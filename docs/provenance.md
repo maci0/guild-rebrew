@@ -9177,3 +9177,23 @@ which will show whether the size excess is on the library side or the project si
 
 Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: data verification shows 157 matching rows and 75 drifted rows
+
+`verify --data --link-map build-goldtl-audit/Europa1400Gold_TL.map` reports 157
+matched data rows and 75 DRIFT rows totaling 2,833 bytes. The drift list is led by
+`plt_PlantInfo` (280 B) and seven compiler-literal strings of 13 to 54 bytes each
+(`str_bau_arbeiter_unterk`, `str_upgr_arbeiter_unterk`,
+`str_begin_statistic_dump_round`, `str_stat_identity_columns`, three tab column
+formats, `str_end_statistic_dump_round`).
+
+The reference stores those strings as global character arrays in `.data` raw bytes
+at 0x67EAE4 onward. Our tree passes the same text as inline literals at the call
+sites in `src/Develop/DieGildeAddOn/game/RunBuergermeister.c`, so the literal goes
+to `.rdata` and the row's `.data` address holds scaffold zeros. Converting the call
+sites back to global string arrays would remove the drift, but the strings total
+213 bytes and the change moves `.data` bytes, so it is a small, layout-sensitive
+edit that needs a full rebuild and pad retune.
+
+No change this round. Baseline: raw 292,336 / informative 108,675, lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.
