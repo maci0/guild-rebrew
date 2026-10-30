@@ -9507,3 +9507,16 @@ Updated the numbers in `docs/TODO.md`.
 
 Byte score: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors / 0
 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: both fixed rows still link late; pad-cap sweep reconfirms the baseline
+
+Placement of the two round-294 fixes: 0x5455B0 links at 0x54CAF0 (+30,016) and
+0x4258D0 at 0x426390 (+2,752), so neither body scores until the layout moves.
+
+Ran the lead-pad pass with cap 0x4000 (51 pads changed, shift +0x2F1B1: raw 228,392 /
+informative 125,342) and cap 0x1000 (24 pads, shift -0x1243: raw 230,074 /
+informative 125,364). Both trade raw bytes for informative ones and lose badly on
+the goal metric, so the committed pad state remains the best: restored with
+`git checkout -- src` and rebuilt to raw 292,528 / 108,803.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
