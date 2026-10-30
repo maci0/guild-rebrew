@@ -8727,3 +8727,29 @@ the misplaced ~4,500 rows. A future attempt needs placement evidence per body
 recover its true VA) before any pad is written.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the png/jpeg objects are linked twice; removing either copy costs score
+
+The supplementary `references/dxsdk8/supp` png/jpeg objects define C-named
+symbols (`_png_set_strip_16`), and d3dx8.lib members define the same routines with
+D3DX-decorated names (`?png_set_strip_16@D3DX@@`). Both are linked, so the code is
+present twice: 430,227 unbound archive bytes against a reference library band that
+the project describes as about 273 KB of bodies.
+
+Experiment A, removing the 23 supplementary objects from the link list: build
+clean, `.text` 2,540,754 -> 2,505,362 (-35,392, most of the +49,384 excess),
+`.rdata` 52,558 -> 50,966, but raw score fell 292,292 -> 275,597 / 106,047 and four
+lead passes changed no pads. The supplementary copies sit at the end of the link
+and their bytes match the reference tail; the archive copies sit earlier and do
+not.
+
+Experiment B, dropping the two `/INCLUDE` anchors whose decorated symbols belong
+to those archive members (149 decorated symbols, only 2 anchored): `.text`
+2,539,218 (-1,536), raw 287,741 / 107,658. The remaining members are pulled by
+references from other archive members, not by anchors.
+
+Both reverted. The duplicate is real but its two copies are not interchangeable:
+one matches reference bytes, the other occupies text that reference does not
+have. Removing the archive-side copy needs the members that reference it to be
+identified and resolved first. Lint 0 errors / 0 warnings, data conflicts 0,
+score 292,292 / 108,702. No GA was run. Decision: Lead.
