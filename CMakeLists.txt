@@ -519,7 +519,7 @@ if(REBREW_BUILD_GOLDTL)
       --first-va pngrtran.obj=0x0062fd99
       --first-va pngrutil.obj=0x0063f638
       --first-va pngset.obj=0x00631aa6
-      --first-va pngtrans.obj=0x00631bfa
+      --first-va pngtrans.obj=0x00630bfa
       --first-va pngwrite.obj=0x0062f059
     WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
     OUTPUT_VARIABLE GOLDTL_ORDERED

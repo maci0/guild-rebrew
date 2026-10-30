@@ -9,5 +9,5 @@ pngread.obj=0x0062d059
 pngrtran.obj=0x0062fd99
 pngrutil.obj=0x0063f638
 pngset.obj=0x00631aa6
-pngtrans.obj=0x00631bfa
+pngtrans.obj=0x00630bfa
 pngwrite.obj=0x0062f059

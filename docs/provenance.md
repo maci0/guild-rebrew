@@ -9660,3 +9660,15 @@ pngread 0x62D059, pngtrans 0x631BFA, the rest at their derived VAs. Further shif
 sweeps on this set are exhausted.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: one more page on pngtrans, sweep exhausted
+
+Fine +/-0x1000 probes on the three shifted supp members: png.obj lost 31 and 42
+bytes either way; pngread.obj lost 0 and 1; pngtrans.obj from 0x631BFA to 0x630BFA
+gained 3 (raw 292,556 -> 292,559, informative 108,801). Kept, recorded in both
+`CMakeLists.txt` and `layout/Europa1400Gold_TL.exe/supp-first-va.txt`.
+
+The three shifted members are now at their measured optimum in one-page steps:
+png 0x62FCCE, pngread 0x62D059, pngtrans 0x630BFA.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
