@@ -9251,3 +9251,19 @@ as is.
 Build clean again at raw 292,389 / informative 108,709 (the round-284 stub prune
 gain), LNK4006 156, lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
 Decision: Lead.
+
+## 2026-10-30: reachability scan finds 27 unused stub data symbols; removing them costs 15 bytes
+
+Built a COFF reachability scan over every linked object (`.scratch/organize/stub_reach.py`):
+each object's external definitions and undefined/relocation references, then a
+closure from all objects except `symbol_stubs.c.obj`. Of 3,532 stub definitions,
+3,505 are reached from other objects and 27 are not (`_g_6761a4`, `_g_67b608`,
+`_g_67b624`, `_g_67b63c`, `_g_67eab0`, ...). All 27 are data globals of about four
+bytes; none are functions.
+
+Removed them: build clean, raw 292,389 -> 292,374 / 108,697. The 15-byte loss comes
+from `.data` layout shifting when the four-byte globals disappear, so the layout
+pads no longer line up for some neighbours. Restored the 27 lines; best build stays
+at 292,389 / 108,709.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
