@@ -9559,3 +9559,20 @@ reference VAs, so correcting their initializers cannot score either.
 
 Byte score: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors / 0
 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: section table numbers and why a vsize-only fix is not worth it
+
+Current built sections: `.text` va 0x1000 vsize 0x26C4C2 raw 0x26D000 (raw end
+0x26E000); `.rdata` va 0x26E000 vsize 0xCD66 raw 0xD000; `.data` va 0x27B000 vsize
+0x2C80BA4 raw 0xA4000 (raw end 0x31F000); `.data1` and `.rsrc` unchanged shapes.
+Every symbol at or above 0x31F000 in `.data` is BSS-only.
+
+The `.data` virtual size is 30.9 MB larger than the reference (0xF09424), from
+uninitialised `_dpad_*` blobs beyond the raw region. Shrinking them to match the
+header would change only the two 4-byte VirtualSize fields in the section table
+(a handful of raw bytes) while moving every BSS symbol address after the first
+removed blob, which is the same layout that data operands and pads depend on. The
+exchange is not worth taking in the last rounds; recorded here rather than risked.
+
+Byte score: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors / 0
+warnings, data conflicts 0. No GA was run. Decision: Lead.
