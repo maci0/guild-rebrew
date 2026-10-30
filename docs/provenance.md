@@ -9137,3 +9137,21 @@ The spill/reload choice follows the whole function's register pressure and frame
 layout, not a local storage qualifier or declaration order. Restored the source;
 baseline raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: section VAs are locked to the .text raw size, so .data operand alignment needs text to shrink
+
+Grew the `.rdata` prefix pad from 0x1000 to 0x7000 so `.rdata` raw becomes 0x13000,
+exactly the reference's `.rdata` raw size. Build clean, but `.data` moved to
+0x281000, not the reference 0x275000: every section after `.text` starts at
+`.text` end, and our `.text` raw is 0x26D000 against the reference 0x261000, a
++0xC000 offset. Growing `.rdata` cannot fix `.data` placement while `.text` is
+49,152 bytes larger. Raw fell 292,336 -> 285,839 / 107,327, so the change also lost
+`.rdata` matches; reverted.
+
+Consequence: the `.data` operand mismatches that block many RELOC funcs come from a
+section base shifted by the text excess. Fixing them requires the reconstructed
+.text to shrink to the reference size, which means removing or replacing code the
+reference does not carry, not padding later sections.
+
+Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
