@@ -110687,7 +110687,7 @@
   },
   {
     "va": 6611408,
-    "size": 28059,
+    "size": 45,
     "name": "fcn.0064e1d0",
     "extent_history": [
       {
@@ -110696,6 +110696,13 @@
         "reason": "Reviewed split: body ends at 0x64e1d0; the remainder decodes as one contiguous function-like block ending in a terminator (block at 0x64e1d0)",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T13:05:59.789868+00:00"
+      },
+      {
+        "old_size": 28059,
+        "new_size": 45,
+        "reason": "The discovery extent runs 28,059 bytes to 0x654f6b, but the body ends at ret 0x64e1fc: mov eax,[ebp+8]; test; jne; add; and; push 0x157d2c8 heap; call [__imp_HeapAlloc]; epilogue; ret. Next function starts after the ret, so the reviewed native extent is 45 bytes.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-30T10:40:19.944213+00:00"
       }
     ]
   },

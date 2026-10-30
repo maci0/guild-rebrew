@@ -602263,3 +602263,11 @@ name = "IsEqualGUID"
 kind = "LIBRARY"
 updated_by = "match"
 updated_at = "2026-10-26T20:25:43+00:00"
+
+["GOLDTL.0x0045e9d0"]
+file = "references/zlib/deflate.c"
+symbol = "_deflate_slow"
+name = "deflate_slow"
+kind = "LIBRARY"
+updated_by = "match"
+updated_at = "2026-10-30T10:36:20+00:00"

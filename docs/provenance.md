@@ -9407,3 +9407,19 @@ bytes; +0xC000 cannot be pinned to a small object set).
 Current: raw 292,528 / 2,850,888 (10.3%), informative 108,803; lint 0 errors /
 0 warnings on all targets; data conflicts 0; worktree clean at commit a0db5f12 plus
 the two fixes. No GA was run. Decision: Lead.
+
+## 2026-10-30: NO_SOURCE falls from 31,226 to 2,145 bytes
+
+Two reviewed metadata repairs from the NO_SOURCE report:
+
+- `library bind-source 0x45E9D0 references/zlib/deflate.c --symbol _deflate_slow`.
+  Verified first: our compiled `_deflate_slow` at 0x45ED00 matches the reference at
+  0x45E9D0 byte for byte over the first 120 bytes (same prologue and body), so the
+  function is already reproduced and only lacked its LIBRARY binding.
+- `binary repair-extents 0x64E1D0=45`. The discovery extent covered 28,059 bytes to
+  0x654F6B, but the body ends at `ret 0x64E1FC` (45 bytes: HeapAlloc wrapper with
+  fs:[0] restore epilogue). Reviewed digest e888ed1e... applied.
+
+`rebrew status` NO_SOURCE: 31,226 -> 2,145 bytes; inventory functions 5,247 -> 5,246.
+Lint 0 errors / 0 warnings on all targets. Byte score unchanged at 292,528 /
+108,803 (these were metadata fixes). No GA was run. Decision: Lead.
