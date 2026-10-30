@@ -8707,3 +8707,23 @@ Conclusion: big pad corrections are unsafe with the current expected-VA set. The
 next step is a placement audit that only trusts boundaries whose reference bytes
 equal the compiled bytes, then corrects the gaps between trusted anchors. Lint
 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: trusted-anchor padding alone also loses raw bytes
+
+Built a placement pass that only pads boundaries whose compiled bytes already
+equal the reference bytes at the metadata VA, so a wrong expected VA can never
+drive a pad. 512 of 5,023 sources qualify (484 EXACT rows plus helpers).
+
+Applied with cap 0x40000: 46 pads resized, net shift +0x79C6F. Raw fell to
+164,458 / informative 104,937. Aligning one anchor moves every function after it,
+including the 587 rows that are already correctly placed and the passing rows
+whose operands already match at their current offsets; those bytes leave their
+matching slots faster than the anchors gain. Reverted; 292,292 / 108,702.
+
+The layout cannot be repaired by padding without a mapping that says where each
+body belongs in the reference, and the metadata VA set is not that mapping for
+the misplaced ~4,500 rows. A future attempt needs placement evidence per body
+(for example, matching the compiled body's bytes anywhere in the reference to
+recover its true VA) before any pad is written.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
