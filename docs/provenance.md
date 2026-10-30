@@ -9387,3 +9387,23 @@ object already links at the reference VA; edits to misplaced objects need to be
 parked rather than landed, because they move everything after them.
 
 Lint 0 errors / 0 warnings pending; data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: parallel-stream outcomes and current state
+
+Ten streams ran. Kept: two body fixes (0x5455B0 -> RELOC 191/191,
+0x4258D0 -> RELOC 108/108) and the earlier leave-one-out supp tuning
+(292,389 -> 292,528). Reverted or parked: agent4's switch fix (cost 3,492 raw on
+placement), agent2's stub reconstruction (undefined 0x1009xxxx globals), agent5's
+and agent6's attempts (VC6 register/spill walls; most of their rows link far from
+the reference VA), and the near-drift agent's edits (their objects sit off the
+reference VA, so exact bodies do not score and layout shifts cost raw bytes).
+
+Read-only reports: `.scratch/team/report-nosource.md` (63 rows / 31,226 B, of which
+0x64E1D0 is 28,059 B of false extent over D3DX8 math code and 0x45E9D0 is zlib
+deflate_slow that should be LIBRARY-bound), `report-data.md` (75 drift rows, 6 with
+wrong initializers, 62 placement), `report-layout.md` (795,090 unidentified build
+bytes; +0xC000 cannot be pinned to a small object set).
+
+Current: raw 292,528 / 2,850,888 (10.3%), informative 108,803; lint 0 errors /
+0 warnings on all targets; data conflicts 0; worktree clean at commit a0db5f12 plus
+the two fixes. No GA was run. Decision: Lead.
