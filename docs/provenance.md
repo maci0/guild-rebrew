@@ -9048,3 +9048,21 @@ raw fell to 239,742, so the nonzero 0x90 fill is what keeps those pads in the fi
 
 Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the .rdata shortfall is library-owned GUID and float tables
+
+Our `.rdata` is 53,248 raw bytes against the reference 77,824, a 24,576-byte
+shortfall that also shifts the `.data` base by +0x6000. Scanning the reference
+`.rdata` in 16-byte windows found 2,674 windows with no match anywhere in our
+`.rdata`, grouped into 216 runs. Largest: RVA 0xB190 (10,880 B), 0x9A50
+(5,504 B), 0xDC20 (4,576 B), 0x3400 (1,696 B), 0x11240 (1,568 B).
+
+Contents identify the owners. RVA 0x3400 (VA 0x665400) is a float table starting
+652.8 then repeating 2.0, 3.0 pairs. RVAs 0xB190/0x9A50/0xDC20 decode as DirectX
+interface GUIDs (`\x00q\x95+\x9a\x9e\xcf\x11...`, IID-shaped data), so the
+missing bytes belong to linked DirectX library data, not game source. The fix is to
+link the archive members that carry those tables rather than to author data rows
+with copied bytes.
+
+Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
