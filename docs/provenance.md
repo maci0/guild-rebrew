@@ -9721,3 +9721,25 @@ pngtrans shifts, stale stub prune, deflate_slow binding, false extent repair).
 
 Lint 0 errors / 0 warnings, data conflicts 0, raw 292,559 / 2,850,888, informative
 108,801. No GA was run. Decision: Lead.
+
+## 2026-10-30: session close
+
+Final state on the committed tree (commit f6feacc7): GoldTL builds clean with the
+SP5-PP profile, image 3,280,896 bytes, raw file agreement 292,559 of 2,850,888
+compared bytes (10.3%), informative agreement 108,801. `rebrew lint --all-targets`
+0 errors / 0 warnings, `rebrew data list --conflicts` 0, whole-binary imports,
+exports, relocations and headers match. Docker-backed verification: 4,154 of 5,229
+rows passing (484 EXACT, 3,670 RELOC, 967 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB);
+text placement 587 of 5,180; NO_SOURCE 31,226 -> 2,145 bytes.
+
+Landed this session: stale symbol stubs pruned that shadowed real definitions (+53
+raw, LNK4006 188 -> 156); supp leave-one-out tuning and png/pngread/pngtrans
+first-VA shifts (292,336 -> 292,559 raw); two body fixes to RELOC (0x5455B0,
+0x4258D0); deflate_slow bound as a compiled library source; false 28,059-byte
+extent repaired; the unshare verify flake filed upstream; gap-to-identity written
+into `docs/TODO.md`.
+
+The 100% objective is not achieved. What blocks it: the reference's D3DX8 static
+library build is in no configured archive (589,824-byte band at 2.6%), 3,285
+outstanding bodies, `.text` raw 0xC000 larger than the reference shifting later
+sections, and 75 drifted data rows. No GA was run in any round. Decision: Lead.
