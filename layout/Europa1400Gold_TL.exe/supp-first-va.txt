@@ -1,14 +1,10 @@
 # Reference first VAs for the prebuilt DX8 supplementary objects. Derived by
 # locating each object first function in original/Europa1400Gold_TL.exe.
+# Entries the leave-one-out pass found harmful were dropped.
 jcomapi.obj=0x0063e84b
-jdapimin.obj=0x0062cdcf
-jdapistd.obj=0x0062d27d
 jdmarker.obj=0x0062d5df
-jdmaster.obj=0x0063e8c0
 png.obj=0x00631cce
-pngerror.obj=0x0062ee23
 pngget.obj=0x0062f9df
-pngmem.obj=0x0063f5e4
 pngread.obj=0x0062f059
 pngrtran.obj=0x0062fd99
 pngrutil.obj=0x0063f638

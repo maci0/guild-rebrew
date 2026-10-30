@@ -9313,3 +9313,21 @@ correct frame model first. Stopped short of writing a body on a guess.
 
 Baseline unchanged: raw 292,389 / informative 108,709, lint 0 errors / 0 warnings,
 data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: leave-one-out tuning of the supp positions gains 139 raw bytes
+
+Ran a leave-one-out pass over the 15 `--first-va` entries for the prebuilt DX8
+supplementary objects: remove one entry, rebuild, score with the upstream
+`rebrew binary score`, keep the removal only when the score improves. Five entries
+were harmful and are now gone: jdapimin.obj, jdapistd.obj, jdmaster.obj,
+pngerror.obj, pngmem.obj.
+
+Result: raw 292,389 -> 292,528 (+139), informative 108,709 -> 108,803 (+94), build
+clean, two lead passes changed no pads. `layout/Europa1400Gold_TL.exe/supp-first-va.txt`
+now lists the ten kept entries.
+
+Note: the bare `rebrew` on PATH no longer offers `binary score`; the tuning script
+and scoring now use the editable upstream venv
+(`/home/maci/Desktop/Projects/relumea/repos/rebrew/.venv/bin/rebrew`).
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
