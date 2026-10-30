@@ -8687,3 +8687,23 @@ that the pad pass could not recover. The `--first-va-file` capability stays
 upstream for a later attempt that reorders and retunes together.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: only 584 of 5,040 source boundaries sit at their reference address
+
+Measured the first bound symbol of every rsp source against its metadata VA:
+584 exact, 33 within 16 bytes, 235 within 0x100, 670 within 0x2000, 3,452 within
+0x10000, and 66 further out (worst late -507,633 on GOLDTL.fcn_0065dd41.c, worst
+early +67,264 on three GOLDTL.fcn_005013c0.c neighbours). Passing rows are worth
+827,670 bytes, so alignment is the largest available gain.
+
+Tried correcting boundaries with the symbol-keyed pad pass at cap 0x20000: 42
+pads changed, net shift +0x49A70. Raw fell to 165,781 / informative 101,593.
+Fewer bytes match because a large correction is only valid when the expected VA
+is right: several rows point at addresses whose reference code differs (library
+or duplicated bodies), and pushing neighbours to those addresses moves correct
+bytes out of place. Reverted; raw 292,292 / informative 108,702.
+
+Conclusion: big pad corrections are unsafe with the current expected-VA set. The
+next step is a placement audit that only trusts boundaries whose reference bytes
+equal the compiled bytes, then corrects the gaps between trusted anchors. Lint
+0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
