@@ -9267,3 +9267,14 @@ pads no longer line up for some neighbours. Restored the 27 lines; best build st
 at 292,389 / 108,709.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: refreshed verification after the stub prune
+
+`verify --no-cache --text --raw-link` on the current build: 4,152 of 5,228 rows
+passing (484 EXACT, 3,668 RELOC, 969 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB),
+libraries 44/44, text placement 587 of 5,180. Row statuses are unchanged from
+round 251; the gain is in bytes: raw 292,389 / 2,850,888 and informative 108,709.
+Evidence: `.scratch/organize/verify287.json`. Updated the numbers in the
+`docs/TODO.md` snapshot.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
