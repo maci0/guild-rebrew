@@ -9066,3 +9066,18 @@ with copied bytes.
 
 Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: no configured archive contains the missing .rdata windows
+
+Searched all 306 files under `references/` and `.scratch/libs` for the reference
+`.rdata` windows at RVAs 0xB190, 0x9A50, 0xDC20 and 0x3400: none appear in any
+archive or extracted object.
+
+So the 24,576-byte `.rdata` shortfall is not a matter of linking the right member
+from the archives we have. The reference carried these GUID and float tables from a
+DirectX library build that is not in `references/dxsdk8` or `.scratch/libs`.
+Linking cannot close it; reconstructing third-party library data as game source
+would misattribute the bytes and is out of scope for the reconstruction rules.
+
+Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
