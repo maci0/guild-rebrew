@@ -8890,3 +8890,23 @@ These rows are not a link-coverage gap that a forced include can close; they nee
 provider identification first. Baseline restored: raw 292,336 / informative
 108,675, lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
 Decision: Lead.
+
+## 2026-10-30: splitting the alchemistry TU breaks the link through its shared helpers
+
+`source split src/Develop/DieGildeAddOn/game/alchemistry_logic.c --force` produced
+the seven per-VA files (`ahm_ResetEntityState`, `ahm_CheckFlag`,
+`ahm_FindRecipeSlotImpl`, `ahm_ExAllocAlchemist`, `ahm_ApplyColorComponent`,
+`ahm_SlotClearMatch`, `ahm_AllocAhmInfo`) and rewrote the rows and multi-target
+references. The file keeps other functions such as `ahm_ClampFloatValue` and
+`ahm_QueryEntityBuildingType` that `command.c` calls, but it has no rows left, so
+`build cmake-sources` drops it and the link fails with eleven unresolved externals
+starting `error LNK2001: unresolved external symbol _ahm_QueryEntityBuildingType`.
+
+`source register ... --support` records the purpose but does not add the file to the
+source list, so the helpers stay unlinked. Reverted the split and rebuilt the
+baseline. Filed the gap upstream in `docs/IDEAS-GUILD.md` (commit 9bf40fc0):
+a split that leaves code behind must keep that code linkable, either through a
+residual file entry or by listing support files that carry code.
+
+Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
