@@ -9213,3 +9213,23 @@ literals.
 
 Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: pruning 32 stale symbol stubs gains 53 raw bytes
+
+`stubs/goldtl/symbol_stubs.c` is generated from a link error log and had kept
+definitions for 32 symbols that the built TUs now define: g_67db50, g_67db54,
+g_67fca0, SonnenstrahlenAktiv, SonnenstrahlenPhase, g_6791d0, g_67a2ac, g_68149c
+and others (script `.scratch/organize/prune_stubs.py`, which only considers
+initialised definitions from sources in the current TL object list). Removed exactly
+those 32 lines.
+
+Build clean: LNK4006 warnings 188 -> 156. Raw 292,336 -> 292,389 (+53),
+informative 108,675 -> 108,709 (+34). Data verification still reports 157 matched
+and 75 DRIFT rows, so the small globals that motivated the change (g_67db50 = 1.0f,
+g_67db54 = 0.5f, the spiel filter extras) are still compared at addresses where our
+layout differs; the gain came from the bytes that did line up.
+
+Filed the generator gap upstream in `docs/IDEAS-GUILD.md` (commit 497EF61F): stale
+stub entries cannot be pruned against the source set.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
