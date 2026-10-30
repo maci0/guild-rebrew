@@ -8910,3 +8910,26 @@ residual file entry or by listing support files that carry code.
 
 Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: both split attempts reduce the raw score
+
+Split `GOLDTL.fcn_004af2f0.c` (13 functions, 13 rows, span 0x2650): build clean,
+pre-retune 288,324 / 105,131; one pad pass gives 291,916 / 108,387, which is 420
+raw bytes below the 292,336 baseline. Reverted.
+
+Split `d3_object.c` (5 functions, 5 rows, span 0x1D050, the largest per-function
+spread): build clean, pre-retune 261,919 / 81,829. Pad passes at cap 0x4000 insert
+57 pads and +0x2F1B1 bytes, then settle at 230,063 raw / 126,881 informative. The
+informative score is the highest seen, but raw falls 62 KB: the pads fill the gaps
+between the newly separated functions with 0x90, and the reference has real code in
+those spans.
+
+Both splits were reverted, including their new files and metadata edits. Baseline:
+292,336 raw / 108,675 informative, lint 0 errors / 0 warnings, data conflicts 0.
+No GA was run. Decision: Lead.
+
+The pattern across the last four experiments (absent members, supp ordering,
+aligned pads, splits) is consistent: every structural move raises informative
+coverage while lowering raw bytes, because raw identity needs the reference's code
+to exist in our link at the reference address, not filler. That code is what the
+remaining 3,300 failed functions need.
