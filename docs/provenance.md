@@ -8795,3 +8795,16 @@ Build clean; `.text` unchanged at 2,540,754 and `.rdata` 52,558 -> 52,590. Score
 passes changed no pads. Kept because raw byte identity is the objective metric.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: four supplementary objects have no unique reference window; pngrio ordering costs bytes
+
+Tried to place the five uninstructed supplementary objects with a relocation-masked
+window search. jdtrans, pngwio, pngwtran and pngwutil have no 24-byte window that
+is unique in the reference (their code likely differs from the reference's copy,
+or the windows repeat). pngrio produced one vote at 0x631C34 from a single window.
+
+Ordered pngrio at 0x631C34: raw fell from 292,336 to 292,275 / 108,664, so the
+single vote is not a trustworthy position. Reverted; the best build stays at
+292,336 raw / 108,675 informative with the 15 derived entries.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
