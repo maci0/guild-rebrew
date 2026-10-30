@@ -9296,3 +9296,20 @@ than edits.
 
 Baseline: raw 292,389 / informative 108,709, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: ch_AttachAni frame accounting is ambiguous under the push-accurate model
+
+Worked through the 129-instruction target with `push` accounting including the
+arguments left on the stack between calls. The offsets are not self-consistent with
+a three-argument cdecl frame: after `add esp,0x2c` the frame sits at E-0x46C, so
+`[esp+0x450]` reads a local at E-0x20, while later `[esp+0x450]` positions (used as
+an object pointer for `[obj+0x34]` and `[obj+0x88]`) read the fourth argument slot
+in some readings and a local in others. The two candidate structures (four
+arguments versus an extra local slot) predict different use of the same offsets.
+
+Because an exact 404-byte reproduction depends on this layout, and the existing
+body is old GA output with 120 of 129 instructions structural, the rewrite needs a
+correct frame model first. Stopped short of writing a body on a guess.
+
+Baseline unchanged: raw 292,389 / informative 108,709, lint 0 errors / 0 warnings,
+data conflicts 0. No GA was run. Decision: Lead.
