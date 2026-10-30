@@ -8945,3 +8945,23 @@ NEAR_MATCHING, 8 STUB), libraries 44/44, text placement 587 of 5,180, inventory
 bodies, 3,300 differing functions) and the next step.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: picked ch_AttachAni as the only stub at its reference address; frame decode needs more work
+
+Of the 8 STUB rows, only `ch_AttachAni` (0x404DC0, 404 B) links at its reference
+VA; the others are 12,624 to 55,264 bytes late. A byte-exact body there would add
+404 raw bytes, so it is the best single body target.
+
+The prologue blocks a straightforward rewrite. `sub esp,0x430`, `push ebx`,
+`push ebp`, then `mov ebp,[esp+0x440]`, so the load happens *before* the later
+`push esi` and `push edi` adjust the frame; under the current reading ebp receives
+arg2 (the name) while `[esp+0x448]` after all four pushes is also arg2. Resolving
+which register holds obj needs a careful instruction-by-instruction frame model,
+not a guess. Tried the REA decompilers for a second opinion: Hopper rejects the
+launcher (`unsupported_hopper_build`), Ghidra is not configured
+(`GHIDRA_INSTALL_DIR` unset), IDA and Kuna are not configured, and Kuna does not
+admit PE. No pseudocode source is available, so the reconstruction waits on the
+manual frame model.
+
+State unchanged: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings,
+data conflicts 0. No GA was run. Decision: Lead.
