@@ -8870,3 +8870,23 @@ those VAs.
 
 State: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the unlinked library rows are identities without providers
+
+The 99 rows whose symbols never link are library identities whose name is the
+recovered placeholder `fcn_<VA>`, not a real symbol: for example 0x638A14 (6,257 B)
+and 0x63A77C (4,436 B) in `src/library_d3dx8.h`, and 0x64C120 (4,224 B) in
+`src/library_dinput.h`. Their binding history shows they were rehomed to LIBRARY
+because they sit in the declared D3DX8 band, with the build provider left
+unresolved; no configured archive member matched their bytes.
+
+For the dinput row, tried `/INCLUDE:_c_rgodfDIKeyboard$S33646`: link fails with
+`error LNK2001: unresolved external symbol _c_rgodfDIKeyboard$S33646`. The archive
+defines the plain symbol `_c_rgodfDIKeyboard` (256 bytes as a DirectInput array),
+so the row name carries a linker-localized suffix and the sizes disagree with the
+4,224-byte row. Reverted.
+
+These rows are not a link-coverage gap that a forced include can close; they need
+provider identification first. Baseline restored: raw 292,336 / informative
+108,675, lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
+Decision: Lead.
