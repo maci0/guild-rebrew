@@ -9447,3 +9447,11 @@ Tested `_dpad_prefix_zeros` at 0x2A000 and 0x2C000 (baseline 0x2B000):
 the pad size is locally optimal. Restored 0x2B000 and rebuilt the baseline.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the .rdata prefix pad is also at its local optimum
+
+Tested `_rdata_prefix_zeros` at 0x800 (raw 291,545 / 108,759), 0x1800 (290,195 /
+107,968) and 0x2000 (288,900 / 107,754). All lose to the 0x1000 baseline of
+292,528 / 108,803. Restored 0x1000 and rebuilt the baseline.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
