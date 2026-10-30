@@ -8666,3 +8666,24 @@ five-byte jump thunks compare at RELOC 5/5, the data placement check reads the
 image's own build tree, and upstream gained `source split --occurrence` and
 `repair-extents --sync-rows` with tests. Two capability gaps are filed in the
 upstream IDEAS-GUILD. No GA was run. Decision: Lead.
+
+## 2026-10-30: zlib files ordered by derived reference VA lose score
+
+The link map put `compress.c.obj`, `infutil.c.obj` and `uncompr.c.obj` at
+0x5E1E60-0x5E2070, after the game tail, while their reference code sits at
+0x45D520 (`_compress2`), 0x4623C0 (`_inflate_flush`) and 0x464500
+(`_uncompress`). None of the three had a `--first-va` entry, so order-sources
+left them at the end.
+
+Extended upstream `build order-sources` with `--first-va-file` (commit 18d03d34,
+tests added, full suite 13,402 passed) and passed the three derived positions.
+Build clean, but the immediate score fell 292,292 to 288,912; after one lead-pad
+pass it reached 291,878, still below the baseline. Reverted the three entries and
+the pad edits and rebuilt to 292,292 / 108,702.
+
+The derived VA for `_compress2` matched bytes in the reference, so the position is
+plausible; moving three small objects earlier shifted thousands of later positions
+that the pad pass could not recover. The `--first-va-file` capability stays
+upstream for a later attempt that reorders and retunes together.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
