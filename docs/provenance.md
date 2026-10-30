@@ -8965,3 +8965,27 @@ manual frame model.
 
 State unchanged: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings,
 data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: ch_AttachAni frame model from the exact prologue
+
+Using the instruction addresses in `original/Europa1400Gold_TL.exe` (the earlier
+diff listed only indices), the cdecl argument pushes stay on the stack until
+`add esp,0x2c` at 0x404e17, which changes every later offset:
+
+- entry esp E: arg1 obj at E+4, arg2 name at E+8.
+- `sub esp,0x430`; `push ebx`; `push ebp`; then `mov ebp,[esp+0x440]` reads E+8,
+  so ebp = name.
+- after `push esi`; `push edi`; `push ebp`; `call 0x42E540`, the return leaves the
+  pushed argument on the stack, so `mov edi,[esp+0x448]` reads E+4, obj.
+- the two sprintf calls then use obj+0x130, name and obj+0x130 for
+  "character/%s/%s_%s.baf", and obj+0x130, name for "%s_%s".
+- `add esp,0x2c` restores esp to E-0x43C, and `mov al,[esp+0x450]` then reads
+  E+0x14, which is a fifth argument position under a three-argument model.
+
+That last read is the open question: either the function takes more arguments than
+the current `ch_AttachAni(int, char*, unsigned char)` prototype, or some of the
+0x2c bytes belong to other cleanups. The next step is to test the two candidate
+prototypes against the compiler and grep the callers for their push counts.
+
+State unchanged: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings,
+data conflicts 0. No GA was run. Decision: Lead.
