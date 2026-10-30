@@ -9693,3 +9693,21 @@ omissions stand.
 
 Current state frozen: raw 292,559 / 2,850,888 (10.3%), informative 108,801. Lint 0
 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: final gate check for the current session
+
+Gates on the committed tree at commit bc2bb13d plus this entry:
+
+- `rebrew lint --all-targets`: 0 errors, 0 warnings on all three targets.
+- `rebrew data list --conflicts`: no conflicting globals.
+- `binary score`: raw 292,559 of 2,850,888 compared bytes (10.3%), informative
+  108,801.
+- Clean rebuild from a deleted build directory reproduces the same image bytes.
+
+The 100% objective is not achieved. Measured blockers, unchanged: the reference's
+D3DX8 static library build is absent from every configured archive, so the 589,824
+byte library band matches at 2.6% with no source path; 3,285 metadata rows remain
+SIZE_MISMATCH/NEAR_MATCHING/STUB or link away from their reference VA; `.text` raw
+is 0xC000 larger than the reference, which shifts `.rdata`/`.data` bases; and 75
+data rows drift, 62 of them by placement. Goal left active; no GA was run. Decision:
+Lead.
