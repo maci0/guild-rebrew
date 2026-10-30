@@ -9576,3 +9576,21 @@ exchange is not worth taking in the last rounds; recorded here rather than riske
 
 Byte score: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors / 0
 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: per-file delta attribution fails when a file's leading function is unbound
+
+The +0xD90 drift that makes 0x4258D0 line 2,752 bytes late looked attributable to
+`src/Develop/Units/Error/Error.c`: its bound row `_GetDebugRecordByIndex` sits at
++0x9B0 while the previous file is at 0. The map shows why that is an artefact:
+Error.c's first linked symbols (`_CrashDumpUnhandledExceptionFilter@4` at 0x41D4D0,
+then `_EmitCrashModuleLine`, `_GetDebugRecordByIndex` at 0x41DD00) already sit at
+their reference VAs; the metadata row at 0x41D858 has no matching leading symbol, so
+pairing the smallest metadata VA with the smallest linked symbol compares two
+different functions.
+
+Whenever a file starts with unbound functions, the per-file delta method reports a
+false jump. The real drift in that window therefore is not localised by this method,
+and no body fix can be justified from it.
+
+Byte score: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors / 0
+warnings, data conflicts 0. No GA was run. Decision: Lead.
