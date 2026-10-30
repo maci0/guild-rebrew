@@ -9647,3 +9647,16 @@ keeping only changes that raise the raw score:
 Final: raw 292,546 / informative 108,792. Both offsets recorded in
 `CMakeLists.txt` and `layout/Europa1400Gold_TL.exe/supp-first-va.txt`. Lint 0 errors /
 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: +0x2000 sweep keeps pngtrans
+
+Repeated the supp sweep in the other direction. `pngtrans.obj` from 0x62FBFA to
+0x631BFA raises raw 292,546 -> 292,556 (informative 108,796); every other entry lost
+1 to 27 bytes and was restored. Recorded in `CMakeLists.txt` and
+`layout/Europa1400Gold_TL.exe/supp-first-va.txt`.
+
+The supp offsets are now locally tuned in both directions: png 0x62FCCE,
+pngread 0x62D059, pngtrans 0x631BFA, the rest at their derived VAs. Further shift
+sweeps on this set are exhausted.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
