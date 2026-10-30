@@ -9233,3 +9233,21 @@ Filed the generator gap upstream in `docs/IDEAS-GUILD.md` (commit 497EF61F): sta
 stub entries cannot be pruned against the source set.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the remaining LNK4006 warnings are ignored scaffold copies, not shadowing
+
+Of the 156 LNK4006 warnings, `link_scaffold.c.obj` is the second definition in the
+`fcn_00408250`, `fcn_0040c3f0`, `fcn_0042a020`, `amt_fio_LoadAemter` and similar
+pairs, so the real source object wins and the scaffold copy is ignored. The
+duplicate copy therefore contributes no bytes; the warning is a cleanup item, not a
+shadowing defect.
+
+Tried removing scaffold definitions whose symbol the built sources also define
+(script `.scratch/organize/prune_scaffold.py`). It dropped `g_68b7a0`, which the
+body needs as a stub (the source set only declares it), and the link failed with
+`error LNK2001: unresolved external symbol _g_68b7a0`. Reverted; the scaffold stays
+as is.
+
+Build clean again at raw 292,389 / informative 108,709 (the round-284 stub prune
+gain), LNK4006 156, lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
+Decision: Lead.
