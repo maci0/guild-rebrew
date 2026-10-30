@@ -8834,3 +8834,19 @@ scratch experiment; it gives the smallest text size so far and should anchor the
 next layout work.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the absent d3dx8 members are absent only as byte-identical bodies
+
+The reduced-anchor build (897 symbols dropped, 33 anchors left) gives `.text`
+2,503,052, just +11,682 over the reference, but retuning at cap 0x4000 adds 51 pads
+and +0x2F1B1 bytes to keep later bodies at their metadata VAs. That tells the
+story: the metadata expects the code after those members to start at the
+reference VAs, so the reference does carry roughly 193 KB of code in those slots,
+just not the byte-identical bodies our archive provides. Dropping the members
+leaves holes and the pad pass fills 193 KB of filler there.
+
+So the region is not removable surplus; the bodies differ from the reference's own
+D3DX8 build and must be reconstructed. Kept the full-anchor build at 292,336 raw /
+108,675 informative, which remains the best raw score.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
