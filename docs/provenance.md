@@ -9423,3 +9423,18 @@ Two reviewed metadata repairs from the NO_SOURCE report:
 `rebrew status` NO_SOURCE: 31,226 -> 2,145 bytes; inventory functions 5,247 -> 5,246.
 Lint 0 errors / 0 warnings on all targets. Byte score unchanged at 292,528 /
 108,803 (these were metadata fixes). No GA was run. Decision: Lead.
+
+## 2026-10-30: the remaining NO_SOURCE bytes cannot score yet
+
+`rebrew status` now reports 2,145 NO_SOURCE bytes. The underlying inventory has 936
+uncovered rows summing 277,447 bytes, but status excludes library-band and pseudo
+VAs; the game-band remainder is dominated by one-byte rows (bare `ret`) at aligned
+addresses, i.e. discovery fragments or genuine empty functions with no source.
+
+The one real body left is 0x420D20 (131 B, an IAT-served GetModuleFileName-style
+helper writing 0x6B7D44). Its neighbours at 0x41F2B0-0x41F5F0 link +3,472 bytes
+past the reference VA, so a new TU for it would also land late and score nothing.
+Attacking these bytes is therefore status cleanup, not raw-score work.
+
+Byte score unchanged: raw 292,528 / informative 108,803, lint 0 errors / 0 warnings,
+data conflicts 0. No GA was run. Decision: Lead.
