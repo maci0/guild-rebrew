@@ -3,7 +3,7 @@
 # Entries the leave-one-out pass found harmful were dropped.
 jcomapi.obj=0x0063e84b
 jdmarker.obj=0x0062d5df
-png.obj=0x00631cce
+png.obj=0x0062fcce
 pngget.obj=0x0062f9df
 pngread.obj=0x0062f059
 pngrtran.obj=0x0062fd99

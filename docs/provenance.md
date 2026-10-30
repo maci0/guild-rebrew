@@ -9616,3 +9616,21 @@ initializer fixes (the five spiel filter globals) are emitted in the BSS tail ne
 
 Lint 0 errors / 0 warnings, byte score raw 292,528 / 2,850,888, informative 108,803.
 No GA was run. Decision: Lead.
+
+## 2026-10-30: png.obj first VA retuned by -0x2000 for +17 raw bytes
+
+The supp object positions came from the first function's reference VA, but a
+constant offset can still place the object better as a whole. Swept the largest
+supp member, `png.obj`, against its derived 0x00631CCE:
+
+- 0x0062FCCE (-0x2000): raw 292,545 / informative 108,798 (kept).
+- 0x0062F6CE (-0x1000): 292,526 / 108,800.
+- 0x0062CCCE (-0x3000) and 0x0062ACCE (-0x4000): 292,522 / 108,794.
+- 0x00633CCE (+0x2000): 292,528 / 108,803.
+
+`jdmarker.obj` was probed on top: a -0x2000 shift was neutral (292,545) and
++0x2000 lost 17, so it stays at its derived VA. The png entry is now 0x0062FCCE in
+both `CMakeLists.txt` and `layout/Europa1400Gold_TL.exe/supp-first-va.txt`.
+
+Net gain: raw 292,528 -> 292,545. Lint 0 errors / 0 warnings, data conflicts 0. No GA
+was run. Decision: Lead.

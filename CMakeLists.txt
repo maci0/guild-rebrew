@@ -513,7 +513,7 @@ if(REBREW_BUILD_GOLDTL)
       --first-va minigzip.c=0x462500
       --first-va jcomapi.obj=0x0063e84b
       --first-va jdmarker.obj=0x0062d5df
-      --first-va png.obj=0x00631cce
+      --first-va png.obj=0x0062fcce
       --first-va pngget.obj=0x0062f9df
       --first-va pngread.obj=0x0062f059
       --first-va pngrtran.obj=0x0062fd99
