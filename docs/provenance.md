@@ -9345,3 +9345,20 @@ order. The entries stay as documentation of the vendor layout.
 
 Baseline: raw 292,528 / informative 108,803, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: ten parallel work streams started
+
+Launched ten agents against the current ledger: two on the eight STUB rows (one
+for ch_AttachAni at its reference VA, one for the seven misplaced stubs), five on
+the 969 SIZE_MISMATCH rows split into exclusive file lists
+(`.scratch/team/agent3-files.txt` through `agent7-files.txt`, 193-196 rows each,
+219 KB / 191 KB / 209 KB / 227 KB / 221 KB), one on the 63 NO_SOURCE bytes, one on
+the 75 data-drift rows, and one on the text-layout size deltas.
+
+Each write-capable agent edits only its own listed files, verifies single files
+with `rebrew test`/`rebrew diff`, and may not run full builds, cmake, GA or
+`rebrew match`; the Lead rebuilds and scores after they report. The three analysis
+streams are read-only and write reports under `.scratch/team/`.
+
+Best build before the parallel work: raw 292,528 / informative 108,803, lint 0
+errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
