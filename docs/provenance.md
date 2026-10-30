@@ -9081,3 +9081,25 @@ would misattribute the bytes and is out of scope for the reconstruction rules.
 
 Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: agreement split by address band
+
+Same-offset comparison against the reference, by range (RVAs):
+
+- game band 0x001000-0x1E0000 (1,961,984 bytes): 138,623 same (7.1%),
+  97,481 informative.
+- D3DX8 band 0x1E0000-0x250000 (458,752 bytes): 12,091 same (2.6%), 8,181
+  informative.
+- D3DX8 tail 0x250000-0x270000 (131,072): 3,407 same (2.6%), 927 informative.
+
+Most text-band agreement is game-side. The D3DX8 bands, 589,824 bytes total,
+match at about 2.6% because the reference was linked against a DirectX 8 SDK
+library build whose code and data are not in the configured archives (the
+`.rdata` owner search found none of its GUID/float tables in `references/` or
+`.scratch/libs`). That band cannot be reproduced from reconstructed source; it is
+third-party binary code. The goal's 100% target therefore depends on a library
+build the project does not have, separate from the game-side reconstruction that
+continues.
+
+Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
