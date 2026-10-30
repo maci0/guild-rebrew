@@ -9594,3 +9594,14 @@ and no body fix can be justified from it.
 
 Byte score: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors / 0
 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: clean rebuild reproduces the measured image exactly
+
+Removed `build-goldtl-audit/` and rebuilt from scratch with
+`flock .scratch/lead/build.lock ./.scratch/lead/build_tl.sh` (configure exit 0,
+build exit 0, no C or LNK errors). The new image is 3,280,896 bytes and scores
+raw 292,528 / informative 108,803, identical to the incremental build. The state
+recorded in `docs/TODO.md` is reproducible from a clean checkout of the committed
+tree.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
