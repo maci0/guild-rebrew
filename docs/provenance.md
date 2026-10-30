@@ -8808,3 +8808,29 @@ single vote is not a trustworthy position. Reverted; the best build stays at
 292,336 raw / 108,675 informative with the 15 derived entries.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: removing the reference-absent d3dx8 members shrinks text to +11,682 but costs raw bytes
+
+The map parses data rows too (four columns: section, symbol, address, object), so the
+earlier anchor audit missed the vftable symbols. Collected every symbol of the 13
+members that the project notes as absent from the reference (btri, cassignment,
+cd3dxstateblock, ceffect, cleanmesh, cparameter, cpass, createmesh, cvalue,
+ctechnique, intersect, jdmaster, shapes): 897 symbols.
+
+Dropping the anchors that name them (764 -> 33) and rebuilding is clean:
+`.text` 2,540,754 -> 2,503,052 (+11,682 over the reference 2,491,370, down from
++49,384). Raw fell to 278,445 / informative 106,761 with the committed pads; three
+small-cap lead passes changed nothing.
+
+Retuning with cap 0x4000 changes the picture: 51 pads, +0x2F1B1 shift, raw
+245,673 and informative 125,311, well above the 108,675 baseline. The padded build
+is larger than the reference again, so the informative gain comes from aligned
+bodies while the raw metric falls to misplaced filler. Reverting the pads returns
+278,445.
+
+Kept the best-scoring committed state: restored the anchor list and pads, rebuilt
+to 292,336 raw / 108,675 informative. The reduced-member build is saved only as a
+scratch experiment; it gives the smallest text size so far and should anchor the
+next layout work.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
