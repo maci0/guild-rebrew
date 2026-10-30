@@ -8606,3 +8606,28 @@ reference VA:
 
 No body kept. Score unchanged 292,292 / 108,702, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: current state after the layout and tooling work
+
+Final gates on the committed tree:
+
+- byte score 292,292 of 2,846,720 compared (informative 108,702); sections
+  `.text` 152,313, `.rdata` 3,994, `.data` 131,586, `.data1` 211, `.rsrc` 386.
+- `verify --text --raw-link`: 5,228 rows, 4,152 passed, 484 EXACT, 3,668 RELOC,
+  969 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB; libraries 44/44; text placement
+  587 correct of 5,180; inventory 6,688 rows.
+- section sizes against the reference: `.text` 2,540,754 vs 2,491,370 (+49,384),
+  `.rdata` 52,558 vs 76,722 (-24,164), `.data` 0x67B000 vs 0x675000 base.
+- linked extents for 5,254 paired symbols are 80,601 bytes short of the reference
+  sizes, and the unpaired side is 129,985 bytes larger, so placement and bytes
+  cannot both close until bodies are completed and the surplus is identified.
+- lint: 0 errors / 0 warnings on 5,453 files; data conflicts 0; imports, layout
+  and headers match.
+- upstream: two features landed, `source split --occurrence` (9f573ade) and
+  `repair-extents --sync-rows` plus the alternate build tree read for
+  check-data-placement (ad5abba6, 9c01de21); two gaps filed in IDEAS-GUILD
+  (04299754 and the split ambiguity entry 1712344a).
+
+The goal's criteria (three byte-identical binaries) are not met. GoldTL raw
+agreement is 10.3%; the server and Gold targets were not touched this span. No GA
+was run. Decision: Lead.
