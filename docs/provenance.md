@@ -9103,3 +9103,22 @@ continues.
 
 Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the remaining correctly placed near matches resist source-level nudges
+
+`GOLDTL.fcn_0040ed40` (398 B, correct VA, 15 structural of 121): mismatches sit in
+the `D3_ANIMATION_OPTIONS` aggregate setup, where the reference builds the flag
+bytes in a different order (`or dl`/`or al` sequence at 90-101) before copying two
+dwords to the call frame. That is compiler scheduling of aggregate
+initialisation; no source change is safe to guess without more instruction
+context.
+
+`GOLDTL.SaveBMP24` (439 B, correct VA, 11 structural of 161): the reference reads a
+stack slot at `mov eax,[ebp+0xC]` inside the pixel loop while our build keeps the
+pointer in a register (`mov edx,esi`). Tried three loop spellings (increment order
+swapped, post-increment stores, per-iteration `src + x*3`): all identical, 140
+exact / 11 structural. The register home comes from how the outer pointers are
+declared and used, not from the inner statement order.
+
+No body kept, sources restored. Baseline: raw 292,336 / informative 108,675, lint
+0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
