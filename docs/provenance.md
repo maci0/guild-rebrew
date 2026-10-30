@@ -8643,3 +8643,26 @@ the closest at 32 structural.
 
 Score unchanged 292,292 / 108,702, lint 0 errors / 0 warnings, data conflicts 0.
 No GA was run. Decision: Lead.
+
+## 2026-10-30: end of the 256-round span, goal not met
+
+Final state, committed and gated: raw byte score 292,292 of 2,850,888 compared,
+informative 108,702. Verification 4,152 of 5,228 rows pass (484 EXACT, 3,668
+RELOC, 969 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB); text placement 587 of 5,180
+correct; lint 0 errors / 0 warnings on 5,453 files; data conflicts 0; imports,
+layout and headers match.
+
+The goal requires all three reference files byte-identical. That is not met:
+GoldTL sits at 10.3% raw agreement, and the blockers are measured, not guessed.
+The linked `.text` is 49,384 bytes larger than the reference while paired
+reconstructed bodies are 80,601 bytes shorter, so layout and body content cannot
+both close; every attempt this span to tune pads, split TUs, remove retention
+anchors or rephrase near-matching bodies moved the score by tens of bytes at most
+or regressed it.
+
+Work landed this span, besides the score: the lead-pad writer now resizes pads
+instead of skipping them, the character TU is split and its pads retuned, the two
+five-byte jump thunks compare at RELOC 5/5, the data placement check reads the
+image's own build tree, and upstream gained `source split --occurrence` and
+`repair-extents --sync-rows` with tests. Two capability gaps are filed in the
+upstream IDEAS-GUILD. No GA was run. Decision: Lead.
