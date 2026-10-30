@@ -8933,3 +8933,15 @@ aligned pads, splits) is consistent: every structural move raises informative
 coverage while lowering raw bytes, because raw identity needs the reference's code
 to exist in our link at the reference address, not filler. That code is what the
 remaining 3,300 failed functions need.
+
+## 2026-10-30: refreshed the authoritative snapshot in docs/TODO.md
+
+Measured again and replaced the stale 2026-10-29 header: raw 292,336 of 2,850,888
+compared bytes (10.3%), informative 108,702. `verify --no-cache --text --raw-link`
+reports 4,152 of 5,228 rows passing (484 EXACT, 3,668 RELOC, 969 SIZE_MISMATCH, 99
+NEAR_MATCHING, 8 STUB), libraries 44/44, text placement 587 of 5,180, inventory
+6,688 rows, `.text` 2,540,754 against 2,491,370. Evidence:
+`.scratch/organize/verify269.json`. The snapshot names the two blockers (D3DX8 band
+bodies, 3,300 differing functions) and the next step.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.

@@ -1,5 +1,28 @@
 # Current work
 
+## Current committed snapshot (2026-10-30 14:45 UTC)
+
+GoldTL builds clean from the committed tree with the SP5-PP profile. Raw file
+agreement is 292,336 of 2,850,888 compared bytes (10.3%), informative agreement
+108,702. `verify --no-cache --text --raw-link` reports 4,152 of 5,228 rows
+passing: 484 EXACT, 3,668 RELOC, 969 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB;
+libraries 44/44; text placement 587 of 5,180; inventory 6,688 rows. `.text` is
+2,540,754 bytes against the reference 2,491,370.
+
+Recent changes: the prebuilt DX8 png/jpeg objects are ordered by their reference
+first VAs (+44 raw, commit 4b06bdc1); the two five-byte tail-jump thunks compare
+at RELOC 5/5; `repair-extents --sync-rows` and `order-sources --first-va-file`
+landed upstream. Lint is 0 errors / 0 warnings on 5,453 files and data conflicts
+are 0.
+
+What blocks byte identity: the reference's D3DX8 band holds code that our linked
+archive bodies do not reproduce byte-for-byte (193 KB of filler when those members
+are dropped), and 3,300 functions still differ in body. Every layout lever tested
+this week (lead pads, trusted-anchor pads, source splits, member removal, supp
+ordering) either moves single-digit bytes or trades raw bytes for informative
+coverage. The next work is body reconstruction in the interleaved bands, starting
+with the functions the d3_object split exposed.
+
 ## Current committed snapshot (2026-10-29 02:40 UTC)
 
 README, code/data bars and defrag map now describe the accumulated committed
