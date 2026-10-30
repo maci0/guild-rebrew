@@ -9197,3 +9197,19 @@ edit that needs a full rebuild and pad retune.
 
 No change this round. Baseline: raw 292,336 / informative 108,675, lint 0 errors /
 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the drifted strings are literal content labels, not globals
+
+Checked the row shape before converting anything: `GOLDTL.0x0067EAE4`
+(`str_bau_arbeiter_unterk`) has `storage_kind = "literal"` and a note that it is a
+"compiler literal content label, not a source identifier or separate C global".
+The same holds for the other six string drifts.
+
+So defining a global array would assign the wrong storage owner. The drift is a
+difference in where the compiler pools the literal, which follows translation-unit
+literal order, not source values. Correcting it means reproducing the original TU's
+literal order, outside the scope of a small edit. Left the call sites as inline
+literals.
+
+Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
