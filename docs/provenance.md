@@ -8631,3 +8631,15 @@ Final gates on the committed tree:
 The goal's criteria (three byte-identical binaries) are not met. GoldTL raw
 agreement is 10.3%; the server and Gold targets were not touched this span. No GA
 was run. Decision: Lead.
+
+## 2026-10-30: do-while loop rewrite loses the 32-mismatch loop instead of fixing it
+
+Tried to match `fcn_0045bfb0`'s rotated loop by rewriting its `for` as a
+`do-while` with the pointer increment at the body end, since the target emits
+`add ecx, 0x70` before the bound compare. The build went from 82 exact and 32
+structural to 11 exact and 111 structural, so the compiler scheduled the
+rewritten loop further from the reference. Restored the `for` form, which remains
+the closest at 32 structural.
+
+Score unchanged 292,292 / 108,702, lint 0 errors / 0 warnings, data conflicts 0.
+No GA was run. Decision: Lead.
