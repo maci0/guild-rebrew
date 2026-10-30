@@ -9672,3 +9672,14 @@ The three shifted members are now at their measured optimum in one-page steps:
 png 0x62FCCE, pngread 0x62D059, pngtrans 0x630BFA.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: supp tuning exhausted
+
+The +/-0x1000 sweep over the remaining seven supp members produced no keep: every
+probe tied or lost (jcomapi 0/-7, jdmarker -1/0, pngget -25/-56, pngrtran -45/-13,
+pngrutil -7/0, pngset -3/0, pngwrite 0/-38). The supp positions are frozen at
+png 0x62FCCE, pngread 0x62D059, pngtrans 0x630BFA and the rest at their derived VAs.
+
+Current state: raw 292,559 / 2,850,888 (10.3%), informative 108,801. Updated the
+numbers in `docs/TODO.md`. Lint 0 errors / 0 warnings, data conflicts 0. No GA was
+run. Decision: Lead.
