@@ -9155,3 +9155,25 @@ reference does not carry, not padding later sections.
 
 Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: our .text runs with no counterpart in the reference
+
+Scanned our `.text` in 16-byte windows against the reference `.text`: 18,048
+windows (1,576,944 bytes) never appear. That is expected for the many bodies that
+differ and is not a size measure. Contiguous runs locate the library-version
+regions:
+
+- btri.obj 7,744 B, createmesh.obj 4,848, cpudetect.obj 4,000, ceffect.obj 3,680,
+  shapes.obj 3,312: long unbroken runs, consistent with a different D3DX8 build.
+- project side: spiel.c.obj 20,656, loadsave.c.obj 11,856, command.c.obj 10,000,
+  fcn_004dcf50.c.obj 8,640.
+
+Aggregate by owner: library 153,760 bytes, project 1,423,184 bytes. The library
+figure is the same order as the 49,152-byte `.text` excess, but the windows include
+relocations and mismatch noise, so it does not prove the excess is all library.
+
+Next: compare reference-side `.text` bytes absent from our build in the same way,
+which will show whether the size excess is on the library side or the project side.
+
+Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
