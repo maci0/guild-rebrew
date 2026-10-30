@@ -25,8 +25,8 @@ unsigned int __cdecl fcn_005455b0(void)
 			if (fcn_00500cb0((pos14_7f4c00*) (r->p + 0x44), &pos) < 0) {
 				p = r->p;
 				foundi = i;
-				found = p;
 				pos = *(pos14_7f4c00*) (p + 0x44);
+				found = p;
 			}
 		}
 	}

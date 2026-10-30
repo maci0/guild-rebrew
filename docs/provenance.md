@@ -9362,3 +9362,28 @@ streams are read-only and write reports under `.scratch/team/`.
 
 Best build before the parallel work: raw 292,528 / informative 108,803, lint 0
 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: two agent fixes kept, one reverted; the integrated build taught a layout lesson
+
+The ten parallel streams produced four code edits that verified individually; the
+combined rebuild was 9 errors (one stub reconstruction referenced undefined
+0x1009xxxx globals) and, once that file was reverted, raw fell 292,528 -> 288,977.
+Reverting all source edits restored 292,528, so the loss came from body-size changes
+shifting a layout where most functions are misplaced.
+
+Re-applied selectively:
+- 0x005455b0: keep `p` live across the 14-byte copy (`pos = ...` before
+  `found = p`). SIZE_MISMATCH 190 -> RELOC 191/191.
+- 0x004258d0: drop the cached `Voice* e`, index `((Voice*)g_6b7e88)[i]` directly.
+  SIZE_MISMATCH 106 -> RELOC 108/108.
+Both now RELOC in metadata. Raw stays 292,528 / 108,803, so the two rows do not
+score because their objects still link away from the reference VA.
+- 0x004f5cc0 (empty switch case bodies, obj 68 -> 63, 0 byte mismatches) was kept
+out: re-adding it alone dropped raw by 3,492, so its object's placement punishes
+the size change. Reverted.
+
+Lesson for the remaining rounds: on this tree a correct body only scores when its
+object already links at the reference VA; edits to misplaced objects need to be
+parked rather than landed, because they move everything after them.
+
+Lint 0 errors / 0 warnings pending; data conflicts 0. No GA was run. Decision: Lead.
