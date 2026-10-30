@@ -9634,3 +9634,16 @@ both `CMakeLists.txt` and `layout/Europa1400Gold_TL.exe/supp-first-va.txt`.
 
 Net gain: raw 292,528 -> 292,545. Lint 0 errors / 0 warnings, data conflicts 0. No GA
 was run. Decision: Lead.
+
+## 2026-10-30: -0x2000 sweep over the supp members keeps one more
+
+Ran the same two-page shift over the remaining nine supp objects
+(`jcomapi, jdmarker, pngget, pngread, pngrtran, pngrutil, pngset, pngtrans, pngwrite`),
+keeping only changes that raise the raw score:
+
+- pngread.obj 0x62F059 -> 0x62D059: raw 292,545 -> 292,546 (kept).
+- The other eight lost between 1 and 40 bytes and were restored.
+
+Final: raw 292,546 / informative 108,792. Both offsets recorded in
+`CMakeLists.txt` and `layout/Europa1400Gold_TL.exe/supp-first-va.txt`. Lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.

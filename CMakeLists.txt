@@ -515,7 +515,7 @@ if(REBREW_BUILD_GOLDTL)
       --first-va jdmarker.obj=0x0062d5df
       --first-va png.obj=0x0062fcce
       --first-va pngget.obj=0x0062f9df
-      --first-va pngread.obj=0x0062f059
+      --first-va pngread.obj=0x0062d059
       --first-va pngrtran.obj=0x0062fd99
       --first-va pngrutil.obj=0x0063f638
       --first-va pngset.obj=0x00631aa6
