@@ -9331,3 +9331,17 @@ and scoring now use the editable upstream venv
 (`/home/maci/Desktop/Projects/relumea/repos/rebrew/.venv/bin/rebrew`).
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: zlib first-VA entries are inert at this stage
+
+Ran the same leave-one-out pass over the twelve zlib `--first-va` entries
+(adler32, crc32, deflate, gzio, infblock, infcodes, inffast, inflate, inftrees,
+trees, unzip, minigzip). Removing each one individually left the score at 292,528
+with a clean build.
+
+That is expected now: `--first-va` only positions files without bound function
+rows, and every one of these zlib files has rows, so the flags no longer affect the
+order. The entries stay as documentation of the vendor layout.
+
+Baseline: raw 292,528 / informative 108,803, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
