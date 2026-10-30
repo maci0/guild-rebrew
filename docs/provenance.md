@@ -9028,3 +9028,23 @@ instructions. Deferred as the cost is high relative to the 404 bytes it can add.
 
 Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the .data excess is 328,928 bytes of layout pads that carry matching bytes
+
+Section table: reference `.data` raw 0x41000 (266,240) and vsize 0xF09424; ours
+raw 0xA4000 (671,744) and vsize 0x2C80C24. The raw excess (405,504) is dominated by
+52 `_dpad_<VA>` arrays totaling 328,928 bytes, declared in game TUs with explicit
+initializer lists (largest `_dpad_6abb08` 41,240 B in
+`src/Develop/Units/m_alloc/GOLDTL.fcn_0040bfd0.c`, `_dpad_699368` 37,424 B,
+`_dpad_699388` 37,392 B).
+
+Tested removing `_dpad_6abb08`: build clean, raw 292,336 -> 283,255 / 107,930, so
+that pad supplies about 9,081 raw matches and its removal shifts the following data
+right. The pads are net positive in the raw metric; restored.
+
+Also tested filling the `.rdata` and `.data` prefix pads with 0x00 instead of 0x90:
+MSVC moves an all-zero initialized array to BSS, `.data` raw dropped 0x2B000 and
+raw fell to 239,742, so the nonzero 0x90 fill is what keeps those pads in the file.
+
+Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
