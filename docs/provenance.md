@@ -9711,3 +9711,13 @@ SIZE_MISMATCH/NEAR_MATCHING/STUB or link away from their reference VA; `.text` r
 is 0xC000 larger than the reference, which shifts `.rdata`/`.data` bases; and 75
 data rows drift, 62 of them by placement. Goal left active; no GA was run. Decision:
 Lead.
+
+## 2026-10-30: snapshot refreshed for the end of the session
+
+Updated `docs/TODO.md`: verify totals on the docker-backed run (484 EXACT, 3,670
+RELOC, 967 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB, 4,154 of 5,229 passing), `.text`
+2,540,738 bytes, and the session's landed changes (supp ordering and png/pngread/
+pngtrans shifts, stale stub prune, deflate_slow binding, false extent repair).
+
+Lint 0 errors / 0 warnings, data conflicts 0, raw 292,559 / 2,850,888, informative
+108,801. No GA was run. Decision: Lead.

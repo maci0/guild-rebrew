@@ -1,16 +1,19 @@
 # Current work
 
-## Current committed snapshot (2026-10-30 14:45 UTC)
+## Current committed snapshot (2026-10-30 22:30 UTC)
 
 GoldTL builds clean from the committed tree with the SP5-PP profile. Raw file
 agreement is 292,559 of 2,850,888 compared bytes (10.3%), informative agreement
 108,801. `verify --no-cache --text --raw-link` reports 4,154 of 5,229 rows
-passing: 484 EXACT, 3,668 RELOC, 969 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB;
+passing: 484 EXACT, 3,670 RELOC, 967 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB;
 libraries 44/44; text placement 587 of 5,180; inventory 6,688 rows. `.text` is
-2,540,754 bytes against the reference 2,491,370.
+2,540,738 bytes against the reference 2,491,370.
 
 Recent changes: the prebuilt DX8 png/jpeg objects are ordered by their reference
-first VAs (+44 raw, commit 4b06bdc1); the two five-byte tail-jump thunks compare
+first VAs, with png, pngread and pngtrans shifted a page or two (raw 292,389 to
+292,559 this session); stale symbol stubs that duplicated built sources were pruned
+(+53 raw); the deflate_slow library binding and a 28,059-byte false extent repair
+cut NO_SOURCE from 31,226 to 2,145 bytes; the two five-byte tail-jump thunks compare
 at RELOC 5/5; `repair-extents --sync-rows` and `order-sources --first-va-file`
 landed upstream. Lint is 0 errors / 0 warnings on 5,453 files and data conflicts
 are 0.
