@@ -9455,3 +9455,21 @@ Tested `_rdata_prefix_zeros` at 0x800 (raw 291,545 / 108,759), 0x1800 (290,195 /
 292,528 / 108,803. Restored 0x1000 and rebuilt the baseline.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: verification worker flake under the unshare backend
+
+Re-ran `verify --no-cache --text --raw-link`. The first run reported 60 rows as
+COMPILE_ERROR with `rebrew-unshare: mount target mkdir: Read-only file system`, and
+the second run reproduced the same 60. Single-file `rebrew test` on one of those
+rows compiles normally (0x4058D0 -> RELOC 30/30), so the sources are fine: the
+failure is in the unshare runner when verify fans out to parallel workers. This
+matches the timing of ten agents running single-file tests at once; their
+namespaces likely left the runner's mount target unusable for the parallel path.
+
+Row totals are therefore unreliable in that run (5,229 rows, 4,094 passing, 60
+compile errors). The byte score is measured from the image and stays valid:
+292,528 / 2,850,888 raw, 108,803 informative. The last clean full verification is
+round 287 (4,152 of 5,228 passing). A clean verify needs the host idle; the
+long-running pytest in the other relumea worktree is still occupying the machine.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
