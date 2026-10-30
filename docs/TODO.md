@@ -2786,3 +2786,26 @@ with the metadata rows) and closes the gap. The slice agents stay stopped: their
 parallel tests saturated docker and a detached finish script rewrote the metadata
 store, breaking every digest-guarded write. Resume with at most three agents and
 one test at a time.
+
+## Gap to byte identity
+
+Measured on the current build (`build-goldtl-audit/Europa1400Gold_TL.exe`):
+
+- Raw file agreement 292,528 of 2,850,888 compared bytes (10.3%), informative
+  agreement 108,803. Verification: 4,154 of 5,229 rows passing, 0 compile errors
+  through the docker backend.
+- D3DX8 band (0x5E0000-0x66FFFF, 589,824 bytes) agrees at 2.6%. The reference was
+  linked against a DirectX 8 SDK static library whose code and GUID/float tables are
+  in no configured archive; owner searches over 306 archives found nothing. That band
+  is third-party binary code and has no source reconstruction path in this project.
+- 3,285 rows are not byte matches: 967 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB, plus
+  rows whose linked object lands away from the reference VA.
+- `.text` raw is 0x26D000 against the reference 0x261000 (+0xC000). Every later
+  section base moves with it, which is why `.data` operands and data symbols are
+  shifted; both section prefix pads are at their measured optima and further pad
+  growth loses raw bytes.
+- 75 data rows drift (2,833 bytes), 62 of them purely placement.
+
+Conclusion: byte identity requires the reference's D3DX8 library build plus
+reconstruction of the 3,285 outstanding bodies; neither is available from this
+checkout, so the target is not reachable in-session.

@@ -9520,3 +9520,19 @@ the goal metric, so the committed pad state remains the best: restored with
 `git checkout -- src` and rebuilt to raw 292,528 / 108,803.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: drift-jump attribution is not valid on this link order
+
+Tried to attribute the cumulative placement drift to individual files by
+difference of consecutive boundary deltas (`drift_jumps.py`). The result is not
+usable: the largest jumps (e.g. +0x21B8F at GOLDTL.fcn_0062B5D0.c) exceed those
+files' reference sizes, because link order interleaves objects from different
+source directories, so consecutive map rows are not necessarily adjacent
+contributions. The method only holds where objects are contiguous; it does not here.
+
+Recorded the measured gap to identity in `docs/TODO.md` instead, with the D3DX8
+library-band evidence, the 3,285 outstanding rows, the +0xC000 text shift and the
+75 drifted data rows.
+
+Byte score unchanged: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.
