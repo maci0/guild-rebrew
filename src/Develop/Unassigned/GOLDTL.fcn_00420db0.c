@@ -1,18 +1,18 @@
 #include <stdio.h>
 
-// SIZE 0x104
+/* SIZE 0x104 */
 typedef struct {
 	unsigned int fd_count;
 	unsigned int fd_array[64];
 } FdSet_420db0;
 
-// SIZE 0x8
+/* SIZE 0x8 */
 typedef struct {
 	long tv_sec;
 	long tv_usec;
 } TimeVal_420db0;
 
-// SIZE 0x10
+/* SIZE 0x10 */
 typedef struct {
 	short sin_family;
 	unsigned short sin_port;
@@ -20,7 +20,7 @@ typedef struct {
 	char sin_zero[8];
 } SockAddrIn_420db0;
 
-// SIZE 0x10
+/* SIZE 0x10 */
 typedef struct {
 	char* h_name;
 	char** h_aliases;
@@ -72,18 +72,16 @@ int __cdecl fcn_00420db0(char* host, int port)
 	unsigned int s;
 	int i;
 	int r;
-	int res;
 
 	fcn_00420b70();
-	res = -1;
-	g_14cbca0 = res;
+	g_14cbca0 = -1;
 	g_14cbca4 = 0;
 	g_14cbca8 = 0;
 	g_14cbcac = 0;
 	g_14cbcae = 0;
 	g_14cbcb0 = 0;
 	if (host == 0) {
-		goto done;
+		return -1;
 	}
 	WSAStartup(2, wsa);
 	g_6b7d40 = 1;
@@ -143,7 +141,8 @@ fail:
 	}
 	g_6b7d40 = 0;
 	WSACleanup();
-	goto done;
+	s = -1;
+	return s;
 connected:
 	len = 4;
 	if (getsockopt(s, 0xffff, 0x1001, (char*) &opt, &len) != -1) {
@@ -154,7 +153,5 @@ connected:
 		sprintf(buf, "getsockopt SO_RCVBUF: %d", opt);
 	}
 	g_14cbca0 = s;
-	res = s;
-done:
-	return res;
+	return s;
 }

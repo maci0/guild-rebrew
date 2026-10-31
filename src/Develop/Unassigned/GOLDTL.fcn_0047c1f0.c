@@ -37,10 +37,10 @@ void __cdecl fcn_0047b9a0(Quad* q, unsigned char r, unsigned char g, unsigned ch
 
 Quad* __cdecl fcn_0047c1f0(float u, float v, int w, int h, Tex* tex, int x, int y)
 {
-	float du;
-	float dv;
 	int cw;
 	int ch;
+	float du;
+	float dv;
 	int tw;
 	int th;
 	float z;
@@ -70,10 +70,10 @@ Quad* __cdecl fcn_0047c1f0(float u, float v, int w, int h, Tex* tex, int x, int 
 		y = g_7725fc;
 		ch = (int)(h - dv);
 	}
-	if (cw + x > g_67d964) {
+	if (x + cw > g_67d964) {
 		cw = g_67d964 - x;
 	}
-	if (y + ch > g_67d968) {
+	if (ch + y > g_67d968) {
 		ch = g_67d968 - y;
 	}
 	q = &g_1552020[g_772604];
