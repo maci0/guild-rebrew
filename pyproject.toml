@@ -1,6 +1,6 @@
 [project]
 name = "guild-rebrew"
-version = "1.6.1"
+version = "1.7.0"
 description = "Europa 1400 (The Guild) decompilation project: byte-identical C89 source reconstruction"
 requires-python = ">=3.15"
 dependencies = [

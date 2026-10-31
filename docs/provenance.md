@@ -9743,3 +9743,14 @@ The 100% objective is not achieved. What blocks it: the reference's D3DX8 static
 library build is in no configured archive (589,824-byte band at 2.6%), 3,285
 outstanding bodies, `.text` raw 0xC000 larger than the reference shifting later
 sections, and 75 drifted data rows. No GA was run in any round. Decision: Lead.
+
+
+## 2026-10-31: release 1.7.0
+
+Tag v1.7.0 publishes the committed tree through the 2026-10-30 session close.
+The README snapshot stays 2026-10-29 02:40 UTC: server code accounting 100%,
+251/251 C functions, raw-file agreement 74.4%. GoldTL is 53.4% code accounted
+and 8.3% raw. Gold is 21.0% code accounted and 1.1% raw. Neither client is
+byte-identical or playable. The v1.6.1 server image is a historical result and
+does not validate this tree. Uncommitted reconstruction is not in the tag.
+The 100% objective is not achieved.
