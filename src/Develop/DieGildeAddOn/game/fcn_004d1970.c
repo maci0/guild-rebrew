@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 
-void* __cdecl fcn_00508e40(int);
+void* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fe2e0(char*, int, int*, int*, int, int*);
 void __cdecl fcn_004ce9e0(char*);
 char* __cdecl fcn_004ce610(char*);
@@ -17,7 +17,7 @@ void* __cdecl fcn_004d1970(int a1, int a2)
 	int i;
 	int f;
 
-	src = (char*) fcn_00508e40(a1);
+	src = (char*) gm_LookupEntityRecordById(a1);
 	i = 0;
 	for (;;) {
 		if (*(unsigned short*) (0x9b4a40 + i * 0x21c) == 0xffff)

@@ -4,7 +4,7 @@ extern int g_6b8010;
 extern char g_6b5c60[];
 
 int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00507870(char*);
 int __cdecl fcn_004c5620(int, char*);
@@ -46,7 +46,7 @@ void __cdecl fcn_00566360(char* a0)
 			return;
 		}
 	}
-	ent = fcn_00508e40(*(unsigned int*) (o + 0xac));
+	ent = gm_LookupEntityRecordById(*(unsigned int*) (o + 0xac));
 	if (ent == 0) {
 		fcn_00546190(o);
 		return;

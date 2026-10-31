@@ -17,7 +17,7 @@ extern char g_6a7e18[];
 
 char* __cdecl fcn_005463a0(int, ...);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_00546190(char*);
@@ -34,7 +34,7 @@ void __cdecl fcn_00576b40(char* u)
 	}
 	for (o = fcn_005463a0(1, 0, 0x99); o != 0; o = he_fn_Handlung()) {
 		if (o != u && *(unsigned short*) (o + 8) == *(unsigned short*) (u + 8)) {
-			fcn_0051af00(text, 0x3ff7, *(unsigned short*) (u + 8));
+			io_FormatTextBuffer(text, 0x3ff7, *(unsigned short*) (u + 8));
 			fcn_00545d40(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -1, text, 0, 0x5fa, 0);
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
 			fcn_00546190(u);

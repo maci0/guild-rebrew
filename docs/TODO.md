@@ -1,96 +1,228 @@
 # Current work
 
-## Current committed snapshot (2026-10-30 22:30 UTC)
+## Working checkpoint (2026-10-31)
 
-GoldTL builds clean from the committed tree with the SP5-PP profile. Raw file
-agreement is 292,559 of 2,850,888 compared bytes (10.3%), informative agreement
-108,801. `verify --no-cache --text --raw-link` reports 4,154 of 5,229 rows
-passing: 484 EXACT, 3,670 RELOC, 967 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB;
-libraries 44/44; text placement 587 of 5,180; inventory 6,688 rows. `.text` is
-2,540,738 bytes against the reference 2,491,370.
+| Target | Latest build evidence | Remaining limits |
+| --- | --- | --- |
+| Server | Raw file equals all 286,720 reference bytes; 316/316 function and 652/652 data checks pass. Imports, exports, sections, resources, relocations, headers, layout and Wine checks pass. | The full gate exits 1 on cross-target D3DX screening; this is not a fully passing gate. |
+| GoldTL | Fresh executable and map at `9703a45c…`, 2,977,792 bytes. Linked without duplicate suppression. `rebrew source organize check` against the preserved `b8bf67e4…` image matches imports, exports, relocations, and headers. `__dpad_14b5798` is absent from the new map, along with `__dpad_fb9084`, `__dpad_fb91c0`, and `__dpad_68ae64`. | Whole image still differs (175,845 / 2,977,792 bytes at original offsets, 5.9%). Section virtual sizes versus the preserved image: `.data` 46,371,108 to 46,280,644, `.rdata` 45,966 to 45,934, `.text` 2,507,904 to 2,503,744. The 12:47 UTC placement counts (102 of 5,188 functions at native VAs; 161 of 275 comparable data records) belong to `b8bf67e4…` and were not repeated. |
+| Gold | This rebuild compiled, then failed to link with 276 unique unresolved symbols and no duplicate-symbol diagnostics. `_d2_SetElementValue` and `_d2_SetOverlayAnimation` are no longer in that set. | No fresh executable was produced. `build/Europa1400Gold.exe` (`067f29eb…`, 819,200 bytes) remains a historical comparison image. |
 
-Recent changes: the prebuilt DX8 png/jpeg objects are ordered by their reference
-first VAs, with png, pngread and pngtrans shifted a page or two (raw 292,389 to
-292,559 this session); stale symbol stubs that duplicated built sources were pruned
-(+53 raw); the deflate_slow library binding and a 28,059-byte false extent repair
-cut NO_SOURCE from 31,226 to 2,145 bytes; the two five-byte tail-jump thunks compare
-at RELOC 5/5; `repair-extents --sync-rows` and `order-sources --first-va-file`
-landed upstream. Lint is 0 errors / 0 warnings on 5,453 files and data conflicts
-are 0.
+Server SHA-256:
+`3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+Latest TL SHA-256:
+`9703a45c444732a2eb47771d19bdb5b14e8c96a0158ce63eda57f6ac8289d29e`
+(`build-goldtl-audit/Europa1400Gold_TL.exe`, 2,977,792 bytes).
+The previous fresh TL image was
+`b8bf67e4b74a9236dc295e712407cf084085480c1b7059b3a014fcdc9467d95a`
+(2,981,888 bytes).
+Current same-offset agreement is 175,845 / 2,977,792 bytes (5.9%).
+The preceding build was 208,863 / 3,203,072 after removing the command-data
+copy. The further copied-array and artificial-prefix removals reduce the raw
+score while preserving function objects. Retaining baked pointers or filler
+to improve that score would not satisfy the source-fidelity requirement.
+Older receipts used the 2,850,888-byte reference as denominator (7.8667%);
+that excluded extra built bytes and is not the README's raw-file measure.
+The existing Gold executable is historical, not a result of the latest build.
+The rebuilt server still matches its reference after the shared-provider guard.
+Stored GoldTL data in the 14:02 UTC status snapshot is 432 records: 3 verified,
+423 displaced, 429 drift and 0 unchecked. The 434-record image report belongs
+to the 12:47 UTC check of `b8bf67e4…`. `_iob` and `cut_RandomSeed` are not
+re-listed here. Current build logs and measurements are in
+`.scratch/grok-naming-20261031/headless/source-batch/`. The integration
+receipts remain in `.scratch/grok-naming-20261031/headless/integration/`. The previous naming
+receipts remain in `.scratch/goal-naming-final-20261031/`. Earlier naming-only changes
+preserved the complete TL executable byte-for-byte; the later copied-data
+removal changes its layout. Earlier naming and duplicate-repair receipts
+describe their own link attempts.
 
-What blocks byte identity: the reference's D3DX8 band holds code that our linked
-archive bodies do not reproduce byte-for-byte (193 KB of filler when those members
-are dropped), and 3,300 functions still differ in body. Every layout lever tested
-this week (lead pads, trusted-anchor pads, source splits, member removal, supp
-ordering) either moves single-digit bytes or trades raw bytes for informative
-coverage. The next work is body reconstruction in the interleaved bands, starting
-with the functions the d3_object split exposed.
+### Source and provider changes
 
-## Current committed snapshot (2026-10-29 02:40 UTC)
+- Naming: reviewed 17 function names and four global names across
+  their definitions, declarations, callers and comparison scaffolds. Native
+  behavior supports the inferred names; the established `d2_SetForm` spelling
+  is reused. Local names clarify the UI, video, text and skill routines.
+  The [naming ledger](naming_conventions.md#naming-review--2026-10-31) records
+  addresses, evidence and unresolved counterpart bindings. Object comparisons
+  preserve code/data bytes and normalized relocations; names alone earn no
+  byte-match credit. Gold's value-step and entity-skill bindings are restored;
+  its main entity lookup now uses the existing `spiel.c` definition. The
+  main 768-entry and separate 32-entry lookups have distinct names. The
+  Gold small counterpart is rebound to the shared C body; focused checks
+  pass 56/56 in both clients and 188/188 for the caller that uses both.
+  The retained TL support helper keeps its current small-table calls while
+  its native identity remains unknown.
+- Removed the retained 1,164-byte `_dpad_68a9d8` copy after proving that its
+  handler addresses had no relocations. Both client functions still test RELOC
+  37/37; native table ownership remains unresolved. The fresh TL relink has
+  matching imports and unchanged function-placement counts; its raw score
+  change is recorded above.
+- Removed the further 41,240-byte `_dpad_6abb08` image copy and artificial
+  176,128-byte `.data` / 4,096-byte `.rdata` prefixes. Complete Gold/TL function
+  code and relocations are preserved; focused comparisons pass 155/155 and
+  52/52. No replacement storage was added. Their former retained contributions
+  are not evidence of native owners. The combined relink passes for TL and
+  preserves the exact server file; its current raw score is recorded above.
+- TL `0x50dfd0`: reconciled the definition with the two cdecl slots supplied
+  by all 52 observed direct callers. The second carrier remains unused and its
+  type inferred; the body stays EXACT 39/39. No TU merge was made from the
+  partial ECX-reuse experiment in the related `0x50e170` caller.
+- Resolved all previously reported duplicate symbols: distinct native functions
+  retain separate identities, target-specific caller destinations are preserved,
+  shared definitions use target guards, and obsolete scaffold providers are
+  removed. Both final client links report zero duplicates; Gold still has the
+  unresolved symbols above. GoldTL no longer uses `/FORCE:MULTIPLE`.
+- Data: removed twelve partial source definitions, retained bounded comparison
+  views, replaced twenty copied string arrays with semantic C initializers and
+  completed the eight-entry table. All 53 affected Gold/TL objects preserve
+  complete function bytes, relocations and link directives. Both table objects
+  match all 288 native bytes. Storage topology and original TU ownership remain
+  unresolved; the zeroed views are not recovered allocations.
+- TL `gv_GetSlotEntry`: re-bound to the shared helper TU, fresh RELOC 317/317.
+  The startup caller at `0x5435e0` now earns RELOC 725/725 after correcting its
+  target-specific helper call. Other focused nonmatches remain documented in
+  the duplicate-group receipts.
+- TL `0x5e6840`: new 152-byte callback, RELOC 152/152. The two native literals
+  and all 15 operands reproduce the body under independently checked image
+  addresses; rejecting target, site, window and literal controls pass.
+- TL `nt_GetLocalIp` (`0x420d20`): RELOC 131/131. All ten applied operands
+  match; an isolated helper/scaffold link imports the five expected Winsock
+  ordinals. Its 16-byte text buffer remains comparison capacity, not native
+  ownership evidence.
+- TL `0x5e53b0`: reviewed C is 1,569 versus 1,685 native bytes. Control-flow,
+  layout and call-target review do not establish full operand equivalence,
+  exceptional floating behavior or selected providers. Eight comparison-only
+  scalar slots compile and link in an isolated probe.
+- `fcn_00499950`: NEAR_MATCHING 213/250. `ch_AttachAni`: meaningful path and
+  argument repairs, still SIZE_MISMATCH 383/404. `fcn_00498e20`: 16 guard cases
+  pass; 294 object bytes versus a reviewed 282-byte native extent.
+- Server: restored the shared indexed save loop, repaired the `gm_AddObjekt`
+  declaration and cleared 57 inert flag overrides. Removed seven unsupported
+  client arrays, one duplicate command span and four empty retired Gold units.
+  The server file remains exact. Other 20 span/alias proposals remain unapplied.
+- TL: removed 82 discarded function stubs in two reviewed batches (7 + 75).
+  The last batch preserves all 17,338 map identities/addresses/owners. The
+  locale helper TU now uses `/MT`, eliminating 22 mixed-CRT warnings. Those
+  checkpoint map totals predate the duplicate-provider repairs above.
+- Gold: restored the stdcall `WinMain` comparison stub, bound three callers to
+  `sprintf` and added seven ABI-reviewed callable stubs. Unified the attested
+  `he_AllocNone` provider across both clients (RELOC 60/60 each), retained the
+  unrelated helper as `fcn_004c3f90` (RELOC 50/50 each), and guarded the leaked
+  server `gm_AddObjekt` definition out of Gold. Restored Gold's shared 280-byte
+  provider at `0x4c39c0` and reconciled six native caller edges; all seven Gold
+  comparisons are RELOC. Its two helper providers and seven data identities
+  remain unresolved. Numeric CRT calls now use `strtok` (29/29 RELOC) and
+  `_ld12cvt` (24/22 SIZE_MISMATCH, corrected distinct arguments). The new full
+  link compiled but still fails as shown above; no fresh Gold map/PE proof exists.
+- TL `cm_RejectCommand` (`0x4c75f0`): metadata-only binding to the existing shared
+  definition, official EXACT 6/6. Four wrong-window controls reject at 0/6
+  with the repaired development CLI; no source or padding was added.
+- TL `0x605233`: strict native identity records D3DX library origin; the compiled
+  naked transcription remains and the original archive provider is unresolved.
 
-README, code/data bars and defrag map now describe the accumulated committed
-source tree, using one CLI status report. Server code and stored data are 100%,
-but its current raw file agrees at 74.4%; the byte-identical v1.6.1 build is
-historical. GoldTL has 4,100/5,184 C matches (79.0%), 53.4% code accounting and
-8.3% raw-file agreement. Gold has 1,881/4,426 C matches (42.4%), 21.0% accounting
-and 1.1% raw-file agreement. No new native build or data verification ran.
+### Tooling and validation
 
-All accumulated source, metadata, layout and build changes were committed; the
-modified .lib archive was explicitly excluded. A stale cross-import fixture
-path was corrected after its source moved. Tests: 39 passed plus 3 subtests.
-All-target lint found zero errors; its only generated-guidance warning was
-cleared by refresh, with project rules preserved and init --check passing.
-Receipts: .scratch/readme-refresh-20261029/.
+Guild uses released Rebrew 6.9.0. The upstream development checkout contains
+unreleased fixes for full-body library matching, lint historical-path scans,
+bare pointer-return declarations, conditional callable stub aliases, and
+explicit `test --symbol` / raw `--target-bin` selection.
+The override repair passes **13,419 tests, 28 skipped**; source/test hashes
+were unchanged during the run. The matcher replay reduces 38 screened findings
+to 29 full-body candidates requiring operand, literal and provider review.
+One candidate (`0x605233`) has since earned strict native identity. No released
+fix or Guild environment upgrade is claimed. See [tooling gaps](tooling-gaps.md).
 
+The subsequent binding/provenance repairs pass 13,429 upstream tests (28 skipped)
+and 13,359 tests in the private v6.9.0 port (29 skipped). They recognize complete
+storage-macro/K&R definitions and remove redundant metadata parsing while keeping
+writer-lock and input checks. Only reviewed naming writes used that explicit
+development port; native builds still use the released environment.
+The later fail-closed library-screen and atomic adoption repairs pass 13,436
+upstream tests (28 skipped), and 13,350 in their private v6.9.0 port (41 skipped).
+The repaired screen reports 28 candidates and two unchecked functions; neither
+classification nor the full gate is complete. The staged `fseek` restoration
+still needs strict callee identity review. No production CRT/library adoption
+was made. See the [tooling gaps](tooling-gaps.md) for the separate mixed-context
+lookup rename. Its upstream repairs pass 13,447 tests (28 skipped), and the
+private v6.9.0 port passes 13,362 (40 skipped). The guarded three-stage rename
+is applied after an isolated replay, with 478 source files checked for only
+the intended identifier and provider-base edits. No installed package changed.
 
-## Release 1.6.1 — server verification and charts (2026-10-27)
+The CRT review corrects TL `0x64d399` to `_unlock_file`, confirms both lock
+extents at 47 bytes, and records `_iob` plus the two linker-owned critical-section
+import slots without creating C storage. Strict review still refuses unresolved
+`__lock` / `__unlock` callees; no trusted native receipt was recorded.
+The two remaining C matching probes leave TL `0x57a3d0` at 799/801 and
+`0x4bd1e0` at 752/758, with measured blockers and unchanged compiler flags.
 
-A fresh isolated build with published Rebrew 6.3.1 reproduces all 286,720 server
-bytes (SHA-256 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`).
-Verification passes 316/316 functions (251 game, 65 source-built library) and
-652/652 data records. Status reports 100% server code accounting, C matches,
-raw-file agreement and all three data bars (547/547 records, 66,664 bytes).
+The lint hot-path profile fell from 82.04 to 61 seconds (25.6%) on the same
+5,452-source corpus; this is not a whole-build benchmark. Latest project checks:
+39 tests plus three subtests and `rebrew init --check` pass. After naming,
+the full server function check passes 316/316; raw-link checking confirms
+all 251 game functions at their reference VAs and all verified bodies EXACT.
+The two text-widget type receipts are refreshed with unchanged sizes/offsets.
+Final all-target lint passes 5,451 files per target with zero errors and warnings.
+All 618 available renamed caller objects (143 Gold, 475 TL) preserve `.text`
+and normalized relocations. Another 335 Gold and three TL contexts have no
+before-object baseline; source comparisons cover the intended edits there.
+Latest project tests pass 39 tests and three subtests; init check passes.
+Receipts: `.scratch/goal-naming-final-20261031/` and the older
+`.scratch/goal-next-20261031/final/` and `final-validation/`;
+the complete server function/raw-link check is in the preceding naming batch.
+Compiler warnings remain separate: earlier full build logs
+record 198 Gold, 1,337 GoldTL and 54 server C diagnostics. Clean lint does not
+mean a warning-free build. Old scratch cleanup
+removed inactive bytecode and regenerable image exports; native receipts,
+archives, analysis state and active worktrees remain.
 
-Reviewed 76 server inventory extents end before 712 trailing NOPs. Those bytes
-remain linker/compiler alignment; no source or image bytes were inserted.
-Rebrew now supplies the native Microsoft-runtime toolchain profile, so the
-obsolete duplicate project overlay and its CMake environment override are removed.
+Receipts: `.scratch/terra-goal-20261031/` (server, TL link/scaffold, Gold link,
+D3DX and tooling), `.scratch/terra-20261031/` (small bodies),
+`.scratch/cleanup-20261031/` (cleanup), and `/tmp/rebrew-final-verification.txt`
+(final upstream suite). [README](../README.md) and graphics read stored verdicts
+and existing configured images; neither is a fresh function verification run.
 
-The README and all three graphics use one release-source status snapshot after
-fresh data checks. GoldTL: 3,804/5,122 C matches, 47.8% code accounting; Gold:
-2,466/4,592 C matches, 22.6%. Existing client raw images agree at 2.0% and 1.1%.
-Neither client was rebuilt or made playable. Ongoing uncommitted client recovery
-is preserved outside this release; its larger counts must not be mixed into the
-release charts. Canonical server bindings accidentally retired by the client
-library sweep were restored separately and their two TUs pass 80/80 checks.
+### Next actions
 
-Release tests: 39 passed and 3 subtests; all dependency extras resolve, `uv lock
---check` and `uv pip check` pass. Source-built library attribution and whole-file
-identity remain separate claims. No full project gate or new gameplay test is
-claimed. Local receipts: `.scratch/release-20261027/`.
+1. Resolve the 276 missing Gold symbols using
+   `.scratch/grok-naming-20261031/headless/integration/gold-configure-build.log`; then relink
+   and compare the raw image, map, imports, text and data. All current duplicate
+   diagnostics are resolved; retain the distinct native functions. The
+   main-table/32-slot lookup split is applied. Continue reviewing unaligned
+   caller sites and existing declaration-type conflicts without changing the
+   selected support helper's preserved target-specific calls.
+2. Resolve TL storage owners, source contracts and placement/data drift.
+   The `eval_ObjektPreis2Credits` caller/provider return types still differ.
+   Latest image checks are dry-run evidence; stored data verdicts have not
+   been refreshed against the final image hash.
+3. Review D3DX candidates and the pending extent repair separately from names
+   and providers. Rerun the full gate using the repaired release when available;
+   do not weaken the gate or classify unresolved candidates as proven libraries.
+   The minizip source migration first needs reviewed restoration of retired CRT
+   boundaries and unambiguous lock/unlock/seek-helper identities. The fixed
+   scratch `fseek` adoption retains size 44, then correctly fails strict operand
+   review on `__lock_file`; no native-identity receipt or production adoption
+   exists. Evidence: `.scratch/goal-next-20261031/minizip/crt-boundaries.md`.
+4. Continue native-body/type/operand review, including TL `0x5e53b0` exceptional
+   arithmetic. Use canonical game TU flags; historical score-only flag probes
+   do not authorize production overrides.
+5. Continue the inherited `_dpad_` audit against selected object contributions
+   and native storage evidence. The retained copy in `GOLDTL.fcn_004c4dc0.c`
+   is removed. The fresh GoldTL map also lacks `__dpad_fb9084`,
+   `__dpad_fb91c0` and `__dpad_68ae64`. `_dpad_675318` is still in
+   `GOLDTL.fcn_0040dad0.c` and was not removed. The semantic command tables
+   still have unresolved/conflicting entry bindings. Review each other
+   contribution separately; a token occurrence alone does not show that the
+   linker retained it.
 
+## Historical work records
 
-## Server data placement fixed (2026-10-24 19:24 UTC)
-
-The upstream Rebrew 6.1.1 fix resolves the 138 previously VERIFIED-only server
-records without adding storage: 123 layout intervals use section coordinates,
-four aliases use bounded backing offsets, ten private symbols use selected
-COFF references, and one float literal has a reviewed native-symbol binding.
-Server data is 547/547 EXACT in status and all 652 raw records pass; the complete
-raw DLL remains byte-identical. The [data chart](../README.md#data-verification)
-now shows 100% in all three server bars. No client rebuild or new client verdict
-is claimed. Evidence: `.scratch/server-data-placement-20261025/`.
-
-## Data/chart check (2026-10-24 18:38 UTC)
-
-Fresh checks: server 652/652 data symbols and whole-file identical; Gold
-83 matches, 30 differences, 49 missing. GoldTL's audit EXE is unavailable and
-its map empty during a concurrent rebuild. The latest recorded link failed
-with 20 unresolved symbols; no fresh TL data result was recorded. Its previous
-125/51/15 measurement remains dated explicitly in the [README](../README.md#data-verification).
-Stored TL C matches are 3,835/4,946 (77.5%); one STUB remains. No functions were
-compiled for this refresh and no full gate ran. Receipts:
-`.scratch/data-readme-refresh-20261025/`. Source work continues below.
+The records below retain native findings, action notes, and existing section
+anchors. Their status, commands, and priorities describe their own dates; use
+the working checkpoint above and fresh checks for the current state. Earlier
+milestones, including the exact server release, are indexed in
+[goal history](goal-history.md). Local release receipts are in
+`.scratch/release-20261027/` and data-placement receipts in
+`.scratch/server-data-placement-20261025/`.
 
 <a id="status-snapshot-2026-10-21-1202-utc"></a>
 
@@ -277,7 +409,9 @@ Next actions, in order:
 
 Older notes below are dated checkpoints and are superseded by this one.
 
-## Live state (2026-10-22, round 107)
+<a id="live-state-2026-10-22-round-107"></a>
+
+## Historical state (2026-10-22, round 107)
 
 Historical round record; use the snapshot above for current results.
 
@@ -1624,7 +1758,9 @@ See [handoff](HANDOFF.md) for prepared work and resume steps. Stop evidence is
 `.scratch/gui-text-creator-integration/STOPPED.json`; detailed receipts are in
 that directory. No further build or reconstruction starts without a resume request.
 
-## Current integration
+<a id="current-integration"></a>
+
+## Historical integration
 
 - The inferred `d2_ShowTxt` now shares Gold `0x473640` and TL `0x46fac0`
   in `Develop/Units/d2.v1/`. Gold uses signed word coordinates; TL uses
@@ -1927,7 +2063,9 @@ unshare, Rebrew 5.2 directs RELOC `todo` rows to raw-image verification
 help before reusing an old command. Client build recipes and scaffold limits
 are in [stubs/README.md](../stubs/README.md).
 
-## CURRENT STATE
+<a id="current-state"></a>
+
+## Historical state
 
 Historical server-only table from the last completed gate, before the current
 creator integration. The gate no longer rewrites this checkpoint from terminal

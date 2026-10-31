@@ -15,7 +15,7 @@ extern double g_6640e8;
 extern float g_662a6c;
 
 void __cdecl d2_SetForm(int, int);
-float __cdecl fcn_00507f10(char*, int);
+float __cdecl gm_GetEntitySkill(char*, int);
 int __cdecl fcn_005c6270(void*, int);
 float __cdecl fcn_004e6d20(void);
 int __cdecl fcn_004e6cb0(int);
@@ -24,7 +24,7 @@ int __cdecl fcn_004dfe40(char*, int);
 void __cdecl fcn_00417b50(char*, int, float, float, float, float);
 int __cdecl fcn_00406340(char*, char*, int);
 int __cdecl fcn_004de610(int);
-char* __cdecl fcn_00519190(int, ...);
+char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004c3030(int, int, char*, int);
 float __cdecl fcn_004ff210(int, int);
 void __cdecl fcn_004cfc40(char*, int, int);
@@ -44,8 +44,8 @@ void __cdecl fcn_004dff50(char* task)
 	d2_SetForm(g_68bfc0, 0);
 	e = *(char**) (task + 0x180);
 	foe = *(char**) (task + 0x17c);
-	a = fcn_00507f10(e, 3);
-	fcn_00507f10(foe, 3);
+	a = gm_GetEntitySkill(e, 3);
+	gm_GetEntitySkill(foe, 3);
 	a = a * g_664108;
 	if (fcn_005c6270(e, 0x16f) != 0) {
 		a = a * g_662a08;
@@ -87,7 +87,7 @@ void __cdecl fcn_004dff50(char* task)
 		}
 		d2_SetForm(g_68bfc0, 0);
 		task = (char*) fcn_004de610(6);
-		fcn_00519190((int) task + 0x1102, *(unsigned short*) foe);
+		io_AppendText((int) task + 0x1102, *(unsigned short*) foe);
 		fcn_004c3030(*(unsigned short*) foe, 0, (char*) 0x68cbb8, (int) task);
 		{
 			float x;
@@ -103,7 +103,7 @@ void __cdecl fcn_004dff50(char* task)
 			fcn_00406340(*(char**) (foe + 0x184), (char*) 0x68cba0, 1);
 		}
 		task = (char*) fcn_004de610(9);
-		fcn_00519190((int) task + 0x1109, *(unsigned short*) foe);
+		io_AppendText((int) task + 0x1109, *(unsigned short*) foe);
 		fcn_004c3030(*(unsigned short*) foe, 0, (char*) 0x68cb74, (int) task);
 	}
 }

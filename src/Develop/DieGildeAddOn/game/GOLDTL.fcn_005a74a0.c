@@ -23,7 +23,7 @@ extern int g_7e2700;
 
 int __cdecl fcn_00506380(int id, unsigned char* store, int a, int b);
 int __cdecl fcn_005a7400(unsigned char* p, int* lo, int* hi);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005263d0(char*, char*, int);
 
 int __cdecl fcn_005a74a0(unsigned char* p)
@@ -58,21 +58,21 @@ int __cdecl fcn_005a74a0(unsigned char* p)
 					x = a;
 					if (((*(int*)&g_7f4c04) & 0xffff) < x) {
 						if (kind == 3 || kind == 5) {
-							fcn_0051af00(text, 0x2059, p);
+							io_FormatTextBuffer(text, 0x2059, p);
 						}
 						else {
-							fcn_0051af00(text, 0x2056, own, p);
+							io_FormatTextBuffer(text, 0x2056, own, p);
 						}
 					}
 					else {
 						if (kind == 3 || kind == 5) {
-							fcn_0051af00(text, 0x205a, p);
+							io_FormatTextBuffer(text, 0x205a, p);
 						}
 						else {
-							fcn_0051af00(text, 0x2057, own, p);
+							io_FormatTextBuffer(text, 0x2057, own, p);
 						}
 					}
-					fcn_0051af00(line, 0x2058, x, b);
+					io_FormatTextBuffer(line, 0x2058, x, b);
 					strcat(text, line);
 					g_7e2700 = 0;
 					fcn_005263d0(title, text, 4);

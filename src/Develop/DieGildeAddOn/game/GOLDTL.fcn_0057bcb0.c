@@ -6,7 +6,7 @@ extern pos14_7f4c00 g_7f4c00;
 
 
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 
 void __cdecl fcn_0057bcb0(char* o)
@@ -20,7 +20,7 @@ void __cdecl fcn_0057bcb0(char* o)
 	}
 	*(pos14_7f4c00*) (o + 0x44) = g_7f4c00;
 	*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
-	x = fcn_00508e40(*(int*) (o + 0xb0));
+	x = gm_LookupEntityRecordById(*(int*) (o + 0xb0));
 	if (x == 0) {
 		*(int*) (o + 0x84) = fcn_004c5620(-1, o);
 		return;

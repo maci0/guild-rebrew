@@ -40,7 +40,7 @@ int __cdecl fcn_005016c0();
 int __cdecl gm_FindNextFilteredEntity();
 int __cdecl gm_StartFilteredEntitySearch();
 int __cdecl fcn_005155e0();
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_00522c0();
 int __cdecl fcn_00526120();
 int __cdecl fcn_005356b0();
@@ -56,7 +56,7 @@ int __cdecl fcn_00546f80();
 int __cdecl fcn_00547770();
 int __cdecl fcn_005490a0();
 int __cdecl fcn_005490d0();
-int __cdecl fcn_0051af00();
+int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_00535570();
 int __cdecl fcn_00535960();
 int __cdecl gm_RandomMod(int);
@@ -98,7 +98,7 @@ void __cdecl fcn_00543080(void)
 		while (v11 != 1) {
 			*(int*) 0x7725c8 = 0;
 			*(int*) 0x7e46ac = 0x24087;
-			fcn_0051af00(v6, 0x79);
+			io_FormatTextBuffer(v6, 0x79);
 			if (!fcn_00526120(v6, 1)) {
 				*(int*) 0x774954 = 1;
 				fcn_005356b0(0x5438c0);
@@ -128,7 +128,7 @@ void __cdecl fcn_00543080(void)
 		v2 = fcn_00470820(0, 0, 0x6a43ac);
 		fcn_00471d80(v2, 3);
 		d2_SetForm(v2, 1);
-		fcn_00519190(0x7d);
+		io_AppendText(0x7d);
 		fcn_00500d60(0x7f4c00, v7);
 		d2_SetForm(v2, 0);
 		fcn_00471e30(v2);
@@ -225,9 +225,9 @@ void __cdecl fcn_00543080(void)
 		if (*(int*) 0x774965 && !(*(int*) 0x7747b0 & 4)) {
 			v2 = fcn_00535570();
 			d2_SetForm(v2, 2);
-			fcn_00519190(0x7d);
+			io_AppendText(0x7d);
 			d2_SetForm(v2, 1);
-			fcn_00519190(0x1ba0, *(int*) 0x774970 & 0xffff, *(int*) 0x774970 & 0xffff);
+			io_AppendText(0x1ba0, *(int*) 0x774970 & 0xffff, *(int*) 0x774970 & 0xffff);
 			fcn_004c30a0(0xfffffff9, 0, 0x6a438c, 0xffffffff, 0);
 			v5 = fcn_005373e0(0x543080, 0x66087);
 			while (v5) {

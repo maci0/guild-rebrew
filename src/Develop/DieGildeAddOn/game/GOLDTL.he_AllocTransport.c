@@ -18,7 +18,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl fcn_0050c710(unsigned char*, int, int);
 int __cdecl fcn_0050ddf0(int, int);
 int __cdecl fcn_0050de80(char*, void*);
-void __cdecl fcn_0041d9e0(const char*);
+void __cdecl ReportClientMessage(const char*);
 
 #pragma pack(1)
 typedef struct Span14 {
@@ -132,7 +132,7 @@ void __cdecl he_AllocTransport(char* a0)
 		if (found_second) {
 			*(int*) (a0 + 0xc8) = 4;
 			if (first == second) {
-				fcn_0041d9e0((char*) 0x6a62dc);
+				ReportClientMessage((char*) 0x6a62dc);
 				fcn_00546190(a0);
 				return;
 			}

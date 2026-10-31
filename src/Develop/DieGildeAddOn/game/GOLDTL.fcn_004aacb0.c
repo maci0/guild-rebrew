@@ -20,9 +20,9 @@ int __cdecl fcn_004aacb0(unsigned short* a1, unsigned short* a2, unsigned short*
 	if (a1 == a2)
 		return 1;
 	d2 = (float)(fcn_0050f980(*a2, *a1, 1));
-	q2 = fcn_00507f10((char*) a2, 4);
+	q2 = gm_GetEntitySkill((char*) a2, 4);
 	d3 = (float)(fcn_0050f980(*a3, *a1, 1));
-	q3 = fcn_00507f10((char*) a3, 4);
+	q3 = gm_GetEntitySkill((char*) a3, 4);
 	s2 = (float)(q2 * 0.34 + d2 * 0.66);
 	s3 = (float)(q3 * 0.34 + d3 * 0.66);
 	if (fcn_005c6270(a2, 0x2be) != 0)

@@ -88,7 +88,8 @@ nullable `hint_name_rva` through `formats.import_table.parse_imports` and
 `binary imports list --json`. Physical name-table position does not establish
 linker load order; the server recipe and ordinal spellings remain project policy.
 
-Guild now pins the published 5.4.0 wheel and its import recipe uses that API.
+This migration used the published 5.4.0 wheel; the current project pin is in
+`pyproject.toml`. The import recipe still uses that API.
 Before/after comparisons preserve all 39 lines and 1,205 bytes of the tracked
 response file. The read-only replay and original migration patch remain in
 `.scratch/rebrew-import-hint-name-rva-migration/` as local evidence.

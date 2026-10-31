@@ -15,13 +15,13 @@ int __cdecl fcn_0055c0f0(void* a, void* b);
 int __cdecl fcn_0055c0a0(void* a, void* b);
 int __cdecl fcn_0055c050(void* a);
 int __cdecl fcn_00579640(void* a, void* b);
-void __cdecl fcn_0051af00(char* buf, int id, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00526120(char* buf, int flag);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl fcn_00471b60(int dlg);
 void __cdecl d2_SetForm(int dlg, int flag);
-void __cdecl fcn_00473a90(int a, int b);
-int __cdecl fcn_00519190(int id, ...);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
+int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_00472250(int dlg, int a, int b);
 int __cdecl fcn_005c9220(unsigned int* ids);
 int __cdecl fcn_005373e0(void* fn, int key);
@@ -64,39 +64,39 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 	entity = fcn_005463a0(2, 2, *(unsigned short*) 0x774970, 0, 0x19);
 	while (entity != 0) {
 		if (*(int*) ((char*) entity + 0xac) == *(int*) (a1 + 1)) {
-			fcn_0051af00(text, 0x1702, *(unsigned short*) (a1 + 0x27), a1);
+			io_FormatTextBuffer(text, 0x1702, *(unsigned short*) (a1 + 0x27), a1);
 			fcn_00526120(text, 0);
 			return 0;
 		}
 		entity = he_fn_Handlung();
 	}
 	if (fcn_0055c0f0(a0, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
-		fcn_0051af00(text, 0x1703, *(unsigned short*) (a1 + 0x27), a1);
+		io_FormatTextBuffer(text, 0x1703, *(unsigned short*) (a1 + 0x27), a1);
 		fcn_00526120(text, 0);
 		return 0;
 	}
 	if (fcn_0055c0a0(a0, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
-		fcn_0051af00(text, 0x1704, *(unsigned short*) a0);
+		io_FormatTextBuffer(text, 0x1704, *(unsigned short*) a0);
 		fcn_00526120(text, 0);
 		return 0;
 	}
 	if (fcn_0055c050(a1) == 0) {
-		fcn_0051af00((char*) &ids[6], 0x1705, a1);
+		io_FormatTextBuffer((char*) &ids[6], 0x1705, a1);
 		fcn_00526120((char*) &ids[6], 0);
 		return 0;
 	}
 	if (fcn_00579640(a0, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
-		fcn_0051af00(text, 0x409f, *(unsigned short*) a0);
+		io_FormatTextBuffer(text, 0x409f, *(unsigned short*) a0);
 		fcn_00526120(text, 0);
 		return 0;
 	}
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac494);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
 	evid = fcn_00472250(dlg, 1,
-		fcn_00519190(0x1700, 0x1711, value, *(unsigned short*) (a1 + 0x27),
+		io_AppendText(0x1700, 0x1711, value, *(unsigned short*) (a1 + 0x27),
 			*(unsigned char*) a1 * 0xe + 0x48e));
 	/* entries 0..5 are cleared; entry 6 is the 0x1705 message area */
 	memset(ids, 0xff, 6 * sizeof(unsigned int));
@@ -122,7 +122,7 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 			fcn_004c4eb0((char*) 0x67eac4);
 			fcn_004c5530(ev);
 			fcn_004c4ef0((char*) 0x67eac4);
-			fcn_0051af00(text2, 0x1701, *(unsigned short*) (a1 + 0x25),
+			io_FormatTextBuffer(text2, 0x1701, *(unsigned short*) (a1 + 0x25),
 				*(unsigned char*) a1 * 0xe + 0x48e);
 			fcn_00526120(text2, 0);
 			*(int*) 0x774654 = 1;

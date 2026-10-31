@@ -4,7 +4,7 @@ extern unsigned char g_773d75;
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
-void __cdecl fcn_0051af00(char* buf, int text, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int text, ...);
 void __cdecl fcn_00546190(char* u);
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char flags, int value, int x, int y, char* name, char* text2);
 
@@ -39,7 +39,7 @@ void __cdecl fcn_00566b80(char* obj)
 			}
 			if (*(unsigned char*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (obj + 8) * 0x21c + 2) == 6
 			    || *(unsigned char*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (obj + 8) * 0x21c + 2) == 7) {
-				fcn_0051af00(buf, 0x19ab, e);
+				io_FormatTextBuffer(buf, 0x19ab, e);
 				id = *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (obj + 8) * 0x21c + 4);
 				he_MessageBoxQuickjump(id, id, buf, 0, 0x5ec, *(int*) (e + 1), -1, 0, 0);
 			}

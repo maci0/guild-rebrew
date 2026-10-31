@@ -17,7 +17,7 @@ extern int g_7728d8;
 extern signed char g_6a3440;
 
 Spec* __cdecl fcn_004b3c50(int op);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004b46c0(char* t, Spec* s);
 int __cdecl fcn_004b4590(char* t, Spec* s);
 int __cdecl fcn_004b4730(char* t, Cmd* c, Spec* s);
@@ -57,7 +57,7 @@ int __cdecl fcn_004b5070(Cmd* c)
 		g_7728d8 = 0;
 		return 1;
 	}
-	t = fcn_00508e40(c->id);
+	t = gm_LookupEntityRecordById(c->id);
 	if (t == 0) {
 		return 0;
 	}

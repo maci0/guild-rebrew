@@ -8,10 +8,10 @@ void __cdecl fcn_004c6ae0(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_005d9000(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00525f60(char*, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -32,10 +32,10 @@ int __cdecl fcn_005cd430(char* e)
 	if (e[2] == 6) {
 		r = 0;
 		dlg = fcn_00470820(0, 0, "privillegien\\wunder");
-		fcn_00473a90(0, 0);
+		d2_SetOverlayAnimation(0, 0);
 		fcn_00471b60(dlg);
 		d2_SetForm(dlg, 1);
-		fcn_00519190(0x1df6, 4);
+		io_AppendText(0x1df6, 4);
 		g_100f1dc = -1;
 		do {
 			if (g_100f1dc != -1) {

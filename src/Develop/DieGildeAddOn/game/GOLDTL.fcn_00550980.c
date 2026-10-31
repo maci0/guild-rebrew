@@ -41,7 +41,7 @@ void __cdecl fcn_00546190(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_004c5530(struct msg*);
 
@@ -74,8 +74,8 @@ void __cdecl fcn_00550980(char* u)
 			return;
 		}
 		d2_SetForm(*(int*) (*(char**) (u + 0x74) + 8), 0);
-		fcn_00519190((int) "$C");
-		fcn_00519190(0x10b4, *(unsigned short*) (u + 8), v);
+		io_AppendText((int) "$C");
+		io_AppendText(0x10b4, *(unsigned short*) (u + 8), v);
 		*(int*) (u + 0x70) = 1;
 		break;
 	case 1:

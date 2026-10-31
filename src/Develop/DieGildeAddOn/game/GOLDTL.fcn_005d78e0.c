@@ -29,7 +29,7 @@ extern unsigned char g_773d75;
 extern int g_774654;
 #include "client_types.h"
 
-char* __cdecl fcn_00508e40(int a);
+char* __cdecl gm_LookupEntityRecordById(int a);
 int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl gm_AccumulateTyped2(char* a);
 unsigned short __cdecl gm_RandomMod(int a);
@@ -37,16 +37,16 @@ int __cdecl fcn_0050f950(int a, int i);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 void __cdecl fcn_004c5150(int a, int b, char c, int n);
 void __cdecl fcn_004c6ae0(int a, int b);
-void __cdecl fcn_0051af00(void* out, int id, ...);
+void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void __cdecl fcn_00545d40(int a, int b, char* text, int c, int d, char* file);
 int __cdecl fcn_005cd440(Query* q, char* text, int a, void* b);
 int __cdecl fcn_00470820(int a, int b, char* name);
-void __cdecl fcn_00473a90(int a, int b);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl fcn_00471b60(int h);
 void __cdecl fcn_00471e30(int h);
 void __cdecl d2_SetForm(int h, int a);
 int __cdecl fcn_00472250(int h, int a, int b);
-int __cdecl fcn_00519190(int id, ...);
+int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_00525f60(char* e, int a);
 int __cdecl fcn_00526010(void* e, int a, char b);
 void __cdecl fcn_00526120(char* text, int a);
@@ -82,11 +82,11 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 		if (*(int*) (a0 + 0x194) < 4) {
 			return 0x20;
 		}
-		e1 = (Ent78e*) fcn_00508e40(*(int*) (a1 + 0x214));
+		e1 = (Ent78e*) gm_LookupEntityRecordById(*(int*) (a1 + 0x214));
 		if (e1 == 0) {
 			return 0x20;
 		}
-		e2 = (Ent78e*) fcn_00508e40(*(int*) (a1 + 0x218));
+		e2 = (Ent78e*) gm_LookupEntityRecordById(*(int*) (a1 + 0x218));
 		if (e2 == 0) {
 			return 0x20;
 		}
@@ -105,11 +105,11 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 		fcn_004c5150(-1, *(int*) (a0 + 4), *(char*) &g_773d75, bv);
 		fcn_004c6ae0(*(int*) (a0 + 4), -4);
 		if (e1->type == 6 || e1->type == 7) {
-			fcn_0051af00(buf, 0x1dd3, e2->id, e2->id);
+			io_FormatTextBuffer(buf, 0x1dd3, e2->id, e2->id);
 			fcn_00545d40(e1->handle, e1->handle, buf, 0, 0x5fb, (char*) 0x6a59fc);
 		}
 		if (e2->type == 6 || e2->type == 7) {
-			fcn_0051af00(buf, 0x1dd3, e1->id, e1->id);
+			io_FormatTextBuffer(buf, 0x1dd3, e1->id, e1->id);
 			fcn_00545d40(e2->handle, e2->handle, buf, 0, 0x5fb, (char*) 0x6a59fc);
 		}
 		return 0x10;
@@ -119,12 +119,12 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 	req.x4 = 0x400;
 	req.x10 = 6;
 	req.mask = g_666018;
-	fcn_0051af00(buf, 0x1dcf);
+	io_FormatTextBuffer(buf, 0x1dcf);
 	e1 = (Ent78e*) fcn_005cd440(&req, buf, 0, 0);
 	if (e1 == 0) {
 		return 0;
 	}
-	fcn_0051af00(buf, 0x1dd0, e1->id);
+	io_FormatTextBuffer(buf, 0x1dd0, e1->id);
 	e2 = (Ent78e*) fcn_005cd440(&req, buf, 0, 0);
 	if (e2 == 0) {
 		return 0;
@@ -133,10 +133,10 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 	sum = sum + gm_WalkEntityChain(e1->id);
 	v = (int) (sum * g_6628ac);
 	h = fcn_00470820(0, 0, (char*) 0x6acd58);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 1);
-	ret = fcn_00519190(0x1dd1, 4, v, e1->id, e2->id);
+	ret = io_AppendText(0x1dd1, 4, v, e1->id, e2->id);
 	r1 = fcn_00472250(h, 1, ret);
 	r2 = fcn_00472250(h, 1, ret + 1);
 	g_100f1dc = -1;
@@ -156,15 +156,15 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 					fcn_004c5150(-1, *(int*) (a0 + 4),
 						     *(char*) &g_773d75, v);
 					fcn_004c6ae0(*(int*) (a0 + 4), -4);
-					fcn_0051af00(buf, 0x1dd2, e1->id, e2->id);
+					io_FormatTextBuffer(buf, 0x1dd2, e1->id, e2->id);
 					fcn_00526120(buf, 0);
 					if (e1->type == 6 || e1->type == 7) {
-						fcn_0051af00(buf, 0x1dd3, e2->id, e2->id);
+						io_FormatTextBuffer(buf, 0x1dd3, e2->id, e2->id);
 						fcn_00545d40(e1->handle, e1->handle, buf,
 							     0, 0x5fb, (char*) 0x6a59fc);
 					}
 					if (e2->type == 6 || e2->type == 7) {
-						fcn_0051af00(buf, 0x1dd3, e1->id, e1->id);
+						io_FormatTextBuffer(buf, 0x1dd3, e1->id, e1->id);
 						fcn_00545d40(e2->handle, e2->handle, buf,
 							     0, 0x5fb, (char*) 0x6a59fc);
 					}

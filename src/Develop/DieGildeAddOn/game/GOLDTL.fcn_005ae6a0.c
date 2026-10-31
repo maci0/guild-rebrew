@@ -13,13 +13,13 @@ int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 int __cdecl fcn_00470820(int a1, int a2, char* text);
 void __cdecl fcn_00471b60(int a1);
-void __cdecl fcn_00473a90(int a1, int a2);
+void __cdecl d2_SetOverlayAnimation(int a1, int a2);
 void __cdecl d2_SetForm(int a1, int a2);
-int __cdecl fcn_00519190(int a1, int a2, int a3, int a4);
+int __cdecl io_AppendText(int a1, int a2, int a3, int a4);
 int __cdecl fcn_00472250(int a1, int a2, int a3);
 int __cdecl fcn_005373e0(void* a1, int a2);
 void __cdecl fcn_00471e30(int a1);
-void __cdecl fcn_0051af00(char* buf, int id, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00526120(void* a1, int a2);
 void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c6ae0(int a1, int a2);
@@ -50,7 +50,7 @@ int __cdecl fcn_005ae6a0(void* a0)
 	    (*(int*) ((char*) a0 + 0x16c) == 0 ||
 	     *(short*) (*(int*) ((char*) a0 + 0x16c) + 0x27) != *(short*) a0)) {
 	if (*(unsigned char*) ((char*) a0 + 0x1b1) != 0) {
-		fcn_0051af00(text, 0x19ba, *(short*) a0);
+		io_FormatTextBuffer(text, 0x19ba, *(short*) a0);
 		fcn_00526120(text + 0xc, 0);
 		return 0;
 	}
@@ -64,9 +64,9 @@ int __cdecl fcn_005ae6a0(void* a0)
 	}
 	v8 = fcn_00470820(0, 0, (char*) 0x6ab2b0);
 	fcn_00471b60(v8);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(v8, 1);
-	v9 = fcn_00519190(0x19b9, *(short*) a0, 3, *(short*) a0);
+	v9 = io_AppendText(0x19b9, *(short*) a0, 3, *(short*) a0);
 	v10 = fcn_00472250(v8, 1, v9);
 	v9 = fcn_00472250(v8, 1, v9 + 1);
 	*(int*) 0x100f1dc = -1;

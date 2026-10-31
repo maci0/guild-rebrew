@@ -30,7 +30,7 @@ void __cdecl fcn_0043a3f0(char*, char*, V43a3f0);
 int __cdecl fcn_004ce270(char*, char*);
 float __cdecl fcn_004cefb0(char*, char*);
 char* __cdecl fcn_004ceb40(char*);
-char* __cdecl gm_LookupEntityRecordById(int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl fcn_00451840(float*, float*, float);
 float __cdecl fcn_00444700(char*, float*);
 void __cdecl fcn_00438d70(char*, int, float, int);
@@ -143,7 +143,7 @@ void __cdecl fcn_004d0070(void)
 		}
 		s = fcn_004ceb40(e);
 		if (s != 0 && *(int*) (s + 4) == 2 && *(char*) (s + 0x1d) != 0) {
-			g = gm_LookupEntityRecordById(*(int*) (s + 0x10));
+			g = gm_LookupEntityRecordIn32SlotTable(*(int*) (s + 0x10));
 			if (g != 0) {
 				o = *(char**) (e + 0x184);
 				e34 = o + 0x34;

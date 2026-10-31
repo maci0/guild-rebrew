@@ -83,7 +83,7 @@ extern char s_6750e8[];
 extern char s_679070[];
 
 char* __cdecl m_alloc(int size, const char* tag);
-int __cdecl fcn_0041d9e0(const char* text);
+int __cdecl ReportClientMessage(const char* text);
 int __cdecl fcn_00465950(const char* name);
 int __cdecl d2_Show(int idx, char* path);
 void __cdecl fcn_00477450(void);
@@ -184,7 +184,7 @@ int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
 	fread(&g_772504, 4, 1, g_772564);
 	if (0x800 < g_772504) {
 		fclose(g_772564);
-		fcn_0041d9e0(s_67d6ac);
+		ReportClientMessage(s_67d6ac);
 		return 0;
 	}
 	for (i = 0; i < g_772504; i++) {
@@ -295,7 +295,7 @@ int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
 			fcn_00472880(fcn_00465950(s_67d474));
 			g_77253c = fcn_0047ce00(s_67d67c, 0);
 			if (g_77253c == 0) {
-				fcn_0041d9e0(s_67d654);
+				ReportClientMessage(s_67d654);
 			}
 			g_67d390 = fcn_00465950(s_67d648);
 			g_67d394 = fcn_00465950(s_67d638);

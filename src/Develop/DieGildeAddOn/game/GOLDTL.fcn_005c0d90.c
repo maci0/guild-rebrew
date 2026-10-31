@@ -25,13 +25,13 @@ extern char g_6ac494[];
 int __cdecl fcn_0055c140(void*, unsigned short*, int*);
 int __cdecl fcn_00579640(unsigned short*, void*);
 int __cdecl fcn_00525f60(void*, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00470820(int, int, void*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c9220(int*);
 int __cdecl fcn_005373e0(void*, int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -58,17 +58,17 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 		return 0;
 	}
 	if (fcn_0055c140(&((Slot5c0d*)g_7f4ca0)[g_774970], obj, &cnt) == 0) {
-		fcn_0051af00(text, 0x190f, *obj);
+		io_FormatTextBuffer(text, 0x190f, *obj);
 		fcn_00526120(text, 0);
 		return 0;
 	}
 	if (fcn_00579640(obj, &((Slot5c0d*)g_7f4ca0)[g_774970]) == 0) {
-		fcn_0051af00(text, 0x409f, *obj);
+		io_FormatTextBuffer(text, 0x409f, *obj);
 		fcn_00526120(text, 0);
 		return 0;
 	}
 	if (cnt > 3) {
-		fcn_0051af00(text, 0x190e);
+		io_FormatTextBuffer(text, 0x190e);
 		fcn_00526120(text, 0);
 		return 0;
 	}
@@ -77,9 +77,9 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 	}
 	d = fcn_00470820(0, 0, g_6ac494);
 	fcn_00471b60(d);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(d, 1);
-	fcn_00519190(0x1910, *obj, *obj, 1, *obj);
+	io_AppendText(0x1910, *obj, *obj, 1, *obj);
 	memset(arr, 0xff, sizeof(arr));
 	arr[0] = d;
 	arr[3] = 4;

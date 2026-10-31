@@ -1,4 +1,4 @@
-unsigned short* __cdecl fcn_00508e40(int id);
+unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl gm_RandomMod(int n);
 
@@ -11,12 +11,12 @@ int __cdecl fcn_00493800(char* p)
 	float d1;
 	float d2;
 
-	a = fcn_00508e40(*(int*) (p + 0x28));
+	a = gm_LookupEntityRecordById(*(int*) (p + 0x28));
 	if (!a) {
 		return 1;
 	}
-	b = fcn_00508e40(*(int*) (p + 0x18));
-	c = fcn_00508e40(*(int*) (p + 0x14));
+	b = gm_LookupEntityRecordById(*(int*) (p + 0x18));
+	c = gm_LookupEntityRecordById(*(int*) (p + 0x14));
 	d1 = fcn_0050f980(*b, *a, 1);
 	d2 = fcn_0050f980(*c, *a, 1);
 	if (d1 - d2 > 20.0f) {

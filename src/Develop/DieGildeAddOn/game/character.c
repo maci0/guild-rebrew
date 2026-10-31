@@ -96,7 +96,7 @@ char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...)
     }
     action = (char*) ch_GetFreeQueueEntry();
     if (action == 0) {
-        fcn_0041d9e0("ch_InsertAction(): Could not ch_GetFreeQueueEntry()");
+        ReportClientMessage("ch_InsertAction(): Could not ch_GetFreeQueueEntry()");
         return 0;
     }
     previous = *(char**) (position + 0x24);
@@ -121,7 +121,7 @@ char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...)
         i = -1;
         if ((*(int*) (action + 0x30) == 0 && *(int*) (action + 0x34) != i) ||
             (*(int*) (action + 0x30) != 0 && *(int*) (action + 0x34) == i)) {
-            fcn_0041d9e0("ch_InsertAction(): move2universe: invalid combination of ids and universeindex");
+            ReportClientMessage("ch_InsertAction(): move2universe: invalid combination of ids and universeindex");
             fcn_004050c0(action);
             return 0;
         }

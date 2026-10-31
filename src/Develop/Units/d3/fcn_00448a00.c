@@ -7,7 +7,7 @@ void *__cdecl vfs_Tfopen(void *, int, int);
 void __cdecl fcn_00401360(void *, int);
 void __cdecl fcn_00446540(void *, ITEM_448a00 *);
 void __cdecl CloseVfsStream(void *);
-void __cdecl fcn_0041d9e0(char *);
+void __cdecl ReportClientMessage(char *);
 void __cdecl d3_UnlinkObject(ITEM_448a00 *);
 void __cdecl fcn_00439c00(int, ITEM_448a00 *);
 
@@ -27,7 +27,7 @@ void __cdecl fcn_00448a00(void *a1, int count, ITEM_448a00 **list)
 		p = list[i];
 		if (found != 0) {
 			if (val != p->f1fc) {
-				fcn_0041d9e0((char *) 0x67ac48);
+				ReportClientMessage((char *) 0x67ac48);
 				return;
 			}
 		} else {

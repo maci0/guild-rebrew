@@ -2,7 +2,7 @@
 #include <string.h>
 
 void __cdecl d3_DestroyObject(int a, int b);
-int __cdecl fcn_00508e40(int id);
+int __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_AllocGebaeude(char typ, unsigned short id);
 int __cdecl fcn_0042f690(char* path, int a, int b, char* out);
 int __cdecl fcn_004488e0(char* path, int a, int b);
@@ -14,7 +14,7 @@ void __cdecl fcn_00597ff0(int id, char* dst);
 int __cdecl lc_GetGebaeudeBauplatz(char* name, void* p);
 void __cdecl fcn_004379a0(int a, int b, int c, int d, void* out);
 void __cdecl fcn_005982d0(void);
-void __cdecl fcn_0041d9e0(char* msg);
+void __cdecl ReportClientMessage(char* msg);
 void __cdecl fcn_004550b0(int a, int b);
 void __cdecl d3_DestroyObject(int a);
 void __cdecl fcn_0052d9d0(void* p);
@@ -39,7 +39,7 @@ int __cdecl cm_ExCreateGeb(char* a0, char* out)
 	int i;
 	int handle;
 
-	model = (unsigned char*) fcn_00508e40(*(int*) (a0 + 0x10));
+	model = (unsigned char*) gm_LookupEntityRecordById(*(int*) (a0 + 0x10));
 	if (model == 0)
 		return 1;
 	if (*(int*) 0x14cbca0 != -1)
@@ -97,7 +97,7 @@ int __cdecl cm_ExCreateGeb(char* a0, char* out)
 			d3_DestroyObject(list.items[i]);
 		}
 	} else {
-		fcn_0041d9e0("cm_ExCreateGeb(): could not lc_GetGebaeudeBauplatz()...");
+		ReportClientMessage("cm_ExCreateGeb(): could not lc_GetGebaeudeBauplatz()...");
 	}
 	fcn_0052d9d0(geb);
 	fcn_004bd4e0(*(int*) (geb + 0x61), *geb);

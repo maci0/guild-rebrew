@@ -48,7 +48,7 @@ int __cdecl fcn_0046f740(int x, int y, int a3, int win)
 		return -1;
 	}
 	if (w->count >= 0x180) {
-		fcn_0041d9e0(s_67d420);
+		ReportClientMessage(s_67d420);
 		return -1;
 	}
 	w->children[w->count] = fcn_00469c30(w->left - w->scroll + x, w->x - w->base + y, a3);

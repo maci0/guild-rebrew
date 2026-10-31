@@ -5,7 +5,7 @@
 extern int g_100f1dc;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00471f80(int);
@@ -18,7 +18,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c6ae0(int, int);
 int __cdecl fcn_004f4830(int, void*);
 int __cdecl fcn_004f4860(char*, unsigned char, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00525f60(char*, int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_005373e0(void*, int);
@@ -89,29 +89,29 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 	}
 	id = 0x13fd + *(unsigned char*) rec * 5;
 	dlg = fcn_00470820(0, 0, "privillegien\\gesetz");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1ba9);
+	io_AppendText(0x1ba9);
 	switch (*(unsigned char*) ((char*) rec + 1)) {
 	case 0:
-		id = fcn_00519190(0x13d0, id, 0x13d3);
+		id = io_AppendText(0x13d0, id, 0x13d3);
 		ctl = fcn_00472250(dlg, 1, id);
 		box = fcn_00472250(dlg, 1, id + 1);
 		fcn_00472380(ctl, rec[1], rec[2], rec[6]);
 		break;
 	case 1:
-		id = fcn_00519190(0x13da, id, 0x13dd, rec[6] + 0x13dd);
+		id = io_AppendText(0x13da, id, 0x13dd, rec[6] + 0x13dd);
 		ctl = fcn_00472250(dlg, 1, id);
 		box = fcn_00472250(dlg, 1, id + 1);
 		add = 0x13dd;
 		break;
 	case 2:
-		ctl = fcn_00472250(dlg, 1, fcn_00519190(0x13e3, id, id, 0x13e7 - rec[6]));
+		ctl = fcn_00472250(dlg, 1, io_AppendText(0x13e3, id, id, 0x13e7 - rec[6]));
 		keep = 0;
 		break;
 	case 3:
-		id = fcn_00519190(0x13e9, 0x13ec, rec[6] + 0x13ec);
+		id = io_AppendText(0x13e9, 0x13ec, rec[6] + 0x13ec);
 		ctl = fcn_00472250(dlg, 1, id);
 		box = fcn_00472250(dlg, 1, id + 1);
 		add = 0x13ec;

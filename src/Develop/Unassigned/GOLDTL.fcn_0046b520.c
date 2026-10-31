@@ -1,6 +1,6 @@
 #include <string.h>
 
-void* __cdecl fcn_00466190(int idx);
+void* __cdecl d2_GetResourceData(int idx);
 char* __cdecl fcn_0047b620(char* p, int i);
 
 /* ADDRESS: GOLDTL 0x0046b520 */
@@ -15,7 +15,7 @@ int __cdecl fcn_0046b520(char* a0, int a1)
 
 	total = 0;
 	len = strlen(a0);
-	tbl = fcn_00466190(a1);
+	tbl = d2_GetResourceData(a1);
 	for (i = 0; i < len; i++) {
 		c = a0[i];
 		if (c != '~') {

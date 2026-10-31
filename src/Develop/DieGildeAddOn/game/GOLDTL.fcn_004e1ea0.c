@@ -1,14 +1,7 @@
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
-char g_68cfc0[43] = {
-    0x5f, 0x50, 0x41, 0x5f, 0x57, 0x45, 0x52, 0x42, 0x55, 0x4e, 0x47, 0x5f, 0x45, 0x56, 0x45, 0x4e,
-    0x54, 0x5f, 0x4e, 0x41, 0x43, 0x48, 0x52, 0x49, 0x43, 0x48, 0x54, 0x5f, 0x48, 0x4f, 0x43, 0x48,
-    0x5a, 0x45, 0x49, 0x54, 0x5f, 0x4d, 0x31, 0x5f, 0x30, 0x30, 0x00,
-};
+char g_68cfc0[] = "_PA_WERBUNG_EVENT_NACHRICHT_HOCHZEIT_M1_00";
 extern char g_68cfc0[];
-char g_68cfec[31] = {
-    0x5f, 0x50, 0x41, 0x5f, 0x57, 0x45, 0x52, 0x42, 0x55, 0x4e, 0x47, 0x5f, 0x45, 0x56, 0x45, 0x4e,
-    0x54, 0x5f, 0x5a, 0x55, 0x53, 0x41, 0x47, 0x45, 0x5f, 0x4d, 0x31, 0x5f, 0x30, 0x30, 0x00,
-};
+char g_68cfec[] = "_PA_WERBUNG_EVENT_ZUSAGE_M1_00";
 extern char g_68cfec[];
 /* Owned (both targets) by src/GOLDTL.fcn_00549330.c. */
 extern char g_7f4ca4[];
@@ -16,8 +9,8 @@ extern char g_7f4ca4[];
 
 
 
-void* __cdecl fcn_00508e40(int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void* __cdecl gm_LookupEntityRecordById(int);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_004e6240(void*, void*, char*, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -29,17 +22,17 @@ int __cdecl fcn_004e1ea0(char* a1)
 	void* e2;
 	char* p;
 
-	e1 = fcn_00508e40(*(int*) ((char*) a1 + 0x34));
-	e2 = fcn_00508e40(*(int*) ((char*) a1 + 0x38));
+	e1 = gm_LookupEntityRecordById(*(int*) ((char*) a1 + 0x34));
+	e2 = gm_LookupEntityRecordById(*(int*) ((char*) a1 + 0x38));
 	if (e1 != 0) {
 		if (e2 != 0 && *(char*) ((char*) e1 + 9) != *(char*) ((char*) e2 + 9)) {
 			if (*(char*) ((char*) e1 + 2) == 6 || *(char*) ((char*) e1 + 2) == 7) {
-				fcn_0051af00(buf, 0x11c3, *(unsigned short*) e2);
+				io_FormatTextBuffer(buf, 0x11c3, *(unsigned short*) e2);
 				fcn_004e6240(e1, a1, buf, g_68cfec);
 			}
 			if (*(char*) ((char*) e1 + 2) == 6 || *(char*) ((char*) e1 + 2) == 7 ||
 			    *(char*) ((char*) e1 + 2) == 5) {
-				fcn_0051af00(buf, 0x11c4, *(unsigned short*) e1, *(unsigned short*) e2);
+				io_FormatTextBuffer(buf, 0x11c4, *(unsigned short*) e1, *(unsigned short*) e2);
 				for (p = g_7f4ca4; (int) p < (int) (g_7f4ca4 + 0x65400); p += 0x21c) {
 					if ((*(char*) (p - 2) == 6 || *(char*) (p - 2) == 7) &&
 					    *(int*) p != *(int*) ((char*) e1 + 4) &&

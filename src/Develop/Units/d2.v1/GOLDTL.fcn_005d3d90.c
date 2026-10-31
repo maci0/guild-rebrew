@@ -34,7 +34,7 @@ int __cdecl fcn_0046fac0(int, int, char *, int);
 int __cdecl fcn_0046b520(char *, int);
 void __cdecl fcn_00500d60(int *, char *);
 int __cdecl fcn_005d36f0(Arg, int, int);
-void __cdecl fcn_0051af00(char *, char *, ...);
+void __cdecl io_FormatTextBuffer(char *, char *, ...);
 
 /* ADDRESS: GOLDTL 0x005d3d90 */
 void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
@@ -81,7 +81,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		fcn_00472c30(0x28, n, 0x2d, n, 0x10, 0x10, 0x10);
 	}
 	for (i = 0, n = 0x64; n > 0; i++, n -= 0x19) {
-		fcn_0051af00(loc.buf, (char *) 0x6acbec, n);
+		io_FormatTextBuffer(loc.buf, (char *) 0x6acbec, n);
 		id = fcn_0046fac0(3, (int) ((float) i * g_6628bc * y + g_662a98), loc.buf, g_772514);
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = 0x23;
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x70) = 1;
@@ -92,12 +92,12 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		x2 = w - 0x37;
 		fcn_00472c30(x2, 8, x1, 8, 0x10, 0x10, 0x10);
 		fcn_00472c30(x2, (h - 0x1e) / 2 + 8, x1, (h - 0x1e) / 2 + 8, 0x10, 0x10, 0x10);
-		fcn_0051af00(loc.buf, (char *) 0x67d444, m);
+		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m);
 		d = fcn_0046b520(loc.buf, 0x55) + 2;
 		id = fcn_0046fac0(x1, 5, loc.buf, g_772514);
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x70) = 1;
-		fcn_0051af00(loc.buf, (char *) 0x67d444, m / 2);
+		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m / 2);
 		id = fcn_0046fac0(x1, (h - 0x1e) / 2 + 5, loc.buf, g_772514);
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x70) = 1;
@@ -108,7 +108,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	*(short *) ((char *) loc.src + 0xc) = g_7f4c0c;
 	fcn_00500d60(loc.src, loc.out);
 	if (loc.out[1] == 1) {
-		fcn_0051af00(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
+		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 		d = fcn_0046b520(loc.buf, 0x55);
 		id = fcn_0046fac0(step * 16 + 0x2d, h - 0xd, loc.buf, g_772514);
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
@@ -119,7 +119,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	for (i = 0xf; i != 0; i--) {
 		fcn_00472c30(n, h - 0x13, n, h - 0x10, 0x10, 0x10, 0x10);
 		if (loc.out[1] == 1) {
-			fcn_0051af00(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
+			io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 			d = fcn_0046b520(loc.buf, 0x55);
 			id = fcn_0046fac0(n, h - 0xd, loc.buf, g_772514);
 			*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
@@ -130,7 +130,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		n -= step;
 	}
 	if (loc.out[1] == 1) {
-		fcn_0051af00(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
+		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 		d = fcn_0046b520(loc.buf, 0x55);
 		id = fcn_0046fac0(0x2d, h - 0xd, loc.buf, g_772514);
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;

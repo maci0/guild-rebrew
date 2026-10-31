@@ -7,7 +7,7 @@ extern int g_7725d0;
 extern int g_7747f0;
 extern int g_772f54;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 #include "client_packet_builder.h"
 void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
@@ -22,7 +22,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-char* __cdecl fcn_00519190(int, ...);
+char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, char*);
 void __cdecl fcn_00472770(int, int);
 void __cdecl fcn_00474cf0(int);
@@ -52,8 +52,8 @@ void __cdecl fcn_004e2890(char* m)
 	int sc;
 	int w;
 
-	a = fcn_00508e40(*(int*) (m + 0x34));
-	b = fcn_00508e40(*(int*) (m + 0x38));
+	a = gm_LookupEntityRecordById(*(int*) (m + 0x34));
+	b = gm_LookupEntityRecordById(*(int*) (m + 0x38));
 	if (a == 0 || b == 0)
 		return;
 	{
@@ -91,11 +91,11 @@ void __cdecl fcn_004e2890(char* m)
 	fcn_00471b60(sc);
 	d2_SetForm(sc, 1);
 	if (b[9] == 0)
-		fcn_00519190(0x1aae);
+		io_AppendText(0x1aae);
 	else
-		fcn_00519190(0x1aaf);
+		io_AppendText(0x1aaf);
 	d2_SetForm(sc, 2);
-	w = fcn_00472250(sc, 2, fcn_00519190((int) "$L%t", b + 0x30));
+	w = fcn_00472250(sc, 2, io_AppendText((int) "$L%t", b + 0x30));
 	fcn_00472770(w, 0xf);
 	fcn_00474cf0(w);
 	for (;;) {

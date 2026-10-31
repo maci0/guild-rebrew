@@ -12,7 +12,7 @@ typedef struct Rec {
 /* SIZE 0x18 */
 
 int __cdecl fcn_004e8cb0(int all, int max, Rec* out);
-unsigned char* __cdecl fcn_00508e40(int id);
+unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004ea560(Rec* r, int type);
 int __cdecl fcn_004e8240(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
 int __cdecl fcn_004c4450(int v);
@@ -78,7 +78,7 @@ void __cdecl fcn_004eafe0(void)
 			default:
 				continue;
 			}
-			q = fcn_00508e40(x);
+			q = gm_LookupEntityRecordById(x);
 			if (q == 0)
 				goto body;
 			if (q[8] == 0)

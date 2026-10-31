@@ -1,7 +1,7 @@
 extern char g_7f4ca0[];
 extern char* g_entity_type_table;
 
-extern int __cdecl fcn_00508e40(int);
+extern int __cdecl gm_LookupEntityRecordById(int);
 extern int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern int __cdecl gm_ResolveEntityById(int*, int, int, int);
 extern int __cdecl gm_FindRecordById(int);
@@ -34,13 +34,13 @@ unsigned int __cdecl fcn_00525670(void)
 	int v9;
 	unsigned char kind;
 
-	*(int*) 0x773da8 = fcn_00508e40(*(int*) 0x773da8);
+	*(int*) 0x773da8 = gm_LookupEntityRecordById(*(int*) 0x773da8);
 	if (!*(int*) 0x773da8)
 		return 0;
 	*(int*) 0x773d78 = gm_StartFilteredEntitySearch(1, 5, 10);
 	if (*(unsigned int*) 0x6a23ac > 0x10016) {
 		for (p = (char*) 0x773db4; (int) p < 0x773dd4; p += 4)
-			*(int*) p = fcn_00508e40(*(int*) p);
+			*(int*) p = gm_LookupEntityRecordById(*(int*) p);
 	}
 	for (p = g_7f4ca0; (int) p < 0x85a0a0; p += 0x21c) {
 		if (*(short*) p != -1) {
@@ -164,7 +164,7 @@ unsigned int __cdecl fcn_00525670(void)
 		v9 = *(int*) rec;
 		if (v9) {
 			if (*(char*) (rec - 5) == 1)
-				*(int*) rec = fcn_00508e40(v9);
+				*(int*) rec = gm_LookupEntityRecordById(v9);
 			if (*(char*) (rec - 5) == 3)
 				*(int*) rec = gm_FindRecordById(v9);
 			if (*(char*) (rec - 5) == 2)

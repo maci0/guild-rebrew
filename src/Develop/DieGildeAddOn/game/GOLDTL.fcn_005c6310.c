@@ -6,7 +6,7 @@ int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl fcn_0047dca0(char*);
 void __cdecl fcn_004c51f0(int, int, int, int, int, int);
-void __cdecl fcn_0051af00(char*, int, int);
+void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
 extern int g_775320;
@@ -66,7 +66,7 @@ void __cdecl fcn_005c6310(void)
 							if (left - stamp <= -1) {
 								*(int*) (rec + 0x21) = 0;
 								if (*(char*) ((char*) 0x7f4ca2 + off) == 6) {
-									fcn_0051af00(text, 0x1bc9, *item * 2 + 0x9a8);
+									io_FormatTextBuffer(text, 0x1bc9, *item * 2 + 0x9a8);
 									fcn_00545d40(*(int*) ((char*) 0x7f4ca4 + off),
 										-1, text, 0, 0x5ec, (char*) 0x6ac758);
 								}

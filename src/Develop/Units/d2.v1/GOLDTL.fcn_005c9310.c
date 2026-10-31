@@ -36,7 +36,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 void* __cdecl gm_SearchTable67(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 
 void __cdecl fcn_005c9310(unsigned short* who, int max, Row* rows, int dlg, int n)
 {
@@ -63,7 +63,7 @@ void __cdecl fcn_005c9310(unsigned short* who, int max, Row* rows, int dlg, int 
 		((Win*)g_1015f40)[rows[i].text].x18 = 0x10;
 		t = gm_SearchTable67(*(int*) (rows[i].obj + 0xac));
 		if (t != 0) {
-			fcn_00519190(0x1f41, t, *(int*) (rows[i].obj + 0xb4), *(int*) (rows[i].obj + 0xc0), rows[i].obj + 0xc4);
+			io_AppendText(0x1f41, t, *(int*) (rows[i].obj + 0xb4), *(int*) (rows[i].obj + 0xc0), rows[i].obj + 0xc4);
 		}
 	}
 }

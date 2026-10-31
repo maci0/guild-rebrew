@@ -1,6 +1,6 @@
 extern int g_aed32c;
 
-int __cdecl fcn_00508e40(int a0);
+int __cdecl gm_LookupEntityRecordById(int a0);
 void __cdecl fcn_004c4510(char* a0, int a1);
 void __cdecl fcn_004c4700(int a0, int a1, int a2, int* a3);
 void __cdecl fcn_004c53a0(void);
@@ -32,7 +32,7 @@ void __cdecl fcn_00566110(int a0)
 	if (*(int*) (a0 + 0x70) != 0) {
 		return;
 	}
-	ent = (char*) fcn_00508e40(*(int*) (a0 + 0xac));
+	ent = (char*) gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
 	if (ent == 0) {
 		goto fail;
 	}

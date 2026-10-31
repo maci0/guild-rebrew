@@ -4,7 +4,7 @@ void __cdecl fcn_0057e880(int, char*, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int);
+int __cdecl io_AppendText(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00472900(int, int);
@@ -13,7 +13,7 @@ void __cdecl fcn_0046f9b0(int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_005463a0(int, int, int, int, int);
-int __cdecl fcn_0051af00(void*, ...);
+int __cdecl io_FormatTextBuffer(void*, ...);
 int __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00471a30(int, int);
 int __cdecl fcn_00525f60(char*, int);
@@ -60,7 +60,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
     v7 = *(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f50);
     v15 = (*(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f4c) - 0x40) / 5;
     v14 = (v15 - *(short*) (*(int*) 0x772500 + 0x1d978)) / 2;
-    fcn_00519190(0x1d36);
+    io_AppendText(0x1d36);
     v18 = (unsigned int*) 0x14a5adc;
     v10 = (-(unsigned int) (*(char*) ((char*) v11 + 9) != '\0') & 0x5f) + 0x130;
     v8 = 0;
@@ -123,7 +123,7 @@ loop:
         v7 = fcn_005463a0(2, 2, *(unsigned short*) 0x774970, 0, 0x26);
         if (v7) {
             v7 = (unsigned int) *(unsigned short*) 0x774970 * 0x21c;
-            fcn_0051af00(v12, 0x15bd,
+            io_FormatTextBuffer(v12, 0x15bd,
                          *(unsigned char*) (v7 + 0x7f4e04) +
                              (-(unsigned int) (*(char*) (v7 + 0x7f4ca9) != '\0') &
                               0x5f) +
@@ -161,7 +161,7 @@ inner:
             if (!v14) {
                 v14 = fcn_00507400(v8 + 1, 1);
             }
-            fcn_0051af00(v13, 0x1d37, v15, v14 + v10);
+            io_FormatTextBuffer(v13, 0x1d37, v15, v14 + v10);
             if (fcn_00526120((int) v13, 1)) {
                 fcn_004c6470(*(int*) ((char*) v11 + 4), v14);
                 fcn_004c6ae0(*(int*) ((char*) v11 + 4), v7);

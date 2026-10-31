@@ -4,7 +4,7 @@ extern char* g_14b5a08;
 extern char* g_14b5a14;
 extern char* g_14b5a18;
 
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
 /* ADDRESS: GOLDTL 0x005b2a40 */
@@ -19,7 +19,7 @@ void __cdecl fcn_005b2a40(unsigned short* a0, int n, char** arr)
 	if (n < 1 || n >= 4) {
 		return;
 	}
-	fcn_0051af00((void*) 0x774a80, 0x41bf, *a0);
+	io_FormatTextBuffer((void*) 0x774a80, 0x41bf, *a0);
 	for (i = 0; i < n; i++) {
 		e = arr[i];
 		if (e[2] == 6 || e[2] == 7) {
@@ -33,7 +33,7 @@ void __cdecl fcn_005b2a40(unsigned short* a0, int n, char** arr)
 			if (i >= limit) {
 				break;
 			}
-			fcn_0051af00(buf, 0x41bb, *(unsigned short*) arr[i]);
+			io_FormatTextBuffer(buf, 0x41bb, *(unsigned short*) arr[i]);
 			strcat((char*) 0x774a80, buf);
 		}
 		found = 0;
@@ -41,7 +41,7 @@ void __cdecl fcn_005b2a40(unsigned short* a0, int n, char** arr)
 			if (found) {
 				break;
 			}
-			fcn_0051af00(buf, 0x41bc, *(unsigned short*) arr[i]);
+			io_FormatTextBuffer(buf, 0x41bc, *(unsigned short*) arr[i]);
 			strcat((char*) 0x774a80, buf);
 			found = 1;
 		}
@@ -52,7 +52,7 @@ void __cdecl fcn_005b2a40(unsigned short* a0, int n, char** arr)
 			if (i >= 1) {
 				break;
 			}
-			fcn_0051af00(buf, 0x41bb, *(unsigned short*) arr[i]);
+			io_FormatTextBuffer(buf, 0x41bb, *(unsigned short*) arr[i]);
 			strcat((char*) 0x774a80, buf);
 		}
 		strcat((char*) 0x774a80, g_14b5a14);

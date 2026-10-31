@@ -18,5 +18,5 @@ void __cdecl d2_SubRefcount(int i)
 		*p -= 1;
 		return;
 	}
-	fcn_0041d9e0(g_67d4e0);
+	ReportClientMessage(g_67d4e0);
 }

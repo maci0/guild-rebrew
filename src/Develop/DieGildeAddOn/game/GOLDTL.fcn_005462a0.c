@@ -9,7 +9,7 @@ extern int g_6a475c;
 extern unsigned short g_6a4760;
 extern int g_6a4764;
 
-void __cdecl fcn_0041d9e0(const char* msg);
+void __cdecl ReportClientMessage(const char* msg);
 
 /* ADDRESS: GOLDTL 0x005462a0 */
 unit_77e980* __cdecl he_fn_Handlung(void)
@@ -21,7 +21,7 @@ unit_77e980* __cdecl he_fn_Handlung(void)
 	matched = 0;
 	base = 0;
 	if (g_7749d4 < 0 || g_7749d4 >= 0x400) {
-		fcn_0041d9e0((const char*) 0x6a5784);
+		ReportClientMessage((const char*) 0x6a5784);
 	} else {
 		base = &g_77e980[g_7749d4];
 	}

@@ -9,8 +9,8 @@ int __cdecl d2_SetForm(int win, int layer);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
 int __cdecl fcn_0046fac0(int x, int y, char* text, int win);
 void __cdecl fcn_00472900(int element, int value);
-int __cdecl fcn_00519190();
-void __cdecl fcn_0051af00(char* buf, char* fmt, ...);
+int __cdecl io_AppendText();
+void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5,
                            int* id2, int* id1, int* id3);
 void __cdecl fcn_00534160(int x0, int y, int len, int t);
@@ -64,11 +64,11 @@ void __cdecl fcn_0058bfd0(int* a0)
 	}
 	saved = *(int*) (a0[2] * 0x3cc + 0x1016198);
 	d2_SetForm(a0[0], 2);
-	fcn_00519190(g_6811b0);
+	io_AppendText(g_6811b0);
 	d2_SetForm(a0[0], 3);
-	fcn_00519190(g_6811b0);
+	io_AppendText(g_6811b0);
 	d2_SetForm(a0[0], 5);
-	fcn_00519190(g_6811b0);
+	io_AppendText(g_6811b0);
 	fcn_00533f40(0, 0, a0[4], a0[2], *(int*) (a0[2] * 0x3cc + 0x1015f50),
 	             &v9, &v11, &v10);
 	d2_SetForm(a0[0], 2);
@@ -103,7 +103,7 @@ void __cdecl fcn_0058bfd0(int* a0)
 			fcn_00472900(h, 0x54);
 			y += 0x12;
 			for (j = 0; j < 5; j++) {
-				fcn_0051af00(buf, "%s:", 0x16b7 + j);
+				io_FormatTextBuffer(buf, "%s:", 0x16b7 + j);
 				h = fcn_0046fac0(0x28, y, buf, a0[2]);
 				*(int*) (g_1015ea0 + 0x18 + h * 0x2f4) = 0x12c;
 				fcn_00472900(h, 0x54);
@@ -117,15 +117,15 @@ void __cdecl fcn_0058bfd0(int* a0)
 	}
 	*(int*) (a0[2] * 0x3cc + 0x1016198) = saved;
 	d2_SetForm(a0[0], 5);
-	fcn_00519190(g_6811b0);
-	fcn_0051af00(buf, "%1N3",
+	io_AppendText(g_6811b0);
+	io_FormatTextBuffer(buf, "%1N3",
 	             *(unsigned short*) (g_7f4ca0 +
 	                                 (unsigned int) g_774970 * 0x21c));
-	fcn_00519190("$7<$R%s$0<$4>$L%s$A$0>", 0x4101, buf);
-	fcn_0051af00(buf, "AD %i", *(unsigned short*) ((char*) v1 + 0xa) + 0x578);
-	fcn_00519190("$7<$R%s$0<$4>$L%s$A$0>", 0x4102, buf);
-	fcn_0051af00(buf, "%i %%",
+	io_AppendText("$7<$R%s$0<$4>$L%s$A$0>", 0x4101, buf);
+	io_FormatTextBuffer(buf, "AD %i", *(unsigned short*) ((char*) v1 + 0xa) + 0x578);
+	io_AppendText("$7<$R%s$0<$4>$L%s$A$0>", 0x4102, buf);
+	io_FormatTextBuffer(buf, "%i %%",
 	             (int) ((float) *(unsigned char*) ((char*) v1 + 0xc) *
 	                    *(float*) 0x662c30 * g_662cf8));
-	fcn_00519190("$7<$R%s$0<$4>$L%s$A$0>", 0x4103, buf);
+	io_AppendText("$7<$R%s$0<$4>$L%s$A$0>", 0x4103, buf);
 }

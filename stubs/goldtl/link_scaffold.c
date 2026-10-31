@@ -39,46 +39,24 @@ int __cdecl amt_SwapOfficeHolders(void) { return 0; }
 int __cdecl amt_UpdateEntityLinks(void) { return 0; }
 int __cdecl amt_ValidateAndAssignOffice(void) { return 0; }
 int __cdecl amt_ValidateCommand(void) { return 0; }
-int __cdecl amt_fio_LoadAemter(void) { return 0; }
 int __cdecl crt_toupper(void) { return 0; }
 int __cdecl fcn_00402480(void) { return 0; }
 int __cdecl fcn_00402aa0(void) { return 0; }
 int __cdecl fcn_00403870(void) { return 0; }
 int __cdecl fcn_004047a0(void) { return 0; }
-int __cdecl fcn_00408250(void) { return 0; }
-int __cdecl fcn_0040c3f0(void) { return 0; }
-int __cdecl fcn_0040c400(void) { return 0; }
-int __cdecl fcn_0040c410(void) { return 0; }
-int __cdecl fcn_0040c420(void) { return 0; }
-int __cdecl fcn_0040c6d0(void) { return 0; }
 int __cdecl fcn_00410620(void) { return 0; }
-int __cdecl fcn_00410f50(void) { return 0; }
-int __cdecl fcn_00411070(void) { return 0; }
-int __cdecl fcn_00411090(void) { return 0; }
-int __cdecl fcn_004110e0(void) { return 0; }
-int __cdecl fcn_00412630(void) { return 0; }
-int __cdecl fcn_004127a0(void) { return 0; }
 int __cdecl fcn_00415300(void) { return 0; }
-int __stdcall fcn_0041adc0(int a0, int a1, int a2, int a3) { return 0; }
-int __cdecl fcn_0041baa0(void) { return 0; }
 int __cdecl fcn_0041db70(void) { return 0; }
 int __cdecl fcn_0041ddd0(void) { return 0; }
 int __cdecl fcn_00422620(void) { return 0; }
-int __cdecl fcn_0042a020(void) { return 0; }
-int __cdecl fcn_0042a850(void) { return 0; }
 int __cdecl fcn_0042b780(void) { return 0; }
 int __cdecl fcn_0042e410(void) { return 0; }
 int __cdecl fcn_0042e450(void) { return 0; }
-int __cdecl fcn_0042e4d0(void) { return 0; }
 int __cdecl fcn_0042e9d0(void) { return 0; }
-int __cdecl fcn_0042ee30(void) { return 0; }
-int __cdecl fcn_00436fc0(void) { return 0; }
 int __cdecl fcn_00437840(void) { return 0; }
-int __cdecl fcn_0043ad10(void) { return 0; }
 int __cdecl fcn_0043bc20(void) { return 0; }
 int __cdecl fcn_0043f690(void) { return 0; }
 int __cdecl fcn_0043f6a0(void) { return 0; }
-int __cdecl fcn_0043f9d0(void) { return 0; }
 int __cdecl fcn_004442be0(void) { return 0; }
 int __cdecl fcn_004507b00(void) { return 0; }
 int __cdecl fcn_00456b60(void) { return 0; }
@@ -94,11 +72,8 @@ int __cdecl fcn_004615b0(void) { return 0; }
 int __cdecl fcn_00462da0(void) { return 0; }
 int __cdecl fcn_004631b0(void) { return 0; }
 int __cdecl fcn_00464460(void) { return 0; }
-int __cdecl fcn_00469c40(void) { return 0; }
-int __cdecl fcn_00469e70(void) { return 0; }
 int __cdecl fcn_0046e790(void) { return 0; }
 int __cdecl fcn_0046fac0(void) { return 0; }
-int __cdecl fcn_00471db0(void) { return 0; }
 int __cdecl fcn_00472380(void) { return 0; }
 int __cdecl fcn_00476850(void) { return 0; }
 int __cdecl fcn_00477550(void) { return 0; }
@@ -106,48 +81,19 @@ int __cdecl fcn_00478cb0(void) { return 0; }
 int __cdecl fcn_0047d220(void) { return 0; }
 int __cdecl fcn_0047daa0(void) { return 0; }
 int __cdecl fcn_00484740(void) { return 0; }
-int __cdecl fcn_0048fe70(void) { return 0; }
-int __cdecl fcn_004901b0(void) { return 0; }
-int __cdecl fcn_004901c0(void) { return 0; }
-int __cdecl fcn_00495140(void) { return 0; }
 int __cdecl fcn_00495980(void) { return 0; }
 int __cdecl fcn_004959b0(void) { return 0; }
 int __cdecl fcn_004959e0(void) { return 0; }
 int __cdecl fcn_00495a10(void) { return 0; }
 int __cdecl fcn_00495a40(void) { return 0; }
 int __cdecl fcn_00495a70(void) { return 0; }
-int __cdecl fcn_004974c0(void) { return 0; }
-int __cdecl fcn_004974d0(void) { return 0; }
 int __cdecl fcn_00498660(void) { return 0; }
-int __cdecl fcn_00498e00(void) { return 0; }
-int __cdecl fcn_00498e10(void) { return 0; }
 int __cdecl fcn_00498f40(void) { return 0; }
-int __cdecl fcn_00499cc0(void) { return 0; }
-int __cdecl fcn_00499db0(void) { return 0; }
 int __cdecl fcn_0049a7b0(void) { return 0; }
-int __cdecl fcn_0049ca80(void) { return 0; }
-int __cdecl fcn_0049d030(void) { return 0; }
-int __cdecl fcn_0049d180(void) { return 0; }
-int __cdecl fcn_0049d920(void) { return 0; }
 int __cdecl fcn_0049fa80(void) { return 0; }
-int __cdecl fcn_004abf80(void) { return 0; }
-int __cdecl fcn_004ac260(void) { return 0; }
-int __cdecl fcn_004b5b40(void) { return 0; }
-int __cdecl fcn_004b60e0(void) { return 0; }
-int __cdecl fcn_004b62e0(void) { return 0; }
 int __cdecl fcn_004b73a0(void) { return 0; }
 int __cdecl fcn_004bb6c0(void) { return 0; }
-int __cdecl fcn_004bfbc0(void) { return 0; }
-int __cdecl fcn_004c3ed0(void) { return 0; }
-int __cdecl fcn_004c48f0(void) { return 0; }
 int __cdecl fcn_004c6230(void) { return 0; }
-int __cdecl fcn_004ce180(void) { return 0; }
-int __cdecl fcn_004ce1c0(void) { return 0; }
-int __cdecl fcn_004d1970(void) { return 0; }
-int __cdecl fcn_004da170(void) { return 0; }
-int __cdecl fcn_004e1950(void) { return 0; }
-int __cdecl fcn_004e4230(void) { return 0; }
-int __cdecl fcn_004e4470(void) { return 0; }
 int __cdecl fcn_004f08d0(void) { return 0; }
 int __cdecl fcn_004f0ed0(void) { return 0; }
 int __cdecl fcn_004f4970(void) { return 0; }
@@ -160,59 +106,32 @@ int __cdecl fcn_00503fe0(void) { return 0; }
 int __cdecl fcn_00504b30(void) { return 0; }
 int __cdecl fcn_00504bd0(void) { return 0; }
 int __cdecl fcn_00504ce0(void) { return 0; }
-int __cdecl fcn_00505840(void) { return 0; }
 int __cdecl fcn_00509570(void) { return 0; }
 int __cdecl fcn_0050b010(void) { return 0; }
-int __cdecl fcn_0050b750(void) { return 0; }
-int __cdecl fcn_0050d270(void) { return 0; }
 int __cdecl fcn_0050d2a0(void) { return 0; }
 int __cdecl fcn_0050d490(void) { return 0; }
 int __cdecl fcn_00511e90(void) { return 0; }
-int __cdecl fcn_00515340(void) { return 0; }
-int __cdecl fcn_00516de0(void) { return 0; }
 int __cdecl fcn_00521eb0(void) { return 0; }
-int __cdecl fcn_005224f0(void) { return 0; }
-int __cdecl fcn_0052a310(void) { return 0; }
-int __cdecl fcn_0052a320(void) { return 0; }
-int __cdecl fcn_0052f7a0(void) { return 0; }
 int __cdecl fcn_005305a0(void) { return 0; }
 int __cdecl fcn_005309d0(void) { return 0; }
-int __cdecl fcn_00538220(void) { return 0; }
-int __stdcall fcn_00538250(int a0, int a1, int a2, int a3) { return 0; }
 int __cdecl fcn_00538700(void) { return 0; }
 int __cdecl fcn_0053e450(void) { return 0; }
 int __cdecl fcn_0053f4b0(void) { return 0; }
-int __cdecl fcn_005448e0(void) { return 0; }
 int __cdecl fcn_00545410(void) { return 0; }
 int __cdecl fcn_00545420(void) { return 0; }
 int __cdecl fcn_00545e80(void) { return 0; }
 int __cdecl fcn_005490d0(void) { return 0; }
-int __cdecl fcn_0055bc30(void) { return 0; }
 int __cdecl fcn_005710f0(void) { return 0; }
 int __cdecl fcn_00572770(void) { return 0; }
-int __cdecl fcn_005729e0(void) { return 0; }
 int __cdecl fcn_00572d90(void) { return 0; }
 int __cdecl fcn_00575450(void) { return 0; }
 int __cdecl fcn_00575460(void) { return 0; }
 int __cdecl fcn_00575700(void) { return 0; }
-int __cdecl fcn_005758e0(void) { return 0; }
-int __cdecl fcn_005758f0(void) { return 0; }
 int __cdecl fcn_00579320(void) { return 0; }
-int __cdecl fcn_00579690(void) { return 0; }
-int __cdecl fcn_0057b000(void) { return 0; }
-int __cdecl fcn_0057f090(void) { return 0; }
-int __cdecl fcn_0057f100(void) { return 0; }
-int __cdecl fcn_0057f2e0(void) { return 0; }
-int __cdecl fcn_0057fea0(void) { return 0; }
-int __cdecl fcn_005805e0(void) { return 0; }
-int __cdecl fcn_0058fbd0(void) { return 0; }
 int __cdecl fcn_00591990(void) { return 0; }
 int __cdecl fcn_005988b0(void) { return 0; }
 int __cdecl fcn_005a8690(void) { return 0; }
-int __cdecl fcn_005ad640(void) { return 0; }
-int __cdecl fcn_005b44b0(void) { return 0; }
 int __cdecl fcn_005c02a0(void) { return 0; }
-int __cdecl fcn_005c7270(void) { return 0; }
 int __cdecl fcn_005c80c0(void) { return 0; }
 int __cdecl fcn_005cff10(void) { return 0; }
 int __cdecl fcn_005e12d0(void) { return 0; }
@@ -220,7 +139,6 @@ int __cdecl fcn_005e1ca0(void) { return 0; }
 int __cdecl fcn_005e2b60(void) { return 0; }
 int __cdecl fcn_005e3520(void) { return 0; }
 int __cdecl fcn_005e6360(void) { return 0; }
-int __cdecl fcn_005e6840(void) { return 0; }
 int __cdecl fcn_005e6e00(void) { return 0; }
 int __cdecl fcn_005e8850(void) { return 0; }
 int __cdecl fcn_005e9870(void) { return 0; }
@@ -423,8 +341,6 @@ int g_6b5dd8 = 0;
    spans into their owners, and the call sites need a reviewed name binding
    before they can target the owner's symbol. Placeholders keep the link whole
    without claiming a body. */
-int __cdecl fcn_004b3b60(void) { return 0; }
-int __cdecl fcn_005c61c0(void) { return 0; }
 void __cdecl fcn_005eaae0(void) { }
 void __cdecl fcn_0041dd90(void) { }
 void __cdecl fcn_0042e4c0(void) { }
@@ -433,9 +349,6 @@ void __cdecl fcn_00442a30(void) { }
 void __cdecl fcn_0045f630(void) { }
 void __cdecl fcn_00466330(void) { }
 void __cdecl fcn_005ea460(void) { }
-void __cdecl fcn_0061324e(void) { }
-void __stdcall fcn_00613478(int flag) { (void) flag; }
-void __cdecl fcn_005ebbb9(void) { }
 
 char data_667158[4] = {0};
 char data_667428[4] = {0};
@@ -468,7 +381,6 @@ void __cdecl fcn_0041e620(void) { }
 void __cdecl fcn_004c2d90(void) { }
 void __cdecl fcn_00502fe0(void) { }
 void __cdecl fcn_00507b00(void) { }
-void __cdecl fcn_00508b20(void) { }
 void __cdecl fcn_00510c90(void) { }
 void __cdecl fcn_00538140(void) { }
 void* __cdecl strchr_64e790(char* s, int c) { (void) s; (void) c; return 0; }

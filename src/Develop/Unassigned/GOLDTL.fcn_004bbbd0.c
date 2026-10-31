@@ -10,7 +10,7 @@ typedef int(__cdecl* fcn_004bbbd0_handler)(fcn_004bbbd0_msg*);
 extern pos14_7f4c00 g_7f4c00;
 extern fcn_004bbbd0_handler g_6811b8[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 
 
 /* ADDRESS: GOLDTL 0x004bbbd0 */
@@ -22,7 +22,7 @@ int __cdecl fcn_004bbbd0(fcn_004bbbd0_msg* m)
 		return 0;
 	if (m == 0)
 		return -1;
-	p = fcn_00508e40(m->who);
+	p = gm_LookupEntityRecordById(m->who);
 	if (p == 0 || *(unsigned char*) (p + 0x1b1) > 0)
 		return 0x400;
 	if (m->op < 0x45)

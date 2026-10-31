@@ -3,10 +3,10 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_004eb220(char*);
 int __cdecl fcn_004eb3e0(int, int*);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_00525f60(void*, int);
 int __cdecl fcn_00526120(void*, int);
 void __cdecl fcn_00532ef0(void);
@@ -47,11 +47,11 @@ void __cdecl fcn_005aa480(void)
 	}
 	h = fcn_00470820(0, 0, "LOCATIONS\\ZUNFTHAUS\\LEVEL1");
 	fcn_00471b60(h);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
 	fcn_005340f0(*(int*) 0x772514);
 	d2_SetForm(h, 1);
-	fcn_00519190(0x1643);
+	io_AppendText(0x1643);
 	d2_SetForm(h, 2);
 	i = 0;
 	do {
@@ -69,7 +69,7 @@ void __cdecl fcn_005aa480(void)
 	} else {
 		n = *(unsigned char*) (0x7f4ca0 + n + 0x169) + 0x27b;
 	}
-	fcn_00519190(0x1644, n, 3, 0x1649);
+	io_AppendText(0x1644, n, 3, 0x1649);
 	d2_SetForm(h, 4);
 	fcn_00533a60(*(int*) 0x772514, 0, sel, 3,
 	    *(char**) 0x14aac34, *(char**) 0x14aac38, *(char**) 0x14aac3c);
@@ -102,14 +102,14 @@ void __cdecl fcn_005aa480(void)
 						cur = j;
 						*(int*) ((char*) *(void**) 0x1015ea0 + ids[j] * 0x2f4 + 0x3c) = 1;
 						d2_SetForm(h, 3);
-						fcn_00519190(0x6811b0);
+						io_AppendText(0x6811b0);
 						n = (unsigned int) *(unsigned short*) 0x774970 * 0x21c;
 						if (*(char*) (0x7f4ca0 + n + 9) == 0) {
 							n = *(unsigned char*) (0x7f4ca0 + n + 0x169) + 0x253;
 						} else {
 							n = *(unsigned char*) (0x7f4ca0 + n + 0x169) + 0x27b;
 						}
-						fcn_00519190(0x1644, n, 3, j + 0x1649);
+						io_AppendText(0x1644, n, 3, j + 0x1649);
 						break;
 					}
 					j++;

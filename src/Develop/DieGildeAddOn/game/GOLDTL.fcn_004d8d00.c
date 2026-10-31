@@ -13,8 +13,8 @@
 
 extern int g_772ea4;		/* 0x00772ea4 */
 
-int __cdecl fcn_00508e40(unsigned int);
 int __cdecl gm_LookupEntityRecordById(unsigned int);
+int __cdecl gm_LookupEntityRecordIn32SlotTable(unsigned int);
 int __cdecl fcn_004ce610(int);
 
 typedef struct TaskRec {
@@ -41,7 +41,7 @@ void __cdecl fcn_004d8d00(char* a0)
 	if (!rec.f[1] || rec.f[0] == -1) {
 		return;
 	}
-	obj = (char*) (rec.f[1] == 5 ? fcn_00508e40((unsigned int) rec.f[0]) : gm_LookupEntityRecordById((unsigned int) rec.f[0]));
+	obj = (char*) (rec.f[1] == 5 ? gm_LookupEntityRecordById((unsigned int) rec.f[0]) : gm_LookupEntityRecordIn32SlotTable((unsigned int) rec.f[0]));
 	h = fcn_004ce610((int) obj);
 	if ((!obj || !*(char*) (obj + 8)) && h) {
 		return;

@@ -1,7 +1,4 @@
-char g_69037c[32] = {
-    0x48, 0x6d, 0x2c, 0x20, 0x64, 0x61, 0x73, 0x20, 0x69, 0x73, 0x74, 0x20, 0x64, 0x6f, 0x63, 0x68,
-    0x20, 0x6e, 0x69, 0x63, 0x68, 0x74, 0x20, 0x76, 0x65, 0x72, 0x62, 0x6f, 0x74, 0x65, 0x6e, 0x00,
-};
+char g_69037c[] = "Hm, das ist doch nicht verboten";
 extern char g_69037c[];
 
 
@@ -14,8 +11,8 @@ typedef struct tag_req_2d_b {
 	char raw[0x2d];
 } req_2d_b;
 
-unsigned char* __cdecl fcn_00508e40(int);
-void __cdecl fcn_0051af00(void*, int, ...);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl fcn_004f51d0(void* a1, req_2d_b s, int b)
 {
@@ -24,7 +21,7 @@ int __cdecl fcn_004f51d0(void* a1, req_2d_b s, int b)
 	int r = 1;
 	int v = (b <= r);
 
-	p = fcn_00508e40(*(int*) ((char*) &s + 0x12));
+	p = gm_LookupEntityRecordById(*(int*) ((char*) &s + 0x12));
 	if (p != 0) {
 		w = *(unsigned short*) p;
 	} else {
@@ -33,21 +30,21 @@ int __cdecl fcn_004f51d0(void* a1, req_2d_b s, int b)
 	switch (*(int*) ((char*) &s + 0x1c) & 0xff) {
 	case 2:
 		if (*(int*) ((char*) &s + 4) < 0x75) {
-			fcn_0051af00(a1, v + 0x140a, (char*) &s + 4,
+			io_FormatTextBuffer(a1, v + 0x140a, (char*) &s + 4,
 			    *(int*) ((char*) &s + 0x1d) + 0x13f9);
 		} else {
-			fcn_0051af00(a1, v + 0x140a, (char*) &s + 4,
+			io_FormatTextBuffer(a1, v + 0x140a, (char*) &s + 4,
 			    *(int*) ((char*) &s + 0x1d) + 0x13fb);
 		}
 		break;
 	case 3:
-		fcn_0051af00(a1, v + 0x140f, (char*) &s + 4);
+		io_FormatTextBuffer(a1, v + 0x140f, (char*) &s + 4);
 		break;
 	case 4:
-		fcn_0051af00(a1, v + 0x1414, (char*) &s + 4, w);
+		io_FormatTextBuffer(a1, v + 0x1414, (char*) &s + 4, w);
 		break;
 	case 8:
-		fcn_0051af00(a1, v + 0x1428, (char*) &s + 4);
+		io_FormatTextBuffer(a1, v + 0x1428, (char*) &s + 4);
 		break;
 	default:
 		memcpy(a1, g_69037c, 0x20);

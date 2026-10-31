@@ -37,7 +37,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005a5440(int, Tab5c84*, int, int, int);
 void __cdecl fcn_0046f280(int);
 void __cdecl fcn_0046b2b0(int);
@@ -79,11 +79,11 @@ int __cdecl fcn_005c8400(void)
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(h, 2);
-	fcn_00519190(0x1f3e);
+	io_AppendText(0x1f3e);
 	d2_SetForm(h, 4);
-	fcn_00519190(0x1f3f);
+	io_AppendText(0x1f3f);
 	d2_SetForm(h, 5);
-	fcn_00519190(0x1f40);
+	io_AppendText(0x1f40);
 	d2_SetForm(h, 1);
 	fcn_005a5440(((Ent5c84*)g_7f4ca0)[g_774970].f178, g_776aa0, h, 1, 0);
 	for (k = 0; k < 9; k++) {
@@ -98,9 +98,9 @@ int __cdecl fcn_005c8400(void)
 	fcn_0050d5d0(g_774970, 0, list);
 	n = fcn_0050d5d0(g_774970, 0, list);
 	d2_SetForm(h, 3);
-	fcn_00519190((int) g_6811b0);
+	io_AppendText((int) g_6811b0);
 	if (n >= 9) {
-		fcn_00519190(0x18cb);
+		io_AppendText(0x18cb);
 	}
 	cy = *(short*) (g_772500 + 0x269d8);
 	d2_SetForm(h, 0);
@@ -115,7 +115,7 @@ int __cdecl fcn_005c8400(void)
 		*(int*) (((char*)g_1015f40) + lines[i].bar * 0x3cc + 0x18) = 0x10;
 		r = gm_SearchTable67(*(int*) (lines[i].e + 0xac));
 		if (r != 0) {
-			fcn_00519190(0x1f41, r, *(int*) (lines[i].e + 0xb4), *(int*) (lines[i].e + 0xc0), lines[i].e + 0xc4);
+			io_AppendText(0x1f41, r, *(int*) (lines[i].e + 0xb4), *(int*) (lines[i].e + 0xc0), lines[i].e + 0xc4);
 		}
 	}
 	return h;

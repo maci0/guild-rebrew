@@ -10,7 +10,7 @@ int __cdecl fcn_00500d20(void*, void*);
 void __cdecl fcn_0050ff70(void*, int);
 char* __cdecl fcn_0050dc90(void*);
 void __cdecl fcn_00500bb0(void*, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, void*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_00546190(void*);
@@ -52,7 +52,7 @@ void __cdecl fcn_005639a0(int a)
 		if (q != 0 && *(char*) (q + 2) == 1 && (*(unsigned char*) (q + 0x1b4) & 1)) {
 			id = 0x60b;
 		}
-		fcn_0051af00(buf, 0x17cb, (int) (unsigned char) r[0] * 0xe + 0x48e);
+		io_FormatTextBuffer(buf, 0x17cb, (int) (unsigned char) r[0] * 0xe + 0x48e);
 		if (*(unsigned short*) (a + 8) != 0xffff) {
 			ofs = *(unsigned short*) (a + 8) * 0x21c;
 			if (*(char*) (g_7f4ca0 + ofs + 2) == 6 || *(char*) (g_7f4ca0 + ofs + 2) == 7) {

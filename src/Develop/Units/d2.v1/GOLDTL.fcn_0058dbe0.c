@@ -1,17 +1,17 @@
 /* Open the arena betting page: query the match, build the layout and poll
  * input until the page is closed. */
 
-void __cdecl fcn_0051af00(char*, int, int);
+void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl fcn_005463a0(int, int, int, int, int);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005bdc30(int, int*, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl fcn_00468cd0(int, int);
@@ -54,7 +54,7 @@ void __cdecl fcn_0058dbe0(int a0)
 	int* v27;
 	int* v30;
 
-	fcn_0051af00(text, 0x40c8, 0x40b6);
+	io_FormatTextBuffer(text, 0x40c8, 0x40b6);
 	if (fcn_005463a0(2, 0, 0x90, 3, *(int*) (a0 + 1))) {
 		fcn_004c30a0(0xffffffff, 0, (char*) 0x6a9780, 0, 100);
 		fcn_00526120(text, 0);
@@ -75,12 +75,12 @@ void __cdecl fcn_0058dbe0(int a0)
 		return;
 	}
 	v2 = fcn_00470820(0, 0, (char*) 0x6a9768);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(v2);
 	d2_SetForm(v2, 0);
 	fcn_005340f0(*(int*) 0x772514);
 	d2_SetForm(v2, 1);
-	fcn_00519190(0x40b7, 0x40b6, *(unsigned short*) (v6 + 0x27), v6);
+	io_AppendText(0x40b7, 0x40b6, *(unsigned short*) (v6 + 0x27), v6);
 	v3 = fcn_004677e0(100, 0xa0, 200, 0, 2, 0x7b, 0x82,
 	                  *(int*) 0x772514);
 	fcn_00472380(v3, 0, 2, 0);
@@ -96,17 +96,17 @@ void __cdecl fcn_0058dbe0(int a0)
 	fcn_00468bb0(v4, 3, *(int*) 0x14b5630, *(int*) 0x14b5634,
 	             *(int*) 0x14b5638);
 	d2_SetForm(v2, 2);
-	v30 = (int*) fcn_00519190(0x40be);
+	v30 = (int*) io_AppendText(0x40be);
 	v27 = (int*) fcn_00472250(v2, 2, (int) v30);
 	v30 = (int*) fcn_00472250(v2, 2, (int) v30 + 1);
 	*(int*) 0x100f1dc = -1;
 	do {
 		d2_SetForm(v2, 3);
-		fcn_00519190(0x6811b0);
+		io_AppendText(0x6811b0);
 		v6 = fcn_00471f80(v4);
 		v6 = (v6 + 2) * (fcn_00471f80(v3) + 2);
-		fcn_00519190(0x40b9);
-		fcn_00519190(0x40ba, v6);
+		io_AppendText(0x40b9);
+		io_AppendText(0x40ba, v6);
 		if (*(int*) 0x14ce8e0) {
 			goto label_58df76;
 		}

@@ -1,6 +1,4 @@
-char g_68deb8[5] = {
-    0x25, 0x73, 0x24, 0x41, 0x00,
-};
+char g_68deb8[] = "%s$A";
 extern char g_68deb8[];
 
 
@@ -8,7 +6,7 @@ extern char g_68deb8[];
 #include <string.h>
 
 int __cdecl fcn_004e8d10(void*, int, void*);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
 void __cdecl fcn_004ec660(void* a1)
@@ -26,10 +24,10 @@ void __cdecl fcn_004ec660(void* a1)
 		return;
 	}
 	memset(buf, 0, 0x800);
-	fcn_0051af00(buf, 0x13ac);
+	io_FormatTextBuffer(buf, 0x13ac);
 	if (n > 0) {
 		for (i = 0; i < n; i++) {
-			fcn_0051af00(buf + strlen(buf), (int) g_68deb8,
+			io_FormatTextBuffer(buf + strlen(buf), (int) g_68deb8,
 			    *(int*) (items + i * 0xc) + 0x253);
 		}
 	}

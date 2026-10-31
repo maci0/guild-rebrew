@@ -22,7 +22,7 @@ int __cdecl gm_GetBuildingTypeCategory(int type);
 
 /* Reconstructed entity byte-access contracts; original spellings are unproved. */
 #ifndef REBREW_SERVER
-float __cdecl fcn_00507f10(char* entity, int index);
+float __cdecl gm_GetEntitySkill(char* entity, int index);
 int __cdecl fcn_00507e30(char* entity, int index);
 float __cdecl fcn_00507e70(char* first, char* second, int index);
 #endif

@@ -101,14 +101,14 @@ void __cdecl fcn_00531d20(void)
 					ent = *(unsigned char**) (g_7746b4 + 0x16c);
 					n = (lpGebaeudePROT[(unsigned) *ent * 0x24d] == 0x20)
 					    ? 0x1286 : 0x1256;
-					fcn_0051af00((char*) text, n,
+					io_FormatTextBuffer((char*) text, n,
 					    (void*) 3);
 				}
 				break;
 			case 0x18:
-				idp = (short*) fcn_00508e40(*(int*) (obj + 0xc4));
+				idp = (short*) gm_LookupEntityRecordById(*(int*) (obj + 0xc4));
 				if (idp != 0)
-					fcn_0051af00((char*) text,
+					io_FormatTextBuffer((char*) text,
 					    0x1262 + (fcn_0042e410(3) & 0xffff),
 					    (void*) (unsigned) *idp);
 				break;
@@ -116,27 +116,27 @@ void __cdecl fcn_00531d20(void)
 				ent = (unsigned char*) gm_SearchTable67(
 				    *(int*) (obj + 0xac));
 				if (ent != 0)
-					fcn_0051af00((char*) text,
+					io_FormatTextBuffer((char*) text,
 					    0x125c + (fcn_0042e410(3) & 0xffff),
 					    (void*) (unsigned)
 					    *(unsigned short*) (ent + 0x27));
 				break;
 			case 0x1a:
-				idp = (short*) fcn_00508e40(*(int*) (obj + 0xb4));
+				idp = (short*) gm_LookupEntityRecordById(*(int*) (obj + 0xb4));
 				if (idp != 0)
-					fcn_0051af00((char*) text,
+					io_FormatTextBuffer((char*) text,
 					    0x1277 + (fcn_0042e410(3) & 0xffff),
 					    (void*) (unsigned) *idp);
 				break;
 			case 0x28:
-				fcn_0051af00((char*) text,
+				io_FormatTextBuffer((char*) text,
 				    0x124d + (fcn_0042e410(3) & 0xffff),
 				    (void*) 3);
 				break;
 			case 0x3c:
-				idp = (short*) fcn_00508e40(*(int*) (obj + 0xac));
+				idp = (short*) gm_LookupEntityRecordById(*(int*) (obj + 0xac));
 				if (idp != 0)
-					fcn_0051af00((char*) text,
+					io_FormatTextBuffer((char*) text,
 					    0x1253 + (fcn_0042e410(3) & 0xffff),
 					    (void*) (unsigned) *idp);
 				break;
@@ -145,7 +145,7 @@ void __cdecl fcn_00531d20(void)
 				ent = (unsigned char*) gm_SearchTable67(
 				    *(int*) (obj + 0xac));
 				if (ent != 0)
-					fcn_0051af00((char*) text,
+					io_FormatTextBuffer((char*) text,
 					    0x1250 + (fcn_0042e410(3) & 0xffff),
 					    (void*) (unsigned)
 					    *(unsigned short*) (ent + 0x27));
@@ -155,13 +155,13 @@ void __cdecl fcn_00531d20(void)
 				    *(int*) (obj + 0xac));
 				if (ent != 0 && *(unsigned short*) (ent + 0x27)
 				    != 0xffff)
-					fcn_0051af00((char*) text,
+					io_FormatTextBuffer((char*) text,
 					    0x1265 + (fcn_0042e410(3) & 0xffff),
 					    (void*) (unsigned)
 					    *(unsigned short*) (ent + 0x27));
 				break;
 			case 0x43:
-				fcn_0051af00((char*) text,
+				io_FormatTextBuffer((char*) text,
 				    0x1268 + (fcn_0042e410(3) & 0xffff),
 				    (void*) 3);
 				break;
@@ -169,13 +169,13 @@ void __cdecl fcn_00531d20(void)
 				ent = (unsigned char*) gm_SearchTable67(
 				    *(int*) (obj + 0xac));
 				if (ent != 0)
-					fcn_0051af00((char*) text,
+					io_FormatTextBuffer((char*) text,
 					    0x1259 + (fcn_0042e410(3) & 0xffff),
 					    (void*) (unsigned)
 					    *(unsigned short*) (ent + 0x27));
 				break;
 			case 0x48:
-				fcn_0051af00((char*) text,
+				io_FormatTextBuffer((char*) text,
 				    0x126e + (fcn_0042e410(3) & 0xffff),
 				    (void*) 3);
 				break;
@@ -183,18 +183,18 @@ void __cdecl fcn_00531d20(void)
 				ent = (unsigned char*) gm_SearchTable67(
 				    *(int*) (obj + 0xac));
 				if (ent != 0)
-					fcn_0051af00((char*) text,
+					io_FormatTextBuffer((char*) text,
 					    0x124a + (fcn_0042e410(3) & 0xffff),
 					    (void*) (unsigned)
 					    *(unsigned short*) (ent + 0x27));
 				break;
 			case 0x61:
-				fcn_0051af00((char*) text,
+				io_FormatTextBuffer((char*) text,
 				    0x126b + (fcn_0042e410(3) & 0xffff),
 				    (void*) 3);
 				break;
 			case 0x62:
-				fcn_0051af00((char*) text,
+				io_FormatTextBuffer((char*) text,
 				    0x125f + (fcn_0042e410(3) & 0xffff),
 				    (void*) 3);
 				break;
@@ -202,20 +202,20 @@ void __cdecl fcn_00531d20(void)
 				ent = (unsigned char*) gm_SearchTable67(
 				    *(int*) (obj + 0xb0));
 				if (ent != 0)
-					fcn_0051af00((char*) text,
+					io_FormatTextBuffer((char*) text,
 					    0x1271 + (fcn_0042e410(3) & 0xffff),
 					    (void*) (unsigned)
 					    *(unsigned short*) (ent + 0x27));
 				break;
 			case 0x65:
-				fcn_0051af00((char*) text,
+				io_FormatTextBuffer((char*) text,
 				    0x1274 + (fcn_0042e410(3) & 0xffff),
 				    (void*) 3);
 				break;
 			case 0x89:
-				idp = (short*) fcn_00508e40(*(int*) (obj + 0xb0));
+				idp = (short*) gm_LookupEntityRecordById(*(int*) (obj + 0xb0));
 				if (idp != 0)
-					fcn_0051af00((char*) text,
+					io_FormatTextBuffer((char*) text,
 					    0x127a + (fcn_0042e410(3) & 0xffff),
 					    (void*) (unsigned) *idp);
 				break;
@@ -225,24 +225,24 @@ void __cdecl fcn_00531d20(void)
 					    + 0x16c);
 					i = lpGebaeudePROT[(unsigned) *ent * 0x24d];
 					if (i == 0x1d)
-						fcn_0051af00((char*) text,
+						io_FormatTextBuffer((char*) text,
 						    0x1283
 						    + (fcn_0042e410(3)
 						    & 0xffff), (void*) 3);
 					else if (i == 0x1f)
-						fcn_0051af00((char*) text,
+						io_FormatTextBuffer((char*) text,
 						    0x1289
 						    + (fcn_0042e410(3)
 						    & 0xffff), (void*) 3);
 				}
 				break;
 			case 0x8e:
-				fcn_0051af00((char*) text,
+				io_FormatTextBuffer((char*) text,
 				    0x127d + (fcn_0042e410(3) & 0xffff),
 				    (void*) 3);
 				break;
 			case 0xa1:
-				fcn_0051af00((char*) text,
+				io_FormatTextBuffer((char*) text,
 				    0x1280 + (fcn_0042e410(3) & 0xffff),
 				    (void*) 3);
 				break;

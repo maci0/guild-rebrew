@@ -10,7 +10,7 @@ extern int g_772544;
 extern char s_67d474[];
 
 int __cdecl fcn_00465950(char* name);
-char* __cdecl fcn_00466190(int id);
+char* __cdecl d2_GetResourceData(int id);
 char* __cdecl fcn_0047b620(char* font, int c);
 void __cdecl fcn_0047ccd0(int x, int y, int surf, char* font, int c);
 void __cdecl fcn_0047cbf0(int x, int y, int surf, char* font, int c);
@@ -26,7 +26,7 @@ void __cdecl fcn_0046bbc0(int x, int y, int surf, char* text, unsigned char flag
 
 	x0 = x;
 	if (g_772524 == 0) {
-		g_772524 = fcn_00466190(fcn_00465950(s_67d474));
+		g_772524 = d2_GetResourceData(fcn_00465950(s_67d474));
 	}
 	g_1015ea4 = *(unsigned short*) (g_772524 + 8);
 	for (i = 0; i < (int) strlen(text); i++) {

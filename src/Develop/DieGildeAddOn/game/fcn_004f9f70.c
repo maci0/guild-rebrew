@@ -1,6 +1,6 @@
 extern char g_679060[];
 
-int __cdecl fcn_0051af00(char*, char*, int);
+int __cdecl io_FormatTextBuffer(char*, char*, int);
 int __cdecl fcn_005dafd0(int, int);
 
 /* ADDRESS: GOLDTL 0x004f9f70 */
@@ -19,7 +19,7 @@ int __cdecl fcn_004f9f70(int a, int b)
 			return 1;
 		}
 		if (*(char*) (a + 2) == 6) {
-			fcn_0051af00((char*) (b + 0x14), g_679060, 0x1e0d);
+			io_FormatTextBuffer((char*) (b + 0x14), g_679060, 0x1e0d);
 		}
 		if (*(int*) (a + 0x1c8) & 0x200) {
 			return 9;
@@ -48,7 +48,7 @@ int __cdecl fcn_004f9f70(int a, int b)
 		if (v == 4) {
 			r = fcn_005dafd0(a, b);
 		} else if (*(char*) (a + 2) == 6) {
-			fcn_0051af00((char*) (b + 0x14), g_679060, 0x1e0d);
+			io_FormatTextBuffer((char*) (b + 0x14), g_679060, 0x1e0d);
 		}
 		return r | 0xa;
 	}

@@ -19,11 +19,11 @@ extern int g_67d370;
 extern int g_774654;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00525f60(struct house*, int);
 void __cdecl fcn_005100f0(int, int);
@@ -47,15 +47,15 @@ void __cdecl fcn_0058acb0(int unused, char* p)
 
 	b = *(int*) (p + 0x20);
 	h = fcn_00470820(0, 0, "Locations\\Domizil\\kabinett");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(h, 1);
-	fcn_00519190("$C");
-	fcn_00519190(0x407d, 0x4171, b);
+	io_AppendText("$C");
+	io_AppendText(0x407d, 0x4171, b);
 	d2_SetForm(h, 2);
-	s = fcn_00519190(0x407e);
+	s = io_AppendText(0x407e);
 	ok = fcn_00472250(h, 2, s);
 	cancel = fcn_00472250(h, 2, s + 1);
 	do {

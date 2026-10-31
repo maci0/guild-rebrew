@@ -1,7 +1,7 @@
 
 
 
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, int);
 int __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(int);
@@ -15,7 +15,7 @@ int __cdecl fcn_004c9980(char* x, char* out)
 	ok = 0;
 	if (out != 0)
 		*out = 2;
-	e = fcn_00508e40(*(int*) (x + 0x10));
+	e = gm_LookupEntityRecordById(*(int*) (x + 0x10));
 	if (e != 0) {
 		ok = 1;
 		fcn_00529160(0, 0, *e, 0);

@@ -2,11 +2,11 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_004e6e20(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -55,8 +55,8 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
 
     *(int*) (participant + 0x94) = -1;
     memset(buttons, 0xff, sizeof(buttons));
-    own = fcn_00508e40(*(int*) (participant + 0x10));
-    other = fcn_00508e40(action[6]);
+    own = gm_LookupEntityRecordById(*(int*) (participant + 0x10));
+    other = gm_LookupEntityRecordById(action[6]);
     switch (action[0]) {
     case 0:
         if (*(int*) (participant + 0x10) != action[6]) return;
@@ -64,7 +64,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         dialog = fcn_00470820(0, 0, "cutscenes\\prozess");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
-        fcn_00519190(0x14bc, *(unsigned short*) own);
+        io_AppendText(0x14bc, *(unsigned short*) own);
         g_100f1dc = -1;
         *(int*) (participant + 0x94) = 0;
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
@@ -89,7 +89,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         dialog = fcn_00470820(0, 0, "cutscenes\\prozess");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
-        fcn_00519190(0x14cb, *(unsigned short*) own, *(unsigned short*) other);
+        io_AppendText(0x14cb, *(unsigned short*) own, *(unsigned short*) other);
         g_100f1dc = -1;
         *(int*) (participant + 0x94) = 0;
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
@@ -117,10 +117,10 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         dialog = fcn_00470820(0, 0, "cutscenes\\folterwahl");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
-        fcn_00519190(0x14db, *(unsigned short*) own);
+        io_AppendText(0x14db, *(unsigned short*) own);
         for (i = 0; i < 3; i++) {
             choice = order[i];
-            buttons[i] = fcn_00472250(dialog, 0, fcn_00519190(0x14dc,
+            buttons[i] = fcn_00472250(dialog, 0, io_AppendText(0x14dc,
                 choice * 2 + 0xb20, rates[choice] * value));
         }
         g_100f1dc = -1;
@@ -148,7 +148,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         dialog = fcn_00470820(0, 0, "cutscenes\\folterwahl");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
-        fcn_00519190(0x14e3, *(unsigned short*) own, *(unsigned short*) other, *(unsigned short*) other);
+        io_AppendText(0x14e3, *(unsigned short*) own, *(unsigned short*) other, *(unsigned short*) other);
         g_100f1dc = -1;
         *(int*) (participant + 0x94) = 0;
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
@@ -174,7 +174,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         dialog = fcn_00470820(0, 0, "cutscenes\\prozess");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
-        fcn_00519190(0x1512, *(unsigned short*) own);
+        io_AppendText(0x1512, *(unsigned short*) own);
         g_100f1dc = -1;
         *(int*) (participant + 0x94) = 0;
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
@@ -200,9 +200,9 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         dialog = fcn_00470820(0, 0, "cutscenes\\prozess");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
-        fcn_00519190(0x1529, *(unsigned short*) own);
-        fcn_00519190(0x152a);
-        fcn_00519190(0x152b);
+        io_AppendText(0x1529, *(unsigned short*) own);
+        io_AppendText(0x152a);
+        io_AppendText(0x152b);
         g_100f1dc = -1;
         *(int*) (participant + 0x94) = 1;
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
@@ -231,11 +231,11 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         dialog = fcn_00470820(0, 0, "cutscenes\\prozess");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
-        fcn_00519190(0x1532, *(unsigned short*) own);
+        io_AppendText(0x1532, *(unsigned short*) own);
         i = 0;
         text_id = base * 3 + 0x1534;
         do {
-            choice = fcn_00472250(dialog, 0, fcn_00519190(0x1533, text_id));
+            choice = fcn_00472250(dialog, 0, io_AppendText(0x1533, text_id));
             available[i] = choice;
             if (fcn_004f6810(other, i + base)) fcn_00472640(choice, 0);
             i++;

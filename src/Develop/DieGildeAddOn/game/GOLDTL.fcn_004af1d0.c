@@ -9,7 +9,7 @@ void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_0050cf50(void*, int);
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x204) and
  * addresses the 0x200 scratch buffer off ebp; section 13 of
@@ -74,6 +74,6 @@ int __cdecl fcn_004af1d0(int a1, int a2, int a3, char* a4, int a5)
 		rep stosb
 	}
 	fcn_004ae080(a4, buf, &a2, &a3);
-	fcn_0051af00((void*) a5, (int) buf, v);
+	io_FormatTextBuffer((void*) a5, (int) buf, v);
 	return 1;
 }

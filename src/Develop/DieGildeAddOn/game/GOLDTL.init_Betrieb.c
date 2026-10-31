@@ -20,7 +20,7 @@ int __cdecl gm_NextEntityQueryMatch(void);
 float __cdecl eval_ObjektPreis2Credits(int id, int a1);
 int __cdecl fcn_0050dfd0(char* a1, int a2);
 int __cdecl fcn_004c51f0(int a1, int a2, int a3, int a4, char a5, int a6);
-void __cdecl fcn_0041d9e0(const char* msg);
+void __cdecl ReportClientMessage(const char* msg);
 
 /* ADDRESS: GOLDTL 0x00512b40 */
 void __cdecl init_Betrieb(unsigned char* a0)
@@ -97,6 +97,6 @@ void __cdecl init_Betrieb(unsigned char* a0)
             i++;
         } while (i < 4);
     } else {
-        fcn_0041d9e0("init_Betrieb(): costs are zero");
+        ReportClientMessage("init_Betrieb(): costs are zero");
     }
 }

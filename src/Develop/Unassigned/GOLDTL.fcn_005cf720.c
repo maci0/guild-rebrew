@@ -1,7 +1,7 @@
 extern unsigned char g_slot_table[2];
 extern void* g_773da8;
 
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fffb0(unsigned int);
 int __cdecl fcn_0047dd60(void*);
 float __cdecl fcn_0050f980(int, int, int);
@@ -53,7 +53,7 @@ int __cdecl fcn_005cf720(unsigned int a0, unsigned int a1, unsigned char* p)
 		if ((flags & 2) && !s[9])
 			return 0;
 		if ((flags & 0x1000) && *(int*) (s + 0x5c) != -1) {
-			i = fcn_00508e40(*(int*) (s + 0x5c));
+			i = gm_LookupEntityRecordById(*(int*) (s + 0x5c));
 			if (i && *(unsigned char*) (i + 8) > 0)
 				return 0;
 		}

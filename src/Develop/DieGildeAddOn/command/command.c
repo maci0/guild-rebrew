@@ -2267,8 +2267,8 @@ LAB_1000e0e7:
 #else
 	extern unsigned char g_773d75;
 	extern short g_774970;
-	extern char g_68a9d8[];
-	extern int __cdecl fcn_0051af00();
+	extern char cm_LastObjectId[];
+	extern int __cdecl io_FormatTextBuffer();
 	extern void __cdecl fcn_00533a40();
 	extern int __cdecl fcn_004234e0();
 
@@ -2525,7 +2525,7 @@ LAB_1000e0e7:
 				}
 			}
 		}
-		*(int*)g_68a9d8 = *(int*)(dest_game_object + 1);
+		*(int*)cm_LastObjectId = *(int*)(dest_game_object + 1);
 		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
 			gm_SubObjekt(
 				*(void**)(dest_owner_entity + 2),
@@ -2556,7 +2556,7 @@ LAB_1000e0e7:
 		*source_owner_entity == g_774970) {
 		source_existing_entity = gm_SearchTable67(*(int*)(source_dynamic_entity + 3));
 		if (source_existing_entity != (void*)0) {
-			fcn_0051af00(log_buffer, 0x7c,
+			io_FormatTextBuffer(log_buffer, 0x7c,
 				14 * (int)*(unsigned char*)source_existing_entity + 0x48e,
 				*(int*)(cmd + 0x23));
 			fcn_00533a40(log_buffer);
@@ -5178,5 +5178,4 @@ unsigned char _dpad_1002ca04[79];
 unsigned char _dpad_1002caf0[67];
 unsigned char _dpad_1002cc39[1307];
 unsigned char _dpad_1002d361[115];
-unsigned char _dpad_10034684[3460];
 unsigned char _dpad_100a8c40[84];

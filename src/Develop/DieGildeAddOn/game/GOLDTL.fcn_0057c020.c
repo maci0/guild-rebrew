@@ -26,7 +26,7 @@ int __cdecl fcn_004e8b40(int, rec18*);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004ec2d0(struct house*, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 
 void __cdecl fcn_0057c020(struct house* a, struct house* b)
@@ -56,7 +56,7 @@ void __cdecl fcn_0057c020(struct house* a, struct house* b)
 	} else {
 		id = 0x41dc;
 	}
-	fcn_0051af00(text1, 0x41df);
-	fcn_0051af00(text2, id, text1);
+	io_FormatTextBuffer(text1, 0x41df);
+	io_FormatTextBuffer(text2, id, text1);
 	fcn_00545d40(b->owner, -1, text2, 1, 0x5fb, 0);
 }

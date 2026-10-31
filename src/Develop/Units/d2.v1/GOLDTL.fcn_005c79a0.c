@@ -82,9 +82,9 @@ int __cdecl fcn_005373e0(void*, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-unsigned char* __cdecl fcn_00508e40(int);
-int __cdecl fcn_00519190(int, ...);
-void __cdecl fcn_0051af00(char*, int, ...);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
+int __cdecl io_AppendText(int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_0052a0c0(unsigned char*, int);
 void __cdecl fcn_0052a2d0(void);
@@ -125,7 +125,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	d2_SetForm(dlg, 0);
 	fcn_00533dc0(g_772514, 0x72f, 0);
 	d2_SetForm(dlg, 3);
-	fcn_00519190(0x1a46);
+	io_AppendText(0x1a46);
 	fcn_0052a0c0(obj, 1);
 	d2_SetForm(dlg, 2);
 	hwnd = g_772514;
@@ -192,11 +192,11 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 		}
 		hwnd = g_772514;
 		g_772514 = hwnd;
-		fcn_00519190(s_6aa194, cnt2, 0x51e, 0x1a47, 0x16b9);
+		io_AppendText(s_6aa194, cnt2, 0x51e, 0x1a47, 0x16b9);
 		g_772514 = hwnd;
-		fcn_00519190(s_6aa194, cnt3, 0x51e, 0x1a47, 0x16ba);
+		io_AppendText(s_6aa194, cnt3, 0x51e, 0x1a47, 0x16ba);
 		g_772514 = hwnd;
-		fcn_00519190(s_6ac7dc, cnt6c, 0x51e, 0x1a48);
+		io_AppendText(s_6ac7dc, cnt6c, 0x51e, 0x1a48);
 		if (g_100f1dc != -1) {
 			if (CountDisplayCounters() != 0) {
 				i = 0;
@@ -267,7 +267,7 @@ send:
 							fcn_004c35f0();
 							fcn_0052ae70();
 							if (sum >= 4) {
-								fcn_0051af00(buf, 0x1a4a, 3);
+								io_FormatTextBuffer(buf, 0x1a4a, 3);
 								fcn_00526120(buf, 0);
 							}
 							break;
@@ -284,7 +284,7 @@ send:
 						if (i != 2) {
 							for (p = fcn_005463a0(2, 0, 0x16, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
 								if (*(char*) (p + 0xac) == (char) (i + 2)) {
-									e = fcn_00508e40(*(int*) (p + 0xb0));
+									e = gm_LookupEntityRecordById(*(int*) (p + 0xb0));
 									if (e != 0) {
 										*(char*) (e + 0x188) = 1;
 									}
@@ -293,7 +293,7 @@ send:
 						}
 						else {
 							for (p = fcn_005463a0(2, 0, 0x6c, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
-								e = fcn_00508e40(*(int*) (p + 0xac));
+								e = gm_LookupEntityRecordById(*(int*) (p + 0xac));
 								if (e != 0) {
 									*(char*) (e + 0x188) = 1;
 								}

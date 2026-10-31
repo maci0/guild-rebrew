@@ -24,7 +24,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_0046f280(int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_00500d20(void*, void*);
 
 /* ADDRESS: GOLDTL 0x0050ee80 */
@@ -154,7 +154,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				*(int*) (0x1015f40 + v2 * 0x3cc + 0x20) = 1;
 				*(int*) (0x1015f40 + v2 * 0x3cc + 0x24) = 1;
 				if (g_7f3f00[i].x0 < 0x2dc) {
-					fcn_00519190(g_7f3f00[i].x0 * 2 + 0x9a8);
+					io_AppendText(g_7f3f00[i].x0 * 2 + 0x9a8);
 				}
 			} else if (st == 2) {
 				v2 = fcn_0046f100(g_7f3f00[i].x10 - 4, g_7f3f00[i].x14 - 4, 0x36, 0x36, 0x400, v1);
@@ -174,7 +174,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				*(int*) (0x1015f40 + v2 * 0x3cc + 0x20) = 1;
 				*(int*) (0x1015f40 + v2 * 0x3cc + 0x24) = 1;
 				if (g_7f3f00[i].x0 < 0x2dc) {
-					fcn_00519190(g_7f3f00[i].x0 * 2 + 0x9a8);
+					io_AppendText(g_7f3f00[i].x0 * 2 + 0x9a8);
 				}
 				*(int*) (*(int*) 0x1015ea0 + g_7f3f00[i].x24 * 0x2f4 + 0x64) = 1;
 			} else {
@@ -195,7 +195,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				*(int*) (0x1015f40 + v2 * 0x3cc + 0x20) = 1;
 				*(int*) (0x1015f40 + v2 * 0x3cc + 0x24) = 1;
 				if (g_7f3f00[i].x0 < 0x2dc) {
-					fcn_00519190(g_7f3f00[i].x0 * 2 + 0x9a8);
+					io_AppendText(g_7f3f00[i].x0 * 2 + 0x9a8);
 				}
 				*(int*) (*(int*) 0x1015ea0 + g_7f3f00[i].x24 * 0x2f4 + 0x64) = 1;
 			}

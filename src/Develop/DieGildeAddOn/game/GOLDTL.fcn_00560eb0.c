@@ -21,7 +21,7 @@ extern struct house g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 extern char g_6b5c60[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_0050c710(char*, int, int);
@@ -32,7 +32,7 @@ void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 char* __cdecl fcn_0050dc90(unsigned char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl fcn_00546190(char*);
@@ -57,7 +57,7 @@ void __cdecl fcn_00560eb0(char* e)
 
 	switch (*(int*) (e + 0x70)) {
 	case 0:
-		who = fcn_00508e40(*(int*) (e + 0xb0));
+		who = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 		if (who != 0 && (unsigned char) who[((unsigned char*) e)[0xac] + 0x80] < 252.0f) {
 			q = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0x10));
 			if (q == 0) {
@@ -88,7 +88,7 @@ void __cdecl fcn_00560eb0(char* e)
 		*(int*) (e + 0x70) = 1;
 		return;
 	case 1:
-		who = fcn_00508e40(*(int*) (e + 0xb0));
+		who = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 		q = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0x10));
 		if (q == 0 || who == 0) {
 			break;
@@ -109,7 +109,7 @@ void __cdecl fcn_00560eb0(char* e)
 			s = gm_SetupEntityQuery(q);
 		}
 		if (s != 0) {
-			fcn_0051af00(buf, 0x1bc8, *(unsigned short*) who, q);
+			io_FormatTextBuffer(buf, 0x1bc8, *(unsigned short*) who, q);
 			he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].handle,
 			    *(int*) (e + 0x10), buf, 0, 0x5f2, *(int*) (q + 1), *(int*) (s + 2),
 			    g_6b5c60, "_NACHRICHTEN_HS_81");

@@ -10,7 +10,7 @@ int __cdecl fcn_004c4450(int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl fcn_00500bb0(char*, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*,
                           char*);
 int __cdecl fcn_00515540(int);
@@ -46,7 +46,7 @@ void __cdecl fcn_0057cbc0(char* p)
         if (wnd != 0) {
             w = *(unsigned short*) (s + 0x27);
             tbl = g_7f4ca0 + w * 0x21c;
-            fcn_0051af00(buf, 0x4205, s);
+            io_FormatTextBuffer(buf, 0x4205, s);
             he_MessageBoxQuickjump(*(int*) (tbl + 4), *(int*) (tbl + 4), buf, 0, 0x5fc,
                          *(int*) (s + 1), *(int*) (wnd + 2), g_6b5c60,
                          g_6b5c60);

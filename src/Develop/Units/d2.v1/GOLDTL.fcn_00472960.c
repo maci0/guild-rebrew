@@ -31,7 +31,7 @@ void __cdecl d2_Plot(int x, int y, unsigned char r, unsigned char g, unsigned ch
 		return;
 	}
 	if (w->surf == 0) {
-		fcn_0041d9e0("d2_Plot:Window is not a paintbox!");
+		ReportClientMessage("d2_Plot:Window is not a paintbox!");
 		return;
 	}
 	if (x < (unsigned char) g_772558 || x > w->w - (unsigned char) g_772558

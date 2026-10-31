@@ -39,7 +39,7 @@ int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00519190(int);
+int __cdecl io_AppendText(int);
 void __cdecl fcn_00527f10(char*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_005c3820(char*);
@@ -49,7 +49,7 @@ void __cdecl fcn_0050ee80(char*, char*);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl fcn_00526010(char*, int, int);
 int __cdecl fcn_00526070(char*, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526920(char*, int, char*);
 char* __cdecl fcn_00507a10(char*);
 void __cdecl fcn_004c4eb0(char*);
@@ -104,7 +104,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 	}
 	fcn_00471b60(h);
 	d2_SetForm(h, 4);
-	h = fcn_00472250(h, 4, fcn_00519190(0x17e2));
+	h = fcn_00472250(h, 4, io_AppendText(0x17e2));
 	fcn_00527f10(a0);
 	while (fcn_005373e0((void*) 0x59aa10, 0x657c7)) {
 		if (g_14ce8e0)
@@ -178,7 +178,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 							}
 							if (v7)
 								ok = 1;
-							fcn_0051af00(buf, req, amount, a0, sel * 2 + 0x9a8);
+							io_FormatTextBuffer(buf, req, amount, a0, sel * 2 + 0x9a8);
 							if (ok && fcn_00526120(buf, 1)) {
 								fcn_0057e880(0x2b, (int) a0, 0, sel);
 								fcn_004c4eb0(s_6aa328);
@@ -197,10 +197,10 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 								goto wait;
 							}
 						} else {
-							fcn_0051af00(buf, 0x1b, req, a0, sel * 2 + 0x9a8);
+							io_FormatTextBuffer(buf, 0x1b, req, a0, sel * 2 + 0x9a8);
 							if (fcn_00526120(buf, 1)) {
 								if (req > *(int*) (house + 0x194)) {
-									fcn_0051af00(buf, 0x74, req);
+									io_FormatTextBuffer(buf, 0x74, req);
 									fcn_00526120(buf, 0);
 								} else {
 									fcn_004c4eb0(s_6aa328);

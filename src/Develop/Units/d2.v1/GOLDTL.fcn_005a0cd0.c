@@ -1,4 +1,4 @@
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005a0a40(int);
@@ -17,7 +17,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int a2, int a3, 
 	if (a6 == 0) {
 		switch (a2) {
 		case 1:
-			fcn_0051af00(buf, 0x1883, *(int*) a1 + 0x30);
+			io_FormatTextBuffer(buf, 0x1883, *(int*) a1 + 0x30);
 			target = (*(volatile int*) 0x6b7fac) + a5;
 			last = (*(volatile int*) 0x6b7fac);
 			while (target > (*(volatile int*) 0x6b7fac)) {
@@ -34,7 +34,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int a2, int a3, 
 			}
 			break;
 		case 2:
-			fcn_0051af00(buf, 0x1884, *(int*) a1 + 0x30, *(int*) (a0 + 4));
+			io_FormatTextBuffer(buf, 0x1884, *(int*) a1 + 0x30, *(int*) (a0 + 4));
 			target = (*(volatile int*) 0x6b7fac) + a5;
 			last = (*(volatile int*) 0x6b7fac);
 			while (target > (*(volatile int*) 0x6b7fac)) {
@@ -51,7 +51,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int a2, int a3, 
 			}
 			break;
 		case 3:
-			fcn_0051af00(buf, 0x1885, *(int*) a1 + 0x30, *(int*) (a0 + 4));
+			io_FormatTextBuffer(buf, 0x1885, *(int*) a1 + 0x30, *(int*) (a0 + 4));
 			last = (*(volatile int*) 0x6b7fac);
 			d2_SetForm(a3, a4);
 			fcn_005a0be0((int) buf, a1);
@@ -64,7 +64,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int a2, int a3, 
 			}
 			break;
 		case 4:
-			fcn_0051af00(buf, 0x1886, *(int*) a1 + 0x30, *(int*) (a0 + 4));
+			io_FormatTextBuffer(buf, 0x1886, *(int*) a1 + 0x30, *(int*) (a0 + 4));
 			last = (*(volatile int*) 0x6b7fac);
 			d2_SetForm(a3, a4);
 			fcn_005a0be0((int) buf, a1);
@@ -81,16 +81,16 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int a2, int a3, 
 	else {
 		switch (a2) {
 		case 1:
-			fcn_0051af00(buf, 0x1883, *(int*) a1 + 0x30);
+			io_FormatTextBuffer(buf, 0x1883, *(int*) a1 + 0x30);
 			break;
 		case 2:
-			fcn_0051af00(buf, 0x1884, *(int*) a1 + 0x30, *(int*) (a0 + 4));
+			io_FormatTextBuffer(buf, 0x1884, *(int*) a1 + 0x30, *(int*) (a0 + 4));
 			break;
 		case 3:
-			fcn_0051af00(buf, 0x1885, *(int*) a1 + 0x30, *(int*) (a0 + 4));
+			io_FormatTextBuffer(buf, 0x1885, *(int*) a1 + 0x30, *(int*) (a0 + 4));
 			break;
 		case 4:
-			fcn_0051af00(buf, 0x1886, *(int*) a1 + 0x30, *(int*) (a0 + 4));
+			io_FormatTextBuffer(buf, 0x1886, *(int*) a1 + 0x30, *(int*) (a0 + 4));
 			break;
 		}
 		last = (*(volatile int*) 0x6b7fac);

@@ -1,14 +1,14 @@
 #include "client_types.h"
 
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_00507e70(char*, char*, int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_00546190(char*);
 void __cdecl fcn_00545780(char*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
-void __cdecl fcn_0051af00(int, int, ...);
-int __cdecl fcn_00519190(int, ...);
+void __cdecl io_FormatTextBuffer(int, int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl d2_SetForm(int, int);
 int __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
@@ -28,9 +28,9 @@ void __cdecl fcn_0054b450(char* a0)
 	char* a;
 
 	a = a0;
-	v3 = fcn_00508e40(*(int*) (a + 0xac));
-	v4 = fcn_00508e40(*(int*) (a + 0xb0));
-	v5 = fcn_00508e40(*(int*) (a + 0xb4));
+	v3 = gm_LookupEntityRecordById(*(int*) (a + 0xac));
+	v4 = gm_LookupEntityRecordById(*(int*) (a + 0xb0));
+	v5 = gm_LookupEntityRecordById(*(int*) (a + 0xb4));
 	if (*(int*) (a + 0x70) == -2 || v3 == 0 || v4 == 0 || v5 == 0) {
 		fcn_00546190(a);
 		if (*(int*) (a + 0x74) != 0)
@@ -48,7 +48,7 @@ void __cdecl fcn_0054b450(char* a0)
 			return;
 		}
 		d2_SetForm(*(int*) (*(int*) (a + 0x74) + 8), 0);
-		fcn_00519190(0x1763, *(unsigned short*) v4, *(unsigned short*) v3);
+		io_AppendText(0x1763, *(unsigned short*) v4, *(unsigned short*) v3);
 		*(pos14_7f4c00*) (a + 0x44) = g_7f4c00;
 		*(pos14_7f4c00*) (a + 0x52) = g_7f4c00;
 		fcn_00500bb0(a + 0x52, 0x18, 0, 0);
@@ -64,7 +64,7 @@ void __cdecl fcn_0054b450(char* a0)
 		if (*(int*) 0x100f884 == *(int*) (*(int*) (a + 0x74) + 8) &&
 		    *(int*) 0x100f1dc != -1) {
 			if (*(int*) 0x100f1dc == 2) {
-				fcn_0051af00((int) buf, 0x1764, *(unsigned short*) v5,
+				io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) v5,
 				             *(unsigned short*) v3);
 				fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
 				fcn_004c54c0(*(int*) (v3 + 2), *(int*) (v5 + 2), -0x14, 1);
@@ -73,7 +73,7 @@ void __cdecl fcn_0054b450(char* a0)
 				return;
 			}
 			if (*(int*) 0x100f1dc == 1) {
-				fcn_0051af00((int) buf, 0x1765, *(unsigned short*) v5,
+				io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) v5,
 				             *(unsigned short*) v3);
 				fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
 				fcn_004c54c0(*(int*) (v4 + 2), *(int*) (v5 + 2), -0xf, 1);
@@ -87,12 +87,12 @@ void __cdecl fcn_0054b450(char* a0)
 	case 2:
 		dist = fcn_00507e70((char*) v4, (char*) v3, 4);
 		if (0x6628a0f <= (float) (gm_RandomFloat01() + dist)) {
-			fcn_0051af00((int) buf, 0x1764, *(unsigned short*) v5, *(unsigned short*) v3);
+			io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) v5, *(unsigned short*) v3);
 			v4 = (unsigned short*) *(int*) (v4 + 2);
 			fcn_00545d40((int) v4, (int) v4, buf, 0, 0x5fa, 0);
 			fcn_004c54c0(*(int*) (v3 + 2), *(int*) (v5 + 2), -0x14, 1);
 		} else {
-			fcn_0051af00((int) buf, 0x1765, *(unsigned short*) v5, *(unsigned short*) v3);
+			io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) v5, *(unsigned short*) v3);
 			fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
 			fcn_004c54c0(*(int*) (v4 + 2), *(int*) (v5 + 2), -0xf, 1);
 			fcn_004c54c0(*(int*) (v5 + 2), *(int*) (v4 + 2), -0xf, 1);

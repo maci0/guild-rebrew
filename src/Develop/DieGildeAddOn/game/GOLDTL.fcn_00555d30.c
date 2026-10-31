@@ -6,7 +6,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_004c5620(int, char*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, void*);
 void __cdecl fcn_00500bb0(char*, int, int, int);
 int __cdecl fcn_004ac150(short);
@@ -66,7 +66,7 @@ void __cdecl fcn_00555d30(char* obj)
 		if (*(unsigned char*) (obj + 0x78) & 4) {
 			return;
 		}
-		fcn_0051af00(buf, 0x1e29);
+		io_FormatTextBuffer(buf, 0x1e29);
 		for (j = 0x7f4ca2; j < 0x85a0a2; j += 0x21c) {
 			if (*(unsigned short*) (j - 2) == 0xffff) {
 				continue;

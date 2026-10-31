@@ -20,7 +20,7 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned short g_774970;
 extern char g_7f4ca0[];
 
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 
@@ -49,7 +49,7 @@ int __cdecl fcn_004ba480(int* a1)
 	int v;
 
 	n = 0;
-	e = fcn_00508e40(a1[0]);
+	e = gm_LookupEntityRecordById(a1[0]);
 	if (e == 0)
 		return 1;
 	for (it = gm_StartFilteredEntitySearch(1, 3, *e); it != 0 && n < 8; it = gm_FindNextFilteredEntity()) {

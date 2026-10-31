@@ -8,7 +8,7 @@ extern int __cdecl fcn_00474780(void);
 extern void __cdecl fcn_00466fe0(int a, int b);
 extern void __cdecl fcn_00474040(void);
 extern void __cdecl fcn_00475220(void *p);
-extern int __cdecl fcn_004722c0(void *p);
+extern int __cdecl d2_GetValueStep(void *p);
 extern void __cdecl fcn_00412830(int a);
 extern int __cdecl fcn_0046b520(void *p, int a);
 
@@ -110,7 +110,7 @@ label_474b14:
 	    && *(int *) 0x14ce8d8) {
 		if ((int) p[0x4b] < (int) p[6] && p[0x4b] != 0xffffffff
 		    && p[0x4f] != 0xffffffff) {
-			v7 = fcn_004722c0(p);
+			v7 = d2_GetValueStep(p);
 			p[0x4b] += v7;
 			p = *(unsigned int **) 0x7725d0;
 		}

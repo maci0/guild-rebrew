@@ -35,8 +35,8 @@ paths and state directories.
 Pin compatible Ghidra, plugin and bridge versions. Preserve the developers'
 names: pass `strict_mode = false` where the endpoint supports it, and verify
 the effective policy before allowing writes. The tested headless 6.0.0 server
-does not load the project's naming-policy file automatically. Rebrew 5.2.0's
-structural backends are ReVa and `ghidra-cli`; bethington's server is a separate
+does not load the project's naming-policy file automatically. At that checkpoint,
+Rebrew's structural backends were ReVa and `ghidra-cli`; bethington's server was a separate
 analysis connection, not a drop-in replacement for either backend. Begin with
 read-only queries, review incoming fields through BinSync, and re-test affected
 C after accepting names or types. This guide does not register a client connection.
@@ -136,6 +136,6 @@ local changes until interrupted; it does not pull edits back, and it rejects
 Format 3 `rebrew-functions.toml` holds function rows plus `source.definitions`
 and `source.files`. `rebrew-data.toml` remains format 2. The separate source
 store is retired. BinSync keeps its own transport schema, so the existing state
-repository stays valid. Command shapes above match Rebrew 5.2.0 help. No state
-repository was changed and no synchronization was started while writing this
-guide.
+repository stays valid. The init/pull/push options above were checked against
+installed Rebrew 6.9.0 help. No state repository was changed and no
+synchronization was started during this documentation pass.

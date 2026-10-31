@@ -34,15 +34,15 @@ extern int g_14ce8e0;
 extern int g_774654;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00525f60(char*, int);
 void __cdecl fcn_004c6ae0(int, int);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl fcn_00500bb0(Name14*, int, int, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -57,10 +57,10 @@ int __cdecl fcn_005d61d0(unsigned short* a1)
 
 	r = 0;
 	dlg = fcn_00470820(0, 0, "privillegien\\furcht_einfloessen");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1d62, *a1, *a1, 2, *a1);
+	io_AppendText(0x1d62, *a1, *a1, 2, *a1);
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
@@ -78,7 +78,7 @@ int __cdecl fcn_005d61d0(unsigned short* a1)
 					fcn_004c5530(&pkt);
 					nm = (*(Name14*)&g_7f4c00);
 					fcn_00500bb0(&nm, 0x18, 0, 0);
-					fcn_0051af00(buf, 0x1d63, &nm, *a1);
+					io_FormatTextBuffer(buf, 0x1d63, &nm, *a1);
 					fcn_00526120(buf, 0);
 					g_774654 = 4;
 					r = 1;

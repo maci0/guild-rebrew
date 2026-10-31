@@ -28,7 +28,7 @@ int __cdecl gm_CheckEntityType(unsigned char* e);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d);
 int __cdecl fcn_004c51f0(int a, int b, int c, int d, char e, int f);
 void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
-void __cdecl fcn_0051af00(void* out, int id, ...);
+void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 char* __cdecl fcn_0050dc90(unsigned char* e);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, char* h);
 void __cdecl fcn_00500bb0(pos14_7f4c00* t, int a, int b, int c);
@@ -60,7 +60,7 @@ void __cdecl fcn_00563f60(char* o)
 			p = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, *(unsigned short*) (o + 0xb0));
 			if (p != 0) {
 				race = lpGebaeudePROT + *e * 0x24d;
-				fcn_0051af00(buf, 0x1c2b, e, *(unsigned short*) (o + 0xb0) * 2 + 0x9a8);
+				io_FormatTextBuffer(buf, 0x1c2b, e, *(unsigned short*) (o + 0xb0) * 2 + 0x9a8);
 				if (*race != 6) {
 					q = fcn_0050dc90(e);
 					if (q != 0 && q[2] == 1 && (q[0x1b4] & 1)) {

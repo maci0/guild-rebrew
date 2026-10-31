@@ -14,7 +14,7 @@ extern unsigned char g_773d75;
 extern int __cdecl fcn_00500e20(int* p);
 extern void __cdecl fcn_00500bb0(void* clock, int a, int b, int c);
 extern void __cdecl fcn_00546190(char* record);
-extern void* __cdecl fcn_00508e40(int id);
+extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 extern void* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
 extern int __cdecl fcn_00500d20(void* p, int v);
@@ -23,7 +23,7 @@ extern int __cdecl fcn_005241f0(char* record);
 extern int __cdecl fcn_0050dc90(void* p);
 extern int __cdecl gm_eval_SlotVoll(int a, int b, int c);
 extern void __cdecl fcn_004c51f0(int a, int b, int c, int d, char e, int f);
-extern void __cdecl fcn_0051af00(char* buf, int id, ...);
+extern void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 extern void __cdecl he_MessageBoxQuickjump(int a, int b, int c, char* d, int e,
 	int f, int g, int h, char* i);
 extern void __cdecl fcn_00529160(int a, int b, int c, int d);
@@ -69,7 +69,7 @@ void __cdecl fcn_005797a0(char* a0)
 	count = 0;
 	p8c = (unsigned int*) (a0 + 0x8c);
 	for (i = 0; i < 4; i++) {
-		entity = (char*) fcn_00508e40(*p8c);
+		entity = (char*) gm_LookupEntityRecordById(*p8c);
 		if (entity != 0) {
 			count++;
 			valid++;
@@ -134,29 +134,29 @@ void __cdecl fcn_005797a0(char* a0)
 			fcn_004c51f0(*(int*) (param + 2), -1, *(unsigned short*) (a0 + 0xac),
 				valid, (char) g_773d75, 0);
 			if (*row != 0x1f) {
-				fcn_0051af00(text, 0x412c, 0x4128, 0x228, (void*) search);
+				io_FormatTextBuffer(text, 0x412c, 0x4128, 0x228, (void*) search);
 				strcpy(name, "_NACHRICHTEN_FRIEDHOF_01");
 				len = *(unsigned short*) (a0 + 0xac) * 2 + 0x9a8;
 				if (valid != 1)
-					fcn_0051af00(line, 0x412e, valid, len);
+					io_FormatTextBuffer(line, 0x412e, valid, len);
 				else
-					fcn_0051af00(line, 0x412d, len);
+					io_FormatTextBuffer(line, 0x412d, len);
 			} else {
-				fcn_0051af00(text, 0x4222, 0x421e, 0x22c, (void*) search);
+				io_FormatTextBuffer(text, 0x4222, 0x421e, 0x22c, (void*) search);
 				strcpy(name, "_NACHRICHTEN_ZIGEUNER_03");
 				len = *(unsigned short*) (a0 + 0xac) * 2 + 0x9a8;
 				if (valid != 1)
-					fcn_0051af00(line, 0x4224, valid, len);
+					io_FormatTextBuffer(line, 0x4224, valid, len);
 				else
-					fcn_0051af00(line, 0x4223);
+					io_FormatTextBuffer(line, 0x4223);
 			}
 			strcat(line, name);
 		} else {
 			if (*row != 0x1f) {
-				fcn_0051af00(text, 0x412f, 0x4128, 0x228, (void*) search);
+				io_FormatTextBuffer(text, 0x412f, 0x4128, 0x228, (void*) search);
 				strcpy(name, "_NACHRICHTEN_FRIEDHOF_01");
 			} else {
-				fcn_0051af00(text, 0x4225, 0x421e, 0x22c, (void*) search);
+				io_FormatTextBuffer(text, 0x4225, 0x421e, 0x22c, (void*) search);
 				strcpy(name, "_NACHRICHTEN_ZIGEUNER_03");
 			}
 		}
@@ -168,7 +168,7 @@ void __cdecl fcn_005797a0(char* a0)
 	}
 	p8c = (unsigned int*) (a0 + 0x8c);
 	for (i = 0; i < 4; i++) {
-		entity = (char*) fcn_00508e40(*p8c);
+		entity = (char*) gm_LookupEntityRecordById(*p8c);
 		if (entity != 0)
 			fcn_00529160(0, 0, *(unsigned short*) entity, 0);
 		p8c++;

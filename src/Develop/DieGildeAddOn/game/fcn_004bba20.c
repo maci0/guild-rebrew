@@ -1,7 +1,7 @@
 #include <string.h>
 
-int __cdecl fcn_00508e40(int);
-void __cdecl fcn_0051af00(char*, int, ...);
+int __cdecl gm_LookupEntityRecordById(int);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004bba20 */
@@ -12,11 +12,11 @@ int __cdecl fcn_004bba20(int* a0)
 	int len;
 	int big;
 
-	p = (char*) fcn_00508e40(*a0);
+	p = (char*) gm_LookupEntityRecordById(*a0);
 	if (p == 0) {
 		return 1;
 	}
-	fcn_0051af00(buf, 0x12e7 + *(unsigned short*) ((char*) a0 + 4));
+	io_FormatTextBuffer(buf, 0x12e7 + *(unsigned short*) ((char*) a0 + 4));
 	len = strlen(buf);
 	big = (unsigned int) len > 0x100u;
 	fcn_00545d40(*(int*) (p + 4), *(int*) (p + 4), buf, big, 0x603, 0);

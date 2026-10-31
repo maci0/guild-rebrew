@@ -18,7 +18,7 @@ int __cdecl fcn_00471b60();
 int __cdecl fcn_00471e30();
 int __cdecl fcn_00472250();
 int __cdecl d2_SetForm();
-int __cdecl fcn_00473a90();
+int __cdecl d2_SetOverlayAnimation();
 int __cdecl fcn_004927c0();
 int __cdecl fcn_00492950();
 int __cdecl fcn_00492d60();
@@ -31,8 +31,8 @@ int __cdecl fcn_00503fe0();
 int __cdecl fcn_00509570();
 int __cdecl fcn_0050b710();
 int __cdecl fcn_0050dac0();
-int __cdecl fcn_00519190();
-int __cdecl fcn_0051af00();
+int __cdecl io_AppendText();
+int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_0052d820();
 int __cdecl fcn_00530510();
 int __cdecl fcn_005340f0();
@@ -115,12 +115,12 @@ void __cdecl fcn_005a1430(unsigned int a0,unsigned int a1)
   fcn_005340f0((*(int *)0x772514));
   fcn_00471b60(v6);
   d2_SetForm(v6,1);
-  fcn_00473a90(0,0);
-  fcn_00519190(0x1874);
+  d2_SetOverlayAnimation(0,0);
+  io_AppendText(0x1874);
   v27 = (double)fcn_0042e450();
   if ((((double)*(float *)(v7 + 0x5c) <= v27) || ((*(int *)0x7f4c04) <= 0xb)) || (v11 < 10000)) {
     d2_SetForm(v6,2);
-    fcn_00519190(0x1875);
+    io_AppendText(0x1875);
     if (0xc <= (*(int *)0x7f4c04)) {
       v26 = *(float *)(v7 + 0x5c) * (*(int *)0x664178) - (*(int *)0x6628ac);
       goto label_5a15b5;
@@ -128,11 +128,11 @@ void __cdecl fcn_005a1430(unsigned int a0,unsigned int a1)
   }
   else {
     d2_SetForm(v6,2);
-    fcn_00519190(0x1876);
+    io_AppendText(0x1876);
     d2_SetForm(v6,3);
-    v29 = fcn_00472250(v6,3,fcn_00519190(0x1877));
-    v28 = fcn_00472250(v6,3,fcn_00519190(0x1878));
-    v30 = fcn_00472250(v6,3,fcn_00519190(0x1879));
+    v29 = fcn_00472250(v6,3,io_AppendText(0x1877));
+    v28 = fcn_00472250(v6,3,io_AppendText(0x1878));
+    v30 = fcn_00472250(v6,3,io_AppendText(0x1879));
     v26 = *(float *)(v7 + 0x5c) * (*(int *)0x664178) - (*(int *)0x662a3c);
 label_5a15b5:
     *(float *)(v7 + 0x5c) = v26;
@@ -168,10 +168,10 @@ label_5a15b5:
   /* Phase 3: guest/order subdialog opened from the Wirtshaus menu. */
   if ((!v2) && (*(char *)((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca8))) {
     d2_SetForm(v6,3);
-    fcn_00519190(0x6811b0);
-    v11 = fcn_00472250(v6,3,fcn_00519190(0x187a));
-    v7 = fcn_00472250(v6,3,fcn_00519190(0x187b));
-    v8 = fcn_00472250(v6,3,fcn_00519190(0x187c));
+    io_AppendText(0x6811b0);
+    v11 = fcn_00472250(v6,3,io_AppendText(0x187a));
+    v7 = fcn_00472250(v6,3,io_AppendText(0x187b));
+    v8 = fcn_00472250(v6,3,io_AppendText(0x187c));
     (*(int *)0x100f1dc) = -1;
     do {
       if ((*(int *)0x100f1dc) != -1) {
@@ -191,12 +191,12 @@ label_5a15b5:
     } while (fcn_005373e0(0x5a1430,0x777c7));
     if (*(char *)((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca8)) {
       d2_SetForm(v6,2);
-      fcn_00519190(0x6811b0);
+      io_AppendText(0x6811b0);
       v9 = (v13[2] != v3) ? 0x187d : 0x187e; // branch-flip
-      fcn_00519190(v9,v14);
+      io_AppendText(v9,v14);
       d2_SetForm(v6,3);
-      fcn_00519190(0x6811b0);
-      fcn_00519190(0x187f);
+      io_AppendText(0x6811b0);
+      io_AppendText(0x187f);
       (*(int *)0x100f1dc) = -1;
       do {
         if ((*(int *)0x100f1dc) == 2)
@@ -247,9 +247,9 @@ label_5a15b5:
         }
         *(unsigned short *)v23 = 0;
         *(char *)((int)v23 + 2) = 0;
-        fcn_0051af00(&v18,0x1880,v13[0]);
-        fcn_0051af00(&v19,0x1881,v13[0]);
-        fcn_0051af00(&v20,0x1882);
+        io_FormatTextBuffer(&v18,0x1880,v13[0]);
+        io_FormatTextBuffer(&v19,0x1881,v13[0]);
+        io_FormatTextBuffer(&v20,0x1882);
         v25 = v3 != v13[2];
         if (v25) {
           v12 = &v13[2];
@@ -264,8 +264,8 @@ label_5a15b5:
         fcn_005340f0((*(int *)0x772514));
         fcn_00471b60(v6);
         d2_SetForm(v6,1);
-        fcn_00473a90(0,0);
-        fcn_00519190(0x1874);
+        d2_SetOverlayAnimation(0,0);
+        io_AppendText(0x1874);
         v32 = 0;
         v33 = 0;
         if (v25) {
@@ -334,13 +334,13 @@ label_5a1b81:
                       v2 = 0;
                       d2_SetForm(v6,4);
                       fcn_0046f2c0((*(int *)0x772514),1);
-                      fcn_00519190(0x6811b0);
+                      io_AppendText(0x6811b0);
                       v10 = v22;
                       v31 = 3;
                       do {
                         v11 = v10[1];
                         if (fcn_00492950(&v14,v3,v11)) { // branch-flip
-                          v9 = fcn_00519190(&v10[3]);
+                          v9 = io_AppendText(&v10[3]);
                           *v10 = fcn_00472250(v6,4,v9);
                         }
                         else {
@@ -357,7 +357,7 @@ label_5a1b81:
                         if ((*(int *)0x67d370) == *v10) {
                           v2 = 1;
                           d2_SetForm(v6,4);
-                          fcn_00519190(0x6811b0);
+                          io_AppendText(0x6811b0);
                           fcn_0046f2c0((*(int *)0x772514),1);
                           fcn_005a0cd0(&v14,v24,v22[v11 * 0x43 + 1],v6,3,0x96,0);
                           fcn_00492d60(&v14,v3,v22[v11 * 0x43 + 1]);

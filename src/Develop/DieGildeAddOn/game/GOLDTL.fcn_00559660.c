@@ -22,7 +22,7 @@ struct obj {
 
 extern unsigned short g_7f4c04;
 
-struct obj* __cdecl fcn_00508e40(int);
+struct obj* __cdecl gm_LookupEntityRecordById(int);
 
 int __cdecl fcn_00529670(struct obj*, int);
 void __cdecl fcn_004c6a40(int);
@@ -35,7 +35,7 @@ int __cdecl fcn_00559660(struct slot* s)
 	int r;
 
 	if (s->id != -1) {
-		o = fcn_00508e40(s->id);
+		o = gm_LookupEntityRecordById(s->id);
 		if (o == 0) {
 			goto clear;
 		}

@@ -5,7 +5,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char s_67fb2c[];
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004c4eb0(char* s);
@@ -21,7 +21,7 @@ int __cdecl fcn_004aaa60(char* a1, int a2, char* x)
 	if (x[0] != 7) {
 		return 0;
 	}
-	p = fcn_00508e40(*(int*) (x + 4));
+	p = gm_LookupEntityRecordById(*(int*) (x + 4));
 	if (!p) {
 		return 0;
 	}

@@ -21,7 +21,7 @@ int __cdecl fcn_004d4700(void);
 char* __cdecl fcn_0040c230(char*, int (__cdecl*)(void), int, int, int);
 void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
 unsigned int __cdecl fcn_004e6cb0(int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_004458a0(char*, char*, char*);
 void __cdecl fcn_00442c00(char*, int);
 void __cdecl fcn_00533a40(char*);
@@ -45,10 +45,10 @@ int __cdecl fcn_004d4790(char* e)
 		fcn_004234e0(0, "Schmerzschrei", 1, 0x3f, 0x7f, 0, 0);
 		if (fcn_004e6cb0(100) > 50) {
 			*(int*) (e + 0x24) = (int) (-(int) *(float*) (e + 0x1c) - 20.0);
-			fcn_0051af00(buf, 0x1181, *(unsigned short*) e);
+			io_FormatTextBuffer(buf, 0x1181, *(unsigned short*) e);
 		} else {
 			*(int*) (e + 0x24) = (int) (10.0 - (int) *(float*) (e + 0x1c));
-			fcn_0051af00(buf, 0x1182, *(unsigned short*) e);
+			io_FormatTextBuffer(buf, 0x1182, *(unsigned short*) e);
 		}
 		q = *(char**) (e + 0x1ac);
 		if (q != 0) {

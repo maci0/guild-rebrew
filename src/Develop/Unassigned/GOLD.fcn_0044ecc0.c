@@ -1,10 +1,10 @@
-void* __cdecl fcn_005dfb95(int, void*);
-int __cdecl atoi(void*);
+#include <stdlib.h>
+#include <string.h>
 
 void __cdecl fcn_0044ecc0(int a1, char* a2)
 {
-	void* p;
+	char* p;
 
-	p = fcn_005dfb95(0, (void*) 0x5ebb58);
+	p = strtok(0, (const char*) 0x5ebb58);
 	*(int*) (a2 + 4) = atoi(p);
 }

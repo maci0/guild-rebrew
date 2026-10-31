@@ -23,7 +23,7 @@ extern char* g_14b5d58;
 char* __cdecl fcn_004ce000(void);
 char* __cdecl fcn_004ce040(void);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 char* __cdecl fcn_004ce190(int);
 int __cdecl sprintf(char*, const char*, ...);
 void __cdecl fcn_0046c310(int);
@@ -41,7 +41,7 @@ void __cdecl fcn_005941e0(void)
 	e = fcn_004ce000();
 	d2_SetForm(g_6a9b9c, 5);
 	h = ((Win*)g_1015f40)[g_772514].x254;
-	fcn_00519190((int) "$C");
+	io_AppendText((int) "$C");
 	g_774a3c = 0;
 	while (e != 0) {
 		g_774a3c++;
@@ -58,7 +58,7 @@ void __cdecl fcn_005941e0(void)
 		} else {
 			sprintf(buf, "$%dFF%s: %s$A", n, e + 0x40, e);
 		}
-		last = fcn_00519190((int) buf);
+		last = io_AppendText((int) buf);
 		e = fcn_004ce040();
 	}
 	if (g_774a3c > g_774a38 && last >= 0 && h > ((Win*)g_1015f40)[g_772514].x10) {

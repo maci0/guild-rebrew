@@ -11,7 +11,7 @@ extern void* __cdecl vfs_Tfopen(char* path, char* mode, struct VFS_DIR* root);
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* ptr);
 extern int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...);
-extern int __cdecl fcn_0041d9e0(char* text);
+extern int __cdecl ReportClientMessage(char* text);
 
 /* Loader of one text table set: finds the next free name slot, opens the
  * record file for it, then reads counts, pointer tables and record payloads
@@ -47,7 +47,7 @@ unsigned int __cdecl fcn_0042d880(char* name)
 	stream = vfs_Tfopen(path, "rb", g_6b7fdc);
 	if (stream == 0) {
 		fcn_0064d41a(msg, "Could not open textfile:%s", path);
-		fcn_0041d9e0(msg);
+		ReportClientMessage(msg);
 		return 0;
 	}
 	vfs_fseek(stream, 0, 0);

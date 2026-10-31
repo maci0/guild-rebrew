@@ -22,7 +22,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int);
+int __cdecl io_AppendText(int);
 void __cdecl fcn_00594340(void);
 void __cdecl fcn_00533dc0(int, int, int);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
@@ -102,7 +102,7 @@ int __cdecl fcn_0059c000(char* a0)
 	fcn_00471b60(h);
 	fcn_0052a0c0(a0, 0);
 	d2_SetForm(h, 3);
-	fcn_00519190(0xcb);
+	io_AppendText(0xcb);
 	fcn_00594340();
 	count = 0;
 	d2_SetForm(h, 0);

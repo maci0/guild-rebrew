@@ -50,7 +50,7 @@ impl = "unsigned char g_6752a4 = 1;"
 impl = "int ch_MorphFrameValue = -1;"
 
 [specials.SonnenstrahlenStartZeit]
-impl = "int SonnenstrahlenStartZeit = -1;"
+impl = ""
 
 # Capacity for the declared six GUI records; not a recovered allocation or owner.
 [specials.g_9b4840]
@@ -62,4 +62,160 @@ impl = ""
 
 # All selected step-helper callers use the existing shared C provider.
 [specials.fcn_00475be0]
+impl = ""
+
+# Selected Gold source definitions provide these functions.
+[specials.amt_fio_LoadAemter]
+impl = ""
+
+[specials.fcn_0040ba30]
+impl = ""
+
+[specials.fcn_0042f6d0]
+impl = ""
+
+[specials.fcn_004c3a50]
+impl = ""
+
+# Gold callers bind the native 0x4c39c0 function as fcn_004c4330.
+[specials.fcn_004c39c0]
+impl = ""
+
+[specials.fcn_004c4090]
+impl = ""
+
+# Gold callback registrations select the shared predicate at 0x00576750.
+[specials.fcn_0057ecf0]
+impl = ""
+
+# Selected Gold source definitions supply these scalar fields.
+[specials.SonnenstrahlenAktiv]
+impl = ""
+
+[specials.SonnenstrahlenPhase]
+impl = ""
+
+[specials.g_6b5cf8]
+impl = ""
+
+[specials.g_6a9b9c]
+impl = ""
+
+[specials.g_6a2bfc]
+impl = ""
+
+[specials.g_6a2c00]
+impl = ""
+
+[specials.g_6b5c20]
+impl = ""
+
+# Comparison-only functions for reviewed Gold conditional aliases; no native implementation claim.
+[specials.fcn_00402540]
+impl = "void __cdecl fcn_00402540(char *a) {}"
+
+[specials.fcn_00447fd0]
+impl = "char __cdecl fcn_00447fd0(void *a, void *b, void *c) { return 0; }"
+
+[specials.fcn_00446e10]
+impl = "char *__cdecl fcn_00446e10(char *a, float *b, float *c, char *d) { return 0; }"
+
+[specials.fcn_00449690]
+impl = "char *__cdecl fcn_00449690(char *a, int b, char *c, char *d) { return 0; }"
+
+[specials.fcn_0057c950]
+impl = "void __cdecl fcn_0057c950(char *a) {}"
+
+[specials.fcn_0058fa00]
+impl = "char __cdecl fcn_0058fa00(char *a, void *b) { return 0; }"
+
+[specials.fcn_005b46e0]
+impl = "void __cdecl fcn_005b46e0(char *a) {}"
+
+# These comparison capacities cover observed accesses; native ownership and aliasing remain unknown.
+[specials.g_680bd4]
+impl = "char g_680bd4[0x540] = {0};"
+
+[specials.g_68b400]
+impl = "char g_68b400[0x398] = {0};"
+
+[specials.g_688118]
+impl = "int g_688118[0x702] = {0};"
+
+[specials.g_6abb08]
+impl = "int g_6abb08[0x1ce] = {0};"
+
+[specials.g_680bd0]
+impl = "int g_680bd0[0x150] = {0};"
+
+[specials.g_68a9cc]
+impl = "int g_68a9cc = 0;"
+
+[specials.cm_LastEntityId]
+impl = "int cm_LastEntityId = 0;"
+
+[specials.cm_LastBuildingId]
+impl = "int cm_LastBuildingId = 0;"
+
+[specials.cm_LastObjectId]
+impl = "int cm_LastObjectId = 0;"
+
+[specials.g_68ff68]
+impl = "int g_68ff68[0x105] = {0};"
+
+[specials.g_690478]
+impl = "int g_690478[0x3a] = {0};"
+
+[specials.g_68da68]
+impl = "int g_68da68[0xf0] = {0};"
+
+[specials.g_6ab570]
+impl = ""
+
+[specials.g_6ab558]
+impl = ""
+
+[specials.g_6ab50c]
+impl = ""
+
+[specials.g_6ab41c]
+impl = ""
+
+[specials.g_69037c]
+impl = ""
+
+[specials.g_68deb8]
+impl = ""
+
+[specials.g_68d6bc]
+impl = ""
+
+[specials.g_68cfec]
+impl = ""
+
+[specials.g_68cfc0]
+impl = ""
+
+[specials.g_68aec4]
+impl = ""
+
+[specials.g_68ae64]
+impl = ""
+
+[specials.g_67eab0]
+impl = ""
+
+[specials.g_67b63c]
+impl = ""
+
+[specials.g_67b624]
+impl = ""
+
+[specials.g_67b608]
+impl = ""
+
+[specials.g_6761a4]
+impl = ""
+
+[specials.g_67a470]
 impl = ""

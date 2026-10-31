@@ -11,7 +11,7 @@ void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(char*, ...);
+int __cdecl io_AppendText(char*, ...);
 int __cdecl fcn_00472250(int, int, int);
 
 int __cdecl fcn_0057ffd0(void)
@@ -36,6 +36,6 @@ int __cdecl fcn_0057ffd0(void)
 	d2_SetForm(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8), 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8), 3);
-	g_665f08[8] = fcn_00472250(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8), 3, fcn_00519190(g_6a2f5c, 0x7d));
+	g_665f08[8] = fcn_00472250(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8), 3, io_AppendText(g_6a2f5c, 0x7d));
 	return 0;
 }

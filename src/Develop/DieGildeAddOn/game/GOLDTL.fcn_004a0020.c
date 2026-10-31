@@ -22,7 +22,7 @@ typedef struct
 
 int __cdecl fcn_004e8b40(int idx, fcn_004a0020_Rec* out);
 int __cdecl fcn_004e8c00(int k, int max, fcn_004a0020_Rec* out);
-fcn_004a0020_Ent* __cdecl fcn_00508e40(int id);
+fcn_004a0020_Ent* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl gm_RandomMod(int n);
 
@@ -88,12 +88,12 @@ int __cdecl fcn_004a0020(fcn_004a0020_Ent* e)
 		if (n >= 3) {
 			for (j = 0; j < n - 1; j++) {
 				if (list[j].id != e->h && list[j].id != -1) {
-					d = fcn_00508e40(list[j].id);
+					d = gm_LookupEntityRecordById(list[j].id);
 					for (k = j + 1; k < n; k++) {
 						if (d == 0)
 							break;
 						if (list[k].id != e->h && list[k].id != -1) {
-							d2 = fcn_00508e40(list[k].id);
+							d2 = gm_LookupEntityRecordById(list[k].id);
 							if (d2 != 0) {
 								sum += fcn_0050f980(d->id, d2->id, 1);
 								sum += fcn_0050f980(d2->id, d->id, 1);

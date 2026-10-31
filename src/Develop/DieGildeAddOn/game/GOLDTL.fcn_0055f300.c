@@ -5,7 +5,7 @@ void __cdecl fcn_00500bb0(void*, int, int, int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_005049a0(unsigned char*);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c4510(char*, int);
@@ -34,7 +34,7 @@ void __cdecl fcn_0055f300(char* e)
 	case 1:
 		gm_ResolveEntityById(0, &item, 0, *(int*) (e + 0xac));
 		if (*(int*) (e + 0xd8) != 0) {
-			fcn_0051af00(buf, 0x1c49, (*(unsigned short*) item) * 2 + 0x9a8);
+			io_FormatTextBuffer(buf, 0x1c49, (*(unsigned short*) item) * 2 + 0x9a8);
 			owner = *(int*) (e + 0x10);
 			p = fcn_005049a0((unsigned char*) gm_SearchTable67(owner));
 			house = *(int*) ((*(unsigned short*) (e + 8)) * 0x21c + 0x7f4ca4);

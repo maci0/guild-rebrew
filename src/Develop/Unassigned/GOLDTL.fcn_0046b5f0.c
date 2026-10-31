@@ -50,7 +50,7 @@ extern int g_67d384;
 extern int g_67d398;
 extern TextWin46b5f0 g_1015f40[0x60];
 
-int __cdecl fcn_00466190(int);
+int __cdecl d2_GetResourceData(int);
 int __cdecl fcn_0046bd00(int, int, int);
 void __cdecl fcn_00472880(int);
 int __cdecl fcn_0047b620(char*, int);
@@ -140,11 +140,11 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 				flag = 1;
 				break;
 			case '[':
-				tex = (char*) fcn_00466190(*(int*) 0x67d3b4 + (g_67d378 - g_67d398) * 2);
+				tex = (char*) d2_GetResourceData(*(int*) 0x67d3b4 + (g_67d378 - g_67d398) * 2);
 				special = 0;
 				break;
 			case ']':
-				tex = (char*) fcn_00466190(*(int*) 0x67d3b4 + (g_67d378 - g_67d398) * 2);
+				tex = (char*) d2_GetResourceData(*(int*) 0x67d3b4 + (g_67d378 - g_67d398) * 2);
 				special = 1;
 				break;
 			}

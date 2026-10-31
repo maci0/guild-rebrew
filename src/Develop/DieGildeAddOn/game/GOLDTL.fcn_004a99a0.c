@@ -5,7 +5,7 @@
 
 unsigned short __cdecl gm_RandomMod(int n);
 #include "Develop/DieGildeAddOn/game/aemter.h"
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 
 int __cdecl fcn_004a99a0(char* a1, char* e, char* a3, char* a4, char* out)
@@ -35,7 +35,7 @@ int __cdecl fcn_004a99a0(char* a1, char* e, char* a3, char* a4, char* out)
 	}
 	n = fcn_004e8b80(5, 6, recs);
 	for (i = 0; i < n; i++) {
-		cands[i] = fcn_00508e40(recs[i].mplayerid);
+		cands[i] = gm_LookupEntityRecordById(recs[i].mplayerid);
 	}
 	for (i = n; i < 6; i++) {
 		cands[i] = 0;

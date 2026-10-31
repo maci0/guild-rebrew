@@ -8,7 +8,7 @@ extern char g_7f4c00[];
 int __cdecl fcn_00500bb0(char*, int, int, int);
 int __cdecl fcn_0042e410(int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
@@ -45,7 +45,7 @@ void __cdecl fcn_005e5ea0(char* participant)
 	*(short*) ((char*) ui + 6) = 0;
 	*(short*) ((char*) ui + 8) = 0;
 	dlg = fcn_00470820(0, 0, "Locations\\zigeuner\\blutrache");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(g_772514);

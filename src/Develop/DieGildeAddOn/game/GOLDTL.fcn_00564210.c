@@ -32,7 +32,7 @@ void __cdecl fcn_004c6650(int);
 int __cdecl fcn_00500480(struct house*, int*, int*);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004c5fd0(int);
 void __cdecl fcn_00546190(char*);
@@ -74,7 +74,7 @@ void __cdecl fcn_00564210(char* e)
 		if (t != 0 && ((struct good*)lpGebaeudePROT)[*t].kind != 0xf) {
 			for (i = 0; i < 768; i++) {
 				if ((((struct house*)g_7f4ca0)[i].type == 6 || ((struct house*)g_7f4ca0)[i].type == 7) && ((struct house*)g_7f4ca0)[i].id != *(unsigned short*) (t + 0x27)) {
-					fcn_0051af00(buf, 0x1c52, *(unsigned short*) (t + 0x27), t);
+					io_FormatTextBuffer(buf, 0x1c52, *(unsigned short*) (t + 0x27), t);
 					fcn_00545d40(((struct house*)g_7f4ca0)[i].handle, -1, buf, 0, 0x5ed, "_NACHRICHTEN_HS_67");
 				}
 			}

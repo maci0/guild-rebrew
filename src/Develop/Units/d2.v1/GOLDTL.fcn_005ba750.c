@@ -20,7 +20,7 @@ extern int g_774698;
 int __cdecl fcn_00471f80(int);
 float __cdecl fcn_0050bb50(int, char);
 
-void __cdecl fcn_005ba750(unsigned char* p, int unused, int mode)
+void __cdecl fcn_005af160(unsigned char* p, int unused, int mode)
 {
 	float sum;
 	unsigned char* rec;

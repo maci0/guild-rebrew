@@ -1068,7 +1068,7 @@ char __cdecl vfs_RemoveFile(char* path, VFS_DIR* root)
 	REBREW_VFS_LAYOUT_LOG("D:\\Develop\\Units\\vfs\\vfs.c", 1052, "vfs_RemoveFile(): file not found", 1);
 	return 0;
 }
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 /* Opens path below root (TL client 0x42ff50; its messages name it vfs:Open and vfs_Tfopen). mode letters:
  * R or W read or write, B or T binary or text, Z or N gzip or plain. A file inside a zip archive opens as
  * the archive member; a loose or new file through gzopen or fopen. */
@@ -1259,7 +1259,7 @@ void* __cdecl vfs_Tfopen(char* path, char* mode, VFS_DIR* root)
 done:
 	return stream;
 }
-
+#endif
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl CloseVfsStream(void* stream)
 {
@@ -1874,7 +1874,7 @@ extern char g_6b7fe8;
 #define g_stream_pool g_6b7fe4
 #define g_vfs_item_pool g_6b7fe0
 #define g_vfs_case_sensitive g_6b7fe8
-#define ReportMessage fcn_0041d9e0
+#define ReportMessage ReportClientMessage
 #endif
 void __cdecl vfs_exit(char verbose)
 {

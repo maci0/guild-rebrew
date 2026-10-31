@@ -36,13 +36,13 @@ extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_774654;
 
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c9220(int*);
 int __cdecl fcn_00525f60(House*, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -65,16 +65,16 @@ int __cdecl fcn_005d5d70(unsigned char* e)
 
 	result = 0;
 	if (*(int*) (e + 0x1c8) & 0x400) {
-		fcn_0051af00(text, 0x1d7f, *(unsigned short*) e);
+		io_FormatTextBuffer(text, 0x1d7f, *(unsigned short*) e);
 		fcn_00526120(text, 0);
 		return 0;
 	}
 	kind = (e[9] != 0) + 0x1d68;
 	dlg = fcn_00470820(0, 0, s_6ac494);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1d67, *(unsigned short*) e, 2, *(unsigned short*) e, kind, *(unsigned short*) e);
+	io_AppendText(0x1d67, *(unsigned short*) e, 2, *(unsigned short*) e, kind, *(unsigned short*) e);
 	{
 		int arr[6];
 
@@ -111,7 +111,7 @@ int __cdecl fcn_005d5d70(unsigned char* e)
 						fcn_00535960();
 					}
 					fcn_004c6ae0(((House*)g_7f4ca0)[g_774970].f4, -2);
-					fcn_0051af00(text, 0x1d6a, b, *(unsigned short*) e, a);
+					io_FormatTextBuffer(text, 0x1d6a, b, *(unsigned short*) e, a);
 					fcn_00526120(text, 0);
 					g_774654 = 3;
 					result = 1;

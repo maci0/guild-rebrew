@@ -10,7 +10,7 @@ typedef struct F8 {
 } F8;
 
 void __cdecl fcn_00546190(void*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004a5e60(char*, int, F8, int, float, int*);
 void __cdecl gm_ResolveEntityById(void**, void**, void**, int);
@@ -35,7 +35,7 @@ void __cdecl fcn_005505b0(int a)
 		fcn_00546190((void*) a);
 		return;
 	}
-	fcn_0051af00(buf, 0x10c2, g_868080 + (unsigned char) g_773d75 * 0x2f4, (gm_RandomMod(3) & 0xffff) + 0x10c4);
+	io_FormatTextBuffer(buf, 0x10c2, g_868080 + (unsigned char) g_773d75 * 0x2f4, (gm_RandomMod(3) & 0xffff) + 0x10c4);
 	p = (char*) 0x7f4ca2;
 	do {
 		id = 0;
@@ -52,7 +52,7 @@ void __cdecl fcn_005505b0(int a)
 				n *= (gm_RandomMod(4) & 0xffff) + 2;
 				fcn_004c51a0(*(int*) (p + 2), -1, (unsigned char) g_773d75, n);
 				if (*(char*) p == 6 || *(char*) p == 7) {
-					fcn_0051af00(msg, 0x10c3, id, n);
+					io_FormatTextBuffer(msg, 0x10c3, id, n);
 					fcn_00545d40(*(int*) (p + 2), -1, msg, 0, 0x5ff, 0);
 				}
 			}

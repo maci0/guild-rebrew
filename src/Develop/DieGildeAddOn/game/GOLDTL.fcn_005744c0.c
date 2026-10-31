@@ -27,7 +27,7 @@ int __cdecl fcn_00500bb0();
 int __cdecl fcn_00500cb0();
 int __cdecl fcn_00500e20();
 int __cdecl gm_ResolveEntityById();
-int __cdecl fcn_00508e40();
+int __cdecl gm_LookupEntityRecordById();
 int __cdecl gm_GetEntityTableEntry();
 int __cdecl fcn_0050cad0();
 int __cdecl fcn_0050f910();
@@ -35,7 +35,7 @@ int __cdecl fcn_00510820();
 int __cdecl fcn_005165b0();
 int __cdecl fcn_00415300();
 int __cdecl fcn_004234e0();
-int __cdecl fcn_0051af00();
+int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_0052d9d0();
 int __cdecl fcn_00546190();
 int __cdecl fcn_00546280();
@@ -121,7 +121,7 @@ void __cdecl fcn_005744c0(int a0)
 		if (fcn_00500cb0((void*) (v5 + 0x52), 0x7f4c00) <= 0
 			&& (*(unsigned char*) (v5 + 0x78) & 2)) {
 			if (*(int*) (v5 + 0xac) != *(int*) (*(int*) 0x773da8 + 4)) {
-				v8 = fcn_00508e40(*(int*) (v5 + 0xac));
+				v8 = gm_LookupEntityRecordById(*(int*) (v5 + 0xac));
 				if (!v8) {
 					goto label_57469a;
 				}
@@ -460,14 +460,14 @@ label_574753:
 				}
 				if (*(char*) (*(unsigned short*) (v14 + 0x27) * 0x21c + 0x7f4ca2) == 6) {
 					if (4 <= *(int*) v14 && *(int*) v14 <= 7) {
-						fcn_0051af00((void*) v22, 0x1c2f, (void*) v14);
+						io_FormatTextBuffer((void*) v22, 0x1c2f, (void*) v14);
 						v13 = *(int*) (v15 + 4);
 						v9 = *(int*) (*(unsigned short*) (v15 + 0x27) * 0x21c + 0x7f4ca4);
 						v27 = *(int*) (v5 + 0x10);
 						v24 = 1;
 					}
 					else {
-						fcn_0051af00((void*) v22, 0x1c27, (void*) v14);
+						io_FormatTextBuffer((void*) v22, 0x1c27, (void*) v14);
 						v13 = *(int*) (v15 + 4);
 						v27 = *(int*) (v5 + 0x10);
 						v24 = 0;
@@ -484,7 +484,7 @@ label_574753:
 					do {
 						if ((*(char*) (v9 - 2) == 6 || *(char*) (v9 - 2) == 7)
 							&& *(int*) v9 != *(int*) (*(unsigned short*) (v14 + 0x27) * 0x21c + 0x7f4ca4)) {
-							fcn_0051af00((void*) v22, 0x1c30,
+							io_FormatTextBuffer((void*) v22, 0x1c30,
 								(void*) *(unsigned short*) (v14 + 0x27),
 								(void*) (*(int*) v14 * 0xe + 0x48e));
 							fcn_00456b60(*(int*) v9, -1, (void*) v22, 0, 0x607,

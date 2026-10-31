@@ -1,7 +1,7 @@
 int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
 void __cdecl fcn_00472900(int i, int v);
 int __cdecl fcn_005373e0(void* fn, int line);
-int __cdecl fcn_00519190(int fmt, ...);
+int __cdecl io_AppendText(int fmt, ...);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 int __cdecl fcn_005b0f00(void* win);
 void __cdecl fcn_0046f280(int);
@@ -49,22 +49,22 @@ void __cdecl fcn_005b39c0(void)
 				g_774654 = 1;
 			}
 			g_772514 = idx;
-			fcn_00519190(0x6811b0);
+			io_AppendText(0x6811b0);
 			save = (char*) 0x85abac;
 			base = (char*) 0x868060;
 			do {
 				if (*base == 0) {
 					break;
 				}
-				fcn_00519190(0x6ab848, base);
-				fcn_00519190(0x6ab834);
+				io_AppendText(0x6ab848, base);
+				io_AppendText(0x6ab834);
 				rec = (Rec80*) (save - 0x1c);
 				n = 0x55;
 				do {
 					if (rec->f00 != 0 && rec->f04 != 0) {
 						id = rec->f00;
 						slot = (int) lpObjektePROT + id * 0x40 + id;
-						fcn_00519190(0x6ab804, slot + 1, (int) rec->f20, rec->f24,
+						io_AppendText(0x6ab804, slot + 1, (int) rec->f20, rec->f24,
 							(int) rec->f38, (int) eval_ObjektPreis2Credits(id, 100), rec->f10,
 							rec->f14, rec->f1c, rec->f18);
 					}

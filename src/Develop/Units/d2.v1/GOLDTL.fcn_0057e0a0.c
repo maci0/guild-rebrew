@@ -15,7 +15,7 @@ int __cdecl fcn_00423460(int);
 int __cdecl fcn_004237f0(int, int);
 void __cdecl fcn_004707d0(int);
 void __cdecl fcn_00472640(int, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_004c3030(int, int, int, int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00533a40(int);
@@ -50,7 +50,7 @@ int __cdecl fcn_0057e0a0(void)
 		if (g_6b5cbc != 0 || g_7e2700 != 0) {
 			goto ret0;
 		}
-		fcn_00473a90(0, 0);
+		d2_SetOverlayAnimation(0, 0);
 		g_665f08[0] = 3;
 	}
 	if (g_7749e4 != *(int *)((int)g_665f08[7] + 0x74)) {
@@ -109,7 +109,7 @@ int __cdecl fcn_0057e0a0(void)
 			cb(0);
 		}
 		fcn_00545c50(*(int *)((int)g_665f08[7] + 0x74));
-		fcn_00473a90(0, 0);
+		d2_SetOverlayAnimation(0, 0);
 		return 0;
 	case 2:
 		if (fcn_00580290() != 1) {

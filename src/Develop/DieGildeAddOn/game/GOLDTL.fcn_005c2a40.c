@@ -28,14 +28,14 @@ unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
 void __cdecl fcn_00533f40(int, int, int, int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl fcn_0046f740(int, int, char*, int);
-int __cdecl fcn_0051af00(char*, int, ...);
+int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_0046fac0(int, int, char*, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00476b60(void);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00526120(int, int);
@@ -120,7 +120,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	han = fcn_00470820(0, 0, g_6ac628);
 	fcn_00471b60(han);
 	d2_SetForm(han, 1);
-	fcn_00519190(0x17ce);
+	io_AppendText(0x17ce);
 	d2_SetForm(han, 0);
 	cur = 0;
 	if (nslots >= 5) {
@@ -148,7 +148,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			*(int*) (r + 0x1e4) = 0x520;
 			*(int*) (r + 0x1e8) = -2;
 			*(int*) (r + 0x1ec) = -2;
-			fcn_0051af00((char*) cbuf, 0x17d3,
+			io_FormatTextBuffer((char*) cbuf, 0x17d3,
 			             *(int*) (id * 8 + 0x14a79c0), val);
 			ep[2] = fcn_0046fac0(0x60, cnt + 10, (char*) cbuf, g_772514);
 			cnt += 0x3c;
@@ -156,7 +156,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			k--;
 		} while (k != 0);
 	}
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00476b60();
 	do {
 		r = gm_SearchTable67(*(int*) (a0 + 1));
@@ -268,7 +268,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			} while (idx != 0);
 		}
 		d2_SetForm(han, 3);
-		fcn_00519190(0x17cf, a0,
+		io_AppendText(0x17cf, a0,
 		             (int) (unsigned char) *(cur + 0x21) - others - removed,
 		             0x17d4);
 	} while (fcn_005373e0((void*) 0x5c2a40, 0x657c7) != 0);

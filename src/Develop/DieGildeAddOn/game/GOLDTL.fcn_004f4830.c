@@ -19,7 +19,7 @@ int __cdecl fcn_004f4830(int idx, void* dst)
 extern unsigned short g_774970;
 extern char g_7f4ca0[];
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004f5110(char* buf, int k);
 void __cdecl fcn_005b26e0(char* o, char* buf);
 
@@ -36,7 +36,7 @@ int __cdecl fcn_004f48e0(char* s)
 	}
 	*(int*) (g_68ff68 + *(unsigned char*) (s + 4) * 36 + 0x18) = *(int*) (s + 5);
 	if (*(int*) (g_7f4ca0 + g_774970 * 0x21c + 4) != *(int*) s) {
-		o = fcn_00508e40(*(int*) s);
+		o = gm_LookupEntityRecordById(*(int*) s);
 		if (o != 0) {
 			fcn_004f5110(buf, *(unsigned char*) (s + 4));
 			fcn_005b26e0(o, buf);

@@ -14,13 +14,13 @@ void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_0051af00(char* buf, int id, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00526120(char* buf, int flag);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl fcn_00471b60(int dlg);
-void __cdecl fcn_00473a90(int a, int b);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_SetForm(int dlg, int flag);
-int __cdecl fcn_00519190(int id, ...);
+int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_00472250(int dlg, int a, int b);
 void __cdecl fcn_004c5530(int a1);
 void __cdecl fcn_004c35f0(void);
@@ -52,7 +52,7 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 		return;
 	}
 	if (fcn_0055c050(obj) == 0) {
-		fcn_0051af00(msg, 0x1a92, *(unsigned short*) (obj + 0x27), obj);
+		io_FormatTextBuffer(msg, 0x1a92, *(unsigned short*) (obj + 0x27), obj);
 		fcn_00526120(msg, 0);
 		return;
 	}
@@ -81,16 +81,16 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 		other = (int) he_fn_Handlung();
 	}
 	if ((*(unsigned char*) (lpGebaeudePROT + id * 0x24d + 0x247) * 2) <= count) {
-		fcn_0051af00(msg2, 0x19fa, count, g_7746c8);
+		io_FormatTextBuffer(msg2, 0x19fa, count, g_7746c8);
 		fcn_00526120(msg2, 0);
 		return;
 	}
 	choice = *(unsigned short*) (obj + 0x27);
 	option = fcn_00470820(0, 0, g_6aa4d8);
 	fcn_00471b60(option);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(option, 1);
-	index = fcn_00519190(0x19f7, *(unsigned short*) (choice * 0x21c + 0x7f4ca0), obj);
+	index = io_AppendText(0x19f7, *(unsigned short*) (choice * 0x21c + 0x7f4ca0), obj);
 	other = fcn_00472250(option, 1, index);
 	index = fcn_00472250(option, 1, index + 1);
 	g_100f1dc = -1;

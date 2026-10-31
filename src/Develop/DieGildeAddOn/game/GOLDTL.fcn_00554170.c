@@ -3,7 +3,7 @@
 #include "client_types.h"
 
 extern void __cdecl fcn_00546190(char*);
-extern char* __cdecl fcn_00508e40(int);
+extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl fcn_00529160(int, int, int, char*);
 extern void __cdecl fcn_004c5c80(int);
 extern int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
@@ -58,7 +58,7 @@ void __cdecl fcn_00554170(char* obj)
 	case 0:
 		iter = obj + 0x8c;
 		for (count = 6; count != 0; count--) {
-			rec = fcn_00508e40(*(int*) iter);
+			rec = gm_LookupEntityRecordById(*(int*) iter);
 			if (rec != 0 && *(int*) (rec + 0x184) != 0) {
 				fcn_00529160(0, 0, *(unsigned short*) rec, obj);
 				fcn_004c5c80(*(int*) (rec + 4));
@@ -72,7 +72,7 @@ void __cdecl fcn_00554170(char* obj)
 	case 1:
 		iter = obj + 0x8c;
 		while (count < 6) {
-			rec = fcn_00508e40(*(int*) iter);
+			rec = gm_LookupEntityRecordById(*(int*) iter);
 			if (rec != 0 && *(int*) (rec + 0x184) != 0 && *(int*) (*(char**) (rec + 0x184) + 0x128) != 0) {
 				fcn_00500bb0(time, 0, 4, 0);
 				*(int*) (obj + 0x84) = fcn_004c5620(1, obj);
@@ -185,7 +185,7 @@ void __cdecl fcn_00554170(char* obj)
 	case 5:
 		iter = obj + 0x8c;
 		for (count = 6; count != 0; count--) {
-			rec = fcn_00508e40(*(int*) iter);
+			rec = gm_LookupEntityRecordById(*(int*) iter);
 			if (rec != 0 && *(int*) (rec + 0x184) != 0) {
 				fcn_00529160(0, 0, *(unsigned short*) rec, 0);
 				fcn_004c5c80(*(int*) (rec + 4));

@@ -18,7 +18,7 @@ typedef struct
 
 int __cdecl fcn_00525fb0(char*);
 void __cdecl fcn_0052a0c0(char*, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl fcn_0052ae70(void);
@@ -38,7 +38,7 @@ void __cdecl fcn_005ad5a0(char* a)
 		return;
 	}
 	fcn_0052a0c0(a, 0);
-	fcn_0051af00(text, 0x19e2);
+	io_FormatTextBuffer(text, 0x19e2);
 	req.id = 0x727;
 	req.kind = 7;
 	req.c = 0xa07443b4;

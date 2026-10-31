@@ -8,7 +8,7 @@ void __cdecl fcn_004ce6e0(void*);
 void __cdecl fcn_004c4670(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
 void* __cdecl fcn_004ce610(void*);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
@@ -48,7 +48,7 @@ char __cdecl fcn_004ce740(char* a1)
 					q = fcn_004ce610(a1);
 					r = *(int*) q;
 					if (r != 0) {
-						fcn_0051af00(buf, 0x1bca, r * 2 + 0x9a8,
+						io_FormatTextBuffer(buf, 0x1bca, r * 2 + 0x9a8,
 						    *(unsigned short*) a1, *(int*) (a1 + 0x16c));
 						fcn_00545d40(*(int*) (p + 4), -1, buf, 0, 0x5f2, 0);
 					}

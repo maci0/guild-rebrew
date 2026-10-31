@@ -33,7 +33,7 @@ extern int* g_665f08;
 
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl fcn_00472250(int, int, int);
@@ -63,9 +63,9 @@ int __cdecl fcn_005806d0(void)
 		}
 		if (((struct tutor*)g_665f08)->state == ((struct tutor*)g_665f08)->lesson->steps[((struct tutor*)g_665f08)->index].kind) {
 			d2_SetForm(((struct tutor*)g_665f08)->dlg, 1);
-			fcn_00519190("$C");
+			io_AppendText("$C");
 			d2_SetForm(((struct tutor*)g_665f08)->dlg, 2);
-			fcn_00519190("$C");
+			io_AppendText("$C");
 		} else {
 			if (((struct tutor*)g_665f08)->dlg != -1) {
 				fcn_00471e30(((struct tutor*)g_665f08)->dlg);
@@ -95,9 +95,9 @@ int __cdecl fcn_005806d0(void)
 			((struct tutor*)g_665f08)->state = ((struct tutor*)g_665f08)->lesson->steps[((struct tutor*)g_665f08)->index].kind;
 		}
 		d2_SetForm(((struct tutor*)g_665f08)->dlg, 1);
-		fcn_00519190(((struct tutor*)g_665f08)->lesson->steps[((struct tutor*)g_665f08)->index].text);
+		io_AppendText(((struct tutor*)g_665f08)->lesson->steps[((struct tutor*)g_665f08)->index].text);
 		d2_SetForm(((struct tutor*)g_665f08)->dlg, 2);
-		((struct tutor*)g_665f08)->button = fcn_00472250(((struct tutor*)g_665f08)->dlg, 2, fcn_00519190("$Z%s", 0x7d));
+		((struct tutor*)g_665f08)->button = fcn_00472250(((struct tutor*)g_665f08)->dlg, 2, io_AppendText("$Z%s", 0x7d));
 		if (((struct tutor*)g_665f08)->lesson->steps[((struct tutor*)g_665f08)->index].sound != 0) {
 			if (((struct tutor*)g_665f08)->sound != 0) {
 				if (fcn_00423460(((struct tutor*)g_665f08)->sound) != 0) {

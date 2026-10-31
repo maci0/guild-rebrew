@@ -1,7 +1,4 @@
 #include "g_6abb08.h"
-Offer g_6abb08[1] = {
-    { 341, 0, 0, 0, 0, 0, 0, 0 },
-};
 extern Offer g_6abb08[];
 
 /* ADDRESS: GOLD 0x005ba7b0 */

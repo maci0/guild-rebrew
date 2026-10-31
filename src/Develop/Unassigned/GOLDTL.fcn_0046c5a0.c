@@ -25,7 +25,7 @@ void __cdecl fcn_00472880(int font);
 void __cdecl fcn_0046b5f0(int pos, int baseline, int a0, int a1, int last, int v35, int v38, int v37);
 int __cdecl fcn_0046b520(char* text, unsigned int font);
 void __cdecl fcn_0046eda0(int x, int y, int a1);
-int __cdecl fcn_00466190(int table, int index);
+int __cdecl d2_GetResourceData(int table, int index);
 void __cdecl fcn_0047a040(unsigned int a, unsigned int b, unsigned int c, unsigned int d);
 void __cdecl fcn_0047cba0(int x, int y, int a0, int text);
 void __cdecl fcn_00469c40(unsigned int a, int b, int c);
@@ -482,7 +482,7 @@ label_46d915:
 	}
 	fcn_0047a040(v22, v19, v18, v20);
 	if ((*(unsigned char*) (v10 + 0x14) & 0x20) && (v5 = ((v21 - v27) + -0x10) / *(int*) (v10 + 0x254) + v27, !g_772554)) {
-		v11 = (unsigned int) fcn_00466190(g_67d390, 5);
+		v11 = (unsigned int) d2_GetResourceData(g_67d390, 5);
 		fcn_0047cba0(v37 + 1, v5, a0, (int) v11);
 	}
 	if ((*(int*) (v10 + 0x3c4) != *(int*) (v10 + 0x2c)) && (v23)) {

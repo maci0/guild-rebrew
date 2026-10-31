@@ -12,7 +12,7 @@ int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_005039e0(int);
-void __cdecl fcn_0051af00(char*, int, int, int, int);
+void __cdecl io_FormatTextBuffer(char*, int, int, int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 
@@ -94,7 +94,7 @@ void __cdecl fcn_00572a50(char* obj)
 					(*(int*) (obj + 0x18) + *(int*) (obj + 0x14));
 				fcn_004c51f0(*(int*) (obj + 0xb4), -1, *(unsigned short*) ent,
 					total, g_773d75, 0);
-				fcn_0051af00(msg, 0x1bb8, *(unsigned short*) ent * 2 + 0x9a8,
+				io_FormatTextBuffer(msg, 0x1bb8, *(unsigned short*) ent * 2 + 0x9a8,
 					ref1, total);
 				he_MessageBoxQuickjump(
 					*(int*) (g_7f4ca0 + *(unsigned short*) ((char*) ref1 + 0x27) * 0x21c + 4),

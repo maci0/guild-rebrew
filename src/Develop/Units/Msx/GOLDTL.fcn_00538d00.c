@@ -48,7 +48,7 @@ void __cdecl fcn_0046b4f0(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471c00(int, int);
 void __cdecl fcn_00469c40(int, int, int);
-void __cdecl fcn_00519190(int, char*);
+void __cdecl io_AppendText(int, char*);
 void __cdecl fcn_00420db0(int, int);
 void __cdecl fcn_004c3d50(void);
 void __cdecl fcn_00590650(void);
@@ -103,7 +103,7 @@ int __cdecl main_OpenEngine(void)
 	} else {
 		sprintf(path, "%s%s", g_6a3550, "die_gilde_add_on_text.def");
 		if (fcn_0042bd20(path) == 0) {
-			fcn_0041d9e0("main_OpenEngine(): could not open txt-engine!");
+			ReportClientMessage("main_OpenEngine(): could not open txt-engine!");
 		}
 	}
 	fcn_004b2070();
@@ -113,7 +113,7 @@ int __cdecl main_OpenEngine(void)
 	fcn_00469c40(0, g_1040490 - ((Window*)g_1015f40)[((Screen*)g_1038144)[screen].window].height - 0x30,
 		((Window*)g_1015f40)[((Screen*)g_1038144)[screen].window].id);
 	fcn_00471c00(((Screen*)g_1038144)[screen].window, 1);
-	fcn_00519190(0x73, g_7e25a0);
+	io_AppendText(0x73, g_7e25a0);
 	fcn_00420db0(0, 0);
 	fcn_004c3d50();
 	fcn_00590650();

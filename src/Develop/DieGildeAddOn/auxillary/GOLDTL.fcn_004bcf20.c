@@ -9,7 +9,7 @@ extern char s_7e1ae0[];
 
 extern void* __cdecl plt_FindPlantInfo(int);
 extern void* __cdecl fcn_004488e0(char*, int, int);
-extern void __cdecl fcn_0041d9e0(char*);
+extern void __cdecl ReportClientMessage(char*);
 extern void __cdecl fcn_00438b40(void*, float*);
 
 
@@ -42,7 +42,7 @@ void __cdecl init_SetPflanzenMap(char* a0, int a1)
 	obj = (char*) fcn_004488e0(b1, 0, 0);
 	if (obj == NULL) {
 		sprintf(b2, s_6815c8, b1);
-		fcn_0041d9e0(b2);
+		ReportClientMessage(b2);
 		return;
 	}
 	*(char**) (a0 + 0x14) = obj;

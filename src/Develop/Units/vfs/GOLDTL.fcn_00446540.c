@@ -78,7 +78,7 @@ void __cdecl fcn_00401230(int, char*);
 void __cdecl fcn_00401260(int, int);
 void __cdecl fcn_004012f0(int, float*);
 void __cdecl fcn_00401360(int, int);
-void __cdecl fcn_0041d9e0(const char*);
+void __cdecl ReportClientMessage(const char*);
 void __cdecl fcn_0043b740(int, void*);
 
 /* ADDRESS: GOLDTL 0x00446540 */
@@ -177,7 +177,7 @@ void __cdecl fcn_00446540(int stream, Node* n)
 		}
 		break;
 	default:
-		fcn_0041d9e0("unknown object type");
+		ReportClientMessage("unknown object type");
 		break;
 	}
 tail:

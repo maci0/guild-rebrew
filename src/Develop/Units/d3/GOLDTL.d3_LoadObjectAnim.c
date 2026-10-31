@@ -4,7 +4,7 @@ void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl fcn_004011f0(void*, void*);
 char* __cdecl m_alloc(int, char*);
 int __cdecl fcn_00401500(void*, int, void**);
-void __cdecl fcn_0041d9e0(const char*);
+void __cdecl ReportClientMessage(const char*);
 void __cdecl CloseVfsStream(void*);
 
 typedef struct {
@@ -45,7 +45,7 @@ void* __cdecl d3_LoadObjectAnim(int a0, char* obj, char* a1, char a3)
 				^ ((unsigned char*) r)[0x34];
 			n = fcn_00401500(h, 0x58, (void**) (r + 0x40));
 			if (n != *(int*) r) {
-				fcn_0041d9e0((char*) 0x67aff4);
+				ReportClientMessage((char*) 0x67aff4);
 			}
 			items = *(char**) (r + 0x40);
 			*(int*) (items + (*(int*) r - 1) * 0x58) =

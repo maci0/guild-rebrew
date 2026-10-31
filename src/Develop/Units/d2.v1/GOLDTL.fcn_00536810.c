@@ -50,7 +50,7 @@ int __cdecl fcn_0046f740(int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00468df0(int, int, int, int, int);
 void __cdecl fcn_00472900(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472770(int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -94,12 +94,12 @@ void __cdecl fcn_00536810(void)
 	win = fcn_00468df0(0, 0, 0xc5, g_14ac628, g_772514);
 	fcn_00472900(win, 0x54);
 	d2_SetForm(dlg, 2);
-	edit = fcn_00472250(dlg, 2, fcn_00519190(0x1cc3, g_6b5c60));
+	edit = fcn_00472250(dlg, 2, io_AppendText(0x1cc3, g_6b5c60));
 	fcn_00472770(edit, 0x60);
 	while (fcn_005373e0(fcn_00536810, 0x657c7)) {
 		d2_SetForm(dlg, 1);
-		fcn_00519190((int) "$C");
-		fcn_00519190((int) g_7e3a60);
+		io_AppendText((int) "$C");
+		io_AppendText((int) g_7e3a60);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
 		}

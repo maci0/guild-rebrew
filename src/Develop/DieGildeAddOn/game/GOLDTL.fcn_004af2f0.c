@@ -4,12 +4,12 @@ extern float g_662910;
 /* Owned (both targets) by src/GOLDTL.fcn_005b24b0.c. */
 extern unsigned char g_773d75;
 
-void* __cdecl fcn_00508e40(int);
+void* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
 int __cdecl fcn_0064eeec(char*);
 int __cdecl fcn_0050b710(int, unsigned char);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 // SIZE 0x21c
 typedef struct {
@@ -109,7 +109,7 @@ int __cdecl fcn_004ae2a0(int mode, int* pairs, int idx, char* text, void* out)
 	int n;
 
 	if (mode == 1) {
-		r = (Rec21c*) fcn_00508e40(pairs[idx * 2 + 1]);
+		r = (Rec21c*) gm_LookupEntityRecordById(pairs[idx * 2 + 1]);
 		if (r == 0 || r->active == 0 || r->kind != 0xf) {
 			return 0;
 		}
@@ -150,7 +150,7 @@ int __cdecl fcn_004ae2a0(int mode, int* pairs, int idx, char* text, void* out)
 		rep stosb
 	}
 	fcn_004ae080(text, buf, &p, &n);
-	fcn_0051af00(out, (int) buf, r->id);
+	io_FormatTextBuffer(out, (int) buf, r->id);
 	return 1;
 }
 #pragma optimize("", on)
@@ -168,7 +168,7 @@ int __cdecl fcn_004ae3c0(int mode, int* pairs, int idx, char* text, void* out)
 	int n;
 
 	if (mode == 1) {
-		r = (Rec21c*) fcn_00508e40(pairs[idx * 2 + 1]);
+		r = (Rec21c*) gm_LookupEntityRecordById(pairs[idx * 2 + 1]);
 		if (r == 0 || r->active == 0 || r->kind != 0x15) {
 			return 0;
 		}
@@ -209,7 +209,7 @@ int __cdecl fcn_004ae3c0(int mode, int* pairs, int idx, char* text, void* out)
 		rep stosb
 	}
 	fcn_004ae080(text, buf, &p, &n);
-	fcn_0051af00(out, (int) buf, r->id);
+	io_FormatTextBuffer(out, (int) buf, r->id);
 	return 1;
 }
 #pragma optimize("", on)
@@ -257,7 +257,7 @@ int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
 		}
 	}
 	if (mode == 1) {
-		r = (Rec21c*) fcn_00508e40(pairs[idx * 2 + 1]);
+		r = (Rec21c*) gm_LookupEntityRecordById(pairs[idx * 2 + 1]);
 		if (r == 0 || r->active <= 0 || r->grade == 0) {
 			return 0;
 		}
@@ -313,7 +313,7 @@ int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
 		pairs[idx * 2 + 1] = r->key;
 	}
 send:
-	fcn_0051af00(out, (int) buf, r->id);
+	io_FormatTextBuffer(out, (int) buf, r->id);
 	return 1;
 }
 #pragma optimize("", on)
@@ -362,7 +362,7 @@ int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
 		}
 	}
 	if (mode == 1) {
-		r = (Rec21c*) fcn_00508e40(pairs[idx * 2 + 1]);
+		r = (Rec21c*) gm_LookupEntityRecordById(pairs[idx * 2 + 1]);
 		if (r == 0 || r->active <= 0 || r->kind == 0) {
 			return 0;
 		}
@@ -429,7 +429,7 @@ int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
 		pairs[idx * 2 + 1] = r->key;
 	}
 send:
-	fcn_0051af00(out, (int) buf, r->id);
+	io_FormatTextBuffer(out, (int) buf, r->id);
 	return 1;
 }
 #pragma optimize("", on)
@@ -478,7 +478,7 @@ int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
 		}
 	}
 	if (mode == 1) {
-		r = (Rec21c*) fcn_00508e40(pairs[idx * 2 + 1]);
+		r = (Rec21c*) gm_LookupEntityRecordById(pairs[idx * 2 + 1]);
 		if (r == 0 || r->active <= 0 || r->kind == 0) {
 			return 0;
 		}
@@ -548,7 +548,7 @@ int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
 		pairs[idx * 2 + 1] = r->key;
 	}
 send:
-	fcn_0051af00(out, (int) buf, r->id);
+	io_FormatTextBuffer(out, (int) buf, r->id);
 	return 1;
 }
 #pragma optimize("", on)
@@ -600,7 +600,7 @@ int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
 		return 0;
 	}
 	if (mode == 1) {
-		r = (Rec21c*) fcn_00508e40(pairs[idx * 2 + 1]);
+		r = (Rec21c*) gm_LookupEntityRecordById(pairs[idx * 2 + 1]);
 		if (r == 0 || r->active <= 0 || r->kind == 0) {
 			return 0;
 		}
@@ -668,7 +668,7 @@ int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
 		pairs[idx * 2 + 1] = r->key;
 	}
 send:
-	fcn_0051af00(out, (int) buf, r->id);
+	io_FormatTextBuffer(out, (int) buf, r->id);
 	return 1;
 }
 #pragma optimize("", on)
@@ -692,7 +692,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 	if (a1 != 2 || a2 == 0 || a3 == 8) {
 		return 0;
 	}
-	e = fcn_00508e40(*(int*) ((char*) a2 + a3 * 8 + 4));
+	e = gm_LookupEntityRecordById(*(int*) ((char*) a2 + a3 * 8 + 4));
 	if (e == 0) {
 		return 0;
 	}
@@ -726,7 +726,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 	}
 	fcn_004ae080(a4, buf, &n, (int*) &p);
 	n = fcn_0064eeec(a4 + n);
-	fcn_0051af00((void*) a5, (int) buf,
+	io_FormatTextBuffer((void*) a5, (int) buf,
 	    fcn_0050b710((int) (((float) n * g_662910) * (float) r),
 	    g_773d75),
 	    g_773d75);
@@ -777,7 +777,7 @@ int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
 		}
 	}
 	if (mode == 1) {
-		r = (Rec21c*) fcn_00508e40(pairs[idx * 2 + 1]);
+		r = (Rec21c*) gm_LookupEntityRecordById(pairs[idx * 2 + 1]);
 		if (r == 0 || r->active <= 0) {
 			return 0;
 		}
@@ -842,7 +842,7 @@ int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
 		pairs[idx * 2 + 1] = r->key;
 	}
 send:
-	fcn_0051af00(out, (int) buf, r->id);
+	io_FormatTextBuffer(out, (int) buf, r->id);
 	return 1;
 }
 #pragma optimize("", on)
@@ -892,7 +892,7 @@ int __cdecl fcn_004afd70(int mode, int* pairs, int idx, char* text, void* out)
 		fcn_004ae080(text, buf, &p, &rest);
 	}
 	if (mode == 1) {
-		r = (Rec21c*) fcn_00508e40(pairs[idx * 2 + 1]);
+		r = (Rec21c*) gm_LookupEntityRecordById(pairs[idx * 2 + 1]);
 		if (r == 0 || r->active <= 0) {
 			return 0;
 		}
@@ -923,7 +923,7 @@ int __cdecl fcn_004afd70(int mode, int* pairs, int idx, char* text, void* out)
 		pairs[idx * 2 + 1] = r->key;
 	}
 send:
-	fcn_0051af00(out, (int) buf, r->id);
+	io_FormatTextBuffer(out, (int) buf, r->id);
 	return 1;
 }
 #pragma optimize("", on)
@@ -982,7 +982,7 @@ int __cdecl fcn_004b0780(int* pairs, int idx, char* text)
 	int j;
 	int key;
 
-	e = (unsigned short*) fcn_00508e40(pairs[idx * 2 + 1]);
+	e = (unsigned short*) gm_LookupEntityRecordById(pairs[idx * 2 + 1]);
 	if (e == 0 || fcn_004ae130(*e) == 0) {
 		return 0;
 	}

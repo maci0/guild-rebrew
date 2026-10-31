@@ -11,7 +11,7 @@ void __cdecl fcn_004b5630(int a, int b);
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl fcn_00471b60(int a);
 void __cdecl d2_SetForm(int a, int b);
-int __cdecl fcn_00519190(int a, ...);
+int __cdecl io_AppendText(int a, ...);
 int __cdecl fcn_00472250(int a, int b, int c);
 int __cdecl fcn_004b3d80(int a, int b, int c);
 int __cdecl fcn_004c5790(int a, void* b);
@@ -69,10 +69,10 @@ void __cdecl fcn_004b5b40(int mode)
 	dlg = fcn_00470820(0, 0, "special\\mission");
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1b95, *(unsigned short*) slot);
-	r1 = fcn_00472250(dlg, 1, fcn_00519190(0x1b96, 0x1b98));
-	r2 = fcn_00472250(dlg, 1, fcn_00519190(0x1b96, 0x1b99));
-	r3 = fcn_00472250(dlg, 1, fcn_00519190(0x1b96, 0x1b9a));
+	io_AppendText(0x1b95, *(unsigned short*) slot);
+	r1 = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b98));
+	r2 = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b99));
+	r3 = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b9a));
 	flags |= 0x80;
 	g_100f1dc = -1;
 	do {

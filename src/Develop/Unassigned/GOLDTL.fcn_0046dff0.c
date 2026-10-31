@@ -11,7 +11,7 @@ void __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_0047c560(int, int, int);
 void __cdecl fcn_0047a040(int, int, int, int);
 void __cdecl fcn_0047cba0(int, int, int, int, int);
-int __cdecl fcn_00466190(int);
+int __cdecl d2_GetResourceData(int);
 char* __cdecl itoa(int, char*, int);
 
 /* Draw one window slot: sync the item states, size the frame, then blit the
@@ -102,7 +102,7 @@ void __cdecl fcn_0046dff0(int a0, int a1)
 	}
 	fcn_0047a040(*(int*) (b + 4), *(int*) (b + 8), *(int*) (b + 0xc) + *(int*) (b + 4), *(int*) (b + 0x10) + *(int*) (b + 8));
 	if ((*(unsigned char*) (b + 0x14) & 4) && !*(int*) 0x772554) {
-		surf = fcn_00466190(*(unsigned int*) (b + 0x288));
+		surf = d2_GetResourceData(*(unsigned int*) (b + 0x288));
 		rec = *(int*) (b + 0x288);
 		x = *(int*) (b + 4);
 		y = *(int*) (b + 8);

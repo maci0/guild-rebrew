@@ -20,7 +20,7 @@ extern char s_6a9b3c[];
 extern char s_6a9b30[];
 
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00533a40(char*);
 
 void __cdecl fcn_00591da0(int a1)
@@ -57,9 +57,9 @@ void __cdecl fcn_00591da0(int a1)
 		((Tip*)g_779d00)[a1].x8 = -1;
 	}
 	if (t != 0 && *(unsigned short*) t != 0xfd) {
-		fcn_0051af00(buf, (int) s_6a9b30, a1 + 0x205e, e, *(unsigned short*) t * 2 + 0x9a8);
+		io_FormatTextBuffer(buf, (int) s_6a9b30, a1 + 0x205e, e, *(unsigned short*) t * 2 + 0x9a8);
 	} else {
-		fcn_0051af00(buf, (int) s_6a9b3c, a1 + 0x205e, e);
+		io_FormatTextBuffer(buf, (int) s_6a9b3c, a1 + 0x205e, e);
 	}
 	fcn_00533a40(buf);
 }

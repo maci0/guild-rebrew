@@ -13,7 +13,7 @@ struct house {
 extern char g_7f4ca0[];
 #include "client_packet_builder.h"
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0050f950(int, int);
 void __cdecl fcn_004c6430(int, int, int);
 void __cdecl fcn_004c6650(int);
@@ -24,7 +24,7 @@ int __cdecl fcn_00500480(char*, int*, int*);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl fcn_004c54c0(int, int, int, int);
 char* __cdecl fcn_005049a0(char*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 void __cdecl fcn_00546190(char*);
@@ -41,7 +41,7 @@ void __cdecl fcn_00566700(char* u)
 	v = 0;
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		h = fcn_00508e40(*(int*) (u + 0xac));
+		h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 		if (h == 0 || *(char**) (h + 0x16c) == 0
 		    || fcn_0050f950(*(unsigned short*) (*(char**) (h + 0x16c) + 0x27), *(unsigned short*) h) > -0x1a) {
 			goto kill;
@@ -61,7 +61,7 @@ void __cdecl fcn_00566700(char* u)
 		v = -5;
 		fcn_004c54c0(((struct house*)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)].owner, *(int*) (h + 4), v, 1);
 		q = fcn_005049a0(*(char**) (h + 0x16c));
-		fcn_0051af00(text, 0x1bac, *(unsigned short*) h, *(char**) (h + 0x16c));
+		io_FormatTextBuffer(text, 0x1bac, *(unsigned short*) h, *(char**) (h + 0x16c));
 		if (q != 0) {
 			h = *(char**) (h + 0x16c);
 			he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].owner, -1, text, 0, 0x5f2, *(int*) (h + 1), *(int*) (q + 2), 0,

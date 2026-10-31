@@ -26,7 +26,7 @@ typedef struct Counts {
 } Counts;
 
 unsigned short __cdecl gm_RandomMod(int n);
-void* __cdecl fcn_00508e40(int handle);
+void* __cdecl gm_LookupEntityRecordById(int handle);
 void* __cdecl fcn_005463a0(int a, int b, int c);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
@@ -62,14 +62,14 @@ int __cdecl fcn_0049adb0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 	p = (int*) (e + 0x5c);
 	q = p + 3;
 	for (i = 3; i < 8; i++, q++) {
-		o = fcn_00508e40(*q);
+		o = gm_LookupEntityRecordById(*q);
 		if (o != 0 && *(unsigned short*) ((char*) o + 0xa) < 0x28) {
 			break;
 		}
 	}
 	q = p + 3;
 	for (i = 3; i < 8; i++, q++) {
-		s = (int) fcn_00508e40(*q);
+		s = (int) gm_LookupEntityRecordById(*q);
 		if (s != 0 && *(unsigned short*) (s + 0xa) < 0x28) {
 			break;
 		}
@@ -84,7 +84,7 @@ int __cdecl fcn_0049adb0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 		o = fcn_005463a0(1, 0, 0x41);
 		while (o != 0) {
 			if (*(int*) ((char*) o + 0xac) == *(int*) (e + 4)) {
-				rec = fcn_00508e40(*(int*) ((char*) o + 0xb0));
+				rec = gm_LookupEntityRecordById(*(int*) ((char*) o + 0xb0));
 				if (rec == 0) {
 					return 0;
 				}

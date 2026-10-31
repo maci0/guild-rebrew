@@ -14,24 +14,24 @@ struct Node {
 
 #include "client_video_list.h"
 
-Node* __cdecl fcn_0041f8f0(void)
+Node* __cdecl AllocVideoListNode(void)
 {
-	Node* n;
-	Node* p;
+	Node* node;
+	Node* cursor;
 
-	n = (Node*) malloc(0x148);
-	if (n != 0) {
-		memset(n, 0, 0x148);
+	node = (Node*) malloc(0x148);
+	if (node != 0) {
+		memset(node, 0, 0x148);
 		if (g_6b6f84 != 0) {
-			p = g_6b6f84;
-			while (p->prev != 0) {
-				p = p->prev;
+			cursor = g_6b6f84;
+			while (cursor->prev != 0) {
+				cursor = cursor->prev;
 			}
-			p->prev = n;
-			n->next = p;
+			cursor->prev = node;
+			node->next = cursor;
 		} else {
-			g_6b6f84 = n;
+			g_6b6f84 = node;
 		}
 	}
-	return n;
+	return node;
 }

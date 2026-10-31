@@ -32,7 +32,7 @@ extern char s_6ab8fc[];
 int __cdecl fcn_0046e940(int, int, int, int, int);
 void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_00519190(char*, ...);
+int __cdecl io_AppendText(char*, ...);
 char* __cdecl fcn_00502cd0(int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_005c61e0(int);
@@ -56,18 +56,18 @@ void __cdecl fcn_005b4500(void)
 				g_774654 = 1;
 			}
 			g_772514 = w;
-			fcn_00519190(s_6811b0);
+			io_AppendText(s_6811b0);
 			for (i = 0; i < 768; i++) {
 				if (((Player*)g_7f4ca0)[i].x0 != 0xffff) {
 					n = 0;
 					for (e = fcn_00502cd0(((Player*)g_7f4ca0)[i].x178, 1, 5); e != 0; e = gm_NextEntityQueryMatch()) {
 						if (fcn_005c61e0(*(unsigned short*) e) != 0 && *(int*) (e + 0x21) != 0) {
 							if (n == 0) {
-								fcn_00519190(s_6ab848, ((Player*)g_7f4ca0)[i].name);
-								fcn_00519190(s_6ab834);
+								io_AppendText(s_6ab848, ((Player*)g_7f4ca0)[i].name);
+								io_AppendText(s_6ab834);
 							}
 							n++;
-							fcn_00519190(s_6ab8fc, *(unsigned short*) e * 2 + 0x9a8, *(int*) (e + 0x1c));
+							io_AppendText(s_6ab8fc, *(unsigned short*) e * 2 + 0x9a8, *(int*) (e + 0x1c));
 						}
 					}
 				}

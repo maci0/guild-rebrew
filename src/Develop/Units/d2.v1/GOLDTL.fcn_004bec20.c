@@ -5,7 +5,7 @@ extern char* g_1015ea0;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(char* fmt, ...);
+int __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl d2_CreateRadioGroup(int);
 int __cdecl fcn_0052dee0(int, int, int);
@@ -54,9 +54,9 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 	g = fcn_00470820(0, 0, "misc\\routing_choose_good_enhanced");
 	fcn_00471b60(g);
 	d2_SetForm(g, 1);
-	fcn_00519190("$Z%2N3$A%1G", *(unsigned short*) (a0 + 0x27), a0);
+	io_AppendText("$Z%2N3$A%1G", *(unsigned short*) (a0 + 0x27), a0);
 	d2_SetForm(g, 4);
-	v4 = fcn_00472250(g, 4, fcn_00519190(0x7d));
+	v4 = fcn_00472250(g, 4, io_AppendText(0x7d));
 	d2_SetForm(g, 3);
 	k = d2_CreateRadioGroup(0);
 	for (i = 0; i < 7; i++) {

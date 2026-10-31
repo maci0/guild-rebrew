@@ -16,7 +16,7 @@ int __cdecl ch_DeclareAction(int idx, int handler, unsigned char kind, const cha
 		return 0;
 	}
 	if (g_14d0c40[idx].handler != 0) {
-		fcn_0041d9e0("slot already in use");
+		ReportClientMessage("slot already in use");
 		return 0;
 	}
 	g_14d0c40[idx].handler = handler;

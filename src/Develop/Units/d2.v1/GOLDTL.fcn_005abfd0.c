@@ -24,8 +24,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00473a90(int, int);
-int __cdecl fcn_00519190(int, ...);
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00471f80(int);
@@ -61,18 +61,18 @@ void __cdecl fcn_005abfd0(unsigned char* e)
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(g_772514);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x197f);
+	io_AppendText(0x197f);
 	if (amt != 0) {
-		btnB = fcn_00472250(dlg, 1, fcn_00519190(0x1981, amt));
+		btnB = fcn_00472250(dlg, 1, io_AppendText(0x1981, amt));
 		d2_SetElementValue(btnB, 2, 6, 2);
-		btnA = fcn_00472250(dlg, 1, fcn_00519190(0x1982));
-		btnC = fcn_00472250(dlg, 1, fcn_00519190(0x1983));
+		btnA = fcn_00472250(dlg, 1, io_AppendText(0x1982));
+		btnC = fcn_00472250(dlg, 1, io_AppendText(0x1983));
 		flag = 1;
 	}
 	else {
-		fcn_00519190(0x1980);
+		io_AppendText(0x1980);
 	}
 	g_100f1dc = -1;
 	do {

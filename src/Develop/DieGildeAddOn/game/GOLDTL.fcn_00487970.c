@@ -35,7 +35,7 @@ void __cdecl fcn_004c4ef0(char* s);
 void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c5150(int a, int b, char c, int n);
 int __cdecl fcn_0051e070(void);
-void __cdecl fcn_0051af00(void* out, int id, ...);
+void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, int h);
 
 /* ADDRESS: GOLD 0x4884a0 */
@@ -97,18 +97,18 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 	switch (fcn_0051e070()) {
 	case 0:
 		if (n == 1) {
-			fcn_0051af00(buf, 0x1bbc, *(unsigned short*) e, *(char**) (e + 0x16c));
+			io_FormatTextBuffer(buf, 0x1bbc, *(unsigned short*) e, *(char**) (e + 0x16c));
 		}
 		else {
-			fcn_0051af00(buf, 0x1bbd, *(unsigned short*) e, *(char**) (e + 0x16c), n);
+			io_FormatTextBuffer(buf, 0x1bbd, *(unsigned short*) e, *(char**) (e + 0x16c), n);
 		}
 		break;
 	case 1:
 		if (n == 1) {
-			fcn_0051af00(buf, 0x1bbc, *(unsigned short*) e, *(char**) (e + 0x16c));
+			io_FormatTextBuffer(buf, 0x1bbc, *(unsigned short*) e, *(char**) (e + 0x16c));
 		}
 		else {
-			fcn_0051af00(buf, 0x1bbd, *(unsigned short*) e, *(char**) (e + 0x16c), n);
+			io_FormatTextBuffer(buf, 0x1bbd, *(unsigned short*) e, *(char**) (e + 0x16c), n);
 		}
 		break;
 	}

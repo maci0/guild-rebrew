@@ -30,7 +30,7 @@ extern int g_9afde0;
 extern int g_9afde4;
 
 int __cdecl gm_RandomMod(int a);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004e04f0(char* a0);
 void __cdecl fcn_004e4f10(void* event);
 void __cdecl fcn_004e4730(char* name);
@@ -47,7 +47,7 @@ int __cdecl fcn_004e4470(char* name);
 int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5);
 void __cdecl fcn_00407800(char* e, int mode, char* name);
 int __cdecl d2_SetForm(int k, int i);
-void __cdecl fcn_00519190(int a, ...);
+void __cdecl io_AppendText(int a, ...);
 int __cdecl fcn_0064d41a(char* out, char* fmt, ...);
 int __cdecl fcn_004e4b20(int a, int b, char* c, int d);
 int __cdecl fcn_00423460(int* a);
@@ -67,7 +67,7 @@ int __cdecl fcn_004e6cb0(int n);
 void __cdecl fcn_004e0210(char* a, char* b, char* c);
 int __cdecl srv_GetEntityOfficeSlot(char* ent, int* role, int* slot);
 int __cdecl fcn_004e8240(int id, int ea, int eb, int x1, int x2);
-void __cdecl fcn_0051af00(char* out, int id, int a, int b);
+void __cdecl io_FormatTextBuffer(char* out, int id, int a, int b);
 int __cdecl fcn_00545d40(int id, int arg, char* t1, int flags, int value, char* t2);
 int __cdecl fcn_004e4aa0(int a);
 void __cdecl fcn_004e4610(int a);
@@ -76,7 +76,7 @@ void __cdecl fcn_004e4910(void);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004230e0(char* p);
 void __cdecl fcn_004cfe20(void);
-void __cdecl fcn_0041d9e0(char* msg);
+void __cdecl ReportClientMessage(char* msg);
 int __cdecl fcn_004e3640(void);
 
 /* ADDRESS: GOLDTL 0x004e0620 */
@@ -116,8 +116,8 @@ void __cdecl cut_MainDuell(char* a0)
     t = gm_RandomMod(3);
     sel0 = ((unsigned short) t) - 5;
     other = 0;
-    e1 = fcn_00508e40(*(int*) (a0 + 0x34));
-    e2 = fcn_00508e40(*(int*) (a0 + 0x38));
+    e1 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
+    e2 = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
     if (e1 == 0 || e2 == 0)
         goto fail;
     if (g_772f3c != 0) {
@@ -150,8 +150,8 @@ void __cdecl cut_MainDuell(char* a0)
     bank = fcn_004c3100((char*) 0x68ce08, 0);
     event = fcn_004e4470((char*) 0x68cde8);
 
-    e1 = fcn_00508e40(*(int*) (a0 + 0x34));
-    e2 = fcn_00508e40(*(int*) (a0 + 0x38));
+    e1 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
+    e2 = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
     sB = *(Snap*) e1;
     sA = *(Snap*) e2;
     g_9afde4 = (int) &sB;
@@ -173,8 +173,8 @@ void __cdecl cut_MainDuell(char* a0)
     lvl = lvl * 3 + 0x10cb;
     do {
         d2_SetForm(g_68bfc0, 0);
-        fcn_00519190(0x6811b0);
-        fcn_00519190(lvl + i);
+        io_AppendText(0x6811b0);
+        io_AppendText(lvl + i);
         fcn_0064d41a(buf1, (char*) 0x68cd94, i);
         p = (char*) fcn_004e4b20(-7, 0, buf1, -1);
         if (p != 0) {
@@ -190,10 +190,10 @@ void __cdecl cut_MainDuell(char* a0)
     fcn_0040c120((char*) sA.entity, 0x35, fcn_00445600(0, 0x100, 0, (char*) 0x68cd3c));
 
     d2_SetForm(g_68bfc0, 0);
-    fcn_00519190(0x6811b0);
-    fcn_00519190(0x10dd);
+    io_AppendText(0x6811b0);
+    io_AppendText(0x10dd);
     fcn_004e4c90(4);
-    fcn_00519190(0x6811b0);
+    io_AppendText(0x6811b0);
     fcn_004c3030(-7, 0, (int) 0x68cd18, -1);
 
     fcn_004e51d0((unsigned int*) a0, (int) a0);
@@ -204,8 +204,8 @@ void __cdecl cut_MainDuell(char* a0)
     if (*(unsigned char*) (e + 0x94) == 1) {
         t = fcn_004de610(6);
         d2_SetForm(g_68bfc0, 0);
-        fcn_00519190(t + 0x10df);
-        fcn_00519190(0x68b300);
+        io_AppendText(t + 0x10df);
+        io_AppendText(0x68b300);
         fcn_004c3030(sel0, bank, (int) 0x68cce4, t);
         p = fcn_0040c230((char*) sB.entity, 0x4dff50, 6, 0x2e, 1);
         *(int*) (p + 0x180) = (int) &sB;
@@ -221,7 +221,7 @@ void __cdecl cut_MainDuell(char* a0)
     if (*(unsigned char*) (e + 0x94) == 1) {
         t = fcn_004de610(6);
         d2_SetForm(g_68bfc0, 0);
-        fcn_00519190(t + 0x10df);
+        io_AppendText(t + 0x10df);
         fcn_004c3030(sel0, bank, (int) 0x68cce4, t);
         p = fcn_0040c230((char*) sA.entity, 0x4dff50, 6, 0x2e, 1);
         *(int*) (p + 0x180) = (int) &sA;
@@ -252,12 +252,12 @@ void __cdecl cut_MainDuell(char* a0)
         if ((g_772f5a != 0 || g_772f5c != 0) && (g_772f5b != 0 || g_772f5d != 0)) {
             t = fcn_004e6cb0(9);
             d2_SetForm(g_68bfc0, 0);
-            fcn_00519190(t + 0x1113);
+            io_AppendText(t + 0x1113);
             fcn_004c3030(-5, 0, (int) 0x68ccac, t);
             fcn_004e4c90(5);
         }
         d2_SetForm(g_68bfc0, 0);
-        fcn_00519190(0x6811b0);
+        io_AppendText(0x6811b0);
         j++;
         if (j >= 3)
             break;
@@ -271,60 +271,60 @@ compare:
             p = (char*) &sB;
         }
         d2_SetForm(g_68bfc0, 0);
-        fcn_00519190(0x6811b0);
+        io_AppendText(0x6811b0);
         n = *(unsigned short*) p;
-        fcn_00519190(0x111d, n, n);
+        io_AppendText(0x111d, n, n);
         fcn_004e4c90(5);
     } else {
         d2_SetForm(g_68bfc0, 0);
-        fcn_00519190(0x6811b0);
-        fcn_00519190(0x111c);
+        io_AppendText(0x6811b0);
+        io_AppendText(0x111c);
         p = other;
     }
 
     d2_SetForm(g_68bfc0, 0);
-    fcn_00519190(0x6811b0);
+    io_AppendText(0x6811b0);
     n = g_772f58;
     if (keepA == 0) {
         if (n != 0) {
-            fcn_00519190(0x111e, sB.id & 0xffff);
+            io_AppendText(0x111e, sB.id & 0xffff);
             fcn_004ff210(sB.id, (int) ((g_772f58 & 0xff) * 5.0));
             sB.acc = (int) ((g_772f58 & 0xff) * 5.0 + sB.acc);
         } else {
-            fcn_00519190(0x111f, sB.id & 0xffff, sB.id & 0xffff);
+            io_AppendText(0x111f, sB.id & 0xffff, sB.id & 0xffff);
         }
     } else {
         if (n != 0)
-            fcn_00519190(0x1120, sB.id & 0xffff);
+            io_AppendText(0x1120, sB.id & 0xffff);
         else
-            fcn_00519190(0x1121, sB.id & 0xffff);
+            io_AppendText(0x1121, sB.id & 0xffff);
     }
     fcn_004e4c90(4);
 
     d2_SetForm(g_68bfc0, 0);
-    fcn_00519190(0x6811b0);
+    io_AppendText(0x6811b0);
     n = g_772f59;
     if (keepB == 0) {
         if (n != 0) {
-            fcn_00519190(0x111e, sA.id & 0xffff);
+            io_AppendText(0x111e, sA.id & 0xffff);
             fcn_004ff210(sA.id, (int) ((g_772f59 & 0xff) * 5.0));
             sA.acc = (int) ((g_772f59 & 0xff) * 5.0 + sA.acc);
         } else {
-            fcn_00519190(0x111f, sA.id & 0xffff, sA.id & 0xffff);
+            io_AppendText(0x111f, sA.id & 0xffff, sA.id & 0xffff);
         }
     } else {
         if (n != 0)
-            fcn_00519190(0x1120, sA.id & 0xffff);
+            io_AppendText(0x1120, sA.id & 0xffff);
         else
-            fcn_00519190(0x1121, sA.id & 0xffff);
+            io_AppendText(0x1121, sA.id & 0xffff);
     }
     fcn_004e4c90(4);
 
     d2_SetForm(g_68bfc0, 0);
-    fcn_00519190(0x6811b0);
+    io_AppendText(0x6811b0);
     if (p != 0) {
         if (*(unsigned char*) (p + 0x166) != 0) {
-            fcn_00519190(0x1123 + *(unsigned char*) (p + 9), *(unsigned short*) p);
+            io_AppendText(0x1123 + *(unsigned char*) (p + 9), *(unsigned short*) p);
             fcn_004c3030(-8, 0, (int) 0x68cc9c, *(unsigned char*) (p + 9) + 1);
             if (srv_GetEntityOfficeSlot(p, outR, outS) != 0) {
                 if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + (g_774970 & 0xffff) * 0x21c)) {
@@ -332,7 +332,7 @@ compare:
                     q = (char*) 0x7f4ca2;
                     do {
                         if (*q == 6 || *q == 7) {
-                            fcn_0051af00(buf2, 0x10c7, *(unsigned short*) p,
+                            io_FormatTextBuffer(buf2, 0x10c7, *(unsigned short*) p,
                                 (*(unsigned char*) (p + 9) != 0) + 0x10c8);
                             fcn_00545d40(*(int*) (q + 2), -1, buf2, 0, 0x5fe,
                                 (char*) 0x6b5c60);
@@ -343,7 +343,7 @@ compare:
             }
         }
     } else {
-        fcn_00519190(0x1122, sB.id & 0xffff, sA.id & 0xffff);
+        io_AppendText(0x1122, sB.id & 0xffff, sA.id & 0xffff);
         fcn_004c3030(-8, 0, (int) 0x68cc9c, 0);
     }
 
@@ -366,7 +366,7 @@ compare:
     fcn_004e3640();
 
 err:
-    fcn_0041d9e0((char*) 0x68cc70);
+    ReportClientMessage((char*) 0x68cc70);
 fail:
     return;
 }

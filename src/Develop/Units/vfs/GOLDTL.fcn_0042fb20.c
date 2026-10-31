@@ -1,13 +1,13 @@
 #include <string.h>
 
-void* __cdecl fcn_00464650(char*);
+void* __cdecl unzOpen(const char* path);
 void* __cdecl fcn_0042e5a0(char*, void*);
-int __cdecl fcn_00464a90(void*, unsigned long*, char*, unsigned long, void*, unsigned long, char*, unsigned long);
+int __cdecl unzGetCurrentFileInfo(void* file, unsigned long* info, char* name, unsigned long name_size, void* extra, unsigned long extra_size, char* comment, unsigned long comment_size);
 void __cdecl fcn_0042e520(char*);
 void __cdecl fcn_0042e540(char*);
-int __cdecl fcn_00465750(void*, unsigned long*, unsigned long*);
+int __cdecl unzGetFilePos(void* file, unsigned long* pos, unsigned long* num);
 void __cdecl fcn_0042ed00(char*, void*, void*, unsigned long, unsigned long, int, unsigned long);
-int __cdecl fcn_00464eb0(void*);
+int __cdecl unzGoToNextFile(void* file);
 void __cdecl unzClose(void*);
 
 
@@ -24,7 +24,7 @@ void __cdecl fcn_0042fb20(char* path, void* parent, int flags)
 	unsigned long info[0x14];
 	char buf[0x100];
 
-	zip = fcn_00464650(path);
+	zip = unzOpen(path);
 	if (zip == 0) {
 		return;
 	}
@@ -39,14 +39,14 @@ void __cdecl fcn_0042fb20(char* path, void* parent, int flags)
 	strcat(name, "/");
 	dir = fcn_0042e5a0(name, parent);
 	do {
-		if (fcn_00464a90(zip, info, buf, 0x100, 0, 0, 0, 0) == 0) {
+		if (unzGetCurrentFileInfo(zip, info, buf, 0x100, 0, 0, 0, 0) == 0) {
 			fcn_0042e520(buf);
 			fcn_0042e540(buf);
 			if (info[7] > 0) {
-				fcn_00465750(zip, &pos, &num);
+				unzGetFilePos(zip, &pos, &num);
 				fcn_0042ed00(buf, dir, dir, pos, num, flags, info[4]);
 			}
 		}
-	} while (fcn_00464eb0(zip) == 0);
+	} while (unzGoToNextFile(zip) == 0);
 	unzClose(zip);
 }

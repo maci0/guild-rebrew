@@ -10,7 +10,7 @@ extern char g_14cc600[];
 void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 
 /* ADDRESS: GOLDTL 0x0041d9e0 */
-void __cdecl fcn_0041d9e0(const char* msg)
+void __cdecl ReportClientMessage(const char* msg)
 {
 	if (g_6b6f48 == 0) {
 		MessageBoxA(0, "ERROR-Handler has not been started...", "Error!", 0x10030);

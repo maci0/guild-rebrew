@@ -7,7 +7,7 @@ extern float g_662a70;
 extern float g_664174;
 extern float g_664090;
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 float __cdecl fcn_00507e70(char* a, char* b, int c);
 int __cdecl fcn_005c6270(char* a1, int a2);
@@ -30,8 +30,8 @@ int __cdecl fcn_00493a30(unsigned short* key, char* e)
 	if (*(int*) (e + 8) == 1) {
 		return 0;
 	}
-	p1 = fcn_00508e40(*(int*) (e + 0x18));
-	p2 = fcn_00508e40(*(int*) (e + 0x14));
+	p1 = gm_LookupEntityRecordById(*(int*) (e + 0x18));
+	p2 = gm_LookupEntityRecordById(*(int*) (e + 0x14));
 	f1 = fcn_0050f980(*(unsigned short*) p1, *key, 1) * g_662910;
 	f2 = fcn_0050f980(*(unsigned short*) p2, *key, 1) * g_662910;
 	if (fcn_005c6270(p1, 0x22e) != 0) {

@@ -19,13 +19,13 @@ extern char* g_14a9ab4;
 extern char* g_14a9ac0;
 extern char g_6b5c60[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_FindRecordById(int);
 int __cdecl fcn_0050de80(char* e, Stats* s);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_004d5450(int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_004e6240(char*, char*, char*, char*);
 
 // Sends the two parties of a transfer (+0x34, +0x38) their message pair,
@@ -46,8 +46,8 @@ int __cdecl fcn_004d74b0(char* x)
 	int* id;
 	unsigned char flags;
 
-	a = fcn_00508e40(*(int*) (x + 0x34));
-	b = fcn_00508e40(*(int*) (x + 0x38));
+	a = gm_LookupEntityRecordById(*(int*) (x + 0x34));
+	b = gm_LookupEntityRecordById(*(int*) (x + 0x38));
 	if (a == 0 || b == 0 || a == b) {
 		return 0;
 	}
@@ -72,26 +72,26 @@ int __cdecl fcn_004d74b0(char* x)
 	}
 	flags = x[0x7c];
 	if (flags & 1) {
-		fcn_0051af00(buf, 0x11e0, *(unsigned short*) b);
+		io_FormatTextBuffer(buf, 0x11e0, *(unsigned short*) b);
 		strcat(buf, g_14a9aa8);
 		fcn_004e6240(a, x, buf, g_6b5c60);
-		fcn_0051af00(buf, 0x11e1, *(unsigned short*) a);
+		io_FormatTextBuffer(buf, 0x11e1, *(unsigned short*) a);
 		strcat(buf, g_14a9aa8);
 		fcn_004e6240(b, x, buf, g_6b5c60);
 	} else if (flags & 2) {
 		t = fcn_004d5450(gm_SearchTable67(*(int*) (x + 0x10c))) + 0x1125;
-		fcn_0051af00(buf, 0x11e3, t, *(unsigned short*) b, t67);
+		io_FormatTextBuffer(buf, 0x11e3, t, *(unsigned short*) b, t67);
 		strcat(buf, g_14a9ab4);
 		fcn_004e6240(a, x, buf, g_6b5c60);
-		fcn_0051af00(buf, 0x11e4, *(unsigned short*) a, t, t67);
+		io_FormatTextBuffer(buf, 0x11e4, *(unsigned short*) a, t, t67);
 		strcat(buf, g_14a9ab4);
 		fcn_004e6240(b, x, buf, g_6b5c60);
 		return 1;
 	} else if (flags & 4) {
-		fcn_0051af00(buf, 0x11e6, *(unsigned short*) b);
+		io_FormatTextBuffer(buf, 0x11e6, *(unsigned short*) b);
 		strcat(buf, g_14a9ac0);
 		fcn_004e6240(a, x, buf, g_6b5c60);
-		fcn_0051af00(buf, 0x11e7, *(unsigned short*) a);
+		io_FormatTextBuffer(buf, 0x11e7, *(unsigned short*) a);
 		strcat(buf, g_14a9ac0);
 		fcn_004e6240(b, x, buf, g_6b5c60);
 	}

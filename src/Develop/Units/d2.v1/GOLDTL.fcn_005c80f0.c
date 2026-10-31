@@ -34,7 +34,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CreateRadioGroup(int n, ...);
 int __cdecl fcn_0046f740(int x, int y, int a3, int win);
 void __cdecl fcn_00469470(int g, int id);
@@ -71,7 +71,7 @@ void __cdecl fcn_005c80f0(void)
 	d2_SetForm(d, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(d, 1);
-	fcn_00519190(0x85);
+	io_AppendText(0x85);
 	d2_SetForm(d, 2);
 	grp = d2_CreateRadioGroup(0);
 	for (i = 0; i < 8; i++) {
@@ -87,7 +87,7 @@ void __cdecl fcn_005c80f0(void)
 		}
 	}
 	d2_SetForm(d, 3);
-	back = fcn_00472250(d, 3, fcn_00519190(0x7f));
+	back = fcn_00472250(d, 3, io_AppendText(0x7f));
 	g_102cbc4[grp].sel = -1;
 	fcn_00525ef0();
 	do {

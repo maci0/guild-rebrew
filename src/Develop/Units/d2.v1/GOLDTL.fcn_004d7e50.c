@@ -8,7 +8,7 @@ int __cdecl fcn_00468df0(int, int, int, unsigned int, unsigned int);
 void __cdecl fcn_00469090(int);
 int __cdecl fcn_004677e0(int, int, int, int, unsigned int, int, int,
                         unsigned int);
-void __cdecl fcn_00519190(int);
+void __cdecl io_AppendText(int);
 void __cdecl fcn_004d0ec0(void);
 void __cdecl fcn_004d0c70(void);
 
@@ -37,7 +37,7 @@ void __cdecl fcn_004d7e50(void)
 	                      0x2f4 +
 	                  0x5c) = 1;
 	d2_SetForm(*(unsigned int*) 0x68bfc0, 0);
-	fcn_00519190(0x6811b0);
+	io_AppendText(0x6811b0);
 	fcn_004d0ec0();
 	fcn_004d0c70();
 }

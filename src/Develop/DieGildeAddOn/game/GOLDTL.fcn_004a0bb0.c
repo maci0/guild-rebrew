@@ -1,7 +1,7 @@
 extern float g_664150;
 extern unsigned char g_773d75;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0047dd60(char*);
 int __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -29,7 +29,7 @@ int __cdecl fcn_004a0bb0(int a0, char* ent, int a2, char* out1, char* out2)
 		return 0;
 	}
 	if (*(unsigned char*) (ent + 2) != 5) {
-		q = fcn_00508e40(*(int*) (ent + 0x5c));
+		q = gm_LookupEntityRecordById(*(int*) (ent + 0x5c));
 		if (q != 0) {
 			if (*(unsigned char*) (q + 2) == 5 || *(unsigned char*) (q + 2) == 6 || *(unsigned char*) (q + 2) == 7) {
 				return 0;
@@ -43,7 +43,7 @@ int __cdecl fcn_004a0bb0(int a0, char* ent, int a2, char* out1, char* out2)
 	}
 	best = 0;
 	for (i = 0; i < 5; i++) {
-		q = fcn_00508e40(*(int*) (ent + 0x68 + i * 4));
+		q = gm_LookupEntityRecordById(*(int*) (ent + 0x68 + i * 4));
 		if (q == 0) {
 			continue;
 		}

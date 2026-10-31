@@ -17,7 +17,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 extern __int64 g_666018;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
 int __cdecl fcn_004a5e60(struct house* p, int kind, F8 f, int c, float r, int* out);
@@ -28,7 +28,7 @@ void __cdecl fcn_00562a60(char* e)
 	char* t;
 	int found;
 
-	fcn_00508e40(*(int*) (e + 0xb4));
+	gm_LookupEntityRecordById(*(int*) (e + 0xb4));
 	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
 	if (*(int*) (e + 0x10) == -1) {
 		t = gm_StartFilteredEntitySearch(1, 5, 0x16);
@@ -38,7 +38,7 @@ void __cdecl fcn_00562a60(char* e)
 	}
 	*(int*) (e + 0xc8) = -1;
 	*(int*) (e + 0xcc) = fcn_004c64b0(0x11, *(int*) (e + 0x10), -1, 0, 2, 0x154, "PRUEGEL");
-	h = fcn_00508e40(*(int*) (e + 0xb4));
+	h = gm_LookupEntityRecordById(*(int*) (e + 0xb4));
 	if (*(char**) (h + 0x170) != 0) {
 		t = *(char**) (h + 0x170);
 	} else {

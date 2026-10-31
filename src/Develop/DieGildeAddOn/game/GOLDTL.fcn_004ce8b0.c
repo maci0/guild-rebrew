@@ -11,7 +11,7 @@ float __cdecl fcn_004ce8b0(char* e)
 	int* p;
 
 	mult = 0.5f;
-	base = fcn_00507f10(e, 3);
+	base = gm_GetEntitySkill(e, 3);
 	p = fcn_004ce610(e);
 	if (p != 0) {
 		switch (*p) {

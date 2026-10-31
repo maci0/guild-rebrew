@@ -55,7 +55,7 @@ int __cdecl fcn_004432d0(int a, int b);
 void __cdecl fcn_00514f10(void);
 void __cdecl fcn_00514fc0(void);
 int __cdecl ls_LoadCharacter(void* stream);
-char* __cdecl fcn_00508e40(int handle);
+char* __cdecl gm_LookupEntityRecordById(int handle);
 int __cdecl fcn_004b6580(void* stream);
 int __cdecl fcn_00592370(void* stream);
 int __cdecl fcn_005b1ff0(void* stream);
@@ -206,8 +206,8 @@ int __cdecl fcn_00521920(char* cpath)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	gm_RichterKatholisch = fcn_00508e40((int) gm_RichterKatholisch);
-	gm_RichterEvangelisch = fcn_00508e40((int) gm_RichterEvangelisch);
+	gm_RichterKatholisch = gm_LookupEntityRecordById((int) gm_RichterKatholisch);
+	gm_RichterEvangelisch = gm_LookupEntityRecordById((int) gm_RichterEvangelisch);
 	if (fcn_004b6580(stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);

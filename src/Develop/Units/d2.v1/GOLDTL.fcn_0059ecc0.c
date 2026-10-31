@@ -32,17 +32,17 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00533dc0(int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_00594340(void);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_0046f9b0(int, int);
 void __cdecl fcn_00472640(int, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00595e20(int, int);
 void __cdecl fcn_005963f0(int, int, int, int);
 int __cdecl fcn_005373e0(int, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_004c35f0(void);
 void __cdecl fcn_0052ae70(void);
 int __cdecl fcn_004c5530(void*);
@@ -95,7 +95,7 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 	d2_SetForm(total, 0);
 	fcn_00533dc0(*(int*) 0x772514, 0x70f, 0x741);
 	d2_SetForm(total, 3);
-	fcn_00519190(0x1806);
+	io_AppendText(0x1806);
 	fcn_0052a0c0(a0, 0);
 	fcn_00594340();
 	fcn_00471b60(total);
@@ -114,7 +114,7 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 		fcn_00472640(h, 1);
 		cnt++;
 	}
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00595e20(a0, ids[6]);
 	fcn_005963f0(total, 1, 0, a0);
 	sel = fcn_005373e0(0x59ecc0, 0x677c7);
@@ -140,13 +140,13 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 		for (i = 0; i < 3; i++) {
 			fcn_00472640(handles[i], 1);
 			if (ids[i + 3] == 1) {
-				fcn_0051af00(text, 0x1807, 1);
+				io_FormatTextBuffer(text, 0x1807, 1);
 			}
 			else if (ids[i + 3] > 1) {
-				fcn_0051af00(text, 0x1808, ids[i + 3]);
+				io_FormatTextBuffer(text, 0x1808, ids[i + 3]);
 			}
 			else {
-				fcn_0051af00(text, 0x679060,
+				io_FormatTextBuffer(text, 0x679060,
 					(int) ids[i] * 2 + 0x9a8);
 			}
 			fcn_0046f9b0(handles[i], text);

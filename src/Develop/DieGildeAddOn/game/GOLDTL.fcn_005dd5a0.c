@@ -1,8 +1,8 @@
 /* Pick three free building sites around the selected plot and place the
  * scene objects there. */
 
-char* __cdecl fcn_00508e40(int);
-int __cdecl fcn_0051af00(char*, int, ...);
+char* __cdecl gm_LookupEntityRecordById(int);
+int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_005cd440(int*, char*, int, int);
 int __cdecl fcn_005c6270(void*, int);
 unsigned int __cdecl gm_RandomMod(int);
@@ -32,7 +32,7 @@ unsigned int __cdecl fcn_005dd5a0(unsigned short* a0, unsigned int* a1)
 
 	a1[4] = 1;
 	if ((char) a0[1] != 6) {
-		v4 = (int) fcn_00508e40(a1[1]);
+		v4 = (int) gm_LookupEntityRecordById(a1[1]);
 	} else {
 		for (v6 = 0; v6 < 0x14; v6++) {
 			v8[v6] = 0;
@@ -40,7 +40,7 @@ unsigned int __cdecl fcn_005dd5a0(unsigned short* a0, unsigned int* a1)
 		for (v6 = 0; v6 < 8; v6++) {
 			v9[v6] = 0xffffffff;
 		}
-		fcn_0051af00(v10, 0x9c);
+		io_FormatTextBuffer(v10, 0x9c);
 		v8[2] = *(unsigned int*) 0x666018;
 		v8[0] = 0;
 		v8[1] = 0x400;
@@ -106,11 +106,11 @@ label_5dd807:
 	fcn_004c54c0(*(int*) (v4 + 2), *(int*) (v15 + 2), v6, 1);
 	if ((char) *(unsigned short*) (v4 + 2) == 6 ||
 	    (char) *(unsigned short*) (v4 + 2) == 7) {
-		fcn_0051af00(v11, 0xfec, *(unsigned short*) v12[0],
+		io_FormatTextBuffer(v11, 0xfec, *(unsigned short*) v12[0],
 		             *(unsigned short*) v12[1], *(unsigned short*) v15);
 		fcn_00545d40(*(int*) (v4 + 2), 0xffffffff, v11, 1, 0x5fb, 0);
 	}
-	fcn_0051af00(v11, 0xfed, *(unsigned short*) v4);
+	io_FormatTextBuffer(v11, 0xfed, *(unsigned short*) v4);
 	for (v6 = 0; v6 < 3; v6++) {
 		v2 = (char) v12[v6][1];
 		if (v2 == 6 || v2 == 7) {
@@ -122,7 +122,7 @@ label_5dd807:
 		return 1;
 	}
 	v6 = fcn_005c6220((int) *(unsigned short*) *a1, v13);
-	fcn_0051af00(v11, 0xfe8, *(unsigned short*) (v6 + 0x18) + 1,
+	io_FormatTextBuffer(v11, 0xfe8, *(unsigned short*) (v6 + 0x18) + 1,
 	             *(unsigned short*) v12[0], v3, *(unsigned short*) v15);
 	fcn_005dbe90(v11);
 	return 1;

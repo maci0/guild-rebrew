@@ -37,10 +37,10 @@ extern int g_774654;
 int __cdecl fcn_00526010(Ent5aa1*, int, unsigned char);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_004eb780(Ent5aa1*, Req5aa1*);
 int __cdecl fcn_005373e0(void*, int);
@@ -62,18 +62,18 @@ int __cdecl fcn_005aa120(int unused, char* p)
 	}
 	h = fcn_00470820(0, 0, g_6aaf58);
 	fcn_00471b60(h);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(h, 1);
-	fcn_00519190(0x165f);
+	io_AppendText(0x165f);
 	d2_SetForm(h, 2);
 	if (((Ent5aa1*)g_7f4ca0)[g_774970].b9 == 0) {
 		name = ((Ent5aa1*)g_7f4ca0)[g_774970].b169 + 0x253;
 	} else {
 		name = ((Ent5aa1*)g_7f4ca0)[g_774970].b169 + 0x27b;
 	}
-	t = fcn_00519190(0x1660, name, 5, cost, *(unsigned short*) (p + 0x27), p);
+	t = io_AppendText(0x1660, name, 5, cost, *(unsigned short*) (p + 0x27), p);
 	w1 = fcn_00472250(h, 2, t);
 	w2 = fcn_00472250(h, 2, t + 1);
 	g_100f1dc = -1;

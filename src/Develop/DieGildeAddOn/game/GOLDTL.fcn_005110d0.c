@@ -30,7 +30,7 @@ void __cdecl fcn_00455350(char* src, char* pos, float* out);
 void __cdecl ch_SetPosition(int, void*, int);
 char* __cdecl fcn_00407330(void);
 int __cdecl fcn_00413160(void);
-void __cdecl fcn_0041d9e0(const char* msg);
+void __cdecl ReportClientMessage(const char* msg);
 int __cdecl fcn_005373e0(void*, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
 
@@ -112,7 +112,7 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 		}
 		v = fcn_00413160();
 		if (v == -1) {
-			fcn_0041d9e0("init_LoadGebaeudeScene:Could not find a free universe...");
+			ReportClientMessage("init_LoadGebaeudeScene:Could not find a free universe...");
 		}
 		fcn_004432d0(v, 0);
 		fcn_00511040(a0, tmp);

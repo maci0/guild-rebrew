@@ -11,7 +11,7 @@ void __cdecl fcn_004011a0(void*, char*);
 void __cdecl fcn_00401280(void*, void*);
 void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_0041d9e0(const char*);
+void __cdecl ReportClientMessage(const char*);
 void __cdecl CloseVfsStream(void*);
 long __cdecl _ftol(float);
 
@@ -154,7 +154,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 							if (*(int*) (v26 + 0x140) != 0) {
 								if (v17 == -1
 									&& *(int*) (v26 + 0x140) != v22) {
-									fcn_0041d9e0((char*) 0x67b9ec);
+									ReportClientMessage((char*) 0x67b9ec);
 								}
 							}
 							else if (v17 >= 0) {
@@ -209,7 +209,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 						v29 += v22;
 						v3 = fcn_0044d770(v2);
 						if (v3 != 0x28) {
-							fcn_0041d9e0((char*) 0x67b968);
+							ReportClientMessage((char*) 0x67b968);
 						}
 						else {
 							v3 = fcn_0044d770(v2);
@@ -230,7 +230,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 							v3 = fcn_0044d770(v2);
 						}
 						if (v3 != 0x28) {
-							fcn_0041d9e0((char*) 0x67b92c);
+							ReportClientMessage((char*) 0x67b92c);
 						}
 						else {
 							v3 = fcn_0044d770(v2);
@@ -279,7 +279,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 				v3 = fcn_0044d770(v2);
 			}
 			if (v3 != 0x2f) {
-				fcn_0041d9e0((char*) 0x67b8e8);
+				ReportClientMessage((char*) 0x67b8e8);
 			}
 			if (v26 != 0) {
 				if (v17 >= 0) {

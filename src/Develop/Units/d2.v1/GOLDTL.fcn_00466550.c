@@ -115,7 +115,7 @@ void __cdecl fcn_00466550(int idx, int surf)
 		}
 		e = &((fcn_00466550_Ent*) g_1015ea0)[f->ent];
 		if (f->def == -1) {
-			font = (char*) fcn_00466190(*(int*) 0x67d39c);
+			font = (char*) d2_GetResourceData(*(int*) 0x67d39c);
 			g0 = fcn_0047b620(font, 0);
 			g1 = fcn_0047b620(font, 1);
 			g2 = fcn_0047b620(font, 2);
@@ -138,7 +138,7 @@ void __cdecl fcn_00466550(int idx, int surf)
 			fcn_0046bd20(f->x, e->i[0x14 / 4] + 1, v, e->i[0x1c / 4],
 			    surf, buf, 0x10);
 		} else {
-			font = (char*) fcn_00466190(f->def);
+			font = (char*) d2_GetResourceData(f->def);
 			e->i[0x1d4 / 4] = *(unsigned short*) (font + 6);
 			e->i[0x1d8 / 4] = *(unsigned short*) (font + 8);
 			if (e->i[0x60 / 4] != 0 && *(float*) (e + 0x1f4) == g_6628a8) {

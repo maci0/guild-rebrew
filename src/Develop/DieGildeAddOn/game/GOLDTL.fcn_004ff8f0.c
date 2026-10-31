@@ -5,7 +5,7 @@ extern int g_aed32c;
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004ff860(unsigned char*);
 float __cdecl fcn_004ff210(unsigned short, int);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fffb0(int);
 void __cdecl fcn_004c4510(void*, int);
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
@@ -60,8 +60,8 @@ void __cdecl fcn_004ff8f0(void)
 			continue;
 		if (!(652.8f <= (float) active)) {
 			if (s[0] == 8) {
-				p = (unsigned char*) fcn_00508e40(*(int*) (s + 0x60));
-				q = (unsigned char*) fcn_00508e40(*(int*) (s + 0x64));
+				p = (unsigned char*) gm_LookupEntityRecordById(*(int*) (s + 0x60));
+				q = (unsigned char*) gm_LookupEntityRecordById(*(int*) (s + 0x64));
 				if ((!p || p[2] == 0x0f) && (!q || q[2] == 0x0f)) {
 					if (fcn_004ff860(e)) {
 						v10 = (int) (-(*(float*) (s + 0x1a) + 1.0f));
@@ -73,8 +73,8 @@ void __cdecl fcn_004ff8f0(void)
 			}
 		}
 		if (s[0] == 8 && !fcn_004fffb0(*(unsigned short*) e)) {
-			p = (unsigned char*) fcn_00508e40(*(int*) (s + 0x60));
-			q = (unsigned char*) fcn_00508e40(*(int*) (s + 0x64));
+			p = (unsigned char*) gm_LookupEntityRecordById(*(int*) (s + 0x60));
+			q = (unsigned char*) gm_LookupEntityRecordById(*(int*) (s + 0x64));
 			if ((p && p[2] != 0x0f) || (q && q[2] != 0x0f))
 				continue;
 			v11 = 3;

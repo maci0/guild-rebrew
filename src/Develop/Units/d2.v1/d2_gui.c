@@ -15,7 +15,7 @@ void __cdecl d2_SetElementImage(int element, int bild)
     if (eintrag->kind < 0x40) {
         d2_SubRefcount(eintrag->f08);
     }
-    eintrag->data = fcn_00466190(bild);
+    eintrag->data = d2_GetResourceData(bild);
     eintrag->bild_offset = g_772568;
     eintrag->f08 = g_772568 + bild;
     eintrag->w = ((D2_BILD_GROESSE*) g_772500)[bild].breite;

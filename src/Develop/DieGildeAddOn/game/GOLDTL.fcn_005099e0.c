@@ -17,7 +17,7 @@ void __cdecl fcn_004c4510(void *, int);
 void __cdecl fcn_004c4670(int, int, int, void *);
 void __cdecl fcn_004c4570(int, int, int, void *);
 void __cdecl fcn_004c5360(void);
-void __cdecl fcn_0051af00(char *, int, ...);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl fcn_00545d40(int, int, int, int, int, char *);
 
 extern int g_773da8;
@@ -121,7 +121,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 			do {
 				if ((*((unsigned char *) it - 2) == 6 || *((unsigned char *) it - 2) == 7)
 					&& *(int *) it != *(int *) ((char *) arg1 + 4)) {
-					fcn_0051af00(buf, 0x1c4d, *(unsigned short *) arg1);
+					io_FormatTextBuffer(buf, 0x1c4d, *(unsigned short *) arg1);
 					fcn_00545d40(*(int *) it, -1, (int) buf, 0, 0x5fe, "_NACHRICHTEN_HS_70");
 					break;
 				}
@@ -136,7 +136,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 				if ((*(unsigned char *) (i * 0x21c + 0x7f4ca2) == 6
 					 || *(unsigned char *) (i * 0x21c + 0x7f4ca2) == 7)
 					&& *(int *) ((i * 0x87 + j) * 4 + 0x7f4cfc) == *(int *) ((char *) arg1 + 4)) {
-					fcn_0051af00(buf, 0x1c4e, *(unsigned short *) arg1);
+					io_FormatTextBuffer(buf, 0x1c4e, *(unsigned short *) arg1);
 					fcn_00545d40(*(int *) (i * 0x21c + 0x7f4ca4), -1, (int) buf, 0, 0x5f4,
 								 "_NACHRICHTEN_HS_63");
 					i = 0x300;
@@ -147,26 +147,26 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 		} while (i < 0x300);
 		return;
 	}
-	fcn_0051af00(out, 0x1c4a, *(unsigned short *) arg1);
+	io_FormatTextBuffer(out, 0x1c4a, *(unsigned short *) arg1);
 	if (cnt != 0) {
-		fcn_0051af00(buf, 0x1c4b);
+		io_FormatTextBuffer(buf, 0x1c4b);
 		strcat(out, buf);
 		for (i = 0; i < cnt; i++) {
 			if (i >= 6) {
 				if (i < cnt) {
-					fcn_0051af00(buf, 0xb6, cnt - i);
+					io_FormatTextBuffer(buf, 0xb6, cnt - i);
 					strcat(out, buf);
 				}
 				break;
 			}
 			if ((((unsigned char **) list)[i])[0x5a] == 0) {
-				fcn_0051af00(buf, (int) "%1G$A", list[i]);
+				io_FormatTextBuffer(buf, (int) "%1G$A", list[i]);
 			}
 			strcat(out, buf);
 		}
 	}
 	val = fcn_0050d2f0(arg1);
-	fcn_0051af00(buf, 0x1c4c, val);
+	io_FormatTextBuffer(buf, 0x1c4c, val);
 	strcat(out, buf);
 	fcn_00545d40(*(int *) ((char *) arg2 + 4), -1, (int) out, 1, 0x5ff, "_NACHRICHTEN_HS_63");
 }

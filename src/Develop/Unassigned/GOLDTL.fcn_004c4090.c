@@ -31,7 +31,7 @@ extern int g_aed330;
 extern pkt99 g_aed740[0x8000];
 extern cell10_fb5760 g_fb5760[0x8000];
 
-unsigned short __cdecl fcn_004c3a50(pkt99*);
+int __cdecl fcn_004c3a50(unsigned char*);
 
 /* ADDRESS: GOLDTL 0x004c4090 */
 int __cdecl fcn_004c4090(void)
@@ -54,8 +54,12 @@ int __cdecl fcn_004c4090(void)
 		seq = (g_1005768 += 1) & 0x7fff;
 		p = &g_aed740[seq];
 		p->type = 7;
-		p->crc = fcn_004c3a50(p);
+		p->crc = fcn_004c3a50((unsigned char*) p);
+#ifdef REBREW_GOLD
+		*(pkt99_payload*) p->data = *(pkt99_payload*) (0xa68800 + i);
+#else
 		*(pkt99_payload*) p->data = *(pkt99_payload*) (0xaece00 + i);
+#endif
 		p->flag = 0;
 		p->seq = seq;
 		p->cur = g_1005768;

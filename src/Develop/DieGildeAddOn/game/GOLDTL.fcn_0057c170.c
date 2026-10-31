@@ -37,7 +37,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 
 void __cdecl fcn_004c5530(struct msg*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 
 void __cdecl fcn_0057c170(struct house* a, struct house* b)
@@ -76,7 +76,7 @@ void __cdecl fcn_0057c170(struct house* a, struct house* b)
 		id = 0x41dc;
 		strcpy(name, "_NACHRICHTEN_ZIGEUNER_01");
 	}
-	fcn_0051af00(text1, 0x41e0, h->id, h->site);
-	fcn_0051af00(text2, id, text1);
+	io_FormatTextBuffer(text1, 0x41e0, h->id, h->site);
+	io_FormatTextBuffer(text2, id, text1);
 	fcn_00545d40(b->owner, -1, text2, 1, 0x5fb, name);
 }

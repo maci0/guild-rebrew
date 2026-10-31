@@ -17,14 +17,14 @@ extern char g_7f4ca4[];
 void* __cdecl fcn_005cd440(void*, char*, int, int);
 int __cdecl fcn_004e99c0(int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, ...);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_00525f60(char*, int);
@@ -76,7 +76,7 @@ void __cdecl fcn_0058a250(int a0)
 	ids[1] = n + 7;
 	ids[2] = n + 10;
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(g_772514);
@@ -89,16 +89,16 @@ void __cdecl fcn_0058a250(int a0)
 	d2_SetElementValue(elem, 0, 2, 0, 1);
 	fcn_00468bb0(elem, 3, *(int*) 0x14b5320, *(int*) 0x14b5324, *(int*) 0x14b5328);
 	d2_SetForm(dlg, 3);
-	v16 = fcn_00519190(0x4003);
+	v16 = io_AppendText(0x4003);
 	v22 = fcn_00472250(dlg, 3, v16);
 	v20 = fcn_00472250(dlg, 3, v16 + 1);
 	g_100f1dc = -1;
 	do {
 		v16 = fcn_00471f80(v16);
 		d2_SetForm(dlg, 1);
-		fcn_00519190(0x6811b0);
-		fcn_00519190(0x3ffd, 0x3ffb, *(unsigned short*) v6);
-		fcn_00519190(0x3ffe, ids[v16]);
+		io_AppendText(0x6811b0);
+		io_AppendText(0x3ffd, 0x3ffb, *(unsigned short*) v6);
+		io_AppendText(0x3ffe, ids[v16]);
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {

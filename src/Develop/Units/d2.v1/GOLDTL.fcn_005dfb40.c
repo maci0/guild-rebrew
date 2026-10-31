@@ -44,9 +44,9 @@ extern int g_67d370;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl fcn_005dfa40(int, int, Rec*);
@@ -80,9 +80,9 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	result = 0;
 	dlg = fcn_00470820(0, 0, s_6acf98);
 	fcn_00471b60(dlg);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 2);
-	fcn_00519190(title);
+	io_AppendText(title);
 	d2_SetForm(dlg, 0);
 	fcn_00533f40(0x140, 0x100, g_772514, fcn_00472830(dlg, 1), 0x18, &w, &h, &field);
 	memset(recs, 0, sizeof(recs));
@@ -90,7 +90,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	flag = mode & 1;
 	if (!flag) {
 		d2_SetForm(dlg, 3);
-		ok = fcn_00472250(dlg, 3, fcn_00519190(0x1ccc));
+		ok = fcn_00472250(dlg, 3, io_AppendText(0x1ccc));
 		d2_SetForm(dlg, 0);
 		list = fcn_00472250(dlg, 0, 0);
 		d2_SetElementValue(list, g_14ac654);

@@ -30,7 +30,7 @@ extern Win_f8f120 g_f8f120[];
 extern int g_14aadc0[];
 
 int __cdecl fcn_005cc240(int, int, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl fcn_005c9160(int, int, int, int, int);
@@ -48,7 +48,7 @@ int __cdecl fcn_005c07a0(int a1, int a2, int a3, unsigned int n, Item* items)
 	}
 	y = fcn_005cc240(a1, a2, a3);
 	half = ((Win*)g_f8f120)[g_772514].x8 / 2;
-	fcn_0051af00(buf, 0x16a7, items[0].x34 + 0x253);
+	io_FormatTextBuffer(buf, 0x16a7, items[0].x34 + 0x253);
 	fcn_005c9090((int) buf, half, 8, half * 2, 0x55);
 	for (i = 0; i < n; i++) {
 		items[i].x10 = 0x4b;

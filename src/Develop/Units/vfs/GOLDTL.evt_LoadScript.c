@@ -59,7 +59,7 @@ Script *__cdecl evt_LoadScript(char *name)
 	f = vfs_Tfopen(name, "rb", g_6b7fdc);
 	if (f == 0) {
 		fcn_0064d41a(msg, "evt_LoadScript: Could not open t_vfs_file: %s!", name);
-		fcn_0041d9e0(msg);
+		ReportClientMessage(msg);
 		return 0;
 	}
 	for (i = 0; i < 0x80; i++) {

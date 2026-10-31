@@ -42,7 +42,7 @@ int __cdecl fcn_00500cb0(char *, int);
 char *__cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050c710(char *, int, int);
 void __cdecl gm_ChangeObjektZustand(char *, int);
-void __cdecl fcn_0051af00(char *, int, ...);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl fcn_00545d40(int, int, char *, int, int, int);
 void __cdecl fcn_00546190(char *);
 void __cdecl fcn_00549330(char *, int);
@@ -50,7 +50,7 @@ void __cdecl fcn_0055d770(char *);
 void __cdecl fcn_0055dab0(char *);
 void __cdecl fcn_0055e4a0(char *);
 void __cdecl he_TransportStadtStadt(char *);
-void __cdecl fcn_0041d9e0(char *);
+void __cdecl ReportClientMessage(char *);
 void __cdecl fcn_004234e0(int, char *, int, int, int, int, int);
 void __cdecl fcn_0046f280(int);
 int __cdecl fcn_005a7400(char *, int, int);
@@ -128,7 +128,7 @@ void __cdecl he_RunTransport(char *e)
 			fcn_0055e4a0(e);
 			break;
 		default:
-			fcn_0041d9e0(g_6a63ec);
+			ReportClientMessage(g_6a63ec);
 			break;
 		}
 		*(int *)(e + 0xd4) = *(int *)(e + 0xd4) + 1;
@@ -139,7 +139,7 @@ void __cdecl he_RunTransport(char *e)
 		if (*(int *)(e + 0xd4) == 5) {
 			gm_ResolveEntityById(0, &q, 0, *(int *)(e + 0xac));
 			if ((unsigned short)gm_RandomMod(0x1e) > *(unsigned char *)(q + 0x12)) {
-				fcn_0051af00(buf, 0x1c46, *(unsigned short *)q * 2 + 0x9a8);
+				io_FormatTextBuffer(buf, 0x1c46, *(unsigned short *)q * 2 + 0x9a8);
 				fcn_00545d40(g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x5ec, 0);
 				fcn_004c6530(*(int *)(q + 2));
 				*(int *)(e + 0x84) = fcn_004c5620(-1, e);
@@ -170,7 +170,7 @@ void __cdecl he_RunTransport(char *e)
 			return;
 		}
 		if ((g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].kind == 6 || g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].kind == 7) && (*(unsigned char *)(q + 0x20) & 1) == 0) {
-			fcn_0051af00(buf, 0x1c45);
+			io_FormatTextBuffer(buf, 0x1c45);
 			fcn_00545d40(g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x608, 0);
 		}
 		gm_ChangeObjektZustand(*(char **)(q + 2), -0xa);

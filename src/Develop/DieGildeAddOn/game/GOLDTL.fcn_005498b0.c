@@ -30,7 +30,7 @@ typedef struct {
 extern char g_7f4ca4[];
 extern Time g_7f4c00;
 
-void __cdecl fcn_0051af00(char *, int, ...);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, int);
 void __cdecl fcn_004c5530(Msg *);
 float __cdecl fcn_004feff0(char *);
@@ -50,7 +50,7 @@ void __cdecl fcn_005498b0(char *a1, char *a2, char *a3, char *a4, int a5, float 
 
 	if (a6 <= 0.0f) {
 		if (a3[2] == 6 || a3[2] == 7) {
-			fcn_0051af00(buf, 0x1632, *(unsigned short *) a2, a4);
+			io_FormatTextBuffer(buf, 0x1632, *(unsigned short *) a2, a4);
 			he_MessageBoxQuickjump(*(int *) (a3 + 4), *(int *) (a4 + 1), buf, 0, 0x5ed, *(int *) (a4 + 1), -1, 0, 0);
 		}
 		memset(&m, 0, sizeof(m));
@@ -78,13 +78,13 @@ void __cdecl fcn_005498b0(char *a1, char *a2, char *a3, char *a4, int a5, float 
 				fcn_004c5da0(*(int *) (a2 + 4), x0, x4, 0, 0, "Unfall");
 			}
 			if (a3[2] == 6 || a3[2] == 7) {
-				fcn_0051af00(buf, 0x1631, *(unsigned short *) a2, a4, a5 + 0x1626);
+				io_FormatTextBuffer(buf, 0x1631, *(unsigned short *) a2, a4, a5 + 0x1626);
 				he_MessageBoxQuickjump(*(int *) (a3 + 4), *(int *) (a4 + 1), buf, 0, 0x5ed, *(int *) (a4 + 1), -1, 0, 0);
 			}
 			return;
 		}
 		if (a3[2] == 6 || a3[2] == 7) {
-			fcn_0051af00(buf, 0x1630, *(unsigned short *) a2, a4, a5 + 0x1626);
+			io_FormatTextBuffer(buf, 0x1630, *(unsigned short *) a2, a4, a5 + 0x1626);
 			he_MessageBoxQuickjump(*(int *) (a3 + 4), *(int *) (a4 + 1), buf, 0, 0x5ed, *(int *) (a4 + 1), -1, 0, 0);
 		}
 	}

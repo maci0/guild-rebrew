@@ -11,7 +11,7 @@ void __cdecl fcn_00500bb0(int, int, int, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_00455350(int, int, float*);
 void* __cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_00529670(int, int);
@@ -22,7 +22,7 @@ int __cdecl gm_RandomMod(int);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 char* __cdecl fcn_0050dc90(unsigned char*);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00546190(char*);
 
@@ -90,7 +90,7 @@ void __cdecl fcn_00560290(char* a0)
 					i = 0;
 					e = a0 + 0x8c;
 					do {
-						id = (unsigned short*) fcn_00508e40(*(int*) e);
+						id = (unsigned short*) gm_LookupEntityRecordById(*(int*) e);
 						if (id) {
 							fcn_004c5c80(*(int*) e);
 							fcn_004c5da0(*(int*) e, *(unsigned int*) (sel + 1), -1, 0, 0, (char*) 0x6a6508);
@@ -114,7 +114,7 @@ void __cdecl fcn_00560290(char* a0)
 			if (*(char*) (a0 + 0xac)) {
 				e = a0 + 0x8c;
 				do {
-					rec = fcn_00508e40(*(int*) e);
+					rec = gm_LookupEntityRecordById(*(int*) e);
 					if (rec && !fcn_00529670(rec, sel)) {
 						*(unsigned int*) (a0 + 0x70) = 2;
 						fcn_00500bb0((int) (a0 + 0x52), 0, 5, 0);
@@ -138,7 +138,7 @@ void __cdecl fcn_00560290(char* a0)
 			if (*(char*) (a0 + 0xac)) {
 				e = a0 + 0x8c;
 				do {
-					id = (unsigned short*) fcn_00508e40(*(int*) e);
+					id = (unsigned short*) gm_LookupEntityRecordById(*(int*) e);
 					if (id) {
 						found = 1;
 						fcn_004c5c80(*(int*) e);
@@ -163,7 +163,7 @@ void __cdecl fcn_00560290(char* a0)
 			if (*(char*) (a0 + 0xac)) {
 				e = a0 + 0x8c;
 				do {
-					rec = fcn_00508e40(*(int*) e);
+					rec = gm_LookupEntityRecordById(*(int*) e);
 					if (rec && !fcn_00529670(rec, (int) v9)) {
 						*(unsigned int*) (a0 + 0x70) = 4;
 						fcn_00500bb0((int) (a0 + 0x52), 0, 5, 0);
@@ -177,7 +177,7 @@ void __cdecl fcn_00560290(char* a0)
 			if (*(char*) (a0 + 0xac)) {
 				e = a0 + 0x8c;
 				do {
-					id = (unsigned short*) fcn_00508e40(*(int*) e);
+					id = (unsigned short*) gm_LookupEntityRecordById(*(int*) e);
 					if (id) {
 						fcn_00529160(0, 0, *id, 0);
 					}
@@ -207,11 +207,11 @@ void __cdecl fcn_00560290(char* a0)
 			id = (unsigned short*) fcn_0050dc90(v9);
 			if (rec) {
 				fcn_004c51f0(*(int*) (q + 2), -1, *(unsigned short*) (a0 + 0xae), rec, g_773d75, 0);
-				fcn_0051af00(text, 0x1802, 0x17fd, v9);
-				fcn_0051af00(name, 0x1803, rec, (unsigned int) *(unsigned short*) (a0 + 0xae) * 2 + 0x9a8);
+				io_FormatTextBuffer(text, 0x1802, 0x17fd, v9);
+				io_FormatTextBuffer(name, 0x1803, rec, (unsigned int) *(unsigned short*) (a0 + 0xae) * 2 + 0x9a8);
 				strcat(text, name);
 			} else {
-				fcn_0051af00(text, 0x1804, 0x17fd, v9);
+				io_FormatTextBuffer(text, 0x1804, 0x17fd, v9);
 			}
 			if ((*(char*) (*(unsigned short*) (a0 + 8) * 0x21c + 0x7f4ca2) == 6 || *(char*) (*(unsigned short*) (a0 + 8) * 0x21c + 0x7f4ca2) == 7) && (!id || !(*(unsigned char*) ((int) id + 0x1b4) & 1))) {
 				he_MessageBoxQuickjump(*(int*) (*(unsigned short*) (a0 + 8) * 0x21c + 0x7f4ca4), -1, text, 0, 0x5ec, *(int*) (v9 + 1), *(int*) (a0 + 0xb0), 0, 0);
@@ -226,7 +226,7 @@ void __cdecl fcn_00560290(char* a0)
 				i = 0;
 				e = a0 + 0x8c;
 				do {
-					id = (unsigned short*) fcn_00508e40(*(int*) e);
+					id = (unsigned short*) gm_LookupEntityRecordById(*(int*) e);
 					if (id) {
 						fcn_004c5c80(*(int*) e);
 						fcn_004c5da0(*(int*) e, *(unsigned int*) (sel + 1), *(unsigned int*) (a0 + 0xb0), 0, 0, (char*) 0x6a6508);

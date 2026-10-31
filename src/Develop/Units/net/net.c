@@ -485,5 +485,3 @@ int __cdecl nt_Send(void)
 	}
 	return 0;
 }
-unsigned char _dpad_a68d40[540832];
-unsigned char _dpad_9badd0[1253392];

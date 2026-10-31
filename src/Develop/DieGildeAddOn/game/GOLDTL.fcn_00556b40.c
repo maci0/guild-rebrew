@@ -2,14 +2,14 @@
 
 extern pos14_7f4c00 g_7f4c00;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00546190(char*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
 
 /* ADDRESS: GOLDTL 0x00556b40 */
@@ -20,8 +20,8 @@ void __cdecl fcn_00556b40(char* e)
 	char* b;
 	int r;
 
-	a = fcn_00508e40(*(int*) (e + 0xb0));
-	b = fcn_00508e40(*(int*) (e + 0xac));
+	a = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
+	b = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 	if (*(int*) (e + 0x70) == -1) {
 		fcn_00546190(e);
 		return;
@@ -78,9 +78,9 @@ void __cdecl fcn_00556b40(char* e)
 			return;
 		}
 		if (a[9] == 1) {
-			fcn_0051af00(buf, 0xb4, *(unsigned short*) a);
+			io_FormatTextBuffer(buf, 0xb4, *(unsigned short*) a);
 		} else {
-			fcn_0051af00(buf, 0xb5, *(unsigned short*) a);
+			io_FormatTextBuffer(buf, 0xb5, *(unsigned short*) a);
 		}
 		he_RegisterApEvent(*(unsigned short*) (e + 8), buf, -*(int*) (e + 0xb8), 0);
 		(*(int*) (e + 0xb4))++;

@@ -20,7 +20,7 @@ typedef struct
 
 int __cdecl fcn_004c6c30(void*);
 
-int __cdecl fcn_004f2540(int a1, void* a2, int a3, short a4, int a5)
+int __cdecl fcn_004f0430(int a1, void* a2, int a3, short a4, int a5)
 {
 	F4fMsg m;
 

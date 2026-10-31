@@ -15,7 +15,7 @@ extern int g_1040490;
 extern int g_1040494;
 
 extern int __cdecl fcn_00506380(int a0, int a1, int a2, int a3);
-extern int __cdecl fcn_00466190(int a0);
+extern int __cdecl d2_GetResourceData(int a0);
 extern int __cdecl fcn_00451840(char *p, int a1, float a2);
 extern void __cdecl fcn_0047a040(int a0, int a1, int a2, int a3);
 extern void __cdecl fcn_0047cba0(int a0, int a1, int a2, int a3, int a4);
@@ -47,7 +47,7 @@ void __cdecl fcn_00532bd0(void)
     }
     if (!(g_7746d8 & 0x1000))
         return;
-    v1 = fcn_00466190(0x52c);
+    v1 = d2_GetResourceData(0x52c);
     if (g_774688 == -1)
     {
         v3 = 1;

@@ -16,7 +16,7 @@ void* __cdecl FindSlotEntryFiltered(int a, unsigned char* rec, void* prev,
 	void* filter, int mask);
 int __cdecl fcn_004f1790(char* a, Elem* e);
 int __cdecl fcn_004f46e0(int a, unsigned char** out1, void** out2);
-void __cdecl fcn_0051af00(void* dest, int id, ...);
+void __cdecl io_FormatTextBuffer(void* dest, int id, ...);
 int __cdecl fcn_0058c410(View* view, char* text);
 void __cdecl fcn_0058cc90(unsigned char* a1, View* view);
 void __cdecl fcn_00471e30(int a);
@@ -40,7 +40,7 @@ void __cdecl fcn_0058fa40(unsigned char* a1)
 		view.x1c = (int) obj;
 		view.x24 = (unsigned char) fcn_004f1790((char*) *(int*) (a1 + 0x65),
 			(Elem*) obj);
-		fcn_0051af00(text, 0x4107, ((char**) 0x665f78)[*(int*) obj]);
+		io_FormatTextBuffer(text, 0x4107, ((char**) 0x665f78)[*(int*) obj]);
 		if (fcn_0058c410(&view, (char*) text) != 0) {
 			fcn_0058cc90(a1, &view);
 			fcn_00471e30(view.x0);

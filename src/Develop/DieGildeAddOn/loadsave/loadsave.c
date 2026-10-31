@@ -753,7 +753,7 @@ int __cdecl ls_SaveEntities(void* file)
 	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 	char* s;
 	char* slot;
-	int* q;
+	int i;
 	int none;
 	int id;
 	int tmp;
@@ -783,9 +783,9 @@ int __cdecl ls_SaveEntities(void* file)
 	if (vfs_fwrite(g_save_header_aux_b ? (char*) g_save_header_aux_b + 4 : (char*) &none, 4, 1, s) <= 0) {
 		return 0;
 	}
-	for (q = &g_save_extra_field; q < &g_save_extra_field + 8; q++) {
+	for (i = 0; i < 8; i++) {
 		id = -1;
-		if (vfs_fwrite(*q ? (char*) *q + 4 : (char*) &id, 4, 1, s) <= 0) {
+		if (vfs_fwrite((&g_save_extra_field)[i] ? (char*) (&g_save_extra_field)[i] + 4 : (char*) &id, 4, 1, s) <= 0) {
 			return 0;
 		}
 	}

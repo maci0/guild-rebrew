@@ -32,7 +32,7 @@ extern int g_6b7fa4;
 
 char* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
-void __cdecl fcn_0041d9e0(char* msg);
+void __cdecl ReportClientMessage(char* msg);
 int __cdecl fcn_0042b810(char* text, int index);
 void __cdecl txt_ParseRandomText(char* s);
 int __cdecl fcn_0064d41a(char* dst, char* fmt, ...);
@@ -450,7 +450,7 @@ pass1_done:
 			g_14a5320[v10] = BANK(v2c).text + v38;
 			v38 += (int) strlen(&g_6b7fa0[v10 * 0x1000]) + 1;
 			if (v38 > g_6b7fa4) {
-				fcn_0041d9e0("txt_OpenText():Zugriffsverletzung!");
+				ReportClientMessage("txt_OpenText():Zugriffsverletzung!");
 			}
 			len = (int) strlen(&g_6b7fa0[v10 * 0x1000]);
 			for (k = 0; k < len; k++) {

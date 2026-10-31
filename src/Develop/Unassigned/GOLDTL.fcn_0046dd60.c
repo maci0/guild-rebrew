@@ -61,7 +61,7 @@ void* __cdecl fcn_0047bf80(int x, int y, int w, int h, int a5, void* r);
 void __cdecl fcn_0047b9a0(void* p, int r, int g, int b);
 void __cdecl fcn_0047c9c0(int x, int y, int w, int h, int color, float alpha);
 void __cdecl fcn_0047cb60(int x, int y, int a3, int img);
-int __cdecl fcn_00466190(int id);
+int __cdecl d2_GetResourceData(int id);
 void __cdecl fcn_0047a040(int a, int b, int c, int d);
 void __cdecl fcn_0047cba0(int x, int y, int surf, int tex, int c);
 void __cdecl fcn_0047c7b0(int x, int y, int w, int h, int bits, float alpha);
@@ -99,7 +99,7 @@ void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 		fcn_0047c9c0(x0, y0, cw, ch, w->pal->color, w->alpha);
 	else if (w->img != 0)
 		fcn_0047cb60(w->x - w->sx, w->y - w->sy, dst, w->img);
-	if (w->tex != -1 && (tex = fcn_00466190(w->tex)) != 0) {
+	if (w->tex != -1 && (tex = d2_GetResourceData(w->tex)) != 0) {
 		s1 = g_7725f8;
 		s2 = g_7725fc;
 		s3 = g_67d964;

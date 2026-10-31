@@ -10,7 +10,7 @@ typedef struct {
 
 extern char g_868060[];
 
-char *__cdecl fcn_00508e40(int);
+char *__cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(char *, int);
 char *__cdecl fcn_005463a0(int, int, int);
 char *__cdecl he_fn_Handlung(void);
@@ -22,7 +22,7 @@ int __cdecl _ftol(void);
 #include "client_packet_builder.h"
 void __cdecl fcn_004c4570(int, int, int, char *);
 void __cdecl fcn_004c5360(void);
-void __cdecl fcn_0051af00(char *, int, ...);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl fcn_00545d40(int, int, char *, int, int, int);
 
 int __cdecl fcn_004b8dc0(int *msg)
@@ -40,7 +40,7 @@ int __cdecl fcn_004b8dc0(int *msg)
 	int k;
 
 	n = 0;
-	p = fcn_00508e40(*msg);
+	p = gm_LookupEntityRecordById(*msg);
 	if (p == 0) {
 		return 1;
 	}
@@ -74,9 +74,9 @@ int __cdecl fcn_004b8dc0(int *msg)
 	fcn_004c4570(1, 1, 0x12, &val);
 	fcn_004c5360();
 	if (*b == 0x47) {
-		fcn_0051af00(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)g_868060)[*(int *) (b + 0x65)].name, ((Dyn*)g_868060)[0].name);
+		io_FormatTextBuffer(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)g_868060)[*(int *) (b + 0x65)].name, ((Dyn*)g_868060)[0].name);
 	} else {
-		fcn_0051af00(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)g_868060)[0].name, ((Dyn*)g_868060)[*(int *) (a + 0x65)].name);
+		io_FormatTextBuffer(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)g_868060)[0].name, ((Dyn*)g_868060)[*(int *) (a + 0x65)].name);
 	}
 	fcn_00545d40(*(int *) (p + 4), *(int *) (p + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;

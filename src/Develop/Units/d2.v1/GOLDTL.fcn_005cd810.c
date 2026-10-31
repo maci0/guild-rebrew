@@ -13,11 +13,11 @@ extern float g_6660d4;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046f2c0(int, int);
 int __cdecl fcn_004e8b80(int, int, char*);
 int __cdecl fcn_004e8cb0(int, int, char*);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005463a0(int, int, ...);
 int __cdecl he_fn_Handlung(void);
 int __cdecl cm_ChkCutsceneReady(int, unsigned short);
@@ -73,13 +73,13 @@ void __cdecl fcn_005cd810(int a0)
 	for (;;) {
 		if (again) {
 			d2_SetForm(dlg, 2);
-			fcn_00519190(0x6811b0);
+			io_AppendText(0x6811b0);
 			if (sel)
-				fcn_00519190(0xa0, *sel2);
+				io_AppendText(0xa0, *sel2);
 			else
-				fcn_00519190(0x6a9ac4, a0 + 0x12b2);
+				io_AppendText(0x6a9ac4, a0 + 0x12b2);
 			d2_SetForm(dlg, 3);
-			fcn_00519190(0x6811b0);
+			io_AppendText(0x6811b0);
 			d2_SetForm(dlg, 1);
 			fcn_0046f2c0(g_772514, 1);
 			for (i = 0; i < 8; i++) {
@@ -91,7 +91,7 @@ void __cdecl fcn_005cd810(int a0)
 				count = fcn_004e8b80(a0, 6, src1);
 				if (count >= 1) {
 					for (i = 0; i < count; i++) {
-						rec[i].ent = fcn_00508e40(*(int*) (src1 + i * 0x18 + 4));
+						rec[i].ent = gm_LookupEntityRecordById(*(int*) (src1 + i * 0x18 + 4));
 						rec[i].text = *(unsigned char*) (src1 + i * 0x18 + 8);
 					}
 				}
@@ -101,7 +101,7 @@ void __cdecl fcn_005cd810(int a0)
 				count = fcn_004e8cb0(0, 6, src2);
 				if (count >= 1) {
 					for (i = 0; i < count; i++) {
-						rec[i].ent = fcn_00508e40(*(int*) (src2 + i * 0x18 + 4));
+						rec[i].ent = gm_LookupEntityRecordById(*(int*) (src2 + i * 0x18 + 4));
 						rec[i].text = *(unsigned char*) (src2 + i * 0x18 + 8);
 					}
 				}

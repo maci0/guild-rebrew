@@ -32,7 +32,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 
 void __cdecl fcn_00546190(char* s);
-void __cdecl fcn_0051af00(char* buf, char* fmt, ...);
+void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_005547c0(Player* p);
 float __cdecl gm_RandomFloat01(void);
@@ -59,7 +59,7 @@ void __cdecl fcn_00554820(char* s)
 		fcn_00546190(s);
 		return;
 	}
-	fcn_0051af00(buf, "-------> RunSimUnfall: calculating at <Day = %i Time = %i.2:%i.2>", ((Clock*) &g_7f4c00)->day,
+	io_FormatTextBuffer(buf, "-------> RunSimUnfall: calculating at <Day = %i Time = %i.2:%i.2>", ((Clock*) &g_7f4c00)->day,
 		((Clock*) &g_7f4c00)->hour, ((Clock*) &g_7f4c00)->minute);
 	if (*(int*) (s + 0xb0) == 0) {
 		steps[0] = 1;

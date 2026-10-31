@@ -21,7 +21,7 @@ struct msg {
 
 extern pos14_7f4c00 g_7f4c00;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5530(struct msg*);
 void __cdecl fcn_004c6470(int, int);
 void __cdecl fcn_00546190(char*);
@@ -38,7 +38,7 @@ void __cdecl fcn_00564fc0(char* u)
 		break;
 	case 0:
 		(*(int*) (u + 0xb8))--;
-		h = fcn_00508e40(*(int*) (u + 0xac));
+		h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 		if (*(int*) (u + 0xb8) < 0 && h != 0) {
 			if (h[2] == 6 || h[2] == 7) {
 				memset(&m, 0, sizeof(m));

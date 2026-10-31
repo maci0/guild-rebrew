@@ -38,7 +38,7 @@ int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
 void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_005b4660(void*);
-char* __cdecl fcn_00519190(int, ...);
+char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005b44b0(Ent_5b4c80*);
 int __cdecl fcn_00472250(int, int, char*);
 void __cdecl fcn_005b0f00(Win_5b4c80*);
@@ -86,8 +86,8 @@ void __cdecl fcn_005b4c80(void)
 			if (fill) {
 				g_772514 = left;
 				saved = ((Win_5b4c80*)g_1015f40)[left].x258;
-				fcn_00519190((int) "$C");
-				ids[0] = fcn_00472250(-1, g_772514, fcn_00519190((int) "%ib[NIEMAND]$6THeCnt:%i$A", 2, fcn_005b44b0(0)));
+				io_AppendText((int) "$C");
+				ids[0] = fcn_00472250(-1, g_772514, io_AppendText((int) "%ib[NIEMAND]$6THeCnt:%i$A", 2, fcn_005b44b0(0)));
 				((Ctl_5b4c80*)g_1015ea0)[ids[0]].ent = 0;
 				((Ctl_5b4c80*)g_1015ea0)[ids[0]].used = 1;
 				n = 1;
@@ -97,7 +97,7 @@ void __cdecl fcn_005b4c80(void)
 					}
 					ids[i] = -1;
 					if (((Ent_5b4c80*)g_7f4ca0)[i].slot != 0xffff) {
-						ids[i] = fcn_00472250(-1, g_772514, fcn_00519190((int) "%it[%1N4]$6THeCnt:%i$A", ((Ent_5b4c80*)g_7f4ca0)[i].slot, fcn_005b44b0(&((Ent_5b4c80*)g_7f4ca0)[i])));
+						ids[i] = fcn_00472250(-1, g_772514, io_AppendText((int) "%it[%1N4]$6THeCnt:%i$A", ((Ent_5b4c80*)g_7f4ca0)[i].slot, fcn_005b44b0(&((Ent_5b4c80*)g_7f4ca0)[i])));
 						((Ctl_5b4c80*)g_1015ea0)[ids[i]].ent = &((Ent_5b4c80*)g_7f4ca0)[i];
 						n++;
 						((Ctl_5b4c80*)g_1015ea0)[ids[i]].used = 1;
@@ -107,7 +107,7 @@ void __cdecl fcn_005b4c80(void)
 							break;
 						}
 						g_772514 = right;
-						fcn_00519190((int) "$C");
+						io_AppendText((int) "$C");
 						n = 0;
 					}
 				}

@@ -16,7 +16,7 @@ extern struct ref_fb5761 g_fb5761[0x8000];
 
 
 void __cdecl fcn_004432d0(int, int);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_FindRecordById(int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_004e6a30(int);
@@ -39,7 +39,7 @@ void __cdecl fcn_0051ea70(void)
 	for (i = 0; i < 0x8000; i++) {
 		if (g_fb5761[i].ref != 0) {
 			if (g_fb5761[i].type == 1) {
-				g_fb5761[i].ref = fcn_00508e40(g_fb5761[i].ref);
+				g_fb5761[i].ref = gm_LookupEntityRecordById(g_fb5761[i].ref);
 			}
 			if (g_fb5761[i].type == 3) {
 				g_fb5761[i].ref = gm_FindRecordById(g_fb5761[i].ref);

@@ -28,7 +28,7 @@ void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl fcn_0050fe40(unsigned short, int);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 
 void __cdecl fcn_005507a0(char* u)
 {
@@ -45,8 +45,8 @@ void __cdecl fcn_005507a0(char* u)
 				fcn_00545670(u, 0, 0, g_6a5a10, 0x5ec);
 			}
 			d2_SetForm(*(int*) (*(char**) (u + 0x74) + 8), 0);
-			fcn_00519190((int) g_6811b0);
-			fcn_00519190(0x10b1, *(unsigned short*) (u + 8), v);
+			io_AppendText((int) g_6811b0);
+			io_AppendText(0x10b1, *(unsigned short*) (u + 8), v);
 			*(int*) (u + 0x70) = 1;
 			break;
 		case 1:

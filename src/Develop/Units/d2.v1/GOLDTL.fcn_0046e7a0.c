@@ -31,7 +31,7 @@ void __cdecl d2_SetBackgroundTexture(const char* name, int win)
 		w->tex = fcn_0047ce00(name, 1);
 		if (!w->tex) {
 			sprintf(msg, s_67d54c);
-			fcn_0041d9e0(msg);
+			ReportClientMessage(msg);
 		}
 		w->alpha = 0.5f;
 	}

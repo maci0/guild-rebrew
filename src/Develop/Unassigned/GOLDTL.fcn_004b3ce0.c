@@ -1,6 +1,3 @@
-int g_680bd0[1] = {
-    0,
-};
 
 /* ADDRESS: GOLDTL 0x004b3ce0 */
 int* __cdecl fcn_004b3ce0(int a0, int* a1)

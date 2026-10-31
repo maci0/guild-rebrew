@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-int __cdecl fcn_00465540(void* z);
-void __cdecl fcn_00465630(void* z);
-int __cdecl fcn_00465020(void* z);
+long __cdecl unztell(void* file);
+int __cdecl unzCloseCurrentFile(void* file);
+int __cdecl unzOpenCurrentFile(void* file);
 int __cdecl unzReadCurrentFile(void* z, void* buf, int len);
 void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
@@ -24,7 +24,7 @@ int __cdecl fcn_00430a80(char* s, int off, int whence)
 			if (s[0x13c] & 0x10) {
 				s[0x13c] &= ~4;
 				if (whence == 0) {
-					pos = fcn_00465540(*(void**) (s + 0x100));
+					pos = unztell(*(void**) (s + 0x100));
 					if (pos <= off) {
 						if (pos == off) {
 							r = 0;
@@ -37,8 +37,8 @@ int __cdecl fcn_00430a80(char* s, int off, int whence)
 							m_FreeTracked(buf);
 						}
 					} else {
-						fcn_00465630(*(void**) (s + 0x100));
-						if (fcn_00465020(*(void**) (s + 0x100)) == 0) {
+						unzCloseCurrentFile(*(void**) (s + 0x100));
+						if (unzOpenCurrentFile(*(void**) (s + 0x100)) == 0) {
 							buf = m_alloc(off, "vfs:fseek(inzip,SEEK_SET,skip)");
 							if (unzReadCurrentFile(*(void**) (s + 0x100), buf, off) == off) {
 								r = 0;
@@ -58,10 +58,10 @@ int __cdecl fcn_00430a80(char* s, int off, int whence)
 							m_FreeTracked(buf);
 						}
 					} else {
-						fcn_0041d9e0("Unsupported vfs_fseek(inzip,SEEK_CUR)");
+						ReportClientMessage("Unsupported vfs_fseek(inzip,SEEK_CUR)");
 					}
 				} else {
-					fcn_0041d9e0("Unsupported vfs_fseek(inzip,SEEK_END)");
+					ReportClientMessage("Unsupported vfs_fseek(inzip,SEEK_END)");
 				}
 			} else if (s[0x13c] & 8) {
 				r = gzseek(*(void**) (s + 0x100), off, whence);
@@ -71,7 +71,7 @@ int __cdecl fcn_00430a80(char* s, int off, int whence)
 				r = r != 0 ? -1 : 0;
 			}
 		} else {
-			fcn_0041d9e0("Seeking only supported in read-only files");
+			ReportClientMessage("Seeking only supported in read-only files");
 		}
 	}
 	return r;

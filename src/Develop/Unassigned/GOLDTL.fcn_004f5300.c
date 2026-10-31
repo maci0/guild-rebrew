@@ -10,8 +10,8 @@ typedef struct tag_req_2d {
 } req_2d;
 
 extern char g_69037c[];
-unsigned char* __cdecl fcn_00508e40(int);
-void __cdecl fcn_0051af00(void*, int, ...);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl fcn_004f5300(void* a1, req_2d s, int b)
 {
@@ -20,7 +20,7 @@ int __cdecl fcn_004f5300(void* a1, req_2d s, int b)
 	int r = 1;
 	int v = (b <= r);
 
-	p = fcn_00508e40(*(int*) ((char*) &s + 0x12));
+	p = gm_LookupEntityRecordById(*(int*) ((char*) &s + 0x12));
 	if (p != 0) {
 		w = *(unsigned short*) p;
 	} else {
@@ -28,10 +28,10 @@ int __cdecl fcn_004f5300(void* a1, req_2d s, int b)
 	}
 	switch (*(int*) ((char*) &s + 0x1c) & 0xff) {
 	case 0xe:
-		fcn_0051af00(a1, v + 0x1446, (char*) &s + 4, w);
+		io_FormatTextBuffer(a1, v + 0x1446, (char*) &s + 4, w);
 		break;
 	case 0x10:
-		fcn_0051af00(a1, v + 0x1450, w, (char*) &s + 4);
+		io_FormatTextBuffer(a1, v + 0x1450, w, (char*) &s + 4);
 		break;
 	default:
 		memcpy(a1, g_69037c, 0x20);

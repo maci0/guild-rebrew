@@ -2,7 +2,7 @@ extern int g_772514;
 extern char g_6a9694[];
 
 void __cdecl fcn_0046f2c0(int, int);
-int __cdecl fcn_00519190(char*, ...);
+int __cdecl io_AppendText(char*, ...);
 void __cdecl fcn_0046f740(int, int, int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 
@@ -12,7 +12,7 @@ void __cdecl fcn_005a0ad0(int a, unsigned char* p)
 	int y, x, i;
 
 	fcn_0046f2c0(g_772514, 1);
-	fcn_00519190(g_6a9694, a);
+	io_AppendText(g_6a9694, a);
 
 	if (*(char*) (*(int*) p + 2) == 6) {
 		i = 0;

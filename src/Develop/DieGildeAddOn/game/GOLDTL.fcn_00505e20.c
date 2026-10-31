@@ -56,9 +56,9 @@ extern unsigned char g_773d75;
 extern pos14_7f4c00 g_7f4c00;
 
 Estate* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-Unit* __cdecl fcn_00508e40(int);
+Unit* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_004c5150(int, int, char, int);
@@ -77,11 +77,11 @@ void __cdecl fcn_00505e20(int search, int buyer, int price, Order* o, int notify
 	Unit* u;
 
 	s = gm_StartFilteredEntitySearch(1, 1, search);
-	u = fcn_00508e40(buyer);
+	u = gm_LookupEntityRecordById(buyer);
 	office = &((Office*)lpGebaeudePROT)[s->office];
 	fcn_004c4eb0("buy_building");
 	if (s->slot != 0xffff) {
-		fcn_0051af00(msg, 0x17e6, s, u->slot, price);
+		io_FormatTextBuffer(msg, 0x17e6, s, u->slot, price);
 		he_MessageBoxQuickjump(((Entity*)g_7f4ca0)[s->slot].id, -1, msg, 0, 0x5ff, s->id, -1, 0, "_NACHRICHTEN_HS_30");
 		fcn_004c51a0(((Entity*)g_7f4ca0)[s->slot].id, buyer, (*(char*)&g_773d75), price);
 		fcn_004c5f60(s->id, u->id, u->id);

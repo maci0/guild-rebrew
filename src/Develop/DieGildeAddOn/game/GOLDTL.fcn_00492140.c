@@ -21,7 +21,7 @@ int __cdecl fcn_00492140(char* e, int unused, int* out)
 	int i;
 	unsigned char* rec;
 
-	s = fcn_00507f10(e, 2);
+	s = gm_GetEntitySkill(e, 2);
 	m = (s - (fcn_004f97a0(2) + 1.0f) * 0.003968254f) * 0.023809524f;
 	y = (float)((*(float*) (e + 0xf4) - 2.0) * *(float*) (e + 0xfc));
 	w = (float)((*(float*) (e + 0x100) - 2.0) * *(float*) (e + 0x108));

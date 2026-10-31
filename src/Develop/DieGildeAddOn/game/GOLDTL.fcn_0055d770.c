@@ -43,7 +43,7 @@ int __cdecl fcn_004c5290(int, int, int);
 int __cdecl fcn_00505340(char*);
 void __cdecl fcn_004c5d20(int, int);
 int __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005049a0(char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_004c5620(int, char*);
@@ -91,13 +91,13 @@ void __cdecl fcn_0055d770(char* e)
 			}
 			fcn_004c5420(*(int*) (r + 2), 0x13, 1, 0, 0x40);
 			if (fcn_00505340(c)) {
-				fcn_0051af00(buf, 0x1c43);
+				io_FormatTextBuffer(buf, 0x1c43);
 			} else if (lv->kind != 0x1d && lv->kind != 0x1f) {
-				fcn_0051af00(buf, 0x1c41, 1, 0x1c39, b, *(unsigned short*) (c + 0x27), c);
+				io_FormatTextBuffer(buf, 0x1c41, 1, 0x1c39, b, *(unsigned short*) (c + 0x27), c);
 			} else if (fcn_00505340(c)) {
-				fcn_0051af00(buf, 0x1c43);
+				io_FormatTextBuffer(buf, 0x1c43);
 			} else {
-				fcn_0051af00(buf, 0x1c44, c);
+				io_FormatTextBuffer(buf, 0x1c44, c);
 			}
 			k = g_7f4ca0[*(unsigned short*) (e + 8)].kind;
 			if (k == 6 || k == 7) {

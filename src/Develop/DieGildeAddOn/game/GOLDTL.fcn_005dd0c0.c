@@ -1,6 +1,6 @@
-int __cdecl fcn_0051af00(void *buf, int len);
+int __cdecl io_FormatTextBuffer(void *buf, int len);
 int __cdecl fcn_005cad70(void *a1, void *buf);
-int __cdecl fcn_00508e40(int value);
+int __cdecl gm_LookupEntityRecordById(int value);
 int __cdecl fcn_005dcf40(int value, int mode);
 
 /* ADDRESS: GOLDTL 0x005dd0c0 */
@@ -10,10 +10,10 @@ int __cdecl fcn_005dd0c0(void *a1, void *a2)
     int r;
 
     if (*(char *)((char *)a1 + 2) == 6) {
-        fcn_0051af00(buf, 0x9d);
+        io_FormatTextBuffer(buf, 0x9d);
         r = fcn_005cad70(a1, buf);
     } else {
-        r = fcn_00508e40(*(int *)((char *)a2 + 4));
+        r = gm_LookupEntityRecordById(*(int *)((char *)a2 + 4));
     }
     if (r != 0) {
         fcn_005dcf40(r, 3);

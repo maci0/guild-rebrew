@@ -7,7 +7,7 @@ typedef struct {
 
 extern blk24 g_68bef4;
 
-char* __cdecl gm_LookupEntityRecordById(int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 void __cdecl fcn_00406120(int);
 char* __cdecl fcn_00445600(int, int, int, int*);
 char* __cdecl fcn_0040c230(int, void*, int, int, int);
@@ -23,7 +23,7 @@ void __cdecl fcn_004d8660(int* a)
 
 	if (a[1] == 0 || a[0] == -1)
 		return;
-	e = gm_LookupEntityRecordById(a[0]);
+	e = gm_LookupEntityRecordIn32SlotTable(a[0]);
 	s = *(unsigned short**) (e + 0x16c);
 	fcn_00406120(*(int*) (e + 0x184));
 	p = fcn_00445600(0, 0x40, 0, a + 4);

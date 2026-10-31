@@ -1,4 +1,4 @@
-unsigned char* __cdecl fcn_00508e40(int id);
+unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x004f65a0 */
 void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
@@ -40,7 +40,7 @@ void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
 		if (*(int*) (0x9a3816 + off) == id) {
 			continue;
 		}
-		ent = fcn_00508e40(*(int*) (0x9a3816 + off));
+		ent = gm_LookupEntityRecordById(*(int*) (0x9a3816 + off));
 		if (ent == 0) {
 			continue;
 		}

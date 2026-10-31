@@ -56,4 +56,3 @@ void __cdecl fcn_00425bf0(char* s, unsigned int pos, const char* msg)
 		sprintf(buf, "%s in Line: %i", msg, 0);
 	}
 }
-unsigned char _dpad_14b5798[90456];

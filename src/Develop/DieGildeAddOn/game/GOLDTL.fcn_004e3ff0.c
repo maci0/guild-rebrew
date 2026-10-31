@@ -1,5 +1,5 @@
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_AccumulateTyped2(char*);
 float __cdecl fcn_004e6d20(void);
 unsigned int __cdecl fcn_004e6cb0(int);
@@ -26,7 +26,7 @@ void __cdecl fcn_004e3ff0(char* a, int* b)
 	*(int*) (a + 0x94) = b[8];
 	gm_StartFilteredEntitySearch(1, 1, b[0x11]);
 	val = b[8];
-	o = fcn_00508e40(*(int*) (a + 0x10));
+	o = gm_LookupEntityRecordById(*(int*) (a + 0x10));
 	if (o == 0)
 		return;
 	fv = (float) (val + b[0x13] * 32000);

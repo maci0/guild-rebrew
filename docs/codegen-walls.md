@@ -3,7 +3,9 @@
 Bounded negative results, not impossibility proofs. Early server residue and
 composition advice is historical: the server later reached raw-file identity.
 Read corrections before reusing an older conclusion; failed searches do not
-authorize assembly. Current compiler policy is in [build facts](general-knowledge.md).
+authorize assembly. Historical flag probes do not authorize per-function
+optimization overrides in production game code. Current compiler policy is in
+[build facts](general-knowledge.md).
 
 Reopen a failed probe family with new native/compiler/context evidence. Preserve
 the recorded inputs and original section numbers.

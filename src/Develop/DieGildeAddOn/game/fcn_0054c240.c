@@ -2,7 +2,7 @@ typedef unsigned char  u8;
 typedef unsigned short u16;
 typedef unsigned int   u32;
 
-void* __cdecl fcn_00508e40(int a1);
+void* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_004c5620(char a1, unsigned char* e);
 void* __cdecl fcn_005463a0(int n, ...);
 void* __cdecl he_fn_Handlung(void);
@@ -11,7 +11,7 @@ void __cdecl fcn_00500bb0(void* clock, int a2, int a3, int a4);
 void __cdecl fcn_005100f0(int id, int amount);
 int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5);
 int __cdecl gm_RandomMod(int);
-float __cdecl fcn_00507f10(char* entity, int idx);
+float __cdecl gm_GetEntitySkill(char* entity, int idx);
 int __cdecl fcn_005c6270(char* a1, int a2);
 void __cdecl fcn_005b2350(void* a1, void* a2);
 void __cdecl fcn_005b2310(void* a1);
@@ -34,7 +34,7 @@ void __cdecl fcn_0054c240(u8* o)
     if (o[0x78] & 4)
         return;
 
-    r = fcn_00508e40(*((u32*)(o + 0xbc)));
+    r = gm_LookupEntityRecordById(*((u32*)(o + 0xbc)));
     if (r == 0) {
         d = o + 0x52;
         CP14(d);
@@ -79,7 +79,7 @@ void __cdecl fcn_0054c240(u8* o)
     *((u32*)(o + 0xc4)) = (u32)(gm_RandomMod(0x300) & 0xffff);
     *((u32*)(o + 0xc8)) = *((u32*)(0x664398 +
                               4 * (u32)(gm_RandomMod(0x10) & 0xffff)));
-    *((float*)(o + 0xd0)) = fcn_00507f10((char*)(0x7f4ca0 + k), 4);
+    *((float*)(o + 0xd0)) = gm_GetEntitySkill((char*)(0x7f4ca0 + k), 4);
     *((u32*)(o + 0xcc)) = 0x300;
 
     if (fcn_005c6270((char*)0x15c, r) != 0) {

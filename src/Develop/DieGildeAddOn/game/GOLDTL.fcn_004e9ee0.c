@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/aemter.h"
 #include "Develop/DieGildeAddOn/game/entity.h"
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e8240(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
@@ -33,8 +33,8 @@ int __cdecl fcn_004e9ee0(void)
 			j = n;
 			do {
 				if (rp->status == 2) {
-					e1 = fcn_00508e40(rp->msetter);
-					e2 = fcn_00508e40(rp->mplayerid);
+					e1 = gm_LookupEntityRecordById(rp->msetter);
+					e2 = gm_LookupEntityRecordById(rp->mplayerid);
 					if (e1 != 0 && *(unsigned char*) (e1 + 8) != 0) {
 						if (e2 != 0 && *(unsigned char*) (e2 + 8) != 0) {
 							flags[i] |= 1;
@@ -74,7 +74,7 @@ int __cdecl fcn_004e9ee0(void)
 		}
 		if ((flags[i] & 1) && n > 0) {
 			for (j = 0; j < n; j++) {
-				e1 = fcn_00508e40(recs[j].mplayerid);
+				e1 = gm_LookupEntityRecordById(recs[j].mplayerid);
 				if (e1 != 0 && (e1[2] == 6 || e1[2] == 7) && e1[0x1b1] == 0) {
 					flags[i] |= 2;
 					break;

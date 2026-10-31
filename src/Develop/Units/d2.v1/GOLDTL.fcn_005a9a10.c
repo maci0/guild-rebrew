@@ -40,11 +40,11 @@ void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_004e8ee0(Player*, int, Ent*, int*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_004e8d10(Player*, int, Ent*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0046f2c0(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -86,7 +86,7 @@ void __cdecl fcn_005a9a10(void)
 	}
 	dlg = fcn_00470820(0, 0, s_6aaebc);
 	fcn_00471b60(dlg);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	g_100f1dc = prev;
 	do {
 		n = fcn_004e8d10(p, 6, list);
@@ -97,9 +97,9 @@ void __cdecl fcn_005a9a10(void)
 		if (flag != 0) {
 			d2_SetForm(dlg, 1);
 			fcn_0046f2c0(g_772514, 1);
-			fcn_00519190(0x1a01);
+			io_AppendText(0x1a01);
 			for (i = 0; i < n; i++) {
-				btns[i] = fcn_00472250(dlg, 1, fcn_00519190(0x1a04, list[i].x0 + 0x253));
+				btns[i] = fcn_00472250(dlg, 1, io_AppendText(0x1a04, list[i].x0 + 0x253));
 			}
 			for (i = n; i < 6; i++) {
 				btns[i] = -1;

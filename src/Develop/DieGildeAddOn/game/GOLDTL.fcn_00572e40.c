@@ -6,7 +6,7 @@ void __cdecl fcn_00546190(char*);
 void __cdecl fcn_00500bb0(int, int, int, char*);
 void* __cdecl gm_FindRecordById(int, int, int, char*, int);
 int __cdecl fcn_004c5530(char*);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 
 /* ADDRESS: GOLDTL 0x00572e40 */
 void __cdecl fcn_00572e40(char* c)
@@ -53,7 +53,7 @@ void __cdecl fcn_00572e40(char* c)
 		fcn_00546190(c);
 	}
 	*(char*) (c + 0xf0) = 0;
-	if (fcn_00508e40(*(int*) (c + 0xb4))) {
+	if (gm_LookupEntityRecordById(*(int*) (c + 0xb4))) {
 		*(char*) (c + 0xf0) = 4;
 	}
 }

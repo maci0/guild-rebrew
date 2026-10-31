@@ -9,7 +9,7 @@ void __cdecl fcn_004ad4d0(int a1);
 char* __cdecl fcn_004e9110(int kind);
 float __cdecl fcn_004ad500(unsigned char* a1, unsigned short* a2, int a3, int a4);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
-int __cdecl fcn_0051af00(char* buf, int a, int b);
+int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
 int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
 /* ADDRESS: GOLDTL 0x004ad2e0 */
@@ -81,7 +81,7 @@ void __cdecl fcn_004ad2e0(void)
 		}
 		fcn_004c5420(*(int*) (hits[i].p + 4), 0x1cc, 4, v6, 0);
 		if (*(char*) (hits[i].p + 2) == 6 || *(char*) (hits[i].p + 2) == 7) {
-			fcn_0051af00(text, 0x42b1, (*(char*) (hits[i].p + 9) != 0 ? 0x28 : 0) + 0x253 + v4);
+			io_FormatTextBuffer(text, 0x42b1, (*(char*) (hits[i].p + 9) != 0 ? 0x28 : 0) + 0x253 + v4);
 			fcn_00545d40(*(int*) (hits[i].p + 4), -1, text, 0, 0x5fd, "_NACHRICHTEN_NEU_14");
 		}
 	}

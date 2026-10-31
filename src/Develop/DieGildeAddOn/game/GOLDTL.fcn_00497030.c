@@ -6,7 +6,7 @@ extern float g_6628a8;
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 char* __cdecl gm_FindRecordById(unsigned int);
 char* __cdecl gm_SearchTable67(unsigned int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 short* __cdecl fcn_0050d430(short*);
 int __cdecl fcn_0050d320(char*, char);
 float __cdecl fcn_0050bb50(int, unsigned char);
@@ -126,7 +126,7 @@ unsigned char __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 			}
 		}
 	} else if (*a4 == 7) {
-		v28 = (int) fcn_00508e40(*(unsigned int*) (a4 + 4));
+		v28 = (int) gm_LookupEntityRecordById(*(unsigned int*) (a4 + 4));
 		if (v28 == 0) {
 			goto fail;
 		}

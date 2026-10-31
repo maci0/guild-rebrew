@@ -43,7 +43,7 @@ extern void* g_6b5df4;
 void __cdecl dd_EndLines(void)
 {
 	if (g_6777ac == -1) {
-		fcn_0041d9e0("dd_EndLines called w/o dd_BeginLines!");
+		ReportClientMessage("dd_EndLines called w/o dd_BeginLines!");
 	}
 	if (g_6777ac >= 0) {
 		((Vb*)g_6b5df4)->vtbl->Unlock(((Vb*)g_6b5df4));

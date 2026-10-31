@@ -831,8 +831,8 @@ native_size = 972
 extent = "stride"
 evidence = "Private access view, not storage ownership. Native TL46fac0 indexes windows at0x1015f40 by0x3cc; nine fields verified in complete518-byte creator and original field-offset array spelling. Gold has distinct0x3c4 canonical GuiWin. .scratch/gui-text-creator-integration/."
 cflags = "/O2 /Gd"
-source_hash = "b0c5c08533b98ee9f5d5a57019d64ffec5d0a6bfd06efb5d6ac7bd8e6f14e704"
-headers_hash = "5a74a5d51535e9d076b9627dd74d3b2a340ab64f4bee8f71f6cdfd4fb595bf21"
+source_hash = "2981343282d09abfef36ae870db21c98f874577fe484b6e67100707b3eb5193b"
+headers_hash = "ac1cf9ffa508475958b3e228e6298097cf472b320b15d9d587ea5e72dcea0964"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -854,8 +854,8 @@ native_size = 756
 extent = "stride"
 evidence = "Private accessed-field view only; no allocation or owner claim. Native TL46fac0 indexes pool at[0x1015ea0] by0x2f4; fields verified in complete518-byte creator and former int-array spelling. Gold uses0x2ec GuiEnt. .scratch/gui-text-creator-integration/."
 cflags = "/O2 /Gd"
-source_hash = "b0c5c08533b98ee9f5d5a57019d64ffec5d0a6bfd06efb5d6ac7bd8e6f14e704"
-headers_hash = "5a74a5d51535e9d076b9627dd74d3b2a340ab64f4bee8f71f6cdfd4fb595bf21"
+source_hash = "2981343282d09abfef36ae870db21c98f874577fe484b6e67100707b3eb5193b"
+headers_hash = "ac1cf9ffa508475958b3e228e6298097cf472b320b15d9d587ea5e72dcea0964"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 

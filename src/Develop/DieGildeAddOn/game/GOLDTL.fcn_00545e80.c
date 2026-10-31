@@ -39,7 +39,7 @@ int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char f
 	m.code = 9;
 	if (name != 0) {
 		if (strlen(name) + 1 > 0x30) {
-			fcn_0041d9e0("he_MessageBoxQuickjump(): contactname is too long!");
+			ReportClientMessage("he_MessageBoxQuickjump(): contactname is too long!");
 		} else {
 			strcpy(m.name, name);
 		}

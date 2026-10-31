@@ -44,7 +44,7 @@ void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
 void __cdecl fcn_0047cbf0(int x, int y, int surf, char* font, int c);
 void __cdecl fcn_0047ccd0(int x, int y, int surf, char* font, int c);
 int __cdecl fcn_0047cc80(int x, int y, int surf, void* s, int idx, float scale, int tint);
-void* __cdecl fcn_00466190(int idx);
+void* __cdecl d2_GetResourceData(int idx);
 int __cdecl fcn_00465950(const char* name);
 void __cdecl fcn_004663e0(char* f, int surf);
 void __cdecl fcn_00469fd0(char* e);
@@ -171,7 +171,7 @@ label_46a1f2:
 			switch (*(int*) (ent + 0x20)) {
 			case 1:
 				if (*(int*) (ent + 0x1e4) != -1) {
-					font = (char*) fcn_00466190(*(int*) (ent + 0x1e4));
+					font = (char*) d2_GetResourceData(*(int*) (ent + 0x1e4));
 					fcn_0047cba0(*(int*) (ent + 0x1e8) + dx, *(int*) (ent + 0x1ec) + dy,
 					             g_77250c, font, g_772568);
 				}
@@ -210,7 +210,7 @@ label_46a1f2:
 			case 5:
 			case 8:
 				if (*(int*) (ent + 0x1e4) != -1) {
-					font = (char*) fcn_00466190(*(int*) (ent + 0x1e4));
+					font = (char*) d2_GetResourceData(*(int*) (ent + 0x1e4));
 					fcn_0047cba0(*(int*) (ent + 0x1e8) + dx, *(int*) (ent + 0x1ec) + dy,
 					             g_77250c, font, g_772568);
 				}
@@ -371,7 +371,7 @@ label_46aadd:
 	fcn_00473a10(g_772570, g_772574);
 	fcn_0047c560(0, 0, 0);
 	fcn_004732c0();
-	g_772524 = (int) fcn_00466190(fcn_00465950((char*) 0x67d474));
+	g_772524 = (int) d2_GetResourceData(fcn_00465950((char*) 0x67d474));
 	g_1015ea4 = 0x18;
 	g_77251c++;
 }

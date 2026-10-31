@@ -35,7 +35,7 @@ extern float g_696550[];
 
 int __cdecl fcn_00500e20(int* pos);
 void __cdecl fcn_00500bb0(Pos14* pos, int a, int b, int c);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int a, int b, int id, int d);
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl gv_GetSlotEntry(int a, int b, int c);
@@ -43,7 +43,7 @@ int __cdecl fcn_00500d20(Pos14* a, Pos14* b);
 int __cdecl _ftol(void);
 int __cdecl fcn_004f2d30(char* p, int a, int b, int c);
 char* __cdecl fcn_0050dc90(char* p);
-void __cdecl fcn_0051af00(char* buf, int a, int b, int c, char* p);
+void __cdecl io_FormatTextBuffer(char* buf, int a, int b, int c, char* p);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e,
 	int f, int g, char* fmt);
 void __cdecl fcn_00546190(char* a0);
@@ -79,7 +79,7 @@ void __cdecl fcn_00579de0(char* a0)
 	if (p->idx == 0xffff || p->xc == -1) {
 		goto end;
 	}
-	s = fcn_00508e40(p->x8c);
+	s = gm_LookupEntityRecordById(p->x8c);
 	if (s) {
 		fcn_00529160(0, 0, *(unsigned short*) s, (int) p);
 	} else {
@@ -127,7 +127,7 @@ void __cdecl fcn_00579de0(char* a0)
 			return;
 		}
 		fig = fcn_0050dc90(rec);
-		fcn_0051af00(text, 0x4126, 0x411e, *(unsigned short*) s, rec);
+		io_FormatTextBuffer(text, 0x4126, 0x411e, *(unsigned short*) s, rec);
 		row = (int) (*(unsigned short*) (a0 + 8)) * 0x21c;
 		if ((g_7f4ca0[row + 2] == 6 || g_7f4ca0[row + 2] == 7)
 			&& (!fig || !(*(unsigned char*) (fig + 0x1b4) & 1))) {

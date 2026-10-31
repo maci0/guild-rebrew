@@ -9,8 +9,8 @@ int __cdecl fcn_004931a0(char* a, char* b)
 	double da;
 	float p;
 
-	da = fcn_00507f10(a, 3);
-	p = (float) (da - fcn_00507f10(b, 3) * 0.5 + 0.1f);
+	da = gm_GetEntitySkill(a, 3);
+	p = (float) (da - gm_GetEntitySkill(b, 3) * 0.5 + 0.1f);
 	if (gm_RandomFloat01() > p)
 		return 0;
 	return 1;

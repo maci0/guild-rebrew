@@ -8,7 +8,7 @@ typedef struct {
 	void* found;    /* +0x0c */
 } SEARCH;
 
-int __cdecl fcn_0051af00(void*, int, ...);
+int __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
@@ -23,7 +23,7 @@ void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c4510(char*, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_00529160(char*, int, int, int);
 int __cdecl fcn_00529670(char*, char*);
@@ -95,7 +95,7 @@ void __cdecl fcn_00569ff0(char* e)
 		count = 8;
 		do {
 			if (*p != -1) {
-				o = (char*) fcn_00508e40(*p);
+				o = (char*) gm_LookupEntityRecordById(*p);
 				if (o != 0) {
 					fcn_00529160(pa, 0, *(unsigned short*) o, e);
 					fcn_004c5c80(*p);
@@ -117,7 +117,7 @@ void __cdecl fcn_00569ff0(char* e)
 		p = (int*) (e + 0x8c);
 		for (count = 0; count < 8; count++, p++) {
 			if (*p != -1) {
-				o = (char*) fcn_00508e40(*p);
+				o = (char*) gm_LookupEntityRecordById(*p);
 				if (o != 0 && *(int*) (o + 0x184) != 0) {
 					if (fcn_00529670(o, pa) == 0) {
 						MSG_COPY(e + 0x52);
@@ -192,15 +192,15 @@ void __cdecl fcn_00569ff0(char* e)
 		}
 		q = (char*) gm_StartFilteredEntitySearch(*(int*) (e + 0xb0), 1, 1);
 		if (q != 0) {
-			pc = (char*) fcn_00508e40(*(int*) (0x7f4ca4 + *(unsigned short*) (q + 0x27) * 0x21c));
+			pc = (char*) gm_LookupEntityRecordById(*(int*) (0x7f4ca4 + *(unsigned short*) (q + 0x27) * 0x21c));
 		}
 		px = (char*) (0x7f4ca0 + *(unsigned short*) (pb + 8) * 0x21c);
 		if (px != 0 && pc != 0) {
 			val = fcn_0050b750((gm_RandomMod(0xc8) & 0xffff) + 0x226);
-			fcn_0051af00(b200, 0x19ea, pa, val, *(unsigned short*) px);
+			io_FormatTextBuffer(b200, 0x19ea, pa, val, *(unsigned short*) px);
 			fcn_00545d40(*(int*) (pc + 4), *(int*) (pc + 4), b200, 1, 0x5f0,
 			        "_NACHRICHTEN_HS_76");
-			fcn_0051af00(b200, 0x19eb, pa, val);
+			io_FormatTextBuffer(b200, 0x19eb, pa, val);
 			fcn_00545d40(*(int*) (px + 4), *(int*) (px + 4), b200, 1, 0x5f0,
 			        "_NACHRICHTEN_HS_77");
 			fcn_004c51a0(*(int*) (pc + 4), *(int*) (px + 4), *(char*) 0x773d75, val);
@@ -216,7 +216,7 @@ void __cdecl fcn_00569ff0(char* e)
 		count = 8;
 		do {
 			if (*p != -1) {
-				o = (char*) fcn_00508e40(*p);
+				o = (char*) gm_LookupEntityRecordById(*p);
 				if (o != 0) {
 					fcn_004ff210(*(short*) o, -100 - (gm_RandomMod(0x64) & 0xffff));
 				}
@@ -242,7 +242,7 @@ void __cdecl fcn_00569ff0(char* e)
 		pa = (char*) gm_StartFilteredEntitySearch(*(int*) (e + 0xac), 1, 1);
 		pb = (char*) gm_StartFilteredEntitySearch(*(int*) (e + 0xb0), 1, 1);
 		if (pb != 0) {
-			pc = (char*) fcn_00508e40(*(int*) (0x7f4ca4 + *(unsigned short*) (pb + 0x27) * 0x21c));
+			pc = (char*) gm_LookupEntityRecordById(*(int*) (0x7f4ca4 + *(unsigned short*) (pb + 0x27) * 0x21c));
 		}
 		if (pa == 0 || pc == 0) {
 			goto fail;
@@ -259,7 +259,7 @@ void __cdecl fcn_00569ff0(char* e)
 			num = 8;
 			do {
 				if (*p != -1) {
-					o = (char*) fcn_00508e40(*p);
+					o = (char*) gm_LookupEntityRecordById(*p);
 					if (o != 0) {
 						fcn_004c5c80(*p);
 						fcn_004c5da0(*p, *(int*) (pb + 1), *(int*) (px + 2), 0, 0,
@@ -312,8 +312,8 @@ void __cdecl fcn_00569ff0(char* e)
 				*(int*) (q + 0x14) += flag;
 			}
 		}
-		fcn_0051af00(b200, 0x19e6, *(unsigned short*) ((char*) count), flag);
-		fcn_0051af00(b100, 0x19e8, *(int*) (e + 0x24), flag);
+		io_FormatTextBuffer(b200, 0x19e6, *(unsigned short*) ((char*) count), flag);
+		io_FormatTextBuffer(b100, 0x19e8, *(int*) (e + 0x24), flag);
 		strcpy(b400, b200);
 		strcpy(b400, b100);
 		fcn_00546190(e);
@@ -327,7 +327,7 @@ void __cdecl fcn_00569ff0(char* e)
 		count = 8;
 		do {
 			if (*p != -1) {
-				o = (char*) fcn_00508e40(*p);
+				o = (char*) gm_LookupEntityRecordById(*p);
 				if (o != 0) {
 					fcn_004c5c80(*p);
 					if (pb != 0 && px != 0) {

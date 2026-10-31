@@ -12,7 +12,7 @@ int __cdecl fcn_0046f7e0(int, int, int, int, int);
 void __cdecl fcn_0046f9b0(int, int);
 void __cdecl fcn_00472900(int, int);
 void __cdecl fcn_0046b2b0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00500e20(int*);
 int __cdecl fcn_0051e070(void);
 char* __cdecl itoa(char*, int, int);
@@ -253,12 +253,12 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			*(int*) 0x772514 = g_row_last(row);
 			if (a4 != 0) {
 				if (a4 != 1) {
-					fcn_00519190(0x6aa164, delta, 0x51e, 0xbb, g_row_type(row) * 2 + 0x9a8);
+					io_AppendText(0x6aa164, delta, 0x51e, 0xbb, g_row_type(row) * 2 + 0x9a8);
 				} else {
-					fcn_00519190(0x6aa17c, delta, 0x51e, 0xba, g_row_type(row) * 2 + 0x9a8);
+					io_AppendText(0x6aa17c, delta, 0x51e, 0xba, g_row_type(row) * 2 + 0x9a8);
 				}
 			} else {
-				fcn_00519190(0x6aa194, delta, 0x51e, 0xb8, g_row_type(row) * 2 + 0x9a8);
+				io_AppendText(0x6aa194, delta, 0x51e, 0xb8, g_row_type(row) * 2 + 0x9a8);
 			}
 		} else if (pick != 0) {
 			*(int*) (g_object(g_row_item(row, key)) + 0x3c) = 1;
@@ -266,32 +266,32 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			if (g_id_field(row, 0x36) == 1) {
 				j = fcn_0051e070();
 				if (j == 0) {
-					fcn_00519190(0xc1, (unsigned int) g_id_field(row, 0x36),
+					io_AppendText(0xc1, (unsigned int) g_id_field(row, 0x36),
 					             g_row_type(row) * 2 + 0x9a8);
 				} else if (j == 1) {
-					fcn_00519190(0xc1, g_row_type(row) * 2 + 0x9a8,
+					io_AppendText(0xc1, g_row_type(row) * 2 + 0x9a8,
 					             (unsigned int) g_id_field(row, 0x36));
 				}
 			} else {
 				j = fcn_0051e070();
 				if (j == 0) {
-					fcn_00519190(0xc2, g_row_type(row) * 2 + 0x9a8,
+					io_AppendText(0xc2, g_row_type(row) * 2 + 0x9a8,
 					             (unsigned int) g_id_field(row, 0x36));
 				} else if (j == 1) {
-					fcn_00519190(0xc2, (unsigned int) g_id_field(row, 0x36),
+					io_AppendText(0xc2, (unsigned int) g_id_field(row, 0x36),
 					             g_row_type(row) * 2 + 0x9a8);
 				}
 			}
 			state = g_row_val(row, key);
 			if (state == 1) {
-				fcn_00519190(0xc3, pick, g_row_cat(row, key) * 2 + 0x9a8);
+				io_AppendText(0xc3, pick, g_row_cat(row, key) * 2 + 0x9a8);
 			} else {
-				fcn_00519190(0xc4, state, g_row_cat(row, key) * 2 + 0x9a8);
+				io_AppendText(0xc4, state, g_row_cat(row, key) * 2 + 0x9a8);
 			}
 			if (pick == 1) {
-				fcn_00519190(0xc5);
+				io_AppendText(0xc5);
 			} else {
-				fcn_00519190(0xc6, pick);
+				io_AppendText(0xc6, pick);
 			}
 		} else {
 			pick = 1;
@@ -300,32 +300,32 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			if (g_id_field(row, 0x36) == 1) {
 				j = fcn_0051e070();
 				if (j == 0) {
-					fcn_00519190(0xc1, (unsigned int) g_id_field(row, 0x36),
+					io_AppendText(0xc1, (unsigned int) g_id_field(row, 0x36),
 					             g_row_type(row) * 2 + 0x9a8);
 				} else if (j == 1) {
-					fcn_00519190(0xc1, g_row_type(row) * 2 + 0x9a8,
+					io_AppendText(0xc1, g_row_type(row) * 2 + 0x9a8,
 					             (unsigned int) g_id_field(row, 0x36));
 				}
 			} else {
 				j = fcn_0051e070();
 				if (j == 0) {
-					fcn_00519190(0xc2, g_row_type(row) * 2 + 0x9a8,
+					io_AppendText(0xc2, g_row_type(row) * 2 + 0x9a8,
 					             (unsigned int) g_id_field(row, 0x36));
 				} else if (j == 1) {
-					fcn_00519190(0xc2, (unsigned int) g_id_field(row, 0x36),
+					io_AppendText(0xc2, (unsigned int) g_id_field(row, 0x36),
 					             g_row_type(row) * 2 + 0x9a8);
 				}
 			}
 			state = g_row_val(row, key);
 			if (state == 1) {
-				fcn_00519190(0xc3, pick, g_row_cat(row, key) * 2 + 0x9a8);
+				io_AppendText(0xc3, pick, g_row_cat(row, key) * 2 + 0x9a8);
 			} else {
-				fcn_00519190(0xc4, state, g_row_cat(row, key) * 2 + 0x9a8);
+				io_AppendText(0xc4, state, g_row_cat(row, key) * 2 + 0x9a8);
 			}
 			if (pick == 1) {
-				fcn_00519190(0xc5);
+				io_AppendText(0xc5);
 			} else {
-				fcn_00519190(0xc6, pick);
+				io_AppendText(0xc6, pick);
 			}
 		}
 

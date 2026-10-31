@@ -38,7 +38,7 @@ int __cdecl fcn_004c5290(int, int, int);
 int __cdecl fcn_00505340(char*);
 void __cdecl fcn_004c5d20(int, int);
 int __cdecl fcn_00529710(char*, char*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_004432d0(int, int);
@@ -86,14 +86,14 @@ void __cdecl fcn_0055dab0(char* e)
 		*(int*) (e + 0xec) = fcn_004c5290(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
 		k = *(unsigned char*) c;
 		if (k == 0x47) {
-			fcn_0051af00(msg, 0x1c3b, 1, 0x1c39, g_868060 + *(int*) (c + 0x65) * 0x2f4);
+			io_FormatTextBuffer(msg, 0x1c3b, 1, 0x1c39, g_868060 + *(int*) (c + 0x65) * 0x2f4);
 			if ((g_7e35c0[g_774650][0] != 0x5ba910 || g_7746c8 != c) &&
 			    !(r[0x20] & 1) && e[0xf2] == 0) {
 				he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), msg, 0,
 				    0x609, *(int*) (c + 1), -1, 0, "_NACHRICHTEN_HS_60");
 			}
 		} else if (*(unsigned char*) b == 0x47) {
-			fcn_0051af00(msg, 0x1c3d, 1, 0x1c39, g_868060 + *(int*) (b + 0x65) * 0x2f4,
+			io_FormatTextBuffer(msg, 0x1c3d, 1, 0x1c39, g_868060 + *(int*) (b + 0x65) * 0x2f4,
 			    *(unsigned short*) (c + 0x27), c);
 			if ((g_7e35c0[g_774650][0] != 0x5ba910 || g_7746c8 != c) &&
 			    !(r[0x20] & 1) && e[0xf2] == 0) {
@@ -113,13 +113,13 @@ void __cdecl fcn_0055dab0(char* e)
 				text[0] = 0;
 			}
 			if (lv->kind != 0x1d && lv->kind != 0x1f) {
-				fcn_0051af00(msg, 0x1c3f, 1, 0x1c39, *(unsigned short*) (c + 0x27), c);
+				io_FormatTextBuffer(msg, 0x1c3f, 1, 0x1c39, *(unsigned short*) (c + 0x27), c);
 			} else {
 				code = 0x608;
 				if (fcn_00505340(c)) {
-					fcn_0051af00(msg, 0x1c43);
+					io_FormatTextBuffer(msg, 0x1c43);
 				} else {
-					fcn_0051af00(msg, 0x1c44, c);
+					io_FormatTextBuffer(msg, 0x1c44, c);
 				}
 			}
 			if ((g_7e35c0[g_774650][0] != 0x5ba910 || g_7746c8 != c) &&

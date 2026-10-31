@@ -16,7 +16,7 @@ int __cdecl fcn_00401470(void* f, int count, void** out, const char* tag)
 	if (n != count) {
 		fcn_00430a80(f, n * size, 1);
 		*out = 0;
-		fcn_0041d9e0("array count mismatch");
+		ReportClientMessage("array count mismatch");
 		return 0;
 	}
 	*out = m_alloc(size * count, tag);

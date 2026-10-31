@@ -10,10 +10,10 @@ void __cdecl fcn_00471e30(void*);
 int __cdecl fcn_0050cf50(char*, signed char);
 int __cdecl fcn_0050b710(int, char);
 int __cdecl d2_SetForm(void*, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(void*, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_0050b750(int, char);
@@ -42,12 +42,12 @@ void __cdecl fcn_005c35d0(char* e)
 	w = fcn_0050b710(x, *(unsigned char*) 0x773d75);
 	d2_SetForm(dlg, 2);
 	ctl = fcn_00472250(dlg, 2,
-	                   fcn_00519190(0x17de, *(unsigned short*) (e + 0x25), e,
+	                   io_AppendText(0x17de, *(unsigned short*) (e + 0x25), e,
 	                                *(unsigned char*) 0x773d75));
 	x = (int) ((double) w * *(double*) 0x662aa0);
 	y = (int) ((double) x * *(double*) 0x662908);
 	fcn_00472380(ctl, y, x, w);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_005373e0(0, 0x677c7);
 	do {
 		x = gm_SearchTable67(w);

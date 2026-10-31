@@ -11,7 +11,7 @@ int __cdecl fcn_00502cd0(int a, int b, ...);
 int __cdecl fcn_00502850(void);
 float __cdecl fcn_0042e450(void);
 void __cdecl fcn_004c51f0(int a, int b, int c, int d, unsigned char e, int f);
-void __cdecl fcn_0051af00(char* buf, int id, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
 void __cdecl fcn_005dbe90(char* buf);
 
@@ -68,13 +68,13 @@ int __cdecl fcn_005de420(char* a0, char* a1)
 	}
 
 	if (base[2] == 6 || base[2] == 7) {
-		fcn_0051af00(v13, 0x100c, v12);
+		io_FormatTextBuffer(v13, 0x100c, v12);
 		fcn_00545d40(*(int*) (base + 4), -1, v13, 0, 0x5fb, 0);
 	}
 	if (a0[2] == 6) {
-		fcn_0051af00(v14, 0x109d,
+		io_FormatTextBuffer(v14, 0x109d,
 		    *(unsigned short*) ((char*) v12 + 0x27), v12);
-		fcn_0051af00(v13, 0xfe8, v14);
+		io_FormatTextBuffer(v13, 0xfe8, v14);
 		fcn_005dbe90(v13);
 	}
 	*(int*) (a1 + 0x10) = one;

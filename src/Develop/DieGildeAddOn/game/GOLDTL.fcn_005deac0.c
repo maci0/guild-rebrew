@@ -19,9 +19,9 @@ extern __int64 g_666018;
 extern int g_66601c;
 extern float g_662a6c;
 
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(char*, int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c6b20(int, int, int);
@@ -37,7 +37,7 @@ int __cdecl fcn_005deac0(char* e, char* a2)
 	if (e[2] == 6) {
 		memset(&req, 0, sizeof(req));
 		memset(&req.pad[2], -1, 0x20);
-		fcn_0051af00(text, 0x9c);
+		io_FormatTextBuffer(text, 0x9c);
 		req.c = (*(int*)&g_666018);
 		req.a = 0;
 		req.size = 0x400;
@@ -46,7 +46,7 @@ int __cdecl fcn_005deac0(char* e, char* a2)
 		r = fcn_005cd440(&req, text, 0, 0);
 	}
 	else {
-		r = fcn_00508e40(*(int*) (a2 + 4));
+		r = gm_LookupEntityRecordById(*(int*) (a2 + 4));
 	}
 	if (r == 0) {
 		return 0;
@@ -56,8 +56,8 @@ int __cdecl fcn_005deac0(char* e, char* a2)
 	}
 	*(int*) (a2 + 0x10) = 1;
 	if (e[2] == 6) {
-		fcn_0051af00(text, 0x10a9, *(unsigned short*) r);
-		fcn_0051af00(msg, 0xfe8, text);
+		io_FormatTextBuffer(text, 0x10a9, *(unsigned short*) r);
+		io_FormatTextBuffer(msg, 0xfe8, text);
 		fcn_005dbe90(msg);
 	}
 	return 1;

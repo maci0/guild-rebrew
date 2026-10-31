@@ -3,7 +3,7 @@
  * listed in the row blocker. */
 
 int __cdecl fcn_00465950(char* name);
-int __cdecl fcn_00466190(int handle);
+int __cdecl d2_GetResourceData(int handle);
 
 /* ADDRESS: GOLDTL 0x0046bd20 */
 int __cdecl fcn_0046bd20(int a1, int a2, int a3, int a4, int a5, int a6,
@@ -15,7 +15,7 @@ int __cdecl fcn_0046bd20(int a1, int a2, int a3, int a4, int a5, int a6,
 
     font = (int*) 0x772524;
     if (*font == 0)
-        *font = fcn_00466190(fcn_00465950("_FONT"));
+        *font = d2_GetResourceData(fcn_00465950("_FONT"));
     *(int*) 0x772544 = 0;
     *(int*) 0x772548 = 0;
     *(int*) 0x77254c = 0x270f;

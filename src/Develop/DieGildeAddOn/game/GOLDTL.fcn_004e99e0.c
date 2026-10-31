@@ -6,7 +6,7 @@
 #include "Develop/DieGildeAddOn/game/aemter.h"
 
 #include "GOLDTL.fcn_004e99e0_gconf.h"
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004aacb0(unsigned short*, unsigned short*, unsigned short*, int*);
 int __cdecl fcn_004aae50(int, unsigned short*, int*, int*);
 int __cdecl fcn_004c4450(int);
@@ -59,14 +59,14 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 			continue;
 		}
 		remain--;
-		self = fcn_00508e40(p->mplayerid);
-		other = fcn_00508e40(p->msetter);
+		self = gm_LookupEntityRecordById(p->mplayerid);
+		other = gm_LookupEntityRecordById(p->msetter);
 		if (self == 0 || other == 0) {
 			continue;
 		}
 		for (k = 0; k < count; k++) {
 			ids[k] = 3;
-			ent = fcn_00508e40(list[k].mplayerid);
+			ent = gm_LookupEntityRecordById(list[k].mplayerid);
 			if (ent != 0 && *(char*) (ent + 0x166) != 0
 			    && *(char*) (ent + 0x1b1) == 0) {
 				held = fcn_004aacb0((unsigned short*) ent,
@@ -164,7 +164,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 				score[k] = 0;
 			}
 			for (k = 0; k < count; k++) {
-				ent = fcn_00508e40(list[k].mplayerid);
+				ent = gm_LookupEntityRecordById(list[k].mplayerid);
 				score[k] = -1;
 				if (ent != 0 && fcn_004e9180(ent, p->mamt) != 0
 				    && *(char*) (ent + 0x1b1) == 0) {

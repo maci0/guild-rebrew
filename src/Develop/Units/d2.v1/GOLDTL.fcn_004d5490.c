@@ -46,7 +46,7 @@ int __cdecl fcn_0046f740(int x, int y, int id, int win);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0046f940(int, char*);
 float __cdecl fcn_0050bb50(int, unsigned char);
-void __cdecl fcn_0051af00(char*, char*, ...);
+void __cdecl io_FormatTextBuffer(char*, char*, ...);
 Item* __cdecl gm_NextEntityQueryMatch(void);
 
 int __cdecl fcn_004d5490(int x, int y, int mode)
@@ -90,7 +90,7 @@ int __cdecl fcn_004d5490(int x, int y, int mode)
 			((Slot*)g_1015ea0)[lbl].color = 0x56;
 			((Slot*)g_1015ea0)[lbl].h = 0x50;
 			((Slot*)g_1015ea0)[lbl].centered = 1;
-			fcn_0051af00(text, "%T", (int) fcn_0050bb50(e->id, g_773d75) * e->count);
+			io_FormatTextBuffer(text, "%T", (int) fcn_0050bb50(e->id, g_773d75) * e->count);
 			fcn_0046f940(lbl, text);
 			total = (int)(fcn_0050bb50(e->id, g_773d75) * e->count + total);
 			n++;

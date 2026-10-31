@@ -14,17 +14,17 @@ void* __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00533dc0(int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_00594340(void);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_0046f9b0(int, int);
 void __cdecl fcn_00472640(int, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00595e20(int, int);
 void __cdecl fcn_005963f0(int, int, int, int);
 int __cdecl fcn_005373e0(int, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_0052ae70(void);
@@ -122,7 +122,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 	fcn_00533dc0(g_772514, 0x70f, 0x741);
 	d2_SetForm(menu, 3);
 	screen = (*ents != 0x1f) ? 0x4128 : 0x421e;
-	fcn_00519190(screen);
+	io_AppendText(screen);
 	fcn_0052a0c0((int) a0, 0);
 	fcn_00594340();
 	fcn_00471b60(menu);
@@ -145,7 +145,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 		}
 		menu = ids[3];
 	}
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00595e20((int) a0, handles[3]);
 	fcn_005963f0(menu, 1, 0, (int) a0);
 	sel = fcn_005373e0(0x58d5f0, 0x677c7);
@@ -178,18 +178,18 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 				if (*ents != 0x1f) {
 					h = ids[i] * 2 + 0x9a8;
 					if (counts[i] == 1) {
-						fcn_0051af00(text, 0x4129, 0x228);
+						io_FormatTextBuffer(text, 0x4129, 0x228);
 					} else if (counts[i] > 1) {
-						fcn_0051af00(text, 0x412a, counts[i], 0x228, h);
+						io_FormatTextBuffer(text, 0x412a, counts[i], 0x228, h);
 					} else {
-						fcn_0051af00(text, 0x679060, h);
+						io_FormatTextBuffer(text, 0x679060, h);
 					}
 				} else if (counts[i] == 1) {
-					fcn_0051af00(text, 0x421f, 0x22d, ids[i] * 2 + 0x9a8);
+					io_FormatTextBuffer(text, 0x421f, 0x22d, ids[i] * 2 + 0x9a8);
 				} else if (counts[i] >= 2) {
-					fcn_0051af00(text, 0x4220, counts[i], 0x22d);
+					io_FormatTextBuffer(text, 0x4220, counts[i], 0x22d);
 				} else {
-					fcn_0051af00(text, 0x679060, ids[i] * 2 + 0x9a8);
+					io_FormatTextBuffer(text, 0x679060, ids[i] * 2 + 0x9a8);
 				}
 				fcn_0046f9b0(handles[i], text);
 			}

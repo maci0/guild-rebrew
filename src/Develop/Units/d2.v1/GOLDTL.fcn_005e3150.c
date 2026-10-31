@@ -33,8 +33,8 @@ void __cdecl fcn_00471db0(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00473a90(int, int);
-int __cdecl fcn_00519190(int, ...);
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00468cd0(int, int);
@@ -77,9 +77,9 @@ void __cdecl fcn_005e3150(void)
 	fcn_00471d80(dlg, 2);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(g_772514);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 2);
-	fcn_00519190(0x1c5b);
+	io_AppendText(0x1c5b);
 	d2_SetForm(dlg, 1);
 	s0 = fcn_00472250(dlg, 1, 0);
 	s1 = fcn_00472250(dlg, 1, 1);

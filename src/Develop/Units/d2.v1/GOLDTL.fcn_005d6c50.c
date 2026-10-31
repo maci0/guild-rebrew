@@ -6,10 +6,10 @@ extern int g_14ce8e0;
 extern int g_774654;
 
 void* __cdecl fcn_00470820(int a, int b, char* name);
-void __cdecl fcn_00473a90(int a, int b);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl fcn_00471b60(int dlg);
 void __cdecl d2_SetForm(int dlg, int a);
-int __cdecl fcn_00519190(int id, ...);
+int __cdecl io_AppendText(int id, ...);
 void __cdecl fcn_004fcda0(int id, int a, void* out);
 int __cdecl gm_RandomMod(int a);
 int __cdecl _ftol(void);
@@ -18,7 +18,7 @@ void __cdecl fcn_004c6ae0(int a, int b);
 int __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 int __cdecl fcn_004c4450(int a);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_0051af00(char* out, int id, ...);
+void __cdecl io_FormatTextBuffer(char* out, int id, ...);
 int __cdecl fcn_00526120(char* text, int a);
 int __cdecl fcn_00471e30(int dlg);
 int __cdecl fcn_005373e0(void* fn, int msg);
@@ -64,10 +64,10 @@ int __cdecl fcn_005d6c50(int a0, int a1)
         return 0;
     }
     dlg = (int) fcn_00470820(0, 0, "privillegien\\unterschlagung");
-    fcn_00473a90(0, 0);
+    d2_SetOverlayAnimation(0, 0);
     fcn_00471b60(dlg);
     d2_SetForm(dlg, 1);
-    fcn_00519190(0x1dc2, *p);
+    io_AppendText(0x1dc2, *p);
     *(int*) frame = dlg;
     g_100f1dc = -1;
     for (;;) {
@@ -80,7 +80,7 @@ int __cdecl fcn_005d6c50(int a0, int a1)
                                      0);
                     while (fcn_004c4450(h) == 0)
                         fcn_00535960();
-                    fcn_0051af00(frame + 0x18, 0x1dc3, h2);
+                    io_FormatTextBuffer(frame + 0x18, 0x1dc3, h2);
                     fcn_00526120(frame + 0x18, 0);
                     *(int*) (frame + 4) = 0x90;
                     g_774654 = 1;

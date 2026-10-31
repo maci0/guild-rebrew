@@ -3,7 +3,7 @@
 
 int __cdecl abs(int);
 #pragma intrinsic(abs)
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00508eb0(unsigned short, int);
 
 int __cdecl fcn_005d2950(int a, int b)
@@ -11,8 +11,8 @@ int __cdecl fcn_005d2950(int a, int b)
 	unsigned char* p;
 	unsigned char* q;
 
-	p = fcn_00508e40(a);
-	q = fcn_00508e40(b);
+	p = gm_LookupEntityRecordById(a);
+	q = gm_LookupEntityRecordById(b);
 	if (p == 0 || q == 0) {
 		return -0x400;
 	}

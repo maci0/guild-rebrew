@@ -3,7 +3,7 @@ void __cdecl fcn_00471b60(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
 int __cdecl fcn_005373e0(int, int);
@@ -61,7 +61,7 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 	menu = fcn_00470820(0, 0, (char*) 0x6816e8);
 	fcn_00471b60(menu);
 	d2_SetForm(menu, 4);
-	active = fcn_00472250(menu, 4, fcn_00519190(0x7d));
+	active = fcn_00472250(menu, 4, io_AppendText(0x7d));
 	d2_SetForm(menu, 2);
 	for (i = 0; i < count; i++) {
 		entry = fcn_0046f740((i % 4) << 6, (i / 4) << 6, values[i] + 0xdf,

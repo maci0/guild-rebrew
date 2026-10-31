@@ -1,4 +1,4 @@
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
 int __cdecl fcn_004eeb10(char*, int);
 int __cdecl ahm_ApplyColorComponent(char*, int);
@@ -18,7 +18,7 @@ int __cdecl fcn_004cdb90(char* cfg, char* out)
 		out[1] = 0;
 		*(int*)(out + 6) = 0;
 	}
-	s = (char*) fcn_00508e40(*(int*)(cfg + 0x14));
+	s = (char*) gm_LookupEntityRecordById(*(int*)(cfg + 0x14));
 	if (!s)
 		return -1;
 	if (!ahm_CheckFlag(s))

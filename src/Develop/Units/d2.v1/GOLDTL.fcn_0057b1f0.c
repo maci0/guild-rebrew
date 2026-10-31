@@ -10,7 +10,7 @@ void __cdecl fcn_0057b160(char* a);
 void __cdecl fcn_00471b60(int id);
 void __cdecl d2_SetForm(int a, int b);
 void __cdecl fcn_004c30a0(int a, int b, char* c, int d, int e);
-int __cdecl fcn_00519190(int a, ...);
+int __cdecl io_AppendText(int a, ...);
 int __cdecl fcn_00500cb0(void* a, void* b);
 
 /* ADDRESS: GOLDTL 0x0057b1f0 */
@@ -59,8 +59,8 @@ void __cdecl fcn_0057b1f0(char* a)
 	}
 	fcn_00471b60(*(int*) (*(int*) (a + 0x74) + 8));
 	d2_SetForm(*(int*) (*(int*) (a + 0x74) + 8), 0);
-	fcn_00519190(0x6811b0);
-	fcn_00519190(0x411c, *(int*) (a + 0xb8));
+	io_AppendText(0x6811b0);
+	io_AppendText(0x411c, *(int*) (a + 0xb8));
 	fcn_004c30a0(-7, 0, (char*) 0x6a8034, -1, 0);
 	*(int*) (a + 0x70) = 1;
 	}

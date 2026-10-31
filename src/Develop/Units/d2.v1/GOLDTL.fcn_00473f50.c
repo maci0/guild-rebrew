@@ -19,7 +19,7 @@ void __cdecl fcn_00473f50(Spin* p, int v, int a3, int a4)
 {
 	int step;
 
-	step = fcn_004722c0((char*) p);
+	step = d2_GetValueStep((char*) p);
 	p->value = v - step * ((a4 - a3) / 4);
 	if (p->value > p->max) {
 		p->value = p->max;

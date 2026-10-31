@@ -5520,6 +5520,11 @@ pad costs more than it returns.
 
 ## 93. The data-prefix pad
 
+Historical client scoring experiment, not a current recipe. Copied unowned
+client `dpad` blobs in a shared TU caused a server regression and were removed.
+Do not recreate reference fillers; original constants and evidenced layout facts
+remain valid.
+
 The `.data` section starts where `.text` and `.rdata` end, so its content sits
 about 0x2C000 bytes before the reference's `.data`. Padding at the end of
 `.text` cannot fix that (simulated: any pad loses, because it replaces the tail
@@ -5537,6 +5542,8 @@ The pad lives in `src/Develop/Unassigned/GOLDTL.fcn_00401000.c` as
 fill` does not manage it, so keep it out of pad regeneration runs.
 
 ## 94. The .rdata prefix pad
+
+This paired padding experiment is historical and does not authorize fillers.
 
 `.rdata` content also starts early (0x23F000 against 0x262000). A prefix pad
 inside `.rdata` moves that section's content later, and the same number of bytes

@@ -25,7 +25,7 @@ char* __cdecl fcn_004011a0(void* stream, char* dst);
 int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl fcn_00401280(void* stream, void* dst);
-void __cdecl fcn_0041d9e0(const char* msg);
+void __cdecl ReportClientMessage(const char* msg);
 void __cdecl fcn_00438920(float a, float b, int c);
 void __cdecl fcn_00438b40(char* object, int* vector);
 void __cdecl fcn_00438cb0(char* object, int* vector);
@@ -186,7 +186,7 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 			fcn_0043b850(s);
 		}
 	} else {
-		fcn_0041d9e0("Scene too old... Sorry!");
+		ReportClientMessage("Scene too old... Sorry!");
 	}
 	if (stream == 0) {
 		CloseVfsStream(s);

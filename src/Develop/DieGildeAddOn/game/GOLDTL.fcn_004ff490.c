@@ -9,7 +9,7 @@ extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
 extern float g_696444[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c5480(int, int, float);
 void __cdecl fcn_00500bb0(void*, int, int, int);
@@ -56,7 +56,7 @@ void __cdecl fcn_004ff490(char* a0)
 		return;
 	}
 
-	ent = fcn_00508e40(*(unsigned int*) (a0 + 0x5c));
+	ent = gm_LookupEntityRecordById(*(unsigned int*) (a0 + 0x5c));
 	if (g_6628a0 < *(float*) (a0 + 0x7c)) {
 		f = gm_RandomFloat01() * g_664158 - *(float*) (a0 + 0x7c);
 		fcn_004c5480(*(unsigned int*) (a0 + 4), 0x7c, f);
@@ -157,7 +157,7 @@ void __cdecl fcn_004ff490(char* a0)
 		p = a0 + 0x68;
 		for (i = 0; i < 5; i++) {
 			if (*(int*) p != -1) {
-				e = fcn_00508e40(*(int*) p);
+				e = gm_LookupEntityRecordById(*(int*) p);
 				if (*(char*) (e + 2) == 6 || *(char*) (e + 2) == 7 || *(char*) (e + 2) == 5) {
 					return;
 				}
@@ -175,7 +175,7 @@ void __cdecl fcn_004ff490(char* a0)
 			p = ent + 0x68;
 			for (i = 0; i < 5; i++) {
 				if (*(int*) p != -1) {
-					e = fcn_00508e40(*(int*) p);
+					e = gm_LookupEntityRecordById(*(int*) p);
 					if (*(char*) (e + 2) == 6 || *(char*) (e + 2) == 7 || *(char*) (e + 2) == 5) {
 						return;
 					}

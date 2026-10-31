@@ -15,7 +15,7 @@
 
 extern char g_office_slots[0x3f0];
 
-unsigned char *__cdecl fcn_00508e40(int id);
+unsigned char *__cdecl gm_LookupEntityRecordById(int id);
 
 
 
@@ -27,7 +27,7 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 	OFFICE_SLOT* p;
 	int i;
 
-	rec = fcn_00508e40(arg1[0]);
+	rec = gm_LookupEntityRecordById(arg1[0]);
 	if (rec == 0 || rec[0x168] != 0)
 		return 0;
 

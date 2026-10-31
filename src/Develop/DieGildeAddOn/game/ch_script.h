@@ -27,7 +27,7 @@ int __cdecl SetCharacterCamera(char** ch, char** view);
 int __cdecl MoveCharacterCamera(char** character, char** view, int* mode);
 int __cdecl fcn_0040da60(void** a1, int* a2, int* a3, int* a4, int* a5);
 int __cdecl fcn_0040dac0(char** character);
-int __cdecl fcn_0040dad0(int** pp);
+int __cdecl CharacterIdle(int** charakter_argument);
 int __cdecl fcn_0040db10(void* a1);
 int __cdecl fcn_0040db50(char** a1);
 char* __cdecl fcn_0040dbb0(char** a, int* range);

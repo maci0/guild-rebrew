@@ -16,7 +16,7 @@ struct Events {
 	EventsVtbl* vtbl;
 };
 
-char* __cdecl fcn_0041f9b0(int id);
+char* __cdecl FindVideoById(int id);
 
 long __cdecl fcn_0041f530(int id, long* p1, long* p2)
 {
@@ -24,7 +24,7 @@ long __cdecl fcn_0041f530(int id, long* p1, long* p2)
 	long code;
 	Events* ev;
 
-	o = fcn_0041f9b0(id);
+	o = FindVideoById(id);
 	code = 0;
 	if (o != 0) {
 		ev = *(Events**) (o + 0x124);

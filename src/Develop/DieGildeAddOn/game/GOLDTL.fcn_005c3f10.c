@@ -16,7 +16,7 @@ extern int g_14ab294;
 int __cdecl fcn_0057ec20(int a);
 void __cdecl fcn_0057e880(int a, int b, int c, int d);
 int __cdecl fcn_00504bd0(int a);
-void __cdecl fcn_00473a90(int a, int b);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_0050cf50(int a);
 int __cdecl fcn_00504f30(int a, int b, int c);
 int __cdecl fcn_005463a0(int a);
@@ -66,7 +66,7 @@ void __cdecl fcn_005c3f10(char* ent)
 		fcn_00504bd0(*(unsigned char*) ent);
 		dlg = fcn_00470820(0, 0, (char*) 0x6ac690);
 		fcn_00471b60(dlg);
-		fcn_00473a90(0, 0);
+		d2_SetOverlayAnimation(0, 0);
 		fcn_0050cf50((int) ent);
 		fcn_00504f30(*(unsigned char*) ent, (int) g_774970, 0);
 		if ((*(unsigned char*) (ent + 0x5a) & 2) != 0

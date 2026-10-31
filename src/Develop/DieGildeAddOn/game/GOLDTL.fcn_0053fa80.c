@@ -54,7 +54,7 @@ void __cdecl fcn_004bbd50(void);
 void __cdecl fcn_004c3e30(void);
 void __cdecl fcn_00402320(void);
 void __cdecl fcn_00421050(void);
-void __cdecl fcn_00473a90(int a, int b);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
 
 /* ADDRESS: GOLDTL 0x0053fa80 */
 void __cdecl fcn_0053fa80(void)
@@ -137,7 +137,7 @@ void __cdecl fcn_0053fa80(void)
 	fcn_00402320();
 	fcn_00421050();
 	g_77497c = 0;
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	g_7e2aa0 = 0;
 	g_7746cc = 0;
 	g_7746c4 = 0;

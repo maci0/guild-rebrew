@@ -2,7 +2,7 @@ extern int __cdecl fcn_00470820(int a, int b, const char *name);
 extern void __cdecl fcn_00471b60(int obj);
 extern void __cdecl d2_SetForm(int obj, int a);
 extern int __cdecl fcn_0051e070(void);
-extern int __cdecl fcn_00519190(int id, ...);
+extern int __cdecl io_AppendText(int id, ...);
 extern int __cdecl fcn_00472250(int obj, int a, int b);
 extern int __cdecl d2_CreateRadioGroup(int a, int b, int c, int d);
 extern void __cdecl fcn_004695a0(int obj, int a);
@@ -49,12 +49,12 @@ int __cdecl fcn_0053dc20(void)
 	fcn_00471b60(obj);
 	d2_SetForm(obj, 0);
 	if (fcn_0051e070()) {
-		v4 = fcn_00519190(0x1ac0, 0x1ac2, 0x1ac4, 0x1ac2);
+		v4 = io_AppendText(0x1ac0, 0x1ac2, 0x1ac4, 0x1ac2);
 		v10 = fcn_00472250(obj, 0, v4);
 		v11 = fcn_00472250(obj, 0, v4 + 1);
 		dlg = d2_CreateRadioGroup(3, v10, v11, fcn_00472250(obj, 0, v4 + 2));
 	} else {
-		v4 = fcn_00519190(0x1ac0, 0x1ac2, 0x1ac3, 0x1ac4, 0x1ac2, 0x1ac3,
+		v4 = io_AppendText(0x1ac0, 0x1ac2, 0x1ac3, 0x1ac4, 0x1ac2, 0x1ac3,
 		    0x1ac4, 1);
 		v10 = fcn_00472250(obj, 0, v4);
 		v12 = fcn_00472250(obj, 0, v4 + 1);

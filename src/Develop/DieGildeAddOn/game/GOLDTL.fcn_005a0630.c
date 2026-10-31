@@ -14,7 +14,7 @@ typedef struct
 
 extern __int64 g_666018;
 
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005cd440(Query*, char*, int, void*);
 void __cdecl fcn_005bf580(void);
 void __cdecl fcn_00532ef0(void);
@@ -28,7 +28,7 @@ void __cdecl fcn_005a0630(void)
 	q.x4 = 0x400;
 	q.x10 = 6;
 	q.mask = g_666018;
-	fcn_0051af00(buf, 0x16f9);
+	io_FormatTextBuffer(buf, 0x16f9);
 	fcn_005cd440(&q, buf, 0, (void*) fcn_005bf580);
 	fcn_00532ef0();
 }

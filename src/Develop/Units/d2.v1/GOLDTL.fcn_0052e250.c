@@ -35,7 +35,7 @@ extern int g_6a25ec;
 
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
-void __cdecl fcn_00519190(char* fmt, ...);
+void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 unsigned short* __cdecl gm_ResolveParentEntity(unsigned short* e);
 int __cdecl fcn_00506380(int id, unsigned char* store, int a, int b);
@@ -67,12 +67,12 @@ void __cdecl fcn_0052e250(unsigned short* item)
 	}
 	if (store != 0) {
 		if (store[5] != 0) {
-			fcn_00519190(g_6a2f64, *store * 14 + 0x48e, store + 5, *item * 2 + 0x9a8);
+			io_AppendText(g_6a2f64, *store * 14 + 0x48e, store + 5, *item * 2 + 0x9a8);
 		} else {
-			fcn_00519190(g_6a2f24, *store * 14 + 0x48e, *item * 2 + 0x9a8);
+			io_AppendText(g_6a2f24, *store * 14 + 0x48e, *item * 2 + 0x9a8);
 		}
 	} else {
-		fcn_00519190(g_6a2f5c, *item * 2 + 0x9a8);
+		io_AppendText(g_6a2f5c, *item * 2 + 0x9a8);
 	}
 	d2_SetForm(g_6a25b8, 0);
 	id = fcn_0046f740(((((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1) - 1, 0x48, *item + 0xdf, g_772514);

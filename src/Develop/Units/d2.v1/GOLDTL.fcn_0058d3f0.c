@@ -21,14 +21,14 @@ extern char s_6a9714[];
 extern char s_6a96d8[];
 
 int __cdecl fcn_004f3e60(int, int*);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00470820(int, int, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_004f3280(int, int, int, int, int);
 int __cdecl fcn_004c4450(int);
@@ -57,20 +57,20 @@ int __cdecl fcn_0058d3f0(int a1, Req* a2)
 	s = fcn_004f3e60(a1, &info);
 	if (s != 1) {
 		if (s == 0) {
-			fcn_0051af00(buf, 0x4135, info, 0x229, a1);
+			io_FormatTextBuffer(buf, 0x4135, info, 0x229, a1);
 			fcn_00526120(buf, 0);
 		}
 		return 0;
 	}
 	dlg = fcn_00470820(0, 0, (int) s_6a96d8);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x4132, 0x4131, 0x229);
+	io_AppendText(0x4132, 0x4131, 0x229);
 	d2_SetForm(dlg, 2);
-	id = fcn_00519190(0x4133);
+	id = io_AppendText(0x4133);
 	ok = fcn_00472250(dlg, 2, id);
 	cancel = fcn_00472250(dlg, 2, id + 1);
 	g_100f1dc = -1;

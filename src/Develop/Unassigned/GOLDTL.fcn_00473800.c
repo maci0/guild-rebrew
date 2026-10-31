@@ -53,7 +53,7 @@ void __cdecl fcn_0047a040(int, int, int, int);
 void __cdecl fcn_0047cba0(int, int, Ctx*, int, int);
 void __cdecl fcn_0047cd70(int, Ctx*);
 void __cdecl fcn_00472880(int);
-int __cdecl fcn_00466190(int);
+int __cdecl d2_GetResourceData(int);
 int __cdecl fcn_0047cc80(int, int, Ctx*, int, int, float, int);
 void __cdecl fcn_0046bd20(int, int, int, int, Ctx*, char*, int);
 
@@ -99,7 +99,7 @@ void __cdecl fcn_00473800(Ctx* c, int x, int y)
 		if (p->id != -1) {
 			px = x + ((Cls*)g_772500)[g_67d3ac].x50 + k % 3 * 0x1a;
 			py = (g_1015ea4 + 0x1a) * (k / 3) + y;
-			h = fcn_00466190(p->id);
+			h = d2_GetResourceData(p->id);
 			if (fcn_0047cc80(px, py, c, h, g_772568, 0.5f, 0)) {
 				v = p->value;
 				id = p->id;

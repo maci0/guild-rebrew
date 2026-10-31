@@ -30,7 +30,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 int __cdecl fcn_0050d270(int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
@@ -59,7 +59,7 @@ void __cdecl fcn_005633e0(char* u)
 				if (h != 0 && (u[0x78] & 2) != 0 && *e != 0x27) {
 					for (i = 0; i < 768; i++) {
 						if ((((struct house*)g_7f4ca0)[i].type == 6 || ((struct house*)g_7f4ca0)[i].type == 7) && ((struct house*)g_7f4ca0)[i].owner != h->owner) {
-							fcn_0051af00(text, 0x17f4, h->id, e, *(int*) (u + 0xb0));
+							io_FormatTextBuffer(text, 0x17f4, h->id, e, *(int*) (u + 0xb0));
 							he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[i].owner, -1, text, 0, 0x5ec, *(int*) (e + 1), -1, g_6b5c60, g_6a65a4);
 						}
 					}

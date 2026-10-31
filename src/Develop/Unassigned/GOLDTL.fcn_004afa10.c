@@ -4,12 +4,12 @@ extern char g_7f4ca4[];
 
 
 
-void* __cdecl fcn_00508e40(int);
+void* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004ae080(char*, char*, char**, int*);
 int __cdecl fcn_0064eeec(char*);
 int __cdecl fcn_004ae0f0(int);
 int __cdecl fcn_004ae260(int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x20c) and
  * addresses the 0x200 scratch buffer off ebp; section 13 of
@@ -67,7 +67,7 @@ int __cdecl fcn_004afa10(int a1, int a2, int a3, char* a4, int a5)
 		v2 = (r != 1);
 	}
 	if (a1 == 1) {
-		e = (char*) fcn_00508e40(*(int*) ((char*) a2 + a3 * 8 + 4));
+		e = (char*) gm_LookupEntityRecordById(*(int*) ((char*) a2 + a3 * 8 + 4));
 		if (e == 0 || *(unsigned char*) (e + 8) <= 0) {
 			return 0;
 		}
@@ -94,6 +94,6 @@ int __cdecl fcn_004afa10(int a1, int a2, int a3, char* a4, int a5)
 	if (a1 == 0) {
 		*(int*) ((char*) a2 + a3 * 8 + 4) = *(int*) ((char*) e + 4);
 	}
-	fcn_0051af00((void*) a5, (int) buf, *(unsigned short*) e);
+	io_FormatTextBuffer((void*) a5, (int) buf, *(unsigned short*) e);
 	return 1;
 }

@@ -13,7 +13,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004f36e0(int);
 extern char g_7f4ca0[];
 extern int g_99f804[];
@@ -31,7 +31,7 @@ int __cdecl cm_ChkCutsceneReady(int arg0, int arg2)
 	int r;
 
 	count = 0;
-	if (fcn_00508e40(arg0) == 0) {
+	if (gm_LookupEntityRecordById(arg0) == 0) {
 		return 0;
 	}
 	base = (int*) (g_7f4ca0 + (arg2 & 0xffff) * 540);

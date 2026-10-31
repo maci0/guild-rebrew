@@ -4,12 +4,12 @@ extern char g_68cb58[];
 extern char g_6b5c60[];
 extern int g_773da8;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00500bb0(int*, int, int, int);
 int __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(int);
 void __cdecl fcn_00529160(int, int, unsigned short, int);
-void __cdecl fcn_0051af00(int*, unsigned int, ...);
+void __cdecl io_FormatTextBuffer(int*, unsigned int, ...);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, char*, char*);
 void __cdecl fcn_00406120(int);
 char* __cdecl fcn_0040c120(int, int, int);
@@ -41,7 +41,7 @@ void __cdecl fcn_0056e3c0(char* a0)
 	if (*(int*) (a0 + 0x70) == -1) {
 		goto tail;
 	}
-	s = fcn_00508e40(*(int*) (a0 + 0xac));
+	s = gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
 	if (s == 0) {
 		goto tail;
 	}
@@ -76,7 +76,7 @@ void __cdecl fcn_0056e3c0(char* a0)
 				idx = *(unsigned short*) (p + 0x27);
 				c = *(char*) (g_7f4ca0 + 2 + idx * 0x21c);
 				if (c == 6 || c == 7) {
-					fcn_0051af00((int*) (buf + 0x114), 0x42f4, *(unsigned short*) s, (int) p);
+					io_FormatTextBuffer((int*) (buf + 0x114), 0x42f4, *(unsigned short*) s, (int) p);
 					v = *(int*) (p + 1);
 					he_MessageBoxQuickjump(*(unsigned int*) (g_7f4ca0 + 4 + idx * 0x21c), v, buf + 0x120, 0, 0x60a, v, -1, g_6b5c60, g_6b5c60);
 				}

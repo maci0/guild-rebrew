@@ -33,7 +33,7 @@ void __cdecl fcn_0046b2b0(int id);
 int __cdecl fcn_00500d20(void* a, void* b);
 void* __cdecl fcn_005463a0(int n, ...);
 void* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_00519190(int a, ...);
+void __cdecl io_AppendText(int a, ...);
 
 /* ADDRESS: GOLDTL 0x00594de0 */
 void __cdecl fcn_00594de0(int a0, int a1, int a2)
@@ -155,10 +155,10 @@ void __cdecl fcn_00594de0(int a0, int a1, int a2)
 
 		if (i == 0) {
 			g_772514 = p->x4c;
-			fcn_00519190(0xc8, span, 0x51e);
+			io_AppendText(0xc8, span, 0x51e);
 		} else {
 			g_772514 = p->x4c;
-			fcn_00519190(0xc9, span, 0x51e, p->x0 * 2 + 0x9a8);
+			io_AppendText(0xc9, span, 0x51e, p->x0 * 2 + 0x9a8);
 		}
 		d2_SetForm(a0, a1);
 	}

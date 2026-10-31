@@ -41,13 +41,13 @@ void __cdecl fcn_004a51d0(struct house*, int, struct offer*, struct level*);
 float __cdecl fcn_004f4770(char*);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_005782f0(struct house*, int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
@@ -103,7 +103,7 @@ void __cdecl fcn_0058ea60(char* e, char* res)
 		mode = 2;
 	}
 	h = fcn_00470820(0, 0, "Locations\\Friedhof\\Friedhof");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
@@ -112,15 +112,15 @@ void __cdecl fcn_0058ea60(char* e, char* res)
 	if (mode == 0) {
 		fcn_004c51f0(((struct house*)g_7f4ca0)[g_774970].handle, -1, id, 1, g_773d75, 0);
 		fcn_005782f0(&((struct house*)g_7f4ca0)[g_774970], 2);
-		fcn_00519190(0x40f2, 0x40cc, id * 2 + 0x9a8);
+		io_AppendText(0x40f2, 0x40cc, id * 2 + 0x9a8);
 		fcn_004c3030(t, 0, "GEIST_KOMMT", gm_RandomMod(8));
 	} else if (mode == 1) {
 		v = (gm_RandomMod(0x400) + 1000) << 5;
 		fcn_004c5150(((struct house*)g_7f4ca0)[g_774970].handle, -1, g_773d75, v);
-		fcn_00519190(0x40f3, 0x40cc, v);
+		io_AppendText(0x40f3, 0x40cc, v);
 		fcn_004c3030(t, 0, "GEIST_KOMMT", gm_RandomMod(8));
 	} else {
-		fcn_00519190(0x40d3, 0x40cc);
+		io_AppendText(0x40d3, 0x40cc);
 		fcn_004c3030(t, 0, "GEIST_KOMMT_NICHT", gm_RandomMod(8));
 	}
 	do {

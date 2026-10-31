@@ -17,7 +17,7 @@ extern void __cdecl fcn_004c5420(int, int, int, int, int);
 extern int __cdecl fcn_004c5620(int, char *);
 extern int __cdecl fcn_00451840(float *, float *, float);
 extern char *__cdecl fcn_005049a0(unsigned char *);
-extern void __cdecl fcn_0051af00(char *, int, ...);
+extern void __cdecl io_FormatTextBuffer(char *, int, ...);
 extern void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int,
 					   int, int);
 
@@ -130,9 +130,9 @@ void __cdecl he_TransportStadtStadt(char *v2)
 						   *(int *)(v2 + 0xac));
 	}
 	if (fcn_00505340((unsigned char *)v5))
-		fcn_0051af00(l_text, 0x1c43);
+		io_FormatTextBuffer(l_text, 0x1c43);
 	else
-		fcn_0051af00(l_text, 0x1c44, v5);
+		io_FormatTextBuffer(l_text, 0x1c44, v5);
 	v10 = *(int *)0x774650;
 	if ((*(int *)(0x7e35c0 + v10 * 8) != 0x5ba910 ||
 	     (*(int *)0x7746c4 != (int)v5 &&

@@ -24,7 +24,7 @@ void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_0046f7e0(int, int, int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 float __cdecl fcn_0050bb50(int, int, int);
 int __cdecl fcn_0050c710(int, int, int);
@@ -66,14 +66,14 @@ int __cdecl fcn_00590b80(int a0)
 	}
 	d2_SetForm(0, 2);
 	fcn_0046f740(0, 0, a0 + 0xdf, g_772514);
-	fcn_00519190(a0 * 2 + 0x9a9);
+	io_AppendText(a0 * 2 + 0x9a9);
 	d2_SetForm(0, 1);
-	fcn_00519190(a0 * 2 + 0x9a8);
+	io_AppendText(a0 * 2 + 0x9a8);
 	d2_SetForm(0, 3);
 	if (def[0x40] != 0) {
-		fcn_00519190(0x21, def[0x40]);
+		io_AppendText(0x21, def[0x40]);
 	} else {
-		fcn_00519190(0x1f, (int) fcn_0050bb50(a0, g_773d75,
+		io_AppendText(0x1f, (int) fcn_0050bb50(a0, g_773d75,
 				(int) eval_ObjektPreis2Credits(a0, 100)));
 	}
 	ent = (int*) g_7746c4;
@@ -85,7 +85,7 @@ int __cdecl fcn_00590b80(int a0)
 	}
 	d2_SetForm(win, 4);
 	if (ent == 0) {
-		fcn_00519190(0x20, *(int*) (def + 0x22));
+		io_AppendText(0x20, *(int*) (def + 0x22));
 	} else {
 		fcn_0050c710((int) ent, 1, 1);
 		p = (char*) fcn_0050dc90((int) ent);
@@ -103,12 +103,12 @@ int __cdecl fcn_00590b80(int a0)
 		if (p == 0) {
 			p = (char*) (0x7f4ca0 + *(unsigned short*) ((char*) ent + 0x27) * 0x21c);
 		}
-		fcn_00519190(0x22, (int) ((double) *(unsigned int*) (def + 0x22)
+		io_AppendText(0x22, (int) ((double) *(unsigned int*) (def + 0x22)
 				/ ((double) *(unsigned char*) (p + 0x81)
 					* 0.000992063492063492 + quality)));
 	}
 	d2_SetForm(0, 4);
-	fcn_00519190(0x25);
+	io_AppendText(0x25);
 	item = 0x28;
 	p = def + 0x26;
 	for (i = 4; i != 0; i--) {
@@ -116,13 +116,13 @@ int __cdecl fcn_00590b80(int a0)
 		val = *(unsigned short*) (p + 8);
 		if (val != 0) {
 			fcn_0046f7e0(0, item, val + 0xdf, g_772514, -2);
-			fcn_00519190((int) s_6a9a30, v, val * 2 + 0x9a8);
+			io_AppendText((int) s_6a9a30, v, val * 2 + 0x9a8);
 			item += 0x16;
 		}
 		p += 2;
 	}
 	d2_SetForm(0, 3);
-	fcn_00519190(0x26);
+	io_AppendText(0x26);
 	slot = 0;
 	for (i = 0; i < 0x309; i += 0x15) {
 		p = (char*) (0x699059 + i);
@@ -132,7 +132,7 @@ int __cdecl fcn_00590b80(int a0)
 				fcn_0046f7e0(6, val,
 						*(unsigned char*) (0x699058 + i) + 0x427,
 						g_772514, -2);
-				fcn_00519190((int) s_6a9a28,
+				io_AppendText((int) s_6a9a28,
 						*(unsigned char*) (0x699058 + i) * 0xe + 0x48e);
 				slot++;
 				val += 0x16;
@@ -185,7 +185,7 @@ int __cdecl fcn_00590b80(int a0)
 		for (count = 0; count < i; count++) {
 			item = arr[count];
 			fcn_0046f7e0(6, val, item + 0x427, g_772514, -2);
-			fcn_00519190((int) s_6a9a28, item * 0xe + 0x48e);
+			io_AppendText((int) s_6a9a28, item * 0xe + 0x48e);
 			val += 0x16;
 		}
 	}
@@ -195,12 +195,12 @@ int __cdecl fcn_00590b80(int a0)
 				&& a0 != 0x2af && a0 != 0x2b0))
 			&& (def[0] == 0x17 || def[0] == 0x25)) {
 		fcn_0046f7e0(6, n * 0x16 + 0x28, 0x444, g_772514, -2);
-		fcn_00519190((int) s_6a9a28, 0x624);
+		io_AppendText((int) s_6a9a28, 0x624);
 		n++;
 	}
 done:
 	if (n == 0) {
-		fcn_00519190((int) s_6811b0);
+		io_AppendText((int) s_6811b0);
 	}
 	return win;
 }

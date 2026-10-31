@@ -10,11 +10,11 @@ extern int g_100f1dc;
 extern int g_67d370;
 extern int g_774654;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_004e6e20(int, int, int);
@@ -36,8 +36,8 @@ void __cdecl fcn_004e16e0(char* a1, int* a2)
 	int b1;
 	int w;
 
-	x = fcn_00508e40(a2[13]);
-	y = fcn_00508e40(a2[14]);
+	x = gm_LookupEntityRecordById(a2[13]);
+	y = gm_LookupEntityRecordById(a2[14]);
 	if (*(int*) (x + 4) == ((int*)g_772f24)[1])
 		who = y;
 	else
@@ -45,7 +45,7 @@ void __cdecl fcn_004e16e0(char* a1, int* a2)
 	h = fcn_00470820(0, 0, g_68ce48);
 	fcn_00471d80(h, 3);
 	d2_SetForm(h, 0);
-	t = fcn_00519190(0x10e6, g_772f2c, *(unsigned short*) ((int*)g_772f24), *(unsigned short*) who);
+	t = io_AppendText(0x10e6, g_772f2c, *(unsigned short*) ((int*)g_772f24), *(unsigned short*) who);
 	b0 = fcn_00472250(h, 0, t);
 	b1 = fcn_00472250(h, 0, t + 1);
 	b2 = fcn_00472250(h, 0, t + 2);

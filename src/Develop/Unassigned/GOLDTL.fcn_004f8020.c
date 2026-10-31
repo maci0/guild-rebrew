@@ -1,6 +1,6 @@
 extern char g_679060[];
 
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_005d6950(char*, int*);
 
 
@@ -16,7 +16,7 @@ int __cdecl fcn_004f8020(char* e, int* s)
 		if (e[0x166] == 0)
 			return 1;
 		if (e[2] == 6)
-			fcn_0051af00((char*) s + 0x14, (int) g_679060, 0x1d98);
+			io_FormatTextBuffer((char*) s + 0x14, (int) g_679060, 0x1d98);
 		if (*(int*) (e + 0x1c8) & 0x200)
 			return 9;
 		if (*(int*) (e + 0x1c8) & 0x200000)
@@ -35,7 +35,7 @@ int __cdecl fcn_004f8020(char* e, int* s)
 		if (*s == 4)
 			r = fcn_005d6950(e, s);
 		else if (e[2] == 6)
-			fcn_0051af00((char*) s + 0x14, (int) g_679060, 0x1d98);
+			io_FormatTextBuffer((char*) s + 0x14, (int) g_679060, 0x1d98);
 		return r | 10;
 	}
 	return 1;

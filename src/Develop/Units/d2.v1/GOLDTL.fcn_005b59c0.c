@@ -38,7 +38,7 @@ int __cdecl fcn_0046f740(int x, int y, int a3, int win);
 void __cdecl fcn_00517c00(int, int, int, char*);
 void __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
-void __cdecl fcn_0051af00(char*, char*, ...);
+void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00534160(int x0, int y, int len, int t);
 int __cdecl fcn_0050f950(int a1, int a2);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -62,17 +62,17 @@ void __cdecl fcn_005b59c0(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 	((fcn_005b59c0_Ctl*)g_1015ea0)[g->icon].x2f0 = (char*) e;
 	if (*(int*) (e + 0x174) != 0 && e[0x164] == 0) {
 		if (g->obj[0x165] == rec[0x230])
-			fcn_0051af00(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a39);
+			io_FormatTextBuffer(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a39);
 		else if (g->obj[0x165] == rec[0x22f])
-			fcn_0051af00(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a3a);
+			io_FormatTextBuffer(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a3a);
 		fcn_0046f940(g->value, buf);
 		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x6c = 1;
 		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x18 = 0xa0;
 	} else if (e[0x164] == 0) {
 		if (g->obj[0x165] == rec[0x230])
-			fcn_0051af00(buf, g_679060, 0x1a3b);
+			io_FormatTextBuffer(buf, g_679060, 0x1a3b);
 		else if (g->obj[0x165] == rec[0x22f])
-			fcn_0051af00(buf, g_679060, 0x1a3c);
+			io_FormatTextBuffer(buf, g_679060, 0x1a3c);
 		fcn_0046f940(g->value, buf);
 		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x6c = 1;
 		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x18 = 0xa0;

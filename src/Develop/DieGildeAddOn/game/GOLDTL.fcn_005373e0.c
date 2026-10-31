@@ -105,7 +105,7 @@ extern int fcn_004e6a30();
 extern void fcn_00533a40();
 extern void fcn_00474e80();
 extern void fcn_00533090();
-extern void fcn_0041d9e0();
+extern void ReportClientMessage();
 extern void fcn_00545aa0();
 extern void fcn_00546d90();
 extern void fcn_004c5700();
@@ -142,7 +142,7 @@ extern void fcn_00419990();
 extern void fcn_00422150();
 extern void fcn_0052fde0();
 extern void fcn_00475220();
-extern void fcn_00473a90();
+extern void d2_SetOverlayAnimation();
 extern void sv_HandleObjects();
 extern void fcn_00531620();
 extern void fcn_00531d20();
@@ -243,7 +243,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 			result = 1;
 			for (addr = 0x7e35c0; addr < 0x7e39c0; addr += 8) {
 				if (*(int *) addr == a0) {
-					fcn_0041d9e0(g_6a33f4);
+					ReportClientMessage(g_6a33f4);
 					result = 0;
 					break;
 				}
@@ -383,7 +383,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 				g_7746a4 = 0;
 				g_7746ac = 0;
 				if (z == 0) {
-					fcn_00473a90(0, 0);
+					d2_SetOverlayAnimation(0, 0);
 				}
 			}
 		}

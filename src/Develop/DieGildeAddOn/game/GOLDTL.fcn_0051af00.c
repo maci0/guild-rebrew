@@ -62,7 +62,7 @@ int __cdecl fcn_00500d60(void*, void*);
 int __cdecl fcn_004fe330(void);
 int __cdecl fcn_0050bc10(int, int, char*);
 int __cdecl fcn_00517c00(int, int, int, char*);
-int __cdecl fcn_0041d9e0(char*);
+int __cdecl ReportClientMessage(char*);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_0046f2c0(int, int);
 
@@ -70,10 +70,10 @@ int __cdecl fcn_0046f2c0(int, int);
 /* Expands the localized markup template named by `fmt` with the varargs
  * into `out`. */
 /* ADDRESS: GOLDTL 0x0051af00 */
-void __cdecl fcn_0051af00(char* out, int fmt, ...)
+void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 {
-	char tmp[0x17d0];
-	char buf[0x17d0];
+	char expansion_buffer[0x17d0];
+	char work_buffer[0x17d0];
 	int tab78[8];
 	char txt58[0x20];
 	char rec58[0x0c];
@@ -81,10 +81,10 @@ void __cdecl fcn_0051af00(char* out, int fmt, ...)
 	int flag;
 	int kind;
 	char* p;
-	int state;
-	char* ap;
+	int grammar_state;
+	char* argument_cursor;
 	int k;
-	int prec;
+	int precision;
 	int i;
 	int j;
 	int r;
@@ -92,57 +92,57 @@ void __cdecl fcn_0051af00(char* out, int fmt, ...)
 	int res;
 	char c;
 
-	ap = (char*) &fmt + 4;
+	argument_cursor = (char*) &format_selector + 4;
 	if (g_1052de0 == 0) {
 		return;
 	}
-	memset(buf, 0, 0x17d0);
-	if (fmt < 0x4800) {
-		p = g_14a5320[fmt];
+	memset(work_buffer, 0, 0x17d0);
+	if (format_selector < 0x4800) {
+		p = g_14a5320[format_selector];
 		if (p == 0) {
 			return;
 		}
 		if (strlen(p) > 0x17c0) {
 			return;
 		}
-		fcn_0064d530(buf, p, 0x17c0);
+		fcn_0064d530(work_buffer, p, 0x17c0);
 	} else {
-		strcpy(buf, (char*) fmt);
+		strcpy(work_buffer, (char*) format_selector);
 	}
-	state = 0;
+	grammar_state = 0;
 	flag = 0;
 	p = 0;
 	kind = 0;
-	if (strlen(buf) == 0) {
+	if (strlen(work_buffer) == 0) {
 		goto done;
 	}
 	i = 0;
 	while (i <= 0x17d0) {
-		c = buf[i];
+		c = work_buffer[i];
 		if (c != '%' && c != '$' && c != '{') {
 			i++;
-			if (i >= (int) strlen(buf)) {
+			if (i >= (int) strlen(work_buffer)) {
 				break;
 			}
 			continue;
 		}
-		r = buf[i + 1] - '0';
+		r = work_buffer[i + 1] - '0';
 		i++;
 		if (r >= 0 && r <= 9) {
 			i++;
 		} else {
 			r = -1;
 		}
-		c = buf[i];
+		c = work_buffer[i];
 		switch (c) {
 		case 'C':
 			i++;
-			memset(out, 0, 0x80);
+			memset(output, 0, 0x80);
 			break;
 		case 'S':
 		case 's':
-			p = *(char**) ap;
-			ap += 4;
+			p = *(char**) argument_cursor;
+			argument_cursor += 4;
 			if ((int) p < 0x4800) {
 				kind = g_11bb000[(int) p];
 				p = g_14a5320[(int) p];
@@ -152,148 +152,148 @@ void __cdecl fcn_0051af00(char* out, int fmt, ...)
 				if (p == 0) {
 					p = g_14a5320[(int) p];
 				}
-			} else if (buf[i] == 's' && flag == 0) {
+			} else if (work_buffer[i] == 's' && flag == 0) {
 				p = (char*) fcn_0042b2f0(p, r, 4);
 			} else {
 				p = (char*) fcn_0042b2f0(p, r, 8);
 			}
-			if (state == 0) {
+			if (grammar_state == 0) {
 				if (strlen(p) + i > 0x17cb) {
 					return;
 				}
 				e = i - k;
-				fcn_0064d740(buf + e + strlen(p), buf + i,
-					(int) strlen(buf) - e);
-				strcpy(buf + e, p);
+				fcn_0064d740(work_buffer + e + strlen(p), work_buffer + i,
+					(int) strlen(work_buffer) - e);
+				strcpy(work_buffer + e, p);
 				break;
 			}
 			e = i - k - 1;
 			while (e >= 0) {
 				if (g_6b25b0 > 1) {
-					res = __isctype(buf[e], 4);
+					res = __isctype(work_buffer[e], 4);
 				} else {
-					res = ((unsigned char*) g_6b23a4)[buf[e] * 2] & 4;
+					res = ((unsigned char*) g_6b23a4)[work_buffer[e] * 2] & 4;
 				}
 				if (res != 0) {
 					break;
 				}
-				if (buf[e] != 0x20) {
+				if (work_buffer[e] != 0x20) {
 					e = -1;
 					break;
 				}
 				e--;
 			}
-			if (state == 1 || state == 2) {
+			if (grammar_state == 1 || grammar_state == 2) {
 				res = fcn_0042b2f0(g_14a540c[0], r, 4);
 				if (e > -1) {
-					k = i - fcn_00517b90(buf, e, txt58);
-					sprintf(tmp, g_6a22d8, res, txt58, p);
+					k = i - fcn_00517b90(work_buffer, e, txt58);
+					sprintf(expansion_buffer, g_6a22d8, res, txt58, p);
 				} else {
-					sprintf(tmp, g_68b3f8, res, p);
+					sprintf(expansion_buffer, g_68b3f8, res, p);
 				}
-				if (fcn_0051e070() == 0 && state == 2) {
-					tmp[0] = (char) toupper((unsigned char) tmp[0]);
+				if (fcn_0051e070() == 0 && grammar_state == 2) {
+					expansion_buffer[0] = (char) toupper((unsigned char) expansion_buffer[0]);
 				}
-			} else if (state == 3 || state == 4) {
+			} else if (grammar_state == 3 || grammar_state == 4) {
 				res = fcn_0042b2f0(g_14a5400[0], r, 4);
 				if (e > -1) {
-					k = i - fcn_00517b90(buf, e, txt58);
-					sprintf(tmp, g_6a22d8, res, txt58, p);
+					k = i - fcn_00517b90(work_buffer, e, txt58);
+					sprintf(expansion_buffer, g_6a22d8, res, txt58, p);
 				} else {
-					sprintf(tmp, g_68b3f8, res, p);
+					sprintf(expansion_buffer, g_68b3f8, res, p);
 				}
-				if (fcn_0051e070() == 0 && state == 4) {
-					tmp[0] = (char) toupper((unsigned char) tmp[0]);
+				if (fcn_0051e070() == 0 && grammar_state == 4) {
+					expansion_buffer[0] = (char) toupper((unsigned char) expansion_buffer[0]);
 				}
 			} else {
 				res = fcn_0042b2f0(g_14a5418[0], r, 4);
 				if (e > -1) {
-					k = i - fcn_00517b90(buf, e, txt58);
-					sprintf(tmp, g_6a22d8, res, txt58, p);
+					k = i - fcn_00517b90(work_buffer, e, txt58);
+					sprintf(expansion_buffer, g_6a22d8, res, txt58, p);
 				} else {
-					sprintf(tmp, g_68b3f8, res, p);
+					sprintf(expansion_buffer, g_68b3f8, res, p);
 				}
-				if (fcn_0051e070() == 0 && state == 6) {
-					tmp[0] = (char) toupper((unsigned char) tmp[0]);
+				if (fcn_0051e070() == 0 && grammar_state == 6) {
+					expansion_buffer[0] = (char) toupper((unsigned char) expansion_buffer[0]);
 				}
 			}
-			if (strlen(tmp) + i > 0x17cb) {
+			if (strlen(expansion_buffer) + i > 0x17cb) {
 				return;
 			}
-			fcn_0064d740(buf + (i - k) + strlen(tmp), buf + i,
-				(int) strlen(buf) - (i - k));
-			strcpy(buf + (i - k), tmp);
-			state = 0;
+			fcn_0064d740(work_buffer + (i - k) + strlen(expansion_buffer), work_buffer + i,
+				(int) strlen(work_buffer) - (i - k));
+			strcpy(work_buffer + (i - k), expansion_buffer);
+			grammar_state = 0;
 			flag = 0;
 			break;
 		case 'F':
 			i++;
 			break;
 		case 'T':
-			if (buf[i - 1] != '%') {
+			if (work_buffer[i - 1] != '%') {
 				break;
 			}
-			res = *(int*) ap;
-			ap += 4;
-			fcn_0050bc10(res, g_773d75[0], tmp);
-			fcn_0064d740(buf + i - 1 + strlen(tmp), buf + i + 1,
-				(int) strlen(buf) - i + 1);
-			strcpy(buf + i - 1, tmp);
+			res = *(int*) argument_cursor;
+			argument_cursor += 4;
+			fcn_0050bc10(res, g_773d75[0], expansion_buffer);
+			fcn_0064d740(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i + 1,
+				(int) strlen(work_buffer) - i + 1);
+			strcpy(work_buffer + i - 1, expansion_buffer);
 			break;
 		case 'w':
-			res = *(int*) ap;
-			ap += 4;
+			res = *(int*) argument_cursor;
+			argument_cursor += 4;
 			res = (int) fcn_0042b2f0(
 				g_14a79c0[*(unsigned short*) (0x8680b4 + res * 0x2f4)], 1, 8);
-			strcpy(tmp, (char*) res);
-			fcn_0064d740(buf + i - 1 + strlen(tmp), buf + i + 1,
-				(int) strlen(buf) - i + 1);
-			strcpy(buf + i - 1, tmp);
+			strcpy(expansion_buffer, (char*) res);
+			fcn_0064d740(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i + 1,
+				(int) strlen(work_buffer) - i + 1);
+			strcpy(work_buffer + i - 1, expansion_buffer);
 			break;
 		case 'i':
-			c = buf[i + 1];
+			c = work_buffer[i + 1];
 			if (c == 'i' || c == 'c' || c == 'b' || c == 'a' ||
 			    c == 'n' || c == 't') {
 				i += 2;
 				break;
 			}
-			j = *(int*) ap;
-			ap += 4;
+			j = *(int*) argument_cursor;
+			argument_cursor += 4;
 			if (j > 1 || j == 0) {
 				flag = 1;
 			}
 			if (r != -1) {
 				sprintf(num, g_6a2354, r);
-				sprintf(tmp, num, j);
+				sprintf(expansion_buffer, num, j);
 			} else {
-				sprintf(tmp, g_67d444, j);
+				sprintf(expansion_buffer, g_67d444, j);
 			}
-			fcn_0064d740(buf + i - 3 + strlen(tmp), buf + i,
-				(int) strlen(buf) - i + 1);
-			strcpy(buf + i - 2, tmp);
+			fcn_0064d740(work_buffer + i - 3 + strlen(expansion_buffer), work_buffer + i,
+				(int) strlen(work_buffer) - i + 1);
+			strcpy(work_buffer + i - 2, expansion_buffer);
 			break;
 		case 'I':
 			if (r != -1) {
 				sprintf(num, g_6a2354, r);
-				sprintf(tmp, num, *(int*) ap);
-				ap += 4;
-				fcn_0064d740(buf + i - 3 + strlen(tmp), buf + i,
-					(int) strlen(buf) - i + 1);
-				strcpy(buf + i - 2, tmp);
+				sprintf(expansion_buffer, num, *(int*) argument_cursor);
+				argument_cursor += 4;
+				fcn_0064d740(work_buffer + i - 3 + strlen(expansion_buffer), work_buffer + i,
+					(int) strlen(work_buffer) - i + 1);
+				strcpy(work_buffer + i - 2, expansion_buffer);
 			} else {
-				sprintf(tmp, g_67d444, *(int*) ap);
-				ap += 4;
-				fcn_0064d740(buf + i - 1 + strlen(tmp), buf + i + 1,
-					(int) strlen(buf) - i + 1);
-				strcpy(buf + i - 1, tmp);
+				sprintf(expansion_buffer, g_67d444, *(int*) argument_cursor);
+				argument_cursor += 4;
+				fcn_0064d740(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i + 1,
+					(int) strlen(work_buffer) - i + 1);
+				strcpy(work_buffer + i - 1, expansion_buffer);
 			}
 			break;
 		case 'f':
-			prec = buf[i + 1] - '0';
-			if (prec <= 0 || prec >= 9) {
-				prec = 0;
+			precision = work_buffer[i + 1] - '0';
+			if (precision <= 0 || precision >= 9) {
+				precision = 0;
 			}
-			if (prec > 0) {
+			if (precision > 0) {
 				i++;
 			}
 			if (r != -1) {
@@ -306,62 +306,62 @@ void __cdecl fcn_0051af00(char* out, int fmt, ...)
 				sprintf(txt58 + strlen(txt58), g_6a2350);
 			}
 			{
-				double d = *(double*) ap;
-				ap += 8;
-				sprintf(tmp, txt58, d);
+				double d = *(double*) argument_cursor;
+				argument_cursor += 8;
+				sprintf(expansion_buffer, txt58, d);
 			}
-			if (strlen(tmp) + i > 0x17cb) {
+			if (strlen(expansion_buffer) + i > 0x17cb) {
 				return;
 			}
 			i++;
-			fcn_0064d740(buf + i - 1 + strlen(tmp), buf + i,
-				(int) strlen(buf) - i + 1);
-			strcpy(buf + i - 1, tmp);
+			fcn_0064d740(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i,
+				(int) strlen(work_buffer) - i + 1);
+			strcpy(work_buffer + i - 1, expansion_buffer);
 			break;
 		case 'u':
 			k = (r != -1) ? 3 : 2;
 			e = i - k;
-			state = 1;
-			fcn_0064d740(buf + e, buf + i + 1, (int) strlen(buf) - i);
+			grammar_state = 1;
+			fcn_0064d740(work_buffer + e, work_buffer + i + 1, (int) strlen(work_buffer) - i);
 			i = e - 1;
 			break;
 		case 'U':
 			k = (r != -1) ? 3 : 2;
 			e = i - k;
-			state = 2;
-			fcn_0064d740(buf + e, buf + i + 1, (int) strlen(buf) - i);
+			grammar_state = 2;
+			fcn_0064d740(work_buffer + e, work_buffer + i + 1, (int) strlen(work_buffer) - i);
 			i = e - 1;
 			break;
 		case 'b':
 			k = (r != -1) ? 3 : 2;
 			e = i - k;
-			state = 3;
-			fcn_0064d740(buf + e, buf + i + 1, (int) strlen(buf) - i);
+			grammar_state = 3;
+			fcn_0064d740(work_buffer + e, work_buffer + i + 1, (int) strlen(work_buffer) - i);
 			i = e - 1;
 			break;
 		case 'B':
 			k = (r != -1) ? 3 : 2;
 			e = i - k;
-			if (buf[e] != '%') {
+			if (work_buffer[e] != '%') {
 				break;
 			}
-			state = 4;
-			fcn_0064d740(buf + e, buf + i + 1, (int) strlen(buf) - i);
+			grammar_state = 4;
+			fcn_0064d740(work_buffer + e, work_buffer + i + 1, (int) strlen(work_buffer) - i);
 			i = e - 1;
 			break;
 		case 'e':
-			state = 5;
+			grammar_state = 5;
 			goto join;
 		case 'E':
-			state = 6;
+			grammar_state = 6;
 		join:
-			c = buf[i + 1];
+			c = work_buffer[i + 1];
 			k = (r != -1) ? 3 : 2;
 			e = i - k;
 			if (c == 0x20) {
-				fcn_0064d740(buf + e, buf + i + 1, (int) strlen(buf) + 2 - i);
+				fcn_0064d740(work_buffer + e, work_buffer + i + 1, (int) strlen(work_buffer) + 2 - i);
 			} else {
-				fcn_0064d740(buf + e, buf + i + 2, (int) strlen(buf) + 2 - i);
+				fcn_0064d740(work_buffer + e, work_buffer + i + 2, (int) strlen(work_buffer) + 2 - i);
 			}
 			i = e - 1;
 			break;
@@ -370,61 +370,61 @@ void __cdecl fcn_0051af00(char* out, int fmt, ...)
 			if (r == -1) {
 				break;
 			}
-			if (buf[i - 3] != '%' || buf[i - 2] == '$') {
+			if (work_buffer[i - 3] != '%' || work_buffer[i - 2] == '$') {
 				break;
 			}
-			kind = *(int*) ap;
-			ap += 4;
-			fcn_00517c00(kind, buf[i] - '0', i, tmp);
-			fcn_0064d740(buf + i + strlen(tmp) - 4, buf + i,
-				(int) strlen(buf) + 2 - i);
-			strcpy(buf + i - 3, tmp);
+			kind = *(int*) argument_cursor;
+			argument_cursor += 4;
+			fcn_00517c00(kind, work_buffer[i] - '0', i, expansion_buffer);
+			fcn_0064d740(work_buffer + i + strlen(expansion_buffer) - 4, work_buffer + i,
+				(int) strlen(work_buffer) + 2 - i);
+			strcpy(work_buffer + i - 3, expansion_buffer);
 			break;
 		case 'a':
-			if (buf[i - 1] == '%') {
-				res = *(int*) ap;
-				ap += 4;
-				sprintf(tmp, g_699a68, res, 0x14);
-				fcn_0064d740(buf + i - 1 + strlen(tmp), buf + i + 1,
-					(int) strlen(buf) - i + 1);
-				strcpy(buf + i - 1, tmp);
+			if (work_buffer[i - 1] == '%') {
+				res = *(int*) argument_cursor;
+				argument_cursor += 4;
+				sprintf(expansion_buffer, g_699a68, res, 0x14);
+				fcn_0064d740(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i + 1,
+					(int) strlen(work_buffer) - i + 1);
+				strcpy(work_buffer + i - 1, expansion_buffer);
 			} else {
-				sprintf(tmp, g_6a2348, 0x14);
-				memmove(buf + i - 1 + strlen(tmp), buf + i + 1,
-					strlen(buf) - i + 1);
-				strcpy(buf + i - 1, tmp);
+				sprintf(expansion_buffer, g_6a2348, 0x14);
+				memmove(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i + 1,
+					strlen(work_buffer) - i + 1);
+				strcpy(work_buffer + i - 1, expansion_buffer);
 			}
 			break;
 		case 'r':
 			memset(tab78, 0, 0x20);
-			prec = 0;
-			j = buf[i + 1] - '1';
+			precision = 0;
+			j = work_buffer[i + 1] - '1';
 			if (j >= 0 && j <= 9) {
-				prec = j + 9;
+				precision = j + 9;
 			}
 			k = i + 3;
 			while (1) {
 				if (g_6b25b0 > 1) {
-					res = __isctype(buf[k], 4);
+					res = __isctype(work_buffer[k], 4);
 				} else {
-					res = ((unsigned char*) g_6b23a4)[buf[k] * 2] & 4;
+					res = ((unsigned char*) g_6b23a4)[work_buffer[k] * 2] & 4;
 				}
 				if (res == 0) {
 					break;
 				}
 				k++;
 			}
-			fcn_0064d530((char*) tab78, buf + i + 3, k - i - 4);
+			fcn_0064d530((char*) tab78, work_buffer + i + 3, k - i - 4);
 			res = fcn_0064eeec((char*) tab78);
-			j = fmt;
+			j = format_selector;
 			while (j < g_6b7f98) {
-				if (g_11bb000[j] == prec) {
+				if (g_11bb000[j] == precision) {
 					break;
 				}
 				j++;
 			}
 			if (j >= g_6b7f98) {
-				fcn_0041d9e0(g_6a2318);
+				ReportClientMessage(g_6a2318);
 				break;
 			}
 			res = gm_RandomMod(res) & 0xffff;
@@ -432,20 +432,20 @@ void __cdecl fcn_0051af00(char* out, int fmt, ...)
 			if (p == 0) {
 				break;
 			}
-			fcn_0064d740(buf + strlen(p) + (i - k) - 5, buf + i,
-				(int) strlen(buf) - (i - k) + 5);
-			strcpy(buf + i - 1, p);
+			fcn_0064d740(work_buffer + strlen(p) + (i - k) - 5, work_buffer + i,
+				(int) strlen(work_buffer) - (i - k) + 5);
+			strcpy(work_buffer + i - 1, p);
 			break;
 		case 'D':
-			fcn_00500d60(&rec58[0], tmp);
+			fcn_00500d60(&rec58[0], expansion_buffer);
 			res = fcn_004fe330();
-			sprintf(tmp, g_6a2310, g_14a5450[res]);
-			fcn_0064d740(buf + strlen(tmp), buf + i, (int) strlen(tmp) + 2 - i);
-			strcpy(buf + i - 1, tmp);
+			sprintf(expansion_buffer, g_6a2310, g_14a5450[res]);
+			fcn_0064d740(work_buffer + strlen(expansion_buffer), work_buffer + i, (int) strlen(expansion_buffer) + 2 - i);
+			strcpy(work_buffer + i - 1, expansion_buffer);
 			break;
 		case 'G':
-			p = *(char**) ap;
-			ap += 4;
+			p = *(char**) argument_cursor;
+			argument_cursor += 4;
 			i++;
 			if ((int) p < 0x4800) {
 				kind = g_11bb000[(int) p];
@@ -458,8 +458,8 @@ void __cdecl fcn_0051af00(char* out, int fmt, ...)
 			if (p == 0) {
 				p = g_14a5320[(int) p];
 			}
-			if (buf[i - 2] != 0) {
-				sprintf(txt58, g_6a2308, p, buf + i - 2);
+			if (work_buffer[i - 2] != 0) {
+				sprintf(txt58, g_6a2308, p, work_buffer + i - 2);
 			} else {
 				strcpy(txt58, p);
 			}
@@ -467,31 +467,31 @@ void __cdecl fcn_0051af00(char* out, int fmt, ...)
 				return;
 			}
 			if (r == -1) {
-				memmove(buf + i - 2 + strlen(txt58), buf + i,
-					strlen(buf) + 2 - i);
+				memmove(work_buffer + i - 2 + strlen(txt58), work_buffer + i,
+					strlen(work_buffer) + 2 - i);
 			} else {
-				memmove(buf + i - 3 + strlen(txt58), buf + i,
-					strlen(buf) + 2 - i);
+				memmove(work_buffer + i - 3 + strlen(txt58), work_buffer + i,
+					strlen(work_buffer) + 2 - i);
 			}
-			strcpy(buf + i - 2, txt58);
-			state = 0;
+			strcpy(work_buffer + i - 2, txt58);
+			grammar_state = 0;
 			i -= 3;
 			break;
 		case 'v':
-			if (buf[i + 1] == 'v') {
-				ap += 4;
+			if (work_buffer[i + 1] == 'v') {
+				argument_cursor += 4;
 				i++;
 			}
 			break;
 		case '%':
-			buf[i - 1] = 0x16;
-			fcn_0064d740(buf + i + 1, buf + i + 2,
-				(int) strlen(buf) - i + 1);
+			work_buffer[i - 1] = 0x16;
+			fcn_0064d740(work_buffer + i + 1, work_buffer + i + 2,
+				(int) strlen(work_buffer) - i + 1);
 			break;
 		default:
 			break;
 		}
 	}
 done:
-	strcpy(out, buf);
+	strcpy(output, work_buffer);
 }

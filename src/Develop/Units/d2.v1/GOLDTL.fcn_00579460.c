@@ -17,7 +17,7 @@ extern char g_6a5a10[];
 extern char g_6811b0[];
 extern char g_6a7f1c[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
@@ -26,7 +26,7 @@ void __cdecl fcn_00579390(char*, struct house*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
 
 void __cdecl fcn_00579460(char* u)
@@ -35,7 +35,7 @@ void __cdecl fcn_00579460(char* u)
 	char* p;
 
 	p = u + 0xac;
-	h = fcn_00508e40(*(int*) (u + 0xac));
+	h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 	if (h == 0 || (((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].flags & 1) != 0) {
 		*(int*) (u + 0x70) = -2;
 	}
@@ -57,8 +57,8 @@ void __cdecl fcn_00579460(char* u)
 		}
 		fcn_00471b60(*(int*) (*(char**) (u + 0x74) + 8));
 		d2_SetForm(*(int*) (*(char**) (u + 0x74) + 8), 0);
-		fcn_00519190((int) g_6811b0);
-		fcn_00519190(0x40fd, *(unsigned short*) h, *(int*) (u + 0xb8));
+		io_AppendText((int) g_6811b0);
+		io_AppendText(0x40fd, *(unsigned short*) h, *(int*) (u + 0xb8));
 		fcn_004c30a0(-7, 0, g_6a7f1c, -1, 0);
 		*(int*) (u + 0x70) = 1;
 		break;

@@ -8,10 +8,10 @@ void* __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl fcn_00471b60(void* dlg);
 void __cdecl d2_SetForm(void* dlg, int panel);
 int __cdecl fcn_005340f0(int a);
-void __cdecl fcn_00473a90(int a, int b);
-int __cdecl fcn_00508e40(int id);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
+int __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_0046f2c0(int a, int b);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 void __cdecl fcn_005ca560(void* slot);
 void __cdecl fcn_005ca740(int x, int y, int a, int b, void* slot, int c);
 int __cdecl fcn_005373e0(void (*fn)(void), int code);
@@ -35,7 +35,7 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(g_772514);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	src = (int*) ((char*) a1 + 0x1c);
 	for (;;) {
 		changed = 0;
@@ -43,7 +43,7 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 		q = src;
 		p = sel[0];
 		for (i = 0; i < 4; i++) {
-			ent = fcn_00508e40(*q);
+			ent = gm_LookupEntityRecordById(*q);
 			if (ent != p[0]) {
 				changed = 1;
 			}
@@ -60,9 +60,9 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 		if (changed) {
 			d2_SetForm(dlg, 1);
 			fcn_0046f2c0(g_772514, 1);
-			fcn_00519190((char*) 0x188c, a0);
+			io_AppendText((char*) 0x188c, a0);
 			if (n == 0) {
-				fcn_00519190((char*) 0x188e);
+				io_AppendText((char*) 0x188e);
 			} else {
 				int x0 = *(int*) (g_77255c + 0xc) + *(short*) (g_772500 + 0x1ebd8) * -2;
 				p = sel[0];
@@ -78,7 +78,7 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 			d2_SetForm(dlg, 2);
 			fcn_0046f2c0(g_772514, 1);
 			if (n == 4) {
-				fcn_00519190((char*) 0x1892);
+				io_AppendText((char*) 0x1892);
 			}
 		}
 		if (g_14ce8e0 != 0) {

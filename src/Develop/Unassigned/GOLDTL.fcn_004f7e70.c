@@ -14,7 +14,7 @@ extern char g_690560[];
 extern char g_679060[];
 
 void __cdecl fcn_004fcda0(short, int, Info*);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_004fa5f0(void*, int, int);
 
 
@@ -33,16 +33,16 @@ int __cdecl fcn_004f7e70(unsigned char* a1, int* a2)
 		fcn_004fcda0(*(short*) a1, 0, &info);
 		memset(buf, 0, sizeof(buf));
 		base = (a1[9] != 0 ? 0x28 : 0) + 0x253;
-		fcn_0051af00(buf, (int) g_690560, 0x1d96);
+		io_FormatTextBuffer(buf, (int) g_690560, 0x1d96);
 		if (a1[0x166] != 0)
-			fcn_0051af00(buf + strlen(buf), 0x1d97, a1[0x166] + base, info.f4);
+			io_FormatTextBuffer(buf + strlen(buf), 0x1d97, a1[0x166] + base, info.f4);
 		if (a1[0x169] != 0)
-			fcn_0051af00(buf + strlen(buf), 0x1d97, a1[0x169] + base, info.f8);
+			io_FormatTextBuffer(buf + strlen(buf), 0x1d97, a1[0x169] + base, info.f8);
 		if (info.b2 != 0)
-			fcn_0051af00(buf + strlen(buf), 0x1d97, info.b2 + base, info.fc);
+			io_FormatTextBuffer(buf + strlen(buf), 0x1d97, info.b2 + base, info.fc);
 		fcn_004fa5f0(buf, 1, 0x657c7);
 	} else if (*a2 == 1 && a1[2] == 6) {
-		fcn_0051af00((char*) a2 + 0x14, (int) g_679060, 0x1d96);
+		io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1d96);
 	}
 	return 2;
 }

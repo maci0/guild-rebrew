@@ -1,5 +1,5 @@
 char* __cdecl fcn_00503fe0(int a, int b, int c);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004c5c80(int id);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* label);
 int __cdecl fcn_00529160(int a, int b, int c, int d);
@@ -8,7 +8,7 @@ int __cdecl fcn_0050c710(char* e, int a, int b);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d);
 char* __cdecl fcn_00502850(void);
 int __cdecl fcn_0042e410(int code);
-int __cdecl fcn_0051af00(char* buf, int fmt, ...);
+int __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 int __cdecl fcn_00545e80(int a, int b, char* s, int c, int d, int e, int f,
     int g, int h);
 int __cdecl fcn_004c5980(void* p);
@@ -49,7 +49,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 			do {
 				j = *(int*) (ent + 0x8c + (8 - count) * 4);
 				if (j != -1) {
-					slot = (int) fcn_00508e40(j);
+					slot = (int) gm_LookupEntityRecordById(j);
 					fcn_004c5c80(j);
 					fcn_004c5da0(j, *(int*) (e2 + 1),
 					    -1, 0, 0, (char*) 0x6a6aac);
@@ -72,7 +72,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 		for (i = 0; i < 8; i++) {
 			j = *(int*) (ent + 0x8c + i * 4);
 			if (j != -1) {
-				target = fcn_00508e40(j);
+				target = gm_LookupEntityRecordById(j);
 				if (*(int*) (target + 0x184) != 0
 				    && *(int*) (*(int*) (target + 0x184) + 0x128)
 				    != 0) {
@@ -196,11 +196,11 @@ void __cdecl fcn_0056bfd0(char* ent)
 			if (e2 != 0) {
 				*(int*) (e2 + 0x4d) += j;
 			}
-			fcn_0051af00(text, 0x1c54, target, j);
+			io_FormatTextBuffer(text, 0x1c54, target, j);
 			fcn_00545e80(*(int*) (0x7f4ca4
 			    + *(unsigned short*) (e2 + 0x27) * 0x21c),
 			    -1, text, 0, 0x5f0, *(int*) (e2 + 1), -1, 0, 0);
-			fcn_0051af00(text2, 0x1c55, target, j);
+			io_FormatTextBuffer(text2, 0x1c55, target, j);
 			fcn_00545e80(*(int*) (0x7f4ca4
 			    + *(unsigned short*) (ent + 8) * 0x21c),
 			    -1, text2, 0, 0x5f0, *(int*) (e2 + 1), -1, 0, 0);
@@ -224,7 +224,7 @@ tail:
 		e2 = fcn_00503fe0(*(int*) (ent + 0xb0), 1, 1);
 		target = fcn_00503fe0(*(int*) (ent + 0xac), 1, 1);
 		j = fcn_004d5450(e2) + 0x1125;
-		fcn_0051af00(text, 0x114b, j,
+		io_FormatTextBuffer(text, 0x114b, j,
 		    (int) *(unsigned short*) (target + 0x27), target, j);
 		fcn_00545e80(*(int*) (0x7f4ca4
 		    + *(unsigned short*) (ent + 8) * 0x21c),
@@ -233,7 +233,7 @@ tail:
 		    + *(unsigned short*) (target + 0x27) * 0x21c) == 6
 		    || *(unsigned char*) (0x7f4ca2
 		    + *(unsigned short*) (target + 0x27) * 0x21c) == 7) {
-			fcn_0051af00(text2, 0x1c56, target);
+			io_FormatTextBuffer(text2, 0x1c56, target);
 			fcn_00545e80(*(int*) (0x7f4ca4
 			    + *(unsigned short*) (target + 0x27) * 0x21c),
 			    -1, text2, 0, 0x5f0,
@@ -281,7 +281,7 @@ tail:
 		do {
 			j = *(int*) (ent + 0x8c + (8 - count) * 4);
 			if (j != -1) {
-				target = fcn_00508e40(j);
+				target = gm_LookupEntityRecordById(j);
 				if (target != 0) {
 					fcn_004c5c80(*(int*) (target + 4));
 					if (e2 != 0) {

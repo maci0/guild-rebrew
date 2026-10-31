@@ -21,7 +21,7 @@ extern float g_665bf0;
 extern double g_6628f0;
 
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00546190(char* e);
 void __cdecl fcn_00529160(char* e, int a, int id, char* rec);
 void __cdecl fcn_004c5c80(int owner);
@@ -35,7 +35,7 @@ void __cdecl fcn_004c51a0(int a, int b, int c, int d);
 void __cdecl fcn_00545d40(int a, int b, char* text, int c, int d, char* tag);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g,
 	char* tag);
-void __cdecl fcn_0051af00(char* buf, int id, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 
 /* ADDRESS: GOLDTL 0x00553cd0 */
 void __cdecl fcn_00553cd0(char* v3)
@@ -54,7 +54,7 @@ void __cdecl fcn_00553cd0(char* v3)
 	int b;
 
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (v3 + 0xb0));
-	v5 = (unsigned short*) fcn_00508e40(*(int*) (v3 + 0xac));
+	v5 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (v3 + 0xac));
 	state = *(int*) (v3 + 0x70);
 	if (state == -2 || v5 == 0 || e == 0 || *(unsigned short*) (e + 0x27) == 0xffff) {
 		fcn_00546190(v3);
@@ -93,10 +93,10 @@ void __cdecl fcn_00553cd0(char* v3)
 			}
 		}
 		if (f <= g_6628f0 && found == 0) {
-			fcn_0051af00(buf, 0x1a76, *(unsigned short*) (e + 0x27), e);
+			io_FormatTextBuffer(buf, 0x1a76, *(unsigned short*) (e + 0x27), e);
 			a = ((Rec*) g_7f4ca0)[*(unsigned short*) (v3 + 8)].owner;
 			fcn_00545d40(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_88");
-			fcn_0051af00(buf, 0x1a78, *(unsigned short*) (v3 + 8), e);
+			io_FormatTextBuffer(buf, 0x1a78, *(unsigned short*) (v3 + 8), e);
 			b = ((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner;
 			he_MessageBoxQuickjump(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
 				"_NACHRICHTEN_HS_86");
@@ -108,13 +108,13 @@ void __cdecl fcn_00553cd0(char* v3)
 			((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner, 0, x);
 		type = ((Rec*) g_7f4ca0)[*(unsigned short*) (v3 + 8)].type;
 		if (type == 6 || type == 7) {
-			fcn_0051af00(buf, 0x1a75, x, *(unsigned short*) (e + 0x27), e);
+			io_FormatTextBuffer(buf, 0x1a75, x, *(unsigned short*) (e + 0x27), e);
 			a = ((Rec*) g_7f4ca0)[*(unsigned short*) (v3 + 8)].owner;
 			fcn_00545d40(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_87");
 		}
 		type = ((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].type;
 		if (type == 6 || type == 7) {
-			fcn_0051af00(buf, 0x1a77, *(unsigned short*) (v3 + 8), e, x);
+			io_FormatTextBuffer(buf, 0x1a77, *(unsigned short*) (v3 + 8), e, x);
 			b = ((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner;
 			he_MessageBoxQuickjump(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
 				"_NACHRICHTEN_HS_86");

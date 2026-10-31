@@ -28,7 +28,7 @@ extern int g_100f884;
 extern int g_100f1dc;
 
 int __cdecl fcn_00500cb0(char*, char*);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
@@ -38,7 +38,7 @@ void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
-void __cdecl fcn_00519190(int, ...);
+void __cdecl io_AppendText(int, ...);
 
 /* ADDRESS: GOLDTL 0x00554f00 */
 void __cdecl fcn_00554f00(char* a0)
@@ -63,7 +63,7 @@ void __cdecl fcn_00554f00(char* a0)
 	if (fcn_00500cb0(name, g_7f4c00) == 1) {
 		return;
 	}
-	p = fcn_00508e40(*(int*) (a0 + 0xb0));
+	p = gm_LookupEntityRecordById(*(int*) (a0 + 0xb0));
 	st = *(int*) (a0 + 0x70);
 	if (st == -2 || st == -1 || *(unsigned short*) rec == 0xffff || p == 0) {
 		if (*(int*) (a0 + 0x74) != 0) {
@@ -99,15 +99,15 @@ void __cdecl fcn_00554f00(char* a0)
 		}
 		c = *(unsigned char*) (a0 + 0xac);
 		if (c == 9) {
-			fcn_00519190(0x42a3, name);
+			io_AppendText(0x42a3, name);
 		} else if (c == 8) {
-			fcn_00519190(0x42a1, name);
+			io_AppendText(0x42a1, name);
 		} else if (c == 7) {
-			fcn_00519190(0x429f, name);
+			io_AppendText(0x429f, name);
 		} else if (c == 2) {
-			fcn_00519190(0x1618, g_868080 + g_773d75 * 0x2f4, name, *(unsigned short*) p, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x116);
+			io_AppendText(0x1618, g_868080 + g_773d75 * 0x2f4, name, *(unsigned short*) p, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x116);
 		} else {
-			fcn_00519190(0x1617, g_868080 + g_773d75 * 0x2f4, name, *(unsigned short*) p, (int) c + ((*(char*) (p + 9) != 0) ? 0x11e : 0x114));
+			io_AppendText(0x1617, g_868080 + g_773d75 * 0x2f4, name, *(unsigned short*) p, (int) c + ((*(char*) (p + 9) != 0) ? 0x11e : 0x114));
 		}
 		c = *(unsigned char*) (a0 + 0xac);
 		if (c == 2) {
@@ -169,15 +169,15 @@ other_record:
 	c = *(unsigned char*) (a0 + 0xac);
 	w = *(unsigned short*) p;
 	if (c == 9) {
-		fcn_00519190(0x42a4, (int) w, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x11d, (int) w);
+		io_AppendText(0x42a4, (int) w, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x11d, (int) w);
 	} else if (c == 8) {
-		fcn_00519190(0x42a2, (int) w, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x11c, (int) w);
+		io_AppendText(0x42a2, (int) w, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x11c, (int) w);
 	} else if (c == 7) {
-		fcn_00519190(0x42a0, (int) w, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x11b, (int) w);
+		io_AppendText(0x42a0, (int) w, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x11b, (int) w);
 	} else if (c == 2) {
-		fcn_00519190(0x161b, (int) w);
+		io_AppendText(0x161b, (int) w);
 	} else {
-		fcn_00519190(0x161a, (int) w, (int) w, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x114, (int) w);
+		io_AppendText(0x161a, (int) w, (int) w, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x114, (int) w);
 	}
 	c = *(unsigned char*) (a0 + 0xac);
 	if (c == 2) {
@@ -195,6 +195,6 @@ other_record:
 
 tail:
 	d2_SetForm(*(int*) (*(char**) (a0 + 0x74) + 8), 2);
-	fcn_00519190(0x161c);
+	io_AppendText(0x161c);
 	*(int*) (a0 + 0x70) = 1;
 }

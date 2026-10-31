@@ -4,7 +4,7 @@ extern void __cdecl fcn_005e1ca0(void);
 extern void __cdecl fcn_005356e0(void);
 extern void __cdecl fcn_0041a380(int, int, int);
 extern char __cdecl fcn_0041a970(HWND, void*, int, int);
-extern void __cdecl fcn_0041d9e0(char*);
+extern void __cdecl ReportClientMessage(char*);
 extern void __cdecl fcn_0041a2a0(void);
 extern void __cdecl m_ShutdownAllocator(void);
 extern void __cdecl fcn_0041d850(void);
@@ -153,7 +153,7 @@ int __cdecl fcn_00538850(int topmost)
 	*(int*) 0x67ac90 = 2;
 	fcn_0041a380(*(int*) 0x6acf80, *(int*) 0x6acf84, topmost == 1);
 	if (!fcn_0041a970(*(HWND*) 0x774940, (void*) 0x5387c0, topmost == 1, 1)) {
-		fcn_0041d9e0((char*) 0x6a3904);
+		ReportClientMessage((char*) 0x6a3904);
 		fcn_0041a2a0();
 		m_ShutdownAllocator();
 		fcn_0041d850();

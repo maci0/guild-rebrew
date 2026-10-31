@@ -22,13 +22,13 @@ void __cdecl fcn_0058acb0(char*, char*);
 int __cdecl fcn_004ecf00(char*, int*, int*, int);
 void __cdecl fcn_00526120(int, int);
 void __cdecl fcn_005944d0(char*);
-void __cdecl fcn_00585030(char*);
-void __cdecl fcn_00585910(char*);
-void __cdecl fcn_005848b0(char*);
-
 #ifdef REBREW_GOLD
 #define fcn_00585030 fcn_0057c950
 #endif
+
+void __cdecl fcn_00585030(char*);
+void __cdecl fcn_00585910(char*);
+void __cdecl fcn_005848b0(char*);
 
 void __cdecl fcn_0058aad0(char* a, char* b)
 {

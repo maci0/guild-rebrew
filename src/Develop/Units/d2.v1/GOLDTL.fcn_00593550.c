@@ -31,7 +31,7 @@ extern int g_779c40;
 
 char* __cdecl fcn_004ce190(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -46,7 +46,7 @@ void __cdecl fcn_00593550(void)
 
 	y = 10;
 	d2_SetForm(g_6a9b9c, 1);
-	fcn_00519190((int) "$C");
+	io_AppendText((int) "$C");
 	for (i = 0; i < 8; i++) {
 		p = fcn_004ce190(g_774a34[i + 1]);
 		if (p != 0) {

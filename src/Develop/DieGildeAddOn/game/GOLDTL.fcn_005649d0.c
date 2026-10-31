@@ -24,9 +24,9 @@ extern char g_8680b4[];
 
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 
@@ -51,7 +51,7 @@ void __cdecl fcn_005649d0(char* e)
 		return;
 	}
 	h = &((struct house*)g_7f4ca0)[*(unsigned short*) (q + 0x27)];
-	o = fcn_00508e40(*(int*) (e + 0xb0));
+	o = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 	if (h->type != 6 && h->type != 7) {
 		return;
 	}
@@ -60,7 +60,7 @@ void __cdecl fcn_005649d0(char* e)
 	if (r != 0) {
 		v = *(int*) (r + 0xe);
 	}
-	fcn_0051af00(buf, 0x18d7, *(unsigned short*) o, q, *(int*) (e + 0xb4), *(int*) (e + 0xc0), *(int*) (e + 0xb8), 0x5d, v);
+	io_FormatTextBuffer(buf, 0x18d7, *(unsigned short*) o, q, *(int*) (e + 0xb4), *(int*) (e + 0xc0), *(int*) (e + 0xb8), 0x5d, v);
 	he_MessageBoxQuickjump(h->handle, -1, buf, 0, 0x5ec, *(int*) (q + 1), -1, 0, 0);
 	fcn_004f4f60(0xe, *(int*) (e + 0xc0), h->handle, *(int*) (e + 0xb0), *(int*) (q + 1));
 }

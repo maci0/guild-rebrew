@@ -8,7 +8,7 @@ typedef struct {
 } EVT_ARG;
 
 int __cdecl fcn_004e8b80(unsigned int a0, int a1, EVT_ARG* a2);
-char* __cdecl fcn_00508e40(int a0);
+char* __cdecl gm_LookupEntityRecordById(int a0);
 
 /* ADDRESS: GOLDTL 0x004ea130 */
 unsigned int __cdecl fcn_004ea130(unsigned int a0)
@@ -31,8 +31,8 @@ unsigned int __cdecl fcn_004ea130(unsigned int a0)
 	for (i = 0; i < n; i++) {
 		if ((char) args[i].type == 2) {
 			id = args[i].ref;
-			obj = fcn_00508e40(id);
-			obj2 = fcn_00508e40(args[i].id);
+			obj = gm_LookupEntityRecordById(id);
+			obj2 = gm_LookupEntityRecordById(args[i].id);
 			if (obj == 0 || obj[8] == 0 || obj[0x1b1] != 0 || obj2 == 0 || obj2[8] == 0) {
 				continue;
 			}
@@ -64,7 +64,7 @@ unsigned int __cdecl fcn_004ea130(unsigned int a0)
 done:
 	if ((flag & 1) != 0) {
 		for (i = 0; i < n; i++) {
-			obj = fcn_00508e40(args[i].id);
+			obj = gm_LookupEntityRecordById(args[i].id);
 			if (obj == 0) {
 				continue;
 			}

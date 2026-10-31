@@ -1,6 +1,6 @@
 extern char s_67fb40[];
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c4eb0(char* s);
@@ -18,7 +18,7 @@ int __cdecl fcn_004aab30(char* a1, int a2, char* x)
 	if (x[0] != 7) {
 		return 0;
 	}
-	p = fcn_00508e40(*(int*) (x + 4));
+	p = gm_LookupEntityRecordById(*(int*) (x + 4));
 	if (!p) {
 		return 0;
 	}

@@ -19,7 +19,7 @@ typedef struct pkt99 {
 // SIZE 0x99
 #pragma pack()
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
@@ -55,7 +55,7 @@ int __cdecl fcn_004c5da0(int who, int key, int target, char* name, int mode, cha
 	} else {
 		pkt.name[0] = 0;
 	}
-	e = fcn_00508e40(who);
+	e = gm_LookupEntityRecordById(who);
 	if (e != 0 && e[8] == 0)
 		return -1;
 	if (mode == 0 && target == -1) {

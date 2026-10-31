@@ -47,9 +47,9 @@ void __cdecl fcn_0050d6d0(char*, struct house*, int, struct want*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
 int __cdecl fcn_004c5530(char* msg);
@@ -83,16 +83,16 @@ void __cdecl fcn_005a4090(char* p)
 	h = fcn_00470820(0, 0, g_6aaba0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 1);
-	fcn_00519190(0x18d0);
+	io_AppendText(0x18d0);
 	d2_SetForm(h, 2);
-	fcn_00519190(0x18d1, *(unsigned short*) (p + 0x25), p);
+	io_AppendText(0x18d1, *(unsigned short*) (p + 0x25), p);
 	for (i = 0; i < 3; i++) {
 		if (list[i].n > 0) {
-			list[i].handle = fcn_00472250(h, 2, fcn_00519190(0x18d2, list[i].n, list[i].y, list[i].x, 0x5d));
+			list[i].handle = fcn_00472250(h, 2, io_AppendText(0x18d2, list[i].n, list[i].y, list[i].x, 0x5d));
 		}
 	}
-	fcn_00519190(0x18d3);
-	fcn_00473a90(0, 0);
+	io_AppendText(0x18d3);
+	d2_SetOverlayAnimation(0, 0);
 	while (fcn_005373e0(fcn_005a4090, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

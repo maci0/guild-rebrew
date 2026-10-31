@@ -3,13 +3,13 @@
 
 extern char g_868060[];
 
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 
 int __cdecl gm_CheckEntityType(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 
@@ -29,7 +29,7 @@ int __cdecl fcn_004b9e60(int* a1)
 	int r;
 
 	n = 0;
-	e = fcn_00508e40(a1[0]);
+	e = gm_LookupEntityRecordById(a1[0]);
 	if (e == 0)
 		return 1;
 	for (s = fcn_005463a0(1, 0, 0xf); s != 0 && n < 8; s = he_fn_Handlung()) {
@@ -55,9 +55,9 @@ int __cdecl fcn_004b9e60(int* a1)
 	gm_ResolveEntityById((void**) (&x2), 0, 0, *(int*) (s + 0xb0));
 	gm_ResolveEntityById((void**) (&x1), 0, 0, *(int*) (s + 0xb4));
 	if (*x2 == 'G')
-		fcn_0051af00(buf, *(unsigned short*) (a1 + 1) + 0x12e7, g_868060 + *(int*) (x2 + 0x65) * 756, g_868060, cnt, g_868060);
+		io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, g_868060 + *(int*) (x2 + 0x65) * 756, g_868060, cnt, g_868060);
 	else
-		fcn_0051af00(buf, *(unsigned short*) (a1 + 1) + 0x12e7, g_868060, g_868060 + *(int*) (x1 + 0x65) * 756, cnt, g_868060 + *(int*) (x1 + 0x65) * 756);
+		io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, g_868060, g_868060 + *(int*) (x1 + 0x65) * 756, cnt, g_868060 + *(int*) (x1 + 0x65) * 756);
 	fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x5ef, 0);
 	return 0;
 }

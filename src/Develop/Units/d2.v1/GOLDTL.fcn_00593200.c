@@ -8,7 +8,7 @@ extern int g_772514;
 extern char* g_1015ea0;
 
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00519190(int, ...);
+void __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00465950(char* name);
 int __cdecl fcn_0046f740(int, int, int, int);
 
@@ -24,7 +24,7 @@ void __cdecl fcn_00593200(void)
 	int x;
 
 	d2_SetForm(g_6a9b9c, 2);
-	fcn_00519190((int) 0x6811b0);
+	io_AppendText((int) 0x6811b0);
 	if (*(int*) 0x9baadc == 0x3f) {
 		strcpy(s1, (char*) 0x9baa76);
 		strcpy(s2, (char*) 0x9baa76);

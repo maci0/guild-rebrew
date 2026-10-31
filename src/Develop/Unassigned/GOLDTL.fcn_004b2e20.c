@@ -4,7 +4,7 @@
 extern int g_1052de0;
 extern char g_67fca0[];
 
-void __cdecl fcn_0051af00(int, int, ...);
+void __cdecl io_FormatTextBuffer(int, int, ...);
 
 /* ADDRESS: GOLDTL 0x004b2e20 */
 void __cdecl hst_ParseText_Real(int out, int src)
@@ -72,5 +72,5 @@ void __cdecl hst_ParseText_Real(int out, int src)
 	if (hash != 0) {
 		return;
 	}
-	fcn_0051af00(out, 0x679060, buf);
+	io_FormatTextBuffer(out, 0x679060, buf);
 }

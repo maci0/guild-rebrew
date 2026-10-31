@@ -14,7 +14,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
-char* __cdecl fcn_00508e40(int k);
+char* __cdecl gm_LookupEntityRecordById(int k);
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
 void __cdecl fcn_004c6900(Msg* msg);
@@ -39,7 +39,7 @@ void __cdecl fcn_005474f0(void)
 			if (((int*) (w + 0x1c))[i] == -1) {
 				continue;
 			}
-			u = fcn_00508e40(((int*) (w + 0x1c))[i]);
+			u = gm_LookupEntityRecordById(((int*) (w + 0x1c))[i]);
 			if (u == 0 || u[8] == 0 || u[2] == 0xf) {
 				Msg msg;
 

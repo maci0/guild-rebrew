@@ -11,7 +11,7 @@ struct pos14 {
 };
 #pragma pack()
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, char*);
 void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
 
@@ -21,7 +21,7 @@ void __cdecl fcn_00560940(char* e)
 	int i;
 
 	for (i = 0; i < *(unsigned char*) (e + 0xac); i++) {
-		p = fcn_00508e40(((int*) (e + 0x8c))[i]);
+		p = gm_LookupEntityRecordById(((int*) (e + 0x8c))[i]);
 		if (p != 0) {
 			fcn_00529160(0, 0, *(unsigned short*) p, e);
 		}

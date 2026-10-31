@@ -38,7 +38,7 @@ extern char g_6aba48[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471af0(int k, int flag);
@@ -79,13 +79,13 @@ void __cdecl fcn_005b4f70(void)
 	d = fcn_00470820(0, 0, g_6abad8);
 	fcn_00471b60(d);
 	d2_SetForm(d, 0);
-	h1 = fcn_00472250(d, 0, fcn_00519190(g_6ababc, 2));
-	h2 = fcn_00472250(d, 0, fcn_00519190(g_6abaa8, 2));
-	h3 = fcn_00472250(d, 0, fcn_00519190(g_6aba94, 2));
-	h4 = fcn_00472250(d, 0, fcn_00519190(g_6aba80, 2));
-	h5 = fcn_00472250(d, 0, fcn_00519190(g_6aba70, 2));
-	h6 = fcn_00472250(d, 0, fcn_00519190(g_6aba5c, 2));
-	h7 = fcn_00472250(d, 0, fcn_00519190(g_6aba48, 2));
+	h1 = fcn_00472250(d, 0, io_AppendText(g_6ababc, 2));
+	h2 = fcn_00472250(d, 0, io_AppendText(g_6abaa8, 2));
+	h3 = fcn_00472250(d, 0, io_AppendText(g_6aba94, 2));
+	h4 = fcn_00472250(d, 0, io_AppendText(g_6aba80, 2));
+	h5 = fcn_00472250(d, 0, io_AppendText(g_6aba70, 2));
+	h6 = fcn_00472250(d, 0, io_AppendText(g_6aba5c, 2));
+	h7 = fcn_00472250(d, 0, io_AppendText(g_6aba48, 2));
 	while (fcn_005373e0(fcn_005b4f70, t) != 0) {
 		if (g_100f1dc != -1) {
 			if (g_67d370 == h1) {

@@ -22,9 +22,9 @@ __declspec(dllimport) int __stdcall MultiByteToWideChar(unsigned int, unsigned l
 extern long __stdcall DirectDrawCreateEx(void*, void**, void*, void*);
 extern long __stdcall CoCreateInstance(void*, void*, unsigned long, void*, void**);
 
-char* __cdecl fcn_0041f8f0(void);
-void __cdecl fcn_0041f7f0(char*);
-void __cdecl fcn_0041f940(char*);
+char* __cdecl AllocVideoListNode(void);
+void __cdecl ReleaseVideoInterfaces(char*);
+void __cdecl FreeVideoListNode(char*);
 
 /* Starts playback of a video file: opens the DirectDraw surface and the
    DirectShow filter graph, then places the video window. Returns the new
@@ -59,7 +59,7 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 		sprintf(msg, (char*) 0x6780b8, name, hwnd);
 		return 0;
 	}
-	v = fcn_0041f8f0();
+	v = AllocVideoListNode();
 	if (v == 0) {
 		return 0;
 	}
@@ -230,7 +230,7 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 	return id;
 
 fail:
-	fcn_0041f7f0(v);
-	fcn_0041f940(v);
+	ReleaseVideoInterfaces(v);
+	FreeVideoListNode(v);
 	return 0;
 }

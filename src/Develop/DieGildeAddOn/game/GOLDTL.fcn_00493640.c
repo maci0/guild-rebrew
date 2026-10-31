@@ -20,7 +20,7 @@ typedef struct Unit {
 } Unit;
 
 unsigned int __cdecl fcn_004938c0(Plan* p);
-Unit* __cdecl fcn_00508e40(int id);
+Unit* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl gm_RandomMod(int n);
 
@@ -44,9 +44,9 @@ int __cdecl fcn_00493640(Plan* p)
 		return 1;
 	}
 	n = fcn_004938c0(p);
-	a = fcn_00508e40(p->a);
-	b = fcn_00508e40(p->b);
-	c = fcn_00508e40(p->c);
+	a = gm_LookupEntityRecordById(p->a);
+	b = gm_LookupEntityRecordById(p->b);
+	c = gm_LookupEntityRecordById(p->c);
 	v = a->base + a->bonus;
 	r = a->mood - 2.0f;
 	if (r > 0.66f) {

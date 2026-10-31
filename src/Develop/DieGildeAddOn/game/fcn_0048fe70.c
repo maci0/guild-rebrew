@@ -1,4 +1,4 @@
-int __cdecl fcn_00508e40(int id);
+int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_0047d220(char* p);
 void* __cdecl fcn_004f18d0(char* a1, char* a2, int a3, int a4, int a5);
 int __cdecl fcn_004f4550(int a, int b, int c, int* out);
@@ -38,7 +38,7 @@ int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
 		return 0;
 	}
 	if (*(char*) (a1 + 2) != 5) {
-		rec = (char*) fcn_00508e40(*(int*) (a1 + 0x5c));
+		rec = (char*) gm_LookupEntityRecordById(*(int*) (a1 + 0x5c));
 		if (rec != 0) {
 			if (*(char*) (rec + 2) == 5) {
 				return 0;

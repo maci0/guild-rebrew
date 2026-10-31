@@ -26,11 +26,11 @@ int __cdecl evt_ImportCommand(const char* name, void* fn, int flags, int nargs, 
 
 	i = 0;
 	if (strlen(name) > 0x1f) {
-		fcn_0041d9e0("evt_ImportCommand: Commandnamelength is invalid...");
+		ReportClientMessage("evt_ImportCommand: Commandnamelength is invalid...");
 		return 0;
 	}
 	if (fcn_00429e60(name)) {
-		fcn_0041d9e0("evt_ImportCommand: Commandname already exists...");
+		ReportClientMessage("evt_ImportCommand: Commandname already exists...");
 		return 0;
 	}
 	for (; i < 0x100; i++) {
@@ -39,7 +39,7 @@ int __cdecl evt_ImportCommand(const char* name, void* fn, int flags, int nargs, 
 		}
 	}
 	if (i >= 0x100) {
-		fcn_0041d9e0("evt_ImportCommand: Too many commands!");
+		ReportClientMessage("evt_ImportCommand: Too many commands!");
 		return 0;
 	}
 	((struct cmd_429ed0*)g_6b7e9c)[i].fn = fn;

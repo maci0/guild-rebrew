@@ -22,7 +22,7 @@ extern int __cdecl fcn_00472250(int, int, int);
 extern int __cdecl fcn_00472380(int, int, int, int);
 extern int __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
 extern int __cdecl fcn_0046b2b0(int);
-extern int __cdecl fcn_00519190(int, ...);
+extern int __cdecl io_AppendText(int, ...);
 extern int __cdecl fcn_005b58a0(void*, int, int);
 extern int __cdecl d2_ShowTxt(int, int, int, int);
 
@@ -106,9 +106,9 @@ int __cdecl fcn_005b6300(char* a1, int a2, int a3)
 		fcn_00468bb0(v60, 5, G(0x14abbd8), G(0x14abbdc), G(0x14abbe0), G(0x14abbe4), G(0x14abbe8));
 	}
 	d2_SetForm(G(book + 0x228), 3);
-	fcn_00519190((int) 0x6ac2c8);
-	fcn_00519190((int) 0x6ac2c8);
-	v78 = fcn_00472250(G(book + 0x228), 3, fcn_00519190(0x1a20));
+	io_AppendText((int) 0x6ac2c8);
+	io_AppendText((int) 0x6ac2c8);
+	v78 = fcn_00472250(G(book + 0x228), 3, io_AppendText(0x1a20));
 
 	if (row[0] != 5 && row[0] != 9) {
 		d2_SetForm(G(book + 0x228), 3);
@@ -122,13 +122,13 @@ int __cdecl fcn_005b6300(char* a1, int a2, int a3)
 
 	for (i = 0; i < 4; i++) {
 		d2_SetForm(G(book + 0x228 + i * 4), 1);
-		fcn_00519190(0x1a1d);
+		io_AppendText(0x1a1d);
 		if (i == 0) {
 			d2_SetForm(G(book + 0x228), 5);
 		} else {
 			d2_SetForm(G(book + 0x228 + i * 4), 4);
 		}
-		fcn_00519190(0x6a2310, 0x1a37, i);
+		io_AppendText(0x6a2310, 0x1a37, i);
 	}
 
 	if (row[0] == 4 || row[0] == 0x13 || row[0] == 0x10) {

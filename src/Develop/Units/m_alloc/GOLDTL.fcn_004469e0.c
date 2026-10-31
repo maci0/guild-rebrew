@@ -32,7 +32,7 @@ void __cdecl fcn_00401210(void* s, char v);
 void __cdecl fcn_00401230(void* s, void* str);
 void __cdecl fcn_00401260(void* s, int v);
 void __cdecl fcn_004012f0(void* s, void* v);
-void __cdecl fcn_00401320(void* s, int* v);
+void __cdecl fcn_004012e0(void* s, int* v);
 void __cdecl fcn_00401360(void* s, int v);
 void __cdecl fcn_00401430(void* s, int a, int b, void* data);
 
@@ -77,8 +77,8 @@ void __cdecl fcn_004469e0(void* s, char* o)
 				fcn_00401260(s, PART(i).e);
 				fcn_00401260(s, PART(i).c);
 				fcn_00401260(s, PART(i).d);
-				fcn_00401320(s, PART(i).v18);
-				fcn_00401320(s, PART(i).v28);
+				fcn_004012e0(s, PART(i).v18);
+				fcn_004012e0(s, PART(i).v28);
 				fcn_00401360(s, PART(i).f154);
 			}
 		}

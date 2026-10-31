@@ -41,11 +41,11 @@ extern int g_774654;
 
 int __cdecl fcn_004ecf00(char*, int*, int*, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -71,18 +71,18 @@ int __cdecl fcn_005865f0(char* e, int* who, int kind)
 		ok = 0;
 	}
 	h = fcn_00470820(0, 0, "Locations\\Domizil\\skill");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(h, 1);
-	fcn_00519190(0x4045, kind + 0x4172);
-	fcn_00519190(kind + 0x4176);
+	io_AppendText(0x4045, kind + 0x4172);
+	io_AppendText(kind + 0x4176);
 	if (ok) {
-		fcn_00519190(0x4046, 0x182);
+		io_AppendText(0x4046, 0x182);
 	}
 	d2_SetForm(h, 2);
-	s = fcn_00519190(0x4047);
+	s = io_AppendText(0x4047);
 	yes = fcn_00472250(h, 2, s);
 	no = fcn_00472250(h, 2, s + 1);
 	fcn_00472640(yes, ok);

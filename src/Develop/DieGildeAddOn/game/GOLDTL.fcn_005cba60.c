@@ -11,7 +11,7 @@ typedef struct {
 
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005ca560(Item5cba60*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 
@@ -28,7 +28,7 @@ int __cdecl fcn_005cba60(unsigned short* who, unsigned int max, Item5cba60* out,
 	count = 0;
 	for (t = fcn_005463a0(1, 0, 0x6f); t != 0 && count < 4; t = he_fn_Handlung()) {
 		if (*(int*) (t + 0xac) == *(int*) (who + 2)) {
-			q = fcn_00508e40(*(int*) (t + 0xb0));
+			q = gm_LookupEntityRecordById(*(int*) (t + 0xb0));
 			if (q != 0) {
 				ps[count++] = q;
 			}

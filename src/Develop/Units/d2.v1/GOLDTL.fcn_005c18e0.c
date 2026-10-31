@@ -12,7 +12,7 @@ int __cdecl fcn_00471e30();
 int __cdecl fcn_00472250();
 int __cdecl fcn_00472640();
 int __cdecl d2_SetForm();
-int __cdecl fcn_00473a90();
+int __cdecl d2_SetOverlayAnimation();
 int __cdecl fcn_00494470();
 int __cdecl fcn_004c4510();
 int __cdecl fcn_004c4570();
@@ -22,9 +22,9 @@ int __cdecl fcn_00500bb0();
 int __cdecl fcn_00502850();
 int __cdecl fcn_00502cd0();
 int __cdecl fcn_00503fe0();
-int __cdecl fcn_00508e40();
-int __cdecl fcn_00519190();
-int __cdecl fcn_0051af00();
+int __cdecl gm_LookupEntityRecordById();
+int __cdecl io_AppendText();
+int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_0052d820();
 int __cdecl fcn_00530510();
 int __cdecl fcn_00533a60();
@@ -147,7 +147,7 @@ void __cdecl fcn_005c18e0(int a0,int a1)
     v12 = 0;
     do {
       v9 = *v14;
-      v20[v12] = fcn_00508e40(v9);
+      v20[v12] = gm_LookupEntityRecordById(v9);
       v12 += 1;
       v14 = &v14[1];
     } while (v12 < 4);
@@ -165,10 +165,10 @@ label_5c221e:
     d2_SetForm(v9,0);
     fcn_005340f0((*(int *)0x772514));
     fcn_00471b60(v9);
-    fcn_00473a90(0,0);
+    d2_SetOverlayAnimation(0,0);
     d2_SetForm(v9,1);
-    fcn_00519190(0x6811b0);
-    fcn_00519190(0x1780,&v16);
+    io_AppendText(0x6811b0);
+    io_AppendText(0x1780,&v16);
     v42 &= 0xffffff00;
     v12 = 0;
     do {
@@ -176,15 +176,15 @@ label_5c221e:
       if (v2) {
         v21[(v42 & 0xff) * 2] = v2;
         v42 = ((v42 & 0xffffff00) | (((char)v42 + '\x01') & 0xff));
-        fcn_00519190(0x1781,*v2);
+        io_AppendText(0x1781,*v2);
       }
       v12 += 1;
     } while (v12 < 4);
-    fcn_00519190(0x1782,v13 + 0x1773);
+    io_AppendText(0x1782,v13 + 0x1773);
     if (v37)
-      fcn_00519190(0x1783,v5 + 0x177a);
+      io_AppendText(0x1783,v5 + 0x177a);
     fcn_00494470(&v20[5],0);
-    fcn_00519190(0x1784,v41);
+    io_AppendText(0x1784,v41);
     (*(int *)0x100f1dc) = -1;
     do {
       if ((*(int *)0x14ce8e0))
@@ -197,20 +197,20 @@ label_5c221e:
     d2_SetForm(v9,0);
     fcn_005340f0((*(int *)0x772514));
     fcn_00471b60(v9);
-    fcn_00473a90(0,0);
+    d2_SetOverlayAnimation(0,0);
     (*(int *)0x100f1dc) = 0xffffffff;
     d2_SetForm(v9,1);
-    fcn_00519190(0x6811b0);
-    fcn_00519190(0x1772);
+    io_AppendText(0x6811b0);
+    io_AppendText(0x1772);
     v18 &= 0xffffff00;
     do {
       v13 = v18 & 0xff;
-      v12 = fcn_00472250(v9,1,fcn_00519190((char *)0x6ac5b0,v13 + 0x1773));
+      v12 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5b0,v13 + 0x1773));
       v17[v18 & 0xff] = v12;
       v6 = (char)v18 + 1;
       v18 = ((v18 & 0xffffff00) | ((v6) & 0xff));
     } while (v6 < 5);
-    v10 = fcn_00472250(v9,1,fcn_00519190((char *)0x6ac5a4,v6 + 0x1773));
+    v10 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5a4,v6 + 0x1773));
     v12 = a1;
     (*(int *)0x100f1dc) = -1;
     v17[v18 & 0xff] = v10;
@@ -244,17 +244,17 @@ label_5c221e:
     if (v10) {
       if (v37) { 
         d2_SetForm(v28,1);
-        fcn_00519190(0x6811b0);
-        fcn_00519190(0x1779);
+        io_AppendText(0x6811b0);
+        io_AppendText(0x1779);
         v18 &= 0xffffff00;
         do {
           v13 = v18 & 0xff;
-          v12 = fcn_00472250(v9,1,fcn_00519190((char *)0x6ac5b0,v13 + 0x177a));
+          v12 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5b0,v13 + 0x177a));
           v17[v18 & 0xff] = v12;
           v6 = (char)v18 + 1;
           v18 = ((v18 & 0xffffff00) | ((v6) & 0xff));
         } while (v6 < 5);
-        v12 = fcn_00472250(v9,1,fcn_00519190((char *)0x6ac5a4,v6 + 0x177a));
+        v12 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5a4,v6 + 0x177a));
         v10 = a1;
         (*(int *)0x100f1dc) = -1;
         v17[v18 & 0xff] = v12;
@@ -302,7 +302,7 @@ label_5c221e:
         d2_SetForm(v9,0);
         fcn_005340f0((*(int *)0x772514));
         fcn_00471b60(v9);
-        fcn_00473a90(0,0);
+        d2_SetOverlayAnimation(0,0);
         (*(int *)0x100f1dc) = -1;
         v12 = -1;
         do {
@@ -310,8 +310,8 @@ label_5c221e:
             v12 = 0;
             v18 = 0;
             d2_SetForm(v9,1);
-            fcn_00519190(0x6811b0);
-            fcn_00519190(0x1769,&v16);
+            io_AppendText(0x6811b0);
+            io_AppendText(0x1769,&v16);
             v41 = 0;
             v10 = 0;
             v42 &= 0xffffff00;
@@ -321,7 +321,7 @@ label_5c221e:
             do {
               v2 = *(unsigned short **)((int)v20 + v12);
               if (v2) { 
-                v11 = fcn_00519190(0x176a,*v2);
+                v11 = io_AppendText(0x176a,*v2);
                 *(unsigned int *)((int)v17 + v12) = fcn_00472250(v9,1,v11);
                 v21[(v42 & 0xff) * 2] = v2;
                 v10 += 1;
@@ -334,16 +334,16 @@ label_5c221e:
             } while (v12 < 0x10);
             fcn_00494470(&v20[5],0);
             d2_SetForm(v9,2);
-            fcn_00519190(0x6811b0);
-            v11 = fcn_00519190(0x176b,v41);
+            io_AppendText(0x6811b0);
+            v11 = io_AppendText(0x176b,v41);
             v12 = fcn_00472250(v9,2,v11);
             v36 = v12;
             if (v10 == 4)
               fcn_00472640(v12,0);
             d2_SetForm(v9,3);
-            fcn_00519190(0x6811b0);
-            fcn_0051af00(v22,0x176c);
-            fcn_0051af00(v23,0x176d);
+            io_AppendText(0x6811b0);
+            io_FormatTextBuffer(v22,0x176c);
+            io_FormatTextBuffer(v23,0x176d);
             fcn_00533a60((*(int *)0x772514),0,&v24,2,v22,v23);
             v20[4] = v24;
             v38 = v43;

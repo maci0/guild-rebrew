@@ -4,7 +4,7 @@ extern int g_1040490;
 extern int g_1040494;
 
 int __cdecl fcn_00469890(void);
-int __cdecl fcn_00466190(int);
+int __cdecl d2_GetResourceData(int);
 
 /* ADDRESS: GOLDTL 0x004675f0 */
 int __cdecl fcn_004675f0(int a0, int a1, int a2, int a3, int a4, int a5, int a6)
@@ -60,6 +60,6 @@ int __cdecl fcn_004675f0(int a0, int a1, int a2, int a3, int a4, int a5, int a6)
 	*(int*) (g_1015ea0 + id * 0x2f4 + 0x34) = g_1040490;
 	*(int*) (g_1015ea0 + id * 0x2f4 + 0x28) = 0;
 	*(int*) (g_1015ea0 + id * 0x2f4 + 0x2c) = g_1040494;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0xc) = fcn_00466190(a5);
+	*(int*) (g_1015ea0 + id * 0x2f4 + 0xc) = d2_GetResourceData(a5);
 	return id;
 }

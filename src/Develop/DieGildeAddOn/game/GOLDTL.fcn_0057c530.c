@@ -26,7 +26,7 @@ struct msg {
 #include <string.h>
 
 void __cdecl fcn_004c5530(struct msg*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
 void __cdecl fcn_0057c530(char* a, char* b)
@@ -51,7 +51,7 @@ void __cdecl fcn_0057c530(char* a, char* b)
 		id = 0x41dc;
 		memcpy(tag, "_NACHRICHTEN_ZIGEUNER_01", 25);
 	}
-	fcn_0051af00(buf1, 0x41e3);
-	fcn_0051af00(buf2, id, buf1);
+	io_FormatTextBuffer(buf1, 0x41e3);
+	io_FormatTextBuffer(buf2, id, buf1);
 	fcn_00545d40(*(int*) (b + 4), -1, buf2, 1, 0x5fb, tag);
 }

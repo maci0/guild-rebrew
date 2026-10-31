@@ -28,7 +28,7 @@ extern int g_7f4ca4[];
 unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01(void);
 char* __cdecl fcn_00502cd0(int id, int a, int b, int c, int d);
-unsigned short* __cdecl fcn_00508e40(int id);
+unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 
 int __cdecl fcn_0049f290(int busy, unsigned short* self, int pending, Act* out)
@@ -99,7 +99,7 @@ int __cdecl fcn_0049f290(int busy, unsigned short* self, int pending, Act* out)
 		cnt = 0;
 		p = (int*) (res[sel] + 0x1c);
 		for (k = 4; k != 0; k--) {
-			o = fcn_00508e40(*p);
+			o = gm_LookupEntityRecordById(*p);
 			if (o != 0 && o != self) {
 				cnt++;
 				sum += fcn_0050f980(*self, *o, 1);

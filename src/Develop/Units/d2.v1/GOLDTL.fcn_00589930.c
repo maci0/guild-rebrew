@@ -41,7 +41,7 @@ extern float g_664150;
 
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
@@ -50,7 +50,7 @@ void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_005373e0(void*, int);
@@ -86,7 +86,7 @@ void __cdecl fcn_00589930(char* a0)
 	act.amt[1] = (int) (f * g_664150);
 	act.amt[2] = (int) (f * *(float*) 0x6628ac);
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(*(int*) 0x772514);
@@ -103,17 +103,17 @@ void __cdecl fcn_00589930(char* a0)
 	fcn_00468bb0(lst, 3, *(int*) 0x14b53a4, *(int*) 0x14b53a8,
 	             *(int*) 0x14b53ac);
 	d2_SetForm(dlg, 3);
-	btn = fcn_00519190(0x4024);
+	btn = io_AppendText(0x4024);
 	act.no = fcn_00472250(dlg, 3, btn);
 	act.yes = fcn_00472250(dlg, 3, btn + 1);
 	*(int*) 0x100f1dc = -1;
 	do {
 		j = fcn_00471f80(lst);
 		d2_SetForm(dlg, 1);
-		fcn_00519190(0x6811b0);
-		fcn_00519190(0x401e, 0x401c);
+		io_AppendText(0x6811b0);
+		io_AppendText(0x401e, 0x401c);
 		amt = act.amt[j];
-		fcn_00519190(0x401f, amt);
+		io_AppendText(0x401f, amt);
 		if (*(int*) 0x14ce8e0) {
 			*(int*) 0x774654 = 1;
 		} else if (*(int*) 0x100f1dc != -1) {

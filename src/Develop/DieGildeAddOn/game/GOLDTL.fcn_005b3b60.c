@@ -36,7 +36,7 @@ void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c5980(void*);
 void __cdecl fcn_004e5a00(void*);
 void __cdecl fcn_00500bb0(void*, int, int, int);
-int __cdecl fcn_00519190(char*);
+int __cdecl io_AppendText(char*);
 int __cdecl fcn_005373e0(int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_RandomMod(int);
@@ -56,16 +56,16 @@ void __cdecl fcn_005b3b60(void)
 	item[7] = fcn_00470820(0, 0, "misc\\theatre");
 	fcn_00471b60(item[7]);
 	d2_SetForm(item[7], 0);
-	item[2] = fcn_00472250(item[7], 0, fcn_00519190("%ia[Hochzeit]$N"));
-	item[4] = fcn_00472250(item[7], 0, fcn_00519190("%ia[Tod]$N"));
-	item[8] = fcn_00472250(item[7], 0, fcn_00519190("%ia[Pleite]$N"));
-	item[9] = fcn_00472250(item[7], 0, fcn_00519190("%ia[Hinrichtung]$N"));
-	item[6] = fcn_00472250(item[7], 0, fcn_00519190("%ia[Pacht]$N"));
-	item[10] = fcn_00472250(item[7], 0, fcn_00519190("%ia[Geburt]$N"));
-	item[0] = fcn_00472250(item[7], 0, fcn_00519190("%ia[Pest]$N"));
-	item[1] = fcn_00472250(item[7], 0, fcn_00519190("%ia[Brand]$N"));
-	item[3] = fcn_00472250(item[7], 0, fcn_00519190("%ia[Sturm]$N"));
-	item[5] = fcn_00472250(item[7], 0, fcn_00519190("%ia[Duell]$N"));
+	item[2] = fcn_00472250(item[7], 0, io_AppendText("%ia[Hochzeit]$N"));
+	item[4] = fcn_00472250(item[7], 0, io_AppendText("%ia[Tod]$N"));
+	item[8] = fcn_00472250(item[7], 0, io_AppendText("%ia[Pleite]$N"));
+	item[9] = fcn_00472250(item[7], 0, io_AppendText("%ia[Hinrichtung]$N"));
+	item[6] = fcn_00472250(item[7], 0, io_AppendText("%ia[Pacht]$N"));
+	item[10] = fcn_00472250(item[7], 0, io_AppendText("%ia[Geburt]$N"));
+	item[0] = fcn_00472250(item[7], 0, io_AppendText("%ia[Pest]$N"));
+	item[1] = fcn_00472250(item[7], 0, io_AppendText("%ia[Brand]$N"));
+	item[3] = fcn_00472250(item[7], 0, io_AppendText("%ia[Sturm]$N"));
+	item[5] = fcn_00472250(item[7], 0, io_AppendText("%ia[Duell]$N"));
 	if (fcn_005373e0(0x5b3b60, 0x657c7)) {
 		do {
 		if (*(int*) 0x14ce8e0) {

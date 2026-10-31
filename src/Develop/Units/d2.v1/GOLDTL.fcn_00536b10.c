@@ -17,7 +17,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 
 /* ADDRESS: GOLDTL 0x00536b10 */
 void __cdecl fcn_00536b10(void)
@@ -33,8 +33,8 @@ void __cdecl fcn_00536b10(void)
 			}
 		}
 		d2_SetForm(g_6a2c20, 0);
-		fcn_00519190((int) g_6811b0);
-		fcn_00519190((int) g_7e3a60);
+		io_AppendText((int) g_6811b0);
+		io_AppendText((int) g_7e3a60);
 		return;
 	}
 	if (g_6a2c20 == -1) {

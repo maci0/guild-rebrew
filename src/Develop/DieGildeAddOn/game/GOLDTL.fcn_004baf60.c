@@ -8,11 +8,11 @@ extern double g_6640e8;
 #include <string.h>
 
 int __cdecl gm_RandomMod(int);
-void* __cdecl fcn_00508e40(int);
+void* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(void*, int);
 int __cdecl fcn_004bac00(void*, int*, float);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_0051af00(void*, int, int, void*);
+void __cdecl io_FormatTextBuffer(void*, int, int, void*);
 void __cdecl he_MessageBoxQuickjump(int, int, void*, int, int, int, int, int, void*);
 
 
@@ -31,7 +31,7 @@ int __cdecl fcn_004baf60(void* a1)
 
 	n = gm_RandomMod(0x14) & 0xffff;
 	f = (float) (((double) n + g_664e78) * g_6640e8);
-	p = fcn_00508e40(*(int*) a1);
+	p = gm_LookupEntityRecordById(*(int*) a1);
 	if (p == 0) {
 		return 1;
 	}
@@ -43,7 +43,7 @@ int __cdecl fcn_004baf60(void* a1)
 
 				t = f;
 				r = (int) (t * g_662cf8);
-				fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, r, e);
+				io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, r, e);
 				len = strlen(buf);
 				he_MessageBoxQuickjump(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4),
 				    buf, 0x100 < len, 0x603, *(int*) ((char*) e + 1), -1, 0, 0);

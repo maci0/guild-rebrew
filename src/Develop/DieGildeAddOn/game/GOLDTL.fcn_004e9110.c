@@ -22,7 +22,7 @@ typedef struct {
 // SIZE 0x18
 
 int __cdecl fcn_004e8a80(int, rec18*);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 
 char* __cdecl fcn_004e9110(int kind)
 {
@@ -30,11 +30,11 @@ char* __cdecl fcn_004e9110(int kind)
 
 	if (kind == 0x24) {
 		if (fcn_004e8a80(0x27, &r) != 0)
-			return fcn_00508e40(r.id);
+			return gm_LookupEntityRecordById(r.id);
 	}
 	else if (kind == 0x25 || kind == 0x23) {
 		if (fcn_004e8a80(0x26, &r) != 0)
-			return fcn_00508e40(r.id);
+			return gm_LookupEntityRecordById(r.id);
 	}
 	return 0;
 }

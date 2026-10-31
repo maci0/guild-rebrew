@@ -26,10 +26,10 @@ void __cdecl fcn_00471b60(int);
 int __cdecl fcn_0050cf50(void*, int);
 int __cdecl fcn_0050b710(int, unsigned char);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, void*, int);
+int __cdecl io_AppendText(int, void*, int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00471f80(int);
@@ -57,9 +57,9 @@ void __cdecl fcn_005c23b0(char* e)
 	v = fcn_0050b710(p, g_773d75);
 	d2_SetForm(win, 2);
 	ret = *(unsigned short*) (g_773d75 * 0x2f4 + 0x8680b4);
-	h = fcn_00472250(win, 2, fcn_00519190(0x17c5, e, ret * 2 + 0x9a8));
+	h = fcn_00472250(win, 2, io_AppendText(0x17c5, e, ret * 2 + 0x9a8));
 	fcn_00472380(h, (int) (x * 0.5), (int) (x * 1.5), v);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_005373e0(0, 0x677c7);
 	do {
 		ret = gm_SearchTable67(id);

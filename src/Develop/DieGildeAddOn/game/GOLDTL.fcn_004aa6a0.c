@@ -16,7 +16,7 @@ int __cdecl fcn_0055c140(char* e, Ent* t, int* cnt);
 int __cdecl fcn_00579640(Ent* t, char* e);
 double __cdecl gm_RandomFloat01(void);
 
-int __cdecl fcn_004aa6a0(char* e, char* a2, char* out)
+int __cdecl fcn_004aa580(char* e, char* a2, char* out)
 {
 	int cnt;
 	int mask;

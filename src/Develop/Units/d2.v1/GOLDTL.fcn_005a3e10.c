@@ -24,11 +24,11 @@ int __cdecl fcn_0050d270(int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_0050b710(int, char);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_0050b750(int, char);
 void __cdecl fcn_004c5150(int, int, char, int);
@@ -52,13 +52,13 @@ void __cdecl fcn_005a3e10(void)
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1a4c);
+	io_AppendText(0x1a4c);
 	d2_SetForm(dlg, 2);
-	sl = fcn_00472250(dlg, 2, fcn_00519190(0x1a4d, g_773d75));
+	sl = fcn_00472250(dlg, 2, io_AppendText(0x1a4d, g_773d75));
 	max = fcn_0050b710(stock, g_773d75) + fcn_0050b710(have, g_773d75) > fcn_0050b710(stock, g_773d75) ?
 	      fcn_0050b710(stock, g_773d75) + fcn_0050b710(have, g_773d75) : fcn_0050b710(stock, g_773d75);
 	d2_SetElementValue(sl, 0, max, fcn_0050b710(stock, g_773d75));
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	if (fcn_005373e0((void*) fcn_005a3e10, 0x677c7) != 0) {
 		do {
 			if (g_14ce8e0 != 0 || g_100f1dc == 1) {

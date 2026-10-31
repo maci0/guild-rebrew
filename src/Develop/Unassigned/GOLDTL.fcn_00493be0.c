@@ -3,7 +3,7 @@
 extern float flt_1;
 extern float flt_6628cc;
 
-int __cdecl fcn_00508e40(int a0);
+int __cdecl gm_LookupEntityRecordById(int a0);
 int __cdecl fcn_005c6270(int a0, int a1);
 
 /* ADDRESS: GOLDTL 0x00493be0 */
@@ -20,7 +20,7 @@ int __cdecl fcn_00493be0(void* a0)
 	n = (int) (*(float*) (p + 4) - flt_1);
 	f = *(float*) (p + 4);
 	frac = f - ceil(f);
-	v = fcn_00508e40(*(int*) (p + 0x18));
+	v = gm_LookupEntityRecordById(*(int*) (p + 0x18));
 	if (frac >= flt_6628cc) {
 		n++;
 	}

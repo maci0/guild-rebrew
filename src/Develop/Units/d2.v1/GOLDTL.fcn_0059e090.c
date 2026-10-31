@@ -57,7 +57,7 @@ void __cdecl d2_SetBackgroundTexture(char*, int);
 void __cdecl fcn_00533a60(int, int, Pick*, int, int, char*, char*);
 void __cdecl fcn_00472170(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00594340(void);
 void __cdecl fcn_005974e0(char*, int);
 void __cdecl fcn_00597940(int, int, int, char*, int);
@@ -117,7 +117,7 @@ void __cdecl fcn_0059e090(char* b)
 					return;
 				}
 				d2_SetForm(h, 3);
-				fcn_00519190(0x1c47, g_868060 + *(int*) (b + 0x65) * 0x2f4);
+				io_AppendText(0x1c47, g_868060 + *(int*) (b + 0x65) * 0x2f4);
 			}
 			else {
 				grp = fcn_00502cd0(*(int*) (b + 0x5d), 2, 0, 0x1dc, 6);
@@ -125,7 +125,7 @@ void __cdecl fcn_0059e090(char* b)
 					return;
 				}
 				d2_SetForm(h, 3);
-				fcn_00519190(0x1c48, g_868060 + *(int*) (b + 0x65) * 0x2f4);
+				io_AppendText(0x1c48, g_868060 + *(int*) (b + 0x65) * 0x2f4);
 			}
 			((City*)g_1015ea0)[a].x4c = sel;
 			((City*)g_1015ea0)[a].x60 = sel;

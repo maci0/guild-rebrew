@@ -30,14 +30,14 @@ void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_005338a0(void);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_004c58b0(int, int);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00471e30(int);
 
@@ -68,11 +68,11 @@ void __cdecl fcn_005e4e50(Ent* other)
 	fcn_00471b60(h);
 	fcn_005338a0();
 	d2_SetForm(h, 1);
-	fcn_00519190(0x4227);
-	fcn_00519190(0x422b, other->id, count, 0x422c, other->id, 1);
+	io_AppendText(0x4227);
+	io_AppendText(0x422b, other->id, count, 0x422c, other->id, 1);
 	d2_SetForm(h, 2);
-	yes = fcn_00472250(h, 2, fcn_00519190((int) s_681140, 0x422d));
-	fcn_00519190((int) s_6ad3bc, 0x422e);
+	yes = fcn_00472250(h, 2, io_AppendText((int) s_681140, 0x422d));
+	io_AppendText((int) s_6ad3bc, 0x422e);
 	if (found == 0 || count == 0) {
 		fcn_00472640(yes, 0);
 	}
@@ -88,10 +88,10 @@ void __cdecl fcn_005e4e50(Ent* other)
 				fcn_004c6ae0(((Ent*)g_7f4ca0)[g_774970].handle, -1);
 				fcn_004c6ae0(other->handle, -1);
 				fcn_004c5420(me->handle, 0x1cc, 4, 0x20000, 0);
-				fcn_0051af00(text, 0x422f, other->id);
+				io_FormatTextBuffer(text, 0x422f, other->id);
 				fcn_00545d40(((Ent*)g_7f4ca0)[g_774970].handle, -1, text, 0, 0x5ec, 0);
 				if (other->kind == 6 || other->kind == 7) {
-					fcn_0051af00(text, 0x4230, g_774970, 1);
+					io_FormatTextBuffer(text, 0x4230, g_774970, 1);
 					fcn_00545d40(other->handle, -1, text, 0, 0x5ec, s_6ad3a8);
 				}
 				g_774654 = 3;

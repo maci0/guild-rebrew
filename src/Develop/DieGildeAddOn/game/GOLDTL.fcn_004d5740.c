@@ -10,13 +10,13 @@ extern char* g_1015ea0;
 extern char g_6b5c60[];
 extern double g_662c38;
 
-char* __cdecl gm_LookupEntityRecordById(int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 int __cdecl fcn_00507e30(char*, int);
 void __cdecl fcn_00534160(int, int, int, int);
 float __cdecl fcn_004ff040(char*);
-int __cdecl fcn_0051af00(char*, char*, ...);
+int __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
 int* __cdecl fcn_004ce610(char*);
 void __cdecl fcn_00472680(int, int);
@@ -46,7 +46,7 @@ void __cdecl fcn_004d5740(char* a0, int a1, int a2)
 		id = *(int*) (a0 + i * 4);
 		if (id == -1)
 			continue;
-		rec = gm_LookupEntityRecordById(id);
+		rec = gm_LookupEntityRecordIn32SlotTable(id);
 		x = (i % 6 + 1) * div + a1;
 		y = a2 + (i / 6) * 100;
 		fcn_0046f740(x - 0x10, y, 0x5da, g_772514);
@@ -57,7 +57,7 @@ void __cdecl fcn_004d5740(char* a0, int a1, int a2)
 		*(int*) (g_1015ea0 + h * 0x2f4 + 0x18) = 0x78;
 		*(int*) (g_1015ea0 + h * 0x2f4 + 0x6c) = 1;
 		*(int*) (g_1015ea0 + h * 0x2f4 + 0x84) = 0x56;
-		fcn_0051af00(buf, "%1N1 %i%", *(unsigned short*) rec,
+		io_FormatTextBuffer(buf, "%1N1 %i%", *(unsigned short*) rec,
 			     (int) (fcn_004ff040(rec) * g_662c38));
 		fcn_0046f940(h, buf);
 		p = fcn_004ce610(rec);

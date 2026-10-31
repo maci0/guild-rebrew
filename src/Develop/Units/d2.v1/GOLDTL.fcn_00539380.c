@@ -11,9 +11,9 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00519190(int, ...);
+void __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
 unsigned char __cdecl fcn_00471f80(int);
 void __cdecl fcn_00471af0(int, int);
@@ -36,11 +36,11 @@ int __cdecl fcn_00539380(void)
 		*(unsigned char*) &(*(int*)&g_6a375c) = mode;
 	}
 	d2_SetElementValue(d, 2, 8, (unsigned char) (*(int*)&g_6a375c));
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 1);
-	fcn_00519190(0x1ab5);
+	io_AppendText(0x1ab5);
 	d2_SetForm(h, 2);
-	fcn_00519190((int) g_6a2300, 0x7d, 0x7e);
+	io_AppendText((int) g_6a2300, 0x7d, 0x7e);
 	while (fcn_005373e0(fcn_00539380, 0x24087) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

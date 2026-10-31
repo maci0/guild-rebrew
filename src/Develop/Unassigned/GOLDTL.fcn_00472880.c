@@ -20,7 +20,7 @@ extern int g_67d384;
 extern int g_67d398;
 extern int g_1015ea4;
 
-char* __cdecl fcn_00466190(int idx);
+char* __cdecl d2_GetResourceData(int idx);
 
 /* ADDRESS: GOLDTL 0x00472880 */
 char* __cdecl fcn_00472880(int idx)
@@ -28,7 +28,7 @@ char* __cdecl fcn_00472880(int idx)
 	if (((VfsEntry*)g_772500)[idx].kind != 7) {
 		return 0;
 	}
-	g_772524 = fcn_00466190(idx);
+	g_772524 = d2_GetResourceData(idx);
 	g_67d378 = idx;
 	g_1015ea4 = *(unsigned short*) (g_772524 + 8);
 	if (idx == g_67d398) {

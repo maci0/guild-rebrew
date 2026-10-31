@@ -46,7 +46,7 @@ extern char g_6b5c60[];
 
 int __cdecl fcn_0057a890(Unit57aa*, float, int, int*);
 void __cdecl fcn_005498b0(int, Unit57aa*, Unit57aa*, Bld57aa*, int, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
 // SIZE 0x10
@@ -154,7 +154,7 @@ void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
 			if (role == 3) {
 				fcn_005498b0(0, u, house, b, v, tmp);
 			} else if (role == 1 && (u->type == 6 || u->type == 7)) {
-				fcn_0051af00(buf, 0x163c, v + 0x1632);
+				io_FormatTextBuffer(buf, 0x163c, v + 0x1632);
 				fcn_00545d40(u->owner, -1, buf, 0, 0x5f7, g_6b5c60);
 			}
 		}

@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include <string.h>
 
-void __cdecl fcn_0041d9e0(char*);
+void __cdecl ReportClientMessage(char*);
 int __cdecl fcn_0042b2f0(char*, int, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl fcn_0046ac30(void);
@@ -33,7 +33,7 @@ long __cdecl fcn_0064eeec(char*);
  * reserves. That prologue is not reachable from C at /O2 (see group-323).
  */
 /* ADDRESS: GOLDTL 0x00519190 */
-int __cdecl fcn_00519190(char* a1, ...)
+int __cdecl io_AppendText(char* format_selector, ...)
 {
 	struct { char text[0x17d0]; char work[0x17d0]; } S;
 	char abuf[7][0x40];
@@ -44,7 +44,7 @@ int __cdecl fcn_00519190(char* a1, ...)
 	int v30;
 	int v2c;
 	int v28;
-	char mac;
+	char directive;
 	int v24;
 	int v20;
 	int v1c;
@@ -55,9 +55,9 @@ int __cdecl fcn_00519190(char* a1, ...)
 	int v08;
 	int ap;
 	int digit;
-	int n;
+	int text_index;
 
-	n = 0;
+	text_index = 0;
 	v30 = 0;
 	v2c = 0;
 	v10 = 0;
@@ -75,10 +75,10 @@ int __cdecl fcn_00519190(char* a1, ...)
 	if (*(int*)(v14 + 0x10161d0) == 0) {
 		return -1;
 	}
-	ap = (int)&a1 + 4;
+	ap = (int)&format_selector + 4;
 	memset(S.text, 0, 0x17d0);
-	if ((unsigned)a1 < 0x4800) {
-		v18 = *(int*)((unsigned)a1 * 4 + 0x14a5320);
+	if ((unsigned)format_selector < 0x4800) {
+		v18 = *(int*)((unsigned)format_selector * 4 + 0x14a5320);
 		if (v18 == 0) {
 			return -1;
 		}
@@ -87,46 +87,46 @@ int __cdecl fcn_00519190(char* a1, ...)
 		}
 		fcn_0064d530(S.text, (char*)v18, 0x17c0);
 	} else {
-		fcn_0064d740(S.text, a1, (unsigned)strlen(a1) + 1);
+		fcn_0064d740(S.text, format_selector, (unsigned)strlen(format_selector) + 1);
 	}
 	if ((int)strlen(S.text) == 0) {
 		goto carry;
 	}
 loop:
-	if (n > 0x17d0) {
+	if (text_index > 0x17d0) {
 		goto carry;
 	}
-	v08 = (unsigned char)S.text[n];
+	v08 = (unsigned char)S.text[text_index];
 	if (v08 != 0x25 && v08 != 0x24 && v08 != 0x7b) {
 		goto plain;
 	}
-	digit = (signed char)S.text[n + 1];
-	n++;
+	digit = (signed char)S.text[text_index + 1];
+	text_index++;
 	digit -= 0x30;
 	if (digit < 0 || digit > 9) {
 		digit = -1;
 	} else {
-		n++;
+		text_index++;
 	}
-	mac = S.text[n];
-	v20 = (int)(S.text + n);
-	if ((unsigned char)(mac - 0x25) > 0x52) {
+	directive = S.text[text_index];
+	v20 = (int)(S.text + text_index);
+	if ((unsigned char)(directive - 0x25) > 0x52) {
 		goto loop;
 	}
-	switch (mac) {
+	switch (directive) {
 	case 'C':
 		memset(*(void**)(v14 + 0x1015f7c), 0, 0x80);
 		*(int*)(v14 + 0x10162d4) = 0;
 		memset((void*)(v14 + 0x10161d4), 0, 0x100);
 		fcn_0046f2c0(*(int*)(v14 + 0x1015f40), 0);
-		n++;
+		text_index++;
 		goto loop;
 	case 'S':
 	case 's':
 		v0c = (int)(S.text - 1);
-		v20 = v0c + n;
+		v20 = v0c + text_index;
 		if (*(char*)v20 == '$') {
-			memcpy(S.text + n + 9, S.text + n + 1, strlen(S.text) - n);
+			memcpy(S.text + text_index + 9, S.text + text_index + 1, strlen(S.text) - text_index);
 			*(int*)v20 = 0x20202020;
 			*(int*)(v20 + 4) = 0x20202020;
 			*(short*)(v20 + 8) = 0x2020;
@@ -134,12 +134,12 @@ loop:
 		}
 		v1c = 0xff;
 		if (*(char*)v20 == '{') {
-			n++;
+			text_index++;
 			goto loop;
 		}
 		goto fmt;
 	case 'F':
-		n++;
+		text_index++;
 		goto loop;
 	case 'l':
 	case 't':
@@ -149,10 +149,10 @@ loop:
 		v08 = *(int*)(v14 + 0x10162d4);
 		*(int*)(v14 + v08 * 4 + 0x10161d4) = v28;
 		*(int*)(v14 + 0x10162d4) = v08 + 1;
-		n++;
+		text_index++;
 		goto loop;
 	case 'T':
-		if (S.text[n - 1] != 0x25) {
+		if (S.text[text_index - 1] != 0x25) {
 			goto skipt;
 		}
 		v28 = *(int*)ap;
@@ -167,27 +167,27 @@ loop:
 		}
 		v18 = (int)sbuf;
 		fcn_0050bc10(v28, v28, sbuf);
-		v08 = (int)strlen(S.text) - n + 2;
-		memcpy(S.text + n + 4, S.text + n + 1, v08);
-		v0c = (int)(S.text + n + 4);
+		v08 = (int)strlen(S.text) - text_index + 2;
+		memcpy(S.text + text_index + 4, S.text + text_index + 1, v08);
+		v0c = (int)(S.text + text_index + 4);
 		v24 = (int)strlen(sbuf);
 		for (v08 = v24 - 1; v08 >= 0; v08--) {
 			*(char*)(v0c + v08) = sbuf[v08];
 		}
-		*(short*)(S.text + n + 2 + v24) = *(short*)0x6a2388;
-		memcpy(S.text + n + 2, sbuf, v24);
-		n += v24;
+		*(short*)(S.text + text_index + 2 + v24) = *(short*)0x6a2388;
+		memcpy(S.text + text_index + 2, sbuf, v24);
+		text_index += v24;
 		goto loop;
 	skipt:
 		v28 = *(int*)ap;
 		ap += 4;
 		fcn_0050bc10(v28, v28, sbuf);
 		v24 = (int)strlen(sbuf);
-		v08 = (int)strlen(S.text) - n + 2;
-		memcpy(S.text + n + 2, S.text + n + 1, v08);
-		*(short*)(S.text + n + v08 + 1) = *(short*)0x6a2388;
-		memcpy(S.text + n, sbuf, v24);
-		n += v24;
+		v08 = (int)strlen(S.text) - text_index + 2;
+		memcpy(S.text + text_index + 2, S.text + text_index + 1, v08);
+		*(short*)(S.text + text_index + v08 + 1) = *(short*)0x6a2388;
+		memcpy(S.text + text_index, sbuf, v24);
+		text_index += v24;
 		goto loop;
 	case 'w':
 		v28 = *(int*)ap;
@@ -195,14 +195,14 @@ loop:
 		v28 = *(short*)(v28 * 63 * 4 + 0x8680b4);
 		v18 = *(int*)(v28 * 8 + 0x14a79c0);
 		strcpy(S.work, (char*)v18);
-		v08 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 1, S.text + n + 2, v08);
+		v08 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 1, S.text + text_index + 2, v08);
 		v24 = (int)strlen(S.work);
-		memcpy(S.text + n, S.work, v24 + 1);
-		n += v24;
+		memcpy(S.text + text_index, S.work, v24 + 1);
+		text_index += v24;
 		goto loop;
 	case 'i':
-		v08 = (unsigned char)S.text[n + 1];
+		v08 = (unsigned char)S.text[text_index + 1];
 		if (v08 == 'i' || v08 == 'c' || v08 == 'b' || v08 == 'a'
 		    || v08 == 'n' || v08 == 't') {
 			goto icon;
@@ -221,10 +221,10 @@ loop:
 			}
 			fcn_0064d41a(S.work, sbuf, v28);
 			v24 = (int)strlen(S.work);
-			v08 = (int)strlen(S.text) - n;
-			memcpy(S.text + n + 1, S.text + n + 2, v08);
-			memcpy(S.text + n, S.work, v24 + 1);
-			n += v24 - 2;
+			v08 = (int)strlen(S.text) - text_index;
+			memcpy(S.text + text_index + 1, S.text + text_index + 2, v08);
+			memcpy(S.text + text_index, S.work, v24 + 1);
+			text_index += v24 - 2;
 			goto loop;
 		}
 		v28 = *(int*)ap;
@@ -239,20 +239,20 @@ loop:
 		}
 		fcn_0064d41a(S.work, sbuf, v28);
 		v24 = (int)strlen(S.work);
-		v08 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 1, S.text + n + 2, v08);
-		memcpy(S.text + n, S.work, v24 + 1);
-		n += v24;
+		v08 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 1, S.text + text_index + 2, v08);
+		memcpy(S.text + text_index, S.work, v24 + 1);
+		text_index += v24;
 		goto loop;
 	icon:
 		v08 = *(int*)(v14 + 0x10162d4);
 		if (v08 > 0x40) {
-			fcn_0041d9e0((char*)0x6a235c);
-			n += 2;
+			ReportClientMessage((char*)0x6a235c);
+			text_index += 2;
 			goto loop;
 		}
 		*(int*)(v14 + v08 * 4 + 0x10161d4) = -1;
-		v18 = (unsigned char)S.text[n + 1];
+		v18 = (unsigned char)S.text[text_index + 1];
 		if (v18 == 'a' || v18 == 'n') {
 			v24 = *(int*)(v14 + 0x10161cc);
 			if (v24 != 0x53 && v24 != 0x55) {
@@ -271,7 +271,7 @@ loop:
 		}
 		v2c = 1;
 		*(int*)(v14 + 0x10162d4) = v08 + 1;
-		n += 2;
+		text_index += 2;
 		goto loop;
 	case 'I':
 		v28 = 1;
@@ -291,15 +291,15 @@ loop:
 		fcn_0064d41a(S.work + 4, sbuf, *(double*)(ap - 8));
 	join:
 		v08 = (int)strlen(S.work);
-		v18 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 1, S.text + n + 2, v18);
-		memcpy(S.text + n, S.work, v08 + 1);
-		n += v08;
+		v18 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 1, S.text + text_index + 2, v18);
+		memcpy(S.text + text_index, S.work, v08 + 1);
+		text_index += v08;
 		goto loop;
 	case 'f':
-		v08 = (signed char)S.text[n + 1] - 0x30;
+		v08 = (signed char)S.text[text_index + 1] - 0x30;
 		if (v08 > 0 && v08 < 9) {
-			n++;
+			text_index++;
 			v14 = v08;
 		} else {
 			v14 = 2;
@@ -315,21 +315,21 @@ loop:
 		fcn_0064d41a(S.work + 4, sbuf, *(double*)(ap - 8));
 		v28 = 1;
 		v08 = (int)strlen(S.work + 4);
-		v18 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 1, S.text + n + 2, v18);
-		memcpy(S.text + n, S.work + 4, v08 + 1);
-		n += v08;
+		v18 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 1, S.text + text_index + 2, v18);
+		memcpy(S.text + text_index, S.work + 4, v08 + 1);
+		text_index += v08;
 		goto loop;
 	case 'v':
-		v08 = (unsigned char)S.text[n];
-		n++;
+		v08 = (unsigned char)S.text[text_index];
+		text_index++;
 		if ((char)v08 == 'v') {
 			ap += 4;
 		}
 		goto loop;
 	case 'm':
-		v08 = (unsigned char)S.text[n];
-		n++;
+		v08 = (unsigned char)S.text[text_index];
+		text_index++;
 		v2c = 1;
 		v18 = *(int*)(v14 + 0x10162d4);
 		if ((char)v08 == 't') {
@@ -338,50 +338,50 @@ loop:
 			*(int*)(v14 + v18 * 4 + 0x10161d8) = *(int*)ap;
 			ap += 4;
 			*(int*)(v14 + 0x10162d4) = v18 + 2;
-			n++;
+			text_index++;
 		} else if ((char)v08 == 'b') {
 			*(int*)(v14 + v18 * 4 + 0x10161d4) = -1;
 			*(int*)(v14 + 0x10162d4) = v18 + 1;
-			n++;
+			text_index++;
 		} else {
 			*(int*)(v14 + v18 * 4 + 0x10161d4) = -1;
 			*(int*)(v14 + 0x10162d4) = v18 + 1;
 		}
 		goto loop;
 	case 'X':
-		S.text[n - 1] = 0x20;
+		S.text[text_index - 1] = 0x20;
 		v30 = 1;
 		*(char*)v20 = 0x20;
-		n++;
+		text_index++;
 		goto loop;
 	case 'W':
 		if (digit == -1) {
 			digit = 0;
 		}
-		v08 = (signed char)S.text[n + 1] - 0x30;
+		v08 = (signed char)S.text[text_index + 1] - 0x30;
 		if (v08 > 0 && v08 < 9) {
 			v10 = v08;
 		} else {
 			v10 = -1;
 		}
-		v18 = (int)(S.text + n + 1);
+		v18 = (int)(S.text + text_index + 1);
 		v24 = (int)(strlen((char*)*(int*)(v14 + 0x1015f7c))
 			    + strlen(S.text));
 		if (v24 < 0x17cf) {
-			strncat((char*)*(int*)(v14 + 0x1015f7c), S.text, n);
+			strncat((char*)*(int*)(v14 + 0x1015f7c), S.text, text_index);
 			*(short*)(*(int*)(v14 + 0x1015f7c)
 				  + strlen((char*)*(int*)(v14 + 0x1015f7c)))
 				= *(short*)0x677c94;
 			*(int*)(v14 + 0x10161b8) = 2;
 		}
-		v24 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 2, S.text + n + 1, v24);
-		*(char*)(S.text + n + v24 + 2) = 0;
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
+		*(char*)(S.text + text_index + v24 + 2) = 0;
 		d2_SetForm((char*)*(int*)(v14 + 0x1015f7c), v10, v18);
 		if (digit != -1) {
-			n += 2;
+			text_index += 2;
 		} else {
-			n++;
+			text_index++;
 		}
 		goto loop;
 	case 'u':
@@ -390,30 +390,30 @@ loop:
 	case 'U':
 		v10 = 2;
 	shift1:
-		v0c = n - (digit != -1 ? 2 : 1);
-		v24 = (int)strlen(S.text) - n;
-		memcpy(S.text + v0c + 2, S.text + n + 1, v24);
-		n = v0c;
+		v0c = text_index - (digit != -1 ? 2 : 1);
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
+		text_index = v0c;
 		goto loop;
 	case 'b':
-		v0c = n - (digit != -1 ? 2 : 1);
+		v0c = text_index - (digit != -1 ? 2 : 1);
 		if (S.text[v0c] != 0x25) {
 			goto fmt;
 		}
 		v10 = 3;
-		v24 = (int)strlen(S.text) - n;
-		memcpy(S.text + v0c + 2, S.text + n + 1, v24);
-		n = v0c;
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
+		text_index = v0c;
 		goto loop;
 	case 'B':
-		v0c = n - (digit != -1 ? 2 : 1);
+		v0c = text_index - (digit != -1 ? 2 : 1);
 		if (S.text[v0c] != 0x25) {
 			goto fmt;
 		}
 		v10 = 4;
-		v24 = (int)strlen(S.text) - n;
-		memcpy(S.text + v0c + 2, S.text + n + 1, v24);
-		n = v0c;
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
+		text_index = v0c;
 		goto loop;
 	case 'e':
 		v10 = 5;
@@ -421,68 +421,68 @@ loop:
 	case 'E':
 		v10 = 6;
 	shift2:
-		v08 = (unsigned char)S.text[n + 1];
-		v24 = (int)strlen(S.text) - n;
+		v08 = (unsigned char)S.text[text_index + 1];
+		v24 = (int)strlen(S.text) - text_index;
 		v18 = (digit != -1 ? 2 : 1);
 		if ((char)v08 == 0x20) {
-			memcpy(S.text + n + 2, S.text + n + 1, v24);
-			v0c = n - v18;
-			memcpy(S.text + v0c + 2, S.text + n + 2, v24);
+			memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
+			v0c = text_index - v18;
+			memcpy(S.text + v0c + 2, S.text + text_index + 2, v24);
 		} else {
-			memcpy(S.text + n + 2, S.text + n + 1, v24);
-			v0c = n - v18;
-			memcpy(S.text + v0c + 3, S.text + n + 1, v24);
+			memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
+			v0c = text_index - v18;
+			memcpy(S.text + v0c + 3, S.text + text_index + 1, v24);
 		}
-		n = v0c;
+		text_index = v0c;
 		goto loop;
 	case 'N':
-		n++;
+		text_index++;
 		if (digit == -1) {
 			goto loop;
 		}
-		if (S.text[n - 2] != 0x25 || S.text[n - 1] == 0x24) {
+		if (S.text[text_index - 2] != 0x25 || S.text[text_index - 1] == 0x24) {
 			goto loop;
 		}
-		v08 = S.text[n] - 0x30;
+		v08 = S.text[text_index] - 0x30;
 		v18 = *(int*)(v14 + 0x10161bc);
 		fcn_00517c00(v18, (char*)0x6a2354, v08, S.work);
 		v24 = (int)strlen(S.work) - 2;
-		fcn_0064d740(S.text + n + 2, S.work, v24);
-		n += v24;
+		fcn_0064d740(S.text + text_index + 2, S.work, v24);
+		text_index += v24;
 		goto loop;
 	case 'a':
 		v28 = 0x14;
-		if (S.text[n - 1] != 0x25) {
+		if (S.text[text_index - 1] != 0x25) {
 			v24 = *(int*)ap;
 			ap += 4;
 			fcn_0064d41a(S.work, (char*)0x67d444, v24);
 			v08 = (int)strlen(S.work) - 2;
-			v18 = (int)strlen(S.text) - n;
-			memcpy(S.text + n + 1, S.text + n + 1, v18);
-			memcpy(S.text + n, S.work, v08);
-			n += v08;
+			v18 = (int)strlen(S.text) - text_index;
+			memcpy(S.text + text_index + 1, S.text + text_index + 1, v18);
+			memcpy(S.text + text_index, S.work, v08);
+			text_index += v08;
 			goto loop;
 		}
 		v24 = *(int*)ap;
 		ap += 4;
 		fcn_0064d41a(S.work, (char*)0x699a68, v24);
 		v08 = (int)strlen(S.work) - 2;
-		v18 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 2, S.text + n + 1, v18);
-		memcpy(S.text + n, S.work, v08);
-		n += v08;
+		v18 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 2, S.text + text_index + 1, v18);
+		memcpy(S.text + text_index, S.work, v08);
+		text_index += v08;
 		goto loop;
 	case 'r':
-		if (mac != 'r') {
+		if (directive != 'r') {
 			goto loop;
 		}
 		memset(rbuf, 0, 0x20);
 		v0c = 0;
-		v08 = (signed char)S.text[n + 1] - 0x31;
+		v08 = (signed char)S.text[text_index + 1] - 0x31;
 		if (v08 >= 0 && v08 <= 9) {
 			v0c = v08 + 9;
 		}
-		v18 = n + 3;
+		v18 = text_index + 3;
 		for (v08 = v18; ; v08++) {
 			if ((unsigned char)S.text[v08] < 0x30
 			    || (unsigned char)S.text[v08] > 0x39) {
@@ -490,9 +490,9 @@ loop:
 			}
 		}
 		v14 = v08 - v18;
-		fcn_0064d530(rbuf, S.text + n + 3, v14);
+		fcn_0064d530(rbuf, S.text + text_index + 3, v14);
 		v14 = fcn_0064eeec(rbuf);
-		v24 = *(int*)&a1;
+		v24 = *(int*)&format_selector;
 		v28 = *(int*)0x6b7f98;
 		for (v08 = v24; v08 < v28; v08++) {
 			if (*(int*)(v08 * 4 + 0x11bb000) == v0c) {
@@ -500,7 +500,7 @@ loop:
 			}
 		}
 		if (v08 >= v28) {
-			fcn_0041d9e0((char*)0x6a2318);
+			ReportClientMessage((char*)0x6a2318);
 			goto loop;
 		}
 		v24 = (gm_RandomMod(v14) & 0xffff) + v08;
@@ -508,12 +508,12 @@ loop:
 		if (v18 == 0) {
 			goto loop;
 		}
-		v24 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 5, S.text + n + 1, v24);
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 5, S.text + text_index + 1, v24);
 		v28 = (int)strlen((char*)v18);
-		memcpy(S.text + n + 3, (char*)v18, v28);
-		*(char*)(S.text + n + 3 + v28) = 0;
-		n += v28;
+		memcpy(S.text + text_index + 3, (char*)v18, v28);
+		*(char*)(S.text + text_index + 3 + v28) = 0;
+		text_index += v28;
 		goto loop;
 	case 'D':
 		v24 = *(int*)ap;
@@ -523,13 +523,13 @@ loop:
 		v18 = *(int*)(v08 * 4 + 0x14a5450);
 		fcn_0064d41a(S.work, (char*)0x6a2310, (char*)v18);
 		v08 = (int)strlen(S.work) - 2;
-		v24 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 2, S.text + n + 1, v24);
-		memcpy(S.text + n, S.work, v08);
-		n += v08;
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
+		memcpy(S.text + text_index, S.work, v08);
+		text_index += v08;
 		goto loop;
 	case 'G':
-		n++;
+		text_index++;
 		v18 = *(int*)ap;
 		ap += 4;
 		v08 = (unsigned char)*(char*)v18;
@@ -581,16 +581,16 @@ loop:
 				}
 			}
 		}
-		v24 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 2, S.text + n + 1, v24);
-		memcpy(S.text + n, abuf[0], strlen(abuf[0]));
-		n += (int)strlen(abuf[0]) - 2;
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
+		memcpy(S.text + text_index, abuf[0], strlen(abuf[0]));
+		text_index += (int)strlen(abuf[0]) - 2;
 		goto loop;
 	case '%':
-		v24 = (int)strlen(S.text) - n;
-		S.text[n - 1] = 0x16;
-		memcpy(S.text + n + 4, S.text + n + 1, v24);
-		n += 0;
+		v24 = (int)strlen(S.text) - text_index;
+		S.text[text_index - 1] = 0x16;
+		memcpy(S.text + text_index + 4, S.text + text_index + 1, v24);
+		text_index += 0;
 		goto loop;
 	default:
 		goto loop;
@@ -600,7 +600,7 @@ loop:
 fmt:
 	v24 = *(int*)ap;
 	ap += 4;
-	n++;
+	text_index++;
 	if (v24 > 0x4800) {
 		v18 = v24;
 	} else {
@@ -612,7 +612,7 @@ fmt:
 		if (digit == -1) {
 			digit = 1;
 		}
-		if (S.text[n - 1] == 's' && v2c == 0) {
+		if (S.text[text_index - 1] == 's' && v2c == 0) {
 			fcn_0042b2f0((char*)v18, digit, 4);
 		} else {
 			fcn_0042b2f0((char*)v18, digit, 8);
@@ -623,20 +623,20 @@ fmt:
 		}
 	}
 	if (v10 == 0) {
-		if ((int)strlen((char*)v18) + n > 0x17cb) {
+		if ((int)strlen((char*)v18) + text_index > 0x17cb) {
 			goto fail;
 		}
-		v14 = n - v08;
-		v24 = (int)strlen(S.text) - n;
-		memmove(S.text + n + 4, S.text + n + 1, v24);
+		v14 = text_index - v08;
+		v24 = (int)strlen(S.text) - text_index;
+		memmove(S.text + text_index + 4, S.text + text_index + 1, v24);
 		v28 = (int)strlen((char*)v18);
 		fcn_0064d740(S.text + v14 + 2, (char*)v18, v28);
 		*(char*)(S.text + v14 + 2 + v28) = 0;
-		n = v14 + v28;
+		text_index = v14 + v28;
 		goto loop;
 	}
 	if (v10 == 1 || v10 == 2) {
-		if (S.text[n] == 's' && v2c == 0) {
+		if (S.text[text_index] == 's' && v2c == 0) {
 			v08 = 4;
 		} else {
 			v08 = 8;
@@ -647,14 +647,14 @@ fmt:
 			fcn_0064d41a(S.work, (char*)0x68b3f8, (char*)v18,
 				     *(char**)(v10 * 4 + 0x14a540c));
 		}
-		v24 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 2, S.text + n + 1, v24);
-		memcpy(S.text + n, S.work, v08 + 1);
-		n += v08;
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
+		memcpy(S.text + text_index, S.work, v08 + 1);
+		text_index += v08;
 		goto loop;
 	}
 	if (v10 == 3 || v10 == 4) {
-		if (S.text[n] == 's' && v2c == 0) {
+		if (S.text[text_index] == 's' && v2c == 0) {
 			v08 = 4;
 		} else {
 			v08 = 8;
@@ -666,14 +666,14 @@ fmt:
 				     (char*)v18,
 				     *(char**)(v10 * 4 + 0x14a5400));
 		}
-		v24 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 2, S.text + n + 1, v24);
-		memcpy(S.text + n, S.work + 0x18, v08 + 1);
-		n += v08;
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
+		memcpy(S.text + text_index, S.work + 0x18, v08 + 1);
+		text_index += v08;
 		goto loop;
 	}
 	if (v10 == 5 || v10 == 6) {
-		if (S.text[n] == 's' && v2c == 0) {
+		if (S.text[text_index] == 's' && v2c == 0) {
 			v08 = 4;
 		} else {
 			v08 = 8;
@@ -682,17 +682,17 @@ fmt:
 		v08 = (int)strlen((char*)v18);
 		fcn_0064d41a(S.work + 0x1c, (char*)0x68b3f8, (char*)v18,
 			     *(char**)(v10 * 4 + 0x14a5418));
-		v24 = (int)strlen(S.text) - n;
-		memcpy(S.text + n + 2, S.text + n + 1, v24);
-		memcpy(S.text + n, S.work + 0x1c, v08 + 1);
-		n += v08;
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
+		memcpy(S.text + text_index, S.work + 0x1c, v08 + 1);
+		text_index += v08;
 		goto loop;
 	}
 	goto loop;
 
 plain:
-	n++;
-	if (n < (int)strlen(S.text)) {
+	text_index++;
+	if (text_index < (int)strlen(S.text)) {
 		goto loop;
 	}
 carry:

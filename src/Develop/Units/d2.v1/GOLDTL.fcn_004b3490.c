@@ -18,9 +18,9 @@ extern int g_774654;
 
 int __cdecl fcn_004b33c0(char* name, char* text);
 int __cdecl fcn_00535570(void);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_SetForm(int k, int i);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 void __cdecl fcn_00535630(void);
 int __cdecl fcn_005373e0(void*, int);
@@ -88,17 +88,17 @@ void __cdecl fcn_004b3490(void)
 		return;
 	}
 	h = fcn_00535570();
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 1);
 	w = g_772514;
 	d2_SetForm(h, 2);
-	fcn_00519190(0x10b0);
+	io_AppendText(0x10b0);
 	fcn_0046e830(-1, -1, g_772514, w, 0x767);
 	((Win*)g_1015f40)[w].style = 0x18;
 	d2_SetForm(h, 1);
-	fcn_00519190((int) "$C%s", text);
+	io_AppendText((int) "$C%s", text);
 	d2_SetForm(h, 3);
-	fcn_00519190((int) "$C$Z$[%s$]", name);
+	io_AppendText((int) "$C$Z$[%s$]", name);
 	g_100f1dc = -1;
 	do {
 		fcn_00535630();
@@ -157,15 +157,15 @@ void __cdecl fcn_004b3490(void)
 				g_774654 = 1;
 			} else {
 				d2_SetForm(h, 2);
-				fcn_00519190(0x10b0);
+				io_AppendText(0x10b0);
 				fcn_0046e830(-1, -1, g_772514, w, 0x767);
 				((Win*)g_1015f40)[w].style = 0x18;
 				d2_SetForm(h, 1);
-				fcn_00519190((int) "$C%s", text);
+				io_AppendText((int) "$C%s", text);
 				((Win*)g_77255c)->x258 = 0;
 				((Win*)g_77255c)->x270 = 2;
 				d2_SetForm(h, 3);
-				fcn_00519190((int) "$C$Z$[%s$]", name);
+				io_AppendText((int) "$C$Z$[%s$]", name);
 			}
 		}
 	} while (fcn_005373e0(fcn_004b3490, 0x66087) != 0);

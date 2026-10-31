@@ -9,7 +9,10 @@ Scores and "SOLVED" or "FENCED" headings are checkpoints. Current proof and
 status stay in managed metadata. A fenced naked body or a failed search here
 is historical, not assembly permission; see
 [the assembly audit](assembly-audit.md#what-qualifies). "Not reproducible"
-means the spellings listed in that note.
+means the spellings listed in that note. Historical flag probes do not authorize
+per-function optimization overrides in production game code; use canonical game
+TU/target flags, with separate contexts only for independently built libraries
+or natively evidenced original TUs.
 
 ## Index
 
@@ -1220,9 +1223,9 @@ expression. Declaration order, for-increment forms, guard+do-while, and
 `mov ecx,[0x100a8c34]` / `mov [0x10035450],eax` = plain global reads/writes
 (`g_100a8c34`, `g_query_limit`), the record field reads at +0/+2/+6/+0xa/
 +0xe/+0x12/+0x13/+0x1c with the 0x43 stride, and the shared `L_ret0` epilogue.
-Note: proving a fenced function requires the toml status to be
-NEAR_MATCHING first: run `rebrew test <file> --cflags "/O2 /Gd"` (no naked
-define) to compile the #else path and set it, then `rebrew prove`.
+Historical proof procedure: that checkpoint first compiled the C path to set
+NEAR_MATCHING, then ran `rebrew prove`. Use current CLI help for proof behavior;
+the old flag override is not a production recommendation.
 
 ## srv_Init (0x10009d30): SOLVED (RELOC, delta 0)
 Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.

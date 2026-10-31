@@ -64,7 +64,7 @@ int __cdecl gm_AccumulateTyped2(void*);
 void __cdecl fcn_0047f6b0(Master47de*);
 void __cdecl ai_CalcMeisterWache(Master47de*);
 void __cdecl ai_CalcMeisterDiebe(Master47de*);
-void __cdecl fcn_004823c0(Master47de*);
+void __cdecl ai_CalcMeisterRaeuber(Master47de*);
 void __cdecl fcn_00482b60(Master47de*);
 void __cdecl fcn_00482f20(Master47de*);
 void __cdecl fcn_00483480(Master47de*);
@@ -120,7 +120,7 @@ void __cdecl fcn_0047de50(Master47de* m)
 		} else if (k == 4) {
 			ai_CalcMeisterDiebe(m);
 		} else if (k == 0x10) {
-			fcn_004823c0(m);
+			ai_CalcMeisterRaeuber(m);
 		} else if (k == 5) {
 			fcn_00482b60(m);
 		} else if (k == 9) {

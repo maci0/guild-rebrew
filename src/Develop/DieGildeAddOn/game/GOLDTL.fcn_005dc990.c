@@ -34,9 +34,9 @@ struct msg {
 
 extern __int64 g_666018;
 
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5530(struct msg*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, void*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
@@ -54,7 +54,7 @@ int __cdecl fcn_005dc990(unsigned char* obj, int* arg)
 	if (obj[2] == 6) {
 		memset(&req, 0, sizeof(req));
 		memset(req.ids, 0xff, sizeof(req.ids));
-		fcn_0051af00(text, 0x9c);
+		io_FormatTextBuffer(text, 0x9c);
 		req.a = 0;
 		req.size = 0x400;
 		req.kind = 6;
@@ -74,7 +74,7 @@ int __cdecl fcn_005dc990(unsigned char* obj, int* arg)
 			m.f64 = 0x18;
 			fcn_004c5530(&m);
 			if (e[2] == 6 || e[2] == 7) {
-				fcn_0051af00(text2, 0xff8);
+				io_FormatTextBuffer(text2, 0xff8);
 				fcn_00545d40(*(int*) (e + 4), -1, text2, 0, 0x5fb, 0);
 			}
 			result = 1;
@@ -82,7 +82,7 @@ int __cdecl fcn_005dc990(unsigned char* obj, int* arg)
 			result = 0;
 		}
 	} else {
-		e = fcn_00508e40(arg[1]);
+		e = gm_LookupEntityRecordById(arg[1]);
 		if (e != 0) {
 			struct msg m;
 
@@ -97,7 +97,7 @@ int __cdecl fcn_005dc990(unsigned char* obj, int* arg)
 			m.f64 = 0x18;
 			fcn_004c5530(&m);
 			if (e[2] == 6 || e[2] == 7) {
-				fcn_0051af00(text2, 0xff8);
+				io_FormatTextBuffer(text2, 0xff8);
 				fcn_00545d40(*(int*) (e + 4), -1, text2, 0, 0x5fb, 0);
 			}
 			result = 1;

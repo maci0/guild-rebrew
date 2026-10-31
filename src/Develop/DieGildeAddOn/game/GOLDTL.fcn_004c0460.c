@@ -20,7 +20,7 @@ int __cdecl gm_eval_SlotVoll(char*, int, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0050d320(char*, char);
 void __cdecl fcn_00517b10(char*, char*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
@@ -94,7 +94,7 @@ void __cdecl fcn_004c0460(char* e, char who)
 		if (m > 0) {
 			if (fcn_0050d320(par, who) < m * val) {
 				fcn_00517b10(g_868060 + who * 756, name);
-				fcn_0051af00(text, 0x42f0, name, 0xc14, name, who);
+				io_FormatTextBuffer(text, 0x42f0, name, 0xc14, name, who);
 				fcn_00545d40(*(int*) (par + 4), -1, text, 0, 0x5ef, "");
 			}
 			fcn_004c51f0(*(int*) (b.obj + 2), *(int*) (src + 2), p[0], m, who, val);

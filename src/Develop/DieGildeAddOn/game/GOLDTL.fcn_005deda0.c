@@ -34,9 +34,9 @@ typedef struct {
 extern __int64 g_666018;
 extern int g_66601c;
 
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5530(Msg*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 char* __cdecl fcn_005c6220(int, int*);
@@ -71,7 +71,7 @@ int __cdecl fcn_005deda0(char* e, char* a2)
 	if (e[2] == 6) {
 		memset(&req, 0, sizeof(req));
 		memset(&req.pad[2], -1, 0x20);
-		fcn_0051af00(text, 0x9c);
+		io_FormatTextBuffer(text, 0x9c);
 		req.c = (*(int*)&g_666018);
 		req.a = 0;
 		req.size = 0x400;
@@ -81,21 +81,21 @@ int __cdecl fcn_005deda0(char* e, char* a2)
 		if (r != 0) {
 			send_hit(*(int*) (r + 4));
 			if (r[2] == 6 || r[2] == 7) {
-				fcn_0051af00(msg, 0xffb);
+				io_FormatTextBuffer(msg, 0xffb);
 				fcn_00545d40(*(int*) (r + 4), -1, msg, 0, 0x5fb, 0);
 			}
 			p = fcn_005c6220(**(unsigned short**) a2, &out);
 			*(int*) (a2 + 0x10) = 1;
-			fcn_0051af00(msg, 0xfe8, *(unsigned short*) (p + 0x18) + 1, *(unsigned short*) r);
+			io_FormatTextBuffer(msg, 0xfe8, *(unsigned short*) (p + 0x18) + 1, *(unsigned short*) r);
 			fcn_005dbe90(msg);
 			return 1;
 		}
 	} else {
-		r = fcn_00508e40(*(int*) (a2 + 4));
+		r = gm_LookupEntityRecordById(*(int*) (a2 + 4));
 		if (r != 0) {
 			send_hit(*(int*) (r + 4));
 			if (r[2] == 6 || r[2] == 7) {
-				fcn_0051af00(msg, 0xffb);
+				io_FormatTextBuffer(msg, 0xffb);
 				fcn_00545d40(*(int*) (r + 4), -1, msg, 0, 0x5fb, 0);
 			}
 			return 1;

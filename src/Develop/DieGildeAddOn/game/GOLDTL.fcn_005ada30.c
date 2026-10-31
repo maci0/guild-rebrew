@@ -29,8 +29,8 @@ extern char g_6811b0[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190();
-void __cdecl fcn_00473a90(int, int);
+int __cdecl io_AppendText();
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00476b60(void);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00472830(int k, int j);
@@ -74,11 +74,11 @@ void __cdecl fcn_005ada30(char* p)
 	d = fcn_00470820(0, 0, g_6ab1e4);
 	fcn_00471b60(d);
 	d2_SetForm(d, 1);
-	fcn_00519190(0x19fb);
-	fcn_00473a90(0, 0);
+	io_AppendText(0x19fb);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00476b60();
 	d2_SetForm(d, 3);
-	back = fcn_00472250(d, 3, fcn_00519190(0x1ba6));
+	back = fcn_00472250(d, 3, io_AppendText(0x1ba6));
 	fcn_0046e830(-1, -1, g_772514, fcn_00472830(d, 2), 0x767);
 	do {
 		if (g_14ce8e0 != 0) {
@@ -91,7 +91,7 @@ void __cdecl fcn_005ada30(char* p)
 				grp = -1;
 			}
 			d2_SetForm(d, 2);
-			fcn_00519190(g_6811b0);
+			io_AppendText(g_6811b0);
 			j = 0;
 			for (e = fcn_00502cd0(*(int*) (p + 0x5d), 1, 0, 0xca); e != 0 && j < 8; e = gm_NextEntityQueryMatch()) {
 				q = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0x2a));
@@ -109,7 +109,7 @@ void __cdecl fcn_005ada30(char* p)
 							continue;
 						}
 						fcn_0050c5d0(q, val);
-						b = fcn_00472250(d, 2, fcn_00519190(0x19fc, *q + 0x427, *(unsigned short*) (q + 0x27), q, e + 0x1c, val[0], val[1], e[0x37], e[0x36]));
+						b = fcn_00472250(d, 2, io_AppendText(0x19fc, *q + 0x427, *(unsigned short*) (q + 0x27), q, e + 0x1c, val[0], val[1], e[0x37], e[0x36]));
 						btns[n] = b;
 						((Slot5ada*)g_1015ea0)[b].obj = q;
 						if (grp == -1) {

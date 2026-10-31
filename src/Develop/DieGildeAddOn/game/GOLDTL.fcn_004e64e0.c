@@ -13,7 +13,7 @@ typedef struct {
 	int pad;
 } Msg;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c5a20(int, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
@@ -35,7 +35,7 @@ int __cdecl cut_CutsceneReady(int* c)
 		h = -1;
 		for (i = 0; i < *((unsigned char*) c + 0x30); i++) {
 			if (c[13 + i] != -1) {
-				o = fcn_00508e40(c[13 + i]);
+				o = gm_LookupEntityRecordById(c[13 + i]);
 				if (o == 0 || (*(int*) (o + 0x20c) != -1 && *(int*) (o + 0x20c) != c[0] && (o[2] == 6 || o[2] == 7)))
 					h = fcn_004c5a20(c[0], c[13 + i]);
 			}
@@ -50,7 +50,7 @@ int __cdecl cut_CutsceneReady(int* c)
 	} else {
 		for (i = 0; i < *((unsigned char*) c + 0x30); i++) {
 			if (c[13 + i] != -1) {
-				o = fcn_00508e40(c[13 + i]);
+				o = gm_LookupEntityRecordById(c[13 + i]);
 				if (o != 0 && *(int*) (o + 0x20c) != -1 && *(int*) (o + 0x20c) != c[0] && (o[2] == 6 || o[2] == 7))
 					return 0;
 			}

@@ -13,7 +13,7 @@ typedef struct {
 } Blk24;
 // SIZE 0x18
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_004ff210(unsigned short, int);
 int __cdecl fcn_0048fc30(int, char*, int, Blk24*, Blk24*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -62,11 +62,11 @@ int __cdecl fcn_005359c0(void)
 		}
 		return;
 	case 0x25:
-		e = fcn_00508e40(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x60));
+		e = gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x60));
 		if (e != 0) {
 			fcn_004ff210(*(unsigned short*) e, -1000);
 		} else {
-			e = fcn_00508e40(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x60));
+			e = gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x60));
 			if (e != 0) {
 				fcn_004ff210(*(unsigned short*) e, -1000);
 			}

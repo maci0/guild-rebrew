@@ -8,7 +8,7 @@ extern char g_868080[];
 extern char g_1007ba0[];
 
 int __cdecl sprintf(char*, const char*, ...);
-int __cdecl fcn_0051af00(char*, char*, ...);
+int __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_0064eeec(void*);
 
 typedef struct Parts {
@@ -141,13 +141,13 @@ int __cdecl hst_ParseDate(int key, int flags, int* out, char* text)
 		} else if ((flags & 2) != 0) {
 			switch (mode) {
 			case 2:
-				fcn_0051af00(text, (char*) 0x680b7c, g_868080 + g_773d75 * 0x2f4, c);
+				io_FormatTextBuffer(text, (char*) 0x680b7c, g_868080 + g_773d75 * 0x2f4, c);
 				break;
 			case 1:
-				fcn_0051af00(text, (char*) 0x680b70, g_868080 + g_773d75 * 0x2f4, b + 0x4f, c);
+				io_FormatTextBuffer(text, (char*) 0x680b70, g_868080 + g_773d75 * 0x2f4, b + 0x4f, c);
 				break;
 			case 0:
-				fcn_0051af00(text, (char*) 0x680b60, g_868080 + g_773d75 * 0x2f4, a, b + 0x4f, c);
+				io_FormatTextBuffer(text, (char*) 0x680b60, g_868080 + g_773d75 * 0x2f4, a, b + 0x4f, c);
 				break;
 			}
 		}

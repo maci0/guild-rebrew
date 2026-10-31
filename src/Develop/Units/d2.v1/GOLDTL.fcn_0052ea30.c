@@ -36,7 +36,7 @@ extern char g_67d444[];
 
 int __cdecl fcn_00508da0(char* a);
 void __cdecl d2_SetForm(int h, int mode);
-void __cdecl fcn_00519190(char* fmt, ...);
+void __cdecl io_AppendText(char* fmt, ...);
 void __cdecl fcn_005186c0(int id, int a, int b, char* out);
 char* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
 int __cdecl fcn_00500d20(void* a, void* b);
@@ -83,16 +83,16 @@ void __cdecl fcn_0052ea30(void)
 	}
 	pct = fcn_00508da0(g_7e2aa0);
 	d2_SetForm(g_6a25b8, 1);
-	fcn_00519190(g_6811b0);
+	io_AppendText(g_6811b0);
 	if (*g_7e2aa0 != 0x47) {
 		fcn_005186c0(*(unsigned short*) (g_7e2aa0 + 0x27), 2, 1, name);
 		if (g_7e2aa0[5] != 0) {
-			fcn_00519190(g_6a2f30, name, *g_7e2aa0 * 0xe + 0x48e, g_7e2aa0 + 5);
+			io_AppendText(g_6a2f30, name, *g_7e2aa0 * 0xe + 0x48e, g_7e2aa0 + 5);
 			goto header_done;
 		}
-		fcn_00519190(g_6a2f24, name, *g_7e2aa0 * 0xe + 0x48e);
+		io_AppendText(g_6a2f24, name, *g_7e2aa0 * 0xe + 0x48e);
 	} else {
-		fcn_00519190(g_6a2f24, (char*) 0x870, g_868060 + *(int*) (g_7e2aa0 + 0x65) * 0x2f4);
+		io_AppendText(g_6a2f24, (char*) 0x870, g_868060 + *(int*) (g_7e2aa0 + 0x65) * 0x2f4);
 	}
 header_done:
 	d2_SetElementValue(g_6a25c0, 0, 100, pct);
@@ -172,7 +172,7 @@ no_header:
 		d2_SetForm(g_6a25b8, 1);
 		pct = (int) (fcn_004ff040(s) * g_662c38);
 		fcn_005186c0(*(unsigned short*) s, 1, 4, name);
-		fcn_00519190(g_6a2fec, name, pct);
+		io_AppendText(g_6a2fec, name, pct);
 	}
 	if (*(int*) (s + 0x16c) == 0) {
 		goto drop_elements;
@@ -338,7 +338,7 @@ no_target:
 	if (e != 0) {
 		s = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb4));
 		if (s != 0) {
-			fcn_00519190(g_6a2fe4, (unsigned char) *s * 0xe + 0x48e);
+			io_AppendText(g_6a2fe4, (unsigned char) *s * 0xe + 0x48e);
 		}
 	}
 	e = fcn_00502cd0(*(int*) ((char*) g_7e2a9c + 0x14), 1, 0, 0x1dd);

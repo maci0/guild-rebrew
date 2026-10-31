@@ -22,7 +22,7 @@ typedef struct TypeRec {
 	int f5;
 } TypeRec; /* 0x18 */
 
-extern void* __cdecl fcn_00508e40(int id);
+extern void* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x004e7ff0 */
 int __cdecl fcn_004e7ff0(unsigned char* arg)
@@ -36,7 +36,7 @@ int __cdecl fcn_004e7ff0(unsigned char* arg)
 	int i;
 	int j;
 
-	owner = (unsigned char*) fcn_00508e40(*(int*) arg);
+	owner = (unsigned char*) gm_LookupEntityRecordById(*(int*) arg);
 	if (owner == 0) {
 		return 0;
 	}

@@ -21,11 +21,11 @@ struct msg58 {
 
 void __cdecl fcn_0052a0c0(void* a1, int a2);
 int __cdecl fcn_00470820(int a1, int a2, char* path);
-void __cdecl fcn_00473a90(int a1, int a2);
+void __cdecl d2_SetOverlayAnimation(int a1, int a2);
 void __cdecl fcn_00471b60(int a1);
 void __cdecl d2_SetForm(int a1, int a2);
 void __cdecl fcn_005340f0(int a1);
-int __cdecl fcn_00519190(int a1, ...);
+int __cdecl io_AppendText(int a1, ...);
 int __cdecl fcn_00472250(int a1, int a2, int a3);
 int __cdecl fcn_005373e0(void* a1, int a2);
 void __cdecl fcn_004c5530(struct msg58* m);
@@ -48,15 +48,15 @@ int __cdecl fcn_0058fbd0(char* a1)
 
 	fcn_0052a0c0(a1, 0);
 	dlg = fcn_00470820(0, 0, (char*) 0x6a96d8);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(*(int*) 0x772514);
 	one = 1;
 	d2_SetForm(dlg, one);
-	fcn_00519190(0x40f6, 0x40f5, 0x228);
+	io_AppendText(0x40f6, 0x40f5, 0x228);
 	d2_SetForm(dlg, 2);
-	i = fcn_00519190(0x40f7);
+	i = io_AppendText(0x40f7);
 	id1 = fcn_00472250(dlg, 2, i);
 	id2 = fcn_00472250(dlg, 2, i + 1);
 	*(int*) 0x100f1dc = -1;

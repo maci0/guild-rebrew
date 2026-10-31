@@ -43,15 +43,15 @@ extern char s_6aa490[];
 int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005463a0(int, int, int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl fcn_004c35f0(void);
-int __cdecl fcn_0051af00(char*, int, int);
+int __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -74,10 +74,10 @@ int __cdecl fcn_0059d060(int unused, char* param)
 
 	flag = 0;
 	dlg = fcn_00470820(0, 0, s_6aa490);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	n = fcn_00519190(0x19ee, *(unsigned short*) (param + 0x27), param);
+	n = io_AppendText(0x19ee, *(unsigned short*) (param + 0x27), param);
 	btn1 = fcn_00472250(dlg, 1, n);
 	btn2 = fcn_00472250(dlg, 1, n + 1);
 	g_100f1dc = -1;
@@ -129,7 +129,7 @@ int __cdecl fcn_0059d060(int unused, char* param)
 								count++;
 						}
 						if (count > 6) {
-							fcn_0051af00(buf, 0x19ef, 6);
+							io_FormatTextBuffer(buf, 0x19ef, 6);
 							fcn_00526120((int) buf, 0);
 						}
 						g_774654 = 2;

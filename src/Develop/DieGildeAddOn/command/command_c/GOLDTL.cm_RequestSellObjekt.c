@@ -33,7 +33,7 @@ int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_00546190(char*);
 
@@ -90,7 +90,7 @@ void __cdecl cm_RequestSellObjekt(char* e)
 					}
 				}
 				if (((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].type == 6 && amt != 0) {
-					fcn_0051af00(msg, 0x10b7, sel, amt);
+					io_FormatTextBuffer(msg, 0x10b7, sel, amt);
 					he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle, ((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle,
 					    msg, 0, 0x5ec, *(int*) (sel + 1), -1, 0, 0);
 				}

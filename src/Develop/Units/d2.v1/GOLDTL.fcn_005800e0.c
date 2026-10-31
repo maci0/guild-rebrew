@@ -6,7 +6,7 @@ extern char g_6811b0[];
 extern int* g_665f08;
 
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00519190(void*);
+void __cdecl io_AppendText(void*);
 
 int __cdecl fcn_005800e0(void)
 {
@@ -21,8 +21,8 @@ int __cdecl fcn_005800e0(void)
 		return -4;
 	}
 	d2_SetForm(*(int*) (p + 8), 1);
-	fcn_00519190((void*) g_6811b0);
+	io_AppendText((void*) g_6811b0);
 	d2_SetForm(*(int*) (*(int*) (*(int*) ((int) g_665f08 + 0x1c) + 0x74) + 8), 2);
-	fcn_00519190((void*) g_6811b0);
+	io_AppendText((void*) g_6811b0);
 	return 0;
 }

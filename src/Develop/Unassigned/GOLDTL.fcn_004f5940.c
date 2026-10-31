@@ -33,7 +33,7 @@ extern unsigned short g_774970;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_004f36e0(int key);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004fa980(int arg, unsigned char kind);
 void __cdecl fcn_005b2a00(Obj* o, char* p);
 
@@ -56,7 +56,7 @@ int __cdecl fcn_004f5940(int key, int force)
 	if (((Order*)g_9a3800)[k].state != 1 && (force == 0 || ((Order*)g_9a3800)[k].state == 0)) {
 		return 1;
 	}
-	p = fcn_00508e40(((Order*)g_9a3800)[k].target);
+	p = gm_LookupEntityRecordById(((Order*)g_9a3800)[k].target);
 	fcn_004fa980(((Order*)g_9a3800)[k].arg, ((Order*)g_9a3800)[k].kind);
 	for (i = 0; i < 2048; i++) {
 		if (key == g_99f800[i].key) {

@@ -43,7 +43,7 @@ void __cdecl fcn_00477a60(void)
 		return;
 	}
 	if (g_006ed9f4 == 0) {
-		step = fcn_004722c0((char*) g_006ed9dc);
+		step = d2_GetValueStep((char*) g_006ed9dc);
 		g_006ed9f4 = 1;
 		g_00f8a66c = g_006310b4;
 		g_00f8a664 = g_005f323c;

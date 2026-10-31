@@ -1,6 +1,3 @@
-char g_68a9cc[2] = {
-    0x02, 0x00,
-};
 extern char g_68a9cc[];
 
 

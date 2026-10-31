@@ -18,7 +18,7 @@ extern char s_699770[];
 extern char s_699784[];
 
 extern char* __cdecl fcn_00523710(void*);
-extern char* __cdecl fcn_00508e40(int);
+extern char* __cdecl gm_LookupEntityRecordById(int);
 extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 extern int __cdecl fcn_0051ad90(int);
 extern int __cdecl fcn_004fda30(int);
@@ -79,7 +79,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 	if (count >= 1) {
 		do {
 			e = fcn_00523710((void*) stream);
-			*(char**) (e + 0x12c) = fcn_00508e40((int) *(char**) (e + 0x12c));
+			*(char**) (e + 0x12c) = gm_LookupEntityRecordById((int) *(char**) (e + 0x12c));
 			i++;
 		} while (i < count);
 	}

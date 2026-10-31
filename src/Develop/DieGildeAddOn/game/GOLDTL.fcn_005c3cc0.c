@@ -10,9 +10,9 @@ extern int g_14ce8e0;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00525f60(char*, int);
@@ -43,13 +43,13 @@ void __cdecl fcn_005c3cc0(char* e)
 	win = fcn_00470820(0, 0, "Panel\\Gebaeude_Brand_loeschen");
 	fcn_00471b60(win);
 	d2_SetForm(win, 1);
-	fcn_00519190(0x17e4, e);
+	io_AppendText(0x17e4, e);
 	d2_SetForm(win, 2);
-	base = fcn_00519190(0x17e5, 1, 2, 4);
+	base = io_AppendText(0x17e5, 1, 2, 4);
 	h1 = fcn_00472250(win, 2, base);
 	h2 = fcn_00472250(win, 2, base + 1);
 	h3 = fcn_00472250(win, 2, base + 2);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_005373e0(0, 0x677c7);
 	do {
 		cur = gm_SearchTable67(id);

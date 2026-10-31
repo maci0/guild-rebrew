@@ -21,15 +21,15 @@ extern int g_67d370;
 extern int g_774654;
 extern int g_14ce8e0;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005dab30(char*, char*);
 void __cdecl fcn_00526120(int, int);
 unsigned short* __cdecl fcn_005cd440(Query*, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -49,7 +49,7 @@ int __cdecl fcn_005dac90(char* e, char* o)
 		if (*(int*) (e + 0x1cc) & 0x80000) {
 			return 0x20;
 		}
-		p = fcn_00508e40(*(int*) (o + 0x214));
+		p = gm_LookupEntityRecordById(*(int*) (o + 0x214));
 		if (p == 0) {
 			return 0x60;
 		}
@@ -73,10 +73,10 @@ int __cdecl fcn_005dac90(char* e, char* o)
 		return 2;
 	}
 	dlg = fcn_00470820(0, 0, "privillegien\\verhoer");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	id = fcn_00519190(0x1e09, *h);
+	id = io_AppendText(0x1e09, *h);
 	ok = fcn_00472250(dlg, 1, id);
 	cancel = fcn_00472250(dlg, 1, id + 1);
 	g_100f1dc = -1;

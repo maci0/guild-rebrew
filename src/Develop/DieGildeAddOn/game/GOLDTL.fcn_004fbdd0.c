@@ -25,7 +25,7 @@ extern double g_dbl_6653e0;
 extern double g_dbl_6653e8;
 
 float __cdecl fcn_004fc520(void);
-void __cdecl fcn_0051af00(char* buf, int id, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int slot, int entity, char* text, int flag, int size, int extra);
 
 /* ADDRESS: GOLDTL 0x004fbdd0 */
@@ -103,11 +103,11 @@ void __cdecl fcn_004fbdd0(void)
 		else {
 			index = table[index + 4];
 		}
-		fcn_0051af00((char*) &table[4], 0x67728c, index, index + 1);
+		io_FormatTextBuffer((char*) &table[4], 0x67728c, index, index + 1);
 		have = 1;
 	}
 	if (sum3 > g_dbl_6653e0) {
-		fcn_0051af00(text, 0x1c0d, id0, id1, id2, id3, 0x1c0e);
+		io_FormatTextBuffer(text, 0x1c0d, id0, id1, id2, id3, 0x1c0e);
 		for (slot = (char*) 0x7f4ca4; (int) slot < 0x85a0a4; slot += 0x21c) {
 			if (*(char*) (slot - 2) == 6) {
 				fcn_00545d40(*(int*) slot, -1, text, 1, 0x5f8, 0);
@@ -119,7 +119,7 @@ void __cdecl fcn_004fbdd0(void)
 		return;
 	}
 	if (sum3 < g_dbl_6653d8) {
-		fcn_0051af00(text, 0x1c0f, id0, id1, id2, id3, 0x1c10);
+		io_FormatTextBuffer(text, 0x1c0f, id0, id1, id2, id3, 0x1c10);
 		for (slot = (char*) 0x7f4ca4; (int) slot < 0x85a0a4; slot += 0x21c) {
 			if (*(char*) (slot - 2) == 6) {
 				fcn_00545d40(*(int*) slot, -1, text, 1, 0x5f8, 0);

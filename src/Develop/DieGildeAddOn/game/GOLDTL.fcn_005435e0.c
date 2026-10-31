@@ -50,7 +50,11 @@ extern char* g_14a5dbc[];
 extern unsigned char g_773d75;
 extern signed char g_6a3440;
 
+#ifdef REBREW_GOLD
+void __cdecl fcn_004b3b60(void);
+#else
 void __cdecl fcn_004b39f0(void);
+#endif
 void __cdecl fcn_004c44a0(void);
 int __cdecl fcn_004c5040(int, int, int, unsigned char, int, unsigned char, unsigned char, char*, char*);
 void __cdecl fcn_004c44b0(void);
@@ -72,7 +76,11 @@ void __cdecl fcn_005435e0(void)
 	int h;
 	int i;
 
+#ifdef REBREW_GOLD
+	fcn_004b3b60();
+#else
 	fcn_004b39f0();
+#endif
 	if ((*(Setup*)g_7e23e0).enabled == 0) {
 		return;
 	}

@@ -40,7 +40,7 @@ void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 int __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* text);
 float __cdecl fcn_004feff0(unsigned short* e);
 int __cdecl fcn_00567170(unsigned short* e, int* a, int* b, int c);
-void __cdecl fcn_0051af00(char* buf, int fmt, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 int __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d,
                                    int e, int f, int g, void* h);
 
@@ -90,10 +90,10 @@ void __cdecl fcn_00549580(int a0, char* a1, char* a2, char* a3,
 			return;
 		}
 		if (p[2] == 0x14) {
-			fcn_0051af00(buf, 0x414a, *(unsigned short*) p, a3);
+			io_FormatTextBuffer(buf, 0x414a, *(unsigned short*) p, a3);
 			text = s_6a597c;
 		} else {
-			fcn_0051af00(buf, 0x1bb0, *(unsigned short*) p, a3);
+			io_FormatTextBuffer(buf, 0x1bb0, *(unsigned short*) p, a3);
 			text = s_6a5968;
 		}
 		p1 = *(int*) (a2 + 4);
@@ -120,7 +120,7 @@ void __cdecl fcn_00549580(int a0, char* a1, char* a2, char* a3,
 				if (a2[2] != 6 && a2[2] != 7) {
 					return;
 				}
-				fcn_0051af00(buf, 0x1baf, *(unsigned short*) p, a3);
+				io_FormatTextBuffer(buf, 0x1baf, *(unsigned short*) p, a3);
 				p1 = *(int*) (a2 + 4);
 				p2 = *(int*) (a3 + 1);
 				text = s_6a594c;
@@ -134,10 +134,10 @@ void __cdecl fcn_00549580(int a0, char* a1, char* a2, char* a3,
 		return;
 	}
 	if (p[2] == 0x14) {
-		fcn_0051af00(buf, 0x4149, *(unsigned short*) p, a3);
+		io_FormatTextBuffer(buf, 0x4149, *(unsigned short*) p, a3);
 		text = s_6a5930;
 	} else {
-		fcn_0051af00(buf, 0x1bae, *(unsigned short*) p, a3);
+		io_FormatTextBuffer(buf, 0x1bae, *(unsigned short*) p, a3);
 		text = s_6a594c;
 	}
 	p1 = *(int*) (a2 + 4);

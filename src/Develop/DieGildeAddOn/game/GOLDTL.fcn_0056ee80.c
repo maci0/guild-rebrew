@@ -20,7 +20,7 @@ extern double g_6629f8;
 extern double g_665ed0;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, unsigned short, int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
@@ -38,7 +38,7 @@ void __cdecl fcn_004c4510(int, int);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_0050b750(int, unsigned char);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
@@ -92,7 +92,7 @@ void __cdecl fcn_0056ee80(char* a0)
 		}
 		for (cnt = 0; cnt < 8; cnt++) {
 			if (*(int*) (a0 + 0x8c + cnt * 4) != -1) {
-				ent = (int) fcn_00508e40(*(int*) (a0 + 0x8c + cnt * 4));
+				ent = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + cnt * 4));
 				if (ent != 0) {
 					fcn_00529160(rec1, 0, *(unsigned short*) ent, (int) a0);
 					fcn_004c5c80(*(int*) (a0 + 0x8c + cnt * 4));
@@ -112,7 +112,7 @@ void __cdecl fcn_0056ee80(char* a0)
 		i = 0;
 		for (;;) {
 			if (*(int*) (a0 + 0x8c + i * 4) != -1) {
-				ent = (int) fcn_00508e40(*(int*) (a0 + 0x8c + i * 4));
+				ent = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + i * 4));
 				if (ent != 0 && *(int*) (ent + 0x184) != 0 && fcn_00529670(ent, rec1) == 0) {
 					break;
 				}
@@ -161,7 +161,7 @@ void __cdecl fcn_0056ee80(char* a0)
 label_1bc:
 		for (cnt = 0; cnt < 8; cnt++) {
 			if (*(int*) (a0 + 0x8c + cnt * 4) != -1) {
-				ent = (int) fcn_00508e40(*(int*) (a0 + 0x8c + cnt * 4));
+				ent = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + cnt * 4));
 				if (ent != 0) {
 					fcn_00529160(rec1, 0, *(unsigned short*) ent, (int) a0);
 					fcn_004c5c80(*(int*) (a0 + 0x8c + cnt * 4));
@@ -184,7 +184,7 @@ label_1bc:
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
 		q = (int) fcn_005463a0(1, 1, *(int*) (a0 + 0xb8));
 		if (rec1 != 0 && q != 0 && *(int*) (q + 0xd4) == *(int*) (a0 + 4) && *(int*) (a0 + 0xb4) != -1) {
-			ent = (int) fcn_00508e40(*(int*) (a0 + 0xb8));
+			ent = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0xb8));
 			h = (int) fcn_004c4480(*(int*) (a0 + 0xb4));
 			if (ent != 0 && h != 0) {
 				fcn_004c58b0(*(int*) h, *(int*) (ent + 4));
@@ -207,13 +207,13 @@ label_1bc:
 		}
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
 		if (rec1 != 0) {
-			val = (int) fcn_00508e40(*(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (a0 + 8) * 0x21c + 4));
+			val = (int) gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (a0 + 8) * 0x21c + 4));
 			row = (int) ((unsigned short) *(unsigned short*) (q + 8) * 0x21c + (int) g_7f4ca0);
 			if (row != 0 && val != 0) {
 				ent = fcn_0050b750((gm_RandomMod(200) & 0xffff) + 0x226, g_773d75);
-				fcn_0051af00(buf, 0x19ea, rec1, ent, *(unsigned short*) row);
+				io_FormatTextBuffer(buf, 0x19ea, rec1, ent, *(unsigned short*) row);
 				fcn_00545d40(*(int*) (val + 4), *(int*) (val + 4), buf, 1, 0x5f0, s_6a6a60);
-				fcn_0051af00(buf, 0x19eb, rec1, ent);
+				io_FormatTextBuffer(buf, 0x19eb, rec1, ent);
 				fcn_004c51a0(*(int*) (row + 4), *(int*) (val + 4), g_773d75, ent);
 			}
 			q = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xbc));
@@ -225,7 +225,7 @@ label_1bc:
 		}
 		for (cnt = 0; cnt < 8; cnt++) {
 			if (*(int*) (a0 + 0x8c + cnt * 4) != -1) {
-				val = (int) fcn_00508e40(*(int*) (a0 + 0x8c + cnt * 4));
+				val = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + cnt * 4));
 				if (val != 0) {
 					fcn_004ff210(*(unsigned short*) val, 0xffffff9c - (gm_RandomMod(100) & 0xffff));
 				}
@@ -246,7 +246,7 @@ label_1bc:
 		return;
 	case 5:
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
-		ent = (int) fcn_00508e40(*(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (a0 + 8) * 0x21c + 4));
+		ent = (int) gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (a0 + 8) * 0x21c + 4));
 		if (rec1 == 0 || ent == 0) {
 			*(int*) (a0 + 0x70) = 0xfffffffe;
 			return;
@@ -259,7 +259,7 @@ label_1bc:
 			cnt = 8;
 			do {
 				if (*(int*) (a0 + 0x8c + (8 - cnt) * 4) != -1) {
-					val = (int) fcn_00508e40(*(int*) (a0 + 0x8c + (8 - cnt) * 4));
+					val = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + (8 - cnt) * 4));
 					if (val != 0) {
 						fcn_004c5c80(*(int*) (a0 + 0x8c + (8 - cnt) * 4));
 						fcn_004c5da0(*(int*) (a0 + 0x8c + (8 - cnt) * 4), *(int*) (h + 1), *(int*) (q + 2), 0, 0, s_6a6dc4);
@@ -286,7 +286,7 @@ label_1bc:
 		h = (int) fcn_00502cd0(*(int*) (rec1 + 0x5d), 2, 6, 0, 0x2a);
 		fcn_0050c5d0((char*) rec1, req);
 		val = (int) (*(int*) req * g_665ed0);
-		fcn_0051af00(str, 0x68bea4, val);
+		io_FormatTextBuffer(str, 0x68bea4, val);
 		strcpy(msg, str);
 		fcn_004c5150(*(int*) (ent + 4), *(int*) (row + 4), g_773d75, val);
 		fcn_004c4510(rec1, *(int*) (rec1 + 1));
@@ -318,12 +318,12 @@ label_1bc:
 			*(int*) (q + 0x14) = *(int*) (q + 0x14) + val;
 		}
 		if (*(char*) (ent + 2) == 6 || *(char*) (ent + 2) == 7) {
-			fcn_0051af00(buf, 0x1a85, *(unsigned short*) row, rec1);
+			io_FormatTextBuffer(buf, 0x1a85, *(unsigned short*) row, rec1);
 			strcpy(msg, buf);
 			he_MessageBoxQuickjump(*(int*) (ent + 4), *(int*) (ent + 4), msg, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
 		}
 		if (*(char*) (row + 2) == 6 || *(char*) (row + 2) == 7) {
-			fcn_0051af00(buf, 0x1a86, rec1, val);
+			io_FormatTextBuffer(buf, 0x1a86, rec1, val);
 			he_MessageBoxQuickjump(*(int*) (row + 4), *(int*) (row + 4), buf, 0, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
 			fcn_00546190(a0);
 			return;
@@ -334,11 +334,11 @@ label_fa92:
 			goto tail;
 		}
 		if (*(char*) (ent + 2) == 6 || *(char*) (ent + 2) == 7) {
-			fcn_0051af00(buf, 0x19e7, *(unsigned short*) row, rec1, 0x19c1);
+			io_FormatTextBuffer(buf, 0x19e7, *(unsigned short*) row, rec1, 0x19c1);
 			he_MessageBoxQuickjump(*(int*) (ent + 4), *(int*) (ent + 4), buf, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
 		}
 		if (*(char*) (row + 2) == 6 || *(char*) (row + 2) == 7) {
-			fcn_0051af00(buf, 0x19e9, rec1);
+			io_FormatTextBuffer(buf, 0x19e9, rec1);
 			he_MessageBoxQuickjump(*(int*) (row + 4), *(int*) (row + 4), buf, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, 0);
 			fcn_00546190(a0);
 			return;
@@ -352,7 +352,7 @@ label_fa92:
 		}
 		for (i = 0; i < 8; i++) {
 			if (*(int*) (a0 + 0x8c + i * 4) != -1) {
-				ent = (int) fcn_00508e40(*(int*) (a0 + 0x8c + i * 4));
+				ent = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + i * 4));
 				if (ent != 0) {
 					fcn_004c5c80(*(int*) (a0 + 0x8c + i * 4));
 					if (h != 0 && q != 0) {

@@ -11,7 +11,7 @@ extern int __cdecl fcn_004fa5b0(int cmd, int obj, void *rec);
 extern int __cdecl gm_RandomMod(int limit);
 extern void *__cdecl fcn_005463a0(int a, int b, int c);
 extern void *__cdecl he_fn_Handlung(void);
-extern void *__cdecl fcn_00508e40(int a);
+extern void *__cdecl gm_LookupEntityRecordById(int a);
 extern int __cdecl fcn_004a92c0(int a0, int obj, void *rec, char *out, int a4);
 extern int __cdecl fcn_004a93a0(int a0, int obj, void *rec, char *out, int a4);
 extern int __cdecl fcn_004a9470(int a0, int obj, void *rec, char *out, int a4);
@@ -42,7 +42,7 @@ unsigned int __cdecl fcn_004aa240(int a0, int a1, int a2, char *a3, int a4)
         {
             if (*(int *)(q + 0xac) == *(int *)(a1 + 4))
             {
-                rec.ptr = (int *)fcn_00508e40(*(int *)(q + 0xb0));
+                rec.ptr = (int *)gm_LookupEntityRecordById(*(int *)(q + 0xb0));
                 break;
             }
             q = (char *)he_fn_Handlung();

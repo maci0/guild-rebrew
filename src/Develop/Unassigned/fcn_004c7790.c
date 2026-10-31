@@ -1,6 +1,6 @@
 extern int g_14cbca0;
 extern int g_699364;
-extern int g_68a9d0;
+extern int cm_LastEntityId;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_0064d3f8(void);
@@ -45,7 +45,7 @@ int __cdecl fcn_004c7790(void* a0, char* a1)
 	if (r == 0xffff)
 		return 1;
 	r = r * 540;
-	g_68a9d0 = *(int*) (g_7f4ca0 + r + 4);
+	cm_LastEntityId = *(int*) (g_7f4ca0 + r + 4);
 	if (a1 != 0) {
 		a1[0] = 1;
 		a1[1] = 1;

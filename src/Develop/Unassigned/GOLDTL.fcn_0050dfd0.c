@@ -1,6 +1,7 @@
 
 /* ADDRESS: GOLDTL 0x0050dfd0 */
-int __cdecl fcn_0050dfd0(char* a1)
+/* 52 native calls supply an unused second dword; int is an inferred carrier. */
+int __cdecl fcn_0050dfd0(char* a1, int unused)
 {
 	int n;
 

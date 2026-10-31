@@ -33,9 +33,9 @@ extern char g_6750e8[];
 extern char g_6b5c60[];
 
 LRESULT CALLBACK fcn_0041e530(HWND, UINT, WPARAM, LPARAM);
-char* __cdecl fcn_0041f8f0(void);
-void __cdecl fcn_0041f7f0(char*);
-void __cdecl fcn_0041f940(char*);
+char* __cdecl AllocVideoListNode(void);
+void __cdecl ReleaseVideoInterfaces(char*);
+void __cdecl FreeVideoListNode(char*);
 
 /* Creates the MOVIEWNDCLASS movie window for a file, opens the DirectShow
    filter graph on it and returns the movie client id, or 0 on failure. */
@@ -93,7 +93,7 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 		sprintf(msg, (char*) 0x6780b8, name, hwnd);
 		return 0;
 	}
-	v = fcn_0041f8f0();
+	v = AllocVideoListNode();
 	if (v == 0) {
 		return 0;
 	}
@@ -207,7 +207,7 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 	return id;
 
 fail:
-	fcn_0041f7f0(v);
-	fcn_0041f940(v);
+	ReleaseVideoInterfaces(v);
+	FreeVideoListNode(v);
 	return 0;
 }

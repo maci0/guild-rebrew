@@ -3,7 +3,7 @@
 Use one shared C tree under `src/Develop/`, following attested `D:\Develop`
 paths. A byte match establishes code agreement; original TU ownership still
 needs path, diagnostic, counterpart or dependency evidence. Label inferred
-placement. Root address-named files remain a consolidation backlog.
+placement. Address-named files in `Unassigned` remain a consolidation backlog.
 
 | Location | Evidence and current use |
 | --- | --- |
@@ -13,7 +13,8 @@ placement. Root address-named files remain a consolidation backlog.
 | `src/Develop/DieGildeAddOn/loadsave` | Attested save/load unit. |
 | `src/Develop/DieGildeAddOnServer` | Attested server unit and reconstructed shared declarations. |
 | `src/Develop/Units` | Attested reusable units: Error, allocation, VFS, network and renderer modules. |
-| `src` directly | Unassigned recovered functions and shared headers whose original module is still unknown. This is a reconstruction backlog, not the intended final layout. |
+| `src/Develop/Unassigned` | Recovered functions whose original module/TU is unresolved; inferred placement is not original path evidence. |
+| `src` directly | Shared reconstruction headers and remaining support files; move them only with ownership evidence. |
 
 ## Moving sources
 

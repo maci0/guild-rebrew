@@ -11,7 +11,7 @@ typedef struct {
 extern char g_7f4ca0[];
 extern char lpGebaeudePROT[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, unsigned int, int);
 int __cdecl fcn_00546190(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -23,7 +23,7 @@ int __cdecl gm_RandomMod(void);
 void __cdecl fcn_005782f0(char*, int, int);
 void __cdecl fcn_005b2f60(char*);
 void __cdecl fcn_005b2fb0(char*);
-float __cdecl fcn_00507f10(char*, int);
+float __cdecl gm_GetEntitySkill(char*, int);
 void __cdecl fcn_005b3000(char*, char*, char*, int);
 void __cdecl fcn_005b30c0(char*, char*, char*);
 
@@ -41,7 +41,7 @@ int __cdecl fcn_00578a10(char* a1)
 	float t;
 	int s;
 
-	p = fcn_00508e40(*(int*) (a1 + 0xb4));
+	p = gm_LookupEntityRecordById(*(int*) (a1 + 0xb4));
 	s = -1;
 	if (*(int*) (a1 + 0x70) == s || *(int*) (a1 + 0x70) == -2) {
 		goto tail1;
@@ -64,7 +64,7 @@ int __cdecl fcn_00578a10(char* a1)
 		return *(int*) (a1 + 0x70) = *(int*) (a1 + 0x70) + 1;
 	case 2:
 		gm_StartFilteredEntitySearch(1, 1, *(int*) (a1 + 0xac));
-		p = fcn_00508e40(*(int*) (a1 + 0xb4));
+		p = gm_LookupEntityRecordById(*(int*) (a1 + 0xb4));
 		if (p == 0) {
 			*(int*) (a1 + 0x70) = s;
 			return;
@@ -76,8 +76,8 @@ int __cdecl fcn_00578a10(char* a1)
 		}
 		*(NAME14*) (a1 + 0x52) = *(NAME14*) g_7f4c00;
 		fcn_00500bb0((int*) (a1 + 0x52), 1, 0, 0);
-		n = fcn_00508e40(*(int*) (a1 + 0xb0));
-		m = fcn_00508e40(*(int*) (a1 + 0xb4));
+		n = gm_LookupEntityRecordById(*(int*) (a1 + 0xb0));
+		m = gm_LookupEntityRecordById(*(int*) (a1 + 0xb4));
 		t = fcn_00507e70(m, n, 2);
 		if (n != 0) {
 			if (t + gm_RandomFloat01() > 0.0) {
@@ -93,7 +93,7 @@ int __cdecl fcn_00578a10(char* a1)
 		}
 		return *(int*) (a1 + 0x70) = *(int*) (a1 + 0x70) + 1;
 	case 3:
-		m = fcn_00508e40(*(int*) (a1 + 0xb4));
+		m = gm_LookupEntityRecordById(*(int*) (a1 + 0xb4));
 		if (m == 0) {
 			*(int*) (a1 + 0x70) = s;
 			return;
@@ -106,7 +106,7 @@ int __cdecl fcn_00578a10(char* a1)
 		fcn_004c5da0(*(int*) (a1 + 0xb4), *(unsigned int*) (o + 1), s, 0, 0, 0x6a7ef4);
 		return *(int*) (a1 + 0x70) = *(int*) (a1 + 0x70) + 1;
 	case 4:
-		m = fcn_00508e40(*(int*) (a1 + 0xb4));
+		m = gm_LookupEntityRecordById(*(int*) (a1 + 0xb4));
 		if (m == 0) {
 			*(int*) (a1 + 0x70) = -1;
 			return;
@@ -122,15 +122,15 @@ int __cdecl fcn_00578a10(char* a1)
 			return fcn_00500bb0((int*) (a1 + 0x52), 0, 4, 0);
 		}
 		gm_StartFilteredEntitySearch(1, 1, *(int*) (a1 + 0xac));
-		n = fcn_00508e40(*(int*) (a1 + 0xb0));
+		n = gm_LookupEntityRecordById(*(int*) (a1 + 0xb0));
 		tbl = (char*) g_7f4ca0 + *(unsigned short*) (a1 + 8) * 0x21c;
-		m = fcn_00508e40(*(int*) (a1 + 0xb4));
+		m = gm_LookupEntityRecordById(*(int*) (a1 + 0xb4));
 		if (n == 0 || tbl == 0 || m == 0) {
 			*(int*) (a1 + 0x70) = -1;
 			return;
 		}
 		if (*(int*) (a1 + 0xbc) != 0) {
-			t = *(float*) 0x6628a0 - fcn_00507f10(m, 1);
+			t = *(float*) 0x6628a0 - gm_GetEntitySkill(m, 1);
 			fcn_005b3000(tbl, m, n, t + gm_RandomFloat01() > 0.0 ? 0 : 1);
 			*(int*) (a1 + 0x70) = -1;
 			return;

@@ -8,7 +8,7 @@
 extern short g_774970;
 extern int g_6a5f7c;
 
-int __cdecl fcn_00508e40(int id);
+int __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004c5c80(int a);
 void __cdecl fcn_004c57e0(int a, int b);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e,
@@ -21,7 +21,7 @@ void __cdecl fcn_00500bb0(int* sel, int a, int b, int c);
 void __cdecl fcn_005015e0(void* out, int a, int b, int ent);
 int __cdecl fcn_0042e450(void);
 int __cdecl fcn_00529670(int a, int b);
-float __cdecl fcn_00507f10(int a, int b);
+float __cdecl gm_GetEntitySkill(int a, int b);
 
 /* ADDRESS: GOLDTL 0x00557460 */
 void __cdecl fcn_00557460(int dlg, int arg2)
@@ -44,7 +44,7 @@ void __cdecl fcn_00557460(int dlg, int arg2)
 	(void) arg2;
 	if (*(int*) (dlg + 0x70) == -1 || *(int*) (dlg + 0x70) == -2) {
 		if ((*(unsigned char*) (dlg + 0x78) & 2) != 0) {
-			ent = fcn_00508e40(*(int*) (dlg + 0xac));
+			ent = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
 			if (ent != 0) {
 				fcn_004c5c80(*(int*) (ent + 4));
 				fcn_004c57e0(*(int*) (ent + 4), 1);
@@ -108,8 +108,8 @@ void __cdecl fcn_00557460(int dlg, int arg2)
 		*(unsigned int*) (dlg + 0xc4) = v;
 		if (h != 0) {
 			line = (char*) &text;
-			fcn_0051af00(line, g_6a5f7c, (void*) h);
-			ent = fcn_00508e40(*(int*) (dlg + 0xac));
+			io_FormatTextBuffer(line, g_6a5f7c, (void*) h);
+			ent = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
 			if (ent != 0) {
 				fcn_004c5c80(*(int*) (ent + 4));
 				fcn_004c5da0(*(int*) (ent + 4),
@@ -129,13 +129,13 @@ void __cdecl fcn_00557460(int dlg, int arg2)
 			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
 			return;
 		}
-		ent = fcn_00508e40(*(int*) (dlg + 0xac));
+		ent = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
 		if (ent != 0) {
 			v = fcn_00529670(ent, h);
 			if (v != 0) {
 				*(int*) (dlg + 0xbc) = *(int*) (dlg + 0xbc) - 1;
 				{
-					float r = fcn_00507f10(
+					float r = gm_GetEntitySkill(
 					    (int) ((unsigned short)
 					    *(unsigned short*) (h + 0x27) * 0x21c
 					    + 0x7f4ca0), 2);

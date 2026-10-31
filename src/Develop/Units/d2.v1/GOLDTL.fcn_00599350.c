@@ -49,7 +49,7 @@ void __cdecl fcn_00471b60(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
-void __cdecl fcn_00519190(int, ...);
+void __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 unsigned int __cdecl fcn_00504f30(int, int);
@@ -115,7 +115,7 @@ void __cdecl fcn_00599350(void)
 	*(int*) (i + 0x10162f4) = 0x18;
 	fcn_00533f40(0x20c, 0x168, g_772514, fcn_00472830(hwnd, 3), 0x5a, &ida, &idc, &idb);
 	d2_SetForm(hwnd, 1);
-	fcn_00519190(0x17eb);
+	io_AppendText(0x17eb);
 	d2_SetForm(hwnd, 2);
 	count = 0;
 	flag = 0;

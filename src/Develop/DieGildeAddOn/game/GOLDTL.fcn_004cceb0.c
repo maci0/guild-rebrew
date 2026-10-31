@@ -1,14 +1,14 @@
 
 
 
-char* __cdecl gm_LookupEntityRecordById(int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 void __cdecl fcn_004cfc40(char*, int, int);
 
 int __cdecl fcn_004cceb0(char* a1, char* a2)
 {
 	char* r;
 
-	r = gm_LookupEntityRecordById(*(int*) (a1 + 0x10));
+	r = gm_LookupEntityRecordIn32SlotTable(*(int*) (a1 + 0x10));
 	if (r != 0) {
 		fcn_004cfc40(r, *(int*) (a1 + 0x14), 0);
 		*(int*) (r + 0x24) -= *(int*) (a1 + 0x14);

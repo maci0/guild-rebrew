@@ -15,7 +15,7 @@ void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00442e30(void);
 int __cdecl fcn_0051e070(void);
 int __cdecl fcn_00448360(char *, int, int);
-void __cdecl fcn_0041d9e0(char *);
+void __cdecl ReportClientMessage(char *);
 void __cdecl fcn_00438da0(float, float, int, int, int, int, int, int, int);
 void __cdecl fcn_0046b4f0(void);
 int __cdecl fcn_00469e30(int);
@@ -106,7 +106,7 @@ void __cdecl main_Menue(void)
 	fcn_004432d0(1, 0);
 	fcn_00442e30();
 	if (!fcn_00448360((char *)0x6a3b98, 0, 0)) {
-		fcn_0041d9e0((char *)0x6a3b70);
+		ReportClientMessage((char *)0x6a3b70);
 	}
 	fcn_00438da0((float)*(int *)0x1040494, (float)*(int *)0x1040490, 0, 0, *(int *)0x10529c8, *(int *)0x10421a0, *(int *)0x10432a4, *(int *)0x1040494, *(int *)0x1040490);
 	*(int *)0x774658 = *(int *)0x774650 + 1;

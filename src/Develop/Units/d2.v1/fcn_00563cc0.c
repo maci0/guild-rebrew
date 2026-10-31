@@ -1,6 +1,6 @@
 int __cdecl fcn_00503fe0(int, int, int);
 char* __cdecl fcn_0050dc90(char*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004c5fa0(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -40,7 +40,7 @@ void __cdecl fcn_00563cc0(char* a0)
 		}
 		rec = (char*) (0x7f4ca0 + (unsigned short) (*(unsigned short*) (a0 + 8)) * 0x21c);
 		if (*(unsigned char*) (rec + 2) == 6) {
-			fcn_0051af00(buf, 0x17e7, ent);
+			io_FormatTextBuffer(buf, 0x17e7, ent);
 			fcn_00545e80(*(int*) (rec + 4), *(int*) (rec + 4), buf, 0, mode,
 				*(int*) (ent + 1), -1, 0, 0x6a65e0);
 		}
@@ -52,7 +52,7 @@ void __cdecl fcn_00563cc0(char* a0)
 
 				if ((*e == 6 || *e == 7) && i != *(unsigned short*) rec) {
 					c = (int) (*(unsigned char*) ent) * 14 + 0x49c;
-					fcn_0051af00(buf, 0x1c32,
+					io_FormatTextBuffer(buf, 0x1c32,
 						(int) (*(unsigned short*) (a0 + 8)),
 						(int) (*(unsigned short*) (a0 + 8)), c);
 					fcn_00545e80(*(int*) (e + 2), -1, buf, 0, 0x607,

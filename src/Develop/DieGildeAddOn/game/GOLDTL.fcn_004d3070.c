@@ -2,7 +2,7 @@
 
 extern int g_67a370;
 
-char* __cdecl gm_LookupEntityRecordById(int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char __cdecl fcn_0045b920(void*, int, int, float*);
 
 /* ADDRESS: GOLDTL 0x004d3070 */
@@ -35,7 +35,7 @@ float __cdecl fcn_004d3070(char* self, int x, int z, float range)
 		if (listA[i] == -1) {
 			continue;
 		}
-		e = gm_LookupEntityRecordById(listA[i]);
+		e = gm_LookupEntityRecordIn32SlotTable(listA[i]);
 		if (e == 0) {
 			continue;
 		}
@@ -53,7 +53,7 @@ float __cdecl fcn_004d3070(char* self, int x, int z, float range)
 	}
 	for (i = 0; i < 16; i++) {
 		if (listB[i] != -1) {
-			e = gm_LookupEntityRecordById(listB[i]);
+			e = gm_LookupEntityRecordIn32SlotTable(listB[i]);
 			if (e != 0 && *(unsigned char*) (e + 8) != 0 && e != self) {
 				p = (float*) (*(int*) (*(int*) (e + 0x184) + 0x34));
 				dx = pos[0] - p[0x13];

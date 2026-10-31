@@ -1,10 +1,10 @@
 extern char* g_aed32c;
 extern unsigned short g_774970;
 
-int __cdecl fcn_0051af00(char*, int, ...);
+int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00525f60(char*, int);
-float __cdecl fcn_00507f10(char*, int);
+float __cdecl gm_GetEntitySkill(char*, int);
 void __cdecl fcn_004c4510(char*, int);
 int __cdecl fcn_004c4570(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
@@ -34,17 +34,17 @@ void __cdecl fcn_005aee90(char* rec)
 	ent = (char*) (0x7f4ca0 + (unsigned int) g_774970 * 540);
 	ent2 = (char*) (0x7f4ca0
 	    + (unsigned int) *(unsigned short*) (rec + 0x27) * 540);
-	fcn_00473a90(0, 0);
-	fcn_0051af00(text, 0x3fea, *(unsigned char*) (ent + 0x1b1) * 2);
+	d2_SetOverlayAnimation(0, 0);
+	io_FormatTextBuffer(text, 0x3fea, *(unsigned char*) (ent + 0x1b1) * 2);
 	if (fcn_00526120(text, 0x11) == 0) {
 		goto done;
 	}
 	if (fcn_00525f60(ent, *(unsigned char*) (ent + 0x1b1) * 2) == 0) {
 		goto done;
 	}
-	f = fcn_00507f10(ent, 4);
-	f = fcn_00507f10(ent, 3) + f;
-	f = fcn_00507f10(ent, 2) + f;
+	f = gm_GetEntitySkill(ent, 4);
+	f = gm_GetEntitySkill(ent, 3) + f;
+	f = gm_GetEntitySkill(ent, 2) + f;
 	f = f * *(float*) 0x6629d0 + *(float*) 0x664328;
 	fcn_004c6ae0(*(int*) (ent + 4), -(int) *(unsigned char*) (ent + 0x1b1) * 2);
 	if (gm_RandomFloat01() < f) {
@@ -71,16 +71,16 @@ void __cdecl fcn_005aee90(char* rec)
 		if (act != 0) {
 			*(int*) (act + 0x84) = fcn_004c5620(-1, act);
 		}
-		fcn_0051af00(line, 0x3feb);
+		io_FormatTextBuffer(line, 0x3feb);
 		fcn_00545d40(*(int*) (ent + 4), -1, line, 0, 0x5f3, 0);
-		fcn_0051af00(line, 0x3fed, *(unsigned short*) ent);
+		io_FormatTextBuffer(line, 0x3fed, *(unsigned short*) ent);
 		fcn_00545d40(*(int*) (ent2 + 4), -1, line, 0, 0x5f3, 0);
 		fcn_00532ef0();
 		return;
 	}
-	fcn_0051af00(text, 0x3fec);
+	io_FormatTextBuffer(text, 0x3fec);
 	fcn_00545d40(*(int*) (ent + 4), -1, text, 0, 0x5f3, 0);
-	fcn_0051af00(text, 0x3fee, *(unsigned short*) ent);
+	io_FormatTextBuffer(text, 0x3fee, *(unsigned short*) ent);
 	fcn_00545d40(*(int*) (ent2 + 4), -1, text, 0, 0x5f3, 0);
 done:
 	fcn_00532ef0();

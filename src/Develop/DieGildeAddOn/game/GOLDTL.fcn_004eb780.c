@@ -19,7 +19,7 @@ void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 void __cdecl fcn_00526120(char*, int);
@@ -44,7 +44,7 @@ int __cdecl fcn_004eb780(char* e, int* msg)
 	if (*(unsigned short*) (h + 0x27) == *(unsigned short*) e || *(unsigned short*) (h + 0x27) == 0xffff) {
 		return 0;
 	}
-	f = fcn_00507f10(e, 4);
+	f = gm_GetEntitySkill(e, 4);
 	amount = (int) (((gm_RandomFloat01() + 1.0f) * f * 15.0f + 5.0) * 2.55f);
 	fcn_004c51a0(-1, *(int*) (e + 4), (*(char*)&g_773d75), msg[2]);
 	for (i = 0, cnt = 0; i < 0x300; i++) {
@@ -64,10 +64,10 @@ int __cdecl fcn_004eb780(char* e, int* msg)
 	fcn_005100f0(*(int*) (e + 4), -5);
 	fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x8000000, 0);
 	if (((Rec*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].type == 7 || ((Rec*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].type == 6) {
-		fcn_0051af00(buf, 0x1663, h);
+		io_FormatTextBuffer(buf, 0x1663, h);
 		he_MessageBoxQuickjump(((Rec*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].owner, -1, buf, 0, 0x5fb, *(int*) (h + 1), -1, 0, "");
 	}
-	fcn_0051af00(buf, 0x1662, *(unsigned short*) (h + 0x27), h);
+	io_FormatTextBuffer(buf, 0x1662, *(unsigned short*) (h + 0x27), h);
 	for (i = 0; i < 0x300; i++) {
 		if ((((Rec*)g_7f4ca0)[i].type == 7 || ((Rec*)g_7f4ca0)[i].type == 6) && *(int*) (e + 4) != ((Rec*)g_7f4ca0)[i].owner
 		    && ((Rec*)g_7f4ca0)[i].owner != ((Rec*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].owner) {
@@ -75,7 +75,7 @@ int __cdecl fcn_004eb780(char* e, int* msg)
 		}
 	}
 	if (e[2] == 6) {
-		fcn_0051af00(buf, 0x1661, *(unsigned short*) (h + 0x27), h);
+		io_FormatTextBuffer(buf, 0x1661, *(unsigned short*) (h + 0x27), h);
 		fcn_00526120(buf, 0);
 	}
 	return 1;

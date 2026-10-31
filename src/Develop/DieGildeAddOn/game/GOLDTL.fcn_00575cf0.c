@@ -5,7 +5,7 @@
 extern pos14_7f4c00 g_7f4c00;
 extern float g_6628a8;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl fcn_004ecbe0(int);
 float __cdecl fcn_004ecd50(char*, char*, int*);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
@@ -19,7 +19,7 @@ void __cdecl fcn_00575cf0(char* u)
 	char* h;
 	char* p;
 
-	h = fcn_00508e40(*(int*) (u + 0xac));
+	h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 	if (h != 0) {
 		p = fcn_004ecbe0(*(int*) (u + 0xb0));
 		if (p != 0) {

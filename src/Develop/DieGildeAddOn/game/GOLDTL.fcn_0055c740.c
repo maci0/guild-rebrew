@@ -18,7 +18,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl fcn_0050d320(char*, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00546190(void*);
@@ -28,7 +28,7 @@ int __cdecl fcn_004c6090(unsigned char*, int, int, int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 char* __cdecl fcn_005049a0(char*);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl fcn_0050dc90(char*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl gm_RandomMod(int);
@@ -65,7 +65,7 @@ void __cdecl fcn_0055c740(char* ctx)
 		ver = (int) fcn_005101e0((unsigned char*) (g_7f4ca0 + bank * 0x21c),
 		    *rec, -1, 1);
 		if (gm_AccumulateTyped2(g_7f4ca0 + *(unsigned short*) (rec + 0x27) * 0x21c) < ver) {
-			fcn_0051af00(text, 0x1a40, rec);
+			io_FormatTextBuffer(text, 0x1a40, rec);
 			he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + bank * 0x21c + 4),
 			    *(int*) (ctx + 0x10), text, 0, 0x5f2, *(int*) (rec + 1),
 			    *(int*) (ctx + 0xe0), 0, 0);
@@ -128,7 +128,7 @@ void __cdecl fcn_0055c740(char* ctx)
 		if (rec == 0) {
 			break;
 		}
-		obj = (unsigned short*) fcn_00508e40(*(int*) (ctx + 0xe8));
+		obj = (unsigned short*) gm_LookupEntityRecordById(*(int*) (ctx + 0xe8));
 		for (i = 0; i < 0xc; i++) {
 			if (obj == 0 || *(int*) (ctx + 0xb0 + i * 4) <= 0) {
 				continue;
@@ -140,7 +140,7 @@ void __cdecl fcn_0055c740(char* ctx)
 			kind = *(unsigned char*) (g_7f4ca0 + bank * 0x21c + 2);
 			if (kind == 6 || kind == 7) {
 				h = fcn_0050dc90(rec);
-				fcn_0051af00(text, 0x1bab, ver, *obj, rec);
+				io_FormatTextBuffer(text, 0x1bab, ver, *obj, rec);
 				if (h != 0 && (*(unsigned char*) (h + 0x1b4) & 1)) {
 					pri = 0x60c;
 				} else {

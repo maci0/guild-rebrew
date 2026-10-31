@@ -29,7 +29,7 @@ void __cdecl fcn_0046b4f0(void);
 void __cdecl fcn_00469e30(int);
 int __cdecl fcn_0046e940(int, int, int, int, int);
 void __cdecl fcn_00471c80(int, int);
-void __cdecl fcn_00519190(int, ...);
+void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046f280(int);
 
 void __cdecl fcn_005e4970(void)
@@ -50,7 +50,7 @@ void __cdecl fcn_005e4970(void)
 	fcn_00469e30(0x7ad);
 	win = fcn_0046e940(100, 0, 0x258, g_1040490, 0x10);
 	fcn_00471c80(win, 1);
-	fcn_00519190(0x2004);
+	io_AppendText(0x2004);
 	(*(Player**)&g_77255c)->scroll = -g_1040490;
 	i = 0;
 	g_7725c8 = 1;

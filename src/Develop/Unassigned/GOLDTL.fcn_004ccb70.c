@@ -1,7 +1,7 @@
 
 
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(int);
 
@@ -11,7 +11,7 @@ int __cdecl fcn_004ccb70(char* a1, char* a2)
 	char* q;
 	int v;
 
-	p = fcn_00508e40(*(int*) (a1 + 0x10));
+	p = gm_LookupEntityRecordById(*(int*) (a1 + 0x10));
 	if (p == 0) {
 		return 1;
 	}

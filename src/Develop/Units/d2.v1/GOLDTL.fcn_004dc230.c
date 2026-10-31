@@ -9,7 +9,7 @@ extern int g_67d370;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_004e6e20(int, int, int);
@@ -33,7 +33,7 @@ int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short*
 	h = fcn_00470820(0, 0, g_68c340);
 	fcn_00471d80(h, 1);
 	d2_SetForm(h, 0);
-	t = fcn_00519190(0x12c6, *a2, *a1);
+	t = io_AppendText(0x12c6, *a2, *a1);
 	b0 = fcn_00472250(h, 0, t);
 	fcn_00472250(h, 0, t + 1);
 	b2 = fcn_00472250(h, 0, t + 2);

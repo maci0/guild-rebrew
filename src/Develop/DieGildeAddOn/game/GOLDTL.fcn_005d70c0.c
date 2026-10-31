@@ -15,11 +15,11 @@ typedef struct
 
 extern __int64 g_666018;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004946f0(char*, char*, int);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_005cd440(Query*, char*, int, void*);
 int __cdecl fcn_005d6ea0(unsigned short*);
 
@@ -36,7 +36,7 @@ int __cdecl fcn_005d70c0(char* e, char* o)
 		if (*(int*) (e + 0x194) < n || n < 1 || n > 5) {
 			return 0x60;
 		}
-		p = fcn_00508e40(*(int*) (o + 0x214));
+		p = gm_LookupEntityRecordById(*(int*) (o + 0x214));
 		if (p == 0) {
 			return 0x60;
 		}
@@ -54,9 +54,9 @@ int __cdecl fcn_005d70c0(char* e, char* o)
 		q.x10 = 6;
 		q.mask = g_666018;
 		if (e[9] == 0) {
-			fcn_0051af00(buf, 0x1dae, 0x1daf);
+			io_FormatTextBuffer(buf, 0x1dae, 0x1daf);
 		} else {
-			fcn_0051af00(buf, 0x1dae, 0x1db0);
+			io_FormatTextBuffer(buf, 0x1dae, 0x1db0);
 		}
 		if (fcn_005cd440(&q, buf, 0, (void*) fcn_005d6ea0) != 0) {
 			r = 1;

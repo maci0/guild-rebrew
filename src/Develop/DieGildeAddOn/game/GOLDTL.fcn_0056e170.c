@@ -6,7 +6,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(int);
 void __cdecl fcn_00529160(char*, int, int, char*);
@@ -22,7 +22,7 @@ void __cdecl fcn_0056e170(char* u)
 
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		h = fcn_00508e40(*(int*) (u + 0xac));
+		h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 		if (h == 0) {
 			goto kill;
 		}
@@ -33,7 +33,7 @@ void __cdecl fcn_0056e170(char* u)
 		(*(int*) (u + 0x70))++;
 		break;
 	case 1:
-		h = fcn_00508e40(*(int*) (u + 0xac));
+		h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 		if (h == 0) {
 			goto kill;
 		}
@@ -42,7 +42,7 @@ void __cdecl fcn_0056e170(char* u)
 		}
 		break;
 	case 2:
-		h = fcn_00508e40(*(int*) (u + 0xac));
+		h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 		if (h == 0) {
 			goto kill;
 		}
@@ -59,7 +59,7 @@ void __cdecl fcn_0056e170(char* u)
 		(*(int*) (u + 0x70))++;
 		break;
 	case 3:
-		h = fcn_00508e40(*(int*) (u + 0xac));
+		h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 		if (h != 0 && (u[0x78] & 2) != 0) {
 			fcn_004c57e0(*(int*) (h + 4), 1);
 		}

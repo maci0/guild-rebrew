@@ -27,7 +27,7 @@ typedef struct Rec6 {
 
 extern unsigned char g_773d75;
 
-unsigned char* __cdecl fcn_00508e40(int id);
+unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_0047dd60(unsigned char* p);
 void __cdecl fcn_004942a0(char* e, Share* out);
 Rec6 __cdecl fcn_00506d50(int idx);
@@ -52,7 +52,7 @@ int __cdecl fcn_004a0e20(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 		return 0;
 	}
 	if (e[2] != 5) {
-		p = fcn_00508e40(*(int*) (e + 0x5c));
+		p = gm_LookupEntityRecordById(*(int*) (e + 0x5c));
 		if (p != 0) {
 			if (p[2] == 5 || p[2] == 6 || p[2] == 7) {
 				return 0;
@@ -64,7 +64,7 @@ int __cdecl fcn_004a0e20(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	}
 	best = 0;
 	for (i = 0; i < 5; i++) {
-		p = fcn_00508e40(((int*) (e + 0x68))[i]);
+		p = gm_LookupEntityRecordById(((int*) (e + 0x68))[i]);
 		if (p != 0 && p[8] > 0 && p[0x164] != 0 && !(*(int*) (p + 0x1c8) & 0x10000)) {
 			if (best == 0 || *(unsigned short*) (p + 0xa) > *(unsigned short*) (best + 0xa)) {
 				best = p;

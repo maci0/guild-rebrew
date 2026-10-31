@@ -35,7 +35,7 @@ extern char g_7f4ca0[];
 extern char* lpObjektePROT;
 
 char* __cdecl gm_SearchTable67(int);
-void __cdecl fcn_0051af00(char*, char*, ...);
+void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 float __cdecl fcn_0050fdb0(int, int, char*);
@@ -51,7 +51,7 @@ void __cdecl he_AllocProduktion(char* e)
 	if (*(unsigned short*) (e + 8) == 0xffff) {
 		g = gm_SearchTable67(*(int*) (e + 0xbc));
 		if (g != 0) {
-			fcn_0051af00(buf, "he_AllocProduktion(): geb:%G", g);
+			io_FormatTextBuffer(buf, "he_AllocProduktion(): geb:%G", g);
 		}
 	}
 	r = gm_SearchTable67(*(int*) (e + 0xbc));

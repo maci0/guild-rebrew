@@ -5,7 +5,7 @@ extern int g_772514;
 extern char g_6a9694[];
 
 void __cdecl fcn_0046f2c0(int, int);
-int __cdecl fcn_00519190(char*, ...);
+int __cdecl io_AppendText(char*, ...);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_0046f740(int, int, int, int);
 
@@ -16,7 +16,7 @@ void __cdecl fcn_005a0a40(int a)
 	int y;
 
 	fcn_0046f2c0(g_772514, 1);
-	fcn_00519190(g_6a9694, a);
+	io_AppendText(g_6a9694, a);
 	i = 0;
 	x = 0x1c;
 	y = 0x1d;

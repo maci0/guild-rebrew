@@ -40,11 +40,11 @@ extern int g_14b5654;
 
 void __cdecl fcn_005263d0(int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00525f60(struct house*, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -78,17 +78,17 @@ int __cdecl fcn_0058dfb0(int a1, char* s, struct result* out)
 		return 0;
 	}
 	h = fcn_00470820(0, 0, "Locations\\Friedhof\\Seance");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(h, 1);
-	fcn_00519190(0x40ce, 0x40cc);
+	io_AppendText(0x40ce, 0x40cc);
 	d2_SetForm(h, 2);
-	b4 = fcn_00472250(h, 2, fcn_00519190(0x40cf, 4));
-	b6 = fcn_00472250(h, 2, fcn_00519190(0x40d0, 6));
-	b8 = fcn_00472250(h, 2, fcn_00519190(0x40d1, 8));
-	cancel = fcn_00472250(h, 2, fcn_00519190(0x40d2));
+	b4 = fcn_00472250(h, 2, io_AppendText(0x40cf, 4));
+	b6 = fcn_00472250(h, 2, io_AppendText(0x40d0, 6));
+	b8 = fcn_00472250(h, 2, io_AppendText(0x40d1, 8));
+	cancel = fcn_00472250(h, 2, io_AppendText(0x40d2));
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {

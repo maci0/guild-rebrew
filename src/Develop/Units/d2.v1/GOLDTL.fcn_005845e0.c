@@ -4,7 +4,7 @@ void __cdecl fcn_00471e30(char*);
 int __cdecl fcn_00472250(char*, int, char*);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(char*, int);
-char* __cdecl fcn_00519190(char*, int);
+char* __cdecl io_AppendText(char*, int);
 int __cdecl fcn_005373e0(char*, int);
 
 /* ADDRESS: GOLDTL 0x005845e0 */
@@ -24,10 +24,10 @@ int __cdecl fcn_005845e0(void)
 	menu = fcn_00470820(0, 0, (char*) 0x6a9298);
 	fcn_00471b60(menu);
 	d2_SetForm(menu, 1);
-	fcn_00519190((char*) 0x6a2f5c, 0x3f1a);
+	io_AppendText((char*) 0x6a2f5c, 0x3f1a);
 	d2_SetForm(menu, 2);
 	for (i = 0; i < 5; i++) {
-		item = fcn_00519190((char*) 0x681140, 0x3f1b + i);
+		item = io_AppendText((char*) 0x681140, 0x3f1b + i);
 		item = fcn_00472250(menu, 2, item);
 		ids[i] = (int) item;
 		index = (int) item;
@@ -38,9 +38,9 @@ int __cdecl fcn_005845e0(void)
 		*(int*) (base + index + 0x38) = *(int*) (0x6a81dc + i * 4);
 		*(int*) (base + index + 0x1d0) &= -3;
 	}
-	item = fcn_00519190((char*) 0x681140, 0x3f20);
+	item = io_AppendText((char*) 0x681140, 0x3f20);
 	result = (int) fcn_00472250(menu, 2, item);
-	item = fcn_00519190((char*) 0x681140, 0x3f21);
+	item = io_AppendText((char*) 0x681140, 0x3f21);
 	fcn_00472250(menu, 2, item);
 	d2_SetForm(menu, 2);
 	if (fcn_005373e0((char*) 0x5845e0, 0x86) != 0) {

@@ -31,13 +31,13 @@ void __cdecl lc_PlayerInJail(void)
 					return;
 				}
 			}
-			fcn_0041d9e0("lc_PlayerInJail(): Could not find ob_DIEBESGILDE_GEFAENGNIS...");
+			ReportClientMessage("lc_PlayerInJail(): Could not find ob_DIEBESGILDE_GEFAENGNIS...");
 			return;
 		}
 	}
 	e = gm_StartFilteredEntitySearch(1, 5, 6);
 	if (e == 0) {
-		fcn_0041d9e0("lc_PlayerInJail(): Could not find a jail...");
+		ReportClientMessage("lc_PlayerInJail(): Could not find a jail...");
 		return;
 	}
 	d = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0xba);

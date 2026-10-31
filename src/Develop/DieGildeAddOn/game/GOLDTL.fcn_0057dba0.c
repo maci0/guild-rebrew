@@ -1,7 +1,7 @@
 
 
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_0057dc30(char*);
 void __cdecl fcn_0057dd40(char*);
@@ -13,7 +13,7 @@ void __cdecl fcn_0057dba0(char* o)
 	char* x;
 	float r;
 
-	x = fcn_00508e40(*(int*) (o + 0xc));
+	x = gm_LookupEntityRecordById(*(int*) (o + 0xc));
 	if (*(int*) (o + 0x70) != -1 && *(int*) (o + 0x70) != -2 && x != 0) {
 		r = gm_RandomFloat01();
 		if (r > 0.8f) {

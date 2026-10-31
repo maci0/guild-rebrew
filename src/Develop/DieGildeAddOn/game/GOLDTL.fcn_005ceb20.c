@@ -62,14 +62,14 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
-int __cdecl fcn_00519190(int, ...);
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 char* __cdecl fcn_005463a0(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl fcn_004c5530(Packet*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00476b60(void);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -90,18 +90,18 @@ void __cdecl fcn_005ceb20(unsigned char* obj, int mode)
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(g_772514);
 	fcn_00471b60(dlg);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
 	switch (mode) {
 	case 0x20:
-		s = fcn_00519190(0x1938);
+		s = io_AppendText(0x1938);
 		btn1 = fcn_00472250(dlg, 1, s);
 		btn2 = fcn_00472250(dlg, 1, s + 1);
 		break;
 	case 0x10:
-		fcn_00519190(0x1949);
-		fcn_00519190(0x194b);
-		btn1 = fcn_00472250(dlg, 1, fcn_00519190(0x194d));
+		io_AppendText(0x1949);
+		io_AppendText(0x194b);
+		btn1 = fcn_00472250(dlg, 1, io_AppendText(0x194d));
 		break;
 	default:
 		fcn_00471e30(dlg);
@@ -134,7 +134,7 @@ void __cdecl fcn_005ceb20(unsigned char* obj, int mode)
 					}
 					pkt.x58 = 0;
 					fcn_004c5530(&pkt);
-					fcn_0051af00(buf, 0x1939, ((Shop*)lpGebaeudePROT)[obj[0]].x223 + 0x130);
+					io_FormatTextBuffer(buf, 0x1939, ((Shop*)lpGebaeudePROT)[obj[0]].x223 + 0x130);
 					fcn_00476b60();
 					fcn_00526120(buf, 0);
 				}

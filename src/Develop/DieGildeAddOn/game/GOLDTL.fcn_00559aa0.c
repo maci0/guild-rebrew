@@ -15,7 +15,7 @@ extern float g_6628cc;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 
-extern void* __cdecl fcn_00508e40(int id);
+extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern int __cdecl gm_RandomMod(int range);
 extern float __cdecl gm_RandomFloat01(void);
 extern void __cdecl gm_ResolveEntityById(void** out, int a, int b, int item);
@@ -52,7 +52,7 @@ void __cdecl fcn_00559aa0(struct job* job)
 	record = 0;
 	guard = 0;
 	count = 0;
-	entity = (char*) fcn_00508e40(job->house);
+	entity = (char*) gm_LookupEntityRecordById(job->house);
 	if (entity == 0) {
 		job->house = -1;
 		job->item = -1;

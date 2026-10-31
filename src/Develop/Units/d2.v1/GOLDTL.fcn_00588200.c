@@ -11,10 +11,10 @@ float __cdecl fcn_005e8860(int);
 int __cdecl _ftol(void);
 void __cdecl fcn_00580070(char*, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046fac0(int, int, char*, int);
 void __cdecl fcn_00472900(int, int);
-void __cdecl fcn_0051af00(char*, char*, ...);
+void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_0050d320(char*, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00588200 */
@@ -67,13 +67,13 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	fcn_00472380(*(int*) (a1 + 0xac), 0, 100, _ftol());
 	fcn_00472380(*(int*) (a1 + 0xc4), 0, 100, _ftol());
 	d2_SetForm(*(int*) (a1 + 0xc0), 2);
-	fcn_00519190(0x6811b0);
+	io_AppendText(0x6811b0);
 	rec = fcn_0046fac0(0, 0xf, (char*) 0x14b54c0, *(int*) 0x772514);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) 0x1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) 0x1015ea0) =
 	    *(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f4c) / 2;
 	fcn_00472900(rec, 0x54);
-	fcn_0051af00(text, (char*) 0x6a9480, v2, v1);
+	io_FormatTextBuffer(text, (char*) 0x6a9480, v2, v1);
 	rec = fcn_0046fac0(0, 0x23, text, *(int*) 0x772514);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) 0x1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) 0x1015ea0) =
@@ -85,7 +85,7 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) 0x1015ea0) =
 	    *(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f4c) / 2;
 	fcn_00472900(rec, 0x54);
-	fcn_0051af00(text, (char*) 0x6a9480,
+	io_FormatTextBuffer(text, (char*) 0x6a9480,
 	             fcn_0050d320((char*) (*(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0),
 	                          *(unsigned char*) 0x773d75));
 	rec = fcn_0046fac0(*(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f4c) / 2,

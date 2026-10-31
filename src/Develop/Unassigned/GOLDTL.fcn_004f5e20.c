@@ -33,7 +33,7 @@ extern Rec2d_9a3800 g_9a3800[512];
 extern Pair_99f800 g_99f800[0x800];
 extern char g_7f4ca0[];
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004c5870(int id, int v);
 void __cdecl fcn_005b2a00(char* o, char* p);
 
@@ -49,7 +49,7 @@ int __cdecl fcn_004f5e20(int target, int max)
 	int r;
 
 	n = 0;
-	p = fcn_00508e40(target);
+	p = gm_LookupEntityRecordById(target);
 	m = 0;
 	if (p != 0) {
 		for (k = 0; k < 768 && m < 8; k++) {

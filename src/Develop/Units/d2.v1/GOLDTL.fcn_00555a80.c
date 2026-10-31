@@ -28,7 +28,7 @@ void __cdecl fcn_00546190(Panel* p);
 void __cdecl fcn_00545670(Panel* p, int a1, int a2, char* fmt, int a4);
 void __cdecl fcn_00471b60(int dlg);
 void __cdecl d2_SetForm(int dlg, int a1);
-void __cdecl fcn_00519190(int a0);
+void __cdecl io_AppendText(int a0);
 void __cdecl fcn_004c30a0(int a0, int a1, char* fmt, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00555a80 */
@@ -92,21 +92,21 @@ open:
 	}
 	fcn_00471b60(*(int*) (p->handle + 8));
 	d2_SetForm(*(int*) (p->handle + 8), 1);
-	fcn_00519190(0x16c8);
+	io_AppendText(0x16c8);
 	v = p->base + (int) p->kind * 6 + 0x16c9;
-	fcn_00519190(v);
+	io_AppendText(v);
 	fcn_004c30a0(-7, 0, (char*) 0x6a5e40, 0, 0x64);
 	fcn_004c30a0(-8, 0, (char*) 0x6a5eb4, p->base + (int) p->kind * 6, 0xfa);
 	if (p->sub < 6) {
-		fcn_00519190(p->sub + 0x16e6);
+		io_AppendText(p->sub + 0x16e6);
 		fcn_004c30a0(-8, 0, (char*) 0x6a5ea4, p->sub - 1, 0x64);
 	} else {
-		fcn_00519190((int) p->kind + 0x16ec);
+		io_AppendText((int) p->kind + 0x16ec);
 		fcn_004c30a0(-8, 0, (char*) 0x6a5e98, (int) p->kind, 0x64);
 	}
 	fcn_004c30a0(-7, 0, (char*) 0x67d908, 0, -1);
 	d2_SetForm(*(int*) (p->handle + 8), 2);
-	fcn_00519190(0x16f1);
+	io_AppendText(0x16f1);
 	p->state = 1;
 	return;
 update:

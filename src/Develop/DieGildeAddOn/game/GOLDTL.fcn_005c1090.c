@@ -4,7 +4,7 @@ extern char g_5c0d90[];
 
 #include <string.h>
 
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005cd440(void*, void*, int, int);
 void __cdecl fcn_00532ef0(void);
 
@@ -22,7 +22,7 @@ void __cdecl fcn_005c1090(int a1)
 	*(int*) (buf + 0x10) = 6;
 	*(int*) (buf + 8) = (*(int*)&g_666018);
 	*(int*) (buf + 0xc) = g_66601c;
-	fcn_0051af00(buf + 0x50, 0x190d);
+	io_FormatTextBuffer(buf + 0x50, 0x190d);
 	fcn_005cd440(buf, buf + 0x50, 0, (int) g_5c0d90);
 	fcn_00532ef0();
 }

@@ -15,7 +15,7 @@ struct house {
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0050f950(int, int);
 char* __cdecl fcn_00502cd0();
 char* __cdecl fcn_005049a0(char*);
@@ -23,7 +23,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00546190(char*);
 
@@ -50,7 +50,7 @@ void __cdecl fcn_00566950(char* e)
 	default:
 		return;
 	}
-	o = fcn_00508e40(*(int*) (e + 0xac));
+	o = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 	if (o == 0 || (p = *(char**) (o + 0x16c)) == 0
 	    || fcn_0050f950(*(unsigned short*) (p + 0x27), *(unsigned short*) o) > -26) {
 		fcn_00546190(e);
@@ -72,7 +72,7 @@ void __cdecl fcn_00566950(char* e)
 			if (sel != 0) {
 				amt = (int) fcn_0050bb50(*(unsigned short*) sel, g_773d75);
 				fcn_004c51f0(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, g_773d75, 0);
-				fcn_0051af00(buf, 0x1bb9, *(int*) (o + 0x16c), *(unsigned short*) sel * 2 + 0x9a8, amt);
+				io_FormatTextBuffer(buf, 0x1bb9, *(int*) (o + 0x16c), *(unsigned short*) sel * 2 + 0x9a8, amt);
 				he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle, -1, buf, 0, 0x5f2, *(int*) (p + 1),
 				    *(int*) (q + 2), 0, "_NACHRICHTEN_HS_09");
 			}

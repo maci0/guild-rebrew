@@ -31,10 +31,10 @@ typedef struct {
 extern pos14_7f4c00 g_7f4c00;
 extern __int64 g_666018;
 
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_004c5530(struct msg*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_005cd440(Req*, char*, int, void*);
 void __cdecl fcn_005d61d0(void);
 
@@ -49,7 +49,7 @@ int __cdecl fcn_005d63e0(unsigned char* obj, char* arg)
 
 	result = 0;
 	if (obj[2] != 6 && obj[2] != 7) {
-		e = fcn_00508e40(*(int*) (arg + 0x214));
+		e = gm_LookupEntityRecordById(*(int*) (arg + 0x214));
 		if (e == 0) {
 			return 0x60;
 		}
@@ -73,7 +73,7 @@ int __cdecl fcn_005d63e0(unsigned char* obj, char* arg)
 	req.size = 0x400;
 	req.kind = 6;
 	req.cd = g_666018;
-	fcn_0051af00(text, 0x1d61);
+	io_FormatTextBuffer(text, 0x1d61);
 	if (fcn_005cd440(&req, text, 0, fcn_005d61d0)) {
 		result = 1;
 	}

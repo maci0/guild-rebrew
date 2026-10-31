@@ -8,7 +8,7 @@ typedef struct Node {
 } Node;
 /* SIZE 0xb4 */
 
-void* __cdecl fcn_00508e40(int a);
+void* __cdecl gm_LookupEntityRecordById(int a);
 void __cdecl fcn_005100f0(int a, int b);
 void __cdecl fcn_00500bb0(char* p, int a, int b, int c);
 void __cdecl fcn_00546190(Node* n);
@@ -28,8 +28,8 @@ void __cdecl fcn_0057c7b0(Node* o)
 		return;
 	}
 	o->f70 = n + 1;
-	a = fcn_00508e40(o->fb0);
-	b = fcn_00508e40(o->fac);
+	a = gm_LookupEntityRecordById(o->fb0);
+	b = gm_LookupEntityRecordById(o->fac);
 	if (a == 0) {
 		fcn_00546190(o);
 		return;

@@ -9,7 +9,7 @@ extern int g_1040494;
 extern int g_1040490;
 
 
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 
 void __cdecl fcn_004116d0(void);
 void __cdecl fcn_00533a40(char*);
@@ -17,7 +17,7 @@ void __cdecl fcn_00475220(char*);
 
 void __cdecl fcn_00525ef0(void)
 {
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	ResetDisplayCounters();
 	fcn_004116d0();
 	fcn_00533a40(g_6b5c60);

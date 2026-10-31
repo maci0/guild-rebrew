@@ -49,7 +49,7 @@ void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 char* __cdecl fcn_005c6220(int, int*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005dbe90(char*);
 
 int __cdecl fcn_005dbf10(Ent* ent, Cmd* cmd)
@@ -117,7 +117,7 @@ int __cdecl fcn_005dbf10(Ent* ent, Cmd* cmd)
 		if (ent->kind == 6 && cmd->done == 0) {
 			rec = fcn_005c6220(*cmd->rec, &v8);
 			if (cmd->shown == 1) {
-				fcn_0051af00(text, 0xfe8, *(unsigned short*) (rec + 0x18) + 1);
+				io_FormatTextBuffer(text, 0xfe8, *(unsigned short*) (rec + 0x18) + 1);
 			}
 			fcn_005dbe90(text);
 		}

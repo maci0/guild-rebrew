@@ -1,13 +1,13 @@
 #include <string.h>
 
-extern unsigned short* __cdecl fcn_00508e40(int id);
+extern unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 extern int __cdecl gm_MapEntityStatRange(int type);
 extern int __cdecl fcn_005c6270(unsigned short* rec, int mode);
 extern int __cdecl gm_RandomMod(int range);
 extern void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 extern int __cdecl gm_WalkEntityChain(int v);
 extern void __cdecl fcn_004c51a0(int a, int b, int c, int d);
-extern void __cdecl fcn_0051af00(char* buf, int a, int b, int c);
+extern void __cdecl io_FormatTextBuffer(char* buf, int a, int b, int c);
 extern void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
 
 /* ADDRESS: GOLDTL 0x004b8130 */
@@ -24,7 +24,7 @@ int __cdecl fcn_004b8130(int* arg)
     double d;
     int r;
 
-    rec = (unsigned char*) fcn_00508e40(arg[0]);
+    rec = (unsigned char*) gm_LookupEntityRecordById(arg[0]);
     if (rec == 0) {
         return 1;
     }
@@ -64,7 +64,7 @@ int __cdecl fcn_004b8130(int* arg)
     } else {
         return 0x400;
     }
-    fcn_0051af00(buf, *(unsigned short*) ((char*) arg + 4) + 0x12e7,
+    io_FormatTextBuffer(buf, *(unsigned short*) ((char*) arg + 4) + 0x12e7,
                  mode + 0x2a3, r);
     fcn_00545d40(*(int*) (rec + 4), *(int*) (rec + 4), buf,
                  strlen(buf) > 0x100, 0x603, 0);

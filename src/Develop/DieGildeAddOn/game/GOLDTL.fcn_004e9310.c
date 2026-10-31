@@ -25,7 +25,7 @@ typedef struct {
 
 int __cdecl fcn_004e8b40(int, rec18*);
 #include "Develop/DieGildeAddOn/game/aemter.h"
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e9180(unsigned char*, int);
 
 int __cdecl fcn_004e9310(int k, int max, unsigned char** out)
@@ -45,7 +45,7 @@ int __cdecl fcn_004e9310(int k, int max, unsigned char** out)
 	n = MIN(n, max);
 	cnt = 0;
 	for (i = 0; i < n; i++) {
-		e = fcn_00508e40(list[i].mplayerid);
+		e = gm_LookupEntityRecordById(list[i].mplayerid);
 		if (e != 0 && fcn_004e9180(e, k) != 0)
 			out[cnt++] = e;
 	}

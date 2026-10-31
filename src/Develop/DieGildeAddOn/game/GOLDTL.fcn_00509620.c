@@ -6,7 +6,7 @@ extern char* g_773da8;
 extern char* lpObjektePROT;
 extern unsigned char* g_entity_ptr;
 
-extern void* __cdecl fcn_00508e40(int id);
+extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern void* __cdecl fcn_004b3c00(void* entity);
 extern int __cdecl gm_GetBuildingTypeCategory(int type);
 extern int __cdecl fcn_005059b0(void* record, int a, int b);
@@ -47,7 +47,7 @@ int __cdecl fcn_00509620(int a0, int a1)
 	unsigned char* ep;
 
 	slots = (EntityStruct*) g_slot_table;
-	p = (EntityStruct*) fcn_00508e40(a0);
+	p = (EntityStruct*) gm_LookupEntityRecordById(a0);
 	if (p == 0)
 		return -1;
 	kind = (int) fcn_004b3c00(p);
@@ -62,7 +62,7 @@ int __cdecl fcn_00509620(int a0, int a1)
 	}
 	p_slot = p->entity_index;
 	value = gm_WalkEntityChain(p_slot);
-	q = (EntityStruct*) fcn_00508e40(a1);
+	q = (EntityStruct*) gm_LookupEntityRecordById(a1);
 	if (q == 0)
 		return -2;
 	q_slot = q->entity_index;

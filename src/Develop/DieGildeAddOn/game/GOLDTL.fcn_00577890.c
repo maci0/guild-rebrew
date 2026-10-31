@@ -15,8 +15,8 @@ int __cdecl fcn_00577890(char* a, char* b, int c)
 
 	k = fcn_00577940(c);
 	if (k >= 0) {
-		fa = fcn_00507f10(a, 4);
-		fb = fcn_00507f10(b, 4);
+		fa = gm_GetEntitySkill(a, 4);
+		fb = gm_GetEntitySkill(b, 4);
 		if (gm_RandomFloat01() + (fa - fb * 0.5f) >= 1.0f) {
 			if (*(char**) (b + 0x170) != 0) {
 				id = *(int*) (*(char**) (b + 0x170) + 1);

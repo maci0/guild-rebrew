@@ -46,7 +46,7 @@ void __cdecl d3_DestroyObject(int a);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 int __cdecl fcn_004488e0(char* a, int b, int c);
 void __cdecl fcn_0043a5a0(int a, float* p);
-void __cdecl fcn_0041d9e0(char* a);
+void __cdecl ReportClientMessage(char* a);
 void __cdecl fcn_00469510(int a);
 void __cdecl fcn_00471e30(int a);
 
@@ -304,7 +304,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 			}
 			else {
 				fcn_0064d41a(v15, (char*) 0x6ac6c4, v14);
-				fcn_0041d9e0(v15);
+				ReportClientMessage(v15);
 				g_774654 = 1;
 			}
 			v33 = v23;

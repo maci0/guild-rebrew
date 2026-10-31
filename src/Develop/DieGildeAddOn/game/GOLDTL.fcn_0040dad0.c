@@ -1,25 +1,21 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 
-char g_6761a4[35] = {
-    0x43, 0x68, 0x61, 0x72, 0x61, 0x63, 0x74, 0x65, 0x72, 0x49, 0x64, 0x6c, 0x65, 0x28, 0x29, 0x3a,
-    0x20, 0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x20, 0x63, 0x68, 0x61, 0x72, 0x61, 0x63, 0x74,
-    0x65, 0x72, 0x00,
-};
+char g_6761a4[] = "CharacterIdle(): Invalid character";
 extern char g_6761a4[];
 
 void __cdecl fcn_00425bf0(void*, int, void*);
 
-int __cdecl fcn_0040dad0(int** pp)
+int __cdecl CharacterIdle(int** charakter_argument)
 {
 	void* g;
 
-	if (*pp == 0) {
+	if (*charakter_argument == 0) {
 		g = *(void**) ((char*)&g_6b7e98);
 		fcn_00425bf0(g, *(int*) ((char*) g + 0x118), (void*) g_6761a4);
 		return 0;
 	}
-	return *((int*) *pp + 0x128 / 4) == 0;
+	return *((int*) *charakter_argument + 0x128 / 4) == 0;
 }
 unsigned char _dpad_675318[3724] = {
     0x02,

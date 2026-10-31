@@ -4,7 +4,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_00529160(char*, char*, int, char*);
@@ -18,7 +18,7 @@ void __cdecl fcn_00560d30(char* u)
 	char* q;
 
 	q = 0;
-	h = fcn_00508e40(*(int*) (u + 0xb0));
+	h = gm_LookupEntityRecordById(*(int*) (u + 0xb0));
 	if (h != 0 && (*(char**) (h + 0x17c) == 0 || **(char**) (h + 0x17c) != 0x16)) {
 		e = gm_StartFilteredEntitySearch(1, 1, *(int*) (u + 0x10));
 		if (e != 0) {

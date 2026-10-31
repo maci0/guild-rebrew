@@ -4,7 +4,7 @@ void __cdecl fcn_004e48b0(void);
 void __cdecl d3_DestroyObject(int);
 void __cdecl fcn_004230e0(int);
 void __cdecl fcn_0044c440(int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_004030e0(int);
 void __cdecl fcn_004e4910(void);
@@ -59,7 +59,7 @@ void __cdecl fcn_004d2a60(int a0)
 			                     0x21c +
 			                 0x7f4ca4) ||
 			    *(int*) 0x14cbca0 == -1) {
-				p = fcn_00508e40(*(int*) ((char*) q - 0x180));
+				p = gm_LookupEntityRecordById(*(int*) ((char*) q - 0x180));
 				if (p[2] != 11) {
 					fcn_004ff210(*(unsigned short*) p,
 					             *(int*) ((char*) q - 0x160) -

@@ -35,7 +35,7 @@ extern int g_6b7fac;
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00471af0(int, int);
 
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 
 void __cdecl fcn_00588000(char* w)
 {
@@ -69,14 +69,14 @@ void __cdecl fcn_00588000(char* w)
 				}
 			}
 			if (j != 0) {
-				fcn_00519190((int) "$A");
+				io_AppendText((int) "$A");
 			} else {
-				fcn_00519190((int) "$C");
+				io_AppendText((int) "$C");
 			}
 			if (*(unsigned short*) (o + 0x27) != 0xffff && &((struct house*)g_7f4ca0)[*(unsigned short*) (o + 0x27)] != ((struct house*)g_773da8)) {
-				fcn_00519190(0x406d, *(unsigned short*) (o + 0x27), o, msg);
+				io_AppendText(0x406d, *(unsigned short*) (o + 0x27), o, msg);
 			} else {
-				fcn_00519190(0x406c, o, msg);
+				io_AppendText(0x406c, o, msg);
 			}
 			cnt++;
 		}
@@ -89,8 +89,8 @@ void __cdecl fcn_00588000(char* w)
 		if (g_774a1c != 0) {
 			g_774a1c = 0;
 			((struct deal*)g_77dda0)[i].state = -1;
-			fcn_00519190((int) "$C");
-			fcn_00519190(0x406e);
+			io_AppendText((int) "$C");
+			io_AppendText(0x406e);
 			fcn_00471af0(*(int*) (w + 0x74), 1);
 			return;
 		}

@@ -22,7 +22,7 @@ typedef struct {
 // SIZE 0x18
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 
 int __cdecl fcn_004ea2b0(int kind, char* x)
 {
@@ -35,8 +35,8 @@ int __cdecl fcn_004ea2b0(int kind, char* x)
 	if (x[0x10] != 2)
 		return 0;
 	n = fcn_004e8b80(kind, 6, list);
-	a = fcn_00508e40(*(int*) (x + 0x14));
-	b = fcn_00508e40(*(int*) (x + 4));
+	a = gm_LookupEntityRecordById(*(int*) (x + 0x14));
+	b = gm_LookupEntityRecordById(*(int*) (x + 4));
 	if (a == 0 || a[8] <= 0 || a[0x1b1] != 0 || b == 0 || b[8] <= 0)
 		return 0;
 	for (i = 0; i < n; i++) {

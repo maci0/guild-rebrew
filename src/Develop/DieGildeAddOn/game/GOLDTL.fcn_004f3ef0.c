@@ -24,7 +24,7 @@ extern int __cdecl fcn_004f2d30(int record, int item, int value, int delta);
 extern int __cdecl fcn_004f4440(int slot, int byte, int item, int zero, int* out);
 extern int __cdecl fcn_004f13a0(char* record);
 extern void __cdecl fcn_004f2e80(char* record, int value);
-extern void* __cdecl fcn_00508e40(int id);
+extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern int __cdecl fcn_0050d320(char* slot, char mode);
 extern int __cdecl fcn_004c4450(int handle);
 extern void __cdecl fcn_004c3ff0(void);
@@ -79,7 +79,7 @@ void __cdecl fcn_004f3ef0(char* a0)
 				n = 0;
 				handle = -1;
 			}
-			slot = (char*) fcn_00508e40(entry[1]);
+			slot = (char*) gm_LookupEntityRecordById(entry[1]);
 			if (slot != 0) {
 				value = (int) ((gm_RandomFloat01() + g_6628a0) * g_6628cc
 					* (float) *(unsigned char*) ((char*) entry + 0xc) * g_662c30

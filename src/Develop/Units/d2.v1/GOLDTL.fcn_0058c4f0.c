@@ -26,7 +26,7 @@ extern int g_772514;
 extern char g_6811b0[];
 
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00472640(int, int);
 
@@ -37,7 +37,7 @@ void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel)
 
 	s = *(char**) (a + 0x65);
 	d2_SetForm(dlg, mode);
-	fcn_00519190((int) g_6811b0);
+	io_AppendText((int) g_6811b0);
 	for (i = 0; i < 4; i++) {
 		ids[i] = fcn_0046f740(6 + i * 0x6c, 0, g_665f58[i], g_772514);
 		((struct gadget*)g_1015ea0)[ids[i]].visible = 1;

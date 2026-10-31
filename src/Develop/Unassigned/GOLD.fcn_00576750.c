@@ -3,7 +3,7 @@
 
 /* ADDRESS: GOLD 0x00576750 */
 /* ADDRESS: GOLDTL 0x0057ecf0 */
-int __cdecl fcn_00576750(int* a)
+int __cdecl fcn_0057ecf0(int* a)
 {
 	if (*a == 0x19 || *a == 0x1b || *a == 0x29) {
 		return 0;

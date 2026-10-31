@@ -24,7 +24,7 @@ extern short g_14ce8c2;
 extern int g_102d028;
 extern int g_102d02c;
 
-char* __cdecl fcn_00466190(int id);
+char* __cdecl d2_GetResourceData(int id);
 fcn_004663e0_Glyph* __cdecl fcn_0047b620(char* font, int c);
 void __cdecl fcn_0047a040(int a, int b, int c, int d);
 void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
@@ -45,7 +45,7 @@ void __cdecl fcn_004663e0(char* f, int surf)
 	char buf[24];
 
 	e = &((fcn_004663e0_Ent*)g_1015ea0)[*(int*) (f + 0x134)];
-	font = fcn_00466190(g_67d394);
+	font = d2_GetResourceData(g_67d394);
 	g0 = fcn_0047b620(font, 0);
 	g1 = fcn_0047b620(font, 1);
 	g2 = fcn_0047b620(font, 2);

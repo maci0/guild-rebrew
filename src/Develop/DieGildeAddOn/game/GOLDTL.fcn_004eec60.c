@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-unsigned short* __cdecl fcn_00508e40(int id);
+unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl fcn_00502e30(void* list, unsigned int id);
 void __cdecl gm_KillSpieler(unsigned int idx, int param);
@@ -15,7 +15,7 @@ int __cdecl fcn_004eec60(int cmd, int* ids, char* parent)
 	unsigned int* slot;
 	int count;
 
-	entity = fcn_00508e40(*ids);
+	entity = gm_LookupEntityRecordById(*ids);
 	if (entity != 0) {
 		query = fcn_00502cd0(*(int*) (parent + 0x5d), 2, 6, 0, 0xff);
 		*(int*) (entity + 0xb8) = 0;

@@ -3,7 +3,7 @@ extern int g_774654;
 
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_0052ae80(void);
-char* __cdecl gm_LookupEntityRecordById(int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl fcn_004cf180(void);
 int __cdecl fcn_004cf6b0(void);
 void __cdecl fcn_004d0070(void);
@@ -30,7 +30,7 @@ void __cdecl fcn_004d4640(char* a1)
 		for (i = 0; i < 16; i++) {
 			s = (struct slot_4d4640*) (a1 + 0x94) + i;
 			if (s->active != 0 && s->id != -1) {
-				r = gm_LookupEntityRecordById(s->id);
+				r = gm_LookupEntityRecordIn32SlotTable(s->id);
 				if (r != 0 && *(char**) (r + 0x184) != 0
 				    && *(int*) (*(char**) (r + 0x184) + 0x128) != 0) {
 					busy = 1;

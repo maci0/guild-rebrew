@@ -1,7 +1,8 @@
 # Verification and runner performance
 
-Current command behavior and execution settings. Timings below are dated local
-observations, not cold-build benchmarks.
+The project uses released Rebrew 6.9.0 with unshare. Timings below are dated
+local observations, not cold-build benchmarks. Current build and unreleased
+tooling results live in [current work](TODO.md#working-checkpoint-2026-10-31).
 
 ## Choose the check
 
@@ -42,7 +43,7 @@ Other repaired costs:
   already-current binding preview fell from 71.43s to 29.16s; validation fell
   from 43.79s to 0.57s. That preview is refused after loading, so it does not
   measure an accepted binding or apply. Roundtrip TOML parsing remains the
-  main cost. This fix is included in installed 5.4.0.
+  main cost. This fix was released in 5.4.0.
   Receipt: `.scratch/source-binding-profile/`.
 - **Known bindings disabled warm results.** Cached verdicts now require matching
   binary/compile inputs and unchanged resolution of every recorded operand.
@@ -51,7 +52,7 @@ Other repaired costs:
 - **Redundant SIZE transactions.** [Upstream #38](https://github.com/maci0/rebrew/pull/38)
   skips the locked SIZE transaction when a function binding already stores that
   size, and writes accepted `--fix-sizes` corrections once. This fix is merged
-  and included in installed 5.4.0; no end-to-end speedup is claimed.
+  and released in 5.4.0; no end-to-end speedup is claimed.
 - **Relative path cache crossed projects.** Roots are made absolute before
   memoized symlink resolution, so changing cwd cannot reuse another project's
   metadata root.
@@ -85,7 +86,7 @@ between targets. Alternating Gold and TL runs rejects the foreign results,
 making the next target cold and losing its `--compare` baseline.
 [Upstream #41](https://github.com/maci0/rebrew/pull/41) isolates these files per
 target while preserving identity-checked legacy reads and existing freshness
-guards. This fix is included in installed 5.4.0.
+guards. This fix was released in 5.4.0.
 
 In Rebrew 5.2.0, the CMake CL driver does not use the test/verify object cache.
 Unix Make makes every target object depend on its shared `flags.make`; adding
@@ -100,7 +101,7 @@ unshare CL-driver cache for unchanged single-source commands. Real plain-SP5
 `/MT` and Processor Pack `/ML` controls preserve complete objects, diagnostics
 and frozen timestamps; hot controls dispatch no compiler. Complex preprocessing,
 nested includes, debug outputs and unsupported modes bypass it. This is not a
-whole-build benchmark. The change is included in installed 5.4.0; the upgrade
+whole-build benchmark. The change is released in 5.4.0; the upgrade
 invalidates older derived compiler-cache entries, so the first run may be cold.
 
 Ninja may avoid Make's target-wide flag invalidation, but VC6 header dependency
@@ -121,8 +122,8 @@ and CMake CL/LINK/LIB stay on the configured unshare runner.
 Goal110 compared complete Gold `/ML` and TL `/MT` COFF objects using identical
 argv and pinned time: Docker and unshare outputs were equal. The native probes
 took 3.390s/2.513s versus Docker's 12.713s/18.796s under shared host load. This is
-not a controlled whole-build speedup. Both subsequent full client passes linked;
-compiler-warning cleanup and final-source rebuilds remain separate work.
+not a controlled whole-build speedup. Both client passes at that checkpoint linked. The latest Gold build does not;
+see [current work](TODO.md#working-checkpoint-2026-10-31).
 
 ## Imported slots
 

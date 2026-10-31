@@ -16,7 +16,7 @@ extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl fcn_005463a0(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5ed0(int, char*, int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
@@ -49,7 +49,7 @@ int __cdecl fcn_0055be70(struct search* s)
 			continue;
 		}
 		for (j = 0; j < 4; j++) {
-			if (((int*) (u + 0xc4))[j] != -1 && (h = fcn_00508e40(((int*) (u + 0xc4))[j])) != 0) {
+			if (((int*) (u + 0xc4))[j] != -1 && (h = gm_LookupEntityRecordById(((int*) (u + 0xc4))[j])) != 0) {
 				a = *(char**) (s->who + 0x61);
 				b = *(char**) (*(char**) (h + 0x184) + 0x34);
 				dx = *(float*) (a + 0x4c) - *(float*) (b + 0x4c);
@@ -67,7 +67,7 @@ int __cdecl fcn_0055be70(struct search* s)
 	}
 	s->found = found;
 	for (j = 0; j < 4; j++) {
-		if (((int*) (found + 0xc4))[j] != -1 && fcn_00508e40(((int*) (found + 0xc4))[j]) != 0) {
+		if (((int*) (found + 0xc4))[j] != -1 && gm_LookupEntityRecordById(((int*) (found + 0xc4))[j]) != 0) {
 			fcn_004c5c80(((int*) (found + 0xc4))[j]);
 			if (*(int*) (h + 4) == ((int*) (found + 0xc4))[j]) {
 				fcn_004c5ed0(((int*) (found + 0xc4))[j], "gestik/herranwinken", 2);

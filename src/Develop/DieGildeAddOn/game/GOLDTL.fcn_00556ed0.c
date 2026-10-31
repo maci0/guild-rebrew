@@ -36,7 +36,7 @@ float __cdecl fcn_004fef80(char*);
 int __cdecl fcn_005c6270(char*, int);
 int __cdecl fcn_00556e80(unsigned short*);
 void __cdecl fcn_005498b0(char*, char*, char*, char*, int, float);
-void __cdecl fcn_0051af00(char*, char*, ...);
+void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00546190(char*);
 
@@ -64,7 +64,7 @@ void __cdecl fcn_00556ed0(char* s)
 		fcn_00546190(s);
 		return;
 	}
-	fcn_0051af00(buf, "-------> RunSimKrankheiten: calculating at <Day = %i Time = %i.2:%i.2>",
+	io_FormatTextBuffer(buf, "-------> RunSimKrankheiten: calculating at <Day = %i Time = %i.2:%i.2>",
 	    ((Clock*) &g_7f4c00)->day, ((Clock*) &g_7f4c00)->hour, ((Clock*) &g_7f4c00)->minute);
 	if (*(int*) (s + 0xb0) == 0) {
 		steps[0] = 1;
@@ -117,7 +117,7 @@ void __cdecl fcn_00556ed0(char* s)
 					} else {
 						if (g < fcn_004fef80((char*) p)
 						    && (p->type == 6 || p->type == 7)) {
-							fcn_0051af00(buf, (char*) 0x163c, (char*) (r + 0x1632));
+							io_FormatTextBuffer(buf, (char*) 0x163c, (char*) (r + 0x1632));
 							fcn_00545d40(p->handle, -1, buf, 0, 0x5f7, g_6b5c60);
 						}
 					}

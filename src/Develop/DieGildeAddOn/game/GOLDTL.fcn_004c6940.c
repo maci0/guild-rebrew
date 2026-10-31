@@ -3,7 +3,7 @@
 extern int* g_772f40;
 
 void __cdecl fcn_004c4330(void* p);
-char* __cdecl gm_LookupEntityRecordById(int id);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int id);
 
 /* ADDRESS: GOLDTL 0x004c6940 */
 void __cdecl fcn_004c6940(void* a0, int a1, void* a2)
@@ -29,7 +29,7 @@ void __cdecl fcn_004c6940(void* a0, int a1, void* a2)
 			*(int*) (buf + 0x29) = *(int*) (q + 0x88);
 			*(int*) (buf + 0x2d) = *(int*) (q + 0x8c);
 			if (a1 == 2) {
-				r = gm_LookupEntityRecordById(*(int*) (buf + 0x45));
+				r = gm_LookupEntityRecordIn32SlotTable(*(int*) (buf + 0x45));
 				if (r != 0) {
 					*(int*) (buf + 0x5d) = *(int*) (r + 0x24);
 				}

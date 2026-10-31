@@ -3,7 +3,7 @@
 
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fa5b0(int, void*, void*);
 
 /* ADDRESS: GOLDTL 0x004aa550 */
@@ -24,7 +24,7 @@ int __cdecl fcn_004aa550(unsigned short* a0, char* a1, char* a2)
 		e = fcn_005463a0(1, 0, 0x45);
 		while (e != 0) {
 			if (*(int*) (e + 0xac) == *(int*) ((char*) a0 + 4)) {
-				*(int*) (msg + 0x21c) = fcn_00508e40(*(int*) (e + 0xb0));
+				*(int*) (msg + 0x21c) = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 				break;
 			}
 			e = he_fn_Handlung();

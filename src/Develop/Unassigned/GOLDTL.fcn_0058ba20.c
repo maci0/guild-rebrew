@@ -1,32 +1,32 @@
 
 
 
-void __cdecl fcn_0051af00(char*, const char*, ...);
+void __cdecl io_FormatTextBuffer(char*, const char*, ...);
 
 void __cdecl fcn_0058ba20(char* o, char* buf)
 {
 	if (*(int*) (o + 0x30) != 0 && *(int*) (o + 0x34) != 0) {
 		if (*(int*) (o + 0x38) == 0) {
-			fcn_0051af00(buf, "%s, %s", *(int*) (o + 0x30) + 0x114, *(int*) (o + 0x34) + 0x130);
+			io_FormatTextBuffer(buf, "%s, %s", *(int*) (o + 0x30) + 0x114, *(int*) (o + 0x34) + 0x130);
 		}
 		else {
-			fcn_0051af00(buf, "%s, %s", *(int*) (o + 0x30) + 0x11e, *(int*) (o + 0x34) + 0x18f);
+			io_FormatTextBuffer(buf, "%s, %s", *(int*) (o + 0x30) + 0x11e, *(int*) (o + 0x34) + 0x18f);
 		}
 	}
 	else if (*(int*) (o + 0x30) != 0) {
 		if (*(int*) (o + 0x38) == 0) {
-			fcn_0051af00(buf, "%s", *(int*) (o + 0x30) + 0x114);
+			io_FormatTextBuffer(buf, "%s", *(int*) (o + 0x30) + 0x114);
 		}
 		else {
-			fcn_0051af00(buf, "%s", *(int*) (o + 0x30) + 0x11e);
+			io_FormatTextBuffer(buf, "%s", *(int*) (o + 0x30) + 0x11e);
 		}
 	}
 	else if (*(int*) (o + 0x34) != 0) {
 		if (*(int*) (o + 0x38) == 0) {
-			fcn_0051af00(buf, "%s", *(int*) (o + 0x34) + 0x130);
+			io_FormatTextBuffer(buf, "%s", *(int*) (o + 0x34) + 0x130);
 		}
 		else {
-			fcn_0051af00(buf, "%s", *(int*) (o + 0x34) + 0x18f);
+			io_FormatTextBuffer(buf, "%s", *(int*) (o + 0x34) + 0x18f);
 		}
 	}
 	else {

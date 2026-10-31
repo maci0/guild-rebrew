@@ -2,7 +2,7 @@
 
 
 int __cdecl fcn_004f4830(int, void*);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl fcn_004f5110(void* a1, int a2)
 {
@@ -20,16 +20,16 @@ int __cdecl fcn_004f5110(void* a1, int a2)
 	v = a * 5 + 0x13fd;
 	switch (b) {
 	case 0:
-		fcn_0051af00(a1, v + 1, v, *(int*) (local + 0x18));
+		io_FormatTextBuffer(a1, v + 1, v, *(int*) (local + 0x18));
 		break;
 	case 1:
-		fcn_0051af00(a1, v + 1, v, *(int*) (local + 0x18) + 0x13dd);
+		io_FormatTextBuffer(a1, v + 1, v, *(int*) (local + 0x18) + 0x13dd);
 		break;
 	case 2:
-		fcn_0051af00(a1, v + 1, v, *(int*) (local + 0x18) + 0x13e6);
+		io_FormatTextBuffer(a1, v + 1, v, *(int*) (local + 0x18) + 0x13e6);
 		break;
 	case 3:
-		fcn_0051af00(a1, v + 1, v, *(int*) (local + 0x18) + 0x13ec);
+		io_FormatTextBuffer(a1, v + 1, v, *(int*) (local + 0x18) + 0x13ec);
 		break;
 	default:
 		r = 0;

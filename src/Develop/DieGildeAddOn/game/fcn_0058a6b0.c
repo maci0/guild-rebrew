@@ -6,7 +6,7 @@ typedef unsigned short u16;
 int __cdecl fcn_0050dac0(int id);
 int __cdecl fcn_005cd440(void* a, int b, int c, int d);
 int __cdecl fcn_00577ab0(int h);
-void __cdecl fcn_0051af00(char* out, int id, int a);
+void __cdecl io_FormatTextBuffer(char* out, int id, int a);
 int __cdecl fcn_00526120(char* out, int a);
 
 /* ADDRESS: GOLDTL 0x0058a6b0 */
@@ -31,7 +31,7 @@ int __cdecl fcn_0058a6b0(void)
     ent = fcn_005cd440(query, *(int*) 0x14b53d0, 0, 0);
     if (fcn_00577ab0(ent) != 0)
         return 0;
-    fcn_0051af00(text, 0x4030, (int) *(u16*) ent);
+    io_FormatTextBuffer(text, 0x4030, (int) *(u16*) ent);
     fcn_00526120(text, 0);
     return 0;
 }

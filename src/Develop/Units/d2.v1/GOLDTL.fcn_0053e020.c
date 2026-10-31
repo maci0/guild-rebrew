@@ -16,7 +16,7 @@ int __cdecl fcn_004e4470();
 int __cdecl fcn_004e44f0();
 int __cdecl fcn_004fdec0();
 int __cdecl fcn_00506d50();
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_005268c0();
 int __cdecl fcn_005373e0();
 int __cdecl fcn_0053c560();
@@ -49,13 +49,13 @@ int __cdecl fcn_0053e020(void)
 	v2 = fcn_00470820(0, 0, 0x68116c);
 	fcn_00471b60(v2);
 	d2_SetForm(v2, 0);
-	v3 = fcn_00519190(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca);
+	v3 = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca);
 	v4 = fcn_00472250(v2, 0, v3);
 	v5 = fcn_00472250(v2, 0, v3 + 1);
 	v6 = fcn_00472250(v2, 0, v3 + 2);
 	v3 = fcn_00472250(v2, 0, v3 + 3);
 	if (*(unsigned char*) 0x6a375c > 1) {
-		v13 = fcn_00472250(v2, 0, fcn_00519190(0x681164, 2, 0x1acb));
+		v13 = fcn_00472250(v2, 0, io_AppendText(0x681164, 2, 0x1acb));
 	}
 	if (*(int*) 0x776700 > -1) {
 		*(int*) 0x776700 = -1;
@@ -67,7 +67,7 @@ int __cdecl fcn_0053e020(void)
 		v8 = 0;
 	}
 	fcn_004695a0(v7, v8);
-	fcn_00469470(v7, fcn_00472250(v2, 0, fcn_00519190(0x7e)));
+	fcn_00469470(v7, fcn_00472250(v2, 0, io_AppendText(0x7e)));
 	for (;;) {
 		if (fcn_005373e0(0x53e020, 0xc6) == 0) {
 			break;

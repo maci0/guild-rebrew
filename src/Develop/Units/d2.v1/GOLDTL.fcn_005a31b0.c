@@ -14,7 +14,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(char* fmt, ...);
+int __cdecl io_AppendText(char* fmt, ...);
 void __cdecl d2_SetBackgroundTexture(const char* name, int win);
 char* __cdecl fcn_00502cd0(int, ...);
 char* __cdecl gm_FindSlotById(int, int);
@@ -69,9 +69,9 @@ void __cdecl fcn_005a31b0(char* a0)
 				*(int*) (win + 0x10162f0) = 0x1c;
 				*(int*) (win + 0x10162f4) = 0xb;
 				d2_SetForm(idx, 1);
-				fcn_00519190((char*) 0x1a11);
+				io_AppendText((char*) 0x1a11);
 				d2_SetForm(idx, 5);
-				fcn_00519190((char*) 0x1a14, *(int*) (a0 + 0x65) * 0x2f4 + g_868060, *(int*) (*(int*) (a0 + 0x65) * 0x2a90 + (int) g_85ab80));
+				io_AppendText((char*) 0x1a14, *(int*) (a0 + 0x65) * 0x2f4 + g_868060, *(int*) (*(int*) (a0 + 0x65) * 0x2a90 + (int) g_85ab80));
 				win = *(int*) (idx * 700 + 0x103814c) * 0x3cc;
 				v12p = g_1015f40 + win;
 				sprintf(name, "Wappen128_ns_Stadt_%s", (char*) (*(int*) (a0 + 0x65) * 0x2f4 + (int) g_868060));
@@ -87,7 +87,7 @@ void __cdecl fcn_005a31b0(char* a0)
 					return;
 				}
 				d2_SetForm(idx, 3);
-				fcn_00519190((char*) 0x1a12);
+				io_AppendText((char*) 0x1a12);
 				it = gm_NextEntityQueryMatch();
 				while (it != 0) {
 					p = (int) gm_FindSlotById(*(int*) (a0 + 0x65), *it);
@@ -99,7 +99,7 @@ void __cdecl fcn_005a31b0(char* a0)
 				}
 				n = 0;
 				d2_SetForm(idx, 4);
-				fcn_00519190((char*) 0x1a13);
+				io_AppendText((char*) 0x1a13);
 				it = gm_NextEntityQueryMatch();
 				while (it != 0) {
 					p = (int) gm_FindSlotById(*(int*) (a0 + 0x65), *it);

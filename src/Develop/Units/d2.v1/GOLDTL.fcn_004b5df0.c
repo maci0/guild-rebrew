@@ -43,7 +43,7 @@ void __cdecl fcn_004b5630(Spec* s, int flags);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_SetForm(int k, int i);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_004c5790(int, Req*);
@@ -92,12 +92,12 @@ void __cdecl fcn_004b5df0(int flags)
 	dlg = fcn_00470820(0, 0, "special\\mission");
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1b94, ent->id);
+	io_AppendText(0x1b94, ent->id);
 	if (level > -1 && level < 4) {
-		b_ok = fcn_00472250(dlg, 1, fcn_00519190(0x1b96, 0x1b98));
+		b_ok = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b98));
 	}
-	b_back = fcn_00472250(dlg, 1, fcn_00519190(0x1b96, 0x1b99));
-	b_quit = fcn_00472250(dlg, 1, fcn_00519190(0x1b96, 0x1b9a));
+	b_back = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b99));
+	b_quit = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b9a));
 	g_100f1dc = -1;
 	mode = flags | 0x80;
 	do {

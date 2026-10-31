@@ -13,14 +13,14 @@ struct Snd {
 	SndVtbl* vtbl;
 };
 
-char* __cdecl fcn_0041f9b0(int id);
+char* __cdecl FindVideoById(int id);
 
 int __cdecl fcn_0041f4c0(int id, float vol)
 {
 	char* o;
 	Snd* s;
 
-	o = fcn_0041f9b0(id);
+	o = FindVideoById(id);
 	if (o != 0 && vol >= 0.0f && vol <= 1.0f) {
 		s = *(Snd**) (o + 0x12c);
 		if (s->vtbl->SetVolume(s, (long) (vol * -10000.0f)) >= 0) {

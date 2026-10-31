@@ -16,12 +16,12 @@ typedef struct {
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_005463a0();
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472170(int, int);
 int __cdecl fcn_00525f60(char*, int);
@@ -60,9 +60,9 @@ int __cdecl fcn_005c1110(void)
 	b[3] = -1;
 	h = fcn_00470820(0, 0, (char*) 0x6ac514);
 	fcn_00471b60(h);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
-	fcn_00519190(0x1912);
+	io_AppendText(0x1912);
 	*(int*) 0x100f1dc = -1;
 	do {
 		if ((unsigned int) t <= (unsigned int) *(int*) 0x6b7fac) {
@@ -84,16 +84,16 @@ int __cdecl fcn_005c1110(void)
 						goto done;
 					}
 					if (ent->f70 > -1) {
-						p = fcn_00508e40(ent->fbc);
+						p = gm_LookupEntityRecordById(ent->fbc);
 						if (p != 0) {
 							d2_SetForm(h, i - 1);
-							fcn_00519190(0x6811b0);
-							fcn_00519190(0x1913, 0x1916 + (int) ent->fc1,
+							io_AppendText(0x6811b0);
+							io_AppendText(0x1913, 0x1916 + (int) ent->fc1,
 							    (int) *p);
 							d2_SetForm(h, i);
-							fcn_00519190(0x6811b0);
+							io_AppendText(0x6811b0);
 							*(int*) ((char*) a + k) = fcn_00472250(h, i,
-							    fcn_00519190(0x1914, 2));
+							    io_AppendText(0x1914, 2));
 							*(int*) ((char*) b + k) = ent->f4;
 							fcn_00472170(*(int*) ((char*) 0x10161bc
 							    + 0x3cc * *(int*) ((char*) 0x1038140
@@ -112,7 +112,7 @@ int __cdecl fcn_005c1110(void)
 				q = (int*) ((char*) 0x1038140 + h * 0x2bc + n * 8);
 				for (j = n * 2 - 1; j < 9; j += 2) {
 					d2_SetForm(h, j);
-					fcn_00519190(0x6811b0);
+					io_AppendText(0x6811b0);
 					fcn_00472170(*(int*) ((char*) 0x10161bc
 					    + 0x3cc * *q), 0);
 					q += 2;

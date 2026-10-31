@@ -2,7 +2,7 @@ int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl fcn_004fa5b0(int, int, void*);
 int __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00526010(int, int, char);
 int __cdecl fcn_0055c0f0(unsigned short*, int);
@@ -11,9 +11,9 @@ int __cdecl fcn_00579640(unsigned short*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00519190(int, int, int, int);
+int __cdecl io_AppendText(int, int, int, int);
 void __cdecl fcn_005c9220(int*);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_00471e30(int);
@@ -52,7 +52,7 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 	p = fcn_005463a0(2, 2, *(unsigned short*) 0x774970, 0, 0x1a);
 	while (p) {
 		if (*(int*) (p + 0xb4) == *(int*) (a0 + 2)) {
-			fcn_0051af00(text, 0x170a, *a0);
+			io_FormatTextBuffer(text, 0x170a, *a0);
 			fcn_00526120(text, 4);
 			return 0;
 		}
@@ -62,27 +62,27 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 		return 0;
 	}
 	if (!fcn_0055c0f0(a0, *(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0)) {
-		fcn_0051af00(tiny, 0x170b, *a0);
+		io_FormatTextBuffer(tiny, 0x170b, *a0);
 		fcn_00526120(tiny, 0);
 		return 0;
 	}
 	if (!fcn_0055c0a0(a0, *(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0)) {
-		fcn_0051af00(tiny, 0x170c, *a0);
+		io_FormatTextBuffer(tiny, 0x170c, *a0);
 		fcn_00526120(tiny, 0);
 		return 0;
 	}
 	if (!fcn_00579640(a0, *(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0)) {
-		fcn_0051af00(tiny, 0x409f);
+		io_FormatTextBuffer(tiny, 0x409f);
 		fcn_00526120(tiny, 0);
 		return 0;
 	}
 	hwnd = fcn_00470820(0, 0, (char*) 0x6ac494);
 	fcn_00471b60(hwnd);
 	d2_SetForm(hwnd, 1);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	if (a0) {
 		d2_SetForm(hwnd, 1);
-		idx = fcn_00472250(hwnd, 1, fcn_00519190(0x1708, 0x1711, timeout, *a0));
+		idx = fcn_00472250(hwnd, 1, io_AppendText(0x1708, 0x1711, timeout, *a0));
 	}
 	for (i = 0; i < 6; i++) {
 		t[i] = -1;
@@ -109,7 +109,7 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 			fcn_004c4eb0((char*) 0x6ac4c0);
 			fcn_004c5530(evt);
 			fcn_004c4ef0((char*) 0x6ac4c0);
-			fcn_0051af00(text, 0x1709, *a0);
+			io_FormatTextBuffer(text, 0x1709, *a0);
 			fcn_00526120(text, 0);
 			*(int*) 0x774654 = 1;
 			res = 1;

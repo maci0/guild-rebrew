@@ -32,7 +32,7 @@ void __cdecl fcn_00500bb0(void*, int, int, int);
 void __cdecl fcn_004c5980(void*);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00554b90 */
@@ -64,7 +64,7 @@ void __cdecl fcn_00554b90(char* e)
 			fcn_004c5620(-1, e);
 			return;
 		}
-		fcn_0051af00(buf, 0x11be, r, *(int*) (e + 0xb0));
+		io_FormatTextBuffer(buf, 0x11be, r, *(int*) (e + 0xb0));
 		for (i = 0; i < 768; i++) {
 			h = &g_7f4ca0[i];
 			if ((h->type == 6 || h->type == 7) && h->level > 0) {

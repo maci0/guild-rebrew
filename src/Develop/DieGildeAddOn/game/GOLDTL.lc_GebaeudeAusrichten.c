@@ -6,7 +6,7 @@ extern unsigned short g_774970;
 
 unsigned char *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char *__cdecl gm_FindNextFilteredEntity(void);
-void __cdecl fcn_0051af00(char *, int, ...);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl fcn_00526120(char *, int);
 
 /* ADDRESS: GOLDTL 0x005988b0 */
@@ -24,7 +24,7 @@ int __cdecl lc_GebaeudeAusrichten(int a1, void *a2, int a3, int a4)
 		p = gm_StartFilteredEntitySearch(1, 5, 0);
 		while (p != 0) {
 			if (*p == a1) {
-				fcn_0051af00(loc, 0x1a00, type_name);
+				io_FormatTextBuffer(loc, 0x1a00, type_name);
 				if (fcn_00526120(loc, 0) == 0) {
 					return 0;
 				}

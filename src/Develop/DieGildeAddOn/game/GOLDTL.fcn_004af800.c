@@ -16,9 +16,9 @@ typedef struct {
 
 extern char g_7f4ca0[];
 
-Rec21c* __cdecl fcn_00508e40(int);
+Rec21c* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_0064eeec(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004ae0f0(int);
@@ -102,7 +102,7 @@ int __cdecl fcn_004af800(int mode, int* pairs, int idx, char* text, void* out)
 		}
 	}
 	if (mode == 1) {
-		r = fcn_00508e40(pairs[idx * 2 + 1]);
+		r = gm_LookupEntityRecordById(pairs[idx * 2 + 1]);
 		if (r == 0 || r->active <= 0) {
 			return 0;
 		}
@@ -136,7 +136,7 @@ int __cdecl fcn_004af800(int mode, int* pairs, int idx, char* text, void* out)
 		pairs[idx * 2 + 1] = r->key;
 	}
 send:
-	fcn_0051af00(out, (int) buf, r->id);
+	io_FormatTextBuffer(out, (int) buf, r->id);
 	return 1;
 }
 #pragma optimize("", on)

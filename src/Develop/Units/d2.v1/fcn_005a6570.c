@@ -5,7 +5,7 @@ extern int g_774654;
 void* __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl fcn_00471b60(int dlg);
 void __cdecl d2_SetForm(int dlg, int a);
-int __cdecl fcn_00519190(int id, ...);
+int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_00472250(int dlg, int a, int b);
 void __cdecl fcn_00472380(int w, int a, int b, int c);
 int __cdecl fcn_005373e0(void* fn, int name);
@@ -26,15 +26,15 @@ void __cdecl fcn_005a6570(char* o)
     dlg = fcn_00470820(0, 0, "locations\\geldleihe\\geldleihe_WechselGebuehren");
     fcn_00471b60((int) dlg);
     d2_SetForm((int) dlg, 2);
-    fcn_00519190(0x1908);
+    io_AppendText(0x1908);
     d2_SetForm((int) dlg, 1);
-    id = fcn_00519190(0x1907);
+    id = io_AppendText(0x1907);
     w1 = fcn_00472250((int) dlg, 1, id);
     w2 = fcn_00472250((int) dlg, 1, id + 1);
     fcn_00472380(w2, 3, 0xf, *(int*) (o + 0x69));
     fcn_00472380(w1, 3, 0xf, *(int*) (o + 0x6d));
 
-    while (fcn_005373e0((void*) 0x5a6570, 0x677c7) != 0) {
+    while (fcn_005373e0((void*) fcn_005a6570, 0x677c7) != 0) {
         if (g_14ce8e0 != 0 || g_100f1dc == 1)
             g_774654 = 1;
         if (g_100f1dc == 2) {

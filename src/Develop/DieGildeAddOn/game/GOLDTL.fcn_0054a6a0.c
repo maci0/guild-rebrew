@@ -10,13 +10,13 @@ int __cdecl fcn_004c5620(int, int);
 void __cdecl fcn_00500bb0(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005b23e0(int, int, int);
 void __cdecl fcn_004c4510(int, int);
 void __cdecl fcn_004c4570(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004fd4f0(int, int*);
-int __cdecl fcn_0051af00(char*, int, int, int);
+int __cdecl io_FormatTextBuffer(char*, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004c5150(int, int, int, int);
 int __cdecl fcn_00493200(int, int);
@@ -79,7 +79,7 @@ void __cdecl fcn_0054a6a0(int a0)
 			v9 = (char) 0xff;
 			v10 = 0xffffffff;
 			v15 = 0;
-			v4 = fcn_00508e40(*(int*) (v3 + 0x1e));
+			v4 = gm_LookupEntityRecordById(*(int*) (v3 + 0x1e));
 			if (v4) {
 				v15 = v4;
 				fcn_005b23e0(
@@ -100,7 +100,7 @@ void __cdecl fcn_0054a6a0(int a0)
 			                       0x21c +
 			                   0x7f4ca2);
 				if (v1 == 6 || v1 == 7) {
-					fcn_0051af00(v12, 0x19a7, pair[1], pair[0]);
+					io_FormatTextBuffer(v12, 0x19a7, pair[1], pair[0]);
 					fcn_00545d40(*(int*) ((unsigned int) *
 					                              (unsigned short*) (v7 + 0x27) *
 					                              0x21c +

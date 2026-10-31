@@ -32,7 +32,7 @@ extern char g_7f4ca0[];
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_004c5530(Packet*);
@@ -43,7 +43,7 @@ int __cdecl fcn_0058ff60(char* a1, unsigned short* a2, int a3)
 	char buf[0x400];
 	char* d;
 
-	fcn_0051af00(buf, 0x413a, *a2);
+	io_FormatTextBuffer(buf, 0x413a, *a2);
 	if (fcn_00526120(buf, 1) != 0) {
 		d = fcn_00502cd0(*(int*) (a1 + 0x5d), 1, 0, 0x211);
 		memset(&pkt, 0, sizeof(pkt));

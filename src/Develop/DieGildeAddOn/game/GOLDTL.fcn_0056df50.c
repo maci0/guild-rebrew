@@ -21,7 +21,7 @@ char* __cdecl gm_SearchTable67(int);
 void __cdecl fcn_004c5f60(int, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_00567030(char*, int*, int*);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
@@ -58,7 +58,7 @@ void __cdecl fcn_0056df50(char* u)
 		h = &((struct house*)g_7f4ca0)[*(unsigned short*) (t + 0x25)];
 		if (h != 0) {
 			if (h->type == 6 || h->type == 7) {
-				fcn_0051af00(text, 0x17e6, t, *(unsigned short*) p, *(int*) (u + 0xbc));
+				io_FormatTextBuffer(text, 0x17e6, t, *(unsigned short*) p, *(int*) (u + 0xbc));
 				he_MessageBoxQuickjump(h->owner, -1, text, 0, 0x5ec, *(int*) (t + 1), -1, 0, g_699874);
 			}
 			fcn_004c5150(h->owner, -1, g_773d75, *(int*) (u + 0xbc));

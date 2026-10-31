@@ -8,7 +8,7 @@ extern char g_6b5c60[];
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_0041d9e0(char*);
+void __cdecl ReportClientMessage(char*);
 
 /* ADDRESS: GOLDTL 0x00515010 */
 void __cdecl fcn_00515010(void)
@@ -68,7 +68,7 @@ void __cdecl fcn_00515010(void)
 				q = tbl + (gm_RandomMod((unsigned char) cnt) & 0xffff) * 0x40;
 				if (strlen(q) >= 0x20) {
 					sprintf(tmp, (char*) 0x69983c, q);
-					fcn_0041d9e0(tmp);
+					ReportClientMessage(tmp);
 				} else {
 					strcpy((char*) (e + 5), q);
 				}

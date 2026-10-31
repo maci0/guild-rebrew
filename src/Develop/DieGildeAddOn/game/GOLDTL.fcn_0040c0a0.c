@@ -45,7 +45,7 @@ Task* __cdecl fcn_0040c0a0(char* e)
 
 	t = (Task*) ch_GetFreeQueueEntry();
 	if (t == 0) {
-		fcn_0041d9e0("no free task slot");
+		ReportClientMessage("no free task slot");
 		return 0;
 	}
 	memset(t, 0, sizeof(Task));

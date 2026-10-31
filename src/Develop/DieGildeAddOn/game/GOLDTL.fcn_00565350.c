@@ -6,16 +6,16 @@ extern unsigned char g_773d75;
 extern int g_100f1dc;
 
 int __cdecl fcn_00500cb0(void*, void*);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_GetOppositeStatIndex(int);
 void __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_00546190(char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00519190(int, ...);
+void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_004c6470(int, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl fcn_00422700(char*);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
@@ -48,7 +48,7 @@ void __cdecl fcn_00565350(int a0)
 	if (0 < fcn_00500cb0((void*) (a0 + 0x44), (void*) 0x7f4c00))
 		return;
 	if (!*(char*) (a0 + 0xb1)) {
-		v = fcn_00508e40(*(unsigned int*) (a0 + 0xac));
+		v = gm_LookupEntityRecordById(*(unsigned int*) (a0 + 0xac));
 		if (v) {
 			*(char*) (a0 + 0xb0) = *(char*) (v + 0x164);
 			*(char*) (a0 + 0xb1) = *(char*) (v + 0x164) - 1;
@@ -63,18 +63,18 @@ void __cdecl fcn_00565350(int a0)
 		}
 		d2_SetForm(*(int*) (*(int*) (a0 + 0x74) + 8), 0);
 		fcn_00471b60(*(int*) (*(int*) (a0 + 0x74) + 8));
-		ent = (unsigned char*) fcn_00508e40(*(unsigned int*) (a0 + 0xac));
+		ent = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (a0 + 0xac));
 		y = (-(*(char*) (ent + 9) != 0) & 0x5f) + 0x130;
 		x = gm_MapEntityStatRange(*(char*) (a0 + 0xb0));
 		z = gm_GetOppositeStatIndex(*(char*) (a0 + 0xb0));
 		d2_SetForm(*(int*) (*(int*) (a0 + 0x74) + 8), 1);
 		v7 = (int) ((float) z * 0.5 + (float) (3 * x + 0x155a));
-		fcn_00519190(0x15c3, g_773d75 * 0x2f4 + (int) 0x868080, (int) 0x7f4c00,
+		io_AppendText(0x15c3, g_773d75 * 0x2f4 + (int) 0x868080, (int) 0x7f4c00,
 			*(unsigned char*) (a0 + 0xb1) + y, v7);
 		fcn_004c6470(*(int*) (ent + 4), *(char*) (a0 + 0xb1));
 		kind = *(char*) (ent + 2);
 		if (kind == 6 || kind == 7 || kind == 5) {
-			fcn_0051af00(buf, 0x1c1f, *(unsigned short*) ent,
+			io_FormatTextBuffer(buf, 0x1c1f, *(unsigned short*) ent,
 				*(unsigned char*) (a0 + 0xb0) + y, *(unsigned char*) (a0 + 0xb1) + y);
 			for (p = (char*) 0x7f4ca4; (int) p < 0x85a0a4; p += 0x21c) {
 				kind = *(char*) (p - 2);
@@ -86,7 +86,7 @@ void __cdecl fcn_00565350(int a0)
 		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
 		return;
 	case 1:
-		ent = (unsigned char*) fcn_00508e40(*(unsigned int*) (a0 + 0xac));
+		ent = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (a0 + 0xac));
 		x = gm_MapEntityStatRange(*(char*) (a0 + 0xb0));
 		v6 = gm_GetOppositeStatIndex(*(char*) (a0 + 0xb0));
 		sprintf(name, "brk_%02i", x);

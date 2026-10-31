@@ -4,14 +4,14 @@
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 
 int __cdecl fcn_004cd620(char* x, char* out)
 {
 	char* e;
 	int v;
 
-	e = fcn_00508e40(*(int*) (x + 0x10));
+	e = gm_LookupEntityRecordById(*(int*) (x + 0x10));
 	if (out != 0) {
 		out[0] = 2;
 		out[1] = 0;

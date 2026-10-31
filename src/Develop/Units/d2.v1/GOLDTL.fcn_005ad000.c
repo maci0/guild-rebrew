@@ -2,18 +2,18 @@
    object, shows the 0x6ab180 dialog and forwards the 0x39 reply while
    fcn_005373e0 keeps the loop alive. */
 int __cdecl fcn_004e8a80(int, void*);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_005463a0(int, int, int, int, int);
-int __cdecl fcn_0051af00(char*, int, ...);
+int __cdecl io_FormatTextBuffer(char*, int, ...);
 void* __cdecl fcn_00470820(int, int, void*);
 void __cdecl fcn_00471b60(void*);
 void __cdecl fcn_00471e30(void*);
 void __cdecl d2_SetForm(void*, int);
 int __cdecl fcn_00472250(void*, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
-void __cdecl fcn_00473a90(int, int);
-int __cdecl fcn_00519190(int, ...);
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0050d360(int);
 int __cdecl fcn_0050b710(int, char);
 int __cdecl fcn_0050b750(int, char);
@@ -44,14 +44,14 @@ void __cdecl fcn_005ad000(void)
 	if (fcn_004e8a80(0x11, msg.pkt) == 0) {
 		return;
 	}
-	obj = fcn_00508e40(*(int*) (msg.pkt + 4));
+	obj = gm_LookupEntityRecordById(*(int*) (msg.pkt + 4));
 	if (obj == 0) {
 		fcn_00526120(*(int*) 0x14ab9f4, 0);
 		fcn_00532ef0();
 		return;
 	}
 	if (fcn_005463a0(2, 0, 0x39, 2, *(unsigned short*) 0x774970) != 0) {
-		fcn_0051af00(msg.pkt + 0x110, 0x19b6, *(unsigned short*) obj);
+		io_FormatTextBuffer(msg.pkt + 0x110, 0x19b6, *(unsigned short*) obj);
 		fcn_00526120((int) (msg.pkt + 0x110), 0);
 		fcn_00532ef0();
 		return;
@@ -60,7 +60,7 @@ void __cdecl fcn_005ad000(void)
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
 	h = *(unsigned char*) 0x773d75;
-	id = fcn_00519190(0x19b1, h, h, *(unsigned short*) obj);
+	id = io_AppendText(0x19b1, h, h, *(unsigned short*) obj);
 	ctl1 = fcn_00472250(dlg, 1, id);
 	ctl2 = fcn_00472250(dlg, 1, id + 1);
 	id = *(unsigned short*) 0x774970;
@@ -68,7 +68,7 @@ void __cdecl fcn_005ad000(void)
 	h = fcn_0050d360(id);
 	fcn_00472380(ctl1, 0x96,
 	             fcn_0050b710(h, *(unsigned char*) 0x773d75), 0xfa);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	do {
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;

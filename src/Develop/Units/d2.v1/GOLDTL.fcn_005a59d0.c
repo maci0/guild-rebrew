@@ -1,5 +1,4 @@
-/* Reconstruction of the two native functions in inventory extent
- * 0x005a59d0..0x005a66a7: the dialog pump body and its message handler. */
+/* Dialog pump at 0x005a59d0. */
 
 typedef struct {
 	int sel;
@@ -38,10 +37,10 @@ int __cdecl fcn_00472250(int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00533dc0(int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00475220(char*);
-int __cdecl fcn_00519190(int, ...);
-void __cdecl fcn_0051af00(char*, int, ...);
+int __cdecl io_AppendText(int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00533a40(char*);
 int __cdecl fcn_005a5440(int, void*, int, int, int);
 int __cdecl fcn_005a5980(void*);
@@ -113,12 +112,12 @@ int __cdecl fcn_005a59d0(char* a0)
 	*(int*)(g_1015f40 + g_772514 * 0x3cc + 0x3b0) = 0xe;
 	*(int*)(g_1015f40 + g_772514 * 0x3cc + 0x3b4) = 0xe;
 	d2_SetForm(v8, 1);
-	fcn_00519190(0x18f5);
+	io_AppendText(0x18f5);
 	d2_SetForm(v8, 2);
-	fcn_00519190(0x18f6, *(int*)(a0 + 0x69),
+	io_AppendText(0x18f6, *(int*)(a0 + 0x69),
 		*(unsigned short*)(g_773d75 * 0x2f4 + 0x8680b4) * 2 + 0x9a8, *(int*)(a0 + 0x6d));
 	fcn_00475220(g_14ab6fc);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	v29 = -1;
 	do {
 		if (g_14ce8e0) {
@@ -139,7 +138,7 @@ int __cdecl fcn_005a59d0(char* a0)
 			v29 = fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, v8, 5, 1);
 			if (v29 != -1) {
 				if (!g_100f8c0 || !v31) {
-					fcn_0051af00(buf, 0x18fa, ownRows[v29].x14, ownRows[v29].val * 2 + 0x9a8);
+					io_FormatTextBuffer(buf, 0x18fa, ownRows[v29].x14, ownRows[v29].val * 2 + 0x9a8);
 					fcn_00475220(buf);
 				}
 				v31 = 1;
@@ -151,7 +150,7 @@ int __cdecl fcn_005a59d0(char* a0)
 		v29 = fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, v8, 4, 1);
 		if (v29 != -1) {
 			if (!g_100f8c0 || !v31) {
-				fcn_0051af00(buf, 0x18f8, globRows[v29].x14, globRows[v29].val * 2 + 0x9a8);
+				io_FormatTextBuffer(buf, 0x18f8, globRows[v29].x14, globRows[v29].val * 2 + 0x9a8);
 				fcn_00475220(buf);
 			}
 			v31 = 2;
@@ -251,7 +250,7 @@ int __cdecl fcn_005a59d0(char* a0)
 								d2_SetElementValue(*(int*)((char*)globRows + v15), 0, 0, 0);
 						}
 					} else {
-						fcn_0051af00(buf, 0x18fd, v2 * 2 + 0x9a8);
+						io_FormatTextBuffer(buf, 0x18fd, v2 * 2 + 0x9a8);
 						fcn_00475220(buf);
 					}
 				} else {
@@ -301,7 +300,7 @@ int __cdecl fcn_005a59d0(char* a0)
 								d2_SetElementValue(*(int*)((char*)globRows + v15), 0, 0, 0);
 						}
 					} else {
-						fcn_0051af00(buf, 0x18fd, v2 * 2 + 0x9a8);
+						io_FormatTextBuffer(buf, 0x18fd, v2 * 2 + 0x9a8);
 						fcn_00533a40(buf);
 					}
 				} else {
@@ -313,41 +312,4 @@ int __cdecl fcn_005a59d0(char* a0)
 	ResetDisplayCounters();
 	fcn_00471e30(v8);
 	return fcn_00532ef0();
-}
-
-/* Second native function inside the same inventory extent (0x005a6570).
- * Not an inventory entry on its own: the 3287-byte row also spans the
- * 15-byte nop gap at 0x005a6562..0x005a6570. */
-int __cdecl fcn_005a6570(char* a0)
-{
-	int v1, v2;
-	int e1, e2;
-	int v8;
-
-	v8 = fcn_00470820(0, 0, g_6aacac);
-	fcn_00471b60(v8);
-	d2_SetForm(v8, 2);
-	fcn_00519190(0x1908);
-	d2_SetForm(v8, 1);
-	v1 = fcn_00519190(0x1907);
-	e1 = fcn_00472250(v8, 1, v1);
-	e2 = fcn_00472250(v8, 1, v1 + 1);
-	d2_SetElementValue(e2, 3, 0xf, *(int*)(a0 + 0x69));
-	d2_SetElementValue(e1, 3, 0xf, *(int*)(a0 + 0x6d));
-	do {
-		if (g_14ce8e0 || g_100f1dc == 1)
-			g_774654 = 1;
-		if (g_100f1dc == 2) {
-			v2 = fcn_00471f80(e2);
-			fcn_004c4510(*(int*)(a0 + 1), v2);
-			fcn_004c4570(4, 1, 0x69, &v2);
-			fcn_004c4570(4, 1, 0x6d, &v2);
-			fcn_004c5360(0);
-			g_774654 = 1;
-		} else if (g_100f1dc == 1) {
-			g_774654 = 1;
-		}
-	} while (fcn_005373e0(fcn_005a6570, 0x677c7));
-	fcn_00471e30(v8);
-	return 0;
 }

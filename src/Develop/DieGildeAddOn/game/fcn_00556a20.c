@@ -1,6 +1,6 @@
 extern char g_7f4c00[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00500bb0(char*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_004c4eb0(char*);
@@ -15,8 +15,8 @@ void __cdecl fcn_00556a20(char* p)
 	char* b;
 	int* q;
 
-	a = fcn_00508e40(*(int*) (p + 0xb0));
-	b = fcn_00508e40(*(int*) (p + 0xac));
+	a = gm_LookupEntityRecordById(*(int*) (p + 0xb0));
+	b = gm_LookupEntityRecordById(*(int*) (p + 0xac));
 	if (*(unsigned char*) (p + 0x78) & 4) {
 		return;
 	}

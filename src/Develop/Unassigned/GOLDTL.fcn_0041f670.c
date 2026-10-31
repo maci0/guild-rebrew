@@ -24,7 +24,7 @@ struct rect_41f670 {
 
 __declspec(dllimport) int __stdcall GetClientRect(void*, struct rect_41f670*);
 
-char* __cdecl fcn_0041f9b0(int);
+char* __cdecl FindVideoById(int);
 
 
 /* Fits a video into its window: stretched to the window width keeping the
@@ -42,7 +42,7 @@ int __cdecl fcn_0041f670(int id)
 	struct unk_41f670* win;
 	struct rect_41f670 rc;
 
-	v = fcn_0041f9b0(id);
+	v = FindVideoById(id);
 	if (v != 0) {
 		if (*(int*) (v + 0xc) & 2) {
 			GetClientRect(*(void**) (v + 0x114), &rc);

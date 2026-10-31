@@ -18,7 +18,7 @@ extern char g_6b5c60[];
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 
 void __cdecl fcn_004c4570(int, int, int, void*);
@@ -43,12 +43,12 @@ void __cdecl fcn_00548f00(void)
 				if ((double) *(short*) (e + 0x6b) / *(short*) (e + 0x69) < 0.5) {
 					char text[0x200];
 
-					fcn_0051af00(text, 0x18a1, e, *(short*) (e + 0x69), *(int*) (e + 0x65));
+					io_FormatTextBuffer(text, 0x18a1, e, *(short*) (e + 0x69), *(int*) (e + 0x65));
 					he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner, -1, text, 0, 0x5fc, *(int*) (e + 1), -1, 0, g_6a58c0);
 				} else {
 					char text2[0x200];
 
-					fcn_0051af00(text2, 0x18a2, e, *(short*) (e + 0x69), *(int*) (e + 0x65));
+					io_FormatTextBuffer(text2, 0x18a2, e, *(short*) (e + 0x69), *(int*) (e + 0x65));
 					he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner, -1, text2, 0, 0x5fc, *(int*) (e + 1), -1, 0, g_6b5c60);
 				}
 			}

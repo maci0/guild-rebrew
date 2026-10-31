@@ -28,7 +28,7 @@ typedef struct Player {
 extern unsigned char g_773d75;
 extern char g_868060[];
 
-Ent* __cdecl fcn_00508e40(int);
+Ent* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(Ent*, int);
 Obj* __cdecl fcn_005463a0(int a, int b, int c);
 Obj* __cdecl he_fn_Handlung(void);
@@ -37,7 +37,7 @@ int __cdecl gm_CheckEntityType(char*);
 unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004c51a0(int, int, unsigned char, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 int __cdecl fcn_004b9530(Cmd* cmd)
@@ -56,7 +56,7 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 	int k;
 
 	n = 0;
-	e = fcn_00508e40(cmd->handle);
+	e = gm_LookupEntityRecordById(cmd->handle);
 	if (e == 0) {
 		return 1;
 	}
@@ -93,9 +93,9 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 	gm_ResolveEntityById((void**) (&work), 0, 0, o->shop);
 	if (shop != 0 && work != 0) {
 		if (*shop == 'G') {
-			fcn_0051af00(text, cmd->text + 0x12e7, ((Player*)g_868060)[0].name);
+			io_FormatTextBuffer(text, cmd->text + 0x12e7, ((Player*)g_868060)[0].name);
 		} else {
-			fcn_0051af00(text, cmd->text + 0x12e7, ((Player*)g_868060)[*(int*) (work + 0x65)].name, amount);
+			io_FormatTextBuffer(text, cmd->text + 0x12e7, ((Player*)g_868060)[*(int*) (work + 0x65)].name, amount);
 		}
 		fcn_00545d40(e->handle, e->handle, text, 0x100 < strlen(text), 0x5ef, 0);
 	}

@@ -14,9 +14,9 @@ extern pos14_7f4c00 g_7f4c00;
 extern char g_6a5af4[];
 extern char g_6a5ae0[];
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00500bb0(fcn_0054ee10_Stamp* s, int a2, int a3, int a4);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
 void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
@@ -45,8 +45,8 @@ void __cdecl fcn_0054ee10(char* t)
 	*(int*) (t + 0x70) = 2;
 	if ((t[0x78] & 2) == 0)
 		return;
-	a = fcn_00508e40(*(int*) (t + 0xac));
-	b = fcn_00508e40(*(int*) (t + 0xb0));
+	a = gm_LookupEntityRecordById(*(int*) (t + 0xac));
+	b = gm_LookupEntityRecordById(*(int*) (t + 0xb0));
 	if (a == 0 || (*(int*) (a + 0x1c8) & 0x100) || b == 0 || (*(int*) (b + 0x1c8) & 0x200)) {
 		*(fcn_0054ee10_Stamp*) (t + 0x52) = (*(fcn_0054ee10_Stamp*)&g_7f4c00);
 		fcn_00500bb0((fcn_0054ee10_Stamp*) (t + 0x52), 0, 2, 0);
@@ -57,7 +57,7 @@ void __cdecl fcn_0054ee10(char* t)
 		fcn_00500bb0((fcn_0054ee10_Stamp*) (t + 0x52), 0x18, 0, 0);
 		*(int*) (t + 0x58) = 0;
 		if (b[2] == 6 || b[2] == 7) {
-			fcn_0051af00(buf, 0x1e18, *(unsigned short*) a);
+			io_FormatTextBuffer(buf, 0x1e18, *(unsigned short*) a);
 			fcn_00545d40(*(int*) (b + 4), -1, buf, 0, 0x5fb, g_6a5af4);
 		}
 		r = -4;
@@ -66,7 +66,7 @@ void __cdecl fcn_0054ee10(char* t)
 		*(int*) (t + 0x58) = 0;
 		r = -2;
 		if (b[2] == 6 || b[2] == 7) {
-			fcn_0051af00(buf, 0x1d5b, *(unsigned short*) a, *(unsigned short*) a);
+			io_FormatTextBuffer(buf, 0x1d5b, *(unsigned short*) a, *(unsigned short*) a);
 			fcn_00545d40(*(int*) (b + 4), -1, buf, 0, 0x5fb, g_6a5ae0);
 		}
 		id = -1;

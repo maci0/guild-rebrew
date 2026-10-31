@@ -23,7 +23,7 @@ extern char g_7f4ca0[];
 extern char g_67ed14[];
 extern char g_6a656c[];
 
-unsigned char* __cdecl fcn_00508e40(int id);
+unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 char* __cdecl fcn_005463a0(int, int, int);
@@ -55,7 +55,7 @@ void __cdecl fcn_00562190(char* u)
 		return;
 	}
 	*(int*) (u + 0xd8) = -1;
-	p = fcn_00508e40(*(int*) (u + 0xc4));
+	p = gm_LookupEntityRecordById(*(int*) (u + 0xc4));
 	if (p == 0) {
 		*(int*) (u + 0x84) = fcn_004c5620(-1, u);
 		return;

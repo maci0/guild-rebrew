@@ -35,7 +35,7 @@ char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 char* __cdecl fcn_0040c120(char*, int, ...);
 char* __cdecl fcn_0055d630(char*);
 char* __cdecl strupr(char*);
-void __cdecl fcn_0041d9e0(char*);
+void __cdecl ReportClientMessage(char*);
 
 extern char g_68b0d8[];
 extern char g_6756b8[];
@@ -194,7 +194,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 				u = *(char**) (C + 0x61);
 				fcn_00455350(u, u + 0x4c, pos);
 			} else {
-				fcn_0041d9e0(g_68b1ac);
+				ReportClientMessage(g_68b1ac);
 			}
 			r[0x17c] = 1;
 			*(float*) (r + 0x180) = pos[0];
@@ -241,7 +241,7 @@ after:
 		k = fcn_00515540(fcn_00502cd0(*(int*) (B + 0x5d), 1, 1,
 		    *(int*) (e + 0x18)));
 		if (k < 0) {
-			fcn_0041d9e0(g_68b108);
+			ReportClientMessage(g_68b108);
 			goto diag39;
 		}
 	} else {
@@ -250,9 +250,9 @@ after:
 	if (*(int*) (e + 0x18) != -1) {
 		q = fcn_00502cd0(*(int*) (B + 0x5d), 1, 1, *(int*) (e + 0x18));
 		if (q == 0)
-			fcn_0041d9e0(g_68b13c);
+			ReportClientMessage(g_68b13c);
 	} else {
-		fcn_0041d9e0(g_68b174);
+		ReportClientMessage(g_68b174);
 	}
 	fcn_0040c120(o, 0x38, 0);
 	r = fcn_0040c120(o, 0x33, k, *(int*) (B + 1), *(int*) (e + 0x18));

@@ -33,7 +33,7 @@ __declspec(dllimport) long __stdcall DispatchMessageA(const struct msg_41f350*);
 __declspec(dllimport) int __stdcall IsWindow(void*);
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
 
-char* __cdecl fcn_0041f9b0(int);
+char* __cdecl FindVideoById(int);
 
 
 /* Shows a video window topmost and starts playback; a modal video pumps
@@ -45,7 +45,7 @@ int __cdecl fcn_0041f350(int id)
 	long hr;
 	struct msg_41f350 msg;
 
-	v = fcn_0041f9b0(id);
+	v = FindVideoById(id);
 	if (v != 0) {
 		ShowWindow(*(void**) (v + 0x114), 5);
 		BringWindowToTop(*(void**) (v + 0x114));

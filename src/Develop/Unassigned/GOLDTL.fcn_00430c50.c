@@ -10,7 +10,7 @@ typedef struct VfsFlags {
 } VfsFlags;
 // SIZE 0x1
 
-long __cdecl fcn_00465540(void* h);
+long __cdecl unztell(void* file);
 long __cdecl fcn_0045fa50(void* h);
 long __cdecl fcn_0064e30c(void* h);
 
@@ -28,7 +28,7 @@ long __cdecl fcn_00430c50(char* a)
 				r = *(long*) (a + 0x108);
 			} else if (((VfsFlags*) (a + 0x13c))->plain) {
 				if (((VfsFlags*) (a + 0x13c))->zip) {
-					r = fcn_00465540(h);
+					r = unztell(h);
 				} else if (((VfsFlags*) (a + 0x13c))->gz) {
 					r = fcn_0045fa50(h);
 				} else {

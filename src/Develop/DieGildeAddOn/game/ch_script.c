@@ -100,7 +100,7 @@ void __cdecl ch_RegisterScriptCommands(void)
     evt_ImportCommand("MoveCharacterCamera", (void*) MoveCharacterCamera, 5, 3, 1, 6, 1);
     evt_ImportCommand("PreloadAnimation", (void*) fcn_0040da60, 5, 5, 1, 6, 6, 6, 6);
     evt_ImportCommand("PreloadSitMesh", (void*) fcn_0040dac0, 5, 1, 1);
-    evt_ImportCommand("CharacterIdle", (void*) fcn_0040dad0, 1, 1, 1);
+    evt_ImportCommand("CharacterIdle", (void*) CharacterIdle, 1, 1, 1);
     evt_ImportCommand("StopCharacter", (void*) fcn_0040db10, 5, 1, 1);
     evt_ImportCommand("KillCharacterAnimations", (void*) fcn_0040db50, 5, 1, 1);
     evt_ImportCommand("DummyBlocked", (void*) fcn_0040dbb0, 1, 2, 1, 1);

@@ -21,14 +21,14 @@ void __cdecl fcn_004c5150(int, int, char, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 int __cdecl fcn_00508890(unsigned char*);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00525f60(unsigned char*, int);
 int __cdecl fcn_00526010(unsigned char*, int, char);
-void __cdecl fcn_0051af00(char*, ...);
+void __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_00526120(char*, int);
@@ -66,10 +66,10 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 	}
 	money = (int) (gm_WalkEntityChain(*(unsigned short*) e) * g_6628ac);
 	dlg = fcn_00470820(0, 0, s_6acc44);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	id = fcn_00519190(0x1d3b, 2, money);
+	id = io_AppendText(0x1d3b, 2, money);
 	ok = fcn_00472250(dlg, 1, id);
 	cancel = fcn_00472250(dlg, 1, id + 1);
 	g_100f1dc = -1;
@@ -78,14 +78,14 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 			if (g_67d370 == ok) {
 				if (fcn_00525f60(e, 2) && fcn_00526010(e, money, g_773d75)) {
 					fcn_004c6ae0(*(int*) (e + 4), -2);
-					fcn_0051af00(text, 0x1d3c);
+					io_FormatTextBuffer(text, 0x1d3c);
 					if (gm_RandomMod(2)) {
-						fcn_0051af00(tmp, s_679060, 0x1d3d);
+						io_FormatTextBuffer(tmp, s_679060, 0x1d3d);
 						strcat(text, tmp);
 						fcn_004c5150(-1, *(int*) (e + 4), g_773d75, money);
 						fcn_00508890(e);
 					} else {
-						fcn_0051af00(tmp, s_679060, 0x1d3e);
+						io_FormatTextBuffer(tmp, s_679060, 0x1d3e);
 						strcat(text, tmp);
 					}
 					ok = -1;

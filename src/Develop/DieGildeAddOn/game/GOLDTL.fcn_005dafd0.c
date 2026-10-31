@@ -29,20 +29,20 @@ extern int g_14ce8e0;
 extern int g_774654;
 extern int g_67d370;
 
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e8a80(int, Info*);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00526120(char*, int);
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00525f60(unsigned char*, int);
 int __cdecl fcn_004c4450(int);
@@ -70,7 +70,7 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 		if (*(int*) (e + 0x194) < 8) {
 			return 0x20;
 		}
-		o = fcn_00508e40(*(int*) (a2 + 0x214));
+		o = gm_LookupEntityRecordById(*(int*) (a2 + 0x214));
 		if (o == 0) {
 			return 0x60;
 		}
@@ -84,7 +84,7 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 		fcn_005100f0(*(int*) (e + 4), -8);
 		fcn_004c5420(*(int*) (e + 4), 0x1cc, 4, 0x40000, 0);
 		if (o[2] == 6 || o[2] == 7) {
-			fcn_0051af00(text, 0x1e10, *(unsigned short*) e, o[9] == 0 ? 0x253 : o[0x166] + 0x27b);
+			io_FormatTextBuffer(text, 0x1e10, *(unsigned short*) e, o[9] == 0 ? 0x253 : o[0x166] + 0x27b);
 			fcn_00545d40(*(int*) (o + 4), -1, text, 0, 0x5fb, s_6ace58);
 		}
 		return 0x10;
@@ -106,10 +106,10 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 		return 0x40;
 	}
 	dlg = fcn_00470820(0, 0, s_6acd74);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	id = fcn_00519190(0x1e0f, *(unsigned short*) o);
+	id = io_AppendText(0x1e0f, *(unsigned short*) o);
 	ok = fcn_00472250(dlg, 1, id);
 	cancel = fcn_00472250(dlg, 1, id + 1);
 	g_100f1dc = -1;
@@ -125,7 +125,7 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 				g_774654 = 1;
 				result = 0x91;
 				if (o[2] == 6 || o[2] == 7) {
-					fcn_0051af00(text, 0x1e10, *(unsigned short*) e, o[9] == 0 ? 0x253 : o[0x166] + 0x27b);
+					io_FormatTextBuffer(text, 0x1e10, *(unsigned short*) e, o[9] == 0 ? 0x253 : o[0x166] + 0x27b);
 					fcn_00545d40(*(int*) (o + 4), -1, text, 0, 0x5fb, 0);
 				}
 			} else if (g_67d370 == cancel) {

@@ -18,7 +18,7 @@ typedef struct Rec18 {
 
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
 int __cdecl fcn_004e8c00(int k, int max, Rec18* out);
-Ent* __cdecl fcn_00508e40(int id);
+Ent* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl gm_RandomMod(int n);
 
@@ -78,7 +78,7 @@ int __cdecl fcn_0049fe50(Ent* e)
 		if (n >= 3) {
 			sum = 0;
 			for (j = 0; j < n; j++) {
-				sum += fcn_0050f980(e->id, fcn_00508e40(list[j].id)->id, 1);
+				sum += fcn_0050f980(e->id, gm_LookupEntityRecordById(list[j].id)->id, 1);
 			}
 			if (sum / n < 66.0f) {
 				return ord[i];

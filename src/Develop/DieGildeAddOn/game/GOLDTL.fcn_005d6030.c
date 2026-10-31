@@ -7,11 +7,11 @@ extern unsigned short g_7f4c0c;
 extern int g_666018;
 extern int g_66601c;
 
-int __cdecl fcn_00508e40(unsigned int);
+int __cdecl gm_LookupEntityRecordById(unsigned int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c6ae0(int, int);
-void __cdecl fcn_0051af00(char*, int);
+void __cdecl io_FormatTextBuffer(char*, int);
 int __cdecl fcn_005cd440(void*, char*, int, char*);
 
 /* Two dialog outcomes: the shop path builds a 0xf8-byte request record from
@@ -28,7 +28,7 @@ int __cdecl fcn_005d6030(char* a0, char* a1)
 	int id;
 
 	if (*(unsigned char*) (a0 + 2) != 6 && *(unsigned char*) (a0 + 2) != 7) {
-		found = fcn_00508e40(*(unsigned int*) (a1 + 0x214));
+		found = gm_LookupEntityRecordById(*(unsigned int*) (a1 + 0x214));
 		if (found == 0) {
 			return 0x60;
 		}
@@ -56,7 +56,7 @@ int __cdecl fcn_005d6030(char* a0, char* a1)
 	init[2] = g_666018;
 	init[3] = g_66601c;
 	init[4] = 6;
-	fcn_0051af00(name, 0x1d66);
+	io_FormatTextBuffer(name, 0x1d66);
 	found = fcn_005cd440(init, name, 0, (char*) 0x5d5d70);
 	if (found != 0 && (*(unsigned int*) (found + 0x1c8) & 0x400) != 0) {
 		return 0x81;

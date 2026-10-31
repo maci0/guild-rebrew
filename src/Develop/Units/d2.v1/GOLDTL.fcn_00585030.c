@@ -36,11 +36,11 @@ extern Win_1015f40 g_1015f40[0x60];
 extern List8c_102cbc8 g_102cbc8[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_00469470(int, int);
@@ -50,7 +50,7 @@ int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00472900(int, int);
-void __cdecl fcn_0051af00(char*, char*, ...);
+void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -98,17 +98,17 @@ void __cdecl fcn_00585030(int a0)
 	stamp = g_6b7fac;
 	g_100f1dc = -1;
 	win = fcn_00470820(0, 0, "Locations\\Domizil\\Alchemistry2");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(win);
 	d2_SetForm(win, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(win, 2);
 	wnd = g_772514;
 	d2_SetForm(win, 1);
-	fcn_00519190(0x404f);
+	io_AppendText(0x404f);
 	if (data == 0) {
 		d2_SetForm(win, 2);
-		fcn_00519190(0x4051, 0x182);
+		io_AppendText(0x4051, 0x182);
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
@@ -121,7 +121,7 @@ void __cdecl fcn_00585030(int a0)
 	fcn_00533a60(g_772514, 0, two, 2, g_14b546c, g_14b5470);
 	prev = sel;
 	d2_SetForm(win, 2);
-	fcn_00519190(0x6811b0);
+	io_AppendText(0x6811b0);
 	list = d2_CreateRadioGroup(0);
 	count = 0;
 	ids = items;
@@ -137,7 +137,7 @@ void __cdecl fcn_00585030(int a0)
 		((Ctl*) g_1015ea0)[item].x5c = 1;
 		((Ctl*) g_1015ea0)[item].x2f0 = (int) (lpObjektePROT + src[0] * 0x41);
 		fcn_00469470(list, item);
-		fcn_0051af00(buf, (char*) 0x679060, src[0] * 2 + 0x9a8);
+		io_FormatTextBuffer(buf, (char*) 0x679060, src[0] * 2 + 0x9a8);
 		item = d2_ShowTxt(x + 0x3c, y + 5, buf, wnd);
 		((Ctl*) g_1015ea0)[item].x18 = g_1015f40[wnd].xc / 2 - 10;
 		fcn_00472900(item, 0x54);
@@ -147,15 +147,15 @@ void __cdecl fcn_00585030(int a0)
 	do {
 		sel = fcn_004ecf00(e, &owner, &frac, 0);
 		d2_SetForm(win, 4);
-		fcn_00519190(0x6811b0);
+		io_AppendText(0x6811b0);
 		if (sel != 0) {
 			dlg = fcn_004677e0((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, g_772514);
 			if (sel == 1) {
-				fcn_0051af00(buf, (char*) 0x404b);
+				io_FormatTextBuffer(buf, (char*) 0x404b);
 			} else if (sel == 2) {
-				fcn_0051af00(buf, (char*) 0x404c, owner * 2 + 0x9a8);
+				io_FormatTextBuffer(buf, (char*) 0x404c, owner * 2 + 0x9a8);
 			} else if (sel == 3) {
-				fcn_0051af00(buf, (char*) 0x404d, owner + 0x4172);
+				io_FormatTextBuffer(buf, (char*) 0x404d, owner + 0x4172);
 			}
 			item = d2_ShowTxt(0, 0, buf, g_772514);
 			((Ctl*) g_1015ea0)[item].x18 = ((Screen*) g_77255c)->xc;
@@ -175,7 +175,7 @@ void __cdecl fcn_00585030(int a0)
 			owner = g_102cbc8[list].n;
 			fcn_00469510(list);
 			d2_SetForm(win, 2);
-			fcn_00519190(0x6811b0);
+			io_AppendText(0x6811b0);
 			list = d2_CreateRadioGroup(0);
 			count = 0;
 			ids = items;
@@ -191,7 +191,7 @@ void __cdecl fcn_00585030(int a0)
 				((Ctl*) g_1015ea0)[item].x5c = 1;
 				((Ctl*) g_1015ea0)[item].x2f0 = (int) (lpObjektePROT + src[0] * 0x41);
 				fcn_00469470(list, item);
-				fcn_0051af00(buf2, (char*) 0x679060, src[0] * 2 + 0x9a8);
+				io_FormatTextBuffer(buf2, (char*) 0x679060, src[0] * 2 + 0x9a8);
 				item = d2_ShowTxt(x + 0x3c, y + 5, buf2, wnd);
 				((Ctl*) g_1015ea0)[item].x18 = g_1015f40[wnd].xc / 2 - 10;
 				fcn_00472900(item, 0x54);

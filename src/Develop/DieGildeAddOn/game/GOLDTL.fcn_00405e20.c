@@ -113,7 +113,7 @@ int __cdecl ch_Update(void)
 			}
 		}
 		if (*p != 0 && *(int*) (*p + 0x88) != *(int*) (*(char**) (*p + 0x34) + 0x20c)) {
-			fcn_0041d9e0(g_67567c);
+			ReportClientMessage(g_67567c);
 		}
 	}
 	fcn_004027b0();

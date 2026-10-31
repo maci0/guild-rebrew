@@ -51,7 +51,7 @@ Task* __cdecl ch_UseGate(char* e, const char* name, const char* name2, int a, in
 	t->a170 = a;
 	t->a174 = b;
 	if (*(int*) &t->a178 == -1) {
-		fcn_0041d9e0("task value unset");
+		ReportClientMessage("task value unset");
 	}
 	*(int*) &t->a178 = c;
 	return t;

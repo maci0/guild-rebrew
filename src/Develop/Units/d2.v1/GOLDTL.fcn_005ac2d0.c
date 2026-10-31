@@ -48,9 +48,7 @@ extern char* g_77255c;
 extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
-char g_6811b0[3] = {
-    0x24, 0x43, 0x00,
-};
+char g_6811b0[] = "$C";
 extern int g_6b7fac;
 extern int g_100f1dc;
 extern int g_666018;
@@ -69,9 +67,9 @@ int __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c4510(char* base, int entity_id);
 int __cdecl fcn_004c4570(unsigned char size, unsigned char count, unsigned short off, char* src);
 char* __cdecl fcn_005463a0(int kind, int first, int id, int arg, int entity_id);
-char* __cdecl fcn_00508e40(int description_id);
+char* __cdecl gm_LookupEntityRecordById(int description_id);
 int __cdecl fcn_00470820(int x, int y, char* title);
-int __cdecl fcn_00473a90(int a1, int a2);
+int __cdecl d2_SetOverlayAnimation(int a1, int a2);
 void __cdecl fcn_00471b60(int dlg);
 void __cdecl fcn_00471e30(int dlg);
 void __cdecl d2_SetForm(int dlg, int page);
@@ -79,13 +77,13 @@ int __cdecl fcn_00472250(int dlg, int page, int id);
 void __cdecl fcn_00472640(int button, int state);
 int __cdecl fcn_0046f2c0(int win, int keep);
 void __cdecl fcn_005340f0(int win);
-int __cdecl fcn_00519190(int id, ...);
+int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_005373e0(void* fn, int msg);
 int __cdecl fcn_00525f60(char* house, int mode);
 void __cdecl fcn_005100f0(int id, int amount);
 int __cdecl fcn_005ca560(sel005ac2d0* sel);
 int __cdecl fcn_005ca740(int x, int y, int win, int id, sel005ac2d0* sel, int flag);
-int __cdecl fcn_0051af00(char* buf, int id, ...);
+int __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 char* __cdecl fcn_005cd440(void* m, char* text, int a2, int a3);
 int __cdecl gm_RandomMod(unsigned short range);
 void __cdecl fcn_00532ef0(void);
@@ -164,14 +162,14 @@ void __cdecl fcn_005ac2d0(char* a0)
 	} else if (*(char*) (obj + 0x1c) == -1 || *(char*) (obj + 0x1d) == -1) {
 		state = 1;
 	} else {
-		info = fcn_00508e40(*(int*) (obj + 0x1e));
+		info = gm_LookupEntityRecordById(*(int*) (obj + 0x1e));
 		state = 2;
 		if (info == 0) {
 			state = 1;
 		}
 	}
 	dlg = fcn_00470820(0, 0, "Locations\\Kirche\\Predigt");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(g_772514);
@@ -192,7 +190,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 				state = 0;
 			} else if (*(char*) (obj + 0x1c) != -1 && *(char*) (obj + 0x1d) != -1
 			    && *(int*) (obj + 0x1e) != -1) {
-				info = fcn_00508e40(*(int*) (obj + 0x1e));
+				info = gm_LookupEntityRecordById(*(int*) (obj + 0x1e));
 				state = (info != 0) + 1;
 			}
 		} else if (flag == 0) {
@@ -207,22 +205,22 @@ void __cdecl fcn_005ac2d0(char* a0)
 		btnCancel = -1;
 		if (state == 0) {
 			d2_SetForm(dlg, 1);
-			fcn_00519190((int) g_6811b0);
-			fcn_00519190(0x19a5, 1, unit + 0x52);
+			io_AppendText((int) g_6811b0);
+			io_AppendText(0x19a5, 1, unit + 0x52);
 			d2_SetForm(dlg, 2);
-			fcn_00519190((int) g_6811b0);
-			i = fcn_00519190(0x19a6);
+			io_AppendText((int) g_6811b0);
+			i = io_AppendText(0x19a6);
 			btnState0 = fcn_00472250(dlg, 2, i);
 			btnCancel = fcn_00472250(dlg, 2, i + 1);
 		} else if (state == 1) {
 			d2_SetForm(dlg, 1);
 			fcn_0046f2c0(g_772514, 1);
-			fcn_00519190((int) g_6811b0);
-			fcn_00519190(0x19a0, unit + 0x52);
+			io_AppendText((int) g_6811b0);
+			io_AppendText(0x19a0, unit + 0x52);
 			d2_SetForm(dlg, 2);
 			fcn_0046f2c0(g_772514, 1);
-			fcn_00519190((int) g_6811b0);
-			i = fcn_00519190(0x19a1);
+			io_AppendText((int) g_6811b0);
+			i = io_AppendText(0x19a1);
 			btnState1 = fcn_00472250(dlg, 2, i);
 			btnCancel = fcn_00472250(dlg, 2, i + 1);
 			if (*(int*) (unit + 0x70) > 0) {
@@ -233,8 +231,8 @@ void __cdecl fcn_005ac2d0(char* a0)
 		} else if (state == 2) {
 			d2_SetForm(dlg, 1);
 			fcn_0046f2c0(g_772514, 1);
-			fcn_00519190((int) g_6811b0);
-			fcn_00519190(0x198e, unit + 0x52, *(char*) (obj + 0x1c) + 0x1990,
+			io_AppendText((int) g_6811b0);
+			io_AppendText(0x198e, unit + 0x52, *(char*) (obj + 0x1c) + 0x1990,
 			    *(char*) (obj + 0x1d) + 0x1998, *(unsigned short*) info);
 			sel.e = info;
 			sel.x = *(int*) (g_77255c + 0xc) / 2 - *(short*) (g_772500 + 0x1ebd8) / 2;
@@ -244,8 +242,8 @@ void __cdecl fcn_005ac2d0(char* a0)
 			fcn_005ca740(sel.x, sel.y, g_772514, 0x54, &sel, 1);
 			d2_SetForm(dlg, 2);
 			fcn_0046f2c0(g_772514, 1);
-			fcn_00519190((int) g_6811b0);
-			i = fcn_00519190(0x198f);
+			io_AppendText((int) g_6811b0);
+			i = io_AppendText(0x198f);
 			btnState2 = fcn_00472250(dlg, 2, i);
 			btnCancel = fcn_00472250(dlg, 2, i + 1);
 			if (*(int*) (unit + 0x70) > 0) {
@@ -280,7 +278,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 				*(int*) (pkt2 + 0x10) = 6;
 				*(int*) (pkt2 + 8) = g_666018;
 				*(int*) (pkt2 + 0xc) = g_66601c;
-				fcn_0051af00(text, 0x19a2);
+				io_FormatTextBuffer(text, 0x19a2);
 				info = fcn_005cd440(pkt2, text, 0, 0);
 				obj = (char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, 0x1b5);
 				if (info != 0 && *(int*) (info + 4) != -1 && obj != 0) {

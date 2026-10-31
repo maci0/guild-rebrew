@@ -18,7 +18,7 @@ extern float g_6a2bec;
 extern float g_664ec0;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_0041d9e0(const char*);
+void __cdecl ReportClientMessage(const char*);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char*);
 void __cdecl fcn_00504250(unsigned char*);
 void __cdecl gv_UpgradeField(unsigned char*);
@@ -77,7 +77,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 	}
 	rec = lpGebaeudePROT + v4[0] + v4[0] * 0x24c;
 	if ((unsigned char) rec[0x247] >= (unsigned char) rec[0x248]) {
-		fcn_0041d9e0("cm_ExSetGebUpgrade(): already highest level");
+		ReportClientMessage("cm_ExSetGebUpgrade(): already highest level");
 		return 1;
 	}
 	v4[0] = (unsigned char) (v4[0] + 1);
@@ -117,7 +117,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 	obj = fcn_004488e0(path, 0, 0);
 	if (obj == 0) {
 		sprintf(name, "cm_ExGebUpgrade(): Could not load 3D-Object-Group '%s'...", path);
-		fcn_0041d9e0(name);
+		ReportClientMessage(name);
 	} else {
 		center[0] = 0.0f;
 		fcn_00455140((char*) h, (float*) 0x662d40, center);

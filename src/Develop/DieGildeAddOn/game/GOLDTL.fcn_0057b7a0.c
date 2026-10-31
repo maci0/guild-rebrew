@@ -15,7 +15,7 @@ struct house {
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0050f950(int, int);
 char* __cdecl fcn_00502cd0();
 char* __cdecl fcn_005049a0(char*);
@@ -23,7 +23,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_0051e070(void);
@@ -50,7 +50,7 @@ void __cdecl fcn_0057b7a0(char* e)
 	default:
 		return;
 	}
-	o = fcn_00508e40(*(int*) (e + 0xac));
+	o = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 	if (o == 0 || (p = *(char**) (o + 0x16c)) == 0
 	    || fcn_0050f950(*(unsigned short*) (p + 0x27), *(unsigned short*) o) > -26) {
 		fcn_00546190(e);
@@ -75,10 +75,10 @@ void __cdecl fcn_0057b7a0(char* e)
 				switch (fcn_0051e070()) {
 				case 0:
 				case 2:
-					fcn_0051af00(buf, 0x414b, 0x229, *(int*) (o + 0x16c), *(unsigned short*) sel * 2 + 0x9a8);
+					io_FormatTextBuffer(buf, 0x414b, 0x229, *(int*) (o + 0x16c), *(unsigned short*) sel * 2 + 0x9a8);
 					break;
 				case 1:
-					fcn_0051af00(buf, 0x414b, 0x229, *(unsigned short*) sel * 2 + 0x9a8, *(int*) (o + 0x16c));
+					io_FormatTextBuffer(buf, 0x414b, 0x229, *(unsigned short*) sel * 2 + 0x9a8, *(int*) (o + 0x16c));
 					break;
 				}
 				he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle, -1, buf, 0, 0x5f2, *(int*) (p + 1),

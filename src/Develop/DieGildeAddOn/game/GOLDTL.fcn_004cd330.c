@@ -1,6 +1,6 @@
 extern int* g_772f40;
 
-char* __cdecl gm_LookupEntityRecordById(int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 void __cdecl fcn_004cd2a0(char*, float*, float*, int);
 void __cdecl fcn_004d8200(int*);
 void __cdecl fcn_004d85c0(int*);
@@ -18,7 +18,7 @@ int __cdecl fcn_004cd330(unsigned char* a1, char* a2)
 
 	if (g_772f40 == 0 || *g_772f40 != *(int*) (a1 + 0x10))
 		return 1;
-	e = gm_LookupEntityRecordById(*(int*) (a1 + 0x35));
+	e = gm_LookupEntityRecordIn32SlotTable(*(int*) (a1 + 0x35));
 	switch (a1[0x14]) {
 	case 2:
 		if (e[8] != 0) {

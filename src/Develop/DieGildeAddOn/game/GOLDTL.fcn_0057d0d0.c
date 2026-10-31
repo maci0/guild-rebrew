@@ -2,7 +2,7 @@
 
 extern pos14_7f4c00 g_7f4c00;
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int, int, int, char*);
 int __cdecl fcn_00529670(char*, char*);
 void __cdecl fcn_00546190(char* unit);
@@ -41,7 +41,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 	do {
 		v = *ids;
 		if (v != -1) {
-			o = fcn_00508e40(v);
+			o = gm_LookupEntityRecordById(v);
 			if (o != 0) {
 				objs[n] = (int) o;
 				n++;

@@ -6913,8 +6913,17 @@
   },
   {
     "va": 4537968,
-    "size": 96,
-    "name": "fcn.00453e70"
+    "size": 84,
+    "name": "fcn.00453e70",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 84,
+        "reason": "84-byte body at Gold 0x453e70 is byte-identical to TL 0x451840. Twelve following bytes are NOPs.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-31T15:52:34.393008+00:00"
+      }
+    ]
   },
   {
     "va": 4538064,

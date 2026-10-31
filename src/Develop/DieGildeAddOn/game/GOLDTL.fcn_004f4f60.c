@@ -4,7 +4,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern double g_662908;
 
 int __cdecl fcn_004f4830(int idx, void* dst);
-char* __cdecl fcn_00508e40(int a1);
+char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int a4);
 float __cdecl fcn_004f4ed0(unsigned short* key);
 float __cdecl gm_RandomFloat01(void);
@@ -38,8 +38,8 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
 	if (!fcn_004f4830(idx, rec)) {
 		goto fail;
 	}
-	h1 = fcn_00508e40(a3);
-	h2 = fcn_00508e40(a4);
+	h1 = gm_LookupEntityRecordById(a3);
+	h2 = gm_LookupEntityRecordById(a4);
 	gm_ResolveEntityById(&hit, 0, 0, a5);
 	switch ((unsigned char) *(int*) (rec + 0x14)) {
 	case 1:

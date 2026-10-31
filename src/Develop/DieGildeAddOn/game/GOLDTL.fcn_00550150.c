@@ -11,7 +11,7 @@ void __cdecl fcn_00546190(char*);
 int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 
 void __cdecl fcn_00550150(char* e)
@@ -36,7 +36,7 @@ void __cdecl fcn_00550150(char* e)
 		if (h != 0) {
 			k = (h[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (h + 0x165);
 			fcn_004c5da0(*(int*) (h + 4), *(int*) (e + 0xb0), *(int*) (e + 0xb4), 0, 0, "RndGeselle");
-			fcn_0051af00(buf, *(unsigned short*) (e + 0xb8), *(unsigned short*) h, k, a);
+			io_FormatTextBuffer(buf, *(unsigned short*) (e + 0xb8), *(unsigned short*) h, k, a);
 			he_MessageBoxQuickjump(*(int*) (e + 0xac), *(int*) (e + 0xac), buf, 0, 0x5ec, *(int*) (e + 0xb0), *(int*) (e + 0xb4), 0,
 			    "_NACHRICHTEN_HS_00");
 		}

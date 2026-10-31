@@ -38,13 +38,13 @@ extern char s_6aa4b8[];
 extern char* __cdecl fcn_005463a0(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern int __cdecl fcn_0055c050(char*);
-extern void __cdecl fcn_0051af00(char*, char*, ...);
+extern void __cdecl io_FormatTextBuffer(char*, char*, ...);
 extern int __cdecl fcn_00526120(char*, int);
 extern int __cdecl fcn_00470820(int, int, char*);
 extern void __cdecl fcn_00471b60(int);
-extern void __cdecl fcn_00473a90(int, int);
+extern void __cdecl d2_SetOverlayAnimation(int, int);
 extern void __cdecl d2_SetForm(int, int);
-extern int __cdecl fcn_00519190(int, ...);
+extern int __cdecl io_AppendText(int, ...);
 extern int __cdecl fcn_00472250(int, int, int);
 extern void __cdecl fcn_004c35f0(void);
 extern void __cdecl fcn_004c5530(Msg_59d380*);
@@ -74,7 +74,7 @@ int __cdecl fcn_0059d380(char* a1)
 	e = fcn_005463a0(1, 0, 0x62);
 	while (e != 0) {
 		if (*(int*) (e + 0xb0) == *(int*) (a1 + 1)) {
-			fcn_0051af00(buf, (char*) 0x1a91, *(unsigned short*) (a1 + 0x27), a1);
+			io_FormatTextBuffer(buf, (char*) 0x1a91, *(unsigned short*) (a1 + 0x27), a1);
 			fcn_00526120(buf, 0);
 			return 0;
 		}
@@ -90,15 +90,15 @@ int __cdecl fcn_0059d380(char* a1)
 		return 0;
 	}
 	if (fcn_0055c050(a1) == 0) {
-		fcn_0051af00(buf, (char*) 0x1a89, *(unsigned short*) (a1 + 0x27), a1);
+		io_FormatTextBuffer(buf, (char*) 0x1a89, *(unsigned short*) (a1 + 0x27), a1);
 		fcn_00526120(buf, 0);
 		return 0;
 	}
 	dlg = fcn_00470820(0, 0, s_6aa4b8);
 	fcn_00471b60(dlg);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	item1 = fcn_00519190(0x1a8b, a1);
+	item1 = io_AppendText(0x1a8b, a1);
 	item2 = fcn_00472250(dlg, 1, item1);
 	fcn_00472250(dlg, 1, item1 + 1);
 	g_100f1dc = -1;

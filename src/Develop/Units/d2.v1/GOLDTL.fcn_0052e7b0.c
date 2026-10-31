@@ -37,7 +37,7 @@ int __cdecl fcn_0050f950(int a, int b);
 int __cdecl fcn_00507c30(int k);
 float __cdecl fcn_004ff040(char* e);
 void __cdecl fcn_005186c0(int id, int a, int b, char* out);
-void __cdecl fcn_00519190(char* fmt, ...);
+void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f, int g, int h);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -65,7 +65,7 @@ void __cdecl fcn_0052e7b0(char* e)
 		}
 		pct = (int) (fcn_004ff040(e) * 100.0);
 		fcn_005186c0(*(unsigned short*) e, 1, 4, buf);
-		fcn_00519190(g_6a2e8c, buf, pct);
+		io_AppendText(g_6a2e8c, buf, pct);
 		d2_SetForm(g_6a25b8, 0);
 		x = (((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1;
 		g_6a25c0 = fcn_004677e0(0x18, 0x6c, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
@@ -83,7 +83,7 @@ void __cdecl fcn_0052e7b0(char* e)
 	}
 	else {
 		sprintf(buf, "%i %s", g_7746f0, g_14b5f10);
-		fcn_00519190(buf);
+		io_AppendText(buf);
 	}
 	d2_SetForm(g_6a25b8, 0);
 	x = (((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1;

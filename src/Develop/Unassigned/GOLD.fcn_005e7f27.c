@@ -1,9 +1,7 @@
 
-// fcn_005e7f27 — fcn_005e7da5(a, a, 0x630a50).
+int __cdecl _ld12cvt(int, int, int);
 
-int __cdecl fcn_005e7da5(int, int, int);
-
-void __cdecl fcn_005e7f27(int a)
+void __cdecl fcn_005e7f27(int a, int b)
 {
-	fcn_005e7da5(a, a, 0x630a50);
+	_ld12cvt(a, b, 0x630a50);
 }

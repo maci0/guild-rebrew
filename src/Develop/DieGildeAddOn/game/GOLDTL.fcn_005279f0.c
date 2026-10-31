@@ -41,7 +41,7 @@ extern char* g_14a79c0[];
 void __cdecl fcn_0046b2b0(int id);
 void __cdecl fcn_00527540(void);
 int __cdecl fcn_00465950(const char* name);
-void* __cdecl fcn_00466190(int idx);
+void* __cdecl d2_GetResourceData(int idx);
 int __cdecl fcn_0047cba0(int x, int y, int a3, fcn_0047cba0_set* s,
 	int idx);
 void* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex,
@@ -112,7 +112,7 @@ void __cdecl fcn_005279f0(unsigned int a0)
 		if (v6 == -1)
 			v6 = fcn_00465950("_STADTWAPPEN_BERLIN");
 		fcn_0047cba0(g_1040494 - 0x6e, 0x5b, g_77250c,
-			(fcn_0047cba0_set*) fcn_00466190(v6), g_772568 + 1);
+			(fcn_0047cba0_set*) d2_GetResourceData(v6), g_772568 + 1);
 		goto done;
 	}
 	if (g_774684) {

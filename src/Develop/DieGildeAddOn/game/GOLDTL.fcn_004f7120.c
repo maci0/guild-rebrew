@@ -1,6 +1,6 @@
 int __cdecl fcn_004f36e0(int a);
 int __cdecl fcn_004f4830(int idx, void* dst);
-char* __cdecl fcn_00508e40(int a1);
+char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_00508eb0(unsigned short a0, int a1);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
@@ -18,7 +18,7 @@ int __cdecl fcn_004f7120(int id, short* a1, int* a2, short* a3, int* a4)
 			if (fcn_004f4830(*(unsigned char*) (0x9a381c + idx * 0x2d), rec) != 0) {
 				sum = rec[3];
 				if (sum != 0) {
-					o = fcn_00508e40(*(int*) (0x9a3816 + idx * 0x2d));
+					o = gm_LookupEntityRecordById(*(int*) (0x9a3816 + idx * 0x2d));
 					if (o != 0) {
 						*a3 = *(short*) o;
 						sum = fcn_00508eb0(*(unsigned short*) o, 1) + sum;

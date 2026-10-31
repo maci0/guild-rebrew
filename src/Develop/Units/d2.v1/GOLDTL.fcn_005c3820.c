@@ -9,16 +9,16 @@ extern int g_14ce8e0;
 void* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_0050c7d0(int, int);
 int __cdecl fcn_0050c710(unsigned char*, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_0046f9b0(int, char*);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_0051af00(char*, char*, ...);
+void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00526120(void*, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471a30(int, int);
@@ -54,11 +54,11 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	table[0x24] = 0;
 	window = fcn_00470820(0, 0, "techtree\\auswirkungen");
 	fcn_00471b60(window);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(window, 1);
-	fcn_00519190(0x17e0, a0);
+	io_AppendText(0x17e0, a0);
 	d2_SetForm(window, 3);
-	elem = fcn_00472250(window, 3, fcn_00519190(0x17e1));
+	elem = fcn_00472250(window, 3, io_AppendText(0x17e1));
 	d2_SetForm(window, 2);
 	entry = table[0];
 	if (entry != 0) {
@@ -77,7 +77,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 				wins[i] = window;
 				*(int*) (g_1015ea0 + window * 0x2f4 + 0x1d0) = 3;
 				*(int*) (g_1015ea0 + window * 0x2f4 + 0x84) = 0x55;
-				fcn_0051af00(buf, "%s:", *(unsigned int*) (table[i] * 8 + 0x14a9180));
+				io_FormatTextBuffer(buf, "%s:", *(unsigned int*) (table[i] * 8 + 0x14a9180));
 				fcn_0046f9b0(window, buf);
 				*(int*) (g_1015ea0 + window * 0x2f4 + 0x5c) = 1;
 				if (table[i] == 3) {
@@ -115,7 +115,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 		if (g_100f1dc != -1 && entry != 0) {
 			for (i = 0; table[i] != 0; i++) {
 				if (wins[i] != -1 && g_67d370 == wins[i]) {
-					fcn_0051af00(buf, "$Z$[%s$]$N%s", table[i] * 2 + 0xf98,
+					io_FormatTextBuffer(buf, "$Z$[%s$]$N%s", table[i] * 2 + 0xf98,
 					    table[i] * 2 + 0xf99);
 					fcn_00471a30(window, 0);
 					fcn_00526120(buf, 0x10);

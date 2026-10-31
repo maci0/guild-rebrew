@@ -1,7 +1,7 @@
 #include "gold_rec.h"
 
 /* ADDRESS: GOLD 0x004e6e20 */
-void __cdecl fcn_004e6e20(GOLDUser *p, int who)
+void __cdecl ClearUserRecords(GOLDUser *p, int who)
 {
 	unsigned short lim = GOLD_limit;
 	int i;

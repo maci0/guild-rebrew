@@ -52,7 +52,7 @@ int __cdecl fcn_00508da0(unsigned char* s);
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl fcn_005186c0(int id, int a, int b, char* out);
-void __cdecl fcn_00519190(char* fmt, ...);
+void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -78,12 +78,12 @@ void __cdecl fcn_0052df40(unsigned char* s)
 	if (*s != 0x47) {
 		fcn_005186c0(*(unsigned short*) (s + 0x27), 2, 1, name);
 		if (s[5] != 0) {
-			fcn_00519190(g_6a2f30, name, *s * 14 + 0x48e, s + 5);
+			io_AppendText(g_6a2f30, name, *s * 14 + 0x48e, s + 5);
 		} else {
-			fcn_00519190(g_6a2f24, name, *s * 14 + 0x48e);
+			io_AppendText(g_6a2f24, name, *s * 14 + 0x48e);
 		}
 	} else {
-		fcn_00519190(g_6a2f24, 0x870, &g_868060[*(int*) (s + 0x65)]);
+		io_AppendText(g_6a2f24, 0x870, &g_868060[*(int*) (s + 0x65)]);
 	}
 	d2_SetForm(g_6a25b8, 0);
 	g_6a25bc = fcn_0046f740((((Slot_52df40*) g_1015f40)[g_772514].width - 0x30) >> 1, 0x48, *s + 0x427, g_772514);

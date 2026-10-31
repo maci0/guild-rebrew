@@ -2,7 +2,7 @@
 
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005059b0(char*, int, int);
 
 int __cdecl fcn_004cb650(char* x, char* out)
@@ -14,10 +14,10 @@ int __cdecl fcn_004cb650(char* x, char* out)
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (x + 0x10));
 	if (e == 0)
 		return 1;
-	a = fcn_00508e40(*(int*) (x + 0x18));
+	a = gm_LookupEntityRecordById(*(int*) (x + 0x18));
 	if (a == 0 && *(int*) (x + 0x18) != -1)
 		return 1;
-	b = fcn_00508e40(*(int*) (x + 0x14));
+	b = gm_LookupEntityRecordById(*(int*) (x + 0x14));
 	if (b == 0 && *(int*) (x + 0x14) != -1)
 		return 2;
 	fcn_005059b0(e, *b, *a);

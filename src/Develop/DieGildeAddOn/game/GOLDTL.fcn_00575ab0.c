@@ -7,7 +7,7 @@ extern float g_696550[];
 extern float g_696540[];
 
 int __cdecl fcn_00500e20(pos14_7f4c00*);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_005b3200(char*, char*, int, int);
@@ -27,7 +27,7 @@ void __cdecl fcn_00575ab0(char* u)
 	int t;
 
 	k = fcn_00500e20(&g_7f4c00);
-	h = fcn_00508e40(*(int*) (u + 0xac));
+	h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 	if (h == 0 || ahm_CheckFlag(h) == 0) {
 		*(int*) (u + 0x70) = -2;
 	}
@@ -36,7 +36,7 @@ void __cdecl fcn_00575ab0(char* u)
 		if (!(t >= g_696550[k]) && !(t < g_696540[k])) {
 			if (*(int*) (u + 0x70) == 1) {
 				q = fcn_00502cd0(*(int*) (*(char**) (h + 0x16c) + 0x5d), 2, 6, 0, 0x24b);
-				o = fcn_00508e40(*(int*) (u + 0xc));
+				o = gm_LookupEntityRecordById(*(int*) (u + 0xc));
 				if (o != 0) {
 					fcn_005b3200(o, h, q, *(int*) (u + 0xb0));
 				}

@@ -28,7 +28,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472830(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_004695a0(int, int);
-int __cdecl fcn_00519190(char*, ...);
+int __cdecl io_AppendText(char*, ...);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_0050dfd0(int, int);
@@ -87,7 +87,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 	first = fcn_00472830(h, 2);
 	fcn_00472830(h, 1);
 	d2_SetForm(h, 1);
-	fcn_00519190(s_68170c, *(unsigned short*) (tbl + 0x27), tbl);
+	io_AppendText(s_68170c, *(unsigned short*) (tbl + 0x27), tbl);
 	d2_SetForm(h, 3);
 	fcn_00533a60(g_772514, 0, ids, 2, g_14b5e9c, g_14b5ea4);
 	selA = ids[0];

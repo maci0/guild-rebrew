@@ -3,12 +3,12 @@ extern char g_7f4ca0[];
 
 #include <string.h>
 
-void* __cdecl fcn_00508e40(int);
+void* __cdecl gm_LookupEntityRecordById(int);
 int  __cdecl fcn_005c6270(void*, int);
 int  __cdecl fcn_004a55c0(void*, int, int*, float, float, unsigned short*);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_0051af00(void*, int, int);
+void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, int);
 
 
@@ -22,7 +22,7 @@ int __cdecl fcn_004b8410(void* a1)
 	void* e;
 	int n;
 
-	p = fcn_00508e40(*(int*) a1);
+	p = gm_LookupEntityRecordById(*(int*) a1);
 	if (p == 0) {
 		return 1;
 	}
@@ -39,7 +39,7 @@ int __cdecl fcn_004b8410(void* a1)
 	}
 	n = 2 * gm_RandomMod(0xf) + 10;
 	fcn_004c54c0(*(int*) ((char*) p + 4), *(int*) ((char*) e + 4), -n, 1);
-	fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7,
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7,
 	    *(unsigned short*) e);
 	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);

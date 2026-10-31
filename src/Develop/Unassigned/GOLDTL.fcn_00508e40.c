@@ -1,7 +1,7 @@
 extern char g_7f4ca4[];
 
 /* ADDRESS: GOLDTL 0x00508e40 */
-char* __cdecl fcn_00508e40(int a1)
+char* __cdecl gm_LookupEntityRecordById(int a1)
 {
 	int i;
 	int a;

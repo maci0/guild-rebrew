@@ -66,7 +66,7 @@ int __cdecl fcn_0050d2f0(unsigned short*);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_0050b710(int, unsigned char);
 int __cdecl fcn_0050b750(int, unsigned char);
-int __cdecl fcn_0051af00(char*, int, ...);
+int __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c4700(int, int, int, char*);
@@ -230,24 +230,24 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 		r = fcn_004c53a0();
 	}
 	if (prev != 0) {
-		fcn_0051af00(buf, s_6999a8, prev);
+		io_FormatTextBuffer(buf, s_6999a8, prev);
 		strcat(a1, buf);
 	}
 	if (stop != 0) {
-		fcn_0051af00(buf, s_6999a8, stop);
+		io_FormatTextBuffer(buf, s_6999a8, stop);
 		strcat(a1, buf);
 	}
 	if (count == 0) {
 		return;
 	}
-	fcn_0051af00(buf, 0x1c50);
+	io_FormatTextBuffer(buf, 0x1c50);
 	strcat(a1, buf);
 	if (count <= 0) {
 		return;
 	}
 	i = 0;
 	while (i <= 5) {
-		fcn_0051af00(buf, s_6999a8, list[i]);
+		io_FormatTextBuffer(buf, s_6999a8, list[i]);
 		strcat(a1, buf);
 		i++;
 		if (count <= i) {
@@ -257,6 +257,6 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 	if (count <= i) {
 		return;
 	}
-	fcn_0051af00(buf, 0xb6, count - i);
+	io_FormatTextBuffer(buf, 0xb6, count - i);
 	strcat(a1, buf);
 }

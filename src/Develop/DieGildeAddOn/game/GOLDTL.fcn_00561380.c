@@ -25,7 +25,7 @@ void __cdecl fcn_00529160(int, int, int, void *);
 void __cdecl fcn_004c51a0(int, int, int, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004c5da0(int, int, int, int, int, char *);
-void *__cdecl fcn_00508e40(int);
+void *__cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00500bb0(void *, int, int, int);
 int __cdecl fcn_0055be70(void *);
 void __cdecl fcn_004c5ed0(int, char *, int);
@@ -34,7 +34,7 @@ int __cdecl fcn_00500cb0(void *, int *);
 float __cdecl fcn_00507e70(void *, void *, int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_005c6270(void *, int);
-void __cdecl fcn_0051af00(char *, int, ...);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, char *);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
@@ -105,7 +105,7 @@ void __cdecl fcn_00561380(void *a0)
 		return;
 	case 2:
 		*(int *)(p + 0xc8) = -1;
-		r = (unsigned char *)fcn_00508e40(*(int *)(p + 0xc4));
+		r = (unsigned char *)gm_LookupEntityRecordById(*(int *)(p + 0xc4));
 		if (r == 0) {
 			*(int *)(p + 0x70) = -1;
 			return;
@@ -160,13 +160,13 @@ void __cdecl fcn_00561380(void *a0)
 		if (fcn_005c6270(recB, 0x2c0) != 0)
 			goto label_561a7a;
 		{
-			fcn_0051af00(text, 0x1735, *(unsigned short *)recA, r);
+			io_FormatTextBuffer(text, 0x1735, *(unsigned short *)recA, r);
 			he_MessageBoxQuickjump(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 			if (*(unsigned short *)(r + 0x27) != 0xffff) {
 				if (*(unsigned char *)(recA + 2) != 6 && *(unsigned char *)(recA + 2) != 7)
 					fcn_004c54c0(*(int *)(recB + 4), *(int *)(recA + 4), -0x19, 1);
 				else {
-					fcn_0051af00(text, 0x1736, r);
+					io_FormatTextBuffer(text, 0x1736, r);
 					he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, g_6a654c);
 				}
 				fcn_004f4f60(0x18, 1, *(int *)(recB + 4), *(int *)(recA + 4), *(int *)(r + 1));
@@ -176,7 +176,7 @@ void __cdecl fcn_00561380(void *a0)
 				if ((*(unsigned char *)(v22 - 2) == 6 || *(unsigned char *)(v22 - 2) == 7)
 					&& *(int *)v22 != *(int *)(recA + 4)
 					&& *(int *)v22 != *(int *)(recB + 4)) {
-					fcn_0051af00(text, 0x1737, *(unsigned short *)recA, r);
+					io_FormatTextBuffer(text, 0x1737, *(unsigned short *)recA, r);
 					he_MessageBoxQuickjump(*(int *)v22, -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 				}
 				v22 = v22 + 0x87 * 4;
@@ -197,20 +197,20 @@ label_561aa2:
 		if (fcn_005c6270(recA, 0x2c0)) {
 			fcn_005100f0(*(int *)(recB + 4), -1);
 			if (*(unsigned char *)(recB + 2) == 6 || *(unsigned char *)(recB + 2) == 7) {
-				fcn_0051af00(text, 0x1013, *(unsigned short *)recA, r);
+				io_FormatTextBuffer(text, 0x1013, *(unsigned short *)recA, r);
 				fcn_00545d40(*(int *)(recB + 4), -1, text, 0, 0x5fa, 0);
 			}
 			if (*(unsigned char *)(recA + 2) == 6 || *(unsigned char *)(recA + 2) == 7) {
-				fcn_0051af00(text, 0x1011, r);
+				io_FormatTextBuffer(text, 0x1011, r);
 				fcn_00545d40(*(int *)(recA + 4), -1, text, 0, 0x5fb, g_6a6538);
 			}
 			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 			return;
 		}
-		fcn_0051af00(text, 0x1738, *(unsigned short *)(r + 0x27), r);
+		io_FormatTextBuffer(text, 0x1738, *(unsigned short *)(r + 0x27), r);
 		he_MessageBoxQuickjump(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 		if (*(unsigned short *)(r + 0x27) != 0xffff) {
-			fcn_0051af00(text, 0x1739, r);
+			io_FormatTextBuffer(text, 0x1739, r);
 			he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 			fcn_004f4f60(0x18, 1, *(int *)(recB + 4), *(int *)(recA + 4), *(int *)(r + 1));
 			*(int *)(p + 0x70) = -1;
@@ -284,7 +284,7 @@ label_561aa2:
 		return;
 		}
 	case 6:
-		r = (unsigned char *)fcn_00508e40(*(int *)(p + 0xc4));
+		r = (unsigned char *)gm_LookupEntityRecordById(*(int *)(p + 0xc4));
 		if (r == 0) {
 			*(int *)(p + 0x70) = -1;
 			return;
@@ -305,7 +305,7 @@ label_561aa2:
 		e = (unsigned char *)fcn_005463a0(1, 1, *(int *)(p + 0xcc));
 		if (r == 0 || e == 0 || *(int *)(e + 0xd4) != *(int *)(p + 4) || *(int *)(p + 0xc8) == -1)
 			goto label_56148f;
-		query = (unsigned char *)fcn_00508e40(*(int *)(p + 0xcc));
+		query = (unsigned char *)gm_LookupEntityRecordById(*(int *)(p + 0xcc));
 		hand = (unsigned char *)fcn_004c4480(*(int *)(p + 0xc8));
 		if (hand != 0 && query != 0)
 			fcn_004c58b0(*(int *)hand, *(int *)(query + 4));

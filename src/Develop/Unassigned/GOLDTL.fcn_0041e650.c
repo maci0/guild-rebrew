@@ -3,8 +3,8 @@
 
 struct Node;
 __declspec(dllimport) void __stdcall CoUninitialize(void);
-void __cdecl fcn_0041f7f0(char*);
-void __cdecl fcn_0041f940(struct Node*);
+void __cdecl ReleaseVideoInterfaces(char*);
+void __cdecl FreeVideoListNode(struct Node*);
 
 /* ADDRESS: GOLDTL 0x0041e650 */
 void __cdecl fcn_0041e650(void)
@@ -14,9 +14,9 @@ void __cdecl fcn_0041e650(void)
 	node = *(char**) 0x6b6f84;
 	if (node != 0) {
 		do {
-			fcn_0041f7f0(node);
+			ReleaseVideoInterfaces(node);
 			node = *(char**) 0x6b6f84;
-			fcn_0041f940((struct Node*) node);
+			FreeVideoListNode((struct Node*) node);
 			node = *(char**) 0x6b6f84;
 		} while (node != 0);
 	}

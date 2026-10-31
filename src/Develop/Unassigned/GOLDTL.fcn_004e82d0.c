@@ -16,7 +16,7 @@ typedef struct {
 #include "client_types.h"
 extern Rec18_68da68 g_9a9220[42];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 
 int __cdecl fcn_004e82d0(unsigned char* m)
 {
@@ -34,9 +34,9 @@ int __cdecl fcn_004e82d0(unsigned char* m)
 		return 0;
 	if (((rec18*)g_9a9220)[i].f14 != -1)
 		return 0;
-	if (*(int*) (m + 7) != -1 && fcn_00508e40(*(int*) (m + 7)) == 0)
+	if (*(int*) (m + 7) != -1 && gm_LookupEntityRecordById(*(int*) (m + 7)) == 0)
 		return 0;
-	if (*(int*) (m + 1) != -1 && fcn_00508e40(*(int*) (m + 1)) == 0)
+	if (*(int*) (m + 1) != -1 && gm_LookupEntityRecordById(*(int*) (m + 1)) == 0)
 		return 0;
 	return 1;
 }

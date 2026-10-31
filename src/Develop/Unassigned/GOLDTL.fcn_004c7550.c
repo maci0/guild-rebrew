@@ -1,7 +1,7 @@
 
 
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 
 int __cdecl fcn_004c7550(char* a1)
 {
@@ -13,7 +13,7 @@ int __cdecl fcn_004c7550(char* a1)
 		return 1;
 	}
 	for (i = 0; i < 0x10; i++) {
-		e = fcn_00508e40(*(int*) (a1 + 0x14 + i * 4));
+		e = gm_LookupEntityRecordById(*(int*) (a1 + 0x14 + i * 4));
 		if (e != 0 && (e[2] == 6 || e[2] == 7)) {
 			v = *(int*) (e + 0x20c);
 			if (v != -1 && v != *(int*) (a1 + 0x10)) {

@@ -1,4 +1,4 @@
-char* __cdecl fcn_00508e40(int a1);
+char* __cdecl gm_LookupEntityRecordById(int a1);
 void __cdecl fcn_004c5530(int a1);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
 
@@ -9,7 +9,7 @@ int __cdecl fcn_004a1080(char* a0, char* a1, char* a2)
 	char* e;
 
 	if (*(unsigned char*) a1 == 7 && *(unsigned char*) a2 == 0x0e) {
-		e = fcn_00508e40(0);
+		e = gm_LookupEntityRecordById(0);
 		if (e != 0) {
 			*(unsigned char*) (buf + 0x36) = 0x12;
 			*(unsigned char*) (buf + 0x04) = 0x5f;

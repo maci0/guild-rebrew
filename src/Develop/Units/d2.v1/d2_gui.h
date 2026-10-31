@@ -46,13 +46,13 @@ extern int g_772568;
 /* ADDRESS: GOLDTL 0x0102d158 */
 extern char d2_BildArgument2[];
 
-void* __cdecl fcn_00466190(int bild);
+void* __cdecl d2_GetResourceData(int bild);
 void __cdecl d2_SubRefcount(int bild);
 void __cdecl fcn_00469900(int bild);
 void __cdecl d2_SetElementImage(int element, int bild);
 /* Inferred name and contract; widget kind/flags select the payload. */
 void __cdecl d2_SetElementValue(int element, ...);
-int __cdecl fcn_004722c0(char* sub);
+int __cdecl d2_GetValueStep(char* sub);
 
 
 /* Inferred from d2:ShowTxt; coordinates are words in Gold and dwords in TL. */

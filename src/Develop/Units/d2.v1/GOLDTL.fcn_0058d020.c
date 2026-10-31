@@ -5,11 +5,11 @@ extern int g_772514;
 extern int g_774654;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0058c4f0(char*, int, int, int*, int*);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(int, int);
@@ -28,15 +28,15 @@ void __cdecl fcn_0058d020(char* a0)
 
 	sel = 0;
 	dlg = fcn_00470820(0, 0, "Locations\\Friedhof\\RentAGrave");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x410a, 0x4108);
+	io_AppendText(0x410a, 0x4108);
 	fcn_0058c4f0(a0, dlg, 2, ids, &sel);
 	d2_SetForm(dlg, 3);
-	task = fcn_00472250(dlg, 3, fcn_00519190(0x6a4078, 0x4117));
+	task = fcn_00472250(dlg, 3, io_AppendText(0x6a4078, 0x4117));
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {

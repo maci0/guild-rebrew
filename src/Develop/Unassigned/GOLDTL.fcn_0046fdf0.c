@@ -37,7 +37,7 @@ int __cdecl fcn_0046fdf0(int x, int y, char* text, int win)
 		return -1;
 	}
 	if (w->i[0x2c / 4] >= 0x180) {
-		fcn_0041d9e0(s_67d420);
+		ReportClientMessage(s_67d420);
 		return -1;
 	}
 	id = fcn_00469890();

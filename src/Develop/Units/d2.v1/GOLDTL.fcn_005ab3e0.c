@@ -4,11 +4,11 @@ int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl fcn_0050f980(unsigned short, unsigned short, int);
 int __cdecl fcn_005c6270(char *, int);
 int __cdecl fcn_00470820(int, int, char *);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00526010(char *, int, int);
 int __cdecl fcn_004c4510(int, int);
@@ -16,8 +16,8 @@ void __cdecl fcn_004c4670(int, int, int, int *);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c5150(int, int, int, int);
 int __cdecl fcn_004c4450(int);
-char *__cdecl fcn_00508e40(int);
-void __cdecl fcn_0051af00(char *, int, ...);
+char *__cdecl gm_LookupEntityRecordById(int);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl fcn_00526120(char *, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005373e0(void *, int);
@@ -70,19 +70,19 @@ void __cdecl fcn_005ab3e0(int a0)
 		}
 	}
 	dlg = fcn_00470820(0, 0, (char *) 0x6ab014);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(*(int *) 0x772514);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1960, "Locations\\Kirche\\Ablass2");
+	io_AppendText(0x1960, "Locations\\Kirche\\Ablass2");
 	if (cost < 1) {
-		fcn_00519190(0x1961, *(unsigned short *) 0x774970);
+		io_AppendText(0x1961, *(unsigned short *) 0x774970);
 		item = 0;
 	} else {
-		fcn_00519190(0x1962, count, cost);
+		io_AppendText(0x1962, count, cost);
 		d2_SetForm(dlg, 2);
-		fcn_00519190(0x1963, count, cost);
+		io_AppendText(0x1963, count, cost);
 		item = fcn_00472250(dlg, 2, 0);
 	}
 	*(int *) 0x100f1dc = -1;
@@ -111,7 +111,7 @@ void __cdecl fcn_005ab3e0(int a0)
 					fcn_00535960();
 				}
 				ent = fcn_0050e600();
-				fcn_0051af00((char *) text, 0x1964, cost, ent, *(unsigned short *) 0x774970);
+				io_FormatTextBuffer((char *) text, 0x1964, cost, ent, *(unsigned short *) 0x774970);
 				fcn_00526120((char *) text, 0x100);
 				changed = 1;
 				*(int *) 0x774654 = 1;
@@ -126,7 +126,7 @@ void __cdecl fcn_005ab3e0(int a0)
 		fcn_00471b60(dlg);
 		d2_SetForm(dlg, 0);
 		fcn_005340f0(*(int *) 0x772514);
-		fcn_00473a90(0, 0);
+		d2_SetOverlayAnimation(0, 0);
 		*(int *) 0x100f1dc = -1;
 		do {
 			fcn_0050e670(prev, cur);
@@ -139,7 +139,7 @@ void __cdecl fcn_005ab3e0(int a0)
 			}
 			if (changed) {
 				fcn_0046f2c0(*(int *) 0x772514, 1);
-				fcn_00519190(0x196b, *(int *) 0x772514);
+				io_AppendText(0x196b, *(int *) 0x772514);
 				for (col = 0; col < 5; col++) {
 					row[0] = 0;
 					if (idx[col] != -1) {
@@ -150,10 +150,10 @@ void __cdecl fcn_005ab3e0(int a0)
 					if (row[0] == 0) {
 						strcpy((char *) text, *(char **) 0x14a6554);
 					} else {
-						fcn_0051af00((char *) text, 0x196d, row[0]);
+						io_FormatTextBuffer((char *) text, 0x196d, row[0]);
 					}
 					fcn_005c91c0((char *) text, row[1], row[2], 0x14, 0x53);
-					fcn_0051af00((char *) text, 0x196e, idx[col]);
+					io_FormatTextBuffer((char *) text, 0x196e, idx[col]);
 					fcn_005c91c0((char *) text, row[1], row[2] + 0x19, 0x14, 0x53);
 				}
 			}

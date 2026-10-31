@@ -4,11 +4,11 @@ extern int g_100f1dc;
 extern int g_67d370;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -34,8 +34,8 @@ void __cdecl fcn_005c2910(char* e)
 	win = fcn_00470820(0, 0, "Panel\\Gebaeude_Verkaufen_pergament");
 	fcn_00471b60(win);
 	d2_SetForm(win, 2);
-	saved = fcn_00472250(win, 2, fcn_00519190(0x17cc, e, *(int*) (u + 0xb0)));
-	fcn_00473a90(0, 0);
+	saved = fcn_00472250(win, 2, io_AppendText(0x17cc, e, *(int*) (u + 0xb0)));
+	d2_SetOverlayAnimation(0, 0);
 	fcn_005373e0((void*) 0, 0x677c7);
 	do {
 		r = (int) gm_SearchTable67(id);

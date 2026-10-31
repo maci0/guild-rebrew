@@ -24,7 +24,7 @@ extern struct house g_7f4ca0[];
 #include "client_packet_builder.h"
 extern char g_6b5c60[];
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00500cb0(struct pos14*, struct pos14*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_0050c710(char*, int, int);
@@ -36,7 +36,7 @@ void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
 char* __cdecl fcn_0050dc90(char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl fcn_00546190(char*);
@@ -55,7 +55,7 @@ void __cdecl fcn_0057a3d0(char* e)
 
 	switch (*(int*) (e + 0x70)) {
 	case 0:
-		who = fcn_00508e40(*(int*) (e + 0xac));
+		who = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 		if (who != 0 && (unsigned char) who[*(int*) (e + 0xb0) + 0x80] < 252.0f
 		    && fcn_00500cb0(&g_7f4c00, (struct pos14*) (e + 0xb8)) < 0) {
 			q = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0x10));
@@ -78,7 +78,7 @@ void __cdecl fcn_0057a3d0(char* e)
 			fcn_00500bb0((struct pos14*) (e + 0x52), 0, 0x1e, 0);
 			return;
 		}
-		who = fcn_00508e40(*(int*) (e + 0xac));
+		who = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 		q = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0x10));
 		if (q == 0 || who == 0) {
 			break;
@@ -90,7 +90,7 @@ void __cdecl fcn_0057a3d0(char* e)
 				s = gm_SetupEntityQuery(q);
 			}
 			if (s != 0) {
-				fcn_0051af00(buf, 0x1bc8, *(unsigned short*) who, q);
+				io_FormatTextBuffer(buf, 0x1bc8, *(unsigned short*) who, q);
 				he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].handle, *(int*) (e + 0x10), buf, 0, 0x5f2,
 				    *(int*) (q + 1), *(int*) (s + 2), g_6b5c60, "_NACHRICHTEN_HS_81");
 			}

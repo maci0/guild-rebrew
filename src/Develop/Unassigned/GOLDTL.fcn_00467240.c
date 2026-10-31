@@ -62,7 +62,7 @@ int __cdecl fcn_00467240(int x, int y, int w, int h, unsigned char flags)
 			i++;
 		}
 		if (i > 0x7f) {
-			fcn_0041d9e0(s_67d47c);
+			ReportClientMessage(s_67d47c);
 			return -1;
 		}
 	}

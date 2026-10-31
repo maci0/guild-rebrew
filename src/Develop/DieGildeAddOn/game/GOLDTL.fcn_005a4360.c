@@ -4,8 +4,8 @@
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
 
-unsigned short* __cdecl fcn_00508e40(int);
-void __cdecl fcn_0051af00(void*, int, ...);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_00526010(void*, int, char);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_004c5150(int, int, char, int);
@@ -21,8 +21,8 @@ void __cdecl fcn_005a4360(char* e, char* s)
 	char* slot;
 	char* p;
 
-	g = fcn_00508e40(*(int*) (s + 0xb0));
-	fcn_0051af00(msg, 0x18d5, *(int*) (s + 0xb4));
+	g = gm_LookupEntityRecordById(*(int*) (s + 0xb0));
+	io_FormatTextBuffer(msg, 0x18d5, *(int*) (s + 0xb4));
 	if (e == 0) {
 		return;
 	}
@@ -39,7 +39,7 @@ void __cdecl fcn_005a4360(char* e, char* s)
 		*(int*) (p + 0x48) += *(int*) (s + 0xb4);
 	}
 	if (slot[2] != 5) {
-		fcn_0051af00(txt, 0x18d8, *g, e, *(int*) (s + 0xb4));
+		io_FormatTextBuffer(txt, 0x18d8, *g, e, *(int*) (s + 0xb4));
 		he_MessageBoxQuickjump(*(int*) (slot + 4), -1, txt, 0, 0x5ec, *(int*) (e + 1), -1, 0, 0);
 	}
 	fcn_00546190(s);

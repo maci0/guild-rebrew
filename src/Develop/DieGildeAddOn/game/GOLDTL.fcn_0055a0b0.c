@@ -9,12 +9,12 @@ struct EvRec {
 
 int __cdecl fcn_004e8b40(unsigned char, int*);
 int __cdecl fcn_004e8b80(int, int, EvRec*);
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004e8240(unsigned char, unsigned char*, unsigned char*, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 void __cdecl fcn_00546190(void*);
 
@@ -35,9 +35,9 @@ void __cdecl fcn_0055a0b0(char* a0)
 	idx = *(int*) (a0 + 0x70);
 	if (idx == 0xc) {
 		if (*(int*) (a0 + 0xac) == 0) {
-			fcn_0051af00(buf, 0x10bc, (unsigned char*) 0x868080 + *(unsigned char*) 0x773d75 * 0x2f4);
+			io_FormatTextBuffer(buf, 0x10bc, (unsigned char*) 0x868080 + *(unsigned char*) 0x773d75 * 0x2f4);
 		} else {
-			fcn_0051af00(buf, 0x10be, (unsigned char*) 0x868080 + *(unsigned char*) 0x773d75 * 0x2f4);
+			io_FormatTextBuffer(buf, 0x10be, (unsigned char*) 0x868080 + *(unsigned char*) 0x773d75 * 0x2f4);
 		}
 		p = (unsigned char*) 0x7f4ca2;
 		do {
@@ -55,7 +55,7 @@ void __cdecl fcn_0055a0b0(char* a0)
 			if (cnt > 0) {
 				r = (unsigned char*) arr;
 				do {
-					v3 = fcn_00508e40(*(int*) (r + 4));
+					v3 = gm_LookupEntityRecordById(*(int*) (r + 4));
 					if (v3 != 0 && fcn_004e8b40(*(unsigned char*) (r + 8), tmp)) {
 						if (*(int*) (a0 + 0xac) == 1
 						    && ((unsigned char) *(tmp + 2) == 9 || ((*(2 + tmp)) & 0xFF) == 6)) {
@@ -80,10 +80,10 @@ void __cdecl fcn_0055a0b0(char* a0)
 							if (n != 0) {
 								if ((*(unsigned char*) (v3 + 2) == 6 || *(unsigned char*) (v3 + 2) == 7)) {
 									if (!(*(int*) (a0 + 0xac) != 0)) {
-										fcn_0051af00(buf, 0x10bd, *(unsigned short*) v3);
+										io_FormatTextBuffer(buf, 0x10bd, *(unsigned short*) v3);
 										fcn_00545d40(*(int*) (v3 + 4), -1, buf, 1, 0x5fd, (void*) 0x6b5c60);
 									} else {
-										fcn_0051af00(buf, 0x10bf, *(unsigned short*) v3);
+										io_FormatTextBuffer(buf, 0x10bf, *(unsigned short*) v3);
 										fcn_00545d40(*(int*) (v3 + 4), -1, (buf), 1, 0x5fd, (void*) 0x6b5c60);
 									}
 								}

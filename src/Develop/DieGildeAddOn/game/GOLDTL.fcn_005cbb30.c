@@ -24,7 +24,7 @@ extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005ca560(Item5cbb* s);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 
@@ -47,38 +47,38 @@ int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, i
 	if (max == 0) {
 		for (t = fcn_005463a0(1, 0, 0x2c); t != 0; t = he_fn_Handlung()) {
 			found = 0;
-			if ((p = fcn_00508e40(*(int*) (t + 0xac))) == 0) {
+			if ((p = gm_LookupEntityRecordById(*(int*) (t + 0xac))) == 0) {
 				continue;
 			}
 			if (p == who) {
 				found = 1;
 			}
-			if ((p = fcn_00508e40(*(int*) (t + 0xb0))) == 0) {
+			if ((p = gm_LookupEntityRecordById(*(int*) (t + 0xb0))) == 0) {
 				continue;
 			}
 			if (p == who) {
 				found = 1;
 			}
-			if ((p = fcn_00508e40(*(int*) (t + 0xb4))) == 0) {
+			if ((p = gm_LookupEntityRecordById(*(int*) (t + 0xb4))) == 0) {
 				continue;
 			}
 			if (p == who) {
 				found = 1;
 			}
-			if ((p = fcn_00508e40(*(int*) (t + 0xb8))) == 0) {
+			if ((p = gm_LookupEntityRecordById(*(int*) (t + 0xb8))) == 0) {
 				continue;
 			}
 			if (p == who) {
 				found = 1;
 			}
-			if ((p = fcn_00508e40(*(int*) (t + 0xbc))) == 0) {
+			if ((p = gm_LookupEntityRecordById(*(int*) (t + 0xbc))) == 0) {
 				continue;
 			}
 			n = 5;
 			if (p == who) {
 				found = 1;
 			}
-			if ((p = fcn_00508e40(*(int*) (t + 0xc0))) != 0) {
+			if ((p = gm_LookupEntityRecordById(*(int*) (t + 0xc0))) != 0) {
 				n = 6;
 				if (p == who) {
 					found = 1;
@@ -95,42 +95,42 @@ int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, i
 		if (*(int*) (t + 0xc5) - (*(Time5cbb*)&g_7f4c00).day > mindays) {
 			continue;
 		}
-		if ((ps[0] = fcn_00508e40(*(int*) (t + 0xac))) == 0) {
+		if ((ps[0] = gm_LookupEntityRecordById(*(int*) (t + 0xac))) == 0) {
 			continue;
 		}
 		role[0] = 0;
 		if (ps[0] == who) {
 			found = 1;
 		}
-		if ((ps[1] = fcn_00508e40(*(int*) (t + 0xb0))) == 0) {
+		if ((ps[1] = gm_LookupEntityRecordById(*(int*) (t + 0xb0))) == 0) {
 			continue;
 		}
 		role[1] = 1;
 		if (ps[1] == who) {
 			found = 1;
 		}
-		if ((ps[2] = fcn_00508e40(*(int*) (t + 0xb4))) == 0) {
+		if ((ps[2] = gm_LookupEntityRecordById(*(int*) (t + 0xb4))) == 0) {
 			continue;
 		}
 		role[2] = 2;
 		if (ps[2] == who) {
 			found = 1;
 		}
-		if ((ps[3] = fcn_00508e40(*(int*) (t + 0xb8))) == 0) {
+		if ((ps[3] = gm_LookupEntityRecordById(*(int*) (t + 0xb8))) == 0) {
 			continue;
 		}
 		role[3] = 3;
 		if (ps[3] == who) {
 			found = 1;
 		}
-		if ((ps[4] = fcn_00508e40(*(int*) (t + 0xbc))) == 0) {
+		if ((ps[4] = gm_LookupEntityRecordById(*(int*) (t + 0xbc))) == 0) {
 			continue;
 		}
 		role[4] = 3;
 		if (ps[4] == who) {
 			found = 1;
 		}
-		if ((ps[5] = fcn_00508e40(*(int*) (t + 0xc0))) != 0) {
+		if ((ps[5] = gm_LookupEntityRecordById(*(int*) (t + 0xc0))) != 0) {
 			role[5] = 4;
 			if (ps[5] == who) {
 				found = 1;

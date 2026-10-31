@@ -44,7 +44,7 @@ int __cdecl fcn_00474780(void)
 		return 0;
 	}
 	if (g_7725e8 == 0) {
-		step = fcn_004722c0((char*) (*(Spin**)&g_7725d0));
+		step = d2_GetValueStep((char*) (*(Spin**)&g_7725d0));
 		g_7725e8 = 1;
 		g_100f1e0 = g_6b5c84;
 		g_100f1d8 = g_6772c0;

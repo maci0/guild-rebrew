@@ -12,7 +12,7 @@ void __cdecl fcn_00576400(void);
 void __cdecl fcn_005764f0(void);
 int __cdecl fcn_00530ab0(int, char*, int, int, int);
 
-int __cdecl fcn_00575900(void)
+int __cdecl fcn_0056d4c0(void)
 {
 	if (fcn_00545580(0x95, (void*) fcn_005759b0, (void*) fcn_00575ab0) != 0 ||
 	    fcn_00545580(0x96, (void*) fcn_00575cf0, (void*) fcn_00575e10) != 0 ||

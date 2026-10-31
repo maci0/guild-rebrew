@@ -43,9 +43,9 @@ int __cdecl fcn_004ea130();
 int __cdecl fcn_004ea2b0();
 int __cdecl fcn_004ea350();
 int __cdecl fcn_004fda30();
-int __cdecl fcn_00508e40();
-int __cdecl fcn_00519190();
-int __cdecl fcn_0051af00();
+int __cdecl gm_LookupEntityRecordById();
+int __cdecl io_AppendText();
+int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_005358e0();
 int __cdecl fcn_00535960();
 int __cdecl fcn_0057e880();
@@ -394,7 +394,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
   if (*(char *)&v14[0xc]) {
     v26 = &v14[0xd];
     do {
-      v12 = fcn_00508e40(*v26);
+      v12 = gm_LookupEntityRecordById(*v26);
       if (v12) {
         v46[v66] = v12;
         v66 += 1;
@@ -424,7 +424,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
     if (1 <= v12) {
       v14 = &v49;
       do {
-        v13 = fcn_00508e40(*v14);
+        v13 = gm_LookupEntityRecordById(*v14);
         if ((v13) && (!*(char *)(v13 + 0x1b1))) {
           v48[v66 + 6] = v67;
           v50[v66] = v13;
@@ -548,7 +548,7 @@ label_4dabf6:
             v67 += 1;
           } while (v67 < v66);
         }
-        fcn_0051af00(v52,(char *)0x68c140,&v39[v81 * 8]);
+        io_FormatTextBuffer(v52,(char *)0x68c140,&v39[v81 * 8]);
         fcn_004e44f0(fcn_004e44b0(v52,0x6b5c60));
         v9 = 1;
         fcn_005358e0(0x6b5c60);
@@ -576,8 +576,8 @@ label_4dabf6:
             v18 = fcn_00470820(0,0,(char *)0x68c104);
             fcn_00471d80(v18,3);
             v80 -= 1;
-            v19 = (unsigned short *)fcn_00508e40(*(unsigned int *)v74);
-            v20 = (unsigned short *)fcn_00508e40(*(unsigned int *)((int)v74 + 0x10));
+            v19 = (unsigned short *)gm_LookupEntityRecordById(*(unsigned int *)v74);
+            v20 = (unsigned short *)gm_LookupEntityRecordById(*(unsigned int *)((int)v74 + 0x10));
             d2_SetForm(v18,1);
             v131 = 0;
             v132 = 0;
@@ -589,9 +589,9 @@ label_4dabf6:
             fcn_004e4b40(0xfffffff8,v10,(char *)0x68c0f0,v24 + -1,0x32);
             fcn_00471af0(v15,1);
             d2_SetForm(v15,0);
-            fcn_00519190(0x6811b0);
-            fcn_00519190(0x12c4);
-            fcn_00519190(0x12c5,v24 + 0x12a9,v24 + 0x12bb,*v20,*v19);
+            io_AppendText(0x6811b0);
+            io_AppendText(0x12c4);
+            io_AppendText(0x12c5,v24 + 0x12a9,v24 + 0x12bb,*v20,*v19);
             fcn_004e4de0(0x9c4);
             d2_SetForm(v17,0);
             fcn_0046f2c0(g_772514,1);
@@ -633,23 +633,23 @@ label_4dabf6:
               v76 = (unsigned int *)v77;
               do {
                 if (*v71 <= 2) {
-                  v21 = (unsigned short *)fcn_00508e40(v71[-0x21]);
+                  v21 = (unsigned short *)gm_LookupEntityRecordById(v71[-0x21]);
                   v57[*v71] = v57[*v71] + 1;
                   d2_SetForm(v15,0);
                   *(unsigned int *)(g_1015ea0 + 0x3c + *v25 * 0x2f4) = 1;
-                  fcn_00519190(0x6811b0);
-                  fcn_00519190(0x12c7,*v21);
+                  io_AppendText(0x6811b0);
+                  io_AppendText(0x12c7,*v21);
                   fcn_004e4de0(1000);
                   d2_SetForm(v15,0);
                   if (*v71) { 
                     if (*v71 == 1) {
                       v22 = fcn_004e6cb0(4,100);
                       fcn_004e4b40(*v21,v10,(char *)0x68c0d0,v22);
-                      fcn_00519190(0x12ca);
+                      io_AppendText(0x12ca);
                       if (v71[1] != 1) { 
                         if (v71[1] == 2) {
                           v6 = *v19;
-                          fcn_00519190(fcn_004e6cb0(2,v6) + 0x12d1);
+                          io_AppendText(fcn_004e6cb0(2,v6) + 0x12d1);
                         }
                         d2_SetForm(v18,2);
                         v22 = 1;
@@ -657,7 +657,7 @@ label_4dabf6:
                       else {
                         v6 = *v20;
                         v7 = *v19;
-                        fcn_00519190(fcn_004e6cb0(2,v7,v6) + 0x12cd);
+                        io_AppendText(fcn_004e6cb0(2,v7,v6) + 0x12cd);
                         d2_SetForm(v18,2);
                         v22 = 1;
                       }
@@ -665,25 +665,25 @@ label_4dabf6:
                     }
                     v22 = fcn_004e6cb0(4,100);
                     fcn_004e4b40(*v21,v10,(char *)0x68c0b8,v22);
-                    fcn_00519190(0x12c9);
+                    io_AppendText(0x12c9);
                     d2_SetForm(v18,2);
                     fcn_004da510(g_772514,0,2);
                   }
                   else {
                     v22 = fcn_004e6cb0(4,100);
                     fcn_004e4b40(*v21,v10,(char *)0x68c0e0,v22);
-                    fcn_00519190(0x12c8);
+                    io_AppendText(0x12c8);
                     if (v71[1] != 1) { 
                       if (v71[1] == 2) {
                         v6 = *v20;
                         v66 = fcn_004e6cb0(2,v6) + 0x12cf;
-                        fcn_00519190(v66); 
+                        io_AppendText(v66);
                       }
                     }
                     else {
                       v6 = *v20;
                       v66 = fcn_004e6cb0(2,v6) + 0x12cb;
-                      fcn_00519190(v66);
+                      io_AppendText(v66);
                     }
                     d2_SetForm(v18,2);
                     v22 = 0;
@@ -701,8 +701,8 @@ label_4db1e1:
               if (v57[0] <= v57[1]) goto label_4db44e;
               fcn_004e4b40(0xfffffff8,v10,(char *)0x68c098,fcn_004e6cb0(3,100));
               d2_SetForm(v15,0);
-              fcn_00519190(0x6811b0);
-              fcn_00519190(0x12d6,v57[0],v57[1],*v19);
+              io_AppendText(0x6811b0);
+              io_AppendText(0x12d6,v57[0],v57[1],*v19);
               fcn_004e4de0(4000);
               if (a0[3] == *(int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4)) {
                 v25 = (int *)0x9b0e30;
@@ -732,11 +732,11 @@ label_4db1e1:
             }
             else {
 label_4db44e:
-              v67 = fcn_00508e40(*(unsigned int *)v74);
+              v67 = gm_LookupEntityRecordById(*(unsigned int *)v74);
               fcn_004e4b40(0xfffffff8,v10,(char *)0x68c074,fcn_004e6cb0(3,100));
               d2_SetForm(v15,0);
-              fcn_00519190(0x6811b0);
-              fcn_00519190(0x12d7,v57[0],v57[1],*v19,*v19);
+              io_AppendText(0x6811b0);
+              io_AppendText(0x12d7,v57[0],v57[1],*v19,*v19);
               fcn_004e4de0(4000);
               v66 = (unsigned int)g_774970 * 0x87;
               if (a0[3] == *(int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4)) {
@@ -780,7 +780,7 @@ label_4db44e:
             }
             d2_SetForm(v15,0);
             fcn_00471af0(v15,0);
-            fcn_00519190(0x6811b0);
+            io_AppendText(0x6811b0);
             fcn_00471e30(v18);
             fcn_00471e30(v17);
             fcn_004e4de0(1000);
@@ -828,7 +828,7 @@ label_4db44e:
               v13 += 1;
             } while (v13 < v66);
           }
-          fcn_0051af00(v59,(char *)0x68c140,&v39[v81 * 8]);
+          io_FormatTextBuffer(v59,(char *)0x68c140,&v39[v81 * 8]);
           fcn_004e44f0(fcn_004e44b0(v59,0x6b5c60));
           v9 = 1;
           fcn_005358e0(0x6b5c60);
@@ -909,13 +909,13 @@ label_4db44e:
               fcn_004e4b40(0xfffffff8,v11,(char *)0x68c044,v67 + -1,500);
               fcn_00471af0(v15,1);
               d2_SetForm(v15,0);
-              fcn_00519190(0x6811b0);
-              fcn_00519190(0x12d8);
-              fcn_00519190(0x12d9,v24 + 0x12a9,v24 + 0x12bb,*v74 + 0x253);
+              io_AppendText(0x6811b0);
+              io_AppendText(0x12d8);
+              io_AppendText(0x12d9,v24 + 0x12a9,v24 + 0x12bb,*v74 + 0x253);
               v66 = 0;
               if (1 <= v67) {
                 do {
-                  fcn_00519190(0x12db,*v62[v66],*v62[v66]);
+                  io_AppendText(0x12db,*v62[v66],*v62[v66]);
                   v66 += 1;
                 } while (v66 < v67);
               }
@@ -962,15 +962,15 @@ label_4db44e:
                           if (v63[v66] == *v79) {
                             *(unsigned int *)(g_1015ea0 + 0x3c + *v78 * 0x2f4) = 1;
                             d2_SetForm(v15,0);
-                            fcn_00519190(0x6811b0);
-                            fcn_00519190(0x12de,*(unsigned short *)v50[v75]);
+                            io_AppendText(0x6811b0);
+                            io_AppendText(0x12de,*(unsigned short *)v50[v75]);
                             v57[v66 + 3] = v57[v66 + 3] + 1;
                             fcn_004e4de0(1000);
                             *(unsigned int *)(g_1015ea0 + 0x3c + v64[v66 * 0xe] * 0x2f4) = 1;
                             d2_SetForm(v18,v66 + 1);
                             fcn_004da4d0(v66 + 1,&v64[v66 * 0xe + -1]);
                             d2_SetForm(v15,0);
-                            fcn_00519190(0x12df,*v62[v66]);
+                            io_AppendText(0x12df,*v62[v66]);
                             fcn_004e4de0(4000);
                             *(unsigned int *)(g_1015ea0 + 0x3c + *v78 * 0x2f4) = 0;
                             *(unsigned int *)(g_1015ea0 + 0x3c + v64[v66 * 0xe] * 0x2f4) = 0;
@@ -1016,12 +1016,12 @@ label_4db44e:
                         } while (v29);
                         fcn_004e4b40(0xfffffff8,v11,(char *)0x68c038,2,100);
                         d2_SetForm(v15,0);
-                        fcn_00519190(0x6811b0);
-                        fcn_00519190(0x12e3);
+                        io_AppendText(0x6811b0);
+                        io_AppendText(0x12e3);
                         fcn_004e4de0(1000);
                         v19 = v62[v66];
                         *(unsigned int *)(g_1015ea0 + 0x3c + v64[v66 * 0xe] * 0x2f4) = 1;
-                        fcn_00519190(0x12e4,*v19);
+                        io_AppendText(0x12e4,*v19);
                         fcn_004e4de0(4000);
                         if (a0[3] == *(int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4)) {
                           v22 = fcn_004e8240(v74[-8],v19,0,1,0xff);
@@ -1037,9 +1037,9 @@ label_4db44e:
                       *(unsigned int *)(g_1015ea0 + 0x3c + v64[v66 * 0xe] * 0x2f4) = 1;
                       fcn_004e4b40(0xfffffff8,v11,(char *)0x68c038,3,100);
                       d2_SetForm(v15,0);
-                      fcn_00519190(0x6811b0);
+                      io_AppendText(0x6811b0);
                       v19 = v62[v66];
-                      fcn_00519190(0x12e5,*v74 + 0x253,*v19);
+                      io_AppendText(0x12e5,*v74 + 0x253,*v19);
                       fcn_004e4de0(4000);
                       v66 = *(int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4);
                       if (a0[3] == v66) {
@@ -1057,12 +1057,12 @@ label_4db44e:
                   v66 = fcn_004e6cb0(v67);
                   fcn_004e4b40(0xfffffff8,v11,(char *)0x68c038,1,100);
                   d2_SetForm(v15,0);
-                  fcn_00519190(0x6811b0);
-                  fcn_00519190(0x12e1);
+                  io_AppendText(0x6811b0);
+                  io_AppendText(0x12e1);
                   fcn_004e4de0(1000);
                   v19 = v62[v66];
                   *(unsigned int *)(g_1015ea0 + 0x3c + v64[v66 * 0xe] * 0x2f4) = 1;
-                  fcn_00519190(0x12e2,*v19);
+                  io_AppendText(0x12e2,*v19);
                   fcn_004e4de0(4000);
                   if (a0[3] == *(int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4)) {
                     v22 = fcn_004e8240(v74[-8],v19,0,1,0xff);
@@ -1078,9 +1078,9 @@ label_4db44e:
                 fcn_004e4b40(0xfffffff8,v11,(char *)0x68c038,0,100);
                 *(unsigned int *)(g_1015ea0 + 0x3c + v64[0] * 0x2f4) = 1;
                 d2_SetForm(v15,0);
-                fcn_00519190(0x6811b0);
+                io_AppendText(0x6811b0);
                 v19 = v62[0];
-                fcn_00519190(0x12e0,*v62[0],*v74 + 0x253);
+                io_AppendText(0x12e0,*v62[0],*v74 + 0x253);
                 fcn_004e4de0(4000);
                 if (a0[3] == *(int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4)) {
                   v22 = fcn_004e8240(v74[-8],v19,0,1,0xff);
@@ -1092,7 +1092,7 @@ label_4db44e:
                 }
               }
               d2_SetForm(v15,0);
-              fcn_00519190(0x6811b0);
+              io_AppendText(0x6811b0);
               fcn_00471af0(v15,0);
               fcn_00471e30(v18);
               fcn_00471e30(v17);

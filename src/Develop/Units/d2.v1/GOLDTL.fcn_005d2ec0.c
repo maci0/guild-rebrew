@@ -27,11 +27,11 @@ int __cdecl fcn_005d28e0(char*, int*, int*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
-char* __cdecl fcn_00508e40(int);
+int __cdecl io_AppendText(int, ...);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005ca560(Item*);
 int __cdecl fcn_005d2a40(int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 int __cdecl fcn_005d2d30(unsigned short*);
@@ -57,18 +57,18 @@ int __cdecl fcn_005d2ec0(char* a0)
 	dlg = fcn_00470820(0, 0, (char*) 0x6acbd4);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1ce3);
+	io_AppendText(0x1ce3);
 	d2_SetForm(dlg, 2);
 	w = (((int*) g_77255c)[3] - *(short*) (g_772500 + 0x1ebd8) * 3) / 4;
 	off = (((int*) g_77255c)[3] - *(short*) (g_772500 + 0x1ebd8) * 3) % 4 / 2;
 	for (i = 0; i < count; i++) {
 		items[i].x = off + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 3) + (i % 3 + 1) * w - 10;
 		items[i].y = i / 3 * 0x41 * 2 + 5;
-		items[i].e = fcn_00508e40(ids[i]);
+		items[i].e = gm_LookupEntityRecordById(ids[i]);
 		items[i].flag = 1;
 		fcn_005ca560(&items[i]);
 		items[i].val = fcn_005d2a40(*(int*) (g_7f4ca0 + g_774970 * 540 + 4), *(int*) (items[i].e + 4));
-		fcn_0051af00(buf, 0x1ce4, items[i].val);
+		io_FormatTextBuffer(buf, 0x1ce4, items[i].val);
 		fcn_005ca740(items[i].x, items[i].y, g_772514, 0x56, &items[i], 1);
 		fcn_005c9090((int) buf, items[i].x + *(short*) (g_772500 + 0x1ebd8) / 2,
 		             *(short*) (g_772500 + 0x1ebda) + items[i].y + 0x2b, 0xca, 0x56);

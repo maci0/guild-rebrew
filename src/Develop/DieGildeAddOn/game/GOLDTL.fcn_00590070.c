@@ -26,15 +26,15 @@ extern int g_14b556c;
 int __cdecl fcn_00500e20(pos14_7f4c00*);
 int __cdecl fcn_00525fb0(char*);
 char* __cdecl fcn_005463a0(int, int, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_0052a0c0(char*, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -64,26 +64,26 @@ void __cdecl fcn_00590070(char* who)
 		return;
 	}
 	if (g_774800 == 0 && st != 2) {
-		fcn_0051af00(buf, 0x413b);
+		io_FormatTextBuffer(buf, 0x413b);
 		fcn_00526120((int) buf, 4);
 		fcn_00532ef0();
 		return;
 	}
 	if (fcn_005463a0(2, 0, 0x8f, 3, *(int*) (who + 1)) != 0) {
-		fcn_0051af00(buf, 0x413c);
+		io_FormatTextBuffer(buf, 0x413c);
 		fcn_00526120((int) buf, 4);
 		fcn_00532ef0();
 		return;
 	}
 	h = fcn_00470820(0, 0, "Locations\\Friedhof\\UpgradeWorker");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(h, 1);
-	fcn_00519190(0x4138);
+	io_AppendText(0x4138);
 	d2_SetForm(h, 3);
-	s = fcn_00519190(0x4139, 0x228);
+	s = io_AppendText(0x4139, 0x228);
 	b1 = fcn_00472250(h, 3, s);
 	b2 = fcn_00472250(h, 3, s + 1);
 	b4 = fcn_00472250(h, 3, s + 2);
@@ -99,17 +99,17 @@ void __cdecl fcn_00590070(char* who)
 			}
 		}
 		if (hh != 0) {
-			if (fcn_00507f10((char*) hh, 1) >= 1.0) {
+			if (gm_GetEntitySkill((char*) hh, 1) >= 1.0) {
 				fcn_00472640(b1, 0);
 			} else {
 				fcn_00472640(b1, 1);
 			}
-			if (fcn_00507f10((char*) hh, 2) >= 1.0) {
+			if (gm_GetEntitySkill((char*) hh, 2) >= 1.0) {
 				fcn_00472640(b2, 0);
 			} else {
 				fcn_00472640(b2, 1);
 			}
-			if (fcn_00507f10((char*) hh, 4) >= 1.0) {
+			if (gm_GetEntitySkill((char*) hh, 4) >= 1.0) {
 				fcn_00472640(b4, 0);
 			} else {
 				fcn_00472640(b4, 1);

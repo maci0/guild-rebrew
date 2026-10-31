@@ -12,12 +12,12 @@ extern char* lpObjektePROT;
 extern unsigned char g_773d75;
 
 unsigned short __cdecl gm_RandomMod(int);
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(void*, int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_0051af00(char*, int, int);
+void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 
@@ -31,7 +31,7 @@ int __cdecl fcn_004bb0b0(int* a1)
 	int n;
 
 	n = 0;
-	p = fcn_00508e40(*a1);
+	p = gm_LookupEntityRecordById(*a1);
 	if (p == 0) {
 		return 1;
 	}
@@ -54,7 +54,7 @@ int __cdecl fcn_004bb0b0(int* a1)
 	}
 	e = found[gm_RandomMod(n)];
 	fcn_004c51f0(-1, *(int*) (p + 4), *e, 1, g_773d75, 0);
-	fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, *e * 2 + 0x9a8);
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, *e * 2 + 0x9a8);
 	fcn_00545d40(*(int*) (p + 4), *(int*) (p + 4), buf, 0x100 < strlen(buf), 0x603, 0);
 	return 0;
 }

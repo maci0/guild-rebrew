@@ -14,7 +14,7 @@ void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_00546fb0(int id);
 void __cdecl fcn_004c6ae0(int a1, int a2);
-void __cdecl fcn_0051af00(char* buf, int id, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00420bf0(void);
 void __cdecl fcn_00420b70(void);
 int __cdecl fcn_0064d41a(char* out, char* fmt, ...);
@@ -62,7 +62,7 @@ void __cdecl main_RundenBeginn(void)
 			do {
 				i = gm_CheckStatLevel(*(unsigned short*) slot, n);
 				if (gm_GetOppositeStatIndex(i) == 6) {
-					fcn_0051af00(bufF, 0x15c5, *(unsigned char*) (n + 0x74 + v5) + 0x130);
+					io_FormatTextBuffer(bufF, 0x15c5, *(unsigned char*) (n + 0x74 + v5) + 0x130);
 					p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufF, 1, 0);
 					if (p)
 						*p -= 1;
@@ -71,13 +71,13 @@ void __cdecl main_RundenBeginn(void)
 			} while (n < 0x11);
 		}
 		if (fcn_005c6270(slot, 0x2c1) != 0) {
-			fcn_0051af00(bufE, 0x2052, 0xf2a);
+			io_FormatTextBuffer(bufE, 0x2052, 0xf2a);
 			p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufE, 6, 0);
 			if (p)
 				*p -= 1;
 		}
 		if (fcn_005c6270(slot, 0x15b) != 0) {
-			fcn_0051af00(bufD, 0x2052, 0xc5e);
+			io_FormatTextBuffer(bufD, 0x2052, 0xc5e);
 			p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufD, 1, 0);
 			if (p)
 				*p -= 1;
@@ -85,7 +85,7 @@ void __cdecl main_RundenBeginn(void)
 		v5 = fcn_005c6270(slot, 0x2c4);
 		if (*(int*) (slot + 0x1cc) & 0x100000) {
 			if (v5 == 0) {
-				fcn_0051af00(bufC, 0x2054, 0xf18);
+				io_FormatTextBuffer(bufC, 0x2054, 0xf18);
 				p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufC, -3, 0);
 				if (p)
 					*p -= 1;
@@ -94,7 +94,7 @@ void __cdecl main_RundenBeginn(void)
 		}
 		if (*(int*) (slot + 0x1cc) & 0x200000) {
 			if (v5 == 0) {
-				fcn_0051af00(bufB, 0x2054, 0xf2c);
+				io_FormatTextBuffer(bufB, 0x2054, 0xf2c);
 				p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufB, -8, 0);
 				if (p)
 					*p -= 1;
@@ -105,7 +105,7 @@ void __cdecl main_RundenBeginn(void)
 		if (*(int*) (slot + 0x170) != 0) {
 			v5 = fcn_0050c710(*(int*) (slot + 0x170), 3, 1);
 			if (v5 != 0) {
-				fcn_0051af00(bufH, 0x2053, *(int*) (slot + 0x170));
+				io_FormatTextBuffer(bufH, 0x2053, *(int*) (slot + 0x170));
 				p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufH, v5, 0);
 				if (p)
 					*p -= 1;
@@ -115,7 +115,7 @@ void __cdecl main_RundenBeginn(void)
 		while (p != 0) {
 			v18 = fcn_0050c710((int) p, 3, 1);
 			if (v18 != 0) {
-				fcn_0051af00(bufG, 0x3fd7, p);
+				io_FormatTextBuffer(bufG, 0x3fd7, p);
 				n = (int) he_RegisterApEvent(*(unsigned short*) slot, bufG, v18, 0);
 				if (n != 0)
 					*(char*) n -= 1;

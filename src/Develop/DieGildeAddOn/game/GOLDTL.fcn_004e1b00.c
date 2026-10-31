@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e6cb0(int);
 void __cdecl fcn_004e4730(char*);
 void __cdecl fcn_004e4b60(char*);
@@ -42,13 +42,13 @@ void __cdecl fcn_004e1b00(int a0)
 	ranges[2] = 12000;
 	ranges[3] = 15000;
 	ranges[4] = 10000;
-	p = (unsigned short*) fcn_00508e40(*(int*) (a0 + 0x34));
+	p = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
 	if (p == 0) {
 		return;
 	}
-	q = (unsigned short*) fcn_00508e40(*(int*) (a0 + 0x38));
-	r = (unsigned short*) fcn_00508e40(*(int*) (a0 + 0x3c));
-	s = (unsigned short*) fcn_00508e40(*(int*) (a0 + 0x40));
+	q = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
+	r = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x3c));
+	s = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x40));
 	*(int*) 0x68bfb8 = 0x702c6;
 	*(int*) 0x7725c8 = 1;
 	fcn_004e4730((char*) 0x68cfb0);

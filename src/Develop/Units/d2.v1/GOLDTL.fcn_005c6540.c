@@ -50,10 +50,10 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 char* __cdecl fcn_005c61e0(int);
-int __cdecl fcn_00519190(int, ...);
-void __cdecl fcn_00473a90(int, int);
+int __cdecl io_AppendText(int, ...);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00525ef0(void);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00471f80(int);
@@ -82,11 +82,11 @@ int __cdecl fcn_005c6540(unsigned short* item)
 		fcn_00471b60(dlg);
 		d2_SetForm(dlg, 1);
 		if ((rec->mask & ((Ent*)g_7f4ca0)[g_774970].mask) == 0 && fcn_005c61e0(id = *item) != 0) {
-			fcn_00519190(0xfe3, id * 2 + 0x9a8, rec->price, id * 2 + 0x9a8);
+			io_AppendText(0xfe3, id * 2 + 0x9a8, rec->price, id * 2 + 0x9a8);
 		} else {
-			fcn_00519190(0xfe4, *item * 2 + 0x9a8);
+			io_AppendText(0xfe4, *item * 2 + 0x9a8);
 		}
-		fcn_00473a90(0, 0);
+		d2_SetOverlayAnimation(0, 0);
 		fcn_00525ef0();
 		g_100f1dc = -1;
 		do {
@@ -99,7 +99,7 @@ int __cdecl fcn_005c6540(unsigned short* item)
 					buy = 1;
 					g_774654 = 1;
 				} else if (g_100f1dc == 1 && ((*(char*)&g_7747b0) & 0x80) == 0) {
-					fcn_0051af00(text, 0xfe6, *item * 2 + 0x9a8, *item * 2 + 0x9a8);
+					io_FormatTextBuffer(text, 0xfe6, *item * 2 + 0x9a8, *item * 2 + 0x9a8);
 					fcn_00471af0(dlg, 0);
 					if (fcn_00526120(text, 1) != 0) {
 						for (i = 0; i < 6; i++) {

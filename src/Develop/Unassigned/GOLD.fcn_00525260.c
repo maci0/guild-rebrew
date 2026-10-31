@@ -59,7 +59,7 @@ extern Row g_75f280[32];
 extern Obj g_770b80[];
 
 int __cdecl fcn_004741e0(short a, int b, char* s);
-void __cdecl fcn_00475f60(int h, int mode);
+void __cdecl d2_SetForm(int h, int mode);
 int __cdecl fcn_00475b70(int h, int a, int b);
 void __cdecl fcn_00475580(int h, int v);
 int __cdecl fcn_00473340(int a, int b, int c, int d, int e);
@@ -77,9 +77,9 @@ void __cdecl fcn_00525260(int unused, char arg)
 		} else {
 			g_623864 = fcn_004741e0((short) (g_fb9072 - 0x68), 0x106, g_624144);
 		}
-		fcn_00475f60(g_623864, 1);
+		d2_SetForm(g_623864, 1);
 		owner = g_6ed938;
-		fcn_00475f60(g_623864, 2);
+		d2_SetForm(g_623864, 2);
 		id = fcn_00475b70(g_623864, 2, 0);
 		((Ent*)g_f8f080)[id].f1d0 = 3;
 		((Slot*)g_f8f110)[g_6ed938].h0 = id;
@@ -93,7 +93,7 @@ void __cdecl fcn_00525260(int unused, char arg)
 			if (g_623868 != -1) {
 				fcn_00475580(g_623868, 0);
 			}
-			fcn_00475f60(g_623864, 1);
+			d2_SetForm(g_623864, 1);
 			for (i = 0; i < 32; i++) {
 				g_75f280[i].a = -1;
 				g_75f280[i].b = -1;
@@ -103,7 +103,7 @@ void __cdecl fcn_00525260(int unused, char arg)
 				g_75f280[i].f = -1;
 				g_75f280[i].g = 0;
 			}
-			fcn_00475f60(g_623864, 2);
+			d2_SetForm(g_623864, 2);
 			id = fcn_00473340(0x11, 4, 0x51d, g_6ed938, -2);
 			((Ent*)g_f8f080)[id].f5c = 1;
 			((Ent*)g_f8f080)[id].f1d0 = 3;

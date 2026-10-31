@@ -61,7 +61,7 @@ void __cdecl fcn_004e8730(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddObjekt(int a, int b, int c);
 char* __cdecl fcn_004ad130(int, int*);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl fcn_004ae040(void);
 int __cdecl fcn_004ae060(void);
@@ -128,14 +128,14 @@ void __cdecl fcn_004adcd0(int mode, int unused, unsigned short owner, Guild4adc*
 	strcpy(g->title, p + 0x1c);
 	if (mode == 0x15) {
 		if ((*(int*)&g_7f4c00) > 0 && k != 0xffff) {
-			fcn_0051af00(buf, 0x42b3, g->id);
+			io_FormatTextBuffer(buf, 0x42b3, g->id);
 			fcn_00545d40(((Ent4adc*)g_7f4ca0)[k].id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_01");
 		}
 		g->f18c = fcn_004ae040();
 		fcn_004adf80();
 	} else {
 		if ((*(int*)&g_7f4c00) > 0 && k != 0xffff) {
-			fcn_0051af00(buf, 0x42b5, g->id);
+			io_FormatTextBuffer(buf, 0x42b5, g->id);
 			fcn_00545d40(((Ent4adc*)g_7f4ca0)[k].id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_03");
 		}
 		g->f18c = fcn_004ae060();

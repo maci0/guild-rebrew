@@ -21,7 +21,7 @@ extern char s_6a4304[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 /* Preserve the original declaration order for native register allocation. */
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
@@ -44,58 +44,58 @@ void __cdecl fcn_005c95d0(unsigned char* a)
 	gm_GetBuildingTypeCategory(a[0]);
 	fcn_0050c1b0(a, g_774970, st);
 	if (a[5] != 0) {
-		fcn_00519190((int) s_6a4310, a[0] * 14 + 0x48e, a + 5);
+		io_AppendText((int) s_6a4310, a[0] * 14 + 0x48e, a + 5);
 	}
 	else {
-		fcn_00519190((int) s_6a4304, a[0] * 14 + 0x48e);
+		io_AppendText((int) s_6a4304, a[0] * 14 + 0x48e);
 	}
-	fcn_00519190(0xa3, fcn_00508da0(a));
+	io_AppendText(0xa3, fcn_00508da0(a));
 	if (st[0] != 0) {
-		fcn_00519190(0xa4, st[0]);
+		io_AppendText(0xa4, st[0]);
 	}
 	if (st[2] != 0) {
-		fcn_00519190(0xa5, st[2]);
+		io_AppendText(0xa5, st[2]);
 	}
 	if (st[6] != 0) {
-		fcn_00519190(0xa6, t->x223 + 0x130, st[6]);
+		io_AppendText(0xa6, t->x223 + 0x130, st[6]);
 	}
 	if (st[4] + st[5] != 0) {
-		fcn_00519190(0xa7, st[4] + st[5]);
+		io_AppendText(0xa7, st[4] + st[5]);
 	}
 	if (st[8] != 0) {
-		fcn_00519190(0xa8, st[8]);
+		io_AppendText(0xa8, st[8]);
 	}
 	if (st[12] != 0) {
-		fcn_00519190(0xa9, st[12]);
+		io_AppendText(0xa9, st[12]);
 	}
 	if (st[15] != 0) {
-		fcn_00519190(0xaa, st[15]);
+		io_AppendText(0xaa, st[15]);
 	}
 	if (st[13] != 0) {
-		fcn_00519190(0xab, st[13]);
+		io_AppendText(0xab, st[13]);
 	}
 	if (st[14] != 0) {
-		fcn_00519190(0xac, st[14]);
+		io_AppendText(0xac, st[14]);
 	}
 	if (st[19] != 0) {
-		fcn_00519190(0xad, st[19]);
+		io_AppendText(0xad, st[19]);
 	}
 	if (st[18] != 0) {
 		if (t->x0 == 4 || t->x0 == 0x10 || t->x0 == 0x13) {
-			fcn_00519190(0xb3, st[18]);
+			io_AppendText(0xb3, st[18]);
 		}
 		else {
-			fcn_00519190(0xae, st[18]);
+			io_AppendText(0xae, st[18]);
 		}
 	}
 	if (st[1] != 0) {
-		fcn_00519190(0xaf, st[1]);
+		io_AppendText(0xaf, st[1]);
 	}
 	if (st[20] > 0) {
-		fcn_00519190(0xb0, st[20]);
+		io_AppendText(0xb0, st[20]);
 	}
 	else if (st[20] < 0) {
-		fcn_00519190(0xb1, st[20] + st[18]);
+		io_AppendText(0xb1, st[20] + st[18]);
 	}
 	if (fcn_005373e0((void*) fcn_005c95d0, 0x677c7) != 0) {
 		do {

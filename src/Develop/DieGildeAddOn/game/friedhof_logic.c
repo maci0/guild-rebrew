@@ -46,7 +46,7 @@ int __cdecl gv_CheckSlotActive(void* slot, int type)
 
 
 extern int __cdecl gv_CheckSlotActive(void* worker, int worktype);
-#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job)
 {
 	if (*(int*) ((char*) worker + 4) < 1 || *(int*) ((char*) worker + 4) > 3)
@@ -95,7 +95,7 @@ void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job)
 	}
 	return 0;
 }
-#endif
+
 /* Client-only slot helpers (the Gold T&L client's friedhof order).  No server
  * function calls them, so /OPT:REF discards them; their absolute fixups still
  * count toward LINK's .reloc reservation. */
@@ -1174,7 +1174,9 @@ int __cdecl gv_eval_SlotFrei(void* unused, int* p);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);
 int __cdecl fcn_00503930(int a, unsigned short b, int c);
+#if !defined(REBREW_SERVER)
 int __cdecl gm_AddObjekt(int a, unsigned short b, int c);
+#endif
 
 /* Moves a graveyard worker's slot entry into the field it currently works in:
  * resolve the command's entity and the worker entity, reject the empty or

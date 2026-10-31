@@ -1,7 +1,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 
 int __cdecl fcn_005bd7c0(int max, int a, int* out)
 {
@@ -16,7 +16,7 @@ int __cdecl fcn_005bd7c0(int max, int a, int* out)
 		if (cnt >= max) {
 			break;
 		}
-		r = fcn_00508e40(((OFFICE_SLOT*) 0x775288)[i].mplayerid);
+		r = gm_LookupEntityRecordById(((OFFICE_SLOT*) 0x775288)[i].mplayerid);
 		if (r != 0) {
 			out[cnt++] = r;
 		}

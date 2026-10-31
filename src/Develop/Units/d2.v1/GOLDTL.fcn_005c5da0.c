@@ -17,7 +17,7 @@ extern int g_10161cc[];
 
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 
 void __cdecl fcn_005c5da0(int layer, int x, int y, unsigned short who, int text)
 {
@@ -33,7 +33,7 @@ void __cdecl fcn_005c5da0(int layer, int x, int y, unsigned short who, int text)
 		fcn_0046f740(0, 0, 0x587, g_6abb00);
 		fcn_0046f100(0, 0x2c, *(int*) (g_77255c + 0xc), 0x1e, 0x110, g_772514);
 		g_10161cc[g_772514 * 243] = 0x54;
-		fcn_00519190(text);
+		io_AppendText(text);
 	}
 }
 unsigned char _dpad_6ab570[1424] = {

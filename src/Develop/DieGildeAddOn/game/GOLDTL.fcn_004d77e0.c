@@ -35,7 +35,7 @@ typedef struct ShiftDlg {
 
 int __cdecl fcn_004e6c80(void);
 void __cdecl fcn_004e6c60(int);
-Ent* __cdecl fcn_00508e40(int);
+Ent* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_FindRecordById(int);
 void __cdecl fcn_0050de80(int, Query*);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -56,7 +56,7 @@ void __cdecl fcn_0046b2b0(int);
 void __cdecl fcn_004d6170(ShiftDlg*);
 void __cdecl fcn_004d2f10(ShiftDlg*);
 void __cdecl fcn_004d2a60(ShiftDlg*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_004e6eb0(char*, unsigned int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl fcn_004d5110(int, int, int, int);
@@ -81,14 +81,14 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 	saved = fcn_004e6c80();
 	changed = 0;
 	for (i = 0; i < 0x10; i++) {
-		if (p->list_a[i] != -1 && fcn_00508e40(p->list_a[i]) == 0) {
+		if (p->list_a[i] != -1 && gm_LookupEntityRecordById(p->list_a[i]) == 0) {
 			flag = 1;
 			p->list_a[i] = -1;
 		}
 	}
 	for (i = 0; i < 0x10; i++) {
 		if (p->list_b[i] != -1) {
-			if (fcn_00508e40(p->list_b[i]) == 0) {
+			if (gm_LookupEntityRecordById(p->list_b[i]) == 0) {
 				flag = 1;
 				p->list_b[i] = -1;
 			} else {
@@ -154,11 +154,11 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 				v = fcn_00502cd0(*(int*) (w + 0x5d), 2, 6, 0, 0x116);
 			}
 			if (*(int*) 0x772eac <= 0) {
-				fcn_0051af00(buf, 0x1146);
+				io_FormatTextBuffer(buf, 0x1146);
 			} else if (v == 0) {
-				fcn_0051af00(buf, 0x1144, *(int*) 0x772eac);
+				io_FormatTextBuffer(buf, 0x1144, *(int*) 0x772eac);
 			} else {
-				fcn_0051af00(buf, 0x1145, *(int*) 0x772eac);
+				io_FormatTextBuffer(buf, 0x1145, *(int*) 0x772eac);
 			}
 			fcn_004e6eb0(buf, 0x10);
 		}
@@ -167,11 +167,11 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 	}
 	changed = 0;
 	saved = 0;
-	*(int*) 0x772e9c = (int) fcn_00508e40(p->first);
-	*(int*) 0x772e98 = (int) fcn_00508e40(p->second);
+	*(int*) 0x772e9c = (int) gm_LookupEntityRecordById(p->first);
+	*(int*) 0x772e98 = (int) gm_LookupEntityRecordById(p->second);
 	for (i = 0; i < 0x10; i++) {
 		if (p->list_a[i] != -1) {
-			ep = fcn_00508e40(p->list_a[i]);
+			ep = gm_LookupEntityRecordById(p->list_a[i]);
 			if (ep != 0 && ep->live != 0 && ep->live != 4) {
 				changed = (int) (fcn_004ce8b0(ep) + changed);
 				fcn_004ff210(ep->id, gm_RandomMod(10) * -20);
@@ -180,7 +180,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 	}
 	for (i = 0; i < 0x10; i++) {
 		if (p->list_b[i] != -1) {
-			ep = fcn_00508e40(p->list_b[i]);
+			ep = gm_LookupEntityRecordById(p->list_b[i]);
 			if (ep != 0 && ep->live != 0 && ep->live != 4) {
 				saved = (int) (fcn_004ce8b0(ep) + saved);
 				fcn_004ff210(ep->id, gm_RandomMod(10) * -20);
@@ -193,12 +193,12 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		changed = *(int*) 0x772e98;
 	}
 	for (i = 0; i < 0x10; i++) {
-		if (p->list_a[i] != -1 && (ep = fcn_00508e40(p->list_a[i])) != 0) {
+		if (p->list_a[i] != -1 && (ep = gm_LookupEntityRecordById(p->list_a[i])) != 0) {
 			fcn_004ce740(ep);
 		}
 	}
 	for (i = 0; i < 0x10; i++) {
-		if (p->list_b[i] != -1 && (ep = fcn_00508e40(p->list_a[i])) != 0) {
+		if (p->list_b[i] != -1 && (ep = gm_LookupEntityRecordById(p->list_a[i])) != 0) {
 			fcn_004ce740(ep);
 		}
 	}

@@ -38,7 +38,7 @@ extern int g_774a00;
 int __cdecl fcn_004c3100(char*, int);
 int* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_00580cf0(int*);
-void __cdecl fcn_00576750(void);
+void __cdecl fcn_0057ecf0(void);
 void __cdecl fcn_0057ed60(void);
 void __cdecl fcn_0057edf0(void);
 void __cdecl fcn_005768a0(void);
@@ -99,7 +99,7 @@ int* __cdecl fcn_005816f0(void)
 	p[0x8] = 0;
 	p[0xb] = -1;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = 0;
 	p[0x10] = 0;
@@ -149,7 +149,7 @@ int* __cdecl fcn_005816f0(void)
 	p[0xa] = (int) g_6a8968;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = (int) fcn_0057f090;
 	p[0x10] = 1;

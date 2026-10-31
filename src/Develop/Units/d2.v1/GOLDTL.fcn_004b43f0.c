@@ -7,7 +7,7 @@ extern signed char g_6a3440;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_SetForm(int k, int i);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_00472640(int, int);
@@ -39,7 +39,7 @@ int __cdecl fcn_004b43f0(int n)
 	dlg = fcn_00470820(0, 0, "Menu\\CHOOSEHISTORY");
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	base = fcn_00519190(0x1b9f);
+	base = io_AppendText(0x1b9f);
 	b0 = fcn_00472250(dlg, 0, base);
 	b1 = fcn_00472250(dlg, 0, base + 1);
 	b2 = fcn_00472250(dlg, 0, base + 2);

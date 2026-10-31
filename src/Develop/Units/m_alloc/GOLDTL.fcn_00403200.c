@@ -26,6 +26,6 @@ void* __cdecl ch_Create(void)
 		return p;
 	}
 	m_FreeTracked(p);
-	fcn_0041d9e0(g_67534c);
+	ReportClientMessage(g_67534c);
 	return 0;
 }

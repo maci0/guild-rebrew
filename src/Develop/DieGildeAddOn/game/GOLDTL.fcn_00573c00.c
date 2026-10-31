@@ -22,7 +22,7 @@ void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
 int __cdecl fcn_00598150(char*, char*);
 int __cdecl fcn_005987c0(char*, char*);
 void __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00546190(char*);
 
 void __cdecl he_AllocGebaeudeBauen(char* u)
@@ -65,7 +65,7 @@ void __cdecl he_AllocGebaeudeBauen(char* u)
 			return;
 		}
 	}
-	fcn_0051af00(text, (int) "he_AllocGebaeudeBauen: %1N1", *(unsigned short*) (u + 8));
+	io_FormatTextBuffer(text, (int) "he_AllocGebaeudeBauen: %1N1", *(unsigned short*) (u + 8));
 	fcn_004432d0(saved, 1);
 	*(int*) (u + 0x84) = -1;
 }

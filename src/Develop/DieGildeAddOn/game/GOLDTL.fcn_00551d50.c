@@ -12,7 +12,7 @@ extern char s_6a5b74[];
 int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl fcn_00546190(void* u);
 void __cdecl fcn_004c6ba0(int a1, int a2, int a3);
-void __cdecl fcn_0051af00(char* out, int a2, int a3, int a4);
+void __cdecl io_FormatTextBuffer(char* out, int a2, int a3, int a4);
 void __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 void __cdecl fcn_004c5530(void* packet);
 void __cdecl fcn_004c6330(int id);
@@ -55,7 +55,7 @@ void __cdecl fcn_00551d50(char* a0)
 		id = *(unsigned char*) (row + 0x80 + byte);
 		if ((int) ((float) (id + delay) * g_664168) <= (int) ((float) byte * g_664168)) {
 			sprintf(msg, s_6a5b74, byte);
-			fcn_0051af00(buf, 0x67728c, 0x16f2, byte + 0x16f3);
+			io_FormatTextBuffer(buf, 0x67728c, 0x16f2, byte + 0x16f3);
 			fcn_00545d40(*(int*) (row + 4), *(int*) (row + 4), buf, 0, 0x5fd, msg);
 		} else {
 			memset(packet, 0, 0xf8);

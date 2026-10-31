@@ -29,7 +29,7 @@ int __cdecl fcn_004f57e0(void);
 void __cdecl fcn_004fa850(int, char, unsigned int*, unsigned int*);
 void __cdecl fcn_004faa90(unsigned int, unsigned int, Area*);
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005463a0(int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl fcn_005b2740(char*, char*);
@@ -61,7 +61,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 	if (idx == -1) {
 		return -1;
 	}
-	ent = (Straftat*) fcn_00508e40(*(int*) (src + 0x26));
+	ent = (Straftat*) gm_LookupEntityRecordById(*(int*) (src + 0x26));
 	if (ent != 0 && *(char*) ((char*) ent + 2) == 6) {
 		fcn_004b4650((char*) ent, 0x17);
 	}
@@ -72,7 +72,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 		g_773d38, *(int*) (src + 0x26), *(int*) (src + 0x22));
 	taeter = *(int*) (src + 0x31);
 	if (taeter == -1) {
-		ent = (Straftat*) fcn_00508e40(*(int*) (src + 0x22));
+		ent = (Straftat*) gm_LookupEntityRecordById(*(int*) (src + 0x22));
 		if (ent != 0) {
 			if (*(int*) ((char*) ent + 0x170) != 0) {
 				taeter = *(int*) (*(char**) ((char*) ent + 0x170) + 1);
@@ -108,7 +108,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 		if (out != 0) {
 			char* px;
 
-			px = (char*) fcn_00508e40(*(int*) ((char*) ent + 0xc4));
+			px = (char*) gm_LookupEntityRecordById(*(int*) ((char*) ent + 0xc4));
 			if (px != 0) {
 				fcn_005b2740(px, g_7f4ca0 + slot * 0x21c);
 			}

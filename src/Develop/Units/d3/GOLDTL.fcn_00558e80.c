@@ -48,7 +48,7 @@ void __cdecl fcn_005b2880(void);
 int __cdecl fcn_00558680(char* e);
 int __cdecl fcn_00558b70(char* e);
 
-void __cdecl fcn_0051af00(char*, char*, ...);
+void __cdecl io_FormatTextBuffer(char*, char*, ...);
 
 void __cdecl EvtSensenmann(char* e)
 {
@@ -137,7 +137,7 @@ void __cdecl EvtSensenmann(char* e)
 				*(int*) (e + 0x70) = -1;
 				return;
 			}
-			fcn_0051af00(buf, "EvtSensenmann: next target = %G", p);
+			io_FormatTextBuffer(buf, "EvtSensenmann: next target = %G", p);
 			*(int*) (e + 0xb4) = p->id;
 			*(int*) (e + 0xc0) = *(int*) (e + 0xc0) - 1;
 			if (fcn_00558b70(e)) {

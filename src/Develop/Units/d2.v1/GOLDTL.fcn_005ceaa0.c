@@ -8,8 +8,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00473a90(int, int);
-int __cdecl fcn_00519190(char*, ...);
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl io_AppendText(char*, ...);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 /* ADDRESS: GOLD 0x5c2880 */
@@ -22,9 +22,9 @@ void __cdecl fcn_005ceaa0(void)
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
 	fcn_00471b60(h);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 1);
-	fcn_00519190((char*) 0x195e);
+	io_AppendText((char*) 0x195e);
 	do {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

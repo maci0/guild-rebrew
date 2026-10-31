@@ -15,7 +15,7 @@ extern char g_6a57ec[];
 extern char g_6a57d8[];
 
 char* __cdecl gm_SearchTable67(int id);
-unsigned short* __cdecl fcn_00508e40(int id);
+unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00445600(int a, int b, int c, char* name);
 void __cdecl he_CreateGfxInfo(unsigned char* p, char* fmt, int v);
 
@@ -66,7 +66,7 @@ void __cdecl fcn_00546850(unsigned char* p)
 		}
 		break;
 	case 0x35:
-		o = fcn_00508e40(*(int*) (p + 0xbc));
+		o = gm_LookupEntityRecordById(*(int*) (p + 0xbc));
 		if (o != 0 && *o == g_774970 && g_6b8010 == 0) {
 			v = fcn_00445600(0, 0x40, 0, g_6a5804);
 			if (v != 0) {

@@ -707,8 +707,6 @@
 /INCLUDE:?WGetPointRep@?$GXTri3Mesh@G$00$0PPPP@@@ABEGG@Z
 /INCLUDE:?WGetPointRep@?$GXTri3Mesh@I$0A@$0?0@@ABEII@Z
 /INCLUDE:?jinit_master_decompress@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-/INCLUDE:?jpeg_calc_output_dimensions@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-/INCLUDE:?jpeg_new_colormap@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 /INCLUDE:?nibbleCount@CD3DXBitField256@@0QBKB
 /INCLUDE:?sm_dwCacheSize@@3KA
 /INCLUDE:?sm_dwMagicNumber@@3KA

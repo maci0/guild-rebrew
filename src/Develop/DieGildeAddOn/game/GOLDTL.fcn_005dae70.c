@@ -16,10 +16,10 @@ extern unsigned short g_7f4c04;
 
 int __cdecl fcn_004e8a80(int, Law*);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 int __cdecl fcn_005373e0(void*, int);
@@ -42,11 +42,11 @@ int __cdecl fcn_005dae70(char* e)
 		return 0x40;
 	}
 	dlg = fcn_00470820(0, 0, "privillegien\\arbeiter_ausweisen");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1e24, (e[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (e + 0x166));
-	id = fcn_00519190(0x1e25);
+	io_AppendText(0x1e24, (e[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (e + 0x166));
+	id = io_AppendText(0x1e25);
 	ok = fcn_00472250(dlg, 1, id);
 	cancel = fcn_00472250(dlg, 1, id + 1);
 	g_100f1dc = -1;

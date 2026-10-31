@@ -3,7 +3,7 @@
 extern char g_6b5c60[];
 extern char g_6811b0[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004b4650(char*, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 char* __cdecl fcn_004fda30(int);
@@ -16,7 +16,7 @@ void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_004e44b0(char*, char*);
 int __cdecl fcn_004e4d00(int, int, int*);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(char* fmt, ...);
+int __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_004e4b20(int, int, char*, int);
 int __cdecl fcn_00423460(int);
 int __cdecl fcn_004e4540(int, void*, int*);
@@ -37,11 +37,11 @@ void __cdecl fcn_004e2090(int a0)
 	int v10;
 	int v11;
 
-	v1 = (unsigned short*) fcn_00508e40(*(int*) (a0 + 0x34));
+	v1 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
 	if (v1 == 0) {
 		return;
 	}
-	v2 = (unsigned short*) fcn_00508e40(*(int*) (a0 + 0x38));
+	v2 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
 	if (v2 == 0) {
 		return;
 	}
@@ -82,7 +82,7 @@ void __cdecl fcn_004e2090(int a0)
 	}
 	fcn_00471af0(v9, 1);
 	d2_SetForm(v9, 0);
-	fcn_00519190((char*) 0x1aa9, *v7, *v1);
+	io_AppendText((char*) 0x1aa9, *v7, *v1);
 	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_MAIN_00", 0);
 	v3 = fcn_00423460(v11);
 	while (v3 != 0) {
@@ -95,7 +95,7 @@ void __cdecl fcn_004e2090(int a0)
 		return;
 	}
 	d2_SetForm(v9, 0);
-	fcn_00519190(g_6811b0);
+	io_AppendText(g_6811b0);
 	fcn_00471af0(v9, 0);
 	v3 = fcn_004e4540(v6, (void*) 0x4e1ff0, &v6);
 	if (v3 != 0) {
@@ -107,7 +107,7 @@ void __cdecl fcn_004e2090(int a0)
 	v6 = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden2.esc", g_6b5c60);
 	d2_SetForm(v9, 0);
 	fcn_00471af0(v9, 1);
-	fcn_00519190((char*) 0x1aac, *v7, *v1);
+	io_AppendText((char*) 0x1aac, *v7, *v1);
 	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_MAIN_03", 0);
 	v3 = fcn_00423460(v11);
 	while (v3 != 0) {
@@ -120,14 +120,14 @@ void __cdecl fcn_004e2090(int a0)
 		return;
 	}
 	d2_SetForm(v9, 0);
-	fcn_00519190(g_6811b0);
+	io_AppendText(g_6811b0);
 	fcn_00471af0(v9, 0);
 	if (fcn_004e4d00(500, 0x4e1ff0, &v6)) {
 		return;
 	}
 	fcn_00471af0(v9, 1);
 	d2_SetForm(v9, 0);
-	fcn_00519190((char*) 0x1aab);
+	io_AppendText((char*) 0x1aab);
 	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_M", 0);
 	v3 = fcn_00423460(v11);
 	while (v3 != 0) {
@@ -146,13 +146,13 @@ void __cdecl fcn_004e2090(int a0)
 	v6 = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden3.esc", g_6b5c60);
 	fcn_00471af0(v9, 0);
 	d2_SetForm(v9, 0);
-	fcn_00519190(g_6811b0);
+	io_AppendText(g_6811b0);
 	if (fcn_004e4d00(0x5dc, 0x4e1ff0, &v6)) {
 		return;
 	}
 	fcn_00471af0(v9, 1);
 	d2_SetForm(v9, 0);
-	fcn_00519190((char*) 0x1aaa, *v1, *v7);
+	io_AppendText((char*) 0x1aaa, *v1, *v7);
 	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_MAIN_01", 0);
 	v3 = fcn_00423460(v11);
 	while (v3 != 0) {
@@ -166,13 +166,13 @@ void __cdecl fcn_004e2090(int a0)
 	}
 	fcn_00471af0(v9, 0);
 	d2_SetForm(v9, 0);
-	fcn_00519190(g_6811b0);
+	io_AppendText(g_6811b0);
 	if (fcn_004e4d00(500, 0x4e1ff0, &v6)) {
 		return;
 	}
 	fcn_00471af0(v9, 1);
 	d2_SetForm(v9, 0);
-	fcn_00519190((char*) 0x1aab);
+	io_AppendText((char*) 0x1aab);
 	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_W", 0);
 	v3 = fcn_00423460(v11);
 	while (v3 != 0) {
@@ -190,7 +190,7 @@ void __cdecl fcn_004e2090(int a0)
 	}
 	v6 = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden4.esc", g_6b5c60);
 	d2_SetForm(v9, 0);
-	fcn_00519190((char*) 0x1aad);
+	io_AppendText((char*) 0x1aad);
 	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_MAIN_04", 0);
 	v3 = fcn_00423460(v11);
 	while (v3 != 0) {
@@ -204,7 +204,7 @@ void __cdecl fcn_004e2090(int a0)
 	}
 	fcn_00471af0(v9, 0);
 	d2_SetForm(v9, 0);
-	fcn_00519190(g_6811b0);
+	io_AppendText(g_6811b0);
 	if (fcn_004e4540(v6, (void*) 0x4e1ff0, &v6)) {
 		return;
 	}

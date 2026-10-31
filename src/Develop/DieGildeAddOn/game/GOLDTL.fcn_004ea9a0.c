@@ -27,7 +27,7 @@ extern char g_7f4ca0[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);
 char* __cdecl gm_AddObjekt(void);
-Obj* __cdecl fcn_00508e40(int id);
+Obj* __cdecl gm_LookupEntityRecordById(int id);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl fcn_004ea560(Obj* o, int v);
@@ -81,7 +81,7 @@ void __cdecl fcn_004ea9a0(void)
 		}
 	}
 	cur = 0;
-	if (rec.b != -1 && (cur = fcn_00508e40(rec.b)) != 0) {
+	if (rec.b != -1 && (cur = gm_LookupEntityRecordById(rec.b)) != 0) {
 		best_v = gm_WalkEntityChain(cur->id);
 	} else {
 		best_v = 0;

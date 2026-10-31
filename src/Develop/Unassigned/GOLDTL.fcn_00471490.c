@@ -11,7 +11,7 @@ extern int g_7725ec;
 extern int g_772604;
 extern char s_67d7a0[];
 
-void __cdecl fcn_0041d9e0(char* text);
+void __cdecl ReportClientMessage(char* text);
 void __cdecl fcn_00465e60(char* base);
 void __cdecl fcn_00466550(int idx, int surf);
 void __cdecl fcn_00467920(int idx, int surf);
@@ -64,7 +64,7 @@ void __cdecl fcn_00471490(int k)
 	do {
 		surf = pp[-2];
 		if ((*(unsigned char*) surf & 0x10) == 0) {
-			fcn_0041d9e0(s_67d7a0);
+			ReportClientMessage(s_67d7a0);
 			return;
 		}
 		fcn_004767f0(0, 0, *(int*) (pp[0] + 4), *(int*) (pp[0] + 8), *(int*) (pp[0] + 0x20), 0, 0, surf);

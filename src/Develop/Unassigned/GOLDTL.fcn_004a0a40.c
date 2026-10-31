@@ -12,7 +12,7 @@ typedef struct Unit {
 	unsigned char locked;
 } Unit;
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_0047dd60(char* e);
 char* __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e, int a5, int a6, int a7);
@@ -32,7 +32,7 @@ int __cdecl fcn_004a0a40(float* s1, float* s2, int idx, char* e, int flag, int a
 		return 0;
 	}
 	if (e[2] != 5) {
-		o = fcn_00508e40(*(int*) (e + 0x5c));
+		o = gm_LookupEntityRecordById(*(int*) (e + 0x5c));
 		if (o != 0) {
 			if (o[2] == 5) {
 				return 0;
@@ -44,7 +44,7 @@ int __cdecl fcn_004a0a40(float* s1, float* s2, int idx, char* e, int flag, int a
 	}
 	best = 0;
 	for (i = 0; i < 5; i++) {
-		t = (Unit*) fcn_00508e40(((int*) (e + 0x68))[i]);
+		t = (Unit*) gm_LookupEntityRecordById(((int*) (e + 0x68))[i]);
 		if (t != 0 && t->hp > 0 && t->level + 4 >= t->need && t->locked == 0 && fcn_005463a0(2, 2, t->id, 0, 0x5e) == 0) {
 			if (best == 0 || t->level > best->level) {
 				best = t;

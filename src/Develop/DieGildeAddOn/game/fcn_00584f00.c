@@ -4,7 +4,7 @@ typedef unsigned short u16;
 int __cdecl fcn_004ec7d0(int a1);
 int __cdecl fcn_00526010(void* tbl, int a2, char a3);
 int __cdecl fcn_00526120(void* buf, int a2);
-void __cdecl fcn_0051af00(void* buf, int id, ...);
+void __cdecl io_FormatTextBuffer(void* buf, int id, ...);
 int __cdecl fcn_004ee220(int a1, int a2);
 int __cdecl fcn_004c4450(int a1);
 int __cdecl fcn_005373e0(int a1, int a2);
@@ -28,7 +28,7 @@ int __cdecl fcn_00584f00(int a1, char* a2, int a3)
 ret0:
     return 0;
 main:
-    fcn_0051af00(buf, 0x4044,
+    io_FormatTextBuffer(buf, 0x4044,
                  *(int*) (0x14b5908 + *(int*) (a2 + 0x10) * 4),
                  *(int*) (0x14b596c + *(int*) (a2 + 0x14) * 4));
     if (fcn_00526120(buf, 1) == 0)

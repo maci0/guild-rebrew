@@ -9,15 +9,15 @@ int __cdecl fcn_00471e30();
 int __cdecl fcn_00472170();
 int __cdecl fcn_00472640();
 int __cdecl d2_SetForm();
-int __cdecl fcn_00473a90();
+int __cdecl d2_SetOverlayAnimation();
 int __cdecl fcn_004c4450();
 int __cdecl fcn_004c5150();
 int __cdecl fcn_004c5530();
 int __cdecl fcn_00502cd0();
 int __cdecl fcn_00509570();
 int __cdecl fcn_0050b810();
-int __cdecl fcn_00519190();
-int __cdecl fcn_0051af00();
+int __cdecl io_AppendText();
+int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_00525fb0();
 int __cdecl fcn_00526010();
 int __cdecl fcn_00526120();
@@ -125,7 +125,7 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
   v5 = fcn_00470820(0,0,(char *)0x6ac468);
   fcn_00471b60(v5);
   d2_SetForm(v5,3);
-  fcn_00519190(0xfa);
+  io_AppendText(0xfa);
   d2_SetForm(v5,0);
   fcn_00533dc0((*(int *)0x772514),0x70b,0x740);
   d2_SetForm(v5,4);
@@ -135,7 +135,7 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
   if ((*(int *)0x7747b0) <= '\xff')
     fcn_00472640(v30,0);
   fcn_00594340();
-  fcn_00473a90(0,0);
+  d2_SetOverlayAnimation(0,0);
   do {
     v3 = fcn_005463a0(2,0,0x12,3,*(unsigned int *)&v2[1]);
     while ((v3 && (!*(int *)(v3 + 0xb0)))) {
@@ -148,38 +148,38 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
     v7 = fcn_005463a0(2,0,0x13,3,*(unsigned int *)&v2[1]);
     d2_SetForm(v5,2);
     if (*v4 != 0x116) { // branch-flip
-      fcn_00519190(0xfe,(char)v4[0xe],*(char *)(v18 + 0x240));
-      fcn_00519190(0xff,8000);
+      io_AppendText(0xfe,(char)v4[0xe],*(char *)(v18 + 0x240));
+      io_AppendText(0xff,8000);
       if (v3) // branch-flip
-        fcn_00519190(0x100,*(unsigned int *)(v3 + 0xb0));
+        io_AppendText(0x100,*(unsigned int *)(v3 + 0xb0));
       else {
-        fcn_00519190(0x101);
+        io_AppendText(0x101);
       }
-      fcn_00519190(0x102,*(char *)((int)v4 + 0x1d),*(char *)(v18 + 0x241));
-      fcn_00519190(0xff,8000);
+      io_AppendText(0x102,*(char *)((int)v4 + 0x1d),*(char *)(v18 + 0x241));
+      io_AppendText(0xff,8000);
       if (v6) // branch-flip
-        fcn_00519190(0x100,*(unsigned int *)(v6 + 0xb4));
+        io_AppendText(0x100,*(unsigned int *)(v6 + 0xb4));
       else {
         v11 = 0x101;
 label_5be43c:
-        fcn_00519190(v11);
+        io_AppendText(v11);
       }
     }
     else {
-      fcn_00519190(0x104,(char)v4[0xe],*(char *)(v18 + 0x242));
-      fcn_00519190(0x105,8000);
+      io_AppendText(0x104,(char)v4[0xe],*(char *)(v18 + 0x242));
+      io_AppendText(0x105,8000);
       if (!v3) {
         v11 = 0x107;
         goto label_5be43c;
       }
-      fcn_00519190(0x106,*(unsigned int *)(v3 + 0xb0));
+      io_AppendText(0x106,*(unsigned int *)(v3 + 0xb0));
     }
-    fcn_00519190(0x103,*(int *)&v4[7] + 0x107,0x3200);
+    io_AppendText(0x103,*(int *)&v4[7] + 0x107,0x3200);
     if ((*(int *)0x100f1dc) != -1) {
       if ((*(int *)0x67d370) != v29) { // branch-flip
         if ((((*(int *)0x67d370) == v28) && ('\0' <= (*(int *)0x7747b0))) && (v11 = CONCAT31((unsigned int)((unsigned int)(*(int *)0x67d370) >> 8),(*(int *)0x773d75)),
              v15 = (unsigned int)(*(int *)0x774970), fcn_00526010(v15 * 0x21c + 0x7f4ca0,0x3200,v11))) {
-          fcn_0051af00(v26,0x113,0x3200);
+          io_FormatTextBuffer(v26,0x113,0x3200);
           fcn_00526120(v26,0x101);
           if (v13) {
             v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca4),CONCAT31((unsigned int)((unsigned int)v22 >> 8),(*(int *)0x773d75)),0x3200);
@@ -355,7 +355,7 @@ label_5bea6c:
       if (v28 != -1)
         fcn_00472170(v28,0);
       d2_SetForm(v5,4);
-      fcn_00519190(0x112);
+      io_AppendText(0x112);
       v28 = -1;
       v29 = -1;
     }

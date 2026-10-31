@@ -34,7 +34,7 @@ extern fcn_004fd4f0_Ent g_7f4ca0[];
 extern char g_773d75;
 
 void __cdecl fcn_004fd400(int* a, int* b);
-float __cdecl fcn_00507f10(fcn_004fd4f0_Ent* e, int k);
+float __cdecl gm_GetEntitySkill(fcn_004fd4f0_Ent* e, int k);
 int __cdecl fcn_004f4830(int idx, fcn_004fd4f0_Stat* dst);
 int __cdecl fcn_0050c710(char* a, int b, int c);
 double __cdecl gm_RandomFloat01(void);
@@ -66,7 +66,7 @@ int __cdecl fcn_004fd4f0(char* a1, fcn_004fd4f0_Out* out)
 	if (*(unsigned short*) (a1 + 0x27) == 0xffff)
 		return 0;
 	me = &g_7f4ca0[*(unsigned short*) (a1 + 0x27)];
-	fcn_00507f10(me, 4);
+	gm_GetEntitySkill(me, 4);
 	fcn_004f4830(2, &st);
 	mult = fcn_0050c710(a1, 9, 1) * 0.0125f + 1.0f;
 	for (ent = g_7f4ca0; ent < g_7f4ca0 + 768; ent++) {

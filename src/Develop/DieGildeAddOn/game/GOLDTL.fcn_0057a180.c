@@ -1,6 +1,6 @@
 extern char g_773d75;
 
-char* __cdecl fcn_00508e40(int a1);
+char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_0050d320(char* entity, char season);
 void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
 void __cdecl fcn_00546190(void* u);
@@ -23,7 +23,7 @@ void __cdecl fcn_0057a180(char* a0)
 	if (*(int*) (a0 + 0x70) > 0) {
 		return;
 	}
-	entity = fcn_00508e40(*(int*) (a0 + 0xc));
+	entity = gm_LookupEntityRecordById(*(int*) (a0 + 0xc));
 	if (entity != 0) {
 		count = fcn_0050d320(entity, g_773d75);
 		if (count > *(int*) (a0 + 0xac)) {
@@ -35,7 +35,7 @@ void __cdecl fcn_0057a180(char* a0)
 		p = (int*) (entity + 0x68);
 		for (i = 0; i < 5; i++) {
 			if (*p != -1) {
-				sound = fcn_00508e40(*p);
+				sound = gm_LookupEntityRecordById(*p);
 				if (sound != 0) {
 					fcn_004ff210(*(unsigned short*) sound, -1001);
 					found = 1;

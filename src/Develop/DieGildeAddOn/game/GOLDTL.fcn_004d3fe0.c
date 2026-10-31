@@ -4,7 +4,7 @@ extern char g_9b0e20[];
 extern double g_662ad8;
 
 float* __cdecl fcn_004d3c60(char*);
-char* __cdecl gm_LookupEntityRecordById(int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 float __cdecl fcn_004d3e90(void*, unsigned int);
 float __cdecl fcn_004e6d20(void);
 float __cdecl gm_RandomFloat01(void);
@@ -45,7 +45,7 @@ void __cdecl fcn_004d3fe0(char* a0)
 	}
 	for (i = 0; i < 16; i++) {
 		if (*(int*) (base + i * 4) != -1) {
-			ent[i] = gm_LookupEntityRecordById(*(int*) (base + i * 4));
+			ent[i] = gm_LookupEntityRecordIn32SlotTable(*(int*) (base + i * 4));
 			n++;
 		} else {
 			ent[i] = 0;
@@ -83,7 +83,7 @@ void __cdecl fcn_004d3fe0(char* a0)
 	}
 	for (i = 0; i < 16; i++) {
 		if (*(int*) (base + i * 4) != -1) {
-			fcn_004d4250(rec, gm_LookupEntityRecordById(*(int*) (base + i * 4)));
+			fcn_004d4250(rec, gm_LookupEntityRecordIn32SlotTable(*(int*) (base + i * 4)));
 		}
 	}
 }

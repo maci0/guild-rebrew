@@ -53,7 +53,7 @@ int __cdecl fcn_00517b90(char*, int, char*);
 int __cdecl fcn_0051e070(void);
 int __cdecl fcn_0046f2c0(int, int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0041d9e0(char*);
+int __cdecl ReportClientMessage(char*);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_00500d60(void*, void*);
 int __cdecl fcn_004fe330(void*, int);
@@ -288,7 +288,7 @@ int __cdecl fcn_0051c840(int id)
 			    buf[i + 1] == 'b' || buf[i + 1] == 'a' ||
 			    buf[i + 1] == 'n' || buf[i + 1] == 't') {
 				if (*(int*) ((char*) base + 0x10162d4) > 0x40) {
-					fcn_0041d9e0(g_6a235c);
+					ReportClientMessage(g_6a235c);
 					i += 2;
 					break;
 				}
@@ -527,7 +527,7 @@ int __cdecl fcn_0051c840(int id)
 				}
 			}
 			if (j >= g_6b7f98) {
-				fcn_0041d9e0(g_6a2318);
+				ReportClientMessage(g_6a2318);
 				break;
 			}
 			res = gm_RandomMod(res) & 0xffff;

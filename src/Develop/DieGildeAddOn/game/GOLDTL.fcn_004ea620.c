@@ -5,7 +5,7 @@ extern char* g_773da8;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_004e8240(unsigned char, char*, char*, int, int);
 void __cdecl fcn_004ea4b0(void*, unsigned int);
@@ -115,7 +115,7 @@ void __cdecl fcn_004ea620(void)
 	best = 0;
 	value = 0;
 	if (b[1] != -1 || a[1] != -1) {
-		existing = fcn_00508e40(b[1] != -1 ? b[1] : a[1]);
+		existing = gm_LookupEntityRecordById(b[1] != -1 ? b[1] : a[1]);
 		if (existing != 0) {
 			value = gm_WalkEntityChain(*(unsigned short*) existing);
 		}

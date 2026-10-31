@@ -488,6 +488,39 @@ if(REBREW_BUILD_GOLDTL)
   # other targets.
   list(APPEND GOLDTL_SOURCES "${PROJECT_SOURCE_DIR}/references/zlib/minigzip.c")
 
+  # The XP image member uses the plain-C JPEG/PNG objects selected below.
+  set(_GOLDTL_XP_D3DX "${PROJECT_SOURCE_DIR}/references/dxsdk8/lib/d3dx8-xpsp1.lib")
+  if(NOT EXISTS "${_GOLDTL_XP_D3DX}")
+    message(FATAL_ERROR "Provide the pristine XP SP1 D3DX8 archive at ${_GOLDTL_XP_D3DX} (SHA-256 c02e4fedf3e2e0964a1eed98ca02b28d68a0a7ac184594b04212216253bfbd9d)")
+  endif()
+  file(SHA256 "${_GOLDTL_XP_D3DX}" _GOLDTL_XP_D3DX_HASH)
+  if(NOT _GOLDTL_XP_D3DX_HASH STREQUAL "c02e4fedf3e2e0964a1eed98ca02b28d68a0a7ac184594b04212216253bfbd9d")
+    message(FATAL_ERROR "Unexpected XP SP1 D3DX8 archive SHA-256: ${_GOLDTL_XP_D3DX_HASH}")
+  endif()
+  find_program(_GOLDTL_LLVM_AR NAMES llvm-ar REQUIRED)
+  set(_GOLDTL_XP_IMAGE "${CMAKE_CURRENT_BINARY_DIR}/xp-cd3dximage.obj")
+  execute_process(COMMAND "${_GOLDTL_LLVM_AR}" p "${_GOLDTL_XP_D3DX}" "obj\\i386\\cd3dximage.obj"
+    OUTPUT_FILE "${_GOLDTL_XP_IMAGE}" RESULT_VARIABLE _GOLDTL_XP_EXTRACT_RC)
+  if(NOT _GOLDTL_XP_EXTRACT_RC EQUAL 0)
+    message(FATAL_ERROR "Failed to extract XP SP1 cd3dximage.obj")
+  endif()
+  file(SHA256 "${_GOLDTL_XP_IMAGE}" _GOLDTL_XP_IMAGE_HASH)
+  if(NOT _GOLDTL_XP_IMAGE_HASH STREQUAL "d0c91f1bf7550ae39709f738416a48710e75aba61749203d8c7b03d5a07fe592")
+    message(FATAL_ERROR "Unexpected XP SP1 cd3dximage.obj SHA-256: ${_GOLDTL_XP_IMAGE_HASH}")
+  endif()
+  set(_GOLDTL_XP_JERROR "${CMAKE_CURRENT_BINARY_DIR}/xp-jerror.obj")
+  execute_process(COMMAND "${_GOLDTL_LLVM_AR}" p "${_GOLDTL_XP_D3DX}" "obj\\i386\\jerror.obj"
+    OUTPUT_FILE "${_GOLDTL_XP_JERROR}" RESULT_VARIABLE _GOLDTL_XP_EXTRACT_RC)
+  if(NOT _GOLDTL_XP_EXTRACT_RC EQUAL 0)
+    message(FATAL_ERROR "Failed to extract XP SP1 jerror.obj")
+  endif()
+  file(SHA256 "${_GOLDTL_XP_JERROR}" _GOLDTL_XP_JERROR_HASH)
+  if(NOT _GOLDTL_XP_JERROR_HASH STREQUAL "e1203fbdc8cb43231d4952b24843030fdd4f332c51e858807bdaf6cbda0516ba")
+    message(FATAL_ERROR "Unexpected XP SP1 jerror.obj SHA-256: ${_GOLDTL_XP_JERROR_HASH}")
+  endif()
+  set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${_GOLDTL_XP_D3DX}")
+  list(APPEND GOLDTL_SOURCES "${_GOLDTL_XP_IMAGE}" "${_GOLDTL_XP_JERROR}")
+
   # The DX8 supplementary png/jpeg objects are prebuilt and carry no metadata
   # rows, so they need reference first VAs and must be ordered with the rest.
   file(GLOB GOLDTL_DX8_SUPP "${PROJECT_SOURCE_DIR}/references/dxsdk8/supp/*.obj")
@@ -509,8 +542,10 @@ if(REBREW_BUILD_GOLDTL)
       --first-va inflate.c=0x461560
       --first-va inftrees.c=0x462200
       --first-va trees.c=0x462da0
-      --first-va unzip.c=0x464a30
+      --first-va unzip.c=0x4645a0
       --first-va minigzip.c=0x462500
+      --first-va xp-cd3dximage.obj=0x0061e196
+      --first-va xp-jerror.obj=0x0062ecc6
       --first-va jcomapi.obj=0x0063e84b
       --first-va jdmarker.obj=0x0062d5df
       --first-va png.obj=0x0062fcce
@@ -570,11 +605,6 @@ if(REBREW_BUILD_GOLDTL)
     # loadx.obj are present in the reference; they stay unlinked until their
     # CTLFWR32 globals resolve. The unused list is kept in
     # layout/Europa1400Gold_TL.exe/d3dx8-includes.rsp as evidence.
-    # The SDK archive and the extracted JPEG/PNG objects compile the same libpng
-    # routines from one source, so their names collide. Measured and expected;
-    # keep the first definition (the SDK's) and force the duplicate names.
-    target_link_options(europa1400gold_tl PRIVATE /FORCE:MULTIPLE)
-
     target_include_directories(europa1400gold_tl PRIVATE
       "${PROJECT_SOURCE_DIR}/src"
     )
@@ -587,7 +617,7 @@ if(REBREW_BUILD_GOLDTL)
     add_custom_command(
       OUTPUT "${_GOLDTL_CTL_STUB}"
       COMMAND "${_REBREW_GOLDTL_BIN}" build driver cl --
-        /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp /c /TP
+        /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp /c /TP /MT
         "/Fo${_GOLDTL_CTL_STUB}"
         "${PROJECT_SOURCE_DIR}/stubs/goldtl/ctl_locale_stubs.cpp"
       DEPENDS "${PROJECT_SOURCE_DIR}/stubs/goldtl/ctl_locale_stubs.cpp"
@@ -720,6 +750,31 @@ foreach(_client europa1400gold europa1400gold_tl)
 
     # Client compilation uses each target's measured profile and runtime.
     if(MSVC_FOR_DECOMP)
+      if(_client STREQUAL "europa1400gold")
+        set(_client_reference_target "Europa1400Gold.exe")
+        set(_client_rebrew_bin "${_REBREW_GOLD_BIN}")
+      else()
+        set(_client_reference_target "Europa1400Gold_TL.exe")
+        set(_client_rebrew_bin "${_REBREW_GOLDTL_BIN}")
+      endif()
+      execute_process(
+        COMMAND "${_client_rebrew_bin}" binary pe --target "${_client_reference_target}" --json
+        WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
+        RESULT_VARIABLE _client_timestamp_rc OUTPUT_VARIABLE _client_timestamps
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
+      if(NOT _client_timestamp_rc EQUAL 0)
+        message(FATAL_ERROR "Cannot read native ${_client_reference_target} build timestamp")
+      endif()
+      string(JSON _client_link_epoch GET "${_client_timestamps}" timestamp)
+      string(JSON _client_reference GET "${_client_timestamps}" binary)
+      if(NOT "${_client_link_epoch}" MATCHES "^[0-9]+$" OR _client_link_epoch GREATER 2147483647)
+        message(FATAL_ERROR "Native Wine clock requires client timestamp in 0..2147483647")
+      endif()
+      string(REPLACE ";" "\\;" _client_reference "${_client_reference}")
+      set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+        "${PROJECT_SOURCE_DIR}/rebrew-project.toml" "${_client_reference}")
+      set_property(TARGET ${_client} PROPERTY RULE_LAUNCH_LINK
+        "\"${CMAKE_COMMAND}\" -E env SOURCE_DATE_EPOCH=${_client_link_epoch}")
       target_include_directories(${_client} PRIVATE
         "${PROJECT_SOURCE_DIR}/src/Develop"
         "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3")

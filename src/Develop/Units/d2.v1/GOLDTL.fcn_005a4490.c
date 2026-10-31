@@ -31,8 +31,8 @@ void __cdecl fcn_00471b60(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00473a90(int, int);
-int __cdecl fcn_00519190();
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl io_AppendText();
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl fcn_005373e0(void*, int);
@@ -80,8 +80,8 @@ void __cdecl fcn_005a4490(char* p)
 	*(int*) (arg + 0x10162f0) = 0x18;
 	*(int*) (arg + 0x10162f4) = 0x18;
 	d2_SetForm(dialog, 1);
-	fcn_00519190(0x18c9, *(unsigned short*) (g_8680b4 + g_773d75 * 0x2f4) * 2 + 0x9a8);
-	fcn_00473a90(0, 0);
+	io_AppendText(0x18c9, *(unsigned short*) (g_8680b4 + g_773d75 * 0x2f4) * 2 + 0x9a8);
+	d2_SetOverlayAnimation(0, 0);
 	while (fcn_005373e0(fcn_005a4490, 0x677c7) != 0) {
 		if (refresh) {
 			for (i = 0; i < 9; i++) {
@@ -96,23 +96,23 @@ void __cdecl fcn_005a4490(char* p)
 			n = fcn_0050d5d0(g_774970, 0, lines);
 			count = fcn_0050d5d0(g_774970, p, lines);
 			d2_SetForm(dialog, 4);
-			fcn_00519190(g_6811b0);
+			io_AppendText(g_6811b0);
 			if (count >= 9) {
-				fcn_00519190(0x18cb);
+				io_AppendText(0x18cb);
 				refresh = 1;
 			} else if (count >= 3) {
-				fcn_00519190(0x18cc);
+				io_AppendText(0x18cc);
 				refresh = 1;
 			} else {
 				if (count != 0) {
-					fcn_00519190(0x18ca, *(unsigned short*) (p + 0x27), p, count, n);
+					io_AppendText(0x18ca, *(unsigned short*) (p + 0x27), p, count, n);
 				} else {
-					fcn_00519190(0x18cd, *(unsigned short*) (p + 0x27), p);
+					io_AppendText(0x18cd, *(unsigned short*) (p + 0x27), p);
 				}
 				refresh = 0;
 			}
 			d2_SetForm(dialog, 3);
-			fcn_00519190(g_6811b0);
+			io_AppendText(g_6811b0);
 			if (refresh) {
 				fcn_00533a60(g_772514, 0, sel, 1, g_14ab65c);
 				first = -1;
@@ -135,7 +135,7 @@ void __cdecl fcn_005a4490(char* p)
 					rows[i].line = line;
 					*(int*) (rows[i].image * 0x3cc + 0x10161cc) = 0x56;
 					*(int*) (rows[i].image * 0x3cc + 0x1015f58) = 0x10;
-					fcn_00519190(0x18d6, *(unsigned int*) (line + 0xb4), *(unsigned int*) (line + 0xc0), line + 0xc4);
+					io_AppendText(0x18d6, *(unsigned int*) (line + 0xb4), *(unsigned int*) (line + 0xc0), line + 0xc4);
 					index++;
 					y += h + 8;
 				}

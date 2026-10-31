@@ -1,5 +1,5 @@
 int __cdecl fcn_00507b00(int);
-float __cdecl fcn_00507f10(char*, int);
+float __cdecl gm_GetEntitySkill(char*, int);
 int __cdecl fcn_004fbd20(int);
 int __cdecl fcn_004f5dd0(int);
 void __cdecl fcn_004f4830(int, char*);
@@ -20,7 +20,7 @@ int __cdecl fcn_004903c0(char* obj, int unused, int* out)
 	char info[0x24];
 
 	kind = fcn_00507b00((unsigned char) obj[0x164]);
-	t = fcn_00507f10(obj, 4);
+	t = gm_GetEntitySkill(obj, 4);
 	n = fcn_004fbd20(4) & 0xff;
 	sum = (t - ((float) n + *(float*) 0x6628a0) * *(float*) 0x66416c) *
 	    *(float*) 0x664168;

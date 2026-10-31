@@ -15,7 +15,7 @@ typedef struct {
 	char buf2[0x1fb8];  /* 0x434 */
 } Frame4e2b70;
 
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004e4e90(char* s);
 int __cdecl fcn_004c3100(char* s, int a);
 void __cdecl fcn_004e4730(char* s);
@@ -28,7 +28,7 @@ void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
 void __cdecl fcn_005373e0(int a, int b);
 void __cdecl fcn_004234e0(int a, char* s, int b, int c, int d, int e, int f);
 int __cdecl fcn_005095d0(void* p, void* buf);
-void __cdecl fcn_0051af00(char* buf, ...);
+void __cdecl io_FormatTextBuffer(char* buf, ...);
 int __cdecl fcn_004e6eb0(void* buf, int n);
 void __cdecl fcn_005d0660(int a, int b, int c, int d);
 void __cdecl fcn_004c4510(void* a, int b);
@@ -61,7 +61,7 @@ void __cdecl fcn_004e2b70(void* arg)
 	unsigned int mask;
 	__int64 q;
 
-	obj = (void*) fcn_00508e40(*(int*) ((char*) arg + 0x34));
+	obj = (void*) gm_LookupEntityRecordById(*(int*) ((char*) arg + 0x34));
 	mask = *(unsigned int*) 0x7f4c04;
 	i = 0;
 	f.w[0] = 8;
@@ -127,7 +127,7 @@ void __cdecl fcn_004e2b70(void* arg)
 	if (r != 0) {
 		if ((flags & 1) != 0 && (flags & 2) == 0) {
 			idxval = *(unsigned short*) obj;
-			fcn_0051af00(f.buf1, 0x40fb, 0x40f5, idxval);
+			io_FormatTextBuffer(f.buf1, 0x40fb, 0x40f5, idxval);
 			if (fcn_004e6eb0(f.buf1, 0x10) != 0) {
 				r = *(int*) ((char*) obj + 4);
 				f.alo = 0;
@@ -149,7 +149,7 @@ void __cdecl fcn_004e2b70(void* arg)
 			idxval = *(unsigned short*) obj;
 			f.f10 = 0.0f;
 			*(float*) &f.alo = 100.0f;
-			fcn_0051af00(f.buf1, 0x40fc, 0x40f5, idxval);
+			io_FormatTextBuffer(f.buf1, 0x40fc, 0x40f5, idxval);
 			fcn_004e6eb0(f.buf1, 0x10);
 			fcn_004c4510(obj, *(int*) ((char*) obj + 4));
 			fcn_004c4570(4, 1, 0x1c, &f.alo);
@@ -161,9 +161,9 @@ void __cdecl fcn_004e2b70(void* arg)
 			*(char*) ((char*) obj + 8) = 0;
 			*(int*) 0x774954 = 1;
 			if (f.yslot != 0) {
-				fcn_0051af00(f.buf1, 0x1ab4);
+				io_FormatTextBuffer(f.buf1, 0x1ab4);
 			} else {
-				fcn_0051af00(f.buf1, 0x1ab3, *(unsigned short*) obj);
+				io_FormatTextBuffer(f.buf1, 0x1ab3, *(unsigned short*) obj);
 			}
 			fcn_004e6eb0(f.buf1, 0);
 			fcn_005356b0(0x5438c0);

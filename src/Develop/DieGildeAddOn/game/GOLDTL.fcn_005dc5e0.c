@@ -11,7 +11,7 @@ extern short g_aed32c;
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_005bdc30(int, int*, char*, int, int);
 int __cdecl fcn_004c5530(char*);
-int __cdecl fcn_0051af00(char*, int, ...);
+int __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
@@ -50,7 +50,7 @@ int __cdecl fcn_005dc5e0(char* a0, int* a1)
 	} else {
 		memset(set, 0, sizeof(set));
 		memset(&set[7], 0xff, 0x20);
-		fcn_0051af00(name, 0x9b);
+		io_FormatTextBuffer(name, 0x9b);
 		set[0] = 1;
 		set[1] = -1;
 		set[4] = 6;
@@ -95,7 +95,7 @@ int __cdecl fcn_005dc5e0(char* a0, int* a1)
 		ent = *(unsigned short*) (pkt + 0x27);
 		kind = g_7f4ca2[ent * 0x21c];
 		if (kind == 6 || kind == 7) {
-			fcn_0051af00(text, 0xff2, pkt);
+			io_FormatTextBuffer(text, 0xff2, pkt);
 			fcn_00545d40(*(int*) (&g_7f4ca4[ent * 0x87]), -1, text, 0, 0x5fb, 0);
 		}
 	}

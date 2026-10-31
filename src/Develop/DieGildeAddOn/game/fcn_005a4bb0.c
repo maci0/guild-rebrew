@@ -5,11 +5,11 @@ typedef unsigned int   u32;
 void* __cdecl fcn_00470820(short a, short b, char* c);
 void __cdecl fcn_00471b60(int a);
 void __cdecl d2_SetForm(int a, int b);
-int __cdecl fcn_00519190(void* id, ...);
+int __cdecl io_AppendText(void* id, ...);
 int __cdecl fcn_00472250(int a, int b, int c);
 int __cdecl fcn_0050b710(int a, int b);
 int __cdecl fcn_0050b750(int a);
-void __cdecl fcn_00473a90(int a, int b);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_005373e0(void* a, int b);
 int __cdecl fcn_00471f80(int a);
 int __cdecl gm_QueryEntitySum(int a, int b);
@@ -39,11 +39,11 @@ void __cdecl fcn_005a4bb0(char* o)
     dlg = (char*) fcn_00470820(0, 0, "locations\\geldleihe\\geldleihe_KreditFreigabe");
     fcn_00471b60((int)dlg);
     d2_SetForm((int)dlg, 1);
-    fcn_00519190((void*)0x18e5);
+    io_AppendText((void*)0x18e5);
     have = gm_QueryEntitySum(*(int*)(o + 0x5d), *(u8*)0x773d75);
     d2_SetForm((int)dlg, 2);
     idx = *(u16*)(*(u8*)0x773d75 * 0x2f4 + 0x8680b4);
-    r = fcn_00519190((void*)0x18e6, (void*)(2 * idx + 0x9a8));
+    r = io_AppendText((void*)0x18e6, (void*)(2 * idx + 0x9a8));
     it1 = fcn_00472250((int)dlg, 2, r);
     it2 = fcn_00472250((int)dlg, 2, r + 1);
     fcn_00472380(it1, 5, 0x28, *(int*)(o + 0x65));
@@ -51,7 +51,7 @@ void __cdecl fcn_005a4bb0(char* o)
     a = fcn_0050b710(have, *(u8*)0x773d75);
     b = fcn_0050b710(sval, *(u8*)0x773d75);
     fcn_00472380(it2, 0, b);
-    fcn_00473a90(0, 0);
+    d2_SetOverlayAnimation(0, 0);
     while (fcn_005373e0((void*)0x5a4bb0, 0x677c7) != 0) {
         if (*(int*)0x14ce8e0 != 0 || *(int*)0x100f1dc == 1)
             *(int*)0x774654 = 1;

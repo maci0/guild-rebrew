@@ -43,14 +43,14 @@ extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(void*, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050f980(int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_004c5530(Packet*);
 
@@ -70,7 +70,7 @@ int __cdecl fcn_004ba080(Req* r)
 
 	n = 0;
 	p2 = 0;
-	o = fcn_00508e40(r->id);
+	o = gm_LookupEntityRecordById(r->id);
 	if (o == 0) {
 		return 1;
 	}
@@ -115,7 +115,7 @@ int __cdecl fcn_004ba080(Req* r)
 	if (!((float) gm_RandomMod(50) > dist)) {
 		return 0x400;
 	}
-	fcn_0051af00(buf, r->x4 + 0x12e7, (p2[9] ? 0x230 : 0x20d) + *(unsigned char*) (p2 + 0x165),
+	io_FormatTextBuffer(buf, r->x4 + 0x12e7, (p2[9] ? 0x230 : 0x20d) + *(unsigned char*) (p2 + 0x165),
 		*(unsigned short*) p2, p1);
 	fcn_00545d40(*(int*) (o + 4), *(int*) (o + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	{

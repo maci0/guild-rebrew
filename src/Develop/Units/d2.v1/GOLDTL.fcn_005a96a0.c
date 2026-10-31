@@ -37,9 +37,9 @@ extern char g_6aae98[];
 int __cdecl fcn_004e8a80(int, void*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 void __cdecl fcn_0046f2c0(int, int);
 int __cdecl fcn_005ca560(Item5a96* s);
@@ -102,9 +102,9 @@ int __cdecl fcn_005a96a0(char* who, int id)
 				if (d == -1) {
 					d = fcn_00470820(0, 0, g_6aae98);
 					fcn_00471b60(d);
-					fcn_00473a90(0, 0);
+					d2_SetOverlayAnimation(0, 0);
 					d2_SetForm(d, 1);
-					fcn_00519190(0x1a07, id + 0x253);
+					io_AppendText(0x1a07, id + 0x253);
 					d2_SetForm(d, 3);
 					fcn_00533a60(g_772514, 0, ids, 3, g_14abb40, g_14abb44, g_14abb48);
 					ha = ids[0];
@@ -113,9 +113,9 @@ int __cdecl fcn_005a96a0(char* who, int id)
 				}
 				d2_SetForm(d, 2);
 				fcn_0046f2c0(g_772514, 1);
-				fcn_00519190(0x1a0b);
+				io_AppendText(0x1a0b);
 				if (n <= 0) {
-					fcn_00519190(0x1a0c);
+					io_AppendText(0x1a0c);
 				}
 				else {
 					w = (((int*)g_77255c)[3] - *(short*) (g_772500 + 0x1ebd8) * 2) / 3;

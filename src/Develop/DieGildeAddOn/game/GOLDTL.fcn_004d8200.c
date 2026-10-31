@@ -8,7 +8,7 @@ typedef struct {
 blk24 g_68bef4 = { { 0x7a657073, 0, 0, 0, 0, 0, 0, 0, 0 } };
 
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
-char* __cdecl gm_LookupEntityRecordById(int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl fcn_004ce610(char*);
 char* __cdecl fcn_0040c230(char*, void (__cdecl*)(int), int, int, int);
 char* __cdecl fcn_0040c120(char*, int, ...);
@@ -58,10 +58,10 @@ void __cdecl fcn_004d8200(int* p)
 	if (p[0] == -1) {
 		return;
 	}
-	rec = (unsigned short*) gm_LookupEntityRecordById(p[0]);
+	rec = (unsigned short*) gm_LookupEntityRecordIn32SlotTable(p[0]);
 	r = fcn_004ce610((char*) rec);
 	save = *(int*) ((char*) rec + 0x16c);
-	ent = (int*) gm_LookupEntityRecordById(p[4]);
+	ent = (int*) gm_LookupEntityRecordIn32SlotTable(p[4]);
 	if (ent != 0) {
 		*(int*) ((char*) ent + 0x24) = p[10];
 	}

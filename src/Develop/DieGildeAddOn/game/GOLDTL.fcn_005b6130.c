@@ -10,7 +10,7 @@ void __cdecl fcn_0046f9b0(int element, int a2);
 void __cdecl fcn_00472900(int element, int a2);
 char* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 char* __cdecl gm_EntityAccumulate(int entity);
-void __cdecl fcn_0051af00(char* buf, char* fmt, ...);
+void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 void __cdecl fcn_00526920(char* text, int a2, int a3);
 
 /* ADDRESS: GOLDTL 0x005b6130 */
@@ -35,7 +35,7 @@ void __cdecl fcn_005b6130(int a0, char* a1)
                 v2 = gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (v1 + 0xb4));
                 if (v2) {
                     v8 = 0x1a3e;
-                    fcn_0051af00(v5, (char*) v8, v2);
+                    io_FormatTextBuffer(v5, (char*) v8, v2);
                 }
             } else {
                 v2 = gm_EntityAccumulate(v3);
@@ -43,7 +43,7 @@ void __cdecl fcn_005b6130(int a0, char* a1)
                     v2 = g_773d78;
                 }
                 v8 = 0x1a3f;
-                fcn_0051af00(v5, (char*) v8, v2);
+                io_FormatTextBuffer(v5, (char*) v8, v2);
             }
             v3 = *(int*) (v4 * 4 + 0x777cdc);
             if (v3 != -1) {

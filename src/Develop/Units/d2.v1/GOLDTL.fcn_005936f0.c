@@ -32,7 +32,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_00517b10(char*, char*);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00533a60(int, int, void*, int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
@@ -97,22 +97,22 @@ int __cdecl fcn_005936f0(int msg, int param)
 	fcn_00471b60(h);
 	fcn_00517b10((char*) 0x9baa76, text);
 	d2_SetForm(h, 1);
-	fcn_00519190(0x1acf, text);
-	first = fcn_00472250(h, 1, fcn_00519190(0x1ad0, 0x1ad2));
+	io_AppendText(0x1acf, text);
+	first = fcn_00472250(h, 1, io_AppendText(0x1ad0, 0x1ad2));
 	d2_SetForm(h, 2);
-	second = fcn_00472250(h, 2, fcn_00519190(0x1ad1, 0x1ad3));
+	second = fcn_00472250(h, 2, io_AppendText(0x1ad1, 0x1ad3));
 	d2_SetForm(h, 3);
-	fcn_00519190(0x1ad4);
+	io_AppendText(0x1ad4);
 	fcn_00533a60(g_772514, 0x1c, out, 2, g_14abe74, g_14abe78);
 	np = out[0];
 	s = out[1];
 	d2_SetForm(h, 4);
-	fcn_00519190(0x1ad7);
+	io_AppendText(0x1ad7);
 	fcn_00533a60(g_772514, 0x1c, out, 2, g_14abe80, g_14abe84);
 	ep = out[1];
 	n = (int) out[0];
 	d2_SetForm(h, 5);
-	fcn_00519190(0x1adb);
+	io_AppendText(0x1adb);
 	cols = (*(int*) (g_772514 * 0x3cc + (int) g_1015f4c) - 0x20) / 0x30;
 	group = d2_CreateRadioGroup(0);
 	for (i = 0; i < 8; i++) {
@@ -125,7 +125,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 		fcn_00469470(group, ids[i]);
 	}
 	d2_SetForm(h, 6);
-	elem6 = fcn_00472250(h, 6, fcn_00519190(0x7e));
+	elem6 = fcn_00472250(h, 6, io_AppendText(0x7e));
 	d2_SetElementValue(first, g_7e23ea);
 	d2_SetElementValue(second, g_7e240a);
 	for (i = 0; i < 8; i++) {

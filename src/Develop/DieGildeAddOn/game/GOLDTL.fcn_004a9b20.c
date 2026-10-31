@@ -8,7 +8,7 @@ typedef struct {
 unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fa5b0(int, char*, int);
 int __cdecl fcn_004a8880(char*, char*, int, char*, int);
 int __cdecl fcn_004a8b70(char*, char*, int, char*, int);
@@ -46,7 +46,7 @@ int __cdecl fcn_004a9b20(char* a0, char* a1, int a2, char* a3, int a4)
 		e = fcn_005463a0(1, 0, 0x45);
 		while (e != 0) {
 			if (*(int*) (e + 0xac) == *(int*) (a1 + 4)) {
-				c.found = fcn_00508e40(*(int*) (e + 0xb0));
+				c.found = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 				break;
 			}
 			e = he_fn_Handlung();

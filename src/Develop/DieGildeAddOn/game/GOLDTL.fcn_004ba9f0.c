@@ -2,13 +2,13 @@
 
 extern char g_7f4ca0[];
 
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_GetBuildingTypeCategory(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004ba9f0 */
@@ -30,7 +30,7 @@ int __cdecl fcn_004ba9f0(int* a1)
 	int cat;
 
 	found = 0;
-	e = fcn_00508e40(a1[0]);
+	e = gm_LookupEntityRecordById(a1[0]);
 	if (e == 0)
 		return 1;
 	n = 0;
@@ -78,7 +78,7 @@ int __cdecl fcn_004ba9f0(int* a1)
 		return 0x400;
 	fcn_004c51f0(*(int*) (chosen + 1), -1, gm_RandomMod(2) + 0x134, 1,
 	    *(unsigned char*) 0x773d75, 0);
-	fcn_0051af00(buf, *(unsigned short*) (a1 + 1) + 0x12e7,
+	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7,
 	    *(unsigned short*) found);
 	he_MessageBoxQuickjump(*(int*) (e + 2), *(int*) (e + 2), buf,
 	    strlen(buf) > 0x100, 0x603, *(int*) (chosen + 1), -1, 0, 0);

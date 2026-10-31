@@ -23,7 +23,7 @@ extern int g_774654;
 
 Book *__cdecl fcn_00534c40(char *, char *, int, char *, char *);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 void __cdecl fcn_004f5110(char *, int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_004f4830(int, Law *);
@@ -78,7 +78,7 @@ void __cdecl fcn_005ce460(int cmd)
 		return;
 	}
 	d2_SetForm(w->left, 1);
-	fcn_00519190(title);
+	io_AppendText(title);
 	d2_SetForm(w->left, 2);
 	col = w->left;
 	for (i = first, n = 0; i < last; i++, n++) {
@@ -87,12 +87,12 @@ void __cdecl fcn_005ce460(int cmd)
 			col = w->right;
 		}
 		fcn_004f5110(buf, i);
-		items[n] = fcn_00472250(col, 2, fcn_00519190("%it$1>%s$N$0>", buf));
+		items[n] = fcn_00472250(col, 2, io_AppendText("%it$1>%s$N$0>", buf));
 	}
 	d2_SetForm(w->left, 3);
-	fcn_00519190(0x1a38, 1);
+	io_AppendText(0x1a38, 1);
 	d2_SetForm(w->right, 3);
-	fcn_00519190(0x1a38, 2);
+	io_AppendText(0x1a38, 2);
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {

@@ -33,7 +33,7 @@ int __cdecl fcn_0046f7e0(int x, int y, int a3, int win, int a5)
 		return -1;
 	}
 	if (w->i[0x2c / 4] >= 0x180) {
-		fcn_0041d9e0(s_67d420);
+		ReportClientMessage(s_67d420);
 		return -1;
 	}
 	((int*) w->i[0x28 / 4])[w->i[0x2c / 4]] = fcn_00469c30((short) (w->i[0x4 / 4] + x), (short) (w->i[0x8 / 4] - w->i[0x258 / 4] + y), a3);

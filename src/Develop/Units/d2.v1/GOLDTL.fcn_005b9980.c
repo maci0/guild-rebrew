@@ -7,12 +7,12 @@ extern int g_100f1dc;
 extern int g_67d370;
 
 extern int __cdecl fcn_0050c490(int a0, int a1);
-extern int __cdecl fcn_0051af00(char *a0, char *a1, ...);
+extern int __cdecl io_FormatTextBuffer(char *a0, char *a1, ...);
 extern int __cdecl fcn_00526120(char *a0, int a1);
 extern int __cdecl fcn_00470820(int a0, int a1, char *a2);
 extern void __cdecl fcn_00471b60(int a0);
 extern void __cdecl d2_SetForm(int a0, int a1);
-extern int __cdecl fcn_00519190(int a0);
+extern int __cdecl io_AppendText(int a0);
 extern int __cdecl fcn_00472250(int a0, int a1, int a2);
 extern void __cdecl fcn_00533dc0(int a0, int a1, int a2);
 extern int __cdecl d2_CreateRadioGroup(int a0, int a1, int a2, int a3);
@@ -49,21 +49,21 @@ void __cdecl fcn_005b9980(int a0)
     v17 = 0;
     if (fcn_0050c490(a0, 0) >= 3)
     {
-        fcn_0051af00(v13, (char *)0xf1, 3);
+        io_FormatTextBuffer(v13, (char *)0xf1, 3);
         fcn_00526120(v13, 0);
         return;
     }
     h = fcn_00470820(0, 0, (char *)0x6ac354);
     fcn_00471b60(h);
     d2_SetForm(h, 2);
-    fcn_00519190(0xd8);
+    io_AppendText(0xd8);
     v14[0] = fcn_00472250(h, 1, 0);
     v14[1] = fcn_00472250(h, 1, 1);
     v14[2] = fcn_00472250(h, 1, 2);
     d2_SetForm(h, 0);
     fcn_00533dc0(g_772514, 0x70b, 0x741);
     d2_SetForm(h, 3);
-    v5 = fcn_00472250(h, 3, fcn_00519190(0xdb));
+    v5 = fcn_00472250(h, 3, io_AppendText(0xdb));
     v1 = d2_CreateRadioGroup(3, v14[0], v14[1], v14[2]);
     fcn_004695a0(v1, 0);
     v16 = 35 * v1;
@@ -89,10 +89,10 @@ void __cdecl fcn_005b9980(int a0)
                     switch (fcn_0051e070())
                     {
                     case 1:
-                        fcn_0051af00(v15, (char *)0xd9, v17 * 2 + 0xc10, v7);
+                        io_FormatTextBuffer(v15, (char *)0xd9, v17 * 2 + 0xc10, v7);
                         break;
                     case 0:
-                        fcn_0051af00(v15, (char *)0xd9, v7, v17 * 2 + 0xc10);
+                        io_FormatTextBuffer(v15, (char *)0xd9, v7, v17 * 2 + 0xc10);
                         break;
                     }
                     if (fcn_00526120(v15, 0x101))
@@ -112,7 +112,7 @@ void __cdecl fcn_005b9980(int a0)
         if (*(int *)(0x102cbc8 + v16 * 4) != -1)
         {
             eval_ObjektPreis2Credits(v17 + 0x134, 100);
-            fcn_0051af00(v13, (char *)0xda, v17 * 2 + 0xc10, _ftol());
+            io_FormatTextBuffer(v13, (char *)0xda, v17 * 2 + 0xc10, _ftol());
             fcn_0046f9b0(v5, v13);
             fcn_00469090(v5);
         }

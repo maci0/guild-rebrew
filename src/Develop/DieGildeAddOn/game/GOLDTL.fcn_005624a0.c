@@ -13,11 +13,11 @@ extern pos14_7f4c00 g_7f4c00;
 extern char s_6a6578[];
 extern char s_67ed14[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl fcn_0050d320(char*, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00546190(void*);
@@ -57,7 +57,7 @@ void __cdecl fcn_005624a0(char* ctx)
 	if (state == -1 || state == -2) {
 		if ((*(unsigned char*) (ctx + 0x78) & 2)
 		    && *(int*) (ctx + 0xd8) != -1) {
-			ent = fcn_00508e40(*(int*) (ctx + 0xd8));
+			ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 			if (ent != 0) {
 				fcn_004c5c80(*(int*) (ent + 4));
 				fcn_004c57e0(*(int*) (ent + 4), 1);
@@ -134,8 +134,8 @@ void __cdecl fcn_005624a0(char* ctx)
 		if (hit == 0) {
 			break;
 		}
-		fcn_0051af00(text, 0x6a6578, hit);
-		ent = fcn_00508e40(*(int*) (ctx + 0xd8));
+		io_FormatTextBuffer(text, 0x6a6578, hit);
+		ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 		if (ent == 0) {
 			break;
 		}
@@ -152,7 +152,7 @@ void __cdecl fcn_005624a0(char* ctx)
 			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 			return;
 		}
-		ent = fcn_00508e40(*(int*) (ctx + 0xd8));
+		ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 		if (ent == 0) {
 			break;
 		}
@@ -179,16 +179,16 @@ void __cdecl fcn_005624a0(char* ctx)
 		fcn_00500bb0(ctx + 0x52, 0, 5, 0);
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
 		if (hit != 0 && *(short*) (hit + 0x27) != -1) {
-			ent = fcn_00508e40(*(int*) (ctx + 0xd8));
+			ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 			if (ent != 0 && fcn_00529670(ent, hit) == 0) {
 				*(int*) (ctx + 0x70) = 3;
 				fcn_00500bb0(ctx + 0x52, 0, 5, 0);
 				*(int*) (ctx + 0x84) = fcn_004c5620(3, ctx);
 				return;
 			}
-			rec = fcn_00508e40(*(int*) (ctx + 0xc4));
+			rec = gm_LookupEntityRecordById(*(int*) (ctx + 0xc4));
 			if (rec != 0) {
-				fcn_0051af00(text, 0x1734, *(unsigned short*) rec);
+				io_FormatTextBuffer(text, 0x1734, *(unsigned short*) rec);
 				fcn_00545d40(*(int*) (g_7f4ca0
 				    + *(unsigned short*) (ctx + 8) * 0x21c + 4),
 				    -1, text, 0, 0x5fa, 0);

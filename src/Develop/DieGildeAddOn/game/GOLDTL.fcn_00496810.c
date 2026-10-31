@@ -135,7 +135,7 @@ int __cdecl fcn_00496810(int a1, short *ent, int mode, Cmd *out1, Cmd *out2, int
 				return 9;
 			}
 		} else if (out1->kind == 7 &&
-			   (e = (unsigned char *) fcn_00508e40(out1->f1)) != 0 &&
+			   (e = (unsigned char *) gm_LookupEntityRecordById(out1->f1)) != 0 &&
 			   e != *(unsigned char **) 0x77261c) {
 			int dist;
 

@@ -2,7 +2,7 @@
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl fcn_00471b60(int k);
 int __cdecl d2_SetForm(int k, int i);
-void __cdecl fcn_00519190(int a);
+void __cdecl io_AppendText(int a);
 int __cdecl fcn_005373e0(void* p, int a);
 float __cdecl fcn_004ff210(unsigned short id, int delta);
 int __cdecl fcn_005095d0(char* e, int* out_count);
@@ -21,9 +21,9 @@ void __cdecl fcn_005a06a0(void)
 	h = fcn_00470820(0, 0, "locations\\wohnsitz\\weinkeller");
 	fcn_00471b60(h);
 	d2_SetForm(h, 1);
-	fcn_00519190(0x42cf);
+	io_AppendText(0x42cf);
 	d2_SetForm(h, 2);
-	fcn_00519190(0x42d1);
+	io_AppendText(0x42d1);
 	while (fcn_005373e0((void*) fcn_005a06a0, 0x677c7) != 0) {
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;

@@ -28,9 +28,9 @@ int __cdecl fcn_0050b810(int a, char b);
 int __cdecl gm_AccumulateTyped2(House5a9d* entity);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 void __cdecl fcn_005c9030(int, int, int, int*);
 int __cdecl fcn_0050b710(int a, unsigned char b);
 int __cdecl fcn_00472250(int, int, int);
@@ -80,13 +80,13 @@ void __cdecl fcn_005a9dd0(unsigned char* p)
 	}
 	d = fcn_00470820(0, 0, g_6aae08);
 	fcn_00471b60(d);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(d, 1);
-	fcn_00519190(0x1a1a, n);
+	io_AppendText(0x1a1a, n);
 	if (ok != 0) {
 		int col;
 
-		b = fcn_00519190(0x1a1b, *(unsigned short*) (((char(*)[0x2f4])g_868060)[g_773d75] + 0x54) * 2 + 0x9a8);
+		b = io_AppendText(0x1a1b, *(unsigned short*) (((char(*)[0x2f4])g_868060)[g_773d75] + 0x54) * 2 + 0x9a8);
 		fcn_005c9030(0x640, acc, 0x20, &col);
 		d2_SetElementValue(fcn_00472250(d, 1, b), fcn_0050b710(0x640, g_773d75), fcn_0050b710(col, g_773d75), fcn_0050b710(0x640, g_773d75));
 		h1 = fcn_00472250(d, 1, b + 1);

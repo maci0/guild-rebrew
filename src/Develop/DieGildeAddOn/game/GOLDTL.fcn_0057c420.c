@@ -32,7 +32,7 @@ struct house {
 extern pos14_7f4c00 g_7f4c00;
 
 void __cdecl fcn_004c5530(struct msg*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 
 void __cdecl fcn_0057c420(struct house* a, struct house* b)
@@ -59,7 +59,7 @@ void __cdecl fcn_0057c420(struct house* a, struct house* b)
 		id = 0x41dc;
 		strcpy(name, "_NACHRICHTEN_ZIGEUNER_01");
 	}
-	fcn_0051af00(text1, 0x41e2);
-	fcn_0051af00(text2, id, text1);
+	io_FormatTextBuffer(text1, 0x41e2);
+	io_FormatTextBuffer(text2, id, text1);
 	fcn_00545d40(b->owner, -1, text2, 1, 0x5fb, name);
 }

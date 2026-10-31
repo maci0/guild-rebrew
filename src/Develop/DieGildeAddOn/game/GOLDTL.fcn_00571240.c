@@ -26,7 +26,7 @@ double __cdecl fcn_0050fdb0(int, int, int);
 int __cdecl fcn_0050c830(char*, char*, int);
 int __cdecl _ftol(void);
 char* __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_0051af00(char*, int, int, int);
+void __cdecl io_FormatTextBuffer(char*, int, int, int);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_00500cb0(char*, char*);
 void __cdecl fcn_00500bb0(char*, int, int, int);
@@ -129,7 +129,7 @@ void __cdecl fcn_00571240(char* self)
 			node = fcn_00502cd0(*(int*) (other + 0x14), 1, 0, *(unsigned short*) (self + 0xac));
 			gm_ResolveEntityById(&other, 0, 0, *(int*) (self + 0xc0));
 			if (node == 0) {
-				fcn_0051af00(buf, 0x1bb7, (*(unsigned short*) (self + 0xac)) * 2 + 0x9a8, (int) other);
+				io_FormatTextBuffer(buf, 0x1bb7, (*(unsigned short*) (self + 0xac)) * 2 + 0x9a8, (int) other);
 				he_MessageBoxQuickjump(*(int*) (0x7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), -1, buf, 0, 0x5f1, *(int*) (other + 1), -1, 0, (char*) 0x6a7a78);
 				entry = (char*) 0x7f4ca0;
 				while (entry < (char*) 0x85a0a0) {

@@ -15,7 +15,7 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_004ae080(char*, char*, int*, char**);
 int __cdecl fcn_0064eeec(char*);
 int __cdecl fcn_0050b710(int, unsigned char);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 
 
@@ -83,7 +83,7 @@ int __cdecl fcn_004af400(int a1, int a2, int a3, char* a4, int a5)
 
 		fcn_004ae080(a4, buf, &n, &p);
 		n = fcn_0064eeec(a4 + n);
-		fcn_0051af00((void*) a5, (int) buf,
+		io_FormatTextBuffer((void*) a5, (int) buf,
 		    fcn_0050b710((int) (((float) n * g_662910) * (float) v),
 		    g_773d75),
 		    g_773d75);

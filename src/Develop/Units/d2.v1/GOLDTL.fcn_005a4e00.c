@@ -8,20 +8,20 @@ extern int g_67d370;
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_00473a90(int, int);
+int __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00533dc0(int, int, int);
 int __cdecl fcn_00472830(int, int, int, void*, void*, void*);
 void __cdecl fcn_00533f40(int, int, int, int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_00533a60(int, int, int*, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_0046f280(int);
 void __cdecl fcn_0046b2b0(int);
 int __cdecl fcn_0050d640(int, char*, unsigned int, char**);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_0050dd00(int, int*, int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_005a4bb0(char*);
@@ -54,7 +54,7 @@ void __cdecl fcn_005a4e00(char* a0)
 		items[i][1] = -1;
 		items[i][2] = 0;
 	}
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	h = fcn_00470820(0, 0, (char*) 0x6aac2c);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
@@ -66,7 +66,7 @@ void __cdecl fcn_005a4e00(char* a0)
 	*(int*) (0x10162f0 + g_772514 * 0x3cc) = 0xe;
 	*(int*) (0x10162f4 + g_772514 * 0x3cc) = 0xe;
 	d2_SetForm(h, 1);
-	fcn_00519190(0x18d9);
+	io_AppendText(0x18d9);
 	d2_SetForm(h, 3);
 	fcn_00533a60(g_772514, 0, tmp, 1, g_14ab694);
 	first = 1;
@@ -85,7 +85,7 @@ void __cdecl fcn_005a4e00(char* a0)
 					items[i][2] = 0;
 				}
 			}
-			fcn_00519190(0x6811b0);
+			io_AppendText(0x6811b0);
 			n = fcn_0050d640(*(unsigned short*) (a0 + 0x27), a0, 0xffff, out);
 			for (i = 0; i < 16; i++) {
 				ids[i] = -1;
@@ -98,7 +98,7 @@ void __cdecl fcn_005a4e00(char* a0)
 						break;
 					}
 					if (ids[i] == -1) {
-						p = fcn_00508e40(v);
+						p = gm_LookupEntityRecordById(v);
 						if (p != 0) {
 							ids[i] = *(unsigned short*) p;
 							count++;
@@ -108,10 +108,10 @@ void __cdecl fcn_005a4e00(char* a0)
 				}
 			}
 			d2_SetForm(h, 2);
-			fcn_00519190(0x18de,
+			io_AppendText(0x18de,
 			    *(unsigned short*) (0x8680b4 + g_773d75 * 0x2f4) * 2 + 0x9a8);
 			if (count - 1 == 0) {
-				fcn_00519190(0x48d);
+				io_AppendText(0x48d);
 			}
 			fcn_0050dd00(count - 1, ids, 0);
 			for (i = 0; i < count - 1; i++) {
@@ -122,7 +122,7 @@ void __cdecl fcn_005a4e00(char* a0)
 					sum += *(int*) (out[j] + 0xb4);
 				}
 				items[i][0] = fcn_00472250(h, 2,
-				    fcn_00519190(0x18df, ids[i], v, sum));
+				    io_AppendText(0x18df, ids[i], v, sum));
 			}
 		}
 		first = 0;

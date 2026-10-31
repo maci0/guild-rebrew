@@ -12,11 +12,11 @@ void __cdecl fcn_00472e50(void)
 
 	m = ((char*)g_1015f40) + g_772514 * 0x3cc;
 	if (*(int*) (m + 0x290) == 0) {
-		fcn_0041d9e0((const char*) 0x67d844);
+		ReportClientMessage((const char*) 0x67d844);
 		return;
 	}
 	if (*(int*) (m + 0x38) == 0) {
-		fcn_0041d9e0((const char*) 0x67d818);
+		ReportClientMessage((const char*) 0x67d818);
 		return;
 	}
 	fcn_00476970(*(int*) (m + 0x38));

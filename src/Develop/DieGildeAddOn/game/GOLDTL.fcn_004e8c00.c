@@ -3,7 +3,7 @@
 
 extern Rec18_68da68 g_9a9220[42];
 extern Rec18_68da68 g_68da68[];
-extern char* __cdecl fcn_00508e40(int id);
+extern char* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x004e8c00 */
 int __cdecl fcn_004e8c00(int group, int max, OFFICE_SLOT* out)
@@ -23,7 +23,7 @@ int __cdecl fcn_004e8c00(int group, int max, OFFICE_SLOT* out)
 	n = 0;
 	for (i = start - 1; i >= 0 && n < max; i--) {
 		if (((OFFICE_ROLE_TEMPLATE*)g_68da68)[((OFFICE_SLOT*)g_9a9220)[i].mamt].f4 == group &&
-		    fcn_00508e40(((OFFICE_SLOT*)g_9a9220)[i].mplayerid) != 0)
+		    gm_LookupEntityRecordById(((OFFICE_SLOT*)g_9a9220)[i].mplayerid) != 0)
 			out[n++] = ((OFFICE_SLOT*)g_9a9220)[i];
 	}
 	return n;

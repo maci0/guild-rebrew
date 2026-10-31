@@ -2,10 +2,11 @@
 
 What a check actually measures, and how it can mislead. Historical scores,
 counts and postlink successes are checkpoint evidence, not current state.
-The reconstructed server raw image is identical to its reference. Old 8k residue
-totals, readonly-access limits, padding steps and composition budgets are
-not current acceptance. Acceptance is the complete unmodified raw image:
-no copied data, postlink fixups or fabricated fillers.
+A historical server raw image matched its reference; current gate results are
+pending. Old residue totals, readonly-access limits, padding steps and
+composition budgets are not current acceptance. Acceptance is the complete
+unmodified raw image, without copied reference fillers or postlink fixups.
+Original constants and evidenced layout facts remain valid source evidence.
 Use complete native bodies, resolved operands/literals, current input hashes
 and the full raw-file gate for the corresponding claims.
 

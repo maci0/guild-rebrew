@@ -13,7 +13,7 @@ int __cdecl fcn_004a55c0(void *, int, void *, int, float, void *, int, int);
 int __cdecl srv_GetEntityOfficeSlot(void *, void *, void *);
 void __cdecl fcn_004e8240(void *, int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char *, int, int, char *);
-void __cdecl fcn_0051af00(char *, int, ...);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 
 /* ADDRESS: GOLDTL 0x005d9000 */
@@ -40,7 +40,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 
 	if (mode < 0 || mode > 5)
 		return;
-	fcn_0051af00(msg, 0x1df7, *(unsigned short *) e);
+	io_FormatTextBuffer(msg, 0x1df7, *(unsigned short *) e);
 	if (mode == 0) {
 		if ((ent = (unsigned char *) fcn_004a5e60(e, 2, 0, 0, 0x80, 100.0f, &slots[0])) == 0)
 			return;
@@ -51,13 +51,13 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		r = gm_RandomMod(3) + 2;
 		score = (int) ((float) r * (float) v * 100.0f);
 		fcn_004c51a0(*(int *) (best + 4), -1, *(unsigned char *) 0x773d75, score);
-		fcn_0051af00(msg, 0x1df8, *(unsigned short *) best, ent, *(unsigned short *) best, score,
+		io_FormatTextBuffer(msg, 0x1df8, *(unsigned short *) best, ent, *(unsigned short *) best, score,
 					 0x868080 + *(unsigned char *) 0x773d75 * 0x2f4);
 	} else if (mode == 1) {
-		fcn_0051af00(t1, 0x1df9);
-		fcn_0051af00(t2, 0x1dfa, t1);
+		io_FormatTextBuffer(t1, 0x1df9);
+		io_FormatTextBuffer(t2, 0x1dfa, t1);
 		fcn_0064d41a(t3, "%s%s%s", msg, t1, t2);
-		fcn_0051af00(t2, 0x1dfb, t3);
+		io_FormatTextBuffer(t2, 0x1dfb, t3);
 		fcn_0064d41a(t4, "%s%s", msg, t2);
 		strcat(msg, t4);
 		p = (unsigned char *) 0x7f4ca2;
@@ -100,7 +100,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		n = 0x5c;
 		fcn_004c4570(1, 1, 0x5c, &n);
 		fcn_004c5360();
-		fcn_0051af00(msg, 0x1dfc, *(unsigned short *) ((unsigned char *) 0x7f4ca0 + w * 0x21c),
+		io_FormatTextBuffer(msg, 0x1dfc, *(unsigned short *) ((unsigned char *) 0x7f4ca0 + w * 0x21c),
 					 ent, n, n);
 	} else if (mode == 3) {
 		a = 0x400800;
@@ -110,7 +110,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		if (srv_GetEntityOfficeSlot(best, &n, &i) == 0)
 			return;
 		fcn_004e8240((void *) i, 0, 0, 4, 0xff);
-		fcn_0051af00(msg, 0x1dfd, *(unsigned short *) best, *(unsigned short *) best,
+		io_FormatTextBuffer(msg, 0x1dfd, *(unsigned short *) best, *(unsigned short *) best,
 					 *(unsigned short *) best, n, i);
 	} else if (mode == 4) {
 		a = 0x300000;
@@ -130,7 +130,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		v = 1;
 		fcn_004c4670(1, 1, n + 0x80, &v);
 		fcn_004c5360();
-		fcn_0051af00(msg, 0x1dfe, *(unsigned short *) best, *(unsigned short *) best, n + 0x16b7,
+		io_FormatTextBuffer(msg, 0x1dfe, *(unsigned short *) best, *(unsigned short *) best, n + 0x16b7,
 					 v, r, 1);
 	} else {
 		n = 0;
@@ -162,7 +162,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		score = bv * r;
 		gm_ResolveEntityById(&slots[0], 0, 0, 0);
 		fcn_004c51a0(*(int *) (best + 2), -1, *(unsigned char *) 0x773d75, score);
-		fcn_0051af00(msg, 0x1dff, *(unsigned short *) best, ent, *(unsigned short *) best, score,
+		io_FormatTextBuffer(msg, 0x1dff, *(unsigned short *) best, ent, *(unsigned short *) best, score,
 					 *(int *) (best + 2), 5);
 	}
 	p = (unsigned char *) 0x7f4ca2;

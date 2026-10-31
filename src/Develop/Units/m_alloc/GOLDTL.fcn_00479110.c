@@ -1,4 +1,4 @@
-void __cdecl fcn_0041d9e0(char*);
+void __cdecl ReportClientMessage(char*);
 void* __cdecl m_alloc(unsigned int, char*);
 int __cdecl fcn_0041bac0(int, int, int);
 void __cdecl fcn_00477560(int*, int*);
@@ -22,7 +22,7 @@ int* __cdecl shp_Convert8To16(int* src, int unused, char* dest)
 	char flag;
 
 	if (*(int*) ((char*) src + 0x26) == -1) {
-		fcn_0041d9e0((char*) 0x67da10);
+		ReportClientMessage((char*) 0x67da10);
 		return 0;
 	}
 	res = m_alloc(*(unsigned int*) ((char*) src + 0x2e) + *(int*) src, (char*) 0x67d9fc);

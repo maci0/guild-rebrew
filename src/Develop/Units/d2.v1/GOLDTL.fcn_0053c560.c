@@ -37,7 +37,7 @@ int __cdecl fcn_00445f50(unsigned int, float, float, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005373e0(int, int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00433780(void *);
 void __cdecl fcn_00412cf0(char *, Vec3 *, Vec3 *, int, int);
 char *__cdecl fcn_00445600(char *, int, char *, char *);
@@ -138,8 +138,8 @@ int __cdecl fcn_0053c560(void)
 				}
 				if (i < 6) {
 					d2_SetForm(obj, 0);
-					fcn_00519190(0x6811b0);
-					fcn_00519190(0x1ae6, i + 0x1aea);
+					io_AppendText(0x6811b0);
+					io_AppendText(0x1ae6, i + 0x1aea);
 					if (i % 2) {
 						parentA = *(Vec3 *) (g_6b8014 + 0xfc);
 						parentB = *(Vec3 *) (g_6b8014 + 0x108);
@@ -194,7 +194,7 @@ slot_found:
 			}
 			if (i >= 6) {
 				d2_SetForm(obj, 0);
-				fcn_00519190(0x6811b0);
+				io_AppendText(0x6811b0);
 				fcn_00471af0(obj, 0);
 				fcn_00433780(g_6b8014);
 				*(int *) 0x6b5cbc = 0;

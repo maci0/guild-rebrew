@@ -67,10 +67,10 @@ void __cdecl init_LocalData(void)
 		}
 	}
 	if ((*(Entity**)&gm_RichterKatholisch) == 0) {
-		fcn_0041d9e0("init_LocalData(): gm_RichterKatholisch==NULL");
+		ReportClientMessage("init_LocalData(): gm_RichterKatholisch==NULL");
 	}
 	if ((*(Entity**)&gm_RichterEvangelisch) == 0) {
-		fcn_0041d9e0("init_LocalData(): gm_RichterEvangelisch==NULL");
+		ReportClientMessage("init_LocalData(): gm_RichterEvangelisch==NULL");
 	}
 	if ((g_7747b0 & 0x44) == 0) {
 		fcn_00515010();

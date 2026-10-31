@@ -44,7 +44,7 @@ typedef struct {
 
 int __cdecl fcn_004e8b40(int idx, Rec* out);
 #include "Develop/DieGildeAddOn/game/aemter.h"
-Ent* __cdecl fcn_00508e40(int id);
+Ent* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl gm_RandomMod(int n);
 
@@ -98,7 +98,7 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 		return 0;
 	}
 	for (i = 0; i < n; i++) {
-		list[i] = fcn_00508e40(recs[i].mplayerid);
+		list[i] = gm_LookupEntityRecordById(recs[i].mplayerid);
 	}
 	for (i = n; i < 6; i++) {
 		list[i] = 0;

@@ -65,8 +65,8 @@ int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl fcn_00471b60(int h);
 void __cdecl fcn_00471e30(int h);
 void __cdecl d2_SetForm(int h, int a);
-void __cdecl fcn_00473a90(int a, int b);
-int __cdecl fcn_00519190(int id, ...);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
+int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_0046f740(int x, int y, int id, int layer);
 void __cdecl fcn_005340f0(int i);
 void __cdecl fcn_00534160(int x0, int y, int len, int t);
@@ -124,9 +124,9 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 	fcn_005340f0(g_772514);
 	fcn_00471b60(h);
 	d2_SetForm(h, 1);
-	fcn_00473a90(0, 0);
-	fcn_00519190(0x16af, a2 + 0x16b7);
-	fcn_00519190(a2 + 0x16c3);
+	d2_SetOverlayAnimation(0, 0);
+	io_AppendText(0x16af, a2 + 0x16b7);
+	io_AppendText(a2 + 0x16c3);
 	d2_SetForm(h, 2);
 	f = (float) color * g_664168;
 	if (f >= g_662a98) {
@@ -137,22 +137,22 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 	fcn_00534160(((struct s_1015f4c*) g_1015f4c)[g_772514].x / 2 - 0x23, 0x3c, color, 0x4df);
 	d2_SetForm(h, 3);
 	if (slot != 0) {
-		fcn_00519190(0x16b3, *(unsigned char*) (slot + 0xae) + 0x16b7, a2 + 0x16b7);
+		io_AppendText(0x16b3, *(unsigned char*) (slot + 0xae) + 0x16b7, a2 + 0x16b7);
 	} else if (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2) >= 0xfc) {
-		fcn_00519190(0x16b2);
+		io_AppendText(0x16b2);
 	} else if (*(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x194) < (int) color) {
-		fcn_00519190(0x16b4, color, a2 + 0x16b7);
+		io_AppendText(0x16b4, color, a2 + 0x16b7);
 	} else if (miss != 0) {
 		switch (fcn_0051e070()) {
 		case 0:
-			fcn_00519190(0x16b0,
+			io_AppendText(0x16b0,
 				     0x253 +
 					     (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 9) != 0 ? 0x28 : 0) +
 					     *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x169),
 				     color, a2 + 0x16b7);
 			break;
 		case 1:
-			fcn_00519190(0x16b0,
+			io_AppendText(0x16b0,
 				     0x253 +
 					     (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 9) != 0 ? 0x28 : 0) +
 					     *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x169),
@@ -163,7 +163,7 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 		switch (fcn_0051e070()) {
 		case 0:
 		case 1:
-			fcn_00519190(0x16b1, color, a2 + 0x16b7);
+			io_AppendText(0x16b1, color, a2 + 0x16b7);
 			break;
 		}
 	}

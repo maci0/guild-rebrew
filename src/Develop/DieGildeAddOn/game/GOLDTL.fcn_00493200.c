@@ -1,5 +1,5 @@
 unsigned short __cdecl gm_RandomMod(int n);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004e8b40(int kind, int* out);
 int __cdecl fcn_004e8b80(int kind, int max, void* out);
 float __cdecl fcn_0050f980(int a, int b, int c);
@@ -47,7 +47,7 @@ int __cdecl fcn_00493200(char* a1, char* a2)
 		for (left = count; left != 0; left--) {
 			roll = *(int*) (slots + index * 24);
 			if (*(int*) (a1 + 4) != roll) {
-				pick = fcn_00508e40(roll);
+				pick = gm_LookupEntityRecordById(roll);
 				if (pick != 0) {
 					value = (unsigned char) fcn_0050f980(*(unsigned short*) a1,
 														 *(unsigned short*) pick, 1);

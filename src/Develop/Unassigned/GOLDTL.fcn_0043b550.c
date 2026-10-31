@@ -1,6 +1,13 @@
 #include "g_67a470.h"
 Named24 g_67a470[8] = {
     { "NONE", 0 },
+    { "TEST", 1 },
+    { "ZOOM_IN_OBJECT", 2 },
+    { "ZOOM_OUT_OBJECT", 3 },
+    { "TEST", 1 },
+    { "SCENE_ENTER", 4 },
+    { "SCENE_EXIT", 5 },
+    { "SCENE_SUPERVISOR", 6 },
 };
 extern Named24 g_67a470[8];
 

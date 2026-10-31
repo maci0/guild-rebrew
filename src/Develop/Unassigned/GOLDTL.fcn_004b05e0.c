@@ -2,7 +2,7 @@
 
 extern char g_7f4ca0[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0064eeec(char*);
 int __cdecl fcn_004ae130(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
@@ -18,7 +18,7 @@ int __cdecl fcn_004b05e0(int* a1, int a2, char* a3)
 
 	if (a1 == 0 || a2 >= 8)
 		return 0;
-	e = fcn_00508e40(a1[a2 * 2 + 1]);
+	e = gm_LookupEntityRecordById(a1[a2 * 2 + 1]);
 	if (e == 0)
 		return 0;
 	if (*a3 != '-')

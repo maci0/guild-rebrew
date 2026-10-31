@@ -1,4 +1,4 @@
-int __cdecl fcn_00508e40(int id);
+int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl he_fn_Handlung(void);
 int __cdecl fcn_005463a0(int a, ...);
 void __cdecl fcn_005ca560(int *out);
@@ -17,9 +17,9 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 			rec = (int *) fcn_005463a0(1, 0, 0x47);
 			while (rec) {
 				if (rec[0x2b] == src[1]) {
-					found = fcn_00508e40(rec[0x2c]);
+					found = gm_LookupEntityRecordById(rec[0x2c]);
 				} else if (rec[0x2c] == src[1]) {
-					found = fcn_00508e40(rec[0x2b]);
+					found = gm_LookupEntityRecordById(rec[0x2b]);
 				} else {
 					rec = (int *) he_fn_Handlung();
 					continue;
@@ -32,7 +32,7 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 		rec = (int *) fcn_005463a0(2, 2, *(unsigned short *) src, 0,
 		                           0x18);
 		while (rec) {
-			if (fcn_00508e40(rec[0x31]))
+			if (gm_LookupEntityRecordById(rec[0x31]))
 				count++;
 			rec = (int *) he_fn_Handlung();
 		}
@@ -47,9 +47,9 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 			rec = (int *) fcn_005463a0(1, 0, 0x47);
 			while (rec) {
 				if (rec[0x2b] == src[1]) {
-					found = fcn_00508e40(rec[0x2c]);
+					found = gm_LookupEntityRecordById(rec[0x2c]);
 				} else if (rec[0x2c] == src[1]) {
-					found = fcn_00508e40(rec[0x2b]);
+					found = gm_LookupEntityRecordById(rec[0x2b]);
 				} else {
 					rec = (int *) he_fn_Handlung();
 					continue;
@@ -69,7 +69,7 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 			for (;;) {
 				if (count >= limit)
 					break;
-				found = fcn_00508e40(rec[0x31]);
+				found = gm_LookupEntityRecordById(rec[0x31]);
 				if (found) {
 					dst[0] = found;
 					dst[0xb] = 1;

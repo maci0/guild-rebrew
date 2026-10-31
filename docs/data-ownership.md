@@ -29,7 +29,8 @@ symbols (`g_slot_table`, `g_entity_base`, town/city records, save info, connecti
 and allocator root). Interior symbols preserve compiler alias behavior; managed
 rows describe their backing allocation. Pads outside allocations are spans.
 This measured recipe does not establish original source ownership or justify
-inventing storage from gaps.
+inventing storage from gaps. Copied `unowned_dpad` reference blobs are evidence
+of reference bytes, not source owners or permission to add fillers.
 
 Obsolete `g_data_restore_gap`, misplaced `__sbh_threshold` and invented
 `__sbh_initialized` records were removed because they overlapped real storage.

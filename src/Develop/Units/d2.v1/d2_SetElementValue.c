@@ -62,7 +62,7 @@ void __cdecl d2_SetElementValue(int id, ...)
 			_itoa(a4, sub + 0x2c, 10);
 			fl = *(int*) (sub + 0x28);
 			if (fl & 0x80) {
-				step = fcn_004722c0(sub);
+				step = d2_GetValueStep(sub);
 				*(int*) (sub + 0x18) -= (*(int*) (sub + 0x18) - *(int*) (sub + 0x1c)) % step;
 				*(int*) (sub + 0x1c) += (*(int*) (sub + 0x18) - *(int*) (sub + 0x1c)) % step;
 				v = *(int*) (sub + 0x12c) / step * step;

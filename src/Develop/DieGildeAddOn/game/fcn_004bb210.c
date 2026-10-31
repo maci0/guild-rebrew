@@ -3,10 +3,10 @@
 extern unsigned char g_773d75;
 extern double g_6640e8;
 
-int __cdecl fcn_00508e40(int id);
+int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_0042e410(int a);
 int __cdecl fcn_0050dac0(short);
-void __cdecl fcn_0051af00(char* buf, int fmt, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
 void __cdecl fcn_004c51a0(int a, int b, unsigned char c, int d);
 
@@ -22,7 +22,7 @@ int __cdecl fcn_004bb210(int* a)
 	char buf[0x800];
 	int* e;
 
-	e = (int*) fcn_00508e40(a[0]);
+	e = (int*) gm_LookupEntityRecordById(a[0]);
 	if (e == 0) {
 		return 1;
 	}
@@ -32,7 +32,7 @@ int __cdecl fcn_004bb210(int* a)
 	v = fcn_0042e410(3) & 0xffff;
 	d = (double) v + *(double*) 0x6629c8;
 	v = (int) (((double) fcn_0050dac0(*(short*) e) * d) * g_6640e8);
-	fcn_0051af00(buf, *(unsigned short*) ((char*) a + 4) + 0x12e7, v);
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a + 4) + 0x12e7, v);
 	fcn_00545d40(e[1], e[1], buf, 0x100 < strlen(buf), 0x603, 0);
 	fcn_004c51a0(a[0], -1, g_773d75, v);
 	return 0;

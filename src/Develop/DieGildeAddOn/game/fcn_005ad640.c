@@ -49,7 +49,7 @@ extern int g_14abc98;
 extern char s_6ab1b8[];
 
 int __cdecl fcn_0055c050(void*);
-void __cdecl fcn_0051af00(char* buf, int id, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00526120(char* buf, int zero);
 int __cdecl fcn_00502cd0(int val, int a, int b, int c);
 int __cdecl fcn_00502850(void);
@@ -57,9 +57,9 @@ int __cdecl fcn_005463a0(int a, int b, int idx, int c, int d);
 int __cdecl he_fn_Handlung(void);
 void* __cdecl fcn_00470820(short a, short b, char* name);
 void __cdecl fcn_00471b60(int h);
-void __cdecl fcn_00473a90(int a, int b);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_SetForm(int h, int stage);
-int __cdecl fcn_00519190(int id, int a, void* p);
+int __cdecl io_AppendText(int id, int a, void* p);
 int __cdecl fcn_00472250(int h, int a, int b);
 void __cdecl fcn_004c5530(void* p);
 void __cdecl fcn_004c35f0(void);
@@ -96,7 +96,7 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 		return 0;
 	}
 	if (fcn_0055c050(obj) == 0) {
-		fcn_0051af00(buf_b, 0x1a92, *(unsigned short*) (obj + 0x27), obj);
+		io_FormatTextBuffer(buf_b, 0x1a92, *(unsigned short*) (obj + 0x27), obj);
 		fcn_00526120(buf_b, 0);
 		return 0;
 	}
@@ -135,9 +135,9 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 	if (n + cnt < (int) (typerec->maxcount * 2)) {
 		dlg = fcn_00470820(0, 0, s_6ab1b8);
 		fcn_00471b60((int) dlg);
-		fcn_00473a90(0, 0);
+		d2_SetOverlayAnimation(0, 0);
 		d2_SetForm((int) dlg, 1);
-		r1 = fcn_00519190(0x19f7,
+		r1 = io_AppendText(0x19f7,
 			(int) g_7f4ca0[*(unsigned short*) (obj + 0x27)].id, obj);
 		r2 = fcn_00472250((int) dlg, 1, r1);
 		r1 = fcn_00472250((int) dlg, 1, r1 + 1);
@@ -183,7 +183,7 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 		fcn_005305a0();
 		return ret;
 	}
-	fcn_0051af00(buf_a, 0x19fa, n + cnt, g_7746c4);
+	io_FormatTextBuffer(buf_a, 0x19fa, n + cnt, g_7746c4);
 	fcn_00526120(buf_a, 0);
 	return 0;
 }

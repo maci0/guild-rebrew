@@ -34,12 +34,12 @@ extern char s_68b300[]; /* 0x0068b300 */
 
 int __cdecl fcn_004e6c80(void);
 void __cdecl fcn_004e4f10(int);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c5790(int, int*);
 void __cdecl fcn_005358e0(int);
 int __cdecl fcn_00533a40(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472500(int);
 int __cdecl fcn_004c4450(int);
 int __cdecl cm_RequestSendCutInfo(int, int);
@@ -108,7 +108,7 @@ label_4e526f:
 			do {
 				g_772f28 = v9;
 				if (*(int*) v17 != -1) {
-					g_772f24 = fcn_00508e40(*(int*) v17);
+					g_772f24 = gm_LookupEntityRecordById(*(int*) v17);
 					if (g_772f24 != 0) {
 						if (*(unsigned char*) (g_772f24 + 2) != 6) {
 							int* v5;
@@ -122,8 +122,8 @@ label_4e526f:
 							((void (__cdecl*) (int, int)) *(int*) ((unsigned int) *(unsigned char*) &v6[2] * 0x14 + 0x9b0844))(v15, a1);
 						}
 						d2_SetForm(v6[0xb], 0);
-						fcn_00519190(v15 + 0x14);
-						fcn_00519190(0x68b300);
+						io_AppendText(v15 + 0x14);
+						io_AppendText(0x68b300);
 					} else {
 						*(int*) v17 = -1;
 					}
@@ -188,7 +188,7 @@ label_4e526f:
 								v18b = v2;
 								v16b = v1;
 							}
-							g_772f24 = fcn_00508e40(v8b);
+							g_772f24 = gm_LookupEntityRecordById(v8b);
 							fcn_004e5140(v6);
 							g_772f34 = g_68bfbc + g_772f30;
 							g_772f38 = 0;
@@ -213,7 +213,7 @@ label_4e526f:
 								v17b = (int*) 0x9b0e28;
 								v18c = (int*) &v6[0xd];
 label_4e5801:
-								v15 = fcn_00508e40(*v18c);
+								v15 = gm_LookupEntityRecordById(*v18c);
 								if (v15 == 0 || *(unsigned char*) (v15 + 2) == 6
 										|| *(unsigned char*) (v15 + 2) == 7
 										|| (v17b != (int*) 0x9b0e28
@@ -277,7 +277,7 @@ label_4e5922:
 						do {
 							int v8c;
 							int v15c;
-							v9 = fcn_00508e40(*(int*) v18e);
+							v9 = gm_LookupEntityRecordById(*(int*) v18e);
 							if (v9 != 0 && *(unsigned char*) (v9 + 2) != 6
 									&& *(unsigned char*) (v9 + 2) != 7
 									&& v20b[2] == 0) {

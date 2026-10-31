@@ -53,7 +53,7 @@ void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_00508640(int a, int b);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_0046b2b0(int);
 void __cdecl fcn_00473690(int key, int amt);
@@ -123,7 +123,7 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 		if (q != 0 && fcn_00508640(*(int*) (q + 0xe), r->key) != 0) {
 			v = fcn_00508640(*(int*) (q + 0xe), r->key);
 			d2_SetElementValue(r->icon, 0, v, ent);
-			fcn_0051af00(buf, (int) g_6aac70, v, g_14a79c0[r->key * 2]);
+			io_FormatTextBuffer(buf, (int) g_6aac70, v, g_14a79c0[r->key * 2]);
 			fcn_0046f940(r->label, buf);
 			((Ent*)g_1015ea0)[r->label].f18 = 0xbe;
 			r->count = v;

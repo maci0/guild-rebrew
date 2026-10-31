@@ -3,14 +3,14 @@ int __cdecl fcn_00470820(int, int, char *);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
-int __cdecl fcn_00519190(int, ...);
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005463a0(int);
 int __cdecl he_fn_Handlung(int);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00472640(int, int);
-void __cdecl fcn_0051af00(char *, int, ...);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
 unsigned short *__cdecl fcn_005cd440(void *, void *, void *, int);
 int __cdecl fcn_00526120(char *, int);
 void __cdecl fcn_004c5530(void *);
@@ -46,12 +46,12 @@ void __cdecl fcn_0059fe60(int a0)
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(*(int *) 0x772514);
 	fcn_00471b60(dlg);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 2);
 	if (*(char *) ((int) *(unsigned short *) 0x774970 * 0x21c + 0x7f4ca9) == 0) {
-		item = fcn_00519190(0x1a50);
+		item = io_AppendText(0x1a50);
 	} else {
-		item = fcn_00519190(0x1a51);
+		item = io_AppendText(0x1a51);
 	}
 	item = fcn_00472250(dlg, 2, item);
 	*(int *) 0x100f1dc = -1;
@@ -79,15 +79,15 @@ void __cdecl fcn_0059fe60(int a0)
 			ent = he_fn_Handlung(item);
 		}
 		d2_SetForm(dlg, 1);
-		fcn_00519190(0x6811b0);
-		fcn_00519190(0x6aa7d0, 0x1a4e, "$Z$[%s$]$N", "locations\\wohnsitz\\geliebte");
-		fcn_00519190(0x1a4f, n);
+		io_AppendText(0x6811b0);
+		io_AppendText(0x6aa7d0, 0x1a4e, "$Z$[%s$]$N", "locations\\wohnsitz\\geliebte");
+		io_AppendText(0x1a4f, n);
 		for (i = 0; i < 4; i++) {
-			ent = fcn_00508e40(ids[i]);
+			ent = gm_LookupEntityRecordById(ids[i]);
 			if (ent == 0) {
 				break;
 			}
-			btn = fcn_00519190(0x1a52, *(unsigned short *) ent);
+			btn = io_AppendText(0x1a52, *(unsigned short *) ent);
 			btn = fcn_00472250(dlg, 1, btn);
 			buttons[i] = btn;
 			fcn_00472640(btn, avail[i]);
@@ -102,15 +102,15 @@ void __cdecl fcn_0059fe60(int a0)
 
 					type_idx = *(unsigned short *) 0x774970;
 					box[0] = 0;
-					fcn_0051af00(text_a, 0x1a53, 0x2040a -
+					io_FormatTextBuffer(text_a, 0x1a53, 0x2040a -
 						(*(char *) (type_idx * 0x21c + 0x7f4ca9) != 0));
-					fcn_0051af00(text_b, 0x1a54, 0x2040a);
+					io_FormatTextBuffer(text_b, 0x1a54, 0x2040a);
 					sel = fcn_005cd440(box, text_a, text_b, 0);
 					if (sel != 0) {
 						if (*(char *) (type_idx * 0x21c + 0x7f4ca9) == 0) {
-							fcn_0051af00(text_c, 0x1a55, *sel);
+							io_FormatTextBuffer(text_c, 0x1a55, *sel);
 						} else {
-							fcn_0051af00(text_c, 0x1a56, *sel);
+							io_FormatTextBuffer(text_c, 0x1a56, *sel);
 						}
 						if (fcn_00526120(text_c, 1) != 0) {
 							rec[0] = 0x6f;
@@ -124,7 +124,7 @@ void __cdecl fcn_0059fe60(int a0)
 				} else {
 					for (i = 0; i < 4; i++) {
 						if (*(int *) 0x67d370 == buttons[i]) {
-							ent = fcn_00508e40(ids[i]);
+							ent = gm_LookupEntityRecordById(ids[i]);
 							fcn_00471af0(dlg, 0, 1, 1, ids[i]);
 							fcn_0059fa80(*(unsigned short *) 0x774970 * 0x21c + 0x7f4ca0, ent,
 								     fcn_005463a0(1));

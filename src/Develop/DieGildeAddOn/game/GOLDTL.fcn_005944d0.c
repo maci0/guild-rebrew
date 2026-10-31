@@ -7,12 +7,12 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_0052a0c0(void*, unsigned int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00594340(void);
 void __cdecl fcn_00533dc0(int, int, int);
 void __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl fcn_005463a0(int, int, int, int, int);
@@ -77,7 +77,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	id = (*(unsigned char*) (*(int*) 0x868050 + (unsigned int) *p * 0x24d) != 0x1e) ? 0 : 2;
 	fcn_0052a0c0(p, id);
 	d2_SetForm(window, 3);
-	fcn_00519190(0xb7);
+	io_AppendText(0xb7);
 	fcn_00594340();
 	count = 0;
 	d2_SetForm(window, 0);
@@ -108,7 +108,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	fcn_00533f40(0x270, 0x15e, *(int*) 0x772514,
 	             fcn_00472830(window, 2, 0x78, rect2, rect1, &v13));
 	*(unsigned int*) (*(int*) 0x1015ea0 + 0x84 + v13 * 0x2f4) = 0x54;
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	for (;;) {
 		int any;
 		int* r;

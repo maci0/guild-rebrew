@@ -117,7 +117,7 @@ void* __cdecl fcn_00470820(short a, short b, char* name);
 void __cdecl d2_SetForm(int dlg, int stage);
 int __cdecl fcn_00472250(int dlg, int a, int b);
 void __cdecl fcn_00472380(int a, int b, int c, int d, int e);
-int __cdecl fcn_00519190(void* id, ...);
+int __cdecl io_AppendText(void* id, ...);
 int __cdecl fcn_005373e0(void* fn, int message);
 void __cdecl fcn_00471e30(int handle);
 /* inferred: two-argument form from fcn_005a4bb0 */
@@ -133,7 +133,7 @@ int __cdecl fcn_004c51a0(int a, int b, unsigned char kind, int amount);
 
 /* Dialog text output. Variadic at every TL call site; see the conflict
  * note above. */
-void __cdecl fcn_0051af00(char* out, int id, ...);
+void __cdecl io_FormatTextBuffer(char* out, int id, ...);
 
 /* inferred: seven stack arguments counted at row 0x00549c50 */
 void __cdecl fcn_00545e80(int handle, int arg, char* text, int a, int b,

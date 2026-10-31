@@ -16,7 +16,7 @@ typedef struct
 } Rec18;
 // SIZE 0x18
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_005b2280(void* a1, void* a2);
 
 /* ADDRESS: GOLDTL 0x004e8360 */
@@ -36,13 +36,13 @@ int __cdecl fcn_004e8360(char* a0)
 	other = -1;
 	setter = 0;
 	if (*(int*) (a0 + 7) != -1) {
-		setter = fcn_00508e40(*(int*) (a0 + 7));
+		setter = gm_LookupEntityRecordById(*(int*) (a0 + 7));
 		if (setter == 0)
 			return 0;
 	}
 	ent = 0;
 	if (*(int*) (a0 + 1) != -1) {
-		ent = fcn_00508e40(*(int*) (a0 + 1));
+		ent = gm_LookupEntityRecordById(*(int*) (a0 + 1));
 		if (ent == 0)
 			return 0;
 		other = *(int*) (ent + 4);
@@ -57,7 +57,7 @@ int __cdecl fcn_004e8360(char* a0)
 	}
 	if (i >= 0x2a)
 		return 0;
-	x = fcn_00508e40(((Rec18*) (0x9a9220 + i * 0x18))->f04);
+	x = gm_LookupEntityRecordById(((Rec18*) (0x9a9220 + i * 0x18))->f04);
 	if (x != 0 && *(int*) (x + 4) != *(int*) (a0 + 1)) {
 		bit = ((Rec18*) (0x9a9220 + i * 0x18))->f08;
 		if (*(unsigned char*) (x + 0x166) != (unsigned char) bit) {

@@ -2086,6 +2086,15 @@ recipe. Gold's recipe points to `0x49dee0`, already attributed to Lua's
 `default_panic`; identical three-byte bodies do not establish folding, shared
 source identity or the linked provider. That LIBRARY row is preserved.
 
+`CharacterIdle` is the unprefixed token in the diagnostic
+`CharacterIdle(): Invalid character` and in the `"CharacterIdle"` script
+registration. TL `0x0040dad0` and Gold `0x0040cba0` share
+`GOLDTL.fcn_0040dad0.c`. Both rows keep size 55 and RELOC. The names preview
+recorded Gold native inventory size 64, so the shared row is not a body proof.
+The file was not moved. It still holds copied `_dpad_675318`, which was not
+removed. Parameter `charakter_argument` is inferred. The declaration stays in
+`ch_script.h`. This is not an original translation unit.
+
 `ch_script.h` holds canonical declarations for the participating callbacks;
 `ch_motion.h` retains object-byte-view/float-vector camera adapters. The narrow
 `m_alloc_checks.h` declaration home is inferred and exposes the existing
@@ -2248,10 +2257,10 @@ The large-body Gold pairings have complete native/Kuna role review and resource/
 | `0x0043c640` | 5419 | `unresolved` | Terrain material/blend mesh construction | unresolved | 0x43d474 -> d3fl:BlendAttributes |
 | `0x0044e1e0` | 3840 | `d3_LoadBinaryAnimStream` | Loads chunked binary animation streams, including vertices, UV faces and frame terminators. | 0x0044f8b0 | 0x44e93e -> 0x67b8e8: Expected EXP_EOCHUNK in d3_LoadBinaryAnimStream(): EndOfFrameLoop; 0x44e76f -> 0x67b92c: Expected EXP_DONE in d3_LoadBinaryAnimStream(): ReadUVFaces |
 | `0x0046c5a0` | 6080 | `unresolved` | GUI text-box markup layout/render pass | GOLD.0x0046fb90 | 0x46d525 -> Unknown textparameter: %%%c |
-| `0x00480330` | 2352 | `ai_CalcMeisterWache` | Updates guard-master patrol and subordinate actions. | 0x00480e60,0x00482ef0 | 0x480ad0 -> 0x67dd1c: ai_CalcMeisterWache(): Meister %s patroulliert im Umland; 0x480a08 -> 0x67dd58: ai_CalcMeisterWache() : gm_GetGebaeudeHauptraum() failed !!! |
+| `0x00480330` | 2352 | `ai_CalcMeisterWache` | Updates guard-master patrol and subordinate actions. Gold `0x00482ef0` was listed here from the shared failure line. The four unique `ai_CalcMeisterRäuber` pushes place that Gold body with TL `0x004823c0`. No Gold source is bound. | 0x00480e60 | 0x480ad0 -> 0x67dd1c: ai_CalcMeisterWache(): Meister %s patroulliert im Umland; 0x480a08 -> 0x67dd58: ai_CalcMeisterWache() : gm_GetGebaeudeHauptraum() failed !!! |
 | `0x00480c60` | 1872 | `ai_CalcAngriff` | Selects and schedules attack or espionage actions. | 0x00481790 | 0x481380 -> 0x67dec0: ai_CalcAngriff(): Meister %s hat schon eine Spionage bei '%s' laufen; 0x481370 -> 0x67df08: ai_CalcAngriff(): Meister %s hat aber noch eine Spionage bei '%s' nicht beendet |
 | `0x004813b0` | 4112 | `ai_CalcMeisterDiebe` | Updates thief-master burglary and espionage actions. | 0x00481ee0 | 0x482272 -> 0x67dfe8: ai_CalcMeisterDiebe(): Meister %s m; 0x4820ea -> 0x67e020: ai_CalcMeisterDiebe(): Meister %s entf |
-| `0x004823c0` | 1952 | `unresolved` | AI action routine reuses an ai_CalcMeisterWache failure diagnostic. That copied string does not establish its own name. | unresolved | 0x48293b -> 0x67dd58: ai_CalcMeisterWache() : gm_GetGebaeudeHauptraum() failed !!! |
+| `0x004823c0` | 1952 | `ai_CalcMeisterRaeuber` | Inferred ASCII identifier. The diagnostic spelling is `ai_CalcMeisterRäuber` (CP1252 E4). Four unique pushes name this body. The copied Wache failure line does not. Filename `GOLDTL.ai_CalcMeisterRaeuber.c` and parameter `meister` are inferred. Not an original translation unit. Gold `0x00482ef0` is the native counterpart and has no source. Function-row size remains 1937. | 0x00482ef0, no source | 0x482550 -> 0x67e2d0; 0x482640 -> 0x67e298; 0x48288f -> 0x67e25c; 0x4829f7 -> 0x67e218. Historical shared line, not the name: 0x48293b -> 0x67dd58: ai_CalcMeisterWache() : gm_GetGebaeudeHauptraum() failed !!! |
 | `0x00489250` | 1744 | `ai_MeisterCollectTrans` | Collects and redirects transporters, with once-per-check state. | 0x00489ca0 | 0x489661 -> 0x67e3a8: ai_MeisterCollectTrans(): Um %li:%li Uhr zus; 0x489762 -> 0x67e3a8: ai_MeisterCollectTrans(): Um %li:%li Uhr zus |
 | `0x00489a70` | 6064 | `ai_MeisterTrade` | Master-worker inventory trading | GOLD.0x0048a4c0 | 0x48a24f -> ai_MeisterTrade(): Von Auto in "%s" %li Einheiten %s entladen |
 | `0x0048b220` | 4993 | `ai_MeisterTradeAllgemein` | General master trade/unload decisions. Its own diagnostics distinguish it from ai_MeisterTrade despite one reused message. | 0x0048bc70 | 0x48c1df -> 0x67e4e8: ai_MeisterTrade(): Fake-Verkauf in "%s" von %li Einheiten %s, weil kein Marktlager; 0x48bd1e -> 0x67e750: ai_MeisterTradeAllgemein(): Fake-Verkauf aus Auto in "%s" von %li Einheiten %s |
@@ -2340,10 +2349,10 @@ its retained448-byte inventory span. It writes a14-byte BITMAPFILEHEADER,
 40-byte BITMAPINFOHEADER,256 BGR0 entries and bottom-up unpadded rows. A null
 palette selects grayscale. Write failures are ignored as in the native body.
 
-The two26-byte zero-fill preludes are the original operand-homed handwritten
-macro documented in docs/msvc6-allocator.md. Reuse is justified by that independent
-compiler/provenance evidence and fresh native-site/stock-archive exclusions,
-not by a difficult C match. The private `fill0` name is inferred; target-scoped
+The two 26-byte zero-fill preludes are consistent with the operand-homed
+handwritten macro hypothesis documented in docs/msvc6-allocator.md. Independent
+compiler/provenance evidence and native-site/stock-archive exclusions support
+that inference; a difficult C match alone does not. The private `fill0` name is inferred; target-scoped
 managed source evidence records its definition. Stock Windows SDK BMP types are
 used without inventing local layouts or storage. VFS backing ownership/provider
 and broader legacy VFS declarations remain open. A fixed-prefix miss in Gold
@@ -2635,3 +2644,70 @@ existing D3 layout. This relationship names an accessed view; it establishes
 neither the sentinel's full static extent nor its storage owner.
 
 `ReadVfsFourDwords` is an inferred descriptive name for the shared TL `0x4012b0` / Gold `0x401270` reader. It separates that definition from Gold `0x4012b0`, which writes three dwords. The placeholder collision did not establish common behavior or a shared provider.
+
+### Naming review — 2026-10-31
+
+The following names describe reviewed native behavior. Except for the existing
+`d2_SetForm` spelling, they are inferred, not recovered original identifiers.
+`d2_` and `io_` are established module prefixes. The video helpers and client
+diagnostic have no attested function prefix and remain unprefixed.
+
+| Name | Active source identities | Evidence for the role |
+|---|---|---|
+| `d2_SetForm` | GOLD `0x475f60` | Reviewed Gold form setter; reuses the established API spelling. |
+| `d2_GetValueStep` | GOLDTL `0x4722c0`, GOLD `0x475be0` | Chooses a numeric increment from the widget's value range. |
+| `d2_GetResourceData` | GOLDTL `0x466190` | Resolves linked resource entries, loads missing data through `d2_Show`, returns the data pointer. |
+| `d2_SetOverlayAnimation` | GOLDTL `0x473a90` | Replaces an animation handle at stored coordinates; zero clears its state. Its purpose as a cursor is unproven. |
+| `ReportClientMessage` | GOLDTL `0x41d9e0`, GOLD `0x4222b0` | Logs `MESSAGE: %s` and optionally displays a message dialog; distinct from the server's `ReportMessage`. |
+| `io_AppendText` | GOLDTL `0x519190` | Expands markup into the active text box. |
+| `io_FormatTextBuffer` | GOLDTL `0x51af00` | Expands markup into a caller-provided output buffer. |
+| `CloseVideo` | GOLDTL `0x41f5f0` | Finds a video by ID, releases its interfaces and frees its list node. |
+| `ReleaseVideoInterfaces` | GOLDTL `0x41f7f0` | Releases and clears eleven interface slots. |
+| `AllocVideoListNode` | GOLDTL `0x41f8f0`, GOLD `0x423660` | Allocates, clears and links a `0x148`-byte video record. |
+| `FreeVideoListNode` | GOLDTL `0x41f940`, GOLD `0x4236b0` | Unlinks the record, updates the list head and frees it. |
+| `FindVideoById` | GOLDTL `0x41f9b0` | Walks the list comparing the ID at `+8`. |
+| `FindVideoByWindow` | GOLDTL `0x41f9d0` | Walks the list comparing the window handle at `+0x114`. |
+| `InitColorTable` | GOLDTL `0x459b80` | Initializes six slots containing color constants; the table's wider purpose and owner remain unknown. |
+| `gm_GetEntitySkill` | GOLDTL `0x507f10`, GOLD `0x504ec0` | Calculates a normalized indexed skill with modifiers, penalties and state-dependent scaling. |
+| `gm_LookupEntityRecordById` | SERVER `0x100184a0`, GOLD `0x505df0`, GOLDTL `0x508e40` | Searches the main 768-entry entity table; the client placeholder now shares the established inferred server name. |
+| `gm_LookupEntityRecordIn32SlotTable` | GOLD `0x4ce130`, GOLDTL `0x4cef30` | Searches a distinct 32-entry table with the same record stride. The table's wider purpose remains unknown. |
+
+The shared native `io_Text()` diagnostic supports the formatter family but
+does not attest either longer name. Gold formatter, resource, overlay and
+several video counterpart bindings remain unresolved or retired. Renaming
+their source users does not reactivate those claims. Existing signatures,
+declaration order, literal strings, file locations and unknown storage owners
+are preserved.
+
+Evidence: `.scratch/providers-20261031/ui/`,
+`.scratch/naming-20261031/text/` and `.scratch/naming-20261031/ui-list/`.
+Before/after object comparisons preserve non-CodeView section bytes and
+relocations after accounting for the intended symbol spellings. These checks
+do not establish raw-link placement or repair the formatters' existing code
+mismatches.
+
+Four scalar global names are also inferred. Their paired native reads and
+writes establish their roles, without adding definitions or asserting storage
+ownership:
+
+| Name | GOLDTL / GOLD address | Evidence |
+|---|---|---|
+| `cm_LastEntityId` | `0x68a9d0` / `0x60bd68` | Command reference `-2`; updated from an allocated entity's ID. Entity kinds vary, so this is not named as a player ID. |
+| `cm_LastBuildingId` | `0x68a9d4` / `0x60bd6c` | Command reference `-3`; building allocation records the returned building's ID. |
+| `cm_LastObjectId` | `0x68a9d8` / `0x60bd70` | Command reference `-4`; records allocated objects and existing destinations, not just newly created objects. |
+| `cut_RandomSeed` | `0x9b0820` / `0x92c4e0` | Printed by the `cut_getrandseed: %i` diagnostic; both targets update it with `seed * 0x41c64e6d + 0x3039`. |
+
+The comparison scaffolds retain their prior types, capacities and initializers.
+Pointer, array and integer declaration conflicts are not resolved by these
+spelling changes. Evidence and eighteen context comparisons are in
+`.scratch/naming-20261031/globals/`; color and skill checks are in
+`.scratch/naming-20261031/render/` and `.scratch/providers-20261031/entity/`.
+
+The lookup names distinguish two native functions that previously shared a C
+name. Callers can use both searches in succession; neither is an alias for the
+other. The reviewed caller matrix is in
+`.scratch/goal-next-20261031/gold-lookup-callers/`, and guarded rename previews,
+source comparisons and target-specific tests are in
+`.scratch/goal-lookup-split-20261031/`. The retained TL support helper keeps its
+two existing small-table calls. Its native identity is still unknown; naming
+its calls does not recover that body or establish table ownership.

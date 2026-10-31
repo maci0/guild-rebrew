@@ -7,8 +7,8 @@ typedef struct tag_req_2d_c {
 	char raw[0x2d];
 } req_2d_c;
 
-unsigned char* __cdecl fcn_00508e40(int);
-void __cdecl fcn_0051af00(void*, int, ...);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl fcn_0051e070(void);
 
@@ -22,9 +22,9 @@ int __cdecl fcn_004f53a0(void* a1, req_2d_c s, int b)
 
 	gm_ResolveEntityById((void**) (&nm), 0, 0, *(int*) ((char*) &s + 0x21));
 	if (nm != 0) {
-		fcn_0051af00(name, (int) "%1G", nm);
+		io_FormatTextBuffer(name, (int) "%1G", nm);
 	}
-	p = fcn_00508e40(*(int*) ((char*) &s + 0x12));
+	p = gm_LookupEntityRecordById(*(int*) ((char*) &s + 0x12));
 	if (p != 0) {
 		w = *(unsigned short*) p;
 	} else {
@@ -32,48 +32,48 @@ int __cdecl fcn_004f53a0(void* a1, req_2d_c s, int b)
 	}
 	switch (*(int*) ((char*) &s + 0x1c) & 0xff) {
 	case 0x11:
-		fcn_0051af00(a1, v + 0x1455, (char*) &s + 4);
+		io_FormatTextBuffer(a1, v + 0x1455, (char*) &s + 4);
 		break;
 	case 0x12:
-		fcn_0051af00(a1, v + 0x145a, (char*) &s + 4);
+		io_FormatTextBuffer(a1, v + 0x145a, (char*) &s + 4);
 		break;
 	case 0x13:
-		fcn_0051af00(a1, v + 0x145f, w, (char*) &s + 4);
+		io_FormatTextBuffer(a1, v + 0x145f, w, (char*) &s + 4);
 		break;
 	case 0x14:
-		fcn_0051af00(a1, v + 0x1464, (char*) &s + 4, w);
+		io_FormatTextBuffer(a1, v + 0x1464, (char*) &s + 4, w);
 		break;
 	case 0x15:
-		fcn_0051af00(a1, v + 0x1469, (char*) &s + 4, w);
+		io_FormatTextBuffer(a1, v + 0x1469, (char*) &s + 4, w);
 		break;
 	case 0x16:
-		fcn_0051af00(a1, v + 0x146e, w, (char*) &s + 4);
+		io_FormatTextBuffer(a1, v + 0x146e, w, (char*) &s + 4);
 		break;
 	case 0x17:
-		fcn_0051af00(a1, v + 0x1473, (char*) &s + 4, w);
+		io_FormatTextBuffer(a1, v + 0x1473, (char*) &s + 4, w);
 		break;
 	case 0x18:
 		switch (fcn_0051e070()) {
 		case 0:
 		case 1:
-			fcn_0051af00(a1, v + 0x1478, (char*) &s + 4, w, name);
+			io_FormatTextBuffer(a1, v + 0x1478, (char*) &s + 4, w, name);
 			break;
 		case 2:
-			fcn_0051af00(a1, v + 0x1478, (char*) &s + 4, name, w);
+			io_FormatTextBuffer(a1, v + 0x1478, (char*) &s + 4, name, w);
 			break;
 		}
 		break;
 	case 0x19:
-		fcn_0051af00(a1, v + 0x147d, w, (char*) &s + 4);
+		io_FormatTextBuffer(a1, v + 0x147d, w, (char*) &s + 4);
 		break;
 	case 0x1a:
-		fcn_0051af00(a1, v + 0x1482, (char*) &s + 4, w);
+		io_FormatTextBuffer(a1, v + 0x1482, (char*) &s + 4, w);
 		break;
 	case 0x1b:
-		fcn_0051af00(a1, v + 0x1487, (char*) &s + 4);
+		io_FormatTextBuffer(a1, v + 0x1487, (char*) &s + 4);
 		break;
 	case 0x1c:
-		fcn_0051af00(a1, v + 0x148c, (char*) &s + 4, w);
+		io_FormatTextBuffer(a1, v + 0x148c, (char*) &s + 4, w);
 		break;
 	}
 	return 0;

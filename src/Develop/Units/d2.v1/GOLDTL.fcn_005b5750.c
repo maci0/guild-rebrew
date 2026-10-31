@@ -19,7 +19,7 @@ extern char s_68d704[];
 
 int __cdecl fcn_00526010(Player*, int, char);
 int __cdecl fcn_00470820(int, int, char*);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl gm_AccumulateTyped2(Player*);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -43,7 +43,7 @@ int __cdecl fcn_005b5750(void)
 		return 0;
 	}
 	dlg = fcn_00470820(0, 0, s_68d704);
-	ctl = fcn_00472250(dlg, 0, fcn_00519190(0x1a34, (unsigned char) (*(char*)&g_773d75)));
+	ctl = fcn_00472250(dlg, 0, io_AppendText(0x1a34, (unsigned char) (*(char*)&g_773d75)));
 	v = gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]);
 	if (v >= 0x12c0) {
 		v = 0x12c0;

@@ -28,12 +28,12 @@ extern char* g_14a9a58;
 extern char* g_14a9a5c;
 extern char g_6b5c60[];
 
-Ent* __cdecl fcn_00508e40(int);
+Ent* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_004ff040(Ent*);
 void __cdecl fcn_004e6240(Ent*, Cmd*, char*, char*);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 
 int __cdecl fcn_004e1330(char* event)
 {
@@ -47,8 +47,8 @@ int __cdecl fcn_004e1330(char* event)
 
 	cmd = (Cmd*) event;
 	result = 0;
-	a = fcn_00508e40(cmd->a);
-	b = fcn_00508e40(cmd->b);
+	a = gm_LookupEntityRecordById(cmd->a);
+	b = gm_LookupEntityRecordById(cmd->b);
 	if (a == 0 || b == 0) {
 		return 0;
 	}
@@ -74,13 +74,13 @@ int __cdecl fcn_004e1330(char* event)
 		return 0;
 	}
 	if (a->kind == 6 || a->kind == 7) {
-		fcn_0051af00(buf, 0x11ca, b->id);
+		io_FormatTextBuffer(buf, 0x11ca, b->id);
 		strcat(buf, g_14a9a54);
 		fcn_004e6240(a, cmd, buf, &(*(char*)g_6b5c60));
 		result = 1;
 	}
 	if (b->kind == 6 || b->kind == 7) {
-		fcn_0051af00(buf, 0x11ca, a->id);
+		io_FormatTextBuffer(buf, 0x11ca, a->id);
 		strcat(buf, g_14a9a54);
 		fcn_004e6240(b, cmd, buf, &(*(char*)g_6b5c60));
 		result = 1;

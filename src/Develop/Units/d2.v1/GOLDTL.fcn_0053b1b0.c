@@ -20,7 +20,7 @@ int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -58,17 +58,17 @@ int __cdecl fcn_0053b1b0(void)
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(dlg, 2);
-	fcn_00519190(0x1ae2);
+	io_AppendText(0x1ae2);
 	if (fcn_005373e0((void*) fcn_0053b1b0, 0x12d6) != 0) {
 		do {
 			if (g_14ce8e0 != 0)
 				g_774654 = 1;
 			if (v_first != 0) {
 				d2_SetForm(dlg, 1);
-				fcn_00519190((int) s_6a3bcc);
+				io_AppendText((int) s_6a3bcc);
 				y = 0x1c;
 				for (i = 0; y < 0xd5; i++, y += 0x25) {
-					fcn_00519190((int) s_6a3bc4, i + 0x16b7);
+					io_AppendText((int) s_6a3bc4, i + 0x16b7);
 					fcn_00534160(0xd2, y, st[6 + i], 0x4d9);
 					id = fcn_0046f740(*(int*) (g_77255c + 0xc) - 0x2c, y, 0x519, g_772514);
 					ids[2 * i] = id;
@@ -79,9 +79,9 @@ int __cdecl fcn_0053b1b0(void)
 					*(int*) (g_1015ea0 + id * 0x2f4 + 0x5c) = 1;
 					*(int*) (g_1015ea0 + id * 0x2f4 + 0x1d0) = 3;
 				}
-				fcn_00519190(0x1ae3);
+				io_AppendText(0x1ae3);
 				fcn_00534160(0xd2, 0xec, v_len, 0x4d9);
-				v_id = fcn_00472250(dlg, 1, fcn_00519190(0x1ae4));
+				v_id = fcn_00472250(dlg, 1, io_AppendText(0x1ae4));
 				j = 0;
 				for (i = 0; i < 0x14; i += 4) {
 					if (*(int*) ((char*) st + 0x18 + i) > *(int*) ((char*) 0x7e1fd8 + i))

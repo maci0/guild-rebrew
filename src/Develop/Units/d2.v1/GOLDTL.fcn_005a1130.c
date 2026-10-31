@@ -5,17 +5,17 @@ int __cdecl fcn_00471b60();
 int __cdecl fcn_00471e30();
 int __cdecl fcn_00472250();
 int __cdecl d2_SetForm();
-int __cdecl fcn_00473a90();
+int __cdecl d2_SetOverlayAnimation();
 int __cdecl fcn_004927c0();
 int __cdecl fcn_00492950();
 int __cdecl fcn_00492d60();
 int __cdecl fcn_00492e50();
 int __cdecl fcn_00493000();
 int __cdecl fcn_004c51a0();
-int __cdecl fcn_00508e40();
+int __cdecl gm_LookupEntityRecordById();
 int __cdecl fcn_0050b710();
-int __cdecl fcn_00519190();
-int __cdecl fcn_0051af00();
+int __cdecl io_AppendText();
+int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_00532ef0();
 int __cdecl fcn_005340f0();
 int __cdecl fcn_005373e0();
@@ -24,7 +24,7 @@ int __cdecl fcn_005a0cd0();
 int __cdecl fcn_005a1130();
 int __cdecl fcn_005ca560();
 int __cdecl fcn_005ca740();
-int __cdecl fcn_00508e40();
+int __cdecl gm_LookupEntityRecordById();
 int __cdecl fcn_00591990();
 
 /* ADDRESS: GOLDTL 0x005a1130 */
@@ -52,7 +52,7 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 
 	if (*(char*) (*(int*) (self + 0xc) + 2) != 6) {
 		d2_SetForm(self, 3);
-		fcn_00519190((char*) (*(int*) (self + 0xc) + 0x30), (char*) 0x6a9694);
+		io_AppendText((char*) (*(int*) (self + 0xc) + 0x30), (char*) 0x6a9694);
 		count = *(unsigned char*) (self + 0x10);
 		for (i = 0; i < count; i++) {
 			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),
@@ -61,7 +61,7 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 	}
 	else {
 		d2_SetForm(self, 2);
-		fcn_00519190((char*) (*(int*) (self + 0xc) + 0x30), (char*) 0x6a9694);
+		io_AppendText((char*) (*(int*) (self + 0xc) + 0x30), (char*) 0x6a9694);
 		count = *(unsigned char*) (self + 0x10);
 		for (i = 0; i < count; i++) {
 			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),
@@ -71,7 +71,7 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 
 	if (*(char*) (*(int*) (self + 0x30) + 2) != 6) {
 		d2_SetForm(self, 2);
-		fcn_00519190((char*) (*(int*) (self + 0x30) + 0x30), (char*) 0x6a9694);
+		io_AppendText((char*) (*(int*) (self + 0x30) + 0x30), (char*) 0x6a9694);
 		count = *(unsigned char*) (self + 0x34);
 		for (i = 0; i < count; i++) {
 			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),
@@ -80,7 +80,7 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 	}
 	else {
 		d2_SetForm(self, 2);
-		fcn_00519190((char*) (*(int*) (self + 0x30) + 0x30), (char*) 0x6a9694);
+		io_AppendText((char*) (*(int*) (self + 0x30) + 0x30), (char*) 0x6a9694);
 		count = *(unsigned char*) (self + 0x34);
 		for (i = 0; i < count; i++) {
 			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),

@@ -3,9 +3,9 @@
 
 int __cdecl fcn_004c4450(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_AccumulateTyped2(int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl fcn_004c5620(int, int);
 int __cdecl fcn_005c4ec0(int, int, int, char*);
@@ -47,9 +47,9 @@ void __cdecl he_RunKredit(int a0)
 			}
 			slot = (char*) 0x7f4ca0 +
 			       (unsigned short) *(unsigned short*) (obj + 0x27) * 0x21c;
-			n = fcn_00508e40(*(int*) (a0 + 0xb0));
+			n = gm_LookupEntityRecordById(*(int*) (a0 + 0xb0));
 			if (!n) {
-				fcn_0051af00(buf, 0x18e7, *(int*) (a0 + 0xb4));
+				io_FormatTextBuffer(buf, 0x18e7, *(int*) (a0 + 0xb4));
 				fcn_00545d40(*(int*) (slot + 4), -1, buf, 0, 0x5ff, 0);
 				*(int*) (a0 + 0x84) = fcn_004c5620(-1, a0);
 				return;
@@ -64,7 +64,7 @@ void __cdecl he_RunKredit(int a0)
 				*(int*) ((char*) n + 0x55) = time;
 			} else {
 				time = fcn_64d228();
-				fcn_0051af00(msg, 0x18e8, time);
+				io_FormatTextBuffer(msg, 0x18e8, time);
 				obj = fcn_005c4ec0(*(int*) ((char*) n + 1), n, time, msg);
 				*(int*) ((char*) n + 0x55) += obj;
 				if (*(unsigned char*) (slot + 2) == 6 ||
@@ -82,13 +82,13 @@ void __cdecl he_RunKredit(int a0)
 		if (obj) {
 			slot = (char*) 0x7f4ca0 +
 			       (unsigned short) *(unsigned short*) (obj + 0x27) * 0x21c;
-			n = fcn_00508e40(*(int*) (a0 + 0xb0));
+			n = gm_LookupEntityRecordById(*(int*) (a0 + 0xb0));
 			if (*(unsigned char*) (a0 + 0x78) & 2) {
 				time = gm_AccumulateTyped2(n);
 				if (*(int*) (a0 + 0xb4) <= time) {
-					fcn_0051af00(buf, 0x18e9, *(int*) (a0 + 0xb4));
+					io_FormatTextBuffer(buf, 0x18e9, *(int*) (a0 + 0xb4));
 				} else {
-					fcn_0051af00(buf, 0x18ea, *(int*) (a0 + 0xb4));
+					io_FormatTextBuffer(buf, 0x18ea, *(int*) (a0 + 0xb4));
 				}
 				fcn_005c4ec0(*(int*) ((char*) obj + 1), n,
 				           *(int*) (a0 + 0xb4), buf);
@@ -101,7 +101,7 @@ void __cdecl he_RunKredit(int a0)
 				}
 				if (*(unsigned char*) (slot + 2) == 6 ||
 				    *(unsigned char*) (slot + 2) == 7) {
-					fcn_0051af00(msg, 0x18d8, *(unsigned short*) n, obj,
+					io_FormatTextBuffer(msg, 0x18d8, *(unsigned short*) n, obj,
 					           *(int*) (a0 + 0xb4));
 					fcn_00545d40(*(int*) (slot + 4), -1, msg, 0, 0x5ff, 0);
 					fcn_00546190(a0);
@@ -112,11 +112,11 @@ void __cdecl he_RunKredit(int a0)
 	} else {
 		obj = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
 		if (obj) {
-			n = fcn_00508e40(*(int*) (a0 + 0xb0));
+			n = gm_LookupEntityRecordById(*(int*) (a0 + 0xb0));
 			slot = (char*) 0x7f4ca0 +
 			       (unsigned short) *(unsigned short*) (obj + 0x27) * 0x21c;
 			if (!n) {
-				fcn_0051af00(msg, 0x18e7, *(int*) (a0 + 0xb4));
+				io_FormatTextBuffer(msg, 0x18e7, *(int*) (a0 + 0xb4));
 				fcn_00545d40(*(int*) (slot + 4), -1, msg, 0, 0x5ff, 0);
 			}
 		}

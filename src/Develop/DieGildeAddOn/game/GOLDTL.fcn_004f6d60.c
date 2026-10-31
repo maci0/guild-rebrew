@@ -10,7 +10,7 @@ extern int __cdecl gm_WalkEntityChain(int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 extern void __cdecl fcn_004c5420(int, int, int, int, int);
-extern void __cdecl fcn_0051af00(char*, char*, ...);
+extern void __cdecl io_FormatTextBuffer(char*, char*, ...);
 extern void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 extern void __cdecl fcn_004c4510(char*, int);
 extern void __cdecl fcn_004c4570(unsigned char, unsigned char, short, void*);
@@ -72,7 +72,7 @@ void __cdecl fcn_004f6d60(unsigned int a0)
 		}
 		fcn_004c5420(*(int*) (slot + 4), 0x1c8, 4, 0x4000, 0);
 		if (*(char*) (slot + 2) == 6 || *(char*) (slot + 2) == 7) {
-			fcn_0051af00(text, (char*) 0x161d, *(unsigned short*) slot);
+			io_FormatTextBuffer(text, (char*) 0x161d, *(unsigned short*) slot);
 			he_MessageBoxQuickjump(*(int*) (slot + 4), -1, text, 0, 0x5fd,
 					       *(int*) ((char*) found + 1),
 					       *(int*) ((char*) alloc + 2), 0, s_6903e8);

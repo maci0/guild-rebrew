@@ -11,12 +11,12 @@ extern int g_67d370;
 int __cdecl fcn_004e8af0(char*, void*);
 int __cdecl fcn_004e8b40(int, void*);
 int __cdecl fcn_004e9310(int, int, void*);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004aae50(char*, int, int*, void*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
-unsigned int __cdecl fcn_00519190();
+unsigned int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, char*);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_004e6e20(int, int, int);
@@ -50,7 +50,7 @@ int __cdecl fcn_004dc3a0(char* a0, int a1, int* a2, int* a3)
 	for (; i < 4; i++) {
 		char* e;
 
-		e = fcn_00508e40(a2[i]);
+		e = gm_LookupEntityRecordById(a2[i]);
 		if (e != 0) {
 			ents[found] = e;
 			found++;
@@ -64,15 +64,15 @@ int __cdecl fcn_004dc3a0(char* a0, int a1, int* a2, int* a3)
 	fcn_00471d80(gui, 1);
 	d2_SetForm(gui, 0);
 	if (n < 2) {
-		fcn_00519190(0x12dc, *(unsigned short*) a2, *(unsigned short*) a2,
+		io_AppendText(0x12dc, *(unsigned short*) a2, *(unsigned short*) a2,
 		    (*(int*) (info + 8) & 0xff) + 0x253);
 	} else {
-		fcn_00519190(0x12dd, *(unsigned short*) a2, *(unsigned short*) a2,
+		io_AppendText(0x12dd, *(unsigned short*) a2, *(unsigned short*) a2,
 		    (*(int*) (info + 8) & 0xff) + 0x253);
 	}
 	for (i = 0; i < found; i++) {
 		handles[i] = fcn_00472250(gui, 0,
-		    (char*) fcn_00519190(0x68c354, *(unsigned short*) ents[i]));
+		    (char*) io_AppendText(0x68c354, *(unsigned short*) ents[i]));
 	}
 	for (i = found; i < 4; i++) {
 		handles[i] = -1;

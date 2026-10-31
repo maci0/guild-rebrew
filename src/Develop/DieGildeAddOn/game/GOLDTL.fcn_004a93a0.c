@@ -1,6 +1,6 @@
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x004a93a0 */
 int __cdecl fcn_004a93a0(int a1, char* e, int a3, int a4, char* out)
@@ -25,7 +25,7 @@ int __cdecl fcn_004a93a0(int a1, char* e, int a3, int a4, char* out)
 	k = n;
 	do {
 		if (d[i] >= thr) {
-			p = fcn_00508e40(ids[i]);
+			p = gm_LookupEntityRecordById(ids[i]);
 			if (p && p[2] != 0xf && p[8] && p[0x166] != 0xd && p[0x166] != 0x1b && p[0x166] != 0xf && p[0x166] != 0x15) {
 				out[0] = 7;
 				*(int*) (out + 4) = *(int*) (p + 4);

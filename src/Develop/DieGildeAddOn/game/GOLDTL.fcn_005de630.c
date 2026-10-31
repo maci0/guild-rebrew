@@ -32,11 +32,11 @@ extern char g_7f4ca0[];
 extern int g_664398[];
 
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 float __cdecl fcn_004ff210(unsigned short, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
@@ -64,7 +64,7 @@ int __cdecl fcn_005de630(House* obj, int* arg)
 			return 0;
 		}
 	} else {
-		e = (House*) fcn_00508e40(arg[1]);
+		e = (House*) gm_LookupEntityRecordById(arg[1]);
 		if (e == 0) {
 			return 0;
 		}
@@ -85,25 +85,25 @@ int __cdecl fcn_005de630(House* obj, int* arg)
 	}
 	fcn_004ff210(e->id, -0x32 - gm_RandomMod(0x40));
 	if (e->b2 == 6 || e->b2 == 7) {
-		fcn_0051af00(text, 0x100d, picks[0]->id, picks[0]->id, picks[1]->id, picks[2]->id);
+		io_FormatTextBuffer(text, 0x100d, picks[0]->id, picks[0]->id, picks[1]->id, picks[2]->id);
 		fcn_00545d40(e->f4, -1, text, 1, 0x5fb, 0);
 	}
 	if (picks[0]->b2 == 6 || picks[0]->b2 == 7) {
-		fcn_0051af00(text, 0x100e, e->id, picks[1]->id, picks[2]->id);
+		io_FormatTextBuffer(text, 0x100e, e->id, picks[1]->id, picks[2]->id);
 		fcn_00545d40(picks[0]->f4, -1, text, 1, 0x5fb, 0);
 	}
 	if (picks[1]->b2 == 6 || picks[1]->b2 == 7) {
-		fcn_0051af00(text, 0x100f, e->id, picks[0]->id, picks[2]->id);
+		io_FormatTextBuffer(text, 0x100f, e->id, picks[0]->id, picks[2]->id);
 		fcn_00545d40(picks[1]->f4, -1, text, 1, 0x5fb, 0);
 	}
 	if (picks[2]->b2 == 6 || picks[2]->b2 == 7) {
-		fcn_0051af00(text, 0x100f, e->id, picks[0]->id, picks[1]->id);
+		io_FormatTextBuffer(text, 0x100f, e->id, picks[0]->id, picks[1]->id);
 		fcn_00545d40(picks[2]->f4, -1, text, 1, 0x5fb, 0);
 	}
 	arg[4] = 1;
 	if (obj->b2 == 6) {
-		fcn_0051af00(text2, 0x10a1, e->id, picks[0]->id, picks[1]->id, picks[2]->id);
-		fcn_0051af00(text, 0xfe8, text2);
+		io_FormatTextBuffer(text2, 0x10a1, e->id, picks[0]->id, picks[1]->id, picks[2]->id);
+		io_FormatTextBuffer(text, 0xfe8, text2);
 		fcn_005dbe90(text);
 	}
 	return 1;

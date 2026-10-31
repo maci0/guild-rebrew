@@ -8,7 +8,7 @@ extern double g_665f00;
 extern double g_664f08;
 extern double g_662b20;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 
 int __cdecl fcn_0050c710(int, int, int);
 float __cdecl gm_RandomFloat01(void);
@@ -24,7 +24,7 @@ void __cdecl fcn_0057d830(char* u, int count)
 	float g;
 	int i;
 
-	h = fcn_00508e40(*(int*) (u + 0xc));
+	h = gm_LookupEntityRecordById(*(int*) (u + 0xc));
 	if (h == 0) {
 		return;
 	}
@@ -34,7 +34,7 @@ void __cdecl fcn_0057d830(char* u, int count)
 	}
 	n = fcn_0050c710(found, 0x1d, 1);
 	mult = n * g_6652c4 + g_6628a0;
-	g = fcn_00507f10(h, 2);
+	g = gm_GetEntitySkill(h, 2);
 	sq = g * g;
 	for (i = count; i > 0; i--) {
 		*(int*) (u + 0xac) += (int) (((gm_RandomFloat01() + sq) * g_665f00 + g_664f08) * mult) << 5;

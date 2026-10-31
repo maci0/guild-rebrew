@@ -6,7 +6,7 @@ extern pos14_7f4c00 g_7f4c00;
 
 
 
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_00529160(char*, char*, int, char*);
@@ -18,7 +18,7 @@ void __cdecl fcn_00579cf0(char* o)
 	char* r;
 	char* q;
 
-	x = fcn_00508e40(*(int*) (o + 0x8c));
+	x = gm_LookupEntityRecordById(*(int*) (o + 0x8c));
 	if (x != 0) {
 		r = gm_SearchTable67(*(int*) (o + 0x10));
 		if (r != 0) {

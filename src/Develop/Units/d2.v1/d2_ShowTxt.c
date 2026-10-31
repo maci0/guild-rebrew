@@ -114,7 +114,7 @@ int __cdecl d2_ShowTxt(D2_TEXT_COORD x, D2_TEXT_COORD y, char* text, int win)
 		return -1;
 	}
 	if (w->count >= 0x180) {
-		fcn_0041d9e0(d2_TEXT_ERROR);
+		ReportClientMessage(d2_TEXT_ERROR);
 		return -1;
 	}
 	id = d2_TEXT_ALLOCATE_INDEX();
@@ -135,7 +135,7 @@ int __cdecl d2_ShowTxt(D2_TEXT_COORD x, D2_TEXT_COORD y, char* text, int win)
 #ifdef REBREW_GOLD
 	d2_TEXT_ENTRIES[id].f16 = g_00f8f084;
 #else
-	d2_TEXT_ENTRIES[id].f16 = *(unsigned short*) ((char*) fcn_00466190(d2_TEXT_ENTRIES[id].font) + 8);
+	d2_TEXT_ENTRIES[id].f16 = *(unsigned short*) ((char*) d2_GetResourceData(d2_TEXT_ENTRIES[id].font) + 8);
 #endif
 	d2_TEXT_ENTRIES[id].f1c = 2;
 	d2_TEXT_ENTRIES[id].parent = w;

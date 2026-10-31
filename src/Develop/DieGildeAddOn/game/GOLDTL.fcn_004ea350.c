@@ -3,7 +3,7 @@
 extern Rec18_68da68 g_9a9220[42];
 extern char g_7f4ca0[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e81a0(unsigned char);
 int __cdecl fcn_004e8240(unsigned char, char*, char*, int, int);
 int __cdecl fcn_004c4450(int);
@@ -23,7 +23,7 @@ void __cdecl fcn_004ea350(void)
 	int n;
 
 	for (r = &g_9a9220[0].x10; (int) r < (int) &g_9a9220[30].x10; r += 0x18) {
-		e = fcn_00508e40(*(int*) (r - 0xc));
+		e = gm_LookupEntityRecordById(*(int*) (r - 0xc));
 		res = -1;
 		if (e != 0 && *(unsigned char*) (e + 8) != 0) {
 			if (*r != 1) {

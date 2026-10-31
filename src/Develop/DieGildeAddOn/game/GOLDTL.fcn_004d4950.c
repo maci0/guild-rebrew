@@ -15,7 +15,7 @@ int __cdecl fcn_004d4790(char*);
 int* __cdecl fcn_00417b50(int, int, int, int, int, int);
 int __cdecl fcn_00406120(char*);
 char* __cdecl fcn_004063b0(int, char*, int, float);
-int __cdecl fcn_0051af00(void*, ...);
+int __cdecl io_FormatTextBuffer(void*, ...);
 void __cdecl fcn_00533a40(char*);
 
 /* Message-dialog handler: look up the topic text and the current page, pick
@@ -138,7 +138,7 @@ draw:
         }
         if (*v7 == 0x16e) {
             *(char*) ((char*) v4 + 8) = 4;
-            fcn_0051af00(v13, 0x1188, *(unsigned int*) (v9 + 0x54), *v4);
+            io_FormatTextBuffer(v13, 0x1188, *(unsigned int*) (v9 + 0x54), *v4);
             fcn_00533a40(v13);
             return;
         }

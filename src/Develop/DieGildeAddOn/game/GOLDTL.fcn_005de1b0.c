@@ -44,13 +44,13 @@ extern char* g_14a5590;
 
 Unit* __cdecl fcn_005bdc30(int, Req*, char*, int, int);
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 float __cdecl gm_RandomFloat01(void);
 float __cdecl fcn_004ff210(int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
@@ -84,7 +84,7 @@ int __cdecl fcn_005de1b0(unsigned char* obj, int* arg)
 			return 0;
 		}
 	} else {
-		e = fcn_00508e40(arg[1]);
+		e = gm_LookupEntityRecordById(arg[1]);
 		if (e == 0) {
 			return 0;
 		}
@@ -100,12 +100,12 @@ int __cdecl fcn_005de1b0(unsigned char* obj, int* arg)
 		}
 	}
 	if (e[2] == 6 || e[2] == 7) {
-		fcn_0051af00(text, 0x100b, q->w27, q->w27, q);
+		io_FormatTextBuffer(text, 0x100b, q->w27, q->w27, q);
 		fcn_00545d40(*(int*) (e + 4), -1, text, 0, 0x5fb, 0);
 	}
 	if (obj[2] == 6) {
-		fcn_0051af00(text2, 0x109b, *(unsigned short*) e, q->w27, q);
-		fcn_0051af00(text, 0xfe8, text2);
+		io_FormatTextBuffer(text2, 0x109b, *(unsigned short*) e, q->w27, q);
+		io_FormatTextBuffer(text, 0xfe8, text2);
 		fcn_005dbe90(text);
 	}
 	arg[4] = 1;

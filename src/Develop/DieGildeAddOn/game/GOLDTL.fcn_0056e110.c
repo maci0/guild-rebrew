@@ -9,7 +9,7 @@ typedef struct {
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_00546190(char*);
 
@@ -17,9 +17,9 @@ void __cdecl he_AllocDiePlayer(char* e)
 {
 	char* p;
 
-	p = fcn_00508e40(*(int*) (e + 0xac));
+	p = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 	if (p == 0) {
-		fcn_0041d9e0("he_AllocDiePlayer: player not found!");
+		ReportClientMessage("he_AllocDiePlayer: player not found!");
 		fcn_00546190(e);
 		return;
 	}

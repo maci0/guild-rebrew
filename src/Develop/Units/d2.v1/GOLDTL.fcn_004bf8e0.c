@@ -30,7 +30,7 @@ extern int g_6816d8;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 void __cdecl fcn_0046f9b0(int, int);
@@ -65,10 +65,10 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 	dlg = fcn_00470820(0, 0, s_681730);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x42e2);
+	io_AppendText(0x42e2);
 	list = fcn_00472250(dlg, 2, 0);
 	d2_SetForm(dlg, 4);
-	fcn_00519190(*(unsigned char*) (p + 0x33) + 0x42ec);
+	io_AppendText(*(unsigned char*) (p + 0x33) + 0x42ec);
 	d2_SetForm(dlg, 3);
 	fcn_00533a60(g_772514, 0, ids, 3, g_14b5e9c, g_14b5eac, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
 	ok = ids[0];
@@ -83,7 +83,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 			g_774654 = 1;
 		}
 		d2_SetForm(dlg, 4);
-		fcn_00519190(*(unsigned char*) (p + 0x33) + 0x42ec);
+		io_AppendText(*(unsigned char*) (p + 0x33) + 0x42ec);
 		fcn_0046f9b0(flip, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
 		if (g_100f1dc != -1 && g_67d370 == clear) {
 			if (g_772908 != 0) {

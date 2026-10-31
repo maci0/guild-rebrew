@@ -50,7 +50,7 @@
 
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 
-int __cdecl gm_LookupEntityRecordById(int);
+int __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl gm_AssignBuildingOwner(char*, int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
@@ -84,7 +84,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 
 	(void) unused;
 
-	from_ent = (char*) gm_LookupEntityRecordById(from_id);
+	from_ent = (char*) gm_LookupEntityRecordIn32SlotTable(from_id);
 	if (from_ent == NULL) {
 		return -1;
 	}
@@ -107,7 +107,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 
 	chain = *(unsigned short*) from_ent;
 	link = gm_WalkEntityChain(chain);
-	to_ent = (char*) gm_LookupEntityRecordById(to_id);
+	to_ent = (char*) gm_LookupEntityRecordIn32SlotTable(to_id);
 	if (to_ent == NULL) {
 		return -2;
 	}

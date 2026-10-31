@@ -46,11 +46,11 @@ void __cdecl fcn_00472ea0(int a, int b, int c, int d)
 
 	w = &((Win*)g_1015f40)[g_772514];
 	if (!w->used) {
-		fcn_0041d9e0(s_67d844);
+		ReportClientMessage(s_67d844);
 		return;
 	}
 	if (!w->surface) {
-		fcn_0041d9e0(s_67d818);
+		ReportClientMessage(s_67d818);
 		return;
 	}
 	fcn_004772e0(a, b, c, d, w->surface);

@@ -14,7 +14,7 @@ struct cap_4cb6f0 {
 extern unsigned char* lpGebaeudePROT;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004fac80(int, struct cap_4cb6f0*);
 
 
@@ -29,7 +29,7 @@ int __cdecl fcn_004cb6f0(char* a1, char* a2)
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (a1 + 0x10));
 	if (e == 0)
 		return 1;
-	p = fcn_00508e40(*(int*) (a1 + 0x14));
+	p = gm_LookupEntityRecordById(*(int*) (a1 + 0x14));
 	if (p == 0 && *(int*) (a1 + 0x14) != -1)
 		return 1;
 	if (((Kind*)lpGebaeudePROT)[e[0]].type == 1) {

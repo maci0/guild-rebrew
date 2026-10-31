@@ -33,7 +33,7 @@ int __cdecl fcn_00577ab0(struct house*);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 void __cdecl fcn_004c5530(struct msg*);
 
@@ -50,23 +50,23 @@ int __cdecl fcn_00577af0(int id, struct house* me)
 		e = gm_StartFilteredEntitySearch(1, 1, id);
 		if (e != 0) {
 			h = &((struct house*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
-			a = fcn_00507f10((char*) h, 2);
-			b = fcn_00507f10((char*) me, 2);
+			a = gm_GetEntitySkill((char*) h, 2);
+			b = gm_GetEntitySkill((char*) me, 2);
 			if (a - b * 0.5f + gm_RandomFloat01() * 0.5 < 0.8) {
 				goto refuse;
 			}
-			a = fcn_00507f10((char*) h, 3);
-			b = fcn_00507f10((char*) me, 3);
+			a = gm_GetEntitySkill((char*) h, 3);
+			b = gm_GetEntitySkill((char*) me, 3);
 			if (a - b * 0.5f + gm_RandomFloat01() * 0.5 < 0.7) {
 refuse:
-				fcn_0051af00(text, 0x4032, me->id, me->id);
+				io_FormatTextBuffer(text, 0x4032, me->id, me->id);
 				fcn_00545d40(h->owner, -1, text, 1, 0x5fa, "_NACHRICHTEN_DOMIZIL_07");
-				fcn_0051af00(text, 0x4034);
+				io_FormatTextBuffer(text, 0x4034);
 				fcn_00545d40(me->owner, -1, text, 1, 0x5fb, "_NACHRICHTEN_DOMIZIL_09");
 			} else {
-				fcn_0051af00(text, 0x4031, me->id);
+				io_FormatTextBuffer(text, 0x4031, me->id);
 				fcn_00545d40(h->owner, -1, text, 1, 0x5fa, "_NACHRICHTEN_DOMIZIL_06");
-				fcn_0051af00(text, 0x4033);
+				io_FormatTextBuffer(text, 0x4033);
 				fcn_00545d40(me->owner, -1, text, 1, 0x5fb, "_NACHRICHTEN_DOMIZIL_09");
 				memset(&m, 0, sizeof(m));
 				m.kind = 0x9b;

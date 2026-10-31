@@ -1,4 +1,4 @@
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
@@ -27,7 +27,7 @@ void __cdecl fcn_00568df0(char* o)
 	if (p != 0 || (e != 0 && *(int*) (e + 0x65) != -1)) {
 		*(int*) (o + 0x70) = -1;
 	}
-	x = fcn_00508e40(*(int*) (o + 0xac));
+	x = gm_LookupEntityRecordById(*(int*) (o + 0xac));
 	if (x != 0 && x[0x1b1] != 0) {
 		*(int*) (o + 0x70) = -1;
 	}

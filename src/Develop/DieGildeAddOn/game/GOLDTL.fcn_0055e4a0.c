@@ -26,7 +26,7 @@ int __cdecl fcn_004c5da0(int who, int key, int target, int name, int mode, char*
 int __cdecl fcn_004c5620(int state, void* ev);
 int __cdecl fcn_00505340(unsigned char* rec);
 int __cdecl fcn_005155e0(unsigned char* rec);
-void __cdecl fcn_0051af00(char* text, int format, ...);
+void __cdecl io_FormatTextBuffer(char* text, int format, ...);
 int __cdecl fcn_00529710(char* a, unsigned char* b);
 char* __cdecl fcn_0055d630(char* o);
 void __cdecl fcn_0055d6e0(char* a, char* b);
@@ -97,7 +97,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 	fcn_004c5420(*(int*) (e + 2), 0x13, 1, 0, 0x40);
 	t = *(char*) v8;
 	if (t == 0x47) {
-		fcn_0051af00(buf, 0x1c3b, 1, 0x1c39,
+		io_FormatTextBuffer(buf, 0x1c3b, 1, 0x1c39,
 			*(int*) (v8 + 0x65) * 0x2f4 + (int) g_868060);
 		if ((*(int*) ((char*) g_7e35c0 + g_774650 * 8) != 0x5ba910
 			|| g_7746c8 != v8) && !(*(unsigned char*) (e + 0x20) & 1)
@@ -110,7 +110,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 		}
 	}
 	else if (*v7 == 0x47) {
-		fcn_0051af00(buf, 0x1c3d, 1, 0x1c39,
+		io_FormatTextBuffer(buf, 0x1c3d, 1, 0x1c39,
 			*(int*) (v7 + 0x65) * 0x2f4 + (int) g_868060,
 			*(unsigned short*) (v8 + 0x27), v8);
 		if ((*(int*) ((char*) g_7e35c0 + g_774650 * 8) != 0x5ba910
@@ -153,14 +153,14 @@ void __cdecl fcn_0055e4a0(char* ev)
 			key[0] = 0;
 		}
 		if (t2 != 0x1d && t2 != 0x1f) {
-			fcn_0051af00(buf, 0x1c3f, 1, 0x1c39,
+			io_FormatTextBuffer(buf, 0x1c3f, 1, 0x1c39,
 				*(unsigned short*) (v8 + 0x27), v8);
 		}
 		else if (fcn_00505340(v8)) {
-			fcn_0051af00(buf, 0x1c43);
+			io_FormatTextBuffer(buf, 0x1c43);
 		}
 		else {
-			fcn_0051af00(buf, 0x1c44, v8);
+			io_FormatTextBuffer(buf, 0x1c44, v8);
 		}
 		if ((*(int*) ((char*) g_7e35c0 + g_774650 * 8) != 0x5ba910
 			|| g_7746c8 != v8) && !(*(unsigned char*) (e + 0x20) & 1)

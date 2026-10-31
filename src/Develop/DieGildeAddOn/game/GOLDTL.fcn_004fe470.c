@@ -8,7 +8,7 @@ extern char g_675908[];
 extern char g_68149c[];
 extern char g_6753fc[];
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 int __cdecl gm_CheckEntityType(char* e);
@@ -31,7 +31,7 @@ char* __cdecl fcn_004fe470(int id, int type, int sub, int x, int y)
 
 	q = 0;
 	old = g_6b8010;
-	o = fcn_00508e40(id);
+	o = gm_LookupEntityRecordById(id);
 	if (o == 0 || *(char**) (o + 0x184) != 0) {
 		return 0;
 	}

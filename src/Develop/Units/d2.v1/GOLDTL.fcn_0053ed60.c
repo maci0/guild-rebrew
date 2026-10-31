@@ -51,7 +51,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_00471db0(int, int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl fcn_005373e0(void*, int);
@@ -157,7 +157,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	fcn_00471d80(win1, 3);
 	fcn_00471db0(win1, 1);
 	d2_SetForm(win1, 0);
-	fcn_00519190(0x1abb);
+	io_AppendText(0x1abb);
 	fcn_00438da0((float) g_1040494, (float) g_1040490, 0.0f, 0.0f, g_10529c8, g_10421a0, g_10432a4, g_1040494, g_1040490);
 	win2 = fcn_00470820(0, 0, (char*) 0x6a4194);
 	fcn_00471d80(win2, 3);
@@ -185,7 +185,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 			dir[1] = 0.0f;
 			dir[2] = 0.0f;
 			d2_SetForm(win2, 1);
-			fcn_00519190(0x6811b0);
+			io_AppendText(0x6811b0);
 			pos[0] = pos[0] + *(float*) (sel + 0x4c);
 			pos[1] = pos[1] + *(float*) (sel + 0x50);
 			pos[2] = pos[2] + *(float*) (sel + 0x54);
@@ -204,9 +204,9 @@ int __cdecl fcn_0053ed60(int unused, int network)
 					idx = fcn_0042dc90(keybuf);
 					if (idx != -1) {
 						d2_SetForm(win2, 1);
-						fcn_00519190(idx);
-						fcn_00519190(0x68b300);
-						fcn_00519190(idx + 1);
+						io_AppendText(idx);
+						io_AppendText(0x68b300);
+						io_AppendText(idx + 1);
 					}
 				}
 				fcn_00442c00(cities[i], 0);

@@ -4,7 +4,7 @@
 void __cdecl fcn_00508cf0(int, int*);
 void __cdecl fcn_005dcf40(unsigned char*, int);
 void __cdecl fcn_004c6330(int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005dbe90(char*);
 
 int __cdecl fcn_005dd980(unsigned char* e, int* a2)
@@ -37,7 +37,7 @@ int __cdecl fcn_005dd980(unsigned char* e, int* a2)
 	}
 	if (e[2] == 6) {
 		fcn_004c6330(*(int*) (e + 4));
-		fcn_0051af00(text, 0xfe8, **(unsigned short**) a2 * 2 + 0xd71, second + 0x16b7,
+		io_FormatTextBuffer(text, 0xfe8, **(unsigned short**) a2 * 2 + 0xd71, second + 0x16b7,
 		    first + 0x16b7);
 		fcn_005dbe90(text);
 	}

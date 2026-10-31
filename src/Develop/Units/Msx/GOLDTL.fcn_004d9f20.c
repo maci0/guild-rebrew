@@ -57,7 +57,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00405540(Obj*, int);
 void __cdecl fcn_00533a40(char*);
 void __cdecl fcn_004d7d70(int);
-Ent* __cdecl fcn_00508e40(int);
+Ent* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004d3fe0(Ent*);
 void __cdecl fcn_004d4f30(Party*);
 void __cdecl fcn_004d8d00(Slot*);
@@ -107,7 +107,7 @@ void __cdecl fcn_004d9f20(int arg)
 				for (i = 0; i < ((Party*)g_772eb4)->count; i++) {
 					id = ((Party*)g_772eb4)->ids[i];
 					if (id != -1) {
-						e = fcn_00508e40(id);
+						e = gm_LookupEntityRecordById(id);
 						if (e != 0 && e->kind != 6 && e->kind != 7) {
 							fcn_004d3fe0(e);
 						}

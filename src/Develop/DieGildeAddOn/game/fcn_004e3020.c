@@ -10,7 +10,7 @@ typedef struct {
 	char big[0x1fb0];    /* 0x320 work buffer */
 } Frame4e3020;
 
-int __cdecl fcn_00508e40(void* p);
+int __cdecl gm_LookupEntityRecordById(void* p);
 int __cdecl fcn_004c3100(char* s, int a);
 void __cdecl fcn_004e4e90(char* s);
 void __cdecl fcn_004e4730(char* s);
@@ -21,7 +21,7 @@ int __cdecl fcn_004e44b0(char* s, char* buf);
 int __cdecl fcn_004e4d00(int a, int b, int c);
 void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
 void __cdecl fcn_004e4c40(int a);
-int __cdecl fcn_0051af00(char* buf, int a, int b);
+int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
 int __cdecl fcn_004e6eb0(void* buf, int n);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4610(void* h);
@@ -50,7 +50,7 @@ void __cdecl fcn_004e3020(void* arg)
 	unsigned int mask;
 	unsigned char flags;
 
-	obj = (void*) fcn_00508e40(*(void**) ((char*) arg + 0x34));
+	obj = (void*) gm_LookupEntityRecordById(*(void**) ((char*) arg + 0x34));
 	mask = *(unsigned int*) 0x7f4c04;
 	i = 0;
 	table[0] = 8;
@@ -98,9 +98,9 @@ void __cdecl fcn_004e3020(void* arg)
 	flags = *(unsigned char*) 0x7747b0;
 	*(int*) 0x7725c8 = 0;
 	if ((flags & 4) != 0) {
-		fcn_0051af00(f.msg, 0x3fda, *(unsigned short*) obj);
+		io_FormatTextBuffer(f.msg, 0x3fda, *(unsigned short*) obj);
 	} else {
-		fcn_0051af00(f.msg, 0x1ab1, *(unsigned short*) obj);
+		io_FormatTextBuffer(f.msg, 0x1ab1, *(unsigned short*) obj);
 	}
 	fcn_004e6eb0(f.msg, 0);
 	fcn_004e48b0();

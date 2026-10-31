@@ -46,13 +46,13 @@ extern char s_6ab348[];
 int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl cm_ExProdObjekt(void);
-int __cdecl fcn_0051af00(char*, int, int);
+int __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -84,9 +84,9 @@ int __cdecl fcn_005af550(int unused, char* param)
 	}
 	dlg = fcn_00470820(0, 0, s_6ab348);
 	fcn_00471b60(dlg);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	btn = fcn_00519190(0x1a6d, param);
+	btn = io_AppendText(0x1a6d, param);
 	btn1 = fcn_00472250(dlg, 1, btn);
 	btn2 = fcn_00472250(dlg, 1, btn + 1);
 	g_100f1dc = -1;
@@ -122,7 +122,7 @@ int __cdecl fcn_005af550(int unused, char* param)
 							count++;
 					}
 					if (count > 6) {
-						fcn_0051af00(buf, 0x19ef, 6);
+						io_FormatTextBuffer(buf, 0x19ef, 6);
 						fcn_00526120(buf, 0);
 					}
 				}

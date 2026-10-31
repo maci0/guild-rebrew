@@ -6,7 +6,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern unsigned char g_773d75;
 extern float g_664168;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
@@ -18,7 +18,7 @@ void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl fcn_004c5ed0(int, char*, int);
 void __cdecl fcn_00529160(int, int, int, char*);
 void __cdecl fcn_00546190(char*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl fcn_00500d20(char*, char*);
@@ -57,7 +57,7 @@ void __cdecl fcn_0054da10(char* a)
 	flags = 0;
 	p = a + 0xc4;
 	do {
-		if (fcn_00508e40(*(int*) p) != 0) {
+		if (gm_LookupEntityRecordById(*(int*) p) != 0) {
 			break;
 		}
 		n++;
@@ -96,7 +96,7 @@ void __cdecl fcn_0054da10(char* a)
 				p = a + 0xc4;
 				for (i = 4; i != 0; i--) {
 					if (*(int*) p != -1) {
-						e = fcn_00508e40(*(int*) p);
+						e = gm_LookupEntityRecordById(*(int*) p);
 						if (e != 0 && *(int*) (e + 0x184) != 0) {
 							char gest[3][0x20] = {
 								"gestik/kopf_kratzen",
@@ -143,7 +143,7 @@ void __cdecl fcn_0054da10(char* a)
 		i = 0;
 		do {
 			if (*(int*) p != -1) {
-				e = fcn_00508e40(*(int*) p);
+				e = gm_LookupEntityRecordById(*(int*) p);
 				if (e != 0 && *(int*) (e + 0x184) != 0
 				    && *(int*) (*(int*) (e + 0x184) + 0x128) != 0) {
 					fcn_00500bb0(a + 0x52, 0, 4, 0);
@@ -165,7 +165,7 @@ void __cdecl fcn_0054da10(char* a)
 		p = a + 0xc4;
 		do {
 			if (*(int*) p != -1) {
-				e = fcn_00508e40(*(int*) p);
+				e = gm_LookupEntityRecordById(*(int*) p);
 				if (e != 0 && *(int*) (e + 0x184) != 0
 				    && *(int*) (*(int*) (e + 0x184) + 0x128) != 0) {
 					return;
@@ -187,7 +187,7 @@ void __cdecl fcn_0054da10(char* a)
 		p = a + 0xc4;
 		for (i = 4; i != 0; i--) {
 			if (*(int*) p != -1) {
-				e = fcn_00508e40(*(int*) p);
+				e = gm_LookupEntityRecordById(*(int*) p);
 				if (e != 0 && *(int*) (e + 0x184) != 0) {
 					fcn_00529160(0, 0, *(unsigned short*) e, a);
 					fcn_004c5c80(*(int*) p);
@@ -218,7 +218,7 @@ void __cdecl fcn_0054da10(char* a)
 	p = a + 0xc4;
 	for (i = 4; i != 0; i--) {
 		if (*(int*) p != -1) {
-			e = fcn_00508e40(*(int*) p);
+			e = gm_LookupEntityRecordById(*(int*) p);
 			if (e != 0 && *(int*) (e + 0x184) != 0) {
 				base = (int) ((float) *(unsigned char*) (e + 0x82) * g_664168
 				    + 1.0f);
@@ -245,7 +245,7 @@ void __cdecl fcn_0054da10(char* a)
 	}
 	if (hits != 0) {
 		dmg = fcn_0050b750(damage, g_773d75);
-		fcn_0051af00(buf, 0x1a6a, dmg);
+		io_FormatTextBuffer(buf, 0x1a6a, dmg);
 		he_MessageBoxQuickjump(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (a + 8) * 0x21c),
 		    -1, buf, 0, 0x5ec, *(int*) (ent + 1), -1, 0, 0);
 		fcn_004c5150(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (a + 8) * 0x21c),

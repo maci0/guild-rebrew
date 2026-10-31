@@ -1,4 +1,4 @@
-extern char* __cdecl fcn_00508e40(int);
+extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl fcn_00529160(int, int, int, int);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
@@ -56,7 +56,7 @@ void __cdecl fcn_00578ed0(char* a0)
 	int ref;
 	int idx;
 
-	ent = fcn_00508e40(*(int*) (a0 + 0xac));
+	ent = gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
 	state = *(int*) (a0 + 0x70);
 	if (state == -1 || state == -2) {
 		if (ent != 0)
@@ -89,7 +89,7 @@ void __cdecl fcn_00578ed0(char* a0)
 		*(int*) (a0 + 0x70) += 1;
 		return;
 	case 2:
-		e = fcn_00508e40(*(int*) (a0 + 0xac));
+		e = gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
 		if (e == 0) {
 			*(int*) (a0 + 0x70) = -1;
 			return;
@@ -149,7 +149,7 @@ void __cdecl fcn_00578ed0(char* a0)
 		*(int*) (a0 + 0x70) += 1;
 		return;
 	case 3:
-		e = fcn_00508e40(*(int*) (a0 + 0xac));
+		e = gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
 		if (e == 0 || *(int*) (e + 0x16c) == 0) {
 			*(int*) (a0 + 0x70) = -1;
 			return;
@@ -159,7 +159,7 @@ void __cdecl fcn_00578ed0(char* a0)
 		*(int*) (a0 + 0x70) += 1;
 		return;
 	case 4:
-		e = fcn_00508e40(*(int*) (a0 + 0xac));
+		e = gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
 		if (e == 0 || *(int*) (e + 0x16c) == 0 ||
 		    *(int*) (*(int*) (e + 0x184) + 0x128) == 0) {
 			*(int*) (a0 + 0x70) = -1;

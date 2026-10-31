@@ -17,7 +17,7 @@ typedef struct Ent {
 extern char g_7f4ca0[];
 #include "client_packet_builder.h"
 
-void __cdecl fcn_0051af00(char*, int);
+void __cdecl io_FormatTextBuffer(char*, int);
 int __cdecl fcn_005bdc30(int, int*, char*, int, int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
@@ -37,7 +37,7 @@ int __cdecl fcn_005dce00(char* cmd, char* arg)
 	if (cmd[2] == 6) {
 		memset(desc, 0, sizeof(desc));
 		memset(desc + 7, 0xff, 8 * sizeof(int));
-		fcn_0051af00(name, 0x9b);
+		io_FormatTextBuffer(name, 0x9b);
 		desc[0] = 1;
 		desc[1] = -1;
 		desc[4] = 4;

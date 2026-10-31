@@ -13,7 +13,7 @@ typedef struct
 	char* xb4;
 } Stats;
 
-extern char* __cdecl fcn_00508e40(int);
+extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl fcn_00529160(int, int, int, char*);
 extern int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 extern int __cdecl fcn_004c5620(int, char*);
@@ -79,7 +79,7 @@ void __cdecl fcn_0056b700(char* obj)
 			*(int*) (obj + 0xe4) = 0;
 			for (i = 8; i != 0; i--) {
 				if (*(int*) iter != -1) {
-					rec = fcn_00508e40(*(int*) iter);
+					rec = gm_LookupEntityRecordById(*(int*) iter);
 					if (rec != 0) {
 						fcn_00529160(0, 0, *(unsigned short*) rec, obj);
 						fcn_004c5da0(*(int*) iter, -1, -1, obj + 0xac, 1, (char*) 0x6a6aa0);
@@ -133,7 +133,7 @@ void __cdecl fcn_0056b700(char* obj)
 			iter = obj + 0x8c;
 			for (i = 8; i != 0; i--) {
 				if (*(int*) iter != -1) {
-					rec = fcn_00508e40(*(int*) iter);
+					rec = gm_LookupEntityRecordById(*(int*) iter);
 					if (rec != 0) {
 						if (ent != 0)
 							fcn_004c5da0(*(int*) (rec + 4), *(int*) (ent + 1), -1, 0, 0, (char*) 0x6a6aa0);
@@ -164,7 +164,7 @@ label_56b858:
 		for (i = 0, iter = obj + 0x8c; i < 8; i++, iter += 4) {
 			if (*(int*) iter == -1)
 				continue;
-			cur = fcn_00508e40(*(int*) iter);
+			cur = gm_LookupEntityRecordById(*(int*) iter);
 			if (cur == 0)
 				continue;
 			cur = *(char**) (*(int*) (cur + 0x184) + 0x34);

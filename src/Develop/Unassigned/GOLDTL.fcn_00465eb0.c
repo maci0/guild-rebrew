@@ -32,7 +32,7 @@ int __cdecl fcn_00465eb0(int id, int win)
 		return 0;
 	}
 	if (w->i[0x2c / 4] >= 0x180) {
-		fcn_0041d9e0(s_67d420);
+		ReportClientMessage(s_67d420);
 		return 0;
 	}
 	fcn_0046f650(id, w);

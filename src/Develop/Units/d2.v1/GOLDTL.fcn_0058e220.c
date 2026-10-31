@@ -20,7 +20,7 @@ extern char g_6a97b8[];
 
 void __cdecl fcn_0058e4a0(int n, int* a, int* b, int base);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int a1, int idx);
+void __cdecl d2_SetOverlayAnimation(int a1, int idx);
 void __cdecl fcn_00471db0(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00426fd0(char* name);
@@ -31,7 +31,7 @@ int __cdecl fcn_004273c0(void);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
 int __cdecl fcn_00423460(int);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_00519190(int);
+void __cdecl io_AppendText(int);
 void __cdecl fcn_00471e30(int);
 
 typedef struct { char pad[0x48]; int x48; int x4c; } S58;
@@ -55,7 +55,7 @@ int __cdecl fcn_0058e220(int a1, S58* a2)
 
 	fcn_0058e4a0(8, snd, ids, 0x40d7);
 	w = fcn_00470820(0, 0, g_6a97f8);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471db0(w, 1);
 	d2_SetForm(w, 0);
 	h = fcn_00426fd0(g_6a97d4);
@@ -81,7 +81,7 @@ int __cdecl fcn_0058e220(int a1, S58* a2)
 			while (fcn_00423460(wait[j]) == 0)
 				fcn_005373e0(0, 0x743c7);
 			d2_SetForm(w, 0);
-			fcn_00519190(snd[j]);
+			io_AppendText(snd[j]);
 			while (fcn_00423460(wait[j]) != 0)
 				fcn_005373e0(0, 0x743c7);
 		}
@@ -104,7 +104,7 @@ int __cdecl fcn_0058e220(int a1, S58* a2)
 					g_774654 = 1;
 				} else {
 					d2_SetForm(w, 0);
-					fcn_00519190(snd[i]);
+					io_AppendText(snd[i]);
 					i++;
 				}
 			}

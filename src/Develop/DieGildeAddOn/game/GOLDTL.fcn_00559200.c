@@ -5,7 +5,7 @@ extern unsigned char g_773d75;
 
 void __cdecl fcn_00500bb0(int, int, int, int);
 void __cdecl fcn_005091d0(int*, int*);
-int __cdecl fcn_0051af00(char*, char*, ...);
+int __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_0064d530(void*, void*, int);
 void __cdecl fcn_00402340(void*, int);
 int __cdecl fcn_0050b710(int);
@@ -43,7 +43,7 @@ void __cdecl fcn_00559200(int a0)
 	*(unsigned short*) (rec + 4) = 0xcf;
 	i = 0;
 	do {
-		fcn_0051af00(text, (char*) 0x679060, i + 0x16b7);
+		io_FormatTextBuffer(text, (char*) 0x679060, i + 0x16b7);
 		fcn_0064d530(list[i], text + 0xc, 0x18);
 		list[i][0x17] = 0;
 		i += 1;

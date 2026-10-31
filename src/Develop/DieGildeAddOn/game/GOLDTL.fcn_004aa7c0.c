@@ -1,6 +1,6 @@
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_0055c0a0(char* a, char* b);
 double __cdecl fcn_0050f980(int a, int b, int c);
 
@@ -26,7 +26,7 @@ int __cdecl fcn_004aa7c0(char* e, char* res, char* out)
 	i = gm_RandomMod(n);
 	k = n;
 	do {
-		p = fcn_00508e40(ids[i]);
+		p = gm_LookupEntityRecordById(ids[i]);
 		if (!p) {
 			return 0;
 		}

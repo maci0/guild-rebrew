@@ -28,19 +28,19 @@ void __cdecl fcn_0042f240(VFS_FILE_42ff50*, struct VFS_DIR*, struct VFS_DIR*, ch
 void __cdecl fcn_0042e540(char*);
 void __cdecl fcn_0042e570(char*);
 void __cdecl fcn_0042e520(char*);
-void* __cdecl fcn_00464650(char*);
+void* __cdecl unzOpen(const char* path);
 int __cdecl unzClose(char*);
-int __cdecl fcn_00465790(char*, unsigned long, unsigned long);
-int __cdecl fcn_00464a90(char*, unsigned long*, char*, unsigned long, void*, void*, void*, void*);
-int __cdecl fcn_00465020(char*);
-int __cdecl fcn_00464eb0(char*);
+int __cdecl unzGoToFilePos(void* file, unsigned long pos, unsigned long num);
+int __cdecl unzGetCurrentFileInfo(void* file, unsigned long* info, char* name, unsigned long name_size, void* extra, unsigned long extra_size, char* comment, unsigned long comment_size);
+int __cdecl unzOpenCurrentFile(void* file);
+int __cdecl unzGoToNextFile(void* file);
 void* __cdecl m_PoolAlloc(void*, int, int);
 void* __cdecl gzopen(char*, char*);
 void* __cdecl fopen(char*, char*);
 char* __cdecl strupr(char*);
 int __cdecl fcn_0042fcd0(char*, struct VFS_DIR*);
 void __cdecl fcn_0042ed00(char*, struct VFS_DIR*, int, int, int, int, int);
-void __cdecl fcn_0041d9e0(char*);
+void __cdecl ReportClientMessage(char*);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x0042ff50 */
@@ -102,13 +102,13 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 			fcn_0042f240(0, file->source, 0, arch);
 			strcat(arch, (char*) 0x6790c4 + file->archive * 6);
 			fcn_0042e570(arch);
-			zip = (char*) fcn_00464650(arch);
+			zip = (char*) unzOpen(arch);
 			if (zip) {
 				fcn_0042f240(file, dir, file->source, entry);
 				strupr(entry);
 				if ((unsigned long) file->stamp > 0) {
-					fcn_00465790(zip, file->stamp, file->packed);
-					if (fcn_00464a90(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
+					unzGoToFilePos(zip, file->stamp, file->packed);
+					if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
 						strupr(name);
 						fcn_0042e540(name);
 						if (info[8] > 0 && strcmp(entry, name) == 0)
@@ -117,18 +117,18 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 					goto close_zip;
 				}
 				do {
-					if (fcn_00464a90(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
+					if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
 						strupr(name);
 						fcn_0042e540(name);
 						if (info[8] > 0 && strcmp(entry, name) == 0)
 							goto open_member;
 					}
-				} while (fcn_00464eb0(zip) == 0);
+				} while (unzGoToNextFile(zip) == 0);
 close_zip:
 				unzClose(zip);
 				goto not_found;
 open_member:
-				err = fcn_00465020(zip);
+				err = unzOpenCurrentFile(zip);
 				if (err != 0)
 					goto close_zip;
 				stream = (char*) m_PoolAlloc((void*) 0x6b7fe4, 0x140, 0x10);
@@ -182,7 +182,7 @@ write_path:
 			file = (VFS_FILE_42ff50*) fcn_0042f120(name, root, &dir);
 			if (!file) {
 				sprintf(entry, "vfs_Tfopen: Could write to \"%s\"!!", path);
-				fcn_0041d9e0(entry);
+				ReportClientMessage(entry);
 				return stream;
 			}
 		}

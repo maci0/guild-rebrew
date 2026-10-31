@@ -25,7 +25,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_005101e0(char*, int, int, int);
 int __cdecl _ftol(void);
 int __cdecl gm_AccumulateTyped2(char*);
-void __cdecl fcn_0051af00(char*, int, char*);
+void __cdecl io_FormatTextBuffer(char*, int, char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_004c6090(char*, int, int, int);
@@ -76,7 +76,7 @@ void __cdecl fcn_0055cc80(char* self)
 		t = _ftol();
 		src = gm_AccumulateTyped2((char*) 0x7f4ca0 + slot * 0x21c);
 		if (t > src) {
-			fcn_0051af00(buf, 0x1a41, (char*) packet);
+			io_FormatTextBuffer(buf, 0x1a41, (char*) packet);
 			he_MessageBoxQuickjump(*(int*) (0x7f4ca4 + slot * 0x21c), *(int*) (self + 0x10), buf, 0, 0x5f2, *(int*) &packet->handle, *(int*) (self + 0xb4), 0, 0);
 			fcn_00546190(self);
 			return;
@@ -131,7 +131,7 @@ void __cdecl fcn_0055cc80(char* self)
 			t = _ftol();
 			*(int*) (self + 0xb0) = *(int*) (self + 0xb0) - 1;
 			if (*(unsigned char*) (0x7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 6 || *(unsigned char*) (0x7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
-				fcn_0051af00(buf, 0x1bb1, (char*) packet);
+				io_FormatTextBuffer(buf, 0x1bb1, (char*) packet);
 				he_MessageBoxQuickjump(*(int*) (0x7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(int*) &packet->handle, buf, 0, 0x5f2, *(int*) &packet->handle, *(int*) (self + 0xb4), 0, 0x6a6278);
 			}
 			fcn_004c51a0(*(int*) (0x7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(int*) (answer + 2), t, *(unsigned char*) 0x773d75);

@@ -1,6 +1,3 @@
-char g_68b400[3] = {
-    0x54, 0x01, 0x00,
-};
 extern char g_68b400[];
 
 /* ADDRESS: GOLD 0x004cd9d0 */

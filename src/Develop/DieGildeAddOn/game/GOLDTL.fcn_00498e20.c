@@ -35,14 +35,8 @@ int __cdecl fcn_00498e20(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	if (a1 != 0 || e[2] == 3) {
 		return 0;
 	}
-	if (a3 == 0) {
-		if (o1->kind != 0) {
-			return 0;
-		}
-	} else {
-		if (o1->kind == 0) {
-			return 0;
-		}
+	if (o1->kind != 0) {
+		return 0;
 	}
 	f.mask = 0xa07d7bb0;
 	f.b = 1;

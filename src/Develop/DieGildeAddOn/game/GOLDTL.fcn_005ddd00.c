@@ -18,9 +18,9 @@ typedef struct {
 extern __int64 g_666018;
 extern int g_66601c;
 
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
@@ -37,7 +37,7 @@ int __cdecl fcn_005ddd00(char* e, char* a2)
 	if (e[2] == 6) {
 		memset(&req, 0, sizeof(req));
 		memset(&req.pad[2], -1, 0x20);
-		fcn_0051af00(text, 0x9c);
+		io_FormatTextBuffer(text, 0x9c);
 		req.c = (*(int*)&g_666018);
 		req.a = 0;
 		req.size = 0x400;
@@ -49,11 +49,11 @@ int __cdecl fcn_005ddd00(char* e, char* a2)
 		}
 		req.pad[0] = 3;
 		*(short*) &req.pad[2] = *(short*) a;
-		fcn_0051af00(text, 0x9e);
+		io_FormatTextBuffer(text, 0x9e);
 		b = fcn_005cd440(&req, text, 0, 0);
 	} else {
-		a = fcn_00508e40(*(int*) (a2 + 4));
-		b = fcn_00508e40(*(int*) (a2 + 8));
+		a = gm_LookupEntityRecordById(*(int*) (a2 + 4));
+		b = gm_LookupEntityRecordById(*(int*) (a2 + 8));
 		if (a == 0) {
 			goto done;
 		}
@@ -63,11 +63,11 @@ int __cdecl fcn_005ddd00(char* e, char* a2)
 		fcn_004c54c0(*(int*) (a + 4), *(int*) (b + 4), -0x19, result);
 		fcn_004c54c0(*(int*) (b + 4), *(int*) (a + 4), -0x19, result);
 		if (a[2] == 6 || a[2] == 7) {
-			fcn_0051af00(msg, 0xfee, *(unsigned short*) b);
+			io_FormatTextBuffer(msg, 0xfee, *(unsigned short*) b);
 			fcn_00545d40(*(int*) (a + 4), -1, msg, 0, 0x5fb, 0);
 		}
 		if (b[2] == 6 || b[2] == 7) {
-			fcn_0051af00(msg, 0xfee, *(unsigned short*) a);
+			io_FormatTextBuffer(msg, 0xfee, *(unsigned short*) a);
 			fcn_00545d40(*(int*) (b + 4), -1, msg, 0, 0x5fb, 0);
 		}
 	}

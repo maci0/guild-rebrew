@@ -65,7 +65,7 @@ extern int g_7749d4;
 extern int g_7749d8;
 extern int g_7dc424;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 
 struct unit* __cdecl fcn_00545fe0(struct spawn* t)
 {
@@ -80,7 +80,7 @@ struct unit* __cdecl fcn_00545fe0(struct spawn* t)
 		return 0;
 	}
 	if (t->owner != -1) {
-		e = fcn_00508e40(t->owner);
+		e = gm_LookupEntityRecordById(t->owner);
 		if (e == 0) {
 			return 0;
 		}

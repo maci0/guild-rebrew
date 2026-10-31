@@ -3,13 +3,13 @@ extern int g_100f1dc;
 extern int g_aed32c;
 extern unsigned char g_773d75;
 
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00500cb0(void*, void*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00519190(int, ...);
+void __cdecl io_AppendText(int, ...);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, int, char*, int, int);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004c4510(char*, int);
@@ -37,8 +37,8 @@ void __cdecl fcn_00569a90(char* a)
 	int pkt;
 	int entity;
 
-	v3 = fcn_00508e40(*(int*) (a + 0xac));
-	v4 = fcn_00508e40(*(int*) (a + 0xb0));
+	v3 = gm_LookupEntityRecordById(*(int*) (a + 0xac));
+	v4 = gm_LookupEntityRecordById(*(int*) (a + 0xb0));
 	if (v3 != 0 && v4 != 0) {
 		if (*(char*) ((char*) v3 + 2) != 6 && *(char*) ((char*) v3 + 2) != 7) {
 			if (*(int*) (a + 0x70) == 0 || *(int*) (a + 0x70) == 2) {
@@ -51,7 +51,7 @@ void __cdecl fcn_00569a90(char* a)
 		case 0:
 			fcn_00545670(a, 0, 0, "locations\\diebesgilde\\Diebesgilde_Loesegeld_Msg", 0x5ec);
 			d2_SetForm(*(int*) (*(int*) (a + 0x74) + 8), 0);
-			fcn_00519190(0x19cb, *(int*) (a + 0xb4));
+			io_AppendText(0x19cb, *(int*) (a + 0xb4));
 			(*(int*) (a + 0x70))++;
 			return;
 		case 1:
@@ -62,7 +62,7 @@ void __cdecl fcn_00569a90(char* a)
 			if (g_100f1dc == 2) {
 				v[2] = -1;
 				pkt = gm_StartFilteredEntitySearch(1, 1, *(int*) (a + 0x10));
-				fcn_0051af00(buf, 0x19d4, *(unsigned short*) v3,
+				io_FormatTextBuffer(buf, 0x19d4, *(unsigned short*) v3,
 				    *(int*) (a + 0xb4), *(unsigned short*) v3);
 				fcn_00545d40(*(int*) ((char*) v4 + 4), *(int*) ((char*) v4 + 4),
 				    buf, 0, 0x5fa, 0);
@@ -97,7 +97,7 @@ void __cdecl fcn_00569a90(char* a)
 				pkt = gm_StartFilteredEntitySearch(1, 1, *(int*) (a + 0x10));
 				if (pkt == 0)
 					break;
-				fcn_0051af00(buf, 0x19d5, *(unsigned short*) v3);
+				io_FormatTextBuffer(buf, 0x19d5, *(unsigned short*) v3);
 				entity = *(int*) ((char*) v4 + 4);
 				he_MessageBoxQuickjump(entity, entity, buf, 0, 0x5f0, *(int*) (pkt + 1),
 				    -1, 0, 0);
@@ -110,7 +110,7 @@ void __cdecl fcn_00569a90(char* a)
 				pkt = gm_StartFilteredEntitySearch(1, 1, *(int*) (a + 0x10));
 				if (pkt == 0)
 					break;
-				fcn_0051af00(buf, 0x19d4, *(unsigned short*) v3,
+				io_FormatTextBuffer(buf, 0x19d4, *(unsigned short*) v3,
 				    *(int*) (a + 0xb4), *(unsigned short*) v3);
 				fcn_00545d40(*(int*) ((char*) v4 + 4), *(int*) (a + 0x10),
 				    buf, 0, 0x5fa, 0);
@@ -135,7 +135,7 @@ void __cdecl fcn_00569a90(char* a)
 				*(int*) (a + 0x70) = 3;
 				return;
 			}
-			fcn_0051af00(buf, 0x19d5, *(unsigned short*) v3);
+			io_FormatTextBuffer(buf, 0x19d5, *(unsigned short*) v3);
 			entity = *(int*) ((char*) v4 + 4);
 			fcn_00545d40(entity, entity, buf, 0, 0x5fb, 0);
 			fcn_00546190(a);

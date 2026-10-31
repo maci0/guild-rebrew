@@ -6,7 +6,7 @@ extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_00500bb0(char*, int, int, int);
@@ -31,7 +31,7 @@ void __cdecl fcn_005513d0(char* a0)
 
 	v20 = -1;
 	entry = g_7f4ca0 + *(unsigned short*) (a0 + 8) * 0x21c;
-	rec = fcn_00508e40(*(int*) (entry + 0x5c));
+	rec = gm_LookupEntityRecordById(*(int*) (entry + 0x5c));
 	if (rec == 0 || rec[8] == 0 || entry[8] == 0)
 		goto tail;
 	state = *(int*) (a0 + 0x70);
@@ -74,7 +74,7 @@ void __cdecl fcn_005513d0(char* a0)
 	count = 0;
 	ids = (int*) (entry + 0x68);
 	for (i = 0; i < 5; i++) {
-		if (ids[i] != -1 && fcn_00508e40(ids[i]) != 0)
+		if (ids[i] != -1 && gm_LookupEntityRecordById(ids[i]) != 0)
 			count++;
 	}
 	if (count != 5) {

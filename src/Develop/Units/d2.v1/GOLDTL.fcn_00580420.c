@@ -7,7 +7,7 @@ extern char g_6811b0[];
 
 void __cdecl fcn_00533a40(char*);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(char*, ...);
+int __cdecl io_AppendText(char*, ...);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_00423460(int);
 void __cdecl fcn_004237f0(int, int);
@@ -19,8 +19,8 @@ void __cdecl fcn_00580420(void)
 	if (g_665f08[6] != 0 && *(int*) (g_665f08[6] + 0x1c) != 0) {
 		fcn_00533a40(g_6b5c60);
 		d2_SetForm(g_665f08[13], 0);
-		fcn_00519190(g_6811b0);
-		fcn_00519190(*(char**) (g_665f08[6] + 0x1c));
+		io_AppendText(g_6811b0);
+		io_AppendText(*(char**) (g_665f08[6] + 0x1c));
 		fcn_00471af0(g_665f08[13], 1);
 		if (*(int*) (g_665f08[6] + 0x20) != 0) {
 			if (g_665f08[5] != 0) {

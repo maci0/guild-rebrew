@@ -5,7 +5,7 @@ typedef struct Stat {
 
 int __cdecl fcn_00493be0(char* p);
 void __cdecl fcn_004f4830(int a, Stat* st);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x00493ce0 */
@@ -20,7 +20,7 @@ int __cdecl fcn_00493ce0(unsigned short* home, char* p)
 	r = fcn_00493be0(p);
 	fcn_004f4830(0, &st);
 	f = (5.0f - st.v[6]) * 0.1f + 0.7f;
-	q = fcn_00508e40(*(int*) (p + 0x18));
+	q = gm_LookupEntityRecordById(*(int*) (p + 0x18));
 	d = fcn_0050f980(*(unsigned short*) q, *home, 1);
 	if (!(d > f * 66.666f)) {
 		if (d > f * 33.333f) {

@@ -23,8 +23,8 @@ void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472830(int, int);
 int __cdecl fcn_0046f940(int, char*);
-int __cdecl fcn_00473a90(int, int);
-void __cdecl fcn_00519190(int, ...);
+int __cdecl d2_SetOverlayAnimation(int, int);
+void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl fcn_00532ef0(void);
@@ -103,7 +103,7 @@ int __cdecl fcn_0059b260(int a0)
 	fcn_00471b60(h);
 	fcn_0052a0c0(a0, 0);
 	d2_SetForm(h, 3);
-	fcn_00519190(0xc7);
+	io_AppendText(0xc7);
 	fcn_00594340();
 	*(int*) 0x779160 = 0;
 	count = 1;
@@ -116,7 +116,7 @@ int __cdecl fcn_0059b260(int a0)
 	fcn_00533dc0(g_772514, 0x70b, 0x742);
 	fcn_00533f40(0x270, 0x15e, g_772514, fcn_00472830(h, 2), 0x78, &id2, &id1, &id3);
 	*(int*) (g_1015ea0 + id3 * 0x2f4 + 0x84) = 0x54;
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	do {
 		d2_SetForm(h, 2);
 		p1 = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, 0xff);

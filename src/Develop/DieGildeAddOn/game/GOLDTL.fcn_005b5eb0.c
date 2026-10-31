@@ -11,8 +11,8 @@ int __cdecl fcn_0046fac0(int a1, int a2, char* text, int win);
 char* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 char* __cdecl gm_EntityAccumulate(int entity);
 int __cdecl fcn_0050c490(char* a, void** out);
-void __cdecl fcn_00519190(int a1, ...);
-void __cdecl fcn_0051af00(char* buf, char* fmt, ...);
+void __cdecl io_AppendText(int a1, ...);
+void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 
 /* ADDRESS: GOLDTL 0x005b5eb0 */
 void __cdecl fcn_005b5eb0(int a0, char* a1)
@@ -34,8 +34,8 @@ void __cdecl fcn_005b5eb0(int a0, char* a1)
         p++;
     } while ((int) p < 0x777ce8);
     d2_SetForm(*(int*) (a0 + 0x234), 1);
-    fcn_00519190(0x6811b0);
-    fcn_00519190(0x1a1f);
+    io_AppendText(0x6811b0);
+    io_AppendText(0x1a1f);
     d2_SetForm(*(int*) (a0 + 0x234), 3);
     v = fcn_0050c490(a1, (void**) 0x777cc4);
     *(int*) 0x777cc0 = v;
@@ -65,14 +65,14 @@ void __cdecl fcn_005b5eb0(int a0, char* a1)
         if (*(int*) (v + 0x24) != 0) {
             name = gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (*(int*) (v + 0x24) + 0xb4));
             if (name != 0) {
-                fcn_0051af00(buf, (char*) 0x1a3e, name);
+                io_FormatTextBuffer(buf, (char*) 0x1a3e, name);
             }
         } else {
             name = gm_EntityAccumulate(v);
             if (*name == 'D') {
                 name = g_773d78;
             }
-            fcn_0051af00(buf, (char*) 0x1a3e, name);
+            io_FormatTextBuffer(buf, (char*) 0x1a3e, name);
         }
         v = fcn_0046fac0(0, x - 0x12, buf, g_772514);
         *(int*) (i * 4 + 0x777cdc) = v;

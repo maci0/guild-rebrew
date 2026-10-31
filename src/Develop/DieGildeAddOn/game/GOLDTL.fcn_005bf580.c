@@ -18,11 +18,11 @@ extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl fcn_005463a0(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_004c5620(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
@@ -37,7 +37,7 @@ void __cdecl fcn_00468bb0(int, int, int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 int __cdecl fcn_00471f80(int);
 int __cdecl gm_WalkEntityChain(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00526010(void*, int, int);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
@@ -70,7 +70,7 @@ int __cdecl fcn_005bf580(char* rec)
 	if (q != 0) {
 		for (;;) {
 			if (*(int*) (q + 0xc4) == *(int*) (rec + 4)) {
-				fcn_0051af00(buf, 0x42c1, *(unsigned short*) rec);
+				io_FormatTextBuffer(buf, 0x42c1, *(unsigned short*) rec);
 				if (fcn_00526120(buf, 0x101) != 0) {
 					*(pos14_7f4c00*) (q + 0x52) = g_7f4c00;
 					*(int*) (q + 0x84) = fcn_004c5620(q, -1);
@@ -83,13 +83,13 @@ int __cdecl fcn_005bf580(char* rec)
 				break;
 		}
 		if (tries > 4) {
-			fcn_0051af00(buf, 0x42c0, 5);
+			io_FormatTextBuffer(buf, 0x42c0, 5);
 			fcn_00526120(buf, 0x104);
 			return 0;
 		}
 	}
 	h = (char*) fcn_00470820(0, 0, "locations\\wohnsitz\\spy");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60((int) h);
 	d2_SetForm((int) h, 0);
 	fcn_005340f0(g_772514);
@@ -120,8 +120,8 @@ int __cdecl fcn_005bf580(char* rec)
 			n = (int) ((float) w2 * *(float*) 0x664138 + f2);
 			n = (int) ((float) n * f);
 			d2_SetForm((int) h, 1);
-			fcn_00519190((int) 0x6811b0);
-			fcn_00519190(0x42b8, n, *(unsigned short*) rec);
+			io_AppendText((int) 0x6811b0);
+			io_AppendText(0x42b8, n, *(unsigned short*) rec);
 			if (g_100f1dc != -1) {
 				if (g_67d370 == sel[0]
 					&& fcn_00526010(tbl, n, *(unsigned char*) 0x773d75) != 0) {
@@ -137,7 +137,7 @@ int __cdecl fcn_005bf580(char* rec)
 					fcn_004c4eb0("spionage");
 					fcn_004c5530(pkt);
 					fcn_004c4ef0("spionage");
-					fcn_0051af00(buf, 0x42bf, *(unsigned short*) rec);
+					io_FormatTextBuffer(buf, 0x42bf, *(unsigned short*) rec);
 					fcn_00526120(buf, 0x100);
 					g_774654 = 1;
 					ret = 1;

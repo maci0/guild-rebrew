@@ -51,7 +51,7 @@ void __cdecl fcn_00436ff0(char* name, int format, struct unk_436ff0** tex, unsig
 		read = vfs_ReadData(buf, size, 1, f);
 		if (read >= size) {
 			sprintf(msg, "Memory size estimate for \"%s\" is too small!", name);
-			fcn_0041d9e0(msg);
+			ReportClientMessage(msg);
 		}
 		CloseVfsStream(f);
 	}

@@ -15,7 +15,7 @@ typedef struct Item_5c99a0 {
 } Item_5c99a0;			/* SIZE 0x38 */
 
 int __cdecl fcn_0046f740();
-int __cdecl fcn_0051af00();
+int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_005c9090();
 int __cdecl fcn_004677e0();
 int __cdecl fcn_00472380();
@@ -142,14 +142,14 @@ int __cdecl fcn_005c99a0(int a0, int a1, int a2, int a3, int a4, int a5)
 			}
 			fcn_0046f740((int) *(short*) (*(int*) 0x772500 + 0x1ebd8) - 0x10 + (x - half), (int) *(short*) (*(int*) 0x772500 + 0x1ebda) - 0x13 + y, items->cw28, *(int*) 0x772514);
 			if (a4 != 7) {
-				fcn_0051af00(buf, 0x6ac964, (-(unsigned int) (*(char*) ((int) obj + 9) != 0) & 10) + 0x114 + (unsigned int) *(unsigned char*) ((int) obj + 0xd), *(unsigned short*) obj);
+				io_FormatTextBuffer(buf, 0x6ac964, (-(unsigned int) (*(char*) ((int) obj + 9) != 0) & 10) + 0x114 + (unsigned int) *(unsigned char*) ((int) obj + 0xd), *(unsigned short*) obj);
 				fcn_005c9090(buf, x, items->y, 0xca, 0x56);
-				fcn_0051af00(buf, 0x6ac95c, *(unsigned short*) items->obj);
+				io_FormatTextBuffer(buf, 0x6ac95c, *(unsigned short*) items->obj);
 			} else {
-				fcn_0051af00(buf, 0x6ac964, (-(unsigned int) (*(char*) ((int) obj + 9) != 0) & 10) + 0x114 + (unsigned int) *(unsigned char*) ((int) obj + 0xd), *(unsigned short*) obj);
+				io_FormatTextBuffer(buf, 0x6ac964, (-(unsigned int) (*(char*) ((int) obj + 9) != 0) & 10) + 0x114 + (unsigned int) *(unsigned char*) ((int) obj + 0xd), *(unsigned short*) obj);
 				fcn_005c9090(buf, x, items->y, 0xca, 0x56);
 				v = (-(unsigned int) (*(char*) ((int) obj + 9) != 0) & 0x28) + 0x253 + (unsigned int) *(unsigned char*) ((int) obj + 0x169);
-				fcn_0051af00(buf, 0x679060, v);
+				io_FormatTextBuffer(buf, 0x679060, v);
 			}
 			fcn_005c9090(buf, x, items->y + 0xf, 0xca, 0x56);
 			if (items->obj != (int*) a5 && *(char*) ((int) items->obj + 2) != 6) {

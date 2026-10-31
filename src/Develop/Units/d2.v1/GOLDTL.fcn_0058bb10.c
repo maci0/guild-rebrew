@@ -65,11 +65,11 @@ extern char g_6a9694[];
 extern char g_6a969c[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(void);
+void __cdecl d2_SetOverlayAnimation(void);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0058b030(char*, SelDlg*);
 void __cdecl fcn_0058b1f0(char*, DialogState*, unsigned int);
 void __cdecl fcn_0058b440(unsigned int, unsigned int*, int, int);
@@ -100,13 +100,13 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 		a0->item2 = 0;
 	}
 	ctx = fcn_00470820(0, 0, g_6a969c);
-	fcn_00473a90();
+	d2_SetOverlayAnimation();
 	fcn_00471b60(ctx);
 	d2_SetForm(ctx, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(ctx, 1);
 	saved = g_772514;
-	fcn_00519190((int) g_6a9694, a2);
+	io_AppendText((int) g_6a9694, a2);
 	d2_SetForm(ctx, 2);
 	d2_SetForm(ctx, 3);
 	d2_SetForm(ctx, 6);

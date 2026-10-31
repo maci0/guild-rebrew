@@ -1,16 +1,13 @@
 extern char g_774a80[];
-char g_6ab4f0[25] = {
-    0x5f, 0x4e, 0x41, 0x43, 0x48, 0x52, 0x49, 0x43, 0x48, 0x54, 0x45, 0x4e, 0x5f, 0x46, 0x52, 0x49,
-    0x45, 0x44, 0x48, 0x4f, 0x46, 0x5f, 0x31, 0x33, 0x00,
-};
+char g_6ab4f0[] = "_NACHRICHTEN_FRIEDHOF_13";
 
 
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_0051af00(void*, int, int);
+void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
 void __cdecl fcn_005b2fb0(void* a1)
 {
-	fcn_0051af00(g_774a80, 0x40ac, (gm_RandomMod(3) & 0xffff) + 0x40a9);
+	io_FormatTextBuffer(g_774a80, 0x40ac, (gm_RandomMod(3) & 0xffff) + 0x40a9);
 	fcn_00545d40(*(int*) ((char*) a1 + 4), -1, g_774a80, 1, 0x5fb, g_6ab4f0);
 }

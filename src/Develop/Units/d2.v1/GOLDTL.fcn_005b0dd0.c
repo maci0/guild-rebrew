@@ -22,7 +22,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 void __cdecl fcn_005b01c0(int, int);
 void __cdecl fcn_0046f540(int);
-int __cdecl fcn_00519190(char*, ...);
+int __cdecl io_AppendText(char*, ...);
 
 int __cdecl fcn_005b0dd0(MsgBox* m)
 {
@@ -56,7 +56,7 @@ int __cdecl fcn_005b0dd0(MsgBox* m)
 	if (m->text != 0) {
 		d2_SetForm(m->dlg, 1);
 		fcn_0046f540(g_772514);
-		fcn_00519190(m->text);
+		io_AppendText(m->text);
 	}
 	if (m->flags & 0x10) {
 		d2_SetForm(m->dlg, 2);

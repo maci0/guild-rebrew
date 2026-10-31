@@ -38,7 +38,7 @@ extern Rec34_7f3f00 g_7f3f00[];
 int __cdecl fcn_00470820(int a, int b, int c);
 void __cdecl fcn_00471b60(int h);
 void __cdecl d2_SetForm(int h, int mode);
-void __cdecl fcn_00519190(char* fmt, int a, int b);
+void __cdecl io_AppendText(char* fmt, int a, int b);
 int __cdecl fcn_0050e830(unsigned char* a, unsigned short* b, int w, int h);
 void __cdecl fcn_00471e30(int h);
 void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b);
@@ -56,9 +56,9 @@ int __cdecl fcn_0050f780(int arg, unsigned char* a, unsigned short* b)
 	s = &((Slot*)g_1015f40)[g_1038150[g_7f4c10].owner];
 	d2_SetForm(0, 1);
 	if (*b == 0xfd) {
-		fcn_00519190(g_699a9c, 0x19, *a * 14 + 0x48e);
+		io_AppendText(g_699a9c, 0x19, *a * 14 + 0x48e);
 	} else {
-		fcn_00519190(g_699a9c, 0x19, *b * 2 + 0x9a8);
+		io_AppendText(g_699a9c, 0x19, *b * 2 + 0x9a8);
 	}
 	d2_SetForm(0, 3);
 	if (fcn_0050e830(a, b, s->width, s->height)) {

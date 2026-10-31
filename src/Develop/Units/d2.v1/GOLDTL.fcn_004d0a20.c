@@ -24,7 +24,7 @@ void __cdecl ResetDisplayCounters(void);
 void __cdecl fcn_00473690(int, int);
 void __cdecl d2_SetElementValue(int, ...);
 float __cdecl fcn_004ff040(char*);
-void __cdecl fcn_0051af00(char*, char*, ...);
+void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_004ce5c0(char*);
 int __cdecl fcn_0046f740(int, int, int, int);
@@ -68,7 +68,7 @@ void __cdecl fcn_004d0a20(void)
 				} else {
 					d2_SetElementValue(q->icon, 0);
 				}
-				fcn_0051af00(buf, (char*) 0x68b838, *(unsigned short*) q->unit,
+				io_FormatTextBuffer(buf, (char*) 0x68b838, *(unsigned short*) q->unit,
 					(int) (fcn_004ff040(q->unit) * *(double*) 0x662c38));
 				fcn_0046f940(q->text, buf);
 				r = (int*) fcn_004ce5c0(q->unit);

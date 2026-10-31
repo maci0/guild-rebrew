@@ -17,7 +17,7 @@ void __cdecl fcn_00471b60(int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0046f740(int, int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 double __cdecl eval_ObjektPreis2Credits(int, int);
 
 int __cdecl fcn_00591190(int id)
@@ -43,18 +43,18 @@ int __cdecl fcn_00591190(int id)
 	}
 	d2_SetForm(0, 2);
 	fcn_0046f740(0, 0, id + 0xdf, g_772514);
-	fcn_00519190(id * 2 + 0x9a9);
+	io_AppendText(id * 2 + 0x9a9);
 	d2_SetForm(0, 1);
-	fcn_00519190(id * 2 + 0x9a8);
+	io_AppendText(id * 2 + 0x9a8);
 	rec = lpObjektePROT + id * 65;
 	d2_SetForm(0, 3);
 	if (rec[0x40] != 0) {
-		fcn_00519190(0x21, (unsigned char) rec[0x40]);
+		io_AppendText(0x21, (unsigned char) rec[0x40]);
 	} else {
 		f = (float)(g_7747b4 * 0.25 + 0.5);
-		fcn_00519190(0x23, (int) (eval_ObjektPreis2Credits(id, 100) * f));
+		io_AppendText(0x23, (int) (eval_ObjektPreis2Credits(id, 100) * f));
 	}
-	fcn_00519190(0x20, *(int*) (rec + 0x22));
+	io_AppendText(0x20, *(int*) (rec + 0x22));
 	sel = ((unsigned char*)g_7746c4);
 	if (sel == 0) {
 		sel = g_7746c8;
@@ -69,13 +69,13 @@ int __cdecl fcn_00591190(int id)
 				a = (unsigned char) r[k + 0x1a3];
 				b = (unsigned char) r[k + 0x1e3];
 				if (a != 0 && a != -1 && a != 0xff) {
-					fcn_00519190(0x24);
+					io_AppendText(0x24);
 					if (a == 3) {
-						fcn_00519190((int) "+%a %s$N", b, 0xf9e);
+						io_AppendText((int) "+%a %s$N", b, 0xf9e);
 					} else if (a == 0x24) {
-						fcn_00519190((int) "+%i %s$N", b, 0xfe0);
+						io_AppendText((int) "+%i %s$N", b, 0xfe0);
 					} else {
-						fcn_00519190((int) "%i%% %s$N", b, a * 2 + 0xf98);
+						io_AppendText((int) "%i%% %s$N", b, a * 2 + 0xf98);
 					}
 				}
 				break;

@@ -13,7 +13,7 @@ extern char g_7e1ae0[]; /* runtime path root */
 extern char g_67f0ac[]; /* %sgebaeude/*%s.ogr */
 extern char g_68de2c[]; /* could not find a free place */
 
-void __cdecl fcn_0041d9e0(const char*);
+void __cdecl ReportClientMessage(const char*);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00455350(char*, char*, int*);
@@ -23,7 +23,7 @@ void __cdecl fcn_004ea4b0(void*, unsigned int);
 void __cdecl fcn_004ea560(void*, unsigned int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl fcn_00597ff0(int, char*);
 int __cdecl fcn_00598150(char*, int*);
@@ -136,7 +136,7 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 				i = 0;
 				while (rec == 0) {
 					if (n <= i) {
-						fcn_0041d9e0(g_68de2c);
+						ReportClientMessage(g_68de2c);
 						return;
 					}
 					if (ids[i] != 0) {
@@ -189,7 +189,7 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 				existing = 0;
 				value = 0;
 				if (types[1] != -1 &&
-				    (existing = fcn_00508e40(types[1])) != 0) {
+				    (existing = gm_LookupEntityRecordById(types[1])) != 0) {
 					value = gm_WalkEntityChain(*(unsigned short*) existing);
 				}
 				best = 0;

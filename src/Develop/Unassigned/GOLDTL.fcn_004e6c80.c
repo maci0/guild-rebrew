@@ -1,10 +1,7 @@
-char g_68d6bc[20] = {
-    0x63, 0x75, 0x74, 0x5f, 0x67, 0x65, 0x74, 0x72, 0x61, 0x6e, 0x64, 0x73, 0x65, 0x65, 0x64, 0x3a,
-    0x20, 0x25, 0x69, 0x00,
-};
+char g_68d6bc[] = "cut_getrandseed: %i";
 extern char g_68d6bc[];
-extern unsigned int g_9b0820;
-extern unsigned int g_9b0820;
+extern unsigned int cut_RandomSeed;
+extern unsigned int cut_RandomSeed;
 /* fcn_004e6c80 — format a message with the current global string. */
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -15,8 +12,8 @@ char* __cdecl fcn_004e6c80(void)
 {
 	char buf[0x40];
 
-	fcn_0064d41a(buf, g_68d6bc, g_9b0820);
-	return (char*) g_9b0820;
+	fcn_0064d41a(buf, g_68d6bc, cut_RandomSeed);
+	return (char*) cut_RandomSeed;
 }
 unsigned char _dpad_68d6bc[436] = {
     0x63, 0x75, 0x74, 0x5f, 0x67, 0x65, 0x74, 0x72, 0x61, 0x6e, 0x64, 0x73, 0x65, 0x65, 0x64, 0x3a,

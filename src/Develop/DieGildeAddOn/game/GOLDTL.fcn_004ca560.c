@@ -10,7 +10,7 @@ char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_00515540(char*);
 int __cdecl fcn_005155e0(char*);
 int __cdecl gm_CheckEntityType(char*);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004fdcf0(char*);
 char* __cdecl fcn_0040c120(char*, int, ...);
 void __cdecl fcn_004432d0(int, int);
@@ -64,7 +64,7 @@ int __cdecl fcn_004ca560(char* x, char* out)
 		if (s != 0)
 			id = *(int*) (s + 1);
 		if (k != 0) {
-			t = fcn_00508e40(*(int*) (x + 0x10));
+			t = gm_LookupEntityRecordById(*(int*) (x + 0x10));
 			if (t != 0)
 				fcn_004fdcf0(t);
 		}

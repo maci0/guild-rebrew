@@ -12,7 +12,7 @@ extern int g_7e46ac;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_004695a0(int, int);
@@ -45,7 +45,7 @@ int __cdecl fcn_004b41b0(void)
 	h = fcn_00470820(0, 0, g_68116c);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	t = fcn_00519190(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca, 0x1acb, 0x1acc);
+	t = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca, 0x1acb, 0x1acc);
 	b0 = fcn_00472250(h, 0, t);
 	b1 = fcn_00472250(h, 0, t + 1);
 	b2 = fcn_00472250(h, 0, t + 2);
@@ -53,10 +53,10 @@ int __cdecl fcn_004b41b0(void)
 	b4 = fcn_00472250(h, 0, t + 4);
 	b5 = fcn_00472250(h, 0, t + 5);
 	if (g_6a375c > 1)
-		b6 = fcn_00472250(h, 0, fcn_00519190((int) g_681164, 2, 0x1acd));
+		b6 = fcn_00472250(h, 0, io_AppendText((int) g_681164, 2, 0x1acd));
 	lst = d2_CreateRadioGroup(6, b0, b1, b2, b3, b4, b5);
 	fcn_004695a0(lst, 0);
-	fcn_00469470(lst, fcn_00472250(h, 0, fcn_00519190(0x7e)));
+	fcn_00469470(lst, fcn_00472250(h, 0, io_AppendText(0x7e)));
 	while (fcn_005373e0(fcn_004b41b0, g_7e46ac) != 0) {
 		fcn_00469630(lst);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1) {

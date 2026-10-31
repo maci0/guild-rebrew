@@ -2,8 +2,6 @@
 # Each TU's only external definition is the named symbol, which
 # another TU on this link still provides. Not a metadata claim.
 set(REBREW_SCAFFOLD_OMITS
-  # _fcn_0053d690 kept by src/GOLD.fcn_0053d690.c
-  "src/GOLD.fcn_004c3f90.c"
   # _fcn_00401320 kept by src/GOLD.fcn_00401320.c
   "src/GOLDTL.fcn_00401320.c"
   # _fcn_0040eac0 kept by src/GOLD.fcn_0040eac0.c

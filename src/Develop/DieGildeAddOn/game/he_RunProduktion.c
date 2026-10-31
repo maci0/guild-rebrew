@@ -11,7 +11,7 @@ extern cell10_fb5760 g_fb5760[0x8000];
 struct unit;
 void* __cdecl gm_SearchTable67(int id);
 int __cdecl gm_GetMsgField(char* objekt, char* eintrag);
-void __cdecl fcn_0051af00(char* text, int format, ...);
+void __cdecl io_FormatTextBuffer(char* text, int format, ...);
 int __cdecl fcn_004c4450(int id);
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 char* __cdecl fcn_005049a0(char* objekt);
@@ -22,7 +22,7 @@ int __cdecl fcn_00500cb0(pos14_7f4c00* a, pos14_7f4c00* b);
 int __cdecl fcn_0050c830(pos14_7f4c00* a, pos14_7f4c00* b, int modus);
 int __cdecl fcn_0050c710(unsigned char* objekt, int art, int modus);
 void __cdecl fcn_004c54c0(int besitzer, int objekt, int menge, int modus);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_004ff040(void* objekt);
 float __cdecl fcn_004eceb0(char* objekt, int ware);
 int __cdecl fcn_005c6270(char* objekt, int id);
@@ -73,7 +73,7 @@ void __cdecl he_RunProduktion(char* e)
     if (*(short*) (e + 8) == -1) {
         gebaeude = gm_SearchTable67(*(int*) (e + 0xbc));
         if (gebaeude != 0) {
-            fcn_0051af00(debug, (int) "he_RunProduktion(): geb:%G", gebaeude);
+            io_FormatTextBuffer(debug, (int) "he_RunProduktion(): geb:%G", gebaeude);
         }
         fcn_00546190((struct unit*) e);
         return;
@@ -113,13 +113,13 @@ void __cdecl he_RunProduktion(char* e)
                 haushalt = fcn_005049a0(gebaeude);
                 if (fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) != 0 &&
                     !gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
-                    fcn_0051af00(text, 0x1bb3, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
+                    io_FormatTextBuffer(text, 0x1bb3, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
                     strcpy(bild, "_NACHRICHTEN_HS_04");
                 } else if (gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
                     if (g_fb5760[*(int*) (e + 0xc4)].f1 != 8) {
                         goto warten;
                     }
-                    fcn_0051af00(text, 0x1bb2, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
+                    io_FormatTextBuffer(text, 0x1bb2, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
                     if (*typ == 7) strcpy(bild, "_NACHRICHTEN_ROHSTOFFMANGEL_HS_01");
                     else if (*typ == 8) strcpy(bild, "_NACHRICHTEN_ROHSTOFFMANGEL_HS_03");
                     else if (*typ == 11) strcpy(bild, "_NACHRICHTEN_ROHSTOFFMANGEL_HS_05");
@@ -133,7 +133,7 @@ void __cdecl he_RunProduktion(char* e)
                     else if (*typ == 30) strcpy(bild, "_NACHRICHTEN_DOMIZIL_02");
                     else if (*typ == 32 || *typ == 31 || *typ == 29) strcpy(bild, "_NACHRICHTEN_ROHSTOFFMANGEL_HS_20");
                 } else {
-                    fcn_0051af00(text, 0x1bb4, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
+                    io_FormatTextBuffer(text, 0x1bb4, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
                     strcpy(bild, "_NACHRICHTEN_HS_05");
                 }
                 arbeiter = g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c;
@@ -177,11 +177,11 @@ warten:
                         fcn_004c54c0(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
                             *arbeiter_id, 2 - *(int*) (gebaeude + 0x41), 0);
                     }
-                    arbeiter = fcn_00508e40(*arbeiter_id);
+                    arbeiter = gm_LookupEntityRecordById(*arbeiter_id);
                     if (arbeiter != 0) {
                         arbeitsleistung = fcn_004ff040(arbeiter);
                         if (arbeiter[0x165] == 27 || arbeiter[0x165] == 28) {
-                            arbeitsleistung = (fcn_00507f10(arbeiter, 1) + 0.5) * arbeitsleistung;
+                            arbeitsleistung = (gm_GetEntitySkill(arbeiter, 1) + 0.5) * arbeitsleistung;
                             if (arbeiter[0x1b4] & 1) arbeitsleistung = 0.01f;
                         }
                         if (arbeiter[0x1cc] & 4) arbeitsleistung = fcn_004eceb0(arbeiter, *(unsigned short*) (e + 0xac)) * arbeitsleistung;
@@ -215,7 +215,7 @@ warten:
         }
         if (fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) != 0 &&
             !gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
-            fcn_0051af00(text, 0x1bb3, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
+            io_FormatTextBuffer(text, 0x1bb3, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
             strcpy(bild, "_NACHRICHTEN_HS_04");
         } else if (gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
             rohstoff = (unsigned short*) (lpObjektePROT + *(unsigned short*) (e + 0xac) * 0x41 + 0x2e);
@@ -223,7 +223,7 @@ warten:
                 if (*rohstoff != 0) {
                     eintrag = fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *rohstoff);
                     if (eintrag == 0 || gm_GetMsgField(lager, (char*) eintrag) < rohstoff[-4]) {
-                        fcn_0051af00(text, 0x1bb2, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
+                        io_FormatTextBuffer(text, 0x1bb2, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
                         if (*typ == 7) strcpy(bild, "_NACHRICHTEN_ROHSTOFFMANGEL_HS_01");
                         else if (*typ == 8) strcpy(bild, "_NACHRICHTEN_ROHSTOFFMANGEL_HS_03");
                         else if (*typ == 11) strcpy(bild, "_NACHRICHTEN_ROHSTOFFMANGEL_HS_05");
@@ -274,7 +274,7 @@ warten:
             } while (fcn_00500cb0(naechste_zeit, &g_7f4c00) < 0);
             return;
         } else {
-            fcn_0051af00(text, 0x1bb4, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
+            io_FormatTextBuffer(text, 0x1bb4, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
             strcpy(bild, "_NACHRICHTEN_HS_05");
         }
 mangel:

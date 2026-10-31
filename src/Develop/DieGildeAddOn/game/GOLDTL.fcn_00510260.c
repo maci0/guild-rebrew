@@ -3,7 +3,7 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_0050c710(unsigned char* p, int a, int b);
 char* __cdecl fcn_0050dc90(int arg1);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_004ff040(char* e);
 float __cdecl fcn_0050fdb0(int k, int n, int* ids);
 
@@ -43,7 +43,7 @@ float __cdecl fcn_00510260(unsigned char* a0, int a1, int a2)
 	if (a1 >= 1) {
 		do {
 			if (arr[i] != -1) {
-				ent = fcn_00508e40(arr[i]);
+				ent = gm_LookupEntityRecordById(arr[i]);
 				if (ent != 0) {
 					sum = (float) (fcn_004ff040(ent) + sum);
 					if (*(char*) (v4 + 0x22f) == *(char*) (ent + 0x165)) {

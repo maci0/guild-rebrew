@@ -20,7 +20,7 @@ int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 int __cdecl _ftol(void);
 int __cdecl fcn_004e6cb0(int a, ...);
 void __cdecl fcn_004e4e90(int a);
-int __cdecl fcn_00508e40(int id);
+int __cdecl gm_LookupEntityRecordById(int id);
 void* __cdecl fcn_004e4ae0(char* name, int a);
 void __cdecl fcn_004e4730(char* name);
 void* __cdecl fcn_00445600(int a, int b, int c, char* name);
@@ -118,7 +118,7 @@ void __cdecl fcn_004e33a0(int* arg)
 	fcn_0064d41a(name, (char*) 0x679060, label);
 	n = *(unsigned char*) (((char*) arg) + 0x30);
 	for (i = 0; i < n && i < 8; i++) {
-		bidders[i] = fcn_00508e40(arg[8 + i]);
+		bidders[i] = gm_LookupEntityRecordById(arg[8 + i]);
 		ids[i] = (short) arg[8 + i];
 		states[i] = bidders[i] != 0 ? -1 : 0;
 	}
@@ -196,7 +196,7 @@ void __cdecl fcn_004e33a0(int* arg)
 		fcn_00471af0((int) dlg, 0);
 	fcn_00471d80((int) dlg, 3);
 	d2_SetForm((int) dlg, 0);
-	fcn_00519190((void*) 0x1aa2, npc, (void*) arg[0x80 / 4]);
+	io_AppendText((void*) 0x1aa2, npc, (void*) arg[0x80 / 4]);
 	fcn_004e44f0(cand);
 	round = 0;
 	while (start > 5) {
@@ -228,7 +228,7 @@ void __cdecl fcn_004e33a0(int* arg)
 			fcn_004e4b40(result, bank_bids,
 			    "_VERSTEIGERUNG_GEBOTE", price, 0);
 			d2_SetForm((int) dlg, 0);
-			fcn_00519190((void*) 0x1aa3, npc, (void*) (bid + 2),
+			io_AppendText((void*) 0x1aa3, npc, (void*) (bid + 2),
 			    (void*) 5, (void*) (n - bid), (void*) best);
 		}
 		fcn_004e4c90(5);
@@ -238,11 +238,11 @@ void __cdecl fcn_004e33a0(int* arg)
 	if (besti < 0) {
 		fcn_004e4b40(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 8, 500);
 		d2_SetForm((int) dlg, 0);
-		fcn_00519190((void*) 0x1aa5, npc);
+		io_AppendText((void*) 0x1aa5, npc);
 	} else {
 		fcn_004e4b40(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 6, 200);
 		d2_SetForm((int) dlg, 0);
-		fcn_00519190((void*) 0x1aa4, (void*) ids[besti],
+		io_AppendText((void*) 0x1aa4, (void*) ids[besti],
 		    (void*) best);
 		if (arg[3] == *(int*) ((unsigned short) g_774970 * 0x21c
 		    + 0x7f4ca4)) {

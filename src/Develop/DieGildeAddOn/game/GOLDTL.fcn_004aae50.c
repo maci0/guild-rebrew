@@ -1,5 +1,5 @@
 int __cdecl fcn_004e8af0(int, void*);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 double __cdecl fcn_0050f980(int, int, int);
 int __cdecl fcn_005c6270(void*, int);
@@ -31,7 +31,7 @@ int __cdecl fcn_004aae50(int a1, unsigned short* a2, int* a3, int* a4)
 	if (fcn_004e8af0(a1, &info) == 0)
 		return -1;
 	for (i = 0; i < 4; i++) {
-		e = fcn_00508e40(a3[i]);
+		e = gm_LookupEntityRecordById(a3[i]);
 		ents[i] = e;
 		if (e != 0 && amt_GetOfficeAffinity((unsigned char*) e, info.kind, &bonus) != 0) {
 			score[i] = fcn_0050f980(*(unsigned short*) e, *a2, 1) + bonus;

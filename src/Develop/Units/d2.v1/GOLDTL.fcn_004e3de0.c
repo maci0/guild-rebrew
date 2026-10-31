@@ -6,14 +6,14 @@ extern int g_68bfb8;
 extern int g_774654;
 
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl fcn_005c9030(int, int, int, int*);
 int __cdecl fcn_0050b710(int, unsigned char);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
-char* __cdecl fcn_00519190(int, ...);
+char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
@@ -52,7 +52,7 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 	*(int*) (a + 0x94) = b[8];
 	gm_StartFilteredEntitySearch(1, 1, b[0x11]);
 	val = b[8];
-	o = fcn_00508e40(*(int*) (a + 0x10));
+	o = gm_LookupEntityRecordById(*(int*) (a + 0x10));
 	if (o == 0)
 		return;
 	cap = gm_AccumulateTyped2(o);
@@ -65,8 +65,8 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 	fcn_00471d80(dlg, 3);
 	g_100f1dc = -1;
 	d2_SetForm(dlg, 0);
-	t = fcn_00519190(0x1aa6, g_773d75);
-	fcn_00519190(0x1aa7);
+	t = io_AppendText(0x1aa6, g_773d75);
+	io_AppendText(0x1aa7);
 	w = fcn_00472250(dlg, 0, t);
 	d2_SetElementValue(w, lo, hi, lo);
 	bar = fcn_004677e0((*(int*) (g_77255c + 0xc) - 0x12c) / 2 - 8, 8, 0x12c, 0, 100, 0x75, 0x42, g_772514);

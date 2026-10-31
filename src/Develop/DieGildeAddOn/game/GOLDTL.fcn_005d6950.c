@@ -28,13 +28,13 @@ extern __int64 g_666018;
 extern char s_6accdc[];
 
 int __cdecl fcn_004e8b40(int, Info*);
-unsigned char* __cdecl fcn_00508e40(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl fcn_004c4eb0(char*);
 int __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_004c4ef0(char*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 unsigned short* __cdecl fcn_005cadc0(int, Req*, char*, char*, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
@@ -68,7 +68,7 @@ int __cdecl fcn_005d6950(unsigned char* e, int* o)
 		return 0x60;
 	}
 	if (e[2] != 6) {
-		q = fcn_00508e40(o[0x85]);
+		q = gm_LookupEntityRecordById(o[0x85]);
 		if (q == 0) {
 			return 0x60;
 		}
@@ -95,8 +95,8 @@ int __cdecl fcn_005d6950(unsigned char* e, int* o)
 	req.f14 = 3;
 	req.size = 0x400;
 	req.cd = g_666018;
-	fcn_0051af00(text1, 0x1d98);
-	fcn_0051af00(text2, 0x1d99);
+	io_FormatTextBuffer(text1, 0x1d98);
+	io_FormatTextBuffer(text2, 0x1d99);
 	g = fcn_005cadc0(info.f4, &req, text1, text2, 0);
 	if (g != 0) {
 		if (!srv_GetEntityOfficeSlot((unsigned char*) g, &y, &x)) {
@@ -115,14 +115,14 @@ int __cdecl fcn_005d6950(unsigned char* e, int* o)
 		}
 		if (fcn_004c4450(h) == 2) {
 		refused:
-			fcn_0051af00(text3, 0x1d9a, *g);
+			io_FormatTextBuffer(text3, 0x1d9a, *g);
 			fcn_00526120(text3, 0);
 			return 0x20;
 		}
 		while (fcn_004c4450(h1) == 0) {
 			fcn_00535960();
 		}
-		fcn_0051af00(text3, 0x1d9b, *g, *g);
+		io_FormatTextBuffer(text3, 0x1d9b, *g, *g);
 		fcn_00526120(text3, 0);
 		return 0x90;
 	}

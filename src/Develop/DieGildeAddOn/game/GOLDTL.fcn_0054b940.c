@@ -81,9 +81,9 @@ extern char g_6b5c60[];
 
 Group* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_004c5620(int, Order*);
-Entity* __cdecl fcn_00508e40(int);
+Entity* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00494470(Party*, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00546190(Order*);
@@ -154,7 +154,7 @@ void __cdecl fcn_0054b940(Order* o)
 			party.a = first;
 			for (i = 0; i < 4; i++) {
 				if (g->ids[i] != -1) {
-					e = fcn_00508e40(g->ids[i]);
+					e = gm_LookupEntityRecordById(g->ids[i]);
 					if (e != 0) {
 						party.members[n++].ent = e;
 					}
@@ -165,7 +165,7 @@ void __cdecl fcn_0054b940(Order* o)
 			party.b = o->b;
 			for (i = 0; i < 4; i++) {
 				if (g->ids[i] != -1) {
-					e = fcn_00508e40(o->ids[i]);
+					e = gm_LookupEntityRecordById(o->ids[i]);
 					if (e != 0) {
 						party.members[n++].ent = e;
 					}
@@ -174,10 +174,10 @@ void __cdecl fcn_0054b940(Order* o)
 		}
 		party.count = (unsigned char) n;
 		if (fcn_00494470(&party, 1) == 0 && (party.ent->type == 6 || party.ent->type == 7)) {
-			fcn_0051af00(msg, 0x1787, party.text);
+			io_FormatTextBuffer(msg, 0x1787, party.text);
 			for (i = 0; i < party.count; i++) {
 				k = party.members[i].value * 3 + 0x178f + gm_RandomMod(3);
-				fcn_0051af00(line, 0x1788, party.members[i].ent->slot, k);
+				io_FormatTextBuffer(line, 0x1788, party.members[i].ent->slot, k);
 				strcat(msg, line);
 			}
 			fcn_00545d40(party.ent->id, -1, msg, 0x20, 0x5fd, g_6b5c60);

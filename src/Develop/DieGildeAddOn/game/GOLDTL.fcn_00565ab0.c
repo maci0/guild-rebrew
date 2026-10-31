@@ -16,7 +16,7 @@ extern int g_6b8010;
 
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_004bcc50(char*, int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c4450(unsigned int);
 int __cdecl fcn_005155e0(unsigned char*);
 void __cdecl fcn_00546190(void*);
@@ -51,7 +51,7 @@ void __cdecl fcn_00565ab0(char* ev)
 	if (v4 != 0) {
 		v24 = *(char**) (v4 + 0x71);
 		v5 = fcn_004bcc50(v24, *(int*) (ev + 0xb8));
-		v15 = fcn_00508e40(*(int*) (ev + 0xb0));
+		v15 = gm_LookupEntityRecordById(*(int*) (ev + 0xb0));
 		if (v5 != 0) {
 			if (v15 != 0) {
 				if (*(int*) (v5 + 0x10) == -1 || *(int*) (v5 + 0x10) == *(int*) (ev + 4)) {

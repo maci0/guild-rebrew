@@ -17,7 +17,7 @@ extern char* g_772eb4;
 extern unsigned short* g_772e9c;
 extern char g_9b0e20[];
 
-char* __cdecl gm_LookupEntityRecordById(int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 ent2c* __cdecl fcn_004ceac0(char*, char*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_004d4250(char*, char*);
@@ -44,7 +44,7 @@ void __cdecl fcn_004d4180(char* x)
 	for (i = 0; i < 16; i++) {
 		if (base[i] == -1)
 			continue;
-		e = gm_LookupEntityRecordById(base[i]);
+		e = gm_LookupEntityRecordIn32SlotTable(base[i]);
 		if (e == 0)
 			continue;
 		d = fcn_004ceac0(rec, e);

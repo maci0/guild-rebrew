@@ -50,13 +50,13 @@ int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl fcn_00471b60(int h);
 void __cdecl d2_SetForm(int h, int page);
 void __cdecl fcn_005340f0(int a);
-void __cdecl fcn_00473a90(int a, int b);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_004f7120(int id, char* rec, int* out1, int* out2, int* idx);
 void __cdecl fcn_0046f2c0(int a, int b);
-int __cdecl fcn_00519190(int id, ...);
+int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_005ca560(struct sel* s);
 void __cdecl fcn_005ca740(int x, int y, int a, int b, struct sel* s, int c);
-void __cdecl fcn_0051af00(char* buf, int id, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_005c91c0(char* buf, int x, int y, int a, int b);
 char* __cdecl fcn_005463a0(int a, int b, int c);
 char* __cdecl he_fn_Handlung(void);
@@ -101,7 +101,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	memset(sel, 0, sizeof(sel));
 	changed = 1;
 	do {
@@ -126,7 +126,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 		if (changed) {
 			d2_SetForm(h, 1);
 			fcn_0046f2c0(g_772514, 1);
-			fcn_00519190(0x18a3);
+			io_AppendText(0x18a3);
 			x = *(int*) (g_77255c + 0xc) / 2;
 			y = (x - *(short*) (g_772500 + 0x1ebd8)) - 0x28;
 			line = 0x46;
@@ -137,9 +137,9 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 				fcn_005ca560(&sel[j]);
 				fcn_005ca740(sel[j].x10, sel[j].x14, g_772514, 0x54, &sel[j], 1);
 				if (seen[j] != -1) {
-					fcn_0051af00(buf, 0x18a5, *(int*) (idx + j) * 5 + 0x13fd, vals[j]);
+					io_FormatTextBuffer(buf, 0x18a5, *(int*) (idx + j) * 5 + 0x13fd, vals[j]);
 				} else {
-					fcn_0051af00(buf, 0x18a6);
+					io_FormatTextBuffer(buf, 0x18a6);
 				}
 				fcn_005c91c0(buf, x, line, 0xf0, 0x54);
 				line += 0x69;
@@ -154,11 +154,11 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 				}
 			}
 			d2_SetForm(h, 2);
-			fcn_00519190(0x6811b0);
+			io_AppendText(0x6811b0);
 			if (found) {
-				fcn_00519190(0x18a8);
+				io_AppendText(0x18a8);
 			} else if (*(int*) (a2 + 0x28) < g_7f4c00) {
-				rc = fcn_00472250(h, 2, fcn_00519190(0x18a7));
+				rc = fcn_00472250(h, 2, io_AppendText(0x18a7));
 				y = rc;
 			}
 		}

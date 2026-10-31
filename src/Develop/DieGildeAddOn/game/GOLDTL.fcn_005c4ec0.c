@@ -20,7 +20,7 @@ int __cdecl gm_GetMsgField(void*, void*);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl fcn_004c51a0(int, int, unsigned char, int);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 /* ADDRESS: GOLDTL 0x005c4ec0 */
 int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
@@ -155,7 +155,7 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 		return written;
 	}
 	fcn_004c5150(a0, -1, g_773d75, total);
-	fcn_0051af00(buf, 0x18eb, total);
+	io_FormatTextBuffer(buf, 0x18eb, total);
 	strcat(a3, buf);
 	return written;
 }

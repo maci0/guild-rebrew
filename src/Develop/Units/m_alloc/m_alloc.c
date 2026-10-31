@@ -1020,7 +1020,7 @@ extern char* g_14cc5e4;
 #define g_array_count m_TRACKED_SLOT_COUNT
 #define g_list_head g_14cc5e4
 #define g_alloc_report_groups g_6b6f7c
-#define ReportMessage fcn_0041d9e0
+#define ReportMessage ReportClientMessage
 #endif
 void __cdecl m_ShutdownAllocator(void)
 {
@@ -1438,8 +1438,6 @@ void __cdecl m_pool_stats(struct M_POOL_BLOCK* block, int* blocks, int* used, in
 		*avg_size = d;
 	}
 }
-unsigned char _dpad_6b6208[3420];
-unsigned char _dpad_6b6f80[820];
 unsigned char _dpad_10027490[5112];
 unsigned char _dpad_100288ab[141];
 unsigned char _dpad_10028940[428];

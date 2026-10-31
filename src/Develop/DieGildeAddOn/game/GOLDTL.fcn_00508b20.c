@@ -6,7 +6,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004c4570(int a, int b, int off, unsigned int* v);
 void __cdecl fcn_004c5360(void);
 
-int __cdecl fcn_00508a20(char* o)
+int __cdecl fcn_00508b20(char* o)
 {
 	int has[4];
 	unsigned int flags;

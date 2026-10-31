@@ -10,7 +10,7 @@ extern int g_100f1dc;
 int __cdecl fcn_004ce1c0(void);
 void* __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(void*);
-void __cdecl fcn_00519190(int);
+void __cdecl io_AppendText(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(void*);
 
@@ -32,7 +32,7 @@ int __cdecl fcn_005926f0(void)
 	if (g_779ce4 == 0) {
 		h = fcn_00470820(0, 0, (char*) 0x68d714);
 		fcn_00471b60(h);
-		fcn_00519190(0x87);
+		io_AppendText(0x87);
 		g_100f1dc = -1;
 		for (;;) {
 			if (g_14ce8e0 != 0)

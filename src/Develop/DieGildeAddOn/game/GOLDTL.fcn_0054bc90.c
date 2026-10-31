@@ -3,7 +3,7 @@ extern char* __cdecl fcn_00502cd0(int, ...);
 extern void __cdecl fcn_00546190(char*);
 extern char* __cdecl fcn_005463a0(int, int, int, ...);
 extern int __cdecl fcn_004943e0(unsigned short*, unsigned short*);
-extern void __cdecl fcn_0051af00(char*, int, ...);
+extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl fcn_004c4510(char*, unsigned int);
 extern int __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
 extern void __cdecl fcn_004c5360(void);
@@ -13,7 +13,7 @@ extern void __cdecl fcn_00545780(char*);
 extern int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 extern int __cdecl fcn_00545670(char*, int, int, char*, int);
 extern int __cdecl d2_SetForm(int, int);
-extern void __cdecl fcn_00519190(int, ...);
+extern void __cdecl io_AppendText(int, ...);
 extern void __cdecl fcn_00500bb0(void*, int, int, int);
 extern int __cdecl fcn_004c3030(int, int, char*, int);
 
@@ -104,7 +104,7 @@ void __cdecl fcn_0054bc90(char* a0)
 		fcn_00546190(a0);
 		return;
 	}
-	fcn_0051af00(text, 0x1785, *v3);
+	io_FormatTextBuffer(text, 0x1785, *v3);
 	goto state2_report;
 state2_unequal:
 	v11 = -1;
@@ -141,7 +141,7 @@ state2_unequal:
 	}
 	if (idx >= 4)
 		goto close2;
-	fcn_0051af00(text, 0x1786, *v3);
+	io_FormatTextBuffer(text, 0x1786, *v3);
 state2_report:
 	v16 = *(int*) (v1 + 0x7f4ca4);
 	fcn_00545d40(v16, -1, text, 0, 0x5ec, 0);
@@ -180,7 +180,7 @@ state1:
 			fcn_00546190(a0);
 			return;
 		}
-		fcn_0051af00(text, 0x1785, *v3);
+		io_FormatTextBuffer(text, 0x1785, *v3);
 	} else if (*(int*) 0x100f1dc == 1) {
 		v16 = *(int*) (v3 + 2);
 		idx = 0;
@@ -219,7 +219,7 @@ state1:
 			fcn_00546190(a0);
 			return;
 		}
-		fcn_0051af00(text, 0x1786, *v3);
+		io_FormatTextBuffer(text, 0x1786, *v3);
 	} else {
 		fcn_00545780(a0);
 		fcn_00546190(a0);
@@ -239,9 +239,9 @@ dialog:
 	d2_SetForm(*(int*) (*(int*) (a0 + 0x74) + 8), 0);
 	v6 = *v7;
 	if (*(int*) (a0 + 0xbc) != 0)
-		fcn_00519190(0x1771, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v6, *v3);
+		io_AppendText(0x1771, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v6, *v3);
 	else
-		fcn_00519190(0x1770, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v10, v6, *v3);
+		io_AppendText(0x1770, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v10, v6, *v3);
 	*(int*) (a0 + 0x44) = *(int*) 0x7f4c00;
 	*(int*) (a0 + 0x48) = *(int*) 0x7f4c04;
 	*(int*) (a0 + 0x4c) = *(int*) 0x7f4c08;

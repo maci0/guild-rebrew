@@ -6,7 +6,7 @@
 
 int __cdecl fcn_00472cd0(int);
 
-void __cdecl fcn_005ba750(void)
+void __cdecl fcn_005c61c0(void)
 {
 	ResetDisplayCounters();
 	fcn_00472cd0(*(int*) 0x6abb00);

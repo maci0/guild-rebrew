@@ -32,7 +32,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_00533dc0(int, int, int);
 int __cdecl fcn_0046fac0(int, int, void*, int);
@@ -122,14 +122,14 @@ void __cdecl fcn_005a6880(char* obj)
 	*(int*) (0x10162f0 + i * 0x3cc) = 0xe;
 	*(int*) (0x10162f4 + i * 0x3cc) = 0xe;
 	d2_SetForm(h, 3);
-	fcn_00519190(0x1900);
+	io_AppendText(0x1900);
 	d2_SetForm(h, 3);
 	fcn_00533a60(g_772514, 0, text, 2, g_14ab738, g_14b5278);
 	sel2 = *(int*) (text + 4);
 	d270 = fcn_0050d270(*(int*) (text + 0x18));
 	if (d270 <= 0) {
 		d2_SetForm(h, 5);
-		fcn_00519190(0x190a, obj);
+		io_AppendText(0x190a, obj);
 	}
 	fcn_005a5760(h, 4, list2, 0);
 	for (i = 0; i < 16; i++) {
@@ -143,12 +143,12 @@ void __cdecl fcn_005a6880(char* obj)
 				cur = he_fn_Handlung();
 		}
 		d2_SetForm(h, 2);
-		fcn_00519190(0x6811b0);
-		fcn_00519190(0x1902, *(int*) (obj + 0x69));
+		io_AppendText(0x6811b0);
+		io_AppendText(0x1902, *(int*) (obj + 0x69));
 		if (cur == 0)
-			fcn_00519190(0x1903);
+			io_AppendText(0x1903);
 		else
-			fcn_00519190(0x1901, g_868060 + (unsigned char) ((char*) cur)[0xb0] * 0x2f4);
+			io_AppendText(0x1901, g_868060 + (unsigned char) ((char*) cur)[0xb0] * 0x2f4);
 		if (g_14ce8e0 != 0)
 			g_774654 = 1;
 		ResetDisplayCounters();

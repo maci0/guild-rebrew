@@ -1,5 +1,5 @@
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void* __cdecl FindSlotEntryFiltered(int, char*, void*, void*, int);
 char __cdecl fcn_004f1790(int, int*);
@@ -60,9 +60,9 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 		saved = *(int*) (g_1016198 + st->slot * 0x3cc);
 	}
 	d2_SetForm(st->handle, 2);
-	fcn_00519190(0x6811b0);
+	io_AppendText(0x6811b0);
 	d2_SetForm(st->handle, 4);
-	fcn_00519190(0x6811b0);
+	io_AppendText(0x6811b0);
 	selected = type;
 	fcn_00533f40(0, 0, st->owner, st->slot, 0x35, &id2, &id1, &selected);
 

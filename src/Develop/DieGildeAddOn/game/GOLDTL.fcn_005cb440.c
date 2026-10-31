@@ -37,7 +37,7 @@ typedef struct Node {
 } Node;
 // SIZE 0xb4
 
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005ca560(Row*);
 int __cdecl fcn_005cf720(int, int, int, int);
 Node* __cdecl he_fn_Handlung(void);
@@ -143,7 +143,7 @@ next:
 		p = fcn_005463a0(1, 0, 0x41);
 		while (p != 0) {
 			if (p->keyac == a0->key) {
-				e = (Ent*) fcn_00508e40(p->b0);
+				e = (Ent*) gm_LookupEntityRecordById(p->b0);
 				if (e != 0 && e->key != a0->sel[0]) {
 					o = &a2[n];
 					o->ent = e;

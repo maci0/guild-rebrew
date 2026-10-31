@@ -40,7 +40,7 @@ typedef struct {
 	unsigned int x34;
 } Rec_5d5930;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004f6470(int, int*, unsigned short);
 int __cdecl fcn_004f61c0(int*, int*, int*, unsigned short);
 unsigned short __cdecl gm_RandomMod(int);
@@ -50,7 +50,7 @@ int __cdecl fcn_004c5530(Msg_5d5930*);
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl fcn_00471b60(int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 void __cdecl fcn_005ca560(Rec_5d5930*);
 void __cdecl fcn_005ca740(int, int, int, int, Rec_5d5930*, int);
@@ -60,7 +60,7 @@ int __cdecl fcn_00525f60(int*, int);
 int __cdecl fcn_005d5670(unsigned char*, unsigned char*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 
 /* ADDRESS: GOLDTL 0x005d5930 */
 int __cdecl fcn_005d5930(unsigned char* p, int* q)
@@ -86,7 +86,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 	Rec_5d5930* r;
 
 	if (*(unsigned char*) (p + 2) != 6 && *(unsigned char*) (p + 2) != 7) {
-		e = fcn_00508e40(q[0x85]);
+		e = gm_LookupEntityRecordById(q[0x85]);
 		if (e == 0) {
 			return 0x60;
 		}
@@ -112,14 +112,14 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 	dlg = fcn_00470820(0, 0, "privillegien\\erpressung");
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1d55);
+	io_AppendText(0x1d55);
 	d2_SetForm(dlg, 2);
 	d2_SetForm(dlg, 3);
 	fcn_0046e830(-1, -1, g_772514, g_772514, 0x767);
 	n = fcn_004f61c0(ids, b, c, *(unsigned short*) p);
 	cnt = 0;
 	for (i = 0; i < n; i++) {
-		obj = fcn_00508e40(ids[i]);
+		obj = gm_LookupEntityRecordById(ids[i]);
 		if (obj != 0) {
 			recs[cnt].p0 = (int) obj;
 			recs[cnt].x2c = c[i];
@@ -136,7 +136,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 			k = cnt;
 			r = recs;
 			do {
-				fcn_0051af00(text, (int) "%i (%i) %s", r->x2c, r->x34, (r->x2c != 1) + 0x1748);
+				io_FormatTextBuffer(text, (int) "%i (%i) %s", r->x2c, r->x34, (r->x2c != 1) + 0x1748);
 				r->x10 = 0x32;
 				r->x14 = y;
 				fcn_005ca740(0x32, y, g_772514, 0x56, r, 1);
@@ -146,7 +146,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 			} while (--k != 0);
 		}
 	} else {
-		fcn_00519190(0x1d50);
+		io_AppendText(0x1d50);
 	}
 	result = 0x20;
 	g_100f1dc = -1;
@@ -156,12 +156,12 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 				if (g_67d370 == rp[1]) {
 					if (fcn_00525f60(q, 2) != 0) {
 						if ((*(unsigned int*) (recs[i].p0 + 0x1c8) & 0x200) != 0) {
-							fcn_0051af00(buf, 0x1d52, *(unsigned short*) recs[i].p0);
+							io_FormatTextBuffer(buf, 0x1d52, *(unsigned short*) recs[i].p0);
 							fcn_00526120(buf, 0);
 						} else if (recs[i].x34 < 3) {
 							fcn_00526120(*(char**) 0x14ac864, 0);
 						} else {
-							obj = fcn_00508e40(ids[i]);
+							obj = gm_LookupEntityRecordById(ids[i]);
 							if (fcn_005d5670((unsigned char*) q, (unsigned char*) obj) != 0) {
 								g_774654 = 1;
 							}

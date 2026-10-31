@@ -34,7 +34,7 @@ int __cdecl d2_SetForm(int k, int i)
 		k = g_772534;
 	}
 	if (i > g_1038140[k].count || i < 0) {
-		fcn_0041d9e0(s_67d7d0);
+		ReportClientMessage(s_67d7d0);
 		return 0;
 	}
 	g_772514 = g_1038140[k].wins[i];

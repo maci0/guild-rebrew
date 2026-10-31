@@ -7,8 +7,8 @@ extern unsigned short g_774970;
 extern char g_7f4ca4[];
 extern char g_9b0e20[];
 
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl gm_LookupEntityRecordById(int);
-char* __cdecl fcn_00508e40(int);
 int* __cdecl fcn_004ceac0(char*, char*);
 
 int __cdecl fcn_004ccd30(char* x, char* out)
@@ -25,9 +25,9 @@ int __cdecl fcn_004ccd30(char* x, char* out)
 		if (*(int*) (g_9b0e20 + i * 0x35c + 0x10) == *(int*) (x + 0x10)) {
 			rec = g_9b0e20 + i * 0x35c;
 			src = (int*) (x + 0x14);
-			e = gm_LookupEntityRecordById(*src);
+			e = gm_LookupEntityRecordIn32SlotTable(*src);
 			if (e == 0) {
-				e = fcn_00508e40(*src);
+				e = gm_LookupEntityRecordById(*src);
 				if (e == 0)
 					break;
 			}

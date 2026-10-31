@@ -17,7 +17,7 @@ void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c4670(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c54c0(int, int, int, int);
-void* __cdecl fcn_00508e40(int);
+void* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005b2560(void*, void*);
 void* __cdecl fcn_005b2620(void*, void*);
 void __cdecl fcn_005b24b0(void*, void*);
@@ -98,7 +98,7 @@ int __cdecl fcn_0047d2a0(char* e)
 	return 0;
 
 other_path:
-	other = (char*) fcn_00508e40(*(int*) (e + 0x210));
+	other = (char*) gm_LookupEntityRecordById(*(int*) (e + 0x210));
 	if ((e[0x166] == 0 && e[0x169] == 0 && e[2] != 5) || other == 0) {
 		goto reset;
 	}

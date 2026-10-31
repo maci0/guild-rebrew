@@ -31,7 +31,7 @@ int __cdecl PlayCharacterAniScriptInt(char** ch, char** script, int* kind, unsig
 	task = fcn_0040c230(*ch, fcn_0040d0f0, *level, 0x2e, *kind);
 	if (task != 0) {
 		if (strlen(*script) >= 0x5f) {
-			fcn_0041d9e0("PlayCharacterAniScript(): script name too long");
+			ReportClientMessage("PlayCharacterAniScript(): script name too long");
 			return 1;
 		}
 		strncpy(task + 0xf0, *script, 0x3f);

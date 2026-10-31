@@ -10,7 +10,7 @@ struct bits {
 
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005492e0(char*);
 void __cdecl fcn_004c6040(int, int, int, int);
 
@@ -24,10 +24,10 @@ void __cdecl fcn_0055bc40(char* h)
 	for (e = fcn_005463a0(1, 0, 0x41); e != 0; e = he_fn_Handlung()) {
 		if ((((struct bits*) (e + 0x78))->a || ((struct bits*) (e + 0x78))->b)) {
 			if (*(int*) (e + 0xac) == *(int*) (h + 4)) {
-				fcn_00508e40(*(int*) (e + 0xb0));
+				gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 				fcn_005492e0(e);
 			} else if (*(int*) (e + 0xb0) == *(int*) (h + 4)) {
-				fcn_00508e40(*(int*) (e + 0xac));
+				gm_LookupEntityRecordById(*(int*) (e + 0xac));
 				fcn_005492e0(e);
 			}
 		}
@@ -35,10 +35,10 @@ void __cdecl fcn_0055bc40(char* h)
 	for (e = fcn_005463a0(1, 0, 0x6f); e != 0; e = he_fn_Handlung()) {
 		if ((((struct bits*) (e + 0x78))->a || ((struct bits*) (e + 0x78))->b)) {
 			if (*(int*) (e + 0xac) == *(int*) (h + 4)) {
-				fcn_00508e40(*(int*) (e + 0xb0));
+				gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 				fcn_005492e0(e);
 			} else if (*(int*) (e + 0xb0) == *(int*) (h + 4)) {
-				fcn_00508e40(*(int*) (e + 0xac));
+				gm_LookupEntityRecordById(*(int*) (e + 0xac));
 				fcn_005492e0(e);
 			}
 		}
@@ -46,10 +46,10 @@ void __cdecl fcn_0055bc40(char* h)
 	for (e = fcn_005463a0(1, 0, 0x45); e != 0; e = he_fn_Handlung()) {
 		if ((((struct bits*) (e + 0x78))->a || ((struct bits*) (e + 0x78))->b)) {
 			if (*(int*) (e + 0xac) == *(int*) (h + 4)) {
-				fcn_00508e40(*(int*) (e + 0xb0));
+				gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 				fcn_005492e0(e);
 			} else if (*(int*) (e + 0xb0) == *(int*) (h + 4)) {
-				fcn_00508e40(*(int*) (e + 0xac));
+				gm_LookupEntityRecordById(*(int*) (e + 0xac));
 				fcn_005492e0(e);
 			}
 		}

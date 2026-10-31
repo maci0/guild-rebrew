@@ -61,7 +61,7 @@ extern unsigned short g_774970;
 extern short g_776658;
 extern int g_664454;
 
-char* __cdecl fcn_00519190(int, ...);
+char* __cdecl io_AppendText(int, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_0046f740(int x, int y, int gfx, int win);
@@ -82,7 +82,7 @@ void __cdecl fcn_005e7b70(int row, int count, int* list)
 	unsigned char* info;
 
 	g_772514 = g_6ad584[row].win;
-	fcn_00519190((int) "$C");
+	io_AppendText((int) "$C");
 	w = ((Win_5e7b70*)g_1015f40)[g_772514].w;
 	h = ((Win_5e7b70*)g_1015f40)[g_772514].h;
 	x = (w - 0xc4) / 2;

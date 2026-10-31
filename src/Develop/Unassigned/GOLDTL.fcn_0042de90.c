@@ -10,7 +10,7 @@ int __cdecl tb_OpenFunction(TIMER_CALLBACK a, unsigned int b)
 	while (g_1052c60[i++].funktion != 0 && i < 32) {
 	}
 	if (i > 32) {
-		fcn_0041d9e0(g_679e00);
+		ReportClientMessage(g_679e00);
 		return 0;
 	}
 	i--;

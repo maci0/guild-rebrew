@@ -20,7 +20,7 @@ ApEvent* __cdecl he_RegisterApEvent(int a, char* name, int b, int c)
 		}
 	}
 	if (i >= 256) {
-		fcn_0041d9e0("he_RegisterApEvent(): Too many ApEvents...");
+		ReportClientMessage("he_RegisterApEvent(): Too many ApEvents...");
 		return 0;
 	}
 	r = &g_7dcae0[i];

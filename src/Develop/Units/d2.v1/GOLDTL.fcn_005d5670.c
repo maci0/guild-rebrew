@@ -27,17 +27,17 @@ extern int g_774654;
 
 int __cdecl fcn_004f6470(int, char*, unsigned short);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5530(struct msg*);
 int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c6ae0(int, int);
@@ -64,12 +64,12 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 	}
 	chance = fcn_004f6470(*(int*) (o + 4), buf, *(unsigned short*) e);
 	dlg = fcn_00470820(0, 0, s_6acc74);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1d57, *(unsigned short*) o, *(unsigned short*) o, *(unsigned short*) o,
+	io_AppendText(0x1d57, *(unsigned short*) o, *(unsigned short*) o, *(unsigned short*) o,
 		*(unsigned short*) o, 2);
-	fcn_00519190(0x1d58);
+	io_AppendText(0x1d58);
 	g_100f1dc = -1;
 	result = 0;
 	do {
@@ -95,7 +95,7 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 						fcn_00535960();
 					}
 					if (*(int*) (e + 0x1c8) & 0x100) {
-						fcn_0051af00(text, 0x1d5a, *(unsigned short*) o, &pos);
+						io_FormatTextBuffer(text, 0x1d5a, *(unsigned short*) o, &pos);
 						fcn_00526120(text, 0);
 					}
 					result = 1;
@@ -103,7 +103,7 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 				} else {
 					fcn_004c54c0(*(int*) (e + 4), *(int*) (o + 4), -0x1a, 1);
 					fcn_004c6ae0(*(int*) (e + 4), -2);
-					fcn_0051af00(text, 0x1d59, *(unsigned short*) o);
+					io_FormatTextBuffer(text, 0x1d59, *(unsigned short*) o);
 					fcn_00526120(text, 0);
 					result = 0;
 					g_774654 = 1;

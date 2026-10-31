@@ -1,6 +1,6 @@
 #include <string.h>
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0064eeec(char*);
 int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl fcn_004c51a0(int, int, int, int);
@@ -18,7 +18,7 @@ int __cdecl fcn_004b04a0(int* a1, int a2, char* a3)
 
 	if (a1 == 0 || a2 >= 8)
 		return 0;
-	e = fcn_00508e40(a1[a2 * 2 + 1]);
+	e = gm_LookupEntityRecordById(a1[a2 * 2 + 1]);
 	if (e == 0)
 		return 0;
 	if (*a3 != '-')

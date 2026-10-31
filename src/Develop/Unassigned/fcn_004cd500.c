@@ -1,6 +1,6 @@
 void* __cdecl fcn_004e6a30(int id);
 void __cdecl fcn_004e6b10(int id);
-void* __cdecl fcn_00508e40(int id);
+void* __cdecl gm_LookupEntityRecordById(int id);
 
 /* Releases the record behind the command's 0x10 field: clears the back-pointer
  * 0x20c of every entity named in the 0x34 count table, then tears the record
@@ -20,7 +20,7 @@ int __cdecl fcn_004cd500(int* cmd, unsigned char* result)
 	for (i = 0; i < (int) rec[0x30]; i++) {
 		h = *(int*) (rec + 0x34 + i * 4);
 		if (h != -1) {
-			p = fcn_00508e40(h);
+			p = gm_LookupEntityRecordById(h);
 			if (p != 0 && *(int*) ((char*) p + 0x20c) == *(int*) rec) {
 				*(int*) ((char*) p + 0x20c) = -1;
 			}

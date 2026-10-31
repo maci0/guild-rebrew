@@ -2,11 +2,11 @@
 
 extern unsigned char g_773d75;
 
-unsigned short* __cdecl fcn_00508e40(int);
+unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(void*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
@@ -18,7 +18,7 @@ int __cdecl fcn_004b74b0(int* a1)
 	unsigned short* e;
 	int v;
 
-	e = fcn_00508e40(a1[0]);
+	e = gm_LookupEntityRecordById(a1[0]);
 	if (e == 0)
 		return 1;
 	if (fcn_005c6270(e, 0x290) != 0)
@@ -26,7 +26,7 @@ int __cdecl fcn_004b74b0(int* a1)
 	v = (int) ((gm_RandomMod(2) + 1.0) * gm_WalkEntityChain(*e) * 0.01);
 	if (v > gm_WalkEntityChain(*e))
 		return 0;
-	fcn_0051af00(buf, *(unsigned short*) (a1 + 1) + 0x12e7, v);
+	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, v);
 	fcn_004c51a0(-1, a1[0], g_773d75, v);
 	fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;

@@ -30,6 +30,9 @@ Use the current [project rules](../AGENTS.md) and [objective](../goal.md).
 Assembly requires positive original-assembly evidence; library attribution and
 provider evidence are separate. Earlier split-link exclusions are historical,
 not current scope restrictions. A score improvement cannot justify incorrect C.
+Historical flag sweeps do not authorize per-function optimization overrides in
+production game code; retain canonical TU/target flags unless an independent
+library or original TU context is supported by native evidence.
 
 ## 3. Errors made during this work, kept on the record
 

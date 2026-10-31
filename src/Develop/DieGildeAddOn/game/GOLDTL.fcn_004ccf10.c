@@ -5,7 +5,7 @@ extern char g_7f4ca0[];
 
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005b2220(char*, char*, void*, int);
 
 
@@ -44,7 +44,7 @@ int __cdecl fcn_004ccf10(int cmd, char* result)
 		}
 	}
 	else if (*(int*) (cmd + 0x10) == 0x62757920) {
-		rec = fcn_00508e40(*(int*) (cmd + 0x14));
+		rec = gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
 		if (rec == 0) {
 			return 1;
 		}

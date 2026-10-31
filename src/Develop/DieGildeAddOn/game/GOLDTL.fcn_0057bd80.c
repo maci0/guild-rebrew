@@ -12,7 +12,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_00546190(char*);
 void __cdecl fcn_0057c630(struct house*, int);
@@ -34,7 +34,7 @@ void __cdecl fcn_0057bd80(char* u)
 		}
 		*(int*) (u + 0x84) = -1;
 		*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
-		h2 = fcn_00508e40(*(int*) (u + 0xb0));
+		h2 = gm_LookupEntityRecordById(*(int*) (u + 0xb0));
 		if (h2 == 0 || ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].id == 0xffff) {
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
 			return;

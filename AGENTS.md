@@ -401,6 +401,14 @@ Every change to a deliverable gets an append-only entry in
 decision owner, verification. Reversals are new entries.
 
 
+## Game compiler policy
+
+Compile game functions with the canonical flags for their whole translation unit
+and target. Per-function flag searches are `--no-promote` diagnostics, not
+production overrides. Native evidence may establish a different original TU or
+library compilation context; apply its flags to the whole TU. Independently
+compiled libraries and runtime code have their own flag contexts.
+
 ## Assembly and linker gaps
 
 Allow assembly only for evidenced padding or positive evidence that the original

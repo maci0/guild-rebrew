@@ -40,7 +40,7 @@ void __cdecl fcn_00471b60(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00519190(int, ...);
+void __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_005cc240(int, int, int);
 void __cdecl fcn_005ccbe0(void);
@@ -93,7 +93,7 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback, int dlg,
 	fcn_00471b60(h);
 	d2_SetForm(h, 2);
 	d2_SetForm(h, 1);
-	fcn_00519190(name);
+	io_AppendText(name);
 	d2_SetForm(h, 4);
 	step = (*(int*) (0x1015f40 + g_772514 * 0x3cc + 0x10) - 0x107) / 7;
 	rem = (*(int*) (0x1015f40 + g_772514 * 0x3cc + 0x10) - 0x107) % 7;

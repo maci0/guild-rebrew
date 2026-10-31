@@ -1,6 +1,6 @@
 extern unsigned short* g_772f24;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00493640(int*);
 int __cdecl IsRandomSecondChoice(int*);
 int __cdecl fcn_004937f0(int*);
@@ -20,7 +20,7 @@ void __cdecl fcn_004dfba0(char* a1, int* ev)
 	switch (ev[0]) {
 	case 0:
 		if (*(int*) (a1 + 0x10) == ev[6]) {
-			e = fcn_00508e40(ev[6]);
+			e = gm_LookupEntityRecordById(ev[6]);
 			*(float*) (a1 + 0x98) = *(int*) (e + 0x24) + *(float*) (e + 0x1c);
 			*(int*) (a1 + 0x94) = fcn_00493640(ev);
 		}
@@ -46,13 +46,13 @@ void __cdecl fcn_004dfba0(char* a1, int* ev)
 		break;
 	case 4:
 		if (*(int*) (a1 + 0x10) == ev[7] || *(int*) (a1 + 0x10) == ev[8] || *(int*) (a1 + 0x10) == ev[9]) {
-			e = fcn_00508e40(((int*)g_772f24)[1]);
+			e = gm_LookupEntityRecordById(((int*)g_772f24)[1]);
 			*(int*) (a1 + 0x94) = fcn_00493a30(e, ev);
 		}
 		break;
 	case 5:
 		if (*(int*) (a1 + 0x10) == ev[7]) {
-			e = fcn_00508e40(ev[7]);
+			e = gm_LookupEntityRecordById(ev[7]);
 			*(int*) (a1 + 0x94) = fcn_00493ce0(e, ev);
 		}
 		break;

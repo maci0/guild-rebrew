@@ -14,7 +14,7 @@ extern unsigned char g_773d75;
 
 char* __cdecl gm_FindRecordById(int);
 char* __cdecl gm_SearchTable67(int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
@@ -42,7 +42,7 @@ int __cdecl fcn_004973a0(int a1, Msg* m, Msg* ev)
 		}
 		id = *(int*) (r + 1);
 	} else if (ev->type == 7) {
-		r = fcn_00508e40(ev->a);
+		r = gm_LookupEntityRecordById(ev->a);
 		if (r == 0) {
 			return 0;
 		}

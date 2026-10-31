@@ -3,9 +3,9 @@ extern int g_14b5280;
 extern int g_aed32c;
 extern float flt_665ecc;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_0051af00(char*, char*, ...);
+void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 int __cdecl fcn_00567170(char*, int*, int*, int);
 int __cdecl fcn_004c5da0(int, int, int, int, int, int);
@@ -39,7 +39,7 @@ void __cdecl fcn_00569760(char* a0)
 		return;
 	}
 	if (*(int*) (a0 + 0x70) < 0) {
-		e = fcn_00508e40(*(int*) (a0 + 0xac));
+		e = gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
 		if (e != 0) {
 			e[0x1b1] = 0;
 		}
@@ -49,7 +49,7 @@ void __cdecl fcn_00569760(char* a0)
 	if (*(int*) (a0 + 0x70) != 0) {
 		return;
 	}
-	e = fcn_00508e40(*(int*) (a0 + 0xac));
+	e = gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
 	rec = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xb0));
 	if (rec == 0 || e == 0) {
 		*(int*) (a0 + 0x70) = -1;
@@ -65,7 +65,7 @@ void __cdecl fcn_00569760(char* a0)
 			return;
 		}
 		he_RegisterApEvent(*(unsigned short*) p, (char*) &g_14b5280, -2, 0);
-		fcn_0051af00(b.text, (char*) 0x19c2, a0 + 0xb4);
+		io_FormatTextBuffer(b.text, (char*) 0x19c2, a0 + 0xb4);
 		fcn_00545d40(*(int*) (e + 4), *(int*) (e + 4), b.text, 0, 0x5f0, 0);
 		if (pl == 0) {
 			return;
@@ -103,7 +103,7 @@ void __cdecl fcn_00569760(char* a0)
 		fcn_00546190(a0);
 		return;
 	}
-	fcn_0051af00(b.text, (char*) 0x19da);
+	io_FormatTextBuffer(b.text, (char*) 0x19da);
 	fcn_00545d40(*(int*) (e + 4), *(int*) (e + 4), b.text, 0, 0x5fb, 0);
 	if (*(int*) (e + 0x184) != 0) {
 		if (fcn_00567170(e, &n, (int*) &f, 0) != 0) {

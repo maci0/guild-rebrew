@@ -23,7 +23,7 @@ typedef struct Slot {
 
 extern char* g_1015ea0;
 
-char* __cdecl fcn_00466190(int idx);
+char* __cdecl d2_GetResourceData(int idx);
 
 /* ADDRESS: GOLDTL 0x00472050 */
 int __cdecl fcn_00472050(int slot, int* w, int* h)
@@ -35,7 +35,7 @@ int __cdecl fcn_00472050(int slot, int* w, int* h)
 	if (slot != -1) {
 		s = &((Slot*)g_1015ea0)[slot];
 		if (s->type == 1 || s->type == 8 || s->type == 5) {
-			f = fcn_00466190(s->value);
+			f = d2_GetResourceData(s->value);
 			if (f) {
 				if (s->type != 8 && s->type != 5) {
 					*w = *(unsigned short*) (f + 6);

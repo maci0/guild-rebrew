@@ -1,19 +1,19 @@
 #include <string.h>
 
-extern char* __cdecl fcn_00508e40(int);
+extern char* __cdecl gm_LookupEntityRecordById(int);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void __cdecl fcn_004c6ae0(int, int);
 extern int __cdecl fcn_004c5420(int, int, int, int, int);
-extern void __cdecl fcn_0051af00(char*, int, ...);
+extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 extern void __cdecl fcn_005099e0(char*, int);
 extern void __cdecl fcn_004c57e0(int, int);
 extern char* __cdecl fcn_005bdc30(int, int*, char*, int, int);
 extern int __cdecl fcn_00470820(int, int, char*);
-extern void __cdecl fcn_00473a90(int, int);
+extern void __cdecl d2_SetOverlayAnimation(int, int);
 extern void __cdecl fcn_00471b60(int);
 extern void __cdecl d2_SetForm(int, int);
-extern int __cdecl fcn_00519190(int, int, int, int);
+extern int __cdecl io_AppendText(int, int, int, int);
 extern int __cdecl fcn_00472250(int, int, int);
 extern int __cdecl fcn_00525f60(char*, int);
 extern int __cdecl fcn_004c4450(int);
@@ -61,14 +61,14 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 		} else {
 			other = a0;
 		}
-		ent = fcn_00508e40(a1[0x85]);
+		ent = gm_LookupEntityRecordById(a1[0x85]);
 		rec = gm_StartFilteredEntitySearch(1, 1, a1[0x86]);
 		if (ent != 0 && rec != 0) {
 			fcn_004c6ae0(*(int*) (a0 + 4), -5);
 			fcn_004c5420(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
 			if (*(unsigned char*) ((*(unsigned short*) (rec + 0x27)) * 0x21c + 0x7f4ca2) == 6 ||
 			    *(unsigned char*) ((*(unsigned short*) (rec + 0x27)) * 0x21c + 0x7f4ca2) == 7) {
-				fcn_0051af00(text, 0x1ddf, *(unsigned short*) a0, rec, *ent);
+				io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) a0, rec, *ent);
 				fcn_00545d40(*(unsigned short*) (rec + 0x27), *(unsigned short*) (rec + 0x27),
 					text, 0, 0x5fb, (char*) 0x6a59fc);
 			}
@@ -90,7 +90,7 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 		other = a0;
 	}
 	if (*(unsigned char*) (other + 0x1c8) <= 0xff) {
-		fcn_0051af00(name, 0x1ce0);
+		io_FormatTextBuffer(name, 0x1ce0);
 		fcn_00526120(name, 0);
 		return 0x81;
 	}
@@ -98,7 +98,7 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 	found[2] = *(unsigned int*) 0x666018;
 	found[3] = *(unsigned int*) 0x66601c;
 	found[0] = 0;
-	fcn_0051af00(name, 0x9b);
+	io_FormatTextBuffer(name, 0x9b);
 	rec = fcn_005bdc30(1, (int*) found, name, 0, 0);
 	if (rec == 0)
 		return 0;
@@ -106,10 +106,10 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 		return 0;
 	state = (*(unsigned short*) (rec + 0x27)) * 0x21c;
 	j = fcn_00470820(0, 0, (char*) 0x6acd8c);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(j);
 	d2_SetForm(j, 1);
-	i = fcn_00519190(0x1ddd, 5, *(unsigned short*) (state + 0x7f4ca0), rec);
+	i = io_AppendText(0x1ddd, 5, *(unsigned short*) (state + 0x7f4ca0), rec);
 	kid = fcn_00472250(j, 1, i);
 	i = fcn_00472250(j, 1, i + 1);
 	*(int*) 0x100f1dc = -1;
@@ -128,7 +128,7 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 						fcn_00535960();
 						count = fcn_004c4450(thr);
 					}
-					fcn_0051af00(text, 0x1dde);
+					io_FormatTextBuffer(text, 0x1dde);
 					fcn_00526120(text, 0);
 					r = gm_RandomMod(0x300) & 0xffff;
 					count = 0x300;
@@ -140,7 +140,7 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 							other = ent;
 							if (*(unsigned char*) ((state + 0x7f4ca2)) == 6 ||
 							    *(unsigned char*) ((state + 0x7f4ca2)) == 7) {
-								fcn_0051af00(text, 0x1ddf, *(unsigned short*) a0, rec,
+								io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) a0, rec,
 									*(unsigned short*) other);
 								fcn_00545d40(*(unsigned int*) (state + 0x7f4ca4),
 									*(unsigned int*) (state + 0x7f4ca4), text, 0, 0x5fb,

@@ -29,11 +29,11 @@ extern float g_6660d4;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046f2c0(int, int);
 int __cdecl fcn_004e8b80(int, int, char*);
 int __cdecl fcn_004e8cb0(int, int, char*);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl cm_ChkCutsceneReady(int, unsigned short);
@@ -70,15 +70,15 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 	for (;;) {
 		if (again) {
 			d2_SetForm(dlg, 2);
-			fcn_00519190(0x6811b0);
+			io_AppendText(0x6811b0);
 			if (sel)
-				fcn_00519190(0xa0, *(unsigned short*) p);
+				io_AppendText(0xa0, *(unsigned short*) p);
 			else
-				fcn_00519190(0x6a9ac4, a0 + 0x12b2);
+				io_AppendText(0x6a9ac4, a0 + 0x12b2);
 			d2_SetForm(dlg, 3);
-			fcn_00519190(0x6811b0);
+			io_AppendText(0x6811b0);
 			if (a2 || a3)
-				fcn_00519190(a2 ? a2 : a3);
+				io_AppendText(a2 ? a2 : a3);
 			d2_SetForm(dlg, 1);
 			fcn_0046f2c0(g_772514, 1);
 			for (i = 0; i < 8; i++) {
@@ -98,7 +98,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 				count = fcn_004e8b80(a0, 6, buf);
 				if (count >= 1) {
 					for (i = 0; i < count; i++) {
-						rec[i].ent = (char*) fcn_00508e40(*(int*) (buf + i * 0x18 + 4));
+						rec[i].ent = (char*) gm_LookupEntityRecordById(*(int*) (buf + i * 0x18 + 4));
 						rec[i].text = *(unsigned char*) (buf + i * 0x18 + 8);
 					}
 				}
@@ -107,7 +107,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 				count = fcn_004e8cb0(0, 6, buf);
 				if (count >= 1) {
 					for (i = 0; i < count; i++) {
-						rec[i].ent = (char*) fcn_00508e40(*(int*) (buf + i * 0x18 + 4));
+						rec[i].ent = (char*) gm_LookupEntityRecordById(*(int*) (buf + i * 0x18 + 4));
 						rec[i].text = *(unsigned char*) (buf + i * 0x18 + 8);
 					}
 				}
@@ -116,7 +116,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 				count = fcn_004e8b80(a0, 5, buf);
 				if (count >= 1) {
 					for (i = 0; i < count; i++) {
-						rec[i].ent = (char*) fcn_00508e40(*(int*) (buf + i * 0x18 + 4));
+						rec[i].ent = (char*) gm_LookupEntityRecordById(*(int*) (buf + i * 0x18 + 4));
 						rec[i].text = *(unsigned char*) (buf + i * 0x18 + 8);
 					}
 				}

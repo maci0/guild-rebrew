@@ -4,7 +4,7 @@ extern int g_7e46ac;
 
 int __cdecl fcn_00470820(int, int, const char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00519190(int);
+void __cdecl io_AppendText(int);
 void __cdecl fcn_005373e0(int, int);
 
 int __cdecl fcn_005268c0(int a, char flags)
@@ -19,7 +19,7 @@ int __cdecl fcn_005268c0(int a, char flags)
 		h = fcn_00470820(0, 0, "misc\\Messagebox");
 	}
 	fcn_00471b60(h);
-	fcn_00519190(a);
+	io_AppendText(a);
 	fcn_005373e0(0, g_7e46ac);
 	return h;
 }

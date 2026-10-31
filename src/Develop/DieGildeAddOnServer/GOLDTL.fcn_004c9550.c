@@ -21,7 +21,7 @@ void __cdecl fcn_004ad2d0(int v);
 void __cdecl fcn_004b3d40(int a, int b);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
-int __cdecl fcn_00508e40(int id);
+int __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_005167c0(void* ent, int v);
 void __cdecl fcn_0052a3a0(void* t, int flag);
 void __cdecl fcn_0052da70(int idx);
@@ -101,7 +101,7 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 		if (*(int*) 0x6a3760 != -1)
 			goto bad;
 		v = *(int*) (buf + 0x11);
-		if (fcn_00508e40(v) == 0)
+		if (gm_LookupEntityRecordById(v) == 0)
 			goto bad;
 		*(int*) 0x6a3760 = v;
 		break;

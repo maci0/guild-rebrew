@@ -4,7 +4,7 @@
 <rect width="715" height="788" rx="16" fill="#101820"/>
 <g font-family="DejaVu Sans, sans-serif">
 <text x="24" y="33" font-size="19" fill="#f1f6fa" text-anchor="start">RECONSTRUCTION METRICS</text>
-<text x="691" y="32" font-size="12" fill="#aebdca" text-anchor="end">2026-10-29 02:40 UTC</text>
+<text x="691" y="32" font-size="12" fill="#aebdca" text-anchor="end">2026-10-31 14:02 UTC</text>
 <text x="24" y="57" font-size="13" fill="#aebdca" text-anchor="start">Code bytes, function counts and raw-file agreement · separate measures</text>
 <rect x="24" y="80" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="107" font-size="16" fill="#f1f6fa" text-anchor="start">server.dll</text>
@@ -16,43 +16,43 @@
 <text x="675" y="174" font-size="17" fill="#39bdf8" text-anchor="end">100.0%</text>
 <rect x="40" y="183" width="635" height="10" fill="#394a59"/>
 <rect x="40" y="183" width="635.00" height="10" fill="#39bdf8"/>
-<text x="40" y="217" font-size="12" fill="#aebdca" text-anchor="start">Raw file, original offsets · 213,559 / 286,720 bytes</text>
-<text x="675" y="217" font-size="17" fill="#ffc68b" text-anchor="end">74.4%</text>
+<text x="40" y="217" font-size="12" fill="#aebdca" text-anchor="start">Raw file, original offsets · 286,720 / 286,720 bytes</text>
+<text x="675" y="217" font-size="17" fill="#ffc68b" text-anchor="end">100.0%</text>
 <rect x="40" y="226" width="635" height="10" fill="#394a59"/>
-<rect x="40" y="226" width="472.97" height="10" fill="#ffc68b"/>
+<rect x="40" y="226" width="635.00" height="10" fill="#ffc68b"/>
 <text x="40" y="256" font-size="11" fill="#aebdca" text-anchor="start">0 assembly matches · 0 functions still to match</text>
-<text x="40" y="272" font-size="11" fill="#ffc68b" text-anchor="start">Raw file differs from reference</text>
+<text x="40" y="272" font-size="11" fill="#55dbac" text-anchor="start">Raw file equals reference</text>
 <rect x="24" y="296" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="323" font-size="16" fill="#f1f6fa" text-anchor="start">Europa1400Gold_TL.exe</text>
-<text x="40" y="347" font-size="12" fill="#aebdca" text-anchor="start">Code accounting · 1,331,545 / 2,491,370 bytes</text>
-<text x="675" y="347" font-size="17" fill="#55dbac" text-anchor="end">53.4%</text>
+<text x="40" y="347" font-size="12" fill="#aebdca" text-anchor="start">Code accounting · 1,344,965 / 2,491,370 bytes</text>
+<text x="675" y="347" font-size="17" fill="#55dbac" text-anchor="end">53.9%</text>
 <rect x="40" y="356" width="635" height="10" fill="#394a59"/>
-<rect x="40" y="356" width="339.38" height="10" fill="#55dbac"/>
-<text x="40" y="390" font-size="12" fill="#aebdca" text-anchor="start">C function matches · 4,100 / 5,184 functions</text>
-<text x="675" y="390" font-size="17" fill="#39bdf8" text-anchor="end">79.0%</text>
+<rect x="40" y="356" width="342.80" height="10" fill="#55dbac"/>
+<text x="40" y="390" font-size="12" fill="#aebdca" text-anchor="start">C function matches · 4,091 / 5,220 functions</text>
+<text x="675" y="390" font-size="17" fill="#39bdf8" text-anchor="end">78.3%</text>
 <rect x="40" y="399" width="635" height="10" fill="#394a59"/>
-<rect x="40" y="399" width="502.22" height="10" fill="#39bdf8"/>
-<text x="40" y="433" font-size="12" fill="#aebdca" text-anchor="start">Raw file, original offsets · 275,539 / 3,280,896 bytes</text>
-<text x="675" y="433" font-size="17" fill="#ffc68b" text-anchor="end">8.3%</text>
+<rect x="40" y="399" width="497.66" height="10" fill="#39bdf8"/>
+<text x="40" y="433" font-size="12" fill="#aebdca" text-anchor="start">Raw file, original offsets · 175,845 / 2,977,792 bytes</text>
+<text x="675" y="433" font-size="17" fill="#ffc68b" text-anchor="end">5.9%</text>
 <rect x="40" y="442" width="635" height="10" fill="#394a59"/>
-<rect x="40" y="442" width="53.33" height="10" fill="#ffc68b"/>
-<text x="40" y="472" font-size="11" fill="#aebdca" text-anchor="start">0 assembly matches · 1,084 functions still to match</text>
+<rect x="40" y="442" width="37.50" height="10" fill="#ffc68b"/>
+<text x="40" y="472" font-size="11" fill="#aebdca" text-anchor="start">0 assembly matches · 1,129 functions still to match</text>
 <text x="40" y="488" font-size="11" fill="#ffc68b" text-anchor="start">Raw file differs from reference</text>
 <rect x="24" y="512" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="539" font-size="16" fill="#f1f6fa" text-anchor="start">Europa1400Gold.exe</text>
-<text x="40" y="563" font-size="12" fill="#aebdca" text-anchor="start">Code accounting · 422,904 / 2,006,532 bytes</text>
-<text x="675" y="563" font-size="17" fill="#55dbac" text-anchor="end">21.0%</text>
+<text x="40" y="563" font-size="12" fill="#aebdca" text-anchor="start">Code accounting · 424,935 / 2,006,532 bytes</text>
+<text x="675" y="563" font-size="17" fill="#55dbac" text-anchor="end">21.1%</text>
 <rect x="40" y="572" width="635" height="10" fill="#394a59"/>
-<rect x="40" y="572" width="133.83" height="10" fill="#55dbac"/>
-<text x="40" y="606" font-size="12" fill="#aebdca" text-anchor="start">C function matches · 1,881 / 4,426 functions</text>
-<text x="675" y="606" font-size="17" fill="#39bdf8" text-anchor="end">42.4%</text>
+<rect x="40" y="572" width="134.48" height="10" fill="#55dbac"/>
+<text x="40" y="606" font-size="12" fill="#aebdca" text-anchor="start">C function matches · 1,889 / 4,426 functions</text>
+<text x="675" y="606" font-size="17" fill="#39bdf8" text-anchor="end">42.6%</text>
 <rect x="40" y="615" width="635" height="10" fill="#394a59"/>
-<rect x="40" y="615" width="269.87" height="10" fill="#39bdf8"/>
+<rect x="40" y="615" width="271.02" height="10" fill="#39bdf8"/>
 <text x="40" y="649" font-size="12" fill="#aebdca" text-anchor="start">Raw file, original offsets · 27,280 / 2,301,952 bytes</text>
 <text x="675" y="649" font-size="17" fill="#ffc68b" text-anchor="end">1.1%</text>
 <rect x="40" y="658" width="635" height="10" fill="#394a59"/>
 <rect x="40" y="658" width="7.53" height="10" fill="#ffc68b"/>
-<text x="40" y="688" font-size="11" fill="#aebdca" text-anchor="start">1 assembly matches · 2,544 functions still to match</text>
+<text x="40" y="688" font-size="11" fill="#aebdca" text-anchor="start">1 assembly matches · 2,536 functions still to match</text>
 <text x="40" y="704" font-size="11" fill="#ffc68b" text-anchor="start">Raw file differs from reference</text>
 <text x="24" y="738" font-size="11" fill="#aebdca" text-anchor="start">Code accounting includes libraries and padding; C counts exclude whole-function assembly.</text>
 <text x="24" y="758" font-size="11" fill="#aebdca" text-anchor="start">Stored verdicts and existing images; not fresh verification. PROVEN is not a byte match.</text>

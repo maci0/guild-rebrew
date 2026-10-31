@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004c4dc0(char*, int);
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 
 
 /* ADDRESS: GOLDTL 0x004c7140 */
@@ -40,7 +40,7 @@ int __cdecl fcn_004c7140(unsigned char* a1)
 			if (addr == stat + 0x5c) {
 				addr = (char*) *(int*) p;
 				addr += *(int*) (stat + 0x5c);
-				e = fcn_00508e40((int) addr);
+				e = gm_LookupEntityRecordById((int) addr);
 				if (e == 0)
 					return 1;
 				if (*(int*) (e + 0x5c) != -1 && *(int*) (e + 0x5c) != *(int*) (stat + 4))

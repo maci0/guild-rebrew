@@ -1,4 +1,4 @@
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00529160(char*, int, int, char*);
@@ -13,7 +13,7 @@ int __cdecl fcn_0057a260(char* p)
 	char* e;
 
 	v = 0;
-	s = (char*) fcn_00508e40(*(int*)(p + 0xac));
+	s = (char*) gm_LookupEntityRecordById(*(int*)(p + 0xac));
 	if (s == 0)
 		goto tail;
 	if (*(char**)(s + 0x17c) != 0 && *(unsigned char*)*(char**)(s + 0x17c) == 0x8f)

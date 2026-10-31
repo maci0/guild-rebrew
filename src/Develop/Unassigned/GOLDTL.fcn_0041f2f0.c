@@ -6,7 +6,7 @@ struct I41f2f0 {
 	int (__stdcall** vt)(I41f2f0*, int);
 };
 
-char* __cdecl fcn_0041f9b0(int);
+char* __cdecl FindVideoById(int);
 
 int __cdecl fcn_0041f2f0(int a1, int a2)
 {
@@ -14,7 +14,7 @@ int __cdecl fcn_0041f2f0(int a1, int a2)
 	I41f2f0* o;
 	int r;
 
-	p = fcn_0041f9b0(a1);
+	p = FindVideoById(a1);
 	if (p != 0) {
 		o = *(I41f2f0**) (p + 0x130);
 		r = o->vt[0x90 / 4](o, a2 ? -1 : 0);

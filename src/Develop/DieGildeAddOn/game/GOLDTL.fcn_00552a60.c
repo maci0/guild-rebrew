@@ -1,7 +1,7 @@
 #include <string.h>
 
 int __cdecl fcn_00500d20(void*, void*);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_00500bb0(void*, int, int, int);
@@ -14,7 +14,7 @@ int __cdecl fcn_0050c710(int, int, int);
 int __cdecl fcn_004c51a0(int, int, unsigned char, int);
 int __cdecl gm_GetEntityTableEntry(int);
 int __cdecl fcn_0050dc90(int);
-int __cdecl fcn_0051af00(char*, ...);
+int __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl gm_AccumulateTyped2(int);
 int __cdecl fcn_004c5c80(int);
@@ -44,7 +44,7 @@ void __cdecl fcn_00552a60(int a0)
 	v14 = 0;
 	v17 = 0;
 	v15 = 0;
-	v5 = (int) fcn_00508e40(*(int*) (a0 + 0xd4));
+	v5 = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0xd4));
 	v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0x10));
 	v18 = v5;
 	if (v6 != 0 && *(unsigned short*) (v6 + 0x27) != 0xffff) {
@@ -61,7 +61,7 @@ void __cdecl fcn_00552a60(int a0)
 				}
 				break;
 			}
-			v14 = (unsigned short*) fcn_00508e40(
+			v14 = (unsigned short*) gm_LookupEntityRecordById(
 			    *(int*) (a0 + 0x8c + *(unsigned char*) (a0 + 0xd2) * 4));
 			v17 = *(unsigned char*) (a0 + 0xd2);
 			*(unsigned char*) (a0 + 0xd2) = *(unsigned char*) (a0 + 0xd2) + 1;
@@ -87,7 +87,7 @@ void __cdecl fcn_00552a60(int a0)
 				v16 = (int*) (a0 + 0x8c);
 				v17 = 6;
 				do {
-					v14 = (unsigned short*) fcn_00508e40(*v16);
+					v14 = (unsigned short*) gm_LookupEntityRecordById(*v16);
 					if (v14 != 0) {
 						v6 = (int) (*(unsigned char*) (v14 + 0x41)
 						    * 0.023809524f + 1.0f);
@@ -125,7 +125,7 @@ void __cdecl fcn_00552a60(int a0)
 					v4 = fcn_0050dc90(v4);
 					if (v4 == 0
 					    || (*(unsigned char*) (v4 + 0x1b4) & 1) == 0) {
-						fcn_0051af00(v12, 0x19f4, v5);
+						io_FormatTextBuffer(v12, 0x19f4, v5);
 						fcn_00545d40(*(int*) (v18 + 4),
 						    *(int*) (v18 + 4), v12, 0, 0x5f0,
 						    (char*) 0x6b5c60);
@@ -180,7 +180,7 @@ void __cdecl fcn_00552a60(int a0)
 						    *(unsigned char*) 0x773d75, v5);
 						if (*(char*) (v4 + 2) == 6
 						    || *(char*) (v4 + 2) == 7) {
-							fcn_0051af00(v12, 0x19f2, v5);
+							io_FormatTextBuffer(v12, 0x19f2, v5);
 							fcn_00545d40(
 							    *(int*) (v4 + 4),
 							    *(int*) (v4 + 4), v12,
@@ -189,7 +189,7 @@ void __cdecl fcn_00552a60(int a0)
 						}
 					} else if (*(char*) (v4 + 2) == 6
 					    || *(char*) (v4 + 2) == 7) {
-						fcn_0051af00(v12, 0x19f3);
+						io_FormatTextBuffer(v12, 0x19f3);
 						fcn_00545d40(*(int*) (v4 + 4),
 						    *(int*) (v4 + 4), v12, 0, 0x5f0, 0);
 					}

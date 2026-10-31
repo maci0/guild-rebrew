@@ -35,7 +35,7 @@ int __cdecl d2_CreateRadioGroup(int n, ...)
 		return -1;
 	}
 	if (n > 0x20) {
-		fcn_0041d9e0(s_67d4b0);
+		ReportClientMessage(s_67d4b0);
 		return -1;
 	}
 	g_102cbc4[i].count = n;

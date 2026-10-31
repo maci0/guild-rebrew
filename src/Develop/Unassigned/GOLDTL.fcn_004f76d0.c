@@ -3,7 +3,7 @@
 
 int  __cdecl fcn_005d63e0(void*, void*);
 extern char g_679060[];
-void __cdecl fcn_0051af00(void*, int, int);
+void __cdecl io_FormatTextBuffer(void*, int, int);
 
 int __cdecl fcn_004f76d0(void* a1, void* a2)
 {
@@ -21,7 +21,7 @@ int __cdecl fcn_004f76d0(void* a1, void* a2)
 		return 2;
 	}
 	if (v == 1 && *(char*) ((char*) a1 + 2) == 6) {
-		fcn_0051af00((char*) a2 + 0x14, (int) g_679060, 0x1d60);
+		io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1d60);
 	}
 	return 2;
 }

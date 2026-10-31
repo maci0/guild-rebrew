@@ -1,7 +1,7 @@
 #include <string.h>
 #include "client_packet_queue.h"
 extern unsigned char g_7747b0;
-void __cdecl fcn_0041d9e0(const char* message);
+void __cdecl ReportClientMessage(const char* message);
 
 /* Inferred distinct client handler name; native diagnostic text is retained. */
 /* ADDRESS: GOLDTL 0x004c9ee0 */
@@ -14,7 +14,7 @@ int __cdecl cm_ExCreateCutsceneEntry(char* command, char* result)
     memcpy(payload, g_aed340, sizeof(payload));
     entry = fcn_004e6ae0(payload);
     if (entry == 0) {
-        fcn_0041d9e0("cm_ExAllocCutscene(): Cutscene-Queue is full!");
+        ReportClientMessage("cm_ExAllocCutscene(): Cutscene-Queue is full!");
         return 1;
     }
     if (g_7747b0 & 4)

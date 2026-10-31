@@ -21,7 +21,7 @@ extern List8c_102cbc8 g_102cbc8[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl d2_CreateRadioGroup(int);
 int* __cdecl fcn_004b3ce0(int, int*);
@@ -49,7 +49,7 @@ int __cdecl fcn_004b3fe0(int a1)
 	h = fcn_00470820(0, 0, g_68114c);
 	fcn_00471b60(h);
 	d2_SetForm(h, 1);
-	fcn_00519190(0x1ace);
+	io_AppendText(0x1ace);
 	d2_SetForm(h, 2);
 	prev = g_772514;
 	d2_SetForm(h, 0);
@@ -57,7 +57,7 @@ int __cdecl fcn_004b3fe0(int a1)
 	d2_SetForm(h, 2);
 	lst = d2_CreateRadioGroup(0);
 	for (it = fcn_004b3ce0(a1, 0); it != 0; it = fcn_004b3ce0(a1, it)) {
-		k = fcn_00472250(h, 2, fcn_00519190((int) g_681140, it[2]));
+		k = fcn_00472250(h, 2, io_AppendText((int) g_681140, it[2]));
 		*(int**) (g_1015ea0 + k * 756 + 0x2f0) = it;
 		fcn_00469470(lst, k);
 	}

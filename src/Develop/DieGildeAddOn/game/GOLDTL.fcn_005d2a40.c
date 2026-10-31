@@ -1,6 +1,6 @@
 #include <string.h>
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_00505e30(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
@@ -28,16 +28,16 @@ int __cdecl fcn_005d2a40(int a0, int a1)
 	f10 = 0.0f;
 	memset(buf, 0, sizeof buf);
 	buf[0] = 1;
-	p = fcn_00508e40(a0);
-	q = fcn_00508e40(a1);
+	p = gm_LookupEntityRecordById(a0);
+	q = gm_LookupEntityRecordById(a1);
 	if (p == 0 || q == 0) {
 		return 0;
 	}
-	t = fcn_00508e40(*(int*) (q + 0x60));
+	t = gm_LookupEntityRecordById(*(int*) (q + 0x60));
 	if (t != 0) {
 		f10 = (float) (gm_WalkEntityChain(*(unsigned short*) t) / 2);
 	}
-	t = fcn_00508e40(*(int*) (q + 0x64));
+	t = gm_LookupEntityRecordById(*(int*) (q + 0x64));
 	if (t != 0) {
 		f8 = (float) (gm_WalkEntityChain(*(unsigned short*) t) / 2);
 	}

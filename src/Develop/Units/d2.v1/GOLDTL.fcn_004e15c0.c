@@ -11,7 +11,7 @@ extern int g_100f1dc;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_004e6e20(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -27,7 +27,7 @@ void __cdecl fcn_004e15c0(char* a1)
 	h = fcn_00470820(0, 0, g_68ce48);
 	fcn_00471d80(h, 3);
 	d2_SetForm(h, 0);
-	fcn_00519190(0x10de, *g_772f24);
+	io_AppendText(0x10de, *g_772f24);
 	a1[0x94] = 0;
 	a1[0x14] = (*(char*)g_6b5c60);
 	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, g_772514);

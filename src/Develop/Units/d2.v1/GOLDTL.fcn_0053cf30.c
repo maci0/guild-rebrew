@@ -13,7 +13,7 @@ int __cdecl fcn_004b3db0(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int);
+int __cdecl io_AppendText(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004b5530(int, int);
@@ -29,8 +29,8 @@ int __cdecl fcn_0053cf30(void)
 		h = fcn_00470820(0, 0, "Menu\\GET_MISSION_WARNING");
 		fcn_00471b60(h);
 		d2_SetForm(h, 0);
-		fcn_00519190(0x1adc);
-		fcn_00519190(0x1add);
+		io_AppendText(0x1adc);
+		io_AppendText(0x1add);
 		while (fcn_005373e0((void*) fcn_0053cf30, 0xc6) != 0) {
 			if (g_100f1dc == 2) {
 				g_774654 = 1;

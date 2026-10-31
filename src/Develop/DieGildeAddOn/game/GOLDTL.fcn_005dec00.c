@@ -15,9 +15,9 @@ extern unsigned short g_774970;
 extern __int64 g_666018;
 extern int g_66601c;
 
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(int*, char*, int, int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 char* __cdecl fcn_005c6220(int, int*);
@@ -37,7 +37,7 @@ int __cdecl fcn_005dec00(char* ent, int* arg)
 	if (ent[2] == 6) {
 		memset(desc, 0, sizeof(desc));
 		memset(desc + 7, 0xff, 8 * sizeof(int));
-		fcn_0051af00(name, 0x9c);
+		io_FormatTextBuffer(name, 0x9c);
 		desc[0] = 1;
 		desc[1] = ((((Ent*)g_7f4ca0)[g_774970].b9 != 0) + 1) | 0x400;
 		desc[4] = 6;
@@ -49,7 +49,7 @@ int __cdecl fcn_005dec00(char* ent, int* arg)
 		}
 		ok = 1;
 	} else {
-		obj = fcn_00508e40(arg[1]);
+		obj = gm_LookupEntityRecordById(arg[1]);
 		if (obj == 0) {
 			goto end;
 		}
@@ -57,13 +57,13 @@ int __cdecl fcn_005dec00(char* ent, int* arg)
 	}
 	fcn_004c54c0(*(int*) (ent + 4), *(int*) (obj + 4), 0x19, ok);
 	if (obj[2] == 6 || obj[2] == 7) {
-		fcn_0051af00(text, 0xffa, *(unsigned short*) ent);
+		io_FormatTextBuffer(text, 0xffa, *(unsigned short*) ent);
 		fcn_00545d40(*(int*) (obj + 4), -1, text, 0, 0x5ec, 0);
 	}
 	if (ent[2] == 6) {
 		rec = fcn_005c6220(**(unsigned short**) arg, &tmp);
 		arg[4] = ok;
-		fcn_0051af00(text, 0xfe8, *(unsigned short*) (rec + 0x18) + 1, *(unsigned short*) obj);
+		io_FormatTextBuffer(text, 0xfe8, *(unsigned short*) (rec + 0x18) + 1, *(unsigned short*) obj);
 		fcn_005dbe90(text);
 	}
 end:

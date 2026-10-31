@@ -19,7 +19,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004c4450(int);
@@ -32,7 +32,7 @@ int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
 int __cdecl fcn_0050cf50(char*, int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00546190(char*);
 
@@ -51,7 +51,7 @@ void __cdecl fcn_00553490(char* self)
 	int step;
 
 	p = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0xb0));
-	ent = fcn_00508e40(*(int*) (self + 0xac));
+	ent = gm_LookupEntityRecordById(*(int*) (self + 0xac));
 	state = *(int*) (self + 0x70);
 	if (state == -1 || state == -2) {
 		if (p != 0 && (*(unsigned char*) (self + 0x78) & 2)) {
@@ -140,7 +140,7 @@ void __cdecl fcn_00553490(char* self)
 			fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0x30, 0, 0);
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
-			fcn_0051af00(buf, 0x1a8d, *(unsigned short*) (p + 0x27), p, *(int*) (self + 0xb4));
+			io_FormatTextBuffer(buf, 0x1a8d, *(unsigned short*) (p + 0x27), p, *(int*) (self + 0xb4));
 			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + 0x7f4ca4);
 			fcn_00545d40(i, i, buf, 0, 0x5f3, (char*) 0x6a5c10);
 			return;
@@ -150,7 +150,7 @@ void __cdecl fcn_00553490(char* self)
 			fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0, 5, 0);
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
-			fcn_0051af00(buf, 0x1a8f, *(unsigned short*) (p + 0x27), p);
+			io_FormatTextBuffer(buf, 0x1a8f, *(unsigned short*) (p + 0x27), p);
 			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + 0x7f4ca4);
 			fcn_00545d40(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
 			return;
@@ -159,14 +159,14 @@ void __cdecl fcn_00553490(char* self)
 			fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0, 5, 0);
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
-			fcn_0051af00(buf, 0x1a8e, *(unsigned short*) (p + 0x27), p);
+			io_FormatTextBuffer(buf, 0x1a8e, *(unsigned short*) (p + 0x27), p);
 			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + 0x7f4ca4);
 			fcn_00545d40(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
 			return;
 		}
 	case 4:
 		if (*(int*) (self + 0xb8) == 1) {
-			fcn_0051af00(buf, 0x1a90, p);
+			io_FormatTextBuffer(buf, 0x1a90, p);
 			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + 0x7f4ca4);
 			fcn_00545d40(i, i, buf, 0, 0x5f3, 0);
 			i = *(int*) (*(unsigned short*) (p + 0x27) * 0x21c + 0x7f4ca4);

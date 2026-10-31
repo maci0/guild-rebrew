@@ -47,7 +47,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00476b60(void);
 void __cdecl fcn_00474cf0(int);
 int __cdecl fcn_00517b10(char*, char*);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00533a60(int, int, int*, int, int, int);
 int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
 
@@ -96,24 +96,24 @@ int __cdecl fcn_0053d490(int a0, int a1)
 	fcn_00471b60(dlg);
 	fcn_00517b10(g_7e1d00, buf);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1acf, buf);
-	v20 = fcn_00472250(dlg, 1, fcn_00519190(0x1ad0, 0x1ad2));
+	io_AppendText(0x1acf, buf);
+	v20 = fcn_00472250(dlg, 1, io_AppendText(0x1ad0, 0x1ad2));
 	d2_SetForm(dlg, 2);
-	v21 = fcn_00472250(dlg, 2, fcn_00519190(0x1ad1, 0x1ad3));
+	v21 = fcn_00472250(dlg, 2, io_AppendText(0x1ad1, 0x1ad3));
 	d2_SetForm(dlg, 3);
-	fcn_00519190(0x1ad4);
+	io_AppendText(0x1ad4);
 	fcn_00533a60(g_772514, 0x1c, v11, 2, *(int*) 0x14abe74,
 	    *(int*) 0x14abe78);
 	s1a = (char*) v11[0];
 	s1b = (char*) v11[1];
 	d2_SetForm(dlg, 4);
-	fcn_00519190(0x1ad7);
+	io_AppendText(0x1ad7);
 	fcn_00533a60(g_772514, 0x1c, v11, 2, *(int*) 0x14abe80,
 	    *(int*) 0x14abe84);
 	s2a = (char*) v11[0];
 	s2b = (char*) v11[1];
 	d2_SetForm(dlg, 5);
-	fcn_00519190(0x1adb);
+	io_AppendText(0x1adb);
 	rows = (*(int*) (g_772514 * 0x3cc + 0x1015f4c) - 0x20) / 0x30;
 	list = d2_CreateRadioGroup(0);
 	for (i = 0; i < 8; i++) {
@@ -128,7 +128,7 @@ int __cdecl fcn_0053d490(int a0, int a1)
 		fcn_00469470(list, id);
 	}
 	d2_SetForm(dlg, 6);
-	v27 = fcn_00472250(dlg, 6, fcn_00519190(0x7e));
+	v27 = fcn_00472250(dlg, 6, io_AppendText(0x7e));
 	fcn_00472380(v20, g_7e23ea);
 	fcn_00472380(v21, g_7e240a);
 	for (j = 0; j < 8; j++) {

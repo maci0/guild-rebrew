@@ -1,6 +1,4 @@
-char g_68aec4[11] = {
-    0x63, 0x6d, 0x5f, 0x4c, 0x6f, 0x61, 0x64, 0x42, 0x75, 0x66, 0x00,
-};
+char g_68aec4[] = "cm_LoadBuf";
 extern unsigned int g_aed328;
 extern char* cm_LoadBuf;
 extern unsigned int g_1005820;

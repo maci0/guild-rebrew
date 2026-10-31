@@ -12,7 +12,7 @@ char* __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(char*);
 void __cdecl d2_SetForm(char*, int);
 void __cdecl fcn_004b5630(int, int);
-void __cdecl fcn_00519190(int, int);
+void __cdecl io_AppendText(int, int);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_00471e30(char*);
 void __cdecl fcn_004b5530(int, int);
@@ -38,7 +38,7 @@ void __cdecl fcn_004b60e0(int flags)
 	v = (flags & 0xfffffff6) | 0x100;
 	fcn_004b5630(tag, v);
 	d2_SetForm(obj, 1);
-	fcn_00519190(0x1b95, *tab);
+	io_AppendText(0x1b95, *tab);
 	g_100f1dc = -1;
 	for (;;) {
 		if (g_6a3760 == -1) {

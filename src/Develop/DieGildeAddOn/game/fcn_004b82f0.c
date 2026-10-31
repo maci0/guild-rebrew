@@ -5,12 +5,12 @@ typedef struct {
 	int f4;
 } H_4b82f0;
 
-char *__cdecl fcn_00508e40(int);
+char *__cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(char *, int);
 int __cdecl fcn_004a55c0(char *, int, int *, int, float, int *);
 int __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_0051af00(char *, int, ...);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl fcn_00545d40(int, int, char *, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b82f0 */
@@ -27,7 +27,7 @@ int __cdecl fcn_004b82f0(int *obj)
 	int neg;
 	int clamp;
 
-	h = (H_4b82f0 *) fcn_00508e40(obj[0]);
+	h = (H_4b82f0 *) gm_LookupEntityRecordById(obj[0]);
 	if (h == 0) {
 		return 1;
 	}
@@ -44,7 +44,7 @@ int __cdecl fcn_004b82f0(int *obj)
 	neg = r * 2 + 6;
 	fcn_004c54c0(h->f4, *(int *) (t + 4), -neg, 1);
 	s = buf;
-	fcn_0051af00(s, *(unsigned short *) ((char *) obj + 4) + 0x12e7,
+	io_FormatTextBuffer(s, *(unsigned short *) ((char *) obj + 4) + 0x12e7,
 		*(unsigned short *) t, *(unsigned short *) t, *(unsigned short *) t);
 	clamp = strlen(s) > 0x100;
 	fcn_00545d40(h->f4, h->f4, s, clamp, 0x603, 0);

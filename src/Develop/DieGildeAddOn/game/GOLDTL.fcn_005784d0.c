@@ -9,7 +9,7 @@ int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_004c5da0(unsigned int, unsigned int, int, int, int, char*);
 void __cdecl fcn_00500bb0(char*, int, int, int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl fcn_00546190(char*);
 void __cdecl fcn_005b2ee0(char*, char*, char*);
@@ -27,7 +27,7 @@ void __cdecl fcn_005784d0(char* obj)
 	unsigned int a;
 	unsigned int b;
 
-	lager = (unsigned short*) fcn_00508e40(*(int*) (obj + 0xb4));
+	lager = (unsigned short*) gm_LookupEntityRecordById(*(int*) (obj + 0xb4));
 	if (lager == 0) {
 		fcn_00546190(obj);
 		return;
@@ -78,7 +78,7 @@ void __cdecl fcn_005784d0(char* obj)
 			*(int*) (obj + 0x56) = g_7f4c04;
 			*(int*) (obj + 0x5a) = g_7f4c08;
 			*(unsigned short*) (obj + 0x5e) = g_7f4c0c;
-			h = (int) fcn_00508e40(*(int*) (obj + 0xb0));
+			h = (int) gm_LookupEntityRecordById(*(int*) (obj + 0xb0));
 			if (h != 0) {
 				fcn_00500bb0(obj + 0x52, 0x18, 0, 0);
 				fcn_005b2ee0(g_7f4ca0 + *(unsigned short*) (obj + 8) * 0x21c,

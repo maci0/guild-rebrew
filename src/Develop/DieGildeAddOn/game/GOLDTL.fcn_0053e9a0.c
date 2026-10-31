@@ -12,7 +12,7 @@ extern int g_67d370;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_004695a0(int, int);
@@ -36,7 +36,7 @@ int __cdecl fcn_0053e9a0(void)
 	h = fcn_00470820(0, 0, g_6a4120);
 	fcn_00471b60(h);
 	g_7747b4 = g_77670a;
-	s = fcn_00519190(0x1abf);
+	s = io_AppendText(0x1abf);
 	a0 = fcn_00472250(h, 0, s);
 	a1 = fcn_00472250(h, 0, s + 1);
 	a2 = fcn_00472250(h, 0, s + 2);

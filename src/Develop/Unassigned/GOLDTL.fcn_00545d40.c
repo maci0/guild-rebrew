@@ -19,7 +19,7 @@ struct msg {
 	char pad9d[0x5b];
 };
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c5580(struct msg*, int, char*);
 
 int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2)
@@ -30,7 +30,7 @@ int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int 
 	int len;
 	int result;
 
-	e = fcn_00508e40(id);
+	e = gm_LookupEntityRecordById(id);
 	if (e != 0 && (e[2] == 6 || e[2] == 7)) {
 		memset(&m, 0, sizeof(m));
 		m.id = id;

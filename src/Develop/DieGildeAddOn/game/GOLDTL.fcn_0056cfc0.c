@@ -27,7 +27,7 @@ int __cdecl fcn_0050cad0(int *, int *);
 void __cdecl fcn_0050ff70(char *, int);
 int __cdecl fcn_004c30a0(int, int, char *, int, int);
 void __cdecl fcn_00500bb0(char *, int, int, int);
-char *__cdecl fcn_00508e40(int);
+char *__cdecl gm_LookupEntityRecordById(int);
 char *__cdecl fcn_00445600(char *, int, int, char *);
 void __cdecl fcn_00455350(char *, char *, float *);
 int __cdecl fcn_00451840(float *, float *, float);
@@ -44,7 +44,7 @@ char *__cdecl fcn_00422460(int, char *);
 int __cdecl fcn_00418c80(int, int, int, float);
 void __cdecl fcn_004192b0(int, int, int, int);
 void __cdecl fcn_004193f0(int, int, int, float);
-void __cdecl fcn_0051af00(char *, int, ...);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl he_MessageBoxQuickjump(int, int, char *, unsigned char, int, int, int, char *, char *);
 int __cdecl gm_RandomMod(unsigned short);
 char *__cdecl fcn_00426fd0(char *);
@@ -101,7 +101,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 						if (*(unsigned short *)(e + 0x27) == g_774970) {
 							fcn_004c30a0(-8, 0, g_6a6b28, 0, 100);
 							if (*(char *)(a0 + 0x104)) {
-								fcn_0051af00(text, 0x42d6, e);
+								io_FormatTextBuffer(text, 0x42d6, e);
 								he_MessageBoxQuickjump(
 									*(int *)(g_7f4ca4 + (unsigned short)g_774970 * 0x21c),
 									-1, text, 0, 0x5ed, *(int *)(e + 1), -1, 0,
@@ -240,7 +240,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 										 *(int *)(a0 + 0xac));
 							i = (int)fcn_00504c90(e, 3);
 						}
-						r = fcn_00508e40(*p);
+						r = gm_LookupEntityRecordById(*p);
 						if (r != 0 &&
 						    (m = *(char **)(r + 0x184)) != 0 &&
 						    *(int *)(m + 0x2c) == -1 &&

@@ -27,7 +27,7 @@ extern int g_774654;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00519190(int);
+void __cdecl io_AppendText(int);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_CreateRadioGroup(int);
 void __cdecl fcn_00469470(int, int);
@@ -75,7 +75,7 @@ int __cdecl fcn_00526660(int parent, int flags)
 	if (flags & 8) {
 		style = 0x717c6;
 	}
-	fcn_00519190(parent);
+	io_AppendText(parent);
 	fcn_00471b60(dlg);
 	list = d2_CreateRadioGroup(0);
 	g_77470e = 1;

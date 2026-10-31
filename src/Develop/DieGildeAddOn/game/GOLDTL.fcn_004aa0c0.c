@@ -16,7 +16,7 @@ typedef struct Query {
 
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004fa5b0(int k, char* e, Query* q);
 
 int __cdecl fcn_004aa0c0(char* e, char* cmd, char* a3)
@@ -39,7 +39,7 @@ int __cdecl fcn_004aa0c0(char* e, char* cmd, char* a3)
 		if (r == 0) {
 			return 0;
 		}
-		q.p = fcn_00508e40(*(int*) (r + 0xb0));
+		q.p = gm_LookupEntityRecordById(*(int*) (r + 0xb0));
 	}
 	q.kind = *(int*) (cmd + 8);
 	k = *(int*) (cmd + 4);

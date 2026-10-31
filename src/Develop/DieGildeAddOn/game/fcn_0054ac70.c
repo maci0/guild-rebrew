@@ -13,7 +13,7 @@ int __cdecl fcn_004c5620(int a, char* unit);
 void __cdecl fcn_004c5980(void* msg);
 void __cdecl fcn_00500bb0(pos14_7f4c00* when, int h, int m, int s);
 void __cdecl fcn_00546190(char* unit);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x0054ac70 */
 void __cdecl fcn_0054ac70(char* e)
@@ -46,29 +46,29 @@ void __cdecl fcn_0054ac70(char* e)
 		kind = (unsigned char) fcn_004c4450(*(int*) (e + 0xd4));
 		if (!kind)
 			return;
-		a = (unsigned char*) fcn_00508e40(*(int*) (e + 0xb0));
-		b = (unsigned char*) fcn_00508e40(*(int*) (e + 0xac));
-		c = (unsigned char*) fcn_00508e40(*(int*) (e + 0xb4));
-		d = (unsigned char*) fcn_00508e40(*(int*) (e + 0xb8));
-		f = (unsigned char*) fcn_00508e40(*(int*) (e + 0xbc));
-		g = (unsigned char*) fcn_00508e40(*(int*) (e + 0xc0));
+		a = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0xb0));
+		b = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0xac));
+		c = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0xb4));
+		d = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0xb8));
+		f = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0xbc));
+		g = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0xc0));
 		if (kind == 1) {
 			*(pos14_7f4c00*) (e + 0x52) = *(pos14_7f4c00*) (e + 0xc5);
 			if (a[2] == 6 || a[2] == 7) {
-				fcn_0051af00(text, 0x1bc0, *(unsigned short*) b, e + 0x52,
+				io_FormatTextBuffer(text, 0x1bc0, *(unsigned short*) b, e + 0x52,
 							 *(unsigned short*) (e + 0x56), *(unsigned short*) c,
 							 *(unsigned short*) d, *(unsigned short*) f);
 				fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), text, 0, 0x5f5,
 							 (char*) 0x6a59e8);
 			}
 			if (b[2] == 6 || a[2] == 7) {
-				fcn_0051af00(text, 0x1bbf, *(unsigned short*) a, e + 0x52,
+				io_FormatTextBuffer(text, 0x1bbf, *(unsigned short*) a, e + 0x52,
 							 *(unsigned short*) (e + 0x56), *(unsigned short*) c,
 							 *(unsigned short*) d, *(unsigned short*) f);
 				fcn_00545d40(*(int*) (b + 4), *(int*) (b + 4), text, 1, 0x5f5,
 							 (char*) 0x6a59d4);
 			}
-			fcn_0051af00(text, 0x1bc1, *(unsigned short*) b, *(unsigned short*) a,
+			io_FormatTextBuffer(text, 0x1bc1, *(unsigned short*) b, *(unsigned short*) a,
 						 e + 0x52, *(unsigned short*) (e + 0x56));
 			if (d[2] == 6 || d[2] == 7)
 				fcn_00545d40(*(int*) (d + 4), *(int*) (d + 4), text, 0, 0x5f5,
@@ -76,7 +76,7 @@ void __cdecl fcn_0054ac70(char* e)
 			if (f[2] == 6 || f[2] == 7)
 				fcn_00545d40(*(int*) (f + 4), *(int*) (f + 4), text, 0, 0x5f5,
 							 (char*) 0x6a59c0);
-			fcn_0051af00(text, 0x1bc2, *(unsigned short*) b, *(unsigned short*) a,
+			io_FormatTextBuffer(text, 0x1bc2, *(unsigned short*) b, *(unsigned short*) a,
 						 e + 0x52, *(unsigned short*) (e + 0x56));
 			if (c[2] == 6 || c[2] == 7)
 				fcn_00545d40(*(int*) (c + 4), *(int*) (c + 4), text, 0, 0x5f5,
@@ -90,7 +90,7 @@ void __cdecl fcn_0054ac70(char* e)
 		if (kind != 2)
 			return;
 		if (b[2] == 6 || a[2] == 7) {
-			fcn_0051af00(text, 0x1bbe, *(unsigned short*) a);
+			io_FormatTextBuffer(text, 0x1bbe, *(unsigned short*) a);
 			fcn_00545d40(*(int*) (b + 4), *(int*) (b + 4), text, 0, 0x5f5, 0);
 		}
 		*(pos14_7f4c00*) (e + 0x52) = *(pos14_7f4c00*) &g_7f4c00;

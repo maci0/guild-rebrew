@@ -2,7 +2,7 @@
 
 int __cdecl fcn_00503fe0(int a, int b, int c);
 void* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
-void* __cdecl fcn_00508e40(int id);
+void* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int a, int b, int c, void* d);
 void __cdecl fcn_00546190(void* p);
 void __cdecl fcn_00500bb0(void* p, int a, int b, int c);
@@ -24,7 +24,7 @@ void __cdecl fcn_00579690(char* a0)
 	h = fcn_00502cd0(*(int*) (obj + 0x5d), 2, found, 0xfd, 6);
 	p = (int*) (a0 + 0x8c);
 	for (i = 4; i != 0; i--) {
-		q = fcn_00508e40(*p);
+		q = gm_LookupEntityRecordById(*p);
 		if (q != 0) {
 			found++;
 			fcn_00529160(obj, (int) h, *(unsigned short*) q, a0);

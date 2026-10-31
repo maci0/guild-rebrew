@@ -20,8 +20,6 @@ int DialogArgument5 = 0;
 int DisplayCounters = 0;
 int LightingUpdateCount = 0;
 int LightingUpdatePending = 0;
-int SonnenstrahlenAktiv = 0;
-int SonnenstrahlenPhase = 0;
 int d2_BildArgument2 = 0;
 int d3d_Device = 0;
 int d3d_LastResult = 0;
@@ -643,7 +641,6 @@ char g_675bbc[1] = {0};
 char g_675be8[1] = {0};
 char g_675f80[1] = {0};
 char g_67617c[1] = {0};
-char g_6761a4[1] = {0};
 char g_6761c8[1] = {0};
 char g_6761ec[1] = {0};
 char g_676694[1] = {0};
@@ -690,7 +687,6 @@ char g_679e68[1] = {0};
 char g_67a090[1] = {0};
 unsigned int g_67a0d8 = 0;
 int g_67a370 = 0;
-int g_67a470[8] = {0};
 char g_67a59c[1] = {0};
 char g_67a5bc[1] = {0};
 int g_67a960 = 0;
@@ -698,9 +694,6 @@ float g_67a964 = 0;
 int g_67ac90 = 0;
 char g_67ac98[1] = {0};
 char g_67b04c[1] = {0};
-char g_67b608[1] = {0};
-char g_67b624[1] = {0};
-char g_67b63c[1] = {0};
 int g_67bbdc = 0;
 float g_67bbe0 = 0;
 float g_67bbe4 = 0;
@@ -715,7 +708,6 @@ float g_67db50 = 0;
 float g_67db54 = 0;
 int g_67e964 = 0;
 char g_67e968[1] = {0};
-char g_67eab0[1] = {0};
 char g_67eac4[1] = {0};
 char g_67eb20[1] = {0};
 char g_67eb2c[1] = {0};
@@ -735,8 +727,9 @@ int g_67fcb0 = 0;
 int g_67fcb4 = 0;
 char g_680890[1] = {0};
 char g_6808a4[1] = {0};
-int g_680bd0[48] = {0};
-char g_680bd4[1] = {0};
+/* Comparison capacities cover observed accesses; native ownership and aliasing remain unknown. */
+int g_680bd0[0x150] = {0};
+char g_680bd4[0x540] = {0};
 char g_681130[1] = {0};
 char g_6811b0[1] = {0};
 int g_6811b8[1] = {0};
@@ -753,24 +746,22 @@ int g_6816d8 = 0;
 char g_6816dc[1] = {0};
 float g_681750 = 0;
 float g_6819b0 = 0;
-int g_688118[1] = {0};
+int g_688118[0x702] = {0};
 char g_68a4f4[1] = {0};
 char g_68a500[1] = {0};
 char g_68a930[1] = {0};
-char g_68a9cc[1] = {0};
-char g_68a9d0[1] = {0};
-char g_68a9d4[1] = {0};
-char g_68a9d8[1] = {0};
+int g_68a9cc = 0;
+int cm_LastEntityId = 0;
+int cm_LastBuildingId = 0;
+int cm_LastObjectId = 0;
 int g_68a9dc = 0;
 char g_68ae34[1] = {0};
-char g_68ae64[1] = {0};
 char g_68ae9c[1] = {0};
-char g_68aec4[1] = {0};
 char g_68b0d8[1] = {0};
 char g_68b2d8[1] = {0};
 char g_68b300[1] = {0};
 char g_68b3f8[1] = {0};
-char g_68b400[1] = {0};
+char g_68b400[0x398] = {0};
 int g_68b79c = 0;
 int g_68b7a4 = 0;
 int g_68b7a8 = 0;
@@ -792,27 +783,22 @@ int g_68bf38 = 0;
 int g_68bfb8 = 0;
 int g_68bfbc = 0;
 int g_68bfc4 = 0;
-char g_68cfc0[1] = {0};
-char g_68cfec[1] = {0};
 char g_68d00c[1] = {0};
-char g_68d6bc[1] = {0};
 char g_68d6d0[1] = {0};
 char g_68d6dc[1] = {0};
 int g_68d780 = 0;
 char g_68d960[1] = {0};
-char g_68da68[1] = {0};
+int g_68da68[0xf0] = {0};
 int g_68da6c[1] = {0};
 char g_68de60[1] = {0};
 char g_68de84[1] = {0};
-char g_68deb8[1] = {0};
 int g_68dec0[1] = {0};
 int g_68e020[32] = {0};
 char g_68fea0[1] = {0};
 char g_68fedc[1] = {0};
-char g_68ff68[1] = {0};
-char g_69037c[1] = {0};
+int g_68ff68[0x105] = {0};
 char g_6903a8[1] = {0};
-char g_690478[1] = {0};
+int g_690478[0x3a] = {0};
 char g_690560[1] = {0};
 char g_690568[1] = {0};
 char g_690584[1] = {0};
@@ -878,8 +864,6 @@ int g_6a2900[5] = {0};
 float g_6a2a18[28] = {0};
 float g_6a2b68[28] = {0};
 int g_6a2bf8 = 0;
-int g_6a2bfc = 0;
-int g_6a2c00 = 0;
 int g_6a2c1c = 0;
 int g_6a2c24 = 0;
 char g_6a2f5c[1] = {0};
@@ -1042,7 +1026,6 @@ char g_6a99a8[1] = {0};
 char g_6a9ac4[1] = {0};
 char g_6a9ad0[1] = {0};
 char g_6a9ae8[1] = {0};
-int g_6a9b9c = 0;
 int g_6a9bf8[15] = {0};
 int g_6aa0b0[1] = {0};
 char g_6aa34c[1] = {0};
@@ -1072,16 +1055,12 @@ char g_6ab07c[1] = {0};
 char g_6ab11c[1] = {0};
 char g_6ab12c[1] = {0};
 char g_6ab2a0[1] = {0};
-char g_6ab41c[1] = {0};
 char g_6ab430[1] = {0};
 char g_6ab44c[1] = {0};
 char g_6ab4b8[1] = {0};
-char g_6ab50c[1] = {0};
 char g_6ab528[1] = {0};
-char g_6ab558[1] = {0};
-char g_6ab570[1] = {0};
 int g_6abb00 = 0;
-int g_6abb08[1] = {0};
+int g_6abb08[0x1ce] = {0};
 int g_6ac240 = 0;
 char g_6ac494[1] = {0};
 char g_6ac690[1] = {0};
@@ -1098,7 +1077,6 @@ int g_6ad62c = 0;
 float g_6ad630 = 0;
 float g_6ad634 = 0;
 char g_6b5b20[1] = {0};
-unsigned int g_6b5c20 = 0;
 int g_6b5c24 = 0;
 char g_6b5c28 = 0;
 int g_6b5c2c = 0;
@@ -1113,7 +1091,6 @@ int g_6b5c94 = 0;
 int g_6b5cbc = 0;
 int g_6b5cc0 = 0;
 int g_6b5cc4 = 0;
-char* g_6b5cf8 = 0;
 char* g_6b5d08 = 0;
 float* g_6b5d0c = 0;
 char* g_6b5d10 = 0;
@@ -1607,7 +1584,7 @@ int g_9a9224[42] = {0};
 int g_9a9228[1] = {0};
 int g_9a9620[10] = {0};
 char g_9a9660[1] = {0};
-unsigned int g_9b0820 = 0;
+unsigned int cut_RandomSeed = 0;
 int g_9b0840 = 0;
 char g_9b0e20[1] = {0};
 char* g_9b46c0[1] = {0};
@@ -1945,7 +1922,6 @@ unsigned char IID_IDirect3D3[16] = {0};
 unsigned char IID_IDirectDraw4[16] = {0};
 
 
-int SonnenstrahlenStartZeit = -1;
 
 int ch_MorphFrameValue = -1;
 
@@ -2029,11 +2005,6 @@ unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int* a)
 }
 
 int __cdecl amt_ValidateCommand(char* a)
-{
-	return 0;
-}
-
-int __cdecl amt_fio_LoadAemter(void* stream, int version)
 {
 	return 0;
 }
@@ -2187,11 +2158,6 @@ int __cdecl fcn_0040b730(char* a, char* b)
 }
 
 int __cdecl fcn_0040ba00(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_0040ba30(void)
 {
 	return 0;
 }
@@ -2786,11 +2752,6 @@ int __cdecl fcn_0042f010(char* a, void* b)
 int __cdecl fcn_0042f240(int a, int b, int c, int d)
 {
 	return 0;
-}
-
-void* __cdecl fcn_0042f6d0(char* a, void* b)
-{
-	return (void*) 0;
 }
 
 int __cdecl fcn_0042ff50(const char* a, const char* b, void* c)
@@ -4199,22 +4160,7 @@ void __cdecl fcn_004c35f0(void)
 {
 }
 
-int __cdecl fcn_004c39c0(void * a)
-{
-	return 0;
-}
-
-int __cdecl fcn_004c3a50(void* a)
-{
-	return 0;
-}
-
 int __cdecl fcn_004c3f70(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_004c4090(void)
 {
 	return 0;
 }
@@ -5699,11 +5645,6 @@ int __cdecl fcn_0057e880(int a, char* b, int c, int d)
 	return 0;
 }
 
-int __cdecl fcn_0057ecf0(void)
-{
-	return 0;
-}
-
 int __cdecl fcn_0057ee40(void)
 {
 	return 0;
@@ -6631,3 +6572,43 @@ int __cdecl sub_00576750(char* a, char* b, char* c, int d)
  * into a client that compiles this translation unit.
  */
 
+
+/* Comparison-only conditional alias stubs; no native implementation claim. */
+void __cdecl fcn_00402540(char *a) {}
+
+char *__cdecl fcn_00446e10(char *a, float *b, float *c, char *d) { return 0; }
+
+char __cdecl fcn_00447fd0(void *a, void *b, void *c) { return 0; }
+
+char *__cdecl fcn_00449690(char *a, int b, char *c, char *d) { return 0; }
+
+void __cdecl fcn_0057c950(char *a) {}
+
+char __cdecl fcn_0058fa00(char *a, void *b) { return 0; }
+
+void __cdecl fcn_005b46e0(char *a) {}
+
+/* Same placeholders the GoldTL link already emits for the io_Text bodies.
+ * No Gold native storage claim. */
+char* g_14a5400[1] = {0};
+char* g_14a540c[1] = {0};
+char* g_14a5418[1] = {0};
+char* g_14a5450[1] = {0};
+char g_67d444[1] = {0};
+char g_699a68[1] = {0};
+char g_6a2308[1] = {0};
+char g_6a2310[1] = {0};
+char g_6a2318[1] = {0};
+char g_6a2348[1] = {0};
+char g_6a234c[1] = {0};
+char g_6a2350[1] = {0};
+char g_6a2354[1] = {0};
+char g_6a2388[1] = {0};
+char g_6a238c[1] = {0};
+int g_6b23a4 = 0;
+int g_6b25b0 = 0;
+int __cdecl __isctype(int c, int mask) { (void)c; (void)mask; return 0; }
+int __cdecl fcn_00657a73(void) { return 0; }
+void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n) {
+	(void)src; (void)n; return dst;
+}

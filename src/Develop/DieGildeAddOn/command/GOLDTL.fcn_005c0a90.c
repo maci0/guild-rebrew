@@ -22,16 +22,16 @@ extern int g_67d370;
 extern char g_6ac494[];
 
 int __cdecl fcn_00525f60(void*, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 unsigned short* __cdecl fcn_005cd440(int*, char*, int, int);
 int __cdecl cm_ChkCutsceneReady(int, unsigned short);
 void __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00470820(int, int, void*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_004c5530(char* msg);
@@ -63,19 +63,19 @@ void __cdecl fcn_005c0a90(int arg)
 	msg[4] = 6;
 	msg[2] = (*(int*)&g_666018);
 	msg[3] = g_66601c;
-	fcn_0051af00(buf, 0x175f);
+	io_FormatTextBuffer(buf, 0x175f);
 	a = fcn_005cd440(msg, buf, 0, 0);
 	if (a == 0) {
 		return;
 	}
-	fcn_0051af00(buf, 0x1760, *a);
+	io_FormatTextBuffer(buf, 0x1760, *a);
 	b = fcn_005cd440(msg, buf, 0, 0);
 	if (b == 0) {
 		return;
 	}
 	r = cm_ChkCutsceneReady(*(int*) (a + 2), g_774970);
 	if (r <= 0) {
-		fcn_0051af00(text, 0x1756, *a);
+		io_FormatTextBuffer(text, 0x1756, *a);
 		fcn_00526120(text, 0);
 		fcn_00532ef0();
 		return;
@@ -86,9 +86,9 @@ void __cdecl fcn_005c0a90(int arg)
 	}
 	d = fcn_00470820(0, 0, g_6ac494);
 	fcn_00471b60(d);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(d, 1);
-	t = fcn_00519190(0x1761, r, (r != 1) + 0x1752, *b, *a);
+	t = io_AppendText(0x1761, r, (r != 1) + 0x1752, *b, *a);
 	h1 = fcn_00472250(d, 1, t);
 	h2 = fcn_00472250(d, 1, t + 1);
 	g_100f1dc = -1;
@@ -110,7 +110,7 @@ void __cdecl fcn_005c0a90(int arg)
 				ev[0x36] = 9;
 				fcn_004c5530(ev);
 				fcn_004c6ae0(((Slot5c0a*)g_7f4ca0)[g_774970].f4, -3);
-				fcn_0051af00(text, 0x1762, *b);
+				io_FormatTextBuffer(text, 0x1762, *b);
 				fcn_00526120(text, 0);
 				g_774654 = 1;
 			}

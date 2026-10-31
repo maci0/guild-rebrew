@@ -7,6 +7,9 @@ For this reconstruction:
 
 - Require faithful C and complete raw-file identity for all three targets.
 - Preserve the server while recovering shared client definitions and contracts.
+- Use canonical target and whole-TU game compiler flags; treat per-function
+  flag searches as non-promoting diagnostics. Independently compiled libraries
+  and runtime code retain their own evidenced contexts.
 - Separate code agreement, source fidelity, library origin, selected providers,
   data ownership and placement. Evidence for one does not establish the others.
 - Keep one home per fact: objective in [goal.md](../goal.md), current work in

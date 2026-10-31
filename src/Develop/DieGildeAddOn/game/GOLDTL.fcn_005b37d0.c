@@ -35,7 +35,7 @@ extern char s_6ab6d0[];
 int __cdecl fcn_0046e940(int, int, int, int, int);
 void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0045a230(int, int, int);
 int __cdecl fcn_00459d50(int);
 int __cdecl fcn_00459d90(int, int);
@@ -61,34 +61,34 @@ void __cdecl fcn_005b37d0(void)
 			g_774654 = 1;
 		}
 		g_772514 = h;
-		fcn_00519190((int) "$C");
-		fcn_00519190((int) s_6ab7e4);
+		io_AppendText((int) "$C");
+		io_AppendText((int) s_6ab7e4);
 		total = fcn_0045a230(0x1ff, 0x80, 0);
-		fcn_00519190((int) s_6ab7cc, total);
+		io_AppendText((int) s_6ab7cc, total);
 		v = fcn_0045a230(0x1ff, 1, 0);
 		total += v;
-		fcn_00519190((int) s_6ab7ac, v);
+		io_AppendText((int) s_6ab7ac, v);
 		v = fcn_0045a230(0x1ff, 2, 0);
 		total += v;
-		fcn_00519190((int) s_6ab790, v);
+		io_AppendText((int) s_6ab790, v);
 		v = fcn_00459d50(*(int*) (((char*)g_67a370) + 0xb0));
 		total += v;
-		fcn_00519190((int) s_6ab778, v);
+		io_AppendText((int) s_6ab778, v);
 		v = fcn_00459d90(g_6b8300, 1);
 		total += v;
-		fcn_00519190((int) s_6ab764, v);
+		io_AppendText((int) s_6ab764, v);
 		v = fcn_0045a230(0x1ff, 0x28, 0);
 		total += v;
-		fcn_00519190((int) s_6ab748, v);
+		io_AppendText((int) s_6ab748, v);
 		n = 0;
 		for (p = g_1042320; p != g_1052a40; p = *(char**) (p + 0x160)) {
 			n += fcn_004346f0(p);
 		}
-		fcn_00519190((int) s_6ab728, n);
-		fcn_00519190((int) s_6ab710, total);
-		fcn_00519190((int) s_6ab6f8, fcn_00402ba0(-1, 1));
-		fcn_00519190((int) s_6ab6e4, g_773d70);
-		fcn_00519190((int) s_6ab6d0, g_773d8c);
+		io_AppendText((int) s_6ab728, n);
+		io_AppendText((int) s_6ab710, total);
+		io_AppendText((int) s_6ab6f8, fcn_00402ba0(-1, 1));
+		io_AppendText((int) s_6ab6e4, g_773d70);
+		io_AppendText((int) s_6ab6d0, g_773d8c);
 		fcn_005b0f00(w);
 	}
 	fcn_0046f280(h);

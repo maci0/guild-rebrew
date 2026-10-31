@@ -18,7 +18,7 @@ extern double g_664f18;
 
 int __cdecl gm_AccumulateTyped2(Entity*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_005c4ec0(int, Entity*, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
@@ -46,7 +46,7 @@ int __cdecl fcn_0050db40(Entity* e, int extra)
 	if (!(abs((int) v) / d > g_664f18)) {
 		return 0;
 	}
-	fcn_0051af00(msg, 0x42c3);
+	io_FormatTextBuffer(msg, 0x42c3);
 	got = fcn_005c4ec0(e->id, e, amount, msg);
 	fcn_00545d40(e->id, e->id, msg, 1, 0x5ff, "_NACHRICHTEN_HS_69");
 	return got <= amount / 2;

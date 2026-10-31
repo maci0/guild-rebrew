@@ -7,7 +7,7 @@ extern char g_7f4ca4[];
 int __cdecl fcn_00500cb0(void*, char*);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
-void __cdecl fcn_0041d9e0(const char*);
+void __cdecl ReportClientMessage(const char*);
 void __cdecl fcn_00546190(char*);
 void __cdecl fcn_004c4510(char*, int);
 int __cdecl fcn_004c4670(unsigned char, unsigned char, int, void*);
@@ -15,7 +15,7 @@ void __cdecl fcn_004c5360(void);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_0050dc90(int);
 int __cdecl fcn_005049a0(void*);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 
 /* ADDRESS: GOLDTL 0x0055ffe0 */
@@ -69,7 +69,7 @@ void __cdecl he_RunLagerErweitern(char* a0)
 			if (info != 0 && (*(unsigned char*) (info + 0x1b4) & 1))
 				msg = 0x60b;
 			cat = fcn_005049a0((void*) ent);
-			fcn_0051af00(buf, 0x1bbb, ent);
+			io_FormatTextBuffer(buf, 0x1bbb, ent);
 			px = *(int*) (g_7f4ca4 + (*(unsigned short*) (a0 + 8)) * 0x21c);
 			v9 = *(int*) ((char*) ent + 1);
 			if (cat) {
@@ -81,7 +81,7 @@ void __cdecl he_RunLagerErweitern(char* a0)
 		}
 	}
 	else {
-		fcn_0041d9e0("he_RunLagerErweitern():Wrong LagerID...");
+		ReportClientMessage("he_RunLagerErweitern():Wrong LagerID...");
 	}
 	fcn_00546190(a0);
 }

@@ -47,7 +47,7 @@ void __cdecl fcn_00488c00(char*);
 void __cdecl ai_CalcAngriff(char*, int);
 
 /* ADDRESS: GOLDTL 0x004823c0 */
-void __cdecl fcn_004823c0(char* e)
+void __cdecl ai_CalcMeisterRaeuber(char* meister)
 {
 	char buf[0x400];
 	char msg[0xf8];
@@ -80,27 +80,27 @@ void __cdecl fcn_004823c0(char* e)
 	float w;
 	double rnd;
 
-	res = fcn_00502cd0(*(int*) (*(char**) (e + 0x16c) + 0x5d), 2, 6, 0, 0x116);
+	res = fcn_00502cd0(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x116);
 	if (res != 0) {
 		g_100b0ac = 0;
 		g_100b0a8 = 0;
-		fcn_00485650(e, res);
-		fcn_00486c40(e, res, *(int*) (*(char**) (e + 0x16c) + 0x39));
-		fcn_00489010(e, res);
-		ai_MeisterCollectTrans(e);
-		ai_MeisterTrade(e, res);
+		fcn_00485650(meister, res);
+		fcn_00486c40(meister, res, *(int*) (*(char**) (meister + 0x16c) + 0x39));
+		fcn_00489010(meister, res);
+		ai_MeisterCollectTrans(meister);
+		ai_MeisterTrade(meister, res);
 	}
-	fcn_00487000(e);
-	fcn_00487970(res, e, 10);
-	fcn_00487c00(res, e, 10);
-	fcn_00487470(e);
-	fcn_004888a0(e);
-	fcn_00488c00(e);
-	if ((unsigned short) g_7f4c00.b > 6 && (*(unsigned int*) (e + 4) + (unsigned short) g_7f4c00.b) % 3 == 0) {
-		if (*(int*) (e + 0x1b4) & 0x20) {
+	fcn_00487000(meister);
+	fcn_00487970(res, meister, 10);
+	fcn_00487c00(res, meister, 10);
+	fcn_00487470(meister);
+	fcn_004888a0(meister);
+	fcn_00488c00(meister);
+	if ((unsigned short) g_7f4c00.b > 6 && (*(unsigned int*) (meister + 4) + (unsigned short) g_7f4c00.b) % 3 == 0) {
+		if (*(int*) (meister + 0x1b4) & 0x20) {
 			return;
 		}
-		*(int*) (e + 0x1b4) |= 0x20;
+		*(int*) (meister + 0x1b4) |= 0x20;
 		hits = 0;
 		freehits = 0;
 		for (p = g_7f4ca0; (int) p < 0x85a0a0; p += 0x21c) {
@@ -113,7 +113,7 @@ void __cdecl fcn_004823c0(char* e)
 			if (*(unsigned char*) (p + 2) == 0x0a) {
 				continue;
 			}
-			if (*(int*) (p + 0x16c) != *(int*) (e + 0x16c)) {
+			if (*(int*) (p + 0x16c) != *(int*) (meister + 0x16c)) {
 				continue;
 			}
 			if (*(unsigned char*) (p + 0x165) == 0) {
@@ -122,7 +122,7 @@ void __cdecl fcn_004823c0(char* e)
 			if (*(int*) (p + 0x184) == 0) {
 				continue;
 			}
-			if (*(int*) (*(int*) (p + 0x184) + 0x2c) != *(int*) (*(int*) (e + 0x16c) + 1)) {
+			if (*(int*) (*(int*) (p + 0x184) + 0x2c) != *(int*) (*(int*) (meister + 0x16c) + 1)) {
 				continue;
 			}
 			hits++;
@@ -130,10 +130,10 @@ void __cdecl fcn_004823c0(char* e)
 				freehits++;
 			}
 		}
-		if (g_100dc20 == *(int*) (e + 0x16c)) {
+		if (g_100dc20 == *(int*) (meister + 0x16c)) {
 			g_100dc34 = freehits;
-			if (*(int*) (e + 0x1c0) != -1) {
-				g_100dc24 = gm_AccumulateTyped2((char*) *(int*) (e + 0x1c0));
+			if (*(int*) (meister + 0x1c0) != -1) {
+				g_100dc24 = gm_AccumulateTyped2((char*) *(int*) (meister + 0x1c0));
 			}
 		}
 		half = hits >> 1;
@@ -141,10 +141,10 @@ void __cdecl fcn_004823c0(char* e)
 			half = hits - half;
 		}
 		if (freehits < half) {
-			sprintf(buf, "ai_CalcMeisterR\xe4uber(): Meister %s hat gerade keine Leute...", e + 0x30);
+			sprintf(buf, "ai_CalcMeisterR\xe4uber(): Meister %s hat gerade keine Leute...", meister + 0x30);
 			return;
 		}
-		bld = *(char**) (e + 0x16c);
+		bld = *(char**) (meister + 0x16c);
 		kind = *(unsigned char*) (g_7f4ca2 + *(unsigned short*) (bld + 0x27) * 0x21c);
 		if (kind != 6 && kind != 7) {
 			if (gm_RandomFloat01() > 0.85) {
@@ -155,20 +155,20 @@ void __cdecl fcn_004823c0(char* e)
 			action = gm_RandomMod(4);
 		} else {
 			action = gm_RandomMod(2);
-			if (action != 0 && *(int*) (e + 0x1c0) != -1 && gm_RandomMod(2) != 0) {
+			if (action != 0 && *(int*) (meister + 0x1c0) != -1 && gm_RandomMod(2) != 0) {
 				goto send48;
 			}
 		}
 		if (action == 3) {
 attack:
-			ai_CalcAngriff(e, freehits);
+			ai_CalcAngriff(meister, freehits);
 			goto send48;
 		}
 		if (action == 0) {
 			if (gm_RandomFloat01() < 0.75) {
 				goto send48;
 			}
-			sprintf(buf, "ai_CalcMeisterR\xe4uber(): Meister %s m\xf6" "chte Geld sch\xfctzen", e + 0x30);
+			sprintf(buf, "ai_CalcMeisterR\xe4uber(): Meister %s m\xf6" "chte Geld sch\xfctzen", meister + 0x30);
 			fmax = 0.0f;
 			for (i = 0; i < 8; i++) {
 				for (j = 0; j < 8; j++) {
@@ -189,7 +189,7 @@ attack:
 				if (*(unsigned char*) p == 0) {
 					continue;
 				}
-				bld = *(char**) (e + 0x16c);
+				bld = *(char**) (meister + 0x16c);
 				if (*(unsigned short*) (p + 0x27) == *(unsigned short*) (bld + 0x27)) {
 					continue;
 				}
@@ -228,11 +228,11 @@ attack:
 				}
 				cand = p;
 			}
-			*(int*) (e + 0x1c0) = *(int*) (cand + 1);
-			sprintf(buf, "ai_CalcMeisterR\xe4uber(): Meister %s sch\xfctzt Geld bei '%s'", e + 0x30, cand + 5);
+			*(int*) (meister + 0x1c0) = *(int*) (cand + 1);
+			sprintf(buf, "ai_CalcMeisterR\xe4uber(): Meister %s sch\xfctzt Geld bei '%s'", meister + 0x30, cand + 5);
 			memset(msg, 0, sizeof(msg));
 			msg[4] = 0x62;
-			bld = *(char**) (e + 0x16c);
+			bld = *(char**) (meister + 0x16c);
 			idx = *(unsigned short*) (bld + 0x27);
 			*(int*) (msg + 8) = *(int*) (g_7f4ca4 + idx * 0x21c);
 			*(int*) (msg + 0xc) = *(int*) (bld + 1);
@@ -251,7 +251,7 @@ attack:
 			}
 			*(int*) (msg + 0x6c) = *(int*) (query + 2);
 			for (p = g_7f4ca0 + 0x165; (int) p < 0x85a205; p += 0x21c) {
-				if (*(short*) (p - 0x165) != -1 && *(int*) (p + 7) == *(int*) (e + 0x16c) && *(unsigned char*) p != 0 && *(int*) (p + 0x17) == 0 && *(int*) (p + 0x1f) != 0 &&
+				if (*(short*) (p - 0x165) != -1 && *(int*) (p + 7) == *(int*) (meister + 0x16c) && *(unsigned char*) p != 0 && *(int*) (p + 0x17) == 0 && *(int*) (p + 0x1f) != 0 &&
 				    *(int*) (*(int*) (p + 0x1f) + 0x2c) == *(int*) (*(int*) (p + 7) + 1)) {
 					*(int*) (msg + 0x58) = *(int*) (p - 0x161);
 					cnt++;
@@ -270,10 +270,10 @@ attack:
 			return;
 		}
 send48:
-		sprintf(buf, "ai_CalcMeisterR\xe4uber(): Meister %s m\xf6" "chte sich auf die Lauer legen", e + 0x30);
+		sprintf(buf, "ai_CalcMeisterR\xe4uber(): Meister %s m\xf6" "chte sich auf die Lauer legen", meister + 0x30);
 		memset(msg, 0, sizeof(msg));
 		msg[4] = 0x48;
-		bld = *(char**) (e + 0x16c);
+		bld = *(char**) (meister + 0x16c);
 		idx = *(unsigned short*) (bld + 0x27);
 		*(int*) (msg + 8) = *(int*) (g_7f4ca4 + idx * 0x21c);
 		*(int*) (msg + 0xc) = *(int*) (bld + 1);
@@ -299,7 +299,7 @@ send48:
 				if ((int) p >= 0x85a205) {
 					break;
 				}
-				if (*(short*) (p - 0x165) != -1 && *(int*) (p + 7) == *(int*) (e + 0x16c) && *(unsigned char*) p != 0 && *(int*) (p + 0x17) == 0 && *(int*) (p + 0x1f) != 0 &&
+				if (*(short*) (p - 0x165) != -1 && *(int*) (p + 7) == *(int*) (meister + 0x16c) && *(unsigned char*) p != 0 && *(int*) (p + 0x17) == 0 && *(int*) (p + 0x1f) != 0 &&
 				    *(int*) (*(int*) (p + 0x1f) + 0x2c) == *(int*) (*(int*) (p + 7) + 1)) {
 					*(int*) (msg + 0x38 + found * 4) = *(int*) (p - 0x161);
 					found++;
@@ -321,6 +321,6 @@ send48:
 		}
 		fcn_004c5530(msg);
 	} else {
-		*(int*) (e + 0x1b4) &= ~0x20;
+		*(int*) (meister + 0x1b4) &= ~0x20;
 	}
 }

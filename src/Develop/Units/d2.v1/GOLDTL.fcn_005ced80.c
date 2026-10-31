@@ -34,7 +34,7 @@ extern char* g_1015ea0;
 extern char* lpObjektePROT;
 
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
@@ -46,10 +46,10 @@ void __cdecl fcn_005ced80(int dlg, Entry* list, int* bars, int* icons)
 	int h;
 
 	d2_SetForm(dlg, 1);
-	fcn_00519190((int) "$C");
-	fcn_00519190(0x1949);
+	io_AppendText((int) "$C");
+	io_AppendText(0x1949);
 	d2_SetForm(dlg, 2);
-	fcn_00519190((int) "$C");
+	io_AppendText((int) "$C");
 	for (i = 0; i < 7; i++) {
 		if (list[i].id != 0) {
 			h = fcn_0046f740(0xf, i * 0x30, list[i].id + 0xdf, g_772514);

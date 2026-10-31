@@ -41,8 +41,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
-void __cdecl fcn_00473a90(int, int);
-int __cdecl fcn_00519190(int, ...);
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046f2c0(int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
@@ -74,14 +74,14 @@ void __cdecl fcn_005a8e20(void)
 	w = g_772514;
 	d2_SetForm(dlg, 0);
 	fcn_0046e830(-1, -1, g_772514, w, 0x767);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	((Win*)g_1015f40)[w].x274 = 0x5a;
 	do {
 		if (flag != 0) {
 			d2_SetForm(dlg, 1);
-			fcn_00519190(0x17f6);
+			io_AppendText(0x17f6);
 			d2_SetForm(dlg, 2);
-			fcn_00519190((int) s_6811b0);
+			io_AppendText((int) s_6811b0);
 			fcn_0046f2c0(g_772514, 1);
 			n = 0;
 			for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
@@ -89,7 +89,7 @@ void __cdecl fcn_005a8e20(void)
 					for (r = fcn_005463a0(1, 0, 0x1b); r != 0; r = he_fn_Handlung()) {
 						if (*(int*) (r + 0xac) == *(int*) (e + 1)) {
 							rows[n].rel = r;
-							rows[n].btn = fcn_00472250(dlg, 2, fcn_00519190(0x17f5, (unsigned char) e[0] + 0x427, *(unsigned short*) (e + 0x27), e, *(int*) (r + 0xb0)));
+							rows[n].btn = fcn_00472250(dlg, 2, io_AppendText(0x17f5, (unsigned char) e[0] + 0x427, *(unsigned short*) (e + 0x27), e, *(int*) (r + 0xb0)));
 							rows[n].obj = e;
 							rows[n].flags = *(unsigned short*) (e + 0x5a);
 							n++;

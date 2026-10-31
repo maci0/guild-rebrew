@@ -22,7 +22,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -49,7 +49,7 @@ void __cdecl fcn_0053eb60(int n)
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(h, 1);
-	fcn_00519190(0x42c5);
+	io_AppendText(0x42c5);
 	d2_SetForm(h, 3);
 	w = (int) (g_6640cc / n * g_66292c);
 	x = (*(int*) (g_77255c + 0x10) - w * n) / 2 + 0xe;
@@ -62,7 +62,7 @@ void __cdecl fcn_0053eb60(int n)
 		fcn_00468bb0(ids[i], 5, g_14b5e3c, g_14b5e40, g_14b5e44, g_14b5e48, g_14b5e4c);
 	}
 	d2_SetForm(h, 2);
-	ok = fcn_00472250(h, 2, fcn_00519190(0x7d));
+	ok = fcn_00472250(h, 2, io_AppendText(0x7d));
 	while (fcn_005373e0(fcn_0053eb60, 0xc6) != 0) {
 		if (g_14ce8e0 != 0 || g_14cf950 == 1 || (g_100f1dc == 2 && g_67d370 == ok)) {
 			g_774654 = 1;

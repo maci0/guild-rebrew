@@ -9,7 +9,7 @@ extern double g_664ee8;
 extern double g_6629a0;
 extern char g_6811b0[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c6ae0(int, int);
@@ -23,9 +23,9 @@ int __cdecl fcn_00471b60(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00525f60(void*, int);
 int __cdecl fcn_00526010(void*, int, char);
 int __cdecl gm_AccumulateTyped2(char*);
@@ -58,7 +58,7 @@ int __cdecl fcn_005d52d0(char* p)
 		if ((float) s.n / w < g_6660d8) {
 			return 0x22;
 		}
-		obj = fcn_00508e40(*(int*) (p + 0x5c));
+		obj = gm_LookupEntityRecordById(*(int*) (p + 0x5c));
 		fcn_004c6ae0(*(int*) (p + 4), -8);
 		fcn_004c4510(p, *(int*) (p + 4));
 		fcn_004c4700(4, 1, 0x5c, &s.sel);
@@ -76,13 +76,13 @@ int __cdecl fcn_005d52d0(char* p)
 	}
 	w = (float) gm_WalkEntityChain(*(unsigned short*) p);
 	s.n = (int) (w * g_664ee8);
-	obj = fcn_00508e40(*(int*) (p + 0x5c));
+	obj = gm_LookupEntityRecordById(*(int*) (p + 0x5c));
 	dlg = fcn_00470820(0, 0, "privillegien\\scheidung");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
 	base = 0x114 + (*(unsigned char*) (p + 9) ? 0xa : 0);
-	x = fcn_00519190(0x1d8f, base + *(unsigned char*) (p + 0xd), 8, s.n - (int) (w * g_6629a0), *(unsigned short*) obj, *(unsigned short*) obj);
+	x = io_AppendText(0x1d8f, base + *(unsigned char*) (p + 0xd), 8, s.n - (int) (w * g_6629a0), *(unsigned short*) obj, *(unsigned short*) obj);
 	fcn_00472250(dlg, 1, x);
 	fcn_00472250(dlg, 1, x + 1);
 	g_100f1dc = -1;
@@ -110,8 +110,8 @@ int __cdecl fcn_005d52d0(char* p)
 				while (fcn_004c4450(x) == 0) {
 					fcn_00535960();
 				}
-				fcn_00519190((int) g_6811b0);
-				fcn_00519190(0x1d90);
+				io_AppendText((int) g_6811b0);
+				io_AppendText(0x1d90);
 				g_774654 = 1;
 				s.mode = 0x81;
 			} else if (g_100f1dc == 1) {

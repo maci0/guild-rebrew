@@ -49,9 +49,9 @@ extern char s_6aa490[];
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 char* __cdecl fcn_005463a0(int, int, int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
@@ -76,10 +76,10 @@ int __cdecl fcn_005add40(int unused, char* e)
 
 	r = 0;
 	dlg = fcn_00470820(0, 0, s_6aa490);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	s = fcn_00519190(0x19ee, *(unsigned short*) (e + 0x27), e);
+	s = io_AppendText(0x19ee, *(unsigned short*) (e + 0x27), e);
 	btn1 = fcn_00472250(dlg, 1, s);
 	btn2 = fcn_00472250(dlg, 1, s + 1);
 	g_100f1dc = -1;

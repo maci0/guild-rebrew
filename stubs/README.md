@@ -1,25 +1,22 @@
 # Client comparison builds
 
-Gold and GoldTL build recipes produce raw PE32 executables with MSVC maps:
-
-- `build/Europa1400Gold.exe` and `build/Europa1400Gold.map`
-- `build/Europa1400Gold_TL.exe` and `build/Europa1400Gold_TL.map`
-
-These are comparison scaffolds, **not playable or byte-identical games**. They
-combine recovered sources with explicit placeholder functions and storage.
-Placeholder sizes and types do not establish native allocations, layouts or
-ownership. The build uses no postlink reference-byte copying or forced
-unresolved/duplicate-symbol link.
+Gold and GoldTL recipes compile recovered C with explicit placeholder functions
+and storage. They are **comparison scaffolds, not playable or byte-identical
+games**. Placeholder sizes and types do not establish native allocations,
+layouts or ownership. No postlink reference-byte copying is used.
 
 ## Build
 
-Both clients link successfully as of 2026-10-22. The current raw executables
-and same-build maps support data and image comparisons. They remain broken
-comparison scaffolds: Gold has 2871 placeholder symbols and GoldTL has 4138
-(including seven additional calling-convention variants). No unresolved symbols
-or duplicate-provider warnings are forced through the linker. Compiler warnings
-and unsupported assembly remain open. See the [status snapshot](../README.md#reconstruction-status)
-and [current work](../docs/TODO.md).
+As of 2026-10-31, GoldTL links with **no duplicate or unresolved-symbol
+diagnostics**, without `/FORCE:MULTIPLE`. Its imports match the reference;
+its configured image and map are under `build-goldtl-audit/`. Gold's latest
+full build compiled but failed to link on 283 unresolved symbols, with no
+duplicate-symbol diagnostics;
+its older `build/Europa1400Gold.exe` and map are historical. Later isolated
+provider probes are not a successful full link. See
+[current work](../docs/TODO.md#working-checkpoint-2026-10-31) for hashes,
+comparison evidence and outstanding blockers. Neither build is an acceptance
+result for the [objective](../goal.md).
 
 Complete the root [setup steps](../README.md#get-started), then run from the
 project root. Use this checkout's `.venv` (`uv sync`). No sibling Rebrew
@@ -29,6 +26,22 @@ the pinned [Miles archive](../references/mss-6.1c/README.md) to
 `references/mss-6.1c/mss32.lib`; check its documented SHA-256. These inputs are
 ignored by Git. Client profiles are `msvc-6.0-sp5-pp`. Build that image from
 the public toolchain checkout and environment variables in the root setup.
+
+GoldTL also needs the local DirectX SDK libraries and supplementary objects
+selected in `CMakeLists.txt`. Its image-loader member comes from the pristine
+XP SP1 archive supplied at `references/dxsdk8/lib/d3dx8-xpsp1.lib`:
+
+| Input | SHA-256 |
+| --- | --- |
+| XP SP1 archive | `c02e4fedf3e2e0964a1eed98ca02b28d68a0a7ac184594b04212216253bfbd9d` |
+| Extracted `obj\i386\cd3dximage.obj` | `d0c91f1bf7550ae39709f738416a48710e75aba61749203d8c7b03d5a07fe592` |
+| Extracted `obj\i386\jerror.obj` | `e1203fbdc8cb43231d4952b24843030fdd4f332c51e858807bdaf6cbda0516ba` |
+
+Configure checks these hashes and extracts the members with `llvm-ar`. The archive
+is a required local input and stays ignored; it is never patched or committed.
+Native JPEG/PNG call destinations support this selection over the competing SDK
+image loader. A matching archive member alone does not establish raw-link identity.
+The error member supplies the loader's `_jpeg_std_error` dependency.
 
 ```sh
 uv run rebrew toolchain build msvc-6.0-sp5-pp
@@ -54,11 +67,10 @@ and `LIBCMT`. The server configuration remains separate. Client `/OPT:NOREF`
 retains code and data while the entrypoints are stubs. Remove that temporary
 retention setting when the real entrypoint references are recovered.
 
-Older incremental object trees remain under
-`.scratch/goal83-gold-build-baseline/build` and
-`.scratch/goal83-tl-build-baseline/build`. They have been reconfigured since
-Goal83 and are not frozen baselines. The commands above create a separate
-build tree.
+The commands above create a separate build tree and write its images/maps to
+`build/`. Verification uses each target's configured `raw_link`; TL currently
+points elsewhere. Pass `--built` with the image you just produced when comparing
+a different tree. Keep older incremental trees separate from frozen baselines.
 
 ## Compare
 
@@ -81,8 +93,8 @@ uv run rebrew verify \
 ```
 
 Exit 1 reports the scaffolds' expected differences; it is not a passing verdict.
-The game `WinMain` definitions remain stubs rather than the native 1,856-byte
-bodies; the CRT still supplies the PE startup code.
+The game `WinMain` definitions remain comparison stubs; Gold's current reviewed
+native extent is 1,849 bytes. The CRT supplies the PE startup code.
 Use maps from the same build as each image when checking placement.
 Data-only verification preserves the function result cache and comparison
 baseline; image-only checks do not initialize the compiler runner.
@@ -96,9 +108,12 @@ that diagnostic link, so their symbols do not become placeholders. When new
 providers are recovered, regenerate from a fresh diagnostic link rather than
 appending the new misses to an old stub list.
 
-The generated C files are checked in; ordinary builds work with the project’s
-pinned Rebrew. **Regeneration requires the fastcall generator fix on Rebrew
-[main fix](https://github.com/maci0/rebrew/commit/8bd102e6).** Rebrew 5.4.0 can emit the wrong calling convention for `@Name@N`.
+The generated C files are checked in. Installed Rebrew 6.9.0 includes the
+[fastcall fix](https://github.com/maci0/rebrew/commit/8bd102e6); the old 5.4.0
+regeneration restriction is retired. A newer, unreleased fix rejects ambiguous
+conditional callable aliases instead of emitting guessed data. Until released,
+review every generated signature and conditional alias against the active
+target and provide an explicit ABI-reviewed special; generation is not ABI proof.
 Conflicting decorations for one C name cannot share a C translation unit:
 GoldTL keeps the additional seven signatures in `abi_stubs.c`, generated from
 `abi-variants.txt`. These placeholders satisfy link contracts, not native ABI
@@ -129,8 +144,9 @@ unbound numeric aliases of library functions can still be placeholders.
 When a real provider becomes available, remove its placeholder and regenerate.
 Do not link the server's BSS ownership files into these client scaffolds.
 
-The fresh logs include the previously separate Gold source-closure symbols,
-so regeneration no longer needs the old fragment-append recipe. The
+The checked-in logs include the previously separate Gold source-closure symbols.
+They are historical input, not the latest failed Gold link; use a new diagnostic
+log before regenerating the complete scaffold. The
 `source-closure.json` file remains historical evidence. Specials preserve the
 comparison-only six-color and six-record GUI capacities without claiming native
 storage ownership.

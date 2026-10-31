@@ -1,6 +1,6 @@
 extern int g_14cbca0;
 extern int g_699364;
-extern char g_68a9d0[];
+extern char cm_LastEntityId[];
 extern char g_7f4ca0[];
 
 int __cdecl rand(void);
@@ -8,7 +8,7 @@ void __cdecl srv_SeedRandom(int);
 unsigned short __cdecl fcn_0050a7e0(unsigned int, int, int, unsigned short, int, unsigned int, unsigned int, unsigned int);
 char* __cdecl strncpy(char*, const char*, unsigned int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 
 
 /* ADDRESS: GOLDTL 0x004c7870 */
@@ -42,14 +42,14 @@ int __cdecl fcn_004c7870(int cmd, char* result)
 	if (entity == 0xffff)
 		return 1;
 	off = entity * 0x21c;
-	(*(int*)g_68a9d0) = *(int*) (g_7f4ca0 + off + 4);
+	(*(int*)cm_LastEntityId) = *(int*) (g_7f4ca0 + off + 4);
 	strncpy(g_7f4ca0 + off + 0x30, (char*) cmd + 0x25, 0x10);
 	entry = gm_GetEntityTableEntry((char*) (g_7f4ca0 + off));
 	if (entry != 0) {
 		*(unsigned short*) entry = *(unsigned short*) (g_7f4ca0 + off + 0x50);
 		strncpy((char*) entry + 2, (char*) cmd + 0x35, 0x10);
 		strncpy(g_7f4ca0 + off + 0x40, (char*) cmd + 0x35, 0x10);
-		r2 = fcn_00508e40(*(int*) (g_7f4ca0 + off + 0x60));
+		r2 = gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + off + 0x60));
 		if (r2 != 0)
 			strncpy(r2 + 0x40, (char*) cmd + 0x35, 0x10);
 		*(float*) ((char*) entry + 0x88) = -1.0f;

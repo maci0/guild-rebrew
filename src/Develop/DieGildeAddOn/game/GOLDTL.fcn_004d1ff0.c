@@ -8,7 +8,7 @@ int __cdecl fcn_004d5450(void *);
 int __cdecl fcn_004c3100(char *, int);
 int __cdecl fcn_0044c310(char *, char *);
 int __cdecl fcn_0045b700(int, int, int);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004d1cf0(void);
 void __cdecl fcn_004c44a0(void);
 void __cdecl fcn_004c51f0(int, int, int, int, int, int);
@@ -215,8 +215,8 @@ void __cdecl fcn_004d1ff0(void *arg)
 	*(char *) 0x6a2574 = 0;
 	*(void **) 0x772eb4 = (void *) o;
 	fcn_004d1cf0();
-	*(int *) 0x772e9c = fcn_00508e40(*(int *) (o + 0x34));
-	*(int *) 0x772e98 = fcn_00508e40(*(int *) (o + 0x38));
+	*(int *) 0x772e9c = gm_LookupEntityRecordById(*(int *) (o + 0x34));
+	*(int *) 0x772e98 = gm_LookupEntityRecordById(*(int *) (o + 0x38));
 	if (*(int *) (*(unsigned short *) 0x774970 * 0x21c + 0x7f4ca4) == -1 && (o[0x7c] & 1) != 0) {
 		fcn_004c44a0();
 		for (p = (int *) (o + 0x100), i = 3; i != 0; i--, p++) {

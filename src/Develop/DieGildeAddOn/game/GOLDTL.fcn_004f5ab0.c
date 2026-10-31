@@ -2,8 +2,8 @@ extern char g_6b5c60[];
 extern char g_7f4ca4[];
 
 
-unsigned char* __cdecl fcn_00508e40(int);
-void __cdecl fcn_0051af00(void*, int, ...);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
 void __cdecl fcn_004f5ab0(int a1, int a2, int a3)
@@ -16,9 +16,9 @@ void __cdecl fcn_004f5ab0(int a1, int a2, int a3)
 	p = 0;
 	for (i = 0x9a3816; i < 0x9a9216; i += 0x2d) {
 		if (*(int*) (i - 0x16) == a1) {
-			p = fcn_00508e40(*(int*) i);
+			p = gm_LookupEntityRecordById(*(int*) i);
 			if (p != 0) {
-				fcn_0051af00(buf, 0x1747, *(unsigned short*) p);
+				io_FormatTextBuffer(buf, 0x1747, *(unsigned short*) p);
 			}
 		}
 	}

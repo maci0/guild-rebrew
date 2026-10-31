@@ -1,15 +1,15 @@
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00500bb0(char* sel, int a, int b, int c);
 int __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
 float __cdecl fcn_00507e70(char* a, char* b, int c);
 float __cdecl fcn_0042e450(void);
 int __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 int __cdecl fcn_004c5620(char* e, int a);
-int __cdecl fcn_0051af00(char* buf, int fmt, ...);
+int __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 int __cdecl fcn_00545d40(int a, int b, char* s, int c, int d, int e);
 int __cdecl fcn_004e7b70(char* e, void* a, void* b);
 int __cdecl fcn_0042e410(int code);
-float __cdecl fcn_00507f10(char* e, int a);
+float __cdecl gm_GetEntitySkill(char* e, int a);
 int __cdecl fcn_004ec2d0(char* e, int a, int b);
 int __cdecl fcn_004c54c0(int a, int b, int c, int d);
 int __cdecl fcn_00500de0(char* p, int id, int a, int b, int c);
@@ -41,8 +41,8 @@ int __cdecl fcn_0054f910(char* ent)
 	if ((flags & 2) == 0) {
 		return 0;
 	}
-	e1 = fcn_00508e40(*(int*) (ent + 0xac));
-	e2 = fcn_00508e40(*(int*) (ent + 0xb0));
+	e1 = gm_LookupEntityRecordById(*(int*) (ent + 0xac));
+	e2 = gm_LookupEntityRecordById(*(int*) (ent + 0xb0));
 	if (e1 == 0 || e2 == 0) {
 		if ((*(int*) (e1 + 0x1c8) & 0x400) != 0
 		    || (*(int*) (e2 + 0x1c8) & 0x400) != 0) {
@@ -82,7 +82,7 @@ int __cdecl fcn_0054f910(char* ent)
 		*(int*) (ent + 0x58) = 0x1e;
 		if (*(unsigned char*) (e1 + 2) == 6
 		    || *(unsigned char*) (e1 + 2) == 7) {
-			fcn_0051af00(text, 0x1d83,
+			io_FormatTextBuffer(text, 0x1d83,
 			    *(unsigned short*) (e2), ent + 0x52,
 			    *(unsigned short*) (e2), *(int*) (e1 + 4));
 			fcn_00545d40(*(int*) (e1 + 4), *(int*) (e1 + 4),
@@ -94,7 +94,7 @@ int __cdecl fcn_0054f910(char* ent)
 	v = 0;
 	if (*(unsigned char*) (e1 + 2) == 6
 	    || *(unsigned char*) (e1 + 2) == 7) {
-		fcn_0051af00(text, 0x1d81,
+		io_FormatTextBuffer(text, 0x1d81,
 		    (*(unsigned char*) (e2 + 9) != 0) + 0x1d68,
 		    *(unsigned short*) (e2), *(unsigned short*) (e2),
 		    *(int*) (e1 + 4));
@@ -109,7 +109,7 @@ int __cdecl fcn_0054f910(char* ent)
 			v = (fcn_0042e410(3) & 0xffff) + 1;
 		}
 	}
-	f = fcn_00507f10(e1, 4) * 8.0f;
+	f = gm_GetEntitySkill(e1, 4) * 8.0f;
 	w = (int) f;
 	dmg = -9 - w - (fcn_0042e410(8) & 0xffff);
 	fcn_004ec2d0(e2, v, dmg);

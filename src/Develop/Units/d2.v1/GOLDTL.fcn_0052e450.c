@@ -32,7 +32,7 @@ extern int g_6b5c48;
 unsigned short* __cdecl gm_ResolveParentEntity(unsigned short* e);
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
-void __cdecl fcn_00519190(char* fmt, int a, int b);
+void __cdecl io_AppendText(char* fmt, int a, int b);
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 int __cdecl fcn_0052dee0(int x, int y, int z);
 int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f, int g, int h);
@@ -49,7 +49,7 @@ void __cdecl fcn_0052e450(unsigned short* e)
 		if (parent != 0) {
 			g_6a25b8 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2f80);
 			d2_SetForm(g_6a25b8, 1);
-			fcn_00519190(g_6a2f74, *parent, *e * 2 + 0x9a8);
+			io_AppendText(g_6a2f74, *parent, *e * 2 + 0x9a8);
 			d2_SetForm(g_6a25b8, 0);
 			x = ((((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1) - 1;
 			id = fcn_0046f740(x, 0x30, *e + 0xdf, g_772514);

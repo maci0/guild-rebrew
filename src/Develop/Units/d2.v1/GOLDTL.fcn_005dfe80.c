@@ -29,7 +29,7 @@ extern char s_68d704[];
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00519190(int);
+void __cdecl io_AppendText(int);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_CreateRadioGroup(int);
 void __cdecl fcn_00469470(int, int);
@@ -70,7 +70,7 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 	if (flags & 8) {
 		wflags = 0x717c6;
 	}
-	fcn_00519190(arg);
+	io_AppendText(arg);
 	fcn_00471b60(h);
 	g_77534d = 1;
 	ctx = d2_CreateRadioGroup(0);

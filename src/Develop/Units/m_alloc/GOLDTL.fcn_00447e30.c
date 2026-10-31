@@ -26,7 +26,7 @@ typedef struct S447e30Rec {
 	int tail;
 } S447e30Rec;
 
-int __cdecl fcn_0041d9e0(char*);
+int __cdecl ReportClientMessage(char*);
 char* __cdecl fcn_004011a0(char*, char*);
 int __cdecl fcn_00401180(char*, char*);
 int __cdecl fcn_004011f0(char*, int*);
@@ -80,7 +80,7 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 	recs = 0;
 	obj = 0;
 	if (version < 0x3a6c0009) {
-		fcn_0041d9e0((char*) 0x67abe0);
+		ReportClientMessage((char*) 0x67abe0);
 		return 0;
 	}
 	memset(name, 0, 0x2a4);

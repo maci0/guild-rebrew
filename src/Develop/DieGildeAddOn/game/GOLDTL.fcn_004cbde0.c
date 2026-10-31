@@ -13,7 +13,7 @@ extern int g_699364;
 int __cdecl rand(void);
 void __cdecl srv_SeedRandom(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl sim_CreateCitizen(char, uint, int, uchar, uchar, ushort*);
 char* __cdecl sim_StartEntityQueryByType(uchar*);
 char* __cdecl fcn_005049a0(ushort*);
@@ -45,7 +45,7 @@ int __cdecl fcn_004cbde0(int cmd, char* result)
 	building_entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building_entity == (ushort*) 0)
 		return 1;
-	citizen_entity = fcn_00508e40(*(int*) (cmd + 0x19));
+	citizen_entity = gm_LookupEntityRecordById(*(int*) (cmd + 0x19));
 	if (*(int*) (cmd + 0x14) != -1) {
 		workplace_entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x14));
 		if (workplace_entity == (ushort*) 0)

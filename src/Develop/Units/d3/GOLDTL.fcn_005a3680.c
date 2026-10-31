@@ -15,7 +15,7 @@ extern char s_6a41a4[];
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl fcn_005a3580(char*);
 char* __cdecl fcn_005338d0(char*, char*, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
 char* __cdecl fcn_00443bf0(float, float, int, int);
@@ -42,7 +42,7 @@ void __cdecl fcn_005a3680(void)
 		sprintf(items[i], s_6a41a4, g_868354[i]);
 		fcn_005338d0(items[i], g_868354[i], 0);
 	}
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_005338a0();
 	if (fcn_005373e0((void*) fcn_005a3680, 0x677d7) != 0) {
 		do {

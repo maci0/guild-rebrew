@@ -35,7 +35,7 @@ void __cdecl fcn_00471db0(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00533a60(int, int, int*, int, int, int, int);
 int __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005373e0(int, int);
@@ -114,7 +114,7 @@ unsigned int __cdecl fcn_00539930(int a0)
 	d2_SetForm(v5, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(v5, 1);
-	fcn_00519190(0x1ca5);
+	io_AppendText(0x1ca5);
 	d2_SetForm(v5, 3);
 	fcn_00533a60(g_772514, 0, &v15, 3, g_14ac614, g_14ac618, g_14ac61c);
 	fcn_00472640(v15, 0);
@@ -220,7 +220,7 @@ label_539ba4:
 							v32 = fcn_0046f100(0x88, v35, 400, 0x78, 0x10, g_772514);
 							v31[1] = v32;
 							fcn_00472900(*(int*) (g_772514 * 0x3cc + 0x10161bc), 0x53);
-							fcn_00519190(0x1cbc, &v16[v34], v8, v26[v34]);
+							io_AppendText(0x1cbc, &v16[v34], v8, v26[v34]);
 							v12 = v37;
 							v32 = v34;
 						} else {

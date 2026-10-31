@@ -59,14 +59,14 @@ extern char s_6ac79c[];
 
 char* __cdecl fcn_005463a0(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_0052a0c0(unsigned char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl cm_ExProdObjekt(void);
@@ -103,16 +103,16 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 		cnt++;
 	}
 	if (cnt >= 3) {
-		fcn_0051af00(buf, 0x1a4a, cnt);
+		io_FormatTextBuffer(buf, 0x1a4a, cnt);
 		fcn_00526120(buf, 0);
 		return;
 	}
 	fcn_0052a0c0(obj, 1);
 	dlg = fcn_00470820(0, 0, s_6ac79c);
 	fcn_00471b60(dlg);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	s = fcn_00519190(0x1a45, kind + 0x20d, kind + 0x20e, a2 + 0x16b7);
+	s = io_AppendText(0x1a45, kind + 0x20d, kind + 0x20e, a2 + 0x16b7);
 	btn1 = fcn_00472250(dlg, 1, s);
 	btn2 = fcn_00472250(dlg, 1, s + 1);
 	g_100f1dc = -1;
@@ -152,7 +152,7 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 				else {
 					cm_ExProdObjekt();
 					if (n > 3) {
-						fcn_0051af00(buf, 0x1a4a, 3);
+						io_FormatTextBuffer(buf, 0x1a4a, 3);
 						fcn_00526120(buf, 0);
 					}
 					g_774654 = 1;

@@ -20,7 +20,7 @@ extern Time g_7f4c00;
 
 int __cdecl gm_GetOppositeStatIndex(int stat);
 int __cdecl gm_MapEntityStatRange(int stat);
-float __cdecl fcn_00507f10(Ent* e, int k);
+float __cdecl gm_GetEntitySkill(Ent* e, int k);
 int __cdecl fcn_00500cb0(Time* a, Time* b);
 int __cdecl fcn_00500d20(Time* a, Time* b);
 void __cdecl fcn_00500bb0(Time* t, int a, int b, int c);
@@ -42,17 +42,17 @@ float __cdecl fcn_00507540(int idx, Time* out)
 		return 0.0f;
 	k = gm_MapEntityStatRange(g_7f4ca0[idx].stat);
 	if (k == 0xb)
-		v = fcn_00507f10(&g_7f4ca0[idx], 2);
+		v = gm_GetEntitySkill(&g_7f4ca0[idx], 2);
 	else if (k == 0xc)
-		v = fcn_00507f10(&g_7f4ca0[idx], 3);
+		v = gm_GetEntitySkill(&g_7f4ca0[idx], 3);
 	else if (k == 0xa)
-		v = fcn_00507f10(&g_7f4ca0[idx], 3);
+		v = gm_GetEntitySkill(&g_7f4ca0[idx], 3);
 	else if (k == 8)
-		v = fcn_00507f10(&g_7f4ca0[idx], 0);
+		v = gm_GetEntitySkill(&g_7f4ca0[idx], 0);
 	else if (k == 9)
-		v = fcn_00507f10(&g_7f4ca0[idx], 4);
+		v = gm_GetEntitySkill(&g_7f4ca0[idx], 4);
 	else
-		v = fcn_00507f10(&g_7f4ca0[idx], 1);
+		v = gm_GetEntitySkill(&g_7f4ca0[idx], 1);
 	if (!(v > 0.25f))
 		v = 0.25f;
 	num = (float) r * 16.0f + 72.0f;

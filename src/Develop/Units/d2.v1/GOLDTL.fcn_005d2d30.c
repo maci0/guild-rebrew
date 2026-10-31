@@ -37,7 +37,7 @@ int __cdecl fcn_005d2a40(int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004c5530(Packet*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
@@ -57,7 +57,7 @@ int __cdecl fcn_005d2d30(unsigned short* a1)
 	dlg = fcn_00470820(0, 0, "privillegien\\werbung2");
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1ce5, *a1, cost);
+	io_AppendText(0x1ce5, *a1, cost);
 	g_100f1dc = -1;
 	r = 0;
 	do {

@@ -47,7 +47,7 @@ extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
 extern char* g_77261c;
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 char* __cdecl fcn_005463a0(int type, int a, int b);
 char* __cdecl he_fn_Handlung(void);
@@ -100,9 +100,9 @@ int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 			fv[0] = 100.0f;
 			fv[1] = 100.0f;
 			fv[2] = 100.0f;
-			sv[0] = fcn_00508e40(p->val);
-			sv[1] = fcn_00508e40(p->ref1);
-			sv[2] = fcn_00508e40(p->ref2);
+			sv[0] = gm_LookupEntityRecordById(p->val);
+			sv[1] = gm_LookupEntityRecordById(p->ref1);
+			sv[2] = gm_LookupEntityRecordById(p->ref2);
 			if (sv[0] != 0 && sv[0] != g_77261c) {
 				fv[0] = fcn_0050f980(e->w0, *(unsigned short*) sv[0], 1);
 			}

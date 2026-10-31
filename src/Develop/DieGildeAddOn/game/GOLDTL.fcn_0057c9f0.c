@@ -4,11 +4,11 @@ extern unsigned char g_773d75;
 extern char g_7f4ca0[];
 
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00510500(int);
 int __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
-int __cdecl fcn_0051af00(char*, int, int, int, int);
+int __cdecl io_FormatTextBuffer(char*, int, int, int, int);
 int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl fcn_004c51a0(int, int, int, int);
 
@@ -32,7 +32,7 @@ void __cdecl fcn_0057c9f0(char* a0)
 	if (handle == 0) {
 		return;
 	}
-	ent = (unsigned short*) fcn_00508e40(*(int*) (a0 + 0xc));
+	ent = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0xc));
 	if (ent == 0) {
 		return;
 	}
@@ -81,7 +81,7 @@ void __cdecl fcn_0057c9f0(char* a0)
 	}
 	bonus += found;
 	found = bonus * count;
-	fcn_0051af00(buf, 0x41fa, handle, bonus, found);
+	io_FormatTextBuffer(buf, 0x41fa, handle, bonus, found);
 	fcn_00545d40(*(int*) (ent + 2), -1, buf + 0x14, 1, 0x5fa, 0);
 	fcn_004c51a0(*(int*) (ent + 2), -1, g_773d75, found);
 }

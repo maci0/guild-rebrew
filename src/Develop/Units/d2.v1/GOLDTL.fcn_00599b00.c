@@ -73,7 +73,7 @@ void __cdecl fcn_00599b00(void)
 	*(int*) (i + 0x10162f0) = 0x18;
 	*(int*) (i + 0x10162f4) = 0x18;
 	d2_SetForm(dlg, 1);
-	fcn_00519190((void*) 0x17f3, dlg, (void*) 1);
+	io_AppendText((void*) 0x17f3, dlg, (void*) 1);
 	d2_SetForm(dlg, 2);
 	ofs = 0;
 	row = 0x40;

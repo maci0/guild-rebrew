@@ -14,7 +14,7 @@ extern char g_7f4ca0[];
 
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004f2810(char*, unsigned char*, int, int, short, int);
 void __cdecl fcn_005b2db0(struct s_7f4ca0*, char*, unsigned char*, int, int, int);
 
@@ -28,7 +28,7 @@ void __cdecl fcn_0057b070(char* o)
 
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac));
 	if (e != 0 && lpGebaeudePROT[*e * 0x24d] == 0x1d) {
-		x = fcn_00508e40(*(int*) (o + 0xc));
+		x = gm_LookupEntityRecordById(*(int*) (o + 0xc));
 		if (x != 0) {
 			fcn_004f2810(x, e, *(int*) (o + 0xb0), *(unsigned char*) (o + 0xb4),
 			             *(short*) (o + 0xbc), *(int*) (o + 0xb8));

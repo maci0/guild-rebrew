@@ -10,11 +10,11 @@ extern char g_6a96f4[];
 extern char g_6a4078[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel);
 int __cdecl fcn_0058c780(char* a1, int a2, int a3, int* a4, int* a5);
 int __cdecl fcn_0058c890(char* a1, int a2, int a3, int a4);
@@ -36,15 +36,15 @@ int __cdecl fcn_0058cae0(char* p, int a1, int a2)
 	sel = 0;
 	res = 0;
 	d = fcn_00470820(0, 0, g_6a96f4);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(d);
 	d2_SetForm(d, 0);
 	fcn_005340f0(g_772514);
 	d2_SetForm(d, 1);
-	fcn_00519190(0x4113, 0x4112);
+	io_AppendText(0x4113, 0x4112);
 	fcn_0058c4f0(p, d, 2, ids, (int*) &sel);
 	d2_SetForm(d, 3);
-	back = fcn_00472250(d, 3, fcn_00519190(g_6a4078, 0x4119));
+	back = fcn_00472250(d, 3, io_AppendText(g_6a4078, 0x4119));
 	fcn_00472640(back, fcn_0058c780(p, a1, a2, ids, (int*) &sel));
 	g_100f1dc = -1;
 	do {

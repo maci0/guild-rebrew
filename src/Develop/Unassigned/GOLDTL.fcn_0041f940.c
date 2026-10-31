@@ -12,23 +12,23 @@ struct Node {
 #include "client_video_list.h"
 void __cdecl free(void* p);
 
-void __cdecl fcn_0041f940(Node* n)
+void __cdecl FreeVideoListNode(Node* node)
 {
-	if (n == 0) {
+	if (node == 0) {
 		return;
 	}
-	if (n->next != 0) {
-		if (n->prev != 0) {
-			n->prev->next = n->next;
-			n->next->prev = n->prev;
+	if (node->next != 0) {
+		if (node->prev != 0) {
+			node->prev->next = node->next;
+			node->next->prev = node->prev;
 		} else {
-			n->next->prev = 0;
+			node->next->prev = 0;
 		}
-	} else if (n->prev != 0) {
-		n->prev->next = 0;
-		g_6b6f84 = n->prev;
+	} else if (node->prev != 0) {
+		node->prev->next = 0;
+		g_6b6f84 = node->prev;
 	} else {
 		g_6b6f84 = 0;
 	}
-	free(n);
+	free(node);
 }

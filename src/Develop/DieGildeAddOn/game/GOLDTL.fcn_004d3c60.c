@@ -9,7 +9,7 @@ extern float g_664144;
 extern float g_662a6c;
 extern float g_6628cc;
 
-char* __cdecl gm_LookupEntityRecordById(int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 float __cdecl fcn_004ce8b0(char*);
 int __cdecl fcn_0064d470(char*, void*);
 void __cdecl fcn_00455350(char*, char*, float*);
@@ -48,7 +48,7 @@ int __cdecl fcn_004d3c60(int id)
 	for (i = 0x80; i < 0xc0; i += 4) {
 		ent = *(int*) (g_772eb4 + i);
 		if (ent != -1) {
-			e = gm_LookupEntityRecordById(ent);
+			e = gm_LookupEntityRecordIn32SlotTable(ent);
 			if (e[8] != 0 && e[8] != 4) {
 				sum_lo = (float) (fcn_004ce8b0(e) + sum_lo);
 			}
@@ -58,7 +58,7 @@ int __cdecl fcn_004d3c60(int id)
 	for (i = 0xc0; i < 0x100; i += 4) {
 		ent = *(int*) (g_772eb4 + i);
 		if (ent != -1) {
-			e = gm_LookupEntityRecordById(ent);
+			e = gm_LookupEntityRecordIn32SlotTable(ent);
 			if (e[8] != 0 && e[8] != 4) {
 				sum_hi = (float) (fcn_004ce8b0(e) + sum_hi);
 			}

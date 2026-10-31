@@ -16,7 +16,7 @@ extern char g_772c44[];
 
 void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_0041d9e0(char*);
+void __cdecl ReportClientMessage(char*);
 char* __cdecl fcn_0047a070(char*, int);
 int __cdecl fcn_0047a570(int, int, int, int*, int*, int);
 int __cdecl fcn_0047a710(int, int, char*, char*);
@@ -315,6 +315,6 @@ done:
 	if (*(short*) (bank + 4) == *(short*) (list + 0x2a))
 		return bank;
 	__asm { int 3 }
-	fcn_0041d9e0("Invalid shapebank created...");
+	ReportClientMessage("Invalid shapebank created...");
 	return bank;
 }

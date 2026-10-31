@@ -1,4 +1,4 @@
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_00500bb0(unsigned int*, int, int);
@@ -12,7 +12,7 @@ void __cdecl fcn_0050c710(int, int, int);
 int __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
 int __cdecl _ftol(void);
 void __cdecl fcn_004c51f0(int, int, int, int, int, int);
-int __cdecl fcn_0051af00(char*, int, int, int);
+int __cdecl io_FormatTextBuffer(char*, int, int, int);
 int __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl fcn_00546190(int);
@@ -36,7 +36,7 @@ void __cdecl fcn_005609c0(char* a0)
 		i = 0;
 		if (*(unsigned char*) (a0 + 0xac) != 0) {
 			while (i < *(unsigned char*) (a0 + 0xac)) {
-				ent = fcn_00508e40(*(int*) (a0 + 0x8c + i * 4));
+				ent = gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + i * 4));
 				if (ent != 0 && *(int*) (ent + 0x16c) != 0) {
 					fcn_004c5c80(*(int*) (a0 + 0x8c + i * 4));
 					fcn_004c5da0(*(int*) (a0 + 0x8c + i * 4),
@@ -60,7 +60,7 @@ void __cdecl fcn_005609c0(char* a0)
 		i = 0;
 		if (*(unsigned char*) (a0 + 0xac) != 0) {
 			while (i < *(unsigned char*) (a0 + 0xac)) {
-				ent = fcn_00508e40(*(int*) (a0 + 0x8c + i * 4));
+				ent = gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + i * 4));
 				if (ent != 0) {
 					fcn_00529160(*(int*) ((unsigned short*) ent + 0xb6), 0,
 						*(unsigned short*) ent, 0);
@@ -94,8 +94,8 @@ void __cdecl fcn_005609c0(char* a0)
 		len = _ftol();
 		fcn_004c51f0(*(int*) (ent + 2), -1, *(unsigned short*) (a0 + 0xae),
 			len, *(unsigned char*) 0x773d75, 0);
-		fcn_0051af00(text, 0x1809, 0x1805, 0);
-		fcn_0051af00(name, 0x180a, len,
+		io_FormatTextBuffer(text, 0x1809, 0x1805, 0);
+		io_FormatTextBuffer(name, 0x180a, len,
 			*(unsigned short*) (a0 + 0xae) * 2 + 0x9a8);
 		strcat(name, text);
 		i = *(unsigned short*) (a0 + 8);

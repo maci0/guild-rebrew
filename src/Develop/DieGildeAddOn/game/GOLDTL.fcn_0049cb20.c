@@ -14,7 +14,7 @@ typedef struct Msg {
 unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00495400(int kind, int id, int n, Msg* b1, Msg* b2);
-int __cdecl fcn_004aa6a0(char* e, char* a2, char* out);
+int __cdecl fcn_004aa580(char* e, char* a2, char* out);
 
 /* ADDRESS: GOLDTL 0x0049cb20 */
 int __cdecl fcn_0049cb20(int a1, char* e, int busy, Msg* out1, Msg* out2)
@@ -70,7 +70,7 @@ int __cdecl fcn_0049cb20(int a1, char* e, int busy, Msg* out1, Msg* out2)
 	if (*(char*) (e + 0x1e8) & 4) {
 		memset(&c, 0, sizeof(c));
 		memset(&d, 0, sizeof(d));
-		if (fcn_004aa6a0(e, (char*) &c, (char*) &d) == 0) {
+		if (fcn_004aa580(e, (char*) &c, (char*) &d) == 0) {
 			return 0;
 		}
 		*out1 = c;

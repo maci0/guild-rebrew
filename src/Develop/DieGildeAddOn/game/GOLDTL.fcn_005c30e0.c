@@ -49,7 +49,7 @@ extern char g_67e968[];
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl fcn_00504f30(int, int);
 int __cdecl fcn_0050d170(int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(void*, int);
 int __cdecl fcn_00526010(void*, int, char);
 int __cdecl gm_SearchTable67(int);
@@ -80,7 +80,7 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 	rec = &((GOLDTL_EntType5c30*) lpGebaeudePROT)[*(unsigned char*) a1];
 	id = *(int*) (a1 + 1);
 	if (rec->f247 >= rec->f248) {
-		fcn_0051af00(buf, 0x17d7);
+		io_FormatTextBuffer(buf, 0x17d7);
 		fcn_00526120(buf, 0);
 		return;
 	}
@@ -88,13 +88,13 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 	if (g_774800 == 0) {
 		if (kind == 1 || kind == 4 || kind == 8) {
 			if (fcn_00504f30(*(unsigned char*) a1 + 1, g_774970) != 1) {
-				fcn_0051af00(buf, 0x17d6);
+				io_FormatTextBuffer(buf, 0x17d6);
 				fcn_00526120(buf, 0);
 				return;
 			}
 		} else {
 			if (fcn_00504f30(*(unsigned char*) a1 + 1, g_774970) != 1) {
-				fcn_0051af00(buf, 0x17d9);
+				io_FormatTextBuffer(buf, 0x17d9);
 				fcn_00526120(buf, 0);
 				return;
 			}
@@ -104,20 +104,20 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 	if (bp.node == 0) {
 		fcn_00597ff0(*(unsigned char*) a1 + 1, (char*) &msg);
 		if (fcn_0065f220((char*) &msg, bp.name) != 0) {
-			fcn_0051af00(buf, 0x17d8, *(unsigned char*) a1 * 14 + 0x49c);
+			io_FormatTextBuffer(buf, 0x17d8, *(unsigned char*) a1 * 14 + 0x49c);
 			fcn_00526120(buf, 0);
 			return;
 		}
 	} else {
 		fcn_00597ff0(*(unsigned char*) a1 + 1, (char*) &msg);
 		if (fcn_0064d470((char*) &msg, bp.node) == 0) {
-			fcn_0051af00(buf, 0x17d8, *(unsigned char*) a1 * 14 + 0x49c);
+			io_FormatTextBuffer(buf, 0x17d8, *(unsigned char*) a1 * 14 + 0x49c);
 			fcn_00526120(buf, 0);
 			return;
 		}
 	}
 	v = (int) (fcn_0050d170(*(unsigned char*) a1 + 1) * g_664e60);
-	fcn_0051af00(buf, 0x17d5, v, a1, *(unsigned char*) a1 * 14 + 0x49c);
+	io_FormatTextBuffer(buf, 0x17d5, v, a1, *(unsigned char*) a1 * 14 + 0x49c);
 	switch (kind) {
 	default:
 		if (fcn_00526120(buf, 0x11) == 0) {
@@ -149,7 +149,7 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 		             (char) g_773d75, v);
 		fcn_004c5530((char*) &msg);
 		fcn_004c4ef0(g_67e968);
-		fcn_0051af00(text, 0x17da, *(unsigned char*) a1 * 14 + 0x49c);
+		io_FormatTextBuffer(text, 0x17da, *(unsigned char*) a1 * 14 + 0x49c);
 		fcn_00526120(text, 4);
 		return;
 	case 3:

@@ -18,7 +18,7 @@ void __cdecl fcn_00471b60(int);
 int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
 char* __cdecl fcn_00471f80(int);
 void __cdecl fcn_00471e30(int);
@@ -36,12 +36,12 @@ int __cdecl fcn_005397c0(void)
 	h = fcn_00470820(0, 0, g_6a3a34);
 	fcn_00471b60(h);
 	d2_SetForm(h, 2);
-	fcn_00519190(0x1cae);
+	io_AppendText(0x1cae);
 	d2_SetForm(h, 0);
 	e = fcn_00472250(h, 0, 0);
 	d2_SetElementValue(e, buf);
 	d2_SetForm(h, 1);
-	ok = fcn_00472250(h, 1, fcn_00519190(0x1cb0));
+	ok = fcn_00472250(h, 1, io_AppendText(0x1cb0));
 	while (fcn_005373e0(fcn_005397c0, 0x24087) != 0) {
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;

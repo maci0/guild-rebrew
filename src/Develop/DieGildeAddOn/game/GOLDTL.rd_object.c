@@ -6,7 +6,7 @@ char* __cdecl fcn_004011a0(void* stream, char* dst);
 int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl fcn_00401280(void* stream, void* dst);
-void __cdecl fcn_0041d9e0(const char* msg);
+void __cdecl ReportClientMessage(const char* msg);
 void __cdecl fcn_00438b40(char* object, void* vector);
 void __cdecl fcn_00438cb0(char* object, void* vector);
 char* __cdecl fcn_00439750(int kind, char* name);
@@ -363,7 +363,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			}
 			break;
 		default:
-			fcn_0041d9e0("Unkown Object-Type in rd_object()!");
+			ReportClientMessage("Unkown Object-Type in rd_object()!");
 			break;
 		}
 		fcn_00438cb0(object, object + 0x84);

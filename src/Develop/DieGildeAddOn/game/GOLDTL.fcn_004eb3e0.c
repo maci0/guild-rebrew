@@ -24,7 +24,7 @@ int __cdecl fcn_00507080(int k);
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 void* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl fcn_00508cf0(int a1, int* a2);
-float __cdecl fcn_00507f10(char* entity, int index);
+float __cdecl gm_GetEntitySkill(char* entity, int index);
 float __cdecl gm_RandomFloat01(void);
 slot80* __cdecl gm_FindSlotById(int a1, int a2);
 float __cdecl fcn_00502780(int a1, int a2);
@@ -32,7 +32,7 @@ int __cdecl fcn_004c61d0(slot80* e, unsigned char kind);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
 void __cdecl fcn_005100f0(int a1, int a2);
 int __cdecl gm_RandomMod(int a1);
-void __cdecl fcn_0051af00(char* buf, int id, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int a1, int a2, void* p, int a4, int a5, void* p6);
 int __cdecl fcn_00526120(void* a1, int a2);
 
@@ -112,7 +112,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 	} else {
 		v20 = (unsigned int) ids[pick[0]];
 	}
-	t = fcn_00507f10(self, 2);
+	t = gm_GetEntitySkill(self, 2);
 	if (packet[2] == 1) {
 		scale = (gm_RandomFloat01() + 1.0f) * t * *(float*) 0x6628d8 + *(float*) 0x664198;
 	} else {
@@ -139,11 +139,11 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 		fcn_005100f0(*(int*) (self + 4), -1);
 		found = gm_RandomMod(3);
 		if (packet[2] != 1) {
-			fcn_0051af00(buf1, (found & 0xffff) + 0x165a, packet[1] + 0x1648);
-			fcn_0051af00(buf2, 0x1659, buf1, v20 * 2 + 0x9a8, v25 * 2 + 0x9a8);
+			io_FormatTextBuffer(buf1, (found & 0xffff) + 0x165a, packet[1] + 0x1648);
+			io_FormatTextBuffer(buf2, 0x1659, buf1, v20 * 2 + 0x9a8, v25 * 2 + 0x9a8);
 		} else {
-			fcn_0051af00(buf1, (found & 0xffff) + 0x1656, packet[1] + 0x1648);
-			fcn_0051af00(buf2, 0x1655, buf1, v20 * 2 + 0x9a8, v25 * 2 + 0x9a8);
+			io_FormatTextBuffer(buf1, (found & 0xffff) + 0x1656, packet[1] + 0x1648);
+			io_FormatTextBuffer(buf2, 0x1655, buf1, v20 * 2 + 0x9a8, v25 * 2 + 0x9a8);
 		}
 		for (q = (unsigned char*) 0x7f4ca4; (int) q < (int) 0x85a0a4; q += 0x21c) {
 			if ((*(unsigned char*) (q - 2) == 7 || *(unsigned char*) (q - 2) == 6) &&

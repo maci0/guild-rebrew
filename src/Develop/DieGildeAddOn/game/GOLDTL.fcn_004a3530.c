@@ -20,7 +20,7 @@ int __cdecl fcn_004e99c0(unsigned char c);
 int __cdecl fcn_004e8b40(int idx, char* out);
 int __cdecl fcn_004e8c00(int group, int max, char* out);
 int __cdecl fcn_004e9310(int k, int max, char** out);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl gm_RandomMod(int n);
 
@@ -91,7 +91,7 @@ int __cdecl fcn_004a3530(char* a0)
 		}
 		cnt = fcn_004e8c00(x10, 6, out);
 		for (i = 0; i < cnt; i++) {
-			e = fcn_00508e40(*(int*) (out + i * 0x18));
+			e = gm_LookupEntityRecordById(*(int*) (out + i * 0x18));
 			if (e && e != a0 && n < 32) {
 				g_10082a0[n].flags = 0x10;
 				g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
@@ -101,7 +101,7 @@ int __cdecl fcn_004a3530(char* a0)
 		}
 		cnt = fcn_004e8c00(flag, 6, out);
 		for (i = 0; i < cnt; i++) {
-			e = fcn_00508e40(*(int*) (out + i * 0x18));
+			e = gm_LookupEntityRecordById(*(int*) (out + i * 0x18));
 			if (e && e != a0 && n < 32) {
 				g_10082a0[n].flags = 1;
 				g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
@@ -111,7 +111,7 @@ int __cdecl fcn_004a3530(char* a0)
 		}
 		cnt = fcn_004e8c00(grp, 6, out);
 		for (i = 0; i < cnt; i++) {
-			e = fcn_00508e40(*(int*) (out + i * 0x18));
+			e = gm_LookupEntityRecordById(*(int*) (out + i * 0x18));
 			if (e && e != a0 && n < 32) {
 				g_10082a0[n].flags = 1;
 				g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
@@ -123,7 +123,7 @@ int __cdecl fcn_004a3530(char* a0)
 			cnt = fcn_004e8c00(arr[0], 6, out);
 			for (i = 0; i < cnt; i++) {
 				if (abs(fcn_004e99c0(*(unsigned char*) (out + i * 0x18 + 4)) - cls) <= 1) {
-					e = fcn_00508e40(*(int*) (out + i * 0x18));
+					e = gm_LookupEntityRecordById(*(int*) (out + i * 0x18));
 					if (!e || e == a0)
 						continue;
 					found = 0;
@@ -145,7 +145,7 @@ int __cdecl fcn_004a3530(char* a0)
 			cnt = fcn_004e8c00(arr[1], 6, out);
 			for (i = 0; i < cnt; i++) {
 				if (abs(fcn_004e99c0(*(unsigned char*) (out + i * 0x18 + 4)) - cls) <= 1) {
-					e = fcn_00508e40(*(int*) (out + i * 0x18));
+					e = gm_LookupEntityRecordById(*(int*) (out + i * 0x18));
 					if (!e || e == a0)
 						continue;
 					found = 0;
@@ -169,7 +169,7 @@ int __cdecl fcn_004a3530(char* a0)
 			cnt = fcn_004e8c00(arr[0], 6, out);
 			for (i = 0; i < cnt; i++) {
 				if (abs(fcn_004e99c0(*(unsigned char*) (out + i * 0x18 + 4)) - cls) <= 1) {
-					e = fcn_00508e40(*(int*) (out + i * 0x18));
+					e = gm_LookupEntityRecordById(*(int*) (out + i * 0x18));
 					if (!e || e == a0)
 						continue;
 					found = 0;
@@ -191,7 +191,7 @@ int __cdecl fcn_004a3530(char* a0)
 			cnt = fcn_004e8c00(arr[1], 6, out);
 			for (i = 0; i < cnt; i++) {
 				if (abs(fcn_004e99c0(*(unsigned char*) (out + i * 0x18 + 4)) - cls) <= 1) {
-					e = fcn_00508e40(*(int*) (out + i * 0x18));
+					e = gm_LookupEntityRecordById(*(int*) (out + i * 0x18));
 					if (!e || e == a0)
 						continue;
 					found = 0;
@@ -213,7 +213,7 @@ int __cdecl fcn_004a3530(char* a0)
 			cnt = fcn_004e8c00(arr[2], 6, out);
 			for (i = 0; i < cnt; i++) {
 				if (abs(fcn_004e99c0(*(unsigned char*) (out + i * 0x18 + 4)) - cls) <= 1) {
-					e = fcn_00508e40(*(int*) (out + i * 0x18));
+					e = gm_LookupEntityRecordById(*(int*) (out + i * 0x18));
 					if (!e || e == a0)
 						continue;
 					found = 0;
@@ -240,7 +240,7 @@ int __cdecl fcn_004a3530(char* a0)
 			for (i = 0; i < cnt; i++) {
 				if (fcn_004e99c0(*(unsigned char*) (out + i * 0x18 + 4)) > 2)
 					continue;
-				e = fcn_00508e40(*(int*) (out + i * 0x18));
+				e = gm_LookupEntityRecordById(*(int*) (out + i * 0x18));
 				if (e && e != a0 && n < 32) {
 					g_10082a0[n].flags = 0x40;
 					g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);

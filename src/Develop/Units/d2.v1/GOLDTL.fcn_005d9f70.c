@@ -28,8 +28,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0046e830(int x, int y, int win, int target, int id);
-void __cdecl fcn_00473a90(int, int);
-int __cdecl fcn_00519190(int, ...);
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c91c0(int, int, int, int, int);
 int __cdecl fcn_004f4830(int, Stat5d9f*);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
@@ -78,9 +78,9 @@ int __cdecl fcn_005d9f70(unsigned short* a1, unsigned short* a2)
 	w = g_772514;
 	d2_SetForm(dlg, 4);
 	fcn_0046e830(-1, -1, g_772514, w, 0x767);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1742, *a2);
+	io_AppendText(0x1742, *a2);
 	d2_SetForm(dlg, 2);
 	for (k = 0; k < n; k++) {
 		fcn_005c91c0(g_14aa314[rows[k].x1c].name, 10, k * 0x28 + 10, 0x13b, 0x55);
@@ -94,9 +94,9 @@ int __cdecl fcn_005d9f70(unsigned short* a1, unsigned short* a2)
 	q[0] = 1;
 	d2_SetForm(dlg, 3);
 	if (fcn_004fa5b0(0x16, a2, q) & 2) {
-		fcn_00519190(0x174a);
+		io_AppendText(0x174a);
 	} else {
-		sel = fcn_00472250(dlg, 3, fcn_00519190(0x1745));
+		sel = fcn_00472250(dlg, 3, io_AppendText(0x1745));
 		if (flag == 0) {
 			fcn_00472640(sel, 0);
 		}

@@ -17,7 +17,7 @@ extern struct ref_f31161 g_f31161[0x8000];
 /* Twin of GOLDTL 0x51ea70; the back-pointer field sits at 0x200 in GOLD, 0x204 in GOLDTL. */
 
 void __cdecl fcn_004478e0(int, int);
-int __cdecl fcn_00508e40(int);
+int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fe980(int);
 int __cdecl fcn_00502020(int);
 int __cdecl fcn_004e50a0(int);
@@ -40,7 +40,7 @@ void __cdecl fcn_00519ad0(void)
 	for (i = 0; i < 0x8000; i++) {
 		if (g_f31161[i].ref != 0) {
 			if (g_f31161[i].type == 1) {
-				g_f31161[i].ref = fcn_00508e40(g_f31161[i].ref);
+				g_f31161[i].ref = gm_LookupEntityRecordById(g_f31161[i].ref);
 			}
 			if (g_f31161[i].type == 3) {
 				g_f31161[i].ref = fcn_004fe980(g_f31161[i].ref);

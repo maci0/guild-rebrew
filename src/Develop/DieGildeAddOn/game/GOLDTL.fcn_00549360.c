@@ -6,7 +6,7 @@
 extern int g_6b8010;
 extern int g_67a370;
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00406340(char* e, char* name, int param);
 int __cdecl fcn_004bc8a0(int, int, float (*)[4]);
@@ -35,7 +35,7 @@ void __cdecl he_CharacterBehavior(char* u, int where)
 		if (*p == -1) {
 			continue;
 		}
-		e = fcn_00508e40(*p);
+		e = gm_LookupEntityRecordById(*p);
 		if (e == 0 || *(int*) (*(char**) (e + 0x184) + 0x128) != 0) {
 			continue;
 		}

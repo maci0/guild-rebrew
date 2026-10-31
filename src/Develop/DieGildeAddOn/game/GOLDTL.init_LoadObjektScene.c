@@ -40,7 +40,7 @@ void __cdecl fcn_00455350(char*, float*, float*);
 void __cdecl ch_SetPosition(char*, float*, int);
 int __cdecl fcn_004053a0(char*, int);
 int __cdecl fcn_00413160(void);
-void __cdecl fcn_0041d9e0(const char*);
+void __cdecl ReportClientMessage(const char*);
 int __cdecl fcn_005105a0(char*);
 void __cdecl fcn_00510bd0(char*);
 void __cdecl fcn_00526bf0(int, int, int);
@@ -85,7 +85,7 @@ void __cdecl init_LoadObjektScene(int a0)
 	if (g_7f3b40[a0] == -1) {
 		type = fcn_00413160();
 		if (type == -1) {
-			fcn_0041d9e0(s_6a1c30);
+			ReportClientMessage(s_6a1c30);
 		}
 		fcn_004432d0(type, 0);
 		sprintf(path, s_6a1c1c, name + 1);

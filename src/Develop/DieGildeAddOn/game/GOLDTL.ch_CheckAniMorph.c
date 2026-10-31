@@ -18,7 +18,7 @@ void __cdecl fcn_00434760(char*, char);
 int __cdecl fcn_00413190(char*);
 int __cdecl fcn_00433be0(char*, char*, int, int, int, int, char*, int);
 int __cdecl fcn_004316c0(char*);
-void __cdecl fcn_0041d9e0(const char*);
+void __cdecl ReportClientMessage(const char*);
 
 /* Completes a pending animation morph on the character. A finished morph is
  * reported and released, a pending morph stream is created against the
@@ -114,7 +114,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 			entity = *(char**) (*(char**) (obj + 0x34) + 0x1cc);
 			if (entity != 0 && *(int*) (entity + 0x390) != 0 &&
 			    *(int*) (entity + 0x40c) != 0) {
-				fcn_0041d9e0(g_675598);
+				ReportClientMessage(g_675598);
 			}
 			*(char**) (obj + 0x70) = 0;
 			return;

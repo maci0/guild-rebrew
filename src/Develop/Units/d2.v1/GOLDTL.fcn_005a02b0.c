@@ -10,7 +10,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 float __cdecl fcn_00507540(int, int*);
@@ -23,7 +23,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 void __cdecl fcn_004c5530(char*);
-void __cdecl fcn_0051af00(char*, int, int);
+void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00532ef0(void);
 /* ADDRESS: GOLDTL 0x005a02b0 */
@@ -54,33 +54,33 @@ int __cdecl fcn_005a02b0(void)
 		base = *(char*) (slot + 9) != 0 ? 0x18f : 0x130;
 		gm_MapEntityStatRange(*(unsigned char*) (slot + 0x164));
 		d2_SetForm(h, 1);
-		fcn_00519190(0x15bb);
+		io_AppendText(0x15bb);
 		d2_SetForm(h, 2);
-		fcn_00519190(0x15bf, *(unsigned short*) slot, 4,
+		io_AppendText(0x15bf, *(unsigned short*) slot, 4,
 		    base + *(unsigned char*) (slot + 0x164) - 1);
 		if (n % 2 != 0) {
-			fcn_00519190(0x15c0);
+			io_AppendText(0x15c0);
 		}
 		d2_SetForm(h, 3);
-		fcn_00519190(0x15c1);
+		io_AppendText(0x15c1);
 	}
 	else if (r != 0) {
 		d2_SetForm(h, 1);
-		fcn_00519190(0x15bb);
+		io_AppendText(0x15bb);
 		d2_SetForm(h, 2);
 		base = *(char*) (slot + 9) != 0 ? 0x18f : 0x130;
-		fcn_00519190(0x15bd, *(unsigned short*) slot,
+		io_AppendText(0x15bd, *(unsigned short*) slot,
 		    base + *(unsigned char*) (slot + 0x164) - 1);
 	}
 	else {
 		d2_SetForm(h, 1);
-		fcn_00519190(0x15bb);
+		io_AppendText(0x15bb);
 		d2_SetForm(h, 2);
 		if (n >= 7) {
-			fcn_00519190(0x15be, *(unsigned short*) slot);
+			io_AppendText(0x15be, *(unsigned short*) slot);
 		}
 		else {
-			fcn_00519190(0x15bc, *(unsigned short*) slot, info);
+			io_AppendText(0x15bc, *(unsigned short*) slot, info);
 			d = fcn_004677e0(0x1c,
 			    *(int*) (*(char**) 0x77255c + 0x10) - 0x3c,
 			    *(int*) (*(char**) 0x77255c + 0xc) - 0x40, 0, 0x64, 0x83,
@@ -92,7 +92,7 @@ int __cdecl fcn_005a02b0(void)
 		if ((mode = *(int*) 0x100f1dc) != -1 && grade >= 1.0) {
 			if (mode == 2) {
 				if (*(int*) (slot + 0x194) < 4) {
-					fcn_0051af00(text, 0x74, 4);
+					io_FormatTextBuffer(text, 0x74, 4);
 					fcn_00526120(text, 4);
 				}
 				else {

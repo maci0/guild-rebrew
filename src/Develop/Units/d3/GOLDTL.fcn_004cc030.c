@@ -4,7 +4,7 @@
 extern int g_6b8010;
 extern char g_6b5c60[];
 
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00413190(int);
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
@@ -21,7 +21,7 @@ int __cdecl fcn_004cc030(char* cmd, char* result)
 	int saved;
 	int keep;
 
-	o = fcn_00508e40(*(int*) (cmd + 0x10));
+	o = gm_LookupEntityRecordById(*(int*) (cmd + 0x10));
 	if (o == 0 || *(char**) (o + 0x184) == 0)
 		return 1;
 	saved = g_6b8010;

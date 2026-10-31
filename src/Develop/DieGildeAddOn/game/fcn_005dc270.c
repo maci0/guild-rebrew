@@ -5,7 +5,7 @@ extern short g_7f4c0c;
 extern short g_aed32c;
 
 int __cdecl fcn_005bdc30(int a, int* dlg, char* txt, int c, int d);
-void __cdecl fcn_0051af00(char* buf, int fmt, ...);
+void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c4510(int a, int b);
 void __cdecl fcn_004c4570(int a, int b, int c, int d);
@@ -39,7 +39,7 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		dlg[1] = -1;
 		dlg[2] = 4;
 		dlg[4] = 6;
-		fcn_0051af00(txt, 0x9a);
+		io_FormatTextBuffer(txt, 0x9a);
 		esi = (char*) fcn_005bdc30(1, dlg, txt, 0, 0);
 		if (esi == 0 || *(short*) (esi + 0x27) == 0) {
 			return 0;
@@ -62,7 +62,7 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 		fcn_00508280(slot, 0, 0);
 		if (slot[2] == 6 || slot[2] == 7) {
-			fcn_0051af00(line, 0xff1);
+			io_FormatTextBuffer(line, 0xff1);
 			fcn_00545d40(*(int*) (slot + 4), -1, line, 0, 0x5fb, 0);
 		}
 		return 1;
@@ -91,7 +91,7 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		fcn_00508280(slot, 0, 0);
 	}
 	if (slot[2] == 6 || slot[2] == 7) {
-		fcn_0051af00(line, 0xff1);
+		io_FormatTextBuffer(line, 0xff1);
 		fcn_00545d40(*(int*) (slot + 4), -1, line, 0, 0x5fb, 0);
 	}
 	return 1;

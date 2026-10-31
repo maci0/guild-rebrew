@@ -25,7 +25,7 @@ int __cdecl fcn_0057ec20(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(short, short, char*);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_005c5da0(int, int, int, unsigned short, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_005c5e70(void);
@@ -59,7 +59,7 @@ void __cdecl fcn_005bad60(void)
 	g_f8f120[g_772514].x3a0 = 0x18;
 	g_f8f120[g_772514].x3a4 = 0x18;
 	d2_SetForm(dlg, 0);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_005c5da0(g_772514, 0, 0, g_774970, 0x1f3b);
 	if (fcn_005373e0((void*) fcn_005bad60, 0x657c7) != 0) {
 		do {

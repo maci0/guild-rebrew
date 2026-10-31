@@ -1,6 +1,6 @@
 extern int g_774970;
 extern int __cdecl fcn_0046f740(int x, int y, int id, int ctx);
-extern int __cdecl fcn_0051af00(char* dst, const char* fmt, ...);
+extern int __cdecl io_FormatTextBuffer(char* dst, const char* fmt, ...);
 extern int __cdecl fcn_005c9090(char* text, int x, int y, int color, int flags);
 extern int __cdecl fcn_004677e0(int x, int y, int w, int a, int b, int c, int d, int ctx);
 extern int __cdecl fcn_0050f980(int a, int b);
@@ -42,15 +42,15 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
 		             *(short*) (*(int*) 0x772500 + 0x1ebda) + 9 + a1, a4[10],
 		             *(int*) 0x772514);
 		if (*(unsigned char*) (a4[0] + 0xd) && a5)
-			fcn_0051af00(buf, (const char*) 0x6ac964,
+			io_FormatTextBuffer(buf, (const char*) 0x6ac964,
 			             ((*(unsigned char*) (a4[0] + 9) != 0) ? 10 : 0) + 0x114 +
 			                 *(unsigned char*) (a4[0] + 0xd),
 			             *(unsigned short*) a4[0]);
 		else
-			fcn_0051af00(buf, (const char*) 0x6ac96c, *(unsigned short*) a4[0]);
+			io_FormatTextBuffer(buf, (const char*) 0x6ac96c, *(unsigned short*) a4[0]);
 		v7 = a3;
 		fcn_005c9090(buf, v10, a4[5], 0xca, a3);
-		fcn_0051af00(buf, (const char*) 0x6ac95c, *(unsigned short*) a4[0]);
+		io_FormatTextBuffer(buf, (const char*) 0x6ac95c, *(unsigned short*) a4[0]);
 		fcn_005c9090(buf, v10, a4[5] + 0xe, 0xca, v7);
 		if (*(unsigned char*) (a4[0] + 2) != 6) {
 			v6 = fcn_004677e0(v10 - 0x23, *(short*) (*(int*) 0x772500 + 0x1ebda) + 0x1e + a1,

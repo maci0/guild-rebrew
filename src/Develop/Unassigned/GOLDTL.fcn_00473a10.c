@@ -6,7 +6,7 @@ extern int g_77250c;
 extern char s_67d5ec[];
 
 int __cdecl fcn_00465950(const char* name);
-char* __cdecl fcn_00466190(int idx);
+char* __cdecl d2_GetResourceData(int idx);
 void __cdecl fcn_00473800(int a, int x, int y, int w, int h);
 
 /* ADDRESS: GOLDTL 0x00473a10 */
@@ -22,7 +22,7 @@ int __cdecl fcn_00473a10(int x, int y)
 	a = 6;
 	b = 6;
 	if (!g_7725c0) {
-		g_7725c0 = fcn_00466190(fcn_00465950(s_67d5ec));
+		g_7725c0 = d2_GetResourceData(fcn_00465950(s_67d5ec));
 	}
 	if (g_14ce8d0) {
 		px--;

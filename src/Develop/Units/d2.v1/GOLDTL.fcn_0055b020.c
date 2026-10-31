@@ -9,11 +9,11 @@ extern int g_100f1dc;
 int __cdecl fcn_00545670(char*, short, short, int, int);
 void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int* __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00500cb0(void*, void*);
 
 /* ADDRESS: GOLDTL 0x0055b020 */
@@ -39,7 +39,7 @@ void __cdecl fcn_0055b020(char* o)
 		return;
 	if (fcn_00500cb0(o + 0x52, (void*) 0x7f4c00) == 1)
 		return;
-	g = fcn_00508e40(*(int*) (o + 0xbc));
+	g = gm_LookupEntityRecordById(*(int*) (o + 0xbc));
 	state = *(int*) (o + 0x70);
 	if (state == -2 || state == -1 || *slot == -1 || g == 0) {
 		if (*(int*) (o + 0x74))
@@ -96,7 +96,7 @@ void __cdecl fcn_0055b020(char* o)
 			end = st + 0x27b;
 		else
 			end = 0x253;
-		fcn_00519190(kind, *(unsigned short*) g, end);
+		io_AppendText(kind, *(unsigned short*) g, end);
 		goto done;
 	}
 	flag = *(char*) (g + 9);
@@ -163,9 +163,9 @@ void __cdecl fcn_0055b020(char* o)
 		end = st + 0x27b;
 	else
 		end = 0x253;
-	fcn_00519190(kind, code, (int) (o + 0xac), end);
+	io_AppendText(kind, code, (int) (o + 0xac), end);
 done:
 	d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 2);
-	fcn_00519190(0x161c);
+	io_AppendText(0x161c);
 	*(int*) (o + 0x70) = 1;
 }

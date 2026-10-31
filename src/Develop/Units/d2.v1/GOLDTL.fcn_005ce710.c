@@ -9,8 +9,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00473a90(int, int);
-int __cdecl fcn_00519190(char*, ...);
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl io_AppendText(char*, ...);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -21,9 +21,9 @@ void __cdecl fcn_005ce710(int a1, int a2)
 	h = fcn_00470820(0, 0, g_6aca14);
 	fcn_00471b60(h);
 	d2_SetForm(h, 1);
-	fcn_00519190((char*) (a1 + 1), a1, a2);
+	io_AppendText((char*) (a1 + 1), a1, a2);
 	d2_SetForm(h, 2);
-	fcn_00519190((char*) (a1 + 2));
+	io_AppendText((char*) (a1 + 2));
 	do {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

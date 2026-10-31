@@ -8,7 +8,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 extern unsigned char g_773d75;
 
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_004c5530(char* msg);
@@ -28,7 +28,7 @@ int __cdecl fcn_0048e230(char* a1, char* a2, char* a3)
 	char* p;
 	F8 f;
 
-	p = fcn_00508e40(*(int*) (a2 + 0xc));
+	p = gm_LookupEntityRecordById(*(int*) (a2 + 0xc));
 	if (p == 0) {
 		return 0;
 	}

@@ -13,7 +13,7 @@ extern float g_6628a8;               /* 0x006628a8 */
 extern double dbl_1_0;               /* 0x006629c8 */
 
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
-void __cdecl fcn_0041d9e0(const char*);
+void __cdecl ReportClientMessage(const char*);
 void __cdecl fcn_004c44a0(void);
 void __cdecl fcn_004c44b0(void);
 int __cdecl fcn_004c44c0(void);
@@ -28,7 +28,7 @@ int __cdecl fcn_0057eba0(int, int, int, int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_004c51f0(int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
-void __cdecl fcn_0051af00(char*, int, int);
+void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00533a40(char*);
 void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
 
@@ -51,7 +51,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 	if (!a4) {
 		query = (int)fcn_00502cd0(0, 2, 7, 1, a0);
 		if (!query) {
-			fcn_0041d9e0((const char*)0x6ac37c);
+			ReportClientMessage((const char*)0x6ac37c);
 			return 0;
 		}
 	}
@@ -123,7 +123,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 					fcn_004c51f0(a0, *(int*)(a1 + 2), *p, count, a6,
 					             (int)(v11 / a5));
 					if (v11 != g_6628a8 && a5 != dbl_1_0) {
-						fcn_0051af00(buf, 0xec, (int)(prod * a5 - prod));
+						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
 						fcn_00533a40(buf);
 						fcn_004234e0(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}
@@ -187,7 +187,7 @@ next:
 					fcn_004c51f0(a0, *(int*)(a1 + 2), *p, count, a6,
 					             (int)(v11 / a5));
 					if (v11 != g_6628a8 && a5 != dbl_1_0) {
-						fcn_0051af00(buf, 0xec, (int)(prod * a5 - prod));
+						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
 						fcn_00533a40(buf);
 						fcn_004234e0(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}

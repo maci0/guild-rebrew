@@ -7,7 +7,7 @@ extern char g_868060[];
 
 
 
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 int __cdecl gm_RandomMod(int);
 
@@ -17,7 +17,7 @@ void __cdecl fcn_005b24b0(void* a1, void* a2)
 
 	t = *(char*) ((char*) a2 + 2);
 	if (t == 6 || t == 7) {
-		fcn_0051af00(g_774a80, 0x132f, *(unsigned short*) a1,
+		io_FormatTextBuffer(g_774a80, 0x132f, *(unsigned short*) a1,
 		    (gm_RandomMod(3) & 0xffff)
 		        + (*(char*) ((char*) a2 + 9) ? 0x1333 : 0x1330),
 		    *(unsigned short*) a2,

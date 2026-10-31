@@ -13,13 +13,13 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00473a90(int, int);
-char* __cdecl fcn_00508e40(int);
+void __cdecl d2_SetOverlayAnimation(int, int);
+char* __cdecl gm_LookupEntityRecordById(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_00502cd0(int, ...);
 int __cdecl fcn_0046f2c0(int, int);
-int __cdecl fcn_00519190(char* fmt, ...);
+int __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_005ca560(void*);
 void __cdecl fcn_005ca740(int, int, int, int, void*, int);
 int __cdecl fcn_00472250(int, int, int);
@@ -28,7 +28,7 @@ void __cdecl fcn_004c6900(int*);
 void __cdecl fcn_004c4ef0(char*);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_0051af00(char*, int, int);
+int __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -61,7 +61,7 @@ void __cdecl fcn_005a2080(int a0, int a1)
 	fcn_00471b60(win);
 	d2_SetForm(win, 0);
 	fcn_005340f0(g_772514);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	ip = (unsigned int*) (a1 + 0x1c);
 	for (;;) {
 		i = 0;
@@ -71,7 +71,7 @@ void __cdecl fcn_005a2080(int a0, int a1)
 		p = sel[0];
 		q = (int*) ip;
 		for (i = 0; i < 4; i++) {
-			ent = (unsigned short*) fcn_00508e40(*ip);
+			ent = (unsigned short*) gm_LookupEntityRecordById(*ip);
 			if ((int) ent != p[0]) {
 				changed = 1;
 			}
@@ -117,7 +117,7 @@ void __cdecl fcn_005a2080(int a0, int a1)
 		if (changed) {
 			d2_SetForm(win, 1);
 			fcn_0046f2c0(g_772514, 1);
-			fcn_00519190((char*) 0x188c, a0);
+			io_AppendText((char*) 0x188c, a0);
 			if (n != 0) {
 				x0 = *(int*) (g_77255c + 0xc) + *(short*) (g_772500 + 0x1ebd8) * -2;
 				p = sel[0];
@@ -130,11 +130,11 @@ void __cdecl fcn_005a2080(int a0, int a1)
 					p += 0xe;
 				}
 			} else {
-				fcn_00519190((char*) 0x188e);
+				io_AppendText((char*) 0x188e);
 			}
 			d2_SetForm(win, 2);
 			fcn_0046f2c0(g_772514, 1);
-			fcn_00519190(g_6811b0);
+			io_AppendText(g_6811b0);
 			win = -1;
 			if (state != 2) {
 				if (state != 4) {
@@ -146,12 +146,12 @@ void __cdecl fcn_005a2080(int a0, int a1)
 					} else {
 						i = 0x188f;
 					}
-					win = fcn_00472250(fcn_00519190((char*) i), 2, 0);
+					win = fcn_00472250(io_AppendText((char*) i), 2, 0);
 				} else {
-					fcn_00519190((char*) 0x1891);
+					io_AppendText((char*) 0x1891);
 				}
 			} else {
-				fcn_00519190((char*) 0x1892);
+				io_AppendText((char*) 0x1892);
 			}
 		}
 label_5a23ad:
@@ -175,7 +175,7 @@ label_5a23ad:
 					fcn_005373e0(0, 0x20007);
 					n = fcn_004c4450((int) join);
 				}
-				fcn_0051af00(buf, (n != 1) ? 0x189f : 0x189e, a0);
+				io_FormatTextBuffer(buf, (n != 1) ? 0x189f : 0x189e, a0);
 			}
 			if (buf[0] != 0) {
 				fcn_00526120(buf, 0);

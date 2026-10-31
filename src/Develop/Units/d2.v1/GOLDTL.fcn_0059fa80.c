@@ -22,17 +22,17 @@ int __cdecl fcn_00470820(int a, int b, const char* name);
 void __cdecl d2_SetForm(int dialog, int slot);
 void __cdecl fcn_005340f0(int screen);
 void __cdecl fcn_00471b60(int dialog);
-void __cdecl fcn_00473a90(int a, int b);
-void __cdecl fcn_00519190(const char* text, int value);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
+void __cdecl io_AppendText(const char* text, int value);
 void __cdecl fcn_00533a60(int screen, int a, int* out, int count, int b,
 	int c);
 void __cdecl fcn_005ca560(void* desc);
 void __cdecl fcn_005ca740(int x, int y, int screen, int id, void* desc,
 	int flag);
-int __cdecl fcn_00508e40(unsigned int id);
+int __cdecl gm_LookupEntityRecordById(unsigned int id);
 int __cdecl fcn_005463a0(int a, int b, int c);
 void __cdecl fcn_00472640(int value, int flag);
-char* __cdecl fcn_0051af00(char* buf, int id, ...);
+char* __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00526120(char* text, int flag);
 void* __cdecl fcn_005cd440(void* desc, int a, int b, int c);
 int __cdecl fcn_00525f60(void* p, int flag);
@@ -72,9 +72,9 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	d2_SetForm(v8, 0);
 	fcn_005340f0(g_772514);
 	fcn_00471b60(v8);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(v8, 1);
-	fcn_00519190("$C$Z$[%1N3$]", *v6);
+	io_AppendText("$C$Z$[%1N3$]", *v6);
 	d2_SetForm(v8, 3);
 	fcn_00533a60(g_772514, 0, pair, 2, g_14abc90, g_14abc94);
 	d2_SetForm(v8, 2);
@@ -86,7 +86,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	fcn_005ca740(v21, v22, g_772514, 0x54, cmd, 1);
 	g_100f1dc = -1;
 	for (;;) {
-		if (fcn_00508e40(v3) && fcn_005463a0(1, 1, v4)) {
+		if (gm_LookupEntityRecordById(v3) && fcn_005463a0(1, 1, v4)) {
 			v5 = 1;
 			if (*(int*) (v7 + 0xbc) < g_7f4c00)
 				v19 = 1;
@@ -106,12 +106,12 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 						flags[4] = 6;
 						flags[2] = g_666018;
 						flags[3] = g_66601c;
-						fcn_0051af00(cmd, 0x1a53);
-						fcn_0051af00(buf, 0x1a54);
+						io_FormatTextBuffer(cmd, 0x1a53);
+						io_FormatTextBuffer(buf, 0x1a54);
 						v10 = (unsigned short*) fcn_005cd440(flags,
 							g_14abc88, 0, 0);
 						if (v10 != 0) {
-							fcn_0051af00(title, 0x1a5b, 2, *v6,
+							io_FormatTextBuffer(title, 0x1a5b, 2, *v6,
 								*v10);
 							if (fcn_00526120(title, 1) && (v11 = g_774970,
 								fcn_00525f60((char*) (v11 * 0x21c + 0x7f4ca0), 2))) {
@@ -130,7 +130,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 						v19 = 0x1a58;
 					else
 						v19 = 0x1a57;
-					fcn_0051af00(text, v19, *v6);
+					io_FormatTextBuffer(text, v19, *v6);
 					if (fcn_00526120(text, 1)) {
 						*(int*) (v7 + 0x52) = g_7f4c00;
 						*(unsigned int*) (v7 + 0x56) = g_7f4c04;

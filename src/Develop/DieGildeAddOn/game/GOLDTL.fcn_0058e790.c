@@ -38,12 +38,12 @@ float __cdecl fcn_004f4770(char*);
 float __cdecl gm_RandomFloat01(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_005782f0(struct house*, int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
@@ -91,7 +91,7 @@ void __cdecl fcn_0058e790(char* e, char* res)
 		fcn_005782f0(&((struct house*)g_7f4ca0)[g_774970], 3);
 	}
 	h = fcn_00470820(0, 0, g_6a96d8);
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
@@ -99,11 +99,11 @@ void __cdecl fcn_0058e790(char* e, char* res)
 	d2_SetForm(h, 1);
 	if (mode == 0) {
 		fcn_004c30a0(t, 0, g_6a9828, gm_RandomMod(8), 0xfa);
-		fcn_00519190(0x40f1, 0x40cc, amt);
+		io_AppendText(0x40f1, 0x40cc, amt);
 	}
 	else {
 		fcn_004c30a0(t, 0, g_6a9814, gm_RandomMod(8), 0xfa);
-		fcn_00519190(0x40d3, 0x40cc);
+		io_AppendText(0x40d3, 0x40cc);
 	}
 	do {
 		if (g_14ce8e0 != 0) {

@@ -17,7 +17,7 @@ typedef struct {
 extern char* g_772500;
 extern signed char g_772510;
 
-int __cdecl fcn_00466190(int);
+int __cdecl d2_GetResourceData(int);
 int __cdecl fcn_0047cba0(int, int, int, int, int);
 
 
@@ -32,12 +32,12 @@ int __cdecl fcn_00469ea0(int a1, int a2, int idx, int a4)
 		base = -1;
 		if ((((Rec*)g_772500)[idx].type == 5 || ((Rec*)g_772500)[idx].type == 8) && ((Rec*)g_772500)[idx].x30 == 0) {
 			if (((Rec*)g_772500)[((Rec*)g_772500)[idx].link].x34 == 0) {
-				r = fcn_00466190(idx);
+				r = d2_GetResourceData(idx);
 			}
 			base = idx;
 			idx = ((Rec*)g_772500)[idx].link;
 		} else if (((Rec*)g_772500)[idx].x34 == 0) {
-			r = fcn_00466190(idx);
+			r = d2_GetResourceData(idx);
 		}
 		if (((Rec*)g_772500)[idx].flags & 2) {
 			idx += g_772510;

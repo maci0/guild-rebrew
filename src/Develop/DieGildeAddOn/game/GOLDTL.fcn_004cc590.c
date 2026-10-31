@@ -12,7 +12,7 @@ struct rec_4cc590 {
 extern char g_7f4ca0[];
 extern int g_14cbca0;
 extern int g_699364;
-extern char g_68a9d0[];
+extern char cm_LastEntityId[];
 extern int(__stdcall* g_662318)(void);
 
 void __cdecl srv_SeedRandom(int);
@@ -63,7 +63,7 @@ int __cdecl fcn_004cc590(unsigned char* a1, char* a2)
 		gm_AllocObjekt(((struct rec_4cc590*)g_7f4ca0)[id].id, a1[0x21], 1);
 		fcn_004ce9e0(&((struct rec_4cc590*)g_7f4ca0)[id]);
 	}
-	(*(int*)g_68a9d0) = ((struct rec_4cc590*)g_7f4ca0)[id].id;
+	(*(int*)cm_LastEntityId) = ((struct rec_4cc590*)g_7f4ca0)[id].id;
 	if (a2 != 0) {
 		a2[0] = 1;
 		a2[1] = 1;

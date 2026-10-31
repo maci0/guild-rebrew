@@ -25,7 +25,7 @@ extern int g_774654;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CreateRadioGroup(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00469470(int, int);
@@ -61,7 +61,7 @@ int __cdecl fcn_0053cd40(int flags)
 	h = fcn_00470820(0, 0, g_6a3f8c);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_00519190(0x1afa);
+	io_AppendText(0x1afa);
 	list = d2_CreateRadioGroup(0);
 	for (i = 0; i < 11; i++) {
 		t = types[i];

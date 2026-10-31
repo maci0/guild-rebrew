@@ -32,6 +32,9 @@ are German and most verbs English.
 | Original retention evidence | `/OPT:REF` | `/DEBUG`, `/OPT:NOREF`, PDB path | `/OPT:REF` |
 
 Default game optimization is `/O2 /Gd`; effective inputs live in configuration.
+Use canonical game TU/target flags, without per-function optimization overrides.
+Independently built libraries and natively evidenced original TU contexts can
+have different flags. Historical probes are measurements, not authorization.
 TL keeps 298 unreferenced game-range bodies in the measured census, Gold three,
 server none. Source sharing does not imply identical code/data: client building
 stat offsets and the 12-level logging table differ from server's three levels.

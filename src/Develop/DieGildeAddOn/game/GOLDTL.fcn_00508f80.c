@@ -1,7 +1,7 @@
 #include "client_types.h"
 
 int __cdecl fcn_004e8b40(int idx, Rec18_68da68* out);
-char* __cdecl fcn_00508e40(int a1);
+char* __cdecl gm_LookupEntityRecordById(int a1);
 
 /* ADDRESS: GOLDTL 0x00508f80 */
 int __cdecl fcn_00508f80(unsigned short a0, int a1)
@@ -21,7 +21,7 @@ int __cdecl fcn_00508f80(unsigned short a0, int a1)
 		return v6;
 	if (a1 != 0)
 		return v6;
-	v3 = fcn_00508e40(*(int*) (0x7f4d00 + idx));
+	v3 = gm_LookupEntityRecordById(*(int*) (0x7f4d00 + idx));
 	if (v3 != 0) {
 		if (v6 > fcn_00508f80(*(unsigned short*) v3, 1))
 			return v6;

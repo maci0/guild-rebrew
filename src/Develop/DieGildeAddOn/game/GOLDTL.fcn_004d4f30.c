@@ -20,7 +20,7 @@ extern int g_772f08;               /* 0x772f08, object count */
 extern char* g_9b9e40[];           /* 0x9b9e40, object pointer table */
 extern char g_9b0e20[];            /* 0x9b0e20, 0x35c-byte player records */
 
-int __cdecl gm_LookupEntityRecordById(int search_id);
+int __cdecl gm_LookupEntityRecordIn32SlotTable(int search_id);
 void* __cdecl fcn_004ceac0(void* rec, char* entity);
 void __cdecl fcn_00455350(char* object, float* in, float* out);
 void __cdecl fcn_004c67c0(int a1, void* a2);
@@ -52,7 +52,7 @@ char* __cdecl fcn_004d4f30(fcn_004d4f30_World* world)
     countA = 0;
     for (i = 0; i < 0x10; i++) {
         if (world->listA[i] != -1) {
-            rec = (char*) gm_LookupEntityRecordById(world->listA[i]);
+            rec = (char*) gm_LookupEntityRecordIn32SlotTable(world->listA[i]);
             if (*(char*) (rec + 8) != 0 && *(char*) (rec + 8) != 4 &&
                 *(int*) (*(int*) (*(int*) (rec + 0x184) + 0x34) + 0x218) != 1) {
                 countA++;
@@ -63,7 +63,7 @@ char* __cdecl fcn_004d4f30(fcn_004d4f30_World* world)
     nB = 0;
     for (i = 0; i < 0x10; i++) {
         if (world->listB[i] != -1) {
-            rec = (char*) gm_LookupEntityRecordById(world->listB[i]);
+            rec = (char*) gm_LookupEntityRecordIn32SlotTable(world->listB[i]);
             if (*(char*) (rec + 8) != 0 && *(char*) (rec + 8) != 4 &&
                 *(int*) (*(int*) (*(int*) (rec + 0x184) + 0x34) + 0x218) != 1) {
                 nB++;

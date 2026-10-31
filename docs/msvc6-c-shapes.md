@@ -6,7 +6,10 @@ project `unshare` backend on the pinned toolchain image. A note that names
 Docker or Wine records that measurement's runtime. Client builds are
 comparison scaffolds, not playable programs and not identical images.
 
-Scores, residue totals, PROVEN labels and old recipes are checkpoints.
+Scores, residue totals, PROVEN labels and old recipes are checkpoints. Historical
+flag and pragma probes do not authorize per-function optimization overrides in
+production game code. Use canonical game TU/target flags; independently built
+libraries and natively evidenced original TU contexts can differ.
 Current proof and status stay in managed metadata. When a later section
 corrects an earlier claim, the later result wins. "Unreachable" means the
 variants named in that section. Assembly permission is
@@ -492,6 +495,9 @@ So the original claim stands after all: no pure-C shape found so far emits the
 prelude, and a byte match needs asm. Best pure-C result is 105/162.
 
 ## 12. CFLAGS are per-file in practice, not per-function
+
+Historical flag and pragma advice in sections 12–13 is superseded by the
+production policy above; retain it only as a record of the measured behavior.
 
 `rebrew-functions.toml` stores `cflags` per function, but a compile covers the
 whole translation unit. Adding a `// CFLAGS:` header for one function caused
@@ -2293,6 +2299,8 @@ Read the diff for a live-value difference before reshaping a loop; sections 8,
 `src/Develop/DieGildeAddOn/command/command_c/cm_ExProdObjekt.c`
 
 ## 58. `/Ox` versus `/O2` is per-file and load-bearing
+
+Historical flag measurements, not a production flag recommendation.
 
 `/O2` enables `/Og`, which makes msvc6 tail-merge early error blocks the
 reference keeps separate; `/Ox` is what several command-handler files need.
@@ -6481,10 +6489,9 @@ carries `/O2 /Gd` **and** the pin.
 bytes, **zero differing bytes outside `.text`**, composition intact at 246 symbols placed at their
 reference VA. Baseline lowered; gate passes at 264 byte-matched.
 
-The lesson generalises past this one file: **a per-file compiler pin is a legitimate tool when
-every function in the translation unit is verified under the new toolchain**, and CMake's
-`COMPILE_OPTIONS`/`COMPILE_FLAGS` distinction is the difference between an 11-byte win and a
-39% regression.
+This historical pin is superseded by the current compiler policy above. The
+`COMPILE_OPTIONS`/`COMPILE_FLAGS` distinction explains the measured regression;
+verification of one TU does not establish its original compiler context.
 
 ## 143. Sweeping the toolchain axis: a second pin, and the limit of the technique
 

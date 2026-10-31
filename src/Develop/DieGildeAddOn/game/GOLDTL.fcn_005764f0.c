@@ -7,7 +7,7 @@ extern float g_696550[];
 extern float g_696540[];
 
 int __cdecl fcn_00500e20(pos14_7f4c00*);
-char* __cdecl fcn_00508e40(int);
+char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
@@ -28,7 +28,7 @@ void __cdecl fcn_005764f0(char* e)
 	float v;
 
 	k = (fcn_00500e20(&g_7f4c00) + 1) % 4;
-	o = fcn_00508e40(*(int*) (e + 0xc));
+	o = gm_LookupEntityRecordById(*(int*) (e + 0xc));
 	if (*(int*) (e + 0x70) == -1 || *(int*) (e + 0x70) == -2) {
 		fcn_00546190(e);
 		return;

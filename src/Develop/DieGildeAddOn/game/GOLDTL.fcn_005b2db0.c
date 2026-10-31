@@ -3,7 +3,7 @@ extern char g_6b5c60[];
 
 
 int  __cdecl fcn_0051e070(void);
-void __cdecl fcn_0051af00(void*, int, int, int, int, int, int);
+void __cdecl io_FormatTextBuffer(void*, int, int, int, int, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
 void __cdecl fcn_005b2db0(void* a1, void* a2, int a3, int a4, int a5, int a6)
@@ -15,11 +15,11 @@ void __cdecl fcn_005b2db0(void* a1, void* a2, int a3, int a4, int a5, int a6)
 		switch (fcn_0051e070()) {
 		case 0:
 		case 2:
-			fcn_0051af00(g_774a80, 0x414f, *(unsigned short*) a2, a3,
+			io_FormatTextBuffer(g_774a80, 0x414f, *(unsigned short*) a2, a3,
 			    *(int*) (0x665f78 + a4 * 4), a5, a6);
 			break;
 		case 1:
-			fcn_0051af00(g_774a80, 0x414f, *(unsigned short*) a2,
+			io_FormatTextBuffer(g_774a80, 0x414f, *(unsigned short*) a2,
 			    *(int*) (0x665f78 + a4 * 4), a3, a5, a6);
 			break;
 		}

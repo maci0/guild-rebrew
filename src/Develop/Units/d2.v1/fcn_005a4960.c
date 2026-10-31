@@ -5,8 +5,8 @@ typedef unsigned int   u32;
 void* __cdecl fcn_00470820(short a, short b, char* c);
 void __cdecl fcn_00471b60(int a);
 void __cdecl d2_SetForm(int a, int b);
-void __cdecl fcn_00519190(void* id, ...);
-void __cdecl fcn_00473a90(int a, int b);
+void __cdecl io_AppendText(void* id, ...);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_005373e0(void* a, int b);
 void __cdecl fcn_0046f280(int w);
 int __cdecl fcn_0046b2b0(int id);
@@ -43,8 +43,8 @@ void __cdecl fcn_005a4960(void)
     *(int*)(0x10162f4 + idx) = 0xe;
     d2_SetForm((int)dlg, 1);
 
-    fcn_00519190((void*)0x18d9);
-    fcn_00473a90(0, 0);
+    io_AppendText((void*)0x18d9);
+    d2_SetOverlayAnimation(0, 0);
 
     while (fcn_005373e0((void*)0x5a4960, 0x677c7)) {
         if (esi != 0) {
@@ -68,11 +68,11 @@ void __cdecl fcn_005a4960(void)
                 idx = 972 * slot[i][2];
                 *(int*)(0x10161cc + idx) = 0x56;
                 *(int*)(0x1015f58 + idx) = 0x10;
-                fcn_00519190((void*)0x18e0,
+                io_AppendText((void*)0x18e0,
                              (void*)*(int*)(slot[i][0] + 0xb4));
-                fcn_00519190((void*)0x18e1,
+                io_AppendText((void*)0x18e1,
                              (void*)(slot[i][0] + 0xc4));
-                fcn_00519190((void*)0x18e2,
+                io_AppendText((void*)0x18e2,
                              (void*)*(int*)(slot[i][0] + 0xc0));
                 ebx += *(int*)(slot[i][0] + 0x18) + 4;
             }

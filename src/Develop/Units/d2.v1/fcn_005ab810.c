@@ -23,19 +23,19 @@ struct house {
 
 int __cdecl gm_WalkEntityChain(unsigned short);
 void* __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00526010(void*, int, char);
 int __cdecl fcn_004c51a0(int, int, int, int);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
-unsigned char* __cdecl fcn_00508e40(int);
-void __cdecl fcn_0051af00(char*, int, ...);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -69,14 +69,14 @@ void __cdecl fcn_005ab810(char* e, int unused)
 	if (*(unsigned short*) (e + 0x27) == g_774970) {
 		d = t * 15;
 		dlg = fcn_00470820(0, 0, "Locations\\Kirche\\Taufe");
-		fcn_00473a90(0, 0);
+		d2_SetOverlayAnimation(0, 0);
 		fcn_00471b60((int) dlg);
 		d2_SetForm((int) dlg, 0);
 		fcn_005340f0(g_772514);
 		d2_SetForm((int) dlg, 1);
-		fcn_00519190(0x1976, p->id, d, 2 * (0x75 <= g_7f4c00) + 0x197a + 1 - p->state);
+		io_AppendText(0x1976, p->id, d, 2 * (0x75 <= g_7f4c00) + 0x197a + 1 - p->state);
 		d2_SetForm((int) dlg, 2);
-		s = fcn_00519190(0x1977);
+		s = io_AppendText(0x1977);
 		v1 = fcn_00472250((int) dlg, 2, s);
 		v2 = fcn_00472250((int) dlg, 2, s + 1);
 		g_100f1dc = -1;
@@ -95,7 +95,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 						for (i = 3; i <= 7; i++) {
 							h = (char*) p->ref_table[i];
 							if (h != (char*) -1) {
-								h = (char*) fcn_00508e40((int) h);
+								h = (char*) gm_LookupEntityRecordById((int) h);
 								if (h != 0) {
 									fcn_004c4510(h, *(int*) (h + 4));
 									fcn_004c4570(1, 1, 0xc, &x);
@@ -103,13 +103,13 @@ void __cdecl fcn_005ab810(char* e, int unused)
 								}
 							}
 						}
-						fcn_0051af00(buf, 0x1978, p->id, e, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
+						io_FormatTextBuffer(buf, 0x1978, p->id, e, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
 						for (i = 0x7f4ca4; i < 0x85a0a4; i += 0x21c) {
 							if (*(int*) i != p->handle && (*(char*) (i - 2) == 6 || *(char*) (i - 2) == 7)) {
 								fcn_00545d40(*(int*) i, -1, buf, 0, 0x5fe, 0);
 							}
 						}
-						fcn_0051af00(buf, 0x1979, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
+						io_FormatTextBuffer(buf, 0x1979, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
 						fcn_00526120(buf, 0);
 						g_774654 = 1;
 					}
@@ -125,19 +125,19 @@ void __cdecl fcn_005ab810(char* e, int unused)
 			return;
 		}
 		if (q->state == p->state) {
-			fcn_0051af00(buf, 0x1970);
+			io_FormatTextBuffer(buf, 0x1970);
 			fcn_00526120(buf, 0);
 			return;
 		}
 		dlg = fcn_00470820(0, 0, "Locations\\Kirche\\Taufe");
-		fcn_00473a90(0, 0);
+		d2_SetOverlayAnimation(0, 0);
 		fcn_00471b60((int) dlg);
 		d2_SetForm((int) dlg, 0);
 		fcn_005340f0(g_772514);
 		d2_SetForm((int) dlg, 1);
-		fcn_00519190(0x1971, p->id, t, 2 * (0x75 <= g_7f4c00) + 0x197a + q->state);
+		io_AppendText(0x1971, p->id, t, 2 * (0x75 <= g_7f4c00) + 0x197a + q->state);
 		d2_SetForm((int) dlg, 2);
-		s = fcn_00519190(0x1972);
+		s = io_AppendText(0x1972);
 		v1 = fcn_00472250((int) dlg, 2, s);
 		v2 = fcn_00472250((int) dlg, 2, s + 1);
 		g_100f1dc = -1;
@@ -154,10 +154,10 @@ void __cdecl fcn_005ab810(char* e, int unused)
 						fcn_004c4570(1, 1, 0xc, &x);
 						fcn_004c5360();
 						if (q->type == 6 || q->type == 7) {
-							fcn_0051af00(buf, 0x1974, p->id, t, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
+							io_FormatTextBuffer(buf, 0x1974, p->id, t, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
 							fcn_00545d40(q->handle, -1, buf, 0, 0x5ff, 0);
 						}
-						fcn_0051af00(buf, 0x1973, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
+						io_FormatTextBuffer(buf, 0x1973, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
 						fcn_00526120(buf, 0);
 						g_774654 = 1;
 					}

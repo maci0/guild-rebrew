@@ -10,8 +10,8 @@ void __cdecl fcn_00471d80(int, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004d5450(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190();
-float __cdecl fcn_00507f10(char*, int);
+int __cdecl io_AppendText();
+float __cdecl gm_GetEntitySkill(char*, int);
 int __cdecl fcn_00507e30(char*, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_00502cd0(int, int, ...);
@@ -26,7 +26,7 @@ int __cdecl fcn_004e6eb0(char*, unsigned int);
 int __cdecl fcn_004d52a0(int, int, char*, char*, float);
 void __cdecl fcn_00472170(int, int);
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00471e30(int);
 
 /* Modal sub-dialog for picking the guard shift. The first block drives the
@@ -74,9 +74,9 @@ unsigned int __cdecl fcn_004d5940(int a0)
 	if (list[1] == 6) {
 		flags = *(unsigned char*) (a0 + 0x7c);
 		if (flags & 2) {
-			fcn_00519190(0x1138, k + 0x1125, rec, *names, id);
+			io_AppendText(0x1138, k + 0x1125, rec, *names, id);
 			d2_SetForm(win, 2);
-			sel = fcn_00519190(0x113a, *names, id);
+			sel = io_AppendText(0x113a, *names, id);
 		} else if (flags & 1) {
 			count = 0;
 			p = (int*) (a0 + 0x100);
@@ -88,33 +88,33 @@ unsigned int __cdecl fcn_004d5940(int a0)
 				p++;
 				i--;
 			} while (i);
-			v = (int) fcn_00507f10(list, 3);
-			fcn_00519190(0x112e, rec, *names);
+			v = (int) gm_GetEntitySkill(list, 3);
+			io_AppendText(0x112e, rec, *names);
 			d2_SetForm(win, 2);
-			fcn_00519190(0x112f, count, 0xc10);
+			io_AppendText(0x112f, count, 0xc10);
 			if (0.5 <= (float) v) {
-				fcn_00519190(*(int*) (a0 + 0x110) ? 0x1134 : 0x1135);
+				io_AppendText(*(int*) (a0 + 0x110) ? 0x1134 : 0x1135);
 			}
 			if (*(float*) 0x6640f8 <= (float) v) {
 				fcn_00507e30(names, 3);
-				t = (int) fcn_00507f10(list, 3);
+				t = (int) gm_GetEntitySkill(list, 3);
 				if (5 <= t) {
 					t = 4;
 				}
-				fcn_00519190(0x1131, t + 0x1128);
+				io_AppendText(0x1131, t + 0x1128);
 			}
 			if (*(char*) (names + 9)) {
-				sel = fcn_00519190(0x1133, 0x1137);
+				sel = io_AppendText(0x1133, 0x1137);
 			} else {
-				sel = fcn_00519190(0x1133, 0x1136);
+				sel = io_AppendText(0x1133, 0x1136);
 			}
 		} else if (flags & 4) {
-			fcn_00519190(0x113b, rec, *names);
+			io_AppendText(0x113b, rec, *names);
 			d2_SetForm(win, 2);
-			sel = fcn_00519190(0x113c, *names, id);
+			sel = io_AppendText(0x113c, *names, id);
 		}
 		d2_SetForm(win, 1);
-		fcn_00519190(0x1132);
+		io_AppendText(0x1132);
 		fcn_004d5740((char*) (a0 + 0xc0), 0, 0xb4);
 		fcn_00472250(win, 2, sel);
 		fcn_00472250(win, 2, sel + 1);
@@ -161,7 +161,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 		sel = *p;
 		sel = *(int*) (fcn_00502cd0(0, 2, 7, 1, sel) + 0x24);
 		d2_SetForm(win, 1);
-		fcn_00519190(0x6811b0);
+		io_AppendText(0x6811b0);
 		if (sel) {
 			sel = gm_SearchTable67(*(unsigned int*) (sel + 0xb4));
 			r = 0;
@@ -175,18 +175,18 @@ unsigned int __cdecl fcn_004d5940(int a0)
 				i--;
 			} while (i);
 			if (sel) {
-				fcn_00519190(0x113d, count, 0xc10, sel, *list, r);
+				io_AppendText(0x113d, count, 0xc10, sel, *list, r);
 			}
 		}
 		fcn_00507e30(names, 3);
-		t = (int) fcn_00507f10(list, 3);
+		t = (int) gm_GetEntitySkill(list, 3);
 		if (5 <= t) {
 			t = 4;
 		}
 		if (*(int*) (a0 + 0x110)) {
-			fcn_00519190(0x113e, t + 0x1128);
+			io_AppendText(0x113e, t + 0x1128);
 		} else {
-			fcn_00519190(0x113f);
+			io_AppendText(0x113f);
 		}
 		fcn_004d5490(0x10, 0x96, 0);
 		i = 3;
@@ -208,9 +208,9 @@ unsigned int __cdecl fcn_004d5940(int a0)
 			i--;
 		} while (i);
 		d2_SetForm(win, 2);
-		fcn_00519190(0x6811b0);
-		v = (int) fcn_00507f10(list, 3);
-		t = fcn_00519190(0x1141, (int) fcn_00507f10(list, 3));
+		io_AppendText(0x6811b0);
+		v = (int) gm_GetEntitySkill(list, 3);
+		t = io_AppendText(0x1141, (int) gm_GetEntitySkill(list, 3));
 		sel = fcn_00472250(win, 2, t);
 		row = fcn_00472250(win, 2, t + 1);
 		r = fcn_00472250(win, 2, t + 2);
@@ -257,7 +257,7 @@ label_4d5f52:
 					}
 					if ((gm_RandomMod(0x5a) & 0xffff) + 10 <= v) {
 						rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x10c));
-						fcn_0051af00(text, 0x1142);
+						io_FormatTextBuffer(text, 0x1142);
 						fcn_004e6eb0(text, 0);
 						g_774654 = 1;
 						answer = 0;
@@ -265,7 +265,7 @@ label_4d5f52:
 						g_772eac = fcn_004d52a0(*(int*) 0x772eb4, rec, list, names, (float) count * *(float*) 0x6640e8);
 						goto label_4d601e;
 					}
-					fcn_0051af00(str, 0x1143);
+					io_FormatTextBuffer(str, 0x1143);
 					fcn_004e6eb0(str, 0);
 				}
 				g_774654 = 1;

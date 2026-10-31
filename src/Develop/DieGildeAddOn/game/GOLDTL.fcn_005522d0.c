@@ -18,9 +18,9 @@ void __cdecl fcn_004c5c80(unsigned int h);
 void __cdecl fcn_004c5da0(unsigned int h, unsigned int id, int a3, int a4, int a5, char* tag);
 void __cdecl fcn_00500bb0(void* q, int a2, int a3, int a4);
 float __cdecl fcn_00508490(char* entity);
-void* __cdecl fcn_00508e40(unsigned int slot_id);
+void* __cdecl gm_LookupEntityRecordById(unsigned int slot_id);
 void __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int id);
-void __cdecl fcn_0051af00(char* buf, char* fmt, ...);
+void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 int __cdecl fcn_00529670(char* a, char* b);
 void __cdecl fcn_00546190(void* ev);
 void __cdecl fcn_005498b0(char* a1, char* a2, char* a3, char* a4, int a5, float a6);
@@ -55,7 +55,7 @@ void __cdecl fcn_005522d0(char* ev)
 	if (*(int*) (ev + 0x70) == -1 || *(int*) (ev + 0x70) == -2) {
 		if (*(unsigned char*) (ev + 0x78) & 2) {
 			for (i = 0; i < 4; i++) {
-				p = fcn_00508e40(*(unsigned int*) (ev + 0xbc + i * 4));
+				p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 				if (p) {
 					fcn_004c5c80(*(unsigned int*) ((char*) p + 4));
 					fcn_004c57e0(*(unsigned int*) ((char*) p + 4), 1);
@@ -118,10 +118,10 @@ void __cdecl fcn_005522d0(char* ev)
 		slot_no = (slot_no + *(int*) (ev + 0xb4)) % 256;
 		*(unsigned int*) (ev + 0xb0) = slot_no;
 		if (rec) {
-			fcn_0051af00(buf, s_6a5b8c, rec);
+			io_FormatTextBuffer(buf, s_6a5b8c, rec);
 			count = 0;
 			for (i = 0; i < 4; i++) {
-				p = fcn_00508e40(*(unsigned int*) (ev + 0xbc + i * 4));
+				p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 				if (p) {
 					fcn_004c5c80(*(unsigned int*) ((char*) p + 4));
 					fcn_004c5da0(*(unsigned int*) ((char*) p + 4),
@@ -145,7 +145,7 @@ void __cdecl fcn_005522d0(char* ev)
 			break;
 		}
 		for (i = 0; i < 4; i++) {
-			p = fcn_00508e40(*(unsigned int*) (ev + 0xbc + i * 4));
+			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 			if (p && !fcn_00529670((char*) p, (char*) rec)) {
 				*(unsigned int*) (ev + 0x70) = 2;
 				fcn_00500bb0(ev + 0x52, 0, 5, 0);
@@ -236,7 +236,7 @@ after_scan:
 		}
 		count = 0;
 		for (i = 0; i < 4; i++) {
-			p = fcn_00508e40(*(unsigned int*) (ev + 0xbc + i * 4));
+			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 			if (p) {
 				fcn_004c5c80(*(unsigned int*) ((char*) p + 4));
 				fcn_004c5da0(*(unsigned int*) ((char*) p + 4),
@@ -255,7 +255,7 @@ after_scan:
 			break;
 		}
 		for (i = 0; i < 4; i++) {
-			p = fcn_00508e40(*(unsigned int*) (ev + 0xbc + i * 4));
+			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 			if (p && !fcn_00529670((char*) p, (char*) rec)) {
 				*(unsigned int*) (ev + 0x70) = 3;
 				fcn_00500bb0(ev + 0x52, 0, 5, 0);

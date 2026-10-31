@@ -7,7 +7,7 @@ extern int g_774654;
 extern int g_7e46ac;
 
 int __cdecl fcn_00470820(int, int, char*);
-int __cdecl fcn_00519190(char*, ...);
+int __cdecl io_AppendText(char*, ...);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_00471e30(int);
@@ -45,12 +45,12 @@ void __cdecl fcn_005b4660(char* e)
 	flags = g_7e46ac;
 	flags &= 0xffffffc7;
 	dialog = fcn_00470820(0, 0, "misc\\Messagebox_BIG");
-	fcn_00519190("$Z$[%1N4$]$N$L", *(unsigned short*) e);
-	fcn_00519190("Mode:%s$A", names[*(unsigned char*) (e + 2)]);
-	hKill = fcn_00472250(dialog, 0, fcn_00519190("%it[Kill player]$A"));
-	hShow = fcn_00472250(dialog, 0, fcn_00519190("%it[Show He]$A"));
-	hMarriage = fcn_00472250(dialog, 0, fcn_00519190("%it[Marriage]$A"));
-	hChild = fcn_00472250(dialog, 0, fcn_00519190("%it[Get Child]$A"));
+	io_AppendText("$Z$[%1N4$]$N$L", *(unsigned short*) e);
+	io_AppendText("Mode:%s$A", names[*(unsigned char*) (e + 2)]);
+	hKill = fcn_00472250(dialog, 0, io_AppendText("%it[Kill player]$A"));
+	hShow = fcn_00472250(dialog, 0, io_AppendText("%it[Show He]$A"));
+	hMarriage = fcn_00472250(dialog, 0, io_AppendText("%it[Marriage]$A"));
+	hChild = fcn_00472250(dialog, 0, io_AppendText("%it[Get Child]$A"));
 	fcn_00471b60(dialog);
 	while (fcn_005373e0((void*) fcn_005b4660, flags) != 0) {
 		if (g_100f1dc != -1) {

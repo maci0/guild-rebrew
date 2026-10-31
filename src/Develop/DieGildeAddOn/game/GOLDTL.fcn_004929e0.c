@@ -1,4 +1,4 @@
-extern float __cdecl fcn_00507f10(char* e, int stat);
+extern float __cdecl gm_GetEntitySkill(char* e, int stat);
 extern int __cdecl gm_RandomMod(int);
 extern float __cdecl gm_RandomFloat01(void);
 
@@ -33,7 +33,7 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 		p = a0 + 0x3c;
 		c = a0 + 0x34;
 	}
-	f = fcn_00507f10(a1, 2);
+	f = gm_GetEntitySkill(a1, 2);
 	ix = (unsigned char) ((int) (f * 100.0f) / 20);
 	if (ix >= 4) {
 		ix = 4;
@@ -116,7 +116,7 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 			p[n] = (unsigned char) v;
 		}
 	} else {
-		f = fcn_00507f10(a1, 0);
+		f = gm_GetEntitySkill(a1, 0);
 		r = gm_RandomFloat01();
 		sum = 0;
 		n = *c;

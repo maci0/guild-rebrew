@@ -13,9 +13,9 @@ typedef struct
 extern char g_7f4ca0[];
 extern char g_679060[];
 
-unsigned char* __cdecl fcn_00508e40(int id);
+unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_005d52d0(unsigned char* a1, int* a2);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl fcn_004f7bf0(unsigned char* a1, int* a2)
 {
@@ -41,7 +41,7 @@ int __cdecl fcn_004f7bf0(unsigned char* a1, int* a2)
 	if (i >= 0x300) {
 		return 1;
 	}
-	e = fcn_00508e40(id);
+	e = gm_LookupEntityRecordById(id);
 	if (e == 0) {
 		return 1;
 	}
@@ -52,7 +52,7 @@ int __cdecl fcn_004f7bf0(unsigned char* a1, int* a2)
 		return fcn_005d52d0(a1, a2);
 	}
 	if (*a2 == 1 && a1[2] == 6) {
-		fcn_0051af00((char*) a2 + 0x14, (int) g_679060, 0x1d8e);
+		io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1d8e);
 	}
 	return 2;
 }

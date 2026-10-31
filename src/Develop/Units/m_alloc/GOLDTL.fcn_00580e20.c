@@ -48,7 +48,7 @@ extern int g_7749fc;
 int __cdecl fcn_004c3100(char*, int);
 int* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_00580cf0(int*);
-void __cdecl fcn_00576750(void);
+void __cdecl fcn_0057ecf0(void);
 void __cdecl fcn_0057ef30(void);
 void __cdecl fcn_0057f030(void);
 
@@ -95,7 +95,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x8] = 0;
 	p[0xb] = -1;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = 0;
 	p[0x10] = 0;
@@ -145,7 +145,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0xa] = (int) g_6a86ec;
 	p[0xb] = 0x429;
 	p[0xc] = 0x163;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = 0;
 	p[0x10] = 0x16;
@@ -194,7 +194,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0xa] = (int) g_6a868c;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = 0;
 	p[0x10] = 6;
@@ -246,7 +246,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0xa] = (int) g_6a862c;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = 0;
 	p[0x10] = 8;
@@ -298,7 +298,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0xa] = (int) g_6a85cc;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = (int) fcn_0057ef30;
 	p[0x10] = 1;
@@ -345,7 +345,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x8] = 0;
 	p[0xb] = 0x429;
 	p[0xc] = 0x47;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = 0;
 	p[0x10] = 3;
@@ -394,7 +394,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0xa] = (int) g_6a8554;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = 0;
 	p[0x10] = 0xc;
@@ -443,7 +443,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0xa] = (int) g_6a8504;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = 0;
 	p[0x10] = 0x13;
@@ -492,7 +492,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0xa] = (int) g_6a84b0;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = 0;
 	p[0x10] = 0x14;
@@ -541,7 +541,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0xa] = (int) g_6a8460;
 	p[0xb] = 0x429;
 	p[0xc] = 0x163;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = (int) fcn_0057f030;
 	p[0x10] = 0xd;
@@ -588,7 +588,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x8] = 0;
 	p[0xb] = -1;
 	p[0xc] = 0x163;
-	p[0xf] = (int) fcn_00576750;
+	p[0xf] = (int) fcn_0057ecf0;
 	p[0xd] = 0;
 	p[0xe] = 0;
 	p[0x10] = 0;

@@ -71,7 +71,7 @@ extern int g_774654;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
 int __cdecl fcn_005373e0(void*, int);
 char __cdecl fcn_00507400(int, int);
@@ -100,7 +100,7 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 	colw = (((Win*) g_1015f40)[g_772514].w - 0x40) / 5;
 	rowh = (((Win*) g_1015f40)[g_772514].h - 0x84) / 3;
 	x0 = (colw - ((Font*) g_772500)->w) / 2;
-	fcn_00519190(0x1a9a, (p->female != 0) + 0x1aa0, p->id, n);
+	io_AppendText(0x1a9a, (p->female != 0) + 0x1aa0, p->id, n);
 	for (i = 1; i <= 15; i++) {
 		id = fcn_0046f740((i - 1) % 5 * colw + x0 + 0x20, (i - 1) / 5 * rowh + x0 + 0x64, i - 1 + 0x5a2, g_772514);
 		g_1015ea0[id].shown = 1;

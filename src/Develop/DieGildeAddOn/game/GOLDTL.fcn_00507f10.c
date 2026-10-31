@@ -32,77 +32,77 @@ int __cdecl fcn_00577ab0(Unit*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 /* ADDRESS: GOLDTL 0x00507f10 */
-float __cdecl fcn_00507f10(char* entity, int idx)
+float __cdecl gm_GetEntitySkill(char* entity, int skill_index)
 {
-	Unit* u;
-	float r;
-	float add;
-	float sub;
-	Mod* m;
+	Unit* entity_view;
+	float skill_value;
+	float bonus;
+	float penalty;
+	Mod* modifier;
 
-	u = (Unit*) entity;
-	sub = 0.0f;
-	if (u == 0 || idx >= 5) {
+	entity_view = (Unit*) entity;
+	penalty = 0.0f;
+	if (entity_view == 0 || skill_index >= 5) {
 		return -1.0f;
 	}
-	r = u->level[idx] * 0.003968254f;
-	if (idx != 1) {
-		add = 0.0f;
-		for (m = fcn_005463a0(2, 2, u->id, 0, 0x82); m != 0; m = he_fn_Handlung()) {
-			if (m->slot_a == idx) {
-				add += m->bonus_a;
-			} else if (m->slot_b == idx) {
-				add += m->bonus_b;
+	skill_value = entity_view->level[skill_index] * 0.003968254f;
+	if (skill_index != 1) {
+		bonus = 0.0f;
+		for (modifier = fcn_005463a0(2, 2, entity_view->id, 0, 0x82); modifier != 0; modifier = he_fn_Handlung()) {
+			if (modifier->slot_a == skill_index) {
+				bonus += modifier->bonus_a;
+			} else if (modifier->slot_b == skill_index) {
+				bonus += modifier->bonus_b;
 			}
 		}
-		if (fcn_005c6270(u, 0x2c4) == 1) {
-			add *= 0.5f;
+		if (fcn_005c6270(entity_view, 0x2c4) == 1) {
+			bonus *= 0.5f;
 		}
-		r += add;
+		skill_value += bonus;
 	}
-	if (idx == 3) {
-		r += fcn_005c6270(u, 0x15a) * 0.16666667f;
+	if (skill_index == 3) {
+		skill_value += fcn_005c6270(entity_view, 0x15a) * 0.16666667f;
 	}
-	switch (idx) {
+	switch (skill_index) {
 	case 0:
-		sub = ((u->skills >> 20) & 7) * 0.0555f + ((u->skills >> 4) & 0xf) * 0.03333333432674408;
+		penalty = ((entity_view->skills >> 20) & 7) * 0.0555f + ((entity_view->skills >> 4) & 0xf) * 0.03333333432674408;
 		break;
 	case 1:
-		sub = ((u->skills >> 8) & 0xf) * 0.03333333432674408;
-		sub += ((u->skills >> 20) & 7) * 0.0555f;
+		penalty = ((entity_view->skills >> 8) & 0xf) * 0.03333333432674408;
+		penalty += ((entity_view->skills >> 20) & 7) * 0.0555f;
 		break;
 	case 2:
-		sub = ((u->skills >> 17) & 7) * 0.055500001654028894;
-		sub += ((u->skills >> 25) & 0xf) * 0.03333333432674408;
+		penalty = ((entity_view->skills >> 17) & 7) * 0.055500001654028894;
+		penalty += ((entity_view->skills >> 25) & 0xf) * 0.03333333432674408;
 		break;
 	case 3:
-		sub = ((u->skills >> 8) & 0xf) * 0.03333333432674408;
-		sub += ((u->skills >> 25) & 0xf) * 0.03333333432674408;
+		penalty = ((entity_view->skills >> 8) & 0xf) * 0.03333333432674408;
+		penalty += ((entity_view->skills >> 25) & 0xf) * 0.03333333432674408;
 		break;
 	case 4:
-		sub = ((u->skills >> 12) & 3) * 0.16666667f + ((u->skills >> 4) & 0xf) * 0.03333333432674408;
+		penalty = ((entity_view->skills >> 12) & 3) * 0.16666667f + ((entity_view->skills >> 4) & 0xf) * 0.03333333432674408;
 		break;
 	}
-	r -= sub;
-	if (idx == 4) {
-		if (u->flags & 0x400) {
-			r += 0.5f;
+	skill_value -= penalty;
+	if (skill_index == 4) {
+		if (entity_view->flags & 0x400) {
+			skill_value += 0.5f;
 		}
-	} else if (idx == 3) {
-		if (u->flags & 0x200) {
-			r += 0.5f;
+	} else if (skill_index == 3) {
+		if (entity_view->flags & 0x200) {
+			skill_value += 0.5f;
 		}
-	} else if (idx == 2) {
-		if (u->flags & 0x800) {
-			r += 0.5f;
+	} else if (skill_index == 2) {
+		if (entity_view->flags & 0x800) {
+			skill_value += 0.5f;
 		}
 	}
-	r = MAX(MIN(r, 1.0f), 0.0f);
-	if (fcn_00577ab0(u) == 0) {
-		if (fcn_005c6270(u, 0x2c4) == 0) {
-			return r * 0.5f;
+	skill_value = MAX(MIN(skill_value, 1.0f), 0.0f);
+	if (fcn_00577ab0(entity_view) == 0) {
+		if (fcn_005c6270(entity_view, 0x2c4) == 0) {
+			return skill_value * 0.5f;
 		}
-		return r * 0.75f;
+		return skill_value * 0.75f;
 	}
-	return r;
+	return skill_value;
 }

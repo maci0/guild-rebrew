@@ -36546,7 +36546,7 @@
   },
   {
     "va": 4820512,
-    "size": 291,
+    "size": 282,
     "name": "fcn.00498e20",
     "extent_history": [
       {
@@ -36562,6 +36562,13 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:03:29.320951+00:00"
+      },
+      {
+        "old_size": 291,
+        "new_size": 282,
+        "reason": "Complete native body ends with ret at 0x498f39; 0x498f3a-0x498f3f are six alignment NOPs; next function begins xor eax,eax;ret at 0x498f40. Existing 291-byte span overlaps that next function by three bytes. Evidence: .scratch/terra-20261031/tl_498e20/native.txt.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-31T04:35:39.906549+00:00"
       }
     ]
   },
@@ -110703,6 +110710,20 @@
         "reason": "The discovery extent runs 28,059 bytes to 0x654f6b, but the body ends at ret 0x64e1fc: mov eax,[ebp+8]; test; jne; add; and; push 0x157d2c8 heap; call [__imp_HeapAlloc]; epilogue; ret. Next function starts after the ret, so the reviewed native extent is 45 bytes.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-30T10:40:19.944213+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6630374,
+    "size": 21,
+    "name": "fcn.00652be6",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 21,
+        "reason": "Stock mlock.obj complete 21-byte unlock body, native entry after ret and reference callers",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-31T11:09:02.725689+00:00"
       }
     ]
   },

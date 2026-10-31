@@ -16,7 +16,7 @@ extern char g_7f4ca0[];
 
 float __cdecl eval_ObjektPreis2Credits(int, char);
 int __cdecl fcn_0051e070(void);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00506300(char*);
 void __cdecl fcn_004c5150(int, int, char, int);
@@ -39,18 +39,18 @@ void __cdecl fcn_005b9cb0(int n, char** items)
 	switch (fcn_0051e070()) {
 	case 0:
 		if (n > 1) {
-			fcn_0051af00(buf, 0xdc, price, n, 0xc10);
+			io_FormatTextBuffer(buf, 0xdc, price, n, 0xc10);
 		}
 		else {
-			fcn_0051af00(buf, 0xdc, price, n, *(unsigned short*) items[0] * 2 + 0x9a8);
+			io_FormatTextBuffer(buf, 0xdc, price, n, *(unsigned short*) items[0] * 2 + 0x9a8);
 		}
 		break;
 	case 1:
 		if (n > 1) {
-			fcn_0051af00(buf, 0xdc, n, 0xc10, price);
+			io_FormatTextBuffer(buf, 0xdc, n, 0xc10, price);
 		}
 		else {
-			fcn_0051af00(buf, 0xdc, n, *(unsigned short*) items[0] * 2 + 0x9a8, price);
+			io_FormatTextBuffer(buf, 0xdc, n, *(unsigned short*) items[0] * 2 + 0x9a8, price);
 		}
 		break;
 	}

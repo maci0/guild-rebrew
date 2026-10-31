@@ -1,7 +1,4 @@
-char g_67eab0[19] = {
-    0x5f, 0x4e, 0x41, 0x43, 0x48, 0x52, 0x49, 0x43, 0x48, 0x54, 0x45, 0x4e, 0x5f, 0x48, 0x53, 0x5f,
-    0x32, 0x32, 0x00,
-};
+char g_67eab0[] = "_NACHRICHTEN_HS_22";
 extern char g_67eab0[];
 extern float g_664164;
 extern float g_664164;
@@ -10,11 +7,11 @@ extern float g_662ac8;
 /* Owned (both targets) by src/GOLDTL.fcn_005b24b0.c. */
 extern unsigned char g_773d75;
 
-void* __cdecl fcn_00508e40(int);
+void* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
 
@@ -34,7 +31,7 @@ int __cdecl fcn_00496ca0(int a1, char* a2, int a3)
 	if (*(char*) a3 != 0x12) {
 		return 0;
 	}
-	e = fcn_00508e40(*(int*) ((char*) a2 + 4));
+	e = gm_LookupEntityRecordById(*(int*) ((char*) a2 + 4));
 	if (e == 0) {
 		return 0;
 	}
@@ -50,7 +47,7 @@ int __cdecl fcn_00496ca0(int a1, char* a2, int a3)
 	fcn_004c54c0(*(int*) ((char*) a1 + 4), *(int*) ((char*) e + 4), r, 1);
 	fcn_004c5420(*(int*) ((char*) a1 + 4), 0x1e8, 4, 0x400, 0);
 	if (*(char*) ((char*) e + 2) == 6 || *(char*) ((char*) e + 2) == 7) {
-		fcn_0051af00(buf, 0x1751, *(unsigned short*) a1, *(int*) ((char*) a3 + 8));
+		io_FormatTextBuffer(buf, 0x1751, *(unsigned short*) a1, *(int*) ((char*) a3 + 8));
 		fcn_00545d40(*(int*) ((char*) e + 4), -1, buf, 0, 0x5fb, g_67eab0);
 	}
 	return 9;

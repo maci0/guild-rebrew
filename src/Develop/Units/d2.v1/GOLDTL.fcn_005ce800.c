@@ -26,7 +26,7 @@ extern float g_662cf8;            /* 0x662cf8, .rdata, 100.0f */
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl fcn_00472250(int k, int i, int j);
 void __cdecl d2_SetElementValue(int element, ...);
-int __cdecl fcn_00519190();
+int __cdecl io_AppendText();
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6,
                          int a7, int win);
 
@@ -42,14 +42,14 @@ void __cdecl fcn_005ce800(int id, int* out, int* value, int* slots,
     float f;
 
     d2_SetForm(id, 1);
-    fcn_00519190("$C");
-    fcn_00519190(0x1949);
+    io_AppendText("$C");
+    io_AppendText(0x1949);
     d2_SetForm(id, 2);
-    fcn_00519190("$C$A");
+    io_AppendText("$C$A");
 
     bit = flags & 1;
     element = fcn_00472250(id, 2,
-                           fcn_00519190(0x194f, 2, text, bit + 0x1951));
+                           io_AppendText(0x194f, 2, text, bit + 0x1951));
     slots[0] = element;
     d2_SetElementValue(element, bit);
     slots[1] = -1;
@@ -60,33 +60,33 @@ void __cdecl fcn_005ce800(int id, int* out, int* value, int* slots,
     if (*entry != 5) {
         bit = (flags >> 1) & 1;
         element = fcn_00472250(id, 2,
-                               fcn_00519190(0x1954, 2, text,
+                               io_AppendText(0x1954, 2, text,
                                             bit + 0x1955));
         slots[1] = element;
         d2_SetElementValue(element, bit);
 
         bit = (flags >> 2) & 1;
         element = fcn_00472250(id, 2,
-                               fcn_00519190(0x1957, 2, text,
+                               io_AppendText(0x1957, 2, text,
                                             bit + 0x1958));
         slots[2] = element;
         d2_SetElementValue(element, bit);
 
         bit = (flags >> 3) & 1;
         element = fcn_00472250(id, 2,
-                               fcn_00519190(0x195a, 2, text,
+                               io_AppendText(0x195a, 2, text,
                                             bit + 0x195b));
         slots[3] = element;
         d2_SetElementValue(element, bit);
     }
 
     element = fcn_00472250(id, 2,
-                           fcn_00519190(0x1953, text, g_773d75));
+                           io_AppendText(0x1953, text, g_773d75));
     *out = element;
     d2_SetElementValue(element, 1000, 9000, *value);
 
     if (*entry != 5 && source != 0) {
-        fcn_00519190(0x42c2);
+        io_AppendText(0x42c2);
         element = fcn_004677e0(100, 300, 200, 50, 150, 123, 0x1002,
                                g_772514);
         *handle = element;

@@ -11,7 +11,7 @@ extern char g_aed438[];
 extern int g_14cbca0;
 extern int g_7749d0;
 
-char *__cdecl fcn_00508e40(int);
+char *__cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0057de80(int);
 char *__cdecl fcn_00545fe0(Msg *);
 char *__cdecl m_alloc(int, char *);
@@ -24,7 +24,7 @@ int __cdecl fcn_004c9160(char *a1, char *a2)
 	char *s2;
 
 	m = *(Msg*) g_aed340;
-	o = fcn_00508e40(m.who);
+	o = gm_LookupEntityRecordById(m.who);
 	if (g_14cbca0 != -1) {
 		if (m.flags & 1) {
 			if (o == 0) {

@@ -1,17 +1,17 @@
-char* __cdecl fcn_0041f9b0(int id);
-void __cdecl fcn_0041f7f0(char* v);
+char* __cdecl FindVideoById(int id);
+void __cdecl ReleaseVideoInterfaces(char* v);
 struct Node;
-void __cdecl fcn_0041f940(struct Node* n);
+void __cdecl FreeVideoListNode(struct Node* node);
 
 /* ADDRESS: GOLDTL 0x0041f5f0 */
-int __cdecl fcn_0041f5f0(int id)
+int __cdecl CloseVideo(int id)
 {
-	char* n;
+	char* node;
 
-	n = fcn_0041f9b0(id);
-	if (n != 0) {
-		fcn_0041f7f0(n);
-		fcn_0041f940((struct Node*)n);
+	node = FindVideoById(id);
+	if (node != 0) {
+		ReleaseVideoInterfaces(node);
+		FreeVideoListNode((struct Node*)node);
 		return 1;
 	}
 	return 0;

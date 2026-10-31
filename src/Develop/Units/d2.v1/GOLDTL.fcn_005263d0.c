@@ -36,7 +36,7 @@ extern int g_774654;
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00519190(char *);
+void __cdecl io_AppendText(char *);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_CreateRadioGroup(int);
 void __cdecl fcn_00469470(int, int);
@@ -76,10 +76,10 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 	fcn_005340f0(g_772514);
 	d2_SetForm(h, 1);
 	if (title != 0) {
-		fcn_00519190(title);
+		io_AppendText(title);
 	}
 	d2_SetForm(h, 2);
-	fcn_00519190(text);
+	io_AppendText(text);
 	fcn_00471b60(h);
 	g_77470d = 1;
 	list = d2_CreateRadioGroup(0);

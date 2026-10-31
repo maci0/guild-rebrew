@@ -6,7 +6,7 @@ typedef struct Info {
 // SIZE 0x18
 
 int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
-char* __cdecl fcn_00508e40(int id);
+char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004e8b40(int job, Info* info);
 
 /* ADDRESS: GOLDTL 0x004a9470 */
@@ -31,7 +31,7 @@ int __cdecl fcn_004a9470(int a1, char* e, int a3, int a4, char* out)
 	k = n;
 	do {
 		if (d[i] >= 4) {
-			p = fcn_00508e40(ids[i]);
+			p = gm_LookupEntityRecordById(ids[i]);
 			if (p && !(*(int*) (p + 0x1c8) & 0x200) && fcn_004e8b40(*(unsigned char*) (p + 0x166), &info) && info.level >= 4) {
 				out[0] = 7;
 				*(int*) (out + 4) = *(int*) (p + 4);

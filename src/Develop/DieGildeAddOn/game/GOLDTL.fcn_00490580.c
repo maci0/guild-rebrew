@@ -3,7 +3,7 @@ int __cdecl fcn_004f5dd0(int a);
 int __cdecl fcn_004f4830(int idx, void* dst);
 char* __cdecl fcn_004e90d0(int a);
 int __cdecl gm_MapEntityStatRange(int a);
-float __cdecl fcn_00507f10(char* entity, int index);
+float __cdecl gm_GetEntitySkill(char* entity, int index);
 float __cdecl fcn_0050f980(int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x00490580 */
@@ -20,7 +20,7 @@ int __cdecl fcn_00490580(char* e, int a1, int* a2)
 	float r;
 
 	job = gm_MapEntityStatRange(*(unsigned char*) (e + 0x164));
-	m = (fcn_00507f10(e, 4) - (fcn_004f97a0(4) + 1.0f) * 0.003968254f)
+	m = (gm_GetEntitySkill(e, 4) - (fcn_004f97a0(4) + 1.0f) * 0.003968254f)
 		* 0.023809524f;
 	y = (float) ((*(float*) (e + 0xf4) - 2.0) * *(float*) (e + 0xfc));
 	w = (float) ((*(float*) (e + 0x100) - 2.0) * *(float*) (e + 0x108));

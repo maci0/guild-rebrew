@@ -59,6 +59,6 @@ void __cdecl fcn_0046f650(int slot, char* parent)
 		}
 		((Slot**)g_772540)[i + 1] = &((Slot*)g_1015ea0)[slot];
 	} else {
-		fcn_0041d9e0(s_67d59c);
+		ReportClientMessage(s_67d59c);
 	}
 }

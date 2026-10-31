@@ -42,7 +42,7 @@ extern short g_7f4c0c;
 extern unsigned short g_774970;
 extern char g_7f4ca4[];
 
-Entity_54fd60* __cdecl fcn_00508e40(int);
+Entity_54fd60* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl fcn_004c5620(int, Order_54fd60*);
 void __cdecl fcn_00500bb0(Stamp_54fd60*, int, int, int);
@@ -66,8 +66,8 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
         if ((o->flags & 2) == 0) {
             return;
         }
-        a = fcn_00508e40(o->actor);
-        b = fcn_00508e40(o->target);
+        a = gm_LookupEntityRecordById(o->actor);
+        b = gm_LookupEntityRecordById(o->target);
         if (a != 0) {
             if (b != 0) {
                 memset(msg, 0, sizeof(msg));
@@ -99,8 +99,8 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
         if ((o->flags & 2) == 0) {
             return;
         }
-        a = fcn_00508e40(o->actor);
-        b = fcn_00508e40(o->target);
+        a = gm_LookupEntityRecordById(o->actor);
+        b = gm_LookupEntityRecordById(o->target);
         if (a != 0) {
             fcn_004c5420(a->id, 0x1c8, 4, 0, 0x400);
         }
@@ -114,8 +114,8 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
     case -1:
     case -2:
         if ((o->flags & 2) != 0) {
-            a = fcn_00508e40(o->actor);
-            b = fcn_00508e40(o->target);
+            a = gm_LookupEntityRecordById(o->actor);
+            b = gm_LookupEntityRecordById(o->target);
             if (a != 0) {
                 fcn_004c5420(a->id, 0x1c8, 4, 0, 0x400);
             }

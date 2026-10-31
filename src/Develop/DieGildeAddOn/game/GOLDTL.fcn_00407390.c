@@ -5,7 +5,7 @@ extern int g_6b8010;
 extern int g_67530c;
 extern int g_675310;
 
-void __cdecl fcn_0041d9e0(const char* msg);
+void __cdecl ReportClientMessage(const char* msg);
 int __cdecl fcn_004050c0(char* obj);
 char* __cdecl fcn_00445600(char* a, int b, char* c, char* d);
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
@@ -31,22 +31,22 @@ void __cdecl ch_Move2Universe(char* a0)
 	v2 = *(int*) (a0 + 0x30);
 	v3 = *(char**) (a0 + 0x14);
 	if (v2 < 0) {
-		fcn_0041d9e0((char*) 0x675a40);
+		ReportClientMessage((char*) 0x675a40);
 		fcn_004050c0(v4);
 		return;
 	}
 	if ((v2 == 0 && *(int*) (v4 + 0x34) != -1)
 		|| (v2 != 0 && *(int*) (v4 + 0x34) == -1)) {
 		if (v2 != 0 || *(int*) (v4 + 0x34) == -1)
-			fcn_0041d9e0((char*) 0x675950);
+			ReportClientMessage((char*) 0x675950);
 		else
-			fcn_0041d9e0((char*) 0x6759c8);
+			ReportClientMessage((char*) 0x6759c8);
 		fcn_004050c0(v4);
 		return;
 	}
 	v5 = (int) ch_MoveCharacter2Universe(v3, g_10432c0 + v2 * 0x3dc);
 	if (v5 == 0) {
-		fcn_0041d9e0((char*) 0x675918);
+		ReportClientMessage((char*) 0x675918);
 		fcn_004050c0(v4);
 		return;
 	}

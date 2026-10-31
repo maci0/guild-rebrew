@@ -4,7 +4,7 @@
 #define MINF(a, b) ((a) < (b) ? (a) : (b))
 #define MAXF(a, b) ((a) > (b) ? (a) : (b))
 
-unsigned char* __cdecl fcn_00508e40(int h);
+unsigned char* __cdecl gm_LookupEntityRecordById(int h);
 
 int __cdecl fcn_004cd7a0(char* o, char* out)
 {
@@ -17,7 +17,7 @@ int __cdecl fcn_004cd7a0(char* o, char* out)
 		out[1] = 0;
 		*(int*) (out + 6) = 0;
 	}
-	p = fcn_00508e40(*(int*) (o + 0x10));
+	p = gm_LookupEntityRecordById(*(int*) (o + 0x10));
 	if (p == 0) {
 		return 1;
 	}

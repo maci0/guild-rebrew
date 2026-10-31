@@ -112,7 +112,7 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 	} else {
 		goto after;
 	}
-	fcn_00519190((void*) 0x1a8c, (void*) id, (void*) n, (void*) msg);
+	io_AppendText((void*) 0x1a8c, (void*) id, (void*) n, (void*) msg);
 after:
 	*(int*) (dlg + 0x44) = g_7f4c00;
 	*(int*) (dlg + 0x48) = g_7f4c04;

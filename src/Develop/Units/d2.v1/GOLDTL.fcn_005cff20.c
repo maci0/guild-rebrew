@@ -70,10 +70,10 @@ extern int g_100f1dc;
 extern char g_7f4ca0[];
 
 void* __cdecl fcn_00470820(short, short, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00519190(int, ...);
+void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 void __cdecl fcn_0046f2c0(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
@@ -89,7 +89,7 @@ void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 
 /* ADDRESS: GOLDTL 0x005cff20 */
 int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
@@ -167,11 +167,11 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 		} while ((int) h < 0x85a0a0);
 	}
 	dlg = (int) fcn_00470820(0, 0, "Gesetze\\Auswahl2");
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	if (a3 != 0) {
 		d2_SetForm(dlg, 1);
-		fcn_00519190(a3);
+		io_AppendText(a3);
 	}
 	if (n > 2) {
 		d2_SetForm(dlg, 2);
@@ -212,7 +212,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 					s->label = fcn_0046f740(0x98, y + 1,
 					                        ((GOLDTL_House5cff*) g_7f4ca0)[s->id].f18c,
 					                        g_772514);
-					fcn_0051af00(text, 0x6a9680, s->id);
+					io_FormatTextBuffer(text, 0x6a9680, s->id);
 					name = fcn_0046fac0(0x96 - (0xa0 - width) / 2,
 					                    dy + y - 0x46, text, g_772514);
 					s->name = name;

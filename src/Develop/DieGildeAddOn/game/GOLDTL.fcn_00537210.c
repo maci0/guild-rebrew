@@ -16,7 +16,7 @@ int __cdecl fcn_0057ec20(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
-void __cdecl fcn_00519190(int);
+void __cdecl io_AppendText(int);
 int __cdecl fcn_005373e0(void (__cdecl*)(void), int);
 void __cdecl fcn_00471e30(int);
 /* ADDRESS: GOLD 0x530820 */
@@ -37,7 +37,7 @@ void __cdecl fcn_00537210(void)
 		g_675308 = 4.9375f;
 		h = fcn_00470820(0, 0, g_6a33b4);
 		fcn_00471b60(h);
-		fcn_00519190(0x82);
+		io_AppendText(0x82);
 		while (fcn_005373e0(fcn_00537210, flags) != 0) {
 			if (g_14cf950 != 0 || g_14ce8cc != 0 || g_14ce8e0 != 0) {
 				g_774654 = 1;

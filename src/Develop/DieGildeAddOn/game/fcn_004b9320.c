@@ -2,14 +2,14 @@
 
 extern char g_868060[];
 
-void* __cdecl fcn_00508e40(int);
+void* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(char*, int);
 void* __cdecl fcn_005463a0(int, int, int);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_005015e0(void*, int, int, int);
 int __cdecl fcn_00505370(char*);
 unsigned short __cdecl fcn_0042e410(int);
-void __cdecl fcn_0051af00(char*, int, ...);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(char*, char*, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b9320 */
@@ -33,7 +33,7 @@ int __cdecl fcn_004b9320(char* a0)
 	int len;
 
 	n = 0;
-	e = (char*) fcn_00508e40(*(int*) a0);
+	e = (char*) gm_LookupEntityRecordById(*(int*) a0);
 	if (e == 0) {
 		return 1;
 	}
@@ -75,12 +75,12 @@ int __cdecl fcn_004b9320(char* a0)
 	if (*(char*) o1 == 0x47) {
 		k = *(int*) (o1 + 0x65);
 		p = (char*) (0x868060 + ((k << 6) - k) * 3 * 4);
-		fcn_0051af00(buf, *(unsigned short*) (a0 + 4) + 0x12e7, p,
+		io_FormatTextBuffer(buf, *(unsigned short*) (a0 + 4) + 0x12e7, p,
 		             g_868060, g_868060);
 	} else {
 		k = *(int*) (o2 + 0x65);
 		p = (char*) (0x868060 + ((k << 6) - k) * 3 * 4);
-		fcn_0051af00(buf, *(unsigned short*) (a0 + 4) + 0x12e7, g_868060, p, p);
+		io_FormatTextBuffer(buf, *(unsigned short*) (a0 + 4) + 0x12e7, g_868060, p, p);
 	}
 	len = (int) strlen(buf);
 	fcn_00545d40(a0, a0, buf, len > 0x100 ? 1 : 0, 0x5ef, 0);

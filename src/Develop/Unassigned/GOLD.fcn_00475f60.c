@@ -11,7 +11,7 @@ extern char s_005feaf4[]; /* 0x005feaf4 */
 
 void __cdecl fcn_004222b0(const char* msg);
 
-int __cdecl fcn_00475f60(int k, int i)
+int __cdecl d2_SetForm(int k, int i)
 {
 	if (k) {
 		g_006ed958 = k;

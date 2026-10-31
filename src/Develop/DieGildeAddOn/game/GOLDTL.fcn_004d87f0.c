@@ -3,8 +3,8 @@ extern char* g_9b9e40[];
 extern char g_6b5c60[];
 
 char* __cdecl fcn_00445600(char*, int, char*, char*);
-char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_0051af00(char*, int, int);
+char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
+void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00533a40(char*);
 void __cdecl d3_DestroyObject(int);
 void __cdecl fcn_00455350(char*, float*, float*);
@@ -31,9 +31,9 @@ void __cdecl fcn_004d87f0(int* a0)
 	}
 	info = fcn_00445600(0, 0x40, 0, (char*) a0 + 0x10);
 	if (a0[0] != -1) {
-		ent = gm_LookupEntityRecordById(a0[0]);
+		ent = gm_LookupEntityRecordIn32SlotTable(a0[0]);
 		*(unsigned char*) (*(int*) (ent + 0x184) + 0x8d) |= 4;
-		fcn_0051af00(buf, 0x11b8, *(unsigned short*) ent);
+		io_FormatTextBuffer(buf, 0x11b8, *(unsigned short*) ent);
 		fcn_00533a40(buf);
 	}
 	if (*(char**) (info + 0x204) != ent) {

@@ -45,10 +45,10 @@ void __cdecl fcn_005091d0(int*, Entry*);
 int __cdecl fcn_0057ec20(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00473a90(int, int);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00519190(int, ...);
+int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_005c9090(char*, int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
@@ -89,10 +89,10 @@ void __cdecl fcn_005c8440(void)
 	} else {
 		dlg = fcn_00470820(0, 0, s_6acc08);
 	}
-	fcn_00473a90(0, 0);
+	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	fcn_00519190(0x1f35);
+	io_AppendText(0x1f35);
 	d2_SetForm(dlg, 2);
 	for (i = 0; i < count; i++) {
 		fl = (int) (list[i].f1c * 100.0f);

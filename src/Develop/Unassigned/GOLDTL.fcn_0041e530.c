@@ -16,8 +16,8 @@ struct IUnk41e530 {
 };
 
 long __cdecl fcn_0041f530(int id, long* p1, long* p2);
-int __cdecl fcn_0041f5f0(int id);
-char* __cdecl fcn_0041f9d0(void* hwnd);
+int __cdecl CloseVideo(int id);
+char* __cdecl FindVideoByWindow(void* hwnd);
 
 long __stdcall fcn_0041e530(void* hwnd, unsigned int msg, unsigned int wp, long lp)
 {
@@ -27,18 +27,18 @@ long __stdcall fcn_0041e530(void* hwnd, unsigned int msg, unsigned int wp, long 
 
 	switch (msg) {
 	case 2:
-		n = fcn_0041f9d0(hwnd);
+		n = FindVideoByWindow(hwnd);
 		if (n != 0) {
-			fcn_0041f5f0(*(int*) (n + 8));
+			CloseVideo(*(int*) (n + 8));
 		}
 		break;
 	case 0x100:
 		if (wp == 0x20 || wp == 0x1b) {
-			n = fcn_0041f9d0(hwnd);
+			n = FindVideoByWindow(hwnd);
 			if (n != 0) {
 				o = *(IUnk41e530**) (n + 0x120);
 				((void(__stdcall*)(IUnk41e530*)) o->vt->fn[9])(o);
-				fcn_0041f5f0(*(int*) (n + 8));
+				CloseVideo(*(int*) (n + 8));
 				DestroyWindow(hwnd);
 				return 0;
 			}
@@ -47,7 +47,7 @@ long __stdcall fcn_0041e530(void* hwnd, unsigned int msg, unsigned int wp, long 
 	case 0x9021:
 		id = *(volatile long*) &lp;
 		if (fcn_0041f530(id, (long*) &wp, &lp) == 1) {
-			fcn_0041f5f0(id);
+			CloseVideo(id);
 			DestroyWindow(hwnd);
 			return 0;
 		}

@@ -8,13 +8,13 @@
 extern double dbl_6640e8;
 extern double dbl_6629c8;
 
-int __cdecl fcn_00508e40(int id);
+int __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004cfe00(void);
 void __cdecl fcn_005373e0(int a, int b);
 int __cdecl fcn_004730c0(int a, int b, int c, int d, char* e, int f, int g);
 void __cdecl fcn_004e5980(void);
 void __cdecl tb_OpenFunction(char* a, int b);
-void __cdecl fcn_00473a90(int a, int b);
+void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl fcn_0052ae70(void);
 void __cdecl ResetDisplayCounters(void);
 void __cdecl fcn_00525ef0(void);
@@ -109,7 +109,7 @@ void __cdecl fcn_004e5a00(int* event)
         for (i = 0; i < (int) e[0x30]; i++) {
             slot = (int*) (e + 0x34 + i * 4);
             if (*slot != -1) {
-                record = (int*) fcn_00508e40(*slot);
+                record = (int*) gm_LookupEntityRecordById(*slot);
                 if (record != 0 && *((unsigned char*) record + 2) == 6) {
                     flag = 0;
                     break;
@@ -119,7 +119,7 @@ void __cdecl fcn_004e5a00(int* event)
         for (i = 0; i < (int) e[0x30]; i++) {
             slot = (int*) (e + 0x34 + i * 4);
             if (*slot != -1) {
-                record = (int*) fcn_00508e40(*slot);
+                record = (int*) gm_LookupEntityRecordById(*slot);
                 if (record != 0 && *((unsigned char*) record + 2) == 6) {
                     flag = 0;
                     break;
@@ -163,7 +163,7 @@ void __cdecl fcn_004e5a00(int* event)
     *(float*) 0x675308 = 0.6f;
     *(float*) 0x67a964 = 1.0f;
     *(int*) 0x6b5c34 = 0;
-    fcn_00473a90(0, 0);
+    d2_SetOverlayAnimation(0, 0);
     fcn_0052ae70();
     ResetDisplayCounters();
     fcn_00525ef0();
@@ -290,7 +290,7 @@ tail:
             hop[0] = 0;
             hop[2] = 0;
             if (*unit != -1) {
-                record = (int*) fcn_00508e40(*unit);
+                record = (int*) gm_LookupEntityRecordById(*unit);
                 if (record != 0) {
                     id1 = -1;
                     fcn_004c4510((int) record, record[1]);
@@ -304,7 +304,7 @@ tail:
     }
     n = *(int*) (e + 0xc);
     if (n != -1) {
-        record = (int*) fcn_00508e40(n);
+        record = (int*) gm_LookupEntityRecordById(n);
         if (record != 0) {
             id2 = -1;
             fcn_004c4510((int) record, record[1]);

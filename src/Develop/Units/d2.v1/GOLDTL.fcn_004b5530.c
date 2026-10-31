@@ -11,7 +11,7 @@ char* __cdecl fcn_004b3c50(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00519190(int);
+void __cdecl io_AppendText(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl fcn_004c3030(int, int, char*, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -30,9 +30,9 @@ void __cdecl fcn_004b5530(int a1, int flags)
 	h = fcn_00470820(0, 0, g_681130);
 	fcn_00471b60(h);
 	d2_SetForm(h, 1);
-	fcn_00519190(*(int*) (r + 8) + 1);
-	fcn_00519190((int) g_68112c);
-	fcn_00519190(0x7d);
+	io_AppendText(*(int*) (r + 8) + 1);
+	io_AppendText((int) g_68112c);
+	io_AppendText(0x7d);
 	fcn_0064d41a(buf, g_681110, *(int*) (r + 0xc));
 	x = fcn_004c3030(-7, 0, buf, -1);
 	while (fcn_005373e0(fcn_004b5530, flags) != 0) {
