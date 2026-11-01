@@ -11,7 +11,7 @@ extern void __cdecl m_FreeTracked(void *);
 extern void __cdecl fcn_00438b40(int, void *);
 extern float __cdecl fcn_00444700(int, float *);
 extern int __cdecl fcn_00451840(void *, void *, float);
-extern char __cdecl fcn_0045b920(void *, char, char, float *);
+extern char __cdecl fcn_0045b920(void *, int, int, float *);
 
 /* ADDRESS: GOLDTL 0x00409c90 */
 unsigned int __cdecl fcn_00409c90(int a0, int a1)
@@ -109,7 +109,7 @@ Lafter:
             memset((void *)(v4 + 0x90), 0, 0x80);
     }
     v9 = *(int *)(v6 + 0xf8);
-    if (*(int *)(v6 + 0xf0) <= v9) {
+    if (v9 >= *(int *)(v6 + 0xf0)) {
         if (*(int *)(v6 + 0xf4)) {
             m_FreeTracked(*(void **)(v6 + 0xf4));
             *(int *)(v6 + 0xf4) = 0;
@@ -119,12 +119,13 @@ Lafter:
                 *(unsigned char *)(v6 + 0x158) > 4)
                 *(unsigned int *)(v6 + 0x160) =
                     *(unsigned int *)(v6 + 0x160) & 0xffffffef;
-            v8 = *(int *)(v4 + 0x34);
-            if (!fcn_00451840((void *)(v8 + 0x4c), (void *)(v6 + 0x144), 5.0f)) {
-                *(int *)(v6 + 0x124) = *(int *)(v6 + 0x144);
+            if (!fcn_00451840((void *)(*(int *)(v4 + 0x34) + 0x4c),
+                    (void *)(v6 + 0x144), 5.0f)) {
+                v13 = *(float *)(v6 + 0x144);
+                *(float *)(v6 + 0x124) = v13;
                 *(int *)(v6 + 0x128) = *(int *)(v6 + 0x148);
                 *(int *)(v6 + 0x12c) = *(int *)(v6 + 0x14c);
-                *(int *)(*(int *)(v4 + 0x70) + 0x4c) = *(int *)(v6 + 0x124);
+                *(float *)(*(int *)(v4 + 0x70) + 0x4c) = v13;
                 *(int *)(*(int *)(v4 + 0x70) + 0x50) = *(int *)(v6 + 0x128);
                 *(int *)(*(int *)(v4 + 0x70) + 0x54) = *(int *)(v6 + 0x12c);
                 v5 = *(char **)(*(int *)(v6 + 0x14) + 0x34);
@@ -132,8 +133,8 @@ Lafter:
                 v14 = *(float *)(v5 + 0x50) - *(float *)(v6 + 0x128);
                 v15 = *(float *)(v5 + 0x54) - *(float *)(v6 + 0x12c);
                 *(int *)(v6 + 0x108) = 0xbf800000;
-                *(float *)(v6 + 0x10c) =
-                    (float)sqrt(v13 * v13 + v14 * v14 + v15 * v15);
+                v13 = (float)sqrt(v13 * v13 + v14 * v14 + v15 * v15);
+                *(float *)(v6 + 0x10c) = v13;
                 *(int *)(*(int *)(v4 + 0x70) + 0x5c) = 0x40a00000;
                 *(unsigned char *)(*(int *)(v4 + 0x70) + 0x74) =
                     *(unsigned char *)(*(int *)(v4 + 0x70) + 0x74) | 2;
@@ -154,20 +155,24 @@ Lafter:
         return 0;
     }
     v2 = (float *)(v6 + 0x124);
-    v8 = *(int *)(v6 + 0xf4);
-    fcn_0045b920(v5, *(char *)(v8 + v9 * 2), *(char *)(v8 + 1 + v9 * 2), v2);
-    *v2 = *(float *)0x6b5c38 + *v2;
-    *(float *)(v6 + 0x128) = *(float *)0x6b5c3c + *(float *)(v6 + 0x128);
-    *(float *)(v6 + 0x12c) = *(float *)0x6b5c40 + *(float *)(v6 + 0x12c);
+    fcn_0045b920(v5, *(unsigned char *)(*(int *)(v6 + 0xf4) + v9 * 2),
+        *(unsigned char *)(*(int *)(v6 + 0xf4) + 1 + v9 * 2), v2);
+    v14 = *(float *)0x6b5c38;
+    *v2 = v14 + *v2;
+    v14 = *(float *)0x6b5c3c;
+    *(float *)(v6 + 0x128) = v14 + *(float *)(v6 + 0x128);
+    v14 = *(float *)0x6b5c40;
+    *(float *)(v6 + 0x12c) = v14 + *(float *)(v6 + 0x12c);
     *(float *)(v6 + 0x108) = fcn_00444700(*(int *)(v4 + 0x34), v2);
     v8 = *(int *)(*(int *)(v6 + 0x14) + 0x34);
     v13 = *(float *)(v8 + 0x4c) - *v2;
     v14 = *(float *)(v8 + 0x50) - *(float *)(v6 + 0x128);
     v15 = *(float *)(v8 + 0x54) - *(float *)(v6 + 0x12c);
-    *(float *)(v6 + 0x10c) = (float)sqrt(v13 * v13 + v14 * v14 + v15 * v15);
+    v13 = (float)sqrt(v13 * v13 + v14 * v14 + v15 * v15);
+    *(float *)(v6 + 0x10c) = v13;
     if (*(int *)(v4 + 0x70)) {
-        if (*(int *)(v6 + 0xf0) - 1 <= *(int *)(v6 + 0xf8) &&
-            2 <= *(int *)(v6 + 0xf0)) {
+        if (*(int *)(v6 + 0xf8) >= *(int *)(v6 + 0xf0) - 1 &&
+            *(int *)(v6 + 0xf0) > 1) {
             if (*(int *)(v4 + 4) & 8)
                 v13 = *(float *)0x66292c;
             else if (*(int *)(v4 + 4) & 0x10)

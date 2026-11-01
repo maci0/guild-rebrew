@@ -27,7 +27,7 @@ extern int g_6b8480;
 extern int g_6b8484;
 
 int __cdecl fcn_00449600(int a);
-int __cdecl fcn_00448cc0(int self, float* dir, int pos, float* view,
+int __cdecl fcn_00448cc0(int self, float* dir, float* view, int pos,
 	float* outA, float* outB);
 void __cdecl fcn_00438b40(int h, float* p);
 void __cdecl fcn_00438cb0(int h, float* p);
@@ -65,6 +65,7 @@ int __cdecl fcn_00449630(void)
 	if (h == 0)
 		return 0;
 	handle = fcn_00449600(g_1041d68);
+	ang = *(float*) 0x6628a8;
 	mx = g_14ce8c0;
 	ht = g_14ce864;
 	w = g_14ce860;
@@ -78,7 +79,6 @@ int __cdecl fcn_00449630(void)
 	f04 = 0.0f;
 	f10 = 0.0f;
 	f14 = 0.0f;
-	ang = *(float*) 0x6628a8;
 	if (g_14ce8d0 != 0) {
 		if (g_6b85b8 == 0) {
 			g_6b85b0 = (int) mx;
@@ -131,10 +131,10 @@ int __cdecl fcn_00449630(void)
 		f10 = (float) ht;
 		a18[0] = (double) dy / f10;
 		r = ((float) fabs((float) dx) + 1.0f) * 30.0f / (double) w;
-		if (r > 3.0f)
+		if (3.0f < r)
 			r = 3.0f;
 		s = ((float) fabs((float) dy) + 1.0f) * 30.0f / (float) ht;
-		if (s > 3.0f)
+		if (3.0f < s)
 			s = 3.0f;
 		f10 = r * f04 * 256.0f;
 		f04 = s * a18[0] * -256.0f;
@@ -172,7 +172,7 @@ both:
 	p34[0] = f10;
 	p34[1] = f04;
 call:
-	ok = (u8) fcn_00448cc0(h, p34, handle, p28, p44, a18);
+	ok = (u8) fcn_00448cc0(h, p34, p28, handle, p44, a18);
 	dirty = (char) (ok & 1);
 	changed = (char) (ok >> 1);
 	if (dirty != 0)

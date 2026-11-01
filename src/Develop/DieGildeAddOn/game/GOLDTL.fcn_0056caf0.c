@@ -18,11 +18,11 @@ void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 
 /* ADDRESS: GOLDTL 0x0056caf0 */
-/* Five-state job machine. State -1 queues the search request, state 0 picks
+/* Five-state job machine. State 0 queues the search request, state 1 picks
  * the nearest of the sixteen stored entity ids and stores it as the new
- * target, state 1 drops that target and reports the removal, state 2
- * re-resolves an existing target and copies its clock position. State -2
- * releases the item. */
+ * target, state 2 drops that target and reports the removal, state 3
+ * re-resolves an existing target and copies its clock position. States -2
+ * and -1 share the release body. */
 void __cdecl fcn_0056caf0(char* a0)
 {
 	float best;
@@ -40,11 +40,11 @@ void __cdecl fcn_0056caf0(char* a0)
 	found = 0;
 	best = 1.0e8f;
 	switch (*(int*) (a0 + 0x70)) {
-	case -1:
+	case 0:
 		fcn_004c30a0(-8, 0, (char*) 0x6a6ac0, -1, 100);
 		*(int*) (a0 + 0x70) += 1;
 		return;
-	case 0:
+	case 1:
 		rec = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xec));
 		for (i = 0x10, e = a0 + 0xac; i != 0; i--, e += 4) {
 			if (rec == 0) {
@@ -77,7 +77,7 @@ void __cdecl fcn_0056caf0(char* a0)
 		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 		*(int*) (a0 + 0x70) += 1;
 		return;
-	case 1:
+	case 2:
 		if (*(int*) (a0 + 0xec) != -1) {
 			rec = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xec));
 			n = 0;
@@ -111,7 +111,7 @@ void __cdecl fcn_0056caf0(char* a0)
 		}
 		*(int*) (a0 + 0x70) += 1;
 		return;
-	case 2:
+	case 3:
 		rec = fcn_005463a0(1, 0, 0x4f);
 		while (rec != 0 && *(int*) (rec + 0xf8) != *(int*) (a0 + 4)) {
 			rec = he_fn_Handlung();
@@ -125,9 +125,8 @@ void __cdecl fcn_0056caf0(char* a0)
 		fcn_00500bb0((pos14_7f4c00*) (a0 + 0x52), 0, 10, 0);
 		return;
 	case -2:
+	case -1:
 		fcn_00546190(a0);
-		return;
-	case 3:
 		return;
 	}
 }

@@ -42,14 +42,15 @@ void __cdecl fcn_0045ce90(Tex* a0)
 		if (a0->x50 == 0 && a0->parent != 0 && a0->name[0] != '*') {
 			obj = fcn_0045be40(a0->name);
 			if (obj != 0) {
+				int val = g_67bd2c;
 				g_6b7ff8 = (a0->flags & 0x20) ? 0 : saved;
-				fcn_00436ff0(obj, a0->x60, &a0->x50, g_67bd2c, a0->x68, a0->x68);
+				fcn_00436ff0(obj, a0->x60, &a0->x50, val, a0->x68, a0->x68);
 				a0->x64 = (unsigned int) a0->x68 >> g_6b7ff8;
 			}
 		}
 		fcn_0045ce20(a0);
 		g_6b7ff8 = saved;
-		if (a0->x5c > 1 && a0->x5d > 0) {
+		if (a0->x5c > 1 && a0->x5d == 0) {
 			p = (Tex*) g_104049c;
 			for (i = 0; i < g_10404a0; i++, p++) {
 				if (p->refs > 0 && p->id == a0->id && p->x5d > 0) {

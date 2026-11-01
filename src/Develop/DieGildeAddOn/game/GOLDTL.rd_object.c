@@ -26,16 +26,22 @@ extern unsigned char g_6b85a4;
 
 #define RD_COPY_NINE(dst, src) \
 	do { \
-		*(int*) ((dst) + 0x28) = *(int*) ((src) + 0x28); \
-		*(int*) ((dst) + 0x24) = *(int*) ((src) + 0x24); \
-		*(int*) ((dst) + 0x2c) = *(int*) ((src) + 0x2c); \
-		*(int*) ((dst) + 0x18) = *(int*) ((src) + 0x18); \
-		*(int*) ((dst) + 0x1c) = *(int*) ((src) + 0x1c); \
-		*(int*) ((dst) + 0x20) = *(int*) ((src) + 0x20); \
-		*(int*) ((dst) + 0x00) = *(int*) ((src) + 0x00); \
-		*(int*) ((dst) + 0x04) = *(int*) ((src) + 0x04); \
-		*(int*) ((dst) + 0x08) = *(int*) ((src) + 0x08); \
-	} while (0)
+
+extern unsigned char g_6b85a4;
+
+#define RD_DRAW(o) (*(char**) ((o) + 0x1ec))
+#define RD_LIGHTS(o) (*(char**) ((o) + 0x1e8))
+
+#define RD_LIGHT_NINE(dst, src) \
+	*(int*) (RD_LIGHTS(object) + (dst) + 0x28) = *(int*) (RD_LIGHTS(object) + (src) + 0x28); \
+	*(int*) (RD_LIGHTS(object) + (dst) + 0x24) = *(int*) (RD_LIGHTS(object) + (src) + 0x24); \
+	*(int*) (RD_LIGHTS(object) + (dst) + 0x2c) = *(int*) (RD_LIGHTS(object) + (src) + 0x2c); \
+	*(int*) (RD_LIGHTS(object) + (dst) + 0x18) = *(int*) (RD_LIGHTS(object) + (src) + 0x18); \
+	*(int*) (RD_LIGHTS(object) + (dst) + 0x1c) = *(int*) (RD_LIGHTS(object) + (src) + 0x1c); \
+	*(int*) (RD_LIGHTS(object) + (dst) + 0x20) = *(int*) (RD_LIGHTS(object) + (src) + 0x20); \
+	*(int*) (RD_LIGHTS(object) + (dst) + 0x00) = *(int*) (RD_LIGHTS(object) + (src) + 0x00); \
+	*(int*) (RD_LIGHTS(object) + (dst) + 0x04) = *(int*) (RD_LIGHTS(object) + (src) + 0x04); \
+	*(int*) (RD_LIGHTS(object) + (dst) + 0x08) = *(int*) (RD_LIGHTS(object) + (src) + 0x08);
 
 /* ADDRESS: GOLDTL 0x00447110 */
 char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsigned char resources)
@@ -45,27 +51,26 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 	unsigned char marker;
 	unsigned char sibling;
 	int type;
-	int scratch;
-	int scratch2;
 	int aux_a;
 	int aux_b;
+	int start;
+	int left;
 	char name[256];
 	char tmp[256];
 	char* object;
+	char* lights;
 	int kind;
 	int i;
 	int off;
-	char* draw;
-	char* lights;
-	char* cursor;
+	int count;
 
 	object = 0;
 	placeholder = 0;
-	aux_a = 0;
 	aux_b = 0;
+	aux_a = 0;
 	if (version >= 0x3a6c000bu) {
-	fcn_00401180(stream, &b);
-	if (b != 0) {
+		fcn_00401180(stream, &b);
+		if (b != 0) {
 		fcn_004011a0(stream, name);
 		if (version >= 0x3a6c00b2u) {
 			fcn_004011f0(stream, &aux_a);
@@ -74,24 +79,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			fcn_004011f0(stream, &aux_b);
 		}
 		fcn_004011f0(stream, &type);
-		if (version >= 0x3a6c00a6u) {
-			fcn_00401180(stream, &marker);
-			if (name[0] == '!' && marker == 0) {
-				i = 0;
-				do {
-					b = (unsigned char) name[i + 1];
-					tmp[i] = (char) b;
-					i++;
-				} while (b != 0);
-				i = 0;
-				do {
-					b = (unsigned char) tmp[i];
-					name[i] = (char) b;
-					i++;
-				} while (b != 0);
-			}
-			kind = type;
-		} else {
+		if (version < 0x3a6c00a6u) {
 			marker = 0;
 			switch (type) {
 			case 0:
@@ -104,39 +92,49 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				kind = 3;
 				break;
 			case 3:
-			case 4:
 				kind = 4;
 				break;
-			case 5:
+			case 4:
 				kind = 5;
 				break;
-			case 6:
+			case 5:
 				kind = 6;
 				break;
-			case 7:
+			case 6:
 				kind = 7;
 				break;
-			case 8:
+			case 7:
 				kind = 8;
+				break;
+			case 8:
+				kind = 2;
 				break;
 			default:
 				kind = 2;
 				break;
 			}
+		} else {
+			kind = type;
+			fcn_00401180(stream, &marker);
+			if (name[0] == '!' && marker == 0) {
+				strcpy(tmp, name + 1);
+				strcpy(name, tmp);
+			}
 		}
 		object = fcn_00439750(kind, name);
+		kind = *(int*) (object + 0x218);
 		*(int*) (object + 0x204) = aux_a;
 		*(int*) (object + 0x220) = aux_b;
 		*(char**) (object + 0x1fc) = parent;
 		if (parent != 0) {
 			object[0x214] = (char) (object[0x214] & 0xfe);
 		}
-		switch (*(int*) (object + 0x218)) {
+		switch (kind) {
 		case 1:
 		case 4:
 			fcn_00401180(stream, &b);
 			object[0x214] = (char) ((object[0x214] & ~0x20) | ((b << 5) & 0x20));
-			fcn_00401180(stream, &scratch);
+			fcn_00401180(stream, &b);
 			if (version >= 0x3a6c000du) {
 				fcn_00401180(stream, &b);
 				object[0x215] = (char) ((object[0x215] & ~0x01) | (b & 0x01));
@@ -171,39 +169,27 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 					}
 				}
 			} else {
-				if (*(char**) (object + 0x1ec) == 0) {
+				if (RD_DRAW(object) == 0) {
 					fcn_00439fa0(object);
 				}
-				i = 0;
-				off = 0;
-				while (i < type) {
+				for (i = 0; i < type; i++) {
 					fcn_004011a0(stream, name);
 					fcn_0044c200(name, name);
-					draw = *(char**) (object + 0x1ec);
-					fcn_00449f90(object, draw + off + 0xf4, name);
-					i++;
-					off += 0x4a4;
+					fcn_00449f90(object, RD_DRAW(object) + i * 0x4a4 + 0xf4, name);
 				}
 				if (version >= 0x3a6c00a3u) {
 					fcn_00401180(stream, &b);
 					if (b != 0) {
 						fcn_004011a0(stream, name);
 						fcn_0044c200(name, name);
-						draw = *(char**) (object + 0x1ec);
-						fcn_00449f90(object, draw + 0xee0, name);
+						fcn_00449f90(object, RD_DRAW(object) + 0xee0, name);
 					}
 				} else {
-					draw = *(char**) (object + 0x1ec);
-					cursor = *(char**) (draw + 0x40c);
-					if (cursor != 0) {
-						i = 0;
-						do {
-							name[i] = cursor[i];
-							i++;
-						} while (cursor[i - 1] != 0);
+					if (*(char**) (RD_DRAW(object) + 0x40c) != 0) {
+						strcpy(name, *(char**) (RD_DRAW(object) + 0x40c));
 						strcat(name, "_s");
 						if (fcn_0044c200(name, name) != 0) {
-							fcn_00449f90(object, draw + 0xee0, name);
+							fcn_00449f90(object, RD_DRAW(object) + 0xee0, name);
 						}
 					}
 				}
@@ -213,21 +199,18 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		case 3:
 			fcn_00401280(stream, object + 0x4c);
 			fcn_00401280(stream, object + 0x84);
-			fcn_00401180(stream, &aux_a);
-			object[0x214] = (char) ((object[0x214] & ~0x40) | ((*(unsigned char*) &aux_a << 6) & 0x40));
+			fcn_00401180(stream, &b);
+			object[0x214] = (char) ((object[0x214] & ~0x40) | ((b << 6) & 0x40));
 			if (b != 0) {
 				fcn_00401280(stream, object + 0x5c);
 				fcn_00401280(stream, object + 0x90);
 			}
 			if (version >= 0x3a6c00afu) {
-				cursor = object + 0xa8;
-				i = 10;
-				do {
-					fcn_00401280(stream, cursor - 0x0c);
-					fcn_00401280(stream, cursor);
-					cursor += 0x18;
-					i--;
-				} while (i != 0);
+				for (i = 0, lights = object + 0xa8; i < 10; i++) {
+					fcn_00401280(stream, lights - 0x0c);
+					fcn_00401280(stream, lights);
+					lights += 0x18;
+				}
 			}
 			break;
 		case 0:
@@ -247,7 +230,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		case 8:
 			fcn_00401180(stream, &b);
 			if (version >= 0x3a6c00a8u) {
-				scratch = fcn_00446ca0(version);
+				count = fcn_00446ca0(version);
 				if (version >= 0x3a6c00a9u) {
 					fcn_00401180(stream, &b);
 					object[0x215] = (char) ((object[0x215] & ~0x04) | ((b << 2) & 0x04));
@@ -259,42 +242,30 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				fcn_00401280(stream, object + 0x4c);
 				fcn_00401280(stream, object + 0x84);
 				if (version >= 0x3a6c00acu) {
-					lights = *(char**) (object + 0x1e8);
-					fcn_004011d0(stream, lights + 0x198);
-					fcn_004011f0(stream, lights + 0x19c);
+					fcn_004011d0(stream, RD_LIGHTS(object) + 0x198);
+					fcn_004011f0(stream, RD_LIGHTS(object) + 0x19c);
 				}
-				aux_b = 0;
-				if (scratch > 0) {
-					aux_b = scratch;
-					scratch2 = scratch;
-					off = 0;
-					do {
-						lights = *(char**) (object + 0x1e8);
-						fcn_004011d0(stream, lights + off + 0x28);
-						lights = *(char**) (object + 0x1e8);
-						fcn_004011d0(stream, lights + off + 0x24);
-						lights = *(char**) (object + 0x1e8);
-						fcn_004011d0(stream, lights + off + 0x2c);
-						lights = *(char**) (object + 0x1e8);
-						fcn_00401280(stream, lights + off + 0x18);
-						lights = *(char**) (object + 0x1e8);
-						fcn_00401280(stream, lights + off);
-						lights = *(char**) (object + 0x1e8);
-						fcn_00401280(stream, lights + off + 0x0c);
+				start = 0;
+				if (count > 0) {
+					left = count;
+					start = count;
+					for (off = 0; left != 0; left--) {
+						fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x28);
+						fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x24);
+						fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x2c);
+						fcn_00401280(stream, RD_LIGHTS(object) + off + 0x18);
+						fcn_00401280(stream, RD_LIGHTS(object) + off);
+						fcn_00401280(stream, RD_LIGHTS(object) + off + 0x0c);
 						if (version >= 0x3a6c00acu) {
-							lights = *(char**) (object + 0x1e8);
-							fcn_004011d0(stream, lights + off + 0x30);
-							lights = *(char**) (object + 0x1e8);
-							fcn_004011f0(stream, lights + off + 0x34);
+							fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x30);
+							fcn_004011f0(stream, RD_LIGHTS(object) + off + 0x34);
 						}
 						off += 0x38;
-						scratch2--;
-					} while (scratch2 != 0);
+					}
 				}
-				if (scratch < 7) {
-					for (i = aux_b; i < 7; i++) {
-						lights = *(char**) (object + 0x1e8);
-						RD_COPY_NINE(lights + i * 0x38, lights + (scratch - 1) * 0x38);
+				if (start < 7) {
+					for (i = start; i < 7; i++) {
+						RD_LIGHT_NINE(i * 0x38, (count - 1) * 0x38)
 					}
 				}
 			} else {
@@ -314,50 +285,39 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				fcn_00401280(stream, object + 0x5c);
 				fcn_00401280(stream, object + 0x4c);
 				if (version >= 0x3a6c00a1u) {
-					scratch = fcn_00446ca0(version);
-					aux_b = 0;
-					if (scratch > 0) {
-						aux_b = scratch;
-						scratch2 = scratch;
-						off = 0;
-						do {
-							lights = *(char**) (object + 0x1e8);
-							fcn_004011d0(stream, lights + off + 0x28);
-							lights = *(char**) (object + 0x1e8);
-							fcn_004011d0(stream, lights + off + 0x24);
-							lights = *(char**) (object + 0x1e8);
-							fcn_004011d0(stream, lights + off + 0x2c);
-							lights = *(char**) (object + 0x1e8);
-							fcn_00401280(stream, lights + off + 0x18);
-							lights = *(char**) (object + 0x1e8);
-							fcn_00401280(stream, lights + off);
+					count = fcn_00446ca0(version);
+					start = 0;
+					if (count > 0) {
+						left = count;
+						start = count;
+						for (off = 0; left != 0; left--) {
+							fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x28);
+							fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x24);
+							fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x2c);
+							fcn_00401280(stream, RD_LIGHTS(object) + off + 0x18);
+							fcn_00401280(stream, RD_LIGHTS(object) + off);
 							off += 0x38;
-							scratch2--;
-						} while (scratch2 != 0);
+						}
 					}
-					if (scratch < 7) {
-						for (i = aux_b; i < 7; i++) {
-							lights = *(char**) (object + 0x1e8);
-							RD_COPY_NINE(lights + i * 0x38, lights + (scratch - 1) * 0x38);
+					if (start < 7) {
+						for (i = start; i < 7; i++) {
+							RD_LIGHT_NINE(i * 0x38, (count - 1) * 0x38)
 						}
 					}
 				} else {
-					lights = *(char**) (object + 0x1e8);
-					off = 0;
-					while (off < 0x188) {
-						*(int*) (lights + off + 0x28) = *(int*) (object + 0x90);
-						*(int*) (lights + off + 0x24) = *(int*) (object + 0x94);
-						*(int*) (lights + off + 0x2c) = *(int*) (object + 0x98);
-						*(int*) (lights + off + 0x00) = *(int*) (object + 0x4c);
-						*(int*) (lights + off + 0x04) = *(int*) (object + 0x50);
-						*(int*) (lights + off + 0x08) = *(int*) (object + 0x54);
-						*(int*) (lights + off + 0x18) = *(int*) (object + 0x5c);
-						*(int*) (lights + off + 0x1c) = *(int*) (object + 0x60);
-						*(int*) (lights + off + 0x20) = *(int*) (object + 0x64);
-						*(int*) (lights + off + 0x0c) = *(int*) (object + 0x90);
-						*(int*) (lights + off + 0x10) = *(int*) (object + 0x94);
-						*(int*) (lights + off + 0x14) = *(int*) (object + 0x98);
-						off += 0x38;
+					for (off = 0; off < 0x188; off += 0x38) {
+						*(int*) (off + RD_LIGHTS(object) + 0x28) = *(int*) (object + 0x90);
+						*(int*) (off + RD_LIGHTS(object) + 0x24) = *(int*) (object + 0x94);
+						*(int*) (off + RD_LIGHTS(object) + 0x2c) = *(int*) (object + 0x98);
+						*(int*) (off + RD_LIGHTS(object) + 0x00) = *(int*) (object + 0x4c);
+						*(int*) (off + RD_LIGHTS(object) + 0x04) = *(int*) (object + 0x50);
+						*(int*) (off + RD_LIGHTS(object) + 0x08) = *(int*) (object + 0x54);
+						*(int*) (off + RD_LIGHTS(object) + 0x18) = *(int*) (object + 0x5c);
+						*(int*) (off + RD_LIGHTS(object) + 0x1c) = *(int*) (object + 0x60);
+						*(int*) (off + RD_LIGHTS(object) + 0x20) = *(int*) (object + 0x64);
+						*(int*) (off + RD_LIGHTS(object) + 0x0c) = *(int*) (object + 0x90);
+						*(int*) (off + RD_LIGHTS(object) + 0x10) = *(int*) (object + 0x94);
+						*(int*) (off + RD_LIGHTS(object) + 0x14) = *(int*) (object + 0x98);
 					}
 				}
 			}
@@ -372,9 +332,9 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		if (marker != 0) {
 			fcn_00442c00(object, 0);
 			if (object[0] != '!') {
-				strcpy(tmp, object);
+				strcpy(name, object);
 				strcpy(object, "!");
-				strcat(object, tmp);
+				strcat(object, name);
 			}
 		}
 	} else {
@@ -407,30 +367,23 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		fcn_0043b7b0(stream, object);
 	}
 	if (object != 0) {
-		if (*(int*) (object + 0x218) == 0 || *(int*) (object + 0x220) == 4 || *(int*) (object + 0x220) == 3 || *(int*) (object + 0x220) == 2) {
-			*(int*) (object + 0x224) = -1;
-		} else {
+		if (*(int*) (object + 0x218) != 0 && *(int*) (object + 0x220) != 4 && *(int*) (object + 0x220) != 3 && *(int*) (object + 0x220) != 2) {
 			*(int*) (object + 0x224) = 0;
+		} else {
+			*(int*) (object + 0x224) = -1;
 		}
-		if (resources != 0 && *(char**) (object + 0x1ec) != 0) {
-			off = 0;
-			while (off < 0xdec) {
-				draw = *(char**) (object + 0x1ec);
-				cursor = *(char**) (draw + off + 0x40c);
-				if (cursor != 0) {
-					lights = *(char**) (draw + off + 0x410);
-					if (lights != 0) {
-						scratch = *(int*) (cursor + 0x1e4);
-						i = 0;
-						while (i < scratch) {
-							if (*(char**) (lights + i * 4) != 0) {
-								fcn_0045ce90(*(char**) (lights + i * 4));
+		if (resources != 0 && RD_DRAW(object) != 0) {
+			for (off = 0; off < 0xdec; off += 0x4a4) {
+				if (*(char**) (RD_DRAW(object) + off + 0x40c) != 0) {
+					if (*(char**) (RD_DRAW(object) + off + 0x410) != 0) {
+						count = *(int*) (*(char**) (RD_DRAW(object) + off + 0x40c) + 0x1e4);
+						for (i = 0; i < count; i++) {
+							if (*(char**) (*(char**) (RD_DRAW(object) + off + 0x410) + i * 4) != 0) {
+								fcn_0045ce90(*(char**) (*(char**) (RD_DRAW(object) + off + 0x410) + i * 4));
 							}
-							i++;
 						}
 					}
 				}
-				off += 0x4a4;
 			}
 		}
 	}

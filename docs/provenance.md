@@ -12286,6 +12286,79 @@ T&L; three T&L caller files have size mismatches. Receipts:
 `.scratch/sim-consolidation/counter-before-{0..5}.json`. These are baseline
 results, not evidence for the post-rename sources or linked placement.
 
+The subsequent guarded rename apply was rejected because project inputs changed
+between the locked preview and apply; no rename was written. A fresh preview
+shows concurrent edits to other source files, including
+`Develop/DieGildeAddOn/game/GOLDTL.fcn_00409c90.c`. The selected source hashes
+had matched before the attempt. Receipt:
+`.scratch/sim-consolidation/crime-count-post-rejection-preview.json`.
+
+A later read-only rehearsal of the public single-plan API was also rejected:
+inputs changed while Rebrew constructed and checked the plan. No source or
+metadata was written by that rehearsal. The queued apply retains the same
+input guard and will require a fresh review if it encounters the same churn.
+
+### 2026-11-01 — Explicit scaffold selection for global renames
+
+Extended the upstream guarded data-rename plan to include explicitly selected
+project scaffold definitions without treating them as storage owners. The
+preview rejects a scaffold that lacks the old definition or already uses the
+new name. Decision owner: project owner. Focused data-rename tests pass (17
+tests), including the paired metadata row and scaffold; the full upstream
+suite is running. Guild still uses its installed release, and the queue-head
+rename has not been applied.
+
+The full upstream suite subsequently passed: 13,544 passed, 29 skipped, and
+236 warnings. Its run overlapped a small final input-guard edit and a focused
+test extension; the focused 17-test suite was rerun successfully afterward.
+Receipt: `/tmp/rebrew-guild-scaffold-suite.log`.
+
+The final upstream full-suite run on the completed files passed: 13,544
+passed, 29 skipped, and 238 warnings. Receipt:
+`/tmp/rebrew-guild-scaffold-final-suite.log`.
+
+### 2026-11-01 — Repair incomplete renderer macro
+
+The T&L build failed in `GOLDTL.rd_object.c` after an unfinished, unused
+`RD_COPY_NINE` macro and a duplicate `g_6b85a4` declaration appeared before
+the completed renderer macros. Removed only those fragments. Decision owner:
+project owner. The build errors are recorded in `.scratch/lead/tl-build.log`;
+target comparison is running in `.scratch/sim-consolidation/rd-object-repair-test.json`.
+
+The repaired T&L source compiles; its current object is 3,376 bytes against a
+3,360-byte native extent and remains `SIZE_MISMATCH`. The comparison does not
+establish a byte match or a successful complete client link.
+
+The failed build and the later source snapshot were observed at different
+times during concurrent edits. The incomplete macro was removed, but the exact
+text compiled by the failed build was not preserved, so the macro is not
+established as the cause of those diagnostics. A fresh build is in progress.
+
+### 2026-11-01 — Consolidate server office declarations
+
+Moved the repeated `g_entity_type_table` and `gm_StartFilteredEntitySearch`
+declarations from three function blocks to the server-only `aemter.c` file
+scope, preserving line positions. Decision owner: project owner. The 91 COFF
+sections have identical contents and relocation targets; compiler-generated
+local labels were compared by section and offset. Receipt:
+`.scratch/sim-consolidation/aemter-scope-compare.json`. Server rebuild and
+function comparisons are running.
+
+The fresh server build succeeded and is byte-identical to the preserved DLL
+(SHA-256 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`).
+Function comparisons continue separately.
+
+Raw-link server verification then passed all 316 checked functions as EXACT;
+receipt: `.scratch/sim-consolidation/aemter-scope-linked-verify.json`.
+
+### 2026-11-01 — Review office-slot type consolidation
+
+Recorded the duplicate 24-byte office-slot layouts and the signed versus
+unsigned byte fields that prevent a mechanical merge. Decision owner: project
+owner. Evidence is the two declarations in `game/office_slot.h` and
+`game_structs.h` and their direct signed-byte comparisons in `aemter.c`.
+No type or function source was changed by this review.
+
 ## 2026-11-01 — exact rows at reference addresses
 
 Rows that now match their reference bytes at their reference VA (all RELOC unless
@@ -12314,5 +12387,510 @@ Layout note: the new near-match bodies carry different object sizes, so the pad
 retune converged at 217,578 same-offset bytes, below the previous 257,830
 checkpoint. The fidelity work is kept; the pアド retune will follow when the bodies
 are exact.
+
+Decision: continuing. No GA was run.
+
+## 2026-11-01: 0x56caf0 case order, ascending report loop, prologue zero register (no byte gain)
+
+- `0x0056caf0` (STUB, 171/896, object 896 bytes). Working-tree case order is already
+  the native body order: the jump table at `0x56ce54` indexes `state + 2` and routes
+  0 to the queue body `0x56cb25`, 1 to search `0x56cb4b`, 2 to removal `0x56cc72`,
+  3 to re-resolve `0x56cdb2`, and -1/-2 to the shared release `0x56ce40`. No body
+  move was needed. The stale block comment that still described the older label
+  shift was corrected to the native mapping; comment text only, no code change.
+- Ascending report loop, measured. `for (n = 0; n < 0x10; n++)`, `for (;;)` with a
+  top `break`, `do/while`, `<= 0xf`, a `long` counter, a variable limit, and a
+  `goto` loop all compile to the same rotated down-counter as the committed
+  `while (n < 0x10)`, so the byte count and match stay at 896 and 171. The native
+  bounded loop (`cmp [esp+0x10],0x10; jge`, counter in memory) is reproducible only
+  from a loop condition that the optimizer cannot rotate, for example
+  `while (rec != 0 && n < 0x10)`. That form also produces the native slot colours
+  (`best` 0x10, `found` 0x14, search counter 0x18) but the object grows to 908
+  bytes and the scored match drops to 90/908, so it was reverted.
+- Zero register: not triggered. With the native slot colours in place the prologue
+  is `mov dword [esp+0x14],0` (8 bytes) where the reference has `xor edi,edi` plus
+  `mov [esp+0x14],edi` (6 bytes). The non-rotated form gives the two zero memory
+  stores the reference has (`found = 0`, `n = 0`) and still folds both to
+  immediates, which reproduces the earlier finding that two zero stores alone are
+  not enough in this switch-split layout. Hoisting `n = 0` into the entry block
+  does not help: the store is sunk back to the case that reads it.
+- Blocker: the prologue byte shape, the slot colours, and the non-rotated report
+  loop are one dependency chain. Any fix for the prologue needs the non-rotated
+  loop, which costs 12 bytes; without a zero register those 12 bytes cannot be
+  recovered, and the 2-byte prologue difference shifts every later byte so no body
+  edit can score.
+- Evidence: `rebrew binary asm show 0x0056caf0 --size 896 --json`,
+  `rebrew build driver cl -- ... /Fo<obj>` plus `objdump -d` for eight source
+  variants held in `.scratch/f56caf0/`, `rebrew test ... --no-promote --json`
+  (171/896 for the countdown variants, SIZE_MISMATCH 90/908 for the bounded
+  variants), and loop-idiom probes compiled with the pinned toolchain.
+- Decision: keep the comment correction only; every measured variant was worse.
+  No GA, no whole build.
+
+## 2026-11-01: 0x453d80 particle emitter, three of four size regions (733/1737)
+
+- `0x00453d80` (SIZE_MISMATCH, 326/1745, object 1743) had four size regions and a
+  1-byte prologue shift that misaligned every later byte. Two were fixed from
+  source evidence in the native stream.
+- Statement order: the reference calls `rand()` for `p+0x0c`, then interleaves the
+  `i % cnt` idiv before finishing that field, then stores `dl` to `p+0x50`
+  (`0x453ed8`-`0x453efd`). The source had the two statements swapped; swapping
+  them back (`p+0x0c` before `p+0x50`) is what the native scheduler produced.
+- `q` alias removed. `q[8..10] += dt * s[n]` kept a second live pointer, so `p`
+  spilled to `[esp+0x24]` and was reloaded before the three updates; the reference
+  addresses `[esi+0x20]` directly. Writing the updates through `p` keeps the
+  particle pointer in `esi`, which is also what makes the compiler save the flag
+  byte (`mov al,[esi+0x51]; test al,1; mov [esp+0x54],al`) exactly as the
+  reference does at `0x453e2e`-`0x453e33`.
+- `cnt = 1` after the early return instead of before it: the reference emits
+  `cmp [edi+0x24],ebx` and an 8-byte immediate store, which needs the constant not
+  already live in `eax` for the shared `return 1` tail. `return cnt;` was tried
+  first and constant-folded back to the shared form.
+- Measured: 733/1737 (`rebrew test --va 0x00453d80 --size 1745 --no-promote`),
+  from 326/1743. Byte-aligned comparison (`.scratch/453d80/cmp.py`) rises from
+  1383 to 1466 matched bytes.
+- Remaining 8 bytes, both register-allocation artifacts, not yet reproduced:
+  the prologue early return is still a shared `mov eax,1` tail (`je rel32` into
+  the epilogue) where the reference inlines `pop edi; mov al,1; pop ebx; add
+  esp,0x40; ret` (4 bytes, `0x453d9a`-`0x453da1`); and the `dt` qword zero-extend
+  stores `[esp+0x3c]` from the known-zero register (`mov [esp+0x3c],edx`, 4 bytes)
+  where the reference materialises `mov dword [esp+0x3c],0` (`0x45407b`). Forcing
+  either needs `edx`/`ecx` zero-register assignment to change; `unsigned int
+  elapsed`, `> 0` instead of `!= 0`, dropping the redundant cast and an if/else
+  form of `cnt = 1` all compiled to identical bytes or worse (`elapsed` scored
+  297/1738).
+- Evidence: `rebrew binary asm show 0x00453d80 --size 1745 --json`,
+  `rebrew build driver cl -- ... /Fo<obj>` plus `objdump -d` for the variants in
+  `.scratch/453d80.*.c`, `.scratch/453d80/cmp.py`, and the sweeps in
+  `.scratch/453d80/sweep.py` / `sweep2.py`. No GA, no whole build, no verify.
+
+## 2026-11-01: 0x45ce90 saved byte in ebp (125/264 to RELOC 264/264)
+
+- `0x0045ce90` (SIZE_MISMATCH, 125/264, object 262) missed `push ebp`/`pop ebp`
+  around the tile dispatch block. The reference keeps the saved
+  `g_6b7ff8` byte in `ebp` (`push ebp; mov ebp,[esp+0x14]` at `0x45cef9`) and
+  hoists `mov edx,[0x67bd2c]` between the flag mask and its application, so
+  `edx` is live at the saved-byte reload and the allocator has to use `ebp`.
+- Fix: an initialised declarator at the top of that block,
+  `int val = g_67bd2c;`, passes `val` to `fcn_00436ff0` instead of reading the
+  global inside the argument list. The added live value reproduces the whole
+  reference register assignment (saved in `ebp`, global in `edx`, `x60` reloaded
+  into `edx`, post-call `x68` in `eax`).
+- Second fix in the same file: the tail guard is `a0->x5d == 0`, not `> 0`
+  (`test al,al; jne exit` at `0x45cf51`). The inner loop keeps `p->x5d > 0`.
+- Measured: RELOC 264/264, object 264, 0 mismatches
+  (`rebrew test --va 0x0045ce90 --size 264 --no-promote`). The 13 masked slots
+  are relocation operands; `g_6b7ff8`, `g_10404a0` and `g_67bd2c` remain
+  unbound so the verdict stops at RELOC.
+- Evidence: `rebrew binary asm show 0x0045ce90 --size 264 --json`, `objdump -d`
+  on the driver object, and the variant sweep in `.scratch/saved-ebp/`
+  (`variants.py`, `v1.c`). Volatile and pointer-to-global forms scored 214/264.
+
+The office-slot review also checked the managed `amt.office_slot` bindings:
+`OFFICE_SLOT` is already bound for server, Gold and T&L at a 24-byte stride.
+The documented layout evidence does not establish byte-field signedness.
+
+The office-slot review also inspected native server `amt_SwapOfficeHolders`
+(`0x1000b880`): its two ID checks compare bytes directly, so they do not
+resolve signedness. Receipt: `.scratch/sim-consolidation/office-swap-native.json`.
+
+### 2026-11-01 — Consolidate the office-slot view
+
+Replaced the private `OfficeSlot` view in `aemter.c` with the existing managed
+`OFFICE_SLOT` type and removed the now-unused `office_slot.h`. Explicit signed
+casts preserve the former signed-byte comparisons. Decision owner: project
+owner. An isolated before/after compile preserved all 91 object sections and
+their relocation targets; receipt: `.scratch/office-merge/compare.json`.
+The actual project build, lint and raw-link checks follow.
+
+The fresh project `server.dll` build succeeded and is byte-identical to the
+preserved baseline (SHA-256
+`3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`).
+Targeted lint passed with zero errors and two unrelated metadata warnings.
+Function, managed-type and raw-link checks are running.
+
+Managed type checking then passed with no findings (1,493 structures);
+receipt: `.scratch/office-merge/types-check.json`.
+The ten source-bound office functions also matched under relocation masking;
+receipt: `.scratch/office-merge/function-test.json`. This test used
+`--no-promote`; raw-link verification remains separate.
+Raw-link verification passed all 316 checked server functions as EXACT;
+receipt: `.scratch/office-merge/linked-verify.json`.
+
+### 2026-11-01 — Separate the client crime counter name
+
+Renamed the Gold/T&L counter formerly called `cm_ChkCutsceneReady` to the inferred `CountMatchingStraftatEntries` and moved its source within the same directory. The independent server name remains canonical. Decision owner: project owner. Rebrew checked the reviewed file, row and caller selections and guarded the plan inputs at apply. Receipts: `.scratch/sim-consolidation/crime-count-single-plan-{preview,apply}.json`. Verification follows.
+
+The client counter rename's targeted lint passed with zero errors and four
+unrelated metadata warnings. Six source comparisons and both client rebuilds
+are in progress. A concurrent build removed the immediately preceding T&L raw
+artifact before the rename obtained the build lock; older raw snapshots do not
+isolate this change, so an exact before/after PE claim is not yet available.
+
+The first three post-rename source comparisons retain their baseline status,
+object size and byte counts: the counter and first caller match under relocation
+masking in both clients, and the second caller retains its T&L size mismatch.
+Receipts: `.scratch/sim-consolidation/counter-{before,after}-{0..2}.json`.
+
+The fourth caller checked (`counter-after-4.json`) also retains its baseline
+T&L size mismatch, object size and byte count. Native T&L caller `0x5c0a90`
+loads only a word before pushing the counter's second argument; the callee at
+`0x4f6520` masks that argument to 16 bits. Receipts:
+`.scratch/sim-consolidation/counter-{caller-native,native}.json`. This supports
+reviewing the existing `unsigned short` caller declarations as a shared
+contract; it does not recover the original declaration spelling.
+
+A scratch counter definition using `unsigned short` for the second argument
+and omitting the explicit mask retained the T&L 122/122 relocation match;
+receipt: `.scratch/counter-contract/candidate.json`. A types-reconciliation
+preview rejected its audit because inputs changed during the scan, and made
+no project edit. Gold comparison and caller checks remain pending.
+
+All six client counter post-rename comparisons now retain their baseline
+status, byte counts and object sizes: the definition and two callers match
+under relocation masking in both clients, while three other T&L callers keep
+their existing size mismatches. The scratch `unsigned short` definition also
+matches Gold 122/122 under relocation masking. Receipts:
+`.scratch/sim-consolidation/counter-{before,after}-{0..5}.json` and
+`.scratch/counter-contract/candidate-gold.json`. The shared prototype has not
+been changed; linked client placement remains to be checked.
+
+The post-rename Gold rebuild failed at link with 267 unresolved externals,
+including `_cm_ChkCutsceneReady` from `command.c`. Before the rename, that
+server-named reference was incorrectly satisfied by the unrelated client
+counter. The server readiness function and `cm_ExCutsceneReady` are bound
+only to server native identities; the counter's native Gold identity is a
+different function. No Gold readiness provider is asserted without native
+or scaffold evidence. Receipt: `.scratch/sim-consolidation/counter-gold-build.log`.
+
+Cross-target structural ranking gave server readiness `0x1000d260` its highest
+Gold candidate at `0x4f4130` (97.1), but native disassembly identifies that
+candidate as the separately named crime-table counter. The histogram score is
+not provider evidence. Receipt:
+`.scratch/counter-contract/server-gold-all-similarity.json`.
+
+### 2026-11-01 — Identify client readiness counterpart
+
+Gold chain processing at `0x4c43c0` dispatches through table `0x60bf20`;
+entry 89 is `0x4c69c0`. Its body checks the same 16 entity readiness records
+as server `cm_ChkCutsceneReady`, without the server diagnostic. Existing
+shared source `GOLDTL.fcn_004c7550.c` already matches Gold `0x4c69c0` and
+T&L `0x4c7550` under relocation masking, 86/86 bytes each. Decision owner:
+project owner. Receipts: `.scratch/counter-contract/{gold-chain-native,gold-chain-entry,gold-readiness-native,tl-readiness-native,readiness-before,readiness-rename-preview}.json`.
+A guarded rename to the canonical name is queued behind the active client
+build; no source change is claimed until it applies. A direct merge into
+`command.c` was reviewed but is not currently safe: the review reports
+foreign definitions and existing guarded duplicate-body conflicts. Receipt:
+`.scratch/counter-contract/readiness-organize-review.json`.
+
+### 2026-11-01 — Gold cutscene execution counterpart
+
+Gold primary command table `0x60bd78` entry 89 points to `0x4cca10`; its
+136-byte body and 52 mnemonics match T&L `0x4cd590`, including calls to the
+corresponding readiness checker, entity lookup and slot helper. The existing
+T&L source compiles against Gold as 136/136 RELOC with all three calls
+validated. Decision owner: project owner. Native disassembly also shows
+three separate table-entry functions at `0x4cc920`, `0x4cc980`, `0x4cca10`,
+ending at `0x4cc97e`, `0x4cca0e`, `0x4cca97`; repaired the Gold inventory
+extents to 95, 143 and 136 bytes with the guarded Rebrew writer. Receipts:
+`.scratch/counter-contract/{gold-execute-entry,gold-execute-native,tl-execute-native,gold-preceding-native,gold-mid-native,gold-execute-candidate,gold-execute-extent-preview,gold-execute-extent-apply}.json`.
+Source binding is being reviewed separately; no status was earned by the
+inventory repair.
+
+The initial Gold execution-handler `source binding rebind` preview correctly
+refused because `GOLD.0x4cca10` has no existing metadata row. The reviewed
+source needs an additional Gold address anchor and `source register` rather
+than a rebind; this is deferred until the active client build releases its
+lock. No source binding or status was changed by the refused preview.
+
+### 2026-11-01 — GOLDTL `0x409c90` reaches full object match
+
+`src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00409c90.c` went from 1373/1383
+NEAR to 1383/1383 RELOC (15 validated relocations, no mismatches). Two changes
+fixed pure register-choice gaps. The `fcn_00451840` first argument is now an
+inline expression instead of a `v8` assignment, which defers the pointer
+computation to argument order and yields the reference `mov edx,[ebp+0x34]`
+sequence. The `0x124` triple now copies x through a `float` value stored twice,
+so the compiler emits `fld [edi]`, `fst [esi+0x124]` and `fstp [edx+0x4c]` with
+the reference `eax`/`ecx`/`edx` rotation; y and z stay integer copies.
+Baseline backed up at `.scratch/bak/f.c.baseline`. Checked with
+`.venv/bin/rebrew test src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00409c90.c
+--va 0x00409c90 --size 1383 --no-promote --json`; the run used `--no-promote`,
+so the metadata verdict is unchanged until a promoting test runs.
+
+The client execution-handler body sets the result byte, updates a looked-up
+slot at `+0x28`, then updates entity records and writes a success response;
+the server `cm_ExCutsceneReady` body omits the client-specific slot and
+success-response work. Any shared-name consolidation must preserve those
+per-target bodies. Evidence: `.scratch/counter-contract/gold-execute-native.json`
+and `src/Develop/DieGildeAddOn/command/command.c`.
+
+### 2026-11-01 — Bind client cutscene readiness counterpart
+
+Gold chain table `0x60bf20` entry 89 points to `0x4c69c0`, whose validation matches server `cm_ChkCutsceneReady` without its log call. The existing shared client source also binds T&L `0x4c7550`; both were 86/86 RELOC before renaming. Renamed that source and its reviewed caller to the canonical name, preserving the independent server body. Decision owner: project owner. Receipts: `.scratch/counter-contract/{gold-chain-native,gold-chain-entry,gold-readiness-native,tl-readiness-native,readiness-locked-preview,readiness-apply}.json`. Post-rename checks follow.
+
+Gold `0x4cca10` was registered on the shared T&L execution-handler source using its stacked address anchor and Rebrew metadata writer. The native dispatch entry, full 136-byte RELOC comparison and three validated calls support this binding. Decision owner: project owner. Receipts: `.scratch/counter-contract/gold-execute-register-{preview,apply}.json`. Both target comparisons follow; registration itself earns no verdict.
+
+After the counter rename, the T&L build likewise failed on one unresolved
+`_cm_ChkCutsceneReady`; receipt: `.scratch/team/build33.log` and the previous
+`.scratch/lead/tl-build.log`. The evidenced client readiness counterpart was
+then renamed to the canonical symbol, and Gold `0x4cca10` was registered on
+its execution caller. Fresh Gold and T&L rebuilds and source comparisons are
+in progress; the earlier failed link is not treated as a successful check.
+
+Post-rename readiness verification passed Gold and T&L at 86/86 RELOC with
+the entity-lookup operand validated. The T&L execution caller retained its
+136/136 RELOC result and all three direct operands validated. The new Gold
+row has no stored size, so its normal source-target test requested the
+reviewed 136-byte extent explicitly; that test is running. Receipts:
+`.scratch/counter-contract/{readiness-after,execute-after}.json`.
+
+A preview to rename the shared client execution source to the canonical
+`cm_ExCutsceneReady` selects both client rows, but the server body is currently
+compiled in client contexts too; applying the rename without target guards
+would create duplicate providers. The installed release also omits a digest
+for this no-explicit-reference shared rename. No such rename or guard was
+applied; receipt: `.scratch/counter-contract/execute-rename-preview.json`.
+
+### 2026-11-01 — Review execution-handler target guard
+
+An isolated `command.c` compile tested guarding the canonical server
+`cm_ExCutsceneReady` body with `REBREW_SERVER`, preserving source line
+positions. All 217 server COFF sections and relocation targets stayed equal;
+the Gold object no longer defined that server body, allowing the separately
+verified client implementation to take the canonical name. Decision owner:
+project owner. Receipt: `.scratch/execution-guard/compare.json`. This was a
+scratch experiment only; no project guard or execution-handler rename was
+applied. Both client builds remain active.
+
+The newly registered Gold execution handler then matched 136/136 bytes under
+relocation masking, with all three direct operands validated. Receipt:
+`.scratch/counter-contract/execute-gold-after.json`.
+
+The subsequent Gold rebuild no longer reports `_cm_ChkCutsceneReady` as
+unresolved and returned to 266 unresolved externals, matching the count
+before the counter rename. The full Gold link still fails for those remaining
+symbols. Receipt: `.scratch/counter-contract/gold-readiness-build.log`.
+
+T&L native dispatch evidence independently confirms the counterpart pairing:
+`cm_ExecCommand` indexes primary table `0x68a9e0`, entry 89 `0x4cd590`;
+`ahm_ProcessEntityChain` indexes table `0x68ab88`, entry 89 `0x4c7550`.
+Receipts: `.scratch/counter-contract/{tl-exec-native,tl-chain-native,tl-dispatch-entries}.json`.
+
+A read-only rehearsal assembled the reviewed execution rename and server
+guard as a single Rebrew plan covering two source files and 5,679 guarded
+inputs. No source or metadata was changed by the rehearsal. Receipt:
+`.scratch/execution-guard/combined-plan-preview.json`; the actual guarded
+apply remains queued behind the T&L build.
+
+A scratch execution caller using the canonical `int cm_ChkCutsceneReady(char*)`
+prototype and an explicit argument cast remains 136/136 RELOC in Gold and
+T&L, with all three direct call operands validated. Receipts:
+`.scratch/counter-contract/caller-contract-{gold,tl}.json`. The project caller
+has not yet been changed; a types-reconciliation preview is running.
+
+The readiness prototype reconciliation preview refused incomplete source or
+include contexts and did not change the project. Added the concrete replay and
+scratch verification receipts to the existing upstream SDK-context feature gap
+in `docs/IDEAS-GUILD.md`. The queued execution rename remains separate.
+
+### 2026-11-01 — Review cutscene lookup naming
+
+Gold `0x4e50a0` and T&L `0x4e6a30` share an active-record lookup over the
+96-entry, 0x114-stride cutscene table. Its cutscene callers and attested
+`cut_` prefix support the inferred name `cut_FindCutsceneById`; original
+spelling and TU remain unproved. Decision owner: project owner. A rename
+preview selects both function rows, two declaration-bound data rows and 18
+source files. One caller is already queued to move, so the preview must be
+repeated after that move; no lookup rename was applied. Receipt:
+`.scratch/counter-contract/cut-find-rename-preview.json`. Data rows remain
+views/declarations and do not establish storage ownership.
+
+### 2026-11-01 — Reconcile cutscene execution handlers
+
+Renamed Gold `0x4cca10` / T&L `0x4cd590` to the server-attested `cm_ExCutsceneReady` and guarded the original server body for server builds, so the client-specific body supplies clients without a duplicate. Decision owner: project owner. Gold and T&L native dispatch entries, 136-byte RELOC comparisons and validated calls establish the counterpart; scratch server COFF comparison preserved all 217 sections and relocation targets. Rebrew guarded the combined plan. Receipts: `.scratch/execution-guard/{compare,combined-plan-preview,combined-plan-apply}.json`. Fresh target builds and comparisons follow.
+
+The server rebuilt successfully after the execution-handler guard and remains
+byte-identical to its prior DLL (SHA-256
+`3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`).
+All 70 source-bound functions in `command.c` passed: 6 EXACT and 64 RELOC;
+the test used `--no-promote`. Targeted lint passed with zero errors. Receipts:
+`.scratch/execution-guard/{server-build.log,server-functions.json,lint.json}`.
+Raw-link verification and both client builds continue.
+
+After the execution-handler rename, its Gold and T&L definitions both retained
+136/136 RELOC; receipt: `.scratch/execution-guard/execute-after.json`. A
+scratch cutscene-lookup rename that also removes its duplicate extern retained
+Gold 60/60 RELOC; T&L comparison is still running. Receipt:
+`.scratch/counter-contract/cut-find-candidate-gold.json`.
+
+The cutscene lookup scratch candidate with the inferred name and duplicate
+extern removed also matches T&L 60/60 RELOC; together with the Gold result,
+both target bodies are preserved in isolation. A guarded application is
+queued behind the T&L build and refuses to run if the Gold build is still
+active or any reviewed source has changed. Receipt:
+`.scratch/counter-contract/cut-find-candidate-tl.json`.
+
+The cutscene lookup's guarded-input donor plan was rechecked after the
+execution-handler move: it enumerates 5,679 inputs, and all 18 reviewed lookup
+source hashes remain unchanged. This was a read-only rehearsal; the lookup
+rename remains queued.
+
+### 2026-11-01 — Review neighboring cutscene lookups
+
+Reviewed the shared `0x4e69e0`, `0x4e6a30` and `0x4e6ab0` lookup sources for
+a future TU merge. Gold and T&L have the same native definition order and
+whole-unit `/O2 /Gd` context; the review found no storage definitions,
+conflicts or order cycle. Decision owner: project owner. The review does not
+establish linked placement: the current T&L raw baseline was unavailable and
+Gold still does not link. No merge was applied. Receipt:
+`.scratch/counter-contract/cut-lookup-organize-review.json`.
+
+The Gold rebuild after the guarded execution-handler rename reports no
+`cm_ChkCutsceneReady` or `cm_ExCutsceneReady` unresolved/duplicate error; it
+still fails with the same 266 unresolved externals. Receipt:
+`.scratch/execution-guard/gold-build.log`. This is not a complete Gold link.
+
+### 2026-11-01 — Restore Gold office validator binding
+
+Gold chain-dispatch table entry 68 calls `0x4e6360`; the current Gold inventory
+has that 205-byte function extent. The existing shared office validator
+compiles 205/205 RELOC with the entity lookup and all office-table operands
+validated. Restored its previously retired Gold binding to the shared client
+source through Rebrew's guarded metadata writer, preserving binding history.
+Decision owner: project owner. Receipts: `.scratch/counter-contract/{gold-office-check-native,gold-office-validator-native,gold-office-validator-test,gold-office-validator-locked-preview,gold-office-validator-rebind-apply}.json`.
+Post-rebind target comparisons and lint are running; binding itself earns no
+verdict and a fresh Gold link is still required.
+
+### 2026-11-01 — Test a shared office-validator TU
+
+Tested a scratch arrangement that keeps the canonical validator in server
+`aemter.c`, guards the surrounding server-only definitions and data, and
+compiles the validator for both clients. Decision owner: project owner. All
+91 server object sections and relocation targets remained equal; Gold and
+T&L each matched the 205-byte validator under relocation masking with the
+entity lookup and office-table operands validated. The post-rebind existing
+client source also matches 205/205 in both targets. Receipts:
+`.scratch/office-shared/{server-compare,gold,tl}.json` and
+`.scratch/counter-contract/office-validator-after.json`. No project TU merge
+was applied: both client raw-link baselines and rebuild checks are required,
+and Gold currently does not link.
+The first all-target organization review was rejected because inputs changed
+while reading; no organization was applied. Receipt:
+`.scratch/counter-contract/office-validator-organize-review.err`.
+
+### 2026-11-01 — Review Gold numeric lookup counterpart
+
+Gold call `0x588fc0` targets `0x505e30`; its 37-byte body and T&L `0x508e80`
+use the same conversion with different native table addresses. A scratch
+conditional source matches both bodies EXACT 37/37 and leaves its neighboring
+T&L function at the same 737-byte size mismatch. Decision owner: project owner.
+The source edit and retired Gold rebind are queued behind client build
+coordination, with source hashes, Gold-build activity and Rebrew digest guards.
+No project source or binding change is claimed until that plan applies.
+Receipts: `.scratch/counter-contract/{gold-float-caller-native,gold-short-float-native,short-float-gold,short-float-tl,short-float-neighbor-before,short-float-neighbor,short-float-rebind-preview}.json`.
+
+### 2026-11-01 — Review Gold object-cleanup counterpart
+
+Gold caller `0x40b1a0` directly calls `0x4028a0`; its body returns at
+`0x4029bb`, followed by four NOPs and the next function at `0x4029c0`.
+Repaired the Gold inventory extent from 288 to 284 bytes through the guarded
+Rebrew writer. The existing T&L source compiles against Gold at 284/284 RELOC;
+entity cleanup and D3 calls that have known bindings validate, while several
+globals and helper operands remain explicitly unresolved. Decision owner:
+project owner. Receipts: `.scratch/counter-contract/{gold-object-cleanup-caller,gold-object-cleanup-native,gold-object-cleanup-padding,gold-object-cleanup-candidate,gold-object-cleanup-extent-preview,gold-object-cleanup-extent-apply}.json`.
+The source rebind is being reviewed; the extent repair alone earns no verdict.
+
+Restored the retired Gold `0x4028a0` source binding through the guarded
+Rebrew writer, preserving its history. The native direct call and full-body
+relocation comparison support the identity; unresolved helper and global
+operands remain unresolved, and Gold comparison stubs do not establish
+runtime providers or complete storage extents. Receipts:
+`.scratch/counter-contract/{gold-object-cleanup-locked-preview,gold-object-cleanup-rebind-apply}.json`.
+Post-rebind target tests and lint are running; a fresh Gold link is required.
+
+The Gold rebuild after restoring the office-validator binding no longer
+reports `_amt_ValidateOfficeCandidate` and fails on 265 remaining unresolved
+externals, down from 266. Receipt:
+`.scratch/counter-contract/gold-office-validator-build.log`. That build
+started before the later object-cleanup rebind and cannot verify it.
+
+### 2026-11-01 — Name the shared cutscene lookup
+
+Renamed Gold `0x4e50a0` / T&L `0x4e6a30` and their reviewed callers to inferred `cut_FindCutsceneById`, moving its declaration-only source into the game directory and removing a duplicate extern. The `cut_` prefix is attested; original spelling and exact TU remain inferred. Decision owner: project owner. Both scratch target bodies match 60/60 RELOC. Rebrew guarded all plan inputs; data rows remain declarations and do not assert storage ownership. Receipts: `.scratch/counter-contract/{cut-find-guarded-preview,cut-find-apply,cut-find-candidate-gold,cut-find-candidate-tl}.json`. Target comparisons and raw builds follow.
+
+The post-rebind object-cleanup comparison is RELOC 284/284 in both clients;
+all 15 T&L operands validate, while Gold has seven validated and eight
+unresolved bindings. Targeted lint reports no errors. Receipt:
+`.scratch/counter-contract/object-cleanup-after.json`. A Gold build attempted
+during the subsequent cutscene source move stopped at the stale source list;
+it did not reach the linker and is being repeated.
+
+One affected T&L caller, `GOLDTL.fcn_005373e0.c`, currently reports
+SIZE_MISMATCH (3078 compiled bytes versus 3071 native); its pre-rename result
+was not captured in this check, so the cause is not established. Receipt:
+`.scratch/counter-contract/cut-find-check-04.json`. Remaining caller checks
+and the T&L rebuild are still in progress.
+
+The affected T&L caller `GOLDTL.fcn_00525670.c` produces the same 948-byte
+SIZE_MISMATCH and identical byte-difference list when compiled from a scratch
+copy with its original lookup name restored. Receipts:
+`.scratch/counter-contract/{cut-find-caller-03-before,cut-find-check-03}.json`.
+
+The original-name scratch version of T&L `GOLDTL.fcn_005373e0.c` also
+produces the same 3078-byte SIZE_MISMATCH and identical byte-difference list.
+Receipts: `.scratch/counter-contract/{cut-find-caller-before,cut-find-check-04}.json`.
+
+For T&L `GOLDTL.fcn_0054e390.c`, an original-name scratch copy also compiles
+to 2628 bytes against a 2676-byte native body; its comparison counts differ,
+so this establishes only that the size mismatch predates the rename. Receipts:
+`.scratch/counter-contract/{cut-find-caller-05-before,cut-find-check-05}.json`.
+
+Post-rename tests of `cut_FindCutsceneById` are RELOC 60/60 in both Gold and
+T&L, with all three recorded operands validated for each target. Receipt:
+`.scratch/counter-contract/cut-find-final.json`. T&L caller
+`GOLDTL.fcn_00554170.c` already compiles to 1480 bytes against its 1536-byte
+native body with the original lookup name; comparison counts differ, so only
+the pre-existing size mismatch is established. Receipts:
+`.scratch/counter-contract/{cut-find-caller-06-before,cut-find-check-06}.json`.
+
+Original-name scratch builds of T&L callers `GOLDTL.fcn_0056b700.c` and
+`GOLDTL.fcn_0056bfd0.c` reproduce their respective 2128/2192 and 2260/2324
+compiled/native size mismatches. Comparison counts differ, so byte equality
+is not claimed. Receipts: `.scratch/counter-contract/caller-0056b700-before.json`,
+`caller-0056bfd0-before.json`, and `cut-find-check-07.json` / `-08.json`.
+
+T&L caller `GOLDTL.fcn_0056e3c0.c` also produces its existing 1288/1458
+compiled/native size mismatch with the original lookup name. Comparison counts
+differ, so byte equality is not claimed. Receipts:
+`.scratch/counter-contract/{caller-0056e3c0-before,cut-find-check-09}.json`.
+
+All 18 affected cutscene-lookup sources have now been checked in their bound
+client targets. Eleven files report RELOC in every tested target; seven T&L
+callers report SIZE_MISMATCH. Original-name scratch comparisons reproduced
+those seven compiled/native size mismatches, as recorded above; only two also
+had identical reported byte-difference lists. Receipts:
+`.scratch/counter-contract/cut-find-check-00.json` through `-17.json`.
+
+## 2026-11-01 — clamp ladder and dispatch reconstruction
+
+Rows matching at their reference VA after this round: `0x409C90` RELOC 1383/1383
+and `0x45CE90` RELOC 264/264, joining the twelve exact rows from the previous
+checkpoint.
+
+- `0x447110` (rd_object) 358 -> 3243/3360: the marker block must buffer through
+  `name`, not `tmp`, and the switch value has to stay in a live local so the case
+  dispatch keeps its register.
+- `0x453470` 413 -> 2301/2308 and `0x453D80` 326 -> 1156/1741: the clamp is one
+  macro-nested `MAX(0.0f, MIN(255.0f, V))` expression, and a conditional tail
+  expression (`return (d5 & 1) && count >= wanted ? 0 : 1;`) gives the reference's
+  mixed word/byte return widths and moves the zero register from edx to ecx.
+- `0x452C60` 1112 -> 2036/2060, `0x441050` 841 -> 855/931 with the frame solved by
+  a 16-byte `float scratch[4]`, `0x409C90` 1001 -> 1383 exact by duplicating the
+  `[esi+0xf4]` read so the allocator stops merging it, and `0x49630` 411 -> 438
+  with the six-argument prototype order corrected and size now exact.
+
+Pads retuned to convergence: 2,977,792 bytes, raw 266,561, informative 128,682,
+no compile or link errors, image sha256 2045d8f0.
 
 Decision: continuing. No GA was run.
