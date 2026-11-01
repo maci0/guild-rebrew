@@ -170,7 +170,7 @@ fmt:
 				goto fail;
 			}
 			v20 = text_index - v08;
-			fcn_0064d740(S.text + v20 + strlen((char*)v18), S.text + text_index,
+			fcn_0064d740(S.text + v20 + 8 + strlen((char*)v18), S.text + text_index,
 				     strlen(S.text) - text_index + 2);
 		} else {
 		v20 = text_index - v08 - 1;
@@ -246,7 +246,7 @@ fmt:
 				S.work[0] = (char)toupper(S.work[0]);
 			}
 		}
-		memcpy(S.text + v20 + strlen(S.work), S.text + text_index,
+		memcpy(S.text + v20 + 8 + strlen(S.work), S.text + text_index,
 		       strlen(S.text) - v20);
 		v18 = (int)S.work;
 	}
@@ -329,7 +329,7 @@ fmt:
 			S.work[v08 + v0c] = 0;
 			v24 = (int)strlen(sbuf);
 			v08 = (int)strlen(S.text) - text_index + 1;
-			memmove(S.text + text_index + v24 - 3,
+			memmove(S.text + text_index + 8 + v24 - 3,
 				S.text + text_index, v08);
 			memcpy(S.text + text_index - 2, sbuf, v24);
 			continue;

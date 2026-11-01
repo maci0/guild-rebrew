@@ -14724,3 +14724,68 @@ binding was changed. Receipt:
 
 Decision: continuing. No GA was run. The whole-image same-offset number is not a
 reliable reading while another session holds many uncommitted bodies in the tree.
+
+## 2026-11-02 — client queue-table backing extents
+
+Decision owner: project maintainer. Recorded inferred `g_fb5760` backing
+identities for Gold `0x00f31160` and T&L `0x00fb5760`, each 0x50000 bytes
+(0x8000 records at a 10-byte stride) in the zero-filled `.data` tail. Native
+initializers establish the boundaries; original source owners are unknown.
+Gold's `g_f31161` accesses an interior view at base +1. Current client
+scaffolds allocate only 0x20000 bytes, and Gold also allocates the interior
+view separately; these comparison scaffolds remain incorrect pending a safe
+regeneration. Guarded metadata receipts:
+`.scratch/counter-contract/{gold,tl}-queue-backing-{preview,apply}.json`;
+native evidence: `gold-queue-init-native.json`, `gold-queue-remap-native.json`,
+and `tl-queue-table-init-native.json`.
+
+After registering Gold's queue backing, the scratch remap view still compares
+RELOC 169/169 and both backing-plus-offset operands validate. Receipt:
+`.scratch/counter-contract/gold-queue-remap-alias-data-bound.json`. No source
+view or scaffold was changed yet: regenerating the Gold scaffold from its
+historical diagnostic log produces over 2,000 unrelated diff lines. A guarded
+selected-symbol scaffold regeneration capability was recorded in upstream
+`rebrew/docs/IDEAS-GUILD.md`; the scratch specials and generated preview are
+`.scratch/counter-contract/gold-queue-specials.toml` and
+`gold-queue-generated.c`.
+
+The post-rename batch completed for all 27 affected C files. Across 37
+reported function/target contexts, statuses and reported match counts remain
+unchanged from their pre-rename measurements. Receipt:
+`.scratch/counter-contract/queue-rename-compare-summary.json`.
+
+## 2026-11-02 — reconcile influence-matrix view
+
+Decision owner: project maintainer. Changed the flat signed-byte declaration
+and indexing of `g_90e0a0` in T&L `fcn_0047d2a0` to the existing 0x300-by-0x300
+character-array declaration used by the other source users. Explicit signed
+casts at arithmetic uses are preserved. Native/source indexing uses a 0x300
+row stride. This changes no storage owner; the separate one-byte T&L scaffold
+capacity remains unresolved. Baseline and full object checks follow.
+
+The pre/post target objects preserve `.text`, `.data`, `.rdata`, `.drectve`,
+and relocation targets (with local labels compared by section offset); debug
+records are excluded. Receipt:
+`.scratch/counter-contract/matrix-view-object-compare.json`. Native comparison
+follows.
+
+## 2026-11-02 — append-text table region lands on native offsets
+
+- `0x519190` rebuilt so code-before-tables is exactly 0x1cac: removed the redundant
+  byte-wide dispatch range check (native has one check, the switch's), and applied
+  five evidenced `+8` destination bases (fmt v10==0 arm, fmt else arm, case i digit
+  path, case G abuf arm, case G S.work arm). Jump table now at 0x1cac, index at
+  0x1d14, with nine tail NOPs, and the final 200 bytes are byte-identical. The
+  positional number reads 655 rather than the earlier 659 because that 659 was
+  coincidental bytes with the table four bytes late; the aligned structure is the
+  durable win.
+- Frame remains 4 bytes short in local-base terms (text base+0x250 against 0x254)
+  and the third push (ebx = text_index) is still unreachable from C: with two pushes
+  only 0x31f0 or 0x31f8 are possible frame immediates.
+
+Whole-image note: pad convergence is currently oscillating (11-13 pad changes per
+pass) because the shared tree carries another session's uncommitted bodies. The best
+committed reading stands at raw 291,869 from f449d446; a clean committed-state
+measurement will be taken when the tree settles.
+
+Decision: continuing. No GA was run.
