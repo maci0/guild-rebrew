@@ -83,7 +83,7 @@ int __cdecl fcn_004dcf50(int a0)
 	char path[0x100];
 	char line[0x100];
 	char work[0x100];
-	char buf[0x100];
+	char buf[0x1f0];
 	float f;
 	float fsum;
 	int n;

@@ -13277,3 +13277,383 @@ Pads retuned against fresh objects (2 pads, shift 0x4E0). Rebuild 2,977,792 byte
 raw 267,667, informative 129,277, no compile or link errors.
 
 Decision: continuing. No GA was run.
+
+Targeted all-target lint for the recent shared wrapper, camera helper, vector
+comparison, and scene-view reset reports zero errors. It reports existing
+redundant-flag and stale provenance/type-evidence warnings; those remain review
+items. Receipt: `.scratch/counter-contract/recent-consolidation-lint.json`.
+
+## 2026-11-01 — camera flag and shared helper verification
+
+Decision owner: project maintainer. The restored Gold camera flag definition and
+its T&L counterpart each compare RELOC at 216/216 bytes; the ten local jump-table
+targets also agree with the compiled COFF symbol offsets. The post-change T&L
+build succeeded. Its complete PE comparison against the preserved baseline has
+matching imports, exports and resources but different code placement and data;
+concurrent source changes prevent attributing that difference to this helper.
+Evidence: `.scratch/counter-contract/camera-mask-after.json`,
+`.scratch/counter-contract/camera-mask-gold-symbols.txt`,
+`.scratch/counter-contract/camera-mask-tl-symbols.txt`, and
+`.scratch/counter-contract/tl-camera-helper-compare.json`.
+
+The first twelve completed source-scope checks after the vector comparison
+rename retain their previously recorded per-target statuses. The remaining
+checks and the Gold rebuild are still running; this partial result does not
+establish the outcome for the full caller scope. Evidence:
+`.scratch/counter-contract/scene-epsilon-pre-status.json` and
+`.scratch/counter-contract/scene-epsilon-scope-*.json`.
+
+## 2026-11-02 — cutscene caller contract evidence
+
+Decision owner: project maintainer. Recorded the existing cutscene lookup
+return-type conflict and checked explicit pointer-to-integer conversions in two
+scratch callers against their current byte-comparison baselines. One remains
+RELOC 169/169; the other retains its pre-existing size mismatch and reported
+mismatch list. The project declarations remain unchanged until the required
+signature reconciliation can audit stable inputs. Evidence and limitations are
+in `docs/source-layout.md`.
+
+Date correction: the preceding cutscene caller evidence entry was recorded on
+2026-11-01 (Singapore time).
+
+## 2026-11-01 — shared camera helper post-change verification
+
+Decision owner: project maintainer. The restored Gold camera helper and the
+shared T&L definition each compare RELOC at 41/41 bytes. The Gold build
+compiled but failed to link with 260 unresolved externals, so a complete Gold PE
+comparison is unavailable. The Gold traversal operand in the helper remains
+unresolved by the comparison. Evidence:
+`.scratch/counter-contract/camera-helper-after.json` and
+`.scratch/counter-contract/gold-post-resource-build.log`.
+
+The previously interrupted scene-view reset caller check was repeated after the
+transient malformed anchor was corrected elsewhere. It reports RELOC 562/562
+for both clients. Evidence:
+`.scratch/counter-contract/entity-reset-caller-16-retry.json`.
+
+## 2026-11-01 — shared resource thunk and initializer evidence
+
+Decision owner: project maintainer. The restored Gold resource thunk and T&L
+counterpart both compare RELOC 5/5 with their direct call operands validated
+(`.scratch/counter-contract/gold-resource-thunk-after.json`). Recorded the
+contradiction between the retired Gold initializer binding and the current
+native call and inventory in `docs/source-layout.md`; the inline assembly and
+native extent still require review before restoring that source binding.
+
+## 2026-11-01 — Gold initializer native extent
+
+Decision owner: project maintainer. Corrected the inventory extent at
+`0x0042ea90` from 304 to 293 bytes: the last return is at `0x0042ebb4` and
+11 NOPs precede the next entry at `0x0042ebc0`. Gold startup directly calls the
+entry. This native boundary repair does not rebind the inline-assembly source or
+claim a function verdict. Evidence:
+`.scratch/counter-contract/gold-init-helper-asm.json`,
+`.scratch/counter-contract/gold-init-extent-preview.json`, and
+`.scratch/counter-contract/gold-init-extent-apply.json`.
+
+## 2026-11-02 — VFS finish-files consolidation evidence
+
+Decision owner: project maintainer. Compared the canonical VFS directory
+finalizer with its separate T&L implementation, identified the Gold direct
+call, and recorded the remaining global and call-binding issues in
+`docs/source-layout.md`. The T&L function compares RELOC 436/436; unresolved
+operands and the pending organization review prevent treating that as a
+completed source merge. No VFS definition or server storage was changed.
+
+The canonical VFS finalizer also compares RELOC 436/436 against Gold; native
+pool, case-flag and comparator addresses were recorded in
+`docs/source-layout.md`. This masked result does not resolve their source or
+storage ownership. Evidence: `.scratch/counter-contract/vfs-finish-scratch-gold.json`
+and `.scratch/counter-contract/vfs-finish-native-gold.json`.
+
+## 2026-11-02 — Gold VFS comparator boundaries
+
+Decision owner: project maintainer. Corrected the Gold inventory to separate the
+case-sensitive comparator at `0x0042f5c0` (63 bytes) from the case-insensitive
+comparator at `0x0042f600` (25 bytes). The native directory finalizer passes
+both addresses to qsort; the first ends in a return, the second in a tail jump,
+and NOPs occupy the intervening and following padding. This changes native
+extents only and does not claim source bindings or verdicts. Evidence:
+`.scratch/counter-contract/gold-vfs-comparators-asm.json`,
+`.scratch/counter-contract/gold-vfs-comparators-extent-preview.json`, and
+`.scratch/counter-contract/gold-vfs-comparators-extent-apply.json`.
+
+## 2026-11-02 — canonical VFS comparator comparisons
+
+Decision owner: project maintainer. Verified the canonical VFS case-sensitive
+comparator EXACT 63/63 against both clients and its case-insensitive comparator
+RELOC 25/25 against both. Checked the masked tail-call targets against the
+clients' library identities and the T&L raw link map. No source binding changed;
+the all-target organization review and guarded binding previews are in progress.
+Receipts and the remaining relocation limitation are in `docs/source-layout.md`.
+
+The vector comparison rename's completed scope checks now cover 32
+function/target results: 23 retain RELOC and nine retain their previously
+recorded SIZE_MISMATCH. Remaining scope checks are in progress. Evidence:
+`.scratch/counter-contract/scene-epsilon-pre-status.json` and
+`.scratch/counter-contract/scene-epsilon-scope-*.json`.
+
+## 2026-11-02 — VFS flag declaration cleanup
+
+Decision owner: project maintainer. Removed a repeated, identical `g_6b7fe8`
+extern declaration from `GOLDTL.fcn_0042e520.c`, retaining the declaration
+with both client address anchors. This does not allocate storage or change the
+function body. Cross-target function verification follows.
+
+## 2026-11-02 — Gold VFS comparator source binding
+
+Decision owner: project maintainer. Rebound Gold `0x0042f5c0` to the existing
+canonical `vfs_CompareFiles` definition after its native callback and exact
+63-byte comparison were reviewed. The replacement requires a fresh stored
+verification. Receipts: `.scratch/counter-contract/vfs-comparator-gold-case-locked-preview.json`
+and `.scratch/counter-contract/vfs-comparator-gold-case-rebind-apply.json`.
+
+## 2026-11-02 — scene-view reset caller scope
+
+Decision owner: project maintainer. Completed the 37-file caller run for the
+scene-view reset rename; the transient error in caller 16 was rechecked and
+both clients report RELOC 562/562. The final two T&L size mismatches, callers
+29 and 35, were reproduced with the old symbol spelling at the same native and
+compiled sizes (422/425 and 1772/1708 bytes respectively). Their reported
+mismatch counts differ, so these comparisons establish pre-existing size
+mismatches, not complete object-byte equality. Evidence:
+`.scratch/counter-contract/entity-reset-caller-{16-retry,29,29-before,35,35-before}.json`.
+
+The Gold `vfs_CompareFiles` binding has now earned a fresh EXACT 63/63 result.
+Receipt: `.scratch/counter-contract/vfs-comparator-gold-case-after.json`.
+
+The VFS flag declaration cleanup now verifies RELOC 19/19 in both Gold and
+T&L. Receipt: `.scratch/counter-contract/vfs-flag-dedup-after.json`.
+
+## 2026-11-02 — Gold case-insensitive VFS comparator
+
+Decision owner: project maintainer. Registered the newly admitted Gold native
+entry `0x0042f600` to the existing canonical `vfs_CompareFilesNoCase` source.
+The 25-byte relocation-masked comparison and native `strcmpi` tail-call
+evidence are recorded in `docs/source-layout.md`; a fresh stored verification
+is required. The locked metadata owner API was used because source registration
+would otherwise require inserting a new address comment into the shared TU.
+
+## 2026-11-02 — VFS finalizer client global experiment
+
+Decision owner: project maintainer. Checked a scratch target-conditional VFS
+finalizer against both clients. Both retain RELOC 436/436, and each case-flag
+operand resolves to the native address; the pool and other operands remain
+unresolved. Evidence and the storage limitation are in `docs/source-layout.md`.
+
+Gold `vfs_CompareFilesNoCase` now has a fresh RELOC 25/25 stored result; its
+`_stricmp` operand remains unresolved by the tool. Receipt:
+`.scratch/counter-contract/vfs-comparator-gold-nocase-after.json`.
+
+## 2026-11-02 — client VFS pool scaffold extent
+
+Decision owner: project maintainer. Corrected `g_6b7fe0` in both client
+scaffolds from one byte to four: native VFS initialization writes a full dword
+to T&L `0x006b7fe0` and Gold `0x00633400`. This repairs existing scaffold
+storage, without asserting native placement or ownership. Evidence:
+`.scratch/counter-contract/{tl,gold}-vfs-init-pool-asm.json`. Client rebuilds
+and raw artifact comparison follow.
+
+## 2026-11-02 — client VFS stream pool scaffold extent
+
+Decision owner: project maintainer. Corrected `g_6b7fe4` in both client
+scaffolds from one byte to four: native VFS shutdown reads a full dword from
+T&L `0x006b7fe4` and Gold `0x00633404`. This repairs existing scaffold
+storage without asserting native placement or ownership. Evidence:
+`.scratch/counter-contract/{tl,gold}-vfs-exit-asm.json`. Client rebuilds and
+raw artifact comparison follow.
+
+The rebuilt T&L scaffold object places `g_6b7fe0`, `g_6b7fe4`, and
+`g_6b7fe8` at consecutive offsets `0x175898`, `0x17589c`, and `0x1758a0`.
+This confirms the two corrected pool-head allocations are four bytes each in
+that object; it does not establish their final PE placement. Evidence: COFF
+symbol table of `build-goldtl-audit/CMakeFiles/europa1400gold_tl.dir/stubs/goldtl/symbol_stubs.c.obj`.
+
+A post-correction T&L raw link completed. Its map places `g_6b7fe0`,
+`g_6b7fe4`, and `g_6b7fe8` at `0x0087b340`, `0x0087b344`, and
+`0x0087b348` respectively, preserving their native four-byte spacing but
+not their reference addresses (`0x006b7fe0`, `0x006b7fe4`, `0x006b7fe8`).
+Evidence: `build-goldtl-audit/Europa1400Gold_TL.map` generated 2026-11-02
+00:20 Singapore time. A preserved complete artifact comparison is still pending.
+
+The Gold scaffold rebuilt with `g_6b7fe0`, `g_6b7fe4`, and `g_6b7fe8` at
+COFF offsets `0x541c`, `0x5420`, and `0x5424`, confirming four-byte pool-head
+allocations. The Gold link still fails with 260 unresolved externals, including
+`fcn_0042ee50`; no complete Gold PE comparison is available. Evidence:
+`.scratch/counter-contract/gold-post-vfs-pool-build.log` and the Gold scaffold
+object's COFF symbol table.
+
+The post-pool-correction T&L rebuild succeeded and its preserved raw PE was
+compared with `.scratch/counter-contract/tl-after-camera-helper.exe`. Imports,
+exports and resources agree; code placement and data bytes differ. Other source
+changes occurred between these baselines, so this comparison does not isolate
+the effect of the pool-size repairs. Receipt:
+`.scratch/counter-contract/tl-vfs-pool-compare.json`.
+
+## 2026-11-02 — linked VFS duplicate storage evidence
+
+Decision owner: project maintainer. Recorded the post-correction T&L link-map
+addresses showing that the canonical and address-based VFS pool and flag names
+currently allocate separate client storage. This finding limits the scaffold
+repair and must be resolved before treating the shared finalizer as linked
+correctly. Evidence: `docs/source-layout.md` and the preserved link map
+`.scratch/counter-contract/tl-vfs-pool-alias-map.txt`.
+
+## 2026-11-02 — VFS organization review
+
+Decision owner: project maintainer. Completed the all-target VFS finalizer
+organization review while holding build and metadata locks. It reports two
+foreign-definition problems for the unchanged donor and 109 unknown include,
+parser, or binding contexts. The intended replacement and its remaining
+limitations are recorded in `docs/source-layout.md`; no merge or verdict was
+claimed from this review. Receipt:
+`.scratch/counter-contract/vfs-finish-organize-locked.json`.
+
+The VFS map audit also found separate linked client root and stream-count
+symbols. The stream-open and stream-close sources use opposite naming families,
+so their reconciliation must cover both call paths. Evidence and the pending
+scratch experiment are recorded in `docs/source-layout.md`.
+
+## 2026-11-02 — shared VFS client-global aliases
+
+Decision owner: project maintainer. Unified the five client VFS references in
+the canonical VFS source with their address-based client storage and directed
+the separate T&L stream-open counter to the same storage used by stream-close.
+Server preprocessing retains its canonical globals. Scratch comparisons for
+init and finish remain RELOC 119/119 and 436/436 for both clients; stream-open
+retains its existing size mismatch and comparison count. Some native global
+operands remain unresolved. Receipts: `.scratch/counter-contract/vfs-client-globals-*.json`,
+`.scratch/counter-contract/vfs-open-{before,client-global}.json`, and
+`.scratch/counter-contract/tl-vfs-open-asm.json`. Rebuild and source verification follow.
+
+The server rebuilt successfully after the client-only VFS alias change, and
+its raw DLL is byte-identical to the preserved baseline (SHA-256
+`3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`).
+Evidence: `.scratch/counter-contract/server-{before,after}-vfs-client-globals.dll`
+and `.scratch/counter-contract/server-post-vfs-alias-build.log`.
+
+The post-change T&L `vfs_OpenStream` comparison retains its pre-existing
+SIZE_MISMATCH: 685 compiled bytes versus 704 native bytes, with 143 matching
+bytes in both the scratch baseline and post-change check. Receipt:
+`.scratch/counter-contract/vfs-open-client-global-after.json`.
+
+The T&L post-alias build succeeded. Its VFS and stream-open COFF objects now
+reference the address-based client globals, and a scan of T&L build objects
+found no undefined references to the five legacy canonical scaffold symbols.
+The raw PE comparison retains matching imports, exports, and resources but
+shows code-placement and data differences; intervening concurrent changes mean
+those differences are not attributable solely to this edit. Evidence:
+`.scratch/counter-contract/tl-vfs-legacy-undefined.txt` and
+`.scratch/counter-contract/tl-vfs-client-globals-compare.json`.
+
+## 2026-11-02 GoldTL 0x005b6300: chkstk frame and epilogue matched
+
+`fcn_005b6300` compiled with a 0x1a58 chkstk allocation (three spill slots) and
+ended with `return 0`, while the native body allocates 0x1a4c and tail-calls
+0x532ef0 after `add esp,0x1a60`. The spill came from keeping `row` and `book`
+as standalone locals plus a pointer temp for the row walk; the native code
+reloads `f.row`/`f.book` and parks that temp in the dead `f.v10` slot, and uses
+`f.v2c` as the two-pass dispatch-loop counter.
+
+Edits: drop the `row` and `book` locals (use the frame fields), move the first
+`*a1` read above the frame initialisers, walk the hover rows through `f.v10`,
+turn the dispatch outer loop into `do { } while (--f.v2c)`, and end with
+`return fcn_00532ef0()`.
+
+Evidence: `objdump -d` on the rebuilt object shows `mov eax,0x1a4c` before the
+chkstk call and the `add esp,0x1a60` / `jmp` tail. `rebrew test --va 0x005b6300
+--size 5499 --no-promote` reports SIZE_MISMATCH with 490 matching bytes (was
+408) and a 5351-byte object. Backups and receipts under `.scratch/b6300/`.
+Decision: reconstruction session. Verified: compile plus byte comparison.
+
+## 2026-11-02 — remove duplicate client VFS storage
+
+Decision owner: project maintainer. Removed five duplicate VFS pool, flag, root,
+and count allocations from each client scaffold after client VFS references were
+redirected to the existing address-based globals. T&L linked successfully and
+undefined-symbol scans of both client object sets found no users of the five
+removed names. Server-owned storage is unchanged. Evidence:
+`.scratch/counter-contract/{tl,gold}-vfs-legacy-undefined.txt` and the client
+build logs. Rebuilds and artifact checks follow.
+
+## 2026-11-02 — VFS mount caller comparison
+
+Decision owner: project maintainer. Checked the VFS mount caller with its old
+and canonical finalizer names against both clients. Both versions compare
+RELOC 1101/1101. The canonical direct-call operand is unresolved until the
+finalizer is bound; the native Gold edge and validated old T&L edge are
+recorded in `docs/source-layout.md`. No caller was changed by this experiment.
+
+## 2026-11-02 — vector comparison rename scope results
+
+Decision owner: project maintainer. The 57-file post-rename source scope has
+completed, with 76 function/target results and no command errors. Seventy-four
+retain their prior recorded status. T&L `0x00455540` and `0x00455610` changed
+from previously stored EXACT to RELOC 194/194 and 230/230 respectively; their
+current direct-call relocation bindings validate. The prior snapshot records
+status but not enough evidence to establish why the earlier EXACT changed, so
+the difference remains a review item and is not represented as byte-identical.
+Evidence: `.scratch/counter-contract/scene-epsilon-pre-status.json` and
+`.scratch/counter-contract/scene-epsilon-scope-{37,38}.json`.
+
+The repository baseline records the earlier EXACT verdicts for T&L
+`0x00455540` and `0x00455610` as linked EXACT against raw image SHA-256
+`84ed33e0936df631fcaac883d69f50c4363519992e9413a651837d1de0ed30a7`.
+Their current source hashes match that baseline, while recorded header and
+compiler hashes differ; the new object checks correctly record RELOC. This
+explains the evidence behind the earlier status without asserting that the
+current raw link places or matches those functions. Evidence: the HEAD
+`rebrew-functions.toml` verification records and the post-change scope results.
+
+The post-removal T&L link succeeded. Its map contains the five address-based
+VFS globals and no separately allocated canonical-name duplicates. Another
+active build removed the raw executable before it could be copied, so the
+complete artifact comparison is pending a retry. Evidence:
+`.scratch/counter-contract/tl-vfs-dedup-map.txt` and
+`.scratch/counter-contract/tl-post-vfs-dedup-build.log`.
+
+The post-dedup Gold build compiled and reached the linker, which still reports
+260 unresolved externals. None of the five removed VFS scaffold names appears
+among them. A complete Gold PE comparison remains unavailable. Receipt:
+`.scratch/counter-contract/gold-post-vfs-dedup-build.log`.
+
+## 2026-11-02 — Gold VFS finalizer source binding
+
+Decision owner: project maintainer. Rebound Gold `0x0042f620` to the canonical
+`vfs_FinishFiles` definition after review of the native caller and 436-byte
+relocation-masked comparison. The previous retired history is preserved. The
+mount caller still needs its old placeholder changed and the new binding must
+earn a fresh verdict. Receipts: `.scratch/counter-contract/gold-vfs-finish-rebind-{preview,apply}.json`.
+
+Gold `vfs_FinishFiles` now verifies RELOC 436/436, including its recursive
+call operand. A scratch Gold mount caller using the canonical name verifies
+RELOC 1101/1101 and its direct call is VALIDATED. Receipts:
+`.scratch/counter-contract/gold-vfs-finish-after.json` and
+`.scratch/counter-contract/vfs-mount-canonical-gold-bound.json`.
+
+The post-alias all-target VFS source test completed with three server RELOC
+results, three T&L RELOC results, one T&L SIZE_MISMATCH (`vfs_AddFile`), and
+Gold one EXACT plus four RELOC results. The T&L `vfs_AddFile` size mismatch was
+already recorded at HEAD. The server raw DLL comparison remains byte-identical.
+Receipt: `.scratch/counter-contract/vfs-client-globals-source-after.json`.
+
+## 2026-11-02 — dialog frame, text loader and message-loop tail
+
+- `0x5B6300` 43 -> 490/5351: frame recovered to 0x1a4c by dropping the `row` local,
+  reusing the dead `f.v10` slot for a walk pointer, turning a dispatch loop into
+  `do { } while (--f.v2c)`, splitting `book` so its spill disappears, and returning
+  `fcn_00532ef0()` as a tail call (native `add esp,0x1a60 / jmp`). Callees reached by
+  the new message loop got placeholders in `stubs/goldtl/link_scaffold.c`.
+- `0x51C840` rebuilt from the candidate body: the done block with `strlen` guard and
+  `strcat` is back, `fcn_0064d530(buf, p, 0x17c0)` replaces an inlined copy, and the
+  prologue initialiser order matches. Instruction identity 53.9% -> 57.2% aligned,
+  75.2% as a multiset, against a score that masked switch-table bytes inflate.
+- `0x42BF20` txt_OpenText 1317 -> 1420: ten per-site fail epilogues inlined with only
+  the shared free tail kept, and `int v30` added for the one read at 0x42d2d0.
+- `0x4DCF50` 1645 -> 1646: the 0x170 of apparent slack is one `char buf[0x1f0]`
+  ending exactly at the 0x760 frame, so no statements exist for the split region.
+
+Pads retuned over six passes (the 0x5B6300 growth required several); final rebuild
+2,977,792 bytes, raw 268,097, informative 129,480, no compile or link errors.
+
+Decision: continuing. No GA was run.

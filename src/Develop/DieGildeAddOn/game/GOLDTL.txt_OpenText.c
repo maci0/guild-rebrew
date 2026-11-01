@@ -74,6 +74,7 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 	int v40;
 	int v44;
 	int v48;
+	int v30;
 	int starts[10];
 	char line[0xc8];
 	char msg[0x100];
@@ -222,7 +223,9 @@ pass1_done:
 		if (fp == 0) {
 			fcn_0064d41a(msg, "Could not open TextFile: '%s' !", line);
 			MessageBoxA((HWND) 0, msg, "Error", 0x30);
-			goto fail_free;
+			m_FreeTracked(g_6b7fa0);
+			g_6b7fa0 = 0;
+			return 0;
 		}
 		v24 = 0;
 		for (;;) {
@@ -297,14 +300,18 @@ pass1_done:
 						k = (int) strlen(msg);
 						if (strlen(&g_6b7fa0[g_6b7f98 * 0x1000]) + k > 0xfff) {
 							fcn_0064d41a(msg, "String too long in file %s in line %i", inc[v2c], v24);
-							goto fail_free;
+							m_FreeTracked(g_6b7fa0);
+							g_6b7fa0 = 0;
+							return 0;
 						}
 						strncat(&g_6b7fa0[g_6b7f98 * 0x1000], msg, k);
 					}
 					else {
 						if (strlen(&g_6b7fa0[g_6b7f98 * 0x1000]) + k > 0xfff) {
 							fcn_0064d41a(msg, "String too long in file %s in line %i", inc[v2c], v24);
-							goto fail_free;
+							m_FreeTracked(g_6b7fa0);
+							g_6b7fa0 = 0;
+							return 0;
 						}
 						strncat(&g_6b7fa0[g_6b7f98 * 0x1000], line + v10, k);
 						v10 += k;
@@ -326,8 +333,10 @@ pass1_done:
 							msg[0] = '|';
 							strcpy(msg + 1, line + v10);
 							if (strlen(&g_6b7fa0[g_6b7f98 * 0x4800000]) + strlen(msg) > 0xfff) {
-								fcn_0064d41a(msg, "String too long in file %s in line %i", inc[v2c], v24);
-								goto fail_free;
+								fcn_0064d41a(msg, "String too long in file %s in line %i", inc[v30], v24);
+								m_FreeTracked(g_6b7fa0);
+								g_6b7fa0 = 0;
+								return 0;
 							}
 							strncat(&g_6b7fa0[g_6b7f98 * 0x1000], msg, strlen(msg));
 							g_6b7fa4 += (int) strlen(msg);
@@ -367,7 +376,10 @@ pass1_done:
 					g_6b7f98 = g_6b7f98 + 1;
 					if (g_6b7f98 > 0x4800) {
 						MessageBoxA((HWND) 0, "Zuviele Textenums!", "txt_OpenText", 0x30);
-						goto fail_free;
+						m_FreeTracked(g_6b7fa0);
+						g_6b7fa0 = 0;
+						fcn_0064e1fd(fp);
+						return 0;
 					}
 					v44 = 0;
 					v14++;
@@ -376,7 +388,10 @@ pass1_done:
 					if (v44 != 0) {
 						fcn_0064d41a(msg, "Syntax error in file %s in line %i: missing ';'", line, v24);
 						MessageBoxA((HWND) 0, msg, "txt_OpenText", 0x30);
-						goto fail_close;
+						m_FreeTracked(g_6b7fa0);
+						g_6b7fa0 = 0;
+						fcn_0064e1fd(fp);
+						return 0;
 					}
 					g_14b7320[v18] = g_6b7f98;
 					v3c = v10;
@@ -417,7 +432,10 @@ pass1_done:
 						if (v18 > 0x4800) {
 							fcn_0064d41a(msg, "Zuviele Label! Zeile:%i", v24);
 							MessageBoxA((HWND) 0, msg, "txt_OpenText", 0x30);
-							goto fail_close;
+							m_FreeTracked(g_6b7fa0);
+							g_6b7fa0 = 0;
+							fcn_0064e1fd(fp);
+							return 0;
 						}
 						v14 = v14 + (v3c - v10) - 2;
 					}
@@ -476,7 +494,9 @@ pass1_done:
 		fp = (FILE*) fcn_0064e2f9(line, "wb");
 		if (fp == 0) {
 			MessageBoxA((HWND) 0, "Could not write ResourceFile!", "txt_OpenText", 0x30);
-			goto fail_free;
+			m_FreeTracked(g_6b7fa0);
+			g_6b7fa0 = 0;
+			return 0;
 		}
 		fcn_0064e48f(fp, 0, 0);
 		v10 = g_6b7f98 - v40;

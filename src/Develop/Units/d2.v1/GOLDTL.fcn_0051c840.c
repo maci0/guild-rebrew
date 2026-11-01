@@ -93,9 +93,9 @@ int __cdecl fcn_0051c840(int id)
 	int j;
 
 	st.w54 = 0;
-	memset(st.dt, 0, 0xc);
 	memcpy(st.tmpl, g_6a239c, 10);
 	memset(st.z42, 0, 6);
+	memset(st.dt, 0, 0xc);
 	state = 0;
 	flag = 0;
 	*(int*) (num + 0xc) = 0;
@@ -119,7 +119,7 @@ int __cdecl fcn_0051c840(int id)
 		if (strlen(p) > 0x17c0) {
 			return -1;
 		}
-		memcpy(buf, p, 0x17c0);
+		fcn_0064d530(buf, p, 0x17c0);
 	} else {
 		strcpy(buf, (char*) id);
 	}
@@ -136,8 +136,7 @@ int __cdecl fcn_0051c840(int id)
 			}
 			continue;
 		}
-		r = buf[i + 1] - '0';
-		i++;
+		r = buf[++i] - '0';
 		if (r >= 0 && r <= 9) {
 			i++;
 		} else {
@@ -629,6 +628,11 @@ int __cdecl fcn_0051c840(int id)
 		}
 	}
 done:
+	p = *(char**) ((char*) (g_772514 * 0x3cc) + 0x1015f7c);
+	if (strlen(p) + strlen(buf) > 0x17cf) {
+		return -1;
+	}
+	strcat(p, buf);
 	*(int*) ((char*) (g_772514 * 0x3cc) + 0x10161b8) = 2;
 	return 0;
 }

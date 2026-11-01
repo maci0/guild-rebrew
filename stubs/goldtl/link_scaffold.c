@@ -399,3 +399,10 @@ void __cdecl fcn_005eaaf0(void) { }
 
 /* Placeholder for the 13-byte setter at 0x4225E0 (sets bit 0x10 at [obj+0x14]). */
 int __cdecl fcn_004225e0(void* obj) { return 0; }
+
+/* Placeholders for callees reached by the dialog message loop at 0x5B6300. */
+int __cdecl fcn_004693b0(void* a0, int a1) { return 0; }
+int __cdecl fcn_004727a0(void* a0) { return 0; }
+int __cdecl fcn_00473a90(void* a0, int a1) { return 0; }
+int __cdecl fcn_0051af00(char* a0, int a1) { return 0; }
+int __cdecl fcn_005462a0(void* a0) { return 0; }
