@@ -395,27 +395,26 @@ fmt:
 		text_index += 2;
 		continue;
 	case 'H':
-		v28 = 1;
-		ap += 8;
-		v24 = (int)*(double*)(ap - 8);
-		if (digit == -1) {
-			fcn_0064d41a(S.work, (char*)0x67d444, v24);
-			goto join;
+		if (digit != -1) {
+			ap += 4;
+			fcn_0064d41a(sbuf, (char*)0x6a2354, digit);
+			v24 = *(int*)(ap - 4);
+			fcn_0064d41a(S.work, sbuf, v24);
+			memmove(S.text + text_index + strlen(S.work) - 3,
+				S.text + text_index,
+				strlen(S.text) - text_index + 1);
+			memcpy(S.text + text_index - 2, S.work,
+				strlen(S.work));
+			continue;
 		}
-		*(short*)sbuf = *(short*)0x6a238c;
-		sbuf[2] = *(char*)0x6a238e;
-		fcn_00657a73(digit, nbuf, 10);
-		strcat(sbuf, nbuf);
-		*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6790c4;
-		fcn_0064d41a(sbuf, sbuf, v24);
-		*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6a2350;
-		fcn_0064d41a(S.work + 4, sbuf, *(double*)(ap - 8));
+		v24 = *(int*)ap;
+		ap += 4;
+		fcn_0064d41a(S.work, (char*)0x67d444, v24);
 	join:
-		v08 = (int)strlen(S.work);
-		v18 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + text_index + 1, S.text + text_index + 2, v18);
-		memcpy(S.text + text_index, S.work, v08 + 1);
-		text_index += v08;
+		memmove(S.text + text_index + strlen(S.work) - 1,
+			S.text + text_index + 1,
+			strlen(S.text) - text_index + 1);
+		memcpy(S.text + text_index - 1, S.work, strlen(S.work));
 		continue;
 	case 'e':
 		v04 = (signed char)S.text[text_index + 1] - 0x30;
@@ -606,24 +605,16 @@ fmt:
 	case '`':
 		v28 = 0x14;
 		if (S.text[text_index - 1] != 0x25) {
-			v24 = *(int*)ap;
-			ap += 4;
-			fcn_0064d41a(S.work, (char*)0x67d444, v24);
-			v08 = (int)strlen(S.work) - 2;
-			v18 = (int)strlen(S.text) - text_index;
-			memcpy(S.text + text_index + 1, S.text + text_index + 1, v18);
-			memcpy(S.text + text_index, S.work, v08);
-			text_index += v08;
-			continue;
+			fcn_0064d41a(S.work, (char*)0x6a2348, v28);
+			goto join;
 		}
 		v24 = *(int*)ap;
 		ap += 4;
 		fcn_0064d41a(S.work, (char*)0x699a68, v24);
-		v08 = (int)strlen(S.work) - 2;
-		v18 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + text_index + 2, S.text + text_index + 1, v18);
-		memcpy(S.text + text_index, S.work, v08);
-		text_index += v08;
+		memmove(S.text + text_index + strlen(S.work) - 1,
+			S.text + text_index + 1,
+			strlen(S.text) - text_index + 1);
+		memcpy(S.text + text_index - 1, S.work, strlen(S.work));
 		continue;
 	case 'q':
 		if (directive != 'r') {

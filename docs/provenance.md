@@ -14194,3 +14194,177 @@ Pads retuned (two pads, shift 0xF40). Rebuild 2,981,888 bytes, raw 266,730,
 informative 129,014, no compile or link errors.
 
 Decision: continuing. No GA was run.
+
+Gold `fcn_0045db30` remains RELOC 177/177 after the call change; its `_strupr`
+operand remains unresolved by the comparator. Receipt:
+`.scratch/counter-contract/gold-strupr-45db30-after.json`.
+
+## 2026-11-02 — GOLDTL 0x005ba910 packet builder and entity-slot init
+
+Decision owner: reconstruction session for row 0x005ba910. Source:
+`src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005ba910.c`.
+
+Change: transcribed the native body after the init block, in native order,
+0x5bab17 through 0x5baf75. The `0x77531c` clear moved to its native place, the
+`0x868050 + idx + idx*0x24c` row pointer and the four packet-builder arms
+(`fcn_00502cd0` rows 0xff/0x2a/0x116/0x1db/0x1dc) replaced the placeholder, the
+`*(unsigned short*)packet` header word now indexes `0x99ec10` into the 0x41-byte
+record table, the 16-slot 0xf0-stride slot clear is written out, and the
+`fcn_0057e880`/`fcn_00470820`/`fcn_00471b60`/`d2_SetForm` window open plus the
+`fcn_00533a60` row-id layout and the a2/0x774970 selection arms are in place.
+
+Frame facts recovered with a CFG-aware push-depth propagation (no conflicting
+depths over all 3413 instructions): the frame base is the post-`__chkstk` esp,
+arg1/arg2 at 0x184c/0x1850, the 16 entity slots are 0xf0 apart starting at 0x6d8
+(the 0xe28 extent at 0x7b0 is slot 0 + 0xd8, not a separate local), and the two
+0x100 objects at 0x15d8/0x16d8 abut the slot array. The frame struct was recut
+to that layout (`Ent5ba910` slots replace the former 0xe28 blob). Native stores
+`a2 & 1` once per outer arm and tests the memory slot again later; writing it as
+`f.v70 = a2 & 1` keeps MSVC from spilling a fourth value, which is what pins the
+struct to frame offset 0.
+
+Verification: `.venv/bin/rebrew test
+src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005ba910.c --va 0x005BA910 --size
+11948 --no-promote --json` reports SIZE_MISMATCH with match_count 120 of 11948
+(previous 71), object size 1533 (previous 520), and the frame immediate back to
+0x1848 with zero struct displacement. The first divergence is offset 11: native
+loads arg1 into esi and keeps ebp as the zero register, this build loads arg2
+into esi and keeps ebx as zero. That assignment is a whole-body decision.
+
+Gap: the body is transcribed to 0x5baf75 of 0x5bd7bb. The remaining region
+floats, `io_AppendText` id blocks and the SEH arm stay out.
+
+## 2026-11-02 — remove retired uppercase scaffolds
+
+Decision owner: project maintainer. Removed the two unused address-name
+`_strupr` macros and the Gold/T&L `fcn_0066080a` no-op scaffold definitions
+after native callers were redirected to SDK `_strupr`. A source search found
+no remaining references. The T&L pre-change raw image is preserved at
+`.scratch/counter-contract/tl-before-strupr-scaffold-removal.exe`; affected
+client builds and link checks follow. The Gold build has existing unresolved
+symbols, so a complete Gold image may remain unavailable.
+
+T&L rebuilt successfully after scaffold removal. Imports, exports and resources
+match the preserved pre-removal PE; text placement and some data bytes differ,
+and concurrent source changes mean the comparison is not isolated to this
+edit. Its import and export tables also match the native reference. The raw
+map selects `LIBCMT:strupr.obj` for `_strupr` and contains no
+`_fcn_0066080a`. Evidence: `.scratch/counter-contract/tl-strupr-scaffold-compare.json`,
+`tl-strupr-reference-compare.json`, and `build-goldtl-audit/Europa1400Gold_TL.map`.
+Gold build is still running.
+
+The Gold rebuild compiled the changed inputs but failed at link with 257
+existing unresolved external names, none for `_strupr` or
+`fcn_0066080a`. A complete Gold PE and import comparison therefore remain
+unavailable. The earlier link reported 258 names; other source changes occurred
+between builds, so the difference is not attributed to this removal. Evidence:
+`.scratch/counter-contract/gold-post-strupr-scaffold-build.log`.
+
+## 2026-11-02 — share CRT substring search in image helpers
+
+Decision owner: project maintainer. Replaced address-named substring searches
+in Gold `GOLD.fcn_0045db30.c` and T&L `GOLDTL.fcn_0045a2e0.c` with SDK
+`strstr`. Native calls target `0x005de800` and `0x0064d470`, respectively;
+each uniquely matches the pinned Gold LIBC or T&L LIBCMT `strstr.obj`.
+The library matcher reports callee resolution unresolved, and no provider is
+inferred from the object match alone. Both source baselines were RELOC 177/177;
+post-change verification follows. Evidence: `.scratch/counter-contract/`
+`{gold-strstr-library,tl-strstr-library,gold-strupr-45db30-native,tl-strstr-45a2e0-native}.json`.
+
+Both image helpers remain RELOC 177/177 after replacing the substring call;
+the comparator reports `_strstr` operands unresolved in both. Receipts:
+`.scratch/counter-contract/{tl-strstr-45a2e0-after,gold-strstr-45db30-after}.json`.
+
+## 2026-11-02 — review shared client image-name lookup
+
+Decision owner: project maintainer. Compared a conditional shared body for Gold
+`0x0045db30` and T&L `0x0045a2e0`; both match 177/177 after relocation masking,
+with Gold data operands validated and T&L data operands unresolved. The
+all-target organization review flags cross-target definitions and unresolved
+SDK include contexts, and Gold has no complete raw-link baseline. Recorded
+the candidate and its limits in `docs/source-layout.md`; no source binding or
+production implementation changed. Evidence:
+`.scratch/counter-contract/shared-image-helper-{gold,tl,organize}.json`.
+
+The post-uppercase-cleanup all-target lint completed with zero errors; it
+reported 8 server, 14 T&L, and 10 Gold warnings. Receipt:
+`.scratch/counter-contract/strupr-cleanup-lint.json`.
+
+## 2026-11-02 — T&L image-helper data identities
+
+Decision owner: project maintainer. Recorded three inferred T&L native data
+identities: the 135-byte `g_662dc8` name table in `.rdata`, the 32-byte
+`g_6b89c4` cache, and the four-byte `g_6b89e8` pointer in the zero-filled
+`.data` tail. Native indexed bounds and direct references establish the
+accessed extents; no original source owner or verification verdict is claimed.
+The existing scaffold's table is zero-filled whereas the native table is
+initialized; that storage discrepancy remains unresolved. Guarded metadata
+receipts: `.scratch/counter-contract/image-helper-tl-data-{preview,apply}.json`;
+reference xrefs: `image-helper-tl-{cache,ptr,names}-xrefs.json`. Gold contains
+the same table bytes in `.data`. Comparison after annotation follows.
+
+After recording the T&L identities, the conditional image helper remains RELOC
+177/177 and all three data symbols validate, including indexed addends. CRT
+call operands remain unresolved by the comparator. Receipt:
+`.scratch/counter-contract/shared-image-helper-tl-data-bound.json`.
+
+## 2026-11-02 — image name-table ownership review
+
+Decision owner: project maintainer. Compared the complete 15-by-9 name table
+in both reference binaries: contents agree, but Gold places it in `.data`
+and T&L in `.rdata`. The zero-filled build definitions live in generated
+scaffolds; the two image helpers are their only source users, and bounded T&L
+source-path evidence did not establish an owning TU. Recorded the missing
+storage and placement evidence in `docs/source-layout.md`; no generated
+scaffold or inferred owner was changed. T&L lint after registering the data
+identities reports zero errors and 14 warnings. Evidence:
+`.scratch/counter-contract/image-helper-tl-{names-xrefs,units,data-lint}.json`.
+The complete per-slot reference bytes and their matching SHA-256 are recorded
+in `.scratch/counter-contract/image-name-table-native.json`.
+
+## 2026-11-02 — image-helper caller contract review
+
+Decision owner: project maintainer. Native xrefs identify one calling function
+in each client, with two calls apiece and no diagnostic path in either caller
+dossier. The reconstructed T&L caller's `(char *, int, int)` declaration and
+calls conflict with the callee's native third-argument image-pointer access
+and `(int, int, int *)` source contract. Its body is currently SIZE_MISMATCH;
+no argument order or inferred TU was guessed. Recorded the discrepancy in
+`docs/source-layout.md`. Evidence:
+`.scratch/counter-contract/image-helper-{tl,gold}-callers.json`,
+`image-helper-{tl,gold}-caller-dossier.json`, and
+`image-helper-tl-caller-asm.json`.
+
+## 2026-11-02 — image-helper native argument order
+
+Decision owner: project maintainer. Traced both T&L call sites: the native
+callee receives the image pointer as its third argument, with coordinate loop
+registers as the first two. A scratch source using that order retains the
+caller's existing SIZE_MISMATCH (1,304 versus 1,388 bytes, 25 reported matches).
+The incomplete caller and cross-target contract review remain open; no
+production declaration or call was changed. Evidence:
+`.scratch/counter-contract/image-helper-tl-caller-asm.json` and
+`image-caller-{baseline,contract-candidate}.json`.
+
+## 2026-11-02 — panel growth and append-text blocks
+
+- `0x5BA910` 120 -> 189/2241 with the frame still exactly 0x1848 and no prefix
+  regression: status-line message ids, the fcn_00533f40 call chain, the
+  io_AppendText strings and the d2_SetForm/overlay sequence are transcribed, plus
+  the 0x261/0xd2 widget handles. A 9-branch compare ladder would need one extra
+  local and push the frame to 0x184c, so that site uses a switch with the native
+  order until more of the body widens the live range.
+- `0x519190` 586 -> 631/7402: H replaced with its native shape (no double/__ftol),
+  the backtick block routed through the shared join. Per-block deltas measured:
+  h -156, F -88, l -32, H -14, with nine blocks oversized; the h digit path divides
+  unsigned in native ((len-2)/3) where our transcription uses signed (len-1)/3, a
+  real semantic bug still to fix.
+- `0x4DA690` 420 -> 428/2882: the scene handle setup, row scan, per-entity packet
+  loops and the 0x51af00 buffer path transcribed on top of the exact 0x9b prefix.
+- `0x46C5A0` 944 -> 952/6008 by moving colon_run inside the '[' case and having ']'
+  store its u16 then jump back.
+
+Pads retuned (one pad, shift -0x60). Rebuild 2,981,888 bytes, raw 266,153,
+informative 128,902, no compile or link errors.
+
+Decision: continuing. No GA was run.

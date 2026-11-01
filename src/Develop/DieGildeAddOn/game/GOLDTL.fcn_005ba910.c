@@ -10,6 +10,15 @@ int __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl fcn_00472170(int, int);
 float __cdecl fcn_0050bbb0(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
+int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
+void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl fcn_00533f40(int, int, int, int);
+void __cdecl io_AppendText(int, ...);
+void __cdecl fcn_00594340(void);
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl fcn_0046f740(int, int, int, int);
+void __cdecl fcn_005c5da0(int, int, int, int, int);
+void __cdecl fcn_00525ef0(void);
 
 /* One 0xf0-byte inventory entity slot. Only the eight bytes at +0x0c..+0x18
    and the two three-int arrays at +0xd8 are written by the native body so far;
@@ -278,10 +287,10 @@ l_after:
 		fcn_00533a60(*(int*) 0x772514, 0, &f.v138, 4,
 			*(int*) 0x14a566c, *(int*) 0x14a5668,
 			*(int*) 0x14a5664, *(int*) 0x14a5670);
-		f.v6c = f.v13C;
-		f.v58 = f.v140;
+		f.v6c = f.v140;
+		f.v58 = f.v144;
 		f.v34 = *(unsigned char*) 0x773d75;
-		f.v54 = f.v138;
+		f.v54 = f.v13C;
 	} else {
 		/* 0x5bad6d: one row id, then the entity's own selection field */
 		fcn_00533a60(*(int*) 0x772514, 0, &f.v138, 1, *(int*) 0x14a566c);
@@ -306,6 +315,7 @@ l_after:
 	} else {
 		if (*(char*) f.v74 == 0xa) {
 			f.v58 = 1;
+			/* /O2 colours stack slots: this slot held a1 at 0x5ba95f */
 			f.v7c = (int) gm_StartFilteredEntitySearch(1, 0, 0x44);
 			f.v40 = 1;
 			f.v50 = fcn_0050bbb0(*(unsigned short*) 0x774970);
@@ -324,6 +334,85 @@ l_after:
 
 	d2_SetForm(f.v2c, 0);
 
-	*(volatile char*) &f = 0;
-	return f.vA0;
+	/* 0x5baec2: status-line message id for the current container state */
+	if (*(int*) 0x7746c4 == 0 && *(int*) 0x7746c8 == 0) {
+		fcn_00533dc0(*(int*) 0x772514, 0x70b, 0x73f);
+	} else {
+		int msg;
+
+		/* The native chain tests al in case order. Written here as an
+		   else-if ladder it needs one more 4-byte local, which moves the
+		   0x1848 frame; the switch keeps the frame until the rest of the
+		   body is present. */
+		switch (*(unsigned char*) f.v74) {
+		case 0x13:
+		case 4:
+		case 0x10:
+			msg = 0x72f;
+			break;
+		case 8:
+		case 0xe:
+			msg = 0x70f;
+			break;
+		case 6:
+			msg = 0x713;
+			break;
+		case 0x16:
+			msg = 0x717;
+			break;
+		case 0xd:
+		case 0xc:
+		case 0xb:
+			msg = 0x71b;
+			break;
+		case 2:
+		case 7:
+			msg = 0x737;
+			break;
+		default:
+			msg = 0x70b;
+			break;
+		}
+		if (f.v3c != 0) {
+			fcn_00533dc0(*(int*) 0x772514, msg, 0x741);
+		} else {
+			fcn_00533dc0(*(int*) 0x772514, msg, 0x73f);
+		}
+	}
+
+	/* 0x5baf75: the item rectangle and its definition-table entry */
+	fcn_00533f40(0x270, 0x15c, *(int*) 0x772514,
+	             fcn_00472830(f.v2c, 2, 0x5e2, &f.v130, &f.v134, &f.vB4));
+	*(int*) (*(int*) 0x1015ea0 + f.vB4 * 0x2f4 + 0x84) = 0x54;
+	d2_SetForm(f.v2c, 3);
+
+	if (a2 == 2) {
+		io_AppendText(0xd0, (char*) (0x868060 + *(int*) (f.v14 + 0x65) * 0x2f4));
+	} else if (a2 == 4) {
+		io_AppendText(0xcf, (char*) (0x868060 + *(int*) (f.v14 + 0x65) * 0x2f4));
+	} else if (*(int*) 0x7746cc != 0 && *(int*) 0x7746c4 == 0
+	           && *(int*) 0x7746c8 == 0) {
+		io_AppendText(0x9a8 + *(unsigned short*) 0x7746cc * 2);
+	} else {
+		io_AppendText(f.v3c != 0 ? 0xcd : 0xcc);
+	}
+
+	d2_SetForm(f.v2c, 2);
+	fcn_00594340();
+	d2_SetOverlayAnimation(0, 0);
+	d2_SetForm(f.v2c, 0);
+
+	/* 0x5bb0ab: the two scroll-bar rows and the item table entry */
+	fcn_005c5da0(*(int*) 0x772514, 0x172, 0x64,
+	             *(unsigned short*) 0x774970, 0x1f3c);
+	d2_SetForm(f.v2c, 0);
+	f.v78 = fcn_0046f740(0x261, 0xd2, 0x528, *(int*) 0x772514);
+	*(int*) (*(int*) 0x1015ea0 + f.v78 * 0x2f4 + 0x1d0) = 3;
+	*(int*) (*(int*) 0x1015ea0 + f.v78 * 0x2f4 + 0x58) = 1;
+	f.vB0 = fcn_0046f740(0x261, 0x104, 0x527, *(int*) 0x772514);
+	f.v9c = f.vB0 * 0x2f4;
+	*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x1d0) = 3;
+	fcn_00525ef0();
+	f.vA8 = f.vA0 * 0x2f4;
+	f.vAC = f.v2c * 0xaf;
 }
