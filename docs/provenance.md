@@ -14950,3 +14950,148 @@ selected-update generator's focused suite passed 81 tests.
 Rebuild 3,047,424 bytes, raw 290,843, informative 154,558, no compile or link errors.
 
 Decision: continuing. No GA was run.
+
+## 2026-11-02 — reconcile client image-helper contract
+
+Decision owner: project maintainer. Added inferred declaration-only
+`Unassigned/image_lookup.h` for the T&L image helper's reviewed signature.
+The helper dereferences its third argument as the image; both native caller
+sites push that pointer first under cdecl, followed by the coordinates. The
+caller reconstruction is incomplete, so its loops and overall byte match are
+not established by the argument evidence. The source contract and callers are
+being reconciled and rechecked. Evidence: `.scratch/counter-contract/image-helper-tl-caller-asm.json`
+and `image-caller-current-baseline.json`.
+
+The attempted image-helper reconciliation was refused because source/include
+contexts remain incomplete. Removed the provisional header; no image-helper
+production signature or caller was changed.
+
+## 2026-11-02 — reconcile client player-index declarations
+
+Decision owner: project maintainer. Added inferred declaration-only
+`game/game_player.h` and used it for the shared Gold/T&L index reader and a
+T&L caller. Removed the former's duplicate extern and corrected the latter's
+32-bit declaration to the native unsigned 16-bit width. T&L `0x0059d77e`
+loads the word after clearing the high register bits; the corresponding data
+metadata records `unsigned short` for both clients. This header does not claim
+native storage ownership. Evidence: `.scratch/counter-contract/g774970-d6b0-native.json`
+and the `player-index-*-before.json` baselines; verification follows.
+
+The Gold/T&L shared reader remains RELOC 50/50 in both targets. The corrected
+T&L caller remains SIZE_MISMATCH: 636 compiled versus 759 native bytes, with
+41 reported matches versus 55 before the width correction. Its native word
+loads and zero extension establish the declaration despite the incomplete
+body. Focused all-target lint reported no errors. Receipts:
+`player-index-{gold,caller}-{before,after}.json` and `player-index-lint.json`.
+A separate T&L function at `0x00541620` reads a dword at the same address;
+that wider view has not been folded into the 16-bit declaration. Evidence:
+`player-00541620-native.json`.
+
+Extended the reviewed 16-bit declaration to four more T&L callers whose native
+code reads the same word and uses it as an unsigned index. Removed an unused
+incorrect extern from a fifth incomplete reconstruction. Each file's previous
+comparison is recorded in `.scratch/counter-contract/player-batch-*-before.json`;
+native instruction receipts are `player-005{c5310,2fde0,9b260,a59d0,ca740}-native.json`.
+The distinct dword view remains untouched. Post-change comparisons follow.
+
+All five additional T&L comparisons remain SIZE_MISMATCH; their before/after
+reported matching bytes are respectively 150/150, 134/119, 353/349, 232/214,
+and 439/443. The unused-extern removal preserves its compiled size and match
+count. Focused all-target lint reports no errors. Receipts:
+`player-batch-*-{before,after}.json` and `player-batch-lint.json` under
+`.scratch/counter-contract/`. Gold's full link still reports 256 unresolved
+externals; the T&L rebuild is being checked.
+
+The T&L rebuild succeeded; its imports and exports still match the reference,
+but the complete image does not. Receipts: `player-tl-build.log` and
+`player-tl-whole.json`. Gold's failed link is recorded in
+`player-gold-build.log`; no complete Gold PE was available for comparison.
+
+## 2026-11-02 — consolidate client player-index declarations
+
+Decision owner: project maintainer. Replaced identical `unsigned short`
+`g_774970` externs in 225 client-only source files with the shared
+`game/game_player.h` declaration, at the same source location. The one source
+also bound to server.dll and one unbound source were left for separate review;
+the evidenced 32-bit view remains separate. No storage was defined or moved.
+The released Rebrew batch verification API measured 236 T&L and 96 Gold bound
+function contexts before the edit; file hashes, selected paths and reports are
+under `.scratch/player-declarations/`. Post-change verification follows.
+
+The 332 client function contexts retained their prior statuses, matching
+percentages and comparison deltas after the declaration move. Thirteen
+contexts reported only renumbered compiler-local relocation labels; no other
+reported relocation fields changed. Receipts: `.scratch/player-declarations/{before,after,compare}-{tl,gold}.json`.
+
+The shared `loadsave.c` declaration is guarded out of the server build. Moved
+its client-only extern to the same header while retaining that guard; the
+server definition and code path remain canonical. Before-change checks cover
+11 server, four T&L and two Gold identities; post-change checks follow.
+
+The shared load/save source retained the same client comparison results. Its
+11 server object comparisons temporarily report RELOC after the source hash
+changed, but the rebuilt raw server DLL is byte-identical to the preserved
+baseline (SHA-256 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`).
+Raw-link verification with the server map reports all 251 mapped functions at
+their expected addresses and refreshes linked EXACT records. The released
+Rebrew locked writer recorded the reviewed 236 T&L and 96 Gold client
+verification results. The T&L raw build succeeds and its imports and exports
+match the reference, although its whole image differs. Its prior raw baseline
+also differs; another source, `GOLDTL.fcn_005ba910.c`, changed between those
+builds, so that whole-image difference is not isolated to this declaration
+move. Gold still fails to link with 256 unresolved externals. Receipts are in
+`.scratch/player-declarations/`, including the builds and `tl-whole.json`.
+
+A final source-target verification recorded the shared load/save results: all
+11 server identities remain EXACT, three of four T&L identities are RELOC,
+and the remaining T&L and both Gold identities remain SIZE_MISMATCH as before.
+Receipt: `.scratch/player-declarations/shared-recorded.json`.
+
+Four additional T&L callers declared the same player index as signed. Native
+code in each reads its word and zero-extends it, so they now use the shared
+unsigned declaration. Before-comparison and native disassembly receipts are
+`signed-*-before.json` and `signed-{005c3f10,004e33a0,00531d20,00599b00}.json`
+under `.scratch/player-declarations/`; verification follows. The remaining
+signed declaration has no confirmed native reference and is left for review.
+
+Removed the final signed `g_774970` extern from `GOLDTL.fcn_00557460.c`: it
+was unused in the source, and the native function has no direct access to the
+index. Before comparison: `.scratch/player-declarations/signed-unused-before.json`;
+native instructions: `signed-00557460.json`. Post-change verification follows.
+The all-target lint started before these final signed-declaration edits and
+reported zero errors, with 8 server, 14 T&L and 11 Gold warnings.
+
+The four corrected T&L functions remain SIZE_MISMATCH, with reported matches
+40/33, 281/281, 293/296 and 89/89 before/after. Their affected-source lint
+reported no errors. Receipts: `.scratch/player-declarations/signed-{0,1,2,3}-{before,after}.json`
+and `signed-lint.json`.
+
+Removing the unused extern preserved its SIZE_MISMATCH result, 87 matching
+bytes and 925-byte compiled size. Focused lint reports no errors. Receipts:
+`signed-unused-{before,after}.json` and `signed-unused-lint.json` under
+`.scratch/player-declarations/`.
+
+## 2026-11-02 — panel trims and the append-text frame measured
+
+- `0x5BA910` 737 -> 772 with the object at 12365 against native 11948: an `int slot`
+  that stays enregistered across the pointer-list arm's calls, the same for the
+  second pointer loop, and an `int` for the fcn_00466EE0 result reused by its stores.
+  Slot 0x9c is not the layout loop's variable; native keeps that one in esi and the
+  frame struct fills 0x10..0x1848 exactly, so any spilled local lands at 0x184c and
+  is forbidden. Remaining excess by anchor: +108, +53, +37, +34, +30 plus two large
+  block-reordering windows (+1294, +522) where MSVC jumps over the release block
+  instead of falling through.
+- `0x519190` frame is now measured exactly from the /Z7 s-bp records: our homes are
+  text_index 0x08, digit 0x1c, v14 0x28 and so on, while native's are 0x0c, 0x1c? no,
+  digit 0x0c, ap 0x10, v0c 0x18, v14 0x20, v1c 0x28, v20 0x2c, v30 0x3c, v2c 0x38,
+  directive 0x33. Native's assignment order differs, so a 13th slot alone cannot
+  reproduce displacements: the third push and the slot order are both needed. The
+  preamble is 0x23 bytes shorter because native inlines four early-return epilogues
+  (nine total) while ours shares one, and native inlines the strcpy at 0x519266.
+  Block order deviates in two places: fmt belongs right after case S, and the
+  continue target is the loop head.
+
+Rebuild 3,047,424 bytes, raw 290,630 (pad convergence still oscillates against the
+other session's uncommitted bodies), no compile or link errors.
+
+Decision: continuing. No GA was run.
