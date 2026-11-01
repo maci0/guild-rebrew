@@ -64,9 +64,9 @@ void __cdecl fcn_00415510(Rain* r, int n, ...)
 		if (t >= 0) {
 			if (t > 1) {
 				if (t == 2) {
+					r->size24 = (float) *++p * g_662a2c;
 					r->f14 = r->f1c;
 					r->f18 = r->f20;
-					r->size24 = (float) *++p * g_662a2c;
 					r->size28 = (float) *++p * g_662a2c;
 					r->f38 = r->f2c;
 					r->f3c = *++p + r->f2c;

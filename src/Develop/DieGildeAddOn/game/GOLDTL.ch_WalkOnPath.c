@@ -46,7 +46,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 
 	res = fcn_00402610(*(char**) (obj + 0x14));
 	inst = *(char**) (obj + 0x14);
-	if (*(char*) (obj + 0x160) < 0) {
+	if ((*(unsigned char*) (obj + 0x160) & 0x80) != 0) {
 		anim = *(char**) (inst + 0x7c);
 		if (anim != 0) {
 			if ((anim[0x6d] & 0x20) == 0) {
@@ -66,7 +66,6 @@ void __cdecl ch_WalkOnPath(char* obj)
 		}
 		*(char**) (inst + 0x70) = 0;
 		fcn_00407610(obj);
-cleanup:
 		if (g_6b5c28 != 0) {
 			*(char*) (*(char**) (obj + 0x14) + 0x8c) |= 8;
 		}
@@ -77,114 +76,140 @@ cleanup:
 		fcn_004050c0(obj);
 		return;
 	}
-	if (*(int*) (obj + 0x154) != -1) {
-		if (g_6b5c24 < *(int*) (obj + 0x154) + 225) {
-			return;
-		}
-		anim = *(char**) (inst + 0x70);
-		if (anim != 0) {
-			*(float*) (anim + 0x60) = 1.0f;
-		}
-		*(int*) (obj + 0x154) = -1;
-	}
-	if (*(unsigned int*) (obj + 0x160) & 0x20) {
-		*(int*) (obj + 0xc) = 0;
-		*(unsigned int*) (obj + 0x160) &= ~0x20;
-	}
-	if (*(int*) (obj + 0xc) == 0) {
-		if (*(char*) (*(char**) (inst + 0x88) + 0x3d5) != 0) {
-			fcn_004050c0(obj);
-			return;
-		}
-		if (!fcn_004094c0(obj, res)) {
-			return;
-		}
-	}
-	if (*(unsigned int*) (obj + 0x160) & 0x40) {
-		anim = *(char**) (inst + 0x70);
-		if (anim != 0 && (anim[0x6d] & 0x20) != 0) {
-			fcn_00435500(*(char**) (*(char**) (inst + 0x34) + 0x1ec) + 0xf4,
-			             *(char**) (anim + 0x68));
-			fcn_00433780(*(char**) (inst + 0x34));
-			*(int*) (inst + 0x78) = 0;
-			*(unsigned int*) (obj + 0x160) &= ~0x40;
-		} else {
-			if (anim != 0) {
+	else {
+		if (*(int*) (obj + 0x154) != -1) {
+			if (g_6b5c24 < *(int*) (obj + 0x154) + 225) {
 				return;
 			}
-			*(unsigned int*) (obj + 0x160) &= ~0x40;
+			anim = *(char**) (inst + 0x70);
+			if (anim != 0) {
+				*(float*) (anim + 0x60) = 1.0f;
+			}
+			*(int*) (obj + 0x154) = -1;
 		}
-	}
-	if (*(int*) (obj + 0x104) == 0) {
-		anim = *(char**) (inst + 0x70);
-		if (anim == 0 || (anim[0x6d] & 0x20) != 0) {
+		if (*(unsigned int*) (obj + 0x160) & 0x20) {
+			*(int*) (obj + 0xc) = 0;
+			*(unsigned int*) (obj + 0x160) &= ~0x20;
+		}
+		if (*(int*) (obj + 0xc) == 0) {
+			if (*(char*) (*(char**) (inst + 0x88) + 0x3d5) != 0) {
+				fcn_004050c0(obj);
+				return;
+			}
+			if (!fcn_004094c0(obj, res)) {
+				return;
+			}
+		}
+		if (*(unsigned int*) (obj + 0x160) & 0x40) {
+			anim = *(char**) (inst + 0x70);
+			if (anim != 0 && (anim[0x6d] & 0x20) != 0) {
+				fcn_00435500(*(char**) (*(char**) (inst + 0x34) + 0x1ec) + 0xf4,
+				             *(char**) (anim + 0x68));
+				fcn_00433780(*(char**) (inst + 0x34));
+				*(int*) (inst + 0x78) = 0;
+				*(unsigned int*) (obj + 0x160) &= ~0x40;
+			} else {
+				if (*(char**) (inst + 0x70) != 0) {
+					return;
+				}
+				*(unsigned int*) (obj + 0x160) &= ~0x40;
+			}
+		}
+		if (*(int*) (obj + 0x104) == 0) {
+			/* native re-tests anim after the bit test; the chain reproduces that block */
+			anim = *(char**) (inst + 0x70);
+			if (anim == 0) {
+				goto _Lc9;
+			}
+			if ((anim[0x6d] & 0x20) != 0) {
+				goto _Lc9;
+			}
+			if (*(char**) (inst + 0x70) != 0) {
+				goto _Lj9;
+			}
+		_Lc9:
 			if (!fcn_00409ae0(obj, res)) {
 				return;
 			}
+		_Lj9:
+			;
 		}
-	}
-	if (*(int*) (obj + 0x104) == 0) {
-		if (*(char**) (inst + 0x70) == 0) {
-			goto cleanup;
-		}
-		if (*(char**) (inst + 0x70) != 0) {
-			return;
-		}
-	}
-	cell = fcn_00407610(obj);
-	fcn_004098e0(obj, cell);
-	if (*(float*) (inst + 0x1a4) < g_6629c8) {
-		*(float*) (inst + 0x1a4) += g_662910;
-	}
-	if (*(int*) (obj + 0xf4) != 0 && !fcn_00409c90(obj, res)) {
-		return;
-	}
-	if (*(int*) (obj + 0xf4) == 0 &&
-	    (*(unsigned int*) (obj + 0x160) & 0x10) != 0) {
-		anim = *(char**) (inst + 0x70);
-		if (anim != 0 && (anim[0x74] & 8) != 0) {
-			ch_FinishAni(inst);
-			if (g_6b5c28 != 0) {
-				*(unsigned short*) (*(char**) (obj + 0x14) + 0x8c) |= 8;
+		if (*(int*) (obj + 0x104) == 0) {
+			if (*(char**) (inst + 0x70) == 0) {
+				if (g_6b5c28 != 0) {
+					*(char*) (*(char**) (obj + 0x14) + 0x8c) |= 8;
+				}
+				if (*(int*) (obj + 0xf4) != 0) {
+					m_FreeTracked(*(void**) (obj + 0xf4));
+					*(int*) (obj + 0xf4) = 0;
+				}
+				fcn_004050c0(obj);
+				return;
 			}
-			*(unsigned int*) (obj + 0x160) |= 0x80;
-			fcn_00438b40(*(char**) (inst + 0x34), (int*) (obj + 0x144));
-			fcn_004053a0(inst, g_6b8010 != 0);
+		}
+		if (*(int*) (obj + 0x104) == 0) {
+			if (*(char**) (inst + 0x70) != 0) {
+				return;
+			}
+		}
+		cell = fcn_00407610(obj);
+		fcn_004098e0(obj, cell);
+		if (*(float*) (inst + 0x1a4) < g_6629c8) {
+			/* volatile keeps the addend second in x87 order, as native has it */
+			*(volatile float*) (inst + 0x1a4) += g_662910;
+		}
+		if (*(int*) (obj + 0xf4) != 0 && !fcn_00409c90(obj, res)) {
 			return;
 		}
-	}
-	ch_WalkOnPathRotation(obj);
-	if (cell == 0 || cell == 0xd) {
-		return;
-	}
-	anim = *(char**) (inst + 0x70);
-	if (anim == 0) {
-		return;
-	}
-	speed = g_6629c0;
-	if (*(int*) (inst + 0x2c) == -1 &&
-	    *(int*) (*(char**) (inst + 0x34) + 0x204) != 0) {
-		speed = g_675308;
-	}
-	if (*(unsigned int*) (inst + 4) & 8) {
+		if (*(int*) (obj + 0xf4) == 0 &&
+		    (*(unsigned int*) (obj + 0x160) & 0x10) != 0) {
+			anim = *(char**) (inst + 0x70);
+			if (anim != 0 && (anim[0x74] & 8) != 0) {
+				ch_FinishAni(inst);
+				if (g_6b5c28 != 0) {
+					*(unsigned short*) (*(char**) (obj + 0x14) + 0x8c) |= 8;
+				}
+				*(unsigned int*) (obj + 0x160) |= 0x80;
+				fcn_00438b40(*(char**) (inst + 0x34), (int*) (obj + 0x144));
+				fcn_004053a0(inst, g_6b8010 != 0);
+				return;
+			}
+		}
+		ch_WalkOnPathRotation(obj);
+		if (cell == 0 || cell == 0xd) {
+			return;
+		}
+		anim = *(char**) (inst + 0x70);
+		if (anim == 0) {
+			return;
+		}
+		speed = g_6629c0;
+		if (*(int*) (inst + 0x2c) == -1 &&
+		    *(int*) (*(char**) (inst + 0x34) + 0x204) != 0) {
+			speed = g_675308;
+		}
+		if (*(unsigned int*) (inst + 4) & 8) {
+			if (cell != 0xb && cell != 6) {
+				*(float*) (anim + 0x60) = ((*(float*) (inst + 0x1a0) *
+				                            *(float*) (inst + 0x1a4)) * speed) *
+				                          g_6629bc;
+				return;
+			}
+			*(float*) (anim + 0x60) = ((*(float*) (inst + 0x1a0) *
+			                            *(float*) (inst + 0x1a4)) * speed) *
+			                          g_6629b8;
+			return;
+		}
 		if (cell != 0xb && cell != 6) {
-			*(float*) (anim + 0x60) = *(float*) (inst + 0x1a0) *
-			                          *(float*) (inst + 0x1a4) * speed *
-			                          g_6629bc;
+			*(float*) (anim + 0x60) = ((*(float*) (inst + 0x1a0) *
+			                            *(float*) (inst + 0x1a4)) * speed) *
+			                          g_6629b4;
 			return;
 		}
-		*(float*) (anim + 0x60) = *(float*) (inst + 0x1a0) *
-		                          *(float*) (inst + 0x1a4) * speed *
-		                          g_6629b8;
-		return;
+		*(float*) (anim + 0x60) = ((*(float*) (inst + 0x1a0) *
+		                            *(float*) (inst + 0x1a4)) * speed) *
+		                          g_6629b0;
 	}
-	if (cell != 0xb && cell != 6) {
-		*(float*) (anim + 0x60) = *(float*) (inst + 0x1a0) *
-		                          *(float*) (inst + 0x1a4) * speed * g_6629b4;
-		return;
-	}
-	*(float*) (anim + 0x60) = *(float*) (inst + 0x1a0) *
-	                          *(float*) (inst + 0x1a4) * speed * g_6629b0;
 }
 char g_6b5c28 = 0;
 unsigned char _dpad_6b5c28[148] = {

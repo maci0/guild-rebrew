@@ -27250,3 +27250,23 @@ definition_hash = "7deb173cb3f4cb8486ce6c511b9a0fe357616bf1575c3e55498f3239d3ec1
 built_va = "0x6d1f40"
 placement_method = "link-symbol"
 measured_at = "2026-10-31T12:39:26+00:00"
+
+["GOLD.0x00a68d24"]
+type = "char *"
+name = "g_aed324"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+note = "Inferred four-byte queue pointer access view in the zero-filled native .data tail; Gold 0x4c38f8 and T&L 0x4c4268 read corresponding operands. Existing provisional name; storage owner and backing allocation are unresolved."
+updated_by = "data"
+updated_at = "2026-11-01T11:57:09+00:00"
+
+["GOLDTL.0x00aed324"]
+type = "char *"
+name = "g_aed324"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+note = "Inferred four-byte queue pointer access view in the zero-filled native .data tail; T&L 0x4c4268 and Gold 0x4c38f8 read corresponding operands. Existing provisional name; storage owner and backing allocation are unresolved."
+updated_by = "data"
+updated_at = "2026-11-01T12:00:14+00:00"

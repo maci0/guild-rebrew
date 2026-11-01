@@ -1,4 +1,4 @@
-int __cdecl fcn_004f36e0(int key);
+int __cdecl FindStraftatIndexById(int key);
 
 /* ADDRESS: GOLDTL 0x004f61c0 */
 int __cdecl fcn_004f61c0(int* a0, int* a1, int* a2, unsigned int a3)
@@ -37,7 +37,7 @@ int __cdecl fcn_004f61c0(int* a0, int* a1, int* a2, unsigned int a3)
 		if (*(int*) (p - 4) != slot_id) {
 			continue;
 		}
-		pos = fcn_004f36e0(*(int*) p);
+		pos = FindStraftatIndexById(*(int*) p);
 		if (pos == -1) {
 			continue;
 		}

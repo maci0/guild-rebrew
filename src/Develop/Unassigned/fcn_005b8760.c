@@ -13,9 +13,9 @@ extern int __cdecl sub_471e30(void *);
 /* ADDRESS: GOLDTL 0x005b8760 */
 int __cdecl fcn_005b8760(void)
 {
+    int ebp = 0;
     int x = *(int *)0x7e46ac;
     int v;
-    int ebp = 0;
     int keep;
     void *edi, *esi;
 

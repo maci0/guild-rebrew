@@ -46,6 +46,8 @@ int __cdecl fcn_00441050(char* e)
 	Fn_441050 fn;
 	int count;
 	float len;
+	/* x87 spill homes: [0] and [2] are 8 bytes apart, [1] and [3] pad the frame. */
+	float scratch[4];
 	unsigned int i;
 	unsigned int j;
 	int k;
@@ -87,25 +89,25 @@ int __cdecl fcn_00441050(char* e)
 			} else {
 				*(char*) (w + 0xe) = 1;
 				f = p + 0x16;
-				sx = p[0];
+				scratch[0] = p[0];
 				sy = p[1];
-				sz = p[2];
+				scratch[2] = p[2];
 				k = 7;
 				do {
-					sx = sx + f[-2];
+					scratch[0] = scratch[0] + f[-2];
 					sy = sy + f[-1];
-					sz = sz + *f;
+					scratch[2] = scratch[2] + *f;
 					f = f + 0x14;
 					k -= 1;
 				} while (k != 0);
-				sx = sx * g_662a34;
+				scratch[0] = scratch[0] * g_662a34;
 				count += 1;
-				*(float*) (w - 0x20) = sx;
+				*(float*) (w - 0x20) = scratch[0];
 				sy = sy * g_662a34;
 				*(float*) (w - 0x1c) = sy;
-				sz = sz * g_662a34;
-				*(float*) (w - 0x18) = sz;
-				len = (float) sqrt(sz * sz + sy * sy + sx * sx);
+				scratch[2] = scratch[2] * g_662a34;
+				*(float*) (w - 0x18) = scratch[2];
+				len = (float) sqrt(scratch[2] * scratch[2] + sy * sy + scratch[0] * scratch[0]);
 				*(float*) (w - 4) = len;
 			}
 			v10 = (void**) (w - 0x1cc);

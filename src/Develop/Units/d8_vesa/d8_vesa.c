@@ -1,21 +1,29 @@
+extern int g_6777ac;
 
+struct vertex_41b5f0 {
+	float x;
+	float y;
+	float z;
+	float rhw;
+	int color;
+};
 
+extern char g_6b5df0[];
+
+#include "Develop/Units/Error/error_message.h"
 typedef struct Vb Vb;
 
-// SIZE 0x34
 typedef struct {
 	void* m[12];
 	long (__stdcall* Unlock)(Vb* self);
 } VbVtbl;
 
-// SIZE 0x4
 struct Vb {
 	VbVtbl* vtbl;
 };
 
 typedef struct Device Device;
 
-// SIZE 0x14c
 typedef struct {
 	void* m0[34];
 	long (__stdcall* BeginScene)(Device* self);
@@ -30,16 +38,39 @@ typedef struct {
 	long (__stdcall* SetStreamSource)(Device* self, unsigned int stream, Vb* vb, unsigned int stride);
 } DeviceVtbl;
 
-// SIZE 0x4
 struct Device {
 	DeviceVtbl* vtbl;
 };
 
-extern int g_6777ac;
 extern void* g_6b5de0;
 extern void* g_6b5df4;
-#include "Develop/Units/Error/error_message.h"
 
+/* dd_Line: queues a screen-space line as two vertices. */
+/* ADDRESS: GOLDTL 0x0041b5f0 */
+void __cdecl dd_Line(int x1, int y1, int x2, int y2, int color)
+{
+	if (g_6777ac == -1) {
+		ReportClientMessage("dd_Line called w/o dd_BeginLines!");
+	}
+	if (g_6777ac < 0x40) {
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].x = (float) x1;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].y = (float) y1;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].z = 0.0f;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].rhw = 1.0f;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].color = color;
+		g_6777ac++;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].x = (float) x2;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].y = (float) y2;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].z = 0.0f;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].rhw = 1.0f;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].color = color;
+		g_6777ac++;
+	} else {
+		ReportClientMessage("Too many lines in dd_Line(): Increase dd_MAX_LINES in d8_vesa.c!");
+	}
+}
+
+/* ADDRESS: GOLDTL 0x0041b700 */
 void __cdecl dd_EndLines(void)
 {
 	if (g_6777ac == -1) {

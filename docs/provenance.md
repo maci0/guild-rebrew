@@ -11832,3 +11832,487 @@ Lead pads retuned to convergence for the new object sizes. Rebuild: 2,977,792
 bytes, raw 257,830, informative 121,051, no compile or link errors.
 
 Decision: continuing. No GA was run.
+The retry compiles the scaffold without the three duplicate-definition errors,
+then Gold linking fails on 267 unresolved externals. No placeholder providers
+were added; `.scratch/sim-consolidation/gold-baseline-retry.log` records them.
+The simulation move remains unapplied because a fresh Gold raw baseline and
+post-change all-target comparison are unavailable.
+
+### 2026-11-01 — concurrent review tooling gap
+
+Recorded a request in upstream `docs/IDEAS-GUILD.md` for immutable review
+snapshots and atomic guarded apply after repeated simulation organization and
+client rename reviews encountered concurrent project changes. The existing
+guards remain in force. Evidence: `.scratch/sim-consolidation/rename-goal.json`
+and the guarded apply result. Decision owner: project owner. No project source
+binding or rename was changed by this request.
+
+### 2026-11-01 — simulation owner-body compiler check
+
+Compiled a scratch copy of the canonical `sim.c` with the server guard enabled
+and the client compiler profiles. Its `_sim_SetSyncParams` body is EXACT 41/41
+against both TL `0x500c50` and Gold `0x4fe1e0`. This is a diagnostic compiler
+comparison, not a source-binding promotion or linked-placement proof. The
+pinned Rebrew 6.9.0 selected the wrong annotated symbol when this override was
+run on the managed multi-function file; upstream already fixes that behavior and
+its `tests/test_test_helpers.py` suite passes (61 tests). Decision owner: project
+owner. Inputs and JSON receipts are in `.scratch/sim-consolidation/`.
+
+### 2026-11-01 — `0x408540` shared zero exit and division operand order
+
+`438/2782` (object 2782) to `496/2776` (object 2770), still SIZE_MISMATCH.
+The four `return 0` sites now share one `label_ret0:` exit, which removes the
+inlined epilogues and matches the native jump to `0x40900b`. Wrapping the
+division in parentheses makes MSVC emit `fld dword [0x662914]; fdiv dword
+[edx+0x10]` instead of the reversed `fdivr` form.
+
+Remaining difference is the frame slot permutation: native allocates 14 four
+byte scalars at `0x10`-`0x44` (`v21` at `0x3c`), then `v20` at `0x48`; this body
+allocates 15, with our `v28` spilled at `0x24` and `v20` at `0x4c`. Declaring
+the locals in the native descending offset order changed no byte, so MSVC 6 does
+not assign these slots by declaration order. Receipts:
+`.scratch/408540/final.json`, `.scratch/408540/vB1.c`,
+`.scratch/408540/flow4.py`.
+
+### 2026-11-01 — network address helper source placement
+
+Moved T&L `nt_GetLocalIp` (`0x420d20`) from `Develop/Unassigned` to
+`Develop/Units/net`, and rehomed its managed binding. Its native cached Winsock
+lookup and position beside the network routines support subsystem affinity;
+the exact original TU and filename remain inferred. No source body or storage
+changed. Decision owner: project owner. Before and after, the function is
+RELOC 131/131 and all ten reported relocation bindings agree. Receipts:
+`.scratch/sim-consolidation/local-ip-before.json` and `local-ip-after.json`.
+The raw-link rebuild and comparison are tracked separately.
+Full T&L `rebrew lint --json` passed 5,498 files with zero errors and nine
+warnings; `.scratch/sim-consolidation/lint-after-move.json` has the details.
+The T&L rebuild after this placement succeeded. The pre/post raw links differ
+in `.text`, `.data` and `.rdata`; imports and relocation tables agree. Other
+source changes were active between and during the builds, so the differences
+cannot be attributed to the path move. Receipt:
+`.scratch/sim-consolidation/local-ip-raw-check.json`.
+
+### 2026-11-01 — entity lookup and pricing source placement
+
+Moved T&L `gm_LookupEntityRecordById` (`0x508e40`) and
+`eval_ObjektPreis2Credits` (`0x50b980`) from `Develop/Unassigned` into the
+game directory, retaining separate TUs and naming each file for its existing
+function. Their server counterparts in `spiel.c` support subsystem affinity;
+client TU boundaries remain inferred, and the retired Gold lookup claim is not
+reactivated. No function body or storage changed. Decision owner: project
+owner. Before and after, the lookup is RELOC 56/56 with equal reported operands;
+the pricing helper remains SIZE_MISMATCH 91/454, object size 452, with equal
+mismatches and 19 reported operand bindings. Receipts:
+`.scratch/sim-consolidation/{entity,price}-{before,after}.json`. The T&L raw
+rebuild and comparison run separately.
+A two-file lint passed with zero errors; its four warnings concern unrelated
+project metadata. `.scratch/sim-consolidation/game-lint.json` records them.
+
+### 2026-11-01 — T&L line-renderer TU evidence
+
+`dd_Line` (`0x41b5f0`, 269 bytes) and `dd_EndLines` (`0x41b700`, 190 bytes)
+share line-buffer state and are adjacent in the native image, separated by
+three alignment bytes. Both current definitions test RELOC in full. A literal
+audit confirms the native `dd_Line` diagnostic naming `d8_vesa.c`; it refers
+to the line limit, so it supports subsystem affinity without proving the
+original source path of either function. Decision owner: project owner. A
+single-TU merge preview selects only these two T&L rows. No merge has been
+applied; the all-target review and raw-link checks remain required. Evidence:
+`.scratch/sim-consolidation/dd-{line-before,end-before,literals,merge-preview}.json`.
+
+### 2026-11-01 — Consolidate T&L line renderer
+
+Merged `dd_Line` and `dd_EndLines` into the inferred
+`Develop/Units/d8_vesa/d8_vesa.c` TU, in native order, with no storage move.
+Their shared line buffer and adjacency support consolidation; the diagnostic
+referencing `d8_vesa.c` supports subsystem naming but does not prove the
+original TU boundary. The all-target review found only T&L active and no native
+order cycle. Decision owner: project owner. The merge exposed an upstream bug
+that discarded multiline typedef openings; the generated source was repaired
+and the upstream merge implementation and regression test corrected. Targeted
+lint passed with zero errors and four unrelated metadata warnings. Review and
+verification receipts are in `.scratch/sim-consolidation/dd-*.json`; the raw
+rebuild and comparison are tracked separately.
+The upstream regression suite passed: 13,538 passed and 29 skipped; the
+targeted merge tests passed 74 cases, and Ruff passed on the changed files.
+After the merge, `dd_Line` remains RELOC 269/269 and `dd_EndLines` remains
+RELOC 190/190; their reported operand bindings are unchanged.
+The later T&L rebuild succeeded, but the complete raw comparison differs:
+`.text` virtual size increased by 64 bytes, and `.text`, `.data` and `.rdata`
+contents differ; imports, exports and relocation records match. Other source
+changes occurred during the rebuild interval, so this comparison does not
+isolate the merge's contribution. Evidence:
+`.scratch/sim-consolidation/game-raw-check.json` and `game-build.log`.
+The two retained pre-merge objects and the merged object have seven identical
+ordered code, data and function-debug sections, including relocation targets;
+object-level compiler directives and source-debug records were excluded from
+that comparison. Receipt: `.scratch/sim-consolidation/dd-object-compare.json`.
+Each of the three objects separately carries the same `LIBCMT` and `OLDNAMES`
+default-library directives; merging removes one duplicate directive record.
+An isolated pair of links using one copied input set and the separate versus
+merged line-renderer objects has identical `.text`, initialized data, resource
+bytes, section placement, imports, exports and relocation records. The full
+files differ in 382 bytes, all before file offset `0x2f0`, and have different
+PE-header offsets; whole-file agreement therefore remains unproven. The merged
+snapshot link has the same SHA-256 as `game-raw-after.exe`. The snapshot was
+captured while another T&L build was active; the separate queued check will
+repeat under the shared build lock. Evidence:
+`.scratch/sim-consolidation/dd-snapshot-raw-check.json` and the snapshot links.
+The subsequent isolated comparison under the shared build lock confirms the
+same result: all section bytes and placement agree, with exactly 382 differing
+file bytes confined below `0x2f0`. The complete files do not match. Receipt:
+`.scratch/sim-consolidation/dd-locked-raw-check.json`.
+`rebrew binary pe` reports identical decoded PE metadata except the Rich
+header: entry `(id 48, build 9044)` counts 5203 inputs before and 5202 after,
+and the Rich checksum key changes. The PE header begins 16 bytes earlier in the
+separate-object image; both links retain the same section file placement.
+Receipts: `.scratch/sim-consolidation/dd-{separate,merged}-pe.json`.
+
+### 2026-11-01 — Gold DirectDraw dialog source-path evidence
+
+The Gold native source-unit inventory reports three direct references from
+the bounded scan of `0x41c830` to `D:\develop\Units\dd_vesa\Dd_vesa.c`.
+Its current source is `Develop/Units/d3/GOLD.fcn_0041c830.c`. This supports
+the attested `dd_vesa` unit as a relocation candidate, distinct from the T&L
+`d8_vesa` line-renderer placement. No source or data ownership was moved:
+thirteen managed data rows reference the file, and the current Gold build fails
+with 267 unresolved externals before a fresh linked placement comparison.
+All thirteen rows describe declaration-only views; six separate `_dpad_` arrays
+in the C file allocate padding bytes and require linked placement review.
+The completed all-target organization review found no native-order cycle, but
+could not close the `windows.h` and `string.h` includes; it requires a Gold
+compile and complete raw-link comparison before reorganization. The report is
+`.scratch/sim-consolidation/gold-dd-review.json`.
+Decision owner: project owner. Evidence:
+`.scratch/sim-consolidation/source-units-gold.json` and
+`.scratch/sim-consolidation/gold-baseline-retry.log`.
+
+### 2026-11-01 — Remove duplicate Gold formatter placeholder
+
+Removed the `io_FormatTextBuffer` placeholder from `stubs/gold/symbol_stubs.c`.
+Gold `0x517700` is already bound to the shared implementation in
+`Develop/DieGildeAddOn/game/GOLDTL.fcn_0051af00.c`; the placeholder caused a
+duplicate-symbol error in the Gold link. This retains the existing managed
+Gold binding and adds no provider or storage claim. Decision owner: project
+owner. The previous link diagnostic is in
+`.scratch/sim-consolidation/gold-baseline-retry.log`; the incremental relink is
+recorded in `.scratch/sim-consolidation/gold-formatter-relink.log`.
+
+### 2026-11-01 — Scope the T&L-only node helper
+
+Guarded T&L `fcn_00436a00` and its private declarations out of Gold builds.
+Its TU also supplies the Gold-bound `fcn_004321a0` at `0x4324e0`, so Gold
+compiles the file; the unrelated T&L-only body otherwise collides with an
+existing Gold scaffold symbol. The shared helper and Gold placeholder remain
+unchanged. Decision owner: project owner. Source-target tests and lint are
+recorded in `.scratch/sim-consolidation/gold-tl-guard-{test,lint}.json`; the
+Gold relink is `.scratch/sim-consolidation/gold-formatter-relink.log`.
+That relink compiled both changed sources and reported neither duplicate
+symbol nor a C error. It still failed on 267 unresolved external symbols, so
+it did not produce a fresh Gold image for placement comparison.
+The sets of 267 unresolved symbol names are identical before and after.
+The shared helper tests EXACT 65/65 in both Gold and T&L; the T&L-only
+function remains RELOC 159/159 with both reported call bindings validated.
+
+### 2026-11-01 — Consolidate office lookup declarations
+
+Removed two repeated declarations of `gm_LookupEntityRecordById` from
+`Develop/DieGildeAddOn/game/aemter.c`, retaining the existing declaration and
+all source line positions. Decision owner: project owner. Server builds of the
+before and after source use the configured compiler command. All 91 COFF
+sections and their relocation targets compare equal, as do 72 external symbol
+records; local relocation targets were compared by section and offset because
+compiler-generated label spellings changed. The `__LINE__` use remains on
+line 1591. Evidence: `.scratch/sim-consolidation/aemter-object-compare.json`
+and the before/after objects and compiler logs in the same directory. This is
+an object comparison, not a fresh server raw-link comparison.
+The subsequent server rebuild succeeded and its complete raw DLL is identical
+to the preserved baseline (SHA-256 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`).
+Rebrew's source-target test reports RELOC for all ten server-bound definitions;
+both clients are skipped because they have no function binding to this file.
+Receipt: `.scratch/sim-consolidation/aemter-declarations-test.json`.
+The subsequent raw-link verification reports 316/316 server functions EXACT;
+receipt: `.scratch/sim-consolidation/aemter-server-linked-verify.json`.
+
+### 2026-11-01 — Target-specific entity lookup contract
+
+Recorded a Rebrew feature request for target-conditional signature
+reconciliation in upstream `docs/IDEAS-GUILD.md`. The existing server lookup
+definition returns `int`, T&L returns `char *`, and per-file callers use
+several pointer views. A single-prototype reconciliation preview also aborted
+when project inputs changed during its audit. Decision owner: project owner.
+No signatures changed. Evidence: `spiel.c`,
+`GOLDTL.gm_LookupEntityRecordById.c`, and the attempted `types reconcile`
+preview for `spiel.h`.
+
+### 2026-11-01 — Gold table lookup binding evidence
+
+Gold `0x4f36e0` is a 31-byte table search ending in `ret` at `0x4f36fe`;
+T&L `0x4f5810` has the same instruction sequence with target-specific table
+addresses. Gold `0x4f417a` directly calls `0x4f36e0`. The current Gold native
+inventory already includes the 31-byte extent, although the prior source claim
+was retired during an earlier inventory merge. Decision owner: project owner.
+A shared target-conditional source is under comparison in scratch; no retired
+binding has been reactivated. The first rebind preview refused to proceed
+because function metadata changed during its read. Evidence:
+`.scratch/sim-consolidation/{gold-lookup-asm,tl-lookup-asm,gold-lookup-caller,gold-lookup-extents-preview}.json`.
+
+### 2026-11-01 — Share the client table-search body
+
+Made `GOLDTL.fcn_4f5810.c` select the Gold or T&L table bounds at compile
+time. `TABLE_START` and `TABLE_END` are inferred local names. A scratch copy
+with the same conditional body tests EXACT 31/31 against both Gold `0x4f36e0`
+and T&L `0x4f5810`; neither result was promoted. Decision owner: project
+owner. The Gold source claim is still retired pending a guarded rebind, and
+Gold's unresolved-symbol link has not been rerun. Evidence:
+`.scratch/sim-consolidation/shared-table-{gold,tl}.json`.
+The production T&L source also tests EXACT 31/31 without promotion, and its
+lint passes with zero errors and four unrelated metadata warnings. Receipts:
+`.scratch/sim-consolidation/shared-table-source-tl.json` and
+`shared-table-lint.json`.
+The production source also tests EXACT 31/31 against Gold `0x4f36e0` without
+promotion (`shared-table-source-gold.json`). A second guarded rebind preview
+again detected concurrent function-metadata changes and made no write.
+A later preview succeeded, but its guarded apply again detected concurrent
+metadata changes and did not reactivate the Gold binding. Preview receipt:
+`gold-lookup-rebind-preview3.json` in the same scratch directory.
+
+### 2026-11-01 — Bind Gold to the shared table search
+
+Rebound Gold `0x4f36e0` to the target-conditional
+`Develop/Unassigned/GOLDTL.fcn_4f5810.c` definition. The native 31-byte body,
+direct Gold caller at `0x4f417a`, and exact production-source comparisons for
+both clients support the identity; the existing native inventory contains the
+extent. Decision owner: project owner. The released Rebrew binding operation
+ran its reviewed dry-run and digest-guarded apply inside one reentrant managed
+metadata transaction to prevent concurrent unrelated writes from invalidating
+the review. The reviewed digest was
+`b82e50b285e24166c1a88b75c488b7b21c953bbbe0e40ddce14336d33ddc28a0`.
+Gold verification and a fresh link attempt are recorded separately in
+`.scratch/sim-consolidation/shared-table-bound-gold.json` and
+`gold-lookup-relink.log`.
+The rebound Gold definition has now earned a fresh EXACT 31/31 object verdict;
+the Gold relink was still running when this was recorded.
+The completed Gold relink reports 266 unresolved symbols versus 267 before;
+`_fcn_004f36e0` is the sole resolved symbol and no new unresolved names or
+duplicate-symbol errors appeared. Gold still produces no fresh image.
+
+### 2026-11-01 — Anchor both table-search identities
+
+Added the Gold address beside the T&L address on the shared definition and
+converted its existing line comment to C89 form. The function body and target
+selection are unchanged. Decision owner: project owner. Source-target
+verification is `.scratch/sim-consolidation/shared-table-anchors-test.json`;
+the Gold and T&L links are running separately.
+The completed source-target verification reports EXACT 31/31 for both Gold and
+T&L, with server skipped because it has no binding to this source. The T&L
+build subsequently succeeded.
+
+### 2026-11-01 — Crime-table lookup naming evidence
+
+T&L `cm_ExAddStraftat` uses the 0x2d-byte table at `0x9a3800`, assigns the
+record ID and logs it as `st_id`; native `0x4c9a72` references that table and
+`0x4c9a9b` references the attested diagnostic. The shared lookup at T&L
+`0x4f5810` / Gold `0x4f36e0` searches the first field and returns its index or
+-1. This supports the inferred name `FindStraftatIndexById`; no original module
+prefix or function spelling is established. Decision owner: project owner.
+The rename preview is `.scratch/sim-consolidation/crime-lookup-rename-preview.json`;
+no rename has been applied. Native evidence:
+`.scratch/sim-consolidation/crime-add-native.json` and the two lookup
+disassemblies recorded above.
+The Gold counterpart at `0x4c8e70` likewise references the Gold table at
+`0x91f700` (`gold-crime-add-native.json`). The preview selects exactly the
+Gold and T&L lookup identities and eight source files; it has not been applied
+while a client build is compiling those inputs.
+Both lookup loops cover exactly 512 records of 45 bytes; this is a bounded
+access span and does not establish a separate storage owner or full allocation.
+The file-move preview additionally selects the neutral inferred filename
+`Develop/Unassigned/FindStraftatIndexById.c`, retaining the unassigned
+subsystem; it is in `crime-lookup-rename-file-preview.json` in the same scratch
+directory.
+This table evidence also refines the previously reviewed client-only
+`cm_ChkCutsceneReady` counter: `CountMatchingStraftatEntries` is a possible
+inferred name for its matching-record count. Its server namesake remains the
+independent canonical readiness function; no client rename is applied here.
+The scoped preview selects Gold `0x4f4130`, T&L `0x4f6520`, five reviewed
+client caller files and the file's existing `g_7f4ca0` declaration row. A
+same-directory filename preserves its relative includes; a move to the
+unassigned directory would require include repair. Receipt:
+`.scratch/sim-consolidation/crime-count-same-dir-preview.json`.
+
+### 2026-11-01 — Repair Gold command wrapper extent
+
+Corrected the Gold native inventory extent at `0x52fe30` from 768 to 15 bytes.
+The body consists of two calls and a tail jump ending at `0x52fe3e`, followed
+by an alignment byte and a distinct prologue at `0x52fe40`. T&L `0x535960`
+has the corresponding two-call/tail-jump shape. Decision owner: project owner.
+This changes inventory evidence only and does not bind a source or establish
+callee providers. Receipts: `.scratch/sim-consolidation/gold-neighbor-helper.json`,
+`tl-neighbor-helper.json`, and `gold-wrapper-extent-{preview,apply}.json`.
+The neighboring T&L table walker compiles against Gold `0x4f3700` as RELOC
+114/114 when its two table addresses are selected for Gold. Two call bindings
+are validated and two remain unresolved; the source has not been shared or
+rebound on that evidence alone. Receipt:
+`.scratch/sim-consolidation/shared-neighbor-gold.json`.
+The existing T&L wrapper compiles RELOC 15/15 against Gold `0x52fe30`: its
+first two call bindings validate, while its tail call to `cm_ExecCommand` is
+unresolved in Gold. No Gold source binding was added. Receipt:
+`.scratch/sim-consolidation/gold-wrapper-shared-test.json`.
+Testing the current T&L `cm_ExecCommand` body at Gold `0x4c4190` yields a
+572-byte object against the 551-byte native extent and reports two conflicting
+call bindings. It is not a verified Gold provider. Receipt:
+`.scratch/sim-consolidation/gold-command-candidate.json`.
+Because the body sizes differ, those reported offsets are not established
+instruction correspondences and do not by themselves prove incorrect native
+callee identities.
+Direct disassembly of Gold `0x4c4190` and T&L `0x4c4b00` shows 165
+instructions in each with the same mnemonic sequence. In particular, Gold's
+call at `0x4c4288` targets `0x4c43c0`, the stored Gold binding of
+`ahm_ProcessEntityChain`, and its call at `0x4c4258` targets `0x4c3850`, the
+stored Gold binding of `fcn_004c41c0`. The earlier reported conflicts arise
+from comparing offsets after the candidate's code diverges; they do not reject
+those two bindings. Receipts: `.scratch/sim-consolidation/{gold,tl}-command-native.json`.
+The command body also calls `fcn_004c4250`; its current T&L source defines a
+712,560-byte `_dpad_` array. Rebinding that file for Gold would compile the
+array as well, so its storage and target-specific placement require review
+before using it as a Gold provider.
+Native Gold `0x4c38e0` and T&L `0x4c4250` each decode to 84 instructions with
+the same mnemonic sequence. The Gold counterparts of T&L addresses
+`0xaed324`, `0xaed340` and `0x1005764` are `0xa68d24`, `0xa68d40` and
+`0xf81164`, respectively. A guarded-padding scratch compile of the current
+T&L body against Gold is 199 bytes versus the 210-byte native extent; Gold's
+scaffold declares the copied destination `g_aed340` as one byte despite the
+body's 0x7e-byte copy. The scratch comparison cannot establish a safe Gold
+provider or storage owner. Receipts:
+`.scratch/sim-consolidation/{gold,tl}-command-helper-native.json` and
+`command-helper-gold.json`.
+Gold's data inventory identifies the existing `g_aed340` declaration at
+`0xa68d40` but records neither a complete size nor a source or library owner;
+`g_aed324` has no Gold VA in that inventory. The one-byte Gold scaffold array
+is therefore not evidence of the native allocation. Receipt:
+`.scratch/sim-consolidation/gold-data-list.json`.
+
+### 2026-11-01 — Name the shared crime-table lookup
+
+Renamed the shared Gold/T&L lookup to the inferred name `FindStraftatIndexById` and moved its source to the matching unassigned filename. The two client definitions search the crime table evidenced by `cm_ExAddStraftat`; no original function spelling or subsystem is claimed. Decision owner: project owner. The fresh preview was checked against the reviewed eight-file, two-identity plan before applying under the T&L build lock. Receipts: `.scratch/sim-consolidation/crime-lookup-rename-{fresh-preview,apply}.log`. Verification is recorded separately.
+Targeted lint passes all eight files with zero errors and four unrelated
+metadata warnings (`crime-rename-lint.json` in the same scratch directory).
+
+### 2026-11-01 — Refresh client counter comments
+
+Updated the client counter's explanatory comment to use
+`FindStraftatIndexById` and converted its line comment to C89 form. The body
+is unchanged. Decision owner: project owner. The previously run caller check
+preceded this comment edit; the counter must be reverified with its eventual
+scoped rename.
+After the comment edit, Rebrew reports RELOC 122/122 for the counter in both
+clients (`crime-counter-comment-test.json` in `.scratch/sim-consolidation`).
+
+### 2026-11-01 — Record the Gold queue-pointer view
+
+Recorded Gold `0xa68d24` as the existing provisional `g_aed324` four-byte
+pointer access view. Gold `0x4c38f8` and T&L `0x4c4268` use the corresponding
+operand; the Gold address lies in the zero-filled virtual tail of native
+`.data`. The original name, backing allocation and storage owner remain
+unresolved, and no storage or declaration was created. Decision owner:
+project owner. Rebrew's reviewed data-set preview and guarded apply are
+`.scratch/sim-consolidation/gold-queue-pointer-{preview2,apply}.json`;
+native operands and PE metadata are in the adjacent command-helper and
+`gold-pe-metadata.json` receipts.
+The corresponding T&L four-byte view at `0xaed324` was recorded with the same
+unresolved ownership and inferred-name qualifications. Its guarded preview and
+apply are `.scratch/sim-consolidation/tl-queue-pointer-{preview,apply}.json`;
+the address is likewise in the native `.data` zero-filled virtual tail.
+Targeted lint passes with zero errors and four unrelated metadata warnings;
+receipt: `.scratch/sim-consolidation/client-queue-pointer-lint.json`.
+
+### 2026-11-01 — Queue-head naming review
+
+The existing provisional `g_aed324` view is read as the head of the linked
+incoming command list and updated when its first node is removed. The inferred
+name `tp_CommandQueueHead` follows the project's typed-pointer convention;
+the original spelling and storage owner remain unknown. Decision owner:
+project owner. A data-rename preview selects eight source files and the T&L
+row, but leaves the Gold row without a file unchanged; Gold and T&L scaffold
+definitions are also outside the preview. No rename was applied. Receipt:
+`.scratch/sim-consolidation/queue-head-rename-preview.json`; users and native
+operands are recorded in the adjacent queue-pointer evidence.
+
+### 2026-11-01 — Shared crime-table lookup verification
+
+Reverified `FindStraftatIndexById` and its renamed callers after consolidating
+the Gold and T&L definitions. Decision owner: project owner. Both definitions
+match exactly (31/31 bytes). Four caller files retain relocation matches in
+their applicable targets; three other T&L callers have size mismatches and
+remain incomplete. The client counter also matches after its comment update.
+Receipts: `.scratch/sim-consolidation/crime-rename-test-{0..7}.json` and
+`.scratch/sim-consolidation/crime-counter-comment-test.json`.
+
+### 2026-11-01 — Guarded global-rename tooling
+
+Added reviewed input digests for data renames in the upstream Rebrew checkout,
+so a changed source or metadata input rejects the reviewed apply. Decision
+owner: project owner. The focused upstream data-rename tests pass (14 tests),
+including unchanged and stale-input cases. This does not yet select unbound
+data rows or comparison scaffolds; no Guild global rename was applied. The
+upstream broader test suites are running. The Guild project continues to use
+its installed Rebrew release.
+
+The upstream rename and source-provenance suites subsequently passed: 298
+tests, with 162 fixture warnings. The full upstream suite is still running.
+
+The full upstream suite then passed: 13,541 passed, 29 skipped, and 240
+warnings. Receipt: `/tmp/rebrew-guild-global-rename-suite.log`.
+
+### 2026-11-01 — Select an additional global identity
+
+Extended the upstream reviewed data-rename plan to accept explicitly selected
+additional metadata identities, including rows without a source file. Each
+selected row must retain the old name and is included in the guarded preview;
+selection does not establish storage ownership. Decision owner: project owner.
+The focused data-rename suite passed 15 tests; the full upstream suite is
+running again. Comparison-scaffold selection remains unsupported, and Guild
+continues to use its installed release; no queue-head rename was applied.
+
+The full upstream suite subsequently passed: 13,542 passed, 29 skipped, and
+239 warnings. Receipt: `/tmp/rebrew-guild-data-row-suite.log`.
+
+### 2026-11-01 — Client crime-counter baseline
+
+Before the planned client counter rename, compared its definition and five
+callers without promoting verdicts. Decision owner: project owner. The
+counter and two caller files match under relocation masking in both Gold and
+T&L; three T&L caller files have size mismatches. Receipts:
+`.scratch/sim-consolidation/counter-before-{0..5}.json`. These are baseline
+results, not evidence for the post-rename sources or linked placement.
+
+## 2026-11-01 — exact rows at reference addresses
+
+Rows that now match their reference bytes at their reference VA (all RELOC unless
+noted): `0x40A600` ch_WalkOnPath 1022/1022, `0x44C460` 441, `0x45BFB0` 337,
+`0x44D7E0` 228, `0x40F1C0` 371, `0x4F18D0` 319, `0x4F2D90` 237, `0x448A00` 263,
+`0x5B8760` 324, `0x451380` 334, `0x448360` 1406.
+
+Proven constructs added to the record:
+- Wrapping the rest of a function in the `else` of the first guard flips c2 block
+  order, making a merged cleanup the guard fallthrough and keeping a private
+  epilogue (ch_WalkOnPath).
+- `*(volatile float*) field += constant` pins the x87 operand order instead of
+  letting MSVC commute it (ch_WalkOnPath, `0x451380` zero-init order plus volatile
+  left operands).
+- `MAX(0.0f, MIN(255.0f, V))` as one macro-nested expression emits the reference
+  clamp ladder with `fld st(0); fld [C]; fcompp` (`0x452C60`, `0x453470`).
+- `float scratch[4]` (16-byte object with dead gaps) reproduces the reference's
+  8-byte-separated FP scratch slots and fixes a frame (`0x441050`).
+- Equal status rows stay put: the STUB bucket is only 9 rows / 8,423 bytes after the
+  sweep, so no stale STUB/verdict divergence remains.
+
+Near matches: `0x453470` 2301/2308, `0x452C60` 2036/2060, `0x441050` 855/931,
+`0x444860` 345/1869, `0x453D80` 326/1743, `0x415510` 489/509, `0x44C6F0` 551/579.
+
+Layout note: the new near-match bodies carry different object sizes, so the pad
+retune converged at 217,578 same-offset bytes, below the previous 257,830
+checkpoint. The fidelity work is kept; the pアド retune will follow when the bodies
+are exact.
+
+Decision: continuing. No GA was run.

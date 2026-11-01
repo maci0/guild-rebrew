@@ -68,7 +68,7 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
     return -1;
   v35 = fcn_00402610(v27);
   fcn_00408250((*(int *)0x6b5c5c),v35);
-  v36 = (int)(*(double *)0x662908 + *(float *)0x662914 / (*(float *)(v35 + 0x10)));
+  v36 = (int)(*(double *)0x662908 + (*(float *)0x662914 / *(float *)(v35 + 0x10)));
   if (v36 > 10)
     v36 = 10;
   v10 = *(int *)(v28 + 0xf8);
@@ -85,7 +85,7 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
   fcn_00408270(v28,*(int *)(v27 + 0x34) + 0x4c,&v19,&v18);
   v26 = 0;
   if (a1 <= 0)
-    return 0;
+    goto label_ret0;
   v24 = a2;
 label_40869c:
   if (!(v13 & 1)) {
@@ -197,7 +197,7 @@ label_408905:
   goto label_40890a;
 label_40892d:
   if (!v13)
-    return 0;
+    goto label_ret0;
   v28 = 0;
   v6 = 0x20;
   v29 = (unsigned int *)(v27 + 0x90);
@@ -216,7 +216,7 @@ label_40892d:
     v11 = &v11[2];
   } while (v28 < a1);
   if (!(v13 & 1))
-    return 0;
+    goto label_ret0;
   if (*(float *)(v27 + 0x1a4) < *(double *)0x662908)
     *(unsigned int *)(v27 + 0x1a4) = 0x3f000000;
   v26 = 0;
@@ -282,7 +282,7 @@ label_40892d:
       v28 = *(int *)(a0 + 0x128);
       v4 = fcn_0045b990(v35,*(int *)(*(int *)(v28 + 0x14) + 0x34) + 0x4c,&v24,&v15,v21);
       if (!v4)
-        return 0;
+        goto label_ret0;
       v6 = *(int *)(v28 + 0xf8) + 0x10;
       v27 = *(int *)(v28 + 0xf0) + -1;
       if (v6 < v27)
@@ -378,4 +378,6 @@ label_40892d:
       return v16;
     }
   } while( 1 );
+label_ret0:
+  return 0;
 }

@@ -1,5 +1,8 @@
 #include <math.h>
 
+#define GOLDTL_MIN(a, b) ((a) < (b) ? (a) : (b))
+#define GOLDTL_MAX(a, b) ((a) > (b) ? (a) : (b))
+
 int __cdecl rand(void);
 void __cdecl fcn_004518a0(float* v);
 
@@ -139,23 +142,23 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
 			p->f50 = (char) (i % den);
 			p->f4e = (char) ((rand() & e->d3) + e->d2);
 			p->f4d = (char) ((rand() & e->d3) + e->d1);
+			p->f4c = (char) ((rand() & e->d3) + e->d0);
 			p->f4f = 0;
 			p->f30 = t;
-			p->f4c = (char) ((rand() & e->d3) + e->d0);
 			v[0] = (float) rand() * *(float*) 0x662a18 - *(float*) 0x6628cc;
 			v[1] = (float) rand() * *(float*) 0x662a18 - *(float*) 0x6628cc;
 			v[2] = (float) rand() * *(float*) 0x662a18 - *(float*) 0x6628cc;
 			fcn_004518a0(v);
 			if (!(e->d4 & 0x60)) {
 				p->f34 = t;
-				p->f20 = v[0] * e->f68;
-				p->f24 = v[1] * e->f68;
-				p->f28 = v[2] * e->f68;
+				p->f20 = v[0] * (e->f68 * 1.0f);
+				p->f24 = v[1] * (e->f68 * 1.0f);
+				p->f28 = v[2] * (e->f68 * 1.0f);
 			} else {
 				r = (float) rand() * *(float*) 0x662a18;
 				p->f34 = (int) ((double) t - e->cc * r);
-				lo = e->f68 < e->f6c ? e->f68 : e->f6c;
-				hi = e->f68 > e->f6c ? e->f68 : e->f6c;
+				lo = GOLDTL_MIN(e->f68, e->f6c);
+				hi = GOLDTL_MAX(e->f68, e->f6c);
 				r = lo + (hi - lo) * r;
 				p->f20 = v[0] * r;
 				p->f24 = v[1] * r;
@@ -189,7 +192,7 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
 			dt = (float) d;
 			if (dt > 150.0f) {
 				p->f34 += t - p->f30;
-				dt = *(float*) 0x6628a8;
+				dt = 0.0f;
 			}
 			age = (int) (t - p->f34);
 			p->f30 = t;
@@ -230,21 +233,15 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
 				p->f08 *= e->fac;
 			}
 			if (age < e->c4) {
-				r = (1.0f - (float) (e->c4 - age) * e->f38) * p->f44;
-				r = 255.0f < r ? 255.0f : r;
-				if (0.0f > r)
-					r = 0.0f;
-				p->f4f = (char) r;
+				p->f4f = (char) GOLDTL_MAX(0.0f, GOLDTL_MIN(255.0f,
+					(1.0f - (float) (e->c4 - age) * e->f38) * p->f44));
 			} else if (age < e->c8) {
-				p->f4f = (char) (p->f44 > 255.0f ? 255.0f :
-					(p->f44 < 0.0f ? 0.0f : p->f44));
+				p->f4f = (char) GOLDTL_MAX(0.0f, GOLDTL_MIN(255.0f,
+					p->f44));
 			} else if (age < e->cc) {
 				r = (float) (e->cc - age) * p->f44;
-				r = r * e->f3c;
-				r = 255.0f < r ? 255.0f : r;
-				if (0.0f > r)
-					r = 0.0f;
-				p->f4f = (char) r;
+				p->f4f = (char) GOLDTL_MAX(0.0f, GOLDTL_MIN(255.0f,
+					r * e->f3c));
 			} else {
 				p->flags = p->flags & 0xfe;
 				e->f20++;

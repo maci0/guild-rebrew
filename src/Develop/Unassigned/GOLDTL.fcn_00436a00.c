@@ -39,6 +39,7 @@ int __cdecl fcn_004321a0(F4321a0 flags, int a2, int a3, int v, int lo, int hi, i
 	return v + 1;
 }
 
+#if !defined(REBREW_GOLD)
 typedef struct
 {
 	int f0;
@@ -75,3 +76,4 @@ void __cdecl fcn_00436a00(int arg0, char* p, int index)
 		fcn_00438ac0(arg0, 1);
 	}
 }
+#endif

@@ -10,9 +10,9 @@ extern void __cdecl srv_InitBuildingTypeTable(void);
 extern void __cdecl LogMessageInternal(const char* module, int line, const char* text, int type);
 extern int __cdecl sprintf(char* buffer, const char* format, ...);
 
-void* __cdecl gm_LookupEntityRecordById(int);
 
-void* __cdecl gm_LookupEntityRecordById(int);
+
+
 
 void* __cdecl gm_LookupEntityRecordById(int entityId);
 

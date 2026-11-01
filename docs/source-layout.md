@@ -213,3 +213,41 @@ current metadata for implementation/verdict state. The recorded integer stream
 transport at TL `0x525b40` was cutover debt. No SERVER-bound input changed. Evidence:
 `.scratch/goal80-scene/{verification-scope.json,proof.json,stream-boundary.json}`
 and `.scratch/goal80-organize-review.json`.
+
+### Network local-address placement (2026-11-01)
+
+T&L `nt_GetLocalIp` (`0x420d20`) lives in `Develop/Units/net` beside the network
+routines. Its cached Winsock lookup and native position support this subsystem
+placement; the reconstructed filename and exact original TU remain inferred.
+The move preserves a separate compilation unit and adds no storage claim.
+
+### Entity lookup and pricing placement (2026-11-01)
+
+T&L `gm_LookupEntityRecordById` (`0x508e40`) and
+`eval_ObjektPreis2Credits` (`0x50b980`) live in the game directory, each in its
+own compilation unit. Their reviewed server counterparts reside in `spiel.c`;
+the exact client TU boundaries remain inferred. The retired Gold lookup claim
+stays retired, and the distinct server implementations remain canonical.
+
+### Line renderer placement (2026-11-01)
+
+T&L `dd_Line` and `dd_EndLines` share the inferred
+`Develop/Units/d8_vesa/d8_vesa.c` translation unit. They are adjacent in the
+native image and use the same line buffer. The `dd_Line` diagnostic references
+`d8_vesa.c` for its line limit; it does not establish the original TU boundary.
+
+### Gold DirectDraw dialog placement candidate (2026-11-01)
+
+Gold `0x41c830`, currently in `Units/d3/GOLD.fcn_0041c830.c`, has three
+bounded direct references to the native path `Units/dd_vesa/Dd_vesa.c`.
+This supports reviewing it for the attested `dd_vesa` unit; that unit is
+distinct from the inferred T&L `d8_vesa` line-renderer placement. The current
+file also defines data and remains in place until its storage and linked
+placement can be checked against a fresh Gold build.
+
+### Shared client table search (2026-11-01)
+
+Gold `0x4f36e0` and T&L `0x4f5810` use the same target-conditional definition
+in `Unassigned/FindStraftatIndexById.c`. The name is inferred from the crime
+table's use by `cm_ExAddStraftat`; the original name and subsystem remain
+unproved. Both contexts tested EXACT after the rename (31 of 31 bytes each).

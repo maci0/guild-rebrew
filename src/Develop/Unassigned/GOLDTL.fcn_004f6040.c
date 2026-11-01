@@ -18,7 +18,7 @@ extern Rec2d g_9a3800[512];
 extern Pair g_99f800[0x800];
 extern char g_7f4ca0[];
 
-int __cdecl fcn_004f36e0(int b);
+int __cdecl FindStraftatIndexById(int b);
 
 /* ADDRESS: GOLDTL 0x004f6040 */
 int __cdecl fcn_004f6040(int* ids, int* d, unsigned short k)
@@ -47,7 +47,7 @@ int __cdecl fcn_004f6040(int* ids, int* d, unsigned short k)
 	key = *(int*) (e + 4);
 	for (i = 0; i < 0x800; i++) {
 		if (g_99f800[i].owner == key) {
-			s = fcn_004f36e0(g_99f800[i].key);
+			s = FindStraftatIndexById(g_99f800[i].key);
 			if (s != -1 && g_9a3800[s].x25 == 1) {
 				list[m] = g_9a3800[s].x16;
 				m++;

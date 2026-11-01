@@ -23260,8 +23260,17 @@
   },
   {
     "va": 5439024,
-    "size": 768,
-    "name": "fcn.0052fe30"
+    "size": 15,
+    "name": "fcn.0052fe30",
+    "extent_history": [
+      {
+        "old_size": 768,
+        "new_size": 15,
+        "reason": "Native wrapper at 0x52fe30 contains two calls and ends in an unconditional tail jump at 0x52fe3a; alignment byte precedes a distinct prologue at 0x52fe40.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T11:22:17.056668+00:00"
+      }
+    ]
   },
   {
     "va": 5439792,

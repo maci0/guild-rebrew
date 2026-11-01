@@ -21,7 +21,7 @@ extern Pair_99f800 g_99f800[0x800];
 extern char g_7f4ca0[];
 
 void* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_004f36e0(int b);
+int __cdecl FindStraftatIndexById(int b);
 
 int __cdecl fcn_004f63d0(int id, int* out, unsigned short k)
 {
@@ -41,7 +41,7 @@ int __cdecl fcn_004f63d0(int id, int* out, unsigned short k)
 	memset(out, 0xff, 0x20 * 4);
 	for (i = 0; i < 0x800; i++) {
 		if (((Pair*)g_99f800)[i].a == *(int*) (e + 4)) {
-			s = fcn_004f36e0(((Pair*)g_99f800)[i].b);
+			s = FindStraftatIndexById(((Pair*)g_99f800)[i].b);
 			if (s != -1 && g_9a3800[s].x16 == id) {
 				out[cnt] = s;
 				cnt++;

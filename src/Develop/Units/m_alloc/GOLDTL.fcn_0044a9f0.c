@@ -36,6 +36,7 @@ void __cdecl fcn_0044a9f0(MeshObj* m)
 	int* counts;
 	int* repeat;
 	int* list;
+	int* p;
 	int max;
 	int v;
 	int f;
@@ -117,14 +118,14 @@ void __cdecl fcn_0044a9f0(MeshObj* m)
 	list = repeat;
 	stride = max * 4;
 	for (v = 0; v < m->nverts; v++) {
-		cnt = list[0];
-		for (i = 0; i < cnt; i++) {
-			entry = list[i + 1];
+		p = list + 1;
+		for (i = 0; i < list[0]; i++, p++) {
+			entry = *p;
+			face = (entry & 0x3ffffff) / 3;
+			corner = (entry & 0x3ffffff) % 3;
 			if (!(entry & 0x40000000)) {
 				continue;
 			}
-			face = (entry & 0x3ffffff) / 3;
-			corner = (entry & 0x3ffffff) % 3;
 			m->uvs[uv_index].u = m->faces[face].uv[corner].u;
 			m->uvs[uv_index].v = m->faces[face].uv[corner].v;
 			if (m->vrepeat[v] > 0) {

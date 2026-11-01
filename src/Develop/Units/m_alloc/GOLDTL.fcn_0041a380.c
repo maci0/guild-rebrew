@@ -52,7 +52,7 @@ int __cdecl fcn_0041a380(unsigned int minWidth, unsigned int minHeight, unsigned
 		r = (int) Direct3DCreate8(0xdc);
 		D3D = r;
 		if (r == 0)
-			return (int) ADAPTERCOUNT;
+			goto done;
 	}
 	while (ADAPTERCOUNT > 0)
 		fcn_0041a2c0(0);
@@ -135,5 +135,6 @@ int __cdecl fcn_0041a380(unsigned int minWidth, unsigned int minHeight, unsigned
 			offset -= 0x508;
 		}
 	}
+done:
 	return (int) ADAPTERCOUNT;
 }

@@ -20,183 +20,222 @@ typedef struct {
 	float pos[4][4];
 	float uv[4][2];
 	pick_point edge[4];
-	int found;
+	unsigned char found;
 } pick_ctx;
 
-/* ADDRESS: GOLDTL 0x00444860 */
-unsigned char __cdecl fcn_00444860(float x, float y, int obj, int enable,
-	float* outx, float* outy)
-{
-	pick_ctx ctx;
-	float min[2];
-	float best_diff;
-	float best_max;
-	float best_min;
-	int i;
-	int j;
-	int ia;
-	int ib;
-	int ic;
-	int id;
-	float ax;
-	float ay;
-	float az;
+typedef struct {
+	float w1;
+	float w2;
+	float t1;
 	float e1x;
 	float e1y;
 	float e1z;
+	float e1w;
 	float e2x;
 	float e2y;
 	float e2z;
-	float n1;
-	float n2;
-	float n3;
+	float e2w;
+	float qx;
+	float qy;
+	float qz;
+	float qw;
+	float min[2];
+	int ic;
+	int ib;
+	int ia;
 	float dx;
 	float dy;
 	float dz;
+	float dw0;
+	float dw1;
+	float ay;
+	float dw2;
+	float dw3;
+	float tdx;
+	float dw4;
+	float tdz;
+	float dw5;
+	pick_ctx ctx;
+} pick_frame;
+
+/* ADDRESS: GOLDTL 0x00444860 */
+unsigned char __cdecl fcn_00444860(float x, float y, int obj, int index,
+	float* outx, float* outy)
+{
+	pick_frame fr;
+	float ax;
+	float az;
+	float n1;
+	float n2;
+	float n3;
 	float den;
 	float t;
 	float r;
 	float r2;
-	float qx;
-	float qy;
 	float qz;
+	int i;
+	int j;
+	int id;
 
-	if (!enable)
+	if (!index)
 		return 0;
-	ctx.obj = enable;
-	ctx.edge[0].x = g_14ce860 - 1;
-	ctx.edge[0].y = g_14ce864 - 1;
-	ctx.edge[1].x = 0;
-	ctx.edge[1].y = g_14ce864 - 1;
-	ctx.edge[2].x = g_14ce860 - 1;
-	ctx.edge[2].y = 0;
-	ctx.edge[3].x = 0;
-	ctx.edge[3].y = 0;
-	ctx.found = 0;
-	fcn_004379a0(g_67a370, obj, 0x40, (void*) fcn_00444ff0, &ctx);
-	if (!ctx.found)
+	fr.ctx.obj = index;
+	fr.ctx.edge[0].x = g_14ce860 - 1;
+	fr.ctx.edge[0].y = g_14ce864 - 1;
+	fr.ctx.edge[1].x = 0;
+	fr.ctx.edge[1].y = g_14ce864 - 1;
+	fr.ctx.edge[2].x = g_14ce860 - 1;
+	fr.ctx.edge[2].y = 0;
+	fr.ctx.edge[3].x = 0;
+	fr.ctx.edge[3].y = 0;
+	fr.ctx.found = 0;
+	fcn_004379a0(g_67a370, obj, 0x40, (void*) fcn_00444ff0, &fr.ctx);
+	if (!fr.ctx.found)
 		return 0;
 
-	min[0] = 1e10f;
-	min[1] = 1e10f;
+	fr.min[0] = 1.0e10f;
+	fr.min[1] = 1.0e10f;
 	for (i = 0; i < 4; i++) {
-		if (!(ctx.uv[i][0] > min[0]))
-			min[0] = ctx.uv[i][0];
-		if (ctx.uv[i][1] <= min[1])
-			min[1] = ctx.uv[i][1];
+		if (fr.ctx.uv[i][0] <= fr.min[0])
+			fr.min[0] = fr.ctx.uv[i][0];
+		if (fr.ctx.uv[i][1] <= fr.min[1])
+			fr.min[1] = fr.ctx.uv[i][1];
 	}
 	for (i = 0; i < 4; i++) {
 		for (j = 0; j < 2; j++)
-			ctx.uv[i][j] -= min[j];
-		ctx.uv[i][1] = 1.0f - ctx.uv[i][1];
+			fr.ctx.uv[i][j] -= fr.min[j];
+		fr.ctx.uv[i][1] = 1.0f - fr.ctx.uv[i][1];
 	}
 
-	ia = -1;
-	ib = -1;
-	ic = -1;
-	best_min = 1e10f;
-	best_max = -1e10f;
-	best_diff = -1e10f;
+	fr.ia = -1;
+	fr.ib = -1;
+	fr.ic = -1;
+	fr.w1 = 1.0e10f;
+	fr.w2 = -1.0e10f;
+	fr.t1 = -1.0e10f;
 	for (i = 0; i < 4; i++) {
-		t = (float) fabs(ctx.uv[i][1]) - (float) fabs(ctx.uv[i][0]);
-		if (t > best_diff) {
-			ia = i;
-			best_diff = t;
+		float fx = (float) fabs(fr.ctx.uv[i][0]);
+		float fy = (float) fabs(fr.ctx.uv[i][1]);
+
+		if (fy - fx > fr.t1) {
+			fr.t1 = fy - fx;
+			fr.ia = i;
 		}
-		t = (float) fabs(ctx.uv[i][0]) + (float) fabs(ctx.uv[i][1]);
-		if (t > best_max) {
-			ib = i;
-			best_max = t;
+		if (fx + fy > fr.w2) {
+			fr.w2 = fx + fy;
+			fr.ib = i;
 		}
-		if (t < best_min) {
-			ic = i;
-			best_min = t;
+		if (fx + fy < fr.w1) {
+			fr.w1 = fx + fy;
+			fr.ic = i;
 		}
 	}
-	if (ia == -1 || ib == -1 || ic == -1)
+	if (fr.ia == -1 || fr.ib == -1 || fr.ic == -1)
 		return 0;
-	if (ia == ib || ia == ic || ib == ic)
+	if (fr.ia == fr.ib || fr.ia == fr.ic || fr.ib == fr.ic)
 		return 0;
-	for (id = 0; id == ib || id == ia || id == ic; id++)
+	for (id = 0; id == fr.ia || id == fr.ib || id == fr.ic; id++)
 		;
 
-	ax = ctx.pos[ia][0];
-	ay = ctx.pos[ia][1];
-	az = ctx.pos[ia][2];
-	e1x = ax - ctx.pos[ib][0];
-	e1y = ay - ctx.pos[ib][1];
-	e1z = az - ctx.pos[ib][2];
-	e2x = ax - ctx.pos[ic][0];
-	e2y = ay - ctx.pos[ic][1];
-	e2z = az - ctx.pos[ic][2];
-	n1 = e2z * e1y - e2y * e1z;
-	n2 = e2x * e1z - e2z * e1x;
-	n3 = e2y * e1x - e2x * e1y;
-	dx = x - g_1052bc0;
-	dy = -(y - g_1052bc8);
-	dz = g_10432a4;
-	den = dz * n3 + dy * n2 + dx * n1;
-	if ((float) fabs(den) <= 1e-7f)
+	ax = fr.ctx.pos[fr.ia][0];
+	fr.ay = fr.ctx.pos[fr.ia][1];
+	az = fr.ctx.pos[fr.ia][2];
+	fr.e1x = ax - fr.ctx.pos[fr.ib][0];
+	fr.e1y = fr.ay - fr.ctx.pos[fr.ib][1];
+	fr.e1z = az - fr.ctx.pos[fr.ib][2];
+	fr.e2x = ax - fr.ctx.pos[fr.ic][0];
+	fr.e2y = fr.ay - fr.ctx.pos[fr.ic][1];
+	fr.e2z = az - fr.ctx.pos[fr.ic][2];
+	n1 = fr.e2z * fr.e1y - fr.e2y * fr.e1z;
+	n2 = fr.e2x * fr.e1z - fr.e2z * fr.e1x;
+	fr.t1 = fr.e2y * fr.e1x;
+	fr.w1 = fr.e2x * fr.e1y;
+	n3 = fr.t1 - fr.w1;
+	fr.dx = x - g_1052bc0;
+	fr.dy = -(y - g_1052bc8);
+	fr.dz = g_10432a4;
+	den = fr.dz * n3 + fr.dy * n2 + fr.dx * n1;
+	if ((float) fabs(den) <= 1e-7)
 		return 0;
-	t = (n1 * ax + n2 * ay + n3 * az
-		+ (n1 + n2 + n3) * *(float*) 0x6628a8) / den;
-	qx = ax - t * dx;
-	qy = ay - t * dy;
-	qz = az - t * dz;
-	r = (qx * e1y - qy * e1x) / (e2x * e1y - e2y * e1x);
-	qx = qx + e2x * -r;
-	qy = qy + e2y * -r;
-	qz = qz + e2z * -r;
-	r2 = (qx / e1x + qy / e1y + qz / e1z) * (1.0f / 3.0f);
+	t = (n3 * az + n2 * fr.ay + n1 * ax + (n3 + n2 + n1) * 0.0f) / den;
+	fr.qx = ax - t * fr.dx;
+	fr.qy = fr.ay - t * fr.dy;
+	qz = az - t * fr.dz;
+	r = (fr.qx * fr.e1y - fr.qy * fr.e1x)
+		/ (fr.e2x * fr.e1y - fr.e2y * fr.e1x);
+	fr.qx = fr.qx + r * -fr.e2x;
+	fr.qy = fr.qy + r * -fr.e2y;
+	qz = qz + r * -fr.e2z;
+	r2 = (fr.qx / fr.e1x + fr.qy / fr.e1y + qz / fr.e1z)
+		* (1.0f / 3.0f);
+	fr.w1 = r;
+	fr.w2 = r2;
 	if (r2 + r > 1.0) {
-		ax = ctx.pos[id][0];
-		ay = ctx.pos[id][1];
-		az = ctx.pos[id][2];
-		e2x = ax - ctx.pos[ib][0];
-		e2y = ay - ctx.pos[ib][1];
-		e2z = az - ctx.pos[ib][2];
-		e1x = ax - ctx.pos[ic][0];
-		e1y = ay - ctx.pos[ic][1];
-		e1z = az - ctx.pos[ic][2];
-		n1 = e2z * e1y - e2y * e1z;
-		n2 = e2x * e1z - e2z * e1x;
-		n3 = e2y * e1x - e2x * e1y;
-		den = dz * n3 + dy * n2 + dx * n1;
-		if ((float) fabs(den) <= 1e-7f)
+		ax = fr.ctx.pos[id][0];
+		fr.ay = fr.ctx.pos[id][1];
+		az = fr.ctx.pos[id][2];
+		fr.e1x = ax - fr.ctx.pos[fr.ib][0];
+		fr.e1y = fr.ay - fr.ctx.pos[fr.ib][1];
+		fr.e1z = az - fr.ctx.pos[fr.ib][2];
+		fr.e2x = ax - fr.ctx.pos[fr.ic][0];
+		fr.e2y = fr.ay - fr.ctx.pos[fr.ic][1];
+		fr.e2z = az - fr.ctx.pos[fr.ic][2];
+		n1 = fr.e2z * fr.e1y - fr.e2y * fr.e1z;
+		n2 = fr.e2x * fr.e1z - fr.e2z * fr.e1x;
+		fr.t1 = fr.e2y * fr.e1x;
+		fr.w1 = fr.e2x * fr.e1y;
+		n3 = fr.t1 - fr.w1;
+		den = fr.dz * n3 + fr.dy * n2 + fr.dx * n1;
+		if ((float) fabs(den) <= 1e-7)
 			return 0;
-		t = (n1 * ax + n2 * ay + n3 * az
-			+ (n1 + n2 + n3) * *(float*) 0x6628a8) / den;
-		qx = ax - t * dx;
-		qy = ay - t * dy;
-		qz = az - t * dz;
-		r = (qx * e1y - qy * e1x) / (e2x * e1y - e2y * e1x);
-		qx = qx + e2x * -r;
-		qy = qy + e2y * -r;
-		qz = qz + e2z * -r;
-		r2 = (qx / e1x + qy / e1y + qz / e1z) * (1.0f / 3.0f);
-		if (!(r2 < 0.0f) && !(r2 > 1.0f) && !(r < 0.0f) && !(r > 1.0f)) {
-			*outx = ((float) fabs(ctx.uv[ia][0])
-				- (float) fabs(ctx.uv[ib][0])) * (1.0f - r2)
-				+ (float) fabs(ctx.uv[ib][0]);
-			*outy = 1.0 - (((float) fabs(ctx.uv[ia][1])
-				- (float) fabs(ctx.uv[ic][1])) * (1.0f - r)
-				+ (float) fabs(ctx.uv[ic][1]));
-			return 1;
-		}
+		t = (n3 * az + n2 * fr.ay + n1 * ax
+			+ (n3 + n2 + n1) * 0.0f) / den;
+		fr.qx = ax - t * fr.dx;
+		fr.qy = fr.ay - t * fr.dy;
+		qz = az - t * fr.dz;
+		r = (fr.qx * fr.e1y - fr.qy * fr.e1x)
+			/ (fr.e2x * fr.e1y - fr.e2y * fr.e1x);
+		fr.qx = fr.qx + r * -fr.e2x;
+		fr.qy = fr.qy + r * -fr.e2y;
+		qz = qz + r * -fr.e2z;
+		r2 = (fr.qx / fr.e1x + fr.qy / fr.e1y + qz / fr.e1z)
+			* (1.0f / 3.0f);
+		fr.w1 = r;
+		fr.w2 = r2;
+		if (r2 < 0.0f)
+			return 0;
+		if (r2 > 1.0f)
+			return 0;
+		if (r < 0.0f)
+			return 0;
+		if (r > 1.0f)
+			return 0;
+		*outx = ((float) fabs(fr.ctx.uv[fr.ib][0])
+			- (float) fabs(fr.ctx.uv[fr.ia][0])) * (1.0f - r2)
+			+ (float) fabs(fr.ctx.uv[fr.ia][0]);
+		*outy = 1.0 - (((float) fabs(fr.ctx.uv[fr.ic][1])
+			- (float) fabs(fr.ctx.uv[fr.ia][1])) * (1.0f - r)
+			+ (float) fabs(fr.ctx.uv[fr.ia][1]));
+		return 1;
 	} else {
-		if (!(r2 < 0.0f) && !(r2 > 1.0f) && !(r < 0.0f) && !(r > 1.0f)) {
-			*outx = ((float) fabs(ctx.uv[ib][0])
-				- (float) fabs(ctx.uv[ia][0])) * r2
-				+ (float) fabs(ctx.uv[ia][0]);
-			*outy = 1.0 - (((float) fabs(ctx.uv[ic][1])
-				- (float) fabs(ctx.uv[ia][1])) * r
-				+ (float) fabs(ctx.uv[ia][1]));
-			return 1;
-		}
+		if (r2 < 0.0f)
+			return 0;
+		if (r2 > 1.0f)
+			return 0;
+		if (r < 0.0f)
+			return 0;
+		if (r > 1.0f)
+			return 0;
+		*outx = ((float) fabs(fr.ctx.uv[fr.ib][0])
+			- (float) fabs(fr.ctx.uv[fr.ia][0])) * r2
+			+ (float) fabs(fr.ctx.uv[fr.ia][0]);
+		*outy = 1.0 - (((float) fabs(fr.ctx.uv[fr.ic][1])
+			- (float) fabs(fr.ctx.uv[fr.ia][1])) * r
+			+ (float) fabs(fr.ctx.uv[fr.ia][1]));
+		return 1;
 	}
 	return 0;
 }
 /* Layout scaffolding: shifts the next source object to its reference
  * VA. 0x90 filler, not reconstruction. Generated by the text lead pass. */
 #pragma data_seg(".text")
-

@@ -32,7 +32,7 @@ extern Pair_99f800 g_99f800[0x800];
 extern unsigned short g_774970;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_004f36e0(int key);
+int __cdecl FindStraftatIndexById(int key);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004fa980(int arg, unsigned char kind);
 void __cdecl fcn_005b2a00(Obj* o, char* p);
@@ -43,7 +43,7 @@ int __cdecl fcn_004f5940(int key, int force)
 	char* p;
 	int i;
 
-	k = fcn_004f36e0(key);
+	k = FindStraftatIndexById(key);
 	if (k == -1) {
 		return 3;
 	}

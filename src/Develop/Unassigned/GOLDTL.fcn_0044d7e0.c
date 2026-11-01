@@ -22,9 +22,8 @@ void __cdecl fcn_0044d7e0(void* stream, int* table, int kind, void* extra)
 			if (v == 0x28) {
 				idx = FindTableEntryIndex(0x28, table, kind);
 				if (idx != 0x27) {
-					rec = table + idx * 3;
-					if (rec[1] != 0) {
-						((void (__cdecl*) (void*, void*)) rec[1]) (stream, extra);
+					if (table[idx * 3 + 1] != 0) {
+						((void (__cdecl*) (void*, void*)) table[idx * 3 + 1]) (stream, extra);
 					}
 				}
 				break;
@@ -35,8 +34,11 @@ void __cdecl fcn_0044d7e0(void* stream, int* table, int kind, void* extra)
 				if (rec[1] != 0 && rec[2] == 0) {
 					((void (__cdecl*) (void*, void*)) rec[1]) (stream, extra);
 				} else {
+					int r2;
+
+					r2 = rec[2];
 					g_6b86c0++;
-					if (rec[2] == 0) {
+					if (r2 == 0) {
 						fcn_0044d7e0(stream, table, kind, extra);
 					} else {
 						fcn_0044d7e0(stream, (int*) rec[1], rec[2], extra);
