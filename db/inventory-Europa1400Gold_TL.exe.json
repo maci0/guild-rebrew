@@ -45951,7 +45951,7 @@
   },
   {
     "va": 4990000,
-    "size": 960,
+    "size": 956,
     "name": "fcn.004c2430",
     "extent_history": [
       {
@@ -45967,6 +45967,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.724330+00:00"
+      },
+      {
+        "old_size": 960,
+        "new_size": 956,
+        "reason": "The 960-byte inventory extent covers 940 bytes of code, a 16-byte four-entry switch table at +0x3AC, then four 0x90 section-padding bytes at +0x3BC. The native function symbol ends after the table, so the reviewed extent is 956 bytes; the padding belongs to section alignment.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T05:49:10.948142+00:00"
       }
     ]
   },

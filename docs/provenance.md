@@ -11387,3 +11387,29 @@ still lack stored verdicts, so the STUB bucket grew while the test batch was
 deferred: ten size-mismatch agents were saturating the compiler backend.
 
 Decision: continuing with SIZE_MISMATCH. No GA was run.
+
+## 2026-11-01 — first size-mismatch keeps and one extent repair
+
+Size-mismatch slices sm3, sm4, sm5, sm7 and sm9 reported. Kept:
+
+- `0x4F2FE0` (`friedhof_logic.c`): the client path reads the count from
+  `*(int*)((char*)cmd+0x11)` and two !REBREW_SERVER declarations widen their
+  second parameter to `int`. Row size 672, object 671, match 671/672, up from 528.
+- `0x4F0F60`: expression reordered to `700.0f * ((float)i * p) * 32.0f`, matching
+  the native `fmul [0x6652cc]` then `fmul [0x664154]`. Object now 133 bytes, match
+  39/133, up from 36.
+- `0x4C2430`: the 960-byte inventory extent covered 940 bytes of code plus a
+  16-byte switch table plus four 0x90 alignment bytes. Repaired the extent to 956
+  with reviewed digest 6c4f42aa; the row is now NEAR_MATCHING 886/956 instead of
+  SIZE_MISMATCH 886/960.
+
+sm4 and sm9 kept nothing; their closest rows are blocked on MSVC 6 scheduling
+(epilogue rematerialisation, x87 stack discipline, stack-cleanup grouping,
+constant CSE), not statement shape. sm5 found two extent-blocked rows
+(`0x4C2430`, `0x561380`) and registers `0x4C2430` as its closest row.
+
+Note on process: ten slices oversubscribed the host (load 85-120, 30+ concurrent
+compiler runs). Results are thin for that reason; the remaining slices finish
+their current rows and report.
+
+Decision: continuing SIZE_MISMATCH after the slices report.

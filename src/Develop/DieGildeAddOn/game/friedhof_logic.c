@@ -1173,9 +1173,9 @@ void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
 int __cdecl gv_eval_SlotFrei(void* unused, int* p);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);
-int __cdecl fcn_00503930(int a, unsigned short b, int c);
 #if !defined(REBREW_SERVER)
-int __cdecl gm_AddObjekt(int a, unsigned short b, int c);
+int __cdecl fcn_00503930(int a, int b, int c);
+int __cdecl gm_AddObjekt(int a, int b, int c);
 #endif
 
 /* Moves a graveyard worker's slot entry into the field it currently works in:
@@ -1398,7 +1398,7 @@ done:
 		gm_AddObjekt(*(int*) ((char*) g_slot_table + 4 +
 		                     *(unsigned short*) ((char*) rec2 + 0x27) * 540),
 		             *(unsigned short*) ((unsigned char) g_773d75 * 756 + 0x8680b4),
-		             (int) ((float) count *
+		             (int) ((float) *(int*) ((char*) cmd + 0x11) *
 		                    *(float*) (0x6652d8 + *(int*) ((char*) cmd + 0xd) * 4)));
 	}
 	return 0;
