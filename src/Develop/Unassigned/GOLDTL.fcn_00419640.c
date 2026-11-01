@@ -2,6 +2,7 @@
 
 extern int g_6b5d54;
 extern int g_6b5da8;
+extern char str_6776b8[];
 
 int __cdecl fcn_004193d0(char*);
 void __cdecl fcn_004225e0(int, int);
@@ -19,7 +20,7 @@ unsigned int __cdecl fcn_00419640(int a0, int* a1)
 	switch (which) {
 	case -1:
 		if (fcn_004193d0((char*) 0x6b5d20)) {
-			if (strcmp((char*) 0x6b5d20, (char*) (a0 * 0x19 + 0x6776b8)) == 0) {
+			if (strcmp((char*) 0x6b5d20, (str_6776b8 + a0 * 0x19)) == 0) {
 				*a1 = 0;
 				r = 0x6b5d20;
 				return r;
@@ -28,7 +29,7 @@ unsigned int __cdecl fcn_00419640(int a0, int* a1)
 				if (g_6b5da8 != 0) {
 					fcn_004225e0(g_6b5da8, 0);
 				}
-				g_6b5da8 = fcn_00422460(0, (char*) (a0 * 0x19 + 0x6776b8));
+				g_6b5da8 = fcn_00422460(0, (str_6776b8 + a0 * 0x19));
 				if (g_6b5da8 == 0 || *(int*) (g_6b5da8 + 4) == 0) {
 					goto done;
 				}
@@ -39,7 +40,7 @@ unsigned int __cdecl fcn_00419640(int a0, int* a1)
 				r = 0x6b5d74;
 				goto done;
 			}
-			if (strcmp((char*) 0x6b5d74, (char*) (a0 * 0x19 + 0x6776b8)) != 0) {
+			if (strcmp((char*) 0x6b5d74, (str_6776b8 + a0 * 0x19)) != 0) {
 				goto done;
 			}
 			*a1 = 1;
@@ -49,7 +50,7 @@ unsigned int __cdecl fcn_00419640(int a0, int* a1)
 		if (g_6b5d54 != 0) {
 			fcn_004225e0(g_6b5d54, 0);
 		}
-		g_6b5d54 = fcn_00422460(0, (char*) (a0 * 0x19 + 0x6776b8));
+		g_6b5d54 = fcn_00422460(0, (str_6776b8 + a0 * 0x19));
 		if (g_6b5d54 == 0 || *(int*) (g_6b5d54 + 4) == 0) {
 			goto done;
 		}
@@ -62,7 +63,7 @@ unsigned int __cdecl fcn_00419640(int a0, int* a1)
 		break;
 	case 0:
 		if (fcn_004193d0((char*) 0x6b5d74)) {
-			if (strcmp((char*) 0x6b5d74, (char*) (a0 * 0x19 + 0x6776b8)) != 0) {
+			if (strcmp((char*) 0x6b5d74, (str_6776b8 + a0 * 0x19)) != 0) {
 				goto done;
 			}
 			*a1 = 1;
@@ -72,7 +73,7 @@ unsigned int __cdecl fcn_00419640(int a0, int* a1)
 		if (g_6b5da8 != 0) {
 			fcn_004225e0(g_6b5da8, 0);
 		}
-		g_6b5da8 = fcn_00422460(0, (char*) (a0 * 0x19 + 0x6776b8));
+		g_6b5da8 = fcn_00422460(0, (str_6776b8 + a0 * 0x19));
 		if (g_6b5da8 == 0 || *(int*) (g_6b5da8 + 4) == 0) {
 			goto done;
 		}
@@ -88,7 +89,7 @@ unsigned int __cdecl fcn_00419640(int a0, int* a1)
 			if (g_6b5d54 != 0) {
 				fcn_004225e0(g_6b5d54, 0);
 			}
-			g_6b5d54 = fcn_00422460(0, (char*) (a0 * 0x19 + 0x6776b8));
+			g_6b5d54 = fcn_00422460(0, (str_6776b8 + a0 * 0x19));
 			if (g_6b5d54 == 0 || *(int*) (g_6b5d54 + 4) == 0) {
 				*a1 = 0;
 				goto done;
@@ -100,7 +101,7 @@ unsigned int __cdecl fcn_00419640(int a0, int* a1)
 			r = 0x6b5d20;
 			goto done;
 		}
-		if (strcmp((char*) 0x6b5d20, (char*) (a0 * 0x19 + 0x6776b8)) != 0) {
+		if (strcmp((char*) 0x6b5d20, (str_6776b8 + a0 * 0x19)) != 0) {
 			goto done;
 		}
 		r = 0x6b5d20;

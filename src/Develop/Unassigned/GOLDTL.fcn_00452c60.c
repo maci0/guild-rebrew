@@ -231,23 +231,18 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
 			}
 			if (age < e->c4) {
 				r = (1.0f - (float) (e->c4 - age) * e->f38) * p->f44;
-				if (r > 255.0f)
-					r = 255.0f;
-				if (r < 0.0f)
+				r = 255.0f < r ? 255.0f : r;
+				if (0.0f > r)
 					r = 0.0f;
 				p->f4f = (char) r;
 			} else if (age < e->c8) {
-				r = p->f44;
-				if (r > 255.0f)
-					r = 255.0f;
-				if (r < 0.0f)
-					r = 0.0f;
-				p->f4f = (char) r;
+				p->f4f = (char) (p->f44 > 255.0f ? 255.0f :
+					(p->f44 < 0.0f ? 0.0f : p->f44));
 			} else if (age < e->cc) {
-				r = (float) (e->cc - age) * p->f44 * e->f3c;
-				if (r > 255.0f)
-					r = 255.0f;
-				if (r < 0.0f)
+				r = (float) (e->cc - age) * p->f44;
+				r = r * e->f3c;
+				r = 255.0f < r ? 255.0f : r;
+				if (0.0f > r)
 					r = 0.0f;
 				p->f4f = (char) r;
 			} else {

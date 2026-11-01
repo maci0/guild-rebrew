@@ -137,12 +137,11 @@ alloc:
 			rec->f14 = 0;
 			rec->f18 = 0;
 			rec->f70 = -1;
-			b = (unsigned char) ((a0->f215 >> 1) & 1);
+			rec->f98 = (unsigned char) ((a0->f215 >> 1) & 1);
 			rec->f1c = 0;
-			rec->f98 = b;
 			rec->f20 = 0;
 			rec->f24 = 0;
-			if (b != 0) {
+			if (rec->f98 != 0) {
 				Col0457290 c;
 				Tex0457290* t;
 

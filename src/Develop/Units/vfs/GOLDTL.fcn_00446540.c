@@ -29,6 +29,7 @@ typedef struct ModelItem {
 /* SIZE 0x1a4; model data block. */
 typedef struct ModelData {
 	ModelItem items[7];
+	char pad188[0x10];
 	int i198;
 	int i19c;
 } ModelData;
@@ -64,9 +65,9 @@ struct Node {
 	Node* child;
 	int i204;
 	char pad208[0xc];
-	char flags;
-	char b215;
-	char b216;
+	unsigned char flags;
+	unsigned char b215;
+	unsigned char b216;
 	char pad217;
 	int type;
 	int kind;
@@ -86,34 +87,28 @@ void __cdecl fcn_00446540(int stream, Node* n)
 {
 	char buf[0x100];
 	char* p;
-	char* str;
 	int kind;
 	int i;
 	Node* p2;
 
 	fcn_00401210(stream, (unsigned char) n->flags >> 7);
-	if (n->flags >= 0)
+	if (((unsigned char) n->flags >> 7) == 0)
 		goto tail;
 	kind = n->type;
-	if (n->type == 1)
+	if (kind == 1) {
 		kind = n->kind;
-	if (n->type == 1 && n->name[0] == '!')
-		str = n->name + 1;
-	else
-		str = n->name;
-	fcn_00401230(stream, str);
+		if (n->name[0] == '!')
+			fcn_00401230(stream, n->name + 1);
+		else
+			fcn_00401230(stream, n->name);
+	} else {
+		fcn_00401230(stream, n->name);
+	}
 	fcn_00401360(stream, n->i204);
 	fcn_00401360(stream, n->i220);
 	fcn_00401360(stream, kind);
 	fcn_00401210(stream, n->type == 1);
 	switch (kind) {
-	case 0:
-		fcn_00401210(stream, ((unsigned char) n->flags >> 6) & 1);
-		fcn_00401260(stream, n->i68);
-		fcn_004012f0(stream, &n->pos.x);
-		fcn_004012f0(stream, &n->v5c.x);
-		fcn_004012f0(stream, &n->v90.x);
-		break;
 	case 1:
 	case 4:
 		fcn_00401210(stream, ((unsigned char) n->flags >> 5) & 1);
@@ -126,7 +121,7 @@ void __cdecl fcn_00446540(int stream, Node* n)
 		fcn_00401360(stream, 0);
 		if (n->model != 0) {
 			fcn_00401360(stream, n->model->count);
-			if (n->model->count != 0) {
+			if (n->model->count > 0) {
 				strcpy(buf, n->model->name);
 				p = strrchr(buf, '_');
 				if (p != 0 && strlen(p) == 2 && isdigit(p[1]))
@@ -136,7 +131,7 @@ void __cdecl fcn_00446540(int stream, Node* n)
 		} else {
 			fcn_00401360(stream, 0);
 		}
-		break;
+		/* Native flow continues into the 2/3 body: no break in the original. */
 	case 2:
 	case 3:
 		fcn_004012f0(stream, &n->pos.x);
@@ -150,6 +145,13 @@ void __cdecl fcn_00446540(int stream, Node* n)
 			fcn_004012f0(stream, &n->pairs[i].a.x);
 			fcn_004012f0(stream, &n->pairs[i].b.x);
 		}
+		break;
+	case 0:
+		fcn_00401210(stream, ((unsigned char) n->flags >> 6) & 1);
+		fcn_00401260(stream, n->i68);
+		fcn_004012f0(stream, &n->pos.x);
+		fcn_004012f0(stream, &n->v5c.x);
+		fcn_004012f0(stream, &n->v90.x);
 		break;
 	case 5:
 	case 6:
@@ -181,13 +183,15 @@ void __cdecl fcn_00446540(int stream, Node* n)
 		break;
 	}
 tail:
-	for (p2 = n->child; p2 != 0 && p2->flags >= 0; p2 = p2->next)
+	for (p2 = n->child; p2 != 0 && ((unsigned char) p2->flags >> 7) == 0; p2 = p2->next)
 		;
 	fcn_00401210(stream, p2 != 0);
 	if (p2 != 0)
 		fcn_00446540(stream, p2);
 	for (p2 = n->next; p2 != 0; p2 = p2->next) {
-		if ((p2->flags & 1) == 0 && p2->flags < 0)
+		if ((p2->flags & 1) == 1)
+			continue;
+		if (((unsigned char) p2->flags >> 7) != 0)
 			break;
 	}
 	fcn_00401210(stream, p2 != 0);

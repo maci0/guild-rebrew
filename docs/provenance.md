@@ -11760,3 +11760,75 @@ pad shift 0x10). Rebuild: 2,977,792 bytes, raw 251,705, informative 115,528,
 no compile or link errors, sha256 2b65d909.
 
 Decision: continuing. No GA was run.
+
+## 2026-11-01: 0x56caf0 state dispatch corrected, zero-register blocker re-established
+
+- `0x0056caf0` (STUB, 171/896, object 896 bytes): the jump table at `0x56ce54` indexes
+  `state + 2` and routes `-2` to the release body `0x56ce40`, `-1` to the queue body
+  `0x56cb25`, `0` to the search body `0x56cb4b`, `1` to the removal body `0x56cc72`,
+  `2` to the re-resolve body `0x56cdb2`, and `3` to the plain epilogue `0x56ce49`.
+  The committed body had those labels shifted by one (queue on `0`, search on `1`,
+  removal on `2`, re-resolve on `3`). The body now uses the native labels in native
+  source order and reaches `cmp eax,5` with a six-entry table, matching the reference
+  dispatch. Byte match stays 171/896 and content-aligned instructions stay 196/284;
+  the change fixes semantics, not the metric.
+- Why it cannot move yet: the reference prologue is `xor edi,edi` (2 bytes) plus
+  `mov [esp+0x14],edi` (4 bytes) where the candidate emits `mov dword ptr [esp+0x10],0`
+  (8 bytes). That single store puts every later byte 2 to 3 bytes off, so positional
+  byte matching cannot recover even where the bodies agree instruction for instruction
+  (the search body is 295 bytes in both files).
+- Zero register trigger, measured: MSVC 6 /O2 does coalesce two zero stores to an
+  address-taken local into one constant register and then reuses it for `push`
+  arguments. A six-line helper with a copied request struct reproduces the reference
+  idiom exactly (`xor edi,edi`, `mov %edi,0x70(%esp)`, `push %edi` four times). The
+  switch-split layout here never triggers it. Rechecked negative: a `zero` local routed
+  through every zero argument and store (folded to immediates), `found` routed through
+  the same sites (folded), `int`/`char*` cast forms, declaration order permutations,
+  declaration initializers, extra zero pushes in one block (up to 15), and per-run
+  `/Oa`, `/Ow`, `/Ob1`, `/O1`, `/Os`. `/Oa` moves the state load to `edi` instead;
+  `/O1` and `/Os` add a frame pointer, which the reference does not have.
+- Slot colours: the reference wants `best` at `esp+0x10`, `found` at `esp+0x14`, the
+  search counter at `esp+0x18`, and the removal counter reusing `esp+0x10`. A
+  loop-condition form (`for (e = a0 + 0xac, n = 0; rec != 0 && n < 0x10; n++, e += 4)`)
+  reproduces those colours and the bounded `cmp [esp+0x10],0x10; jge` loop, but emits
+  908 bytes and scores 90/908, so the countdown form stays.
+- Evidence: `rebrew binary asm show 0x0056caf0 --size 896`, `rebrew diff --json`
+  instruction lists, `rebrew test ... --no-promote` (`STUB 171/896`), a
+  `difflib.SequenceMatcher` pass over masked instruction text (196/284), and the
+  `0x476a00` helper reproduction compiled with the pinned toolchain.
+- Decision: user request. Verified: compile via the Rebrew cl driver, `rebrew test`
+  on the file, no other source touched.
+
+### 2026-11-01 — Gold scaffold duplicate definitions
+
+Removed later duplicate definitions of `lpGebaeudePROT`, `lpObjektePROT` and
+`_lpObjektePROT` from `stubs/gold/symbol_stubs.c` after the Gold build rejected
+multiple initializations. The earlier scaffold definitions and the separate
+`_lpGebaeudePROT` symbol remain. This selects the existing placeholder
+initialization and does not establish native storage ownership. Decision owner:
+project owner. The Gold rebuild is the verification.
+
+## 2026-11-01 — four more placed rows and the frame recovery
+
+- `0x448A00` RELOC 263/263: `CloseVfsStream` is duplicated in each branch, not
+  shared after the if/else; the field at +0x1FC is a pointer (kinder) and the
+  values coalesce into ebp like native.
+- `0x446540` 173/1172 -> 1165/1172: reconstructed from disassembly. The kind
+  argument is passed by three duplicated calls, case bodies in native order with a
+  shared fallthrough for cases 1/4 and 2/3, child walk and sibling walk split into
+  the native `mov cl,al; and cl,1; cmp cl,1; je` form.
+- `0x457290` 247/909 -> 912/914 at exact size: store the extracted bit straight
+  into `rec->f98` and test the field, which makes MSVC forward the pre-store value
+  and emit the native dl shape.
+- `0x408540` 160/2782 -> 438/2782: `sqrtf` (implicit int) was the cause of the
+  frame pointer and the `and esp,-8`; `sqrt` inlines `fsqrt` like native, and the
+  buffer is 2048 bytes, giving the native 0x9B8 frame with three pushes.
+- `0x419640` 257 -> 283: key address written `str_6776b8 + a0*0x19` so the
+  reference lea pair is reproduced.
+- `0x452C60` 1084 -> 1112/2022: per-arm clamp shapes (flipped compare for arms 1/3,
+  memory compare for arm 2) and the arm-3 multiply split.
+
+Lead pads retuned to convergence for the new object sizes. Rebuild: 2,977,792
+bytes, raw 257,830, informative 121,051, no compile or link errors.
+
+Decision: continuing. No GA was run.

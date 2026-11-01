@@ -39,7 +39,7 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
   unsigned int v22; 
   int *v23; 
   int *v24; 
-  char v25 [2049];
+  char v25 [2048];
   unsigned int v26; 
   int v27;
   int v28;
@@ -58,18 +58,18 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
   int v6;
   unsigned char *v7;
   unsigned int v8;
-  char *v9;
+  unsigned char *v9;
   v27 = a0;
   v13 = 0;
   v28 = *(int *)(a0 + 0x128);
   v6 = fcn_00413190(*(unsigned int *)(a0 + 0x88));
+  v37 = v6;
   if (*(char *)(v28 + 9) != '-')
     return -1;
-  v37 = v6;
   v35 = fcn_00402610(v27);
   fcn_00408250((*(int *)0x6b5c5c),v35);
-  v36 = fcn_0064d228();
-  if (0xb <= v36)
+  v36 = (int)(*(double *)0x662908 + *(float *)0x662914 / (*(float *)(v35 + 0x10)));
+  if (v36 > 10)
     v36 = 10;
   v10 = *(int *)(v28 + 0xf8);
   if (*(int *)((*(int *)0x67a370) + 0xac + v6 * 0x3dc)) 
@@ -77,11 +77,11 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
   else {
     *(unsigned int *)((*(int *)0x6b5c5c) + 0x10) = 0x42700000;
   }
-  v9 = (char *)(*(int *)(v28 + 0xf4) + v10 * 2);
+  v9 = (unsigned char *)(*(int *)(v28 + 0xf4) + v10 * 2);
   fcn_004082d0(v35,*v9,v9[1],(*(int *)0x6b5c5c),&v15,&v14);
   v28 = (*(int *)0x6b5c5c);
   if (*(int **)(v27 + 0x124))
-    fcn_00408270((*(int *)0x6b5c5c),**(int **)(v27 + 0x124) + 0x4c,&v17,&v16);
+    fcn_00408270(v28,**(int **)(v27 + 0x124) + 0x4c,&v17,&v16);
   fcn_00408270(v28,*(int *)(v27 + 0x34) + 0x4c,&v19,&v18);
   v26 = 0;
   if (a1 <= 0)
@@ -153,10 +153,10 @@ label_40874a:
             v31 = *(float *)(v10 + 0x4c) - *(float *)(v2 + 0x4c);
             v32 = *(float *)(v10 + 0x50) - *(float *)(v2 + 0x50);
             v33 = *(float *)(v10 + 0x54) - *(float *)(v2 + 0x54);
-            v31 = sqrtf(v31 * v31 + v32 * v32 + v33 * v33) * (*(int *)0x662910) * (*(int *)0x6628cc);
+            v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * (*(float *)0x662910) * (*(float *)0x6628cc);
             *(float *)(v27 + 0x1a4) = v31;
-            if ((*(int *)0x6628a0) < v31)
-              v31 = (*(int *)0x6628a0);
+            if ((*(float *)0x6628a0) < v31)
+              v31 = (*(float *)0x6628a0);
             *(float *)(v27 + 0x1a4) = v31;
             v13 = 2;
           }
@@ -181,10 +181,10 @@ label_408870:
   v31 = *(float *)(v28 + 0x4c) - *(float *)(v6 + 0x4c);
   v32 = *(float *)(v28 + 0x50) - *(float *)(v6 + 0x50);
   v33 = *(float *)(v28 + 0x54) - *(float *)(v6 + 0x54);
-  v31 = sqrtf(v31 * v31 + v32 * v32 + v33 * v33) * (*(int *)0x662910) * (*(int *)0x6628cc);
+  v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * (*(float *)0x662910) * (*(float *)0x6628cc);
   *(float *)(v27 + 0x1a4) = v31;
-  if ((*(int *)0x6628a0) < v31)
-    v31 = (*(int *)0x6628a0);
+  if ((*(float *)0x6628a0) < v31)
+    v31 = (*(float *)0x6628a0);
   *(float *)(v27 + 0x1a4) = v31;
   v13 = 2;
 label_40890a:
@@ -217,7 +217,7 @@ label_40892d:
   } while (v28 < a1);
   if (!(v13 & 1))
     return 0;
-  if (*(float *)(v27 + 0x1a4) < (float)(*(int *)0x662908))
+  if (*(float *)(v27 + 0x1a4) < *(double *)0x662908)
     *(unsigned int *)(v27 + 0x1a4) = 0x3f000000;
   v26 = 0;
   do {
@@ -290,13 +290,13 @@ label_40892d:
       v6 = v27 + 1;
       v10 = 0;
       if (v6 < *(int *)(v28 + 0xf0)) {
-        v12 = v25;
-        v9 = (char *)(*(int *)(v28 + 0xf4) + v6 * 2);
+        v9 = (unsigned char *)(*(int *)(v28 + 0xf4) + v6 * 2);
+        v12 = &v25[1];
         do {
-          v12 = &v12[2];
           v10 += 1;
           v12[-1] = *v9;
-          *v12 = v9[1];
+          v12[0] = v9[1];
+          v12 = &v12[2];
           v9 = &v9[2];
           v6 += 1;
         } while (v6 < *(int *)(v28 + 0xf0));
