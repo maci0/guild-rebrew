@@ -37,7 +37,7 @@ long __cdecl fcn_0064eeec(char*);
 /* ADDRESS: GOLDTL 0x00519190 */
 int __cdecl io_AppendText(char* format_selector, ...)
 {
-	__declspec(align(8)) struct { char text[0x17d0]; char work[0x17d0]; } S;
+	__declspec(align(8)) struct { char text[0x17d0]; char work[0x17cc]; } S;
 	char abuf[7][0x40];
 	char rbuf[0x20];
 	char dbuf[0xc];
@@ -144,509 +144,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 	case 'E':
 		text_index++;
 		continue;
-	case 'k':
-	case 's':
-		v28 = *(int*)ap;
-		ap += 4;
-		v2c = 1;
-		v08 = *(int*)(v14 + 0x10162d4);
-		*(int*)(v14 + v08 * 4 + 0x10161d4) = v28;
-		*(int*)(v14 + 0x10162d4) = v08 + 1;
-		text_index++;
-		continue;
-	case 'S':
-		if (S.text[text_index - 1] != 0x25) {
-			goto skipt;
-		}
-		v28 = *(int*)ap;
-		ap += 4;
-		*(short*)sbuf = *(short*)0x6a238c;
-		sbuf[2] = *(char*)0x6a238e;
-		fcn_00657a73(v28, nbuf, 10);
-		strcat(sbuf, nbuf);
-		*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6a2388;
-		if (v28 > 1 || v28 == 0) {
-			v24 = 2;
-		}
-		v18 = (int)sbuf;
-		fcn_0050bc10(v28, v28, sbuf);
-		v08 = (int)strlen(S.text) - text_index + 2;
-		memcpy(S.text + text_index + 4, S.text + text_index + 1, v08);
-		v0c = (int)(S.text + text_index + 4);
-		v24 = (int)strlen(sbuf);
-		for (v08 = v24 - 1; v08 >= 0; v08--) {
-			*(char*)(v0c + v08) = sbuf[v08];
-		}
-		*(short*)(S.text + text_index + 2 + v24) = *(short*)0x6a2388;
-		memcpy(S.text + text_index + 2, sbuf, v24);
-		text_index += v24;
-		continue;
-	skipt:
-		v28 = *(int*)ap;
-		ap += 4;
-		fcn_0050bc10(v28, v28, sbuf);
-		v24 = (int)strlen(sbuf);
-		v08 = (int)strlen(S.text) - text_index + 2;
-		memcpy(S.text + text_index + 2, S.text + text_index + 1, v08);
-		*(short*)(S.text + text_index + v08 + 1) = *(short*)0x6a2388;
-		memcpy(S.text + text_index, sbuf, v24);
-		text_index += v24;
-		continue;
-	case 'v':
-		v28 = *(int*)ap;
-		ap += 4;
-		v28 = *(short*)(v28 * 63 * 4 + 0x8680b4);
-		v18 = *(int*)(v28 * 8 + 0x14a79c0);
-		strcpy(S.work, (char*)v18);
-		v08 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + text_index + 1, S.text + text_index + 2, v08);
-		v24 = (int)strlen(S.work);
-		memcpy(S.text + text_index, S.work, v24 + 1);
-		text_index += v24;
-		continue;
-	case 'F':
-		text_index++;
-		v18 = *(int*)ap;
-		ap += 4;
-		v08 = (unsigned char)*(char*)v18;
-		v08 = v08 * 7 + 0x48e;
-		if (v08 > 0x4800) {
-			v24 = v08;
-		} else {
-			v28 = *(int*)(v08 * 4 + 0x11bb000);
-			v24 = *(int*)(v08 * 4 + 0x14a5320);
-		}
-		if (digit != -1) {
-			v24 = fcn_0042b2f0((char*)v24, digit, 4);
-		}
-		if (v24 == 0) {
-			v24 = *(int*)(v08 * 4 + 0x14a5320);
-		}
-		v0c = v18 + 5;
-		if (*(char*)v0c != 0) {
-			fcn_0064d41a(abuf[0], (char*)0x6a2308, (char*)v24,
-				     (char*)v0c);
-		} else {
-			fcn_0064d740(abuf[0], (char*)v24,
-				     (unsigned)strlen((char*)v24) + 1);
-		}
-		if (v10 != 0) {
-			if (v10 == 1 || v10 == 2) {
-				fcn_0064d41a(abuf[0], (char*)0x68b3f8,
-					     (char*)v24,
-					     *(char**)(v28 * 4 + 0x14a540c));
-				if (fcn_0051e070() == 0 && v10 == 2) {
-					*(char*)v0c = (char)toupper(
-						*(char*)v0c);
-				}
-			} else if (v10 == 3 || v10 == 4) {
-				fcn_0064d41a(abuf[1], (char*)0x68b3f8,
-					     (char*)v24,
-					     *(char**)(v28 * 4 + 0x14a5400));
-				if (fcn_0051e070() == 0 && v10 == 4) {
-					*(char*)v0c = (char)toupper(
-						*(char*)v0c);
-				}
-			} else if (v10 == 5 || v10 == 6) {
-				fcn_0064d41a(abuf[6], (char*)0x68b3f8,
-					     (char*)v24,
-					     *(char**)(v28 * 4 + 0x14a5418));
-				if (fcn_0051e070() == 0 && v10 == 6) {
-					*(char*)v0c = (char)toupper(
-						*(char*)v0c);
-				}
-			}
-		}
-		v24 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
-		memcpy(S.text + text_index, abuf[0], strlen(abuf[0]));
-		text_index += (int)strlen(abuf[0]) - 2;
-		continue;
-	case 'h':
-		v08 = (unsigned char)S.text[text_index + 1];
-		if (v08 == 'i' || v08 == 'c' || v08 == 'b' || v08 == 'a'
-		    || v08 == 'n' || v08 == 't') {
-			goto icon;
-		}
-		if (digit == -1) {
-			v28 = *(int*)ap;
-			ap += 4;
-			if (v28 > 1 || v28 == 0) {
-				v30 = 2;
-			}
-			fcn_0064d41a(sbuf, (char*)0x67d444, v28);
-			v08 = (int)strlen(sbuf);
-			v24 = (unsigned)(v08 - 1) / 3;
-			v18 = v08 + v24;
-			v04 = -1;
-			for (v20 = v08; v20 >= 0; v20--) {
-				S.work[v18] = sbuf[v20];
-				v18--;
-				if (v20 != 0 && v04 > 0 && (v04 + 1) % 3 == 0) {
-					S.work[v18] = '.';
-					v18--;
-				}
-				v04++;
-			}
-			S.work[v08 + v24] = 0;
-			v24 = (int)strlen(S.work);
-			v08 = (int)strlen(S.text) - text_index + 1;
-			memmove(S.text + text_index + v24 - 1,
-				S.text + text_index + 1, v08);
-			memcpy(S.text + text_index - 1, S.work, v24);
-			continue;
-		}
-		fcn_00657a73(digit, nbuf, 10);
-		*(short*)sbuf = *(short*)0x6a238c;
-		sbuf[2] = *(char*)0x6a238e;
-		strcat(sbuf, nbuf);
-		*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6a2388;
-		v28 = *(int*)ap;
-		ap += 4;
-		if (v28 > 1 || v28 == 0) {
-			v30 = 2;
-		}
-		fcn_0064d41a(S.work, sbuf, v28);
-		v08 = (int)strlen(S.work);
-		v24 = (unsigned)v08 / 3;
-		v18 = v08 + v24;
-		v04 = -1;
-		for (v20 = v08; v20 >= 0; v20--) {
-			sbuf[v18] = S.work[v20];
-			v18--;
-			if (v20 != 0 && v04 > 0
-			    && (v04 + 1) % 3 == 0) {
-				sbuf[v18] = '.';
-				v18--;
-			}
-			v04++;
-		}
-		sbuf[v08 + v24] = 0;
-		v24 = (int)strlen(sbuf);
-		v08 = (int)strlen(S.text) - text_index + 1;
-		memmove(S.text + text_index + v24 - 3,
-			S.text + text_index, v08);
-		memcpy(S.text + text_index - 2, sbuf, v24);
-		continue;
-	icon:
-		v08 = *(int*)(v14 + 0x10162d4);
-		if (v08 > 0x40) {
-			ReportClientMessage((char*)0x6a235c);
-			text_index += 2;
-			continue;
-		}
-		*(int*)(v14 + v08 * 4 + 0x10161d4) = -1;
-		v18 = (unsigned char)S.text[text_index + 1];
-		if (v18 == 'a' || v18 == 'n') {
-			v24 = *(int*)(v14 + 0x10161cc);
-			if (v24 != 0x53 && v24 != 0x55) {
-				*(int*)(v14 + v08 * 4 + 0x10161d4) = -1;
-			}
-		} else if (v18 == 't') {
-			v24 = *(int*)(v14 + 0x10161cc);
-			if (v24 == 0x53 || v24 == 0x55) {
-				*(int*)(v14 + v08 * 4 + 0x10161d4) = 2;
-			} else {
-				*(int*)(v14 + v08 * 4 + 0x10161d4) = 5;
-			}
-		} else {
-			*(int*)(v14 + v08 * 4 + 0x10161d4) = *(int*)ap;
-			ap += 4;
-		}
-		v2c = 1;
-		*(int*)(v14 + 0x10162d4) = v08 + 1;
-		text_index += 2;
-		continue;
-	case 'H':
-		v28 = 1;
-		ap += 8;
-		v24 = (int)*(double*)(ap - 8);
-		if (digit == -1) {
-			fcn_0064d41a(S.work, (char*)0x67d444, v24);
-			goto join;
-		}
-		*(short*)sbuf = *(short*)0x6a238c;
-		sbuf[2] = *(char*)0x6a238e;
-		fcn_00657a73(digit, nbuf, 10);
-		strcat(sbuf, nbuf);
-		*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6790c4;
-		fcn_0064d41a(sbuf, sbuf, v24);
-		*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6a2350;
-		fcn_0064d41a(S.work + 4, sbuf, *(double*)(ap - 8));
-	join:
-		v08 = (int)strlen(S.work);
-		v18 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + text_index + 1, S.text + text_index + 2, v18);
-		memcpy(S.text + text_index, S.work, v08 + 1);
-		text_index += v08;
-		continue;
-	case 'e':
-		v04 = (signed char)S.text[text_index + 1] - 0x30;
-		if (v04 > 0 && v04 < 9) {
-			text_index++;
-		} else {
-			v04 = 2;
-		}
-		if (digit == -1) {
-			fcn_00657a73(v04, nbuf, 10);
-			*(short*)sbuf = *(short*)0x6a234c;
-			sbuf[2] = *(char*)0x6a234e;
-			strcat(sbuf, nbuf);
-			*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6a2350;
-			ap += 8;
-			fcn_0064d41a(S.work, sbuf, *(double*)(ap - 8));
-			v08 = (int)strlen(S.work);
-			if (v08 + text_index > 0x17cb) {
-				goto fail;
-			}
-			text_index++;
-			v0c = (int)(S.text + text_index - (v04 != -1) - 2);
-			v08 = (int)strlen(S.text) - text_index + 1;
-			v24 = (int)strlen(S.work);
-			memmove((char*)v0c + v24, S.text + text_index, v08);
-			memcpy((char*)v0c, S.work, v24);
-		} else {
-			fcn_00657a73(digit, nbuf, 10);
-			*(short*)sbuf = *(short*)0x6a238c;
-			sbuf[2] = *(char*)0x6a238e;
-			strcat(sbuf, nbuf);
-			fcn_00657a73(v04, nbuf, 10);
-			*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6790c4;
-			strcat(sbuf, nbuf);
-			*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6a2350;
-			ap += 8;
-			fcn_0064d41a(S.work, sbuf, *(double*)(ap - 8));
-		}
-		v08 = (int)strlen(S.work);
-		if (v08 + text_index > 0x17cb) {
-			goto fail;
-		}
-		text_index++;
-		v0c = (int)(S.text + text_index - (v04 != -1) - 2);
-		v08 = (int)strlen(S.text) - text_index + 1;
-		v24 = (int)strlen(S.work);
-		memmove((char*)v0c + v24, S.text + text_index, v08);
-		memcpy((char*)v0c, S.work, v24);
-		continue;
-	case 'u':
-		v08 = (unsigned char)S.text[text_index];
-		text_index++;
-		if ((char)v08 == 'v') {
-			ap += 4;
-		}
-		continue;
-	case 'l':
-		v08 = (unsigned char)S.text[text_index];
-		text_index++;
-		v2c = 1;
-		v18 = *(int*)(v14 + 0x10162d4);
-		if ((char)v08 == 't') {
-			*(int*)(v14 + v18 * 4 + 0x10161d4) = *(int*)ap;
-			ap += 4;
-			*(int*)(v14 + v18 * 4 + 0x10161d8) = *(int*)ap;
-			ap += 4;
-			*(int*)(v14 + 0x10162d4) = v18 + 2;
-			text_index++;
-		} else if ((char)v08 == 'b') {
-			*(int*)(v14 + v18 * 4 + 0x10161d4) = -1;
-			*(int*)(v14 + 0x10162d4) = v18 + 1;
-			text_index++;
-		} else {
-			*(int*)(v14 + v18 * 4 + 0x10161d4) = -1;
-			*(int*)(v14 + 0x10162d4) = v18 + 1;
-		}
-		continue;
-	case 'W':
-		S.text[text_index - 1] = 0x20;
-		v30 = 1;
-		*(char*)v20 = 0x20;
-		text_index++;
-		continue;
-	case 'V':
-		if (digit == -1) {
-			digit = 0;
-		}
-		v08 = (signed char)S.text[text_index + 1] - 0x30;
-		if (v08 > 0 && v08 < 9) {
-			v10 = v08;
-		} else {
-			v10 = -1;
-		}
-		v18 = (int)(S.text + text_index + 1);
-		v24 = (int)(strlen((char*)*(int*)(v14 + 0x1015f7c))
-			    + strlen(S.text));
-		if (v24 < 0x17cf) {
-			strncat((char*)*(int*)(v14 + 0x1015f7c), S.text, text_index);
-			*(short*)(*(int*)(v14 + 0x1015f7c)
-				  + strlen((char*)*(int*)(v14 + 0x1015f7c)))
-				= *(short*)0x677c94;
-			*(int*)(v14 + 0x10161b8) = 2;
-		}
-		v24 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
-		*(char*)(S.text + text_index + v24 + 2) = 0;
-		d2_SetForm((char*)*(int*)(v14 + 0x1015f7c), v10, v18);
-		if (digit != -1) {
-			text_index += 2;
-		} else {
-			text_index++;
-		}
-		continue;
-	case 't':
-		v10 = 1;
-		goto shift1;
-	case 'T':
-		v10 = 2;
-	shift1:
-		v0c = text_index - (digit != -1 ? 2 : 1);
-		v24 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
-		text_index = v0c;
-		continue;
-	case 'a':
-		v0c = text_index - (digit != -1 ? 2 : 1);
-		if (S.text[v0c] != 0x25) {
-			goto fmt;
-		}
-		v10 = 3;
-		v24 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
-		text_index = v0c;
-		continue;
-	case 'A':
-		v0c = text_index - (digit != -1 ? 2 : 1);
-		if (S.text[v0c] != 0x25) {
-			goto fmt;
-		}
-		v10 = 4;
-		v24 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
-		text_index = v0c;
-		continue;
-	case 'd':
-		v10 = 5;
-		goto shift2;
-	case 'D':
-		v10 = 6;
-	shift2:
-		v08 = (unsigned char)S.text[text_index + 1];
-		v24 = (int)strlen(S.text) - text_index;
-		v18 = (digit != -1 ? 2 : 1);
-		if ((char)v08 == 0x20) {
-			memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
-			v0c = text_index - v18;
-			memcpy(S.text + v0c + 2, S.text + text_index + 2, v24);
-		} else {
-			memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
-			v0c = text_index - v18;
-			memcpy(S.text + v0c + 3, S.text + text_index + 1, v24);
-		}
-		text_index = v0c;
-		continue;
-	case 'M':
-		text_index++;
-		if (digit == -1) {
-			continue;
-		}
-		if (S.text[text_index - 2] != 0x25 || S.text[text_index - 1] == 0x24) {
-			continue;
-		}
-		v08 = S.text[text_index] - 0x30;
-		v18 = *(int*)(v14 + 0x10161bc);
-		fcn_00517c00(v18, (char*)0x6a2354, v08, S.work);
-		v24 = (int)strlen(S.work) - 2;
-		fcn_0064d740(S.text + text_index + 2, S.work, v24);
-		text_index += v24;
-		continue;
-	case '`':
-		v28 = 0x14;
-		if (S.text[text_index - 1] != 0x25) {
-			v24 = *(int*)ap;
-			ap += 4;
-			fcn_0064d41a(S.work, (char*)0x67d444, v24);
-			v08 = (int)strlen(S.work) - 2;
-			v18 = (int)strlen(S.text) - text_index;
-			memcpy(S.text + text_index + 1, S.text + text_index + 1, v18);
-			memcpy(S.text + text_index, S.work, v08);
-			text_index += v08;
-			continue;
-		}
-		v24 = *(int*)ap;
-		ap += 4;
-		fcn_0064d41a(S.work, (char*)0x699a68, v24);
-		v08 = (int)strlen(S.work) - 2;
-		v18 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + text_index + 2, S.text + text_index + 1, v18);
-		memcpy(S.text + text_index, S.work, v08);
-		text_index += v08;
-		continue;
-	case 'q':
-		if (directive != 'r') {
-			continue;
-		}
-		memset(rbuf, 0, 0x20);
-		v0c = 0;
-		v08 = (signed char)S.text[text_index + 1] - 0x31;
-		if (v08 >= 0 && v08 <= 9) {
-			v0c = v08 + 9;
-		}
-		v18 = text_index + 3;
-		for (v08 = v18; ; v08++) {
-			if ((unsigned char)S.text[v08] < 0x30
-			    || (unsigned char)S.text[v08] > 0x39) {
-				break;
-			}
-		}
-		v14 = v08 - v18;
-		fcn_0064d530(rbuf, S.text + text_index + 3, v14);
-		v14 = fcn_0064eeec(rbuf);
-		v24 = *(int*)&format_selector;
-		v28 = *(int*)0x6b7f98;
-		for (v08 = v24; v08 < v28; v08++) {
-			if (*(int*)(v08 * 4 + 0x11bb000) == v0c) {
-				break;
-			}
-		}
-		if (v08 >= v28) {
-			ReportClientMessage((char*)0x6a2318);
-			continue;
-		}
-		v24 = (gm_RandomMod(v14) & 0xffff) + v08;
-		v18 = *(int*)(v24 * 4 + 0x14a5320);
-		if (v18 == 0) {
-			continue;
-		}
-		v24 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + text_index + 5, S.text + text_index + 1, v24);
-		v28 = (int)strlen((char*)v18);
-		memcpy(S.text + text_index + 3, (char*)v18, v28);
-		*(char*)(S.text + text_index + 3 + v28) = 0;
-		text_index += v28;
-		continue;
-	case 'C':
-		v24 = *(int*)ap;
-		ap += 4;
-		fcn_00500d60(v24, dbuf);
-		v08 = fcn_004fe330(dbuf, *(short*)(dbuf + 2));
-		v18 = *(int*)(v08 * 4 + 0x14a5450);
-		fcn_0064d41a(S.work, (char*)0x6a2310, (char*)v18);
-		v08 = (int)strlen(S.work) - 2;
-		v24 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
-		memcpy(S.text + text_index, S.work, v08);
-		text_index += v08;
-		continue;
-	case '%':
-		v24 = (int)strlen(S.text) - text_index;
-		S.text[text_index - 1] = 0x16;
-		memcpy(S.text + text_index + 4, S.text + text_index + 1, v24);
-		text_index += 0;
-		continue;
-	default:
-		continue;
-	}
-
-	/* shared va_arg formatter (native 0x5193a3), reached by R/r */
+/* shared va_arg formatter (native 0x5193a3), reached by R/r */
 fmt:
 	v24 = *(int*)ap;
 	ap += 4;
@@ -761,7 +259,519 @@ fmt:
 	v30 = 0;
 	continue;
 
-plain:
+	case 'k':
+	case 's':
+		v28 = *(int*)ap;
+		ap += 4;
+		v2c = 1;
+		v08 = *(int*)(v14 + 0x10162d4);
+		*(int*)(v14 + v08 * 4 + 0x10161d4) = v28;
+		*(int*)(v14 + 0x10162d4) = v08 + 1;
+		text_index++;
+		continue;
+	case 'S':
+		if (S.text[text_index - 1] != 0x25) {
+			text_index++;
+			continue;
+		}
+		v08 = *(int*)ap;
+		ap += 4;
+		fcn_0050bc10(v08, *(unsigned char*)0x773d75, S.work);
+		v24 = (int)strlen(S.work);
+		v18 = (int)strlen(S.text) - text_index + 1;
+		memcpy(S.text + text_index + v24 - 1, S.text + text_index + 1, v18);
+		v24 = (int)strlen(S.work);
+		memcpy(S.text + text_index - 1, S.work, v24);
+		text_index++;
+		continue;
+	case 'v':
+		v28 = *(int*)ap;
+		ap += 4;
+		v08 = *(short*)(v28 * 189 * 4 + 0x8680b4);
+		v18 = fcn_0042b2f0((char*)*(int*)(v08 * 8 + 0x14a79c0), 1, 8);
+		strcpy(S.work, (char*)v18);
+		v08 = (int)strlen(S.text) - text_index + 1;
+		memmove(S.text + text_index + strlen(S.work) - 1,
+			S.text + text_index + 1, v08);
+		memcpy(S.text + text_index - 1, S.work, strlen(S.work));
+		continue;
+	case 'h':
+		v08 = (unsigned char)S.text[text_index + 1];
+		if (v08 == 'i' || v08 == 'c' || v08 == 'b' || v08 == 'a'
+		    || v08 == 'n' || v08 == 't') {
+			goto icon;
+		}
+		if (digit != -1) {
+			fcn_00657a73(digit, nbuf, 10);
+			*(short*)sbuf = *(short*)0x6a238c;
+			sbuf[2] = *(char*)0x6a238e;
+			strcat(sbuf, nbuf);
+			*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6a2388;
+			v28 = *(int*)ap;
+			ap += 4;
+			if (v28 > 1 || v28 == 0) {
+				v30 = 2;
+			}
+			fcn_0064d41a(S.work, sbuf, v28);
+			v04 = -1;
+			v0c = (int)strlen(S.work);
+			v08 = v0c / 3;
+			v18 = v08 + v0c;
+			v20 = v0c;
+			while (v20 >= 0) {
+				S.work[v18] = S.work[v20];
+				v18--;
+				if (v20 != 0 && v04 > 0
+				    && (v04 + 1) % 3 == 0) {
+					S.work[v18] = '.';
+					v18--;
+				}
+				v04++;
+				v20--;
+			}
+			S.work[v08 + v0c] = 0;
+			v24 = (int)strlen(sbuf);
+			v08 = (int)strlen(S.text) - text_index + 1;
+			memmove(S.text + text_index + v24 - 3,
+				S.text + text_index, v08);
+			memcpy(S.text + text_index - 2, sbuf, v24);
+			continue;
+		}
+		v28 = *(int*)ap;
+		ap += 4;
+		if (v28 > 1 || v28 == 0) {
+			v30 = 2;
+		}
+		fcn_0064d41a(sbuf, (char*)0x67d444, v28);
+		v04 = -1;
+		v0c = (int)strlen(sbuf);
+		v08 = (v0c - 1) / 3;
+		v18 = v08 + v0c;
+		v20 = v0c;
+		while (v20 >= 0) {
+			S.work[v18] = sbuf[v20];
+			v18--;
+			if (v20 != 0 && v04 > 0 && (v04 + 1) % 3 == 0) {
+				S.work[v18] = '.';
+				v18--;
+			}
+			v04++;
+			v20--;
+		}
+		S.work[v08 + v0c] = 0;
+		v24 = (int)strlen(S.work);
+		v08 = (int)strlen(S.text) - text_index + 1;
+		memmove(S.text + text_index + v24 - 1,
+			S.text + text_index + 1, v08);
+		memcpy(S.text + text_index - 1, S.work, v24);
+		continue;
+	icon:
+		v08 = *(int*)(v14 + 0x10162d4);
+		if (v08 > 0x40) {
+			ReportClientMessage((char*)0x6a235c);
+			text_index += 2;
+			continue;
+		}
+		*(int*)(v14 + v08 * 4 + 0x10161d4) = -1;
+		v18 = (unsigned char)S.text[text_index + 1];
+		if (v18 == 'a' || v18 == 'n') {
+			v24 = *(int*)(v14 + 0x10161cc);
+			if (v24 != 0x53 && v24 != 0x55) {
+				*(int*)(v14 + v08 * 4 + 0x10161d4) = -1;
+			}
+		} else if (v18 == 't') {
+			v24 = *(int*)(v14 + 0x10161cc);
+			if (v24 == 0x53 || v24 == 0x55) {
+				*(int*)(v14 + v08 * 4 + 0x10161d4) = 2;
+			} else {
+				*(int*)(v14 + v08 * 4 + 0x10161d4) = 5;
+			}
+		} else {
+			*(int*)(v14 + v08 * 4 + 0x10161d4) = *(int*)ap;
+			ap += 4;
+		}
+		v2c = 1;
+		*(int*)(v14 + 0x10162d4) = v08 + 1;
+		text_index += 2;
+		continue;
+	case 'H':
+		v28 = 1;
+		ap += 8;
+		v24 = (int)*(double*)(ap - 8);
+		if (digit == -1) {
+			fcn_0064d41a(S.work, (char*)0x67d444, v24);
+			goto join;
+		}
+		*(short*)sbuf = *(short*)0x6a238c;
+		sbuf[2] = *(char*)0x6a238e;
+		fcn_00657a73(digit, nbuf, 10);
+		strcat(sbuf, nbuf);
+		*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6790c4;
+		fcn_0064d41a(sbuf, sbuf, v24);
+		*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6a2350;
+		fcn_0064d41a(S.work + 4, sbuf, *(double*)(ap - 8));
+	join:
+		v08 = (int)strlen(S.work);
+		v18 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 1, S.text + text_index + 2, v18);
+		memcpy(S.text + text_index, S.work, v08 + 1);
+		text_index += v08;
+		continue;
+	case 'e':
+		v04 = (signed char)S.text[text_index + 1] - 0x30;
+		if (v04 > 0 && v04 < 9) {
+			text_index++;
+		} else {
+			v04 = 2;
+		}
+		if (digit == -1) {
+			fcn_00657a73(v04, nbuf, 10);
+			*(short*)sbuf = *(short*)0x6a234c;
+			sbuf[2] = *(char*)0x6a234e;
+			strcat(sbuf, nbuf);
+			*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6a2350;
+			ap += 8;
+			fcn_0064d41a(S.work, sbuf, *(double*)(ap - 8));
+			v08 = (int)strlen(S.work);
+			if (v08 + text_index > 0x17cb) {
+				goto fail;
+			}
+			text_index++;
+			v0c = (int)(S.text + text_index - (v04 != -1) - 2);
+			v08 = (int)strlen(S.text) - text_index + 1;
+			v24 = (int)strlen(S.work);
+			memmove((char*)v0c + v24, S.text + text_index, v08);
+			memcpy((char*)v0c, S.work, v24);
+		} else {
+			fcn_00657a73(digit, nbuf, 10);
+			*(short*)sbuf = *(short*)0x6a238c;
+			sbuf[2] = *(char*)0x6a238e;
+			strcat(sbuf, nbuf);
+			fcn_00657a73(v04, nbuf, 10);
+			*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6790c4;
+			strcat(sbuf, nbuf);
+			*(short*)(sbuf + strlen(sbuf)) = *(short*)0x6a2350;
+			ap += 8;
+			fcn_0064d41a(S.work, sbuf, *(double*)(ap - 8));
+		}
+		v08 = (int)strlen(S.work);
+		if (v08 + text_index > 0x17cb) {
+			goto fail;
+		}
+		text_index++;
+		v0c = (int)(S.text + text_index - (v04 != -1) - 2);
+		v08 = (int)strlen(S.text) - text_index + 1;
+		v24 = (int)strlen(S.work);
+		memmove((char*)v0c + v24, S.text + text_index, v08);
+		memcpy((char*)v0c, S.work, v24);
+		continue;
+	case 'u':
+		v08 = (unsigned char)S.text[text_index];
+		text_index++;
+		if ((char)v08 == 'v') {
+			ap += 4;
+		}
+		continue;
+	case 'l':
+		v08 = (unsigned char)S.text[text_index + 1];
+		text_index++;
+		v2c = 1;
+		if ((char)v08 == 't') {
+			*(int*)(v14 + *(int*)(v14 + 0x10162d4) * 4 + 0x10161d4)
+				= *(int*)ap;
+			ap += 4;
+			*(int*)(v14 + 0x10162d4) =
+				*(int*)(v14 + 0x10162d4) + 1;
+			*(int*)(v14 + *(int*)(v14 + 0x10162d4) * 4 + 0x10161d4)
+				= *(int*)ap;
+			ap += 4;
+			*(int*)(v14 + 0x10162d4) =
+				*(int*)(v14 + 0x10162d4) + 1;
+			text_index++;
+		} else if ((char)v08 == 'b') {
+			*(int*)(v14 + *(int*)(v14 + 0x10162d4) * 4 + 0x10161d4)
+				= -1;
+			*(int*)(v14 + 0x10162d4) =
+				*(int*)(v14 + 0x10162d4) + 1;
+			text_index++;
+		} else {
+			*(int*)(v14 + *(int*)(v14 + 0x10162d4) * 4 + 0x10161d4)
+				= -1;
+			*(int*)(v14 + 0x10162d4) =
+				*(int*)(v14 + 0x10162d4) + 1;
+		}
+		continue;
+	case 'W':
+		S.text[text_index - 1] = 0x20;
+		v30 = 1;
+		*(char*)v20 = 0x20;
+		text_index++;
+		continue;
+	case 'V':
+		if (digit == -1) {
+			digit = 0;
+		}
+		v08 = (signed char)S.text[text_index + 1] - 0x30;
+		if (v08 > 0 && v08 < 9) {
+			v10 = v08;
+		} else {
+			v10 = -1;
+		}
+		v18 = (int)(S.text + text_index + 1);
+		v24 = (int)(strlen((char*)*(int*)(v14 + 0x1015f7c))
+			    + strlen(S.text));
+		if (v24 < 0x17cf) {
+			strncat((char*)*(int*)(v14 + 0x1015f7c), S.text, text_index);
+			*(short*)(*(int*)(v14 + 0x1015f7c)
+				  + strlen((char*)*(int*)(v14 + 0x1015f7c)))
+				= *(short*)0x677c94;
+			*(int*)(v14 + 0x10161b8) = 2;
+		}
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 2, S.text + text_index + 1, v24);
+		*(char*)(S.text + text_index + v24 + 2) = 0;
+		d2_SetForm((char*)*(int*)(v14 + 0x1015f7c), v10, v18);
+		if (digit != -1) {
+			text_index += 2;
+		} else {
+			text_index++;
+		}
+		continue;
+	case 't':
+		v10 = 1;
+	shift1:
+		v0c = text_index - (digit != -1 ? 2 : 1);
+		memmove(S.text + v0c, S.text + text_index + 1,
+			strlen(S.text) - text_index);
+		text_index = v0c - 1;
+		continue;
+	case 'T':
+		v10 = 2;
+		goto shift1;
+	case 'a':
+		v0c = text_index - (digit != -1 ? 2 : 1);
+		if (S.text[v0c] != 0x25) {
+			goto fmt;
+		}
+		v10 = 3;
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
+		text_index = v0c;
+		continue;
+	case 'A':
+		v0c = text_index - (digit != -1 ? 2 : 1);
+		if (S.text[v0c] != 0x25) {
+			goto fmt;
+		}
+		v10 = 4;
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
+		text_index = v0c;
+		continue;
+	case 'd':
+		v10 = 5;
+		goto shift2;
+	case 'D':
+		v10 = 6;
+	shift2:
+		v08 = (unsigned char)S.text[text_index + 1];
+		v0c = text_index - (digit != -1 ? 2 : 1);
+		if ((char)v08 == 0x20) {
+			memmove(S.text + v0c, S.text + text_index + 2,
+				strlen(S.text) - text_index + 2);
+		} else {
+			memmove(S.text + v0c + 1, S.text + text_index + 1,
+				strlen(S.text) - text_index + 2);
+		}
+		text_index = v0c;
+		continue;
+	case 'M':
+		text_index++;
+		if (digit == -1) {
+			continue;
+		}
+		if (S.text[text_index - 2] != 0x25
+		    || S.text[text_index - 1] == 0x24) {
+			continue;
+		}
+		v28 = *(int*)ap;
+		ap += 4;
+		v08 = S.text[text_index] - 0x30;
+		fcn_00517c00(v28, digit, v08, S.work);
+		v24 = (int)strlen(S.work);
+		memmove(S.text + text_index + v24 - 1, S.text + text_index,
+			strlen(S.text) - text_index + 2);
+		memcpy(S.text + text_index - 2, S.work, v24);
+		continue;
+	case '`':
+		v28 = 0x14;
+		if (S.text[text_index - 1] != 0x25) {
+			v24 = *(int*)ap;
+			ap += 4;
+			fcn_0064d41a(S.work, (char*)0x67d444, v24);
+			v08 = (int)strlen(S.work) - 2;
+			v18 = (int)strlen(S.text) - text_index;
+			memcpy(S.text + text_index + 1, S.text + text_index + 1, v18);
+			memcpy(S.text + text_index, S.work, v08);
+			text_index += v08;
+			continue;
+		}
+		v24 = *(int*)ap;
+		ap += 4;
+		fcn_0064d41a(S.work, (char*)0x699a68, v24);
+		v08 = (int)strlen(S.work) - 2;
+		v18 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 2, S.text + text_index + 1, v18);
+		memcpy(S.text + text_index, S.work, v08);
+		text_index += v08;
+		continue;
+	case 'q':
+		if (directive != 'r') {
+			continue;
+		}
+		memset(rbuf, 0, 0x20);
+		v0c = 0;
+		v08 = (signed char)S.text[text_index + 1] - 0x31;
+		if (v08 >= 0 && v08 <= 9) {
+			v0c = v08 + 9;
+		}
+		v18 = text_index + 3;
+		for (v08 = v18; ; v08++) {
+			if ((unsigned char)S.text[v08] < 0x30
+			    || (unsigned char)S.text[v08] > 0x39) {
+				break;
+			}
+		}
+		v14 = v08 - v18;
+		fcn_0064d530(rbuf, S.text + text_index + 3, v14);
+		v14 = fcn_0064eeec(rbuf);
+		v24 = *(int*)&format_selector;
+		v28 = *(int*)0x6b7f98;
+		for (v08 = v24; v08 < v28; v08++) {
+			if (*(int*)(v08 * 4 + 0x11bb000) == v0c) {
+				break;
+			}
+		}
+		if (v08 >= v28) {
+			ReportClientMessage((char*)0x6a2318);
+			continue;
+		}
+		v24 = (gm_RandomMod(v14) & 0xffff) + v08;
+		v18 = *(int*)(v24 * 4 + 0x14a5320);
+		if (v18 == 0) {
+			continue;
+		}
+		v24 = (int)strlen(S.text) - text_index;
+		memcpy(S.text + text_index + 5, S.text + text_index + 1, v24);
+		v28 = (int)strlen((char*)v18);
+		memcpy(S.text + text_index + 3, (char*)v18, v28);
+		*(char*)(S.text + text_index + 3 + v28) = 0;
+		text_index += v28;
+		continue;
+	case 'C':
+		v24 = *(int*)ap;
+		ap += 4;
+		fcn_00500d60(v24, dbuf);
+		v08 = fcn_004fe330(dbuf, *(short*)(dbuf + 2));
+		v18 = *(int*)(v08 * 4 + 0x14a5450);
+		fcn_0064d41a(S.work, (char*)0x6a2310, (char*)v18);
+		v08 = (int)strlen(S.text) - text_index + 2;
+		memmove(S.text + text_index + strlen(S.work) - 2,
+			S.text + text_index, v08);
+		memcpy(S.text + text_index - 1, S.work, strlen(S.work));
+		continue;
+	case 'F':
+		text_index++;
+		v18 = *(int*)ap;
+		ap += 4;
+		v08 = (unsigned char)*(char*)v18;
+		v08 = v08 * 7 + 0x48e;
+		if (v08 > 0x4800) {
+			v24 = v08;
+		} else {
+			v1c = *(int*)(v08 * 4 + 0x11bb000);
+			v24 = *(int*)(v08 * 4 + 0x14a5320);
+		}
+		if (digit != -1) {
+			v24 = fcn_0042b2f0((char*)v24, digit, 4);
+			text_index--;
+		}
+		if (v24 == 0) {
+			v24 = *(int*)(v08 * 4 + 0x14a5320);
+		}
+		v0c = v18 + 5;
+		if (*(char*)v0c != 0) {
+			fcn_0064d41a(abuf[0], (char*)0x6a2308, (char*)v24,
+				     (char*)v0c);
+		} else {
+			fcn_0064d740(abuf[0], (char*)v24,
+				     (unsigned)strlen((char*)v24) + 1);
+		}
+		if (v10 == 0) {
+			if ((int)strlen(abuf[0]) + text_index > 0x17cb) {
+				goto fail;
+			}
+			memmove(S.text + text_index + strlen(abuf[0])
+				- (digit != -1 ? 3 : 2),
+				S.text + text_index,
+				strlen(S.text) - text_index + 2);
+			memcpy(S.text + text_index - 2, abuf[0],
+			       strlen(abuf[0]));
+		} else {
+			if (v10 == 1 || v10 == 2) {
+				v24 = fcn_0042b2f0(
+					(char*)*(int*)(v1c * 4 + 0x14a540c),
+					digit, 4);
+				fcn_0064d41a(S.work, (char*)0x68b3f8,
+					     (char*)v24, abuf[0]);
+				if (fcn_0051e070() == 0 && v10 == 2) {
+					S.work[0] = (char)toupper(S.work[0]);
+				}
+			}
+			if (v10 == 3 || v10 == 4) {
+				v24 = fcn_0042b2f0(
+					(char*)*(int*)(v1c * 4 + 0x14a5400),
+					digit, 4);
+				fcn_0064d41a(S.work, (char*)0x68b3f8,
+					     (char*)v24, abuf[0]);
+				if (fcn_0051e070() == 0 && v10 == 4) {
+					S.work[0] = (char)toupper(S.work[0]);
+				}
+			}
+			if (v10 == 5 || v10 == 6) {
+				v24 = fcn_0042b2f0(
+					(char*)*(int*)(v1c * 4 + 0x14a5418),
+					digit, 4);
+				fcn_0064d41a(S.work, (char*)0x68b3f8,
+					     (char*)v24, abuf[0]);
+				if (fcn_0051e070() == 0 && v10 == 6) {
+					S.work[0] = (char)toupper(S.work[0]);
+				}
+			}
+			if ((int)strlen(S.work) + text_index > 0x17cb) {
+				goto fail;
+			}
+			memmove(S.text + text_index + strlen(S.work)
+				- (digit != -1 ? 3 : 2),
+				S.text + text_index,
+				strlen(S.text) - text_index + 2);
+			memcpy(S.text + text_index - 2, S.work,
+			       strlen(S.work));
+		}
+		v10 = 0;
+		text_index -= 2;
+		continue;
+	case '%':
+		v24 = (int)strlen(S.text) - text_index;
+		S.text[text_index - 1] = 0x16;
+		memcpy(S.text + text_index + 4, S.text + text_index + 1, v24);
+		text_index += 0;
+		continue;
+	default:
+		continue;
+	}
+
+	plain:
 	text_index++;
 	if (text_index < (int)strlen(S.text)) {
 		continue;

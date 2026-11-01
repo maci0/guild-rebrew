@@ -82,7 +82,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 	int sv74;
 	int sv78;
 	char bufA[0x100];
-	__declspec(align(8)) char bufB[0x80];
+	char bufB[0x84];
 	char bufC[0x200];
 	char bufD[0x200];
 	char bufE[0x100];
@@ -90,6 +90,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 	char* s;
 	char* e;
 	char* p;
+	char tailCh;
 
 	nImg = 0;
 	extra = 0;
@@ -176,7 +177,12 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					extra = 0;
 				}
 				g_7725b4 = 0;
-				goto next_line;
+			next_line:
+				g_102d020 = xr;
+				g_102d024 += span;
+				i += 1;
+				nLine += 1;
+				continue;
 			case 'Y':
 				if (*(char*) (p - 1) != '$') {
 					continue;
@@ -187,12 +193,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					span = extra;
 					extra = 0;
 				}
-			next_line:
-				g_102d020 = xr;
-				g_102d024 += span;
-				i += 1;
-				nLine += 1;
-				continue;
+				goto next_line;
 			case 'i':
 				if ((*(char*) (p + 1) == 'a') || (*(char*) (p + 1) == 'n')) {
 					img = *(int*) (slot + nImg * 4 + 0x294);
@@ -465,14 +466,9 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				tmp = g_772530;
 				span = tmp * 0x10c;
 				*(unsigned short*) (span + 0x10119e0) = *(unsigned short*) 0x67d524;
-				*(char*) (span + 0x10119e2) = *(char*) 0x67d526;
-				goto colon_run;
-			case ']':
-				tmp = g_772530;
-				span = tmp * 0x10c;
-				*(unsigned short*) (span + 0x10119e0) = *(unsigned short*) 0x67d520;
-				*(char*) (span + 0x10119e2) = *(char*) 0x67d522;
+				tailCh = *(char*) 0x67d526;
 			colon_run:
+				*(char*) (span + 0x10119e2) = tailCh;
 				len = (g_67d378 - g_67d398) + g_67d3b4 * 2;
 				tmp += 1;
 				len = len * 21;
@@ -480,6 +476,12 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				i += 1;
 				g_772530 = tmp;
 				continue;
+			case ']':
+				tmp = g_772530;
+				span = tmp * 0x10c;
+				*(unsigned short*) (span + 0x10119e0) = *(unsigned short*) 0x67d520;
+				tailCh = *(char*) 0x67d522;
+				goto colon_run;
 			case 'Z':
 				color = 0x100;
 				i += 1;

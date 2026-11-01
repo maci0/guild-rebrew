@@ -43,26 +43,24 @@ int __cdecl fcn_00547670();
 
 #define REC_SIZE 0xa9
 
-#define LIMIT(v, lo, hi) ((v) > (hi) ? (hi) : ((v) <= (lo) ? (lo) : (v)))
-
 #define FIND_REC(T)                                                          \
     rp = *(u8 **)0x90e094;                                                   \
     tb = *(u8 **)0x868050;                                                   \
-    for (m = 0; m < 0x100; m++) {                                            \
+    wp = *(u2 **)0x773da8;                                                   \
+    for (m = 0; m < 0x100; m++, rp += REC_SIZE) {                            \
         if (*rp != 0) {                                                      \
             q = tb + *rp + (u32)*rp * 0x24c;                                 \
             if (*q == (T)) {                                                 \
                 w = *(u2 *)(rp + 0x27);                                      \
-                if ((w == 0xffff) || (w == **(u2 **)0x773da8)) {              \
+                if ((w == 0xffff) || (w == *wp)) {                           \
                     break;                                                   \
                 }                                                            \
             }                                                                \
         }                                                                    \
-        rp += REC_SIZE;                                                      \
     }
 
 /* ADDRESS: GOLDTL 0x00547770 */
-u32 __cdecl fcn_00547770(void)
+void __cdecl fcn_00547770(void)
 {
     int cnt2[33];
     int cnt[33];
@@ -92,8 +90,11 @@ u32 __cdecl fcn_00547770(void)
     u8 *q;
     u8 t;
     u2 w;
+    u2 *wp;
 
-    wi = LIMIT(*(i32 *)0x7747b4, 0, 4);
+    wi = *(i32 *)0x7747b4;
+    wi = (wi > 4) ? 4 : wi;
+    wi = (wi <= 0) ? 0 : wi;
     a = *(i32 *)0x7f4c00 / 4 + 1;
     thr = (float)a / ((float)a + *(float *)(wi * 4 + 0x665e68));
     fcn_00547670();
@@ -101,9 +102,10 @@ u32 __cdecl fcn_00547770(void)
     memset(cnt2, 0, 0x84);
     rp = *(u8 **)0x90e094;
     tb = *(u8 **)0x868050;
-    for (j = 0; j < 0x100; j++) {
+    for (j = 0; j < 0x100; j++, rp += REC_SIZE) {
         if (*rp != 0) {
-            t = tb[*rp + (u32)*rp * 0x24c];
+            q = tb + *rp + (u32)*rp * 0x24c;
+            t = *q;
             if (t < 0x21) {
                 cnt[t]++;
                 w = *(u2 *)(rp + 0x27);
@@ -118,17 +120,14 @@ u32 __cdecl fcn_00547770(void)
                 }
             }
         }
-        rp += REC_SIZE;
     }
     sw = *(i32 *)0x7f4c00 % 5;
     if (sw == 1) {
-        int msk;
-        int zer;
+        int msk = 0;
+        int zer = 0;
         a = cnt[4] - cnt2[4];
         b = cnt[19] - cnt2[19];
         c = cnt[16] - cnt2[16];
-        msk = 0;
-        zer = 0;
         sel = 0;
         if (a < 3) {
             msk |= 1;
@@ -159,7 +158,7 @@ u32 __cdecl fcn_00547770(void)
             }
         } else {
             if (fcn_0042e450() > thr) {
-                return 0;
+                return;
             }
             if ((a + c > b * 2) && ((msk & 2) != 0)) {
                 sel = 2;
@@ -181,7 +180,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(4);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(0xb, (u32)q[0x247] * 2 - 1);
@@ -193,7 +192,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(0x13);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(0xa, (u32)q[0x247] * 2 - 1);
@@ -214,15 +213,16 @@ u32 __cdecl fcn_00547770(void)
                 fcn_004c5150(p[1], -1, *(u8 *)0x773d75, e2);
                 fcn_004c4510(p, p[1]);
                 fcn_004c4570(1, 1, 0xd, &two);
-                return fcn_004c5360();
+                fcn_004c5360();
+                return;
             }
-            return 0;
+            return;
         }
-        return sel;
+        return;
     }
     if (sw == 2) {
-        int msk;
-        int zer;
+        int msk = 0;
+        int zer = 0;
         p1 = 0.0f;
         if (cnt[18] > 0) {
             p1 = (float)cnt2[18] / (float)cnt[18];
@@ -239,8 +239,6 @@ u32 __cdecl fcn_00547770(void)
         if (cnt[14] > 0) {
             p4 = (float)cnt2[14] / (float)cnt[14];
         }
-        msk = 0;
-        zer = 0;
         sel = 0;
         if (1) {
             if ((cnt[18] < 3) || (p1 >= 0.5f)) {
@@ -272,7 +270,7 @@ u32 __cdecl fcn_00547770(void)
             sel = zer;
         } else {
             if (fcn_0042e450() > thr) {
-                return 0;
+                return;
             }
             r = (u2)fcn_0042e410(4);
             for (j = 4; j != 0; j--) {
@@ -294,7 +292,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(0x12);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(1, (u32)q[0x247] * 2 - 1);
@@ -306,7 +304,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(0x15);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(3, (u32)q[0x247] * 2 - 1);
@@ -318,7 +316,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(0x14);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(2, (u32)q[0x247] * 2 - 1);
@@ -330,7 +328,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(0xe);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(5, (u32)q[0x247] * 2 - 1);
@@ -352,11 +350,11 @@ u32 __cdecl fcn_00547770(void)
                 fcn_004c5360();
             }
         }
-        return 0;
+        return;
     }
     if (sw == 3) {
-        int msk;
-        int zer;
+        int msk = 0;
+        int zer = 0;
         p1 = 0.0f;
         if (cnt[8] > 0) {
             p1 = (float)cnt2[8] / (float)cnt[8];
@@ -365,8 +363,6 @@ u32 __cdecl fcn_00547770(void)
         if (cnt[22] > 0) {
             p2 = (float)cnt2[22] / (float)cnt[22];
         }
-        msk = 0;
-        zer = 0;
         sel = 0;
         if ((cnt[8] < 3) || (p1 >= 0.5f)) {
             msk |= 1;
@@ -384,7 +380,7 @@ u32 __cdecl fcn_00547770(void)
             sel = zer;
         } else {
             if (fcn_0042e450() > thr) {
-                return 0;
+                return;
             }
             r = (u2)fcn_0042e410(2);
             for (j = 2; j != 0; j--) {
@@ -406,7 +402,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(8);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(6, (u32)q[0x247] * 2 - 1);
@@ -418,7 +414,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(0x16);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(4, (u32)q[0x247] * 2 - 1);
@@ -440,11 +436,11 @@ u32 __cdecl fcn_00547770(void)
                 fcn_004c5360();
             }
         }
-        return 0;
+        return;
     }
     if (sw == 0) {
-        int msk;
-        int zer;
+        int msk = 0;
+        int zer = 0;
         p1 = 0.0f;
         if (cnt[9] > 0) {
             p1 = (float)cnt2[9] / (float)cnt[9];
@@ -454,8 +450,6 @@ u32 __cdecl fcn_00547770(void)
             p2 = (float)cnt2[5] / (float)cnt[5];
         }
         v = (u2)fcn_0042e410(2);
-        msk = 0;
-        zer = 0;
         sel = 0;
         if ((cnt[9] < 2) || (p1 >= 0.5f)) {
             msk |= 1;
@@ -479,7 +473,7 @@ u32 __cdecl fcn_00547770(void)
             sel = zer;
         } else {
             if (fcn_0042e450() > thr) {
-                return 0;
+                return;
             }
             r = (u2)fcn_0042e410(3);
             for (j = 3; j != 0; j--) {
@@ -501,7 +495,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(9);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(8, (u32)q[0x247] * 2 - 1);
@@ -530,7 +524,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(5);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(9, (u32)q[0x247] * 2 - 1);
@@ -553,11 +547,11 @@ u32 __cdecl fcn_00547770(void)
                 fcn_004c5360();
             }
         }
-        return 0;
+        return;
     }
     if (sw == 4) {
-        int msk;
-        int zer;
+        int msk = 0;
+        int zer = 0;
         p1 = 0.0f;
         if (cnt[32] > 0) {
             p1 = (float)cnt2[32] / (float)cnt[32];
@@ -570,8 +564,6 @@ u32 __cdecl fcn_00547770(void)
         if (cnt[29] > 0) {
             p3 = (float)cnt2[29] / (float)cnt[29];
         }
-        msk = 0;
-        zer = 0;
         sel = 0;
         if ((cnt[32] < 3) || (p1 >= 0.5f)) {
             msk |= 1;
@@ -595,7 +587,7 @@ u32 __cdecl fcn_00547770(void)
             sel = zer;
         } else {
             if (fcn_0042e450() > thr) {
-                return 0;
+                return;
             }
             r = (u2)fcn_0042e410(3);
             for (j = 3; j != 0; j--) {
@@ -619,7 +611,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(0x20);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(0xf, (u32)q[0x247] * 2 - 1);
@@ -631,7 +623,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(0x1f);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(0xe, (u32)q[0x247] * 2 - 1);
@@ -643,7 +635,7 @@ u32 __cdecl fcn_00547770(void)
                 } else {
                     FIND_REC(0x1d);
                     if (m >= 0x100) {
-                        return 0;
+                        return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
                     lvl = fcn_00507400(0xd, (u32)q[0x247] * 2 - 1);
@@ -664,7 +656,7 @@ u32 __cdecl fcn_00547770(void)
                 fcn_004c5360();
             }
         }
-        return 0;
+        return;
     }
-    return 0;
+    return;
 }

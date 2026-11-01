@@ -13978,3 +13978,219 @@ Pads retuned (two pads, shift -0x280). Rebuild 2,977,792 bytes, raw 267,521,
 informative 129,099, no compile or link errors.
 
 Decision: continuing. No GA was run.
+
+## 2026-11-02 — VFS uppercase native callee evidence
+
+Decision owner: project maintainer. Checked the native case-normalization
+callees against the pinned archives. Gold `0x005eaad6` uniquely matches
+`LIBC:strupr.obj`, and T&L `0x0066080a` uniquely matches
+`LIBCMT:strupr.obj`; each match reports every direct callee supported. These
+confirm existing library identities and the canonical helper's uppercase
+operation; they do not establish Gold's current raw-link provider. Receipts:
+`.scratch/counter-contract/gold-strupr-libc.json` and
+`.scratch/counter-contract/tl-strupr-library.json`. A further locked contract
+preview again rejected changing source inputs, so no remaining callers were
+rewritten.
+
+## 2026-11-02 — contract review tooling gap
+
+Decision owner: project maintainer. Recorded the repeated guarded contract
+preview failure and unrelated unknown contexts in upstream
+`rebrew/docs/IDEAS-GUILD.md`, with a replay command and a proposal for a scoped
+immutable review snapshot. The proposal preserves refusal on unresolved
+relevant callers and rechecks live inputs before applying. No project source,
+type binding or function binding changed in this review.
+
+## 2026-11-02 — GOLDTL 0x005ba910 frame scaffolding
+
+Decision owner: reconstruction session for row 0x005ba910 (T&L trade and
+transport inventory panel controller). Source:
+`src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005ba910.c`.
+
+Native facts read from `rebrew binary asm show 0x005BA910 --size 11948`:
+frameless `__chkstk` frame 0x1848, saved ebx/ebp/esi/edi, arg1 at 0x1858 and
+arg2 at 0x1860 (two arguments, cdecl), 3413 instructions, 265 call sites over
+92 callees, 69 backward branches.
+
+Change: the previous ten-byte stub (compiled frame 0x38) was replaced by a
+frame-struct declaration and the reconstructed prologue, init block, the
+`a2 & 8` branch, and the seven-iteration per-entity row loop. The frame struct
+carries the native extents (scalars 0x10..0x158, int[7] at 0xd4, int[7] at
+0xf0, int[9] at 0x10c, struct 0xb4 at 0x15c, 0xe28 at 0x7b0, two 0x100 objects
+at 0x15d8/0x16d8, int[28] at 0x17d8) so the object reproduces the 0x1848
+`__chkstk` value while the body is incomplete. Unused members are kept alive by
+one volatile store at the end of the function; MSVC 6 drops unreferenced
+locals, which is why a plain declaration list cannot hold the frame.
+
+Verification: `.venv/bin/rebrew test
+src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005ba910.c --va 0x005BA910 --size
+11948 --no-promote --json` reports SIZE_MISMATCH with match_count 71 of 11948
+(previous baseline 10) and object size 520.
+
+Gap: the first divergence is offset 11, the saved-register sequence. Native
+saves ebx/ebp/esi/edi and keeps `ebp` as the zero register and `esi` for arg1;
+a truncated body leaves ebx free for the zero constant and only ebx/edi are
+saved. That assignment is a whole-function decision and is expected to
+converge only when the remaining region bodies exist. Native locals are
+separate; the frame struct is scaffolding to be replaced as the body grows.
+
+The subsequent locked, all-target case-normalization reconciliation reached a
+stable snapshot but refused the preview because source/include contexts remain
+incomplete. The earlier audit identifies many missing standard or SDK includes
+in vendored library contexts, alongside parse errors; those findings require
+review and cannot be assumed irrelevant to every symbol. Receipt:
+`.scratch/counter-contract/vfs-normalize-locked-run2.log`. No binding changed.
+
+## 2026-11-02 — use native CRT uppercase in the client VFS helper
+
+Decision owner: project maintainer. Replaced the client case-normalization
+helper's call to the address-named link scaffold with `_strupr`, preserving the
+helper's existing integer ABI while its pointer contract awaits reconciliation.
+Gold `0x005eaad6` and T&L `0x0066080a` match the respective stock LIBC and
+LIBCMT `strupr.obj` members, including supported direct callees; see
+`.scratch/counter-contract/{gold-strupr-libc,tl-strupr-library}.json`.
+Cross-target comparison is running; current raw-link provider selection for
+Gold remains unverified.
+
+The updated helper verifies RELOC 19/19 in each client, with the case-flag
+operand validated in both. The comparison still marks the `_strupr` operands
+unresolved despite the separate stock-library matches; no linked-provider
+claim follows from the masked comparison. Receipt:
+`.scratch/counter-contract/vfs-normalize-stock-crt.json`.
+
+## 2026-11-02 — remaining CRT uppercase placeholders
+
+Decision owner: project maintainer. Reviewed the remaining references to
+`fcn_0066080a` after updating the VFS helper. Multiple client subsystems still
+call that spelling, and client link scaffolds still define it; the scaffolds
+were therefore retained. `rebrew source rename fcn_0066080a
+GOLDTL.0x0066080a --dry-run --json` refused the binding because
+`src/Develop/crt_globals.h` defines the old spelling as a macro. Its callers
+also contain differing return declarations, so the macro, callers, and
+scaffolds need a coordinated contract and provider review before removal.
+Evidence: `.scratch/counter-contract/strupr-placeholder-rename-preview.err`.
+
+## 2026-11-02 — use CRT uppercase in text-line reader
+
+Decision owner: project maintainer. Replaced the address-named uppercase call
+in `GOLDTL.fcn_004010b0.c` with the existing SDK `_strupr` declaration. The
+call's return is ignored; native Gold `0x00401163` targets `0x005eaad6` and
+T&L `0x00401163` targets `0x0066080a`, independently identified as their stock
+CRT uppercase functions. Before the change both caller bodies compared RELOC
+193/193 with the placeholder operand unresolved. Evidence:
+`.scratch/counter-contract/{gold-strupr-4010b0-native,strupr-4010b0-native,strupr-4010b0-before}.json`.
+Post-change cross-target verification is running.
+
+Post-change the reader remains RELOC 193/193 in both clients. The comparator
+reports the `_strupr` operands unresolved, so the native call evidence and
+stock-library match are recorded separately from linked-provider verification.
+Receipt: `.scratch/counter-contract/strupr-4010b0-after.json`.
+
+## 2026-11-02 — share CRT uppercase in two client callers
+
+Decision owner: project maintainer. Replaced the address-named uppercase call
+in `GOLDTL.fcn_005913e0.c` and `GOLDTL.fcn_004ce9e0.c` with the SDK `_strupr`
+declaration. Both clients' native bodies directly call the independently
+identified stock uppercase function; the second caller consumes its returned
+pointer. Before the edits both clients compare RELOC 169/169 and 221/221,
+respectively. Evidence: `.scratch/counter-contract/strupr-calls-native.json`
+and the corresponding `strupr-{5913e0,4ce9e0}-before.json` receipts.
+Post-change comparisons are running.
+
+After the changes, Gold and T&L still compare RELOC 169/169 for
+`fcn_005913e0` and RELOC 221/221 for `fcn_004ce9e0`. The verifier does not
+resolve the `_strupr` relocation operands; native targets and stock archive
+matches are separate evidence. Receipts:
+`.scratch/counter-contract/strupr-{5913e0,4ce9e0}-after.json`.
+
+## 2026-11-02 — GOLDTL 0x00547770 byte-match pass
+
+Decision owner: project maintainer (delegated matching session). Changed the
+reconstruction at `src/Develop/Units/m_alloc/GOLDTL.fcn_00547770.c` to follow
+native code shape: single-load clamp written as two assignment ternaries,
+`FIND_REC` hoisting the `[0x773da8]` pointer into `wp` and advancing `rp` in
+the loop increment, the type-count loop computing its record pointer `q`
+before loading the type, per-case `msk`/`zer` declarator initialisers, and a
+`void` return type (native leaves no return value in eax on any `return`
+path; one path tail-calls `fcn_004c5360`). Semantics of the counted groups,
+selection masks, thresholds and emitted commands are unchanged; the caller
+ignores the return value.
+
+Measured with
+`rebrew test src/Develop/Units/m_alloc/GOLDTL.fcn_00547770.c --va 0x00547770 --size 5595 --no-promote --json`:
+match 487/5595 (object 5558) before, 731/5595 (object 5564) after; status
+stays SIZE_MISMATCH. Pre-edit source and all experiment receipts are in
+`.scratch/47770/` (`base.c`, `native.json`, `final.json`). Remaining gaps:
+world-counter clamp cold block still inline (`mov ecx,4` not out of line),
+fild divisor temp at `[esp+0x20]` instead of native `[esp+0x14]`, selection
+mask byte in `[esp+0x14]` instead of ebx, type-7b counter incremented in
+memory instead of a register with one store after the loop.
+
+## 2026-11-02 — use CRT uppercase in two T&L callers
+
+Decision owner: project maintainer. Replaced `fcn_0066080a` with SDK `_strupr`
+in `GOLDTL.fcn_0045a2e0.c` and `GOLDTL.fcn_0053e7a0.c`. Native T&L calls at
+`0x0045a33c` and `0x0053e7e2` target the stock CRT uppercase function; both
+source baselines compare RELOC 177/177 and 247/247. Seven other callers have
+existing body size mismatches and remain under review. Evidence:
+`.scratch/counter-contract/strupr-calls-native.json` and
+`.scratch/counter-contract/strupr-baselines.json`. Post-change verification
+is running.
+
+After the change, T&L retains RELOC 177/177 and 247/247 for the two callers.
+The `_strupr` operands remain unresolved in the comparator; native target and
+archive evidence are separate from raw-link verification. Receipts:
+`.scratch/counter-contract/strupr-{45a2e0,53e7a0}-after.json`.
+
+## 2026-11-02 — reuse CRT uppercase in remaining client callers
+
+Decision owner: project maintainer. Updated the seven remaining client source
+callers of `fcn_0066080a` to use SDK `_strupr`. Their T&L native call sites
+all target `0x0066080a`, identified as stock LIBCMT uppercase; each existing
+source body has a size mismatch. Preserved complete pre-change objects using
+the target's CMake compile commands and recorded baseline comparisons in
+`.scratch/counter-contract/strupr-objects/before.json` and
+`strupr-baselines.json`. Complete object and source verification follows.
+
+All seven object comparisons preserve `.text`, `.data`, `.rdata`, and
+`.drectve` contents and relocations after mapping the reviewed placeholder to
+`_strupr` and resolving renumbered local labels to their section offsets.
+Compiler debug records differ and were excluded. This is object preservation,
+not proof of raw-link placement. Receipt:
+`.scratch/counter-contract/strupr-objects/compare.json`.
+
+The seven T&L post-change comparisons retain their respective previous
+SIZE_MISMATCH results and match counts. Receipts:
+`.scratch/counter-contract/strupr-final-results.json` and the before receipts
+listed in `strupr-baselines.json`.
+
+## 2026-11-02 — use CRT uppercase in the Gold counterpart
+
+Decision owner: project maintainer. Replaced the Gold-only
+`fcn_005eaad6` call in `GOLD.fcn_0045db30.c` with SDK `_strupr`, matching the
+already-updated T&L counterpart. Gold native `0x0045db8c` directly calls
+`0x005eaad6`; its baseline compares RELOC 177/177. Evidence:
+`.scratch/counter-contract/gold-strupr-45db30-{native,before}.json`.
+Post-change comparison is running.
+
+## 2026-11-02 — five-body batch
+
+- `0x519190` 510 -> 586/7546 (native 7536): S, F, v, l, h, C, d/D, t/T, M blocks
+  transcribed in native order, fmt moved to its native position between E and k,
+  F after C, the work buffer at 0x17c0, and the frame now 0x31ec.
+- `0x547770` 487 -> 731/5564: the clamp emits the native `mov ecx,[0x7747b4]`,
+  FIND_REC hoists the 0x773DA8 word pointer and advances rp in the for-increment
+  (two 114-byte runs now match), the type-count loop reads `*(u32*)q` first, per-case
+  msk/zer are block-top initialisers, and the return type is void (native has no
+  `xor eax,eax` on any path; the caller ignores the value).
+- `0x4DA690`: replaced the coincidental 457 baseline with the faithful body from
+  .scratch/4da690/e2.c (420/2461). The old score was noise: its equal bytes were
+  spread at roughly 1/256 per byte, and the new body reproduces the native frame
+  0x900 and the prefix to 0x9b. Documented so the drop is not read as a regression.
+- `0x5BA910` 10 -> 71/520 with the 0x1848 frame scaffold and init block.
+- `0x46C5A0` 943 -> 944 with the frame at 0x6f8.
+
+Pads retuned (two pads, shift 0xF40). Rebuild 2,981,888 bytes, raw 266,730,
+informative 129,014, no compile or link errors.
+
+Decision: continuing. No GA was run.
