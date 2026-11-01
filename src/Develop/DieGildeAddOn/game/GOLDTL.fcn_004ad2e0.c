@@ -1,5 +1,3 @@
-#pragma optimize("y", off)
-
 typedef struct Hit4ad2e0 {
 	char* p;
 	float f;

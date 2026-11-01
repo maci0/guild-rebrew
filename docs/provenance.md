@@ -13072,3 +13072,208 @@ Pads retuned twice; rebuild 2,977,792 bytes, raw 267,762, informative 129,364, n
 compile or link errors.
 
 Decision: continuing. No GA was run.
+
+### 2026-11-01 — Name shared scene-view reset
+
+Renamed Gold `0x52ae70` / T&L `0x5305a0` and their reviewed references to inferred `sv_ClearObjectSelection`, and moved its shared source to the game subsystem. Attested `sv_HandleObjects` calls this function before marking selected scene objects; the `sv_` prefix is attested, while spelling and exact TU remain inferred. Decision owner: project owner. Scratch comparisons are EXACT 40/40 in both targets. Receipts: `.scratch/counter-contract/{entity-reset-rename-guarded-preview,entity-reset-rename-apply,entity-reset-renamed-gold,entity-reset-renamed-tl}.json`. Post-change target checks and builds follow.
+
+The first affected scene-view caller, `GOLDTL.fcn_004e5a00.c`, reports a
+2001-byte SIZE_MISMATCH against its 2033-byte native extent. A scratch copy
+with the old reset name produces the same compiled size and status; comparison
+counts differ, so byte-for-byte equality is not claimed. Receipts:
+`.scratch/counter-contract/entity-reset-caller-00-before.json` and
+`entity-reset-caller-00.json`.
+
+Scene-view caller `GOLDTL.fcn_0059d380.c` reports a 707-byte SIZE_MISMATCH
+against its 685-byte native extent. Restoring the old reset name in scratch
+reproduces the same compiled size and status; comparison counts differ.
+Receipts: `.scratch/counter-contract/entity-reset-caller-03-before.json` and
+`entity-reset-caller-03.json`.
+
+A later T&L raw-link comparison across the target-conditional reset change also
+shows changed section placement, code/data bytes, and three resource bytes;
+imports and exports match. Other source and layout work occurred between these
+links, so the differences are not isolated to the reset change. Receipt:
+`.scratch/counter-contract/tl-entity-reset-compare.json`.
+
+Scene-view caller `GOLDTL.fcn_0059d6b0.c` reports a 633-byte SIZE_MISMATCH
+against its 759-byte native extent. Restoring the old reset name in scratch
+reproduces the same compiled size and status; comparison counts differ.
+Receipts: `.scratch/counter-contract/entity-reset-caller-04-before.json` and
+`entity-reset-caller-04.json`.
+
+After the scene-view rename and move, `sv_ClearObjectSelection` is recorded as
+EXACT 40/40 in both clients. Receipt:
+`.scratch/counter-contract/entity-reset-renamed-after.json`.
+
+Scene-view caller `GOLDTL.fcn_005a80d0.c` reports a 1507-byte SIZE_MISMATCH
+against its 1488-byte native extent. Restoring the old reset name in scratch
+reproduces the same compiled size and status; comparison counts differ.
+Receipts: `.scratch/counter-contract/entity-reset-caller-06-before.json` and
+`entity-reset-caller-06.json`.
+
+Scene-view caller `GOLDTL.fcn_005a86a0.c` reports a 1450-byte SIZE_MISMATCH
+against its 1424-byte native extent. Restoring the old reset name in scratch
+reproduces the same compiled size and status; comparison counts differ.
+Receipts: `.scratch/counter-contract/entity-reset-caller-07-before.json` and
+`entity-reset-caller-07.json`.
+
+Scene-view caller `GOLDTL.fcn_005ae6a0.c` reports a 708-byte SIZE_MISMATCH
+against its 698-byte native extent. Restoring the old reset name in scratch
+reproduces the same compiled size and status; comparison counts differ.
+Receipts: `.scratch/counter-contract/entity-reset-caller-08-before.json` and
+`entity-reset-caller-08.json`.
+
+### 2026-11-01 — Name shared vector tolerance comparison
+
+Renamed Gold `0x453e70` / T&L `0x451840` and their reviewed references to inferred `CompareVector3WithinTolerance`, and moved the shared source to the D3 subsystem. The function tests each of three component differences against a supplied tolerance; its original name and exact TU are not attested. Decision owner: project owner. Scratch comparisons are EXACT 84/84 in both targets. Existing inconsistent reconstructed caller prototypes are unchanged and remain contract work. Receipts: `.scratch/counter-contract/{scene-epsilon-rename-guarded-preview,scene-epsilon-rename-apply,scene-epsilon-renamed-gold,scene-epsilon-renamed-tl}.json`. Post-change target checks and builds follow.
+
+Scene-view caller `GOLDTL.fcn_00531620.c` reports a 1395-byte SIZE_MISMATCH
+against its 1363-byte native extent. Restoring the old reset name in scratch
+reproduces the same compiled size and status; comparison counts differ.
+Receipts: `.scratch/counter-contract/entity-reset-caller-01-before.json` and
+`entity-reset-caller-01.json`.
+
+### 2026-11-01 — Review Gold D3 camera-position binding
+
+Gold `0x43b790` and the existing T&L camera-position source compare RELOC
+83/83, and Gold has 91 discovered direct calls. Two Gold globals validate,
+while four callee/callback bindings remain unresolved and are represented by
+comparison stubs. Decision owner: project owner. The retired Gold binding was
+not restored pending provider and caller-contract evidence; native targets and
+receipts are recorded in `docs/source-layout.md`.
+
+Scene-view caller `GOLDTL.fcn_00529890.c` reports a 2119-byte SIZE_MISMATCH
+against its 2095-byte native extent. Restoring the old reset name in scratch
+reproduces the same compiled size and status; comparison counts differ.
+Receipts: `.scratch/counter-contract/entity-reset-caller-12-before.json` and
+`entity-reset-caller-12.json`.
+
+The Gold D3 camera candidate's non-current-camera helper is also a shared
+41-byte body with target-specific global and callback addresses. Scratch
+comparisons are RELOC 41/41 in Gold and T&L; the Gold traversal callee remains
+unresolved. Decision owner: project owner. No binding or source was changed;
+see `docs/source-layout.md` for native addresses and receipts.
+
+A fresh no-promote comparison of the unchanged T&L D3 helper also reports
+RELOC 41/41, matching the conditional scratch candidate; the prior stored
+EXACT verdict was not refreshed by this diagnostic. Receipt:
+`.scratch/counter-contract/camera-helper-original-tl.json`.
+
+### 2026-11-01 — Review shared D3 traversal offsets
+
+The Gold and T&L D3 traversal bodies match 288/288 under relocation masking
+when three native node offsets are target-conditional. Decision owner: project
+owner. Both targets retain unresolved data operands; Gold also has an unresolved
+nonrecursive callee. No binding or storage was changed. Native offset and data
+address evidence is recorded in `docs/source-layout.md`.
+
+After the vector rename and move, Rebrew recorded
+`CompareVector3WithinTolerance` as EXACT 84/84 for Gold and T&L. Receipt:
+`.scratch/counter-contract/scene-epsilon-renamed-after.json`. One parallel
+scene-view caller check encountered a concurrent malformed address anchor in
+another source and must be repeated after that source stabilizes.
+
+The Gold rebuild after the scene and vector changes reached the linker and
+failed on 261 unresolved externals, compared with 263 in the previous build.
+It reports neither the old nor the new reset and vector symbols as unresolved.
+Concurrent source changes prevent attributing the total decrease to a single
+binding. Receipt: `.scratch/counter-contract/gold-post-vector-build.log`.
+
+Scene-view callers `GOLDTL.fcn_0058d5f0.c` and `GOLDTL.fcn_0058f310.c`
+retain their respective 1594/1510 and 905/902 compiled/native size mismatches
+when the old reset name is restored in scratch. Comparison counts differ.
+Receipts: `.scratch/counter-contract/entity-reset-caller-14-before.json`,
+`entity-reset-caller-14.json`, `entity-reset-caller-15-before.json`, and
+`entity-reset-caller-15.json`.
+
+The first completed vector-scope checks preserve the previously recorded
+statuses: `GOLDTL.fcn_004055a0.c` retains one T&L SIZE_MISMATCH and its Gold
+and T&L RELOC functions; `GOLDTL.fcn_004d0070.c` remains SIZE_MISMATCH.
+Receipts: `.scratch/counter-contract/scene-epsilon-pre-status.json`,
+`scene-epsilon-scope-00.json`, and `scene-epsilon-scope-05.json`.
+
+### 2026-11-01 — Review shared D3 reset with Gold cleanup
+
+A target-conditional D3 reset candidate matches Gold `0x43b6e0` at 171/171
+and T&L `0x438af0` at 74/74 under relocation masking. Gold includes additional
+cleanup. Decision owner: project owner. No source or binding was changed while
+Gold's traversal and cleanup providers remain unresolved; evidence is in
+`docs/source-layout.md`.
+
+The Gold cleanup dependency of the D3 reset is a 358-byte native function;
+the existing T&L source compiles to 212 bytes for Gold. Decision owner: project
+owner. Kept its binding unresolved rather than inferring unverified paths from
+the reset's zero-argument case. Evidence and receipts are in
+`docs/source-layout.md`.
+
+### 2026-11-01 — Share D3 traversal flag test
+
+Restored Gold `0x438c60` to the existing T&L `fcn_004378c0` source, preserving its retired history. The Gold traversal calls it at `0x438d69`. Decision owner: project owner. Both native bodies compare RELOC 216/216; all ten masked local jump-table targets agree with the relative COFF symbol offsets in each target object. No external callee or data operand is involved. Receipts: `.scratch/counter-contract/{camera-mask-gold,camera-mask-tl,camera-mask-gold-symbols.txt,camera-mask-tl-symbols.txt,camera-mask-locked-preview,camera-mask-rebind-apply}`. Post-binding tests and Gold rebuild follow.
+
+### 2026-11-01 — Repair Gold resource-wrapper boundaries
+
+Gold `0x50cc50` is a five-byte tail jump to the already bound helper at
+`0x4c5f60`, followed by alignment and a separate `0x50cc60..0x50ccc1` body.
+The inventory had merged them into 113 bytes. Decision owner: project owner.
+Rebrew repaired the first extent to 5 and registered the second as 97 bytes;
+Gold has 54 direct calls to the wrapper and one to the following body. The
+existing shared source compares RELOC 5/5 with its target operand validated.
+Receipts: `.scratch/counter-contract/{gold-resource-thunk-extent,gold-resource-thunk-xrefs,gold-resource-next-xrefs,gold-resource-extents-preview,gold-resource-extents-apply,gold-resource-thunk-gold}.json`.
+
+The T&L post-vector rebuild completed successfully. A raw-link comparison
+against the earlier queued-change image retains imports, exports and resources
+but differs in `.text` placement and code/data bytes. Concurrent source and
+layout work means the comparison does not isolate the vector move. Receipt:
+`.scratch/counter-contract/tl-vector-compare.json`.
+
+Vector-scope caller `GOLDTL.fcn_00533090.c` retains its previously recorded
+SIZE_MISMATCH after the rename. Receipts:
+`.scratch/counter-contract/scene-epsilon-pre-status.json` and
+`scene-epsilon-scope-09.json`.
+
+Scene-view callers `GOLDTL.fcn_0059e740.c` and `GOLDTL.fcn_0059ecc0.c`
+retain their respective 1431/1405 and 1207/1224 compiled/native size
+mismatches when the old reset name is restored in scratch. Comparison counts
+differ. Receipts: `.scratch/counter-contract/entity-reset-caller-23-before.json`,
+`entity-reset-caller-23.json`, `entity-reset-caller-24-before.json`, and
+`entity-reset-caller-24.json`.
+
+### 2026-11-01 — Share D3 camera helper
+
+Gold `0x43b6b0` and T&L `0x438ac0` share the D3 helper with target-specific list and callback addresses. Removed the displaced Gold comparison stub so the shared definition owns the symbol. Decision owner: project owner. Scratch comparisons are RELOC 41/41 in both clients; the Gold traversal callee at `0x438d40` remains unresolved and scaffold-backed. Existing caller prototype disagreements remain contract work. Receipts: `.scratch/counter-contract/{gold-camera-helper-native,camera-helper-gold,camera-helper-tl,camera-helper-locked-preview,camera-helper-rebind-apply}.json`. Post-change verification and builds follow.
+
+Restored Gold `0x50cc50` to the existing shared wrapper source with retired
+history preserved. The native tail-jump target is already bound and validated.
+Decision owner: project owner. Receipts: `.scratch/counter-contract/
+gold-resource-thunk-locked-preview.json` and `gold-resource-thunk-rebind-apply.json`.
+Post-binding tests and Gold rebuild follow.
+
+The Gold wrapper's binding receipts are
+`.scratch/counter-contract/gold-resource-thunk-locked-preview.json` and
+`.scratch/counter-contract/gold-resource-thunk-rebind-apply.json`.
+
+## 2026-11-01 — pragma and literal levers across six rows
+
+- `#pragma optimize("y", off)` was the wrong assumption on two rows: under /Oy- VC6
+  diverts an aligned aggregate into a dynamic frame chain instead of emitting the
+  native `and esp,-8` after `mov ebp,esp`. Removing it fixed `0x4AD2E0` (34 -> 101)
+  and `0x4AD6A0` (57 -> 367).
+- Address-cast float constants replaced by their literal values emit the reference
+  x87 form: `57.2957763671875f` (180/pi) for `0x4441C0` (147 -> 183), `0.0f`/`1.03`
+  for `0x48C5B0` (150 -> 158).
+- `0x547770` 404 -> 487: the same wrong pragma, the two `rep stosd`-zeroed 33-int
+  arrays, and the year-mod-5 dispatch decoded from the native block extents.
+- `0x43C640` 343 -> 391 and `0x5B6300` 43 -> 269 after the frame layout was
+  recovered from the chkstk argument (0x1a4c) and the first cell loop written in
+  native shape.
+
+Walls measured and recorded: aligned-aggregate frames round to a multiple of 8, so
+a native frame of 4 mod 8 (`0x51AF00`, `0x332c`) cannot be reproduced; `0x4DCF50`
+needs its slot map rebuilt (0x170 framed bytes with no reference); `0x4DA690`
+needs constant-size `rep movs` bodies before offsets align.
+
+Pads retuned against fresh objects (2 pads, shift 0x4E0). Rebuild 2,977,792 bytes,
+raw 267,667, informative 129,277, no compile or link errors.
+
+Decision: continuing. No GA was run.

@@ -42,6 +42,9 @@ static i32 __cdecl libc_rand(void)
 void __cdecl fcn_0043c640(i32 arg_4h)
 {
     float fVar1;
+    i32 y;
+    i32 y1;
+    i32 x;
     i32 iVar2;
     u4 *arg_4h_00;
     u4 *arg_4h_01;
@@ -92,37 +95,16 @@ void __cdecl fcn_0043c640(i32 arg_4h)
     i32 var_60h;
     i32 var_64h;
     
-    iVar3 = *(i32 *)arg_4h;
-    var_ch = 0;
-    iVar2 = iVar3 + -1;
-    if (0 < iVar2) {
-        do {
-            iVar9 = 0;
-            if (0 < iVar2) {
-                do {
-                    iVar2 = iVar3 * var_ch;
-                    pcVar15 = (char *)(*(i32 *)(arg_4h + 0x14) + iVar2 + iVar9);
-                    pcVar22 = (char *)((var_ch + 1) * iVar3 + *(i32 *)(arg_4h + 0x14) + iVar9);
-                    if (*pcVar15 == pcVar22[1]) {
-                        if (pcVar15[1] != *pcVar22) {
-                            iVar2 = *(i32 *)(arg_4h + 0x24) + iVar2;
-                            uVar14 = *(u8 *)(iVar2 + iVar9) & 0x7f;
-                            goto code_r0x0043c6a7;
-                        }
-                    } else {
-                        iVar2 = *(i32 *)(arg_4h + 0x24) + iVar2;
-                        uVar14 = *(u8 *)(iVar2 + iVar9) | 0x80;
-code_r0x0043c6a7:
-                        *(u8 *)(iVar2 + iVar9) = uVar14;
-                    }
-                    iVar3 = *(i32 *)arg_4h;
-                    iVar9 = iVar9 + 1;
-                } while (iVar9 < iVar3 + -1);
-            }
-            iVar3 = *(i32 *)arg_4h;
-            var_ch = var_ch + 1;
-            iVar2 = iVar3 + -1;
-        } while (var_ch < iVar2);
+    for (y = 0; y < *(i32 *)arg_4h - 1; y++) {
+        y1 = y + 1;
+        for (x = 0; x < *(i32 *)arg_4h - 1; x++) {
+            if (*(u8 *)(*(i32 *)(arg_4h + 0x14) + y * *(i32 *)arg_4h + x)
+                != *(u8 *)(*(i32 *)(arg_4h + 0x14) + y1 * *(i32 *)arg_4h + x + 1))
+                *(u8 *)(*(i32 *)(arg_4h + 0x24) + y * *(i32 *)arg_4h + x) |= 0x80;
+            else if (*(u8 *)(*(i32 *)(arg_4h + 0x14) + y * *(i32 *)arg_4h + x + 1)
+                     != *(u8 *)(*(i32 *)(arg_4h + 0x14) + y1 * *(i32 *)arg_4h + x))
+                *(u8 *)(*(i32 *)(arg_4h + 0x24) + y * *(i32 *)arg_4h + x) &= 0x7f;
+        }
     }
     arg_4h_00 = (u4 *)fcn_0041db70(*(i32 *)(arg_4h + 4) * *(i32 *)(arg_4h + 4), 0x67a694);
     arg_4h_01 = (u4 *)fcn_0041db70(*(i32 *)(arg_4h + 4) * *(i32 *)(arg_4h + 4), 0x67a680);

@@ -61,9 +61,9 @@ void __cdecl fcn_004441c0(void)
 			case 2:
 			case 3:
 			case 4:
-				v1 = *((float*) p + 0x23) * *(float*) 0x6628dc;
-				v2 = *((float*) p + 0x22) * *(float*) 0x6628dc;
-				v3 = *((float*) p + 0x21) * *(float*) 0x6628dc;
+				v1 = *((float*) p + 0x23) * 57.2957763671875f;
+				v2 = *((float*) p + 0x22) * 57.2957763671875f;
+				v3 = *((float*) p + 0x21) * 57.2957763671875f;
 				fcn_0064d41a(v9, 0x67aab8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), (double) v3, (double) v2, (double) v1, p);
 				*(char*) 0x6b85a1 = 0;
 				return;
@@ -76,9 +76,9 @@ void __cdecl fcn_004441c0(void)
 				return;
 			case 7:
 				v5 = _ftol(p);
-				v1 = *((float*) p + 0x23) * *(float*) 0x6628dc;
-				v2 = *((float*) p + 0x22) * *(float*) 0x6628dc;
-				v3 = *((float*) p + 0x21) * *(float*) 0x6628dc;
+				v1 = *((float*) p + 0x23) * 57.2957763671875f;
+				v2 = *((float*) p + 0x22) * 57.2957763671875f;
+				v3 = *((float*) p + 0x21) * 57.2957763671875f;
 				fcn_0064d41a(v9, 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), (double) v3, (double) v2, (double) v1, v5);
 				break;
 			case 8:
@@ -89,9 +89,9 @@ void __cdecl fcn_004441c0(void)
 					return;
 				}
 				v5 = _ftol(p);
-				v1 = *((float*) p + 0x23) * *(float*) 0x6628dc;
-				v2 = *((float*) p + 0x22) * *(float*) 0x6628dc;
-				v3 = *((float*) p + 0x21) * *(float*) 0x6628dc;
+				v1 = *((float*) p + 0x23) * 57.2957763671875f;
+				v2 = *((float*) p + 0x22) * 57.2957763671875f;
+				v3 = *((float*) p + 0x21) * 57.2957763671875f;
 				fcn_0064d41a(v9, 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), (double) v3, (double) v2, (double) v1, v5);
 				*(char*) 0x6b85a1 = 0;
 				return;

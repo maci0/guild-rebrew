@@ -87,7 +87,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 
 	n = 0;
 	k = 0;
-	if (*(float*) 0x100b0e0 <= *(float*) 0x6628a8 || *(int*) 0x100b0f4 == 0) {
+	if (*(float*) 0x100b0e0 <= 0.0f || *(int*) 0x100b0f4 == 0) {
 		return 0;
 	}
 	fcn_0050cce0(*(char**) (o + 0x16c), &st2, 0);
@@ -179,7 +179,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			i = 1;
 		}
 		for (; i < *(int*) 0x100b0a8; i++) {
-			if (*(float*) (0x100b0c0 + i * 0x40 + 0x20) > *(float*) 0x6628a8) {
+			if (*(float*) (0x100b0c0 + i * 0x40 + 0x20) > 0.0f) {
 				break;
 			}
 			if (*(int*) (*(int*) (0x100b0c0 + i * 0x40 + 8) + 1) != m.slots[3]) {
@@ -217,7 +217,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 					    -1, (char) n, i);
 					fcn_004c5150(-1, *(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
-					    (char) g_773d75, (int) ((double) i * *(double*) 0x664110));
+					    (char) g_773d75, (int) ((double) i * 1.03));
 					fcn_004c4ef0((char*) 0x67e8b0);
 				} else if (sums[n] * 2 < tmp) {
 					i = tmp - sums[n] * 9 / 8;
@@ -227,7 +227,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 					    -1, (char) g_773d75, i);
 					fcn_004c5150(-1, *(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
-					    (char) n, (int) ((double) i * *(double*) 0x664110));
+					    (char) n, (int) ((double) i * 1.03));
 					fcn_004c4ef0((char*) 0x67e8b0);
 				}
 			}
@@ -235,7 +235,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		i = 0;
 		if (k < 3) {
 			for (; i < *(int*) 0x100b0ac; i++) {
-				if (*(float*) (0x100d0c0 + i * 0x58 + 0x34) > *(float*) 0x6628a8) {
+				if (*(float*) (0x100d0c0 + i * 0x58 + 0x34) > 0.0f) {
 					break;
 				}
 				if (*(int*) (*(int*) (0x100d0c0 + i * 0x58 + 0x14) + 1) != m.slots[3]) {
