@@ -132,10 +132,10 @@ body:
 		c = buf[i];
 		if (c != '%' && c != '$' && c != '{') {
 			i++;
-			if (i >= (int) strlen(buf)) {
-				break;
+			if (i < strlen(buf)) {
+				continue;
 			}
-			continue;
+			break;
 		}
 		r = buf[++i] - '0';
 		if (r >= 0 && r <= 9) {
@@ -424,7 +424,7 @@ body:
 			}
 			break;
 		case 'u':
-			k = (r != -1) ? 3 : 2;
+			k = (r != -1) ? 2 : 1;
 			e = i - k;
 			state = 1;
 			memmove(buf + e, buf + i + 1, strlen(buf) - i);
@@ -447,7 +447,7 @@ body:
 			i = e - 1;
 			break;
 		case 'B':
-			k = (r != -1) ? 3 : 2;
+			k = (r != -1) ? 2 : 1;
 			e = i - k;
 			if (buf[e] != '%') {
 				break;

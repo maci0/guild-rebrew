@@ -13791,3 +13791,119 @@ Pads retuned (two pads, shift 0x260). Rebuild 2,977,792 bytes, raw 267,407,
 informative 129,182, no compile or link errors.
 
 Decision: continuing. No GA was run.
+
+## 2026-11-02 — Gold minizip native boundaries
+
+Decision owner: project maintainer. Corrected Gold inventory extents at
+`0x00467830` from 400 to 398 bytes and `0x00468070` from 128 to 115 bytes;
+their native returns are followed by two and thirteen NOP bytes respectively.
+Both are called by the archive scanner. This repairs native extents only and
+does not establish a library provider or verdict. Evidence:
+`.scratch/counter-contract/gold-unz{open,next}-asm.json` and
+`.scratch/counter-contract/gold-minizip-extents-{preview,apply}.json`.
+
+## 2026-11-02 — Gold VFS archive-scanner binding
+
+Decision owner: project maintainer. Rebound Gold `0x00430130` to the existing
+canonical `vfs_ScanArchive` definition after reviewing the native mount call,
+294-byte masked comparison, and four internal dependency comparisons. Library
+and literal operands remain unresolved; the caller and fresh verdict need
+verification. Receipts: `.scratch/counter-contract/gold-vfs-scanarchive-rebind-{preview,apply}.json`.
+
+## 2026-11-02 — Gold minizip source comparisons
+
+Decision owner: project maintainer. Compared the pinned compiled minizip source
+against four Gold archive-scanner callees. One body is EXACT 64/64; the other
+three are relocation-masked matches with unresolved operands. Recorded the
+results and provider limitations in `docs/source-layout.md`.
+
+## 2026-11-02 — Gold minizip file-position provider
+
+Decision owner: project maintainer. Bound Gold `0x004686c0` to the existing
+compiled `references/minizip/unzip.c` provider for `_unzGetFilePos`. The source
+comparison is EXACT 64/64 without relocations; the Gold build compiles that
+provider. The library identity is separate from game reversing progress and
+requires a fresh stored comparison. Evidence:
+`.scratch/counter-contract/gold-minizip-pos-scratch.json`,
+`.scratch/counter-contract/gold-unzgetfilepos-bind-preview.json`, and
+`.scratch/counter-contract/gold-unzgetfilepos-bind-apply.json`.
+
+## 2026-11-02 — VFS mount uses canonical archive scanner
+
+Decision owner: project maintainer. Redirected the shared client VFS mount
+caller to `vfs_ScanArchive`, the existing canonical implementation. Scratch
+comparisons remain RELOC 1101/1101 in both clients and the Gold direct-call
+operand validates against the rebound scanner. The T&L donor remains until its
+identity is reconciled. Evidence: `.scratch/counter-contract/vfs-mount-scanarchive-{tl,gold-bound}.json`.
+Fresh caller verification and client builds follow.
+
+Gold `_unzGetFilePos` now has a fresh EXACT 64/64 stored comparison against the
+compiled vendored provider. Gold `vfs_ScanArchive` compares RELOC 294/294;
+its library, CRT, literal and internal VFS operands remain unresolved by the
+verifier, including `unzGetFilePos` despite the new identity. The T&L build
+after the scanner caller change succeeded. Its imports, exports and resources
+match the preserved pre-caller artifact, while section layout and code/data
+bytes differ amid concurrent source changes. Receipts:
+`.scratch/counter-contract/gold-unzgetfilepos-after.json`,
+`.scratch/counter-contract/gold-vfs-scanarchive-library-bound.json`, and
+`.scratch/counter-contract/tl-vfs-scanner-caller-compare.json`.
+
+The actual shared VFS mount caller compares RELOC 1101/1101 in both clients
+after the archive-scanner redirect; Gold's scanner operand is VALIDATED and
+T&L's awaits its canonical binding. Gold now links through both canonical VFS
+helpers and reports 258 unresolved externals, down from 259; it still cannot
+produce a complete PE. Receipts:
+`.scratch/counter-contract/vfs-mount-scanarchive-after.json` and
+`.scratch/counter-contract/gold-post-vfs-scan-caller-build.log`.
+
+The locked archive-scanner review found the donor active only in T&L, with
+matching `/O2 /Gd` settings. Its two foreign-definition findings describe
+adding the donor unchanged to server and Gold; the intended operation removes
+it and binds T&L to the existing canonical definition. The review also reports
+104 unknown contexts, mostly unbound definitions already in the canonical unit,
+and no native-order cycle. Receipt:
+`.scratch/counter-contract/vfs-scanner-organize-locked.json`.
+
+## 2026-11-02 — consolidate T&L VFS archive scanner
+
+Decision owner: project maintainer. Rebound T&L `0x0042fb20` to the existing
+canonical `vfs_ScanArchive` and removed the T&L-only donor after the shared
+mount caller was redirected. All-target review confirmed the donor does not
+contribute to server or Gold and owns no storage. Both clients and the donor
+compare RELOC 294/294; four internal dependencies match their validated donor
+targets. Library and literal operands remain unresolved. The pre-change T&L
+raw PE is `.scratch/counter-contract/tl-after-vfs-scan-caller.exe`; review and
+binding receipts are `.scratch/counter-contract/vfs-scanner-merge-locked-review.json`
+and `vfs-scanner-tl-rebind.json`. Fresh checks and raw-link comparison follow.
+
+After the T&L scanner binding, the shared mount caller verifies RELOC
+1101/1101 and its direct call to `vfs_ScanArchive` is VALIDATED. Receipt:
+`.scratch/counter-contract/vfs-tl-mount-scanner-postmerge.json`.
+
+The rebound T&L `vfs_ScanArchive` now verifies RELOC 294/294. Its mount
+caller's scanner operand is VALIDATED; scanner-internal VFS, minizip, CRT and
+literal operands remain unresolved by the verifier. Receipts:
+`.scratch/counter-contract/vfs-tl-scanarchive-postmerge.json` and
+`.scratch/counter-contract/vfs-tl-mount-scanner-postmerge.json`.
+
+Post-scanner-merge all-target VFS lint reports zero errors, with the existing
+W029 redundant flag and W031 stale source/type evidence warnings. Receipt:
+`.scratch/counter-contract/vfs-scanner-postmerge-lint.json`.
+
+## 2026-11-02 — append-text directives and the loop tail
+
+- `0x519190` io_AppendText: every case label was one ASCII character off the
+  native directive tables (jump targets at 0x51AE3C, 0x53-byte index at 0x51AEA4,
+  default 0x19, indexed by directive-0x25). Corrected to B, R/r, E, fmt, k/s, S, v,
+  h, H, e, u, l, W, V, t, T, a, A, d, D, M, `, q, C, F, %. The same pass verified
+  the body errors: fmt gates on v30 not v2c, the v index is c*189*4, F's index is
+  b*14+0x48e, S passes the byte at 0x773D75, C's sprintf writes work+4, h needs the
+  thousands separator, and the u/t/T block ends `text_index = v0c - 1`.
+- `0x51C840` 918 -> 977: the loop tail written `if (i < strlen(buf)) continue; break;`
+  keeps the shared loop test instead of peeling it, giving the native head
+  (`je done / cmp ebp,0x17D0 / jg done / mov edi,[esp+0x10] / body`) and the unsigned
+  `jb` on the strlen path. The case-exit index `k` was corrected for the u and B
+  cases only, because changing all five moves the switch tables off native offsets.
+- `0x46C5A0` is ~40 instructions short of native; a continuation is transcribing them.
+
+Decision: continuing. No GA was run.

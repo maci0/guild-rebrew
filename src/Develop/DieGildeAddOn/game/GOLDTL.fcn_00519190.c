@@ -52,6 +52,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 	int v14;
 	int v10;
 	int v0c;
+	int v04;
 	int v08;
 	int ap;
 	int digit;
@@ -114,15 +115,15 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		continue;
 	}
 	switch (directive) {
-	case 'C':
+	case 'B':
 		memset(*(void**)(v14 + 0x1015f7c), 0, 0x80);
 		*(int*)(v14 + 0x10162d4) = 0;
 		memset((void*)(v14 + 0x10161d4), 0, 0x100);
 		fcn_0046f2c0(*(int*)(v14 + 0x1015f40), 0);
 		text_index++;
 		continue;
-	case 'S':
-	case 's':
+	case 'R':
+	case 'r':
 		v0c = (int)(S.text - 1);
 		v20 = v0c + text_index;
 		if (*(char*)v20 == '$') {
@@ -138,11 +139,11 @@ int __cdecl io_AppendText(char* format_selector, ...)
 			continue;
 		}
 		goto fmt;
-	case 'F':
+	case 'E':
 		text_index++;
 		continue;
-	case 'l':
-	case 't':
+	case 'k':
+	case 's':
 		v28 = *(int*)ap;
 		ap += 4;
 		v2c = 1;
@@ -151,7 +152,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		*(int*)(v14 + 0x10162d4) = v08 + 1;
 		text_index++;
 		continue;
-	case 'T':
+	case 'S':
 		if (S.text[text_index - 1] != 0x25) {
 			goto skipt;
 		}
@@ -189,7 +190,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		memcpy(S.text + text_index, sbuf, v24);
 		text_index += v24;
 		continue;
-	case 'w':
+	case 'v':
 		v28 = *(int*)ap;
 		ap += 4;
 		v28 = *(short*)(v28 * 63 * 4 + 0x8680b4);
@@ -201,7 +202,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		memcpy(S.text + text_index, S.work, v24 + 1);
 		text_index += v24;
 		continue;
-	case 'G':
+	case 'F':
 		text_index++;
 		v18 = *(int*)ap;
 		ap += 4;
@@ -259,7 +260,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		memcpy(S.text + text_index, abuf[0], strlen(abuf[0]));
 		text_index += (int)strlen(abuf[0]) - 2;
 		continue;
-	case 'i':
+	case 'h':
 		v08 = (unsigned char)S.text[text_index + 1];
 		if (v08 == 'i' || v08 == 'c' || v08 == 'b' || v08 == 'a'
 		    || v08 == 'n' || v08 == 't') {
@@ -331,7 +332,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		*(int*)(v14 + 0x10162d4) = v08 + 1;
 		text_index += 2;
 		continue;
-	case 'I':
+	case 'H':
 		v28 = 1;
 		ap += 8;
 		v24 = (int)*(double*)(ap - 8);
@@ -354,7 +355,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		memcpy(S.text + text_index, S.work, v08 + 1);
 		text_index += v08;
 		continue;
-	case 'f':
+	case 'e':
 		v08 = (signed char)S.text[text_index + 1] - 0x30;
 		if (v08 > 0 && v08 < 9) {
 			text_index++;
@@ -378,14 +379,14 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		memcpy(S.text + text_index, S.work + 4, v08 + 1);
 		text_index += v08;
 		continue;
-	case 'v':
+	case 'u':
 		v08 = (unsigned char)S.text[text_index];
 		text_index++;
 		if ((char)v08 == 'v') {
 			ap += 4;
 		}
 		continue;
-	case 'm':
+	case 'l':
 		v08 = (unsigned char)S.text[text_index];
 		text_index++;
 		v2c = 1;
@@ -406,13 +407,13 @@ int __cdecl io_AppendText(char* format_selector, ...)
 			*(int*)(v14 + 0x10162d4) = v18 + 1;
 		}
 		continue;
-	case 'X':
+	case 'W':
 		S.text[text_index - 1] = 0x20;
 		v30 = 1;
 		*(char*)v20 = 0x20;
 		text_index++;
 		continue;
-	case 'W':
+	case 'V':
 		if (digit == -1) {
 			digit = 0;
 		}
@@ -442,10 +443,10 @@ int __cdecl io_AppendText(char* format_selector, ...)
 			text_index++;
 		}
 		continue;
-	case 'u':
+	case 't':
 		v10 = 1;
 		goto shift1;
-	case 'U':
+	case 'T':
 		v10 = 2;
 	shift1:
 		v0c = text_index - (digit != -1 ? 2 : 1);
@@ -453,7 +454,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
 		text_index = v0c;
 		continue;
-	case 'b':
+	case 'a':
 		v0c = text_index - (digit != -1 ? 2 : 1);
 		if (S.text[v0c] != 0x25) {
 			goto fmt;
@@ -463,7 +464,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
 		text_index = v0c;
 		continue;
-	case 'B':
+	case 'A':
 		v0c = text_index - (digit != -1 ? 2 : 1);
 		if (S.text[v0c] != 0x25) {
 			goto fmt;
@@ -473,10 +474,10 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
 		text_index = v0c;
 		continue;
-	case 'e':
+	case 'd':
 		v10 = 5;
 		goto shift2;
-	case 'E':
+	case 'D':
 		v10 = 6;
 	shift2:
 		v08 = (unsigned char)S.text[text_index + 1];
@@ -493,7 +494,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		}
 		text_index = v0c;
 		continue;
-	case 'N':
+	case 'M':
 		text_index++;
 		if (digit == -1) {
 			continue;
@@ -508,7 +509,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		fcn_0064d740(S.text + text_index + 2, S.work, v24);
 		text_index += v24;
 		continue;
-	case 'a':
+	case '`':
 		v28 = 0x14;
 		if (S.text[text_index - 1] != 0x25) {
 			v24 = *(int*)ap;
@@ -530,7 +531,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		memcpy(S.text + text_index, S.work, v08);
 		text_index += v08;
 		continue;
-	case 'r':
+	case 'q':
 		if (directive != 'r') {
 			continue;
 		}
@@ -573,7 +574,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		*(char*)(S.text + text_index + 3 + v28) = 0;
 		text_index += v28;
 		continue;
-	case 'D':
+	case 'C':
 		v24 = *(int*)ap;
 		ap += 4;
 		fcn_00500d60(v24, dbuf);
