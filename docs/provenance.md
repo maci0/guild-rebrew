@@ -11362,3 +11362,28 @@ comparison from 216/229 to NEAR 222/229 (exact instructions 66 to 72, structural
 initialisation order. Verdict recorded with `rebrew test --json`.
 
 Decision: continuing TL reconstruction. No GA was run.
+
+## 2026-11-01 — NO_SOURCE reaches zero on GoldTL
+
+`rebrew status` reported 58 uncovered rows / 171 bytes. Reviewed each against the
+reference image instead of the linked build:
+
+- 45 rows are a bare `ret` (C3), 6 are `mov eax,imm32; ret`, 5 are
+  `xor eax,eax; ret`, one is `mov al,1; ret`, one is `jmp` to `0x5eaaf0`, and
+  `0x506e10` is `mov eax,2; ret` under a retired binding.
+- The 45-byte `0x64e1d0` is not a function start: it begins `mov eax,[ebp+8]` with
+  no prologue and ends by restoring `fs:[0]` from `[ebp-0x10]`, popping ebx/esi/edi,
+  `leave`, `ret`, so discovery split the interior of the function at `0x64e1c7`.
+  Retired with reviewed digest c41fe3ae, which removes 45 bytes from the bucket.
+
+Generated one source per simple row (`src/Develop/Unassigned/GOLDTL.fcn_<va>.c`)
+with the matching body, registered them through `rebrew source register`, fixed the
+`jmp` row's address comment placement, and rebound `0x506e10` with the reviewed
+`source binding rebind` path (verdict EXACT 6/6). Spot-checked verdicts: the
+generated empty bodies compile to EXACT 1/1 (`0x402aa0`, `0x415300`, `0x41e600`).
+
+`rebrew status` now reports NO_SOURCE absent (0 bytes). The rows are new and most
+still lack stored verdicts, so the STUB bucket grew while the test batch was
+deferred: ten size-mismatch agents were saturating the compiler backend.
+
+Decision: continuing with SIZE_MISMATCH. No GA was run.

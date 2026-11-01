@@ -188374,25 +188374,30 @@ changed_at = "2026-10-29T12:11:34.049934+00:00"
 updated_by = "test"
 ["GOLDTL.0x00506e10"]
 size = 6
-updated_by = "rehome"
-updated_at = "2026-10-25T10:19:03+00:00"
+updated_by = "test"
+updated_at = "2026-11-01T04:53:23+00:00"
+file = "src/Develop/Unassigned/GOLDTL.fcn_00506e10.c"
+name = "fcn_00506e10"
+symbol = "_fcn_00506e10"
+kind = "FUNCTION"
+status = "EXACT"
 
 ["GOLDTL.0x00506e10".verification]
-source_hash = "2b5d43f21cb094a4d248c3351cf45f5b7e3ac283c28a2910b1b619742f1db968"
+source_hash = "cf08a9f9b6e3712645eccd3671217c08534f3afad14ec11ce45de3f2247bebbe"
 reference_hash = "7140f35dee6220b79b12aecc27acf5105bf3b77d1588e89fce345de7c16c72b7"
 reference_size = "6"
-headers_hash = "72effd9bea6497f3ed6f9d0fabdbcd84f92cb5b9332f2d79832e9db018ac8fef"
-compiler_hash = "1a15f18f3252384c9aab6285a1b834666514515de54f459deca277eed385dbf2"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x506e10"
 context_hash = ""
 defines = "[]"
-input_hash = "8e14ff2431043ac7bcd3e7608191061a0e45ddf8fc61892eb5e0a7071f4991ba"
-writer = "verify"
+input_hash = "17a970a401bd5953af9e7033d13d71014ec177dca746350a4048c08cb13a6adb"
 status = "EXACT"
-measured_at = "2026-10-25T06:09:25+00:00"
+writer = "test"
+measured_at = "2026-11-01T04:53:23+00:00"
 
 [["GOLDTL.0x00506e10".binding_history]]
 action = "retire"
@@ -188428,6 +188433,7 @@ measured_at = "2026-10-24T11:02:40+00:00"
 ["GOLDTL.0x00506e10".binding_history.replacement]
 
 
+
 [["GOLDTL.0x00506e10".binding_history]]
 action = "rebind"
 reason = "Rollback of an over-broad merged-row retirement: the VA was still a live inventory row or a live claim, so the previous identity is restored."
@@ -188459,6 +188465,7 @@ file = "src/Develop/DieGildeAddOn/game/GOLD.fcn_00503f30.c"
 kind = "FUNCTION"
 name = "fcn_00506e10"
 symbol = "_fcn_00506e10"
+
 
 [["GOLDTL.0x00506e10".binding_history]]
 action = "retire"
@@ -188492,6 +188499,38 @@ status = "EXACT"
 measured_at = "2026-10-25T06:09:25+00:00"
 
 ["GOLDTL.0x00506e10".binding_history.replacement]
+
+[["GOLDTL.0x00506e10".binding_history]]
+action = "rebind"
+reason = "Reference 0x506E10 decodes as mov eax,2; ret (B8 02 00 00 00 C3), a self-contained six-byte function with no prologue and no caller frame use, and the inventory still lists this start, so the fragment-merge retirement no longer applies."
+changed_at = "2026-11-01T04:52:20.818206+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00506e10".binding_history.previous]
+size = 6
+
+["GOLDTL.0x00506e10".binding_history.previous.verification]
+source_hash = "2b5d43f21cb094a4d248c3351cf45f5b7e3ac283c28a2910b1b619742f1db968"
+reference_hash = "7140f35dee6220b79b12aecc27acf5105bf3b77d1588e89fce345de7c16c72b7"
+reference_size = "6"
+headers_hash = "72effd9bea6497f3ed6f9d0fabdbcd84f92cb5b9332f2d79832e9db018ac8fef"
+compiler_hash = "1a15f18f3252384c9aab6285a1b834666514515de54f459deca277eed385dbf2"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x506e10"
+context_hash = ""
+defines = "[]"
+input_hash = "8e14ff2431043ac7bcd3e7608191061a0e45ddf8fc61892eb5e0a7071f4991ba"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-10-25T06:09:25+00:00"
+
+["GOLDTL.0x00506e10".binding_history.replacement]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00506e10.c"
+name = "fcn_00506e10"
+symbol = "_fcn_00506e10"
+kind = "FUNCTION"
 ["GOLDTL.0x00506e20"]
 size = 70
 status = "RELOC"
@@ -618737,3 +618776,399 @@ input_hash = "ea872f1eef132073c3b54b50e970f12436d54e775665cd6e76c950d5c692fdee"
 status = "EXACT"
 writer = "test"
 measured_at = "2026-10-31T06:34:43+00:00"
+
+["GOLDTL.0x00402aa0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00402aa0.c"
+name = "fcn_00402aa0"
+kind = "FUNCTION"
+symbol = "_fcn_00402aa0"
+size = 1
+updated_by = "test"
+updated_at = "2026-11-01T04:54:47+00:00"
+status = "EXACT"
+
+["GOLDTL.0x00402aa0".verification]
+source_hash = "546a7b66e9c59fe2d2892a452a808e3d77b37cd563baf0b5e689c9b0d68e2113"
+reference_hash = "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
+reference_size = "1"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x402aa0"
+context_hash = ""
+defines = "[]"
+input_hash = "ddb576cae78bb94ee2567abb9e24bc826deb65f6f28fe818246fdf68953858c1"
+status = "EXACT"
+writer = "test"
+measured_at = "2026-11-01T04:54:47+00:00"
+["GOLDTL.0x00415300"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00415300.c"
+name = "fcn_00415300"
+kind = "FUNCTION"
+symbol = "_fcn_00415300"
+size = 1
+updated_by = "test"
+updated_at = "2026-11-01T04:57:10+00:00"
+status = "EXACT"
+
+["GOLDTL.0x00415300".verification]
+source_hash = "622d30f8104099ffb1b4581bae3da4341a8bbe95f17007e03b9eed567189ecd9"
+reference_hash = "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
+reference_size = "1"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x415300"
+context_hash = ""
+defines = "[]"
+input_hash = "b2033f8502efcb0543a68ac06c87d3def84bae2f8757c12551383b7f41ce655a"
+status = "EXACT"
+writer = "test"
+measured_at = "2026-11-01T04:57:10+00:00"
+["GOLDTL.0x0041e600"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0041e600.c"
+name = "fcn_0041e600"
+kind = "FUNCTION"
+symbol = "_fcn_0041e600"
+size = 1
+updated_by = "test"
+updated_at = "2026-11-01T05:06:55+00:00"
+status = "EXACT"
+
+["GOLDTL.0x0041e600".verification]
+source_hash = "451eb593ed27b75235ffe332d2a37c05d5dacf3dc963d132a04f2e6355042b7b"
+reference_hash = "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
+reference_size = "1"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x41e600"
+context_hash = ""
+defines = "[]"
+input_hash = "60253b2f1ed2f259c247ff89d532669d007a8ff7943942b11ddbc37c25f521f5"
+status = "EXACT"
+writer = "test"
+measured_at = "2026-11-01T05:06:55+00:00"
+["GOLDTL.0x0041e610"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0041e610.c"
+name = "fcn_0041e610"
+kind = "FUNCTION"
+symbol = "_fcn_0041e610"
+
+["GOLDTL.0x0041f620"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0041f620.c"
+name = "fcn_0041f620"
+kind = "FUNCTION"
+symbol = "_fcn_0041f620"
+
+["GOLDTL.0x0042e3c0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0042e3c0.c"
+name = "fcn_0042e3c0"
+kind = "FUNCTION"
+symbol = "_fcn_0042e3c0"
+
+["GOLDTL.0x0043bc20"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0043bc20.c"
+name = "fcn_0043bc20"
+kind = "FUNCTION"
+symbol = "_fcn_0043bc20"
+
+["GOLDTL.0x0043f690"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0043f690.c"
+name = "fcn_0043f690"
+kind = "FUNCTION"
+symbol = "_fcn_0043f690"
+
+["GOLDTL.0x0043f6a0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0043f6a0.c"
+name = "fcn_0043f6a0"
+kind = "FUNCTION"
+symbol = "_fcn_0043f6a0"
+
+["GOLDTL.0x00444180"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00444180.c"
+name = "fcn_00444180"
+kind = "FUNCTION"
+symbol = "_fcn_00444180"
+
+["GOLDTL.0x0044d3e0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0044d3e0.c"
+name = "fcn_0044d3e0"
+kind = "FUNCTION"
+symbol = "_fcn_0044d3e0"
+
+["GOLDTL.0x0044d6e0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0044d6e0.c"
+name = "fcn_0044d6e0"
+kind = "FUNCTION"
+symbol = "_fcn_0044d6e0"
+
+["GOLDTL.0x0044d6f0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0044d6f0.c"
+name = "fcn_0044d6f0"
+kind = "FUNCTION"
+symbol = "_fcn_0044d6f0"
+
+["GOLDTL.0x00465fe0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00465fe0.c"
+name = "fcn_00465fe0"
+kind = "FUNCTION"
+symbol = "_fcn_00465fe0"
+
+["GOLDTL.0x0046b2a0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0046b2a0.c"
+name = "fcn_0046b2a0"
+kind = "FUNCTION"
+symbol = "_fcn_0046b2a0"
+
+["GOLDTL.0x0046e790"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0046e790.c"
+name = "fcn_0046e790"
+kind = "FUNCTION"
+symbol = "_fcn_0046e790"
+
+["GOLDTL.0x00477410"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00477410.c"
+name = "fcn_00477410"
+kind = "FUNCTION"
+symbol = "_fcn_00477410"
+
+["GOLDTL.0x004774c0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_004774c0.c"
+name = "fcn_004774c0"
+kind = "FUNCTION"
+symbol = "_fcn_004774c0"
+
+["GOLDTL.0x004774d0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_004774d0.c"
+name = "fcn_004774d0"
+kind = "FUNCTION"
+symbol = "_fcn_004774d0"
+
+["GOLDTL.0x00477510"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00477510.c"
+name = "fcn_00477510"
+kind = "FUNCTION"
+symbol = "_fcn_00477510"
+
+["GOLDTL.0x00477550"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00477550.c"
+name = "fcn_00477550"
+kind = "FUNCTION"
+symbol = "_fcn_00477550"
+
+["GOLDTL.0x0047a300"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0047a300.c"
+name = "fcn_0047a300"
+kind = "FUNCTION"
+symbol = "_fcn_0047a300"
+
+["GOLDTL.0x0047a310"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0047a310.c"
+name = "fcn_0047a310"
+kind = "FUNCTION"
+symbol = "_fcn_0047a310"
+
+["GOLDTL.0x0047de40"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0047de40.c"
+name = "fcn_0047de40"
+kind = "FUNCTION"
+symbol = "_fcn_0047de40"
+
+["GOLDTL.0x00495950"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00495950.c"
+name = "fcn_00495950"
+kind = "FUNCTION"
+symbol = "_fcn_00495950"
+
+["GOLDTL.0x00495980"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00495980.c"
+name = "fcn_00495980"
+kind = "FUNCTION"
+symbol = "_fcn_00495980"
+
+["GOLDTL.0x004959b0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_004959b0.c"
+name = "fcn_004959b0"
+kind = "FUNCTION"
+symbol = "_fcn_004959b0"
+
+["GOLDTL.0x004959e0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_004959e0.c"
+name = "fcn_004959e0"
+kind = "FUNCTION"
+symbol = "_fcn_004959e0"
+
+["GOLDTL.0x00495a10"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00495a10.c"
+name = "fcn_00495a10"
+kind = "FUNCTION"
+symbol = "_fcn_00495a10"
+
+["GOLDTL.0x00495a40"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00495a40.c"
+name = "fcn_00495a40"
+kind = "FUNCTION"
+symbol = "_fcn_00495a40"
+
+["GOLDTL.0x00495a70"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00495a70.c"
+name = "fcn_00495a70"
+kind = "FUNCTION"
+symbol = "_fcn_00495a70"
+
+["GOLDTL.0x00498660"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00498660.c"
+name = "fcn_00498660"
+kind = "FUNCTION"
+symbol = "_fcn_00498660"
+
+["GOLDTL.0x004b73a0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_004b73a0.c"
+name = "fcn_004b73a0"
+kind = "FUNCTION"
+symbol = "_fcn_004b73a0"
+
+["GOLDTL.0x004b9bc0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_004b9bc0.c"
+name = "fcn_004b9bc0"
+kind = "FUNCTION"
+symbol = "_fcn_004b9bc0"
+
+["GOLDTL.0x004c6ed0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_004c6ed0.c"
+name = "fcn_004c6ed0"
+kind = "FUNCTION"
+symbol = "_fcn_004c6ed0"
+
+["GOLDTL.0x004e4720"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_004e4720.c"
+name = "fcn_004e4720"
+kind = "FUNCTION"
+symbol = "_fcn_004e4720"
+
+["GOLDTL.0x004ee050"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_004ee050.c"
+name = "fcn_004ee050"
+kind = "FUNCTION"
+symbol = "_fcn_004ee050"
+
+["GOLDTL.0x005095c0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_005095c0.c"
+name = "fcn_005095c0"
+kind = "FUNCTION"
+symbol = "_fcn_005095c0"
+
+["GOLDTL.0x00525e81"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00525e81.c"
+name = "fcn_00525e81"
+kind = "FUNCTION"
+symbol = "_fcn_00525e81"
+
+["GOLDTL.0x00537200"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00537200.c"
+name = "fcn_00537200"
+kind = "FUNCTION"
+symbol = "_fcn_00537200"
+
+["GOLDTL.0x00538700"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00538700.c"
+name = "fcn_00538700"
+kind = "FUNCTION"
+symbol = "_fcn_00538700"
+
+["GOLDTL.0x0053f4b0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_0053f4b0.c"
+name = "fcn_0053f4b0"
+kind = "FUNCTION"
+symbol = "_fcn_0053f4b0"
+
+["GOLDTL.0x00545410"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00545410.c"
+name = "fcn_00545410"
+kind = "FUNCTION"
+symbol = "_fcn_00545410"
+
+["GOLDTL.0x00545420"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00545420.c"
+name = "fcn_00545420"
+kind = "FUNCTION"
+symbol = "_fcn_00545420"
+
+["GOLDTL.0x005490d0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_005490d0.c"
+name = "fcn_005490d0"
+kind = "FUNCTION"
+symbol = "_fcn_005490d0"
+
+["GOLDTL.0x005492d0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_005492d0.c"
+name = "fcn_005492d0"
+kind = "FUNCTION"
+symbol = "_fcn_005492d0"
+
+["GOLDTL.0x00549b30"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00549b30.c"
+name = "fcn_00549b30"
+kind = "FUNCTION"
+symbol = "_fcn_00549b30"
+
+["GOLDTL.0x00549b40"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00549b40.c"
+name = "fcn_00549b40"
+kind = "FUNCTION"
+symbol = "_fcn_00549b40"
+
+["GOLDTL.0x00563b90"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00563b90.c"
+name = "fcn_00563b90"
+kind = "FUNCTION"
+symbol = "_fcn_00563b90"
+
+["GOLDTL.0x00563ba0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00563ba0.c"
+name = "fcn_00563ba0"
+kind = "FUNCTION"
+symbol = "_fcn_00563ba0"
+
+["GOLDTL.0x005710f0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_005710f0.c"
+name = "fcn_005710f0"
+kind = "FUNCTION"
+symbol = "_fcn_005710f0"
+
+["GOLDTL.0x00572d90"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00572d90.c"
+name = "fcn_00572d90"
+kind = "FUNCTION"
+symbol = "_fcn_00572d90"
+
+["GOLDTL.0x005a73f0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_005a73f0.c"
+name = "fcn_005a73f0"
+kind = "FUNCTION"
+symbol = "_fcn_005a73f0"
+
+["GOLDTL.0x005c80c0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_005c80c0.c"
+name = "fcn_005c80c0"
+kind = "FUNCTION"
+symbol = "_fcn_005c80c0"
+
+["GOLDTL.0x005dfa30"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_005dfa30.c"
+name = "fcn_005dfa30"
+kind = "FUNCTION"
+symbol = "_fcn_005dfa30"
+
+["GOLDTL.0x005eaae0"]
+file = "src/Develop/Unassigned/GOLDTL.fcn_005eaae0.c"
+name = "fcn_005eaae0"
+kind = "FUNCTION"
+symbol = "_fcn_005eaae0"
