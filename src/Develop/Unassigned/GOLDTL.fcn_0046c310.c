@@ -95,7 +95,7 @@ y_axis:
 		w->vy = v - w->step;
 	}
 	if (w->x != w->prevx || w->y != w->prevy) {
-		i = ((char)w->type & 8) >> 3;
+		i = (w->type >> 3) & 1;
 		if ((char)w->type & 0x20) {
 			i += 2;
 		}

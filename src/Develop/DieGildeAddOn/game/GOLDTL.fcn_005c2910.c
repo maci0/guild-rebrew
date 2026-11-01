@@ -39,7 +39,7 @@ void __cdecl fcn_005c2910(char* e)
 	fcn_005373e0((void*) 0, 0x677c7);
 	do {
 		r = (int) gm_SearchTable67(id);
-		if ((e[0x5b] & 4) || r == 0) {
+		if (r == 0 || (e[0x5b] & 4)) {
 			g_774654 = 1;
 		}
 		if (g_14ce8e0 != 0) {

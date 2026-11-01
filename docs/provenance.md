@@ -11413,3 +11413,24 @@ compiler runs). Results are thin for that reason; the remaining slices finish
 their current rows and report.
 
 Decision: continuing SIZE_MISMATCH after the slices report.
+
+## 2026-11-01 — sm1 keeps two exact-size near matches, sm10 keeps none
+
+Kept from sm1, both semantics-preserving re-expressions that reach the exact
+reference size:
+
+- `0x0046C310`: `((char)w->type & 8) >> 3` became `(w->type >> 3) & 1`; object 452
+  (was 453), match 418/452 (was 287).
+- `0x005C2910`: guard reordered to `r == 0 || (e[0x5b] & 4)`; object 291 (was 297),
+  match 271/291 (was 180).
+
+Verdicts recorded with promoted `rebrew test --size`; both NEAR_MATCHING at the exact
+reference size.
+
+sm10 kept nothing. Its best row `0x004E04F0` is 200/295 with every structural
+mismatch an esi/edi mirror (callee-saved rotation), and it reports two codegen
+walls: a two-level switch table our compiler flattens, and a caller-saved register
+kept live across a call. Those look like compiler-context differences rather than
+statement shapes.
+
+Decision: continuing SIZE_MISMATCH once sm2, sm6 and sm8 report.
