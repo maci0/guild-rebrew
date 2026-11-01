@@ -13907,3 +13907,74 @@ W029 redundant flag and W031 stale source/type evidence warnings. Receipt:
 - `0x46C5A0` is ~40 instructions short of native; a continuation is transcribing them.
 
 Decision: continuing. No GA was run.
+
+## 2026-11-02 — texture-wrapper cross-target candidate
+
+Decision owner: project maintainer. Checked a conditional shared texture
+wrapper against Gold and T&L; it matches 102/102 and 78/78 after relocation
+masking. Gold's two callee bindings and global ownership remain unresolved, so
+no production source or binding was changed. Evidence:
+`.scratch/counter-contract/texture-wrapper-v2-{gold,tl}.json` and
+`docs/source-layout.md`.
+
+## 2026-11-02 — VFS scanner raw-link comparison
+
+Decision owner: project maintainer. Rebuilt T&L after binding the archive scanner
+into the shared VFS translation unit and compared the complete raw PE against
+`.scratch/counter-contract/tl-after-vfs-scan-caller.exe`. The build succeeded;
+imports, exports, resources and relocation directories agree. Code placement,
+`.text` size and some data bytes differ. Other source changes occurred during
+the build, so this comparison does not isolate the scanner merge or establish
+identical linked placement. Evidence: `.scratch/counter-contract/tl-post-vfs-scanner-merge-build.log`
+and `.scratch/counter-contract/tl-vfs-scanner-merge-compare.json`.
+
+## 2026-11-02 — VFS case-normalization contract review
+
+Decision owner: project maintainer. Reviewed the client case-normalization
+helper against the canonical VFS implementation and identified conflicting
+caller declarations and an integer-cast argument. Recorded the required
+contract reconciliation in `docs/source-layout.md` rather than changing the
+binding without review. Cross-target `rebrew types contracts` and
+`rebrew types reconcile --dry-run` rejected inputs that changed during the
+audit; the Gold raw link also remains unavailable because of unresolved
+symbols. No source implementation or managed binding was changed.
+
+The case-normalization contract review was retried with the function and data
+metadata locks held. Source inputs still changed during the audit, so the
+reconciliation preview again refused to proceed. The partial per-target audit
+also reported one Gold pointer/value contract conflict and incomplete source
+or include contexts; it is not a complete guarded preview. No source or
+metadata binding was changed by this retry.
+
+## 2026-11-02 — reuse VFS normalization in the mount caller
+
+Decision owner: project maintainer. Changed the shared client mount routine's
+two normalization calls to the canonical `vfs_NormalizeCase`, using its existing
+`char *` signature. Gold and T&L native normalizers and the canonical body
+compare RELOC 19/19; the case flag operand is validated, while the CRT uppercase
+operand remains unresolved by the comparator. The T&L raw map selects stock
+`LIBCMT:strupr.obj` for the canonical implementation; the former
+address-named callee was a link scaffold. Cross-target mount verification is
+running; other callers and the duplicate donor remain pending contract review.
+
+The updated mount routine verifies RELOC 1101/1101 in both Gold and T&L;
+the server target has no binding for this caller. Both normalization call
+operands remain unresolved by the verifier until the target identities are
+rebound. Receipt: `.scratch/counter-contract/vfs-mount-normalize-canonical.json`.
+
+## 2026-11-02 — append-text fmt, e and h blocks
+
+- `0x519190` 463 -> 510/7342 (native 7536). The shared fmt block is transcribed
+  (va_arg fetch, 0x4800 threshold, text/type tables, isdigit backwards scan, the
+  three format tables 0x14A540C/0x14A5400/0x14A5418 with abuf[6]/[5]/[4], the
+  width and no-width sprintf forms, toupper, and the shared memcpy tail). The `e`
+  case now has both precision paths with the native '%0<d>f' construction and
+  bounds check. The `h` case builds the thousands separator with the
+  `mul 0xAAAAAAAB; shr 1` division and both digit paths. The `e` bounds compare is
+  signed where native uses unsigned; the unsigned form measures 535 at 7178 bytes,
+  so the faithful-size variant is kept.
+
+Pads retuned (two pads, shift -0x280). Rebuild 2,977,792 bytes, raw 267,521,
+informative 129,099, no compile or link errors.
+
+Decision: continuing. No GA was run.
