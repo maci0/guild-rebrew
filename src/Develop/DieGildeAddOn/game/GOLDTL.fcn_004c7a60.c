@@ -1,4 +1,27 @@
-int __cdecl fcn_004c4dc0(int a1, int a2);
+/* The native caller 0x4C7A60 keeps a live ecx across the call to 0x4C4DC0
+ * and stores through it after the call, which MSVC 6 only emits when the callee
+ * is defined in the same translation unit. Both bodies live in this file. */
+
+extern char cm_LastEntityId[];
+extern char cm_LastBuildingId[];
+extern char cm_LastObjectId[];
+
+/* ADDRESS: GOLD 0x004c4450 */
+/* ADDRESS: GOLDTL 0x004c4dc0 */
+int __cdecl fcn_004c4dc0(int a1, int a2)
+{
+	if (a2 == -2) {
+		return *(int*) cm_LastEntityId;
+	}
+	if (a2 == -3) {
+		return *(int*) cm_LastBuildingId;
+	}
+	if (a2 == -4) {
+		return *(int*) cm_LastObjectId;
+	}
+	return a2;
+}
+
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl fcn_00504130(void* entity);
 void __cdecl gm_KillSpieler(int entity_id, int flag);

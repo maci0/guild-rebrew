@@ -1,5 +1,17 @@
 # Current work
 
+## Working checkpoint update (2026-11-01 15:15 UTC)
+
+GoldTL rebuilds clean; image 2,981,888 bytes, sha256 `e1e11501899a37aa...`.
+Same-offset agreement with the reference is 241,542 bytes with 106,935 informative
+bytes. Status bytes: SIZE_MISMATCH 1,069,010, RELOC 790,613, EXACT 30,729,
+NEAR_MATCHING 42,205, STUB 2,066, LIBRARY 486,356.
+
+NO_SOURCE is zero: 57 tiny inventory starts got reviewed bodies and one interior
+split was retired. Eleven inventory extents were repaired to drop alignment fill.
+A same-TU callee merge fixed `0x50E170`; six near-match bodies were kept. Lead pads
+were retuned after these layout changes (eight pads, shift 0x9C0).
+
 ## Working checkpoint (2026-11-01)
 
 | Target | Latest build evidence | Remaining limits |

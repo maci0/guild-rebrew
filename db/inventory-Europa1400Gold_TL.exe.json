@@ -46408,8 +46408,17 @@
   },
   {
     "va": 4995664,
-    "size": 768,
-    "name": "fcn.004c3a50"
+    "size": 760,
+    "name": "fcn.004c3a50",
+    "extent_history": [
+      {
+        "old_size": 768,
+        "new_size": 760,
+        "reason": "The 768-byte inventory extent ends with eight 0x90 alignment bytes at 0x4C3D48 after the final switch-table entry; the compiled object ends at 760 and the next inventory start is 0x4C3D50, the current row end.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T07:20:40.245327+00:00"
+      }
+    ]
   },
   {
     "va": 4996432,

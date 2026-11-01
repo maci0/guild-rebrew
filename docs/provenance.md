@@ -11465,3 +11465,66 @@ The resume baseline for HEAD was 175,845 raw; this checkpoint is +65,697 raw whi
 removing the NO_SOURCE class and shrinking SIZE_MISMATCH.
 
 Decision: continuing benchmark work. No GA was run.
+
+## 2026-11-01 — GoldTL same-TU merges: three more callees into their callers
+
+Applied the lever from 0x50E170 (a native caller that keeps a caller-saved register
+live across a direct call only compiles that way when the callee definition sits in
+the same translation unit). Candidate search: every SIZE_MISMATCH/NEAR_MATCHING row
+whose native body reads ecx/edx after a direct call without rewriting it, where the
+callee resolves to a game definition in a different file. Cheap reproduction: merged
+translation unit under `.scratch/team/`, compiled with `rebrew test --va --size
+--cflags "/O2 /Gd /I src /I src/Develop" --no-promote`.
+
+Kept merges (caller match before -> after, row size):
+
+- 0x406120 7/87 -> 87/87 after moving `fcn_004050c0` (0x4050C0) from
+  `GOLDTL.fcn_00405080.c` into `GOLDTL.fcn_00406120.c`. Native keeps edx across the
+  call and dereferences it afterwards.
+- 0x436A00 117/159 -> 159/159 after moving `fcn_004321a0` (0x4321A0) into
+  `GOLDTL.fcn_00436a00.c`. Native keeps edx across the call; the file was deleted.
+- 0x4C7A60 22/150 -> 24/150 after moving `fcn_004c4dc0` (0x4C4DC0) into
+  `GOLDTL.fcn_004c7a60.c`; the first differing byte moves from offset 1 to offset
+  24, so the prologue and call site now match. The file was deleted.
+
+Callee rows rebound to the merged files (`source binding rebind`, each guarded by
+its reviewed digest). Two shared definitions also carried GOLD rows, so
+`GOLD.0x004324e0` and `GOLD.0x004c4450` were rebound to the same files with
+`--target Europa1400Gold.exe`. No scaffold placeholders existed for the moved
+addresses. Verification: `rebrew test <va> --no-promote` for every affected row;
+0x4050C0 110/110 EXACT, 0x4321A0 65/65 EXACT, GOLD 0x4324E0 65/65 EXACT,
+0x4C4DC0 37/37 RELOC, GOLD 0x4C4450 37/37 RELOC.
+
+Rejected candidates (no match rise or drop): 0x4339E0, 0x4BF1B0, 0x500A40,
+0x53ABE0, 0x547770, 0x5C0020, 0x5D2470, 0x4FF8F0, 0x511C60, 0x512EE0, 0x5AD000,
+and 0x451A40/0x5A6880/0x5AAF60, which rose but left the first differing byte at the
+same offset, so the merge did not reproduce the native head. 0x5A59D0 (439 -> 292)
+and 0x5C1490 (561 -> 266) fell, and 0x4441C0, 0x490C90/0x490E20/0x49D300 and
+0x5609C0 failed to compile with conflicting prototypes for the merged callee.
+
+Decision: merges kept under the stated rule (caller match rises, both rows compile).
+Status promotion left to the next verify pass; measurements above are `--no-promote`.
+
+## 2026-11-01 — same-TU merge lever lands three rows
+
+Three callees moved into their native caller's translation unit, because each
+callee address is preserved in a caller-saved register across the call and MSVC 6
+only keeps that register when the callee is visible in the same TU:
+
+- `0x406120` 7/87 -> RELOC 87/87; callee `0x4050C0` (EXACT 110/110) moved from
+  `GOLDTL.fcn_00405080.c`.
+- `0x436A00` 117/159 -> RELOC 159/159; callee `0x4321A0` (EXACT 65/65) moved from
+  the deleted `GOLDTL.fcn_004321a0.c`.
+- `0x4C7A60` 22/150 -> 24/155; callee `0x4C4DC0` (RELOC 37/37) moved from the
+  deleted `GOLDTL.fcn_004c4dc0.c`. First differing byte moved from offset 1 to 24.
+
+`GOLD.0x004324E0` and `GOLD.0x004c4450` were rebound to the same files and retested
+clean. Ten candidate merges were rejected for no change; four rose without the
+first mismatch moving; two fell; six hit compile conflicts.
+
+Layout note: retuning lead pads immediately after the merges lowered same-offset
+agreement from 240,349 to 209,878, so the retune was reverted and the checkpoint
+pads kept. Rebuild after the revert: 2,981,888 bytes, raw 240,349, informative
+105,867.
+
+Decision: continuing. No GA was run.
