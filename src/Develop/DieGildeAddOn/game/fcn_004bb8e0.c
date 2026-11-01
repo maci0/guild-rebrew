@@ -10,7 +10,7 @@ int __cdecl fcn_004bb8e0(int* a0)
 {
 	char buf[0x400];
 	char* p;
-	int len;
+	size_t len;
 
 	p = (char*) gm_LookupEntityRecordById(*a0);
 	if (p == 0)

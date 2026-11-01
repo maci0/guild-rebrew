@@ -9,27 +9,14 @@ int __cdecl fcn_004f5cc0(unsigned char a0, int a1)
 		if ((a0 & 0xf0) < 0x30)
 			r = 1;
 		break;
-	case 2:
-		r = 0;
+	case 2: case 3:
 		break;
-	case 3:
-		r = 0;
+	case 4: case 5:
 		break;
-	case 4:
-		r = 0;
-		break;
-	case 5:
-		r = 0;
-		break;
-	case 6:
-		r = 0;
-		break;
-	case 7:
-		r = 0;
+	case 6: case 7:
 		break;
 	default:
-		r = 0;
-		break;
+		return 0;
 	}
 	return r;
 }

@@ -19355,8 +19355,17 @@
   },
   {
     "va": 4482368,
-    "size": 1184,
-    "name": "fcn.00446540"
+    "size": 1172,
+    "name": "fcn.00446540",
+    "extent_history": [
+      {
+        "old_size": 1184,
+        "new_size": 1172,
+        "reason": "extent audit: row extent includes trailing 0x90 alignment fill after the last body byte or switch table; object ends at the reviewed body end; next inventory row starts at the current row end",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T06:49:49.767793+00:00"
+      }
+    ]
   },
   {
     "va": 4483552,
@@ -19598,8 +19607,17 @@
   },
   {
     "va": 4492048,
-    "size": 432,
-    "name": "fcn.00448b10"
+    "size": 425,
+    "name": "fcn.00448b10",
+    "extent_history": [
+      {
+        "old_size": 432,
+        "new_size": 425,
+        "reason": "extent audit: row extent includes trailing 0x90 alignment fill after the last body byte or switch table; object ends at the reviewed body end; next inventory row starts at the current row end",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T06:49:49.767815+00:00"
+      }
+    ]
   },
   {
     "va": 4492480,
@@ -27929,7 +27947,7 @@
   },
   {
     "va": 4633264,
-    "size": 576,
+    "size": 572,
     "name": "fcn.0046b2b0",
     "extent_history": [
       {
@@ -27952,6 +27970,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.723387+00:00"
+      },
+      {
+        "old_size": 576,
+        "new_size": 572,
+        "reason": "extent audit: row extent includes trailing 0x90 alignment fill after the last body byte or switch table; object ends at the reviewed body end; next inventory row starts at the current row end",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T06:49:49.767820+00:00"
       }
     ]
   },
@@ -59956,7 +59981,7 @@
   },
   {
     "va": 5197664,
-    "size": 432,
+    "size": 424,
     "name": "fcn.004f4f60",
     "extent_history": [
       {
@@ -59979,6 +60004,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.725132+00:00"
+      },
+      {
+        "old_size": 432,
+        "new_size": 424,
+        "reason": "extent audit: row extent includes trailing 0x90 alignment fill after the last body byte or switch table; object ends at the reviewed body end; next inventory row starts at the current row end",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T06:49:49.767824+00:00"
       }
     ]
   },
@@ -60284,8 +60316,17 @@
   },
   {
     "va": 5201088,
-    "size": 64,
-    "name": "fcn.004f5cc0"
+    "size": 63,
+    "name": "fcn.004f5cc0",
+    "extent_history": [
+      {
+        "old_size": 64,
+        "new_size": 63,
+        "reason": "The 64-byte inventory extent ends with one 0x90 alignment byte at 0x4F5CFF before the next function at 0x4F5D00; the switch-table object ends at 63 bytes and no branch targets the fill.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T06:49:59.408795+00:00"
+      }
+    ]
   },
   {
     "va": 5201152,
@@ -64022,7 +64063,7 @@
   },
   {
     "va": 5255136,
-    "size": 2016,
+    "size": 2003,
     "name": "fcn.00502fe0",
     "extent_history": [
       {
@@ -64038,6 +64079,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.725341+00:00"
+      },
+      {
+        "old_size": 2016,
+        "new_size": 2003,
+        "reason": "extent audit: row extent includes trailing 0x90 alignment fill after the last body byte or switch table; object ends at the reviewed body end; next inventory row starts at the current row end",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T06:49:49.767827+00:00"
       }
     ]
   },
@@ -66100,8 +66148,17 @@
   },
   {
     "va": 5293280,
-    "size": 112,
-    "name": "fcn.0050c4e0"
+    "size": 110,
+    "name": "fcn.0050c4e0",
+    "extent_history": [
+      {
+        "old_size": 112,
+        "new_size": 110,
+        "reason": "extent audit: row extent includes trailing 0x90 alignment fill after the last body byte or switch table; object ends at the reviewed body end; next inventory row starts at the current row end",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T06:49:49.767830+00:00"
+      }
+    ]
   },
   {
     "va": 5293392,
@@ -76921,8 +76978,17 @@
   },
   {
     "va": 5569888,
-    "size": 832,
-    "name": "fcn.0054fd60"
+    "size": 820,
+    "name": "fcn.0054fd60",
+    "extent_history": [
+      {
+        "old_size": 832,
+        "new_size": 820,
+        "reason": "extent audit: row extent includes trailing 0x90 alignment fill after the last body byte or switch table; object ends at the reviewed body end; next inventory row starts at the current row end",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T06:49:49.767833+00:00"
+      }
+    ]
   },
   {
     "va": 5570720,
@@ -77813,8 +77879,17 @@
   },
   {
     "va": 5584016,
-    "size": 2000,
-    "name": "fcn.00553490"
+    "size": 1992,
+    "name": "fcn.00553490",
+    "extent_history": [
+      {
+        "old_size": 2000,
+        "new_size": 1992,
+        "reason": "extent audit: row extent includes trailing 0x90 alignment fill after the last body byte or switch table; object ends at the reviewed body end; next inventory row starts at the current row end",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T06:49:49.767836+00:00"
+      }
+    ]
   },
   {
     "va": 5586016,
@@ -80144,8 +80219,17 @@
   },
   {
     "va": 5653600,
-    "size": 1392,
-    "name": "fcn.00564460"
+    "size": 1388,
+    "name": "fcn.00564460",
+    "extent_history": [
+      {
+        "old_size": 1392,
+        "new_size": 1388,
+        "reason": "extent audit: row extent includes trailing 0x90 alignment fill after the last body byte or switch table; object ends at the reviewed body end; next inventory row starts at the current row end",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T06:49:49.767838+00:00"
+      }
+    ]
   },
   {
     "va": 5654992,
@@ -84395,8 +84479,17 @@
   },
   {
     "va": 5759136,
-    "size": 1984,
-    "name": "fcn.0057e0a0"
+    "size": 1976,
+    "name": "fcn.0057e0a0",
+    "extent_history": [
+      {
+        "old_size": 1984,
+        "new_size": 1976,
+        "reason": "extent audit: row extent includes trailing 0x90 alignment fill after the last body byte or switch table; object ends at the reviewed body end; next inventory row starts at the current row end",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-01T06:49:49.767841+00:00"
+      }
+    ]
   },
   {
     "va": 5761120,

@@ -188374,13 +188374,12 @@ changed_at = "2026-10-29T12:11:34.049934+00:00"
 updated_by = "test"
 ["GOLDTL.0x00506e10"]
 size = 6
-updated_by = "test"
-updated_at = "2026-11-01T04:53:23+00:00"
-file = "src/Develop/Unassigned/GOLDTL.fcn_00506e10.c"
+updated_by = "rehome"
+updated_at = "2026-11-01T06:51:36+00:00"
+file = "src/Develop/DieGildeAddOn/game/GOLD.fcn_00503f30.c"
 name = "fcn_00506e10"
 symbol = "_fcn_00506e10"
 kind = "FUNCTION"
-status = "EXACT"
 
 ["GOLDTL.0x00506e10".verification]
 source_hash = "cf08a9f9b6e3712645eccd3671217c08534f3afad14ec11ce45de3f2247bebbe"
@@ -188434,6 +188433,7 @@ measured_at = "2026-10-24T11:02:40+00:00"
 
 
 
+
 [["GOLDTL.0x00506e10".binding_history]]
 action = "rebind"
 reason = "Rollback of an over-broad merged-row retirement: the VA was still a live inventory row or a live claim, so the previous identity is restored."
@@ -188465,6 +188465,7 @@ file = "src/Develop/DieGildeAddOn/game/GOLD.fcn_00503f30.c"
 kind = "FUNCTION"
 name = "fcn_00506e10"
 symbol = "_fcn_00506e10"
+
 
 
 [["GOLDTL.0x00506e10".binding_history]]
@@ -188500,6 +188501,7 @@ measured_at = "2026-10-25T06:09:25+00:00"
 
 ["GOLDTL.0x00506e10".binding_history.replacement]
 
+
 [["GOLDTL.0x00506e10".binding_history]]
 action = "rebind"
 reason = "Reference 0x506E10 decodes as mov eax,2; ret (B8 02 00 00 00 C3), a self-contained six-byte function with no prologue and no caller frame use, and the inventory still lists this start, so the fragment-merge retirement no longer applies."
@@ -188528,6 +188530,43 @@ measured_at = "2026-10-25T06:09:25+00:00"
 
 ["GOLDTL.0x00506e10".binding_history.replacement]
 file = "src/Develop/Unassigned/GOLDTL.fcn_00506e10.c"
+name = "fcn_00506e10"
+symbol = "_fcn_00506e10"
+kind = "FUNCTION"
+
+[["GOLDTL.0x00506e10".binding_history]]
+action = "rebind"
+reason = "fcn_00506E10 is already defined as mov eax,2; ret in GOLD.fcn_00503f30.c, which is compiled into GoldTL; the separate single-function file duplicated the symbol and broke the link with LNK2005."
+changed_at = "2026-11-01T06:51:36.166352+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00506e10".binding_history.previous]
+size = 6
+file = "src/Develop/Unassigned/GOLDTL.fcn_00506e10.c"
+name = "fcn_00506e10"
+symbol = "_fcn_00506e10"
+kind = "FUNCTION"
+status = "EXACT"
+
+["GOLDTL.0x00506e10".binding_history.previous.verification]
+source_hash = "cf08a9f9b6e3712645eccd3671217c08534f3afad14ec11ce45de3f2247bebbe"
+reference_hash = "7140f35dee6220b79b12aecc27acf5105bf3b77d1588e89fce345de7c16c72b7"
+reference_size = "6"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x506e10"
+context_hash = ""
+defines = "[]"
+input_hash = "17a970a401bd5953af9e7033d13d71014ec177dca746350a4048c08cb13a6adb"
+status = "EXACT"
+writer = "test"
+measured_at = "2026-11-01T04:53:23+00:00"
+
+["GOLDTL.0x00506e10".binding_history.replacement]
+file = "src/Develop/DieGildeAddOn/game/GOLD.fcn_00503f30.c"
 name = "fcn_00506e10"
 symbol = "_fcn_00506e10"
 kind = "FUNCTION"
@@ -190835,13 +190874,12 @@ changed_at = "2026-10-04T03:20:51.149333+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0050dfd0"]
 size = 39
-status = "EXACT"
 updated_by = "rehome"
-updated_at = "2026-10-27T08:34:39+00:00"
-file = "src/Develop/Unassigned/GOLDTL.fcn_0050dfd0.c"
+updated_at = "2026-11-01T06:47:31+00:00"
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0050e170.c"
+name = "fcn_0050dfd0"
 symbol = "_fcn_0050dfd0"
 kind = "FUNCTION"
-name = "fcn_0050dfd0"
 
 ["GOLDTL.0x0050dfd0".verification]
 source_hash = "dfcb00b8805d727cf3ab385106718d793c0c0acb4aa7baeb4492ed95eff26936"
@@ -190860,6 +190898,42 @@ status = "EXACT"
 writer = "test"
 measured_at = "2026-10-31T09:50:19+00:00"
 
+[["GOLDTL.0x0050dfd0".binding_history]]
+action = "rebind"
+reason = "The native caller 0x50E170 keeps a1 in ecx across the call to 0x50DFD0 and pushes that ecx as fcn_00502cd0's fourth argument, which MSVC 6 only emits when the callee is defined in the same translation unit; compiling the callee body before the caller reproduces the native head exactly. The two files are merged into the caller TU."
+changed_at = "2026-11-01T06:47:31.226387+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0050dfd0".binding_history.previous]
+size = 39
+status = "EXACT"
+file = "src/Develop/Unassigned/GOLDTL.fcn_0050dfd0.c"
+symbol = "_fcn_0050dfd0"
+kind = "FUNCTION"
+name = "fcn_0050dfd0"
+
+["GOLDTL.0x0050dfd0".binding_history.previous.verification]
+source_hash = "dfcb00b8805d727cf3ab385106718d793c0c0acb4aa7baeb4492ed95eff26936"
+reference_hash = "fb9c5fd43cc48230e93ec5dcad601b2dabac65859b089d5fc68b587b2cc9d552"
+reference_size = "39"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x50dfd0"
+context_hash = ""
+defines = "[]"
+input_hash = "e07560fe80bd314c2c78bc89e9bc17c16f067259bcb98265872289e0596807be"
+status = "EXACT"
+writer = "test"
+measured_at = "2026-10-31T09:50:19+00:00"
+
+["GOLDTL.0x0050dfd0".binding_history.replacement]
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0050e170.c"
+name = "fcn_0050dfd0"
+symbol = "_fcn_0050dfd0"
+kind = "FUNCTION"
 ["GOLDTL.0x0050e000"]
 size = 363
 status = "RELOC"
@@ -424092,7 +424166,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x004f5cc0".verification]
-source_hash = "1fa4696300b8fab10009895ae16f9ce832fabd3e89f972b12de1ee178b9dba4d"
+source_hash = "5d1768c2720346eef081c1abec702c815e2378968b684fece38261d8cac0f99e"
 reference_hash = "196eff8d214dbcd6e0fd15d2514b2b35f0a487f28fcdf2cccfdc75b3b1c57575"
 reference_size = "64"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -424103,10 +424177,10 @@ module = "GOLDTL"
 va = "0x4f5cc0"
 context_hash = ""
 defines = "[]"
-input_hash = "8024edee4ce7dc07e44f514cc8e98925ed83123cbfe2df3721b3879582920beb"
-writer = "verify"
+input_hash = "062be2641f94eacf1d5e475ccc49a354612506fb20dcb39e245997e37999ffc5"
 status = "SIZE_MISMATCH"
-measured_at = "2026-10-31T05:58:31+00:00"
+writer = "test"
+measured_at = "2026-11-01T06:49:21+00:00"
 
 [["GOLDTL.0x004f5cc0".status_history]]
 old_status = "STUB"
@@ -429473,13 +429547,13 @@ symbol = "_fcn_004f0f60"
 name = "fcn_004f0f60"
 kind = "FUNCTION"
 updated_by = "test"
-updated_at = "2026-11-01T05:41:56+00:00"
-status = "STUB"
+updated_at = "2026-11-01T06:48:45+00:00"
+status = "NEAR_MATCHING"
 blocker = "extent is the canonical 133B: the 8 bytes after the main ret are the cold idx==4 clamp block (mov eax,4; jmp 0x4f0f6f), not alignment; the earlier test --size 125 probe and the task text are stale. Current body 127B/32 matched, 6B short: it inlines the clamp instead of emitting the out-of-line tail, plus x87/loop register allocation. Needs one pass emitting the clamp as a separate cold block."
 blocker_delta = 6
 
 ["GOLDTL.0x004f0f60".verification]
-source_hash = "e9056674e0e2521aa2ac3457ab144d4495ac3102ea02c3a57cf1b88a387f3e62"
+source_hash = "335cb3c8dbfe978158248a931aee9c858b046224f38b90652ffa4805b773392e"
 reference_hash = "1d56fc3806b8bcf2de3dadca4abc70b2a2a2b4d7e39e9a70eca209c8b78b832a"
 reference_size = "133"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -429490,10 +429564,10 @@ module = "GOLDTL"
 va = "0x4f0f60"
 context_hash = ""
 defines = "[]"
-input_hash = "56d9f3a466d3dfaa98289535ca81ca6c434f29589d7b6d812ef1cb28807e0af9"
-status = "STUB"
+input_hash = "0d1ea14d964ab80517d0b1f677cc7889e479dc43a20f07d00406e33686fc286e"
+status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-01T05:41:56+00:00"
+measured_at = "2026-11-01T06:48:45+00:00"
 
 [["GOLDTL.0x004f0f60".status_history]]
 old_status = "STUB"
@@ -429517,6 +429591,12 @@ updated_by = "test"
 old_status = "SIZE_MISMATCH"
 new_status = "STUB"
 changed_at = "2026-11-01T05:41:56.002185+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x004f0f60".status_history]]
+old_status = "STUB"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-01T06:48:45.636245+00:00"
 updated_by = "test"
 ["GOLDTL.0x0065dd41"]
 size = 3
@@ -436116,7 +436196,7 @@ status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd"
 
 ["GOLDTL.0x00498e20".verification]
-source_hash = "0bf437eef61dd83d91cfbaad3891320c086e3429402849dd9018a23d8c466ea3"
+source_hash = "da89cc86f0556b1bf2be4fac5c26e39fc8ecf4711001b386af45460ba248b961"
 reference_hash = "dfb715de2934b0e81dc7457414792ca2995e8a117ce284f1e4fb18856daa6e4a"
 reference_size = "282"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -436127,10 +436207,10 @@ module = "GOLDTL"
 va = "0x498e20"
 context_hash = ""
 defines = "[]"
-input_hash = "707e7614be65c5b1d3ec48a4ed0f97b9864e6b42d5191ce8e2aae70ecc12515c"
+input_hash = "09fc0e6c8d8ada99939ec5fecfc4354435883489d1e7a226227e2d757b44ac57"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-10-31T16:45:53+00:00"
+measured_at = "2026-11-01T06:09:18+00:00"
 
 [["GOLDTL.0x00498e20".status_history]]
 old_status = "STUB"
@@ -614509,9 +614589,9 @@ kind = "FUNCTION"
 file = "src/Develop/DieGildeAddOn/game/fcn_004bb8e0.c"
 name = "fcn_004bb8e0"
 symbol = "_fcn_004bb8e0"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:42+00:00"
-status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-11-01T06:12:01+00:00"
+status = "RELOC"
 size = 158
 
 [["GOLDTL.0x004bb8e0".status_history]]
@@ -614525,8 +614605,14 @@ old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-25T23:50:17.149399+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x004bb8e0".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "RELOC"
+changed_at = "2026-11-01T06:12:01.447380+00:00"
+updated_by = "test"
 ["GOLDTL.0x004bb8e0".verification]
-source_hash = "743f4d222dabe80d00496d37720cff42a816a276a875b06a45c4ee91a1a27f50"
+source_hash = "cab132b9096247ac039a6a27afcca152bb1f169307ac03440a2d2ea8408f794b"
 reference_hash = "1f4151cde4f5efcf5f1bd1b204cb4e01f870dfa46c3ef69c7be5c1d28ae02211"
 reference_size = "158"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -614537,10 +614623,10 @@ module = "GOLDTL"
 va = "0x4bb8e0"
 context_hash = ""
 defines = "[]"
-input_hash = "8e3eefacf91e71ff1603ecc19569cca977efd9cb9ccc3699dccf1be0ece202e5"
-writer = "verify"
-status = "SIZE_MISMATCH"
-measured_at = "2026-10-31T05:58:31+00:00"
+input_hash = "77c3a5ae7d1ef6fcbaf35724c992b56fb6881f5b7e7eb0eb0712d57ef916d32a"
+status = "RELOC"
+writer = "test"
+measured_at = "2026-11-01T06:12:01+00:00"
 ["GOLDTL.0x004bb980"]
 note = "Inferred address-only identity for an inventory start admitted by the coverage repair; the stub body is an unreconstructed work item, not a match."
 kind = "FUNCTION"

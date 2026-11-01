@@ -8,7 +8,13 @@ typedef struct Blk24 {
 	float f;
 } Blk24;
 
-int __cdecl fcn_004a5e60(char* p, int kind, int mask, int b, int c, float r, int* out);
+typedef struct F8 {
+	int mask;
+	int b;
+} F8;
+/* SIZE 0x8 */
+
+int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl fcn_004a4fb0(int* a, int* b, char* q, int c);
 int __cdecl fcn_00495400(int kind, int id, int n, Blk24* b1, Blk24* b2);
 void __cdecl gm_ResolveEntityById(void** out, int, int, int id);

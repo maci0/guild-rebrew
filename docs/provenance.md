@@ -11434,3 +11434,34 @@ kept live across a call. Those look like compiler-context differences rather tha
 statement shapes.
 
 Decision: continuing SIZE_MISMATCH once sm2, sm6 and sm8 report.
+
+## 2026-11-01 — GoldTL checkpoint: NO_SOURCE zero, extent repairs, pad retune
+
+State after the NO_SOURCE pass, the size-mismatch slices and the layout retune:
+
+- NO_SOURCE: 58 rows / 171 bytes -> 0. Fifty-seven tiny rows got reviewed bodies
+  from the reference bytes (bare `ret`, `mov eax,imm`, `xor eax,eax`, `mov al,1`,
+  one tail jmp), and one interior discovery split (0x64E1D0) was retired.
+- Extent repairs applied: 0x4C2430 960->956, 0x4F5CC0 64->63, and the ten audited
+  rows 0x446540=1172, 0x448B10=425, 0x46B2B0=572, 0x4F4F60=424, 0x502FE0=2003,
+  0x50C4E0=110, 0x54FD60=820, 0x553490=1992, 0x564460=1388, 0x57E0A0=1976.
+  Status bytes: SIZE_MISMATCH 1,071,003 -> 1,069,010; NEAR_MATCHING 40,373 ->
+  42,205.
+- Kept body fixes: 0x4F2FE0 671/672, 0x4F0F60 109/133 (duplicated-guard goto shape
+  for the out-of-line clamp arm), 0x4F5CC0 63/63 at the repaired extent,
+  0x46C310 418/452, 0x5C2910 271/291, 0x468E40 426/591, and 0x50E170 39/121 after
+  merging its callee 0x50DFD0 into the same translation unit (the native caller
+  keeps a1 in ecx across the call, which MSVC 6 only emits for same-TU callees).
+- Link fixes for the new sources: the duplicate placeholder definitions for the 24
+  newly defined functions were removed from `stubs/goldtl/link_scaffold.c`, the
+  duplicate 0x506E10 definition was replaced by a rebind to its existing definition
+  in `GOLD.fcn_00503f30.c`, and placeholders were added for `fcn_005eaaf0` and
+  `gv_00675318`. The build is clean again.
+- Layout retune: `scripts/gen_text_lead.py 0x2000` changed eight pads (shift 0x9C0)
+  and converged; raw same-offset agreement rose 163,546 -> 241,542 with informative
+  106,935. Image is 2,981,888 bytes, sha256 e1e11501899a37aa...
+
+The resume baseline for HEAD was 175,845 raw; this checkpoint is +65,697 raw while
+removing the NO_SOURCE class and shrinking SIZE_MISMATCH.
+
+Decision: continuing benchmark work. No GA was run.

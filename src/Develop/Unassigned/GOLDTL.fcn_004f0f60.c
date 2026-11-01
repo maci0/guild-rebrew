@@ -4,12 +4,15 @@ void __cdecl fcn_004f0f60(int a0, int* out)
 	float p;
 	int i;
 
-	if (a0 < 4) {
-		if (a0 <= 0)
-			a0 = 0;
-	} else {
-		a0 = 4;
-	}
+	if (a0 < 4 && a0 > 0)
+		goto body;
+	if (a0 >= 4)
+		goto big;
+	a0 = 0;
+	goto body;
+big:
+	a0 = 4;
+body:
 	out[0] = a0;
 	out[1] = a0 + 2;
 	p = (float) a0 * 0.25f + 1.0f;
