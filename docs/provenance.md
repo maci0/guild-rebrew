@@ -13657,3 +13657,137 @@ Pads retuned over six passes (the 0x5B6300 growth required several); final rebui
 2,977,792 bytes, raw 268,097, informative 129,480, no compile or link errors.
 
 Decision: continuing. No GA was run.
+
+The retry preserved the post-dedup T&L executable. Compared with the preserved
+pre-dedup client build, imports, exports, resources, section sizes and placement,
+`.data`, and `.rdata` agree; `.text` has 6,225 differing or missing bytes.
+Concurrent source changes occurred between builds, so this result does not
+isolate the deleted scaffold symbols. Receipt:
+`.scratch/counter-contract/tl-vfs-dedup-compare.json`.
+
+## 2026-11-02 — VFS mount uses canonical finalizer
+
+Decision owner: project maintainer. Redirected the shared client VFS directory
+mount caller to `vfs_FinishFiles`, the canonical implementation. Scratch
+comparisons retain RELOC 1101/1101 in both clients and the Gold direct-call
+operand validates against the rebound native finalizer. The old T&L donor
+definition remains temporarily until its binding and comparators are reconciled.
+Evidence: `.scratch/counter-contract/vfs-mount-canonical-{tl,gold-bound}.json`.
+Post-change verification and client builds follow.
+
+## 2026-11-02 — client VFS pool-head identities
+
+Decision owner: project maintainer. Recorded four-byte inferred VFS item and
+stream pool-head data identities in the zero-filled `.data` tails for Gold and
+T&L. Native initialization and shutdown perform dword accesses, and adjacent
+heads establish their extents. The `char[4]` type describes the current C
+scaffold representation; no native source owner or byte verdict is asserted.
+Evidence: `.scratch/counter-contract/{tl,gold}-vfs-{init-pool,exit}-asm.json`,
+`.scratch/counter-contract/{tl,gold}-pe.json`, and guarded data patch receipts
+`.scratch/counter-contract/vfs-pool-{gold,goldtl}-data-{preview,apply}.json`.
+
+The expanded locked organization review included the finalizer and both old
+T&L comparator source files. It reports those three donor definitions as foreign
+if added unchanged to server and Gold, plus 109 unknown contexts. The intended
+change is to replace them with the existing canonical definitions; this review
+does not claim that the linked-layout checks have passed. Receipt:
+`.scratch/counter-contract/vfs-all-organize-post-alias-locked.json`.
+
+All-target lint of the VFS source and mount changes reports zero errors and no
+warnings for the newly recorded pool identities. Existing W029 redundant flag
+and W031 stale source/type evidence warnings remain. Receipt:
+`.scratch/counter-contract/vfs-consolidation-lint.json`.
+
+The actual VFS mount caller now compares RELOC 1101/1101 in both clients; its
+Gold `vfs_FinishFiles` operand validates, while the T&L operand awaits the
+canonical T&L binding. Registering the pool heads also resolves Gold finalizer
+pool, flag, comparator and recursive operands; the two qsort calls and literal
+remain unresolved. The Gold link now reports 259 unresolved externals rather
+than 260, and `_fcn_0042ee50` is no longer among them. T&L rebuilt; its imports,
+exports and resources match the pre-caller artifact, while section layout and
+code/data differ amid concurrent changes. Receipts:
+`.scratch/counter-contract/vfs-mount-canonical-after.json`,
+`.scratch/counter-contract/gold-vfs-finish-data-bound.json`,
+`.scratch/counter-contract/gold-post-vfs-mount-build.log`, and
+`.scratch/counter-contract/tl-vfs-mount-compare.json`.
+
+## 2026-11-02 — consolidate T&L VFS finalizer and comparators
+
+Decision owner: project maintainer. Rebound T&L `0x0042edf0`, `0x0042ee30`,
+and `0x0042ee50` to the existing canonical VFS comparator and finalizer
+definitions, then removed the three T&L-only duplicate sources. The reviewed
+mount caller already uses the canonical finalizer. The all-target review
+confirmed that only T&L compiles the donors and that they own no storage; its
+foreign-definition findings concern adding the donors unchanged, which this
+replacement does not do. Native comparisons and known unresolved contexts are
+recorded in `docs/source-layout.md`. The pre-change T&L raw PE and review are
+`.scratch/counter-contract/tl-after-vfs-mount.exe` and
+`.scratch/counter-contract/vfs-tl-merge-locked-review.json`. Rebuild, raw PE
+comparison and fresh verdicts follow.
+
+After the T&L binding change, the VFS mount caller verifies RELOC 1101/1101 and
+its direct call to `vfs_FinishFiles` is VALIDATED. Receipt:
+`.scratch/counter-contract/vfs-tl-mount-postmerge.json`.
+
+Post-merge T&L checks record `vfs_CompareFiles` EXACT 63/63,
+`vfs_CompareFilesNoCase` RELOC 25/25, and `vfs_FinishFiles` RELOC 436/436.
+The finalizer's pool, case flag, both comparator and recursive-call operands
+validate; its qsort and literal operands and the case-insensitive comparator's
+CRT alias remain unresolved by the verifier. The mount caller's canonical
+finalizer call also validates. Receipts:
+`.scratch/counter-contract/vfs-tl-{case,nocase,finish,mount}-postmerge.json`.
+
+Post-merge all-target VFS lint reports zero errors. It retains existing W029
+redundant flag and W031 stale source/type evidence warnings. Receipt:
+`.scratch/counter-contract/vfs-postmerge-lint.json`.
+
+## 2026-11-02 — VFS archive-scanner candidate
+
+Decision owner: project maintainer. Compared the canonical archive scanner
+and its T&L donor with both clients, traced four internal calls through the
+existing validated donor bindings, and compared their canonical bodies against
+T&L. The remaining unresolved operands and verification limits are recorded in
+`docs/source-layout.md`; no scanner source binding or merge was made. Evidence:
+`.scratch/counter-contract/vfs-scanarchive-{tl,gold,donor-tl}.json` and
+`.scratch/counter-contract/vfs-scan-dep-*-tl.json`.
+
+## 2026-11-02 — Gold VFS scanner dependency extents
+
+Decision owner: project maintainer. Corrected Gold inventory extents for the
+archive scanner's case-normalization callee `0x0042ecf0` from 32 to 19 bytes
+and subdirectory callee `0x0042ed70` from 160 to 157 bytes. Native disassembly
+shows the respective tail jump and return followed by NOP padding. The canonical
+VFS bodies compare RELOC 19/19 and RELOC 157/157 in scratch; no new source
+binding or verdict is implied. Evidence:
+`.scratch/counter-contract/gold-vfs-{normalize,getsub}-asm.json`,
+`.scratch/counter-contract/gold-vfs-scan-deps-extent-{preview,apply}.json`, and
+`.scratch/counter-contract/vfs-scan-dep-{normal,getsub}-gold.json`.
+
+The Gold archive-scanner donor comparison also matches RELOC 294/294 with all
+four internal VFS call operands validated. T&L's five minizip native targets
+have source-bound `LIBRARY` identities; the scanner verifier still marks them
+unresolved. Evidence and limits are recorded in `docs/source-layout.md`.
+
+The T&L post-merge build completed and its preserved raw PE was compared with
+`.scratch/counter-contract/tl-after-vfs-mount.exe`. Imports, exports and
+resources match; section layout and `.text`, `.data`, and `.rdata` bytes differ.
+Other source changes occurred between the baselines, so linked placement and
+the merge's isolated effect remain unproven. Receipt:
+`.scratch/counter-contract/tl-vfs-merge-compare.json`.
+
+## 2026-11-02 — dialog parser loop rotation
+
+- `0x51C840` 909 -> 918 with the object at 6043 bytes against native 6048. The loop
+  is rotated (`body:` label, case ends `goto body;`, only the strlen path falls to
+  the guard), `i = 0` moved into the init block, and seven copy sites converted to
+  `memcpy(dst, src, strlen(src))`, which inlines to the native rep-movsd/rep-movsb
+  core (16-18 rep sites now, 4 before). Conversions must be applied one site at a
+  time: installing all at once drops aligned identity to 1348/1874 because the
+  choices interact through register allocation.
+- Normalized identity: bag 1517/1874 (80.9%), aligned 1193/1874 (63.7%), up from
+  1409 and 1074.
+
+Pads retuned (two pads, shift 0x260). Rebuild 2,977,792 bytes, raw 267,407,
+informative 129,182, no compile or link errors.
+
+Decision: continuing. No GA was run.

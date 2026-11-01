@@ -98,6 +98,7 @@ int __cdecl fcn_0051c840(int id)
 	memset(st.dt, 0, 0xc);
 	state = 0;
 	flag = 0;
+	i = 0;
 	*(int*) (num + 0xc) = 0;
 	st.dt[0] = 4;
 	memset(lc.rec, 0, 0xa9);
@@ -126,8 +127,8 @@ int __cdecl fcn_0051c840(int id)
 	if (strlen(buf) == 0) {
 		goto done;
 	}
-	i = 0;
 	while (i <= 0x17d0) {
+body:
 		c = buf[i];
 		if (c != '%' && c != '$' && c != '{') {
 			i++;
@@ -339,7 +340,7 @@ int __cdecl fcn_0051c840(int id)
 				}
 				memmove(buf + i - 3 + strlen(num), buf + i,
 					strlen(buf) - i + 1);
-				strcpy(buf + i - 2, num);
+				memcpy(buf + i - 2, num, strlen(num));
 			} else {
 				sprintf(num, g_67d444, 0x3e7);
 				flag = 2;
@@ -368,7 +369,7 @@ int __cdecl fcn_0051c840(int id)
 				sprintf(tmp, num, 0x270f);
 				memmove(buf + i - 3 + strlen(tmp), buf + i,
 					strlen(buf) - i + 1);
-				strcpy(buf + i - 2, tmp);
+				memcpy(buf + i - 2, tmp, strlen(tmp));
 			} else {
 				sprintf(tmp, g_67d444, 0x270f);
 				memmove(buf + i - 1 + strlen(tmp), buf + i + 1,
@@ -484,7 +485,7 @@ int __cdecl fcn_0051c840(int id)
 			*(int*) tmp = g_6a2390;
 			memmove(buf + i + strlen(tmp) - 4, buf + i,
 				strlen(buf) + 2 - i);
-			strcpy(buf + i - 3, tmp);
+			memcpy(buf + i - 3, tmp, strlen(tmp));
 			break;
 		case 'a':
 			if (p[i] == '%') {
@@ -496,7 +497,7 @@ int __cdecl fcn_0051c840(int id)
 				memmove(buf + i - 1 + strlen(tmp), buf + i + 1,
 					strlen(buf) - i + 1);
 			}
-			strcpy(buf + i - 1, tmp);
+			memcpy(buf + i - 1, tmp, strlen(tmp));
 			break;
 		case 'r':
 			memset(tab78, 0, 0x20);
@@ -543,7 +544,7 @@ int __cdecl fcn_0051c840(int id)
 			res = fcn_004fe330(rec58, *(short*) (rec58 + 2));
 			sprintf(tmp, g_6a2310, g_14a5450[res]);
 			memmove(buf + strlen(tmp), buf + i, strlen(tmp) + 2 - i);
-			strcpy(buf + i - 1, tmp);
+			memcpy(buf + i - 1, tmp, strlen(tmp));
 			break;
 		case 'G':
 			e = (*(unsigned char*) lc.rec & 0xff) * 7;
@@ -579,7 +580,7 @@ int __cdecl fcn_0051c840(int id)
 					memmove(buf + i - 3 + strlen(lc.s98), buf + i,
 						strlen(buf) + 2 - i);
 				}
-				strcpy(buf + i - 2, lc.s98);
+				memcpy(buf + i - 2, lc.s98, strlen(lc.s98));
 				i -= 2;
 				break;
 			}
@@ -615,7 +616,7 @@ int __cdecl fcn_0051c840(int id)
 				memmove(buf + i - 3 + strlen(tmp), buf + i,
 					strlen(buf) + 2 - i);
 			}
-			strcpy(buf + i - 2, tmp);
+			memcpy(buf + i - 2, tmp, strlen(tmp));
 			state = 0;
 			i -= 2;
 			break;
@@ -626,6 +627,7 @@ int __cdecl fcn_0051c840(int id)
 		default:
 			break;
 		}
+		goto body;
 	}
 done:
 	p = *(char**) ((char*) (g_772514 * 0x3cc) + 0x1015f7c);
