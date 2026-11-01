@@ -9,9 +9,9 @@ float __cdecl fcn_00413d10(float* pos)
 	float height;
 	int row;
 	float acc;
+	int width;
 	int k;
 	int dx;
-	int width;
 	int off;
 
 	acc = 0.0f;
@@ -20,7 +20,6 @@ float __cdecl fcn_00413d10(float* pos)
 		map = *(char**) (world + 0xb0);
 		if (map != 0) {
 			if (fcn_0045b990(map, pos, &col, &row, &height) != 0) {
-				acc = *(volatile float*) &acc;
 				k = -4;
 				width = *(int*) (map + 0x20);
 				off = (row - 4) * width;

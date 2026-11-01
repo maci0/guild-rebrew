@@ -11348,3 +11348,17 @@ Native pushes `esi` and `edi` after the mode compare, and pushes `ebx` only on t
 
 Tag v1.9.0 publishes the accumulated reconstruction progress and byte-match refinements on GoldTL. Key improvements include promoting multiple near-misses to RELOC (0x5024e0, 0x4903c0, 0x4cd090, 0x5b44b0, 0x4e7340), tightening candidate bodies across client units, updating project documentation and provenance, and pruning temporary artifacts.
 
+
+## 2026-11-01 — TL 0x413d10 drops the redundant acc self-read
+
+`fcn_00413d10` (TL `0x413d10`, placed at its reference VA) carried
+`acc = *(volatile float*) &acc;` twice. The first, on the successful-call path,
+bought nothing: `acc` is zero there and the write-back only pinned a stack slot.
+Removing that one line and leaving the failure-path read in place raises the
+comparison from 216/229 to NEAR 222/229 (exact instructions 66 to 72, structural
+13 to 7), candidate still 229 bytes. The remaining seven differences are the
+`k`/`width` stack-home swap (`[esp+0x10]` versus `[esp+0x14]`) and the two
+`add ecx, edx` / `add ecx, eax` order; neither changed with declaration or
+initialisation order. Verdict recorded with `rebrew test --json`.
+
+Decision: continuing TL reconstruction. No GA was run.
