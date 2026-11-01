@@ -112,15 +112,14 @@ int __cdecl fcn_0051c840(int id)
 		return -1;
 	}
 	memset(buf, 0, 0x17d0);
-	if (id < 0x4800) {
-		p = g_14a5320[id];
-		if (p == 0) {
+	if ((unsigned) id < 0x4800) {
+		if (g_14a5320[id] == 0) {
 			return -1;
 		}
-		if (strlen(p) > 0x17c0) {
+		if (strlen(g_14a5320[id]) > 0x17c0) {
 			return -1;
 		}
-		fcn_0064d530(buf, p, 0x17c0);
+		fcn_0064d530(buf, g_14a5320[id], 0x17c0);
 	} else {
 		strcpy(buf, (char*) id);
 	}
@@ -138,7 +137,7 @@ body:
 			break;
 		}
 		r = buf[++i] - '0';
-		if (r >= 0 && r <= 9) {
+		if ((unsigned) r <= 9) {
 			i++;
 		} else {
 			r = -1;
@@ -201,11 +200,11 @@ body:
 				} else {
 					res = fcn_0042b2f0(g_14a540c[0], r, 8);
 				}
-				if (e > -1) {
+				if (e < 0) {
+					sprintf(tmp, g_68b3f8, res, st.tmpl);
+				} else {
 					k = i - fcn_00517b90(buf, e, b3);
 					sprintf(tmp, g_6a22d8, res, b3, st.tmpl);
-				} else {
-					sprintf(tmp, g_68b3f8, res, st.tmpl);
 				}
 				if (fcn_0051e070() == 0 && state == 2) {
 					tmp[0] = (char) toupper(tmp[0]);

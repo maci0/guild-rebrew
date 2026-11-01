@@ -314,10 +314,10 @@ fmt:
 			}
 			fcn_0064d41a(S.work, sbuf, v28);
 			v04 = -1;
+			v08 = (unsigned)strlen(S.work) / 3;
 			v0c = (int)strlen(S.work);
-			v08 = v0c / 3;
 			v18 = v08 + v0c;
-			v20 = v0c;
+			v20 = (int)strlen(S.work);
 			while (v20 >= 0) {
 				S.work[v18] = S.work[v20];
 				v18--;
@@ -344,10 +344,10 @@ fmt:
 		}
 		fcn_0064d41a(sbuf, (char*)0x67d444, v28);
 		v04 = -1;
+		v08 = ((unsigned)strlen(sbuf) - 1) / 3;
 		v0c = (int)strlen(sbuf);
-		v08 = (v0c - 1) / 3;
 		v18 = v08 + v0c;
-		v20 = v0c;
+		v20 = (int)strlen(sbuf);
 		while (v20 >= 0) {
 			S.work[v18] = sbuf[v20];
 			v18--;
@@ -374,13 +374,18 @@ fmt:
 		}
 		*(int*)(v14 + v08 * 4 + 0x10161d4) = -1;
 		v18 = (unsigned char)S.text[text_index + 1];
-		if (v18 == 'a' || v18 == 'n') {
-			v24 = *(int*)(v14 + 0x10161cc);
+		if (v18 == 'a') {
+			v24 = *(int*)(*(int*)0x772514 * 3 * 9 * 9 * 4 + 0x10161cc);
 			if (v24 != 0x53 && v24 != 0x55) {
 				*(int*)(v14 + v08 * 4 + 0x10161d4) = -1;
 			}
+		} else if (v18 == 'n') {
+			v24 = *(int*)(*(int*)0x772514 * 3 * 9 * 9 * 4 + 0x10161cc);
+			if (v24 == 0x53 || v24 == 0x55) {
+				*(int*)(v14 + v08 * 4 + 0x10161d4) = -1;
+			}
 		} else if (v18 == 't') {
-			v24 = *(int*)(v14 + 0x10161cc);
+			v24 = *(int*)(*(int*)0x772514 * 3 * 9 * 9 * 4 + 0x10161cc);
 			if (v24 == 0x53 || v24 == 0x55) {
 				*(int*)(v14 + v08 * 4 + 0x10161d4) = 2;
 			} else {

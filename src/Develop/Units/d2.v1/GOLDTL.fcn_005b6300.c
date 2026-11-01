@@ -444,7 +444,7 @@ L6cb7:
 			f.msg.f2c = G(0x7f4c04);
 			f.msg.f30 = G(0x7f4c08);
 			f.msg.w34 = *(short*) 0x7f4c0c;
-			if (fcn_00505370((int) &f.msg) != 0)
+			if (fcn_00505370((int) a1) != 0)
 				f.msg.f5c[1] = -1;
 			else
 				f.msg.f5c[1] = G(G(0x7746cc) + 8);
@@ -479,6 +479,10 @@ L6e44:
 		f.msg.w34 = *(short*) 0x7f4c0c;
 		f.msg.f58 = G(f.sel.a08 + 4);
 		fcn_004c5530(&f.msg);
+		for (i = 0; i < 3; i++) {
+			fcn_004727a0(G(f.book + 0x228 + i * 4), 2);
+			io_AppendText(0x6811b0);
+		}
 		f.v18 = -1;
 L6f92:
 		f.v28 = -1;
@@ -562,6 +566,9 @@ L6fa2:
 			f.v34 = -1;
 			f.v18 = k;
 			if (f.rows[k].a08 == 0) {
+				fcn_005101e0(
+					(char*) ((*(unsigned short*) (a1 + 0x27) * 0x21c) + 0x7f4ca0),
+					*a1, -1, 1);
 				e = fcn_0064d228();
 				fcn_004727a0(f.rows[k].a58, 2);
 				f.v28 = fcn_00472250(f.rows[k].a58, 2,
@@ -591,8 +598,11 @@ L6fa2:
 				f.msg.f2c = G(0x7f4c04);
 				f.msg.f30 = G(0x7f4c08);
 				f.msg.w34 = *(short*) 0x7f4c0c;
-				f.msg.f5c[0] = 1;
-				f.msg.f5c[1] = -1;
+				f.msg.f5c[1] = 1;
+				if (fcn_00505370((int) a1) != 0)
+					f.msg.f8c = -1;
+				else
+					f.msg.f8c = G(G(0x7746cc) + 8);
 				*((char*) &f.msg.f58 + 1) = 1;
 				*(char*) &f.msg.f58 = f.row[0x230];
 				fcn_004c5530(&f.msg);

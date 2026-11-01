@@ -69,48 +69,39 @@ typedef struct CMsg {
 /* ADDRESS: GOLDTL 0x004dcf50 */
 int __cdecl fcn_004dcf50(int a0)
 {
-	int rec[9];
-	int list[0x20];
-	int sel[0x20];
-	int flags[0x20];
-	float ratio[5];
-	union {
-		float f[9];
-		int i[9];
-	} tmp;
 	CMsg msg;
-	char str[0x100];
-	char path[0x100];
-	char line[0x100];
-	char work[0x100];
-	char buf[0x1f0];
-	float f;
-	float fsum;
-	int n;
 	int i;
 	int j;
+	int n;
 	int cnt;
 	unsigned char cbe;
-	char recbuf[0x2d];
-	char tmprec[0x2d];
+	float f;
+	float fsum;
+	char* p34;
+	char* p38;
+	char* p3c;
+	char* p40;
+	char* p44;
+	char* p48;
 	int h;
 	int h2;
 	int hWait;
-	int h88;
-	int h94;
+	int h0;
+	int h14;
+	int hStrafe;
+	int hAnk;
 	int h80;
 	int h84;
+	int h88;
 	int h8c;
 	int h90;
+	int h94;
 	int h9c;
-	int h0;
-	int hStrafe;
-	int h14;
 	int x60;
-	int x6c;
 	int x68;
+	int x6c;
 	int x74;
-	int x98;
+	int x98 = -1;
 	int inst;
 	int st;
 	int rnd;
@@ -118,47 +109,27 @@ int __cdecl fcn_004dcf50(int a0)
 	int eIdx;
 	int didFolter;
 	int div3;
-	int hAnk;
 	int acc;
-	char* p34;
-	char* p38;
-	char* p3c;
-	char* p40;
-	char* p44;
-	char* p48;
 	char* end;
 	char* pend;
 	char* nam;
 	char* pent;
+	union {
+		float f[5];
+		int i[9];
+		char c[0x2d];
+	} tbl;
+	char flags[0x20];
+	union {
+		int i[9];
+		char c[0x2d];
+	} rec;
+	char str[0x100];
+	int list[0x20];
+	int sel[0x20];
+	char work[0x100];
+	char buf[0x1f0];
 
-	h88 = 0;
-	h94 = 0;
-	h80 = 0;
-	h84 = 0;
-	h8c = 0;
-	h90 = 0;
-	h9c = 0;
-	h0 = 0;
-	h14 = 0;
-	hStrafe = 0;
-	hAnk = 0;
-	x98 = -1;
-	didFolter = 0;
-	fcn_004f4830(0, rec);
-	ratio[0] = 1.4f;
-	ratio[1] = 1.2f;
-	ratio[2] = 1.0f;
-	ratio[3] = 0.8f;
-	ratio[4] = 0.6f;
-	i = rec[6];
-	if (i >= 4) {
-		i = 4;
-	} else if (i <= 0) {
-		i = 0;
-	}
-	f = ratio[i];
-	fcn_004e4450(g_68bfc0, 0);
-	fcn_004e4730("Gericht.ed3");
 	msg.state = 0;
 	msg.f04 = 0.0f;
 	msg.i08 = 0;
@@ -174,6 +145,35 @@ int __cdecl fcn_004dcf50(int a0)
 	for (i = 0; i < 9; i++) {
 		msg.pad[i] = 0;
 	}
+
+	fcn_004f4830(0, rec.i);
+	h88 = 0;
+	h94 = 0;
+	h80 = 0;
+	h84 = 0;
+	h8c = 0;
+	h90 = 0;
+	h9c = 0;
+	h0 = 0;
+	h14 = 0;
+	hStrafe = 0;
+	hAnk = 0;
+	didFolter = 0;
+	x98 = -1;
+	tbl.f[0] = 1.4f;
+	tbl.f[1] = 1.2f;
+	tbl.f[2] = 1.0f;
+	tbl.f[3] = 0.8f;
+	tbl.f[4] = 0.6f;
+	i = rec.i[6];
+	if (i >= 4) {
+		i = 4;
+	} else if (i <= 0) {
+		i = 0;
+	}
+	f = tbl.f[i];
+	fcn_004e4450(g_68bfc0, 0);
+	fcn_004e4730("Gericht.ed3");
 	n = fcn_004f5740(*(int*) (a0 + 0x7c), list);
 	p34 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
 	if (p34 == 0) {
@@ -267,14 +267,14 @@ int __cdecl fcn_004dcf50(int a0)
 			if (flags[i] == -1) {
 				continue;
 			}
-			memcpy(recbuf, g_9a3800 + list[i] * 45, 45);
+			memcpy(rec.c, g_9a3800 + list[i] * 45, 45);
 			flags[i] = 1;
 			for (j = i + 1; j < n; j++) {
 				if (flags[j] == -1) {
 					continue;
 				}
-				memcpy(tmprec, g_9a3800 + list[j] * 45, 45);
-				if (recbuf[0x1c] == tmprec[0x1c]) {
+				memcpy(tbl.c, g_9a3800 + list[j] * 45, 45);
+				if (rec.c[0x1c] == tbl.c[0x1c]) {
 					flags[j] = -1;
 					flags[i] += 1;
 				}
@@ -283,12 +283,12 @@ int __cdecl fcn_004dcf50(int a0)
 	}
 	fsum = 0.0f;
 	for (j = 0; j < n; j++) {
-		memcpy(recbuf, g_9a3800 + list[j] * 45, 45);
-		fcn_004f4830(recbuf[0x1c] & 0xff, tmp.i);
+		memcpy(rec.c, g_9a3800 + list[j] * 45, 45);
+		fcn_004f4830(rec.c[0x1c] & 0xff, tbl.i);
 		if (flags[j] != -1) {
-			fsum += (float) tmp.i[3] * f;
+			fsum += (float) tbl.i[3] * f;
 			h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
-			fcn_004f56b0((int) work, *(S2d*) recbuf, flags[j]);
+			fcn_004f56b0((int) work, *(S2d*) rec.c, flags[j]);
 			d2_SetForm(g_68bfc0, 0);
 			io_AppendText(0x68c998);
 			io_AppendText((int) work);
@@ -436,9 +436,13 @@ int __cdecl fcn_004dcf50(int a0)
 				"NEUNSCHWAENZIGE_PEITSCHE", "ESSE_UND_BRANDEISEN",
 				"EISWASSERTROPFER", "HAENGENDER_KAEFIG", "STRECKBANK"
 			};
-			int msgIds[7] = {
-				0x14ed, 0x14f2, 0x14f7, 0x14fc, 0x1501, 0x1506, 0x150b
-			};
+			tbl.i[0] = 0x14ed;
+			tbl.i[1] = 0x14f2;
+			tbl.i[2] = 0x14f7;
+			tbl.i[3] = 0x14fc;
+			tbl.i[4] = 0x1501;
+			tbl.i[5] = 0x1506;
+			tbl.i[6] = 0x150b;
 
 			eIdx = g_774970;
 			if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
@@ -543,7 +547,7 @@ int __cdecl fcn_004dcf50(int a0)
 			rnd = fcn_004e6cb0(5);
 			fcn_004e4b40(*(unsigned short*) p34, h8c, buf, rnd, 0x320);
 			io_AppendText(0x6811b0);
-			io_AppendText(0x14ec, msgIds[inst] + rnd);
+			io_AppendText(0x14ec, tbl.i[inst] + rnd);
 			fcn_004e4c90(5);
 			fcn_004e4450(g_68bfc0, 0);
 			fcn_00493920(&msg);

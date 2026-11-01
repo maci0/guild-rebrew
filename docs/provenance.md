@@ -14368,3 +14368,208 @@ Pads retuned (one pad, shift -0x60). Rebuild 2,981,888 bytes, raw 266,153,
 informative 128,902, no compile or link errors.
 
 Decision: continuing. No GA was run.
+
+## 2026-11-02 — use CRT substring search in shared filter helper
+
+Decision owner: project maintainer. Replaced the address-named substring call
+in `GOLDTL.fcn_0040e610.c` with SDK `strstr`. Gold native `0x0040d6e0` and
+T&L native `0x0040e610` both directly call their respective stock CRT
+substring search; both baselines compare RELOC 69/69. The return value is used
+only as a Boolean. Evidence: `.scratch/counter-contract/strstr-calls-native.json`
+and `strstr-40e610-before.json`. Post-change comparisons follow.
+
+The image-helper signature reconciliation preview rejected changing inputs
+again and produced no guarded apply digest; the incomplete caller was not
+changed. Receipt: `.scratch/counter-contract/image-caller-contract-preview.err`.
+
+The updated filter helper remains RELOC 69/69 in both clients; the `_strstr`
+operand remains unresolved by the comparator. Receipt:
+`.scratch/counter-contract/strstr-40e610-after.json`.
+
+## 2026-11-02 — use CRT substring search in pointer-typed callers
+
+Decision owner: project maintainer. Replaced the address-named substring helper
+with SDK `strstr` in nine client sources whose pointer-returning declarations
+and native call targets were reviewed. Ten target compilation contexts were
+preserved before editing; five source bodies have existing SIZE_MISMATCH
+results. Evidence: `.scratch/counter-contract/strstr-calls-native.json`,
+`strstr-pointer-baselines.json`, and `strstr-objects/before.json`.
+Complete object and function comparisons follow.
+
+All ten target objects preserve `.text`, `.data`, `.rdata`, `.drectve` and
+relocation targets after mapping the placeholder to `_strstr` and resolving
+renumbered local labels to section offsets. Debug records are excluded; this
+does not establish raw-link placement. Receipt:
+`.scratch/counter-contract/strstr-objects/compare.json`.
+
+All ten post-change target comparisons retain their prior statuses and match
+counts: five RELOC results and five existing SIZE_MISMATCH results. Receipts:
+`.scratch/counter-contract/strstr-final-results.json` and
+`strstr-pointer-baselines.json`. The `_strstr` operands remain unresolved by
+the comparator; object comparisons do not establish raw-link placement.
+
+## 2026-11-02 — use CRT substring search in Boolean callers
+
+Decision owner: project maintainer. Replaced `fcn_0064d470` with SDK `strstr`
+in twelve client sources whose native calls target the CRT function and whose
+results are used as Boolean predicates. Their arguments are pointer-typed;
+integer-argument and integer-storage cases remain for separate review. The
+thirteen target objects and source baselines were captured before editing.
+Evidence: `.scratch/counter-contract/strstr-calls-native.json`,
+`strstr-bool-reviewed.json`, and `strstr-bool-objects/before.json`.
+Post-change object and target checks follow.
+
+All thirteen target objects preserve code, data, and relocation targets after
+mapping the reviewed placeholder to `_strstr` and resolving renumbered local
+labels to their section offsets. Debug records are excluded. Receipt:
+`.scratch/counter-contract/strstr-bool-objects/compare.json`. Native comparison
+batch follows.
+
+## 2026-11-02 — Gold substring wrapper
+
+Decision owner: project maintainer. Replaced the address-named call in Gold
+`fcn_0040e4c0` with SDK `strstr`; its native direct call targets the identified
+Gold CRT routine, and the result is used only as a Boolean. The baseline is
+RELOC 36/36. Evidence:
+`.scratch/counter-contract/gold-strstr-40e4c0-{native,before}.json`.
+Post-change verification follows.
+
+## 2026-11-02 — retire remaining substring call placeholders
+
+Decision owner: project maintainer. Replaced the four remaining source users of
+`fcn_0064d470` with SDK `strstr`, using explicit pointer casts where the
+existing caller stores pointer values in 32-bit integers. Native call targets
+were reviewed for every bound target; one source contains an additional
+unrelated function. Five target objects and source baselines were preserved
+before editing. Evidence: `.scratch/counter-contract/strstr-calls-native.json`,
+`strstr-int-baselines.json`, and `strstr-int-objects/before.json`. Complete
+object and native comparisons follow.
+
+All five target objects preserve code, data, and relocation targets after
+mapping the placeholder to `_strstr` and resolving renumbered local labels.
+Debug records are excluded. Source search found no remaining calls to either
+address-named substring function. Receipt:
+`.scratch/counter-contract/strstr-int-objects/compare.json`; native comparison
+batch follows.
+
+Gold `fcn_0040e4c0` remains RELOC 36/36 after the CRT substring call change;
+the comparator leaves the `_strstr` operand unresolved. Receipt:
+`.scratch/counter-contract/gold-strstr-40e4c0-after.json`.
+
+The Boolean-call batch completed: all thirteen target contexts retain their
+prior statuses and reported match counts (six SIZE_MISMATCH, one
+NEAR_MATCHING, six RELOC). Receipt:
+`.scratch/counter-contract/strstr-bool-final-results.json`; baseline receipts
+are listed in `strstr-bool-reviewed.json`.
+
+## 2026-11-02 — remove retired substring scaffolds
+
+Decision owner: project maintainer. Removed the unused T&L `fcn_0064d470`
+scaffold and the Gold `fcn_0064d470` and `fcn_005de800` scaffolds after all
+source callers were redirected to SDK `strstr`. A source search found no
+remaining references. The T&L pre-change raw image is preserved at
+`.scratch/counter-contract/tl-before-strstr-scaffold-removal.exe`. Affected
+client rebuilds and raw-link checks follow; Gold has existing link failures.
+
+Correction to the Boolean-call result counts: the thirteen contexts comprise
+five SIZE_MISMATCH, one NEAR_MATCHING, and seven RELOC results. All retain
+their prior statuses and reported match counts.
+
+## 2026-11-02 — T&L 0x005ba910: transcribe the post-0x5bb193 body
+
+Decision owner: delegated row task. Extended
+`src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005ba910.c` from the
+`f.vAC` statement through the native span 0x5bb193–0x5bc052: the 0x7746d8
+gate and 0x5c6270 status-row lookup, the 0x100f1dc selection push, the
+0x5c5e70 packet dispatch, the 16-slot release loop, the 0x5bb419 container
+fill loop, the slot rebind pass, the per-slot refresh (0x5bb798), the
+row-selection sync (0x5bbdd5) and the item-table marking pass (0x5bbeb7).
+New frame state reuses existing slots (`v10`, `v1c`, `v20`, `v24`, `v28`,
+`v30`, `v38`, `v48`, `v54`, `v58`, `v60`, `v70`, `v74`, `v78`, `v80`,
+`v88`, `v90`, `vA8`, `v158`, `v15C`) and `Ent5ba910.f1c`; no new locals
+were introduced.
+
+Evidence: `.scratch/5ba910/fields.json` (CFG-aware push-depth propagation
+over the whole function) for the frame-slot mapping, `.scratch/5ba910/rng3.py`
+for per-instruction deltas, and the native listing of 0x5bb193–0x5bc052.
+Verification: `.venv/bin/rebrew test ... --va 0x005ba910 --size 11948
+--no-promote` reports SIZE_MISMATCH with match_count 387 and object size
+6257 (baseline 189/2961); the `__chkstk` prologue still allocates 0x1848
+and the prefix divergence is unchanged at offset 0x0a.
+Pre-change sources: `.scratch/5ba910/backup_189.c` through
+`backup_374.c`.
+
+The integer-caller comparison batch retained all prior results: four RELOC
+functions in five client contexts plus the unrelated `CharacterSitsDown`
+RELOC function, and one pre-existing SIZE_MISMATCH. Receipt:
+`.scratch/counter-contract/strstr-int-final-results.json`.
+
+The T&L rebuild compiled the changed substring sources and scaffold but its
+link failed on `_fcn_004737c0` in the concurrently changed
+`GOLDTL.fcn_005ba910.c`; neither retired substring symbol appeared among the
+link errors. Native `0x004737c0` is the existing `ResetDisplayCounters`
+identity, and native xrefs show calls from that function. Rebrew's guarded
+binding preview succeeded, but apply refused changed inputs; no concurrent
+source edit was overwritten. Gold also failed at link with 257 unresolved
+names, none for the retired substring names or `_strstr`. No new complete PE
+or import comparison was available. Evidence:
+`.scratch/counter-contract/{tl,gold}-post-strstr-scaffold-build.log`,
+`reset-display-native-xrefs.json`, and `reset-display-bind-{preview2,apply.err}`.
+Correction: the integer batch has three changed RELOC functions across four
+client contexts, plus the unrelated `CharacterSitsDown` RELOC function and one
+pre-existing SIZE_MISMATCH function.
+
+## 2026-11-02 — bind display-counter reset reference
+
+Decision owner: project maintainer. Bound the `fcn_004737c0` placeholder in
+`GOLDTL.fcn_005ba910.c` to the existing T&L `ResetDisplayCounters` identity
+using the guarded Rebrew reference-binding operation. Native `0x004737c0`
+is that existing definition, and native xrefs include five calls within the
+caller. The guarded plan changed only its declaration and call and preserved
+existing identity and verdict. Evidence:
+`.scratch/counter-contract/reset-display-native-xrefs.json` and
+`reset-display-bind-locked-{preview,apply}.json`. Caller verification and
+T&L rebuild follow.
+
+The caller currently measures SIZE_MISMATCH (6,257 compiled versus 11,948
+native bytes, 383 reported matches). Its `ResetDisplayCounters` relocation is
+reported CONFLICT at the same offset in the native body; the incomplete source
+and native body do not align there. The five native direct calls establish
+that the native function uses the destination, but do not validate the exact
+reconstructed call site. Receipt:
+`.scratch/counter-contract/reset-display-caller-postbind.json`.
+
+After binding `ResetDisplayCounters`, T&L rebuilt successfully. Its imports and
+exports match both the pre-removal PE and native reference; the preserved raw
+map selects `LIBCMT:strstr.obj` and contains no retired substring symbols.
+The pre/post raw comparison differs in code and data placement and three
+resource bytes. Other source changes occurred between builds, so those
+changes cannot be isolated to the substring cleanup. Evidence:
+`.scratch/counter-contract/tl-strstr-{scaffold,reference}-compare.json`,
+`tl-after-strstr-scaffold-removal.{exe,map}`, and
+`tl-post-strstr-reset-bind-build.log`. Gold remains unable to link because of
+257 unrelated unresolved names, as recorded above.
+
+## 2026-11-02 — layout jump from the trade panel and parser
+
+- `0x5BA910` 189 -> 387/6257: the 0x5bb193 gate, the 16-slot release loop, the
+  container fill loop, the slot rebind and per-slot refresh passes, the row draw
+  loop and the item-table marking are transcribed, all through existing v-slots so
+  the 0x1848 frame holds. `fcn_004737C0` got a scaffold placeholder so the link
+  resolves.
+- `0x519190` 631 -> 659/7530 (native 7536): the h digit path now divides unsigned
+  with `mul 0xAAAAAAAB; shr edx,1`, which fixes a real semantic bug, and the icon
+  sites rematerialize `*(int*)(*(int*)0x772514*3*9*9*4 + 0x10161CC)` so the native
+  lea chain appears. `a` and `n` are separate branches again.
+- `0x5B6300` 490 -> 557/5464: a missing `fcn_005101E0` call in the k-loop rows
+  branch, a missing three-iteration SetForm/AppendText loop after the type-0x31
+  block, `fcn_00505370` taking a1 instead of `&f.msg`, and the el==0 msg branch
+  writing f5c[1] then the second pattern at msg+0x8C.
+- `0x4DCF50` 1646 -> 1746/8826 with the union-backed slot sharing; `0x51C840`
+  977 -> 1162/6035 with the unsigned guards and the g_14A5320 id path (the id path
+  is now byte-identical for 92 instructions).
+
+Pads retuned over three passes (34, then 21, then 15 changes). Rebuild 3,047,424
+bytes, raw 291,869, informative 155,527, no compile or link errors, sha256 0C031BCB.
+
+Decision: continuing. No GA was run.

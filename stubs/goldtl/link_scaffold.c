@@ -159,7 +159,6 @@ int __cdecl fcn_0064d228(void) { return 0; }
 int __cdecl fcn_0064d3eb(void) { return 0; }
 int __cdecl fcn_0064d3f8(void) { return 0; }
 int __cdecl fcn_0064d41a(void) { return 0; }
-int __cdecl fcn_0064d470(void) { return 0; }
 int __cdecl fcn_0064d530(void) { return 0; }
 int __cdecl fcn_0064d62e(void) { return 0; }
 int __cdecl fcn_0064dc43(void) { return 0; }
@@ -183,7 +182,6 @@ int __cdecl fcn_00657a73(void) { return 0; }
 int __cdecl fcn_00659eda(void) { return 0; }
 int __cdecl fcn_0065f220(void) { return 0; }
 int __cdecl fcn_0065f2f0(void) { return 0; }
-int __cdecl fcn_0066080a(void) { return 0; }
 int __cdecl fcn_0066096a(void) { return 0; }
 int __cdecl fcn_10016ea0(void) { return 0; }
 int __cdecl fcn_412630(void) { return 0; }
@@ -406,3 +404,6 @@ int __cdecl fcn_004727a0(void* a0) { return 0; }
 int __cdecl fcn_00473a90(void* a0, int a1) { return 0; }
 int __cdecl fcn_0051af00(char* a0, int a1) { return 0; }
 int __cdecl fcn_005462a0(void* a0) { return 0; }
+
+/* Placeholder for the item-table marker reached by the trade panel at 0x5BA910. */
+void __cdecl fcn_004737c0(void) { }
