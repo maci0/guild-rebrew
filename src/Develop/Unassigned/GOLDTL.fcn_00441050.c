@@ -2,7 +2,6 @@
 
 extern char* g_6b8014;
 
-extern float g_662a34;
 extern float g_1042150;
 extern float g_1042154;
 extern float g_1042158;
@@ -100,12 +99,12 @@ int __cdecl fcn_00441050(char* e)
 					f = f + 0x14;
 					k -= 1;
 				} while (k != 0);
-				scratch[0] = scratch[0] * g_662a34;
+				scratch[0] = scratch[0] * 0.125f;
 				count += 1;
+				sy = sy * 0.125f;
+				scratch[2] = scratch[2] * 0.125f;
 				*(float*) (w - 0x20) = scratch[0];
-				sy = sy * g_662a34;
 				*(float*) (w - 0x1c) = sy;
-				scratch[2] = scratch[2] * g_662a34;
 				*(float*) (w - 0x18) = scratch[2];
 				len = (float) sqrt(scratch[2] * scratch[2] + sy * sy + scratch[0] * scratch[0]);
 				*(float*) (w - 4) = len;

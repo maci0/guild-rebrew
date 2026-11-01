@@ -12894,3 +12894,181 @@ Pads retuned to convergence: 2,977,792 bytes, raw 266,561, informative 128,682,
 no compile or link errors, image sha256 2045d8f0.
 
 Decision: continuing. No GA was run.
+
+The pre-queued-change T&L build completed successfully and its raw executable
+was preserved as `.scratch/counter-contract/tl-before-queued-edits.exe`
+(SHA-256 `2045d8f0a5bf8f56fae95c2de9a8cd95644adec94d6900104b4a94d869ec951a`).
+It is a baseline for the subsequent guarded changes, not a claim of equality
+with the reference. Build receipt: `.scratch/team/build35.log`.
+
+### 2026-11-01 — Reconcile client numeric lookup
+
+Gold `0x505e30` and T&L `0x508e80` share the existing `fcn_00505e30` source with target-specific table addresses; the neighboring T&L function stays excluded from Gold. Gold call `0x588fc0` establishes the Gold target. Decision owner: project owner. Scratch comparisons are EXACT 37/37 in both targets; the T&L neighbor retains its prior 737-byte SIZE_MISMATCH. The retired Gold binding was restored through Rebrew with its history preserved. Receipts: `.scratch/counter-contract/{gold-short-float-native,gold-float-caller-native,short-float-gold,short-float-tl,short-float-neighbor-before,short-float-neighbor,short-float-locked-preview,short-float-rebind-apply}.json`. Project comparisons and builds follow.
+
+### 2026-11-01 — Deduplicate shared entity-field declarations
+
+Removed repeated extern declarations from `GOLDTL.fcn_004fffb0.c`; storage ownership is unchanged. Decision owner: project owner. The reviewed scratch candidate matches 60/60 RELOC in Gold and T&L; receipts `.scratch/counter-contract/dedup-entity-field-gold.json` and `dedup-entity-field.json`. Post-change tests follow.
+
+### 2026-11-01 — Name the shared free cutscene lookup
+
+Gold `0x4e5120` and T&L `0x4e6ab0` find the first cutscene record whose ID is -1; their caller copies a new record there. Renamed the function and caller to inferred `cut_FindFreeCutscene` and moved its shared source to the game subsystem. The `cut_` prefix is attested; spelling and exact TU are inferred. Decision owner: project owner. Scratch comparisons are RELOC 47/47 with all operands validated in both targets. Receipts: `.scratch/counter-contract/{cut-free-guarded-preview,cut-free-apply,cut-free-candidate-gold,cut-free-candidate-tl}.json`. Post-change comparisons follow.
+
+Post-change tests of `GOLDTL.fcn_004fffb0.c` report RELOC 60/60 for both
+clients, with both recorded operands validated in each target. Receipt:
+`.scratch/counter-contract/dedup-entity-field-after.json`.
+
+### 2026-11-01 — Complete the `GOLDTL.fcn_00453d80` x87 schedule
+
+`src/Develop/Unassigned/GOLDTL.fcn_00453d80.c` at `0x453D80` now compares
+RELOC 1745/1745 with the object size exactly 1745, up from 1156/1741.
+
+- `volatile float dt` forces the discrete `fld dword [esp+0x58]` followed by
+  `fmul st(1)` and the trailing `fstp st(0)` for the `p->20 += dt * s[0]`
+  update. Folding `dt` into the `fmul` memory operand is four bytes short.
+- The particle-allocation branch writes the three random unit values into
+  `s[0..2]`, not spare locals: the reference reuses the `s` array slots
+  (`[esp+0x40]`, `[esp+0x44]`) while our version asked for `[esp+0x58]` and
+  `[esp+0x20]`.
+- Kept the conditional tail expression, the macro clamp, the unsigned char
+  flag test, and the `i`/`cnt`/`n` declaration order.
+
+Receipts: `.scratch/453d80.final.json`, kept source `.scratch/453d80.kept.c`,
+prior body `.scratch/453d80.base.c`. Decision owner: project owner.
+
+### 2026-11-01 — Name the shared cutscene release helper
+
+Gold `0x4e5180` and T&L `0x4e6b10` find a cutscene by ID, clear its record, and mark its slot free. Renamed the function and caller to inferred `cut_FreeCutscene` and moved its shared source to the game subsystem. The `cut_` prefix is attested; spelling and exact TU are inferred. Decision owner: project owner. Scratch comparisons are RELOC 39/39 with all operands validated in both targets. Receipts: `.scratch/counter-contract/{cut-release-guarded-preview,cut-release-apply,cut-release-candidate-gold,cut-release-candidate-tl}.json`. Post-change comparisons follow.
+
+Post-move `cut_FindFreeCutscene` tests are RELOC 47/47 in Gold and T&L,
+with all three recorded operands validated in each target. Receipt:
+`.scratch/counter-contract/cut-free-after.json`.
+
+Post-rebind `fcn_00505e30` compares EXACT 37/37 in both Gold and T&L. The
+neighboring T&L `fcn_005d2a40` remains at its pre-change 737-byte
+SIZE_MISMATCH against the 742-byte reference. Receipt:
+`.scratch/counter-contract/short-float-after.json`.
+
+Post-move `cut_FreeCutscene` tests are RELOC 39/39 in Gold and T&L, with the
+cutscene lookup operand validated in each. Receipt:
+`.scratch/counter-contract/cut-release-after.json`.
+
+All five callers affected by the `cut_FreeCutscene` rename compare RELOC in
+every target to which they are bound. Receipts:
+`.scratch/counter-contract/cut-release-caller-00.json` through `-04.json`.
+
+The free-slot lookup's caller `GOLDTL.fcn_004e6ae0.c` compares RELOC 46/46 in
+Gold and T&L after the rename, with both recorded operands validated in each.
+Receipt: `.scratch/counter-contract/cut-free-caller-after.json`.
+
+### 2026-11-01 — Record Gold queue-state binding evidence
+
+Gold `0x4c3ae0` is a 34-byte native function with 335 discovered direct
+call references; the shared client body compares RELOC 34/34. Its global
+operand is unresolved, and its Gold scaffold is smaller than the maximum
+indexed span. Decision owner: project owner. Kept the retired binding and
+storage unchanged pending backing-object and owner evidence; details and
+receipts are in `docs/source-layout.md`.
+
+The Gold queue candidate's `g_f31161` reference is a one-byte interior view
+of the same 10-byte-stride range indexed by `g_fb5760`. Existing scaffold
+arrays are separate and undersized. The writable PE virtual tail covers the
+range; ownership and a reproducible alias remain unresolved. No storage or
+binding was changed. See `docs/source-layout.md` for the evidence.
+
+Gold native disassembly at `0x519b17` independently confirms the queue view's
+`0xf31161` type address, `0xf31166` reference address, 10-byte stride, and
+`0xf81166` loop bound. Receipt:
+`.scratch/counter-contract/gold-queue-remap-native.json`.
+
+Gold native initialization at `0x4c350f` confirms the queue table spans
+`0xf31160..0xf81160` in 10-byte entries, followed by a separately accessed
+global at the upper boundary. The native extent is 0x50000 bytes; the source
+storage owner remains unresolved. Receipts:
+`.scratch/counter-contract/gold-queue-init-native.json` and
+`gold-queue-data-xrefs-0.json` through `-3.json`.
+
+Gold `0x4c3480` is already bound to the shared queue initializer, which uses
+`g_fb5760` as 0x8000 ten-byte entries. The undersized Gold scaffold therefore
+also affects an existing binding. Its ownership and raw-link layout remain
+unverified; no placeholder storage was enlarged or claimed as original.
+
+### 2026-11-01 — Review shared cutscene record layout
+
+Two client helpers repeat the same 0x114-byte record definition. Scratch code
+uses one inferred `CUTSCENE_RECORD` definition and compiler assertions for the
+native field offsets; Gold and T&L comparisons retain the original RELOC
+64/64 and 76/76 results. Decision owner: project owner. The shared source type
+is not yet applied while the function-contract audit and builds remain active;
+receipts and scope are recorded in `docs/source-layout.md`.
+
+The subsequent Gold rebuild reached the linker and failed on 263 unresolved
+externals, compared with 265 in the earlier office-validator build. It no longer
+reports `_fcn_004030e0`, `_fcn_00505e30`, or `_amt_ValidateOfficeCandidate`;
+other concurrent source changes prevent attributing the total difference to a
+single rebind. Receipt: `.scratch/counter-contract/gold-post-consolidation-build.log`.
+
+The post-queued-change T&L rebuild completed. Comparing its preserved raw image
+with the earlier baseline shows matching imports, exports and resources, but
+`.text` placement differs by 0x200 and code/data bytes differ. Other source
+work continued between the two builds, so this comparison cannot attribute
+the differences to the consolidation changes. Receipt:
+`.scratch/counter-contract/tl-queued-edits-compare.json` (before SHA-256
+`2045d8f0a5bf8f56fae95c2de9a8cd95644adec94d6900104b4a94d869ec951a`, after
+`4ac42954a733204da38a388e85cd5f3343dea526c3b964de1c3a7a7c4fc5f15d`).
+
+### 2026-11-01 — Review Gold cutscene lookup call
+
+Gold `0x519ad0` directly calls the shared cutscene lookup at `0x4e50a0`.
+A scratch caller using the correct pointer-return declaration and an explicit
+conversion at the stored integer field compares RELOC 169/169, with the lookup
+operand validated. Decision owner: project owner. Other caller operands remain
+unresolved; the current address-named scaffold and source were not changed.
+Receipt: `.scratch/counter-contract/gold-cut-lookup-caller-candidate.json`.
+
+### 2026-11-01 — Review scene-comparison caller contract
+
+The two-argument `fcn_00451840` call in T&L `GOLDTL.fcn_005ab3e0.c` has no
+corresponding direct call to `0x451840` in its decoded 1063-byte native extent.
+The source is already SIZE_MISMATCH. Decision owner: project owner. Kept the
+caller unchanged rather than inventing a third argument; native disassembly is
+in `.scratch/counter-contract/scene-epsilon-caller-5ab3e0-native.json`.
+
+### 2026-11-01 — Share client entity reset
+
+Gold `0x52ae70` and T&L `0x5305a0` share the existing reset body with target-specific addresses. Gold has 35 direct native call references and its retired binding was restored with history preserved. Decision owner: project owner. Scratch comparisons are EXACT 40/40 for each target; raw-address operands do not establish storage owners. Receipts: `.scratch/counter-contract/{gold-entity-reset-native,tl-entity-reset-native,gold-entity-reset-xrefs,entity-reset-candidate-gold,entity-reset-candidate-tl,entity-reset-locked-preview,entity-reset-rebind-apply}.json`. Post-change tests and builds follow.
+
+Post-rebind `fcn_0052ae70` comparisons are EXACT 40/40 for Gold and T&L.
+These no-promote measurements do not update stored status. Receipt:
+`.scratch/counter-contract/entity-reset-after.json`.
+
+### 2026-11-01 — Share client scene comparison
+
+Restored the Gold `0x453e70` binding to the existing T&L scene comparison; the Gold body has 96 discovered direct calls and both clients compile EXACT 84/84 in scratch. Decision owner: project owner. Retired history is preserved. Several reconstructed callers have inconsistent prototypes and remain separate contract work; no caller ABI was changed. Receipts: `.scratch/counter-contract/{scene-epsilon-gold,scene-epsilon-tl,scene-epsilon-gold-xrefs,scene-epsilon-locked-preview,scene-epsilon-rebind-apply}.json`. Post-binding tests and builds follow.
+
+Rebrew recorded the post-rebind reset result as EXACT 40/40 in both clients.
+Receipt: `.scratch/counter-contract/entity-reset-promote.json`.
+
+Rebrew recorded the rebound scene comparison as EXACT 84/84 in both clients.
+Receipt: `.scratch/counter-contract/scene-epsilon-after.json`.
+
+## 2026-11-01 — chkstk prologue lever and two large bodies
+
+- `__declspec(align(8))` on the large local aggregate reproduces the native
+  `push ebp; mov ebp,esp; and esp,-8; mov eax,<frame>; call __chkstk` prologue; a
+  plain local `double` does not. Proven on `0x519190` (io_AppendText) and usable on
+  the 0xeb6c/0x3294-frame rows.
+- Compiler float literals written as literals (`0.125f`) emit the reference
+  `fxch st(1); fmul [lit]` and the int-wise copy; address casts did not (`0x441050`).
+- Array-slot scratch reuse instead of short locals, plus `volatile float dt`,
+  reproduced the reference stack displacements and the discrete `fld` +
+  `fmul st(1)` pair (`0x453D80`, now RELOC 1745/1745).
+- `0x46C5A0` 329 -> 943/6016 after replacing the truncated decompiler switch with a
+  real 21-case dispatch decoded from the two tables, `/Oy-` frame, and the full
+  markup and wrap paths.
+- `0x519190` 417 -> 463/6387, `0x452C60` 2036 -> 2046/2060, `0x441050` 855 -> 901/931,
+  `0x441F90` 207 -> 251/1362.
+
+Pads retuned twice; rebuild 2,977,792 bytes, raw 267,762, informative 129,364, no
+compile or link errors.
+
+Decision: continuing. No GA was run.

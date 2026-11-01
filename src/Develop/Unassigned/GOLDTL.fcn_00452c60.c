@@ -112,14 +112,16 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
 	float lo;
 	float hi;
 	float v[4];
+	float w;
 
 	den = 1;
 	if (e->f24 == t)
 		return 1;
-	len = (float) sqrt(e->f74 * e->f74 + e->f78 * e->f78 + e->f7c * e->f7c);
+	w = (float) sqrt(e->f74 * e->f74 + e->f78 * e->f78 + e->f7c * e->f7c);
+	len = w;
 	if (e->f68 > e->f6c)
 		len = -len;
-	lim = e->d4 < 0 ? (int) (e->count * e->fb4) : e->count;
+	lim = (e->d4 & 0x80) ? (int) (e->count * e->fb4) : e->count;
 	if (e->sub != 0 && ((fcn_00452c60_Sub*) e->sub)->n > 0)
 		den = ((fcn_00452c60_Sub*) e->sub)->n;
 	e->f38 = 1.0f / e->c4;
@@ -131,7 +133,7 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
 		if (!(p->flags & 1)) {
 			if (cnt >= lim)
 				continue;
-			if (e->d4 < 0 && !(e->d5 & 2))
+			if ((e->d4 & 0x80) && !(e->d5 & 2))
 				continue;
 			cnt++;
 			p->f10 = (float) rand() * *(float*) 0x662a18 * *(float*) 0x6628c8;

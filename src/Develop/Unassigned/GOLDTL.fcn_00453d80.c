@@ -21,7 +21,7 @@ unsigned char __cdecl fcn_00453d80(void* a1, unsigned int a2)
 	int n;
 	int wanted;
 	int age;
-	float dt;
+	volatile float dt;
 	float fade;
 	float r;
 	float s1;
@@ -85,12 +85,12 @@ unsigned char __cdecl fcn_00453d80(void* a1, unsigned int a2)
 					*(unsigned char*) (e + 0xd0);
 				*(unsigned char*) (p + 0x4f) = 0;
 				*(unsigned int*) (p + 0x30) = a2;
-				t = 2.0f * ((float) rand() * RAND_UNIT_453D80) - 1.0f;
-				u = 2.0f * ((float) rand() * RAND_UNIT_453D80) - 1.0f;
-				v = 2.0f * ((float) rand() * RAND_UNIT_453D80) - 1.0f;
-				*(float*) (p + 0x20) = t * *(float*) (e + 0x68);
-				*(float*) (p + 0x24) = u * *(float*) (e + 0x6c);
-				*(float*) (p + 0x28) = v * *(float*) (e + 0x70);
+				s[0] = 2.0f * ((float) rand() * RAND_UNIT_453D80) - 1.0f;
+				s[1] = 2.0f * ((float) rand() * RAND_UNIT_453D80) - 1.0f;
+				s[2] = 2.0f * ((float) rand() * RAND_UNIT_453D80) - 1.0f;
+				*(float*) (p + 0x20) = s[0] * *(float*) (e + 0x68);
+				*(float*) (p + 0x24) = s[1] * *(float*) (e + 0x6c);
+				*(float*) (p + 0x28) = s[2] * *(float*) (e + 0x70);
 				if (*(unsigned char*) (e + 0xd4) & 0x40) {
 					r = (float) rand() * RAND_UNIT_453D80;
 					*(int*) (p + 0x34) = (int) (
