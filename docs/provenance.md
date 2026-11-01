@@ -14789,3 +14789,164 @@ committed reading stands at raw 291,869 from f449d446; a clean committed-state
 measurement will be taken when the tree settles.
 
 Decision: continuing. No GA was run.
+
+The matrix user retains its existing SIZE_MISMATCH result (1,361 compiled
+versus 1,382 native bytes, 78 reported matches) after the declaration change.
+Receipts: `.scratch/counter-contract/matrix-view-{before,after}.json`.
+
+## 2026-11-02 — fcn_005b6300: region 2 landed, 0x67d370 chain cached
+
+- `src/Develop/Units/d2.v1/GOLDTL.fcn_005b6300.c`: added the native pointer-form
+  SetForm loop at the end of the v20 else arm (`p = f.book + 0x228;` three
+  iterations, `p += 4`), matching native 0x5b7791–0x5b77b7, and cached the single
+  `G(0x67d370)` load that native issues once at 0x5b731d for the
+  f.v28/f.v1c/f.v20 chain (reused at 0x5b7467 and 0x5b758b).
+- Result: object 5502 bytes against the 5499 native extent (3 over, was 35 under),
+  chkstk frame 0x1a4c preserved, match_count 562 (was 557).
+- Rejected variants, all measured: caching only the f.v48/f.v34 pair
+  (`G(0x67d370)` once, 0x5b6cd6 load reused at 0x5b6e80) reaches the native five
+  loads and keeps frame 0x1a4c but drops the positional count to 504; the full
+  five-load form with region 1 is 5494 bytes; region 1's `_ftol` idiom (native
+  0x5b7634–0x5b76e8) raises the count to 823 but always adds a global spill that
+  moves FRAME to esp+0x14 (chkstk 0x1a50), so it was not kept.
+- Verification: `rebrew build driver cl` object plus `rebrew test ... --no-promote`
+  (SIZE_MISMATCH, 562/5499). Receipts under `.scratch/5b6300/`.
+
+The post-change data-conflict inventory no longer reports `g_90e0a0` as a
+source type conflict. Updated its metadata note through the guarded writer to
+reflect the now-consistent declarations; no storage owner or placement is
+claimed. Receipts: `.scratch/counter-contract/matrix-view-conflicts-after.json`
+and `matrix-view-note-{preview,apply}.json`.
+
+## 2026-11-02 — reconcile second influence-matrix view
+
+Decision owner: project maintainer. Changed the flat signed-byte declaration
+and indexing of `g_869480` in T&L `fcn_0047d2a0` to the existing
+`char[0x300][0x300]` view used by the other source users. The signed cast is
+preserved and the index retains its 0x300 row stride. No storage owner changed;
+the T&L one-byte comparison scaffold remains undersized. Object and target
+comparisons follow.
+
+Removed a duplicate identical `g_869480` extern from the shared Gold/T&L
+matrix getter `GOLDTL.fcn_0050f950.c`; no address anchors or storage definitions
+were removed. Both target comparisons follow.
+
+The matrix user's target object preserves code, data, and relocations after
+this change; debug records were excluded. The existing SIZE_MISMATCH result
+remains 1,361 compiled versus 1,382 native bytes, with 78 reported matches.
+Receipts: `.scratch/counter-contract/matrix2-view-object-compare.json` and
+`matrix2-view-{before,after}.json`.
+
+The all-target lint started after recording the queue backing identities
+completed with zero errors and 8 server, 14 T&L, and 11 Gold warnings.
+Receipt: `.scratch/counter-contract/queue-backing-all-target-lint.json`.
+
+The getter remains RELOC 33/33 in both clients after removing the duplicate
+extern. Receipts: `.scratch/counter-contract/matrix2-getter-{before,after}.json`.
+
+## 2026-11-02 — consolidate game matrix declarations
+
+Decision owner: project maintainer. Moved the six client sources' repeated
+`g_869480` and `g_90e0a0` externs into inferred game header
+`game_matrices.h`. Their `char[0x300][0x300]` types and signed casts remain
+unchanged; the header allocates no storage and does not assert original TU or
+owner. Nine target compilation contexts and per-file baseline comparisons were
+preserved. Evidence: `.scratch/counter-contract/game-matrices-baselines.json`
+and `game-matrices-objects/before.json`. Post-change object and target checks
+follow.
+
+All nine affected Gold/T&L compilation contexts preserve `.text`, `.data`,
+`.rdata`, `.drectve`, and relocation targets after the header change; local
+labels are compared by section offset and debug records are excluded. Receipt:
+`.scratch/counter-contract/game-matrices-objects/compare.json`.
+
+The post-header data inventory reports no type conflict for either matrix and
+identifies `game_matrices.h` as a declaration site. Updated the `g_90e0a0`
+metadata note through the guarded writer; its storage owner and placement
+remain unproved. Receipts: `.scratch/counter-contract/game-matrices-data-after.json`
+and `game-matrices-note-{preview,apply}.json`.
+
+All six affected source files completed post-header comparisons: all nine
+Gold/T&L function contexts retain their prior statuses and reported match
+counts. Receipts: `.scratch/counter-contract/game-matrices-final-results.json`
+and `game-matrices-baselines.json`.
+
+## 2026-11-02 — configure client scaffold capacities
+
+Decision owner: project maintainer. Added reviewed `symbol-stubs` specials for
+`g_fb5760` and the two influence matrices to each client configuration. Native
+queue initializers establish 0x8000 records at 10-byte stride, and the T&L
+matrix initializer walks 0x300-by-0x300 bytes. These are comparison scaffold
+capacities, not native source-owner claims. The existing generated scaffold
+files are not yet regenerated: using the historical logs would replace many
+unrelated reviewed definitions. Targeted generation and compilation checks
+follow. Evidence: `.scratch/counter-contract/{gold-queue-init-native,tl-queue-table-init-native,tl-matrices-init-native}.json`.
+
+Released Rebrew generated targeted scratch scaffolds from the updated specials;
+both compiled under their target runtime flags. Their object symbols and `.bss`
+extent confirm two 0x90000-byte matrices and one 0x50000-byte queue table in
+each target. This verifies the generator configuration only: the selected
+production scaffold files remain unchanged, and raw placement is unverified.
+Receipt: `.scratch/counter-contract/capacity-generated-proof.json`.
+
+## 2026-11-02 — reconcile client queue and scaffold extents
+
+Decision owner: project maintainer. Applied the reviewed queue and matrix
+capacities to the two existing generated comparison scaffolds using the
+upstream selected-symbol generator in its local development checkout; all
+other scaffold definitions were preserved. The Gold queue's `g_f31161` view
+now addresses byte 1 of `g_fb5760`, and its separate scaffold allocation was
+removed. These scaffolds are comparison inputs, not claims about the original
+storage owner. Native initialization and relocation evidence, preview digests,
+and selected updates are recorded under `.scratch/counter-contract/` in the
+`*-selected-*` and `gold-alias-*` receipts. Target builds and verification
+follow.
+
+The first selected queue definitions included `client_types.h`, which exposed
+pre-existing incompatible declarations in the full scaffold TUs. Replaced the
+queue special with an equally sized byte array and removed the two include lines
+introduced by that initial update; both complete scaffolds then compiled with
+their target compiler flags. The upstream selected-update tool now rejects
+multi-statement replacements, including includes. The Gold queue function
+remains RELOC 169/169, with both queue relocations validated against the
+backing table. Receipt: `gold-queue-alias-final.json`.
+
+The all-target lint after matrix declaration consolidation completed with zero
+errors (8 server, 14 T&L, and 11 Gold warnings); it preceded the later queue
+view and scaffold edits. Receipt: `game-matrices-lint.json`.
+
+Gold's focused lint reports no errors. The T&L raw build succeeded after the
+correction; comparison with the reference reports matching imports and exports,
+while the complete image and section sizes differ. Gold compiled its affected
+sources but the link remains blocked by 256 unresolved external symbols; no
+Gold PE comparison was possible. Receipts: `gold-queue-alias-lint.json`,
+`tl-capacity-build-final.log`, `tl-capacity-whole-binary.json`, and
+`gold-capacity-build-final.log` in `.scratch/counter-contract/`. The upstream
+selected-update generator's focused suite passed 81 tests.
+
+## 2026-11-02 — trade panel complete and trimmed
+
+- `0x5BA910` body is complete between 0x5ba910 and 0x5bd7bc (both remaining gaps
+  transcribed: the three-way row-id ladder with the weighted per-slot height loop
+  through eval_ObjektPreis2Credits, the 0x7f4c00 record chain, the dialog arms, and
+  the second overlay pass with its 16-slot three-row dispatch), then trimmed from
+  12441 to 12421 bytes against native 11948 while match rose 690 -> 737. Two keeps:
+  enregistering the call result in the 7-slot init loop instead of reloading
+  `f.vD4[i]`, and hoisting the l_5bb193 gate's entity pointer.
+- `0x5B6300` 557 -> 562 with region 2's pointer-form loop plus one cached
+  `0x67d370` covering the v28/v1c/v20 chain; object 5502 against native 5499. The
+  earlier claim that native had eight three-iteration loops was wrong: it has nine
+  (eight `dec edi` sites plus the k-loop's `dec ebp`).
+- Padding audit: of 932 SIZE_MISMATCH rows only two (`0x4F2FE0`, `0x4F5CC0`) are
+  byte-equal modulo parser-stripped trailing padding, so the upstream classification
+  fix is narrow in effect. The fix is implemented and tested in the upstream checkout
+  (compile.py reference_tail_is_padding plus test.py multi-annotation guard, new
+  regression tests, 396+136+165 tests passing) but is not committed and the project
+  venv still runs the installed 6.9.0 build.
+- The panel's remaining excess is frame-slot driven: `f.v9c` is read 28 times from
+  its slot against native's three register reuses, and the biggest drift blocks are
+  0x5bbd73..0x5bc033 (+121) and 0x5bc937..0x5bca42 (+53).
+
+Rebuild 3,047,424 bytes, raw 290,843, informative 154,558, no compile or link errors.
+
+Decision: continuing. No GA was run.

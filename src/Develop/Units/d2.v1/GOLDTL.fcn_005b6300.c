@@ -184,6 +184,7 @@ int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
 	int el;
 	int i;
 	int t;
+	int c;
 	int k;
 	int x;
 	int y;
@@ -584,7 +585,8 @@ L6fa2:
 			}
 		}
 		f.v10 = 0xc;
-		if (G(0x67d370) == f.v28 && f.v18 != -1) {
+		c = G(0x67d370);
+		if (c == f.v28 && f.v18 != -1) {
 			el = fcn_005463a0(2, 0, 6, 3, G(a1 + 4));
 			if (el != 0) {
 				G(el + f.v18 * 4 + 0xb0) = 1;
@@ -613,7 +615,7 @@ L6fa2:
 				io_AppendText(0x6811b0);
 			}
 			fcn_0057e880(0x22, 0, 0, 0);
-		} else if (G(0x67d370) == f.v1c && f.v18 != -1
+		} else if (c == f.v1c && f.v18 != -1
 			&& *(signed char*) 0x7747b0 >= 0) {
 			if (fcn_00526120(*(char**) 0x14abbf8, 1) == 0)
 				goto L77c4;
@@ -633,7 +635,7 @@ L6fa2:
 			f.msg.f58 = G(f.rows[f.v18].a08 + 4);
 			fcn_004c5530(&f.msg);
 			f.v18 = -1;
-		} else if (G(0x67d370) == f.v20 && f.v18 != -1) {
+		} else if (c == f.v20 && f.v18 != -1) {
 			e = (char*) f.rows[f.v18].a08;
 			if (G(e + 0x184) != 0 && G(e + 0x184) + 0x2c != G(a1 + 4)) {
 				fcn_0051af00(f.txt124c, 0x42c4, *(unsigned short*) e);
@@ -665,6 +667,12 @@ L6fa2:
 				f.msg.w34 = *(short*) 0x7f4c0c;
 				f.msg.f58 = G(e + 4);
 				fcn_004c5530(&f.msg);
+				p = f.book + 0x228;
+				for (i = 0; i < 3; i++) {
+					fcn_004727a0(G(p), 2);
+					io_AppendText(0x6811b0);
+					p += 4;
+				}
 				f.v18 = -1;
 				f.v20 = -1;
 			}
