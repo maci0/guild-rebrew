@@ -407,3 +407,6 @@ int __cdecl fcn_005462a0(void* a0) { return 0; }
 
 /* Placeholder for the item-table marker reached by the trade panel at 0x5BA910. */
 void __cdecl fcn_004737c0(void) { }
+
+/* Placeholder for the selection tail reached by the trade panel at 0x5BA910. */
+void __cdecl fcn_005ba750(void) { }

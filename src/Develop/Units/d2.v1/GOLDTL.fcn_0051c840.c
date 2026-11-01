@@ -159,7 +159,7 @@ body:
 				memset(p + i, 0x20, 10);
 				break;
 			}
-			*(int*) (num + 0xc) = -1;
+			*(int*) (num + 0xc) = 0xff;
 			if (p[i] == '{') {
 				i++;
 				break;
@@ -621,7 +621,7 @@ body:
 			break;
 		case '%':
 			buf[i - 1] = 0x16;
-			memmove(buf + i + 1, tmp, strlen(buf) - i + 1);
+			memmove(buf + i, buf + i + 1, strlen(buf) - i + 1);
 			break;
 		default:
 			break;

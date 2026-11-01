@@ -14667,3 +14667,60 @@ many uncommitted bodies in the shared tree; per-row verdicts above are the relia
 record and a full rebuild will be re-measured once the tree settles.
 
 Decision: continuing. No GA was run.
+
+## 2026-11-02 — name shared queue-entry removal
+
+Decision owner: project maintainer. Renamed the shared Gold/T&L queue-removal
+definition and references to inferred `ch_RemoveQueueEntry`, following the
+attested `ch_` queue naming pattern and native unlink-and-clear behavior.
+Original spelling remains unproved. Guarded Rebrew planning and apply updated
+two identities, 27 source files, and the queue header; no server identity was
+changed. Baselines: `.scratch/counter-contract/queue-rename-baseline/manifest.json`;
+preview/apply: `queue-remove-rename-guarded-preview.json` and
+`queue-remove-rename-apply.json`. Fresh target checks follow.
+
+Recorded the inferred `ch_RemoveQueueEntry` spelling and its evidence in
+`docs/naming_conventions.md` and `docs/source-layout.md`; no original spelling
+or exact TU is asserted.
+
+Gold's post-rename rebuild compiled without C errors but still failed at link
+on 256 unresolved names. Neither the old nor new queue-removal symbol is among
+them. Receipt: `.scratch/counter-contract/gold-post-queue-rename-build.log`.
+
+The post-rename Gold build still has 256 unrelated unresolved names and no
+queue-removal unresolved reference. The T&L build reached link but failed on
+`_fcn_005ba750` from concurrently edited `GOLDTL.fcn_005ba910.c`. The T&L
+native address `0x005ba750` is bound to `fcn_005af160`, while an independent
+Gold function is also named `fcn_005ba750`; a global placeholder rename would
+therefore be ambiguous. No concurrent source was changed. Receipts:
+`.scratch/counter-contract/{gold,tl}-post-queue-rename-build.log`.
+
+## 2026-11-02 — target-scoped reference binding gap
+
+Decision owner: project maintainer. Confirmed `fcn_005ba750` is an independent
+live Gold definition as well as a T&L placeholder for the separately named
+`GOLDTL.0x005ba750` identity. Rebrew correctly refused the global reference
+binding as not globally unbound. Recorded a target-and-file-scoped binding
+capability request in upstream `rebrew/docs/IDEAS-GUILD.md`; no source or
+binding was changed. Receipt:
+`.scratch/counter-contract/targeted-bind-5ba750-preview.err`.
+
+## 2026-11-02 — trade panel body complete, parser tables aligned
+
+- `0x5BA910` 387 -> 686/10937 (native 11948): the display-counter teardown, the
+  three handle sweeps, the row-id dispatch, the 0x776c60 trade-entry loops, the
+  selection-flag passes, the row-record path with the 0x17d8 slot list, and the
+  dialog release plus native-shaped epilogue are transcribed. Frame stays 0x1848,
+  tail is `xor eax,eax; add esp,0x1858; ret`. Every new callee resolves to a project
+  definition; `fcn_005BA750` got a scaffold placeholder.
+- `0x51C840` table offsets now exact (jump 0x16E8, index 0x1748, .text 0x17A0) via
+  three edits: `memset(p + i, 0x20, 10)`, the '%' case `memmove(buf + i, buf + i +
+  1, ...)`, and `*(int*)(num + 0xc) = 0xff`. Positional match fell to 1119 because
+  case-block sizes oscillate (+86/-122/+71/-48 blocks), while aligned identity rose
+  to 1244. The 6043-vs-6048 size gap is not a code byte: the matcher strips trailing
+  0xCC/0x90 from object bytes but reports the metadata extent as the total.
+- `0x519190` case labels corrected off the native index table: every label except
+  '%' was one too low, so the emitted index table now equals native byte for byte.
+
+Decision: continuing. No GA was run. The whole-image same-offset number is not a
+reliable reading while another session holds many uncommitted bodies in the tree.

@@ -113,19 +113,16 @@ int __cdecl io_AppendText(char* format_selector, ...)
 	}
 	directive = S.text[text_index];
 	v20 = (int)(S.text + text_index);
-	if ((unsigned char)(directive - 0x25) > 0x52) {
-		continue;
-	}
 	switch (directive) {
-	case 'B':
+	case 'C':
 		memset(*(void**)(v14 + 0x1015f7c), 0, 0x80);
 		*(int*)(v14 + 0x10162d4) = 0;
 		memset((void*)(v14 + 0x10161d4), 0, 0x100);
 		fcn_0046f2c0(*(int*)(v14 + 0x1015f40), 0);
 		text_index++;
 		continue;
-	case 'R':
-	case 'r':
+	case 'S':
+	case 's':
 		v0c = (int)(S.text - 1);
 		v20 = v0c + text_index;
 		if (*(char*)v20 == '$') {
@@ -141,7 +138,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 			continue;
 		}
 		goto fmt;
-	case 'E':
+	case 'F':
 		text_index++;
 		continue;
 /* shared va_arg formatter (native 0x5193a3), reached by R/r */
@@ -259,8 +256,8 @@ fmt:
 	v30 = 0;
 	continue;
 
-	case 'k':
-	case 's':
+	case 'l':
+	case 't':
 		v28 = *(int*)ap;
 		ap += 4;
 		v2c = 1;
@@ -269,7 +266,7 @@ fmt:
 		*(int*)(v14 + 0x10162d4) = v08 + 1;
 		text_index++;
 		continue;
-	case 'S':
+	case 'T':
 		if (S.text[text_index - 1] != 0x25) {
 			text_index++;
 			continue;
@@ -284,7 +281,7 @@ fmt:
 		memcpy(S.text + text_index - 1, S.work, v24);
 		text_index++;
 		continue;
-	case 'v':
+	case 'w':
 		v28 = *(int*)ap;
 		ap += 4;
 		v08 = *(short*)(v28 * 189 * 4 + 0x8680b4);
@@ -295,7 +292,7 @@ fmt:
 			S.text + text_index + 1, v08);
 		memcpy(S.text + text_index - 1, S.work, strlen(S.work));
 		continue;
-	case 'h':
+	case 'i':
 		v08 = (unsigned char)S.text[text_index + 1];
 		if (v08 == 'i' || v08 == 'c' || v08 == 'b' || v08 == 'a'
 		    || v08 == 'n' || v08 == 't') {
@@ -399,7 +396,7 @@ fmt:
 		*(int*)(v14 + 0x10162d4) = v08 + 1;
 		text_index += 2;
 		continue;
-	case 'H':
+	case 'I':
 		if (digit != -1) {
 			ap += 4;
 			fcn_0064d41a(sbuf, (char*)0x6a2354, digit);
@@ -421,7 +418,7 @@ fmt:
 			strlen(S.text) - text_index + 1);
 		memcpy(S.text + text_index - 1, S.work, strlen(S.work));
 		continue;
-	case 'e':
+	case 'f':
 		v04 = (signed char)S.text[text_index + 1] - 0x30;
 		if (v04 > 0 && v04 < 9) {
 			text_index++;
@@ -469,14 +466,14 @@ fmt:
 		memmove((char*)v0c + v24, S.text + text_index, v08);
 		memcpy((char*)v0c, S.work, v24);
 		continue;
-	case 'u':
+	case 'v':
 		v08 = (unsigned char)S.text[text_index];
 		text_index++;
 		if ((char)v08 == 'v') {
 			ap += 4;
 		}
 		continue;
-	case 'l':
+	case 'm':
 		v08 = (unsigned char)S.text[text_index + 1];
 		text_index++;
 		v2c = 1;
@@ -505,13 +502,13 @@ fmt:
 				*(int*)(v14 + 0x10162d4) + 1;
 		}
 		continue;
-	case 'W':
+	case 'X':
 		S.text[text_index - 1] = 0x20;
 		v30 = 1;
 		*(char*)v20 = 0x20;
 		text_index++;
 		continue;
-	case 'V':
+	case 'W':
 		if (digit == -1) {
 			digit = 0;
 		}
@@ -541,7 +538,7 @@ fmt:
 			text_index++;
 		}
 		continue;
-	case 't':
+	case 'u':
 		v10 = 1;
 	shift1:
 		v0c = text_index - (digit != -1 ? 2 : 1);
@@ -549,10 +546,10 @@ fmt:
 			strlen(S.text) - text_index);
 		text_index = v0c - 1;
 		continue;
-	case 'T':
+	case 'U':
 		v10 = 2;
 		goto shift1;
-	case 'a':
+	case 'b':
 		v0c = text_index - (digit != -1 ? 2 : 1);
 		if (S.text[v0c] != 0x25) {
 			goto fmt;
@@ -562,7 +559,7 @@ fmt:
 		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
 		text_index = v0c;
 		continue;
-	case 'A':
+	case 'B':
 		v0c = text_index - (digit != -1 ? 2 : 1);
 		if (S.text[v0c] != 0x25) {
 			goto fmt;
@@ -572,10 +569,10 @@ fmt:
 		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
 		text_index = v0c;
 		continue;
-	case 'd':
+	case 'e':
 		v10 = 5;
 		goto shift2;
-	case 'D':
+	case 'E':
 		v10 = 6;
 	shift2:
 		v08 = (unsigned char)S.text[text_index + 1];
@@ -589,7 +586,7 @@ fmt:
 		}
 		text_index = v0c;
 		continue;
-	case 'M':
+	case 'N':
 		text_index++;
 		if (digit == -1) {
 			continue;
@@ -607,7 +604,7 @@ fmt:
 			strlen(S.text) - text_index + 2);
 		memcpy(S.text + text_index - 2, S.work, v24);
 		continue;
-	case '`':
+	case 'a':
 		v28 = 0x14;
 		if (S.text[text_index - 1] != 0x25) {
 			fcn_0064d41a(S.work, (char*)0x6a2348, v28);
@@ -621,7 +618,7 @@ fmt:
 			strlen(S.text) - text_index + 1);
 		memcpy(S.text + text_index - 1, S.work, strlen(S.work));
 		continue;
-	case 'q':
+	case 'r':
 		if (directive != 'r') {
 			continue;
 		}
@@ -664,7 +661,7 @@ fmt:
 		*(char*)(S.text + text_index + 3 + v28) = 0;
 		text_index += v28;
 		continue;
-	case 'C':
+	case 'D':
 		v24 = *(int*)ap;
 		ap += 4;
 		fcn_00500d60(v24, dbuf);
@@ -676,7 +673,7 @@ fmt:
 			S.text + text_index, v08);
 		memcpy(S.text + text_index - 1, S.work, strlen(S.work));
 		continue;
-	case 'F':
+	case 'G':
 		text_index++;
 		v18 = *(int*)ap;
 		ap += 4;
@@ -707,7 +704,7 @@ fmt:
 			if ((int)strlen(abuf[0]) + text_index > 0x17cb) {
 				goto fail;
 			}
-			memmove(S.text + text_index + strlen(abuf[0])
+			memmove(S.text + text_index + 8 + strlen(abuf[0])
 				- (digit != -1 ? 3 : 2),
 				S.text + text_index,
 				strlen(S.text) - text_index + 2);
@@ -747,7 +744,7 @@ fmt:
 			if ((int)strlen(S.work) + text_index > 0x17cb) {
 				goto fail;
 			}
-			memmove(S.text + text_index + strlen(S.work)
+			memmove(S.text + text_index + 8 + strlen(S.work)
 				- (digit != -1 ? 3 : 2),
 				S.text + text_index,
 				strlen(S.text) - text_index + 2);
