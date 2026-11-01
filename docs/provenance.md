@@ -15095,3 +15095,7 @@ Rebuild 3,047,424 bytes, raw 290,630 (pad convergence still oscillates against t
 other session's uncommitted bodies), no compile or link errors.
 
 Decision: continuing. No GA was run.
+
+Correction to the entry above: the native slot list for 0x519190 reads digit 0x0c,
+ap 0x10, v0c 0x18, v14 0x20, v1c 0x28, v20 0x2c, v30 0x3c, v2c 0x38, directive 0x33;
+the "0x1c? no," fragment was a drafting artifact, not part of the record.
