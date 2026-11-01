@@ -63,3 +63,9 @@ int g_007725a8 = 0;
 int g_6b8034 = 0;
 
 int gv_00675318 = 0;
+
+int g_6b85b0 = 0;
+int g_6b85b4 = 0;
+int g_6b85b8 = 0;
+int g_6b85bc = 0;
+int g_1041d68 = 0;

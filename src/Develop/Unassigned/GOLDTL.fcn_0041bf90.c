@@ -26,8 +26,8 @@ int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
 	}
 	for (left = count; left > 0; left--) {
 		key = g_6b6b18[pixels[2]] + g_6b5e08[pixels[1]] + g_6b6d20[pixels[0]];
-		pixels += 3;
 		g_6b6f20[5][key].count++;
+		pixels += 3;
 	}
 	g_6b6f38 = 0;
 	for (i = 0; i < 0x8000; i++) {
@@ -41,10 +41,10 @@ int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
 			g_6b6f20[5][i].g = (((((i >> 2) & 0x800 | i & 0x400) >> 2 | i & 0x80) >> 2 | (i & 2) << 2 | i & 0x10) + 4) * c;
 			g_6b6f20[5][i].b = (((((i >> 2) & 0x400 | i & 0x200) >> 2 | i & 0x40) >> 1 | ((i & 1) << 2 | i & 8) * 2) + 4) * c;
 			idx = i;
-			for (pp = g_6b6f20 + 4; pp >= g_6b6f20; pp--) {
+			for (pp = g_6b6f20 + 4; (int) pp >= (int) g_6b6f20; pp--) {
 				bit = idx & 7;
 				idx >>= 3;
-				(*pp)[idx].key += c;
+				*(unsigned int*) ((unsigned char*) *pp + idx * sizeof(OctNode) + 0x10) += c;
 				(*pp)[idx].mask |= (unsigned char) (1 << bit);
 			}
 		}

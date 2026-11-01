@@ -34,19 +34,20 @@ int __cdecl fcn_0050e170(ENT_50e170* p0, int a1, int a2)
     int total;
     int n;
     unsigned short* p;
+    unsigned short* q;
     int i;
 
     total = fcn_0050dfd0((char*) p0, a1);
     p = fcn_00502cd0(p0->id, 1, 0, a1);
     if (p != 0) {
-        n = total - *(int*) ((char*) p + 0xe);
-        if (n > a2) {
+        if (total - *(int*) ((char*) p + 0xe) > a2) {
             return a2;
         }
-        return n;
+        return total - *(int*) ((char*) p + 0xe);
     }
     i = 0;
-    if (fcn_00502cd0(p0->id, 1, 5) != 0) {
+    q = fcn_00502cd0(p0->id, 1, 5);
+    if (q != 0) {
         do {
             i++;
         } while (gm_NextEntityQueryMatch() != 0);

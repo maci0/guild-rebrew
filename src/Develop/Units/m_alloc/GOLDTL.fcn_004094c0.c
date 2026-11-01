@@ -12,7 +12,7 @@ extern char __cdecl fcn_0045b990();
 extern void __cdecl m_FreeTracked(void* ptr);
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern int __cdecl fcn_00407e30();
-extern int __cdecl fcn_00421350();
+extern short __cdecl fcn_00421350();
 extern int __cdecl fcn_00407760();
 extern int __cdecl fcn_0045b920();
 extern int __cdecl fcn_00451840();
@@ -101,9 +101,8 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 		    &v17, &v16, 8, *(unsigned int*) (rec + 0x160));
 	*(unsigned int*) 0x14d0c28 = 0x14cfc20;
 	*(unsigned int*) 0x14d0c24 = 0x200;
-	r = fcn_00421350((void*) 0x14d0c20, a1, v15, v14, v17, v16,
-	    *(char*) (obj + 0x240));
-	if (r == -1) {
+	if (fcn_00421350((void*) 0x14d0c20, a1, v15, v14, v17, v16,
+	    *(unsigned char*) (obj + 0x240)) == -1) {
 		*(char*) (*(int*) (rec + 0x14) + 0x110) = 0;
 		if (*(char*) 0x6b5c28 != 0)
 			*(unsigned char*) (*(int*) (rec + 0x14) + 0x8c) |= 8;

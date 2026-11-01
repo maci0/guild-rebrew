@@ -15,7 +15,6 @@ char __cdecl fcn_0040f1c0(char* a0, char* a1)
 	char* anim;
 	char* object;
 	char* motion;
-	int kind;
 	int frame;
 	int i;
 	char copied;
@@ -43,10 +42,9 @@ char __cdecl fcn_0040f1c0(char* a0, char* a1)
 		}
 		memset(&options, 0, sizeof(options));
 		*(int*) &options = 0;
-		kind = *(int*) (motion + 0xc0);
 		options.queue = 1;
-		options.layer = kind == 1 ? 0x10 : 0;
-		options.mode = (unsigned char) kind;
+		options.layer = *(int*) (motion + 0xc0) == 1 ? 0x10 : 0;
+		options.mode = (unsigned char) *(int*) (motion + 0xc0);
 		options.reverse = 0;
 		options.loop = 1;
 		anim = fcn_00434970(*(char**) (object + 0x1cc), name, options);

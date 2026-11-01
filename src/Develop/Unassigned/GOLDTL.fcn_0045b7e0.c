@@ -1,26 +1,23 @@
-typedef struct Cell {
-	int kind;
-	char pad_000[0x1c - 4];
-} Cell;
+#include <math.h>
+#include <stdlib.h>
 
 /* ADDRESS: GOLDTL 0x0045b7e0 */
-int __cdecl fcn_0045b7e0(int a0, int a1, int a2, int* a3, int* a4)
+char __cdecl fcn_0045b7e0(int a0, int a1, int a2, int* a3, int* a4)
 {
-	Cell* base;
-	Cell* e;
+	int* base;
 	int n;
-	int i;
-	int j;
-	int lim;
-	int d;
-	int t;
-	int hi;
-	int lo;
+	int i = 0;
+	int rowEnd;
+	int row;
+	int colEnd;
+	int col;
+	int span;
+	int type;
 
 	if (a0 == 0) {
 		return 0;
 	}
-	base = *(Cell**) (a0 + 0x24);
+	base = *(int**) (a0 + 0x24);
 	if (base == 0) {
 		return 0;
 	}
@@ -31,44 +28,25 @@ int __cdecl fcn_0045b7e0(int a0, int a1, int a2, int* a3, int* a4)
 		return 0;
 	}
 	n = *(int*) (a0 + 0x20);
-	if (n <= 0) {
-		return 0;
-	}
-	for (i = 0; i < n; i++) {
-		lim = n - 1;
-		if (i + a2 < lim) {
-			lim = i + a2;
-		}
-		j = (a2 < 0) ? 0 : a2;
-		for (; j <= lim; j++) {
-			d = a2 - j;
-			if (d < 0) {
-				d = -d;
-			}
-			t = i - d;
-			hi = n - 1;
-			if (a1 + t < hi) {
-				hi = a1 + t;
-			}
-			lo = a1 - t;
-			if (lo < 0) {
-				lo = 0;
-			}
-			for (; lo <= hi; lo++) {
-				if (j < 0 || j >= n) {
-					continue;
+	for (; i < n; i++) {
+		rowEnd = (n - 1 < i + a2) ? n - 1 : i + a2;
+		row = (a2 - i < 0) ? 0 : a2 - i;
+		while (row <= rowEnd) {
+			span = i - abs(a2 - row);
+			colEnd = (n - 1 < a1 + span) ? n - 1 : a1 + span;
+			col = (a1 - span < 0) ? 0 : a1 - span;
+			while (col <= colEnd) {
+				if (row >= 0 && row < n && col >= 0 && col < n) {
+					type = base[(n * row + col) * 7];
+					if (type != 0 && type != 0x0d) {
+						*a3 = col;
+						*a4 = row;
+						return 1;
+					}
 				}
-				if (lo < 0 || lo >= n) {
-					continue;
-				}
-				e = base + n * j + lo;
-				if (e->kind == 0 || e->kind == 0xd) {
-					continue;
-				}
-				*a3 = lo;
-				*a4 = j;
-				return 1;
+				col++;
 			}
+			row++;
 		}
 	}
 	return 0;

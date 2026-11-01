@@ -31,10 +31,15 @@ void __cdecl fcn_0044c6f0(int a1, int a2, int a3, int a4, int a5, int a6, int a7
 	v2 = buf;
 	switch (*(int*) 0x67ac90) {
 	case 1:
-		*(int*) (v2 + 0) = *(int*) 0x67b12c;
-		*(int*) (v2 + 4) = *(int*) 0x67b130;
-		*(int*) (v2 + 8) = *(int*) 0x67b134;
-		*(int*) (v2 + 0xc) = *(int*) 0x67b138;
+		{
+			int t2 = *(int*) 0x67b134;
+			int t1 = *(int*) 0x67b130;
+			int t0 = *(int*) 0x67b12c;
+			*(int*) (v2 + 0) = t0;
+			*(int*) (v2 + 4) = t1;
+			*(int*) (v2 + 8) = t2;
+			*(int*) (v2 + 0xc) = *(int*) 0x67b138;
+		}
 		break;
 	case 2:
 		*(int*) (v2 + 0) = *(int*) 0x67b13c;

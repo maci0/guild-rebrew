@@ -67,6 +67,7 @@ void __cdecl fcn_00416300(Snow* r, int n, ...)
 	int* p;
 	int i;
 	int k;
+	int remaining;
 	float v;
 
 	i = 0;
@@ -94,6 +95,7 @@ void __cdecl fcn_00416300(Snow* r, int n, ...)
 				d = (Flake*) ((char*) buf + r->count * sizeof(Flake));
 				if (r->count < k) {
 					k -= r->count;
+					remaining = k;
 					do {
 						d->x = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
 						d->y = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
@@ -102,7 +104,7 @@ void __cdecl fcn_00416300(Snow* r, int n, ...)
 						d->drift_a = (float) rand() * g_662a84 + g_662a74;
 						d->drift_b = (float) rand() * g_662a84 + g_662a74;
 						d++;
-					} while (--k);
+					} while (--remaining);
 				}
 			}
 			if (t == 0) {

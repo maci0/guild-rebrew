@@ -46,8 +46,8 @@ int __cdecl fcn_00441050(char* e)
 	void** v10;
 	Fn_441050 fn;
 	int count;
-	int i;
-	int j;
+	unsigned int i;
+	unsigned int j;
 	int k;
 	unsigned char res;
 
@@ -99,14 +99,14 @@ int __cdecl fcn_00441050(char* e)
 					f = f + 0x14;
 					k -= 1;
 				} while (k != 0);
-				sx = sx * g_662a34;
-				count += 1;
 				sy = sy * g_662a34;
+				count += 1;
+				sx = sx * g_662a34;
 				sz = sz * g_662a34;
-				*(float*) (w - 0x20) = sx;
-				*(float*) (w - 0x1c) = sy;
+				*(float*) (w - 0x20) = sy;
+				*(float*) (w - 0x1c) = sx;
 				*(float*) (w - 0x18) = sz;
-				*(float*) (w - 4) = (float) sqrt(sx * sx + sy * sy + sz * sz);
+				*(float*) (w - 4) = (float) sqrt(sz * sz + sx * sx + sy * sy);
 			}
 			v10 = (void**) (w - 0x1cc);
 			k = 8;

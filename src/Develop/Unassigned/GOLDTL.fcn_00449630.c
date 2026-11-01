@@ -1,187 +1,198 @@
+#include <math.h>
+
 typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
+
+extern int g_1041d0c;
+extern int g_1041d68;
+extern int g_14ce8d0;
+extern int g_14ce8e4;
+extern int g_14ce8cc;
+extern int g_14ce8e0;
+extern unsigned int g_14ce860;
+extern unsigned int g_14ce864;
+extern short g_14ce8c0;
+extern short g_14ce8c2;
+extern char g_14cf72a;
+extern char g_14cf71d;
+extern char g_67ab48;
+extern char g_67ab49;
+extern char g_6b85a0;
+extern int g_6b85b0;
+extern int g_6b85b4;
+extern int g_6b85b8;
+extern int g_6b85bc;
+extern int g_6b8478;
+extern int g_6b847c;
+extern int g_6b8480;
+extern int g_6b8484;
 
 int __cdecl fcn_00449600(int a);
-int __cdecl fcn_00448cc0(int a, int* b, int* c, int d);
-void __cdecl fcn_00438b40(int a, void* p);
-void __cdecl fcn_00438cb0(int a, void* p);
+int __cdecl fcn_00448cc0(int self, float* dir, int pos, float* view,
+	float* outA, float* outB);
+void __cdecl fcn_00438b40(int h, float* p);
+void __cdecl fcn_00438cb0(int h, float* p);
 void __cdecl UpdateSceneLighting(int a);
 int __cdecl fcn_00448b10(void);
-
-static float flt_abs(float f)
-{
-    return f < 0.0f ? -f : f;
-}
 
 /* ADDRESS: GOLDTL 0x00449630 */
 int __cdecl fcn_00449630(void)
 {
-    int h;
-    int handle;
-    int dx;
-    int dy;
-    int d44;
-    int d40;
-    int d3c;
-    int d38;
-    int p2c;
-    int p28;
-    int p24;
-    int p20;
-    int p1c;
-    int p18;
-    float f1;
-    float f3;
-    float f4;
-    float g;
-    int u;
-    int v5;
-    char flag;
-    char flag2;
-    char bflag;
-    u8 ok;
+	char changed;
+	char dirty;
+	float f04;
+	int dx;
+	int dy;
+	float f10;
+	float f14;
+	float a18[2];
+	float ang;
+	int handle;
+	float p28[3];
+	float p34[4];
+	float p44[4];
+	int h;
+	short mx;
+	short my;
+	unsigned int w;
+	unsigned int ht;
+	float r;
+	float s;
+	char ok;
 
-    h = *(int*) 0x1041d0c;
-    flag = 0;
-    flag2 = 0;
-    bflag = 0;
-    if (h == 0)
-        return 0;
-    handle = fcn_00449600(*(int*) 0x1041d68);
-    f1 = 0.0f;
-    g = 0.0f;
-    p2c = 0;
-    p28 = 0;
-    p24 = 0;
-    p20 = 0;
-    p1c = 0;
-    p18 = 0;
-    d44 = 0;
-    d40 = 0;
-    if (*(int*) 0x14ce8d0 != 0) {
-        if (*(int*) 0x6b85b8 == 0) {
-            *(int*) 0x6b85b0 = (int) *(short*) 0x14ce8c0;
-            *(int*) 0x6b85b8 = 1;
-            *(int*) 0x6b85b4 = (int) *(short*) 0x14ce8c2;
-        } else if (*(int*) (h + 0x218) != 0 && h != *(int*) 0x6b8478 &&
-                   h != *(int*) 0x6b847c && h != *(int*) 0x6b8480) {
-            if (*(char*) 0x67ab48 == 0)
-                dx = 0;
-            else
-                dx = (int) *(short*) 0x14ce8c0 - *(int*) 0x6b85b0;
-            flag2 = *(char*) 0x67ab48 != 0;
-            if (*(char*) 0x67ab49 == 0)
-                dy = 0;
-            else
-                dy = (int) *(short*) 0x14ce8c2 - *(int*) 0x6b85b4;
-            flag2 = (*(char*) 0x67ab49 != 0) || flag2;
-            *(int*) 0x6b85b0 = (int) *(short*) 0x14ce8c0;
-            d3c = *(int*) 0x14ce864;
-            d38 = 0;
-            *(int*) 0x6b85b4 = (int) *(short*) 0x14ce8c2;
-            f1 = ((float) dx / (float) *(u32*) 0x14ce860) * 3.141593f;
-            d40 = (int) (((float) dy / (float) *(u32*) 0x14ce864) * 3.141593f);
-            h = *(int*) 0x1041d0c;
-        }
-    }
-    if (*(int*) 0x14ce8e4 == 0) {
-    check_flag:
-        if (flag2 == 0)
-            goto no_update;
-    } else {
-        if (*(int*) 0x6b85bc == 0) {
-            *(int*) 0x6b85b0 = (int) *(short*) 0x14ce8c0;
-            *(int*) 0x6b85b4 = (int) *(short*) 0x14ce8c2;
-            *(int*) 0x6b85bc = 1;
-            goto check_flag;
-        }
-        if (*(char*) 0x67ab48 == 0)
-            dx = 0;
-        else
-            dx = (int) *(short*) 0x14ce8c0 - *(int*) 0x6b85b0;
-        flag2 = *(char*) 0x67ab48 != 0;
-        if (*(char*) 0x67ab49 == 0)
-            dy = 0;
-        else
-            dy = (int) *(short*) 0x14ce8c2 - *(int*) 0x6b85b4;
-        v5 = *(char*) 0x67ab49 != 0;
-        flag = (char) (v5 != 0 || flag2);
-        d38 = 0;
-        *(int*) 0x6b85b4 = (int) *(short*) 0x14ce8c2;
-        *(int*) 0x6b85b0 = (int) *(short*) 0x14ce8c0;
-        d3c = (int) ((float) dy / (float) *(u32*) 0x14ce864);
-        f3 = ((flt_abs((float) dx) + 1.0f) * 30.0f) /
-             (float) *(u32*) 0x14ce860;
-        if (f3 > 3.0f)
-            f3 = 3.0f;
-        f4 = ((flt_abs((float) dy) + 1.0f) * 30.0f) /
-             (float) *(u32*) 0x14ce864;
-        if (f4 > 3.0f)
-            f4 = 3.0f;
-        d44 = (int) (f3 * ((float) dx / (float) *(u32*) 0x14ce860) * 256.0f);
-        g = f4 * (float) d3c * -256.0f;
-        if (v5 == 0 && flag2 == 0)
-            goto check_flag;
-    }
-    f3 = (float) p2c;
-    f4 = (float) p28;
-    if (h == *(int*) 0x6b8484) {
-        if (*(char*) 0x14cf72a == 0 && *(char*) 0x14cf71d == 0) {
-            p2c = d40;
-            p28 = (int) f1;
-            f1 = (float) p24;
-        } else {
-            p24 = (int) f1;
-            if (*(char*) 0x14cf72a != 0 || *(char*) 0x14cf71d != 0)
-                goto alt;
-        }
-        p24 = (int) f1;
-        p20 = d44;
-        p1c = (int) g;
-    } else {
-        f4 = f1;
-        if (*(char*) 0x14cf72a == 0 &&
-            (*(char*) 0x14cf71d == 0)) {
-            f3 = f1;
-            f4 = (float) p28;
-            goto set_both;
-        }
-    alt:
-        p28 = (int) f4;
-        p2c = (int) f3;
-        p18 = (int) g;
-        goto after;
-    set_both:
-        p2c = d40;
-        p28 = (int) f1;
-        p24 = (int) f1;
-        p20 = d44;
-        p1c = (int) g;
-    }
-after:
-    ok = (u8) fcn_00448cc0(h, &p20, &p2c, handle);
-    flag2 = (char) (ok >> 1);
-    bflag = (char) (ok & 1);
-    if (bflag != 0)
-        fcn_00438b40(*(int*) 0x1041d0c, &p18);
-    if (flag2 != 0 && *(int*) 0x1041d0c != *(int*) 0x6b8478 &&
-        *(int*) 0x1041d0c != *(int*) 0x6b847c &&
-        *(int*) 0x1041d0c != *(int*) 0x6b8480)
-        fcn_00438cb0(*(int*) 0x1041d0c, &d3c);
-no_update:
-    if (*(int*) 0x6b85b8 != 0 && *(int*) 0x14ce8cc != 0) {
-        *(int*) 0x6b85b8 = 0;
-        UpdateSceneLighting(1);
-        bflag = 1;
-    }
-    if (*(int*) 0x6b85bc != 0 && *(int*) 0x14ce8e0 != 0) {
-        *(int*) 0x6b85bc = 0;
-        UpdateSceneLighting(1);
-        bflag = 1;
-    }
-    u = fcn_00448b10();
-    if ((u | bflag) == 0 && flag2 == 0)
-        return 0;
-    return 1;
+	h = g_1041d0c;
+	dirty = 0;
+	changed = 0;
+	if (h == 0)
+		return 0;
+	handle = fcn_00449600(g_1041d68);
+	mx = g_14ce8c0;
+	ht = g_14ce864;
+	w = g_14ce860;
+	my = g_14ce8c2;
+	p28[0] = 0.0f;
+	p28[1] = 0.0f;
+	p28[2] = 0.0f;
+	p34[0] = 0.0f;
+	p34[1] = 0.0f;
+	p34[2] = 0.0f;
+	f04 = 0.0f;
+	f10 = 0.0f;
+	f14 = 0.0f;
+	ang = *(float*) 0x6628a8;
+	if (g_14ce8d0 != 0) {
+		if (g_6b85b8 == 0) {
+			g_6b85b0 = (int) mx;
+			g_6b85b8 = 1;
+			g_6b85b4 = (int) my;
+		}
+		else if (*(int*) (h + 0x218) != 0 && h != g_6b8478
+			&& h != g_6b847c && h != g_6b8480) {
+			if (g_67ab48 != 0) {
+				changed = 1;
+				dx = (int) mx - g_6b85b0;
+			}
+			else
+				dx = 0;
+			if (g_67ab49 != 0) {
+				changed = 1;
+				dy = (int) my - g_6b85b4;
+			}
+			else
+				dy = 0;
+			g_6b85b0 = (int) mx;
+			g_6b85b4 = (int) my;
+			ang = (float) dx / (float) w * *(float*) 0x6628fc;
+			f14 = (float) dy / (float) ht * *(float*) 0x6628fc;
+			h = g_1041d0c;
+		}
+	}
+	if (g_14ce8e4 != 0) {
+		if (g_6b85bc == 0) {
+			g_6b85bc = 1;
+			g_6b85b0 = (int) mx;
+			g_6b85b4 = (int) my;
+			goto check;
+		}
+		if (g_67ab48 != 0) {
+			dx = (int) mx - g_6b85b0;
+			dirty = 1;
+		}
+		else
+			dx = 0;
+		if (g_67ab49 != 0) {
+			dy = (int) my - g_6b85b4;
+			dirty = 1;
+		}
+		else
+			dy = 0;
+		f04 = (float) dx / (float) w;
+		g_6b85b4 = (int) my;
+		g_6b85b0 = (int) mx;
+		f10 = (float) ht;
+		a18[0] = (float) dy / f10;
+		r = ((float) fabs((float) dx) + 1.0f) * 30.0f / (float) w;
+		if (r > 3.0f)
+			r = 3.0f;
+		s = ((float) fabs((float) dy) + 1.0f) * 30.0f / (float) ht;
+		if (s > 3.0f)
+			s = 3.0f;
+		f10 = r * f04 * 256.0f;
+		f04 = s * a18[0] * -256.0f;
+		if (dirty != 0)
+			goto body;
+	}
+check:
+	if (changed == 0)
+		goto out;
+body:
+	if (h == g_6b8484) {
+		if (g_14cf72a == 0 && g_14cf71d == 0) {
+			p28[1] = ang;
+			p28[0] = f14;
+			goto both;
+		}
+		p28[2] = ang;
+		if (g_14cf72a == 0 && g_14cf71d == 0)
+			goto both;
+		p34[2] = f04;
+		goto call;
+	}
+	if (g_14cf72a != 0) {
+		p28[1] = ang;
+		p34[2] = f04;
+		goto call;
+	}
+	if (g_14cf71d != 0) {
+		p28[0] = ang;
+		p34[2] = f04;
+		goto call;
+	}
+	p28[2] = ang;
+both:
+	p34[0] = f10;
+	p34[1] = f04;
+call:
+	ok = (char) fcn_00448cc0(h, p34, handle, p28, p44, a18);
+	dirty = ok & 1;
+	changed = ok >> 1;
+	if (dirty != 0)
+		fcn_00438b40(g_1041d0c, p44);
+	if (changed != 0 && g_1041d0c != g_6b8478
+		&& g_1041d0c != g_6b847c && g_1041d0c != g_6b8480)
+		fcn_00438cb0(g_1041d0c, a18);
+out:
+	if (g_6b85b8 != 0 && g_14ce8cc != 0) {
+		g_6b85b8 = 0;
+		UpdateSceneLighting(1);
+		dirty = 1;
+	}
+	if (g_6b85bc != 0 && g_14ce8e0 != 0) {
+		g_6b85bc = 0;
+		UpdateSceneLighting(1);
+		dirty = 1;
+	}
+	ok = (char) fcn_00448b10();
+	if ((ok | dirty) == 0 && changed == 0)
+		return 0;
+	return 1;
 }

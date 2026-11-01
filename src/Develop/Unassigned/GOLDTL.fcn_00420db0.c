@@ -53,7 +53,7 @@ extern int g_14cbcb0;
 extern int g_6b7d40;
 
 void __cdecl fcn_00420b70(void);
-void __cdecl fcn_004208a0(int err);
+void __cdecl nt_LogWinsockError(int err);
 
 
 /* Opens a non-blocking TCP connection to host:port, waiting up to 16
@@ -118,7 +118,7 @@ int __cdecl fcn_00420db0(char* host, int port)
 		}
 		addr.sin_port = htons((unsigned short) port);
 		if (connect(s, &addr, 16) != 0 && WSAGetLastError() != 0x2733) {
-			fcn_004208a0(WSAGetLastError());
+			nt_LogWinsockError(WSAGetLastError());
 			goto fail;
 		}
 		tv.tv_sec = 0;
@@ -134,7 +134,7 @@ int __cdecl fcn_00420db0(char* host, int port)
 				goto connected;
 			}
 		}
-		fcn_004208a0(WSAGetLastError());
+		nt_LogWinsockError(WSAGetLastError());
 fail:
 		shutdown(s, 2);
 		closesocket(s);

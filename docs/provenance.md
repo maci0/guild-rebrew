@@ -11528,3 +11528,123 @@ pads kept. Rebuild after the revert: 2,981,888 bytes, raw 240,349, informative
 105,867.
 
 Decision: continuing. No GA was run.
+
+### 2026-11-01 — network diagnostic consolidation
+
+Moved the T&L `0x4208a0` binding to the existing `Units/net/net.c`
+`nt_LogWinsockError` definition and renamed its callers. The native diagnostic
+references `D:\\develop\\units\\net\\net.c`; the established name describes the
+observed role and is inferred. Server-only state and other network functions
+are guarded, and the client uses its existing logging provider. The original
+server definitions remain canonical. Decision owner: project owner.
+
+Verification: the T&L function is RELOC, 710/710 bytes with relocations masked;
+the logging call operands validate and string operands remain unresolved. The
+rebuilt server raw image is byte-identical to the pre-change baseline (SHA-256
+`3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`).
+The T&L full rebuild was interrupted after regeneration triggered a full
+recompile; its raw-link comparison, data placement, and caller verification
+remain outstanding. The pre-change image is `.scratch/net-reconcile/tl-before.exe`.
+
+### 2026-11-01 — network diagnostic literal ownership follow-up
+
+The first shared network link exposed duplicate Winsock string symbols in the
+T&L stub object. The shared unit now uses compiler literals in the client and
+keeps the server's named storage. Decision owner: project owner. All 34 literal
+references audit equal to native; `nt_LogWinsockError` remains RELOC 710/710.
+The server rebuild remains byte-identical to the pre-change raw image. The T&L
+link no longer reports duplicate Winsock symbols, but fails on six unresolved
+symbols in `GOLDTL.fcn_00419640.c` and `GOLDTL.fcn_00449630.c`, which have
+concurrent work. Raw-link comparison and data placement remain unverified.
+Caller checks: `0x420db0` NEAR 659/667, `0x421290` RELOC 183/183, and
+`0x4210a0` SIZE_MISMATCH 130/495. Receipts: `.scratch/net-reconcile/`.
+
+## 2026-11-01 — TL 0x441050 float store order and counter signedness
+
+`fcn_00441050` matched 541/980 bytes with signed loop counters and the scaled
+pair stored sx→w-0x20, sy→w-0x1c. The reference compares both cell counters
+with `jb` and stores the middle-loaded sum at w-0x20, so the edit uses unsigned
+`i`/`j` and scales/stores `sy` first. `rebrew test` now records 593/970 against
+the reference 931, frame still 0x0c versus the reference 0x18. The reference
+counter at `[esp+0x2c]` is the first parameter's home slot in that frame, not a
+second parameter's (a second parameter would sit at `[esp+0x30]`); a
+two-parameter trial scored 594/970 with a still smaller frame. Remaining gap is
+the inner cell loop and the v10 callback walk.
+
+Row A `0x45bfb0` stays 327/337, object 337. Nineteen source shapes were tested
+for the `q = p + 0x70` / field `+0x44` pair (typed 0x70 struct pointer, taken
+member address, int-cast and scaled-pointer arithmetic, split assignment,
+advance-pointer-first, per-access casts); every one folded to
+`lea eax, [ecx + 0xb4]`. Baseline restored.
+
+### 2026-11-01 — command-name ownership review
+
+The client `cm_ChkCutsceneReady` body at TL `0x4f6520` / Gold `0x4f4130`
+counts matching table entries and is not server `cm_ChkCutsceneReady`
+(`0x1000d260`), which checks readiness. Five TL callers at `0x5c0b73`,
+`0x5c07e0`, `0x5ca618`, `0x5cb0b0`, and `0x5cda4c` directly call
+`0x4f6520`. `CountMatchingTableEntries` is a possible inferred client name;
+no original spelling or prefix was established. Decision owner: project owner.
+The reviewed scoped rename was not applied: its input digest changed while
+other project work was updating the shared stores. No claim or name changed.
+The preview and native disassemblies are under `.scratch/net-reconcile/`.
+
+### 2026-11-01 — GoldTL `0x448360` scene loader body: geometry slot reuse
+
+`src/Develop/Units/d3/GOLDTL.fcn_00448360.c` moved from 132/1406 to 771/1406
+with the object at 1406 bytes, the reference size exactly (was 1353, 53 short).
+Still `STUB`, no claim of a byte match.
+
+Three source changes, each measured with
+`rebrew test ... --va 0x00448360 --size 1406 --no-promote`:
+
+- `dim` and `k` reuse `index` and `count`. The native frame proves one slot per
+  pair: `0x44847f` takes `&dim` at `[esp+0x10]` and `0x44852c` writes `index` to
+  the same slot; `0x4485b8` writes `k` to the slot `0x448647` later takes
+  `&count`. 132 → 223, object 1376.
+- The geometry rows are addressed as `g_1041d80 + index * 0x60 + n` instead of
+  a `row` pointer. The native recomputes `index * 0x60` per store
+  (`0x44854c`, `0x44859c`) and uses absolute bases, because all four callee-saved
+  registers are taken. 223 → 259, object 1397.
+- The inner six-entry loop reads both floats into one scratch float, as the
+  native does: `0x4485c7` and `0x4485f7` take the address of the same local
+  (`lea eax, [esp+0x28]` and `lea eax, [esp+0x30]`, one slot at `-0x124`),
+  instead of reusing `fog_a`/`fog_b`. 259 → 771, object 1406.
+
+Evidence: `.scratch/448360.native.json` (native disassembly), `.scratch/final.obj`
+with its objdump listing (the 771/1406 build), `.scratch/cfgslots.py` (CFG-aware
+`esp` propagation used to recover the native stack slots), and the per-call-site
+byte table from this session. All 39 call sites in the native
+disassembly match the object in order and symbol, so no statement is missing;
+the residual is register allocation and stack-slot placement.
+
+Open: the object frame is 300 bytes against the reference 308, so every
+`[esp+N]` displacement below `-0x104` differs; the reference has two extra
+four-byte slots (`-0x114`, unused, and `-0x124` for the discarded float). The
+`#pragma data_seg(".text") _dpad_6b870c[728]` pad in the same file was left
+alone; a pad pass that sizes from actual object bytes would now want 675.
+
+## 2026-11-01 — placed-row sweep and layout recovery
+
+The placed non-matching rows were swept in ten slices. Kept changes, all measured
+with promoted `rebrew test --size`:
+
+- `0x40F1C0` RELOC 371/371. The `kind` local was removing the compiler's single
+  `mov ecx,[ebx+0xc0]` and forcing motion into ebp; inlining the load at both uses
+  fixed the options schedule and the frame.
+- `0x41BF90` NEAR 503/510: moving `pixels += 3` after the count increment flipped
+  the schedule to the reference shape, plus signed loop casts for `jge`.
+- `0x4F0F60` 109/133, `0x44C6F0` 504/579, `0x44C6F0`, `0x416300` 420/576,
+  `0x4094C0` 669/1044, `0x451500` 180/536, `0x40F7C0` RELOC 336/336,
+  `0x5B8760` 318/324, `0x44C6F0` 504/579, `0x05B9980` NEAR 800/809,
+  `0x448360` 771/1406 with the exact reference size, `0x449630` 356/1133,
+  `0x419640` 118/845, `0x441050` 593/970, `0x50E170` 89/123.
+- Link scaffolding for the new bodies: `fcn_004225e0` placeholder and zero
+  definitions for `g_6b85b0/b4/b8/bc` and `g_1041d68`.
+
+Two size-changing rewrites (`0x449630`, `0x419640`) shifted the layout enough to
+cost about 46k raw bytes, so they were reverted and the lead pads retuned for the
+remaining changes (one pad, shift 0xE80). Rebuild: 2,981,888 bytes, raw 251,522,
+informative 115,657, no compile or link errors.
+
+Decision: continuing. No GA was run.

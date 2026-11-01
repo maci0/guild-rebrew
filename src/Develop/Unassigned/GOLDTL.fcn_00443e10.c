@@ -33,9 +33,9 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 	if (*(int*) (obj + 0x218) == 0) {
 		fcn_00455450(obj, *(char**) 0x6b8014, (Vec3*) (obj + 0x4c), (Vec3*) p);
 		t = *(float*) 0x6628a0 / p[2];
-		sx = p[0] * *(float*) 0x10432a4 * t + *(float*) 0x1052bc0;
-		sy = p[1] * *(float*) 0x1042584 * t + *(float*) 0x1052bc8;
-		d = *(float*) (obj + 0x68) * *(float*) 0x10432a4 * t * *(float*) 0x6628cc;
+		sx = *(float*) 0x10432a4 * p[0] * t + *(float*) 0x1052bc0;
+		sy = *(float*) 0x1042584 * p[1] * t + *(float*) 0x1052bc8;
+		d = *(float*) 0x10432a4 * *(float*) (obj + 0x68) * t * *(float*) 0x6628cc;
 		rc[0] = (int) (sx - d);
 		rc[2] = (int) (sx + d);
 		rc[1] = (int) (sy - d);
@@ -76,9 +76,17 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 		rc[3] = rc[3] > iy ? rc[3] : iy;
 		rec += 0x14;
 	} while (--i != 0);
-	rc[0] = rc[0] > *(int*) 0x1042570 ? rc[0] : *(int*) 0x1042570;
-	rc[2] = rc[2] < *(int*) 0x1042578 - 1 ? rc[2] : *(int*) 0x1042578 - 1;
-	rc[1] = rc[1] > *(int*) 0x1042574 ? rc[1] : *(int*) 0x1042574;
-	rc[3] = rc[3] < *(int*) 0x104257c - 1 ? rc[3] : *(int*) 0x104257c - 1;
+	if (rc[0] < *(int*) 0x1042570) {
+		rc[0] = *(int*) 0x1042570;
+	}
+	if (rc[2] > *(int*) 0x1042578 - 1) {
+		rc[2] = *(int*) 0x1042578 - 1;
+	}
+	if (rc[1] < *(int*) 0x1042574) {
+		rc[1] = *(int*) 0x1042574;
+	}
+	if (rc[3] > *(int*) 0x104257c - 1) {
+		rc[3] = *(int*) 0x104257c - 1;
+	}
 	return 1;
 }

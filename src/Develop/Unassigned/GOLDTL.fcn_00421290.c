@@ -8,7 +8,7 @@ extern int g_14cbca0;
 extern unsigned char* g_14cbca8;
 extern unsigned short g_14cbcae;
 #include "GOLDTL.fcn_00421290_gconf.h"
-void __cdecl fcn_004208a0(int err);
+void __cdecl nt_LogWinsockError(int err);
 void __cdecl fcn_00421050(void);
 void __cdecl fcn_00420ba0(unsigned char* p, unsigned int n, char flag);
 
@@ -29,7 +29,7 @@ int __cdecl fcn_00421290(void)
 		if (err == 10035) {
 			return 0;
 		}
-		fcn_004208a0(err);
+		nt_LogWinsockError(err);
 		fcn_00421050();
 		return 1;
 	}

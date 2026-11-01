@@ -10,7 +10,7 @@ extern int (__stdcall* g_662384)(unsigned int s, char* buf, int len, int flags);
 extern int (__stdcall* g_662364)(void);
 
 void __cdecl fcn_00421050(void);
-void __cdecl fcn_004208a0(int err);
+void __cdecl nt_LogWinsockError(int err);
 void __cdecl fcn_0064d41a(char* buf, char* fmt, int a, int b);
 void __cdecl fcn_00420ba0(char* buf, int len, int flag);
 
@@ -55,7 +55,7 @@ got_error:
 		if (err == 0x2733) {
 			return 0;
 		}
-		fcn_004208a0(err);
+		nt_LogWinsockError(err);
 		fcn_00421050();
 		return 1;
 	}

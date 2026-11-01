@@ -28,13 +28,10 @@ void __cdecl fcn_00451500(float* a, float angle, float* m)
 	m[10] = a[2];
 	fcn_004518a0(m + 8);
 	v4 = -(v5 * m[8] + v7 * m[10] + v6 * m[9]);
-	v5 = v4 * m[8] + v5;
-	m[4] = v5;
-	v6 = v4 * m[9] + v6;
-	m[5] = v6;
-	v7 = v4 * m[10] + v7;
-	m[6] = v7;
-	if ((float) sqrt(v5 * v5 + v6 * v6 + v7 * v7) < g_662ce8) {
+	m[4] = v4 * m[8] + v5;
+	m[5] = v4 * m[9] + v6;
+	m[6] = v4 * m[10] + v7;
+	if ((float) sqrt(m[4] * m[4] + m[5] * m[5] + m[6] * m[6]) < g_662ce8) {
 		v5 = -m[9];
 		m[4] = v5 * m[8] + g_662d60;
 		m[5] = v5 * m[9] + g_662d64;

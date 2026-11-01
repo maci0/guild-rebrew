@@ -15,6 +15,7 @@ typedef struct fcn_00452c60_Particle {
 	float f20;
 	float f24;
 	float f28;
+	float f2c;
 	unsigned int f30;
 	unsigned int f34;
 	float f38;

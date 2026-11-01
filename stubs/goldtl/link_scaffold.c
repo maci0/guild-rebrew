@@ -396,3 +396,6 @@ int __cdecl fcn_00401240(int a0) { return 0; }
 
 /* Placeholder for the import thunk at 0x5EAAF0 reached by the tail jmp at 0x5EAAE0. */
 void __cdecl fcn_005eaaf0(void) { }
+
+/* Placeholder for the 13-byte setter at 0x4225E0 (sets bit 0x10 at [obj+0x14]). */
+int __cdecl fcn_004225e0(void* obj) { return 0; }

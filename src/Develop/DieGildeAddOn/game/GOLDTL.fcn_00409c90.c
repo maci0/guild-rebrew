@@ -109,7 +109,7 @@ Lafter:
             memset((void *)(v4 + 0x90), 0, 0x80);
     }
     v9 = *(int *)(v6 + 0xf8);
-    if (!(v9 < *(int *)(v6 + 0xf0))) {
+    if (*(int *)(v6 + 0xf0) <= v9) {
         if (*(int *)(v6 + 0xf4)) {
             m_FreeTracked(*(void **)(v6 + 0xf4));
             *(int *)(v6 + 0xf4) = 0;

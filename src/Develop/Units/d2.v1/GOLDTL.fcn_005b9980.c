@@ -1,5 +1,5 @@
 extern int g_772514;
-extern int g_774970;
+extern unsigned short g_774970;
 extern unsigned char g_773d75;
 extern int g_14ce8e0;
 extern int g_774654;
@@ -22,7 +22,7 @@ extern int __cdecl fcn_005373e0(void *a0, int a1);
 extern void __cdecl fcn_00471e30(int a0);
 extern int __cdecl fcn_00469510(int a0);
 extern void __cdecl eval_ObjektPreis2Credits(int a0, int a1);
-extern int __cdecl fcn_00526010(char *a0, int a1, int a2);
+extern int __cdecl fcn_00526010(char *a0, int a1, unsigned char a2);
 extern int __cdecl fcn_0051e070(void);
 extern int __cdecl fcn_00526120(char *a0, int a1);
 extern void __cdecl fcn_0046f9b0(int a0, char *a1);

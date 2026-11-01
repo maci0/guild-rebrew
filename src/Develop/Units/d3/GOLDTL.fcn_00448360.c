@@ -57,13 +57,10 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 	int index;
 	int rows;
 	int color;
-	int dim;
-	int k;
 	char* s;
 	char* obj;
 	char* clone;
 	char* row;
-	char* slot;
 	char* universe;
 	unsigned char present;
 
@@ -98,11 +95,13 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 			g_6b86c4.z = vec.z;
 		}
 		if (version >= 0x3a6c00b3) {
-			dim = 0;
+			/* index doubles as the scene value written below, then as the
+			 * row counter of the geometry loop. */
+			index = 0;
 			if (version >= 0x3a6c00b7) {
-				fcn_004011f0(s, &dim);
+				fcn_004011f0(s, &index);
 			}
-			*(int*) (g_67a370 + 0xb4) = dim;
+			*(int*) (g_67a370 + 0xb4) = index;
 			fcn_004011f0(s, &color);
 			fcn_004011d0(s, &fog_a);
 			fcn_004011d0(s, &fog_b);
@@ -124,28 +123,28 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 			if (rows > 0) {
 				do {
 					fcn_00401280(s, &vec);
-					row = g_1041d80 + index * 0x60;
-					*(float*) row = vec.x;
-					*(float*) (row + 4) = vec.y;
-					*(float*) (row + 8) = vec.z;
+					*(float*) (g_1041d80 + index * 0x60) = vec.x;
+					*(float*) (g_1041d80 + index * 0x60 + 4) = vec.y;
+					*(float*) (g_1041d80 + index * 0x60 + 8) = vec.z;
 					if (version >= 0x3a6c00b3) {
 						if (version >= 0x3a6c00b5) {
 							fcn_00401280(s, &vec);
-							*(float*) (row + 0xc) = vec.x;
-							*(float*) (row + 0x10) = vec.y;
-							*(float*) (row + 0x14) = vec.z;
+							*(float*) (g_1041d80 + index * 0x60 + 0xc) = vec.x;
+							*(float*) (g_1041d80 + index * 0x60 + 0x10) = vec.y;
+							*(float*) (g_1041d80 + index * 0x60 + 0x14) = vec.z;
 						}
-						k = 0;
+						/* count is the per-row entry counter and later the
+						 * object count read after the geometry block. */
+						count = 0;
 						do {
 							fcn_004011f0(s, &color);
-							fcn_004011d0(s, &fog_a);
-							slot = g_1041d80 + 0x18 + (k + index * 8) * 12;
-							*(int*) slot = color;
-							*(float*) (slot + 4) = fog_a;
-							fcn_004011d0(s, &fog_b);
-							*(float*) (slot + 8) = fog_b;
-							k = k + 1;
-						} while (k < 6);
+							fcn_004011d0(s, &discarded);
+							*(int*) (g_1041d80 + 0x18 + (count + index * 8) * 12) = color;
+							*(float*) (g_1041d80 + 0x1c + (count + index * 8) * 12) = discarded;
+							fcn_004011d0(s, &discarded);
+							*(float*) (g_1041d80 + 0x20 + (count + index * 8) * 12) = discarded;
+							count = count + 1;
+						} while (count < 6);
 					}
 					index = index + 1;
 				} while (index < rows);
