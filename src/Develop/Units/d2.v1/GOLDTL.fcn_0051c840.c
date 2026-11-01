@@ -156,7 +156,7 @@ body:
 			p = buf - 1;
 			if (p[i] == '$') {
 				memmove(buf + i + 9, buf + i + 1, strlen(buf) - i);
-				memset(buf + i - 1, 0x20, 10);
+				memset(p + i, 0x20, 10);
 				break;
 			}
 			*(int*) (num + 0xc) = -1;
@@ -294,8 +294,8 @@ body:
 				*(int*) ((char*) base + 0x10161d4 +
 					 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
 				if (buf[i + 1] == 'a' || buf[i + 1] == 'n') {
-					if (*(int*) ((char*) base + 0x10161cc) == 0x53 ||
-					    *(int*) ((char*) base + 0x10161cc) == 0x55) {
+					if (*(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x53 ||
+					    *(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x55) {
 						*(int*) ((char*) base + 0x10161d4 +
 							 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
 					}

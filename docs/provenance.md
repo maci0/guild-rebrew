@@ -14573,3 +14573,97 @@ Pads retuned over three passes (34, then 21, then 15 changes). Rebuild 3,047,424
 bytes, raw 291,869, informative 155,527, no compile or link errors, sha256 0C031BCB.
 
 Decision: continuing. No GA was run.
+
+## 2026-11-02 — C queue-removal body for shared client work
+
+Decision owner: project maintainer. Replaced the first inline assembly clear
+in `fcn_004050c0` with the equivalent C `memset`. The earlier assembly entry
+was justified by matching instruction order after C matching failed; those
+facts do not establish original assembly under the current project policy.
+Gold `0x004047a0` and T&L `0x004050c0` have identical 110-byte native bodies;
+the C-only body compares NEAR_MATCHING 98/110 in both, and the neighboring
+T&L `fcn_00406120` remains RELOC 87/87 in scratch. This deliberately gives up
+the earlier assembly-assisted EXACT claim and makes the shared C candidate
+reviewable. Gold binding and complete raw-link comparison remain open.
+Evidence: `.scratch/counter-contract/{gold,tl}-queue-remove-{native,c-only}.json`
+and `tl-queue-06120-{before,c-only}.json`. Stored verification follows.
+
+Stored T&L verification now records the C-only queue removal as
+NEAR_MATCHING 98/110 and retains RELOC 87/87 for its neighboring function.
+Receipt: `.scratch/counter-contract/tl-queue-c-only-production.json`.
+
+T&L rebuilt after the C-only change. Imports, exports, and resources match the
+previous raw image, and imports/exports also match the native reference. Code
+placement and some data bytes differ; concurrent source edits prevent an
+isolated attribution. Receipts:
+`.scratch/counter-contract/tl-queue-c-only-{compare,reference}.json` and
+`tl-post-queue-c-only-build.log`.
+
+The T&L-only companion portion of the queue translation unit is now guarded
+with `#ifndef REBREW_GOLD` in preparation for sharing the queue-removal body.
+The pre-guard C-only Gold candidate and T&L companion comparisons are recorded
+above; binding and fresh target checks follow. The organization review reports
+no order cycle or source-owned storage, with the SDK `string.h` include
+unresolved by its scanner. Receipt:
+`.scratch/counter-contract/queue-remove-organize.json`.
+
+The earlier post-substring-cleanup all-target lint completed with zero errors
+and 8 server, 14 T&L, and 10 Gold warnings. Receipt:
+`.scratch/counter-contract/strstr-cleanup-lint.json`.
+
+## 2026-11-02 — share client task-queue removal
+
+Decision owner: project maintainer. Rebound Gold `0x004047a0` to the existing
+C-only `fcn_004050c0` definition in the shared client translation unit; the
+T&L-only companion is excluded from the Gold compilation with
+`#ifndef REBREW_GOLD`. Both native bodies are identical and a Gold native
+caller targets this address. Gold's earlier source claim had been retired
+when the address was absent from inventory; it is again a current 110-byte
+function start. The replacement earns a fresh verdict. Evidence:
+`.scratch/counter-contract/gold-queue-remove-rebind-locked-{preview,apply}.json`,
+`{gold,tl}-queue-remove-native.json`, and `gold-queue-caller-406210.json`.
+Fresh target tests and client builds follow; Gold currently lacks a raw-link
+baseline because of unrelated unresolved symbols.
+
+A fresh Gold object compiled with the build's target command contains
+`_fcn_004050c0` and excludes the T&L-only `_fcn_00406120`, confirming the
+preprocessor guard's object-level effect. Evidence:
+`.scratch/counter-contract/gold-queue-shared.obj`; full client builds remain
+in progress.
+
+Stored post-binding comparisons record the shared queue-removal body as
+NEAR_MATCHING 98/110 in both clients and its T&L-only companion as RELOC 87/87.
+Receipt: `.scratch/counter-contract/queue-remove-shared-postbind.json`.
+
+The Gold rebuild compiled the shared queue source without C errors and reached
+link. The prior eight `_fcn_004050c0` unresolved references are gone; the link
+still fails on 256 other unresolved names (previously 257 unique names), so no
+complete Gold PE or import comparison is available. Receipt:
+`.scratch/counter-contract/gold-post-queue-shared-build.log`.
+
+The post-sharing T&L rebuild stopped on compile errors in concurrently edited
+`GOLDTL.fcn_005ba910.c` (argument count and syntax errors); no complete raw
+image or import comparison resulted from that build. The shared queue source
+was not the reported error. Receipt:
+`.scratch/counter-contract/tl-post-queue-shared-build.log`.
+
+## 2026-11-02 — parser reaches one byte of native size
+
+- `0x51C840` 1162 -> 1246 with the object at 6047 bytes against native 6048: the
+  case-i merged a||n state check recomputes `(char*)(g_772514*0x3cc)` inline instead
+  of using the cached base, which is what the reference does at that one site.
+  Aligned identity 1229/1874, multiset 1548, same-offset 210. The alleged missing
+  four-byte prologue store is disproved: native and the object carry the same store
+  multiset at the same absolute slots, only the emission order differs, and the
+  streams resync at +0x6F.
+- `0x4DCF50` slot pass produced no net win and was reverted; the mechanism is now
+  known: native's shape is 12 scalar words, then msg 0x40..0x90, then an 8-word
+  handle block 0x90..0xb0 as a contiguous tail of the msg aggregate (proven by
+  embedding it inside the CMsg struct), but msg needs two fewer live scalars before
+  it and flags must share folterFile's slot before the rest can shift into place.
+
+Measurement note: the raw same-offset number is unstable while another session holds
+many uncommitted bodies in the shared tree; per-row verdicts above are the reliable
+record and a full rebuild will be re-measured once the tree settles.
+
+Decision: continuing. No GA was run.
