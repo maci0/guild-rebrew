@@ -4,10 +4,9 @@
  * 0x4e32b8/0x4e32be. */
 
 typedef struct {
-	char pad[8];         /* 0x18 */
-	char path[0x104];    /* 0x20 sprintf path buffer */
-	char msg[0x1fc];     /* 0x124 message buffer */
-	char big[0x1fb0];    /* 0x320 work buffer */
+	char path[0x100];    /* 0x18 sprintf path buffer */
+	char msg[0x200];     /* 0x118 message buffer */
+	char big[0x1fb8];    /* 0x318 work buffer */
 } Frame4e3020;
 
 int __cdecl gm_LookupEntityRecordById(void* p);

@@ -83,10 +83,11 @@ void __cdecl fcn_005aa480(void)
 			if (n == sel[2]) {
 				*(int*) 0x774654 = 1;
 			} else if (n == sel[0]) {
+				n = *(unsigned short*) 0x774970;
 				pb[0] = 3;
 				pb[1] = cur + 1;
 				pb[2] = 1;
-				fcn_004eb3e0((int) (0x7f4ca0 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c), pb);
+				fcn_004eb3e0((int) (0x7f4ca0 + (unsigned int) n * 0x21c), pb);
 				*(int*) 0x774654 = 1;
 			} else if (n == sel[1]) {
 				pa[0] = 3;

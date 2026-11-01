@@ -38,15 +38,16 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 	int p;
 	int r;
 
-	idx = -1;
-	res = 0;
 	for (i = 0; i < 136; i++) {
 		data[i] = 0;
 	}
+	timeout = *(unsigned short*) 0x774970;
+	idx = -1;
+	res = 0;
 	data[0] = 1;
-	r = gm_WalkEntityChain(*(unsigned short*) (*(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0));
+	r = gm_WalkEntityChain(*(unsigned short*) (timeout * 0x21c + 0x7f4ca0));
 	timeout = (int) ((float) r * 0.0085f);
-	if (fcn_004fa5b0(0x1b, *(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0, &data[1]) & 2) {
+	if (fcn_004fa5b0(0x1b, *(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0, data) & 2) {
 		timeout /= 2;
 	}
 	p = fcn_005463a0(2, 2, *(unsigned short*) 0x774970, 0, 0x1a);

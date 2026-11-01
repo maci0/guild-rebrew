@@ -10,8 +10,8 @@ int __cdecl fcn_004903c0(char* obj, int unused, int* out)
 {
 	float t;
 	float v10;
-	float fB;
 	float fC;
+	float fB;
 	float sum;
 	float q;
 	int kind;
@@ -38,7 +38,7 @@ int __cdecl fcn_004903c0(char* obj, int unused, int* out)
 	q = (float) e / sum;
 	fcn_004f4830(0, info);
 	if (q > *(float*) 0x6628a0) {
-		if (fB > v10 && *(int*) (info + 0x18) < 2) {
+		if (fC > v10 && *(int*) (info + 0x18) < 2) {
 			*out = (fcn_0042e410(2) & 0xffff) + *(int*) (info + 0x18) + 1;
 			return 1;
 		}
@@ -47,8 +47,8 @@ int __cdecl fcn_004903c0(char* obj, int unused, int* out)
 			return 1;
 		}
 	} else {
-		if (v10 > fC && *(int*) (info + 0x18) > 2) {
-			*out = *(int*) (info + 0x1c) - (fcn_0042e410(3) & 0xffff) - 1;
+		if (v10 > fB && *(int*) (info + 0x18) > 2) {
+			*out = *(int*) (info + 0x18) - (fcn_0042e410(3) & 0xffff) - 1;
 			return 1;
 		}
 	}

@@ -17,8 +17,8 @@ void __cdecl fcn_0062a200(void* p);
 int __stdcall fcn_00613478(int mode)
 {
 	if (mode == 0) {
-		*(State613478*) 0x6ad638 = *(State613478*) 0x6ad720;
 		*(int*) 0x6ad80c = 0xffff;
+		*(State613478*) 0x6ad638 = *(State613478*) 0x6ad720;
 	} else if (*(int*) 0x6ad80c == 0xffff) {
 		*(int*) 0x6ad80c = 0;
 		*(State613478*) 0x6ad638 = *(State613478*) 0x6ad720;

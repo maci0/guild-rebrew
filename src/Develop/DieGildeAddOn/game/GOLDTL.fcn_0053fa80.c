@@ -115,13 +115,15 @@ void __cdecl fcn_0053fa80(void)
 		g_7e4538 = 0;
 	}
 	if (g_6b89c0 != 0) {
+		int ctx = g_6b89c0;
 		for (entry = (int*) 0x7e4540; (int) entry < 0x7e4558; entry++) {
 			if (*entry != 0) {
-				fcn_004597f0(g_6b89c0, *entry);
+				fcn_004597f0(ctx, *entry);
+				ctx = g_6b89c0;
 				*entry = 0;
 			}
 		}
-		fcn_00459b40(g_6b89c0);
+		fcn_00459b40(ctx);
 		g_6b89c0 = 0;
 	}
 	g_6b8061 = 0;

@@ -10758,3 +10758,593 @@ Thirteen names left the unresolved set and none were added. Twelve are the rebin
 
 Tag v1.8.0 publishes the integrated reconstruction work, naming passes, Gold rebinds, toolchain updates (Rebrew 6.9.0, Recoverage 8.7.1) and status documentation across the tree. Server remains 100% byte-identical (286,720 bytes) with 316/316 function and 652/652 data checks passing. GoldTL links without duplicate definitions, and its imports match the reference. Gold unresolved externals reduced to 269. Full project lint passes with 0 errors and 0 warnings.
 
+## 2026-11-01 — Three TL near rows match their reference bodies
+
+TL-only sources. Released Rebrew 6.9.0, canonical TU flags, `rebrew test` on each file. The linked image was not rebuilt.
+
+- `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00502450.c`: the loop at `0x5024e0` called `gm_AddObjekt`. The native continuation is `call 0x503e80` (`gm_FindNextFilteredEntity`). The local prototype keeps the existing `unsigned char*` return. Result RELOC 187/187, relocation at offset 112 VALIDATED. Sibling `0x502450` stays RELOC 131/131.
+- `src/Develop/DieGildeAddOn/game/fcn_004903c0.c`: native stores the `obj+0x100` term at `[esp+0x28]` and the `obj+0x10c` term at `[esp+0x24]`, then the high-price compare reads the `0x24` slot and the low-price compare reads the `0x28` slot. Declaring `fC` before `fB` and testing those terms in that order reproduces the homes. The low-price adjustment loads `info+0x18`. Result RELOC 434/434.
+- `src/Develop/DieGildeAddOn/game/fcn_004cd090.c`: the leave scan's tail was `add eax, 4` then `inc edi`. The increment clause `i++, q++` emits `inc edi` then `add eax, 4`. Result RELOC 528/528.
+
+Stored TL status after the three promotions: RELOC 3685, NEAR 92, EXACT 409, SIZE_MISMATCH 971, STUB 5. Accounted `.text` 1,346,114 / 2,491,370.
+
+Rejected in the same pass and restored: `0x593360` (`y += z` still emits `add ebx, edi`, 366/368) and `0x48ddd0` (reusing the index local for the sum grew the object from 444 to 450 bytes, 269/450). `0x4a0bb0` is still the SIB byte of `[esi+eax+0x74]`, and `0x4b64b0` is still `jl` versus `jb`. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x420db0 epilogue schedule does not move
+
+`nt_Connect` (`src/Develop/Unassigned/GOLDTL.fcn_00420db0.c`, 667 bytes) stays NEAR 659/667. The eight bytes are the host-null `je` (native target +0x290, the success pops; candidate target +0x204, the fail `or eax,-1`) and the fail epilogue order (`pop edi; pop esi; pop ebp; or eax,-1; pop ebx` against `or eax,-1` before those three pops). Under canonical `/O2 /Gd`, `return -1`, `goto done` through a shared result, and the single-exit form in `src/Develop/Units/net/net.c` compile to the same object. The source was restored. Blocker delta 8 is recorded on `GOLDTL.0x00420db0`. A four-line probe can jump to the success pop; this function's fail joins redirect that edge. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — Operand trials on three TL near rows, restored
+
+Each change was compiled with `rebrew test --dry-run` under the TL Processor Pack profile and restored because the object got worse.
+
+- `0x57de80`: the 4-byte gap is `movsx` versus `xor eax,eax; mov al` on the `0x40` bit, plus `jns` versus `jge` on the sign test. Widening the byte to `int` before the shift became `sar`/`and 1` and scored 186/196 against the previous 192/196. Isolated probes emit absolute `movsx` only for a bare signed-char return; masking that value collapses it.
+- `0x4b64b0`: native `cmp esi, 0x1007ba4; jl`. A signed `int` cursor and a signed compare of the existing pointer both grew the object from 204 to 207 bytes.
+- `0x4eea30`: the `0` and `1.0f` blocks are swapped, and the `jne`/`jp` displacements follow them, so the constants still match the compares. Placing the zero arm before the one arm scored 199/209 against the previous 203/209.
+
+Decision: continuing TL reconstruction.
+
+## 2026-11-01 — Calendar and message field order left the bytes unchanged or worse
+
+`0x59dcf0` already stores `g_7f4c08` in `v30` and `g_7f4c04` in `v2c`. The object carries those loads in the other registers, so the bound `_g_7f4c04` site compares against native `0x7f4c08`. Writing `v30` before `v28` scored 257/272. Forcing the two loads through temps stayed at 259/272. Restored.
+
+`0x5473a0` writes `msg.seed` before `msg.id`. Native loads `[esi+1]` before that seed store. Swapping the two assignments scored 172/188 against the previous 175/188. Restored.
+
+`0x5ce800`, `0x493be0`, `0x441400`, `0x465c60`, `0x401ed0`, and `0x413d10` differ by register or stack-slot choice. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4f4440 max-argument order restored
+
+`fcn_004f4440` clamps with `__min(1000000.0, v)`, `__max(v, 10000.0)`, then `__min(1000000.0, v)`. Native compares `1e6` with `test ah,5; jnp`, then `1e4` with `and eax,0x4100; jne`. Swapping the max operands to `__max(10000.0, v)` changed the second compare and grew the object. `rebrew test --dry-run` scored 114/269 against the previous 250/267. The original line was restored and retested at 250/267. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4c6090 flag-first load restored
+
+`fcn_004c6090` stores `*(t+4)` and then tests `*(t+0x170)`. Native loads `+0x170` before the store and tests after it. Hoisting that load into a local before the store shrank the object from 188 to 186 bytes. `rebrew test --dry-run` scored 95/188 against the previous 174/188. The original statements were restored and retested at 174/188. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x472680 writes the height sample into the width slot
+
+`fcn_00472680` calls `fcn_00472050(id, &h, &w)`. Native stores `h * type` at slot `+0x18` and `w * type` at `+0x1c`, and the same pairing for the division arm. The source had those products reversed. Swapping both arms scored NEAR 174/184, up from 170/184. The remaining 10 bytes are `sub eax, esi` scheduled after the `h`/`w` loads. `rebrew test` recorded the new verdict. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4131e0 third matrix row multiplies m[10] first
+
+`fcn_004131e0` computed the third output row as `m[10]*neg + (m[6]*scale + m[2]*scale)`. That evaluated the memory term first. Native multiplies `m[10]*neg`, then `m[6]*scale`, then the memory term. The left-associated sum scores NEAR 179/183, up from 165/183. The remaining 4 bytes are an x87 stack index (`fmul st(1)`/`st(3)` against `st(2)`) and the two `fld` slots those indexes select. `rebrew test` recorded the new verdict. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4131e0 third-row multiply order stays left-associated
+
+The live gap is four bytes: native `fld [esp+0x58]; fmul st(2); fld [esp+0x48]; fmul st(2)` against `fld [esp+0x48]; fmul st(1); fld [esp+0x58]; fmul st(3)`. Swapping the inner addends and declaring `scale` before `neg` both stayed at NEAR 179/183. Three statements load the native slots but emit `fmulp st(2)` because `neg` dies there, and the object shrinks to 181 bytes (135/183). Recomputing `scale` as `neg * *(float*)0x6628a8` in the next product grew the object to 189 (117/189). An inline comma, `(a = m[10]*neg, a + m[6]*scale)`, keeps both non-popping `fmul st(2)` and leaves the first product live, so the add is `fadd` plus a third `fstp` rather than `faddp` and the two native pops. Adding `neg * 0.0f` to keep `neg` live also gets both `fmul st(2)` and `faddp`, then emits `fxch` and a multiply by zero. The left-associated row was restored. `rebrew test --dry-run` confirmed NEAR 179/183, object 183, mismatches at offsets 126, 128, 132, and 134. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x5b44b0 pushes 0xffff in the null arm
+
+`fcn_005b44b0` loaded the entity word into one local and passed that local to `fcn_005463a0`. Both arms then shared `mov eax, imm; push eax`, and the pointer landed in ecx. Native tests the pointer in eax, zero-extends the word into ecx, `push ecx`, and the null arm is `push 0xffff` into the same call. Writing the call in each arm lets those tails merge. `rebrew test` recorded RELOC 54/54. The calls bind to `_fcn_005463a0` at 0x5463a0 and `_he_fn_Handlung` at 0x546320, both VALIDATED. TL-only. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x473610 stores the result before clearing the field
+
+`fcn_00473610` wrote `gp[9] = 0` before `*(int*) 0x14ce728 = r`. Native stores the return value first (`mov [0x14ce728], eax`) and then clears `[edx+0x24]`. Swapping those two assignments scores NEAR 31/33, up from 21/33. The remaining two bytes are the second global reload in ecx (`8b 0d`) instead of edx (`8b 15`), and the clear at `[ecx+0x24]` instead of `[edx+0x24]`. `rebrew test` recorded the new verdict. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4a70c0 address scale stays add-then-shift
+
+`fcn_004a70c0` copies a 16-byte record from `0x1007ce0 + idx * 16`. Native shifts the index (`shl eax, 4`) and then adds `0x1007ce0`. The candidate adds `0x1007ce` and then shifts, which is the same address because the base is 16-byte aligned. Writing `idx <<= 4` before the add stayed at NEAR 76/84 with the same eight bytes. The array index was restored. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4ce210 pointer local does not move the lea
+
+`fcn_004ce210` stores `g_9badd0` at `buf+0x14` and then passes `buf`. Native stores that dword and then executes `lea eax, [esp+4]; push eax`. The candidate forms the pointer first (`lea edx, [esp+4]`) and `push edx`. Assigning `char* p = buf` after the store and passing `p` compiles to the same object. `rebrew test` records NEAR 68/74 either way. The direct call was restored. The six differing bytes are that `lea`/`mov` pair and the `push`. `fcn_00473610` stays NEAR 31/33: the remaining reload is ecx versus edx. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4e7340 indexes the table by row
+
+`fcn_004e7340` walked a byte offset (`off += 0x194`, bound `0xc5440`). That put the table pointer in the SIB base and the offset in the index (`[eax+edi+9]`). Native uses the offset as the base (`[edi+eax+9]` and `[edi+eax+0x14]`). A row counter `row < 0x7d0` with `row * 0x194` strength-reduces to the same `add edi, 0x194; cmp edi, 0xc5440; jl` loop and gives the counter the base role. `rebrew test` recorded RELOC 77/77. The two `fcn_0041dd90` calls stay UNRESOLVED. TL-only. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x490c10 lower clamp stays a ternary
+
+`fcn_00490c10` clamps the scaled stat with `t = v < 4 ? v : 4` then `t = t < 1 ? 1 : t`. On the `v < 4` path native copies `mov esi, eax` and then `cmp esi, 1`. The candidate compares `eax` first. Replacing the second ternary with `if (t < 1) t = 1` stayed at NEAR 113/118, same five bytes. Copying through a second local shrank the object to 116 bytes and scored 51/118. The ternaries were restored and `rebrew test` recorded NEAR 113/118. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x509570 duplicate bounds check does not move the client
+
+`gm_GetEntityTableEntry` on the server is exact with two copies of `table_index >= 0 && table_index < 0x10`. The client has one copy. Native tests the masked index (`test eax, eax; jl`) and builds `index * 0xac` with `eax` kept as the index (`lea ecx, [eax*8]`). The client object copies the index to `ecx` first (`mov ecx, eax`) and multiplies in `eax`. Adding the server's empty second check to the client branch stayed at NEAR 54/65, the same eleven bytes. The single check was restored and `rebrew test` recorded NEAR 54/65. The server body was not edited. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4c6e20 copy-count setup stays after the link load
+
+`fcn_004c6e20` copies each 0x40-byte node with `memcpy` after `p = *(char**)(p + 0x3c)`. Native sets `mov ecx, 0x10` before `mov esi, ebx; mov ebx, [ebx+0x3c]`. The candidate loads the next pointer first. Moving `memcpy` ahead of the link load, with the next node read from `src`, scored NEAR 107/123 against 113/123. The original statement order was restored and `rebrew test` recorded NEAR 113/123. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4127a0 save-arm load split grows the object
+
+`fcn_004127a0` saves three globals and then copies `0x6b5c84` into `0x6b5c70`. Native loads that dword between the stores of the first and second saved values, using `eax` for the first value and the later load. Naming that load `d` and writing it between those stores grew the object from 130 to 132 bytes and scored 18/132. The inline load was restored and `rebrew test` recorded NEAR 95/130. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x45ec0 named sample stays ahead of the stores
+
+`fcn_00445ec0` loads `0x67bbe0` into `t1` before copying six dwords at `idx * 96`. Native loads `0x67bbdc` first and keeps one load ahead of each store. Inlining `t1` so every store reads its global directly scored STUB 66/135 against NEAR 82/135. The named load was restored and `rebrew test` recorded NEAR 82/135. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x57f9a0 index register stays ecx
+
+`fcn_0057f9a0` scans `0x7f4e0c` by `0x21c` for `g_774970`. Native keeps the index in `edx` and the record in `ecx` (`xor edx, edx`, `inc edx`, `lea eax, [edx+edx*2]`). The candidate uses `ecx` for the index and `edx` for the record. Declaring `rec` before `idx` stayed at NEAR 147/153, the same six bytes. The original declaration order was restored and `rebrew test` recorded NEAR 147/153. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x41b510 viewport stores stay with the arguments
+
+`fcn_0041b510` fills a 4-int viewport, then calls through the object at `0x6b5de0`. Native loads `0x14ce860` before storing `vp[0]`, and stores `vp[2]` after that object load. Computing both decremented edges first and storing `vp[2]` after the object load grew the object from 159 to 160 bytes and scored 34/160. The argument stores were restored and `rebrew test` recorded NEAR 122/159. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x436a00 keeps the node pointer in esi
+
+`fcn_00436a00` walks `p` and the child count. Native loads `p` into `edx` before `push esi`, and keeps the count in `esi`. The candidate pushes `esi` first and homes `p` there, with the count in `edx`. Declaring `count` before `owner` stayed at NEAR 117/159, the same 42 mismatch bytes. The original declaration order was restored and `rebrew test` recorded NEAR 117/159. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x402b80 for-loop matches the do-while
+
+`fcn_00402b80` counts non-null pointers at stride `0x194`. Native counts down in `edx` (`mov edx, 0x7d0`, `dec edx`) and loads each pointer into `esi`. The candidate homes the countdown in `esi`. A `for (i = 0x7d0; i != 0; --i)` loop stayed at NEAR 22/32, the same ten bytes as `do { ... } while (--i != 0)`. The do-while was restored and `rebrew test` recorded NEAR 22/32. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x473610 clean body loses the store order
+
+`fcn_00473610` is NEAR 31/33. Native reloads `g_77250c` into `edx` after the call and clears `[edx+0x24]`. The candidate uses `ecx`. A cleaned body, with the result stored before `gp[9] = 0`, scored NEAR 22/33 and put that store after the clear. The previous body was restored and `rebrew test` recorded NEAR 31/33. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4a70c0 pointer add stays add-then-shift
+
+`fcn_004a70c0` copies `Blk16` number `idx` from `0x1007ce0`. Native shifts the index (`shl eax, 4`) and then adds `0x1007ce0`. The candidate adds `0x1007ce` and then shifts. `row = (Blk16*) 0x1007ce0 + idx` stayed at NEAR 76/84, the same eight bytes as the array index and as `idx <<= 4` before the add. The array index was restored and `rebrew test` recorded NEAR 76/84. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x50b840 named table base stays
+
+`fcn_0050b840` keeps the id in `esi` and `lpGebaeudePROT` in `edi`. The candidate swaps those registers. Inlining the table base as `(*(unsigned char**) 0x868050)[...]` scored NEAR 83/136 against 125/136. The named `base` local was restored and `rebrew test` recorded NEAR 125/136. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x536b10 else-if does not retarget the returns
+
+`fcn_00536b10` returns through the `ret` at offset 125 when `g_6a2c20` is still -1 (`je +0x1f` and `je -0xb`). The candidate jumps to the final `ret` (`+0x3d` and `+0x13`). Writing the close path as `else if (g_6a2c20 != -1)` stayed at NEAR 154/156, the same two displacement bytes. The original `if` was restored and `rebrew test` recorded NEAR 154/156. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4f2ee0 named type-table pointer grows the frame
+
+`gv_ValidateEntityAction` reads the building type at `field_id * 589`. Native adds the field id to `lpGebaeudePROT` and scales the rest as `[edi+eax*4]`. The candidate builds the full offset first and reads it through `ebx`. `tp = g_entity_type_table + field_id; tp[field_id * 588]` grew the object from 161 to 182 bytes and scored 7/182. The subscript was restored and `rebrew test` recorded NEAR 138/161. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x509120 local entity pointer does not swap esi
+
+`fcn_00509120` keeps the entity in `esi` and the age in `edi`. The candidate uses `edi` for the entity and `esi` for the age, and the later divisors follow that swap. Copying `e` into `char* p` and reading the age and seed through `p` stayed at NEAR 124/161. The parameter was restored and `rebrew test` recorded NEAR 124/161. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x471e30 local index does not move a0 into ecx
+
+`fcn_00471e30` scales `a0` by 700 from `ecx` (`lea eax, [ecx*8]; sub eax, ecx`). The candidate keeps `a0` in `edx`. Copying `a0` into `int id` and using that for the compares and the scale stayed at NEAR 148/169, the same 21 mismatch bytes. The parameter was restored and `rebrew test` recorded NEAR 148/169. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x57c7b0 block-scoped half stays in ebx
+
+`fcn_0057c7b0` keeps the node in `ebx` and the value at `a+0x194` in `edi`. The candidate keeps the node in `edi` and that value in `ebx`. Moving the half into a block-scoped `h` stayed at NEAR 146/173, the same 27 mismatch bytes. The function-scoped `h` was restored and `rebrew test` recorded NEAR 146/173. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4c6940 field store stays after q+0x4c
+
+`fcn_004c6940` copies `q+0x4c` into the buffer and then `a0+0x24`. Native stores `a0+0x24` first and keeps the `q` fields in `esi`. Writing the `a0+0x24` store before the `q+0x4c` store shrank the object from 186 to 183 bytes and scored 64/186. The original store order was restored and `rebrew test` recorded NEAR 156/186. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x5aceb0 named id and count stay inline
+
+`fcn_005aceb0` prints each live entry as `io_AppendText(0x19ae, count + 1, *(unsigned short*) entry)` and then increments `count`. Native zero-extends that id with `xor edx, edx; mov dx` and forms `count + 1` with `lea`. The candidate uses `movzx` and `inc` between the pushes. An `unsigned short id` and a `shown` local stayed at NEAR 146/219, the same 73 mismatch bytes. The inline call was restored and `rebrew test` recorded NEAR 146/219. Decision: continuing TL reconstruction.
+
+## 2026-11-01 — TL 0x4f88d0 text-id sum stays in the call
+
+`fcn_004f88d0` passes `0x253 + (a1[9] ? 0x28 : 0) + a1[0x169]` straight into `io_FormatTextBuffer`. Native forms the buffer pointer, then `add eax, 0x253; add eax, edx`. The candidate folds the sum into `lea ecx, [eax + edx + 0x253]` and forms the buffer pointer afterward. Naming that sum `code` before the call compiled to the same 224 bytes, still 28 exact and 42 structural. The inline argument was restored and `rebrew test` recorded NEAR 196/224. Decision: continuing TL reconstruction. The next sourced near row is still open.
+
+## 2026-11-01 — TL 0x44d7e0 zero arm is the fallthrough
+
+`fcn_0044d7e0` recurses when a table slot has a nested kind. Native tests `rec[2]`, stores the incremented counter, and falls through the zero arm (`push` kind, `push` table) while `jnz` reaches the nested call. The `!= 0` test compiled the other way: `jz` to the zero arm, 147/228. Writing `if (rec[2] == 0)` first puts that arm in the fallthrough and `rebrew test` recorded NEAR 151/228. Decision: continuing TL reconstruction. Kind and extra remain swapped in `ebx` and `ebp`.
+
+## 2026-11-01 — TL 0x413d10 width declared after k stays
+
+`fcn_00413d10` keeps `k` at `[esp+0x10]` and `width` at `[esp+0x14]`. The candidate has those spills exchanged, and `acc` and `col` sit four bytes lower. Declaring `width` before `k` stayed at NEAR 216/229, the same 13 mismatch bytes, including `add ecx, eax` before `add ecx, edx`. The original declaration order was restored and `rebrew test` recorded NEAR 216/229. Decision: continuing TL reconstruction. The slot layout is still the open gap.
+
+## 2026-11-01 — TL 0x571140 clears the flag after the scaled float
+
+`fcn_00571140` writes `obj+0xc8` before the `obj+0xc4` float. Native finishes that float, loads `obj+0xb8`, and only then clears the flag. The early clear scored NEAR 173/243 and pushed the second 14-byte copy seven bytes out of line. Moving the clear to just after the `obj+0xc4` store lets that copy match, and `rebrew test` recorded NEAR 217/243. Decision: continuing TL reconstruction. The `* 0x41` scale still adds the index into the scaled register instead of into the table base.
+
+## 2026-11-01 — TL 0x493be0 parameter stays in esi
+
+`fcn_00493be0` keeps the object in `edi` and the truncated level in `esi`. The candidate loads the object into `esi` before `push edi`, then keeps the level in `edi`. Using `a0` directly, with no `char* p`, stayed at NEAR 237/249, the same 12 mismatch bytes. The local `p` was restored and `rebrew test` recorded NEAR 237/249. Decision: continuing TL reconstruction. The switch arms already match.
+
+## 2026-11-01 — TL 0x499950 scale multiply stays fld of the factor
+
+`fcn_00499950` writes each global as `constant * (b + 0x14)`. Native loads the constant, then `fmul` the factor. The candidate loads the factor, then `fmul` the constant, and stores the `fcn_004faaf0` result before the string push. Reversing all four products stayed at NEAR 213/250, the same 37 mismatch bytes. The constant-on-the-left products were restored and `rebrew test` recorded NEAR 213/250. Decision: continuing TL reconstruction. Operand order did not choose which value is loaded.
+
+## 2026-11-01 — TL 0x4ea350 index local stays after v
+
+`fcn_004ea350` takes `&v` in `ecx` and the second-loop field in `edx`. The candidate uses `eax` for the first `&v`, then `ecx` for that field and `edx` for the second `&v`. Declaring `n` before `v` stayed at NEAR 253/259, the same 6 mismatch bytes. The original declaration order was restored and `rebrew test` recorded NEAR 253/259. Decision: continuing TL reconstruction. Those three address temporaries are still the open gap.
+
+## 2026-11-01 — TL 0x4124b0 key store stays before stamp+9
+
+`fcn_004124b0` copies the current key into `dl`, adds 9 to the stamp, then stores `dl`. The candidate stores `al` first and copies into `dl` afterward. Adding 9 before the key store dropped the object to STUB 158/266. The store-before-add order was restored and `rebrew test` recorded NEAR 175/266. Decision: continuing TL reconstruction. The held-key reload still uses `esi` in the native body and `eax` in the candidate.
+
+## 2026-11-01 — TL 0x491570 width product stays in one expression
+
+`fcn_00491570` stores the width sample, then multiplies the y terms, and only then compares `job` with 5. The candidate compares `job` before that store. Splitting the y product into a subtraction and a multiply stayed at NEAR 243/266, the same 23 mismatch bytes. The single product expression was restored and `rebrew test` recorded NEAR 243/266. Decision: continuing TL reconstruction. The compare still sits in front of the width store.
+
+## 2026-11-01 — TL 0x491680 width store stays its own statement
+
+`fcn_00491680` has the same width-then-y schedule as `fcn_00491570`. Native stores the width sample before it compares `job`. Folding that store into the y product with a comma scored NEAR 238/266. The separate width statement was restored and `rebrew test` recorded NEAR 243/266. Decision: continuing TL reconstruction. The compare still precedes the width store.
+
+## 2026-11-01 — TL 0x5de9a0 field 0x0c stays the second store
+
+`fcn_005de9a0` loads both globals, stores `desc+0x08`, pushes the call arguments, then writes 0, `0x400`, 6, and `desc+0x0c`. The candidate pushes once before the second load and stores `desc+0x0c` ahead of the three immediates. Moving that store to the end scored NEAR 242/284. The original second-store position was restored and `rebrew test` recorded NEAR 246/284. Decision: continuing TL reconstruction. The first `push 0` still lands between the two global loads.
+
+## 2026-11-01 — TL 0x4918a0 last skill factor stays in the product
+
+`fcn_004918a0` leaves the skill value on the x87 stack, computes the three position samples, then multiplies by `flt_lit1_1`. The candidate multiplies and stores before those samples. Splitting that last factor into a later `v = v * flt_lit1_1` grew the object from 292 to 296 bytes and scored 160/296. The single product was restored and `rebrew test` recorded NEAR 227/292. Decision: continuing TL reconstruction. The factor still multiplies before the position samples.
+
+## 2026-11-01 — TL 0x48f4f0 index slot stays below the query slot
+
+`fcn_0048f4f0` keeps `idx` in the `q` argument slot and the widened random value in the `b1` slot. The candidate uses the `e` slot for `idx` and the `q` slot for that random value. Declaring `idx` before `found` stayed at NEAR 357/361, the same 4 mismatch bytes. The original declaration order was restored and `rebrew test` recorded NEAR 357/361. Decision: continuing TL reconstruction. Those two slots are still four bytes low.
+
+## 2026-11-01 — TL 0x40f1c0 kind load stays before the flag fields
+
+`fcn_0040f1c0` copies a zero flag byte into `dl`, then loads `motion+0xc0`. The candidate loads that kind first. Writing `queue`, `reverse`, and `loop` before the kind load scored NEAR 306/371. The kind load was restored ahead of those fields and `rebrew test` recorded NEAR 326/371. Decision: continuing TL reconstruction. `motion` remains in `ebp` where the native body uses `ebx`.
+
+## 2026-11-01 — TL 0x507130 duplicate skill arms stay separate
+
+`fcn_00507130` gives cases 5 and 2 their own `1, 0` bodies, and cases 1, 3, 14, 15, and 16 share the default body. Folding those five cases into `default` shrank the object from 400 to 332 bytes and scored 97/400. The separate arms were restored and `rebrew test` recorded NEAR 371/400. Decision: continuing TL reconstruction. Case 5 still stores `3, 2` where the native body stores `1, 0`.
+
+## 2026-11-01 — TL 0x5448e0 reads the exit flag before restoring the byte
+
+`fcn_005448e0` loads `0x77492c` before it writes `saved` back to `0x772d10`. The inline test loaded that flag after the store and scored NEAR 382/420. Saving the flag in `t` first, then restoring the byte, and `rebrew test` recorded NEAR 388/420. Decision: continuing TL reconstruction. The `0x6b5c90` clear still lands before the float spill.
+
+## 2026-11-01 — TL 0x479660 zero index is stored before the count test
+
+`fcn_00479660` stores the child index before `jna` on the empty count. The index assignment sat inside the `> 0` test, so the store followed the branch, NEAR 428/464. Moving `total = 0` ahead of both copies of that test and `rebrew test` recorded NEAR 434/464. Decision: continuing TL reconstruction. The payload size still uses `esi` where the native body uses `ecx`.
+
+## 2026-11-01 — TL 0x4a0bb0 table byte stays q[rnd + 0x74]
+
+`fcn_004a0bb0` reads the slot as `[esi + eax + 0x74]`, with the record pointer as the SIB base. `(q + 0x74)[rnd]` stayed at NEAR 491/492, the same SIB byte `0x30` against native `0x06`. The subscript `q[rnd + 0x74]` was restored and `rebrew test` recorded NEAR 491/492. Decision: continuing TL reconstruction. The base and index registers are still swapped.
+
+## 2026-11-01 — TL 0x524fc0 record pointer stays one induction variable
+
+`fcn_00524fc0` keeps the slot cursor at `0x9a9674` and addresses the first fields with negative displacements. The candidate rebases that cursor to `0x9a9668`. A separate advancing cursor, with a per-iteration copy for the field reads, grew the object from 498 to 512 bytes and scored 99/512. The single pointer was restored and `rebrew test` recorded NEAR 454/498. Decision: continuing TL reconstruction. The second field is still the `[ebx]` operand.
+
+## 2026-11-01 — TL 0x49a880 zero return stays behind the success test
+
+`fcn_0049a880` clears `eax` and then pops `edi` and `esi`. The `r == 0` path jumps to the pops and skips the clear. Writing that path as `if (r == 0) return 0` stayed at NEAR 500/505, the same 5 mismatch bytes. The `if (r != 0)` success arm was restored and `rebrew test` recorded NEAR 500/505. Decision: continuing TL reconstruction. The clear still sits between `pop esi` and `pop ebx`.
+
+## 2026-11-01 — TL 0x440670 slot address stays shift and mask
+
+`fcn_00440670` forms each sample slot as `(i >> 2) * 0x40 + (i & 3) * 0x10` and keeps one base pointer for the four stores. Writing that stride as `i * 0x10` shrank the object from 508 to 489 bytes and scored 297/508. The shift-and-mask address was restored and `rebrew test` recorded NEAR 364/508. Decision: continuing TL reconstruction. The index still lives in `eax` where the native body uses `ecx`.
+
+## 2026-11-01 — TL 0x53fa80 reloads the context before clearing the slot
+
+`fcn_0053fa80` reloads `g_6b89c0` after `fcn_004597f0`, pops the arguments, and then stores zero through the slot pointer. The inline clear ran before that reload and scored NEAR 502/509. Keeping the context in `ctx`, assigning `ctx = g_6b89c0` before `*entry = 0`, and passing `ctx` to `fcn_00459b40` made `rebrew test` record RELOC 509/509. Decision: continuing TL reconstruction. The shutdown order is unchanged.
+
+## 2026-11-01 — TL 0x427280 lexer position stays inside the subtraction
+
+`fcn_00427280` copies the lexer position into `esi` before the inlined `strlen`. The candidate scans the string first and copies the position afterward. Naming that position `lex` and using it for both the subtraction and the first token call stayed at NEAR 325/511, the same 188 mismatch bytes. The inline `LEX_427280` reads were restored and `rebrew test` recorded NEAR 325/511. Decision: continuing TL reconstruction. The copy still follows `repne scasb`.
+
+## 2026-11-01 — TL 0x506ab0 word store stays ahead of the byte clear
+
+`gm_KillSpieler` writes `ent+0x28` and then clears `ent+8`. Native clears the byte first. Swapping those stores scored NEAR 516/540. The word store was restored ahead of the byte clear and `rebrew test` recorded NEAR 519/540. Decision: continuing TL reconstruction. The `0xffff` store still precedes `mov ecx, 8`.
+
+## 2026-11-01 — TL 0x4d3c60 second id stays in the else-if chain
+
+`fcn_004d3c60` compares `g_772e9c` in `esi`, and loads `g_772e98` into `edx` only after that test fails. The candidate loads the second id before the frame. Reading it into `other` only inside the else stayed at NEAR 512/560, the same 48 mismatch bytes. The flat `else if` chain was restored and `rebrew test` recorded NEAR 512/560. Decision: continuing TL reconstruction. The first id still compares from `edx`.
+
+## 2026-11-01 — TL 0x44c6f0 switch copies stay direct stores
+
+`fcn_0044c6f0` loads three source dwords, stores the first, loads the tail byte or word, then stores the rest. Naming those values and storing them afterward shrank the object from 579 to 558 bytes and scored 83/579. The direct stores were restored and `rebrew test` recorded NEAR 491/579. Decision: continuing TL reconstruction. Each arm still stores a value before the next load.
+
+## 2026-11-01 — TL 0x4dc3a0 text id stays on a2
+
+`fcn_004dc3a0` reads the dialog word from `a2` in both `io_AppendText` arms. Native keeps `a1` in `esi` and reads the word from that register. Pointing both arms at `a1` shrank the object from 587 to 586 bytes and scored 382/587. The `a2` loads were restored and `rebrew test` recorded NEAR 404/587. Decision: continuing TL reconstruction. The fill still plants `-1` in `esi` before `cmp ebx, 4`.
+
+## 2026-11-01 — TL 0x4f0a30 ok clear stays before the first copy
+
+`fcn_004f0a30` stores `ok = 0` before copying `a2` into the packet. Native stores that zero after `rep movsd` and the argument push. Moving the clear next to `prio = 0` shrank the object from 594 to 584 bytes and scored 190/594. The clear was restored ahead of the copy and `rebrew test` recorded NEAR 555/594. Decision: continuing TL reconstruction. The first packet still stores `pkt[1]` before `pkt[2]`.
+
+## 2026-11-01 — TL 0x47c1f0 clip reloads stay on the globals
+
+`fcn_0047c1f0` reloads `g_67d968` into `ecx` and then `g_67d964` into `edx` after each float-to-int conversion. The candidate reloads those globals in the other order. Naming `bottom` and `right`, and assigning the bottom bound first, stayed at NEAR 603/607, the same four ModRM bytes. The direct compares were restored and `rebrew test` recorded NEAR 603/607. Decision: continuing TL reconstruction. The right bound still reloads with ModRM `0x15` where native uses `0x0d`.
+
+## 2026-11-01 — TL 0x495180 rate check stays `test eax, eax`
+
+`fcn_00495180` compares the rate callback's return with `cmp eax, esi`. The candidate uses `test eax, eax` at that one site; the pick result already compares with `cmp edx, esi`. An earlier explicit-temp and forced-materialisation trial measured the same 623/625 or worse and was reverted. This pass did not repeat it. Decision: continuing TL reconstruction. The rate check is still the two bytes at the `test`.
+
+## 2026-11-01 — TL 0x58e220 reads a2 after the entity lookup
+
+`fcn_0058e220` copies `a2` into `edi` before scaling `g_774970`. The candidate scales the index first and copies `a2` after the two `fcn_004fd9d0` calls. Naming that pointer `row` and reading it before the lookup stayed at NEAR 550/638, the same 91 mismatch bytes. The direct `a2->x4c` and `a2->x48` reads were restored and `rebrew test` recorded NEAR 550/638. Decision: continuing TL reconstruction. `edi` is still loaded after `add esp, 8`.
+
+## 2026-11-01 — TL 0x450e90 sort slot stays an indexed store
+
+`fcn_00450e90` scales the light count and then loads `g_1041d04`. The candidate loads the table first. Naming a `slot` pointer for the first loop shrank the object from 652 to 622 bytes and scored 148/652. The indexed stores were restored and `rebrew test` recorded NEAR 626/652. Decision: continuing TL reconstruction. The light count still lives in `esi` through that loop.
+
+## 2026-11-01 — TL 0x4e3020 frame buffers match the native slots
+
+`fcn_004e3020` places the sprintf path at allocation offset `0x18`, the message at `0x118`, and the work buffer at `0x318`. The old struct inserted an 8-byte pad and sized those arrays `0x104`, `0x1fc`, and `0x1fb0`, which shifted every `lea`. The arrays are now `0x100`, `0x200`, and `0x1fb8`, and `rebrew test` recorded NEAR 616/671, up from 610/671. Decision: continuing TL reconstruction. The `0x68bfb8` store still precedes the threshold table.
+
+## 2026-11-01 — TL 0x55a0b0 count test stays after the assignment
+
+`fcn_0055a0b0` tests the `fcn_004e8b80` return and only then spills it. The candidate spills the count before that test. Folding the assignment into `if ((cnt = ...) > 0)` stayed at NEAR 556/715, the same 159 mismatch bytes. The separate assignment was restored and `rebrew test` recorded NEAR 556/715. Decision: continuing TL reconstruction. The spill is still `mov [esp+0xc], eax` ahead of `test eax, eax`.
+
+## 2026-11-01 — TL 0x4e3020 threshold store stays a plain assignment
+
+`fcn_004e3020` writes the six thresholds, sets `state` to 6, then stores `0x702c6` at `0x68bfb8`. The candidate stores that global before the table. Marking the store `volatile` stayed at NEAR 616/671, the same 55 mismatch bytes. The plain store was restored and `rebrew test` recorded NEAR 616/671. Decision: continuing TL reconstruction. `0x68bfb8` is still written before `mov [esp+8], 8`.
+
+## 2026-11-01 — TL 0x441400 offset init stays after the pointer save
+
+`fcn_00441400` materializes the occupant offset `0x14` in `ebx` and then saves the mesh pointer. The candidate saves the pointer first. Writing `k = 0` before that pointer in the first loop header stayed at NEAR 712/725, the same 13 mismatch bytes. The pointer-first header was restored and `rebrew test` recorded NEAR 712/725. Decision: continuing TL reconstruction. `mov [esp+0x10], eax` still precedes `mov ebx, 0x14`.
+
+## 2026-11-01 — TL 0x57e880 stamps the clock before the argument
+
+`fcn_0057e880` stores `since` and then, when `b` is nonzero, stores `arg`. The candidate tested `b` first and wrote `arg` before the clock. Moving the clock store ahead of that test raised the score from 703/763 to 709/763. `rebrew test` recorded NEAR 709/763. Decision: continuing TL reconstruction. `want = 5` still precedes the clock store.
+
+## 2026-11-01 — TL 0x437bc0 sine stays after the cosine store
+
+`fcn_00437bc0` computes `fsin` and then `fcos` for each half-angle, and stores the cosine first. Naming `s` before `c` and assigning those locals before the array stores stayed at NEAR 528/796, the same 268 mismatch bytes. The cosine-first stores were restored and `rebrew test` recorded NEAR 528/796. Decision: continuing TL reconstruction. The first angle still spills with `fstp` before `fcos`.
+
+## 2026-11-01 — TL 0x48eba0 count record stays beside the slot table
+
+`fcn_0048eba0` places `cnt` directly against the slot array. The candidate leaves an 8-byte hole there. Moving `F8` into the `idx == 6` block stayed at NEAR 854/898, the same 45 mismatch bytes. The function-scope `F8` was restored and `rebrew test` recorded NEAR 854/898. Decision: continuing TL reconstruction. `&cnt` is still `lea eax, [esp+0x14]`. `0x57a3d0` remains the recorded two-byte `[esp+0x18]` spill; that search was not repeated.
+
+## 2026-11-01 — TL 0x5aa480 first packet stays index-zero first
+
+`fcn_005aa480` writes `pb[1]`, then `pb[0]`, then `pb[2]`, with the guild-hall word load in between. The candidate writes `pb[0]` first. Storing `pb[1]` before `pb[0]` stayed at NEAR 928/982, the same 54 mismatch bytes. The original field order was restored and `rebrew test` recorded NEAR 928/982. Decision: continuing TL reconstruction. `pb[0] = 3` still precedes `pb[1] = cur + 1`.
+
+## 2026-11-01 — TL 0x513d40 lookup stays ahead of the list load
+
+`fcn_00513d40` loads `q.list[j]` into `edi` before `fcn_00439750`. The candidate calls that lookup first. Loading the list entry before the call scored NEAR 863/991. The call-first order was restored and `rebrew test` recorded NEAR 889/991. Decision: continuing TL reconstruction. The loop still opens with `push 2` before the list load.
+
+## 2026-11-01 — TL 0x5bf9e0 passes the data record itself
+
+`fcn_005bf9e0` calls `fcn_004fa5b0` with a pointer 4 bytes below `&data[1]`, which is the start of `data`. Passing `&data[1]` scored NEAR 886/1036. Passing `data` raised it to 887/1036. `rebrew test` recorded NEAR 887/1036. Decision: continuing TL reconstruction. `idx = -1` still follows the guild-hall word load.
+
+## 2026-11-01 — TL 0x58bfd0 sentinel stays an immediate
+
+`fcn_0058bfd0` builds `-1` with `or ebp, -1` before it loads the menu table. The candidate compares and stores the immediate. Naming that value `neg` and assigning it after `n = 0` stayed at NEAR 951/1077, the same 126 mismatch bytes. The immediate `-1` was restored and `rebrew test` recorded NEAR 951/1077. Decision: continuing TL reconstruction. The count still starts in `ebx`.
+
+## 2026-11-01 — TL 0x589d00 query flags stay in source order
+
+`fcn_00589d00` writes `q[0]`, then `q[1]`, then `q[4]` after the argument pushes. The candidate writes `q[1]`, `q[4]`, `q[0]` before those pushes. Reordering the three assignments to the native store order scored NEAR 1137/1350. The source order was restored and `rebrew test` recorded NEAR 1141/1350. Decision: continuing TL reconstruction. `q[1] = 0x400` still precedes `q[0] = 1`. `ahm_ExAllocAlchemist` at TL `0x4ee290` stays shared with the exact server body and was not edited.
+
+## 2026-11-01 — TL 0x565ab0 plant byte stays a prior load
+
+`fcn_00565ab0` loads `p[-5]` before the byte at `v6 + 0x42`. The candidate loads that plant byte first. Folding the load into the plot comparison scored NEAR 1299/1560, the same 264 mismatch bytes. The prior assignment was restored and `rebrew test` recorded NEAR 1299/1560. Decision: continuing TL reconstruction. The plant byte is still loaded before `p[-5]`.
+
+## 2026-11-01 — TL 0x57d0d0 array zero stays an initializer
+
+`fcn_0057d0d0` zeros `objs[3]` after it takes the address of the id list. The initializer writes that slot earlier and stores `objs[0]` from `ebp`. Explicit stores, with `found = n` and `objs[3] = 0` after the address, scored STUB 740/1802. The initializer was restored and `rebrew test` recorded NEAR 1788/1802. Decision: continuing TL reconstruction. `objs[0]` is still stored from `ebp`.
+
+## 2026-11-01 — TL 0x5816f0 is already reloc, 0x4c7c50 stays shared
+
+`rebrew test` records `fcn_005816f0` as RELOC 1839/1839. `cm_ExSellObjekt` at TL `0x4c7c50` is NEAR 2061 in `command.c`, the same body as server `0x1000d930`, which is EXACT 2057. That body was not edited. Decision: continuing TL reconstruction. The next sourced TL near-miss is `0x580e20`.
+
+## 2026-11-01 — TL 0x580e20 is reloc, 0x4ce210 keeps the global store first
+
+`rebrew test` records `fcn_00580e20` as RELOC 2254/2254. `fcn_004ce210` stores `g_9badd0` before it takes the buffer address. Moving that store below the flag, the byte, and the argument scored SIZE_MISMATCH 26/74 with an object of 75 bytes. The earlier store was restored and `rebrew test` recorded NEAR 68/74. Decision: continuing TL reconstruction. `g_9badd0` is still stored before the byte `0x5f`.
+
+## 2026-11-01 — TL 0x4763e0 source pointer keeps the pitch term first
+
+`fcn_004763e0` adds `sbase` to the source cursor before `src->bits`. The candidate adds `src->bits` first. Writing the pointer as `src->bits + src->pitch * y + sbase` scored NEAR 556/570. The pitch-first sum was restored and `rebrew test` recorded NEAR 556/570. Decision: continuing TL reconstruction. The count shift still sits before `add edi, ebp`.
+
+## 2026-11-01 — TL 0x495180 body was already restored, 0x4c3800 flag stays volatile
+
+`fcn_00495180` matches the kept rate check `if ((res2 = plan->rate(...)) == 0)`. The working tree for that file has no edit past the last commit, so the cancelled restore left the body as the 623/625 form. `fcn_004c3800` pops `esi` after `test ebx, ebx`. Dropping `volatile` from `flag` shrank the object from 417 to 406 bytes and scored 170/417. The volatile local was restored and `rebrew test` recorded NEAR 398/417. Decision: continuing TL reconstruction. `pop esi` still sits before the `je` that skips the flag store.
+
+## 2026-11-01 — TL 0x465c60 offset stays added after the table
+
+`fcn_00465c60` addresses each archive slot as `[edi+eax+0x34]`, with the byte offset in `edi`. The candidate uses `[eax+esi+0x34]`. Writing the sum as `off + table` stayed at NEAR 489/500, the same eleven register and SIB bytes. The `table + off` sum was restored and `rebrew test` recorded NEAR 489/500. Decision: continuing TL reconstruction. The offset is still added in `esi`.
+
+## 2026-11-01 — TL 0x5ce800 flags stay a direct parameter
+
+`fcn_005ce800` keeps the config flags in `esi` and the slot pointer in `edi`. The candidate swaps those registers. Naming the flags `fl` and masking that local scored NEAR 495/513 against 497/513. The direct `flags` reads were restored and `rebrew test` recorded NEAR 497/513. Decision: continuing TL reconstruction. The first bit is still `mov ebp, edi` on the candidate.
+
+## 2026-11-01 — TL 0x4763e0 row offset stays inside the memcpy
+
+`fcn_004763e0` adds `sbase` to the source row before `src->bits`. The candidate adds `src->bits` first. Computing `soff = src->pitch * y + sbase` and passing `src->bits + soff` stayed at NEAR 556/570, the same 14 bytes. The inline sum was restored and `rebrew test` recorded NEAR 556/570. Decision: continuing TL reconstruction. `shr ecx, 2` still follows `add edi, ebp`.
+
+## 2026-11-01 — TL 0x420db0 null host still takes the fail exit
+
+`fcn_00420db0` builds `-1` for `g_14cbca0` and, when `host` is null, jumps to the success pops at offset `0x290`. The candidate jumps to offset `0x204`. Returning that same `-1` through `rc` stayed at NEAR 659/667, the same eight bytes. The direct `return -1` was restored and `rebrew test` recorded NEAR 659/667. Decision: continuing TL reconstruction. The fail epilogue still executes `or eax, -1` before `pop edi`.
+
+## 2026-11-01 — TL 0x545780 link store stays on the old slot
+
+Every live TL near-miss larger than `0x420db0` already has a shape trial. `fcn_00545780` stores `v3[-2]`, then `*v1`, then the back-link. The candidate stores the back-link first. Reading that link through `*v1` stayed at NEAR 285/295, the same ten bytes. The `v3[-1]` address was restored and `rebrew test` recorded NEAR 285/295. Decision: continuing TL reconstruction. `*v3 = -1` still follows the `v3[-3]` compare.
+
+## 2026-11-01 — TL 0x445ec0 sample load stays before the first store
+
+`fcn_00445ec0` loads `0x67bbdc` and then `0x67bbe0` before it writes `base + 0x1041d80`. The candidate loads `0x67bbe0` into `t1` first. Moving that load to after the first store scored STUB 66/135. The early `t1` load was restored and `rebrew test` recorded NEAR 82/135. Decision: continuing TL reconstruction. Each later store still lands before the next global load.
+
+## 2026-11-01 — TL 0x420bf0 multiply stays on the row count
+
+`fcn_00420bf0` multiplies the row count by `g_662c38` and then divides. Two `fdivp` instructions sit before the next integer spill. Writing `g_662c38 * (double) p[n]` first stayed at NEAR 288/302, the same 14 bytes. The count-first product was restored and `rebrew test` recorded NEAR 288/302. Decision: continuing TL reconstruction. Those two `fdivp` instructions still follow the spill of the next count.
+
+## 2026-11-01 — TL 0x45bfb0 inner loop stays compare-first
+
+`fcn_0045bfb0` advances the inner record with `add ecx, 0x70` and then compares the index. The candidate compares first and reads the field at `ecx + 0xb4`. Advancing `q` at the start of an open `for` scored NEAR 323/337. The `for (j = i + 1; j < g_10404a0; j++, q += 0x70)` loop was restored and `rebrew test` recorded NEAR 327/337. Decision: continuing TL reconstruction. The inner pointer still steps after the index compare.
+
+## 2026-11-01 — TL 0x40ed40 layer stays inside the field store
+
+`fcn_0040ed40` builds the animation layer in `cl` with `setne`, `dec`, `and 8`, and `or 0x10` before it opens the by-value slot. The candidate opens that slot first. Naming the layer byte and assigning it before `options.layer` stayed at NEAR 342/398, the same 56 mismatch bytes. The inline field store was restored and `rebrew test` recorded NEAR 342/398. Decision: continuing TL reconstruction. `sub esp, 0xc` still precedes the `or cl, 0x10`.
+
+## 2026-11-01 — TL 0x48ddd0 sum keeps its own spill
+
+`fcn_0048ddd0` reuses the `gm_RandomMod` spill at `[esp+0x18]` when it converts `total` to float. The candidate spills `total` at `[esp+0x10]`. Feeding `total` with that random value first grew the object from 444 to 448 bytes and scored 20/444. The separate `gm_RandomMod` call was restored and `rebrew test` recorded NEAR 442/444. Decision: continuing TL reconstruction. The `total` conversion still uses `[esp+0x10]`.
+
+## 2026-11-01 — TL 0x57a3d0 skill byte stays an inline compare
+
+`fcn_0057a3d0` spills the skill byte at `[esp+0x18]` before `fild`. The candidate spills it at `[esp+0x10]`. Storing that byte in `add` before the `252.0f` test grew the object from 801 to 817 bytes and scored 128/801. The inline compare was restored and `rebrew test` recorded NEAR 799/801. Decision: continuing TL reconstruction. The skill-byte `fild` still uses `[esp+0x10]`.
+
+## 2026-11-01 — TL 0x593360 sum stays in the y register
+
+`fcn_00593360` adds `y + z` as `add ebx, edi` and pushes `ebx`. Native adds into `edi` and pushes that register. Accumulating with `z += y` stayed at NEAR 366/368, the same two bytes. The `y + z` call was restored and `rebrew test` recorded NEAR 366/368. Decision: continuing TL reconstruction. The sum is still `add ebx, edi`.
+
+## 2026-11-01 — TL 0x5aa480 loads the guild-hall index before the first packet
+
+`fcn_005aa480` reloads `0x774970` before it finishes the `pb` stores. The candidate stored `pb[0]`, `pb[1]`, and `pb[2]` first. Naming that index in `n` before those three stores raised the score from 928/982 to 958/982. `rebrew test` recorded NEAR 958/982. The same load ahead of the `pa` stores grew the object to 983 bytes and scored 766/982, so that arm still reads the word in the call. Writing `pa[2]` before `pa[0]` stayed at 958/982. Decision: continuing TL reconstruction. The second packet still loads the word after `push eax`. Storing that load in `j` also grew the object to 983 bytes and scored 766/982.
+
+## 2026-11-01 — TL 0x472680 samples stay ahead of the slot store
+
+`fcn_00472680` finishes `sub eax, esi` before it reloads the height and width. The candidate reloads those samples between `shl eax, 6` and that subtract. Storing `f80` before the copies scored NEAR 143/184. The copies were restored ahead of the store and `rebrew test` recorded NEAR 174/184. Decision: continuing TL reconstruction. `sub eax, esi` still follows the two sample loads.
+
+## 2026-11-01 — TL 0x513d40 last corner store stays inside the for
+
+`fcn_00513d40` steps the vertex pointer and decrements the count before the last `fstp`. The candidate stores that corner first. Holding the value in `h2` and writing it after `i++` stayed at NEAR 889/991. The `for` loop was restored and `rebrew test` recorded NEAR 889/991. Decision: continuing TL reconstruction. The last `fstp` still precedes `add ecx, 0x50`.
+
+## 2026-11-01 — TL 0x5bf9e0 loads the guild-hall word before idx
+
+`fcn_005bf9e0` reads `0x774970` before it stores `idx`, `res`, and `data[0]`. The candidate stored `data[0]` first. Saving that word in `timeout` and writing `idx` and `res` after the clear raised the score from 887/1036 to 894/1036. `rebrew test` recorded NEAR 894/1036. Decision: continuing TL reconstruction. The official match count is 894 of 1036.
+
+## 2026-11-01 — TL 0x58bfd0 steps the row after the stat index
+
+`fcn_0058bfd0` increments the stat index and then adds `0xd` to the row. The candidate added `0xd` first. Writing `j++` before `y += 0xd` raised the score from 951/1077 to 955/1077. `rebrew test` recorded NEAR 955/1077. Decision: continuing TL reconstruction. The count still starts with `xor ebx, ebx`.
+
+## 2026-11-01 — TL 0x589d00 entity word stays inside the request address
+
+`fcn_00589d00` loads `a0 + 0x27` between the `0x36` byte and the `-1` store, and it adjusts the stack before those stores. The candidate adjusts the stack after them. Saving that word in `id` between the byte stores stayed at NEAR 1141/1350. The inline address was restored and `rebrew test` recorded NEAR 1141/1350. Decision: continuing TL reconstruction. `add esp, 0x18` still follows the request stores.
+
+## 2026-11-01 — TL 0x565ab0 plot byte stays inside the compare
+
+`fcn_00565ab0` loads `p[-5]` before the plant byte at `v6 + 0x42`. The candidate loads the plant byte first. Saving `p[-5]` in `plot` before that load grew the object from 1560 to 1576 bytes and scored 1122/1560. The inline `p[-5]` was restored and `rebrew test` recorded NEAR 1299/1560. Decision: continuing TL reconstruction. `mov al, [ebp-5]` still follows the plant load.
+
+## 2026-11-01 — TL 0x57d0d0 zero order stays the initializer
+
+`fcn_0057d0d0` zeros `objs[0]`, `objs[1]`, `found`, and `objs[2]`, takes the id-list address, then zeros `objs[3]`. Writing those stores in that order scored STUB 740/1802. The initializer was restored and `rebrew test` recorded NEAR 1788/1802. Decision: continuing TL reconstruction. `objs[0]` is still stored from `ebp`.
+
+## 2026-11-01 — TL 0x571140 scale stays a multiply by 0x41
+
+`fcn_00571140` adds `index << 6` into the object table and then adds the index in the load. The candidate adds the index into the shifted register. Saving the table and the index and writing `(id << 6) + id` stayed at NEAR 217/243. The `* 0x41` address was restored and `rebrew test` recorded NEAR 217/243. Decision: continuing TL reconstruction. `add ecx, eax` still forms the scale. `cm_ExSellObjekt` at `0x4c7c50` stays shared with the exact server body and was not edited.
+
+## 2026-11-01 — TL 0x580e20 is reloc, 0x5473a0 keeps the seed store first
+
+`fcn_00580e20` is already RELOC 2254/2254, so it was not edited. `fcn_005473a0` loads `[esi+1]` before it stores `msg.seed`. The candidate stores the seed first. Holding the seed and that id in locals grew the object from 188 to 189 bytes and scored 97/188. The direct stores were restored and `rebrew test` recorded NEAR 175/188. Decision: continuing TL reconstruction. `mov edx, [esi+1]` still follows the seed store.
+
+## 2026-11-01 — TL 0x57de80 sign test stays an inline compare
+
+`fcn_0057de80` tests the guild byte with `test al, al` and jumps with `jns`. The candidate uses `jge`. Naming that byte `sign` and comparing `sign >= 0` stayed at NEAR 192/196, the same four bytes. The inline compare was restored and `rebrew test` recorded NEAR 192/196. Decision: continuing TL reconstruction. The `0x40` arm still zero-extends with `mov al`.
+
+## 2026-11-01 — TL 0x4eea30 raw sample stays the nested fallthrough
+
+Provenance already records the `0x4b64b0` `jl` versus `jb` wall. `fcn_004eea30` stores `0` in the first out-of-line block and `1.0f` in the second. The candidate stores `1.0f` first. Sending the zero case to a label ahead of the one case scored NEAR 152/209. The nested compares were restored and `rebrew test` recorded NEAR 203/209. Decision: continuing TL reconstruction. The `jne` still targets the `1.0f` block.
+
+## 2026-11-01 — TL 0x5aceb0 displayed count stays an inline sum
+
+`fcn_005aceb0` forms `count + 1` with `lea` and copies that register back to `edi`. The candidate increments `edi` between the pushes. Writing the sum into `next` and assigning it back after the call stayed at NEAR 146/219, the same 73 mismatch bytes. The inline `count + 1` was restored and `rebrew test` recorded NEAR 146/219. Decision: continuing TL reconstruction. The id is still `movzx`.
+
+## 2026-11-01 — TL 0x4f88d0 buffer pointer stays an argument
+
+`fcn_004f88d0` takes the address of `buf` before it adds `0x253` and the skill byte. The candidate folds that sum into `lea` and takes the address afterward. Saving `buf` in `out` before the call stayed at NEAR 196/224, the same 28 mismatch bytes. The direct `buf` argument was restored and `rebrew test` recorded NEAR 196/224. Decision: continuing TL reconstruction. The sum is still `lea ecx, [eax + edx + 0x253]`.
+
+## 2026-11-01 — TL 0x44d7e0 kind and extra stay swapped
+
+`fcn_0044d7e0` keeps `extra` in `ebp` and `kind` in `ebx`. The candidate swaps those registers. Copying `kind` into `knd` and `extra` into `ext` before the first call stayed at NEAR 151/228, the same 77 mismatch bytes. The parameter uses were restored and `rebrew test` recorded NEAR 151/228. Decision: continuing TL reconstruction. `extra` is still loaded into `ebx`.
+
+## 2026-11-01 — TL 0x413d10 row base stays inside the byte address
+
+`fcn_00413d10` adds `off` into the height-map pointer and then adds `dx`. The candidate adds `dx` first. Saving `*(map + 0x28) + off` in `sample` stayed at NEAR 216/229, the same 13 mismatch bytes. The inline sum was restored and `rebrew test` recorded NEAR 216/229. Decision: continuing TL reconstruction. `add ecx, eax` still precedes `add ecx, edx`.
+
+## 2026-11-01 — TL 0x493be0 level stays computed from the object copy
+
+`fcn_00493be0` keeps the object in `edi` and the truncated level in `esi`. The candidate keeps the object in `esi`. Computing that level from `a0` before `p = (char*) a0` stayed at NEAR 237/249, the same 12 mismatch bytes. The object copy was restored first and `rebrew test` recorded NEAR 237/249. Decision: continuing TL reconstruction. The level is still stored in `edi`. Holding the `fcn_004faaf0` result in `id` and storing it after the first `0x1009354` product on `fcn_00499950` scored NEAR 207/250. The inline store was restored and `rebrew test` recorded NEAR 213/250. Decision: continuing TL reconstruction. The scale still loads the constant before `[esi+0x14]`. Inlining `n` into the `fcn_004c4510` argument of `fcn_004ea350` scored NEAR 250/259. The named index was restored and `rebrew test` recorded NEAR 253/259. Decision: continuing TL reconstruction. The load of `e + 4` still precedes the zero store. Loading `0x6b5cb0` once into `held` for both tests in `fcn_004124b0` scored SIZE_MISMATCH 132/266, object 264. The two inline loads were restored and `rebrew test` recorded NEAR 175/266. Decision: continuing TL reconstruction. The held key is still reloaded from `eax` before `push esi`. Computing the three samples before `gm_MapEntityStatRange` in `fcn_00491570` scored SIZE_MISMATCH 47/266, object 267. The call was restored first and `rebrew test` recorded NEAR 243/266. Decision: continuing TL reconstruction. The `cmp eax, 5` still precedes the width store. Replacing the `__max` and the second `__min` in `fcn_004f4440` with `if (v > 10000.0)` scored SIZE_MISMATCH 113/267, object 277. The two intrinsics were restored and `rebrew test` recorded NEAR 250/267. Decision: continuing TL reconstruction. The `1e4` compare still falls through into `fld` of `1e4`. Marking `w` volatile in `fcn_00491680` stayed at NEAR 243/266, the same 23 mismatch bytes. The plain float was restored and `rebrew test` recorded NEAR 243/266. Decision: continuing TL reconstruction. The width store still follows `cmp eax, 5`. Loading `0x7746cc` between the `v30` and `v2c` stores in `fcn_0059dcf0` scored SIZE_MISMATCH 150/272, object 273. The query load was restored after `v2c` and `rebrew test` recorded NEAR 259/272. Decision: continuing TL reconstruction. `v30` is still stored from `edx`. Naming the two globals in `fcn_005de9a0` before the `desc` stores scored SIZE_MISMATCH 87/284, object 283. The inline stores were restored and `rebrew test` recorded NEAR 246/284. Decision: continuing TL reconstruction. The first `push 0` still precedes the `0x66601c` load. Storing `x08` through `(char*) &s->items[i] + 8` in `fcn_0040fb80` stayed at NEAR 323/328, the same 5 mismatch bytes. The field store was restored and `rebrew test` recorded NEAR 323/328. Decision: continuing TL reconstruction. The `lea` still precedes `fsubr`. Dropping `volatile` on the pointer in `fcn_00473610` stayed at NEAR 31/33, the same two bytes. The volatile pointer was restored and `rebrew test` recorded NEAR 31/33. Decision: continuing TL reconstruction. The reload is still `mov ecx`. Naming the `0xac` scale in the client `gm_GetEntityTableEntry` stayed at NEAR 54/65, the same eleven bytes. The array return was restored and `rebrew test` recorded NEAR 54/65. The server body was not edited. Decision: continuing TL reconstruction. The index is still copied to `ecx` before the scale. A volatile store of `g_9badd0` in `fcn_004ce210` stayed at NEAR 68/74, the same six bytes. The plain store was restored and `rebrew test` recorded NEAR 68/74. Decision: continuing TL reconstruction. The buffer address is still formed before that store. Writing `(idx << 4) + 0x1007ce0` in `fcn_004a70c0` stayed at NEAR 76/84, the same eight bytes. The array index was restored and `rebrew test` recorded NEAR 76/84. Decision: continuing TL reconstruction. The scale is still add-then-shift. Writing the upper clamp in `fcn_00490c10` as `if (v < 4)` stayed at NEAR 113/118, the same five bytes. The ternary was restored and `rebrew test` recorded NEAR 113/118. Decision: continuing TL reconstruction. The copy into `esi` still follows `cmp eax, 1`. Naming the `0x40` copy length in `fcn_004c6e20` stayed at NEAR 113/123, the same ten bytes. The literal length was restored and `rebrew test` recorded NEAR 113/123. Decision: continuing TL reconstruction. `mov ecx, 0x10` still follows the link load. Reusing `a` for the `0x6b5c84` load in the save arm of `fcn_004127a0` scored SIZE_MISMATCH 18/130, object 132. The inline load was restored and `rebrew test` recorded NEAR 95/130. Decision: continuing TL reconstruction. That load still follows both saved stores. Preloading `0x67bbdc` ahead of `t1` in `fcn_00445ec0` stayed at NEAR 82/135, the same 53 mismatch bytes. The inline first store was restored and `rebrew test` recorded NEAR 82/135. Decision: continuing TL reconstruction. `0x67bbe0` is still loaded before `0x67bbdc`. Reading `id` before `lpGebaeudePROT` in `fcn_0050b840` stayed at NEAR 125/136, the same eleven bytes. The table load was restored first and `rebrew test` recorded NEAR 125/136. Decision: continuing TL reconstruction. The id is still homed in `edi`. Marking `rec` `register` in `fcn_0057f9a0` stayed at NEAR 147/153, the same six bytes. The plain pointer was restored and `rebrew test` recorded NEAR 147/153. Decision: continuing TL reconstruction. The scan index is still `ecx`.
+
+## 2026-11-01 — TL 0x536b10 shared return label stays on the final ret
+
+`fcn_00536b10` returns through the `ret` at offset 125 when `g_6a2c20` is still -1 (`je +0x1f` and `je -0xb`). The candidate jumps to the final `ret` (`+0x3d` and `+0x13`). Sending both of those exits to a label on the success `return` stayed at NEAR 154/156, the same two displacement bytes. The original `return` statements were restored and `rebrew test` recorded NEAR 154/156. Decision: continuing TL reconstruction. Both early returns still target the final `ret`.
+
+## 2026-11-01 — TL 0x41b510 edge load stays after the argument stores
+
+`fcn_0041b510` loads `0x14ce860` into `edx` before it stores `vp[0]`. The candidate stores `vp[0]` and `vp[1]` first. Computing `t860` before those stores scored NEAR 105/159 against 122/159. The argument stores were restored ahead of `t860` and `rebrew test` recorded NEAR 122/159. Decision: continuing TL reconstruction. The `0x14ce860` load still follows `vp[1]`.
+
+## 2026-11-01 — TL 0x436a00 register count stays in edx
+
+`fcn_00436a00` keeps `p` in `edx` and the child count in `esi`. The candidate homes `p` in `esi` and the count in `edx`. Marking `count` `register` stayed at NEAR 117/159, the same 42 mismatch bytes. The plain `int` was restored and `rebrew test` recorded NEAR 117/159. Decision: continuing TL reconstruction. `p` is still loaded after `push esi`.
+
+## 2026-11-01 — TL 0x4f2ee0 scaled row stays one byte offset
+
+`gv_ValidateEntityAction` adds `field_id` to `lpGebaeudePROT` and reads `[edi+eax*4]`. The candidate folds that id into the scaled offset and reads `[ecx+eax]`. Naming `scale = field_id * 147` and indexing `(table + field_id)[scale * 4]` grew the object from 161 to 182 bytes and scored 7/182. The `field_id + field_id * 588` subscript was restored and `rebrew test` recorded NEAR 138/161. Decision: continuing TL reconstruction. The type byte is still loaded through `ebx`.
+
+## 2026-11-01 — TL 0x509120 register age stays in esi
+
+`fcn_00509120` keeps the entity in `esi` and the age in `edi`. The candidate swaps those registers, and the later divisors follow. Marking `age` `register` stayed at NEAR 124/161, the same 37 mismatch bytes. The plain `int` was restored and `rebrew test` recorded NEAR 124/161. Decision: continuing TL reconstruction. The entity is still homed in `edi`.
+
+## 2026-11-01 — TL 0x471e30 register parameter stays in edx
+
+`fcn_00471e30` scales `a0` by 700 from `ecx` (`lea eax, [ecx*8]; sub eax, ecx`). The candidate keeps `a0` in `edx`. Declaring the parameter `register int a0` stayed at NEAR 148/169, the same 21 mismatch bytes. The plain parameter was restored and `rebrew test` recorded NEAR 148/169. Decision: continuing TL reconstruction. The `* 8` scale still indexes `edx`.
+
+## 2026-11-01 — TL 0x57c7b0 register node stays in edi
+
+`fcn_0057c7b0` keeps the node in `ebx` and the value at `a+0x194` in `edi`. The candidate keeps the node in `edi` and that value in `ebx`. Copying the parameter into `register Node* node` stayed at NEAR 146/173, the same 27 mismatch bytes. The parameter uses were restored and `rebrew test` recorded NEAR 146/173. Decision: continuing TL reconstruction. The node is still loaded after `push edi`.
+
+## 2026-11-01 — TL 0x472680 split index stays behind the sample loads
+
+`fcn_00472680` finishes `sub eax, esi` before it reloads the height and width. The candidate reloads those samples between `shl eax, 6` and that subtract. Computing `idx = (id << 6) - id` before the copies and storing `f80` through that index stayed at NEAR 174/184, the same ten bytes. The struct store was restored and `rebrew test` recorded NEAR 174/184. Decision: continuing TL reconstruction. `sub eax, esi` still follows the two sample loads.
+
+## 2026-11-01 — TL 0x4c6940 shared field temp stays in ecx
+
+`fcn_004c6940` copies each `q` field through `esi`. The candidate uses `esi` for `q+0x4c` and `ecx` for the rest. One `v` for every field stayed at NEAR 156/186, the same 30 mismatch bytes. The inline loads were restored and `rebrew test` recorded NEAR 156/186. Decision: continuing TL reconstruction. `q+0x50` is still loaded with `mov ecx`.
+
+## 2026-11-01 — TL 0x4c6090 duplicated value store stays one byte short
+
+`fcn_004c6090` loads `t+0x170` before `t+4`, tests the flag, then stores the value. The candidate stores `t+4` and then loads the flag. Writing that store on both arms of the flag test scored NEAR 173/188 against 174/188. The single store was restored and `rebrew test` recorded NEAR 174/188. Decision: continuing TL reconstruction. The flag load still follows the value store.
+
+## 2026-11-01 — TL 0x5473a0 countdown clear stays xor-first
+
+`fcn_005473a0` sets `ecx` to `0x3e` and then clears `eax` for `rep stosd`. The candidate clears `eax` first. A countdown store of `0x3e` dwords stayed at NEAR 175/188, the same 13 mismatch bytes. `memset` was restored and `rebrew test` recorded NEAR 175/188. Decision: continuing TL reconstruction. `xor eax, eax` still precedes `mov ecx, 0x3e`.
+
+## 2026-11-01 — TL 0x57de80 shifted bit test stays a zero-extend
+
+`fcn_0057de80` sign-extends the guild byte, masks `0x40`, and shifts. The candidate clears `eax` and loads `al`. Returning that masked bit as an unsigned shift stayed at NEAR 192/196, the same four bytes. The `!= 0` test was restored and `rebrew test` recorded NEAR 192/196. Decision: continuing TL reconstruction. The `0x40` arm still opens with `xor eax, eax`.
+
+## 2026-11-01 — TL 0x4b64b0 ptrdiff compare grows the loop
+
+`fcn_004b64b0` compares the cursor with `0x1007ba4` and jumps with `jl`. The candidate uses `jb`. Writing the test as `(q - 4) - (char*) 0x1007ba4 < 0` grew the object from 204 to 206 bytes and scored 186/206. The pointer compare was restored and `rebrew test` recorded NEAR 203/204. Decision: continuing TL reconstruction. The loop jump is still `jb`.
+
+## 2026-11-01 — TL 0x4eea30 early returns land on the label score
+
+`fcn_004eea30` stores `0.0f` in the first out-of-line block and `1.0f` in the second. The candidate stores `1.0f` first. Returning from the low and high arms, in that order, scored NEAR 152/209 against 203/209. The nested compares were restored and `rebrew test` recorded NEAR 203/209. Decision: continuing TL reconstruction. The `jne` still targets the `1.0f` block.
+
+## 2026-11-01 — TL 0x5aceb0 increment before the call stays movzx
+
+`fcn_005aceb0` forms `count + 1` with `lea` before the pushes and zero-extends the id with `mov dx`. The candidate uses `movzx` and `inc` between the pushes. Incrementing `count` before `io_AppendText` stayed at NEAR 146/219, the same 73 mismatch bytes. The post-call increment was restored and `rebrew test` recorded NEAR 146/219. Decision: continuing TL reconstruction. The id is still `movzx`.
+
+## 2026-11-01 — TL 0x613478 stores the sentinel before the state copy
+
+`fcn_00613478` writes `0xffff` to `0x6ad80c` before `rep movsd` on the zero path. The candidate copied the state first. Moving that store ahead of the struct assignment raised the dry-run score from 160/221 to 161/221. `rebrew diff 0x613478` reports no source binding, and `rebrew test` without `--dry-run` refuses the verdict because the row is retired. The store order stays. Decision: continuing TL reconstruction. `push ebx` is still in the prologue.
+
+## 2026-11-01 — TL 0x613478 ebx save stays in the prologue
+
+Native pushes `esi` and `edi` after the mode compare, and pushes `ebx` only on the nonzero path. A `goto` split scored SIZE_MISMATCH 43/224. An else-only pointer scored NEAR 147/221. `#pragma optimize("g", off)` scored SIZE_MISMATCH 68/239. All three still opened with `push ebx`. The `0xffff`-before-copy body was restored and a `--no-promote --dry-run` compare recorded NEAR 161/221. Decision: continuing TL reconstruction. The prologue is still `push ebx; push esi; push edi`.
+
+## 2026-11-01 — TL 0x4f88d0 split text id stays a three-operand lea
+
+`fcn_004f88d0` adds `0x253` and then the skill byte after it has the buffer address. The candidate folds both into `lea ecx, [eax + edx + 0x253]`. Writing `code = a1[9] ? 0x28 : 0; code += 0x253; code += a1[0x169]` stayed at NEAR 196/224, the same 28 mismatch bytes. The inline sum was restored and `rebrew test` recorded NEAR 196/224. Decision: continuing TL reconstruction. The buffer address still follows that `lea`.
+
+## 2026-11-01 — TL 0x44d7e0 register kind stays in ebp
+
+`fcn_0044d7e0` keeps `extra` in `ebp` and `kind` in `ebx`. The candidate swaps those registers. Marking `kind` `register` stayed at NEAR 151/228, the same 77 mismatch bytes. The plain parameter was restored and `rebrew test` recorded NEAR 151/228. Decision: continuing TL reconstruction. `extra` is still loaded into `ebx`.
+
+## 2026-11-01 — TL 0x413d10 dx-before-off stays the same adds
+
+`fcn_00413d10` adds `off` into the height-map pointer and then adds `dx`. The candidate adds `dx` first. Writing the address as `dx + off + col` stayed at NEAR 216/229, the same 13 mismatch bytes. The `off + dx + col` sum was restored and `rebrew test` recorded NEAR 216/229. Decision: continuing TL reconstruction. `add ecx, eax` still precedes `add ecx, edx`.
+
+## 2026-11-01 — TL 0x571140 shifted base stays add-into-index
+
+`fcn_00571140` adds `index << 6` into `lpObjektePROT` and leaves the index in the load. The candidate adds the index into the shifted register. Advancing a named base by `ix << 6` and then adding `ix` stayed at NEAR 217/243, the same 26 mismatch bytes. The `* 0x41` address was restored and `rebrew test` recorded NEAR 217/243. Decision: continuing TL reconstruction. `add ecx, eax` still forms the scale.
+
+## 2026-11-01 — TL 0x493be0 declaration order stays object in esi
+
+`fcn_00493be0` keeps the object in `edi` and the truncated level in `esi`. The candidate keeps the object in `esi`. Declaring `n` before `p` stayed at NEAR 237/249, the same 12 mismatch bytes. The original declaration order was restored and `rebrew test` recorded NEAR 237/249. Decision: continuing TL reconstruction. The level is still stored in `edi`.
+
+## 2026-11-01 — TL 0x499950 named scale loads the constant
+
+`fcn_00499950` loads each scale constant and multiplies by `b + 0x14`. The candidate loaded the factor and multiplied by the constant. Copying each constant through `scale` before the product raised the score from NEAR 213/250 to NEAR 237/250. `rebrew test` recorded NEAR 237/250. Decision: continuing TL reconstruction. The `pruegel` push and the `fcn_004faaf0` store still precede that first `fld`.
+
+## 2026-11-01 — TL 0x4ea350 int return stays lea eax
+
+`fcn_004ea350` takes the first `&v` in `ecx` and the second-loop field in `edx`. The candidate uses `eax` for that address and `ecx` for the field. Declaring `fcn_004c4510` as returning `int` stayed at NEAR 253/259, the same 6 mismatch bytes. The `void` prototype was restored and `rebrew test` recorded NEAR 253/259. Decision: continuing TL reconstruction. The first `&v` is still `lea eax`.
+
+## 2026-11-01 — TL 0x4124b0 register key stays stored from al
+
+`fcn_004124b0` copies the current key into `dl`, adds 9, then stores `dl`. The candidate stores `al` and copies into `dl` afterward. Marking `key` `register` stayed at NEAR 175/266, the same 91 mismatch bytes. The plain `unsigned char` was restored and `rebrew test` recorded NEAR 175/266. Decision: continuing TL reconstruction. The held-key index is still `eax`.
+
+## 2026-11-01 — TL 0x55a0b0 register count stays spilled before the test
+
+`fcn_0055a0b0` tests the `fcn_004e8b80` return and only then spills it, after `push ebx`. The candidate spills first. Marking `cnt` `register` stayed at NEAR 556/715, the same 159 mismatch bytes. The plain `int` was restored and `rebrew test` recorded NEAR 556/715. Decision: continuing TL reconstruction. The spill is still `mov [esp+0xc], eax` ahead of `test eax, eax`.
+
+## 2026-11-01 — TL 0x441400 named occupant grows the third loop
+
+`fcn_00441400` addresses the third loop as `[edi + esi]`. The candidate uses `[esi + edi]`. Naming `oc` as `&c->occ[k]` grew the object from 725 to 752 bytes and scored 477/725. The field accesses were restored and `rebrew test` recorded NEAR 712/725. Decision: continuing TL reconstruction. The third loop is still `[esi + edi]`.
+
+## 2026-11-01 — TL 0x57e880 split return grows the arg arm
+
+`fcn_0057e880` stores `since`, tests `b`, and on the nonzero arm stores `arg` between the epilogue pops. The candidate stores `arg` before those pops. Returning from the zero arm before the `arg` store grew the object from 763 to 794 bytes and scored 342/763. The shared tail was restored and `rebrew test` recorded NEAR 709/763. Decision: continuing TL reconstruction. `pop edi` still follows the `arg` store.
+
+## 2026-11-01 — TL 0x437bc0 double angle spills before sine
+
+`fcn_00437bc0` duplicates the `atan2` result, stores the float, and then runs `fsin` before `fcos`. The candidate pops the angle before `fcos`. Keeping that result in `ang` and calling `sin` before `cos` shrank the object from 796 to 788 bytes and scored 293/796. The float casts were restored and `rebrew test` recorded NEAR 528/796. Decision: continuing TL reconstruction. The first angle still spills with `fstp` before `fcos`.
+
+## 2026-11-01 — TL 0x57a3d0 months-first spill stays at esp+0x10
+
+`fcn_0057a3d0` spills the skill byte at `[esp+0x18]` before `fild`. The candidate spills it at `[esp+0x10]`. Declaring `months` first stayed at NEAR 799/801, the same two bytes. The original declaration order was restored and `rebrew test` recorded NEAR 799/801. Decision: continuing TL reconstruction. The skill-byte `fild` still uses `[esp+0x10]`.
+
+## 2026-11-01: release 1.9.0
+
+Tag v1.9.0 publishes the accumulated reconstruction progress and byte-match refinements on GoldTL. Key improvements include promoting multiple near-misses to RELOC (0x5024e0, 0x4903c0, 0x4cd090, 0x5b44b0, 0x4e7340), tightening candidate bodies across client units, updating project documentation and provenance, and pruning temporary artifacts.
+

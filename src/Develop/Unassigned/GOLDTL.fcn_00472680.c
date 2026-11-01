@@ -34,12 +34,12 @@ void __cdecl fcn_00472680(int id, int type)
 	h0 = h;
 	((Slot_00472680*) g_1015ea0)[id].f80 = type;
 	if (type > 1) {
-		((Slot_00472680*) g_1015ea0)[id].w = w0 * type;
-		((Slot_00472680*) g_1015ea0)[id].h = h0 * type;
+		((Slot_00472680*) g_1015ea0)[id].w = h0 * type;
+		((Slot_00472680*) g_1015ea0)[id].h = w0 * type;
 	}
 	if (type < -1) {
 		n = abs(type);
-		((Slot_00472680*) g_1015ea0)[id].w = w0 / n;
-		((Slot_00472680*) g_1015ea0)[id].h = h0 / n;
+		((Slot_00472680*) g_1015ea0)[id].w = h0 / n;
+		((Slot_00472680*) g_1015ea0)[id].h = w0 / n;
 	}
 }

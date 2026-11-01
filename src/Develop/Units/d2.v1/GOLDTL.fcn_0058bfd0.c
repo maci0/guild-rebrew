@@ -102,15 +102,17 @@ void __cdecl fcn_0058bfd0(int* a0)
 			    *(int*) (a0[2] * 0x3cc + 0x1015f4c);
 			fcn_00472900(h, 0x54);
 			y += 0x12;
-			for (j = 0; j < 5; j++) {
+			j = 0;
+			do {
 				io_FormatTextBuffer(buf, "%s:", 0x16b7 + j);
 				h = fcn_0046fac0(0x28, y, buf, a0[2]);
 				*(int*) (g_1015ea0 + 0x18 + h * 0x2f4) = 0x12c;
 				fcn_00472900(h, 0x54);
 				fcn_00534160(0xa0, y,
 				             *(unsigned char*) (*r + 0x24 + j), 0x4df);
+				j++;
 				y += 0xd;
-			}
+			} while (j < 5);
 			i++;
 			r += 3;
 		} while (i < n);

@@ -63,12 +63,10 @@ int __cdecl fcn_004cd090(T_4cd090* s, char* out)
 		if (p == 0) {
 			return 1;
 		}
-		q = (int*) (p + 0x1c);
-		for (i = 0; i < 4; i++) {
+		for (i = 0, q = (int*) (p + 0x1c); i < 4; i++, q++) {
 			if (*q == s->value) {
 				break;
 			}
-			q++;
 		}
 		if (i >= 4) {
 			return 1;

@@ -13,6 +13,7 @@ int __cdecl fcn_00499950(int a, char* b)
     char buf[0xf8];
     int e;
     int v;
+    float scale;
 
     if (*(char*) b != 7)
         return 0;
@@ -29,10 +30,14 @@ int __cdecl fcn_00499950(int a, char* b)
     *(int*) (buf + 0x84) = v;
     *(int*) (buf + 0x60) = *(int*) (e + 4);
     *(int*) (buf + 0x58) = fcn_004faaf0(e);
-    *(float*) 0x1009374 = *(float*) 0x1009354 * *(float*) (b + 0x14);
-    *(float*) 0x100937c = *(float*) 0x100935c * *(float*) (b + 0x14);
-    *(float*) 0x1009384 = *(float*) 0x1009364 * *(float*) (b + 0x14);
-    *(float*) 0x100938c = *(float*) 0x100936c * *(float*) (b + 0x14);
+    scale = *(float*) 0x1009354;
+    *(float*) 0x1009374 = scale * *(float*) (b + 0x14);
+    scale = *(float*) 0x100935c;
+    *(float*) 0x100937c = scale * *(float*) (b + 0x14);
+    scale = *(float*) 0x1009364;
+    *(float*) 0x1009384 = scale * *(float*) (b + 0x14);
+    scale = *(float*) 0x100936c;
+    *(float*) 0x100938c = scale * *(float*) (b + 0x14);
     fcn_004c4eb0("pruegel");
     fcn_004c5530(buf);
     fcn_004c4ef0("pruegel");

@@ -26,8 +26,8 @@ short __cdecl fcn_00473610(void)
         register int _reg_95;
         {
         int _reg_77;
-        9[gp] = 0;
         *(int*) _mk_26 = (unsigned int)r;
+        9[gp] = 0;
     }
     }
 	return (unsigned int)r;

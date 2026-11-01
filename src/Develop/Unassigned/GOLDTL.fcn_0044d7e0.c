@@ -36,10 +36,10 @@ void __cdecl fcn_0044d7e0(void* stream, int* table, int kind, void* extra)
 					((void (__cdecl*) (void*, void*)) rec[1]) (stream, extra);
 				} else {
 					g_6b86c0++;
-					if (rec[2] != 0) {
-						fcn_0044d7e0(stream, (int*) rec[1], rec[2], extra);
-					} else {
+					if (rec[2] == 0) {
 						fcn_0044d7e0(stream, table, kind, extra);
+					} else {
+						fcn_0044d7e0(stream, (int*) rec[1], rec[2], extra);
 					}
 				}
 			}

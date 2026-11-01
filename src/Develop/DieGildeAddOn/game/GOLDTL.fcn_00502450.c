@@ -35,7 +35,7 @@ extern float g_6628a8;
 extern double g_662908;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
-unsigned char* __cdecl gm_AddObjekt(void);
+unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
 /* ADDRESS: GOLDTL 0x005024e0 */
 int __cdecl fcn_005024e0(int a, int b)
@@ -52,7 +52,7 @@ int __cdecl fcn_005024e0(int a, int b)
 	}
 	for (j = 0; j < 4; j++) {
 		if (c[0x40 + j * 8] != 0) {
-			for (e = gm_StartFilteredEntitySearch(1, 5, *(unsigned char*) (c + 0x40 + j * 8)); e != 0; e = gm_AddObjekt()) {
+			for (e = gm_StartFilteredEntitySearch(1, 5, *(unsigned char*) (c + 0x40 + j * 8)); e != 0; e = gm_FindNextFilteredEntity()) {
 				sum = (int) (sum + *(float*) (c + 0x44 + j * 8));
 			}
 		}

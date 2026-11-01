@@ -1,6 +1,6 @@
 # Current work
 
-## Working checkpoint (2026-10-31)
+## Working checkpoint (2026-11-01)
 
 | Target | Latest build evidence | Remaining limits |
 | --- | --- | --- |
@@ -119,6 +119,236 @@ describe their own link attempts.
   with the repaired development CLI; no source or padding was added.
 - TL `0x605233`: strict native identity records D3DX library origin; the compiled
   naked transcription remains and the original archive provider is unresolved.
+- TL object matches, 2026-11-01. `0x5024e0` is RELOC 187/187: the filtered-entity
+  loop calls `gm_FindNextFilteredEntity` (`0x503e80`), and that relocation
+  validates. The sibling `0x502450` stays RELOC 131/131. `0x4903c0` is RELOC
+  434/434: the high-price branch compares the `obj+0x10c` term with `v10`, the
+  low-price branch compares `v10` with the `obj+0x100` term, and the low-price
+  adjustment reads `info+0x18`. `0x4cd090` is RELOC 528/528: the leave scan
+  increments the index before the element pointer (`i++, q++`). `0x5b44b0` is
+  RELOC 54/54: each arm calls `fcn_005463a0`, so the null arm is `push 0xffff`
+  and the word arm is `push ecx`. `0x472680` is NEAR 174/184. `0x4131e0` is
+  NEAR 179/183; separate statements, a declaration swap, and recomputing
+  `scale` from `neg` all scored worse, and the left-associated third row stays.
+  `0x402b80` stays NEAR 22/32. Declaring the countdown first, and a
+  `for` countdown, both compile to the same bytes as the do-while. `0x473610` is NEAR 31/33: the result store precedes the field
+  clear. A cleaned body scored 22/33. The second reload of `g_77250c`
+  is still ecx rather than edx.
+  `0x4ce210` stays NEAR 68/74; a pointer local after the `g_9badd0` store
+  does not move the `lea`. `0x4e7340` is RELOC 77/77: a row index times
+  `0x194` puts the offset in the SIB base. `0x490c10` stays NEAR 113/118:
+  the lower clamp still compares `eax` before `mov esi, eax`.
+  `0x509570` stays NEAR 54/65; the server's duplicate index check does
+  not change the client multiply registers. `0x4c6e20` stays NEAR
+  113/123; copying before the link load scored 107/123. `0x4127a0`
+  stays NEAR 95/130; naming the `0x6b5c84` load grew the object to 132
+  bytes. `0x45ec0` stays NEAR 82/135; inlining the `0x67bbe0` sample
+  scored 66/135. `0x4a70c0` stays NEAR 76/84; a `Blk16` pointer add
+  still emits add-then-shift. `0x50b840` stays NEAR 125/136; inlining
+  the table base scored 83/136. `0x536b10` stays NEAR 154/156; the
+  two -1 returns still jump to the final `ret`. `0x4f2ee0` stays NEAR
+  138/161; a named type-table pointer grew the object to 182 bytes.
+  `0x509120` stays NEAR 124/161; a local copy of the entity does not
+  swap `esi` and `edi`. `0x471e30` stays NEAR 148/169; a local
+  copy of `a0` does not move it from `edx` into `ecx`. `0x57c7b0`
+  stays NEAR 146/173; a block-scoped half does not move the node
+  from `edi` into `ebx`. `0x4c6940` stays NEAR 156/186; storing
+  `a0+0x24` before `q+0x4c` shrank the object to 183 bytes.
+  `0x5aceb0` stays NEAR 146/219; a named id and displayed count
+  do not replace `movzx` with `xor`/`mov dx`.
+  `0x4f88d0` stays NEAR 196/224; naming the text-id sum
+  before `io_FormatTextBuffer` still folds it into one `lea`.
+  `0x44d7e0` is NEAR 151/228; the zero `rec[2]` arm is the
+  fallthrough. The earlier `!= 0` test scored 147/228.
+  `0x413d10` stays NEAR 216/229; declaring `width` before
+  `k` does not swap those spill slots. `0x571140` is NEAR
+  217/243; the `obj+0xc8` clear follows the `obj+0xc4`
+  store. The earlier clear scored 173/243. `0x493be0` stays
+  NEAR 237/249; dropping the local object pointer does not
+  move it from `esi` into `edi`. `0x499950` stays NEAR
+  213/250; putting the scale on the left of each product
+  does not make `fld` load the constant. `0x4ea350` stays
+  NEAR 253/259; declaring `n` before `v` does not move
+  `&v` into `ecx`. `0x4124b0` stays NEAR 175/266; adding
+  9 before the key store scored STUB 158/266.
+  `0x491570` stays NEAR 243/266; splitting the y product
+  does not sink the `job == 5` compare. `0x491680` stays
+  NEAR 243/266; folding the width store into the y product
+  scored 238/266. `0x5de9a0` stays NEAR 246/284; storing
+  `desc+0x0c` last scored 242/284. `0x4918a0` stays NEAR
+  227/292; a later `v * flt_lit1_1` grew the object to
+  296 bytes and scored 160/296. `0x48f4f0` stays NEAR
+  357/361; declaring `idx` before `found` does not raise
+  that index into the `q` slot. `0x40f1c0` stays NEAR
+  326/371; writing the flag fields before the kind load
+  scored 306/371. `0x507130` stays NEAR 371/400; sharing
+  the duplicate skill arms with `default` shrank the
+  object to 332 bytes and scored 97/400. `0x5448e0` is
+  NEAR 388/420; the `0x77492c` load is saved before the
+  byte restore. The inline test scored 382/420.
+  `0x479660` is NEAR 434/464; `total = 0` is stored before
+  the count test. The inner assignment scored 428/464.
+  `0x4a0bb0` stays NEAR 491/492; `(q + 0x74)[rnd]` does
+  not put `q` in the SIB base. `0x524fc0` stays NEAR
+  454/498; a second cursor for the slot walk grew the
+  object to 512 bytes and scored 99/512. `0x49a880` stays
+  NEAR 500/505; an early `return 0` when `r == 0` does
+  not move `xor eax, eax` ahead of the pops. `0x440670`
+  stays NEAR 364/508; an `i * 0x10` stride shrank the
+  object to 489 bytes and scored 297/508. `0x53fa80` is
+  RELOC 509/509; the context is reloaded before the slot
+  clear. The inline clear scored 502/509. `0x427280` stays
+  NEAR 325/511; a named lexer position does not move the
+  copy ahead of `strlen`. `0x506ab0` stays NEAR 519/540;
+  clearing `ent+8` before the word store scored 516/540.
+  `0x4d3c60` stays NEAR 512/560; loading `g_772e98` only
+  in the else does not move it out of the prologue.
+  `0x44c6f0` stays NEAR 491/579; naming the switch copies
+  shrank the object to 558 bytes and scored 83/579.
+  `0x4dc3a0` stays NEAR 404/587; reading the text id from
+  `a1` shrank the object to 586 bytes and scored 382/587.
+  `0x4f0a30` stays NEAR 555/594; moving `ok = 0` past the
+  first copy shrank the object to 584 bytes and scored
+  190/594. `0x47c1f0` stays NEAR 603/607; named clip bounds
+  leave the same four ModRM bytes. `0x495180` stays NEAR
+  623/625; the rate check is still `test eax, eax`.
+  `0x58e220` stays NEAR 550/638; copying `a2` before the
+  entity lookup scored 550/638. `0x450e90` stays NEAR
+  626/652; a slot pointer shrank the object to 622 bytes
+  and scored 148/652. `0x4e3020` is NEAR 616/671; the
+  path, message, and work buffers are 0x100, 0x200, and
+  0x1fb8. The padded layout scored 610/671.
+  `0x55a0b0` stays NEAR 556/715; folding the count
+  assignment into the test scored 556/715. `0x4e3020`
+  stays NEAR 616/671; a volatile `0x68bfb8` store scored
+  616/671. `0x441400` stays NEAR 712/725; writing `k`
+  before the mesh pointer scored 712/725. `0x57e880` is
+  NEAR 709/763; the clock store precedes the `b` test.
+  The earlier order scored 703/763. `0x437bc0` stays NEAR
+  528/796; computing sine before cosine scored 528/796.
+  `0x48eba0` stays NEAR 854/898; a block-scoped `F8`
+  scored 854/898. `0x57a3d0` stays the two-byte
+  `[esp+0x18]` spill. `0x5aa480` stays NEAR 928/982;
+  storing `pb[1]` first scored 928/982. `0x513d40`
+  stays NEAR 889/991; loading the list entry first
+  scored 863/991. `0x5bf9e0` is NEAR 887/1036; the
+  visit call receives `data`. `&data[1]` scored 886/1036.
+  `0x58bfd0` stays NEAR 951/1077; a named `-1`
+  scored 951/1077. `0x589d00` stays NEAR 1141/1350;
+  writing `q[0]` first scored 1137/1350. `0x4ee290`
+  stays shared with the exact server body. `0x565ab0`
+  stays NEAR 1299/1560; folding the plant-byte load
+  into the plot test scored 1299/1560. `0x57d0d0` stays
+  NEAR 1788/1802; explicit slot zeros scored 740/1802.
+  `0x5816f0` is RELOC 1839/1839. `0x4c7c50` stays
+  shared with the exact server body. `0x580e20` is
+  RELOC 2254/2254. `0x4ce210` stays NEAR 68/74;
+  storing the global last scored 26/74. `0x4763e0`
+  stays NEAR 556/570; bits-first source pointer
+  scored 556/570. `0x495180` stays the kept rate
+  check. `0x4c3800` stays NEAR 398/417; a plain
+  `flag` scored 170/417. `0x465c60` stays NEAR
+  489/500; `off + table` scored 489/500. `0x5ce800`
+  stays NEAR 497/513; a named flags copy scored
+  495/513. `0x4763e0` stays NEAR 556/570; a split
+  `soff` scored 556/570. `0x420db0` stays NEAR
+  659/667; returning the stored `-1` scored 659/667.
+  `0x545780` stays NEAR 285/295; the link through
+  `*v1` scored 285/295. `0x445ec0` stays NEAR
+  82/135; moving `t1` after the first store scored
+  66/135. `0x420bf0` stays NEAR 288/302; multiplying
+  `g_662c38` first scored 288/302. `0x45bfb0` stays
+  NEAR 327/337; advancing the inner record first
+  scored 323/337. `0x40ed40` stays NEAR 342/398;
+  a named layer byte scored 342/398. `0x48ddd0`
+  stays NEAR 442/444; reusing the random local
+  scored 20/444. `0x57a3d0` stays NEAR 799/801;
+  storing the skill byte in `add` scored 128/801.
+  `0x57f9a0` stays NEAR 147/153; declaring the record
+  before the index does not swap `edx` and `ecx`. `0x41b510` stays NEAR
+  122/159; moving the edge loads ahead of `vp[0]` grew the object to
+  160 bytes. `0x436a00` stays NEAR 117/159; declaring the count first
+  does not move `p` from `esi` into `edx`. After `0x4e7340`, stored TL
+  counts are RELOC 3687, NEAR 90,
+  EXACT 409, SIZE_MISMATCH 971, STUB 5. These files are TL-only. The linked
+  image was not rebuilt, so the 5.9% raw-file figure above still stands.
+  `0x593360` stays 366/368 (`add edi, ebx` versus `add ebx, edi`); `y += z`
+  and `z += y` both stay `add ebx, edi`. `0x5aa480` is NEAR
+  958/982 after the first packet loads the guild-hall index into
+  `n`; the same load on the second packet scored 766/982, and
+  `pa[2]` first stayed 958/982. Storing the second
+  packet's index in `j` scored 766/982. `0x472680` stays
+  NEAR 174/184; storing `f80` before the samples scored 143/184. `0x513d40`
+  stays NEAR 889/991; writing the last corner after `i++` scored 889/991.
+  `0x5bf9e0` is NEAR 894/1036 after the guild-hall word is saved in
+  `timeout` before `idx` and `res`. `0x58bfd0` is NEAR
+  955/1077 after `j++` precedes `y += 0xd`. `0x589d00` stays
+  NEAR 1141/1350; saving `a0 + 0x27` in `id` scored 1141/1350.
+  `0x565ab0` stays NEAR 1299/1560; a named `plot` byte scored 1122/1560.
+  `0x57d0d0` stays NEAR 1788/1802; zeros in native slot order scored 740/1802.
+  `0x571140` stays NEAR 217/243; `(id << 6) + id` scored 217/243.
+  The shared sell body at `0x4c7c50` was not edited.
+  `0x580e20` is already RELOC 2254/2254. `0x5473a0` stays
+  NEAR 175/188; naming the seed and the id scored 97/188.
+  `0x57de80` stays NEAR 192/196; a named sign byte scored 192/196.
+  `0x4b64b0` stays the recorded `jl` versus `jb` wall. `0x4eea30`
+  stays NEAR 203/209; a zero label before the one label scored 152/209.
+  `0x5aceb0` stays NEAR 146/219; storing the displayed count in `next` scored 146/219.
+  `0x4f88d0` stays NEAR 196/224; saving `buf` in `out` scored 196/224.
+  `0x44d7e0` stays NEAR 151/228; copying `kind` and `extra` scored 151/228.
+  `0x413d10` stays NEAR 216/229; a `sample` row pointer scored 216/229.
+  `0x493be0` stays NEAR 237/249; the level-from-`a0` load scored 237/249.
+  `0x499950` stays NEAR 213/250; storing the `fcn_004faaf0` result after the first scale scored 207/250.
+  `0x4ea350` stays NEAR 253/259; inlining `n` scored 250/259.
+  `0x4124b0` stays NEAR 175/266; one `held` reload scored 132/266.
+  `0x491570` stays NEAR 243/266; samples before the job call scored 47/266.
+  `0x4f4440` stays NEAR 250/267; an `if (v > 10000.0)` clamp scored 113/267.
+  `0x491680` stays NEAR 243/266; a volatile width scored 243/266.
+  `0x59dcf0` stays NEAR 259/272; the query load between `v30` and `v2c` scored 150/272.
+  `0x5de9a0` stays NEAR 246/284; naming the two globals scored 87/284.
+  `0x40fb80` stays NEAR 323/328; a byte-offset store of `x08` scored 323/328.
+  `0x473610` stays NEAR 31/33; a plain pointer reload scored 31/33.
+  `0x509570` stays NEAR 54/65; a named `0xac` scale scored 54/65.
+  `0x4ce210` stays NEAR 68/74; a volatile `g_9badd0` store scored 68/74.
+  `0x4a70c0` stays NEAR 76/84; `(idx << 4) + 0x1007ce0` scored 76/84.
+  `0x490c10` stays NEAR 113/118; an `if (v < 4)` upper clamp scored 113/118.
+  `0x4c6e20` stays NEAR 113/123; a named `0x40` copy length scored 113/123.
+  `0x4127a0` stays NEAR 95/130; reusing `a` for the mid load scored 18/130.
+  `0x445ec0` stays NEAR 82/135; preloading `0x67bbdc` scored 82/135.
+  `0x50b840` stays NEAR 125/136; reading `id` first scored 125/136.
+  `0x57f9a0` stays NEAR 147/153; a `register` record pointer scored 147/153.
+  `0x536b10` stays NEAR 154/156; a `goto` to the success return scored 154/156.
+  `0x41b510` stays NEAR 122/159; hoisting `t860` scored 105/159.
+  `0x436a00` stays NEAR 117/159; a `register` count scored 117/159.
+  `0x4f2ee0` stays NEAR 138/161; a `* 147` row index scored 7/182.
+  `0x509120` stays NEAR 124/161; a `register` age scored 124/161.
+  `0x471e30` stays NEAR 148/169; a `register` parameter scored 148/169.
+  `0x57c7b0` stays NEAR 146/173; a `register` node pointer scored 146/173.
+  `0x472680` stays NEAR 174/184; a split `(id << 6) - id` index scored 174/184.
+  `0x4c6940` stays NEAR 156/186; one field temp scored 156/186.
+  `0x4c6090` stays NEAR 174/188; a store on both flag arms scored 173/188.
+  `0x5473a0` stays NEAR 175/188; a countdown clear scored 175/188.
+  `0x57de80` stays NEAR 192/196; an unsigned shift of the `0x40` bit scored 192/196.
+  `0x4b64b0` stays NEAR 203/204; a ptrdiff loop test scored 186/206.
+  `0x4eea30` stays NEAR 203/209; early returns scored 152/209.
+  `0x5aceb0` stays NEAR 146/219; incrementing `count` before the call scored 146/219.
+  `0x613478` stays NEAR 161/221; the `0xffff` store now precedes the state copy, up from 160/221. The retired row rejects a recorded verdict. A nonzero-only `ebx` save was not reached: goto 43/224, else pointer 147/221, `optimize("g", off)` 68/239.
+  `0x4f88d0` stays NEAR 196/224; split adds of the text id scored 196/224.
+  `0x44d7e0` stays NEAR 151/228; a `register` kind scored 151/228.
+  `0x413d10` stays NEAR 216/229; `dx` before `off` scored 216/229.
+  `0x571140` stays NEAR 217/243; a base advanced by `ix << 6` scored 217/243.
+  `0x493be0` stays NEAR 237/249; declaring `n` before `p` scored 237/249.
+  `0x499950` stays NEAR 237/250; a named `scale` rose from 213/250.
+  `0x4ea350` stays NEAR 253/259; an `int` return on `fcn_004c4510` scored 253/259.
+  `0x4124b0` stays NEAR 175/266; a `register` key scored 175/266.
+  `0x55a0b0` stays NEAR 556/715; a `register` count scored 556/715.
+  `0x441400` stays NEAR 712/725; a named occupant scored 477/752.
+  `0x57e880` stays NEAR 709/763; a split return scored 342/794.
+  `0x437bc0` stays NEAR 528/796; a double `ang` scored 293/788.
+  `0x57a3d0` stays NEAR 799/801; declaring `months` first scored 799/801.
+  `0x48ddd0` stays 442/444; folding the sum
+  into the index local grew the object to 450 bytes. `0x4a0bb0` remains the
+  `[esi+eax+0x74]` SIB order, and `0x4b64b0` remains `jl` versus `jb`.
 
 ### Tooling and validation
 
@@ -203,8 +433,13 @@ and existing configured images; neither is a fresh function verification run.
    review on `__lock_file`; no native-identity receipt or production adoption
    exists. Evidence: `.scratch/goal-next-20261031/minizip/crt-boundaries.md`.
 4. Continue native-body/type/operand review, including TL `0x5e53b0` exceptional
-   arithmetic. Use canonical game TU flags; historical score-only flag probes
-   do not authorize production overrides.
+   arithmetic. `0x5024e0`, `0x4903c0` and `0x4cd090` are RELOC as of 2026-11-01.
+   The open two-byte rows include `0x57a3d0` (stack slot), `0x495180`
+   (`cmp eax, esi` versus `test eax, eax`), `0x593360` (add destination) and
+   `0x48ddd0` (spill slot). `0x420db0` stays 659/667: the host-null jump and
+   the fail epilogue's `or eax,-1` placement do not move under the shared-exit
+   spellings. Use canonical game TU flags; historical score-only
+   flag probes do not authorize production overrides.
 5. Continue the inherited `_dpad_` audit against selected object contributions
    and native storage evidence. The retained copy in `GOLDTL.fcn_004c4dc0.c`
    is removed. The fresh GoldTL map also lacks `__dpad_fb9084`,

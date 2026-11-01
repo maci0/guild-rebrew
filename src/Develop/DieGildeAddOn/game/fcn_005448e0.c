@@ -62,8 +62,9 @@ void __cdecl fcn_005448e0(void)
 	*(int*) 0x6b5c90 = 0;
 	*(unsigned char*) 0x14cf950 = 0;
 	fcn_004c2d90((float) t * *(float*) 0x665e44, 0x3e8);
+	t = *(int*) 0x77492c;
 	*(unsigned char*) 0x772d10 = (unsigned char) saved;
-	if (*(int*) 0x77492c == 0) {
+	if (t == 0) {
 		fcn_0041e650();
 	}
 }
