@@ -42,16 +42,32 @@ void __cdecl fcn_0044c6f0(int a1, int a2, int a3, int a4, int a5, int a6, int a7
 		}
 		break;
 	case 2:
-		*(int*) (v2 + 0) = *(int*) 0x67b13c;
-		*(int*) (v2 + 4) = *(int*) 0x67b140;
-		*(int*) (v2 + 8) = *(int*) 0x67b144;
-		v2[0xc] = *(char*) 0x67b148;
+		{
+			int t0 = *(int*) 0x67b13c;
+			int t1 = *(int*) 0x67b140;
+			int t2 = *(int*) 0x67b144;
+			*(int*) (v2 + 0) = t0;
+			{
+				char t3 = *(char*) 0x67b148;
+				*(int*) (v2 + 4) = t1;
+				*(int*) (v2 + 8) = t2;
+				v2[0xc] = t3;
+			}
+		}
 		break;
 	case 4:
-		*(int*) (v2 + 0) = *(int*) 0x67b14c;
-		*(int*) (v2 + 4) = *(int*) 0x67b150;
-		*(int*) (v2 + 8) = *(int*) 0x67b154;
-		*(short*) (v2 + 0xc) = *(short*) 0x67b158;
+		{
+			int t0 = *(int*) 0x67b14c;
+			int t1 = *(int*) 0x67b150;
+			int t2 = *(int*) 0x67b154;
+			*(int*) (v2 + 0) = t0;
+			{
+				short t3 = *(short*) 0x67b158;
+				*(int*) (v2 + 4) = t1;
+				*(int*) (v2 + 8) = t2;
+				*(short*) (v2 + 0xc) = t3;
+			}
+		}
 		break;
 	default:
 		v2[0] = *(char*) 0x6b5c60;

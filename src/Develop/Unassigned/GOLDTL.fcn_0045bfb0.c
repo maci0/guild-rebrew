@@ -10,7 +10,6 @@ void __cdecl fcn_0045bfb0(int obj)
 {
 	char* o;
 	char* p;
-	char* q;
 	unsigned int i;
 	unsigned int j;
 	int idx;
@@ -44,11 +43,10 @@ void __cdecl fcn_0045bfb0(int obj)
 				*(char*) (p + 0x54) = *(char*) (p + 0x54) & 0xfd;
 				*(int*) (p + 0x44) = *(int*) (o + 0x44);
 				nidx = (int) (p - g_104049c) / 0x70;
-				q = p + 0x70;
-				for (j = i + 1; j < g_10404a0; j++, q += 0x70) {
-					if (*(int*) (q + 0x40) > 0 && (*(char*) (q + 0x54) & 2) &&
-					    *(int*) (q + 0x44) == idx) {
-						*(int*) (q + 0x44) = nidx;
+				for (j = i + 1, p += 0x70; j < g_10404a0; j++, p += 0x70) {
+					if (*(int*) (p + 0x40) > 0 && (*(char*) (p + 0x54) & 2) &&
+					    *(int*) (p + 0x44) == idx) {
+						*(int*) (p + 0x44) = nidx;
 					}
 				}
 				break;

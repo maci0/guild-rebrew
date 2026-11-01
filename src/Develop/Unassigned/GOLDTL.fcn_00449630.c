@@ -48,7 +48,7 @@ int __cdecl fcn_00449630(void)
 	float ang;
 	int handle;
 	float p28[3];
-	float p34[4];
+	float p34[3];
 	float p44[4];
 	int h;
 	short mx;
@@ -57,7 +57,7 @@ int __cdecl fcn_00449630(void)
 	unsigned int ht;
 	float r;
 	float s;
-	char ok;
+	u8 ok;
 
 	h = g_1041d0c;
 	dirty = 0;
@@ -125,12 +125,12 @@ int __cdecl fcn_00449630(void)
 		}
 		else
 			dy = 0;
-		f04 = (float) dx / (float) w;
+		f04 = dx / (double) w;
 		g_6b85b4 = (int) my;
 		g_6b85b0 = (int) mx;
 		f10 = (float) ht;
-		a18[0] = (float) dy / f10;
-		r = ((float) fabs((float) dx) + 1.0f) * 30.0f / (float) w;
+		a18[0] = (double) dy / f10;
+		r = ((float) fabs((float) dx) + 1.0f) * 30.0f / (double) w;
 		if (r > 3.0f)
 			r = 3.0f;
 		s = ((float) fabs((float) dy) + 1.0f) * 30.0f / (float) ht;
@@ -172,9 +172,9 @@ both:
 	p34[0] = f10;
 	p34[1] = f04;
 call:
-	ok = (char) fcn_00448cc0(h, p34, handle, p28, p44, a18);
-	dirty = ok & 1;
-	changed = ok >> 1;
+	ok = (u8) fcn_00448cc0(h, p34, handle, p28, p44, a18);
+	dirty = (char) (ok & 1);
+	changed = (char) (ok >> 1);
 	if (dirty != 0)
 		fcn_00438b40(g_1041d0c, p44);
 	if (changed != 0 && g_1041d0c != g_6b8478
@@ -191,7 +191,7 @@ out:
 		UpdateSceneLighting(1);
 		dirty = 1;
 	}
-	ok = (char) fcn_00448b10();
+	ok = (u8) fcn_00448b10();
 	if ((ok | dirty) == 0 && changed == 0)
 		return 0;
 	return 1;

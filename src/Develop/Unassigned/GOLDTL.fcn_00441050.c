@@ -23,13 +23,13 @@ extern int g_1042a04;
 extern unsigned int __cdecl fcn_00440260(int, int, int, int);
 extern unsigned char __cdecl fcn_00437ee0(void*, char*, char*);
 
-typedef int (__cdecl* Fn_441050)(void*);
+typedef int (__stdcall* Fn_441050)(void*);
 
 
+/* ADDRESS: GOLDTL 0x00441050 */
 /* Recomputes the two cached shadow boxes of an entity from the eight
  * surrounding placements and sums the visibility/occupancy callbacks of the
  * 8x8 cell grid. Returns the number of lit cells. */
-/* ADDRESS: GOLDTL 0x00441050 */
 int __cdecl fcn_00441050(char* e)
 {
 	float* m;
@@ -42,10 +42,10 @@ int __cdecl fcn_00441050(char* e)
 	float* f;
 	float* p;
 	char* w;
-	char* o;
 	void** v10;
 	Fn_441050 fn;
 	int count;
+	float len;
 	unsigned int i;
 	unsigned int j;
 	int k;
@@ -77,8 +77,7 @@ int __cdecl fcn_00441050(char* e)
 		+ m[0x6c] * *(float*) (e + 0x88);
 	g_1042168 = *(float*) (e + 0x84) * m[0x69] + *(float*) (e + 0x88) * m[0x6d]
 		+ m[0x65] * *(float*) (e + 0x80);
-	w = e + 0x280;
-	for (i = 0; i < 8; i++) {
+	for (i = 0, w = e + 0x280; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
 			p = (float*) fcn_00440260((int) e, (int) (w - 0x1e0), j, i);
 			res = fcn_00437ee0(p, w, w + 4);
@@ -99,35 +98,34 @@ int __cdecl fcn_00441050(char* e)
 					f = f + 0x14;
 					k -= 1;
 				} while (k != 0);
-				sy = sy * g_662a34;
-				count += 1;
 				sx = sx * g_662a34;
+				count += 1;
+				*(float*) (w - 0x20) = sx;
+				sy = sy * g_662a34;
+				*(float*) (w - 0x1c) = sy;
 				sz = sz * g_662a34;
-				*(float*) (w - 0x20) = sy;
-				*(float*) (w - 0x1c) = sx;
 				*(float*) (w - 0x18) = sz;
-				*(float*) (w - 4) = (float) sqrt(sz * sz + sx * sx + sy * sy);
+				len = (float) sqrt(sz * sz + sy * sy + sx * sx);
+				*(float*) (w - 4) = len;
 			}
 			v10 = (void**) (w - 0x1cc);
 			k = 8;
 			do {
-				o = v10[1];
-				if (o != 0) {
-					if (*(char*) (w + 0xe) != 0) {
-						g_1052bac += (*(Fn_441050*) ((char*) *(void**) o + 0x14))(o);
-						g_1042a08 += (*(Fn_441050*) ((char*) *(void**) o + 0x10))(o);
+				if (v10[1] != 0) {
+					if (*(unsigned char*) (w + 0xe) > 0) {
+						g_1052bac += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x14))(v10[1]);
+						g_1042a08 += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x10))(v10[1]);
 					}
-					g_10432a8 += (*(Fn_441050*) ((char*) *(void**) o + 0x10))(o);
-					g_1042a04 += (*(Fn_441050*) ((char*) *(void**) o + 0x14))(o);
+					g_10432a8 += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x10))(v10[1]);
+					g_1042a04 += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x14))(v10[1]);
 				}
-				o = v10[0];
-				if (o != 0) {
-					if (*(char*) (w + 0xe) != 0) {
-						g_1052bac += (*(Fn_441050*) ((char*) *(void**) o + 0x14))(o);
-						g_1042a08 += (*(Fn_441050*) ((char*) *(void**) o + 0x10))(o);
+				if (v10[0] != 0) {
+					if (*(unsigned char*) (w + 0xe) > 0) {
+						g_1052bac += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x14))(v10[0]);
+						g_1042a08 += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x10))(v10[0]);
 					}
-					g_10432a8 += (*(Fn_441050*) ((char*) *(void**) o + 0x10))(o);
-					g_1042a04 += (*(Fn_441050*) ((char*) *(void**) o + 0x14))(o);
+					g_10432a8 += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x10))(v10[0]);
+					g_1042a04 += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x14))(v10[0]);
 				}
 				v10 = (void**) ((char*) v10 + 0x34);
 				k -= 1;

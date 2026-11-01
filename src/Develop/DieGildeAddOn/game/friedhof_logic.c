@@ -206,13 +206,24 @@ int __cdecl gv_eval_HasWorkerId(int* wanted, int* slot)
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 extern int __cdecl cm_GetBuildingStatCount(unsigned char* entity);
+#define gv_BuildingStatCount(e) cm_GetBuildingStatCount((unsigned char*) (e))
+#define gv_SlotWorkerCount(worktype, index) (g_field_worker_count_wt##worktype[(index)])
+#define gv_SlotTable (g_slot_table)
+#define gv_SlotTableEnd ((char*) g_entity_table_end)
+#else
+extern int __cdecl fcn_004f13d0(unsigned char* entity);
+#define gv_BuildingStatCount(e) fcn_004f13d0((unsigned char*) (e))
+#define gv_SlotWorkerCount(worktype, index) (((int*) (0x665328 + (worktype) * 0x10))[(index)])
+#define gv_SlotTable ((char*) 0x7f4ca0)
+#define gv_SlotTableEnd ((char*) (*(unsigned int*) 0x773da8))
+#endif
 
 /* Scans a graveyard slot list for an entry matching the filter callback.
  * The slot list is selected by type (0..3) or derived from the building
  * stats for type 0xff.  Returns the first slot for which the filter
  * returns non-zero, or NULL. */
-#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor, void* filter, int type)
 {
 	unsigned char* entry;
@@ -231,8 +242,9 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
 	 * hoisting the slot index, volatile pins and the CFLAGS sweep all
 	 * leave the cycle in place.
 	 *
-	 * Now 320/320 RELOC; the 7 reloc bytes are the four g_10025* tables,
-	 * g_entity_type_table and the two calls, so RELOC is the ceiling. */
+	 * Now 320/320 RELOC for the server and 319/319 for the T&L client;
+	 * the reloc bytes are the four g_10025* tables, g_entity_type_table
+	 * and the two calls, so RELOC is the ceiling. */
 
 	entry = (unsigned char*) ((g_entity_type_table + *(unsigned char*) entity) + *(unsigned char*) entity * 588);
 	workers = *(void**) ((char*) entity + 0x65);
@@ -240,15 +252,15 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
 		return 0;
 	}
 	if (type == 0) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 8) + g_field_worker_count_wt0[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 8) + gv_SlotWorkerCount(0, *(unsigned char*) (entry + 0x247)) * 20;
 	} else if (type == 1) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0xc) + g_field_worker_count_wt1[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0xc) + gv_SlotWorkerCount(1, *(unsigned char*) (entry + 0x247)) * 20;
 	} else if (type == 2) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0x10) + g_field_worker_count_wt2[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0x10) + gv_SlotWorkerCount(2, *(unsigned char*) (entry + 0x247)) * 20;
 	} else if (type == 3) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0x14) + g_field_worker_count_wt3[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0x14) + gv_SlotWorkerCount(3, *(unsigned char*) (entry + 0x247)) * 20;
 	} else if (type == 0xff) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0x1c) + cm_GetBuildingStatCount((unsigned char*) entity) * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0x1c) + gv_BuildingStatCount(entity) * 20;
 	} else {
 		return 0;
 	}
@@ -278,7 +290,6 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
 	}
 	return 0;
 }
-#endif
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor, void* filter, int type);
 /* Client-only: the first slot of the building holding worker `entity`
  * (discarded, like the helpers above). */
@@ -1078,7 +1089,6 @@ extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
-#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl gv_UpdateProductionProgress(void* building)
 {
 	void* entity;
@@ -1093,7 +1103,7 @@ int __cdecl gv_UpdateProductionProgress(void* building)
 	if (entity) {
 		grave_id = *(unsigned short*) ((char*) entity + 0x27);
 		if (grave_id != 0xffff) {
-			if ((char*) &g_slot_table + grave_id * 0x21c != (char*) g_entity_table_end) {
+			if (gv_SlotTable + grave_id * 0x21c != gv_SlotTableEnd) {
 				field_id = *(unsigned char*) entity;
 				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
 					return -2;
@@ -1126,7 +1136,6 @@ int __cdecl gv_UpdateProductionProgress(void* building)
 	}
 	return -1;
 }
-#endif
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"

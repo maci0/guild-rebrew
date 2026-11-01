@@ -32,9 +32,7 @@ extern int __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0050e170(ENT_50e170* p0, int a1, int a2)
 {
     int total;
-    int n;
     unsigned short* p;
-    unsigned short* q;
     int i;
 
     total = fcn_0050dfd0((char*) p0, a1);
@@ -46,8 +44,7 @@ int __cdecl fcn_0050e170(ENT_50e170* p0, int a1, int a2)
         return total - *(int*) ((char*) p + 0xe);
     }
     i = 0;
-    q = fcn_00502cd0(p0->id, 1, 5);
-    if (q != 0) {
+    if (fcn_00502cd0(p0->id, 1, 5) != 0) {
         do {
             i++;
         } while (gm_NextEntityQueryMatch() != 0);

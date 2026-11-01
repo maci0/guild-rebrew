@@ -44,11 +44,20 @@ void __cdecl gv_Free3Fields(int* slot);
 void __cdecl fcn_0045cfa0(SCENE_PROGRESS progress);
 int __cdecl _strcmpi(const char* a, const char* b);
 
+/* Reader scratch. The reference frame reserves sixteen bytes for it and never
+ * touches the fourth float; only x/y/z reach the scene tables. */
+typedef struct {
+	float x;
+	float y;
+	float z;
+	float w;
+} VEC4;
+
 /* ADDRESS: GOLDTL 0x00448360 */
 char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS progress)
 {
 	char name[256];
-	VECTOR3 vec;
+	VEC4 vec;
 	float discarded;
 	float fog_a;
 	float fog_b;
@@ -57,10 +66,10 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 	int index;
 	int rows;
 	int color;
+	int fog_color;
 	char* s;
 	char* obj;
 	char* clone;
-	char* row;
 	char* universe;
 	unsigned char present;
 
@@ -85,13 +94,13 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 		fcn_004011a0(s, name);
 		fcn_004011d0(s, &discarded);
 		fcn_00401280(s, &vec);
-		g_67bbdc.z = vec.z;
 		g_67bbdc.x = vec.x;
 		g_67bbdc.y = vec.y;
+		g_67bbdc.z = vec.z;
 		if (version >= 0x3a6c00b5) {
 			fcn_00401280(s, &vec);
-			g_6b86c4.y = vec.y;
 			g_6b86c4.x = vec.x;
+			g_6b86c4.y = vec.y;
 			g_6b86c4.z = vec.z;
 		}
 		if (version >= 0x3a6c00b3) {
@@ -102,21 +111,22 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 				fcn_004011f0(s, &index);
 			}
 			*(int*) (g_67a370 + 0xb4) = index;
-			fcn_004011f0(s, &color);
+			fcn_004011f0(s, &fog_color);
 			fcn_004011d0(s, &fog_a);
 			fcn_004011d0(s, &fog_b);
-			fcn_00438920(fog_a, fog_b, color);
+			fcn_00438920(fog_a, fog_b, fog_color);
 		}
-		row = g_1041d80 + 4;
-		do {
-			*(float*) (row - 4) = g_67bbdc.x;
-			*(float*) row = g_67bbdc.y;
-			*(float*) (row + 4) = g_67bbdc.z;
-			*(int*) (row + 8) = 0;
-			*(int*) (row + 0xc) = 0;
-			*(int*) (row + 0x10) = 0;
-			row += 0x60;
-		} while (row < g_1041d80 + 0x2a4);
+		/* The reference writes the row count into index before the loop
+		 * and never reads it back. */
+		index = 7;
+		for (index = 0; index < 7; index++) {
+			*(float*) (g_1041d80 + index * 0x60) = g_67bbdc.x;
+			*(float*) (g_1041d80 + index * 0x60 + 4) = g_67bbdc.y;
+			*(float*) (g_1041d80 + index * 0x60 + 8) = g_67bbdc.z;
+			*(int*) (g_1041d80 + index * 0x60 + 0xc) = 0;
+			*(int*) (g_1041d80 + index * 0x60 + 0x10) = 0;
+			*(int*) (g_1041d80 + index * 0x60 + 0x14) = 0;
+		}
 		if (version >= 0x3a6c00a2) {
 			rows = fcn_00446ca0((unsigned) version);
 			index = 0;
@@ -154,8 +164,8 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 			d3_DisposeObject(g_6b8484);
 		}
 		fcn_004011f0(s, &count);
+		index = 0;
 		if (count > 0) {
-			index = 0;
 			do {
 				rd_object(s, 0, (unsigned) version, 0);
 				if (progress != 0) {

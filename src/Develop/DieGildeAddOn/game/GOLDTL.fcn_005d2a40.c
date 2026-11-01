@@ -9,6 +9,13 @@ int __cdecl fcn_004fa5b0(int, char*, int);
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
+/* fcn_00505e30: float of short [0x7f4caa + (a&0xffff)*540]. */
+/* ADDRESS: GOLDTL 0x00508e80 */
+float __cdecl fcn_00505e30(int a)
+{
+	return (float) (unsigned short) *(unsigned short*) (0x7f4caa + (a & 0xffff) * 540);
+}
+
 /* ADDRESS: GOLDTL 0x005d2a40 */
 int __cdecl fcn_005d2a40(int a0, int a1)
 {

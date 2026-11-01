@@ -11648,3 +11648,115 @@ remaining changes (one pad, shift 0xE80). Rebuild: 2,981,888 bytes, raw 251,522,
 informative 115,657, no compile or link errors.
 
 Decision: continuing. No GA was run.
+
+### 2026-11-01 — align flags for consolidated entity helper
+
+Cleared the stale per-function include-path override on TL `0x508e80` after its
+move into `GOLDTL.fcn_005d2a40.c`; both functions now use the target's canonical
+`/O2 /Gd` TU flags. The TU includes only the standard `string.h`, and the helper
+still matches 37/37 bytes EXACT with `/O2 /Gd`. Decision owner: project owner.
+This removes the conflicting-flags configuration failure; the full T&L rebuild
+and raw-link comparison remain separate checks.
+The subsequent two-function test recorded `0x508e80` EXACT 37/37 and
+`0x5d2a40` SIZE_MISMATCH 498/742 (737-byte object); it does not claim the
+second body matches.
+
+### 2026-11-01 — same-TU merges: client rows join their native translation unit
+
+Applied the same-TU lever on the Gold T&L client. A native caller that keeps
+ecx/edx live across a direct call only compiles that way when the callee is
+defined in the same translation unit.
+
+- `0x4F18D0` `FindSlotEntryFiltered`: 67/326 -> RELOC 319/319. The body moved from
+  the deleted `friedhof_logic_c/GOLDTL.FindSlotEntryFiltered.c` into
+  `friedhof_logic.c`, which already defines `gv_CheckSlotActive` (0x4F15D0) for the
+  server and Gold targets. The guard now includes the T&L client and the type-0xff
+  stat call uses the client's `fcn_004f13d0` row. The stale `/Oy-` override was
+  cleared; the TU uses its canonical `/O2 /Gd`.
+- `0x4F2D90` `gv_UpdateProductionProgress`: 158/240 -> RELOC 237/237. Same file;
+  the split `friedhof_logic_c/GOLDTL.gv_UpdateProductionProgress.c` is deleted and
+  the existing server body now serves the client.
+- `0x5D2A40` `fcn_005d2a40`: 482/742 (object 758) -> 498/742 (object 737), first
+  mismatch offset 22 -> 82. The `fcn_00505e30` body (0x508E80, EXACT 37/37) moved
+  from the deleted `Unassigned/GOLDTL.fcn_508e80.c` into the caller file. The
+  remaining gap is the unreconstructed tail.
+
+Rows rebound with `source binding rebind` under reviewed digests. Verification:
+`rebrew test <va>` for each affected row; 0x4F15D0 stays EXACT 113/113 and the
+server rows 0x10010710 (320/320) and 0x10011790 (242/242) still match.
+
+Rejected candidates (match did not rise, or it rose without moving the first
+mismatch): 0x5448E0, 0x5305D0, 0x4FD0A0, 0x4BFE00, 0x591EA0, 0x4FD780, 0x474CF0,
+0x4A0BB0, 0x4E3020, 0x4F7120, 0x507540, 0x52DF40, 0x48FE70, 0x551A20, 0x451A40,
+0x4748B0, 0x4BF1B0, 0x5BE140, 0x52EA30, 0x4DCF50, and 0x406560 (the empty callee
+is folded away). Several further pairs failed to compile because the caller's
+prototype disagrees with the callee definition.
+
+Decision: merges kept under the stated rule.
+The T&L rebuild passed flag generation but failed to link: the newly included
+`friedhof_logic.c` references `g_field_worker_count_wt0` through `wt3`, whose
+existing server-verified definitions live in a source not selected by the T&L
+build. Their native client ownership and linked placement have not been
+established, so no replacement storage was added. See
+`.scratch/net-reconcile/tl-build-final.log`.
+A subsequent T&L build succeeded after the shared game helper selected T&L's
+native table addresses. The earlier and current raw links differ in `.text` and
+`.data`; unrelated source changes occurred between them, so that comparison
+does not isolate the network consolidation. Imports and relocations match.
+Receipt: `.scratch/sim-consolidation/prior-check.json`.
+
+### 2026-11-01 — simulation shared-definition review
+
+`sim_SetSyncParams` has identical source bodies in `sim.c` and
+`GOLD.fcn_0047cec0.c`; existing client definitions test EXACT 41/41 for TL
+`0x500c50` and Gold `0x4fe1e0`. The server's `sim.c` definition remains
+canonical. Decision owner: project owner. No move was applied: two all-target
+organization reviews rejected inputs that changed while reading the shared
+stores. The current T&L build succeeds and its preserved raw link is
+`.scratch/sim-consolidation/tl-before.exe`; its Gold and server counterparts
+are in the same directory. The eventual move still requires a fresh review,
+rebuilds of affected targets, and raw-link comparisons.
+
+### 0x00449630 `fcn_00449630` frame and conversion scratch
+
+- `p34` declared `float[4]` but only elements 0..2 are used: `float p34[3]`.
+  Local frame drops 0x58 -> 0x54, matching the native (`sub esp, 0x54`).
+- The two mouse-delta divisions were converted through explicit float casts,
+  which made MSVC 6 emit a signed integer divide against a 4-byte scratch. The
+  native instead converts both operands to double and stores the unsigned
+  operand with a `fild qword` of a stack scratch:
+  `f04 = dx / (double) w`, `a18[0] = (double) dy / f10`, and the `r` divisor
+  `(double) w`. That reproduces the native's `fild qword [esp+0x28]` /
+  `fidiv`-free block order and materializes `f10` at `[esp+0x20]`.
+- Verification: `.venv/bin/rebrew test src/Develop/Unassigned/GOLDTL.fcn_00449630.c
+  --va 0x00449630 --size 1131 --no-promote` reports match 411/1131 (was 356/1133),
+  object 1127 bytes, frame 0x54. Remaining blocker: `a18` still lands at frame
+  offset 0x24 rather than the native 0x18, so `p28`/`p34` sit 4 bytes high.
+  Rejected (no code change or worse): union/double `a18`, `a18[3]`/`a18[4]`,
+  declaration and zero-init reordering, `f10`/`f14` as double, uninitialized
+  4th call argument (native reads `[esp+0x34]`, never written).
+
+## 2026-11-01 — placed rows close three exact and one frame
+
+- `0x448360` RELOC 1406/1406: the row-init loop is a literal-count index loop over
+  `g_1041d80` with a required dead `index = 7` (the index is address-taken in the
+  function), which makes MSVC emit the base g+4, the dead store, and the signed
+  absolute compare. The object-count loop needs `index = 0;` as its own statement
+  before the guard.
+- `0x45BFB0` RELOC 337/337: drop the `q = p + 0x70` temp and advance `p` itself.
+- `0x44C460` RELOC 441/441: real signature is
+  `char* d3_LoadObjectAnim(char* path, char* object, char loop)`; no `items` local;
+  flag update written `(old ^ (loop << 1)) & 2 ^ old` on `unsigned char*`.
+- `0x4F18D0` RELOC 319/319 and `0x4F2D90` RELOC 237/237 from same-TU merges into
+  `friedhof_logic.c`; `0x4C9E20` and the goldtl worker tables use literals.
+- `0x4C2430`: per-TU `/O2 /Gd /Oa` recorded with native aliasing evidence, match
+  886 -> 949/956.
+- Near matches: `0x44C6F0` 550/579, `0x441050` 841/931 at exact size,
+  `0x449630` 411/1131 with frame 0x54, `0x419640` 257/845, `0x452C60` 1084/2060,
+  `0x448360` exact, `0x50E170` 100/121, `0x40F1C0` RELOC 371/371.
+
+Lead pads retuned twice for the new object sizes (5 pads shift -0x2A0, then one
+pad shift 0x10). Rebuild: 2,977,792 bytes, raw 251,705, informative 115,528,
+no compile or link errors, sha256 2b65d909.
+
+Decision: continuing. No GA was run.

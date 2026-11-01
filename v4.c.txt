@@ -1,0 +1,67 @@
+
+.scratch/alloc/out.obj:     file format pe-i386
+
+
+Disassembly of section .text:
+
+00000000 <_cm_ExAllocCutscene>:
+   0:	mov    eax,ds:0x0
+   5:	sub    esp,0x114
+   b:	mov    ecx,0x45
+  10:	push   ebx
+  11:	push   esi
+  12:	push   edi
+  13:	mov    esi,0x0
+  18:	lea    edi,[esp+0xc]
+  1c:	xor    ebx,ebx
+  1e:	rep movs DWORD PTR es:[edi],DWORD PTR ds:[esi]
+  20:	mov    esi,DWORD PTR [esp+0x124]
+  27:	cmp    eax,0xffffffff
+  2a:	je     34 <_cm_ExAllocCutscene+0x34>
+  2c:	mov    eax,DWORD PTR [esi+0x10]
+  2f:	mov    ds:0x0,eax
+  34:	lea    ecx,[esp+0xc]
+  38:	push   ecx
+  39:	call   3e <_cm_ExAllocCutscene+0x3e>
+  3e:	add    esp,0x4
+  41:	mov    dl,0x4
+  43:	test   eax,eax
+  45:	je     70 <_cm_ExAllocCutscene+0x70>
+  47:	test   BYTE PTR ds:0x0,dl
+  4d:	je     53 <_cm_ExAllocCutscene+0x53>
+  4f:	or     BYTE PTR [eax+0x26],0x80
+  53:	mov    ecx,DWORD PTR [esi+0x14]
+  56:	mov    DWORD PTR [eax+0x78],ecx
+  59:	mov    ecx,DWORD PTR [esp+0x128]
+  60:	test   ecx,ecx
+  62:	je     75 <_cm_ExAllocCutscene+0x75>
+  64:	mov    BYTE PTR [ecx],0x1
+  67:	mov    BYTE PTR [ecx+0x1],0x9
+  6b:	mov    DWORD PTR [ecx+0x6],eax
+  6e:	jmp    75 <_cm_ExAllocCutscene+0x75>
+  70:	mov    ebx,0x1
+  75:	cmp    BYTE PTR [eax+0x8],0x5
+  79:	jne    a7 <_cm_ExAllocCutscene+0xa7>
+  7b:	xor    ecx,ecx
+  7d:	mov    esi,DWORD PTR [eax+0x34]
+  80:	mov    cx,WORD PTR ds:0x0
+  87:	lea    ecx,[ecx+ecx*2]
+  8a:	lea    ecx,[ecx+ecx*4]
+  8d:	lea    ecx,[ecx+ecx*8]
+  90:	mov    ecx,DWORD PTR [ecx*4+0x0]
+  97:	cmp    ecx,esi
+  99:	je     a7 <_cm_ExAllocCutscene+0xa7>
+  9b:	test   BYTE PTR ds:0x0,dl
+  a1:	jne    a7 <_cm_ExAllocCutscene+0xa7>
+  a3:	and    BYTE PTR [eax+0x26],0x7f
+  a7:	mov    eax,ds:0x0
+  ac:	pop    edi
+  ad:	inc    eax
+  ae:	pop    esi
+  af:	mov    ds:0x0,eax
+  b4:	mov    eax,ebx
+  b6:	pop    ebx
+  b7:	add    esp,0x114
+  bd:	ret
+  be:	nop
+  bf:	nop

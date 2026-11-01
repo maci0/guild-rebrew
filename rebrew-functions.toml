@@ -129932,31 +129932,30 @@ measured_at = "2026-11-01T07:32:10+00:00"
 
 ["GOLDTL.0x0044c460"]
 size = 441
-status = "SIZE_MISMATCH"
+status = "RELOC"
 updated_by = "test"
-updated_at = "2026-10-19T04:46:00+00:00"
+updated_at = "2026-11-01T08:44:29+00:00"
 file = "src/Develop/Units/d3/GOLDTL.d3_LoadObjectAnim.c"
 symbol = "_d3_LoadObjectAnim"
 kind = "FUNCTION"
 name = "d3_LoadObjectAnim"
-blocker = "Incomplete reconstruction: current stub returns zero; recover the native object-animation loader body and its call contract."
 
 ["GOLDTL.0x0044c460".verification]
-source_hash = "d97bf9dec208d7dbb7a059fc9d9c3394ab842b8954b0b1980b27627d28eb263e"
+source_hash = "834ee89abaa2dfecf1b499aadeef338442a6bac9f429df6a772b698d4618bb0f"
 reference_hash = "cff04c518adaae478636a6283152f0743e7f01c8d53f4a42fcd44ee3c09b33a6"
 reference_size = "441"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "9f6f5c4d3ea00931397a552b31f272fb0a33988bdd8e0c42f67cb48a1af49936"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x44c460"
 context_hash = ""
 defines = "[]"
-input_hash = "0cc4daae9604f6a4715f3334a7e191698ff5f771a48011e4aaa05e001999bdfc"
-writer = "verify"
-status = "SIZE_MISMATCH"
-measured_at = "2026-11-01T07:32:10+00:00"
+input_hash = "eecfad72639355724693b72d2aee351a99054263ce5d79567c4cda46af1eb61d"
+status = "RELOC"
+writer = "test"
+measured_at = "2026-11-01T08:44:29+00:00"
 
 [["GOLDTL.0x0044c460".status_history]]
 old_status = "SIZE_MISMATCH"
@@ -129968,6 +129967,12 @@ updated_by = "verify"
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-19T04:46:00.144935+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0044c460".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "RELOC"
+changed_at = "2026-11-01T08:44:29.368811+00:00"
 updated_by = "test"
 ["GOLDTL.0x0044c620"]
 size = 207
@@ -181702,33 +181707,30 @@ measured_at = "2026-11-01T07:32:11+00:00"
 
 ["GOLDTL.0x004f18d0"]
 size = 319
-status = "SIZE_MISMATCH"
-blocker = "codegen needs gv_CheckSlotActive (0x4f15d0) defined in the same TU: with a non-static definition present MSVC 6 keeps the entity-type-table pointer in edx across the call (target shape); with only a declaration it spills it to esi, 21 byte diffs, 299/320. The reference TU co-located both, this split TU cannot without a duplicate symbol."
-blocker_delta = 292
 updated_by = "test"
-updated_at = "2026-10-24T08:31:54+00:00"
-file = "src/Develop/DieGildeAddOn/game/friedhof_logic_c/GOLDTL.FindSlotEntryFiltered.c"
+updated_at = "2026-11-01T08:44:13+00:00"
+file = "src/Develop/DieGildeAddOn/game/friedhof_logic.c"
+name = "FindSlotEntryFiltered"
 symbol = "_FindSlotEntryFiltered"
 kind = "FUNCTION"
-name = "FindSlotEntryFiltered"
-cflags = "/O2 /Gd /Oy-"
+status = "RELOC"
 
 ["GOLDTL.0x004f18d0".verification]
-source_hash = "20414f2fb48a288499399124e9f072b2be378c83cca6310641fbc5961a5277e8"
+source_hash = "ce761b560384d9f076ec5d9f7cbb4a480ac2f9992e42b69682383a3c4697c6a8"
 reference_hash = "1805505f5de9ed139204a94cfa464165cb24155bc6a697c365fe84ad92457d6a"
 reference_size = "319"
-headers_hash = "599e1475221a68118394810857b2e89e1bd5b00e235f32645cc9dad491b97ee7"
-compiler_hash = "9f6f5c4d3ea00931397a552b31f272fb0a33988bdd8e0c42f67cb48a1af49936"
+headers_hash = "3374b87fd72c15a48f8fd40039b139201bb07183c9b8cd7b949741c0109e1799"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
 toolchain = "(default)"
-cflags = "/O2 /Gd /Oy-"
+cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x4f18d0"
 context_hash = ""
 defines = "[]"
-input_hash = "8e109f8063032e81e4b8693d3e3d69f1d19da7dbb687b080455445942578444d"
-writer = "verify"
-status = "SIZE_MISMATCH"
-measured_at = "2026-11-01T07:32:11+00:00"
+input_hash = "2424a320103020166f5febd229f8f9423ca01e580aa8173ae3c85aa7ccca01be"
+status = "RELOC"
+writer = "test"
+measured_at = "2026-11-01T09:02:20+00:00"
 
 [["GOLDTL.0x004f18d0".status_history]]
 old_status = "SIZE_MISMATCH"
@@ -181753,6 +181755,46 @@ old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-24T08:31:54.374661+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x004f18d0".binding_history]]
+action = "rebind"
+reason = "Native caller 0x4F18D0 keeps the entity-table pointer in edx across the direct call to 0x4F15D0 and reads it after the call; MSVC 6 only emits that when gv_CheckSlotActive is defined in the same translation unit. The client variant now shares the server's friedhof_logic translation unit, so the split client file is removed."
+changed_at = "2026-11-01T08:41:57.505937+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x004f18d0".binding_history.previous]
+size = 319
+status = "SIZE_MISMATCH"
+blocker = "codegen needs gv_CheckSlotActive (0x4f15d0) defined in the same TU: with a non-static definition present MSVC 6 keeps the entity-type-table pointer in edx across the call (target shape); with only a declaration it spills it to esi, 21 byte diffs, 299/320. The reference TU co-located both, this split TU cannot without a duplicate symbol."
+blocker_delta = 292
+file = "src/Develop/DieGildeAddOn/game/friedhof_logic_c/GOLDTL.FindSlotEntryFiltered.c"
+symbol = "_FindSlotEntryFiltered"
+kind = "FUNCTION"
+name = "FindSlotEntryFiltered"
+cflags = "/O2 /Gd /Oy-"
+
+["GOLDTL.0x004f18d0".binding_history.previous.verification]
+source_hash = "20414f2fb48a288499399124e9f072b2be378c83cca6310641fbc5961a5277e8"
+reference_hash = "1805505f5de9ed139204a94cfa464165cb24155bc6a697c365fe84ad92457d6a"
+reference_size = "319"
+headers_hash = "599e1475221a68118394810857b2e89e1bd5b00e235f32645cc9dad491b97ee7"
+compiler_hash = "9f6f5c4d3ea00931397a552b31f272fb0a33988bdd8e0c42f67cb48a1af49936"
+toolchain = "(default)"
+cflags = "/O2 /Gd /Oy-"
+module = "GOLDTL"
+va = "0x4f18d0"
+context_hash = ""
+defines = "[]"
+input_hash = "8e109f8063032e81e4b8693d3e3d69f1d19da7dbb687b080455445942578444d"
+writer = "verify"
+status = "SIZE_MISMATCH"
+measured_at = "2026-11-01T07:32:11+00:00"
+
+["GOLDTL.0x004f18d0".binding_history.replacement]
+file = "src/Develop/DieGildeAddOn/game/friedhof_logic.c"
+name = "FindSlotEntryFiltered"
+symbol = "_FindSlotEntryFiltered"
+kind = "FUNCTION"
 ["GOLDTL.0x004f1a10"]
 size = 43
 status = "RELOC"
@@ -182255,15 +182297,58 @@ changed_at = "2026-10-04T03:20:51.149333+00:00"
 updated_by = "verify"
 ["GOLDTL.0x004f2d90"]
 size = 237
-status = "SIZE_MISMATCH"
 updated_by = "test"
-updated_at = "2026-10-19T05:28:37+00:00"
+updated_at = "2026-11-01T08:47:31+00:00"
+file = "src/Develop/DieGildeAddOn/game/friedhof_logic.c"
+name = "gv_UpdateProductionProgress"
+symbol = "_gv_UpdateProductionProgress"
+kind = "FUNCTION"
+status = "RELOC"
+
+["GOLDTL.0x004f2d90".verification]
+source_hash = "ce761b560384d9f076ec5d9f7cbb4a480ac2f9992e42b69682383a3c4697c6a8"
+reference_hash = "33547bc874563b6804d597f5e7eb5bfeae46b639d93f075bcbf1f177ad3c502e"
+reference_size = "237"
+headers_hash = "3374b87fd72c15a48f8fd40039b139201bb07183c9b8cd7b949741c0109e1799"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x4f2d90"
+context_hash = ""
+defines = "[]"
+input_hash = "b42f0a74e641a58501051d06e4100036ed1d397267988b498e4af51121f4c25e"
+status = "RELOC"
+writer = "test"
+measured_at = "2026-11-01T09:02:53+00:00"
+
+[["GOLDTL.0x004f2d90".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-10-03T21:17:10.897223+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x004f2d90".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-19T05:28:37.440899+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x004f2d90".binding_history]]
+action = "rebind"
+reason = "Native caller 0x4F2D90 keeps the entity-table pointer in edx across the direct call to 0x4F15D0; MSVC 6 only emits that when gv_CheckSlotActive is defined in the same translation unit. The client variant now shares the server's friedhof_logic translation unit, so the split client file is removed."
+changed_at = "2026-11-01T08:43:17.675399+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x004f2d90".binding_history.previous]
+size = 237
+status = "SIZE_MISMATCH"
 file = "src/Develop/DieGildeAddOn/game/friedhof_logic_c/GOLDTL.gv_UpdateProductionProgress.c"
 symbol = "_gv_UpdateProductionProgress"
 kind = "FUNCTION"
 name = "gv_UpdateProductionProgress"
 
-["GOLDTL.0x004f2d90".verification]
+["GOLDTL.0x004f2d90".binding_history.previous.verification]
 source_hash = "8729713420391df625f475fbd22428300f5d325aed8545c80a2f6fdfbac09c90"
 reference_hash = "33547bc874563b6804d597f5e7eb5bfeae46b639d93f075bcbf1f177ad3c502e"
 reference_size = "237"
@@ -182280,17 +182365,11 @@ writer = "verify"
 status = "SIZE_MISMATCH"
 measured_at = "2026-11-01T07:32:11+00:00"
 
-[["GOLDTL.0x004f2d90".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "NEAR_MATCHING"
-changed_at = "2026-10-03T21:17:10.897223+00:00"
-updated_by = "verify"
-
-[["GOLDTL.0x004f2d90".status_history]]
-old_status = "NEAR_MATCHING"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-19T05:28:37.440899+00:00"
-updated_by = "test"
+["GOLDTL.0x004f2d90".binding_history.replacement]
+file = "src/Develop/DieGildeAddOn/game/friedhof_logic.c"
+name = "gv_UpdateProductionProgress"
+symbol = "_gv_UpdateProductionProgress"
+kind = "FUNCTION"
 ["GOLDTL.0x004f2e80"]
 size = 81
 status = "RELOC"
@@ -190200,16 +190279,47 @@ changed_at = "2026-10-04T03:20:51.149333+00:00"
 updated_by = "verify"
 ["GOLDTL.0x00508e80"]
 size = 37
+updated_by = "test"
+updated_at = "2026-11-01T08:48:08+00:00"
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005d2a40.c"
+name = "fcn_00505e30"
+symbol = "_fcn_00505e30"
+kind = "FUNCTION"
+status = "EXACT"
+
+["GOLDTL.0x00508e80".verification]
+source_hash = "780093538beb411cb7f71f2e87ab7821da519cfd6767f2667672aa227de74247"
+reference_hash = "ac0ee18886320d10a8e26bdaf6f40af5999e90db3e3e4b7ddea15f658dcc0160"
+reference_size = "37"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x508e80"
+context_hash = ""
+defines = "[]"
+input_hash = "e739b9ca1bdb41a2d57703b73bf98e61168634e4ebbf4ddbb538b03e2f1f8c55"
+status = "EXACT"
+writer = "test"
+measured_at = "2026-11-01T09:05:13+00:00"
+
+[["GOLDTL.0x00508e80".binding_history]]
+action = "rebind"
+reason = "Native caller 0x5D2A40 keeps edx across the direct call to 0x508E80; MSVC 6 only emits that when the callee is defined in the same translation unit. The 37-byte callee body moves into the caller's file."
+changed_at = "2026-11-01T08:45:39.114648+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00508e80".binding_history.previous]
+size = 37
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/guild-rebrew/src/Europa1400Gold.exe"
 status = "EXACT"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:26+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_508e80.c"
 symbol = "_fcn_00505e30"
 kind = "FUNCTION"
 name = "fcn_00505e30"
 
-["GOLDTL.0x00508e80".verification]
+["GOLDTL.0x00508e80".binding_history.previous.verification]
 source_hash = "7cf7bde26f957a42eb474e24c9850cea33e54627519e94eadcf3eb702fe3c761"
 reference_hash = "ac0ee18886320d10a8e26bdaf6f40af5999e90db3e3e4b7ddea15f658dcc0160"
 reference_size = "37"
@@ -190226,6 +190336,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-01T07:32:11+00:00"
 
+["GOLDTL.0x00508e80".binding_history.replacement]
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005d2a40.c"
+name = "fcn_00505e30"
+symbol = "_fcn_00505e30"
+kind = "FUNCTION"
 ["GOLDTL.0x00509570"]
 size = 65
 status = "NEAR_MATCHING"
@@ -416518,17 +416633,17 @@ source_hash = "4a7e626437f7b3aa5aa39ffbbb225888f6fdcd8261d056b61b6a4e4800f3e3fd"
 reference_hash = "b004540d158976c33cff841c2a62a7359206f626cf8f49a98bde8e81bd4671b5"
 reference_size = "404"
 headers_hash = "b2ddb7d51852834dbbf7c2df3598797bdc45843cfa389d2a8ab7fe58c66a5c50"
-compiler_hash = "9f6f5c4d3ea00931397a552b31f272fb0a33988bdd8e0c42f67cb48a1af49936"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
 toolchain = "(default)"
 cflags = "/O2 /Gd /G5"
 module = "GOLDTL"
 va = "0x404dc0"
 context_hash = ""
 defines = "[]"
-input_hash = "e3b2f43d0f946f61f15c6f385b09b8a76cec47de3ff9eb4ed5e8d961949ccc8e"
-writer = "verify"
+input_hash = "091a236dc452b0fc1c1b1166db590eaceb64cff4c2a08edd4fe20612d6b32e1b"
 status = "STUB"
-measured_at = "2026-11-01T07:32:09+00:00"
+writer = "test"
+measured_at = "2026-11-01T09:01:18+00:00"
 
 [["GOLDTL.0x00404dc0".status_history]]
 old_status = "STUB"
@@ -420008,14 +420123,14 @@ size = 1406
 note = "Complete TL scene-loader C body1353/native1406, SIZE_MISMATCH. Native38-call set and literal bytes agree, but shifted84 operands are not native-site proof. After identity-only data bindings82 slots CONFLICT and2 CRT targets unresolved; stricter comparison76/1406 is not a source regression. Native ret0x4488dd excludes2 alignment NOPs. Primitive stream, universe-pointer and provider contracts remain open. .scratch/goal83-scene-data-integration/"
 name = "fcn_00448360"
 updated_by = "test"
-updated_at = "2026-11-01T08:36:46+00:00"
+updated_at = "2026-11-01T09:08:14+00:00"
 file = "src/Develop/Units/d3/GOLDTL.fcn_00448360.c"
 symbol = "_fcn_00448360"
 kind = "FUNCTION"
-status = "STUB"
+status = "RELOC"
 
 ["GOLDTL.0x00448360".verification]
-source_hash = "2f89bac6bc26b4578e7ed4cb08e143cc0363a84300bf9a0ab8ce80775a90b01e"
+source_hash = "03f92ba4d4fa011dfa817b7f052d7537db05090ff102de7f9325a7fa70f7dbb3"
 reference_hash = "afb0afa5a769a4b3814e91b7aaea8767c4a4eaae03d99aa2271ca32163913972"
 reference_size = "1406"
 headers_hash = "f89b5b1d78d3891e37ef1022e26f94ca36f4db388150d63c97cc786ff38a159d"
@@ -420026,16 +420141,21 @@ module = "GOLDTL"
 va = "0x448360"
 context_hash = ""
 defines = "[]"
-input_hash = "b992572839d2a30d6004a674065c74a4cc109d49ade7de99a40021e9752bc529"
-status = "STUB"
+input_hash = "a7470bcea2464c05f6ba502e82cff73778e2d22e5418ecaa4487c71a6d5bbcd9"
+status = "RELOC"
 writer = "test"
-measured_at = "2026-11-01T08:36:46+00:00"
-
+measured_at = "2026-11-01T09:08:14+00:00"
 
 [["GOLDTL.0x00448360".status_history]]
 old_status = "SIZE_MISMATCH"
 new_status = "STUB"
 changed_at = "2026-11-01T08:36:46.943523+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00448360".status_history]]
+old_status = "STUB"
+new_status = "RELOC"
+changed_at = "2026-11-01T09:08:14.071749+00:00"
 updated_by = "test"
 ["GOLDTL.0x0045b290"]
 size = 1136
@@ -428731,13 +428851,13 @@ symbol = "_fcn_0050e170"
 name = "fcn_0050e170"
 kind = "FUNCTION"
 updated_by = "test"
-updated_at = "2026-10-29T15:08:50+00:00"
-status = "STUB"
+updated_at = "2026-11-01T08:40:42+00:00"
+status = "NEAR_MATCHING"
 blocker = "faithful C89 body compiles to the exact 121-byte extent; residual is register allocation: reference keeps a1 in ecx across fcn_0050dfd0 and pushes that ecx as fcn_00502cd0's 4th argument, our compiler reloads a1 from the stack and duplicates p0, so 104 of 121 bytes differ"
 blocker_delta = 104
 
 ["GOLDTL.0x0050e170".verification]
-source_hash = "cd4ad1facc9386719002a26287b6d392e5b4056306f45cda6e79d1d0caa33059"
+source_hash = "65e2b1b7db3c100b270c9541015f8fcbc8a07e70576fe522e7d9e297ffabb1c3"
 reference_hash = "11ba2c50e9f20a9a44e89d380765529e0a252f36ea2e5b1cc9d57bb00fe3eb29"
 reference_size = "121"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -428748,10 +428868,10 @@ module = "GOLDTL"
 va = "0x50e170"
 context_hash = ""
 defines = "[]"
-input_hash = "77e28a549864e1baa99eb812d7c700bb49321a9421e93cf2be0548358597c928"
-status = "STUB"
+input_hash = "183dd7f365b92d50d9d9d943abecbde7db813b62250f055806aad41cdc87b8dd"
+status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-10-31T16:19:56+00:00"
+measured_at = "2026-11-01T08:40:42+00:00"
 
 [["GOLDTL.0x0050e170".status_history]]
 old_status = "STUB"
@@ -428775,6 +428895,12 @@ updated_by = "test"
 old_status = "SIZE_MISMATCH"
 new_status = "STUB"
 changed_at = "2026-10-29T15:08:50.042115+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0050e170".status_history]]
+old_status = "STUB"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-01T08:40:42.557497+00:00"
 updated_by = "test"
 ["GOLDTL.0x0042a2d0"]
 size = 125
@@ -439027,27 +439153,26 @@ file = "src/Develop/Unassigned/GOLDTL.fcn_0045bfb0.c"
 symbol = "_fcn_0045bfb0"
 name = "fcn_0045bfb0"
 kind = "FUNCTION"
-updated_by = "verify"
-updated_at = "2026-10-29T11:21:26+00:00"
-status = "NEAR_MATCHING"
-blocker = "Application code — pending per-function decompilation"
+updated_by = "test"
+updated_at = "2026-11-01T08:48:22+00:00"
+status = "RELOC"
 
 ["GOLDTL.0x0045bfb0".verification]
-source_hash = "337f48165901941c72558d3e7bc58a3dc1d4a066e747d4a5ee726ed4591eceda"
+source_hash = "23475ca8d943346bfed1787921cd055875138c0e3cf63711119a2ed750823453"
 reference_hash = "0a215fc4505156d0c98147d87208f4b40179f3f5ba6fcd9270f82e2477bb8721"
 reference_size = "337"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "9f6f5c4d3ea00931397a552b31f272fb0a33988bdd8e0c42f67cb48a1af49936"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x45bfb0"
 context_hash = ""
 defines = "[]"
-input_hash = "266eeabca85be29ddfe7916941b544c96c9ef3ca66b289fd8c8a410ceb2f2afd"
-writer = "verify"
-status = "NEAR_MATCHING"
-measured_at = "2026-11-01T07:32:10+00:00"
+input_hash = "7c0e4184595eb5baee4da97bd3ee60951e6b4a3a737645a0c2c4e539f9676314"
+status = "RELOC"
+writer = "test"
+measured_at = "2026-11-01T08:48:22+00:00"
 
 [["GOLDTL.0x0045bfb0".status_history]]
 old_status = "STUB"
@@ -439078,6 +439203,12 @@ old_status = "SIZE_MISMATCH"
 new_status = "NEAR_MATCHING"
 changed_at = "2026-10-29T11:21:26.193942+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0045bfb0".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "RELOC"
+changed_at = "2026-11-01T08:48:22.319306+00:00"
+updated_by = "test"
 ["GOLDTL.0x0058d020"]
 size = 339
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_0058d020.c"
@@ -452047,21 +452178,21 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005d2a40".verification]
-source_hash = "3eb5a2750c778f5479557f9513693098c35173c73e3abd14cd5f67553c7dc3cb"
+source_hash = "780093538beb411cb7f71f2e87ab7821da519cfd6767f2667672aa227de74247"
 reference_hash = "7518b90f732110665e60602ed4ccb444a5f850b57ef22f8bbc7997e7bb493b95"
 reference_size = "742"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "9f6f5c4d3ea00931397a552b31f272fb0a33988bdd8e0c42f67cb48a1af49936"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x5d2a40"
 context_hash = ""
 defines = "[]"
-input_hash = "aa095d6e031b5e562567a1ad6024ec960bbe6319e06012de1e4e307074ef120b"
-writer = "verify"
+input_hash = "7df2c4fb2f55fd947a57ee747f7459fcf452af77edc56c5924807b5dc0fc457e"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-01T07:32:12+00:00"
+writer = "test"
+measured_at = "2026-11-01T09:06:03+00:00"
 
 [["GOLDTL.0x005d2a40".status_history]]
 old_status = "STUB"
@@ -453193,7 +453324,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00419640".verification]
-source_hash = "a159d5c763c21f99df0d084b74a5f850434d8731070b90e5a4c8e5bd2f8245a5"
+source_hash = "d705650cb123bcadad3265416d890241fc96b759733a0354ac5132eec1f03adf"
 reference_hash = "6e2484f0fa9abeced1c41202e9da0ee60cc1bd252507ee5675ff97af63837d4a"
 reference_size = "845"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -453204,10 +453335,10 @@ module = "GOLDTL"
 va = "0x419640"
 context_hash = ""
 defines = "[]"
-input_hash = "b7abd70f1bfb1aae75b9f5f868f3e452bd398f318d1d2277aee2bea49ed88935"
+input_hash = "34991b8f1f6e7cc58b28aeb2d07f840e0a262aeff8d1c16043149815c018db3b"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-01T08:32:13+00:00"
+measured_at = "2026-11-01T09:13:07+00:00"
 
 [["GOLDTL.0x00419640".status_history]]
 old_status = "STUB"
@@ -455027,13 +455158,13 @@ file = "src/Develop/Unassigned/GOLDTL.fcn_00441050.c"
 symbol = "_fcn_00441050"
 name = "fcn_00441050"
 kind = "FUNCTION"
-updated_by = "fix-sizes"
-updated_at = "2026-10-29T11:14:46+00:00"
-status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-11-01T09:09:48+00:00"
+status = "NEAR_MATCHING"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00441050".verification]
-source_hash = "dcd2f6efeb64ba205bbc8e43f942727426b1225bbfbcc9d3f5744e59e3622a22"
+source_hash = "9831f776dbb9d12a0d248518458f6d8906ca7070e042c7e8dc7742416d8969a5"
 reference_hash = "176e60e12bee02dae01cf6ca70af0319090e9c2b9e81a923007e7eb3cd87e2bb"
 reference_size = "931"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -455044,15 +455175,21 @@ module = "GOLDTL"
 va = "0x441050"
 context_hash = ""
 defines = "[]"
-input_hash = "a69e81a21b7ec1c411af0f659c2de254aaa08f48d1a38cb2f3ebfda03487f076"
-status = "SIZE_MISMATCH"
+input_hash = "053e9489102bcfdde073f8cb16649744e90a617bbf9dd4ed506bd75346a06241"
+status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-01T08:37:51+00:00"
+measured_at = "2026-11-01T09:09:48+00:00"
 
 [["GOLDTL.0x00441050".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-19T18:35:28.355276+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00441050".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-01T09:09:48.229558+00:00"
 updated_by = "test"
 ["GOLDTL.0x005167c0"]
 size = 934
@@ -455528,26 +455665,27 @@ symbol = "_fcn_004c2430"
 name = "fcn_004c2430"
 kind = "FUNCTION"
 updated_by = "test"
-updated_at = "2026-11-01T05:52:29+00:00"
+updated_at = "2026-11-01T08:46:16+00:00"
 status = "NEAR_MATCHING"
 blocker = "Application code — pending per-function decompilation"
+cflags = "/O2 /Gd /Oa"
 
 ["GOLDTL.0x004c2430".verification]
 source_hash = "79f5804cabe98016b079f979320a0b77e8873079be425748d4c0124a88576030"
 reference_hash = "4d088dc71bad49cde886634fe41ed34a908a7d4d697a7b0c99eb7759ecee5a3a"
 reference_size = "956"
 headers_hash = "4bd0545b8ff4a2c38e239e4dab787917ff83fe429fc002eed92782f68d93a006"
-compiler_hash = "9f6f5c4d3ea00931397a552b31f272fb0a33988bdd8e0c42f67cb48a1af49936"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
 toolchain = "(default)"
-cflags = "/O2 /Gd"
+cflags = "/O2 /Gd /Oa"
 module = "GOLDTL"
 va = "0x4c2430"
 context_hash = ""
 defines = "[]"
-input_hash = "72b784c547eff5e86f213985cf40a65c600a45866e733995f02ac7dc793b733e"
-writer = "verify"
+input_hash = "a65980b138daf2e58bae6baa0cbda22642515014159f07510b9fdee520ffc1ae"
 status = "NEAR_MATCHING"
-measured_at = "2026-11-01T07:32:10+00:00"
+writer = "test"
+measured_at = "2026-11-01T08:46:35+00:00"
 
 [["GOLDTL.0x004c2430".status_history]]
 old_status = "STUB"
@@ -459280,7 +459418,7 @@ blocker = "MSVC 6 frame/float-codegen class: faithful body from pdg hint compile
 blocker_delta = 42
 
 ["GOLDTL.0x00449630".verification]
-source_hash = "4f50275e3a6ca9be55a113922e6d6805d9aa1366b25a083e11cd34ce4b53bd5d"
+source_hash = "2ff4f141cbe8c6c9d3588cc9671d156a7d31ab91aafad5a6700a56d9808e6a23"
 reference_hash = "3b36b60cee29d5b25a576222a1e0ce91122ebed7e72a76d1d2d6c90d5970df76"
 reference_size = "1131"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -459291,10 +459429,10 @@ module = "GOLDTL"
 va = "0x449630"
 context_hash = ""
 defines = "[]"
-input_hash = "9e918a4bc2093b7c229217a0490069db430c7cdf26a12b4fb1b3651f82420853"
+input_hash = "2a4b1ee4f36fbac6153f7da40ce808d875002e8a17f0cf343e888e319a52cdc7"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-01T08:31:39+00:00"
+measured_at = "2026-11-01T09:16:36+00:00"
 
 [["GOLDTL.0x00449630".status_history]]
 old_status = "STUB"
@@ -467601,21 +467739,21 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00452c60".verification]
-source_hash = "a7bf81679225156ebb3d8ede947a50c493d9a57353b9d2888eb49d03368d48c3"
+source_hash = "d8ae5564cb26fa0b991d88df94e8060f224f7e583bda02bb4f03c6ada02f715e"
 reference_hash = "386ac56e91fd19580c0cf8253dfd45bc68936d5b31319d4e9301c267813e17fc"
 reference_size = "2060"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "9f6f5c4d3ea00931397a552b31f272fb0a33988bdd8e0c42f67cb48a1af49936"
+compiler_hash = "acaa38e6e5fb3db98fd3e088e17ec8e98a8c10f10c52f184f91611a7d7aea103"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x452c60"
 context_hash = ""
 defines = "[]"
-input_hash = "7afe7754ff5b8b4323efbba859d616fe75d8a42882c60579d285cff71d91bdf4"
-writer = "verify"
+input_hash = "5f250372d1e13d043f64a1818e70a607850b9e4e0baac828d0f6e8afe6c8e2fb"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-01T07:32:10+00:00"
+writer = "test"
+measured_at = "2026-11-01T09:12:28+00:00"
 
 [["GOLDTL.0x00452c60".status_history]]
 old_status = "STUB"
@@ -614240,7 +614378,7 @@ new_status = "NEAR_MATCHING"
 changed_at = "2026-10-26T09:57:58.282603+00:00"
 updated_by = "test"
 ["GOLDTL.0x0044c6f0".verification]
-source_hash = "b3b3c1c8eee171f754821b0558ea3bc9ceb41af0cc8c16c00e414b397914607a"
+source_hash = "0c1e13541e8b8278799869a834b7b5a7a5927915616e88432532fdeead8daa7d"
 reference_hash = "71f962b26db67659f324cbf35a140a523f8c3b6d352527a09b71299df53cea33"
 reference_size = "579"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -614251,10 +614389,10 @@ module = "GOLDTL"
 va = "0x44c6f0"
 context_hash = ""
 defines = "[]"
-input_hash = "8d7f8b2c57d7b73664edb9c25848ebc56491d93c97a5b689b6ef1e346299a152"
+input_hash = "43cb1d3b485f2e4f0e0f1567abce958835864ee02e7cbabbf389d2731af35065"
 status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-01T08:09:27+00:00"
+measured_at = "2026-11-01T09:13:51+00:00"
 ["GOLDTL.0x0044d110"]
 note = "Inferred address-only identity for an inventory start admitted by the coverage repair; the stub body is an unreconstructed work item, not a match."
 kind = "FUNCTION"

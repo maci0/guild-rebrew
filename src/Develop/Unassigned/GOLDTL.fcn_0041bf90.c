@@ -44,7 +44,7 @@ int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
 			for (pp = g_6b6f20 + 4; (int) pp >= (int) g_6b6f20; pp--) {
 				bit = idx & 7;
 				idx >>= 3;
-				*(unsigned int*) ((unsigned char*) *pp + idx * sizeof(OctNode) + 0x10) += c;
+				(*pp)[idx].key += c;
 				(*pp)[idx].mask |= (unsigned char) (1 << bit);
 			}
 		}
