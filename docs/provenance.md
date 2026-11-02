@@ -19461,3 +19461,27 @@ met the keep bar. The three allocator states, the pin at the 0xce7 mangel store,
 /Ot, /Ob0, /Ox, /O1 and /Os, and the GOLD 0x5694b0 identity through 0xed4 are all recorded above. A blocker is
 set on the row and the effort moves to another function. Harness and variants in .scratch/571870/ with
 c_paren_right.c, c_pin_tempstruct.c, c_pr_fresh.c, probe3.py and b23..b34.py.
+
+## 2026-11-03 — production message reaches case-5 length parity
+
+`0x569FF0` 303 to 335 with object 3732 from 3636, 38 relocations, frame `sub esp,0x738` with ten scalar dwords,
+lint clean and case 5 now spanning 0x63c..0xdad for 0x771 against native's 0x770, length-exact. The extra dword
+was `int v`, the fcn_0050c5d0 out-parameter: native writes that result into the slot the num block later
+dereferences, and our separate v was the eleventh scalar. Writing `fcn_0050c5d0(pa, (int*)&cnt2)` and reading it
+back through cnt2, as `(float)(int)cnt2`, `if (cnt2 != 0)`, `*(int*)(cnt2+0x14)` and `*(int*)(cnt2+2)`, took the
+all-strcat build from frame 0x73c to 0x738. Five smaller edits were kept on top: case 4's
+`fcn_004c4670(4, 1, 0x65, &num)`, since native's site at 0x56a577 addresses the same slot as the case-4 num and
+is worth 12 match bytes; the flag arm passing num to fcn_004c51a0, since native reads the num product stored at
+0x56a98a at 0x56a9cd; `num = num < 0 ? 0 : num` for native's setl, dec and and, worth 18; the num block's
+`strcat(b400, b100)` at native 0x56ab11; and `default: return;` for 9. The slot map is SEARCH at 0x28..0x37,
+b200 at 0x38, b100 at 0x238, b400 at 0x338 with the memset ending at 0x738, and the zero-initialiser slots are
+X 0x04, 0x24, 0x1c and 0x08 against native's 0x24, 0x1c, 0x20 and 0x0c, so per-variable assignment still differs
+even though the count matches. Blocker recorded: `io_FormatTextBuffer(b100, 0x68bea4, num)`, which native writes
+at 0x56a974 resolving to X 0x238, reproducibly hangs cl.exe across three `rebrew test` attempts at the 60-second
+unshare-runner timeout and one direct run at 100 seconds, while the identical file with b400 compiles in under a
+second; the current source uses b400 and the site remains unmeasured. The prefix is still unconverged: native is
+`push ebx; push ebp; push esi; mov esi,[esp+0x748]; push edi` with e in esi, pb in ebx and px in ebp, while ours
+is `push ebx; mov ebx,[esp+0x740]; push ebp` with e in ebx, and no shape tried moved the assignment. Rejected
+variants with numbers: native-exact nesting 297 at 0x73c with 11 scalars, `fcn_0050c710(pb,1,1)` 294, the while
+compare with pa+1 294, strcpy at the 0x19e6 site 297, and case-4 &cnt2 305. Current source
+.scratch/569ff0/C_final_335.c with notes in NOTES.md.

@@ -75,7 +75,6 @@ void __cdecl fcn_00569ff0(char* e)
 	char* q;
 	char* pc;
 	float fv;
-	int v;
 	int n;
 	char* o;
 	SEARCH s;
@@ -222,7 +221,7 @@ void __cdecl fcn_00569ff0(char* e)
 			q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xbc));
 			if (q != 0) {
 				fcn_004c4510(q, *(int*) (q + 1));
-				fcn_004c4670(4, 1, 0x65, (int*) &cnt2);
+				fcn_004c4670(4, 1, 0x65, &num);
 				fcn_004c5360();
 			}
 		}
@@ -340,17 +339,15 @@ void __cdecl fcn_00569ff0(char* e)
 		}
 		if (flag != 0) {
 			num = fcn_00502cd0(*(int*) (pa + 0x5d), 2, 6, 0, 0x2a);
-			fcn_0050c5d0(pa, &v);
+			fcn_0050c5d0(pa, (int*) &cnt2);
 			hits = (int) (((float) (gm_RandomMod(0x32) & 0xffff) * 0.001f
-			        + 1.0) * (float) v);
+			        + 1.0) * (float) (int) cnt2);
 			num = (int) (((float) fcn_0050c710(pa, 7, 1) * 0.0025f
 			        + 1.0f) * (float) hits);
-			if (num < 0) {
-				num = 0;
-			}
+			num = num < 0 ? 0 : num;
 			io_FormatTextBuffer(b400, 0x68bea4, num);
 			strcat(b400, b100);
-			fcn_004c51a0(*(int*) (q + 4), *(int*) (px + 4), *(char*) 0x773d75, flag);
+			fcn_004c51a0(*(int*) (q + 4), *(int*) (px + 4), *(char*) 0x773d75, num);
 			fcn_004c4510(pb, *(int*) (pb + 1));
 			fcn_004c4670(4, 1, 0x69, &flag);
 			fcn_004c5360();
@@ -371,8 +368,8 @@ void __cdecl fcn_00569ff0(char* e)
 			}
 		}
 		if (num != 0) {
-			if (v != 0) {
-				cnt2 = (char*) fcn_00502cd0(*(int*) (v + 0x14), 1, 5);
+			if (cnt2 != 0) {
+				cnt2 = (char*) fcn_00502cd0(*(int*) (cnt2 + 0x14), 1, 5);
 				while (cnt2 != 0) {
 					int r;
 
@@ -390,9 +387,9 @@ void __cdecl fcn_00569ff0(char* e)
 						}
 						fcn_0064d41a(b100, "%i %s$A",
 						        num, *(char**) (id * 8 + 0x14a79c0));
-						strcpy(b400, b100);
+						strcat(b400, b100);
 						fcn_004c51f0(*(int*) (pb + 2), *(int*) (q + 2), id,
-						        *(int*) (v + 2), *(char*) 0x773d75);
+						        *(int*) (cnt2 + 2), *(char*) 0x773d75);
 						flag = (int) (fcn_0050bb50(id, *(char*) 0x773d75)
 						        * (float) num + (float) flag);
 					}
@@ -460,7 +457,7 @@ void __cdecl fcn_00569ff0(char* e)
 		fcn_00546190(e);
 		return;
 	default:
-		break;
+		return;
 	}
 fail:
 	*(int*) (e + 0x70) = -1;
