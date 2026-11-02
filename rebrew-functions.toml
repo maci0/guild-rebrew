@@ -475982,7 +475982,7 @@ blocker = "Partial reconstruction kept (no STUB): SIZE_MISMATCH 4/3872, obj 107.
 blocker_delta = 3868
 
 ["GOLDTL.0x0050a7e0".verification]
-source_hash = "f1d546a4bb95413c999966c936d5347e7d92f49824d413c342a34a0583968d46"
+source_hash = "b0fe09c92ba6635008f00af65e083606d2b137c1ca4234bfd53b4b63669be5f3"
 reference_hash = "eb5f5d927dfb20803364fe0ad3cd6eee86ea6eee8d269c358a906ee7367a74d3"
 reference_size = "3872"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -475993,10 +475993,10 @@ module = "GOLDTL"
 va = "0x50a7e0"
 context_hash = ""
 defines = "[]"
-input_hash = "7c9276395f9dcc2ce690a2af96131da1656ae6e79b0e652bd1783732b9e0e593"
+input_hash = "2f012e5766e2d495d033090e267de45af4a321623233209bcbdae1b5bed6d5a1"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T17:21:56+00:00"
+measured_at = "2026-11-02T17:54:11+00:00"
 
 [["GOLDTL.0x0050a7e0".status_history]]
 old_status = "STUB"

@@ -18404,3 +18404,22 @@ the layout. Operational note: `rebrew build driver cl -- ... -Fo<path>.obj` writ
 different basename than requested (vd.obj appeared as Vd.obj, t1 as T1.obj), so use `rebrew test` or find
 rather than trusting the -Fo name. Candidate kept on disk: .scratch/660/round9-vf-4388.c and
 round9-t1-4389-frame434.c, round9-w1-4389-frame434.c.
+
+## 2026-11-03 — alloc spieler respell search to 919
+
+`0x50A7E0` 815 to 919 with object exactly 3872, frame 0x428, lint clean and the first mismatch still at
+offset 8. The method is same-size respelling as a coordinate search with no structural change: each
+candidate is compiled with the canonical driver flags and scored by the compare routine through a fast
+script at about 0.7 seconds per variant, and every promotion is confirmed with `rebrew test --size 3872`.
+Store groups permuted across the body, all byte-neutral: the four 0x869480 cross-link stores in order cbad
+(+16), the shared 0x869480 and 0x90e0a0 tile-loop body in dcab (+9), the two-parent stat regeneration block
+in cbade (+14), the no-parent twin in baced (+8), the tail block in bac (+3), the 0x166/0x165/0x1f4 stores
+in bac (+4), a middle triple in cab (+3), the init quadruple in bcad (+1) and a tail triple in acb (+1).
+Then pairwise non-adjacent swap hill climbs over single-statement ranges: 79-93 (+10), 116-123 (+6), 71-78
+(+3), 342-346 (+4) and 104-115 (+1), plus respelling `type == 6 || type == 5 || type == 7` (+1).
+Re-permuting the previously fixed groups on the new base and a second pair-climb round produced only the
+342-346 swap. Recorded plainly: the top aligned runs stay intact (2146-2187 at 42 bytes and 618-653 at 36,
+grown from 29) but the 36 non-zero call-gap deltas now total 335 rather than the 245 measured at 815, so
+the match rise came with more local gap drift; the judgement for this row is match at fixed size and
+frame, which holds. Rejected and restored from backup: the single-load 0x773d68 variant (3865 at match
+488), the loop-base reload (3912 at 725) and every structural edit from sessions 6 and 7.
