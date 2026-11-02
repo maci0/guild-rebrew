@@ -83,8 +83,6 @@ int __cdecl gm_RandomMod(int);
 int __cdecl __isctype(int, int);
 int sprintf(char*, const char*, ...);
 
-/* ADDRESS: GOLDTL 0x0051af00 */
-/* ADDRESS: GOLD 0x00517700 */
 void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 {
 	char num[0x14];
@@ -164,7 +162,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			r = -1;
 		}
 		c = text.buf[i];
-		switch (c) {
+		switch ((unsigned char) c) {
 		case 'C':
 			i++;
 			memset(output, 0, 0x80);
@@ -560,7 +558,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 1;
 			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
-			memcpy(cp_dst, cp_src, cp_n);
+			memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			break;
 		case 'G':
 			cursor += 4;
@@ -705,7 +703,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			break;
 		case '%':
 			text.buf[i - 1] = 0x16;
-			fcn_0064d740(text.buf + i + 1, text.buf + i + 2,
+			fcn_0064d740(text.buf + i, text.buf + i + 1,
 				(int) strlen(text.buf) - i + 1);
 			break;
 		default:

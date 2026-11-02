@@ -16284,3 +16284,75 @@ block, the last adding 5 bytes). Remaining differences are block order and regis
 only: native emits the pad[7] if-branch before the else and the guilty block before the
 not-guilty one, spills the dedup induction to slot 0x10, reloads a0 from [esp+0x774], and keeps
 a register copy where we reread msg.pad[3].
+
+## 2026-11-02 — `0x51AF00` percent tail shift and copy-length flips
+
+`0x51AF00` io_FormatTextBuffer keeps object 6463 against native 6464 with match 860 to 960, tails
+held (12 rep movs, 6 rep movsd), prologue and frame 0x3338 unchanged. Four edits: the `%` case now
+calls `fcn_0064d740(text.buf + i, text.buf + i + 1, ...)`, matching native's dst (`push edx`, edx
+already `&buf[i]` from the dispatch) and src (`lea [esp+ebx+0x39d]`); the switch expression is cast
+to `unsigned char`, behaviour-neutral because only `%`, `$` and `{` reach the dispatch and every
+other byte fails native's own `cmp edi,0x52` range check; and two copy sites swap between the
+cached `cp_n` and a fresh `strlen(cp_src)`, value-identical at both points (`i` case r!=-1 branch
+to fresh, `G` case grammar_state==0 branch to cached).
+
+Size arithmetic: the object extractor rstrips trailing padding
+(`_parse_coff`: `content[func_start:func_end].rstrip(_PADDING_STRIP)`), so the reported length is
+`roundup4(code) + 88-byte jump table + 83-byte selector table`, always 3 mod 4. Measured sweeps gave
+6387, 6391, 6411, 6419, 6423, 6447, 6451, 6455, 6459, 6463, 6467, 6471, 6475, 6483, 6487, 6491, 6555,
+6559, 6563, all 3 mod 4, so 6464 is unreachable without changing the switch table shape. Native's
+6464 extent is 6284 code + 88 + 83 = 6455 plus nine inter-function nop bytes at
+0x51c837..0x51c83f. A case that would widen the selector table by one byte (`case '$': break;`)
+is dropped by the compiler as default-identical and changes nothing (byte-identical object).
+
+Evidence: `rebrew build driver cl -- /nologo /c /MT /O2 /Gd /I src /I src/Develop /Fo<obj> <src>`,
+`rebrew test <src> --va 0x0051af00 --size 6464 --no-promote --json` (obj 6463, match 960,
+SIZE_MISMATCH), objdump rep-movs count 12/6. Kept copy `.scratch/51af00/m/kept6463_960.c`.
+Alternative measured and not kept: unsigned switch + percent shape + one flip gives object 6455
+(native's true content length, tables landing on native's offsets) with match 1014, nine bytes
+under the inventory extent.
+
+## 2026-11-02 — `0x4D6170` frame map decoded, small locals widened
+
+`0x4D6170` stays SIZE_MISMATCH at 648/4923 (13.16%, was 639/4923) with object 5441 against native
+4923; the equal prefix still stops at byte 15, at the zero-register choice. One edit: `flags`,
+`kind` and `looked_kind` become `int` instead of `unsigned char`/`char`, which raises the matched
+byte count by nine and leaves frame 0x1124, the slot set and the object layout untouched.
+
+Frame facts established from the listing, which the current object still contradicts: `alloca_probe`
+(0x64D710) subtracts EAX itself, so there is no `sub esp`; the local region is 0x1124 with saved
+registers below it, first stack argument at `[esp+0x1140]`. Slots are five dwords at 0x0..0x10, two
+eight-byte conversion temporaries at 0x14 and 0x1C, `char[0x100]` at 0x24, three used `char[0x400]`
+at 0x124/0x524/0x924 and an untouched 0x400 tail. `EBX` holds the context pointer and `EBP` the
+zero constant and short-lived counters. The object under test keeps one conversion temporary, places
+the 0x100 array at 0x1C and the buffers at 0x11C, and holds the context in `EBP`, so every
+register-relative operand differs from native from byte 15 onward.
+
+Evidence: `rebrew binary asm show 0x004d6170 --size 4923 --json`,
+`rebrew build driver cl -- /nologo /c /MT /O2 /Gd /I src /I src/Develop /Fo<obj>
+src/Develop/Units/d2.v1/GOLDTL.fcn_004d6170.c`,
+`rebrew test src/Develop/Units/d2.v1/GOLDTL.fcn_004d6170.c --va 0x004d6170 --size 4923
+--no-promote --json`. All 45 native callees resolve to project definitions. Rejected after
+measurement: unsigned conversions at both `0.001`/`0.01` sites (613), flat buffers instead of the
+struct (437), `spare[0x400]` with a user `double` (646, frame shifts off 0x1124).
+Backup `.scratch/bak/f0.c`, analysis scripts `.scratch/frame_map.py`, `.scratch/algn.py`.
+
+## 2026-11-02 — formatter content length and native table offsets
+
+`0x51AF00` reaches its true content length. The object length the matcher compares is
+`roundup4(code) + 171`, where 171 is the 88-byte jump table plus the 83-byte selector table,
+both byte-identical to native; that is why every measured variant lands at 3 mod 4 and 6464 is
+unreachable by adding code. Native's own content is 6284 code + 88 + 83 = 6455, and its inventory
+extent 6464 includes nine inter-function NOP bytes at 0x51c837..0x51c83f. The kept source is the
+6455-byte form (`wf10.c`): the tables land exactly on native's offsets 0x188c and 0x18e4, match
+reads 1014 against 960 for the 6463-byte form, and the difference is only the nine bytes of
+padding after the function. Kept edits: the percent case copies
+`fcn_0064d740(text.buf + i, text.buf + i + 1, (int)strlen(text.buf) - i + 1)`, which matches
+native's dst/src shape (dst = [esp+ebx+0x398] from the dispatch, src = [esp+ebx+0x39d] after the
+length push) and is the behaviour fix; `switch ((unsigned char) c)` is behaviour-neutral because
+only percent, $ and { pass the trigger test; and two value-identical length flips (fresh strlen
+in i's r!=-1 branch, cached length in G's grammar_state==0 branch). Case extents now read
+percent -65, B -53, ampersand group -39, a +37, F +61 (layout artifact), I -14, G -62, Ss -22,
+w -50, f +19, D -11. B and the ampersand group stay short because native inlines 18 rep movs
+where we merge to 12, so closing them would mean unmerging tails, which the tail constraint
+forbids.
