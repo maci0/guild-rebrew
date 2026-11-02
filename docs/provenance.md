@@ -17235,3 +17235,28 @@ match than they gain: v34-only split (4651, two sites, match 519), v2c-only spli
 that collapse back to one site. The two `push 3` arms, v34's `!v28` and v2c's `!v28`, still share
 one call tail because the compiler redirects v34's pushes into the v2c call block, so the icon hit
 region remains 24 bytes over native's 0x364.
+
+## 2026-11-02 — transport arrays grouped into two aggregates
+
+`0x4DA690` 848 to 853 with the object at 7053, frame 0x900, sitzung 0x1e4, prefix 0x9b and four
+pushes. Two aggregates replace the seven independent arrays and put three bases on native exact:
+`blkA { int sel[4]; int s84[6]; }` at 0x74 and
+`blkB { int s98[4]; int order[6]; int sD0[6]; double pdd0,pdd1,pdd2; int sF4[8]; }` at 0xac. Raw
+bases now read sel 0x74, s84 0x84 and sF4 0x104 like native, with s98 0xac against 0xa8, sD0 0xd4
+against 0xd0 and order 0xbc against 0xb8, so the sum of absolute deltas falls from 144 to 8. The
+escape block is 21 arguments: 18 int scalars, then &blkB.pdd0, &blkB.pdd1 and &blkB.sF4, with the
+three never-used doubles serving as the 24-byte gap before sF4 so they cost no frame. The remaining
++0x10 is a fixed allocator slack between the first aggregate at 0x74 and the second at 0xac.
+Evidence for the wall: a single aggregate holding every array lands at 0x80/0x84 and never 0x74; a
+0x40-byte second aggregate with no member array escaped is contiguous at 0x9c, while any other
+size, or escaping sF4, moves it to 0xac and grows the frame by exactly 0x10; padding-only structs
+are dropped when unused; filling the 0x9c..0xa8 or 0xe8..0x104 gaps with used scalars breaks
+coalescing (+8 to +36 frame) and breaks the prefix; 128 array-escape subsets on this layout give
+delta 16 without the doubles trick and 8 with it, none reaching zero; and declaration order or
+position of the structs has no effect. Also recorded: the native tail 0x004dc199..0x004dc220 has no
+escape call at all (cmp, fcn_004ea350, fcn_004e4b00(s34), fcn_004e4b00(s38), fcn_00420840(s2C),
+fcn_004e4eb0, rep movsd 0x45, fcn_0057e880(0x30,0,0,0), pop*4, add esp,0x900, ret), so the
+`if (a0[4]==0x11111111u) fcn_004e4de0(...)` block is a layout lever whose argument count can trade
+against the frame; the 21-argument block gives object 7053, 22 gives 7061, and no knob lands
+7056/7057 because argument costs are 2, 5 or 8 bytes, though one literal-argument variant reached
+7058 with match 856.
