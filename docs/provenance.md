@@ -17167,3 +17167,27 @@ missing statements: native has 11 fcn_004c6680 and 9 fcn_004c67c0 sites against 
 because we tail-merge, it stores -1 to p->timer as an immediate nine times while we hoist -1 into
 edi (edi is zero in native, flipping 18 push sites), and it inlines ent34 where we call it 26
 times. Measured no-op: ent34 as a macro gives 4532 bytes and match 235, worse on both.
+
+## 2026-11-02 — panel gauge ends retranscribed
+
+`0x467920` 488 to 519 with the object growing 4546 to 4633, now 66 under native. The gauge ends
+block at 0x4688d7 is three independent blocks rather than one nested if. Block A has no leading
+rect: its guard is `w8.f = (float)v24; w8.f - v18 > 0 && !(v20 & 8)`, its count is
+`(int)(w8.f/GH + g_6628a0)`, and its marks sit at `y = e[5]+GH(h0)+GH*(w0.idx-1)` with
+`x = e[4]+(GW(H3)-GW(h))/2` and flag 1. Block B is a rect
+`a040(e[4], e[5]+GH(h0), e[4]+e[6], e[5]+e[7]-GH(h0))` plus a `wc.f/GH` fill under `v20&0x10` with
+flag 4. Block C is a rect `a040(e[4], (int)(ysave-v18), e[4]+e[6], ysave)` with
+`ysave = e[5]+e[7]-GH(h0)` plus a `v18/GH` fill under `v18>0` with flag 1. Both fill loops use the
+native float-y form `(int)((float)e[7]-X-(float)GH(h0)+(float)(e[5]+GH*idx))`, which is where the
+73 missing bytes and the extra ftol calls were, and they index through w0.idx. The region measures
+0x2b9 against native 0x2a3 (was -63, now +22). The hit flags at 0x4682ec/0x4682ed are byte stores
+through `(char*)e`, previously int stores at 0xbb0/0xbb4. A key constraint is recorded: the gauge
+blocks must reference the glyph pointer as `hs` (e[3]), the pointer native's edi holds on the
+`!(v20&2)` path, because writing h1 or H6 there keeps that pointer live to function end and rotates
+the whole register plan (xor ebp instead of xor edi, h6 promoted to ebp), measured at 402-426 match
+for +70-90 bytes. Also reverted: arg3 `(int)b` in the ccd0/cba0/cbf0 calls (502 alone, 510
+combined, 505 at 4613) even though it is the correct value, and moving the colour block's glyph
+differences and tick step from h0 to h1 (413-480). Not converged: the icon hit region is still
+about 60 short because native has four separate fcn_0047ccd0 end-mark calls at 0x468471, 0x468499,
+0x468508 and 0x468546 while the compiler tail-merges each f.v28 pair into one call; temp locals and
+argument changes produce byte-identical output and do not stop the merge.

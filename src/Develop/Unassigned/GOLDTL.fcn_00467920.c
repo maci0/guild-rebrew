@@ -24,7 +24,7 @@
  *   0x46882f  trailing element text
  *   0x4688d7  flag 0x01: gauge ends and their fill loops
  *
- * Status: SIZE_MISMATCH, match 488/4699, object 4546. The frame is one
+ * Status: SIZE_MISMATCH, match 519/4699, object 4633. The frame is one
  * compiler temporary slot from native: `sub esp,0x260` with the struct at +4
  * because the icon hit test spills e[4] (native keeps it in a register). The
  * native prefix is 34 bytes and diverges on the shared zero register (native
@@ -32,9 +32,15 @@
  * stay in registers. The 0x468554, 0x468700 and 0x467bc2..0x4681cc blocks are
  * transcribed from the listing; the 0x467bc2 split is `if (!(v20 & 0x400))`
  * with the marks in the taken branch and the colour/bitmap path in the else.
- * The taken branch is transcribed instruction by instruction: the 0x10 mark
- * fill, the 0xca7 frame rect, the two 0xcee/0xe39 filled-part variants (fill
- * flags 2 and 1) and the 0xf5c closing rect.
+ *
+ * The 0x4688d7 gauge ends are three independent blocks, as native has them: a
+ * fill loop of (int)(w8.f/GH) marks at e[5]+GH(h0)+GH*(idx-1), then an end-cap
+ * rect plus a float-y fill loop under flag 0x10, then a second rect and
+ * float-y fill loop under v18 > 0. The glyph height/width come from `hs`
+ * (e[3]): that is the pointer the native edi carries on this path, and writing
+ * `h1` or H6 keeps that pointer live to the end of the function, rotating the
+ * whole register plan and costing more matches than the region gains. The
+ * 0x2ec/0x2ed hit flags are byte stores (native `mov byte ptr [esi+0x2ec]`).
  */
 
 extern char* g_1015ea0;			/* 0x01015ea0 element table */
@@ -413,8 +419,8 @@ void __cdecl fcn_00467920(int a0, int a1)
 				}
 			}
 		}
-		e[0x2ec] = (char) f.v34;
-		e[0x2ed] = (char) f.v2c;
+		*((char*) e + 0x2ec) = (char) f.v34;
+		*((char*) e + 0x2ed) = (char) f.v2c;
 		if (!e[0x18]) {
 			fcn_0047cba0(e[4], e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 				     (int) e[3], (char*) f.v14, 0);
@@ -558,42 +564,44 @@ void __cdecl fcn_00467920(int a0, int a1)
 	}
 
 	/* 0x4688d7: gauge ends */
-	if ((float) f.v24 - f.v18 > 0.0f && !(f.v20 & 8)) {
-		fcn_0047a040(e[4] + GLYPH_W(H3), e[5] + GLYPH_H(H3),
-			     e[4], e[5]);
-		g_102d024 = (int) (f.v18 / (float) GLYPH_H(H6) + g_6628a0);
-		for (n = 0; n < g_102d024; n++) {
-			y = e[5] + GLYPH_H(H6) * (n - 1) + GLYPH_H(h0);
-			x = e[4] + (GLYPH_W(h1) - GLYPH_W(H3)) / 2;
-			fcn_0047cba0(x, y, (int) b, (char*) f.v14, 1);
+	f.w8.f = (float) f.v24;
+	if (f.w8.f - f.v18 > 0.0f && !(f.v20 & 8)) {
+		g_102d024 = (int) (f.w8.f / (float) GLYPH_H(hs) + g_6628a0);
+		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
+			y = e[5] + GLYPH_H(h0)
+			    + GLYPH_H(hs) * (f.w0.idx - 1);
+			x = e[4] + (GLYPH_W(H3) - GLYPH_W(hs)) / 2;
+			fcn_0047cba0(x, y, a1, (char*) f.v14, 1);
 		}
-		/* 0x468997: end cap */
-		if (f.wc.f > 0.0f) {
-			fcn_0047a040(e[5] + GLYPH_W(h0), e[4] + GLYPH_H(H6),
-				     e[5], e[4]);
-			g_102d024 = (int) (f.wc.f / (float) GLYPH_H(H6)
-					   + g_6628a0);
-			for (n = 0; n < g_102d024; n++) {
-				x = e[4] + GLYPH_H(H6) * n + e[5];
-				y = e[5] + (GLYPH_W(H3) - GLYPH_W(h0)) / 2;
-				fcn_0047cba0(x, y, (int) b, (char*) f.v14, 4);
-			}
+	}
+	/* 0x468997: end cap */
+	if ((f.v20 & 0x10) && f.wc.f > 0.0f) {
+		fcn_0047a040(e[4], e[5] + GLYPH_H(h0),
+			     e[4] + e[6], e[5] + e[7] - GLYPH_H(h0));
+		g_102d024 = (int) (f.wc.f / (float) GLYPH_H(hs) + g_6628a0);
+		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
+			y = (int) ((float) e[7] - f.wc.f - (float) GLYPH_H(h0)
+				   + (float) (e[5]
+					      + GLYPH_H(hs) * f.w0.idx));
+			x = e[4] + (GLYPH_W(H3) - GLYPH_W(hs)) / 2;
+			fcn_0047cba0(x, y, a1, (char*) f.v14, 4);
 		}
-		/* 0x468a74 */
-		if (f.v18 > 0.0f) {
-			y = e[5] + GLYPH_H(h0);
-			fcn_0047a040(e[4] + GLYPH_H(H6) - GLYPH_W(h0), e[5],
-				     e[4], e[5] + GLYPH_H(h0));
-			g_102d024 = (int) (f.v18 / (float) GLYPH_H(H6)
-					   + g_6628a0);
-			for (n = 0; n < g_102d024; n++) {
-				x = e[4] + GLYPH_H(H6) * n + e[5];
-				y = e[5] + (GLYPH_W(H3) - GLYPH_W(h0)) / 2;
-				fcn_0047cba0(x, y, (int) b, (char*) f.v14, 1);
-			}
-			e[0x1d] = 0;
-			return;
+	}
+	/* 0x468a74 */
+	if (f.v18 > 0.0f) {
+		f.v10 = e[5] + e[7] - GLYPH_H(h0);
+		fcn_0047a040(e[4], (int) ((float) GLYPH_H(h0) - f.v18),
+			     e[4] + e[6], f.v10);
+		g_102d024 = (int) (f.v18 / (float) GLYPH_H(hs) + g_6628a0);
+		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
+			y = (int) ((float) e[7] - f.v18 - (float) GLYPH_H(h0)
+				   + (float) (e[5]
+					      + GLYPH_H(hs) * f.w0.idx));
+			x = e[4] + (GLYPH_W(H3) - GLYPH_W(hs)) / 2;
+			fcn_0047cba0(x, y, a1, (char*) f.v14, 1);
 		}
+		e[0x1d] = 0;
+		return;
 	}
 
 	e[0x1d] = 0;
