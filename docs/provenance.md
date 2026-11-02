@@ -17146,3 +17146,24 @@ than a removable extra block.
 0x9bc with the object exactly 5386, both exhaustive sweeps (216 permutations, and a 95-evaluation
 hill climb over the six triples) maxing at 5369, expression forms byte-identical, and the three
 named regressions (5326, 5291, 454). Statement permutations are exhausted there.
+
+## 2026-11-02 — task dispatcher case six corrected
+
+`0x4D8D00` 329 to 338 with the object growing 4396 to 4548 and the instruction count at 1439
+against native 1452; frame 0x138 held. Three real defects fixed. Case 6's structure was wrong:
+native 0x4d98b0..0x4d9b19 splits on p->c22 before the 0x128 test and has four fcn_004c6940 sites
+with ids 6, 6, 4 and 5, where c22==0 takes the 0x128 branch through c0c=1, c6940(obj,6,msg),
+cec00 and c6680, and otherwise goes through 45b920(base,c20,c21,vec), a 50.0 compare,
+c6940(obj,4,msg), msg+0x22=1 and p->timer = c6820(a0->f10, msg); c22==1 runs the 0x100 body then
+c6940(obj,4,msg), msg+0x22=2 and c6680; c22==2 runs 45b920, the 50.0 compare, c6940(obj,5,msg),
+msg.f[0..1] and p->timer = c67c0. The old source had the id-4 body under c22==1, no id-5 body and
+a global 0x128 guard; fcn_004c6820 must return int. The tail1 test was inverted: native 0x4d958b
+is `if (!p->c1d) goto tail1_body;` then falls into lvl3 at 0x4d9596, where the old
+`if (p->c1d) goto lvl3;` was a no-op and is deleted. And the three float comparisons were `!=`
+where native's mask says `>`: `fcomp [ent+0xc]; fnstsw ax; and eax,0x4100; jne skip` with 0x4100
+being C3|C0 means the body runs only when the call result is greater, so the value is `(x <= y)`,
+and our `!=` emitted `test ah,0x44; jnp`. The remaining 92 bytes are codegen policy rather than
+missing statements: native has 11 fcn_004c6680 and 9 fcn_004c67c0 sites against our 8 and 8
+because we tail-merge, it stores -1 to p->timer as an immediate nine times while we hoist -1 into
+edi (edi is zero in native, flipping 18 push sites), and it inlines ent34 where we call it 26
+times. Measured no-op: ent34 as a macro gives 4532 bytes and match 235, worse on both.

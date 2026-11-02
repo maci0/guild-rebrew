@@ -5,10 +5,11 @@
  * the target object of each live task and hands it to the per-type progress
  * handler. One loop, eight-way dispatch on the task state.
  *
- * Status: SIZE_MISMATCH. All eight dispatch bodies are transcribed in native
- * body order (5, 1, 2, 3, 6, 4, 7, 8); the frame still differs from the native
- * 0x138 because the source does not yet spill the same locals (native keeps
- * ent/base/tgt in 0x18/0x1c/0x20 across the switch).
+ * Status: SIZE_MISMATCH, 4548 of 4640 bytes. All eight dispatch bodies are
+ * transcribed in native body order (5, 1, 2, 3, 6, 4, 7, 8) and the frame
+ * matches the native 0x138. The remaining gap is code generation: this build
+ * keeps -1 in a register where the reference stores the immediate into
+ * p->timer, and it tail-merges three call sequences the reference duplicates.
  */
 extern int g_772ea4;		/* 0x00772ea4 */
 
@@ -35,7 +36,7 @@ int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00455350(char*, float*, float*);
 int __cdecl fcn_004ce270(char*, char*);
-void __cdecl fcn_004c6820(int, void*);
+int __cdecl fcn_004c6820(int, void*);
 int __cdecl fcn_004c6680(char*, int, int, char*);
 unsigned int __cdecl fcn_004d89c0(int, unsigned int, int);
 int __cdecl sprintf(char*, char*, ...);
@@ -192,26 +193,26 @@ void __cdecl fcn_004d8d00(char* a0)
 				}
 			} else if (*(int*)ent == 0x176) {
 				if (tgt) {
-					if (fcn_004cefb0(obj, ent34(tgt)) != *(float*)(ent + 0xc))
+					if (fcn_004cefb0(obj, ent34(tgt)) > *(float*)(ent + 0xc))
 						v24 = 0;
 					if (!p->c0c) {
-						if (fcn_004cefb0(obj, ent34(tgt)) != *(float*)(ent + 0xc) * *(double*)0x6629f8)
+						if (fcn_004cefb0(obj, ent34(tgt)) > *(float*)(ent + 0xc) * *(double*)0x6629f8)
 							v24 = 0;
 					}
 				} else {
-					if (fcn_004cf000(obj, p->f14, p->f18) != *(float*)(ent + 0xc))
+					if (fcn_004cf000(obj, p->f14, p->f18) > *(float*)(ent + 0xc))
 						v24 = 0;
 					if (!p->c0c) {
-						if (fcn_004cf000(obj, p->f14, p->f18) != *(float*)(ent + 0xc) * *(double*)0x6629f8)
+						if (fcn_004cf000(obj, p->f14, p->f18) > *(float*)(ent + 0xc) * *(double*)0x6629f8)
 							v24 = 0;
 					}
 				}
 			} else {
 				if (tgt) {
-					if (fcn_004cefb0(obj, ent34(tgt)) != *(float*)(ent + 0xc))
+					if (fcn_004cefb0(obj, ent34(tgt)) > *(float*)(ent + 0xc))
 						v24 = 0;
 				} else {
-					if (fcn_004cf000(obj, p->f14, p->f18) != *(float*)(ent + 0xc))
+					if (fcn_004cf000(obj, p->f14, p->f18) > *(float*)(ent + 0xc))
 						v24 = 0;
 				}
 			}
@@ -318,8 +319,8 @@ void __cdecl fcn_004d8d00(char* a0)
 					    v10, v14, 0);
 			}
 tail1:
-			if (p->c1d)
-				goto lvl3;
+			if (!p->c1d)
+				goto tail1_body;
 lvl3:
 			if (*(int*)(*(int*)(obj + 0x184) + 0x128) != 0)
 				goto tail1_body;
@@ -389,44 +390,52 @@ tail1_body:
 				msg.f[1] = 0;
 				p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
 			}
-			if (*(int*)(*(int*)(obj + 0x184) + 0x128) != 0)
-				goto after2;
 			if (!*((unsigned char*)p + 0x22)) {
-				fcn_004c6940(obj, 6, msg.f);
-				p->c0c = 1;
-				if (!fcn_004cec00(*((unsigned char*)p + 0x20),
-					*((unsigned char*)p + 0x21), &v10, &v14))
+				if (*(int*)(*(int*)(obj + 0x184) + 0x128) == 0) {
+					p->c0c = 1;
+					fcn_004c6940(obj, 6, msg.f);
+					if (!fcn_004cec00(*((unsigned char*)p + 0x20),
+						*((unsigned char*)p + 0x21), &v10, &v14))
+						break;
+					p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
+				} else {
+					fcn_0045b920((int)base, *((unsigned char*)p + 0x20),
+					    *((unsigned char*)p + 0x21), vec);
+					if (!CompareVector3WithinTolerance(vec,
+						(float*)(ent34(obj) + 0x4c), 50.0f))
+						break;
+					fcn_004c6940(obj, 4, msg.f);
+					*((unsigned char*)msg.f + 0x22) = 1;
+					p->timer = fcn_004c6820(*(int*)(a0 + 0x10), msg.f);
+				}
+			} else if (*((unsigned char*)p + 0x22) == 1) {
+				if (*(int*)(*(int*)(obj + 0x184) + 0x128) != 0)
 					break;
+				n = (int)fcn_00445600(0, 0x100, 0,
+				    (char*)(*(int*)(obj + 0x16c) == *(int*)0x772e9c
+					? 0x68bf70 : 0x68bf58));
+				fcn_00455350((char*)n, (float*)(n + 0x4c), vec);
+				if (!fcn_0045b990(base, (float*)(n + 0x4c), &v10, &v14, &v28))
+					break;
+				if (!fcn_004cec00(v10, v14, &v10, &v14))
+					break;
+				*((unsigned char*)msg.f + 0x20) = (unsigned char)v10;
+				*((unsigned char*)msg.f + 0x21) = (unsigned char)v14;
+				fcn_004c6820(*(int*)(a0 + 0x10), msg.f);
+				*((unsigned char*)msg.f + 0x22) = 2;
 				p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
-				goto after2;
-			}
-			if (*((unsigned char*)p + 0x22) == 1) {
+			} else if (*((unsigned char*)p + 0x22) == 2) {
 				fcn_0045b920((int)base, *((unsigned char*)p + 0x20),
 				    *((unsigned char*)p + 0x21), vec);
 				if (!CompareVector3WithinTolerance(vec,
 					(float*)(ent34(obj) + 0x4c), 50.0f))
 					break;
-				fcn_004c6940(obj, 4, msg.f);
-				fcn_004c6820(*(int*)(a0 + 0x10), msg.f);
-				*((unsigned char*)msg.f + 0x22) = 1;
-				goto after2;
+				fcn_004c6940(obj, 5, msg.f);
+				msg.f[0] = *(int*)(obj + 4);
+				msg.f[1] = 0;
+				p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
 			}
-			if (*((unsigned char*)p + 0x22) != 2)
-				break;
-			n = (int)fcn_00445600(0, 0x100, 0,
-			    (char*)(*(int*)(obj + 0x16c) == *(int*)0x772e9c
-				? 0x68bf70 : 0x68bf58));
-			fcn_00455350((char*)n, (float*)(n + 0x4c), vec);
-			if (!fcn_0045b990(base, (float*)(n + 0x4c), &v10, &v14, &v28))
-				break;
-			if (!fcn_004cec00(v10, v14, &v10, &v14))
-				break;
-			*((unsigned char*)msg.f + 0x20) = (unsigned char)v10;
-			*((unsigned char*)msg.f + 0x21) = (unsigned char)v14;
-			fcn_004c6820(*(int*)(a0 + 0x10), msg.f);
-			*((unsigned char*)msg.f + 0x22) = 2;
-			p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
-			goto after2;
+			break;
 		case 4:
 			if (p->timer != 1 && !fcn_004c4450(p->timer))
 				break;
