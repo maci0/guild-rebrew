@@ -100,7 +100,7 @@ typedef struct {
 
 extern unsigned char g_773d75;
 extern char* g_773d78;
-extern float g_6628a0;
+extern float volatile g_6628a0;
 extern float g_664144;
 
 int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld);
@@ -128,22 +128,31 @@ void __cdecl fcn_004c5530(int a1);
 char* __cdecl fcn_00503d10(int who);
 double __cdecl gm_RandomFloat01(void);
 
+/*
+ * The volatile qualifiers below are scheduling barriers, not semantics: the
+ * native body reloads o, x, id, n and found from their stack homes on every
+ * use (0x006e, 0x0dde, 0x0ce7, 0x0f7d, 0x0a85) and re-reads 0x6628a0 at each
+ * compare, so caching them in registers changes the instruction stream.
+ * The 0x74c frame itself comes from the 0x400 line buffer below (native memset
+ * 0xf8 at 0x0608, line at [esp+0x34c]); both changes measure 627/6055.
+ */
+
 /* ADDRESS: GOLDTL 0x00489a70 */
-int __cdecl ai_MeisterTrade(char* o, char* bld)
+int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 {
 	char* q;
 	char* r;
-	char* x;
+	char* volatile x;
 	char* tp;
 	Prod* pr;
 	Town* t;
-	unsigned short id;
+	unsigned short volatile id;
 	int i;
 	int j;
-	int n;
+	int volatile n;
 	int cnt;
 	int sent;
-	int found;
+	int volatile found;
 	int tmp;
 	int price;
 	int type;
@@ -154,7 +163,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 		Stock s1;
 		Stock s2;
 		Stock s3;
-		char line[0x404];
+		char line[0x400];
 	} v;
 
 	/* 0x0000: general trade for special request type 0x116 */
@@ -607,7 +616,7 @@ next_auto:
 
 	/* 0x0bf0-0x0d30: route the cart ids reserved for the request */
 	if (cnt < 3) {
-		for (i = 0; i < v.s3.cap && cnt < 3; i++) {
+		for (i = 0; cnt < 3 && i < v.s3.cap; i++) {
 			id = v.s3.ids[i];
 			if (id == 0 || v.s3.vals[i] == 0) {
 				continue;
@@ -635,6 +644,11 @@ next_auto:
 					break;
 				}
 			}
+			if (v.s3.vals[i] != 0) {
+				continue;
+			}
+			fcn_004c52d0(*(int*) (bld + 2), id);
+			v.s3.ids[i] = 0;
 		}
 	}
 

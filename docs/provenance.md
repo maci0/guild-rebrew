@@ -16532,3 +16532,60 @@ still EBP). Findings 62/64/65/68 record the same home rotation surviving declara
 removal, pressure pads and volatile homing. The next lever is body weight: our object is 534 bytes
 larger than native, which is where the priority inversion most plausibly lives, so the blocks are
 being reconstructed in native order from the corrected geometry.
+
+## 2026-11-02 — ai_MeisterTrade frame and reload homes
+
+`GOLDTL.ai_MeisterTrade.c` (0x00489a70) gained four evidence-backed changes; measured
+SIZE_MISMATCH match 416 -> 627, object 5552 -> 5923, native 6055, first divergence still
+at 0x0032 (instruction 22).
+
+- `v.line` was `char[0x404]`; the native frame is `sub esp,0x74c` with `v` at
+  `[esp+0x2c]` and the line buffer at `[esp+0x34c]` (memset of 0xf8 bytes: `rep stosd`
+  0x3e dwords at 0x0608). `0x400` (the sibling `ai_MeisterTradeAllgemein` size) gives
+  `0x74c` exactly and moves the byte prefix from 0x8 to 0x2d. Evidence: native
+  prologue 0x0006, memset 0x0601-0x061a, lea 0x0986.
+- The native body reloads `o`, `x`, `id`, `n`, `found` from their stack homes per
+  use and re-reads `ds:0x6628a0` at each compare. `volatile` qualifiers reproduce
+  that: each was measured alone and in greedy composition; removals are all worse
+  (o 415, x 610, id 563, n 573, found 592, 0x6628a0 516 against the kept 627).
+- The s3->s2 route loop was missing native's terminal block
+  (`if (id consumed) { fcn_004c52d0(bld+2, id); v.s3.ids[i] = 0; }`, native
+  0x11ef-0x1204): +10 match, +39 bytes.
+- Rejected after measurement: block-scoped producer counter (byte-identical),
+  `&o` address-take through a cast (folded), town/base expression rewrite
+  (byte-identical), flipping the `cnt < 3` guard order in the town or prod route
+  loops (620/5915 and 606/5912), and rewriting the first route loop from
+  s2->s3 to the native s1->s2 roles (585/5948: +25 bytes, -42 match).
+Remaining gaps: the first route loop still uses s2->s3 where the native walks s1
+into s2 (0x0dde-0x0fc7), the town/prod route loops write s3 where the native writes
+s2 (0x1229, 0x138d), and the producer loop still colours `i`/induction/qty28 as
+esi/edi/ebx against the native's ebx/esi/edi (docs/msvc6-allocator.md findings
+62-70). Measured with `.venv/bin/rebrew test ... --no-promote --json`; the
+production C keeps the kept shape only.
+
+## 2026-11-02 — shared blocks reconstructed in two rows
+
+`0x4D6170` object falls 5454 to 4944, now only 21 over native 4923, and match rises 601 to 630
+with the frame at 0x1124 and the first mismatch at offset 24. Three block reconstructions did it.
+The shared wait loop `while (fcn_005373e0(fcn_004d6170,0x7d6c6)) { if (g_14ce8e0 ||
+g_100f1dc == 2) g_774654 = 1; }` now has a single call site reached by fall-through from the
+flags&1 tail and by jumps from the flags&4 tail and settle (a `sync:` label plus `goto sync`),
+which removed the duplicated settle block and three wait loops. The shared choice==3 block (buf
+init, FormatTextBuffer 0x11a6, e6eb0, e6cb0(0x14), fcn_0050ff70) is now one copy reached by a
+`reduce:` label from both dispatches. Call counts agree exactly at 137 after normalising alias
+names. Most importantly, ctx moved to EBX on its own once the block weights matched, so the
+prologue reads `xor ebp,ebp ... mov ebx,[esp+0x1140]` like native and bytes 0..23 now match,
+confirming Finding 74's priority-driven colouring. Remaining 21 bytes: a redundant
+`xor ebp,ebp` before tally=0 (+2), `side` stored four times per arm where native stores once at
+the join (+12), two `movsx ecx,[eax+8]` where native has `mov cl,[eax+8]` (+1 each), and a loop
+form about +17 offset by the merged StartFiltered. Local slots are a permutation of native's
+(native mode=0, side=4, rec=8, id=0xC, tally=0x10; ours tally=0, mode=4, side=8, rec=0x10).
+
+`0x489A70` 416 to 627 with the object at 5923 (-132) and the frame now `sub esp,0x74c` as native:
+`v.line[0x400]` instead of 0x404, which put v at [esp+0x2c] and line at [esp+0x34c] and moved the
+byte prefix from 0x8 to 0x2d; `volatile` on the parameter o, locals x, id, n, found and global
+g_6628a0 because native reloads them per use (each single removal measures worse); and the s3->s2
+route loop terminal block with cnt<3 first in its head. Remaining: the first route loop must walk
+s1 into s2, and the town and prod loops must target s2, which together account for three missing
+calls (+1 dfd0, +1 sprintf, +1 fcn_004c51f0); the producer loop's register rotation is allocator
+colouring, documented and not chased.

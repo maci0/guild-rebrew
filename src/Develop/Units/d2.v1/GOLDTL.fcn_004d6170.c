@@ -271,6 +271,7 @@ int __cdecl fcn_004d6170(char* ctx)
 				cur = gm_NextEntityQueryMatch();
 			}
 		}
+sync:
 		while (fcn_005373e0(fcn_004d6170, 0x7d6c6) != 0) {
 			if (g_14ce8e0 != 0 || g_100f1dc == 2) {
 				g_774654 = 1;
@@ -342,22 +343,9 @@ int __cdecl fcn_004d6170(char* ctx)
 					ent = gm_NextEntityQueryMatch();
 				}
 			}
-			d2_SetForm(screen, 1);
-			io_AppendText((int) s.buf);
-			cur = gm_GetEntityTableEntry(g_772e9c);
-			if (cur != 0) {
-				*(int*) (cur + 0x1c) += sum;
-			}
-			if (*(int*) (self + 0x10c) != -1) {
-				ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10c));
-				*(int*) (ent + 0x4d) += sum;
-			}
-			while (fcn_005373e0(fcn_004d6170, 0x7d6c6) != 0) {
-				if (g_14ce8e0 != 0 || g_100f1dc == 2) {
-					g_774654 = 1;
-				}
-			}
+			goto settle;
 		} else if (choice == 3) {
+reduce:
 			s.buf[0] = g_6b5c60[0];
 			memset(s.buf + 1, 0, 0x3ff);
 			io_FormatTextBuffer(s.buf, 0x11a6, *(unsigned short*) g_772e9c, ent);
@@ -419,11 +407,7 @@ int __cdecl fcn_004d6170(char* ctx)
 				ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10c));
 				*(int*) (ent + 0x4d) += sum;
 			}
-			while (fcn_005373e0(fcn_004d6170, 0x7d6c6) != 0) {
-				if (g_14ce8e0 != 0 || g_100f1dc == 2) {
-					g_774654 = 1;
-				}
-			}
+			goto sync;
 		}
 	} else if (flags != 0 && side == g_772e9c && g_772e9c[2] != 6 && g_772e9c[2] != 7) {
 		i = fcn_00507910((unsigned char) *ent);
@@ -472,13 +456,7 @@ int __cdecl fcn_004d6170(char* ctx)
 					}
 					goto settle;
 				} else if (choice == 3) {
-					s.buf[0] = g_6b5c60[0];
-					memset(s.buf + 1, 0, 0x3ff);
-					io_FormatTextBuffer(s.buf, 0x11a6, *(unsigned short*) g_772e9c, ent);
-					fcn_004e6eb0(s.buf, 0);
-					if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
-						fcn_0050ff70(ent, 0x14 - fcn_004e6cb0(0x14));
-					}
+					goto reduce;
 				} else if (choice == 1) {
 					io_FormatTextBuffer(s.cat, 0x11a7, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e9c);
 					fcn_004e6eb0(s.cat, 0);
@@ -510,11 +488,7 @@ settle:
 		ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10c));
 		*(int*) (ent + 0x4d) += sum;
 	}
-	while (fcn_005373e0(fcn_004d6170, 0x7d6c6) != 0) {
-		if (g_14ce8e0 != 0 || g_100f1dc == 2) {
-			g_774654 = 1;
-		}
-	}
+	goto sync;
 done:
 	fcn_00412830(0x10);
 	return fcn_00471e30(screen);
