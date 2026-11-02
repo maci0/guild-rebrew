@@ -718,24 +718,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
                         }
                         i += 1;
                     }
-                    if (s70 != 0) {
-                        /* native 0x4dbfd5: tie, walk forward modulo rs20 */
+                    if (s70 == 0) {
                         if (s6C != -1) {
-                            s78 = (int)fcn_004e6cb0((unsigned int)rs20);
-                            i = rs20;
-                            do {
-                                if (((int *)&s54)[s78] == s68) {
-                                    s6C = s78;
-                                    break;
-                                }
-                                i -= 1;
-                                s78 += 1;
-                                s78 %= rs20;
-                            } while (i != 0);
-                        }
-                    }
-                    if (s6C != -1) {
-                        if (s70 == 0) {
                             *(int *)(0x1015ea0 +
                                      *(int *)((char *)&mid + 0x12c + s6C * 0x38) * 0x2f4 + 0x3c) = 1;
                             fcn_004e4b40(-8, s38, 0x68c038, 3, 0x64);
@@ -744,7 +728,32 @@ void __cdecl fcn_004da690(unsigned int *a0)
                             io_AppendText((char *)0x12e5,
                                           *(unsigned short *)((int *)&s9C)[s6C],
                                           *(unsigned char *)s00 + 0x253);
-                        } else {
+                            fcn_004e4de0(0xfa0);
+                            if (a0[3] == *(int *)(0x7f4ca4 +
+                                                  (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
+                                s78 = fcn_004e8240(*(unsigned char *)(s00 - 8), 0,
+                                                   (unsigned char *)((int *)&s9C)[s6C], 1, 0xff);
+                                if (fcn_004c4450(s78) == 0) {
+                                    do {
+                                        fcn_00535960();
+                                    } while (fcn_004c4450(s78) == 0);
+                                }
+                            }
+                        }
+                    } else if (s6C != -1) {
+                        /* native 0x4dbfd5: tie, walk forward modulo rs20 */
+                        s78 = (int)fcn_004e6cb0((unsigned int)rs20);
+                        i = rs20;
+                        do {
+                            if (((int *)&s54)[s78] == s68) {
+                                s6C = s78;
+                                break;
+                            }
+                            i -= 1;
+                            s78 += 1;
+                            s78 %= rs20;
+                        } while (i != 0);
+                        {
                             fcn_004e4b40(-8, s38, 0x68c038, 2, 0x64);
                             fcn_004727a0(s14, 0);
                             io_AppendText((char *)0x6811b0);
@@ -754,20 +763,27 @@ void __cdecl fcn_004da690(unsigned int *a0)
                                      *(int *)((char *)&mid + 0x12c + s6C * 0x38) * 0x2f4 + 0x3c) = 1;
                             io_AppendText((char *)0x12e4,
                                           *(unsigned short *)((int *)&s9C)[s6C]);
-                        }
-                        fcn_004e4de0(0xfa0);
-                        if (a0[3] == *(int *)(0x7f4ca4 +
-                                              (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
-                            s78 = fcn_004e8240(*(unsigned char *)(s00 - 8), 0,
-                                               (unsigned char *)((int *)&s9C)[s6C], 1, 0xff);
-                            if (fcn_004c4450(s78) == 0) {
-                                do {
-                                    fcn_00535960();
-                                } while (fcn_004c4450(s78) == 0);
+                            fcn_004e4de0(0xfa0);
+                            if (a0[3] == *(int *)(0x7f4ca4 +
+                                                  (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
+                                s78 = fcn_004e8240(*(unsigned char *)(s00 - 8), 0,
+                                                   (unsigned char *)((int *)&s9C)[s6C], 1, 0xff);
+                                if (fcn_004c4450(s78) == 0) {
+                                    do {
+                                        fcn_00535960();
+                                    } while (fcn_004c4450(s78) == 0);
+                                }
                             }
                         }
                     }
                     }
+                    fcn_004727a0(s14, 0);
+                    io_AppendText((char *)0x6811b0);
+                    fcn_00471af0(s14, 0);
+                    fcn_00471e30(s14);
+                    fcn_00471e30(s50);
+                    fcn_004e4de0(0x3e8);
+                    fcn_005358e0(0x6b5c60);
                 }
             }
             s30 += 1;

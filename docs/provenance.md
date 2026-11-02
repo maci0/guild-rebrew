@@ -16461,3 +16461,55 @@ frame are mutually exclusive in this source shape. Remaining first-order differe
 pointer is in EBP and the zero constant in EBX, the reverse of native (first mismatch offset 15,
 target 0xED against ours 0xDB); EBP is reused as the entity scratch pointer in the 0.01 loop in
 both builds, so that tail already matches.
+
+## 2026-11-02 — frame slots for fcn_00432480
+
+`src/Develop/Unassigned/GOLDTL.fcn_00432480.c` now compiles to the native
+`sub esp,0xb0` instead of `sub esp,0xec`. The transcribed Frame member offsets
+were native offsets plus 0x10: stack accesses inside the body carry the four
+callee-saved pushes, so the local offset is `disp - 0x10`. Normalizing the
+listing through its control flow gives the real map (`sb` 0x03, `neg` 0x10,
+`tan` 0x44, `vec` 0x70, `out` 0x90, conversion temporaries 0x80..0x8c). The
+aggregate was rebuilt at those offsets (0xa4 bytes) and the scalars native
+keeps in memory are addressed through it, which removes the 0x38 of separate
+scalar slots the aggregate used to push past 0xb0. `flags`, `f`, `owner`,
+`slot`, `cur`, `prev`, `st` and `nd` stay locals.
+
+Evidence: `.venv/bin/rebrew test src/Develop/Unassigned/GOLDTL.fcn_00432480.c
+--va 0x00432480 --size 4850 --no-promote` reports SIZE_MISMATCH, match 302
+(previously 194), object 4918 against native 4850 (previously 4705), first
+different byte offset 7 (previously offset 2, target 0xb0 against 0xec), and
+the same 43 call-site relocation bindings. Slot inventory and the subset search
+are in `.scratch/bak432480/` (`slots2.py`, `mkvarC.py`, `testset.py`,
+`q-test.json`); the superseded source is `v0-0xec.c`.
+
+## 2026-11-02 — second packet pass, formatter branch order, callback frame
+
+`0x4DA690` second packet pass transcribed: the unique-max path carries its own tail inline
+(e4de0(0xfa0), the a0[3] 0x7f4ca4 check, the e8240/c4450/535960 wait loop), the tie path keeps
+its own copy after io(0x12e4,...), the gates are reshaped to native's two independent
+`cmp esi,-1` arms, and the second-pass join is added inside the s2C block with the
+4727a0/io/471af0/471e30(s14)/471e30(s50)/e4de0(0x3e8)/5358e0(0x6b5c60) order. Spans now match
+native within a few bytes (224 against 231, 116 against 122, the unique-path interval 218 against
+217). Match reads 817 against 869 because appending real code shifts the tail and VC6 renumbers
+s28 from 0x58 to 0x50, so the objects first diverge at 0x3a3; the change is kept because the
+spans are the durability signal and the object is 594 over. Escapes for the frame anchor cost
+about 496 bytes and real code is now about 6974.
+
+`0x51AF00` 1017 to 1018 by putting case a's percent path first as native's `jne` to the
+non-percent path implies. Staging removals all measured worse or size-shifting: dropping T's
+guard address via `r != -1` converged T but reshuffled the switch (6519 bytes, tables 0x18cc);
+dropping N's `(unsigned char)` shrank N but moved the tables (6447, 0x1884); f's +11 instructions
+are spill pairs from the same register cause; r's +9 is layout. Mechanism confirmed: the guard
+address `text.buf + i - 1` is CSE'd with cp_dst and spilled across the call, and every spelling
+that keeps the addresses equal is re-canonicalised, so no source-level staging removal survives
+the jump-table-is-code-end size constraint.
+
+`0x432480` 194 to 302 with frame immediate 0xb0 and the first differing byte at offset 7. The
+0xec frame came from session-2 member offsets being native offsets plus 0x10: inside the body
+`[esp+disp]` is read with the four callee-saved pushes already on the stack, so the local offset
+is disp-0x10. With the corrected aggregate (size 0xa4 including the 0xa0 slot) and lvalue macros
+for the memory-resident scalars (delta 0x20, boff 0x3c, lo 0x50, j 0x54, now 0x58, i 0x5c), and
+with the artificial scratch stores removed, the frame is native. Cross-cutting finding for the
+project: any Frame or struct model built from raw [esp+x] displacements in this target is 0x10
+too high until the four callee-saved pushes are subtracted.

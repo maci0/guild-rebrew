@@ -29,44 +29,41 @@ typedef struct ClampBlk {
 	int c;
 } ClampBlk;
 
-/* Locals of the native frame (0xb0 bytes). Only the members the body touches
- * are named; the leading 0x13 bytes and the trailing 4 are never addressed.
- * The struct is address-taken, which is what makes MSVC allocate the frame
- * before the callee-saved pushes. */
 typedef struct Frame {
-	unsigned char pad_00[0x13];
-	signed char sb;			/* 0x13 */
-	float f14;			/* 0x14 */
-	float f18;			/* 0x18 */
+	unsigned char pad_00[3];	/* 0x00 */
+	signed char sb;			/* 0x03 */
+	float f14;			/* 0x04 */
+	float f18;			/* 0x08 */
+	int i0c;			/* 0x0c */
+	float neg[3];			/* 0x10 */
 	int i1c;			/* 0x1c */
-	float neg[3];			/* 0x20 */
+	int i20;			/* 0x20 */
+	int i24;			/* 0x24 */
+	int i28;			/* 0x28 */
 	int i2c;			/* 0x2c */
 	int i30;			/* 0x30 */
 	int i34;			/* 0x34 */
 	int i38;			/* 0x38 */
 	int i3c;			/* 0x3c */
 	int i40;			/* 0x40 */
-	int i44;			/* 0x44 */
-	int i48;			/* 0x48 */
-	int i4c;			/* 0x4c */
+	float tan[3];			/* 0x44 */
 	int i50;			/* 0x50 */
-	float tan[3];			/* 0x54 */
+	int i54;			/* 0x54 */
+	int i58;			/* 0x58 */
+	int i5c;			/* 0x5c */
 	int i60;			/* 0x60 */
 	int i64;			/* 0x64 */
 	int i68;			/* 0x68 */
 	int i6c;			/* 0x6c */
-	int i70;			/* 0x70 */
-	int i74;			/* 0x74 */
-	int i78;			/* 0x78 */
+	float vec[3];			/* 0x70 */
 	int i7c;			/* 0x7c */
-	float vec[3];			/* 0x80 */
-	float f8c;			/* 0x8c */
-	int i90;			/* 0x90 */
-	float f94;			/* 0x94 */
-	int i98;			/* 0x98 */
+	int i80;			/* 0x80 */
+	int i84;			/* 0x84 */
+	int i88;			/* 0x88 */
+	int i8c;			/* 0x8c */
+	float out[3];			/* 0x90 */
 	int i9c;			/* 0x9c */
-	float out[3];			/* 0xa0 */
-	unsigned char pad_ac[4];
+	float tA0;			/* 0xa0 */
 } Frame;
 
 int __cdecl fcn_004321a0(ClampBlk flags, int v, int lo, int hi, int max);
@@ -86,6 +83,29 @@ void __cdecl fcn_00433780(char*);
 void __cdecl fcn_00435500(char*, char*);
 char __cdecl fcn_0045cbe0(char*, unsigned int);
 
+
+/* Native frame slots, addressed through the aggregate. */
+#define now (*(unsigned int*) ((char*) fs + 0x58))
+#define delta (*(int*) ((char*) fs + 0x20))
+#define i (*(int*) ((char*) fs + 0x5c))
+#define j (*(int*) ((char*) fs + 0x54))
+#define boff (*(int*) ((char*) fs + 0x3c))
+#define hi (*(int*) ((char*) fs + 0x08))
+#define lo (*(int*) ((char*) fs + 0x50))
+#define max (*(int*) ((char*) fs + 0x2c))
+#define bit (*(int*) ((char*) fs + 0x60))
+#define off (*(int*) ((char*) fs + 0x64))
+#define r (*(int*) ((char*) fs + 0x68))
+#define ext (*(char**) ((char*) fs + 0x7c))
+#define frames (*(char**) ((char*) fs + 0x84))
+#define sfr (*(char**) ((char*) fs + 0x8c))
+#define bld (*(char**) ((char*) fs + 0x1c))
+#define cnt (*(int*) ((char*) fs + 0x24))
+#define n (*(int*) ((char*) fs + 0x28))
+#define saved (*(int*) ((char*) fs + 0x34))
+#define g (*(float*) ((char*) fs + 0x6c))
+#define t (*(float*) ((char*) fs + 0xa0))
+
 #define SI(p) (*(int*) (p))
 #define SF(p) (*(float*) (p))
 #define SB(p) (*(unsigned char*) (p))
@@ -99,34 +119,14 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 {
 	Frame frame;
 	Frame* fs;
-	unsigned int now;
-	int delta;
-	char* ext;
-	char* bld;
 	char* slot;
 	char* owner;
-	char* frames;
 	char* st;
-	char* sfr;
-	int bit;
 	int flags;
-	int lo;
-	int hi;
-	int max;
-	int cnt;
-	int n;
-	int i;
-	int j;
-	int boff;
-	int off;
 	int cur;
 	int prev;
-	int r;
-	int saved;
 	char* nd;
 	float f;
-	float g;
-	float t;
 
 	fs = &frame;
 	prev = SI(o + 0x40);
@@ -195,9 +195,6 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 				/* clock carry */
 				flags = SB(slot + 0x74);
 				bit = (flags >> 1) & 1;
-				fs->i34 = delta;
-				fs->i38 = 0;
-				fs->i44 = bit;
 				f = (float) bit * SF(slot + 0x60) * (float) delta +
 					SF(slot + 0x64);
 				SF(slot + 0x64) = f;
@@ -432,7 +429,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 	if (!(SB(st + 0x34) & 2)) {
 		return 1;
 	}
-	fs->i2c = SI(st);
+	cnt = SI(st);
 	sfr = SP(st + 0x40);
 	flags = SB(st + 0x2d);
 	SB(st + 0x2d) = (unsigned char) (flags & ~0x20);
@@ -579,10 +576,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 
 	/* walk clock carry */
 	flags = SB(st + 0x34);
-	fs->i34 = delta;
-	fs->i38 = 0;
 	bit = (flags >> 1) & 1;
-	fs->i48 = bit;
 	f = (float) bit * SF(st + 0x38) * (float) delta + SF(st + 0x3c);
 	SF(st + 0x3c) = f;
 	r = (int) f;
@@ -593,7 +587,6 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 	}
 	SF(st + 0x3c) = f - (float) r;
 
-	cnt = fs->i2c;
 	sfr = SP(st + 0x40);
 	flags = SB(st + 0x2d);
 adv2:
@@ -617,7 +610,7 @@ adv2:
 			SI(st + 4) = 0;
 			goto dec2c;
 		}
-		prev = fs->i2c - 1;
+		prev = cnt - 1;
 		SI(st + 4) = prev;
 		SI(st + 0xc) = SI(st + 0xc) + QI(WR(prev), 0);
 		SB(st + 0x34) &= ~0x10;

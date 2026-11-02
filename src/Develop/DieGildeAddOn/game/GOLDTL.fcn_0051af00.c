@@ -531,8 +531,10 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			memcpy(cp_dst, cp_src, cp_n);
 			break;
 		case 'a':
-			if (text.buf[i - 1] != '%') {
-				sprintf(text.tmp, g_6a2348, 0x14);
+			if (text.buf[i - 1] == '%') {
+				cursor += 4;
+				res = *(int*) (cursor - 4);
+				sprintf(text.tmp, g_699a68, res, 0x14);
 				cp_src = text.tmp;
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 1;
@@ -540,9 +542,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				memcpy(cp_dst, cp_src, cp_n);
 				break;
 			}
-			cursor += 4;
-			res = *(int*) (cursor - 4);
-			sprintf(text.tmp, g_699a68, res, 0x14);
+			sprintf(text.tmp, g_6a2348, 0x14);
 			cp_src = text.tmp;
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 1;
