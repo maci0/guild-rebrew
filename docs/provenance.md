@@ -17501,3 +17501,37 @@ exactly native's 6 bytes and 2 instructions and B goes from -53 to +12. Length 6
 measured trades: reverting case N's fresh strlen (-8) and giving one I copy site a fresh strlen
 (-8). Rejected: the `while` form (byte-identical to the old 1027 object), guard-in-ordinary-path
 (6471/790), and dispatch-first if/else (6479/780).
+
+## 2026-11-02 — dialog frame split and message index corrected
+
+`0x5B6300` 644 to 778 with the object at 5499 and chkstk 0x1a4c held. Three edits. The frame split was
+four bytes high on the three text buffers: pad6d8 0x68 became 0x64 and txt800 0x1fc became 0x200,
+which matches the native CFG stack analysis (txt740 0x73c, txt7a0 0x79c, txt800 0x7fc, txt9fc 0x9fc,
+rows2 0xdfc) at the same total frame. Line 229 stores the handle once as `el = f.v44 = fcn_00472250(...)`
+and passes el to both fcn_00472380 and fcn_00468bb0, as native keeps it in a register at 0x5b64b7 and
+0x5b64bf. And line 604 writes `f.msg.f5c[f.v18] = 1` instead of `f5c[1]`, matching native's
+`mov dword [esp+ebx*4+0xbc],1` where ebx holds f.v18 from 0x5b732a while the other arm indexes
+`[eax+ebx*4+0xb0]`. The last two cancel exactly to 5499; each alone measured SIZE_MISMATCH. Verified
+but not kept: line 237 is really `f.v58 = fcn_00472250(...)` (-3 bytes, +7 alone), the four non-7
+message blocks put the screen-table value and G(a1+4) at opposite msg fields from native (swapping
+costs -4 and drops global match under the size shift), the second fcn_00469470 in the
+v10==0 && v40==-1 arm is unconditional in native (0x5b67b4 skips only sel.a0c, 0x5b67c0 always calls
+rows[0].a0c; fixing adds +10), and the d2_ShowTxt/fcn_005b58a0 argument order matches natively but is
++2 and drops global match when paired with the handle fix. Region match moved mainly at 0x5b6700
+(5 to 36) and 0x5b6800 (9 to 73).
+
+`0x5D0660` 6.2 to 6.6 percent with match 288 and the object at 3770 from 129, frame 0x438, first
+mismatch moved from 0 to 20. The whole native range 0x5d0660..0x5d1785 is transcribed in native
+order: prologue with `sub esp,0x438` and the four callee-saved pushes deferred until after the two
+early exits as the reference does; the count-gated redraw inside a `for (;;)` whose tail test is
+`if (!fcn_005373e0((void*)0x5d0660, a3)) break;`; the three memset(-1) tables compiling to the native
+`mov ecx,N; mov eax,-1; rep stosd` triple for 32, 96 and 80 bytes (16-byte entries: id +0, text +4,
+x +8, y +10); record collection through parent slot tabB[2]/tabB[3] with the 0x40000 flag test,
+tabA[1] from entity+0x64, tabA[0] from entity+0x60 with the child loop at entity+0x68, and the tabC
+pass keyed on the type byte being at least 0xa; and the full draw sequence (d2_SetForm, fcn_00472e50,
+fcn_0046f2c0, the tabA groups, the flag parent group, the child column loops over 756-byte graph
+slots in 0x1015ea0 with entity base 0x7f4ca0 and stride 0x21c, the centre groups and the three text
+passes through io_FormatTextBuffer plus fcn_005c9090 and fcn_0046f740), ending with the hover block
+and the two global gates. All 18 callees resolve. Two DATA symbols do not resolve in the TL target:
+g_14ce8e0 and g_67d370 exist only as GOLD rows, so the tester reports those DIR32 operands
+unresolved.

@@ -98,10 +98,10 @@ typedef struct {
 	SEL rows[12];   /* 0x254 */
 	int f6a4;
 	int arr6a8[12];
-	char pad6d8[0x68];
+	char pad6d8[0x64];
 	char txt740[0x60];
 	char txt7a0[0x60];
-	char txt800[0x1fc];
+	char txt800[0x200];
 	char txt9fc[0x400];
 	SEL rows2[12];  /* 0xdfc */
 	char txt124c[0x400];
@@ -226,9 +226,9 @@ int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
 	f.v50 = fcn_00472250(*(int*) (book + 0x228), 3, 2);
 	fcn_00472380(f.v50, 0x32, 0x96, *(int*) (rec + 0x3d));
 	if (f.row[0] != 4 && f.row[0] != 0x13 && f.row[0] != 0x10) {
-		f.v44 = fcn_00472250(*(int*) (book + 0x228), 3, 3);
-		fcn_00472380(f.v44, 0, 4, *(int*) (rec + 0x41));
-		fcn_00468bb0(f.v44, 5, *(int*) 0x14abbd8, *(int*) 0x14abbdc,
+		el = f.v44 = fcn_00472250(*(int*) (book + 0x228), 3, 3);
+		fcn_00472380(el, 0, 4, *(int*) (rec + 0x41));
+		fcn_00468bb0(el, 5, *(int*) 0x14abbd8, *(int*) 0x14abbdc,
 			*(int*) 0x14abbe0, *(int*) 0x14abbe4, *(int*) 0x14abbe8);
 	}
 	d2_SetForm(*(int*) (book + 0x228), 3);
@@ -601,7 +601,7 @@ L6fa2:
 				f.msg.f2c = G(0x7f4c04);
 				f.msg.f30 = G(0x7f4c08);
 				f.msg.w34 = *(short*) 0x7f4c0c;
-				f.msg.f5c[1] = 1;
+				f.msg.f5c[f.v18] = 1;
 				if (fcn_00505370((int) a1) != 0)
 					f.msg.f8c = -1;
 				else
