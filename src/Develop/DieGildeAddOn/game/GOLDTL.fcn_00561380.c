@@ -272,18 +272,29 @@ void __cdecl fcn_00561380(void *a0)
 		}
 	case 5:
 		{
+			int v10;
+			float v24;
+
+			if (*(unsigned char *)(p + 0xc2) >= 1)
+				goto label_56211d;
+			v10 = g_6b8010;
+			{
 			char names[3][64] = {"dummy_TUER", "dummy_FAHNE", "dummy_RAUCH_0"};
 			unsigned char *r;
 			unsigned char *model;
 			unsigned char *query;
 			unsigned char color[4];
-			int v10;
-			float v24;
 			int n;
 
-			if (*(unsigned char *)(p + 0xc2) >= 1)
-				goto label_56211d;
-			v10 = g_6b8010;
+			pos[0] = -243.0f;
+			pos[1] = -90.0f;
+			pos[2] = 190.0f;
+			pos[3] = 0.0f;
+			pos[4] = -50.0f;
+			pos[5] = 0.0f;
+			pos[6] = 38.0f;
+			pos[7] = 0.0f;
+			v24 = 1.0f;
 			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
 			if (r == 0)
 				goto label_561d51;
@@ -344,6 +355,7 @@ void __cdecl fcn_00561380(void *a0)
 			*(unsigned char *)(p + 0xc2) = *(unsigned char *)(p + 0xc2) + 1;
 			fcn_004432d0(v10, 1);
 			return;
+			}
 		}
 	case 6:
 		{

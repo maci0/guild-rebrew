@@ -19125,3 +19125,26 @@ spelling of the copies. Tooling caveat recorded: object dumps must use the proje
 `/I src /I src/Develop` wrapper compiles to frame 0x73c and invalidates any dump made with it; mk2.sh is the
 corrected wrapper. Artifacts in .scratch/569ff0/ (SC_19e6_strcat_317.c, SC_both_strcat_299.c, SC_droppc_326.c,
 SC_dropnum_316.c, SC_single_buf_314.c, mk2.sh, m.sh, na.sh, NOTES.md).
+
+## 2026-11-03 — inventory switch blocks written and slot order fixed
+
+`0x561380` reaches object 3528 from 3452 with normalised instructions 1057 from 1043 against native's 1087,
+53 relocations, frame `sub esp,0x5e4` held and lint clean; match reads 691. Three blocks landed. Case 5 is
+re-scoped so `if (*(unsigned char*)(p+0xc2) >= 1) goto label_56211d;` sits outside the block that declares
+`names[3][64]`, with names moved into a nested block, reproducing native's cmpb, jae, then names init order.
+The pos[8] initialiser with -243, -90, 190, 0, -50, 0, 38 and 0 now precedes the gm_StartFilteredEntitySearch
+call inside that nested block and all four float constants appear in the object (0xc3730000, 0xc2b40000,
+0x433e0000, 0xc2480000) with stores at frame 0xc..0x2b. And `v24 = 1.0f` with `v10 = g_6b8010` are hoisted to
+case-5 scope, which fixed the slot order as a scope artifact rather than needing a declaration reorder: the
+top-of-frame slots now match native exactly with v10 at 0x000, dist and v24 at 0x004, recB and color at 0x008,
+pos at 0x00c, names at 0x02c, msg at 0x0ec, text at 0x1e4 and frame 0x5e4. Reverted and not to be repeated:
+case 3 as `if (be70 != 0) {tail} else {failure}` (match 559 at 1053 instructions), case 3 as
+`if (be70 == 0) goto label_56165c` with the failure block textually last (byte-identical), inlining the record
+loads as `*(int*)(idx*0x21c + 0x7f4ca4)` (1054 at object 3512, match 561), and a local q for case 3's p+0x52
+initialiser (byte-identical). The deficit now concentrates in case 4: native 0x561817..0x561c32 is 334
+instructions and 0x41c bytes against our 314 and 0x3c6, with a block-order split against native
+0x5619e3..0x561aff and 0x561b0a..0x561bba. The case-3 tail also differs in base selection, since native does
+`add esi,0x52` and then disp8 stores at [esi+0x1e] and [esi+0x7a] while ours keeps p and pays disp32, making
+our tail fifteen bytes longer even though the object is seventy-two short overall. A pre-existing untracked
+skeleton probe file next to the source was left alone. Current source .scratch/r561380/v9_final.c with notes
+in NOTES.md.
