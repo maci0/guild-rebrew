@@ -16356,3 +16356,19 @@ percent -65, B -53, ampersand group -39, a +37, F +61 (layout artifact), I -14, 
 w -50, f +19, D -11. B and the ampersand group stay short because native inlines 18 rep movs
 where we merge to 12, so closing them would mean unmerging tails, which the tail constraint
 forbids.
+
+## 2026-11-02 — inventory dialog flags widened to int
+
+`0x4D6170` 639 to 648 with the object at 5441 and the equal prefix still stopping at byte 15;
+`flags`, `kind` and `looked_kind` are `int` instead of `char`, worth 9 matched bytes with the
+prefix and frame unchanged. The blockers are now measured rather than guessed: native's prologue
+has no `sub esp` because it calls the alloca probe at 0x64D710 (so chkstk imm 0x1124 is the whole
+local region and the object already matches bytes 0..14, no padding is wanted); and the local map
+differs from 0x1C onward, because native has two 8-byte int-to-double temporaries at 0x14 and
+0x1C with `char[0x100]` at 0x24 and buffers at 0x124/0x524/0x924 plus an untouched 0x400 tail,
+while the object has one temporary, the 0x100 array at 0x1C, buffers at 0x11C and a spare[0x408].
+Native also keeps the context pointer in EBX and the zero constant in EBP, the object the other
+way round. Native conversion shapes: both 0.001 and 0.07 sites need the two-fild form (measured
++20 bytes but correct), and the 0.01 site converts without reassociation
+(`fild qword; fmul qword[0x6640e8]; fimul dword[ebp+0xe]; ftol`). Constants verified:
+0x662A20 = 0.001, 0x664F18 = 0.07, 0x6640E8 = 0.01. All 45 distinct call targets resolve.

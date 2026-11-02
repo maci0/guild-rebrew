@@ -85,8 +85,8 @@ int __cdecl fcn_004d6170(char* ctx)
 	int tally;
 	char* ent;
 	char* cur;
-	unsigned char flags;
-	unsigned char kind;
+	int flags;
+	int kind;
 	char* row;
 	int i;
 	int col;
@@ -97,7 +97,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	char* p;
 	int mask;
 	char* looked;
-	char looked_kind;
+	int looked_kind;
 	char* self;
 
 	self = ctx;
