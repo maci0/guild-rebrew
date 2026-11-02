@@ -17480,3 +17480,24 @@ dropping k=s44 (identical object), a guard-free body (862/7041), the escape bloc
 epilogue (863/7054), 68 single escape swaps X->{s78,s88,s8C,s90} (best 882 at X=s40), drop-s44
 pairs (927-930 at 7031-7035 but sel moves 0x74 to 0x70 and blkB 0xa8 to 0xac), char or short
 filler (frame 0x904) and double filler (900-914 with the same census but alignment forcing 0x908).
+
+## 2026-11-02 — formatter adopts the nested loop skeleton
+
+`0x51AF00` keeps the faithful nested skeleton at object 6455 with both tables on 0x188c and 0x18e4,
+selector byte-identical, and match 888 against 1027 for the previous state. The trade is deliberate:
+the earlier 1027 came from accidental alignment of the r and percent tail with the table region, not
+from structure, while this skeleton reproduces native's block graph. Structure found: native's loop
+test at 0xb8 (`cmp ebx,0x17d0; jg done`) is entered only by the entry fall-through and the
+ordinary-char path (`0x1860 jb 0x51afb8`), and its 25 case-end jumps target the char load at 0xc4
+and skip the test; ours had the rotated latch at 0x185d where 22 case ends jump to the comparison.
+So the guard is not at the loop top in the original. The reproducing shape is an outer `for (;;)`
+carrying the guard plus an inner `for (;;)` cycle for the dispatch, with the ordinary path breaking
+out to `i++`, the strlen test and `continue`: guard 0xb7 to char load 0xc3 (native 0xb8 to 0xc4),
+the dispatch as fall-through with `jne` to the ordinary block out of line at 0x1866 (native 0x184c),
+and every case end jumping to the char load including the switch default. With B also inverted
+(`if (buf[k]=='%') {...; break;} i++; break;`) the merged `inc; jmp` block leaves B and lands at
+0xdf9 between v and u, where native has it at 0xe6f between v (0xe55) and u (0xe75), so F becomes
+exactly native's 6 bytes and 2 instructions and B goes from -53 to +12. Length 6455 needed two
+measured trades: reverting case N's fresh strlen (-8) and giving one I copy site a fresh strlen
+(-8). Rejected: the `while` form (byte-identical to the old 1027 object), guard-in-ordinary-path
+(6471/790), and dispatch-first if/else (6479/780).

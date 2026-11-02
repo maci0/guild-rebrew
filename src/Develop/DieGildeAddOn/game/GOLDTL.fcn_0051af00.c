@@ -147,14 +147,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 		if (i > 0x17d0) {
 			break;
 		}
-		c = text.buf[i];
-		if (c != '%' && c != '$' && c != '{') {
-			i++;
-			if (i < (int) strlen(text.buf)) {
-				continue;
+		for (;;) {
+			c = text.buf[i];
+			if (c != '%' && c != '$' && c != '{') {
+				break;
 			}
-			break;
-		}
 		r = text.buf[i + 1] - '0';
 		i++;
 		if (r >= 0 && r <= 9) {
@@ -340,7 +337,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 2;
 				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 1 - i);
-				memcpy(cp_dst, cp_src, cp_n);
+				memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			} else {
 				cursor += 4;
 				j = *(int*) (cursor - 4);
@@ -490,14 +487,14 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			break;
 		case 'B':
 			k = i - ((r != -1) ? 2 : 1);
-			if (text.buf[k] != '%') {
-				i++;
+			if (text.buf[k] == '%') {
+				grammar_state = 4;
+				fcn_0064d740(text.buf + k, text.buf + i + 1,
+					(int) strlen(text.buf) - i);
+				i = k - 1;
 				break;
 			}
-			grammar_state = 4;
-			fcn_0064d740(text.buf + k, text.buf + i + 1,
-				(int) strlen(text.buf) - i);
-			i = k - 1;
+			i++;
 			break;
 		case 'e':
 			k = i - ((r != -1) ? 2 : 1);
@@ -528,7 +525,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 3;
 			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
-			memcpy(cp_dst, cp_src, (int) strlen(cp_src));
+			memcpy(cp_dst, cp_src, cp_n);
 			break;
 		case 'a':
 			if (text.buf[i - 1] == '%') {
@@ -539,7 +536,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 1;
 				fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) - i + 1);
-				memcpy(cp_dst, cp_src, (int) strlen(cp_src));
+				memcpy(cp_dst, cp_src, cp_n);
 				break;
 			}
 			sprintf(text.tmp, g_6a2348, 0x14);
@@ -707,9 +704,15 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			fcn_0064d740(text.buf + i, text.buf + i + 1,
 				(int) strlen(text.buf) - i + 1);
 			break;
-		default:
-			break;
+			default:
+				break;
+			}
 		}
+		i++;
+		if (i < (int) strlen(text.buf)) {
+			continue;
+		}
+		break;
 	}
 done:
 	strcpy(output, text.buf);
