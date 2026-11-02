@@ -423307,7 +423307,7 @@ blocker = "Full body reconstructed from the native listing (frame 0x6f8, saved e
 blocker_delta = 943
 
 ["GOLDTL.0x0046c5a0".verification]
-source_hash = "0024385dcc7575b2b956acb5dfb8b9f7c88b9a63a7f22c6f526c9f3527fac207"
+source_hash = "0823ccc825225945162af9e43b8d43d853746a1c754a20b37f47448ad2de9c63"
 reference_hash = "d8be1a122f5c6a5df52cb4c68974ebc029ae7da682bc2da59ba22e24636ba23e"
 reference_size = "6080"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423318,10 +423318,10 @@ module = "GOLDTL"
 va = "0x46c5a0"
 context_hash = ""
 defines = "[]"
-input_hash = "c2304cdcac1b190b2615afa939df463518b90c316ee228f16cac810537eb0b82"
-writer = "verify"
+input_hash = "14d1b881fd35aa59807b23b735fca969f74e21d9fa97657157277f5492f495fd"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-02T07:45:55+00:00"
+writer = "test"
+measured_at = "2026-11-02T10:20:34+00:00"
 
 [["GOLDTL.0x0046c5a0".status_history]]
 old_status = "STUB"

@@ -16049,3 +16049,33 @@ loop advances a record pointer by 0x38 per match as native does (+30 to +3). Cor
 the previous pass's lead: the 0x4db17b call really carries five arguments; the evidence is
 the 0x64 push at 0x4db15c, fcn_004e6cb0 consuming only the 4 at 0x4db166 with add esp,4, and
 the add esp,0x18 at 0x4db18d accounting for 5*4 plus 4 for io_AppendText.
+
+## 2026-11-02 — fcn_0046c5a0 second dispatch chain, 'm' and 'M' statements
+
+The second dispatch (`*(char*)(p+1)`) is now an if/else-if chain instead of a switch, so the
+object carries one jump table as native does; the object emits the six compares in native's
+order (c, i, b, t, a, n). That costs the 44-byte table and reads 880 against 952, which is the
+expected trade: the position match was never the reason for the change. Two statement gaps
+native has and we lacked are filled, recovering 40 bytes: case 'm' re-stores
+`r[0x102d294] = t + i` after the strlen and calls `fcn_00469c40(g_102d020, g_102d024,
+r[0x102d274])` where the source had `g_102d020 = xr`, and case 'M' passes `strlen(t) + 1 - i`
+as native does at 0xa55 rather than `strlen(p+1) + 1`. Object 6008 -> 6004, match 952 -> 880.
+Dropping the `&span` stores in 'F' and inlining the text pointer both failed the keep rule and
+are reverted. The remaining 76-byte deficit is register allocation (native spills `i` and
+keeps `g_102d020` in ebx, ours the reverse) and the placement of the two shared tails, not
+missing code.
+
+## 2026-11-02 — dialog dispatch reduced to the reference's single table
+
+`0x46C5A0` keeps the if/else-if chain for the second dispatch, which removes the second jump
+table the object used to emit: there is now exactly one dispatch table, 21 dwords plus an
+80-byte index that is byte-identical to native 0x46dd04, and the six compares appear in
+native's order c, i, b, t, a, n (only the compare register differs, ours cl where native uses
+al, which is the p-pointer difference). The positional match reads 880 against the previous
+952 because a 6004-byte object is 76 short of native and every byte moves; the change is kept
+for table fidelity. Also corrected: the case 'm' else-arm gains the two statements native has
+at 0x93d..0x993 and drops a `g_102d020 = xr;` native does not perform, and the case 'M' copy
+count is `strlen(t) + 1 - i` as native uses at 0xa55..0xa69. Remaining 76 bytes are 63 code
+and 13 table/pad: native puts each shared tail in the first case of a pair while ours puts it
+in the second (net +32 for identical statements), and the continue arms run short (Z/B/L +6,
+C +3, '<' +11, '>' +7, t +7, R +13, entry +38).

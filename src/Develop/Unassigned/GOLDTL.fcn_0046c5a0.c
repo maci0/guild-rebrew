@@ -269,43 +269,36 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					nImg += 1;
 					continue;
 				}
-				switch (*(char*) (p + 1)) {
-				case 'c':
+				if (*(char*) (p + 1) == 'c') {
 					*(int*) (g_1015ea0 + img * 0x2f4 + 0x5c) = 0;
 					*(int*) (g_1015ea0 + img * 0x2f4 + 0x58) = 1;
-					break;
-				case 'i':
+				} else if (*(char*) (p + 1) == 'i') {
 					*(int*) (g_1015ea0 + img * 0x2f4 + 0x5c) = 0;
 					*(int*) (g_1015ea0 + img * 0x2f4 + 0x58) = 0;
-					break;
-				case 'b':
+				} else if (*(char*) (p + 1) == 'b') {
 					*(int*) (g_1015ea0 + img * 0x2f4 + 0x5c) = 1;
 					*(int*) (g_1015ea0 + img * 0x2f4 + 0x58) = 0;
-					break;
-				case 't':
-				case 'a':
-				case 'n':
-					if (*(char*) (p + 2) != '[') {
-						break;
+				} else if ((*(char*) (p + 1) == 't') || (*(char*) (p + 1) == 'a') ||
+				    (*(char*) (p + 1) == 'n')) {
+					if (*(char*) (p + 2) == '[') {
+						s = p + 3;
+						memset(bufB, 0, 0x80);
+						*(int*) (g_1015ea0 + img * 0x2f4 + 0x5c) = 1;
+						*(int*) (g_1015ea0 + img * 0x2f4 + 0x84) = *(int*) (slot + 0x28c);
+						*(int*) (g_1015ea0 + img * 0x2f4 + 0x1d0) = 3;
+						e = strchr(s, ']');
+						if (!e) {
+							sprintf(bufD, (char*) 0x67d540);
+							continue;
+						}
+						strncpy(bufB, s, (int) (e - s));
+						fcn_0046f9b0(img, bufB);
+						if (!*(char*) (e + 1)) {
+							*(char*) (p + 2) = 0;
+						} else {
+							strncpy(t + i + 2, e + 1, (int) strlen(e + 1) + 1);
+						}
 					}
-					s = p + 3;
-					memset(bufB, 0, 0x80);
-					*(int*) (g_1015ea0 + img * 0x2f4 + 0x5c) = 1;
-					*(int*) (g_1015ea0 + img * 0x2f4 + 0x84) = *(int*) (slot + 0x28c);
-					*(int*) (g_1015ea0 + img * 0x2f4 + 0x1d0) = 3;
-					e = strchr(s, ']');
-					if (!e) {
-						sprintf(bufD, (char*) 0x67d540);
-						continue;
-					}
-					strncpy(bufB, s, (int) (e - s));
-					fcn_0046f9b0(img, bufB);
-					if (!*(char*) (e + 1)) {
-						*(char*) (p + 2) = 0;
-					} else {
-						strncpy(t + i + 2, e + 1, (int) strlen(e + 1) + 1);
-					}
-					break;
 				}
 				*(int*) (slot + nImg * 4 + 0x294) = -1;
 				g_102d020 += *(int*) (g_1015ea0 + img * 0x2f4 + 0x18);
@@ -357,7 +350,9 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				*(int*) (slot + nImg * 4 + 0x294) = -1;
 				*(int*) (slot + nImg * 4 + 0x298) = tmp;
 				textLen = (int) strlen(*(char**) (slot + 0x3c));
-				g_102d020 = xr;
+				*(int*) (tmp * 0x160 + 0x102d294) = *(int*) (slot + 0x3c) + i;
+				fcn_00469c40(g_102d020, g_102d024,
+				    *(int*) (tmp * 0x160 + 0x102d274));
 				nImg += 2;
 				continue;
 			case 'l':
@@ -378,7 +373,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				nImg += 1;
 				continue;
 			case 'M':
-				strncpy(t + i - 1, p + 1, (int) strlen(p + 1) + 1);
+				strncpy(t + i - 1, p + 1, (int) strlen(t) + 1 - i);
 				tmp = g_772530;
 				*(unsigned short*) (tmp * 0x10c + 0x10119e0) = *(unsigned short*) 0x67d530;
 				*(char*) (tmp * 0x10c + 0x10119e2) = *(char*) 0x67d532;
