@@ -16749,3 +16749,33 @@ reversed `mode=0; rec=0;`, and `(flags = (unsigned char) self[0x7c])` all produc
 output, and address-taking mode was already byte-neutral, so the remaining 16-byte frame shift
 (struct base 0x134 against native 0x124, mode at [esp+0x18] against [esp+0x1c], rec at
 [esp+0x24] against [esp+0x14]) is register-allocation output rather than a source lever.
+
+## 2026-11-02 — trade ai table pointer and transport array semantics
+
+`0x489A70` 541 to 566 with the object at 6072. Two discoveries are kept for fidelity: 0x868050
+is a table pointer, `unsigned char* lpGebaeudePROT` (data row GOLDTL.0x00868050), so both sites
+lower as native does (`mov edx,ds:0x868050; add edx,ecx; cmp BYTE [edx+eax*4],0x16`); and the
+cart producer search is a fixed-end pointer walk
+`for (pp = (Prod*)0x100b0c0; pp < (Prod*)0x100d0c0 && pr == 0; pp++)`, since native compares the
+induction pointer against 0x100d0c0 and never reloads 0x100b0a8. Volatiles on cnt, sent and
+price are added to the existing set as scheduling barriers. The unresolved defect is the frame:
+native is `sub esp,0x74c` with v.m at [esp+0x38] and v.line at [esp+0x358], ours is
+`sub esp,0x744` with v.m at [esp+0x30] and v.line at [esp+0x350], and the v struct is the same
+size (0x720), so eight bytes of scalars that native keeps in memory are in registers for us, which
+shifts every v access and makes the real compare diverge at offset 8. Volatiles do not move the
+frame. Also noted: the 0x7f4c04 low-bit test uses an idiom unique in the image and about thirty
+condition spellings produce the plain `test BYTE,0x1`, so it is not reachable from the condition;
+and native does not perform our redundant `v.m+0x9d = 0` after memset.
+
+`0x4DA690` keeps the corrected array semantics at 810 match and object 7099 (42 over native),
+down from 994 match and 7461 bytes, and the trade is deliberate. Landed: one record array
+`int s84[6]` at native raw 0x84 with its fill, zero fill and later reads, the id read as
+`*(int*)((char*)s84[i]+4)`, `int s98[4]` filled from `*(int*)(s80+4)` with the -1 tail, a new
+`int sel[4]` for the native raw-0x74 array whose base matches at 0x74 exactly, `int s54[4]` with
+the placement loop index moved to n, `int sF4[8]`, `int sD0[6]`, and the split of the conflated
+s9C. The old s74 declaration, its `((int*)&s74)` uses and the `s74[i+1]` alias are gone, as are
+the wrong `mid+0xa8` and `mid+0x74` writes. The escape block is now 19 escaped int scalars plus
+nine escaped never-used doubles for 148 filler bytes at 11 arguments per call, and it is the only
+remaining excess. VC6 still picks different array bases (sF4 0xbc against native 0x104, sD0 and
+sel coalesced at 0x74 against 0xd0 and 0x74, s84 0x8c against 0x84, s98 0xa4 against 0xa8), so the
+positional match now depends on the allocator's base choices rather than on statements.

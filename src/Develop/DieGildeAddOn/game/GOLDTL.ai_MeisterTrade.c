@@ -99,6 +99,7 @@ typedef struct {
 } Stock;
 
 extern unsigned char g_773d75;
+extern unsigned char* lpGebaeudePROT;
 extern char* g_773d78;
 extern float volatile g_6628a0;
 extern float g_664144;
@@ -147,16 +148,17 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 	char* x;
 	char* tp;
 	Prod* pr;
+	Prod* pp;
 	Town* t;
 	unsigned short volatile id;
 	int i;
 	int j;
 	int volatile n;
-	int cnt;
-	int sent;
+	int volatile cnt;
+	int volatile sent;
 	int found;
 	int tmp;
-	int price;
+	int volatile price;
 	int type;
 	int slot;
 	float fr;
@@ -184,8 +186,7 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 		}
 		if (pr->qty28 > fcn_0050dfd0(bld, pr->id) / 3) {
 			tp = *(char**) (o + 0x16c);
-			if (*(unsigned char*) (0x868050 +
-			    (unsigned char) *tp * 0x24d) == 0x16) {
+			if (lpGebaeudePROT[(unsigned char) *tp * 0x24d] == 0x16) {
 				pr->qty18 = pr->qty28 / 2;
 			} else {
 				pr->qty18 = pr->qty28;
@@ -338,7 +339,7 @@ dump_stock:
 	}
 
 	tp = *(char**) (o + 0x16c);
-	type = *(unsigned char*) (0x868050 + (unsigned char) *tp * 0x24d);
+	type = lpGebaeudePROT[(unsigned char) *tp * 0x24d];
 	if (type == 0xd || type == 0xb || type == 0xc) {
 		/* 0x0420-0x04b7: drop town requests already being handled */
 		for (i = 0; i < *(int*) 0x100b0ac; i++) {
@@ -436,10 +437,10 @@ next_request:
 		sprintf(v.line, (char*) 0x67e634, *(char**) (o + 0x16c) + 5,
 		    v.s2.vals[i], *(char**) 0x99ec10 + id * 0x41 + 1);
 		pr = 0;
-		for (tmp = 0; tmp < *(int*) 0x100b0a8; tmp++) {
-			if (((Prod*) 0x100b0c0 + tmp)->id == id) {
-				pr = (Prod*) 0x100b0c0 + tmp;
-				break;
+		for (pp = (Prod*) 0x100b0c0; pp < (Prod*) 0x100d0c0 &&
+		    pr == 0; pp++) {
+			if (pp->id == id) {
+				pr = pp;
 			}
 		}
 		if (pr == 0) {
