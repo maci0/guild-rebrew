@@ -161,7 +161,7 @@ void __cdecl fcn_004d8d00(char* a0)
 			tgt = gm_LookupEntityRecordIn32SlotTable(p->f10);
 			if (tgt) {
 				if (*((unsigned char*)tgt + 8) == 0
-				    || *(int*)(ent34(tgt) + 0x218) == 1
+				    || *(int*)((*(int*)(*(int*)(tgt + 0x184) + 0x34)) + 0x218) == 1
 				    || obj == 0 || *((unsigned char*)obj + 8) == 0) {
 					msg.f[0] = *(int*)(obj + 4);
 					msg.f[1] = 0;
@@ -312,7 +312,7 @@ void __cdecl fcn_004d8d00(char* a0)
 					break;
 				if (tgt) {
 					if (!fcn_0045b990(base,
-						(float*)(ent34(tgt) + 0x4c),
+						(float*)((*(int*)(*(int*)(tgt + 0x184) + 0x34)) + 0x4c),
 						&p->f14, &p->f18, &v28))
 						break;
 				}
@@ -408,7 +408,7 @@ tail1_body:
 					fcn_0045b920((int)base, *((unsigned char*)p + 0x20),
 					    *((unsigned char*)p + 0x21), vec);
 					if (!CompareVector3WithinTolerance(vec,
-						(float*)(ent34(obj) + 0x4c), 50.0f))
+						(float*)((*(int*)(*(int*)(obj + 0x184) + 0x34)) + 0x4c), 50.0f))
 						break;
 					fcn_004c6940(obj, 4, msg.f);
 					*((unsigned char*)msg.f + 0x22) = 1;
@@ -429,7 +429,7 @@ tail1_body:
 				*((unsigned char*)msg.f + 0x21) = (unsigned char)v14;
 				fcn_004c6820(*(int*)(a0 + 0x10), msg.f);
 				*((unsigned char*)msg.f + 0x22) = 2;
-				n = ent34(obj);
+				n = (*(int*)(*(int*)(obj + 0x184) + 0x34));
 				p->timer = fcn_004c6680((char*)n, v10, v14, 0);
 			} else if (*((unsigned char*)p + 0x22) == 2) {
 				fcn_0045b920((int)base, *((unsigned char*)p + 0x20),
@@ -457,7 +457,7 @@ tail1_body:
 					goto case4b;
 				if (*((unsigned char*)v68 + 8) != 0
 				    && CompareVector3WithinTolerance(vec,
-					(float*)(ent34((char*)v68) + 0x4c), 49.5f))
+					(float*)((*(int*)(*(int*)((char*)v68 + 0x184) + 0x34)) + 0x4c), 49.5f))
 					goto case4b;
 			}
 			if (!p->c0c) {

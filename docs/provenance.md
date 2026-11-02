@@ -17567,3 +17567,49 @@ strlen temporaries 6527/808, D with cp_n 6471/837, w with a literal memcpy 6495/
 bodies cross-jump into one block native keeps separate. The row carries a blocker record; the lever
 is a source shape that forces a third callee-saved value, which is the same wall documented for
 0x519190.
+
+## 2026-11-02 — TL globals bound, water body completed, dispatcher inlines
+
+The two globals behind `0x5D0660` now have TL rows, written through `rebrew data set` with the
+addresses proven from native immediates: `GOLDTL.0x014ce8e0` as `g_14ce8e0` in .bss and
+`GOLDTL.0x0067d370` as `g_67d370` in .data, with size, type, storage kind, backing and link symbol
+left unset because a dword access does not prove an allocation. Evidence: native loads
+`[0x14ce8e0]` at 0x005D15F1 and 0x004B3F60 with 325 xrefs, and `[0x67d370]` at
+0x005D161D/1665/16AC and 0x00474040 with 366 xrefs; the neighbours now validate, with
+GOLDTL.fcn_004b3ec0 at RELOC 274/274 reporting `_g_14ce8e0 VALIDATED` and GOLDTL.fcn_00474040 at
+RELOC 694/694 reporting `_g_67d370 VALIDATED` five times. The row's unresolved DIR32 count fell from
+4 to 0, match reads 275 against 288 because the four operands are now compared rather than tolerantly
+masked, and lint stays at 5485 of 5485. GOLD rows 0x014673A0 and 0x005FE710 are untouched.
+
+`0x43DB70` 148 to 199 with the object growing 3430 to 4414, frame now exactly 0x28c and the first
+mismatch at offset 10. Written: the per-label min/max triple pass after the label-table realloc in
+native order (lock call through [tile+0x1a0] vtbl+0x2c into a vertex pointer; label loop over
+used[] with 255 slots, stride 0x158 and bound 0x156a8; per cell two three-call triangles through
+fcn_0043c070, now called six times; MIN/MAX from 0x40000000 and 0; six 16-bit vertex words with
+count += 6 per cell; per-label 0x14 record with base, span, start, (count-start)/3 and the tile-record
+pointer e+0x7da0+offset), the tile teardown loop at a new teardown label (8x8 over e+0x258, stride
+0x1f4, freeing [t] and [t-4] through m_FreeTracked and [t-0x18] and [t-0x14] through vtbl+8 into
+g_14ce728, only when the valid byte [t+4] is zero), the object release moved inside the valid-tile
+block as native has it, and the gotos retargeted (early name-slot miss to teardown, empty mask to
+free_v3 shared with the normal v3 free). Declaration order then produced the native array offsets
+(-0x28c for fmt, -0x18c for used, -0x8c for buf) once the five extra slots appeared. The prologue
+push order is still unaligned: native keeps the tile pointer in esi and the name-slot counter in ebx
+where ours gives the tile pointer ebx and spills the counter, and register hints, parameter aliases,
+hoisted counters, an explicit source pointer variable and a volatile pointer all failed to flip it.
+Likely the original used short-lived per-pass locals while this file reuses v0..v17 across the whole
+function, so their live ranges span it; fixing that is a whole-file variable-lifetime refactor.
+
+`0x4D8D00` keeps five ent34 call sites inlined at the exact body expression, at source lines 164,
+315, 411, 432 and 460, which is native-faithful shape since native inlines at those sites. The object
+stays exactly 4640 with the call counts held (11/9/16, ent34 now 20 sites) and the instruction count
+falls from 1464 to 1451, while match drops from 616 to 468 because each inline shifts everything after
+it. The open hypothesis was tested and falsified: removing those thirteen instructions does not move
+register pressure, since v68 still lives in ebx, the prologue still emits xor ebx and xor eax, the
+trailer still reloads v68 from 0x70(%esp) and the /FAs slot table is byte-identical. Negative results
+from the same pass: `p->type == -1` instead of `~p->type == 0` gives 1470 instructions and match 175;
+splitting the two continue tests gives 4540 code with c67c0 at 7 and c6940 at 15; three spellings of
+the 0x68bf70/0x68bf58 ternary change nothing because MSVC always emits the sub/neg/sbb/and/add
+select; the case1-else rewrite gives 4636/1470 with c67c0 8 and c6940 17; completing the two missing
++0x184 in the expression is closer to native but drops c67c0 to 7 and c6940 to 15, so it is flagged as
+a real divergence in that region rather than applied; and a beam search over ent34 inline subsets
+under the size and call-count invariants tops out at 1451.

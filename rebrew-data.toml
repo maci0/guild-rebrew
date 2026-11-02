@@ -27432,3 +27432,19 @@ updated_by = "data"
 updated_at = "2026-11-02T12:53:54+00:00"
 name = "g_9b156c"
 type = "char[]"
+
+["GOLDTL.0x014ce8e0"]
+name = "g_14ce8e0"
+section = ".bss"
+kind = "GLOBAL"
+note = "TL image identity of existing C symbol g_14ce8e0. TL bodies read dword [0x14ce8e0] as a zero-tested flag: 0x005d15f1 mov eax,[0x14ce8e0] then test, and 0x004b3f60 uses the same role, both gating the g_774654 write on g_100f1dc. 325 TL xrefs. Address is in the .data virtual tail (rebrew .bss). size, type, storage_kind, file, link_symbol and backing stay unset: a dword access does not prove interiority or an allocation, and this row is not a storage owner."
+updated_by = "data"
+updated_at = "2026-11-02T15:07:53+00:00"
+
+["GOLDTL.0x0067d370"]
+name = "g_67d370"
+section = ".data"
+kind = "GLOBAL"
+note = "TL image identity of existing C symbol g_67d370. TL bodies load dword [0x67d370] as a search/index key: 0x005d161d, 0x005d1665 and 0x005d16ac mov edx,[0x67d370] against table entries, and 0x00474040 mov edx,[0x67d370] then cmp edx,-1 before indexing g_1015ea0. 366 TL xrefs. Address is in raw .data and the first 8 file bytes are ff. size, type, storage_kind, file, link_symbol and backing stay unset: a dword access does not prove interiority or an allocation, and this row is not a storage owner."
+updated_by = "data"
+updated_at = "2026-11-02T15:07:54+00:00"

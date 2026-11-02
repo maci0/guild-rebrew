@@ -9,13 +9,12 @@
  * horizontal strip runs and turns the water-mask bits of the texture. Then
  * rebuilds the region pool and the per-tile strip/region tables.
  *
- * Transcribed from the native listing in address order: 0x43db70..0x43e42e
- * and the tile-table scan, strip pass, region-label pass and record cleanup
- * at 0x43e42e..0x43ebd4. Still missing: the min/max triple pass
- * 0x43e7f1..0x43eb10 and the tile teardown loop 0x43ebf7..0x43ec78. The
- * min/max pass is why the frame is 0x278 and the object 3430 bytes: several
- * scalar locals that native keeps in stack slots stay in registers here, so
- * the `sub esp` immediate and local offsets do not match yet.
+ * Transcribed from the native listing in address order, including the
+ * per-label min/max triple pass at 0x43e7f1 and the tile teardown loop at
+ * 0x43ebf7. The frame is 0x28c, matching native. The remaining prologue
+ * difference is register allocation: native keeps the tile pointer in esi
+ * with the name-slot counter in ebx, while this build gives the tile
+ * pointer ebx and spills the counter.
  */
 
 void* __cdecl m_alloc(int size, char* reason);
@@ -44,7 +43,8 @@ void __cdecl fcn_0043db70(char* e)
 {
 	char flag;
 	int v17, v16, v15, v14, v13, v12, v11, v10, v9, v8, v6, v5, v4, v2, v1, v0;
-	char *v7, *v3;
+	int v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29;
+	char *v7, *v3, *v30;
 	char buf[0x40];
 	unsigned char used[0x100];
 	char* rec;
@@ -68,7 +68,7 @@ void __cdecl fcn_0043db70(char* e)
 		}
 	}
 	if (*(unsigned char*) (e + 0x8034) >= 0xff) {
-		goto tiles;
+		goto teardown;
 	}
 
 	v3 = (char*) m_alloc(*(int*) e * *(int*) e, (char*) 0x67a778);
@@ -121,8 +121,7 @@ void __cdecl fcn_0043db70(char* e)
 
 	if (!flag) {
 		*(unsigned char*) (e + 0x8034) = 0xff;
-		m_FreeTracked(v3);
-		goto tiles;
+		goto free_v3;
 	}
 	if (*(int*) (e + 0x18) != 0) {
 		for (v15 = 0; v15 < *(int*) e * *(int*) e; v15++) {
@@ -432,7 +431,73 @@ void __cdecl fcn_0043db70(char* e)
 				if (*(int*) (v5 + 0x1b4) == 0) {
 					*(int*) (v5 + 0x1b4) = (int) m_alloc(v16 * 20, (char*) 0x67a6f0);
 				}
-			}
+				/* Per water label: two cell triangles, base and span
+				 * of the corner region indices. */
+				(*(void (__cdecl**) (int, int, int, void**, int))
+				    (*(int*) *(int*) (v5 + 0x1a0) + 0x2c))(
+				    *(int*) (v5 + 0x1a0), 0, 0, (void**) &v30, 0);
+				v20 = 0;
+				v18 = 0;
+				v21 = 0;
+				v19 = 0;
+				do {
+					if (used[v18] != 0) {
+						v22 = v20;
+						v23 = 0x40000000;
+						v24 = 0;
+						v25 = *(int*) (e + 4) * v13;
+						if (v25 < *(int*) (e + 4) * (v13 + 1)) {
+							do {
+								v26 = *(int*) (e + 4) * v14;
+								v27 = v26 + 1;
+								if (v26 < *(int*) (e + 4) * (v14 + 1)) {
+									do {
+										v4 = *(int*) e * (v25 & *(int*) (e + 0xc))
+										    + (v26 & *(int*) (e + 0xc));
+										if (*(unsigned char*) (v7 + v4) == v18) {
+											v28 = fcn_0043c070((char*) v5, v26, v25,
+											    *(unsigned char*) (v7 + v4));
+											v29 = fcn_0043c070((char*) v5, v27, v25 + 1,
+											    *(unsigned char*) (v7 + v4));
+											v2 = fcn_0043c070((char*) v5, v26, v25 + 1,
+											    *(unsigned char*) (v7 + v4));
+											v23 = MIN(v28, MIN(v29, MIN(v2, v23)));
+											v24 = MAX(v28, MAX(v29, MAX(v2, v24)));
+											((short*) (void*) v30)[0] = (short) v28;
+											((short*) (void*) v30)[1] = (short) v29;
+											((short*) (void*) v30)[2] = (short) v2;
+											v28 = fcn_0043c070((char*) v5, v26, v25,
+											    *(unsigned char*) (v7 + v4));
+											v29 = fcn_0043c070((char*) v5, v27, v25,
+											    *(unsigned char*) (v7 + v4));
+											v2 = fcn_0043c070((char*) v5, v27, v25 + 1,
+											    *(unsigned char*) (v7 + v4));
+											v23 = MIN(v28, MIN(v29, MIN(v2, v23)));
+											v24 = MAX(v28, MAX(v29, MAX(v2, v24)));
+											((short*) (void*) v30)[3] = (short) v28;
+											((short*) (void*) v30)[4] = (short) v29;
+											((short*) (void*) v30)[5] = (short) v2;
+											v30 += 6;
+											v20 += 6;
+										}
+										v26++;
+										v27++;
+									} while (v26 < *(int*) (e + 4) * (v14 + 1));
+								}
+								v25++;
+							} while (v25 < *(int*) (e + 4) * (v13 + 1));
+						}
+						*(int*) (*(int*) (v5 + 0x1b4) + v21) = v23;
+						*(int*) (*(int*) (v5 + 0x1b4) + v21 + 4) = v24 - v23 + 1;
+						*(int*) (*(int*) (v5 + 0x1b4) + v21 + 8) = v22;
+						*(int*) (*(int*) (v5 + 0x1b4) + v21 + 0xc) = (v20 - v22) / 3;
+						*(int*) (*(int*) (v5 + 0x1b4) + v21 + 0x10)
+						    = *(int*) (e + 0x7da0) + v19;
+						v21 += 0x14;
+					}
+					v18++;
+					v19 += 0x158;
+				} while (v19 < 0x156a8);
 				v6 = *(int*) (v5 + 0x1a0);
 				if (v6 != 0) {
 					(*(void (__cdecl**) (int)) (*(int*) v6 + 0x30))(v6);
@@ -456,13 +521,43 @@ void __cdecl fcn_0043db70(char* e)
 						}
 					}
 				}
+			}
 			v14++;
 		} while (v14 < 8);
 		v13++;
 	} while (v13 < 8);
 
 	m_FreeTracked(v7);
+
+free_v3:
 	m_FreeTracked(v3);
+
+teardown:
+	for (v13 = 0; v13 < 8; v13++) {
+		for (v14 = 0; v14 < 8; v14++) {
+			v6 = (int) (e + 0x258 + (v13 * 8 + v14) * 0x1f4);
+			if (*(unsigned char*) (v6 + 4) == 0) {
+				if (*(int*) v6 != 0) {
+					m_FreeTracked((void*) *(int*) v6);
+					*(int*) v6 = 0;
+				}
+				if (*(int*) (v6 - 4) != 0) {
+					m_FreeTracked((void*) *(int*) (v6 - 4));
+					*(int*) (v6 - 4) = 0;
+				}
+				if (*(int*) (v6 - 0x18) != 0) {
+					g_14ce728 = (*(int (__cdecl**) (int))
+					    (*(int*) *(int*) (v6 - 0x18) + 8))(*(int*) (v6 - 0x18));
+					*(int*) (v6 - 0x18) = 0;
+				}
+				if (*(int*) (v6 - 0x14) != 0) {
+					g_14ce728 = (*(int (__cdecl**) (int))
+					    (*(int*) *(int*) (v6 - 0x14) + 8))(*(int*) (v6 - 0x14));
+					*(int*) (v6 - 0x14) = 0;
+				}
+			}
+		}
+	}
 
 tiles:
 	if (*(unsigned char*) (e + 0x8034) == 0xff) {
