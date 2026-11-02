@@ -298,10 +298,13 @@ body:
 					    *(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x55) {
 						*(int*) ((char*) base + 0x10161d4 +
 							 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
+					} else {
+						*(int*) ((char*) base + 0x10161d4 +
+							 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
 					}
 				} else if (buf[i + 1] == 't') {
-					if (*(int*) ((char*) base + 0x10161cc) == 0x53 ||
-					    *(int*) ((char*) base + 0x10161cc) == 0x55) {
+					if (*(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x53 ||
+					    *(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x55) {
 						*(int*) ((char*) base + 0x10161d4 +
 							 *(int*) ((char*) base + 0x10162d4) * 4) = 2;
 					} else {
@@ -359,7 +362,7 @@ body:
 				}
 				memmove(buf + i - 1 + strlen(tmp), buf + i + 1,
 					strlen(buf) - i + 1);
-				strcpy(buf + i - 1, tmp);
+				memcpy(buf + i - 1, tmp, strlen(tmp));
 			}
 			break;
 		case 'I':

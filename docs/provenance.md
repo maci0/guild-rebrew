@@ -15718,3 +15718,17 @@ four reorderings moved a1 to ebp or edi, never esi. Placement baseline recorded 
 correct with 4551 misplaced, so raw loss is dominated by link order and body-size
 drift. Remaining excess windows for the panel are +1232 at native 0x5bd5d7 and +472
 at 0x5bcb04, both source branch nesting.
+
+## 2026-11-02 — parser block two grows while its tables stay exact
+
+`0x51C840` 1119 to 1388. Three native-faithful edits, all net zero for the pre-table
+budget: the t-arm condition recomputes `(char*)(g_772514 * 0x3cc)` instead of using the
+`base` local (native recomputes, +16 bytes at 0xAF4), the a/n arm's `tab[n] = -1` store
+is duplicated into an else arm to give the two 15-byte tails at 0xAAC and 0xAE1 (+16),
+and the r==-1 copy at 0xBC6 becomes `memcpy(buf+i-1, tmp, strlen(tmp))` because native
+emits the strlen plus rep movs idiom rather than a byte loop (-32; the preceding memmove
+already writes the terminating NUL). The jump table at 0x16E8, the 83-byte char map at
+0x1748 and the pad to 0x17A0 are byte-identical to native, the pre-table total stays
+5864, and the object matches native size at 6043 stored bytes. Block2 is still about 66
+bytes short and the r!=-1 / r==-1 register-shape gaps (native spills p to [esp+0x18] and
+divides unsigned) remain.
