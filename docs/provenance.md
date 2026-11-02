@@ -16184,3 +16184,18 @@ sites now use one shape: `cp_src = <source>; cp_n = (int) strlen(cp_src); cp_dst
 <offset>; fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + <c> - i);
 memcpy(cp_dst, cp_src, cp_n);`. rep-movsd tails fall 12 to 6 (native 9), all rep movs 24 to 12
 (native 18). Remaining deficits are missing code: I -107, f -65, G -52, w -34, Ss -29, D -11.
+
+## 2026-11-02 — transport loops as tail tests and register twins
+
+`0x4DA690` 762 to 787 with the object falling 7343 to 7233 (176 over native), prefix 0x9b and
+frame 0x900 with four pushes held. Loops that our source wrote as guarded loops but native
+writes as a single test at the tail were rewritten as do/while: the scene-row outer loop
+(0x4dae26 94 to 86), the per-slot refresh (0x4db106 84 to 76), the 0x7f4ca0 scan (0x4db8b5 64
+to 62), the 0x9b0eb4 fill (dedupe 383 to 376) and the third-region text loop (0x4dba84 74 to
+64). The trick that paid most is the register-substitution twin: an address-taken keepalive
+holds the frame slot while a non-address-taken twin does the work, which put the third-region
+placement accumulator in a register like native's ebx, the packet-scan counter in edi, and
+hoisted order[s20] before fcn_005358e0 (0x4daaa6 12 to 1), shrinking the scan arm from 204 to
+132. Rejected: the placement loop as do/while or goto-to-tail (frame 0x904), the packet scan
+with an inner break (total grew), s70 as a register variable (+7), and dropping the s7C
+keepalive without a replacement slot (frame 0x8fc).

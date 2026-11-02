@@ -84,6 +84,9 @@ void __cdecl fcn_004da690(unsigned int *a0)
     int s74;
     int s78;
     int s7C;
+    int acc;
+    int ord;
+    int jc;
     int s80;
     int s84;
     int s88;
@@ -185,8 +188,9 @@ void __cdecl fcn_004da690(unsigned int *a0)
         s0C = k;
     }
 
+    ord = order[s20];
     fcn_005358e0(0x6b5c60);
-    if (fcn_004ea130(order[s20]) == 0) {
+    if (fcn_004ea130(ord) == 0) {
         unsigned short v = *(unsigned short *)0x774970;
         if (*(int *)((char *)a0 + 0xc) == *(int *)(0x7f4ca4 + (unsigned int)v * 0x21c)) {
             fcn_004e99e0(order[s20], n, (char *)&mid[0x38]);
@@ -211,9 +215,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
         s48 = s44;
         ((int *)&s4C)[0] = 0;
         ((int *)&s50)[0] = 0x9b0e24 + s48 * 0x35c;
-        s54 = 0;
         ((int *)&s58)[0] = 0;
-        do {
+        for (s54 = 0; s54 < s48; s54++) {
             int *pp = (int *)0x9b0e30;
             int j = 0;
             s5C = *(int *)(((int *)&sF4)[s54] + 4);
@@ -221,7 +224,9 @@ void __cdecl fcn_004da690(unsigned int *a0)
                 j += 1;
                 pp += 0x35c / 4;
             }
-            if (j >= s48) {
+            if (j < s48)
+                continue;
+            {
                 int *pd = (int *)((int *)&s50)[0];
                 *(int *)((char *)a0 + 0x34 + ((int *)&s4C)[0] * 4) = s5C;
                 pd[3] = s5C;
@@ -231,20 +236,19 @@ void __cdecl fcn_004da690(unsigned int *a0)
                 ((int *)&s50)[0] = (int)(pd + 0x35c / 4);
                 ((int *)&s4C)[0] += 1;
             }
-            s54 += 1;
-        } while (s54 < s48);
+        }
     }
     *(unsigned char *)((char *)a0 + 0x30) = (unsigned char)((int *)&s4C)[0];
     if (((int *)&s4C)[0] < 0x10) {
         int *pa = (int *)((char *)a0 + 0x34) + s4C;
         int *pt = (int *)(0x9b0e30 + s4C * 0x35c);
         int *ptEnd = (int *)0x9b43f0;
-        while (pt < ptEnd) {
+        do {
             *pa = -1;
             *pt = -1;
             pt += 0x35c / 4;
             pa += 1;
-        }
+        } while (pt < ptEnd);
     }
     /* native 0x4dac46: scene handle, per-entity text packets */
     fcn_005358e0(0x6b5c60);
@@ -287,7 +291,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
     /* native 0x4dade7..0x4db5f5: per-row scene pass */
     if (s28 > 0) {
         s00 = (int)(char *)&mid[0x3c];
-        while (s30 < s28) {
+        do {
             if (s1C == 0)
                 break;
             s48 = 0;
@@ -337,10 +341,10 @@ void __cdecl fcn_004da690(unsigned int *a0)
                             *(int *)((char *)&mid + 0x3bc) = 0;
                             *(int *)((char *)&mid + 0x3d8) = 0;
                             fcn_005ca560((char *)&mid + 0x3a8);
-                            fcn_005ca740(*(short *)(*(int *)0x772500 + 0x1ebd8) * i + s7C, 0,
+                            fcn_005ca740(*(short *)(*(int *)0x772500 + 0x1ebd8) * i + acc, 0,
                                          *(int *)0x772514, 0x54,
                                          (int *)((char *)&mid + 0x3a8), 0);
-                            s7C += s08;
+                            acc += s08;
                             i += 1;
                         }
                         n += 1;
@@ -358,7 +362,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                 fcn_00471af0(s38, 1);
                 if (s0C > 0) {
                     i = 0;
-                    while (i < s0C) {
+                    do {
                         s80 = 0x9b0eb4 + i * 0x35c;
                         if (*(int *)s80 < 3) {
                             s58 = gm_LookupEntityRecordById(*(int *)(s80 - 0x84));
@@ -411,12 +415,12 @@ void __cdecl fcn_004da690(unsigned int *a0)
                             fcn_004e4de0(0x3e8);
                         }
                         i += 1;
-                    }
+                    } while (i < s0C);
                 }
             }
             s30 += 1;
             s00 += 0x18;
-        }
+        } while (s30 < s28);
     }
     /* native 0x4db5f5..0x4dc199: second packet pass */
     s2C = 0;
@@ -484,7 +488,9 @@ void __cdecl fcn_004da690(unsigned int *a0)
                 lane = (int *)((char *)&mid + 0x128);
                 i = 0;
                 s80 = 0x7f4ca0;
-                while (i < *(int *)(s14 + 4) && i < 4) {
+                do {
+                    if (i >= *(int *)(s14 + 4) || i >= 4)
+                        break;
                     if (*(unsigned char *)(s80 + 0x168) == *(unsigned char *)s00) {
                         *(int *)((char *)&s9C + i * 4) = s80;
                         fcn_004727a0(s14, i + 1);
@@ -501,7 +507,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                         lane = (int *)((char *)lane + 0x38);
                     }
                     s80 += 0x21c;
-                }
+                } while (s80 < 0x85a0a0);
                 }
                 if (i != 0) {
                     if (i < 4) {
@@ -532,20 +538,20 @@ void __cdecl fcn_004da690(unsigned int *a0)
                     if (s20 > 0) {
                         s08 = (0x320 - *(short *)(*(int *)0x772500 + 0x1ebd8) * s20) / (s20 + 1);
                         i = 0;
-                        s7C = s08;
-                        while (i < s0C) {
+                        acc = s08;
+                        do {
                             if (fcn_004e9180((void *)((int *)&s74)[i], sA4) != 0) {
                                 *(int *)((char *)&mid + 0x3a8) = ((int *)&s74)[i];
                                 *(int *)((char *)&mid + 0x3bc) = 0;
                                 *(int *)((char *)&mid + 0x3d8) = 0;
                                 fcn_005ca560((char *)&mid + 0x3a8);
-                                fcn_005ca740((0x320 - *(short *)(*(int *)0x772500 + 0x1ebd8) * i) / 2,
+                                fcn_005ca740(*(short *)(*(int *)0x772500 + 0x1ebd8) * i + acc,
                                              0, *(int *)0x772514, 0x54,
                                              (int *)((char *)&mid + 0x3a8), 0);
-                                s7C += s08;
+                                acc += s08;
                             }
                             i += 1;
-                        }
+                        } while (i < s0C);
                     }
                     fcn_004e4de0(0x9c4);
                 }
@@ -602,33 +608,32 @@ void __cdecl fcn_004da690(unsigned int *a0)
                         while (s4C < s0C) {
                             s70 = *(int *)s5C;
                             if (s70 != -1 && s20 > 0) {
-                                s6C = 0;
+                                int *pq;
+                                jc = 0;
                                 do {
-                                    if (((int *)&s98)[s6C] == s70)
+                                    if (((int *)&s98)[jc] == s70) {
+                                        *(int *)(0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 1;
+                                        fcn_004727a0(s14, 0);
+                                        io_AppendText((char *)0x6811b0);
+                                        io_AppendText((char *)0x12de,
+                                                      *(unsigned short *)((int *)&s74)[s4C]);
+                                        ((int *)&s54)[jc] += 1;
+                                        fcn_004e4de0(0x3e8);
+                                        pq = (int *)((char *)&mid + 0x12c + jc * 0x38);
+                                        *(int *)(0x1015ea0 + *pq * 0x2f4 + 0x3c) = 1;
+                                        fcn_004727a0(s50, jc + 1);
+                                        fcn_004da4d0(jc + 1,
+                                                     (void *)((char *)&mid + 0x408 + jc * 0x38));
+                                        fcn_004727a0(s14, 0);
+                                        io_AppendText((char *)0x12df,
+                                                      *(unsigned short *)((int *)&s9C)[jc]);
+                                        fcn_004e4de0(0xfa0);
+                                        *(int *)(0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 0;
+                                        *(int *)(0x1015ea0 + *pq * 0x2f4 + 0x3c) = 0;
                                         break;
-                                    s6C += 1;
-                                } while (s6C < s20);
-                                if (s6C < s20) {
-                                    int *pq;
-                                    *(int *)(0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 1;
-                                    fcn_004727a0(s14, 0);
-                                    io_AppendText((char *)0x6811b0);
-                                    io_AppendText((char *)0x12de,
-                                                  *(unsigned short *)((int *)&s74)[s4C]);
-                                    ((int *)&s54)[s6C] += 1;
-                                    fcn_004e4de0(0x3e8);
-                                    pq = (int *)((char *)&mid + 0x12c + s6C * 0x38);
-                                    *(int *)(0x1015ea0 + *pq * 0x2f4 + 0x3c) = 1;
-                                    fcn_004727a0(s50, s6C + 1);
-                                    fcn_004da4d0(s6C + 1,
-                                                 (void *)((char *)&mid + 0x408 + s6C * 0x38));
-                                    fcn_004727a0(s14, 0);
-                                    io_AppendText((char *)0x12df,
-                                                  *(unsigned short *)((int *)&s9C)[s6C]);
-                                    fcn_004e4de0(0xfa0);
-                                    *(int *)(0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 0;
-                                    *(int *)(0x1015ea0 + *pq * 0x2f4 + 0x3c) = 0;
-                                }
+                                    }
+                                    jc += 1;
+                                } while (jc < s20);
                             }
                             s4C += 1;
                             s5C += 0x35c;
@@ -755,11 +760,10 @@ void __cdecl fcn_004da690(unsigned int *a0)
         fcn_004e4de0((int)&s60);
         fcn_004e4de0((int)&s64);
         fcn_004e4de0((int)&s68);
-        fcn_004e4de0((int)&s6C);
         fcn_004e4de0((int)&s70);
+        fcn_004e4de0((int)&s6C);
         fcn_004e4de0((int)&s74);
         fcn_004e4de0((int)&s78);
-        fcn_004e4de0((int)&s7C);
         fcn_004e4de0((int)&s80);
         fcn_004e4de0((int)&s84);
         fcn_004e4de0((int)&s88);
