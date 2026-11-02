@@ -19298,3 +19298,24 @@ base cflags lack /Isrc. Next lever recorded: either find the native source shape
 letzte_zeit without address-taking or a qualifier, likely register pressure from a variable we have not
 identified, or revisit the b4 forms that already produced the xor ebx (inline `(float)differenz` at 2522) for
 one that also keeps the fild sequence.
+
+## 2026-11-03 — season setup role flip only reachable with a spill
+
+`0x540020` keeps 3873 at object 4393 with frame 0x3b8 and the first mismatch at 0xb15; round seven kept no
+edit and the source is unmodified. Two levers were worked. Rebuilding the comparison from other C idioms, with
+an unsigned short temp, pointers to a short local, an int pointer with and without the mask, a fresh int temp,
+and char* obj, all hold 4393 and 0xb15 but keep w in edi; the variants that put the value in memory cost 4397 or
+4401; the no-mask, unsigned, long, short and cast forms and reversed comparisons range 4393 to 4399 with the
+same roles; and judging the 4393 candidates gives the baseline 3873 at best, with a2, p1, p3 and u1 at 3872 and
+p4, p5 and u4 equal to it. A 16-bit-returning fcn_0042e410 with `w = fcn_0042e410(0x5a);` or with an explicit
+mask reproduces native's exact compare shape `mov di,ax; push esi; and edi,0xffff; call` at object 4394, and
+with native roles that shape would be exactly 4393 since `mov bx,ax` costs three and `lea [edi+edi]` saves one
+against the current 4393, so the rank remains the only blocker and the return-type change alone is not
+keepable. Adding a live web in the for body was also tried, with k across the body (4422, spilled), k coalesced
+through the divide (4394), the early w renamed to w2 (4393, 3873) and `n = 0` before the leftw computation
+(4393, 3868), and no shape changed a role. The one shape across rounds four to seven that flips all four roles
+is a single loop-2 divide by w instead of n, which gives obj in esi, leftw in edi, w in ebx and n in ebp but
+spills w across the loop back edge at object 4412, so it was rejected. The ENTCLASS and ENTTYPE spellings were
+re-measured and keep our `[eax+ecx*1+0x247]` encoding; native's `[ecx+eax+0x247]` form cannot be produced from
+any spelling tried, so that remaining intermediate-representation difference is not an available lever. Tables
+in .scratch/f540020/ROUND7.md with batch.py, cmpreg.py and judge.py.
