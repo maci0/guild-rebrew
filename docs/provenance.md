@@ -18520,3 +18520,31 @@ that block, so it is structural rather than a data placement issue; native's fla
 `push 1` and `push 0`, and the fcn_00402a00 call shares one site. Rollback points for the session are kept
 in .scratch/f540020/ (before_order.c, before_inline.c, before_ifelse.c, before_sym.c, before_offsets.c,
 before_walk.c, before_wing.c, kept.c) with cc.sh, diff.py, align.py, order.py and fold.py.
+
+## 2026-11-03 — inventory dialog merge is register pressure, source clean
+
+`0x5D0660` keeps its v14 state at 1258 with object 4389, frame 0x438, nine store blocks and lint clean; the
+merge round produced no keeper and the source is byte-identical to kept-v14. The shared visibility block is
+reproducible but the compensation pool cannot pay for it. The duplicate exists because of register pressure
+rather than source shape: both tabB[2] arms already write identical statements, but native spills n3 to its
+slot, freeing ebx and edi so the label text stays in a callee-saved register and the id index lands in esi at
+both sites, while our build keeps n3 in ebx so the else arm reloads tabB[2].text and puts the id index in
+edi, and MSVC's suffix merge therefore sees different register streams. Forcing n3 to memory reproduces
+native's merge exactly, either as `volatile int n3` or through an address-taken use: eight store blocks, the
+else arm jumping into the tabB[3] store tail at the native-relative spot, and the preludes `mov eax,reg; add
+esp,0x10; shl eax,6; sub eax,reg`, with frame 0x438 held. Measured, all at frame 0x438: volatile n3 gives
+object 4345 with eight stores and match 560; an address-taken n3 gives 4330, eight stores, match 430; that
+plus eight sentinel conversions gives 4359, eight stores, match 556; a tabA[0] plus else sentinel variant
+gives 4393 with nine stores and match 822; tabA[0] and tabA[1] reading .text instead of the temp gives 4359
+with nine stores and match 376; and the volatile variant plus that tabA change gives 4335, eight stores,
+match 392. The merge costs 33 to 44 bytes rather than 32, since the tabB[3] tail plus the else tail is 0x47
+in native against 0x68 here, and the nine `cmp word ptr [mem],0xffff` sites are worth one byte each, about
+14 in one build, leaving a merged object still 24 to 30 short with no byte-neutral compensation: volatile nb
+or idx break the frame at 0x43c and volatile t0 gives 4538 while still merging. The rest of the deficit sits
+in the tabA label blocks, where native stores .text before the branch and spills t0 and n3, and touching
+those cascades through the allocation. The kept body has 1104 strictly equal bytes with the longest equal run
+54 bytes at 0x154, so the match is spread over small runs and any global allocation change loses more than
+the localized win. Recommendation: rebuild the pre-merge label blocks (tabA[0] and tabA[1], native
+0x5d08e9..0x5d09cf, 17 and 6 bytes over ours) before landing the merge. Merged candidates are kept in
+.scratch/660/r11/ (e1a and e10 are the cleanest at frame 0x438 with the shared block present), with tooling in
+.scratch/660/tools/ and the write-up in NOTES-rewrite.md round 6.
