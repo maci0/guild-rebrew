@@ -18633,3 +18633,34 @@ next lever is the original local decomposition rather than local reshapes: nativ
 block-scoped temporaries that share dead slots, and reproducing that decomposition is what could free ebp for
 rows2 while the text stays in ebx. Candidates are left in .scratch/660/r12/ (a0, c1 to c5, d2 to d8, e1 to
 e3, f1textvar, g5, h1) with tools asmparse, role, align, mkdis, side and blk.
+
+## 2026-11-03 — production message switch reconstructed
+
+`0x569FF0` goes from 200 matching bytes (5.3 percent) to 321 (8.5 percent) with the object at 3332 from 2640,
+36 relocations, lint clean and the first mismatch at offset 2 where our frame is `sub esp,0x730` against
+native 0x738. The listing decoded the switch: it dispatches on `*(int*)(e+0x70)` with cases -2 through 5
+(native `add eax,2; cmp eax,7; ja`), and the jump table at 0x56ae8c maps index 0 and 1, the -2 and -1 states,
+to 0x56adc4, then 0 to 0x56a02d, 1 to 0x56a0f9, 2 to 0x56a1f0, 3 to 0x56a31b, 4 to 0x56a3de and 5 to
+0x56a654, with the real default being the bare epilogue at 0x56ae7e and the old default body being the
+-2/-1 block that sits last in source order. The search and setup calls take their literal flags first,
+`push [e+0xac]; push 1; push 1` for gm_StartFilteredEntitySearch(1,1,id) and the same shape for
+fcn_005463a0(1,1,e->b8), fixed at four sites. Case 5 is about 0x740 bytes: after the Einbruch loop it has a
+second block from 0x56a8cb to 0x56abc0 with memset(b400, *(char*)0x6b5c60, 0x400) guarded by flag, a
+re-search, fcn_00502cd0 and fcn_0050c5d0, two _ftol chains (0.001f/1.0 and 0.0025f/1.0f),
+io_FormatTextBuffer(b400, 0x68bea4, n), strcpy(b400,b200) and strcpy(b400,b100), then the entity-query loop
+from 0x56aa42 to 0x56ab9c with its gm_RandomMod(0x64) gate against 0x32 and nine id whitelist values,
+fcn_0050df70, a sprintf "%i %s$A" through 0x64d41a into a buffer plus the name table at 0x14a79c0[id*8],
+fcn_004c51f0 and fcn_0050bb50, the pc table-entry bump `*(int*)(q+0x14) += flag`, `pb->0x4d += flag`, and
+the 6/7-type branches calling fcn_00545e80 with nine arguments through io_FormatTextBuffer ids 0x19e6 through
+0x19e9 and the strings _NACHRICHTEN_HS_74 to 77, with the flag==0 arm at 0x56ad1e mirroring it through HS_75
+and HS_74. The frame model is confirmed: locals occupy 0x10 to 0x748, that is 0x738 made of ten dword slots
+at 0x10..0x38 plus SEARCH at 0x38 of 0x10, b200 at 0x48, b100 at 0x248 and b400 at 0x348, with `sub esp` equal
+to that region, saved registers below and arg e at [esp+0x748] after the three pushes. Remaining in order:
+the frame is eight bytes short because we allocate eight dword slots where native has ten, and native's four
+block-top initialisers sit at slots 0x34, 0x2c, 0x30 and 0x1c for num, pc, hits and cnt2 in that statement
+order while ours collapse to two stores; case 5's arithmetic around 0x56aa42 is structural but not yet byte
+transcribed, since the `num * (hits * 0.1)` plus fiadd chain is a guess that must be re-derived from the
+fild, fmulp and fiadd order at 0x56aac6..0x56ab93; the double fcn_00546190(e) tail needs two copies, one
+inline at 0x56ad0a and one shared at 0x56ae75 reachable by je from the cnt2 block, where we emit one; and case
+4's goto-fail block lands after case 4 in native at 0x56a3f7 because MSVC merges the identical
+`*(int*)(e+0x70) = -1; return;` tails, so case 0's return needs its own copy to reproduce 0x56a046.
