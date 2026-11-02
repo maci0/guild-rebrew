@@ -18876,3 +18876,46 @@ and 220, volatile n3 variants 4359 which force the eight-store merge rather than
 &t0 variants 4371 and 4385. The next lever recorded was a construct that forces native's scalar home for n3
 at +0x0c without a volatile access, for example a spill and reload whose slot is the declared n3 slot, before
 attacking the scaling temporary. A blocker is set on the row and the effort moves to other rows.
+
+## 2026-11-03 — production message buffers reach native offsets
+
+`0x569FF0` keeps the native buffer layout at match 303 with object 3372, 35 relocations and frame
+`sub esp,0x738` held; the match dip from 318 is positional noise because the parameter still sits in ebp so
+the body runs one byte early. Three arrays became `char b300[0x300]` plus `char b400[0x400]` with
+`#define b200 b300` and `#define b100 (b300 + 0x200)`, and the object now references 0x48 for b200 at four
+sites, 0x248 for b100 at the sprintf site and 0x348 for b400 at two, matching native's 0x48, 0x248 and 0x348
+exactly. The parameter did not move: either bump line alone flips e to ebp, while the bare
+`q = fcn_00509570(q)` call keeps esi and adding the `if (q) += flag` flips it; swapping the bump order drops
+the frame to 0x734; and `if (q)`, brace wrapping, a `char* pe = e` alias for all uses, an `ee = e` alias, and
+a hoisted `int* p` are all byte-identical to the 318 state, so the flip is global allocation pressure rather
+than spelling. New evidence for the next pass: case 5 is 0x145 short, native 0x664..0xdd4 is 0x770 against
+ours 0x61c..0xc47 at 0x62b, and native has three post-bump blocks we lack. The first is gated on
+`*(char*)(q+2) == 6 || 7` and does io_FormatTextBuffer(b200, 0x19e6, 0x19c1, word, pb), strcpy(b200, b400)
+copying 0x348 to 0x48, and fcn_00545e80 with 0x6a6a2c; the second does io_FormatTextBuffer(b200, 0x19e8, ...)
+plus fcn_00545e80 with 0x6a6a18; the third is reached from 0x56a8c5 by `je` when flag is zero and repeats
+the `gm_StartFilteredEntitySearch(1,1,e+0xac)` call with the 0x19e7 and 0x19e9 message pairs before jumping to
+0x56acd1. That duplicated search suggests `pa = Search(...)` and `if (pa == 0)` belong in both branches of
+`if (flag != 0)`. Native kills esi and e at 0x56a8f0 with `mov esi,eax` for pa and reloads e at 0x56acca, so
+the e-register flip is likely a symptom of that structure rather than a separate fix.
+
+`0x540020` moves to the corrected state at match 3872 with object 4393, 258 relocations, frame 0x3b8 and the
+first mismatch at 0xb15, replacing the 3921 baseline at `.scratch/f540020/kept.c` because that baseline
+carried two semantic errors. Nine byte-verified changes are in the source. fcn_004c5150's third parameter is
+char rather than int, which kills the `xor ecx,ecx` before `mov cl,[0x773d75]` and took 4395 to 4393; other
+files already declare it char. `if (fcn_0050bfe0(obj) < w)` gives native's `cmp eax,ebx; jge` where the old
+`w > ...` gave `cmp reg,eax; jle`. The float temp is written
+`if ((*(float*) &cand = (float) left) * g_662a6c > *(float*) &agebits)`, which emits `fild [esp+0x1c];
+fst [esp+0x18]; fmul; fcomp` without growing the frame, where a named block-scoped float grows it to 0x3bc
+at 4401 with fstp and a reload. The reduction reads that temp as
+`leftw = (int)(*(float*) &cand - *(float*) &agebits)`, emitting `fld [esp+0x18]; fsub [esp+0x14]`. The inner
+fcn_004c5150 arg4 is `(int)(*(float*) &agebits)` for native's `fld dword [esp+0x18]`. Six clamp sites are
+upper clamps, `if (v >= K) v = K;`, giving native `jl` where the old `<` gave `jge` and was semantically
+inverted. `left = leftw;` after the reduction reproduces native's `mov [esp+0x1c],reg` store. Splitting `ent`
+from cand for the fcn_00509570 result removes a `mov [esp+0x18],esi` store native does not have and frees
+cand's slot for the float temp. And the first inner-loop tail is `while ((obj = fcn_00503e80()) != 0)`, the
+only lever that flips obj from ebp to esi, which rotates leftw and w with it. Open item: native consumes the
+class-0 preferences in the order esi, edi, ebx, ebp as obj, leftw, w, n, while ours colours obj, w, n, leftw,
+so leftw must outrank w; declaration order of obj, n and w, block scopes, `long n`, a walk-variable split,
+`char* obj` and `unsigned short w` are all inert, and the divisions-on-left variants either push the
+remainder into memory at 4396 or lose the d60 store at 4381. Details in .scratch/f540020/ROUND3.md with the
+probe script .scratch/f540020/probe.py.

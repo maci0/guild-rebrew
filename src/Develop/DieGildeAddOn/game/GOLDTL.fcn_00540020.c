@@ -118,7 +118,7 @@ int __cdecl fcn_005463a0(int, ...);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c4eb0(int);
 void __cdecl fcn_004c4ef0(int);
-void __cdecl fcn_004c5150(int, int, int, int);
+void __cdecl fcn_004c5150(int, int, char, int);
 int __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_004bbc30(int, int);
 int __cdecl fcn_00471af0(int, int);
@@ -474,13 +474,15 @@ void __cdecl fcn_00540020(void)
 				}
 				if (fcn_0047d240(SLOTPTR(i)) != 0 || *(unsigned char*) (SLOTPTR(i) + 2) == 1) {
 					w = (int) (fcn_0042e410(0x5a) & 0xffff);
-					if (w > fcn_0050bfe0(obj)) {
+					if (fcn_0050bfe0(obj) < w) {
+						int ent;
+
 						cand = fcn_0050cf50(obj, 0x64);
 						*(float*) &agebits = (float) cand * g_664138;
 						if (g_664154 > *(float*) &agebits) {
 							*(float*) &agebits = 32.0f;
 						}
-						if ((float) left * g_662a6c > *(float*) &agebits) {
+						if ((*(float*) &cand = (float) left) * g_662a6c > *(float*) &agebits) {
 							memset(evs, 0, sizeof(evs));
 							evs[0].id = 0x1c;
 							evs[0].kind = -1;
@@ -490,20 +492,21 @@ void __cdecl fcn_00540020(void)
 							evs[0].ent = SLOT4(i);
 							fcn_004c4eb0(0x67e330);
 							fcn_004c5150(-1, SLOT4(i), g_773d75,
-								     (int) ((float) left));
+								     (int) (*(float*) &agebits));
 							fcn_004c5530(&evs[0]);
 							fcn_004c4ef0(0x67e330);
-							cand = (int) fcn_00509570(SLOTPTR(i));
-							if (cand != 0) {
-								*(int*) (cand + 0x44) =
-									(int) ((float) *(int*) (cand + 0x44)
+							ent = (int) fcn_00509570(SLOTPTR(i));
+							if (ent != 0) {
+								*(int*) (ent + 0x44) =
+									(int) ((float) *(int*) (ent + 0x44)
 									       + *(float*) &agebits);
 							}
-							leftw = (int) ((float) left - *(float*) &agebits);
+							leftw = (int) (*(float*) &cand - *(float*) &agebits);
+							left = leftw;
 						}
 					}
 				}
-			} while (fcn_00503e80() != 0);
+			} while ((obj = fcn_00503e80()) != 0);
 		}
 
 		obj = fcn_00503fe0(1, 4, i);
@@ -525,10 +528,10 @@ void __cdecl fcn_00540020(void)
 					v = v < 0 ? 0 : v;
 					*(volatile int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
-						if (v < 0x2ee00) {
+						if (v >= 0x2ee00) {
 							v = 0x2ee00;
 						}
-					} else if (v < 0xfa00) {
+					} else if (v >= 0xfa00) {
 						v = 0xfa00;
 					}
 					*(volatile int*) ((char*) obj + 0x39) = v;
@@ -538,10 +541,10 @@ void __cdecl fcn_00540020(void)
 					v = v < 0 ? 0 : v;
 					*(volatile int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
-						if (v < 0x4e200) {
+						if (v >= 0x4e200) {
 							v = 0x4e200;
 						}
-					} else if (v < 0x1f400) {
+					} else if (v >= 0x1f400) {
 						v = 0x1f400;
 					}
 					*(volatile int*) ((char*) obj + 0x39) = v;
@@ -551,10 +554,10 @@ void __cdecl fcn_00540020(void)
 					v = v < 0 ? 0 : v;
 					*(volatile int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
-						if (v < 0x9c400) {
+						if (v >= 0x9c400) {
 							v = 0x9c400;
 						}
-					} else if (v < 0x3e800) {
+					} else if (v >= 0x3e800) {
 						v = 0x3e800;
 					}
 					*(volatile int*) ((char*) obj + 0x39) = v;

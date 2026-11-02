@@ -79,9 +79,12 @@ void __cdecl fcn_00569ff0(char* e)
 	int n;
 	char* o;
 	SEARCH s;
-	char b100[0x100];
-	char b200[0x200];
+	char b300[0x300];
+
 	char b400[0x400];
+
+#define b200 b300
+#define b100 (b300 + 0x200)
 
 	num = 0;
 	pc = 0;
