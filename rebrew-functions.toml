@@ -207885,12 +207885,13 @@ measured_at = "2026-11-02T07:45:57+00:00"
 size = 3824
 status = "SIZE_MISMATCH"
 note = "Complete shared C89 candidate, not byte matched: pinned MSVC emits 4016 bytes against reviewed3816. Actual-MSVC bounded fixtures agree in456 modeled runs/all66 native call sites per client after owner reload and inclusive-zero repairs; external helpers remain modeled. Both450-byte initializer callers retain RELOC after name binding. Original event allocation, types/prototypes and source placement remain unresolved. Receipts: .scratch/goal26/production/."
-updated_by = "rehome"
-updated_at = "2026-10-27T07:51:25+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-02T20:52:27+00:00"
 file = "src/Develop/DieGildeAddOn/game/he_RunProduktion.c"
 symbol = "_he_RunProduktion"
 name = "he_RunProduktion"
 kind = "FUNCTION"
+blocker = "allocator state wall after three rounds: native needs letzte_zeit as lea eax sharing slot 0x08, the early int-to-double temp at 0x14, the zeroings at 0x8cc/0x955/0x96b and frame 0x724. State A (block-local float df) keeps letzte_zeit in ebx with temp 0x08 and no zeroings; state B (inline cast, fimul) frees ebx and gives the zeroings but moves the temp DOWN to 0x04. Freeing ebx always moves the temp down, and every CSE-equivalent respelling of the pinning mangel store at 0xce7 compiles back to the register copy. Flags /Oa /Ow /Ot /Ob0 /Ox /O1 /Os reach neither"
 
 ["GOLDTL.0x00571870".verification]
 source_hash = "0ef407a3c9b594fa555f6ab723e16bc9c257135480e8a7556e715bdc8abe5d19"

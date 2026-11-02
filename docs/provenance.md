@@ -19433,3 +19433,31 @@ case 6's duplicated fail block, which the compiler still inlines and retargets t
 native keeps `je 0x56148f`; and case 3's late `add esi,0x52`, which the compiler emits only after the 0x70 and
 0xcc stores so `mov [esi+0xcc]` stays at disp32 against native's `[esi+0x7a]`. Current source
 .scratch/r561380/v27_final_round5.c with notes in NOTES.md.
+
+## 2026-11-03 — production run allocator state parked
+
+`0x571870` keeps 2757 at object 3816 with the first mismatch at 0x537 and lint clean; round three kept nothing
+and the source is unchanged. The slot data now rules out both orders. Native labels are the displacement minus
+the pushes minus 0x10: letzte_zeit's spill at 0x08, the early int-to-double temp at 0x14 (0x537), the haus temp
+at 0x14 (0x594) and the inner unsigned-int-to-double scratch at 0x14 and 0x18. State A keeps the spill and both
+temps at 0x08. State B and the parenthesised fallback keep spill and temps at 0x04, so freeing ebx moves the
+temperature DOWN by four rather than up to 0x14, which is the opposite of what the target needs. State B was
+reproduced with `A * (float)differenz * leistung` at match 2522 and object 3808 with zeroings at 0x8cc, 0x955 and
+0x96b, frame 0x724 and `lea eax`, and the parenthesised fallback `A * ((float)differenz * leistung)` at 2534 and
+3812 with the same zeroings and `fild differenz`. Nudges found nothing: named double, float or int temps, an
+explicit `(double)(int)`, operand order, `0.01*x` and a whole-expression float cast are all scalar-replaced to
+identical bytes; an `(unsigned int)` cast or a named unsigned int switches the conversion to an eight-byte
+scratch with `fild qword` but at label 0x10 with frame 0x728 and match 1555, and the loop's 0x14 scratch is not
+reused; a named int plus a second impossible-range compare is also scalar-replaced into the label-0x04 slot. The
+only mover found fetches `haus = fcn_0050dc90(gebaeude)` before the leistung conversion, which moves the temp to
+label 0x08 at match 1565 but changes the fcn_0050c710 and fcn_0050dc90 call order, so it is diagnostic only. The
+mangel-store spelling on state A also failed: a fresh destination through char*, unsigned int, `int* + 0x18`,
+`&e[0x60]`, void* and the naechste_zeit alias all compile to the exact current bytes because copy propagation
+puts the address back in ebx; a 16-byte named temp gives 2760 at 3816 but still ebx and no zeroings with a
+different copy shape; volatile pointer read, read and write back, and a volatile local pointer give 2399, 2417 and
+2420 at objects 3820, 3824 and 3824 but still `lea ebx` and no zeroings; and combining the parenthesised b4 with
+those keeps the zeroings and `lea eax` but leaves spill and temp at label 0x04, or loses the zeroings. Nothing
+met the keep bar. The three allocator states, the pin at the 0xce7 mangel store, the flag sweep over /Oa, /Ow,
+/Ot, /Ob0, /Ox, /O1 and /Os, and the GOLD 0x5694b0 identity through 0xed4 are all recorded above. A blocker is
+set on the row and the effort moves to another function. Harness and variants in .scratch/571870/ with
+c_paren_right.c, c_pin_tempstruct.c, c_pr_fresh.c, probe3.py and b23..b34.py.
