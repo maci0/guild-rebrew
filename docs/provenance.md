@@ -17105,3 +17105,22 @@ frame 0x900, and no mask restores sel 0x74 together with sF4 0x104; fixed 148-by
 filler mixes break the frame or prefix. The point is a local optimum of that search, so the next
 dimension is the frame's own structure (aggregate members fixing a position) and first-use order
 rather than the escape mask.
+
+## 2026-11-02 — panel mark and fill path transcribed
+
+`0x467920` 477 to 488 with the object growing 4256 to 4546. The missing ~312-byte block is in
+place: the filled part exists twice and the old source had only the first, with a goto for the
+bit-set case. The `!(v20 & 8)` block at 0x467cce..0x467e11 fills with flag 2 and ends with a
+trailing `e[4]+W(h0)+v24` rect, the `v20 & 8` block at 0x467e39..0x467f5c fills with flag 1 and has
+no trailing rect, and both choose `if (e[0x13]) fcn_0047cbf0 else fcn_0047cba0` (the old arms were
+swapped). Also corrected: the 0x10 mark fill keeps its int scratch in w8.i and passes
+`(int)((float)w8.i + wc.f)` as rect arg3 instead of the bare `e[4]+W(h0)`; the 0xca7 frame rect
+takes `e[4]+W(h0)+v24` with the bogus +v30 removed; the closing rect at 0x467f5c stays
+`e[4]+2*W(h0)+v24`; and the flag fields are fixed at 0x467a60 (`f.v20&2`), 0x4688d7 (`!(f.v20&1)`)
+and 0x4688fb (`!(f.v20&8)`). Reverted negative: moving the colour block's glyph-height differences
+and tick-step width from h0 to h1 grew the object to 4556 but dropped match to 404. Remaining
+per-region byte accounting (ours against native): prologue 0x13c/0x13c, bar+fill 0x162/0x166, mark
+0x3a0/0x3ae with no missing logic (325 instructions against 318, the 14 bytes are encoding since
+ours multiplies a register where native multiplies the memory slot), colour 0x24e/0x25f, icon hit
+0x328/0x364, label 0x1bd/0x1ac, icon block 0x12b/0x12f, trailing 0xa1/0xa8 and gauge ends
+0x25a/0x2a3. Object is 153 under native overall.
