@@ -97,6 +97,8 @@ void __cdecl fcn_0043c640(Tile* t)
 	RegionRecord* r;
 	unsigned short* out;
 	unsigned char* p;
+	int* p00;
+	unsigned char* v;
 	float jx;
 	float jy;
 	float jx2;
@@ -154,15 +156,16 @@ void __cdecl fcn_0043c640(Tile* t)
 						m = count;
 						for (bit = 0; bit < 8; bit++) {
 							p = &t->mat[row * t->W + col];
-							if ((p[0] == 0 || p[1] == 0 ||
-							     t->mat[(row + 1) * t->W + col] == 0 ||
-							     t->mat[(row + 1) * t->W + col + 1] == 0) &&
-							    (p[0] != 0 || p[1] != 0 ||
-							     t->mat[(row + 1) * t->W + col] != 0 ||
-							     t->mat[(row + 1) * t->W + col + 1] != 0)) {
-								cand[(row - t->H * y) * t->H + (col - t->H * x)] |= 0x10;
-								if ((m & 1) == 1) {
-									cand[(row - t->H * y) * t->H + (col - t->H * x)]++;
+							if (p[0] == 0 || p[1] == 0 ||
+							    t->mat[(row + 1) * t->W + col] == 0 ||
+							    t->mat[(row + 1) * t->W + col + 1] == 0) {
+								if (p[0] != 0 || p[1] != 0 ||
+								    t->mat[(row + 1) * t->W + col] != 0 ||
+								    t->mat[(row + 1) * t->W + col + 1] != 0) {
+									cand[(row - t->H * y) * t->H + (col - t->H * x)] |= 0x10;
+									if ((m & 1) == 1) {
+										cand[(row - t->H * y) * t->H + (col - t->H * x)]++;
+									}
 								}
 							}
 							m >>= 1;
@@ -192,7 +195,7 @@ void __cdecl fcn_0043c640(Tile* t)
 				}
 			}
 			off = (x + y * 8) * REGION_STRIDE;
-			r = (RegionRecord*) ((char*) t + off + 0xbc);
+			r = (RegionRecord*) ((char*) t + off + 0xa0);
 			for (i = 8; i != 0; i--) {
 				r->material = 2;
 				r = (RegionRecord*) ((char*) r + 0x34);
@@ -207,6 +210,10 @@ void __cdecl fcn_0043c640(Tile* t)
 				r = &((Region*) ((char*) t + off + 0xa0))->rec[i];
 				count2 = 0;
 				count1 = 0;
+				r->n24 = 0;
+				r->n20 = 0;
+				r->n30 = 0;
+				r->n2c = 0;
 				if (r->p04 != 0) {
 					m_FreeTracked(r->p04);
 					r->p04 = 0;
@@ -227,10 +234,6 @@ void __cdecl fcn_0043c640(Tile* t)
 					m_FreeTracked(r->p00);
 					r->p00 = 0;
 				}
-				r->n24 = 0;
-				r->n20 = 0;
-				r->n30 = 0;
-				r->n2c = 0;
 				memset(map, 0, t->H * t->H);
 				limitY = t->H * y1;
 				if (limitY > t->W - 1) {
@@ -373,6 +376,7 @@ void __cdecl fcn_0043c640(Tile* t)
 					r->n20 = count;
 				}
 				if (count2 > 0) {
+					r->n28 = 0;
 					n = count2 * 4;
 					memset(idx, -1, (t->H + 1) * (t->H + 1) * 4);
 					for (row = 0; row < t->H; row++) {
@@ -399,6 +403,7 @@ void __cdecl fcn_0043c640(Tile* t)
 					r->n30 = count2 * 2;
 					r->p10 = (unsigned short*) m_alloc(r->n30 * 6, (const char*) 0x67a5f8);
 					r->p00 = m_alloc(r->n30 * 4, (const char*) 0x67a5e0);
+					p00 = (int*) r->p00;
 					out = r->p10;
 					limitX = x == 7 ? t->H - 4 : t->H;
 					limitY = y == 7 ? t->H - 4 : t->H;
@@ -475,6 +480,16 @@ void __cdecl fcn_0043c640(Tile* t)
 								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 3] =
 									((float) (t->H * y + row + 1) * t->vstep + f + f) - jy2;
 							}
+							if (r->material == 1) {
+								v = &bestmap[row * t->H + col];
+								if ((*v & 0xf) > 1) {
+									(*v)--;
+									p00[0] = 1;
+									p00[1] = 1;
+									r->n28 = 1;
+								}
+							}
+							p00 += 2;
 							if ((signed char) t->flags[t->W * (row + t->H * y) +
 										   t->H * x + col] < 0) {
 								out[0] = (unsigned short) idx[v0];
@@ -495,13 +510,12 @@ void __cdecl fcn_0043c640(Tile* t)
 							r->n30 += 2;
 						}
 					}
+					if (r->n28 == 0) {
+						m_FreeTracked(r->p00);
+						r->p00 = 0;
+					}
 					r->n24 = count;
 				}
-				if (r->n28 == 0) {
-					m_FreeTracked(r->p00);
-					r->p00 = 0;
-				}
-				r->n24 = count;
 			}
 		}
 	}

@@ -16982,3 +16982,22 @@ colour block is still modelled as an `if (v20 & 0x40)` text block and needs deco
 gradient through fcn_0041bac0(0xff, 0x80, 0) with a float-to-int conversion, byte stores at frame
 offsets 0, 1 and 2, then fcn_00479e00, and its constants live at 0x6629c8, 0x662950, 0x664068,
 0x664070, 0x664078 and 0x66407c.
+
+## 2026-11-02 — mask phase tail rebuilt
+
+`0x4D6170` is unaffected; this entry covers `0x43C640`, which moves from 392 to 432 match with the
+object growing 5102 to 5169, equal prefix still 5 bytes (native `push esi; mov esi,[ebp+8]` where
+ours has `mov ebx,[ebp+8]`). The phase-2 tail at native 0x43d317..0x43db0b was missing its whole
+`if (r->material == 1)` block inside the quad emission: `bestmap[row*H+col] & 0xf > 1` leading to
+`(*v)--` and `p00[0]=1; p00[1]=1; r->n28=1`, with `p00 += 2` at the join. Also added `r->n28 = 0`
+at region start, moved `if (r->n28 == 0) free(r->p00)` and `r->n24 = count` inside
+`if (count2 > 0)`, dropped the stale outside `r->n24 = count`, put the four count stores at
++0x24, +0x20, +0x30 and +0x2c before the free chain as native does at 0x43ca1b, and corrected the
+material clear base to `t + off + 0xa0` (it wrote 0x1c high through +0xbc; byte-neutral but the
+`lea [..+0xbc]; mov [ecx],2` now matches). Reverted with measurements: a duplicate `if (r->p08)`
+free (object 5188, match 391), `RegionRecord* volatile r` (5305, 363), and five inline-asm
+align-up fills using the exact native prelude including the `rep movs` copy that clobbers esi
+(5293, 325), which re-confirms that asm blocks re-home the function. Remaining: about 95 bytes of
+five memset preludes, about 60 bytes in the record-free where native keeps `r` in the -0x0c slot
+and reloads after each call while ours homes it in esi, 57 bytes in masksearch and recclr, and the
+frame 0x54 against 0x60 with `x` in the dead argument slot [ebp+8].
