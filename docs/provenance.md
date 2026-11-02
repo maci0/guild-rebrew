@@ -18774,3 +18774,31 @@ where native loads `fld dword [0x6628a8]` for 0.0f and adds `[leistung]` while o
 haushalt search loop where native uses `jl 0x85a0a0` and ours `jb`, likely from the comparison form of
 `arbeiter < g_7f4ca0 + 768*0x21c`. Backup .scratch/he_RunProduktion.best.c holds the current source and
 .scratch/norm.awk the normalised instruction diff.
+
+## 2026-11-03 — inventory dialog label block held back by t0 homing
+
+`0x5D0660` keeps its v14 state at 1258 with object 4389, frame 0x438 and nine store blocks; the fourteenth
+round held nothing and the tracked file is byte-identical to kept-v14 with lint clean. The label cluster
+after `call fcn_0046f2c0` starts at 0x289 with 210 bytes against native's 230, so the gate is not cleared:
+rows2 is in ebp at block entry (0x293 `mov edi,ebp`) but its home store is 0x100 and ebp is clobbered by the
+id scaling at 0x2ec with rows2 reloaded at 0x31b; text is not in ebx, n3 is; and t0 sits in esi at 0x2cf as
+`lea esi,[ebx+edi]` rather than being spilled to frame+0x00. The round also corrected a stale premise: in
+kept-v14 the child-walk counter and the tabC fill pointer are already memory-resident in native's slot 0x04,
+with the k=3 store at 0x1b8 and the tabC pointer at 0x21f, 0x24a and 0x25d against native's 0x1b0 and the
+same three pointer sites, and in the walk ebx=p, esi=slot, edi=er and ebp=rows2, so k has no register exactly
+as in native and ebp is not reused for the walk counter; the slot-0x04 pair lever therefore has nothing left
+to move. Measured levers: volatile p alone is byte-identical to v14 at 0x289 and 210 bytes; an `int k[1]`
+with k[0] is identical because MSVC promotes it back; `*((int*)&t0)` is optimised away; the tabA[0]
+text-pre shape alone gives 4393 with the block at 0x289 and 214 bytes at match 832 but spills the text and
+clobbers ebp; both arms text-pre gives 4359 with the block at 0x270 and 213 bytes at match 376 and roles
+text=ebx, posY0=esi, rows2=edi; adding volatile k and p to that gives 4392 with the block at 0x291 and 213
+bytes at match 705, where volatile k emits `mov ebp,8` for the loop bound instead of an immediate compare and
+so moves the start to 0x291 while volatile p is inert; and address-escaping t0 through g_774654 in the same
+shape gives 4437 with the block at 0x291 and 229 bytes, text in ebx, t0 spilled and rows2 in edi, but the
+escape homes t0 for the whole function for 48 extra bytes and match 505. The gate therefore needs the
+internal tabA[0] and tabA[1] allocation (rows2 untouched in ebp, n3 in edi with its home at 0x1c and a reload
+after the arm, text in ebx, t0 at frame 0x00), not the slot-0x04 pair. The only construct found that forces
+t0 out of a register is a real address escape, which costs 48 bytes elsewhere, so the next probe is a
+construct that puts n3 in edi and leaves rows2 in ebp without homing all of t0, for example an n3-local
+address escape scoped to the label block plus re-selection of the arm temporary. Candidates and tooling in
+.scratch/660/r14/ with builds in .scratch/660/tools/out/ and notes in NOTES-rewrite.md.
