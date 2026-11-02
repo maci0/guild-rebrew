@@ -587328,7 +587328,7 @@ status = "STUB"
 blocker = "frame wall: native 0x760 vs honest 0x6b4; region L0x660..0x75f has no reference, no address-take and no callee extent (387 CFG-resolved esp refs, 345 call sites checked); body 2246/2340 instructions transcribed"
 
 ["GOLDTL.0x004dcf50".verification]
-source_hash = "fab53fa58a0c56280fbd837656ccb3b8793e8e0cf9406ab633df7e39208cc01e"
+source_hash = "b9be62982beaaf4ebb7e92740a9d39ee7cfe6fe1682786c768eb85c68df52b4d"
 reference_hash = "de5919be9c5674c24e6f180f5ed469ce11ffc23f5f03f1697c4d3e4d9550ef64"
 reference_size = "8798"
 headers_hash = "153434ce6fd0c7855c8d334a0f472f0c3850b3888e9c2366d6eddcdb5c286398"
@@ -587339,10 +587339,10 @@ module = "GOLDTL"
 va = "0x4dcf50"
 context_hash = ""
 defines = "[]"
-input_hash = "79129a92c6067d69647b94a3bb7059b76238271421b6bfb82979f49a8f0649e2"
+input_hash = "774b5e0e5034c73bddf1cbee544e9eb1013df986ecae2e40d2bc1aa6f9b3fd4d"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T11:09:42+00:00"
+measured_at = "2026-11-02T11:20:19+00:00"
 
 [["GOLDTL.0x004dcf50".status_history]]
 old_status = "STUB"

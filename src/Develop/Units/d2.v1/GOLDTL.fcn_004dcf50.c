@@ -124,12 +124,6 @@ int __cdecl fcn_004dcf50(int a0)
 	msg.f0c = 1000.0f;
 	msg.text[0] = 10;
 	msg.text[1] = 0;
-	msg.id[0] = *(int*) (a0 + 0x34);
-	msg.id[1] = *(int*) (a0 + 0x38);
-	msg.id[2] = *(int*) (a0 + 0x3c);
-	msg.id[3] = *(int*) (a0 + 0x40);
-	msg.id[4] = *(int*) (a0 + 0x44);
-	msg.id[5] = *(int*) (a0 + 0x48);
 	msg.pad[0] = 0;
 	msg.pad[1] = 0;
 	msg.pad[2] = 0;
@@ -163,6 +157,12 @@ int __cdecl fcn_004dcf50(int a0)
 	f = tbl.f[i];
 	fcn_004e4450(g_68bfc0, 0);
 	fcn_004e4730("Gericht.ed3");
+	msg.id[0] = *(int*) (a0 + 0x34);
+	msg.id[1] = *(int*) (a0 + 0x38);
+	msg.id[2] = *(int*) (a0 + 0x3c);
+	msg.id[3] = *(int*) (a0 + 0x40);
+	msg.id[4] = *(int*) (a0 + 0x44);
+	msg.id[5] = *(int*) (a0 + 0x48);
 	n = fcn_004f5740(*(int*) (a0 + 0x7c), list);
 	p34 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
 	if (p34 == 0) {

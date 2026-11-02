@@ -16372,3 +16372,16 @@ way round. Native conversion shapes: both 0.001 and 0.07 sites need the two-fild
 +20 bytes but correct), and the 0.01 site converts without reassociation
 (`fild qword; fmul qword[0x6640e8]; fimul dword[ebp+0xe]; ftol`). Constants verified:
 0x662A20 = 0.001, 0x664F18 = 0.07, 0x6640E8 = 0.01. All 45 distinct call targets resolve.
+
+## 2026-11-02 — inventory panel message ids hoisted where native hoists them
+
+`0x4DCF50` 1969 to 1982 at the same object size 8798, frame 0x760 and 153 of 153 slots. The six
+`msg.id[]` copies moved from the function top to just after `fcn_004e4730("Gericht.ed3")`, which
+is where native hoists a0 into esi (offset 208) rather than offset 9, so `push edi` lands at
+offset 9; every equal-run in offsets 9..326 vanished (base runs 9-14, 19-50, 53-78, 140-177,
+221-277 and 331-438) and the 331-438 run shrank to 347-438, taking mismatched bytes from 7054 to
+7040. Reverted with measured sizes: pad[7] arm swap (8797), verdict arm swap (8790), both (8789),
+a0 pointer alias (8798 but 1974 match), msg-init move (8811), msg.state move (8802), hnd/tbl
+reorder (8811). Remaining: the 4937..5080 run, where native keeps h in slot 0x5c and reloads it
+(`mov edx,[esp+0x60]; push; call`) while ours keeps it in edi (`push edi; call`), and native
+reuses the clamped pad[3] in esi after fcn_004938c0 where we reload the slot.
