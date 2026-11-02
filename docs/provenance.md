@@ -18664,3 +18664,29 @@ fild, fmulp and fiadd order at 0x56aac6..0x56ab93; the double fcn_00546190(e) ta
 inline at 0x56ad0a and one shared at 0x56ae75 reachable by je from the cnt2 block, where we emit one; and case
 4's goto-fail block lands after case 4 in native at 0x56a3f7 because MSVC merges the identical
 `*(int*)(e+0x70) = -1; return;` tails, so case 0's return needs its own copy to reproduce 0x56a046.
+
+## 2026-11-03 — production message switch frame recovered
+
+`0x569FF0` keeps the recovered frame at match 281 with object 3380 and 34 relocations, down from 321 at
+object 3332, because the frame is now `sub esp,0x738`, exactly native, and the first mismatch moved from
+offset 2 to 0x12; the match dip is a shift of everything downstream, not a code regression, and the frame
+gate takes precedence. One line did it: `fcn_004c4670(4, 1, 0x65, (int*)&cnt2)` instead of `&num`, since
+native's `lea edx,[esp+0x24]` at 0x56a577 with eight bytes of arguments pending is slot 0x1c, and slot 0x1c
+is read at 0x56acd1 by the cnt2 guard on the shared fcn_00546190 tail; taking the address forces a memory
+home and yields native's fourth block-top store with the ten-dword scalar area at 0x10..0x38, SEARCH at
+0x38, b200 at 0x48 and b400 at 0x348. Case 5 is now decoded rather than guessed, from 0x56aac6 to 0x56ab93:
+`fild [slot0x10]` for the fcn_0050df70 result, `fild [slot0x30]` for hits, `fmull qword 0x6629f8` for 0.1 as
+a double, `fmulp`, `_ftol`, then clamp below 1 to 1 and store to slot 0x10; then
+`sprintf(&b100, 0x68be9c, n, *(char**)(id*8 + 0x14a79c0))`, `strcpy(b400, b100)`, fcn_004c51f0 with six
+arguments `[slot2c+2]`, `[slot20+2]`, id, n, `*(char*)0x773d75` and 0, then `fcn_0050bb50(id, char)`,
+`fimul [slot0x10]`, `add esp,0x30`, `fiadd [slot0x14]`, `_ftol` and `mov [slot0x14],eax`, so slot 0x14 is a
+running accumulator rather than a flag and num is not updated there. Two bumps follow at 0x56abd1 that our
+source lacks entirely: `*(int*)(fcn_00509570(slot2c) + 0x14) += flag` and `*(int*)(pb + 0x4d) += flag`, with
+0x509570 unbound in the metadata. Two further corrections are recorded for the rewrite: the default arm is
+the bare epilogue, so `default: return;` is right and makes case 0's `-1; return;` inline at 0x56a046 (alone
+it measures object 3376 with match 272 and was deferred to ship with the case 5 work), and the buffers are
+swapped, ours b100 at 0x48 and b200 at 0x148 against native b200 at 0x48 and b100 at 0x248 with b400 at 0x348
+in both. The prologue still differs from 0x56a001, where native emits `xor ebx,ebx; mov eax,[esi+0x70];
+xor edi,edi; add eax,2; xor ebp,ebp; cmp eax,7` and then stores ebx to 0x34, ebp to 0x2c, ebx to 0x30 and
+ebx to 0x1c, while ours emits edi first and hits' store is dead. Current source at
+.scratch/569ff0/KEEP_frame738.c, notes in NOTES.md.

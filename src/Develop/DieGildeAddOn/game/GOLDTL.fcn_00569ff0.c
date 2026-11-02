@@ -218,7 +218,7 @@ void __cdecl fcn_00569ff0(char* e)
 			q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xbc));
 			if (q != 0) {
 				fcn_004c4510(q, *(int*) (q + 1));
-				fcn_004c4670(4, 1, 0x65, &num);
+				fcn_004c4670(4, 1, 0x65, (int*) &cnt2);
 				fcn_004c5360();
 			}
 		}
