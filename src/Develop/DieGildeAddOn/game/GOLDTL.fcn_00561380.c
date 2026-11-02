@@ -213,8 +213,7 @@ void __cdecl fcn_00561380(void *a0)
 			dist = fcn_00507e70(recB, recA, 2);
 			if (gm_RandomFloat01() + dist < g_6628a0)
 				goto label_561a7a;
-			if (fcn_005c6270(recA, 0x2c0) != 0)
-				goto label_561a7a;
+			if (fcn_005c6270(recA, 0x2c0) == 0) {
 			io_FormatTextBuffer(text, 0x1735, *(unsigned short *)recA, r);
 			he_MessageBoxQuickjump(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 			if (*(unsigned short *)(r + 0x27) != 0xffff) {
@@ -224,7 +223,10 @@ void __cdecl fcn_00561380(void *a0)
 					io_FormatTextBuffer(text, 0x1736, r);
 					he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, g_6a654c);
 				}
-				fcn_004f4f60(0x18, 1, *(int *)(recB + 4), *(int *)(recA + 4), *(int *)(r + 1));
+				fcn_004f4f60(0x18, 1,
+					*(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4),
+					*(int *)((unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0) + 4),
+					*(int *)(r + 1));
 			}
 			v22 = (unsigned char *)0x7f4ca4;
 			do {
@@ -243,6 +245,7 @@ void __cdecl fcn_00561380(void *a0)
 			*(unsigned short *)(q + 0xc) = g_7f4c0c;
 			fcn_00500bb0(q, 0, 10, 0);
 			return;
+			}
 		label_561a7a:
 			recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);
 			recB = (unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0);
@@ -264,7 +267,10 @@ void __cdecl fcn_00561380(void *a0)
 			if (*(unsigned short *)(r + 0x27) != 0xffff) {
 				io_FormatTextBuffer(text, 0x1739, r);
 				he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
-				fcn_004f4f60(0x18, 1, *(int *)(recB + 4), *(int *)(recA + 4), *(int *)(r + 1));
+				fcn_004f4f60(0x18, 1,
+					*(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4),
+					*(int *)((unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0) + 4),
+					*(int *)(r + 1));
 				*(int *)(p + 0x70) = -1;
 				return;
 			}

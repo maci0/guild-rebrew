@@ -19244,3 +19244,27 @@ fourth argument and its `&flag` at 0x56a9f4 both address X 0x04, which our sourc
 `num`, and that split is the likely reason our scalar set needs an eleventh dword when the other two strcats are
 enabled. Kept source .scratch/569ff0/SC_both_bpair_303.c with KEEP_334.c, KEEP_306.c, SC_all3_strcat_277.c and
 the ranking table in NOTES.md.
+
+## 2026-11-03 — inventory switch case four rebuilt to native order
+
+`0x561380` 691 to 989 with object 3608 against native 3600, 61 relocations, frame `sub esp,0x5e4` held and
+lint clean. Case 4 is rebuilt to native block order and now starts at the same offset 0x497 with 334
+instructions (native 334) and 0x41a bytes (native 0x41c), matching native's 0x561817..0x561c32 sequence:
+header, good path, loop, tail stores, phase2 at label_561a7a, then else path. Two edits over the previous
+state, with the case-5 structure, pos initialiser, v10 and v24 hoisting and slot order untouched. Both case-4
+`fcn_004f4f60(0x18,1,...)` sites pass the record fields as full expressions, so MSVC rematerialises and folds
+the +4 into `0x7f4ca4(,%reg,4)`, reproducing native's reload at 0x56197f and 0x561be3 and taking case 4 from
+314 to 334 instructions, match 691 to 745. The good path is written
+`if (fcn_005c6270(recA,0x2c0) == 0) { ...; return; }` with `label_561a7a:` after the closing brace, so the good
+path becomes the fall-through and phase2 and the else path follow, taking match 745 to 989. The case-3 tail was
+measured and not changed: ours is 76 bytes after the f4f4f60 call against native 75 at
+0x561611..0x56165b, and case 3 overall is 297 against 289; the fifteen-byte figure earlier was wrong.
+`p = p + 0x52`, a case-scope q for the global stores, and q with the 0x1e and 0x7a stores are all
+byte-identical because MSVC folds q back to p, and native's `add esi,0x52` shape was not reachable from source
+although the case-7 and 8 tails already produce it. Rejected this round: recA and recB at 0x7f4ca4 (587),
+inlined record expressions without variables (521), case-3 success inside `if (be70 != 0)` (565 at 3612),
+fcn_004c51a0 with a char third parameter (886, right code shape but it breaks the current offset alignment),
+and a split failure label (444). Residual in order: case 0 is 198 bytes against native 216, whose out-of-line
+stub at 0x561489 does `mov 0xc4(esi),-1` and has no source shape found yet; cases 1 and 2 start eighteen bytes
+early; and case 4's two-byte gap is the float test idiom, native `and $0x100,%eax; jne` against our
+`test $0x5,%ah; jnp`. Current source .scratch/r561380/v12_final_round3.c with v12_ifbody.c and NOTES.md.

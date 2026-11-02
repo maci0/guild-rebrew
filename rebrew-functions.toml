@@ -587030,7 +587030,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00561380".verification]
-source_hash = "da874865a608dd59ba61b9db71c22d0a40cd7467192ac273d16f54f35bd11dcc"
+source_hash = "b887fb7d8c36866d0549120df32543a49bfe815c6dc7154953fbf3eb26a491c0"
 reference_hash = "e51db3b372ef190b7929d3fba93018ba87d75e61b1920b5f61e45223057b5503"
 reference_size = "3600"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -587041,10 +587041,10 @@ module = "GOLDTL"
 va = "0x561380"
 context_hash = ""
 defines = "[]"
-input_hash = "cb67371f9e1e9ea5addebd3734e26e1b2f55c50174c8248974ba4d751f6ec925"
+input_hash = "ef94b47392c5ffcdf799909e2c3e6d2c2f589bb6ab88129a96197a6b2a3561a4"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T20:00:42+00:00"
+measured_at = "2026-11-02T20:13:06+00:00"
 
 [["GOLDTL.0x00561380".status_history]]
 old_status = "STUB"
