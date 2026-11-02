@@ -18613,3 +18613,23 @@ clamped value as `mov [esi+0x39],eax` twice around `and eax,edx`. Writing `v = v
 store is dead-store-eliminated by MSVC 6, so the source shape that keeps both stores is still open, and there
 are plus eleven and minus eleven regions around it. Finding text in .scratch/f540020/WALK_FINDING.md, with
 the current source at kept.c and the previous 3097 state at before_walk2.c.
+
+## 2026-11-03 — inventory dialog register roles probed, gate unmet
+
+`0x5D0660` keeps its v14 state at 1258 with object 4389, frame 0x438, native tables and nine store blocks;
+the register-role round produced no keeper and the source is unchanged. The probe measured the roles
+directly. The native-shaped candidate (tabA[0] arm result dead, stores reading tabA[0].text) gives 4393 with
+the block at 0x289 of 214 bytes and match 832, with rows2 in ebp, posY0 in esi, n3 in ebx, t0 in edi and the
+text spilled to its field, which is four bytes over native rather than matching. The only lever that puts
+the first call result in ebx across the branch is a named block-scope `int text;` read in the arm, but it
+spills rows2 out of ebp and reallocates the pre-label fill loop, moving the label start from 0x289 to 0x270
+for a 25-byte loss; the best such block measures 222 of 230, eight short, and no candidate holds both the
+0x289 start and the 230 length. t0 never spills in any candidate, and native's n3-in-edi never appears since
+ours is in ebx or ebp, so no shape got rows2 in ebp, n3 in edi and text in ebx at once. The `register` keyword
+and declaration permutations change no role. The merge returns only with `volatile int n3`, which restores
+the shared tails and an eight-store body at frame 0x438 and block start 0x289, but measures 4359 with match
+688, about 30 short and far below 1258. The gate is therefore unmet on all three counts, and the suggested
+next lever is the original local decomposition rather than local reshapes: native's slot map implies extra
+block-scoped temporaries that share dead slots, and reproducing that decomposition is what could free ebp for
+rows2 while the text stays in ebx. Candidates are left in .scratch/660/r12/ (a0, c1 to c5, d2 to d8, e1 to
+e3, f1textvar, g5, h1) with tools asmparse, role, align, mkdis, side and blk.
