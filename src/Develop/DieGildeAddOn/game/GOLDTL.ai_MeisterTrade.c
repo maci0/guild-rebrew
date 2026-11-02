@@ -194,9 +194,7 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 	}
 
 	/* 0x00b0-0x00c0: building busy flag; the pricing pass runs once */
-	if ((*(int*) 0x7f4c04 & 1) == 0) {
-		*(int*) (o + 0x1b4) &= ~0x200;
-	} else {
+	if ((*(int*) 0x7f4c04 & 0xffff) % 2) {
 		if ((*(int*) (o + 0x1b4) & 0x200) == 0) {
 			/* 0x00c0-0x0198: sell town stock on a good price */
 			for (i = 0; i < *(int*) 0x100b0ac; i++) {
@@ -310,6 +308,8 @@ dump_stock:
 			}
 		}
 		*(int*) (o + 0x1b4) |= 0x200;
+	} else {
+		*(int*) (o + 0x1b4) &= ~0x200;
 	}
 
 	/* 0x0334-0x03a7: collect the own stock lanes */

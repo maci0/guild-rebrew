@@ -16945,3 +16945,19 @@ or 0xfffffffe; inc; je`, a sign-based boolean, while about thirty condition spel
 plain `test BYTE ds:0x7f4c04,0x1`; the only 6055-byte hit (`& 0x8001`) changes the condition and
 was rejected. Drift is zero at call 94 and call 70 is -86 because the 0x104b exclusion scans are
 still unwritten.
+
+## 2026-11-02 — trade ai remainder idiom decoded
+
+The wall at offset 0xb0 is decoded and reproduced. Native's bytes at 0x489b20 are
+`mov eax,ds:0x7f4c04; and 0xffff; and 0x80000001; jns; dec; or 0xfffffffe; inc; je`, which is not
+a bit test: `and 0xffff` narrows the dividend to unsigned short, `and 0x80000001` keeps sign and
+parity, `jns` tests the sign flag of that result, and `dec`/`or 0xfffffffe`/`inc` convert sign plus
+parity into the signed remainder, so the `je` branches on remainder zero. Because the dividend is
+already 16-bit, the sign chain is unreachable and the value is `x & 1`. The source form is
+`if ((*(int*)0x7f4c04 & 0xffff) % 2) { if ((*(int*)(o+0x1b4) & 0x200) == 0) {...} *(int*)(o+0x1b4) |= 0x200; } else { *(int*)(o+0x1b4) &= ~0x200; }`,
+truthy test with the odd arm first, because an `== 0` test with the clear arm first emits `jne`
+where native has `je`. With it the first mismatch moves from 0xb0 to 0xc8 and match rises from 605
+to 638; the object grows to 6082 because the price body 0xde..0x461 runs 40 bytes longer than
+native's 0xde..0x439 (the set and clear at 0x461 are byte-identical to native's 0x439 shifted by
+0x28) while later regions are 13 bytes shorter, netting +27. Kept for the decoded construct, with
+the body gap as the open item; fixture k_6082_638.c is the current source.
