@@ -2381,3 +2381,20 @@ inlining, a predicate-forced zero and pre-assigned b/n/x/y all leave 0x260 and o
 Frame 0x25c is reachable only by shrinking the real 0x200 buffer to 0x1fc, which is not a
 candidate. The reservation follows the function's call and loop topology rather than the
 register plan, so further progress needs a different angle than source-level register hints.
+
+TL4d8d00 keeps its prologue zero register bound to v68's residency. The object is exactly 4640
+with match 616, frame 0x138, call counts 11/9/16 and ent34 at 25 sites; at offset 12 we emit
+`xor ebx,ebx` where native has `xor edx,edx`, with slots base 0x18, ent 0x1c, vec 0x5c, msg
+0x30, v80 0x2c, v68 0x70 against native's ent 0x18, base 0x1c, vec 0x2c, msg 0x3c, v80 0x80
+and v68 at 0x68 (msg plus 0x2c). The mechanism: ours keeps v68 in ebx for its whole live
+range, so its zero is a callee-saved value and i needs a second scratch zero in eax, while
+native keeps v68 memory-resident ([esp+0x68] = edx at 0x4d8d17, reloaded into ebx at
+0x4d9ce3) so its zero is scratch edx CSE'd with i's zero. Every lever that pushes v68 into
+memory also merges one fcn_004c6940 tail, which breaks the call counts: address-taking it
+in a call argument moves the first mismatch to 13 and swaps ent/base to native order but
+costs one c6940 (15) with proxy match 204 to 227, volatile v68 gives 4652 with c6940 15 and
+first 13, v68 as a struct member gives 4648 with c67c0 8 and c6940 15, and base-before-v68
+store order, `(void)&v68`, self-reads, long or unsigned forms, predicate zeros and loop
+pointer rewrites are all identical to the base. The next lever is the twelve-instruction
+code delta (native 1452 against our 1464), which is what would change register pressure
+enough to spill v68 like the reference.

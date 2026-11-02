@@ -17441,3 +17441,21 @@ pre-assigned b/n/x/y all leave 0x260 with the first mismatch at offset 2. Frame 
 only by shrinking the real 0x200 buffer to 0x1fc, which is not a candidate. Recorded in
 docs/codegen-walls.md as following the function's call and loop topology rather than the register
 plan.
+
+## 2026-11-02 — dispatcher prologue register documented
+
+`0x4D8D00` keeps 616 at object 4640 with call counts 11/9/16 and ent34 at 25 sites; the
+register-plan pass was negative and the source is restored byte-identical to the kept state. At
+offset 12 we emit `xor ebx,ebx` where native has `xor edx,edx`, and the slots differ (ours base
+0x18, ent 0x1c, vec 0x5c, msg 0x30, v80 0x2c, v68 0x70; native ent 0x18, base 0x1c, vec 0x2c, msg
+0x3c, v80 0x80, v68 0x68). The mechanism: our v68 stays in ebx for its whole live range, so its
+zero is callee-saved and i needs a second scratch zero in eax, while native keeps v68
+memory-resident ([esp+0x68] = edx at 0x4d8d17, reloaded into ebx at 0x4d9ce3) so its zero is
+scratch edx CSE'd with i's zero. Every lever that pushes v68 into memory also merges one
+fcn_004c6940 tail: address-taking it in a call argument moves the first mismatch to 13 and swaps
+ent/base to native order but costs one c6940 (15) with proxy match 204 to 227; volatile v68 gives
+4652 with c6940 15 and first 13; v68 as a struct member gives 4648 with c67c0 8 and c6940 15; and
+base-before-v68 store order, `(void)&v68`, self-reads, long or unsigned forms, predicate zeros and
+loop pointer rewrites are all identical to the base. Recorded in docs/codegen-walls.md: the next
+lever is the twelve-instruction delta (native 1452 against our 1464), which is what would change
+register pressure enough to spill v68 like the reference.
