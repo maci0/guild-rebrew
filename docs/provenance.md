@@ -16385,3 +16385,22 @@ a0 pointer alias (8798 but 1974 match), msg-init move (8811), msg.state move (88
 reorder (8811). Remaining: the 4937..5080 run, where native keeps h in slot 0x5c and reloads it
 (`mov edx,[esp+0x60]; push; call`) while ours keeps it in edi (`push edi; call`), and native
 reuses the clamped pad[3] in esi after fcn_004938c0 where we reload the slot.
+
+## 2026-11-02 — building animation callback transcribed in full
+
+`0x432480` goes from no matching bytes to 194 of 4850 with the object at 4705, 97 percent of
+native size: both halves are transcribed in native order through the final
+`pop edi/esi/ebp/ebx; add esp,0xb0; ret`, all 43 call sites are present, and 1412 of 1519 native
+instructions are emitted. Half 1 covers the building animation clock (delta and ext guards,
+fcn_0045cbe0, the outer 0x4a4-stride building loop with the 0x7c inner slots, the live byte,
+owner and slot fetch, lo/hi/max, the interval interpolation into slot+0x40, the clock carry with
+its two _ftol sites, the cursor retry loop, the geometry gate with two tolerance compares,
+fcn_00431330, the 0x14/0x18/0x1c/0x30 frame trigger block with fcn_00451340, fcn_00455140, the
+node-matrix rotate and fcn_00438b40, and the sb tail). Half 2 covers fcn_004316c0, the null and
+0x34&2 guards, the 0x58-stride weights, the three geometry branches including six Hermite calls
+each for the 4d&2 set and clear paths and the fmin blend into CompareVector3WithinTolerance, the
+12-dword frame-table reset, the clock carry, and the reverse/forward cursor retry with
+fcn_004321f0, the final setpos/setrot and fcn_00433780. The remaining first-order gap is the
+frame: native allocates 0xb0 and keeps about fifteen scalars in frame slots, while our build
+spills only the overflow and allocates 0xec, so byte 2 (the immediate) is the first difference
+and everything after inherits it.
