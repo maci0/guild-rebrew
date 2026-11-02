@@ -18444,3 +18444,25 @@ native begins each block with `mov eax,[0x774970]` for the slot calculation and 
 kind, visible, wd, mon, ent and day stores, while our scheduling differs; putting ent first makes the first
 six instructions identical but still splits mon and day. That is where the last twelve bytes of the object
 sit.
+
+## 2026-11-03 — inventory dialog reaches native tables, and a division corrected
+
+`0x5D0660` 1132 to 1258 with object exactly 4389, frame 0x438, native table offsets, 66 calls in native
+order, no setne, 43 relocations and lint at 5485 of 5485. Layout verified from the object: memset leas edi
+to [esp+0x54] for tabA 0x44, [esp+0x98] for tabB 0x88 and [esp+0xf8] for tabC 0xe8, with buffers at
+[esp+0x148/0x248/0x348] for frame 0x138/0x238/0x338, identical to native, and the hover lookups stay
+distinct at 0x1002, 0x1049 and 0x1094 against native minus two. Four edits plus the buffer size. The buffer
+returns to 768 because the 17th scalar slot is now carried by the t0 hoist
+(`t0 = (*((int*)(&tabB[2].y))) & 0xffff;` before posY[1], with the connector's duplicate t0 assignment
+omitted since it drops the slot). Behaviour change, evidence-backed: `nb = rows / 5` and
+`t0 = (rows * 4) / 5` replace the previous /10, because native emits the 0x66666667 multiply with
+`sar edx,1` at 0x5d0d0f and 0x5d0d38 where /10 gave `sar edx,2`, and rows is written once at 0x5d0720 into
+slot 0x40, so the earlier /10 was a reconstruction error rather than a scaled variable; alone the change
+measures 4386 with match 939. And `if ((unsigned short) tabB[3].id != 0xffff)` replaces `!= -1`, the same
+truth value for a short and the form native uses, worth three bytes, which restores 4389 after the division
+correction. The odd-byte lever is therefore `cmp word ptr [mem],0xffff` at 8 bytes against the 7-byte form
+with -1, and native uses the 0xffff form at nine sites (0x5d093b, 0x5d09ed, 0x5d0ac5, 0x5d0b99, 0x5d0c6e,
+0x5d0f6e, 0x5d12ba, 0x5d138a and 0x5d1453), each conversion costing one byte. Open: the middle still
+duplicates the visibility-store block that native shares by jumping to 0x5d0bf2, about 32 bytes offset by
+shortfalls elsewhere. Candidates kept: .scratch/660/kept-v14.c (current), round10-s4-4389-native-tables.c
+and kept-v13.c for the previous state.

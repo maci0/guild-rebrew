@@ -58,7 +58,7 @@ typedef struct TreeRec {
 /* ADDRESS: GOLDTL 0x005d0660 */
 void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned int a3)
 {
-	char buf[772];
+	char buf[768];
 	TreeRec tabC[5];
 	TreeRec tabB[6];
 	int posC[5];
@@ -253,7 +253,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 					tabB[3].x = (short) (n3 + rows2 + 0x10);
 					tabB[3].y = 0x96;
 					idx = rows2 + 0x12;
-					if (tabB[3].id != -1) {
+					if ((unsigned short) tabB[3].id != 0xffff) {
 						id = tabB[3].id & 0xffff;
 						fcn_0046f740(idx, 0x98,
 						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
@@ -287,9 +287,9 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				}
 
 				if (nb) {
-					nb = rows / 10;
+					nb = rows / 5;
 					posX[0] = nb + 0x10;
-					t0 = (rows * 4) / 10;
+					t0 = (rows * 4) / 5;
 					posX[1] = t0 - w - 0x10;
 					{
 						char* p;
@@ -346,8 +346,8 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 					}
 				}
 
-				posY[1] = ((((*((int*) (&tabB[2].y))) & 0xffff)
-				    - h - 0xa) / 2) + h + 0xa;
+				t0 = (*((int*) (&tabB[2].y))) & 0xffff;
+				posY[1] = (((int) t0 - h - 0xa) / 2) + h + 0xa;
 				{
 					char* p;
 					int k;
@@ -451,7 +451,6 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 					char* p;
 					int k;
 
-					t0 = *(short*) (&tabB[2].y) & 0xffff;
 					idx = *(short*) (&tabB[2].x) & 0xffff;
 					posY[0] = idx;
 					nb = idx;

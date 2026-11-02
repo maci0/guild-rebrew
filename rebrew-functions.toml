@@ -424564,7 +424564,7 @@ status = "STUB"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005d0660".verification]
-source_hash = "0ce21be53b54b5cd2b20c84504f924416092b13d5e84c710c3bd0c1606f40644"
+source_hash = "17b3003110c763e78ae00e9dd47055ffeb8a73d281b5e9087680d0f1b6161047"
 reference_hash = "f81b7e1e35113e706b4abe715858d96529bddc28d0d16694e409d4f479f8f8c3"
 reference_size = "4389"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -424575,10 +424575,10 @@ module = "GOLDTL"
 va = "0x5d0660"
 context_hash = ""
 defines = "[]"
-input_hash = "0d53cfb8d6f88fe027ff0c523acd560d89b0efe246e7dd5aad3d1a2811fc56ce"
+input_hash = "45fc8a81920c945927aee5ccf0fd3597b310fb752d07753e2a8c5e17de79c805"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T17:09:04+00:00"
+measured_at = "2026-11-02T18:06:02+00:00"
 
 [["GOLDTL.0x005d0660".status_history]]
 old_status = "STUB"
