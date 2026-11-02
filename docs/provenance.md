@@ -18207,3 +18207,29 @@ because inlining mid removed one 4-byte slot and the 772-byte buffer restores th
 the 17th slot. Rejected slot levers: volatile idx (frame ok, +119 bytes), volatile nb (+63), int t0 (+8),
 spare locals (dropped), forced-memory mid[1] (over target), and keeping mid live across the tabC loop
 (native layout and frame restored but 4397 bytes at match 741).
+
+## 2026-11-03 — season setup frame solved
+
+`0x540020` goes from 13 matching bytes to 83 with the object at 344, sixteen relocations and lint clean.
+Transcribed the prologue through 0x540172: the fcn_00509570 call with the slot table expression, fcn_00500e20
+on 0x7f4c00, the pos copy with the g_7747b0&4 and g_774950 gate, fcn_0052a310, fcn_004ec9e0, the three float
+stores at v5+0x58, +0x5c and +0x60, the whole g_6a3420 block including the 0x1040480/84/88/8c reset and
+the g_774978==0 path through fcn_004730c0, the while loop on handle[0]&4, fcn_00469e30, fcn_00473150, the
+second fcn_004730c0 call and the trailing g_7747b0&4 call to fcn_00535770. The frame is solved and recorded
+in the file header and .scratch/f540020/ANALYSIS.md: native locals start at esp+0x10 and sum 0x3a8, so the
+prologue is `sub esp,0x3b8`, and the map is int i at 0x10 (address-taken by fcn_004fd400), a float at 0x14,
+ints at 0x18 and 0x1c, pos at 0x20 (0x14 including padding), a short out at 0x32, three 0x7c records at
+0x34, 0xb0 and 0x12c (the first two zeroed by one merged `rep stosd 0x3e` for 0xf8) and a char[0x210] at
+0x1a8. MSVC 6 allocates slots in ascending size order and `sub esp` equals the 0x10 hole plus the sum of
+sizes, which reproduces every observed offset and 0x3b8 exactly; registers are esi=v5, ebx=the season
+value, ebp=the alloc handle and edi=a zero constant. The prologue byte shape is reachable with four saved
+registers (`81ec…/a1 ..53/25…/55 56 57`), and the prefix is still zero because unused locals are promoted
+away, so the 0x3b8 frame only materialises once the real body addresses those locals. Remaining regions
+are decoded in the analysis file: the 0x540172 setup, seven Element blocks (ids 0x66, 0x70, 0x68 and 0x85
+guarded by g_7747f0, then 0x7c, 0x93 and 0x84 guarded by g_77670b) through fcn_005463a0 and fcn_004c5530,
+the five-argument 0x4c block, the g_7747b0&8 object walker, two passes over 0x300 slots with the type gates
+and the 0x2ee00, 0xfa00, 0x4e200, 0x1f400, 0x9c400 and 0x3e800 clamps, the 0x540f34 bit-clear loop, the
+0x540fa3 loop over fcn_00567170 and fcn_0040c120, and the tail setting g_1007cd0=1 with fcn_004ec660 and
+fcn_004c2d90. Two callee signatures need review before those calls bind: GOLDTL.fcn_0052a890.c declares
+`void fcn_0052a890(int)` while this body passes a pointer, and fcn_0052a310's project source is an
+int-pointer wrapper while this body passes &pos.
