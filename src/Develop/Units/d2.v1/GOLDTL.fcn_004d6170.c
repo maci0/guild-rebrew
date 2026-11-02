@@ -130,12 +130,7 @@ int __cdecl fcn_004d6170(char* ctx)
 			}
 		}
 	}
-	if (g_772ea4 != 0) {
-		side = g_772e98;
-		if (g_772ea4 != g_772e9c) {
-			side = g_772e9c;
-		}
-	} else {
+	if (g_772ea4 == 0) {
 		tally = 0;
 		for (id = (int*) (self + 0x80), n = 16; n != 0; n--, id++) {
 			if (*id != -1) {
@@ -162,6 +157,11 @@ int __cdecl fcn_004d6170(char* ctx)
 			side = g_772e9c;
 		} else {
 			side = g_772e98;
+		}
+	} else {
+		side = g_772e98;
+		if (g_772ea4 != g_772e9c) {
+			side = g_772e9c;
 		}
 	}
 	screen = fcn_00470820(0, 0, "cutscenes\\combat_end");

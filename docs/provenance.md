@@ -16513,3 +16513,22 @@ for the memory-resident scalars (delta 0x20, boff 0x3c, lo 0x50, j 0x54, now 0x5
 with the artificial scratch stores removed, the frame is native. Cross-cutting finding for the
 project: any Frame or struct model built from raw [esp+x] displacements in this target is 0x10
 too high until the four callee-saved pushes are subtracted.
+
+## 2026-11-02 — inventory dialog branch geometry
+
+`0x4D6170` keeps native's branch geometry at the first structural divergence (object offset 0x104).
+Native tests `g_772ea4 == 0` first, emitting `cmp ecx,ebp; jne rel32 0x4d631b` with the tally
+block as fall-through; ours had `je rel8` with the if-block as fall-through. The geometry variant
+measures 601 match and 5454 bytes against 636 and 5457 for the old shape, and is kept because the
+geometry is durable while positional bytes are not. The register pair remains native's reverse
+(ctx in EBP, zero and tally family in EBX); per docs/msvc6-allocator.md Finding 74 the colouring
+order among callee-saved registers is priority-driven (candidates by priority descending, ties by
+higher node id, try order esi, edi, ebx, ebp), so ctx lives the whole function and takes EBX only
+if it is coloured before the zero/tally candidate, which ours is not. About 25 variants held the
+frame and left the roles unchanged: removing the self alias, reordering or deleting the zero
+initialisers (ctx stays EBP even with no zero stores), const/cast/register spellings that are
+byte-identical, and 120 extra ctx references with a global side effect (object grew to 8304, ctx
+still EBP). Findings 62/64/65/68 record the same home rotation surviving declaration order, local
+removal, pressure pads and volatile homing. The next lever is body weight: our object is 534 bytes
+larger than native, which is where the priority inversion most plausibly lives, so the blocks are
+being reconstructed in native order from the corrected geometry.
