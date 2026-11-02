@@ -17836,3 +17836,21 @@ unmatched walk drops match to 197, so it belongs after the prologue matches. Rej
 reads matching native's `fld [esi+0x3c]` (229, layer to edi), hfield plus taps last (231), group all
 twelve temps then store the arrays (251), emission locals block-scoped inside the switch, and two
 native-like declaration orders.
+
+## 2026-11-03 — inventory dialog keeps the frame and gains the regions
+
+`0x5D0660` 285 to 373 with the object at 4322, frame 0x438 held, tlead filler 53 bytes so the .text
+contribution is exactly 4389, zero unresolved bindings (144 total, 131 positional conflicts and 13
+validated), and lint at 5485 of 5485. The frame is restored by `volatile int idx`: the overlay
+diagnostics, which set `g_774654=(int)&X` per scalar, showed only t0 and idx restore 0x438, because the
+reorder otherwise lets MSVC overlay a slot in that group, and liveness-only fixes did not work (extra
+mid definition in the tail, hoisted mid, post-join w/t0 uses, idx/t0 read-order swaps). The three text
+passes read x into `nb` rather than the volatile idx, so the converged text-pass length is kept while x
+is still read once and reused by draw and redraw. Regions now: text passes about 0x27c against native
+0x276 with the first io_FormatTextBuffer at 0xd35 against 0xd7e, the hover block exactly 0x15f with
+three distinct lookup sites at 0xfbd, 0x1004 and 0x104f (all 67 instructions early, no tail merge), and
+all 66 calls in native order; pre-text deltas improved from +99..+168 to +19..+74. The volatile
+qualifier is a layout lever rather than an attested original, and that is recorded. Alternatives on
+disk: B7-safe-mid.c is statement-only with frame 0x438, text region 0x27c, hover 0x15f and match 302,
+and Vg-volidx-k.c reaches match 381 with a diverged text region around 0x2a4. The remaining deficit is
+the child-walk and label blocks, about 67 bytes at the hover start.

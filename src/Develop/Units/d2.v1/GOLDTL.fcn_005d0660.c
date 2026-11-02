@@ -79,7 +79,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 	int h;
 	int n3;
 	int nb;
-	int idx;
+	volatile int idx;
 	int t0;
 
 	if (!fcn_0057ec20(1)) {
@@ -347,68 +347,16 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 					char* p;
 					int k;
 
-					p = (char*) &tabA[1].x;
+					p = (char*) &tabA[0].x;
 					for (k = 0; k < 2; k++) {
 						fcn_00472c30(*(short*) p,
 						    *(short*) (p + 2) + h + 5,
 						    *(short*) p, posY[1], 0x10, 0x10, 0x10);
-						p -= 0x10;
+						p += 0x10;
 					}
 				}
 				idx = tabA[0].x & 0xffff;
 				nb = tabA[1].x & 0xffff;
-				{
-					char* p;
-					int k;
-					int mid;
-
-					t0 = *(short*) (&tabB[2].y) & 0xffff;
-					idx = *(short*) (&tabB[2].x) & 0xffff;
-					posY[0] = idx;
-					nb = idx;
-					if (flag) {
-						nb = *(short*) (&tabB[3].x) & 0xffff;
-						mid = (((int) (*(short*) (&tabC[0].y) & 0xffff) -
-						    t0 - h) / 2) + t0 + h;
-						p = (char*) &tabB[2].x;
-						for (k = 0; k < 2; k++) {
-							fcn_00472c30(*(short*) p,
-							    *(short*) (p + 2) + h + 5,
-							    *(short*) p, mid, 0x10, 0x10, 0x10);
-							p += 0x10;
-						}
-						fcn_00472c30(idx, mid, nb + 1, mid,
-						    0x10, 0x10, 0x10);
-					}
-					p = (char*) &tabC[0].x;
-					for (k = 0; k < 5; k++) {
-						if (*(short*) (p - 8) == -1) {
-							break;
-						}
-						mid = (((int) (*(short*) (&tabC[0].y) & 0xffff) -
-						    t0 - h) / 2) + t0 + h;
-						fcn_00472c30(*(short*) p,
-						    *(short*) (p + 2) + h + 5,
-						    *(short*) p, mid, 0x10, 0x10, 0x10);
-						if (*(short*) p < idx) {
-							idx = *(short*) p;
-						}
-						if (*(short*) p > nb) {
-							nb = *(short*) p;
-						}
-						p += 0x10;
-					}
-					if (nc) {
-						fcn_00472c30(idx, mid, nb + 1, mid,
-						    0x10, 0x10, 0x10);
-						if (!flag) {
-							fcn_00472c30(posY[0],
-							    t0 + h + 5, posY[0], mid,
-							    0x10, 0x10, 0x10);
-						}
-					}
-				}
-
 				{
 					char* p;
 					int k;
@@ -494,6 +442,63 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						}
 					}
 				}
+				{
+					char* p;
+					int k;
+					int mid;
+
+					t0 = *(short*) (&tabB[2].y) & 0xffff;
+					idx = *(short*) (&tabB[2].x) & 0xffff;
+					posY[0] = idx;
+					nb = idx;
+					if (flag) {
+						nb = *(short*) (&tabB[3].x) & 0xffff;
+						mid = (((int) (*(short*) (&tabC[0].y) & 0xffff) -
+						    t0 - h) / 2) + t0 + h;
+						p = (char*) &tabB[2].x;
+						for (k = 0; k < 2; k++) {
+							fcn_00472c30(*(short*) p,
+							    *(short*) (p + 2) + h + 5,
+							    *(short*) p, mid, 0x10, 0x10, 0x10);
+							p += 0x10;
+						}
+						fcn_00472c30(idx, mid, nb + 1, mid,
+						    0x10, 0x10, 0x10);
+					}
+					p = (char*) &tabC[0].x;
+					for (k = 0; k < 5; k++) {
+						if (*(short*) (p - 8) == -1) {
+							break;
+						}
+						mid = (((int) (*(short*) (&tabC[0].y) & 0xffff) -
+						    t0 - h) / 2) + t0 + h;
+						fcn_00472c30(*(short*) p,
+						    *(short*) (p + 2) + h + 5,
+						    *(short*) p, mid, 0x10, 0x10, 0x10);
+						if (*(short*) p < idx) {
+							idx = *(short*) p;
+						}
+						if (*(short*) p > nb) {
+							nb = *(short*) p;
+						}
+						p += 0x10;
+					}
+					if (nc) {
+						fcn_00472c30(idx,
+						    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
+						    t0 - h) / 2) + t0 + h, nb + 1,
+						    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
+						    t0 - h) / 2) + t0 + h,
+						    0x10, 0x10, 0x10);
+						if (!flag) {
+							fcn_00472c30(posY[0],
+							    t0 + h + 5, posY[0],
+							    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
+							    t0 - h) / 2) + t0 + h,
+							    0x10, 0x10, 0x10);
+						}
+					}
+				}
 
 				{
 					char* p;
@@ -508,14 +513,14 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						    ((a1 & 1) && !(a1 & 0xc)) ||
 						    (a1 & 0x10) ? 1 : 0;
 						io_FormatTextBuffer(buf2, 0x6ac96c,
-						    *(short*) p);
-						fcn_005c9090(buf2, *(short*) (p + 8),
-						    *(short*) (p + 0xa) + rows2 + 3,
+						    *(unsigned short*) p);
+						nb = *(unsigned short*) (p + 8);
+						t0 = *(unsigned short*) (p + 0xa);
+						fcn_005c9090(buf2, nb, t0 + rows2 + 3,
 						    0x50, 0x56);
 						if (*(short*) p == *(short*) ent) {
-							fcn_0046f740(
-							    *(short*) (p + 8) - n3 - 0xa,
-							    *(short*) (p + 0xa) - 0xa,
+							fcn_0046f740(nb - n3 - 0xa,
+							    t0 - 0xa,
 							    *(int*) (ent + 0x54),
 							    g_772514);
 						}
@@ -529,14 +534,14 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						*(int*) (g_1015ea0 + *(int*) (p + 4) * 756 + 0x5c) =
 						    (a1 & 0xc) ? 0 : 1;
 						io_FormatTextBuffer(buf1, 0x6ac96c,
-						    *(short*) p);
-						fcn_005c9090(buf1, *(short*) (p + 8),
-						    *(short*) (p + 0xa) + rows2 + 3,
+						    *(unsigned short*) p);
+						nb = *(unsigned short*) (p + 8);
+						t0 = *(unsigned short*) (p + 0xa);
+						fcn_005c9090(buf1, nb, t0 + rows2 + 3,
 						    0x50, 0x56);
 						if (*(short*) p == *(short*) ent) {
-							fcn_0046f740(
-							    *(short*) (p + 8) - n3 - 0xa,
-							    *(short*) (p + 0xa) - 0xa,
+							fcn_0046f740(nb - n3 - 0xa,
+							    t0 - 0xa,
 							    *(int*) (ent + 0x54),
 							    g_772514);
 						}
@@ -554,14 +559,14 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						    (*(short*) p & 0xffff) * 0x21c + 0xa) > 0xa)
 						    ? 1 : 0;
 						io_FormatTextBuffer(buf3, 0x6ac96c,
-						    *(short*) p);
-						fcn_005c9090(buf3, *(short*) (p + 8),
-						    *(short*) (p + 0xa) + rows2 + 3,
+						    *(unsigned short*) p);
+						nb = *(unsigned short*) (p + 8);
+						t0 = *(unsigned short*) (p + 0xa);
+						fcn_005c9090(buf3, nb, t0 + rows2 + 3,
 						    0x50, 0x56);
 						if (*(short*) p == *(short*) ent) {
-							fcn_0046f740(
-							    *(short*) (p + 8) - n3 - 0xa,
-							    *(short*) (p + 0xa) - 0xa,
+							fcn_0046f740(nb - n3 - 0xa,
+							    t0 - 0xa,
 							    *(int*) (ent + 0x54),
 							    g_772514);
 						}
@@ -634,151 +639,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 /* Layout scaffolding: shifts the next source object to its reference
  * VA. Generated by the text lead pass. */
 #pragma data_seg(".text")
-unsigned char _tlead_GOLDTL_fcn_005d0660[197] = {
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
+unsigned char _tlead_GOLDTL_fcn_005d0660[53] = {
     0x90,
     0x90,
     0x90,
