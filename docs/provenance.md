@@ -17791,3 +17791,31 @@ then the connector block, where the old order gave 8 draws then 4 labels instead
 y read once into idx and t0 and reused by draw and redraw. Recorded caveat: .scratch/660/ann.txt
 operand offsets are unreliable (raw native asm shows 5d08ff as [esp+0x64] where ann says [base+0x38]),
 so slots must be re-derived from `rebrew binary asm show` bytes.
+
+## 2026-11-02 — trade dialog body transcribed
+
+`0x5B88B0` goes from 8 matching bytes to 323 with the object at 4283 against native 4297 and the first
+mismatch at offset 1, where offset 0 already matches (`mov eax,0x1368`). The whole body is transcribed
+in native order: the window creation with two count labels and a name label; four header labels with
+the radio group and format loop; the building layout metrics; the 12-row slot loop at four rows per
+page over three pages with gauge fill, radio group and two labels per row; the header gauge and
+message-loop entry; the per-iteration window refresh with worker search, packet 1 and the
+io_FormatTextBuffer send; packet 2 with the selection reset; the rows-to-old copy, slot merge through
+fcn_00505d00 and control teardown; the row refresh loop with element creation, bar, name and default
+text and the a[6] free; the 12-row hit scan with re-create and fcn_004ff210 send; and the
+fcn_00469510/fcn_00534f30/fcn_00532ef0 tail. Name corrections: 0x472380 is d2_SetElementValue and
+0x5462a0 is he_fn_Handlung, both wrong in the first pass and now fixed. The local map is recorded:
+frame 0x1368 made of 15 dwords at 0x00..0x38, Row gage 0x3c size 0x5c, pkt 0x98 size 0xf8, Row
+rows[12] 0x190 size 0x450, txtName 0x5e0 size 0x60, txtNum 0x640 size 0x80, txtWorker 0x6c0 size 0x80,
+txtDefault 0x740 size 0x80, int slots[0x26] 0x7c0 size 0x98, numA 0x858 size 0x60, numB 0x8b8 size
+0x60, textA 0x918 size 0x200, textB 0xb18 size 0x400 and Row old[12] 0xf18 size 0x450. Frame rule
+recorded: the chkstk immediate is the local region only, not locals plus four per save (probe with
+char[0x1200] and two saves keeps `mov eax,0x1200`), B is esp after __chkstk, arg0 is B+0x136c and the
+epilogue's `add esp,0x136c` with four pops confirms it. The immediate is eight short because MSVC kept
+only 13 of the 15 scalars on the stack, and two more never spill from source alone. Also recorded: the
+bar x87 scale is parked because the pointer-cast literal form
+`(int)((tv + *(double*)0x666088) * *(double*)0x662c38 * *(double*)0x665388)` forces a frame-pointer
+preamble and a 0x136c frame, while named extern doubles avoid it at 0x1360, and the three doubles at
+0x666088, 0x662c38 and 0x665388 are unregistered. The agent removed the committed
+`_tlead_GOLDTL_fcn_005b88b0[4128]` filler because the function now supplies about 4283 of those bytes,
+so the text lead pass needs re-running for this row.
