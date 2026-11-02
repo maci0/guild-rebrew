@@ -240,21 +240,25 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 				}
 			}
 
-			/* 0x0198-0x02a5: fill the own market stall to 32000 */
-			if (*(int*) (o + 0x1b8) >= 0xc80) {
-				if (gm_AccumulateTyped2((void*) (0x7f4ca0 +
-				    *(unsigned short*) (*(char**) (o + 0x16c) +
-				    0x27) * 0x21c)) >= 0x1f40) {
-					goto dump_stock;
-				}
+			{
+				char* oc = o;
+				/* 0x0198-0x02a5: fill the own market stall to 32000 */
+				if (*(int*) (oc + 0x1b8) >= 0xc80) {
+					if (gm_AccumulateTyped2((void*) (0x7f4ca0 +
+					    *(unsigned short*) (*(char**) (oc + 0x16c) +
+					    0x27) * 0x21c)) >= 0x1f40) {
+						goto dump_stock;
+					}
 			}
-			tmp = *(int*) (o + 0x1b8);
-			if (tmp > gm_AccumulateTyped2((void*) (0x7f4ca0 +
-			    *(unsigned short*) (*(char**) (o + 0x16c) + 0x27) *
+			j = *(int*) (oc + 0x1b8);
+			if (j > gm_AccumulateTyped2((void*) (0x7f4ca0 +
+			    *(unsigned short*) (*(char**) (oc + 0x16c) + 0x27) *
 			    0x21c))) {
-				tmp = gm_AccumulateTyped2((void*) (0x7f4ca0 +
-				    *(unsigned short*) (*(char**) (o + 0x16c) +
+				j = gm_AccumulateTyped2((void*) (0x7f4ca0 +
+				    *(unsigned short*) (*(char**) (oc + 0x16c) +
 				    0x27) * 0x21c));
+			}
+			tmp = j;
 			}
 			if (tmp >= 0x7d00) {
 				goto dump_stock;
@@ -266,12 +270,13 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 					continue;
 				}
 				price = (int) fcn_0050bb50(t->id, g_773d75);
+				slot = price;
 				j = 0x7d00 / price;
 				if (j < 1) {
 					j = 1;
 				}
 				t->qty44 = j < t->qty3c ? j : t->qty3c;
-				tmp += j * price;
+				tmp += j * slot;
 				if (o == (char*) 0x100e748) {
 					sprintf(v.line, (char*) 0x67e6ac,
 					    t->qty44,
@@ -287,16 +292,15 @@ dump_stock:
 				if ((t->flags54 & 6) != 0) {
 					continue;
 				}
-				tmp = fcn_0050dfd0(bld, t->id) / 4;
+				tmp = fcn_0050dfd0(*(char* volatile*) &bld, t->id) / 4;
 				if (t->qty3c <= tmp) {
 					continue;
 				}
-				tmp = t->qty3c / 4;
-				if (tmp < 5) {
-					tmp = 5;
+				t->qty44 = t->qty3c / 4;
+				if (t->qty44 < 5) {
+					t->qty44 = 5;
 				}
-				t->qty44 = tmp;
-				if (tmp >= t->qty3c) {
+				if (t->qty44 > t->qty3c) {
 					t->qty44 = t->qty3c;
 				}
 				if (o == (char*) 0x100e748) {
@@ -578,8 +582,9 @@ next_auto:
 			continue;
 		}
 		found = 0;
-		for (j = 0; j < *(int*) 0x100b0ac; j++) {
-			if (((Town*) 0x100d0c0 + j)->id == id) {
+		t = (Town*) 0x100d0c0;
+		for (j = 0; j < *(int*) 0x100b0ac; j++, t++) {
+			if (t->id == id) {
 				found = 1;
 				break;
 			}
@@ -588,8 +593,9 @@ next_auto:
 			continue;
 		}
 		found = 0;
-		for (j = 0; j < *(int*) 0x100b0a8; j++) {
-			if (((Prod*) 0x100b0c0 + j)->id == id) {
+		pr = (Prod*) 0x100b0c0;
+		for (j = 0; j < *(int*) 0x100b0a8; j++, pr++) {
+			if (pr->id == id) {
 				found = 1;
 				break;
 			}

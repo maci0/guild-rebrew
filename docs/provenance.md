@@ -17049,3 +17049,20 @@ sites. g_77256c is declared as a surface pointer with field x20 as in GOLDTL.fcn
 `extern double g_662950` is new. The block checks at 203 instructions against 208 with LCS 0.89 and
 591 against 619 bytes, so no logic is missing there. The remaining shortfall is the mark and fill
 path, about 312 bytes short by 0x467f5c, with the object 443 under native overall.
+
+## 2026-11-02 — trade ai price body exact
+
+`0x489A70` 638 to 726 with the object at 6041, fourteen short of native, frame 0x74c, calls 95/95,
+first mismatch byte 0xe6. The price body 0xde..0x43f is now exactly native length (0x361) and the
+set and clear at native offsets 0x43f and 0x444 are byte-identical, so the whole remaining gap is
+the remainder of the function. Four edits: the market-fill head uses a block-local `char* oc = o;`
+with j as the min-clamp temp, which removes the `[esp]` spill from the clamp and reaches
+[edi+0x1b8] and [edi+0x16c] through a register as native does (511 to 510 bytes); the market loop
+does one volatile read of price into slot and divides with price, since native reads the ftol
+result from edi; the dump loop uses `t->qty44` as clamp scratch and
+`fcn_0050dfd0(*(char* volatile*)&bld, ...)` so bld reloads per iteration as native does at 0x3ae,
+which returns ebx to the loop counter (the only new volatile, a single read, and the existing set
+is unchanged); and the route-own-stock town and producer exclusion scans became native pointer
+walks with t and pr induction (`j++, t++`), worth +2 bytes and +36 match. Drift shows +20 to +113
+through call 39 against the known -126 hole at native 0x104b where the loop2 exclusion scans are
+still unwritten, netting -14, so the next step is that block plus removal of the early excess.
