@@ -19757,3 +19757,22 @@ declarator initialiser are all byte-identical with v30 at 0x18 and v29 at 0x1c. 
 `*(unsigned int*)(v27+0x243)` and `(unsigned)v11` as unsigned emits `div` and puts case 7 at 0x35d exactly, but
 the `xor edx` schedule shifts and match drops to 1160, so the signed idiv form was kept. Current source
 .scratch/row5744c0/kept_split7_1793655670.c with FINDINGS.md round 3.
+
+## 2026-11-03 — crew dialog frame needs expression pressure, not declarations
+
+`0x43C640` keeps 469 at object 5169 against native 5419 with the frame at 0x54 and the first mismatch at offset 5
+where native is 0x60; the frame pass kept nothing and the source is restored to the session baseline. The tactic
+of naming the two H-derived temporaries cannot work as stated: MSVC sinks a standalone `hh = t->H; hx = hh*x;`
+past the following call and rematerialises `[ebx+4]` afterwards, so the named values never become live across the
+RNG call and never claim slots. The frame only grows with expression-shape pressure, not declaration count, since
+three unused ints leave the frame at 0x54. Measured probes, all kept as evidence and reverted from the source:
+hoisting H, hx and hy before all sixteen RNG calls gives frame 0x58 at object 5335 with match 447; adding
+`hz = hx + col` gives 0x5c at 5312; moving the RNG call inside the verts expression as
+`... + (f = (float)fcn()*g*jx) + f ...` gives 0x58 at 5360; and volatile hh, hx and hy gives 0x5c at 5856, over
+native's size. None reached 0x60 and every one lost match, so all were reverted. Two further differences were
+recorded that bear on the same region: native emits the record-init loop as direct stores at material offset +0xbc
+over eight strides of 0x34, where our source walks a RegionRecord pointer from +0xa0, and native's memset form
+emits three rep-stos stages against our two. Both change register pressure in the region that owns native's -0x58
+and -0x5c slots, so the next lever is to reproduce the region-init and scan expression shapes, namely the memset
+length temporaries, the direct material-field stores and `off` held in a slot, rather than forcing the emission
+temporaries. Backups in .scratch/goldtl-0043c640/ with v4-hoist.c, v5-comma.c and v6-volatile.c.
