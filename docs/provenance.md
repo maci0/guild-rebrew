@@ -19664,3 +19664,19 @@ against ours v30 at 0x18 and v29 at 0x1c, and declaration permutations including
 order are byte-identical; fixing the reference's two-block failure split may be a prerequisite for that swap since
 the current fold decides which failure block owns the shared call. Backups and findings in .scratch/row5744c0/
 with kept_succ7_1793654387.c and backup_tailpre_1793654100.c.
+
+## 2026-11-03 — inventory extents repaired where the reference tails are padding
+
+Two extents were wrong because the inventory includes alignment nops that follow the function. Disassembly of
+the reference ends 0x561380's code at 0x562184 with twelve 0x90 bytes from 0x562184 to 0x56218f, so its code
+extent is 3588 rather than the inventoried 3600, and it ends 0x571870's code at 0x572758 with eight 0x90 bytes
+from 0x572758 to 0x57275f, so that extent is 3816 rather than 3824. Both were repaired through
+`rebrew binary repair-extents 0x561380=3588 0x571870=3816 --reason ... --sync-rows` after a preview digest of
+cbd7f888f18a5d0d22da4c702e79fc7c4e570b803a0c14b0c605252db04caa81, which updated the inventory rows and synced the
+function row sizes. The effect is direct and large: 0x571870 now measures 2757 matching bytes at object 3816
+with size 3816, so its verdict moves from SIZE_MISMATCH to NEAR_MATCHING because the size is exact, and 0x561380
+measures 1244 at object 3592 against the corrected 3588, so it is four bytes over its code extent instead of
+eight. This also explains the earlier confusion where a row's object could never reach the inventoried size: the
+object extent excludes trailing section padding that the inventory counts. Rows whose extent has not been
+audited keep their inventoried sizes, and the same repair is the right step for any other row whose reference
+tail is alignment padding.

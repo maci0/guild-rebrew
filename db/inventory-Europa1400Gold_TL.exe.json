@@ -79896,7 +79896,7 @@
   },
   {
     "va": 5641088,
-    "size": 3600,
+    "size": 3588,
     "name": "fcn.00561380",
     "extent_history": [
       {
@@ -79919,6 +79919,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726380+00:00"
+      },
+      {
+        "old_size": 3600,
+        "new_size": 3588,
+        "reason": "reviewed tail padding: native disassembly shows 12 trailing 0x90 nops at 0x562184..0x56218f and 8 at 0x572758..0x57275f, so the code extents are 0xE04 and 0xEE8",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:24:04.692513+00:00"
       }
     ]
   },
@@ -81990,7 +81997,7 @@
   },
   {
     "va": 5707888,
-    "size": 3824,
+    "size": 3816,
     "name": "he_RunProduktion",
     "extent_history": [
       {
@@ -81999,6 +82006,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726467+00:00"
+      },
+      {
+        "old_size": 3824,
+        "new_size": 3816,
+        "reason": "reviewed tail padding: native disassembly shows 12 trailing 0x90 nops at 0x562184..0x56218f and 8 at 0x572758..0x57275f, so the code extents are 0xE04 and 0xEE8",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:24:04.692537+00:00"
       }
     ]
   },
