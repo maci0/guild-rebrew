@@ -56,7 +56,7 @@ int __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00561380(void *a0)
 {
 	unsigned char *p;
-	char text[0x3f0];
+	char text[0x400];
 	unsigned char msg[0xf8];
 	float pos[8];
 
@@ -237,11 +237,11 @@ void __cdecl fcn_00561380(void *a0)
 				v22 = v22 + 0x87 * 4;
 			} while ((int)v22 < (int)0x85a0a4);
 			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
-			*(int *)(p + 0x52) = g_7f4c00;
-			*(int *)(p + 0x56) = g_7f4c04;
-			*(int *)(p + 0x5a) = g_7f4c08;
-			*(unsigned short *)(p + 0x5e) = g_7f4c0c;
-			fcn_00500bb0((void *)(p + 0x52), 0, 10, 0);
+			*(int *)q = g_7f4c00;
+			*(int *)(q + 4) = g_7f4c04;
+			*(int *)(q + 8) = g_7f4c08;
+			*(unsigned short *)(q + 0xc) = g_7f4c0c;
+			fcn_00500bb0(q, 0, 10, 0);
 			return;
 		label_561a7a:
 			recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);

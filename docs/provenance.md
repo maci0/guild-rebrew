@@ -19053,3 +19053,26 @@ strcpy is the byte loop, and native's sites at 0x56a993 and 0x56ac1c are strcat 
 it; writing the 0x19e6 copy as strcat measures 317 at object 3612 but moves the frame to 0x73c, and the
 flag-arm copy alone gives 291 at 3612. A `goto after;` at the end of the flag==0 arm drops the frame to 0x730
 at match 272. Current source at .scratch/569ff0/KEEP_306.c and candA_keep.c with notes in NOTES.md.
+
+## 2026-11-03 — inventory switch frame recovered
+
+`0x561380` 584 to 692 with the object at 3452, 48 relocations, lint clean and the frame now `sub esp,0x5e4`,
+exactly native. The frame model was corrected: the 0x10 is not a bottom hole but sits at the TOP of the
+physical frame as the declared tail of `text`, with `char text[0x400]` declared and 0x3f0 used, which is the
+project convention in twenty other functions. With that plus three four-byte slots every base matches native
+exactly (pos 0xc, names 0x2c, 0x6c and 0xac, msg 0xec, text 0x1e4, frame 0x5e4). The steps were measured
+separately with the canonical driver: the baseline with `text[0x3f0]` and the case-4 tail via
+`(void*)(p+0x52)` gives 0x5d0, using q in that tail alone gives 0x5d4 as the third slot appears, `text[0x400]`
+alone gives 0x5e0 as the hole-only shape, and both together give 0x5e4. The case-4 tail must use `q` rather
+than `(void*)(p+0x52)` because native reloads slot 0 into eax at 0x561a31 and uses it for the p+0x52 stores
+and the fcn_00500bb0(q, ...) call. The premise that the body matched instruction for instruction once the
+frame agreed is false: the body is about 44 instructions short of native's 1087. Three gaps identified by
+normalized alignment. 0x561d01..0x561d3f is a missing pos[8] initialiser with the values -243, -90, 190, 0,
+-50, 0, 38 and 0 as floats plus `v24 = 1.0f` and a v10 store, since the four float constants 0xc3730000,
+0xc2b40000, 0x433e0000 and 0xc2480000 are absent from our object. The case 3 and 7 region
+0x5615db..0x561635 is absent. And case 5's scope differs because native tests `cmpb p+0xc2; jae` BEFORE the
+names initialiser, so that if belongs outside the block declaring `names[3][64]`. A minor blocker remains in
+the two-slot order: native has dist and v24 at 0x4 with recB and color at 0x8, while every build we produce
+gives recB and color at 0x4 and dist with v24 at 0x8 for about eight displacement bytes; that may be a
+source-scope artifact of the missing structure and is to be re-measured after the blocks are written.
+Backups and notes in .scratch/r561380/ (v0_584.c, kept_v3_frame0x5e4.c, v2 to v6, NOTES.md).
