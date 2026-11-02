@@ -422816,13 +422816,13 @@ name = "fcn_005b6300"
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_005b6300.c"
 symbol = "_fcn_005b6300"
 kind = "FUNCTION"
-updated_by = "fix-sizes"
-updated_at = "2026-10-29T11:14:46+00:00"
-status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-11-02T10:10:56+00:00"
+status = "STUB"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005b6300".verification]
-source_hash = "a2d4a9c06ed83d6c4f89cbcfa14317384b757936a208e60170dc30c6e49fcc22"
+source_hash = "06d12a7582bfe22404bdf9f60a3d2ca96ccc22a01e842cbb94f5f05064a1af69"
 reference_hash = "05c27e1cb379fe3c2985c6425c599eaec9e29353b53ca8f223826984176a77c5"
 reference_size = "5499"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -422833,15 +422833,21 @@ module = "GOLDTL"
 va = "0x5b6300"
 context_hash = ""
 defines = "[]"
-input_hash = "0aa886d57804bc04d12a7b9f8ca416053a28a91f26e6d7b675e62dc631668526"
-writer = "verify"
-status = "SIZE_MISMATCH"
-measured_at = "2026-11-02T07:45:57+00:00"
+input_hash = "628400a0c2a2e3109ce9e6de0464acc3f510ccf8f0753a128f733b6cbea6946b"
+status = "STUB"
+writer = "test"
+measured_at = "2026-11-02T10:10:56+00:00"
 
 [["GOLDTL.0x005b6300".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-20T21:38:02.073420+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005b6300".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "STUB"
+changed_at = "2026-11-02T10:10:56.423591+00:00"
 updated_by = "test"
 ["GOLD.0x005aacd0"]
 size = 9680

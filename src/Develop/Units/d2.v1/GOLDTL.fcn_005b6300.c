@@ -156,7 +156,7 @@ int __cdecl fcn_004c53b0(void);
 int __cdecl fcn_00505d00(int, void*);
 int __cdecl fcn_005b5750(void);
 int __cdecl fcn_0050b750(int, int);
-int __cdecl fcn_0050b8d0(int, int, int, int);
+float __cdecl fcn_0050b8d0(int, int, int, int);
 int __cdecl fcn_00526010(int, int);
 int __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl fcn_005463a0(int, int, int, int, int);
@@ -422,7 +422,8 @@ L69b6:
 L6cb7:
 		if (G(0x100f1dc) == -1)
 			goto L6fa2;
-		if (G(0x67d370) == f.v48 && f.v48 != -1
+		c = G(0x67d370);
+		if (c == f.v48 && f.v48 != -1
 			&& *(signed char*) 0x7747b0 >= 0) {
 			e = (char*) f.v2c;
 			if (e != 0 && *(char*) (e + 8) != 0)
@@ -461,7 +462,7 @@ L6e44:
 			f.sel.a20 = 2;
 			goto L6f92;
 		}
-		if (G(0x67d370) != f.v34 || f.sel.a08 == 0)
+		if (c != f.v34 || f.sel.a08 == 0)
 			goto L6fa2;
 		if (fcn_00526120(*(char**) 0x14abbf8, 1) == 0)
 			goto L6fa2;
@@ -649,10 +650,12 @@ L6fa2:
 				x = fcn_0050b8d0(0, -1, *a1, (int) e);
 				if (*(char*) (e + 9)) {
 					fcn_0051af00(f.txt9fc, 0x1a29,
-						*(unsigned short*) e, f.row[0x22f] + 0x230);
+						*(unsigned short*) e,
+						(unsigned char) f.row[0x22f] + 0x230);
 				} else {
 					fcn_0051af00(f.txt9fc, 0x1a28,
-						*(unsigned short*) e, f.row[0x22f] + 0x20d);
+						*(unsigned short*) e,
+						(unsigned char) f.row[0x22f] + 0x20d);
 				}
 				if (fcn_00526120(f.txt9fc, 0) == 0)
 					goto L77c4;

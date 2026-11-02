@@ -15992,3 +15992,33 @@ so the object emits `lea`/`mov` instead of rescaling the index twice. Also noted
 pushes four arguments to fcn_004e4b40 at 0x4db17b while our source passes five, which is an
 open question, and the pick loop's max/best/tie values stay in fr slots here where native
 keeps them in edi/esi/edx.
+
+## 2026-11-02 — 0x5B6300 float return, 0x67d370 pair, byte casts
+
+Three edits to `GOLDTL.fcn_005b6300.c`, taking the positional match from 562 to 644 with the
+object at the native 5499 bytes and the chkstk frame still 0x1a4c. First, `fcn_0050b8d0` is
+declared `float`: native calls it at 0x5b7654/0x5b7675 and then converts the return with
+`fild`/`fmul` straight from st(0), so the value never lands in a stack temp, and
+`GOLDTL.fcn_00507910.c`, `fcn_0050c1b0.c` and `GOLDTL.fcn_005422c0.c` already declare the same
+signature. Second, the 0x67d370 read at 0x5b6cd6 is reused at 0x5b6e80 (native keeps it in ecx
+across the `c == f.v48` miss path), so one `c = G(0x67d370)` now feeds both the f.v48 and
+f.v34 tests. Third, both `f.row[0x22f]` arm values take `(unsigned char)`, matching the native
+`mov cl` zero-extension. The `_ftol` region at 0x5b7634..0x5b76e8 is not landed: adding it
+(the native `(int)(fcn_0050b8d0(...) * ((double)*(int*)(a1+0x3d) * g_6640e8))` idiom plus the
+two trailing varargs) pushes MSVC 6 to pin `a1` in a callee-saved register and spill the
+arr6a8 loop counter to a new slot, so chkstk becomes 0x1a50. Measured: with the spill the match
+reads 821; forcing the frame back to 0x1a4c by restructuring that loop drops it to 522-613.
+
+## 2026-11-02 — dialog commit float return and cached row id
+
+`0x5B6300` 562 to 644 with the object exactly 5499 and chkstk still 0x1a4c. Three edits:
+`fcn_0050b8d0` is declared `float` (native converts its return straight from st(0) with
+fild/fmul/fmul p and no stack temp; three other project TUs already declare it float), the
+0x67d370 value is cached once for the f.v48 / f.v34 pair because native keeps it in ecx
+between the 0x5b6cd6 load and the 0x5b6e80 compare with no call in between, and both
+`f.row[0x22f]` arm values take `(unsigned char)` for native's `mov cl` zero-extend. Region 1
+(the _ftol idiom) stays out: the ftol-after-call form pins a1 in ebp so the arr6a8 loop's
+counter cannot fit and spills at offset 0, making chkstk 0x1a50; the correlation is exact
+(0x1a50 means zero a1 reloads, 0x1a4c means 12 to 14 reloads), and every frame-restoring
+variant lost more than it gained. Note the verdict now reads STUB because the match
+percentage sits below the classifier's threshold at this size.
