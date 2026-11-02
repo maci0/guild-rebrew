@@ -16680,3 +16680,72 @@ never performs. The volatile set is now o, id, n and g_6628a0, each removal meas
 with divergence back at 0x32; native does re-read g_6628a0 at 0x1c9/0x1ef). Recorded nuance: the
 size now agrees while native's 0x104b loop2 exclusion scans are still absent, so the compensating
 excess is spread reload drift rather than a block, and adding 0x104b now would overshoot.
+
+## 2026-11-02 — 0x4DCF50 cleanup semantics settled, wrong verdict handle pair corrected
+
+The cleanup ladder was read from the raw listing with the frame solver
+(`.scratch/4dcf50/frame.py`, `slotdump.py`) instead of inferred: native
+releases `msg.hnd[1]`, `msg.hnd[2]` and `msg.hnd[5]` from their own slots,
+then tests `msg.hnd[0]` (S=0x90) and releases the `msg.hnd[5]` value still
+live in esi (native 0x4df17b loads S=0xa4, 0x4df18f tests S=0x90 and pushes
+esi). The eight handle words are index-linear from S=0x90, confirmed by the
+PROZESS_5 creation stores at S=0xa0/0x9c/0x94/0x90.
+
+The guilty-verdict handle pair was attached to the wrong files. Native
+creates SCHULDIG first (0x4deb5b, S=0x14) and STRAFEN second (0x4deb6e,
+S=0x10); the two `_PROZESS_7_SCHULDIG` calls load S=0x14 and the
+`_PROZESS_7_STRAFEN` call loads S=0x10. The source had `hStrafe` (used
+with `_PROZESS_7_SCHULDIG`) bound to STRAFEN.sbf and `h0` bound to
+SCHULDIG.sbf. Swapped the two creation strings.
+
+Evidence: native listing `rebrew binary asm show 0x004df150 --size 352`,
+slot map via `slotdump.py nat_full.json`; object and match via
+`rebrew test src/Develop/Units/d2.v1/GOLDTL.fcn_004dcf50.c --va
+0x004dcf50 --size 8798 --no-promote`. Result: STUB 1982/8798, frame
+0x760, 153/153 native slots, unchanged from the restore point except the
+corrected strings; the same-size positional score does not move because
+the two pushed addresses are relocations.
+
+Rejected after measurement, all reverted and recorded in
+`.scratch/4dcf50/findings.md`: native arm order for the pad[7] and
+verdict if/else (8789 to 8800, match 1645 to 1685), the three native
+`sete;and reg,1` widenings (+8), the guilty creation move (-4), and the
+cleanup release-argument fix (+2, 8800/1947; no 2-byte compensation
+exists in the tail, so the 8798 object target and that fix conflict).
+
+## 2026-11-02 - fcn_004d6170 loop-form reload
+
+Reloaded the fourth flag test from `self[0x7c]` instead of the cached
+`flags` local. The native body loads `[self+0x7c]` for the branch tests
+(`mov cl,[ebx+0x7c]` at 0x4d638e, `mov al,[ebx+0x7c]` at 0x4d6423, then
+`mov al,[edx+0x7c]` before the 0x4d667b compare), so the reload is the
+original shape and the semantics are unchanged.
+
+Evidence: native listing `rebrew binary asm show 0x004d6170 --size 4923`;
+object and match via `rebrew test src/Develop/Units/d2.v1/GOLDTL.fcn_004d6170.c
+--va 0x004d6170 --size 4923 --no-promote`. Object size 4918 (five under)
+before the edit, 4923 after; masked match 924 to 967; first mismatch
+unchanged at offset 24; frame 0x1124 and prologue sequence held.
+
+Slot permutation not achieved. Declaration permutations of mode/side/rec,
+`unsigned int`/`long` mode, reversed `mode = 0; rec = 0;`, and the
+assignment-in-condition reload form all produced byte-identical output.
+Mode stays at `[esp+0x18]` against native `[esp+0x1c]` and rec at
+`[esp+0x24]` against native `[esp+0x14]`, so the two trailing stores still
+differ at offset 24 and the remaining 16-byte frame shift (struct base
+0x134 against native 0x124) is register-allocation driven. Kept source:
+`.scratch/bak/f0.kept4923.c`; prior state `.scratch/bak/f0.kept4918.c`.
+
+## 2026-11-02 — inventory dialog reaches exact size
+
+`0x4D6170` object is now exactly 4923, the native size, with match 967 against 924 and the frame
+0x1124 and prologue sequence held; the first mismatch stays at offset 24. One line did it: the
+fourth flag branch reloads the byte (`self[0x7c] != 0`) instead of testing the cached `flags`,
+which is semantically identical and native-faithful since native reloads [self+0x7c] for all
+three flag tests (0x4d638e `mov cl`, 0x4d6423 `mov al`, 0x4d667b `mov al`). The five bytes come
+exactly from the loop and branch region with no offsets removed. The slot attack is closed:
+declaration permutations (rec first, mode after pointers, mode last), unsigned or long mode,
+reversed `mode=0; rec=0;`, and `(flags = (unsigned char) self[0x7c])` all produce byte-identical
+output, and address-taking mode was already byte-neutral, so the remaining 16-byte frame shift
+(struct base 0x134 against native 0x124, mode at [esp+0x18] against [esp+0x1c], rec at
+[esp+0x24] against [esp+0x14]) is register-allocation output rather than a source lever.

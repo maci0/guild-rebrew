@@ -406,7 +406,7 @@ reduce:
 			}
 			goto sync;
 		}
-	} else if (flags != 0 && side == g_772e9c && g_772e9c[2] != 6 && g_772e9c[2] != 7) {
+	} else if (self[0x7c] != 0 && side == g_772e9c && g_772e9c[2] != 6 && g_772e9c[2] != 7) {
 		i = fcn_00507910((unsigned char) *ent);
 		if (gm_CheckStatLevel(*(unsigned short*) g_772e9c, i) == 0 || *ent == 0xd || *ent == 0xc || *ent == 0xb) {
 			mask = 0xffff;

@@ -425188,15 +425188,15 @@ measured_at = "2026-10-22T08:35:51+00:00"
 size = 4923
 note = "Goal72 inferred role: Combat outcome/results UI and post-combat settlement. Counterpart GOLD.0x004d4d70 supported by full native structure, resources and callers, not a compiled shared-provider claim. See .scratch/goal72/large/REPORT.md and manifest.json. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
 name = "fcn_004d6170"
-updated_by = "fix-sizes"
-updated_at = "2026-10-29T11:14:46+00:00"
+updated_by = "test"
+updated_at = "2026-11-02T12:25:29+00:00"
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_004d6170.c"
 symbol = "_fcn_004d6170"
 kind = "FUNCTION"
-status = "SIZE_MISMATCH"
+status = "STUB"
 
 ["GOLDTL.0x004d6170".verification]
-source_hash = "02b782cef9b5945249a15b45387c3d2f75e38a4545564c1ad62f181a4c5a2789"
+source_hash = "3b877d64a97a74d6623d07c432eb3a5ae7e73d631c7da031d35515e20154ced1"
 reference_hash = "14725d25255807ed54f0a178341a25e1afcef429a32775fbec3f343ee0e45870"
 reference_size = "4923"
 headers_hash = "715e465ca14c6143fd5b6ea46de554ac822b0104969453b838363aefd91f2b60"
@@ -425207,10 +425207,17 @@ module = "GOLDTL"
 va = "0x4d6170"
 context_hash = ""
 defines = "[]"
-input_hash = "71b8018f81cec1a249bf9d0f6aefb9eb5bef28c18368b1b1f0fa47529735350b"
-status = "SIZE_MISMATCH"
+input_hash = "452999c01367d05fcee8d219dc3db9d47a2816dc3c9f22d114c6b0aa20e86571"
+status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T12:08:46+00:00"
+measured_at = "2026-11-02T12:25:29+00:00"
+
+
+[["GOLDTL.0x004d6170".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "STUB"
+changed_at = "2026-11-02T12:25:29.448776+00:00"
+updated_by = "test"
 ["GOLD.0x004d4d70"]
 size = 4915
 note = "Goal72 inferred role: Combat outcome/results UI and post-combat settlement. Counterpart GOLDTL.0x004d6170 supported by full native structure, resources and callers, not a compiled shared-provider claim. See .scratch/goal72/large/REPORT.md and manifest.json. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
@@ -587328,7 +587335,7 @@ status = "STUB"
 blocker = "frame wall: native 0x760 vs honest 0x6b4; region L0x660..0x75f has no reference, no address-take and no callee extent (387 CFG-resolved esp refs, 345 call sites checked); body 2246/2340 instructions transcribed"
 
 ["GOLDTL.0x004dcf50".verification]
-source_hash = "b9be62982beaaf4ebb7e92740a9d39ee7cfe6fe1682786c768eb85c68df52b4d"
+source_hash = "2ae289fb5662e679123b79564d2cbd21f4d9a11eaeee9090b83eae2bddd71216"
 reference_hash = "de5919be9c5674c24e6f180f5ed469ce11ffc23f5f03f1697c4d3e4d9550ef64"
 reference_size = "8798"
 headers_hash = "153434ce6fd0c7855c8d334a0f472f0c3850b3888e9c2366d6eddcdb5c286398"
@@ -587339,10 +587346,10 @@ module = "GOLDTL"
 va = "0x4dcf50"
 context_hash = ""
 defines = "[]"
-input_hash = "774b5e0e5034c73bddf1cbee544e9eb1013df986ecae2e40d2bc1aa6f9b3fd4d"
+input_hash = "d6c4df3cb2bacd2e97e6459204724fb21a9b5540a1e15a0eafe629ef70bb9e5f"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T11:20:19+00:00"
+measured_at = "2026-11-02T12:24:29+00:00"
 
 [["GOLDTL.0x004dcf50".status_history]]
 old_status = "STUB"
