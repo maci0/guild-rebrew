@@ -15760,3 +15760,35 @@ sites already match native site for site, including `*(int*)(a1 + 0x5d)`; the ex
 0x5bbdf3/0x5bbdf7 is an if/else fallthrough inversion at 0x5bbde2. Remaining windows:
 472 at 0x5bcb04, 379/353 near 0x5bd630, 202 at 0x5bbc64, 186/179 near 0x5bc870, 152 at
 0x5bac3b, and 137/90 at 0x5bbdf7/0x5bbdf3.
+
+## 2026-11-02 — chapter 3 task graph body transcribed from the native listing
+
+`0x581E20` replaced its four-block sketch with the whole-body transcription: all 18
+`m_alloc` sites with their tags and sizes, the ten inlined `rep stos` clears as the same
+inline-assembly prelude the sibling `0x583330` uses, every node-header store in native
+order, the nine three-way float blocks selected on `g_1040494` (0x320, 0x400, else) and
+the shared free-and-return-0 fail path. Matched bytes move from 16 to 4025 of 5386; the
+object is 5442 bytes against native 5386. The first 0x888 bytes are byte-identical apart
+from the forward jump displacements, which cannot be right while the object is longer.
+Evidence: `rebrew binary asm show 0x00581e20 --size 5386 --json`,
+`rebrew test src/Develop/Units/m_alloc/GOLDTL.fcn_00581e20.c --va 0x00581e20 --size 5386
+--no-promote --json`. Remaining gaps are register homes, not missing transcription: native
+keeps the child pointer in ecx and materializes 35.0/71.0 in edx/edi where the literal
+form lets the compiler pick the opposite pair from 0x888; native re-zeros edi after the
+third clear where ours re-zeros ebx from 0xac6; and native hoists `mov edx,0x43340000`
+before the 0x320 compare at 0xb90 to cover two later else-body uses, while the literal
+form rematerializes per use and adds 48 instructions. Ledger command for the next pass:
+`.scratch/cmpall581.py` against the rebuilt object.
+
+## 2026-11-02 — allocator node walker rebuilt
+
+`0x581E20` 16 to 4025 of 5386 bytes (74.7 percent), object 5442. The whole body is
+transcribed: the prologue and frame, all 18 m_alloc sites with their native sizes and
+tags, ten inlined rep-stos clears written as the same inline-asm prelude the sibling
+0x583330 uses (MSVC 6 does not emit that prelude from memset), every node-header store in
+native order through both children, the nine three-way g_1040494 chains with the shared
+fail block, and the tail through fcn_004c3100 into 0x774a04. The first 0x888 bytes are
+byte-identical apart from forward jump displacements. The remaining 56 bytes and the
+alignment drift come from register homes: native hoists `mov edx,0x43340000` at 0xb90
+because the value is stored again in a later else body, while the literal form
+rematerializes it per use and emits 48 extra instructions.
