@@ -16779,3 +16779,25 @@ nine escaped never-used doubles for 148 filler bytes at 11 arguments per call, a
 remaining excess. VC6 still picks different array bases (sF4 0xbc against native 0x104, sD0 and
 sel coalesced at 0x74 against 0xd0 and 0x74, s84 0x8c against 0x84, s98 0xa4 against 0xa8), so the
 positional match now depends on the allocator's base choices rather than on statements.
+
+## 2026-11-02 — panel draw callback transcribed
+
+`0x467920` goes from 1 matching byte to 290 of 4699 with the object at 3429, and the frame is
+native: `sub esp,0x25c`, arg load `mov ecx,[esp+0x260]`, pushes ebx/ebp/esi/edi in native order,
+and the index math `shl 6 / sub / lea [eax+eax*2]`, with an equal prefix of 34 bytes. The frame
+comes out right because the local is one struct whose member offsets are the native offsets and
+the buffer's address escapes through sprintf, which is what makes the compiler emit the full
+`sub esp`; buf is 0x1f4 rather than 0x200 because the compiler spills three dwords after the
+struct, and the total with spills is 604. Transcribed in native order: the element fetch
+`(int*)(g_1015ea0 + a0*0x2f4)`, four fcn_0047b620 glyph lookups (indices 1, 0, 3, 6), the
+e[0x23..0x28] loads with the ratio `(float)e[0x27]/(float)(e[0x25]-e[0x24])` and both clamps
+against g_6628a8 and g_6628a0, the flag 0x02 bar block (rect via 0x47a040, fill loops
+0x47cbf0/0x47cba0 with g_102d020 counts and per-index glyph offsets, the e[0x4c] glyph-set
+switch, the flag 0x08 fill run, closing rects, 0x47bf80 quad plus 0x47b9a0 tint, 0x468c30 label
+extract, 0x472880 resource fetch, itoa, sprintf, 0x46b520 text width, 0x46bbc0 blits, 0x46bd20
+text run, icon selection through 0x67d370/e[0]/e[0x198]/g_100f1e8, the e[0x2ec]/e[0x2ed] flags,
+0x47ccd0 tick marks and the e[0x1d] clear), and the flag 0x01 block. All 18 callees resolve.
+Remaining: prologue scheduling (native `xor ebp,ebp` with a hoisted `push 1` before the two zero
+stores, ours picks edi for the zero and stores first), the 0x4681cc..0x468554 region and parts of
+the icon block transcribed only at block level, and per-block arithmetic detail such as tick
+spacing and text placement.
