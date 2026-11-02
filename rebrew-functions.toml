@@ -424478,11 +424478,11 @@ measured_at = "2026-10-22T08:35:51+00:00"
 
 ["GOLD.0x00401b90".binding_history.replacement]
 ["GOLDTL.0x005b88b0"]
-size = 5000
+size = 4297
 note = "Goal70 native-only role mapping: Building personnel / worker-slot book controller. Original identifier and source-unit placement remain unresolved; retain the address placeholder. Builds the Personalbuch_2/3/4 or Soeldnerbuch_1 book view for a supplied entity, creates up to12 worker-slot rows in0x5c-byte local records, refreshes assignments and worker controls, and sends packet-builder operations after selections. Calls the shared UI loop and restores UI state through an external tail service. Complete executable extent 4297 bytes; inventory span 4304 bytes, with alignment kept separate. Related Gold native body 0x5ad2a0 (4322 executable bytes) is supported by complete native/Kuna role comparison and paired resources; its source, full operands and selected provider remain unverified. Kuna follows the532ef0 shared tail and loses the alloca-probe stack frame, presenting18 apparent arguments; this is not an established native prototype. The catalog dossier also contains the next809-byte transport-cart dialog and its resource string; that next entry is excluded from this role. Stock LIBCMT miss is inconclusive for other libraries; partial FLIRT failure-helper collisions are rejected using the complete game/UI body. No C source, comparison verdict, storage owner or raw-link provider is registered. Evidence .scratch/goal70/no-source-large/manifest.json and REPORT.md; reviewed boundary repair is recorded separately."
 name = "fcn_005b88b0"
 updated_by = "test"
-updated_at = "2026-11-02T16:02:31+00:00"
+updated_at = "2026-11-02T16:05:05+00:00"
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_005b88b0.c"
 symbol = "_fcn_005b88b0"
 kind = "FUNCTION"
@@ -424491,8 +424491,8 @@ blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005b88b0".verification]
 source_hash = "5d8339844d40325bff99dbdea82a9dbc1a5ed7ff23103cdb3e99b9f90649d3f2"
-reference_hash = "476f4da174c1ae05bb83d7a035b68ea38704089cf752f9969d71e98aafad8ae3"
-reference_size = "5000"
+reference_hash = "63d7249a7f730318612a4f8d90b9e67a9e9198da7551b33faffd4458d5c8dde3"
+reference_size = "4297"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 compiler_hash = "7abcb079717a76f6d448fa4f910ea5f9116c386c77fd93b0df08395841ecd51f"
 toolchain = "(default)"
@@ -424501,10 +424501,10 @@ module = "GOLDTL"
 va = "0x5b88b0"
 context_hash = ""
 defines = "[]"
-input_hash = "7918198ae17e1d5425e46553855b0a3254eb81d7a22dad591ee1093df0274713"
+input_hash = "e354a554d1699b4de5fca999fbcf0312fe02846d4862aad448be36d8da4ec556"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T16:03:14+00:00"
+measured_at = "2026-11-02T16:05:19+00:00"
 
 [["GOLDTL.0x005b88b0".status_history]]
 old_status = "STUB"

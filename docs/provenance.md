@@ -17854,3 +17854,50 @@ qualifier is a layout lever rather than an attested original, and that is record
 disk: B7-safe-mid.c is statement-only with frame 0x438, text region 0x27c, hover 0x15f and match 302,
 and Vg-volidx-k.c reaches match 381 with a diverged text region around 0x2a4. The remaining deficit is
 the child-walk and label blocks, about 67 bytes at the hover start.
+
+## 2026-11-03 — trade dialog literal rows and faithful bar scale
+
+`0x5B88B0` keeps the faithful bar x87 sequence at match 214 with object 4314; the previous state without
+the scale was 4283 with match 323, and the scale is kept because it reproduces the native instruction
+sequence with the prologue intact. Three data rows were created through `rebrew data set --target
+Europa1400Gold_TL.exe` as compiler literals with type double, section .rdata, size 8 and a
+`link_symbol` of `__real@...`, values read from the reference image: `0x666088` `dbl_128_0` = 128.0
+(`__real@4060000000000000`), `0x662c38` `dbl_100_0` = 100.0 (`__real@4059000000000000`) and `0x665388`
+`dbl_0_00392156862745098` = 1.0/255.0 (`__real@3f70101010101010`). The bar scale is now
+`(int)((tv + dbl_128_0) * dbl_0_00392156862745098 * dbl_100_0)` with three extern double declarations,
+which emits mov/fild/fadd/fmul/fmul/__ftol as native without the frame-pointer preamble, keeping the
+prologue at `mov eax,0x1360`; the factor order is inverted on purpose because MSVC reverses fmul
+operands, and the bindings resolve to the three addresses with status CONFLICT only because the frame
+shift moves the bytes. Frame probes found no lever for the remaining eight bytes: address-taking hD or
+hE into a call, each of the 17 scalars as int[1], and an unread 8-byte memset buffer all stay at 0x1360,
+while a live `char pad[0x100]` gives 0x1460 and `textB[0x3f8]` gives 0x1358, so the immediate does track
+live bytes; the body keeps 13 dword values live at the peak where native keeps 15, because MSVC overlaps
+slots of locals with disjoint live ranges. Root cause of the size overage found: native calls 0x5b8760
+exactly once at 0x5b8dda while our source calls it twice, in the condition and again for the division;
+`.scratch/5b88b0/segments.py` anchors on resolved call symbols and shows 109 object segments against 107
+native with the drift starting there, and hoisting the call into the condition drops .text from 4320 to
+4288 (object 4287, match 192), so the duplicate call and recompute account for about 32 bytes, the same
+block the scale added. Native keeps the raw return and its quotient alive across the row loop, which is
+also the missing two live dwords for the 0x1368 frame.
+
+## 2026-11-03 — alloc spieler register colour bisect
+
+`0x50A7E0` keeps 741 at object 3854 with the slot map matching native; the bisect found the trigger for
+the EBX-versus-ESI colour difference is not any of the listed TL differences. The control (server text
+with extern globals) gives idx in ESI with frame 0x424, the reference row 0x50a7e0 gives idx in ESI with
+frame 0x428, and our TL source gives idx in EBX with the same 0x428 frame and the same home 0x28. All
+nine listed TL differences were applied individually and cumulatively (13 mutants) and every one keeps
+ESI, as do the unlisted TL-only blocks (the 0x10 block's fcn_004fdec0 store, the unconditional
+slot[0x54]=0x59a, the family-branch gm_GetEntityTableEntry patch with the 0x59a..0x5a1 free-slot scan,
+the tail random-name strncpy block and the memset fills). What does move the colour is spelling the large
+array globals as named extern arrays instead of absolute-address casts: the 0x869480+0x90e0a0 extern gives
+ESI with frame 0x42c, object 3849 and match 533; the 0x7f4ca0 extern gives ESI with home 0x1c, frame
+0x424, object 3917 and match 435; all three extern gives ESI with home 0x24, frame 0x428, object 3887 and
+match 475; and the canonical names g_7f4ca0/g_869480/g_90e0a0 keep the colour with match 419 and 492
+because the abs32 relocations stay unmasked. Every one breaks either the slot home or the frame and
+loses match against 741, so none was applied. Supporting fact: the reference folds `g_citizen_count--`
+to `dec dword ptr [0x773d70]`, which an absolute-address cast cannot produce because it compiles to
+load/dec/store, and wrapping the scalars as extern globals alone leaves idx in EBX while shrinking the
+object to 3823 with match 509. The colour is therefore a global allocator tie-break rather than a
+spelling effect, and our object is 18 bytes short of 3872, so the remaining missing code is the likelier
+thing to move it.

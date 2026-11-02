@@ -9,11 +9,10 @@
  * shared message loop. Every selection sends the packet-builder operations for
  * the clicked slot. Closes the window and hands the tail to fcn_00532ef0.
  *
- * Open gap: the bar value is passed unscaled. The reference scales it as
- * (value + d1) * d2 * d3 through the compiler-literal doubles 0x666088,
- * 0x662c38 and 0x665388; spelling that dereference in C forces an 8-byte
- * aligned EBP frame and moves the frame to 0x136c, so the form is parked
- * until those literal rows are registered. Evidence: .scratch/5b88b0/.
+ * Bar scale uses the compiler-literal doubles 0x666088 (128.0), 0x662c38
+ * (100.0) and 0x665388 (1.0/255.0) through named externs: the pointer-cast
+ * dereference forces an 8-byte aligned EBP frame and breaks the prologue.
+ * Remaining gap: the frame is 0x1360, not 0x1368. Evidence: .scratch/5b88b0/.
  */
 
 typedef struct
@@ -84,6 +83,9 @@ void* __cdecl fcn_005463a0(int, ...);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0050f950(int, int);
 void __cdecl fcn_0046f940(int, const char*);
+extern double dbl_128_0;
+extern double dbl_100_0;
+extern double dbl_0_00392156862745098;
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
@@ -493,7 +495,8 @@ after2:
 						    *(unsigned short*) 0x774970);
 						d2_SetElementValue(
 						    r->bar, 0, 0x64,
-						    tv);
+						    (int) ((tv + dbl_128_0) * dbl_0_00392156862745098
+						           * dbl_100_0));
 					}
 				} else if (p != 0 && p[0xac] == 0x13
 				           && *pIt != 0) {
