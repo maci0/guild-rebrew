@@ -37,8 +37,7 @@
  *  - g_868050 and g_90e094 appear as both char* and unsigned char*
  *    across files. unsigned char* is the majority form and is kept.
  *
- * Sample_99ec20 and g_99ec20[16] belong to client_types.h and are not
- * declared here: this header deliberately includes nothing yet.
+ * Sample_99ec20 and g_99ec20[16] are declared in client_types.h.
  */
 #ifndef CLIENT_DIALOG_HELPERS_H
 #define CLIENT_DIALOG_HELPERS_H
@@ -78,7 +77,7 @@ extern int g_14ce86c;
 
 /* Dialog busy flag written while a modal dialog runs.
  * Used by fcn_005a4bb0 and row 0x00589d00. */
-extern int g_774654;
+#include "client_dialog_state.h"
 
 /* Active player or team index byte. */
 extern unsigned char g_773d75;
@@ -93,7 +92,11 @@ extern int g_7f4c08;
 
 /* Unit type table, indexed by the type byte of an entity record and
  * walked with a 0x24d stride. GOLDTL.fcn_004a4bb0.c. */
+#if defined(REBREW_GOLD)
 extern unsigned char* lpGebaeudePROT;
+#else
+extern unsigned char* lpGebaeudePROT;
+#endif
 
 /* Entity record array walked with a 0xa9 stride (0xa900 bytes total).
  * GOLDTL.fcn_00497990.c and row 0x00498670. */

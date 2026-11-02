@@ -11,7 +11,7 @@ typedef struct
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_772514;
 extern char* g_6b7e94;
 extern char s_6ab6b8[];

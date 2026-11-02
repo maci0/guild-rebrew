@@ -1,7 +1,7 @@
 
 
 
-char* __cdecl fcn_004e6a30(int);
+char* __cdecl cut_FindCutsceneById(int);
 
 int __cdecl fcn_004cdcb0(char* a1, char* a2)
 {
@@ -12,7 +12,7 @@ int __cdecl fcn_004cdcb0(char* a1, char* a2)
 		a2[1] = 0;
 		*(int*) (a2 + 6) = 0;
 	}
-	p = fcn_004e6a30(*(int*) (a1 + 0x10));
+	p = cut_FindCutsceneById(*(int*) (a1 + 0x10));
 	if (p == 0) {
 		return 1;
 	}

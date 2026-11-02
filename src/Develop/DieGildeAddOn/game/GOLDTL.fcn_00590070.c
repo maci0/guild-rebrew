@@ -20,7 +20,7 @@ extern int g_772514;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_67d370;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_14b556c;
 
 int __cdecl fcn_00500e20(pos14_7f4c00*);
@@ -43,7 +43,7 @@ void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_0058ff60(char*, struct house*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 
 void __cdecl fcn_00590070(char* who)
 {
@@ -134,6 +134,6 @@ void __cdecl fcn_00590070(char* who)
 	}
 	fcn_00471e30(h);
 	fcn_0052a2d0();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 	fcn_00532ef0();
 }

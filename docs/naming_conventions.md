@@ -2711,3 +2711,49 @@ source comparisons and target-specific tests are in
 `.scratch/goal-lookup-split-20261031/`. The retained TL support helper keeps its
 two existing small-table calls. Its native identity is still unknown; naming
 its calls does not recover that body or establish table ownership.
+
+### Character queue-entry removal (2026-11-02)
+
+`ch_RemoveQueueEntry` is an inferred name for T&L `0x004050c0` / Gold
+`0x004047a0`. It follows the attested `ch_` queue naming used by
+`ch_GetFreeQueueEntry`; native code unlinks a queue entry and clears its
+0x194-byte record. The original spelling and exact original source unit are
+not established. The two client identities use one C definition. Evidence:
+`.scratch/counter-contract/{gold,tl}-queue-remove-native.json` and
+`queue-remove-rename-guarded-preview.json`.
+
+`ch_CancelActionQueue` is inferred for Gold `0x00405610` and T&L
+`0x00406120`. The function marks the current action for cancellation, removes
+its queued successors, and may request a standing animation. The `ch_` prefix
+is attested by neighboring character-action routines; the full spelling is not
+attested. Both targets use the shared `character.c` definition.
+
+`ch_ClearActionQueue` is inferred for Gold `0x00404810` and T&L
+`0x00405130`: it removes every action in a character's queue and frees the
+owned payload for action kind `0x2d`. The `ch_` prefix is attested by neighboring
+character-action routines; the full spelling is not attested. This is distinct
+from `ch_CancelActionQueue`, which marks the current action and removes its
+successors.
+
+`CH_ACTION` is an inferred name for the shared client action-queue record; the
+original type and member spellings are not attested. Its members use descriptive
+German names where the role is known and `unbekannt_<offset>` where it is not.
+
+`ch_ExecuteAction` is inferred for the per-character routine that calls the
+active action callback, advances its state and runs its completion callback.
+The original name is not attested.
+
+`ch_PlaceOnGround` is inferred for the character ground-placement routine that
+returns its map cell type; the original spelling is not attested.
+
+`ch_CancelActionQueueWithMotion` is an inferred name for the T&L-only
+cancellation variant that also clears an active motion for action kind 0x2e.
+The original spelling is not attested.
+
+`ch_ClearSitting` is inferred for the T&L character helper at 0x00406560 that
+clears the sitting flag and releases its associated seat animation. The original
+spelling is not attested.
+
+`cut_FreeAllCutscenes`, `cut_AddParticipant`, and `cut_RemoveParticipant` are
+inferred names for the adjacent cutscene-management routines. The `cut_` prefix
+is attested; the original helper spellings are not.

@@ -21,7 +21,7 @@ extern int g_14abad4;
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_005bdc30(int, Req*, int, void*, int);
 void __cdecl fcn_0052a2d0(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_005add40(void);
 
 void __cdecl fcn_005adfa0(int a)
@@ -35,5 +35,5 @@ void __cdecl fcn_005adfa0(int a)
 	fcn_0052a0c0(a, 0);
 	fcn_005bdc30(1, &req, g_14abad4, (void*) fcn_005add40, 0);
 	fcn_0052a2d0();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 }

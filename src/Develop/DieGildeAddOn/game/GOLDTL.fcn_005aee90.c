@@ -1,5 +1,5 @@
 extern char* g_aed32c;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);

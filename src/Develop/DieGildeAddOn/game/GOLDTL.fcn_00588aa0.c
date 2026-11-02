@@ -49,7 +49,7 @@ typedef struct {
 } Emitter;
 
 extern float g_662910;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 #include "GOLDTL.fcn_00588aa0_gconf.h"
 
 int __cdecl fcn_00471f80(int slot);

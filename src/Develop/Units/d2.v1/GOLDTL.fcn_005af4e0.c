@@ -22,7 +22,7 @@ int __cdecl fcn_00525fb0(char*);
 void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl fcn_005bdc30(int, Req*, int, void*, int);
 void __cdecl fcn_0052a2d0(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 int __cdecl ConfirmProductionSelection(int, char*);
 
 void __cdecl fcn_005af4e0(char* a)
@@ -42,5 +42,5 @@ void __cdecl fcn_005af4e0(char* a)
 	fcn_0052a0c0(a, 0);
 	fcn_005bdc30(1, &req, g_14abcc0, (void*) ConfirmProductionSelection, 0);
 	fcn_0052a2d0();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 }

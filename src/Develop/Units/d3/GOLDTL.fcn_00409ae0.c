@@ -63,7 +63,7 @@ int __cdecl fcn_00409ae0(char* ev, char* step)
 			m_FreeTracked(*(void**) (ev + 0xf4));
 			*(void**) (ev + 0xf4) = 0;
 		}
-		fcn_004050c0(ev);
+		ch_RemoveQueueEntry(ev);
 		return 0;
 	}
 	(*(struct anim_409ae0**) (obj + 0x70))->looping = 0;

@@ -17,7 +17,7 @@ extern int g_7e46ac;
 extern int g_772514;
 extern int g_14ce8e0;
 extern int g_14ce8d8;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_100f894;
 extern char* g_1015ea0;
 #include "client_types.h"

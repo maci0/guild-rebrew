@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #endif
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_004053a0(void*, int);
+#include "Develop/DieGildeAddOn/game/ch_ground.h"
 #ifdef REBREW_GOLD
 void __cdecl fcn_00453270(char*);
 #endif
@@ -80,7 +80,7 @@ void __cdecl ch_SetPosition(char* a1, float* a2, int flag)
 		fcn_00453270(*(char**) (a1 + 0x34));
 	}
 #endif
-	fcn_004053a0(a1, 0);
+	ch_PlaceOnGround(a1, 0);
 	if (*(int*) ((char*) a1 + 0x124) != 0) {
 		ch_UpdateAttachedModelPosition(a1, 0);
 #ifdef REBREW_GOLD

@@ -27,7 +27,7 @@ void __cdecl fcn_0058fb00(char* e)
 			q = *(char**) (p + 0x61);
 			if (q != 0) {
 				fcn_00458a10(q, q + 0x4c, pb);
-				if (fcn_00451840(pb, pa, 100.0f)) {
+				if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 					ok = 0;
 					break;
 				}
@@ -43,7 +43,7 @@ void __cdecl fcn_0058fb00(char* e)
 				q = *(char**) (p + 0x61);
 				if (q != 0) {
 					fcn_00458a10(q, q + 0x4c, pb);
-					if (fcn_00451840(pb, pa, 100.0f)) {
+					if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 						ok = 0;
 						goto done;
 					}

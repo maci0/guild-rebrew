@@ -45,7 +45,7 @@ void __cdecl fcn_004bc090(char* a1)
 			break;
 		b = ents[i];
 		fcn_00455350(*(int*) (b + 0x61), *(int*) (b + 0x61) + 0x4c, &pb);
-		if (b != chosen && fcn_00451840((float*) &pa, (float*) &pb, 6000.0f) != 0) {
+		if (b != chosen && CompareVector3WithinTolerance((float*) &pa, (float*) &pb, 6000.0f) != 0) {
 			pts[cnt++].x = pb.x;
 			pts[cnt++].y = pb.y;
 			pts[cnt++].z = pb.z;

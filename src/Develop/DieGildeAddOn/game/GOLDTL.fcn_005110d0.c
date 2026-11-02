@@ -25,7 +25,7 @@ int __cdecl fcn_004026f0(char* p);
 void __cdecl gv_Free3Fields(int);
 void __cdecl fcn_0045b290(int, int);
 char __cdecl fcn_00437ac0(char* scene, char* node, unsigned int flags, void (__cdecl* cb)(char*));
-int __cdecl fcn_00451840(float* a, float* b, float eps);
+int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
 void __cdecl ch_SetPosition(int, void*, int);
 char* __cdecl fcn_00407330(void);
@@ -88,7 +88,7 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 			for (i = 0x14d0020; i < 0x14d0c20; i += 4) {
 				v = *(int*) i;
 				if (v != 0 && *(int*) (v + 0x88) == obj * 0x3dc + 0x10432c0) {
-					if (fcn_00451840((float*) (v + 0x38), (float*) 0x662d70, 0.5f)) {
+					if (CompareVector3WithinTolerance((float*) (v + 0x38), (float*) 0x662d70, 0.5f)) {
 						if ((*(int*) (v + 0x124) != 0 && (obj = (int) fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER")) != 0) || (obj = (int) fcn_00407330()) != 0 || ((obj = (int) fcn_00445600(0, 0x100,
 						    0, "dummy_EINGANG")) != 0 || (obj = (int) fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER_ENTRY")) != 0)) {
 							fcn_00455350((char*) obj, (char*) (obj + 0x4c), (float*) pos);

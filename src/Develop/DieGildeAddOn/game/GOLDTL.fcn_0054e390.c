@@ -6,7 +6,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 extern int g_774800;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern double g_6640e8;
 extern double g_6629c8;
 extern double g_662c38;
@@ -18,7 +18,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl fcn_00502cd0(int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_SetupEntityQuery(char*);
-char* __cdecl fcn_004e6a30(int);
+char* __cdecl cut_FindCutsceneById(int);
 int __cdecl fcn_0050c710(char*, int, int);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004d5450(char*);
@@ -297,7 +297,7 @@ label_54e6a1:
 			int id;
 
 			id = *(int*) (e + 0xb8);
-			if (!fcn_004e6a30(id)) {
+			if (!cut_FindCutsceneById(id)) {
 				*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
 				fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
 				*(int*) (e + 0x70) = 1;

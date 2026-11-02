@@ -37,7 +37,6 @@ int __cdecl fcn_0042b810(char* text, int index);
 void __cdecl txt_ParseRandomText(char* s);
 int __cdecl fcn_0064d41a(char* dst, char* fmt, ...);
 char* __cdecl fcn_0064d1a0(char* s, int c);
-char* __cdecl fcn_0064d470(char* s, char* sub);
 char* __cdecl fcn_0064e790(char* s, int c);
 char* __cdecl fgets(char* buf, int n, FILE* f);
 char* __cdecl fcn_0064e2f9(char* path, char* mode);
@@ -160,10 +159,10 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 	for (;;) {
 		memset(line, 0, 0xc8);
 		fgets(line, 0xc8, fp);
-		if (fcn_0064d470(line, "//") != 0) {
+		if (strstr(line, "//") != 0) {
 			goto pass1_done;
 		}
-		p = (char*) fcn_0064d470(line, "#outputpath");
+		p = (char*) strstr(line, "#outputpath");
 		if (p != 0) {
 			p = (char*) fcn_0064e790(p, '"');
 			if (p == 0) {
@@ -176,7 +175,7 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 			*fcn_0064e790(p, '"') = 0;
 			strcpy(g_1052e00, p);
 		}
-		p = (char*) fcn_0064d470(line, "#headerfile");
+		p = (char*) strstr(line, "#headerfile");
 		if (p != 0) {
 			p = (char*) fcn_0064e790(p, '"');
 			if (p == 0) {
@@ -189,7 +188,7 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 			*fcn_0064e790(p, '"') = 0;
 			strcpy(g_1335000, p);
 		}
-		p = (char*) fcn_0064d470(line, "#include");
+		p = (char*) strstr(line, "#include");
 		if (p != 0) {
 			p = (char*) fcn_0064e790(p, '"');
 			if (p == 0) {
@@ -236,7 +235,7 @@ pass1_done:
 			}
 			v24++;
 			v20 = 0;
-			if (fcn_0064d470(line, "#define") != 0) {
+			if (strstr(line, "#define") != 0) {
 				k = strlen(line);
 				line[k - 1] = 0;
 				fcn_0064d41a(def[v48], "%s\n", line);
@@ -247,7 +246,7 @@ pass1_done:
 				v10 = strlen(line);
 			}
 			if (v20 != 0) {
-				if (fcn_0064e790(line, '"') == 0 && fcn_0064d470(line, "*/") != 0) {
+				if (fcn_0064e790(line, '"') == 0 && strstr(line, "*/") != 0) {
 					v20 = 0;
 				}
 				v10 = strlen(line);
@@ -279,23 +278,23 @@ pass1_done:
 						break;
 					}
 					fcn_0064d530(msg, line + v10, k);
-					p = (char*) fcn_0064d470(msg, "/*");
+					p = (char*) strstr(msg, "/*");
 					if (p != 0) {
 						v10 += k;
 						v14 += k;
 						while (p != 0) {
-							if (fcn_0064d470(msg, "*/") != 0 && fcn_0064d470(msg, "*/") < p) {
+							if (strstr(msg, "*/") != 0 && strstr(msg, "*/") < p) {
 								fcn_0064d41a(msg, "Syntax error in file %s in line %i: Missing '/*'", p, v24);
 								MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
 								break;
 							}
-							if (fcn_0064d470(msg, "*/") == 0) {
+							if (strstr(msg, "*/") == 0) {
 								fcn_0064d41a(msg, "Syntax error in file %s in line %i: Missing '*/'", p, v24);
 								MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
 								break;
 							}
-							memcpy(p, fcn_0064d470(msg, "*/") + 2, strlen(fcn_0064d470(msg, "*/") + 2));
-							p = (char*) fcn_0064d470(msg, "/*");
+							memcpy(p, strstr(msg, "*/") + 2, strlen(strstr(msg, "*/") + 2));
+							p = (char*) strstr(msg, "/*");
 						}
 						k = (int) strlen(msg);
 						if (strlen(&g_6b7fa0[g_6b7f98 * 0x1000]) + k > 0xfff) {
@@ -362,7 +361,7 @@ pass1_done:
 				case '/':
 					if (line[v10 + 1] == '*') {
 						v20++;
-						if (fcn_0064d470(line + v10 + 1, "*/") != 0) {
+						if (strstr(line + v10 + 1, "*/") != 0) {
 							v20--;
 						}
 					}

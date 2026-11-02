@@ -23,7 +23,7 @@ extern char s_6a2f5c[];
 extern char s_6acd38[];
 extern int g_100f1dc;
 extern int g_67d370;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_14ce8e0;
 
 int __cdecl fcn_005d75d0(Ent*, Ent*, Ent*);

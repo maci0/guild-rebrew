@@ -16,7 +16,7 @@ extern unsigned short* g_772e98;
 void* __cdecl fcn_004ce610(char*);
 float __cdecl fcn_004ff040(char*);
 void __cdecl fcn_00417b50(int, int, float, float, float, float);
-void __cdecl fcn_00406120(char*);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 int __cdecl fcn_004d4700(void);
 char* __cdecl fcn_0040c230(char*, int (__cdecl*)(void), int, int, int);
 void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
@@ -37,7 +37,7 @@ int __cdecl fcn_004d4790(char* e)
 	fcn_004ce610(e);
 	if (fcn_004ff040(e) < 0.05) {
 		fcn_00417b50(*(int*) (*(char**) (e + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
-		fcn_00406120(*(char**) (e + 0x184));
+		ch_CancelActionQueue(*(char**) (e + 0x184));
 		p = fcn_0040c230(*(char**) (e + 0x184), fcn_004d4700, 0x14, 0x36, 1);
 		strcpy(p + 0xf0, "kampf/todumfallen");
 		e[8] = 0;

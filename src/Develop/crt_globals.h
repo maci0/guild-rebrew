@@ -7,13 +7,6 @@
 
 #include "rebrew_types.h"
 
-/* Verified stock _strupr aliases: TL 0x66080a (MT strupr.obj),
- * Gold 0x5eaad6 (ST strupr.obj). Full native bodies identify the member.
- * Use the SDK declaration; these macros allocate no runtime code/data. */
-#include <string.h>
-#define fcn_0066080a _strupr
-#define fcn_005eaad6 _strupr
-
 extern void * _FPinit; /* 0x100317D8, first init fnptr */
 extern char g_lock_stream_table; /* Legacy one-byte view at _iob[0] (0x100317f8); stock FILE[20] owns storage. */
 extern struct rterr_entry g_rterrlist[18]; /* 0x10033EF0, _NMSG_WRITE runtime-error table (0x1001fe31) */

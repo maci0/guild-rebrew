@@ -29,7 +29,7 @@ typedef struct {
 
 extern Rec2d_9a3800 g_9a3800[512];
 extern Pair_99f800 g_99f800[0x800];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 
 int __cdecl FindStraftatIndexById(int key);

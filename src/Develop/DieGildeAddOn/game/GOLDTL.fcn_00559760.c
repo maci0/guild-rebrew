@@ -24,7 +24,7 @@ typedef struct F8 {
 extern int g_7e4538;
 extern int g_7e453c;
 extern unsigned short g_7f4c04;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudeINST;
 extern int g_6643d8[];

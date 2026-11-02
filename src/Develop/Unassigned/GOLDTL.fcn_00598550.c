@@ -22,7 +22,7 @@ char __cdecl fcn_00598550(char* object, void* context)
 #else
 		fcn_00455350(object, (float*) (object + 0x4c), position);
 #endif
-		if (fcn_00451840(result->position, position, 100.0f)) {
+		if (CompareVector3WithinTolerance(result->position, position, 100.0f)) {
 			result->node = object;
 			name = strstr(object, "bk_");
 			if (name != 0) {

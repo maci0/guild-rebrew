@@ -11,7 +11,7 @@ typedef struct
 
 extern char* lpObjektePROT;
 extern unsigned char* g_7746c8;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_774650;
 extern int g_774658;
 extern int g_7e2700;

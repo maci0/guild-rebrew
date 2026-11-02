@@ -15,7 +15,7 @@ extern void __cdecl fcn_004c5b50(int, int, int, int);
 extern int __cdecl fcn_004c5290(int, int, int);
 extern void __cdecl fcn_004c5420(int, int, int, int, int);
 extern int __cdecl fcn_004c5620(int, char *);
-extern int __cdecl fcn_00451840(float *, float *, float);
+extern int __cdecl CompareVector3WithinTolerance(float *, float *, float);
 extern char *__cdecl fcn_005049a0(unsigned char *);
 extern void __cdecl io_FormatTextBuffer(char *, int, ...);
 extern void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int,
@@ -118,7 +118,7 @@ void __cdecl he_TransportStadtStadt(char *v2)
 	if (*(int *)(v6 + 0x128))
 		return;
 	v8 = *(char **)(v6 + 0x34);
-	if (!fcn_00451840((float *)(v8 + 0x4c), (float *)(v2 + 0xd8),
+	if (!CompareVector3WithinTolerance((float *)(v8 + 0x4c), (float *)(v2 + 0xd8),
 			  300.0f) &&
 	    *(int *)(v2 + 0xd4) <= 6)
 		return;
@@ -156,7 +156,7 @@ void __cdecl he_TransportStadtStadt(char *v2)
 	*(int *)(v2 + 0xc4) = *(int *)(v2 + 0xb4);
 	*(int *)(v2 + 0x84) = fcn_004c5620(3, v2);
 	if (!*(int *)(v6 + 0x128) && *(int *)(v2 + 0xd4) > 6 &&
-	    !fcn_00451840((float *)(*(int *)(v6 + 0x34) + 0x4c),
+	    !CompareVector3WithinTolerance((float *)(*(int *)(v6 + 0x34) + 0x4c),
 			  (float *)(v2 + 0xd8), 100.0f))
 		sprintf(l_msg, (char *)0x6a6380,
 			*(int *)(0x14a6558 + *(unsigned char *)v5 * 0x38));

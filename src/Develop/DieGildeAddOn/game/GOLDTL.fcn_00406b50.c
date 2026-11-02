@@ -18,7 +18,7 @@ void __cdecl ch_DroppingObject(char* ev)
 	obj = *(char**) (ev + 0x14);
 	if (*(int*) (ev + 0xc) == 0) {
 		if (*(int*) (obj + 0x64) == 0) {
-			fcn_004050c0(ev);
+			ch_RemoveQueueEntry(ev);
 			return;
 		}
 		if (ev[0xf0] != 0) {
@@ -28,7 +28,7 @@ void __cdecl ch_DroppingObject(char* ev)
 			return;
 		}
 		fcn_00407800(*(char**) (ev + 0x14), *(int*) (ev + 0x38), 0);
-		fcn_004050c0(ev);
+		ch_RemoveQueueEntry(ev);
 		return;
 	}
 	if (*(int*) (obj + 0x80) != 0) {
@@ -44,6 +44,6 @@ void __cdecl ch_DroppingObject(char* ev)
 			sprintf(msg, "ch_DroppingObject(): object not dropped yet (should be in frame:%i)!", *(int*) (ev + 0x30));
 		}
 		ch_CheckAniMorph(obj);
-		fcn_004050c0(ev);
+		ch_RemoveQueueEntry(ev);
 	}
 }

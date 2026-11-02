@@ -4,13 +4,13 @@ typedef struct VFS_DIR VFS_DIR;
 
 extern const char g_file_extension_names[];
 
-char* __cdecl fcn_0042e520(char*);
+char* __cdecl vfs_NormalizeCase(char*);
 void __cdecl fcn_0042e540(char*);
 int __cdecl fcn_0042e4d0(const char*, const char*);
 VFS_DIR* __cdecl fcn_0042e5a0(char*, VFS_DIR*);
 void __cdecl vfs_AddFile(char*, VFS_DIR*, VFS_DIR*, int, int, unsigned int, unsigned int);
-void __cdecl fcn_0042ee50(VFS_DIR*, char);
-void __cdecl fcn_0042fb20(char*, VFS_DIR*, unsigned int);
+void __cdecl vfs_FinishFiles(VFS_DIR*, char);
+void __cdecl vfs_ScanArchive(char*, VFS_DIR*, unsigned int);
 VFS_DIR* __cdecl fcn_0042f6d0(char*, VFS_DIR*);
 
 /* Mounts path below parent: a .BIN archive directly, or a directory tree whose
@@ -36,7 +36,7 @@ VFS_DIR* __cdecl fcn_0042f6d0(char* path, VFS_DIR* parent)
 
 	dir = 0;
 	strcpy(dirpath, path);
-	fcn_0042e520(dirpath);
+	vfs_NormalizeCase(dirpath);
 	if (parent == 0) {
 		fcn_0042e540(dirpath);
 	}
@@ -45,7 +45,7 @@ VFS_DIR* __cdecl fcn_0042f6d0(char* path, VFS_DIR* parent)
 	if ((n <= 0 || (dirpath[n] != '/' && dirpath[n] != '\\')) && ext != 0) {
 		for (i = 0; i <= 6; i++) {
 			if (fcn_0042e4d0(ext, g_file_extension_names + i * 6) == 0) {
-				fcn_0042fb20(dirpath, parent, i);
+				vfs_ScanArchive(dirpath, parent, i);
 			}
 		}
 	} else {
@@ -87,7 +87,7 @@ VFS_DIR* __cdecl fcn_0042f6d0(char* path, VFS_DIR* parent)
 				}
 				found = 0;
 				strcpy(buf, fd.cFileName);
-				fcn_0042e520(buf);
+				vfs_NormalizeCase(buf);
 				ext = strrchr(buf, '.');
 				if (ext != 0) {
 					for (i = 0; i <= 6; i++) {
@@ -113,7 +113,7 @@ VFS_DIR* __cdecl fcn_0042f6d0(char* path, VFS_DIR* parent)
 		}
 	}
 	if (parent == 0 && dir != 0) {
-		fcn_0042ee50(dir, 1);
+		vfs_FinishFiles(dir, 1);
 	}
 	return dir;
 }

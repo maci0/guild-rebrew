@@ -12,7 +12,7 @@ void __cdecl fcn_0045b920(int, int, int, int);
 int __cdecl fcn_00433ba0(char*);
 void __cdecl fcn_00434760(int, int);
 int __cdecl fcn_00435500(int, char*, char*, int);
-void __cdecl fcn_004050c0(void);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 
 /* Per-frame state of a movie/animation object: resets the morph and the
@@ -57,7 +57,7 @@ int __cdecl fcn_0040aa00(char* obj)
 		memset((void*) (e + 0x90), 0, 0x80);
 		r = fcn_00413190(*(int*) (e + 0x88));
 		if (r != *(int*) (obj + 0x38)) {
-			fcn_004050c0();
+			ch_RemoveQueueEntry(obj);
 			return v;
 		}
 		r = fcn_0041db70(0x200, "ch_t:waypoints");

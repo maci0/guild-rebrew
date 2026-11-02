@@ -1,5 +1,5 @@
 extern int g_100f1dc;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_774960;
 
 

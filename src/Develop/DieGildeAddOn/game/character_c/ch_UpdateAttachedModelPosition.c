@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #endif
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_004053a0(void*, int);
+#include "Develop/DieGildeAddOn/game/ch_ground.h"
 #ifdef REBREW_GOLD
 void __cdecl fcn_00453270(char*);
 #endif
@@ -98,7 +98,7 @@ void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force)
 		return;
 	}
 	attachment = **(char***) (obj + 0x124);
-	if (fcn_00451840((float*) (model + 0x4c),
+	if (CompareVector3WithinTolerance((float*) (model + 0x4c),
 	                    (float*) (*(char**) (obj + 0x124) + 4), 0.01f) && !force) {
 		return;
 	}

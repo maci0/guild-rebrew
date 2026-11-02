@@ -9,13 +9,10 @@ void __cdecl fcn_0044a770(void*, int);
 void __cdecl fcn_0044e190(void*, void*);
 char __cdecl fcn_0044f0e0(char*);
 void __cdecl fcn_0044fc70(char*, char);
-int __cdecl fcn_00451840(float*, float*, float);
+int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 int __cdecl fcn_0045c5b0(char*, int, int, int);
-int __cdecl fcn_0064d470(char*, char*);
 char* __cdecl fcn_0064d530(char*, const char*, unsigned int);
 void* __cdecl fcn_0064d740(void*, const void*, unsigned int);
-char* __cdecl fcn_0066080a(char*);
-
 /* Texture record of the .BGF chunk block, native stride 0xe0. */
 typedef struct BGF_TEX {
 	char name_000[0x40];
@@ -146,8 +143,8 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 
 	res = 0;
 	strcpy(buf, name);
-	fcn_0066080a(buf);
-	if (!fcn_0064d470(buf, (char*) 0x67af00)) {
+	_strupr(buf);
+	if (!strstr(buf, (char*) 0x67af00)) {
 		return 0;
 	}
 	ok = fcn_0044f0e0(buf);
@@ -186,7 +183,7 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 			j = 0;
 			off2 = 0;
 			while (j < hdr.anzahl_poi) {
-				if (i != j && fcn_00451840((float*) ((char*) hdr.poi + off),
+				if (i != j && CompareVector3WithinTolerance((float*) ((char*) hdr.poi + off),
 					(float*) ((char*) hdr.poi + off2), 0.001f)) {
 					for (k = 0; k < hdr.anzahl_pol; k++) {
 						for (m = 0; m < 3; m++) {

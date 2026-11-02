@@ -5,7 +5,7 @@ extern void* g_14d0020[];
 extern float g_6628a8;
 extern float g_6628b0;
 
-int __cdecl fcn_00451840(float* a, float* b, float eps);
+int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl fcn_004518a0(float* v);
 int __cdecl fcn_0045b990(float* tex, float* pt, int* outx, int* outy, float* out);
 
@@ -62,7 +62,7 @@ void __cdecl fcn_00402d00(char* a0)
 					goto next;
 				}
 			}
-			if (fcn_00451840((float*) (*(char**) (a0 + 0x34) + 0x4c),
+			if (CompareVector3WithinTolerance((float*) (*(char**) (a0 + 0x34) + 0x4c),
 			                 (float*) (s + 0x4c), limit) != 0) {
 				list[i] = (int) e;
 				i++;

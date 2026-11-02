@@ -23,9 +23,10 @@ typedef char item_position_check[offsetof(ITEM, x) == 0x10 && offsetof(ITEM, y) 
 typedef char request_size_check[sizeof(REQUEST) == 0x50 ? 1 : -1];
 typedef char request_excluded_check[offsetof(REQUEST, excluded) == 0x1c ? 1 : -1];
 
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_772514, g_14b59e8, g_14b59ec;
-extern int g_14b59fc, g_14b5a00, g_14ce8e0, g_774654;
+extern int g_14b59fc, g_14b5a00, g_14ce8e0;
+#include "client_dialog_state.h"
 extern int g_100f1dc, g_67d370, g_666018, g_66601c;
 extern unsigned int g_6b7fac;
 extern char *g_772500, *g_1015ea0;

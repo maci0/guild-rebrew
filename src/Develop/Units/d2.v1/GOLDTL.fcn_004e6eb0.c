@@ -32,7 +32,7 @@ extern int g_100f894;
 extern List8c_102cbc8 g_102cbc8[];
 extern char g_14cf950;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl d2_SetForm(int, int);

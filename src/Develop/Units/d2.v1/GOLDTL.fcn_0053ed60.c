@@ -1,4 +1,4 @@
-
+#include <string.h>
 extern char* g_6b8014;
 extern int g_1040490;
 extern int g_1040494;
@@ -10,7 +10,7 @@ extern short g_14ce8c2;
 extern int g_14ce8cc;
 extern int g_14ce8e0;
 extern char g_14cf950;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char* g_7746a0;
 extern char* g_7746a4;
 extern int g_67d370;
@@ -39,7 +39,6 @@ int __cdecl fcn_00521eb0(int, char*);
 void __cdecl CloseVfsStream(int);
 char* __cdecl fcn_0053e7a0(char*);
 int __cdecl sprintf(char*, const char*, ...);
-void __cdecl fcn_0066080a(char*);
 int __cdecl fcn_0042dc90(char*);
 void __cdecl fcn_005338d0(char*, char*, int);
 char* __cdecl fcn_00442910(int, void*, void*, char*);
@@ -122,7 +121,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 		cities[i] = fcn_0053e7a0(hdr + 5);
 		if (cities[i] != 0) {
 			sprintf(keybuf, (char*) 0x6a22a8, hdr + 5);
-			fcn_0066080a(keybuf);
+			_strupr(keybuf);
 			idx = fcn_0042dc90(keybuf);
 			if (idx != -1) {
 				strcpy(langName, g_14a5320[idx]);
@@ -200,7 +199,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 				if (cities[i] != 0) {
 					strcpy(g_7e1d00, cities[i] + 6);
 					sprintf(keybuf, (char*) 0x6a4170, g_7e1d00);
-					fcn_0066080a(keybuf);
+					_strupr(keybuf);
 					idx = fcn_0042dc90(keybuf);
 					if (idx != -1) {
 						d2_SetForm(win2, 1);

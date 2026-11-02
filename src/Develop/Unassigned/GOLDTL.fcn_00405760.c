@@ -4,7 +4,7 @@ extern float g_662d74;
 extern float g_662d78;
 
 void __cdecl fcn_004518a0(float* v);
-int __cdecl fcn_00451840(float* a, float* b, float eps);
+int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl fcn_00438c40(char* o, float* v);
 void __cdecl fcn_00438b40(char* p, float* v);
 
@@ -43,7 +43,7 @@ void __cdecl fcn_00405760(unsigned char* e)
 	if (e[0x110] > 0) {
 		e[0x110]--;
 	}
-	if (fcn_00451840(v, (float*) (e + 0x114), 0.4f) == 0) {
+	if (CompareVector3WithinTolerance(v, (float*) (e + 0x114), 0.4f) == 0) {
 		return;
 	}
 	e[0x110] = 0;

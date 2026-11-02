@@ -6,7 +6,7 @@ extern int __cdecl fcn_00434760();
 extern int __cdecl fcn_00433ba0();
 extern int __cdecl fcn_00413120();
 extern int __cdecl fcn_00413190();
-extern int __cdecl fcn_004050c0();
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 extern int __cdecl fcn_004032b0();
 extern char __cdecl fcn_0045b990();
 extern void __cdecl m_FreeTracked(void* ptr);
@@ -15,7 +15,7 @@ extern int __cdecl fcn_00407e30();
 extern short __cdecl fcn_00421350();
 extern int __cdecl fcn_00407760();
 extern int __cdecl fcn_0045b920();
-extern int __cdecl fcn_00451840();
+extern int __cdecl CompareVector3WithinTolerance();
 
 /* Rebuilds one object's render state from its definition record. Native
  * extent 1056 bytes. */
@@ -57,7 +57,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	v17 = *(unsigned int*) (rec + 0x34);
 	n = fcn_00413190(*(int*) (obj + 0x88));
 	if (n != *(int*) (rec + 0x38)) {
-		fcn_004050c0(rec);
+		ch_RemoveQueueEntry((char*) rec);
 		return 0;
 	}
 	if (*(unsigned char*) (rec + 0x160) & 8)
@@ -71,7 +71,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 			m_FreeTracked((void*) *(int*) (rec + 0xf4));
 			*(int*) (rec + 0xf4) = 0;
 		}
-		fcn_004050c0(rec);
+		ch_RemoveQueueEntry((char*) rec);
 		return 0;
 	}
 	if (v15 < 1) {
@@ -113,7 +113,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 		fn = (void (__cdecl*) (int)) *(int*) (rec + 0x15c);
 		if (fn != 0)
 			fn(rec);
-		fcn_004050c0(rec);
+		ch_RemoveQueueEntry((char*) rec);
 		return 0;
 	}
 	*(int*) (rec + 0xf4) = (int) m_alloc(*(unsigned int*) 0x14d0c20 * 2,
@@ -139,7 +139,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 		*(float*) (rec + 0x128) = *(float*) 0x6b5c3c + *(float*) (rec + 0x128);
 		*(float*) (rec + 0x12c) = *(float*) 0x6b5c40 + *(float*) (rec + 0x12c);
 		if (*(unsigned char*) (rec + 0x160) & 0x10) {
-			if (fcn_00451840((void*) (rec + 0x134), (void*) (rec + 0x144),
+			if (CompareVector3WithinTolerance((void*) (rec + 0x134), (void*) (rec + 0x144),
 				(int) 0x41f00000) == 0) {
 				*(int*) (rec + 0x144) = *(int*) (rec + 0x134);
 				*(int*) (rec + 0x148) = *(int*) (rec + 0x138);

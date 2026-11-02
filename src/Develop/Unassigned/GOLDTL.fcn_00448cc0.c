@@ -1,6 +1,6 @@
 #include <math.h>
 
-extern int __cdecl fcn_00451840(float*, float*, float);
+extern int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 extern void __cdecl fcn_004557c0(void*, void*, int, float*);
 extern float* __stdcall fcn_005ebbb9(float*, const float*);
 extern float __cdecl fcn_004514d0(float*, float*);
@@ -39,10 +39,10 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 	v[1] = 0.0f;
 	v[2] = 0.0f;
 	v[3] = 0.0f;
-	r1 = fcn_00451840(dir, v, 0.001f);
+	r1 = CompareVector3WithinTolerance(dir, v, 0.001f);
 	written = 0;
 	same = (unsigned char) (r1 == 0);
-	r2 = fcn_00451840(pos, v, 0.001f);
+	r2 = CompareVector3WithinTolerance(pos, v, 0.001f);
 	valid = 0;
 	if (r2 == 0) {
 		valid = 1;

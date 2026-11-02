@@ -10,7 +10,7 @@ int __cdecl fcn_0042e450();
 int __cdecl fcn_00433780();
 int __cdecl fcn_00438b40();
 int __cdecl fcn_00438cb0();
-int __cdecl fcn_00451840();
+int __cdecl CompareVector3WithinTolerance();
 int __cdecl fcn_0046f2c0();
 int __cdecl fcn_00470820();
 int __cdecl fcn_00471af0();
@@ -405,7 +405,7 @@ label_532ef0:
     v44 = 0x14ce880;
     v43 = 0x532f13;
     v46 = (*(int *)0x6b8014);
-    if (fcn_00451840()) { // branch-flip
+    if (CompareVector3WithinTolerance()) { // branch-flip
       v45 = 0x532f25;
       fcn_00433780();
       v45 = 0x7e3a40;
@@ -432,12 +432,12 @@ label_532ef0:
     v44 = (*(int *)0x6b8014) + 0x84;
     v45 = 0x7e3a50;
     v43 = 0x533015;
-    if (fcn_00451840()) {
+    if (CompareVector3WithinTolerance()) {
       v46 = 0x3dcccccd;
       v44 = (*(int *)0x6b8014) + 0x4c;
       v45 = 0x7e3a40;
       v43 = 0x533034;
-      if (fcn_00451840()) goto label_533077;
+      if (CompareVector3WithinTolerance()) goto label_533077;
     }
     if (!v2) {
       v46 = 0x533044;

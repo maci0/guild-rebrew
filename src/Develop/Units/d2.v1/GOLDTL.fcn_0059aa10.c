@@ -14,7 +14,7 @@ extern char* lpObjektePROT;
 extern char* g_7746c4;
 extern int g_7746c8;
 extern int g_7746f8;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_7747b4;
 extern int g_85ab60;
 extern int g_14ce8e0;
@@ -22,7 +22,7 @@ extern int g_100f1dc;
 extern int g_67d370;
 extern char* g_773da8;
 extern unsigned char g_773d75;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern char g_7f3f24[];
 extern char* g_14a5398;
@@ -60,7 +60,6 @@ void __cdecl fcn_004c6ae0(int, int);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
 char* __cdecl gm_GetEntityTableEntry(char*);
-char* __cdecl fcn_0066080a(char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x0059aa10 */
@@ -134,7 +133,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 								while ((*d++ = *p++) != 0)
 									;
 							}
-							fcn_0066080a(name);
+							_strupr(name);
 							fcn_0064d41a(text, s_68b7ac, name);
 							fcn_00526920(a0, *(int*) (house + 2), text);
 						}

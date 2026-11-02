@@ -5,7 +5,6 @@
 
 extern char g_6b5b20[];
 char* __cdecl fcn_004308a0(char* buf, int size, void* f);
-void __cdecl fcn_0066080a(char* s);
 
 char* __cdecl fcn_004010b0(void* f)
 {
@@ -27,7 +26,7 @@ char* __cdecl fcn_004010b0(void* f)
 			p++;
 		}
 		if (*p != 0 && *p != ';') {
-			fcn_0066080a(p);
+			_strupr(p);
 			return p;
 		}
 	}

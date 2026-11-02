@@ -1,18 +1,19 @@
-void* __cdecl fcn_004c7550(void* p);
-void* __cdecl fcn_004e6a30(int id);
+void* __cdecl cm_ChkCutsceneReady(void* p);
+void* __cdecl cut_FindCutsceneById(int id);
 void* __cdecl gm_LookupEntityRecordById(int id);
 
 /* Attach counterpart of 0x004cd500: rejects an already attached command, marks
  * the result as failure, then links the fresh record into up to 16 entities and
  * reports success into the result packet. */
+/* ADDRESS: GOLD 0x004cca10 */
 /* ADDRESS: GOLDTL 0x004cd590 */
-int __cdecl fcn_004cd590(int* a, unsigned char* result)
+int __cdecl cm_ExCutsceneReady(int* a, unsigned char* result)
 {
 	void* rec;
 	void* e;
 	int i;
 
-	if (fcn_004c7550(a) != 0) {
+	if (cm_ChkCutsceneReady(a) != 0) {
 		if (result != 0) {
 			result[0] = 2;
 		}
@@ -21,7 +22,7 @@ int __cdecl fcn_004cd590(int* a, unsigned char* result)
 	if (result != 0) {
 		result[0] = 2;
 	}
-	rec = fcn_004e6a30(*(int*) ((char*) a + 0x10));
+	rec = cut_FindCutsceneById(*(int*) ((char*) a + 0x10));
 	if (rec != 0) {
 		*(int*) ((char*) rec + 0x28) = 1;
 	}

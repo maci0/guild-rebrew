@@ -10,9 +10,9 @@ extern short g_14ce8c2;
 extern char* g_6b8014;
 extern int g_14ce8cc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_67d370;
-extern unsigned int g_774970;
+#include "game_player.h"
 extern char g_773d75;
 extern char g_14cf950;
 extern float g_664ee0;

@@ -14,7 +14,7 @@ typedef struct {
 
 extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_7747b0;
 extern char* g_14ad474;
 extern unsigned short g_7f4c04;

@@ -8,7 +8,7 @@ extern char g_14cf950;       /* last pressed key */
 extern int g_14ce8e0;
 extern int g_100f1dc;        /* focused element id */
 extern int g_67d370;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int* g_774a34;        /* entity list head */
 extern int* g_779cb8;        /* rejected entity */
 extern int* g_779ce4;

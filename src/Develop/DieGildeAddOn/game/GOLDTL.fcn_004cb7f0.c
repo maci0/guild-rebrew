@@ -47,7 +47,6 @@ int __cdecl fcn_00428720(int);
 void __cdecl fcn_0052db70(char*);
 void __cdecl fcn_00501d20(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-char* __cdecl fcn_0066080a(char*);
 long __cdecl _ftol(float);
 
 /* ADDRESS: GOLDTL 0x004cb7f0 */
@@ -89,7 +88,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 	}
 	saved = g_6798d4;
 	strcpy(name, lpGebaeudePROT + v4[0] + v4[0] * 0x24c + 1);
-	fcn_0066080a(name + 2);
+	_strupr(name + 2);
 	i = 0;
 	for (;;) {
 		if (*rec != 0x21) {

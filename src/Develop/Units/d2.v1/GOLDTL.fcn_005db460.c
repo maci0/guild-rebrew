@@ -18,7 +18,7 @@ extern int g_14ac6a0;
 extern int g_14acb78;
 extern int g_100f1dc;
 extern int g_67d370;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_14ce8e0;
 
 char* __cdecl gm_LookupEntityRecordById(int);

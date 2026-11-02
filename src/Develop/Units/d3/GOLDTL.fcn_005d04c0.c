@@ -17,7 +17,7 @@ extern char g_6a4080[];
 extern float g_66418c;
 extern float g_665e64;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 char* __cdecl fcn_00445600(int, int, int, char*);
 char* __cdecl fcn_00442910(int, float*, char*, char*);

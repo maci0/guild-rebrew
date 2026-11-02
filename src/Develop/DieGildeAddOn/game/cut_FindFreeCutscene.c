@@ -3,7 +3,7 @@
 
 extern char g_9a9660[];
 
-char* __cdecl fcn_004e6ab0(void)
+char* __cdecl cut_FindFreeCutscene(void)
 {
 	int a;
 	int i;

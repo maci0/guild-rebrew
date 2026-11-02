@@ -16,7 +16,7 @@ extern int g_6b7fac;            /* 0x006b7fac */
 extern int g_6b7fdc;            /* 0x006b7fdc */
 extern int g_772514;            /* 0x00772514 */
 extern int g_7725c8;            /* 0x007725c8 */
-extern int g_774654;            /* 0x00774654 */
+#include "client_dialog_state.h"            /* 0x00774654 */
 extern unsigned char g_7747b0;  /* 0x007747b0 */
 extern int g_9badc0;            /* 0x009badc0 */
 extern int g_9badc4;            /* 0x009badc4 */

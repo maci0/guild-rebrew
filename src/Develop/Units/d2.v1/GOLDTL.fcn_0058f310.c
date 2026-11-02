@@ -1,11 +1,11 @@
 #include "client_types.h"
 
 extern int g_772514;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_7e46ac;
 extern int g_14b556c;
 extern int g_14b5574;
@@ -37,7 +37,7 @@ int __cdecl fcn_004c4450(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 
 /* ADDRESS: GOLDTL 0x0058f310 */
 int __cdecl fcn_0058f310(char* a0)
@@ -148,6 +148,6 @@ int __cdecl fcn_0058f310(char* a0)
 	} while (fcn_005373e0((void*) fcn_0058f310, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_0052a2d0();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 	return fcn_00532ef0();
 }

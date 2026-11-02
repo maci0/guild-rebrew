@@ -17,7 +17,7 @@ typedef struct F8 {
 
 extern char g_7f4ca0[];
 extern float g_664154;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_00502cd0(int, int, int, int, int);

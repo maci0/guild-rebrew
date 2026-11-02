@@ -2,7 +2,7 @@
 
 extern unsigned char lpGebaeudePROT[];
 extern unsigned char lpObjektePROT[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 unsigned char *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char *__cdecl gm_FindNextFilteredEntity(void);

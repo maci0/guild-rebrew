@@ -1,4 +1,4 @@
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl fcn_00567030(char* slot, int* out1, int* out2);
 void __cdecl cm_RequestChrMoveToUniverse(int h, int a, int b, char* tag);

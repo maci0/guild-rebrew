@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/entity.h"
 
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_772514;
 extern int g_775338;
 

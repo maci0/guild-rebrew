@@ -1,3 +1,10 @@
+#ifndef REBREW_SERVER
+#define g_vfs_root g_6b7fdc
+#define g_vfs_item_pool g_6b7fe0
+#define g_vfs_case_sensitive g_6b7fe8
+#define g_stream_pool g_6b7fe4
+#define g_stream_count g_6b7fec
+#endif
 #include "vfs.h"
 extern char g_zlib_version[];
 #include "../Error/error.h"
@@ -38,7 +45,7 @@ int __cdecl unzCloseCurrentFile(char*);
 int __cdecl unzClose(char*);
 int __cdecl gzclose(int);
 
-extern char g_stream_pool[1];
+extern char g_stream_pool[];
 #include <string.h>
 
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
@@ -957,7 +964,6 @@ void __cdecl vfs_ScanArchive(char* path, VFS_DIR* parent, unsigned int archive)
 /* Frees dir, its siblings and their subtrees with their files and pending items. */
 #ifndef REBREW_SERVER
 extern char g_6b7fe0[];
-#define g_vfs_item_pool g_6b7fe0
 #endif
 void __cdecl vfs_FreeDirs(VFS_DIR* n)
 {
@@ -988,7 +994,6 @@ void __cdecl vfs_FreeDirs(VFS_DIR* n)
 }
 
 #ifndef REBREW_SERVER
-#undef g_vfs_item_pool
 #endif
 
 /* Creates every missing directory of path below dir. */
@@ -1869,11 +1874,6 @@ extern int g_6b7fec;
 extern char g_6b7fe4[];
 extern char g_6b7fe8;
 #include "Develop/Units/Error/error_message.h"
-#define g_vfs_root g_6b7fdc
-#define g_stream_count g_6b7fec
-#define g_stream_pool g_6b7fe4
-#define g_vfs_item_pool g_6b7fe0
-#define g_vfs_case_sensitive g_6b7fe8
 #define ReportMessage ReportClientMessage
 #endif
 void __cdecl vfs_exit(char verbose)
@@ -1910,11 +1910,6 @@ void __cdecl vfs_exit(char verbose)
 }
 
 #ifndef REBREW_SERVER
-#undef g_vfs_root
-#undef g_stream_count
-#undef g_stream_pool
-#undef g_vfs_item_pool
-#undef g_vfs_case_sensitive
 #undef ReportMessage
 #endif
 

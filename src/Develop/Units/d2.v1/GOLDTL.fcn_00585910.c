@@ -19,7 +19,7 @@ extern int g_772514;
 extern char* g_77255c;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_67d370;
 extern float g_662cf8;
 extern char* g_14b58e8;

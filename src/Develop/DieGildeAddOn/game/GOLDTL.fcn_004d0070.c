@@ -31,7 +31,7 @@ int __cdecl fcn_004ce270(char*, char*);
 float __cdecl fcn_004cefb0(char*, char*);
 char* __cdecl fcn_004ceb40(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-int __cdecl fcn_00451840(float*, float*, float);
+int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 float __cdecl fcn_00444700(char*, float*);
 void __cdecl fcn_00438d70(char*, int, float, int);
 void __cdecl fcn_004cfca0(void);
@@ -148,7 +148,7 @@ void __cdecl fcn_004d0070(void)
 				o = *(char**) (e + 0x184);
 				e34 = o + 0x34;
 				g34 = *(char**) (g + 0x184) + 0x34;
-				if (fcn_00451840((float*) (e34 + 0x4c), (float*) (g34 + 0x4c), 10.0f) == 0) {
+				if (CompareVector3WithinTolerance((float*) (e34 + 0x4c), (float*) (g34 + 0x4c), 10.0f) == 0) {
 					v = fcn_00444700((char*) (e34 + 0x4c), (float*) (g34 + 0x4c));
 					s = (char*) *(int*) (o + 0x128);
 					if (s == 0 || (*(char*) (s + 9) != 0x2d && *(char*) (s + 9) != 0x3a)) {

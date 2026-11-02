@@ -30,8 +30,6 @@ int __cdecl fcn_004bdbe0(int obj, int x, int y, int i, int j);
 char* __cdecl fcn_00445600(char* o, int flags, char* ptr, char* name);
 char __cdecl fcn_0045b990(char* map, float* pos, int* x, int* y, int* z);
 char __cdecl fcn_004bdeb0(char* e, char* obj);
-void __cdecl fcn_0066080a(char* text);
-
 /* ADDRESS: GOLDTL 0x004bd4e0 */
 int __cdecl fcn_004bd4e0(int a0, int a1)
 {
@@ -84,7 +82,7 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 			p++;
 			i++;
 		} while (c);
-		fcn_0066080a(name);
+		_strupr(name);
 		if (strstr(name, s_681664) != 0) {
 			g_1005908 = k;
 		}

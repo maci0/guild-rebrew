@@ -28,7 +28,7 @@ typedef struct {
 	int selected;
 } Dialog_58ee70;
 
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 #include "GOLDTL.fcn_0058ee70_gconf.h"
 extern int g_14b5650;
 extern int g_14b5674;

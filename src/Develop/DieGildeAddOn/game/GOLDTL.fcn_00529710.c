@@ -32,7 +32,7 @@ int __cdecl fcn_00529710(char* a, unsigned char* b)
 				fcn_00455350(*(char**) (b + 0x61), *(char**) (b + 0x61) + 0x4c, pos);
 				r = 3250.0f;
 			}
-			if (fcn_00451840((float*) (*(char**) (d + 0x34) + 0x4c), pos, r) != 0) {
+			if (CompareVector3WithinTolerance((float*) (*(char**) (d + 0x34) + 0x4c), pos, r) != 0) {
 				return 1;
 			}
 		}

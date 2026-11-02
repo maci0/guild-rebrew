@@ -1,4 +1,4 @@
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 #pragma pack(2)
 // SIZE 0xe

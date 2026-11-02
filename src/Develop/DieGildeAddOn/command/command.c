@@ -4666,7 +4666,7 @@ int __cdecl cm_ChkEntityLookup(int cmd, char* result)
 /* Execution handler: updates cutscene state. Dispatches
  * cutscene-related commands for entity state transitions
  * during in-game cinematics. */
-
+#ifdef REBREW_SERVER
 int __cdecl cm_ExCutsceneReady(int cmd, char* result)
 {
 	int readyResult;
@@ -4692,7 +4692,7 @@ int __cdecl cm_ExCutsceneReady(int cmd, char* result)
 	} while (readyResult != 0);
 	return 0;
 }
-
+#endif
 /* Execution handler: modifies an entity's health value.
  * Looks up entity by ID at cmd+0x10 and applies the health
  * delta from the command payload. */

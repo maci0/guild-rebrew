@@ -13,9 +13,14 @@ int __cdecl fcn_004fa5b0(int, char*, int);
 /* ADDRESS: GOLDTL 0x00508e80 */
 float __cdecl fcn_00505e30(int a)
 {
+#ifdef REBREW_GOLD
+	return (float) (unsigned short) *(unsigned short*) (0x770b8a + (a & 0xffff) * 540);
+#else
 	return (float) (unsigned short) *(unsigned short*) (0x7f4caa + (a & 0xffff) * 540);
+#endif
 }
 
+#ifndef REBREW_GOLD
 /* ADDRESS: GOLDTL 0x005d2a40 */
 int __cdecl fcn_005d2a40(int a0, int a1)
 {
@@ -73,3 +78,5 @@ int __cdecl fcn_005d2a40(int a0, int a1)
 	}
 	return (int) MIN(MAX(f8, 2.0f), 15.0f);
 }
+
+#endif

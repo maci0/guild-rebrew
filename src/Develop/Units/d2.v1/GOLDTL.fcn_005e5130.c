@@ -20,7 +20,7 @@ typedef struct
 	char pad1d0[0x4c];
 } House;
 
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern int g_14b5bc0;
 extern char* g_14b5bc8;

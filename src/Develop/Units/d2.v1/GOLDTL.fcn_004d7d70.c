@@ -22,7 +22,7 @@ extern int g_100f1dc;
 extern int g_67d370;
 extern int g_68b7a8;
 extern unsigned short* g_772f24;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0052ae80(void);

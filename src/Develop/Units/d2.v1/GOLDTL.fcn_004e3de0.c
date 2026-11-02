@@ -3,7 +3,7 @@ extern int g_100f1dc;
 extern char* g_77255c;
 extern int g_772514;
 extern int g_68bfb8;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);

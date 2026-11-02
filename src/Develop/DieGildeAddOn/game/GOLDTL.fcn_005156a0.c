@@ -4,7 +4,7 @@ extern char* g_6b8014;
 extern char* lpObjektePROT;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* g_7746c8;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773dd4;
 
 extern void* __cdecl fcn_00502cd0(int list, int a, int b, ...);

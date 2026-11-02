@@ -27,7 +27,7 @@ typedef struct
 } Packet;
 // SIZE 0xf8
 
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;

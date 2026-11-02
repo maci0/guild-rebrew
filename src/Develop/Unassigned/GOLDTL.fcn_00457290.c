@@ -82,7 +82,7 @@ Tex0457290* __cdecl fcn_0045c5b0(char* name, Col0457290 c, unsigned int flags,
 void __cdecl fcn_0045ce90(Tex0457290* t);
 void __cdecl fcn_00455350(char* object, float* in, float* out);
 void __cdecl fcn_00455140(char* node, float* in, float* out);
-int __cdecl fcn_00451840(float* a, float* b, float eps);
+int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 int __cdecl fcn_00456630(void* obj, char b, unsigned int key,
                          unsigned int stamp, int unused);
 int __cdecl fcn_004582d0(char* a0, char* p2, char* p1, char* a2, float* va,
@@ -211,7 +211,7 @@ alloc:
 			va[1] = vc[1] - vb[1];
 			va[2] = vc[2] - vb[2];
 		}
-		r = fcn_00451840(va, (float*) &rec->f1c, tol);
+		r = CompareVector3WithinTolerance(va, (float*) &rec->f1c, tol);
 		b = (r != 0 && q->f4a0 == 0) ? 0 : 1;
 		if (a2 != 0) {
 			unsigned char mx;

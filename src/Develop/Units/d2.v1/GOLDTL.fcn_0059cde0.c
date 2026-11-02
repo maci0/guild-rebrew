@@ -43,7 +43,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern unsigned char* g_7746c8;
 extern char s_6aa464[];
 
@@ -57,7 +57,7 @@ char* __cdecl fcn_005463a0(int, int, int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl cm_ExProdObjekt(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -116,7 +116,7 @@ int __cdecl fcn_0059cde0(char* name)
 					}
 					fcn_004c5530(&pkt);
 				}
-				fcn_0052ae70();
+				sv_ClearObjectSelection();
 				r = 1;
 				g_774654 = 1;
 			}

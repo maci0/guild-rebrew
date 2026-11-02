@@ -25,7 +25,7 @@ typedef struct {
 } Contact;
 
 extern unsigned char* lpGebaeudePROT;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_67a370;
 extern int g_6b8300;
 

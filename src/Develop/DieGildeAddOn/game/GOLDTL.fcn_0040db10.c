@@ -5,7 +5,7 @@ extern char g_6761c8[];
 
 
 void __cdecl fcn_00425bf0(int*, int, char*);
-void __cdecl fcn_00406120(void*);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 int __cdecl fcn_0040db10(void* a1)
 {
@@ -15,7 +15,7 @@ int __cdecl fcn_0040db10(void* a1)
 	if (p == 0) {
 		fcn_00425bf0(((int*)g_6b7e98), *(int*) ((char*) ((int*)g_6b7e98) + 0x118), g_6761c8);
 	} else {
-		fcn_00406120(p);
+		ch_CancelActionQueue(p);
 	}
 	return 0;
 }

@@ -4,12 +4,12 @@
  * list, keeps one hotkey row per building category, then runs the message
  * loop that reacts to the chosen building and to the close messages. */
 
-extern short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_772514;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_7746f8;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_1015ea0;
 extern int g_10162e8;
 extern int g_10162ec;

@@ -8,10 +8,10 @@ typedef struct
 
 extern int g_7e46ac;
 extern unsigned char g_773d75;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern int g_100f1dc;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char g_14cf950;
 extern int g_14abbf4;
 extern int g_14ce8e0;

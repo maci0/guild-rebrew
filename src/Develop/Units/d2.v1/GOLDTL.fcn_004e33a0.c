@@ -5,7 +5,7 @@
  * scene up again. arg is the auction record: player at +0x30 (bidder
  * count), bidder ids at +0x34, +0x7c and +0x80 the auctioneer data. */
 
-extern short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_772f3c;
 extern int g_772d28;
 extern int g_772d1c;

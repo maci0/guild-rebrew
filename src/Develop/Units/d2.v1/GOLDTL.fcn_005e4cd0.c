@@ -5,7 +5,7 @@ extern char* g_1015ea0;
 extern int g_14ac660[];
 extern int g_14ce8e0;
 extern char g_14cf950;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);

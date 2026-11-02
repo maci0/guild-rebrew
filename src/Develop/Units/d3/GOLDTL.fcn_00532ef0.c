@@ -16,7 +16,7 @@ extern float g_7e3a40[3];
 extern float g_7e3a50[3];
 #include "Develop/Units/d3/d3_camera.h"
 extern int g_774650;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_774658;
 extern int g_77465c;
 extern char* g_7746a8;
@@ -36,7 +36,7 @@ void __cdecl fcn_00532ef0(void)
 
 	done = 0;
 	if (g_6b5cc0 != 0) {
-		if (fcn_00451840(g_14ce880, g_7e3a40, 0.1f)) {
+		if (CompareVector3WithinTolerance(g_14ce880, g_7e3a40, 0.1f)) {
 			fcn_00433780(((View*)g_6b8014));
 			g_6b5cc0 = 0;
 			g_6b5cbc = 0;
@@ -64,7 +64,7 @@ void __cdecl fcn_00532ef0(void)
 				fcn_00530510();
 			}
 		}
-	} else if ((!fcn_00451840(((View*)g_6b8014)->rot, g_7e3a50, 0.1f) || !fcn_00451840(((View*)g_6b8014)->pos, g_7e3a40, 0.1f)) &&
+	} else if ((!CompareVector3WithinTolerance(((View*)g_6b8014)->rot, g_7e3a50, 0.1f) || !CompareVector3WithinTolerance(((View*)g_6b8014)->pos, g_7e3a40, 0.1f)) &&
 		   done == 0) {
 		fcn_0052d820();
 		if (g_7746a8 != 0) {

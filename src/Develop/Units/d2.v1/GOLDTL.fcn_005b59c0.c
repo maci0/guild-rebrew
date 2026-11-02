@@ -29,7 +29,7 @@ typedef struct
 extern char* g_1015ea0;
 extern unsigned char* lpGebaeudePROT;
 extern int g_772514;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_68c1c8[];
 extern char g_679060[];
 

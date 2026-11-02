@@ -25,7 +25,7 @@ void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c6ae0(int a1, int a2);
 void __cdecl fcn_004f4f60(int a1, int a2, int a3, int a4, int a5);
 void __cdecl fcn_004c35f0(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 
 /* ADDRESS: GOLDTL 0x005ae6a0 */
 int __cdecl fcn_005ae6a0(void* a0)
@@ -102,7 +102,7 @@ int __cdecl fcn_005ae6a0(void* a0)
 					fcn_004f4f60(0x1a, 1, *(int*) (0x7f4ca4 + *(unsigned short*) 0x774970 * 0x21c),
 						*(int*) ((char*) a0 + 4), -1);
 					fcn_004c35f0();
-					fcn_0052ae70();
+					sv_ClearObjectSelection();
 					res = 1;
 					*(int*) 0x774654 = 3;
 				} else {

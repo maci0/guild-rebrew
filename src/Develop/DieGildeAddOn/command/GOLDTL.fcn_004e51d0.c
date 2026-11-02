@@ -26,7 +26,7 @@ extern int g_772f34;            /* 0x00772f34 */
 extern int g_772f38;            /* 0x00772f38 */
 extern int g_772f3c;            /* 0x00772f3c */
 extern int g_7747b0;            /* 0x007747b0 */
-extern unsigned short g_774970; /* 0x00774970 */
+#include "Develop/DieGildeAddOn/game/game_player.h" /* 0x00774970 */
 extern int g_6b5c60;            /* 0x006b5c60 */
 
 extern char s_68d580[]; /* "cut_type:%i" */

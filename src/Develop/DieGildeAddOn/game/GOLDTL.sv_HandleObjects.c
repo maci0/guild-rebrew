@@ -39,7 +39,7 @@ extern char* g_77479c;
 extern int g_774650;
 extern int g_77465c;
 extern int g_6b5c48;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern char s_6a3004[];
 extern char s_6a301c[];
@@ -49,7 +49,7 @@ extern char* __cdecl fcn_00445600(int, int, int, char*);
 extern int __cdecl fcn_0064d41a(char*, char*, ...);
 extern void __cdecl fcn_00412e50(char*, int);
 extern int __cdecl fcn_00506380(int, int, int, void*);
-extern void __cdecl fcn_0052ae70(void);
+extern void __cdecl sv_ClearObjectSelection(void);
 extern void __cdecl fcn_004c3540(char*);
 extern void __cdecl fcn_00530510(void);
 
@@ -191,7 +191,7 @@ L744:
 	g_77479c = v5;
 	if (g_7746b4 != 0 && *(char*) (g_7746b4 + 8) != 0) {
 		r = fcn_00506380((int) g_774970, 0, 0, g_7746b4);
-		fcn_0052ae70();
+		sv_ClearObjectSelection();
 		p = g_7746b4;
 		if ((r & 0x800) != 0
 		    && (*(char*) (p + 0x165) != 0x1c || (*(unsigned char*) (p + 0x1b4) & 1) == 0)) {
@@ -219,7 +219,7 @@ L744:
 	}
 	if (*(char*) (lpObjektePROT + (unsigned int) (unsigned short) *(unsigned short*) list * 0x41) == 0x1d) {
 		g_7746c0 = v5;
-		fcn_0052ae70();
+		sv_ClearObjectSelection();
 		return;
 	}
 	g_7746c0 = v5;

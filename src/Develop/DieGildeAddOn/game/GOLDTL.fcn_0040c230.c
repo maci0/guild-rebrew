@@ -3,40 +3,11 @@
 
 #include <stdarg.h>
 
-typedef struct Task Task;
-
-// SIZE 0x194
-struct Task {
-	void (__cdecl* run)(Task* t);
-	void (__cdecl* done)(Task* t);
-	unsigned char level;
-	char kind;
-	char pad0a[2];
-	int state;
-	unsigned char flags;
-	char pad11[3];
-	char* owner;
-	char pad18[0x24 - 0x18];
-	Task* prev;
-	Task* next;
-	char pad2c[4];
-	int param;
-	int a34;
-	int a38;
-	char pad3c[0xf0 - 0x3c];
-	char name[0x40];
-	char name2[0x40];
-	int a170;
-	int a174;
-	float a178;
-	char pad17c[0x190 - 0x17c];
-	unsigned char b190;
-	char pad191[3];
-};
+#include "Develop/DieGildeAddOn/game/ch_action.h"
 
 // SIZE 0x4c
 typedef struct {
-	void (__cdecl* handler)(Task* t);
+	void (__cdecl* handler)(CH_ACTION* t);
 	unsigned char kind;
 	char name[0x43];
 	int nargs;
@@ -44,11 +15,11 @@ typedef struct {
 
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-Task* __cdecl fcn_0040c0a0(char* e);
+CH_ACTION* __cdecl fcn_0040c0a0(char* e);
 
-Task* __cdecl fcn_0040c230(char* e, void (__cdecl* done)(Task* t), unsigned char level, int kind, ...)
+CH_ACTION* __cdecl fcn_0040c230(char* e, void (__cdecl* done)(CH_ACTION* t), unsigned char level, int kind, ...)
 {
-	Task* t;
+	CH_ACTION* t;
 	va_list ap;
 	int i;
 
@@ -62,21 +33,21 @@ Task* __cdecl fcn_0040c230(char* e, void (__cdecl* done)(Task* t), unsigned char
 	if (t == 0) {
 		return 0;
 	}
-	t->run = ((Entry*)g_14d0c40)[kind].handler;
-	t->kind = (char) kind;
-	t->owner = e;
-	t->state = 0;
+	t->ausfuehren = ((Entry*)g_14d0c40)[kind].handler;
+	t->art = (char) kind;
+	t->besitzer = e;
+	t->zustand = 0;
 	va_start(ap, kind);
-	for (i = 0; i < ((Entry*)g_14d0c40)[(unsigned char) t->kind].nargs; i++) {
-		(&t->param)[i] = va_arg(ap, int);
+	for (i = 0; i < ((Entry*)g_14d0c40)[(unsigned char) t->art].nargs; i++) {
+		(&t->parameter)[i] = va_arg(ap, int);
 	}
 	va_end(ap);
-	t->next = 0;
-	t->flags = 0;
-	t->done = done;
-	t->level = level;
-	if (t->run == fcn_004079d0) {
-		t->param = (unsigned char) t->kind;
+	t->naechste = 0;
+	t->merkmale = 0;
+	t->abschluss = done;
+	t->stufe = level;
+	if (t->ausfuehren == fcn_004079d0) {
+		t->parameter = (unsigned char) t->art;
 	}
 	return t;
 }

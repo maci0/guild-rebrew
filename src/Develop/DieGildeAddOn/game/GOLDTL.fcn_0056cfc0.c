@@ -1,4 +1,4 @@
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_6b7fb8;
 extern int g_6b8010;
 extern int g_7e4538;
@@ -30,7 +30,7 @@ void __cdecl fcn_00500bb0(char *, int, int, int);
 char *__cdecl gm_LookupEntityRecordById(int);
 char *__cdecl fcn_00445600(char *, int, int, char *);
 void __cdecl fcn_00455350(char *, char *, float *);
-int __cdecl fcn_00451840(float *, float *, float);
+int __cdecl CompareVector3WithinTolerance(float *, float *, float);
 int __cdecl fcn_004c5da0(int, int, int, char *, int, char *);
 int __cdecl fcn_004c5620(int, char *);
 void __cdecl fcn_004c5c80(int);
@@ -248,7 +248,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 						    (m = fcn_00445600((char *)*(int *)(e + 0x61), 0x100, 0,
 								      g_68149c)) != 0) {
 							fcn_00455350(m, m + 0x4c, pos);
-							if (fcn_00451840(
+							if (CompareVector3WithinTolerance(
 								    (float *)(*(int *)(*(int *)(r + 0x184) + 0x34) + 0x4c),
 								    pos, 750.0f) != 0) {
 								if (i != 0)

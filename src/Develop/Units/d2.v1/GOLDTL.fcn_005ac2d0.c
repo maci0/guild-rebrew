@@ -40,7 +40,7 @@ typedef struct sel005ac2d0 {
 } sel005ac2d0;
 /* SIZE 0x38 */
 
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_773da8;
 extern int g_772514;
 extern char* g_772500;

@@ -23,7 +23,7 @@ struct house {
 extern pos14_7f4c00 g_7f4c00;
 extern char g_77e0a0[];
 extern char g_776709;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern char* g_14a5320[];
 

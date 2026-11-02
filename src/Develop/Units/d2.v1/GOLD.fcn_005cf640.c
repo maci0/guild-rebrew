@@ -47,7 +47,7 @@ typedef struct {
 
 extern char g_868060[];
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_f8f080;
 extern char s_6ace6c[];
 extern char s_679060[];
@@ -56,7 +56,7 @@ extern int g_772514;
 extern int g_7e46ac;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_67d370;
 
 void __cdecl fcn_004942a0(House*, Share*);

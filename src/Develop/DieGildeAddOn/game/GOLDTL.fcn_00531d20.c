@@ -4,7 +4,7 @@
  * from the cursor selection, formats a message string from the object's
  * action code and finally dispatches it to the tooltip channel. */
 
-extern short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_7746b4;
 extern int g_7746a4;
 extern int g_7746c4;

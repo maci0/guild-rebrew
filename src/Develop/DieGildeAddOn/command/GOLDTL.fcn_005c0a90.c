@@ -12,19 +12,19 @@ typedef struct {
 } Slot5c0a;
 
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern __int64 g_666018;
 extern int g_66601c;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_67d370;
 extern char g_6ac494[];
 
 int __cdecl fcn_00525f60(void*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 unsigned short* __cdecl fcn_005cd440(int*, char*, int, int);
-int __cdecl cm_ChkCutsceneReady(int, unsigned short);
+int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 void __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00470820(int, int, void*);
@@ -73,7 +73,7 @@ void __cdecl fcn_005c0a90(int arg)
 	if (b == 0) {
 		return;
 	}
-	r = cm_ChkCutsceneReady(*(int*) (a + 2), g_774970);
+	r = CountMatchingStraftatEntries(*(int*) (a + 2), g_774970);
 	if (r <= 0) {
 		io_FormatTextBuffer(text, 0x1756, *a);
 		fcn_00526120(text, 0);

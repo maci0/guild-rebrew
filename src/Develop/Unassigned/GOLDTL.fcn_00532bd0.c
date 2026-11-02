@@ -6,7 +6,7 @@ extern int g_7746d8;
 extern int g_7746dc;
 extern int g_774688;
 extern int g_77468c;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char *g_6b8014;
 extern int g_77250c;
 extern int g_1015eac;
@@ -16,7 +16,7 @@ extern int g_1040494;
 
 extern int __cdecl fcn_00506380(int a0, int a1, int a2, int a3);
 extern int __cdecl d2_GetResourceData(int a0);
-extern int __cdecl fcn_00451840(char *p, int a1, float a2);
+extern int __cdecl CompareVector3WithinTolerance(char *p, int a1, float a2);
 extern void __cdecl fcn_0047a040(int a0, int a1, int a2, int a3);
 extern void __cdecl fcn_0047cba0(int a0, int a1, int a2, int a3, int a4);
 
@@ -51,39 +51,39 @@ void __cdecl fcn_00532bd0(void)
     if (g_774688 == -1)
     {
         v3 = 1;
-        if (!fcn_00451840(g_6b8014 + 0xfc, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(g_6b8014 + 0xfc, 0x662d70, 0.2f))
             v3 = 2;
     }
     else if (g_774688 == 1)
     {
         v4 = 1;
-        if (!fcn_00451840(g_6b8014 + 0xe4, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(g_6b8014 + 0xe4, 0x662d70, 0.2f))
             v4 = 2;
     }
     else if (g_774688 == 0)
     {
-        if (!fcn_00451840(g_6b8014 + 0xe4, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(g_6b8014 + 0xe4, 0x662d70, 0.2f))
             v4 = 1;
-        if (!fcn_00451840(g_6b8014 + 0xfc, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(g_6b8014 + 0xfc, 0x662d70, 0.2f))
             v3 = 1;
     }
     if (g_77468c == -1)
     {
         v5 = 1;
-        if (!fcn_00451840(g_6b8014 + 0xb4, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(g_6b8014 + 0xb4, 0x662d70, 0.2f))
             v5 = 2;
     }
     else if (g_77468c == 1)
     {
         v7 = 1;
-        if (!fcn_00451840(g_6b8014 + 0xcc, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(g_6b8014 + 0xcc, 0x662d70, 0.2f))
             v7 = 2;
     }
     else if (g_77468c == 0)
     {
-        if (!fcn_00451840(g_6b8014 + 0xb4, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(g_6b8014 + 0xb4, 0x662d70, 0.2f))
             v5 = 1;
-        if (!fcn_00451840(g_6b8014 + 0xcc, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(g_6b8014 + 0xcc, 0x662d70, 0.2f))
             v7 = 1;
     }
     fcn_0047a040(0, 0, *(int *)(g_77250c + 4), *(int *)(g_77250c + 8));

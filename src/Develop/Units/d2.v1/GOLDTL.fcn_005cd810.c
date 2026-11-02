@@ -1,7 +1,7 @@
 extern int g_772514;
 extern int g_67d370;
-extern int g_774654;
-extern unsigned short g_774970;
+#include "client_dialog_state.h"
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
 extern int g_14ce8d8;
 extern int g_14ce8e0;
@@ -20,7 +20,7 @@ int __cdecl fcn_004e8cb0(int, int, char*);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005463a0(int, int, ...);
 int __cdecl he_fn_Handlung(void);
-int __cdecl cm_ChkCutsceneReady(int, unsigned short);
+int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 float __cdecl fcn_004fef80(char*);
 int __cdecl fcn_005c9f10(int, int, int, int, int, short*);
 int __cdecl fcn_005c99a0(int, int, int, int, int, int);
@@ -125,7 +125,7 @@ void __cdecl fcn_005cd810(int a0)
 					}
 				}
 				rec[i].text3 = 0;
-				if (cm_ChkCutsceneReady(*(int*) (ent + 4), g_774970) >= 1) {
+				if (CountMatchingStraftatEntries(*(int*) (ent + 4), g_774970) >= 1) {
 					rec[i].text3 = 0x6cd;
 				} else {
 					j = fcn_005463a0(1, 0, 0x18);

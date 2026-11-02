@@ -5,7 +5,7 @@ extern int g_7f4c00;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca4[];
 
 int __cdecl fcn_004c4450(int id);

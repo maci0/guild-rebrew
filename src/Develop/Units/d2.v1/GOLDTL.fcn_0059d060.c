@@ -36,7 +36,7 @@ extern int g_14abc44;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern Name14 g_7f4c00;
 extern char s_6aa490[];
 

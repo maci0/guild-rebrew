@@ -13,7 +13,7 @@ extern int g_67d370;
 extern int g_7e46ac;
 extern int g_7746f0;
 extern int g_772514;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_7e2aa0;
 extern int* g_7e2a9c;
 extern int g_7ea360;

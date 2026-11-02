@@ -4,8 +4,8 @@
 
 extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca4[];
-extern char g_869480[0x300][0x300];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_matrices.h"
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern float g_664174;
 extern char g_6a5a48[];
 

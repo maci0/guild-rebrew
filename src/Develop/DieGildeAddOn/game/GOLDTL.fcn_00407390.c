@@ -6,12 +6,12 @@ extern int g_67530c;
 extern int g_675310;
 
 void __cdecl ReportClientMessage(const char* msg);
-int __cdecl fcn_004050c0(char* obj);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl fcn_00445600(char* a, int b, char* c, char* d);
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
 int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe);
 char __cdecl SelectTextureSet(void* obj, void* ctx, unsigned char a, char b);
-void __cdecl CharacterClearSitting(unsigned char* ch);
+#include "Develop/DieGildeAddOn/game/ch_action.h"
 void __cdecl ch_SetPosition(char* obj, float* position, int flag);
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl ch_SetVisible(char* obj, int shown);
@@ -32,7 +32,7 @@ void __cdecl ch_Move2Universe(char* a0)
 	v3 = *(char**) (a0 + 0x14);
 	if (v2 < 0) {
 		ReportClientMessage((char*) 0x675a40);
-		fcn_004050c0(v4);
+		ch_RemoveQueueEntry(v4);
 		return;
 	}
 	if ((v2 == 0 && *(int*) (v4 + 0x34) != -1)
@@ -41,13 +41,13 @@ void __cdecl ch_Move2Universe(char* a0)
 			ReportClientMessage((char*) 0x675950);
 		else
 			ReportClientMessage((char*) 0x6759c8);
-		fcn_004050c0(v4);
+		ch_RemoveQueueEntry(v4);
 		return;
 	}
 	v5 = (int) ch_MoveCharacter2Universe(v3, g_10432c0 + v2 * 0x3dc);
 	if (v5 == 0) {
 		ReportClientMessage((char*) 0x675918);
-		fcn_004050c0(v4);
+		ch_RemoveQueueEntry(v4);
 		return;
 	}
 	{
@@ -65,7 +65,7 @@ void __cdecl ch_Move2Universe(char* a0)
 					(char*) *(int*) (*(int*) (v3 + 0x34) + 0x1ec) + 0xf4,
 					*(unsigned char*) (v3 + 0x23a), 1);
 		}
-		CharacterClearSitting((unsigned char*) v3);
+		ch_ClearSitting((unsigned char*) v3);
 		if (*(char*) (v4 + 0x17c)) {
 			ch_SetPosition(v3, (float*) (v4 + 0x180), 0);
 		} else {
@@ -96,6 +96,6 @@ void __cdecl ch_Move2Universe(char* a0)
 			&& *(char*) (*(int*) (v4 + 0x28) + 9) == 0x38)
 			ch_SetVisible(v3, 0);
 		fcn_004432d0(saved, 1);
-		fcn_004050c0(v4);
+		ch_RemoveQueueEntry(v4);
 	}
 }

@@ -1,8 +1,8 @@
 extern char* g_772500;
 extern char* g_77255c;
 extern int g_772514;
-extern int g_774654;
-extern unsigned short g_774970;
+#include "client_dialog_state.h"
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern char g_8680b4[];
 extern int g_100f1dc;

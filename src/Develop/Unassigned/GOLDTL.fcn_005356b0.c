@@ -1,5 +1,5 @@
 extern int g_774650;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_7e35c0[];
 
 /* ADDRESS: GOLDTL 0x005356b0 */

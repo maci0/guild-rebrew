@@ -1,4 +1,4 @@
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;

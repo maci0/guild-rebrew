@@ -37,7 +37,7 @@ extern char g_7e2480[];
 extern char g_773de8;
 typedef struct VFS_DIR VFS_DIR;
 extern VFS_DIR* g_6b7fdc;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_6b5c60[];
 
 void __cdecl fcn_00535850(int, char*);

@@ -5,7 +5,7 @@ extern int g_6a3760;
 extern char g_681130[];
 extern int g_100f1dc;
 extern int g_774954;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int h);
 int __cdecl fcn_00470820(int a, int b, int* c);

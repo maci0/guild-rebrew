@@ -3,7 +3,7 @@
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
-int __cdecl fcn_004c7550(char* a1)
+int __cdecl cm_ChkCutsceneReady(char* a1)
 {
 	int i;
 	char* e;

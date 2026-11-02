@@ -1,5 +1,5 @@
 void __cdecl fcn_00530510(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 void __cdecl init_LoadObjektScene(int);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_0043aa30(int);
@@ -58,7 +58,7 @@ void __cdecl fcn_005a86a0(void* a0)
 	save58 = *(int*) 0x7e3a58;
 	*(int*) 0x6a2520 = 0;
 	fcn_00530510();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 	id = *(unsigned short*) a0;
 	v1 = *(char*) (id + 0x7f3b40);
 	if (v1 != (char) 0xfe) {
@@ -137,7 +137,7 @@ void __cdecl fcn_005a86a0(void* a0)
 	}
 	*(char*) 0x772d10 = 1;
 	fcn_00530510();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 	fcn_005338a0();
 	*(void**) 0x7ea360 = 0;
 	if (sub != -1) {

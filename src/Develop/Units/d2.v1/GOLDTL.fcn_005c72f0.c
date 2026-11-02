@@ -17,7 +17,7 @@ extern int g_1015ea0;          /* 0x01015ea0 */
 extern int g_67d370;           /* 0x0067d370 */
 extern int g_772514;           /* 0x00772514 */
 extern unsigned char g_773d75; /* 0x00773d75 */
-extern int g_774654;           /* 0x00774654 */
+#include "client_dialog_state.h"           /* 0x00774654 */
 extern int g_775334;           /* 0x00775334 */
 extern int g_7e46ac;           /* 0x007e46ac */
 extern char s_6ac7b0[];        /* 0x006ac7b0 */

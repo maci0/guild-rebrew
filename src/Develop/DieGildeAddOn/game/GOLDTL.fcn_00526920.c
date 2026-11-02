@@ -6,12 +6,12 @@ extern char* g_7e2704;
 extern char* g_7e2708;
 extern char g_7e2714[];
 extern char* lpGebaeudePROT;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_7746c4;
 extern char* g_7746c8;
 extern char* g_7746cc;
 extern int g_774650;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_774658;
 extern int g_774670;
 extern char g_7f4e51[];

@@ -36,7 +36,7 @@ void __cdecl fcn_00530a00(char*);
 void __cdecl fcn_00505c80(char*);
 int __cdecl fcn_00413190(int);
 void __cdecl ch_SetVisible(char*, int);
-int __cdecl fcn_004053a0(char*, int);
+#include "Develop/DieGildeAddOn/game/ch_ground.h"
 void __cdecl fcn_004fdcf0(char*);
 void __cdecl fcn_004fdfe0(char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -123,7 +123,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 			if (*(int*) (obj + 0x2c) == *(int*) (a0 + 1)
 			    || *(int*) (obj + 0x30) == *(int*) (entity + 2)) {
 				ch_SetVisible((char*) obj, 1);
-				fcn_004053a0((char*) obj, 0);
+				ch_PlaceOnGround((char*) obj, 0);
 			} else {
 				ch_SetVisible((char*) obj, 0);
 			}
@@ -140,7 +140,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 				ch_SetVisible((char*) obj, 0);
 			} else {
 				ch_SetVisible((char*) obj, 1);
-				fcn_004053a0((char*) obj, 0);
+				ch_PlaceOnGround((char*) obj, 0);
 				fcn_004fdcf0((char*) p - 0x184);
 				fcn_004fdfe0((char*) p - 0x184);
 				i++;
@@ -154,7 +154,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 		if (*(int*) (obj + 0x88) == g_67a370) {
 			if (*(int*) (obj + 0x2c) == *(int*) (a0 + 1)) {
 				ch_SetVisible((char*) obj, 1);
-				fcn_004053a0((char*) obj, 0);
+				ch_PlaceOnGround((char*) obj, 0);
 				ch_UpdateAttachedModelPosition((char*) obj, 1);
 			} else if (*(int*) (obj + 0x88) == g_67a370) {
 				ch_SetVisible((char*) obj, 0);

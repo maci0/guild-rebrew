@@ -20,7 +20,7 @@ extern int g_14b5ec4;
 extern int g_14ce8e0;
 extern int g_100f1dc;
 extern int g_67d370;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern Node_4bf8e0* g_772908;
 extern IdSlot10058a0 g_10058a0[8];
 extern int g_772900;

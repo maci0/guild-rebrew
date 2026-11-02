@@ -1,3 +1,4 @@
+#include <string.h>
 #include "client_types.h"
 
 typedef struct
@@ -19,14 +20,14 @@ extern int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 extern int __cdecl fcn_004c5620(int, char*);
 extern int __cdecl fcn_004c4450(int);
 extern char* __cdecl fcn_004c4480(int);
-extern int __cdecl fcn_004e6a30(int);
+extern int __cdecl cut_FindCutsceneById(int);
 extern void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 extern int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 extern void __cdecl fcn_00546190(char*);
 extern void __cdecl fcn_004432d0(int, int);
 extern char* __cdecl fcn_00445600(int, int, int, char*);
 extern void __cdecl fcn_00455350(char*, char*, float*);
-extern int __cdecl fcn_00451840(float*, float*, float);
+extern int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 extern void __cdecl he_CharacterBehavior(char*, int);
 extern char* __cdecl fcn_005463a0(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
@@ -37,7 +38,6 @@ extern char* __cdecl fcn_00502cd0(int, ...);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl fcn_004e69e0(int, int);
 extern int __cdecl gm_RandomMod(int);
-extern int __cdecl fcn_0064d470(char*, char*);
 extern void __cdecl fcn_004d1d40(char*, unsigned char);
 extern int __cdecl fcn_004c5980(void*);
 
@@ -117,7 +117,7 @@ void __cdecl fcn_0056b700(char* obj)
 		*(int*) (obj + 0x84) = fcn_004c5620(1, obj);
 		return;
 	case 3:
-		if (!fcn_004e6a30(*(int*) (obj + 0xe0))) {
+		if (!cut_FindCutsceneById(*(int*) (obj + 0xe0))) {
 			*(pos14_7f4c00*) (obj + 0x52) = *(pos14_7f4c00*) 0x7f4c00;
 			fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 0, 1);
 			*(int*) (obj + 0x70) = -1;
@@ -168,7 +168,7 @@ label_56b858:
 			if (cur == 0)
 				continue;
 			cur = *(char**) (*(int*) (cur + 0x184) + 0x34);
-			if (!fcn_00451840((float*) (cur + 0x4c), pos, 25000.0f)) {
+			if (!CompareVector3WithinTolerance((float*) (cur + 0x4c), pos, 25000.0f)) {
 				nearby = 0;
 				break;
 			}
@@ -185,7 +185,7 @@ label_56b858:
 					cur = gm_FindRecordById(*(int*) (ent + 0xac));
 					if (cur == 0)
 						goto next;
-					r = fcn_00451840((float*) (*(int*) (*(int*) (cur + 0x3b) + 0x34) + 0x4c), pos, 1500.0f);
+					r = CompareVector3WithinTolerance((float*) (*(int*) (*(int*) (cur + 0x3b) + 0x34) + 0x4c), pos, 1500.0f);
 					fcn_0050de80(cur, &stats);
 					code = stats.xb0;
 					if (code <= 0)
@@ -259,7 +259,7 @@ label_56b858:
 				msg[0x7c] = 1;
 				*(int*) (msg + 0x38) = prev;
 				*(int*) (msg + 0x34) = *(int*) ((unsigned int) *(unsigned short*) (slot + 0x27) * 0x21c + 0x7f4ca4);
-				if (door != 0 && fcn_0064d470(door, (char*) 0x6a1d10) != 0)
+				if (door != 0 && strstr(door, (char*) 0x6a1d10) != 0)
 					msg[0x7c] |= 8;
 				for (i = 0; i < 0x10; i++) {
 					*(int*) (msg + 0x80 + i * 4) = -1;

@@ -189,8 +189,17 @@
   },
   {
     "va": 4204704,
-    "size": 288,
-    "name": "fcn.004028a0"
+    "size": 284,
+    "name": "fcn.004028a0",
+    "extent_history": [
+      {
+        "old_size": 288,
+        "new_size": 284,
+        "reason": "Direct Gold call at 0x40b209 targets 0x4028a0; decoded body returns at 0x4029bb and four bytes of padding precede 0x4029c0",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T13:59:42.783997+00:00"
+      }
+    ]
   },
   {
     "va": 4204992,
@@ -4602,8 +4611,17 @@
   },
   {
     "va": 4385424,
-    "size": 304,
-    "name": "fcn.0042ea90"
+    "size": 293,
+    "name": "fcn.0042ea90",
+    "extent_history": [
+      {
+        "old_size": 304,
+        "new_size": 293,
+        "reason": "Gold startup calls 0x42ea90 directly; last return at 0x42ebb4 followed by eleven NOP bytes before next entry 0x42ebc0.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T15:57:07.826031+00:00"
+      }
+    ]
   },
   {
     "va": 4385728,
@@ -4642,8 +4660,17 @@
   },
   {
     "va": 4386032,
-    "size": 32,
-    "name": "fcn.0042ecf0"
+    "size": 19,
+    "name": "fcn.0042ecf0",
+    "extent_history": [
+      {
+        "old_size": 32,
+        "new_size": 19,
+        "reason": "NormalizeCase ends in a tail jump at 0x42ecfe followed by 13 NOPs; GetSubDir returns at 0x42ee0c followed by 3 NOPs. Both are direct archive-scanner callees.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T16:59:06.891086+00:00"
+      }
+    ]
   },
   {
     "va": 4386064,
@@ -4657,8 +4684,17 @@
   },
   {
     "va": 4386160,
-    "size": 160,
-    "name": "fcn.0042ed70"
+    "size": 157,
+    "name": "fcn.0042ed70",
+    "extent_history": [
+      {
+        "old_size": 160,
+        "new_size": 157,
+        "reason": "NormalizeCase ends in a tail jump at 0x42ecfe followed by 13 NOPs; GetSubDir returns at 0x42ee0c followed by 3 NOPs. Both are direct archive-scanner callees.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T16:59:06.891115+00:00"
+      }
+    ]
   },
   {
     "va": 4386320,
@@ -4682,8 +4718,31 @@
   },
   {
     "va": 4388288,
-    "size": 96,
-    "name": "fcn.0042f5c0"
+    "size": 63,
+    "name": "fcn.0042f5c0",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 63,
+        "reason": "VFS finalizer passes 0x42f5c0 and 0x42f600 as distinct qsort callbacks; first ends at ret 0x42f5fe and second tail-jumps at 0x42f614 through 0x42f618, with NOP padding between and after.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T16:02:19.164179+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4388352,
+    "size": 25,
+    "name": "fcn.0042f600",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 25,
+        "reason": "VFS finalizer passes 0x42f5c0 and 0x42f600 as distinct qsort callbacks; first ends at ret 0x42f5fe and second tail-jumps at 0x42f614 through 0x42f618, with NOP padding between and after.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T16:02:19.166283+00:00"
+      }
+    ]
   },
   {
     "va": 4388384,
@@ -8414,8 +8473,17 @@
   },
   {
     "va": 4618288,
-    "size": 400,
-    "name": "fcn.00467830"
+    "size": 398,
+    "name": "fcn.00467830",
+    "extent_history": [
+      {
+        "old_size": 400,
+        "new_size": 398,
+        "reason": "Gold archive scanner calls both minizip entries; unzOpen returns at 0x4679bd followed by two NOPs and unzGoToNextFile returns at 0x4680e2 followed by thirteen NOPs.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T17:02:34.663147+00:00"
+      }
+    ]
   },
   {
     "va": 4618688,
@@ -8473,8 +8541,17 @@
   },
   {
     "va": 4620400,
-    "size": 128,
-    "name": "fcn.00468070"
+    "size": 115,
+    "name": "fcn.00468070",
+    "extent_history": [
+      {
+        "old_size": 128,
+        "new_size": 115,
+        "reason": "Gold archive scanner calls both minizip entries; unzOpen returns at 0x4679bd followed by two NOPs and unzGoToNextFile returns at 0x4680e2 followed by thirteen NOPs.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T17:02:34.663158+00:00"
+      }
+    ]
   },
   {
     "va": 4620528,
@@ -15955,8 +16032,45 @@
   },
   {
     "va": 5032224,
-    "size": 384,
-    "name": "fcn.004cc920"
+    "size": 95,
+    "name": "fcn.004cc920",
+    "extent_history": [
+      {
+        "old_size": 384,
+        "new_size": 95,
+        "reason": "Gold dispatch entries start at 0x4cc920, 0x4cc980 and 0x4cca10; disassembly ends with returns at 0x4cc97e, 0x4cca0e and 0x4cca97",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T13:08:47.787325+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5032320,
+    "size": 143,
+    "name": "fcn.004cc980",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 143,
+        "reason": "Gold dispatch entries start at 0x4cc920, 0x4cc980 and 0x4cca10; disassembly ends with returns at 0x4cc97e, 0x4cca0e and 0x4cca97",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T13:08:47.791677+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5032464,
+    "size": 136,
+    "name": "fcn.004cca10",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 136,
+        "reason": "Gold dispatch entries start at 0x4cc920, 0x4cc980 and 0x4cca10; disassembly ends with returns at 0x4cc97e, 0x4cca0e and 0x4cca97",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T13:08:47.795821+00:00"
+      }
+    ]
   },
   {
     "va": 5032608,
@@ -21469,8 +21583,31 @@
   },
   {
     "va": 5295184,
-    "size": 113,
-    "name": "fcn.0050cc50"
+    "size": 5,
+    "name": "fcn.0050cc50",
+    "extent_history": [
+      {
+        "old_size": 113,
+        "new_size": 5,
+        "reason": "Gold 0x50cc50 is a five-byte tail jump to the bound 0x4c5f60 helper; alignment fill precedes distinct body 0x50cc60 ending at 0x50ccc1",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T15:39:29.148343+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5295200,
+    "size": 97,
+    "name": "fcn.0050cc60",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 97,
+        "reason": "Gold 0x50cc50 is a five-byte tail jump to the bound 0x4c5f60 helper; alignment fill precedes distinct body 0x50cc60 ending at 0x50ccc1",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-01T15:39:29.150800+00:00"
+      }
+    ]
   },
   {
     "va": 5295312,

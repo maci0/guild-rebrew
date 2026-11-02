@@ -9,7 +9,7 @@ extern short g_14ce8c0;
 extern short g_14ce8c2;
 extern int g_14ce8cc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char s_6a41a4[];
 
 int __cdecl sprintf(char*, const char*, ...);

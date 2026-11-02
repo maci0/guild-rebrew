@@ -219,3 +219,20 @@ impl = ""
 
 [specials.g_67a470]
 impl = ""
+
+# Comparison capacities follow the native queue and influence-matrix extents.
+# Original source storage owners remain unproved.
+[specials.g_fb5760]
+impl = "unsigned char g_fb5760[0x50000] = {0};"
+
+[specials.g_869480]
+impl = "char g_869480[0x300][0x300] = {0};"
+
+[specials.g_90e0a0]
+impl = "char g_90e0a0[0x300][0x300] = {0};"
+
+[specials.g_f31161]
+impl = ""
+
+[specials.fcn_00406120]
+impl = ""

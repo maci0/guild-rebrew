@@ -28,7 +28,7 @@ extern float g_6660d4;
 
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl cm_ChkCutsceneReady(int, unsigned short);
+int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 float __cdecl fcn_004fef80(char*);
 
 int __cdecl fcn_005ca560(Sel* s)
@@ -53,7 +53,7 @@ int __cdecl fcn_005ca560(Sel* s)
 		}
 	}
 	s->x24 = 0;
-	if (cm_ChkCutsceneReady(*(int*) (s->e + 4), SND_INDEX) > 0) {
+	if (CountMatchingStraftatEntries(*(int*) (s->e + 4), SND_INDEX) > 0) {
 		s->x24 = 0x6cd;
 	} else {
 		for (p = fcn_005463a0(1, 0, 0x18); p != 0; p = he_fn_Handlung()) {

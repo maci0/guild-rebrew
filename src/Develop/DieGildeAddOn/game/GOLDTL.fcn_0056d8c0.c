@@ -42,7 +42,7 @@ void __cdecl fcn_0056d8c0(char* u)
 			break;
 		}
 		e = list[i];
-		if (e != p && fcn_00451840((float*) (*(char**) (e + 0x61) + 0x4c), (float*) (*(char**) (p + 0x61) + 0x4c), (float) *(int*) (u + 0xf0)) != 0) {
+		if (e != p && CompareVector3WithinTolerance((float*) (*(char**) (e + 0x61) + 0x4c), (float*) (*(char**) (p + 0x61) + 0x4c), (float) *(int*) (u + 0xf0)) != 0) {
 			*(int*) (u + 0xac + k++ * 4) = *(int*) (e + 1);
 		}
 	}

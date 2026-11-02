@@ -22,7 +22,6 @@ extern char g_10432c0;
 extern int g_773d40;
 extern char* g_773d44;
 
-char* __cdecl fcn_0064d470(const char* s, const char* sub);
 char* __cdecl fcn_0064d1a0(char* s, int c);
 int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...);
 int __cdecl fcn_0065f220(const char* a, const char* b);
@@ -57,8 +56,8 @@ void __cdecl fcn_004fdfe0(Figure* f)
 			if (*name == 0) {
 				continue;
 			}
-			if (fcn_0064d470(name, "kopf") != 0 || fcn_0064d470(name, "KOPF") != 0 || fcn_0064d470(name, "HEAD") != 0
-			    || fcn_0064d470(name, "head") != 0) {
+			if (strstr(name, "kopf") != 0 || strstr(name, "KOPF") != 0 || strstr(name, "HEAD") != 0
+			    || strstr(name, "head") != 0) {
 				fcn_0064d41a(icon, "%s_ICON.bmp", name);
 				for (j = 0; j < g_773d40; j++) {
 					if (g_773d44[j * 0x30] == 0) {
@@ -96,7 +95,7 @@ void __cdecl fcn_004fdfe0(Figure* f)
 			for (i = 0; i < 4; i++, slot++) {
 				*slot = 0;
 				fcn_0064d41a(icon, "%s_HEAD%i_%s_ICON.bmp", base, i, kind);
-				if (fcn_0064d470(base, "zigeunermeister") != 0) {
+				if (strstr(base, "zigeunermeister") != 0) {
 					fcn_0064d41a(icon, "%s_HEAD%i_ICON.bmp", base, i);
 				}
 				*slot = 0xff;

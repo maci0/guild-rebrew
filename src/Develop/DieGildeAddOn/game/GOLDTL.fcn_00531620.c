@@ -37,7 +37,7 @@ extern int g_7e4318;
 #include "GOLDTL.fcn_00531620_gconf.h"
 extern int g_6772c4;
 extern int g_100f894;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern short g_14ce8c0;
 extern short g_14ce8c2;
 extern int g_14ce8cc;
@@ -59,7 +59,7 @@ void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5f20(int, int, int);
 int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
 void __cdecl fcn_00529160(int, int, int, int);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00531320(void);
 int __cdecl fcn_00515540(char*);
 int __cdecl fcn_005155e0(unsigned char*);
@@ -257,7 +257,7 @@ L1a0d:
 			fcn_004c5f20(*(int*) (e + 4), *(int*) (p + 1), *(int*) ((char*) g_7746b8 + 2));
 		}
 	}
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 	g_7746b8 = 0;
 
 La50:
@@ -296,6 +296,6 @@ La5d:
 		g_7e2760[idx] = c;
 	}
 	if (g_14ce8e0 != 0 && g_7746f0 != 0) {
-		fcn_0052ae70();
+		sv_ClearObjectSelection();
 	}
 }

@@ -19,7 +19,7 @@ void __cdecl fcn_004432d0(int, int);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_FindRecordById(int);
 int __cdecl gm_SearchTable67(int);
-int __cdecl fcn_004e6a30(int);
+int __cdecl cut_FindCutsceneById(int);
 
 void __cdecl fcn_0051ea70(void)
 {
@@ -48,7 +48,7 @@ void __cdecl fcn_0051ea70(void)
 				g_fb5761[i].ref = gm_SearchTable67(g_fb5761[i].ref);
 			}
 			if (g_fb5761[i].type == 9) {
-				g_fb5761[i].ref = fcn_004e6a30(g_fb5761[i].ref);
+				g_fb5761[i].ref = cut_FindCutsceneById(g_fb5761[i].ref);
 			}
 		}
 	}

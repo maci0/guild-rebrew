@@ -11,7 +11,7 @@ typedef struct Ent {
 // SIZE 0x21c
 
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char s_6ad3c4[];
 extern char s_681140[];
 extern char s_6ad3bc[];
@@ -20,7 +20,7 @@ extern char* g_7746c4;
 extern int g_14ce8e0;
 extern int g_100f1dc;
 extern int g_67d370;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl fcn_004f65a0(Ent*, int, int*, int*);

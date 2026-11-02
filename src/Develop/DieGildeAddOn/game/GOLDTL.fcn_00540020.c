@@ -9,7 +9,7 @@
  * 0x541149; that part is not reconstructed here.
  */
 
-extern unsigned short g_774970;		/* 0x00774970 */
+#include "Develop/DieGildeAddOn/game/game_player.h"		/* 0x00774970 */
 extern unsigned char g_7747b0;		/* 0x007747b0 */
 extern int g_774950;			/* 0x00774950 */
 #include "GOLDTL.fcn_00540020_gconf.h"

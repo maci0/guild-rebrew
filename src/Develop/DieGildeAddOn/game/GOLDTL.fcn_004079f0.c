@@ -46,7 +46,7 @@ int __cdecl fcn_004339e0(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);
 void __cdecl fcn_00433780(char*);
 void __cdecl fcn_00435500(char*, char*);
 void __cdecl fcn_00438cb0(char*, float*);
-int __cdecl fcn_004050c0(char*);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 /* ADDRESS: GOLDTL 0x004079f0 */
 void __cdecl fcn_004079f0(char* task)
@@ -152,7 +152,7 @@ void __cdecl fcn_004079f0(char* task)
 		fcn_00433780(*(char**) (owner + 0x34));
 		*(int*) (owner + 0x78) = 0;
 		if (*(char**) (owner + 0x70) == 0) {
-			fcn_004050c0(task);
+			ch_RemoveQueueEntry(task);
 			task = 0;
 		}
 	}
@@ -164,13 +164,13 @@ void __cdecl fcn_004079f0(char* task)
 				     (float*) (task + 0x18));
 			fcn_00433780(*(char**) (*(char**) (task + 0x14) + 0x34));
 			*(int*) (owner + 0x78) = 0;
-			fcn_004050c0(task);
+			ch_RemoveQueueEntry(task);
 			return;
 		}
 		return;
 	}
 	if (*(int*) (owner + 0x78) == 0 && task != 0) {
-		fcn_004050c0(task);
+		ch_RemoveQueueEntry(task);
 	}
 }
 /* Layout scaffolding: shifts the next source object to its reference

@@ -7,7 +7,7 @@ extern int __cdecl gm_ResolveEntityById(int*, int, int, int);
 extern int __cdecl gm_FindRecordById(int);
 extern int __cdecl fcn_005463a0(int, int, int);
 extern int __cdecl gm_SearchTable67(int);
-extern int __cdecl fcn_004e6a30(int);
+extern int __cdecl cut_FindCutsceneById(int);
 extern void __cdecl fcn_004432d0(int, int);
 extern void __cdecl fcn_005290d0(char*);
 extern void __cdecl fcn_00573e10(char*);
@@ -170,7 +170,7 @@ unsigned int __cdecl fcn_00525670(void)
 			if (*(char*) (rec - 5) == 2)
 				*(int*) rec = gm_SearchTable67(v9);
 			if (*(char*) (rec - 5) == 9)
-				*(int*) rec = fcn_004e6a30(v9);
+				*(int*) rec = cut_FindCutsceneById(v9);
 		}
 	}
 	fcn_00510100();

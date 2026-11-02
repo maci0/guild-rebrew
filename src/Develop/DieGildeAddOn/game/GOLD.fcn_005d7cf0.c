@@ -19,7 +19,7 @@ extern char* g_77255c;
 extern int g_7725c8;
 extern int g_14ce8e0;
 extern char g_14cf950;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern float g_6a24e4;
 
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);

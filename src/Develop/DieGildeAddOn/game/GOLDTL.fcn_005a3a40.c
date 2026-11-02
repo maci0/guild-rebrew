@@ -9,7 +9,7 @@ extern char* g_773d78;
 extern char* g_7746cc;
 
 void __cdecl fcn_0052f710(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_0057e880(int, int, int, int);
@@ -20,7 +20,7 @@ void __cdecl fcn_005a3a40(int a1, int a2)
 	(*(int*)&g_7e2aa0) = 0;
 	g_7746c0 = 0;
 	fcn_0052f710();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 	g_7746d4 = 1;
 	if (g_6a25b8 != -1) {
 		fcn_00471af0(g_6a25b8, 0);

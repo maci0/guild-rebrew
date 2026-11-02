@@ -1,6 +1,6 @@
 extern double g_662b20;
 extern int g_772e6c;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004c3100(char*, int);

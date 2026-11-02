@@ -44,7 +44,7 @@ extern char* g_772500;
 extern int g_772514;
 extern char* g_1015ea0;
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl fcn_0046f740(int x, int y, int a3, int win);
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);

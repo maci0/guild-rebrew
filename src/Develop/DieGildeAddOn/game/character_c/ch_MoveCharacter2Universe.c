@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #endif
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_004053a0(void*, int);
+#include "Develop/DieGildeAddOn/game/ch_ground.h"
 #ifdef REBREW_GOLD
 void __cdecl fcn_00453270(char*);
 #endif

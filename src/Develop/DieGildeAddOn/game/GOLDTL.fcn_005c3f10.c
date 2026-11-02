@@ -9,7 +9,7 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_67d370;
 extern int g_7747b0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char g_773d75;
 extern int g_14ab294;
 

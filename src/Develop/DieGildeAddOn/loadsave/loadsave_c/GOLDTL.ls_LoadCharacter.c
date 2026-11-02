@@ -23,7 +23,6 @@ extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 extern int __cdecl fcn_0051ad90(int);
 extern int __cdecl fcn_004fda30(int);
 extern int __cdecl fcn_0042f690(char*, void*, void*, char*);
-extern void __cdecl fcn_0066080a(char*);
 extern int __cdecl ch_CreateMesh(void*, char*, void*);
 extern void __cdecl fcn_00407800(void*, int, void*);
 extern void __cdecl fcn_0040c360(void*, void*);
@@ -35,7 +34,7 @@ extern char* __cdecl fcn_0050d430(void*);
 extern char __cdecl SelectTextureSet(void*, void*, unsigned char, char);
 extern int __cdecl fcn_00403ce0(void*, void*);
 extern void __cdecl ch_SetVisible(void*, int);
-extern void __cdecl fcn_00405130(void*);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 extern int __cdecl fcn_004432d0(int, int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern int __cdecl fcn_00515540(char*);
@@ -118,7 +117,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 				sprintf(name, s_6a2498, rec + 0x130);
 			}
 			sprintf(path, s_6a2490, name);
-			fcn_0066080a(path);
+			_strupr(path);
 			if (fcn_0042f690(path, &g_6b7fdc, &g_6b7fdc, text) == 0) {
 				p = *(char**) (rec + 0x12c);
 				t = *(unsigned short*) p;
@@ -275,7 +274,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 		if (v == 0) {
 			if (u[5] != 0) {
 				if (*(int*) ((char*) u[5] + 0x128) != 0) {
-					fcn_00405130(u[5]);
+					ch_ClearActionQueue((void*) u[5]);
 				}
 				*(unsigned int*) ((char*) u[5] + 0x128) = (unsigned int) u;
 			} else {

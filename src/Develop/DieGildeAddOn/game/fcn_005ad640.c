@@ -39,10 +39,10 @@ typedef struct ObjMsg {
 extern unsigned char* g_7746c4;
 extern unsigned char* g_7746c8;
 extern unsigned char* lpGebaeudePROT;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern Ent g_7f4ca0[];
 extern int g_100f1dc;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_14ce8e0;
 extern int g_67d370;
 extern int g_14abc98;

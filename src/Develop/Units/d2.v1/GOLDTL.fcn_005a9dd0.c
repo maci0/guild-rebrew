@@ -15,11 +15,11 @@ typedef struct {
 extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 extern char g_868060[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_67d370;
 extern char g_6aae08[];
 

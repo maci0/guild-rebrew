@@ -1881,7 +1881,7 @@ int __cdecl ls_LoadDynamicEntities(void* file)
 
 
 #if !defined(REBREW_SERVER)
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 #endif
 
 int __cdecl ls_LoadEntities(void* ctx)

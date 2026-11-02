@@ -19,7 +19,7 @@ int __cdecl fcn_00493be0(char*);
 int __cdecl fcn_004f6810(char*, unsigned int);
 void __cdecl fcn_00472640(int, int);
 extern int g_100f1dc;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_67d370;
 extern int g_68bfb8;
 extern int g_772514;

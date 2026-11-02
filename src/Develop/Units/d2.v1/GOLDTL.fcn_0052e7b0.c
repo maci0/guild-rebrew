@@ -23,7 +23,7 @@ extern int g_6a25d8;
 extern int g_1040494;
 extern int g_7746f0;
 extern int g_14b5f10;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_772514;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];

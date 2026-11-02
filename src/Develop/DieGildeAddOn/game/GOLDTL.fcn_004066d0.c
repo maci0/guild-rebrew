@@ -43,7 +43,7 @@ void __cdecl UsingGate(char* ev)
 	saved = g_6b8010;
 	room = fcn_00413190(*(int*) (obj + 0x88));
 	if (room == *(int*) (ev + 0x170)) {
-		fcn_004050c0(ev);
+		ch_RemoveQueueEntry(ev);
 		return;
 	}
 	fcn_004432d0(room, 1);
@@ -64,5 +64,5 @@ void __cdecl UsingGate(char* ev)
 	next = ch_InsertAction(obj, ev, 0x33, *(int*) (ev + 0x170), *(int*) (ev + 0x174), *(int*) (ev + 0x178));
 	strcpy(next + 0xf0, ev + 0xf0);
 	ch_InsertAction(obj, next, 0x38, 1);
-	fcn_004050c0(ev);
+	ch_RemoveQueueEntry(ev);
 }

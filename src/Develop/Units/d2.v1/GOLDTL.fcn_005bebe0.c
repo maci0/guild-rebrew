@@ -46,12 +46,12 @@ struct s_1015f4c
 };
 
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_772514;
 extern int g_7725d0;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char* g_1015ea0;
 extern float g_662a98;
 extern float g_664168;

@@ -38,7 +38,7 @@ extern int g_1042570;
 extern int g_1042574;
 extern int g_1042578;
 extern int g_104257c;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_67a370;
 #include "Develop/Units/d3/d3_camera.h"
 extern char g_1052be0[];

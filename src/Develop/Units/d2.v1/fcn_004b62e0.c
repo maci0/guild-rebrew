@@ -31,7 +31,7 @@ typedef struct Req {
 // SIZE 0x7c
 
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_10069a0[];
 extern signed char g_6a3440;
 

@@ -1,9 +1,9 @@
 extern char g_9a9660[];
-extern char g_9a9660[];
+
 
 /* ADDRESS: GOLD 0x004e50a0 */
 /* ADDRESS: GOLDTL 0x004e6a30 */
-char* __cdecl fcn_004e6a30(int a1)
+char* __cdecl cut_FindCutsceneById(int a1)
 {
 	int i;
 	int a;

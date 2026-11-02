@@ -2,11 +2,11 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 extern int g_772514;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_7f4c00;
 extern int g_7f4c04;
 extern int g_7f4c08;

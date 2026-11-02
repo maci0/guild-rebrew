@@ -10,7 +10,7 @@ struct OWNER_406e70 {
 };
 
 int __cdecl ch_AttachAni(void* owner, void* name, int flags);
-int __cdecl fcn_004050c0(char* task);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 /* ADDRESS: GOLDTL 0x00406e70 */
 void __cdecl fcn_00406e70(char* task)
@@ -35,5 +35,5 @@ void __cdecl fcn_00406e70(char* task)
 			return;
 		}
 	}
-	fcn_004050c0(task);
+	ch_RemoveQueueEntry(task);
 }

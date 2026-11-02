@@ -46,8 +46,7 @@ typedef struct {
 	int flags;
 } Guild4adc;
 
-extern char g_869480[0x300][0x300];
-extern char g_90e0a0[0x300][0x300];
+#include "Develop/DieGildeAddOn/game/game_matrices.h"
 extern char g_8680b4[];
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];

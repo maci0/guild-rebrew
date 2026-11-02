@@ -23,10 +23,10 @@ struct s_1015f4c {
 
 extern s_1015f4c g_1015f4c[];
 extern int g_772514;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_67d370;
 
 char* __cdecl gm_LookupEntityRecordById(int id);

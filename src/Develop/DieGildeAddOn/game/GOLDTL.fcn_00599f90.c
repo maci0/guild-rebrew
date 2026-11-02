@@ -23,7 +23,7 @@ extern int g_6a2594;
 extern char g_7746f4;
 extern unsigned char* g_7746c8;
 extern char* g_7746c4;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 unsigned char* __cdecl fcn_005bdc30(int, Query*, int, int, int);
 int __cdecl gm_CheckEntityType(unsigned char*);

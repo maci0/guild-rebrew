@@ -19,7 +19,7 @@ extern char g_6a5d04[];
 extern char g_6a5ce8[];
 extern char g_6a5ccc[];
 extern char g_67d908[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_774964;
 extern char g_7749e8;
 extern int g_7749e4;

@@ -46,7 +46,7 @@ void __cdecl fcn_0056c8f0(char* u)
 		e = list[i];
 		fcn_00455350(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, v1);
 		fcn_00455350(*(char**) (pick + 0x61), *(char**) (pick + 0x61) + 0x4c, v2);
-		if (e != pick && fcn_00451840(v1, v2, (float) *(int*) (u + 0xf0)) != 0) {
+		if (e != pick && CompareVector3WithinTolerance(v1, v2, (float) *(int*) (u + 0xf0)) != 0) {
 			((int*) (u + 0xac))[m++] = *(int*) (e + 1);
 		}
 	}

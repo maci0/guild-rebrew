@@ -1,4 +1,4 @@
-extern int g_774970;
+
 extern int __cdecl fcn_0046f740(int x, int y, int id, int ctx);
 extern int __cdecl io_FormatTextBuffer(char* dst, const char* fmt, ...);
 extern int __cdecl fcn_005c9090(char* text, int x, int y, int color, int flags);

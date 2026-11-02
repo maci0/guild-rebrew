@@ -13,7 +13,7 @@
  * 0x528fcf; that part is not reconstructed here.
  */
 
-extern unsigned short g_774970;		/* 0x00774970 */
+#include "Develop/DieGildeAddOn/game/game_player.h"		/* 0x00774970 */
 extern int g_1040490;			/* 0x01040490 */
 extern int g_1040494;			/* 0x01040494 */
 extern int g_774674;			/* 0x00774674 */

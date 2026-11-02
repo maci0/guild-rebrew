@@ -33,7 +33,7 @@ extern int g_774954;			/* 0x00774954 */
 extern int g_77497c;			/* 0x0077497c */
 extern int g_774950;			/* 0x00774950 */
 #include "GOLDTL.fcn_005438c0_gconf.h"
-extern unsigned short g_774970;		/* 0x00774970 */
+#include "Develop/DieGildeAddOn/game/game_player.h"		/* 0x00774970 */
 extern unsigned char g_77494c;		/* 0x0077494c */
 extern unsigned char g_773de8;		/* 0x00773de8 */
 extern unsigned char g_773d75;		/* 0x00773d75 */

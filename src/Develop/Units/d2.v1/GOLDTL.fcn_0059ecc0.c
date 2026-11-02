@@ -44,7 +44,7 @@ void __cdecl fcn_005963f0(int, int, int, int);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_004c35f0(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
@@ -187,7 +187,7 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 				}
 				else {
 					fcn_004c35f0();
-					fcn_0052ae70();
+					sv_ClearObjectSelection();
 					sel = fcn_004c5530(&req);
 					while (!fcn_004c4450(sel)) {
 						fcn_005373e0(0, 0x20007);
@@ -201,7 +201,7 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 			*(int*) 0x774654 = 1;
 		sel = fcn_005373e0(0x59ecc0, 0x677c7);
 	}
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 	fcn_0052a2d0();
 	fcn_00471e30(total);
 	return fcn_00532ef0();

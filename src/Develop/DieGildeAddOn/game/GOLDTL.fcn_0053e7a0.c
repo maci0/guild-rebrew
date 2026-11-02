@@ -12,7 +12,6 @@ struct vec4 {
 
 extern float g_662d70[4];
 
-char* __cdecl fcn_0066080a(char*);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00455350(char*, char*, struct vec4*);
@@ -32,7 +31,7 @@ char* __cdecl fcn_0053e7a0(char* name)
 	v.z = 0.0f;
 	v.w = 0.0f;
 	strcpy(upper, name);
-	fcn_0066080a(upper);
+	_strupr(upper);
 	sprintf(dummy, "dummy_%s", upper);
 	p = fcn_00445600(0, 0x140, 0, dummy);
 	if (p == 0) {

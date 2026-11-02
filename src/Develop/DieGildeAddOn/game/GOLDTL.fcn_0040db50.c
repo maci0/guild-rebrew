@@ -21,7 +21,7 @@ int __cdecl fcn_0040db50(char** a1)
 		if (q != 0) {
 			q[0x190] = 1;
 			while ((e = *(char**) (q + 0x28)) != 0) {
-				fcn_004050c0(e);
+				ch_RemoveQueueEntry(e);
 			}
 		}
 	}

@@ -7,10 +7,10 @@ extern char* g_aed32c;
 extern int g_14aba40;
 extern int g_14aba48;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_67d370;
 extern int g_100f1dc;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern double g_662908;
 extern double g_6640f8;
 extern double g_665fc0;

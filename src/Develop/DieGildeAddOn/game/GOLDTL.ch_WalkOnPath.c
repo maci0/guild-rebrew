@@ -19,7 +19,7 @@ extern char g_675504[]; /* "%s_%s" */
 extern char g_6753fc[]; /* "bewegung/gehen" */
 
 int __cdecl fcn_00402610(char*);
-int __cdecl fcn_004050c0(char*);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 int __cdecl fcn_00407610(char*);
 int __cdecl fcn_004094c0(char*, int);
 void __cdecl fcn_004098e0(char*, int);
@@ -29,7 +29,7 @@ void __cdecl ch_FinishAni(char*);
 void __cdecl fcn_00435500(char*, char*);
 void __cdecl fcn_00433780(void*);
 void __cdecl fcn_00438b40(char*, int*);
-int __cdecl fcn_004053a0(char*, int);
+#include "Develop/DieGildeAddOn/game/ch_ground.h"
 void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_0042e540(char*);
 void __cdecl ch_WalkOnPathRotation(char*);
@@ -53,7 +53,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 				return;
 			}
 		}
-		fcn_004050c0(obj);
+		ch_RemoveQueueEntry(obj);
 		return;
 	}
 	if (*(char*) (obj + 0x190) != 0) {
@@ -73,7 +73,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 			m_FreeTracked(*(void**) (obj + 0xf4));
 			*(int*) (obj + 0xf4) = 0;
 		}
-		fcn_004050c0(obj);
+		ch_RemoveQueueEntry(obj);
 		return;
 	}
 	else {
@@ -93,7 +93,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 		}
 		if (*(int*) (obj + 0xc) == 0) {
 			if (*(char*) (*(char**) (inst + 0x88) + 0x3d5) != 0) {
-				fcn_004050c0(obj);
+				ch_RemoveQueueEntry(obj);
 				return;
 			}
 			if (!fcn_004094c0(obj, res)) {
@@ -143,7 +143,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 					m_FreeTracked(*(void**) (obj + 0xf4));
 					*(int*) (obj + 0xf4) = 0;
 				}
-				fcn_004050c0(obj);
+				ch_RemoveQueueEntry(obj);
 				return;
 			}
 		}
@@ -171,7 +171,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 				}
 				*(unsigned int*) (obj + 0x160) |= 0x80;
 				fcn_00438b40(*(char**) (inst + 0x34), (int*) (obj + 0x144));
-				fcn_004053a0(inst, g_6b8010 != 0);
+				ch_PlaceOnGround(inst, g_6b8010 != 0);
 				return;
 			}
 		}

@@ -21,7 +21,7 @@ int __cdecl fcn_005ba020(char* a1, char* a2)
 	}
 	if (*(int*) (a1 + 0x61) != 0) {
 		fcn_00455350(*(int*) (a1 + 0x61), *(int*) (a1 + 0x61) + 0x4c, v);
-		if (fcn_00451840((float*) (*(char**) (s + 0x34) + 0x4c), v, 1350.0f) != 0 && *(int*) (s + 0x128) == 0) {
+		if (CompareVector3WithinTolerance((float*) (*(char**) (s + 0x34) + 0x4c), v, 1350.0f) != 0 && *(int*) (s + 0x128) == 0) {
 			return 1;
 		}
 	}

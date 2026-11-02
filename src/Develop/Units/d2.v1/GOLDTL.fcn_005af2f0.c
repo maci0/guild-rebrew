@@ -32,12 +32,12 @@ typedef struct
 // SIZE 0x21c
 
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14abc98;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char* g_7746c4;
 extern char s_6ab348[];
 
@@ -50,7 +50,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl cm_ExProdObjekt(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
@@ -115,7 +115,7 @@ int __cdecl ConfirmProductionSelection(int unused, char* a)
 					fcn_004c5530(&pkt);
 					cm_ExProdObjekt();
 				}
-				fcn_0052ae70();
+				sv_ClearObjectSelection();
 				g_774654 = 2;
 			}
 			else if (g_67d370 == btn2) {

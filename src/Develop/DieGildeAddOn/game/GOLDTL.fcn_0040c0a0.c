@@ -3,67 +3,38 @@
 
 #include <string.h>
 
-typedef struct Task Task;
-
-// SIZE 0x194
-struct Task {
-	void (__cdecl* run)(Task* t);
-	void (__cdecl* done)(Task* t);
-	unsigned char level;
-	char kind;
-	char pad0a[2];
-	int state;
-	unsigned char flags;
-	char pad11[3];
-	char* owner;
-	char pad18[0x24 - 0x18];
-	Task* prev;
-	Task* next;
-	char pad2c[4];
-	int param;
-	int a34;
-	int a38;
-	char pad3c[0xf0 - 0x3c];
-	char name[0x40];
-	char name2[0x40];
-	int a170;
-	int a174;
-	float a178;
-	char pad17c[0x190 - 0x17c];
-	unsigned char b190;
-	char pad191[3];
-};
+#include "Develop/DieGildeAddOn/game/ch_action.h"
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 #include "Develop/Units/Error/error_message.h"
 
 
-Task* __cdecl fcn_0040c0a0(char* e)
+CH_ACTION* __cdecl fcn_0040c0a0(char* e)
 {
-	Task* t;
-	Task* p;
+	CH_ACTION* t;
+	CH_ACTION* p;
 
-	t = (Task*) ch_GetFreeQueueEntry();
+	t = (CH_ACTION*) ch_GetFreeQueueEntry();
 	if (t == 0) {
 		ReportClientMessage("no free task slot");
 		return 0;
 	}
-	memset(t, 0, sizeof(Task));
-	if (*(Task**) (e + 0x128) == 0) {
-		*(Task**) (e + 0x128) = t;
+	memset(t, 0, sizeof(CH_ACTION));
+	if (*(CH_ACTION**) (e + 0x128) == 0) {
+		*(CH_ACTION**) (e + 0x128) = t;
 	} else {
-		p = *(Task**) (e + 0x128);
-		while (p->next != 0) {
-			p = p->next;
+		p = *(CH_ACTION**) (e + 0x128);
+		while (p->naechste != 0) {
+			p = p->naechste;
 		}
-		p->next = t;
-		t->prev = p;
+		p->naechste = t;
+		t->vorherige = p;
 	}
-	t->owner = e;
-	t->state = 0;
-	t->run = 0;
-	t->next = 0;
-	t->flags = 0;
+	t->besitzer = e;
+	t->zustand = 0;
+	t->ausfuehren = 0;
+	t->naechste = 0;
+	t->merkmale = 0;
 	fcn_00405180(e, t);
 	return t;
 }

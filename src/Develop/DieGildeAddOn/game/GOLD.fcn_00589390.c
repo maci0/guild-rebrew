@@ -10,7 +10,7 @@ struct sel {
 
 extern int g_772514;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);

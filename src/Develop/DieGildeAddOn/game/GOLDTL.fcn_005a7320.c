@@ -4,7 +4,7 @@
 extern char* g_7746c4;
 extern int g_774650;
 extern int g_774658;
-extern int g_774654;
+#include "client_dialog_state.h"
 #include "Develop/Units/d3/d3_camera.h"
 extern int g_774688;
 extern int g_77468c;

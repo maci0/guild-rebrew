@@ -18,7 +18,7 @@ typedef struct {
 
 extern unsigned char g_773d75;
 extern int g_100f1dc;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca4[];
 
 int __cdecl fcn_00470820(int, int, char*);

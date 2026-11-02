@@ -19,7 +19,7 @@ typedef struct {
 extern char g_7f4ca0[];
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern char g_77531c;
 

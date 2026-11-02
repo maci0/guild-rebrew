@@ -1,5 +1,5 @@
 extern int g_772ea4;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_0052ae80(void);

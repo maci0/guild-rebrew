@@ -15,7 +15,7 @@ int __cdecl fcn_004730c0(int a, int b, int c, int d, char* e, int f, int g);
 void __cdecl fcn_004e5980(void);
 void __cdecl tb_OpenFunction(char* a, int b);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 void __cdecl ResetDisplayCounters(void);
 void __cdecl fcn_00525ef0(void);
 void __cdecl fcn_00469e70(void);
@@ -164,7 +164,7 @@ void __cdecl fcn_004e5a00(int* event)
     *(float*) 0x67a964 = 1.0f;
     *(int*) 0x6b5c34 = 0;
     d2_SetOverlayAnimation(0, 0);
-    fcn_0052ae70();
+    sv_ClearObjectSelection();
     ResetDisplayCounters();
     fcn_00525ef0();
     unit = (int*) *(int*) 0x1015ea0;

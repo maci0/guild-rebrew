@@ -58,13 +58,13 @@ typedef struct GOLDTL_Screen5cff {
 } GOLDTL_Screen5cff;
 
 extern unsigned char* lpGebaeudePROT;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_772514;
 extern char* g_772500;
 extern char* g_77255c;
 extern int g_1015ea0;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_67d370;
 extern int g_100f1dc;
 extern char g_7f4ca0[];

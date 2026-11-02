@@ -18,7 +18,7 @@ extern char g_67567c[];
 void __cdecl fcn_004058f0(char* m);
 void __cdecl ch_CheckAniMorph(char* e);
 void __cdecl fcn_00435500(char* a, char* b);
-int __cdecl fcn_004054b0(char* e);
+#include "Develop/DieGildeAddOn/game/ch_action.h"
 int __cdecl fcn_00405d70(char* self, char** out, float range);
 char* __cdecl fcn_00402610(char* obj);
 void __cdecl fcn_00405c70(char* src, float* dst);
@@ -68,7 +68,7 @@ int __cdecl ch_Update(void)
 				*(char**) (*p + 0x70) = 0;
 				*(*p + 0x8d) &= 0xdf;
 			}
-			fcn_004054b0(*p);
+			ch_ExecuteAction(*p);
 		} else if (*(char**) (*p + 0x88) == (char*) g_67a370 && (f = *(unsigned short*) (*p + 0x8c), (f & 0x32) == 0) &&
 			   (f & 0x8000) == 0 && *(int*) (*p + 0x124) == 0) {
 			if (fcn_00405d70(*p, list, 20.0f) != 0) {

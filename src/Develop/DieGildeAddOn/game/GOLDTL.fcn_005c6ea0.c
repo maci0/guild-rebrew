@@ -47,14 +47,14 @@ typedef struct
 
 extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 extern int g_14abc44;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char s_6ac79c[];
 
 char* __cdecl fcn_005463a0(int, int, int, int, int);
@@ -74,7 +74,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl fcn_00532ef0(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 
 void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 {
@@ -166,5 +166,5 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 	fcn_00471e30(dlg);
 	fcn_0052a2d0();
 	fcn_00532ef0();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 }

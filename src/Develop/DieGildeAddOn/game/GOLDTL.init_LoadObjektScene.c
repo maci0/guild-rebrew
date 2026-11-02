@@ -33,12 +33,12 @@ void __cdecl gv_Free3Fields(int*);
 int __cdecl fcn_004026f0(char*);
 void __cdecl fcn_0045b290(char*, int);
 char __cdecl fcn_00437ac0(int, void*, int, void (__cdecl*)(void));
-int __cdecl fcn_00451840(float*, float*, float);
+int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 char* __cdecl fcn_00445600(char*, int, char*, char*);
 char* __cdecl fcn_00407330(void);
 void __cdecl fcn_00455350(char*, float*, float*);
 void __cdecl ch_SetPosition(char*, float*, int);
-int __cdecl fcn_004053a0(char*, int);
+#include "Develop/DieGildeAddOn/game/ch_ground.h"
 int __cdecl fcn_00413160(void);
 void __cdecl ReportClientMessage(const char*);
 int __cdecl fcn_005105a0(char*);
@@ -117,7 +117,7 @@ void __cdecl init_LoadObjektScene(int a0)
 					obj = (char*) *p;
 					if (obj != 0
 					    && *(int*) (obj + 0x88) == (int) (g_10432c0 + slot * 4)) {
-						if (fcn_00451840((float*) (obj + 0x38), (float*) g_662d70, 0.5f) != 0) {
+						if (CompareVector3WithinTolerance((float*) (obj + 0x38), (float*) g_662d70, 0.5f) != 0) {
 							if ((*(int*) (obj + 0x124) != 0
 							     && (found = fcn_00445600(0, 0x100, 0, s_68b0f4)) != 0)
 							    || (found = fcn_00407330()) != 0
@@ -128,7 +128,7 @@ void __cdecl init_LoadObjektScene(int a0)
 							}
 						} else {
 							ch_SetPosition(obj, (float*) (obj + 0x38), 1);
-							fcn_004053a0(obj, 1);
+							ch_PlaceOnGround(obj, 1);
 						}
 					}
 					p++;

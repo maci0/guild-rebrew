@@ -3,8 +3,7 @@
  * matrices, then raises the script events (0x210..0x218) and the ambient
  * dialogue for the chosen house. */
 
-extern signed char g_90e0a0[];
-extern signed char g_869480[];
+#include "Develop/DieGildeAddOn/game/game_matrices.h"
 extern int g_7747b4;
 extern char g_7f4ca0[];
 
@@ -58,11 +57,11 @@ int __cdecl fcn_0047d2a0(char* e)
 			d = -d;
 		}
 		f = (10.0f - (float) d * 0.5f) * 0.1f;
-		if ((float) (signed char) g_90e0a0[*(unsigned short*) e + i * 0x300] * f
+		if ((float) (signed char) g_90e0a0[i][*(unsigned short*) e] * f
 		    < bestscore) {
 			if (fcn_0050f980(i, (int) *(unsigned short*) e, 1) < 34.0f) {
 				best = i;
-				bestscore = (float) (signed char) g_90e0a0[*(unsigned short*) e + i * 0x300]
+				bestscore = (float) (signed char) g_90e0a0[i][*(unsigned short*) e]
 				            * f;
 			}
 		}
@@ -71,8 +70,8 @@ int __cdecl fcn_0047d2a0(char* e)
 	if (best == -1) {
 		return 0;
 	}
-	if (((signed char) g_869480[*(unsigned short*) e + best * 0x300] / 2
-	     + (signed char) g_90e0a0[*(unsigned short*) e + best * 0x300])
+	if (((signed char) g_869480[best][*(unsigned short*) e] / 2
+	     + (signed char) g_90e0a0[best][*(unsigned short*) e])
 	    >= -50 - ((int) fcn_0042e410(0x20) & 0xffff)) {
 		return 0;
 	}
@@ -91,7 +90,7 @@ int __cdecl fcn_0047d2a0(char* e)
 	fcn_004c4570(1, 1, 0x216, &b);
 	h = g_7f4ca0 + best * 0x21c;
 	fcn_004c4570(4, 1, 0x210, h + 4);
-	fcn_004c4570(1, 1, 0x214, &g_90e0a0[*(unsigned short*) e + best * 0x300]);
+	fcn_004c4570(1, 1, 0x214, &g_90e0a0[best][*(unsigned short*) e]);
 	fcn_004c5360();
 	fcn_004c54c0(*(int*) (h + 4), *(int*) (e + 4), 0, 2);
 	fcn_005b2560(e, h);
@@ -112,7 +111,7 @@ other_path:
 	if ((int) (unsigned char) e[0x215] >= (int) (unsigned char) e[0x216]) {
 		goto pulse;
 	}
-	if ((signed char) g_90e0a0[*(unsigned short*) other * 0x300 + *(unsigned short*) e]
+	if ((signed char) g_90e0a0[*(unsigned short*) other][*(unsigned short*) e]
 	    + (signed char) e[0x214] > 0) {
 		goto pulse2;
 	}

@@ -15,12 +15,11 @@ int __cdecl gm_RemoveLinkedNodeById(int*, int);
 
 
 
-int __cdecl fcn_0064d470(int, int);
 int __cdecl fcn_00413120(int);
 
 char __cdecl fcn_0040f3d0(int a, int b)
 {
-	if (fcn_0064d470(a, b) != 0) {
+	if (strstr((char*) a, (char*) b) != 0) {
 		fcn_00413120(a);
 	}
 	return 1;

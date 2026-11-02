@@ -2,7 +2,7 @@
 
 
 extern unsigned char* lpGebaeudePROT;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl fcn_0057f8b0(int* m)
 {

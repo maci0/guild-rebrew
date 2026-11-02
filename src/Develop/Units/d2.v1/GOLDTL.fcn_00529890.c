@@ -24,7 +24,7 @@ int fcn_00507c30(int key);
 void fcn_00517c00(int id, int a, int b, char* out);
 void fcn_00529160(char* obj, int a, int id, int b);
 int fcn_00529800(char* entity, int* out);
-void fcn_0052ae70(void);
+void sv_ClearObjectSelection(void);
 void fcn_00534210(int a, int b, char* entity, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00529890 */
@@ -325,7 +325,7 @@ label_529fe5:
 				}
 				v14 = &v14[10];
 			} while ((int) v14 < 0x7e35d0);
-			fcn_0052ae70();
+			sv_ClearObjectSelection();
 		}
 		if (*(int*) 0x7ea360
 			&& !*(char*) (*(int*) 0x7ea360 + 0x188)) {

@@ -1172,8 +1172,8 @@ char* g_6b7fd0 = 0;
 char* g_6b7fd4 = 0;
 char* g_6b7fd8 = 0;
 void* g_6b7fdc = 0;
-char g_6b7fe0[1] = {0};
-char g_6b7fe4[1] = {0};
+char g_6b7fe0[4] = {0};
+char g_6b7fe4[4] = {0};
 char g_6b7fe8 = 0;
 int g_6b7fec = 0;
 int g_6b8008 = 0;
@@ -1553,11 +1553,11 @@ int g_868058 = 0;
 char g_868060[1] = {0};
 char g_8680b4[1] = {0};
 char g_868354[1] = {0};
-char g_869480[589824] = {0};
+char g_869480[0x300][0x300] = {0};
 char* g_889f74 = 0;
 int g_90d520[1] = {0};
 unsigned char* g_90e094 = 0;
-char g_90e0a0[589824] = {0};
+char g_90e0a0[0x300][0x300] = {0};
 char g_930600[1] = {0};
 char* g_99ec10 = 0;
 int g_99ec20[16] = {0};
@@ -1686,7 +1686,11 @@ char g_entity_state_base[2] = {0};
 unsigned short* g_entity_table_end = 0;
 unsigned char g_entity_type_bytes[1] = {0};
 char* g_entity_type_table = 0;
-int g_f31161[32768] = {0};
+unsigned char* lpGebaeudePROT = (unsigned char*) &g_entity_type_table;
+char* lpObjektePROT = 0;
+unsigned char* lpObjektePROT_ptr = (unsigned char*) &lpObjektePROT;
+unsigned char* _lpObjektePROT = (unsigned char*) &lpObjektePROT;
+
 int g_f8a668 = 0;
 char g_f8aae0[1] = {0};
 char* g_f8f080 = 0;
@@ -1697,7 +1701,7 @@ short g_f8f39c[1] = {0};
 int g_fa6158[1] = {0};
 int g_fb1024[1] = {0};
 char* g_fb5740 = 0;
-int g_fb5760[32768] = {0};
+unsigned char g_fb5760[0x50000] = {0};
 short g_fb9070 = 0;
 short g_fb9072 = 0;
 void* g_fb9074 = 0;
@@ -1781,12 +1785,7 @@ int g_stat2 = 0;
 int g_stat3 = 0;
 int g_stat4 = 0;
 unsigned char g_stat_table[780] = {0};
-int g_stream_count = 0;
-char g_stream_pool[1] = {0};
 void* g_thread_handle = 0;
-char g_vfs_case_sensitive = 0;
-char g_vfs_item_pool[1] = {0};
-void* g_vfs_root = 0;
 int g_worker_entry_count = 0;
 int gm_CurrentHumanFamilyCount = 0;
 
@@ -2088,10 +2087,7 @@ int __cdecl fcn_00404f60(char* ev)
 	return 0;
 }
 
-int __cdecl fcn_00406120(void* a)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_00406560(char* e)
 {
@@ -2828,11 +2824,6 @@ int __cdecl fcn_00438100(void* a, char* b, char c)
 }
 
 int __cdecl fcn_00438920(int a, int b, int c)
-{
-	return 0;
-}
-
-int __cdecl fcn_00438ac0(char* a, int b)
 {
 	return 0;
 }
@@ -6365,11 +6356,6 @@ int __cdecl fcn_005dd1e0(int value)
 	return 0;
 }
 
-int __cdecl fcn_005de800(void* a, void* b)
-{
-	return 0;
-}
-
 int __cdecl fcn_005de8c0(char* dst, char* src, int n)
 {
 	return 0;
@@ -6440,11 +6426,6 @@ int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...)
 	return 0;
 }
 
-int __cdecl fcn_0064d470(char* a, char* b)
-{
-	return 0;
-}
-
 int __cdecl fcn_0064d530(char* a, char* b, int c)
 {
 	return 0;
@@ -6503,10 +6484,6 @@ int __cdecl fcn_0065f220(char* a, char* b)
 int __cdecl fcn_0065f2f0(int a, int b, int c)
 {
 	return 0;
-}
-
-void __cdecl fcn_0066080a(char* a)
-{
 }
 
 int __cdecl fcn_0066096a(char* a, int b)
@@ -6612,3 +6589,14 @@ int __cdecl fcn_00657a73(void) { return 0; }
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n) {
 	(void)src; (void)n; return dst;
 }
+
+unsigned char* _lpGebaeudePROT = (unsigned char*) &g_entity_type_table;
+
+int* g_6f2594 = 0;
+
+
+
+
+
+
+char* g_dynasty_name[64] = {0};

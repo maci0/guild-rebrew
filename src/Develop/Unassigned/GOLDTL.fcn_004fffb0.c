@@ -1,6 +1,4 @@
 extern char g_7f4caa[];
-extern char g_7f4caa[];
-extern char g_7f4cc0[];
 extern char g_7f4cc0[];
 
 /* ADDRESS: GOLD 0x004fd7e0 */

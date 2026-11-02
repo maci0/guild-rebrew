@@ -30,7 +30,7 @@ typedef struct Ent {
 // SIZE 0x21c
 
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char* lpGebaeudePROT;
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;

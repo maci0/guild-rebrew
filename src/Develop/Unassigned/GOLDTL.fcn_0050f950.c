@@ -1,5 +1,4 @@
-extern char g_869480[0x300][0x300];
-extern char g_869480[0x300][0x300];
+#include "Develop/DieGildeAddOn/game/game_matrices.h"
 
 /* ADDRESS: GOLD 0x0050c520 */
 /* ADDRESS: GOLDTL 0x0050f950 */

@@ -21,7 +21,7 @@ void __cdecl ch_TakingObject(char* ev)
 			*(char**) (ev + 0x170) = fcn_00404300(obj, ev + 0xf0, 1);
 		} else {
 			fcn_00407800(obj, *(int*) (ev + 0x38), ev + 0x130);
-			fcn_004050c0(ev);
+			ch_RemoveQueueEntry(ev);
 			return;
 		}
 	}
@@ -43,6 +43,6 @@ void __cdecl ch_TakingObject(char* ev)
 			sprintf(msg, "ch_TakingObject(): c->NextAnim still valid %s!\n", *(int*) (obj + 0x80));
 		}
 		ch_CheckAniMorph(obj);
-		fcn_004050c0(ev);
+		ch_RemoveQueueEntry(ev);
 	}
 }

@@ -15099,3 +15099,567 @@ Decision: continuing. No GA was run.
 Correction to the entry above: the native slot list for 0x519190 reads digit 0x0c,
 ap 0x10, v0c 0x18, v14 0x20, v1c 0x28, v20 0x2c, v30 0x3c, v2c 0x38, directive 0x33;
 the "0x1c? no," fragment was a drafting artifact, not part of the record.
+
+The final T&L build succeeded and is byte-identical to the build immediately
+before removal of the unused extern. Its imports and exports match the native
+reference; its whole image remains different. Receipts: `signed-final-build.log`
+and `signed-final-whole.json` under `.scratch/player-declarations/`.
+
+## 2026-11-02 — consolidate client dialog-state declaration
+
+Decision owner: project maintainer. Extracted the existing `g_774654` int
+extern from `client_dialog_helpers.h` into inferred declaration-only
+`client_dialog_state.h` and replaced repeated client externs at their existing
+positions. The helper header includes the new declaration. This does not
+allocate storage or claim the original TU; T&L native `0x0059d88d` and
+`0x0059d93c` access four bytes at `0x00774654`. Before-change comparison
+receipts and source hashes for all affected bound contexts are under
+`.scratch/dialog-state/`; target verification and builds follow.
+
+The two client data identities for this declaration are now recorded with
+name, C declaration type and PE section through the guarded metadata writer:
+T&L `0x00774654`, Gold `0x006f22a0`. Across existing RELOC function
+comparisons, 327 T&L and 130 Gold direct operands resolve to those respective
+addresses. Both lie in the zero-filled virtual tail of `.data`. The declaration
+and access width do not establish the full allocation extent or original
+storage owner, which remain unset. Receipts: `.scratch/dialog-state/data-{tl,gold}-{reviewed,apply}.json`
+and `before-{tl,gold}.json`.
+
+After recording the address bindings, the same 332 client function statuses
+remain unchanged. The comparator now reports 349 validated T&L and 137
+validated Gold operands for `g_774654`. It also reports 150 T&L conflicts and
+two out-of-extent operands in incomplete or mismatching bodies; those are
+findings for native alignment review, not validated uses. Receipt:
+`.scratch/dialog-state/bound-{tl,gold}.json`.
+
+The remaining multi-declarator extern in `GOLDTL.fcn_005e53b0.c` now obtains
+`g_774654` from the shared header while preserving its three other externs.
+Baseline: `.scratch/dialog-state/multi-before.json`; post-change verification
+follows. The earlier T&L raw build succeeded, with imports and exports checked
+against the reference. Its image differed from the preserved pre-build image;
+three other sources were changed between those builds, so the image difference
+is not isolated to this declaration move. Gold still has 256 unresolved
+externals. Build receipts are under `.scratch/dialog-state/`.
+
+The final multi-declarator user remains SIZE_MISMATCH at 115/1685 reported
+matching bytes and 1569 compiled bytes, unchanged. Focused lint reports no
+errors. The subsequent T&L build succeeds and matches reference imports and
+exports; its whole image differs. `GOLDTL.ai_MeisterTrade.c` also changed
+between the two raw builds, so the PE difference is not isolated. Receipts:
+`multi-{before,after}.json`, `multi-lint.json`, `multi-build.log`, and
+`multi-whole.json` under `.scratch/dialog-state/`.
+
+A native cross-reference audit for the T&L player-index address found 746 word
+loads, 65 word comparisons, 43 dword loads, four word stores, two address pushes
+and one word subtraction; no direct reference targeted `0x00774972`. The
+observed dword reads in `0x00541620` mask the low 16 bits. This does not prove
+whether the upper bytes are part of the same original allocation, so the
+existing wider C view and scaffold placement were left unchanged. Receipts:
+`.scratch/dialog-state/player-{base,high}-xrefs.json` and
+`.scratch/counter-contract/player-00541620-native.json`.
+
+Clarification: several dword reads in `0x00541620` immediately mask or compare
+the low 16 bits; the audit above does not establish the use of every loaded
+high half.
+
+Classified both newly recorded address identities as `GLOBAL` through the
+locked data API. This is the identity kind; it does not establish storage
+ownership. The guarded preview digests were
+`5c2762aceb6d3faf58ef4de6f6c4ca5bfe1c49d2a8808fd3209b35fab5a0395f`
+(T&L) and `459521fa81adb946e2f416070091f097c0c1345e08c0dcd46e936b77f102bb71`
+(Gold).
+
+The all-target lint reports zero errors and 8 server, 14 T&L, and 11 Gold
+warnings. It ran while the later data-identity and multi-declarator updates
+were made; the latter also passed a fresh focused lint. Receipt:
+`.scratch/dialog-state/lint.json`.
+
+## 2026-11-02 — restore Gold character-action binding
+
+Decision owner: project maintainer. Restored Gold `0x004048b0` to the existing
+`character.c` `ch_InsertAction` definition through guarded source rebinding.
+The old retirement cited an absent inventory head; the current reviewed Gold
+inventory records a 456-byte function at that address. The existing source
+compares RELOC 456/456 under Gold flags, with known queue and message operands
+validated; two literal operands and one callee remain unresolved. Receipts:
+`.scratch/counter-contract/insert-gold-{original-test,rebind-preview,rebind-apply}.json`.
+The binding has not itself established a linked placement or a fresh verdict.
+
+The restored Gold action-insertion identity earned a fresh RELOC 456/456
+comparison. Receipt: `.scratch/counter-contract/insert-gold-restored.json`.
+A scratch character TU placing `ch_RemoveQueueEntry`, `ch_InsertAction`, and
+the queue-clearing routine in their T&L native order preserves the prior
+results for all five Gold/T&L function contexts. The removal routine remains
+NEAR_MATCHING 98/110 in both clients, insertion remains RELOC 456/456 Gold and
+461/461 T&L, and the T&L clearing routine remains RELOC 87/87. The candidate
+does not by itself verify raw-link placement. Receipts:
+`.scratch/counter-contract/character-queue-{remove,insert}-{gold,tl}.json`
+and `character-queue-clear-tl.json`.
+
+The source merge preview refused the conditional queue-clearing definition.
+Recorded the guarded interleaved-organization feature gap in the upstream
+`docs/IDEAS-GUILD.md`. The organization review was attempted again after the
+Gold binding restoration, but its inputs changed during its scan; the earlier
+review records T&L native order and the later scratch checks validate the
+proposed target-specific bodies. Fresh raw baselines are being rebuilt.
+
+Gold `0x0040cbe0` and T&L `0x0040db10` are matching 51-byte callers; their
+corresponding queue-clearing calls target Gold `0x00405610` and T&L
+`0x00406120`. Gold inventory records the former as an 87-byte function. A
+shared body in the proposed character TU compares RELOC 87/87 for Gold, with
+both the queue-removal and animation calls validated; its string literal remains
+unresolved. Therefore the Gold exclusion around that body is no longer needed.
+The Gold generated scaffold currently supplies a no-op stub for this symbol;
+it must be removed when the source binding is restored. Receipts:
+`.scratch/counter-contract/queue-clear-caller-{gold,tl}.json`,
+`queue-clear-native-{gold,tl}.json`, and `character-queue-clear-gold.json`.
+
+Added a Gold scaffold special to suppress the queue-clearing no-op once the
+real shared definition is bound. The current scaffold definition remains in
+place until that source move. The upstream selected-symbol scaffold updater was
+extended locally to handle unique function definitions; its focused test suite
+passes 82 tests. The selected removal preview is
+`.scratch/counter-contract/queue-clear-stub-preview.json`.
+
+## 2026-11-02 — consolidate character action queue TU
+
+Decision owner: project maintainer. Moved the shared removal and queue-clearing
+bodies from `Unassigned/GOLDTL.fcn_00406120.c` into the existing inferred
+`game/character.c`, in the native T&L order around `ch_InsertAction`. The
+client-only guard retains the existing server path. Rebound Gold `0x004047a0`
+and T&L `0x004050c0` to the moved removal definition; rebound T&L
+`0x00406120` and restored Gold `0x00405610` to the shared clearing definition.
+The move used the locked, digest-guarded batch source-binding writer. Removed
+the superseded Gold scaffold function with the guarded selected-symbol
+updater; the scaffold special keeps later regeneration from recreating it.
+Evidence and reviewed inputs: `.scratch/counter-contract/queue-character-organize-current.json`,
+`queue-move-bind-{preview,apply}.json`, `queue-clear-stub-{preview,apply}.json`,
+and the preceding native and scratch comparisons. The reviewed organization
+report still lists unresolved standard SDK include closures and the pre-move
+unbound Gold clearing identity. Target verification and raw-link checks follow.
+
+Post-move verification reports the same results for all six client identities:
+removal is NEAR_MATCHING with 12 differing bytes in each target, and insertion
+and clearing are RELOC at full native extents in each target. The Gold clearing
+identity earned its fresh verdict. Focused all-target lint has no errors, and
+`rebrew source organize check` confirms the server raw DLL is identical to its
+baseline. Receipts: `queue-move-verify.json`, `queue-move-lint.json`, and
+`queue-check-server.json` under `.scratch/counter-contract/`.
+
+Gold's baseline after restoring `ch_InsertAction` failed with 255 unresolved
+externals, down from 256 in the prior build. The post-move Gold link has the
+same 255 unresolved count and no duplicate-symbol warning for the moved
+routines. No complete Gold PE is available for a raw comparison. Receipts:
+`queue-baseline-gold.log` and `queue-after-gold.log`.
+
+T&L native `0x0040ab09` pushes the function's input queue entry before
+calling `ch_RemoveQueueEntry`; the current incomplete source omits the
+argument. A scratch correction using the canonical queue declaration compiles
+and remains SIZE_MISMATCH (46/3370 versus 49/3370 reported matching bytes).
+Native entry `0x0040aa09` loads that input into ESI. This evidence establishes
+the missing argument, not the rest of the incomplete reconstruction.
+Receipts: `action-queue-caller-40aa00.json` and
+`queue-caller-40aa00-{before,candidate}.json`.
+
+Updated `docs/source-layout.md` with the current character action-queue
+bindings and the remaining native-order and linked-placement uncertainty.
+
+The `ch_RemoveQueueEntry` type-reconciliation preview refused to proceed
+because its all-target source/include contexts are incomplete. Incompatible
+caller arguments therefore require explicit native-reviewed repair before a
+whole-contract reconciliation. Receipt:
+`.scratch/counter-contract/queue-remove-contract-review.err`.
+
+The T&L raw before/after organization check is not byte-identical: section
+placement, imports, exports and resources match, while 736 `.text` bytes and
+148 `.data` bytes differ. The raw map keeps removal at native `0x004050c0`,
+but places insertion at `0x00405130` versus native `0x004051d0`, clearing at
+`0x00405300` versus native `0x00406120`, and moves the two intervening native
+functions after the combined unit. The pre-move map also misplaced those
+functions; this merge changes rather than proves native placement. Native
+intervening functions and object ordering remain work items. Receipts:
+`queue-check-tl.json` and `queue-{baseline,after}-tl.map` under
+`.scratch/counter-contract/`. Gold has no complete raw PE to compare.
+
+## 2026-11-02 — reconcile queue-removal caller contracts
+
+Decision owner: project maintainer. Replaced seven local
+`ch_RemoveQueueEntry` declarations with the existing `ch_queue.h` prototype.
+Six candidates preserve their compiled code, data and relocation targets;
+the seventh repairs T&L `fcn_0040aa00` to pass its input entry, as the native
+call at `0x0040ab09` does. Three calls that held a pointer in an `int` now use
+explicit pointer casts. The caller remains incomplete and is not claimed as a
+byte match. The all-context signature reconciler refused incomplete include
+contexts, so these are individually reviewed caller repairs. Receipts:
+`.scratch/queue-contract/objects/compare.json`, `before-tl.json`, candidate
+results, and `.scratch/counter-contract/action-queue-caller-40aa00.json`.
+Post-change checks follow.
+
+Post-repair checks preserve the six declaration-only callers' comparison
+results. The corrected `fcn_0040aa00` remains SIZE_MISMATCH at 46/3370,
+versus 49/3370 before; its native argument evidence is independent of that
+incomplete match. Focused T&L lint reports no errors. Receipts:
+`.scratch/queue-contract/{before,after}-tl.json` and `lint.json`.
+
+## 2026-11-02 — name the shared action-queue cancellation routine
+
+Decision owner: project maintainer. Renamed `fcn_00406120` to inferred
+`ch_CancelActionQueue` in its shared character definition and reviewed callers,
+using the attested `ch_` subsystem prefix and the native behavior. Both Gold
+`0x00405610` and T&L `0x00406120` identities were renamed by the guarded
+source/metadata writer. The exact historical spelling remains unproved and is
+recorded in `docs/naming_conventions.md`. Receipts:
+`.scratch/queue-clear-name/{plan,apply}.json`; target verification follows.
+
+After the inferred cancellation rename, all 19 affected T&L and nine affected
+Gold function contexts retain their prior statuses, comparison deltas and
+matching percentages. Reverification receipts:
+`.scratch/queue-clear-name/{before,after}-{tl,gold}.json`.
+
+For context, same-offset T&L raw-image scoring against the reference changed
+from 263,074 to 262,931 equal file bytes; informative equal bytes changed from
+130,436 to 130,442. These scores are not function or placement verdicts.
+Receipts: `.scratch/counter-contract/queue-score-{before,after}.json`.
+
+The post-rename T&L build succeeds and its imports and exports match the
+reference. Relative to the preceding post-move raw image, section placement and
+all data/resource bytes match; 165 `.text` bytes differ after the caller repair
+and symbol rename. Gold still fails to link with 255 unresolved externals and
+no duplicate or unresolved symbol for the renamed cancellation routine.
+Focused all-target rename lint reports no errors. Receipts:
+`.scratch/queue-clear-name/final-{tl,gold}-build.log`, `final-check-tl.json`,
+`final-whole-tl.json`, and `lint.json`.
+
+## 2026-11-02 — consolidate cancellation caller contracts
+
+Decision owner: project maintainer. Added the evidenced
+`int __cdecl ch_CancelActionQueue(char*)` declaration to `ch_queue.h` and
+replaced 13 local declarations plus one implicit declaration with that header.
+Integer-held pointer arguments are explicitly converted to pointers. Scratch
+compilation in all 20 affected caller/target contexts preserved code, data and
+relocation targets, with compiler-local labels normalized by section offset.
+The all-target type-reconciliation preview refused incomplete include contexts;
+these caller repairs use the validated shared native definition and individual
+compilation evidence. Receipts: `.scratch/queue-cancel/objects/compare.json`,
+`candidates.json`, and `.scratch/queue-clear-name/contract-preview.err`.
+Header-dependent target verification and rebuilds follow.
+
+All 60 affected T&L and 26 Gold function contexts retained their prior
+comparison status, delta and matching percentage after the header and caller
+changes. Focused all-target lint reports no errors. Receipts:
+`.scratch/queue-cancel/{before,after}-{tl,gold}.json` and `lint.json`.
+
+The T&L raw build after signature consolidation is byte-identical to the
+immediately preceding raw build, and its imports and exports match the native
+reference. Gold still fails to link with 255 unresolved externals; the renamed
+queue routine is neither unresolved nor duplicated. The reviewed function
+results were recorded through the locked verification writer. Receipts:
+`.scratch/queue-cancel/final-check-tl.json`, `final-whole-tl.json`,
+`final-{tl,gold}-build.log`, and `promote-{tl,gold}.log`.
+
+## 2026-11-02 — place full action-queue clearing in character TU
+
+Decision owner: project maintainer. Moved the shared Gold `0x00404810` and
+T&L `0x00405130` full-queue clearing body into `game/character.c`, between
+queue-entry removal and insertion as in both native inventories. Rebound both
+identities through the guarded locked batch writer and removed the old source
+file. Before-change organization review found no order cycle or provider
+conflict, but could not resolve standard SDK include closures. Scratch builds
+preserved all eight Gold/T&L comparisons across the four functions; clearing
+remained RELOC 78/78 in both. The adjacent breakpoint-checking routine stays
+separate because its inline assembly provenance is not established. Receipts:
+`.scratch/counter-contract/action-clear-organize.json` and
+`.scratch/action-clear/{clear,insert,remove,cancel}-{gold,tl}.json` plus
+`move-{preview,apply}.json`. Post-move verification and raw builds follow.
+
+Renamed the shared clear routine to inferred `ch_ClearActionQueue`, using the
+attested `ch_` prefix and its observed full-queue removal behavior. The two
+client identities and both caller files were updated through the guarded
+source/metadata rename writer; the historical spelling is unproved. Naming
+evidence is recorded in `docs/naming_conventions.md`. Receipts:
+`.scratch/action-clear/rename-{plan,apply}.json`. Post-rename checks follow.
+
+The all-target `ch_ClearActionQueue` contract preview could not complete due to
+unresolved include contexts. Added the native definition's `int(void*)`
+prototype to `ch_queue.h` and replaced the two locally incompatible caller
+declarations with that header; one integer-held pointer is explicitly cast.
+Scratch builds preserve code, data and relocation targets in all three caller
+contexts. Receipts: `.scratch/action-clear/contracts/contract-preview.err`,
+`.scratch/action-clear/ls-caller-native.json`, and
+`.scratch/action-clear/candidates/objects/compare.json`.
+
+The moved routine and all three other functions in `character.c` retained
+their previous Gold/T&L comparison results. Across the header and caller
+changes, 62 T&L and 27 Gold function contexts retained their prior statuses,
+deltas and matching percentages. The two caller objects also preserve code,
+data and relocation targets. Receipts: `.scratch/action-clear/move-verify.json`,
+`contracts/{before,after}-{tl,gold}.json` and
+`candidates/objects/compare.json`.
+
+The neighboring queue checker remains separate. In the pinned MSVC 6
+compiler, scratch C calls to `__debugbreak`, `_debugbreak`, and `__int3`
+compile as external calls rather than inline breakpoint instructions; this
+does not establish the historical source form of its existing `int3` sites.
+Receipts: `.scratch/action-clear/breakpoint-probes.c` and
+`breakpoint-probes.obj`.
+
+Focused all-target lint reports zero errors. The server raw before/after
+organization check is byte-identical. The reviewed Gold and T&L function
+results were recorded through the locked verification writer. Receipts:
+`.scratch/action-clear/contracts/{lint.json,promote-tl.log,promote-gold.log}`
+and `.scratch/action-clear/check-server.json`.
+
+Updated `docs/source-layout.md` to record the shared clear routine, native
+order and remaining breakpoint-checker placement uncertainty.
+
+The adjacent Gold `0x00404860` and T&L `0x00405180` queue checkers have
+identical 68-byte instruction sequences, including three `int3` sites. That
+confirms their cross-target machine-code correspondence, but not the original
+source form of the breakpoints; the existing inline-assembly definition was not
+moved. Receipts: `.scratch/action-clear/checker-{gold,tl}-native.json`.
+
+The T&L raw organization check reports matching section placement, imports,
+exports and data/resource bytes; 646 `.text` bytes differ. The link map now
+places `ch_ClearActionQueue` at its native `0x00405130`; insertion moves from
+`0x00405130` to `0x00405180`, closer to native `0x004051d0`. The separate
+breakpoint checker remains at `0x004053b0`, away from native `0x00405180`.
+This is placement evidence, not a whole-image match. Receipts:
+`.scratch/action-clear/check-tl.json` and `{before,after}-tl.map`.
+
+2026-11-02 — Reused the allocator subsystem's canonical `m_FreeTracked`
+declaration in the client-only character queue code and passed the stored pointer
+with its declared type. The prior local declaration incorrectly took an integer.
+Decision owner: project maintainer. Native call evidence and target compiler
+comparisons support the pointer interpretation; complete Gold and T&L character
+objects have identical code, data and relocations before and after the change.
+The automated contract preview could not resolve all include contexts, so the
+change was reviewed in the affected translation unit. Receipts:
+`.scratch/action-clear/allocator-objects/objects/compare.json` and
+`.scratch/action-clear/allocator-reconcile-preview.err`.
+
+The post-consolidation Gold build compiled the affected source but failed to link
+with 255 unresolved externals, unchanged from the baseline. Receipt:
+`.scratch/action-clear/after-gold-build.log`. Direct comparison of T&L raw bytes
+at the newly placed clear routine found two differing bytes, so its object RELOC
+verdict is not a linked exact match.
+
+Final validation of the allocator declaration repair: the full T&L raw rebuild
+is byte-identical to the immediately preceding raw image, including all sections,
+imports and exports. All-target lint reports zero errors (existing warnings remain),
+and verification retains three RELOC and one NEAR_MATCHING character function per
+client. Receipts: `.scratch/action-clear/allocator-check-tl.json`,
+`.scratch/action-clear/allocator-lint.json`, and
+`.scratch/action-clear/allocator-verify.json`.
+
+The final Gold rebuild after the allocator declaration repair again reached the
+linker and failed with the same 255 unresolved externals. No fresh Gold raw image
+was available for complete-PE comparison. Receipt:
+`.scratch/action-clear/allocator-after-gold-build.log`.
+
+2026-11-02 — Moved the existing shared `ch_GetFreeQueueEntry` implementation
+from its single-function scaffold into `game/character.c`, immediately before
+queue removal. Decision owner: project maintainer. The Gold and T&L native
+inventories both place this 64-byte routine directly before removal, and the
+all-target organization review found no provider conflict or order cycle; its
+include-closure warning concerns compiler SDK headers. Both native allocator
+comparisons remain RELOC 64/64 with the pointer operand validated, and scratch
+comparisons preserve the four existing queue-function verdicts for each client.
+The server remains excluded by the existing target guard. Receipts:
+`.scratch/action-clear/free-organize.json`, `.scratch/action-clear/free-before.json`,
+and `.scratch/queue-free/candidate-*.json`. Raw rebuild comparisons follow.
+
+Post-move verification retains four RELOC results and one NEAR_MATCHING result
+for each client; focused all-target lint has zero errors. The server complete raw
+image is byte-identical to its baseline. T&L's complete image differs in 148
+bytes outside its sections, while every compared code/data/resource byte,
+section placement, import and export is unchanged. The allocator remains at
+native `0x00405080`, directly before removal. Receipts:
+`.scratch/queue-free/{verify,lint,check-server,check-tl}.json` and
+`.scratch/queue-free/{before,after}-tl.map`.
+
+Gold rebuilt through compilation but again failed its raw link with the same
+255 unresolved externals as the preserved baseline; a complete Gold image
+comparison remains unavailable. Receipt: `.scratch/queue-free/after-gold-build.log`.
+
+2026-11-02 — Consolidated twelve duplicate full action-record views and the
+copy in `character.c` into the inferred `CH_ACTION` definition in
+`game/ch_action.h`, and updated its forward declaration and uses. Decision
+owner: project maintainer. The expanded view exposes offsets 0x34 and 0x38
+previously covered by padding in the shorter views; the other offsets agree.
+The separate partial `Task` view remains untouched. Native queue allocation and
+0x194 stride, existing client field accesses, and TL 0x406a10 support the
+layout; names and field semantics remain inferred. The compiler checked the
+size and field offsets for Gold and T&L. All 21 affected source/target object
+comparisons retain identical code, data and relocations. Receipts:
+`.scratch/queue-type/{native-fields.json,objects/compare.json,bind-Europa1400Gold.exe.json,bind-Europa1400Gold_TL.exe.json}`.
+The existing occupancy view's stable bindings were refreshed after its header
+forward declaration changed; no storage ownership was changed.
+
+After the shared record change, scoped verification covered 59 T&L and 24 Gold
+function contexts; all results shared with the prior scoped baseline were
+unchanged. Complete T&L and server raw rebuilds are byte-identical to their
+baselines. Gold again fails to link with 255 unresolved externals. Type checks
+confirm the new action-record bindings are current; they also report stale
+evidence for the separate `d3.object-animation-frame`,
+`d3.object-animation-flags`, and `event.validator_view` IDs, which require
+independent review. Receipts: `.scratch/queue-type/{verify-*.json,check-tl.json,check-server.json,types-tl.json,types-gold.json,after-gold-build.log}`.
+Focused lint on the changed C sources reports zero errors for all three targets;
+receipt: `.scratch/queue-type/lint.json`.
+
+2026-11-02 — Replaced the remaining partial action-record definition in
+`GOLDTL.fcn_004054b0.c` with the shared `CH_ACTION` view and named the function
+`ch_ExecuteAction` (inferred). Decision owner: project maintainer. The caller
+loads the same character queue pointer at +0x128; native TL 0x4054b0 tests the
+record at +0x14, invokes callbacks at +0/+4 and accesses state/level at +0xc/+8,
+which agree with the shared view. Both client candidate functions retain their
+exact 130-byte native matches. The definition and sole caller share the
+prototype in `ch_action.h`; the type binding is refreshed after that header
+change. Receipts: `.scratch/queue-run/{native-tl.json,before.json,candidate-tl.json,candidate-gold.json,rename-preview.json}`.
+
+Post-change verification records EXACT for `ch_ExecuteAction` in both clients,
+and its T&L caller remains RELOC. Focused lint reports no errors; other users of
+the changed header were reverified. The complete T&L and server raw images are
+byte-identical to their respective baselines. Gold compilation reached the link,
+which again failed on 255 unresolved externals. Receipts:
+`.scratch/queue-run/{verify-definition.json,verify-caller.json,lint.json,check-tl.json,check-server.json,after-gold-build.log}`.
+
+2026-11-02 — Restored the Gold source binding for `fcn_004053a0` at
+0x00404a80. Decision owner: project maintainer. Its prior retirement cited a
+missing inventory boundary; the current inventory again contains that head,
+and the existing client definition matches the 260-byte native body after
+relocation masking. Its Gold direct-call targets and remaining unresolved
+bindings are recorded in `.scratch/queue-run/ground-gold-native.json` and
+`.scratch/queue-run/ground-gold-test.json`; the reviewed rebind is in
+`.scratch/queue-neighbors/ground-gold-rebind.json`. A fresh verdict and raw-link
+review follow the source consolidation.
+
+2026-11-02 — Moved the existing ground-placement body and inferred
+`ch_ExecuteAction` into `game/character.c`, in the order shared by the Gold and
+T&L native inventories. Decision owner: project maintainer. The all-target
+organization review found no provider conflict or order cycle after restoring the
+Gold ground-placement identity; SDK-header closure remained unknown. The target
+scratch comparisons preserve RELOC 260/260 for ground placement, EXACT 130/130
+for the executor, and the existing results of all five neighboring queue bodies.
+The client declarations were reconciled within the combined TU; the server's
+existing declaration remains guarded. Raw rebuild comparisons are pending.
+Receipts: `.scratch/queue-neighbors/{organize.json,ground-tl.json,ground-gold.json,candidate-*.json,move-apply.json}`.
+
+The final all-target function verification preserves the reviewed results:
+five RELOC, one EXACT, and one NEAR_MATCHING per client. Focused lint reports
+zero errors. The complete server raw image is unchanged. The T&L raw link has
+618 differing `.text` bytes but unchanged compared data/resource sections;
+the two moved bodies move from 0x00405400/0x00405510 to
+0x00405350/0x00405460, closer to native 0x004053a0/0x004054b0. Gold reaches
+linking with 254 unresolved externals, one fewer than baseline. The source
+contract audit flags existing incompatible return/pointer declarations for
+`fcn_004053a0`; no blanket caller rewrite was attempted. Receipts:
+`.scratch/queue-neighbors/{verify.json,lint.json,check-tl.json,check-server.json,contracts.json,after-gold-build.log}`.
+
+2026-11-02 — Named the inferred character ground-placement routine
+`ch_PlaceOnGround` and consolidated its declarations in `game/ch_ground.h`.
+Decision owner: project maintainer. Native TL 0x4053a0 and Gold 0x404a80 return
+the map cell type; callers pass pointers to character/object views. The client
+contract therefore returns `int` and accepts `void*`; the preexisting server
+`void` return declaration remains conditional. Both client candidates retain
+RELOC 260/260. The automated reconciliation declined incomplete include
+contexts, and one caller conflicts with unrelated globals when including
+`ch_motion.h`; a dedicated header avoids that conflict. All 69 affected
+server/client compiled contexts preserve code, data and relocations. Receipts:
+`.scratch/ground-contract/{rename-preview.json,candidate-tl.json,candidate-gold.json,objects/compare.json}`
+and `.scratch/queue-neighbors/reconcile-preview.err`. Raw rebuild and function
+verification follow.
+
+Post-change verification covered 87 T&L and 63 Gold function contexts; focused
+lint reports zero errors. Full T&L and server raw images are byte-identical to
+baseline; Gold compilation reaches the linker with the same 254 unresolved
+externals. The declaration audit no longer reports incompatible pointer views,
+but reports the mutually exclusive server/client return types because it does
+not preprocess target guards. This tooling capability gap is documented in the
+upstream `docs/IDEAS-GUILD.md`. Receipts:
+`.scratch/ground-contract/{verify-Europa1400Gold_TL.exe.json,verify-Europa1400Gold.exe.json,lint.json,contracts.json,check-tl.json,check-server.json,after-gold-build.log}`.
+
+2026-11-02 — Moved the T&L-only cancellation variant from its single-function
+scaffold into `game/character.c`, after the shared cancellation routine, and
+named it `ch_CancelActionQueueWithMotion` (inferred). Decision owner: project
+maintainer. T&L native 0x406180 immediately follows 0x406120 cancellation;
+Gold has `ch_DeclareAction` at the corresponding next native address, so the
+variant is guarded out of Gold and server. The organization review reported a
+Gold foreign-definition concern before that guard was applied; the Gold
+candidate object is byte-identical in code, data and relocations to its baseline.
+The T&L candidate retains RELOC 143/143 and the seven neighboring functions
+retain their prior results in both clients. Receipts:
+`.scratch/queue-neighbors/cancel-extra-organize.json`,
+`.scratch/queue-extra/{candidate.json,candidate-*.json,objects/compare.json,move-apply.json,rename-preview.json}`.
+
+Reversal, 2026-11-02 — Restored `ch_CancelActionQueueWithMotion` to the separate,
+conventionally named `game/GOLDTL.ch_CancelActionQueueWithMotion.c` unit after the
+raw-link review. Decision owner: project maintainer. The attempted merge moved
+T&L's body from 0x004061a0 (native 0x00406180) to 0x00405550 and changed 3,220
+`.text` bytes, because intervening functions are not yet grouped. Gold again
+had 254 unresolved externals; the server raw image remained byte-identical.
+The inferred name and reviewed pointer declarations are retained. Rebuild and
+verification follow. Receipts: `.scratch/queue-extra/{check-tl.json,check-server.json,reversal-review.json,reversal-apply.json}`.
+
+The final standalone rebuild restores T&L's variant to 0x004061a0, exactly its
+pre-merge location; the full T&L and server raw images are byte-identical to
+those baselines. The function remains RELOC 143/143, other character function
+verdicts are unchanged, and focused lint has zero errors. Gold still fails its
+link with 254 unresolved externals. Receipts:
+`.scratch/queue-extra/{reversal-variant-verify.json,reversal-character-verify.json,reversal-lint.json,reversal-check-tl.json,reversal-check-server.json,reversal-gold-build.log}`.
+
+2026-11-02 — Moved the T&L sitting helper from command code into the character
+subsystem as inferred `ch_ClearSitting`, and consolidated its declarations in
+`ch_action.h`. Decision owner: project maintainer. Its 0x00406560 native body
+uses the seat pointer after calling 0x00402aa0; that callee is a single `ret`.
+The former C assigned the result of a function whose actual body returns no
+value. The corrected source calls the helper as `void` and retains the seat
+pointer; the existing 16-combination 32-bit behavior harness passes against the
+updated body. The correction changes its object from 89 to 98 bytes against
+an 87-byte native body, so it remains SIZE_MISMATCH; the prior blocker already
+records this compiler-order limitation. The three captured caller contexts retain
+identical code, data and relocations after prototype consolidation. Type binding,
+verification and raw-build checks follow. Receipts:
+`.scratch/clear-sit/{native.json,empty-native.json,before.json,candidate.json,behavior.c,objects/compare.json,rename-preview.json}`.
+
+Final checks for `ch_ClearSitting`: the shared action-record type binding was
+refreshed for both clients; scoped verification covered 70 T&L and 31 Gold
+functions, and focused lint has zero errors. The updated helper remains
+SIZE_MISMATCH 98/87; its 16-case 32-bit behavior harness passes. The complete
+server image is byte-identical. T&L's raw image changes in 2,275,744 `.text`,
+784 `.rdata` and 336 `.data` bytes, while the helper's linked start stays at
+0x00406580. Gold again fails to link on 254 unresolved externals. The large
+linked-placement cost remains open alongside the compiler-order mismatch.
+Receipts: `.scratch/clear-sit/{verify-Europa1400Gold_TL.exe.json,verify-Europa1400Gold.exe.json,lint.json,check-tl.json,check-server.json,after-gold-build.log}`.
+
+2026-11-02 — Reduced the linked-placement disruption from the corrected
+`ch_ClearSitting` body by reloading the seat and entity views after the verified
+single-`ret` helper call. Decision owner: project maintainer. Native
+0x00402aa0 and its current source have no side effects, so the reloaded values
+are the same; the updated production body passes the 16-combination 32-bit
+behavior harness. Under canonical /O2 /Gd the object is now 93 bytes versus
+native 87 (44 matching bytes), down from 98 bytes. The 93-byte body fits the
+same aligned link slot as the former 89-byte source. The full T&L image now
+differs from the pre-correction raw baseline in 69 `.text` bytes and no
+compared data/resource bytes, rather than the earlier widespread displacement.
+The function remains SIZE_MISMATCH. Receipts:
+`.scratch/clear-sit-match/{reload_both.json,behavior.c,production-test.json,check-original.json,check-98.json}`.
+
+2026-11-02 — Restored the Gold source identity for the cutscene participant-add
+routine at 0x004e51b0. Decision owner: project maintainer. The current Gold
+inventory contains the head that an earlier retired claim considered absent;
+the existing client body matches its 86-byte extent after relocation masking,
+with the call to `cut_FindCutsceneById` validated. The binding was restored
+through the reviewed metadata writer and requires fresh verification. Receipts:
+`.scratch/cutscene-cluster/{add-gold.json,rebind-reviewed.json,rebind-gold.json}`.
+
+2026-11-02 — Consolidated cutscene freeing and participant operations into the
+inferred `game/cutscene.c` unit, with their shared declarations in `cutscene.h`.
+Decision owner: project maintainer. Gold and T&L native order agrees for free,
+add and remove; T&L alone has the intervening free-all routine, which is guarded
+out of Gold. The organization review flags that foreign Gold definition before
+preprocessing; the Gold candidate does not emit its symbol. All seven applicable
+candidate functions retain RELOC at their complete native extents, and all eight
+captured caller objects preserve code, data and relocations. The three helper
+names `cut_FreeAllCutscenes`, `cut_AddParticipant`, and `cut_RemoveParticipant`
+are inferred. Receipts: `.scratch/cutscene-cluster/{organize-reviewed.json,gold-guard.json,candidate-*.json,objects/compare.json,move-apply.json,rename-*-preview.json}`.
+Raw rebuilds and final verification follow.

@@ -125,8 +125,6 @@ int __cdecl fcn_005155e0(char*);
 int __cdecl fcn_005b1e40(int);
 int __cdecl plt_CheckZoneAvailability(int, int, int, int);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_0064d470(char*, char*);
-
 /* ADDRESS: GOLDTL 0x0047f6b0 */
 int __cdecl fcn_0047f6b0(char* a)
 {
@@ -460,7 +458,7 @@ after:
 
 		ch = -1;
 		for (i = 0; i < 8; i++) {
-			if (fcn_0064d470(p2 + 0x7e24 + i * 0x40, (char*) 0x67dd10) != 0) {
+			if (strstr(p2 + 0x7e24 + i * 0x40, (char*) 0x67dd10) != 0) {
 				ch = i;
 			}
 		}

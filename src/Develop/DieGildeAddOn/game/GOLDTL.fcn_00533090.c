@@ -13,9 +13,9 @@ extern char* g_7e2aa0;
 extern int g_7ea360;
 extern unsigned char g_7f4e51[];
 extern char* g_item_def_table;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_774650;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_774658;
 extern int g_77465c;
 extern int g_774688;
@@ -44,7 +44,7 @@ void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 void __cdecl fcn_00433780(void*);
 void __cdecl fcn_00438b40(char*, float*);
 void __cdecl fcn_00438cb0(char*, float*);
-int __cdecl fcn_00451840(float*, float*, float);
+int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_004bbd70(void);
 int* __cdecl gm_SetupEntityQuery(char*);
 int __cdecl fcn_00506380(int, void*, void*, int);
@@ -158,7 +158,7 @@ void __cdecl fcn_00533090(unsigned int a0)
 			if (g_7746c4 == 0 && g_7746c8 == 0) {
 				goto done;
 			}
-			if (fcn_00451840(&g_14ce880, g_7e3a40, 0.1f)) {
+			if (CompareVector3WithinTolerance(&g_14ce880, g_7e3a40, 0.1f)) {
 				fcn_00433780(g_6b8014);
 				g_6b5cc0 = 0;
 				g_6b5cbc = 0;
@@ -172,8 +172,8 @@ void __cdecl fcn_00533090(unsigned int a0)
 			}
 		}
 		if (g_774650 <= g_774658 || v2) {
-			if (fcn_00451840((float*) (g_6b8014 + 0x84), g_7e3a50, 0.1f)
-			    || fcn_00451840((float*) (g_6b8014 + 0x4c), g_7e3a40, 0.1f) || v2) {
+			if (CompareVector3WithinTolerance((float*) (g_6b8014 + 0x84), g_7e3a50, 0.1f)
+			    || CompareVector3WithinTolerance((float*) (g_6b8014 + 0x4c), g_7e3a40, 0.1f) || v2) {
 				if (g_7746c4 == 0 && g_7746c8 == 0 && g_7746cc == 0) {
 					if (g_774650 == g_774658 && g_7e2a9c) {
 						fcn_00530510();

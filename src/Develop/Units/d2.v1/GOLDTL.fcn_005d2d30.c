@@ -25,13 +25,13 @@ typedef struct
 } Packet;
 // SIZE 0xf8
 
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 int __cdecl fcn_005d2a40(int, int);
 int __cdecl fcn_00470820(int, int, char*);

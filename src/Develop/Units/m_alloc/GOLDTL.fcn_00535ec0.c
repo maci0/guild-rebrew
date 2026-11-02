@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 #include "client_types.h"
 
 extern unsigned char g_14cf950;
@@ -13,7 +14,7 @@ extern unsigned char* g_7746c8;
 extern char* g_7746cc;
 extern int g_7747b0;
 extern int g_774804;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 void __cdecl fcn_00406340(char*, char*, int);
 void __cdecl CreateAnimationEvent(char*, char*);
@@ -88,7 +89,7 @@ void __cdecl fcn_00535ec0(void)
 		if (g_7ea360 == 0) {
 			return;
 		}
-		fcn_00406120(*(char**) (g_7ea360 + 0x184));
+		ch_CancelActionQueue(*(char**) (g_7ea360 + 0x184));
 		m = *(char**) (g_7ea360 + 0x184);
 		if (*(unsigned char*) (m + 0x8c) & 0x10) {
 			fcn_00406670(m, "sitzend/aufstehen");

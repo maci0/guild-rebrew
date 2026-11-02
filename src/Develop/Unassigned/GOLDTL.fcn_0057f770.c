@@ -30,7 +30,7 @@ extern int* g_665f08;
 /* volatile: the original loads the tick before the state pointer */
 extern int g_6b7fac;
 extern unsigned char* lpGebaeudePROT;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl fcn_0057f770(int* ev)
 {

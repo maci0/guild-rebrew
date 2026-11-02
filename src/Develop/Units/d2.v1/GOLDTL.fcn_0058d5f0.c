@@ -27,7 +27,7 @@ int __cdecl fcn_005373e0(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00526120(int, int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl fcn_00471e30(int);
@@ -235,10 +235,10 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 						}
 					}
 					*(int*) 0x7e46ac = 0x677c7;
-					fcn_0052ae70();
+					sv_ClearObjectSelection();
 				} else {
 					fcn_00526120(*(int*) 0x14b556c, 4);
-					fcn_0052ae70();
+					sv_ClearObjectSelection();
 				}
 				goto next;
 			}
@@ -249,7 +249,7 @@ next:
 		sel = fcn_005373e0(0x58d5f0, 0x677c7);
 		menu = ids[3];
 	}
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 	fcn_0052a2d0();
 	fcn_00471e30(menu);
 	fcn_00532ef0();

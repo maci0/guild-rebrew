@@ -11,7 +11,9 @@ struct ref_f31161 {
 };
 #pragma pack()
 
-extern struct ref_f31161 g_f31161[0x8000];
+#include "client_types.h"
+extern cell10_fb5760 g_fb5760[0x8000];
+#define g_f31161 ((struct ref_f31161 *)((char *)g_fb5760 + 1))
 
 
 /* Twin of GOLDTL 0x51ea70; the back-pointer field sits at 0x200 in GOLD, 0x204 in GOLDTL. */

@@ -1,3 +1,5 @@
+#include <string.h>
+
 extern int* g_6b89e8;
 extern int g_6b89c4[8];
 extern char g_662dc8[15][9];
@@ -5,8 +7,6 @@ extern char g_662dc8[15][9];
 /* GOLD twin of GOLDTL fcn_0045a2e0: the name strings sit at img + 0x1a64
  * instead of 0x7e24. */
 
-char* __cdecl fcn_005eaad6(char*);
-char* __cdecl fcn_005de800(char*, char*);
 
 int __cdecl fcn_0045db30(int x, int y, int* img)
 {
@@ -23,7 +23,7 @@ int __cdecl fcn_0045db30(int x, int y, int* img)
 			g_6b89c4[k] = 1;
 			if (((char*) img)[0x1a64 + k * 0x40] != 0) {
 				for (i = 0; i < 15; i++) {
-					if (fcn_005de800(fcn_005eaad6((char*) img + 0x1a64 + k * 0x40), g_662dc8[i]) != 0) {
+					if (strstr(_strupr((char*) img + 0x1a64 + k * 0x40), g_662dc8[i]) != 0) {
 						g_6b89c4[k] = i;
 						break;
 					}

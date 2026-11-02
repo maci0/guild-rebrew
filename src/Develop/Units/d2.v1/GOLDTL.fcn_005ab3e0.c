@@ -29,7 +29,7 @@ void __cdecl fcn_005b2150(void);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_0050e600(void);
 void __cdecl fcn_0050e670(void *, void *);
-int __cdecl fcn_00451840(void *, void *);
+int __cdecl CompareVector3WithinTolerance(void *, void *);
 void __cdecl fcn_00438b40(int, void *);
 void __cdecl fcn_00438cb0(int, void *);
 void __cdecl fcn_0052d820(void);
@@ -163,7 +163,7 @@ void __cdecl fcn_005ab3e0(int a0)
 		} while (fcn_005373e0((void *) 0x5abd60, 0x677c7) != 0);
 	}
 	if (*(int *) 0x6b5cc0 != 0) {
-		if (fcn_00451840((void *) 0x14ce880, (void *) 0x7e3a40) == 0) {
+		if (CompareVector3WithinTolerance((void *) 0x14ce880, (void *) 0x7e3a40) == 0) {
 			*(int *) 0x6b5cc0 = 0;
 		} else {
 			*(int *) 0x6b5cc0 = 0;

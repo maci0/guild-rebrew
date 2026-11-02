@@ -1,4 +1,4 @@
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_005d3120(int a1, int* a2);

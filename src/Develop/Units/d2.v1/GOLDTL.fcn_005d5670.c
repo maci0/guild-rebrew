@@ -23,7 +23,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern char s_6acc74[];
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 int __cdecl fcn_004f6470(int, char*, unsigned short);
 int __cdecl fcn_00470820(int, int, char*);

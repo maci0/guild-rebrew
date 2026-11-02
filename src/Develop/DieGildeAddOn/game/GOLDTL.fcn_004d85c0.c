@@ -1,7 +1,7 @@
 /* fcn_004d85c0 — tail-call the handler with the record's field. */
 
 void* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-void __cdecl fcn_00406120(int);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 /* ADDRESS: GOLDTL 0x004d85c0 */
 void __cdecl fcn_004d85c0(int* a1)
@@ -18,5 +18,5 @@ void __cdecl fcn_004d85c0(int* a1)
 	if (record == 0) {
 		return;
 	}
-	fcn_00406120(*(int*) ((char*) record + 0x184));
+	ch_CancelActionQueue((char*) *(int*) ((char*) record + 0x184));
 }

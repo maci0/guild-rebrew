@@ -16,7 +16,7 @@ typedef struct {
 #define HOUSES 768
 
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_773da8;
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;

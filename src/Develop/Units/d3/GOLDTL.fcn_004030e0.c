@@ -3,7 +3,7 @@ extern void* g_14d0020[];
 extern int g_67a370;
 extern int g_6b8010;
 
-void __cdecl fcn_00405130(char*);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl fcn_00404560(char*);
 int __cdecl fcn_00413190(int);
 void __cdecl fcn_004432d0(int, int);
@@ -27,7 +27,7 @@ int __cdecl fcn_004030e0(char* obj)
 		if (i < 0x300) {
 			((char**)g_14d0020)[i] = 0;
 			*(int*) obj = -1;
-			fcn_00405130(obj);
+			ch_ClearActionQueue(obj);
 			if (*(int*) (obj + 0x34) != 0) {
 				saved = -1;
 				fcn_00404560(obj);

@@ -3,7 +3,7 @@ typedef void (__cdecl* Cb5a80d0b)(int a0, int a1, int a2, int a3);
 
 int __cdecl fcn_005a74a0(unsigned char* a0);
 void __cdecl fcn_00530510(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 int __cdecl fcn_005155e0(unsigned char* a0);
 void __cdecl fcn_004c3170(unsigned char* b);
 int __cdecl fcn_005373e0(int a0, int a1);
@@ -16,7 +16,7 @@ void __cdecl fcn_00516c50(int a0, unsigned char* a1);
 int __cdecl gm_GetBuildingTypeCategory(int a0);
 void __cdecl fcn_00438b40(char* p, int* v);
 void __cdecl fcn_00438cb0(int a0, int a1);
-int __cdecl fcn_00451840(float* a, float* b, float eps);
+int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl fcn_0058f700(int a0);
 void* __cdecl fcn_00426cc0(int a1);
 void __cdecl fcn_00428720(void* p);
@@ -64,7 +64,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	a0 = (unsigned char*) *(int*) 0x6b8010;
 	*(int*) 0x6a2520 = 0;
 	fcn_00530510();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 	s0 = *(int*) 0x7e3a40;
 	s1 = *(int*) 0x7e3a44;
 	s2 = *(int*) 0x7e3a48;
@@ -126,12 +126,12 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 					fcn_00438b40((char*) *(int*) 0x6b8014, (int*) (*(int*) 0x6b8014 + 0x5c));
 					v10 = *(int*) 0x6b8014 + 0x90;
 					fcn_00438cb0(*(int*) 0x6b8014, v10);
-				} else if (fcn_00451840((float*) (*(int*) 0x6b8014 + 0x114), (float*) 0x662d70, 0.1f) == 0 && fcn_00451840((float*) (*(int*) 0x6b8014 + 0x120), (float*) 0x662d70, 0.1f) == 0) {
+				} else if (CompareVector3WithinTolerance((float*) (*(int*) 0x6b8014 + 0x114), (float*) 0x662d70, 0.1f) == 0 && CompareVector3WithinTolerance((float*) (*(int*) 0x6b8014 + 0x120), (float*) 0x662d70, 0.1f) == 0) {
 					fcn_00438b40((char*) *(int*) 0x6b8014, (int*) (*(int*) 0x6b8014 + 0x114));
 					v10 = *(int*) 0x6b8014 + 0x120;
 					fcn_00438cb0(*(int*) 0x6b8014, v10);
 				}
-			} else if (fcn_00451840((float*) (*(int*) 0x6b8014 + 0x114), (float*) 0x662d70, 0.1f) == 0 && fcn_00451840((float*) (*(int*) 0x6b8014 + 0x120), (float*) 0x662d70, 0.1f) == 0) {
+			} else if (CompareVector3WithinTolerance((float*) (*(int*) 0x6b8014 + 0x114), (float*) 0x662d70, 0.1f) == 0 && CompareVector3WithinTolerance((float*) (*(int*) 0x6b8014 + 0x120), (float*) 0x662d70, 0.1f) == 0) {
 				fcn_00438b40((char*) *(int*) 0x6b8014, (int*) (*(int*) 0x6b8014 + 0x114));
 				v10 = *(int*) 0x6b8014 + 0x120;
 				fcn_00438cb0(*(int*) 0x6b8014, v10);
@@ -182,7 +182,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 		*(int*) 0x6b89c0 = 0;
 	}
 	fcn_00530510();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 	*(int*) 0x774688 = 0;
 	*(int*) 0x77468c = 0;
 	if (id != -1) {

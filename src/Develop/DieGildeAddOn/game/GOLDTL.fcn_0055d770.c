@@ -83,7 +83,7 @@ void __cdecl fcn_0055d770(char* e)
 	} else {
 		o = *(char**) (r + 0x3b);
 		if (o != 0 && *(int*) (o + 0x128) == 0 &&
-		    ((*(int*) (o + 0x88) == 0x10432c0 && fcn_00451840((float*) (*(char**) (o + 0x34) + 0x4c), (float*) (e + 0xd8), 100.0f)) ||
+		    ((*(int*) (o + 0x88) == 0x10432c0 && CompareVector3WithinTolerance((float*) (*(char**) (o + 0x34) + 0x4c), (float*) (e + 0xd8), 100.0f)) ||
 		     *(int*) (e + 0xd4) > 6)) {
 			if (!fcn_00505340(c)) {
 				*(int*) (e + 0xec) = fcn_004c5290(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));

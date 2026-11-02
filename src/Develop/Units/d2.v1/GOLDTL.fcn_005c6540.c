@@ -35,10 +35,10 @@ typedef struct Player {
 } Player;
 
 extern int g_100f1dc;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_14ce8e0;
 extern unsigned char g_7747b0;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 #include "client_types.h"
 extern Btn_776c60 g_776c60[6];

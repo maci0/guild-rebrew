@@ -31,5 +31,5 @@ void __cdecl fcn_00406db0(char* ev)
 	rot[1] += *(float*) (*(char**) (obj + 0x34) + 0x88);
 	rot[2] += *(float*) (*(char**) (obj + 0x34) + 0x8c);
 	ch_InsertAction(obj, ev, 7, (int) (angle * 57.2957795f), 0);
-	fcn_004050c0(ev);
+	ch_RemoveQueueEntry(ev);
 }

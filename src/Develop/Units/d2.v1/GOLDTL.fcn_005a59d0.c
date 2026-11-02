@@ -23,8 +23,8 @@ extern int g_14ab6fc;
 extern int g_14ce8e0;
 extern int g_100f8c0;
 extern int g_100f1dc;
-extern int g_774654;
-extern int g_774970;
+#include "client_dialog_state.h"
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern int g_67d370;
 extern double g_6640e8;

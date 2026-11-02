@@ -19,7 +19,7 @@ extern unsigned char* g_7746c8;
 extern char* g_7746cc;
 extern unsigned char* lpGebaeudePROT;
 extern pos14_7f4c00 g_7f4c00;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern IdGroup g_688118[];
 extern Tpl_4c2100 g_6819b8[];
 extern char g_772c10[];

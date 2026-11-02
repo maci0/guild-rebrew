@@ -23,7 +23,7 @@ extern char* g_77255c;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_67d370;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_14b546c;
 extern int g_14b5470;
 extern int g_14b59e0;

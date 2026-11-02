@@ -4,7 +4,7 @@
 extern char* g_7746c4;
 extern unsigned char* lpGebaeudePROT;
 extern char g_6b5c60[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);

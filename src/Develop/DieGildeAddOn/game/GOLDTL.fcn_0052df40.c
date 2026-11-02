@@ -43,7 +43,7 @@ extern House_52df40 g_7f4ca0[];
 extern Dyn_52df40 g_868060[];
 extern char* g_773da8;
 extern unsigned char* lpGebaeudePROT;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char* g_7746c8;
 extern int g_14ad0cc;
 extern int g_14ad0d4;

@@ -4,13 +4,13 @@
 extern int __cdecl fcn_00407d90(void *, char *);
 extern int __cdecl fcn_00408540(void *, int, char *);
 extern void __cdecl ch_FinishAni(void *);
-extern void __cdecl fcn_004050c0(void *);
-extern void __cdecl fcn_004053a0(void *, int);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
+#include "Develop/DieGildeAddOn/game/ch_ground.h"
 extern void __cdecl fcn_004090d0(void *);
 extern void __cdecl m_FreeTracked(void *);
 extern void __cdecl fcn_00438b40(int, void *);
 extern float __cdecl fcn_00444700(int, float *);
-extern int __cdecl fcn_00451840(void *, void *, float);
+extern int __cdecl CompareVector3WithinTolerance(void *, void *, float);
 extern char __cdecl fcn_0045b920(void *, int, int, float *);
 
 /* ADDRESS: GOLDTL 0x00409c90 */
@@ -88,7 +88,7 @@ unsigned int __cdecl fcn_00409c90(int a0, int a1)
             m_FreeTracked(*(void **)(v6 + 0xf4));
             *(int *)(v6 + 0xf4) = 0;
         }
-        fcn_004050c0(v6);
+        ch_RemoveQueueEntry(v6);
         return 0;
     }
 Lafter:
@@ -98,7 +98,7 @@ Lafter:
         return 1;
     if (*(unsigned char *)(v6 + 0x160) & 8) {
         if (*(int *)(v6 + 0xf8) % 4 == 0) {
-            if (!fcn_00451840((void *)(v6 + 0x134),
+            if (!CompareVector3WithinTolerance((void *)(v6 + 0x134),
                     (void *)(*(int *)(*(int *)(v6 + 0x110) + 0x34) + 0x4c), 70.0f))
                 fcn_004090d0(v6);
         }
@@ -119,7 +119,7 @@ Lafter:
                 *(unsigned char *)(v6 + 0x158) > 4)
                 *(unsigned int *)(v6 + 0x160) =
                     *(unsigned int *)(v6 + 0x160) & 0xffffffef;
-            if (!fcn_00451840((void *)(*(int *)(v4 + 0x34) + 0x4c),
+            if (!CompareVector3WithinTolerance((void *)(*(int *)(v4 + 0x34) + 0x4c),
                     (void *)(v6 + 0x144), 5.0f)) {
                 v13 = *(float *)(v6 + 0x144);
                 *(float *)(v6 + 0x124) = v13;
@@ -146,12 +146,12 @@ Lafter:
                 return 0;
             }
             fcn_00438b40(*(int *)(v4 + 0x34), (void *)(v6 + 0x144));
-            fcn_004053a0(v4, 1);
+            ch_PlaceOnGround(v4, 1);
         }
         ch_FinishAni(v4);
         if (*(char *)0x6b5c28)
             *(unsigned char *)(*(int *)(v6 + 0x14) + 0x8c) |= 8;
-        fcn_004050c0(v6);
+        ch_RemoveQueueEntry(v6);
         return 0;
     }
     v2 = (float *)(v6 + 0x124);

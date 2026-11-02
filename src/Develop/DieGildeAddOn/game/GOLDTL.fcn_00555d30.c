@@ -1,6 +1,6 @@
 
 extern int g_772514;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c4450(int);

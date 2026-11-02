@@ -8,7 +8,7 @@ extern int g_68bfbc;
 extern int g_68bfb8;
 extern int g_100f1dc;
 extern int g_67d370;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00470820(int, int, char*);

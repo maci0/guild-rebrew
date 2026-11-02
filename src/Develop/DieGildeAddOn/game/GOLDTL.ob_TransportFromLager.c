@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 extern char* g_entity_type_table;    /* 0x00868050 */
-extern unsigned short g_774970;      /* 0x00774970 */
+#include "Develop/DieGildeAddOn/game/game_player.h"      /* 0x00774970 */
 #include "GOLDTL.ob_TransportFromLager_gconf.h"
 extern float flt_1;                  /* 0x006628a0 */
 extern float g_6628a8;               /* 0x006628a8 */

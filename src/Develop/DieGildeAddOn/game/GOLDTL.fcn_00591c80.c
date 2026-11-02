@@ -6,7 +6,7 @@
 typedef Slot_779d00 Slot;
 
 extern Slot_779d00 g_779d00[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindRecordById(int);

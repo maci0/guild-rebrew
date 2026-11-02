@@ -5,7 +5,7 @@ extern float g_662d64;
 extern float g_662d68;
 
 void __cdecl fcn_004518a0(float* v);
-int __cdecl fcn_00451840(float* a, float* b, float eps);
+int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 
 /* ADDRESS: GOLDTL 0x00451380 */
 float __cdecl fcn_00451380(float* a, float* b)
@@ -24,13 +24,13 @@ float __cdecl fcn_00451380(float* a, float* b)
 	vb[2] = b[2];
 	fcn_004518a0(va);
 	fcn_004518a0(vb);
-	if (fcn_00451840(va, vb, 1.0e-7f)) {
+	if (CompareVector3WithinTolerance(va, vb, 1.0e-7f)) {
 		return *(float*) 0x6628a8;
 	}
 	nvb[0] = -vb[0];
 	nvb[1] = -vb[1];
 	nvb[2] = -vb[2];
-	if (fcn_00451840(va, nvb, 1.0e-7f)) {
+	if (CompareVector3WithinTolerance(va, nvb, 1.0e-7f)) {
 		return *(float*) 0x6628f8;
 	}
 	cr[0] = *(volatile float*) &vb[2] * va[1] - *(volatile float*) &vb[1] * va[2];

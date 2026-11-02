@@ -1,10 +1,10 @@
 extern char* lpGebaeudePROT;
 extern int g_7746c4;
 extern int g_7746c8;
-extern int g_774970;
+#include "game_player.h"
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_67d370;
 extern int g_14abaac;
 extern char* g_6aa4d8;
@@ -24,7 +24,7 @@ int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_00472250(int dlg, int a, int b);
 void __cdecl fcn_004c5530(int a1);
 void __cdecl fcn_004c35f0(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 int __cdecl fcn_005373e0(int a, int b);
 void __cdecl fcn_00471e30(int dlg);
 
@@ -120,7 +120,7 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 				if (i != 0) {
 					fcn_004c5530(*(int*) packet);
 					fcn_004c35f0();
-					fcn_0052ae70();
+					sv_ClearObjectSelection();
 					g_774654 = 1;
 				}
 				else {

@@ -1,13 +1,10 @@
-
-
-
+#include <string.h>
 extern char g_6a9ae8[];
 extern char g_6a9ad0[];
 extern char g_6a9ac4[];
 
 char* __cdecl strcpy(char*, const char*);
 #pragma intrinsic(strcpy)
-char* __cdecl fcn_0066080a(char*);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 int __cdecl fcn_0042dc90(char*);
 int __cdecl fcn_00470820(int, int, char*);
@@ -23,7 +20,7 @@ int __cdecl fcn_005913e0(char* name)
 	int h;
 
 	strcpy(base, name);
-	fcn_0066080a(base);
+	_strupr(base);
 	fcn_0064d41a(path, g_6a9ae8, base);
 	idx = fcn_0042dc90(path);
 	if (idx == -1) {

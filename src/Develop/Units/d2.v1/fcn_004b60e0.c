@@ -1,11 +1,11 @@
 extern int g_10069a0;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern int g_100f1dc;
 extern int g_6a3760;
 extern int g_774954;
 extern char g_6a3440;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 int __cdecl fcn_004b3c50(int);
 char* __cdecl fcn_00470820(int, int, char*);

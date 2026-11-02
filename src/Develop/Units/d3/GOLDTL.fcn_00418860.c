@@ -20,7 +20,7 @@ extern double g_662958;
 extern double g_662b38;
 extern double dbl_1_0;
 
-int __cdecl fcn_00451840(float*, float*, float);
+int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_00438b40(char*, float*);
 char* __cdecl fcn_00445600(char*, int, char*, char*);
 void __cdecl fcn_00438cb0(char*, float*);
@@ -55,7 +55,7 @@ void __cdecl fcn_00418860(char* obj)
 	vec[1] = a;
 	a = *(float*) (g_6b8014 + 0x54);
 	vec[2] = a;
-	if (fcn_00451840(vec, (float*) (obj + 0x4c), 0.0001f) == 0) {
+	if (CompareVector3WithinTolerance(vec, (float*) (obj + 0x4c), 0.0001f) == 0) {
 		fcn_00438b40(obj, vec);
 	}
 	{

@@ -2,7 +2,7 @@ extern int g_772514;
 extern char* g_1015ea0;
 extern char* g_entity_type_table;
 extern int g_100f1dc;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_14ce8e0;
 
 int __cdecl fcn_00470820(int, int, char*);

@@ -14,7 +14,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern int g_772514;
 extern char* g_77255c;
 extern int g_100f1dc;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 int __cdecl fcn_004b3720(char* name, char* text, int arg);
 int __cdecl fcn_00535570(void);

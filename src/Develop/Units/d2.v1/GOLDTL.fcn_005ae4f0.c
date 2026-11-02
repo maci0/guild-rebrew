@@ -6,7 +6,7 @@ typedef Loot_7774a0 Loot;
 
 extern Loot_7774a0 g_7774a0[32];
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_100f1dc;
 
 int __cdecl fcn_00470820(int, int, char*);

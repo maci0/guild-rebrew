@@ -39,7 +39,7 @@ typedef struct GOLDTL_House5c30 {
 
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_774800;
 extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
@@ -61,7 +61,6 @@ void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_004c4ef0(char*);
-int __cdecl fcn_0064d470(char*, char*);
 int __cdecl fcn_0065f220(const char*, const char*);
 
 /* ADDRESS: GOLDTL 0x005c30e0 */
@@ -110,7 +109,7 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 		}
 	} else {
 		fcn_00597ff0(*(unsigned char*) a1 + 1, (char*) &msg);
-		if (fcn_0064d470((char*) &msg, bp.node) == 0) {
+		if (strstr((char*) &msg, bp.node) == 0) {
 			io_FormatTextBuffer(buf, 0x17d8, *(unsigned char*) a1 * 14 + 0x49c);
 			fcn_00526120(buf, 0);
 			return;

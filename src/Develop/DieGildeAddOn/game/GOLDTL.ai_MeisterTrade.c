@@ -171,14 +171,13 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 		if ((pr->flags & 8) == 0) {
 			continue;
 		}
-		tmp = pr->qty28;
-		if (tmp > fcn_0050dfd0(bld, pr->id) / 3) {
+		if (pr->qty28 > fcn_0050dfd0(bld, pr->id) / 3) {
 			tp = *(char**) (o + 0x16c);
 			if (*(unsigned char*) (0x868050 +
 			    (unsigned char) *tp * 0x24d) == 0x16) {
-				pr->qty18 = tmp / 2;
+				pr->qty18 = pr->qty28 / 2;
 			} else {
-				pr->qty18 = tmp;
+				pr->qty18 = pr->qty28;
 			}
 		}
 	}
@@ -201,11 +200,10 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 				if (*(unsigned char*) (0x7f4ca2 +
 				    *(unsigned short*) (tp + 0x27) *
 				    0x21c) == 6) {
-					fr = (float) (int) fcn_005a8a30(tp);
-					price = (int) eval_ObjektPreis2Credits(t->id, 100);
-					tmp = (int) fcn_0050bb50(t->id,
-					    g_773d75);
-					if (fr <= (float) tmp / (float) price) {
+					fr = fcn_005a8a30(tp);
+					if (fr <= fcn_0050bb50(t->id,
+					    g_773d75) /
+					    eval_ObjektPreis2Credits(t->id, 100)) {
 						t->qty44 = t->qty3c;
 						if (o == (char*) 0x100e748) {
 							sprintf(v.line,
@@ -216,12 +214,11 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 						}
 					}
 				} else {
-					price = (int) eval_ObjektPreis2Credits(t->id, 100);
-					fr = (float) price /
+					fr = eval_ObjektPreis2Credits(t->id, 100) /
 					    fcn_0050bb50(t->id, g_773d75);
 					if (fr < g_6628a0
-					    && fr < (float) (gm_RandomFloat01() *
-					    g_664144 + 0.25)) {
+					    && fr < gm_RandomFloat01() *
+					    g_664144 + 0.25) {
 						t->qty44 = t->qty3c;
 						if (o == (char*) 0x100e748) {
 							sprintf(v.line,
@@ -236,25 +233,25 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 
 			/* 0x0198-0x02a5: fill the own market stall to 32000 */
 			if (*(int*) (o + 0x1b8) >= 0xc80) {
-				tp = *(char**) (o + 0x16c);
 				if (gm_AccumulateTyped2((void*) (0x7f4ca0 +
-				    *(unsigned short*) (tp + 0x27) * 0x21c))
-				    >= 0x1f40) {
+				    *(unsigned short*) (*(char**) (o + 0x16c) +
+				    0x27) * 0x21c)) >= 0x1f40) {
 					goto dump_stock;
 				}
 			}
-			tp = *(char**) (o + 0x16c);
-			fr = (float) gm_AccumulateTyped2((void*) (0x7f4ca0 +
-			    *(unsigned short*) (tp + 0x27) * 0x21c));
 			tmp = *(int*) (o + 0x1b8);
-			if (tmp > (int) fr) {
-				tmp = (int) fr;
+			if (tmp > gm_AccumulateTyped2((void*) (0x7f4ca0 +
+			    *(unsigned short*) (*(char**) (o + 0x16c) + 0x27) *
+			    0x21c))) {
+				tmp = gm_AccumulateTyped2((void*) (0x7f4ca0 +
+				    *(unsigned short*) (*(char**) (o + 0x16c) +
+				    0x27) * 0x21c));
 			}
 			if (tmp >= 0x7d00) {
 				goto dump_stock;
 			}
 			i = 0;
-			for (; i < *(int*) 0x100b0ac && tmp < 0x7d00; i++) {
+			for (; tmp < 0x7d00 && i < *(int*) 0x100b0ac; i++) {
 				t = (Town*) 0x100d0c0 + i;
 				if ((t->flags54 & 6) != 0) {
 					continue;

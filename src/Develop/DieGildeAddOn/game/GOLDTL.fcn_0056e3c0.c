@@ -11,7 +11,7 @@ void __cdecl fcn_00428720(int);
 void __cdecl fcn_00529160(int, int, unsigned short, int);
 void __cdecl io_FormatTextBuffer(int*, unsigned int, ...);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, char*, char*);
-void __cdecl fcn_00406120(int);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl fcn_0040c120(int, int, int);
 char* __cdecl fcn_004934c0(char*);
 void __cdecl fcn_005099e0(char*, char*);
@@ -23,7 +23,7 @@ void __cdecl fcn_004c57e0(int, int);
 int __cdecl fcn_004c4450(int);
 int* __cdecl fcn_004c4480(int);
 int __cdecl fcn_004c5980(int);
-int __cdecl fcn_004e6a30(int);
+int __cdecl cut_FindCutsceneById(int);
 void __cdecl fcn_00546190(char*);
 
 /* ADDRESS: GOLDTL 0x0056e3c0 */
@@ -95,7 +95,7 @@ void __cdecl fcn_0056e3c0(char* a0)
 	case 2:
 		obj = *(char**) (s + 0x184);
 		if (obj != 0) {
-			fcn_00406120((int) obj);
+			ch_CancelActionQueue(obj);
 			p = fcn_0040c120((int) *(char**) (s + 0x184), 0x36, 1);
 			if (p != 0) {
 				memcpy(p + 0xf0, g_68cb58, 0x19);
@@ -178,7 +178,7 @@ void __cdecl fcn_0056e3c0(char* a0)
 		if (*(unsigned char*) (s + 8) != 0) {
 			goto tail;
 		}
-		if (fcn_004e6a30(*(int*) (a0 + 0xb0)) != 0) {
+		if (cut_FindCutsceneById(*(int*) (a0 + 0xb0)) != 0) {
 			*(int*) (a0 + 0x52) = *(int*) g_7f4c00;
 			*(int*) (a0 + 0x56) = *(int*) (g_7f4c00 + 4);
 			*(int*) (a0 + 0x5a) = *(int*) (g_7f4c00 + 8);

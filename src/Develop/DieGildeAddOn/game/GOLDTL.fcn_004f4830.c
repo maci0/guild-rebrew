@@ -16,7 +16,7 @@ int __cdecl fcn_004f4830(int idx, void* dst)
 	return 1;
 }
 
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);

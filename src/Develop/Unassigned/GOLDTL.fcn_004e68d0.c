@@ -20,7 +20,7 @@ typedef struct
 
 extern char g_9a9660[];
 
-void* __cdecl fcn_004e6a30(unsigned int);
+void* __cdecl cut_FindCutsceneById(unsigned int);
 
 void* __cdecl fcn_004e68d0(void)
 {
@@ -35,7 +35,7 @@ void* __cdecl fcn_004e68d0(void)
 		}
 	}
 	if (best != (unsigned int) -1) {
-		return fcn_004e6a30(best);
+		return cut_FindCutsceneById(best);
 	}
 	return 0;
 }

@@ -8,7 +8,7 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 
 char* __cdecl fcn_00502cd0(int, int, int, int);

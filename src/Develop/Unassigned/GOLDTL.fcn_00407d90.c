@@ -24,7 +24,7 @@ int __cdecl fcn_00407d90(char* self, char** out)
 			if (*(int*) (n + 0x218) != 1 ||
 			    (*(char**) (e + 0x22c) != 0 &&
 			     *(int*) (*(char**) (e + 0x22c) + 0x218) != 1)) {
-				if (fcn_00451840((float*) (*(char**) (self + 0x34) + 0x4c), (float*) (n + 0x4c), 300.0f)) {
+				if (CompareVector3WithinTolerance((float*) (*(char**) (self + 0x34) + 0x4c), (float*) (n + 0x4c), 300.0f)) {
 					out[count] = *p;
 					count++;
 				}

@@ -37,7 +37,7 @@ extern int g_772514;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_67d370;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 int __cdecl fcn_004ecf00(char*, int*, int*, int);
 int __cdecl fcn_00470820(int, int, char*);

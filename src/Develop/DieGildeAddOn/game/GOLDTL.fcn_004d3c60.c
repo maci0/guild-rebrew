@@ -1,3 +1,4 @@
+#include <string.h>
 extern char* g_772eb4;
 extern int g_772e9c;
 #include "GOLDTL.fcn_004d3c60_gconf.h"
@@ -11,7 +12,6 @@ extern float g_6628cc;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 float __cdecl fcn_004ce8b0(char*);
-int __cdecl fcn_0064d470(char*, void*);
 void __cdecl fcn_00455350(char*, char*, float*);
 
 /* ADDRESS: GOLDTL 0x004d3c60 */
@@ -66,7 +66,7 @@ int __cdecl fcn_004d3c60(int id)
 	}
 	cnt = 0;
 	for (i = 0; i < g_772f08; i++) {
-		if (fcn_0064d470((char*) *(int*) ((char*) g_9b9e40 + i * 4), "sp_CONQUER")) {
+		if (strstr((char*) *(int*) ((char*) g_9b9e40 + i * 4), "sp_CONQUER")) {
 			ent = *(int*) ((char*) g_9b9e40 + i * 4);
 			fcn_00455350((char*) ent, (char*) (ent + 0x4c), pos);
 			ent = *(int*) (*(int*) ((char*) g_9b9e40 + i * 4) + 0x204);

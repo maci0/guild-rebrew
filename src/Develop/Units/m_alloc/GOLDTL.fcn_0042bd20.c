@@ -7,7 +7,6 @@ extern int g_6b7f98;
 extern void* g_6b7fa0;
 
 char* __cdecl fcn_0064d1a0(char*, int);
-char* __cdecl fcn_0064d470(char*, char*);
 char* __cdecl fcn_0064e790(char*, int);
 char* __cdecl fcn_0064e2f9(char*, char*);
 int __cdecl fcn_0064e1fd(char*);
@@ -50,8 +49,8 @@ int __cdecl fcn_0042bd20(char* path)
 	do {
 		memset(line, 0, 0xc8);
 		fgets(line, 0xc8, f);
-		if (!fcn_0064d470(line, "<")) {
-			if (fcn_0064d470(line, "#include")) {
+		if (!strstr(line, "<")) {
+			if (strstr(line, "#include")) {
 				p = fcn_0064e790(line, '"');
 				if (!p)
 					goto fail;

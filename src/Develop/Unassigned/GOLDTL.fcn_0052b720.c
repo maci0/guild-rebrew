@@ -1,7 +1,7 @@
 #include <math.h>
 
 void __cdecl fcn_005ebbb9(float* out, int src, float scale);
-int __cdecl fcn_00451840(int a, float* p, float b);
+int __cdecl CompareVector3WithinTolerance(int a, float* p, float b);
 int __cdecl fcn_004514d0(float* a, float* b);
 void __cdecl fcn_00438b40(int a, int b);
 
@@ -221,7 +221,7 @@ done:
 		px = ax + *(float*) (*(int*) 0x6b8014 + 0x4c);
 		py = *(float*) (*(int*) 0x6b8014 + 0x50);
 		pz = ay + *(float*) (*(int*) 0x6b8014 + 0x54);
-		if (fcn_00451840(0x773e24, &px, 0.1f) == 0) {
+		if (CompareVector3WithinTolerance(0x773e24, &px, 0.1f) == 0) {
 			fcn_00438b40(*(int*) 0x6b8014, (int) &pz);
 			py = 1.0f;
 		}

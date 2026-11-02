@@ -28,7 +28,7 @@ void __cdecl fcn_00472640(int handle, int flag);
 void __cdecl fcn_00595e20(void* obj, int packet);
 void __cdecl fcn_005963f0(int dlg, int a, int b, void* obj);
 int __cdecl fcn_005373e0(void* fn, int key);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl fcn_00471e30(int dlg);
 int __cdecl fcn_004c5530(char* msg);
@@ -189,7 +189,7 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 					pkt[0x58] = (char) j;
 					if (j != 0) {
 						fcn_004c35f0();
-						fcn_0052ae70();
+						sv_ClearObjectSelection();
 						h = fcn_004c5530(pkt);
 						while (fcn_004c4450(h) == 0) {
 							fcn_005373e0(0, 0x20007);
@@ -205,7 +205,7 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 			*(int*) 0x774654 = 1;
 		}
 	}
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 	fcn_0052a2d0();
 	fcn_00471e30(dlg);
 	fcn_00532ef0();

@@ -34,13 +34,13 @@ void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
 
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_7746c4;
 extern int g_14abc98;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char s_6ab348[];
 
 int __cdecl fcn_00526120(int, int);

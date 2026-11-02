@@ -30,7 +30,7 @@ void __cdecl fcn_00455350(char*, float*, float*);
 void __cdecl fcn_00455140(char*, char*, float*);
 float __cdecl fcn_00451380(char*, float*);
 void __cdecl fcn_00438cb0(Model*, float*);
-void __cdecl fcn_004053a0(Figure*, int);
+#include "Develop/DieGildeAddOn/game/ch_ground.h"
 void __cdecl fcn_00438ac0(Model*, int);
 void __cdecl fcn_00404a00(Figure*, int, char*);
 void __cdecl fcn_005338d0(Model*, int, int);
@@ -57,7 +57,7 @@ Figure* __cdecl fcn_0053b090(char* res, char* kind, int anim)
 		fcn_00455140(h, ((char*)g_662d40), at);
 		pos[1] = fcn_00451380(((char*)g_662d40), at);
 		fcn_00438cb0(f->model, pos);
-		fcn_004053a0(f, 0);
+		ch_PlaceOnGround(f, 0);
 		f->model->owner = f;
 		fcn_00438ac0(f->model, 1);
 		fcn_00404a00(f, 1, "bewegung/gehen");

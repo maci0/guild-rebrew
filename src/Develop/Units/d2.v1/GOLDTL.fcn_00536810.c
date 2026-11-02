@@ -36,10 +36,10 @@ extern int g_772514;
 extern int g_14ac628;
 extern int g_14ce8e0;
 extern char g_14cf950;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_100f1dc;
 extern int g_67d370;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_6b5c60[];
 extern char g_7e3a60[];
 

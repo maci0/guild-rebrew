@@ -3,7 +3,7 @@
 
 extern unsigned char g_773d75;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char g_6aae08[];
 
 char* __cdecl fcn_00502cd0(int, int, int, int, int);

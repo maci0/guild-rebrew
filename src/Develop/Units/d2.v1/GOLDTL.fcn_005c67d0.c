@@ -20,13 +20,13 @@ extern int g_1040490;
 extern int g_1040494;
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_772514;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern Btn_776c60 g_776c60[6];
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14a92bc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char s_6ac77c[];
 
 int __cdecl fcn_0057ec20(int);

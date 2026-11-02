@@ -346,3 +346,14 @@ impl = "int g_68ff68[0x105] = {0};"
 
 [specials.g_690478]
 impl = "int g_690478[0x3a] = {0};"
+
+# Comparison capacities follow the native queue and influence-matrix extents.
+# Original source storage owners remain unproved.
+[specials.g_fb5760]
+impl = "unsigned char g_fb5760[0x50000] = {0};"
+
+[specials.g_869480]
+impl = "char g_869480[0x300][0x300] = {0};"
+
+[specials.g_90e0a0]
+impl = "char g_90e0a0[0x300][0x300] = {0};"

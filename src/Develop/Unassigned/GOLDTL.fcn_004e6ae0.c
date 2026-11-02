@@ -7,7 +7,7 @@ extern int g_699368;
 
 #pragma intrinsic(memcpy, memset)
 
-char* __cdecl fcn_004e6ab0(void);
+char* __cdecl cut_FindFreeCutscene(void);
 
 #include "client_packet_queue.h"
 
@@ -15,7 +15,7 @@ char* __cdecl fcn_004e6ae0(void* src)
 {
 	char* p;
 
-	p = fcn_004e6ab0();
+	p = cut_FindFreeCutscene();
 	if (p != 0) {
 		memcpy(p, src, 0x114);
 		*(int*) p = g_699368;

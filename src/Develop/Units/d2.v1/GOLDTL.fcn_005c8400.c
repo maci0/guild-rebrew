@@ -24,7 +24,7 @@ typedef struct {
 
 extern Tab5c84 g_776aa0[16];
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_6ac820[];
 extern char g_6811b0[];
 extern int g_772514;

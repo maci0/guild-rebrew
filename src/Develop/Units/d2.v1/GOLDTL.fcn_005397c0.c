@@ -9,7 +9,7 @@ extern char g_7e2000[];
 extern char g_6a3a34[];
 extern int g_14ce8e0;
 extern char g_14cf950;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_100f1dc;
 extern int g_67d370;
 

@@ -33,7 +33,7 @@ void __cdecl fcn_0040b7f0(char* ev)
 	saved = g_6b8010;
 	room = fcn_00413190(*(int*) (*(char**) (ev + 0x14) + 0x88));
 	if (room != *(int*) (ev + 0x30)) {
-		fcn_004050c0(ev);
+		ch_RemoveQueueEntry(ev);
 		return;
 	}
 	fcn_004432d0(room, 1);
@@ -49,6 +49,6 @@ void __cdecl fcn_0040b7f0(char* ev)
 			strcpy(walk + 0x70, "Walk2RndDummy");
 		}
 	}
-	fcn_004050c0(ev);
+	ch_RemoveQueueEntry(ev);
 	fcn_004432d0(saved, 1);
 }

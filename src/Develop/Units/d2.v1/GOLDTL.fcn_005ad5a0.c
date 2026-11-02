@@ -21,7 +21,7 @@ void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
 void __cdecl fcn_0052a2d0(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_005ad380(void);
 
 void __cdecl fcn_005ad5a0(char* a)
@@ -45,5 +45,5 @@ void __cdecl fcn_005ad5a0(char* a)
 	req.d = 1;
 	fcn_005bdc30(1, &req, text, (void*) fcn_005ad380, 0);
 	fcn_0052a2d0();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 }

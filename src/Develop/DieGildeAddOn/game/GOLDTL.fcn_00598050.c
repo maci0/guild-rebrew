@@ -35,7 +35,7 @@ char __cdecl fcn_00598050(char* e, char* pfx)
 		q = *(char**) (p + 0x61);
 		if (q != 0) {
 			fcn_00455350(q, q + 0x4c, pb);
-			if (fcn_00451840(pb, pa, 100.0f)) {
+			if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 				return 1;
 			}
 		}

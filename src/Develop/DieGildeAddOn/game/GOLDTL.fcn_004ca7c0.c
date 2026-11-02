@@ -6,7 +6,7 @@ extern char g_68b0d8[];
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl fcn_004032b0(char*);
-void __cdecl fcn_00406120(char*);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl fcn_0040c120(char*, int, int);
 
 int __cdecl fcn_004ca7c0(char* x, char* out)
@@ -18,7 +18,7 @@ int __cdecl fcn_004ca7c0(char* x, char* out)
 	o = fcn_004032b0(buf);
 	if (o == 0)
 		return 2;
-	fcn_00406120(o);
+	ch_CancelActionQueue(o);
 	if (out != 0) {
 		out[0] = 2;
 		out[1] = 0;

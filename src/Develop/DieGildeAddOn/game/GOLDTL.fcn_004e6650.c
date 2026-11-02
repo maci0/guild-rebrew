@@ -36,7 +36,7 @@ typedef struct {
 
 extern char g_9a9660[];
 extern char g_7f4ca4[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_77494c;
 extern unsigned char g_7747b0;
 #include "client_types.h"
@@ -46,7 +46,7 @@ extern int g_7e2700;
 void __cdecl fcn_00500bb0(Time *, int, int, int);
 int __cdecl fcn_00500cb0(Time *, Time *);
 void __cdecl fcn_004c6a70(int);
-void __cdecl fcn_004e6b10(int);
+#include "Develop/DieGildeAddOn/game/cutscene.h"
 
 /* ADDRESS: GOLDTL 0x004e6650 */
 int __cdecl fcn_004e6650(void)
@@ -97,13 +97,13 @@ int __cdecl fcn_004e6650(void)
 					   (((Ent*)g_9a9660)[i].flags & 2) != 0) {
 					((Ent*)g_9a9660)[i].done = 1;
 				} else {
-					fcn_004e6b10(((Ent*)g_9a9660)[i].id);
+					cut_FreeCutscene(((Ent*)g_9a9660)[i].id);
 				}
 			}
 			if (fcn_00500cb0(&(*(Time*)&g_7f4c00), &t) > 0 && ((Ent*)g_9a9660)[i].done != 0) {
 				g_7e2700 = 0;
 				fcn_004e5a00((int*) &((Ent*)g_9a9660)[i]);
-				fcn_004e6b10(((Ent*)g_9a9660)[i].id);
+				cut_FreeCutscene(((Ent*)g_9a9660)[i].id);
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 extern int g_774650;
 extern int g_774658;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_774670;
 extern int g_77493c;
 extern int g_774708;
@@ -12,7 +12,7 @@ extern int g_7e35c0[];
 extern int g_7e46ac;
 extern int g_7e2700;
 extern int g_7e4300;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_7f4c04;
 extern char g_7f4ca0[];
 extern int g_14a5544;
@@ -101,7 +101,7 @@ extern void *memcpy(void *, const void *, unsigned int);
 extern void fcn_005356e0();
 extern void fcn_412630();
 extern void fcn_004116d0();
-extern int fcn_004e6a30();
+extern int cut_FindCutsceneById();
 extern void fcn_00533a40();
 extern void fcn_00474e80();
 extern void fcn_00533090();
@@ -215,7 +215,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 				g_7f4ca0[(unsigned short) g_774970 * 540 + 2] == 7) &&
 				g_7f4ca0[(unsigned short) g_774970 * 540 + 8] == 0 &&
 				g_774650 > g_774658) {
-				p = (char *) fcn_004e6a30(
+				p = (char *) cut_FindCutsceneById(
 					*(int *) (g_7f4ca0 + (unsigned short) g_774970 * 540 + 0x20c));
 				if (p != 0 && p[8] == 8 && !(flags & 0x10000)) {
 					g_774654 = g_774650 - g_774658;

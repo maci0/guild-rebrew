@@ -11,7 +11,7 @@ typedef struct
 
 extern double g_662b20;
 extern unsigned char g_773d75;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 
 float __cdecl eval_ObjektPreis2Credits(int, char);

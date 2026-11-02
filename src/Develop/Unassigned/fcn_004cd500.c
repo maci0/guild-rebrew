@@ -1,5 +1,5 @@
-void* __cdecl fcn_004e6a30(int id);
-void __cdecl fcn_004e6b10(int id);
+void* __cdecl cut_FindCutsceneById(int id);
+#include "Develop/DieGildeAddOn/game/cutscene.h"
 void* __cdecl gm_LookupEntityRecordById(int id);
 
 /* Releases the record behind the command's 0x10 field: clears the back-pointer
@@ -13,7 +13,7 @@ int __cdecl fcn_004cd500(int* cmd, unsigned char* result)
 	void* p;
 	int i;
 
-	rec = (unsigned char*) fcn_004e6a30(*(int*) ((char*) cmd + 0x10));
+	rec = (unsigned char*) cut_FindCutsceneById(*(int*) ((char*) cmd + 0x10));
 	if (rec == 0) {
 		return 1;
 	}
@@ -26,7 +26,7 @@ int __cdecl fcn_004cd500(int* cmd, unsigned char* result)
 			}
 		}
 	}
-	fcn_004e6b10(*(int*) ((char*) cmd + 0x10));
+	cut_FreeCutscene(*(int*) ((char*) cmd + 0x10));
 	if (result != 0) {
 		result[0] = 1;
 		result[1] = 0;

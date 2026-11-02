@@ -10,7 +10,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(int);
 void __cdecl fcn_00529160(char*, int, int, char*);
-void __cdecl fcn_00406120(char*);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl fcn_0040c120(char*, int, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c57e0(int, int);
@@ -50,7 +50,7 @@ void __cdecl fcn_0056e170(char* u)
 		fcn_00529160(0, 0, *(unsigned short*) h, 0);
 		*(int*) (h + 0x16c) = 0;
 		if (*(char**) (h + 0x184) != 0) {
-			fcn_00406120(*(char**) (h + 0x184));
+			ch_CancelActionQueue(*(char**) (h + 0x184));
 			h = fcn_0040c120(*(char**) (h + 0x184), 0x36, 1);
 			strcpy(h + 0xf0, "bewegung/zu_boden_sinken");
 		}

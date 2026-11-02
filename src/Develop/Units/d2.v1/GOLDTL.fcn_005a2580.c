@@ -35,8 +35,8 @@ typedef struct Rec {
 extern int g_772514;
 extern char* g_772500;
 extern char* g_77255c;
-extern unsigned short g_774970;
-extern int g_774654;
+#include "Develop/DieGildeAddOn/game/game_player.h"
+#include "client_dialog_state.h"
 extern int g_67d370;
 extern int g_7f4c00;
 extern int g_7f4c04;

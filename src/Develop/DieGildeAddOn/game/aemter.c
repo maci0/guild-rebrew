@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "../../Units/Error/error.h"
-#include "office_slot.h"
+
 #include "game_structs.h"
 
 extern char g_office_slots[0x3f0];
@@ -9,8 +9,8 @@ extern unsigned short g_current_hour;
 extern void __cdecl srv_InitBuildingTypeTable(void);
 extern void __cdecl LogMessageInternal(const char* module, int line, const char* text, int type);
 extern int __cdecl sprintf(char* buffer, const char* format, ...);
-
-
+extern char* g_entity_type_table;
+unsigned char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
 
 
 
@@ -284,7 +284,7 @@ int __cdecl amt_ExecuteOfficeAssignment(char* cmd_payload)
 	/* Search table for matching type byte */
 	record_index = 0;
 	for (; record_index < 0x2a; record_index++) {
-		if (((OfficeSlot*) g_office_slots)[record_index].type == *cmd_payload)
+		if ((char) ((OFFICE_SLOT*) g_office_slots)[record_index].id == *cmd_payload)
 			break;
 	}
 	if (record_index >= 0x2a) {
@@ -294,10 +294,10 @@ int __cdecl amt_ExecuteOfficeAssignment(char* cmd_payload)
 	record_off = record_index * 0x18;
 
 	/* Lookup existing owner and clear old role references */
-	old_owner = (int)gm_LookupEntityRecordById(((OfficeSlot*) g_office_slots)[record_index].entityId);
+	old_owner = (int)gm_LookupEntityRecordById(((OFFICE_SLOT*) g_office_slots)[record_index].mplayerid);
 	if (old_owner != 0 && *(int*) (old_owner + 4) != *(int*) (cmd_payload + 1)) {
 		char role;
-		role = ((OfficeSlot*) g_office_slots)[record_index].role;
+		role = ((OFFICE_SLOT*) g_office_slots)[record_index].mamt;
 
 		if (*(char*) (old_owner + 0x166) == role) {
 			*(char*) (old_owner + 0x166) = 0;
@@ -334,31 +334,31 @@ after_old_clear:
 	{
 		int k;
 
-		if ((unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role <= 0x1b) {
+		if ((unsigned char) ((OFFICE_SLOT*) g_office_slots)[record_index].mamt <= 0x1b) {
 			/* Small role path */
 			if (*(char*) (ent + 0x166) != 0) {
 				/* Search for existing assignment with same owner */
 				int j;
 				for (j = 0; j < 30; j++) {
-					if (((OfficeSlot*) g_office_slots)[j].entityId == iStack) {
-						((OfficeSlot*) g_office_slots)[j].entityId = -1;
-						((OfficeSlot*) g_office_slots)[j].assignmentId = -1;
-						((OfficeSlot*) g_office_slots)[j].state = 4;
-						((OfficeSlot*) g_office_slots)[j].count = 0;
+					if (((OFFICE_SLOT*) g_office_slots)[j].mplayerid == iStack) {
+						((OFFICE_SLOT*) g_office_slots)[j].mplayerid = -1;
+						((OFFICE_SLOT*) g_office_slots)[j].msetter = -1;
+						((OFFICE_SLOT*) g_office_slots)[j].status = 4;
+						((OFFICE_SLOT*) g_office_slots)[j].pcount = 0;
 						break;
 					}
 				}
 			}
 
 			/* Compare role priorities */
-			if (*(unsigned char*) ((unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role * 0x18 + (unsigned int) ((char*) &g_office_role_templates + 0x8)) >=
+			if (*(unsigned char*) ((unsigned char) ((OFFICE_SLOT*) g_office_slots)[record_index].mamt * 0x18 + (unsigned int) ((char*) &g_office_role_templates + 0x8)) >=
 			    *(unsigned char*) (*(unsigned char*) (ent + 0x166) * 0x18 + (unsigned int) ((char*) &g_office_role_templates + 0x8))) {
-				*(char*) (ent + 0x167) = ((OfficeSlot*) g_office_slots)[record_index].role;
+				*(char*) (ent + 0x167) = ((OFFICE_SLOT*) g_office_slots)[record_index].mamt;
 			}
 
 			{
 				char new_role;
-				new_role = ((OfficeSlot*) g_office_slots)[record_index].role;
+				new_role = ((OFFICE_SLOT*) g_office_slots)[record_index].mamt;
 				*(char*) (ent + 0x166) = new_role;
 				if (*(char*) (ent + 0x168) == new_role) {
 					*(char*) (ent + 0x168) = 0;
@@ -368,7 +368,7 @@ after_old_clear:
 			/* Set flags based on role */
 			{
 				unsigned char role_val;
-				role_val = (unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role;
+				role_val = (unsigned char) ((OFFICE_SLOT*) g_office_slots)[record_index].mamt;
 
 				if (role_val == 0x0f) {
 					*(int*) (ent + 0x1cc) = *(int*) (ent + 0x1cc) | 0x40;
@@ -382,13 +382,13 @@ after_old_clear:
 			}
 
 			/* Check role's count property */
-			if (*(int*) ((unsigned int) (unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role * 0x18 + (unsigned int) ((char*) &g_office_role_templates + 0x10)) != 0) {
+			if (*(int*) ((unsigned int) (unsigned char) ((OFFICE_SLOT*) g_office_slots)[record_index].mamt * 0x18 + (unsigned int) ((char*) &g_office_role_templates + 0x10)) != 0) {
 				unsigned char* scan;
 				k = 0;
 				scan = (unsigned char*) ((char*) &g_office_slots + 0x8);
 
 				while ((int) scan < (int) ((char*) &g_office_slots + 0x2d8)) {
-					if (*scan == (unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role && k != record_index) {
+					if (*scan == (unsigned char) ((OFFICE_SLOT*) g_office_slots)[record_index].mamt && k != record_index) {
 						goto dec_count;
 					}
 					scan += 0x18;
@@ -397,30 +397,30 @@ after_old_clear:
 			}
 
 		final_store:
-			((OfficeSlot*) g_office_slots)[record_index].entityId = iStack;
-			((OfficeSlot*) g_office_slots)[record_index].assignmentId = *(int*) (cmd_payload + 7);
-			((OfficeSlot*) g_office_slots)[record_index].state = cmd_payload[5];
+			((OFFICE_SLOT*) g_office_slots)[record_index].mplayerid = iStack;
+			((OFFICE_SLOT*) g_office_slots)[record_index].msetter = *(int*) (cmd_payload + 7);
+			((OFFICE_SLOT*) g_office_slots)[record_index].status = cmd_payload[5];
 			if (cmd_payload[5] == 3) {
-				((OfficeSlot*) g_office_slots)[record_index].count = 0;
+				((OFFICE_SLOT*) g_office_slots)[record_index].pcount = 0;
 			}
 			return 1;
 
 		dec_count:
-			if (((OfficeSlot*) g_office_slots)[k].state == 3) {
+			if (((OFFICE_SLOT*) g_office_slots)[k].status == 3) {
 				int cnt;
-				cnt = ((OfficeSlot*) g_office_slots)[k].count;
+				cnt = ((OFFICE_SLOT*) g_office_slots)[k].pcount;
 				if (cnt != 0) {
-					((OfficeSlot*) g_office_slots)[k].count = cnt - 1;
+					((OFFICE_SLOT*) g_office_slots)[k].pcount = cnt - 1;
 					if (cnt - 1 == 0) {
-						((OfficeSlot*) g_office_slots)[k].state = 4;
+						((OFFICE_SLOT*) g_office_slots)[k].status = 4;
 					}
 				}
 			}
 			goto final_store;
 		}
 
-		if ((unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role >= 0x1c &&
-		    (unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role <= 0x22) {
+		if ((unsigned char) ((OFFICE_SLOT*) g_office_slots)[record_index].mamt >= 0x1c &&
+		    (unsigned char) ((OFFICE_SLOT*) g_office_slots)[record_index].mamt <= 0x22) {
 			/* Medium role path (0x1c-0x22) */
 			if (*(char*) (ent + 0x169) != 0) {
 				int* scan;
@@ -433,7 +433,7 @@ after_old_clear:
 				} while ((int) scan < (int) ((char*) &g_office_slots + 0x37c));
 			}
 
-			*(char*) (ent + 0x169) = ((OfficeSlot*) g_office_slots)[record_index].role;
+			*(char*) (ent + 0x169) = ((OFFICE_SLOT*) g_office_slots)[record_index].mamt;
 			goto final_store;
 		}
 
@@ -447,7 +447,7 @@ after_old_clear:
 			flags &= 0xfffff1ff;
 			*(int*) (ent + 0x1cc) = flags;
 
-			role_ch = ((OfficeSlot*) g_office_slots)[record_index].role;
+			role_ch = ((OFFICE_SLOT*) g_office_slots)[record_index].mamt;
 			mask = 0;
 			if (role_ch == 0x23) {
 				*(int*) (ent + 0x1cc) = flags | 0x200;
@@ -488,8 +488,8 @@ void __cdecl amt_FindEntity26(int val)
 	unsigned int i;
 	for (i = 0x29; i != 0; i--) {
 		/* asm checks byte at slot+8 (role); stores dword at slot+4 (entityId) */
-		if (((OfficeSlot*) g_office_slots)[i].role == 0x26) {
-			((OfficeSlot*) g_office_slots)[i].entityId = val;
+		if (((OFFICE_SLOT*) g_office_slots)[i].mamt == 0x26) {
+			((OFFICE_SLOT*) g_office_slots)[i].mplayerid = val;
 			return;
 		}
 	}
@@ -502,8 +502,8 @@ void __cdecl amt_FindEntity27(int val)
 {
 	unsigned int i;
 	for (i = 0x29; i != 0; i--) {
-		if (((OfficeSlot*) g_office_slots)[i].role == 0x27) {
-			((OfficeSlot*) g_office_slots)[i].entityId = val;
+		if (((OFFICE_SLOT*) g_office_slots)[i].mamt == 0x27) {
+			((OFFICE_SLOT*) g_office_slots)[i].mplayerid = val;
 			return;
 		}
 	}
@@ -515,8 +515,8 @@ void __cdecl amt_FindEntity27(int val)
 
 int __cdecl amt_SwapOfficeHolders(int* arg1)
 {
-	OfficeSlot* slot_a;
-	OfficeSlot* slot_b;
+	OFFICE_SLOT* slot_a;
+	OFFICE_SLOT* slot_b;
 	char* ent_a;
 	char* ent_b;
 	char* ent_c;
@@ -531,7 +531,7 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 	/* find office slot A by type byte */
 	i = 0;
 	while (1) {
-		if (((OfficeSlot*) g_office_slots)[i].type == *((char*) arg1 + 4)) {
+		if ((char) ((OFFICE_SLOT*) g_office_slots)[i].id == *((char*) arg1 + 4)) {
 			break;
 		}
 		i++;
@@ -539,11 +539,11 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 			return 0;
 		}
 	}
-	slot_a = &((OfficeSlot*) g_office_slots)[i];
+	slot_a = &((OFFICE_SLOT*) g_office_slots)[i];
 	if (slot_a == 0) {
 		return 0;
 	}
-	ent_b = (char*) gm_LookupEntityRecordById(slot_a->entityId);
+	ent_b = (char*) gm_LookupEntityRecordById(slot_a->mplayerid);
 	if (ent_b == 0) {
 		return 0;
 	}
@@ -551,7 +551,7 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 	/* find office slot B by type byte */
 	i = 0;
 	while (1) {
-		if (((OfficeSlot*) g_office_slots)[i].type == *((char*) arg1 + 5)) {
+		if ((char) ((OFFICE_SLOT*) g_office_slots)[i].id == *((char*) arg1 + 5)) {
 			break;
 		}
 		i++;
@@ -559,19 +559,19 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 			return 0;
 		}
 	}
-	slot_b = &((OfficeSlot*) g_office_slots)[i];
+	slot_b = &((OFFICE_SLOT*) g_office_slots)[i];
 	if (slot_b == 0) {
 		return 0;
 	}
-	ent_c = (char*) gm_LookupEntityRecordById(slot_b->entityId);
+	ent_c = (char*) gm_LookupEntityRecordById(slot_b->mplayerid);
 	if (ent_c == 0) {
 		return 0;
 	}
-	*(char*) (ent_b + 0x166) = slot_b->role;
-	*(char*) (ent_c + 0x166) = slot_a->role;
-	i = slot_a->entityId;
-	slot_a->entityId = slot_b->entityId;
-	slot_b->entityId = i;
+	*(char*) (ent_b + 0x166) = slot_b->mamt;
+	*(char*) (ent_c + 0x166) = slot_a->mamt;
+	i = slot_a->mplayerid;
+	slot_a->mplayerid = slot_b->mplayerid;
+	slot_b->mplayerid = i;
 	*(int*) (ent_a + 0x194) -= *(int*) ((char*) arg1 + 6);
 	return 1;
 }
@@ -581,7 +581,7 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 
 int __cdecl amt_ClearEntityLinks(char* entity)
 {
-	OfficeSlot* slot;
+	OFFICE_SLOT* slot;
 	unsigned short default_val;
 	int i;
 	int result;
@@ -589,26 +589,26 @@ int __cdecl amt_ClearEntityLinks(char* entity)
 
 	default_val = (unsigned short) g_current_hour;
 	result = 0;
-	slot = (OfficeSlot*) g_office_slots;
+	slot = (OFFICE_SLOT*) g_office_slots;
 	for (i = 0; i < 0x2a; i++) {
-		if (slot[i].entityId == *(int*) (entity + 4)) {
-			slot[i].entityId = -1;
-			slot[i].assignmentId = -1;
+		if (slot[i].mplayerid == *(int*) (entity + 4)) {
+			slot[i].mplayerid = -1;
+			slot[i].msetter = -1;
 			state_tmp = (default_val > 0xb) ? 4 : 3;
-			slot[i].state = (char) state_tmp;
-			slot[i].count = 0;
+			slot[i].status = (char) state_tmp;
+			slot[i].pcount = 0;
 			result |= 1;
 		}
-		else if (slot[i].assignmentId == *(int*) (entity + 4)) {
-			slot[i].assignmentId = -1;
-			slot[i].state = 1;
+		else if (slot[i].msetter == *(int*) (entity + 4)) {
+			slot[i].msetter = -1;
+			slot[i].status = 1;
 		}
 	}
 	if (*(char*) (entity + 0x168) != 0) {
 		for (i = 0; i < 0x2a; i++) {
-			if (slot[i].role == *(char*) (entity + 0x168)) {
-				if (slot[i].count > 0) {
-					slot[i].count--;
+			if ((char) slot[i].mamt == *(char*) (entity + 0x168)) {
+				if (slot[i].pcount > 0) {
+					slot[i].pcount--;
 					result |= 1;
 				}
 			}
@@ -632,19 +632,19 @@ typedef struct {
 } OFFICE_PICK;
 // SIZE 0xc
 
-int __cdecl amt_GetSlotByRole(int role, OfficeSlot* out)
+int __cdecl amt_GetSlotByRole(int role, OFFICE_SLOT* out)
 {
 	int i;
 
 	for (i = 0; i < 0x2a; i++) {
-		if (((OfficeSlot*) g_office_slots)[i].role == role) {
+		if ((char) ((OFFICE_SLOT*) g_office_slots)[i].mamt == role) {
 			break;
 		}
 	}
 	if (i >= 0x2a) {
 		return 0;
 	}
-	*out = ((OfficeSlot*) g_office_slots)[i];
+	*out = ((OFFICE_SLOT*) g_office_slots)[i];
 	return 1;
 }
 
@@ -656,19 +656,19 @@ int __cdecl amt_GetRoleGroup(int role)
 	return g_office_role_templates[role].f4;
 }
 
-int __cdecl amt_GetSlotByType(unsigned char type, OfficeSlot* out)
+int __cdecl amt_GetSlotByType(unsigned char type, OFFICE_SLOT* out)
 {
 	int i;
 
 	for (i = 0; i < 0x2a; i++) {
-		if ((unsigned char) ((OfficeSlot*) g_office_slots)[i].type == type) {
+		if ((unsigned char) ((OFFICE_SLOT*) g_office_slots)[i].id == type) {
 			break;
 		}
 	}
 	if (i >= 0x2a) {
 		return 0;
 	}
-	*out = ((OfficeSlot*) g_office_slots)[i];
+	*out = ((OFFICE_SLOT*) g_office_slots)[i];
 	return 1;
 }
 
@@ -682,7 +682,7 @@ int __cdecl amt_GetRoleTemplate(int role, OFFICE_ROLE_TEMPLATE* out)
 	return 1;
 }
 
-int __cdecl amt_ListSlotsOfGroup(int group, int max, OfficeSlot* out)
+int __cdecl amt_ListSlotsOfGroup(int group, int max, OFFICE_SLOT* out)
 {
 	int n;
 	int i;
@@ -702,14 +702,14 @@ int __cdecl amt_ListSlotsOfGroup(int group, int max, OfficeSlot* out)
 	}
 	n = 0;
 	for (i = start - 1; i >= 0 && n < max; i--) {
-		if (g_office_role_templates[(unsigned char) ((OfficeSlot*) g_office_slots)[i].role].f4 == group) {
-			out[n++] = ((OfficeSlot*) g_office_slots)[i];
+		if (g_office_role_templates[(unsigned char) ((OFFICE_SLOT*) g_office_slots)[i].mamt].f4 == group) {
+			out[n++] = ((OFFICE_SLOT*) g_office_slots)[i];
 		}
 	}
 	return n;
 }
 
-int __cdecl amt_ListHeldSlotsOfGroup(int group, int max, OfficeSlot* out)
+int __cdecl amt_ListHeldSlotsOfGroup(int group, int max, OFFICE_SLOT* out)
 {
 	int n;
 	int i;
@@ -729,15 +729,15 @@ int __cdecl amt_ListHeldSlotsOfGroup(int group, int max, OfficeSlot* out)
 	}
 	n = 0;
 	for (i = start - 1; i >= 0 && n < max; i--) {
-		if (g_office_role_templates[(unsigned char) ((OfficeSlot*) g_office_slots)[i].role].f4 == group &&
-		    gm_LookupEntityRecordById(((OfficeSlot*) g_office_slots)[i].entityId) != 0) {
-			out[n++] = ((OfficeSlot*) g_office_slots)[i];
+		if (g_office_role_templates[(unsigned char) ((OFFICE_SLOT*) g_office_slots)[i].mamt].f4 == group &&
+		    gm_LookupEntityRecordById(((OFFICE_SLOT*) g_office_slots)[i].mplayerid) != 0) {
+			out[n++] = ((OFFICE_SLOT*) g_office_slots)[i];
 		}
 	}
 	return n;
 }
 
-int __cdecl amt_ListCouncilSlots(int all, int max, OfficeSlot* out)
+int __cdecl amt_ListCouncilSlots(int all, int max, OFFICE_SLOT* out)
 {
 	int n;
 	int i;
@@ -747,9 +747,9 @@ int __cdecl amt_ListCouncilSlots(int all, int max, OfficeSlot* out)
 		if (n >= max) {
 			break;
 		}
-		if (g_office_role_templates[(unsigned char) ((OfficeSlot*) g_office_slots)[i].role].f4 == 7 &&
-		    (all != 0 || ((OfficeSlot*) g_office_slots)[i].entityId != -1)) {
-			*out = ((OfficeSlot*) g_office_slots)[i];
+		if (g_office_role_templates[(unsigned char) ((OFFICE_SLOT*) g_office_slots)[i].mamt].f4 == 7 &&
+		    (all != 0 || ((OFFICE_SLOT*) g_office_slots)[i].mplayerid != -1)) {
+			*out = ((OFFICE_SLOT*) g_office_slots)[i];
 			n++;
 			out++;
 		}
@@ -778,10 +778,10 @@ int __cdecl amt_RankOpenOffices(unsigned char* who, int n, OFFICE_PICK* picks)
 		picks[j].rank = 0;
 	}
 	for (i = 0; i < 30; i++) {
-		if (((OfficeSlot*) g_office_slots)[i].state != 3 || ((OfficeSlot*) g_office_slots)[i].count >= 4) {
+		if (((OFFICE_SLOT*) g_office_slots)[i].status != 3 || ((OFFICE_SLOT*) g_office_slots)[i].pcount >= 4) {
 			continue;
 		}
-		t = (unsigned char) ((OfficeSlot*) g_office_slots)[i].role;
+		t = (unsigned char) ((OFFICE_SLOT*) g_office_slots)[i].mamt;
 		if (amt_GetOfficeAffinity(who, t, &score) == 0) {
 			continue;
 		}
@@ -847,14 +847,14 @@ int __cdecl amt_RankAllOffices(unsigned char* who, int n, OFFICE_PICK* picks, in
 		picks[j].rank = 0;
 	}
 	for (i = 0; i < 30; i++) {
-		if (((OfficeSlot*) g_office_slots)[i].state != 3) {
+		if (((OFFICE_SLOT*) g_office_slots)[i].status != 3) {
 			continue;
 		}
-		t = (unsigned char) ((OfficeSlot*) g_office_slots)[i].role;
+		t = (unsigned char) ((OFFICE_SLOT*) g_office_slots)[i].mamt;
 		if (amt_GetOfficeAffinity(who, t, &score) == 0) {
 			continue;
 		}
-		if (((OfficeSlot*) g_office_slots)[i].count >= 4) {
+		if (((OFFICE_SLOT*) g_office_slots)[i].pcount >= 4) {
 			full = 1;
 			continue;
 		}
@@ -905,8 +905,8 @@ void* __cdecl amt_GetRoleHolder(int role)
 	int i;
 
 	for (i = 0; i < 0x2a; i++) {
-		if (((OfficeSlot*) g_office_slots)[i].role == role) {
-			return gm_LookupEntityRecordById(((OfficeSlot*) g_office_slots)[i].entityId);
+		if ((char) ((OFFICE_SLOT*) g_office_slots)[i].mamt == role) {
+			return gm_LookupEntityRecordById(((OFFICE_SLOT*) g_office_slots)[i].mplayerid);
 		}
 	}
 	return 0;
@@ -914,16 +914,16 @@ void* __cdecl amt_GetRoleHolder(int role)
 
 void* __cdecl amt_GetSuperiorHolder(int role)
 {
-	OfficeSlot slot;
+	OFFICE_SLOT slot;
 
 	if (role == 0x24) {
 		if (amt_GetSlotByRole(0x27, &slot) != 0) {
-			return gm_LookupEntityRecordById(slot.entityId);
+			return gm_LookupEntityRecordById(slot.mplayerid);
 		}
 	}
 	else if (role == 0x25 || role == 0x23) {
 		if (amt_GetSlotByRole(0x26, &slot) != 0) {
-			return gm_LookupEntityRecordById(slot.entityId);
+			return gm_LookupEntityRecordById(slot.mplayerid);
 		}
 	}
 	return 0;
@@ -965,7 +965,7 @@ int __cdecl amt_IsNextRoleStep(unsigned char* entity, int role)
 int __cdecl amt_HasIdleSuperior(int role)
 {
 	OFFICE_ROLE_TEMPLATE tmpl;
-	OfficeSlot list[6];
+	OFFICE_SLOT list[6];
 	int n;
 	int i;
 	unsigned char* e;
@@ -978,7 +978,7 @@ int __cdecl amt_HasIdleSuperior(int role)
 		return 0;
 	}
 	for (i = 0; i < n; i++) {
-		e = gm_LookupEntityRecordById(list[i].entityId);
+		e = gm_LookupEntityRecordById(list[i].mplayerid);
 		if (e != 0 && amt_IsNextRoleStep(e, role) != 0 && e[0x1b1] == 0) {
 			return 1;
 		}
@@ -989,7 +989,7 @@ int __cdecl amt_HasIdleSuperior(int role)
 int __cdecl amt_ListSuperiors(int role, int max, unsigned char** out)
 {
 	OFFICE_ROLE_TEMPLATE tmpl;
-	OfficeSlot list[6];
+	OFFICE_SLOT list[6];
 	int n;
 	int i;
 	int cnt;
@@ -1005,7 +1005,7 @@ int __cdecl amt_ListSuperiors(int role, int max, unsigned char** out)
 	n = n < max ? n : max;
 	cnt = 0;
 	for (i = 0; i < n; i++) {
-		e = gm_LookupEntityRecordById(list[i].entityId);
+		e = gm_LookupEntityRecordById(list[i].mplayerid);
 		if (e != 0 && amt_IsNextRoleStep(e, role) != 0) {
 			out[cnt++] = e;
 		}
@@ -1016,7 +1016,7 @@ int __cdecl amt_ListSuperiors(int role, int max, unsigned char** out)
 int __cdecl amt_ListPromotionRoles(unsigned char* entity, int max, int* out)
 {
 	OFFICE_ROLE_TEMPLATE tmpl;
-	OfficeSlot list[6];
+	OFFICE_SLOT list[6];
 	int want;
 	int n;
 	int i;
@@ -1037,8 +1037,8 @@ int __cdecl amt_ListPromotionRoles(unsigned char* entity, int max, int* out)
 	want = (tmpl.f8 & 0xff) % 3 == 1 ? 0 : (tmpl.f8 & 0xff) - 1;
 	cnt = 0;
 	for (i = 0; i < n && cnt < max; i++) {
-		if (list[i].state == 3) {
-			role = (unsigned char) list[i].role;
+		if (list[i].status == 3) {
+			role = (unsigned char) list[i].mamt;
 			amt_GetRoleTemplate(role, &tmpl);
 			level = tmpl.f8 & 0xff;
 			if (level % 3 == 0) {
@@ -1055,18 +1055,18 @@ int __cdecl amt_ListPromotionRoles(unsigned char* entity, int max, int* out)
 	return cnt;
 }
 
-void __cdecl amt_ExpandSlots(int count, OfficeSlot* p)
+void __cdecl amt_ExpandSlots(int count, OFFICE_SLOT* p)
 {
 	int i;
 
 	for (i = 0; i < count; i++) {
-		p[i] = ((OfficeSlot*) g_office_slots)[(unsigned char) p[i].type];
+		p[i] = ((OFFICE_SLOT*) g_office_slots)[(unsigned char) p[i].id];
 	}
 }
 
 int __cdecl amt_FindVacantRoleBelow(int role)
 {
-	OfficeSlot slot;
+	OFFICE_SLOT slot;
 
 	if (role == 0) {
 		return 0;
@@ -1075,7 +1075,7 @@ int __cdecl amt_FindVacantRoleBelow(int role)
 		role = 0x1b;
 	}
 	while (role > 0) {
-		if (amt_GetSlotByRole(role, &slot) != 0 && slot.state == 3 && slot.count <= 1) {
+		if (amt_GetSlotByRole(role, &slot) != 0 && slot.status == 3 && slot.pcount <= 1) {
 			break;
 		}
 		role--;
@@ -1174,7 +1174,7 @@ int __cdecl amt_ListRolesOfLevel(int level, int max, int* out)
 	}
 	n = 0;
 	for (i = 0; i < 0x1c && n < max; i++) {
-		role = (unsigned char) ((OfficeSlot*) g_office_slots)[i].role;
+		role = (unsigned char) ((OFFICE_SLOT*) g_office_slots)[i].mamt;
 		amt_GetRoleTemplate(role, &tmpl);
 		if ((unsigned char) tmpl.f8 == level) {
 			out[n++] = role;
@@ -1195,7 +1195,7 @@ int __cdecl amt_GetGroupVacancyFlags(int group)
 {
 	extern char g_entity_state_base[2];
 	extern char g_dynamic_entities[];
-	OfficeSlot list[6];
+	OFFICE_SLOT list[6];
 	unsigned char* holder;
 	unsigned char* setter;
 	unsigned char* e;
@@ -1207,22 +1207,22 @@ int __cdecl amt_GetGroupVacancyFlags(int group)
 	flags = 0;
 	n = amt_ListSlotsOfGroup(group, 6, list);
 	for (i = 0; i < n; i++) {
-		if (list[i].state == 2) {
-			holder = gm_LookupEntityRecordById(list[i].assignmentId);
-			setter = gm_LookupEntityRecordById(list[i].entityId);
+		if (list[i].status == 2) {
+			holder = gm_LookupEntityRecordById(list[i].msetter);
+			setter = gm_LookupEntityRecordById(list[i].mplayerid);
 			if (holder == 0 || holder[8] == 0 || holder[0x1b1] != 0 || setter == 0 || setter[8] == 0) {
 				continue;
 			}
 			for (j = 0; j < n; j++) {
-				if (list[j].entityId == list[i].assignmentId) {
+				if (list[j].mplayerid == list[i].msetter) {
 					flags |= 1;
 					break;
 				}
 			}
 		}
-		else if (list[i].state == 3 && list[i].count > 0) {
+		else if (list[i].status == 3 && list[i].pcount > 0) {
 			for (e = (unsigned char*) g_entity_state_base; e < (unsigned char*) g_dynamic_entities; e += 0x21c) {
-				if (e[0x166] == (unsigned char) list[i].role) {
+				if (e[0x166] == (unsigned char) list[i].mamt) {
 					flags |= 1;
 					if ((e[0] == 6 || e[0] == 7) && e[0x1af] == 0) {
 						flags |= 2;
@@ -1234,7 +1234,7 @@ int __cdecl amt_GetGroupVacancyFlags(int group)
 	}
 	if (flags & 1) {
 		for (i = 0; i < n; i++) {
-			e = gm_LookupEntityRecordById(list[i].entityId);
+			e = gm_LookupEntityRecordById(list[i].mplayerid);
 			if (e != 0 && (e[2] == 6 || e[2] == 7) && e[0x1b1] == 0) {
 				flags |= 2;
 				break;
@@ -1246,7 +1246,7 @@ int __cdecl amt_GetGroupVacancyFlags(int group)
 
 int __cdecl amt_IsPendingAssignment(int group, char* slot)
 {
-	OfficeSlot list[6];
+	OFFICE_SLOT list[6];
 	int n;
 	int i;
 	unsigned char* a;
@@ -1262,7 +1262,7 @@ int __cdecl amt_IsPendingAssignment(int group, char* slot)
 		return 0;
 	}
 	for (i = 0; i < n; i++) {
-		if (list[i].entityId == *(int*) (slot + 0x14)) {
+		if (list[i].mplayerid == *(int*) (slot + 0x14)) {
 			return 1;
 		}
 	}
@@ -1276,9 +1276,9 @@ int __cdecl amt_HasCouncilHolder(void)
 
 	left = 7;
 	for (i = 36; i != 0 && left != 0; i--) {
-		if (g_office_role_templates[(unsigned char) ((OfficeSlot*) g_office_slots)[i].role].f4 == 7) {
-			if (((OfficeSlot*) g_office_slots)[i].entityId != -1) {
-				if (gm_LookupEntityRecordById(((OfficeSlot*) g_office_slots)[i].entityId) != 0) {
+		if (g_office_role_templates[(unsigned char) ((OFFICE_SLOT*) g_office_slots)[i].mamt].f4 == 7) {
+			if (((OFFICE_SLOT*) g_office_slots)[i].mplayerid != -1) {
+				if (gm_LookupEntityRecordById(((OFFICE_SLOT*) g_office_slots)[i].mplayerid) != 0) {
 					return 1;
 				}
 			}
@@ -1296,32 +1296,32 @@ int __cdecl amt_HasCouncilHolder(void)
 
 void __cdecl amt_UpdateEntityLinks(char* entity, int arg2)
 {
-	OfficeSlot* slot;
+	OFFICE_SLOT* slot;
 	unsigned short default_val;
 	int i;
 	int result;
 
 	default_val = (unsigned short) g_current_hour;
 	result = 0;
-	slot = (OfficeSlot*) g_office_slots;
+	slot = (OFFICE_SLOT*) g_office_slots;
 	for (i = 0; i < 0x2a; i++) {
-		if (slot[i].entityId == *(int*) (entity + 4) && arg2 != 0) {
-			slot[i].entityId = -1;
-			slot[i].assignmentId = -1;
-			slot[i].state = (default_val > 0xb) ? 4 : 3;
-			slot[i].count = 0;
+		if (slot[i].mplayerid == *(int*) (entity + 4) && arg2 != 0) {
+			slot[i].mplayerid = -1;
+			slot[i].msetter = -1;
+			slot[i].status = (default_val > 0xb) ? 4 : 3;
+			slot[i].pcount = 0;
 			result |= 1;
 		}
-		else if (slot[i].assignmentId == *(int*) (entity + 4)) {
-			slot[i].assignmentId = -1;
-			slot[i].state = 1;
+		else if (slot[i].msetter == *(int*) (entity + 4)) {
+			slot[i].msetter = -1;
+			slot[i].status = 1;
 		}
 	}
 	if (*(char*) (entity + 0x168) != 0) {
 		for (i = 0; i < 0x2a; i++) {
-			if (slot[i].role == *(char*) (entity + 0x168)) {
-				if (slot[i].count > 0) {
-					slot[i].count--;
+			if ((char) slot[i].mamt == *(char*) (entity + 0x168)) {
+				if (slot[i].pcount > 0) {
+					slot[i].pcount--;
 					result |= 1;
 				}
 			}
@@ -1355,8 +1355,8 @@ int __cdecl amt_CanUpgradeBuildingTier1(char* building)
 
 int __cdecl amt_CanUpgradeBuildingTier2(unsigned char* building)
 {
-	extern char* g_entity_type_table;
-	unsigned char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
+
+
 	unsigned char* hit;
 	int kind;
 
@@ -1394,8 +1394,8 @@ int __cdecl amt_CanUpgradeBuildingTier2(unsigned char* building)
 
 int __cdecl amt_CanUpgradeBuildingTier3(unsigned char* building)
 {
-	extern char* g_entity_type_table;
-	unsigned char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
+
+
 	unsigned char* hit;
 	int kind;
 
@@ -1578,7 +1578,7 @@ int __cdecl amt_fio_LoadAemter(void* streamCtx, int version)
 /* Client-only town-hall helpers (discarded; see the blocks above). */
 void* __cdecl amt_GetTownHallHolder(unsigned char* building)
 {
-	extern char* g_entity_type_table;
+
 	int* office;
 
 	if (g_entity_type_table[building[0] * 0x24d] == 0x1e) {

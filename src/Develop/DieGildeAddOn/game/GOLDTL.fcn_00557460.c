@@ -5,7 +5,6 @@
  * arg is the dialog record; state lives at arg+0x70, the selected entity at
  * arg+0xac, the result handle at arg+0x84. */
 
-extern short g_774970;
 extern int g_6a5f7c;
 
 int __cdecl gm_LookupEntityRecordById(int id);

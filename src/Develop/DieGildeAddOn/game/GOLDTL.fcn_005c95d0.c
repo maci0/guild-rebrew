@@ -10,9 +10,9 @@ typedef struct
 // SIZE 0x24d
 
 extern unsigned char* lpGebaeudePROT;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char* g_77255c;
 extern char s_6a4320[];
 extern char s_6a4310[];

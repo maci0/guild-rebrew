@@ -13,7 +13,7 @@ extern char* __cdecl he_fn_Handlung(void);
 extern int __cdecl gm_RandomMod(int);
 extern int __cdecl fcn_004c4450(int);
 extern char* __cdecl fcn_004c4480(int);
-extern int __cdecl fcn_004e6a30(int);
+extern int __cdecl cut_FindCutsceneById(int);
 extern char* __cdecl fcn_00445600(int, int, int, char*);
 extern void __cdecl fcn_00455350(char*, char*, float*);
 extern void __cdecl he_CharacterBehavior(char*, int);
@@ -176,7 +176,7 @@ void __cdecl fcn_00554170(char* obj)
 		return;
 	case 4:
 		fcn_00500bb0(time, 0, 5, 0);
-		if (fcn_004e6a30(*(int*) (obj + 0xd4)) != 0) {
+		if (cut_FindCutsceneById(*(int*) (obj + 0xd4)) != 0) {
 			*(int*) (obj + 0x84) = fcn_004c5620(4, obj);
 			return;
 		}

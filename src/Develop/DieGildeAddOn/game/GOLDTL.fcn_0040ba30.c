@@ -49,7 +49,7 @@ void __cdecl fcn_0040ba30(Fade* f)
 	e = f->ent;
 	if (f->started == 0) {
 		if (*(int*) (*(char**) (e + 0x34) + 0x1cc) == 0) {
-			fcn_004050c0((char*) (f));
+			ch_RemoveQueueEntry((char*) (f));
 			return;
 		}
 		if (g_67530c != *(int*) (e + 0x2c) || g_675310 != *(int*) (e + 0x30)) {
@@ -58,7 +58,7 @@ void __cdecl fcn_0040ba30(Fade* f)
 			} else {
 				ch_SetVisible(e, f->fade_in);
 			}
-			fcn_004050c0((char*) (f));
+			ch_RemoveQueueEntry((char*) (f));
 			return;
 		}
 		ch_SetVisible(e, 1);
@@ -119,6 +119,6 @@ void __cdecl fcn_0040ba30(Fade* f)
 		} else if (alpha == 255.0f) {
 			ch_SetVisible(e, 1);
 		}
-		fcn_004050c0((char*) (f));
+		ch_RemoveQueueEntry((char*) (f));
 	}
 }

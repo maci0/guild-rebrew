@@ -7,14 +7,14 @@ extern int g_100f1dc;
 extern int g_100f884;
 extern int g_67d370;
 extern int g_7746cc;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern int g_14ce8e0;
 extern int g_7798a0;
 extern int g_7f4c00;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned short g_7f3ee4;
 
 int __cdecl fcn_00525fb0(int);

@@ -29,7 +29,7 @@ void __cdecl fcn_0059a2a0(void)
 		v[1] = 0;
 		x = *(float*) (g_6b8014 + 0x8c);
 		v[2] = x;
-		if (fcn_00451840(v, (float*) (g_6b8014 + 0x84), 0.1f) == 0) {
+		if (CompareVector3WithinTolerance(v, (float*) (g_6b8014 + 0x84), 0.1f) == 0) {
 			fcn_00412cf0(g_6b8014, (float*) (g_6b8014 + 0x4c), v, 0x1e, 0x28);
 		}
 	}

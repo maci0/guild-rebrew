@@ -9,7 +9,7 @@ typedef struct {
 extern blk24 g_68bef4;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-void __cdecl fcn_00406120(int);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl fcn_00445600(int, int, int, int*);
 void __cdecl fcn_004458a0(int, char*, char*);
 void __cdecl fcn_00442c00(int, int);
@@ -25,7 +25,7 @@ void __cdecl fcn_004d8700(int* a)
 	if (a[1] == 0 || a[0] == -1)
 		return;
 	e = gm_LookupEntityRecordIn32SlotTable(a[0]);
-	fcn_00406120(*(int*) (e + 0x184));
+	ch_CancelActionQueue((char*) *(int*) (e + 0x184));
 	fcn_00445600(0, 0x40, 0, a + 4);
 	h = *(int*) (e + 0x1ac);
 	if (h != 0) {

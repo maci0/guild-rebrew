@@ -1,7 +1,7 @@
 
 
 
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14ad0e0;
 extern int g_14ad210;
 extern int g_14ad1c8;

@@ -15,7 +15,7 @@ int __cdecl fcn_004c5980(void* p);
 void __cdecl fcn_004c5a60(int a, int b, int c);
 int __cdecl fcn_004c4450(int h);
 int* __cdecl fcn_004c4480(int h);
-int __cdecl fcn_004e6a30(int h);
+int __cdecl cut_FindCutsceneById(int h);
 char* __cdecl fcn_00504b30(char* p);
 void __cdecl fcn_00546190(char* e);
 int __cdecl fcn_004d5450(char* e);
@@ -255,7 +255,7 @@ tail:
 		*(int*) (ent + 0x70) = 4;
 		return;
 	case 4:
-		if (fcn_004e6a30(*(int*) (ent + 0xb8)) != 0) {
+		if (cut_FindCutsceneById(*(int*) (ent + 0xb8)) != 0) {
 			*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
 			*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
 			*(int*) (ent + 0x5a) = *(int*) 0x7f4c08;

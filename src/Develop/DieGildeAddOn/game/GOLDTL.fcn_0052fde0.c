@@ -31,7 +31,7 @@ extern int g_7746e0;
 extern int g_7746e8;
 extern int g_774798;
 extern int g_6b8010;
-extern int g_774970;
+#include "game_player.h"
 extern char* g_item_def_table;
 extern char s_6a2308[];
 extern char s_6a2ff8[];

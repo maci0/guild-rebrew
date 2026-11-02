@@ -20,7 +20,7 @@ typedef struct {
 // SIZE 0x2f4
 
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 extern unsigned char g_773d75;
@@ -29,7 +29,7 @@ extern unsigned char g_6a375c;
 extern char g_6aae78[];
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 
 int __cdecl gm_AccumulateTyped2(Ent5a92*);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);

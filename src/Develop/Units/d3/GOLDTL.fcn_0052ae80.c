@@ -18,7 +18,7 @@ extern int g_6b5cbc;
 extern int g_6b5cc0;
 extern int g_6a256c;
 
-int __cdecl fcn_00451840(float*, float*, float);
+int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_00433780(char*);
 void __cdecl fcn_00412cf0(char*, int*, int*, int, int);
 
@@ -77,7 +77,7 @@ void __cdecl fcn_0052ae80(void)
 		idx = g_774688;
 		g_77468c = 0;
 		if (idx == -1) {
-			if (fcn_00451840((float*) (g_6b8014 + 0xe4), ref, 0.2f)) {
+			if (CompareVector3WithinTolerance((float*) (g_6b8014 + 0xe4), ref, 0.2f)) {
 				return;
 			}
 			cur[0] = *(int*) (g_6b8014 + 0xe4);
@@ -94,7 +94,7 @@ void __cdecl fcn_0052ae80(void)
 			next[1] = *(int*) (g_6b8014 + 0x94);
 			next[2] = *(int*) (g_6b8014 + 0x98);
 		} else if (idx == 1) {
-			if (fcn_00451840((float*) (g_6b8014 + 0xfc), ref, 0.2f)) {
+			if (CompareVector3WithinTolerance((float*) (g_6b8014 + 0xfc), ref, 0.2f)) {
 				return;
 			}
 			cur[0] = *(int*) (g_6b8014 + 0xfc);
@@ -121,7 +121,7 @@ void __cdecl fcn_0052ae80(void)
 		}
 		g_774688 = 0;
 		if (idx == -1) {
-			if (fcn_00451840((float*) (g_6b8014 + 0xb4), ref, 0.2f)) {
+			if (CompareVector3WithinTolerance((float*) (g_6b8014 + 0xb4), ref, 0.2f)) {
 				return;
 			}
 			cur[0] = *(int*) (g_6b8014 + 0xb4);
@@ -138,7 +138,7 @@ void __cdecl fcn_0052ae80(void)
 			next[1] = *(int*) (g_6b8014 + 0x94);
 			next[2] = *(int*) (g_6b8014 + 0x98);
 		} else if (idx == 1) {
-			if (fcn_00451840((float*) (g_6b8014 + 0xcc), ref, 0.2f)) {
+			if (CompareVector3WithinTolerance((float*) (g_6b8014 + 0xcc), ref, 0.2f)) {
 				return;
 			}
 			cur[0] = *(int*) (g_6b8014 + 0xcc);

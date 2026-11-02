@@ -19,11 +19,9 @@ typedef struct str7 {
 } Str7;
 
 extern char* __cdecl fcn_0064d1a0(char* s, int c);
-extern char* __cdecl fcn_0064d470(char* s, char* sub);
 extern char* __cdecl fcn_0064e790(char* s, int c);
 extern int __cdecl fcn_0064eeec(char* s);
 extern int __cdecl fcn_0065f220(char* a, char* b);
-extern char* __cdecl fcn_0066080a(char* s);
 extern int __cdecl gm_RandomMod(int n);
 extern int __cdecl fcn_004fdec0(char* name);
 extern void __cdecl fcn_004b20d0(unsigned char v);
@@ -79,7 +77,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 	strcpy((char*) 0x7e25e0, (char*) 0x7e1be0);
 	p = fcn_0064d1a0((char*) 0x7e25e0, 0x5c);
 	*p = 0;
-	fcn_0066080a(command);
+	_strupr(command);
 
 	*(int*) 0x7747e4 = GetPrivateProfileIntA("Gfx", "TextureDivider", 0, (char*) 0x7e22c0);
 	*(int*) 0x774930 = GetPrivateProfileIntA("Sound", "msx", 0, (char*) 0x7e22c0);
@@ -88,11 +86,11 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 	*(int*) 0x774938 = GetPrivateProfileIntA("Sound", "weather", 1, (char*) 0x7e22c0);
 
 	GetPrivateProfileStringA("General", "Bildmodus", "FULLSCREEN", text, 0x100, (char*) 0x7e22c0);
-	fcn_0066080a(text);
+	_strupr(text);
 	windowed = (memcmp(text, (void*) 0x6a46cc, 0xd) == 0);
-	if (fcn_0064d470(command, (char*) 0x6a46cc) != 0)
+	if (strstr(command, (char*) 0x6a46cc) != 0)
 		windowed = 1;
-	if (fcn_0064d470(command, (char*) 0x6a46f0) != 0)
+	if (strstr(command, (char*) 0x6a46f0) != 0)
 		windowed = 0;
 
 	GetPrivateProfileStringA("General", "GfxPath", "\\project\\gfx\\", (char*) 0x6a3448, 0x104, (char*) 0x7e22c0);
@@ -106,14 +104,14 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 	q = (char*) 0x6acf68 + i * 8;
 	*(int*) 0x6acf80 = *(int*) q;
 	*(int*) 0x6acf84 = *(int*) (q + 4);
-	if (fcn_0064d470(command, (char*) 0x6a4648) != 0)
+	if (strstr(command, (char*) 0x6a4648) != 0)
 		*(int*) 0x7747fc = 1;
 
 	GetPrivateProfileStringA("General", "Stadt", "Augsburg", (char*) 0x7e1d00, 0x40, (char*) 0x7e22c0);
 	GetPrivateProfileStringA("Network", "Host", "128.0.0.1", (char*) 0x7e2000, 0x80, (char*) 0x7e22c0);
 	*(int*) 0x7e2510 = GetPrivateProfileIntA("Network", "Port", 0x1d6b, (char*) 0x7e22c0);
 
-	p = fcn_0064d470(command, (char*) 0x6a4618);
+	p = strstr(command, (char*) 0x6a4618);
 	if (p != 0) {
 		p += 7;
 		e = fcn_0064e790(p, 0x22);
@@ -125,7 +123,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 		*q = 0;
 	}
 
-	p = fcn_0064d470(command, (char*) 0x6a4610);
+	p = strstr(command, (char*) 0x6a4610);
 	if (p != 0) {
 		p += 7;
 		e = fcn_0064e790(p, 0x22);
@@ -137,7 +135,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 		*q = 0;
 	}
 
-	p = fcn_0064d470(command, (char*) 0x6a4608);
+	p = strstr(command, (char*) 0x6a4608);
 	if (p != 0) {
 		p += 4;
 		e = fcn_0064e790(p, 0x22);
@@ -152,7 +150,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 		n = server;
 	}
 
-	p = fcn_0064d470(command, (char*) 0x6a4600);
+	p = strstr(command, (char*) 0x6a4600);
 	if (p != 0) {
 		p += 6;
 		e = fcn_0064e790(p, 0x22);

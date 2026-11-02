@@ -2,7 +2,7 @@
 
 extern char g_6811b0[];
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern float g_662cf8;
 
 int __cdecl d2_SetForm(int win, int layer);

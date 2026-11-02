@@ -21,7 +21,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005bdc30(int, Query*, char*, void*, int);
 void __cdecl fcn_0059da50(char*);
 void __cdecl fcn_0052a2d0(void);
-void __cdecl fcn_0052ae70(void);
+void __cdecl sv_ClearObjectSelection(void);
 
 void __cdecl fcn_0059dc50(char* e)
 {
@@ -44,5 +44,5 @@ void __cdecl fcn_0059dc50(char* e)
 	io_FormatTextBuffer(buf, 0x1a83);
 	fcn_005bdc30(1, &q, buf, (void*) fcn_0059da50, 0);
 	fcn_0052a2d0();
-	fcn_0052ae70();
+	sv_ClearObjectSelection();
 }

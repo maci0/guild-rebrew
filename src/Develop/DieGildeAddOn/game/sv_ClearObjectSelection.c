@@ -1,0 +1,25 @@
+#ifdef REBREW_GOLD
+#define ENTITY_RESET_STATE_1 0x7662c0
+#define ENTITY_RESET_STATE_2 0x6f2304
+#define ENTITY_RESET_FIRST 0x770d08
+#define ENTITY_RESET_END 0x7d6108
+#define ENTITY_RESET_STATE_3 0x6f2334
+#else
+#define ENTITY_RESET_STATE_1 0x7ea360
+#define ENTITY_RESET_STATE_2 0x7746c0
+#define ENTITY_RESET_FIRST 0x7f4e28
+#define ENTITY_RESET_END 0x85a228
+#define ENTITY_RESET_STATE_3 0x7746f0
+#endif
+
+/* ADDRESS: GOLDTL 0x005305a0 */
+void __cdecl sv_ClearObjectSelection(void)
+{
+	int p;
+	*(int*) ENTITY_RESET_STATE_1 = 0;
+	*(int*) ENTITY_RESET_STATE_2 = 0;
+	for (p = ENTITY_RESET_FIRST; p < ENTITY_RESET_END; p += 0x21c) {
+		*(char*) p = 0;
+	}
+	*(int*) ENTITY_RESET_STATE_3 = 0;
+}

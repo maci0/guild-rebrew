@@ -39,7 +39,7 @@ void __cdecl fcn_0058f880(int a1, char** list)
 				q = *(char**) (p + 0x61);
 				if (q != 0) {
 					fcn_00458a10(q, q + 0x4c, pb);
-					if (fcn_00451840(pb, pa, 100.0f)) {
+					if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 						g_6f5308[i] = 0;
 						break;
 					}
@@ -55,7 +55,7 @@ void __cdecl fcn_0058f880(int a1, char** list)
 					q = *(char**) (p + 0x61);
 					if (q != 0) {
 						fcn_00458a10(q, q + 0x4c, pb);
-						if (fcn_00451840(pb, pa, 100.0f)) {
+						if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 							g_6f5308[i] = 0;
 							goto next;
 						}

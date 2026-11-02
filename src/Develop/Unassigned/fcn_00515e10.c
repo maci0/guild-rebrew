@@ -1,5 +1,5 @@
+#include <string.h>
 int __cdecl fcn_0064f170(void*, char*, int);
-int __cdecl fcn_0064d470(char*, char*);
 void* __cdecl fcn_00422460(char*, int);
 int __cdecl fcn_00418c80(void*, void*, int, float);
 int __cdecl fcn_004192b0(int, int, int, int);
@@ -24,8 +24,8 @@ int __cdecl fcn_00515e10(char* p)
 		s++;
 	}
 
-	bn = fcn_0064d470(buf, (char*) 0x6a1f78);
-	br = fcn_0064d470(buf + 8, (char*) 0x6a1f74);
+	bn = (int) strstr(buf, (char*) 0x6a1f78);
+	br = (int) strstr(buf + 8, (char*) 0x6a1f74);
 	if (br != 0) {
 		br = 0x7d0;
 		bn = 0;

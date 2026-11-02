@@ -58,6 +58,6 @@ void __cdecl fcn_00406410(char* ev)
 		*(short*) (*(char**) (ev + 0x14) + 0x8c) |= 0x10;
 		*(short*) (*(char**) (ev + 0x14) + 0x8c) &= ~2;
 		fcn_004432d0(saved, 1);
-		fcn_004050c0(ev);
+		ch_RemoveQueueEntry(ev);
 	}
 }

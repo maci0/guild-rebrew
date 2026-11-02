@@ -24,7 +24,7 @@ typedef struct {
 
 extern __int64 g_666018;
 extern char g_7f4ca0[];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);

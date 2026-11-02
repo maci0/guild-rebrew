@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #endif
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_004053a0(void*, int);
+#include "Develop/DieGildeAddOn/game/ch_ground.h"
 #ifdef REBREW_GOLD
 void __cdecl fcn_00453270(char*);
 #endif
@@ -120,12 +120,12 @@ void __cdecl ch_Updatelowpoly(char* obj)
 			}
 			if (*(int*) (*(char**) (obj + 0x22c) + 0x218) != 1
 			    && *(char**) (*(char**) (obj + 0x22c) + 0x1cc) != 0
-			    && !fcn_00451840((float*) (*(char**) (obj + 0x22c) + 0x4c),
+			    && !CompareVector3WithinTolerance((float*) (*(char**) (obj + 0x22c) + 0x4c),
 			                       (float*) (*(char**) (obj + 0x34) + 0x4c), 2.0f)) {
 				fcn_00438b40(*(char**) (obj + 0x22c), (int*) (*(char**) (obj + 0x34) + 0x4c));
 			}
 			if (*(char**) (*(char**) (obj + 0x34) + 0x1cc) != 0
-			    && !fcn_00451840((float*) (*(char**) (obj + 0x22c) + 0x84),
+			    && !CompareVector3WithinTolerance((float*) (*(char**) (obj + 0x22c) + 0x84),
 			                       (float*) (*(char**) (obj + 0x34) + 0x84), 0.05f)) {
 				fcn_00438cb0(*(char**) (obj + 0x22c), (float*) (*(char**) (obj + 0x34) + 0x84));
 			}

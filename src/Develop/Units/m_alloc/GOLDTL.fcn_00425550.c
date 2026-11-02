@@ -1,6 +1,5 @@
 #include <string.h>
 
-char* __cdecl fcn_0064d470(char* string, char* find);
 char* __cdecl fcn_0064e2f9(char* path, char* mode);
 int __cdecl fcn_0064ebe4(void* buffer, int size, int count, char* file);
 int __cdecl fcn_0064e1fd(char* file);
@@ -28,7 +27,7 @@ int __cdecl fcn_00425550(char* name, char* ext)
 	int index;
 
 	result = 0;
-	file = fcn_0064d470(name, (char*) 0x6790c4);
+	file = strstr(name, (char*) 0x6790c4);
 	if (file == 0) {
 		size = fcn_00424700(name);
 		index = fcn_0064d3f8() % size;
@@ -64,7 +63,7 @@ int __cdecl fcn_00425550(char* name, char* ext)
 		*(int*) 0x6b7d84 = 0;
 	}
 	strcpy(path, name);
-	found = fcn_0064d470(path, (char*) 0x679010);
+	found = strstr(path, (char*) 0x679010);
 	if (found != 0) {
 		*found = 0;
 		strcat(path, ext);

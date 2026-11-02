@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #endif
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_004053a0(void*, int);
+#include "Develop/DieGildeAddOn/game/ch_ground.h"
 #ifdef REBREW_GOLD
 void __cdecl fcn_00453270(char*);
 #endif
@@ -134,7 +134,7 @@ int __cdecl ch_CreateMesh(char* model, char* resource, float* position)
     else
         (*(D3_OBJECT**) (model + 0x34))->darstellungsflag = 0;
     *(int*) ((char*) *(D3_OBJECT**) (model + 0x34) + 0x48) = 0x3000000;
-    fcn_004053a0(model, 0);
+    ch_PlaceOnGround(model, 0);
 #ifdef REBREW_GOLD
     fcn_00453270(*(char**) (model + 0x34));
 #endif

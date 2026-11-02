@@ -5,7 +5,7 @@
 int __cdecl fcn_00433780();
 int __cdecl fcn_00438b40();
 int __cdecl fcn_00438cb0();
-int __cdecl fcn_00451840();
+int __cdecl CompareVector3WithinTolerance();
 int __cdecl fcn_00470820();
 int __cdecl fcn_00471b60();
 int __cdecl fcn_00471e30();
@@ -467,7 +467,7 @@ label_5c221e:
     v59 = 0x14ce880;
     v58 = 0x532f13;
     v61 = (*(int *)0x6b8014);
-    if (fcn_00451840()) { 
+    if (CompareVector3WithinTolerance()) { 
       v60 = 0x532f25;
       fcn_00433780();
       v60 = 0x7e3a40;
@@ -494,12 +494,12 @@ label_5c221e:
     v59 = (*(int *)0x6b8014) + 0x84;
     v60 = 0x7e3a50;
     v58 = 0x533015;
-    if (fcn_00451840()) {
+    if (CompareVector3WithinTolerance()) {
       v61 = 0x3dcccccd;
       v59 = (*(int *)0x6b8014) + 0x4c;
       v60 = 0x7e3a40;
       v58 = 0x533034;
-      if (fcn_00451840()) goto label_533077;
+      if (CompareVector3WithinTolerance()) goto label_533077;
     }
     if (!v3) {
       v61 = 0x533044;

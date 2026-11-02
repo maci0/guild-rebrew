@@ -25,7 +25,7 @@ extern int g_7e46ac;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
-extern int g_774654;
+#include "client_dialog_state.h"
 extern char g_6abad8[];
 extern char g_6ababc[];
 extern char g_6abaa8[];

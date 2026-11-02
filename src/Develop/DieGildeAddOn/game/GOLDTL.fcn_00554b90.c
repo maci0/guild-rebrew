@@ -23,7 +23,7 @@ typedef struct Pos_554b90 {
 #pragma pack(pop)
 
 extern House_554b90 g_7f4ca0[768];
-extern unsigned short g_774970;
+#include "Develop/DieGildeAddOn/game/game_player.h"
 extern Pos_554b90 g_7f4c00;
 
 void __cdecl fcn_00546190(char*);
