@@ -19485,3 +19485,35 @@ is `push ebx; mov ebx,[esp+0x740]; push ebp` with e in ebx, and no shape tried m
 variants with numbers: native-exact nesting 297 at 0x73c with 11 scalars, `fcn_0050c710(pb,1,1)` 294, the while
 compare with pa+1 294, strcpy at the 0x19e6 site 297, and case-4 &cnt2 305. Current source
 .scratch/569ff0/C_final_335.c with notes in NOTES.md.
+
+## 2026-11-03 — crew dialog reconstructed
+
+`0x5744C0` goes from 7.36 to 11.31 percent (456 matching bytes) with the object at 4032 against native 4001,
+26 relocations, equal prefix 39 bytes from 2 and lint clean. The live source is
+src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005744c0.c, since the Unassigned path has no live binding. The
+prologue and frame are exact at `sub esp,0x38c` with the saved-register hole at 0x10, and the locals are
+reconstructed from the listing: entity pointer at 0x10, best-distance float at 0x14, distance floats at 0x18
+and 0x1c, the saved global at 0x1c or 0x18, float[4] scratch at 0x20, a 14-byte name scratch at 0x30, an int at
+0x40, the 0x54-byte Bauplatz struct at 0x44 with position at +0x40 and buffer pointer at +0x50, int[33] at 0x98,
+a 128-byte sprintf buffer at 0x11c and a 512-byte format buffer at 0x19c. The dispatch is
+`switch (*(int*)(v5+0x70)+2)` with its ten-entry table at 0x575420 decoded and the arm layout order 2, 3, 4, 5,
+6, 7, 8, 9 then 0 and 1. All ten arms are transcribed in native order with exact callees, argument counts and
+field offsets: case 2's entity-record compare and state start; cases 3 and 5's message-state checks through
+0x4c4450 and 0x4c4480; case 4's 0x4c4f30 start; case 5's resolve into [v5+0xb8] and [v5+0x10]; case 6's 0x5742e0
+init with the rate `[edi+0x243]*0x3fc/count` and 0x500bb0; case 7's Bauplatz scan over 0x90e094 with stride 0xa9
+and limit 0xa900, its fsqrt, the 0x445600 filter and the 0x4379a0 selection list with 0x2c0 and 0x5982d0 writing
+v18[33] and the count at v18[32]; case 8's list traversal through 0x4550b0 and 0x442be0 with both name copies;
+case 9's signed idiv progress, the "he_%i" sprintf, the 0x1c2f, 0x1c27 and 0x1c30 formatting through 0x51af00 and
+0x545e80, the 0x21c class tables at 0x7f4ca2, 0x7f4ca4 and 0x7f4e10, and 0x5001e0; and cases 0 and 1's state
+advance. Typed prototypes were added so char parameters emit `mov al` rather than movzx, for example the
+0x4c5150 third argument. Remaining gaps in order: the compiler placed the saved global at 0x18 and the distance
+float at 0x1c while the reference has distance at 0x18 and the global at 0x1c, so every global access and the
+fst and fcomp pair is off by four and this is the first mismatch, with declaration order, type, volatile and array
+experiments all leaving the swap; the object is 31 bytes over because the reference tail-merges the two
+`fcn_004c5620(-1,v5)` failure tails at 0x5745ff and 0x57469a while this compiler emits separate copies worth
+about 23 bytes in case 2 and 22 in case 5, and a gotos-into-case variant produced fewer bytes but moved the first
+mismatch left without raising match; and smaller excess sits in case 9 at about 9, cases 0 and 1 at about 13, and
+the reference shares one epilogue at 0x575414 where our arms emit their own. Unresolved callees that still emit
+correctly are fcn_00508e40, fcn_00509570, fcn_005015e0, fcn_005985f0, fcn_00442be0, fcn_0051af00, fcn_00545e80,
+fcn_005001e0 and the CRT sprintf at 0x64d41a, with the 1.8 compiler literal unbound as a data row. Backups in
+.scratch/row5744c0/.
