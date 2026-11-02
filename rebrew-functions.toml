@@ -424555,16 +424555,16 @@ updated_by = "test"
 size = 4389
 note = "Goal70 native-only role mapping: Interactive family-tree panel controller. Original identifier and source-unit placement remain unresolved; retain the address placeholder. Loads Special\\Stammbaum, resolves the selected person and related family IDs, builds clickable ancestor/spouse/child panels with portraits/names, draws the relationship layout, and navigates to a selected person through5d1790/Gold5c5460. The local arrays track up to6 sibling candidates and5 child candidates. Complete executable extent 4389 bytes; inventory span 4389 bytes, with alignment kept separate. Related Gold native body 0x5c42a0 (4542 executable bytes) is supported by complete native/Kuna role comparison and paired resources; its source, full operands and selected provider remain unverified. Gold has153 more executable bytes, a0x430 stack frame versus TL0x438, and compact UI coordinate/layout accesses. Complete paired native/Kuna behavior supports the counterpart, not a shared compiled-body or callee-provider proof. Stock LIBCMT miss is inconclusive for other libraries; partial FLIRT failure-helper collisions are rejected using the complete game/UI body. No C source, comparison verdict, storage owner or raw-link provider is registered. Evidence .scratch/goal70/no-source-large/manifest.json and REPORT.md; reviewed boundary repair is recorded separately."
 name = "fcn_005d0660"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:36:54+00:00"
+updated_by = "test"
+updated_at = "2026-11-02T16:47:02+00:00"
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_005d0660.c"
 symbol = "_fcn_005d0660"
 kind = "FUNCTION"
-status = "SIZE_MISMATCH"
+status = "STUB"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005d0660".verification]
-source_hash = "953d59767720a603964ea7a9471ce015bff2eac3fef3ff1982038d4f0d25836d"
+source_hash = "31f0fc160b700abc4c0efedb7c9c6924d33ce37829cc5d011a948c97f308546a"
 reference_hash = "f81b7e1e35113e706b4abe715858d96529bddc28d0d16694e409d4f479f8f8c3"
 reference_size = "4389"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -424575,15 +424575,21 @@ module = "GOLDTL"
 va = "0x5d0660"
 context_hash = ""
 defines = "[]"
-input_hash = "f40b2b2a177867e7e2c0c47750207df3220b670e81efd7afac06807918089182"
-status = "SIZE_MISMATCH"
+input_hash = "a19b1d217d8ea9ea99abc697d3d7176e71970f7682a76a99a9e6143be662f353"
+status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T16:28:04+00:00"
+measured_at = "2026-11-02T16:47:02+00:00"
 
 [["GOLDTL.0x005d0660".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-19T22:12:05.818362+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005d0660".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "STUB"
+changed_at = "2026-11-02T16:47:02.537181+00:00"
 updated_by = "test"
 ["GOLDTL.0x004432d0"]
 size = 1223

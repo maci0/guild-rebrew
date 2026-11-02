@@ -18069,3 +18069,26 @@ dropping the unused `int delta` (frame unchanged). A managed row was created for
 `gm_CurrentHumanFamilyCount`, object, int, size 4, .data, with the folding evidence in its note; the two
 dir32 operands are now bound rather than unresolved, so relocations fell from 53 to 51 and match reads
 809 rather than 814 because the operands are compared instead of tolerantly masked.
+
+## 2026-11-03 — inventory dialog reaches native size
+
+`0x5D0660` now measures exactly 4389, the native size, with match 688 against 318 and the frame at 0x438;
+the verdict reads STUB only because 15.7 percent sits under the near-match cutoff at equal size. The
+object section is 0x1130, which is the function plus an 11-byte 16-align pad, so the tlead filler is gone
+because 0x1130 already lands the next object at the reference 0x5d1790; all 66 calls are in native order
+with zero unresolved bindings (114 positional conflicts, 28 validated), lint is 5485 of 5485, and no
+setne remains. Gates improved: the pre-text absolute delta sum for calls 1..48 fell from 731 to 599 (621
+across all 66), the first io_FormatTextBuffer moved from 0xd56 to 0xd79 against native 0xd7e, the text
+block is exactly 0x276, the label block starts at 0xd1b as native, the hover block is exactly 0x15f with
+start 0xf91, end 0x10f0 and lookups at exactly 0x1000, 0x1047 and 0x1092 behind the two-arm tail, and the
+layout is native with tabB at [esp+0x98] and the format buffers at [esp+0x148/0x248/0x348]. Three edits
+did it. `g_1015ea0` is a pointer global (the data row's type is `char *`) and is now declared
+`extern char*`, because native loads the pointer at every visibility and index store (`mov ecx,[0x1015ea0]`
+then `mov [eax+ecx+0x1d0],3` and `[ecx+eax*4+0x5c]`), which is about 13 bytes per site across nine
+pre-text and three text-loop uses. The label loops count down in native (`for (k = 6; k; k--)`, then 2 and
+5) where count-up emitted an extra cmp/jl per loop. And `unsigned int t0` forces MSVC to allocate the 17th
+scalar slot instead of overlaying t0, nb and idx, which restores frame 0x438 and the native offsets and
+trims the label loops by exactly the missing seven bytes; this replaces the earlier `volatile int idx`
+lever, since volatile idx combined with the pointer loads gave 4483. Rejected: posC[6] and buf[260]
+frame pads (frame 0x438 but worse layout, 395 to 398), hoisted block locals, and struct-field or if/else
+visibility forms.
