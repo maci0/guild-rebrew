@@ -15869,3 +15869,24 @@ replaces the sete/xor materialisation of `j` with branch-form gotos (A inline, B
 continue;` after the then-branch with the else-loop as fall-through; adding it grows the
 frame to 0x184c, so the spill-free source form is still open. Remaining windows: 474+138
 at 0x5bcb04, 379/353 at 0x5bd630, 202 at 0x5bbc64, 186/179 at 0x5bc870.
+
+## 2026-11-02 — formatter and transport second pass
+
+`0x51AF00` 627 to 674 with the object at 5611 against native 6464 and the first mismatch
+moving from offset 0 to 7. The body is transcribed in native order: the gate and walker,
+the buf clear, the id lookup, the scan loop with all 22 cases, the S/s state inserts and
+duplicated branches, the i marker and precision format, the I regrouping, and the T/w/f/v/
+F/u/U/b/B/e/E/N/a/D/G/r/percent bodies. The frame reaches 0x3330, one push short of native:
+the probe establishes chkstk immediate = total locals minus 4 per saved-register push, so
+native's 0x332c is the same 0x3338 total with three pushes, and the open lever is a third
+live callee-saved value (index in ebx, digit in esi).
+
+`0x4DA690` 743 to 791 with the object at 7645 (588 over native). The missing second-pass
+arms are transcribed: the count==0 pick, the count>1 packet scan with its 0x38-stride merge
+walk, the least-used-variant pick with its modulo walk and two render arms, and the in-loop
+tail. The row guard now tests s2C (the packet countdown) as native does at 0x4db791, and the
+5-argument io_AppendText call is written with `(char *)s40 + K` so it does not spill. Slot
+sources traced: s2C, s38, s34, s10 and s18 set from their native producers; s40's native
+store is known but applying it costs match, so it stays unapplied with one C4700 warning.
+The new ann6.py propagates esp offsets over the real CFG and reproduces every session-6
+anchor with zero conflicts.

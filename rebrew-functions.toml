@@ -423051,7 +423051,7 @@ blocker = "Body ported from the Kuna decompilation of the native 0x900 frame: pa
 blocker_delta = 697
 
 ["GOLDTL.0x004da690".verification]
-source_hash = "cece700fa8de72368b01419f27606c9057f1209b71852597542a116f11001cd3"
+source_hash = "cdc03c50a07ffb9151870f7f71c93f010da978385c2065c82067ce212d721f6f"
 reference_hash = "217cf950d461ae3aff7e23c906f4b9cd6e9e683cac0694b5f715363c23fefb02"
 reference_size = "7057"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423062,10 +423062,10 @@ module = "GOLDTL"
 va = "0x4da690"
 context_hash = ""
 defines = "[]"
-input_hash = "8fba0d1b2d82297127a9503657b0e86e4d4c0a7f8e6c7975862cad50682297f1"
+input_hash = "ecd31f61cf9359f00586292901995734ce2b613bcbb48f7ef115aaa5db14c6ed"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T09:29:35+00:00"
+measured_at = "2026-11-02T09:44:03+00:00"
 
 [["GOLDTL.0x004da690".binding_history]]
 action = "rebind"
@@ -423174,7 +423174,7 @@ blocker = "io_Text-family buffer expansion reconstructed in full from a fresh ri
 blocker_delta = 2108
 
 ["GOLDTL.0x0051af00".verification]
-source_hash = "b5462245e26e8a354524fc19f660062483ddb4c404f2b2eff6545a150ed548e1"
+source_hash = "51407eacb836f7a4ef51306a22830c1edfe1d5a05e0f4620729e363862bdd486"
 reference_hash = "1a5a0fcc3c96b5e63a7087a546fe535837f30271f04358bc5d9b7ebc2ddb58ab"
 reference_size = "6464"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423185,10 +423185,10 @@ module = "GOLDTL"
 va = "0x51af00"
 context_hash = ""
 defines = "[]"
-input_hash = "335212c9e05c5764532fd7ba182c0f9140db1c771334c44cffeed8287c1a82a1"
-writer = "verify"
+input_hash = "03f206cb5cbb201809bb9f29c3cd93ba761511bc8fe92e4d7a1bc0e0d282d0fd"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-02T07:45:56+00:00"
+writer = "test"
+measured_at = "2026-11-02T09:43:32+00:00"
 
 [["GOLDTL.0x0051af00".status_history]]
 old_status = "STUB"

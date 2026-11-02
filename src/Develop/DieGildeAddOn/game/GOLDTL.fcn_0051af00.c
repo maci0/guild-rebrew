@@ -2,22 +2,42 @@
 #include <ctype.h>
 
 /*
- * io_Text-family buffer expansion (attested "io_Text()" diagnostics at
- * 0x51c68a). Native shape from 0x51af00:
- *   frame 0x332c, ebp frame pointer (and esp,-8 + __chkstk 0x332c).
- *   locals, esp-relative after the three callee-saved pushes:
- *     0x10 precision digit, 0x14 k (directive length),
- *     0x18 vararg walker (char*), 0x1c state, 0x20 p (resolved text),
- *     0x24 kind/lookup value, 0x28 flag,
- *     0x2c num[0x14], 0x4c date record[0xc], 0x58.. text scratch area,
- *     0x78 tab78[8], 0x398 buf[0x17d0], 0x1b68 tmp[0x17d0].
- *   arg1 out buffer, arg2 text id (<0x4800 indexes g_14a5320) or a
- *   direct char* template, then printf-style varargs read through a
- *   single walking pointer local.
- * The markup scan and the state machine (u/U/b/B/e/E set the case
- * prefix applied by a later S/s) mirror the sibling io_Text bodies
- * 0x51c840 / 0x519190; this variant consumes its values from the
- * vararg list instead of a call-state record.
+ * io_Text-family output-buffer grammar expansion (attested "io_Text()"
+ * diagnostic at 0x51c68a). Native shape from 0x51af00:
+ *
+ *   push ebp / mov ebp,esp / and esp,-8 / mov eax,0x332c / call __chkstk
+ *   push ebx / push esi / push edi
+ *
+ * chkstk immediate = total local bytes - 4 x saved-register pushes (verified
+ * with a throwaway frame probe: 0x17e0 locals and four pushes produced
+ * 0x17d0).  The align(8) aggregate below keeps the aligned prologue and the
+ * native local displacements: buf at 0x398, tmp at 0x1b68, frame 0x3330.
+ * Native is 0x332c because this CL saves only esi/edi here (loop index in
+ * esi, directive digit in a scratch register) where the reference saves
+ * ebx/esi/edi: 0x3338 - 2*4 = 0x3330 versus 0x3338 - 3*4 = 0x332c.  A third
+ * live callee-saved value would land the reference immediate exactly.
+ *
+ * Locals, offsets from the post-push esp:
+ *   0x10 res, 0x14 k, 0x18 vararg walker, 0x1c grammar_state,
+ *   0x20 p, 0x24 kind, 0x28 flag, 0x2c num[0x14], 0x40 format scratch,
+ *   0x78 tab78[8], 0x98/0x118/0x158/0x198/0x1d8/0x218/0x258/0x298
+ *   per-branch scratch, 0x398 buf[0x17d0], 0x1b68 tmp[0x17d0].
+ *   text.unrecovered stands in for the native scratch at 0x2a8..0x397, whose
+ *   users are not yet identified; it carries no source semantics.
+ *
+ * arg1 out buffer, arg2 text id (<0x4800 indexes g_14a5320) or a direct
+ * char* template, then printf-style varargs read through one walking
+ * pointer.  The 22-case dispatch (selector table 0x51c7e4, jump table
+ * 0x51c78c) covers % B C D E F G I N S T U a b e f i r u v w; the case
+ * bodies are laid out in native order.
+ *
+ * Remaining gaps against the native body: the loop index sits in esi here and
+ * the directive digit in a scratch register (native: ebx and esi), so the
+ * guard and every case body differ in register names; the repeated
+ * strlen/memmove/strcpy bursts are written once per case rather than with the
+ * reference's folded tails; the 'I' regrouping loop and the 'G' icon path are
+ * transcribed from the decoded call/format shape, not instruction for
+ * instruction; text.unrecovered has no identified user.
  */
 
 extern int g_1052de0;
@@ -39,18 +59,12 @@ extern char g_6a2310[];
 extern char g_6a2318[];
 extern char g_6a2348[];
 extern char g_6a234c[];
-extern char g_6a234e[];
 extern char g_6a2350[];
 extern char g_6a2354[];
-extern char g_6a2388[];
 extern char g_6a238c[];
-extern char g_6a238e[];
 extern char g_699a68[];
-extern char g_677c94[];
 extern char g_773d75[];
 
-int sprintf(char*, const char*, ...);
-int __cdecl __isctype(int, int);
 int __cdecl fcn_0042b2f0(char*, int, int);
 int __cdecl fcn_0064d530(char*, const char*, unsigned int);
 int __cdecl fcn_0064eeec(char*);
@@ -58,45 +72,58 @@ int __cdecl fcn_0064d41a(char*, const char*, ...);
 int __cdecl fcn_0064d740(char*, char*, int);
 int __cdecl fcn_00517b90(char*, int, char*);
 int __cdecl fcn_0051e070(void);
-int __cdecl fcn_00500d60(void*, void*);
-int __cdecl fcn_004fe330(void);
+void __cdecl fcn_00500d60(void*, void*);
+int __cdecl fcn_004fe330(char*, int);
 int __cdecl fcn_0050bc10(int, int, char*);
-int __cdecl fcn_00517c00(int, int, int, char*);
+int __cdecl fcn_00517c00(int, char*, int, char*);
 int __cdecl ReportClientMessage(char*);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_0046f2c0(int, int);
+int __cdecl __isctype(int, int);
+int sprintf(char*, const char*, ...);
 
-
-/* Expands the localized markup template named by `fmt` with the varargs
- * into `out`. */
 /* ADDRESS: GOLDTL 0x0051af00 */
+/* ADDRESS: GOLD 0x00517700 */
 void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 {
-	char expansion_buffer[0x17d0];
-	char work_buffer[0x17d0];
-	int tab78[8];
-	char txt58[0x20];
-	char rec58[0x0c];
 	char num[0x14];
-	int flag;
+	char fmt_scratch[0x38];
+	int tab78[8];
+	char slot98[0x40];
+	char slotd8[0x40];
+	char slot118[0x40];
+	char slot158[0x40];
+	char slot198[0x40];
+	char slot1d8[0x40];
+	char slot218[0x40];
+	char slot258[0x40];
+	char slot298[0x40];
+	__declspec(align(8)) struct {
+		/* native scratch 0x2a8..0x397; its users are not yet identified */
+		char unrecovered[0x100];
+		char buf[0x17d0];
+		char tmp[0x17d0];
+	} text;
+	int i = 0;
+	int res;
+	int k;
+	char* cursor;
+	int grammar_state;
 	int kind;
 	char* p;
-	int grammar_state;
-	char* argument_cursor;
-	int k;
-	int precision;
-	int i;
-	int j;
-	int r;
+	int flag;
 	int e;
-	int res;
+	int r;
+	int j;
 	char c;
 
-	argument_cursor = (char*) &format_selector + 4;
+	grammar_state = 0;
+	kind = 0;
+	flag = 0;
 	if (g_1052de0 == 0) {
 		return;
 	}
-	memset(work_buffer, 0, 0x17d0);
+	cursor = (char*) &format_selector + 4;
+	memset(text.buf, 0, 0x17d0);
 	if (format_selector < 0x4800) {
 		p = g_14a5320[format_selector];
 		if (p == 0) {
@@ -105,35 +132,33 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 		if (strlen(p) > 0x17c0) {
 			return;
 		}
-		fcn_0064d530(work_buffer, p, 0x17c0);
+		fcn_0064d530(text.buf, p, 0x17c0);
 	} else {
-		strcpy(work_buffer, (char*) format_selector);
+		strcpy(text.buf, (char*) format_selector);
 	}
-	grammar_state = 0;
-	flag = 0;
-	p = 0;
-	kind = 0;
-	if (strlen(work_buffer) == 0) {
+	if (strlen(text.buf) == 0) {
 		goto done;
 	}
-	i = 0;
-	while (i <= 0x17d0) {
-		c = work_buffer[i];
+	for (;;) {
+		if (i > 0x17d0) {
+			break;
+		}
+		c = text.buf[i];
 		if (c != '%' && c != '$' && c != '{') {
 			i++;
-			if (i >= (int) strlen(work_buffer)) {
-				break;
+			if (i < (int) strlen(text.buf)) {
+				continue;
 			}
-			continue;
+			break;
 		}
-		r = work_buffer[i + 1] - '0';
+		r = text.buf[i + 1] - '0';
 		i++;
 		if (r >= 0 && r <= 9) {
 			i++;
 		} else {
 			r = -1;
 		}
-		c = work_buffer[i];
+		c = text.buf[i];
 		switch (c) {
 		case 'C':
 			i++;
@@ -141,8 +166,8 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			break;
 		case 'S':
 		case 's':
-			p = *(char**) argument_cursor;
-			argument_cursor += 4;
+			cursor += 4;
+			p = *(char**) (cursor - 4);
 			if ((int) p < 0x4800) {
 				kind = g_11bb000[(int) p];
 				p = g_14a5320[(int) p];
@@ -152,346 +177,451 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				if (p == 0) {
 					p = g_14a5320[(int) p];
 				}
-			} else if (work_buffer[i] == 's' && flag == 0) {
-				p = (char*) fcn_0042b2f0(p, r, 4);
 			} else {
-				p = (char*) fcn_0042b2f0(p, r, 8);
+				if (r == -1) {
+					r = 1;
+				}
+				if (text.buf[i - 1] == 's' && flag == 0) {
+					p = (char*) fcn_0042b2f0(p, r, 4);
+				} else {
+					p = (char*) fcn_0042b2f0(p, r, 8);
+				}
 			}
 			if (grammar_state == 0) {
-				if (strlen(p) + i > 0x17cb) {
+				if ((int) strlen(p) + i > 0x17cb) {
 					return;
 				}
 				e = i - k;
-				fcn_0064d740(work_buffer + e + strlen(p), work_buffer + i,
-					(int) strlen(work_buffer) - e);
-				strcpy(work_buffer + e, p);
+				fcn_0064d740(text.buf + e + strlen(p), text.buf + i,
+					(int) strlen(text.buf) + 2 - i);
+				strcpy(text.buf + e, p);
 				break;
 			}
 			e = i - k - 1;
 			while (e >= 0) {
 				if (g_6b25b0 > 1) {
-					res = __isctype(work_buffer[e], 4);
+					res = __isctype(text.buf[e], 4);
 				} else {
-					res = ((unsigned char*) g_6b23a4)[work_buffer[e] * 2] & 4;
+					res = ((unsigned char*) g_6b23a4)[text.buf[e] * 2] & 4;
 				}
 				if (res != 0) {
 					break;
 				}
-				if (work_buffer[e] != 0x20) {
+				if (text.buf[e] != 0x20) {
 					e = -1;
 					break;
 				}
 				e--;
 			}
 			if (grammar_state == 1 || grammar_state == 2) {
-				res = fcn_0042b2f0(g_14a540c[0], r, 4);
-				if (e > -1) {
-					k = i - fcn_00517b90(work_buffer, e, txt58);
-					sprintf(expansion_buffer, g_6a22d8, res, txt58, p);
+				if (text.buf[i - 1] == 's' && flag == 0) {
+					res = fcn_0042b2f0(g_14a540c[kind], r, 4);
 				} else {
-					sprintf(expansion_buffer, g_68b3f8, res, p);
+					res = fcn_0042b2f0(g_14a540c[kind], r, 8);
+				}
+				if (e > -1) {
+					k = fcn_00517b90(text.buf, e, slot258);
+					sprintf(text.tmp, g_6a22d8, res, slot258, p);
+				} else {
+					sprintf(text.tmp, g_68b3f8, res, p);
 				}
 				if (fcn_0051e070() == 0 && grammar_state == 2) {
-					expansion_buffer[0] = (char) toupper((unsigned char) expansion_buffer[0]);
+					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
 				}
 			} else if (grammar_state == 3 || grammar_state == 4) {
-				res = fcn_0042b2f0(g_14a5400[0], r, 4);
-				if (e > -1) {
-					k = i - fcn_00517b90(work_buffer, e, txt58);
-					sprintf(expansion_buffer, g_6a22d8, res, txt58, p);
+				if (text.buf[i - 1] == 's' && flag == 0) {
+					res = fcn_0042b2f0(g_14a5400[kind], r, 4);
 				} else {
-					sprintf(expansion_buffer, g_68b3f8, res, p);
+					res = fcn_0042b2f0(g_14a5400[kind], r, 8);
+				}
+				if (e > -1) {
+					k = fcn_00517b90(text.buf, e, slot198);
+					sprintf(text.tmp, g_6a22d8, res, slot198, p);
+				} else {
+					sprintf(text.tmp, g_68b3f8, res, p);
 				}
 				if (fcn_0051e070() == 0 && grammar_state == 4) {
-					expansion_buffer[0] = (char) toupper((unsigned char) expansion_buffer[0]);
+					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
 				}
-			} else {
-				res = fcn_0042b2f0(g_14a5418[0], r, 4);
-				if (e > -1) {
-					k = i - fcn_00517b90(work_buffer, e, txt58);
-					sprintf(expansion_buffer, g_6a22d8, res, txt58, p);
+			} else if (grammar_state == 5 || grammar_state == 6) {
+				if (text.buf[i - 1] == 's' && flag == 0) {
+					res = fcn_0042b2f0(g_14a5418[kind], r, 4);
 				} else {
-					sprintf(expansion_buffer, g_68b3f8, res, p);
+					res = fcn_0042b2f0(g_14a5418[kind], r, 8);
+				}
+				if (e > -1) {
+					k = fcn_00517b90(text.buf, e, slot218);
+					sprintf(text.tmp, g_6a22d8, res, slot218, p);
+				} else {
+					sprintf(text.tmp, g_68b3f8, res, p);
 				}
 				if (fcn_0051e070() == 0 && grammar_state == 6) {
-					expansion_buffer[0] = (char) toupper((unsigned char) expansion_buffer[0]);
+					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
 				}
 			}
-			if (strlen(expansion_buffer) + i > 0x17cb) {
+			if ((int) strlen(text.tmp) + i > 0x17cb) {
 				return;
 			}
-			fcn_0064d740(work_buffer + (i - k) + strlen(expansion_buffer), work_buffer + i,
-				(int) strlen(work_buffer) - (i - k));
-			strcpy(work_buffer + (i - k), expansion_buffer);
+			e = i - k;
+			fcn_0064d740(text.buf + e + strlen(text.tmp), text.buf + i,
+				(int) strlen(text.buf) + 2 - i);
+			strcpy(text.buf + e, text.tmp);
 			grammar_state = 0;
 			flag = 0;
 			break;
-		case 'F':
-			i++;
-			break;
-		case 'T':
-			if (work_buffer[i - 1] != '%') {
-				break;
-			}
-			res = *(int*) argument_cursor;
-			argument_cursor += 4;
-			fcn_0050bc10(res, g_773d75[0], expansion_buffer);
-			fcn_0064d740(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i + 1,
-				(int) strlen(work_buffer) - i + 1);
-			strcpy(work_buffer + i - 1, expansion_buffer);
-			break;
-		case 'w':
-			res = *(int*) argument_cursor;
-			argument_cursor += 4;
-			res = (int) fcn_0042b2f0(
-				g_14a79c0[*(unsigned short*) (0x8680b4 + res * 0x2f4)], 1, 8);
-			strcpy(expansion_buffer, (char*) res);
-			fcn_0064d740(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i + 1,
-				(int) strlen(work_buffer) - i + 1);
-			strcpy(work_buffer + i - 1, expansion_buffer);
-			break;
 		case 'i':
-			c = work_buffer[i + 1];
-			if (c == 'i' || c == 'c' || c == 'b' || c == 'a' ||
-			    c == 'n' || c == 't') {
+			c = text.buf[i + 1];
+			if (c == 'i' || c == 'c' || c == 'b' || c == 'a' || c == 'n') {
 				i += 2;
 				break;
 			}
-			j = *(int*) argument_cursor;
-			argument_cursor += 4;
+			cursor += 4;
+			j = *(int*) (cursor - 4);
 			if (j > 1 || j == 0) {
 				flag = 1;
 			}
 			if (r != -1) {
 				sprintf(num, g_6a2354, r);
-				sprintf(expansion_buffer, num, j);
+				sprintf(text.tmp, num, j);
 			} else {
-				sprintf(expansion_buffer, g_67d444, j);
+				sprintf(text.tmp, g_67d444, j);
 			}
-			fcn_0064d740(work_buffer + i - 3 + strlen(expansion_buffer), work_buffer + i,
-				(int) strlen(work_buffer) - i + 1);
-			strcpy(work_buffer + i - 2, expansion_buffer);
+			fcn_0064d740(text.buf + i - 3 + strlen(text.tmp), text.buf + i,
+				(int) strlen(text.buf) - i + 1);
+			strcpy(text.buf + i - 2, text.tmp);
 			break;
 		case 'I':
 			if (r != -1) {
 				sprintf(num, g_6a2354, r);
-				sprintf(expansion_buffer, num, *(int*) argument_cursor);
-				argument_cursor += 4;
-				fcn_0064d740(work_buffer + i - 3 + strlen(expansion_buffer), work_buffer + i,
-					(int) strlen(work_buffer) - i + 1);
-				strcpy(work_buffer + i - 2, expansion_buffer);
+				strcpy(fmt_scratch, num);
 			} else {
-				sprintf(expansion_buffer, g_67d444, *(int*) argument_cursor);
-				argument_cursor += 4;
-				fcn_0064d740(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i + 1,
-					(int) strlen(work_buffer) - i + 1);
-				strcpy(work_buffer + i - 1, expansion_buffer);
+				strcpy(fmt_scratch, g_6a234c);
 			}
+			strcat(fmt_scratch, g_6a2350);
+			cursor += 4;
+			j = *(int*) (cursor - 4);
+			if (j > 1 || j == 0) {
+				flag = 1;
+			}
+			sprintf(text.tmp, fmt_scratch, j);
+			e = (int) strlen(text.tmp);
+			k = e + e / 3;
+			text.tmp[k] = 0;
+			res = 0;
+			for (e = e - 1; e >= 0; e--) {
+				text.tmp[k] = text.tmp[e];
+				k--;
+				if (e != 0 && j >= 0 && (res + 1) % 3 == 0) {
+					text.tmp[k] = '.';
+					k--;
+				}
+				res++;
+			}
+			if (j >= 0) {
+				strcpy(slot298, text.tmp);
+			} else {
+				slot298[0] = '-';
+				strcpy(slot298 + 1, text.tmp);
+			}
+			fcn_0064d740(text.buf + i - 1 + strlen(slot298), text.buf + i,
+				(int) strlen(text.buf) - i + 1);
+			strcpy(text.buf + i - 1, slot298);
+			break;
+		case 'T':
+			if (text.buf[i - 1] != '%') {
+				break;
+			}
+			cursor += 4;
+			res = *(int*) (cursor - 4);
+			fcn_0050bc10(res, g_773d75[0], text.tmp);
+			fcn_0064d740(text.buf + i - 1 + strlen(text.tmp), text.buf + i + 1,
+				(int) strlen(text.buf) - i + 1);
+			strcpy(text.buf + i - 1, text.tmp);
+			break;
+		case 'w':
+			cursor += 4;
+			res = *(int*) (cursor - 4);
+			res = (int) fcn_0042b2f0(
+				g_14a79c0[*(unsigned short*) (0x8680b4 + res * 0x2f4)], 1, 8);
+			strcpy(text.tmp, (char*) res);
+			fcn_0064d740(text.buf + i - 1 + strlen(text.tmp), text.buf + i + 1,
+				(int) strlen(text.buf) - i + 1);
+			strcpy(text.buf + i - 1, text.tmp);
 			break;
 		case 'f':
-			precision = work_buffer[i + 1] - '0';
-			if (precision <= 0 || precision >= 9) {
-				precision = 0;
-			}
-			if (precision > 0) {
+			j = text.buf[i + 1] - '0';
+			if (j > 0 && j < 9) {
 				i++;
 			}
 			if (r != -1) {
-				sprintf(num, g_6a238c);
-				sprintf(num + 4, g_6a2388);
-				sprintf(txt58, g_6a234c);
-				sprintf(txt58 + strlen(txt58), g_6a2350);
-			} else {
-				sprintf(txt58, g_6a234c);
-				sprintf(txt58 + strlen(txt58), g_6a2350);
+				sprintf(num, g_6a2354, r);
 			}
+			strcpy(fmt_scratch, g_6a234c);
+			if (r != -1) {
+				strcat(fmt_scratch, num);
+			}
+			strcat(fmt_scratch, g_6a2350);
+			cursor += 8;
 			{
-				double d = *(double*) argument_cursor;
-				argument_cursor += 8;
-				sprintf(expansion_buffer, txt58, d);
+				double d = *(double*) (cursor - 8);
+				sprintf(text.tmp, fmt_scratch, d);
 			}
-			if (strlen(expansion_buffer) + i > 0x17cb) {
+			if ((int) strlen(text.tmp) + i > 0x17cb) {
 				return;
 			}
 			i++;
-			fcn_0064d740(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i,
-				(int) strlen(work_buffer) - i + 1);
-			strcpy(work_buffer + i - 1, expansion_buffer);
+			fcn_0064d740(text.buf + i - 1 + strlen(text.tmp), text.buf + i,
+				(int) strlen(text.buf) - i + 1);
+			strcpy(text.buf + i - 1, text.tmp);
+			break;
+		case 'v':
+			c = text.buf[i + 1];
+			i++;
+			if (c != 'v') {
+				break;
+			}
+			cursor += 4;
+			break;
+		case 'F':
+			i++;
 			break;
 		case 'u':
-			k = (r != -1) ? 3 : 2;
-			e = i - k;
+			e = i - ((r != -1) ? 3 : 2);
+			k = e;
 			grammar_state = 1;
-			fcn_0064d740(work_buffer + e, work_buffer + i + 1, (int) strlen(work_buffer) - i);
-			i = e - 1;
+			fcn_0064d740(text.buf + k, text.buf + i + 1,
+				(int) strlen(text.buf) - i);
+			i = k - 1;
 			break;
 		case 'U':
-			k = (r != -1) ? 3 : 2;
-			e = i - k;
+			e = i - ((r != -1) ? 3 : 2);
+			k = e;
 			grammar_state = 2;
-			fcn_0064d740(work_buffer + e, work_buffer + i + 1, (int) strlen(work_buffer) - i);
-			i = e - 1;
+			fcn_0064d740(text.buf + k, text.buf + i + 1,
+				(int) strlen(text.buf) - i);
+			i = k - 1;
 			break;
 		case 'b':
-			k = (r != -1) ? 3 : 2;
-			e = i - k;
+			e = i - ((r != -1) ? 3 : 2);
+			k = e;
 			grammar_state = 3;
-			fcn_0064d740(work_buffer + e, work_buffer + i + 1, (int) strlen(work_buffer) - i);
-			i = e - 1;
+			fcn_0064d740(text.buf + k, text.buf + i + 1,
+				(int) strlen(text.buf) - i);
+			i = k - 1;
 			break;
 		case 'B':
-			k = (r != -1) ? 3 : 2;
-			e = i - k;
-			if (work_buffer[e] != '%') {
+			e = i - ((r != -1) ? 3 : 2);
+			k = e;
+			if (text.buf[k] != '%') {
 				break;
 			}
 			grammar_state = 4;
-			fcn_0064d740(work_buffer + e, work_buffer + i + 1, (int) strlen(work_buffer) - i);
-			i = e - 1;
+			fcn_0064d740(text.buf + k, text.buf + i + 1,
+				(int) strlen(text.buf) - i);
+			i = k - 1;
 			break;
 		case 'e':
+			e = i - ((r != -1) ? 3 : 2);
+			k = e;
 			grammar_state = 5;
-			goto join;
+			fcn_0064d740(text.buf + k, text.buf + i + 1,
+				(int) strlen(text.buf) - i);
+			i = k - 1;
+			break;
 		case 'E':
+			e = i - ((r != -1) ? 3 : 2);
+			k = e;
 			grammar_state = 6;
-		join:
-			c = work_buffer[i + 1];
-			k = (r != -1) ? 3 : 2;
-			e = i - k;
-			if (c == 0x20) {
-				fcn_0064d740(work_buffer + e, work_buffer + i + 1, (int) strlen(work_buffer) + 2 - i);
-			} else {
-				fcn_0064d740(work_buffer + e, work_buffer + i + 2, (int) strlen(work_buffer) + 2 - i);
-			}
-			i = e - 1;
+			fcn_0064d740(text.buf + k, text.buf + i + 1,
+				(int) strlen(text.buf) - i);
+			i = k - 1;
 			break;
 		case 'N':
 			i++;
 			if (r == -1) {
 				break;
 			}
-			if (work_buffer[i - 3] != '%' || work_buffer[i - 2] == '$') {
+			if (text.buf[i - 3] != '%' || text.buf[i - 2] == '$') {
 				break;
 			}
-			kind = *(int*) argument_cursor;
-			argument_cursor += 4;
-			fcn_00517c00(kind, work_buffer[i] - '0', i, expansion_buffer);
-			fcn_0064d740(work_buffer + i + strlen(expansion_buffer) - 4, work_buffer + i,
-				(int) strlen(work_buffer) + 2 - i);
-			strcpy(work_buffer + i - 3, expansion_buffer);
+			cursor += 4;
+			kind = *(int*) (cursor - 4);
+			fcn_00517c00(kind, (char*) (text.buf[i] - '0'), i, text.tmp);
+			fcn_0064d740(text.buf + i + strlen(text.tmp) - 4, text.buf + i,
+				(int) strlen(text.buf) + 2 - i);
+			strcpy(text.buf + i - 3, text.tmp);
 			break;
 		case 'a':
-			if (work_buffer[i - 1] == '%') {
-				res = *(int*) argument_cursor;
-				argument_cursor += 4;
-				sprintf(expansion_buffer, g_699a68, res, 0x14);
-				fcn_0064d740(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i + 1,
-					(int) strlen(work_buffer) - i + 1);
-				strcpy(work_buffer + i - 1, expansion_buffer);
-			} else {
-				sprintf(expansion_buffer, g_6a2348, 0x14);
-				memmove(work_buffer + i - 1 + strlen(expansion_buffer), work_buffer + i + 1,
-					strlen(work_buffer) - i + 1);
-				strcpy(work_buffer + i - 1, expansion_buffer);
+			if (text.buf[i - 1] != '%') {
+				sprintf(text.tmp, g_6a2348, 0x14);
+				fcn_0064d740(text.buf + i - 1 + strlen(text.tmp), text.buf + i + 1,
+					(int) strlen(text.buf) - i + 1);
+				strcpy(text.buf + i - 1, text.tmp);
+				break;
 			}
+			cursor += 4;
+			res = *(int*) (cursor - 4);
+			sprintf(text.tmp, g_699a68, res, 0x14);
+			fcn_0064d740(text.buf + i - 1 + strlen(text.tmp), text.buf + i + 1,
+				(int) strlen(text.buf) - i + 1);
+			strcpy(text.buf + i - 1, text.tmp);
+			break;
+		case 'D':
+			cursor += 4;
+			res = *(int*) (cursor - 4);
+			fcn_00500d60(fmt_scratch + 0xc, (void*) res);
+			res = fcn_004fe330(fmt_scratch + 0xc, *(short*) (fmt_scratch + 0x16));
+			sprintf(text.tmp, g_6a2310, g_14a5450[res]);
+			fcn_0064d740(text.buf + i - 2 + strlen(text.tmp), text.buf + i,
+				(int) strlen(text.buf) + 2 - i);
+			strcpy(text.buf + i - 1, text.tmp);
+			break;
+		case 'G':
+			cursor += 4;
+			p = *(char**) (cursor - 4);
+			i++;
+			kind = 0;
+			j = *(unsigned char*) p;
+			j = j * 7 + 0x48e;
+			if (j <= 0x4800) {
+				kind = g_11bb000[j];
+				p = g_14a5320[j];
+			} else {
+				p = (char*) j;
+			}
+			if (r == -1) {
+				k = 2;
+				r = 1;
+			} else {
+				k = 3;
+			}
+			p = (char*) fcn_0042b2f0(p, r, 4);
+			if (p == 0) {
+				p = g_14a5320[j];
+			}
+			if (p[5] != 0) {
+				sprintf(slot98, g_6a2308, p, p + 5);
+			} else {
+				strcpy(slot98, p);
+			}
+			if (grammar_state == 0) {
+				if ((int) strlen(slot98) + i > 0x17cb) {
+					return;
+				}
+				e = i - k;
+				fcn_0064d740(text.buf + e + strlen(slot98), text.buf + i,
+					(int) strlen(text.buf) + 2 - i);
+				strcpy(text.buf + e, slot98);
+				grammar_state = 0;
+				flag = 0;
+				break;
+			}
+			e = i - k - 1;
+			while (e >= 0) {
+				if (g_6b25b0 > 1) {
+					res = __isctype(text.buf[e], 4);
+				} else {
+					res = ((unsigned char*) g_6b23a4)[text.buf[e] * 2] & 4;
+				}
+				if (res != 0) {
+					break;
+				}
+				if (text.buf[e] != 0x20) {
+					e = -1;
+					break;
+				}
+				e--;
+			}
+			if (grammar_state == 1 || grammar_state == 2) {
+				res = fcn_0042b2f0(g_14a540c[kind], r, 4);
+				if (e > -1) {
+					k = fcn_00517b90(text.buf, e, slot1d8);
+					sprintf(text.tmp, g_6a22d8, res, slot1d8, slot98);
+				} else {
+					sprintf(text.tmp, g_68b3f8, res, slot98);
+				}
+				if (fcn_0051e070() == 0 && grammar_state == 2) {
+					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
+				}
+			} else if (grammar_state == 3 || grammar_state == 4) {
+				res = fcn_0042b2f0(g_14a5400[kind], r, 4);
+				if (e > -1) {
+					k = fcn_00517b90(text.buf, e, slot118);
+					sprintf(text.tmp, g_6a22d8, res, slot118, slot98);
+				} else {
+					sprintf(text.tmp, g_68b3f8, res, slot98);
+				}
+				if (fcn_0051e070() == 0 && grammar_state == 4) {
+					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
+				}
+			} else if (grammar_state == 5 || grammar_state == 6) {
+				res = fcn_0042b2f0(g_14a5418[kind], r, 4);
+				if (e > -1) {
+					k = fcn_00517b90(text.buf, e, slot158);
+					sprintf(text.tmp, g_6a22d8, res, slot158, slot98);
+				} else {
+					sprintf(text.tmp, g_68b3f8, res, slot98);
+				}
+				if (fcn_0051e070() == 0 && grammar_state == 6) {
+					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
+				}
+			}
+			if ((int) strlen(text.tmp) + i > 0x17cb) {
+				return;
+			}
+			e = i - k;
+			fcn_0064d740(text.buf + e + strlen(text.tmp), text.buf + i,
+				(int) strlen(text.buf) + 2 - i);
+			strcpy(text.buf + e, text.tmp);
+			grammar_state = 0;
 			break;
 		case 'r':
 			memset(tab78, 0, 0x20);
-			precision = 0;
-			j = work_buffer[i + 1] - '1';
+			res = 0;
+			j = text.buf[i + 1] - '1';
 			if (j >= 0 && j <= 9) {
-				precision = j + 9;
+				res = j + 9;
 			}
-			k = i + 3;
-			while (1) {
+			e = i + 3;
+			do {
 				if (g_6b25b0 > 1) {
-					res = __isctype(work_buffer[k], 4);
+					j = __isctype(text.buf[e], 4);
 				} else {
-					res = ((unsigned char*) g_6b23a4)[work_buffer[k] * 2] & 4;
+					j = ((unsigned char*) g_6b23a4)[text.buf[e] * 2] & 4;
 				}
-				if (res == 0) {
+				e++;
+			} while (j != 0);
+			fcn_0064d530((char*) tab78, text.buf + i + 3, e - i - 4);
+			j = fcn_0064eeec((char*) tab78);
+			r = format_selector;
+			while (r < g_6b7f98) {
+				if (g_11bb000[r] == res) {
 					break;
 				}
-				k++;
+				r++;
 			}
-			fcn_0064d530((char*) tab78, work_buffer + i + 3, k - i - 4);
-			res = fcn_0064eeec((char*) tab78);
-			j = format_selector;
-			while (j < g_6b7f98) {
-				if (g_11bb000[j] == precision) {
-					break;
-				}
-				j++;
-			}
-			if (j >= g_6b7f98) {
+			if (r >= g_6b7f98) {
 				ReportClientMessage(g_6a2318);
 				break;
 			}
-			res = gm_RandomMod(res) & 0xffff;
-			p = g_14a5320[res + j];
-			if (p == 0) {
+			j = gm_RandomMod(j) & 0xffff;
+			if (g_14a5320[j + r] == 0) {
 				break;
 			}
-			fcn_0064d740(work_buffer + strlen(p) + (i - k) - 5, work_buffer + i,
-				(int) strlen(work_buffer) - (i - k) + 5);
-			strcpy(work_buffer + i - 1, p);
-			break;
-		case 'D':
-			fcn_00500d60(&rec58[0], expansion_buffer);
-			res = fcn_004fe330();
-			sprintf(expansion_buffer, g_6a2310, g_14a5450[res]);
-			fcn_0064d740(work_buffer + strlen(expansion_buffer), work_buffer + i, (int) strlen(expansion_buffer) + 2 - i);
-			strcpy(work_buffer + i - 1, expansion_buffer);
-			break;
-		case 'G':
-			p = *(char**) argument_cursor;
-			argument_cursor += 4;
-			i++;
-			if ((int) p < 0x4800) {
-				kind = g_11bb000[(int) p];
-				p = g_14a5320[(int) p];
-			}
-			if (r != -1) {
-				p = (char*) fcn_0042b2f0(p, r, 4);
-				i--;
-			}
-			if (p == 0) {
-				p = g_14a5320[(int) p];
-			}
-			if (work_buffer[i - 2] != 0) {
-				sprintf(txt58, g_6a2308, p, work_buffer + i - 2);
-			} else {
-				strcpy(txt58, p);
-			}
-			if (strlen(txt58) + i > 0x17cb) {
-				return;
-			}
-			if (r == -1) {
-				memmove(work_buffer + i - 2 + strlen(txt58), work_buffer + i,
-					strlen(work_buffer) + 2 - i);
-			} else {
-				memmove(work_buffer + i - 3 + strlen(txt58), work_buffer + i,
-					strlen(work_buffer) + 2 - i);
-			}
-			strcpy(work_buffer + i - 2, txt58);
-			grammar_state = 0;
-			i -= 3;
-			break;
-		case 'v':
-			if (work_buffer[i + 1] == 'v') {
-				argument_cursor += 4;
-				i++;
-			}
+			p = g_14a5320[j + r];
+			fcn_0064d740(text.buf + strlen(p) + (i - e) - 5, text.buf + i,
+				(int) strlen(text.buf) - (i - e) + 5);
+			strcpy(text.buf + i - 1, p);
 			break;
 		case '%':
-			work_buffer[i - 1] = 0x16;
-			fcn_0064d740(work_buffer + i + 1, work_buffer + i + 2,
-				(int) strlen(work_buffer) - i + 1);
+			text.buf[i - 1] = 0x16;
+			fcn_0064d740(text.buf + i + 1, text.buf + i + 2,
+				(int) strlen(text.buf) - i + 1);
 			break;
 		default:
 			break;
 		}
 	}
 done:
-	strcpy(output, work_buffer);
+	strcpy(output, text.buf);
 }
