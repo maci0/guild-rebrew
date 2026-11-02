@@ -19372,3 +19372,38 @@ role-normalized structural diff leaves only the loop-2 class load and compare en
 so is not independently leverable, plus the [esi+1] load scheduling at 0xcce against 0xcc4 with the third-loop
 preheader block ordering, worth one byte rather than nineteen. A blocker is set on the row and the effort moves
 elsewhere. Notes in .scratch/f540020/ROUND8.md with variants r8_*.c and v_d1.c.
+
+## 2026-11-03 — production run allocator pin located
+
+`0x571870` stays at 2757 with object 3816, 1076 byte mismatches and the first at 0x537; the round kept nothing
+and the source is unchanged. Three findings narrow the target. First, GOLD's 0x5694b0 and GOLDTL's 0x571870 are
+instruction-identical through 0xed4 with only declared extents differing at 3816 and 3824 plus trailing decode,
+and GOLD carries the same three `xor ebx`, so the source and compiler context are shared and the eight-byte
+extent difference is not a codegen difference; both native builds sit in the same allocator state. Second, the
+allocator choice is invariant under every CSE-equivalent respelling tried, including partial and full inlining
+of letzte_zeit or naechste_zeit, char* and void* copies, struct assignment, memcpy at the mangel store,
+an extra alias variable, `register` on letzte_zeit, naechste_zeit, produziert, i and anzahl, split loop counters,
+block-scoped tail locals, named float and int temps for the c710 and haus[0x81] expressions, a named float for
+the 1.3f sub-expression, a float* b4 pointer local and a declaration reorder, all of which compile to exactly
+2757, 3816 and 0x537. Third, the pin is the mangel-path store `*letzte_zeit = *(pos14_7f4c00*)(e+0x52)` at
+0xce7: diagnostic removal frees ebx so the build emits `lea eax,[ebp+0x60]`, `xor ebx` and rematerialised leas,
+while removing the do-loop copy or inlining the differenz calls does not, so that single use keeps letzte_zeit in
+a register from 0x793 across both loops and no respelling of it survives CSE. Three allocator states were
+measured. A, the current block-local float df, keeps letzte_zeit in ebx with the early temp at frame 0x08, no
+zeroings and frame 0x724. B, the inline cast emitting `fimul [esp+0x2c]`, gives letzte_zeit as `lea eax` sharing
+0x08, the temp at frame 0x04, zeroings exactly at 0x8cc, 0x955 and 0x96b, and frame 0x724. C, volatile or /Oa,
+gives letzte_zeit its own slot, the temp at 0x14, the zeroings and frame 0x728. Native is letzte_zeit as lea eax
+sharing 0x08, the temp at 0x14, the zeroings and frame 0x724, and no form produced it; a flag sweep shows /Oa
+gives the C shape while /Ow, /Ot, /Ob0, /Ox, /O1 and /Os do not reach native either. The b4 fallback did yield a
+new positive: with `A = (*(int*)(e+0x14)*1.3f + *(int*)(e+0x18))`, the parenthesised forms
+`A * ((float)differenz * leistung)` (match 2534, object 3812) and `((float)differenz) * (A) * leistung` (2530,
+3808) keep `lea eax`, the exact three zeroings and `fild dword [esp+0x2c]` at frame 0x724, but they evaluate A
+first where native loads differenz first, leave the early temp at 0x04 and cost about 225 match, and native's
+differenz-first order only appears with the named float df, which restores the register copy, so fild and the
+zeroings are not strictly exclusive and the only remaining gap in B is the early temp slot. Next levers
+recorded: a spelling of the 0xce7 mangel store that still emits the sixteen-byte copy from shared slot 0x08 but
+breaks CSE with the register copy, since that single use is the pin; a way to make the early four-byte
+conversion reuse the unsigned-int-to-double scratch at frame 0x14 instead of taking its own slot; or state B
+plus any nudge that moves that temp from 0x04 to 0x14 without touching the b4 bytes. Findings and the harness in
+.scratch/571870/findings.md with b4probe2.py, diag.py, diag2.py, flags.py, goldtl.py, align.py, align2.py and
+batch7..22.py.
