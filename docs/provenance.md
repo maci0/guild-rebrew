@@ -19680,3 +19680,21 @@ eight. This also explains the earlier confusion where a row's object could never
 object extent excludes trailing section padding that the inventory counts. Rows whose extent has not been
 audited keep their inventoried sizes, and the same repair is the right step for any other row whose reference
 tail is alignment padding.
+
+## 2026-11-03 — extent audit classified, table tails included
+
+The inventory audit found 151 rows whose recorded extent ends in a run of at least four 0x90 or 0xCC bytes. A
+decode from each row start, resynchronising over validated four-byte jump tables, split them into 21 rows whose
+code ends with a control transfer followed only by padding with the next row starting exactly at the recorded
+end, 89 rows whose byte before the run is the last dword of an in-function jump table whose targets point back
+into the row, and 41 rows that did not classify because of decode desync or a data tail, which stay excluded.
+The classification table is .scratch/extents/classified.json. Both of the first two classes are repairs: the
+criterion is that the trailing run is alignment after the function's last content, and for a switch-bearing
+function that content is the jump table. The earlier filter wording that required the byte before the run not to
+be table data was wrong and would have excluded the two precedent repairs, since 0x561380's table dwords end at
+0x562184 with twelve nops to 0x56218f for an extent of 3588 and 0x571870's dwords end at 0x572758 with eight nops
+to 0x57275f for 3816, both of which were applied. Multi-byte nop forms also count as padding, so the row
+0x641810, recorded at 368 bytes with a 32-byte int3 run and a 7-byte `lea esi,[esi]` between the final ret and
+that run, is repaired to 329 rather than 336. Repairs run in batches of at most eight through
+`rebrew binary repair-extents 0xVA=SIZE ... --reason <evidence> --sync-rows`, with a dry run for the input digest
+and then the apply guarded by `--expected-digest`, and receipts kept under .scratch/extents/.
