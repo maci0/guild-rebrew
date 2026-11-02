@@ -20023,3 +20023,31 @@ the next lever is that home allocation. Reference slots were re-verified before 
 v18 0x98 at 0x574987 and 0x5749d1, v16 0x44 at 0x5752bb and v20 with v17 at 0x30 at 0x575071. A blocker is set on
 the row. Findings in .scratch/row5744c0/FINDINGS.md round 7 with results in v9 to v13 result files and
 work/vsw_results.jsonl.
+
+## 2026-11-03 — inventory switch case six merge tied to the minus-one register
+
+`0x561380` keeps its state at 2451 with object 3584 against native 3588, 110 relocations and lint clean; the
+case-6 pass kept no edit and the source is byte-identical to the v29 state. Case lengths remain 0xd8, 0x5a, 0x86,
+0x121, 0xc5, 0xb4, 0x41c, 0x47c, 0x7c for cases 0, 1, 2, 3, 7, 8, 4, 5 and 6 against native 0x80 for case 6, with
+the -1/-2 arm at 0x29, and the first mismatch is now offset 17 where we emit `or ebp,-1` (0xcd) and native emits
+`or ebx,-1` (0xcb). The main finding is that the case-6 tail merge is not independent of case 3 but rides the same
+knob as the minus-one register. Because the v29 state hoists `q = p + 0x52` above the fcn_004f4f60 call, q takes
+edi across that call, r takes ebx, and the function's -1 constant is forced into ebp; with -1 in ebp the fail block
+at 0x10f, which is case 0's tail, is `mov %ebp,0x70` plus the epilogue and is byte-identical to case 6's own r==0
+return at 0xd42, so every fail goto including case 6's else is redirected there and case 6's je becomes the
+two-byte short form for 0x7c. Every variant that leaves -1 in ebx instead gets case 6 at 0x80 with the six-byte
+far je, because the canonical fail block at label_561d51 inside case 5 then starts with `or $-1,%ebx` and is not
+identical to case 6's copy, so nothing is redirected: breaking the merge is the same thing as moving -1 to ebx.
+The best lead measured, c3i1 in .scratch/r561380, advances the parameter destructively instead of using a q
+register, `a0 = (void*)((unsigned char*)a0 + 0x52);`, which gives case 3 at 0x121, case 6 at 0x80 and -1 in ebx,
+but case 5 grows to 0x47f for object 3592 and match 2315, below the current state, so it was reverted and its
+first mismatch moves from offset 17 to 43. Case 5 grows because native zeroes ebx with `xor %ebx,%ebx` at 0x561cf8
+since ebp holds v10, so the zeroing also kills -1 and label_561d51 becomes the seven-byte `movl $-1` at case-5
+offset 0x11e for 0x47c, whereas in our builds v10 spills, ebp is free, the zero goes to ebp, ebx keeps -1 and the
+fail block becomes `or $-1,%ebx` plus a late `mov %ebx,0x70` at offset 0x257 for three extra bytes. Forcing v10
+into the compare with `&& v10 == 0` gives case 5 at 0x478 and moves -1 back to ebp, returning case 6 to 0x7c, so
+it is not usable. The immediate-store route has no C lever on case 6's path, since the lookup call preserves ebp
+so the -1 register is never clobbered there, and cases 4 and 5 get `movl $-1` only because their bodies reuse that
+register before the fail. The next step is to make case 5's zero constant land in ebx while -1 stays in ebx, which
+native achieves by keeping v10 in ebp. Variants c3i1, c3h1, c3g2, c3e1, c6m2, c3t1, c5v10, c3j1, c3j2 and c3j3
+and notes in .scratch/r561380/NOTES_round7b.md.
