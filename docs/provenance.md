@@ -16022,3 +16022,17 @@ counter cannot fit and spills at offset 0, making chkstk 0x1a50; the correlation
 (0x1a50 means zero a1 reloads, 0x1a4c means 12 to 14 reloads), and every frame-restoring
 variant lost more than it gained. Note the verdict now reads STUB because the match
 percentage sits below the classifier's threshold at this size.
+
+## 2026-11-02 — append-text flags split, f arm corrected
+
+`0x519190` now keeps the two native flags apart. Native uses [esp+0x34] as the case-i flag
+(set 2 at 0x519a8f/0x519bc1, tested by the four `*p=='s' && flag==0` sites, reset at
+0x51980f) and [esp+0x3c] as the case-X flag (set 1 at 0x51a26c, tested in carry at
+0x51ad8b/0x51ae26); our source had merged them into one variable, which is a semantic error.
+Splitting them gives 14 int slots, text at [esp+0x260] as native, and frame 0x31f8, still
+two saves, so the third push stays open (edi is pinned by the inline rep movs/rep stos
+sequences and by v24 in carry, and text_index keeps its home at [esp+0x08] while native keeps
+it wholly in ebx). Verdict reads 631/7539. The f-case non-digit arm now stores -1 as native
+does at 0x51a2a2 rather than 2; it is byte-neutral until the frame lands. The earlier 659
+reading belonged to a different structure with code at 0x1cb0; the current code sits at
+0x1cb8 against native 0x1cac.

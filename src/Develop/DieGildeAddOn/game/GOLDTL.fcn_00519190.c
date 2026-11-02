@@ -44,6 +44,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 	char nbuf[0x14];
 	char sbuf[0x20];
 	int v30;
+	int v32;
 	int v2c;
 	int v28;
 	char directive;
@@ -65,7 +66,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 	v2c = 0;
 	v10 = 0;
 	v1c = 0;
-	v28 = 0;
+	v32 = 0;
 
 	if (*(void**)0x1052de0 == 0) {
 		return -1;
@@ -157,7 +158,7 @@ fmt:
 			if (digit == -1) {
 				digit = 1;
 			}
-			if (*(char*)(v0c + text_index) == 's' && v30 == 0) {
+			if (*(char*)(v0c + text_index) == 's' && v32 == 0) {
 				v18 = fcn_0042b2f0((char*)v18, digit, 4);
 			} else {
 				v18 = fcn_0042b2f0((char*)v18, digit, 8);
@@ -191,7 +192,7 @@ fmt:
 		}
 		if (v10 == 1 || v10 == 2) {
 			v08 = 8;
-			if (*(char*)(v0c + text_index) == 's' && v30 == 0) {
+			if (*(char*)(v0c + text_index) == 's' && v32 == 0) {
 				v08 = 4;
 			}
 			v24 = fcn_0042b2f0((char*)*(int*)(v1c * 4 + 0x14a540c), digit, v08);
@@ -210,7 +211,7 @@ fmt:
 		}
 		if (v10 == 3 || v10 == 4) {
 			v08 = 8;
-			if (*(char*)(v0c + text_index) == 's' && v30 == 0) {
+			if (*(char*)(v0c + text_index) == 's' && v32 == 0) {
 				v08 = 4;
 			}
 			v24 = fcn_0042b2f0((char*)*(int*)(v1c * 4 + 0x14a5400), digit, v08);
@@ -229,7 +230,7 @@ fmt:
 		}
 		if (v10 == 5 || v10 == 6) {
 			v08 = 8;
-			if (*(char*)(v0c + text_index) == 's' && v30 == 0) {
+			if (*(char*)(v0c + text_index) == 's' && v32 == 0) {
 				v08 = 4;
 			}
 			v24 = fcn_0042b2f0((char*)*(int*)(v1c * 4 + 0x14a5418), digit, v08);
@@ -253,7 +254,7 @@ fmt:
 	v10 = 0;
 	text_index = v20;
 	memcpy(S.text + v20, (char*)v18, strlen((char*)v18));
-	v30 = 0;
+	v32 = 0;
 	continue;
 
 	case 'l':
@@ -307,7 +308,7 @@ fmt:
 			v28 = *(int*)ap;
 			ap += 4;
 			if (v28 > 1 || v28 == 0) {
-				v30 = 2;
+				v32 = 2;
 			}
 			fcn_0064d41a(S.work, sbuf, v28);
 			v04 = -1;
@@ -337,7 +338,7 @@ fmt:
 		v28 = *(int*)ap;
 		ap += 4;
 		if (v28 > 1 || v28 == 0) {
-			v30 = 2;
+			v32 = 2;
 		}
 		fcn_0064d41a(sbuf, (char*)0x67d444, v28);
 		v04 = -1;
@@ -423,7 +424,7 @@ fmt:
 		if (v04 > 0 && v04 < 9) {
 			text_index++;
 		} else {
-			v04 = 2;
+			v04 = -1;
 		}
 		if (digit == -1) {
 			fcn_00657a73(v04, nbuf, 10);
