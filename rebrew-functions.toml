@@ -425194,12 +425194,13 @@ measured_at = "2026-10-22T08:35:51+00:00"
 size = 4923
 note = "Goal72 inferred role: Combat outcome/results UI and post-combat settlement. Counterpart GOLD.0x004d4d70 supported by full native structure, resources and callers, not a compiled shared-provider claim. See .scratch/goal72/large/REPORT.md and manifest.json. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
 name = "fcn_004d6170"
-updated_by = "test"
-updated_at = "2026-11-02T12:25:29+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-02T13:00:00+00:00"
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_004d6170.c"
 symbol = "_fcn_004d6170"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "slot permutation: mode at [esp+0x18] against native [esp+0x1c] and rec at [esp+0x24] against [esp+0x14] are allocator output, first mismatch offset 24"
 
 ["GOLDTL.0x004d6170".verification]
 source_hash = "3b877d64a97a74d6623d07c432eb3a5ae7e73d631c7da031d35515e20154ced1"
@@ -427530,9 +427531,10 @@ file = "src/Develop/Unassigned/GOLDTL.fcn_0065a20a.c"
 symbol = "_fcn_0065a20a"
 name = "fcn_0065a20a"
 kind = "FUNCTION"
-updated_by = "verify"
-updated_at = "2026-11-02T09:00:59+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-02T13:00:14+00:00"
 status = "STUB"
+blocker = "byte parity pending: source transcribed but comparison not yet converged"
 
 ["GOLDTL.0x0065a20a".verification]
 source_hash = "6d27a3b4aafb44fe7aab0ff455722cb4a70c4ea437e2ebf309a1c4a893ff2058"

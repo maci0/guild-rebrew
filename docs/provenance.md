@@ -16918,3 +16918,11 @@ keeps them in edi and ebx, offsets in 283 (-4) and 293/294 (-2 each) run the oth
 three vote blocks still lack native's `mov ecx,eax; add esp,4` because our pops are deferred.
 Fixing 277, 296 and 304 to native sizes would give exactly 8798. Candidates saved: best_symbol_8809.c
 (kept), symbol_allsym_8811.c, schar_8808.c, swap_arms.c, dowhile.c, keep_base_1982.c.
+
+## 2026-11-02 — blocker records for two stub rows
+
+Two STUB rows carried no blocker explanation after their verdicts changed, which raised W005 in
+`rebrew lint`. Both now carry the reason through `rebrew blocker set`: `0x004D6170` records the
+slot permutation (mode at [esp+0x18] against native [esp+0x1c] and rec at [esp+0x24] against
+[esp+0x14] are allocator output, first mismatch offset 24) and `0x0065A20A` records that its
+transcription is not yet converged. Lint is back to 5485 files checked, 0 errors, 0 warnings.
