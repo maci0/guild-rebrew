@@ -17723,3 +17723,22 @@ the declaration order. The tlead filler is now 229 bytes so the .text contributi
 remaining 239 bytes are the text passes (native 0x276 against about 0x1f0) and the hover block
 (native 0x15f against about 0xca), where native is a less-merged build of the same logic because the
 three hover lookups tail-merge into one site here.
+
+## 2026-11-02 — terrain layer model corrected
+
+`0x435910` 155 to 272 with the object growing 3024 to 3834, at the cost of the equal prefix falling
+from 23 to 2 bytes, kept because the prefix came from the previous wrong local set rather than from
+correct code. The semantic model is now verified against the listing: record vectors at +0x08 (b) and
++0x14 (a); taps at +0xb4 (p0) and +0xb8 (p1); two lane arrays A[3][2] = {r0->p0, r1->p0} and
+B[3][2] = {r0->p1, r1->p1} with per-lane byte offsets 0, 1 and 2; heights as three floats per cell
+from layout+0x27c; emission reads only B[0], the layer-0 data, while the walk stores B[1] and B[2]
+which are dead; record 0 weights scale by m[ei][0] and record 1 by m[ei][1] where the old model scaled
+all twelve by m[ei][0]; the step floats are
+`((B[0][0][o+k]-bias)*m[0][0] + (B[0][1][o+k]-bias)*m[0][1])*K`; the per-cell vertex count is an int
+array at a1 advancing 4 per cell, with ids as two ints per vertex from layout+0x294; and the layer-index
+compare reads [esp+0x64], which nothing writes, so it is modelled as an unassigned local with the
+expected C4700 warning. The blocker: native's frame is 0x154 with a0 in edi, while the corrected local
+set compiles to 0x150 with a0 in esi, and the prefix is decided by the whole local allocation rather
+than prologue text. One dead store also differs: native stores the 0x4356c0 result to [esp+0x68] where
+/O2 removes it from plain C, so it needs a source variable whose address escapes. The 1936-byte tlead
+pad is still in the file and untouched.
