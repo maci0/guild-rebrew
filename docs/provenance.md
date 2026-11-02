@@ -15792,3 +15792,16 @@ byte-identical apart from forward jump displacements. The remaining 56 bytes and
 alignment drift come from register homes: native hoists `mov edx,0x43340000` at 0xb90
 because the value is stored again in a later else body, while the literal form
 rematerializes it per use and emits 48 extra instructions.
+
+## 2026-11-02 — panel keeps structural fidelity over a positional dip
+
+`0x5BA910` source now carries the inverted 0x5bbde2 branch (`cmp [0x6abb00],-1; je
+0x5bbeb7` then `test v38; jne 0x5bbeb2`, with the long v38==0 arm inline and the lone
+call 0x5c5e70 out of line) and the enregistered `f.v98` value passed to the
+fcn_004c51f0 call. Both reproduce native block order and remove the 90 and 137-byte
+galign windows at 0x5bbdf3/0x5bbdf7, and the object falls from 12353 to 12329. The
+positional match drops 787 to 767 because this object is 381 bytes over native, so any
+size change reshuffles the whole compared tail; the change is kept deliberately as a
+fidelity step and the row is judged by drift windows and object size until the body
+reaches 11948. Remaining windows: 456 at 0x5bcb04, 379/353 near 0x5bd630, 202 at
+0x5bbc64, 186/179 near 0x5bc870, 152 at 0x5bac3b, 101 at 0x5bb604.

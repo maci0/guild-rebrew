@@ -199,6 +199,7 @@ int __cdecl fcn_005ba910(int a1, int a2)
 	int idx;
 	int i;
 	int j;
+	int h;
 	Ent5ba910* e;
 
 	f.v158 = 0;
@@ -873,9 +874,7 @@ l_da9:
 
 	/* 0x5bbdd5: keep the row selection cursor in sync with the open container */
 	if (*(int*) 0x6abb00 != -1) {
-		if (f.v38 != 0) {
-			fcn_005c5e70();
-		} else {
+		if (f.v38 == 0) {
 			f.v60 = fcn_005c5e70();
 			i = fcn_00471f80(f.v78);
 			if (f.v90 != i) {
@@ -890,6 +889,8 @@ l_da9:
 				}
 			}
 			f.v90 = i;
+		} else {
+			fcn_005c5e70();
 		}
 	}
 	/* 0x5bbeb7: mark the open container row in the item table */
@@ -1344,7 +1345,7 @@ l_5bcb82:
 	if ((*(char*) (idx + 0x20) & 1) != 0) {
 		goto l_5bcc9f;
 	}
-	f.v98 = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
+	h = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
 	f.v30 = f.v10 + 0xd8;
 	for (f.v1c = 3; f.v1c != 0; f.v1c--, f.v30 += 4) {
 		j = *(int*) f.v30;
@@ -1368,7 +1369,7 @@ l_5bcb82:
 		}
 		fcn_004c51f0(*(int*) (0x7f4ca4
 		                      + *(unsigned short*) 0x774970 * 0x21c),
-		             f.v9c, *(int*) (f.v98 + 2), f.v38, f.v24, 0);
+		             f.v9c, *(int*) (h + 2), f.v38, f.v24, 0);
 		fcn_00472380(j, 0, 0x64, 0);
 	}
 l_5bcc9f:
