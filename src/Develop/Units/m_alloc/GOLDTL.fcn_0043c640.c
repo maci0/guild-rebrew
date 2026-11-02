@@ -92,7 +92,12 @@ void __cdecl fcn_0043c640(Tile* t)
 	unsigned char* bestmap;
 	int n;
 	int off;
+	int* mat;
+	int cells;
 	float f;
+	int hh;
+	int hx;
+	int hy;
 
 	for (y = 0; y < t->W - 1; y++) {
 		y1 = y + 1;
@@ -109,6 +114,7 @@ void __cdecl fcn_0043c640(Tile* t)
 	cand = (unsigned char*) m_alloc(t->H * t->H, (const char*) 0x67a680);
 	bestmap = (unsigned char*) m_alloc(t->H * t->H, (const char*) 0x67a668);
 	idx = (int*) m_alloc((t->H + 1) * (t->H + 1) * 4, (const char*) 0x67a654);
+	cells = t->H * t->H;
 
 	for (y = 0; y < MATERIALS; y++) {
 		y1 = y + 1;
@@ -141,7 +147,7 @@ void __cdecl fcn_0043c640(Tile* t)
 				if (m != 0) {
 					continue;
 				}
-				memset(cand, 0, t->H * t->H);
+				memset(cand, 0, cells);
 				limitY = t->H * y1;
 				if (limitY > t->W - 1) {
 					limitY = t->W - 1;
@@ -193,21 +199,21 @@ void __cdecl fcn_0043c640(Tile* t)
 				if (n < count2) {
 					count2 = n;
 					v0 = count;
-					n = t->H * t->H;
+					n = cells;
 					memcpy(bestmap, cand, n);
 				}
 			}
 			off = (x + y * MATERIALS) * REGION_STRIDE;
-			r = (RegionRecord*) ((char*) t + off + 0xa0);
+			mat = (int*) ((char*) t + off + 0xbc);
 			for (i = MATERIALS; i != 0; i--) {
-				r->material = 2;
-				r = (RegionRecord*) ((char*) r + 0x34);
+				*mat = 2;
+				mat = (int*) ((char*) mat + 0x34);
 			}
 			if (count2 < SCORE_LIMIT) {
 				m = v0;
 				for (; m > 0; m >>= 1) {
-					r->material = (m & 1) == 1 ? 1 : 2;
-					r = (RegionRecord*) ((char*) r + 0x34);
+					*mat = (m & 1) == 1 ? 1 : 2;
+					mat = (int*) ((char*) mat + 0x34);
 				}
 			}
 			for (i = 0; i < MATERIALS; i++) {
@@ -246,7 +252,7 @@ void __cdecl fcn_0043c640(Tile* t)
 					m_FreeTracked(r->p00);
 					r->p00 = 0;
 				}
-				memset(map, 0, t->H * t->H);
+				memset(map, 0, cells);
 				limitY2 = t->H * y1;
 				if (limitY2 > t->W - 1) {
 					limitY2 = t->W - 1;
@@ -316,12 +322,17 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx = col != 0 ? t->jitter : 0;
 								jy = row != 0 ? t->jitter : 0;
+								hh = t->H;
+								hx = hh * x;
 								f = (float) fcn_0064d3f8() * g_662a18 * jx;
-								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col)] =
-									((float) (t->H * x + col) * t->vstep + f + f) - jx;
+								t->verts[2 * (t->W * (row + hh * y) + hx + col)] =
+									((float) (hx + col) * t->vstep + f + f) - jx;
+								hh = t->H;
+								hx = hh * x;
+								hy = hh * y + row;
 								f = (float) fcn_0064d3f8() * g_662a18 * jy;
-								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 1] =
-									((float) (t->H * y + row) * t->vstep + f + f) - jy;
+								t->verts[2 * (t->W * (row + t->H * y) + hx + col) + 1] =
+									(hy * t->vstep + f + f) - jy;
 							}
 							if (idx[v0 + 1] == -1) {
 								r->p04[count] = t->H * x +
@@ -330,12 +341,17 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx = col == t->H - 1 ? 0 : t->jitter;
 								jy = row != 0 ? t->jitter : 0;
+								hh = t->H;
+								hx = hh * x;
 								f = (float) fcn_0064d3f8() * g_662a18 * jx;
-								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 2] =
-									((float) (t->H * x + col + 1) * t->vstep + f + f) - jx;
+								t->verts[2 * (t->W * (row + hh * y) + hx + col) + 2] =
+									((float) (hx + col + 1) * t->vstep + f + f) - jx;
+								hh = t->H;
+								hx = hh * x;
+								hy = hh * y + row;
 								f = (float) fcn_0064d3f8() * g_662a18 * jy;
-								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 3] =
-									((float) (t->H * y + row) * t->vstep + f + f) - jy;
+								t->verts[2 * (t->W * (row + t->H * y) + hx + col) + 3] =
+									(hy * t->vstep + f + f) - jy;
 							}
 							if (idx[v1] == -1) {
 								r->p04[count] = t->H * x +
@@ -344,12 +360,17 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx = col != 0 ? t->jitter : 0;
 								jy = row == t->H - 1 ? 0 : t->jitter;
+								hh = t->H;
+								hx = hh * x;
 								f = (float) fcn_0064d3f8() * g_662a18 * jx;
-								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col)] =
-									((float) (t->H * x + col) * t->vstep + f + f) - jx;
+								t->verts[2 * (t->W * (row + 1 + hh * y) + hx + col)] =
+									((float) (hx + col) * t->vstep + f + f) - jx;
+								hh = t->H;
+								hx = hh * x;
+								hy = hh * y + row + 1;
 								f = (float) fcn_0064d3f8() * g_662a18 * jy;
-								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 1] =
-									((float) (t->H * y + row + 1) * t->vstep + f + f) - jy;
+								t->verts[2 * (t->W * (row + 1 + t->H * y) + hx + col) + 1] =
+									(hy * t->vstep + f + f) - jy;
 							}
 							if (idx[v1 + 1] == -1) {
 								r->p04[count] = t->H * x +
@@ -358,12 +379,17 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx = col == t->H - 1 ? 0 : t->jitter;
 								jy = row == t->H - 1 ? 0 : t->jitter;
+								hh = t->H;
+								hx = hh * x;
 								f = (float) fcn_0064d3f8() * g_662a18 * jx;
-								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 2] =
-									((float) (t->H * x + col + 1) * t->vstep + f + f) - jx;
+								t->verts[2 * (t->W * (row + 1 + hh * y) + hx + col) + 2] =
+									((float) (hx + col + 1) * t->vstep + f + f) - jx;
+								hh = t->H;
+								hx = hh * x;
+								hy = hh * y + row + 1;
 								f = (float) fcn_0064d3f8() * g_662a18 * jy;
-								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 3] =
-									((float) (t->H * y + row + 1) * t->vstep + f + f) - jy;
+								t->verts[2 * (t->W * (row + 1 + t->H * y) + hx + col) + 3] =
+									(hy * t->vstep + f + f) - jy;
 							}
 							if ((signed char) t->flags[t->W * (row + t->H * y) +
 										   t->H * x + col] < 0) {
@@ -440,12 +466,17 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx2 = col != 0 ? t->jitter : 0;
 								jy2 = row != 0 ? t->jitter : 0;
+								hh = t->H;
+								hx = hh * x;
 								f = (float) fcn_0064d3f8() * g_662a18 * jx2;
-								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col)] =
-									((float) (t->H * x + col) * t->vstep + f + f) - jx2;
+								t->verts[2 * (t->W * (row + hh * y) + hx + col)] =
+									((float) (hx + col) * t->vstep + f + f) - jx2;
+								hh = t->H;
+								hx = hh * x;
+								hy = hh * y + row;
 								f = (float) fcn_0064d3f8() * g_662a18 * jy2;
-								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 1] =
-									((float) (t->H * y + row) * t->vstep + f + f) - jy2;
+								t->verts[2 * (t->W * (row + t->H * y) + hx + col) + 1] =
+									(hy * t->vstep + f + f) - jy2;
 							}
 							if (idx[v0 + 1] == -1) {
 								r->p08[count] =
@@ -456,12 +487,17 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx2 = col == t->H - 1 ? 0 : t->jitter;
 								jy2 = row != 0 ? t->jitter : 0;
+								hh = t->H;
+								hx = hh * x;
 								f = (float) fcn_0064d3f8() * g_662a18 * jx2;
-								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 2] =
-									((float) (t->H * x + col + 1) * t->vstep + f + f) - jx2;
+								t->verts[2 * (t->W * (row + hh * y) + hx + col) + 2] =
+									((float) (hx + col + 1) * t->vstep + f + f) - jx2;
+								hh = t->H;
+								hx = hh * x;
+								hy = hh * y + row;
 								f = (float) fcn_0064d3f8() * g_662a18 * jy2;
-								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 3] =
-									((float) (t->H * y + row) * t->vstep + f + f) - jy2;
+								t->verts[2 * (t->W * (row + t->H * y) + hx + col) + 3] =
+									(hy * t->vstep + f + f) - jy2;
 							}
 							if (idx[v1] == -1) {
 								r->p08[count] =
@@ -472,12 +508,17 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx2 = col != 0 ? t->jitter : 0;
 								jy2 = row == t->H - 1 ? 0 : t->jitter;
+								hh = t->H;
+								hx = hh * x;
 								f = (float) fcn_0064d3f8() * g_662a18 * jx2;
-								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col)] =
-									((float) (t->H * x + col) * t->vstep + f + f) - jx2;
+								t->verts[2 * (t->W * (row + 1 + hh * y) + hx + col)] =
+									((float) (hx + col) * t->vstep + f + f) - jx2;
+								hh = t->H;
+								hx = hh * x;
+								hy = hh * y + row + 1;
 								f = (float) fcn_0064d3f8() * g_662a18 * jy2;
-								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 1] =
-									((float) (t->H * y + row + 1) * t->vstep + f + f) - jy2;
+								t->verts[2 * (t->W * (row + 1 + t->H * y) + hx + col) + 1] =
+									(hy * t->vstep + f + f) - jy2;
 							}
 							if (idx[v1 + 1] == -1) {
 								r->p08[count] =
@@ -488,12 +529,17 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx2 = col == t->H - 1 ? 0 : t->jitter;
 								jy2 = row == t->H - 1 ? 0 : t->jitter;
+								hh = t->H;
+								hx = hh * x;
 								f = (float) fcn_0064d3f8() * g_662a18 * jx2;
-								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 2] =
-									((float) (t->H * x + col + 1) * t->vstep + f + f) - jx2;
+								t->verts[2 * (t->W * (row + 1 + hh * y) + hx + col) + 2] =
+									((float) (hx + col + 1) * t->vstep + f + f) - jx2;
+								hh = t->H;
+								hx = hh * x;
+								hy = hh * y + row + 1;
 								f = (float) fcn_0064d3f8() * g_662a18 * jy2;
-								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 3] =
-									((float) (t->H * y + row + 1) * t->vstep + f + f) - jy2;
+								t->verts[2 * (t->W * (row + 1 + t->H * y) + hx + col) + 3] =
+									(hy * t->vstep + f + f) - jy2;
 							}
 							if (r->material == 1) {
 								v = &bestmap[row * t->H + col];

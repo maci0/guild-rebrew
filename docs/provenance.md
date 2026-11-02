@@ -19835,3 +19835,27 @@ nops. Sampled verdicts after repair: 0x41d8b0 ReportFatalError moves from SIZE_M
 the last batch reports 5485 checks with no errors or warnings. Seventy-five table-tail rows were held back for a
 separate decision and are since handled by the continuation described below; forty rows stay excluded, split into
 seven decode desyncs, twenty unclassified table or data edges and thirteen with data immediately before the run.
+
+## 2026-11-03 — crew dialog frame reaches native width
+
+`0x43C640` keeps the widened frame at 0x60, exactly native, with the prologue matching through offset 6, object
+5358 against native 5419, 36 relocations and lint clean. The match falls from 469 to 376 because the body now
+carries substantially more transcribed code; the frame was the gate, so the widened body was kept. Three shapes
+produced it: the record-init loop writes the material field directly at +0xbc through an int pointer with a 0x34
+stride over the eight strides and the count2 loop advances that same pointer, matching native's
+`lea 0xbc(ebx,eax); movl $2,(eax); add 0x34,eax; dec/jne`, where the older `r->material` form emitted
+`mov [ecx+0x1c],2`; `hh = t->H` and `hx = hh*x` are hoisted before each of the sixteen RNG calls with hx used in
+the verts index, matching native's -0x10 and -0x14 slots and its H*x reload after the call; and `cells = t->H*t->H`
+is a persistent local used at the memset of cand, the bestmap memcpy and the memset of map, which is the pure-C
+shape that buys the third frame slot. Three findings shape the next pass. The three-stage rep-stos clear cannot be
+produced from C on this profile, since ten spellings under the sp5-pp driver give the plain two-stage form, which
+agrees with docs/msvc6-c-shapes.md section 11 and docs/codegen-walls.md section 6b, so native's -0x58 store and its
+separate fild temp at -0x60 need reviewed assembly if they are wanted. `off` already owns a slot, so native's
+-0x5c is the third slot of that clear template rather than a different lifetime. And the frame does not reallocate
+registers, since forcing 0x60 with volatile locals reproduces the same offset-7 divergence at match 269. The gate
+is now the parameter register: native emits `56 / 8b 75 08` for `push esi; mov esi,[ebp+8]` while ours emits
+`8b 5d 08 / 33 d2` for `mov ebx,[ebp+8]; xor edx,edx`, caused by argument-slot reuse, because our build loads t into
+ebx once and zeroes [ebp+8] while native keeps t in esi, lets the bestmap `rep movsd` clobber esi and reloads t
+from [ebp+8] at 0x43c979, leaving its argument slot live and giving x a frame slot; native's roles are t=esi, y=edi
+and byte temporaries in bl. Current source .scratch/goldtl-0043c640/v16-cells-hx.c with v7-base.c as the 469
+baseline and NOTES.md holding the measurement table.
