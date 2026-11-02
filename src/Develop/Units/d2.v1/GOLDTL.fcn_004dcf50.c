@@ -34,7 +34,7 @@ int __cdecl fcn_004e4b40(int a1, int a2, char* s, int a4, int a5);
 int __cdecl fcn_00493e50(int a, int b);
 int __cdecl fcn_004938c0(void* m);
 void __cdecl fcn_00493920(void* m);
-void __cdecl fcn_004c51a0(int a, int b, int c, int d);
+int __cdecl fcn_004c51a0(int a, int b, unsigned char c, int d);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 float __cdecl fcn_004ff210(int a, int b);
 int __cdecl fcn_005c6270(int a, int b);

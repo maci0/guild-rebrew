@@ -17191,3 +17191,19 @@ differences and tick step from h0 to h1 (413-480). Not converged: the icon hit r
 about 60 short because native has four separate fcn_0047ccd0 end-mark calls at 0x468471, 0x468499,
 0x468508 and 0x468546 while the compiler tail-merges each f.v28 pair into one call; temp locals and
 argument changes produce byte-identical output and do not stop the merge.
+
+## 2026-11-02 — dialog helper prototype aligned
+
+`0x4DCF50` local prototype for fcn_004c51a0 said `void ... (int a, int b, int c, int d)` while
+src/client_dialog_helpers.h:135 declares `int __cdecl fcn_004c51a0(int a, int b, unsigned char
+kind, int amount)`, and the native evidence agrees: the third argument is a byte, since native
+emits `mov dl,[0x773d75]` where our int declaration produced movsx at three sites. The local
+declaration now matches the header and the return type, which takes the object from 8809 to 8799,
+one byte over native, and closes segment 296 to +2 and segment 315. Match reads 1784 against 1811
+for the wrong-typed build, and the change is kept because a prototype that contradicts the shared
+header is a defect regardless of its positional score. Two leads remain open from the same pass:
+native reads msg.id[] in all six vote loops (0x54 for id[0], 0x5c for id[2], at native offsets
+0x0acd, 0x1449, 0x1932 and 0x1c6c), so `*(int*)(a0+0x34/0x3c)` should become msg.id[0]/msg.id[2],
+which is faithful, gives 8796 to 8806 and closes vote segments but moves one slot (152/153) and
+needs a companion slot fix; and the best size seen, 8790, combines the corrected prototype with
+msg.text[1] moved before the p34 lookup.
