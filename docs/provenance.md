@@ -18092,3 +18092,29 @@ trims the label loops by exactly the missing seven bytes; this replaces the earl
 lever, since volatile idx combined with the pointer loads gave 4483. Rejected: posC[6] and buf[260]
 frame pads (frame 0x438 but worse layout, 395 to 398), hoisted block locals, and struct-field or if/else
 visibility forms.
+
+## 2026-11-03 — trade name dialog frame split and inter-aggregate slot
+
+`0x5B7880` keeps the CTL plus DATA split at frame 0x110c with match 233 against 299, object 3862 against
+3980, nine relocations and the first mismatch at 0x1f from 76. The match and prefix dips are accepted
+because the split restores struct-member promotion, which is the structural fact: f.win now reloads from
+frame 0x10 at exactly native's six sites (the store at 0x7d and loads at 0x458, 0xa3e, 0xaa3, 0xcc6,
+0xd32 and 0xf01), where the single aggregate reloaded it eighteen times and left EDI free. The extra
+4-byte slot between the aggregates is gone: the local `p` had stayed live across the 12-row loop, so the
+compiler reused EDI as `p` for `((char*)f.pg)[0xac]` in the loop condition, spilled p to frame 0x3c and
+pushed DATA to 0x40 for frame 0x1110. A CFG esp-delta analyzer (.scratch/tools/espframe.py) showed
+two.c storing edi to [esp+0x4c] at frame 0x3c and reloading it at 0x0225 while native has no such slot,
+and the fix is to assign the fcn_005463a0 result straight to the member and derive the iteration pointer:
+`c.pg = (int) fcn_005463a0(2, 0, 6, 3, *(int*)(a0 + 1)); c.pIt = (int*)(c.pg + 0xb0); c.tv3 = n;`. That
+ends p's live range and the frame is 0x110c. Two gaps remain. Native has 88 call sites and our source has
+85: the missing three are `d2_SetForm(rows[i].win, 2)` in the icon-match obj==0 branch and
+`d2_SetForm(rows[i].win, 2)` plus `io_AppendText(0x6811b0)` in the state==1 branch at native
+0x5b835f..0x5b83a4 with `[edi+0x50]=rows[i].win`; adding them as preceding statements reaches 88 but
+grows the object to 3901 and drops match to 239 because we then emit d2_SetForm before fcn_005101e0 and
+ftol where native orders fcn_005101e0, ftol, d2_SetForm, io_AppendText, fcn_00472250, so they are
+probably nested inside the io_AppendText or fcn_00472250 expression. And the prefix at 0x1f is a
+register-role cycle: native materialises -1 in EBP once (`or ebp,-1`) and reloads ent from frame 0x28,
+while ours materialises -1 in EAX per site, computes ent into EDI and keeps it there across the 12-row
+init so win takes EBX; eight initializer permutations, a chained assignment, ent before or after win and
+three win-local alias variants all failed to flip it. The pre-split source is at .scratch/blem_best.c and
+the current at .scratch/three.c.
