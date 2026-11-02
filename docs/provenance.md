@@ -16420,3 +16420,26 @@ match, object 6467, tables slid to 0x1898). Extent accounting: the negative ones
 effects (G owns two inline 16-instruction tails in native, w ends in its own 16-instruction copy
 sequence, B and percent and the ampersand group are the same effect), while the positive ones are
 staging in a, f, T, N and r that native does not have.
+
+## 2026-11-02 — transport scene block and arms collapse
+
+`0x4DA690` 787 to 869 with the object growing 7220 to 7459, prefix 0x9b, frame 0x900 and four
+pushes held. The missing scene block 0x4db332..0x4db5c5 is inserted after the 0x9b0eb4 packet
+loop: gate s48 > s4C (native frames 0x58 and 0x5c, an int[3] row counter array), the
+0x68c098+0x12d6 arm with a do-while over 0x9b0e30 comparing *(int*)(p+4) against s10[1] with
+states 0/-0x28/0xa/-0x14, the else arm storing gm_lookup(s00[0]), 0x68c074+0x12d7, the
+count-guarded state-5 loop and the 0x4e8240 wait loop, joining into 0x4727a0(s14,0),
+0x471af0(s14,0), io 0x6811b0, 0x471e30(s60), 0x471e30(s5C), 0x4e4de0(0x3e8) and
+0x5358e0(0x6b5c60); it adds 597 bytes and emits 606 against native's 594. The arms block
+collapses to one io per outer arm with the nested branches only computing the string offset,
+plus one 0x4727a0(s60,2) and one fcn_004da510(*(int*)0x772514, 0, 0/1/2) per outer arm (the
+earlier mention of fcn_004da627 was a typo), saving 82 bytes. Padding code dropped about 330
+bytes: the 62 scalar address escapes became three variadic fcn_004e4de0 calls with one argument
+per local, and four array calls plus (int)order were dropped. Frame anchoring is why 7057 is not
+reachable by trimming: sitzung = frame - 0x71c, so prefix 0x9b needs frame 0x900, the scalar
+region is forced only by address-taking individual locals, volatile locals do not allocate
+(frame 0x86c), and the minimum padding cost is about 5 bytes per local, about 310 total, against
+real code that is itself 81-95 bytes short. Remaining: the second packet pass is short about 219
+bytes of real code (native 0x4dbf2e..0x4dc00e is 224 against our 74, and 0x4dc0da..0x4dc14e is
+116 against 47), the object runs +44 before the row body, and scalar slots still differ
+(object s0C at 0x2c against native 0x1c) so match gains need slot-level reconstruction.

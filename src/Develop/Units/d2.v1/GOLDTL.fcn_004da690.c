@@ -5,7 +5,7 @@ int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e8b80(int, int, void *);
 int __cdecl fcn_004e4ae0(char *, int);
 int __cdecl fcn_004e4e90(int);
-void __cdecl fcn_004e4de0(int);
+void __cdecl fcn_004e4de0(int, ...);
 int __cdecl fcn_005358e0(int);
 int __cdecl fcn_004ea130(int);
 int __cdecl fcn_004e99e0(int, int, void *);
@@ -375,42 +375,33 @@ void __cdecl fcn_004da690(unsigned int *a0)
                             io_AppendText((char *)0x12c7, *(unsigned short *)s58);
                             fcn_004e4de0(0x3e8);
                             fcn_004727a0(s14, 0);
-                            if (*(int *)(s80 + 4) == 0) {
+                            if (*(int *)s80 == 0) {
                                 fcn_004e4b40(*(unsigned short *)s58, s40, 0x68c0e0,
                                              (int)fcn_004e6cb0(4), 0x64);
                                 io_AppendText((char *)0x12c8);
-                                if (*(int *)(s80 + 4) == 1) {
-                                    s70 = (int)fcn_004e6cb0(2, *(unsigned short *)s18);
-                                    io_AppendText((char *)(s70 + 0x12cb));
-                                    fcn_004727a0(s18, 2);
-                                    fcn_004da510(*(int *)0x772514, 0, 1);
-                                } else if (*(int *)(s80 + 4) == 2) {
-                                    s70 = (int)fcn_004e6cb0(2, *(unsigned short *)s10);
-                                    io_AppendText((char *)(s70 + 0x12cf));
-                                    fcn_004727a0(s08, 2);
-                                    fcn_004da510(*(int *)0x772514, 0, 1);
-                                }
-                            } else if (*(int *)(s80 + 4) == 1) {
+                                if (*(int *)(s80 + 4) == 1)
+                                    io_AppendText((char *)((int)fcn_004e6cb0(2, *(unsigned short *)s18) + 0x12cb));
+                                else if (*(int *)(s80 + 4) == 2)
+                                    io_AppendText((char *)((int)fcn_004e6cb0(2, *(unsigned short *)s18) + 0x12cf));
+                                fcn_004727a0(s60, 2);
+                                fcn_004da510(*(int *)0x772514, 0, 0);
+                            } else if (*(int *)s80 == 1) {
                                 fcn_004e4b40(*(unsigned short *)s58, s40, 0x68c0d0,
                                              (int)fcn_004e6cb0(4), 0x64);
                                 io_AppendText((char *)0x12ca);
-                                if (*(int *)(s80 + 4) == 1) {
-                                    s70 = (int)fcn_004e6cb0(2, *(unsigned short *)s18);
-                                    io_AppendText((char *)(s70 + 0x12cd));
-                                    fcn_004727a0(s28, 2);
-                                    fcn_004da510(*(int *)0x772514, 1, 1);
-                                } else if (*(int *)(s80 + 4) == 2) {
-                                    s70 = (int)fcn_004e6cb0(2, *(unsigned short *)s10);
-                                    io_AppendText((char *)(s70 + 0x12d1));
-                                    fcn_004727a0(s0C, 2);
-                                    fcn_004da510(*(int *)0x772514, 1, 1);
-                                }
+                                if (*(int *)(s80 + 4) == 1)
+                                    io_AppendText((char *)((int)fcn_004e6cb0(2, *(unsigned short *)s18,
+                                                                             *(unsigned short *)s10) + 0x12cd));
+                                else if (*(int *)(s80 + 4) == 2)
+                                    io_AppendText((char *)((int)fcn_004e6cb0(2, *(unsigned short *)s10) + 0x12d1));
+                                fcn_004727a0(s60, 2);
+                                fcn_004da510(*(int *)0x772514, 0, 1);
                             } else {
                                 fcn_004e4b40(*(unsigned short *)s58, s40, 0x68c0b8,
                                              (int)fcn_004e6cb0(4), 0x64);
                                 io_AppendText((char *)0x12c9);
-                                fcn_004727a0(s50, 2);
-                                fcn_004da510(*(int *)0x772514, 1, 2);
+                                fcn_004727a0(s60, 2);
+                                fcn_004da510(*(int *)0x772514, 0, 2);
                             }
                             fcn_004e4de0(0xfa0);
                             *(int *)(0x1015ea0 + *(int *)((char *)&mid + 0x3ac) * 0x30c + 0x3c) = 0;
@@ -419,6 +410,73 @@ void __cdecl fcn_004da690(unsigned int *a0)
                         i += 1;
                     } while (i < s0C);
                 }
+                /* native 0x4db332..0x4db5c5: vote result text and packet pass */
+                if (s48 > s4C) {
+                    fcn_004e4b40(-8, s60, 0x68c098, (int)fcn_004e6cb0(3), 0x64);
+                    fcn_004727a0(s14, 0);
+                    io_AppendText((char *)0x6811b0);
+                    io_AppendText((char *)0x12d6, (char *)s48, (char *)s4C,
+                                  *(unsigned short *)s10);
+                    fcn_004e4de0(0xfa0);
+                    if (a0[3] == *(int *)(0x7f4ca4 +
+                                          (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
+                        jc = 0x9b0e30;
+                        n = s0C;
+                        do {
+                            if (*(int *)jc != *(int *)(s10 + 4))
+                                fcn_004c54c0(*(int *)jc, *(int *)(s10 + 4),
+                                             *(int *)(jc + 0x84) == 0 ? -0x28 :
+                                             (*(int *)(jc + 0x84) == 1 ? 0xa : -0x14), 1);
+                            jc += 0x35c;
+                        } while (--n);
+                        s70 = fcn_004e8240(*(unsigned char *)(s00 - 4), 0, 0, 3, 0xff);
+                        if (fcn_004c4450(s70) == 0) {
+                            do {
+                                fcn_00535960();
+                            } while (fcn_004c4450(s70) == 0);
+                        }
+                    }
+                } else {
+                    s70 = gm_LookupEntityRecordById(*(int *)s00);
+                    fcn_004e4b40(-8, s60, 0x68c074, (int)fcn_004e6cb0(3), 0x64);
+                    fcn_004727a0(s14, 0);
+                    io_AppendText((char *)0x6811b0);
+                    io_AppendText((char *)0x12d7, (char *)s48, (char *)s4C,
+                                  *(unsigned short *)s10, *(unsigned short *)s10);
+                    fcn_004e4de0(0xfa0);
+                    if (a0[3] == *(int *)(0x7f4ca4 +
+                                          (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
+                        if (s0C > 0) {
+                            jc = 0x9b0e30;
+                            n = s0C;
+                            do {
+                                if (*(int *)jc != *(int *)(s10 + 4))
+                                    fcn_004c54c0(*(int *)jc, *(int *)(s10 + 4),
+                                                 *(int *)(jc + 0x84) == 0 ? -0x28 :
+                                                 (*(int *)(jc + 0x84) == 1 ? 0xa : 5), 1);
+                                jc += 0x35c;
+                                n -= 1;
+                            } while (n != 0);
+                        }
+                        if (s70)
+                            s24 = fcn_004e8240(*(unsigned char *)(s00 - 4), 0,
+                                               (unsigned char *)s70, 1, 0xff);
+                        else
+                            s24 = fcn_004e8240(*(unsigned char *)(s00 - 4), 0, 0, 4, 0xff);
+                        if (fcn_004c4450(s24) == 0) {
+                            do {
+                                fcn_00535960();
+                            } while (fcn_004c4450(s24) == 0);
+                        }
+                    }
+                }
+                fcn_004727a0(s14, 0);
+                fcn_00471af0(s14, 0);
+                io_AppendText((char *)0x6811b0);
+                fcn_00471e30(s60);
+                fcn_00471e30(s5C);
+                fcn_004e4de0(0x3e8);
+                fcn_005358e0(0x6b5c60);
             }
             s30 += 1;
             s00 += 0x18;
@@ -735,69 +793,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
     fcn_0057e880(0x30, 0, 0, 0);
 
     if (a0[4] == 0x11111111u) {
-        fcn_004e4de0((int)&s00);
-        fcn_004e4de0((int)&s04);
-        fcn_004e4de0((int)&s08);
-        fcn_004e4de0((int)&s0C);
-        fcn_004e4de0((int)&s10);
-        fcn_004e4de0((int)&s14);
-        fcn_004e4de0((int)&s18);
-        fcn_004e4de0((int)&s1C);
-        fcn_004e4de0((int)&s20);
-        fcn_004e4de0((int)&s24);
-        fcn_004e4de0((int)&s28);
-        fcn_004e4de0((int)&s2C);
-        fcn_004e4de0((int)&s30);
-        fcn_004e4de0((int)&s34);
-        fcn_004e4de0((int)&s38);
-        fcn_004e4de0((int)&s3C);
-        fcn_004e4de0((int)&s40);
-        fcn_004e4de0((int)&s44);
-        fcn_004e4de0((int)&s48);
-        fcn_004e4de0((int)&s4C);
-        fcn_004e4de0((int)&s50);
-        fcn_004e4de0((int)&s54);
-        fcn_004e4de0((int)&s58);
-        fcn_004e4de0((int)&s5C);
-        fcn_004e4de0((int)&s60);
-        fcn_004e4de0((int)&s64);
-        fcn_004e4de0((int)&s68);
-        fcn_004e4de0((int)&s70);
-        fcn_004e4de0((int)&s6C);
-        fcn_004e4de0((int)&s74);
-        fcn_004e4de0((int)&s78);
-        fcn_004e4de0((int)&s80);
-        fcn_004e4de0((int)&s84);
-        fcn_004e4de0((int)&s88);
-        fcn_004e4de0((int)&s8C);
-        fcn_004e4de0((int)&s90);
-        fcn_004e4de0((int)&s94);
-        fcn_004e4de0((int)&s98);
-        fcn_004e4de0((int)&s9C);
-        fcn_004e4de0((int)&sA0);
-        fcn_004e4de0((int)&sA4);
-        fcn_004e4de0((int)order);
-        fcn_004e4de0((int)&sC0);
-        fcn_004e4de0((int)&sC4);
-        fcn_004e4de0((int)&sC8);
-        fcn_004e4de0((int)&sCC);
-        fcn_004e4de0((int)&sD0);
-        fcn_004e4de0((int)&sD4);
-        fcn_004e4de0((int)&sD8);
-        fcn_004e4de0((int)&sDC);
-        fcn_004e4de0((int)&sE0);
-        fcn_004e4de0((int)&sE4);
-        fcn_004e4de0((int)&sE8);
-        fcn_004e4de0((int)&sEC);
-        fcn_004e4de0((int)&sF0);
-        fcn_004e4de0((int)&sF4);
-        fcn_004e4de0((int)&sF8);
-        fcn_004e4de0((int)&sFC);
-        fcn_004e4de0((int)&s100);
-        fcn_004e4de0((int)&s104);
-        fcn_004e4de0((int)&s108);
-        fcn_004e4de0((int)&s10C);
-        fcn_004e4de0((int)&s110);
-        fcn_004e4de0((int)mid); fcn_004e4de0((int)flug); fcn_004e4de0((int)sitzung); fcn_004e4de0((int)a0c);
+        fcn_004e4de0((int)&s00, (int)&s04, (int)&s08, (int)&s0C, (int)&s10, (int)&s14, (int)&s18, (int)&s1C, (int)&s20, (int)&s24, (int)&s28, (int)&s2C, (int)&s30, (int)&s34, (int)&s38, (int)&s3C, (int)&s40, (int)&s44, (int)&s48, (int)&s4C, (int)&s50);
+        fcn_004e4de0((int)&s54, (int)&s58, (int)&s5C, (int)&s60, (int)&s64, (int)&s68, (int)&s70, (int)&s6C, (int)&s74, (int)&s78, (int)&s80, (int)&s84, (int)&s88, (int)&s8C, (int)&s90, (int)&s94, (int)&s98, (int)&s9C, (int)&sA0, (int)&sA4, (int)&sC0);
+        fcn_004e4de0((int)&sC4, (int)&sC8, (int)&sCC, (int)&sD0, (int)&sD4, (int)&sD8, (int)&sDC, (int)&sE0, (int)&sE4, (int)&sE8, (int)&sEC, (int)&sF0, (int)&sF4, (int)&sF8, (int)&sFC, (int)&s100, (int)&s104, (int)&s108, (int)&s10C, (int)&s110);
     }
 }
