@@ -17681,3 +17681,22 @@ the per-lane byte offsets unconfirmed; the x87 chain order is inferred because t
 the three component chains; and the file still carries the 1936-byte `_tlead_GOLDTL_fcn_00435910`
 pad in the .text data segment, which was sized for a 12-byte body and needs the text lead pass re-run
 once the body is final.
+
+## 2026-11-02 — version dialog constant unification documented
+
+`0x527F60` keeps its reconstructed state at 2120 match and object 4183; the follow-up pass produced no
+keeper and the file is the committed version. Evidence recorded in docs/codegen-walls.md: the body is
+structurally complete (instruction-level agreement 1090 of 1200, frame exact, all creator and field
+stores in native order) and the stuck prefix at 0xcf is a constant-register unification. Native has
+`mov edi,3` at 0xcf and materialises `mov esi,0x43` later at 0x528166 with a plain immediate store at
+0x528b49, while our TU unifies every source-level 0x43 in the function and hoists the register to the
+pre-branch slot. The decisive experiment changed only the g_6a2580 store value from 0x43 to 0x44 and
+the object then emitted `mov edi,3` at 0xcf and `mov esi,0x43` at 0x206, byte-identical to native at
+both sites, which shows the original source value at that store is not a source-level 0x43 even though
+native emits the immediate 0x43; establishing it needs evidence from the original TU rather than more
+C-shape attempts. Rejected spellings, all still hoisting: block-scoped `int kind = 0x43`, nested
+declarator, function-scope variable with separate assignment, promoted struct field, `three + 0x40`,
+`'C'`, `0x43u`, a per-block local at the g_6a2580 site, and the cross-path variable (which spills the
+frame to 0x314). The three callees still without project definitions are 0x0050b7c0 (gm_QueryEntitySum,
+extern declarations only), 0x0066080a and 0x0050d270 (a source file exists but the symbol is listed
+unresolved).

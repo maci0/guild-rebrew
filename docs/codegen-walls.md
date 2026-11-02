@@ -2436,3 +2436,23 @@ from a, so T -70 against a +123 is one fact; native a's two tails live in T's an
 a literal expressions 6535/804, a with strlen temporaries 6527/808, D with cp_n 6471/837, w with
 a literal memcpy 6495/842, T+a+D 6479/812, the u rewrite 6447/817, and w with u/U/b/B/e rewrites
 6259/785 where the now-identical bodies cross-jump into one block native keeps separate.
+
+TL527f60 is capped by a constant-register unification. Its object is 4183 against native 4198 with
+match 2120 (50.5 percent), instruction-level agreement 1090 of 1200 over the whole body and the
+frame exact (`xor eax,eax; sub esp,0x310`, push ebx/ebp/esi/edi, no chkstk, a0 at [esp+0x324],
+text/name/buf at +0x20/+0x120/+0x220), so the body is structurally complete. The stuck prefix is
+at 0xcf: native has `mov edi,3` there and materialises `mov esi,0x43` later at 0x528166 (offset
+0x206, after the first fcn_0046f740 call) with a plain immediate store at 0x528b49, while our TU
+unifies every source-level 0x43 in this function and hoists the register to the pre-branch slot.
+The decisive experiment: changing only the g_6a2580 store value from 0x43 to 0x44 makes the
+object emit `mov edi,3` at 0xcf and `mov esi,0x43` at 0x206, byte-identical to native at exactly
+those two sites, so the original source value at that store is not a source-level 0x43 even though
+native emits the immediate 0x43. Rejected spellings, all still hoisting to 0xcf: block-scoped
+`int kind = 0x43`, nested-block declarator, function-scope variable with a separate assignment, a
+promoted struct field, `three + 0x40`, `'C'`, `0x43u`, a per-block local at the g_6a2580 site, and
+using the cross-path variable at that site (which spills and moves the frame to 0x314). The
+remaining differences are downstream of esi occupancy and scheduling: native reuses esi as scratch
+at 0x5287da, 0x528839 and 0x528a90, keeps `push 0x551` and `push 0x585` interleaved with the
+preceding field stores, emits `mov [0x774720],eax` where we store the constant 0, loads the two
+0x1015f48/0x10161bc slots through `lea ..,[ecx*4+0x1015f40]; mov eax,[eax+8]`, and hoists the
+shared `push 0` of the two d2_SetForm calls above the `je`.
