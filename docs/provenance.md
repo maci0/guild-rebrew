@@ -19594,3 +19594,25 @@ swapped bodies. The last block should use slot 0x00 for its index, shared with i
 our source still uses outer. And the g_6a3424 handles-release arm on the `outer <= 0xf` path is not byte
 verified. Tools in .scratch/512ee0/ (cmp.py, diff.py, frame.py) with variants orig.c, final.c, final2.c (current),
 step1.c, best3.c and var_dowhile.c.
+
+## 2026-11-03 — production message prologue lane exhausted
+
+`0x569FF0` stays at 335 with object 3732, 38 relocations, frame 0x738, ten scalars and the first mismatch at
+offset 7; the prologue lane kept nothing and the source is restored byte-identical to C_final_335.c. Across about
+one hundred and fifty variants the prologue never changed: ours is `push ebx; mov ebx,[esp+0x740]; push ebp`, e
+never leaves ebx, and the load never leaves offset 7. The zero-initialiser slots stay at 0x14, 0x34, 0x2c and
+0x18 against native's 0x34, 0x2c, 0x30 and 0x1c, with all our stores coming from ebp where native mixes ebx and
+ebp. Measured negatives: twenty-four initialiser permutations only permute the four stores while each variable's
+slot is fixed, and declaration order, case order and `register` on the parameter are byte-identical; all 126
+four-element subsets of num, pc, hits, cnt2, pb, px, q, pa and n were compiled, and q, px or pb in the subset is a
+real slot lever since the set pb, px, num, pc, hits moves num from 0x14 to 0x34, but no subset reaches native's
+slot set and none loads e into esi; and loading pb at entry or zero-initialising pb and px changes the prologue
+shape while e stays in ebx. One new fact landed in scratch: the case-5 tail at native 0x56abc0 and 0x56abe9 shows
+the fcn_00509570 result is not stored back into q, and the following gate reads [esi+2], the old q, so native gates
+on q where our source keeps a separate pc. Transcribed as .scratch/569ff0/cand_hall2.c with the q gate, q handle,
+a qq temporary and inits for num, q, cnt2 and pc, it measures 339 at object 3728 with 40 relocations, frame 0x738,
+mismatch 7 and slots 0x10, 0x28, 0x18, 0x14 stored from ebp, ebp, ebp and edi, so it is above the current match but
+the prologue and slot map do not converge and it stays in scratch under the keep rule; hall1 with the gate and
+temporary only and the old initialisers is 306 at 3736. Recommendation recorded: q and pc identity in the tail is
+the root-cause lead for both the slot map and e's home, and the parameter home looks like whole-frame colouring
+under docs/msvc6-allocator.md sections 62 to 70 rather than a prologue spelling. Notes in .scratch/569ff0/NOTES.md.
