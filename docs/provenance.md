@@ -17424,3 +17424,20 @@ strlen +96, f path-2 fresh strlen -72, and a plain-path fresh strlen +92 (all sp
 `j = *(char*)p` in G scored 1041 at the same size and tables but native zero-extends the icon index
 (`xor ecx,ecx; mov cl,[eax]; mov eax,ecx` at 0x51c120), so it is a behaviour change and was
 rejected.
+
+## 2026-11-02 — panel frame reservation documented
+
+`0x467920` keeps its state at 540 match and object exactly 4699; the frame attempt was negative
+and the source is restored byte-identical to the previous kept state. The extra four bytes are an
+unused allocator slot below the struct: the frame equals sizeof(struct) plus 4, the struct base sits
+at S+4, and nothing in the object references [esp], [esp+4] or [esp+0x25c]. The frame tracks the
+struct exactly (buf 0x204 gives 0x264, buf 0x1fc gives 0x25c) but is not sized by it, and removing
+any single region still leaves 0x260: the hit test, the four fcn_0047b620 lookups, the sprintf
+varargs, hs in the gauge ends, the x/y locals, the b local, the goto labels, the ratio, n, the fill
+blocks, the gauge ends and the label, icon and trailing blocks each keep it; removing the hit test
+and the end marks together from the full function still leaves 0x260. Block-scope width locals, a
+box-before-width order, a named width pointer, x/y inlining, a predicate-forced zero and
+pre-assigned b/n/x/y all leave 0x260 with the first mismatch at offset 2. Frame 0x25c is reachable
+only by shrinking the real 0x200 buffer to 0x1fc, which is not a candidate. Recorded in
+docs/codegen-walls.md as following the function's call and loop topology rather than the register
+plan.

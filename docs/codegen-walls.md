@@ -2365,3 +2365,19 @@ the asm operands to [ebp-4]/[ebp-0xc] (454) all lose. The later occurrences at 0
 0xec6 already match because the constants land in ebx/ecx/edi in both builds. Statement
 permutations of this transcription are exhausted; a structural change to the float fill
 whose store order the allocator could schedule differently is the untried direction.
+
+TL467920 keeps a 4-byte frame reservation the source cannot remove. The object is exactly
+4699 with match 540 and the first mismatch at offset 2 (frame immediate), and the extra
+word sits below the struct: frame equals sizeof(struct) + 4, the struct base is at S+4, and
+no instruction in the object references [esp], [esp+4] or [esp+0x25c]. The frame tracks the
+struct exactly (buf 0x204 gives 0x264, buf 0x1fc gives 0x25c), so the reservation is not
+sized by the struct. Removing any single region leaves 0x260: the hit test, the four
+fcn_0047b620 glyph lookups, the sprintf varargs, hs in the gauge ends, the x/y locals, the
+b local, the goto labels, the ratio, n, the fill blocks, the gauge ends, and the label, icon
+and trailing blocks each keep it, and removing the hit test plus the end marks from the full
+function still leaves 0x260, so several regions independently make the allocator reserve the
+slot. Block-scope width locals, a box-before-width order, a named width pointer, x/y
+inlining, a predicate-forced zero and pre-assigned b/n/x/y all leave 0x260 and offset 2.
+Frame 0x25c is reachable only by shrinking the real 0x200 buffer to 0x1fc, which is not a
+candidate. The reservation follows the function's call and loop topology rather than the
+register plan, so further progress needs a different angle than source-level register hints.
