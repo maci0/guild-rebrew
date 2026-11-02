@@ -374,12 +374,14 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		}
 		if (resources != 0 && RD_DRAW(object) != 0) {
 			for (off = 0; off < 0xdec; off += 0x4a4) {
+				char* entries;
 				if (*(char**) (RD_DRAW(object) + off + 0x40c) != 0) {
-					if (*(char**) (RD_DRAW(object) + off + 0x410) != 0) {
+					entries = *(char**) (RD_DRAW(object) + off + 0x410);
+					if (entries != 0) {
 						count = *(int*) (*(char**) (RD_DRAW(object) + off + 0x40c) + 0x1e4);
-						for (i = 0; i < count; i++) {
-							if (*(char**) (*(char**) (RD_DRAW(object) + off + 0x410) + i * 4) != 0) {
-								fcn_0045ce90(*(char**) (*(char**) (RD_DRAW(object) + off + 0x410) + i * 4));
+						for (type = 0; type < count; type++) {
+							if (*(char**) (entries + type * 4) != 0) {
+								fcn_0045ce90(*(char**) (entries + type * 4));
 							}
 						}
 					}

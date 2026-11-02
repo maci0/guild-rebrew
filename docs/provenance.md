@@ -20107,3 +20107,27 @@ down to 0x1c3 with one `mov ax,[ebp]` at 0x56aa66 rather than against the random
 `io_FormatTextBuffer` at 0x56a99e targets b100 at 0x238 and not b400, and that spelling is avoided only because it
 hangs cl.exe at this row. Tools .scratch/569ff0/cmp2.py and slots3.py with the slot dumps ns3.txt and os3.txt and
 the aligned diff d980b.txt, current source C_final_980.c and KEEP_980b.c, previous state BAK_903_pre.c.
+
+## 2026-11-03 — terrain object hoist closes its four-byte excess
+
+`0x447110` (rd_object) reaches object 3348, exactly native, with match 3314 of 3348 and 114 relocations; its
+status is NEAR_MATCHING because 34 same-size encoding differences remain. The live source is
+src/Develop/DieGildeAddOn/game/GOLDTL.rd_object.c, the only file claiming that address, and the edit is confined to
+the rd_object definition under a narrow authorization for this one row. The four-byte cause was structural: the
+reference is 3348 bytes made of 3276 bytes of code ending in the `ret` at 0x447ddb followed by 72 bytes of jump
+tables at 0x447ddc and 0x447e00, while the previous object was 3352 bytes made of 3277 bytes of code ending at
+0xccc plus a three-byte alignment pad `8d 49 00` and the same tables at 0xcd0 and 0xcf4. The extra code byte was in
+the tail inner loop, where the source inlined `*(char**)(RD_DRAW(object)+off+0x410)` and MSVC therefore reloaded
+[ebp+0x1ec] for six bytes and recomputed `[eax+ebx+0x410]` for seven bytes on every iteration, where native hoists
+the list pointer into esi once and indexes with `mov ecx,[esi+eax*4]` for three bytes. Hoisting that pointer into a
+block-local `char* entries` inside the for body, assigning it once from the same expression, and indexing with the
+existing `type` variable makes the code 3276 bytes, aligns the tables at 0xccc, and removes the pad, so the object
+is exactly 3348. The remaining 34 differences are all same-size encodings, 32 inside the RD_LIGHT_NINE region at
+offsets 1638 to 1800, 2186 to 2270 and 2489 to 2762, where the base and index order in the SIB byte and one store
+order differ, and two in the tail at offsets 3182 and 3189 where we emit `mov ecx,[edx+ebx+0x40c]` and
+`lea eax,[edx+ebx]` against native's `[ebx+edx]`; flipping the source operand order for those addresses produces
+identical bytes, so they appear to be encoding decisions rather than source order. One metadata mishap is recorded
+here because it was repaired: testing another address against this file wrote the rd_object size and source hash
+into the neighbouring row 0x447e30, which was restored from the committed store and then rd_object was re-promoted
+on its own, so that row is back at its size 1319 and rd_object now carries status NEAR_MATCHING at 3348 with the
+current source hash. Scratch copies .scratch/row447110/rd_object.S1.c and v6.copy.c hold the verified shape.

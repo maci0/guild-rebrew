@@ -425724,7 +425724,7 @@ kind = "FUNCTION"
 status = "NEAR_MATCHING"
 
 ["GOLDTL.0x00447110".verification]
-source_hash = "e912063ea17c28e0998470a1a632992ba100f8a2ed143fd33874d901728c529f"
+source_hash = "c13a867d09ca70af2964f5a7a1ff693547093ff3e1eea68ed127c488593e9435"
 reference_hash = "0e8c54efb89dc41d4d75559bd0778299738dad975187fa6f37fc1938ed68b9a9"
 reference_size = "3348"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -425735,11 +425735,10 @@ module = "GOLDTL"
 va = "0x447110"
 context_hash = ""
 defines = "[]"
-input_hash = "6b71d5bc63b899463d0a96987bac832fbd3924de7fbeb74162517afd0e13238e"
+input_hash = "6cc395d5c83688b837178a778714f31bbe4c34acebca4ca447f0ae640b7db2b3"
 status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-02T23:01:35+00:00"
-
+measured_at = "2026-11-02T23:11:09+00:00"
 
 [["GOLDTL.0x00447110".status_history]]
 old_status = "SIZE_MISMATCH"
