@@ -604010,7 +604010,7 @@ blocker = "Prefix body only, 3/3808: type/base stride, the 0x6ac300/0x6ac314/0x6
 blocker_delta = 3692
 
 ["GOLDTL.0x005b7880".verification]
-source_hash = "fa7420b620b6f48615141d036b5cc64f636b8d4283fcbd88e9e3d00a0cf3ba96"
+source_hash = "b7e0cfaf85b0b45a3516e6c001dd0b0bd10f0bfe02e62dd09e7fae5b562adde7"
 reference_hash = "066d956be0d2df38cf99af278fd7c9a2ffef443c532f49d0b236f55f25d3628b"
 reference_size = "3794"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -604021,10 +604021,10 @@ module = "GOLDTL"
 va = "0x5b7880"
 context_hash = ""
 defines = "[]"
-input_hash = "72e0bb1f5c2a2651506bb24a70acd3a42c7d1103e8fce046b40e16634c1125a4"
+input_hash = "68dad334b59e994b3b761e2cc6e55a84d4ff983891b012f4cc5d64a4493a15be"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T16:50:09+00:00"
+measured_at = "2026-11-02T17:03:09+00:00"
 ["GOLDTL.0x0054ac70"]
 size = 1209
 file = "src/Develop/DieGildeAddOn/game/fcn_0054ac70.c"

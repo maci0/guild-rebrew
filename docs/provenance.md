@@ -18161,3 +18161,24 @@ and match 428, the only candidate above 404, while volatile hA gives 4314, sel 4
 and all six 4367. The native cascade ent to eax, -1 to ebx, 0 to ebp and base to edx follows from -1
 living in ebx, which only happens when the lea chain owns eax at materialisation time, and every source
 form tested makes MSVC hoist the constant and take eax. A blocker is recorded on the row.
+
+## 2026-11-03 — trade name dialog calls complete and prologue matched to 0x4a
+
+`0x5B7880` reaches 300 match with object 4019, all 88 calls in native order and the frame at 0x110c, and
+the prologue is now byte-identical from 0x00 to 0x4a with the first difference at 0x4b, `or edi,-1`
+against native `or ebp,-1`. The three formerly missing calls are in. For obj==0 the shape that reproduces
+native's fcn_005101e0, ftol, d2_SetForm, io_AppendText, fcn_00472250 order splits the ftol into a
+preceding statement: `n = (int)fcn_005101e0(...); d2_SetForm(win,2);
+c.hC = fcn_00472250(win,2,io_AppendText((char*)0x1a22, n, (char*)0x220));`, which gives exactly native's
+`add esp,0x30` accounting; comma forms and nesting d2_SetForm inside the io call both emit it too early.
+For state==1 a plain `d2_SetForm(win,2); io_AppendText((char*)0x6811b0);` before the fcn_00472250 call
+matches. The frame went back to a single aggregate with all members at native offsets rather than the
+split, because the split leaves ent resident in EDI while the merged form lets ent spill and the -1
+hoist: with ent stored last and its assignment moved after hRadio, plus the -1 stores reordered to
+native's hC, hB, hD, hA, hRadio, the store sequence reproduces native exactly apart from the register
+name. The split variant with the same calls measures 245 at object 3908 with the first mismatch still
+0x1f and is saved at .scratch/blem_split_245.c; the current source is .scratch/blem_merged_300.c. Still
+open: the object is 225 bytes over because the counters i and cnt spill to the frame where native keeps
+them in EBX; -1 wants EBP rather than EDI; and native stores cnt=0 and compares `cmp ebx,edx` while ours
+folds i to a constant, so the row-init counter in native is not i (a y-counter variant measured 275 and a
+pointer-loop variant 266).

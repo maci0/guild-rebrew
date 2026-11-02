@@ -14,7 +14,8 @@
  *    0x32), row refresh from the entity table at 0x7f4ca0 (0x21c-byte
  *    entities), the old-area diff and the label/value repaint.
  *
- * Frame layout (native esp offsets; four saved registers sit below it):
+ * The frame is one aggregate at chkstk offset 0.  Frame layout (native esp
+ * offsets; four saved registers sit below it):
  *   0x000 15 scalar slots
  *   0x03c message packet, 0xf8 bytes (f28/f2c/f30/w34, flag at +0x36,
  *         handle at +0x58, per-row flags at +0x5c, trailing value at +0x8c)
@@ -87,15 +88,12 @@ typedef struct {
 typedef struct {
 	int* pIt; int pg; int cnt; int hA; char* win; int tv; int hB; int hC;
 	int tv3; int hD; unsigned char* ent; int hRadio; int nSlots; int tv2; int hE;
-} CTL;
-/* SIZE 0x3c */
-typedef struct {
 	MSG msg; Row rows[12];
 	char txtName[0x60]; char txtWorker[0x80]; char txtDefault[0x80];
 	char txtNum[0x80]; int slots[0x26];
 	char numB[0x60]; char numA[0x60]; char text[0x400]; Row old[12];
-} DATA;
-/* SIZE 0x10d0 */
+} FRAME;
+/* SIZE 0x110c */
 
 #define GUI(i) (((Ctl*) *(void**) 0x1015ea0)[i])
 
@@ -143,150 +141,149 @@ int __cdecl fcn_00505370(char*);
 /* ADDRESS: GOLDTL 0x005b7880 */
 void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 {
-	CTL c;
-	DATA d;
+	FRAME f;
 	char* p;
 	Row* r;
 	int i = 0;
 	int n;
 	int y;
 
-	c.ent = (unsigned char*) (lpGebaeudePROT + a0[0] * 0x24d);
-	c.nSlots = 0;
-	c.hA = -1;
-	c.hB = -1;
-	c.hC = -1;
-	c.hD = -1;
-	c.hRadio = -1;
-	c.win = (char*) fcn_00534c40(a1, 0x6a42c8, 4, 0x6ac340, 0x6ac300,
+	f.nSlots = 0;
+	f.hC = -1;
+	f.hB = -1;
+	f.hD = -1;
+	f.hA = -1;
+	f.hRadio = -1;
+	f.ent = (unsigned char*) (lpGebaeudePROT + a0[0] * 0x24d);
+	f.win = (char*) fcn_00534c40(a1, 0x6a42c8, 4, 0x6ac340, 0x6ac300,
 	                           0x6ac314, 0x6ac328);
-	fcn_005350d0(c.win);
-	fcn_00517c00(*(unsigned short*) (a0 + 0x27), 1, 2, d.numA);
-	fcn_00517c00(*(unsigned short*) (a0 + 0x25), 1, 2, d.numB);
+	fcn_005350d0(f.win);
+	fcn_00517c00(*(unsigned short*) (a0 + 0x27), 1, 2, f.numA);
+	fcn_00517c00(*(unsigned short*) (a0 + 0x25), 1, 2, f.numB);
 	p = fcn_0050dc90((int) a0);
 	if (p == 0) {
-		strcpy(d.txtName, *(char**) 0x14abc28);
+		strcpy(f.txtName, *(char**) 0x14abc28);
 	} else {
-		fcn_00517c00(*(unsigned short*) p, 1, 1, d.txtName);
+		fcn_00517c00(*(unsigned short*) p, 1, 1, f.txtName);
 	}
-	d2_SetForm(*(int*) (c.win + 0x228), 3);
+	d2_SetForm(*(int*) (f.win + 0x228), 3);
 	io_AppendText((char*) 0x68beac);
 	io_AppendText((char*) 0x6ac33c);
-	c.hE = fcn_00472250(*(int*) (c.win + 0x228), 3,
+	f.hE = fcn_00472250(*(int*) (f.win + 0x228), 3,
 	                    io_AppendText((char*) 0x1a20));
-	d2_SetForm(*(int*) (c.win + 0x228), 3);
+	d2_SetForm(*(int*) (f.win + 0x228), 3);
 	for (i = 0; i < 4; i++) {
-		d2_SetForm(*(int*) (c.win + 0x228 + i * 4), 1);
+		d2_SetForm(*(int*) (f.win + 0x228 + i * 4), 1);
 		io_AppendText((char*) 0x1a1d);
 		if (i == 0) {
-			d2_SetForm(*(int*) (c.win + 0x228), 5);
+			d2_SetForm(*(int*) (f.win + 0x228), 5);
 		} else {
-			d2_SetForm(*(int*) (c.win + 0x228 + i * 4), 4);
+			d2_SetForm(*(int*) (f.win + 0x228 + i * 4), 4);
 		}
 		io_AppendText((char*) 0x6a2310, (char*) 0x1a37, i);
 	}
-	d2_SetForm(*(int*) (c.win + 0x230), 3);
+	d2_SetForm(*(int*) (f.win + 0x230), 3);
 
-	c.tv3 = *(int*) (0x1015f4c + *(int*) 0x772514 * 0x3cc) / 2;
-	c.tv2 = *(int*) (0x1015f50 + *(int*) 0x772514 * 0x3cc) / 2;
+	f.tv3 = *(int*) (0x1015f4c + *(int*) 0x772514 * 0x3cc) / 2;
+	f.tv2 = *(int*) (0x1015f50 + *(int*) 0x772514 * 0x3cc) / 2;
 	for (i = 0; i < 12; i++) {
-		d.rows[i].obj = 0;
-		d.rows[i].icon = -1;
+		f.rows[i].obj = 0;
+		f.rows[i].icon = -1;
 	}
 
-	c.pIt = (int*) (c.win + 0x22c);
-	c.cnt = 0;
-	c.pg = 1;
+	f.pIt = (int*) (f.win + 0x22c);
+	f.cnt = 0;
+	f.pg = 1;
 	for (;;) {
-		if ((int) (c.ent[0x232] + c.ent[0x231]) <= i) {
+		if ((int) (f.ent[0x232] + f.ent[0x231]) <= i) {
 			break;
 		}
-		if (c.cnt / 2 >= 2) {
-			c.cnt = 0;
-			c.pg++;
-			c.pIt++;
-			if (c.pg > 3) {
+		if (f.cnt / 2 >= 2) {
+			f.cnt = 0;
+			f.pg++;
+			f.pIt++;
+			if (f.pg > 3) {
 				break;
 			}
 		}
-		d2_SetForm(*c.pIt, 3);
-		c.tv = c.cnt % 2 * c.tv3 + 0x10;
-		d.rows[i].x = c.tv;
-		d.rows[i].y = c.cnt / 2 * c.tv2 + 0x11;
-		c.tv = c.tv + 0x18;
-		d.rows[i].icon = fcn_0046f740(c.tv, d.rows[i].y, 0x5db,
+		d2_SetForm(*f.pIt, 3);
+		f.tv = f.cnt % 2 * f.tv3 + 0x10;
+		f.rows[i].x = f.tv;
+		f.rows[i].y = f.cnt / 2 * f.tv2 + 0x11;
+		f.tv = f.tv + 0x18;
+		f.rows[i].icon = fcn_0046f740(f.tv, f.rows[i].y, 0x5db,
 		                              *(int*) 0x772514);
 		if (i == 0) {
-			c.hRadio = fcn_004693b0(1, d.rows[i].icon);
+			f.hRadio = fcn_004693b0(1, f.rows[i].icon);
 		} else {
-			fcn_00469470(c.hRadio, d.rows[i].icon);
+			fcn_00469470(f.hRadio, f.rows[i].icon);
 		}
-		c.tv -= 0x36;
-		d.rows[i].label = fcn_0046fac0(c.tv, d.rows[i].y - 0x11,
+		f.tv -= 0x36;
+		f.rows[i].label = fcn_0046fac0(f.tv, f.rows[i].y - 0x11,
 		                               *(char**) 0x14abc28,
 		                               *(int*) 0x772514);
-		GUI(d.rows[i].icon).f5c = 1;
-		GUI(d.rows[i].label).w = 0xa0;
-		GUI(d.rows[i].label).f6c = 1;
-		d.rows[i].value = fcn_0046fac0(c.tv, d.rows[i].y + 0x44,
+		GUI(f.rows[i].icon).f5c = 1;
+		GUI(f.rows[i].label).w = 0xa0;
+		GUI(f.rows[i].label).f6c = 1;
+		f.rows[i].value = fcn_0046fac0(f.tv, f.rows[i].y + 0x44,
 		                               (char*) 0x6b5c60,
 		                               *(int*) 0x772514);
-		d.rows[i].obj = 0;
-		GUI(d.rows[i].value).w = 0xa0;
-		GUI(d.rows[i].value).f6c = 1;
-		d.rows[i].x1c = -1;
-		d.rows[i].bar = -1;
+		f.rows[i].obj = 0;
+		GUI(f.rows[i].value).w = 0xa0;
+		GUI(f.rows[i].value).f6c = 1;
+		f.rows[i].x1c = -1;
+		f.rows[i].bar = -1;
 		for (n = 0; n < 6; n++) {
-			d.rows[i].a[n] = -1;
+			f.rows[i].a[n] = -1;
 		}
 		i++;
-		c.cnt++;
+		f.cnt++;
 		if (i >= 12) {
 			break;
 		}
 	}
-	c.cnt = i;
+	f.cnt = i;
 
 	d2_SetOverlayAnimation(0, 0);
 	while (fcn_005373e0((void*) 0x5b7880, 0x677c7)) {
 		if (*(int*) 0x14ce8e0) {
 			*(int*) 0x774654 = 1;
 		}
-		fcn_005350d0(c.win);
-		fcn_00534c20(c.win);
+		fcn_005350d0(f.win);
+		fcn_00534c20(f.win);
 		if (*(char*) 0x14cf950 == 0xcd) {
-			fcn_00535550(c.win);
+			fcn_00535550(f.win);
 		}
 		if (*(char*) 0x14cf950 == 0xcb) {
-			fcn_00535560(c.win);
+			fcn_00535560(f.win);
 		}
-		if (*(char*) (c.win + 0x270)) {
+		if (*(char*) (f.win + 0x270)) {
 			goto L870d;
 		}
-		if (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == c.hE
-		    && c.nSlots != 0) {
+		if (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == f.hE
+		    && f.nSlots != 0) {
 			n = fcn_005b5750();
 			if (n == 0) {
 				goto L7e3d;
 			}
-			c.tv2 = n / c.nSlots;
-			y = c.tv2 / 3;
+			f.tv2 = n / f.nSlots;
+			y = f.tv2 / 3;
 			if (fcn_00526010(
 			        (void*) (0x7f4ca0
 			                 + *(unsigned short*) 0x774970 * 0x21c),
-			        fcn_0050b750(c.tv2, *(unsigned char*) 0x773d75),
+			        fcn_0050b750(f.tv2, *(unsigned char*) 0x773d75),
 			        *(unsigned char*) 0x773d75)) {
-				c.pIt = (int*) &d.rows[0].obj;
-				c.pg = c.cnt;
-				while (c.pg != 0) {
-					p = (char*) *c.pIt;
+				f.pIt = (int*) &f.rows[0].obj;
+				f.pg = f.cnt;
+				while (f.pg != 0) {
+					p = (char*) *f.pIt;
 					if (p != 0) {
 						fcn_004c4eb0(0x6ac2bc);
 						fcn_004c5150(
 						    *(int*) (p + 4), -1,
 						    *(unsigned char*) 0x773d75,
 						    fcn_0050b750(
-						        c.tv2,
+						        f.tv2,
 						        *(unsigned char*)
 						            0x773d75));
 						fcn_004c54c0(
@@ -297,8 +294,8 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 						                   * 0x21c));
 						fcn_004c4ef0(0x6ac2bc);
 					}
-					c.pIt = (int*) ((char*) c.pIt + 0x5c);
-					c.pg--;
+					f.pIt = (int*) ((char*) f.pIt + 0x5c);
+					f.pg--;
 				}
 			}
 			fcn_004c5150(
@@ -306,21 +303,21 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 			    *(int*) (0x7f4ca4
 			             + *(unsigned short*) 0x774970 * 0x21c),
 			    *(unsigned char*) 0x773d75,
-			    fcn_0050b750(c.tv2, *(unsigned char*) 0x773d75));
+			    fcn_0050b750(f.tv2, *(unsigned char*) 0x773d75));
 		}
 	L7e3d:
-		n = c.cnt;
+		n = f.cnt;
 		for (i = 0; i < 0x114; i++) {
-			((int*) d.old)[i] = ((int*) d.rows)[i];
+			((int*) f.old)[i] = ((int*) f.rows)[i];
 		}
 		if (n > 0) {
 			for (i = 0; i < n; i++) {
-				d.rows[i].obj = 0;
+				f.rows[i].obj = 0;
 			}
 		}
-		c.nSlots = fcn_00505d00((unsigned char*) a0, d.slots);
+		f.nSlots = fcn_00505d00((unsigned char*) a0, f.slots);
 		for (i = 0; i < 12; i++) {
-			n = d.slots[0x19 + i];
+			n = f.slots[0x19 + i];
 			if (n == 0xffff) {
 				continue;
 			}
@@ -328,53 +325,53 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 			if (*(char*) (0x7f4e04 + n * 0x21c) != 0) {
 				continue;
 			}
-			for (y = 0; y < c.cnt; y++) {
-				if (d.rows[y].obj == (unsigned char*) p) {
+			for (y = 0; y < f.cnt; y++) {
+				if (f.rows[y].obj == (unsigned char*) p) {
 					break;
 				}
 			}
-			if (y < c.cnt) {
+			if (y < f.cnt) {
 				continue;
 			}
-			for (y = 0; y < c.cnt; y++) {
-				if (d.rows[y].obj == 0) {
-					d.rows[y].obj = (unsigned char*) p;
+			for (y = 0; y < f.cnt; y++) {
+				if (f.rows[y].obj == 0) {
+					f.rows[y].obj = (unsigned char*) p;
 					break;
 				}
 			}
 		}
-		if (c.cnt > 0) {
-			c.pg = c.cnt;
+		if (f.cnt > 0) {
+			f.pg = f.cnt;
 			i = 0;
-			while (c.pg != 0) {
-				if (d.rows[i].obj != d.old[i].obj) {
-					if (d.rows[i].x1c != -1) {
-						fcn_0046b2b0(d.rows[i].x1c);
-						d.rows[i].x1c = -1;
+			while (f.pg != 0) {
+				if (f.rows[i].obj != f.old[i].obj) {
+					if (f.rows[i].x1c != -1) {
+						fcn_0046b2b0(f.rows[i].x1c);
+						f.rows[i].x1c = -1;
 					}
-					if (d.rows[i].bar != -1) {
-						fcn_0046b2b0(d.rows[i].bar);
-						d.rows[i].bar = -1;
+					if (f.rows[i].bar != -1) {
+						fcn_0046b2b0(f.rows[i].bar);
+						f.rows[i].bar = -1;
 					}
 					for (y = 0; y < 6; y++) {
-						if (d.rows[i].a[y] != -1) {
+						if (f.rows[i].a[y] != -1) {
 							fcn_0046b2b0(
-							    d.rows[i].a[y]);
-							d.rows[i].a[y] = -1;
+							    f.rows[i].a[y]);
+							f.rows[i].a[y] = -1;
 						}
 					}
 				}
 				i++;
-				c.pg--;
+				f.pg--;
 			}
 		}
 
-		c.pg = (int) fcn_005463a0(2, 0, 6, 3, *(int*) (a0 + 1));
-		c.pIt = (int*) (c.pg + 0xb0);
-		c.tv3 = n;
+		f.pg = (int) fcn_005463a0(2, 0, 6, 3, *(int*) (a0 + 1));
+		f.pIt = (int*) (f.pg + 0xb0);
+		f.tv3 = n;
 		i = 0;
 		if (n > 0) {
-			r = d.rows;
+			r = f.rows;
 			do {
 				if (r->obj != 0) {
 					if (r->x1c == -1) {
@@ -385,8 +382,8 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 						    *(int*) 0x772514);
 						fcn_00517c00(
 						    *(unsigned short*) r->obj, 1,
-						    1, d.txtNum);
-						fcn_0046f940(r->label, d.txtNum);
+						    1, f.txtNum);
+						fcn_0046f940(r->label, f.txtNum);
 						GUI(r->label).f6c = 1;
 						GUI(r->label).w = 0xa0;
 						r->value = fcn_004677e0(
@@ -397,21 +394,21 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 						GUI(r->value).f4c = 1;
 					}
 					if (r->value != -1) {
-						c.tv = fcn_0050f950(
+						f.tv = fcn_0050f950(
 						    *(unsigned short*) r->obj,
 						    *(unsigned short*) 0x774970);
 						fcn_00472380(
 						    r->value, 0, 0x64,
-						    (int) ((c.tv + 128.0) * 100.0
+						    (int) ((f.tv + 128.0) * 100.0
 						           * 0.00392156862745098));
 					}
-				} else if (c.pg != 0
-				           && ((char*) c.pg)[0xac] == 0x13
-				           && *c.pIt != 0) {
-					strcpy(d.txtWorker,
+				} else if (f.pg != 0
+				           && ((char*) f.pg)[0xac] == 0x13
+				           && *f.pIt != 0) {
+					strcpy(f.txtWorker,
 					       *(char**) 0x14abbb0);
 					r->state = 2;
-					fcn_0046f940(r->label, d.txtWorker);
+					fcn_0046f940(r->label, f.txtWorker);
 					GUI(r->label).w = 0xa0;
 					GUI(r->label).h = 0x28;
 				} else {
@@ -429,28 +426,28 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 							r->a[y] = -1;
 						}
 					}
-					strcpy(d.txtDefault,
+					strcpy(f.txtDefault,
 					       *(char**) 0x14abc28);
 					r->state = 0;
-					fcn_0046f940(r->label, d.txtDefault);
+					fcn_0046f940(r->label, f.txtDefault);
 					GUI(r->label).w = 0xa0;
 					GUI(r->label).h = 0x28;
 					fcn_0046f940(r->value,
 					             (char*) 0x6b5c60);
 				}
 				r++;
-				c.pIt++;
-				c.tv3--;
-			} while (c.tv3 != 0);
+				f.pIt++;
+				f.tv3--;
+			} while (f.tv3 != 0);
 		}
 
-		if (c.hB != -1 && c.hA != -1 && d.rows[c.hA].obj == 0) {
-			c.hA = -1;
-			c.hB = -1;
-			c.hC = -1;
-			c.hD = -1;
+		if (f.hB != -1 && f.hA != -1 && f.rows[f.hA].obj == 0) {
+			f.hA = -1;
+			f.hB = -1;
+			f.hC = -1;
+			f.hD = -1;
 			for (i = 0; i < 3; i++) {
-				d2_SetForm(*(int*) (c.win + 0x228 + i * 4), 2);
+				d2_SetForm(*(int*) (f.win + 0x228 + i * 4), 2);
 				io_AppendText((char*) 0x6811b0);
 			}
 		}
@@ -458,133 +455,134 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 			goto L870d;
 		}
 		for (i = 0; i < 12; i++) {
-			if (d.rows[i].icon != *(int*) 0x67d370) {
+			if (f.rows[i].icon != *(int*) 0x67d370) {
 				continue;
 			}
 			for (y = 0; y < 3; y++) {
-				d2_SetForm(*(int*) (c.win + 0x228 + y * 4), 2);
+				d2_SetForm(*(int*) (f.win + 0x228 + y * 4), 2);
 				io_AppendText((char*) 0x6811b0);
 			}
-			c.hA = i;
-			c.hB = -1;
-			c.hC = -1;
-			c.hD = -1;
-			if (d.rows[i].obj == 0) {
-				c.hC = fcn_00472250(
-				    d.rows[i].win, 2,
-				    io_AppendText(
-				        (char*) 0x1a22,
-				        (int) fcn_005101e0(
-				            (unsigned char*) (0x7f4ca0
-				                              + *(unsigned short*) (
-				                                    a0 + 0x27)
-				                                    * 0x21c),
-				            a0[0], -1, 1),
-				        (char*) 0x220));
-			} else if (d.rows[i].state == 1) {
-				c.hB = fcn_00472250(
-				    d.rows[i].win, 2,
+			f.hA = i;
+			f.hB = -1;
+			f.hC = -1;
+			f.hD = -1;
+			if (f.rows[i].obj == 0) {
+				n = (int) fcn_005101e0(
+				    (unsigned char*) (0x7f4ca0
+				                      + *(unsigned short*) (a0 + 0x27)
+				                            * 0x21c),
+				    a0[0], -1, 1);
+				d2_SetForm(f.rows[i].win, 2);
+				f.hC = fcn_00472250(f.rows[i].win, 2,
+				                    io_AppendText(
+				                        (char*) 0x1a22, n,
+				                        (char*) 0x220));
+			} else if (f.rows[i].state == 1) {
+				d2_SetForm(f.rows[i].win, 2);
+				io_AppendText((char*) 0x6811b0);
+				f.hB = fcn_00472250(
+				    f.rows[i].win, 2,
 				    io_AppendText(
 				        (char*) 0x1a21,
-				        *(unsigned short*) d.rows[i].obj));
-				if (*(char*) (d.rows[i].obj + 0x165)
-				    == c.ent[0x230]) {
-					c.hD = fcn_00472250(
-					    d.rows[i].win, 2,
+				        *(unsigned short*) f.rows[i].obj));
+				if (*(char*) (f.rows[i].obj + 0x165)
+				    == f.ent[0x230]) {
+					f.hD = fcn_00472250(
+					    f.rows[i].win, 2,
 					    io_AppendText(
 					        (char*) 0x1a25,
-					        *(unsigned short*) d.rows[i].obj));
+					        *(unsigned short*) f.rows[i].obj));
 				}
 			}
 		}
-		if (*(int*) 0x67d370 == c.hC && c.hA != -1) {
+		if (*(int*) 0x67d370 == f.hC && f.hA != -1) {
 			p = (char*) fcn_005463a0(2, 0, 6, 3,
 			                         *(int*) (a0 + 1));
 			if (p != 0) {
-				*(int*) (p + 0xb0 + c.hA * 4) = 1;
+				*(int*) (p + 0xb0 + f.hA * 4) = 1;
 			} else {
-				memset(&d.msg, 0, 0xf8);
-				d.msg.f0c = *(int*) (a0 + 1);
-				d.msg.type = 6;
-				d.msg.b36 = 1;
-				d.msg.f30 = *(int*) 0x7f4c08;
-				d.msg.f08 = *(int*) (0x7f4ca4
+				memset(&f.msg, 0, 0xf8);
+				f.msg.f0c = *(int*) (a0 + 1);
+				f.msg.type = 6;
+				f.msg.b36 = 1;
+				f.msg.f30 = *(int*) 0x7f4c08;
+				f.msg.f08 = *(int*) (0x7f4ca4
 				                     + *(unsigned short*) 0x774970
 				                           * 0x21c);
-				d.msg.f28 = *(int*) 0x7f4c00;
-				d.msg.f2c = *(int*) 0x7f4c04;
-				d.msg.w34 = *(short*) 0x7f4c0c;
-				d.msg.f5c[c.hA] = 1;
+				f.msg.f28 = *(int*) 0x7f4c00;
+				f.msg.f2c = *(int*) 0x7f4c04;
+				f.msg.w34 = *(short*) 0x7f4c0c;
+				f.msg.f5c[f.hA] = 1;
 				if (fcn_00505370((char*) a0) != 0) {
-					d.msg.f8c = -1;
+					f.msg.f8c = -1;
 				} else {
-					d.msg.f8c = *(int*) (*(int*) 0x7746cc
+					f.msg.f8c = *(int*) (*(int*) 0x7746cc
 					                     + 2);
 				}
-				d.msg.b59 = 0;
-				d.msg.b58 = 0x13;
-				fcn_004c5530(&d.msg);
+				f.msg.b59 = 0;
+				f.msg.b58 = 0x13;
+				fcn_004c5530(&f.msg);
 			}
-			c.hA = -1;
+			f.hA = -1;
 			for (i = 0; i < 3; i++) {
-				d2_SetForm(*(int*) (c.win + 0x228 + i * 4), 2);
+				d2_SetForm(*(int*) (f.win + 0x228 + i * 4), 2);
 				io_AppendText((char*) 0x6811b0);
 			}
 			goto L870d;
 		}
-		if (*(int*) 0x67d370 == c.hB && c.hA != -1) {
+		if (*(int*) 0x67d370 == f.hB && f.hA != -1) {
 			if (fcn_00526120(*(char**) 0x14abbf8, 1) != 0) {
 				for (i = 0; i < 3; i++) {
 					d2_SetForm(
-					    *(int*) (c.win + 0x228 + i * 4), 2);
+					    *(int*) (f.win + 0x228 + i * 4), 2);
 					io_AppendText((char*) 0x6811b0);
 				}
-				memset(&d.msg, 0, 0xf8);
-				d.msg.type = 0x31;
-				d.msg.b36 = 1;
-				d.msg.f08 = *(int*) (0x7f4ca4
+				memset(&f.msg, 0, 0xf8);
+				f.msg.type = 0x31;
+				f.msg.b36 = 1;
+				f.msg.f08 = *(int*) (0x7f4ca4
 				                     + *(unsigned short*) 0x774970
 				                           * 0x21c);
-				d.msg.f0c = *(int*) (a0 + 1);
-				d.msg.f28 = *(int*) 0x7f4c00;
-				d.msg.f2c = *(int*) 0x7f4c04;
-				d.msg.f30 = *(int*) 0x7f4c08;
-				d.msg.w34 = *(short*) 0x7f4c0c;
-				d.msg.b58 = *(int*) (d.rows[c.hA].obj + 4);
-				fcn_004c5530(&d.msg);
-				c.hA = -1;
+				f.msg.f0c = *(int*) (a0 + 1);
+				f.msg.f28 = *(int*) 0x7f4c00;
+				f.msg.f2c = *(int*) 0x7f4c04;
+				f.msg.f30 = *(int*) 0x7f4c08;
+				f.msg.w34 = *(short*) 0x7f4c0c;
+				f.msg.b58 = *(int*) (f.rows[f.hA].obj + 4);
+				fcn_004c5530(&f.msg);
+				f.hA = -1;
 			}
 			goto L870d;
 		}
-		if (*(int*) 0x67d370 == c.hD && c.hA != -1) {
-			p = (char*) d.rows[c.hA].obj;
+		if (*(int*) 0x67d370 == f.hD && f.hA != -1) {
+			p = (char*) f.rows[f.hA].obj;
 			if (*(int*) (p + 0x174) < 4) {
-				fcn_0051af00(d.text, (char*) 0x1a27, 4);
-				fcn_00526120(d.text, 0);
+				fcn_0051af00(f.text, (char*) 0x1a27, 4);
+				fcn_00526120(f.text, 0);
 			} else {
-				memset(&d.msg, 0, 0xf8);
-				d.msg.type = 0x32;
-				d.msg.b36 = 2;
-				d.msg.f08 = *(int*) (0x7f4ca4
+				memset(&f.msg, 0, 0xf8);
+				f.msg.type = 0x32;
+				f.msg.b36 = 2;
+				f.msg.f08 = *(int*) (0x7f4ca4
 				                     + *(unsigned short*) 0x774970
 				                           * 0x21c);
-				d.msg.f0c = *(int*) (a0 + 1);
-				d.msg.f28 = *(int*) 0x7f4c00;
-				d.msg.f2c = *(int*) 0x7f4c04;
-				d.msg.f30 = *(int*) 0x7f4c08;
-				d.msg.w34 = *(short*) 0x7f4c0c;
-				d.msg.b58 = *(int*) (p + 4);
-				fcn_004c5530(&d.msg);
-				c.hA = -1;
+				f.msg.f0c = *(int*) (a0 + 1);
+				f.msg.f28 = *(int*) 0x7f4c00;
+				f.msg.f2c = *(int*) 0x7f4c04;
+				f.msg.f30 = *(int*) 0x7f4c08;
+				f.msg.w34 = *(short*) 0x7f4c0c;
+				f.msg.b58 = *(int*) (p + 4);
+				fcn_004c5530(&f.msg);
+				f.hA = -1;
 			}
 		}
 	L870d:
 		;
 	}
 
-	if (c.hRadio != -1) {
-		fcn_00469510(c.hRadio);
+	if (f.hRadio != -1) {
+		fcn_00469510(f.hRadio);
 	}
-	fcn_00534f30(c.win);
+	fcn_00534f30(f.win);
 	fcn_00532ef0();
 }
