@@ -19214,3 +19214,33 @@ holds the chain result with no source lever found, and the `mov cl,[0x773d75]` s
 byte-identical. Next lever recorded: force a fifth live web in the for-body to perturb the ordering, or
 reconstruct the comparison from a different original-C idiom such as a short-typed helper result stored
 through a local pointer. Current source .scratch/f540020/base_v5.c, ROUND6.md.
+
+## 2026-11-03 — production message copies take their evidenced forms
+
+`0x569FF0` moves from 306 to 303 with object 3636 and frame `sub esp,0x738` held, and the state taken is the
+one the listing supports rather than the highest match. The listing evidence fixes three sites: the 0x19e6
+copy is `strcat(b200, b400)` at 0x56ac21, the num-block copy is `strcat(b400, b100)` at 0x56ab11, and the
+flag-arm copy is `strcat(b400, b100)` at 0x56a993, each showing the double repne-scasb plus `dec edi` append
+rather than a copy loop. The kept 334 variant used strcpy at the first two sites because strcat cost three
+appearance points, and that trade is rejected here: strcat appends to existing content where strcpy overwrites,
+the destinations are non-empty at those points, so the two forms differ in behaviour and a byte count does not
+pay for wrong code. With both pair copies as strcat the object is 3636 and the frame holds at 0x738. The slot
+layout now equals the listing, with X the offset after `sub esp,0x738` and the printed offsets in the notes
+being X+0x10: ten scalar dwords at 0x00..0x27 with the gm_SetupEntityQuery result q in a scalar home of its own
+at X 0x20, SEARCH at 0x28..0x37 holding obj, a radius of 5000.0f, owner and found, then b200 at 0x38, b100 at
+0x238 and b400 at 0x338 with the 0x400 memset ending exactly at 0x738, identical to native, so the strcat
+expansion no longer needs an extra dword and the struct is not displaced. Three argument fixes from the listing
+are also in this state: `fcn_0055c050(pa)` because native pushes edi at 0x56a878 and edi holds the variable
+loaded at 0x56a801 and 0x56a86c which is also the px source at 0x56a80b and the while compare source at
+0x56a7ae; `fcn_0050c710(pa, 7, 1)` because native pushes 1, 7 and edi at 0x56a807, 0x56a809 and 0x56a80f; and
+the flag-arm strcat. Ranking measured across a 64-variant sweep of the three copy sites crossed with the
+argument fixes: the kept state at 334 uses strcpy at the first two sites, the runner-ups are 320, 319, 317 and
+312, the previous baseline 306, and the evidence-complete state taken here is 303 at 3636 with the frame held.
+Open in the order that matters: the first mismatch at 0x8 is the parameter register, ours pushes ebx and ebp
+then loads ebp where native pushes ebx, ebp and esi then loads esi and pushes edi, so every match count here is
+positional and native also zeroes ebx, edi and ebp where we now zero ebx and esi; case 5 is 0x5f short and the
+shortfall is exactly the two copy loops that native writes as strcat byte loops; and native's fcn_004c51a0
+fourth argument and its `&flag` at 0x56a9f4 both address X 0x04, which our source splits between `flag` and
+`num`, and that split is the likely reason our scalar set needs an eleventh dword when the other two strcats are
+enabled. Kept source .scratch/569ff0/SC_both_bpair_303.c with KEEP_334.c, KEEP_306.c, SC_all3_strcat_277.c and
+the ranking table in NOTES.md.

@@ -325,7 +325,7 @@ void __cdecl fcn_00569ff0(char* e)
 				flag = 0;
 			}
 		}
-		if (fcn_0055c050(cnt2) == 0) {
+		if (fcn_0055c050(pa) == 0) {
 			flag = 0;
 		}
 		fcn_004f4f60(0x17, 1,
@@ -343,13 +343,13 @@ void __cdecl fcn_00569ff0(char* e)
 			fcn_0050c5d0(pa, &v);
 			hits = (int) (((float) (gm_RandomMod(0x32) & 0xffff) * 0.001f
 			        + 1.0) * (float) v);
-			num = (int) (((float) fcn_0050c710(pb, 1, 1) * 0.0025f
+			num = (int) (((float) fcn_0050c710(pa, 7, 1) * 0.0025f
 			        + 1.0f) * (float) hits);
 			if (num < 0) {
 				num = 0;
 			}
 			io_FormatTextBuffer(b400, 0x68bea4, num);
-			strcpy(b400, b100);
+			strcat(b400, b100);
 			fcn_004c51a0(*(int*) (q + 4), *(int*) (px + 4), *(char*) 0x773d75, flag);
 			fcn_004c4510(pb, *(int*) (pb + 1));
 			fcn_004c4670(4, 1, 0x69, &flag);
@@ -409,7 +409,7 @@ void __cdecl fcn_00569ff0(char* e)
 		*(int*) (pb + 0x4d) += flag;
 		if (*(char*) (pc + 2) == 6 || *(char*) (pc + 2) == 7) {
 			io_FormatTextBuffer(b200, 0x19e6, 0x19c1, *(unsigned short*) px, pa);
-			strcpy(b200, b400);
+			strcat(b200, b400);
 			fcn_00545e80(*(int*) (pc + 4), *(int*) (pc + 4), b200, 1, 0x5f0,
 			        *(int*) (pa + 1), -1, 0, "_NACHRICHTEN_HS_74");
 		}
