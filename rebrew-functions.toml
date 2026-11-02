@@ -425716,15 +425716,15 @@ updated_by = "test"
 size = 3348
 note = "Goal72 rd_object name attested by directly referenced native diagnostic; recursive four-argument scene-object reader, pointer/NULL result. Kuna omits main switch; no C adopted. Exact native tables, version branches, callers and real Gold differences saved in .scratch/goal72/scene-deps/manifest.json and REPORT.md. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
 name = "rd_object"
-updated_by = "fix-sizes"
-updated_at = "2026-11-02T21:57:20+00:00"
+updated_by = "test"
+updated_at = "2026-11-02T23:01:35+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.rd_object.c"
 symbol = "_rd_object"
 kind = "FUNCTION"
-status = "SIZE_MISMATCH"
+status = "NEAR_MATCHING"
 
 ["GOLDTL.0x00447110".verification]
-source_hash = "f14f504250445ddf61077b2bf773e710ba80f57fe6d004e9629a96d5b04a69dc"
+source_hash = "e912063ea17c28e0998470a1a632992ba100f8a2ed143fd33874d901728c529f"
 reference_hash = "0e8c54efb89dc41d4d75559bd0778299738dad975187fa6f37fc1938ed68b9a9"
 reference_size = "3348"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -425735,10 +425735,17 @@ module = "GOLDTL"
 va = "0x447110"
 context_hash = ""
 defines = "[]"
-input_hash = "c4ebfa6743f6e30e3271d9e5dd12cdb6ff139a41bc1c48ca4548c41c04eda35b"
-status = "SIZE_MISMATCH"
+input_hash = "6b71d5bc63b899463d0a96987bac832fbd3924de7fbeb74162517afd0e13238e"
+status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-02T22:02:53+00:00"
+measured_at = "2026-11-02T23:01:35+00:00"
+
+
+[["GOLDTL.0x00447110".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-02T23:01:35.416775+00:00"
+updated_by = "test"
 ["GOLD.0x0044abb0"]
 size = 3432
 note = "Goal72 rd_object name attested by directly referenced native diagnostic; recursive four-argument scene-object reader, pointer/NULL result. Kuna omits main switch; no C adopted. Exact native tables, version branches, callers and real Gold differences saved in .scratch/goal72/scene-deps/manifest.json and REPORT.md. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
@@ -476126,7 +476133,7 @@ status = "STUB"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00569ff0".verification]
-source_hash = "f2265af9f5eb812be43695e2eebb4ec3cd6e6ba1038e9b1f9fe8edd9faaa1883"
+source_hash = "b5edae6af276773aac238b8567bb22ff70bf6e2f3ef0214e9bc1a193291fb02b"
 reference_hash = "9fc3617384c7478cba05636e1f4460a666a2570b80484f6b9bd5e33915cf197f"
 reference_size = "3772"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -476137,10 +476144,10 @@ module = "GOLDTL"
 va = "0x569ff0"
 context_hash = ""
 defines = "[]"
-input_hash = "dd85aed07ea1a75433ab3ef128206f01656f50eb0386343ba46768fed232e33c"
+input_hash = "2da7bece3a30d317738a965b0fb1e8ecd4fd45e97376cb11cd9fd63f9c2c5860"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T22:51:13+00:00"
+measured_at = "2026-11-02T23:03:17+00:00"
 
 [["GOLDTL.0x00569ff0".status_history]]
 old_status = "STUB"
@@ -587210,7 +587217,7 @@ defines = "[]"
 input_hash = "f059c4c7554766c99599814251402a71d1dd39aa5c8d5df36c6fd0bd62f0cc95"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T22:52:55+00:00"
+measured_at = "2026-11-02T23:01:48+00:00"
 
 [["GOLDTL.0x00561380".status_history]]
 old_status = "STUB"

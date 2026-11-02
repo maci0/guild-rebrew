@@ -300,7 +300,7 @@ void __cdecl fcn_00569ff0(char* e)
 			}
 			cnt2 = (char*) fcn_00502cd0(*(int*) (pb + 0x5d), 1, 0, 0xca);
 			if (cnt2 != 0) {
-				while (*(int*) (cnt2 + 0x2a) != *(int*) (q + 1)) {
+				while (*(int*) (cnt2 + 0x2a) != *(int*) (pa + 1)) {
 					cnt2 = (char*) gm_NextEntityQueryMatch();
 					if (cnt2 == 0) {
 						break;
@@ -330,7 +330,7 @@ void __cdecl fcn_00569ff0(char* e)
 		}
 		fcn_004f4f60(0x17, 1,
 		        *(int*) (0x7f4ca4 + *(unsigned short*) (pb + 0x27) * 0x21c),
-		        *(int*) (cnt2 + 4), *(int*) (pa + 1));
+		        *(int*) (px + 4), *(int*) (pa + 1));
 		if (flag != 0) {
 			memset(b400, *(char*) 0x6b5c60, 0x400);
 		}
@@ -348,7 +348,7 @@ void __cdecl fcn_00569ff0(char* e)
 			num = num < 0 ? 0 : num;
 			io_FormatTextBuffer(b400, 0x68bea4, num);
 			strcat(b400, b100);
-			fcn_004c51a0(*(int*) (q + 4), *(int*) (px + 4), *(char*) 0x773d75, num);
+			fcn_004c51a0(*(int*) (pc + 4), *(int*) (px + 4), *(char*) 0x773d75, num);
 			fcn_004c4510(pb, *(int*) (pb + 1));
 			fcn_004c4670(4, 1, 0x69, &flag);
 			fcn_004c5360();

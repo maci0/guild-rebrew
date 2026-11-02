@@ -20077,3 +20077,33 @@ zero CSE is the only lever found for the offset-11 gate and it is an allocator c
 recommended next step is the one hundred and one native-longer bytes between fill1 and fill3, meaning the region
 scan, the material-store block, the frees and the region setup, since reproducing that missing work is a
 prerequisite for 5419. Findings in .scratch/goldtl-0043c640/NOTES.md round 6.
+
+## 2026-11-03 — production message arguments corrected from the listing
+
+`0x569FF0` 903 to 980 with the object held at exactly 3772, 64 relocations, frame `sub esp,0x738`, status STUB and
+lint clean. Three argument corrections landed, all evidenced by the listing. Case 5's fourth fcn_004f4f60 argument
+is `*(int*)(px + 4)` and not `*(int*)(cnt2 + 4)`, since native loads `mov ecx,[ebp+4]` at 0x56a89c with ebp holding
+px from `lea ebp,[edx*4+0x7f4ca0]` at 0x56a829, while arg5 is `*(int*)(pa+1)` from `[edi+1]` at 0x56a899 with edi
+holding pa. Case 5's while condition compares `*(int*)(pa+1)` rather than `*(int*)(q+1)`, because native loads
+`mov ecx,[edi+1]` at 0x56a7c5 with edi holding the spilled slot 0x14, which is pa after `mov [esp+0x3c],edi` at
+0x56a681. Case 5's first fcn_004c51a0 argument is `*(int*)(pc+4)` rather than `*(int*)(q+4)`, since native loads
+`mov eax,[esp+0x30]` for slot 0x1c, which is pc, and then `[eax+4]` at 0x56a9eb; that change is byte-neutral here
+and was kept because the listing says pc. The first two are worth 77 matched bytes. Reverted with measurements:
+`fcn_0050c710(pb,1,1)` for the num-block factor gives object 3784 and SIZE_MISMATCH; `fcn_00509570(pc)` gives 3768;
+splitting the b400 clear into a single stored byte plus a 0x3ff zero fill, which is native's shape at 0x56a8db,
+gives 3764 at match 937; and moving the case-5 search call into the flag branch, where native calls 0x503fe0 once
+per branch at 0x56a8fb and 0x56ad2e, gives 3752 at match 322. The prologue remains out of reach with e in ebx and
+one zero register where native has e in esi and three zero registers, so the whole body stays positionally shifted
+and the first mismatch stays at offset 7. The slot map from the listing, frame-relative with frame 0x738, is fv
+0x00, flag 0x04, px with n 0x08, q with cnt2 0x0c, the flag-branch 00502cd0 result 0x10, pa 0x14, o 0x18, pc 0x1c,
+hits 0x20 and num 0x24, the SEARCH struct at 0x28 with obj, radius, owner and found at 0x28, 0x2c, 0x30 and 0x34,
+and the buffers b200 at 0x38 for 0x200, b100 at 0x238 for 0x100 and b400 at 0x338 for 0x400, with the same ten
+scalar dwords and buffer bases as ours but a different scalar assignment. Listing-evidenced but not applied, all of
+which need a variable-set change that would likely break the 0x738 frame: native keeps the flag-branch
+fcn_00502cd0 result in slot 0x10 and the pb-block one in slot 0x24 with the structure
+`if (slot10) { if (slot24) { cnt2 = fcn_00502cd0(*(int*)(slot10+0x14), 1, 5); ... } }` at 0x56aa1c..0x56aa40 and the
+clamped value in temp slot 0x04; and native's num-block `&&` chain compares `*(unsigned short*)cnt2` against 0x1c7
+down to 0x1c3 with one `mov ax,[ebp]` at 0x56aa66 rather than against the random value. Also recorded:
+`io_FormatTextBuffer` at 0x56a99e targets b100 at 0x238 and not b400, and that spelling is avoided only because it
+hangs cl.exe at this row. Tools .scratch/569ff0/cmp2.py and slots3.py with the slot dumps ns3.txt and os3.txt and
+the aligned diff d980b.txt, current source C_final_980.c and KEEP_980b.c, previous state BAK_903_pre.c.
