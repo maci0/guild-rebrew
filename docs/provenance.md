@@ -18855,3 +18855,24 @@ two; we emit `fimul` where native does `fild differenz` plus `fmulp`, two the ot
 Recorded for later: the tool strips the trailing 0x90 padding from the object, so a byte-identical body here
 would report 3816 with an eight-byte delta against 3824, and object size should not be used as the gate for
 this row; the normalised stream and branch displacements are the signal.
+
+## 2026-11-03 — inventory dialog label block parked
+
+`0x5D0660` stays at 1258 with object 4389, frame 0x438 and nine store blocks; rounds 14 and 15 both kept
+nothing and the source remains byte-identical to kept-v14. Round 15 produced the sharper diagnosis: the
+built object's scalar home map does not match native's, with the n3 spill at +0x20 against native +0x0c, the
+rows2 home at +0x10 against +0x20 and count at +0x28 against +0x30, while round 13 verified only the native
+map and never compared the object's. So the declaration set does not reproduce the reference coloring even
+where the instruction stream agrees. Mechanism findings: plain address escapes such as `pn = &n3`, `pt = &t0`
+or an `int box[1]` fold to byte-identical output, and only a volatile-qualified read through the address
+survives, which does get native's opening (w in edi, text in ebx, block at 0x289) and stores n3 before the
+branch but still keeps t0 in edi while evicting ebp for the id scaling, for a block of 212 bytes at object
+4370; a volatile read through &t0 homes t0 from function entry and moves the pre-block to 0x26f, which is
+unusable; in the 0x289 family the else arm emits `or ebx,-1; mov [esp+0x58],ebx` for seven bytes where
+native stores the immediate for ten, and the scaling uses ebp instead of edi; and no shape yet gives rows2 in
+ebp, n3 in edi and t0 in the frame at once. Best probes: a0vv and g5vv at 4370 with the block at 0x289 and
+212 bytes, a0nv 4377 at 0x289 and 219, a0n 4400 at 0x289 and 221, g5n 4372 at 0x26f and 229, b0n 4395 at 0x28a
+and 220, volatile n3 variants 4359 which force the eight-store merge rather than the gate, and the volatile
+&t0 variants 4371 and 4385. The next lever recorded was a construct that forces native's scalar home for n3
+at +0x0c without a volatile access, for example a spill and reload whose slot is the declared n3 slot, before
+attacking the scaling temporary. A blocker is set on the row and the effort moves to other rows.
