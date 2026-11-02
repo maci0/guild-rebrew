@@ -18378,3 +18378,29 @@ places the same block after the post-loop body (0x39 je to 0x123 with a 6-byte `
 so the layout heuristic sees the whole function; fixing it would also fix the je encoding and every offset
 after 0x37 and it is upstream of the register colour. Native also keeps owner in a slot at S+0x28 where we
 recompute rec+0x30, so owner's liveness needs to change too.
+
+## 2026-11-03 — inventory dialog size delta is one instruction encoding
+
+`0x5D0660` keeps its v13 state at object 4389, match 1132, frame 0x438 and lint clean; the round produced
+no keeper and the file has no diff against HEAD. Four findings change the plan. The three-byte difference
+between the current state and the native-table candidate is one instruction encoding rather than a
+duplicated tail: both objects hold 1234 instructions with identical normalised sequences, and the only
+size difference is source line 426, `posB[3] = posB[1] + w + 0x28;`, where the current state emits
+`mov [esp+0x7c],edx` for four bytes (frame 0x6c) and the candidate emits `mov [esp+0x80],edx` for seven
+(frame 0x70); native has the seven-byte form, so the current sequence carries three extra bytes somewhere
+else but not as a separable block, and the sharing story does not hold locally. The 17th scalar slot can be
+forced by liveness instead of a struct pad: hoisting
+`t0 = (*((int*)(&tabB[2].y))) & 0xffff;` before
+`posY[1] = (((int)t0 - h - 0xa)/2)+h+0xa;` with plain `TreeRec tabA[2]` and `char buf[768]` gives the
+native tables (tabA 0x44, tabB raw 0x98, tabC 0xe8, buffers 0x138/0x238/0x338), frame 0x438 and native's
+four-byte `mov [esp+0x10],eax` reused at the connector, at object 4388 and match 792 with hover starting
+0xf90 so the tail is one byte short. Restoring the connector's duplicate
+`t0 = *(short*)(&tabB[2].y) & 0xffff;` on top lands at exactly 4389 with match 1126 (1128 when placed after
+`nb = idx;`) but the compiler drops the 17th slot, giving frame 0x434 and tables at minus four, and adding
+the pad back to that shape costs three bytes for 4392. Odd-byte levers are only `and eax,imm32` (5) against
+the same mask in another register (6) and `mov eax,abs32` (5) against other registers (6); signed and
+unsigned read flips and loop-form edits move in two-byte steps, which is why every size-exact variant loses
+the layout. Operational note: `rebrew build driver cl -- ... -Fo<path>.obj` writes the object under a
+different basename than requested (vd.obj appeared as Vd.obj, t1 as T1.obj), so use `rebrew test` or find
+rather than trusting the -Fo name. Candidate kept on disk: .scratch/660/round9-vf-4388.c and
+round9-t1-4389-frame434.c, round9-w1-4389-frame434.c.
