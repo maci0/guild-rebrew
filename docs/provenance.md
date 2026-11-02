@@ -18269,3 +18269,24 @@ forcing the loop base reload at gaps 27 and 28 grows to 3912 with match 725; and
 compare, the zero-store immediates and the arm splits measure between 380 and 590 in every combination. So
 3872 with the current body is a local optimum that any size change destroys, and only same-size respellings
 win.
+
+## 2026-11-03 — inventory dialog native table layout found three bytes over
+
+`0x5D0660` keeps the v13 state at 1132 with object 4389, frame 0x438 and lint clean; the layout pass
+produced no keeper. It did find the lever: a 4-byte struct pad before the tabA array member
+(`struct { int pad; TreeRec a[2]; } tabA;` with tabA.a[0] and tabA.a[1] used and the memset over tabA.a)
+together with `char buf[768]` instead of 772 moves every table and buffer to its native offset with no
+spill and without changing the 16 scalar slots: tabA 0x44, tabB 0x88 (raw [esp+0x98]), tabC 0xe8 and buf
+at 0x138/0x238/0x338, frame 0x438. The cost is three bytes, so the function measures 4392 with
+SIZE_MISMATCH and match 909: posB[3] sits at native raw 0x80, which makes its store take the seven-byte
+disp32 form native also uses, while v13 avoided those three bytes by sitting at raw 0x7c, so v13 must
+carry a three-byte excess elsewhere. That excess is in the connector, where our visibility-store tail is
+duplicated while native shares the sequence at 0x5d0bf2 and 0x5d0cf5; removing three bytes before 0xf91
+would realign hover and tail, and the region agreement then projects 979 against v13's 978 (test match
+about 1133 before the mask undercount), making exact-size Z1 the only found route to native tables above
+1132. Rejected with measurements: spill levers for the 17th slot (mid or t0 live across the connector
+loop, including a spare[1] array) all give 4398 with match 741 to 783; all eight signed and unsigned
+combinations in the tabA draw loop give 4388, 4390, 4392, 4396, 4398, 4399 or 4401, none 4389; dead pad
+locals (array, scalar, volatile), a one-int struct and an int[1] array are dropped or overlaid and leave
+the frame at 0x434; and keeping mid live across the loop gives 4397 at match 741. Candidate kept on disk
+at .scratch/660/Z1.c with Z1b.obj and Z1b.dis.
