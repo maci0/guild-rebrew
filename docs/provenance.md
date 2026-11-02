@@ -19268,3 +19268,33 @@ and a split failure label (444). Residual in order: case 0 is 198 bytes against 
 stub at 0x561489 does `mov 0xc4(esi),-1` and has no source shape found yet; cases 1 and 2 start eighteen bytes
 early; and case 4's two-byte gap is the float test idiom, native `and $0x100,%eax; jne` against our
 `test $0x5,%ah; jnp`. Current source .scratch/r561380/v12_final_round3.c with v12_ifbody.c and NOTES.md.
+
+## 2026-11-03 — production run spill needs a qualifier that blocks slot sharing
+
+`0x571870` stays at 2757 with object 3816, 1076 byte mismatches and the first at 0x537 where the target writes
+frame 0x30 and we write 0x24; the spill attempt kept nothing and the source is unchanged. The root cause is now
+pinned with a slot map: frame 0x00 gebaeude, 0x04 lager, 0x08 anzahl with letzte_zeit and the conversion temp,
+0x0c leistung, 0x10 arbeitsleistung, 0x14 summe, 0x18 the double high word, 0x1c typ and differenz, 0x20 bild.
+Native stores letzte_zeit at frame 0x08 at 0x79e and reloads it at 0xa10, 0xa61, 0xce7 and 0xd65, and there is
+no `lea reg,[esp+0x18]` anywhere in the function, so the pointer is not address-taken: it is an ordinary local
+the allocator chose to keep in memory. Native's early int-to-double temp sits at frame 0x14, the same slot as
+summe and the later unsigned-int scratch, while ours uses frame 0x08, one slot apart as diagnosed. A single edit
+reproduces both target facts, `pos14_7f4c00* volatile letzte_zeit;`, giving `fild [esp+0x30]` and
+`[esp+0x24]` for frame 0x14 and `xor ebx` at 0x8d2, 0x95d and 0x973 with the b4 sequence intact, but match falls
+to 2103 at object 3820 with the first mismatch at 0x35, because a volatile slot cannot be shared so it needs a
+ninth scalar slot where the baseline already uses all eight, moving the frame from 0x724 to 0x728 and relocating
+anzahl to 0x14 and summe to 0x04, which breaks the worker loop; a volatile loop-local copy variant gets the
+`xor ebx` at exactly 0x8cc, 0x955 and 0x96b but measures 2529 with the same frame and temps at 0x20 and 0x14.
+Every shareable memory form is scalar-replaced back to the current bytes, all measured at 2757, 3816 and 0x537
+with no ebx zero: struct-of-one, union wrapper, one-element pointer array, `*(pos14_7f4c00**)&letzte_zeit`, an
+address held in a local pointer-to-pointer, char* retype, declaration swap, repeated assignment at each use,
+memcpy copy, assignment moved to the case top or after typ or after leistung or before d0, an initialiser at the
+declaration, assignment inside the do-loop, and unsigned casts. The memory slot is therefore reachable only
+through a qualifier that also forbids sharing, and that costs the four bytes the prologue needs. The coupled sum
+is not reachable from this source with the block-local float df b4 form. Details and the harness in
+.scratch/571870/findings.md with measure.py and batch1..6.py, and the volatile variant at v21_vol.c. Tooling note:
+`rebrew test` on a scratch file needs `--symbol he_RunProduktion --cflags '/O2 /Gd /Isrc'` because the project
+base cflags lack /Isrc. Next lever recorded: either find the native source shape that makes MSVC give up on
+letzte_zeit without address-taking or a qualifier, likely register pressure from a variable we have not
+identified, or revisit the b4 forms that already produced the xor ebx (inline `(float)differenz` at 2522) for
+one that also keeps the fild sequence.
