@@ -444,7 +444,7 @@ void __cdecl fcn_00540020(void)
 	}
 
 	for (i = 0; i < 0x300; i++) {
-		int add;
+		int leftw;
 
 		if (*(unsigned short*) SLOTPTR(i) == 0xffff) {
 			continue;
@@ -452,12 +452,12 @@ void __cdecl fcn_00540020(void)
 		if (*(unsigned char*) (SLOTPTR(i) + 2) == 6 || *(unsigned char*) (SLOTPTR(i) + 2) == 7) {
 			continue;
 		}
-		left = fcn_0050d2a0(SLOTPTR(i)) * 75;
+		leftw = fcn_0050d2a0(SLOTPTR(i)) * 75;
+		left = leftw;
 		n = 0;
 		obj = fcn_00503fe0(1, 4, i);
 		if (obj != 0) {
 			do {
-				add = 0;
 				if (fcn_00504bd0(OBJBYTE) == 1 || fcn_00504bd0(OBJBYTE) == 4
 				    || fcn_00504bd0(OBJBYTE) == 2 || ENTTYPE(OBJBYTE) == 0x13
 				    || ENTTYPE(OBJBYTE) == 4 || ENTTYPE(OBJBYTE) == 0x10
@@ -465,17 +465,16 @@ void __cdecl fcn_00540020(void)
 					unsigned char c = ENTCLASS(OBJBYTE);
 
 					if (c == 1) {
-						add = 2;
+						n += 2;
 					} else if (c == 2) {
-						add = 4;
+						n += 4;
 					} else if (c == 3) {
-						add = 8;
+						n += 8;
 					}
 				}
-				n += add;
 				if (fcn_0047d240(SLOTPTR(i)) != 0 || *(unsigned char*) (SLOTPTR(i) + 2) == 1) {
-					if ((int) (fcn_0042e410(0x5a) & 0xffff)
-					    > fcn_0050bfe0(obj)) {
+					w = (int) (fcn_0042e410(0x5a) & 0xffff);
+					if (w > fcn_0050bfe0(obj)) {
 						cand = fcn_0050cf50(obj, 0x64);
 						*(float*) &agebits = (float) cand * g_664138;
 						if (g_664154 > *(float*) &agebits) {
@@ -500,7 +499,7 @@ void __cdecl fcn_00540020(void)
 									(int) ((float) *(int*) (cand + 0x44)
 									       + *(float*) &agebits);
 							}
-							left = (int) ((float) left - *(float*) &agebits);
+							leftw = (int) ((float) left - *(float*) &agebits);
 						}
 					}
 				}
@@ -521,8 +520,10 @@ void __cdecl fcn_00540020(void)
 				}
 				c = ENTCLASS(OBJBYTE);
 				if (c == 1) {
-					v = cand * 2 / n;
-					*(int*) ((char*) obj + 0x39) = v < 0 ? 0 : v;
+					v = leftw * 2 / n;
+					*(volatile int*) ((char*) obj + 0x39) = v;
+					v = v < 0 ? 0 : v;
+					*(volatile int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v < 0x2ee00) {
 							v = 0x2ee00;
@@ -530,10 +531,12 @@ void __cdecl fcn_00540020(void)
 					} else if (v < 0xfa00) {
 						v = 0xfa00;
 					}
-					*(int*) ((char*) obj + 0x39) = v;
+					*(volatile int*) ((char*) obj + 0x39) = v;
 				} else if (c == 2) {
-					v = cand * 4 / n;
-					*(int*) ((char*) obj + 0x39) = v < 0 ? 0 : v;
+					v = leftw * 4 / n;
+					*(volatile int*) ((char*) obj + 0x39) = v;
+					v = v < 0 ? 0 : v;
+					*(volatile int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v < 0x4e200) {
 							v = 0x4e200;
@@ -541,10 +544,12 @@ void __cdecl fcn_00540020(void)
 					} else if (v < 0x1f400) {
 						v = 0x1f400;
 					}
-					*(int*) ((char*) obj + 0x39) = v;
+					*(volatile int*) ((char*) obj + 0x39) = v;
 				} else if (c == 3) {
-					v = cand * 8 / n;
-					*(int*) ((char*) obj + 0x39) = v < 0 ? 0 : v;
+					v = leftw * 8 / n;
+					*(volatile int*) ((char*) obj + 0x39) = v;
+					v = v < 0 ? 0 : v;
+					*(volatile int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v < 0x9c400) {
 							v = 0x9c400;
@@ -552,11 +557,11 @@ void __cdecl fcn_00540020(void)
 					} else if (v < 0x3e800) {
 						v = 0x3e800;
 					}
-					*(int*) ((char*) obj + 0x39) = v;
+					*(volatile int*) ((char*) obj + 0x39) = v;
 				}
 next2:
 				;
-			} while (fcn_00503e80() != 0);
+			} while ((obj = fcn_00503e80()) != 0);
 		}
 	}
 
@@ -571,6 +576,8 @@ next2:
 		}
 	}
 
+	cand = -1;
+	agebits = -1;
 	for (i = 0; i < 0x300; i++) {
 
 		if (*(char**) (SLOTPTR(i) + 0x184) == 0) {
@@ -591,9 +598,10 @@ next2:
 			char* r = fcn_0040c120(*(char**) (SLOTPTR(i) + 0x184), 0x33, left, cand, agebits);
 
 			if (r != 0) {
-				*(int*) (r + 0x70) = g_6a42f8;
-				*(int*) (r + 0x74) = g_6a42fc;
-				*(int*) (r + 0x78) = g_6a4300;
+				r += 0x70;
+				*(int*) r = g_6a42f8;
+				*(int*) (r + 4) = g_6a42fc;
+				*(int*) (r + 8) = g_6a4300;
 			}
 		}
 		if ((g_7747b0 & 8) && *(char**) (SLOTPTR(i) + 0x184) != 0

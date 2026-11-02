@@ -18716,3 +18716,24 @@ lever is to make the child-walk counter and the tabC fill pointer memory-residen
 point, since those two block-scoped variables are exactly native's occupants of slot 0x04. Tools and
 candidates in .scratch/660/r13/ (frame.py, natlist.py, objsmap.py, life.py, ndiff.py, block.py) with the
 write-up in NOTES-rewrite.md.
+
+## 2026-11-03 — season setup recovers its size and reaches ninety percent match
+
+`0x540020` returns to NEAR_MATCHING at exactly 4393 with match 3921 (89 percent), 258 relocations, lint at
+5485 of 5485 and the first mismatch at 0xb15; the second 0x300-loop body now measures 369 bytes from 0xd8e
+to 0xef9 with its raw-then-clamped double store present, and the walk block from 0xa4e to 0xace is intact
+with a matched prefix of 2837 bytes. Six shapes did it. The first 0x300 loop adds 2, 4 or 8 through immediate
+arms rather than an add temp. `w = (int)(fcn_0042e410(0x5a) & 0xffff); if (w > fcn_0050bfe0(obj))` replaces
+the inline comparison, and that single change flipped the whole register allocation to land exactly 4393.
+The raw-then-clamped store is written `*(volatile int*)((char*)obj+0x39) = v; v = v < 0 ? 0 : v;
+*(volatile int*)((char*)obj+0x39) = v;` because the volatile first store defeats MSVC 6 dead-store
+elimination while non-volatile int or unsigned casts are still eliminated, and the ternary supplies native's
+setl, dec and and. The running remainder lives in `leftw`, derived from `fcn_0050d2a0(...) * 75` and reduced
+by the ftol with a mirror into `left`, so divisions use `leftw` and the multiplicand lands in edi with
+`lea eax,[edi+edi]`. `cand = -1; agebits = -1;` precede the last 0x300 loop. The last loop's store block
+does `r += 0x70;` then three stores as native's `add eax,0x70` form. And the second loop tail is
+`while ((obj = fcn_00503e80()) != 0)`. The remaining differences are allocation-only and net size zero: n sits
+in ebx where native uses ebp, obj sits in ebp where native uses esi in the first loop, and native keeps a
+float temp with `fst [esp+0x18]` before the ftol that we do not emit. New locals `leftw` and the reused `w`
+are placeholders to rename under the naming conventions if they persist. Backups .scratch/f540020/kept.c and
+win_4393.c hold the current source, with notes in WALK_FINDING.md.
