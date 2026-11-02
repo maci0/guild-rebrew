@@ -20,7 +20,7 @@ int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
 void *__cdecl gm_GetEntityTableEntry(void *);
 void __cdecl fcn_00529160(int, int, int, void *);
-void __cdecl fcn_004c51a0(int, int, int, int);
+void __cdecl fcn_004c51a0(int, int, char, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004c5da0(int, int, int, int, int, char *);
 void *__cdecl gm_LookupEntityRecordById(int);
@@ -72,16 +72,20 @@ void __cdecl fcn_00561380(void *a0)
 			if (*(int *)(p + 0xc8) != -1 && !fcn_004c4450(*(int *)(p + 0xc8)))
 				return;
 			hand = (unsigned char *)fcn_004c4480(*(int *)(p + 0xc8));
-			if (hand == 0)
-				goto label_56148f;
-			e = (unsigned char *)gm_GetEntityTableEntry((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0));
-			if (e != 0)
-				*(int *)(e + 0x28) = *(int *)(e + 0x28) + *(int *)(p + 0xd0);
-			*(int *)(p + 0xc4) = *(int *)(hand + 4);
-			fcn_00529160(0, 0, *(unsigned short *)hand, p);
-			fcn_004c51a0(-1, *(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4), g_773d75, *(int *)(p + 0xd0));
-			*(int *)(p + 0xc8) = -1;
-			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
+			if (hand != 0) {
+				e = (unsigned char *)gm_GetEntityTableEntry((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0));
+				if (e != 0)
+					*(int *)(e + 0x28) = *(int *)(e + 0x28) + *(int *)(p + 0xd0);
+				*(int *)(p + 0xc4) = *(int *)(hand + 4);
+				fcn_00529160(0, 0, *(unsigned short *)hand, p);
+				fcn_004c51a0(-1, *(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4), g_773d75, *(int *)(p + 0xd0));
+				*(int *)(p + 0xc8) = -1;
+				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
+				return;
+			}
+			*(int *)(p + 0xc4) = -1;
+		label_56148f:
+			*(int *)(p + 0x70) = -1;
 			return;
 		}
 	case 1:
@@ -107,10 +111,8 @@ void __cdecl fcn_00561380(void *a0)
 				*(int *)(p + 0x70) = -1;
 				return;
 			}
-			if (*(int *)(*(int *)(r + 0x184) + 0x128) == 0) {
-				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
-				return;
-			}
+			if (*(int *)(*(int *)(r + 0x184) + 0x128) == 0)
+				goto label_561b4d;
 			*(int *)(p + 0x52) = g_7f4c00;
 			*(int *)(p + 0x56) = g_7f4c04;
 			*(int *)(p + 0x5a) = g_7f4c08;
@@ -211,7 +213,7 @@ void __cdecl fcn_00561380(void *a0)
 			recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);
 			recB = (unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0);
 			dist = fcn_00507e70(recB, recA, 2);
-			if (gm_RandomFloat01() + dist < g_6628a0)
+			if (!(gm_RandomFloat01() + dist >= g_6628a0))
 				goto label_561a7a;
 			if (fcn_005c6270(recA, 0x2c0) == 0) {
 			io_FormatTextBuffer(text, 0x1735, *(unsigned short *)recA, r);
@@ -259,6 +261,7 @@ void __cdecl fcn_00561380(void *a0)
 					io_FormatTextBuffer(text, 0x1011, r);
 					fcn_00545d40(*(int *)(recA + 4), -1, text, 0, 0x5fb, g_6a6538);
 				}
+			label_561b4d:
 				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 				return;
 			}
@@ -390,10 +393,6 @@ void __cdecl fcn_00561380(void *a0)
 	default:
 		return;
 	}
-label_56148f:
-	*(int *)(p + 0xc4) = -1;
-	*(int *)(p + 0x70) = -1;
-	return;
 label_561d51:
 	*(int *)(p + 0x70) = -1;
 	return;

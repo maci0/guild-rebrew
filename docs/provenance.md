@@ -19319,3 +19319,28 @@ spills w across the loop back edge at object 4412, so it was rejected. The ENTCL
 re-measured and keep our `[eax+ecx*1+0x247]` encoding; native's `[ecx+eax+0x247]` form cannot be produced from
 any spelling tried, so that remaining intermediate-representation difference is not an available lever. Tables
 in .scratch/f540020/ROUND7.md with batch.py, cmpreg.py and judge.py.
+
+## 2026-11-03 — inventory switch case zero stub reproduced
+
+`0x561380` takes the case-0 stub reconstruction, trading match 989 for 752 because the previous higher count
+depended on accidental alignment of the later cases against native offsets that were themselves wrong. The
+structural facts gained are exact: case 0 is 216 bytes, cases 1 and 2 start at 0x11d and 0x177, both native,
+case 4 is 0x41c bytes and 334 instructions at native length, and the frame holds at 0x5e4 with object 3608
+against native 3600. Two edits produced the case-0 stub. fcn_004c51a0's third parameter is declared `char` in
+this translation unit as GOLDTL.fcn_0049c590.c does, which drops the two-byte `xor edx,edx` because native
+passes the byte in dl. And case 0's failure is written as the trailing else of an if-then success,
+`if (hand != 0) { ...success...; return; }` followed by `*(int*)(p+0xc4) = -1;` then `label_56148f:` and
+`*(int*)(p+0x70) = -1; return;`, with cases 3, 4 and 6 still jumping to label_56148f, so MSVC emits
+`test edi,edi; je 0x109` with displacement 0x90 as native has it, the stub `89 9e c4 00 00 00` at 0x109 and the
+label at 0x10f, matching native's 0x561489 and 0x56148f; only distance-dependent bytes differ. Negative
+results: labels between cases or inside case 0, and the `if (hand == 0) { ...; return; }` form, make the fail
+block the test's fallthrough at 0x75 and give case 0 = 212. The float idiom is settled by probe: `if (!(x >= g))`
+emits `fcomps; fnstsw; and $0x100,%eax; jne` while `if (x < g)` emits `test $0x5,%ah; jnp`, and the first form
+is applied at case 4's gm_RandomFloat01() test. Beyond the ask, case 2's zero path now jumps to a shared
+label_561b4d placed on case 4's near-path increment as native does, taking case 2 from 0x92 to 0x84 against
+native 0x86, and case 3 moves to 0x1fb; those raised match from 730 to 752 and reduced the object from 3620 to
+3608. Current deltas: case 2 is two short with the store path still emitting `[esi+0x56]` where native does
+`mov ecx,eax` and then `[ecx+4]`, case 3 is eight over at 0x1fb against 0x1fd, case 7 six over, case 8 two
+short, case 4 four over at 0x49b, case 5 seven over and case 6 eleven over, so realigning case 4 needs the
+case-2 store shape, case 3 and case 8 first, and match above 989 is not reachable until those land. Current
+source .scratch/r561380/v20_case2_shared.c with v19_kept_round4.c and NOTES.md.
