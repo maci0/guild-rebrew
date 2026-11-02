@@ -17280,3 +17280,38 @@ rewrites (`p->type+1==0` 315, `p->type<0` 321), prologue reorders, and the 335 v
 remaining +8 bytes and +24 instructions come from the ent34 call-versus-inline divergence: ent34
 stays a static function with 25 call sites, and the full-macro form measures 4532 bytes with match
 235, worse on both.
+
+
+## 2026-11-02: update the released Rebrew tooling to 6.15.0
+
+Change: update the Rebrew prove and BinSync dependency pins, public wheel URL,
+and uv lock from 6.14.3 to 6.15.0. Reason: the maintainer requested the latest
+released Rebrew across all reconstruction projects. Evidence: upstream tag
+`v6.15.0`, commit `6bc2e816ee63f0520afda43fed0a09adbf8ad25e`, wheel SHA-256
+`a389c880f5cb9a64350f63feced2c1d861d37a7679364cadfc82133e61884c21`.
+Decision owner: maintainer. Verification: locked environment sync completed,
+`.venv/bin/rebrew --version` reports 6.15.0, and the project configuration loads
+successfully. Native compilation and byte comparison were not rerun; this
+change makes no reconstruction source or verdict changes.
+
+## 2026-11-02 — dialogs read their message ids and hold the frame
+
+`0x4DCF50` reaches match 2495 with the object exactly 8798, frame 0x760 and 153 of 153 native slots,
+from 1784 at 8799. The verdict string is STUB only because the equal-size ratio sits under the
+near-match threshold. Six edits. All six vote loops now read msg.id[0] and msg.id[2] instead of
+`*(int*)(a0+0x34/0x3c)`, which is the faithful read since native's loops at 0x4dd7f5, 0x4dda1d,
+0x4de0f1, 0x4de2b5, 0x4de882 and 0x4debbc all load the id from a stack slot before the loop.
+`volatile int xpad;` with one store after the fcn_004f4830 call pins one pre-msg stack word so msg
+keeps its native 0x40 home and msg.text[1] stays at slot 0x51; it is a layout lever with no
+behaviour change and costs about 7 bytes. `msg.text[1] = (char) n` moved before the p34 lookup as
+native orders it (push argument, store al, then call). Four vote loops hoist the byte count into a
+block-local cnt2, removing the redundant second test and `and reg,0xff` that the unsigned char test
+emitted. And one size knob: the msg.id[3] test is written `>= 0` instead of `!= -1`, which is
+behaviourally identical for ids but is not native evidence (native compares -1 at 0x4de98f); it was
+kept over the nibble-alternative pad[3] clamp `<= 0` to `< 1` because it measures 2495 against
+2313. Measurements: baseline 8799/1784/153 slots; msg.id reads alone 8790 with 152 slots; five
+reads with site 397 left on a0 gives 8798 but 152 slots; the volatile word is what buys the 153rd
+slot back.
+
+`0x4DA690` keeps 853 at object 7053 with one formatting change: the 21-argument escape call now
+wraps across three lines so `rebrew lint` returns to 5485 files checked, 0 errors, 0 warnings.

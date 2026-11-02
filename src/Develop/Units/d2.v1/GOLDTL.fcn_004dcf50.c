@@ -100,6 +100,7 @@ int __cdecl fcn_004dcf50(int a0)
 	int votes;
 	int eIdx;
 	int didFolter;
+	volatile int xpad;	/* one pre-msg stack word: msg home stays at 0x40 */
 	int div3;
 	int acc;
 	char* end;
@@ -138,6 +139,7 @@ int __cdecl fcn_004dcf50(int a0)
 	msg.pad[8] = 0;
 
 	fcn_004f4830(0, rec.i);
+	xpad = 0;
 	msg.hnd[2] = 0;
 	msg.hnd[5] = 0;
 	msg.hnd[0] = 0;
@@ -167,11 +169,11 @@ int __cdecl fcn_004dcf50(int a0)
 	msg.id[4] = *(int*) (a0 + 0x44);
 	msg.id[5] = *(int*) (a0 + 0x48);
 	n = fcn_004f5740(*(int*) (a0 + 0x7c), list);
+	msg.text[1] = (char) n;
 	p34 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
 	if (p34 == 0) {
 		return;
 	}
-	msg.text[1] = (char) n;
 	p38 = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
 	if (p38 == 0) {
 		return;
@@ -337,7 +339,7 @@ int __cdecl fcn_004dcf50(int a0)
 		cnt2 = *(unsigned char*) (a0 + 0x30);
 		idx = 0;
 		if (cnt2 > 0) {
-			while (*(int*) (0x9b0e30 + idx * 0x35c) != *(int*) (a0 + 0x34)) {
+			while (*(int*) (0x9b0e30 + idx * 0x35c) != msg.id[0]) {
 				idx++;
 				if (idx >= cnt2) {
 					break;
@@ -391,11 +393,15 @@ int __cdecl fcn_004dcf50(int a0)
 		fcn_004e4450(g_68bfc0, 0);
 		fcn_004e51d0((unsigned int*) a0, (int) &msg);
 		fcn_004e44f0(h);
-		st = 0;
-		if (*(unsigned char*) (a0 + 0x30) > 0) {
-			for (i = 0; i < *(unsigned char*) (a0 + 0x30); i++) {
-				if (*(int*) (0x9b0e30 + i * 0x35c) == *(int*) (a0 + 0x34)) {
-					break;
+		{
+			int cnt2;
+			cnt2 = *(unsigned char*) (a0 + 0x30);
+			st = 0;
+			if (cnt2 > 0) {
+				for (i = 0; i < cnt2; i++) {
+					if (*(int*) (0x9b0e30 + i * 0x35c) == msg.id[0]) {
+						break;
+					}
 				}
 			}
 		}
@@ -467,10 +473,14 @@ int __cdecl fcn_004dcf50(int a0)
 			fcn_004e4450(g_68bfc0, 0);
 			fcn_004e51d0((unsigned int*) a0, (int) &msg);
 			st = 0;
-			if (*(unsigned char*) (a0 + 0x30) > 0) {
-				for (i = 0; i < *(unsigned char*) (a0 + 0x30); i++) {
-					if (*(int*) (0x9b0e30 + i * 0x35c) == *(int*) (a0 + 0x34)) {
-						break;
+			{
+				int cnt2;
+				cnt2 = *(unsigned char*) (a0 + 0x30);
+				if (cnt2 > 0) {
+					for (i = 0; i < cnt2; i++) {
+						if (*(int*) (0x9b0e30 + i * 0x35c) == msg.id[0]) {
+							break;
+						}
 					}
 				}
 			}
@@ -505,10 +515,14 @@ int __cdecl fcn_004dcf50(int a0)
 			fcn_004e4450(g_68bfc0, 0);
 			fcn_004e51d0((unsigned int*) a0, (int) &msg);
 			st = 0;
-			if (*(unsigned char*) (a0 + 0x30) > 0) {
-				for (i = 0; i < *(unsigned char*) (a0 + 0x30); i++) {
-					if (*(int*) (0x9b0e30 + i * 0x35c) == *(int*) (a0 + 0x3c)) {
-						break;
+			{
+				int cnt2;
+				cnt2 = *(unsigned char*) (a0 + 0x30);
+				if (cnt2 > 0) {
+					for (i = 0; i < cnt2; i++) {
+						if (*(int*) (0x9b0e30 + i * 0x35c) == msg.id[2]) {
+							break;
+						}
 					}
 				}
 			}
@@ -635,10 +649,14 @@ int __cdecl fcn_004dcf50(int a0)
 	fcn_004e51d0((unsigned int*) a0, (int) &msg);
 	fcn_004e4b00(hAnk);
 	st = 0;
-	if (*(unsigned char*) (a0 + 0x30) > 0) {
-		for (i = 0; i < *(unsigned char*) (a0 + 0x30); i++) {
-			if (*(int*) (0x9b0e30 + i * 0x35c) == *(int*) (a0 + 0x3c)) {
-				break;
+	{
+		int cnt2;
+		cnt2 = *(unsigned char*) (a0 + 0x30);
+		if (cnt2 > 0) {
+			for (i = 0; i < cnt2; i++) {
+				if (*(int*) (0x9b0e30 + i * 0x35c) == msg.id[2]) {
+					break;
+				}
 			}
 		}
 	}
@@ -657,7 +675,7 @@ int __cdecl fcn_004dcf50(int a0)
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "1");
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "1");
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
-	if (msg.id[3] != -1) {
+	if (msg.id[3] >= 0) {
 		x74 = *(int*) (g_9b1210 + i * 0x35c);
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-1.esc", (int) "");
 		d2_SetForm(g_68bfc0, 0);
@@ -705,7 +723,7 @@ int __cdecl fcn_004dcf50(int a0)
 		if (cnt > 0) {
 			i = 0;
 			do {
-				if (*(int*) (0x9b0e30 + i * 0x35c) == *(int*) (a0 + 0x3c)) {
+				if (*(int*) (0x9b0e30 + i * 0x35c) == msg.id[2]) {
 					break;
 				}
 				i++;
