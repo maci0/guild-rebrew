@@ -297,11 +297,32 @@ void __cdecl fcn_004d8d00(char* a0)
 			if (*(int*)(ent + 0x58) == 1 || *(int*)ent == 0x176) {
 				if (p->c1d)
 					goto lvl3;
+				if (*(int*)(*(int*)(obj + 0x184) + 0x128) != 0)
+					goto tail1;
+				if (p->c1c)
+					goto tail1;
+				if (!fcn_0045b990(base, (float*)(ent34(obj) + 0x4c),
+					&v84, &v80, &v28))
+					break;
+				if (tgt) {
+					if (!fcn_0045b990(base,
+						(float*)(ent34(tgt) + 0x4c),
+						&p->f14, &p->f18, &v28))
+						break;
+				}
+				if (fcn_004d31d0(obj, p->f14, p->f18,
+					(int)(*(float*)(ent + 0xc)
+					/ *(float*)(base + 0x10)
+					* *(double*)0x664128), &v10, &v14))
+					p->timer = fcn_004c6680((char*)ent34(obj),
+					    v10, v14, 0);
 			}
-			goto after2;
+tail1:
+			if (p->c1d)
+				goto lvl3;
 lvl3:
 			if (*(int*)(*(int*)(obj + 0x184) + 0x128) != 0)
-				goto after2;
+				goto tail1_body;
 			if (*(int*)(ent + 0x58) != 2 || !p->f20)
 				goto tail2;
 			fcn_004c5420(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
@@ -319,10 +340,7 @@ lvl3:
 tail2:
 			fcn_004c5420(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
 			p->timer = fcn_004c6940(obj, 2, p);
-			goto after2;
-tail1:
-			if (p->c0c == 0)
-				goto after2;
+tail1_body:
 			if (*(int*)ent != 0x16e && *(int*)ent != 0x172)
 				break;
 			if (!p->f20)
@@ -414,17 +432,17 @@ tail1:
 				break;
 			p->timer = -1;
 			e = fcn_00445600(0, 0x40, 0, (char*)&p->f10);
-			if (e) {
-				v68 = *(int*)(e + 0x204);
-				fcn_00455350(e, (float*)(e + 0x4c), vec);
-				if (v68) {
-					if (!fcn_004ce270(obj, (char*)v68))
-						goto case4b;
-					if (*((unsigned char*)v68 + 8) != 0
-					    && CompareVector3WithinTolerance(vec,
-						(float*)(ent34((char*)v68) + 0x4c), 49.5f))
-						goto case4b;
-				}
+			if (!e)
+				goto case4b;
+			v68 = *(int*)(e + 0x204);
+			fcn_00455350(e, (float*)(e + 0x4c), vec);
+			if (v68) {
+				if (!fcn_004ce270(obj, (char*)v68))
+					goto case4b;
+				if (*((unsigned char*)v68 + 8) != 0
+				    && CompareVector3WithinTolerance(vec,
+					(float*)(ent34((char*)v68) + 0x4c), 49.5f))
+					goto case4b;
 			}
 			if (!p->c0c) {
 				if (!CompareVector3WithinTolerance(vec,

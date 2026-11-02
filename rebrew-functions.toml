@@ -425294,7 +425294,7 @@ status = "SIZE_MISMATCH"
 blocker = "Docs map TL 0x4d8d00 with Gold 0x4d76a0 as combat task progression and claim no provider. Stored SIZE 4632. Prologue allocates 0x138, loads global 0x67a370+0xb0, and branches on global 0x772ea4. GOLDTL.fcn_004d9f20 calls it as void(Slot*), while this file is int(void) return 0. Signature and body are unwritten."
 
 ["GOLDTL.0x004d8d00".verification]
-source_hash = "d7c42d71bb413d503f5acb6110fa6675fc2dbe79536d292c9925b67425a5102c"
+source_hash = "7a245b4df9bdcf95c8d5d192aeb7ed326f096818fa99162dafe2e1c580a3731a"
 reference_hash = "409f7a2378525cc1fd7834f94348d97e06a59a32c4f48642641567d8e81991d7"
 reference_size = "4640"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -425305,10 +425305,10 @@ module = "GOLDTL"
 va = "0x4d8d00"
 context_hash = ""
 defines = "[]"
-input_hash = "9ed6e92f676fc5c06a992cdf5f2b2bda8c1e46d13c6bfef21b36fd7dc301bd89"
+input_hash = "136d75c463851760e9513f71e0e8f4972c0572981a2d8b594009a45e9ab92a2f"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T12:46:01+00:00"
+measured_at = "2026-11-02T13:19:36+00:00"
 
 [["GOLDTL.0x004d8d00".status_history]]
 old_status = "STUB"

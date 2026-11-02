@@ -17001,3 +17001,25 @@ align-up fills using the exact native prelude including the `rep movs` copy that
 five memset preludes, about 60 bytes in the record-free where native keeps `r` in the -0x0c slot
 and reloads after each call while ours homes it in esi, 57 bytes in masksearch and recclr, and the
 frame 0x54 against 0x60 with `x` in the dead argument slot [ebp+8].
+
+## 2026-11-02 — task dispatcher case two transcribed
+
+`0x4D8D00` 315 to 318 with the object growing 4268 to 4400, frame 0x128 against native 0x138 and
+msg at 0x30 against 0x3c. Landed: the case-2 tail block native 0x4d9492..0x4d9588 (the c1d path to
+lvl3, the `obj->[0x184]->0x128` and p->c1c exits, the two fcn_0045b990 calls with their break-on-
+zero, fcn_004d31d0 with the distance, and fcn_004c6680 on a non-zero result); the distance is a
+32-bit float divide rather than an int divide, since native 0x4d953e..0x4d954f is
+`fld dword [ent+0xc]; fdiv dword [base+0x10]; fmul qword [0x664128]`, so the source is
+`(int)(*(float*)(ent+0xc) / *(float*)(base+0x10) * *(double*)0x664128)` and our object now emits
+flds 0xc/fdivs 0x10/fmull 0x664128; case-4 `if (!e) goto case4b` with the body dedented and v68
+live; and two control-flow corrections, that the tail1 entry at 0x4d958b is `if (p->c1d) goto lvl3`
+with no c0c guard, and that lvl3's `obj->[0x184]->0x128` exit and tail2's store fall into the
+0x4d96aa tail1 body instead of jumping past it. The remaining 0x10 is allocation order, not size:
+frame probes give 0x138 for bb8[0x40], 0x118 for [0x20] and 0x128 for [0x30], so our top local
+bb8 sits at 0xf8..0x128 where native's b118 sits at 0x118..0x138, because two of the four sprintf
+buffers overlap by 0x10: native keeps b88 0x88, bb8 0xb8, be8 0xe8 and b118 0x118 in reverse
+declaration order, ours lands b118 0x88, b88 0xa8, be8 0xd8 and bb8 0xf8. Our slot set spills v80
+early at 0x2c below msg and puts the conversion temps at 0x78/0x80, where native has v80 at 0x80,
+v84 at 0x84, msg at 0x3c, vec at 0x2c and v68 at 0x68. Measured no-ops: buffer declaration order,
+msg/vec/v28/v24 order, `(void)&msg`, msg as int[11], and moving the case-2 candidate from v80 into
+`e`.
