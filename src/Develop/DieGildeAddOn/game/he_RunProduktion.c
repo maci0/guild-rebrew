@@ -56,7 +56,7 @@ void __cdecl he_RunProduktion(char* e)
     struct unit* nachricht;
     pos14_7f4c00* letzte_zeit;
     pos14_7f4c00* naechste_zeit;
-    char bild[256];
+    char bild[260];
     char text[1024];
     char debug[512];
     float leistung;
@@ -70,18 +70,13 @@ void __cdecl he_RunProduktion(char* e)
     int nachricht_typ;
 
     bild[0] = 0;
-    if (*(short*) (e + 8) == -1) {
+    if (*(unsigned short*) (e + 8) == 0xffff) {
         gebaeude = gm_SearchTable67(*(int*) (e + 0xbc));
         if (gebaeude != 0) {
             io_FormatTextBuffer(debug, (int) "he_RunProduktion(): geb:%G", gebaeude);
         }
-        fcn_00546190((struct unit*) e);
-        return;
-    }
+    } else {
     switch (*(int*) (e + 0x70)) {
-    case 0:
-        *(int*) (e + 0x70) = *(int*) (e + 0x70) + 1;
-        return;
     case 1:
         if (*(int*) (e + 0x14) <= 0 && *(int*) (e + 0x18) <= 0) {
             *(int*) (e + 0x70) = *(int*) (e + 0x70) + 1;
@@ -136,14 +131,22 @@ void __cdecl he_RunProduktion(char* e)
                     io_FormatTextBuffer(text, 0x1bb4, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
                     strcpy(bild, "_NACHRICHTEN_HS_05");
                 }
-                arbeiter = g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c;
-                if (arbeiter[2] == 6 || arbeiter[2] == 7) {
+                if (*(unsigned char*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 2) == 6 ||
+                    *(unsigned char*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 2) == 7) {
                     nachricht_typ = 0x5f1;
                     haus = fcn_0050dc90((int) gebaeude);
-                    if (haus != 0 && (haus[0x1b4] & 1)) nachricht_typ = 0x60d;
-                    he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
-                        *(int*) (e + 4), text, 0, nachricht_typ,
-                        *(int*) (gebaeude + 1), *(int*) (haushalt + 2), 0, bild[0] ? bild : 0);
+                    if (haus != 0 && (haus[0x1b4] & 1)) {
+                        nachricht_typ = 0x60d;
+                    }
+                    if (bild[0]) {
+                        he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
+                            *(int*) (e + 4), text, 0, nachricht_typ,
+                            *(int*) (gebaeude + 1), *(int*) (haushalt + 2), 0, bild);
+                    } else {
+                        he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
+                            *(int*) (e + 4), text, 0, nachricht_typ,
+                            *(int*) (gebaeude + 1), *(int*) (haushalt + 2), 0, 0);
+                    }
                 }
                 if (gebaeude != 0 && *(int*) (gebaeude + 0x95) != -1) {
                     fcn_004c6300(*(int*) (gebaeude + 1));
@@ -160,13 +163,20 @@ warten:
             *(int*) (e + 0x70) = -1;
             return;
         }
-        if (*(int*) (gebaeude + 0x95) == -1) fcn_004c6300(*(int*) (gebaeude + 1));
+        if (*(int*) (gebaeude + 0x95) == -1) {
+            fcn_004c6300(*(int*) (gebaeude + 1));
+        }
         typ = lpGebaeudePROT + *(unsigned char*) gebaeude * 0x24d;
         leistung = fcn_0050c710((unsigned char*) gebaeude, 1, 1) * 0.01 + 1.0;
         haus = fcn_0050dc90((int) gebaeude);
-        if (haus == 0) haus = g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c;
-        leistung += (haus[2] == 6 || haus[2] == 7) ? *(unsigned char*) (haus + 0x81) * (1.0 / 1008.0) : 0.0f;
-        if ((gebaeude[0x5a] & 0x20) && fcn_005c62c0(gebaeude, 0x178)) leistung *= 0.5;
+        if (haus == 0) {
+            haus = g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c;
+        }
+        leistung = leistung + ((haus[2] == 6 || haus[2] == 7)
+            ? *(unsigned char*) (haus + 0x81) * (1.0 / 1008.0) : 0.0f);
+        if ((gebaeude[0x5a] & 0x20) && fcn_005c62c0(gebaeude, 0x178)) {
+            leistung *= 0.5;
+        }
         if (*(unsigned char*) (e + 0xd0) >= 60) {
             anzahl = 0;
             summe = 0.0f;
@@ -182,9 +192,13 @@ warten:
                         arbeitsleistung = fcn_004ff040(arbeiter);
                         if (arbeiter[0x165] == 27 || arbeiter[0x165] == 28) {
                             arbeitsleistung = (gm_GetEntitySkill(arbeiter, 1) + 0.5) * arbeitsleistung;
-                            if (arbeiter[0x1b4] & 1) arbeitsleistung = 0.01f;
+                            if (arbeiter[0x1b4] & 1) {
+                                arbeitsleistung = 0.01f;
+                            }
                         }
-                        if (arbeiter[0x1cc] & 4) arbeitsleistung = fcn_004eceb0(arbeiter, *(unsigned short*) (e + 0xac)) * arbeitsleistung;
+                        if (arbeiter[0x1cc] & 4) {
+                            arbeitsleistung = fcn_004eceb0(arbeiter, *(unsigned short*) (e + 0xac)) * arbeitsleistung;
+                        }
                         if (fcn_005c6270(g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c, 0x2ba)) {
                             summe += arbeitsleistung * 1.25f;
                         } else {
@@ -206,8 +220,12 @@ warten:
         }
         letzte_zeit = (pos14_7f4c00*) (e + 0x60);
         differenz = fcn_0050c830(letzte_zeit, &g_7f4c00, 0);
-        if (differenz > 0) e[0xd0] += (char) differenz;
-        if (gebaeude[0x5b] & 0x10) leistung += 0.1f;
+        if (differenz > 0) {
+            e[0xd0] += differenz;
+        }
+        if (gebaeude[0x5b] & 0x10) {
+            leistung += 0.1f;
+        }
         leistung = (leistung + *(float*) (e + 0xcc) + (*(int*) (gebaeude + 0x41) - 2) * 0.1) * *(float*) (e + 0xd4);
         if (!gm_ResolveEntityById(0, (void**) &lager, 0, *(int*) (e + 0xc0)) ||
             (*(short*) lager != 0x2a && *(short*) lager != 0x116)) {
@@ -241,7 +259,9 @@ warten:
             }
             if (*(int*) (e + 0xc8)) {
                 nachricht = fcn_005463a0(2, 0, 0x11, 3, *(int*) (e + 4));
-                if (nachricht != 0) fcn_00546190(nachricht);
+                if (nachricht != 0) {
+                    fcn_00546190(nachricht);
+                }
                 *(int*) (e + 0xc8) = 0;
                 if (*(int**) (e + 0x88) != 0) {
                     fcn_005467e0(*(int**) (e + 0x88));
@@ -250,7 +270,9 @@ warten:
                 *letzte_zeit = *(pos14_7f4c00*) (e + 0x52);
             }
             naechste_zeit = (pos14_7f4c00*) (e + 0x52);
-            if (fcn_00500cb0(naechste_zeit, &g_7f4c00) >= 0) return;
+            if (fcn_00500cb0(naechste_zeit, &g_7f4c00) >= 0) {
+                return;
+            }
             do {
                 rezept = lpObjektePROT + *(unsigned short*) (e + 0xac) * 0x41;
                 differenz = fcn_0050c830(letzte_zeit, naechste_zeit, 0);
@@ -259,11 +281,14 @@ warten:
                 if (*(float*) (e + 0xb4) <= 0.0f) {
                     do {
                         ++produziert;
-                        *(float*) (e + 0xb4) += *(unsigned int*) (rezept + 0x22);
+                        *(float*) (e + 0xb4) += (double) *(unsigned int*) (rezept + 0x22);
                         *(float*) (e + 0xb8) = *(float*) (e + 0xb4);
                     } while (*(float*) (e + 0xb4) <= 0.0f);
                     if (produziert != 0) {
                         *(int*) (e + 0xc4) = fcn_004c5250(*(int*) (e + 0xc0), *(unsigned short*) (e + 0xac), produziert);
+                    } else if (*(int*) (e + 0xc4) == -1 &&
+                        fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) == 0) {
+                        *(int*) (e + 0xc4) = fcn_004c51f0(*(int*) (lager + 2), -1, *(unsigned short*) (e + 0xac), 0, g_773d75, 0);
                     }
                 } else if (*(int*) (e + 0xc4) == -1 &&
                     fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) == 0) {
@@ -279,14 +304,23 @@ warten:
         }
 mangel:
         haushalt = fcn_005049a0(gebaeude);
-        arbeiter = g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c;
-        if (!*(int*) (e + 0xc8) && (arbeiter[2] == 6 || arbeiter[2] == 7)) {
+        if (!*(int*) (e + 0xc8) &&
+            (*(unsigned char*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 2) == 6 ||
+             *(unsigned char*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 2) == 7)) {
             nachricht_typ = 0x5f1;
             haus = fcn_0050dc90((int) gebaeude);
-            if (haus != 0 && (haus[0x1b4] & 1)) nachricht_typ = 0x60d;
-            he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
-                *(int*) (e + 4), text, 0, nachricht_typ,
-                *(int*) (gebaeude + 1), haushalt != 0 ? *(int*) (haushalt + 2) : -1, 0, bild);
+            if (haus != 0 && (haus[0x1b4] & 1)) {
+                nachricht_typ = 0x60d;
+            }
+            if (haushalt != 0) {
+                he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
+                    *(int*) (e + 4), text, 0, nachricht_typ,
+                    *(int*) (gebaeude + 1), *(int*) (haushalt + 2), 0, bild);
+            } else {
+                he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
+                    *(int*) (e + 4), text, 0, nachricht_typ,
+                    *(int*) (gebaeude + 1), -1, 0, bild);
+            }
         }
         if (gebaeude != 0 && !*(int*) (e + 0xc8) && *(int*) (gebaeude + 0x95) != -1) {
             fcn_004c6300(*(int*) (gebaeude + 1));
@@ -295,6 +329,9 @@ mangel:
         *(int*) (e + 0xc4) = -1;
         fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
         *letzte_zeit = *(pos14_7f4c00*) (e + 0x52);
+        return;
+    case 0:
+        *(int*) (e + 0x70) = *(int*) (e + 0x70) + 1;
         return;
     case 2:
         if (*(int*) (e + 0x14) > 0 || *(int*) (e + 0x18) > 0) {
@@ -307,24 +344,32 @@ mangel:
             return;
         }
         for (arbeiter = g_7f4ca0; arbeiter < g_7f4ca0 + 768 * 0x21c; arbeiter += 0x21c) {
-            if (*(char**) (arbeiter + 0x17c) == e) fcn_00529160(gebaeude, 0, *(unsigned short*) arbeiter, 0);
+            if (*(char**) (arbeiter + 0x17c) == e) {
+                fcn_00529160(gebaeude, 0, *(unsigned short*) arbeiter, 0);
+            }
         }
         if (gebaeude != 0) {
             fcn_004c6300(*(int*) (gebaeude + 1));
-            fcn_00546190((struct unit*) e);
-            return;
+        } else {
+            break;
         }
-        break;
+        fcn_00546190((struct unit*) e);
+        return;
     case -2:
     case -1:
         gm_ResolveEntityById((void**) &gebaeude, 0, 0, *(int*) (e + 0xbc));
-        if (gebaeude != 0) fcn_004c6300(*(int*) (gebaeude + 1));
+        if (gebaeude != 0) {
+            fcn_004c6300(*(int*) (gebaeude + 1));
+        }
         for (arbeiter = g_7f4ca0; arbeiter < g_7f4ca0 + 768 * 0x21c; arbeiter += 0x21c) {
-            if (*(char**) (arbeiter + 0x17c) == e) fcn_00529160(0, 0, *(unsigned short*) arbeiter, 0);
+            if (*(char**) (arbeiter + 0x17c) == e) {
+                fcn_00529160(0, 0, *(unsigned short*) arbeiter, 0);
+            }
         }
         break;
     default:
         return;
+    }
     }
     fcn_00546190((struct unit*) e);
 }

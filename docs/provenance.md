@@ -18737,3 +18737,40 @@ in ebx where native uses ebp, obj sits in ebp where native uses esi in the first
 float temp with `fst [esp+0x18]` before the ftol that we do not emit. New locals `leftw` and the reused `w`
 are placeholders to rename under the naming conventions if they persist. Backups .scratch/f540020/kept.c and
 win_4393.c hold the current source, with notes in WALK_FINDING.md.
+
+## 2026-11-03 — production run reconstructed
+
+`0x571870` (he_RunProduktion) goes from 437 matching bytes (11.4 percent) to 891 (23.3 percent) with the
+object at 4208 from 2640, all 31 callees resolving to project definitions, lint clean and the equal prefix
+grown from 10 bytes to 53. The first mismatch is a positional branch displacement rather than a code-shape
+error, since our switch tail sits farther away. The whole body is transcribed in native order: the prologue
+and frame; the early `*(unsigned short*)(e+8) == 0xffff` branch; the switch with its jump table decoded
+(-2 and -1 to 0x5726d2, 0 to 0x5718f7, 1 to 0x5718e9, 2 to 0x57261e); the case 1 c4 path with
+fcn_00502cd0, gm_eval_SlotVoll, the 12-arm bild table, g_fb5760[c4].f1 == 8 and two he_MessageBoxQuickjump
+sites; the main production path (leistung from fcn_0050c710 times 0.01 plus 1.0, the haus type 6/7 term of
+1/1008, fcn_005c62c0 at 0.5 discount, the 60-worker loop, summe and anzahl, e->d4 times 0.9f, the
+fcn_0050fdb0 0.25 blend, fcn_0050c830 differenz and the leistung blend); lager type 0x2a and 0x116; the
+rohstoff four-word loop; the c8 message clear; the do/while production loop with its duplicated else-if
+(produziert != 0 against e->c4 == -1); the mangel epilogue; case 2 and the -2/-1 loops; and the default.
+Four load-bearing shapes were verified by build. `char bild[260]` rather than 256 gives `sub esp,0x724` with
+text at 0x124 and debug at 0x524 exactly, where 256 gives 0x720. The early branch must place the
+fcn_00546190 call after the if/else as a join, `if (short == 0xffff) { gebaeude = ...; if (gebaeude)
+io_FormatTextBuffer(...); } else { switch (...) {...} } fcn_00546190(e);`, which makes the compiler emit
+native's non-folded `add esp,0xc; push ebp; call; add esp,4` and the near je to the shared tail, while any
+variant with the call inside the branch or with an early return folds the cleanups. The switch source order
+must be case 1, case 0, case 2, case -2, case -1, which with case 0 present yields native's dispatch of
+eax=value and ecx=index with the inline `inc eax` early return, while case 0 first or last or dropped swaps
+the register roles and puts the early-return block out of line. And case 2 must be
+`if (gebaeude) fcn_004c6300(...); else break; fcn_00546190(e); return;` so the zero path breaks to the shared
+tail and the 6300/546190 pair stays unfolded. The largest remaining size gap is the `strcpy(bild, "...")`
+inlining: native shares one 34-byte copy block across the ten ROHSTOFFMANGEL arms as `mov esi,literal; jmp
+copy` around `lea edi,[esp+0x30]; mov ecx,8; rep movsd; movsw`, while our object inlines the whole copy per
+arm in both chains for about nine bytes per arm, roughly 180 over. The same source shape shares in a
+standalone translation unit, so the trigger is the surrounding block layout: native's chain falls through to
+0x571c21 and ours jumps to a continuation at 0x44f because the arms are ordered differently, with native
+laying out first-if body, final else body, else-if body and then the continuation. Also open: the FP ternary
+where native loads `fld dword [0x6628a8]` for 0.0f and adds `[leistung]` while ours loads a qword 0.0 with
+`fadd st,st(1)` and an extra `fstp`, plus a scratch slot at B+0x14 in native against B+0x08 in ours; and the
+haushalt search loop where native uses `jl 0x85a0a0` and ours `jb`, likely from the comparison form of
+`arbeiter < g_7f4ca0 + 768*0x21c`. Backup .scratch/he_RunProduktion.best.c holds the current source and
+.scratch/norm.awk the normalised instruction diff.
