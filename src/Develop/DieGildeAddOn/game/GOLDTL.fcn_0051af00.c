@@ -523,12 +523,12 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			}
 			cursor += 4;
 			fcn_00517c00(*(int*) (cursor - 4), r,
-				(unsigned char) (text.buf[i] - '0'), text.tmp);
+				(text.buf[i] - '0'), text.tmp);
 			cp_src = text.tmp;
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 3;
 			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
-			memcpy(cp_dst, cp_src, cp_n);
+			memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			break;
 		case 'a':
 			if (text.buf[i - 1] == '%') {
@@ -539,7 +539,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 1;
 				fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) - i + 1);
-				memcpy(cp_dst, cp_src, cp_n);
+				memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 				break;
 			}
 			sprintf(text.tmp, g_6a2348, 0x14);
@@ -626,7 +626,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					sprintf(text.tmp, g_68b3f8, res, slot98);
 				}
 				if (fcn_0051e070() == 0 && grammar_state == 2) {
-					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
+					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			} else if (grammar_state == 3 || grammar_state == 4) {
 				res = fcn_0042b2f0(g_14a5400[kind], r, 4);
@@ -637,7 +637,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					sprintf(text.tmp, g_68b3f8, res, slot98);
 				}
 				if (fcn_0051e070() == 0 && grammar_state == 4) {
-					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
+					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			} else if (grammar_state == 5 || grammar_state == 6) {
 				res = fcn_0042b2f0(g_14a5418[kind], r, 4);
@@ -648,7 +648,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					sprintf(text.tmp, g_68b3f8, res, slot98);
 				}
 				if (fcn_0051e070() == 0 && grammar_state == 6) {
-					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
+					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			}
 			if ((int) strlen(text.tmp) + i > 0x17cb) {

@@ -5,15 +5,16 @@
  * the target object of each live task and hands it to the per-type progress
  * handler. One loop, eight-way dispatch on the task state.
  *
- * Status: the compiled body is exactly the native 4640 bytes; 534 of those
+ * Status: the compiled body is exactly the native 4640 bytes; 616 of those
  * bytes match, and the rebrew verdict is STUB (equal length, below the
  * NEAR_MATCHING threshold). All eight dispatch bodies are transcribed in
  * native body order (5, 1, 2, 3, 6, 4, 7, 8) and the frame matches the native
  * 0x138. The reference stores -1 to p->timer as an immediate and keeps every
  * fcn_004c6680/fcn_004c67c0 call tail separate; here the state -1 test is
  * spelled ~p->type == 0, the two case-6 tails evaluate ent34(obj) into n
- * ahead of the call, and the case-4 p->c0c == 1 guard inlines ent34, so the
- * compiler cannot share those tails either.
+ * ahead of the call, and three argument sites spell ent34 out in place (the
+ * case-4 p->c0c == 1 CompareVector argument and the two case-2 sites below),
+ * so the compiler cannot share those tails either.
  */
 extern int g_772ea4;		/* 0x00772ea4 */
 
@@ -193,7 +194,7 @@ void __cdecl fcn_004d8d00(char* a0)
 				    && p->c0c) {
 					fcn_0045b920((int)base, p->f14, p->f18, vec);
 					v24 = CompareVector3WithinTolerance(vec,
-					    (float*)(ent34(obj) + 0x4c), 120.0f) != 0;
+					    (float*)((*(int*)(*(int*)(obj) + 0x34)) + 0x4c), 120.0f) != 0;
 				}
 			} else if (*(int*)ent == 0x176) {
 				if (tgt) {
@@ -306,7 +307,7 @@ void __cdecl fcn_004d8d00(char* a0)
 					goto tail1;
 				if (p->c1c)
 					goto tail1;
-				if (!fcn_0045b990(base, (float*)(ent34(obj) + 0x4c),
+				if (!fcn_0045b990(base, (float*)((*(int*)(*(int*)(obj) + 0x34)) + 0x4c),
 					&v84, &v80, &v28))
 					break;
 				if (tgt) {

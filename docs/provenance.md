@@ -17372,3 +17372,55 @@ force over the six tick calls on the end-mark base gives four 4699 objects, wher
 540 and keeps three sites. On the swapped base the 4699 hits top out at 532. The remaining lever is
 the frame and register plan: the icon hit test spills e[4] for 12 bytes and the compiler picks edi
 for h0, so h3 reloads, where native has ebp for h0 and edi for h3.
+
+## 2026-11-02 — task dispatcher match 534 to 616 at native size
+
+`0x4D8D00` keeps the object at exactly 4640 with the call counts held (fcn_004c6680 11,
+fcn_004c67c0 9, fcn_004c6940 16), frame 0x138 and the instruction count down from 1465 to 1464
+against native 1452. Match rises from 534 to 616. Two selective ent34 inlines do it: the case-2
+0x174 branch now passes `(char*)(*(int*)(*(int*)(obj + 0x184) + 0x34))` to fcn_004c6680, and the
+case-2 tail1 block passes `(float*)(*(int*)(*(int*)(obj + 0x184) + 0x34) + 0x4c)` to
+fcn_0045b990, so ent34 is a static function with 25 remaining call sites. The pair is the only
+zero-net-size combination out of the full inline sweep that keeps all three call counts: each site
+alone measures 4612 (+4, match 266) and 4604 (-4, match 292), and every other pair at 4640 trades
+match down (best others 437 and 378), while the 4640 triples above proxy match raise fcn_004c6940
+to 17 and the quads land at 4604 or below. Evidence: native listing
+`.scratch/native_4d8d00.json`, region and shape diffs from `.scratch/regions.py` and
+`.scratch/mshets.py`, verified by
+`rebrew test src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004d8d00.c --va 0x004d8d00 --size 4640 --no-promote`
+reporting STUB 616/4640. Backup `.scratch/4d8d00.kept11.c`; previous state
+`.scratch/4d8d00.kept10.c`.
+
+## 2026-11-02 — dispatcher inlines a zero-net pair, formatter trades strlens
+
+`0x4D8D00` 534 to 616 with the object still exactly 4640, the call counts held (fcn_004c6680 11,
+fcn_004c67c0 9, fcn_004c6940 16), frame 0x138 and instruction count 1464 against native 1452. One
+zero-net-size ent34 inline pair sits on top of the kept L476 inline: the case-2 0x174 branch calls
+`fcn_004c6680((char*)(*(int*)(*(int*)(obj+0x184)+0x34)), v10, v14, 0)` and the case-2 tail1 calls
+`fcn_0045b990(base, (float*)(*(int*)(*(int*)(obj+0x184)+0x34)+0x4c), &v84, &v80, &v28)`, leaving
+ent34 static with 25 call sites. The sweep covered all 28 single inlines from the previous state
+(sizes 4536..4620; line-196 alone is 4612/+4 with proxy 266, line-309 is 4604/-4 with proxy 292),
+then every zero-net pair (this is the best; the others proxy 437, 378, 361, 354, 344, 329), then
+-4/-4/+8 triples (4640 but c6940 rises to 17, rejected) and +12/-4/-4/-4 quads (4604 or worse).
+Newly aligned runs: 0x4d9d82..0x4d9e25, 0x4d936a..0x4d9391, 0x4d9b5a..0x4d9b78. Divergence now
+starts at the prologue offset 12, where we emit `xor ebx,ebx` against native's `xor edx,edx` with
+a different slot order (ours base 0x18 and ent 0x1c, vec 0x5c and msg 0x30, v80 0x2c; native ent
+0x18, base 0x1c, vec 0x2c, msg 0x3c, v80 0x80) and our trailer adds a `mov ebx,[v68]` reload.
+Dead levers measured: swapping the declarations of base/ent, vec/msg, v68/i and i/v80 all give the
+identical object because MSVC assigns these slots by use; volatile v68 gives 4660/match 172; v80
+and v84 as int[2] or vec and msg as one struct gives 4640 with proxy 435; dropping `v68 = 0` gives
+4640 with proxy 203; `i = 0; for (; ...)` gives 4564.
+
+`0x51AF00` 1018 to 1027 with the object at 6455 and both tables on native offsets, selector
+byte-identical, rep movs 12 and 6 movsd. Four size-neutral trades after case I, so the matched I
+region and the table placement stay undisturbed: case N drops the `(unsigned char)` on the
+fcn_00517c00 digit argument because native pushes the byte; case N's memcpy length becomes a fresh
+`(int) strlen(cp_src)` because native reruns strlen at its tail (0x51bfcd); case a's percent path
+takes a fresh strlen at 0x51c073's region tail; and the three G `toupper` sites drop the cast
+because native sign-extends (movsx at 0x51b265). Net zero: -8, +8, +12 and -16 bytes with compiler
+interactions giving exactly 6455. Rejected with measurements: `switch(c)` -4 (pre-I, match 878),
+all six toupper -20 (pre-I, 833), unsigned /3 and %3 in I -8 (I drops to -28, 1008/956), T fresh
+strlen +96, f path-2 fresh strlen -72, and a plain-path fresh strlen +92 (all split merges).
+`j = *(char*)p` in G scored 1041 at the same size and tables but native zero-extends the icon index
+(`xor ecx,ecx; mov cl,[eax]; mov eax,ecx` at 0x51c120), so it is a behaviour change and was
+rejected.

@@ -423186,21 +423186,21 @@ blocker = "io_Text-family buffer expansion reconstructed in full from a fresh ri
 blocker_delta = 2108
 
 ["GOLDTL.0x0051af00".verification]
-source_hash = "edeb4e1590c2dc80c5ae4b6f4d43468382b21852e740e779c04e2b36c2475a6f"
+source_hash = "f728a197956037e3eee8f8568fcb4142bce0a56128f70b0b9543013754ba8e8a"
 reference_hash = "1a5a0fcc3c96b5e63a7087a546fe535837f30271f04358bc5d9b7ebc2ddb58ab"
 reference_size = "6464"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "0e8a99954f54c9a4a83e18dc30c2c78d371ee084f27f0d787482cfc91082426c"
+compiler_hash = "7abcb079717a76f6d448fa4f910ea5f9116c386c77fd93b0df08395841ecd51f"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x51af00"
 context_hash = ""
 defines = "[]"
-input_hash = "c53c0ff96f3eaba5a1930b56d6bde55e6a4f51fbd743823cfdb6cbfe3ebef555"
+input_hash = "181f57823d84d50a2e0d8f03acad6b1d7ccaa3437ae3f866457e233d57837ba0"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T11:36:48+00:00"
+measured_at = "2026-11-02T14:33:50+00:00"
 
 [["GOLDTL.0x0051af00".status_history]]
 old_status = "STUB"
@@ -425306,7 +425306,7 @@ status = "STUB"
 blocker = "Docs map TL 0x4d8d00 with Gold 0x4d76a0 as combat task progression and claim no provider. Stored SIZE 4632. Prologue allocates 0x138, loads global 0x67a370+0xb0, and branches on global 0x772ea4. GOLDTL.fcn_004d9f20 calls it as void(Slot*), while this file is int(void) return 0. Signature and body are unwritten."
 
 ["GOLDTL.0x004d8d00".verification]
-source_hash = "a2582b4a150ef151d58473d79b45ee9db168b060bfd2b9a1c83ad3d1ac2d8d73"
+source_hash = "94d2af4afd61002e5ce3d9660716488f91145b9d3ae096d50f4b6e94e0fc6cf6"
 reference_hash = "409f7a2378525cc1fd7834f94348d97e06a59a32c4f48642641567d8e81991d7"
 reference_size = "4640"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -425317,10 +425317,10 @@ module = "GOLDTL"
 va = "0x4d8d00"
 context_hash = ""
 defines = "[]"
-input_hash = "334feb05d5e4d0328ec06797e84fdb554343377d37c9c9b824fe772fa04c82ac"
+input_hash = "6dbb0e2016045d531a65abb2e0bdcef727059c588e0c117ebfab733b983eb710"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T14:23:23+00:00"
+measured_at = "2026-11-02T14:33:21+00:00"
 
 [["GOLDTL.0x004d8d00".status_history]]
 old_status = "STUB"
