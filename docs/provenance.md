@@ -19616,3 +19616,29 @@ the prologue and slot map do not converge and it stays in scratch under the keep
 temporary only and the old initialisers is 306 at 3736. Recommendation recorded: q and pc identity in the tail is
 the root-cause lead for both the slot map and e's home, and the parameter home looks like whole-frame colouring
 under docs/msvc6-allocator.md sections 62 to 70 rather than a prologue spelling. Notes in .scratch/569ff0/NOTES.md.
+
+## 2026-11-03 — production message tail identity settled on pc
+
+`0x569FF0` stays at 335 with object 3732, 38 relocations, frame 0x738 and the first mismatch at offset 7; the
+tail-identity edit was reverted and the source is clean. The listing settles the identity with raw esp plus the
+pending push count, where the slot is the raw offset minus the depth minus 0x10. The call at 0x56a699 to
+0x508e40 is followed by `mov [esp+0x2c],ebp` at 0x56a6a4, so slot 0x2c holds that call's result, which is our
+pc, and no other write to 0x2c precedes the tail. At 0x56abc0 the listing does `mov esi,[esp+0x2c]; push esi;
+call 0x509570` and uses the result only for `[eax+0x14] += flag` without storing it back, and 0x56abe9 reads
+`al,[esi+2]` from the stale esi, so the gate and the handle share one pointer; 0x56ac50 and 0x56ad2c also read
+0x2c, so both tail gates and both fcn_00545e80 handles are pc. Native therefore shares pc and not q, while our
+baseline passes q at slot 0x30 and gates on pc at 0x34. Measurements with the unchanged initialisers for num, pc,
+hits and cnt2: the baseline gives 335 at object 3732 with slots 0x14, 0x34, 0x2c and 0x18 where q is 0x30 and pc
+is 0x34; removing only the storeback is byte-identical because q is reassigned in the after: block before any
+read, so VC6 already drops it; passing pc instead gives 323 at 3728 with slots 0x14, 0x30, 0x2c and 0x18 and pc at
+0x30; adding the flag-arm `fcn_004c51a0(*(int*)(pc+4), ...)` gives 324 at 3728 with slots 0x10, 0x34, 0x30 and
+0x18; the same with a block-local qq temporary measures 324 with the same shape; and adding
+`while (... != *(int*)(pa+1))` gives 317 with the slots unchanged. Native's slots are cnt2 0x1c, pc 0x2c, hits
+0x30 and num 0x34, and the best attempt reached two of the four with the prologue unchanged, so nothing was kept.
+The tail itself is settled and offers no further code change, so the slot map and the parameter's home must move
+through another divergence. Remaining suspects: the after:-block guard variable, where native reads slot 0x1c and
+our source reads cnt2 which we place at 0x2c, and the num non-zero arm's fcn_004c51f0 second argument, where
+native reads slot 0x20 plus two and we read q plus two and native appears to overwrite q's slot with cnt2 so q is
+dead there. Both need the variable to slot mapping for the tail block re-derived with correct pending-push
+accounting before another edit. Candidate kept at .scratch/569ff0/cand_pctail_324.c with notes in NOTES.md under
+the case-5 tail identity section.
