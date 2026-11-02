@@ -17901,3 +17901,24 @@ load/dec/store, and wrapping the scalars as extern globals alone leaves idx in E
 object to 3823 with match 509. The colour is therefore a global allocator tie-break rather than a
 spelling effect, and our object is 18 bytes short of 3872, so the remaining missing code is the likelier
 thing to move it.
+
+## 2026-11-03 — trade dialog call hoist reaches the native frame
+
+`0x5B88B0` 214 to 404 with the object at 4300, three bytes over native, chkstk immediate exactly
+0x1368, one call to 0x5b8760, eight relocations, lint clean, and the first mismatch moved from offset 1
+to offset 23. Four changes. The 0x5b8760 call now happens once in the condition with the raw return and
+its quotient both live across the message loop, and the split matches native: the raw value feeds
+0x50b750 at 0x5b8e08 and 0x5b8ee3 while the quotient feeds the in-loop site at 0x5b8e7c. A second,
+discarded 0x50b750 statement after the if was a real duplicate call and is removed, with the single
+remaining call nested as the fourth argument of 0x4c5150 as native has it. `ent` now uses the
+zero-extended byte `*(unsigned char*)a0` so the code emits `xor ecx,ecx / mov cl,[esi]` instead of
+movsx, which alone lifted match from 213 to 404 by repairing the following register allocation. And pkt
+grew from 0xf8 to 0x100, making the local region eight bytes larger so every local above pkt sits eight
+higher, native rows at [esp+0x1a8] against our previous 0x1a0, which puts the frame at 0x1368 and aligns
+all local offsets with no instruction byte change. Caveat recorded: those eight bytes sit inside the
+packet buffer because that is where the gap lies, and two extra dword scalars would give identical
+codegen, so the exact original local is unproven. Rejected: `tv2 = tv / 3` because native's 0x55555556
+magic multiply costs 32 bytes, so it stays `% 3`; hoisting with a separate quotient local, sel as the
+quotient, init reorder, and nesting the in-loop 0x50b750 argument all measured worse or neutral (192 to
+213). The remaining three bytes and the divergence at offset 23 are a register choice: native loads
+`mov edx,[0x868050]` where we use ebp.

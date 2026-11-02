@@ -117,7 +117,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 	int hD;
 	int hE;
 	Row gage;
-	char pkt[0xf8];
+	char pkt[0x100];
 	Row rows[12];
 	char txtName[0x60];
 	char txtNum[0x80];
@@ -130,16 +130,17 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 	char textB[0x400];
 	Row old[12];
 	int i;
+	int ret;
 	char* p;
 	Row* r;
 
 	cnt = 0;
+	ent = (unsigned char*) (*(void**) 0x868050) + *(unsigned char*) a0 * 0x24d;
 	hA = -1;
 	sel = -1;
 	hB = -1;
 	hC = -1;
 	hD = -1;
-	ent = (unsigned char*) (*(void**) 0x868050) + a0[0] * 0x24d;
 
 	win = (char*) fcn_00534c40(a1, 0x6a42c8, 4, 0x6ac340, 0x6ac300, 0x6ac314,
 	                          0x6ac328);
@@ -261,10 +262,10 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 			goto packet2;
 		}
 		if (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == hE && nSlots != 0
-		    && fcn_005b8760() != 0) {
-			tv = fcn_005b8760() / nSlots;
+		    && (ret = fcn_005b8760()) != 0) {
+			tv = ret / nSlots;
 			tv2 = tv % 3;
-			tv3 = fcn_0050b750(tv, *(unsigned char*) 0x773d75);
+			tv3 = fcn_0050b750(ret, *(unsigned char*) 0x773d75);
 			if (fcn_00526010((void*) (0x7f4ca0
 			                          + *(unsigned short*) 0x774970 * 0x21c),
 			                 tv3, *(unsigned char*) 0x773d75)) {
@@ -283,8 +284,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 					fcn_004c4ef0(0x6ac2bc);
 				}
 			}
-			fcn_0050b750(tv, *(unsigned char*) 0x773d75);
-			fcn_004c5150(fcn_0050b750(tv, *(unsigned char*) 0x773d75), -1,
+			fcn_004c5150(fcn_0050b750(ret, *(unsigned char*) 0x773d75), -1,
 			             *(unsigned char*) 0x773d75,
 			             *(int*) (0x7f4ca4
 			                      + *(unsigned short*) 0x774970 * 0x21c));
