@@ -97,7 +97,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	char* p;
 	int mask;
 	char* looked;
-	int looked_kind;
+	char looked_kind;
 	char* self;
 
 	self = ctx;
@@ -153,16 +153,13 @@ int __cdecl fcn_004d6170(char* ctx)
 				}
 			}
 		}
+		p = g_772e98;
 		if (n > tally) {
-			side = g_772e9c;
-		} else {
-			side = g_772e98;
+			p = g_772e9c;
 		}
+		side = p;
 	} else {
-		side = g_772e98;
-		if (g_772ea4 != g_772e9c) {
-			side = g_772e9c;
-		}
+		side = g_772ea4 != g_772e9c ? g_772e9c : g_772e98;
 	}
 	screen = fcn_00470820(0, 0, "cutscenes\\combat_end");
 	fcn_00471d80(screen, 3);
@@ -258,9 +255,9 @@ int __cdecl fcn_004d6170(char* ctx)
 			cur = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
 			while (cur != 0) {
 				if (side == g_772e9c) {
-					*(int*) (cur + 0xa) = (unsigned short) *g_772e9c;
+					*(int*) (cur + 0xa) = *(unsigned short*) g_772e9c;
 				}
-				if (*(int*) (cur + 0xa) == (unsigned short) *g_772e9c && rec != 0) {
+				if (*(int*) (cur + 0xa) == *(unsigned short*) g_772e9c && rec != 0) {
 					if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
 						fcn_0050d490(cur);
 						fcn_004c51f0(*(int*) (rec + 2), *(int*) (cur + 6), *(unsigned short*) cur,

@@ -16627,3 +16627,20 @@ body to recover match would be a regression in structure. Reverted: the loop2 ex
 (0x104b block, +133 bytes) and using v.s1.vals[j] instead of [4+j] (379). Remaining: about +125
 bytes of reload drift spread over the body plus the documented producer-loop register colouring
 (i/qty28/induction as esi/ebx/edi against native ebx/edi/esi).
+
+## 2026-11-02 — inventory dialog reaches 924 with a pointer phi
+
+`0x4D6170` 630 to 924 with the object at 4918, five bytes under native 4923; frame 0x1124, the
+prologue sequence matches and the first mismatch stays at offset 24. Four edits. The side
+selection is a pointer phi (`p = g_772e98; if (n > tally) p = g_772e9c; side = p;` plus the else
+arm's ternary), so side stores once at the join instead of four times. `looked_kind` is `char`, so
+both loops emit `mov cl,[eax+8]; test cl,cl; cmp cl,4` as native does. The second `xor ebp,ebp`
+before tally=0 disappeared on its own once the register pressure changed, leaving only the
+`mov [esp+0x10],ebp` tally store that native does not have (removing it would make the gap 9).
+And `*g_772e9c` is read as `*(unsigned short*)` because native does `mov cx,[eax]`: a byte read
+was a real defect, and it now matches instruction for instruction (it took the object from +2 to
+-5). Reverted: loop restructure V-A, hoisting tally=0 to the prologue (broke the prologue match at
+offset 29), if/else and negated/ternary side variants, and while-condition rewrites. The slot
+permutation is not steerable: mode sits at [esp+0x18] against native [esp+0x1c] and the second
+store at [esp+0x24] against 0x14, and hiding or dropping the `*(int*)&mode = sum;` address-taking
+produced byte-identical output, so the first mismatch stays at 24.

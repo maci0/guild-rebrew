@@ -425196,7 +425196,7 @@ kind = "FUNCTION"
 status = "SIZE_MISMATCH"
 
 ["GOLDTL.0x004d6170".verification]
-source_hash = "b89ea5d895bb92b6a3ba97bb8be7d29929a3f79272592f78d3d0bdf4bfd2933e"
+source_hash = "02b782cef9b5945249a15b45387c3d2f75e38a4545564c1ad62f181a4c5a2789"
 reference_hash = "14725d25255807ed54f0a178341a25e1afcef429a32775fbec3f343ee0e45870"
 reference_size = "4923"
 headers_hash = "715e465ca14c6143fd5b6ea46de554ac822b0104969453b838363aefd91f2b60"
@@ -425207,10 +425207,10 @@ module = "GOLDTL"
 va = "0x4d6170"
 context_hash = ""
 defines = "[]"
-input_hash = "b71cdb5ba88e1875d3af733442ec3575703724b4f7f12df77131a3cb4137908e"
+input_hash = "71b8018f81cec1a249bf9d0f6aefb9eb5bef28c18368b1b1f0fa47529735350b"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T11:57:14+00:00"
+measured_at = "2026-11-02T12:08:46+00:00"
 ["GOLD.0x004d4d70"]
 size = 4915
 note = "Goal72 inferred role: Combat outcome/results UI and post-combat settlement. Counterpart GOLDTL.0x004d6170 supported by full native structure, resources and callers, not a compiled shared-provider claim. See .scratch/goal72/large/REPORT.md and manifest.json. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
