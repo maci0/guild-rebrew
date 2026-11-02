@@ -19801,3 +19801,16 @@ than native's. The next probe is to force inner's spill inside the do-while, or 
 merged total keeps i in the pool, since the correct merged variants currently collapse to two slots at frame
 0x400. Tool added: .scratch/512ee0/probe3.py reporting frame, prologue store slot, kinds start, amp slot and
 prefix, with backups L3.c and pre_m11_swap.c.
+
+## 2026-11-03 — crew dialog extent trimmed to its jump table
+
+`0x5744C0` had an extent of 4001 reached in an inventory whose last 25 bytes are linker fill rather than code:
+the switch jump table's final dword ends at 0x575447, then 0x575448 carries eight 0x90 bytes, a 0xC3 fill byte at
+0x575450, fifteen more 0x90 bytes and a final 0xC3 at 0x575460 before the next row at 0x575461, with no reachable
+instruction in that span. The extent is therefore 0xF88 = 3976, repaired through
+`rebrew binary repair-extents 0x5744c0=3976 --reason ... --sync-rows` with the preview digest
+a3c2cee3dbb6be2978ee30f89c3479f1b6390e69673bbfac8d88718d5647f7bb. The row then measures 1246 matching bytes with
+object 3980 against the corrected 3976, so it is four bytes over its extent, which agrees with the observation that
+its jump table sits at 0xf64 against the reference 0xf60. The larger point for the remaining work is that several
+of these rows were inventoried with trailing fill included, so a row can never reach its recorded size by compiling
+more code; the extent has to be repaired first, and then the object should match the corrected size exactly.

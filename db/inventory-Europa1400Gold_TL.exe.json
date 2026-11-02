@@ -1426,8 +1426,17 @@
   },
   {
     "va": 4216224,
-    "size": 256,
-    "name": "fcn.004055a0"
+    "size": 248,
+    "name": "fcn.004055a0",
+    "extent_history": [
+      {
+        "old_size": 256,
+        "new_size": 248,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4055a0 trim 248: 0x405698..0x40569f (8 x 0x90) | 0x416300 trim 572: 0x41653c..0x41653f (4 x 0x90) | 0x41d8b0 trim 155: 0x41d94b..0x41d94f (5 x 0x90) | 0x427c40 trim 700: 0x427efc..0x427eff (4 x 0x90) | 0x429490 trim 476: 0x42966c..0x42966f (4 x 0x90) | 0x4378c0 trim 216: 0x437998..0x43799f (8 x 0x90) | 0x4441c0 trim 1340: 0x4446fc..0x4446ff (4 x 0x90) | 0x4462b0 trim 248: 0x4463a8..0x4463af (8 x 0x90)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:48:22.426631+00:00"
+      }
+    ]
   },
   {
     "va": 4216480,
@@ -6820,8 +6829,17 @@
   },
   {
     "va": 4285184,
-    "size": 576,
-    "name": "fcn.00416300"
+    "size": 572,
+    "name": "fcn.00416300",
+    "extent_history": [
+      {
+        "old_size": 576,
+        "new_size": 572,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4055a0 trim 248: 0x405698..0x40569f (8 x 0x90) | 0x416300 trim 572: 0x41653c..0x41653f (4 x 0x90) | 0x41d8b0 trim 155: 0x41d94b..0x41d94f (5 x 0x90) | 0x427c40 trim 700: 0x427efc..0x427eff (4 x 0x90) | 0x429490 trim 476: 0x42966c..0x42966f (4 x 0x90) | 0x4378c0 trim 216: 0x437998..0x43799f (8 x 0x90) | 0x4441c0 trim 1340: 0x4446fc..0x4446ff (4 x 0x90) | 0x4462b0 trim 248: 0x4463a8..0x4463af (8 x 0x90)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:48:22.426658+00:00"
+      }
+    ]
   },
   {
     "va": 4285760,
@@ -8787,7 +8805,7 @@
   },
   {
     "va": 4315312,
-    "size": 160,
+    "size": 155,
     "name": "fcn.0041d8b0",
     "extent_history": [
       {
@@ -8803,6 +8821,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.721699+00:00"
+      },
+      {
+        "old_size": 160,
+        "new_size": 155,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x41d8b0 0x90x5 0x41d94b..0x41d94f, 0x544a90 0xCCx5 0x544c2b..0x544c2f, 0x566d00 0x90x10 0x567026..0x56702f, 0x5cfd00 0x90x13 0x5cff13..0x5cff1f, 0x62a1ee 0xCCx13 0x62a1f3..0x62a1ff, 0x640959 0xCCx14 0x640a62..0x640a6f, 0x64c112 0xCCx8 0x64c118..0x64c11f, 0x64d41a 0xCCx4 0x64d46c..0x64d46f",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:37:54.724571+00:00"
       }
     ]
   },
@@ -12529,8 +12554,17 @@
   },
   {
     "va": 4357184,
-    "size": 704,
-    "name": "fcn.00427c40"
+    "size": 700,
+    "name": "fcn.00427c40",
+    "extent_history": [
+      {
+        "old_size": 704,
+        "new_size": 700,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4055a0 trim 248: 0x405698..0x40569f (8 x 0x90) | 0x416300 trim 572: 0x41653c..0x41653f (4 x 0x90) | 0x41d8b0 trim 155: 0x41d94b..0x41d94f (5 x 0x90) | 0x427c40 trim 700: 0x427efc..0x427eff (4 x 0x90) | 0x429490 trim 476: 0x42966c..0x42966f (4 x 0x90) | 0x4378c0 trim 216: 0x437998..0x43799f (8 x 0x90) | 0x4441c0 trim 1340: 0x4446fc..0x4446ff (4 x 0x90) | 0x4462b0 trim 248: 0x4463a8..0x4463af (8 x 0x90)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:48:22.426665+00:00"
+      }
+    ]
   },
   {
     "va": 4357888,
@@ -12668,7 +12702,7 @@
   },
   {
     "va": 4363408,
-    "size": 480,
+    "size": 476,
     "name": "fcn.00429490",
     "extent_history": [
       {
@@ -12684,6 +12718,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.722072+00:00"
+      },
+      {
+        "old_size": 480,
+        "new_size": 476,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4055a0 trim 248: 0x405698..0x40569f (8 x 0x90) | 0x416300 trim 572: 0x41653c..0x41653f (4 x 0x90) | 0x41d8b0 trim 155: 0x41d94b..0x41d94f (5 x 0x90) | 0x427c40 trim 700: 0x427efc..0x427eff (4 x 0x90) | 0x429490 trim 476: 0x42966c..0x42966f (4 x 0x90) | 0x4378c0 trim 216: 0x437998..0x43799f (8 x 0x90) | 0x4441c0 trim 1340: 0x4446fc..0x4446ff (4 x 0x90) | 0x4462b0 trim 248: 0x4463a8..0x4463af (8 x 0x90)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:48:22.426669+00:00"
       }
     ]
   },
@@ -16288,8 +16329,17 @@
   },
   {
     "va": 4421824,
-    "size": 224,
-    "name": "fcn.004378c0"
+    "size": 216,
+    "name": "fcn.004378c0",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 216,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4055a0 trim 248: 0x405698..0x40569f (8 x 0x90) | 0x416300 trim 572: 0x41653c..0x41653f (4 x 0x90) | 0x41d8b0 trim 155: 0x41d94b..0x41d94f (5 x 0x90) | 0x427c40 trim 700: 0x427efc..0x427eff (4 x 0x90) | 0x429490 trim 476: 0x42966c..0x42966f (4 x 0x90) | 0x4378c0 trim 216: 0x437998..0x43799f (8 x 0x90) | 0x4441c0 trim 1340: 0x4446fc..0x4446ff (4 x 0x90) | 0x4462b0 trim 248: 0x4463a8..0x4463af (8 x 0x90)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:48:22.426673+00:00"
+      }
+    ]
   },
   {
     "va": 4422048,
@@ -18930,7 +18980,7 @@
   },
   {
     "va": 4473280,
-    "size": 1344,
+    "size": 1340,
     "name": "fcn.004441c0",
     "extent_history": [
       {
@@ -18946,6 +18996,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.722786+00:00"
+      },
+      {
+        "old_size": 1344,
+        "new_size": 1340,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4055a0 trim 248: 0x405698..0x40569f (8 x 0x90) | 0x416300 trim 572: 0x41653c..0x41653f (4 x 0x90) | 0x41d8b0 trim 155: 0x41d94b..0x41d94f (5 x 0x90) | 0x427c40 trim 700: 0x427efc..0x427eff (4 x 0x90) | 0x429490 trim 476: 0x42966c..0x42966f (4 x 0x90) | 0x4378c0 trim 216: 0x437998..0x43799f (8 x 0x90) | 0x4441c0 trim 1340: 0x4446fc..0x4446ff (4 x 0x90) | 0x4462b0 trim 248: 0x4463a8..0x4463af (8 x 0x90)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:48:22.426677+00:00"
       }
     ]
   },
@@ -19306,7 +19363,7 @@
   },
   {
     "va": 4481712,
-    "size": 256,
+    "size": 248,
     "name": "fcn.004462b0",
     "extent_history": [
       {
@@ -19322,6 +19379,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.722815+00:00"
+      },
+      {
+        "old_size": 256,
+        "new_size": 248,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4055a0 trim 248: 0x405698..0x40569f (8 x 0x90) | 0x416300 trim 572: 0x41653c..0x41653f (4 x 0x90) | 0x41d8b0 trim 155: 0x41d94b..0x41d94f (5 x 0x90) | 0x427c40 trim 700: 0x427efc..0x427eff (4 x 0x90) | 0x429490 trim 476: 0x42966c..0x42966f (4 x 0x90) | 0x4378c0 trim 216: 0x437998..0x43799f (8 x 0x90) | 0x4441c0 trim 1340: 0x4446fc..0x4446ff (4 x 0x90) | 0x4462b0 trim 248: 0x4463a8..0x4463af (8 x 0x90)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:48:22.426681+00:00"
       }
     ]
   },
@@ -19488,7 +19552,7 @@
   },
   {
     "va": 4485392,
-    "size": 3360,
+    "size": 3348,
     "name": "fcn.00447110",
     "extent_history": [
       {
@@ -19504,6 +19568,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.722829+00:00"
+      },
+      {
+        "old_size": 3360,
+        "new_size": 3348,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x641810 trim 329: 0x641959..0x64195f (7-byte lea esi,[esi]) and 0x641960..0x2b8 (32 x 0xcc) | 0x447110 trim 3348: 0x447e24..0x447e2f (12 x 0x90/0xcc) | 0x45fd70 trim 3140: 0x4609b4..0x4609bf (12 x 0x90/0xcc) | 0x4616e0 trim 1064: 0x461b08..0x461b0f (8 x 0x90/0xcc) | 0x48e050 trim 148: 0x48e0e4..0x48e0ef (12 x 0x90/0xcc) | 0x492d60 trim 232: 0x492e48..0x492e4f (8 x 0x90/0xcc) | 0x4a6bb0 trim 748: 0x4a6e9c..0x4a6e9f (4 x 0x90/0xcc) | 0x4a82b0 trim 908: 0x4a863c..0x4a863f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:57:06.152694+00:00"
       }
     ]
   },
@@ -25476,8 +25547,17 @@
   },
   {
     "va": 4586864,
-    "size": 3152,
-    "name": "fcn.0045fd70"
+    "size": 3140,
+    "name": "fcn.0045fd70",
+    "extent_history": [
+      {
+        "old_size": 3152,
+        "new_size": 3140,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x641810 trim 329: 0x641959..0x64195f (7-byte lea esi,[esi]) and 0x641960..0x2b8 (32 x 0xcc) | 0x447110 trim 3348: 0x447e24..0x447e2f (12 x 0x90/0xcc) | 0x45fd70 trim 3140: 0x4609b4..0x4609bf (12 x 0x90/0xcc) | 0x4616e0 trim 1064: 0x461b08..0x461b0f (8 x 0x90/0xcc) | 0x48e050 trim 148: 0x48e0e4..0x48e0ef (12 x 0x90/0xcc) | 0x492d60 trim 232: 0x492e48..0x492e4f (8 x 0x90/0xcc) | 0x4a6bb0 trim 748: 0x4a6e9c..0x4a6e9f (4 x 0x90/0xcc) | 0x4a82b0 trim 908: 0x4a863c..0x4a863f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:57:06.152720+00:00"
+      }
+    ]
   },
   {
     "va": 4590016,
@@ -25668,7 +25748,7 @@
   },
   {
     "va": 4593376,
-    "size": 1072,
+    "size": 1064,
     "name": "fcn.004616e0",
     "extent_history": [
       {
@@ -25684,6 +25764,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.723257+00:00"
+      },
+      {
+        "old_size": 1072,
+        "new_size": 1064,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x641810 trim 329: 0x641959..0x64195f (7-byte lea esi,[esi]) and 0x641960..0x2b8 (32 x 0xcc) | 0x447110 trim 3348: 0x447e24..0x447e2f (12 x 0x90/0xcc) | 0x45fd70 trim 3140: 0x4609b4..0x4609bf (12 x 0x90/0xcc) | 0x4616e0 trim 1064: 0x461b08..0x461b0f (8 x 0x90/0xcc) | 0x48e050 trim 148: 0x48e0e4..0x48e0ef (12 x 0x90/0xcc) | 0x492d60 trim 232: 0x492e48..0x492e4f (8 x 0x90/0xcc) | 0x4a6bb0 trim 748: 0x4a6e9c..0x4a6e9f (4 x 0x90/0xcc) | 0x4a82b0 trim 908: 0x4a863c..0x4a863f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:57:06.152725+00:00"
       }
     ]
   },
@@ -33972,8 +34059,17 @@
   },
   {
     "va": 4776016,
-    "size": 160,
-    "name": "fcn.0048e050"
+    "size": 148,
+    "name": "fcn.0048e050",
+    "extent_history": [
+      {
+        "old_size": 160,
+        "new_size": 148,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x641810 trim 329: 0x641959..0x64195f (7-byte lea esi,[esi]) and 0x641960..0x2b8 (32 x 0xcc) | 0x447110 trim 3348: 0x447e24..0x447e2f (12 x 0x90/0xcc) | 0x45fd70 trim 3140: 0x4609b4..0x4609bf (12 x 0x90/0xcc) | 0x4616e0 trim 1064: 0x461b08..0x461b0f (8 x 0x90/0xcc) | 0x48e050 trim 148: 0x48e0e4..0x48e0ef (12 x 0x90/0xcc) | 0x492d60 trim 232: 0x492e48..0x492e4f (8 x 0x90/0xcc) | 0x4a6bb0 trim 748: 0x4a6e9c..0x4a6e9f (4 x 0x90/0xcc) | 0x4a82b0 trim 908: 0x4a863c..0x4a863f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:57:06.152729+00:00"
+      }
+    ]
   },
   {
     "va": 4776176,
@@ -35081,7 +35177,7 @@
   },
   {
     "va": 4795744,
-    "size": 240,
+    "size": 232,
     "name": "fcn.00492d60",
     "extent_history": [
       {
@@ -35097,6 +35193,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.723792+00:00"
+      },
+      {
+        "old_size": 240,
+        "new_size": 232,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x641810 trim 329: 0x641959..0x64195f (7-byte lea esi,[esi]) and 0x641960..0x2b8 (32 x 0xcc) | 0x447110 trim 3348: 0x447e24..0x447e2f (12 x 0x90/0xcc) | 0x45fd70 trim 3140: 0x4609b4..0x4609bf (12 x 0x90/0xcc) | 0x4616e0 trim 1064: 0x461b08..0x461b0f (8 x 0x90/0xcc) | 0x48e050 trim 148: 0x48e0e4..0x48e0ef (12 x 0x90/0xcc) | 0x492d60 trim 232: 0x492e48..0x492e4f (8 x 0x90/0xcc) | 0x4a6bb0 trim 748: 0x4a6e9c..0x4a6e9f (4 x 0x90/0xcc) | 0x4a82b0 trim 908: 0x4a863c..0x4a863f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:57:06.152732+00:00"
       }
     ]
   },
@@ -38903,8 +39006,17 @@
   },
   {
     "va": 4877232,
-    "size": 752,
-    "name": "fcn.004a6bb0"
+    "size": 748,
+    "name": "fcn.004a6bb0",
+    "extent_history": [
+      {
+        "old_size": 752,
+        "new_size": 748,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x641810 trim 329: 0x641959..0x64195f (7-byte lea esi,[esi]) and 0x641960..0x2b8 (32 x 0xcc) | 0x447110 trim 3348: 0x447e24..0x447e2f (12 x 0x90/0xcc) | 0x45fd70 trim 3140: 0x4609b4..0x4609bf (12 x 0x90/0xcc) | 0x4616e0 trim 1064: 0x461b08..0x461b0f (8 x 0x90/0xcc) | 0x48e050 trim 148: 0x48e0e4..0x48e0ef (12 x 0x90/0xcc) | 0x492d60 trim 232: 0x492e48..0x492e4f (8 x 0x90/0xcc) | 0x4a6bb0 trim 748: 0x4a6e9c..0x4a6e9f (4 x 0x90/0xcc) | 0x4a82b0 trim 908: 0x4a863c..0x4a863f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:57:06.152734+00:00"
+      }
+    ]
   },
   {
     "va": 4877984,
@@ -39275,7 +39387,7 @@
   },
   {
     "va": 4883120,
-    "size": 912,
+    "size": 908,
     "name": "fcn.004a82b0",
     "extent_history": [
       {
@@ -39291,6 +39403,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.723977+00:00"
+      },
+      {
+        "old_size": 912,
+        "new_size": 908,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x641810 trim 329: 0x641959..0x64195f (7-byte lea esi,[esi]) and 0x641960..0x2b8 (32 x 0xcc) | 0x447110 trim 3348: 0x447e24..0x447e2f (12 x 0x90/0xcc) | 0x45fd70 trim 3140: 0x4609b4..0x4609bf (12 x 0x90/0xcc) | 0x4616e0 trim 1064: 0x461b08..0x461b0f (8 x 0x90/0xcc) | 0x48e050 trim 148: 0x48e0e4..0x48e0ef (12 x 0x90/0xcc) | 0x492d60 trim 232: 0x492e48..0x492e4f (8 x 0x90/0xcc) | 0x4a6bb0 trim 748: 0x4a6e9c..0x4a6e9f (4 x 0x90/0xcc) | 0x4a82b0 trim 908: 0x4a863c..0x4a863f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:57:06.152742+00:00"
       }
     ]
   },
@@ -74706,7 +74825,7 @@
   },
   {
     "va": 5524112,
-    "size": 416,
+    "size": 411,
     "name": "fcn.00544a90",
     "extent_history": [
       {
@@ -74715,6 +74834,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726069+00:00"
+      },
+      {
+        "old_size": 416,
+        "new_size": 411,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x41d8b0 0x90x5 0x41d94b..0x41d94f, 0x544a90 0xCCx5 0x544c2b..0x544c2f, 0x566d00 0x90x10 0x567026..0x56702f, 0x5cfd00 0x90x13 0x5cff13..0x5cff1f, 0x62a1ee 0xCCx13 0x62a1f3..0x62a1ff, 0x640959 0xCCx14 0x640a62..0x640a6f, 0x64c112 0xCCx8 0x64c118..0x64c11f, 0x64d41a 0xCCx4 0x64d46c..0x64d46f",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:37:54.724620+00:00"
       }
     ]
   },
@@ -80688,7 +80814,7 @@
   },
   {
     "va": 5664000,
-    "size": 816,
+    "size": 806,
     "name": "fcn.00566d00",
     "extent_history": [
       {
@@ -80704,6 +80830,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726412+00:00"
+      },
+      {
+        "old_size": 816,
+        "new_size": 806,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x41d8b0 0x90x5 0x41d94b..0x41d94f, 0x544a90 0xCCx5 0x544c2b..0x544c2f, 0x566d00 0x90x10 0x567026..0x56702f, 0x5cfd00 0x90x13 0x5cff13..0x5cff1f, 0x62a1ee 0xCCx13 0x62a1f3..0x62a1ff, 0x640959 0xCCx14 0x640a62..0x640a6f, 0x64c112 0xCCx8 0x64c118..0x64c11f, 0x64d41a 0xCCx4 0x64d46c..0x64d46f",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:37:54.724627+00:00"
       }
     ]
   },
@@ -82352,7 +82485,7 @@
   },
   {
     "va": 5719232,
-    "size": 4001,
+    "size": 3976,
     "name": "fcn.005744c0",
     "extent_history": [
       {
@@ -82368,6 +82501,13 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:32.737463+00:00"
+      },
+      {
+        "old_size": 4001,
+        "new_size": 3976,
+        "reason": "reviewed extent: the switch jump table's last dword ends at 0x575447, and 0x575448..0x575460 is linker fill (eight 0x90, a 0xC3 fill byte, fifteen 0x90, a final 0xC3) with no reachable instruction, so the code extent is 0xF88 = 3976 rather than the inventoried 4001",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:58:04.728267+00:00"
       }
     ]
   },
@@ -96299,8 +96439,17 @@
   },
   {
     "va": 6094080,
-    "size": 544,
-    "name": "fcn.005cfd00"
+    "size": 531,
+    "name": "fcn.005cfd00",
+    "extent_history": [
+      {
+        "old_size": 544,
+        "new_size": 531,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x41d8b0 0x90x5 0x41d94b..0x41d94f, 0x544a90 0xCCx5 0x544c2b..0x544c2f, 0x566d00 0x90x10 0x567026..0x56702f, 0x5cfd00 0x90x13 0x5cff13..0x5cff1f, 0x62a1ee 0xCCx13 0x62a1f3..0x62a1ff, 0x640959 0xCCx14 0x640a62..0x640a6f, 0x64c112 0xCCx8 0x64c118..0x64c11f, 0x64d41a 0xCCx4 0x64d46c..0x64d46f",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:37:54.724631+00:00"
+      }
+    ]
   },
   {
     "va": 6094624,
@@ -108571,7 +108720,7 @@
   },
   {
     "va": 6463982,
-    "size": 18,
+    "size": 5,
     "name": "fcn.0062a1ee",
     "extent_history": [
       {
@@ -108587,6 +108736,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729707+00:00"
+      },
+      {
+        "old_size": 18,
+        "new_size": 5,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x41d8b0 0x90x5 0x41d94b..0x41d94f, 0x544a90 0xCCx5 0x544c2b..0x544c2f, 0x566d00 0x90x10 0x567026..0x56702f, 0x5cfd00 0x90x13 0x5cff13..0x5cff1f, 0x62a1ee 0xCCx13 0x62a1f3..0x62a1ff, 0x640959 0xCCx14 0x640a62..0x640a6f, 0x64c112 0xCCx8 0x64c118..0x64c11f, 0x64d41a 0xCCx4 0x64d46c..0x64d46f",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:37:54.724637+00:00"
       }
     ]
   },
@@ -109838,8 +109994,17 @@
   },
   {
     "va": 6555993,
-    "size": 279,
-    "name": "fcn.00640959"
+    "size": 265,
+    "name": "fcn.00640959",
+    "extent_history": [
+      {
+        "old_size": 279,
+        "new_size": 265,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x41d8b0 0x90x5 0x41d94b..0x41d94f, 0x544a90 0xCCx5 0x544c2b..0x544c2f, 0x566d00 0x90x10 0x567026..0x56702f, 0x5cfd00 0x90x13 0x5cff13..0x5cff1f, 0x62a1ee 0xCCx13 0x62a1f3..0x62a1ff, 0x640959 0xCCx14 0x640a62..0x640a6f, 0x64c112 0xCCx8 0x64c118..0x64c11f, 0x64d41a 0xCCx4 0x64d46c..0x64d46f",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:37:54.724643+00:00"
+      }
+    ]
   },
   {
     "va": 6556272,
@@ -109894,8 +110059,17 @@
   },
   {
     "va": 6559760,
-    "size": 368,
-    "name": "fcn.00641810"
+    "size": 329,
+    "name": "fcn.00641810",
+    "extent_history": [
+      {
+        "old_size": 368,
+        "new_size": 329,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x641810 trim 329: 0x641959..0x64195f (7-byte lea esi,[esi]) and 0x641960..0x2b8 (32 x 0xcc) | 0x447110 trim 3348: 0x447e24..0x447e2f (12 x 0x90/0xcc) | 0x45fd70 trim 3140: 0x4609b4..0x4609bf (12 x 0x90/0xcc) | 0x4616e0 trim 1064: 0x461b08..0x461b0f (8 x 0x90/0xcc) | 0x48e050 trim 148: 0x48e0e4..0x48e0ef (12 x 0x90/0xcc) | 0x492d60 trim 232: 0x492e48..0x492e4f (8 x 0x90/0xcc) | 0x4a6bb0 trim 748: 0x4a6e9c..0x4a6e9f (4 x 0x90/0xcc) | 0x4a82b0 trim 908: 0x4a863c..0x4a863f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:57:06.152744+00:00"
+      }
+    ]
   },
   {
     "va": 6560128,
@@ -110521,7 +110695,7 @@
   },
   {
     "va": 6603026,
-    "size": 14,
+    "size": 6,
     "name": "fcn.0064c112",
     "extent_history": [
       {
@@ -110537,6 +110711,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729721+00:00"
+      },
+      {
+        "old_size": 14,
+        "new_size": 6,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x41d8b0 0x90x5 0x41d94b..0x41d94f, 0x544a90 0xCCx5 0x544c2b..0x544c2f, 0x566d00 0x90x10 0x567026..0x56702f, 0x5cfd00 0x90x13 0x5cff13..0x5cff1f, 0x62a1ee 0xCCx13 0x62a1f3..0x62a1ff, 0x640959 0xCCx14 0x640a62..0x640a6f, 0x64c112 0xCCx8 0x64c118..0x64c11f, 0x64d41a 0xCCx4 0x64d46c..0x64d46f",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:37:54.724649+00:00"
       }
     ]
   },
@@ -110613,7 +110794,7 @@
   },
   {
     "va": 6607898,
-    "size": 86,
+    "size": 82,
     "name": "fcn.0064d41a",
     "extent_history": [
       {
@@ -110622,6 +110803,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729728+00:00"
+      },
+      {
+        "old_size": 86,
+        "new_size": 82,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x41d8b0 0x90x5 0x41d94b..0x41d94f, 0x544a90 0xCCx5 0x544c2b..0x544c2f, 0x566d00 0x90x10 0x567026..0x56702f, 0x5cfd00 0x90x13 0x5cff13..0x5cff1f, 0x62a1ee 0xCCx13 0x62a1f3..0x62a1ff, 0x640959 0xCCx14 0x640a62..0x640a6f, 0x64c112 0xCCx8 0x64c118..0x64c11f, 0x64d41a 0xCCx4 0x64d46c..0x64d46f",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:37:54.724655+00:00"
       }
     ]
   },
@@ -110632,7 +110820,7 @@
   },
   {
     "va": 6608122,
-    "size": 54,
+    "size": 40,
     "name": "fcn.0064d4fa",
     "extent_history": [
       {
@@ -110641,6 +110829,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729731+00:00"
+      },
+      {
+        "old_size": 54,
+        "new_size": 40,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x64d4fa 0xCCx14 0x64d522..0x64d52f, 0x64d701 0xCCx6 0x64d70a..0x64d70f, 0x64dc43 0xCCx9 0x64dc77..0x64dc7f, 0x657bf8 0xCCx13 0x657c13..0x657c1f, 0x657e51 0xCCx6 0x65802a..0x65802f, 0x65aa71 0xCCx12 0x65aa94..0x65aa9f, 0x65b4d9 0xCCx15 0x65b721..0x65b72f, 0x65b730 0xCCx12 0x65b7b4..0x65b7bf",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:45:51.883907+00:00"
       }
     ]
   },
@@ -110666,7 +110861,7 @@
   },
   {
     "va": 6608641,
-    "size": 15,
+    "size": 9,
     "name": "fcn.0064d701",
     "extent_history": [
       {
@@ -110675,6 +110870,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729733+00:00"
+      },
+      {
+        "old_size": 15,
+        "new_size": 9,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x64d4fa 0xCCx14 0x64d522..0x64d52f, 0x64d701 0xCCx6 0x64d70a..0x64d70f, 0x64dc43 0xCCx9 0x64dc77..0x64dc7f, 0x657bf8 0xCCx13 0x657c13..0x657c1f, 0x657e51 0xCCx6 0x65802a..0x65802f, 0x65aa71 0xCCx12 0x65aa94..0x65aa9f, 0x65b4d9 0xCCx15 0x65b721..0x65b72f, 0x65b730 0xCCx12 0x65b7b4..0x65b7bf",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:45:51.883957+00:00"
       }
     ]
   },
@@ -110714,7 +110916,7 @@
   },
   {
     "va": 6609987,
-    "size": 61,
+    "size": 52,
     "name": "fcn.0064dc43",
     "extent_history": [
       {
@@ -110723,6 +110925,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729739+00:00"
+      },
+      {
+        "old_size": 61,
+        "new_size": 52,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x64d4fa 0xCCx14 0x64d522..0x64d52f, 0x64d701 0xCCx6 0x64d70a..0x64d70f, 0x64dc43 0xCCx9 0x64dc77..0x64dc7f, 0x657bf8 0xCCx13 0x657c13..0x657c1f, 0x657e51 0xCCx6 0x65802a..0x65802f, 0x65aa71 0xCCx12 0x65aa94..0x65aa9f, 0x65b4d9 0xCCx15 0x65b721..0x65b72f, 0x65b730 0xCCx12 0x65b7b4..0x65b7bf",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:45:51.883964+00:00"
       }
     ]
   },
@@ -111085,7 +111294,7 @@
   },
   {
     "va": 6650872,
-    "size": 40,
+    "size": 27,
     "name": "fcn.00657bf8",
     "extent_history": [
       {
@@ -111094,6 +111303,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729786+00:00"
+      },
+      {
+        "old_size": 40,
+        "new_size": 27,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x64d4fa 0xCCx14 0x64d522..0x64d52f, 0x64d701 0xCCx6 0x64d70a..0x64d70f, 0x64dc43 0xCCx9 0x64dc77..0x64dc7f, 0x657bf8 0xCCx13 0x657c13..0x657c1f, 0x657e51 0xCCx6 0x65802a..0x65802f, 0x65aa71 0xCCx12 0x65aa94..0x65aa9f, 0x65b4d9 0xCCx15 0x65b721..0x65b72f, 0x65b730 0xCCx12 0x65b7b4..0x65b7bf",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:45:51.883968+00:00"
       }
     ]
   },
@@ -111114,7 +111330,7 @@
   },
   {
     "va": 6651473,
-    "size": 479,
+    "size": 473,
     "name": "fcn.00657e51",
     "extent_history": [
       {
@@ -111123,6 +111339,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729789+00:00"
+      },
+      {
+        "old_size": 479,
+        "new_size": 473,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x64d4fa 0xCCx14 0x64d522..0x64d52f, 0x64d701 0xCCx6 0x64d70a..0x64d70f, 0x64dc43 0xCCx9 0x64dc77..0x64dc7f, 0x657bf8 0xCCx13 0x657c13..0x657c1f, 0x657e51 0xCCx6 0x65802a..0x65802f, 0x65aa71 0xCCx12 0x65aa94..0x65aa9f, 0x65b4d9 0xCCx15 0x65b721..0x65b72f, 0x65b730 0xCCx12 0x65b7b4..0x65b7bf",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:45:51.883971+00:00"
       }
     ]
   },
@@ -111453,7 +111676,7 @@
   },
   {
     "va": 6662769,
-    "size": 47,
+    "size": 35,
     "name": "fcn.0065aa71",
     "extent_history": [
       {
@@ -111462,6 +111685,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729799+00:00"
+      },
+      {
+        "old_size": 47,
+        "new_size": 35,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x64d4fa 0xCCx14 0x64d522..0x64d52f, 0x64d701 0xCCx6 0x64d70a..0x64d70f, 0x64dc43 0xCCx9 0x64dc77..0x64dc7f, 0x657bf8 0xCCx13 0x657c13..0x657c1f, 0x657e51 0xCCx6 0x65802a..0x65802f, 0x65aa71 0xCCx12 0x65aa94..0x65aa9f, 0x65b4d9 0xCCx15 0x65b721..0x65b72f, 0x65b730 0xCCx12 0x65b7b4..0x65b7bf",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:45:51.883975+00:00"
       }
     ]
   },
@@ -111502,13 +111732,31 @@
   },
   {
     "va": 6665433,
-    "size": 599,
-    "name": "fcn.0065b4d9"
+    "size": 584,
+    "name": "fcn.0065b4d9",
+    "extent_history": [
+      {
+        "old_size": 599,
+        "new_size": 584,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x64d4fa 0xCCx14 0x64d522..0x64d52f, 0x64d701 0xCCx6 0x64d70a..0x64d70f, 0x64dc43 0xCCx9 0x64dc77..0x64dc7f, 0x657bf8 0xCCx13 0x657c13..0x657c1f, 0x657e51 0xCCx6 0x65802a..0x65802f, 0x65aa71 0xCCx12 0x65aa94..0x65aa9f, 0x65b4d9 0xCCx15 0x65b721..0x65b72f, 0x65b730 0xCCx12 0x65b7b4..0x65b7bf",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:45:51.883979+00:00"
+      }
+    ]
   },
   {
     "va": 6666032,
-    "size": 144,
-    "name": "fcn.0065b730"
+    "size": 132,
+    "name": "fcn.0065b730",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 132,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x64d4fa 0xCCx14 0x64d522..0x64d52f, 0x64d701 0xCCx6 0x64d70a..0x64d70f, 0x64dc43 0xCCx9 0x64dc77..0x64dc7f, 0x657bf8 0xCCx13 0x657c13..0x657c1f, 0x657e51 0xCCx6 0x65802a..0x65802f, 0x65aa71 0xCCx12 0x65aa94..0x65aa9f, 0x65b4d9 0xCCx15 0x65b721..0x65b72f, 0x65b730 0xCCx12 0x65b7b4..0x65b7bf",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:45:51.883983+00:00"
+      }
+    ]
   },
   {
     "va": 6666176,
@@ -111711,12 +111959,21 @@
   },
   {
     "va": 6670318,
-    "size": 114,
-    "name": "fcn.0065c7ee"
+    "size": 105,
+    "name": "fcn.0065c7ee",
+    "extent_history": [
+      {
+        "old_size": 114,
+        "new_size": 105,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x65c7ee 0xCCx9 0x65c857..0x65c85f, 0x65c860 0xCCx8 0x65c8c8..0x65c8cf, 0x65cfc3 0xCCx4 0x65d08c..0x65d08f, 0x65f050 0xCCx11 0x65f215..0x65f21f, 0x660563 0xCCx6 0x6605fa..0x6605ff",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:50:13.681243+00:00"
+      }
+    ]
   },
   {
     "va": 6670432,
-    "size": 112,
+    "size": 104,
     "name": "fcn.0065c860",
     "extent_history": [
       {
@@ -111725,6 +111982,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729804+00:00"
+      },
+      {
+        "old_size": 112,
+        "new_size": 104,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x65c7ee 0xCCx9 0x65c857..0x65c85f, 0x65c860 0xCCx8 0x65c8c8..0x65c8cf, 0x65cfc3 0xCCx4 0x65d08c..0x65d08f, 0x65f050 0xCCx11 0x65f215..0x65f21f, 0x660563 0xCCx6 0x6605fa..0x6605ff",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:50:13.681265+00:00"
       }
     ]
   },
@@ -111760,8 +112024,17 @@
   },
   {
     "va": 6672323,
-    "size": 205,
-    "name": "fcn.0065cfc3"
+    "size": 201,
+    "name": "fcn.0065cfc3",
+    "extent_history": [
+      {
+        "old_size": 205,
+        "new_size": 201,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x65c7ee 0xCCx9 0x65c857..0x65c85f, 0x65c860 0xCCx8 0x65c8c8..0x65c8cf, 0x65cfc3 0xCCx4 0x65d08c..0x65d08f, 0x65f050 0xCCx11 0x65f215..0x65f21f, 0x660563 0xCCx6 0x6605fa..0x6605ff",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:50:13.681270+00:00"
+      }
+    ]
   },
   {
     "va": 6672528,
@@ -112051,8 +112324,17 @@
   },
   {
     "va": 6680656,
-    "size": 464,
-    "name": "fcn.0065f050"
+    "size": 453,
+    "name": "fcn.0065f050",
+    "extent_history": [
+      {
+        "old_size": 464,
+        "new_size": 453,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x65c7ee 0xCCx9 0x65c857..0x65c85f, 0x65c860 0xCCx8 0x65c8c8..0x65c8cf, 0x65cfc3 0xCCx4 0x65d08c..0x65d08f, 0x65f050 0xCCx11 0x65f215..0x65f21f, 0x660563 0xCCx6 0x6605fa..0x6605ff",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:50:13.681274+00:00"
+      }
+    ]
   },
   {
     "va": 6681120,
@@ -112171,7 +112453,7 @@
   },
   {
     "va": 6686051,
-    "size": 157,
+    "size": 151,
     "name": "fcn.00660563",
     "extent_history": [
       {
@@ -112180,6 +112462,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729806+00:00"
+      },
+      {
+        "old_size": 157,
+        "new_size": 151,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x65c7ee 0xCCx9 0x65c857..0x65c85f, 0x65c860 0xCCx8 0x65c8c8..0x65c8cf, 0x65cfc3 0xCCx4 0x65d08c..0x65d08f, 0x65f050 0xCCx11 0x65f215..0x65f21f, 0x660563 0xCCx6 0x6605fa..0x6605ff",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T21:50:13.681276+00:00"
       }
     ]
   },
