@@ -423482,7 +423482,7 @@ status = "SIZE_MISMATCH"
 blocker = "PARKED: prologue schedule wall (native loads [0x6a23a0] before [0x6a239c]; locked compiler loads src+0 first), so divergence at offset 16 makes the score coincidence-dominated. Copy forms/done block/r fold are structurally exact and saved as variants; frame 0x3294 exact; keeping the 981 body."
 
 ["GOLDTL.0x0051c840".verification]
-source_hash = "430e450780599064fe243785896becee27f96c582091c31959d969d95d127340"
+source_hash = "1d8bf1a7c31a0ccaadda26a3641045a0f3dac23edf565dbace1e36af63483a4a"
 reference_hash = "303c48f711186c6be65d56b78d82f063c481d24a9e7be25213523d36a7b17e07"
 reference_size = "6048"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423493,10 +423493,10 @@ module = "GOLDTL"
 va = "0x51c840"
 context_hash = ""
 defines = "[]"
-input_hash = "d6f1856e807fd27572fcd2863d39d076aa791633b53f327b9383421c8b28a302"
+input_hash = "8ade1cdab77df6316dd8b8fedc48b1d81b23230bc0e13ffd8b976dc36b8cc002"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T09:13:14+00:00"
+measured_at = "2026-11-02T09:54:27+00:00"
 
 [["GOLDTL.0x0051c840".status_history]]
 old_status = "STUB"

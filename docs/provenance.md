@@ -15937,3 +15937,18 @@ remaining 17 bytes are three store-order mismatches (0x47f, 0x888, 0x9bc); no ar
 keeps native ascending store order and native register homes at once: ascending order at
 those sites reverts global allocation to 5282, and a brute force over all 216 triplet
 permutations plus a one-site hill climb tops out at 5369.
+
+## 2026-11-02 — parser structural rebuild reaches its size ceiling
+
+`0x51C840` moves to 1432 match with the object at 6043, which is this function's ceiling.
+The object's bytes are stripped of trailing 0x90 while the target is not, so the reported
+SIZE_MISMATCH is an artifact; the code ends at 0x16E5 and native's `8d 49 00` pad carries the
+jump table to 0x16E8. The accepted structure is the collapsed splice (one shared
+count/memmove/copy tail at 0x9BB that case 'w' at 0x74F jumps into, i r==-1 falling through,
+native prefaces for both digit branches, separate 'a'/'n' arms) plus one spill-steering edit:
+writing the cursor through an address-taken pointer (`char** pp = &p; *pp = num + res;`) so p
+is spilled, which flips the S case to native's memory compare and adds exactly one code byte,
+so the table lands on 0x16E8 instead of riding down to 0x16E4. The earlier "-4 at 0x16D1"
+readings were an objdump wrapping artifact; extents must be measured from the jump-table
+anchors (casemap.py). Measured remaining per-anchor deltas: G +86, r +48, W -45, B -44, a -26,
+E +21, I +18, with the mid region netting +71 and the s/T region -72.

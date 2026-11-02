@@ -278,10 +278,8 @@ body:
 		case 'w':
 			res = fcn_0042b2f0(g_14a7bb0[0], 1, 8);
 			strcpy(tmp, (char*) res);
-			memmove(buf + i - 1 + strlen(tmp), buf + i + 1,
-				strlen(buf) - i + 1);
-			strcpy(buf + i - 1, tmp);
-			break;
+			k = strlen(buf) - i + 1;
+			goto wtail;
 		case 'i':
 			if (buf[i + 1] == 'i' || buf[i + 1] == 'c' ||
 			    buf[i + 1] == 'b' || buf[i + 1] == 'a' ||
@@ -293,7 +291,16 @@ body:
 				}
 				*(int*) ((char*) base + 0x10161d4 +
 					 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
-				if (buf[i + 1] == 'a' || buf[i + 1] == 'n') {
+				if (buf[i + 1] == 'a') {
+					if (*(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x53 ||
+					    *(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x55) {
+						*(int*) ((char*) base + 0x10161d4 +
+							 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
+					} else {
+						*(int*) ((char*) base + 0x10161d4 +
+							 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
+					}
+				} else if (buf[i + 1] == 'n') {
 					if (*(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x53 ||
 					    *(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x55) {
 						*(int*) ((char*) base + 0x10161d4 +
@@ -326,9 +333,12 @@ body:
 				strcat(num, "i");
 				flag = 2;
 				sprintf(tmp, num, 0x3e7);
-				k = strlen(tmp) / 3 + strlen(tmp);
+				res = strlen(tmp) / 3 + strlen(tmp) - 1;
+				{
+					char** pp = &p;
+					*pp = num + res;
+				}
 				e = strlen(tmp) - 1;
-				p = num + k;
 				k = -1;
 				while (e >= 0) {
 					*p = tmp[e];
@@ -340,14 +350,15 @@ body:
 					k++;
 					e--;
 				}
+				num[res] = 0;
 				memmove(buf + i - 3 + strlen(num), buf + i,
 					strlen(buf) - i + 1);
 				memcpy(buf + i - 2, num, strlen(num));
 			} else {
 				sprintf(num, g_67d444, 0x3e7);
 				flag = 2;
-				k = strlen(num);
-				p = tmp + (k - 1) / 3 + k;
+				res = (strlen(num) - 2) / 3 + strlen(num);
+				p = tmp + res;
 				k = -1;
 				e = strlen(num);
 				while (e >= 0) {
@@ -360,8 +371,10 @@ body:
 					k++;
 					e--;
 				}
-				memmove(buf + i - 1 + strlen(tmp), buf + i + 1,
-					strlen(buf) - i + 1);
+				tmp[res] = 0;
+				k = strlen(buf) - i + 1;
+			wtail:
+				memmove(buf + i - 1 + strlen(tmp), buf + i + 1, k);
 				memcpy(buf + i - 1, tmp, strlen(tmp));
 			}
 			break;
