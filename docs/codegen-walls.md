@@ -2349,3 +2349,19 @@ Evidence `.scratch/goal-tl-training/probe*.json` and native diff/command-table
 audit reports. These are rejected controls, not source promotions or proof of
 one unique original spelling. Future work can use the deferred native named
 call/global bindings rather than repeat these controls or emit assembly.
+
+TL581e20 remains 17 mismatched bytes at 0x47f, 0x888 and 0x9bc, object exactly 5386,
+frame `sub esp,0xc` with ebx/esi/edi. The three sites are the first three occurrences
+of the 35/142/71 triples, and native emits them in ascending store order while the
+global vreg homes only match with the rotated source order; ascending order (5282)
+flips the reload alternation from 0xba3 plus the 0xc55/0xec7 materialisations. Two
+exhaustive searches found no repair: all 216 permutations of the three triples max at
+5369, and a hill climb over the six triples (95 evaluations from the baseline and from
+all-ascending) also maxes at 5369. Expression forms (float and long literals, deref
+and byte-offset spellings, comma expressions, extra braces) are byte-identical, and
+folded constant temps or dead-value injectors are eliminated before allocation. Hoisting
+flen to function scope (5326), swapping `p=m_alloc` before `first=0` (5291), and moving
+the asm operands to [ebp-4]/[ebp-0xc] (454) all lose. The later occurrences at 0xc8c and
+0xec6 already match because the constants land in ebx/ecx/edi in both builds. Statement
+permutations of this transcription are exhausted; a structural change to the float fill
+whose store order the allocator could schedule differently is the untried direction.

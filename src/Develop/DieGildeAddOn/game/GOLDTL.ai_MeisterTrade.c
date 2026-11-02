@@ -143,7 +143,7 @@ double __cdecl gm_RandomFloat01(void);
 /* ADDRESS: GOLDTL 0x00489a70 */
 int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 {
-	char* q;
+	char* volatile q;
 	char* r;
 	char* x;
 	char* tp;
@@ -636,10 +636,33 @@ next_auto:
 	if (cnt < 3) {
 		for (i = 0; cnt < 3 && i < v.s3.cap; i++) {
 			id = v.s3.ids[i];
-			if (id == 0 || v.s3.vals[i] == 0) {
+			if (id == 0) {
+				continue;
+			}
+			found = 0;
+			t = (Town*) 0x100d0c0;
+			for (j = 0; j < *(int*) 0x100b0ac && found == 0; j++, t++) {
+				if (t->id == (unsigned short) id) {
+					found = 1;
+				}
+			}
+			if (found) {
+				continue;
+			}
+			found = 0;
+			pr = (Prod*) 0x100b0c0;
+			for (j = 0; j < *(int*) 0x100b0a8 && found == 0; j++, pr++) {
+				if (pr->id == (unsigned short) id) {
+					found = 1;
+				}
+			}
+			if (found) {
 				continue;
 			}
 			tmp = fcn_0050dfd0(q, id);
+			if (v.s3.vals[i] == 0) {
+				continue;
+			}
 			for (j = 0; j < v.s2.cap; j++) {
 				if (v.s2.ids[j] != 0 && v.s2.ids[j] != id) {
 					continue;
@@ -763,8 +786,9 @@ next_auto:
 	cnt = 0;
 	sent = 0;
 	n = 0;
-	for (i = 0; i < *(int*) 0x100b0a8 && n < 3; i++) {
-		int* w = (int*) ((char*) 0x100b0d4 + i * 0x40);
+	for (i = 0, pr = (Prod*) 0x100b0c0; i < *(int*) 0x100b0a8 && n < 3;
+	    i++, pr++) {
+		int* w = (int*) ((char*) pr + 0x14);
 
 		if (*w == 0) {
 			continue;

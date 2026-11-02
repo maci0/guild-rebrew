@@ -17124,3 +17124,25 @@ per-region byte accounting (ours against native): prologue 0x13c/0x13c, bar+fill
 ours multiplies a register where native multiplies the memory slot), colour 0x24e/0x25f, icon hit
 0x328/0x364, label 0x1bd/0x1ac, icon block 0x12b/0x12f, trailing 0xa1/0xa8 and gauge ends
 0x25a/0x2a3. Object is 153 under native overall.
+
+## 2026-11-02 — trade exclusion scans and a documented wall
+
+`0x489A70` 726 to 742 with the object at 6075. The loop2 exclusion scans are now native
+pointer walks: the town scan uses `t = (Town*)0x100d0c0` with `j < *(int*)0x100b0ac && found == 0`
+and `t->id == (unsigned short) id`, the producer scan uses `pr = (Prod*)0x100b0c0` with
+`j < *(int*)0x100b0a8 && found == 0` and `pr->id == (unsigned short) id`, and `v.s3.vals[i] == 0`
+moved after `fcn_0050dfd0(q, id)` as native does at 0x10d8/0x10fc. The -126 hole is gone and the
+drift at native 0x10e4 went from -100 to -59. Two supporting edits: `char* volatile q` keeps the
+frame at 0x74c once the scans remove the eight-byte locals slack, and the leftover producer loop
+is rewritten with pr induction and `w = (char*)pr + 0x14`. Reverted with measurements: break-style
+scans (6025/682), pwscan (6063/730), a large set of volatile removals and additions, producer-sell
+pr induction (6127/731) and the block-scoped leftover walk (6044/702). The first mismatch stays
+at 0xe6 because native homes i at [esp+0x14] and ours at [esp+0x1c]; the remaining +20 splits into
+drift +20 at call 30 (native 0x6be), +98 at call 39 (0x8d8), -95 at call 73 (0x11fc) and +50 at
+call 88 (0x15b1), which is the same dump-loop restructuring around native 0x82f..0x9dd rather
+than a removable extra block.
+
+`0x581E20` is now recorded in docs/codegen-walls.md: 17 mismatched bytes at 0x47f, 0x888 and
+0x9bc with the object exactly 5386, both exhaustive sweeps (216 permutations, and a 95-evaluation
+hill climb over the six triples) maxing at 5369, expression forms byte-identical, and the three
+named regressions (5326, 5291, 454). Statement permutations are exhausted there.
