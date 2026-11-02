@@ -2494,3 +2494,23 @@ and pushing edi at 0x0a instead of 0x1e, which regresses the prefix. The same ca
 of the +186 bytes in the body: about 18 f.win reloads plus non-CSE'd GUI(f.rows[i].label)
 control-index recomputations, where native computes the label index once at 0x7bf9 with
 shl/sub/lea and two stores because its win and label values stay in registers.
+
+TL4813B0 has a scalar slot map that is a colourer tie of the Finding 60 class. Our eight variables
+occupy the same eight slots as native but transposed: ours are j 0x00, factor 0x04, maxfactor 0x08,
+sel 0x0c, i and owner sharing 0x10, handle and saved at 0x14, cy 0x18, match 0x1c, cx 0x20, best
+0x24, best_score 0x28 and ent 0x2c, while native has match 0x10, i 0x14, cx 0x18, best_score 0x1c,
+cy 0x20, saved 0x24, owner 0x28 and ent 0x2c. The first difference is the saved-slot displacement at
+0x2c, native 0x48 against ours 0x38, and the prefix is byte-identical through 0x2b with the block
+order and colour intact (0x17 33 ff, 0x24 33 ed, 74 46 at 0x39, eb 0c at 0x7f, cmp ebp,edi at 0x81).
+The prescribed owner shape does not move it because owner already has a stack home at S+0x10 shared
+with the anonymous i, j and sel scratch, and the four later messages already reload it from there
+(0xb65, 0xd04, 0xe41, 0xe6a): a single assignment at L176c plus four message uses is byte-identical
+to the current body and only changes the slot's debug name, while removing the four per-site
+assignments changes no bytes. Measured inert: swapping the match and i declarations, reversing the
+whole scalar declaration list, and casting a void* saved. Measured regressions: owner assigned at
+entry (420 at object 4092), splitting j=0 before the outer g_100dc38<4 compare (526 at 4061, colour
+flips and the first difference moves to 0x18), volatile owner (461 at 4191), volatile saved (392 at
+4069), volatile i (538 at 4238, first difference stays 0x2c). `extern char g_100df20[]` does produce
+the immediate `add eax,0x100df20` form but costs the frame at 0x524 and 72 match, and keeping owner
+live across the call still gives 474 at 4114 with owner at 0x04, so the array form cannot be taken:
+native's 0x528 frame with the array implies a dedicated owner slot the colourer will not produce.

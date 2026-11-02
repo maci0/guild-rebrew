@@ -18548,3 +18548,26 @@ the localized win. Recommendation: rebuild the pre-merge label blocks (tabA[0] a
 0x5d08e9..0x5d09cf, 17 and 6 bytes over ours) before landing the merge. Merged candidates are kept in
 .scratch/660/r11/ (e1a and e10 are the cleanest at frame 0x438 with the shared block present), with tooling in
 .scratch/660/tools/ and the write-up in NOTES-rewrite.md round 6.
+
+## 2026-11-03 — master thieves slot map recorded as a colourer tie
+
+`0x4813B0` keeps 546 at object 4083 with frame `sub esp,0x528` and the prefix byte-identical through 0x2b;
+the owner-slot pass produced no keeper and the source is restored to the kept file. The slot maps are now
+read from a /Fc /O2 listing and the two sides hold the same eight variables over the same eight slots in
+transposed order: ours are j 0x00, factor 0x04, maxfactor 0x08, sel 0x0c, i and owner sharing 0x10,
+handle and saved at 0x14, cy 0x18, match 0x1c, cx 0x20, best 0x24, best_score 0x28 and ent 0x2c, against
+native's match 0x10, i 0x14, cx 0x18, best_score 0x1c, cy 0x20, saved 0x24, owner 0x28 and ent 0x2c. The
+first difference is the saved displacement at 0x2c, native 0x48 against ours 0x38. The owner shape does not
+move it because owner already has a stack home at S+0x10 shared with the anonymous i, j and sel scratch and
+the four later messages reload it from there (0xb65, 0xd04, 0xe41, 0xe6a); a single assignment at L176c with
+four message uses is byte-identical and removing the four per-site assignments changes nothing. Inert by
+measurement: swapping the match and i declarations, reversing the scalar declaration list, casting a void*
+saved. Regressions by measurement: owner assigned at entry (420 at 4092), splitting j=0 before the outer
+compare (526 at 4061, colour flips), volatile owner (461 at 4191), volatile saved (392 at 4069), volatile i
+(538 at 4238). The `extern char g_100df20[]` form produces native's immediate add but costs frame 0x524 and
+72 match, and keeping owner live across the call still measures 474 at 4114, so the array form is out of
+reach while the slot prefix stands. Recorded in docs/codegen-walls.md as the Finding 60 class; the copy-loop
+0xD1 item depends on the slots moving and must not be adopted on its own because its shape (nesting j=0
+between the conditions) flips the colour to 526 at 4061. Variants kept in .scratch: meis_own1.c, meis_own5.c
+and meis_own7.c are byte-identical, with meis_own4.c, meis_j1.c, meis_a2.c, meis_vol1.c, meis_vol2.c,
+meis_sv1.c, meis_vi1.c, meis_sp1.c and meis_rev1.c documenting the rest.
