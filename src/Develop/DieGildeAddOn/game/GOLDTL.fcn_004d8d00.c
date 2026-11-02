@@ -5,11 +5,13 @@
  * the target object of each live task and hands it to the per-type progress
  * handler. One loop, eight-way dispatch on the task state.
  *
- * Status: SIZE_MISMATCH, 4548 of 4640 bytes. All eight dispatch bodies are
- * transcribed in native body order (5, 1, 2, 3, 6, 4, 7, 8) and the frame
- * matches the native 0x138. The remaining gap is code generation: this build
- * keeps -1 in a register where the reference stores the immediate into
- * p->timer, and it tail-merges three call sequences the reference duplicates.
+ * Status: SIZE_MISMATCH, 4648 against the native 4640 bytes, 371 matching
+ * bytes. All eight dispatch bodies are transcribed in native body order
+ * (5, 1, 2, 3, 6, 4, 7, 8) and the frame matches the native 0x138. The
+ * reference stores -1 to p->timer as an immediate and keeps every
+ * fcn_004c6680/fcn_004c67c0 call tail separate; here the state -1 test is
+ * spelled ~p->type == 0, and the two case-6 tails evaluate ent34(obj) into n
+ * ahead of the call, so the compiler cannot share those tails either.
  */
 extern int g_772ea4;		/* 0x00772ea4 */
 
@@ -102,7 +104,7 @@ void __cdecl fcn_004d8d00(char* a0)
 		p = (TaskRec*)(a0 + 0x94) + i;
 		if (p)
 			msg = *(MsgRec*)p;
-		if (!p->state || p->type == -1)
+		if (!p->state || ~p->type == 0)
 			continue;
 		obj = (p->state == 5)
 		    ? gm_LookupEntityRecordById(p->type)
@@ -397,7 +399,8 @@ tail1_body:
 					if (!fcn_004cec00(*((unsigned char*)p + 0x20),
 						*((unsigned char*)p + 0x21), &v10, &v14))
 						break;
-					p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
+					n = ent34(obj);
+					p->timer = fcn_004c6680((char*)n, v10, v14, 0);
 				} else {
 					fcn_0045b920((int)base, *((unsigned char*)p + 0x20),
 					    *((unsigned char*)p + 0x21), vec);
@@ -423,7 +426,8 @@ tail1_body:
 				*((unsigned char*)msg.f + 0x21) = (unsigned char)v14;
 				fcn_004c6820(*(int*)(a0 + 0x10), msg.f);
 				*((unsigned char*)msg.f + 0x22) = 2;
-				p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
+				n = ent34(obj);
+				p->timer = fcn_004c6680((char*)n, v10, v14, 0);
 			} else if (*((unsigned char*)p + 0x22) == 2) {
 				fcn_0045b920((int)base, *((unsigned char*)p + 0x20),
 				    *((unsigned char*)p + 0x21), vec);
@@ -461,7 +465,7 @@ tail1_body:
 						p->f20 = v10;
 						p->f24 = v14;
 						fcn_004c6940(obj, 6, msg.f);
-						p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
+						p->timer = fcn_004c6680((char*)(*(int*)(*(int*)(obj + 0x184) + 0x34)), v10, v14, 0);
 						goto after2;
 					}
 				}

@@ -17260,3 +17260,23 @@ fcn_004e4eb0, rep movsd 0x45, fcn_0057e880(0x30,0,0,0), pop*4, add esp,0x900, re
 against the frame; the 21-argument block gives object 7053, 22 gives 7061, and no knob lands
 7056/7057 because argument costs are 2, 5 or 8 bytes, though one literal-argument variant reached
 7058 with match 856.
+
+## 2026-11-02 — task dispatcher call counts match
+
+`0x4D8D00` 338 to 371 with the object at 4648, eight over native, 1476 instructions against 1452,
+frame 0x138 held, and the call counts now equal the reference: fcn_004c6680 11, fcn_004c67c0 9,
+fcn_004c6940 16. Two levers did it. The `p->type == -1` test is now `~p->type == 0`, because the
+old form made the compiler materialise -1 in edi before the dispatch and reuse it for seven of the
+eight `p->timer = -1` stores, while the new spelling frees edi and every store becomes the
+immediate `mov dword [ebp+8],0xffffffff`; respelling the stores themselves (-1L, ~0, (short)-1, 0-1,
+(int)0xFFFFFFFF) all fold to the same constant and do nothing. And the call tails are un-merged by
+evaluating `n = ent34(obj);` as its own statement before the fcn_004c6680 calls at the case-6
+c22==0 and c22==1 sites, which changes argument evaluation order so the shared tail no longer
+matches, plus inlining ent34 as its exact expression at the 464 site. Measured grid: lever 1 alone
+4548/1440/match 343, temp 400 4572/1447/343, temp 400+426 4616/1467/381, temp 400+426+464
+4628/1475/335 (rejected below the 338 baseline), temp all four 4560/1443/391, and temp 400+426 plus
+inline 464 4648/1476/371 kept. Rejected: macro or respelled -1 stores (no effect), branch-compare
+rewrites (`p->type+1==0` 315, `p->type<0` 321), prologue reorders, and the 335 variant. The
+remaining +8 bytes and +24 instructions come from the ent34 call-versus-inline divergence: ent34
+stays a static function with 25 call sites, and the full-macro form measures 4532 bytes with match
+235, worse on both.
