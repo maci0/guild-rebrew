@@ -75,7 +75,6 @@ int __cdecl fcn_004dcf50(int a0)
 	int j;
 	int n;
 	int cnt;
-	unsigned char cbe;
 	float f;
 	float fsum;
 	char* p34;
@@ -91,11 +90,8 @@ int __cdecl fcn_004dcf50(int a0)
 	int h14;
 	int hStrafe;
 	int hAnk;
-	int x60;
 	int x68;
-	int x6c;
 	int x74;
-	int inst;
 	int st;
 	int rnd;
 	int votes;
@@ -288,7 +284,8 @@ int __cdecl fcn_004dcf50(int a0)
 				d2_SetForm(g_68bfc0, 0);
 				io_AppendText(0x68c998);
 				io_AppendText((int) work);
-				hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_GESETZ", cbe & 0xff);
+				hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_GESETZ",
+					tbl.c[0x1e] & 0xff);
 				while (hWait != 0 && fcn_00423460(hWait) != 0) {
 					fcn_004e4c90(1);
 				}
@@ -380,10 +377,10 @@ int __cdecl fcn_004dcf50(int a0)
 
 	/* ---- 0x4dd976: msg.state == 1 follow-up ---- */
 	if (msg.state == 1) {
-		x60 = fcn_00493e50((int) p34, (int) p38);
+		msg.pad[1] = fcn_00493e50((int) p34, (int) p38);
 		d2_SetForm(g_68bfc0, 0);
 		io_AppendText(0x6811b0);
-		io_AppendText(0x14ca, *(unsigned short*) p34, *(unsigned short*) p38, x60);
+		io_AppendText(0x14ca, *(unsigned short*) p34, *(unsigned short*) p38, msg.pad[1]);
 		fcn_004e4c90(4);
 		h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-folter-1.esc", (int) "");
 		d2_SetForm(g_68bfc0, 0);
@@ -433,6 +430,7 @@ int __cdecl fcn_004dcf50(int a0)
 				"NEUNSCHWAENZIGE_PEITSCHE", "ESSE_UND_BRANDEISEN",
 				"EISWASSERTROPFER", "HAENGENDER_KAEFIG", "STRECKBANK"
 			};
+			msg.pad[7] = 0;
 			tbl.i[0] = 0x14ed;
 			tbl.i[1] = 0x14f2;
 			tbl.i[2] = 0x14f7;
@@ -443,7 +441,7 @@ int __cdecl fcn_004dcf50(int a0)
 
 			eIdx = g_774970;
 			if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
-				div3 = x60 / 3;
+				div3 = msg.pad[1] / 3;
 				fcn_004c51a0(*(int*) (p3c + 4), *(int*) (p34 + 4),
 					*(unsigned char*) 0x773d75, div3);
 				fcn_004c51a0(*(int*) (p40 + 4), *(int*) (p34 + 4),
@@ -476,23 +474,24 @@ int __cdecl fcn_004dcf50(int a0)
 			fcn_004e44f0(h);
 			h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
 			st = *(int*) (0x9b0eb4 + i * 0x35c);
-			inst = st & 0xf;
-			if (inst >= 6) {
-				inst = 6;
-			} else if (inst <= 0) {
-				inst = 0;
+			msg.pad[3] = st & 0xf;
+			if (msg.pad[3] >= 6) {
+				msg.pad[3] = 6;
+			} else if (msg.pad[3] <= 0) {
+				msg.pad[3] = 0;
 			}
-			x6c = fcn_004938c0(&msg);
-			sprintf(buf, "PROZESS_5_FOLTER2_%s.sbf", folterName[inst]);
+			msg.pad[4] = fcn_004938c0(&msg);
+			msg.pad[5] = 0;
+			sprintf(buf, "PROZESS_5_FOLTER2_%s.sbf", folterName[msg.pad[3]]);
 			msg.hnd[4] = fcn_004e4ae0("PROZESS_5_FOLTER2_GESTEHEN.sbf", 0);
 			msg.hnd[3] = fcn_004e4ae0(buf, 0);
 			msg.hnd[1] = fcn_004e4ae0("PROZESS_5_FOLTER2_WEITER.sbf", 0);
 			msg.hnd[0] = fcn_004e4ae0("PROZESS_5_FOLTER2_UNSCHULDSBETEUERUNG.sbf", 0);
-			sprintf(buf, "_PROZESS_5_FOLTER2_%s", folterName[inst]);
+			sprintf(buf, "_PROZESS_5_FOLTER2_%s", folterName[msg.pad[3]]);
 			fcn_004e4450(g_68bfc0, 1);
 			d2_SetForm(g_68bfc0, 0);
 			io_AppendText(0x6811b0);
-			io_AppendText(0x14dd, *(unsigned short*) p34, inst * 2 + 0xb20);
+			io_AppendText(0x14dd, *(unsigned short*) p34, msg.pad[3] * 2 + 0xb20);
 			fcn_004e4c90(4);
 			d2_SetForm(g_68bfc0, 0);
 			io_AppendText(0x6811b0);
@@ -510,7 +509,7 @@ int __cdecl fcn_004dcf50(int a0)
 					}
 				}
 			}
-			x74 = *(int*) (0x9b0eb4 + i * 0x35c);
+			msg.pad[5] = *(int*) (0x9b0eb4 + i * 0x35c);
 			end = str + strlen(str);
 			nam = (char*) fcn_004fda30(*(unsigned short*) pent);
 			if (nam != 0) {
@@ -532,8 +531,8 @@ int __cdecl fcn_004dcf50(int a0)
 			fcn_004e4c90(1);
 			i = 0;
 			do {
-				pend[i] = folterFile[inst][i];
-			} while (folterFile[inst][i++] != 0);
+				pend[i] = folterFile[msg.pad[3]][i];
+			} while (folterFile[msg.pad[3]][i++] != 0);
 			fcn_004e4450(g_68bfc0, 0);
 			d2_SetForm(g_68bfc0, 0);
 			io_AppendText(0x6811b0);
@@ -544,7 +543,7 @@ int __cdecl fcn_004dcf50(int a0)
 			rnd = fcn_004e6cb0(5);
 			fcn_004e4b40(*(unsigned short*) p34, msg.hnd[3], buf, rnd, 0x320);
 			io_AppendText(0x6811b0);
-			io_AppendText(0x14ec, tbl.i[inst] + rnd);
+			io_AppendText(0x14ec, tbl.i[msg.pad[3]] + rnd);
 			fcn_004e4c90(5);
 			fcn_004e4450(g_68bfc0, 0);
 			fcn_00493920(&msg);
@@ -622,7 +621,6 @@ int __cdecl fcn_004dcf50(int a0)
 	hAnk = fcn_004e4ae0("PROZESS_6_ANKUENDIGUNG.sbf", 0);
 	fcn_004e4b40(*(unsigned short*) p34, hAnk, "_PROZESS_6_ANKUENDIGUNG", 0, 0);
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
-	fcn_004e4450(g_68bfc0, 0);
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x6811b0);
 	io_AppendText(0x1523);
@@ -722,7 +720,6 @@ int __cdecl fcn_004dcf50(int a0)
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
 		fcn_004e4450(g_68bfc0, 0);
-		d2_SetForm(g_68bfc0, 0);
 		fcn_004e51d0((unsigned int*) a0, (int) &msg);
 		st = 0;
 		if (*(unsigned char*) (a0 + 0x30) > 0) {

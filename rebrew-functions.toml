@@ -587322,13 +587322,13 @@ file = "src/Develop/Units/d2.v1/GOLDTL.fcn_004dcf50.c"
 name = "fcn_004dcf50"
 symbol = "_fcn_004dcf50"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:33:55+00:00"
-status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-11-02T11:09:42+00:00"
+status = "STUB"
 blocker = "frame wall: native 0x760 vs honest 0x6b4; region L0x660..0x75f has no reference, no address-take and no callee extent (387 CFG-resolved esp refs, 345 call sites checked); body 2246/2340 instructions transcribed"
 
 ["GOLDTL.0x004dcf50".verification]
-source_hash = "6a009b64d533bd43a3ac1ab40bd7c8a7f6cdfa9405cba98e10e124033a9bcf3c"
+source_hash = "fab53fa58a0c56280fbd837656ccb3b8793e8e0cf9406ab633df7e39208cc01e"
 reference_hash = "de5919be9c5674c24e6f180f5ed469ce11ffc23f5f03f1697c4d3e4d9550ef64"
 reference_size = "8798"
 headers_hash = "153434ce6fd0c7855c8d334a0f472f0c3850b3888e9c2366d6eddcdb5c286398"
@@ -587339,15 +587339,21 @@ module = "GOLDTL"
 va = "0x4dcf50"
 context_hash = ""
 defines = "[]"
-input_hash = "83d6a1bb6001473380d775fe809a8ba11b2557b1839cf24f07a10ca6f846917f"
-status = "SIZE_MISMATCH"
+input_hash = "79129a92c6067d69647b94a3bb7059b76238271421b6bfb82979f49a8f0649e2"
+status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T10:50:23+00:00"
+measured_at = "2026-11-02T11:09:42+00:00"
 
 [["GOLDTL.0x004dcf50".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-20T21:42:41.883599+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x004dcf50".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "STUB"
+changed_at = "2026-11-02T11:09:42.551050+00:00"
 updated_by = "test"
 ["GOLDTL.0x00546480"]
 size = 262

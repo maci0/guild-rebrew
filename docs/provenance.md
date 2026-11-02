@@ -16266,3 +16266,21 @@ real gap is an entire missing native block, 0x4db332..0x4db584 (594 bytes), in t
 pass, with fcn_004c54c0 (declared but never called) and constants 0x68c098/0x68c074/0x12d6/0x12d7
 absent from the source; the arms block also duplicates three calls per nested branch where native
 shares one.
+
+## 2026-11-02 — inventory panel reaches native size and slot set
+
+`0x4DCF50` object is now exactly 8798 bytes, the same as native, with 153 of 153 native
+base-relative slots, frame 0x760 and every landmark on its native offset; match 1625 to 1969.
+The verdict string reads STUB because the tool's classifier puts a size-equal low-percentage row
+there, not SIZE_MISMATCH. What closed it: the missing slot 0xce has no separate native store, it
+is a char read of the buffer that the same loop's fcn_004f4830 writes through tbl.i, so
+`cbe & 0xff` became `tbl.c[0x1e] & 0xff` and the dead cbe declaration went away (MSVC encodes a
+char member of a live aggregate as `mov reg,[s]; and reg,0xff`); two call statements native does
+not have were removed (fcn_004e4450(g,0) before the hAnk block's d2_SetForm, and d2_SetForm(g,0)
+in the guilty branch before fcn_004e51d0), bringing the call multiset to 345/345; and the
+packet-field stores the old body lacked were recovered (x60 to msg.pad[1], inst to pad[3] with
+its clamp stores, x6c to pad[4], pad[5] zeroed and x74 stored, pad[7] zeroed inside the pad[6]
+block, the last adding 5 bytes). Remaining differences are block order and register allocation
+only: native emits the pad[7] if-branch before the else and the guilty block before the
+not-guilty one, spills the dedup induction to slot 0x10, reloads a0 from [esp+0x774], and keeps
+a register copy where we reread msg.pad[3].
