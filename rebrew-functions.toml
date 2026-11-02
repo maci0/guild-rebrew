@@ -423180,7 +423180,7 @@ blocker = "io_Text-family buffer expansion reconstructed in full from a fresh ri
 blocker_delta = 2108
 
 ["GOLDTL.0x0051af00".verification]
-source_hash = "acd5a2c850f2b47a66e76fa30b20b31cdd36521056a3cef8be88661f1292ac9b"
+source_hash = "ccd197e41cdf970711f1dd8f25b45b7fec33ea4ceb66062ac67de0f95915ff18"
 reference_hash = "1a5a0fcc3c96b5e63a7087a546fe535837f30271f04358bc5d9b7ebc2ddb58ab"
 reference_size = "6464"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423191,10 +423191,10 @@ module = "GOLDTL"
 va = "0x51af00"
 context_hash = ""
 defines = "[]"
-input_hash = "5719e2c9a25cc8c3dbf1b0cf84a65dbeb6ab3daa1f03936068357d63c12728e7"
+input_hash = "dfb899740ef605236c9d8b5f75ad6bd4880b4069a8ca9157e128c1998d27da1c"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T10:25:47+00:00"
+measured_at = "2026-11-02T10:43:49+00:00"
 
 [["GOLDTL.0x0051af00".status_history]]
 old_status = "STUB"
@@ -423488,7 +423488,7 @@ status = "SIZE_MISMATCH"
 blocker = "PARKED: prologue schedule wall (native loads [0x6a23a0] before [0x6a239c]; locked compiler loads src+0 first), so divergence at offset 16 makes the score coincidence-dominated. Copy forms/done block/r fold are structurally exact and saved as variants; frame 0x3294 exact; keeping the 981 body."
 
 ["GOLDTL.0x0051c840".verification]
-source_hash = "7dbee4176057de36f795b4d58168eaec6693011e1bdcd813de7477b29d4e0e30"
+source_hash = "5fed903e459a671e77fbf168e04b46fad02783188eb1a21b67a7a2ea91775057"
 reference_hash = "303c48f711186c6be65d56b78d82f063c481d24a9e7be25213523d36a7b17e07"
 reference_size = "6048"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423499,10 +423499,10 @@ module = "GOLDTL"
 va = "0x51c840"
 context_hash = ""
 defines = "[]"
-input_hash = "bef0395e7cc22906e14b98f9d9f428d68c24f47fed32c6151d5b06f7d75bef7d"
+input_hash = "4eb7bb7f089b87b996448945c221c0835a708aed8cfb5c4a5ec34be3e63c4b96"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T10:34:55+00:00"
+measured_at = "2026-11-02T10:43:19+00:00"
 
 [["GOLDTL.0x0051c840".status_history]]
 old_status = "STUB"

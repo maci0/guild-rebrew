@@ -117,6 +117,9 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 	int r;
 	int j;
 	char c;
+	char* cp_src;
+	char* cp_dst;
+	int cp_n;
 
 	grammar_state = 0;
 	kind = 0;
@@ -194,9 +197,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					return;
 				}
 				e = i - k;
-				fcn_0064d740(text.buf + e + strlen(p), text.buf + i,
-					(int) strlen(text.buf) + 2 - i);
-				memcpy(text.buf + e, p, strlen(p));
+				cp_src = p;
+				cp_n = (int) strlen(cp_src);
+				cp_dst = text.buf + e;
+				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
+				memcpy(cp_dst, cp_src, cp_n);
 				break;
 			}
 			e = i - k - 1;
@@ -265,9 +270,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				return;
 			}
 			e = i - k;
-			fcn_0064d740(text.buf + e + strlen(text.tmp), text.buf + i,
-				(int) strlen(text.buf) + 2 - i);
-			memcpy(text.buf + e, text.tmp, strlen(text.tmp));
+			cp_src = text.tmp;
+			cp_n = (int) strlen(cp_src);
+			cp_dst = text.buf + e;
+			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
+			memcpy(cp_dst, cp_src, cp_n);
 			grammar_state = 0;
 			flag = 0;
 			break;
@@ -285,18 +292,22 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				}
 				sprintf(num, g_6a2354, r);
 				sprintf(text.tmp, num, j);
-				fcn_0064d740(text.buf + i - 3 + strlen(text.tmp),
-					text.buf + i, (int) strlen(text.buf) + 1 - i);
-				memcpy(text.buf + i - 2, text.tmp, strlen(text.tmp));
+				cp_src = text.tmp;
+				cp_n = (int) strlen(cp_src);
+				cp_dst = text.buf + i - 2;
+				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 1 - i);
+				memcpy(cp_dst, cp_src, cp_n);
 			} else {
 				j = *(int*) (cursor - 4);
 				if (j > 1 || j == 0) {
 					flag = 1;
 				}
 				sprintf(text.tmp, g_67d444, j);
-				fcn_0064d740(text.buf + i - 1 + strlen(text.tmp),
-					text.buf + i + 1, (int) strlen(text.buf) + 1 - i);
-				memcpy(text.buf + i - 1, text.tmp, strlen(text.tmp));
+				cp_src = text.tmp;
+				cp_n = (int) strlen(cp_src);
+				cp_dst = text.buf + i - 1;
+				fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) + 1 - i);
+				memcpy(cp_dst, cp_src, cp_n);
 			}
 			break;
 		case 'I':
@@ -324,9 +335,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					res++;
 					k--;
 				}
-				fcn_0064d740(text.buf + i - 3 + strlen(num),
-					text.buf + i, (int) strlen(text.buf) + 1 - i);
-				memcpy(text.buf + i - 2, num, strlen(num));
+				cp_src = num;
+				cp_n = (int) strlen(cp_src);
+				cp_dst = text.buf + i - 2;
+				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 1 - i);
+				memcpy(cp_dst, cp_src, cp_n);
 			} else {
 				cursor += 4;
 				j = *(int*) (cursor - 4);
@@ -357,9 +370,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					slot298[0] = '-';
 					strcpy(slot298 + 1, text.tmp);
 				}
-				fcn_0064d740(text.buf + i - 1 + strlen(slot298),
-					text.buf + i + 1, (int) strlen(text.buf) + 1 - i);
-				memcpy(text.buf + i - 1, slot298, strlen(slot298));
+				cp_src = slot298;
+				cp_n = (int) strlen(cp_src);
+				cp_dst = text.buf + i - 1;
+				fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) + 1 - i);
+				memcpy(cp_dst, cp_src, cp_n);
 			}
 			break;
 		case 'T':
@@ -369,9 +384,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cursor += 4;
 			res = *(int*) (cursor - 4);
 			fcn_0050bc10(res, g_773d75[0], text.tmp);
-			fcn_0064d740(text.buf + i - 1 + strlen(text.tmp), text.buf + i + 1,
-				(int) strlen(text.buf) - i + 1);
-			memcpy(text.buf + i - 1, text.tmp, strlen(text.tmp));
+			cp_src = text.tmp;
+			cp_n = (int) strlen(cp_src);
+			cp_dst = text.buf + i - 1;
+			fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) - i + 1);
+			memcpy(cp_dst, cp_src, cp_n);
 			break;
 		case 'w':
 			cursor += 4;
@@ -380,9 +397,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				g_14a79c0[*(unsigned short*) (0x8680b4 + res * 189 * 4) * 2],
 				1, 8);
 			strcpy(text.tmp, (char*) res);
-			fcn_0064d740(text.buf + i - 1 + strlen(text.tmp), text.buf + i + 1,
-				(int) strlen(text.buf) - i + 1);
-			memcpy(text.buf + i - 1, text.tmp, strlen(text.tmp));
+			cp_src = text.tmp;
+			cp_n = (int) strlen(cp_src);
+			cp_dst = text.buf + i - 1;
+			fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) - i + 1);
+			memcpy(cp_dst, cp_src, cp_n);
 			break;
 		case 'f':
 			j = text.buf[i + 1] - '0';
@@ -408,9 +427,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					return;
 				}
 				i++;
-				fcn_0064d740(text.buf + i - 4 + strlen(text.tmp),
-					text.buf + i, (int) strlen(text.buf) + 1 - i);
-				memcpy(text.buf + i - 4, text.tmp, strlen(text.tmp));
+				cp_src = text.tmp;
+				cp_n = (int) strlen(cp_src);
+				cp_dst = text.buf + i - 4;
+				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 1 - i);
+				memcpy(cp_dst, cp_src, cp_n);
 			} else {
 				fcn_00657a73(j, fmt_scratch + 0x18, 10);
 				strcpy(num, "%.");
@@ -425,9 +446,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					return;
 				}
 				i++;
-				fcn_0064d740(text.buf + i - 3 + strlen(text.tmp),
-					text.buf + i, (int) strlen(text.buf) + 1 - i);
-				memcpy(text.buf + i - 3, text.tmp, strlen(text.tmp));
+				cp_src = text.tmp;
+				cp_n = (int) strlen(cp_src);
+				cp_dst = text.buf + i - 3;
+				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 1 - i);
+				memcpy(cp_dst, cp_src, cp_n);
 			}
 			break;
 		case 'v':
@@ -498,24 +521,30 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cursor += 4;
 			fcn_00517c00(*(int*) (cursor - 4), r,
 				(unsigned char) (text.buf[i] - '0'), text.tmp);
-			fcn_0064d740(text.buf + i + strlen(text.tmp) - 4, text.buf + i,
-				(int) strlen(text.buf) + 2 - i);
-			memcpy(text.buf + i - 3, text.tmp, strlen(text.tmp));
+			cp_src = text.tmp;
+			cp_n = (int) strlen(cp_src);
+			cp_dst = text.buf + i - 3;
+			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
+			memcpy(cp_dst, cp_src, cp_n);
 			break;
 		case 'a':
 			if (text.buf[i - 1] != '%') {
 				sprintf(text.tmp, g_6a2348, 0x14);
-				fcn_0064d740(text.buf + i - 1 + strlen(text.tmp), text.buf + i + 1,
-					(int) strlen(text.buf) - i + 1);
-				memcpy(text.buf + i - 1, text.tmp, strlen(text.tmp));
+				cp_src = text.tmp;
+				cp_n = (int) strlen(cp_src);
+				cp_dst = text.buf + i - 1;
+				fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) - i + 1);
+				memcpy(cp_dst, cp_src, cp_n);
 				break;
 			}
 			cursor += 4;
 			res = *(int*) (cursor - 4);
 			sprintf(text.tmp, g_699a68, res, 0x14);
-			fcn_0064d740(text.buf + i - 1 + strlen(text.tmp), text.buf + i + 1,
-				(int) strlen(text.buf) - i + 1);
-			memcpy(text.buf + i - 1, text.tmp, strlen(text.tmp));
+			cp_src = text.tmp;
+			cp_n = (int) strlen(cp_src);
+			cp_dst = text.buf + i - 1;
+			fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) - i + 1);
+			memcpy(cp_dst, cp_src, cp_n);
 			break;
 		case 'D':
 			cursor += 4;
@@ -523,9 +552,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			fcn_00500d60(fmt_scratch + 0xc, (void*) res);
 			res = fcn_004fe330(fmt_scratch + 0xc, *(short*) (fmt_scratch + 0xe));
 			sprintf(text.tmp, g_6a2310, g_14a5450[res]);
-			fcn_0064d740(text.buf + i - 2 + strlen(text.tmp), text.buf + i,
-				(int) strlen(text.buf) + 2 - i);
-			memcpy(text.buf + i - 1, text.tmp, strlen(text.tmp));
+			cp_src = text.tmp;
+			cp_n = (int) strlen(cp_src);
+			cp_dst = text.buf + i - 1;
+			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
+			memcpy(cp_dst, cp_src, cp_n);
 			break;
 		case 'G':
 			cursor += 4;
@@ -560,9 +591,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					return;
 				}
 				e = i - k;
-				fcn_0064d740(text.buf + e + strlen(slot98), text.buf + i,
-					(int) strlen(text.buf) + 2 - i);
-				memcpy(text.buf + e, slot98, strlen(slot98));
+				cp_src = slot98;
+				cp_n = (int) strlen(cp_src);
+				cp_dst = text.buf + e;
+				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
+				memcpy(cp_dst, cp_src, cp_n);
 				break;
 			}
 			e = i - k - 1;
@@ -619,9 +652,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				return;
 			}
 			e = i - k;
-			fcn_0064d740(text.buf + e + strlen(text.tmp), text.buf + i,
-				(int) strlen(text.buf) + 2 - i);
-			memcpy(text.buf + e, text.tmp, strlen(text.tmp));
+			cp_src = text.tmp;
+			cp_n = (int) strlen(cp_src);
+			cp_dst = text.buf + e;
+			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
+			memcpy(cp_dst, cp_src, cp_n);
 			grammar_state = 0;
 			break;
 		case 'r':
@@ -658,9 +693,11 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				break;
 			}
 			p = g_14a5320[j + r];
-			fcn_0064d740(text.buf + strlen(p) + (i - e) - 5, text.buf + i,
-				(int) strlen(text.buf) - (i - e) + 5);
-			memcpy(text.buf + i - 1, p, strlen(p));
+			cp_src = p;
+			cp_n = (int) strlen(cp_src);
+			cp_dst = text.buf + i - 1;
+			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) - (i - e) + 5);
+			memcpy(cp_dst, cp_src, cp_n);
 			break;
 		case '%':
 			text.buf[i - 1] = 0x16;

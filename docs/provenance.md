@@ -16153,3 +16153,34 @@ removes 6 bytes before the tables, so the object is 6035 and the jump table has 
 moved. The correction is kept as semantics: the old value misplaces the cursor and the
 `buf[e] '%'` check by one byte in those three cases, so byte identity was unreachable with it.
 Recovering the exact 6 bytes so the table lands back on 0x16E8 is the open task.
+
+## 2026-11-02 — case `u` advances the cursor to `e - 1`
+
+Case `u` in `0x51C840` computed `k`/`e`, stored `state = 1` and ran its own memmove, then
+broke without touching `i`. Native does not: the block `u` jumps to (0xf97) ends with
+`lea ebp,[esi-1]`, where `esi` holds `e`, so the cursor advances to `e - 1` after the move.
+Adding `i = e - 1;` restores that. Measured: object 6043, jump table back on 0x16E8 with the
+83-byte character index at 0x1748 byte-identical to native (both verified from the object),
+positional match 1410/6048 against 1081 before the edit. The `b`/`B` shared copy now lands in
+the `b` extent instead of `B` and the pair total is 42 bytes short of native's two copies; the
+`u` extent is +3. Residual gaps are unchanged register-allocation and tail-merge differences.
+
+## 2026-11-02 — parser cursor fix and formatter copy unification
+
+`0x51C840` returns to the native table offset. One line, semantically required: case u now does
+`i = e - 1;` after its memmove, because native's case u jumps to the shared tail at 0xf97,
+which ends `lea ebp,[esi-1]` with esi holding e, so native advances the cursor after u's move
+and our source never did. The object is 6043, match 1410, the jump table is back at 0x16E8
+with 24 entries, the char index at 0x1748 is byte-identical, and the tail bytes 0x16e4..0x16e8
+read `c3 8d 49 00` exactly like native. Per-anchor deltas: I +18, W -45, b -41, G +86, r +48,
+D +11, Ss +1, T -27, F -52, u +19.
+
+`0x51AF00` 716 to 761 with the object falling 6703 to 6303, now 161 bytes UNDER native (6464).
+The correction to the previous diagnosis is what worked: CL6 does merge identical copy tails
+(two probes confirm it, and native's own shared block at 0x51b948 is entered by nine jumps);
+the blocker was per-site shape, since every site had its own strlen of its own source, its own
+destination materialisation and its own scratch register for the spilled index. All 17 copy
+sites now use one shape: `cp_src = <source>; cp_n = (int) strlen(cp_src); cp_dst = text.buf +
+<offset>; fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + <c> - i);
+memcpy(cp_dst, cp_src, cp_n);`. rep-movsd tails fall 12 to 6 (native 9), all rep movs 24 to 12
+(native 18). Remaining deficits are missing code: I -107, f -65, G -52, w -34, Ss -29, D -11.

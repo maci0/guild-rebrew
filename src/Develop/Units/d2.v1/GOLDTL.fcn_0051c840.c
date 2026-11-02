@@ -443,6 +443,7 @@ body:
 			e = i - k;
 			state = 1;
 			memmove(buf + e, buf + i + 1, strlen(buf) - i);
+			i = e - 1;
 			break;
 		case 'U':
 			k = (r != -1) ? 2 : 1;
