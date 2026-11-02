@@ -16961,3 +16961,24 @@ to 638; the object grows to 6082 because the price body 0xde..0x461 runs 40 byte
 native's 0xde..0x439 (the set and clear at 0x461 are byte-identical to native's 0x439 shifted by
 0x28) while later regions are 13 bytes shorter, netting +27. Kept for the decoded construct, with
 the body gap as the open item; fixture k_6082_638.c is the current source.
+
+## 2026-11-02 — panel scratch unions and decoded blocks
+
+`0x467920` 282 to 349 with the object growing 3707 to 3842. The struct is now buf 0x200 plus union
+scratch members w0 at 0, w8 at 8 and wc at 0xc, so the bar loops index through w0.idx, the ratio
+products go through w8.i, `(float)v24` through w8.f and `e[4]+W(h0)` through wc.i, which drops the
+compiler temps from two to one. h3 and h6 stopped being locals and became H3/H6 over f.v1c and
+f.v28 as native does, leaving only h1 and h0 in registers. The 0x468554 label block and the
+0x468700 icon block are transcribed: the 0x1000/0x800/else sprintf split, the e[0xe8] split, the
+three-way 0x472880 choice, the three 0x46bbc0 calls, the seven-argument 0x46bd20, the swapped
+g_1040494/g_1040490 and the reused y = e[5]-((g-H(h0))/2-1). The first bar rect uses f.v24 and the
+clamps are `v > g_6628a8 && v < g_6628a0`. Reverted with measurements: routing the hit-test e[4]
+through f.wc.i gave frame 0x264 with match 365, and routing the gauge-end GLYPH_H conversions
+through w0.idx changed nothing. The remaining compiler temp is the hit-test spill at 0x661
+(`mov [esp+0x10],ecx`) because ecx holds e[4] and is reused for the 16-bit width load while edi
+holds h0, where native keeps e[4] in ecx, loads through edx and leaves edi free; the root is the
+zero-register pick (ebp native, edi ours) that swaps h1 and h0 between ebp and edi. The 0x467f7d
+colour block is still modelled as an `if (v20 & 0x40)` text block and needs decoding: it is a
+gradient through fcn_0041bac0(0xff, 0x80, 0) with a float-to-int conversion, byte stores at frame
+offsets 0, 1 and 2, then fcn_00479e00, and its constants live at 0x6629c8, 0x662950, 0x664068,
+0x664070, 0x664078 and 0x66407c.
