@@ -19148,3 +19148,40 @@ instructions and 0x41c bytes against our 314 and 0x3c6, with a block-order split
 our tail fifteen bytes longer even though the object is seventy-two short overall. A pre-existing untracked
 skeleton probe file next to the source was left alone. Current source .scratch/r561380/v9_final.c with notes
 in NOTES.md.
+
+## 2026-11-03 — production run remaining hunks are one allocation choice
+
+`0x571870` keeps 2757 at object 3816 with 1076 byte mismatches and the first at 0x537, where the target writes
+frame 0x30 and we write 0x24; the round closed no hunks and the source is byte-identical to
+.scratch/571870.keep1.c. The premise of the zeroing hunk was wrong and is corrected here: the `xor ebx,ebx` at
+0x8cc, 0x955 and 0x96b is not a comparison zero but the high dword of the unsigned-int to double conversion of
+`*(unsigned int*)(rezept+0x22)` in the inner produziert loop, since native's 0xaab..0xab7 is
+`mov eax,[esi+0x22]; mov [esp+0x28],ebx; mov [esp+0x24],eax; inc ecx; fild qword [esp+0x24]` with ebx as the
+high dword, and the `cmp ax,bx` and `cmp eax,ebx` merely reuse it; native hoists the zero onto the three entry
+paths, while ours re-zeroes ecx inside the loop at 0xaa5 because ebx is held by `letzte_zeit`, where ours does
+`lea ebx,[ebp+0x60]` at 0x793 and native does `lea eax,[ebp+0x60]` plus a stack spill. The tradeoff around the
+b4 hunk was measured with the source otherwise identical: the current block-local `float df` gives match 2757
+at object 3816 and the b4 sequence matches native exactly (fild [esp+0x2c]; fild [ebp+0x14]; fmul 1.3; fiadd;
+fmulp st(1); fmul leistung; fsubr) but has no xor ebx and its temp slot sits at frame 0x08; inlining
+`* (float) differenz` gives 2522 at 3808 with the xor ebx present and the temp at 0x04; `(double) differenz *
+(...)` gives 2532 at 3812 with the xor ebx present; and a full cast and grouping sweep over differenz-first,
+double on either factor, double group, double df and df at the top ranges 2468 to 2532, all losing either the
+ebx zero or size. Only the df form matches b4 and it necessarily costs the three zeroings and moves the
+conversion temp, and no cast form found produces `fild` without df because every one compiles to
+`fimul [esp+0x2c]`. The conversion temp detail: native stores it at frame 0x14, which is the later `summe`
+slot, while ours uses 0x08, the later `anzahl` slot, and both conversions at 0x537/0x53f and 0x597/0x59b share
+one slot; the frame map is otherwise identical between the builds (gebaeude 0x00, lager 0x04, anzahl 0x08,
+leistung 0x0c, arbeitsleistung 0x10, summe 0x14, typ 0x1c, bild 0x20, text 0x124, debug 0x524, sub esp 0x724),
+and the slot is invariant under explicit casts, operand reorder, a named int or double temp, block scoping of
+the three locals, every declaration reorder including arrays first or last and a full reverse, renaming
+locals, unused locals being eliminated, and live locals which shift the temp down four bytes rather than up.
+The address-fold hunk folds to the single `lea esi,[eax+edx*1+0x2e]` from every form tried (`*0x41`,
+`*0x40 + idx`, parenthesised groups, `+ 0x17` on an unsigned short pointer, a two-statement `+(char*)0x2e`,
+`(idx<<6)+idx`) while native keeps `add eax,edx` before the lea, and the ecx against eax at 0xaef most likely
+cascades from the earlier differences. Toolchain check: the pinned rebrew/msvc:6.0-sp5-pp-win32 and
+rebrew-deps/msvc:6.0-sp5-pp-security images have byte-identical C1.DLL, c2.dll and CL.EXE, while plain SP3,
+SP4 and SP6 compile this function to 3936 bytes at match 1099, so the sp5-pp profile is not the variable.
+Recommendation: treat the conversion temp and the ebx zeroings as one problem and hunt a b4 expression that
+yields native's `fild` early without a local, or establish why native spills `letzte_zeit` instead of keeping
+it in ebx. Findings in .scratch/571870/findings.md with helpers probe.py, gen.py, slots.py, cfgframe.py and
+the h2, h3, df and v1 to v19 variants.
