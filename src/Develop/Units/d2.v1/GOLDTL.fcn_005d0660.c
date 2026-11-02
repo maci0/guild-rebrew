@@ -10,10 +10,10 @@
  * allocation, the four callee-saved registers are saved after the two
  * early exits, and the record tables are 16-byte entries cleared to -1.
  *
- * Open gaps: the frame comes out 8 bytes short (two native slots stay in
- * registers here), so the second immediate and the branch distances do not
- * agree yet. The hover block near the end still guesses at the native slot
- * use and the last three text passes map their positions approximately.
+ * Native order: the record tables hold (id, -1, text, x, y, 0) entries. The
+ * child walk fills tabB by slot 0/1 then 4/5, tabA holds the two parents and
+ * tabC the records whose +2 byte is below 0xa. The last three passes print
+ * the labels and the visibility bit comes from the a1 flag bits.
  */
 
 #include <string.h>
@@ -81,13 +81,6 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 	int nb;
 	int idx;
 	int t0;
-	int hid;
-	int rec;
-	/* Address-taken keepalives: the native frame keeps two hover-state
-	 * slots in memory. These hold those slots while hid/rec work the
-	 * values in registers. */
-	int keepHid;
-	int keepRec;
 
 	if (!fcn_0057ec20(1)) {
 		return;
@@ -118,16 +111,13 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 			nc = 0;
 			nb = 0;
 			flag = 0;
-			t0 = 0;
 			{
 				char* er;
 				char* rec;
-				int id;
 				int slot;
+				int id;
 				int k;
 				char* p;
-				int col;
-				int i;
 
 				slot = 0;
 				er = (char*) ent;
@@ -135,11 +125,10 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				rec = (char*) gm_LookupEntityRecordById(
 				    *(int*) (er + 0x5c));
 				if (rec) {
-					if (!(*(int*) (er + 0x1c8) & 0x40000)) {
-						if (!(*(int*) (rec + 0x1c8) & 0x40000)) {
-							flag = 1;
-							tabB[3].id = *(short*) rec;
-						}
+					if (!(*(int*) (er + 0x1c8) & 0x40000) &&
+					    !(*(int*) (rec + 0x1c8) & 0x40000)) {
+						flag = 1;
+						tabB[3].id = *(short*) rec;
 					}
 				}
 				rec = (char*) gm_LookupEntityRecordById(
@@ -152,28 +141,29 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				if (rec) {
 					tabA[0].id = *(short*) rec;
 					p = rec + 0x68;
-					idx = 3;
-					if (nb < 6) {
-						for (;;) {
-							id = *(int*) p;
-							if (id != -1) {
-								if (id != *(int*) (er + 4)) {
-									rec = (char*) gm_LookupEntityRecordById(id);
-									if (rec) {
-										tabB[slot].id = *(short*) rec;
-										nb++;
-										slot++;
-										if (slot == 2) {
-											slot = 4;
-										}
+					k = 3;
+					for (;;) {
+						if (slot >= 6) {
+							break;
+						}
+						id = *(int*) p;
+						if (id != -1) {
+							if (id != *(int*) (er + 4)) {
+								rec = (char*) gm_LookupEntityRecordById(id);
+								if (rec) {
+									tabB[slot].id = *(short*) rec;
+									nb++;
+									slot++;
+									if (slot == 2) {
+										slot = 4;
 									}
 								}
 							}
-							p += 4;
-							idx++;
-							if (idx >= 8) {
-								break;
-							}
+						}
+						p += 4;
+						k++;
+						if (k >= 8) {
+							break;
 						}
 					}
 				}
@@ -183,117 +173,113 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						break;
 					}
 					id = *(int*) (er + 0x68 + (k - 3) * 4);
-					if (id == -1) {
-						continue;
+					if (id != -1) {
+						rec = (char*) gm_LookupEntityRecordById(id);
+						if (rec) {
+							if (*(unsigned char*) (rec + 2) < 0xa) {
+								*(short*) p = *(short*) rec;
+								nc++;
+								p += 0x10;
+							}
+						}
 					}
-					rec = (char*) gm_LookupEntityRecordById(id);
-					if (!rec) {
-						continue;
-					}
-					if (*(unsigned char*) (rec + 2) >= 0xa) {
-						continue;
-					}
-					*(short*) p = *(short*) rec;
-					nc++;
-					p += 0x10;
 				}
 
 				d2_SetForm(win, 1);
 				fcn_00472e50();
 				fcn_0046f2c0(g_772514, 1);
-				i = rows2 - t0;
-				tabA[0].text = fcn_0046f740(g_772514, 0x5db, 0xa,
-				    i - 0x5a);
-				n3 = t0 / 2;
-				tabA[0].x = (short) ((rows2 - posY[0]) + n3 - 0x5a);
+				posY[0] = rows2 - w;
+				tabA[0].text = fcn_0046f740(posY[0] - 0x5a, 0xa,
+				    0x5db, g_772514);
+				n3 = w / 2;
+				t0 = posY[0] + n3;
+				tabA[0].x = (short) (t0 - 0x5a);
 				tabA[0].y = 0xa;
-				i = (rows2 - t0) - 0x58;
+				idx = posY[0] - 0x58;
 				if (tabA[0].id != -1) {
 					id = tabA[0].id & 0xffff;
-					col = fcn_0046f740(g_772514,
+					t0 = fcn_0046f740(idx, 0xc,
 					    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
-					    0xc, i);
-					tabA[0].text = col;
-					*(int*) (g_1015ea0 + col * 756 + 0x1d0) = 3;
-					*(int*) (g_1015ea0 + col * 756 + 0x2f0) =
+					    g_772514);
+					tabA[0].text = t0;
+					*(int*) (g_1015ea0 + t0 * 756 + 0x1d0) = 3;
+					*(int*) (g_1015ea0 + t0 * 756 + 0x2f0) =
 					    (int) (g_7f4ca0 + id * 0x21c);
 				} else {
-					fcn_0046f740(g_772514, 0x4fb, 0xc, i);
+					fcn_0046f740(idx, 0xc, 0x4fb, g_772514);
 					tabA[0].text = -1;
 				}
-				tabA[1].text = fcn_0046f740(g_772514, 0x5db, 0xa,
-				    rows2 + 0x5a);
+				tabA[1].text = fcn_0046f740(rows2 + 0x5a, 0xa,
+				    0x5db, g_772514);
 				tabA[1].x = (short) (n3 + rows2 + 0x5a);
 				tabA[1].y = 0xa;
-				i = rows2 + 0x5c;
+				idx = rows2 + 0x5c;
 				if (tabA[1].id != -1) {
 					id = tabA[1].id & 0xffff;
-					col = fcn_0046f740(g_772514,
+					t0 = fcn_0046f740(idx, 0xc,
 					    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
-					    0xc, i);
-					tabA[1].text = col;
-					*(int*) (g_1015ea0 + col * 756 + 0x1d0) = 3;
-					*(int*) (g_1015ea0 + col * 756 + 0x2f0) =
+					    g_772514);
+					tabA[1].text = t0;
+					*(int*) (g_1015ea0 + t0 * 756 + 0x1d0) = 3;
+					*(int*) (g_1015ea0 + t0 * 756 + 0x2f0) =
 					    (int) (g_7f4ca0 + id * 0x21c);
 				} else {
-					fcn_0046f740(g_772514, 0x4fb, 0xc, i);
+					fcn_0046f740(idx, 0xc, 0x4fb, g_772514);
 					tabA[1].text = -1;
 				}
 
 				if (flag) {
-					col = fcn_0046f740(g_772514, 0x5db, 0x96,
-					    (rows2 - t0) - 0x10);
-					tabB[2].text = col;
-					tabB[2].x = (short) (n3 + rows2 - 0x10);
+					tabB[2].text = fcn_0046f740(posY[0] - 0x10,
+					    0x96, 0x5db, g_772514);
+					tabB[2].x = (short) (t0 - 0x10);
 					tabB[2].y = 0x96;
-					i = (rows2 - t0) - 0xe;
+					idx = posY[0] - 0xe;
 					if (tabB[2].id != -1) {
 						id = tabB[2].id & 0xffff;
-						fcn_0046f740(g_772514,
+						fcn_0046f740(idx, 0x98,
 						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
-						    0x98, i);
-						*(int*) (g_1015ea0 + col * 756 + 0x1d0) = 3;
-						*(int*) (g_1015ea0 + col * 756 + 0x2f0) =
+						    g_772514);
+						*(int*) (g_1015ea0 + tabB[2].text * 756 + 0x1d0) = 3;
+						*(int*) (g_1015ea0 + tabB[2].text * 756 + 0x2f0) =
 						    (int) (g_7f4ca0 + id * 0x21c);
 					} else {
-						fcn_0046f740(g_772514, 0x4fb, 0x98, i);
+						fcn_0046f740(idx, 0x98, 0x4fb, g_772514);
 						tabB[2].text = -1;
 					}
-					col = fcn_0046f740(g_772514, 0x5db, 0x96,
-					    rows2 + 0x10);
-					tabB[3].text = col;
+					tabB[3].text = fcn_0046f740(rows2 + 0x10,
+					    0x96, 0x5db, g_772514);
 					tabB[3].x = (short) (n3 + rows2 + 0x10);
 					tabB[3].y = 0x96;
-					i = rows2 + 0x12;
+					idx = rows2 + 0x12;
 					if (tabB[3].id != -1) {
 						id = tabB[3].id & 0xffff;
-						fcn_0046f740(g_772514,
+						fcn_0046f740(idx, 0x98,
 						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
-						    0x98, i);
-						*(int*) (g_1015ea0 + col * 756 + 0x1d0) = 3;
-						*(int*) (g_1015ea0 + col * 756 + 0x2f0) =
+						    g_772514);
+						*(int*) (g_1015ea0 + tabB[3].text * 756 + 0x1d0) = 3;
+						*(int*) (g_1015ea0 + tabB[3].text * 756 + 0x2f0) =
 						    (int) (g_7f4ca0 + id * 0x21c);
 					} else {
-						fcn_0046f740(g_772514, 0x4fb, 0x98, i);
+						fcn_0046f740(idx, 0x98, 0x4fb, g_772514);
 						tabB[3].text = -1;
 					}
 				} else {
-					i = rows2 - n3;
-					col = fcn_0046f740(g_772514, 0x5db, 0x96, i);
-					tabB[2].text = col;
+					idx = rows2 - n3;
+					tabB[2].text = fcn_0046f740(idx, 0x96, 0x5db,
+					    g_772514);
 					tabB[2].x = (short) rows2;
 					tabB[2].y = 0x96;
-					i += 2;
+					idx += 2;
 					if (tabB[2].id != -1) {
 						id = tabB[2].id & 0xffff;
-						fcn_0046f740(g_772514,
+						fcn_0046f740(idx, 0x98,
 						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
-						    0x98, i);
-						*(int*) (g_1015ea0 + col * 756 + 0x1d0) = 3;
-						*(int*) (g_1015ea0 + col * 756 + 0x2f0) =
+						    g_772514);
+						*(int*) (g_1015ea0 + tabB[2].text * 756 + 0x1d0) = 3;
+						*(int*) (g_1015ea0 + tabB[2].text * 756 + 0x2f0) =
 						    (int) (g_7f4ca0 + id * 0x21c);
 					} else {
-						fcn_0046f740(g_772514, 0x4fb, 0x98, i);
+						fcn_0046f740(idx, 0x98, 0x4fb, g_772514);
 						tabB[2].text = -1;
 					}
 				}
@@ -301,197 +287,286 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				if (nb) {
 					nb = rows / 10;
 					posX[0] = nb + 0x10;
-					posX[1] = (rows * 4) / 10 - w - 0x10;
+					t0 = (rows * 4) / 10;
+					posX[1] = t0 - w - 0x10;
+					{
+						char* p;
+						int k;
+
+						idx = 2;
+						p = (char*) tabB;
+						for (k = 0; k < 2; k++) {
+							if (*(short*) p == -1) {
+								break;
+							}
+							*(int*) (p + 4) = fcn_0046f740(
+							    posX[k], 0x96, 0x5db, g_772514);
+							*(short*) (p + 0xa) = 0x96;
+							*(short*) (p + 8) =
+							    (short) (posX[k] + nc);
+							id = *(short*) p & 0xffff;
+							fcn_0046f740(posX[k] + 2, 0x98,
+							    *(int*) (g_7f4ca0 +
+							    id * 0x21c + 0x18c), g_772514);
+							*(int*) (g_1015ea0 +
+							    *(int*) (p + 4) * 756 + 0x1d0) = 3;
+							*(int*) (g_1015ea0 +
+							    *(int*) (p + 4) * 756 + 0x2f0) =
+							    (int) (g_7f4ca0 + id * 0x21c);
+							p += 0x10;
+						}
+						posX[0] = nb - w - 0x10;
+						posX[1] = t0 + 0x10;
+						p = (char*) &tabB[4];
+						for (k = 0; k < 2; k++) {
+							if (*(short*) p == -1) {
+								break;
+							}
+							*(int*) (p + 4) = fcn_0046f740(
+							    posX[k], 0x96, 0x5db, g_772514);
+							*(short*) (p + 0xa) = 0x96;
+							*(short*) (p + 8) =
+							    (short) (posX[k] + nc);
+							id = *(short*) p & 0xffff;
+							fcn_0046f740(posX[k] + 2, 0x98,
+							    *(int*) (g_7f4ca0 +
+							    id * 0x21c + 0x18c), g_772514);
+							*(int*) (g_1015ea0 +
+							    *(int*) (p + 4) * 756 + 0x1d0) = 3;
+							*(int*) (g_1015ea0 +
+							    *(int*) (p + 4) * 756 + 0x2f0) =
+							    (int) (g_7f4ca0 + id * 0x21c);
+							p += 0x10;
+						}
+					}
+				}
+
+				posY[1] = (((*(short*) (&tabB[2].y) - h - 0xa) / 2) +
+				    h + 0xa);
+				{
+					char* p;
+					int k;
+
+					p = (char*) &tabA[1].x;
 					for (k = 0; k < 2; k++) {
-						if (tabB[k].id == -1) {
-							break;
-						}
-						col = fcn_0046f740(g_772514, 0x5db, 0x96,
-						    posX[k]);
-						tabB[k].text = col;
-						tabB[k].y = 0x96;
-						tabB[k].x = (short) (posY[k] + nc);
-						id = tabB[k].id & 0xffff;
-						fcn_0046f740(g_772514,
-						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
-						    0x98, posY[k] + 2);
-						*(int*) (g_1015ea0 + col * 756 + 0x1d0) = 3;
-						*(int*) (g_1015ea0 + col * 756 + 0x2f0) =
-						    (int) (g_7f4ca0 + id * 0x21c);
-					}
-					p = (char*) posX;
-					for (i = 4; i < 6; i++) {
-						if (tabB[i].id == -1) {
-							break;
-						}
-						col = fcn_0046f740(g_772514, 0x5db, 0x96,
-						    *(int*) p);
-						tabB[i].text = col;
-						tabB[i].y = 0x96;
-						tabB[i].x = (short) (*(short*) p + nc);
-						id = tabB[i].id & 0xffff;
-						fcn_0046f740(g_772514,
-						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
-						    0x98, *(int*) p + 2);
-						*(int*) (g_1015ea0 + col * 756 + 0x1d0) = 3;
-						*(int*) (g_1015ea0 + col * 756 + 0x2f0) =
-						    (int) (g_7f4ca0 + id * 0x21c);
-						p += 4;
-					}
-				}
-
-				i = ((tabB[2].y - h - 0xa) / 2) + h + 0xa;
-				p = (char*) &tabA[0].x;
-				for (k = 0; k < 2; k++) {
-					fcn_00472c30(*(short*) p,
-					    *(short*) (p + 2) + h + 5,
-					    *(short*) p, i, 0x10, 0x10, 0x10);
-					p += 0x10;
-				}
-				id = tabA[0].x & 0xffff;
-				i = tabA[1].x & 0xffff;
-				t0 = 0;
-				p = (char*) &tabB[0].x;
-				for (k = 0; k < 6; k++) {
-					if (*(short*) (p - 8) != -1 && t0 != 3) {
-						col = *(short*) p;
-						fcn_00472c30(col,
+						fcn_00472c30(*(short*) p,
 						    *(short*) (p + 2) + h + 5,
-						    col, posY[1], 0x10, 0x10, 0x10);
-						if (col < id) {
-							id = col;
+						    *(short*) p, posY[1], 0x10, 0x10, 0x10);
+						p -= 0x10;
+					}
+				}
+				idx = tabA[0].x & 0xffff;
+				nb = tabA[1].x & 0xffff;
+				{
+					char* p;
+					int k;
+					int mid;
+
+					t0 = *(short*) (&tabB[2].y) & 0xffff;
+					idx = *(short*) (&tabB[2].x) & 0xffff;
+					posY[0] = idx;
+					nb = idx;
+					if (flag) {
+						nb = *(short*) (&tabB[3].x) & 0xffff;
+						mid = (((int) (*(short*) (&tabC[0].y) & 0xffff) -
+						    t0 - h) / 2) + t0 + h;
+						p = (char*) &tabB[2].x;
+						for (k = 0; k < 2; k++) {
+							fcn_00472c30(*(short*) p,
+							    *(short*) (p + 2) + h + 5,
+							    *(short*) p, mid, 0x10, 0x10, 0x10);
+							p += 0x10;
 						}
-						if (col > i) {
-							i = col;
+						fcn_00472c30(idx, mid, nb + 1, mid,
+						    0x10, 0x10, 0x10);
+					}
+					p = (char*) &tabC[0].x;
+					for (k = 0; k < 5; k++) {
+						if (*(short*) (p - 8) == -1) {
+							break;
+						}
+						mid = (((int) (*(short*) (&tabC[0].y) & 0xffff) -
+						    t0 - h) / 2) + t0 + h;
+						fcn_00472c30(*(short*) p,
+						    *(short*) (p + 2) + h + 5,
+						    *(short*) p, mid, 0x10, 0x10, 0x10);
+						if (*(short*) p < idx) {
+							idx = *(short*) p;
+						}
+						if (*(short*) p > nb) {
+							nb = *(short*) p;
+						}
+						p += 0x10;
+					}
+					if (nc) {
+						fcn_00472c30(idx, mid, nb + 1, mid,
+						    0x10, 0x10, 0x10);
+						if (!flag) {
+							fcn_00472c30(posY[0],
+							    t0 + h + 5, posY[0], mid,
+							    0x10, 0x10, 0x10);
 						}
 					}
-					p += 0x10;
-					t0++;
 				}
-				if (id != i) {
-					i++;
-				}
-				fcn_00472c30(id, posY[1], i, posY[1], 0x10, 0x10, 0x10);
-				tabC[0].y = 0x122;
-				tabC[0].x = tabA[0].x & 0xffff;
-				tabC[1].x = tabA[0].x & 0xffff;
 
-				if (a1 & 1) {
-					posB[0] = rows2 - n3;
-					posC[0] = posB[0] - w - 0x28;
-					posB[1] = posB[0] + w + 0x28;
-					posC[1] = posC[0] - w - 0x28;
-					posC[2] = posB[1] + w + 0x28;
+				{
+					char* p;
+					int k;
+
+					p = (char*) tabB;
+					for (k = 0; k < 6; k++) {
+						if (*(short*) p != -1 && k != 3) {
+							fcn_00472c30(*(short*) (p + 8),
+							    *(short*) (p + 0xa) + h + 5,
+							    *(short*) (p + 8), posY[1],
+							    0x10, 0x10, 0x10);
+							if (*(short*) (p + 8) < idx) {
+								idx = *(short*) (p + 8);
+							}
+							if (*(short*) (p + 8) > nb) {
+								nb = *(short*) (p + 8);
+							}
+						}
+						p += 0x10;
+					}
+				}
+				if (idx != nb) {
+					nb++;
+				}
+				fcn_00472c30(idx, posY[1], nb, posY[1], 0x10, 0x10, 0x10);
+				tabC[0].y = 0x122;
+				if (nc) {
+					char* p;
+					int k;
+
+					if (nc & 1) {
+						posC[0] = rows2 - n3;
+						posC[1] = posC[0] - w - 0x28;
+						posC[2] = posC[0] + w + 0x28;
+						posC[3] = posC[1] - w - 0x28;
+						posC[4] = posC[2] + w + 0x28;
+						p = (char*) tabC;
+						for (k = 0; k < 5; k++) {
+							if (*(short*) p == -1) {
+								break;
+							}
+							*(int*) (p + 4) = fcn_0046f740(
+							    posC[k], 0x122, 0x5db, g_772514);
+							*(short*) (p + 0xa) = 0x122;
+							*(short*) (p + 8) =
+							    (short) (posC[k] + nc);
+							id = *(short*) p & 0xffff;
+							fcn_0046f740(posC[k] + 2, 0x124,
+							    *(int*) (g_7f4ca0 +
+							    id * 0x21c + 0x18c), g_772514);
+							*(int*) (g_1015ea0 +
+							    *(int*) (p + 4) * 756 + 0x1d0) = 3;
+							*(int*) (g_1015ea0 +
+							    *(int*) (p + 4) * 756 + 0x2f0) =
+							    (int) (g_7f4ca0 + id * 0x21c);
+							p += 0x10;
+						}
+					} else {
+						posB[0] = posY[0] - 0x14;
+						posB[1] = rows2 + 0x14;
+						posB[2] = posB[0] - w - 0x28;
+						posB[3] = posB[1] + w + 0x28;
+						p = (char*) tabC;
+						for (k = 0; k < 4; k++) {
+							if (*(short*) p == -1) {
+								break;
+							}
+							*(int*) (p + 4) = fcn_0046f740(
+							    posB[k], 0x122, 0x5db, g_772514);
+							*(short*) (p + 0xa) = 0x122;
+							*(short*) (p + 8) =
+							    (short) (posB[k] + nc);
+							id = *(short*) p & 0xffff;
+							fcn_0046f740(posB[k] + 2, 0x124,
+							    *(int*) (g_7f4ca0 +
+							    id * 0x21c + 0x18c), g_772514);
+							*(int*) (g_1015ea0 +
+							    *(int*) (p + 4) * 756 + 0x1d0) = 3;
+							*(int*) (g_1015ea0 +
+							    *(int*) (p + 4) * 756 + 0x2f0) =
+							    (int) (g_7f4ca0 + id * 0x21c);
+							p += 0x10;
+						}
+					}
+				}
+
+				{
+					char* p;
+					int k;
+
+					p = (char*) tabB;
+					for (k = 0; k < 6; k++) {
+						if (*(short*) p == -1) {
+							break;
+						}
+						*(int*) (g_1015ea0 + *(int*) (p + 4) * 756 + 0x5c) =
+						    ((a1 & 1) && !(a1 & 0xc)) ||
+						    (a1 & 0x10) ? 1 : 0;
+						io_FormatTextBuffer(buf2, 0x6ac96c,
+						    *(short*) p);
+						fcn_005c9090(buf2, *(short*) (p + 8),
+						    *(short*) (p + 0xa) + rows2 + 3,
+						    0x50, 0x56);
+						if (*(short*) p == *(short*) ent) {
+							fcn_0046f740(
+							    *(short*) (p + 8) - n3 - 0xa,
+							    *(short*) (p + 0xa) - 0xa,
+							    *(int*) (ent + 0x54),
+							    g_772514);
+						}
+						p += 0x10;
+					}
+					p = (char*) tabA;
+					for (k = 0; k < 2; k++) {
+						if (*(short*) p == -1) {
+							break;
+						}
+						*(int*) (g_1015ea0 + *(int*) (p + 4) * 756 + 0x5c) =
+						    (a1 & 0xc) ? 0 : 1;
+						io_FormatTextBuffer(buf1, 0x6ac96c,
+						    *(short*) p);
+						fcn_005c9090(buf1, *(short*) (p + 8),
+						    *(short*) (p + 0xa) + rows2 + 3,
+						    0x50, 0x56);
+						if (*(short*) p == *(short*) ent) {
+							fcn_0046f740(
+							    *(short*) (p + 8) - n3 - 0xa,
+							    *(short*) (p + 0xa) - 0xa,
+							    *(int*) (ent + 0x54),
+							    g_772514);
+						}
+						p += 0x10;
+					}
 					p = (char*) tabC;
 					for (k = 0; k < 5; k++) {
 						if (*(short*) p == -1) {
 							break;
 						}
-						col = fcn_0046f740(g_772514, 0x5db,
-						    0x122, posC[k]);
-						*(int*) (p + 4) = col;
-						*(short*) (p + 0xa) = 0x122;
-						*(short*) (p + 8) = (short) (posB[k] + nc);
-						id = *(short*) p & 0xffff;
-						fcn_0046f740(g_772514,
-						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
-						    0x124, posC[k] + 2);
-						*(int*) (g_1015ea0 + col * 756 + 0x1d0) = 3;
-						*(int*) (g_1015ea0 + col * 756 + 0x2f0) =
-						    (int) (g_7f4ca0 + id * 0x21c);
-						p += 0x10;
-					}
-				} else {
-					posB[0] = rows2 - n3;
-					posC[0] = posB[0] - w - 0x28;
-					posC[2] = posC[0] - w - 0x28;
-					posB[1] = posB[0] + w + 0x28;
-					posC[1] = posB[1] + w + 0x28;
-					p = (char*) tabC;
-					for (k = 0; k < 4; k++) {
-						if (*(short*) p == -1) {
-							break;
+						*(int*) (g_1015ea0 + *(int*) (p + 4) * 756 + 0x5c) =
+						    ((a1 & 1) && !(a1 & 0xc)) ||
+						    ((a1 & 2) && (a1 & 8) &&
+						    *(unsigned short*) (g_7f4ca0 +
+						    (*(short*) p & 0xffff) * 0x21c + 0xa) > 0xa)
+						    ? 1 : 0;
+						io_FormatTextBuffer(buf3, 0x6ac96c,
+						    *(short*) p);
+						fcn_005c9090(buf3, *(short*) (p + 8),
+						    *(short*) (p + 0xa) + rows2 + 3,
+						    0x50, 0x56);
+						if (*(short*) p == *(short*) ent) {
+							fcn_0046f740(
+							    *(short*) (p + 8) - n3 - 0xa,
+							    *(short*) (p + 0xa) - 0xa,
+							    *(int*) (ent + 0x54),
+							    g_772514);
 						}
-						col = fcn_0046f740(g_772514, 0x5db,
-						    0x122, posC[k]);
-						*(int*) (p + 4) = col;
-						*(short*) (p + 0xa) = 0x122;
-						*(short*) (p + 8) = (short) (posB[k] + nc);
-						id = *(short*) p & 0xffff;
-						fcn_0046f740(g_772514,
-						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
-						    0x124, posB[k] + 2);
-						*(int*) (g_1015ea0 + col * 756 + 0x1d0) = 3;
-						*(int*) (g_1015ea0 + col * 756 + 0x2f0) =
-						    (int) (g_7f4ca0 + id * 0x21c);
 						p += 0x10;
 					}
-				}
-
-				p = (char*) tabB;
-				for (k = 0; k < 6; k++) {
-					if (*(short*) p == -1) {
-						break;
-					}
-					col = *(int*) (p + 4);
-					*(int*) (g_1015ea0 + col * 756 + 0x5c) =
-					    (a1 & 1) ? ((a1 & 0xc) ? 1 : 0)
-					    : ((a1 & 0x10) ? 1 : 0);
-					io_FormatTextBuffer(buf3, 0x6ac96c,
-					    *(short*) p);
-					fcn_005c9090(buf3, *(short*) (p + 8),
-					    *(short*) (p + 0xa) + rows2 + 3,
-					    0x50, 0x56);
-					if (*(short*) p == *(short*) er) {
-						fcn_0046f740(g_772514,
-						    *(int*) (er + 0x54),
-						    *(short*) (p + 8) - w - 0xa,
-						    *(short*) (p + 0xa) - 0xa);
-					}
-					p += 0x10;
-				}
-				p = (char*) tabA;
-				for (k = 0; k < 2; k++) {
-					if (*(short*) p == -1) {
-						break;
-					}
-					col = *(int*) (p + 4);
-					*(int*) (g_1015ea0 + col * 756 + 0x5c) =
-					    (a1 & 0xc) ? 0 : 1;
-					io_FormatTextBuffer(buf1, 0x6ac96c,
-					    *(short*) p);
-					fcn_005c9090(buf1, *(short*) (p + 8),
-					    *(short*) (p + 0xa) + rows2 + 3,
-					    0x50, 0x56);
-					if (*(short*) p == *(short*) er) {
-						fcn_0046f740(g_772514,
-						    *(int*) (er + 0x54),
-						    *(short*) (p + 8) - w - 0xa,
-						    *(short*) (p + 0xa) - 0xa);
-					}
-					p += 0x10;
-				}
-				p = (char*) tabC;
-				for (k = 0; k < 5; k++) {
-					if (*(short*) p == -1) {
-						break;
-					}
-					col = *(int*) (p + 4);
-					*(int*) (g_1015ea0 + col * 756 + 0x5c) =
-					    ((a1 & 1) && !(a1 & 0xc)) ||
-					    !(a1 & 2) || !(a1 & 8) ? 1 : 0;
-					io_FormatTextBuffer(buf2, 0x6ac96c,
-					    *(short*) p);
-					fcn_005c9090(buf2, *(short*) (p + 8),
-					    *(short*) (p + 0xa) + rows2 + 3,
-					    0x50, 0x56);
-					if (*(short*) p == *(short*) er) {
-						fcn_0046f740(g_772514,
-						    *(int*) (er + 0x54),
-						    *(short*) (p + 8) - w - 0xa,
-						    *(short*) (p + 0xa) - 0xa);
-					}
-					p += 0x10;
 				}
 			}
 		}
@@ -499,82 +574,62 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			hid = -1;
-			{
-				char* q;
-				int j;
+			int hid;
+			int rec;
+			char* q;
+			int k;
 
-				q = (char*) &tabB[0].y;
-				for (j = 0; j < 6; j++) {
+			hid = -1;
+			rec = 0;
+			q = (char*) &tabB[0].text;
+			for (k = 0; k < 6; k++) {
+				if (g_67d370 == *(int*) q) {
+					hid = k;
+					break;
+				}
+				q += 0x10;
+			}
+			if (hid != -1) {
+				rec = gm_LookupEntityRecordById(
+				    *(int*) (g_7f4ca0 +
+				    (tabB[hid].id & 0xffff) * 0x21c + 4));
+			}
+			if (hid == -1) {
+				q = (char*) &tabA[0].text;
+				for (k = 0; k < 2; k++) {
 					if (g_67d370 == *(int*) q) {
-						hid = j;
+						hid = k;
+						break;
+					}
+					q += 0x10;
+				}
+				if (hid != -1) {
+					rec = gm_LookupEntityRecordById(
+					    *(int*) (g_7f4ca0 +
+					    (tabA[hid].id & 0xffff) * 0x21c + 4));
+				}
+			}
+			if (hid == -1) {
+				q = (char*) &tabC[0].text;
+				for (k = 0; k < 5; k++) {
+					if (g_67d370 == *(int*) q) {
+						rec = gm_LookupEntityRecordById(
+						    *(int*) (g_7f4ca0 +
+						    (tabC[k].id & 0xffff) * 0x21c + 4));
 						break;
 					}
 					q += 0x10;
 				}
 			}
-			rec = 0;
-			if (hid != -1) {
-				rec = gm_LookupEntityRecordById(
-				    *(int*) (g_7f4ca0 +
-				    (*(short*) (&tabB[hid].x) & 0xffff) * 0x21c + 4));
-			}
-			if (!rec) {
-				hid = -1;
-				{
-					char* q;
-					int j;
-
-					q = (char*) &tabA[0].x;
-					for (j = 0; j < 2; j++) {
-						if (g_67d370 == *(int*) q) {
-							hid = j;
-							break;
-						}
-						q += 0x10;
-					}
-				}
-				if (hid != -1) {
-					rec = gm_LookupEntityRecordById(
-					    *(int*) (g_7f4ca0 +
-					    (*(short*) (&tabA[hid].x) & 0xffff) * 0x21c + 4));
-				}
-			}
-			if (!rec) {
-				hid = -1;
-				{
-					char* q;
-					int j;
-
-					q = (char*) &tabC[0].x;
-					for (j = 0; j < 5; j++) {
-						if (g_67d370 == *(int*) q) {
-							hid = j;
-							break;
-						}
-						q += 0x10;
-					}
-				}
-				if (hid != -1) {
-					rec = gm_LookupEntityRecordById(
-					    *(int*) (g_7f4ca0 +
-					    (*(short*) (&tabC[hid].x) & 0xffff) * 0x21c + 4));
-				}
-			}
-			keepHid = hid;
-			keepRec = rec;
 			if (rec) {
 				fcn_00471af0(win, 0);
 				if (!(a1 & 0x10) && (a1 & 8)) {
 					fcn_005d1790((void*) rec,
-					    *(int*) &posY[1] != rec ? 1 : 0);
+					    (int) ent != rec ? 1 : 0);
 				}
 				fcn_00471af0(win, 1);
 			} else {
 				count = 1;
-			}
-			if (a3 == 0x5d0660) {
-				io_AppendText((void*) &keepHid, (void*) &keepRec);
 			}
 		}
 		if (!fcn_005373e0((void*) 0x5d0660, a3)) {
@@ -585,9 +640,9 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 	fcn_0057e880(6, 1, 0, 0);
 }
 /* Layout scaffolding: shifts the next source object to its reference
- * VA. 0x90 filler, not reconstruction. Generated by the text lead pass. */
+ * VA. Generated by the text lead pass. */
 #pragma data_seg(".text")
-unsigned char _tlead_GOLDTL_fcn_005d0660[619] = {
+unsigned char _tlead_GOLDTL_fcn_005d0660[229] = {
     0x90,
     0x90,
     0x90,
@@ -817,394 +872,4 @@ unsigned char _tlead_GOLDTL_fcn_005d0660[619] = {
     0x90,
     0x90,
     0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    0x90,
-    };
+};

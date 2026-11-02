@@ -17700,3 +17700,26 @@ declarator, function-scope variable with separate assignment, promoted struct fi
 frame to 0x314). The three callees still without project definitions are 0x0050b7c0 (gm_QueryEntitySum,
 extern declarations only), 0x0066080a and 0x0050d270 (a source file exists but the symbol is listed
 unresolved).
+
+## 2026-11-02 — inventory connector block and argument order
+
+`0x5D0660` 275 to 291 with the object growing 3770 to 4150, frame 0x438 held, zero unresolved bindings
+and lint at 5485 of 5485. Five corrections. fcn_0046f740's argument order was inverted at every call
+site: native pushes g_772514 first, so it is the last parameter, `fcn_0046f740(y, x, value, g_772514)`,
+fixed at about 29 sites. A whole connector block was missing, native 0x5d11fc..0x5d137b (0x17f bytes
+after the tabC draw), which draws the tabB[2..3] box when the flag is set, walks tabC tracking min and
+max x, draws the closing line and adds a marker when the flag is clear; adding it grew the object by
+424 bytes. The two keepalive twins turned out to be that block's temporaries (mid plus reused min and
+max accumulators) rather than hover state, and removing them left the frame at 0x438. The hover block
+is rederived: all three scans compare g_67d370 against the record's text field at +4 rather than .y,
+hid is set only by the tabB and tabA scans, the tabC scan only sets rec, fcn_005d1790 receives
+(ent != rec), and there is no second io_AppendText. And the text passes are rederived: the tabC draw
+is gated by `if (nc)` with `nc & 1` choosing the five-entry posC layout, the four-entry layout uses
+posB and posY[0]-0x14, per-pass visibility is tabB `((a1&1)&&!(a1&0xc))||(a1&0x10)`, tabA
+`(a1&0xc)?0:1`, and tabC adds `(a1&2)&&(a1&8)&&entity(+0xa)>0xa`, the redraw x is x-n3-0xa rather
+than -w, and tabA[0] uses posY[0]=rows2-w with n3=w/2. The frame slot map is scalars 0x00..0x40,
+tabA 0x44, posB 0x64, posC 0x74, tabB 0x88, tabC 0xe8 and buf1/2/3 at 0x138/0x238/0x338, matching
+the declaration order. The tlead filler is now 229 bytes so the .text contribution stays 4389. The
+remaining 239 bytes are the text passes (native 0x276 against about 0x1f0) and the hover block
+(native 0x15f against about 0xca), where native is a less-merged build of the same logic because the
+three hover lookups tail-merge into one site here.
