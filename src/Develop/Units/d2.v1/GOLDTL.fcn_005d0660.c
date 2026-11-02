@@ -34,7 +34,7 @@ void* __cdecl fcn_00470820(short, short, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl io_AppendText(void*, ...);
+int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00472e50(void);
 int __cdecl fcn_0046f2c0(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
@@ -58,9 +58,7 @@ typedef struct TreeRec {
 /* ADDRESS: GOLDTL 0x005d0660 */
 void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned int a3)
 {
-	char buf3[256];
-	char buf2[256];
-	char buf1[256];
+	char buf[772];
 	TreeRec tabC[5];
 	TreeRec tabB[6];
 	int posC[5];
@@ -94,7 +92,11 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(win);
 	d2_SetForm(win, 2);
-	io_AppendText(a2 ? (void*) a2 : (void*) 0x9f);
+	if (a2) {
+		io_AppendText(a2);
+	} else {
+		io_AppendText(0x9f);
+	}
 	d2_SetForm(win, 1);
 	count = 1;
 	g_100f1dc = -1;
@@ -352,9 +354,9 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 
 					p = (char*) &tabA[0].x;
 					for (k = 0; k < 2; k++) {
-						fcn_00472c30(*(short*) p,
-						    *(short*) (p + 2) + h + 5,
-						    *(short*) p, posY[1], 0x10, 0x10, 0x10);
+						fcn_00472c30(*(unsigned short*) p,
+						    *(unsigned short*) (p + 2) + h + 5,
+						    *(unsigned short*) p, posY[1], 0x10, 0x10, 0x10);
 						p += 0x10;
 					}
 				}
@@ -448,7 +450,6 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				{
 					char* p;
 					int k;
-					int mid;
 
 					t0 = *(short*) (&tabB[2].y) & 0xffff;
 					idx = *(short*) (&tabB[2].x) & 0xffff;
@@ -456,28 +457,31 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 					nb = idx;
 					if (flag) {
 						idx = *(short*) (&tabB[3].x) & 0xffff;
-						mid = (((int) (*(short*) (&tabC[0].y) & 0xffff) -
-						    t0 - h) / 2) + t0 + h;
 						p = (char*) &tabB[2].x;
 						for (k = 0; k < 2; k++) {
 							fcn_00472c30(*(short*) p,
 							    *(short*) (p + 2) + h + 5,
-							    *(short*) p, mid, 0x10, 0x10, 0x10);
+							    *(short*) p,
+							    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
+							    t0 - h) / 2) + t0 + h, 0x10, 0x10, 0x10);
 							p += 0x10;
 						}
-						fcn_00472c30(nb, mid, nb + 1, mid,
-						    0x10, 0x10, 0x10);
+						fcn_00472c30(nb,
+						    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
+						    t0 - h) / 2) + t0 + h, nb + 1,
+						    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
+						    t0 - h) / 2) + t0 + h, 0x10, 0x10, 0x10);
 					}
 					p = (char*) &tabC[0].x;
 					for (k = 0; k < 5; k++) {
 						if (*(short*) (p - 8) == -1) {
 							break;
 						}
-						mid = (((int) (*(short*) (&tabC[0].y) & 0xffff) -
-						    t0 - h) / 2) + t0 + h;
 						fcn_00472c30(*(short*) p,
 						    *(short*) (p + 2) + h + 5,
-						    *(short*) p, mid, 0x10, 0x10, 0x10);
+						    *(short*) p,
+						    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
+						    t0 - h) / 2) + t0 + h, 0x10, 0x10, 0x10);
 						if (*(short*) p < nb) {
 							nb = *(short*) p;
 						}
@@ -515,11 +519,11 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						*(int*) (g_1015ea0 + *(int*) (p + 4) * 756 + 0x5c) =
 						    ((a1 & 1) && !(a1 & 0xc)) ||
 						    (a1 & 0x10) ? 1 : 0;
-						io_FormatTextBuffer(buf2, 0x6ac96c,
+						io_FormatTextBuffer(buf + 0x100, 0x6ac96c,
 						    *(unsigned short*) p);
 						nb = *(unsigned short*) (p + 8);
 						t0 = *(unsigned short*) (p + 0xa);
-						fcn_005c9090(buf2, nb, t0 + rows2 + 3,
+						fcn_005c9090(buf + 0x100, nb, t0 + rows2 + 3,
 						    0x50, 0x56);
 						if (*(short*) p == *(short*) ent) {
 							fcn_0046f740(nb - n3 - 0xa,
@@ -536,11 +540,11 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						}
 						*(int*) (g_1015ea0 + *(int*) (p + 4) * 756 + 0x5c) =
 						    (a1 & 0xc) ? 0 : 1;
-						io_FormatTextBuffer(buf1, 0x6ac96c,
+						io_FormatTextBuffer(buf, 0x6ac96c,
 						    *(unsigned short*) p);
 						nb = *(unsigned short*) (p + 8);
 						t0 = *(unsigned short*) (p + 0xa);
-						fcn_005c9090(buf1, nb, t0 + rows2 + 3,
+						fcn_005c9090(buf, nb, t0 + rows2 + 3,
 						    0x50, 0x56);
 						if (*(short*) p == *(short*) ent) {
 							fcn_0046f740(nb - n3 - 0xa,
@@ -561,11 +565,11 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						    *(unsigned short*) (g_7f4ca0 +
 						    (*(short*) p & 0xffff) * 0x21c + 0xa) > 0xa)
 						    ? 1 : 0;
-						io_FormatTextBuffer(buf3, 0x6ac96c,
+						io_FormatTextBuffer(buf + 0x200, 0x6ac96c,
 						    *(unsigned short*) p);
 						nb = *(unsigned short*) (p + 8);
 						t0 = *(unsigned short*) (p + 0xa);
-						fcn_005c9090(buf3, nb, t0 + rows2 + 3,
+						fcn_005c9090(buf + 0x200, nb, t0 + rows2 + 3,
 						    0x50, 0x56);
 						if (*(short*) p == *(short*) ent) {
 							fcn_0046f740(nb - n3 - 0xa,
@@ -640,5 +644,5 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 		}
 	}
 	fcn_00471e30(win);
-	fcn_0057e880(6, 1, 0, 0);
+	fcn_0057e880(6, 0, 1, 0);
 }

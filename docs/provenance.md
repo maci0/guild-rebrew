@@ -18182,3 +18182,28 @@ open: the object is 225 bytes over because the counters i and cnt spill to the f
 them in EBX; -1 wants EBP rather than EDI; and native stores cnt=0 and compares `cmp ebx,edx` while ours
 folds i to a constant, so the row-init counter in native is not i (a y-counter variant measured 275 and a
 pointer-loop variant 266).
+
+## 2026-11-03 — inventory dialog blocks converge to 1132
+
+`0x5D0660` 688 to 1132 with object exactly 4389, frame 0x438, all 66 calls in native order, zero
+unresolved bindings (99 positional conflicts, 43 validated) and lint at 5485 of 5485. Deltas: the pre-text
+absolute sum for calls 1..48 fell from 599 to 402 (621 to 424 across all 66) with calls 1..12 exact, and
+region byte agreement went from 261 to 647 of 3355 in the pre-text span, 78 to 82 of 630 in the text,
+214 to 211 of 351 in the hover and 35 to 38 of 53 in the tail. Five changes. io_AppendText is
+`int __cdecl io_AppendText(int, ...)` matching the other translation units, and the call is written as two
+if/else arms with the same callee so MSVC tail-merges them into native's test/je/push reg/jmp/push
+imm/call/add esp,4 shape, which also fixes the early drift. One `char buf[772]` scratch replaces the three
+separate buffers, with passes using buf, buf+0x100 and buf+0x200, and the four bytes over 768 restore the
+locked frame 0x438 after mid inlining dropped it to 0x434 because the compiler will not place three
+same-size arrays in native's order, the first referenced taking the lowest slot. The tabA draw loop reads
+x and y as unsigned short, matching native's zero extension, since the reference has exactly two movsx
+loads, the w and h ones. The mid block local is removed and the midpoint expression inlined at each
+fcn_00472c30 site, matching native's per-site recompute. And the final call is `fcn_0057e880(6, 0, 1, 0)`
+as native pushes. Caveat recorded: the layout below the buffer is native minus four. Tables sit at tabA
+0x40, tabB 0x84 (raw [esp+0x94]), tabC 0xe4 and buf 0x134/0x234/0x334 where native has 0x44, 0x88 (raw
+0x98), 0xe8 and 0x138/0x238/0x338, and the scalar slots are permuted (h 0x08 against 0x10, w 0x0c against
+0x18, ent 0x1c against 0x14, rows2 0x18 against 0x20, count 0x24 against 0x30, rows 0x3c against 0x40),
+because inlining mid removed one 4-byte slot and the 772-byte buffer restores the frame without restoring
+the 17th slot. Rejected slot levers: volatile idx (frame ok, +119 bytes), volatile nb (+63), int t0 (+8),
+spare locals (dropped), forced-memory mid[1] (over target), and keeping mid live across the tabC loop
+(native layout and frame restored but 4397 bytes at match 741).
