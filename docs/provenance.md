@@ -19185,3 +19185,32 @@ Recommendation: treat the conversion temp and the ebx zeroings as one problem an
 yields native's `fild` early without a local, or establish why native spills `letzte_zeit` instead of keeping
 it in ebx. Findings in .scratch/571870/findings.md with helpers probe.py, gen.py, slots.py, cfgframe.py and
 the h2, h3, df and v1 to v19 variants.
+
+## 2026-11-03 — season setup compare region decomposed
+
+`0x540020` 3872 to 3873 with object exactly 4393, frame 0x3b8 and lint clean; one line was kept, the evs
+store order `f5c; ent; f58;`, which makes the `[esi+1]` load emit native's `mov eax,[esi+1];
+mov [esp+0x90],eax` instead of moving through ecx. Orders measured: f5c,ent,f58 gives 3873 and is
+byte-identical to ent,f5c,f58, while f58,f5c,ent and f58,ent,f5c give 3870 and ent,f58,f5c gives 3872. The
+compare region is now fully decomposed and is the remaining gap: native 0xc10 is `push 0x5a; call 0x42e410;
+mov bx,ax; push esi; and ebx,0xffff; call 0x50bfe0; add esp,8; cmp eax,ebx; jge` and ours is the same module
+the register names, with edi in place of ebx. Size stays 4393 because the byte native's `mov bx,ax` costs over
+our `mov edi,eax` is exactly cancelled by native's `lea eax,[edi+edi]` at 3 bytes against our
+`lea eax,[ebp+ebp*1+0x0]` at 4 at 0xe17, that is by the leftw role, so with roles obj=esi, leftw=edi, w=ebx
+and n=ebp both the compare region and that lea become native bytes at 4393 with no other edit. The `mov X,ax`
+form is micro-verified: it needs an int w, a 16-bit-returning callee and the `& 0xffff` mask together, since
+`short w` alone gives `mov esi,eax` plus movsx, `unsigned short w` alone gives `mov esi,eax` plus
+`and eax,0xffff`, and an explicit cast gives `mov esi,eax`; that combination is round 4's keep_wret_tmp.c which
+measures 4394 while leftw stays in ebp. The second-use premise does not hold: native references the w value
+exactly three times at 0xc17, 0xc1b and 0xc29, and the other ebx uses in the function are the season value and
+a constant web whose live ranges are disjoint. Thirty-seven source shapes were measured; every one that keeps
+w as a variable keeps w in edi and every one that drops the variable gives the three native roles at 4391.
+Inert for the rank: the 16-bit callee plain or with unsigned or long w, block scoping at all three scopes,
+declaration with initialiser, casting, masking at the use or at the comparison, comma and logical wrappers,
+ternaries, assignment inside the comparison, reversed comparisons (MSVC canonicalises back), declaration order,
+extra uses, and no-mask forms. Also checked and rejected: the ENTCLASS base and index swap is the same address
+with the same tree in a probe and the first-loop equivalents already match, so it tracks whichever register
+holds the chain result with no source lever found, and the `mov cl,[0x773d75]` site already emits no and and is
+byte-identical. Next lever recorded: force a fifth live web in the for-body to perturb the ordering, or
+reconstruct the comparison from a different original-C idiom such as a short-typed helper result stored
+through a local pointer. Current source .scratch/f540020/base_v5.c, ROUND6.md.

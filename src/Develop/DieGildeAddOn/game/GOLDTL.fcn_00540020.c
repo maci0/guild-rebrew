@@ -488,8 +488,8 @@ void __cdecl fcn_00540020(void)
 							evs[0].kind = -1;
 							evs[0].visible = 1;
 							evs[0].f5c = 0xa;
-							evs[0].f58 = *(int*) ((char*) obj + 1);
 							evs[0].ent = SLOT4(i);
+							evs[0].f58 = *(int*) ((char*) obj + 1);
 							fcn_004c4eb0(0x67e330);
 							fcn_004c5150(-1, SLOT4(i), g_773d75,
 								     (int) (*(float*) &agebits));
