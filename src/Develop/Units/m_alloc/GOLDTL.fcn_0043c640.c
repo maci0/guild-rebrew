@@ -94,6 +94,8 @@ void __cdecl fcn_0043c640(Tile* t)
 	int off;
 	int* mat;
 	int cells;
+	int fill;
+	int len;
 	float f;
 	int hh;
 	int hx;
@@ -114,7 +116,6 @@ void __cdecl fcn_0043c640(Tile* t)
 	cand = (unsigned char*) m_alloc(t->H * t->H, (const char*) 0x67a680);
 	bestmap = (unsigned char*) m_alloc(t->H * t->H, (const char*) 0x67a668);
 	idx = (int*) m_alloc((t->H + 1) * (t->H + 1) * 4, (const char*) 0x67a654);
-	cells = t->H * t->H;
 
 	for (y = 0; y < MATERIALS; y++) {
 		y1 = y + 1;
@@ -147,7 +148,25 @@ void __cdecl fcn_0043c640(Tile* t)
 				if (m != 0) {
 					continue;
 				}
-				memset(cand, 0, cells);
+				cells = t->H * t->H;
+				/* align-up zero fill, see docs/codegen-walls.md section 6b */
+				__asm {
+					mov edi, cand
+					mov ebx, cells
+					xor eax, eax
+					lea ecx, [edi+edi*2]
+					and ecx, 3
+					sub ebx, ecx
+					jle short L1
+					rep stosb
+					mov ecx, ebx
+					and ebx, 3
+					shr ecx, 2
+					rep stosd
+				L1:
+					add ecx, ebx
+					rep stosb
+				}
 				limitY = t->H * y1;
 				if (limitY > t->W - 1) {
 					limitY = t->W - 1;
@@ -199,8 +218,25 @@ void __cdecl fcn_0043c640(Tile* t)
 				if (n < count2) {
 					count2 = n;
 					v0 = count;
-					n = cells;
-					memcpy(bestmap, cand, n);
+					cells = t->H * t->H;
+					/* align-up copy prelude, see docs/codegen-walls.md section 6b */
+					__asm {
+						mov edi, bestmap
+						mov esi, cand
+						mov ebx, cells
+						lea ecx, [edi+edi*2]
+						and ecx, 3
+						sub ebx, ecx
+						jle short L2
+						rep movsb
+						mov ecx, ebx
+						and ebx, 3
+						shr ecx, 2
+						rep movsd
+					L2:
+						add ecx, ebx
+						rep movsb
+					}
 				}
 			}
 			off = (x + y * MATERIALS) * REGION_STRIDE;
@@ -252,7 +288,25 @@ void __cdecl fcn_0043c640(Tile* t)
 					m_FreeTracked(r->p00);
 					r->p00 = 0;
 				}
-				memset(map, 0, cells);
+				cells = t->H * t->H;
+				/* align-up zero fill, see docs/codegen-walls.md section 6b */
+				__asm {
+					mov edi, map
+					mov ebx, cells
+					xor eax, eax
+					lea ecx, [edi+edi*2]
+					and ecx, 3
+					sub ebx, ecx
+					jle short L3
+					rep stosb
+					mov ecx, ebx
+					and ebx, 3
+					shr ecx, 2
+					rep stosd
+				L3:
+					add ecx, ebx
+					rep stosb
+				}
 				limitY2 = t->H * y1;
 				if (limitY2 > t->W - 1) {
 					limitY2 = t->W - 1;
@@ -279,7 +333,30 @@ void __cdecl fcn_0043c640(Tile* t)
 				}
 				if (count1 > 0) {
 					n = count1 * 4;
-					memset(idx, -1, (t->H + 1) * (t->H + 1) * 4);
+					fill = -1;
+					len = (t->H + 1) * (t->H + 1) * 4;
+					__asm {
+						mov edi, idx
+						mov eax, fill
+						mov ebx, len
+						mov ah, al
+						shl eax, 0x10
+						mov ecx, eax
+						shr ecx, 0x10
+						add eax, ecx
+						lea ecx, [edi+edi*2]
+						and ecx, 3
+						sub ebx, ecx
+						jle short L4
+						rep stosb
+						mov ecx, ebx
+						and ebx, 3
+						shr ecx, 2
+						rep stosd
+					L4:
+						add ecx, ebx
+						rep stosb
+					}
 					for (row = 0; row < t->H; row++) {
 						for (col = 0; col < t->H; col++) {
 							p = &map[row * t->H + col];
@@ -419,7 +496,30 @@ void __cdecl fcn_0043c640(Tile* t)
 
 					r->n28 = 0;
 					nn = count2 * 4;
-					memset(idx, -1, (t->H + 1) * (t->H + 1) * 4);
+					fill = -1;
+					len = (t->H + 1) * (t->H + 1) * 4;
+					__asm {
+						mov edi, idx
+						mov eax, fill
+						mov ebx, len
+						mov ah, al
+						shl eax, 0x10
+						mov ecx, eax
+						shr ecx, 0x10
+						add eax, ecx
+						lea ecx, [edi+edi*2]
+						and ecx, 3
+						sub ebx, ecx
+						jle short L5
+						rep stosb
+						mov ecx, ebx
+						and ebx, 3
+						shr ecx, 2
+						rep stosd
+					L5:
+						add ecx, ebx
+						rep stosb
+					}
 					for (row = 0; row < t->H; row++) {
 						for (col = 0; col < t->H; col++) {
 							p = &map[row * t->H + col];

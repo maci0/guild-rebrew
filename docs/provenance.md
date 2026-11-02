@@ -19956,3 +19956,41 @@ no C lever was found for it. Two length-neutral mismatches remain: the -1 consta
 native's ebx, so every -1 compare and store differs, and case 3 holds q in edi where native does `add esi,0x52`.
 Current source .scratch/r561380/v29_case3_case5_lead.c with the previous state at v28_kept_round6.c and notes in
 NOTES_round7b.md.
+
+## 2026-11-03 — production message reaches exact size
+
+`0x569FF0` reaches object 3772, exactly the corrected native extent, with match 903 from 335, 62 relocations,
+frame `sub esp,0x738` and lint clean; its status is STUB because 903 of 3772 is below the sixty percent threshold,
+but the size gate is cleared. Case 5 spans 0x664..0xdd5 for 0x771 against native 0x770, the -1/-2 arm spans
+0xdd5..0xe9c for 0xc7 against native 0xc8, and the switch table sits at 0xe9c as native. Three edits did it, each
+evidenced from the listing. Case 2's fourth argument to fcn_004f4f60 is `*(int*)(px + 4)` and not `s.found + 4`,
+since native moves [ebp+4] at 0x56a263 with ebp holding px, worth twenty bytes and bringing case 2 to native
+length. Case 4 uses `if (pb == 0) { *(int*)(e+0x70) = -1; return; }` instead of a goto to the shared failure,
+matching native's inline epilogue at 0x56a403 through 0x56a418, worth twelve bytes and putting case 4 at 0x276 and
+case 5 at 0x664 exactly. And `fcn_0050b750(int, unsigned char)` now receives `*(char*)0x773d75`, matching native's
+`mov cl,[773d75]; push ecx` at 0x56a4be with the signature already used in GOLDTL.fcn_004a6bb0.c, worth eight
+bytes and making that site byte-identical. The first mismatch remains at offset 7 in the prologue, where ours is
+`push ebx; mov ebx,[esp+0x740]; push ebp; xor ebp,ebp` against native's
+`push ebx; push ebp; push esi; mov esi,[esp+0x748]; push edi`, so e's home is still the whole-frame colouring
+problem established over about one hundred and fifty variants. Candidates kept in .scratch/569ff0/ with
+BAK_335_pre.c as the previous state, C_final_903.c and candD.c as the current one, and NOTES.md appended.
+
+## 2026-11-03 — crew dialog fill blocks taken as reviewed assembly
+
+`0x43C640` keeps five align-up fill blocks as inline `__asm`, with the prologue now matching native through offset
+10 (`55 8bec 83ec60 53 56 8b7508`), t homed in esi and reloaded from [ebp+8] after the copy, match up from 376 to
+442 and lint clean; the object overshoots at 5491 against native 5419 and the first mismatch moves from 7 to 11,
+where native pushes edi and ours emits `xor ebx,ebx; xor edx,edx`. The five sites are the native bodies at
+0x43c797 (memset cand to zero), 0x43c95f (memcpy bestmap from cand), 0x43cad7 (memset map to zero), 0x43cc68 and
+0x43d360 (both memset idx to -1); every combination that left any of them in C measured lower, at 417 for the copy
+alone, 292 for zero plus copy, 283 for copy plus the -1 site and 314 for all sites with a persistent cells value,
+and the -1 sites additionally need the byte-replication prelude `mov ah,al; shl eax,0x10; mov ecx,eax;
+shr ecx,0x10; add eax,ecx` that no memset spelling emits. Alongside the asm, `cells = t->H * t->H;` is now
+recomputed before each of the three H*H fills instead of once after the allocations, which reproduces native's
+count materialisation at 0x43c78c, 0x43c953 and 0x43cacc and is why the row rises to 442 where the untouched C sits
+at 314. The original assembly is recorded through
+`rebrew source document-assembly src/Develop/Units/m_alloc/GOLDTL.fcn_0043c640.c --symbol fcn_0043c640
+--evidence "..."` with source hash a9a6bb3cbf97b091d9a84a06be9c43c0b04bc099f69cdbacd6e6bf3d7f113397, the evidence
+being the C1.DLL elimination, the documented align-up family and the five site addresses. The 72-byte overshoot is
+allocation divergence in the surrounding C, for example y at [ebp-4] where native has x, and a size-first
+alternative sits in scratch at v41-copycells.c with object 5408 and match 417 at frame 0x64.

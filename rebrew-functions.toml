@@ -423864,7 +423864,7 @@ blocker = "Complete decompiler-shaped body from the live disassembly (1814 instr
 blocker_delta = 411
 
 ["GOLDTL.0x0043c640".verification]
-source_hash = "ccd14d0122c2f5435b6795436075d7db12ccda3e58a4a3e87ccd5a1cf69ea864"
+source_hash = "69cd5c6b936ab98d2b6a6e4e236106d4bd720ac93bb609ab84f3e97e0faf5e03"
 reference_hash = "a85772db61157cde9460239ae378fae361df96530629c05b32fd253ca2b97cb7"
 reference_size = "5419"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423875,10 +423875,10 @@ module = "GOLDTL"
 va = "0x43c640"
 context_hash = ""
 defines = "[]"
-input_hash = "d76764a1221e6abdd2fd4256dc01000becf82f328777e1b1dcc8e0530bea1041"
+input_hash = "26bbe54c8925d816432cca2add32f02a5c0b6dd80d02036a0d4f1986b83c0385"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T22:12:50+00:00"
+measured_at = "2026-11-02T22:49:08+00:00"
 
 [["GOLDTL.0x0043c640".status_history]]
 old_status = "STUB"
@@ -476120,13 +476120,13 @@ file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00569ff0.c"
 symbol = "_fcn_00569ff0"
 name = "fcn_00569ff0"
 kind = "FUNCTION"
-updated_by = "fix-sizes"
-updated_at = "2026-11-02T22:32:07+00:00"
-status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-11-02T22:51:13+00:00"
+status = "STUB"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00569ff0".verification]
-source_hash = "b31560263fc97278ea2b551b4e816de6a4e2f9b763b6a7589360525ba16021ea"
+source_hash = "f2265af9f5eb812be43695e2eebb4ec3cd6e6ba1038e9b1f9fe8edd9faaa1883"
 reference_hash = "9fc3617384c7478cba05636e1f4460a666a2570b80484f6b9bd5e33915cf197f"
 reference_size = "3772"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -476137,15 +476137,21 @@ module = "GOLDTL"
 va = "0x569ff0"
 context_hash = ""
 defines = "[]"
-input_hash = "46743e4b7ce5f3868b82dfcaecbab507e0b4c3baba5c2017c9c1180f291fbce8"
-status = "SIZE_MISMATCH"
+input_hash = "dd85aed07ea1a75433ab3ef128206f01656f50eb0386343ba46768fed232e33c"
+status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T22:37:53+00:00"
+measured_at = "2026-11-02T22:51:13+00:00"
 
 [["GOLDTL.0x00569ff0".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-20T16:58:30.162135+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00569ff0".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "STUB"
+changed_at = "2026-11-02T22:51:13.130662+00:00"
 updated_by = "test"
 ["GOLDTL.0x0050a7e0"]
 size = 3872
@@ -588640,6 +588646,9 @@ evidence = "Whole-function naked assembly: the reference extent is an ABI shape 
 source_hash = "e6652cbd04955f15518c3445986c2baf94bd2d4d6b76fd63483baaa008301b61"
 evidence = "Whole-function naked assembly: the reference extent is an ABI shape MSVC 6 C mode cannot express; bytes transcribed instruction for instruction."
 
+[source.definitions."src/Develop/Units/m_alloc/GOLDTL.fcn_0043c640.c".fcn_0043c640.GOLDTL]
+source_hash = "a9a6bb3cbf97b091d9a84a06be9c43c0b04bc099f69cdbacd6e6bf3d7f113397"
+evidence = "five align-up fill blocks at 0x43c797, 0x43c95f, 0x43cad7, 0x43cc68 and 0x43d360 are hand-written: three local MSVC 6 C1.DLL copies contain no lea ecx,[edi+edi*2]; and ecx,3 pattern (8d 0c 7f 83 e1 03) and no align-up memcpy, the sp5 C1 align-up memset opens neg ecx; and ecx,3 (f7 d9 83 e1 03) where the reference opens with the three-byte lea, and seventeen mock translation units and seven real-source spellings all produce the two-stage form or de-inline to calls"
 [source.files."src/crt_region/amsg_exit.c".SERVER]
 purpose = "reversed mirror of stock LIBCMT amsg/crt0msg code, compiled to keep crt0msg.obj out of the link (its runtime-error strings duplicate rdata_restore.c). the strcat mirror (0x1001f8e0) is asm in the CRT and cannot match in pure C; this file is scaffolding, not reversed game code"
 

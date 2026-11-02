@@ -38,7 +38,7 @@ int __cdecl fcn_00507e30(char*, int);
 char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl fcn_0050c5d0(char*, int*);
 int __cdecl fcn_0050c710(char*, int, int);
-int __cdecl fcn_0050b750(int);
+int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl _ftol(void);
@@ -156,7 +156,7 @@ void __cdecl fcn_00569ff0(char* e)
 			if (fcn_0055be70((int*) &s) != 0) {
 				*(int*) (e + 0xb4) = fcn_004f4f60(0x17, 1,
 				        *(int*) (0x7f4ca4 + *(unsigned short*) (e + 8) * 0x21c),
-				        *(int*) ((char*) s.found + 4), *(int*) (pa + 1));
+				        *(int*) (px + 4), *(int*) (pa + 1));
 				*(int*) (e + 0xb8) = *(int*) ((char*) s.found + 4);
 				*(int*) (e + 0xbc) = *(int*) ((char*) s.found + 0xb0);
 				*(int*) (e + 0x70) = 3;
@@ -194,7 +194,8 @@ void __cdecl fcn_00569ff0(char* e)
 	case 4:
 		pb = (char*) fcn_005463a0(1, 1, *(int*) (e + 0xb8));
 		if (pb == 0) {
-			goto fail;
+			*(int*) (e + 0x70) = -1;
+			return;
 		}
 		if (*(int*) (pb + 0xd4) == *(int*) (e + 4)) {
 			fcn_00500bb0(e + 0x52, 0, 6, 0);
@@ -209,7 +210,7 @@ void __cdecl fcn_00569ff0(char* e)
 			}
 			px = (char*) (0x7f4ca0 + *(unsigned short*) (pb + 8) * 0x21c);
 			if (px != 0 && pc != 0) {
-				num = fcn_0050b750((gm_RandomMod(0xc8) & 0xffff) + 0x226);
+				num = fcn_0050b750((gm_RandomMod(0xc8) & 0xffff) + 0x226, *(char*) 0x773d75);
 				io_FormatTextBuffer(b200, 0x19ea, pa, num, *(unsigned short*) px);
 				fcn_00545d40(*(int*) (pc + 4), *(int*) (pc + 4), b200, 1, 0x5f0,
 				        "_NACHRICHTEN_HS_76");
