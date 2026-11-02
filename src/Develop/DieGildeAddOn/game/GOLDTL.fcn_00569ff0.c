@@ -349,13 +349,16 @@ void __cdecl fcn_00569ff0(char* e)
 				num = 0;
 			}
 			io_FormatTextBuffer(b400, 0x68bea4, num);
-			strcpy(b400, b200);
 			strcpy(b400, b100);
 			fcn_004c51a0(*(int*) (q + 4), *(int*) (px + 4), *(char*) 0x773d75, flag);
 			fcn_004c4510(pb, *(int*) (pb + 1));
 			fcn_004c4670(4, 1, 0x69, &flag);
 			fcn_004c5360();
 		} else {
+			pa = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
+			if (pa == 0) {
+				goto after;
+			}
 			if (*(char*) (pc + 2) == 6 || *(char*) (pc + 2) == 7) {
 				io_FormatTextBuffer(b200, 0x19e7, 0x19c1, *(unsigned short*) px, pa);
 				fcn_00545e80(*(int*) (pc + 4), *(int*) (pc + 4), b200, 1, 0x5f0,
@@ -404,6 +407,17 @@ void __cdecl fcn_00569ff0(char* e)
 			*(int*) (q + 0x14) += flag;
 		}
 		*(int*) (pb + 0x4d) += flag;
+		if (*(char*) (pc + 2) == 6 || *(char*) (pc + 2) == 7) {
+			io_FormatTextBuffer(b200, 0x19e6, 0x19c1, *(unsigned short*) px, pa);
+			strcpy(b200, b400);
+			fcn_00545e80(*(int*) (pc + 4), *(int*) (pc + 4), b200, 1, 0x5f0,
+			        *(int*) (pa + 1), -1, 0, "_NACHRICHTEN_HS_74");
+		}
+		if (*(char*) (px + 2) == 6 || *(char*) (px + 2) == 7) {
+			io_FormatTextBuffer(b200, 0x19e8, pa, flag);
+			fcn_00545e80(*(int*) (px + 4), *(int*) (px + 4), b200, 0, 0x5f0,
+			        *(int*) (pa + 1), -1, 0, "_NACHRICHTEN_HS_27");
+		}
 	after:
 		if (cnt2 != 0) {
 			q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));

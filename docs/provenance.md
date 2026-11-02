@@ -18919,3 +18919,28 @@ so leftw must outrank w; declaration order of obj, n and w, block scopes, `long 
 `char* obj` and `unsigned short w` are all inert, and the divisions-on-left variants either push the
 remainder into memory at 4396 or lose the d60 store at 4381. Details in .scratch/f540020/ROUND3.md with the
 probe script .scratch/f540020/probe.py.
+
+## 2026-11-03 — production message case five blocks transcribed
+
+`0x569FF0` keeps the transcribed blocks at match 295 with object 3564 from 3372, 39 relocations, frame
+0x738 held, buffers still at native offsets (0x48 four sites, 0x248 one, 0x348 two) and lint clean. Case 5 is
+now 0x6eb against native's 0x770, so 0x85 short rather than 0x145. Transcribed in native order after both
+bumps: the gate `*(char*)(pc+2) == 6 || 7` then `io_FormatTextBuffer(b200, 0x19e6, 0x19c1,
+*(unsigned short*)px, pa)`, `strcpy(b200, b400)` and `fcn_00545e80(*(int*)(pc+4), *(int*)(pc+4), b200, 1,
+0x5f0, *(int*)(pa+1), -1, 0, "_NACHRICHTEN_HS_74")`; then a gate on px with
+`io_FormatTextBuffer(b200, 0x19e8, pa, flag)` plus `fcn_00545e80` pushing 0 as its fourth argument and the
+string "_NACHRICHTEN_HS_27"; and the `pa = Search(1,1,e+0xac); if (pa == 0) goto after;` head in the flag==0
+arm, matching native at 0x56ad1e. The spurious `strcpy(b400, b200)` is deleted because native has exactly one
+copy in the flag arm and it runs from b100 to b400, scanning [esp+0x28c] and writing [esp+0x38c]. The string
+map read from the reference image is 0x6a6a04 "_NACHRICHTEN_HS_75", 0x6a6a18 "_NACHRICHTEN_HS_27" and
+0x6a6a2c "_NACHRICHTEN_HS_74", and block three's second call pushes 0 rather than a literal, so the existing
+"_NACHRICHTEN_HS_74" on the 0x19e9 call is probably wrong and is left for the next pass. Costs measured: any
+added block flips e from esi back to ebp, so the mismatch at 0x8 returns and every variant that holds frame
+0x738 with the blocks leaves e in ebp; the native-exact nesting with memset, search, body, num block, bumps
+and blocks all inside `if (flag != 0)` and a cold else arm drops the frame to 0x730 with twelve scalar dwords
+against native's fourteen, slides the buffers to 0x40 and measures 282, so it was rejected on the frame; and
+the blocks-free fallback that puts only the else-arm search in place measures 305 at object 3400 with the
+first mismatch at 0x10 and e in esi, which is available if prefix parity ever outranks coverage. The remaining
+0x85 most likely sits where native calls 0x504b30 twice in case 5 (0x56a6f1 and 0x56adde) and 0x502850 twice
+(0x56a7bc and 0x56ab97), since our case 5 has neither the 0x504b30 pair nor a second 0x502850. Notes with all
+rejected variants in .scratch/569ff0/NOTES.md and the kept source at KEEP_v3_295.c.
