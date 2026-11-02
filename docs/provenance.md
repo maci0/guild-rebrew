@@ -17993,3 +17993,37 @@ seven pre-call stores because MSVC sinks `hD = -1` to object 0x549 as `or edi,-1
 to 0x24c, and init reorders with hD first or last and cnt last are all neutral while inits before ent
 break the prefix to 22. Packet sizes 0xfd, 0xfe and 0xff are byte-identical to 0x100 and 0xfc drops the
 frame to 0x1364, so the packet cannot be tuned by four.
+
+## 2026-11-03 — duplicated parent copies and the branch-arm hover tail
+
+`0x50A7E0` 741 to 787 with the object at 3879 (deficit 18 to 7), frame 0x428 and the slot map held.
+The two-parent merge path has two inlined copies of the slot+0x40 string in native, one per arm of the
+father-type test at 0x50b190 for mother and 0x50b1a9 for father together with the 65-byte test, while our
+source selected a `src` pointer and did one shared strcpy of 44 bytes; moving
+`strcpy(slot+0x40, father+0x40)` and `strcpy(slot+0x40, mother+0x40)` into the two arms adds 25 bytes and
+takes match to 787. The no-parent path's `memset(slot+0x5c,0xff,0x20)` also moved before
+`D(slot,0x64)=father_id` to native order (0x50b439 and 0x50b43b), byte-neutral. The remaining seven bytes
+are colour-driven: our father-pointer reload from [esp+0x10] costs 4, the family-count block costs 9
+because our counter lands in ESI (no high-byte register) so it emits `or esi,0x8000` and load/inc/store
+for [0x773d6c] where native keeps EAX with `or ah,0x80` and `inc dword ptr [0x773d6c]`, and native's
+`mov word [slot],0xffff` at 0x50a896 is dead-store-eliminated from our literal spelling for 6 the other
+way (volatile or slot-based spellings revive it but reallocate the function to 3768, 3795 or 3860 with
+match 504 or 415, so they were reverted). A colour lever was found and rejected: spelling both
+relationship matrices as file-scope `extern char g_relationship_matrix_primary[]` and `secondary[]` in the
+matrix loops gives idx in ESI with home 0x28, frame 0x42c, object 3876 and match 568, but the four extra
+frame bytes appear only when the `id + n*0x300` matrix writes are extern and those same writes flip the
+colour, emitting dir32 relocations where native has literal disp32. The conclusion recorded: the 18-byte
+gap was the merged-versus-duplicated two-parent blocks, not a missing call or field store, and both the
+last seven bytes and the ESI colour are downstream of the allocator's idx pick.
+
+`0x5D0660` keeps the min/max swap at match 318 with object 4355, .text 0x1110 plus a 21-byte tlead filler
+totalling 4389, frame 0x438, all 66 calls and zero unresolved bindings. The hover block stays exactly
+0x15f (start 0xf6f, end 0x10ce) with lookup sites at 0xfde, 0x1025 and 0x1071 against native 0x1000,
+0x1047 and 0x1092, so the deltas are -34, -34 and -33 from -37, and hover byte agreement rises to 213 of
+351 where v10 and C5 both had 206. The pre-text absolute delta sum falls to 731 from 777 (the v9 baseline
+was 1118), the first io_FormatTextBuffer sits at 0xd56 against 0xd7e, the text block is 0x27c against
+0x276 and the first-format-to-hover span is 0x219 against 0x213. Key finding: the tail keeps native's
+length only when written as two branch arms,
+`if (ent != rec) { fcn_005d1790((void*) rec, 1); } else { fcn_005d1790((void*) rec, 0); }`, because MSVC
+merges the identical calls into native's `cmp [esp+..],reg; je; push 1; jmp; push 0; push rec; call` of
+13 bytes with no setne, whereas `int ne = (ent != rec); fcn(rec, ne ? 1 : 0)` falls back to setne.

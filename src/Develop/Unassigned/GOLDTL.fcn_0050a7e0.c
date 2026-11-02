@@ -260,8 +260,8 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         if (type != 6 && type != 7) {
             B(slot, 0xd) = B((char*) 0x69939d, B(slot, 0x164) * 6);
         }
-        D(slot, 0x64) = father_id;
         memset(slot + 0x5c, 0xff, 0x20);
+        D(slot, 0x64) = father_id;
         B(slot, 0x58) = 1;
         if (father != 0) {
             B(slot, 0x58) = (char) (B(father, 0x58) + 1);
@@ -317,7 +317,6 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         strncpy(slot + 0x40, *(char**) ((char*) 0x14a62d8 + (gm_RandomMod(0x95) & 0xffff) * 4), 0xf);
     } else {
         char* dst;
-        char* src;
 
         B(slot, 0xd) = 1;
         if (B(mother, 2) == 6 || B(mother, 2) == 7 || B(mother, 2) == 5) {
@@ -433,11 +432,10 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         B((char*) 0x869480 + ((W(father, 0) * 3) << 8) + W(slot, 0), 0) =
             (char) (0x7f - gm_RandomMod(0x20));
         if (B(father, 2) == 6 || B(father, 2) == 7 || B(father, 2) == 5) {
-            src = father;
+            strcpy(slot + 0x40, father + 0x40);
         } else {
-            src = mother;
+            strcpy(slot + 0x40, mother + 0x40);
         }
-        strcpy(slot + 0x40, src + 0x40);
     }
     if (B(slot, 9) == 0) {
         strncpy(slot + 0x30,
