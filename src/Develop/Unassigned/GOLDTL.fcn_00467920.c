@@ -8,19 +8,24 @@
  *
  * The reconstruction carries the native frame as one local: `f`'s member
  * offsets are the native frame offsets, `f.buf` is the text buffer at 0x5c and
- * `f.v3c` the itoa scratch at 0x3c. `f.buf` is sized 0x1f4 rather than the
- * native 0x200 because the compiler also spills three dwords after the struct;
- * struct plus spills total the native 0x25c frame. Native body
- * 0x467920..0x468b7a.
+ * `f.v3c` the itoa scratch at 0x3c. `f.buf` is sized 0x1f8 rather than the
+ * native 0x200 because the compiler spills two dwords after the struct; struct
+ * plus spills total the native 0x25c frame. Native body 0x467920..0x468b7a.
  *
  * Native regions, in order:
  *   0x467920  element fetch, sprite handle lookups, fill ratio, clamps
- *   0x467a5c  flag 0x02: bar frame, fill loops, icon, label text
+ *   0x467a5c  flag 0x02: bar frame and fill loops
+ *   0x4681cc  gauge body rect, icon hit test, icon fills and end marks
+ *   0x468554  label text and the 0x468700 icon text block
+ *   0x46882f  trailing element text
  *   0x4688d7  flag 0x01: gauge ends and their fill loops
  *
- * Status: structure and call sequence transcribed; several per-block arithmetic
- * details (tick spacing, text placement offsets) still differ from the native
- * instruction stream.
+ * Status: equal native prefix is 34 bytes; it diverges on the shared zero
+ * register (native ebp, compiler edi). The 0x4681cc..0x468554 region is
+ * transcribed from the listing. All frame accesses sit 8 bytes above the
+ * native slots because the compiler places its two spill dwords below the
+ * struct, and the 0x468554 label block and 0x468700 icon text block still
+ * differ in detail.
  */
 
 extern char* g_1015ea0;			/* 0x01015ea0 element table */
@@ -68,7 +73,7 @@ typedef struct {
 	float v18;
 	int v1c, v20, v24, v28, v2c, v30, v34, v38;
 	char v3c[0x20];
-	char buf[0x1f4];
+	char buf[0x1f8];
 } fcn_00467920_frame;
 
 #define GLYPH_W(p)	(*(unsigned short*) ((char*) (p) + 2))
@@ -215,18 +220,29 @@ void __cdecl fcn_00467920(int a0, int a1)
 		}
 
 		/* 0x4681cc: gauge body rect */
-		fcn_0047a040(e[0x0a], e[0x0b], e[0x0c], e[0x0d]);
+		fcn_0047a040(e[0x0a], e[0x0c], e[0x0b], e[0x0d]);
 		if (f.v20 & 0x20) {
 			goto body;
 		}
 
-		/* 0x4681f0: icon switch */
+		/* 0x4681f0: icon hit test */
 		if (g_67d370 == e[0] && !(f.v20 & 0x40)) {
-			n = e[0x14] ? FLD(e[0x14], 0x198) : 0;
-			if (n == 0) {
+			if (e[0x14] && FLD(e[0x14], 0x198)) {
+				n = g_102d028;
+			}
+			else {
 				n = g_100f1e8;
 			}
 			if (f.v28) {
+				if (n >= e[4] && n < e[4] + GLYPH_W(h6)) {
+					f.v34 = 1;
+				}
+				else if (n >= e[4] + e[6] - GLYPH_W(h6)
+					 && n < e[4] + e[6]) {
+					f.v2c = 1;
+				}
+			}
+			else {
 				if (n >= e[4] && n < e[4] + GLYPH_W(h3)) {
 					f.v34 = 1;
 				}
@@ -235,56 +251,60 @@ void __cdecl fcn_00467920(int a0, int a1)
 					f.v2c = 1;
 				}
 			}
-			else {
-				f.v34 = 1;
-			}
 		}
 		e[0x2ec] = (char) f.v34;
 		e[0x2ed] = (char) f.v2c;
 		if (!e[0x18]) {
-			fcn_0047cba0(e[4], e[5] + (GLYPH_H(h3) - GLYPH_H(h1)) / 2,
-				     (int) b, (char*) f.v14, 1);
-			fcn_0047cba0(e[4], e[5] + (GLYPH_H(h3) - GLYPH_H(h1)) / 2,
-				     (int) b, (char*) f.v14, 5);
+			fcn_0047cba0(e[4], e[5] + (GLYPH_H(h3) - GLYPH_H(h0)) / 2,
+				     (int) e[3], (char*) f.v14, 0);
+			if (fcn_0047cba0(e[4] + GLYPH_W(h0) + f.v24,
+					 e[5] + (GLYPH_H(h3) - GLYPH_H(h0)) / 2,
+					 (int) e[3], (char*) f.v14, 5)) {
+				goto ticks;
+			}
+			fcn_0047cba0(e[4] + GLYPH_W(h0) + f.v24,
+				     e[5] + (GLYPH_H(h3) - GLYPH_H(h0)) / 2,
+				     (int) e[3], (char*) f.v14, 0);
 		}
 		else {
-			fcn_0047cbf0(e[4], e[5] + (GLYPH_H(h3) - GLYPH_H(h1)) / 2,
-				     (int) b, (char*) f.v14, 1);
-			fcn_0047cbf0(e[4], e[5] + (GLYPH_H(h3) - GLYPH_H(h1)) / 2,
-				     (int) b, (char*) f.v14, 5);
-			if (!f.v34) {
-				fcn_0047cba0(e[4], e[5] + (GLYPH_H(h3) - GLYPH_H(h1)) / 2,
-					     (int) b, (char*) f.v14, 6);
-				fcn_0047cba0(e[4], e[5] + (GLYPH_H(h3) - GLYPH_H(h1)) / 2,
-					     (int) b, (char*) f.v14, 3);
+			fcn_0047cbf0(e[4], e[5] + (GLYPH_H(h3) - GLYPH_H(h0)) / 2,
+				     (int) e[3], (char*) f.v14, 0);
+			if (fcn_0047cbf0(e[4] + GLYPH_W(h0) + f.v24,
+					 e[5] + (GLYPH_H(h3) - GLYPH_H(h0)) / 2,
+					 (int) e[3], (char*) f.v14, 5)) {
+				goto ticks;
 			}
+			fcn_0047cbf0(e[4] + GLYPH_W(h0) + f.v24,
+				     e[5] + (GLYPH_H(h3) - GLYPH_H(h0)) / 2,
+				     (int) e[3], (char*) f.v14, 0);
 		}
+
+	ticks:
+		/* 0x46843c: end marks */
 		if (f.v34) {
 			if (f.v28) {
-				fcn_0047ccd0(e[4], e[5] + (GLYPH_H(h3) - GLYPH_H(h1)) / 2,
-					     (int) b, (char*) f.v14, 6);
+				fcn_0047ccd0(e[4],
+					     e[5] + (GLYPH_H(h3) - GLYPH_H(h0)) / 2,
+					     (int) e[3], (char*) f.v14, 6);
 			}
 			else {
-				fcn_0047ccd0(e[4], e[5] + (GLYPH_H(h3) - GLYPH_H(h1)) / 2,
-					     (int) b, (char*) f.v14, 3);
+				fcn_0047ccd0(e[4],
+					     e[5] + (GLYPH_H(h3) - GLYPH_H(h0)) / 2,
+					     (int) e[3], (char*) f.v14, 3);
 			}
 		}
 		else if (f.v2c) {
-			fcn_0047a040(e[0x0a], e[0x0b], e[0x0c], e[0x0d]);
+			fcn_0047a040(e[0x0a], e[0x0c], e[0x0b], e[0x0d]);
 			if (f.v28) {
-				fcn_0047ccd0(e[4] + e[6] - GLYPH_W(h3),
-					     e[5] + (GLYPH_H(h3) - GLYPH_H(h6)) / 2,
-					     (int) b, (char*) f.v14, 7);
+				fcn_0047ccd0(e[4] + e[6] - GLYPH_W(h6),
+					     e[5] + (GLYPH_H(h6) - GLYPH_H(h0)) / 2,
+					     (int) e[3], (char*) f.v14, 7);
 			}
 			else {
 				fcn_0047ccd0(e[4] + e[6] - GLYPH_W(h3),
-					     e[5] + (GLYPH_H(h3) - GLYPH_H(h6)) / 2,
-					     (int) b, (char*) f.v14, 3);
+					     e[5] + (GLYPH_H(h3) - GLYPH_H(h0)) / 2,
+					     (int) e[3], (char*) f.v14, 3);
 			}
-		}
-		else {
-			fcn_0047ccd0(e[4], e[5] + (GLYPH_H(h3) - GLYPH_H(h1)) / 2,
-				     (int) b, (char*) f.v14, 3);
 		}
 
 	body:

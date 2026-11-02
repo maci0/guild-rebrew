@@ -16851,3 +16851,44 @@ src/Develop/Unassigned/GOLD.fcn_004ce270.c and must be declared as fcn_004ce270.
 blocker is the frame: MSVC does not spill ent, tgt or v24 and merges the two unsigned-to-double
 temporaries, so the frame is 0x120 against native 0x138, base sits at 0xc against 0x1c and msg at
 0x18 against 0x3c, and native's 16-byte slack at 0x00..0x0f is absent.
+
+## 2026-11-02 fcn_00467920: icon block transcribed from the listing
+
+The 0x4681cc..0x468554 region was previously block-level. It is now transcribed
+instruction by instruction from `.scratch/asm_467920.frame.txt`:
+the gauge body rect uses the native argument order
+`fcn_0047a040(e[0x0a], e[0x0c], e[0x0b], e[0x0d])`; the icon hit test reads the
+shared zero flag from `e[0x14]->0x198` and selects `g_102d028` or `g_100f1e8`
+before testing the h6 or h3 glyph boxes; the icon fill block emits the native
+three-call sequence (fill, fill 5, fill 0) against `e[0x18]`; and the end marks
+use the native tick arguments (h6 width for the right mark, h3 height for the
+left mark). The frame buffer is 0x1f8 so the two compiler spill dwords still
+total the native 0x25c frame.
+
+Verification: `.venv/bin/rebrew test src/Develop/Unassigned/GOLDTL.fcn_00467920.c
+--va 0x00467920 --size 4699 --no-promote --json` gives SIZE_MISMATCH, object
+3707 bytes (was 3429), equal prefix 34 bytes (unchanged), match count 282 (was
+290). The prefix still stops on the shared zero register, which the compiler
+assigns to edi where the native uses ebp. The two spill dwords sit below the
+struct, so every frame access lands 8 bytes above the native slot. Both blockers
+are recorded in the file header. Decision: operator's matching run.
+
+## 2026-11-02 — panel tick and icon region
+
+`0x467920` grows 3429 to 3707 bytes with the equal prefix still 34 and match reading 282 against
+290, kept because the object growth carries real transcription. New in native order: the rect
+argument order `fcn_0047a040(e[0x0a], e[0x0c], e[0x0b], e[0x0d])` at both 0x4681cc and 0x4684b2;
+the icon hit test `n = (e[0x14] && FLD(e[0x14],0x198)) ? g_102d028 : g_100f1e8` with the h6 box
+then the h3 box writing v34 and v2c; the three icon fills (flags 0, 5, 0) choosing 0x47cbf0 when
+e[0x18] is nonzero and 0x47cba0 otherwise, with the second call's result skipping the third and
+x = e[4]+W(h0)+v24 for calls 2 and 3; and the end marks through 0x47ccd0 at flags 6/3 and 7/3,
+with the right mark at x = e[4]+e[6]-W(h6 or h3) and y = e[5]+(H(h6 or h3)-H(h0))/2. The old rect
+order bug and the wrong icon index are gone. The buffer is 0x1f8 so the 0x254 struct plus the two
+compiler spill dwords still totals native 0x25c. Blockers measured: the compiler picks edi for the
+shared zero where native uses ebp (an explicit zero local, pointer and int locals, immediate
+stores, ordering and declaration reorders all keep edi; one variant hoists `push 1` to 0x23 as
+native does but keeps edi), and with buf 0x1f8 the spill dwords sit below the struct so every frame
+access lands 8 bytes above the native slot (v34 at S0-0x220 against native S0-0x228). The path is
+a full-body rewrite moving the compiler temporaries into struct members at offsets 0, 0x8 and 0xc.
+The 0x468554 label block and 0x468700 icon text block remain block-level, where native reloads
+ebx = ARG1 and uses dword loads at frame offsets 2/1/0 for the 0x47b9a0 colour arguments.
