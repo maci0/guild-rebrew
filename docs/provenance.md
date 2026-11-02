@@ -16111,3 +16111,16 @@ G's index as (unsigned char)*p*14+0x48e, the directive length as r!=-1 ? 2 : 1 f
 u/U/b/B/e/E, B's percent-failure falling into F's body, and w's res*189*4 with the [ecx*8]
 table read. Remaining deltas are spill overhead from the two-save frame wall: r +49, N +39,
 Ss +20, u/U/b/B/e/E +12 each, I 68 short with both paths present.
+
+## 2026-11-02 — transport fills as int loops and merged tails
+
+`0x4DA690` object falls 7413 to 7343 (excess 356 to 286) with prefix 0x9b and frame 0x900 held;
+the positional match reads 762 because the tails merge and every later byte moves. Intervals
+closed: dedupe 411 to 383 (+29), pick+render 264 to 192 (now under native because MSVC
+tail-merges the outer scan loop exit with the match tail), scene-row head 110 to 94 (+21).
+Edits: both zero fills are int-indexed for loops rather than memset, since memset emits
+shl/shr plus a rep stosb tail while the int loop emits a single rep stosd (probe msprobe.c);
+the dedupe scan counter is a block-scope int held in edx; the duplicate s30 store inside
+`if (s28 > 0)` is gone; `s3C = 1` sits inside the push sequence before fcn_005358e0; the tie
+counter is a register variable; the second-pass packet scan is a do/while with break; and the
+dedupe match block writes through a block-scope pointer.

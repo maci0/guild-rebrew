@@ -162,7 +162,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
     }
     k = s44;
     if (k < 8)
-        memset((char *)&sF4 + k * 4, 0, (8 - k) * 4);
+        for (i = k; i < 8; i++)
+            ((int *)&sF4)[i] = 0;
 
     s20 = 0;
     s28 = fcn_004e8b80(order[s20], 6, (char *)&mid[0x38]);
@@ -193,7 +194,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
         return;
     }
     if (n < 6)
-        memset((char *)&s74 + n * 4, 0, (6 - n) * 4);
+        for (i = n; i < 6; i++)
+            ((int *)&s74)[i] = 0;
     if (s44 > 0) {
         for (i = 0; i < s44; i++) {
             int id = *(int *)((char *)&s74 + i * 4 + 4);
@@ -213,19 +215,20 @@ void __cdecl fcn_004da690(unsigned int *a0)
         ((int *)&s58)[0] = 0;
         do {
             int *pp = (int *)0x9b0e30;
+            int j = 0;
             s5C = *(int *)(((int *)&sF4)[s54] + 4);
-            ((int *)&s60)[0] = 0;
-            while (((int *)&s60)[0] < s48 && *pp != s5C) {
-                ((int *)&s60)[0] += 1;
+            while (j < s48 && *pp != s5C) {
+                j += 1;
                 pp += 0x35c / 4;
             }
-            if (((int *)&s60)[0] >= s48) {
+            if (j >= s48) {
+                int *pd = (int *)((int *)&s50)[0];
                 *(int *)((char *)a0 + 0x34 + ((int *)&s4C)[0] * 4) = s5C;
-                *(int *)(((int *)&s50)[0] + 0xc) = s5C;
-                *(int *)(((int *)&s50)[0] + 0) = 0;
-                *(int *)(((int *)&s50)[0] + 4) = 1;
-                *(int *)(((int *)&s50)[0] + 0x98) = 1;
-                ((int *)&s50)[0] += 0x35c;
+                pd[3] = s5C;
+                pd[0] = 0;
+                pd[1] = 1;
+                *(int *)((char *)pd + 0x98) = 1;
+                ((int *)&s50)[0] = (int)(pd + 0x35c / 4);
                 ((int *)&s4C)[0] += 1;
             }
             s54 += 1;
@@ -276,15 +279,14 @@ void __cdecl fcn_004da690(unsigned int *a0)
         }
         fcn_0051af00((char *)&mid[0x298], (char *)0x68c140, flug[s20]);
         fcn_004e44f0(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x298]));
-        fcn_005358e0(0x6b5c60);
         s3C = 1;
+        fcn_005358e0(0x6b5c60);
     }
     s30 = 0;
 
     /* native 0x4dade7..0x4db5f5: per-row scene pass */
     if (s28 > 0) {
         s00 = (int)(char *)&mid[0x3c];
-        s30 = 0;
         while (s30 < s28) {
             if (s1C == 0)
                 break;
@@ -601,8 +603,11 @@ void __cdecl fcn_004da690(unsigned int *a0)
                             s70 = *(int *)s5C;
                             if (s70 != -1 && s20 > 0) {
                                 s6C = 0;
-                                while (s6C < s20 && ((int *)&s98)[s6C] != s70)
+                                do {
+                                    if (((int *)&s98)[s6C] == s70)
+                                        break;
                                     s6C += 1;
+                                } while (s6C < s20);
                                 if (s6C < s20) {
                                     int *pq;
                                     *(int *)(0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 1;
@@ -652,16 +657,16 @@ void __cdecl fcn_004da690(unsigned int *a0)
                         /* native 0x4dbfd5: tie, walk forward modulo s20 */
                         if (s6C != -1) {
                             s78 = (int)fcn_004e6cb0((unsigned int)s20);
-                            s4C = s20;
+                            i = s20;
                             do {
                                 if (((int *)&s54)[s78] == s68) {
                                     s6C = s78;
                                     break;
                                 }
-                                s4C -= 1;
+                                i -= 1;
                                 s78 += 1;
                                 s78 %= s20;
-                            } while (s4C != 0);
+                            } while (i != 0);
                         }
                     }
                     if (s6C != -1) {
