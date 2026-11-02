@@ -17,7 +17,7 @@ int __cdecl fcn_004e4b20(int a1, int a2, char* name, int mode);
 int __cdecl fcn_00420780(char* snd, int flag);
 int __cdecl fcn_004e6cb0(int n);
 void __cdecl fcn_004e4e90(char* snd);
-int __cdecl fcn_00423460(int* a1);
+int __cdecl fcn_00423460(int a1);
 void __cdecl fcn_004e4c90(int dur);
 void __cdecl d2_SetForm(int k, int i);
 int __cdecl fcn_00493dc0(unsigned short* a, unsigned short* b);
@@ -64,6 +64,7 @@ typedef struct CMsg {
 	char text[4];   /* +0x10 */
 	int id[6];      /* +0x14 */
 	int pad[9];     /* +0x2c */
+	int hnd[8];
 } CMsg;
 
 /* ADDRESS: GOLDTL 0x004dcf50 */
@@ -90,18 +91,10 @@ int __cdecl fcn_004dcf50(int a0)
 	int h14;
 	int hStrafe;
 	int hAnk;
-	int h80;
-	int h84;
-	int h88;
-	int h8c;
-	int h90;
-	int h94;
-	int h9c;
 	int x60;
 	int x68;
 	int x6c;
 	int x74;
-	int x98 = -1;
 	int inst;
 	int st;
 	int rnd;
@@ -119,7 +112,6 @@ int __cdecl fcn_004dcf50(int a0)
 		int i[9];
 		char c[0x2d];
 	} tbl;
-	char flags[0x20];
 	union {
 		int i[9];
 		char c[0x2d];
@@ -128,7 +120,7 @@ int __cdecl fcn_004dcf50(int a0)
 	int list[0x20];
 	int sel[0x20];
 	char work[0x100];
-	char buf[0x1f0];
+	char buf[0x200];
 
 	msg.state = 0;
 	msg.f04 = 0.0f;
@@ -142,24 +134,25 @@ int __cdecl fcn_004dcf50(int a0)
 	msg.id[3] = *(int*) (a0 + 0x40);
 	msg.id[4] = *(int*) (a0 + 0x44);
 	msg.id[5] = *(int*) (a0 + 0x48);
-	for (i = 0; i < 9; i++) {
-		msg.pad[i] = 0;
-	}
+	msg.pad[0] = 0;
+	msg.pad[1] = 0;
+	msg.pad[2] = 0;
+	msg.pad[3] = 0;
+	msg.pad[4] = 0;
+	msg.pad[5] = 0;
+	msg.pad[6] = 0;
+	msg.pad[7] = 0;
+	msg.pad[8] = 0;
 
 	fcn_004f4830(0, rec.i);
-	h88 = 0;
-	h94 = 0;
-	h80 = 0;
-	h84 = 0;
-	h8c = 0;
-	h90 = 0;
-	h9c = 0;
-	h0 = 0;
-	h14 = 0;
-	hStrafe = 0;
-	hAnk = 0;
-	didFolter = 0;
-	x98 = -1;
+	msg.hnd[2] = 0;
+	msg.hnd[5] = 0;
+	msg.hnd[0] = 0;
+	msg.hnd[1] = 0;
+	msg.hnd[3] = 0;
+	msg.hnd[4] = 0;
+	msg.hnd[7] = 0;
+	msg.hnd[6] = -1;
 	tbl.f[0] = 1.4f;
 	tbl.f[1] = 1.2f;
 	tbl.f[2] = 1.0f;
@@ -203,7 +196,7 @@ int __cdecl fcn_004dcf50(int a0)
 		}
 	}
 	if (g_772f3c == 0) {
-		h9c = fcn_00420780("Athmos\\Athmo_sitzung.mp3", 0x40);
+		msg.hnd[7] = fcn_00420780("Athmos\\Athmo_sitzung.mp3", 0x40);
 	}
 	if (fcn_004e6cb0(2) != 0) {
 		fcn_004e4e90("cd2\\ArmerDelinquent.mp3");
@@ -231,7 +224,7 @@ int __cdecl fcn_004dcf50(int a0)
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x1491);
 	hWait = fcn_004e4b20(*(unsigned short*) p3c, h2, "_PROZESS_NEU", 5);
-	while (hWait != 0 && fcn_00423460(&hWait) != 0) {
+	while (hWait != 0 && fcn_00423460(hWait) != 0) {
 		fcn_004e4c90(1);
 	}
 	fcn_004e4c90(1);
@@ -246,60 +239,64 @@ int __cdecl fcn_004dcf50(int a0)
 	io_AppendText(0x1499, *(unsigned short*) p38);
 	hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_NEU",
 		*(char*) (p38 + 9) == 1);
-	while (hWait != 0 && fcn_00423460(&hWait) != 0) {
+	while (hWait != 0 && fcn_00423460(hWait) != 0) {
 		fcn_004e4c90(1);
 	}
 	fcn_004e4c90(1);
 	fcn_004e44f0(h);
-	for (i = 0; i < 0x20; i++) {
-		flags[i] = 0;
-	}
-	cnt = 0;
-	for (i = 0; i < n; i++) {
-		sel[i] = *(int*) (g_9a3800 + list[i] * 45);
-		cnt++;
-	}
-	for (; cnt < 0x20; cnt++) {
-		sel[cnt] = -1;
-	}
-	if (n > 0) {
+	{
+		int flags[0x20];
+
+		for (i = 0; i < 0x20; i++) {
+			flags[i] = 0;
+		}
+		cnt = 0;
 		for (i = 0; i < n; i++) {
-			if (flags[i] == -1) {
-				continue;
-			}
-			memcpy(rec.c, g_9a3800 + list[i] * 45, 45);
-			flags[i] = 1;
-			for (j = i + 1; j < n; j++) {
-				if (flags[j] == -1) {
+			sel[i] = *(int*) (g_9a3800 + list[i] * 45);
+			cnt++;
+		}
+		for (; cnt < 0x20; cnt++) {
+			sel[cnt] = -1;
+		}
+		if (n > 0) {
+			for (i = 0; i < n; i++) {
+				if (flags[i] == -1) {
 					continue;
 				}
-				memcpy(tbl.c, g_9a3800 + list[j] * 45, 45);
-				if (rec.c[0x1c] == tbl.c[0x1c]) {
-					flags[j] = -1;
-					flags[i] += 1;
+				memcpy(rec.c, g_9a3800 + list[i] * 45, 45);
+				flags[i] = 1;
+				for (j = i + 1; j < n; j++) {
+					if (flags[j] == -1) {
+						continue;
+					}
+					memcpy(tbl.c, g_9a3800 + list[j] * 45, 45);
+					if (rec.c[0x1c] == tbl.c[0x1c]) {
+						flags[j] = -1;
+						flags[i] += 1;
+					}
 				}
 			}
 		}
-	}
-	fsum = 0.0f;
-	for (j = 0; j < n; j++) {
-		memcpy(rec.c, g_9a3800 + list[j] * 45, 45);
-		fcn_004f4830(rec.c[0x1c] & 0xff, tbl.i);
-		if (flags[j] != -1) {
-			fsum += (float) tbl.i[3] * f;
-			h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
-			fcn_004f56b0((int) work, *(S2d*) rec.c, flags[j]);
-			d2_SetForm(g_68bfc0, 0);
-			io_AppendText(0x68c998);
-			io_AppendText((int) work);
-			hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_GESETZ", cbe & 0xff);
-			while (hWait != 0 && fcn_00423460(&hWait) != 0) {
+		fsum = 0.0f;
+		for (j = 0; j < n; j++) {
+			memcpy(rec.c, g_9a3800 + list[j] * 45, 45);
+			fcn_004f4830(rec.c[0x1c] & 0xff, tbl.i);
+			if (flags[j] != -1) {
+				fsum += (float) tbl.i[3] * f;
+				h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
+				fcn_004f56b0((int) work, *(S2d*) rec.c, flags[j]);
+				d2_SetForm(g_68bfc0, 0);
+				io_AppendText(0x68c998);
+				io_AppendText((int) work);
+				hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_GESETZ", cbe & 0xff);
+				while (hWait != 0 && fcn_00423460(hWait) != 0) {
+					fcn_004e4c90(1);
+				}
 				fcn_004e4c90(1);
+				fcn_004e6cb0(0x1e);
+				io_AppendText(0x6811b0);
+				fcn_004e44f0(h);
 			}
-			fcn_004e4c90(1);
-			fcn_004e6cb0(0x1e);
-			io_AppendText(0x6811b0);
-			fcn_004e44f0(h);
 		}
 	}
 	msg.f04 = fsum;
@@ -311,7 +308,7 @@ int __cdecl fcn_004dcf50(int a0)
 		ch = *(char*) (p38 + 9);
 		hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_NEU", (ch != 0) + 2);
 	}
-	while (hWait != 0 && fcn_00423460(&hWait) != 0) {
+	while (hWait != 0 && fcn_00423460(hWait) != 0) {
 		fcn_004e4c90(1);
 	}
 	fcn_004e4c90(1);
@@ -409,10 +406,10 @@ int __cdecl fcn_004dcf50(int a0)
 		if (st == 1) {
 			rnd = fcn_004e6cb0(6);
 			votes = fcn_004e6cb0(6);
-			h88 = fcn_004e4ae0("PROZESS_4_FOLTER_1.sbf", 0);
-			h94 = fcn_004e4ae0("PROZESS_4_FOLTER_2.sbf", 0);
-			fcn_004e4b40(*(unsigned short*) p34, h88, "_PROZESS_4_FOLTER_1", rnd, 0x32);
-			fcn_004e4b40(*(unsigned short*) p34, h94, "_PROZESS_4_FOLTER_2", votes, 0x12c);
+			msg.hnd[2] = fcn_004e4ae0("PROZESS_4_FOLTER_1.sbf", 0);
+			msg.hnd[5] = fcn_004e4ae0("PROZESS_4_FOLTER_2.sbf", 0);
+			fcn_004e4b40(*(unsigned short*) p34, msg.hnd[2], "_PROZESS_4_FOLTER_1", rnd, 0x32);
+			fcn_004e4b40(*(unsigned short*) p34, msg.hnd[5], "_PROZESS_4_FOLTER_2", votes, 0x12c);
 			io_AppendText(0x14d9);
 			fcn_004e4c90(1);
 			io_AppendText(0x6811b0);
@@ -487,10 +484,10 @@ int __cdecl fcn_004dcf50(int a0)
 			}
 			x6c = fcn_004938c0(&msg);
 			sprintf(buf, "PROZESS_5_FOLTER2_%s.sbf", folterName[inst]);
-			h90 = fcn_004e4ae0("PROZESS_5_FOLTER2_GESTEHEN.sbf", 0);
-			h8c = fcn_004e4ae0(buf, 0);
-			h84 = fcn_004e4ae0("PROZESS_5_FOLTER2_WEITER.sbf", 0);
-			h80 = fcn_004e4ae0("PROZESS_5_FOLTER2_UNSCHULDSBETEUERUNG.sbf", 0);
+			msg.hnd[4] = fcn_004e4ae0("PROZESS_5_FOLTER2_GESTEHEN.sbf", 0);
+			msg.hnd[3] = fcn_004e4ae0(buf, 0);
+			msg.hnd[1] = fcn_004e4ae0("PROZESS_5_FOLTER2_WEITER.sbf", 0);
+			msg.hnd[0] = fcn_004e4ae0("PROZESS_5_FOLTER2_UNSCHULDSBETEUERUNG.sbf", 0);
 			sprintf(buf, "_PROZESS_5_FOLTER2_%s", folterName[inst]);
 			fcn_004e4450(g_68bfc0, 1);
 			d2_SetForm(g_68bfc0, 0);
@@ -521,7 +518,7 @@ int __cdecl fcn_004dcf50(int a0)
 			} else {
 				sprintf(end, " handwerker_MANN");
 			}
-			x98 = g_6b8010;
+			msg.hnd[6] = g_6b8010;
 			fcn_004e4730("ob_GEFAENGNIS_FOLTERKAMMER.ed3");
 			fcn_004e44b0((int) "cutscenes\\prozess\\folter-create.esc", (int) str);
 			fcn_004e4450(g_68bfc0, 1);
@@ -529,7 +526,7 @@ int __cdecl fcn_004dcf50(int a0)
 			io_AppendText(0x6811b0);
 			io_AppendText(0x14e4);
 			hWait = fcn_004e4b20(*(unsigned short*) p3c, h2, "_PROZESS_NEU", 4);
-			while (hWait != 0 && fcn_00423460(&hWait) != 0) {
+			while (hWait != 0 && fcn_00423460(hWait) != 0) {
 				fcn_004e4c90(1);
 			}
 			fcn_004e4c90(1);
@@ -545,7 +542,7 @@ int __cdecl fcn_004dcf50(int a0)
 			fcn_004e4450(g_68bfc0, 1);
 			d2_SetForm(g_68bfc0, 0);
 			rnd = fcn_004e6cb0(5);
-			fcn_004e4b40(*(unsigned short*) p34, h8c, buf, rnd, 0x320);
+			fcn_004e4b40(*(unsigned short*) p34, msg.hnd[3], buf, rnd, 0x320);
 			io_AppendText(0x6811b0);
 			io_AppendText(0x14ec, tbl.i[inst] + rnd);
 			fcn_004e4c90(5);
@@ -556,8 +553,8 @@ int __cdecl fcn_004dcf50(int a0)
 			d2_SetForm(g_68bfc0, 0);
 			if (msg.pad[7] != 0) {
 				rnd = fcn_004e6cb0(0xa);
-				fcn_004e4b40(*(unsigned short*) p38, h90, "_PROZESS_5_FOLTER2_GESTEHEN", rnd, 0);
-				fcn_004e4b40(*(unsigned short*) p38, h84, "_PROZESS_5_FOLTER2_WEITER", 0, 0x1f4);
+				fcn_004e4b40(*(unsigned short*) p38, msg.hnd[4], "_PROZESS_5_FOLTER2_GESTEHEN", rnd, 0);
+				fcn_004e4b40(*(unsigned short*) p38, msg.hnd[1], "_PROZESS_5_FOLTER2_WEITER", 0, 0x1f4);
 				fcn_004e4450(g_68bfc0, 1);
 				d2_SetForm(g_68bfc0, 0);
 				io_AppendText(0x6811b0);
@@ -573,7 +570,7 @@ int __cdecl fcn_004dcf50(int a0)
 				d2_SetForm(g_68bfc0, 0);
 				io_AppendText(0x6811b0);
 				io_AppendText(rnd + 0x14e6);
-				fcn_004e4b40(*(unsigned short*) p38, h80, "_PROZESS_5_FOLTER2_UNSCHULDSBETEUERUNG", rnd, 0x1f4);
+				fcn_004e4b40(*(unsigned short*) p38, msg.hnd[0], "_PROZESS_5_FOLTER2_UNSCHULDSBETEUERUNG", rnd, 0x1f4);
 				fcn_004e4c90(5);
 			}
 		}
@@ -598,8 +595,8 @@ int __cdecl fcn_004dcf50(int a0)
 		if (h != 0) {
 			fcn_004e44f0(h);
 		}
-		if (g_772f3c == 0 && x98 != -1) {
-			fcn_004432d0(x98, 0);
+		if (g_772f3c == 0 && msg.hnd[6] != -1) {
+			fcn_004432d0(msg.hnd[6], 0);
 		}
 	}
 	/* 0x4de6e0 */
@@ -809,8 +806,8 @@ int __cdecl fcn_004dcf50(int a0)
 	fcn_004e44f0(h);
 	h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-exit.esc", (int) "");
 	fcn_004e44f0(h);
-	if (h9c != 0) {
-		fcn_00420840(h9c);
+	if (msg.hnd[7] != 0) {
+		fcn_00420840(msg.hnd[7]);
 	}
 	fcn_004e3640();
 	fcn_004c09b0();
@@ -826,23 +823,23 @@ int __cdecl fcn_004dcf50(int a0)
 	if (h14 != 0) {
 		fcn_004e4b00(h14);
 	}
-	if (h90 != 0) {
-		fcn_004e4b00(h90);
+	if (msg.hnd[4] != 0) {
+		fcn_004e4b00(msg.hnd[4]);
 	}
-	if (h8c != 0) {
-		fcn_004e4b00(h8c);
+	if (msg.hnd[3] != 0) {
+		fcn_004e4b00(msg.hnd[3]);
 	}
-	if (h84 != 0) {
-		fcn_004e4b00(h84);
+	if (msg.hnd[1] != 0) {
+		fcn_004e4b00(msg.hnd[1]);
 	}
-	if (h88 != 0) {
-		fcn_004e4b00(h88);
+	if (msg.hnd[2] != 0) {
+		fcn_004e4b00(msg.hnd[2]);
 	}
-	if (h94 != 0) {
-		fcn_004e4b00(h94);
+	if (msg.hnd[5] != 0) {
+		fcn_004e4b00(msg.hnd[5]);
 	}
-	if (h80 != 0) {
-		fcn_004e4b00(h80);
+	if (msg.hnd[0] != 0) {
+		fcn_004e4b00(msg.hnd[0]);
 	}
 
 	return;

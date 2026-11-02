@@ -16213,3 +16213,21 @@ separate base) puts the load back in a register, re-spills n7b and returns to 73
 is 29 bytes short and the slot map is still off (n7a 0x28 against 0x10, thr 0x20 against 0x28,
 fild temp 0x18 against 0x14, mask still a stack slot where native keeps it in ebx); declaration
 order is not the lever, only the initialiser store order swaps n7a and n7b.
+
+## 2026-11-02 — inventory panel frame lands on native offsets
+
+`0x4DCF50` now reproduces the native frame: 0x760 exactly, and every landmark lands (msg 0x40,
+handle block 0x90, tbl 0xb0, flags/folterFile 0xe0, folterName 0x160, rec 0x240, str 0x270,
+list 0x370, sel 0x3f0, work 0x470, buf 0x570). Our base-relative slot set is native's minus one
+slot, 152 of 153, with no extra slots. The object is 8727 against native 8798, so it is 71
+short; the positional match reads 1625 rather than 1746 because moving the frame onto native
+offsets re-shifts every compared byte, and the change is kept as a fidelity step because the
+layout is now the reference's. What did it: CMsg carries `int hnd[8]` as a tail with the native
+word order (h80,h84,h88,h8c,h90,h94,x98,h9c); fcn_00423460 takes the handle by value at all
+five sites; flags is block-scoped `int flags[0x20]` and its 0xe0 overlay onto folterFile[7][0x10]
+is plain live-range reuse, no union needed; buf is char[0x200]; and `didFolter = 0` sits in the
+else branch of the msg.pad[7] test, because a top initialiser makes it long-lived, costs a pool
+word at 0xb0 and pushes every aggregate +4. Remaining: the late/folter section schedule (native
+interleaves the folterFile/folterName literal-pool copies, ours runs them in source order) and
+one missing slot 0xce, where native reads `dword [esp+0xd6] & 0xff` (tbl+0x1e) for the
+_PROZESS_GESETZ fcn_004e4b20 call while our source's cbe has no assignment.

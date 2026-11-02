@@ -587328,7 +587328,7 @@ status = "SIZE_MISMATCH"
 blocker = "frame wall: native 0x760 vs honest 0x6b4; region L0x660..0x75f has no reference, no address-take and no callee extent (387 CFG-resolved esp refs, 345 call sites checked); body 2246/2340 instructions transcribed"
 
 ["GOLDTL.0x004dcf50".verification]
-source_hash = "4e6072b7899b40aa9329fdf8a1eaa5ff2345028236821c6992909a93a174ef9f"
+source_hash = "6a009b64d533bd43a3ac1ab40bd7c8a7f6cdfa9405cba98e10e124033a9bcf3c"
 reference_hash = "de5919be9c5674c24e6f180f5ed469ce11ffc23f5f03f1697c4d3e4d9550ef64"
 reference_size = "8798"
 headers_hash = "153434ce6fd0c7855c8d334a0f472f0c3850b3888e9c2366d6eddcdb5c286398"
@@ -587339,10 +587339,10 @@ module = "GOLDTL"
 va = "0x4dcf50"
 context_hash = ""
 defines = "[]"
-input_hash = "dd9728cbbd45e6b6dc03a8981f4e2c3e49f338f5fc4aa4c453102e1db23673c6"
-writer = "verify"
+input_hash = "83d6a1bb6001473380d775fe809a8ba11b2557b1839cf24f07a10ca6f846917f"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-02T07:45:55+00:00"
+writer = "test"
+measured_at = "2026-11-02T10:50:23+00:00"
 
 [["GOLDTL.0x004dcf50".status_history]]
 old_status = "STUB"
