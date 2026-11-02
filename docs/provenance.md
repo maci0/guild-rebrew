@@ -16246,3 +16246,23 @@ second f site, case D with a fresh strlen (match 932 but the D extent moved the 
 removing the I terminators. Case extents now read I -20/-3, f +19/+11, G -55/-22, Ss -22/-2,
 w -50/-15, D -11/-1; the remaining large gaps are percent -62, B -53, the ampersand group -40,
 a +37, and F +61, the last being a layout artifact where our F target points at shared code.
+
+## 2026-11-02 — transport twin registers and lane pointer
+
+`0x4DA690` 787 with the object falling 7233 to 7220, prefix 0x9b and frame 0x900 held. The s20
+register twin (a non-address-taken `rs20` does the work while `fcn_004e4de0((int)&s20)` keeps
+the slot alive) closes the 0x4dbb3f interval (30/34 +4 to 30/30 +0) and 0x4dbbc3; ebx now
+carries the count (`cmp $1,%ebx`, 3 bytes like native's `cmp ebp,1`) though native's ebp is still
+taken by a 0/1 constant in our object. Hoisting the placement lane pointer before the loop body
+removed a hidden 4-byte pointer temp, so flug/sitzung/mid/a0c moved to native's 0x124/0x1e4/
+0x304/0x7fc and 0x4db057 went from +6 to -4. Rejected: s28 and s44 twins (frame 0x904), inlined
+fcn_004e6cb0 temporaries (frame 0x904, prefix 0x2), and declaration reorder (match 663, prefix
+0xb).
+
+Measurement correction recorded: alw.py's call-target pairing is corrupted by 84 `push &local;
+call 0x4e4de0` sites pairing with arbitrary native sites, so the phantom +49/+47/-233/-226
+intervals are artifacts; use al2b.py (consecutive pairs) and marks.py (unique constants). The
+real gap is an entire missing native block, 0x4db332..0x4db584 (594 bytes), in the per-row scene
+pass, with fcn_004c54c0 (declared but never called) and constants 0x68c098/0x68c074/0x12d6/0x12d7
+absent from the source; the arms block also duplicates three calls per nested branch where native
+shares one.

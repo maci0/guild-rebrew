@@ -61,6 +61,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
     int s18;
     int s1C;
     int s20;
+    int rs20;
     int s24;
     int s28;
     int s2C;
@@ -331,19 +332,20 @@ void __cdecl fcn_004da690(unsigned int *a0)
                 fcn_004727a0(s5C, 0);
                 fcn_0046f2c0(*(int *)0x772514, 1);
                 if (k > 0) {
+                    int *lane;
                     s08 = (0x320 - *(short *)(*(int *)0x772500 + 0x1ebd8) * k) / (k + 1);
                     i = 0;
                     n = 0;
                     s7C = s08;
+                    lane = (int *)((char *)&mid + 0x3a8);
                     while (n < s0C) {
                         if (((char *)((int *)&s74)[n])[0x166] != 0) {
-                            *(int *)((char *)&mid + 0x3a8) = ((int *)&s74)[n];
-                            *(int *)((char *)&mid + 0x3bc) = 0;
-                            *(int *)((char *)&mid + 0x3d8) = 0;
-                            fcn_005ca560((char *)&mid + 0x3a8);
+                            lane[0] = ((int *)&s74)[n];
+                            lane[5] = 0;
+                            lane[12] = 0;
+                            fcn_005ca560((char *)lane);
                             fcn_005ca740(*(short *)(*(int *)0x772500 + 0x1ebd8) * i + acc, 0,
-                                         *(int *)0x772514, 0x54,
-                                         (int *)((char *)&mid + 0x3a8), 0);
+                                         *(int *)0x772514, 0x54, lane, 0);
                             acc += s08;
                             i += 1;
                         }
@@ -470,11 +472,11 @@ void __cdecl fcn_004da690(unsigned int *a0)
                 sA0 = *(unsigned char *)(s00 - 8);
                 sA4 = *(unsigned char *)s00;
                 i = 0;
-                s20 = 0;
+                rs20 = 0;
                 while (i < s44) {
                     if (fcn_004e9180((void *)((int *)&s74)[i], sA4) != 0 &&
                         ((char *)((int *)&s74)[i])[0x1b1] == 0)
-                        s20 += 1;
+                        rs20 += 1;
                     i += 1;
                 }
                 s14 = fcn_00470820((char *)0x68c124, 0, 0);
@@ -527,7 +529,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                     io_AppendText((char *)0x12d9, s40 + 0x12a9, s40 + 0x12bb,
                                   *(unsigned char *)s00 + 0x253);
                     i = 0;
-                    while (i < s20) {
+                    while (i < rs20) {
                         io_AppendText((char *)0x12db,
                                       *(unsigned short *)(((int *)&s74)[i]), 0);
                         i += 1;
@@ -535,8 +537,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
                     fcn_004e4de0(0x9c4);
                     fcn_004727a0(s38, 0);
                     fcn_0046f2c0(*(int *)0x772514, 1);
-                    if (s20 > 0) {
-                        s08 = (0x320 - *(short *)(*(int *)0x772500 + 0x1ebd8) * s20) / (s20 + 1);
+                    if (rs20 > 0) {
+                        s08 = (0x320 - *(short *)(*(int *)0x772500 + 0x1ebd8) * rs20) / (rs20 + 1);
                         i = 0;
                         acc = s08;
                         do {
@@ -555,16 +557,16 @@ void __cdecl fcn_004da690(unsigned int *a0)
                     }
                     fcn_004e4de0(0x9c4);
                 }
-                if (s20 == 1) {
+                if (rs20 == 1) {
                     fcn_004e4b40(-8, s38, 0x68c038, 0, 0x64);
-                    *(int *)(0x1015ea0 + *(int *)((char *)&mid + 0x3a8) * 0x30c + 0x3c) = s20;
+                    *(int *)(0x1015ea0 + *(int *)((char *)&mid + 0x3a8) * 0x30c + 0x3c) = rs20;
                     fcn_004727a0(s38, 0);
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12e0, *(unsigned short *)s5C,
                                   *(unsigned char *)s00 + 0x253);
                     fcn_004e4de0(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
-                        fcn_004e8240(*(unsigned char *)(s00 - 8), 0, 0, s20, 0xff);
+                        fcn_004e8240(*(unsigned char *)(s00 - 8), 0, 0, rs20, 0xff);
                         s5C = 0;
                         if (fcn_004c4450(s5C) == 0) {
                             do {
@@ -572,9 +574,9 @@ void __cdecl fcn_004da690(unsigned int *a0)
                             } while (fcn_004c4450(s5C) == 0);
                         }
                     }
-                } else if (s20 == 0) {
+                } else if (rs20 == 0) {
                     /* native 0x4dbbed: count == 0, single picked row */
-                    s68 = (int)fcn_004e6cb0((unsigned int)s20);
+                    s68 = (int)fcn_004e6cb0((unsigned int)rs20);
                     fcn_004e4b40(-8, s38, 0x68c038, 1, 0x64);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
@@ -607,7 +609,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                         s64 = 0;
                         while (s4C < s0C) {
                             s70 = *(int *)s5C;
-                            if (s70 != -1 && s20 > 0) {
+                            if (s70 != -1 && rs20 > 0) {
                                 int *pq;
                                 jc = 0;
                                 do {
@@ -633,7 +635,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                                         break;
                                     }
                                     jc += 1;
-                                } while (jc < s20);
+                                } while (jc < rs20);
                             }
                             s4C += 1;
                             s5C += 0x35c;
@@ -647,7 +649,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                     s6C = -1;
                     s70 = 0;
                     i = 0;
-                    while (i < s20) {
+                    while (i < rs20) {
                         s78 = ((int *)&s54)[i];
                         if (s78 > s68) {
                             s70 = 0;
@@ -659,10 +661,10 @@ void __cdecl fcn_004da690(unsigned int *a0)
                         i += 1;
                     }
                     if (s70 != 0) {
-                        /* native 0x4dbfd5: tie, walk forward modulo s20 */
+                        /* native 0x4dbfd5: tie, walk forward modulo rs20 */
                         if (s6C != -1) {
-                            s78 = (int)fcn_004e6cb0((unsigned int)s20);
-                            i = s20;
+                            s78 = (int)fcn_004e6cb0((unsigned int)rs20);
+                            i = rs20;
                             do {
                                 if (((int *)&s54)[s78] == s68) {
                                     s6C = s78;
@@ -670,7 +672,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                                 }
                                 i -= 1;
                                 s78 += 1;
-                                s78 %= s20;
+                                s78 %= rs20;
                             } while (i != 0);
                         }
                     }
