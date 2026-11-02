@@ -19407,3 +19407,29 @@ conversion reuse the unsigned-int-to-double scratch at frame 0x14 instead of tak
 plus any nudge that moves that temp from 0x04 to 0x14 without touching the b4 bytes. Findings and the harness in
 .scratch/571870/findings.md with b4probe2.py, diag.py, diag2.py, flags.py, goldtl.py, align.py, align2.py and
 batch7..22.py.
+
+## 2026-11-03 — inventory switch stores are a packed struct assignment
+
+`0x561380` 752 to 935 with object 3608 against native 3600, 52 relocations, frame `sub esp,0x5e4` held and lint
+clean. The p+0x52 store block is a whole-struct assignment from a packed global rather than four scalar stores:
+only that form emits `mov ecx,eax` followed by `[ecx+off]` and the word at +0xc. A `#pragma pack(push,1)` type
+`typedef struct { int f00, f04, f08; unsigned short f0c; } MSGCOLOR;` with
+`*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;` replaced all six sites in cases 2, 3, 8, the case-4 near
+path, 5 and 6, taking case 2 to 0x86 and case 8 to 0xb4 and case 4 to 0x41c, all native lengths. Case 3 was
+restructured because native puts the failure path as the fall-through with success out of line, so its bodies
+became `if (fcn_0055be70(pos) != 0) { failure; return; } success; return;` with recA and recB inlined into the
+fcn_004f4f60 arguments. Case 6 now uses the literal `if (x == 0) { p[0x70] = -1; return; }` instead of a goto,
+which reduced the object from 3612 to 3608 and raised match from 927 to 935. Case lengths and starts now read:
+case 0 at 0x45 of 0xd8, case 1 at 0x11d of 0x5a, case 2 at 0x177 of 0x86, case 3 at 0x1fd of 0x124 against native
+0x121, case 7 at 0x321 of 0xc5, case 8 at 0x3e6 of 0xb4, case 4 at 0x49a of 0x41c, case 5 at 0x8b6 of 0x481
+against native 0x47c, case 6 at 0xd37 of 0x8a against native 0x80, and the -1/-2 arm at 0xdc1 of 0x29, so cases
+3, 4, 5 and 6 start at plus three, plus three, plus three and plus eight because of the case-3 and case-5
+deltas, and cases 4 and 8 reach their native start offsets only after case 3 shrinks. Reverted and not to be
+repeated: the goto form for case 6 (worse), moving label_56148f to switch scope (no change), reordering the
+case-3 tail stores (no change), and an `m = p + 0x52` form (case 3 down to 291 bytes but match 932, worse than
+935). Next targets in order: case 5's five bytes, where its message and record initialisation differs around the
+lpGebaeudePROT record and the v10 spill that native puts at [esp+0x1c] with an ebp reload after fcn_004c5530;
+case 6's duplicated fail block, which the compiler still inlines and retargets the case 3, 4 and 7 gotos to where
+native keeps `je 0x56148f`; and case 3's late `add esi,0x52`, which the compiler emits only after the 0x70 and
+0xcc stores so `mov [esi+0xcc]` stays at disp32 against native's `[esi+0x7a]`. Current source
+.scratch/r561380/v27_final_round5.c with notes in NOTES.md.

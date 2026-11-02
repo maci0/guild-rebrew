@@ -52,6 +52,15 @@ void __cdecl fcn_004185a0(int, float *, int, float, float, float, float, float, 
 void __cdecl fcn_00417d00(int, float *, int, float, float, float, float, int);
 int __cdecl gm_RandomMod(unsigned short);
 
+#pragma pack(push, 1)
+typedef struct {
+	int field_00;
+	int field_04;
+	int field_08;
+	unsigned short field_0c;
+} MSGCOLOR;
+#pragma pack(pop)
+
 /* ADDRESS: GOLDTL 0x00561380 */
 void __cdecl fcn_00561380(void *a0)
 {
@@ -84,10 +93,10 @@ void __cdecl fcn_00561380(void *a0)
 				return;
 			}
 			*(int *)(p + 0xc4) = -1;
-		label_56148f:
-			*(int *)(p + 0x70) = -1;
-			return;
 		}
+	label_56148f:
+		*(int *)(p + 0x70) = -1;
+		return;
 	case 1:
 		{
 			unsigned char *r;
@@ -113,10 +122,7 @@ void __cdecl fcn_00561380(void *a0)
 			}
 			if (*(int *)(*(int *)(r + 0x184) + 0x128) == 0)
 				goto label_561b4d;
-			*(int *)(p + 0x52) = g_7f4c00;
-			*(int *)(p + 0x56) = g_7f4c04;
-			*(int *)(p + 0x5a) = g_7f4c08;
-			*(unsigned short *)(p + 0x5e) = g_7f4c0c;
+			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
 			fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
 			*(int *)(p + 0x70) = 2;
 			return;
@@ -124,8 +130,6 @@ void __cdecl fcn_00561380(void *a0)
 	case 3:
 		{
 			unsigned char *r;
-			unsigned char *recA;
-			unsigned char *recB;
 
 			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
 			if (r == 0 || *(unsigned short *)(r + 0x27) == 0xffff)
@@ -134,21 +138,19 @@ void __cdecl fcn_00561380(void *a0)
 			pos[1] = 4000.0f;
 			*(void **)(pos + 2) = p;
 			pos[3] = 0.0f;
-			if (fcn_0055be70(pos) == 0) {
-				fcn_004c5ed0(*(int *)(p + 0xc4), g_68bef4, 1);
-				fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
-				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
+			if (fcn_0055be70(pos) != 0) {
+				*(int *)(p + 0xc8) = fcn_004f4f60(0x18, 1,
+					*(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4),
+					*(int *)((unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0) + 4),
+					*(int *)(p + 0xac));
+				*(int *)(p + 0x70) = 7;
+				*(int *)(p + 0xcc) = *(int *)(*(unsigned char **)(pos + 3) + 4);
+				*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
 				return;
 			}
-			recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);
-			recB = (unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0);
-			*(int *)(p + 0xc8) = fcn_004f4f60(0x18, 1, *(int *)(recB + 4), *(int *)(recA + 4), *(int *)(p + 0xac));
-			*(int *)(p + 0x70) = 7;
-			*(int *)(p + 0xcc) = *(int *)(*(unsigned char **)(pos + 3) + 4);
-			*(int *)(p + 0x52) = g_7f4c00;
-			*(int *)(p + 0x56) = g_7f4c04;
-			*(int *)(p + 0x5a) = g_7f4c08;
-			*(unsigned short *)(p + 0x5e) = g_7f4c0c;
+			fcn_004c5ed0(*(int *)(p + 0xc4), g_68bef4, 1);
+			fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
+			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 			return;
 		}
 	case 7:
@@ -186,10 +188,7 @@ void __cdecl fcn_00561380(void *a0)
 				return;
 			}
 			fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
-			*(int *)(p + 0x52) = g_7f4c00;
-			*(int *)(p + 0x56) = g_7f4c04;
-			*(int *)(p + 0x5a) = g_7f4c08;
-			*(unsigned short *)(p + 0x5e) = g_7f4c0c;
+			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
 			fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
 			*(int *)(p + 0x70) = 6;
 			return;
@@ -241,10 +240,7 @@ void __cdecl fcn_00561380(void *a0)
 				v22 = v22 + 0x87 * 4;
 			} while ((int)v22 < (int)0x85a0a4);
 			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
-			*(int *)q = g_7f4c00;
-			*(int *)(q + 4) = g_7f4c04;
-			*(int *)(q + 8) = g_7f4c08;
-			*(unsigned short *)(q + 0xc) = g_7f4c0c;
+			*(MSGCOLOR *)q = *(MSGCOLOR *)&g_7f4c00;
 			fcn_00500bb0(q, 0, 10, 0);
 			return;
 			}
@@ -356,10 +352,7 @@ void __cdecl fcn_00561380(void *a0)
 			fcn_00417d00(v10, pos, (int)(v24 * g_662c98), v24 * g_665ec0, v24 * g_662cf8,
 				20.0f, 60.0f, 0x50);
 		label_562049:
-			*(int *)(p + 0x52) = g_7f4c00;
-			*(int *)(p + 0x56) = g_7f4c04;
-			*(int *)(p + 0x5a) = g_7f4c08;
-			*(unsigned short *)(p + 0x5e) = g_7f4c0c;
+			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
 			fcn_00500bb0((void *)(p + 0x52), 0, gm_RandomMod(2) & 0xffff, 0);
 			*(unsigned char *)(p + 0xc2) = *(unsigned char *)(p + 0xc2) + 1;
 			fcn_004432d0(v10, 1);
@@ -375,12 +368,11 @@ void __cdecl fcn_00561380(void *a0)
 				*(int *)(p + 0x70) = -1;
 				return;
 			}
-			if (*(int *)(*(int *)(r + 0x184) + 0x128) == 0)
-				goto label_56148f;
-			*(int *)(p + 0x52) = g_7f4c00;
-			*(int *)(p + 0x56) = g_7f4c04;
-			*(int *)(p + 0x5a) = g_7f4c08;
-			*(unsigned short *)(p + 0x5e) = g_7f4c0c;
+			if (*(int *)(*(int *)(r + 0x184) + 0x128) == 0) {
+				*(int *)(p + 0x70) = -1;
+				return;
+			}
+			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
 			fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
 			goto label_56211d;
 		}
