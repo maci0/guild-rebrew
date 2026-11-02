@@ -39886,8 +39886,17 @@
   },
   {
     "va": 4891984,
-    "size": 336,
-    "name": "fcn.004aa550"
+    "size": 328,
+    "name": "fcn.004aa550",
+    "extent_history": [
+      {
+        "old_size": 336,
+        "new_size": 328,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x4aa550 run 0x4aa698..0x4aa69f (8 x 0x90/0xcc) | 0x4bbd70 run 0x4bc004..0x4bc00f (12 x 0x90/0xcc) | 0x4c9550 run 0x4c9974..0x4c997f (12 x 0x90/0xcc) | 0x4ce430 run 0x4ce58c..0x4ce58f (4 x 0x90/0xcc) | 0x4d3e90 run 0x4d3fd4..0x4d3fdf (12 x 0x90/0xcc) | 0x4d8d00 run 0x4d9f18..0x4d9f1f (8 x 0x90/0xcc) | 0x4df1b0 run 0x4dfb98..0x4dfb9f (8 x 0x90/0xcc) | 0x4dfba0 run 0x4dfd0c..0x4dfd0f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:00:19.966431+00:00"
+      }
+    ]
   },
   {
     "va": 4892320,
@@ -44565,7 +44574,7 @@
   },
   {
     "va": 4963696,
-    "size": 672,
+    "size": 660,
     "name": "fcn.004bbd70",
     "extent_history": [
       {
@@ -44581,6 +44590,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.724176+00:00"
+      },
+      {
+        "old_size": 672,
+        "new_size": 660,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x4aa550 run 0x4aa698..0x4aa69f (8 x 0x90/0xcc) | 0x4bbd70 run 0x4bc004..0x4bc00f (12 x 0x90/0xcc) | 0x4c9550 run 0x4c9974..0x4c997f (12 x 0x90/0xcc) | 0x4ce430 run 0x4ce58c..0x4ce58f (4 x 0x90/0xcc) | 0x4d3e90 run 0x4d3fd4..0x4d3fdf (12 x 0x90/0xcc) | 0x4d8d00 run 0x4d9f18..0x4d9f1f (8 x 0x90/0xcc) | 0x4df1b0 run 0x4dfb98..0x4dfb9f (8 x 0x90/0xcc) | 0x4dfba0 run 0x4dfd0c..0x4dfd0f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:00:19.966457+00:00"
       }
     ]
   },
@@ -49880,8 +49896,17 @@
   },
   {
     "va": 5018960,
-    "size": 1072,
-    "name": "fcn.004c9550"
+    "size": 1060,
+    "name": "fcn.004c9550",
+    "extent_history": [
+      {
+        "old_size": 1072,
+        "new_size": 1060,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x4aa550 run 0x4aa698..0x4aa69f (8 x 0x90/0xcc) | 0x4bbd70 run 0x4bc004..0x4bc00f (12 x 0x90/0xcc) | 0x4c9550 run 0x4c9974..0x4c997f (12 x 0x90/0xcc) | 0x4ce430 run 0x4ce58c..0x4ce58f (4 x 0x90/0xcc) | 0x4d3e90 run 0x4d3fd4..0x4d3fdf (12 x 0x90/0xcc) | 0x4d8d00 run 0x4d9f18..0x4d9f1f (8 x 0x90/0xcc) | 0x4df1b0 run 0x4dfb98..0x4dfb9f (8 x 0x90/0xcc) | 0x4dfba0 run 0x4dfd0c..0x4dfd0f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:00:19.966462+00:00"
+      }
+    ]
   },
   {
     "va": 5020032,
@@ -51626,8 +51651,17 @@
   },
   {
     "va": 5039152,
-    "size": 352,
-    "name": "fcn.004ce430"
+    "size": 348,
+    "name": "fcn.004ce430",
+    "extent_history": [
+      {
+        "old_size": 352,
+        "new_size": 348,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x4aa550 run 0x4aa698..0x4aa69f (8 x 0x90/0xcc) | 0x4bbd70 run 0x4bc004..0x4bc00f (12 x 0x90/0xcc) | 0x4c9550 run 0x4c9974..0x4c997f (12 x 0x90/0xcc) | 0x4ce430 run 0x4ce58c..0x4ce58f (4 x 0x90/0xcc) | 0x4d3e90 run 0x4d3fd4..0x4d3fdf (12 x 0x90/0xcc) | 0x4d8d00 run 0x4d9f18..0x4d9f1f (8 x 0x90/0xcc) | 0x4df1b0 run 0x4dfb98..0x4dfb9f (8 x 0x90/0xcc) | 0x4dfba0 run 0x4dfd0c..0x4dfd0f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:00:19.966466+00:00"
+      }
+    ]
   },
   {
     "va": 5039504,
@@ -53177,8 +53211,17 @@
   },
   {
     "va": 5062288,
-    "size": 336,
-    "name": "fcn.004d3e90"
+    "size": 324,
+    "name": "fcn.004d3e90",
+    "extent_history": [
+      {
+        "old_size": 336,
+        "new_size": 324,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x4aa550 run 0x4aa698..0x4aa69f (8 x 0x90/0xcc) | 0x4bbd70 run 0x4bc004..0x4bc00f (12 x 0x90/0xcc) | 0x4c9550 run 0x4c9974..0x4c997f (12 x 0x90/0xcc) | 0x4ce430 run 0x4ce58c..0x4ce58f (4 x 0x90/0xcc) | 0x4d3e90 run 0x4d3fd4..0x4d3fdf (12 x 0x90/0xcc) | 0x4d8d00 run 0x4d9f18..0x4d9f1f (8 x 0x90/0xcc) | 0x4df1b0 run 0x4dfb98..0x4dfb9f (8 x 0x90/0xcc) | 0x4dfba0 run 0x4dfd0c..0x4dfd0f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:00:19.966468+00:00"
+      }
+    ]
   },
   {
     "va": 5062624,
@@ -53936,7 +53979,7 @@
   },
   {
     "va": 5082368,
-    "size": 4640,
+    "size": 4632,
     "name": "fcn.004d8d00",
     "extent_history": [
       {
@@ -53952,6 +53995,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.724800+00:00"
+      },
+      {
+        "old_size": 4640,
+        "new_size": 4632,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x4aa550 run 0x4aa698..0x4aa69f (8 x 0x90/0xcc) | 0x4bbd70 run 0x4bc004..0x4bc00f (12 x 0x90/0xcc) | 0x4c9550 run 0x4c9974..0x4c997f (12 x 0x90/0xcc) | 0x4ce430 run 0x4ce58c..0x4ce58f (4 x 0x90/0xcc) | 0x4d3e90 run 0x4d3fd4..0x4d3fdf (12 x 0x90/0xcc) | 0x4d8d00 run 0x4d9f18..0x4d9f1f (8 x 0x90/0xcc) | 0x4df1b0 run 0x4dfb98..0x4dfb9f (8 x 0x90/0xcc) | 0x4dfba0 run 0x4dfd0c..0x4dfd0f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:00:19.966471+00:00"
       }
     ]
   },
@@ -54263,7 +54313,7 @@
   },
   {
     "va": 5108144,
-    "size": 2544,
+    "size": 2536,
     "name": "fcn.004df1b0",
     "extent_history": [
       {
@@ -54279,13 +54329,29 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.724825+00:00"
+      },
+      {
+        "old_size": 2544,
+        "new_size": 2536,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x4aa550 run 0x4aa698..0x4aa69f (8 x 0x90/0xcc) | 0x4bbd70 run 0x4bc004..0x4bc00f (12 x 0x90/0xcc) | 0x4c9550 run 0x4c9974..0x4c997f (12 x 0x90/0xcc) | 0x4ce430 run 0x4ce58c..0x4ce58f (4 x 0x90/0xcc) | 0x4d3e90 run 0x4d3fd4..0x4d3fdf (12 x 0x90/0xcc) | 0x4d8d00 run 0x4d9f18..0x4d9f1f (8 x 0x90/0xcc) | 0x4df1b0 run 0x4dfb98..0x4dfb9f (8 x 0x90/0xcc) | 0x4dfba0 run 0x4dfd0c..0x4dfd0f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:00:19.966479+00:00"
       }
     ]
   },
   {
     "va": 5110688,
-    "size": 368,
-    "name": "fcn.004dfba0"
+    "size": 364,
+    "name": "fcn.004dfba0",
+    "extent_history": [
+      {
+        "old_size": 368,
+        "new_size": 364,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x4aa550 run 0x4aa698..0x4aa69f (8 x 0x90/0xcc) | 0x4bbd70 run 0x4bc004..0x4bc00f (12 x 0x90/0xcc) | 0x4c9550 run 0x4c9974..0x4c997f (12 x 0x90/0xcc) | 0x4ce430 run 0x4ce58c..0x4ce58f (4 x 0x90/0xcc) | 0x4d3e90 run 0x4d3fd4..0x4d3fdf (12 x 0x90/0xcc) | 0x4d8d00 run 0x4d9f18..0x4d9f1f (8 x 0x90/0xcc) | 0x4df1b0 run 0x4dfb98..0x4dfb9f (8 x 0x90/0xcc) | 0x4dfba0 run 0x4dfd0c..0x4dfd0f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:00:19.966481+00:00"
+      }
+    ]
   },
   {
     "va": 5111056,
@@ -54611,7 +54677,7 @@
   },
   {
     "va": 5118720,
-    "size": 928,
+    "size": 920,
     "name": "fcn.004e1b00",
     "extent_history": [
       {
@@ -54627,6 +54693,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.724847+00:00"
+      },
+      {
+        "old_size": 928,
+        "new_size": 920,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4e1b00 trim 920: 0x4e1e98..0x4e1e9f (8 x 0x90/0xcc) | 0x4e9580 trim 424: 0x4e9728..0x4e972f (8 x 0x90/0xcc) | 0x4eafe0 trim 404: 0x4eb174..0x4eb17f (12 x 0x90/0xcc) | 0x4eb180 trim 148: 0x4eb214..0x4eb21f (12 x 0x90/0xcc) | 0x4eb260 trim 188: 0x4eb31c..0x4eb31f (4 x 0x90/0xcc) | 0x4eb320 trim 188: 0x4eb3dc..0x4eb3df (4 x 0x90/0xcc) | 0x4ee790 trim 148: 0x4ee824..0x4ee82f (12 x 0x90/0xcc) | 0x4f5110 trim 188: 0x4f51cc..0x4f51cf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:04:49.283335+00:00"
       }
     ]
   },
@@ -57046,7 +57119,7 @@
   },
   {
     "va": 5150080,
-    "size": 432,
+    "size": 424,
     "name": "fcn.004e9580",
     "extent_history": [
       {
@@ -57062,6 +57135,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.724989+00:00"
+      },
+      {
+        "old_size": 432,
+        "new_size": 424,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4e1b00 trim 920: 0x4e1e98..0x4e1e9f (8 x 0x90/0xcc) | 0x4e9580 trim 424: 0x4e9728..0x4e972f (8 x 0x90/0xcc) | 0x4eafe0 trim 404: 0x4eb174..0x4eb17f (12 x 0x90/0xcc) | 0x4eb180 trim 148: 0x4eb214..0x4eb21f (12 x 0x90/0xcc) | 0x4eb260 trim 188: 0x4eb31c..0x4eb31f (4 x 0x90/0xcc) | 0x4eb320 trim 188: 0x4eb3dc..0x4eb3df (4 x 0x90/0xcc) | 0x4ee790 trim 148: 0x4ee824..0x4ee82f (12 x 0x90/0xcc) | 0x4f5110 trim 188: 0x4f51cc..0x4f51cf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:04:49.283355+00:00"
       }
     ]
   },
@@ -57394,7 +57474,7 @@
   },
   {
     "va": 5156832,
-    "size": 416,
+    "size": 404,
     "name": "fcn.004eafe0",
     "extent_history": [
       {
@@ -57417,12 +57497,19 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.725014+00:00"
+      },
+      {
+        "old_size": 416,
+        "new_size": 404,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4e1b00 trim 920: 0x4e1e98..0x4e1e9f (8 x 0x90/0xcc) | 0x4e9580 trim 424: 0x4e9728..0x4e972f (8 x 0x90/0xcc) | 0x4eafe0 trim 404: 0x4eb174..0x4eb17f (12 x 0x90/0xcc) | 0x4eb180 trim 148: 0x4eb214..0x4eb21f (12 x 0x90/0xcc) | 0x4eb260 trim 188: 0x4eb31c..0x4eb31f (4 x 0x90/0xcc) | 0x4eb320 trim 188: 0x4eb3dc..0x4eb3df (4 x 0x90/0xcc) | 0x4ee790 trim 148: 0x4ee824..0x4ee82f (12 x 0x90/0xcc) | 0x4f5110 trim 188: 0x4f51cc..0x4f51cf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:04:49.283359+00:00"
       }
     ]
   },
   {
     "va": 5157248,
-    "size": 160,
+    "size": 148,
     "name": "fcn.004eb180",
     "extent_history": [
       {
@@ -57431,6 +57518,13 @@
         "reason": "recycle2-158 reviewed merges",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-20T07:08:25.563931+00:00"
+      },
+      {
+        "old_size": 160,
+        "new_size": 148,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4e1b00 trim 920: 0x4e1e98..0x4e1e9f (8 x 0x90/0xcc) | 0x4e9580 trim 424: 0x4e9728..0x4e972f (8 x 0x90/0xcc) | 0x4eafe0 trim 404: 0x4eb174..0x4eb17f (12 x 0x90/0xcc) | 0x4eb180 trim 148: 0x4eb214..0x4eb21f (12 x 0x90/0xcc) | 0x4eb260 trim 188: 0x4eb31c..0x4eb31f (4 x 0x90/0xcc) | 0x4eb320 trim 188: 0x4eb3dc..0x4eb3df (4 x 0x90/0xcc) | 0x4ee790 trim 148: 0x4ee824..0x4ee82f (12 x 0x90/0xcc) | 0x4f5110 trim 188: 0x4f51cc..0x4f51cf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:04:49.283361+00:00"
       }
     ]
   },
@@ -57450,7 +57544,7 @@
   },
   {
     "va": 5157472,
-    "size": 192,
+    "size": 188,
     "name": "fcn.004eb260",
     "extent_history": [
       {
@@ -57466,12 +57560,19 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.725017+00:00"
+      },
+      {
+        "old_size": 192,
+        "new_size": 188,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4e1b00 trim 920: 0x4e1e98..0x4e1e9f (8 x 0x90/0xcc) | 0x4e9580 trim 424: 0x4e9728..0x4e972f (8 x 0x90/0xcc) | 0x4eafe0 trim 404: 0x4eb174..0x4eb17f (12 x 0x90/0xcc) | 0x4eb180 trim 148: 0x4eb214..0x4eb21f (12 x 0x90/0xcc) | 0x4eb260 trim 188: 0x4eb31c..0x4eb31f (4 x 0x90/0xcc) | 0x4eb320 trim 188: 0x4eb3dc..0x4eb3df (4 x 0x90/0xcc) | 0x4ee790 trim 148: 0x4ee824..0x4ee82f (12 x 0x90/0xcc) | 0x4f5110 trim 188: 0x4f51cc..0x4f51cf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:04:49.283364+00:00"
       }
     ]
   },
   {
     "va": 5157664,
-    "size": 192,
+    "size": 188,
     "name": "fcn.004eb320",
     "extent_history": [
       {
@@ -57487,6 +57588,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.725019+00:00"
+      },
+      {
+        "old_size": 192,
+        "new_size": 188,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4e1b00 trim 920: 0x4e1e98..0x4e1e9f (8 x 0x90/0xcc) | 0x4e9580 trim 424: 0x4e9728..0x4e972f (8 x 0x90/0xcc) | 0x4eafe0 trim 404: 0x4eb174..0x4eb17f (12 x 0x90/0xcc) | 0x4eb180 trim 148: 0x4eb214..0x4eb21f (12 x 0x90/0xcc) | 0x4eb260 trim 188: 0x4eb31c..0x4eb31f (4 x 0x90/0xcc) | 0x4eb320 trim 188: 0x4eb3dc..0x4eb3df (4 x 0x90/0xcc) | 0x4ee790 trim 148: 0x4ee824..0x4ee82f (12 x 0x90/0xcc) | 0x4f5110 trim 188: 0x4f51cc..0x4f51cf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:04:49.283366+00:00"
       }
     ]
   },
@@ -58280,7 +58388,7 @@
   },
   {
     "va": 5171088,
-    "size": 160,
+    "size": 148,
     "name": "fcn.004ee790",
     "extent_history": [
       {
@@ -58296,6 +58404,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.725058+00:00"
+      },
+      {
+        "old_size": 160,
+        "new_size": 148,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4e1b00 trim 920: 0x4e1e98..0x4e1e9f (8 x 0x90/0xcc) | 0x4e9580 trim 424: 0x4e9728..0x4e972f (8 x 0x90/0xcc) | 0x4eafe0 trim 404: 0x4eb174..0x4eb17f (12 x 0x90/0xcc) | 0x4eb180 trim 148: 0x4eb214..0x4eb21f (12 x 0x90/0xcc) | 0x4eb260 trim 188: 0x4eb31c..0x4eb31f (4 x 0x90/0xcc) | 0x4eb320 trim 188: 0x4eb3dc..0x4eb3df (4 x 0x90/0xcc) | 0x4ee790 trim 148: 0x4ee824..0x4ee82f (12 x 0x90/0xcc) | 0x4f5110 trim 188: 0x4f51cc..0x4f51cf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:04:49.283369+00:00"
       }
     ]
   },
@@ -60144,13 +60259,31 @@
   },
   {
     "va": 5198096,
-    "size": 192,
-    "name": "fcn.004f5110"
+    "size": 188,
+    "name": "fcn.004f5110",
+    "extent_history": [
+      {
+        "old_size": 192,
+        "new_size": 188,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4e1b00 trim 920: 0x4e1e98..0x4e1e9f (8 x 0x90/0xcc) | 0x4e9580 trim 424: 0x4e9728..0x4e972f (8 x 0x90/0xcc) | 0x4eafe0 trim 404: 0x4eb174..0x4eb17f (12 x 0x90/0xcc) | 0x4eb180 trim 148: 0x4eb214..0x4eb21f (12 x 0x90/0xcc) | 0x4eb260 trim 188: 0x4eb31c..0x4eb31f (4 x 0x90/0xcc) | 0x4eb320 trim 188: 0x4eb3dc..0x4eb3df (4 x 0x90/0xcc) | 0x4ee790 trim 148: 0x4ee824..0x4ee82f (12 x 0x90/0xcc) | 0x4f5110 trim 188: 0x4f51cc..0x4f51cf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:04:49.283371+00:00"
+      }
+    ]
   },
   {
     "va": 5198288,
-    "size": 304,
-    "name": "fcn.004f51d0"
+    "size": 292,
+    "name": "fcn.004f51d0",
+    "extent_history": [
+      {
+        "old_size": 304,
+        "new_size": 292,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4f51d0 trim 292: 0x4f52f4..0x4f52ff (12 x 0x90/0xcc) | 0x4f53a0 trim 776: 0x4f56a8..0x4f56af (8 x 0x90/0xcc) | 0x4fdc40 trim 168: 0x4fdce8..0x4fdcef (8 x 0x90/0xcc) | 0x502cd0 trim 300: 0x502dfc..0x502dff (4 x 0x90/0xcc) | 0x503fe0 trim 284: 0x5040fc..0x5040ff (4 x 0x90/0xcc) | 0x506f70 trim 92: 0x506fcc..0x506fcf (4 x 0x90/0xcc) | 0x507080 trim 164: 0x507124..0x50712f (12 x 0x90/0xcc) | 0x5072c0 trim 184: 0x507378..0x50737f (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:11:43.638111+00:00"
+      }
+    ]
   },
   {
     "va": 5198592,
@@ -60159,8 +60292,17 @@
   },
   {
     "va": 5198752,
-    "size": 784,
-    "name": "fcn.004f53a0"
+    "size": 776,
+    "name": "fcn.004f53a0",
+    "extent_history": [
+      {
+        "old_size": 784,
+        "new_size": 776,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4f51d0 trim 292: 0x4f52f4..0x4f52ff (12 x 0x90/0xcc) | 0x4f53a0 trim 776: 0x4f56a8..0x4f56af (8 x 0x90/0xcc) | 0x4fdc40 trim 168: 0x4fdce8..0x4fdcef (8 x 0x90/0xcc) | 0x502cd0 trim 300: 0x502dfc..0x502dff (4 x 0x90/0xcc) | 0x503fe0 trim 284: 0x5040fc..0x5040ff (4 x 0x90/0xcc) | 0x506f70 trim 92: 0x506fcc..0x506fcf (4 x 0x90/0xcc) | 0x507080 trim 164: 0x507124..0x50712f (12 x 0x90/0xcc) | 0x5072c0 trim 184: 0x507378..0x50737f (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:11:43.638137+00:00"
+      }
+    ]
   },
   {
     "va": 5199536,
@@ -62818,8 +62960,17 @@
   },
   {
     "va": 5233728,
-    "size": 176,
-    "name": "fcn.004fdc40"
+    "size": 168,
+    "name": "fcn.004fdc40",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 168,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4f51d0 trim 292: 0x4f52f4..0x4f52ff (12 x 0x90/0xcc) | 0x4f53a0 trim 776: 0x4f56a8..0x4f56af (8 x 0x90/0xcc) | 0x4fdc40 trim 168: 0x4fdce8..0x4fdcef (8 x 0x90/0xcc) | 0x502cd0 trim 300: 0x502dfc..0x502dff (4 x 0x90/0xcc) | 0x503fe0 trim 284: 0x5040fc..0x5040ff (4 x 0x90/0xcc) | 0x506f70 trim 92: 0x506fcc..0x506fcf (4 x 0x90/0xcc) | 0x507080 trim 164: 0x507124..0x50712f (12 x 0x90/0xcc) | 0x5072c0 trim 184: 0x507378..0x50737f (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:11:43.638141+00:00"
+      }
+    ]
   },
   {
     "va": 5233904,
@@ -64081,8 +64232,17 @@
   },
   {
     "va": 5254352,
-    "size": 304,
-    "name": "fcn.00502cd0"
+    "size": 300,
+    "name": "fcn.00502cd0",
+    "extent_history": [
+      {
+        "old_size": 304,
+        "new_size": 300,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4f51d0 trim 292: 0x4f52f4..0x4f52ff (12 x 0x90/0xcc) | 0x4f53a0 trim 776: 0x4f56a8..0x4f56af (8 x 0x90/0xcc) | 0x4fdc40 trim 168: 0x4fdce8..0x4fdcef (8 x 0x90/0xcc) | 0x502cd0 trim 300: 0x502dfc..0x502dff (4 x 0x90/0xcc) | 0x503fe0 trim 284: 0x5040fc..0x5040ff (4 x 0x90/0xcc) | 0x506f70 trim 92: 0x506fcc..0x506fcf (4 x 0x90/0xcc) | 0x507080 trim 164: 0x507124..0x50712f (12 x 0x90/0xcc) | 0x5072c0 trim 184: 0x507378..0x50737f (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:11:43.638144+00:00"
+      }
+    ]
   },
   {
     "va": 5254656,
@@ -64352,7 +64512,7 @@
   },
   {
     "va": 5259232,
-    "size": 288,
+    "size": 284,
     "name": "fcn.00503fe0",
     "extent_history": [
       {
@@ -64368,6 +64528,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.725347+00:00"
+      },
+      {
+        "old_size": 288,
+        "new_size": 284,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4f51d0 trim 292: 0x4f52f4..0x4f52ff (12 x 0x90/0xcc) | 0x4f53a0 trim 776: 0x4f56a8..0x4f56af (8 x 0x90/0xcc) | 0x4fdc40 trim 168: 0x4fdce8..0x4fdcef (8 x 0x90/0xcc) | 0x502cd0 trim 300: 0x502dfc..0x502dff (4 x 0x90/0xcc) | 0x503fe0 trim 284: 0x5040fc..0x5040ff (4 x 0x90/0xcc) | 0x506f70 trim 92: 0x506fcc..0x506fcf (4 x 0x90/0xcc) | 0x507080 trim 164: 0x507124..0x50712f (12 x 0x90/0xcc) | 0x5072c0 trim 184: 0x507378..0x50737f (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:11:43.638147+00:00"
       }
     ]
   },
@@ -65033,8 +65200,17 @@
   },
   {
     "va": 5271408,
-    "size": 96,
-    "name": "fcn.00506f70"
+    "size": 92,
+    "name": "fcn.00506f70",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 92,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4f51d0 trim 292: 0x4f52f4..0x4f52ff (12 x 0x90/0xcc) | 0x4f53a0 trim 776: 0x4f56a8..0x4f56af (8 x 0x90/0xcc) | 0x4fdc40 trim 168: 0x4fdce8..0x4fdcef (8 x 0x90/0xcc) | 0x502cd0 trim 300: 0x502dfc..0x502dff (4 x 0x90/0xcc) | 0x503fe0 trim 284: 0x5040fc..0x5040ff (4 x 0x90/0xcc) | 0x506f70 trim 92: 0x506fcc..0x506fcf (4 x 0x90/0xcc) | 0x507080 trim 164: 0x507124..0x50712f (12 x 0x90/0xcc) | 0x5072c0 trim 184: 0x507378..0x50737f (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:11:43.638150+00:00"
+      }
+    ]
   },
   {
     "va": 5271504,
@@ -65043,8 +65219,17 @@
   },
   {
     "va": 5271680,
-    "size": 176,
-    "name": "fcn.00507080"
+    "size": 164,
+    "name": "fcn.00507080",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 164,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4f51d0 trim 292: 0x4f52f4..0x4f52ff (12 x 0x90/0xcc) | 0x4f53a0 trim 776: 0x4f56a8..0x4f56af (8 x 0x90/0xcc) | 0x4fdc40 trim 168: 0x4fdce8..0x4fdcef (8 x 0x90/0xcc) | 0x502cd0 trim 300: 0x502dfc..0x502dff (4 x 0x90/0xcc) | 0x503fe0 trim 284: 0x5040fc..0x5040ff (4 x 0x90/0xcc) | 0x506f70 trim 92: 0x506fcc..0x506fcf (4 x 0x90/0xcc) | 0x507080 trim 164: 0x507124..0x50712f (12 x 0x90/0xcc) | 0x5072c0 trim 184: 0x507378..0x50737f (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:11:43.638153+00:00"
+      }
+    ]
   },
   {
     "va": 5271856,
@@ -65053,8 +65238,17 @@
   },
   {
     "va": 5272256,
-    "size": 192,
-    "name": "fcn.005072c0"
+    "size": 184,
+    "name": "fcn.005072c0",
+    "extent_history": [
+      {
+        "old_size": 192,
+        "new_size": 184,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x4f51d0 trim 292: 0x4f52f4..0x4f52ff (12 x 0x90/0xcc) | 0x4f53a0 trim 776: 0x4f56a8..0x4f56af (8 x 0x90/0xcc) | 0x4fdc40 trim 168: 0x4fdce8..0x4fdcef (8 x 0x90/0xcc) | 0x502cd0 trim 300: 0x502dfc..0x502dff (4 x 0x90/0xcc) | 0x503fe0 trim 284: 0x5040fc..0x5040ff (4 x 0x90/0xcc) | 0x506f70 trim 92: 0x506fcc..0x506fcf (4 x 0x90/0xcc) | 0x507080 trim 164: 0x507124..0x50712f (12 x 0x90/0xcc) | 0x5072c0 trim 184: 0x507378..0x50737f (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:11:43.638155+00:00"
+      }
+    ]
   },
   {
     "va": 5272448,
@@ -65072,8 +65266,17 @@
   },
   {
     "va": 5272576,
-    "size": 224,
-    "name": "fcn.00507400"
+    "size": 220,
+    "name": "fcn.00507400",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 220,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x507400 trim 220: 0x5074dc..0x5074df (4 x 0x90/0xcc) | 0x5186c0 trim 2756: 0x519184..0x51918f (12 x 0x90/0xcc) | 0x54ca10 trim 3480: 0x54d7a8..0x54d7af (8 x 0x90/0xcc) | 0x54e390 trim 2676: 0x54ee04..0x54ee0f (12 x 0x90/0xcc) | 0x5522d0 trim 1740: 0x55299c..0x55299f (4 x 0x90/0xcc) | 0x554170 trim 1524: 0x554764..0x55476f (12 x 0x90/0xcc) | 0x555d30 trim 984: 0x556108..0x55610f (8 x 0x90/0xcc) | 0x557460 trim 2532: 0x557e44..0x557e4f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:18:32.318957+00:00"
+      }
+    ]
   },
   {
     "va": 5272800,
@@ -68891,8 +69094,17 @@
   },
   {
     "va": 5342912,
-    "size": 2768,
-    "name": "fcn.005186c0"
+    "size": 2756,
+    "name": "fcn.005186c0",
+    "extent_history": [
+      {
+        "old_size": 2768,
+        "new_size": 2756,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x507400 trim 220: 0x5074dc..0x5074df (4 x 0x90/0xcc) | 0x5186c0 trim 2756: 0x519184..0x51918f (12 x 0x90/0xcc) | 0x54ca10 trim 3480: 0x54d7a8..0x54d7af (8 x 0x90/0xcc) | 0x54e390 trim 2676: 0x54ee04..0x54ee0f (12 x 0x90/0xcc) | 0x5522d0 trim 1740: 0x55299c..0x55299f (4 x 0x90/0xcc) | 0x554170 trim 1524: 0x554764..0x55476f (12 x 0x90/0xcc) | 0x555d30 trim 984: 0x556108..0x55610f (8 x 0x90/0xcc) | 0x557460 trim 2532: 0x557e44..0x557e4f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:18:32.318974+00:00"
+      }
+    ]
   },
   {
     "va": 5345680,
@@ -76805,7 +77017,7 @@
   },
   {
     "va": 5556752,
-    "size": 3488,
+    "size": 3480,
     "name": "fcn.0054ca10",
     "extent_history": [
       {
@@ -76821,6 +77033,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726199+00:00"
+      },
+      {
+        "old_size": 3488,
+        "new_size": 3480,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x507400 trim 220: 0x5074dc..0x5074df (4 x 0x90/0xcc) | 0x5186c0 trim 2756: 0x519184..0x51918f (12 x 0x90/0xcc) | 0x54ca10 trim 3480: 0x54d7a8..0x54d7af (8 x 0x90/0xcc) | 0x54e390 trim 2676: 0x54ee04..0x54ee0f (12 x 0x90/0xcc) | 0x5522d0 trim 1740: 0x55299c..0x55299f (4 x 0x90/0xcc) | 0x554170 trim 1524: 0x554764..0x55476f (12 x 0x90/0xcc) | 0x555d30 trim 984: 0x556108..0x55610f (8 x 0x90/0xcc) | 0x557460 trim 2532: 0x557e44..0x557e4f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:18:32.318979+00:00"
       }
     ]
   },
@@ -76938,7 +77157,7 @@
   },
   {
     "va": 5563280,
-    "size": 2688,
+    "size": 2676,
     "name": "fcn.0054e390",
     "extent_history": [
       {
@@ -76954,6 +77173,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726209+00:00"
+      },
+      {
+        "old_size": 2688,
+        "new_size": 2676,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x507400 trim 220: 0x5074dc..0x5074df (4 x 0x90/0xcc) | 0x5186c0 trim 2756: 0x519184..0x51918f (12 x 0x90/0xcc) | 0x54ca10 trim 3480: 0x54d7a8..0x54d7af (8 x 0x90/0xcc) | 0x54e390 trim 2676: 0x54ee04..0x54ee0f (12 x 0x90/0xcc) | 0x5522d0 trim 1740: 0x55299c..0x55299f (4 x 0x90/0xcc) | 0x554170 trim 1524: 0x554764..0x55476f (12 x 0x90/0xcc) | 0x555d30 trim 984: 0x556108..0x55610f (8 x 0x90/0xcc) | 0x557460 trim 2532: 0x557e44..0x557e4f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:18:32.318982+00:00"
       }
     ]
   },
@@ -77869,8 +78095,17 @@
   },
   {
     "va": 5579472,
-    "size": 1744,
-    "name": "fcn.005522d0"
+    "size": 1740,
+    "name": "fcn.005522d0",
+    "extent_history": [
+      {
+        "old_size": 1744,
+        "new_size": 1740,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x507400 trim 220: 0x5074dc..0x5074df (4 x 0x90/0xcc) | 0x5186c0 trim 2756: 0x519184..0x51918f (12 x 0x90/0xcc) | 0x54ca10 trim 3480: 0x54d7a8..0x54d7af (8 x 0x90/0xcc) | 0x54e390 trim 2676: 0x54ee04..0x54ee0f (12 x 0x90/0xcc) | 0x5522d0 trim 1740: 0x55299c..0x55299f (4 x 0x90/0xcc) | 0x554170 trim 1524: 0x554764..0x55476f (12 x 0x90/0xcc) | 0x555d30 trim 984: 0x556108..0x55610f (8 x 0x90/0xcc) | 0x557460 trim 2532: 0x557e44..0x557e4f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:18:32.318985+00:00"
+      }
+    ]
   },
   {
     "va": 5581216,
@@ -78098,8 +78333,17 @@
   },
   {
     "va": 5587312,
-    "size": 1536,
-    "name": "fcn.00554170"
+    "size": 1524,
+    "name": "fcn.00554170",
+    "extent_history": [
+      {
+        "old_size": 1536,
+        "new_size": 1524,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x507400 trim 220: 0x5074dc..0x5074df (4 x 0x90/0xcc) | 0x5186c0 trim 2756: 0x519184..0x51918f (12 x 0x90/0xcc) | 0x54ca10 trim 3480: 0x54d7a8..0x54d7af (8 x 0x90/0xcc) | 0x54e390 trim 2676: 0x54ee04..0x54ee0f (12 x 0x90/0xcc) | 0x5522d0 trim 1740: 0x55299c..0x55299f (4 x 0x90/0xcc) | 0x554170 trim 1524: 0x554764..0x55476f (12 x 0x90/0xcc) | 0x555d30 trim 984: 0x556108..0x55610f (8 x 0x90/0xcc) | 0x557460 trim 2532: 0x557e44..0x557e4f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:18:32.318987+00:00"
+      }
+    ]
   },
   {
     "va": 5588848,
@@ -78355,7 +78599,7 @@
   },
   {
     "va": 5594416,
-    "size": 992,
+    "size": 984,
     "name": "fcn.00555d30",
     "extent_history": [
       {
@@ -78371,6 +78615,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726288+00:00"
+      },
+      {
+        "old_size": 992,
+        "new_size": 984,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x507400 trim 220: 0x5074dc..0x5074df (4 x 0x90/0xcc) | 0x5186c0 trim 2756: 0x519184..0x51918f (12 x 0x90/0xcc) | 0x54ca10 trim 3480: 0x54d7a8..0x54d7af (8 x 0x90/0xcc) | 0x54e390 trim 2676: 0x54ee04..0x54ee0f (12 x 0x90/0xcc) | 0x5522d0 trim 1740: 0x55299c..0x55299f (4 x 0x90/0xcc) | 0x554170 trim 1524: 0x554764..0x55476f (12 x 0x90/0xcc) | 0x555d30 trim 984: 0x556108..0x55610f (8 x 0x90/0xcc) | 0x557460 trim 2532: 0x557e44..0x557e4f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:18:32.318990+00:00"
       }
     ]
   },
@@ -78537,8 +78788,17 @@
   },
   {
     "va": 5600352,
-    "size": 2544,
-    "name": "fcn.00557460"
+    "size": 2532,
+    "name": "fcn.00557460",
+    "extent_history": [
+      {
+        "old_size": 2544,
+        "new_size": 2532,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x507400 trim 220: 0x5074dc..0x5074df (4 x 0x90/0xcc) | 0x5186c0 trim 2756: 0x519184..0x51918f (12 x 0x90/0xcc) | 0x54ca10 trim 3480: 0x54d7a8..0x54d7af (8 x 0x90/0xcc) | 0x54e390 trim 2676: 0x54ee04..0x54ee0f (12 x 0x90/0xcc) | 0x5522d0 trim 1740: 0x55299c..0x55299f (4 x 0x90/0xcc) | 0x554170 trim 1524: 0x554764..0x55476f (12 x 0x90/0xcc) | 0x555d30 trim 984: 0x556108..0x55610f (8 x 0x90/0xcc) | 0x557460 trim 2532: 0x557e44..0x557e4f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:18:32.318992+00:00"
+      }
+    ]
   },
   {
     "va": 5602896,
@@ -78598,8 +78858,17 @@
   },
   {
     "va": 5603296,
-    "size": 416,
-    "name": "fcn.00557fe0"
+    "size": 412,
+    "name": "fcn.00557fe0",
+    "extent_history": [
+      {
+        "old_size": 416,
+        "new_size": 412,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x557fe0 trim 412: 0x55817c..0x55817f (4 x 0x90/0xcc) | 0x5599c0 trim 212: 0x559a94..0x559a9f (12 x 0x90/0xcc) | 0x55c740 trim 1272: 0x55cc38..0x55cc3f (8 x 0x90/0xcc) | 0x55cc80 trim 1092: 0x55d0c4..0x55d0cf (12 x 0x90/0xcc) | 0x55ea30 trim 1972: 0x55f1e4..0x55f1ef (12 x 0x90/0xcc) | 0x55f300 trim 2504: 0x55fcc8..0x55fccf (8 x 0x90/0xcc) | 0x55fd10 trim 644: 0x55ff94..0x55ff9f (12 x 0x90/0xcc) | 0x55ffe0 trim 504: 0x5601d8..0x5601df (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:23:38.750460+00:00"
+      }
+    ]
   },
   {
     "va": 5603712,
@@ -78869,8 +79138,17 @@
   },
   {
     "va": 5609920,
-    "size": 224,
-    "name": "fcn.005599c0"
+    "size": 212,
+    "name": "fcn.005599c0",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 212,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x557fe0 trim 412: 0x55817c..0x55817f (4 x 0x90/0xcc) | 0x5599c0 trim 212: 0x559a94..0x559a9f (12 x 0x90/0xcc) | 0x55c740 trim 1272: 0x55cc38..0x55cc3f (8 x 0x90/0xcc) | 0x55cc80 trim 1092: 0x55d0c4..0x55d0cf (12 x 0x90/0xcc) | 0x55ea30 trim 1972: 0x55f1e4..0x55f1ef (12 x 0x90/0xcc) | 0x55f300 trim 2504: 0x55fcc8..0x55fccf (8 x 0x90/0xcc) | 0x55fd10 trim 644: 0x55ff94..0x55ff9f (12 x 0x90/0xcc) | 0x55ffe0 trim 504: 0x5601d8..0x5601df (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:23:38.750494+00:00"
+      }
+    ]
   },
   {
     "va": 5610144,
@@ -79567,8 +79845,17 @@
   },
   {
     "va": 5621568,
-    "size": 1280,
-    "name": "fcn.0055c740"
+    "size": 1272,
+    "name": "fcn.0055c740",
+    "extent_history": [
+      {
+        "old_size": 1280,
+        "new_size": 1272,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x557fe0 trim 412: 0x55817c..0x55817f (4 x 0x90/0xcc) | 0x5599c0 trim 212: 0x559a94..0x559a9f (12 x 0x90/0xcc) | 0x55c740 trim 1272: 0x55cc38..0x55cc3f (8 x 0x90/0xcc) | 0x55cc80 trim 1092: 0x55d0c4..0x55d0cf (12 x 0x90/0xcc) | 0x55ea30 trim 1972: 0x55f1e4..0x55f1ef (12 x 0x90/0xcc) | 0x55f300 trim 2504: 0x55fcc8..0x55fccf (8 x 0x90/0xcc) | 0x55fd10 trim 644: 0x55ff94..0x55ff9f (12 x 0x90/0xcc) | 0x55ffe0 trim 504: 0x5601d8..0x5601df (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:23:38.750498+00:00"
+      }
+    ]
   },
   {
     "va": 5622848,
@@ -79593,8 +79880,17 @@
   },
   {
     "va": 5622912,
-    "size": 1104,
-    "name": "fcn.0055cc80"
+    "size": 1092,
+    "name": "fcn.0055cc80",
+    "extent_history": [
+      {
+        "old_size": 1104,
+        "new_size": 1092,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x557fe0 trim 412: 0x55817c..0x55817f (4 x 0x90/0xcc) | 0x5599c0 trim 212: 0x559a94..0x559a9f (12 x 0x90/0xcc) | 0x55c740 trim 1272: 0x55cc38..0x55cc3f (8 x 0x90/0xcc) | 0x55cc80 trim 1092: 0x55d0c4..0x55d0cf (12 x 0x90/0xcc) | 0x55ea30 trim 1972: 0x55f1e4..0x55f1ef (12 x 0x90/0xcc) | 0x55f300 trim 2504: 0x55fcc8..0x55fccf (8 x 0x90/0xcc) | 0x55fd10 trim 644: 0x55ff94..0x55ff9f (12 x 0x90/0xcc) | 0x55ffe0 trim 504: 0x5601d8..0x5601df (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:23:38.750502+00:00"
+      }
+    ]
   },
   {
     "va": 5624016,
@@ -79773,8 +80069,17 @@
   },
   {
     "va": 5630512,
-    "size": 1984,
-    "name": "fcn.0055ea30"
+    "size": 1972,
+    "name": "fcn.0055ea30",
+    "extent_history": [
+      {
+        "old_size": 1984,
+        "new_size": 1972,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x557fe0 trim 412: 0x55817c..0x55817f (4 x 0x90/0xcc) | 0x5599c0 trim 212: 0x559a94..0x559a9f (12 x 0x90/0xcc) | 0x55c740 trim 1272: 0x55cc38..0x55cc3f (8 x 0x90/0xcc) | 0x55cc80 trim 1092: 0x55d0c4..0x55d0cf (12 x 0x90/0xcc) | 0x55ea30 trim 1972: 0x55f1e4..0x55f1ef (12 x 0x90/0xcc) | 0x55f300 trim 2504: 0x55fcc8..0x55fccf (8 x 0x90/0xcc) | 0x55fd10 trim 644: 0x55ff94..0x55ff9f (12 x 0x90/0xcc) | 0x55ffe0 trim 504: 0x5601d8..0x5601df (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:23:38.750505+00:00"
+      }
+    ]
   },
   {
     "va": 5632496,
@@ -79799,7 +80104,7 @@
   },
   {
     "va": 5632768,
-    "size": 2512,
+    "size": 2504,
     "name": "fcn.0055f300",
     "extent_history": [
       {
@@ -79822,6 +80127,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726367+00:00"
+      },
+      {
+        "old_size": 2512,
+        "new_size": 2504,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x557fe0 trim 412: 0x55817c..0x55817f (4 x 0x90/0xcc) | 0x5599c0 trim 212: 0x559a94..0x559a9f (12 x 0x90/0xcc) | 0x55c740 trim 1272: 0x55cc38..0x55cc3f (8 x 0x90/0xcc) | 0x55cc80 trim 1092: 0x55d0c4..0x55d0cf (12 x 0x90/0xcc) | 0x55ea30 trim 1972: 0x55f1e4..0x55f1ef (12 x 0x90/0xcc) | 0x55f300 trim 2504: 0x55fcc8..0x55fccf (8 x 0x90/0xcc) | 0x55fd10 trim 644: 0x55ff94..0x55ff9f (12 x 0x90/0xcc) | 0x55ffe0 trim 504: 0x5601d8..0x5601df (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:23:38.750507+00:00"
       }
     ]
   },
@@ -79848,8 +80160,17 @@
   },
   {
     "va": 5635344,
-    "size": 656,
-    "name": "fcn.0055fd10"
+    "size": 644,
+    "name": "fcn.0055fd10",
+    "extent_history": [
+      {
+        "old_size": 656,
+        "new_size": 644,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x557fe0 trim 412: 0x55817c..0x55817f (4 x 0x90/0xcc) | 0x5599c0 trim 212: 0x559a94..0x559a9f (12 x 0x90/0xcc) | 0x55c740 trim 1272: 0x55cc38..0x55cc3f (8 x 0x90/0xcc) | 0x55cc80 trim 1092: 0x55d0c4..0x55d0cf (12 x 0x90/0xcc) | 0x55ea30 trim 1972: 0x55f1e4..0x55f1ef (12 x 0x90/0xcc) | 0x55f300 trim 2504: 0x55fcc8..0x55fccf (8 x 0x90/0xcc) | 0x55fd10 trim 644: 0x55ff94..0x55ff9f (12 x 0x90/0xcc) | 0x55ffe0 trim 504: 0x5601d8..0x5601df (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:23:38.750511+00:00"
+      }
+    ]
   },
   {
     "va": 5636000,
@@ -79874,8 +80195,17 @@
   },
   {
     "va": 5636064,
-    "size": 512,
-    "name": "fcn.0055ffe0"
+    "size": 504,
+    "name": "fcn.0055ffe0",
+    "extent_history": [
+      {
+        "old_size": 512,
+        "new_size": 504,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x557fe0 trim 412: 0x55817c..0x55817f (4 x 0x90/0xcc) | 0x5599c0 trim 212: 0x559a94..0x559a9f (12 x 0x90/0xcc) | 0x55c740 trim 1272: 0x55cc38..0x55cc3f (8 x 0x90/0xcc) | 0x55cc80 trim 1092: 0x55d0c4..0x55d0cf (12 x 0x90/0xcc) | 0x55ea30 trim 1972: 0x55f1e4..0x55f1ef (12 x 0x90/0xcc) | 0x55f300 trim 2504: 0x55fcc8..0x55fccf (8 x 0x90/0xcc) | 0x55fd10 trim 644: 0x55ff94..0x55ff9f (12 x 0x90/0xcc) | 0x55ffe0 trim 504: 0x5601d8..0x5601df (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:23:38.750514+00:00"
+      }
+    ]
   },
   {
     "va": 5636576,
@@ -79893,8 +80223,17 @@
   },
   {
     "va": 5636752,
-    "size": 1712,
-    "name": "fcn.00560290"
+    "size": 1700,
+    "name": "fcn.00560290",
+    "extent_history": [
+      {
+        "old_size": 1712,
+        "new_size": 1700,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x560290 trim 1700: 0x560934..0x56093f (12 x 0x90/0xcc) | 0x5609c0 trim 872: 0x560d28..0x560d2f (8 x 0x90/0xcc) | 0x560eb0 trim 916: 0x561244..0x56124f (12 x 0x90/0xcc) | 0x5624a0 trim 1460: 0x562a54..0x562a5f (12 x 0x90/0xcc) | 0x562ba0 trim 2104: 0x5633d8..0x5633df (8 x 0x90/0xcc) | 0x565100 trim 492: 0x5652ec..0x5652ef (4 x 0x90/0xcc) | 0x565350 trim 1196: 0x5657fc..0x5657ff (4 x 0x90/0xcc) | 0x565ab0 trim 1560: 0x5660c8..0x5660cf (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:36.533908+00:00"
+      }
+    ]
   },
   {
     "va": 5638464,
@@ -79919,7 +80258,7 @@
   },
   {
     "va": 5638592,
-    "size": 880,
+    "size": 872,
     "name": "fcn.005609c0",
     "extent_history": [
       {
@@ -79942,6 +80281,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726373+00:00"
+      },
+      {
+        "old_size": 880,
+        "new_size": 872,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x560290 trim 1700: 0x560934..0x56093f (12 x 0x90/0xcc) | 0x5609c0 trim 872: 0x560d28..0x560d2f (8 x 0x90/0xcc) | 0x560eb0 trim 916: 0x561244..0x56124f (12 x 0x90/0xcc) | 0x5624a0 trim 1460: 0x562a54..0x562a5f (12 x 0x90/0xcc) | 0x562ba0 trim 2104: 0x5633d8..0x5633df (8 x 0x90/0xcc) | 0x565100 trim 492: 0x5652ec..0x5652ef (4 x 0x90/0xcc) | 0x565350 trim 1196: 0x5657fc..0x5657ff (4 x 0x90/0xcc) | 0x565ab0 trim 1560: 0x5660c8..0x5660cf (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:36.533954+00:00"
       }
     ]
   },
@@ -79961,8 +80307,17 @@
   },
   {
     "va": 5639856,
-    "size": 928,
-    "name": "fcn.00560eb0"
+    "size": 916,
+    "name": "fcn.00560eb0",
+    "extent_history": [
+      {
+        "old_size": 928,
+        "new_size": 916,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x560290 trim 1700: 0x560934..0x56093f (12 x 0x90/0xcc) | 0x5609c0 trim 872: 0x560d28..0x560d2f (8 x 0x90/0xcc) | 0x560eb0 trim 916: 0x561244..0x56124f (12 x 0x90/0xcc) | 0x5624a0 trim 1460: 0x562a54..0x562a5f (12 x 0x90/0xcc) | 0x562ba0 trim 2104: 0x5633d8..0x5633df (8 x 0x90/0xcc) | 0x565100 trim 492: 0x5652ec..0x5652ef (4 x 0x90/0xcc) | 0x565350 trim 1196: 0x5657fc..0x5657ff (4 x 0x90/0xcc) | 0x565ab0 trim 1560: 0x5660c8..0x5660cf (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:36.533960+00:00"
+      }
+    ]
   },
   {
     "va": 5640784,
@@ -80071,8 +80426,17 @@
   },
   {
     "va": 5645472,
-    "size": 1472,
-    "name": "fcn.005624a0"
+    "size": 1460,
+    "name": "fcn.005624a0",
+    "extent_history": [
+      {
+        "old_size": 1472,
+        "new_size": 1460,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x560290 trim 1700: 0x560934..0x56093f (12 x 0x90/0xcc) | 0x5609c0 trim 872: 0x560d28..0x560d2f (8 x 0x90/0xcc) | 0x560eb0 trim 916: 0x561244..0x56124f (12 x 0x90/0xcc) | 0x5624a0 trim 1460: 0x562a54..0x562a5f (12 x 0x90/0xcc) | 0x562ba0 trim 2104: 0x5633d8..0x5633df (8 x 0x90/0xcc) | 0x565100 trim 492: 0x5652ec..0x5652ef (4 x 0x90/0xcc) | 0x565350 trim 1196: 0x5657fc..0x5657ff (4 x 0x90/0xcc) | 0x565ab0 trim 1560: 0x5660c8..0x5660cf (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:36.533964+00:00"
+      }
+    ]
   },
   {
     "va": 5646944,
@@ -80090,8 +80454,17 @@
   },
   {
     "va": 5647264,
-    "size": 2112,
-    "name": "fcn.00562ba0"
+    "size": 2104,
+    "name": "fcn.00562ba0",
+    "extent_history": [
+      {
+        "old_size": 2112,
+        "new_size": 2104,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x560290 trim 1700: 0x560934..0x56093f (12 x 0x90/0xcc) | 0x5609c0 trim 872: 0x560d28..0x560d2f (8 x 0x90/0xcc) | 0x560eb0 trim 916: 0x561244..0x56124f (12 x 0x90/0xcc) | 0x5624a0 trim 1460: 0x562a54..0x562a5f (12 x 0x90/0xcc) | 0x562ba0 trim 2104: 0x5633d8..0x5633df (8 x 0x90/0xcc) | 0x565100 trim 492: 0x5652ec..0x5652ef (4 x 0x90/0xcc) | 0x565350 trim 1196: 0x5657fc..0x5657ff (4 x 0x90/0xcc) | 0x565ab0 trim 1560: 0x5660c8..0x5660cf (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:36.533967+00:00"
+      }
+    ]
   },
   {
     "va": 5649376,
@@ -80480,8 +80853,17 @@
   },
   {
     "va": 5656832,
-    "size": 496,
-    "name": "fcn.00565100"
+    "size": 492,
+    "name": "fcn.00565100",
+    "extent_history": [
+      {
+        "old_size": 496,
+        "new_size": 492,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x560290 trim 1700: 0x560934..0x56093f (12 x 0x90/0xcc) | 0x5609c0 trim 872: 0x560d28..0x560d2f (8 x 0x90/0xcc) | 0x560eb0 trim 916: 0x561244..0x56124f (12 x 0x90/0xcc) | 0x5624a0 trim 1460: 0x562a54..0x562a5f (12 x 0x90/0xcc) | 0x562ba0 trim 2104: 0x5633d8..0x5633df (8 x 0x90/0xcc) | 0x565100 trim 492: 0x5652ec..0x5652ef (4 x 0x90/0xcc) | 0x565350 trim 1196: 0x5657fc..0x5657ff (4 x 0x90/0xcc) | 0x565ab0 trim 1560: 0x5660c8..0x5660cf (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:36.533970+00:00"
+      }
+    ]
   },
   {
     "va": 5657328,
@@ -80506,7 +80888,7 @@
   },
   {
     "va": 5657424,
-    "size": 1200,
+    "size": 1196,
     "name": "fcn.00565350",
     "extent_history": [
       {
@@ -80522,6 +80904,13 @@
         "reason": "Reviewed native extent repair: 0x5657e5 holds the five four-byte case pointers (0x5657e8 table after a 3-byte 8d 49 00 align nop) of the compiler jump table emitted for the function at 0x565350; every pointer targets code inside that function. The table and its trailing 0x90 alignment are part of the function's contribution, so the separate admitted inventory row is retired and the owning extent grows to the next function start.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T07:08:36.149385+00:00"
+      },
+      {
+        "old_size": 1200,
+        "new_size": 1196,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x560290 trim 1700: 0x560934..0x56093f (12 x 0x90/0xcc) | 0x5609c0 trim 872: 0x560d28..0x560d2f (8 x 0x90/0xcc) | 0x560eb0 trim 916: 0x561244..0x56124f (12 x 0x90/0xcc) | 0x5624a0 trim 1460: 0x562a54..0x562a5f (12 x 0x90/0xcc) | 0x562ba0 trim 2104: 0x5633d8..0x5633df (8 x 0x90/0xcc) | 0x565100 trim 492: 0x5652ec..0x5652ef (4 x 0x90/0xcc) | 0x565350 trim 1196: 0x5657fc..0x5657ff (4 x 0x90/0xcc) | 0x565ab0 trim 1560: 0x5660c8..0x5660cf (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:36.533973+00:00"
       }
     ]
   },
@@ -80583,7 +80972,7 @@
   },
   {
     "va": 5659312,
-    "size": 1568,
+    "size": 1560,
     "name": "fcn.00565ab0",
     "extent_history": [
       {
@@ -80599,6 +80988,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726401+00:00"
+      },
+      {
+        "old_size": 1568,
+        "new_size": 1560,
+        "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x560290 trim 1700: 0x560934..0x56093f (12 x 0x90/0xcc) | 0x5609c0 trim 872: 0x560d28..0x560d2f (8 x 0x90/0xcc) | 0x560eb0 trim 916: 0x561244..0x56124f (12 x 0x90/0xcc) | 0x5624a0 trim 1460: 0x562a54..0x562a5f (12 x 0x90/0xcc) | 0x562ba0 trim 2104: 0x5633d8..0x5633df (8 x 0x90/0xcc) | 0x565100 trim 492: 0x5652ec..0x5652ef (4 x 0x90/0xcc) | 0x565350 trim 1196: 0x5657fc..0x5657ff (4 x 0x90/0xcc) | 0x565ab0 trim 1560: 0x5660c8..0x5660cf (8 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:36.533976+00:00"
       }
     ]
   },
@@ -80891,8 +81287,17 @@
   },
   {
     "va": 5666192,
-    "size": 2656,
-    "name": "fcn.00567590"
+    "size": 2648,
+    "name": "fcn.00567590",
+    "extent_history": [
+      {
+        "old_size": 2656,
+        "new_size": 2648,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x567590 run 0x567fe8..0x567fef (8 x 0x90/0xcc) | 0x568ed0 run 0x5696f8..0x5696ff (8 x 0x90/0xcc) | 0x569ff0 run 0x56aeac..0x56aeaf (4 x 0x90/0xcc) | 0x56aef0 run 0x56b67c..0x56b67f (4 x 0x90/0xcc) | 0x56b700 run 0x56bf8c..0x56bf8f (4 x 0x90/0xcc) | 0x56bfd0 run 0x56c8e4..0x56c8ef (12 x 0x90/0xcc) | 0x56caf0 run 0x56ce6c..0x56ce6f (4 x 0x90/0xcc) | 0x56cfc0 run 0x56d8bc..0x56d8bf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:28.170374+00:00"
+      }
+    ]
   },
   {
     "va": 5668848,
@@ -80966,7 +81371,7 @@
   },
   {
     "va": 5672656,
-    "size": 2096,
+    "size": 2088,
     "name": "fcn.00568ed0",
     "extent_history": [
       {
@@ -81031,6 +81436,13 @@
             }
           ]
         }
+      },
+      {
+        "old_size": 2096,
+        "new_size": 2088,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x567590 run 0x567fe8..0x567fef (8 x 0x90/0xcc) | 0x568ed0 run 0x5696f8..0x5696ff (8 x 0x90/0xcc) | 0x569ff0 run 0x56aeac..0x56aeaf (4 x 0x90/0xcc) | 0x56aef0 run 0x56b67c..0x56b67f (4 x 0x90/0xcc) | 0x56b700 run 0x56bf8c..0x56bf8f (4 x 0x90/0xcc) | 0x56bfd0 run 0x56c8e4..0x56c8ef (12 x 0x90/0xcc) | 0x56caf0 run 0x56ce6c..0x56ce6f (4 x 0x90/0xcc) | 0x56cfc0 run 0x56d8bc..0x56d8bf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:28.170400+00:00"
       }
     ]
   },
@@ -81155,8 +81567,17 @@
   },
   {
     "va": 5677040,
-    "size": 3776,
-    "name": "fcn.00569ff0"
+    "size": 3772,
+    "name": "fcn.00569ff0",
+    "extent_history": [
+      {
+        "old_size": 3776,
+        "new_size": 3772,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x567590 run 0x567fe8..0x567fef (8 x 0x90/0xcc) | 0x568ed0 run 0x5696f8..0x5696ff (8 x 0x90/0xcc) | 0x569ff0 run 0x56aeac..0x56aeaf (4 x 0x90/0xcc) | 0x56aef0 run 0x56b67c..0x56b67f (4 x 0x90/0xcc) | 0x56b700 run 0x56bf8c..0x56bf8f (4 x 0x90/0xcc) | 0x56bfd0 run 0x56c8e4..0x56c8ef (12 x 0x90/0xcc) | 0x56caf0 run 0x56ce6c..0x56ce6f (4 x 0x90/0xcc) | 0x56cfc0 run 0x56d8bc..0x56d8bf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:28.170405+00:00"
+      }
+    ]
   },
   {
     "va": 5680816,
@@ -81181,7 +81602,7 @@
   },
   {
     "va": 5680880,
-    "size": 1936,
+    "size": 1932,
     "name": "fcn.0056aef0",
     "extent_history": [
       {
@@ -81204,6 +81625,13 @@
         "reason": "Reviewed native extent repair: 0x56b666 holds the five four-byte case pointers (0x56b668 table after the 2-byte 8b ff align prefix) of the compiler jump table emitted for the function at 0x56aef0; every pointer targets code inside that function. The table and its trailing 0x90 alignment are part of the function's contribution, so the separate admitted inventory row is retired and the owning extent grows to the next function start.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T07:08:38.419410+00:00"
+      },
+      {
+        "old_size": 1936,
+        "new_size": 1932,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x567590 run 0x567fe8..0x567fef (8 x 0x90/0xcc) | 0x568ed0 run 0x5696f8..0x5696ff (8 x 0x90/0xcc) | 0x569ff0 run 0x56aeac..0x56aeaf (4 x 0x90/0xcc) | 0x56aef0 run 0x56b67c..0x56b67f (4 x 0x90/0xcc) | 0x56b700 run 0x56bf8c..0x56bf8f (4 x 0x90/0xcc) | 0x56bfd0 run 0x56c8e4..0x56c8ef (12 x 0x90/0xcc) | 0x56caf0 run 0x56ce6c..0x56ce6f (4 x 0x90/0xcc) | 0x56cfc0 run 0x56d8bc..0x56d8bf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:28.170408+00:00"
       }
     ]
   },
@@ -81230,8 +81658,17 @@
   },
   {
     "va": 5682944,
-    "size": 2192,
-    "name": "fcn.0056b700"
+    "size": 2188,
+    "name": "fcn.0056b700",
+    "extent_history": [
+      {
+        "old_size": 2192,
+        "new_size": 2188,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x567590 run 0x567fe8..0x567fef (8 x 0x90/0xcc) | 0x568ed0 run 0x5696f8..0x5696ff (8 x 0x90/0xcc) | 0x569ff0 run 0x56aeac..0x56aeaf (4 x 0x90/0xcc) | 0x56aef0 run 0x56b67c..0x56b67f (4 x 0x90/0xcc) | 0x56b700 run 0x56bf8c..0x56bf8f (4 x 0x90/0xcc) | 0x56bfd0 run 0x56c8e4..0x56c8ef (12 x 0x90/0xcc) | 0x56caf0 run 0x56ce6c..0x56ce6f (4 x 0x90/0xcc) | 0x56cfc0 run 0x56d8bc..0x56d8bf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:28.170411+00:00"
+      }
+    ]
   },
   {
     "va": 5685136,
@@ -81256,7 +81693,7 @@
   },
   {
     "va": 5685200,
-    "size": 2336,
+    "size": 2324,
     "name": "fcn.0056bfd0",
     "extent_history": [
       {
@@ -81286,6 +81723,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726431+00:00"
+      },
+      {
+        "old_size": 2336,
+        "new_size": 2324,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x567590 run 0x567fe8..0x567fef (8 x 0x90/0xcc) | 0x568ed0 run 0x5696f8..0x5696ff (8 x 0x90/0xcc) | 0x569ff0 run 0x56aeac..0x56aeaf (4 x 0x90/0xcc) | 0x56aef0 run 0x56b67c..0x56b67f (4 x 0x90/0xcc) | 0x56b700 run 0x56bf8c..0x56bf8f (4 x 0x90/0xcc) | 0x56bfd0 run 0x56c8e4..0x56c8ef (12 x 0x90/0xcc) | 0x56caf0 run 0x56ce6c..0x56ce6f (4 x 0x90/0xcc) | 0x56cfc0 run 0x56d8bc..0x56d8bf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:28.170414+00:00"
       }
     ]
   },
@@ -81312,7 +81756,7 @@
   },
   {
     "va": 5688048,
-    "size": 896,
+    "size": 892,
     "name": "fcn.0056caf0",
     "extent_history": [
       {
@@ -81349,6 +81793,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726435+00:00"
+      },
+      {
+        "old_size": 896,
+        "new_size": 892,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x567590 run 0x567fe8..0x567fef (8 x 0x90/0xcc) | 0x568ed0 run 0x5696f8..0x5696ff (8 x 0x90/0xcc) | 0x569ff0 run 0x56aeac..0x56aeaf (4 x 0x90/0xcc) | 0x56aef0 run 0x56b67c..0x56b67f (4 x 0x90/0xcc) | 0x56b700 run 0x56bf8c..0x56bf8f (4 x 0x90/0xcc) | 0x56bfd0 run 0x56c8e4..0x56c8ef (12 x 0x90/0xcc) | 0x56caf0 run 0x56ce6c..0x56ce6f (4 x 0x90/0xcc) | 0x56cfc0 run 0x56d8bc..0x56d8bf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:28.170418+00:00"
       }
     ]
   },
@@ -81382,7 +81833,7 @@
   },
   {
     "va": 5689280,
-    "size": 2304,
+    "size": 2300,
     "name": "fcn.0056cfc0",
     "extent_history": [
       {
@@ -81398,6 +81849,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726439+00:00"
+      },
+      {
+        "old_size": 2304,
+        "new_size": 2300,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x567590 run 0x567fe8..0x567fef (8 x 0x90/0xcc) | 0x568ed0 run 0x5696f8..0x5696ff (8 x 0x90/0xcc) | 0x569ff0 run 0x56aeac..0x56aeaf (4 x 0x90/0xcc) | 0x56aef0 run 0x56b67c..0x56b67f (4 x 0x90/0xcc) | 0x56b700 run 0x56bf8c..0x56bf8f (4 x 0x90/0xcc) | 0x56bfd0 run 0x56c8e4..0x56c8ef (12 x 0x90/0xcc) | 0x56caf0 run 0x56ce6c..0x56ce6f (4 x 0x90/0xcc) | 0x56cfc0 run 0x56d8bc..0x56d8bf (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:30:28.170421+00:00"
       }
     ]
   },
@@ -81424,8 +81882,17 @@
   },
   {
     "va": 5691936,
-    "size": 240,
-    "name": "fcn.0056da20"
+    "size": 232,
+    "name": "fcn.0056da20",
+    "extent_history": [
+      {
+        "old_size": 240,
+        "new_size": 232,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x56da20 run 0x56db08..0x56db0f (8 x 0x90/0xcc) | 0x56dc30 run 0x56de58..0x56de5f (8 x 0x90/0xcc) | 0x56e170 run 0x56e31c..0x56e31f (4 x 0x90/0xcc) | 0x56e980 run 0x56ee38..0x56ee3f (8 x 0x90/0xcc) | 0x56ee80 run 0x56fc64..0x56fc6f (12 x 0x90/0xcc) | 0x571240 run 0x571718..0x57171f (8 x 0x90/0xcc) | 0x573a80 run 0x573bfc..0x573bff (4 x 0x90/0xcc) | 0x5754e0 run 0x5756ec..0x5756ef (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:21:58.783515+00:00"
+      }
+    ]
   },
   {
     "va": 5692176,
@@ -81450,8 +81917,17 @@
   },
   {
     "va": 5692464,
-    "size": 560,
-    "name": "fcn.0056dc30"
+    "size": 552,
+    "name": "fcn.0056dc30",
+    "extent_history": [
+      {
+        "old_size": 560,
+        "new_size": 552,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x56da20 run 0x56db08..0x56db0f (8 x 0x90/0xcc) | 0x56dc30 run 0x56de58..0x56de5f (8 x 0x90/0xcc) | 0x56e170 run 0x56e31c..0x56e31f (4 x 0x90/0xcc) | 0x56e980 run 0x56ee38..0x56ee3f (8 x 0x90/0xcc) | 0x56ee80 run 0x56fc64..0x56fc6f (12 x 0x90/0xcc) | 0x571240 run 0x571718..0x57171f (8 x 0x90/0xcc) | 0x573a80 run 0x573bfc..0x573bff (4 x 0x90/0xcc) | 0x5754e0 run 0x5756ec..0x5756ef (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:21:58.783542+00:00"
+      }
+    ]
   },
   {
     "va": 5693024,
@@ -81504,8 +81980,17 @@
   },
   {
     "va": 5693808,
-    "size": 432,
-    "name": "fcn.0056e170"
+    "size": 428,
+    "name": "fcn.0056e170",
+    "extent_history": [
+      {
+        "old_size": 432,
+        "new_size": 428,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x56da20 run 0x56db08..0x56db0f (8 x 0x90/0xcc) | 0x56dc30 run 0x56de58..0x56de5f (8 x 0x90/0xcc) | 0x56e170 run 0x56e31c..0x56e31f (4 x 0x90/0xcc) | 0x56e980 run 0x56ee38..0x56ee3f (8 x 0x90/0xcc) | 0x56ee80 run 0x56fc64..0x56fc6f (12 x 0x90/0xcc) | 0x571240 run 0x571718..0x57171f (8 x 0x90/0xcc) | 0x573a80 run 0x573bfc..0x573bff (4 x 0x90/0xcc) | 0x5754e0 run 0x5756ec..0x5756ef (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:21:58.783546+00:00"
+      }
+    ]
   },
   {
     "va": 5694240,
@@ -81558,7 +82043,7 @@
   },
   {
     "va": 5695872,
-    "size": 1216,
+    "size": 1208,
     "name": "fcn.0056e980",
     "extent_history": [
       {
@@ -81574,6 +82059,13 @@
         "reason": "Reviewed native extent repair: 0x56ee22 holds the five four-byte case pointers (0x56ee24 table after the 2-byte 8b ff align prefix) of the compiler jump table emitted for the function at 0x56e980; every pointer targets code inside that function. The table and its trailing 0x90 alignment are part of the function's contribution, so the separate admitted inventory row is retired and the owning extent grows to the next function start.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T07:08:39.566425+00:00"
+      },
+      {
+        "old_size": 1216,
+        "new_size": 1208,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x56da20 run 0x56db08..0x56db0f (8 x 0x90/0xcc) | 0x56dc30 run 0x56de58..0x56de5f (8 x 0x90/0xcc) | 0x56e170 run 0x56e31c..0x56e31f (4 x 0x90/0xcc) | 0x56e980 run 0x56ee38..0x56ee3f (8 x 0x90/0xcc) | 0x56ee80 run 0x56fc64..0x56fc6f (12 x 0x90/0xcc) | 0x571240 run 0x571718..0x57171f (8 x 0x90/0xcc) | 0x573a80 run 0x573bfc..0x573bff (4 x 0x90/0xcc) | 0x5754e0 run 0x5756ec..0x5756ef (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:21:58.783550+00:00"
       }
     ]
   },
@@ -81600,7 +82092,7 @@
   },
   {
     "va": 5697152,
-    "size": 3568,
+    "size": 3556,
     "name": "fcn.0056ee80",
     "extent_history": [
       {
@@ -81623,6 +82115,13 @@
         "reason": "Reviewed native extent repair: 0x56fc44 holds the eight four-byte case pointers of the compiler jump table emitted for the function at 0x56ee80 (every pointer targets code in that function; the existing data row 0x56fc44 already records the layout view). The table and its trailing alignment are part of that function's contribution, so the separate inventory row is retired and the owning extent grows to the next function start.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T07:02:01.664118+00:00"
+      },
+      {
+        "old_size": 3568,
+        "new_size": 3556,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x56da20 run 0x56db08..0x56db0f (8 x 0x90/0xcc) | 0x56dc30 run 0x56de58..0x56de5f (8 x 0x90/0xcc) | 0x56e170 run 0x56e31c..0x56e31f (4 x 0x90/0xcc) | 0x56e980 run 0x56ee38..0x56ee3f (8 x 0x90/0xcc) | 0x56ee80 run 0x56fc64..0x56fc6f (12 x 0x90/0xcc) | 0x571240 run 0x571718..0x57171f (8 x 0x90/0xcc) | 0x573a80 run 0x573bfc..0x573bff (4 x 0x90/0xcc) | 0x5754e0 run 0x5756ec..0x5756ef (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:21:58.783554+00:00"
       }
     ]
   },
@@ -82104,8 +82603,17 @@
   },
   {
     "va": 5706304,
-    "size": 1248,
-    "name": "fcn.00571240"
+    "size": 1240,
+    "name": "fcn.00571240",
+    "extent_history": [
+      {
+        "old_size": 1248,
+        "new_size": 1240,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x56da20 run 0x56db08..0x56db0f (8 x 0x90/0xcc) | 0x56dc30 run 0x56de58..0x56de5f (8 x 0x90/0xcc) | 0x56e170 run 0x56e31c..0x56e31f (4 x 0x90/0xcc) | 0x56e980 run 0x56ee38..0x56ee3f (8 x 0x90/0xcc) | 0x56ee80 run 0x56fc64..0x56fc6f (12 x 0x90/0xcc) | 0x571240 run 0x571718..0x57171f (8 x 0x90/0xcc) | 0x573a80 run 0x573bfc..0x573bff (4 x 0x90/0xcc) | 0x5754e0 run 0x5756ec..0x5756ef (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:21:58.783557+00:00"
+      }
+    ]
   },
   {
     "va": 5707552,
@@ -82368,8 +82876,17 @@
   },
   {
     "va": 5716608,
-    "size": 384,
-    "name": "fcn.00573a80"
+    "size": 380,
+    "name": "fcn.00573a80",
+    "extent_history": [
+      {
+        "old_size": 384,
+        "new_size": 380,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x56da20 run 0x56db08..0x56db0f (8 x 0x90/0xcc) | 0x56dc30 run 0x56de58..0x56de5f (8 x 0x90/0xcc) | 0x56e170 run 0x56e31c..0x56e31f (4 x 0x90/0xcc) | 0x56e980 run 0x56ee38..0x56ee3f (8 x 0x90/0xcc) | 0x56ee80 run 0x56fc64..0x56fc6f (12 x 0x90/0xcc) | 0x571240 run 0x571718..0x57171f (8 x 0x90/0xcc) | 0x573a80 run 0x573bfc..0x573bff (4 x 0x90/0xcc) | 0x5754e0 run 0x5756ec..0x5756ef (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:21:58.783559+00:00"
+      }
+    ]
   },
   {
     "va": 5716992,
@@ -82534,8 +83051,17 @@
   },
   {
     "va": 5723360,
-    "size": 528,
-    "name": "fcn.005754e0"
+    "size": 524,
+    "name": "fcn.005754e0",
+    "extent_history": [
+      {
+        "old_size": 528,
+        "new_size": 524,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x56da20 run 0x56db08..0x56db0f (8 x 0x90/0xcc) | 0x56dc30 run 0x56de58..0x56de5f (8 x 0x90/0xcc) | 0x56e170 run 0x56e31c..0x56e31f (4 x 0x90/0xcc) | 0x56e980 run 0x56ee38..0x56ee3f (8 x 0x90/0xcc) | 0x56ee80 run 0x56fc64..0x56fc6f (12 x 0x90/0xcc) | 0x571240 run 0x571718..0x57171f (8 x 0x90/0xcc) | 0x573a80 run 0x573bfc..0x573bff (4 x 0x90/0xcc) | 0x5754e0 run 0x5756ec..0x5756ef (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:21:58.783562+00:00"
+      }
+    ]
   },
   {
     "va": 5723888,
@@ -82784,12 +83310,21 @@
   },
   {
     "va": 5727472,
-    "size": 608,
-    "name": "fcn.005764f0"
+    "size": 600,
+    "name": "fcn.005764f0",
+    "extent_history": [
+      {
+        "old_size": 608,
+        "new_size": 600,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x5764f0 run 0x576748..0x57674f (8 x 0x90/0xcc) | 0x576750 run 0x576adc..0x576adf (4 x 0x90/0xcc) | 0x5784d0 run 0x578858..0x57885f (8 x 0x90/0xcc) | 0x578a10 run 0x578e04..0x578e0f (12 x 0x90/0xcc) | 0x57df50 run 0x57e094..0x57e09f (12 x 0x90/0xcc) | 0x5806d0 run 0x580958..0x58095f (8 x 0x90/0xcc) | 0x5c99a0 run 0x5c9f08..0x5c9f0f (8 x 0x90/0xcc) | 0x5ce460 run 0x5ce704..0x5ce70f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:13:32.643018+00:00"
+      }
+    ]
   },
   {
     "va": 5728080,
-    "size": 912,
+    "size": 908,
     "name": "fcn.00576750",
     "extent_history": [
       {
@@ -82805,6 +83340,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726505+00:00"
+      },
+      {
+        "old_size": 912,
+        "new_size": 908,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x5764f0 run 0x576748..0x57674f (8 x 0x90/0xcc) | 0x576750 run 0x576adc..0x576adf (4 x 0x90/0xcc) | 0x5784d0 run 0x578858..0x57885f (8 x 0x90/0xcc) | 0x578a10 run 0x578e04..0x578e0f (12 x 0x90/0xcc) | 0x57df50 run 0x57e094..0x57e09f (12 x 0x90/0xcc) | 0x5806d0 run 0x580958..0x58095f (8 x 0x90/0xcc) | 0x5c99a0 run 0x5c9f08..0x5c9f0f (8 x 0x90/0xcc) | 0x5ce460 run 0x5ce704..0x5ce70f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:13:32.643038+00:00"
       }
     ]
   },
@@ -83167,7 +83709,7 @@
   },
   {
     "va": 5735632,
-    "size": 912,
+    "size": 904,
     "name": "fcn.005784d0",
     "extent_history": [
       {
@@ -83183,6 +83725,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726518+00:00"
+      },
+      {
+        "old_size": 912,
+        "new_size": 904,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x5764f0 run 0x576748..0x57674f (8 x 0x90/0xcc) | 0x576750 run 0x576adc..0x576adf (4 x 0x90/0xcc) | 0x5784d0 run 0x578858..0x57885f (8 x 0x90/0xcc) | 0x578a10 run 0x578e04..0x578e0f (12 x 0x90/0xcc) | 0x57df50 run 0x57e094..0x57e09f (12 x 0x90/0xcc) | 0x5806d0 run 0x580958..0x58095f (8 x 0x90/0xcc) | 0x5c99a0 run 0x5c9f08..0x5c9f0f (8 x 0x90/0xcc) | 0x5ce460 run 0x5ce704..0x5ce70f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:13:32.643043+00:00"
       }
     ]
   },
@@ -83209,7 +83758,7 @@
   },
   {
     "va": 5736976,
-    "size": 1024,
+    "size": 1012,
     "name": "fcn.00578a10",
     "extent_history": [
       {
@@ -83232,6 +83781,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.726520+00:00"
+      },
+      {
+        "old_size": 1024,
+        "new_size": 1012,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x5764f0 run 0x576748..0x57674f (8 x 0x90/0xcc) | 0x576750 run 0x576adc..0x576adf (4 x 0x90/0xcc) | 0x5784d0 run 0x578858..0x57885f (8 x 0x90/0xcc) | 0x578a10 run 0x578e04..0x578e0f (12 x 0x90/0xcc) | 0x57df50 run 0x57e094..0x57e09f (12 x 0x90/0xcc) | 0x5806d0 run 0x580958..0x58095f (8 x 0x90/0xcc) | 0x5c99a0 run 0x5c9f08..0x5c9f0f (8 x 0x90/0xcc) | 0x5ce460 run 0x5ce704..0x5ce70f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:13:32.643046+00:00"
       }
     ]
   },
@@ -84637,8 +85193,17 @@
   },
   {
     "va": 5758800,
-    "size": 336,
-    "name": "fcn.0057df50"
+    "size": 324,
+    "name": "fcn.0057df50",
+    "extent_history": [
+      {
+        "old_size": 336,
+        "new_size": 324,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x5764f0 run 0x576748..0x57674f (8 x 0x90/0xcc) | 0x576750 run 0x576adc..0x576adf (4 x 0x90/0xcc) | 0x5784d0 run 0x578858..0x57885f (8 x 0x90/0xcc) | 0x578a10 run 0x578e04..0x578e0f (12 x 0x90/0xcc) | 0x57df50 run 0x57e094..0x57e09f (12 x 0x90/0xcc) | 0x5806d0 run 0x580958..0x58095f (8 x 0x90/0xcc) | 0x5c99a0 run 0x5c9f08..0x5c9f0f (8 x 0x90/0xcc) | 0x5ce460 run 0x5ce704..0x5ce70f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:13:32.643048+00:00"
+      }
+    ]
   },
   {
     "va": 5759136,
@@ -85641,8 +86206,17 @@
   },
   {
     "va": 5768912,
-    "size": 656,
-    "name": "fcn.005806d0"
+    "size": 648,
+    "name": "fcn.005806d0",
+    "extent_history": [
+      {
+        "old_size": 656,
+        "new_size": 648,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x5764f0 run 0x576748..0x57674f (8 x 0x90/0xcc) | 0x576750 run 0x576adc..0x576adf (4 x 0x90/0xcc) | 0x5784d0 run 0x578858..0x57885f (8 x 0x90/0xcc) | 0x578a10 run 0x578e04..0x578e0f (12 x 0x90/0xcc) | 0x57df50 run 0x57e094..0x57e09f (12 x 0x90/0xcc) | 0x5806d0 run 0x580958..0x58095f (8 x 0x90/0xcc) | 0x5c99a0 run 0x5c9f08..0x5c9f0f (8 x 0x90/0xcc) | 0x5ce460 run 0x5ce704..0x5ce70f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:13:32.643051+00:00"
+      }
+    ]
   },
   {
     "va": 5769568,
@@ -95567,8 +96141,17 @@
   },
   {
     "va": 6068640,
-    "size": 1392,
-    "name": "fcn.005c99a0"
+    "size": 1384,
+    "name": "fcn.005c99a0",
+    "extent_history": [
+      {
+        "old_size": 1392,
+        "new_size": 1384,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x5764f0 run 0x576748..0x57674f (8 x 0x90/0xcc) | 0x576750 run 0x576adc..0x576adf (4 x 0x90/0xcc) | 0x5784d0 run 0x578858..0x57885f (8 x 0x90/0xcc) | 0x578a10 run 0x578e04..0x578e0f (12 x 0x90/0xcc) | 0x57df50 run 0x57e094..0x57e09f (12 x 0x90/0xcc) | 0x5806d0 run 0x580958..0x58095f (8 x 0x90/0xcc) | 0x5c99a0 run 0x5c9f08..0x5c9f0f (8 x 0x90/0xcc) | 0x5ce460 run 0x5ce704..0x5ce70f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:13:32.643053+00:00"
+      }
+    ]
   },
   {
     "va": 6070032,
@@ -96228,8 +96811,17 @@
   },
   {
     "va": 6087776,
-    "size": 688,
-    "name": "fcn.005ce460"
+    "size": 676,
+    "name": "fcn.005ce460",
+    "extent_history": [
+      {
+        "old_size": 688,
+        "new_size": 676,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x5764f0 run 0x576748..0x57674f (8 x 0x90/0xcc) | 0x576750 run 0x576adc..0x576adf (4 x 0x90/0xcc) | 0x5784d0 run 0x578858..0x57885f (8 x 0x90/0xcc) | 0x578a10 run 0x578e04..0x578e0f (12 x 0x90/0xcc) | 0x57df50 run 0x57e094..0x57e09f (12 x 0x90/0xcc) | 0x5806d0 run 0x580958..0x58095f (8 x 0x90/0xcc) | 0x5c99a0 run 0x5c9f08..0x5c9f0f (8 x 0x90/0xcc) | 0x5ce460 run 0x5ce704..0x5ce70f (12 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:13:32.643059+00:00"
+      }
+    ]
   },
   {
     "va": 6088464,
@@ -96380,8 +96972,17 @@
   },
   {
     "va": 6090480,
-    "size": 1648,
-    "name": "fcn.005ceef0"
+    "size": 1640,
+    "name": "fcn.005ceef0",
+    "extent_history": [
+      {
+        "old_size": 1648,
+        "new_size": 1640,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x5ceef0 run 0x5cf558..0x5cf55f (8 x 0x90/0xcc) | 0x5d6540 run 0x5d694c..0x5d694f (4 x 0x90/0xcc) | 0x5e8870 run 0x5e8b0c..0x5e8b0f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:08:25.506846+00:00"
+      }
+    ]
   },
   {
     "va": 6092128,
@@ -97067,8 +97668,17 @@
   },
   {
     "va": 6120768,
-    "size": 1040,
-    "name": "fcn.005d6540"
+    "size": 1036,
+    "name": "fcn.005d6540",
+    "extent_history": [
+      {
+        "old_size": 1040,
+        "new_size": 1036,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x5ceef0 run 0x5cf558..0x5cf55f (8 x 0x90/0xcc) | 0x5d6540 run 0x5d694c..0x5d694f (4 x 0x90/0xcc) | 0x5e8870 run 0x5e8b0c..0x5e8b0f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:08:25.506865+00:00"
+      }
+    ]
   },
   {
     "va": 6121808,
@@ -99482,8 +100092,17 @@
   },
   {
     "va": 6195312,
-    "size": 672,
-    "name": "fcn.005e8870"
+    "size": 668,
+    "name": "fcn.005e8870",
+    "extent_history": [
+      {
+        "old_size": 672,
+        "new_size": 668,
+        "reason": "reviewed tail padding: trailing 0x90/0xCC run after the last in-function four-byte jump-table dword; trim to the run start: 0x5ceef0 run 0x5cf558..0x5cf55f (8 x 0x90/0xcc) | 0x5d6540 run 0x5d694c..0x5d694f (4 x 0x90/0xcc) | 0x5e8870 run 0x5e8b0c..0x5e8b0f (4 x 0x90/0xcc)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-02T22:08:25.506870+00:00"
+      }
+    ]
   },
   {
     "va": 6195984,
