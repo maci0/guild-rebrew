@@ -98,8 +98,9 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 	char slot258[0x40];
 	char slot298[0x40];
 	__declspec(align(8)) struct {
-		/* native scratch 0x2a8..0x397; its users are not yet identified */
-		char unrecovered[0x100];
+		/* native scratch 0x2a0..0x397; its users are not yet identified.
+		 * Sized so buf lands on the native 0x398 and the frame on 0x3330. */
+		char unrecovered[0xf8];
 		char buf[0x17d0];
 		char tmp[0x17d0];
 	} text;

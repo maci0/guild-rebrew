@@ -16404,3 +16404,19 @@ fcn_004321f0, the final setpos/setrot and fcn_00433780. The remaining first-orde
 frame: native allocates 0xb0 and keeps about fifteen scalars in frame slots, while our build
 spills only the overflow and allocates 0xec, so byte 2 (the immediate) is the first difference
 and everything after inherits it.
+
+## 2026-11-02 — formatter text block on native offsets
+
+`0x51AF00` 1014 to 1017 with the object at 6455 and the first mismatch still the frame immediate
+at offset 7 (ours 0x3330, native 0x332c). One edit: the aligned aggregate's pad
+`unrecovered[0x100]` became `[0xf8]`, which had been holding the whole text block eight bytes
+high; now buf is at 0x398 with 24 references and tmp at 0x1b68 with 31, so every text
+displacement equals native's and the file's comment is finally true. Table offsets unmoved
+0x188c and 0x18e4, selector byte-identical, rep movs held at 12 total and 6 movsd. Reverted:
+unsigned /3 and %3 in both I regroup paths (956 match, object 6447, although native does use
+`mul 0xaaaaaaab`/`shr`, signed matches more at this layout); a staged `e = i - 1` before T's
+sprintf (byte-identical); and moving the `i > 0x17d0` test into the ordinary-char branch (780
+match, object 6467, tables slid to 0x1898). Extent accounting: the negative ones are shared-tail
+effects (G owns two inline 16-instruction tails in native, w ends in its own 16-instruction copy
+sequence, B and percent and the ampersand group are the same effect), while the positive ones are
+staging in a, f, T, N and r that native does not have.
