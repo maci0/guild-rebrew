@@ -15732,3 +15732,18 @@ already writes the terminating NUL). The jump table at 0x16E8, the 83-byte char 
 5864, and the object matches native size at 6043 stored bytes. Block2 is still about 66
 bytes short and the r!=-1 / r==-1 register-shape gaps (native spills p to [esp+0x18] and
 divides unsigned) remain.
+
+## 2026-11-02 — terrain builder rebuilt as C
+
+`0x43C640` replaced its decompiler-shaped body with a whole-body C reconstruction: Tile,
+Region and RegionRecord structs with every displacement verified, the per-cell edge-bit
+pass, the four allocations and 256-mask overdraw search, the region-record init, and both
+material phases including the -0x1000000 vertex bias, the flags&0x80 winding swap and the
+0xFF000000 sentinel. Fills use memset and memcpy, never inline assembly. Verdict moves
+from 391 to 392 and the object from 5885 to 5102 bytes against native 5419, so the
+remaining 317-byte gap is the register-home wall (native keeps t in esi and y in edi,
+ours puts t in ebx) and the memset align-up prelude documented in
+docs/codegen-walls.md sections 1 and 6b, not missing transcription. One deliberate
+deviation: native frees p08 twice, and including the dead duplicate grows the object to
+5121 while dropping match to 374, so the duplicate is omitted and the rest of the order
+follows native.
