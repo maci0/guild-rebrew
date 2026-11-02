@@ -19517,3 +19517,29 @@ the reference shares one epilogue at 0x575414 where our arms emit their own. Unr
 correctly are fcn_00508e40, fcn_00509570, fcn_005015e0, fcn_005985f0, fcn_00442be0, fcn_0051af00, fcn_00545e80,
 fcn_005001e0 and the CRT sprintf at 0x64d41a, with the 1.8 compiler literal unbound as a data row. Backups in
 .scratch/row5744c0/.
+
+## 2026-11-03 — inventory switch cases reach native lengths
+
+`0x561380` 935 to 1248 with object 3592 against native 3600, 70 relocations, frame `sub esp,0x5e4` held and lint
+clean. Case lengths now read 0xd8, 0x5a, 0x86, 0x122 against native 0x121, 0xc5, 0xb4, 0x41c, 0x47f against
+native 0x47c, 0x80 exactly and 0x29, with cases 7, 8, 4 and 3 starting one byte late because of case 3's extra
+byte. Four edits did it. Case 3's tail uses `q = p + 0x52` with q-relative stores `q[0x1e] = 7` and
+`q[0x7a] = pos[3] + 4` plus four scalar colour stores instead of the packed copy, taking case 3 from 0x124 to
+0x122. Case 5's position zeros are int stores `*(int*)(pos + 3) = 0;` also in cases 5 and 7, which make MSVC
+materialise a constant-zero register and spill v10, taking case 5 from 0x481 to 0x47d or 0x47f depending on block
+order. Case 5's message block condition is inverted to `if (p[0xc2] == 0) { msg init } else { names }`, matching
+native's block order so the post-else join jump becomes a short `eb`. And case 6's second check is written
+`if (cond != 0) { success; goto label_56211d; } else goto label_56148f;`, which reaches 0x80 exactly and stops
+emitting the duplicated inline fail block. Not reached: case 5's last three bytes and case 3's last byte. Case 5
+is a register-role inversion, with the compiler putting the constant zero in ebp and spilling v10 to 0x18(%esp)
+where native keeps v10 in ebp, the zero in ebx and the spill at 0x10; the cost appears at the join as
+`cmp %ebp,0x18(%esp)` for four bytes against `test %ebp,%ebp` for two and at the tail as
+`mov 0x28(%esp),%eax; push %eax` against `push %ebp`, four more. The root cause is our r==0 fail block emitting
+`mov %ebx,0x70`, which needs minus one live across case 5's position init where native uses the immediate form and
+frees ebx; forcing the immediate form by splitting that block gives case 5 0x478 but perturbs case 4 and case 6,
+taking case 6 to 0x7c. Case 3 is missing native's `add esi,0x52`, since every source order tried either
+strength-reduces q into p-relative disp8 for 0x122 or spends the byte on a lea or `mov esi,ecx` for 0x123, and
+the packed-struct copy costs two to four. Alternates on disk: v28_alt_msgorder.c at 1236 with case 5 0x47d,
+v_z3a at 1031 with the object exactly 3600, v_z4q at 1105, z4f with float zeros at case 5 0x48a, and v_z4s.c
+with case 5 0x478 but case 6 0x7c. Tools: vb.sh, cases.py and d.py in .scratch/r561380/, with the notes in
+NOTES.md round 6 and the current source v28_kept_round6.c.

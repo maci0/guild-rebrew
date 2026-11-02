@@ -130,6 +130,7 @@ void __cdecl fcn_00561380(void *a0)
 	case 3:
 		{
 			unsigned char *r;
+			unsigned char *q;
 
 			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
 			if (r == 0 || *(unsigned short *)(r + 0x27) == 0xffff)
@@ -143,9 +144,13 @@ void __cdecl fcn_00561380(void *a0)
 					*(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4),
 					*(int *)((unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0) + 4),
 					*(int *)(p + 0xac));
-				*(int *)(p + 0x70) = 7;
-				*(int *)(p + 0xcc) = *(int *)(*(unsigned char **)(pos + 3) + 4);
-				*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
+				q = (unsigned char *)(p + 0x52);
+				*(int *)(q + 0x1e) = 7;
+				*(int *)(q + 0x7a) = *(int *)(*(unsigned char **)(pos + 3) + 4);
+				*(int *)q = g_7f4c00;
+				*(int *)(q + 4) = g_7f4c04;
+				*(int *)(q + 8) = g_7f4c08;
+				*(unsigned short *)(q + 0xc) = g_7f4c0c;
 				return;
 			}
 			fcn_004c5ed0(*(int *)(p + 0xc4), g_68bef4, 1);
@@ -294,11 +299,11 @@ void __cdecl fcn_00561380(void *a0)
 			pos[0] = -243.0f;
 			pos[1] = -90.0f;
 			pos[2] = 190.0f;
-			pos[3] = 0.0f;
+			*(int *)(pos + 3) = 0;
 			pos[4] = -50.0f;
-			pos[5] = 0.0f;
+			*(int *)(pos + 5) = 0;
 			pos[6] = 38.0f;
-			pos[7] = 0.0f;
+			*(int *)(pos + 7) = 0;
 			v24 = 1.0f;
 			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
 			if (r == 0)
@@ -313,14 +318,7 @@ void __cdecl fcn_00561380(void *a0)
 			model = (unsigned char *)*(int *)(r + 0x61);
 			if (model == 0)
 				goto label_562049;
-			if (*(unsigned char *)(p + 0xc2) != 0) {
-				n = gm_RandomMod(3) & 0xffff;
-				model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, &names[n][0]);
-				if (model != 0)
-					fcn_00455350((char *)model, (char *)model + 0x4c, pos);
-				else
-					model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, "dummy_TUER");
-			} else {
+			if (*(unsigned char *)(p + 0xc2) == 0) {
 				*(unsigned char *)(msg + 4) = 0x4f;
 				*(int *)(msg + 8) = *(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4);
 				*(int *)(msg + 0xc) = -1;
@@ -334,6 +332,13 @@ void __cdecl fcn_00561380(void *a0)
 				query = (unsigned char *)(lpGebaeudePROT + (unsigned char)*(unsigned char *)r * 0x24d);
 				*(int *)(msg + 0x5c) = (gm_RandomMod(0x10) & 0xffff) - *(unsigned char *)(query + 0x247) * 3 + 0x14;
 				fcn_004c5530(msg);
+			} else {
+				n = gm_RandomMod(3) & 0xffff;
+				model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, &names[n][0]);
+				if (model != 0)
+					fcn_00455350((char *)model, (char *)model + 0x4c, pos);
+				else
+					model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, "dummy_TUER");
 			}
 			if (model == 0 || v10 != 0)
 				goto label_562049;
@@ -368,13 +373,13 @@ void __cdecl fcn_00561380(void *a0)
 				*(int *)(p + 0x70) = -1;
 				return;
 			}
-			if (*(int *)(*(int *)(r + 0x184) + 0x128) == 0) {
-				*(int *)(p + 0x70) = -1;
-				return;
+			if (*(int *)(*(int *)(r + 0x184) + 0x128) != 0) {
+				*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
+				fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
+				goto label_56211d;
+			} else {
+				goto label_56148f;
 			}
-			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
-			fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
-			goto label_56211d;
 		}
 	case -2:
 	case -1:
