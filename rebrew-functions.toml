@@ -423726,13 +423726,13 @@ name = "fcn_00581e20"
 file = "src/Develop/Units/m_alloc/GOLDTL.fcn_00581e20.c"
 symbol = "_fcn_00581e20"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:36:09+00:00"
-status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-11-02T09:32:52+00:00"
+status = "NEAR_MATCHING"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00581e20".verification]
-source_hash = "0b7eeb454bae881e0c853db223f454354e150c949cf45c3c5346887d87e4ebe2"
+source_hash = "77f37415714367576321ae7162e88393e71bf86c779ee816166176b69b903194"
 reference_hash = "b33d73352a0e7a40557519c00a196b0da35753846c06d588bfc516b5d25e47f3"
 reference_size = "5386"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423743,15 +423743,21 @@ module = "GOLDTL"
 va = "0x581e20"
 context_hash = ""
 defines = "[]"
-input_hash = "586db8f222102ddc19d5e3864a58d8f5a3e568c6d38f788dd1831acc93b26067"
-status = "SIZE_MISMATCH"
+input_hash = "95052ca5050a20f11d8e9e5ed0d53b8e36ce7fe576a4047ec0f371c8cf2760f4"
+status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-02T09:22:11+00:00"
+measured_at = "2026-11-02T09:32:52+00:00"
 
 [["GOLDTL.0x00581e20".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-19T22:14:36.468542+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00581e20".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-02T09:32:52.715930+00:00"
 updated_by = "test"
 ["GOLD.0x00579830"]
 size = 5377

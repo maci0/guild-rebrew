@@ -15820,3 +15820,39 @@ s20==1 message pump and the loop-tail block). All 43 callees resolve to project
 definitions. Missing: the s20==0 and default packet cases plus the merge walks in
 0x4db774..0x4dc146, about 868 bytes. The frame stays 0x900 with the prefix equal to
 0x9b; the six order stores keep the disp8-versus-disp32 difference, a known layout wall.
+
+## 2026-11-02 — `0x581E20` reaches native size
+
+`0x581E20` 4025 to 5282 of 5386 bytes (98.1 percent), object 5442 to 5386, which is the
+native size. Four source changes, each checked with `rebrew test`:
+- `[0x19][0xb]` of the second float chain stored the node pointer where native stores
+  `0x43340000`. The literal makes one value live across both else bodies, so the
+  allocator hoists `mov edx,0x43340000` before the `cmp` at 0xb90, as native does.
+- `[0x19][0x2c..0x32]` of the later chain stored the pointer in the same way; native
+  repeats `0x44670000` there through one register. Substituting the literal raised match
+  by 109 bytes with size held.
+- The final allocation check is now `if (p[0x1c] == 0) { fail: ... }`. That emits the
+  short `jne` over the inline fail block and puts the tail out of line (native layout,
+  4 bytes smaller).
+- The tail assigns `p = (int*) p[0x1c]` and stores through `p`, so the block base stays
+  in a register instead of reloading `[esi+0x64]` per store (52 bytes smaller).
+Recheck: `.venv/bin/rebrew test src/Develop/Units/m_alloc/GOLDTL.fcn_00581e20.c --va
+0x00581e20 --size 5386 --no-promote --json`. The remaining 104 mismatched bytes are
+register homes: the pointer and first constant are swapped at 0x888 and 0x9ba (base in
+ecx natively, edx here), the base rotation that starts at 0xba3 begins on ecx natively
+and eax here, and the `0x44670000`/`0x447f0000` materializations in 0xec7..0xef0 sit on
+opposite sides of the compare.
+
+## 2026-11-02 — allocator node walker reaches native size
+
+`0x581E20` moves from SIZE_MISMATCH 4025 of 5442 to NEAR_MATCHING 5282 of 5386, with the
+object exactly 5386 bytes. Four edits in the constant family: the `[0x19][0xb]` store of
+the second float chain and the four later `[0x19][0x2c..0x32]` stores now use the compiler
+literals `0x43340000` and `0x44670000` instead of copying `p[0x19]`, which makes each value
+one live range and lets the allocator hoist the materialization before the compare exactly
+as native does at 0xb90 and 0xac; the last allocation check is `if (p[0x1c] == 0)` with the
+label on the first statement inside the block, giving the short jump over the inline fail
+body; and the tail assigns `p = (int*) p[0x1c]` so the base stays in a register instead of
+reloading [esi+0x64] per store. The remaining 104 bytes are register homes only (the
+0x888 pair swap, the 0x320 base rotation, the deferred third constant, and the 0xec7
+hoist order).
