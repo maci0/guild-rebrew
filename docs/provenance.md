@@ -16589,3 +16589,25 @@ route loop terminal block with cnt<3 first in its head. Remaining: the first rou
 s1 into s2, and the town and prod loops must target s2, which together account for three missing
 calls (+1 dfd0, +1 sprintf, +1 fcn_004c51f0); the producer loop's register rotation is allocator
 colouring, documented and not chased.
+
+## 2026-11-02 — transport scalar region and escape cost
+
+`0x4DA690` 817 to 994 with the object falling 7651 to 7461 (404 over), frame 0x900, prefix 0x9b
+and the four pushes held. The escape block went from 62 arguments in three variadic calls (492
+bytes) to 53 arguments in three calls of 21 (about 424): 47 real locals plus six never-used pad
+ints. Fifteen real escapes were dropped, thirteen whose addresses the body already takes (s4C,
+s50, s54, s58, s74, s84, s98, s9C, sC0, sD0, sD8, sF4, s110) plus s3C and s28; the six pads are a
+frame knob, since the thirteen drops alone free six slots and move the frame to 0x8e8 with sitzung
+at 0x1cc, and the pads restore 0x900 and 0x1e4. Reverted with measurements: the no-guard block
+(993/7454), one-call and two-call grouping (947/7484, 960/7456), and adding any redundant escape
+back (best 995 at 7469 for sD8). An escape argument costs about 8 bytes (lea with disp32 plus
+push); per-call grouping of 21 is best (20 gives 906, 22 gives 992, 24 gives 993, 26 and 30 give
+961). A single-drop sweep over the 47-set shows every other real escape hurts match badly (809 to
+937), so this is a local optimum; pairs were not searched. 49 pad ints with zero real escapes also
+gives frame 0x900 and prefix 0x9b but only 6647 bytes and 744 match, so real-local escapes are not
+frame ballast: they reproduce native's memory-operand codegen, about 822 bytes of body. One
+escaping pad array does not move flug/sitzung/mid/a0c, and 62 volatile scalars give frame 0x868
+because VC6 shares volatile slots across disjoint lifetimes. Next path: native's scalar region
+holds small int arrays around 0x54, 0x64, 0x74, 0x84, 0x98, 0xb0, 0xcc and 0xf4, so the source's
+`((int*)&sXX)[i]` casts are probably real array declarations, which would fill the scalar region
+with the arrays themselves instead of escaped scalars.

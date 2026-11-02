@@ -119,6 +119,12 @@ void __cdecl fcn_004da690(unsigned int *a0)
     int s108;
     int s10C;
     int s110;
+    int pd0;
+    int pd1;
+    int pd2;
+    int pd3;
+    int pd4;
+    int pd5;
     int order[6];
     char sitzung[6][0x30] = {
         "Sitzung_Wohnsitz.ed3",
@@ -809,8 +815,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
     fcn_0057e880(0x30, 0, 0, 0);
 
     if (a0[4] == 0x11111111u) {
-        fcn_004e4de0((int)&s00, (int)&s04, (int)&s08, (int)&s0C, (int)&s10, (int)&s14, (int)&s18, (int)&s1C, (int)&s20, (int)&s24, (int)&s28, (int)&s2C, (int)&s30, (int)&s34, (int)&s38, (int)&s3C, (int)&s40, (int)&s44, (int)&s48, (int)&s4C, (int)&s50);
-        fcn_004e4de0((int)&s54, (int)&s58, (int)&s5C, (int)&s60, (int)&s64, (int)&s68, (int)&s70, (int)&s6C, (int)&s74, (int)&s78, (int)&s80, (int)&s84, (int)&s88, (int)&s8C, (int)&s90, (int)&s94, (int)&s98, (int)&s9C, (int)&sA0, (int)&sA4, (int)&sC0);
-        fcn_004e4de0((int)&sC4, (int)&sC8, (int)&sCC, (int)&sD0, (int)&sD4, (int)&sD8, (int)&sDC, (int)&sE0, (int)&sE4, (int)&sE8, (int)&sEC, (int)&sF0, (int)&sF4, (int)&sF8, (int)&sFC, (int)&s100, (int)&s104, (int)&s108, (int)&s10C, (int)&s110);
+        fcn_004e4de0((int)&s00, (int)&s04, (int)&s08, (int)&s0C, (int)&s10, (int)&s14, (int)&s18, (int)&s1C, (int)&s20, (int)&s24, (int)&s2C, (int)&s30, (int)&s34, (int)&s38, (int)&s40, (int)&s44, (int)&s48, (int)&s5C, (int)&s60, (int)&s64, (int)&s68);
+        fcn_004e4de0((int)&s70, (int)&s6C, (int)&s78, (int)&s80, (int)&s88, (int)&s8C, (int)&s90, (int)&s94, (int)&sA0, (int)&sA4, (int)&sC4, (int)&sC8, (int)&sCC, (int)&sD4, (int)&sDC, (int)&sE0, (int)&sE4, (int)&sE8, (int)&sEC, (int)&sF0, (int)&sF8);
+        fcn_004e4de0((int)&sFC, (int)&s100, (int)&s104, (int)&s108, (int)&s10C, (int)&pd0, (int)&pd1, (int)&pd2, (int)&pd3, (int)&pd4, (int)&pd5);
     }
 }
