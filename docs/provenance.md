@@ -18997,3 +18997,35 @@ from a size class below four bytes or a compiler internal reserve, and it was no
 Also confirmed rather than assumed: MSVC defers and merges `add esp` across consecutive calls, so the
 target's deferred-pop pattern needs no special source shape, and `sub esp` equals the byte sum with no
 rounding. Backups in .scratch/r561380/ (orig.c and v1_16.22.c).
+
+## 2026-11-03 — season setup colouring measured as an order list
+
+`0x540020` keeps its corrected state at 3872 with object 4393, 258 relocations, frame 0x3b8 and the first
+mismatch at 0xb15; round four kept no edit and the tree is restored to base_v4.c. The allocator was measured
+rather than guessed: the register preference order is esi, edi, ebp, ebx, with ebp preferred over ebx, which is
+what makes the three-candidate cases fit, and every build fits a per-web priority list. The current state has
+obj, w, leftw, n in that order giving esi, edi, ebp, ebx; dropping w's web gives obj, leftw, n for esi, edi,
+ebp; divisions on left give obj, w, n; the 3921 baseline had w, leftw, obj, n for esi, edi, ebp, ebx; and
+native needs obj, leftw, n, w. So w must fall from position two to last, below n, not merely below leftw, and
+obj keeps esi because it inherits the register from the pre-loop walk at 0xa7b. Shapes measured inert for the
+priority list with size and prefix held: a 16-bit-valued w, `unsigned short w` in a block, `short w`, w in a
+nested block, renaming the loop w, renaming or splitting the early w, function-scope leftw in three
+declaration positions, loop-head statement permutations (prefix 0xb0c or 0xb14), merged `left = leftw = ...`,
+`75 * fcn(...)`, `2 * leftw / n`, `leftw << 1`, comparison operand order, hoisting w's definition out of the
+gate block (the compiler sinks it back), a redundant `left = leftw` at the loop tail, using leftw after the
+second loop (4414), splitting leftw into lwt at the second loop head, and swapping the [esi+1] and ent store
+order. Making w memory-resident or inlined gives the wanted leftw in edi and n in ebp but deletes w's register
+(4391 or 4400) or n's ebx, so it is not the answer. New native fact: fcn_0042e410 returns a 16-bit type, since
+native emits `mov bx,ax; push esi; and ebx,0xffff; call; add esp,8; cmp eax,ebx`; declaring
+`unsigned short __cdecl fcn_0042e410(int);` with `w = (int)(fcn_0042e410(0x5a) & 0xffff)` reproduces that
+sequence exactly with the same scheduling but costs one byte for object 4394, which balances against leftw in
+edi dropping the `+0x0` displacement that ebp forces on `lea eax,[ebp+ebp*1+0x0]` at 0xe17, so the role flip
+and the 16-bit callee fix are both needed to hold 4393 and the role flip comes first. A role-normalised
+structural diff of the loop shows the remaining non-register differences are only the scheduling of
+`mov cl,[0x773d75]` with its and, the ENTCLASS encoding `[eax+ecx*1+0x247]` against native's
+`[ecx+eax+0x247]`, and the [esi+1] load placement in the evs fill; the loop CFGs are identical with the back
+edge at 0xb3b, so the colouring difference is not a CFG artifact. Artifacts: ROUND4.md with the full measured
+table, roles.py, exp.py and xloop.py, plus keep_wret_tmp.c for the 4394 16-bit callee variant. Recommended
+next attempt: treat the colouring as opaque and either find a shape that moves w below n, with the untested
+family being a change to how n's 2/4/8 accumulation interacts with the divisor, such as accumulating a
+multiplier instead of n, or accept the current roles and push on the remaining per-instruction differences.
