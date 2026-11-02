@@ -16892,3 +16892,29 @@ access lands 8 bytes above the native slot (v34 at S0-0x220 against native S0-0x
 a full-body rewrite moving the compiler temporaries into struct members at offsets 0, 0x8 and 0xc.
 The 0x468554 label block and 0x468700 icon text block remain block-level, where native reloads
 ebx = ARG1 and uses dword loads at frame offsets 2/1/0 for the 0x47b9a0 colour arguments.
+
+## 2026-11-02 — vote tables get owners and symbol reads
+
+The three vote tables behind `0x4DCF50` now have managed data rows, written through
+`rebrew data set` (locked writer, no hand edit): `GOLDTL.0x009b0e30` as `g_9b0e30`, an object in
+.bss of size 0x8d18 (42 records of 0x35c; 43 would end at 0x9b9e8c and overlap the recorded BSS
+object g_9b9e40, so 42 is the maximum that fits), plus aliases `GOLDTL.0x009b0eb4` (`g_9b0eb4`,
+size 0x8c94, 0x84 into the record), `GOLDTL.0x009b1210` (`g_9b1210`, size 0x8938, 0x3e0 in) and
+`GOLDTL.0x009b156c` (`g_9b156c`, size 0x85dc, 0x73c in), each with the native read sites in its
+evidence note. `rebrew lint` exits 0 with no W037 or W038, and `rebrew data list` does not show
+them because it scans source bindings and these rows have no defining source.
+
+The source now reads those votes through the extern arrays instead of literal addresses, which is
+the native shape: MSVC 6 treats a load from a literal address as invariant across calls and keeps
+one load, while a relocatable symbol load is invalidated at each call and re-emitted where native
+has it. With the reloads, the verdict arm in native order, the guilty handle loads at the top of
+the arm, the guarded do-while search, a signed char load for 0x773d75 at all nine sites, the
+remaining literal vote reads converted, and `*(short*) p38` at the final fcn_004ff210 call, the
+vote segments 246, 256 and 267 become instruction-identical, 240 and 265 sit at -3 and 254 at -3
+against base -9/-10/-3/-8/-9/-8. The kept state is 1811 match at 8809 bytes, eleven over native,
+where the base held exactly 8798 only by keeping the non-native arm order. The residue is
+register allocation: tail segments 277 (+5), 296 (+3) and 304 (+3) spill p34 and p38 where native
+keeps them in edi and ebx, offsets in 283 (-4) and 293/294 (-2 each) run the other way, and the
+three vote blocks still lack native's `mov ecx,eax; add esp,4` because our pops are deferred.
+Fixing 277, 296 and 304 to native sizes would give exactly 8798. Candidates saved: best_symbol_8809.c
+(kept), symbol_allsym_8811.c, schar_8808.c, swap_arms.c, dowhile.c, keep_base_1982.c.

@@ -4,6 +4,9 @@ extern int g_6b8010;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern float g_662b28;
 extern unsigned char g_9a3800[];
+extern char g_9b0eb4[];
+extern char g_9b1210[];
+extern char g_9b156c[];
 
 int __cdecl fcn_004f4830(int idx, void* dst);
 void __cdecl fcn_004e4450(int k, int flag);
@@ -74,7 +77,7 @@ int __cdecl fcn_004dcf50(int a0)
 	int i;
 	int j;
 	int n;
-	int cnt;
+	unsigned int cnt;
 	float f;
 	float fsum;
 	char* p34;
@@ -341,7 +344,7 @@ int __cdecl fcn_004dcf50(int a0)
 				}
 			}
 		}
-		v1 = *(int*) (0x9b0eb4 + idx * 0x35c);
+		v1 = *(int*) (g_9b0eb4 + idx * 0x35c);
 		v2 = *(int*) (0x9b0eb8 + idx * 0x35c);
 		msg.f0c = *(float*) &v2;
 		fcn_004e4450(g_68bfc0, 1);
@@ -396,7 +399,7 @@ int __cdecl fcn_004dcf50(int a0)
 				}
 			}
 		}
-		st = *(int*) (0x9b0eb4 + i * 0x35c);
+		st = *(int*) (g_9b0eb4 + i * 0x35c);
 		fcn_004e4450(g_68bfc0, 1);
 		d2_SetForm(g_68bfc0, 0);
 		io_AppendText(0x6811b0);
@@ -443,11 +446,11 @@ int __cdecl fcn_004dcf50(int a0)
 			if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 				div3 = msg.pad[1] / 3;
 				fcn_004c51a0(*(int*) (p3c + 4), *(int*) (p34 + 4),
-					*(unsigned char*) 0x773d75, div3);
+					*(signed char*) 0x773d75, div3);
 				fcn_004c51a0(*(int*) (p40 + 4), *(int*) (p34 + 4),
-					*(unsigned char*) 0x773d75, div3);
+					*(signed char*) 0x773d75, div3);
 				fcn_004c51a0(*(int*) (p44 + 4), *(int*) (p34 + 4),
-					*(unsigned char*) 0x773d75, div3);
+					*(signed char*) 0x773d75, div3);
 			}
 
 			/* 0x4de05c */
@@ -473,7 +476,7 @@ int __cdecl fcn_004dcf50(int a0)
 			}
 			fcn_004e44f0(h);
 			h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
-			st = *(int*) (0x9b0eb4 + i * 0x35c);
+			st = *(int*) (g_9b0eb4 + i * 0x35c);
 			msg.pad[3] = st & 0xf;
 			if (msg.pad[3] >= 6) {
 				msg.pad[3] = 6;
@@ -509,7 +512,7 @@ int __cdecl fcn_004dcf50(int a0)
 					}
 				}
 			}
-			msg.pad[5] = *(int*) (0x9b0eb4 + i * 0x35c);
+			msg.pad[5] = *(int*) (g_9b0eb4 + i * 0x35c);
 			end = str + strlen(str);
 			nam = (char*) fcn_004fda30(*(unsigned short*) pent);
 			if (nam != 0) {
@@ -646,16 +649,16 @@ int __cdecl fcn_004dcf50(int a0)
 	io_AppendText(0x6811b0);
 	io_AppendText(0x1528, *(unsigned short*) p3c);
 	fcn_004e4c90(2);
-	acc = *(int*) (0x9b0eb4 + i * 0x35c);
-	votes = fcn_004e6cb0(3) + acc * 3;
+	acc = *(int*) (g_9b0eb4 + i * 0x35c);
+	votes = fcn_004e6cb0(3) + *(int*) (g_9b0eb4 + i * 0x35c) * 3;
 	fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_6_ABSTIMMUNG_ERGEBNISSE", votes, 0x64);
-	io_AppendText(*(int*) (0x9b0eb4 + i * 0x35c) + 0x152c);
+	io_AppendText(acc + 0x152c);
 	fcn_004e4c90(2);
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "1");
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "1");
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
 	if (msg.id[3] != -1) {
-		x74 = *(int*) (0x9b1210 + i * 0x35c);
+		x74 = *(int*) (g_9b1210 + i * 0x35c);
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-1.esc", (int) "");
 		d2_SetForm(g_68bfc0, 0);
 		nam = gm_LookupEntityRecordById(msg.id[3]);
@@ -663,14 +666,14 @@ int __cdecl fcn_004dcf50(int a0)
 		io_AppendText(0x1528, *(unsigned short*) nam);
 		fcn_004e4c90(2);
 		io_AppendText(x74 + 0x152c);
-		votes = fcn_004e6cb0(3) + x74 * 3;
+		votes = fcn_004e6cb0(3) + *(int*) (g_9b1210 + i * 0x35c) * 3;
 		fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_6_ABSTIMMUNG_ERGEBNISSE", votes, 0x64);
 		fcn_004e4c90(2);
+		acc += *(int*) (g_9b1210 + i * 0x35c);
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "2");
-		acc += *(int*) (0x9b1210 + i * 0x35c);
 	}
 	if (msg.id[4] != -1) {
-		x74 = *(int*) (0x9b156c + i * 0x35c);
+		x74 = *(int*) (g_9b156c + i * 0x35c);
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-2.esc", (int) "");
 		d2_SetForm(g_68bfc0, 0);
 		nam = gm_LookupEntityRecordById(msg.id[4]);
@@ -678,60 +681,37 @@ int __cdecl fcn_004dcf50(int a0)
 		io_AppendText(0x1528, *(unsigned short*) nam);
 		fcn_004e4c90(2);
 		io_AppendText(x74 + 0x152c);
-		votes = fcn_004e6cb0(3) + x74 * 3;
+		votes = fcn_004e6cb0(3) + *(int*) (g_9b156c + i * 0x35c) * 3;
 		fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_6_ABSTIMMUNG_ERGEBNISSE", votes, 0x64);
 		fcn_004e4c90(2);
+		acc += *(int*) (g_9b156c + i * 0x35c);
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "2");
-		acc += *(int*) (0x9b156c + i * 0x35c);
 	}
 	/* 0x4deb1c */
 	fcn_004e4b00(hStrafe);
 	fcn_004e4b00(h0);
 	h14 = fcn_004e4ae0("PROZESS_8.sbf", 0);
-	if (acc >= 2) {
-		/* 0x4dee4f: not guilty verdict */
-		hStrafe = fcn_004e4ae0("PROZESS_7_NICHT_SCHULDIG.sbf", 0);
-		fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_7_NICHT_SCHULDIG",
-			(*(char*) (p38 + 9) == 1), 0x64);
-		fcn_004e4b40(*(unsigned short*) p3c, h14, "_PROZESS_8",
-			2 + (*(char*) (p34 + 9) == 1), 0xc8);
-		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
-		fcn_004e4450(g_68bfc0, 1);
-		d2_SetForm(g_68bfc0, 0);
-		io_AppendText(0x6811b0);
-		io_AppendText(0x152e, *(unsigned short*) p38);
-		fcn_004e4c90(4);
-		io_AppendText(0x6811b0);
-		io_AppendText(0x1557, msg.pad[0], *(unsigned short*) p34);
-		fcn_004e4c90(4);
-		eIdx = g_774970;
-		if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
-			div3 = msg.pad[0] / 3;
-			fcn_004c51a0(*(int*) (p3c + 4), *(int*) (p34 + 4),
-				*(unsigned char*) 0x773d75, div3);
-			fcn_004c51a0(*(int*) (p40 + 4), *(int*) (p34 + 4),
-				*(unsigned char*) 0x773d75, div3);
-			fcn_004c51a0(*(int*) (p44 + 4), *(int*) (p34 + 4),
-				*(unsigned char*) 0x773d75, div3);
-		}
-	} else {
+	if (acc < 2) {
 		/* 0x4deb4a: guilty verdict */
+		hStrafe = fcn_004e4ae0("PROZESS_7_SCHULDIG.sbf", 0);
+		h0 = fcn_004e4ae0("PROZESS_7_STRAFEN.sbf", 0);
 		msg.state = 5;
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
 		fcn_004e4450(g_68bfc0, 0);
 		fcn_004e51d0((unsigned int*) a0, (int) &msg);
 		st = 0;
-		if (*(unsigned char*) (a0 + 0x30) > 0) {
-			for (i = 0; i < *(unsigned char*) (a0 + 0x30); i++) {
+		cnt = *(unsigned char*) (a0 + 0x30);
+		if (cnt > 0) {
+			i = 0;
+			do {
 				if (*(int*) (0x9b0e30 + i * 0x35c) == *(int*) (a0 + 0x3c)) {
 					break;
 				}
-			}
+				i++;
+			} while (i < cnt);
 		}
-		hStrafe = fcn_004e4ae0("PROZESS_7_STRAFEN.sbf", 0);
-		h0 = fcn_004e4ae0("PROZESS_7_SCHULDIG.sbf", 0);
-		st = *(int*) (0x9b0eb4 + i * 0x35c);
+		st = *(int*) (g_9b0eb4 + i * 0x35c);
 		if (st >= 4 && *(char*) (p34 + 2) == 6 && *(char*) (p38 + 0x166) != 0) {
 			fcn_004b4650((int) p34, 0x13);
 		}
@@ -771,22 +751,48 @@ int __cdecl fcn_004dcf50(int a0)
 		if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 			div3 = msg.pad[0] / 3;
 			fcn_004c51a0(*(int*) (p3c + 4), *(int*) (p38 + 4),
-				*(unsigned char*) 0x773d75, div3);
+				*(signed char*) 0x773d75, div3);
 			fcn_004c51a0(*(int*) (p40 + 4), *(int*) (p38 + 4),
-				*(unsigned char*) 0x773d75, div3);
+				*(signed char*) 0x773d75, div3);
 			fcn_004c51a0(*(int*) (p44 + 4), *(int*) (p38 + 4),
-				*(unsigned char*) 0x773d75, div3);
+				*(signed char*) 0x773d75, div3);
 		}
 		fcn_004e4c90(6);
 		io_AppendText(0x6811b0);
 		io_AppendText(0x1557, msg.pad[0], *(unsigned short*) p38);
 		fcn_004e4c90(4);
+	} else {
+		/* 0x4dee4f: not guilty verdict */
+		hStrafe = fcn_004e4ae0("PROZESS_7_NICHT_SCHULDIG.sbf", 0);
+		fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_7_NICHT_SCHULDIG",
+			(*(char*) (p38 + 9) == 1), 0x64);
+		fcn_004e4b40(*(unsigned short*) p3c, h14, "_PROZESS_8",
+			2 + (*(char*) (p34 + 9) == 1), 0xc8);
+		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
+		fcn_004e4450(g_68bfc0, 1);
+		d2_SetForm(g_68bfc0, 0);
+		io_AppendText(0x6811b0);
+		io_AppendText(0x152e, *(unsigned short*) p38);
+		fcn_004e4c90(4);
+		io_AppendText(0x6811b0);
+		io_AppendText(0x1557, msg.pad[0], *(unsigned short*) p34);
+		fcn_004e4c90(4);
+		eIdx = g_774970;
+		if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
+			div3 = msg.pad[0] / 3;
+			fcn_004c51a0(*(int*) (p3c + 4), *(int*) (p34 + 4),
+				*(signed char*) 0x773d75, div3);
+			fcn_004c51a0(*(int*) (p40 + 4), *(int*) (p34 + 4),
+				*(signed char*) 0x773d75, div3);
+			fcn_004c51a0(*(int*) (p44 + 4), *(int*) (p34 + 4),
+				*(signed char*) 0x773d75, div3);
+		}
 	}
 	/* 0x4defad */
 	eIdx = g_774970;
 	if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 		if (msg.pad[6] != 0 && *(float*) &msg.pad[8] != 0.0f) {
-			fcn_004ff210(*(unsigned short*) p38, (int) *(float*) &msg.pad[8]);
+			fcn_004ff210(*(short*) p38, (int) *(float*) &msg.pad[8]);
 		}
 		if (fcn_005c6270((int) p38, 0x22e) != 0) {
 			fcn_004c54c0(*(int*) (p38 + 4), *(int*) (p3c + 4), -0x1a, 1);

@@ -27385,3 +27385,50 @@ note = "Inferred client dialog state; 130 RELOC operands agree; full extent and 
 updated_by = "data"
 updated_at = "2026-11-01T19:19:49+00:00"
 kind = "GLOBAL"
+
+["GOLDTL.0x009b0e30"]
+storage_kind = "object"
+size = 36120
+section = ".bss"
+kind = "GLOBAL"
+note = "Unattested vote-record array: 42 records of 0x35c bytes at 0x9b0e30 (=0x8d18). Stride proven by native search base 0x9b0e30 at 0x4dd7f9,0x4dda21,0x4de0f5,0x4de2b9,0x4de886,0x4debc0 with add edx,0x35c (e.g. 0x4dd803). Field +0x84 read through 0x9b0eb4. 43 records end at 0x9b9e8c and overlap the next recorded BSS object g_9b9e40, so 42 is the maximum fit."
+updated_by = "data"
+updated_at = "2026-11-02T12:53:54+00:00"
+name = "g_9b0e30"
+type = "char[]"
+
+["GOLDTL.0x009b0eb4"]
+storage_kind = "alias"
+backing = "g_9b0e30"
+size = 35988
+section = ".bss"
+kind = "GLOBAL"
+note = "Interior view of g_9b0e30 record field at +0x84, read as [i*0x35c+0x9b0eb4]. Native reads 0x4dd82a,0x4dda4f,0x4de137,0x4de2e8,0x4de914,0x4de921,0x4debea. Extent 0x8d18-0x84 runs to the end of record 41."
+updated_by = "data"
+updated_at = "2026-11-02T12:53:54+00:00"
+name = "g_9b0eb4"
+type = "char[]"
+
+["GOLDTL.0x009b1210"]
+storage_kind = "alias"
+backing = "g_9b0e30"
+size = 35128
+section = ".bss"
+kind = "GLOBAL"
+note = "Interior view of g_9b0e30 +0x3e0 (record 1 field +0x84), read as [i*0x35c+0x9b1210]. Native reads 0x4de998,0x4dea10,0x4dea3b. Extent 0x8d18-0x3e0."
+updated_by = "data"
+updated_at = "2026-11-02T12:53:54+00:00"
+name = "g_9b1210"
+type = "char[]"
+
+["GOLDTL.0x009b156c"]
+storage_kind = "alias"
+backing = "g_9b0e30"
+size = 34268
+section = ".bss"
+kind = "GLOBAL"
+note = "Interior view of g_9b0e30 +0x73c (record 2 field +0x84), read as [i*0x35c+0x9b156c]. Native reads 0x4dea60,0x4dead7,0x4deb02. Extent 0x8d18-0x73c."
+updated_by = "data"
+updated_at = "2026-11-02T12:53:54+00:00"
+name = "g_9b156c"
+type = "char[]"
