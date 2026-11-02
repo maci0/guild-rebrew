@@ -16926,3 +16926,22 @@ Two STUB rows carried no blocker explanation after their verdicts changed, which
 slot permutation (mode at [esp+0x18] against native [esp+0x1c] and rec at [esp+0x24] against
 [esp+0x14] are allocator output, first mismatch offset 24) and `0x0065A20A` records that its
 transcription is not yet converged. Lint is back to 5485 files checked, 0 errors, 0 warnings.
+
+## 2026-11-02 — trade ai producer loop matches
+
+`0x489A70` 576 to 605 with the object still exactly 6055, frame 0x74c, calls 95/95, and the first
+mismatch moving from offset 0x37 to 0xb0; the text prefix now covers 70 instructions and the
+producer loop 0x2d..0xae is byte-identical after relocation masking (loop-back jl to 0x3d,
+forward jle to 0xb0). Three edits. The producer-loop compare is anonymous,
+`lpGebaeudePROT[(unsigned char) *(*(char**)(o+0x16c)) * 0x24d] == 0x16`, which flips the node from
+eax to edx and lets MSVC emit `mov edx,ds:0x868050; add edx,ecx` before the lea tree, the base-first
+scheduling native has; `int volatile sent` recovers the allocation ripple; and `short type` instead
+of int lands the object exactly on 6055 (unsigned short measures identically and the semantics are
+unchanged because the element is an unsigned char below 0x100). Rejected with measurements: the
+inline site-2 compare (6048/554), char and unsigned char type (6047/545), and volatile pairs or
+triples (6058 to 6072 or 6041 to 6053). The remaining wall is the first mismatch at 0xb0: native
+materialises the 0x7f4c04 low bit as `mov eax,ds:0x7f4c04; and 0xffff; and 0x80000001; jns; dec;
+or 0xfffffffe; inc; je`, a sign-based boolean, while about thirty condition spellings give the
+plain `test BYTE ds:0x7f4c04,0x1`; the only 6055-byte hit (`& 0x8001`) changes the condition and
+was rejected. Drift is zero at call 94 and call 70 is -86 because the 0x104b exclusion scans are
+still unwritten.

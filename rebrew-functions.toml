@@ -423398,7 +423398,7 @@ blocker = "Full body reconstructed from the native listing: special type0x116 de
 blocker_delta = 480
 
 ["GOLDTL.0x00489a70".verification]
-source_hash = "1c21821bc6055fd074f0b997f5ed405fe4eb3bab9dfc8f4741189cfc8e2aa0ee"
+source_hash = "2111ffdd82ecb955011441a57b938ec5ff1e2b804a04ebe9edbcdbf097e8600c"
 reference_hash = "b9021a6f988b766d3e4f60351e3372056c2941dbf557ff1680029c3a2b39e05b"
 reference_size = "6055"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423409,10 +423409,10 @@ module = "GOLDTL"
 va = "0x489a70"
 context_hash = ""
 defines = "[]"
-input_hash = "e95f2e6a8c221bc8707240c574a3ebf4d8082a7f33f976d38d61038713383428"
+input_hash = "eb8bc9bd9e7a3860bc5dbb475b00fd4cf7dbc8990966d9ba66695c951d849dcb"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T12:41:13+00:00"
+measured_at = "2026-11-02T13:04:24+00:00"
 
 [["GOLDTL.0x00489a70".status_history]]
 old_status = "STUB"

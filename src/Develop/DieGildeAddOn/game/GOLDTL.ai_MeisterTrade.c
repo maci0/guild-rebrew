@@ -155,11 +155,11 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 	int j;
 	int n;
 	int cnt;
-	int sent;
+	int volatile sent;
 	int found;
 	int tmp;
 	int volatile price;
-	int type;
+	short type;
 	int slot;
 	float fr;
 	struct {
@@ -185,8 +185,7 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 			continue;
 		}
 		if (pr->qty28 > fcn_0050dfd0(bld, pr->id) / 3) {
-			tp = *(char**) (o + 0x16c);
-			if (lpGebaeudePROT[(unsigned char) *tp * 0x24d] == 0x16) {
+			if (lpGebaeudePROT[(unsigned char) *(*(char**)(o + 0x16c)) * 0x24d] == 0x16) {
 				pr->qty18 = pr->qty28 / 2;
 			} else {
 				pr->qty18 = pr->qty28;
