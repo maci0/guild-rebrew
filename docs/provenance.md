@@ -18319,3 +18319,37 @@ and 391 and dense differences from 408. Caching slot pointers across calls pushe
 inlining the slot pointer in the three 0x300 loops plus splitting the event-wait handle from the malloc
 handle recovered pos to 0x20 and the object to 4366. The remaining fix is to make the native fourth 4-byte
 local materialise so pos plus out total 0x14 and the records start at 0x34.
+
+## 2026-11-03 — master thieves reconstructed with its exact frame
+
+`0x4813B0` (ai_CalcMeisterDiebe) reaches 381 match with the object at 4059 from 3842 and the frame
+`sub esp,0x528` exactly right; the equal prefix grew from 2 to 24 bytes and the first mismatch now sits at
+0x18. The earlier frame miss was the msg struct's `pad37[0x21]`, which shifted f38 to 0x58 and sizeof to
+0x110; correcting it to `pad37[1]` gives f4 0x04, f8 0x08, fc 0x0c, f28/f2c/f30 at 0x28/0x2c/0x30, the
+short f34 at 0x34, f36 at 0x36, f38[8] at 0x38, f58/f5c/f60 and f80 at 0x80 with sizeof 0xf8, so the
+locals are ten dwords plus msg plus text[0x400] for 0x528 exactly. Transcribed region by region: the
+prologue with ebx=rec, the first query loop through gm_ResolveEntityById and its next call, the
+house-accounting calls, the 0x40-byte memcpy loop from 0x100b0c0 into 0x100df20 plus g_100dc38*0x40 with
+its two break tests (k >= g_100b0a8 and g_100dc38 >= 4), the common tail through 0x487000, 0x487970,
+0x487c00, 0x487470, query 0x60, 0x4888a0 and 0x488c00 with the flag test clearing 0x20 and the two return
+paths, the 0x21c entity scan (e[8] > 0, e[0] != 0xffff, e[2] != 0xa, e+0x16c == h, e[0x165],
+e+0x184->[0x2c] == h[1]) counting total and matching when e[0x17c] == 0 with g_100dc34 and g_100dc24 set
+and the "keine Leute" wsprintf, j = min(total>>1, total - (total>>1)), the dispatch on
+g_7f4ca2[id*0x21c] with the RandomMod(2) path, the RandomFloat01() > 0.85 double gate plus match >= 3 and
+g_7f4c00 >= 7 - g_7747b4 to L1e70, the sel==1 entfuehren path with its 0.95 gate, wsprintf, the two 8x8
+scans over g_99ef80 (stride 0x18 outer, 0xc0 inner, countdown inner, storing when maxfactor <= f,
+maxfactor == 0 to 1.0f), scan A through gm_GetBuildingTypeCategory and fcn_004fa6f0 with the
+1.0 - tile/maxfactor factor and the score through gm_AccumulateTyped2, then query 0x65, the 0x3c query,
+wsprintf and packet 0x3c with n = MIN(match, RandomMod(3)+1), the f38 collection, pad -1, fcn_004c5530
+and the clear of rec+0x1c0; the L176c einbrechen path with its wsprintf, SearchTable67, scans, scan B
+through lpGebaeudePROT[*e*0x24d], g_773da8, gm_CheckEntityType, '!', fcn_0055c050 and the
+(8.0f - (float)fcn_0050c4e0)*factor*0.5f factor, then fcn_0050d0c0; the einbrechen tail with query 0xca
+and the weak/strong split on b < 0x5f and 36*2.0f + (RandomMod(0x14)&0xffff) > b, the he_fn_Handlung loops
+and packets 0x40 and 0x3f; and L1e70 calling ai_CalcAngriff with packet 0x61. All callees resolve as
+metadata rows; only wsprintfA is the CRT import. The remaining gap is allocation: native slots are factor
+S+4, maxfactor S+8, match S+0x10, i S+0x14, cx S+0x18, best_score S+0x1c, cy S+0x20, saved S+0x24, owner
+S+0x28 and ent S+0x2c, while ours holds saved at S+0x10, match at S+0x1c, best_score at S+0x28 and shares
+i's slot with owner; the first mismatch at 0x18 is the zero constant's register, native `33ff` (xor edi,edi)
+against our `33ed` (xor ebp,ebp). Declaration reorders, handle and saved initialisation changes and a
+single-saved variant all compiled to identical bytes. The earlier body measured 9.55 percent with prefix 2
+and the current measures 9.29 with prefix 24 and the exact frame; the keep is deliberate.

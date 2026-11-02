@@ -421480,21 +421480,21 @@ blocker = "Body reconstructed and compiles (C89): Meister handle scan, house acc
 blocker_delta = 258
 
 ["GOLDTL.0x004813b0".verification]
-source_hash = "28e7ae31ea6f0e74a3413a9631763de60e745a23a4ec3b5b07ea930bbabdc5ca"
+source_hash = "dcbae5b64aa9cdd8759aab9969f0d4241135a0b21e48e729ae126b6faf6baba9"
 reference_hash = "9bd4af507cd3f7c7bad44e27a5df703a50360cb61f3b183d98681846ef60fd49"
 reference_size = "4100"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "0e8a99954f54c9a4a83e18dc30c2c78d371ee084f27f0d787482cfc91082426c"
+compiler_hash = "7abcb079717a76f6d448fa4f910ea5f9116c386c77fd93b0df08395841ecd51f"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x4813b0"
 context_hash = ""
 defines = "[]"
-input_hash = "37a1f39e08092e8c8f6df07c3e15990345925b7789c5e9f58b974c46fe03dc1d"
-writer = "verify"
+input_hash = "e9162ab6c1426e6ab9e5f7d433bce3bad47878e96847ba7c3a23c3324891fa61"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-02T07:45:55+00:00"
+writer = "test"
+measured_at = "2026-11-02T17:38:22+00:00"
 
 [["GOLDTL.0x004813b0".status_history]]
 old_status = "STUB"
