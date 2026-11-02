@@ -18571,3 +18571,24 @@ reach while the slot prefix stands. Recorded in docs/codegen-walls.md as the Fin
 between the conditions) flips the colour to 526 at 4061. Variants kept in .scratch: meis_own1.c, meis_own5.c
 and meis_own7.c are byte-identical, with meis_own4.c, meis_j1.c, meis_a2.c, meis_vol1.c, meis_vol2.c,
 meis_sv1.c, meis_vi1.c, meis_sp1.c and meis_rev1.c documenting the rest.
+
+## 2026-11-03 — alloc spieler repairs restore correct behaviour
+
+`0x50A7E0` keeps 967 match at object exactly 3872 with frame 0x428 and lint clean, down from the 978 state
+because three swaps from that search were semantically wrong and were repaired. The family count now reads
+first: `count = gm_CurrentHumanFamilyCount; if (count >= 0x10) return -1; W(slot,0x50) = count | 0x8000;`,
+matching native's load of ds:0x773d6c at 0x50b4a1, the compare against 0x10, the jl, the `or ah,0x80` and
+the store, where the previous order tested and stored a stale value. The two-parent tail no longer crosses
+its arms: the father arm writes `W(slot,0x50) = W(father,0x50)` and the mother arm the mother's field, as
+native does with [ecx+0x50] in the father arm and [edi+0x50] in the else. A third error was found while
+verifying: the same search had moved `gm_CurrentHumanFamilyCount++` into the type >= 0xa else and
+`W(slot,0x50) = 0x7fff` into the 6/5/7 block, and both are restored, with the increment last in the 6/5/7
+block and 0x7fff in the else, matching native's `inc ds:0x773d6c` at 0x50b50a and 0x7fff at 0x50b485; the
+edit is byte-neutral in the compare and was kept because the other placement is wrong behaviour. Measurements:
+the 978 state had a fast metric of 992 and 978 by comparison, the repaired base measures fast 984 and 967,
+with the count and 0x7fff repairs costing five fast units and the arm repair three, matching the numbers
+recorded when they were first made; an alternative read/store/test ordering gives object 3873 and was
+rejected. A further climb over 276-320 accepted only the two semantic reversions and over 404-439 only the
+tail re-crossing, and sweeping all six tail-arm orders and the p-record store order produced nothing above
+19984 fast, so the state is kept as the correctness floor. Session notes in .scratch/g0/NOTES.md session 10,
+backups .scratch/bak/v45_967_kept.c and v43_978_asis.c.
