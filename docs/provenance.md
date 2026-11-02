@@ -19029,3 +19029,27 @@ table, roles.py, exp.py and xloop.py, plus keep_wret_tmp.c for the 4394 16-bit c
 next attempt: treat the colouring as opaque and either find a shape that moves w below n, with the untested
 family being a change to how n's 2/4/8 accumulation interacts with the divisor, such as accumulating a
 multiplier instead of n, or accept the current roles and push on the remaining per-instruction differences.
+
+## 2026-11-03 — production message arguments corrected
+
+`0x569FF0` 295 to 306 with the object at 3556, 38 relocations, frame `sub esp,0x738` held and lint clean;
+case 5 measures 0x6e2 against native's 0x770, so 0x8e short. Two corrections. The 0x19e9 pair uses the 0x48
+buffer (b200) rather than b100, since native's lea at 0x56ad8d is [esp+0x4c] with call arguments still pushed,
+and its ninth fcn_00545e80 argument is 0 rather than "_NACHRICHTEN_HS_74", because native pushes 0 twice at
+0x56ada2 and 0x56ada4 and that string belongs only to the 0x19e6 pair at 0x6a6a2c. And the num-block product
+is `(int)((float)fcn_0050df70(pa,cnt2) * ((float)hits * 0.1))` instead of overwriting hits with the 50df70
+result and using num, matching native's fild of the call result, fild of hits, fmul by 0.1 and fmulp at
+0x56aac6, which also keeps the loop's hits++ live as native does at 0x56a75e. That second fix alone accounts
+for the whole gain at zero size change, while the 0x19e9 argument fix is match-neutral and eight bytes smaller.
+The missing-call hypothesis from the previous round is false: the object already contains
+_gm_SetupEntityQuery (0x504b30) in case 5 at native 0x56a6f1 and in the -1/-2 tail at 0x56adde, plus
+_gm_NextEntityQueryMatch (0x502850) twice at native 0x56a7bc and 0x56ab97, so native and our call order are
+one-to-one through all of case 5. The remaining 0x8e is codegen shape, localized to the head at -0x14, the pb
+block at -0x20, the 55c050 tail at -0x13, the num block at -0x2c and the 0x19e6 plus 0x19e8 blocks at -0x3a
+combined, along with native's inline px==0 epilogue and a redundant px recompute at 0x56a807. Rejected with
+evidence: strcat for the copies, since VC6's strcat is the double repne-scasb plus `dec edi` append while
+strcpy is the byte loop, and native's sites at 0x56a993 and 0x56ac1c are strcat shapes meaning native has
+`strcat(b400,b100)` and `strcat(b200,b400)` with 0x6b5c60 equal to 0x00 in the image so b400's memset zeroes
+it; writing the 0x19e6 copy as strcat measures 317 at object 3612 but moves the frame to 0x73c, and the
+flag-arm copy alone gives 291 at 3612. A `goto after;` at the end of the flag==0 arm drops the frame to 0x730
+at match 272. Current source at .scratch/569ff0/KEEP_306.c and candA_keep.c with notes in NOTES.md.

@@ -365,9 +365,9 @@ void __cdecl fcn_00569ff0(char* e)
 				        *(int*) (pa + 1), -1, 0, "_NACHRICHTEN_HS_75");
 			}
 			if (*(char*) (px + 2) == 6 || *(char*) (px + 2) == 7) {
-				io_FormatTextBuffer(b100, 0x19e9, pa);
-				fcn_00545e80(*(int*) (px + 4), *(int*) (px + 4), b100, 1, 0x5f0,
-				        *(int*) (pa + 1), -1, 0, "_NACHRICHTEN_HS_74");
+				io_FormatTextBuffer(b200, 0x19e9, pa);
+				fcn_00545e80(*(int*) (px + 4), *(int*) (px + 4), b200, 1, 0x5f0,
+				        *(int*) (pa + 1), -1, 0, 0);
 			}
 		}
 		if (num != 0) {
@@ -383,8 +383,8 @@ void __cdecl fcn_00569ff0(char* e)
 						int id;
 
 						id = *(unsigned short*) cnt2;
-						hits = fcn_0050df70(pa, cnt2);
-						num = (int) ((float) num * ((float) hits * 0.1));
+						num = (int) ((float) fcn_0050df70(pa, cnt2)
+						        * ((float) hits * 0.1));
 						if (num < 1) {
 							num = 1;
 						}
