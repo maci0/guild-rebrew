@@ -18251,3 +18251,21 @@ and i; keeping i=4 entering the fill loop preserves 0x4b at 4016 and match 284 b
 The split frame (0x3c scalar header plus data block with offsets preserved) gives object 3908 and match
 229 with ent in EDI and -1 in EAX, the same split already measured, so merged matches native's ent (EAX,
 spilled) while split matches native's win (EDI) and neither gives both. A blocker is recorded on the row.
+
+## 2026-11-03 — alloc spieler store orders raise the local optimum
+
+`0x50A7E0` reaches 815 match at object exactly 3872 with frame 0x428, one more increment of the same-size
+search technique. The three byte-neutral stores in each arm of the two-parent chain were permuted across
+all four arms by coordinate ascent over the 6^4 orders: `B(0xc)`, `B(0x217)` and `D(0x1d0)`. Native
+interleaves each arm's load and store (`mov dl,[x+0xc]; mov [ebp+0xc],dl; ...`), so no natural source order
+matches and register colouring decides; the best assignment is mother-type arm acb, father-type arm abc,
+the `mother[0xd] < father[0xd]` arm bac and the else arm cab, worth 815, with nearby orders at 812 (cab,
+cab, bac, cab) and 811, against the previous cab, cab, abc, abc at 810. The top aligned runs stay intact
+(2146-2187 at 42 bytes and 625-653 at 29 bytes), the gap count stays at 36 non-zero with total 245, lint is
+5485 of 5485. All three optimizer deltas were re-measured and none holds the size: forcing a single load of
+0x773d68 at gap 5 gives object 3865 with match 488 and, with the volatile `mov word [slot],0xffff` for the
+extra six bytes, 3871 at match 531, since there is no seven-byte spelling before offset 654 to compensate;
+forcing the loop base reload at gaps 27 and 28 grows to 3912 with match 725; and the redundant float
+compare, the zero-store immediates and the arm splits measure between 380 and 590 in every combination. So
+3872 with the current body is a local optimum that any size change destroys, and only same-size respellings
+win.

@@ -475982,7 +475982,7 @@ blocker = "Partial reconstruction kept (no STUB): SIZE_MISMATCH 4/3872, obj 107.
 blocker_delta = 3868
 
 ["GOLDTL.0x0050a7e0".verification]
-source_hash = "e2346e3068880b084f628574e4def7d8ebbdcf3e10dce54610a30dff2bfd9beb"
+source_hash = "f1d546a4bb95413c999966c936d5347e7d92f49824d413c342a34a0583968d46"
 reference_hash = "eb5f5d927dfb20803364fe0ad3cd6eee86ea6eee8d269c358a906ee7367a74d3"
 reference_size = "3872"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -475993,10 +475993,10 @@ module = "GOLDTL"
 va = "0x50a7e0"
 context_hash = ""
 defines = "[]"
-input_hash = "5f131dd25464e4692c83c01364056d5ff3d74004b2c110264170806ca7a52852"
+input_hash = "7c9276395f9dcc2ce690a2af96131da1656ae6e79b0e652bd1783732b9e0e593"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T17:05:55+00:00"
+measured_at = "2026-11-02T17:21:56+00:00"
 
 [["GOLDTL.0x0050a7e0".status_history]]
 old_status = "STUB"
@@ -604003,10 +604003,10 @@ file = "src/Develop/DieGildeAddOn/game/fcn_005b7880.c"
 symbol = "_fcn_005b7880"
 name = "fcn_005b7880"
 kind = "FUNCTION"
-updated_by = "fix-sizes"
-updated_at = "2026-10-29T11:14:46+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-02T17:17:30+00:00"
 status = "SIZE_MISMATCH"
-blocker = "Prefix body only, 3/3808: type/base stride, the 0x6ac300/0x6ac314/0x6ac328/0x6ac340 fcn_00534c40 setup, fcn_005350d0, the two fcn_00517c00 id fills and the fcn_0050dc90 call are reconstructed; 0x5b7942-0x5b87d0 not transcribed."
+blocker = "merged and split frames each match one half: merged spills ent in EAX like native but never promotes win, split promotes win in EDI but keeps ent in EDI and -1 in EAX. Counter roles decoded: row-fill i in EBX with cmp ebx,edx, rows-init countdown in ECX, button loop in ESI; any 0-initialised fill index makes MSVC give EBX to i and evict the zero to EBP, breaking byte 0x4a. Object is 225 over native from spilled counters"
 blocker_delta = 3692
 
 ["GOLDTL.0x005b7880".verification]

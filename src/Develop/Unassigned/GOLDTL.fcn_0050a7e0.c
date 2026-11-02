@@ -322,20 +322,20 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         B(slot, 0xd) = 1;
         if (B(mother, 2) == 6 || B(mother, 2) == 7 || B(mother, 2) == 5) {
             B(slot, 0xc) = B(mother, 0xc);
-            D(slot, 0x1d0) = D(mother, 0x1d0);
             B(slot, 0x217) = B(mother, 0x217);
+            D(slot, 0x1d0) = D(mother, 0x1d0);
         } else if (B(father, 2) == 6 || B(father, 2) == 7 || B(father, 2) == 5) {
             B(slot, 0xc) = B(father, 0xc);
             D(slot, 0x1d0) = D(father, 0x1d0);
             B(slot, 0x217) = B(father, 0x217);
         } else if (B(mother, 0xd) < B(father, 0xd)) {
-            B(slot, 0xc) = B(father, 0xc);
             D(slot, 0x1d0) = D(father, 0x1d0);
+            B(slot, 0xc) = B(father, 0xc);
             B(slot, 0x217) = B(father, 0x217);
         } else {
+            B(slot, 0x217) = B(mother, 0x217);
             B(slot, 0xc) = B(mother, 0xc);
             D(slot, 0x1d0) = D(mother, 0x1d0);
-            B(slot, 0x217) = B(mother, 0x217);
         }
         dst = slot + 0x88;
         for (n = 0; n < 0xe; n++) {
