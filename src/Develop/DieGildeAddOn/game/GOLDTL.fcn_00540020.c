@@ -2,20 +2,21 @@
  * Round/day refresh for the town view.
  *
  * Rebuilt from the native listing 0x540020..0x541149 (size 4393).  Native
- * frame: `sub esp,0x3b8` with ebx/ebp/esi/edi saved, so the local area is
- * 0x3a8 bytes above a 0x10 save slot.
+ * frame: `sub esp,0x3b8`, then the four saved registers are pushed below it
+ * and locals run from esp+0x10 through esp+0x3b7.
  *
  * Local frame recovered from the esp offsets in the listing:
- *   0x10 int            loop counter, address-taken by fcn_004fd400
- *   0x14 float          age of the newest entity
- *   0x18 int            candidate age / scratch
- *   0x1c int            scratch
- *   0x20 Pos            the clock record handed to fcn_0052a310
- *   0x32 short          entity index produced by fcn_004fd400
- *   0x34 Ev (0x7c)      HUD element record, always zeroed 0xf8 with 0x100
- *   0xb0 Ev (0x7c)      second element record, zeroed by the same rep stosd
- *   0x12c Ev (0x7c)     timer record: {int stamp; int now}
- *   0x1a8 char[0x210]   render list filled by fcn_0050e380
+ *   0x10 int             loop counter, address-taken by fcn_004fd400
+ *   0x14 int             age of the newest entity (float bit pattern)
+ *   0x18 int             candidate age / scratch
+ *   0x1c int             scratch
+ *   0x20 Pos (0x14)      the clock record handed to fcn_0052a310; its +0x12
+ *                        short is the entity index produced by fcn_004fd400
+ *   0x34 Ev (0x7c)       HUD element record, always zeroed 0xf8 with 0x100
+ *   0xb0 Ev (0x7c)       second element record, zeroed by the same rep stosd
+ *   0x12c Ev (0x7c)      timer record, stamp/now at +0x00/+0x04
+ *   0x1a8 char[0x220]    render list filled by fcn_0050e380 (0x210 in use,
+ *                        0x10 of tail keeps the native 0x3b8 frame)
  */
 #include <string.h>
 
@@ -29,13 +30,16 @@ typedef struct {
 	short d;
 	short e;
 	short f;
-} Pos;					/* 0x12 */
+	short out;			/* +0x12, written by fcn_004fd400 */
+} Pos;					/* 0x14 */
 #pragma pack()
 
 typedef struct {
-	char pad0[4];
-	unsigned char id;		/* +0x04 */
-	char pad5[3];
+	int stamp;			/* +0x00 */
+	union {
+		unsigned char id;	/* +0x04 */
+		int now;		/* +0x04 */
+	};
 	int ent;			/* +0x08 */
 	int kind;			/* +0x0c */
 	int f10;			/* +0x10 */
@@ -151,6 +155,7 @@ void __cdecl fcn_004c2d90(float, int);
 #define SLOT4(k) (*(int *) (SLOTPTR(k) + 4))
 #define ENTTYPE(t) (*(unsigned char *) (g_868050 + (t) * 0x24d))
 #define ENTCLASS(t) (*(unsigned char *) (g_868050 + (t) * 0x24d + 0x247))
+#define OBJBYTE (*(unsigned char *) obj)
 
 /* ADDRESS: GOLDTL 0x00540020 */
 void __cdecl fcn_00540020(void)
@@ -160,10 +165,9 @@ void __cdecl fcn_00540020(void)
 	int cand;
 	int left;
 	Pos pos;
-	short out;
 	Ev evs[2];
 	Ev tm;
-	unsigned char arr[0x210];
+	unsigned char arr[0x220];
 	unsigned char* v5;
 	int season;
 	void* hp;
@@ -210,10 +214,10 @@ void __cdecl fcn_00540020(void)
 	fcn_0050e380(g_774970 & 0xffff, arr);
 	fcn_0052a890((pos14_7f4c00*) &pos);
 	g_7e4314 = fcn_0052a310((pos14_7f4c00*) &pos);
-	fcn_004fd400(&out, &i);
+	fcn_004fd400(&pos.out, &i);
 	i = 0;
-	tm.year = pos.a;
-	tm.mon = (*(int (__cdecl **) (void)) 0x662318) ();
+	tm.stamp = pos.a;
+	tm.now = (*(int (__stdcall **) (void)) 0x662318) ();
 	wait = fcn_004c5790(0, &tm);
 	while (fcn_004c4450(wait) == 0) {
 		fcn_00535960();
@@ -436,14 +440,12 @@ void __cdecl fcn_00540020(void)
 		obj = fcn_00503fe0(1, 4, i);
 		if (obj != 0) {
 			do {
-				unsigned char t = *(unsigned char*) obj;
-
 				add = 0;
-				if (fcn_00504bd0(t) == 1 || fcn_00504bd0(t) == 4
-				    || fcn_00504bd0(t) == 2 || ENTTYPE(t) == 0x13
-				    || ENTTYPE(t) == 4 || ENTTYPE(t) == 0x10
-				    || ENTTYPE(t) == 5 || ENTTYPE(t) == 9) {
-					unsigned char c = ENTCLASS(t);
+				if (fcn_00504bd0(OBJBYTE) == 1 || fcn_00504bd0(OBJBYTE) == 4
+				    || fcn_00504bd0(OBJBYTE) == 2 || ENTTYPE(OBJBYTE) == 0x13
+				    || ENTTYPE(OBJBYTE) == 4 || ENTTYPE(OBJBYTE) == 0x10
+				    || ENTTYPE(OBJBYTE) == 5 || ENTTYPE(OBJBYTE) == 9) {
+					unsigned char c = ENTCLASS(OBJBYTE);
 
 					if (c == 1) {
 						add = 2;
@@ -491,21 +493,20 @@ void __cdecl fcn_00540020(void)
 		obj = fcn_00503fe0(1, 4, i);
 		if (obj != 0) {
 			do {
-				unsigned char t = *(unsigned char*) obj;
 				unsigned char c;
 				int v;
 
-				if (fcn_00504bd0(t) != 1 && fcn_00504bd0(t) != 4
-				    && fcn_00504bd0(t) != 2 && ENTTYPE(t) != 0x13
-				    && ENTTYPE(t) != 4 && ENTTYPE(t) != 0x10
-				    && ENTTYPE(t) != 5 && ENTTYPE(t) != 9) {
+				if (fcn_00504bd0(OBJBYTE) != 1 && fcn_00504bd0(OBJBYTE) != 4
+				    && fcn_00504bd0(OBJBYTE) != 2 && ENTTYPE(OBJBYTE) != 0x13
+				    && ENTTYPE(OBJBYTE) != 4 && ENTTYPE(OBJBYTE) != 0x10
+				    && ENTTYPE(OBJBYTE) != 5 && ENTTYPE(OBJBYTE) != 9) {
 					goto next2;
 				}
-				c = ENTCLASS(t);
+				c = ENTCLASS(OBJBYTE);
 				if (c == 1) {
 					v = cand * 2 / n;
 					*(int*) ((char*) obj + 0x39) = v < 0 ? 0 : v;
-					if (ENTTYPE(t) == 5) {
+					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v < 0x2ee00) {
 							v = 0x2ee00;
 						}
@@ -516,7 +517,7 @@ void __cdecl fcn_00540020(void)
 				} else if (c == 2) {
 					v = cand * 4 / n;
 					*(int*) ((char*) obj + 0x39) = v < 0 ? 0 : v;
-					if (ENTTYPE(t) == 5) {
+					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v < 0x4e200) {
 							v = 0x4e200;
 						}
@@ -527,7 +528,7 @@ void __cdecl fcn_00540020(void)
 				} else if (c == 3) {
 					v = cand * 8 / n;
 					*(int*) ((char*) obj + 0x39) = v < 0 ? 0 : v;
-					if (ENTTYPE(t) == 5) {
+					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v < 0x9c400) {
 							v = 0x9c400;
 						}
@@ -561,15 +562,15 @@ next2:
 		if (fcn_00567170(SLOTPTR(i), &cand, &agebits, &left) == 0) {
 			continue;
 		}
-		if (left == *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x2c)
-		    && cand == *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x30)) {
+		if (cand == *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x2c)
+		    && agebits == *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x30)) {
 			continue;
 		}
 		if (*(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x28) != -1) {
 			fcn_00428720(fcn_00426cc0(*(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x28)));
 		}
 		fcn_00406120(*(char**) (SLOTPTR(i) + 0x184));
-		if (left != -1) {
+		if (agebits != -1) {
 			char* r = fcn_0040c120(*(char**) (SLOTPTR(i) + 0x184), 0x33, left, cand, agebits);
 
 			if (r != 0) {

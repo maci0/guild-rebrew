@@ -425408,7 +425408,7 @@ status = "SIZE_MISMATCH"
 blocker = "Docs map TL 0x540020 with Gold 0x538740 as round/day refresh and claim no provider. Stored SIZE 4393. Prologue allocates 0x3b8 and calls gm_GetEntityTableEntry then fcn_00500e20. Source is int(void) return 0; those calls and the frame are unwritten."
 
 ["GOLDTL.0x00540020".verification]
-source_hash = "92c212cafe46c4fefb48648036a4da4877c5b1703a5fef68904ee851245adf01"
+source_hash = "a64990ae33bb34fb1807cb07a8f6443e6c0a72499c8a5bd4595b74a2c8b32dd0"
 reference_hash = "03fb2e428ac720b68f52e8b8da5f549c8d71c565fe77e568e2d23e5fed84a5d3"
 reference_size = "4393"
 headers_hash = "c23ebdf26082c3b8224e5d244740b71b635b44c55fd86df34e59c897a87797df"
@@ -425419,10 +425419,10 @@ module = "GOLDTL"
 va = "0x540020"
 context_hash = ""
 defines = "[]"
-input_hash = "6bf59c7dc673189692ed2ff9f7e8312988799698524697ab7aa45ee6f2dd1c29"
+input_hash = "d74c486a7581af510f8bc4326ba8c188f4bd11a1efd473c913e2af42c5e55889"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T17:34:35+00:00"
+measured_at = "2026-11-02T17:56:54+00:00"
 
 [["GOLDTL.0x00540020".status_history]]
 old_status = "STUB"

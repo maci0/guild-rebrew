@@ -18423,3 +18423,24 @@ grown from 29) but the 36 non-zero call-gap deltas now total 335 rather than the
 the match rise came with more local gap drift; the judgement for this row is match at fixed size and
 frame, which holds. Rejected and restored from backup: the single-load 0x773d68 variant (3865 at match
 488), the loop-base reload (3912 at 725) and every structural edit from sessions 6 and 7.
+
+## 2026-11-03 — season setup frame recovered
+
+`0x540020` 894 to 1269 with the frame now `sub esp,0x3b8` exactly and every local at its native offset (pos
+0x20, &out 0x32, evs 0x34, tm 0x12c, arr 0x1a8); the first mismatch moved from 0x347 to 0x539 and the
+object is 4381 with 126 relocations and lint clean. Two layout errors, not a missing int. pos and out are
+one 0x14-byte local: native's &out is pos+0x12, and separate `Pos pos; short out;` left a 4-byte slot
+between them (out at 0x36, evs 0x38, &out eight late), fixed by making the type
+`Pos { int a,b,c; short d,e,f; short out; }` and calling `fcn_004fd400(&pos.out, &i)`. Native's 0x3b8
+frame also has 0x10 above the last referenced local, and an unreferenced local is not allocated (an unused
+char[0x10] was dropped in a probe), so the 0x10 is declared as the render-buffer tail with
+`unsigned char arr[0x220]` using 0x210, which is byte-identical to arr[0x210] plus a 0x10 hole. The 0x408
+blocker was the indirect call through 0x662318: typing it `__stdcall` makes MSVC clean the six pending
+arguments right after fcn_004fd400 with `add esp,0x18`, where `__cdecl` deferred the cleanup to
+`add esp,0x24`; the call takes no arguments so there is no runtime difference. Earlier fixes kept: the
+object type byte reloads `*(unsigned char*)obj` through a macro as native does, and tm uses int stamp and
+now fields at +0 and +4 in a union with id. The remaining divergence starts at 0x21b in the element blocks:
+native begins each block with `mov eax,[0x774970]` for the slot calculation and interleaves the year, id,
+kind, visible, wd, mon, ent and day stores, while our scheduling differs; putting ent first makes the first
+six instructions identical but still splits mon and day. That is where the last twelve bytes of the object
+sit.
