@@ -70,7 +70,7 @@ static int ent34(char* e)
 /* ADDRESS: GOLDTL 0x004d8d00 */
 void __cdecl fcn_004d8d00(char* a0)
 {
-	char b118[0x20];
+	char b118[0x30];
 	char be8[0x30];
 	char bb8[0x30];
 	char b88[0x30];

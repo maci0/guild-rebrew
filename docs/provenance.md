@@ -17066,3 +17066,25 @@ is unchanged); and the route-own-stock town and producer exclusion scans became 
 walks with t and pr induction (`j++, t++`), worth +2 bytes and +36 match. Drift shows +20 to +113
 through call 39 against the known -126 hole at native 0x104b where the loop2 exclusion scans are
 still unwritten, netting -14, so the next step is that block plus removal of the early excess.
+
+## 2026-11-02 — task dispatcher frame solved
+
+`0x4D8D00` 318 to 329 with the frame now native at 0x138 and the object 4396, msg still at 0x30
+against native 0x3c. One line did the frame: `char b118[0x30]` instead of 0x20. The premise that
+the four buffers overlapped by 0x10 was wrong, and the frame formula settles it: in this build
+`sub esp` equals max_local_end minus 0x10 because the saved registers occupy slots 0x00..0x10 and
+locals start at 0x10, so native's 0x138 pins max_local_end to 0x148; no native access exists in
+0x138..0x148, and b118 at 0x118 must therefore be 0x30. The buffers total 0xc0 in a tight
+0x88..0x148 region, and the measured slot chain with that size is contiguous. The slot map is now
+v10 0x10, v14 0x14, base 0x18, tgt 0x1c, ent 0x20, v28 0x28, v80 0x2c, msg 0x30, vec 0x5c,
+i 0x6c, v68 0x70, v84 0x74, be8 0x88, bb8 0xb8, b88 0xe8, b118 0x118, where native has ent 0x18,
+base 0x1c, tgt 0x20, v24 0x24, v28 0x28, vec 0x2c, msg 0x3c, v68 0x68, i 0x6c, temps 0x70/0x78,
+v80 0x80, v84 0x84 and the buffers from 0x88. Blocking msg at 0x3c, all measured as no-ops:
+declaration permutations of all four buffers, msg/vec swap, base/ent swap, moving v80/v84 down the
+list, block-scoping msg and vec into the loop, and early live vec writes before the loop.
+Declaration order has zero effect on slot assignment here; scalars do respond to first-assignment
+order (prologue `v80 = 0; v84 = 0;` moves v80 to 0x28 and swaps v10/v14), and msg at 0x3c needs vec
+assigned first, which the allocator refuses because arrays slot at first use and msg's rep movsl is
+first. The object is 244 bytes short while emitting 1541 instructions against native's 1452, so
+ours has more, smaller instructions and the remaining slot order is driven by that code shape
+rather than by declarations.
