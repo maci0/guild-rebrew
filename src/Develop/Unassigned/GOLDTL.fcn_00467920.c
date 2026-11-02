@@ -24,12 +24,18 @@
  *   0x46882f  trailing element text
  *   0x4688d7  flag 0x01: gauge ends and their fill loops
  *
- * Status: SIZE_MISMATCH, match 519/4699, object 4633. The frame is one
+ * Status: SIZE_MISMATCH, match 539/4699, object 4723. The frame is one
  * compiler temporary slot from native: `sub esp,0x260` with the struct at +4
  * because the icon hit test spills e[4] (native keeps it in a register). The
  * native prefix is 34 bytes and diverges on the shared zero register (native
  * ebp, compiler edi). h3/h6 live in f.v1c/f.v28 as in native, so only h1/h0
- * stay in registers. The 0x468554, 0x468700 and 0x467bc2..0x4681cc blocks are
+ * stay in registers. The end marks are four separate calls in native; the
+ * 0x46843c block writes each pair's two arms as two guarded statements
+ * (`if (v28)` then `if (!v28)`) so the compiler keeps three of the four call
+ * sites instead of tail-merging both pairs into one. The v34 pair and the
+ * v2c `v28` arm survive; the v2c `!v28` arm still merges with the v34 `!v28`
+ * arm, so the region stays 24 bytes over the native 0x364. The 0x468554,
+ * 0x468700 and 0x467bc2..0x4681cc blocks are
  * transcribed from the listing; the 0x467bc2 split is `if (!(v20 & 0x400))`
  * with the marks in the taken branch and the colour/bitmap path in the else.
  *
@@ -450,26 +456,22 @@ void __cdecl fcn_00467920(int a0, int a1)
 		/* 0x46843c: end marks */
 		if (f.v34) {
 			if (f.v28) {
-				fcn_0047ccd0(e[4],
-					     e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+				fcn_0047ccd0(e[4], e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 					     (int) e[3], (char*) f.v14, 6);
 			}
-			else {
-				fcn_0047ccd0(e[4],
-					     e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+			if (!f.v28) {
+				fcn_0047ccd0(e[4], e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 					     (int) e[3], (char*) f.v14, 3);
 			}
 		}
 		else if (f.v2c) {
 			fcn_0047a040(e[0x0a], e[0x0c], e[0x0b], e[0x0d]);
 			if (f.v28) {
-				fcn_0047ccd0(e[4] + e[6] - GLYPH_W(H6),
-					     e[5] + (GLYPH_H(H6) - GLYPH_H(h0)) / 2,
+				fcn_0047ccd0(e[4] + e[6] - GLYPH_W(H6), e[5] + (GLYPH_H(H6) - GLYPH_H(h0)) / 2,
 					     (int) e[3], (char*) f.v14, 7);
 			}
-			else {
-				fcn_0047ccd0(e[4] + e[6] - GLYPH_W(H3),
-					     e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+			if (!f.v28) {
+				fcn_0047ccd0(e[4] + e[6] - GLYPH_W(H3), e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 					     (int) e[3], (char*) f.v14, 3);
 			}
 		}

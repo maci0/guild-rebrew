@@ -17207,3 +17207,31 @@ native reads msg.id[] in all six vote loops (0x54 for id[0], 0x5c for id[2], at 
 which is faithful, gives 8796 to 8806 and closes vote segments but moves one slot (152/153) and
 needs a companion slot fix; and the best size seen, 8790, combines the corrected prototype with
 msg.text[1] moved before the p34 lookup.
+
+## 2026-11-02 — fcn_00467920 icon hit test end-mark calls split
+
+The 0x46843c end-mark block now writes each `f.v28` pair as two guarded
+statements (`if (v28)` then `if (!v28)`) instead of if/else arm pairs. The
+compiler was tail-merging all four `fcn_0047ccd0` calls into one shared call
+tail; the duplicated inner test gives each arm its own successor and keeps
+three call sites (native has four). Object grows 4633 to 4723 against native
+4699 and match rises 519 to 539; first mismatch stays offset 2, the known frame
+temp and zero-register family, unchanged by this block. Evidence: variant sweep
+in `.scratch/asm_467920.findings.md` (base 4633/1 site, variants at 4651/2,
+4701/2, 4723/3, 4746/4 sites; the four-site form drops to 522). Verified with
+`rebrew test src/Develop/Unassigned/GOLDTL.fcn_00467920.c --va 0x00467920
+--size 4699 --no-promote`; source backed up at
+`.scratch/backup_467920.c.icon_539`.
+
+## 2026-11-02 — panel end-mark calls split
+
+`0x467920` 519 to 539 with the object at 4723, twenty-four over native. Three of native's four
+fcn_0047ccd0 end-mark sites now exist: the 0x46843c block writes each f.v28 pair as two guarded
+statements, `if (f.v28) {...}` then `if (!f.v28) {...}`, rather than if/else arms, and the
+duplicated inner test gives each arm its own successor, which defeats the tail merge the compiler
+otherwise performs. The extra `test v28` per pair is the price. Measured variants that cost more
+match than they gain: v34-only split (4651, two sites, match 519), v2c-only split (4701, two,
+527), four top-level `if (v34 && ...)` (4746, four sites, 522), and swapped arms or goto layouts
+that collapse back to one site. The two `push 3` arms, v34's `!v28` and v2c's `!v28`, still share
+one call tail because the compiler redirects v34's pushes into the v2c call block, so the icon hit
+region remains 24 bytes over native's 0x364.
