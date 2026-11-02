@@ -818,8 +818,6 @@ void __cdecl fcn_004da690(unsigned int *a0)
     fcn_0057e880(0x30, 0, 0, 0);
 
     if (a0[4] == 0x11111111u) {
-        fcn_004e4de0((int)&s00, (int)&s04, (int)&s08, (int)&s0C, (int)&s10, (int)&s14, (int)&s18, (int)&s1C, (int)&s20, (int)&s24, (int)&s2C);
-        fcn_004e4de0((int)&s30, (int)&s34, (int)&s38, (int)&s40, (int)&s44, (int)&s48, (int)&s5C, (int)&s60, (int)&pdd0, (int)&pdd1, (int)&pdd2);
-        fcn_004e4de0((int)&pdd3, (int)&pdd4, (int)&pdd5, (int)&pdd6, (int)&pdd7, (int)&pdd8);
+        fcn_004e4de0((int)&s00, (int)&s04, (int)&s08, (int)&s0C, (int)&s10, (int)&s14, (int)&s18, (int)&s1C, (int)&s20, (int)&s24, (int)&s2C, (int)&s30, (int)&s34, (int)&s40, (int)&s44, (int)&s48, (int)&s5C, (int)&s60, (int)&pdd0, (int)&pdd1, (int)&pdd2, (int)&sF4, (int)&sD0, (int)&order);
     }
 }

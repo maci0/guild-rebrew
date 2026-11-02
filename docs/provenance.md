@@ -17088,3 +17088,20 @@ assigned first, which the allocator refuses because arrays slot at first use and
 first. The object is 244 bytes short while emitting 1541 instructions against native's 1452, so
 ours has more, smaller instructions and the remaining slot order is driven by that code shape
 rather than by declarations.
+
+## 2026-11-02 — transport arrays start converging on native bases
+
+`0x4DA690` 810 to 848 with the object at 7056, one byte short of native, frame 0x900, sitzung 0x1e4,
+prefix 0x9b and four pushes held. The escape block is now a single fcn_004e4de0 call with 24
+arguments: 18 int escapes after dropping s38, then pdd0..2, then the addresses of sF4, sD0 and
+order. That brings sF4's base to exactly native 0x104 and moves sD0 off the shared slot toward
+0xd0. Bases now read sel 0xb4 against 0x74, s84 0x74 against 0x84, s98 0xdc against 0xa8, sD0 0xc4
+against 0xd0 and sF4 0x104 against 0x104, so the sum of absolute deltas fell from 176 to 144. An
+exact 7057-byte variant exists (drop s38, per=8) but measures 800 match, so 7056/848 was kept.
+Measured no-ops: escape argument order in four arrangements (reversed, doubles-first, interleaved,
+single group), int-array declaration order, and volatile arrays. A full 128-mask array-escape
+subset sweep against doubles 0..9 shows only masks containing sF4, sD0 and order reach sF4 0x104 at
+frame 0x900, and no mask restores sel 0x74 together with sF4 0x104; fixed 148-byte int and double
+filler mixes break the frame or prefix. The point is a local optimum of that search, so the next
+dimension is the frame's own structure (aggregate members fixing a position) and first-use order
+rather than the escape mask.
