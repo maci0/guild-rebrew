@@ -57,7 +57,7 @@ int __cdecl d2_GetResourceData(int table, int index);
 /* ADDRESS: GOLDTL 0x0046c5a0 */
 void __cdecl fcn_0046c5a0(int a0, int a1)
 {
-	int i;
+	volatile int i;
 	int nImg;
 	int img;
 	int xr;
@@ -82,7 +82,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 	int sv74;
 	int sv78;
 	char bufA[0x100];
-	char bufB[0x84];
+	char bufB[0x88];
 	char bufC[0x200];
 	char bufD[0x200];
 	char bufE[0x100];
@@ -99,7 +99,11 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 	color = 0;
 	v60 = 0;
 	slot = a1 * 0x3cc + 0x1015f40;
-	fcn_00472880(*(int*) (slot + 0x28c) ? *(int*) (slot + 0x28c) : fcn_00465950("_FONT"));
+	if (*(int*) (slot + 0x28c)) {
+		fcn_00472880(*(int*) (slot + 0x28c));
+	} else {
+		fcn_00472880(fcn_00465950("_FONT"));
+	}
 	g_7725b4 = 0;
 	if (!*(int*) (slot + 0x3c)) {
 		return;
@@ -147,10 +151,12 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				chk = *(unsigned char*) (g_6b23a4 + *(char*) (t + i) * 2) & 4;
 			}
 			if (chk) {
+				d = *(char*) (t + i) - '0';
 				i += 1;
+			} else {
+				d = -1;
 			}
 			p = t + i;
-			d = *(char*) (p) - '0';
 			switch (*(char*) (p)) {
 			case 'A':
 				DRAW_RUN(1, g_102d020);
@@ -534,8 +540,8 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					continue;
 				}
 				g_7725b4 |= 0x40;
-				tail[1] = pal[d][0];
-				tail[0] = pal[d][1];
+				tail[0] = pal[d][0];
+				tail[1] = pal[d][1];
 				tail[2] = pal[d][2];
 				*(char*) (&span - 2) = tail[0];
 				*(char*) (&span - 3) = tail[1];

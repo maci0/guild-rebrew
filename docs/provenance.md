@@ -16124,3 +16124,20 @@ the dedupe scan counter is a block-scope int held in edx; the duplicate s30 stor
 `if (s28 > 0)` is gone; `s3C = 1` sits inside the push sequence before fcn_005358e0; the tie
 counter is a register variable; the second-pass packet scan is a do/while with break; and the
 dedupe match block writes through a block-scope pointer.
+
+## 2026-11-02 — dialog dispatch reaches its reachable size
+
+`0x46C5A0` is now 962 match with the object at 6068, which is the closest reachable size: the
+declared native extent 6080 includes twelve trailing NOPs after its index that the object
+compare trims, and code plus pad ends at 0x1710, so the 21-dword dispatch table sits at object
+0x1710 and the 80-byte index at 0x1764, exactly native's offsets relative to 0x46c5a0, with the
+index byte-identical to native 0x46dd04. Kept edits: the digit `d` is computed inside the digit
+branch (`d = *(char*)(t+i) - '0'; i += 1;` with the else setting -1) instead of reading the
+letter, which was a semantic error; the font call is duplicated in both branches as native
+does; `volatile int i` forces the stack spill native has at [ebp-4] so the Z/B/L arms become
+byte-identical modulo slot offsets; `bufB[0x88]` restores the frame after the spill frees a
+temp (native's buffer total is 0x680 against our 0x688 for this reason); and the F palette
+tail copies `pal[d][0..2]` in natural order, where the old swapped 0/1 was wrong. Residual
+gaps are one mechanism: native caches g_102d020 in ebx and reloads it after every call before
+passing it as DRAW_RUN's x argument, while our source reads memory each time; per-case
+native-minus-ours reads i +40, [ +74, N +44, F -35, Y -27, ] -62, l -11, T -7, R +7.
