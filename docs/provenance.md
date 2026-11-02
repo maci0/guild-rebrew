@@ -18353,3 +18353,28 @@ i's slot with owner; the first mismatch at 0x18 is the zero constant's register,
 against our `33ed` (xor ebp,ebp). Declaration reorders, handle and saved initialisation changes and a
 single-saved variant all compiled to identical bytes. The earlier body measured 9.55 percent with prefix 2
 and the current measures 9.29 with prefix 24 and the exact frame; the keep is deliberate.
+
+## 2026-11-03 — master thieves slot pass negative, block order found
+
+`0x4813B0` keeps 381 at object 4059 with prefix 24 and the first mismatch at 0x18; the slot pass produced
+no keeper and the source was never edited. The slot maps are now verified by tracking esp through the
+object: ours is factor S+4, maxfactor S+8, saved S+0x10, i S+0x14, cx S+0x18, match S+0x1c, cy S+0x20,
+best_score S+0x28, ent S+0x2c with S+0x24 unused and no stack slot for owner, which is recomputed as
+rec+0x30; native is factor S+4, maxfactor S+8, match S+0x10, i S+0x14, cx S+0x18, best_score S+0x1c,
+cy S+0x20, saved S+0x24, owner S+0x28 and ent S+0x2c, confirmed at native sites for saved (store at 0x29,
+0x7b and 0x83, reload at 0x10f), match (0x1b7 and 0x228), best_score (0x607 and 0x643) and ent (0x3e and
+0x52). Native's edi is the constant zero (`xor edi,edi` at 0x17, push edi, cmp esi,edi, stores into
+g_100b0ac and g_100b0a8) while ebp is the handle and saved variable (`xor ebp,ebp` at 0x24, mov ebp,esi at
+0x6e, spill and reload at S+0x24); ours is the mirror, with ebp as the zero and edi as the handle. Nine
+allocator experiments all produced the same 0x17 `33ed` and 0x24 `33ff` pair: reversed declaration order
+(object byte-identical), a single-variable variant, moving `saved = 0` after the first call, volatile
+saved, an unsigned char pointer saved, three handle renames, an added handle-weight guard in L1e70, and
+moving the two zero stores to the function top. So the constant CSE colour and the slot order are
+whole-function decisions. The actionable finding is block layout: native places the found==0 block between
+the loop and the post-loop body (0x39 je to 0x81, that block doing cmp ebp,edi, storing saved and jumping
+to common at 0x4d3 before falling into 0x8d, with the loop's break path as a jmp 0x8d at 0x7f), while ours
+places the same block after the post-loop body (0x39 je to 0x123 with a 6-byte `0f 84` where native has a
+2-byte `74`, and the break path falling through at 0x7f). The CFG is the same but the placement differs,
+so the layout heuristic sees the whole function; fixing it would also fix the je encoding and every offset
+after 0x37 and it is upstream of the register colour. Native also keeps owner in a slot at S+0x28 where we
+recompute rec+0x30, so owner's liveness needs to change too.
