@@ -82,7 +82,7 @@ int __cdecl fcn_005b9cb0(int, int);
 int __cdecl fcn_005b9df0(int, int, int, int);
 void __cdecl fcn_005b9fb0(int);
 int __cdecl fcn_005b9980(int);
-int __cdecl fcn_005ba750(int, int, int);
+int __cdecl fcn_005ba750(int, float, int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl fcn_0057eba0(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
@@ -1410,83 +1410,82 @@ l_5bcd16:
 	}
 
 	/* 0x5bcd9a: the dialog status of the current trade row */
-	if (*(int*) 0x100f1dc == 2) {
-		goto l_5bcf9f;
-	}
-	if (*(int*) 0x100f1dc != 0x527) {
+	if (*(int*) 0x100f1dc != 2) {
+		if (*(int*) 0x100f1dc != 0x527) {
+			goto l_5bd632;
+		}
+		if (fcn_00526120(*(int*) 0x14a5704, 0x101) == 0) {
+			goto l_5bd632;
+		}
+		if (f.v38 == 0) {
+			goto l_5bceb8;
+		}
+		if (f.v40 != 0) {
+			goto l_5bd632;
+		}
+		/* 0x5bcdeb: the owner rows of the two 0x38-stride tables */
+		for (idx = 0x7796f0; idx < 0x7798b0; idx += 0x38) {
+			if (*(int*) idx == -1) {
+				continue;
+			}
+			j = fcn_00471f80(*(int*) idx);
+			if (j > 0) {
+				fcn_004c51f0(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
+				             (int) (*(unsigned char*) 0x773d75), 0);
+				fcn_00472380(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
+			} else if (j < 0) {
+				fcn_004c52d0(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
+			}
+		}
+		for (idx = 0x778db0; idx < 0x779130; idx += 0x38) {
+			if (*(int*) idx == -1) {
+				continue;
+			}
+			j = fcn_00471f80(*(int*) idx);
+			if (j > 0) {
+				fcn_004c51f0(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
+				             (int) (*(unsigned char*) 0x773d75), 0);
+				fcn_00472380(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
+			} else if (j < 0) {
+				fcn_004c52d0(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
+			}
+		}
 		goto l_5bd632;
-	}
-	if (fcn_00526120(*(int*) 0x14a5704, 0x101) == 0) {
-		goto l_5bd632;
-	}
-	if (f.v38 == 0) {
-		goto l_5bceb8;
-	}
-	if (f.v40 != 0) {
-		goto l_5bd632;
-	}
-	/* 0x5bcdeb: the owner rows of the two 0x38-stride tables */
-	for (idx = 0x7796f0; idx < 0x7798b0; idx += 0x38) {
-		if (*(int*) idx == -1) {
-			continue;
-		}
-		j = fcn_00471f80(*(int*) idx);
-		if (j > 0) {
-			fcn_004c51f0(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
-			             (int) (*(unsigned char*) 0x773d75), 0);
-			fcn_00472380(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
-		} else if (j < 0) {
-			fcn_004c52d0(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
-		}
-	}
-	for (idx = 0x778db0; idx < 0x779130; idx += 0x38) {
-		if (*(int*) idx == -1) {
-			continue;
-		}
-		j = fcn_00471f80(*(int*) idx);
-		if (j > 0) {
-			fcn_004c51f0(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
-			             (int) (*(unsigned char*) 0x773d75), 0);
-			fcn_00472380(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
-		} else if (j < 0) {
-			fcn_004c52d0(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
-		}
-	}
-	goto l_5bd632;
 
-l_5bceb8:
-	/* 0x5bceb8: the three owned rows of every filled slot */
-	if (f.v48 == 0) {
+	l_5bceb8:
+		/* 0x5bceb8: the three owned rows of every filled slot */
+		if (f.v48 == 0) {
+			goto l_5bd632;
+		}
+		f.v24 = 0;
+		f.v10 = (int) f.v6D8;
+	l_5bced7:
+		idx = *(int*) f.v10;
+		if (idx != 0) {
+			f.vA4 = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
+			f.v30 = f.v10 + 0xd8;
+			for (f.v1c = 3; f.v1c != 0; f.v1c--, f.v30 += 4) {
+				if (*(int*) f.v30 == -1) {
+					continue;
+				}
+				f.v9c = *(int*) (*(int*) 0x1015ea0 + *(int*) f.v30 * 0x2f4 + 8) - 0xdf;
+				j = fcn_00471f80(*(int*) f.v30);
+				if (j <= 0) {
+					continue;
+				}
+				fcn_004c51f0(-1, *(int*) (f.vA4 + 2), f.v9c, j,
+				             (int) (*(unsigned char*) 0x773d75), 0);
+				fcn_00472380(*(int*) f.v30, 0,
+				             ((int*) (f.v15C + 0x64))[f.v24], 0);
+			}
+		}
+		f.v24++;
+		f.v10 += 0xf0;
+		if (f.v24 < 0x10) {
+			goto l_5bced7;
+		}
 		goto l_5bd632;
 	}
-	f.v24 = 0;
-	f.v10 = (int) f.v6D8;
-l_5bced7:
-	idx = *(int*) f.v10;
-	if (idx != 0) {
-		f.vA4 = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
-		f.v30 = f.v10 + 0xd8;
-		for (f.v1c = 3; f.v1c != 0; f.v1c--, f.v30 += 4) {
-			if (*(int*) f.v30 == -1) {
-				continue;
-			}
-			f.v9c = *(int*) (*(int*) 0x1015ea0 + *(int*) f.v30 * 0x2f4 + 8) - 0xdf;
-			j = fcn_00471f80(*(int*) f.v30);
-			if (j <= 0) {
-				continue;
-			}
-			fcn_004c51f0(-1, *(int*) (f.vA4 + 2), f.v9c, j,
-			             (int) (*(unsigned char*) 0x773d75), 0);
-			fcn_00472380(*(int*) f.v30, 0,
-			             ((int*) (f.v15C + 0x64))[f.v24], 0);
-		}
-	}
-	f.v24++;
-	f.v10 += 0xf0;
-	if (f.v24 < 0x10) {
-		goto l_5bced7;
-	}
-	goto l_5bd632;
 
 l_5bcf9f:
 	/* 0x5bcf9f: the row record of the transport dialog */

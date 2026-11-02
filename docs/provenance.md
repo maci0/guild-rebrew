@@ -15747,3 +15747,16 @@ docs/codegen-walls.md sections 1 and 6b, not missing transcription. One delibera
 deviation: native frees p08 twice, and including the dead duplicate grows the object to
 5121 while dropping match to 374, so the duplicate is omitted and the rest of the order
 follows native.
+
+## 2026-11-02 — panel branch nesting removes the 1232-byte drift
+
+`0x5BA910` 782 to 787 with the object at 12353 against native 11948. The 0x100f1dc
+guard is nested instead of jumping to l_5bcf9f, which is native's shape at 0x5bcd9a
+(`sub eax,2; je 0x5bcf9f`, the 0x527 block inline, the body emitted at 0x5bcf9f): the
+pointer loop that sat 1232 bytes late in the previous object is now in place and that
+drift window is gone. `fcn_005ba750` takes `(int, float, int)` because native pushes the
+raw float bits at 0x5bd728. Lead 2 from the previous pass is refuted: the a2-mode call
+sites already match native site for site, including `*(int*)(a1 + 0x5d)`; the excess at
+0x5bbdf3/0x5bbdf7 is an if/else fallthrough inversion at 0x5bbde2. Remaining windows:
+472 at 0x5bcb04, 379/353 near 0x5bd630, 202 at 0x5bbc64, 186/179 near 0x5bc870, 152 at
+0x5bac3b, and 137/90 at 0x5bbdf7/0x5bbdf3.
