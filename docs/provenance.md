@@ -17459,3 +17459,24 @@ base-before-v68 store order, `(void)&v68`, self-reads, long or unsigned forms, p
 loop pointer rewrites are all identical to the base. Recorded in docs/codegen-walls.md: the next
 lever is the twelve-instruction delta (native 1452 against our 1464), which is what would change
 register pressure enough to spill v68 like the reference.
+
+## 2026-11-02 — transport slot map recorded as positional
+
+`0x4DA690` keeps 882 at object 7057 with frame 0x900, prefix 0x9b, four pushes and the array
+census intact; the tenth round produced no keeper and the source is unchanged. Measured facts now
+in docs/codegen-walls.md: VC6 canonicalises shape, so reversing the whole scalar declaration block,
+reordering the sD8..sE8 staging loads and rewriting the `if(k)` and `if(s04)` condition families in
+three spellings each give a byte-identical 882/7057 object, because slots follow liveness rather
+than source order. Call-anchored accounting puts the first nonzero delta at 0x320 (+3, ours
+`mov [esp+0x80],eax` against native's disp8 `[esp+0x58]`), then -6 at 0x339 and +11 at 0x3b2, with
+the cumulative shift swinging +25 to -160 and the body 160 bytes shorter than native before the
+tail escape block hides it; the worst short regions are 0x9c7 -41, 0xbb5 -20, 0x10d8 -65, 0x138e
+-36, 0x143b -24 and 0x1aef -27. Native interleaves order[0] at 0x9b inside the sitzung copies and
+order[1..5] at 0x188..0x1b4 where ours emits all six at 0x2da..0x311, which is the 0x9b prefix
+break. Scalar slots still differ (s2C 0x24 against native 0x2c, s34 0x80 against 0x58) and s44 is
+address-taken by the frame lever, so it cannot stay in ebp as native has it. Rejected with
+measurements: condition and gate rewrites, staging reorders, an in-loop s04 temp (864/7050),
+dropping k=s44 (identical object), a guard-free body (862/7041), the escape block before the
+epilogue (863/7054), 68 single escape swaps X->{s78,s88,s8C,s90} (best 882 at X=s40), drop-s44
+pairs (927-930 at 7031-7035 but sel moves 0x74 to 0x70 and blkB 0xa8 to 0xac), char or short
+filler (frame 0x904) and double filler (900-914 with the same census but alignment forcing 0x908).

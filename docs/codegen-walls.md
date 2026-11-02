@@ -2398,3 +2398,26 @@ store order, `(void)&v68`, self-reads, long or unsigned forms, predicate zeros a
 pointer rewrites are all identical to the base. The next lever is the twelve-instruction
 code delta (native 1452 against our 1464), which is what would change register pressure
 enough to spill v68 like the reference.
+
+TL4da690 holds native size 7057 and a zero base delta but its slot map and initialiser
+schedule do not reproduce. The object matches 882 with frame 0x900, prefix 0x9b, four
+pushes and the census 74:2 84:10 90:1 94:1 9c:3 a0:2 a4:2 a8:3 b0:1 b4:1 bc:1 c0:1 d0:6
+d4:1 104:3; VC6 canonicalises shape, so reversing the scalar declaration block, reordering
+the sD8..sE8 staging loads and rewriting `if(k)`, `if(k!=0)`, `if(k>0)`, `if(s04)` and
+`if(s04!=0)` all give a byte-identical object, because slots are set by liveness rather
+than source order. Call-anchored accounting shows the first nonzero delta at 0x320 (+3,
+ours `mov [esp+0x80],eax` against native's disp8 `[esp+0x58]`), then -6 at 0x339 and +11 at
+0x3b2, with the cumulative shift swinging +25 to -160 and the body 160 bytes shorter than
+native before the tail escape block hides it; the worst short regions are 0x9c7 -41, 0xbb5
+-20, 0x10d8 -65, 0x138e -36, 0x143b -24 and 0x1aef -27. Native interleaves order[0] at 0x9b
+inside the sitzung copies and order[1..5] at 0x188..0x1b4, while ours emits all six at
+0x2da..0x311, which is what breaks the 0x9b prefix. Scalar slots still differ (s2C native
+0x2c against 0x24, s34 0x58 against 0x80) and s44 is address-taken by the frame lever so it
+cannot stay in ebp as native has it. Rejected with measurements: condition and gate
+rewrites, staging reorders, an in-loop s04 temp (864/7050), dropping k=s44 (identical
+object), a guard-free body (862/7041), the escape block before the epilogue (863/7054),
+68 single escape swaps X->{s78,s88,s8C,s90} (best 882 at X=s40), drop-s44 pairs (927-930
+at 7031-7035 but sel moves 0x74 to 0x70 and blkB 0xa8 to 0xac), char or short filler
+(frame 0x904) and double filler (900-914 with the same census but 8-byte alignment forcing
+0x908). Within the pinned aggregate geometry the remaining gap is positional: the slot map
+and the interleaved initialiser schedule cannot be reproduced by source-level reordering.
