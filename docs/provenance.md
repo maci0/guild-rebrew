@@ -19076,3 +19076,23 @@ the two-slot order: native has dist and v24 at 0x4 with recB and color at 0x8, w
 gives recB and color at 0x4 and dist with v24 at 0x8 for about eight displacement bytes; that may be a
 source-scope artifact of the missing structure and is to be re-measured after the blocks are written.
 Backups and notes in .scratch/r561380/ (v0_584.c, kept_v3_frame0x5e4.c, v2 to v6, NOTES.md).
+
+## 2026-11-03 — season setup accumulation family tried, one shape close
+
+`0x540020` keeps its state at 3872 with object 4393, 258 relocations, frame 0x3b8 and roles obj in esi, leftw
+in ebp, w in edi and n in ebx; the accumulation family produced no keeper and the tree is untouched. Twenty or
+so rewrites of how n accumulates were measured and every one is invisible to the allocator, with the roles
+unchanged: switch, temp k, ternary, accumulate a multiplier with copy or divisor by it, a d=n copy once and per
+branch, `leftw + leftw`, shift by one, a parenthesised divisor, `n = n + 2`, a reversed chain, unsigned n, long
+n, `1 << k` adds, doubled adds, w_tmp and lw_tmp temporaries, renaming the earlier w block, declaration swaps,
+block-scoped n, loop-head permutations, continue against goto, and a separate unsigned short cast web for w.
+The finding is that byte-equivalent rewrites are invisible to the allocator because temporaries coalesce and
+dead code is dropped, and scopes or types do not matter. The 16-bit callee fix alone measures 4394 with no role
+change, and crossing it with eleven variants changes no role. One informative shape: making w not a variable,
+`if (fcn_0050bfe0(obj) < (int)(fcn_0042e410(0x5a) & 0xffff))`, gives obj in esi, leftw in edi and n in ebp at
+size 4391, so the allocator ranks the three webs obj, leftw, n exactly as native and only w's priority is
+wrong while its instructions are byte-identical. Suggested next lever: the post-0xb15 non-role differences,
+namely the `mov cl,[0x773d75]` and its and scheduling at the fcn_004c5150 site, the ENTCLASS addressing
+`[eax+ecx+0x247]` against native's `[ecx+eax+0x247]`, and the [esi+1] load placement, since those change the
+intermediate representation where the pre-0xb15 stream cannot. Log in .scratch/f540020/ROUND5.md with tools
+gen.py, cross16.py and struct.py.
