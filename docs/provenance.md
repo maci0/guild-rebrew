@@ -20051,3 +20051,29 @@ so the -1 register is never clobbered there, and cases 4 and 5 get `movl $-1` on
 register before the fail. The next step is to make case 5's zero constant land in ebx while -1 stays in ebx, which
 native achieves by keeping v10 in ebp. Variants c3i1, c3h1, c3g2, c3e1, c6m2, c3t1, c5v10, c3j1, c3j2 and c3j3
 and notes in .scratch/r561380/NOTES_round7b.md.
+
+## 2026-11-03 — crew dialog segment map built
+
+`0x43C640` stays at 442 with object 5491 against native 5419, 34 relocations, frame 0x60, prologue equal to native
+through offset 10 (`55 8bec 83ec60 53 56 8b7508`), five assembly fill blocks intact and lint clean; round six kept
+nothing and the source is v38. A segment map was built by anchoring on the fills, which are instruction-identical,
+so only the gaps between them can differ: entry to fill1 is plus eleven bytes, fill1 to fill2 is minus forty-nine,
+fill2 to fill3 minus fifty-two, fill3 to fill4 plus twelve, fill4 to fill5 plus sixty-five and fill5 to the end
+plus sixty-nine, for a net of plus seventy-two. That shows the surplus is a redistribution rather than spill: native
+carries one hundred and one bytes more across the region-scan and setup segments and one hundred and thirty-four
+fewer across the two vertex-emission segments, so 5419 cannot be reached by deleting seventy-two bytes of spill and
+needs native's extra scan and setup work reproduced while the vertex segments shrink. The largest identified block
+is the float vertex expression, where native per site does fild, fmul g, fmul jx, fadd st0,st0, fild int, fmul
+vstep, faddp, fsub jx and fstp, for a census of sixteen fadd, sixteen faddp and zero fxch, while v38 emits an extra
+`fxch st(1)` at all sixteen sites for thirty-two bytes. Rewriting the sum with the doubling as its own statement
+kills all sixteen fxch, but MSVC then keeps the variable copy alive past the store and adds a non-popping fadd plus
+`fstp st(0)` per site, returning the thirty-two bytes: `(f+f+X)` and `X+(f+f)` give 5491 at frame 0x60, `f = f+f`
+then `f+X` and `f += f` give 5475 at match 282 but frame 0x64, and hoisting the first-loop bound into w1 gives 5483
+at match 310 and frame 0x60, so every variant that shrinks moves the frame to 0x64 and breaks the prologue at offset
+3, and all were reverted. The offset-11 divergence is our zero constant in ebx, used for `cmp reg,ebx` on the
+greater-than-zero tests and forcing `xor ebx,ebx` before `push edi`, where native tests registers directly and homes
+y in edi and x in ecx; our y sits in edx with slot [ebp-4] against native's [ebp-8] and x in edi. Clearing that
+zero CSE is the only lever found for the offset-11 gate and it is an allocator choice rather than a source one. The
+recommended next step is the one hundred and one native-longer bytes between fill1 and fill3, meaning the region
+scan, the material-store block, the frees and the region setup, since reproducing that missing work is a
+prerequisite for 5419. Findings in .scratch/goldtl-0043c640/NOTES.md round 6.
