@@ -428,14 +428,18 @@ void __cdecl fcn_00540020(void)
 		obj = fcn_00502cd0(*(int*) (p + 0x5d), 1, 4, 0x1d);
 		if (obj != 0) {
 			char* s;
+			int ent;
 
 			do {
+				ent = *(int*) ((char*) obj + 0x3b);
 				p = fcn_00503fe0(1, 1, *(int*) ((char*) obj + 0x1c));
-				fcn_00402a00(*(int*) ((char*) obj + 0x3b),
-					     p != 0
-					     && (s = SLOTPTR(*(unsigned short*) (p + 0x27))) != 0
-					     && fcn_0047dca0(s) != 0);
-			} while (fcn_00502850() != 0);
+				if (p != 0
+				    && (s = SLOTPTR(*(unsigned short*) (p + 0x27))) != 0
+				    && fcn_0047dca0(s) != 0)
+					fcn_00402a00(ent, 1);
+				else
+					fcn_00402a00(ent, 0);
+			} while ((obj = fcn_00502850()) != 0);
 		}
 	}
 

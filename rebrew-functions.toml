@@ -425400,15 +425400,15 @@ size = 4393
 note = "Goal72 inferred role: Client round/day transition setup and entity refresh. Counterpart GOLD.0x00538740 supported by full native structure, resources and callers, not a compiled shared-provider claim. See .scratch/goal72/large/REPORT.md and manifest.json. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
 name = "fcn_00540020"
 updated_by = "test"
-updated_at = "2026-11-02T18:16:19+00:00"
+updated_at = "2026-11-02T18:30:05+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00540020.c"
 symbol = "_fcn_00540020"
 kind = "FUNCTION"
-status = "NEAR_MATCHING"
+status = "SIZE_MISMATCH"
 blocker = "Docs map TL 0x540020 with Gold 0x538740 as round/day refresh and claim no provider. Stored SIZE 4393. Prologue allocates 0x3b8 and calls gm_GetEntityTableEntry then fcn_00500e20. Source is int(void) return 0; those calls and the frame are unwritten."
 
 ["GOLDTL.0x00540020".verification]
-source_hash = "50975ce8dbd6470682f26ea9a0a2e60aefbd343f1c59269c23bfea5c43578ae9"
+source_hash = "32b6d010283f23c2566e891b82dc264824f3d0718cee8e5a221543ae623b0df1"
 reference_hash = "03fb2e428ac720b68f52e8b8da5f549c8d71c565fe77e568e2d23e5fed84a5d3"
 reference_size = "4393"
 headers_hash = "e4117b2e34213d6e7910b6ff317f4754e997a864de1dfea6b932048fd0f3a8e7"
@@ -425419,10 +425419,10 @@ module = "GOLDTL"
 va = "0x540020"
 context_hash = ""
 defines = "[]"
-input_hash = "99587e6da918ddc656301334574cff34777073ac67d65d80114aa9736145c002"
-status = "NEAR_MATCHING"
+input_hash = "9c672322ea089108b34469702b820f387430187e9902749fa34e3dd27a92237a"
+status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T18:16:19+00:00"
+measured_at = "2026-11-02T18:30:05+00:00"
 
 [["GOLDTL.0x00540020".status_history]]
 old_status = "STUB"
@@ -425434,6 +425434,12 @@ updated_by = "test"
 old_status = "SIZE_MISMATCH"
 new_status = "NEAR_MATCHING"
 changed_at = "2026-11-02T18:16:19.546880+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00540020".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-11-02T18:30:05.759867+00:00"
 updated_by = "test"
 ["GOLD.0x00538740"]
 size = 4402

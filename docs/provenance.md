@@ -18592,3 +18592,24 @@ rejected. A further climb over 276-320 accepted only the two semantic reversions
 tail re-crossing, and sweeping all six tail-arm orders and the p-record store order produced nothing above
 19984 fast, so the state is kept as the correctness floor. Session notes in .scratch/g0/NOTES.md session 10,
 backups .scratch/bak/v45_967_kept.c and v43_978_asis.c.
+
+## 2026-11-03 — season walk block converged, size exchanged for structure
+
+`0x540020` keeps the byte-identical walk block at match 3009 with object 4386, 232 relocations and the first
+mismatch at 0xaf1, exchanging the previous 3097 at exactly 4393 with NEAR_MATCHING for a structural gain.
+The walk block now matches native from 0xa4e to 0xace (128 bytes): the je at 0xa55 is `74 77` with native's
+displacement 0x77, the loop head is `mov ecx,[eax+0x1c]` and `mov esi,[eax+0x3b]`, and the flag argument is
+`push 1; jmp; push 0; push esi; call` at one shared call site. The source shape is a do/while,
+`int ent; do { ent = *(int*)((char*)obj + 0x3b); p = fcn_00503fe0(1, 1, *(int*)((char*)obj + 0x1c));
+if (p != 0 && (s = SLOTPTR(*(unsigned short*)(p + 0x27))) != 0 && fcn_0047dca0(s) != 0)
+fcn_00402a00(ent, 1); else fcn_00402a00(ent, 0); } while ((obj = fcn_00502850()) != 0);`, where both the
+`ent` local and the in-condition reassignment are load-bearing: without them MSVC keeps obj in esi and
+duplicates the 0x3b load, and the block does not match. The size fell because the previous 4393 object
+reached that number with a walk block six bytes long and the remainder six bytes short, and converging the
+walk removed those six with one more byte lost to the new allocation. The remainder is now 1620 bytes
+against native 1627, and the deficit is pre-existing and localized: native's second 0x300-loop body (the
+do/while at 0x540d8e..0x540eff) is 369 bytes against our 362, where native stores the raw value and then the
+clamped value as `mov [esi+0x39],eax` twice around `and eax,edx`. Writing `v = v < 0 ? 0 : v` as a double
+store is dead-store-eliminated by MSVC 6, so the source shape that keeps both stores is still open, and there
+are plus eleven and minus eleven regions around it. Finding text in .scratch/f540020/WALK_FINDING.md, with
+the current source at kept.c and the previous 3097 state at before_walk2.c.
