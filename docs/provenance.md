@@ -15890,3 +15890,18 @@ sources traced: s2C, s38, s34, s10 and s18 set from their native producers; s40'
 store is known but applying it costs match, so it stays unapplied with one C4700 warning.
 The new ann6.py propagates esp offsets over the real CFG and reproduces every session-6
 anchor with zero conflicts.
+
+## 2026-11-02 — panel guard without a spill, index scale reuse
+
+`0x5BA910` object falls from 12281 to 12181 (match 761 to 768) while keeping frame 0x1848.
+Three edits. The 0x5bbc64 guard now uses the shape `if (j < f.v158) { A }` then
+`if (f.v20 < f.v158) continue;` then a search loop whose body contains B, which emits
+native's `mov 0x18c(%esp),%ebx / add $0x34,%esp / cmp %ebx,0x20(%esp) / jl` then the loop
+entry and break without any value crossing the branch, so nothing spills to 0x184c; folding
+B into the loop and deleting the old post-check removes a dead cmp/jge (-16). Adjacent pairs
+of the 0x1015ea0 row-offset computation (bo, two f.vA8, two f.v9c and the four i*0x2f4
+stores) compute the scale once into a block-scoped k, so the object emits the shl/sub/lea
+chain once and reuses it (-84). The 0x5bcacf cleanup loops already matched native; the tail
+bytes there come from two loop tails placed before the 0x4737c0 call. Still open: native
+emits the l_5bcf9f chain immediately before the 0x5bd632 epilogue, and the 0x5bc874
+slot-refresh flag should be a plain boolean store rather than a setcc materialisation.
