@@ -17653,3 +17653,31 @@ here as `int __cdecl fcn_0050b7c0(int, int)`), 0x0064d4fa (an x87 register-conve
 `fmod`) and 0x0066080a (declared `void __cdecl fcn_0066080a(char*)`); 0x0047cb60 resolves through
 GOLDTL.fcn_0047cb60.c, 0x0046fac0 resolves to d2_ShowTxt, and 0x00500e00 resolves to fcn_004fe330 with
 the prototype in GOLD.fcn_004fe330.c incomplete.
+
+## 2026-11-02 — terrain layer function transcribed
+
+`0x435910` grows from a 12-byte stub with no matching bytes to 3024 bytes with match 155 and an equal
+prefix of 23 bytes. The row has the address-taken-aggregate frame shape: `sub esp,0x154` before the
+four pushes with arg0 at [esp+0x168], so the immediate equals the 340-byte local region rather than
+locals plus four per push, and it is reached exactly; bytes 0..0x16 match (the sub, the pushes,
+`mov edi,[esp+0x168]`, `push edi` and `call 0x4356c0`). Transcribed in native order: the prologue
+(entity to 0x318 layout, layout to 0x294 byte grid and 0x27c heights, the 0x4356c0 call, count = 1,
+layer = a0+0x32c, layers = 3); the layer walk 0x435958..0x435c4c with its guard on [layer+0x64] and
+float [layer+0x3c] against 0x6628a8, radix-0xc0 frame records through table+0x15c, twelve h-times-vector
+products, `fcn_004357b0(b,&m[ei][1],&m[ei][0])`, twelve q-times-t stores into the two six-record weight
+arrays, a macro-nested clamp on a3 with the MIN duplicated, count++ and layer += 0x7c; then the
+dispatch as a real `switch(count)` with count==3 as the fall-through block at 0x435c66, count==2 at
+0x4361d7 and count==1 at 0x436609, each returning, so the three emission blocks are written out rather
+than factored, each doing two-times-count taps times per-layer weights plus heights[3*cell+c] plus
+two-times-count C rows in descending record order, the last three floats as
+`((tapA-bias)*m00 + (tapB-bias)*m01) * 0x662c78`, the a1-driven id expansion where the first vertex is
+computed and the rest copy the previous record's six floats and take the next id pair, then the lane
+advance of three per cell. Both callees resolve to project definitions (0x004356c0 and
+0x004357b0(unsigned char* blend, float* w0, float* w1)). Open items: native reads the local slot
+[esp+0x64] once per layer although nothing in the function writes it, so it is modelled as the first
+layer's blend block and flagged in the file header as possibly original UB; the eight hoisted tap-lane
+pointers at [esp+0x6c..0x80], [esp+0xbc] and [esp+0xc0] are modelled as three pointers per layer, with
+the per-lane byte offsets unconfirmed; the x87 chain order is inferred because the compiler interleaves
+the three component chains; and the file still carries the 1936-byte `_tlead_GOLDTL_fcn_00435910`
+pad in the .text data segment, which was sized for a 12-byte body and needs the text lead pass re-run
+once the body is final.

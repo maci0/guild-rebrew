@@ -1,43 +1,332 @@
 /*
- * Transport/goods position builder.
+ * Terrain route vertex builder.
  *
- * Resolves the entity's layout block, walks the three 0x7c-byte route layers
- * and accumulates the eight corner positions of every visible layer, then
- * emits four vertex streams plus the depth values.
+ * Walks the three 0x7c-byte route layers that hang off the entity at +0x32c,
+ * blends both frame records of every visible layer into per-layer weights,
+ * then expands a1[0] vertices per grid cursor: the six blended floats per
+ * vertex plus two ids per vertex, and widens the layer height bound through a3.
  *
- * Reconstructed range 0x435910..0x435971: the entity lookup, the layout block
- * fetch and the layer walk guard. The per-layer x87 matrix accumulation from
- * 0x435977 and the four emit loops through 0x43692e are not reconstructed
- * here; the decompiler only recovers them via the FPU stack, which no C
- * statement order reproduces.
+ * Reconstructed from the native range 0x435910..0x43692e. Hex offsets are
+ * native field offsets; the names are local to this file.
+ *
+ * Shape notes:
+ *   - the body needs address-taken aggregates, so the frame is
+ *     `sub esp,0x154` before the four callee-saved pushes;
+ *   - every visible layer with a non-zero blend index bumps the layer counter,
+ *     and the counter selects one of three unrolled emission blocks, so the
+ *     source duplicates the emission per layer count as well;
+ *   - the heights come from layout+0x27c, the byte taps from layout+0x294.
+ *
+ * Open native facts: the layer walk reads local slot [esp+0x64] and compares
+ * it against the layer's blend address, but no path in this function writes
+ * that slot. The modelled form compares against the first layer's blend block,
+ * which is what the emission expects (first visible layer gets index 0). The
+ * pre-loop pointer differences for the tap lanes in slots [esp+0x6c..0x80],
+ * [esp+0xbc], [esp+0xc0] are hoisted by the compiler from the same lanes; the
+ * lane offsets below are not individually confirmed.
  */
 
-extern float g_6628a8;			/* 0x006628a8 */
+#define F_ZERO      (*(float*) 0x6628a8)
+#define F_STEP_BIAS (*(float*) 0x662a7c)
+#define F_STEP_K    (*(float*) 0x662c78)
 
-int* __cdecl fcn_004356c0(int);
+#define LAYER_BASE    0x32c
+#define LAYER_STRIDE  0x7c
+#define REC_STRIDE    0xc0
+#define CELL_STRIDE   3
+#define VERTEX_STRIDE 0x20
+
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
+/* 0xc0-byte frame record: two 3-float vectors plus two byte-grid taps. */
+typedef struct Rec {
+	unsigned char pad00[0x08];
+	float m[3];		/* +0x08 */
+	float n[3];		/* +0x14 */
+	unsigned char pad20[0x94];
+	unsigned char* p0;	/* +0xb4 */
+	unsigned char* p1;	/* +0xb8 */
+	unsigned char padbc[4];
+} Rec;
+
+/* 0x20-byte output vertex: six floats plus two ids. */
+typedef struct Vertex {
+	float f[6];
+	int id[2];
+} Vertex;
+
+int* __cdecl fcn_004356c0(int a0);
+void __cdecl fcn_004357b0(unsigned char* blend, float* w0, float* w1);
 
 /* ADDRESS: GOLDTL 0x00435910 */
 void __cdecl fcn_00435910(int a0, int* a1, float* a2, float* a3)
 {
-	int* v2;
-	int layout;
-	float* v20;
-	int* layer;
+	unsigned char* e;
+	unsigned char* layout;
+	unsigned char* grid;
+	float* heights;
+	unsigned char* layer;
+	unsigned char* first;
+	unsigned char* b;
+	unsigned char* recs;
+	Rec* r0;
+	Rec* r1;
+	unsigned char* tap[3][3];
+	Vertex* out;
+	int* ids;
+	float wA[3][2][3];
+	float wC[3][2][3];
+	float m[3][2];
+	float t[12];
+	float* dst[12];
+	float h;
+	float q;
+	float s0;
+	float s1;
+	float d0;
+	float d1;
+	float f0;
+	float f1;
+	float f2;
 	int count;
 	int layers;
+	int ei;
+	int n;
+	int item;
+	int o;
+	int k;
 
-	v2 = fcn_004356c0(a0);
-	layout = *(int*) (a0 + 0x318);
-	v20 = *(float**) (layout + 0x294);
+	e = (unsigned char*) a0;
+	fcn_004356c0(a0);
+	layout = (unsigned char*) *(int*) (e + 0x318);
+	grid = (unsigned char*) *(int*) (layout + 0x294);
+	heights = (float*) *(int*) (layout + 0x27c);
+	first = e + (LAYER_BASE - 4);
+	recs = 0;
 	count = 1;
-	layer = (int*) (a0 + 0x32c);
+	layer = e + LAYER_BASE;
 	layers = 3;
+
+	/* ---- layer walk: blend both records of every visible layer ---- */
 	do {
-		if (layer[0x19] && (*(float*) ((char*) layer + 0x3c) != g_6628a8)) {
-			/* 0x435977..0x435d89: corner transform of this layer */
+		b = layer - 4;
+		if (*(int*) (layer + 0x64) != 0 && *(float*) (layer + 0x3c) != F_ZERO) {
+			h = *(float*) (layer + 0x3c);
+			ei = (b == first) ? 0 : count;
+			recs = (unsigned char*) *(int*) (*(int*) (layer + 0x64) + 0x15c);
+			r0 = (Rec*) (recs + *(int*) (layer - 4) * REC_STRIDE);
+			r1 = (Rec*) (recs + *(int*) (layer) * REC_STRIDE);
+			tap[ei][0] = r0->p0;
+			tap[ei][1] = r1->p0;
+			tap[ei][2] = r1->p1;
+			tap[ei][1] = r1->p0;
+
+			t[0] = h * r0->n[0];
+			t[1] = h * r0->n[1];
+			t[2] = h * r0->n[2];
+			t[3] = h * r0->m[0];
+			t[4] = h * r0->m[1];
+			t[5] = h * r0->m[2];
+			t[6] = h * r1->n[0];
+			t[7] = h * r1->n[1];
+			t[8] = h * r1->n[2];
+			t[9] = h * r1->m[0];
+			t[10] = h * r1->m[1];
+			t[11] = h * r1->m[2];
+
+			dst[0] = &wA[ei][0][0];
+			dst[1] = &wA[ei][0][1];
+			dst[2] = &wA[ei][0][2];
+			dst[3] = &wC[ei][0][0];
+			dst[4] = &wC[ei][0][1];
+			dst[5] = &wC[ei][0][2];
+			dst[6] = &wA[ei][1][0];
+			dst[7] = &wA[ei][1][1];
+			dst[8] = &wA[ei][1][2];
+			dst[9] = &wC[ei][1][0];
+			dst[10] = &wC[ei][1][1];
+			dst[11] = &wC[ei][1][2];
+
+			/* the raw values land in the weight slots first; the
+			   weighted pass below overwrites them, as in the native */
+			*dst[0] = t[0];
+			*dst[1] = t[1];
+			*dst[2] = t[2];
+			*dst[3] = t[3];
+			*dst[4] = t[4];
+			*dst[5] = t[5];
+			*dst[6] = t[6];
+			*dst[7] = t[7];
+			*dst[8] = t[8];
+			*dst[9] = t[9];
+			*dst[10] = t[10];
+			*dst[11] = t[11];
+
+			fcn_004357b0(b, &m[ei][1], &m[ei][0]);
+			q = m[ei][0];
+
+			*dst[0] = q * t[0];
+			*dst[1] = q * t[1];
+			*dst[2] = q * t[2];
+			*dst[3] = q * t[3];
+			*dst[4] = q * t[4];
+			*dst[5] = q * t[5];
+			*dst[6] = q * t[6];
+			*dst[7] = q * t[7];
+			*dst[8] = q * t[8];
+			*dst[9] = q * t[9];
+			*dst[10] = q * t[10];
+			*dst[11] = q * t[11];
+
+			/* widen this layer pair's height bound */
+			if (a3 != 0) {
+				f0 = *(float*) ((char*) r0 + 0x38);
+				f1 = *(float*) ((char*) r1 + 0x38);
+				f2 = MIN(f0, f1);
+				*(float*) a3 = MAX(*(float*) a3, f2);
+			}
+			if (ei > 0) {
+				count++;
+			}
 		}
-		layer = (int*) ((char*) layer + 0x7c);
+		layer += LAYER_STRIDE;
 	} while (--layers);
+
+	/* ---- emission: one unrolled block per visible layer count ---- */
+	n = *(int*) (e + 0x310);
+	if (n <= 0) {
+		return;
+	}
+	ids = (int*) layout;
+	out = (Vertex*) a2;
+	s0 = m[0][0];
+	s1 = m[0][1];
+
+	switch (count) {
+	case 1:
+		for (item = 0; item < n; item++) {
+			o = item * CELL_STRIDE;
+			out->f[0] = (float) tap[0][1][o] * wA[0][1][0] +
+				(float) tap[0][0][o] * wA[0][0][0] +
+				heights[o] + wC[0][1][0] + wC[0][0][0];
+			out->f[1] = (float) tap[0][1][o] * wA[0][1][1] +
+				(float) tap[0][0][o] * wA[0][0][1] +
+				heights[o + 1] + wC[0][1][1] + wC[0][0][1];
+			out->f[2] = (float) tap[0][1][o] * wA[0][1][2] +
+				(float) tap[0][0][o] * wA[0][0][2] +
+				heights[o + 2] + wC[0][1][2] + wC[0][0][2];
+			d0 = (float) tap[0][0][o] - F_STEP_BIAS;
+			d1 = (float) tap[0][1][o] - F_STEP_BIAS;
+			out->f[3] = (d0 * s0 + d1 * s1) * F_STEP_K;
+			out->f[4] = (d0 * s0 + d1 * s1) * F_STEP_K;
+			out->f[5] = (d0 * s0 + d1 * s1) * F_STEP_K;
+			if (*a1 > 0) {
+				out->id[0] = ids[0];
+				out->id[1] = ids[1];
+				ids += 2;
+			}
+			k = 1;
+			while (k < *a1) {
+				out[k] = out[0];
+				out[k].id[0] = ids[0];
+				out[k].id[1] = ids[1];
+				ids += 2;
+				k++;
+			}
+			out = (Vertex*) ((char*) out + *a1 * VERTEX_STRIDE);
+		}
+		return;
+
+	case 2:
+		for (item = 0; item < n; item++) {
+			o = item * CELL_STRIDE;
+			out->f[0] = (float) tap[0][0][o] * wA[0][0][0] +
+				(float) tap[0][1][o] * wA[0][1][0] +
+				(float) tap[1][0][o] * wA[1][0][0] +
+				(float) tap[1][1][o] * wA[1][1][0] +
+				heights[o] + wC[1][1][0] + wC[1][0][0] + wC[0][1][0] + wC[0][0][0];
+			out->f[1] = (float) tap[0][0][o] * wA[0][0][1] +
+				(float) tap[0][1][o] * wA[0][1][1] +
+				(float) tap[1][0][o] * wA[1][0][1] +
+				(float) tap[1][1][o] * wA[1][1][1] +
+				heights[o + 1] + wC[1][1][1] + wC[1][0][1] + wC[0][1][1] + wC[0][0][1];
+			out->f[2] = (float) tap[0][0][o] * wA[0][0][2] +
+				(float) tap[0][1][o] * wA[0][1][2] +
+				(float) tap[1][0][o] * wA[1][0][2] +
+				(float) tap[1][1][o] * wA[1][1][2] +
+				heights[o + 2] + wC[1][1][2] + wC[1][0][2] + wC[0][1][2] + wC[0][0][2];
+			d0 = (float) tap[0][0][o] - F_STEP_BIAS;
+			d1 = (float) tap[0][1][o] - F_STEP_BIAS;
+			out->f[3] = (d0 * s0 + d1 * s1) * F_STEP_K;
+			out->f[4] = (d0 * s0 + d1 * s1) * F_STEP_K;
+			out->f[5] = (d0 * s0 + d1 * s1) * F_STEP_K;
+			if (*a1 > 0) {
+				out->id[0] = ids[0];
+				out->id[1] = ids[1];
+				ids += 2;
+			}
+			k = 1;
+			while (k < *a1) {
+				out[k] = out[0];
+				out[k].id[0] = ids[0];
+				out[k].id[1] = ids[1];
+				ids += 2;
+				k++;
+			}
+			out = (Vertex*) ((char*) out + *a1 * VERTEX_STRIDE);
+		}
+		return;
+
+	case 3:
+		for (item = 0; item < n; item++) {
+			o = item * CELL_STRIDE;
+			out->f[0] = (float) tap[0][0][o] * wA[0][0][0] +
+				(float) tap[0][1][o] * wA[0][1][0] +
+				(float) tap[1][0][o] * wA[1][0][0] +
+				(float) tap[1][1][o] * wA[1][1][0] +
+				(float) tap[2][0][o] * wA[2][0][0] +
+				(float) tap[2][1][o] * wA[2][1][0] +
+				heights[o] + wC[2][1][0] + wC[2][0][0] + wC[1][1][0] +
+				wC[1][0][0] + wC[0][1][0] + wC[0][0][0];
+			out->f[1] = (float) tap[0][0][o] * wA[0][0][1] +
+				(float) tap[0][1][o] * wA[0][1][1] +
+				(float) tap[1][0][o] * wA[1][0][1] +
+				(float) tap[1][1][o] * wA[1][1][1] +
+				(float) tap[2][0][o] * wA[2][0][1] +
+				(float) tap[2][1][o] * wA[2][1][1] +
+				heights[o + 1] + wC[2][1][1] + wC[2][0][1] + wC[1][1][1] +
+				wC[1][0][1] + wC[0][1][1] + wC[0][0][1];
+			out->f[2] = (float) tap[0][0][o] * wA[0][0][2] +
+				(float) tap[0][1][o] * wA[0][1][2] +
+				(float) tap[1][0][o] * wA[1][0][2] +
+				(float) tap[1][1][o] * wA[1][1][2] +
+				(float) tap[2][0][o] * wA[2][0][2] +
+				(float) tap[2][1][o] * wA[2][1][2] +
+				heights[o + 2] + wC[2][1][2] + wC[2][0][2] + wC[1][1][2] +
+				wC[1][0][2] + wC[0][1][2] + wC[0][0][2];
+			d0 = (float) tap[0][0][o] - F_STEP_BIAS;
+			d1 = (float) tap[0][1][o] - F_STEP_BIAS;
+			out->f[3] = (d0 * s0 + d1 * s1) * F_STEP_K;
+			out->f[4] = (d0 * s0 + d1 * s1) * F_STEP_K;
+			out->f[5] = (d0 * s0 + d1 * s1) * F_STEP_K;
+			if (*a1 > 0) {
+				out->id[0] = ids[0];
+				out->id[1] = ids[1];
+				ids += 2;
+			}
+			k = 1;
+			while (k < *a1) {
+				out[k] = out[0];
+				out[k].id[0] = ids[0];
+				out[k].id[1] = ids[1];
+				ids += 2;
+				k++;
+			}
+			out = (Vertex*) ((char*) out + *a1 * VERTEX_STRIDE);
+		}
+		return;
+	}
 }
 /* Layout scaffolding: shifts the next source object to its reference
  * VA. 0x90 filler, not reconstruction. Generated by the text lead pass. */
