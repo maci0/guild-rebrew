@@ -37,7 +37,7 @@ extern int g_100dc38;
 extern int g_100dc34;
 extern int g_100dc24;
 extern char* g_100df20;
-extern unsigned char* g_100b0c0;
+extern unsigned char g_100b0c0[];
 extern int g_100b0a8;
 extern int g_100b0ac;
 extern unsigned short* g_773da8;
@@ -104,10 +104,6 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 	found = fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 2, 6, 0, 0x116);
 	for (;;) {
 		if (found == 0) {
-			saved = (int) handle;
-			if (handle == 0) {
-				goto common;
-			}
 			break;
 		}
 		if (gm_ResolveEntityById(0, (int*) &ent, 0, *(int*) (found + 6)) != 0
@@ -118,8 +114,11 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 		if (handle == 0) {
 			continue;
 		}
-		saved = (int) handle;
 		break;
+	}
+	saved = (int) handle;
+	if (handle == 0) {
+		goto common;
 	}
 	g_100b0ac = 0;
 	g_100b0a8 = 0;
@@ -127,20 +126,18 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 	fcn_00486c40((int) rec, (int) handle, *(int*) (*(int*) (rec + 0x16c) + 0x39));
 	fcn_00489010((int) rec, (int) handle);
 	if (g_100dc20 == *(int*) (rec + 0x16c) && g_100dc38 < 4) {
-		e = (unsigned char*) g_100b0c0;
 		j = 0;
 		n = g_100b0a8;
-		for (;;) {
+		e = g_100b0c0;
+		do {
 			if (j >= n) {
 				break;
 			}
 			memcpy((void*) (g_100df20 + g_100dc38 * 0x40), e, 0x40);
+			e = e + 0x40;
 			g_100dc38 = g_100dc38 + 1;
 			j = j + 1;
-			if (g_100dc38 >= 4) {
-				break;
-			}
-		}
+		} while (g_100dc38 < 4);
 	}
 	fcn_00489250((int) rec);
 	fcn_00489a70((int) rec, saved);

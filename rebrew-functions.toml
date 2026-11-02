@@ -421480,7 +421480,7 @@ blocker = "Body reconstructed and compiles (C89): Meister handle scan, house acc
 blocker_delta = 258
 
 ["GOLDTL.0x004813b0".verification]
-source_hash = "dcbae5b64aa9cdd8759aab9969f0d4241135a0b21e48e729ae126b6faf6baba9"
+source_hash = "1c8993eb6c4bd2aefcf56b530b12d73b88b509e4e38c5cb8caa0b1ce4da77102"
 reference_hash = "9bd4af507cd3f7c7bad44e27a5df703a50360cb61f3b183d98681846ef60fd49"
 reference_size = "4100"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -421491,10 +421491,10 @@ module = "GOLDTL"
 va = "0x4813b0"
 context_hash = ""
 defines = "[]"
-input_hash = "e9162ab6c1426e6ab9e5f7d433bce3bad47878e96847ba7c3a23c3324891fa61"
+input_hash = "b2301866ffb0f3993381342f7808dd9daa81588362f18225a4e5ff3d8896643b"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T17:38:22+00:00"
+measured_at = "2026-11-02T18:07:21+00:00"
 
 [["GOLDTL.0x004813b0".status_history]]
 old_status = "STUB"

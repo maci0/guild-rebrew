@@ -18466,3 +18466,30 @@ with -1, and native uses the 0xffff form at nine sites (0x5d093b, 0x5d09ed, 0x5d
 duplicates the visibility-store block that native shares by jumping to 0x5d0bf2, about 32 bytes offset by
 shortfalls elsewhere. Candidates kept: .scratch/660/kept-v14.c (current), round10-s4-4389-native-tables.c
 and kept-v13.c for the previous state.
+
+## 2026-11-03 — master thieves block order and register colour
+
+`0x4813B0` 381 to 546 with the object at 4083 and the frame `sub esp,0x528` still exact. The loop block order
+is now native's: `je 0x81` is the 2-byte `74 46` where it had been a 6-byte `0f 84` to 0x123, the miss block
+sits out of line between the loop and the post-loop body (saved stored at 0x7b, the break path `eb 0c` at
+0x7f, then `cmp ebp,edi` at 0x81, the store at 0x83, a 6-byte je to the common block and the body at 0x8d).
+The register colour also flipped to native: `33 ff` at 0x17 for the zero constant in edi and `33 ed` at 0x24
+for the handle in ebp. Three source shapes did it. The main query loop is
+`for(;;){ if(found==0) break; ...; if(handle==0) continue; break; }` followed by
+`saved=handle; if(handle==0) goto common;`, so handle's value is unprovable at the merge and MSVC keeps the
+runtime test and places the block inline. The copy loop is
+`do { if (j>=n) break; memcpy(...); e += 0x40; g_100dc38++; j++; } while (g_100dc38 < 4);`, and that
+do-while is what flips the whole-function colour; the outer `&&` form must stay flat because nesting `j=0`
+between the two conditions flips it back. `g_100b0c0` is declared `unsigned char g_100b0c0[]` because native
+emits the immediate `mov eax,0x100b0c0`, as fcn_00485650.c also declares it, and the loop advances
+`e = e + 0x40` as native's `add eax,0x40`. Remaining in order: the saved slot sits at S+0x14 against native
+S+0x24 and the whole scalar order differs (ours i S+0x10, saved S+0x14, match S+0x1c against native match
+S+0x10, i S+0x14, cx S+0x18, best_score S+0x1c, cy S+0x20, saved S+0x24, owner S+0x28, ent S+0x2c), giving
+the first mismatch at 0x2C, a repeat at 0x7E, +2 in the common block at 0x89 and a +2 je at 0xCA; the owner
+slot is confirmed real because native stores the lea of ebx+0x30 to S+0x28 at 0x3CD before its wsprintfA and
+reloads it at 0x795, 0x8CE, 0x967 and 0xA8E for the Lb45, Lcae, Lc7e and Le3e messages, while ours
+rematerialises rec+0x30 and removing the four per-site assignments changed zero bytes; and that owner slot is
+the blocker for declaring g_100df20 as an array, since the `extern char g_100df20[]` form produces native's
+immediate `add edi,0x100df20` but drops the frame to 0x524 because the missing owner slot is exactly those
+four bytes, so the file keeps `extern char* g_100df20;` for now. Also open: the copy-loop schedule puts
+`xor edx,edx` for j=0 after the outer `g_100dc38<4` compare where native puts it before.
