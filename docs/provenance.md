@@ -15952,3 +15952,16 @@ so the table lands on 0x16E8 instead of riding down to 0x16E4. The earlier "-4 a
 readings were an objdump wrapping artifact; extents must be measured from the jump-table
 anchors (casemap.py). Measured remaining per-anchor deltas: G +86, r +48, W -45, B -44, a -26,
 E +21, I +18, with the mid region netting +71 and the s/T region -72.
+
+## 2026-11-02 — transport order array and pointer fill
+
+`0x4DA690` 791 to 792 with the object falling from 7645 to 7534 (477 over native). Two edits
+landed together because each alone loses match: `int order[6]` replaces the six scalars
+sA8..sBC, which never landed contiguously, so the initialiser now emits disp32 at 0xc8
+instead of native's disp32 at 0xb8 and saves 56 bytes; and the 0x4dabff zero fill is written
+as running pointers with native's constant end `while (pt < (int*)0x9b43f0)` and 0x35c
+stride. Recorded mechanism: match_count is a same-offset reloc-masked byte count, so 791 was
+a sharp local maximum, adding four bytes anywhere dropped it to 769, and trims only pay off
+through a favourable re-shift. Remaining oversize blocks: 0x4dbf21 pick+render arms 218/304,
+0x4dac4b dedupe 354/428, 0x4dbf33 and 0x4dc020 arm setup 13/57 each, 0x4dbd95 133/169,
+0x4db17b 16/52.

@@ -94,12 +94,6 @@ void __cdecl fcn_004da690(unsigned int *a0)
     int s9C;
     int sA0;
     int sA4;
-    int sA8;
-    int sAC;
-    int sB0;
-    int sB4;
-    int sB8;
-    int sBC;
     int sC0;
     int sC4;
     int sC8;
@@ -121,6 +115,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
     int s108;
     int s10C;
     int s110;
+    int order[6];
     char sitzung[6][0x30] = {
         "Sitzung_Wohnsitz.ed3",
         "Sitzung_Kirche.ed3",
@@ -140,12 +135,12 @@ void __cdecl fcn_004da690(unsigned int *a0)
     char mid[0x4f8];
     char a0c[0x114];
     int n, k, i;
-    sA8 = 6;
-    sAC = 5;
-    sB0 = 4;
-    sB4 = 3;
-    sB8 = 2;
-    sBC = 1;
+    order[0] = 6;
+    order[1] = 5;
+    order[2] = 4;
+    order[3] = 3;
+    order[4] = 2;
+    order[5] = 1;
 
     memcpy(a0c, a0, 0x114);
     s2C = 0;
@@ -170,7 +165,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
         memset((char *)&sF4 + k * 4, 0, (8 - k) * 4);
 
     s20 = 0;
-    s28 = fcn_004e8b80(((int *)&sA8)[s20], 6, (char *)&mid[0x38]);
+    s28 = fcn_004e8b80(order[s20], 6, (char *)&mid[0x38]);
     s0C = 0;
     k = 0;
     if (s28 > 0) {
@@ -190,10 +185,10 @@ void __cdecl fcn_004da690(unsigned int *a0)
     }
 
     fcn_005358e0(0x6b5c60);
-    if (fcn_004ea130(((int *)&sA8)[s20]) == 0) {
+    if (fcn_004ea130(order[s20]) == 0) {
         unsigned short v = *(unsigned short *)0x774970;
         if (*(int *)((char *)a0 + 0xc) == *(int *)(0x7f4ca4 + (unsigned int)v * 0x21c)) {
-            fcn_004e99e0(((int *)&sA8)[s20], n, (char *)&mid[0x38]);
+            fcn_004e99e0(order[s20], n, (char *)&mid[0x38]);
         }
         return;
     }
@@ -236,15 +231,14 @@ void __cdecl fcn_004da690(unsigned int *a0)
     }
     *(unsigned char *)((char *)a0 + 0x30) = (unsigned char)((int *)&s4C)[0];
     if (((int *)&s4C)[0] < 0x10) {
-        ((int *)&s64)[0] = ((int *)&s4C)[0];
-        ((int *)&s68)[0] = (int)((char *)a0 + 0x34 + ((int *)&s4C)[0] * 4);
-        ((int *)&s6C)[0] = 0x9b0e30 + ((int *)&s4C)[0] * 0x35c;
-        while (((int *)&s64)[0] < 0x10) {
-            *(int *)(((int *)&s68)[0]) = -1;
-            *(int *)(((int *)&s6C)[0]) = -1;
-            ((int *)&s6C)[0] += 0x35c;
-            ((int *)&s68)[0] += 4;
-            ((int *)&s64)[0] += 1;
+        int *pa = (int *)((char *)a0 + 0x34) + s4C;
+        int *pt = (int *)(0x9b0e30 + s4C * 0x35c);
+        int *ptEnd = (int *)0x9b43f0;
+        while (pt < ptEnd) {
+            *pa = -1;
+            *pt = -1;
+            pt += 0x35c / 4;
+            pa += 1;
         }
     }
     /* native 0x4dac46: scene handle, per-entity text packets */
@@ -762,12 +756,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
         fcn_004e4de0((int)&s9C);
         fcn_004e4de0((int)&sA0);
         fcn_004e4de0((int)&sA4);
-        fcn_004e4de0((int)&sA8);
-        fcn_004e4de0((int)&sAC);
-        fcn_004e4de0((int)&sB0);
-        fcn_004e4de0((int)&sB4);
-        fcn_004e4de0((int)&sB8);
-        fcn_004e4de0((int)&sBC);
+        fcn_004e4de0((int)order);
         fcn_004e4de0((int)&sC0);
         fcn_004e4de0((int)&sC4);
         fcn_004e4de0((int)&sC8);
