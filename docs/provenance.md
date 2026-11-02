@@ -19881,3 +19881,28 @@ and i; and the only lever that moves total to 0x14 is a second real address-take
 inventory of only 0x13375 and 0x13389, both frame 0x14, excludes. A blocker is set on the row. Findings in
 .scratch/512ee0/FINDINGS_pool.md with the probe scripts probe3 to probe6, batch.py, gen_*.py and the variant set
 L3, a1, f3, f3d, x1, x2, s1, u_inner.
+
+## 2026-11-03 — crew dialog aggregate hypothesis falsified, home aliasing found
+
+`0x5744C0` stays at 1246 with object 3980 against native 3976, 51 relocations and the first mismatch at 0x27;
+the round kept no edit and the source is unchanged. The aggregate-packing hypothesis was falsified by
+measurement, and the authoritative slot map from an /FAs listing gives the base as v15 0x10, v21 0x14, v30 0x18,
+v11 and v29 0x1c, v17 0x20, v13 and v36 0x30, v20 0x34, v18 0x44, v16 0xc8, v19 0x11c and v22 0x19c against the
+reference v15 0x10, v21 0x14, v13 and v29 0x18, v30 0x1c, v17 0x20, v20 0x30, v36 0x40, v16 0x44, v18 0x98,
+v19 0x11c and v22 0x19c, so there are two pair swaps plus a difference in v13's home. Layout levers exist but
+cost bytes: `char v20[16]` instead of `[14]` packs the two-byte pad and flips the aggregates exactly to v16 0x44
+and v18 0x98, as does a store to v16 or removing the case-7 clear of v18, yet the result is object 3992, table
+0xf70 and match 1008, because the 0x985f0 lea drops from seven bytes to four while each of v18's two
+`lea [esp+0x98]` sites grows from four to seven, so case 7 goes plus six, case 8 plus six, case 9 plus fifteen and
+cases 0 and 1 plus fifteen. Declarations, element type, alignment and struct grouping are all irrelevant to the
+pair order. The stronger root cause is that the frame order is downstream of where v13's home lands: the
+reference keeps v13 in ebx across case 7 and spills its home only after v29 dies, so v13's home aliases v29's
+slot, with the spill `mov [esp+0x18],ebx` at 0x57494b and the float store `fst [esp+0x18]` at 0x5748f5 sharing
+0x18, v13's zero-init store `mov [esp+0x18],ebx` at 0x57486d, and v30 at 0x1c, while our build homes v13 at 0x30
+shared with v36 and spills there at 0x48a. A volatile read through `*(volatile float*)&v29 = 0.0f` forces the dead
+init store but leaves v29 at 0x1c, so that lever does not move the pair either. The remaining route is to
+reproduce the reference's allocation order for v13 and v29 from case-7 code shape, or to accept the frame order as
+downstream and chase the four-byte overage through case 8 and case 9 scheduling, which are minus ten and plus nine
+today. The round also added .scratch/row5744c0/frames.py, an authoritative slot dump through /FAs, plus slots.py
+and the exp variants A_swapdecl, B_v16int, C_v18char, E1_noloop, E3_v16store, H_v20_16, H_v20_12, S1_aggs,
+K_v36arr, M1_volstore, mini4 and mini6, with FINDINGS.md round 5.

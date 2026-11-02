@@ -2538,3 +2538,19 @@ single outer k and idx-as-walk-counter give the same; the round-12 native shape 
 the block at 0x289 of 214 and the text spilled, at match 832. Next lever: make the child-walk
 counter and the tabC fill pointer memory-resident before rows2's split point, since those two
 block-scoped variables are exactly native's two occupants of slot 0x04.
+
+TL5744C0 frame order is downstream of one home slot. The reference keeps v13 in ebx across case 7 and
+spills its home only after v29 dies, so v13's home aliases v29's slot: the spill `mov [esp+0x18],ebx`
+at 0x57494b and the float store `fst [esp+0x18]` at 0x5748f5 share 0x18, with v13's zero-init store
+`mov [esp+0x18],ebx` at 0x57486d, and v30 sits at 0x1c. Our build homes v13 at 0x30 shared with v36,
+spills there at 0x48a, and puts v29 at 0x1c and v30 at 0x18. The pair swaps in both the scalars and
+the aggregates follow that allocator order, not declarations, element type, alignment or struct
+grouping. Measured: `char v20[16]` instead of `[14]` packs the two-byte pad and flips the aggregates
+exactly to v16 0x44 and v18 0x98, and so does a store to v16 or removing the case-7 clear of v18, but
+the fix costs bytes rather than saving them, because the 0x985f0 lea drops from seven bytes to four
+while each of v18's two `lea [esp+0x98]` sites grows from four to seven, so case 7 becomes +6, case 8
++6, case 9 +15 and cases 0 and 1 +15, for object 3992, table 0xf70 and match 1008. A volatile read
+through `*(volatile float*)&v29 = 0.0f` forces the dead init store but leaves v29 at 0x1c, so that
+lever does not move the pair either. The remaining route is to reproduce the reference's allocation
+order for v13 and v29 from case-7 code shape, or to accept the frame order as downstream and chase the
+four-byte overage through case 8 and case 9 scheduling, which are minus ten and plus nine today.
