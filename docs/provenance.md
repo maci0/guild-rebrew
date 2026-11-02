@@ -16830,3 +16830,24 @@ candidates (t, tp, r, pr) also reach 0x74c but cost far more match; the redundan
 `v.m+0x9d = 0` after memset is gone; and the volatile set is now o, id and price, with sent, n and
 cnt dropped after single-removal sweeps (sent 575, price 547, n 527, cnt 516, id 516 at frame
 0x74c). Call count stays 95.
+
+## 2026-11-02 — task dispatcher reconstructed
+
+`0x4D8D00` goes from 11 matching bytes and a 106-byte object to 315 match and 4268 bytes, with the
+first mismatch now at offset 2 (the frame immediate). The whole dispatcher is transcribed: the
+prologue with saved ebx/ebp/esi/edi and a0 at [esp+0x14c]; `v68 = 0` and
+`base = *(int*)(*(int*)0x67a370+0xb0)` with the `for (i=0;i<0x10;i++)` loop; the early
+`if (g_772ea4) return;`; `p = (TaskRec*)(a0+0x94) + i` written as struct pointer arithmetic
+because native strength-reduces i*0x2c as i*11*4; the 11-dword copy to the 0x3c buffer; the
+continue conditions; the state==5 ternary between gm_LookupEntityRecordById and
+gm_LookupEntityRecordIn32SlotTable; `ent = fcn_004ce610(obj)`; the clear-and-return path; and the
+real switch on p->state with its table at 0x4d9ef8. The bodies are emitted in address order, so
+the source lists cases 5,1,2,3,6,4,7,8, and all eight are written in native order with their
+message tails, sprintf buffers at 0xe8/0xb8/0x88/0x118, the float comparison sites, the double
+multiplier at 0x6629f8, the sentinel pair, the random gate, the timer computation, the 0x9b0e20
+table scan with count `*(unsigned char*)*(int*)0x772eb4+0x30`, the slot fill and the type-4 path's
+fcn_004d89c0 call. Naming trap recorded: 0x4cf0f0 is defined by
+src/Develop/Unassigned/GOLD.fcn_004ce270.c and must be declared as fcn_004ce270. The single
+blocker is the frame: MSVC does not spill ent, tgt or v24 and merges the two unsigned-to-double
+temporaries, so the frame is 0x120 against native 0x138, base sits at 0xc against 0x1c and msg at
+0x18 against 0x3c, and native's 16-byte slack at 0x00..0x0f is absent.
