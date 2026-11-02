@@ -16095,3 +16095,19 @@ native also uses edi for inline rep stosd and repne scasb, helper calls did not 
 set, and probes with the aligned struct plus varargs plus inline copies never save ebx at any
 frame size. Native's remaining layout clues are that it packs the directive into a byte at
 [esp+0x33] inside the 0x30 slot and shares slot 0x0c between digit and text_index.
+
+## 2026-11-02 — formatter case bodies rebuilt
+
+`0x51AF00` 674 to 716 with the object growing 5611 to 6703 against native 6464 (239 over,
+previously 853 short). The discovery that unlocked it: the native burst after every memmove is
+`memcpy(dst, src, strlen(src))`, not strcpy, because strcpy expanded to a byte-copy loop and
+kept every case separate, while the native tails are strlen plus rep movsd/movsb and are
+shared. Case bodies rebuilt with native shapes: i (both digit paths), I (both paths with the
+%0<int>i format, the sign variant, the regroup-dot loop and the slot298 prefix), f (both itoa
+paths, memmove/copy to buf+i-4 and i-3), i/N's fcn_00517c00 call order with the kind passed
+inline, D via fcn_004fe330 (keeping the project's binding of 0x500e00 to that symbol; an
+interim extern scored 719 only because an unresolved reloc is masked, code bytes identical),
+G's index as (unsigned char)*p*14+0x48e, the directive length as r!=-1 ? 2 : 1 for
+u/U/b/B/e/E, B's percent-failure falling into F's body, and w's res*189*4 with the [ecx*8]
+table read. Remaining deltas are spill overhead from the two-save frame wall: r +49, N +39,
+Ss +20, u/U/b/B/e/E +12 each, I 68 short with both paths present.

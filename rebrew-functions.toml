@@ -423180,7 +423180,7 @@ blocker = "io_Text-family buffer expansion reconstructed in full from a fresh ri
 blocker_delta = 2108
 
 ["GOLDTL.0x0051af00".verification]
-source_hash = "51407eacb836f7a4ef51306a22830c1edfe1d5a05e0f4620729e363862bdd486"
+source_hash = "acd5a2c850f2b47a66e76fa30b20b31cdd36521056a3cef8be88661f1292ac9b"
 reference_hash = "1a5a0fcc3c96b5e63a7087a546fe535837f30271f04358bc5d9b7ebc2ddb58ab"
 reference_size = "6464"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423191,10 +423191,10 @@ module = "GOLDTL"
 va = "0x51af00"
 context_hash = ""
 defines = "[]"
-input_hash = "03f206cb5cbb201809bb9f29c3cd93ba761511bc8fe92e4d7a1bc0e0d282d0fd"
+input_hash = "5719e2c9a25cc8c3dbf1b0cf84a65dbeb6ab3daa1f03936068357d63c12728e7"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T09:43:32+00:00"
+measured_at = "2026-11-02T10:25:47+00:00"
 
 [["GOLDTL.0x0051af00".status_history]]
 old_status = "STUB"
