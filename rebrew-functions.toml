@@ -440186,13 +440186,13 @@ new_status = "RELOC"
 changed_at = "2026-10-20T07:58:28.719979+00:00"
 updated_by = "test"
 ["GOLDTL.0x00492d60"]
-size = 240
+size = 232
 file = "src/Develop/Unassigned/GOLDTL.fcn_00492d60.c"
 symbol = "_fcn_00492d60"
 name = "fcn_00492d60"
 kind = "FUNCTION"
-updated_by = "verify"
-updated_at = "2026-11-02T09:00:59+00:00"
+updated_by = "fix-sizes"
+updated_at = "2026-11-02T21:59:43+00:00"
 status = "SIZE_MISMATCH"
 
 ["GOLDTL.0x00492d60".verification]

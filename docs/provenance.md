@@ -19814,3 +19814,24 @@ object 3980 against the corrected 3976, so it is four bytes over its extent, whi
 its jump table sits at 0xf64 against the reference 0xf60. The larger point for the remaining work is that several
 of these rows were inventoried with trailing fill included, so a row can never reach its recorded size by compiling
 more code; the extent has to be repaired first, and then the object should match the corrected size exactly.
+
+## 2026-11-03 — extent audit: control-transfer rows repaired
+
+The extent audit repaired 21 control-transfer rows in three digest-guarded batches, each with the reason that the
+trailing run of one repeated byte starts at the end of the last real instruction (a ret, ret imm, jmp, or a call
+whose callee is noreturn, as with 0x41d8b0 ending in a call to the CRT exit path that reaches TerminateProcess),
+and every row's next inventory row starts exactly at the old extent end. Batch 1, digest
+76f629127253bbd980bfec7cd3bde98d2b85b7822e57fdd92c532c6dfaa05745: 0x41d8b0 160 to 155, 0x544a90 416 to 411,
+0x566d00 816 to 806, 0x5cfd00 544 to 531, 0x62a1ee 18 to 5, 0x640959 279 to 265, 0x64c112 14 to 6, 0x64d41a 86
+to 82. Batch 2, digest a057182224e48e573835ad5af1801d8969e4f1f94d6d88042af6a014130f629b: 0x64d4fa 54 to 40,
+0x64d701 15 to 9, 0x64dc43 61 to 52, 0x657bf8 40 to 27, 0x657e51 479 to 473, 0x65aa71 47 to 35, 0x65b4d9 599 to
+584, 0x65b730 144 to 132. Batch 3, digest cbda73e4dc45b9b7702d6e1c8b15a669efb5327ef2a0bd91f5ca5153e702f1ac:
+0x65c7ee 114 to 105, 0x65c860 112 to 104, 0x65cfc3 205 to 201, 0x65f050 464 to 453, 0x660563 157 to 151. The two
+rows that desync under a linear decode from the row start, 0x566d00 and 0x5cfd00, were confirmed by
+`rebrew binary switches` to hold inline switch tables, and their tail windows show the terminator and then only
+nops. Sampled verdicts after repair: 0x41d8b0 ReportFatalError moves from SIZE_MISMATCH 155 of 160 to RELOC at
+155 of 155 with object 155; 0x544a90 moves from SIZE_MISMATCH 411 of 416 to RELOC at 411 of 411 with object 411;
+0x566d00 stays SIZE_MISMATCH at 311 of 806 with object 680, and 0x5cfd00 at 58 of 531 with object 516. Lint after
+the last batch reports 5485 checks with no errors or warnings. Seventy-five table-tail rows were held back for a
+separate decision and are since handled by the continuation described below; forty rows stay excluded, split into
+seven decode desyncs, twenty unclassified table or data edges and thirteen with data immediately before the run.
