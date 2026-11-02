@@ -17970,3 +17970,26 @@ Rejected: nSlots/ent/hA statement orders, native store order, a block-top `int m
 mostly later-region argument order and loop strength reduction, and the object is 186 bytes over native
 with no tlead filler in the file. Callees all resolve except 0x00505370, which has only a zero-returning
 stub in stubs/goldtl/link_scaffold.c and is called once in the hC packet path.
+
+## 2026-11-03 — trade dialog width and prologue store findings
+
+`0x5B88B0` keeps 404 at object 4300 with the first mismatch at 23; the follow-up pass produced no keeper
+and the source is byte-identical to base_404.c. Four findings that change the next step. The three
+overage bytes are a wrong parameter width: native loads the 0x773d75 byte with `a0 75 3d 77 00` (a bare
+mov al, no extension) at all three fcn_0050b750 sites, 0x5b8dfc with `mov al` then `mov cl,al`, 0x5b8e75
+and 0x5b8edc, while our prototype `fcn_0050b750(int,int)` emits `xor edx,edx` plus `mov dl,[...]` for
+eight bytes; a probe confirmed a one-byte parameter makes MSVC pass the byte in AL for five bytes, and
+declaring `int __cdecl fcn_0050b750(int, unsigned char)` gives object 4290 with match 238, so the fix is
+real but needs seven bytes of correct code added elsewhere before it pays. Native's early zero store is
+nSlots rather than cnt: the prologue stores 0 to local 0x30 and -1 to 0x10, 0x14, 0x24, 0x28 and 0x34
+and ent to 0x2c with eleven pushes still on the stack, and a slot probe maps our variables as hA 0x08,
+sel 0x04, hB 0x1c, hD 0x20, nSlots 0x30, pIt 0x10 and cnt 0x0c, so replacing the top `cnt = 0;` with
+`nSlots = 0;` moves the zero store to 0x30 like native but grows the frame to 0x136c and still picks edi
+for the 0x868050 load. The register choice is not the ent source form: nine variants (two-step, explicit
+char pointer plus character, integer-typed add, cast int, an idx local, volatile-free permutations) all
+compile identically because ent's tree canonicalises to base plus 589c, and edx appears only when extra
+locals are forced to materialise, so it is register pressure at the prologue: ours has five of native's
+seven pre-call stores because MSVC sinks `hD = -1` to object 0x549 as `or edi,-1` and the top `cnt = 0`
+to 0x24c, and init reorders with hD first or last and cnt last are all neutral while inits before ent
+break the prefix to 22. Packet sizes 0xfd, 0xfe and 0xff are byte-identical to 0x100 and 0xfc drops the
+frame to 0x1364, so the packet cannot be tuned by four.
