@@ -212,11 +212,13 @@ void __cdecl fcn_004da690(unsigned int *a0)
         s54 = 0;
         ((int *)&s58)[0] = 0;
         do {
+            int *pp = (int *)0x9b0e30;
             s5C = *(int *)(((int *)&sF4)[s54] + 4);
             ((int *)&s60)[0] = 0;
-            while (((int *)&s60)[0] < s48 &&
-                   *(int *)(0x9b0e30 + ((int *)&s60)[0] * 0x35c) != s5C)
+            while (((int *)&s60)[0] < s48 && *pp != s5C) {
                 ((int *)&s60)[0] += 1;
+                pp += 0x35c / 4;
+            }
             if (((int *)&s60)[0] >= s48) {
                 *(int *)((char *)a0 + 0x34 + ((int *)&s4C)[0] * 4) = s5C;
                 *(int *)(((int *)&s50)[0] + 0xc) = s5C;
@@ -598,6 +600,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                                 while (s6C < s20 && ((int *)&s98)[s6C] != s70)
                                     s6C += 1;
                                 if (s6C < s20) {
+                                    int *pq;
                                     *(int *)(0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 1;
                                     fcn_004727a0(s14, 0);
                                     io_AppendText((char *)0x6811b0);
@@ -605,8 +608,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
                                                   *(unsigned short *)((int *)&s74)[s4C]);
                                     ((int *)&s54)[s6C] += 1;
                                     fcn_004e4de0(0x3e8);
-                                    s7C = *(int *)((char *)&mid + 0x12c + s6C * 0x38);
-                                    *(int *)(0x1015ea0 + s7C * 0x2f4 + 0x3c) = 1;
+                                    pq = (int *)((char *)&mid + 0x12c + s6C * 0x38);
+                                    *(int *)(0x1015ea0 + *pq * 0x2f4 + 0x3c) = 1;
                                     fcn_004727a0(s50, s6C + 1);
                                     fcn_004da4d0(s6C + 1,
                                                  (void *)((char *)&mid + 0x408 + s6C * 0x38));
@@ -615,8 +618,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                                                   *(unsigned short *)((int *)&s9C)[s6C]);
                                     fcn_004e4de0(0xfa0);
                                     *(int *)(0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 0;
-                                    s7C = *(int *)((char *)&mid + 0x12c + s6C * 0x38);
-                                    *(int *)(0x1015ea0 + s7C * 0x2f4 + 0x3c) = 0;
+                                    *(int *)(0x1015ea0 + *pq * 0x2f4 + 0x3c) = 0;
                                 }
                             }
                             s4C += 1;
@@ -658,9 +660,9 @@ void __cdecl fcn_004da690(unsigned int *a0)
                     }
                     if (s6C != -1) {
                         if (s70 == 0) {
-                            fcn_004e4b40(-8, s38, 0x68c038, 3, 0x64);
                             *(int *)(0x1015ea0 +
                                      *(int *)((char *)&mid + 0x12c + s6C * 0x38) * 0x2f4 + 0x3c) = 1;
+                            fcn_004e4b40(-8, s38, 0x68c038, 3, 0x64);
                             fcn_004727a0(s14, 0);
                             io_AppendText((char *)0x6811b0);
                             io_AppendText((char *)0x12e5,
@@ -668,12 +670,12 @@ void __cdecl fcn_004da690(unsigned int *a0)
                                           *(unsigned char *)s00 + 0x253);
                         } else {
                             fcn_004e4b40(-8, s38, 0x68c038, 2, 0x64);
-                            *(int *)(0x1015ea0 +
-                                     *(int *)((char *)&mid + 0x12c + s6C * 0x38) * 0x2f4 + 0x3c) = 1;
                             fcn_004727a0(s14, 0);
                             io_AppendText((char *)0x6811b0);
                             io_AppendText((char *)0x12e3);
                             fcn_004e4de0(0x3e8);
+                            *(int *)(0x1015ea0 +
+                                     *(int *)((char *)&mid + 0x12c + s6C * 0x38) * 0x2f4 + 0x3c) = 1;
                             io_AppendText((char *)0x12e4,
                                           *(unsigned short *)((int *)&s9C)[s6C]);
                         }

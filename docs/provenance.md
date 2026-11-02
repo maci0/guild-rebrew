@@ -15978,3 +15978,17 @@ stores wrote f04 (slot+4) where native writes f08 (slot+8) at 0x5bc2f8 and 0x5bc
 byte-equal. The sete at l_5bc3fa matches native 0x5bc438 and needed no change. Remaining drift
 is a uniform body spread of about +166 bytes (4 percent per block) with no window over 60
 bytes outside the early body.
+
+## 2026-11-02 — transport arms interleave and dedupe pointers
+
+`0x4DA690` object falls from 7534 to 7498 (excess 477 to 441) with the prefix at 0x9b and the
+frame intact; the positional match reads 778 because every trim re-shifts the compared tail.
+Four edits: the first pick+render arm does its mid[0x12c] load, 0x2f4 scale and `= 1` store
+before the 0x4e4b40 call as native does at 0x4dbeea..0x4dbf21, and the second arm puts the
+same store after fcn_004e4de0(0x3e8) just before the 0x12e4 print, collapsing the two 57-byte
+arm-setup rows to 16; the 0x9b0e30 scan uses a walking pointer (`pp += 0x35c/4`) because
+native keeps that pointer in ecx; and the two mid+0x12c reads share one block-scope pointer
+so the object emits `lea`/`mov` instead of rescaling the index twice. Also noted: native
+pushes four arguments to fcn_004e4b40 at 0x4db17b while our source passes five, which is an
+open question, and the pick loop's max/best/tie values stay in fr slots here where native
+keeps them in edi/esi/edx.
