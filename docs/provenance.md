@@ -19698,3 +19698,37 @@ to 0x57275f for 3816, both of which were applied. Multi-byte nop forms also coun
 that run, is repaired to 329 rather than 336. Repairs run in batches of at most eight through
 `rebrew binary repair-extents 0xVA=SIZE ... --reason <evidence> --sync-rows`, with a dry run for the input digest
 and then the apply guarded by `--expected-digest`, and receipts kept under .scratch/extents/.
+
+## 2026-11-03 — quest dialog arm fix and crew dialog body
+
+`0x512EE0` 385 to 393 with object 3448, three relocations, frame 0x404 and prefix 0x35 held, lint clean. The kept
+edit inlines the release-handles arm as
+`fcn_004c5150(*(int*)(e + 4), -1, g_773d75, fcn_0050d170(4))`, since native passes that call directly as the
+fourth argument with no count store; the array layout stays native at pos3 0x30, found 0x3c, path 0x5c, counts
+0x6c and handles 0x164, while the scalar slots remain total 0x00, count 0x04 and i 0x08 against native's i 0x00,
+total 0x04 and inner 0x08. The structural merge that puts count into total was measured and rejected: with the
+inline arm it gives 229 at object 3476 with prefix 0xb and no prologue store, and a variant that keeps the found
+counter in total gives 352 with prefix 0x35 and the prologue store at [esp+0x10] but shifts kinds from 0x0c to
+0x08 and loses i from the low pool. The slot evidence is that native's prologue store of total survives only when
+total is the found-loop counter, that making total the counter reserves slot 0x00 for it and pushes kinds to 0x08,
+that making i the counter keeps kinds at 0x0c but drops the store, and that the needed i-first, total-second,
+inner-third order never appears from any initialiser form tried, including `int total = i;`, an explicit
+`total = 0;`, a memset, declaration reorders, `int inner = 0;`, an early `i = 0;`, `i = total;` and the done test
+at the top, which moves the frame to 0x408. The prefix breaks on exactly one byte, the store displacement
+`89 74 24 10` against native's `89 74 24 14`.
+
+`0x43C640` goes from 432 to 469 matching bytes with object 5169, lint clean, and the full body replaced in native
+order: the edge flags over the material matrix, the scratch allocations through 0x67a694, 0x67a680, 0x67a668 and
+0x67a654, the 8x8 overdraw search with its clipped windows and 0x40000000 score saturation, the record
+initialisation at (x + y*8) * 500 with the best-mask replay `material = (m & 1) == 1 ? 1 : 2`, and the
+per-material loop with its six frees, map rebuild, count1 and count2 branches and jittered index and vertex
+emission. The file lives at src/Develop/Units/m_alloc/GOLDTL.fcn_0043c640.c, not under DieGildeAddOn. This row also
+exposed a wrong inventory extent: both the count2 target 0x43da7c and the material-loop target 0x43db0e lie past
+the recorded 0x43c640 + 5169 = 0x43da71, and the listing was cut mid-instruction, while the real epilogue ret is
+at 0x43db6a with five 0x90 bytes from 0x43db6b to 0x43db6f before the next row at 0x43db70, so the true extent is
+0x152B = 5419. The extent audit repaired that boundary, and the row now measures against 5419 with object 5169, so
+250 bytes of body remain to be transcribed. Remaining blockers in order: the frame is 21 slots against native's
+24, missing the compiler temporaries that must survive the RNG call and the int-to-float scratch, and while the
+frame differs the prologue mismatches at offset 5 with t in ebx against native's esi; fcn_0064d3f8 has no project
+source definition and resolves through link_scaffold.c.obj at 0x005f6630; and g_662a18 has no project data row.
+Also added `#pragma optimize("y", off)` for the frame pointer and bound the RNG to fcn_0064d3f8 at sixteen sites.

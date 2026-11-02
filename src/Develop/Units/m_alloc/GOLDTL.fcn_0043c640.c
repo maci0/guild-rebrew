@@ -1,9 +1,9 @@
 /*
- * Reconstructed from the native body at 0x0043c640 (5419 bytes).
+ * Reconstructed from the native body at 0x0043c640.
  *
- * Per-region material analysis for one tile: edge flags from the material map,
- * a 256-mask overdraw search, then for every material slot of every 8x8 region
- * the cell classification, index list and vertex emission.
+ * Per-tile material mesh builder: edge flags from the material map, a
+ * 256-mask overdraw search per 8x8 region, then for every material slot of
+ * every region the cell classification, index list and vertex emission.
  *
  * Tile layout: +0x000 W, +0x004 H, +0x014 material map, +0x020 vertex array,
  * +0x024 edge flags, +0x030 material slot table, +0x0a0 region table
@@ -18,6 +18,7 @@ extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* ptr);
 
 extern float g_662a18;
+extern int __cdecl fcn_0064d3f8(void);
 
 #define MATERIALS	8
 #define MASK_LIMIT	0x100
@@ -72,37 +73,25 @@ void __cdecl fcn_0043c640(Tile* t)
 {
 	int x;
 	int y;
-	int y1;
-	int row;
-	int col;
-	int bit;
-	int m;
-	int best;
-	int bestscore;
-	int i;
-	int n;
-	int count1;
-	int count2;
-	int count;
-	int limitX;
-	int limitY;
-	int v0;
-	int v1;
-	int off;
-	int* slot;
-	int* idx;
-	unsigned char* map;
-	unsigned char* cand;
-	unsigned char* bestmap;
 	RegionRecord* r;
-	unsigned short* out;
-	unsigned char* p;
-	int* p00;
-	unsigned char* v;
+	int* idx;
+	int v1;
+	int v0;
 	float jx;
 	float jy;
 	float jx2;
 	float jy2;
+	int i;
+	unsigned char* map;
+	int count;
+	unsigned char* cand;
+	int count2;
+	int y1;
+	unsigned short* out;
+	int* p00;
+	unsigned char* bestmap;
+	int n;
+	int off;
 	float f;
 
 	for (y = 0; y < t->W - 1; y++) {
@@ -121,13 +110,23 @@ void __cdecl fcn_0043c640(Tile* t)
 	bestmap = (unsigned char*) m_alloc(t->H * t->H, (const char*) 0x67a668);
 	idx = (int*) m_alloc((t->H + 1) * (t->H + 1) * 4, (const char*) 0x67a654);
 
-	for (y = 0; y < 8; y++) {
-		for (x = 0; x < 8; x++) {
-			y1 = y + 1;
-			best = -1;
-			bestscore = SCORE_LIMIT;
-			for (count = 1; count < MASK_LIMIT; count++) {
-				if (bestscore <= 0) {
+	for (y = 0; y < MATERIALS; y++) {
+		y1 = y + 1;
+		for (x = 0; x < MATERIALS; x++) {
+			int m;
+			int bit;
+			int* slot;
+			int row;
+			int col;
+			int limitY;
+			int limitX;
+			unsigned char* p;
+
+			v0 = -1;
+			count2 = SCORE_LIMIT;
+			count = 1;
+			for (; count < MASK_LIMIT; count++) {
+				if (count2 <= 0) {
 					break;
 				}
 				m = count;
@@ -162,9 +161,10 @@ void __cdecl fcn_0043c640(Tile* t)
 								if (p[0] != 0 || p[1] != 0 ||
 								    t->mat[(row + 1) * t->W + col] != 0 ||
 								    t->mat[(row + 1) * t->W + col + 1] != 0) {
-									cand[(row - t->H * y) * t->H + (col - t->H * x)] |= 0x10;
+									n = (row - t->H * y) * t->H + (col - t->H * x);
+									cand[n] |= 0x10;
 									if ((m & 1) == 1) {
-										cand[(row - t->H * y) * t->H + (col - t->H * x)]++;
+										cand[n]++;
 									}
 								}
 							}
@@ -173,12 +173,13 @@ void __cdecl fcn_0043c640(Tile* t)
 					}
 				}
 				n = 0;
+				p = cand;
 				for (row = 0; row < t->H; row++) {
 					if (n >= SCORE_LIMIT) {
 						break;
 					}
 					for (col = 0; col < t->H; col++) {
-						m = cand[row * t->H + col];
+						m = *p;
 						if ((m & 0x10) == 0x10) {
 							if ((m & 0xf) == 0) {
 								n = SCORE_LIMIT;
@@ -186,27 +187,34 @@ void __cdecl fcn_0043c640(Tile* t)
 							}
 							n += (m & 0xf) - 1;
 						}
+						p++;
 					}
 				}
-				if (n < bestscore) {
-					bestscore = n;
-					best = count;
-					memcpy(bestmap, cand, t->H * t->H);
+				if (n < count2) {
+					count2 = n;
+					v0 = count;
+					n = t->H * t->H;
+					memcpy(bestmap, cand, n);
 				}
 			}
-			off = (x + y * 8) * REGION_STRIDE;
+			off = (x + y * MATERIALS) * REGION_STRIDE;
 			r = (RegionRecord*) ((char*) t + off + 0xa0);
-			for (i = 8; i != 0; i--) {
+			for (i = MATERIALS; i != 0; i--) {
 				r->material = 2;
 				r = (RegionRecord*) ((char*) r + 0x34);
 			}
-			if (bestscore < SCORE_LIMIT) {
-				for (m = best; m > 0; m >>= 1) {
+			if (count2 < SCORE_LIMIT) {
+				m = v0;
+				for (; m > 0; m >>= 1) {
 					r->material = (m & 1) == 1 ? 1 : 2;
 					r = (RegionRecord*) ((char*) r + 0x34);
 				}
 			}
 			for (i = 0; i < MATERIALS; i++) {
+				int count1;
+				int limitY2;
+				int limitX2;
+
 				r = &((Region*) ((char*) t + off + 0xa0))->rec[i];
 				count2 = 0;
 				count1 = 0;
@@ -217,6 +225,10 @@ void __cdecl fcn_0043c640(Tile* t)
 				if (r->p04 != 0) {
 					m_FreeTracked(r->p04);
 					r->p04 = 0;
+				}
+				if (r->p08 != 0) {
+					m_FreeTracked(r->p08);
+					r->p08 = 0;
 				}
 				if (r->p08 != 0) {
 					m_FreeTracked(r->p08);
@@ -235,16 +247,16 @@ void __cdecl fcn_0043c640(Tile* t)
 					r->p00 = 0;
 				}
 				memset(map, 0, t->H * t->H);
-				limitY = t->H * y1;
-				if (limitY > t->W - 1) {
-					limitY = t->W - 1;
+				limitY2 = t->H * y1;
+				if (limitY2 > t->W - 1) {
+					limitY2 = t->W - 1;
 				}
-				for (row = t->H * y; row < limitY; row++) {
-					limitX = t->H * (x + 1);
-					if (limitX > t->W - 1) {
-						limitX = t->W - 1;
+				for (row = t->H * y; row < limitY2; row++) {
+					limitX2 = t->H * (x + 1);
+					if (limitX2 > t->W - 1) {
+						limitX2 = t->W - 1;
 					}
-					for (col = t->H * x; col < limitX; col++) {
+					for (col = t->H * x; col < limitX2; col++) {
 						p = &t->mat[row * t->W + col];
 						if (p[0] == i && p[1] == i &&
 						    t->mat[(row + 1) * t->W + col] == i &&
@@ -286,12 +298,12 @@ void __cdecl fcn_0043c640(Tile* t)
 					r->n2c = count1 * 2;
 					r->p0c = (unsigned short*) m_alloc(r->n2c * 6, (const char*) 0x67a624);
 					out = r->p0c;
-					limitX = x == 7 ? t->H - 4 : t->H;
-					limitY = y == 7 ? t->H - 4 : t->H;
+					limitX2 = x == 7 ? t->H - 4 : t->H;
+					limitY2 = y == 7 ? t->H - 4 : t->H;
 					count = 0;
 					r->n2c = 0;
-					for (row = 0; row < limitY; row++) {
-						for (col = 0; col < limitX; col++) {
+					for (row = 0; row < limitY2; row++) {
+						for (col = 0; col < limitX2; col++) {
 							if (map[row * t->H + col] != 1) {
 								continue;
 							}
@@ -304,10 +316,10 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx = col != 0 ? t->jitter : 0;
 								jy = row != 0 ? t->jitter : 0;
-								f = (float) rand() * g_662a18 * jx;
+								f = (float) fcn_0064d3f8() * g_662a18 * jx;
 								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col)] =
 									((float) (t->H * x + col) * t->vstep + f + f) - jx;
-								f = (float) rand() * g_662a18 * jy;
+								f = (float) fcn_0064d3f8() * g_662a18 * jy;
 								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 1] =
 									((float) (t->H * y + row) * t->vstep + f + f) - jy;
 							}
@@ -318,10 +330,10 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx = col == t->H - 1 ? 0 : t->jitter;
 								jy = row != 0 ? t->jitter : 0;
-								f = (float) rand() * g_662a18 * jx;
+								f = (float) fcn_0064d3f8() * g_662a18 * jx;
 								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 2] =
 									((float) (t->H * x + col + 1) * t->vstep + f + f) - jx;
-								f = (float) rand() * g_662a18 * jy;
+								f = (float) fcn_0064d3f8() * g_662a18 * jy;
 								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 3] =
 									((float) (t->H * y + row) * t->vstep + f + f) - jy;
 							}
@@ -332,10 +344,10 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx = col != 0 ? t->jitter : 0;
 								jy = row == t->H - 1 ? 0 : t->jitter;
-								f = (float) rand() * g_662a18 * jx;
+								f = (float) fcn_0064d3f8() * g_662a18 * jx;
 								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col)] =
 									((float) (t->H * x + col) * t->vstep + f + f) - jx;
-								f = (float) rand() * g_662a18 * jy;
+								f = (float) fcn_0064d3f8() * g_662a18 * jy;
 								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 1] =
 									((float) (t->H * y + row + 1) * t->vstep + f + f) - jy;
 							}
@@ -346,10 +358,10 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx = col == t->H - 1 ? 0 : t->jitter;
 								jy = row == t->H - 1 ? 0 : t->jitter;
-								f = (float) rand() * g_662a18 * jx;
+								f = (float) fcn_0064d3f8() * g_662a18 * jx;
 								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 2] =
 									((float) (t->H * x + col + 1) * t->vstep + f + f) - jx;
-								f = (float) rand() * g_662a18 * jy;
+								f = (float) fcn_0064d3f8() * g_662a18 * jy;
 								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 3] =
 									((float) (t->H * y + row + 1) * t->vstep + f + f) - jy;
 							}
@@ -376,8 +388,11 @@ void __cdecl fcn_0043c640(Tile* t)
 					r->n20 = count;
 				}
 				if (count2 > 0) {
+					int nn;
+					unsigned char* v;
+
 					r->n28 = 0;
-					n = count2 * 4;
+					nn = count2 * 4;
 					memset(idx, -1, (t->H + 1) * (t->H + 1) * 4);
 					for (row = 0; row < t->H; row++) {
 						for (col = 0; col < t->H; col++) {
@@ -385,32 +400,32 @@ void __cdecl fcn_0043c640(Tile* t)
 							if (p[0] == 2) {
 								if (col < t->H - 1 && row < t->H - 1 &&
 								    p[1] == 2 && map[(row + 1) * t->H + col] == 2) {
-									n -= 3;
+									nn -= 3;
 								} else if (col < t->H - 1 && p[1] == 2) {
-									n -= 2;
+									nn -= 2;
 								} else if (row < t->H - 1 &&
 									   map[(row + 1) * t->H + col] == 2) {
-									n -= 2;
+									nn -= 2;
 								} else if (col < t->H - 1 && row < t->H - 1 &&
 									   map[(row + 1) * t->H + col + 1] == 2) {
-									n -= 1;
+									nn -= 1;
 								}
 							}
 						}
 					}
-					r->n24 = n;
-					r->p08 = (int*) m_alloc(n * 4, (const char*) 0x67a60c);
+					r->n24 = nn;
+					r->p08 = (int*) m_alloc(nn * 4, (const char*) 0x67a60c);
 					r->n30 = count2 * 2;
 					r->p10 = (unsigned short*) m_alloc(r->n30 * 6, (const char*) 0x67a5f8);
 					r->p00 = m_alloc(r->n30 * 4, (const char*) 0x67a5e0);
 					p00 = (int*) r->p00;
 					out = r->p10;
-					limitX = x == 7 ? t->H - 4 : t->H;
-					limitY = y == 7 ? t->H - 4 : t->H;
+					limitX2 = x == 7 ? t->H - 4 : t->H;
+					limitY2 = y == 7 ? t->H - 4 : t->H;
 					count = 0;
 					r->n30 = 0;
-					for (row = 0; row < limitY; row++) {
-						for (col = 0; col < limitX; col++) {
+					for (row = 0; row < limitY2; row++) {
+						for (col = 0; col < limitX2; col++) {
 							if (map[row * t->H + col] != 2) {
 								continue;
 							}
@@ -425,10 +440,10 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx2 = col != 0 ? t->jitter : 0;
 								jy2 = row != 0 ? t->jitter : 0;
-								f = (float) rand() * g_662a18 * jx2;
+								f = (float) fcn_0064d3f8() * g_662a18 * jx2;
 								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col)] =
 									((float) (t->H * x + col) * t->vstep + f + f) - jx2;
-								f = (float) rand() * g_662a18 * jy2;
+								f = (float) fcn_0064d3f8() * g_662a18 * jy2;
 								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 1] =
 									((float) (t->H * y + row) * t->vstep + f + f) - jy2;
 							}
@@ -441,10 +456,10 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx2 = col == t->H - 1 ? 0 : t->jitter;
 								jy2 = row != 0 ? t->jitter : 0;
-								f = (float) rand() * g_662a18 * jx2;
+								f = (float) fcn_0064d3f8() * g_662a18 * jx2;
 								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 2] =
 									((float) (t->H * x + col + 1) * t->vstep + f + f) - jx2;
-								f = (float) rand() * g_662a18 * jy2;
+								f = (float) fcn_0064d3f8() * g_662a18 * jy2;
 								t->verts[2 * (t->W * (row + t->H * y) + t->H * x + col) + 3] =
 									((float) (t->H * y + row) * t->vstep + f + f) - jy2;
 							}
@@ -457,10 +472,10 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx2 = col != 0 ? t->jitter : 0;
 								jy2 = row == t->H - 1 ? 0 : t->jitter;
-								f = (float) rand() * g_662a18 * jx2;
+								f = (float) fcn_0064d3f8() * g_662a18 * jx2;
 								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col)] =
 									((float) (t->H * x + col) * t->vstep + f + f) - jx2;
-								f = (float) rand() * g_662a18 * jy2;
+								f = (float) fcn_0064d3f8() * g_662a18 * jy2;
 								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 1] =
 									((float) (t->H * y + row + 1) * t->vstep + f + f) - jy2;
 							}
@@ -473,10 +488,10 @@ void __cdecl fcn_0043c640(Tile* t)
 								count++;
 								jx2 = col == t->H - 1 ? 0 : t->jitter;
 								jy2 = row == t->H - 1 ? 0 : t->jitter;
-								f = (float) rand() * g_662a18 * jx2;
+								f = (float) fcn_0064d3f8() * g_662a18 * jx2;
 								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 2] =
 									((float) (t->H * x + col + 1) * t->vstep + f + f) - jx2;
-								f = (float) rand() * g_662a18 * jy2;
+								f = (float) fcn_0064d3f8() * g_662a18 * jy2;
 								t->verts[2 * (t->W * (row + 1 + t->H * y) + t->H * x + col) + 3] =
 									((float) (t->H * y + row + 1) * t->vstep + f + f) - jy2;
 							}

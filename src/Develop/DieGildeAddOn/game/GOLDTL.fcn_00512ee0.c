@@ -374,8 +374,8 @@ release_handles:
 		for (; i < outer; i++) {
 			e = (char *)handles[i];
 			if (e) {
-				count = fcn_0050d170(4);
-				fcn_004c5150(*(int *)(e + 4), -1, g_773d75, count);
+				fcn_004c5150(*(int *)(e + 4), -1, g_773d75,
+						fcn_0050d170(4));
 			}
 		}
 handles_done:
