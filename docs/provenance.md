@@ -16079,3 +16079,19 @@ count is `strlen(t) + 1 - i` as native uses at 0xa55..0xa69. Remaining 76 bytes 
 and 13 table/pad: native puts each shared tail in the first case of a pair while ours puts it
 in the second (net +32 for identical statements), and the continue arms run short (Z/B/L +6,
 C +3, '<' +11, '>' +7, t +7, R +13, entry +38).
+
+## 2026-11-02 — append-text loop head and frame algebra
+
+`0x519190` 631 to 681 with the object at 7527 and code ending at 0x1cac exactly. The loop head
+now reads `char ch = S.text[text_index]` and compares the char directly against 0x25/0x24/0x7b
+instead of staging an unsigned char in v08, which drops the extra slot pressure and restores
+the native code length. Two corrections recorded. First, the object can never reach 7536:
+native's extent runs to the next function and includes 9 alignment bytes (8 NOPs plus 1 pad)
+after the tables, so size must be judged by the code end at 0x1cac and by match. Second,
+chkstk is a pure function of the push count, not the slot count: native's locals start at
+esp+0 after three pushes where ours start at esp+4 after two, so 0x31f4 arrives with the third
+push rather than by removing a slot. The copy-helper route to free edi for ebx was falsified:
+native also uses edi for inline rep stosd and repne scasb, helper calls did not change the push
+set, and probes with the aligned struct plus varargs plus inline copies never save ebx at any
+frame size. Native's remaining layout clues are that it packs the directive into a byte at
+[esp+0x33] inside the 0x30 slot and shares slot 0x0c between digit and text_index.

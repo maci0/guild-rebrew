@@ -48,6 +48,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 	int v2c;
 	int v28;
 	char directive;
+	char ch;
 	int v24;
 	int v20;
 	int v1c;
@@ -100,8 +101,8 @@ int __cdecl io_AppendText(char* format_selector, ...)
 	if (text_index > 0x17d0) {
 		goto carry;
 	}
-	v08 = (unsigned char)S.text[text_index];
-	if (v08 != 0x25 && v08 != 0x24 && v08 != 0x7b) {
+	ch = S.text[text_index];
+	if (ch != 0x25 && ch != 0x24 && ch != 0x7b) {
 		goto plain;
 	}
 	digit = (signed char)S.text[text_index + 1];

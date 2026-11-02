@@ -422918,7 +422918,7 @@ status = "SIZE_MISMATCH"
 blocker = "prologue wall: native push ebp;mov ebp,esp;and esp,-8 is never emitted by /O2 with this profile (15-construct matrix), so byte 0 differs; slots solved via aggregate (text esp+0x25c vs 0x260, +4 = the alignment slack); frame honest 0x31ec vs native 0x31f4"
 
 ["GOLDTL.0x00519190".verification]
-source_hash = "9e52c2451cf2d4815024aebbedeb345cdc727c92effe66e6c2a9d796ac9bdf67"
+source_hash = "4e1a638f42f0be6e192c54eeb47836b48c49b523bb87a63221fc561574381ce5"
 reference_hash = "3066b0a5b202927dbba2b64e11fbe7ae60c09679647b57d48273a92c99e6de7e"
 reference_size = "7536"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -422929,10 +422929,10 @@ module = "GOLDTL"
 va = "0x519190"
 context_hash = ""
 defines = "[]"
-input_hash = "bc9f03ac53cbe63fa0fa0e6aa494808fdd4f85dd3b2f524f55aad4cb2a10c3ae"
-writer = "verify"
+input_hash = "81dc1250d032aad521cc287a03e2fb2c4d3b396dea89d46ebdb594a8bde8332d"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-02T07:45:56+00:00"
+writer = "test"
+measured_at = "2026-11-02T10:24:50+00:00"
 
 [["GOLDTL.0x00519190".status_history]]
 old_status = "STUB"
