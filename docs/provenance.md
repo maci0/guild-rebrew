@@ -19994,3 +19994,32 @@ at 314. The original assembly is recorded through
 being the C1.DLL elimination, the documented align-up family and the five site addresses. The 72-byte overshoot is
 allocation divergence in the surrounding C, for example y at [ebp-4] where native has x, and a size-first
 alternative sits in scratch at v41-copycells.c with object 5408 and match 417 at frame 0x64.
+
+## 2026-11-03 — crew dialog packing sweep exhausted
+
+`0x5744C0` keeps its state at 1246 with object 3980 against native 3976, jump table 0xf64, 51 relocations and the
+first mismatch at 0x27; the declared type and size sweep kept nothing and the source is byte-identical to the kept
+copy. Eighty-eight candidates were generated and eighty-four were tested canonically through an extended
+`.scratch/row5744c0/vsweep.py` that reports the object extent from the last text relocation plus four, the ten-dword
+jump table, the first raw mismatch against the reference, and installs each candidate at the registered source path
+for one `rebrew test` before restoring the original with a readback check. Neither acceptance path was met. No
+candidate reached the reference slot targets with object 3976 and table 0xf60, and none reached 3976 at all: the
+closest were 3972 with `char v18[132]` at match 1252, which breaks int indexing, and 3972 with `int/float v20[4]`
+at match 996 and a frame four bytes wider, while `double v20[2]` gives 3964 and breaks the v20+4 byte offset. The
+first mismatch moved past 0x27 only with the semantics-breaking `float v18[33]` at 0x3b and object 4020 or 4036,
+and every semantics-preserving variant stays at 0x27 or moves to 0x02 when the frame changes. The useful
+positives: v16 and v18 can be flipped exactly with `char v20[16]` or `int v18[34]`, which lands v16 0x44 and v18
+0x98 with v19 0x11c and v22 0x19c correct at frame 0x38c, but v20 stays 0x34 with v36 at 0x30 and the object is
+3992 at table 0xf70 and match 1008, or 999 with `int v18[34]`; v36 at 0x40 never occurs because its home is bound
+to v13's 0x30 slot and no aggregate extent moves it; and v20 at 0x30 appeared only with `float v17[3]`, which
+shifts v17 to 0x14 and the scalar block to v21 0x20, v30 0x24 and v13 with v36 at 0x2c for frame 0x388 and a
+first mismatch at 0x02. `short v18[66]` scores 1360 but is spurious, since the reference clears v18 with
+`mov ecx,0x21; lea edi,[esp+0x98]; rep stosd` at 0x574980 and loads `[esp+edi*4+0x98]`, so v18 is int[33] and
+16-bit operations change behaviour. `__declspec(align(8))` and `align(16)` compile but VC6 does not honour local
+alignment above four, giving v20 0x3c, extra slots and frame 0x398. The mechanism is that declared extent is the
+only live lever and it moves packing only within the v16 and v18 region, while the remaining deltas of v13 with
+v29 at 0x18, v30 at 0x1c and v36 at 0x40 are register-home choices of v11 and v13 rather than aggregate packing, so
+the next lever is that home allocation. Reference slots were re-verified before judging: v36 0x40 at 0x574c5c,
+v18 0x98 at 0x574987 and 0x5749d1, v16 0x44 at 0x5752bb and v20 with v17 at 0x30 at 0x575071. A blocker is set on
+the row. Findings in .scratch/row5744c0/FINDINGS.md round 7 with results in v9 to v13 result files and
+work/vsw_results.jsonl.

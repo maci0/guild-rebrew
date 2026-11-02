@@ -476287,10 +476287,10 @@ file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005744c0.c"
 symbol = "_fcn_005744c0"
 name = "fcn_005744c0"
 kind = "FUNCTION"
-updated_by = "fix-sizes"
-updated_at = "2026-11-02T21:58:23+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-02T22:53:20+00:00"
 status = "SIZE_MISMATCH"
-blocker = "Application code — pending per-function decompilation"
+blocker = "frame packing wall after seven rounds: declared extent is the only live lever and it moves packing only inside the v16/v18 region. char v20[16] or int v18[34] lands v16 0x44 and v18 0x98 exactly but leaves v20 0x34, v36 0x30 and costs bytes (obj 3992, table 0xf70). v36 0x40 never occurs because its home is bound to v13's 0x30 slot, and v20 0x30 appears only with float v17[3] which shifts the scalar block and breaks the frame. The remaining deltas (v13/v29 0x18, v30 0x1c, v36 0x40) are register-home choices of v11/v13 outside aggregate packing, so the next lever is that home allocation, not another sweep"
 
 ["GOLDTL.0x005744c0".verification]
 source_hash = "41fad21f4c03cc71a9a35977977577afe1e26e3fb8702055d3d84a263d8d047b"
@@ -587210,7 +587210,7 @@ defines = "[]"
 input_hash = "f059c4c7554766c99599814251402a71d1dd39aa5c8d5df36c6fd0bd62f0cc95"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T22:40:56+00:00"
+measured_at = "2026-11-02T22:52:55+00:00"
 
 [["GOLDTL.0x00561380".status_history]]
 old_status = "STUB"
