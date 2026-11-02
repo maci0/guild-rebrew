@@ -18118,3 +18118,25 @@ while ours materialises -1 in EAX per site, computes ent into EDI and keeps it t
 init so win takes EBX; eight initializer permutations, a chained assignment, ent before or after win and
 three win-local alias variants all failed to flip it. The pre-split source is at .scratch/blem_best.c and
 the current at .scratch/three.c.
+
+## 2026-11-03 — alloc spieler colour lever measured and rejected
+
+`0x50A7E0` keeps its 809 match at object exactly 3872 with frame 0x428 and idx in EBX; the colour pass
+was reverted and the source is unchanged. A lever does move idx to ESI while holding the frame: holding
+the next-object-id load in the existing local n across the sprintf (`n = *(int*)0x699364;
+sprintf(..., n, type); D(slot,4) = n; *(int*)0x699364 = n + 1;`) makes the prologue byte-exact
+(81ec28040000 53 55 56 33f6 57 89742428), but the function then measures 3862 with match 442. Adding an
+extern int for g_773d70 and moving the increment after the slot[4] and slot[0] stores gives 3857 with
+match 509 and the same exact prologue, first mismatch at 0x88. Holding the same value in other locals
+(iv, rnd, cnt, delta) gives frame 0x42c, father_id gives frame 0x428 at 3884 with ESI, and mother_id or
+arg4 stay in EBX; dead stores, a named zero local and a type copy coalesce to the baseline bytes, and
+register, unsigned or long spellings on idx do not flip it. Reaching ESI at 3872 fails because the early
+block is 149 bytes native against 134 in the ESI build: the missing `mov word [slot],0xffff` costs 6, the
+[esp+0x210] = -1 reuses eax instead of a fresh 10-byte immediate for 4, native's lea edx plus the
+0x7f4cfc and 0x7f4ca4 stores beat our add and [edx-0x58] for 4, three zero byte stores through cl save 1
+each, and the id load into esi costs 1 against eax, so the held id takes the register native keeps for
+zero. The reference reloads 0x699364 after the call, so this lever is not the reference shape. Measured
+also: the baseline and the ESI build have the same 36 non-zero call-gap deltas across the body (from
+plus or minus 1 to 22 bytes each, .scratch/g0/gaps.py), so the match deficit is not the prologue colour
+and 809 cannot be exceeded by it alone. Probe note: .scratch/g0/probe.sh now trims nop padding, because
+the .text size is padded and misleads (an ESI build reported .text 0xf20 for a 0xf11 function).
