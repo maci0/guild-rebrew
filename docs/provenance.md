@@ -15663,3 +15663,14 @@ captured caller objects preserve code, data and relocations. The three helper
 names `cut_FreeAllCutscenes`, `cut_AddParticipant`, and `cut_RemoveParticipant`
 are inferred. Receipts: `.scratch/cutscene-cluster/{organize-reviewed.json,gold-guard.json,candidate-*.json,objects/compare.json,move-apply.json,rename-*-preview.json}`.
 Raw rebuilds and final verification follow.
+
+## 2026-11-02 — lint cleanup
+
+Cleared the four redundant cflags rows (0x420DB0, 0x498E20), recorded a blocker for
+0x558220 (frame 0x184C is 4 mod 8, so the aligned-aggregate prologue cannot reach the
+native chkstk immediate), rebound the three stale types to their surviving files and
+sizes (d3.object-animation-frame 88, d3.object-animation-flags 12, event.validator_view
+20), cleared two stale assembly-provenance records whose files the shared-TU
+consolidation deleted or changed (fcn_004050C0, fcn_004E7340), and wrapped the six
+over-length source lines in 0x5A80D0 and net.c with macro continuations. Rebuild is
+clean; `rebrew lint` reports 5485 files checked, 0 errors, 0 warnings.

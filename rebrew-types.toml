@@ -192,36 +192,28 @@ symbol = "D3_OBJ_ANIM_FRAME"
 size = 88
 native_size = 88
 extent = "allocation"
-evidence = "Rebind after source/header edits in the reconstruction rounds; the native 88-byte stride evidence in TL 0x412d30 (two contiguous 88-byte records passed to 0x4339e0) is unchanged and no modeled offset changed."
+evidence = "Rebind after the source consolidation: native 88-byte stride evidence in TL 0x412d30 (two contiguous 88-byte records passed to 0x4339e0) unchanged, no modeled offset changed."
 cflags = "/O2 /Gd"
 source_hash = "5bd2e1c1524c5afb5fe51bbf03fe0c0743541c28bab55a069ae30de15241380a"
-headers_hash = "584e859f9a64f276af02d6b70e76b4b4133aea1c72e9eb92da0bfdebba5ce354"
+headers_hash = "281429e2e1b3445d2ffc2d7b61d83042fde59354fdd2dd7eb00ab6a20240d2bf"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object-animation-frame".GOLDTL.offsets]
-unbekannt_000 = 0
-position = 4
-unbekannt_010 = 16
-drehung = 20
-unbekannt_020 = 32
 [types."d3.object-animation-flags".GOLDTL]
 file = "src/Develop/Units/d3/StartObjectTransformAnimation.c"
 symbol = "D3_OBJ_ANIM_FLAGS"
 size = 12
 native_size = 12
 extent = "allocation"
-evidence = "Rebind after source/header edits in the reconstruction rounds; the 12-byte by-value options argument copied by TL 0x412d30 to 0x4339e0 is unchanged and no modeled offset changed."
+evidence = "Rebind after the source consolidation: the 12-byte by-value options argument copied by TL 0x412d30 to 0x4339e0 is unchanged, no modeled offset changed."
 cflags = "/O2 /Gd"
 source_hash = "5bd2e1c1524c5afb5fe51bbf03fe0c0743541c28bab55a069ae30de15241380a"
-headers_hash = "584e859f9a64f276af02d6b70e76b4b4133aea1c72e9eb92da0bfdebba5ce354"
+headers_hash = "281429e2e1b3445d2ffc2d7b61d83042fde59354fdd2dd7eb00ab6a20240d2bf"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object-animation-flags".GOLDTL.offsets]
-unbekannt_000 = 0
-unbekannt_002 = 2
-unbekannt_009 = 9
 [types."d3.object_aux_slot".GOLDTL]
 file = "src/Develop/Units/d3/d3_object.h"
 symbol = "D3_OBJECT_AUX_SLOT"
@@ -435,10 +427,10 @@ symbol = "Kind"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "Rebind after the round-17 source edits: native TL 0x4e6650 scales the event type as index*5*4 and calls the fourth slot, unchanged 20-byte stride."
+evidence = "Rebind after the source consolidation: native TL 0x4e6650 scales the event type as index*5*4 and calls the fourth slot, unchanged 20-byte stride."
 cflags = "/O2 /Gd"
-source_hash = "a93832c2c953015c371426be347fbb553ab17d65087135392459dea345e20af6"
-headers_hash = "c12b3f9d62407a5b88dd5e8dc2058484722cae267209ed294bd0919a0c02757e"
+source_hash = "9b532e9fc0c659e22bff6b5e31bca7787ce662c3ab6456865fe2185a8751a60f"
+headers_hash = "7a059382e5902232f7f366180b5662469049109243c5a2db0c09c7f833955dff"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 

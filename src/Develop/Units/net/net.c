@@ -80,14 +80,19 @@ char s_Cant_set_SO_RCVBUF[] = "Can't set SO_RCVBUF on Socket";
 
 #else
 #define s_Unknown_winsock_error_u "Unknown winsock error %u!!!"
-#define s_WSAECONNRESET "WSAECONNRESET: The virtual circuit was reset by the remote side executing a " "hard or abortive close. The application should close the socket as it is no " "longer usable. On a UPD-datagram socket this error would indicate that a " "previous send operation resulted in an ICMP >Port Unreachable< message."
+#define s_WSAECONNRESET "WSAECONNRESET: The virtual circuit was reset by the remote side executing a " \
+"hard or abortive close. The application should close the socket as it is no " "longer usable. On a UPD-datagram socket this error would indicate that a " \
+"previous send operation resulted in an ICMP >Port Unreachable< message."
 #define s_WSAETIMEDOUT "WSAETIMEDOUT: The connection has been dropped because of a network failure or " "because the peer system failed to respond."
 #define s_WSAECONNABORTED "WSAECONNABORTED: The virtual circuit was terminated due to a time-out or other " "failure. The application should close the socket as it is no longer usable."
-#define s_WSAEINVAL "WSAEINVAL: The socket has not been bound with bind, or an unknown flag was " "specified, or MSG_OOB was specified for a socket with SO_OOBINLINE enabled or " "(for byte stream sockets only) len was zero or negative."
+#define s_WSAEINVAL "WSAEINVAL: The socket has not been bound with bind, or an unknown flag was " \
+"specified, or MSG_OOB was specified for a socket with SO_OOBINLINE enabled or " "(for byte stream sockets only) len was zero or negative."
 #define s_WSAEMSGSIZE "WSAEMSGSIZE: The message was too large to fit into the specified buffer and was truncated."
 #define s_WSAEWOULDBLOCK "WSAEWOULDBLOCK: The socket is marked as nonblocking and the receive operation would block."
 #define s_WSAESHUTDOWN "WSAESHUTDOWN: The socket has been shut down; it is not possible to receive on a " "socket after shutdown has been invoked with how set to SD_RECEIVE or SD_BOTH."
-#define s_WSAEOPNOTSUPP "WSAEOPNOTSUPP: MSG_OOB was specified, but the socket is not stream-style such " "as type SOCK_STREAM, OOB data is not supported in the communication domain " "associated with this socket, or the socket is unidirectional and supports only " "send operations."
+#define s_WSAEOPNOTSUPP "WSAEOPNOTSUPP: MSG_OOB was specified, but the socket is not stream-style such " \
+"as type SOCK_STREAM, OOB data is not supported in the communication domain " "associated with this socket, or the socket is unidirectional and supports only " \
+"send operations."
 #define s_WSAENOTSOCK "WSAENOTSOCK: The descriptor is not a socket."
 #define s_WSAENETRESET "WSAENETRESET: The connection has been broken due to the keep-alive activity " "detecting a failure while the operation was in progress."
 #define s_WSAEINPROGRESS "WSAEINPROGRESS: A blocking Windows Sockets 1.1 call is in progress, or the " "service provider is still processing a callback function."

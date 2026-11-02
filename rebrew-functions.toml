@@ -118851,7 +118851,6 @@ file = "src/Develop/Unassigned/GOLDTL.fcn_00420db0.c"
 symbol = "_fcn_00420db0"
 kind = "FUNCTION"
 name = "fcn_00420db0"
-cflags = "/O2 /Gd"
 blocker = "8 bytes under /O2 /Gd: host==0 jumps to the fail epilogue or eax,-1 at +0x204 instead of the success pops at +0x290, and that epilogue emits or eax,-1 before pop edi/esi/ebp rather than after pop ebp. return -1, goto done with a shared result, and the net.c single-exit form all compile to the same 659/667 object."
 blocker_delta = 8
 
@@ -440584,7 +440583,6 @@ kind = "FUNCTION"
 updated_by = "test"
 updated_at = "2026-10-31T16:45:10+00:00"
 status = "SIZE_MISMATCH"
-cflags = "/O2 /Gd"
 
 ["GOLDTL.0x00498e20".verification]
 source_hash = "da89cc86f0556b1bf2be4fac5c26e39fc8ecf4711001b386af45460ba248b961"
@@ -442274,9 +442272,10 @@ file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00558220.c"
 symbol = "_fcn_00558220"
 name = "fcn_00558220"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:35:39+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-02T02:11:21+00:00"
 status = "STUB"
+blocker = "frame 0x184c is 4 mod 8; aligned-aggregate prologue needs a multiple of 8, so the native chkstk immediate is unreachable from C with this toolchain"
 
 ["GOLDTL.0x00558220".verification]
 source_hash = "e4bd371c0bec4d194e32dceb3f8db41e68c48252c2d7b6b37e31d3ab5705bb12"
@@ -467784,7 +467783,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005a80d0".verification]
-source_hash = "6d9d8ac92194c5ecebfb8a72f15de5a09b4cbd90289f9a0e21e137205680f4f6"
+source_hash = "0c61b9353dd624c8946c92823e4f2341842daf91fb1e57e2fad87001fed86d36"
 reference_hash = "f5f09490b8667bae7f02da33ecbb0ea12344ab1063414795cf5e1d8feec522e4"
 reference_size = "1488"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -467795,10 +467794,10 @@ module = "GOLDTL"
 va = "0x5a80d0"
 context_hash = ""
 defines = "[]"
-input_hash = "79527f897ee679077ab06ea388dfed5ea34395a5b3122cb2f4c03eb447ef313f"
+input_hash = "9f58a2dc55178ec5ce1525098eb7cb63221a9e2743d58120f94f16c3b8568c1a"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-01T16:02:46+00:00"
+measured_at = "2026-11-02T02:26:34+00:00"
 
 [["GOLDTL.0x005a80d0".status_history]]
 old_status = "STUB"
@@ -586876,10 +586875,6 @@ evidence = "Inference: very likely original inline assembly at the reviewed nati
 source_hash = "631fb7d6cd24d8ff44b280cc7af7f73d73764287aa2b046c0ee7bf4bbe87edec"
 evidence = "Inference: very likely original inline assembly at the reviewed native SERVER core sites 0x10017611. Positive structural evidence is the fixed EBX count, LEA(3*EDI)&3 alignment and three REP passes across distinct native contexts. Native building-table instances in both clients spill literal 0x3f0 and reload EBX before the core; that operand homing supports the family inference. Goal108 freshly checks 209 distinct target/site pairs, including these sites; the building-table spill/reload is independently rechecked in both clients. Compiler controls and stock-library exclusions only corroborate that structural inference. Neither an unsuccessful C search nor byte agreement establishes provenance or impossibility of a C spelling. No original macro name, authorship, whole-function verdict, provider, layout or storage owner is claimed. Native checks and historical receipt details: .scratch/goal108-assembly-provenance/native-cores.json and before.json; docs/assembly-audit.md and docs/msvc6-allocator.md."
 
-[source.definitions."src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00405080.c".fcn_004050c0.GOLDTL]
-source_hash = "22f9d079add9c27bf93d90288429bd3b868e67ecc1ee4d2263da4692b237af35"
-evidence = "Native GoldTL 0x004050c0 contains mov ecx,0x65; xor eax,eax; rep stosd at both memset sites; sequence differs from Gold target and reproduces 110/110 bytes."
-
 [source.definitions."src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00405080.c".fcn_004050c0.GOLD]
 source_hash = "22f9d079add9c27bf93d90288429bd3b868e67ecc1ee4d2263da4692b237af35"
 evidence = "Native Gold 0x004047a0 contains mov ecx,0x65; xor eax,eax; rep stosd at both clearing sites, confirmed at 0x004047c9 and 0x004047fe."
@@ -587254,10 +587249,6 @@ evidence = "Whole-function naked assembly: the reference extent is an ABI shape 
 [source.definitions."src/Develop/Unassigned/GOLDTL.fcn_0065ba0f.c".fcn_0065ba0f.GOLDTL]
 source_hash = "b3bdd9a5a394a992f1da3227b5f49d8b5a5e7f3aaad6dbeb3391b50329aeb9df"
 evidence = "Whole-function naked assembly: the reference extent is an ABI shape MSVC 6 C mode cannot express; bytes transcribed instruction for instruction."
-
-[source.definitions."src/Develop/Unassigned/fcn_004e7340.c".fcn_004e7340.GOLDTL]
-source_hash = "36fb41eb03d4be2816fe2794456d152a689db7952914ee4621a599d3b1c643c4"
-evidence = "int 3 breakpoint traps on failed invariant checks; reference bytes at GOLDTL 0x4e7366 and 0x4e737b contain 0xCC at exactly the two __asm { int 3 } sites, so the original function carried these traps. MSVC 6.0 C has no spelling that emits int 3."
 
 [source.definitions."src/Develop/Unassigned/fcn_005e0090.c".fcn_005e0090.GOLDTL]
 source_hash = "7eb8ce2507cf234b189dbea8c512f48ba2165b2176badac406a647c812af25b7"
