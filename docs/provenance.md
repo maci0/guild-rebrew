@@ -17315,3 +17315,18 @@ slot back.
 
 `0x4DA690` keeps 853 at object 7053 with one formatting change: the 21-argument escape call now
 wraps across three lines so `rebrew lint` returns to 5485 files checked, 0 errors, 0 warnings.
+
+## 2026-11-02 — task dispatcher reaches native size
+
+`0x4D8D00` object is now exactly 4640, the native size, with match 534 against 371, frame 0x138 and
+the call counts held (fcn_004c6680 11, fcn_004c67c0 9, fcn_004c6940 16). The verdict string is STUB
+only because an equal-length row below the near-match threshold lands in that class. One selective
+ent34 inline did it: the case-4 `p->c0c == 1` guard's CompareVector argument is now the exact
+expression `(float*)(*(int*)(*(int*)(obj + 0x184) + 0x34) + 0x4c)`, while ent34 stays a static
+function with 27 remaining call sites. Measured variants: a single inline at that site gives
+4640/534; a second inline off 4640 except L297 (4640/442) and L408 (4640/345); temps at the 187,
+297, 320, 340 and 356 sites give 4664, 4580, 4628, 4624 and 4660, none beating match 371; and the
+pairs or triples that reach 4640 with higher match (198+378 gives 4640/603, 198+194+367 gives
+4640/677) all merge two fcn_004c6940 tails and drop that count to 15, so they were rejected on the
+call-count constraint. Instruction count is 1465 against native 1452, so the remaining work is
+shape rather than size.

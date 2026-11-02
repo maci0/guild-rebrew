@@ -5,13 +5,15 @@
  * the target object of each live task and hands it to the per-type progress
  * handler. One loop, eight-way dispatch on the task state.
  *
- * Status: SIZE_MISMATCH, 4648 against the native 4640 bytes, 371 matching
- * bytes. All eight dispatch bodies are transcribed in native body order
- * (5, 1, 2, 3, 6, 4, 7, 8) and the frame matches the native 0x138. The
- * reference stores -1 to p->timer as an immediate and keeps every
+ * Status: the compiled body is exactly the native 4640 bytes; 534 of those
+ * bytes match, and the rebrew verdict is STUB (equal length, below the
+ * NEAR_MATCHING threshold). All eight dispatch bodies are transcribed in
+ * native body order (5, 1, 2, 3, 6, 4, 7, 8) and the frame matches the native
+ * 0x138. The reference stores -1 to p->timer as an immediate and keeps every
  * fcn_004c6680/fcn_004c67c0 call tail separate; here the state -1 test is
- * spelled ~p->type == 0, and the two case-6 tails evaluate ent34(obj) into n
- * ahead of the call, so the compiler cannot share those tails either.
+ * spelled ~p->type == 0, the two case-6 tails evaluate ent34(obj) into n
+ * ahead of the call, and the case-4 p->c0c == 1 guard inlines ent34, so the
+ * compiler cannot share those tails either.
  */
 extern int g_772ea4;		/* 0x00772ea4 */
 
@@ -473,7 +475,7 @@ tail1_body:
 			if (p->c0c == 1
 			    && *(int*)(*(int*)(obj + 0x184) + 0x128) == 0
 			    && !CompareVector3WithinTolerance(vec,
-				(float*)(ent34(obj) + 0x4c), 49.5f)) {
+				(float*)((*(int*)(*(int*)(obj + 0x184) + 0x34)) + 0x4c), 49.5f)) {
 				p->c0c = 0;
 				goto after2;
 			}
