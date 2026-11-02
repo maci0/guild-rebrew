@@ -18690,3 +18690,29 @@ in both. The prologue still differs from 0x56a001, where native emits `xor ebx,e
 xor edi,edi; add eax,2; xor ebp,ebp; cmp eax,7` and then stores ebx to 0x34, ebp to 0x2c, ebx to 0x30 and
 ebx to 0x1c, while ours emits edi first and hits' store is dead. Current source at
 .scratch/569ff0/KEEP_frame738.c, notes in NOTES.md.
+
+## 2026-11-03 — inventory dialog frame and scalar map decoded
+
+`0x5D0660` keeps its v14 state at 1258 with object 4389, frame 0x438, nine store blocks and lint clean; the
+decomposition pass kept nothing. A CFG-based esp dataflow replaced the earlier linear push counts, which
+drifted at the `if (a2)` arm where `push eax` and `push 0x9f` are exclusive; with zero conflicts every
+anchor reproduces: [esp+0x54] is tabA 0x44, [esp+0x98] tabB 0x88, [esp+0xf8] tabC 0xe8, [esp+0x58]
+tabA[0].text 0x48 and [esp+0x10] t0, the 0x10 shift being the four callee-saved pushes. The layout is 17
+scalars at 0x00..0x44, tabA 0x44, posB[4] at 0x64 (indexed base from [esp+ebx*4+0x74]), posC[5] at 0x74
+([esp+ebx*4+0x84]), tabB 0x88, tabC 0xe8, buf 0x138 and frame 0x438. Native scalar slots: 0x00 t0, 0x04 k
+for the child walk then p for the tabC fill, 0x08 nb, 0x0c n3, 0x10 h, 0x14 ent, 0x18 w, 0x1c nc, 0x20
+rows2, 0x24 flag, 0x28 posX[2], 0x30 count, 0x34 win, 0x38 posY[2] and 0x40 rows, with slot 0x04 shared by
+the 0x1b0 store of 3 and the tabC pointer at 0x21f, 0x24a and 0x25d, and idx holding no slot. The kept
+declaration order already matches that layout under descending allocation, so declarations are not the
+defect. The gate is one allocation: native keeps rows2 in ebp for its whole range (home store 0x134, no
+reload, `mov esi,ebp` at 0x293), which pushes the child-walk counter and the tabC pointer into slot 0x04 and
+leaves no register for t0 at 0x2d4, so t0 spills to 0x00, the tabA arm reads the field and the text stays in
+ebx; our builds split rows2 at 0x100 and reuse ebp for the walk counter, so t0 keeps a register, `t0-0x5a`
+fuses, and the pre-label region comes out 25 bytes short with the block 17 short. Measured: the
+both-arms-text-pre shape with a dead arm result gives 4359, block at 0x270 of 213 bytes, text in ebx, posY0
+in esi, rows2 in edi and n3 in ebp, match 376; a single outer k and idx-as-walk-counter measure the same; the
+round-12 native shape gives 4393 with the block at 0x289 of 214 and the text spilled, match 832. The next
+lever is to make the child-walk counter and the tabC fill pointer memory-resident before rows2's split
+point, since those two block-scoped variables are exactly native's occupants of slot 0x04. Tools and
+candidates in .scratch/660/r13/ (frame.py, natlist.py, objsmap.py, life.py, ndiff.py, block.py) with the
+write-up in NOTES-rewrite.md.
