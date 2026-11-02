@@ -103,8 +103,7 @@ void __cdecl fcn_005744c0(int a0)
 		else {
 			*(int*) (v5 + 0xcc) = fcn_0050f910(*(int*) (v5 + 0xb4));
 		}
-		*(int*) (v5 + 0x84) = fcn_004c5620(*(int*) (v5 + 0x70) + 1, (void*) v5);
-		return;
+		goto Lsucc;
 
 	case 3:
 		*(int*) (v5 + 0x84) = -1;
@@ -118,6 +117,7 @@ void __cdecl fcn_005744c0(int a0)
 			*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
 			return;
 		}
+Lsucc:
 		*(int*) (v5 + 0x84) = fcn_004c5620(*(int*) (v5 + 0x70) + 1, (void*) v5);
 		return;
 
@@ -150,8 +150,7 @@ void __cdecl fcn_005744c0(int a0)
 		}
 		*(int*) (v5 + 0xb8) = *(int*) (v15 + 1);
 		*(int*) (v5 + 0x10) = *(int*) (v15 + 1);
-		*(int*) (v5 + 0x84) = fcn_004c5620(*(int*) (v5 + 0x70) + 1, (void*) v5);
-		return;
+		goto Lsucc;
 
 	case 6:
 		*(int*) (v5 + 0x84) = -1;

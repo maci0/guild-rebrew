@@ -19642,3 +19642,25 @@ native reads slot 0x20 plus two and we read q plus two and native appears to ove
 dead there. Both need the variable to slot mapping for the tail block re-derived with correct pending-push
 accounting before another edit. Candidate kept at .scratch/569ff0/cand_pctail_324.c with notes in NOTES.md under
 the case-5 tail identity section.
+
+## 2026-11-03 — crew dialog shares its success tail
+
+`0x5744C0` 467 to 512 with object 3984 from 4024 against native 4001, 32 relocations, seven fcn_004c5620 call
+sites matching the reference count and lint clean. The kept edit makes case 2 and case 5 success statements
+`goto Lsucc;` with `Lsucc:` on case 3's success statement, and the compiler places that shared block at 0x23b
+right after case 5, as the reference places it at 0x5746e0, with cases 3 and 5 reaching it. What remains is now
+measured precisely. Case 2's two success paths are still emitted inline at 0xe8 and 0x11c, and the shared success
+tail jumps into the failure block's call and epilogue at 0x213, so the reference's separate success call at
+0x5746e5 is not reproduced even though the site count matches. On the failure side the reference splits the four
+`fcn_004c5620(-1, v5)` edges into two blocks: A at 0x5745ff fed by the case-3 ==2 fallthrough and the case-5 null
+jump with `push esi` hoisted into both predecessors, and B at 0x57469a fed by the case-2 null and the case-5 ==2
+paths so B pushes esi itself. Our compiler folds all four into one B-shaped block at 0x211, and explicit labels,
+alternate label placements and every success-sharing variant still fold them, at 4028 with nine sites, 3956 with
+six and 4008 with eight, all reverted. A being missing costs 22 bytes in case 3 and 27 in case 5, while case 2
+carries two inline success tails worth 54. Arm deltas from the function start are case 2 plus 54, case 3 minus 22,
+case 4 zero, case 5 minus 27, case 6 minus 1, case 7 plus 4, case 8 minus 10, case 9 plus 9 and cases 0 and 1 plus
+1. The slot swap is still unlanded, with the target putting v15 at 0x10, v21 at 0x14, v29 at 0x18 and v30 at 0x1c
+against ours v30 at 0x18 and v29 at 0x1c, and declaration permutations including a float swap and a full reverse
+order are byte-identical; fixing the reference's two-block failure split may be a prerequisite for that swap since
+the current fold decides which failure block owns the shared call. Backups and findings in .scratch/row5744c0/
+with kept_succ7_1793654387.c and backup_tailpre_1793654100.c.
