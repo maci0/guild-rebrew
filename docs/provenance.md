@@ -16141,3 +16141,15 @@ tail copies `pal[d][0..2]` in natural order, where the old swapped 0/1 was wrong
 gaps are one mechanism: native caches g_102d020 in ebx and reloads it after every call before
 passing it as DRAW_RUN's x argument, while our source reads memory each time; per-case
 native-minus-ours reads i +40, [ +74, N +44, F -35, Y -27, ] -62, l -11, T -7, R +7.
+
+## 2026-11-02 — parser directive length corrected in three cases
+
+`0x51C840` had the wrong directive length in cases U, b and E: those sites said
+`(r != -1) ? 3 : 2` while native's bytes at 0xdfe, 0xe34, 0xe7d, 0xed5 and 0xf37 read
+`33 c0 83 fe ff 0f 95 c0 40`, that is `xor eax,eax; cmp esi,-1; setne al; inc eax`, which is
+`(r != -1) ? 2 : 1`. Cases u and B already had the correct form. Correcting the three sites
+removes 6 bytes before the tables, so the object is 6035 and the jump table has slid to
+0x16E0; the positional match reads 1081 against 1432 because the table and everything after it
+moved. The correction is kept as semantics: the old value misplaces the cursor and the
+`buf[e] '%'` check by one byte in those three cases, so byte identity was unreachable with it.
+Recovering the exact 6 bytes so the table lands back on 0x16E8 is the open task.

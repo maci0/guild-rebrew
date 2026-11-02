@@ -445,14 +445,14 @@ body:
 			memmove(buf + e, buf + i + 1, strlen(buf) - i);
 			break;
 		case 'U':
-			k = (r != -1) ? 3 : 2;
+			k = (r != -1) ? 2 : 1;
 			e = i - k;
 			memmove(buf + e, buf + i + 1, strlen(buf) - i);
 			state = 2;
 			i = e - 1;
 			break;
 		case 'b':
-			k = (r != -1) ? 3 : 2;
+			k = (r != -1) ? 2 : 1;
 			e = i - k;
 			if (buf[e] != '%') {
 				break;
@@ -478,7 +478,7 @@ body:
 			state = 6;
 		join:
 			c = buf[i + 1];
-			k = (r != -1) ? 3 : 2;
+			k = (r != -1) ? 2 : 1;
 			e = i - k;
 			if (c == 0x20) {
 				memmove(buf + e, buf + i + 1, strlen(buf) + 2 - i);
