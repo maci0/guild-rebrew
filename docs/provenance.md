@@ -20177,3 +20177,28 @@ case-5 fail emitted at its r==0 fallthrough as `movl $-1,0x70(%esi)` while case 
 MSVC 6 will not choose both: it picks the shared fail representative at case 4's tail whenever case 5's fail has a
 local copy, and at case 5's end with the `or` rematerialisation when only gotos exist. A blocker is set on the row.
 Variants in .scratch/r561380 including keep_v29_now.c, i9, k1, m1, n1, i11 to i13, j1 to j6, o1, o2, p1 and p3.
+
+## 2026-11-03 — crew dialog segments measured, scan block blocked
+
+`0x43C640` keeps one edit and then parks: match 442 to 432 with object 5512 from 5491 and 32 relocations, frame
+0x60 and prologue bytes 0 to 10 equal to native with all five fill blocks byte-identical. The kept edit drops the
+hoisted `p` in the mask scan so the source indexes `t->mat[row*W+col]` and `[.. + 1]` directly, which makes native's
+zero-extended byte materialisation appear (`xor ebx,ebx; mov bl,[..]; cmp`) and re-tests it, taking the f1 to f2
+segment from minus thirty-one to minus eight and the entry from plus eleven to plus eight while the frame and fills
+stay intact. Segments anchored on the five fill entries, native against ours with deltas, are entry to f1 343
+against 351 for plus eight, f1 to f2 456 against 448 for minus eight, f2 to f3 376 against 324 for minus fifty-two,
+f3 to f4 401 against 412 for plus eleven, f4 to f5 1784 against 1849 for plus sixty-five, and tail 2059 against 2148
+for plus sixty-nine; our fill offsets are 0x15f, 0x31f, 0x463, 0x5ff and 0xd38, and fill2 now lands at native's own
+0x31f because entry plus f1 to f2 equals native exactly. Reverted: int byte temporaries give the best instruction
+match at 475 and reproduce native's p0 spill, but every added local pushes the frame to 0x64 with `sub esp,0x64` and
+a first mismatch at 5, and reusing existing ints or deleting y1 frees no slot; a volatile RegionRecord pointer
+reproduces native's six post-call `mov edx,[ebp-0xc]` reloads and takes f2 to f3 to plus sixty-seven but overshoots
+to plus fifteen, costs twenty-one in f4 to f5, breaks the prologue at the first fourteen bytes and drops match to
+293. The finding is that fill1 to fill3 contains no native operation our C lacks: the block already has the four-term
+byte tests, the cand or 0x10 and increment, the scoring pass, the best copy, the eight material stores at +0xbc with
+0x34 stride, the bit selection, exactly six frees, the four zero stores, cells = H*H and the map fill prelude. The
+minus fifty-two is entirely native homing the record pointer in edx and reloading it after each free where ours
+keeps edi, and the remaining minus eight needs the frame-breaking temporaries. Keeping the aligned fill2 is the
+deliberate choice even though the object grew, since anchor alignment is structural and the size target cannot be
+met before the vertex-emission surplus is removed. A blocker is set on the row. Backups v38-pre-round7.c as the
+previous source, v45-kept.c as the current one and v45-dehoist.c, with NOTES.md round 7.

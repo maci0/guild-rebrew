@@ -423857,10 +423857,10 @@ name = "fcn_0043c640"
 file = "src/Develop/Units/m_alloc/GOLDTL.fcn_0043c640.c"
 symbol = "_fcn_0043c640"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:14+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-02T23:18:07+00:00"
 status = "SIZE_MISMATCH"
-blocker = "Complete decompiler-shaped body from the live disassembly (1814 instructions, 24 stack locals, 8x8 region table records). Measured SIZE_MISMATCH after --force-status: obj 5830 vs 5419 (+411), 343/5419 bytes match, 43 reloc. Prologue/flow match only at instruction-class level: the reference keeps about half of its variables in registers (only 0x60 stack bytes) while this transliteration spills more, so ebp/esp displacements and register roles differ. NEAR needs a hand reconstruction of the register and stack assignment, not another transliteration. Evidence: .scratch/gold-p/stub2/ (asm dumps, diffs t6/t7, converter)."
+blocker = "segment-shape wall: the five align-up fill blocks are byte-identical and the object is redistributed rather than oversized. Segments anchored on the fill entries (native|ours|delta): entry-f1 343|351|+8, f1-f2 456|448|-8, f2-f3 376|324|-52, f3-f4 401|412|+11, f4-f5 1784|1849|+65, tail 2059|2148|+69. fill1..fill3 has no native operation our C lacks; the -52 is native homing the record pointer in edx and reloading it after each of the six frees where ours keeps edi, and the remaining -8 needs zero-extended byte temps that push the frame to 0x64 and break the prologue. The vertex-emission surplus needs an fxch-free float shape that does not move the frame"
 blocker_delta = 411
 
 ["GOLDTL.0x0043c640".verification]

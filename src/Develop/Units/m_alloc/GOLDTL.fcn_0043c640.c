@@ -179,11 +179,12 @@ void __cdecl fcn_0043c640(Tile* t)
 					for (col = t->H * x; col < limitX; col++) {
 						m = count;
 						for (bit = 0; bit < 8; bit++) {
-							p = &t->mat[row * t->W + col];
-							if (p[0] == 0 || p[1] == 0 ||
+							if (t->mat[row * t->W + col] == 0 ||
+							    t->mat[row * t->W + col + 1] == 0 ||
 							    t->mat[(row + 1) * t->W + col] == 0 ||
 							    t->mat[(row + 1) * t->W + col + 1] == 0) {
-								if (p[0] != 0 || p[1] != 0 ||
+								if (t->mat[row * t->W + col] != 0 ||
+								    t->mat[row * t->W + col + 1] != 0 ||
 								    t->mat[(row + 1) * t->W + col] != 0 ||
 								    t->mat[(row + 1) * t->W + col + 1] != 0) {
 									n = (row - t->H * y) * t->H + (col - t->H * x);
