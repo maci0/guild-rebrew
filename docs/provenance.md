@@ -18802,3 +18802,28 @@ t0 out of a register is a real address escape, which costs 48 bytes elsewhere, s
 construct that puts n3 in edi and leaves rows2 in ebp without homing all of t0, for example an n3-local
 address escape scoped to the label block plus re-selection of the arm temporary. Candidates and tooling in
 .scratch/660/r14/ with builds in .scratch/660/tools/out/ and notes in NOTES-rewrite.md.
+
+## 2026-11-03 — production message case five rewritten from the listing
+
+`0x569FF0` 281 to 318 with the object at 3372, 38 relocations, frame `sub esp,0x738` held and the first
+mismatch moved from 0x12 to 0x8, lint clean. Three edits. The case-5 accumulator is now
+`flag = (int)(fcn_0050bb50(id, *(char*)0x773d75) * (float)num + (float)flag);`, which emits native's fimul
+on num, fiadd on flag, _ftol and store, so slot 0x14 is the running accumulator. Both bumps follow the
+`if (num)` block as `q = (char*)fcn_00509570(q); if (q) *(int*)(q+0x14) += flag;` and then
+`*(int*)(pb+0x4d) += flag;`, matching native at 0x56abc0 and 0x56abd1, with 0x509570 declared locally and
+still unbound in the metadata. The buffer declarations were swapped as well, though that swap measures
+byte-identical. Rejected, all on the same gate: the `num = fcn_0050df70(...)` accumulator variant gives 259
+alone and 306 with all three edits but the bump pushes the frame to 0x73c with fifteen scalar dwords against
+native's fourteen and arrays at 0x4c, 0x14c and 0x34c; the six-argument fcn_004c51f0 variant gives 0x734
+alone and only returns to 0x738 combined with the other case-5 change, then 0x73c with the bump;
+`default: return;` gives 276 at object 3404; fcn_0055c050(pa) gives 292; and fcn_004f4f60 with `px+4` gives
+276. Two findings change the plan. The buffer swap is byte-identical because VC6 assigns char arrays by size
+rather than declaration order, and permuting the scalar declarations is also identical, so native's b200 at
+0x48 and b100 at 0x248 cannot be reached by reordering: native's 0x48..0x347 span is either three 0x100
+blocks or a 0x200 plus 0x100 in an order this compiler will not emit, and it needs a different declaration
+set. And our parameter e moves from esi to ebp once the bump call exists (`mov ebp,[esp+0x744]` at 0x8
+against native's `push esi; mov esi,[esp+0x748]`), which is the whole of the one-byte-shift mismatch at 0x8;
+q, o, cnt2 and px targets and the assignment-inside-condition form all land in ebp, and native reloads e at
+0x56acca so it tolerates the spill, which points at the parameter needing to stay live differently rather
+than another bump spelling. Full measurement table in .scratch/569ff0/NOTES.md with the current source at
+KEEP_318.c and the previous at BASE_281.c.

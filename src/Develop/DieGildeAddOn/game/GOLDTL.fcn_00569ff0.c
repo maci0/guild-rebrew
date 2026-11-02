@@ -50,6 +50,7 @@ float __cdecl fcn_0050bb50(int, int);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl fcn_0050df70(char*, char*);
 unsigned char* __cdecl fcn_00508e40(int);
+void* __cdecl fcn_00509570(char*);
 
 /* The 14-byte message block published by the server at 0x7f4c00. */
 #define MSG_COPY(dst) \
@@ -78,8 +79,8 @@ void __cdecl fcn_00569ff0(char* e)
 	int n;
 	char* o;
 	SEARCH s;
-	char b200[0x200];
 	char b100[0x100];
+	char b200[0x200];
 	char b400[0x400];
 
 	num = 0;
@@ -386,9 +387,8 @@ void __cdecl fcn_00569ff0(char* e)
 						strcpy(b400, b100);
 						fcn_004c51f0(*(int*) (pb + 2), *(int*) (q + 2), id,
 						        *(int*) (v + 2), *(char*) 0x773d75);
-						fcn_0050bb50(id, *(char*) 0x773d75);
-						num = (int) ((float) num * (float) hits
-						        + (float) v);
+						flag = (int) (fcn_0050bb50(id, *(char*) 0x773d75)
+						        * (float) num + (float) flag);
 					}
 					cnt2 = (char*) gm_NextEntityQueryMatch();
 				}
@@ -396,6 +396,11 @@ void __cdecl fcn_00569ff0(char* e)
 				strcpy(b400, *(char**) 0x14abad0);
 			}
 		}
+		q = (char*) fcn_00509570(q);
+		if (q != 0) {
+			*(int*) (q + 0x14) += flag;
+		}
+		*(int*) (pb + 0x4d) += flag;
 	after:
 		if (cnt2 != 0) {
 			q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
