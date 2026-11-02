@@ -15674,3 +15674,18 @@ sizes (d3.object-animation-frame 88, d3.object-animation-flags 12, event.validat
 consolidation deleted or changed (fcn_004050C0, fcn_004E7340), and wrapped the six
 over-length source lines in 0x5A80D0 and net.c with macro continuations. Rebuild is
 clean; `rebrew lint` reports 5485 files checked, 0 errors, 0 warnings.
+
+## 2026-11-02 — missing sizes cleared, stores refreshed for 6.14.3
+
+The 53 MISSING_SIZE rows were leaf stubs whose inventory extents are 1 to 3 bytes and
+whose files had never been compiled. Each was tested with its inventory VA and size
+(`rebrew test <file> --va <va> --size <size>`), which recorded a verdict and removed the
+status: the target now reports zero MISSING_SIZE rows and 100 percent coverage, with
+EXACT up from 412 to 464. `rebrew coverage catalog --fix-sizes` also updated 121 stored
+SIZE annotations to the canonical inventory extents. The Rebrew upgrade to 6.14.3
+changed the compiler-context hash, so the eight stale type bindings were rebound at
+their reviewed sizes (d3.object-animation-frame 88, d3.object-animation-flags 12,
+amt.office_slot 24, ch.action_queue_slot 404, event.validator_view 20,
+d3.universe-view 988, d2.text-window.tl 972, d2.text-entry.tl 756), and
+`rebrew init --refresh-agents` refreshed the drifted generated skill file. `rebrew lint`
+reports 5485 files, 0 errors, 0 warnings.
