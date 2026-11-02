@@ -17330,3 +17330,27 @@ pairs or triples that reach 4640 with higher match (198+378 gives 4640/603, 198+
 4640/677) all merge two fcn_004c6940 tails and drop that count to 15, so they were rejected on the
 call-count constraint. Instruction count is 1465 against native 1452, so the remaining work is
 shape rather than size.
+
+## 2026-11-02 — transport row lands on native size and bases
+
+`0x4DA690` object is now exactly 7057, the native size, with match 882 against 853, frame 0x900,
+sitzung 0x1e4, prefix 0x9b and four pushes. The "+0x10 slack" was not slack: the 0x9c..0xac block in
+front of blkB is the counter array s54, native's counters are 0xc bytes long because its raw
+counter accesses only touch 0x9c, 0xa0 and 0xa4 (and its s98 writes at 0xa8 and 0xb8 pin s98 to
+0xa8 and order to 0xb8), so the declaration is `int s54[3]` and blkB follows contiguously at 0xa8.
+With s54[4] VC6 placed blkB at 0xac, four bytes high on s98, order and sD0. The kept layout is
+`blkA { int sel[4]; int s84[6]; int s54[3]; }` at 0x74 and
+`blkB { int s98[4]; int order[6]; int sD0[6]; int pad0,pad1; char pad2[16]; int pad3; int sF4[8]; }`
+at 0xa8: footprint 0x34 + 0x7c = 0xb0 covering native's 0x74..0x124 exactly, and blkB carries no
+double because the three pdd doubles forced alignment 8 and sizeof 0x80, moving the frame to 0x904
+back when the doubles were the trick. Bases are all native now (sel 0x74, s84 0x84, s54 0x9c, s98
+0xa8, order 0xb8, sD0 0xd0, sF4 0x104) with sum of absolute deltas zero, verified two ways: a
+struct-offset probe compiled from the same struct text gives s98 +0, order +0x10, sD0 +0x28, sF4
++0x5c and sizeof 0x7c, and esp-corrected disps agree (a store at raw disp 0xc0 is order[0] with two
+live argument pushes, true 0xb8; raw prologue disps mislead without esp correction). The escape
+block is 17 int escapes plus &blkB.pad0, &blkB.pad1 and &blkB.sF4 plus three literal arguments
+0x10/0x11/0x12 at 20 per call, so two calls (20 and 3). Size model: 5 bytes per scalar argument, 8
+per member, 2 per literal and 5 per extra call group, giving 7048 at 20 arguments, 7056 at 21, 7057
+at 23 spread as 20 per call or 21/22, and 7061 at 22 per 22. The three literal arguments are pure
+size ballast; escaping blkA.sel instead costs 27 bytes of body and match. The 21-argument escape
+call is wrapped across three lines so `rebrew lint` stays at 0 errors and 0 warnings.

@@ -423046,32 +423046,32 @@ kind = "FUNCTION"
 ["GOLDTL.0x004da690"]
 size = 7057
 note = "Goal63 native mapping. Council election/removal session cutscene controller. Coordinates Sitzung scene creation, AMTSWAHL/ABSETZUNG script resources, chamber votes and result scenes. The six location-specific Sitzung scenes and create/exit cutscenes provide a specific role. Evidence: 0x4dac50 -> cutscenes\\sitzung_main. retain fcn_004da690; role mapping only. Gold counterpart GOLD.0x004d8e20, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 99.906471 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
-updated_by = "rehome"
-updated_at = "2026-10-27T08:33:55+00:00"
+updated_by = "test"
+updated_at = "2026-11-02T14:24:39+00:00"
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_004da690.c"
 name = "fcn_004da690"
 symbol = "_fcn_004da690"
 kind = "FUNCTION"
-status = "SIZE_MISMATCH"
+status = "STUB"
 blocker = "Body ported from the Kuna decompilation of the native 0x900 frame: party record snapshot and 0x114 copy-back, the six-scene Sitzung loop with per-scene entity collection, ABSETZUNG/AMTSWAHL resource loading, the create path (entity placement, chamber dialogue 12c4-12d7, Sitzung.esc assembly) and the removal path (vote counts 12d8-12e5, majority/tie selection, chamber vote scene). It compiles to 6360 bytes and keeps the statement order and all 43 callees, but it is not byte-accurate: 1176/7057 bytes equal, 697 bytes short. Cause: Kuna's element-typed pointer arithmetic is kept as printed, so the native byte strides (0x18 result rows, 0x10e scene entries, 0x35c slots, 0xd7/0x2f4 vote tables) and the rep-movs script-name copies do not fold to the reference encodings, and the a0 write-back blocks differ. Byte recovery needs source-level scene/vote types and a hand rewrite of the stride arithmetic."
 blocker_delta = 697
 
 ["GOLDTL.0x004da690".verification]
-source_hash = "875845c7e82d8f414e8c0d3bcb916128eab3045d8cd0c20fc7ec1edf91ee5968"
+source_hash = "c544743be53bcc2885caaf46d3ef0ab60ea186e187b889451f52b93acef976f7"
 reference_hash = "217cf950d461ae3aff7e23c906f4b9cd6e9e683cac0694b5f715363c23fefb02"
 reference_size = "7057"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "0e8a99954f54c9a4a83e18dc30c2c78d371ee084f27f0d787482cfc91082426c"
+compiler_hash = "7abcb079717a76f6d448fa4f910ea5f9116c386c77fd93b0df08395841ecd51f"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x4da690"
 context_hash = ""
 defines = "[]"
-input_hash = "2252ea6dc20d32c7c55731936b82b1f87f9e0f33928529dfbd11a03a4945792b"
-status = "SIZE_MISMATCH"
+input_hash = "f2746b6448866cbc98f1f9366eb09307749cdc2e369b74b2bcf650ac277c1431"
+status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T14:10:43+00:00"
+measured_at = "2026-11-02T14:24:39+00:00"
 
 [["GOLDTL.0x004da690".binding_history]]
 action = "rebind"
@@ -423110,6 +423110,12 @@ file = "src/GOLDTL.fcn_004da690.c"
 name = "fcn_004da690"
 symbol = "_fcn_004da690"
 kind = "FUNCTION"
+
+[["GOLDTL.0x004da690".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "STUB"
+changed_at = "2026-11-02T14:24:39.194893+00:00"
+updated_by = "test"
 ["GOLD.0x004d8e20"]
 size = 7089
 note = "Goal63 native role counterpart of GOLDTL.0x004da690. Council election/removal session cutscene controller. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 99.906471 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."

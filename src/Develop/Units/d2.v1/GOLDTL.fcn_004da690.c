@@ -74,7 +74,6 @@ void __cdecl fcn_004da690(unsigned int *a0)
     int s48;
     int s4C;
     int s50;
-    int s54[4];
     int s58;
     int s5C;
     int s60;
@@ -135,14 +134,19 @@ void __cdecl fcn_004da690(unsigned int *a0)
     struct {
         int sel[4];
         int s84[6];
+        /* native 0x9c: three variant counters, 0xc bytes */
+        int s54[3];
     } blkA;
     struct {
         int s98[4];
         int order[6];
         int sD0[6];
-        double pdd0;
-        double pdd1;
-        double pdd2;
+        /* native leaves 0xe8..0x103 untouched; inert filler keeps this
+           aggregate at 0x7c bytes so sF4 lands on native's 0x104 */
+        int pad0;
+        int pad1;
+        char pad2[16];
+        int pad3;
         int sF4[8];
     } blkB;
     int n, k, i;
@@ -375,7 +379,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                         s80 = 0x9b0eb4 + i * 0x35c;
                         if (*(int *)s80 < 3) {
                             s58 = gm_LookupEntityRecordById(*(int *)(s80 - 0x84));
-                            s54[*(int *)s80] += 1;
+                            blkA.s54[*(int *)s80] += 1;
                             fcn_004727a0(s14, 0);
                             *(int *)(0x1015ea0 + *(int *)((char *)&mid + 0x3ac) * 0x30c + 0x3c) = 1;
                             io_AppendText((char *)0x6811b0);
@@ -684,7 +688,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                                         io_AppendText((char *)0x6811b0);
                                         io_AppendText((char *)0x12de,
                                                       *(unsigned short *)blkA.s84[s4C]);
-                                        s54[jc] += 1;
+                                        blkA.s54[jc] += 1;
                                         fcn_004e4de0(0x3e8);
                                         pq = (int *)((char *)&mid + 0x12c + jc * 0x38);
                                         *(int *)(0x1015ea0 + *pq * 0x2f4 + 0x3c) = 1;
@@ -715,7 +719,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                     s70 = 0;
                     i = 0;
                     while (i < rs20) {
-                        s78 = s54[i];
+                        s78 = blkA.s54[i];
                         if (s78 > s68) {
                             s70 = 0;
                             s68 = s78;
@@ -752,7 +756,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                         s78 = (int)fcn_004e6cb0((unsigned int)rs20);
                         i = rs20;
                         do {
-                            if (s54[s78] == s68) {
+                            if (blkA.s54[s78] == s68) {
                                 s6C = s78;
                                 break;
                             }
@@ -817,7 +821,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
 
     if (a0[4] == 0x11111111u) {
         fcn_004e4de0((int)&s00, (int)&s04, (int)&s08, (int)&s0C, (int)&s10, (int)&s14, (int)&s18, (int)&s1C, (int)&s20,
-            (int)&s24, (int)&s2C, (int)&s30, (int)&s34, (int)&s40, (int)&s44, (int)&s48, (int)&s5C, (int)&s60, (int)&blkB.pdd0,
-            (int)&blkB.pdd1, (int)&blkB.sF4);
+            (int)&s24, (int)&s2C, (int)&s30, (int)&s34, (int)&s40, (int)&s44, (int)&s48, (int)&s60, (int)&blkB.pad0,
+            (int)&blkB.pad1, (int)&blkB.sF4);
+        fcn_004e4de0((int)0x10, (int)0x11, (int)0x12);
     }
 }
