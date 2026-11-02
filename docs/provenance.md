@@ -16443,3 +16443,21 @@ real code that is itself 81-95 bytes short. Remaining: the second packet pass is
 bytes of real code (native 0x4dbf2e..0x4dc00e is 224 against our 74, and 0x4dc0da..0x4dc14e is
 116 against 47), the object runs +44 before the row body, and scalar slots still differ
 (object s0C at 0x2c against native 0x1c) so match gains need slot-level reconstruction.
+
+## 2026-11-02 — inventory dialog frame and conversions on native offsets
+
+`0x4D6170` frame is now native: `mov eax,0x1124`, and the local map equals native exactly (five
+dwords at 0x00..0x10, two 8-byte conversion temporaries at 0x14/0x1C, char[0x100] at 0x24,
+buffers at 0x124/0x524/0x924, untouched 0x400 tail), verified with frame_map.py and objmap.py
+with zero conflicts. Kept: spare[0x408] became [0x400]; both 0.001 sites multiply `pay` without
+a cast so the compiler emits fimul on it; and both 0.01 sites became
+`*(int*)(ent+0xe) * ((double)(unsigned) qlo * 0.01)`, which now emits native's
+`fild qword [esp+0x2c]; fmul qword 0x6640e8; fimul dword [ebp+0xe]; call __ftol` with matching
+displacements. Match reads 636 against 648 because the 0.01 reorder changes block scheduling,
+kept for the frame. Blocked finding: every form of unsigned conversion at a 0.001 site costs
++4 frame bytes, because the sum's 8-byte temp cannot take 0x14 while `tally` occupies it (native
+keeps tally at 0x04, sharing side's slot), so native's two `fild qword` sites and native's 0x1124
+frame are mutually exclusive in this source shape. Remaining first-order difference: the context
+pointer is in EBP and the zero constant in EBX, the reverse of native (first mismatch offset 15,
+target 0xED against ours 0xDB); EBP is reused as the entity scratch pointer in the 0.01 loop in
+both builds, so that tail already matches.

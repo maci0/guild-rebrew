@@ -78,7 +78,7 @@ int __cdecl fcn_004d6170(char* ctx)
 		char buf[0x400];
 		char cat[0x400];
 		char msg[0x400];
-		char spare[0x408];
+		char spare[0x400];
 	} s;
 	int* id;
 	int n;
@@ -320,7 +320,7 @@ int __cdecl fcn_004d6170(char* ctx)
 			if (pay < 0) {
 				pay = 0;
 			}
-			sum = (int) (((double) qlo * 0.001 + 0.07) * (double) pay);
+			sum = (int) (((double) qlo * 0.001 + 0.07) * pay);
 			io_FormatTextBuffer(s.buf, (int) "$Z%T$A", sum);
 			*(int*) &mode = sum;
 			fcn_004c5150(*(int*) (g_772e9c + 4), *(int*) (g_772e98 + 4), g_773d75, sum);
@@ -329,7 +329,7 @@ int __cdecl fcn_004d6170(char* ctx)
 				while (ent != 0) {
 					qlo = fcn_004e6cb0(0x14) + 0x50;
 					qhi = 0;
-					n = (int) ((double) qlo * 0.01 * (double) *(int*) (ent + 0xe));
+					n = (int) (*(int*) (ent + 0xe) * ((double) (unsigned) qlo * 0.01));
 					if (n < 1) {
 						n = 1;
 					}
@@ -449,7 +449,7 @@ int __cdecl fcn_004d6170(char* ctx)
 					if (pay < 0) {
 						pay = 0;
 					}
-					sum = (int) (((double) flo * 0.001 + 0.07) * (double) pay);
+					sum = (int) (((double) flo * 0.001 + 0.07) * pay);
 					io_FormatTextBuffer(s.buf, (int) "$Z%T$A", sum);
 					fcn_004c5150(*(int*) (g_772e9c + 4), *(int*) (g_772e98 + 4), g_773d75, sum);
 					if (cur != 0 && rec != 0) {
@@ -457,7 +457,7 @@ int __cdecl fcn_004d6170(char* ctx)
 						while (p != 0) {
 							qlo = fcn_004e6cb0(0x14) + 0x50;
 							qhi = 0;
-							n = (int) ((double) qlo * 0.01 * (double) *(int*) (p + 0xe));
+							n = (int) (*(int*) (p + 0xe) * ((double) (unsigned) qlo * 0.01));
 							if (n < 1) {
 								n = 1;
 							}
