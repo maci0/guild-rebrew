@@ -17354,3 +17354,21 @@ per member, 2 per literal and 5 per extra call group, giving 7048 at 20 argument
 at 23 spread as 20 per call or 21/22, and 7061 at 22 per 22. The three literal arguments are pure
 size ballast; escaping blkA.sel instead costs 27 bytes of body and match. The 21-argument escape
 call is wrapped across three lines so `rebrew lint` stays at 0 errors and 0 warnings.
+
+## 2026-11-02 — panel reaches native size
+
+`0x467920` object is now exactly 4699, the native size, with match 540 against 539; the first
+mismatch stays at offset 2 because the frame immediate and struct base still differ. The 24 bytes
+were not the duplicated `test v28` guard: native pushes ebx, holding e[3], the surface and sprite
+pointer loaded once in the prefix, as the third argument to every 0x47cba0, 0x47cbf0 and 0x47ccd0
+call, while our source reloaded `[esi+0xc]` per call. Since f.v14 holds the same pointer, eight
+sites now pass `f.v14`: the four 0x46843c end-mark calls and four of the six 0x468251 tick calls
+(the third 0x47cba0 call and all three 0x47cbf0 calls). All three fcn_0047ccd0 call sites remain,
+verified as 3 DISP32 relocations. Measured alternatives, all rejected: end-mark argument change
+alone 4711/559; that plus a swapped `&&` in the v28=0 arm 4712/618; plus an `x0=e[4]` local
+4716/617; both `&&` swapped 4696/523; natural if/else with two sites 4682/529; a hoisted single
+v28 test with four sites 4715/595, whose best 4699 form is 541 with four call sites; and a brute
+force over the six tick calls on the end-mark base gives four 4699 objects, where mask 60 is best at
+540 and keeps three sites. On the swapped base the 4699 hits top out at 532. The remaining lever is
+the frame and register plan: the icon hit test spills e[4] for 12 bytes and the compiler picks edi
+for h0, so h3 reloads, where native has ebp for h0 and edi for h3.
