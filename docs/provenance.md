@@ -18027,3 +18027,21 @@ length only when written as two branch arms,
 `if (ent != rec) { fcn_005d1790((void*) rec, 1); } else { fcn_005d1790((void*) rec, 0); }`, because MSVC
 merges the identical calls into native's `cmp [esp+..],reg; je; push 1; jmp; push 0; push rec; call` of
 13 bytes with no setne, whereas `int ne = (ent != rec); fcn(rec, ne ? 1 : 0)` falls back to setne.
+
+## 2026-11-03 — trade name dialog aggregate promotion documented
+
+`0x5B7880` keeps 299 at object 3980 with the equal prefix at 76 bytes; the follow-up pass produced no
+keeper and the source is unchanged. The cause of the 0x4c mismatch is aggregate promotion, not the -1
+initialiser form: native keeps f.win in EDI across calls, storing it to frame+0x10 at 0x78fb and then
+using `mov [edi+0x228]` sites with no reload, while our single FRAME aggregate reloads f.win from the
+frame at every use, leaving EDI free so the sentinel takes it (`or edi,-1` at 0x4b against native's
+`or ebp,-1`). MSVC 6 will not promote a struct member once any member's address is taken, and our source
+passes &f.msg to memset and fcn_004c5530 and &f.rows[0] to the pointer walk; scratch probes confirm a
+clean aggregate promotes its member to edi while the same aggregate with those addresses taken does not.
+Splitting the frame into CTL (15 scalars, 0x3c) plus DATA (msg through old, 0x10d0) restores promotion
+and the correct CTL offsets (nSlots 0x30, hA 0x0c, hB 0x18, hC 0x1c, hD 0x24, hRadio 0x2c, ent 0x28) but
+gives frame 0x1110 with DATA at 0x40 (txtName lea at [esp+0x598] against native 0x594), one extra 4-byte
+slot between the two, and win in EBX with ent in EDI and the sentinel in EAX. A win alias keeps frame
+0x110c but steals ESI from a0 and moves the prologue push, regressing the prefix. The same cause accounts
+for most of the +186 bytes: about 18 f.win reloads plus non-CSE'd GUI(f.rows[i].label) control-index
+recomputations, where native computes the label index once at 0x7bf9 with shl/sub/lea and two stores.

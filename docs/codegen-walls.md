@@ -2475,3 +2475,22 @@ store under CL 6.0 /O2, the value is dropped (a minimal TU turns the function in
 form that works is `int* volatile dead;`, which does emit `mov [esp+0x68],eax` and reuses a free slot at
 frame 0x150, but it lands before the still-unmatched walk and drops match to 197, so it is only worth
 adding once the prologue matches.
+
+TL5b7880 shows that MSVC 6 will not promote a struct member to a callee-saved register once any
+member's address is taken. Native keeps f.win in EDI across calls: the win store to frame+0x10 at
+0x78fb is followed by `mov [edi+0x228]` sites with no reload. Our single FRAME aggregate reloads
+f.win from the frame at every use (for example `mov eax,[esp+0x20]` at 0x120f onward), so EDI is
+free and the -1 sentinel lands there (`or edi,-1` at 0x4b) where native has `or ebp,-1`. The
+cause is that our source passes &f.msg to memset and fcn_004c5530 and &f.rows[0] to the pointer
+walk, which kills promotion for the whole aggregate: scratch probes confirm that promo.c promotes
+s.e to edi while promo2.c with &s.msg and &s.rows[0] does not. Splitting the frame into CTL (15
+scalars, 0x3c) plus DATA (msg through old, 0x10d0) restores promotion (`mov edi,eax; mov
+[esp+0x44],edi` at 0x7a and 0x7d) and the correct CTL field offsets (nSlots 0x30, hA 0x0c, hB
+0x18, hC 0x1c, hD 0x24, hRadio 0x2c, ent 0x28), but MSVC then computes frame 0x1110 with DATA at
+0x40 (txtName lea [esp+0x598] against native 0x594), so one extra 4-byte slot appears between CTL
+and DATA, and win lands in EBX with ent in EDI and the sentinel in EAX. A win alias
+(`f.win = win = fcn_00534c40(...)`) keeps frame 0x110c but steals ESI from a0, moving a0 to EDI
+and pushing edi at 0x0a instead of 0x1e, which regresses the prefix. The same cause explains most
+of the +186 bytes in the body: about 18 f.win reloads plus non-CSE'd GUI(f.rows[i].label)
+control-index recomputations, where native computes the label index once at 0x7bf9 with
+shl/sub/lea and two stores because its win and label values stay in registers.
