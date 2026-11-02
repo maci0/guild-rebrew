@@ -15965,3 +15965,16 @@ a sharp local maximum, adding four bytes anywhere dropped it to 769, and trims o
 through a favourable re-shift. Remaining oversize blocks: 0x4dbf21 pick+render arms 218/304,
 0x4dac4b dedupe 354/428, 0x4dbf33 and 0x4dc020 arm setup 13/57 each, 0x4dbd95 133/169,
 0x4db17b 16/52.
+
+## 2026-11-02 — panel chain reachability and slot offsets
+
+`0x5BA910` object falls 12181 to 12169 and the +742 window at native 0x5bd62a closes. The
+premise that l_5bcf9f needed moving was wrong: it already sat before l_5bd550/l_5bd5e7 but was
+unreachable (it followed `goto l_5bd632` with no branch to it), so MSVC emitted the 779-byte
+chain last and every ladder jump skipped it. The 0x100f1dc dispatch is now a switch with the
+chain nested under `if (f.vD0 == f.vA0)` and the 0x5bd27c ladder as the false path, which
+emits native's `sub eax,2; je` reachability and puts the chain inline. Second fix: both slot
+stores wrote f04 (slot+4) where native writes f08 (slot+8) at 0x5bc2f8 and 0x5bc773, now
+byte-equal. The sete at l_5bc3fa matches native 0x5bc438 and needed no change. Remaining drift
+is a uniform body spread of about +166 bytes (4 percent per block) with no window over 60
+bytes outside the early body.
