@@ -17922,3 +17922,20 @@ magic multiply costs 32 bytes, so it stays `% 3`; hoisting with a separate quoti
 quotient, init reorder, and nesting the in-loop 0x50b750 argument all measured worse or neutral (192 to
 213). The remaining three bytes and the divergence at offset 23 are a register choice: native loads
 `mov edx,[0x868050]` where we use ebp.
+
+## 2026-11-03 — inventory dialog label blocks converge
+
+`0x5D0660` keeps the converged label blocks at match 315 with object 4352, .text 0x1100 plus a 37-byte
+tlead filler totalling 4389, frame 0x438, all 66 calls in native order, zero unresolved bindings and
+lint at 5485 of 5485. The match dipped from 373 to 315 while same-offset byte equality is flat (267 to
+268 per 0x180-byte window), and the state is kept because the region deltas are the fidelity signal
+here: the pre-text sum of absolute deltas fell from 1118 to 777, the hover start deficit from -60 to
+-36, the hover lookup deficit from -67 to -37 and the final drift from -67 to -37, with the hover block
+still exactly 0x15f (start 0xf6c, sites 0xfdb, 0x1022 and 0x106d, 0x47 and 0x4b apart) and the text span
+unchanged at 0x219 (first io_FormatTextBuffer at 0xd53 against 0xd7e). Changes: posY[1] reads tabB[2].y
+as a dword with a mask, matching native's `mov eax,[esp+0xc2]; and eax,0xffff`; the tabB draw seeds read
+tabA[0].x and tabA[1].x the same way; and the second posX loop is a pointer scan with px++ over k=4..6
+like native. The volatile idx remains the frame lever. Rejected with backups: swapping min and max so
+idx=max and nb=min reaches delta sum 731 and lookup deficit -34 but compiles the hover tail as setne and
+shrinks the hover block to 0x15e; hoisting tabB[2].y into t0, rows or a new local gives frame 0x43c or
+0x434. The 373-match state is preserved at .scratch/660/kept-v9-baseline.c.
