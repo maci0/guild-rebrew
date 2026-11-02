@@ -18290,3 +18290,32 @@ combinations in the tabA draw loop give 4388, 4390, 4392, 4396, 4398, 4399 or 44
 locals (array, scalar, volatile), a one-int struct and an int[1] array are dropped or overlaid and leave
 the frame at 0x434; and keeping mid live across the loop gives 4397 at match 741. Candidate kept on disk
 at .scratch/660/Z1.c with Z1b.obj and Z1b.dis.
+
+## 2026-11-03 — season setup transcribed end to end
+
+`0x540020` 83 to 894 with the object at 4366 from 344, 106 relocations and lint clean. The whole body is
+transcribed in native order: the 0x540172 setup (fcn_0050e380, fcn_0052a890, fcn_0052a310, fcn_004fd400,
+the timer record, the fcn_004c5790 wait loop and fcn_0042df30); seven Element blocks (0x66, 0x70 and 0x68
+under !(g_7747b0&0x80), 0x85 under g_7747f0, then 0x7c, 0x93 and 0x84 under g_77670b) each with memset
+0xf8 and fcn_004c5530; the g_6a25b8 and fcn_005459a0 pair; the previously unanalysed g_6a3420 block from
+0x5405f0 to 0x5409d6 (fcn_00535570, fcn_004727a0, four io_AppendText calls, fcn_0046e830, the 0x10161b4
+dword table store, the 0x100-entry 0x50-byte table loop, the five-byte-record arr loop, the
+fcn_005373e0 wait loop, the second fcn_004730c0, fcn_005355f0 and fcn_00469e70); fcn_004c51a0 with
+fcn_004bbc30 and fcn_004c5790; the g_7747b0&4 call to fcn_00535770; the 0x1040480/84/88/8c copies from
+0x6a3764 through 0x6a3770; fcn_00516f60, fcn_005270c0 and fcn_00528fd0; the second handle free; the
+second g_6a25b8 call; the five-argument 0x4c Element block; the g_7747b0&8 walker (fcn_00502cd0,
+fcn_00503fe0, fcn_0047dca0, fcn_00402a00, fcn_00502850); both 0x300-slot passes with the 0x2ee00, 0xfa00,
+0x4e200, 0x1f400, 0x9c400 and 0x3e800 clamps; the 0x1c8 bit-clear loop with 0xffffe7ff; the fcn_00567170
+loop with fcn_00426cc0, fcn_00428720, fcn_00406120 and fcn_0040c120 plus the three-int copy to +0x70 and
+the fcn_004c57e0 tail; and the tail setting g_1007cd0=1 with fcn_004ec660 and fcn_004c2d90. Signature
+corrections: fcn_005463a0 is variadic (three arguments in the Element blocks, five in the 0x4c block),
+fcn_005373e0 takes (callback, msgId) so the prologue call is fcn_005373e0(0, 0x24087) and the previous
+file had those reversed, which alone broke the prologue, fcn_00519190 is int(int msgId, ...) and
+fcn_0047dd60 returns int. The prefix is now byte-identical from 0x540020 to 0x54017a except byte 2, which
+carries the frame size: native 0x3b8 against our 0x3b4, so the frame is four bytes short and pos, out and
+evs lay out four to twelve bytes late, with arr at 0x1b4 against native 0x1a8 and &out at 0x3a against
+0x32 while pos.a is at 0x20 in both. Mismatch runs are byte 2, then clean 3..346, then single bytes at 347
+and 391 and dense differences from 408. Caching slot pointers across calls pushed pos to 0x24, and
+inlining the slot pointer in the three 0x300 loops plus splitting the event-wait handle from the malloc
+handle recovered pos to 0x20 and the object to 4366. The remaining fix is to make the native fourth 4-byte
+local materialise so pos plus out total 0x14 and the records start at 0x34.
