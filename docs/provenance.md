@@ -18827,3 +18827,31 @@ q, o, cnt2 and px targets and the assignment-inside-condition form all land in e
 0x56acca so it tolerates the spill, which points at the parameter needing to stay live differently rather
 than another bump spelling. Full measurement table in .scratch/569ff0/NOTES.md with the current source at
 KEEP_318.c and the previous at BASE_281.c.
+
+## 2026-11-03 — production run copy block shared at native offsets
+
+`0x571870` 891 to 1885 with the object at 3812 against native 3824, lint clean and the first mismatch still
+at offset 53 where the shared-exit branch displacement is three bytes short; the normalised instruction
+stream is now identical through 0x3af. The copy block is shared again and at native's offsets: both
+ROHSTOFFMANGEL chains emit `mov esi,literal; jmp copy` with one 34-byte copy at 0x3ad (native 0x3ad) plus the
+26-byte DOMIZIL copy at 0x38f (native 0x38f) for the first chain, and one 34-byte copy at 0xbc2 (native
+0xbc0) for the second, worth 156 and then 164 bytes. Three shapes did it. The arm order in both
+if/else-if/else chains inverts the second test and swaps the bodies,
+`else if (!gm_eval_SlotVoll(...)) { 0x1bb4 + HS_05 } else { ...0x1bb2 + chain... }`, which puts the first-if
+body, then the final else body, then the else-if body, letting the chain's last arm fall through to the
+continuation; native's block order is if at 0x1d3, else at 0x25c and chain at 0x2c8. The two identical
+`if (*(int*)(e+0xc4) == -1 && fcn_00502cd0(...) == 0) c4 = fcn_004c51f0(...)` copies are merged into one after
+the do-loop with `goto lager_done` for the `produziert != 0` path, matching native's shared block at
+0x572581 and worth 60 bytes. And the haushalt comparisons use
+`(int) arbeiter < (int) (g_7f4ca0 + 768 * 0x21c)`, which emits `jl` at all three loops (0x146, 0xe26, 0xeb8)
+and is worth two match bytes at no size change. Probed and byte-identical: operand order in
+`leistung + ternary`, `leistung +=`, `differenz * (...)`, and 0.0 against 0.0f in the ternary false arm.
+Remaining differences, all small: the FP ternary emits `fld qword 0.0` plus `fld [leistung]` plus
+`fadd st,st(1)` and an extra `fstp` against native's `fld dword [0x6628a8]` and `fadd dword [leistung]` for
+five bytes; the do-loop's `b4 += x` loads b4 before the value where native does `fild` then `fadd [b4]` for
+two; we emit `fimul` where native does `fild differenz` plus `fmulp`, two the other way; native's
+`xor ecx,ecx` before `mov cx,[e+0xac]` is two the other way; and the case-2 path merges the 6300/546190
+`add esp,4` pair into `add esp,8`, ours three bytes shorter, which is exactly the shared-exit displacement.
+Recorded for later: the tool strips the trailing 0x90 padding from the object, so a byte-identical body here
+would report 3816 with an eight-byte delta against 3824, and object size should not be used as the gate for
+this row; the normalised stream and branch displacements are the signal.

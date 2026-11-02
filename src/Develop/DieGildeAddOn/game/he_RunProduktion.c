@@ -96,7 +96,7 @@ void __cdecl he_RunProduktion(char* e)
                 haushalt = 0;
                 bild[0] = 0;
                 haus = fcn_0050dc90((int) gebaeude);
-                for (arbeiter = g_7f4ca0; arbeiter < g_7f4ca0 + 768 * 0x21c; arbeiter += 0x21c) {
+                for (arbeiter = g_7f4ca0; (int) arbeiter < (int) (g_7f4ca0 + 768 * 0x21c); arbeiter += 0x21c) {
                     if (*(char**) (arbeiter + 0x17c) == e) {
                         haushalt = arbeiter;
                     }
@@ -110,7 +110,10 @@ void __cdecl he_RunProduktion(char* e)
                     !gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
                     io_FormatTextBuffer(text, 0x1bb3, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
                     strcpy(bild, "_NACHRICHTEN_HS_04");
-                } else if (gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
+                } else if (!gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
+                    io_FormatTextBuffer(text, 0x1bb4, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
+                    strcpy(bild, "_NACHRICHTEN_HS_05");
+                } else {
                     if (g_fb5760[*(int*) (e + 0xc4)].f1 != 8) {
                         goto warten;
                     }
@@ -127,9 +130,6 @@ void __cdecl he_RunProduktion(char* e)
                     else if (*typ == 22) strcpy(bild, "_NACHRICHTEN_ROHSTOFFMANGEL_HS_19");
                     else if (*typ == 30) strcpy(bild, "_NACHRICHTEN_DOMIZIL_02");
                     else if (*typ == 32 || *typ == 31 || *typ == 29) strcpy(bild, "_NACHRICHTEN_ROHSTOFFMANGEL_HS_20");
-                } else {
-                    io_FormatTextBuffer(text, 0x1bb4, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
-                    strcpy(bild, "_NACHRICHTEN_HS_05");
                 }
                 if (*(unsigned char*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 2) == 6 ||
                     *(unsigned char*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 2) == 7) {
@@ -235,7 +235,10 @@ warten:
             !gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
             io_FormatTextBuffer(text, 0x1bb3, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
             strcpy(bild, "_NACHRICHTEN_HS_04");
-        } else if (gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
+        } else if (!gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
+            io_FormatTextBuffer(text, 0x1bb4, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
+            strcpy(bild, "_NACHRICHTEN_HS_05");
+        } else {
             rohstoff = (unsigned short*) (lpObjektePROT + *(unsigned short*) (e + 0xac) * 0x41 + 0x2e);
             for (i = 0; i < 4; ++i, ++rohstoff) {
                 if (*rohstoff != 0) {
@@ -286,21 +289,18 @@ warten:
                     } while (*(float*) (e + 0xb4) <= 0.0f);
                     if (produziert != 0) {
                         *(int*) (e + 0xc4) = fcn_004c5250(*(int*) (e + 0xc0), *(unsigned short*) (e + 0xac), produziert);
-                    } else if (*(int*) (e + 0xc4) == -1 &&
-                        fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) == 0) {
-                        *(int*) (e + 0xc4) = fcn_004c51f0(*(int*) (lager + 2), -1, *(unsigned short*) (e + 0xac), 0, g_773d75, 0);
+                        goto lager_done;
                     }
-                } else if (*(int*) (e + 0xc4) == -1 &&
+                }
+                if (*(int*) (e + 0xc4) == -1 &&
                     fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) == 0) {
                     *(int*) (e + 0xc4) = fcn_004c51f0(*(int*) (lager + 2), -1, *(unsigned short*) (e + 0xac), 0, g_773d75, 0);
                 }
+lager_done:
                 *letzte_zeit = *naechste_zeit;
                 fcn_00500bb0(naechste_zeit, 0, 1, 0);
             } while (fcn_00500cb0(naechste_zeit, &g_7f4c00) < 0);
             return;
-        } else {
-            io_FormatTextBuffer(text, 0x1bb4, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
-            strcpy(bild, "_NACHRICHTEN_HS_05");
         }
 mangel:
         haushalt = fcn_005049a0(gebaeude);
@@ -343,7 +343,7 @@ mangel:
             *(int*) (e + 0x70) = -1;
             return;
         }
-        for (arbeiter = g_7f4ca0; arbeiter < g_7f4ca0 + 768 * 0x21c; arbeiter += 0x21c) {
+        for (arbeiter = g_7f4ca0; (int) arbeiter < (int) (g_7f4ca0 + 768 * 0x21c); arbeiter += 0x21c) {
             if (*(char**) (arbeiter + 0x17c) == e) {
                 fcn_00529160(gebaeude, 0, *(unsigned short*) arbeiter, 0);
             }
@@ -361,7 +361,7 @@ mangel:
         if (gebaeude != 0) {
             fcn_004c6300(*(int*) (gebaeude + 1));
         }
-        for (arbeiter = g_7f4ca0; arbeiter < g_7f4ca0 + 768 * 0x21c; arbeiter += 0x21c) {
+        for (arbeiter = g_7f4ca0; (int) arbeiter < (int) (g_7f4ca0 + 768 * 0x21c); arbeiter += 0x21c) {
             if (*(char**) (arbeiter + 0x17c) == e) {
                 fcn_00529160(0, 0, *(unsigned short*) arbeiter, 0);
             }
