@@ -17613,3 +17613,43 @@ select; the case1-else rewrite gives 4636/1470 with c67c0 8 and c6940 17; comple
 +0x184 in the expression is closer to native but drops c67c0 to 7 and c6940 to 15, so it is flagged as
 a real divergence in that region rather than applied; and a beam search over ent34 inline subsets
 under the size and call-count invariants tops out at 1451.
+
+## 2026-11-02 — version dialog reconstructed end to end
+
+`0x527F60` goes from 375 matching bytes (8.9 percent) to 2120 (50.5 percent) with the object at 4183
+against native 4198 and an equal prefix of 207 bytes, up from 8. Everything is transcribed in native
+order. Prologue: `xor eax,eax / sub esp,0x310 / mov ax,[0x774970]` with the push ebx/ebp/esi/edi load
+folded into the lea chain, frame immediate 0x310 byte-exact (no chkstk because 0x310 is below a page).
+Then the guard `g_slot_table[2 + g_774970*0x21c] != 6` with `fcn_0047a040` and the three `fcn_0047cb60`
+draws; the a0 bit 0 path with ten `!= -1` teardown and store-(-1) pairs at 578, 57c, 580, 5a0, 5a4,
+584, 588, 58c, 590 and 594, the nine element creations with per-call argument order verified (two
+0x46f740, d2_ShowTxt, five 0x469c30 with (short) casts producing movsx, 0x46fcd0) and the record stores
+at +0x1d0 kind, +0x5c visible, +0x84, +0x20, +0x18, +0x1c and +0x6c; the else path with six inline
+strcpy from the 0x14ad0xx table and six single-byte `*g_6b5c60` variants in the same order; and from
+0x5286d0 onward `fcn_005279f0(a1)`, the 0x54/0x55/0x56 `fcn_00472880` bracket, `fcn_00500d60(0x7f4c00,&pos)`,
+the `fcn_0051e070()==2` duplicated path at +0x181 and +0x195, both double-scaled `__ftol` arguments
+(`%0x3c` and `(g_7f4c04&0xffff)*0x3c+g_7f4c06`), the `g_67d8d4==g_6a25a8` sprintf plus `fcn_0046bd20`
+block, the fmod/0x665dc8/0x665dc0/0x665db8 angle into element +0x88, the `fcn_00517c00` name path, the
+`g_6a2580` create/update/destroy paths, the `fcn_0050b7c0` and `fcn_00507ab0`+`fcn_0050d270` value paths,
+the `fcn_0046f740` recreate when element +8 differs from the slot kind, and the final
+`fcn_00472170`/`0x469c40` pair with its duplicated x-constant paths before the closing
+`0x47a040`/`0x47cba0` pair. Levers: the element field macro `(char*)g_1015ea0 + i*0x2f4 + off`,
+`(short)` casts for the two coordinates, `fmod(...)` for the x87 register-convention helper (which
+compiles to `__CIfmod`), `(int)(double)x` for the fild plus `__ftol` pair, `kind` and `three` locals for
+the kind byte and the three stores, a literal `x & 0xffff`, and one `struct town_frame` so the text
+buffers land at 0x20/0x120/0x220 with the 8 pad bytes the native frame carries at 0x18/0x1c, giving
+`sub esp,0x310` and a0 at [esp+0x324]. The stale `_dpad_100f8c0[26080]` scratch definition is gone.
+The cap is constant-register scheduling at prefix 0xcf: native is `mov ebx,1 / or ebp,-1 / mov edi,3 /
+test bl,al / je` with `mov esi,0x43` only inside the rebuild block at 0x528166, while ours hoists 0x43
+into esi and defers the 3 load, because MSVC makes 0x43 a global constant-in-register pick across its
+nine uses in two regions; no spelling tried moved it. That single 5-byte insertion shifts the rest of
+the stream and caps the match near 50 percent. About twenty further small reordering differences share
+the same scheduling family (movsx/add order in the 0x469c30 setup, fmul order, the push of 0x582
+relative to idiv, `push 0` hoisted before the `if (val)` branch) with an instruction multiset otherwise
+identical at 1200 native against 1205 current, and one real shape difference remains: our inline
+`strcpy(fr.name, (char*)(0x868060 + g_773d75*0x21c))` is seven instructions shorter than native's form
+that computes the source pointer twice. Three callees have no project definition: 0x0050b7c0 (declared
+here as `int __cdecl fcn_0050b7c0(int, int)`), 0x0064d4fa (an x87 register-convention helper written as
+`fmod`) and 0x0066080a (declared `void __cdecl fcn_0066080a(char*)`); 0x0047cb60 resolves through
+GOLDTL.fcn_0047cb60.c, 0x0046fac0 resolves to d2_ShowTxt, and 0x00500e00 resolves to fcn_004fe330 with
+the prototype in GOLD.fcn_004fe330.c incomplete.
