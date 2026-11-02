@@ -15689,3 +15689,32 @@ amt.office_slot 24, ch.action_queue_slot 404, event.validator_view 20,
 d3.universe-view 988, d2.text-window.tl 972, d2.text-entry.tl 756), and
 `rebrew init --refresh-agents` refreshed the drifted generated skill file. `rebrew lint`
 reports 5485 files, 0 errors, 0 warnings.
+
+## 2026-11-02: fcn_005ba910 init order moved ahead of v10C block
+
+`GOLDTL.fcn_005ba910.c` set the `f.vF0[]` message-id constants after the `f.vD4[]`
+`-1` run. The host compiler hoists the two `0x93` stores (`f.v10C[8]` and
+`f.vF0[2]`) as a shared-constant pair, so their position in the source moves the
+early byte stream. Moving the seven `f.vF0[]` stores to just after `f.v88 = 0;`
+moved that pair later and raised the stored match from 772 to 782 bytes with the
+object size unchanged at 12365 (native 11948). Frame stays 0x1848 and the
+`xor eax,eax; add esp,0x1858; ret` epilogue is unchanged. Probes that removed
+either `0x93` store, assigned `f.vF0[2]` from `f.v10C[8]`, or moved the
+`f.v14 = a1` store scored lower (713 to 794 without the store, which is not a
+permitted source state) and were reverted; scratch copies and the measurement
+JSON live in `.scratch/5ba910/`.
+
+## 2026-11-02 — trade panel store order and placement baseline
+
+`0x5BA910` 772 to 782 by moving the seven `f.vF0[]` constant stores ahead of the
+`f.v10C[]` block: the compiler hoists the shared `0x93` pair, and every placement of
+that pair before the zero-store run costs positional match while the move keeps the
+object size at 12365. The prologue register assignment is not reachable by source
+reordering: native loads a1 into esi only for the head, reuses esi as a byte-offset
+accumulator from 0x5baa9f, and re-reads a1 from [esp+0x185c] at 0x5bd065/0x5bd089;
+four reorderings moved a1 to ebp or edi, never esi. Placement baseline recorded from
+`verify --text --raw-link` on this image: 5288 functions, 4165 passed, 546 exact,
+3619 reloc, 1005 size mismatch, 0 compile errors, and 668 of 5222 text placements
+correct with 4551 misplaced, so raw loss is dominated by link order and body-size
+drift. Remaining excess windows for the panel are +1232 at native 0x5bd5d7 and +472
+at 0x5bcb04, both source branch nesting.
