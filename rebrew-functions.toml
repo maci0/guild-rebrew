@@ -425399,13 +425399,13 @@ measured_at = "2026-10-22T08:35:56+00:00"
 size = 4393
 note = "Goal72 inferred role: Client round/day transition setup and entity refresh. Counterpart GOLD.0x00538740 supported by full native structure, resources and callers, not a compiled shared-provider claim. See .scratch/goal72/large/REPORT.md and manifest.json. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
 name = "fcn_00540020"
-updated_by = "test"
-updated_at = "2026-11-02T18:51:46+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-02T20:34:52+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00540020.c"
 symbol = "_fcn_00540020"
 kind = "FUNCTION"
 status = "NEAR_MATCHING"
-blocker = "Docs map TL 0x540020 with Gold 0x538740 as round/day refresh and claim no provider. Stored SIZE 4393. Prologue allocates 0x3b8 and calls gm_GetEntityTableEntry then fcn_00500e20. Source is int(void) return 0; those calls and the frame are unwritten."
+blocker = "register rank wall after rounds 4-8: native needs obj=esi leftw=edi w=ebx n=ebp, ours is obj=esi leftw=ebp w=edi n=ebx. The only shapes that flip w/n need the merged long w web across both loop back edges, which forces a memory home and 19 extra bytes (4412 with frame 0x3bc). l1div (leftw = (int)(cand - agebits) / w in the loop-1 tail) gives obj=esi leftw=edi at 4395 frame 0x3b8 with only w/n swapped, costing 2 bytes. Every comparison idiom, callee prototype, ENTCLASS spelling and web split measured inert or worse"
 
 ["GOLDTL.0x00540020".verification]
 source_hash = "c0986091b6e8764cf63913fca027e37769afb063464b8d88d4c062eb7599a35f"

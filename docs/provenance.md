@@ -19344,3 +19344,31 @@ native 0x86, and case 3 moves to 0x1fb; those raised match from 730 to 752 and r
 short, case 4 four over at 0x49b, case 5 seven over and case 6 eleven over, so realigning case 4 needs the
 case-2 store shape, case 3 and case 8 first, and match above 989 is not reachable until those land. Current
 source .scratch/r561380/v20_case2_shared.c with v19_kept_round4.c and NOTES.md.
+
+## 2026-11-03 — season setup register rank parked
+
+`0x540020` keeps 3873 at object 4393 with frame 0x3b8 and the first mismatch at 0xb15; round eight solved
+nothing and the tree is untouched. The nineteen bytes have been itemized for the divide-by-w shape: the frame
+becomes 0x3bc and the cost is six memory operations minus the expected lea win of one, namely
+`mov [esp+0x24],esi` for the early w from fcn_00535570, a reload before the fcn_004c51a0 block, three evs-fill
+reloads, a store right after the loop-1 w definition and a reload at the loop-1 tail before the back edge, less
+the one byte the `lea [edi+edi]` form saves. The store and reload inside loop 1 are the crux: the merged web
+runs from `w = fcn_00535570()` at 0x5d0 through the loop-1 redefinition to the loop-2 divide, so the value must
+survive both back edges and the allocator gives it a memory home and reloads it per iteration. Shrinking the
+live range failed every way measured, with an early-w rename losing the flip entirely at 4413, and a copy in the
+loop-2 preheader, a copy at the loop-2 body top, splitting as `v = leftw*2; v = v/w;`, restricting the divide to
+the c==2 arm and a preheader-only use `if (w == 0) n = 1;` all staying at 4412 or worse with the native roles,
+so the flip tracks whether w is used after loop 1 at all rather than where the divide sits, and the memory home
+is its price. Deleted levers: fcn_0050bfe0 prototypes short or unsigned short (4398, prefix 0xaf1), unsigned
+char (4410), char* or unsigned char* (4393, byte-identical), left as short or unsigned short (4405 or 4414), n
+unsigned (4396), and every ENTCLASS and ENTTYPE spelling (4393 with the loop-2 encoding still
+`[eax+ecx*1+0x247]` and never native's `[ecx+eax+0x247]`). One positive remains for a later attempt: l1div with
+`leftw = (int)(cand - agebits) / w;` in the loop-1 tail measures 4395 at frame 0x3b8 with roles obj=esi,
+leftw=edi, n=ebx and w=ebp, which is native for obj and leftw and leaves only w and n swapped while costing the
+unconditional cdq and idiv pair; adding back one loop-2 divide by w restores native roles at 4417 as the spill
+returns, and l1div with an early-w split gives 4399 at frame 0x3b8 with the same two swapped. The
+role-normalized structural diff leaves only the loop-2 class load and compare encoding
+`[eax+ecx*1]` against `[ecx+eax]` at 0xe0b, 0xe33, 0xe87 and 0xecd, which every spelling reproduces as ours and
+so is not independently leverable, plus the [esi+1] load scheduling at 0xcce against 0xcc4 with the third-loop
+preheader block ordering, worth one byte rather than nineteen. A blocker is set on the row and the effort moves
+elsewhere. Notes in .scratch/f540020/ROUND8.md with variants r8_*.c and v_d1.c.
