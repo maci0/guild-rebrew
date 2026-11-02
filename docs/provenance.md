@@ -20131,3 +20131,49 @@ here because it was repaired: testing another address against this file wrote th
 into the neighbouring row 0x447e30, which was restored from the committed store and then rd_object was re-promoted
 on its own, so that row is back at its size 1319 and rd_object now carries status NEAR_MATCHING at 3348 with the
 current source hash. Scratch copies .scratch/row447110/rd_object.S1.c and v6.copy.c hold the verified shape.
+
+## 2026-11-03 — production message structures land
+
+`0x569FF0` 980 to 982 with the object held at exactly 3772, 65 relocations, frame `sub esp,0x738`, status STUB and
+lint clean. Two listing-evidenced structures landed. The slot-0x10 and slot-0x24 nesting is now written as native
+has it: native tests slot 0x10, the `*(int*)(cnt2+0x14)` pointer, at 0x56aa1c and jumps to the merge at 0x56abc0
+when it is zero, then tests slot 0x24, the num value, and jumps to the strcpy body at 0x56aba8 when that is zero,
+then reloads slot 0x10 and dereferences +0x14 for `fcn_00502cd0(..., 1, 5)`, so the else hangs on the inner test as
+`if (cnt2 != 0) { if (num != 0) { cnt2 = fcn_00502cd0(*(int*)(cnt2+0x14), 1, 5); while (...) } else
+{ strcpy(b400, *(char**)0x14abad0); } }`, where the previous source had it mirrored with the num test outermost;
+aligning the nesting alone cost nothing, leaving object 3772 and match 980. The num-block chain now compares
+`*(unsigned short*)cnt2` instead of the random value and drops the `int id` local so the three later uses re-read
+it, matching native's `cmp ax,0x32` and jbe on the random with no and, one `mov ax,[ebp]` at 0x56aa66 and nine
+`cmp ax,imm16` against 0x1c7, 0x1c4, 0x1c5, 0x1c6, 0x2af, 0x2b0, 0x1c1, 0x1c2 and 0x1c3, with reloads at
+0x56ab02, 0x56ab64 and 0x56ab88; the value `r` had to become `unsigned short`, because with `int r` the mask
+survives as `and eax,0xffff` plus a signed `cmp eax,0x32` that native does not have. Variants measured with the
+nesting already in place: the chain on unsigned short with `int id` kept gives 3768 at match 958, the chain inline
+with `int r` gives 3776 at match 930, the kept form with `unsigned short r` gives 3772 at match 982, and an
+`unsigned short id` loaded before the random test gives 3768 at match 726. Untouched as instructed: the prologue,
+where e is still in ebx and the first mismatch stays at offset 7 so the 982 count is coincidence rather than real
+alignment; the clamp, which still writes num's home instead of native's temp slot 0x04; and the io_FormatTextBuffer
+site at 0x56a99e, which stays on b400. Copies C_final_982.c and KEEP_982.c with BAK_980_pre.c as the previous
+state and evidence in t_final_982.json.
+
+## 2026-11-03 — inventory switch fail representative parked
+
+`0x561380` keeps its state at 2451 with object 3584 against native 3588 and 110 relocations; the v10 pass kept
+nothing and the source is identical to the v29 lead. Cases remain 0xd8, 0x5a, 0x86, 0x121, 0xc5, 0xb4, 0x41c,
+0x47c, 0x7c and 0x29. Measured findings on the v10 knob: in the c3i1 world, where the parameter is advanced
+destructively, case 3 holds 0x121, case 5 grows to 0x47f and case 6 reaches 0x80 at object 3592, with v10 spilling
+to [esp+0x18], the zero taking ebp and the shared fail label at case-5 end emitting `or $-1,%ebx; mov %ebx,0x70`
+for three extra bytes; v10 never moved to ebp through any source shape tried, including assignment before or after
+the c2 check, a volatile read, v10 in the c2 compare, a zero variable fed to the position stores, position-store
+forms with long, ~0 and 0xFFFFFFFF, and case-5 fail inline, goto and break variants; v10 does take ebp when the zero
+constant stops needing a callee-saved register because the position stores become immediates. The best structural
+result is the i9 and k1 world, with case 4's fail inlined and `pos[3] = 0.0f` making the first zero store
+immediate, which gives case 5 at 0x47c and case 6 at 0x80 together but case 4 at 0x418 for object 3584 and match
+2189, and it was reverted: with case 4's fail inlined the merged fail block lands at case 4's tail seventy-seven
+bytes away so its je is two bytes rather than native's six, while keeping case 4's goto restores case 4 to 0x41c
+but forces the block back to case-5 end with the `or` rematerialisation and case 5 at 0x47f. Routing case 4's fail
+through label_56148f gives case 4 0x41c, case 5 0x478 and case 6 0x8d, and inlining case 4's fail alone gives
+case 5 0x478, case 6 0x80 and case 4 0x418. The triple of case 5 at 0x47c, case 6 at 0x80 and object 3588 needs the
+case-5 fail emitted at its r==0 fallthrough as `movl $-1,0x70(%esi)` while case 4 keeps a six-byte far je, and
+MSVC 6 will not choose both: it picks the shared fail representative at case 4's tail whenever case 5's fail has a
+local copy, and at case 5's end with the `or` rematerialisation when only gotos exist. A blocker is set on the row.
+Variants in .scratch/r561380 including keep_v29_now.c, i9, k1, m1, n1, i11 to i13, j1 to j6, o1, o2, p1 and p3.

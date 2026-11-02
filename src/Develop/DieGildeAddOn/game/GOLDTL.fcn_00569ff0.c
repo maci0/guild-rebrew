@@ -368,31 +368,35 @@ void __cdecl fcn_00569ff0(char* e)
 				        *(int*) (pa + 1), -1, 0, 0);
 			}
 		}
-		if (num != 0) {
-			if (cnt2 != 0) {
+		if (cnt2 != 0) {
+			if (num != 0) {
 				cnt2 = (char*) fcn_00502cd0(*(int*) (cnt2 + 0x14), 1, 5);
 				while (cnt2 != 0) {
-					int r;
+					unsigned short r;
 
 					r = gm_RandomMod(0x64) & 0xffff;
-					if (r > 0x32 && r != 0x1c7 && r != 0x1c4 && r != 0x1c5
-					        && r != 0x1c6 && r != 0x2af && r != 0x2b0
-					        && r != 0x1c1 && r != 0x1c2 && r != 0x1c3) {
-						int id;
-
-						id = *(unsigned short*) cnt2;
+					if (r > 0x32 && *(unsigned short*) cnt2 != 0x1c7
+					        && *(unsigned short*) cnt2 != 0x1c4
+					        && *(unsigned short*) cnt2 != 0x1c5
+					        && *(unsigned short*) cnt2 != 0x1c6
+					        && *(unsigned short*) cnt2 != 0x2af
+					        && *(unsigned short*) cnt2 != 0x2b0
+					        && *(unsigned short*) cnt2 != 0x1c1
+					        && *(unsigned short*) cnt2 != 0x1c2
+					        && *(unsigned short*) cnt2 != 0x1c3) {
 						num = (int) ((float) fcn_0050df70(pa, cnt2)
 						        * ((float) hits * 0.1));
 						if (num < 1) {
 							num = 1;
 						}
-						fcn_0064d41a(b100, "%i %s$A",
-						        num, *(char**) (id * 8 + 0x14a79c0));
+						fcn_0064d41a(b100, "%i %s$A", num,
+						        *(char**) (*(unsigned short*) cnt2 * 8 + 0x14a79c0));
 						strcat(b400, b100);
-						fcn_004c51f0(*(int*) (pb + 2), *(int*) (q + 2), id,
-						        *(int*) (cnt2 + 2), *(char*) 0x773d75);
-						flag = (int) (fcn_0050bb50(id, *(char*) 0x773d75)
-						        * (float) num + (float) flag);
+						fcn_004c51f0(*(int*) (pb + 2), *(int*) (q + 2),
+						        *(unsigned short*) cnt2, *(int*) (cnt2 + 2),
+						        *(char*) 0x773d75);
+						flag = (int) (fcn_0050bb50(*(unsigned short*) cnt2,
+						        *(char*) 0x773d75) * (float) num + (float) flag);
 					}
 					cnt2 = (char*) gm_NextEntityQueryMatch();
 				}

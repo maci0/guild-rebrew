@@ -423864,7 +423864,7 @@ blocker = "Complete decompiler-shaped body from the live disassembly (1814 instr
 blocker_delta = 411
 
 ["GOLDTL.0x0043c640".verification]
-source_hash = "69cd5c6b936ab98d2b6a6e4e236106d4bd720ac93bb609ab84f3e97e0faf5e03"
+source_hash = "4875daabe299bb4ef1688e2f1d3219c02c597fcb396aac682f47663938950a37"
 reference_hash = "a85772db61157cde9460239ae378fae361df96530629c05b32fd253ca2b97cb7"
 reference_size = "5419"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423875,10 +423875,10 @@ module = "GOLDTL"
 va = "0x43c640"
 context_hash = ""
 defines = "[]"
-input_hash = "26bbe54c8925d816432cca2add32f02a5c0b6dd80d02036a0d4f1986b83c0385"
+input_hash = "3411aacfa20b29a4e43fea9a8b81a479829b798a5336c34d674770ae4bc16cb0"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T22:49:08+00:00"
+measured_at = "2026-11-02T23:16:07+00:00"
 
 [["GOLDTL.0x0043c640".status_history]]
 old_status = "STUB"
@@ -476132,7 +476132,7 @@ status = "STUB"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00569ff0".verification]
-source_hash = "b5edae6af276773aac238b8567bb22ff70bf6e2f3ef0214e9bc1a193291fb02b"
+source_hash = "17c391024fd0689c96761048f439da9fc3f4980cc438d96b053acf39e2dd768a"
 reference_hash = "9fc3617384c7478cba05636e1f4460a666a2570b80484f6b9bd5e33915cf197f"
 reference_size = "3772"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -476143,10 +476143,10 @@ module = "GOLDTL"
 va = "0x569ff0"
 context_hash = ""
 defines = "[]"
-input_hash = "2da7bece3a30d317738a965b0fb1e8ecd4fd45e97376cb11cd9fd63f9c2c5860"
+input_hash = "2bf640da89cd4e73df16f96f56ba3010a9dafbf2168613d636cd089174e2e8bf"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T23:03:17+00:00"
+measured_at = "2026-11-02T23:15:12+00:00"
 
 [["GOLDTL.0x00569ff0".status_history]]
 old_status = "STUB"
@@ -587196,10 +587196,10 @@ file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00561380.c"
 name = "fcn_00561380"
 symbol = "_fcn_00561380"
 kind = "FUNCTION"
-updated_by = "fix-sizes"
-updated_at = "2026-11-02T21:24:21+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-02T23:17:39+00:00"
 status = "SIZE_MISMATCH"
-blocker = "Application code — pending per-function decompilation"
+blocker = "case-4 fail representative wall after eight rounds: the triple case5 0x47c + case6 0x80 + object 3588 needs the case-5 r==0 fail emitted as movl $-1,0x70(%esi) while case 4 keeps a 6-byte far je, and MSVC 6 cannot choose both: it picks the shared fail representative at case 4's tail (2-byte je, case4 0x418) whenever case 5's fail has a local copy, and at case 5's end (or $-1,%ebx remat, case5 0x47f) when only gotos exist. v10 never moves to ebp by any source shape tried; it does take ebp only when the zero constant stops needing a callee-saved register, which costs case 4"
 
 ["GOLDTL.0x00561380".verification]
 source_hash = "c7496a23f68c379fa477d44c390df12c102f3882fa4c48eb4d0507b75bfdec3e"
@@ -587216,7 +587216,7 @@ defines = "[]"
 input_hash = "f059c4c7554766c99599814251402a71d1dd39aa5c8d5df36c6fd0bd62f0cc95"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T23:01:48+00:00"
+measured_at = "2026-11-02T23:16:32+00:00"
 
 [["GOLDTL.0x00561380".status_history]]
 old_status = "STUB"
