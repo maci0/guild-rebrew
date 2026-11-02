@@ -27,7 +27,7 @@ overrides = [
     { name = "python-flirt", marker = "python_full_version == '3.15.*' and implementation_name == 'cpython' and platform_machine != 'AMD64' and sys_platform == 'win32'", url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz" },
     { name = "python-flirt", marker = "python_full_version == '3.15.*' and implementation_name != 'cpython'", url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz" },
 ]
-excludes = [{ package = { name = "recoverage", version = "8.7.1" }, dependencies = ["rebrew"] }]
+excludes = [{ package = { name = "recoverage", version = "8.8.2" }, dependencies = ["rebrew"] }]
 
 [[package]]
 name = "angr"
@@ -487,9 +487,9 @@ requires-dist = [
     { name = "isort", marker = "extra == 'dev'", specifier = ">=9.0.2" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=2.4.1" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.2.0" },
-    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.9.0/rebrew-6.9.0-py3-none-any.whl" },
-    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.9.0/rebrew-6.9.0-py3-none-any.whl" },
-    { name = "recoverage", marker = "extra == 'dashboard'", url = "https://github.com/maci0/recoverage/releases/download/v8.7.1/recoverage-8.7.1-py3-none-any.whl" },
+    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.14.3/rebrew-6.14.3-py3-none-any.whl" },
+    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.14.3/rebrew-6.14.3-py3-none-any.whl" },
+    { name = "recoverage", marker = "extra == 'dashboard'", url = "https://github.com/maci0/recoverage/releases/download/v8.8.2/recoverage-8.8.2-py3-none-any.whl" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.17.3" },
 ]
 provides-extras = ["dashboard", "binsync", "dev"]
@@ -1199,8 +1199,8 @@ wheels = [
 
 [[package]]
 name = "rebrew"
-version = "6.9.0"
-source = { url = "https://github.com/maci0/rebrew/releases/download/v6.9.0/rebrew-6.9.0-py3-none-any.whl" }
+version = "6.14.3"
+source = { url = "https://github.com/maci0/rebrew/releases/download/v6.14.3/rebrew-6.14.3-py3-none-any.whl" }
 dependencies = [
     { name = "capstone" },
     { name = "click" },
@@ -1222,7 +1222,7 @@ dependencies = [
     { name = "zstandard" },
 ]
 wheels = [
-    { url = "https://github.com/maci0/rebrew/releases/download/v6.9.0/rebrew-6.9.0-py3-none-any.whl", hash = "sha256:fcea4415503dabc49c4f08c3a360ea5b1154f4392b9511847ce3c14c91e1150e" },
+    { url = "https://github.com/maci0/rebrew/releases/download/v6.14.3/rebrew-6.14.3-py3-none-any.whl", hash = "sha256:37a893a6f3f2cd245cfd9c6c64bf5f0d1172a3e365e7106efd73377d27bb067e" },
 ]
 
 [package.optional-dependencies]
@@ -1258,8 +1258,8 @@ provides-extras = ["prove", "binsync"]
 
 [[package]]
 name = "recoverage"
-version = "8.7.1"
-source = { url = "https://github.com/maci0/recoverage/releases/download/v8.7.1/recoverage-8.7.1-py3-none-any.whl" }
+version = "8.8.2"
+source = { url = "https://github.com/maci0/recoverage/releases/download/v8.8.2/recoverage-8.8.2-py3-none-any.whl" }
 dependencies = [
     { name = "bottle" },
     { name = "brotli" },
@@ -1270,7 +1270,7 @@ dependencies = [
     { name = "zstandard" },
 ]
 wheels = [
-    { url = "https://github.com/maci0/recoverage/releases/download/v8.7.1/recoverage-8.7.1-py3-none-any.whl", hash = "sha256:c8928635861f8df8913a565b986deb0347a8ecd17bde7ca319e2e46723a1f4ad" },
+    { url = "https://github.com/maci0/recoverage/releases/download/v8.8.2/recoverage-8.8.2-py3-none-any.whl", hash = "sha256:fe59e9e6fae8465e1e9b350f7c25ff888e5b1aabbf88c4aa081f6cd5d0a2e0b3" },
 ]
 
 [package.metadata]
@@ -1286,7 +1286,7 @@ requires-dist = [
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.1.1" },
     { name = "pytest-playwright", marker = "extra == 'playwright'", specifier = ">=0.9.0" },
     { name = "rcssmin", specifier = ">=1.1" },
-    { name = "rebrew", url = "https://github.com/maci0/rebrew/releases/download/v6.3.0/rebrew-6.3.0-py3-none-any.whl" },
+    { name = "rebrew", url = "https://github.com/maci0/rebrew/releases/download/v6.14.2/rebrew-6.14.2-py3-none-any.whl" },
     { name = "rich", specifier = ">=15.0.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.16.7" },
     { name = "typer", specifier = ">=0.27.2" },
