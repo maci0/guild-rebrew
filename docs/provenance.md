@@ -19859,3 +19859,25 @@ ebx once and zeroes [ebp+8] while native keeps t in esi, lets the bestmap `rep m
 from [ebp+8] at 0x43c979, leaving its argument slot live and giving x a frame slot; native's roles are t=esi, y=edi
 and byte temporaries in bl. Current source .scratch/goldtl-0043c640/v16-cells-hx.c with v7-base.c as the 469
 baseline and NOTES.md holding the measurement table.
+
+## 2026-11-03 — quest dialog pool wall recorded
+
+`0x512EE0` keeps its state at 393 with object 3448, frame 0x404, kinds 0x1c and prefix 0x35; the pool and spill
+pass kept no edit and the source is back to L3. Current slots are total 0x10, count 0x14 and i 0x18 with inner in
+a register, and no shape reached the target of i 0x10, total 0x14, inner 0x18 at frame 0x404. Measured:
+the merged-correct form, with total holding the fcn_0050cf50 result and both amp sites `&total`, gives frame
+0x400, kinds 0x18, total 0x10 and i 0x14 with prefix 0x2; adding the done test at the top of the do-while gives
+frame 0x404, kinds 0x18, total 0x10, inner 0x14 and i 0x3c with prefix 0x35, so the top test is the confirmed
+inner-spill lever but it pushes i out of the low block every time; a split with correct semantics, count holding
+the cf50 result with `&count` at 0x65 and total as count*2 with `&total` at 0x69, gives frame 0x404, kinds 0x1c,
+i 0x10, total 0x14 and count 0x18 with prefix 0xe9 and match 405 at object 3469, which is byte-identical to the
+rejected split and has its 0x65 lea resolving to 0x18 against native's 0x14, so it was not kept; and the closest
+merged-plus-pressure shape gives frame 0x404, total 0x14, inner 0x10, i 0x3c, kinds 0x18 and prefix 0x39. The
+done test at the top with three scalars already present gives frame 0x408, over budget. Slot-order findings:
+declaration order and declaration scope are byte-irrelevant for i and total, though block scope did move count;
+`(void)&x` is folded with no slot effect; a dead `if (0) fcn_004c4570(4, 1, 0x69, (char*)&x);` marks x
+address-taken with no emitted code and forces inner to 0x18 at frame 0x404 and kinds 0x1c but never reorders total
+and i; and the only lever that moves total to 0x14 is a second real address-taken scalar, which native's lea
+inventory of only 0x13375 and 0x13389, both frame 0x14, excludes. A blocker is set on the row. Findings in
+.scratch/512ee0/FINDINGS_pool.md with the probe scripts probe3 to probe6, batch.py, gen_*.py and the variant set
+L3, a1, f3, f3d, x1, x2, s1, u_inner.
