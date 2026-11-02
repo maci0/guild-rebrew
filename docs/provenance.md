@@ -19096,3 +19096,32 @@ namely the `mov cl,[0x773d75]` and its and scheduling at the fcn_004c5150 site, 
 `[eax+ecx+0x247]` against native's `[ecx+eax+0x247]`, and the [esi+1] load placement, since those change the
 intermediate representation where the pre-0xb15 stream cannot. Log in .scratch/f540020/ROUND5.md with tools
 gen.py, cross16.py and struct.py.
+
+## 2026-11-03 — production message strcat evidenced, slot order blocks it
+
+`0x569FF0` keeps its 306 state with object 3556, frame 0x738, first mismatch 0x8 and case 5 at 0x6e2 against
+native 0x770; the round kept nothing and the source is byte-identical to HEAD. The strcat question is settled
+by the listing: the 0x19e6 site is a strcat on the native side, with 0x56ac21..0x56ac61 showing the double
+repne-scasb plus `dec edi` append at destination +0x48 (`lea edx,[esp+0x5c]`) from source +0x348, so
+`strcat(b200, b400)` stands, and the num-block copy at 0x56ab11 is the same shape as `strcat(b400, b100)` with
+destination [esp+0x358] and source [esp+0x258], as is 0x56a993. It cannot be kept yet because any strcat in
+this function costs exactly one extra dword slot, moving the frame from 0x738 to 0x73c regardless of
+arrangement: the 0x19e6 copy alone gives 317 at object 3612, the flag-arm copy alone 291 at 3612, both 299 at
+3644, a single `char b[0x700]` with b200, b100 and b400 views 314 at 3608, the product written to its own
+local 311 at 3612, moving the SEARCH struct into the case 2 body or declaring it first or after the buffers
+317 at 3612 each, `o` block-local at all four loops 317 at 3612, and five initialiser-order permutations 317
+at 3612. Two frame-held variants got 0x738 only by deleting an initialiser and both are rejected: dropping
+`num = 0` gives 316 at 3596, and dropping `pc = 0` gives 326 at 3596 but the object then has two prologue zero
+stores where native has four at 0x56a010, 0x56a014, 0x56a018 and 0x56a01c writing 0x34, 0x2c, 0x30 and 0x1c,
+and case 5 reads pc when pb is zero; putting `pc = 0` inside case 5 gives 301 at 3604 with frame 0x73c. The
+root cause of the slot is visible in the object: the spill is q, since the 0x73c builds store the
+gm_SetupEntityQuery result to a new slot 0x38 and move the SEARCH struct to 0x3c, while the baseline lets q
+reuse the struct's first dword at 0x38; native instead keeps q in a scalar slot with `mov edi,[esp+0x24]` at
+0x56a7ae and recomputes px into 0x24 at 0x56a801 and 0x56a820, leaving the struct alone at 0x38..0x47. That is
+the same allocation question as e sitting in ebp where native has esi (`push esi; mov esi,[esp+0x748]` at
+0x56a001 against our `mov ebp,[esp+0x744]` at 0x8), and both need the native local order rather than another
+spelling of the copies. Tooling caveat recorded: object dumps must use the project cflags
+`/nologo /c /MT /D "_WIN32_WINNT=0x0400" /Ireferences/zlib-1.1.3 /O2 /Gd`, because the older
+`/I src /I src/Develop` wrapper compiles to frame 0x73c and invalidates any dump made with it; mk2.sh is the
+corrected wrapper. Artifacts in .scratch/569ff0/ (SC_19e6_strcat_317.c, SC_both_strcat_299.c, SC_droppc_326.c,
+SC_dropnum_316.c, SC_single_buf_314.c, mk2.sh, m.sh, na.sh, NOTES.md).
