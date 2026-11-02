@@ -18944,3 +18944,56 @@ first mismatch at 0x10 and e in esi, which is available if prefix parity ever ou
 0x85 most likely sits where native calls 0x504b30 twice in case 5 (0x56a6f1 and 0x56adde) and 0x502850 twice
 (0x56a7bc and 0x56ab97), since our case 5 has neither the 0x504b30 pair nor a second 0x502850. Notes with all
 rejected variants in .scratch/569ff0/NOTES.md and the kept source at KEEP_v3_295.c.
+
+## 2026-11-03 — production run reaches seventy-two percent
+
+`0x571870` 1885 to 2757 matching bytes (72 percent) with the object at 3816, the byte-identical-equivalent
+size recorded earlier since the tool strips the trailing 0x90 padding, mismatches down from 1938 to 1076,
+lint clean, and bytes 0..0x536 identical so the shared-exit branch displacement at offset 53 now matches and
+the first byte mismatch moved to 0x537. Three hunks closed. The FP ternary casts its true arm to float,
+`? (float)(*(unsigned char*)(haus + 0x81) * (1.0 / 1008.0)) : 0.0f`, making the ternary float-typed so it
+emits `fld dword [0x6628a8]`, `fadd dword [leistung]` and `test byte [edx+0x5a],0x20` with no extra `fstp`,
+matching native exactly. The differenz multiply takes a block-local `float df; df = (float) differenz;` and
+then multiplies by df, giving `fild [differenz]` plus `fmulp` in native order, and as a side effect the same
+change made `b4 += x` emit native's `fild qword [esp+0x24]; fadd dword [ebp+0xb4]`, closing that hunk too.
+And the case-2 arm deletes a redundant `else { break; }` after `if (gebaeude != 0) { fcn_004c6300(...); }`,
+which turns the je into a real block join so MSVC emits separate `add esp,4` / `add esp,4` instead of merging
+to `add esp,8` and the je target becomes 0xebd like native; semantics are preserved because with gebaeude==0
+the compiler jumps to the shared `fcn_00546190(e); return;` tail, exactly what break did, and that was the
+three-byte shortfall. Remaining and not closed: the scratch int-conversion slots at 0x537 and 0x53f are at
+0x24 and 0x18 against native 0x30 and 0x24, a constant -0xc; the `xor ebx,ebx` zeroings at 0x8cc, 0x955 and
+0x96b are two bytes short each and appeared only after the df local, since ours uses `test ax,ax` plus an edi
+counter instead of `cmp ax,bx`; the rohstoff address fold at 0x974 emits `add eax,edx; lea esi,[eax+0x2e]`
+where native is two bytes longer and both the two-way and temp-pointer source forms fold to a single lea; the
+`xor ecx,ecx` before `mov cx,[ebp+0xac]` at 0xaef is two bytes short with ours using esi and eax instead of
+ecx; and the tail at 0xed4 is native's 16-byte switch table plus nops which the tool strips. Constant audit
+against the reference bytes: 0x665be8 is the double 0.000992063492063492 for 1.0/1008.0 so the existing
+`(1.0 / 1008.0)` is right, 0x6628a8 is the double 0.0 whose dword load is the float zero, and 0x66419c is the
+float 1.3f, so no constant change was needed. Current source at .scratch/he_RunProduktion.best.c and
+.scratch/571870.v8.c with the helper scripts check.py, pair.py, deltamap.py, fpvar.py, fivar.py and
+case2var.py.
+
+`0x561380` goes from 14.25 to 16.22 percent (584 matching bytes) with the object at 3444 from 3404 and 48
+relocations, lint clean. The whole function is transcribed in native order: the prologue `sub esp,0x5e4`,
+push ebx/ebp/esi, `mov esi,[esp+0x5f4]`, `or ebx,-1`, push edi; the guard
+`if (p[0xc8] != -1 && !fcn_004c4450(...)) return`; the dispatch `add eax,2; cmp 0xa; ja default;
+jmp [eax*4+0x562158]` with its table decoded to eleven entries in value order -2, -2, 0, 1, 2, 3, 4, 5, 6, 7, 8
+pointing at 0x56212f, 0x56212f, 0x5613c5, 0x56149d, 0x5614f7, 0x56157d, 0x561817, 0x561c33, 0x5620af,
+0x56169e and 0x561763; all eleven case bodies; three shared tails at 0x56148f, 0x561d51 and 0x56211d; the
+case-3 pos aggregate with its out pointer read back as `*(int*)(*(uchar**)(pos+3)+4)`; the case-4
+filtered-entity loop as a native do/while with `(int)` casts on both sides of the 0x85a0a4 pointer-range
+compare and the 0x87*4 stride; the message and name field offsets; the case-5 name-table init from the three
+64-byte literals; the fild float pos updates; the he_MessageBoxQuickjump and io_FormatTextBuffer argument
+order; and the fcn_00417d00 ftol path. Every callee resolves to a project definition, with 0x64d228 as the
+_ftol library row. The single blocker is the frame: target 0x5e4 against our 0x5d0. The target layout is
+decoded exhaustively as 0x10 unused then three four-byte slots at 0x10, 0x14 and 0x18 (q with v10, a float,
+and recB with color[4]), pos[8] at 0x1c, three char[64] at 0x3c, 0x7c and 0xbc, msg[0xf8] at 0xfc and
+text[0x3f0] at 0x1f4, with 0x1f4 + 0x3f0 = 0x5e4 exactly, so `sub esp` is the 0x10 hole plus 1492. Our
+compile has no leading 0x10 and only two four-byte slots for 1488, so every displacement is 0x14 low and the
+prefix stalls at offset 2. Probes confirmed that slot order is strictly ascending size and contiguous, that
+unused or assigned-but-unread locals get no slot, that four scalar chars pack into one four-byte slot, and
+that switch scoping, fild scratch, _ftol, varargs and jump tables add no hole, so the target's 0x10 must come
+from a size class below four bytes or a compiler internal reserve, and it was not reproducible from source.
+Also confirmed rather than assumed: MSVC defers and merges `add esp` across consecutive calls, so the
+target's deferred-pop pattern needs no special source shape, and `sub esp` equals the byte sum with no
+rounding. Backups in .scratch/r561380/ (orig.c and v1_16.22.c).

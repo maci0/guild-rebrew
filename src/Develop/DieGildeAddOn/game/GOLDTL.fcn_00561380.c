@@ -10,13 +10,11 @@ extern float g_662cf8;
 extern float g_665ec0;
 extern float g_662c98;
 extern int lpGebaeudePROT;
-extern char g_68149c[];
 extern char g_6a6560[];
 extern char g_6a654c[];
 extern char g_6a6538[];
 extern char g_68bef4[];
 extern char g_677640[];
-extern unsigned char g_7f4ca0[];
 
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
@@ -58,59 +56,61 @@ int __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00561380(void *a0)
 {
 	unsigned char *p;
-	unsigned char *r;
-	unsigned char *e;
-	unsigned char *recA;
-	unsigned char *recB;
-	unsigned char *v22;
-	unsigned char *model;
-	unsigned char *query;
-	unsigned char *hand;
 	char text[0x3f0];
 	unsigned char msg[0xf8];
 	float pos[8];
-	unsigned char color[4];
-	float v24;
-	int v10;
-	int n;
 
 	p = (unsigned char *)a0;
 	if (*(int *)(p + 0xc8) != -1 && !fcn_004c4450(*(int *)(p + 0xc8)))
 		return;
 	switch (*(int *)(p + 0x70)) {
 	case 0:
-		if (*(int *)(p + 0xc8) != -1 && !fcn_004c4450(*(int *)(p + 0xc8)))
-			return;
-		r = (unsigned char *)fcn_004c4480(*(int *)(p + 0xc8));
-		if (r != 0) {
+		{
+			unsigned char *hand;
+			unsigned char *e;
+
+			if (*(int *)(p + 0xc8) != -1 && !fcn_004c4450(*(int *)(p + 0xc8)))
+				return;
+			hand = (unsigned char *)fcn_004c4480(*(int *)(p + 0xc8));
+			if (hand == 0)
+				goto label_56148f;
 			e = (unsigned char *)gm_GetEntityTableEntry((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0));
 			if (e != 0)
 				*(int *)(e + 0x28) = *(int *)(e + 0x28) + *(int *)(p + 0xd0);
-			*(int *)(p + 0xc4) = *(int *)(r + 4);
-			fcn_00529160(0, 0, *(unsigned short *)r, p);
+			*(int *)(p + 0xc4) = *(int *)(hand + 4);
+			fcn_00529160(0, 0, *(unsigned short *)hand, p);
 			fcn_004c51a0(-1, *(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4), g_773d75, *(int *)(p + 0xd0));
 			*(int *)(p + 0xc8) = -1;
 			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 			return;
 		}
-		goto label_56148f;
 	case 1:
-		r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
-		if (r == 0) {
-			*(int *)(p + 0x70) = -1;
+		{
+			unsigned char *r;
+
+			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
+			if (r == 0) {
+				*(int *)(p + 0x70) = -1;
+				return;
+			}
+			*(int *)(p + 0xc8) = fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(r + 1), -1, 0, 1, g_6a6560);
+			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 			return;
 		}
-		*(int *)(p + 0xc8) = fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(r + 1), -1, 0, 1, g_6a6560);
-		*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
-		return;
 	case 2:
-		*(int *)(p + 0xc8) = -1;
-		r = (unsigned char *)gm_LookupEntityRecordById(*(int *)(p + 0xc4));
-		if (r == 0) {
-			*(int *)(p + 0x70) = -1;
-			return;
-		}
-		if (*(int *)(*(int *)(r + 0x184) + 0x128) != 0) {
+		{
+			unsigned char *r;
+
+			*(int *)(p + 0xc8) = -1;
+			r = (unsigned char *)gm_LookupEntityRecordById(*(int *)(p + 0xc4));
+			if (r == 0) {
+				*(int *)(p + 0x70) = -1;
+				return;
+			}
+			if (*(int *)(*(int *)(r + 0x184) + 0x128) == 0) {
+				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
+				return;
+			}
 			*(int *)(p + 0x52) = g_7f4c00;
 			*(int *)(p + 0x56) = g_7f4c04;
 			*(int *)(p + 0x5a) = g_7f4c08;
@@ -119,47 +119,102 @@ void __cdecl fcn_00561380(void *a0)
 			*(int *)(p + 0x70) = 2;
 			return;
 		}
-		*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
-		return;
 	case 3:
-		r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
-		if (r == 0 || *(unsigned short *)(r + 0x27) == 0xffff)
-			goto label_56148f;
-		*(void **)pos = r;
-		pos[1] = 4000.0f;
-		*(void **)(pos + 2) = p;
-		pos[3] = 0.0f;
-		if (fcn_0055be70(pos) == 0) {
-			fcn_004c5ed0(*(int *)(p + 0xc4), g_68bef4, 1);
-			fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
-			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
+		{
+			unsigned char *r;
+			unsigned char *recA;
+			unsigned char *recB;
+
+			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
+			if (r == 0 || *(unsigned short *)(r + 0x27) == 0xffff)
+				goto label_56148f;
+			*(void **)pos = r;
+			pos[1] = 4000.0f;
+			*(void **)(pos + 2) = p;
+			pos[3] = 0.0f;
+			if (fcn_0055be70(pos) == 0) {
+				fcn_004c5ed0(*(int *)(p + 0xc4), g_68bef4, 1);
+				fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
+				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
+				return;
+			}
+			recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);
+			recB = (unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0);
+			*(int *)(p + 0xc8) = fcn_004f4f60(0x18, 1, *(int *)(recB + 4), *(int *)(recA + 4), *(int *)(p + 0xac));
+			*(int *)(p + 0x70) = 7;
+			*(int *)(p + 0xcc) = *(int *)(*(unsigned char **)(pos + 3) + 4);
+			*(int *)(p + 0x52) = g_7f4c00;
+			*(int *)(p + 0x56) = g_7f4c04;
+			*(int *)(p + 0x5a) = g_7f4c08;
+			*(unsigned short *)(p + 0x5e) = g_7f4c0c;
 			return;
 		}
-		*(int *)(p + 0xc8) = fcn_004f4f60(0x18, 1,
-			*(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4),
-			*(int *)((unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0) + 4),
-			*(int *)(p + 0xac));
-		*(int *)(p + 0x70) = 7;
-		*(int *)(p + 0xcc) = *(int *)(pos + 1);
-		*(int *)(p + 0x52) = g_7f4c00;
-		*(int *)(p + 0x56) = g_7f4c04;
-		*(int *)(p + 0x5a) = g_7f4c08;
-		*(unsigned short *)(p + 0x5e) = g_7f4c0c;
-		return;
-	case 4:
-		if (fcn_00500cb0((void *)(p + 0x52), &g_7f4c00) >= 0)
-			return;
-		*(unsigned char *)(p + 0xc2) = 0;
-		r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
-		if (r == 0 || *(unsigned short *)(r + 0x27) == 0xffff)
-			goto label_56148f;
-		recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);
-		recB = (unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0);
-		if (gm_RandomFloat01() + fcn_00507e70(recB, recA, 2) < g_6628a0)
-			goto label_561a7a;
-		if (fcn_005c6270(recB, 0x2c0) != 0)
-			goto label_561a7a;
+	case 7:
 		{
+			unsigned char *r;
+			unsigned char *e;
+			unsigned char *hand;
+			unsigned char *query;
+
+			if (*(int *)(p + 0xc8) != -1 && !fcn_004c4450(*(int *)(p + 0xc8)))
+				return;
+			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
+			e = (unsigned char *)fcn_005463a0(1, 1, *(int *)(p + 0xcc));
+			if (r == 0 || e == 0 || *(int *)(e + 0xd4) != *(int *)(p + 4) || *(int *)(p + 0xc8) == -1)
+				goto label_56148f;
+			query = (unsigned char *)gm_LookupEntityRecordById(*(int *)(p + 0xcc));
+			hand = (unsigned char *)fcn_004c4480(*(int *)(p + 0xc8));
+			if (hand != 0 && query != 0)
+				fcn_004c58b0(*(int *)hand, *(int *)(query + 4));
+			*(int *)(p + 0x70) = 8;
+			fcn_00500bb0((void *)(p + 0x52), 0, 10, 0);
+			return;
+		}
+	case 8:
+		{
+			unsigned char *r;
+
+			r = (unsigned char *)fcn_005463a0(1, 1, *(int *)(p + 0xcc));
+			if (r == 0) {
+				*(int *)(p + 0x70) = -1;
+				return;
+			}
+			if (*(int *)(r + 0xd4) == *(int *)(p + 4)) {
+				fcn_00500bb0((void *)(p + 0x52), 0, 6, 0);
+				return;
+			}
+			fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
+			*(int *)(p + 0x52) = g_7f4c00;
+			*(int *)(p + 0x56) = g_7f4c04;
+			*(int *)(p + 0x5a) = g_7f4c08;
+			*(unsigned short *)(p + 0x5e) = g_7f4c0c;
+			fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
+			*(int *)(p + 0x70) = 6;
+			return;
+		}
+	case 4:
+		{
+			unsigned char *q;
+			float dist;
+			unsigned char *recB;
+			unsigned char *recA;
+			unsigned char *r;
+			unsigned char *v22;
+
+			q = (unsigned char *)(p + 0x52);
+			if (fcn_00500cb0(q, &g_7f4c00) >= 0)
+				return;
+			*(unsigned char *)(p + 0xc2) = 0;
+			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
+			if (r == 0 || *(unsigned short *)(r + 0x27) == 0xffff)
+				goto label_56148f;
+			recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);
+			recB = (unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0);
+			dist = fcn_00507e70(recB, recA, 2);
+			if (gm_RandomFloat01() + dist < g_6628a0)
+				goto label_561a7a;
+			if (fcn_005c6270(recA, 0x2c0) != 0)
+				goto label_561a7a;
 			io_FormatTextBuffer(text, 0x1735, *(unsigned short *)recA, r);
 			he_MessageBoxQuickjump(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 			if (*(unsigned short *)(r + 0x27) != 0xffff) {
@@ -180,7 +235,7 @@ void __cdecl fcn_00561380(void *a0)
 					he_MessageBoxQuickjump(*(int *)v22, -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 				}
 				v22 = v22 + 0x87 * 4;
-			} while ((int)v22 < 0x85a0a4);
+			} while ((int)v22 < (int)0x85a0a4);
 			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 			*(int *)(p + 0x52) = g_7f4c00;
 			*(int *)(p + 0x56) = g_7f4c04;
@@ -188,60 +243,67 @@ void __cdecl fcn_00561380(void *a0)
 			*(unsigned short *)(p + 0x5e) = g_7f4c0c;
 			fcn_00500bb0((void *)(p + 0x52), 0, 10, 0);
 			return;
-		}
-		goto label_561aa2;
-label_561a7a:
-		recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);
-		recB = (unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0);
-label_561aa2:
-		if (fcn_005c6270(recA, 0x2c0)) {
-			fcn_005100f0(*(int *)(recB + 4), -1);
-			if (*(unsigned char *)(recB + 2) == 6 || *(unsigned char *)(recB + 2) == 7) {
-				io_FormatTextBuffer(text, 0x1013, *(unsigned short *)recA, r);
-				fcn_00545d40(*(int *)(recB + 4), -1, text, 0, 0x5fa, 0);
+		label_561a7a:
+			recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);
+			recB = (unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0);
+			if (fcn_005c6270(recA, 0x2c0)) {
+				fcn_005100f0(*(int *)(recB + 4), -1);
+				if (*(unsigned char *)(recB + 2) == 6 || *(unsigned char *)(recB + 2) == 7) {
+					io_FormatTextBuffer(text, 0x1013, *(unsigned short *)recA, r);
+					fcn_00545d40(*(int *)(recB + 4), -1, text, 0, 0x5fa, 0);
+				}
+				if (*(unsigned char *)(recA + 2) == 6 || *(unsigned char *)(recA + 2) == 7) {
+					io_FormatTextBuffer(text, 0x1011, r);
+					fcn_00545d40(*(int *)(recA + 4), -1, text, 0, 0x5fb, g_6a6538);
+				}
+				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
+				return;
 			}
-			if (*(unsigned char *)(recA + 2) == 6 || *(unsigned char *)(recA + 2) == 7) {
-				io_FormatTextBuffer(text, 0x1011, r);
-				fcn_00545d40(*(int *)(recA + 4), -1, text, 0, 0x5fb, g_6a6538);
+			io_FormatTextBuffer(text, 0x1738, *(unsigned short *)(r + 0x27), r);
+			he_MessageBoxQuickjump(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
+			if (*(unsigned short *)(r + 0x27) != 0xffff) {
+				io_FormatTextBuffer(text, 0x1739, r);
+				he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
+				fcn_004f4f60(0x18, 1, *(int *)(recB + 4), *(int *)(recA + 4), *(int *)(r + 1));
+				*(int *)(p + 0x70) = -1;
+				return;
 			}
-			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
-			return;
+			goto label_561d51;
 		}
-		io_FormatTextBuffer(text, 0x1738, *(unsigned short *)(r + 0x27), r);
-		he_MessageBoxQuickjump(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
-		if (*(unsigned short *)(r + 0x27) != 0xffff) {
-			io_FormatTextBuffer(text, 0x1739, r);
-			he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
-			fcn_004f4f60(0x18, 1, *(int *)(recB + 4), *(int *)(recA + 4), *(int *)(r + 1));
-			*(int *)(p + 0x70) = -1;
-			return;
-		}
-		goto label_561d51;
 	case 5:
-		if (*(unsigned char *)(p + 0xc2) >= 1)
-			goto label_56211d;
 		{
 			char names[3][64] = {"dummy_TUER", "dummy_FAHNE", "dummy_RAUCH_0"};
-		v10 = g_6b8010;
-		r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
-		if (r == 0)
-			goto label_561d51;
-		if (*(unsigned char *)(p + 0xc2) == 0 && g_6b8010 == 0) {
-			n = fcn_00422460(0, g_677640);
-			if (n != 0)
-				fcn_004193f0(n, *(int *)(r + 0x61), 0x6b, 0x463ea000);
-			v24 = 3.0f;
-		}
-		fcn_004432d0(0, 1);
-		model = (unsigned char *)*(int *)(r + 0x61);
-		if (model != 0) {
+			unsigned char *r;
+			unsigned char *model;
+			unsigned char *query;
+			unsigned char color[4];
+			int v10;
+			float v24;
+			int n;
+
+			if (*(unsigned char *)(p + 0xc2) >= 1)
+				goto label_56211d;
+			v10 = g_6b8010;
+			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
+			if (r == 0)
+				goto label_561d51;
+			if (*(unsigned char *)(p + 0xc2) == 0 && g_6b8010 == 0) {
+				n = fcn_00422460(0, g_677640);
+				if (n != 0)
+					fcn_004193f0(n, *(int *)(r + 0x61), 0x6b, 0x463ea000);
+				v24 = 3.0f;
+			}
+			fcn_004432d0(0, 1);
+			model = (unsigned char *)*(int *)(r + 0x61);
+			if (model == 0)
+				goto label_562049;
 			if (*(unsigned char *)(p + 0xc2) != 0) {
 				n = gm_RandomMod(3) & 0xffff;
 				model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, &names[n][0]);
 				if (model != 0)
 					fcn_00455350((char *)model, (char *)model + 0x4c, pos);
 				else
-					model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, g_68149c);
+					model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, "dummy_TUER");
 			} else {
 				*(unsigned char *)(msg + 4) = 0x4f;
 				*(int *)(msg + 8) = *(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4);
@@ -257,39 +319,43 @@ label_561aa2:
 				*(int *)(msg + 0x5c) = (gm_RandomMod(0x10) & 0xffff) - *(unsigned char *)(query + 0x247) * 3 + 0x14;
 				fcn_004c5530(msg);
 			}
-			if (model != 0 && v10 == 0) {
-				fcn_00455350((char *)model, (char *)model + 0x4c, pos);
-				pos[0] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[0] - g_664154;
-				pos[1] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[1];
-				pos[2] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[2] - g_664154;
-				color[3] = 0x3f;
-				color[2] = 0xc0;
-				color[1] = 0xc0;
-				color[0] = 0xc0;
-				fcn_00418000(v10, pos, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f, 140.0f, 35.0f,
-					pos + 4, 400, 6, *(int *)color);
-				fcn_004185a0(v10, pos, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f, 7.0f, 8.0f,
-					*(int *)color);
-				fcn_00417d00(v10, pos, (int)(v24 * g_662c98), v24 * g_665ec0, v24 * g_662cf8,
-					20.0f, 60.0f, 0x50);
-			}
-		}
-		*(int *)(p + 0x52) = g_7f4c00;
-		*(int *)(p + 0x56) = g_7f4c04;
-		*(int *)(p + 0x5a) = g_7f4c08;
-		*(unsigned short *)(p + 0x5e) = g_7f4c0c;
-		fcn_00500bb0((void *)(p + 0x52), 0, gm_RandomMod(2) & 0xffff, 0);
-		*(unsigned char *)(p + 0xc2) = *(unsigned char *)(p + 0xc2) + 1;
-		fcn_004432d0(v10, 1);
-		return;
-		}
-	case 6:
-		r = (unsigned char *)gm_LookupEntityRecordById(*(int *)(p + 0xc4));
-		if (r == 0) {
-			*(int *)(p + 0x70) = -1;
+			if (model == 0 || v10 != 0)
+				goto label_562049;
+			fcn_00455350((char *)model, (char *)model + 0x4c, pos);
+			pos[0] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[0] - g_664154;
+			pos[1] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[1];
+			pos[2] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[2] - g_664154;
+			color[3] = 0x3f;
+			color[2] = 0xc0;
+			color[1] = 0xc0;
+			color[0] = 0xc0;
+			fcn_00418000(v10, pos, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f, 140.0f, 35.0f,
+				pos + 4, 400, 6, *(int *)color);
+			fcn_004185a0(v10, pos, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f, 7.0f, 8.0f,
+				*(int *)color);
+			fcn_00417d00(v10, pos, (int)(v24 * g_662c98), v24 * g_665ec0, v24 * g_662cf8,
+				20.0f, 60.0f, 0x50);
+		label_562049:
+			*(int *)(p + 0x52) = g_7f4c00;
+			*(int *)(p + 0x56) = g_7f4c04;
+			*(int *)(p + 0x5a) = g_7f4c08;
+			*(unsigned short *)(p + 0x5e) = g_7f4c0c;
+			fcn_00500bb0((void *)(p + 0x52), 0, gm_RandomMod(2) & 0xffff, 0);
+			*(unsigned char *)(p + 0xc2) = *(unsigned char *)(p + 0xc2) + 1;
+			fcn_004432d0(v10, 1);
 			return;
 		}
-		if (*(int *)(*(int *)(r + 0x184) + 0x128) != 0) {
+	case 6:
+		{
+			unsigned char *r;
+
+			r = (unsigned char *)gm_LookupEntityRecordById(*(int *)(p + 0xc4));
+			if (r == 0) {
+				*(int *)(p + 0x70) = -1;
+				return;
+			}
+			if (*(int *)(*(int *)(r + 0x184) + 0x128) == 0)
+				goto label_56148f;
 			*(int *)(p + 0x52) = g_7f4c00;
 			*(int *)(p + 0x56) = g_7f4c04;
 			*(int *)(p + 0x5a) = g_7f4c08;
@@ -297,39 +363,6 @@ label_561aa2:
 			fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
 			goto label_56211d;
 		}
-		goto label_56148f;
-	case 7:
-		if (*(int *)(p + 0xc8) != -1 && !fcn_004c4450(*(int *)(p + 0xc8)))
-			return;
-		r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
-		e = (unsigned char *)fcn_005463a0(1, 1, *(int *)(p + 0xcc));
-		if (r == 0 || e == 0 || *(int *)(e + 0xd4) != *(int *)(p + 4) || *(int *)(p + 0xc8) == -1)
-			goto label_56148f;
-		query = (unsigned char *)gm_LookupEntityRecordById(*(int *)(p + 0xcc));
-		hand = (unsigned char *)fcn_004c4480(*(int *)(p + 0xc8));
-		if (hand != 0 && query != 0)
-			fcn_004c58b0(*(int *)hand, *(int *)(query + 4));
-		*(int *)(p + 0x70) = 8;
-		fcn_00500bb0((void *)(p + 0x52), 0, 10, 0);
-		return;
-	case 8:
-		r = (unsigned char *)fcn_005463a0(1, 1, *(int *)(p + 0xcc));
-		if (r == 0) {
-			*(int *)(p + 0x70) = -1;
-			return;
-		}
-		if (*(int *)(r + 0xd4) != *(int *)(p + 4)) {
-			fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
-			*(int *)(p + 0x52) = g_7f4c00;
-			*(int *)(p + 0x56) = g_7f4c04;
-			*(int *)(p + 0x5a) = g_7f4c08;
-			*(unsigned short *)(p + 0x5e) = g_7f4c0c;
-			fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
-			*(int *)(p + 0x70) = 6;
-			return;
-		}
-		fcn_00500bb0((void *)(p + 0x52), 0, 6, 0);
-		return;
 	case -2:
 	case -1:
 		if (*(int *)(p + 0xc4) != -1)

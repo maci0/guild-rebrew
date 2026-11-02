@@ -173,7 +173,7 @@ warten:
             haus = g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c;
         }
         leistung = leistung + ((haus[2] == 6 || haus[2] == 7)
-            ? *(unsigned char*) (haus + 0x81) * (1.0 / 1008.0) : 0.0f);
+            ? (float) (*(unsigned char*) (haus + 0x81) * (1.0 / 1008.0)) : 0.0f);
         if ((gebaeude[0x5a] & 0x20) && fcn_005c62c0(gebaeude, 0x178)) {
             leistung *= 0.5;
         }
@@ -280,7 +280,11 @@ warten:
                 rezept = lpObjektePROT + *(unsigned short*) (e + 0xac) * 0x41;
                 differenz = fcn_0050c830(letzte_zeit, naechste_zeit, 0);
                 produziert = 0;
-                *(float*) (e + 0xb4) -= (*(int*) (e + 0x14) * 1.3f + *(int*) (e + 0x18)) * differenz * leistung;
+                {
+                    float df;
+                    df = (float) differenz;
+                    *(float*) (e + 0xb4) -= (*(int*) (e + 0x14) * 1.3f + *(int*) (e + 0x18)) * df * leistung;
+                }
                 if (*(float*) (e + 0xb4) <= 0.0f) {
                     do {
                         ++produziert;
@@ -350,8 +354,6 @@ mangel:
         }
         if (gebaeude != 0) {
             fcn_004c6300(*(int*) (gebaeude + 1));
-        } else {
-            break;
         }
         fcn_00546190((struct unit*) e);
         return;
