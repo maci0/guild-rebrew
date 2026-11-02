@@ -423391,14 +423391,14 @@ name = "ai_MeisterTrade"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.ai_MeisterTrade.c"
 symbol = "_ai_MeisterTrade"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T07:42:18+00:00"
-status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-11-02T12:41:13+00:00"
+status = "STUB"
 blocker = "Full body reconstructed from the native listing: special type0x116 delegation, producer overstock pass, town price/sell and market fill, both stock lanes (fcn_0050cce0), handled-request cleanup, cart unload/collect, duplicate routing, depth of sale passes, leftover-producer request and the 0xb send, then the query tail. Prologue, EBP frame (0x74c, and esp,-8) and all 95 call sites match the reference exactly. Candidate is 5575 bytes against 6055 (-480) and stays SIZE_MISMATCH: remaining delta is MSVC 6 expression/allocator class inside the blocks (price-compare condition forms, lane tracking arrays that the native code indexes four ints into the caps/vals blocks, request-lane merges). Evidence: .scratch/gold-p/206/ (listing.txt, asm.json, diff1.json, t1.json)."
 blocker_delta = 480
 
 ["GOLDTL.0x00489a70".verification]
-source_hash = "6f4d3b8f7b8dbdbd590e28d1ea6cae19fe01bc9a5c080829064609f3e813f304"
+source_hash = "1c21821bc6055fd074f0b997f5ed405fe4eb3bab9dfc8f4741189cfc8e2aa0ee"
 reference_hash = "b9021a6f988b766d3e4f60351e3372056c2941dbf557ff1680029c3a2b39e05b"
 reference_size = "6055"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423409,15 +423409,21 @@ module = "GOLDTL"
 va = "0x489a70"
 context_hash = ""
 defines = "[]"
-input_hash = "6e985d18151874f30d103a86c55a87329ca926ae1787153ccf7477a7c2f23dae"
-status = "SIZE_MISMATCH"
+input_hash = "e95f2e6a8c221bc8707240c574a3ebf4d8082a7f33f976d38d61038713383428"
+status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T12:27:27+00:00"
+measured_at = "2026-11-02T12:41:13+00:00"
 
 [["GOLDTL.0x00489a70".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-24T05:11:45.230518+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00489a70".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "STUB"
+changed_at = "2026-11-02T12:41:13.945194+00:00"
 updated_by = "test"
 ["GOLD.0x0048a4c0"]
 size = 6055

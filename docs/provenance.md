@@ -16801,3 +16801,32 @@ Remaining: prologue scheduling (native `xor ebp,ebp` with a hoisted `push 1` bef
 stores, ours picks edi for the zero and stores first), the 0x4681cc..0x468554 region and parts of
 the icon block transcribed only at block level, and per-block arithmetic detail such as tick
 spacing and text placement.
+
+## 2026-11-02 - trade AI frame repaired to 0x74c and size closed at 6055
+
+`0x489A70` moves from 566 match with object 6072 (SIZE_MISMATCH) to 576 match with object 6055
+and frame 0x74c, v.m at [esp+0x38], line at [esp+0x358]. The 8-byte locals area is restored by
+the `Prod* volatile pp` home, which raises the scalar area from 0x24 to 0x2c bytes; the same
+frame follows from a volatile home on t, tp, r or pr, but pp costs the fewest bytes (+31) and
+keeps the most match. Dropping volatile from sent, n and cnt (scheduling barriers only) lands
+the object exactly on 6055 with the pp home: pp plus no-9d plus sent/n/cnt removal is 6055/576,
+while keeping sent gives 6081, keeping cnt gives 6111 and keeping n gives 6049. The redundant
+`v.m+0x9d = 0` after memset is removed (-8 bytes); native only writes the byte in the =1 branch.
+The first byte mismatch moves from offset 8 to offset 55 (0x37), and the byte-identical prefix
+is 13 instructions; the first text divergence stays at 0x71 (`mov edx` vs `mov eax` from
+`[ecx+0x16c]`). Volatiles on inner locals (w, z, tpx, s, nx) and on i or j do not move the
+frame. Verified with `rebrew test ... --va 0x00489a70 --size 6055 --no-promote --json`
+(status STUB, match 576, obj 6055) and the frame/offset checks in
+`.scratch/gold-p/489a70/frame.py`. Kept source copy: `.scratch/gold-p/489a70/k_6055_576.c`.
+
+## 2026-11-02 — trade ai frame lands on native
+
+`0x489A70` object is exactly 6055 and the frame is native: 0x74c with v.m at [esp+0x38] and
+v.line at [esp+0x358]. Match is 576 and the byte-identical prefix covers 13 instructions to byte
+55 (0x37); the text-level first difference is instruction 47 at byte 0x71, native
+`mov edx,[ecx+0x16c]` against our eax. The frame mechanism is recorded: `Prod* volatile pp;`
+adds an 8-byte home that widens the scalar area from 0x24 to 0x2c, and the other 8-byte
+candidates (t, tp, r, pr) also reach 0x74c but cost far more match; the redundant
+`v.m+0x9d = 0` after memset is gone; and the volatile set is now o, id and price, with sent, n and
+cnt dropped after single-removal sweeps (sent 575, price 547, n 527, cnt 516, id 516 at frame
+0x74c). Call count stays 95.

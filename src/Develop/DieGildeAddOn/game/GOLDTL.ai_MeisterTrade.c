@@ -130,14 +130,14 @@ char* __cdecl fcn_00503d10(int who);
 double __cdecl gm_RandomFloat01(void);
 
 /*
- * The volatile qualifiers on o, id, n and 0x6628a0 are scheduling barriers, not
- * semantics: the native body reloads those from their stack homes per use and
- * re-reads 0x6628a0 at each compare (0x006e, 0x0ce7, 0x0f7d, 0x1c9/0x1ef), so
- * caching them in registers changes the instruction stream. x and found are
- * plain locals: the native body keeps both in registers and reloads found only
- * once, at the function tail (0x1751).
- * The 0x74c frame itself comes from the 0x400 line buffer below (native memset
- * 0xf8 at 0x0608, line at [esp+0x34c]).
+ * The volatile qualifiers on o, id, price, pp and 0x6628a0 are scheduling
+ * barriers, not semantics: the native body reloads those from their stack homes
+ * per use and re-reads 0x6628a0 at each compare (0x006e, 0x0ce7, 0x0f7d,
+ * 0x1c9/0x1ef), so caching them in registers changes the instruction stream.
+ * The pp home is also what fixes the locals area at 0x2c bytes: v.m sits at
+ * [esp+0x38] and the frame is 0x74c, with the line buffer at [esp+0x358].
+ * sent, n and cnt are plain locals here; x and found are plain as well, and
+ * the native body reloads found once, at the function tail (0x1751).
  */
 
 /* ADDRESS: GOLDTL 0x00489a70 */
@@ -148,14 +148,14 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 	char* x;
 	char* tp;
 	Prod* pr;
-	Prod* pp;
+	Prod* volatile pp;
 	Town* t;
 	unsigned short volatile id;
 	int i;
 	int j;
-	int volatile n;
-	int volatile cnt;
-	int volatile sent;
+	int n;
+	int cnt;
+	int sent;
 	int found;
 	int tmp;
 	int volatile price;
@@ -411,7 +411,6 @@ next_request:
 	cnt = 0;
 	sent = 0;
 	n = 0;
-	*(unsigned char*) ((char*) &v.m + 0x9d) = 0;
 	if (fcn_0047d1e0() > fcn_0047d1b0()) {
 		*(unsigned char*) ((char*) &v.m + 0x9d) = 1;
 	}
