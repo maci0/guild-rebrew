@@ -18045,3 +18045,27 @@ slot between the two, and win in EBX with ent in EDI and the sentinel in EAX. A 
 0x110c but steals ESI from a0 and moves the prologue push, regressing the prefix. The same cause accounts
 for most of the +186 bytes: about 18 f.win reloads plus non-CSE'd GUI(f.rows[i].label) control-index
 recomputations, where native computes the label index once at 0x7bf9 with shl/sub/lea and two stores.
+
+## 2026-11-03 — alloc spieler reaches native size
+
+`0x50A7E0` now measures exactly 3872, the native size, with match 814 against 787 and the frame at 0x428;
+idx keeps its native home [esp+0x28] and the slot map is unchanged (work at [esp+0x40], slot in EBP). The
+verdict prints STUB because the 21 percent ratio sits under the near-match cutoff at equal size. Two
+edits. `extern int gm_CurrentHumanFamilyCount;` now backs 0x773d6c for both the load and the increment:
+the reference folds `inc dword ptr [0x773d6c]` at 0x50b50a, and a two-function probe confirmed an
+absolute-address cast cannot fold (it emits mov/inc/mov) while a named extern emits `dec DWORD PTR
+ds:addr`; with the extern the counter lands in EAX and the block reproduces native exactly, with the A1
+load form at 5 bytes instead of 6, `or ah,0x80` at 3 instead of `or esi,0x8000` at 6, and
+`inc dword ptr ds:addr` at 6 instead of 13. A `*(volatile unsigned short*)(slot + 0x50)` read after the
+gm_GetEntityTableEntry call stops the reload folding back into the counter register, reproducing the
+reference's `mov dx,[ebp+0x50]` and ending the counter's live range so the allocator no longer needs a
+callee-saved register for it, worth +2 match at identical size. The three localized deltas remain: the
+0x773d70 decrement does not fold (+5, a cast cannot fold), the father and mother reload at 0x9b1 (+4) and
+the missing `mov word [slot],0xffff` (-6). Rejected: an extern int for 0x773d70 instead (the decrement
+folds but the increment's codegen and allocation change, object 3864, match 517 to 521); extern
+relationship matrices (idx moves to ESI and only `sub esp,0x42c` differs, object 3869, match 544, but it
+breaks the frame and size); a volatile store for the 0xffff sentinel (object 3778, match 484); and
+dropping the unused `int delta` (frame unchanged). A managed row was created for 0x773d6c as
+`gm_CurrentHumanFamilyCount`, object, int, size 4, .data, with the folding evidence in its note; the two
+dir32 operands are now bound rather than unresolved, so relocations fell from 53 to 51 and match reads
+809 rather than 814 because the operands are compared instead of tolerantly masked.

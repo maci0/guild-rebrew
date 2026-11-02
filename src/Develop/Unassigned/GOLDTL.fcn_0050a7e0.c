@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 extern int rand(void);
+extern int gm_CurrentHumanFamilyCount;
 
 unsigned short __cdecl gm_RandomMod(int n);
 double __cdecl gm_RandomFloat01(void);
@@ -275,14 +276,14 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         if (type == 6 || type == 7 || type == 5) {
             int count;
 
-            count = *(int*) 0x773d6c;
+            count = gm_CurrentHumanFamilyCount;
             if (count >= 0x10)
                 return -1;
             W(slot, 0x50) = (unsigned short) (count | 0x8000);
             p = (char*) gm_GetEntityTableEntry(slot);
             if (p != 0) {
                 D(p, 0x88) = 0xbf800000;
-                W(p, 0) = W(slot, 0x50);
+                W(p, 0) = *(volatile unsigned short*) (slot + 0x50);
             }
             if (type == 7 || type == 5) {
                 int id;
@@ -300,7 +301,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
                     }
                 }
             }
-            (*(int*) 0x773d6c)++;
+            gm_CurrentHumanFamilyCount++;
         } else if (type < 0xa) {
             W(slot, 0x50) = (unsigned short) *(int*) 0x773d68;
             (*(int*) 0x773d68)++;

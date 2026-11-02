@@ -27481,3 +27481,13 @@ section = ".rdata"
 updated_by = "data"
 updated_at = "2026-11-02T15:53:33+00:00"
 note = "Compiler double literal 1.0/255.0 (0x3f70101010101010), not a named C global. Native fmul operand at 0x5b9624+2 reads these 8 bytes; no data verdict or independent storage owner claimed."
+
+["GOLDTL.0x00773d6c"]
+storage_kind = "object"
+type = "int"
+name = "gm_CurrentHumanFamilyCount"
+size = 4
+section = ".data"
+note = "Family count. The reference folds both the load and the increment into dir32 forms (mov eax,ds:0x773d6c at 0x50b4xx and inc dword ptr ds:0x773d6c at 0x50b50a), which an absolute-address cast cannot produce, so the source uses this extern. Managed row created to mask the two dir32 operands; the increment's high-byte or ah,0x80 sets the 0x8000 bit of the count."
+updated_by = "data"
+updated_at = "2026-11-02T16:37:50+00:00"

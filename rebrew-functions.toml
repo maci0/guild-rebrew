@@ -475969,14 +475969,14 @@ file = "src/Develop/Unassigned/GOLDTL.fcn_0050a7e0.c"
 symbol = "_fcn_0050a7e0"
 name = "fcn_0050a7e0"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:34:39+00:00"
-status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-11-02T16:37:37+00:00"
+status = "STUB"
 blocker = "Partial reconstruction kept (no STUB): SIZE_MISMATCH 4/3872, obj 107. Recovered: the two 0x7f4ca0/0x7f4ca2 type-table scans (540-byte stride, 0x300 bound, word 0xffff / byte 0x0f sentinels) and the 0x773d70 decrement on a 0x0f hit. Remaining: the action-table dispatch after 0x50a851 (0x64d41a/0x4eef70/0x42e410/0x42e450/0x4fdec0/0x42e470/0x64d228 calls and the 0x773d70/0x773d74 handlers), i.e. nearly the whole 3872-byte body."
 blocker_delta = 3868
 
 ["GOLDTL.0x0050a7e0".verification]
-source_hash = "d24a213a577a9bb3c64051b4249348b6d67be90c36cf95c2216a10f9b58004f9"
+source_hash = "4f4dde19ec11f0b6bb81398af5f76364ca8048e17e885ebbeb272fc8282d8709"
 reference_hash = "eb5f5d927dfb20803364fe0ad3cd6eee86ea6eee8d269c358a906ee7367a74d3"
 reference_size = "3872"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -475987,15 +475987,21 @@ module = "GOLDTL"
 va = "0x50a7e0"
 context_hash = ""
 defines = "[]"
-input_hash = "0900d68d8239e2f9002bb82cdf3a9e92b3b5976800a0ec0fd213395efdd9ecf7"
-status = "SIZE_MISMATCH"
+input_hash = "f10f837afc893be9d5cc0d2428e6085773edb7139c504bf58d341d96bf10006f"
+status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T16:27:28+00:00"
+measured_at = "2026-11-02T16:37:37+00:00"
 
 [["GOLDTL.0x0050a7e0".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-24T08:42:28.942273+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0050a7e0".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "STUB"
+changed_at = "2026-11-02T16:37:37.513479+00:00"
 updated_by = "test"
 ["GOLDTL.0x00614ede"]
 size = 3892
