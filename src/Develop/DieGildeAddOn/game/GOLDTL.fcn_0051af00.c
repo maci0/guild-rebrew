@@ -201,7 +201,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + e;
 				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
-				memcpy(cp_dst, cp_src, cp_n);
+				memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 				break;
 			}
 			e = i - k - 1;
@@ -274,7 +274,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + e;
 			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
-			memcpy(cp_dst, cp_src, cp_n);
+			memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			grammar_state = 0;
 			flag = 0;
 			break;
@@ -322,19 +322,21 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					flag = 1;
 				}
 				sprintf(text.tmp, num, j);
+				e = (int) strlen(text.tmp) + (int) strlen(text.tmp) / 3;
 				k = (int) strlen(text.tmp);
-				e = k + k / 3;
 				res = -1;
+				p = num + e;
 				while (k >= 0) {
-					num[e] = text.tmp[k];
-					e--;
+					*p = text.tmp[k];
+					p--;
 					if (k != 0 && res > 0 && (res + 1) % 3 == 0) {
-						num[e] = '.';
-						e--;
+						*p = '.';
+						p--;
 					}
 					res++;
 					k--;
 				}
+				num[e] = 0;
 				cp_src = num;
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 2;
@@ -351,19 +353,21 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				} else {
 					sprintf(num, g_67d444, j);
 				}
+				e = (int) strlen(num) + ((int) strlen(num) - 1) / 3;
 				k = (int) strlen(num);
-				e = k + (k - 1) / 3;
 				res = -1;
+				p = text.tmp + e;
 				while (k >= 0) {
-					text.tmp[e] = num[k];
-					e--;
+					*p = num[k];
+					p--;
 					if (k != 0 && res > 0 && (res + 1) % 3 == 0) {
-						text.tmp[e] = '.';
-						e--;
+						*p = '.';
+						p--;
 					}
 					res++;
 					k--;
 				}
+				text.tmp[e] = 0;
 				if (j >= 0) {
 					strcpy(slot298, text.tmp);
 				} else {
@@ -401,7 +405,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 1;
 			fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) - i + 1);
-			memcpy(cp_dst, cp_src, cp_n);
+			memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			break;
 		case 'f':
 			j = text.buf[i + 1] - '0';
@@ -431,7 +435,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 4;
 				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 1 - i);
-				memcpy(cp_dst, cp_src, cp_n);
+				memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			} else {
 				fcn_00657a73(j, fmt_scratch + 0x18, 10);
 				strcpy(num, "%.");
@@ -595,7 +599,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + e;
 				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
-				memcpy(cp_dst, cp_src, cp_n);
+				memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 				break;
 			}
 			e = i - k - 1;
@@ -656,7 +660,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + e;
 			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
-			memcpy(cp_dst, cp_src, cp_n);
+			memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			grammar_state = 0;
 			break;
 		case 'r':

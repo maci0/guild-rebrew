@@ -16231,3 +16231,18 @@ word at 0xb0 and pushes every aggregate +4. Remaining: the late/folter section s
 interleaves the folterFile/folterName literal-pool copies, ours runs them in source order) and
 one missing slot 0xce, where native reads `dword [esp+0xd6] & 0xff` (tbl+0x1e) for the
 _PROZESS_GESETZ fcn_004e4b20 call while our source's cbe has no assignment.
+
+## 2026-11-02 — formatter reaches one byte of native size
+
+`0x51AF00` 761 to 860 with the object at 6463 against native 6464, one byte short, with the
+merged tails held (6 rep-movsd against native 9, 12 rep movs against 18) and no frame change.
+The gains are pure strlen rebalancing, which changes bytes without changing semantics: case I's
+both branches compute three strlens (`e = strlen + strlen/3; k = strlen`) and keep e live
+through the regroup loop with a trailing `dest[e] = 0`, which the object does not show but which
+keeps e alive (removing it loses 8 bytes and 21 match); and the `memcpy(cp_dst, cp_src, cp_n)`
+sites for w, both G sites, the first f site and both Ss sites take a fresh
+`(int) strlen(cp_src)` as the copy length. Rejected after measurement: a fresh strlen at the
+second f site, case D with a fresh strlen (match 932 but the D extent moved the wrong way), and
+removing the I terminators. Case extents now read I -20/-3, f +19/+11, G -55/-22, Ss -22/-2,
+w -50/-15, D -11/-1; the remaining large gaps are percent -62, B -53, the ampersand group -40,
+a +37, and F +61, the last being a layout artifact where our F target points at shared code.
