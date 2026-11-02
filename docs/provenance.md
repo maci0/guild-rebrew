@@ -18233,3 +18233,21 @@ and the 0x2ee00, 0xfa00, 0x4e200, 0x1f400, 0x9c400 and 0x3e800 clamps, the 0x540
 fcn_004c2d90. Two callee signatures need review before those calls bind: GOLDTL.fcn_0052a890.c declares
 `void fcn_0052a890(int)` while this body passes a pointer, and fcn_0052a310's project source is an
 int-pointer wrapper while this body passes &pos.
+
+## 2026-11-03 — trade name dialog counters decoded and blocked
+
+`0x5B7880` keeps 300 at object 4019 with the prefix at 0x4b; the counter pass produced no keeper and the
+source is back at the base. The listing decodes the counter roles with no conflicts through the CFG frame
+map: the row-fill loop index i lives in EBX, and `cmp ebx,edx` at 0x5b7aa5 is the `sum <= i` test, with cnt
+in memory at +0x08, pg at +0x04 and pIt at +0x00, and the byte-sum scratch in ECX precisely because EBX
+holds i, whose last iteration is `mov [esp+0x20],ebx` storing `f.cnt = i`; the rows-init `obj=0, icon=-1`
+is a twelve-countdown in ECX using the already live EBX=0 and EBP=-1, so its counter is not i; and the
+four-slot button loop counter is ESI in native, passing i+1. The -1 colour is a consequence rather than a
+cause: EDI stays free because f.win is never promoted, and our object touches frame+0x10 eighteen times
+against native's seven. Rejected: rows-init on y or n (objects 4016, match 284 or 282, prefix still 0x4b
+or 0x4a), because any genuinely zero-initialised fill index makes MSVC reserve EBX for i and evict the
+nSlots zero to EBP with `xor ebp,ebp` at 0x49, breaking byte 0x4a, while native shares EBX between the zero
+and i; keeping i=4 entering the fill loop preserves 0x4b at 4016 and match 284 but is semantically wrong.
+The split frame (0x3c scalar header plus data block with offsets preserved) gives object 3908 and match
+229 with ent in EDI and -1 in EAX, the same split already measured, so merged matches native's ent (EAX,
+spilled) while split matches native's win (EDI) and neither gives both. A blocker is recorded on the row.
