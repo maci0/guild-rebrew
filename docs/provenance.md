@@ -19732,3 +19732,28 @@ at 0x43db6a with five 0x90 bytes from 0x43db6b to 0x43db6f before the next row a
 frame differs the prologue mismatches at offset 5 with t in ebx against native's esi; fcn_0064d3f8 has no project
 source definition and resolves through link_scaffold.c.obj at 0x005f6630; and g_662a18 has no project data row.
 Also added `#pragma optimize("y", off)` for the frame pointer and bound the RNG to fcn_0064d3f8 at sixteen sites.
+
+## 2026-11-03 — crew dialog failure split matches the reference
+
+`0x5744C0` 512 to 1250 with object 3980 against native 4001, 52 relocations, first mismatch still at 0x27 and
+lint clean, and the object now carries the reference's seven call sites in the same roles. Two structural details
+produced it. Case 2's null path is `if (v8) { continuation } else { LfailB: call; return; }`, case 5's null path
+is `if (v15) { stores } else { call; return; }`, case 5's ==2 path is `goto LfailB;`, and the successes of cases 2,
+3 and 5 are duplicated inline statements rather than a goto to a shared label. The failure blocks then land as
+the reference has them: A at 0x140 for the case-3 ==2 fallthrough with case 5's null path doing a six-byte
+`je 0x13f` back into it and `push esi` hoisted, B at 0x1dc for the case-5 ==2 fallthrough with case 2's null path
+doing a six-byte `je 0x1da` into it, and the shared success at 0x225 as
+`mov ecx,[esi+0x70]; inc ecx; push ecx; call` reached by case 2's two jumps at 0xde and 0xf9, case 3's jne and
+case 5's fallthrough with `push esi` hoisted, followed by the case-6 site at 0x295 merged with case 7's first
+failure and then 0x493 and 0x662. The mechanism is that without failure labels the compiler anchors each null
+failure as a jne fallthrough and never merges, which gave 4032 with nine sites; one label on case 2's else block
+makes case 2's null path a je target so it merges into case 5's ==2 fallthrough as B, and case 5's null else as a
+je target merges into case 3's A, while the earlier goto-based success had made case 5's null path the jne
+fallthrough and blocked the A merge. Arm offsets now match the reference for cases 2, 3, 4, 5 and 6, with case 7
+one short, case 8 three over, case 9 seven short, cases 0 and 1 two over and the jump table at 0xf64 against
+0xf60. The v29 and v30 slot swap remains unreachable on this structure: declaration permutations of v15, v21, v29
+and v30, a v29 and v21 swap, prologue and case-7 init order, renaming including swapped names, and a v30
+declarator initialiser are all byte-identical with v30 at 0x18 and v29 at 0x1c. Treating
+`*(unsigned int*)(v27+0x243)` and `(unsigned)v11` as unsigned emits `div` and puts case 7 at 0x35d exactly, but
+the `xor edx` schedule shifts and match drops to 1160, so the signed idiv form was kept. Current source
+.scratch/row5744c0/kept_split7_1793655670.c with FINDINGS.md round 3.

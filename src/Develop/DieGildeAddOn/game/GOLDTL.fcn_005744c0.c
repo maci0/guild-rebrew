@@ -89,21 +89,25 @@ void __cdecl fcn_005744c0(int a0)
 		}
 		if (*(int*) (v5 + 0xac) != *(int*) (*(int*) 0x773da8 + 4)) {
 			v8 = fcn_00508e40(*(int*) (v5 + 0xac));
-			if (!v8) {
+			if (v8) {
+				*(int*) (v5 + 0xcc) = fcn_004c5150(-1, *(int*) (v5 + 0xac),
+					(v8 & 0xffffff00) | *(unsigned char*) 0x773d75, *(int*) (v5 + 0xb4));
+				v8 = fcn_00509570(v8);
+				if (v8) {
+					*(int*) (v8 + 0x54) = *(int*) (v8 + 0x54) + *(int*) (v5 + 0xb4);
+				}
+			}
+			else {
+LfailB:
 				*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
 				return;
-			}
-			*(int*) (v5 + 0xcc) = fcn_004c5150(-1, *(int*) (v5 + 0xac),
-				(v8 & 0xffffff00) | *(unsigned char*) 0x773d75, *(int*) (v5 + 0xb4));
-			v8 = fcn_00509570(v8);
-			if (v8) {
-				*(int*) (v8 + 0x54) = *(int*) (v8 + 0x54) + *(int*) (v5 + 0xb4);
 			}
 		}
 		else {
 			*(int*) (v5 + 0xcc) = fcn_0050f910(*(int*) (v5 + 0xb4));
 		}
-		goto Lsucc;
+		*(int*) (v5 + 0x84) = fcn_004c5620(*(int*) (v5 + 0x70) + 1, (void*) v5);
+		return;
 
 	case 3:
 		*(int*) (v5 + 0x84) = -1;
@@ -117,7 +121,6 @@ void __cdecl fcn_005744c0(int a0)
 			*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
 			return;
 		}
-Lsucc:
 		*(int*) (v5 + 0x84) = fcn_004c5620(*(int*) (v5 + 0x70) + 1, (void*) v5);
 		return;
 
@@ -140,17 +143,19 @@ Lsucc:
 			break;
 		}
 		if (fcn_004c4450(*(int*) (v5 + 0xcc)) == 2) {
-			*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
-			return;
+			goto LfailB;
 		}
 		v15 = (unsigned char*) fcn_004c4480(*(int*) (v5 + 0xcc));
-		if (!v15) {
+		if (v15) {
+			*(int*) (v5 + 0xb8) = *(int*) (v15 + 1);
+			*(int*) (v5 + 0x10) = *(int*) (v15 + 1);
+		}
+		else {
 			*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
 			return;
 		}
-		*(int*) (v5 + 0xb8) = *(int*) (v15 + 1);
-		*(int*) (v5 + 0x10) = *(int*) (v15 + 1);
-		goto Lsucc;
+		*(int*) (v5 + 0x84) = fcn_004c5620(*(int*) (v5 + 0x70) + 1, (void*) v5);
+		return;
 
 	case 6:
 		*(int*) (v5 + 0x84) = -1;
