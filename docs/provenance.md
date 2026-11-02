@@ -17742,3 +17742,32 @@ set compiles to 0x150 with a0 in esi, and the prefix is decided by the whole loc
 than prologue text. One dead store also differs: native stores the 0x4356c0 result to [esp+0x68] where
 /O2 removes it from plain C, so it needs a source variable whose address escapes. The 1936-byte tlead
 pad is still in the file and untouched.
+
+## 2026-11-02 — alloc spieler body transcribed from its server twin
+
+`0x50A7E0` goes from 4 matching bytes (0.1 percent) to 741 (19.1 percent) with the object at 3854
+against native 3872, the frame at 0x428 with four pushes and the first mismatch at offset 8. The row
+is the GOLDTL twin of gm_AllocSpieler, whose server build is byte-exact in
+src/Develop/DieGildeAddOn/game/spiel.c (SERVER.0x10018850, 3689 bytes), so that body was used as
+scaffolding and adapted to the TL native. TL differences applied: no LogMessageInternal calls
+anywhere, with the overflow path returning 0xffff and both work[] tails being sprintf only; the tail
+is `sprintf(work, "----->PlayerID= %i PlayerName= %s", g_next_object_id, slot+0x30); return idx;`;
+strcpy compiles to the inline byte loop; the 14-iteration parent trait interpolation is
+`1.0*father + (rnd-1.0)*mother` (the reference loads the qword 1.0 at 0x6629c8 and does fsub st(1)),
+where the server uses `(1.0-rnd)*father + rnd*mother`; TL adds
+`if (*(int*)0x774800) { slot[0x194]=10; slot[0x190]=10; }`; the type-table stride is 588 (0x24c)
+against the server's 0x24d; TL calls fcn_004fdfe0(slot) before the 0x1b4 clear and
+ahm_ResetEntityState; the no-parent parent-hook loop only checks ref == -1; and TL's 0x10 block also
+stores slot[0x54]=0x59a. Transcribed: prologue, both slot scans, record init and zeroing with the id
+and sprintf("SpID"), the type==0x10 randomised-entity block with its early returns, the 0x15/0x16
+dynasty path, the location type-table lookup, stat and class fields, both the two-parent merge path
+(4-way parent copy, 14 floats, best indices, 5-trait pick, parent hooks, counters, matrix init, mutual
+stores, name inheritance) and the no-parent generated-traits path (direction pick, trait-range
+interpolation, 0x300x0x300 matrices, stat modifiers, family counter, floats, name strncpy), then the
+shared age-decay tail, fcn_004fdfe0 and the 0x1b4 clear, ahm_ResetEntityState, the +0x2a stat bump,
+the PlayerID sprintf and the return. The remaining gap is local slot allocation: MSVC puts idx at
+L+0x18 and the loop counter in ebx where the reference has idx at L+0x28 and the counter in esi,
+which shifts every esp displacement and the prologue scheduling (reference pushes ebx/ebp/esi, then
+`xor esi,esi`, then push edi; ours pushes ebx/ebp, then `xor ebx,ebx`, then push esi/edi). The ten
+spill words at 0x10..0x34 plus work[0x400] at 0x38 otherwise match, and declaration reordering of idx
+does not move it.
