@@ -534,6 +534,21 @@ next_request:
 			*(int*) (o + 0x1b8) = price;
 			v.s1.ids[j] = 0;
 			v.s1.vals[4 + j] = 0;
+			tmp = fcn_0050dfd0(bld, id);
+			if (v.s2.vals[i] < tmp) {
+				tmp = v.s2.vals[i];
+			}
+			sprintf(v.line, (char*) 0x67e358,
+			    *(int*) (bld + 2), *(int*) (q + 2), id, tmp,
+			    g_773d75, 0);
+			fcn_004c51f0(*(int*) (bld + 2), *(int*) (q + 2), id,
+			    tmp, g_773d75, 0);
+			v.s2.vals[i] -= tmp;
+			if (v.s2.vals[i] == 0) {
+				v.s2.ids[i] = 0;
+			}
+			v.s1.ids[j] = id;
+			v.s1.vals[4 + j] += tmp;
 			break;
 		}
 no_market:
@@ -559,9 +574,9 @@ next_auto:
 		;
 	}
 
-	/* 0x0aa0-0x0bf0: route the cart amounts into the request */
-	for (i = 0; i < v.s2.cap && cnt < 3; i++) {
-		id = v.s2.ids[i];
+	/* 0x0aa0-0x0bf0: route the own stock into the request */
+	for (i = 0; i < v.s1.cap && cnt < 3; i++) {
+		id = v.s1.ids[i];
 		if (id == 0) {
 			continue;
 		}
@@ -586,11 +601,11 @@ next_auto:
 			continue;
 		}
 		tmp = fcn_0050dfd0(q, id);
-		for (j = 0; j < v.s3.cap; j++) {
-			if (v.s3.ids[j] != 0 && v.s3.ids[j] != id) {
+		for (j = 0; j < v.s2.cap; j++) {
+			if (v.s2.ids[j] != 0 && v.s2.ids[j] != id) {
 				continue;
 			}
-			tmp = v.s2.vals[i] < tmp ? v.s2.vals[i] : tmp;
+			tmp = v.s1.vals[i] < tmp ? v.s1.vals[i] : tmp;
 			if (tmp == 0) {
 				break;
 			}
@@ -601,17 +616,17 @@ next_auto:
 			v.m.ids[cnt] = id;
 			v.m.slots[cnt] = *(int*) (g_773d78 + 1);
 			cnt++;
-			v.s2.vals[i] -= tmp;
-			v.s3.ids[j] = id;
-			if (v.s2.vals[i] == 0) {
+			v.s1.vals[i] -= tmp;
+			v.s2.ids[j] = id;
+			if (v.s1.vals[i] == 0) {
 				break;
 			}
 		}
-		if (v.s2.vals[i] != 0) {
+		if (v.s1.vals[i] != 0) {
 			continue;
 		}
 		fcn_004c52d0(*(int*) (bld + 2), id);
-		v.s2.ids[i] = 0;
+		v.s1.ids[i] = 0;
 	}
 
 	/* 0x0bf0-0x0d30: route the cart ids reserved for the request */
@@ -663,8 +678,8 @@ next_auto:
 			if (t->qty44 == 0) {
 				continue;
 			}
-			for (j = 0; j < v.s3.cap; j++) {
-				if (v.s3.ids[j] != 0 && v.s3.ids[j] != t->id) {
+			for (j = 0; j < v.s2.cap; j++) {
+				if (v.s2.ids[j] != 0 && v.s2.ids[j] != t->id) {
 					continue;
 				}
 				tmp = t->qty44 < tmp ? t->qty44 : tmp;
@@ -680,7 +695,7 @@ next_auto:
 				v.m.slots[cnt] = *(int*) (g_773d78 + 1);
 				cnt++;
 				t->qty44 -= tmp;
-				v.s3.ids[j] = t->id;
+				v.s2.ids[j] = t->id;
 				if (t->qty44 == 0) {
 					break;
 				}
@@ -714,9 +729,9 @@ next_auto:
 			if (pr->qty18 == 0) {
 				continue;
 			}
-			for (j = 0; j < v.s3.cap; j++) {
-				if (v.s3.ids[j] != 0 &&
-				    v.s3.ids[j] != pr->id) {
+			for (j = 0; j < v.s2.cap; j++) {
+				if (v.s2.ids[j] != 0 &&
+				    v.s2.ids[j] != pr->id) {
 					continue;
 				}
 				tmp = pr->qty18 < tmp ? pr->qty18 : tmp;
@@ -733,7 +748,7 @@ next_auto:
 				v.m.slots[cnt] = *(int*) (g_773d78 + 1);
 				cnt++;
 				pr->qty18 -= tmp;
-				v.s3.ids[j] = pr->id;
+				v.s2.ids[j] = pr->id;
 				if (pr->qty18 == 0) {
 					break;
 				}

@@ -16611,3 +16611,19 @@ because VC6 shares volatile slots across disjoint lifetimes. Next path: native's
 holds small int arrays around 0x54, 0x64, 0x74, 0x84, 0x98, 0xb0, 0xcc and 0xf4, so the source's
 `((int*)&sXX)[i]` casts are probably real array declarations, which would fill the scalar region
 with the arrays themselves instead of escaped scalars.
+
+## 2026-11-02 — trade AI structure corrected over its positional score
+
+`0x489A70` keeps the structurally native version at 489 match and 6180 bytes, against 627 match and
+5923 bytes for the previous state, and the reason is worth recording: the structure is now correct
+while the earlier score was not. Call counts are 95/95 with dfd0 9, 51f0 10 and sprintf 21, so all
+three previously missing calls are present; the first route loop walks s1 into s2, the town and
+prod loops target s2, and the missing route body inside the unload-cart fake-sale branch (native
+0xbeb..0xc94) is in place with the dfd0/sprintf/51f0 sequence, the cart quantity subtraction and
+the s1 slot updates. The first divergence moved from byte 0x32 to 0x6e. The parent's earlier
+causal model was wrong: (a) and (b) alone do not add the three calls (92 calls, metric
+byte-identical), so the missing triple was a separate native route body, and removing the added
+body to recover match would be a regression in structure. Reverted: the loop2 exclusion scans
+(0x104b block, +133 bytes) and using v.s1.vals[j] instead of [4+j] (379). Remaining: about +125
+bytes of reload drift spread over the body plus the documented producer-loop register colouring
+(i/qty28/induction as esi/ebx/edi against native ebx/edi/esi).
