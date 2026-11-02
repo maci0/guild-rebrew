@@ -16644,3 +16644,39 @@ offset 29), if/else and negated/ternary side variants, and while-condition rewri
 permutation is not steerable: mode sits at [esp+0x18] against native [esp+0x1c] and the second
 store at [esp+0x24] against 0x14, and hiding or dropping the `*(int*)&mode = sum;` address-taking
 produced byte-identical output, so the first mismatch stays at 24.
+
+## 2026-11-02 — ai_MeisterTrade reload drift removed
+
+`0x489A70` 489 to 541 match with the object at 6058 against native 6055, from 6180. Three edits.
+`x` and `found` lost their `volatile` qualifier: native keeps `x` in eax through the unload-cart
+probe and stores `found` once for a single reload at the tail (0x1751), so the qualifiers were
+forcing per-use reloads the reference never performs (measured: removing `found` alone took the
+object from 6153 to 6076, and `x` from 6180 to 6153 before that). The unload-cart probe loop was
+also wrong: it re-tested a pointer it never advanced, so it could only exit through a null
+`he_fn_Handlung`; native loads the next entity into the same register and loops on the compare
+(0x6ca..0x6e2). Rewritten as `while (x != 0) { if (eq) goto tail; x = he_fn_Handlung(); }`, which
+reproduces that back edge. Call count stays 95 with dfd0 9, 51f0 10 and sprintf 21, and the first
+divergence stays at byte 0x6e. Reverted: `volatile` on `n` (6018, match 469), on `id` (5833,
+match 457), on `g_6628a0` (6054, match 466; native does re-read it at 0x1c9/0x1ef), and removing
+`volatile o` (divergence falls to 0x32, match 421). `o`, `id`, `n` and `0x6628a0` keep their
+qualifiers. The loop2 exclusion scans (native 0x104b) remain absent; the missing bytes are offset
+by residual reload drift elsewhere, so the size agrees while that block is still unwritten.
+Evidence: `.scratch/gold-p/489a70/` (`measure.py`, `drift.py`, `oreloads.py`, `k_6058_541.c`).
+
+## 2026-11-02 — trade AI reaches three bytes of native size
+
+`0x489A70` 489 to 541 with the object at 6058, three bytes over native 6055, call counts 95/95 and
+the first text divergence at byte 0x6e (byte 0x71 differs only in register choice, edx against
+eax). Three edits, all in reload territory. `char* volatile x` became `char* x` because native
+keeps x in eax across the unload-cart probe and the qualifier forced spills at 0x6f7, 0x711 and
+0x722. The unload-cart probe loop was genuinely wrong: it re-tested a pointer it never advanced,
+so only a null he_fn_Handlung could exit; native loads the next entity and loops on the compare
+(0x6db call, 0x6e0 test, 0x6e2 jne 0x6ca), and the rewritten
+`while (x != 0) { if (*(int*)(x+0xac) == *(int*)(r+2)) goto tail; x = he_fn_Handlung(); }` matches
+instruction for instruction. `int volatile found` became plain `int found` because native keeps it
+in esi and reloads once at the tail (0x1751), so the qualifier cost 77 bytes of reloads native
+never performs. The volatile set is now o, id, n and g_6628a0, each removal measured worse
+(volatile n 6018/469, volatile id 5833/457, volatile g_6628a0 6054/466, no volatile o 6143/421
+with divergence back at 0x32; native does re-read g_6628a0 at 0x1c9/0x1ef). Recorded nuance: the
+size now agrees while native's 0x104b loop2 exclusion scans are still absent, so the compensating
+excess is spread reload drift rather than a block, and adding 0x104b now would overshoot.
