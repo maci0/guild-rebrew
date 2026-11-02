@@ -15805,3 +15805,18 @@ size change reshuffles the whole compared tail; the change is kept deliberately 
 fidelity step and the row is judged by drift windows and object size until the body
 reaches 11948. Remaining windows: 456 at 0x5bcb04, 379/353 near 0x5bd630, 202 at
 0x5bbc64, 186/179 near 0x5bc870, 152 at 0x5bac3b, 101 at 0x5bb604.
+
+## 2026-11-02 — transport panel context regions
+
+`0x4DA690` 428 to 743 with the object at 6189 against native 7057. Three regions
+transcribed in native order: the epilogue (a0[3] table compare, fcn_004ea350, two
+fcn_004e4b00 calls, free, fcn_004e4eb0, the 0x114 memcpy back to a0, fcn_0057e880),
+the scene-row region (s00 walking mid+0x3c by 0x18, fcn_004ea2b0, the entity count and
+widget handles, gm_LookupEntityRecordById, the two placement loops, fcn_004e4b40 and the
+io_AppendText prints, fcn_004e51d0, the 0x9b0eb4 packet scan with its three type cases
+and fcn_004e6cb0 picks), and the third-region head (row type-3 count, the second copy of
+the 0x4dac46 packet block, the role filter with byte +0x1b1, the 0x7f4ca0 scan, the
+s20==1 message pump and the loop-tail block). All 43 callees resolve to project
+definitions. Missing: the s20==0 and default packet cases plus the merge walks in
+0x4db774..0x4dc146, about 868 bytes. The frame stays 0x900 with the prefix equal to
+0x9b; the six order stores keep the disp8-versus-disp32 difference, a known layout wall.
