@@ -648,15 +648,20 @@ l_next:
 		e->f18 = fcn_0046f740(0x18, f.v1c, 0x5e8, *(int*) 0x772514);
 		e->f1c = fcn_0046f740(0xac, f.v1c, 0x5eb, *(int*) 0x772514);
 		f.v1c = e->f0c;
-		*(int*) (*(int*) 0x1015ea0 + e->f18 * 0x2f4 + 0x5c) = 1;
-		*(int*) (*(int*) 0x1015ea0 + e->f18 * 0x2f4 + 0x1d0) = 0x43;
-		*(char*) (*(int*) 0x1015ea0 + e->f18 * 0x2f4 + 0xcc) = *(char*) 0x6b5c60;
-		*(int*) (*(int*) 0x1015ea0 + e->f1c * 0x2f4 + 0x5c) = 1;
-		*(int*) (*(int*) 0x1015ea0 + e->f1c * 0x2f4 + 0x1d0) = 0x43;
 		{
-			char* src = *(char**) 0x14b5e84;
-			char* dst = (char*) (*(int*) 0x1015ea0 + e->f1c * 0x2f4 + 0xcc);
+			int k;
+			char* src;
+			char* dst;
 
+			k = e->f18 * 0x2f4;
+			*(int*) (*(int*) 0x1015ea0 + k + 0x5c) = 1;
+			*(int*) (*(int*) 0x1015ea0 + k + 0x1d0) = 0x43;
+			*(char*) (*(int*) 0x1015ea0 + k + 0xcc) = *(char*) 0x6b5c60;
+			k = e->f1c * 0x2f4;
+			*(int*) (*(int*) 0x1015ea0 + k + 0x5c) = 1;
+			*(int*) (*(int*) 0x1015ea0 + k + 0x1d0) = 0x43;
+			src = *(char**) 0x14b5e84;
+			dst = (char*) (*(int*) 0x1015ea0 + k + 0xcc);
 			while ((*dst++ = *src++) != 0) {
 				;
 			}
@@ -1394,21 +1399,30 @@ l_5bcc9f:
 l_5bcd16:
 	/* 0x5bcd16: the selection flags of the panel row */
 	if (f.vB0 != -1) {
-		j = 0;
 		if (f.v48 != 0) {
-			j = (f.v38 == 0);
-		} else if (f.v38 != 0 && f.v68 == 0) {
-			j = (*(short*) (f.v14 + 0x27) == *(short*) 0x774970);
-		}
-		if (j != 0) {
-			*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x5c) = 1;
-			*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x60) = 0;
-			*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x1d0) = 3;
+			if (f.v38 != 0) {
+				goto l_5bcd7b;
+			}
 		} else {
-			*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x5c) = 0;
-			*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x60) = 1;
+			if (f.v38 == 0) {
+				goto l_5bcd7b;
+			}
+			if (f.v68 != 0) {
+				goto l_5bcd7b;
+			}
+			if (*(short*) (f.v14 + 0x27) != *(short*) 0x774970) {
+				goto l_5bcd7b;
+			}
 		}
+		*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x5c) = 1;
+		*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x60) = 0;
+		*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x1d0) = 3;
+		goto l_5bcd9a;
+	l_5bcd7b:
+		*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x5c) = 0;
+		*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x60) = 1;
 	}
+l_5bcd9a:
 
 	/* 0x5bcd9a: the dialog status of the current trade row */
 	if (*(int*) 0x100f1dc != 2) {

@@ -15856,3 +15856,16 @@ body; and the tail assigns `p = (int*) p[0x1c]` so the base stays in a register 
 reloading [esi+0x64] per store. The remaining 104 bytes are register homes only (the
 0x888 pair swap, the 0x320 base rotation, the deferred third constant, and the 0xec7
 hoist order).
+
+## 2026-11-02 — panel scale reuse and diamond removal
+
+`0x5BA910` object falls from 12329 to 12281 (match 767 to 761) under the fidelity-first
+rule, since the object is still over native and positional match is unstable at this
+size. Two edits: the slot store runs at native 0x5bb604 compute the 0x2f4 byte offset once
+per slot into a local and reuse it, matching native's single ecx scale at 0x5bb5a3 and
+0x5bb5e5 (-44 bytes, and the 101-byte insert at that site is gone); the 0x5bcd16 head
+replaces the sete/xor materialisation of `j` with branch-form gotos (A inline, B after it,
+`goto l_5bcd9a`), -4 bytes. Native's shape for the 0x5bbc64 guard is `if (j < f.v158)
+continue;` after the then-branch with the else-loop as fall-through; adding it grows the
+frame to 0x184c, so the spill-free source form is still open. Remaining windows: 474+138
+at 0x5bcb04, 379/353 at 0x5bd630, 202 at 0x5bbc64, 186/179 at 0x5bc870.
