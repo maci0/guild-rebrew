@@ -19776,3 +19776,28 @@ emits three rep-stos stages against our two. Both change register pressure in th
 and -0x5c slots, so the next lever is to reproduce the region-init and scan expression shapes, namely the memset
 length temporaries, the direct material-field stores and `off` held in a slot, rather than forcing the emission
 temporaries. Backups in .scratch/goldtl-0043c640/ with v4-hoist.c, v5-comma.c and v6-volatile.c.
+
+## 2026-11-03 — quest dialog low pool is claimed by address-taken-ness
+
+`0x512EE0` keeps its state at 393 with object 3448, three relocations, frame 0x404 and lint clean; the slot pass
+kept no edit. The mechanism is now known: the low pool slot is claimed by address-taken-ness, not by declaration
+or emission order, since declaration permutations of inner, total and i, renames and alternate initialiser orders
+are all byte-identical. Taking the address of the value that must live at 0x14 moves the prologue store there,
+which matches native: its only scalar lea site is 0x13375 for `&[esp+0x14]`, and native slot 0x14 is both the
+found counter and the 0x65 and 0x69 count, because native stores the fcn_0050cf50 result straight to 0x14 at
+0x13367, so native merges count into the found counter and keeps no separate count variable. Measurements, all at
+frame 0x404 unless noted: making both address-taken sites `&total` puts the store at 0x14 with i at 0x10, gives
+total 0x14, kinds 0x18 and prefix 0x2, but its semantics are wrong at 0x65 because total does not yet hold the
+fcn_0050cf50 result; splitting the sites, first `&count` then `&total`, keeps frame 0x404 and kinds 0x1c with i at
+0x10, total at 0x14 and count at 0x18, and raises the prefix to 0xe9 with match 405 at object 3469, but native's
+two amp leas at 0x13375 and 0x13389 both resolve to slot 0x14, so that split cannot be the original shape and is
+not promoted; and the correctly merged forms, whether by renaming count to total or merging it, are semantically
+right but drop i from the low pool with frame 0x400, kinds 0x18 and prefix 0x2. A third artificial address-taken
+scalar restores frame 0x404 but still leaves kinds at 0x18, so the third low slot appears only when the third
+scalar is itself address-taken, which native's lea inventory rules out. The conclusion is that i at 0x10 and total
+at 0x14 are reachable by making total address-taken, while the third slot, inner at 0x18 in native, is a plain
+register spill, and our merged-correct shape does not spill inner because our do-while register pressure is lower
+than native's. The next probe is to force inner's spill inside the do-while, or find the source form where the
+merged total keeps i in the pool, since the correct merged variants currently collapse to two slots at frame
+0x400. Tool added: .scratch/512ee0/probe3.py reporting frame, prologue store slot, kinds start, amp slot and
+prefix, with backups L3.c and pre_m11_swap.c.
