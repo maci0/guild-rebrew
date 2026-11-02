@@ -16036,3 +16036,16 @@ it wholly in ebx). Verdict reads 631/7539. The f-case non-digit arm now stores -
 does at 0x51a2a2 rather than 2; it is byte-neutral until the frame lands. The earlier 659
 reading belonged to a different structure with code at 0x1cb0; the current code sits at
 0x1cb8 against native 0x1cac.
+
+## 2026-11-02 — transport pick block scope and per-arm calls
+
+`0x4DA690` 778 to 810 with the object falling 7498 to 7413 (356 over native), prefix 0x9b
+and frame 0x900 held. The pick block is wrapped in a nested block with fresh locals
+(excess +101 to +46), the second-pass scan gets an s78 shadow (+31 to +31 on that row after
+the shrink), fcn_004e6cb0(4) is nested inside the fcn_004e4b40 argument in each of the three
+arms so MSVC hoists the shared push 0x64/push 4 exactly like native (+33 to +8), the scene
+pass loses a spurious `s6C -= 1;` that native does not have (match 792 to 810), and the lane
+loop advances a record pointer by 0x38 per match as native does (+30 to +3). Correction to
+the previous pass's lead: the 0x4db17b call really carries five arguments; the evidence is
+the 0x64 push at 0x4db15c, fcn_004e6cb0 consuming only the 4 at 0x4db166 with add esp,4, and
+the add esp,0x18 at 0x4db18d accounting for 5*4 plus 4 for io_AppendText.

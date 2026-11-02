@@ -292,7 +292,6 @@ void __cdecl fcn_004da690(unsigned int *a0)
             s4C = 0;
             s50 = 0;
             if (fcn_004ea2b0(s40, (char *)(s00 - 4)) != 0) {
-                s6C -= 1;
                 i = 0;
                 k = 0;
                 while (i < s44) {
@@ -368,40 +367,39 @@ void __cdecl fcn_004da690(unsigned int *a0)
                             io_AppendText((char *)0x12c7, *(unsigned short *)s58);
                             fcn_004e4de0(0x3e8);
                             fcn_004727a0(s14, 0);
-                            s68 = (int)fcn_004e6cb0(4);
-                            s78 = *(int *)(s80 + 4);
-                            if (s78 == 0) {
-                                fcn_004e4b40(*(unsigned short *)s58, s40, 0x68c0e0, s68, 0x64);
+                            if (*(int *)(s80 + 4) == 0) {
+                                fcn_004e4b40(*(unsigned short *)s58, s40, 0x68c0e0,
+                                             (int)fcn_004e6cb0(4), 0x64);
                                 io_AppendText((char *)0x12c8);
-                                s78 = *(int *)(s80 + 4);
-                                if (s78 == 1) {
+                                if (*(int *)(s80 + 4) == 1) {
                                     s70 = (int)fcn_004e6cb0(2, *(unsigned short *)s18);
                                     io_AppendText((char *)(s70 + 0x12cb));
                                     fcn_004727a0(s18, 2);
                                     fcn_004da510(*(int *)0x772514, 0, 1);
-                                } else if (s78 == 2) {
+                                } else if (*(int *)(s80 + 4) == 2) {
                                     s70 = (int)fcn_004e6cb0(2, *(unsigned short *)s10);
                                     io_AppendText((char *)(s70 + 0x12cf));
                                     fcn_004727a0(s08, 2);
                                     fcn_004da510(*(int *)0x772514, 0, 1);
                                 }
-                            } else if (s78 == 1) {
-                                fcn_004e4b40(*(unsigned short *)s58, s40, 0x68c0d0, s68, 0x64);
+                            } else if (*(int *)(s80 + 4) == 1) {
+                                fcn_004e4b40(*(unsigned short *)s58, s40, 0x68c0d0,
+                                             (int)fcn_004e6cb0(4), 0x64);
                                 io_AppendText((char *)0x12ca);
-                                s78 = *(int *)(s80 + 4);
-                                if (s78 == 1) {
+                                if (*(int *)(s80 + 4) == 1) {
                                     s70 = (int)fcn_004e6cb0(2, *(unsigned short *)s18);
                                     io_AppendText((char *)(s70 + 0x12cd));
                                     fcn_004727a0(s28, 2);
                                     fcn_004da510(*(int *)0x772514, 1, 1);
-                                } else if (s78 == 2) {
+                                } else if (*(int *)(s80 + 4) == 2) {
                                     s70 = (int)fcn_004e6cb0(2, *(unsigned short *)s10);
                                     io_AppendText((char *)(s70 + 0x12d1));
                                     fcn_004727a0(s0C, 2);
                                     fcn_004da510(*(int *)0x772514, 1, 1);
                                 }
                             } else {
-                                fcn_004e4b40(*(unsigned short *)s58, s40, 0x68c0b8, s68, 0x64);
+                                fcn_004e4b40(*(unsigned short *)s58, s40, 0x68c0b8,
+                                             (int)fcn_004e6cb0(4), 0x64);
                                 io_AppendText((char *)0x12c9);
                                 fcn_004727a0(s50, 2);
                                 fcn_004da510(*(int *)0x772514, 1, 2);
@@ -478,24 +476,30 @@ void __cdecl fcn_004da690(unsigned int *a0)
                 s50 = fcn_00470820((char *)0x68c058, 0, 0);
                 fcn_00471d80(s50, 2);
                 fcn_004727a0(s50, 0);
+                {
+                int *lane;
+                int s80;
+                lane = (int *)((char *)&mid + 0x128);
                 i = 0;
                 s80 = 0x7f4ca0;
                 while (i < *(int *)(s14 + 4) && i < 4) {
                     if (*(unsigned char *)(s80 + 0x168) == *(unsigned char *)s00) {
                         *(int *)((char *)&s9C + i * 4) = s80;
                         fcn_004727a0(s14, i + 1);
-                        *(int *)((char *)&mid + 0x128) = s80;
-                        *(int *)((char *)&mid + 0x13c) = 0;
-                        *(int *)((char *)&mid + 0x154) = 0;
-                        *(int *)((char *)&mid + 0x158) = 0;
-                        fcn_005ca560((char *)&mid + 0x128);
+                        *lane = s80;
+                        lane[5] = 0;
+                        lane[11] = 0;
+                        lane[12] = 0;
+                        fcn_005ca560((char *)lane);
                         fcn_005ca740((0xa0 - *(short *)(*(int *)0x772500 + 0x1ebd8)) / 2,
                                      0, *(int *)0x772514, 0x54,
-                                     (int *)((char *)&mid + 0x128), 1);
+                                     lane, 1);
                         ((int *)&s98)[i] = *(int *)(s80 + 4);
                         i += 1;
+                        lane = (int *)((char *)lane + 0x38);
                     }
                     s80 += 0x21c;
+                }
                 }
                 if (i != 0) {
                     if (i < 4) {
@@ -626,6 +630,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
                             s60 += 0x38;
                         }
                     }
+                    {
+                    int s68, s6C, s70, s78;
                     /* native 0x4dbeab: pick the least-used variant */
                     s68 = -1;
                     s6C = -1;
@@ -690,6 +696,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                                 } while (fcn_004c4450(s78) == 0);
                             }
                         }
+                    }
                     }
                 }
             }
