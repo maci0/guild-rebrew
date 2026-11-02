@@ -140,17 +140,14 @@ void __cdecl fcn_00561380(void *a0)
 			*(void **)(pos + 2) = p;
 			pos[3] = 0.0f;
 			if (fcn_0055be70(pos) != 0) {
+				q = (unsigned char *)(p + 0x52);
 				*(int *)(p + 0xc8) = fcn_004f4f60(0x18, 1,
 					*(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4),
 					*(int *)((unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0) + 4),
 					*(int *)(p + 0xac));
-				q = (unsigned char *)(p + 0x52);
-				*(int *)(q + 0x1e) = 7;
 				*(int *)(q + 0x7a) = *(int *)(*(unsigned char **)(pos + 3) + 4);
-				*(int *)q = g_7f4c00;
-				*(int *)(q + 4) = g_7f4c04;
-				*(int *)(q + 8) = g_7f4c08;
-				*(unsigned short *)(q + 0xc) = g_7f4c0c;
+				*(int *)(q + 0x1e) = 7;
+				*(MSGCOLOR *)q = *(MSGCOLOR *)&g_7f4c00;
 				return;
 			}
 			fcn_004c5ed0(*(int *)(p + 0xc4), g_68bef4, 1);

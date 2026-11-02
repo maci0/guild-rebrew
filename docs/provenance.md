@@ -19932,3 +19932,27 @@ four-byte overage is the v16 disp32 for three bytes plus that lea and push sched
 type-and-size permutation sweep over v16, v17, v18, v20 and v22 to find the packing that lands v13 and v29 at
 0x18 with v30 at 0x1c, using .scratch/row5744c0/vsweep.py with its v1 to v7 result files, rather than shaping
 case 7 further.
+
+## 2026-11-03 — inventory switch cases reach native lengths
+
+`0x561380` 1244 to 2451 (68 percent) with object 3584 against native 3588, 110 relocations, frame `sub esp,0x5e4`
+and lint clean. Every case now matches its native length except case 6: 0xd8, 0x5a, 0x86, 0x121, 0xc5, 0xb4,
+0x41c, 0x47c and 0x29 for cases 0, 1, 2, 3, 7, 8, 4, 5 and -2/-1, with case 4 at native's 0x41c where the previous
+state had 0x418, and case 6 at 0x7c against 0x80. One case-3 edit produced the whole convergence: hoisting
+`q = (unsigned char*)(p + 0x52);` above the fcn_004f4f60 call, storing `q+0x7a` then `q+0x1e`, and then
+`*(MSGCOLOR*)q = *(MSGCOLOR*)&g_7f4c00;`. Because q stays live across that call it takes edi, which frees eax so
+the four colour loads use native's moffs forms (`a1`, `8b 0d`, `8b 15`, `66 a1`) instead of six and seven byte
+ModRM encodings, and the 0x7a store becomes a disp8, giving case 3 its 0x121. The same rebuild moved the
+function's -1 constant from ebx to ebp, which turned case 5's r==0 fail block into native's immediate
+`movl $-1,0x70(%esi)` and brought case 5 to 0x47c exactly. The remaining four bytes are case 6 alone: native's
+`je 0x56148f` is a six-byte far jump to the shared fail block at 0x56148f, while this build tail-merges that
+block with case 6's own r==0 fail block because the two are byte-identical `mov <neg>,0x70(%esi)` plus pops and
+return, and emits a two-byte jump to the local copy. Attempts to break the merge all failed: else versus plain
+goto, an inverted condition, reordered conditions, targeting label_561d51 or a new far label, volatile, cast, -1L
+and 0xFFFFFFFFu store forms, an id temporary, and every q-before-call ordering. The alternative is to force the
+immediate form in case 6's own fail block, which adds four bytes and keeps the jump at two for exactly 0x80 and
+object 3588, but that form only appears when the -1 register is clobbered before the fail as it is in case 5 and
+no C lever was found for it. Two length-neutral mismatches remain: the -1 constant lives in ebp rather than
+native's ebx, so every -1 compare and store differs, and case 3 holds q in edi where native does `add esi,0x52`.
+Current source .scratch/r561380/v29_case3_case5_lead.c with the previous state at v28_kept_round6.c and notes in
+NOTES_round7b.md.
