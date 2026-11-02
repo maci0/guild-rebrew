@@ -423176,13 +423176,13 @@ measured_at = "2026-10-22T08:35:56+00:00"
 size = 6464
 note = "Goal72 io_Text-family output-buffer grammar expansion. Shared native diagnostic establishes family, not a unique overload identity; retain existing address name. Full6282 code bytes plus2 alignment,88-byte jump table and83-byte selector are retained. Existing933 source calls discard return; source contracts remain open. Complete native pair/effect/caller evidence .scratch/goal72/credit-deps/native-pairs.json, caller-matrix.json and REPORT.md. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
 name = "io_FormatTextBuffer"
-updated_by = "rename"
-updated_at = "2026-10-31T08:57:11+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-02T15:09:22+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0051af00.c"
 symbol = "_io_FormatTextBuffer"
 kind = "FUNCTION"
 status = "SIZE_MISMATCH"
-blocker = "io_Text-family buffer expansion reconstructed in full from a fresh rizin pdg/disassembly at the true entry. Body covers: g_1052de0 gate; template load id<0x4800 via g_14a5320 else direct char* copy; 0x17d0 buf with markup scan on % $, {; optional single digit; 22-entry jump table (selector 0x51c7e4, table 0x51c78c) covering % B C D E F G I N S T U a b e f i r u v w; state machine u/U/b/B/e/E -> S/s case prefixes with g_14a540c/g_14a5400/g_14a5418 helper resolution; digit/float/random-text/date/icon cases; varargs read through the native walking pointer local; final strcpy(out, buf). Outcome is SIZE_MISMATCH: object 4347B vs target 6455B (-2108B), 666/6455 compared bytes match, 120 reloc slots. Residual: body is a semantic reconstruction, not a byte-level translation: cases i/I/f/a/T/w/D/G/N/% and the state-prefix sprintf tails are transcribed from the decoded call/format/memmove shapes but their exact stack formatting sequences (native 0x2c..0x1b68 scratch area, repeated strlen/memmove bursts) are not reproduced instruction-for-instruction, so instruction counts and frame slots diverge. Native frame 0x332c with ebp frame pointer and __chkstk; our object uses a smaller frame. Next step would be case-by-case asm transcription with exact locals/offsets."
+blocker = "third callee-saved register unreachable: the loop index sits in esi where native saves ebx too (chkstk 0x3330 against 0x332c), so every inlined rep movs spills it and case-local k lands in edx"
 blocker_delta = 2108
 
 ["GOLDTL.0x0051af00".verification]

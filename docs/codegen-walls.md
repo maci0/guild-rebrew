@@ -2421,3 +2421,18 @@ at 7031-7035 but sel moves 0x74 to 0x70 and blkB 0xa8 to 0xac), char or short fi
 (frame 0x904) and double filler (900-914 with the same census but 8-byte alignment forcing
 0x908). Within the pinned aggregate geometry the remaining gap is positional: the slot map
 and the interleaved initialiser schedule cannot be reproduced by source-level reordering.
+
+TL51af00 is capped by the missing ebx save. The nested skeleton reproduces native's block graph
+and the case targets sit in native order at object 6455, but the loop index lives in esi where
+native saves ebx and esi and edi (chkstk 0x3330 against native 0x332c). Every inlined rep movs
+clobbers esi, so i is spilled and reloaded around each copy tail, and a case-local k has no
+callee-saved register left: it lands in edx and is stored and reloaded around the memmove. That
+is exactly the +12 bytes and +5 instructions on u/U/b/B/e/E and the a/T/w gaps. `register int i`
+is byte-identical and moving i's declaration to the top is byte-identical. The per-case extent
+misattribution is cross-jump placement rather than body size: native T's 138 is its own 49-byte
+body plus a-path2's 89-byte tail because T falls through, while ours shares the group and owns it
+from a, so T -70 against a +123 is one fact; native a's two tails live in T's and D's buckets at
+0x51b98f and 0x51c100. Tail edits at 6455 all measured worse: a copies through strcpy 6555/799,
+a literal expressions 6535/804, a with strlen temporaries 6527/808, D with cp_n 6471/837, w with
+a literal memcpy 6495/842, T+a+D 6479/812, the u rewrite 6447/817, and w with u/U/b/B/e rewrites
+6259/785 where the now-identical bodies cross-jump into one block native keeps separate.

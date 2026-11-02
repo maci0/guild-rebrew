@@ -17548,3 +17548,22 @@ definitions; strupr, strstr, sprintf, memmove, strcpy, memset and memcpy are CRT
 triple pass 0x43e7f1..0x43eb10 and the tile teardown loop 0x43ebf7..0x43ec78. Test at 0x43db70 size 4544: SIZE_MISMATCH,
 match bytes 148 of 4544 (from 19), object 3430 bytes (from 187), first mismatch at offset 5 because the emitted frame is
 0x278 against the native 0x28c and the `sub esp` immediate differs; the push order also still differs from native.
+
+## 2026-11-02 — formatter copy tails measured against the register cap
+
+`0x51AF00` keeps the nested skeleton at 888 match and object 6455; the copy-tail round produced no
+keeper and the source is unchanged. The cap is the missing ebx save: the loop index lives in esi
+where native saves ebx, esi and edi (chkstk 0x3330 against native 0x332c), and since every inlined
+rep movs clobbers esi, i is spilled and reloaded around each copy tail while a case-local k lands
+in edx and is stored and reloaded around the memmove. That accounts for the +12 bytes and +5
+instructions on u/U/b/B/e/E and the a/T/w gaps; `register int i` is byte-identical and moving i's
+declaration to the top is byte-identical. The per-case extent misattribution is cross-jump
+placement, not body size: native T's 138 is its own 49-byte body plus a-path2's 89-byte tail since
+T falls through, and native a's two tails live in T's and D's buckets at 0x51b98f and 0x51c100,
+while ours shares the group and owns it from a, so T -70 against a +123 is one fact. Tail edits at
+6455 all measured worse: a copies through strcpy 6555/799, a literal expressions 6535/804, a with
+strlen temporaries 6527/808, D with cp_n 6471/837, w with a literal memcpy 6495/842, T+a+D
+6479/812, the u rewrite 6447/817, and w with u/U/b/B/e rewrites 6259/785 where the identical
+bodies cross-jump into one block native keeps separate. The row carries a blocker record; the lever
+is a source shape that forces a third callee-saved value, which is the same wall documented for
+0x519190.
