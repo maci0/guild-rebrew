@@ -18140,3 +18140,24 @@ also: the baseline and the ESI build have the same 36 non-zero call-gap deltas a
 plus or minus 1 to 22 bytes each, .scratch/g0/gaps.py), so the match deficit is not the prologue colour
 and 809 cannot be exceeded by it alone. Probe note: .scratch/g0/probe.sh now trims nop padding, because
 the .text size is padded and misleads (an ESI build reported .text 0xf20 for a 0xf11 function).
+
+## 2026-11-03 — trade dialog prologue cascade blocked
+
+`0x5B88B0` keeps 404 at object 4300 with frame 0x1368 and the first mismatch at 23, where native loads
+the base into edx and we use ebp. The pass confirmed the earlier findings and produced no keeper. The
+byte-typed prototype costs: `int __cdecl fcn_0050b750(int, unsigned char)` alone gives object 4290 with
+match 238 and the same first mismatch, and adding `unsigned char*` for a0 gives 4291 with match 255.
+Moving the top store to nSlots gives objects 4294 or 4295 with frame 0x136c and the base load in edi, and
+pkt 0xfc brings the frame back to 0x1368. The blocker is the register cascade: on msvc-6.0-sp5-pp the base
+load never reaches edx and exactly one of the five -1 stores is always sunk, whatever the source shape.
+Tested: six store orders (plain, chained, declaration initialisers, struct temp plus copy, nSlots-1
+sentinels, a shared negated variable, and all 15 scalars as a struct in native slot order with textual
+field rewrite); ent spellings (void pointer, int, unsigned casts, operand order, the sibling 0x506380
+form, two-step, register locals, base in tv, char pointer ent, unsigned sentinels); parameter and
+prototype shapes; and pre-call uses or guards, all folded. Volatile is the only construct that forces
+the stores but it emits `mov dword ptr [esp+..],0xffffffff` for eight bytes instead of a four-byte
+register store: volatile hD with nSlots and pkt 0xfc gives frame 0x1368, object 4300, first mismatch 22
+and match 428, the only candidate above 404, while volatile hA gives 4314, sel 4340, hB 4302, hC 4310
+and all six 4367. The native cascade ent to eax, -1 to ebx, 0 to ebp and base to edx follows from -1
+living in ebx, which only happens when the lea chain owns eax at materialisation time, and every source
+form tested makes MSVC hoist the constant and take eax. A blocker is recorded on the row.

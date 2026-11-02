@@ -424481,13 +424481,13 @@ measured_at = "2026-10-22T08:35:51+00:00"
 size = 4297
 note = "Goal70 native-only role mapping: Building personnel / worker-slot book controller. Original identifier and source-unit placement remain unresolved; retain the address placeholder. Builds the Personalbuch_2/3/4 or Soeldnerbuch_1 book view for a supplied entity, creates up to12 worker-slot rows in0x5c-byte local records, refreshes assignments and worker controls, and sends packet-builder operations after selections. Calls the shared UI loop and restores UI state through an external tail service. Complete executable extent 4297 bytes; inventory span 4304 bytes, with alignment kept separate. Related Gold native body 0x5ad2a0 (4322 executable bytes) is supported by complete native/Kuna role comparison and paired resources; its source, full operands and selected provider remain unverified. Kuna follows the532ef0 shared tail and loses the alloca-probe stack frame, presenting18 apparent arguments; this is not an established native prototype. The catalog dossier also contains the next809-byte transport-cart dialog and its resource string; that next entry is excluded from this role. Stock LIBCMT miss is inconclusive for other libraries; partial FLIRT failure-helper collisions are rejected using the complete game/UI body. No C source, comparison verdict, storage owner or raw-link provider is registered. Evidence .scratch/goal70/no-source-large/manifest.json and REPORT.md; reviewed boundary repair is recorded separately."
 name = "fcn_005b88b0"
-updated_by = "test"
-updated_at = "2026-11-02T16:05:05+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-02T16:59:57+00:00"
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_005b88b0.c"
 symbol = "_fcn_005b88b0"
 kind = "FUNCTION"
 status = "SIZE_MISMATCH"
-blocker = "Application code — pending per-function decompilation"
+blocker = "prologue register cascade unreachable from C: native is ent->eax, -1->ebx, 0->ebp, base->edx, and every source form makes MSVC hoist the constant and take eax; volatile forces the stores but emits 8-byte immediates. Best measured 428 match at object 4300 with volatile hD, nSlots=0 and pkt 0xfc"
 
 ["GOLDTL.0x005b88b0".verification]
 source_hash = "4cf893536d8063b2236222f3b8342f0aad8e9e5b7c625e3b790eeefc6a8c572a"
