@@ -18493,3 +18493,30 @@ the blocker for declaring g_100df20 as an array, since the `extern char g_100df2
 immediate `add edi,0x100df20` but drops the frame to 0x524 because the missing owner slot is exactly those
 four bytes, so the file keeps `extern char* g_100df20;` for now. Also open: the copy-loop schedule puts
 `xor edx,edx` for j=0 after the outer `g_100dc38<4` compare where native puts it before.
+
+## 2026-11-03 — season setup reaches native size and NEAR_MATCHING
+
+`0x540020` goes from 1269 to 3097 matching bytes (70 percent) and the verdict moves to NEAR_MATCHING with
+the object at exactly 4393, frame `sub esp,0x3b8`, native local offsets (pos 0x20, &out 0x32, evs 0x34, tm
+0x12c, arr 0x1a8), the call order held, 239 relocations, lint at 5485 of 5485 and the first mismatch now at
+0xa56. The seven element blocks were fixed by storing fields in the order ent, year, id, kind, visible, mon,
+day, wd: ent first makes MSVC hoist the g_774970 slot load and wd last makes the second hoisted load the
+word load from 0x7f4c0c, which moved the prefix from 0x21f to the end of the element blocks. Reaching 4393
+took five more changes. fcn_00519190 is called inline as
+`fcn_00519190(0x2051, &pos, (int)g_696540[season], (int)g_696550[season] % 12)` because the earlier
+cand/left assignments spilled when &cand was taken later. The ternaries are if/else with the `>= 0` and
+0x1efc arm first, matching native's branch direction. The 0x7dcae4 walk table uses the canonical extern
+`ApEvent g_7dcae0[256]` from he_tables.h as sibling files do, because a literal base makes MSVC emit
+`add eax,imm` while the symbol produces native's `lea eax,[eax+disp]`, and the record offsets are +4 for the
+f4 id, +8 for f8, +0xc for fc and +0x10 for the name where the earlier source used +0, +4, +8 and +0xc. The
+walk condition is one call argument, `p != 0 && (s = SLOTPTR(p[0x27])) != 0 && fcn_0047dca0(s) != 0`,
+replacing a version that called fcn_0047dca0 on the wrong pointer. `fcn_00503fe0(1,0,0x44)` is split into
+its own statement so the inner call is evaluated before fcn_00502cd0's other arguments, which orders the
+stack split like native. And fcn_004c51a0 uses the header's four-argument
+`int __cdecl fcn_004c51a0(int,int,unsigned char,int)` without the spurious g_774970 trailing argument. The
+remaining divergence is the walk-loop je disp8 at 0xa56: our walk block from 0x540a57 to the end is six
+bytes long where native's block is six bytes shorter elsewhere, and all 33 relocation conflicts sit inside
+that block, so it is structural rather than a data placement issue; native's flag argument compiles as
+`push 1` and `push 0`, and the fcn_00402a00 call shares one site. Rollback points for the session are kept
+in .scratch/f540020/ (before_order.c, before_inline.c, before_ifelse.c, before_sym.c, before_offsets.c,
+before_walk.c, before_wing.c, kept.c) with cc.sh, diff.py, align.py, order.py and fold.py.
