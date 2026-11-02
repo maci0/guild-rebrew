@@ -1,53 +1,491 @@
+#include <stdio.h>
 #include <string.h>
 
 /*
- * Member list rebuild for the personnel window.
+ * Floor-water layer build for one tile.
  *
- * Clears the pending update flag, resolves the current list name by searching
- * the eight stored name slots (case-normalised), zeroes the per-row state
- * bytes and allocates the row array sized by the entry count.
+ * Resolves the "WASSER" name slot, converts the water mask (n*n bytes) into
+ * 8x8 strip regions, merges the water heights, cuts the alpha texture into
+ * horizontal strip runs and turns the water-mask bits of the texture. Then
+ * rebuilds the region pool and the per-tile strip/region tables.
  *
- * Reconstructed range 0x43db70..0x43dc53. The native body continues at
- * 0x43dc53 with the row copy loop and the large dispatch through 0x43ed08;
- * that part is not reconstructed here.
+ * Transcribed from the native listing in address order: 0x43db70..0x43e42e
+ * and the tile-table scan, strip pass, region-label pass and record cleanup
+ * at 0x43e42e..0x43ebd4. Still missing: the min/max triple pass
+ * 0x43e7f1..0x43eb10 and the tile teardown loop 0x43ebf7..0x43ec78. The
+ * min/max pass is why the frame is 0x278 and the object 3430 bytes: several
+ * scalar locals that native keeps in stack slots stay in registers here, so
+ * the `sub esp` immediate and local offsets do not match yet.
  */
 
-#pragma optimize("y", off)
+void* __cdecl m_alloc(int size, char* reason);
+void __cdecl m_FreeTracked(void* p);
+char* __cdecl fcn_0045bde0(const char* name);
+int __cdecl fcn_0045c5b0(char* name, unsigned int flags, unsigned int a3, unsigned int a4);
+void __cdecl fcn_0045ce90(void* obj);
+void __cdecl fcn_0045c310(void* tex, char all);
+void __cdecl fcn_0045bfb0(int obj);
+int __cdecl fcn_0043c070(char* tile, int x, int id, unsigned char tag);
+void __cdecl fcn_0043c0d0(unsigned char* buf, int x0, int x1, unsigned char c0, unsigned char c1);
+void __cdecl d3_FillWaterRegion(unsigned char* regionen, int breite, int x, int y,
+    int alte_region, int neue_region);
 
-int __cdecl m_alloc(int, char*);
+extern int g_6b7fac;
+extern int g_6b5de0;
+extern unsigned long g_14ce728;
+
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
+#pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x0043db70 */
 void __cdecl fcn_0043db70(char* e)
 {
-	char buf[0x80];
-	int i;
-	int j;
-	int n;
-	unsigned char pending;
+	char flag;
+	int v17, v16, v15, v14, v13, v12, v11, v10, v9, v8, v6, v5, v4, v2, v1, v0;
+	char *v7, *v3;
+	char buf[0x40];
+	unsigned char used[0x100];
+	char* rec;
+	char fmt[0x100];
 
-	pending = *(unsigned char*) (e + 0x8035);
+	v4 = *(unsigned char*) (e + 0x8035);
 	*(unsigned char*) (e + 0x8035) = 0;
 	if (*(unsigned char*) (e + 0x8034) == 0xff) {
-		for (i = 0; i < 8; i++) {
-			strcpy(buf, e + 0x7e24 + i * 0x40);
+		for (v13 = 0; v13 < 8; v13++) {
+			strcpy(buf, e + 0x7e24 + v13 * 0x40);
 			strupr(buf);
-			if (strstr(buf, (char*) 0x67a790)) {
-				*(unsigned char*) (e + 0x8034) = i;
+			if (strstr(buf, (char*) 0x67a790) != 0) {
+				*(unsigned char*) (e + 0x8034) = (unsigned char) v13;
 				break;
 			}
 		}
 	}
-	for (i = 0; i < 8; i++) {
-		for (j = 0; j < 8; j++) {
-			*(e + 0x25c + (i * 8 + j) * 0x1f4) = 0;
+	for (v13 = 0; v13 < 8; v13++) {
+		for (v14 = 0; v14 < 8; v14++) {
+			*(unsigned char*) (e + 0x25c + (v13 * 8 + v14) * 0x1f4) = 0;
 		}
 	}
 	if (*(unsigned char*) (e + 0x8034) >= 0xff) {
-		return;
+		goto tiles;
 	}
-	n = m_alloc(*(int*) e * *(int*) e, (char*) 0x67a778);
-	i = *(int*) e - 4;
+
+	v3 = (char*) m_alloc(*(int*) e * *(int*) e, (char*) 0x67a778);
+	flag = 0;
+	v9 = 0;
+	if (*(int*) e - 4 > 0) {
+		do {
+			v11 = 0;
+			if (*(int*) e - 4 > 0) {
+				do {
+					v17 = *(int*) e * v9 + v11;
+					if (*(unsigned char*) (*(int*) (e + 0x14) + v17)
+					    == *(unsigned char*) (e + 0x8034)) {
+						flag = 1;
+						v15 = v9 / *(int*) (e + 4);
+						v15 = (int) (e + ((v11 / *(int*) (e + 4)) + v15 * 8) * 0x1f4);
+						*(unsigned char*) (v15 + 0x25c) = 1;
+						if (v9 % *(int*) (e + 4) == 0 && v9 > 0) {
+							*(unsigned char*) (v15 - 0xd44) = 1;
+						}
+						if (v11 % *(int*) (e + 4) == 0 && v11 > 0) {
+							*(unsigned char*) (v15 + 0x68) = 1;
+						}
+						if (v11 % *(int*) (e + 4) == 0 && v11 > 0
+						    && v9 % *(int*) (e + 4) == 0 && v9 > 0) {
+							*(unsigned char*) (v15 - 0xf38) = 1;
+						}
+						v3[v17] = 0xff;
+						v8 = v11 + 1;
+						v17 = v11 - 1;
+						v3[*(int*) e * v9 + (v17 & *(int*) (e + 0xc))] = 0xff;
+						v3[*(int*) e * v9 + (v8 & *(int*) (e + 0xc))] = 0xff;
+						v3[((v9 - 1) & *(int*) (e + 0xc)) * *(int*) e
+						    + (v17 & *(int*) (e + 0xc))] = 0xff;
+						v3[((v9 - 1) & *(int*) (e + 0xc)) * *(int*) e + v11] = 0xff;
+						v3[((v9 - 1) & *(int*) (e + 0xc)) * *(int*) e
+						    + (v8 & *(int*) (e + 0xc))] = 0xff;
+						v3[((v9 + 1) & *(int*) (e + 0xc)) * *(int*) e
+						    + (v17 & *(int*) (e + 0xc))] = 0xff;
+						v3[((v9 + 1) & *(int*) (e + 0xc)) * *(int*) e + v11] = 0xff;
+						v3[((v9 + 1) & *(int*) (e + 0xc)) * *(int*) e
+						    + (v8 & *(int*) (e + 0xc))] = 0xff;
+					}
+					v11++;
+				} while (v11 < *(int*) e - 4);
+			}
+			v9++;
+		} while (v9 < *(int*) e - 4);
+	}
+
+	if (!flag) {
+		*(unsigned char*) (e + 0x8034) = 0xff;
+		m_FreeTracked(v3);
+		goto tiles;
+	}
+	if (*(int*) (e + 0x18) != 0) {
+		for (v15 = 0; v15 < *(int*) e * *(int*) e; v15++) {
+			*(unsigned char*) (*(int*) (e + 0x18) + v15) &= v3[v15];
+			if (v3[v15] == 0xff
+			    && *(unsigned char*) (*(int*) (e + 0x18) + v15) == 0) {
+				*(unsigned char*) (*(int*) (e + 0x18) + v15) = 0xff;
+			}
+		}
+	} else {
+		*(int*) (e + 0x18) = (int) m_alloc(*(int*) e * *(int*) e, (char*) 0x67a764);
+		memcpy((void*) *(int*) (e + 0x18), v3, *(int*) e * *(int*) e);
+	}
+
+	v13 = 0;
+	if (*(int*) e > 0) {
+		do {
+			flag = 0;
+			v14 = 0;
+			if (*(int*) e > 0) {
+				do {
+					v17 = *(int*) e * v13 + v14;
+					v16 = *(unsigned char*) (*(int*) (e + 0x18) + v17);
+					if (v16 == 0xff && !flag) {
+						flag = 1;
+						v15 = v14;
+						if (v14 > 0
+						    && *(unsigned char*) (*(int*) (e + 0x18) + v17 - 1) > 0) {
+							v10 = MAX(1,
+							    *(unsigned char*) (*(int*) (e + 0x18) + v17 - 1));
+						} else {
+							v10 = MAX(1,
+							    *(unsigned char*) (*(int*) (e + 0x10) + v17) - 2);
+						}
+					} else if (v16 == 0xff) {
+					} else if (flag) {
+						flag = 0;
+						if (v16 > 0) {
+							v12 = MAX(1, v16);
+						} else {
+							v12 = MAX(1,
+							    *(unsigned char*) (*(int*) (e + 0x10) + v17 - 1) - 2);
+						}
+						fcn_0043c0d0((unsigned char*) v3 + *(int*) e * v13,
+						    v15, v14 - 1, (unsigned char) v10, (unsigned char) v12);
+					}
+					v14++;
+				} while (v14 < *(int*) e);
+			}
+			if (flag) {
+				v12 = MAX(1, *(unsigned char*) (*(int*) (e + 0x10)
+					+ (v13 + 1) * *(int*) e - 1) - 2);
+				fcn_0043c0d0((unsigned char*) v3 + *(int*) e * v13,
+				    v15, *(int*) e - 1, (unsigned char) v10, (unsigned char) v12);
+			}
+			v13++;
+		} while (v13 < *(int*) e);
+	}
+
+	v13 = 0;
+	if (*(int*) e > 0) {
+		do {
+			v14 = 0;
+			if (*(int*) e > 0) {
+				do {
+					v8 = (v14 + 1) & *(int*) (e + 0xc);
+					v6 = *(int*) e * v13;
+					v12 = (v13 + 1) & *(int*) (e + 0xc);
+					v16 = (*(unsigned char*) (*(int*) (e + 0x14) + v6 + v14)
+					    == *(unsigned char*) (e + 0x8034));
+					v16 = (v16 << 1)
+					    | (*(unsigned char*) (*(int*) (e + 0x14) + v12 * *(int*) e + v14)
+						== *(unsigned char*) (e + 0x8034));
+					v16 = (v16 << 1)
+					    | (*(unsigned char*) (*(int*) (e + 0x14) + v6 + v8)
+						== *(unsigned char*) (e + 0x8034));
+					v16 = (v16 << 1)
+					    | (*(unsigned char*) (*(int*) (e + 0x14) + v12 * *(int*) e + v8)
+						== *(unsigned char*) (e + 0x8034));
+					switch (v16) {
+					case 1:
+					case 7:
+					case 8:
+					case 9:
+					case 14:
+						*(unsigned char*) (*(int*) (e + 0x24) + v6 + v14) |= 0x80;
+						break;
+					case 2:
+					case 4:
+					case 6:
+					case 11:
+					case 13:
+						*(unsigned char*) (*(int*) (e + 0x24) + v6 + v14) &= 0x7f;
+						break;
+					}
+					v14++;
+				} while (v14 < *(int*) e);
+			}
+			v13++;
+		} while (v13 < *(int*) e);
+	}
+
+	v7 = (char*) m_alloc(*(int*) e * *(int*) e, (char*) 0x67a748);
+	memset(v7, 0xff, *(int*) e * *(int*) e);
+	v13 = 0;
+	do {
+		v14 = 0;
+		do {
+			if (v7[*(int*) e * v13 + v14] == 0xff
+			    && *(unsigned char*) (*(int*) (e + 0x18) + *(int*) e * v13 + v14) > 0
+			    && *(unsigned char*) (*(int*) (e + 0x18) + (v13 + 1) * *(int*) e + v14) > 0
+			    && *(unsigned char*) (*(int*) (e + 0x18) + *(int*) e * v13 + v14 + 1) > 0
+			    && *(unsigned char*) (*(int*) (e + 0x18) + (v13 + 1) * *(int*) e + v14 + 1) > 0) {
+				v7[*(int*) e * v13 + v14] = 0xfe;
+			}
+			v14++;
+		} while (v14 < *(int*) e - 1);
+		v13++;
+	} while (v13 < *(int*) e - 1);
+
+	v13 = 0;
+	do {
+		v14 = 0;
+		do {
+			if (v7[*(int*) e * v13 + v14] == 0xfe) {
+				d3_FillWaterRegion((unsigned char*) v7, *(int*) e, v14, v13,
+				    0xfe, (*(unsigned char*) (e + 0x8035))++);
+			}
+			v14++;
+		} while (v14 < *(int*) e - 1);
+		v13++;
+	} while (v13 < *(int*) e - 1);
+
+	if (*(unsigned char*) (e + 0x8035) != v4) {
+	v10 = (int) m_alloc(*(unsigned char*) (e + 0x8035) * 0x158, (char*) 0x67a730);
+	if (v4 > *(unsigned char*) (e + 0x8035)) {
+		memcpy((void*) v10, (void*) *(int*) (e + 0x7da0),
+		    *(unsigned char*) (e + 0x8035) * 0x158);
+	} else {
+		v9 = 0;
+		if (v4 > 0) {
+			memcpy((void*) v10, (void*) *(int*) (e + 0x7da0), v4 * 0x158);
+			v9 = v4;
+		}
+		v16 = (int) fcn_0045bde0((const char*) 0x67a718);
+		if (v16 == 0) {
+			v16 = fcn_0045c5b0((char*) 0x67a718, 0xac, 0, 0);
+			if (v16 != 0) {
+				fcn_0045ce90((void*) v16);
+			}
+		}
+		for (; v9 < *(unsigned char*) (e + 0x8035); v9++) {
+			v17 = v10 + v9 * 0x158;
+			*(int*) (v17 + 0) = v16;
+			*(int*) (v17 + 4) = 0;
+			*(int*) (v17 + 8) = 0;
+			if (v16 != 0) {
+				*(int*) (v17 + 0xc) = *(int*) (v16 + 0x58);
+				if (v9 < *(unsigned char*) (e + 0x8035) - 1) {
+					fcn_0045c310((void*) v16, 1);
+				}
+			} else {
+				*(int*) (v17 + 0xc) = 0;
+			}
+			*(float*) (v17 + 0x10) = 63.0f;
+			*(float*) (v17 + 0x14) = 0.023000000044703484f;
+			*(float*) (v17 + 0x18) = 0.019999999552965164f;
+			*(float*) (v17 + 0x1c) = 0.027000000700354576f;
+			*(float*) (v17 + 0x20) = 0.029999999329447746f;
+			*(float*) (v17 + 0x24) = 1.0f;
+			*(float*) (v17 + 0x28) = 1.0f;
+			*(float*) (v17 + 0x2c) = 1.0f;
+			*(float*) (v17 + 0x30) = 31.0f;
+			*(int*) (v17 + 0x130) = 0;
+			*(int*) (v17 + 0x134) = 0;
+			*(int*) (v17 + 0x138) = 0;
+			*(int*) (v17 + 0x13c) = 0;
+			*(int*) (v17 + 0x140) = 0;
+			*(int*) (v17 + 0x144) = 0;
+			*(int*) (v17 + 0x148) = g_6b7fac;
+		}
+	}
+	if (*(int*) (e + 0x7da0) != 0) {
+		m_FreeTracked((void*) *(int*) (e + 0x7da0));
+		*(int*) (e + 0x7da0) = 0;
+	}
+	*(int*) (e + 0x7da0) = v10;
+	}
+
+
+	/* Region-table build: distinct region labels per tile. */
+	v13 = 0;
+	do {
+		v14 = 0;
+		do {
+			v15 = v14 + v13 * 8;
+			v5 = (int) (e + 0xa0 + v15 * 0x1f4);
+			if (*(unsigned char*) (v5 + 0x1bc) != 0) {
+				v6 = (int) (v5 + 0x1b8);
+				if (*(int*) v6 == 0) {
+					*(int*) v6 = (int) m_alloc(
+					    *(int*) (e + 4) * *(int*) (e + 4) / 2 * 20, (char*) 0x67a704);
+				}
+				v8 = 0;
+				v11 = 0;
+				v12 = *(int*) (e + 4);
+				v16 = (v13 == 7) ? *(int*) e - 4 : (v13 + 1) * v12;
+				v9 = v12 * v13;
+				rec = (char*) *(int*) v6;
+				if (v9 <= v16) {
+					do {
+						flag = 0;
+						v17 = (v14 == 7) ? *(int*) e - 4 : (v14 + 1) * v12;
+						v0 = v12 * v14;
+						v15 = v0;
+						if (v0 <= v17) {
+							do {
+								v4 = *(int*) e * (v9 & *(int*) (e + 0xc))
+								    + (v15 & *(int*) (e + 0xc));
+								v2 = *(unsigned char*) (*(int*) (e + 0x18) + v4);
+								if (flag) {
+									if (v2 == 0) {
+										flag = 0;
+										*(int*) (rec + 0xc) = v15 - 1;
+										if (*(int*) (rec + 8) < v15 - 1) {
+											v8 += v15 - 1 - *(int*) (rec + 8) + 1;
+											rec += 20;
+										}
+									}
+								}
+								if (v2 != 0 && flag == 0) {
+									if ((v9 < (v13 + 1) * v12 && v15 < v17
+										&& v7[v4] < 0xff)
+									    || (v9 > v13 * v12
+										&& v7[v4 - *(int*) e] < 0xff)
+									    || (v15 > v14 * v12 && v7[v4 - 1] < 0xff)) {
+										flag = 1;
+										*(int*) (rec + 0) = v8;
+										*(int*) (rec + 4) = v9;
+										*(int*) (rec + 8) = v15;
+										*(int*) (rec + 0xc) = v15;
+										*(unsigned char*) (rec + 0x10) = 0xff;
+									}
+								}
+								if (v9 < (v13 + 1) * v12 && v15 < v17
+								    && v7[v4] < 0xff) {
+									v11 += 2;
+								}
+								v15++;
+							} while (v15 <= v17);
+						}
+						if (flag) {
+							v16 = (v14 + 1) * v12;
+							*(int*) (rec + 0xc) = v16;
+							if (*(int*) (rec + 8) < v16) {
+								v8 += v16 - *(int*) (rec + 8) + 1;
+								rec += 20;
+							}
+						}
+						v9++;
+					} while (v9 <= v16);
+				}
+				*(int*) (rec + 4) = -1;
+				v6 = *(int*) (v5 + 0x1a4);
+				if (v6 != 0 && *(int*) (v5 + 0x1ac) != v8) {
+					g_14ce728 = (*(int (__cdecl**) (int)) (*(int*) v6 + 8))(v6);
+					*(int*) (v5 + 0x1a4) = 0;
+				}
+				*(int*) (v5 + 0x1ac) = v8;
+				v6 = *(int*) (v5 + 0x1a0);
+				if (v6 != 0 && *(int*) (v5 + 0x1b0) != v11) {
+					g_14ce728 = (*(int (__cdecl**) (int)) (*(int*) v6 + 8))(v6);
+					*(int*) (v5 + 0x1a0) = 0;
+				}
+				*(int*) (v5 + 0x1b0) = v11;
+				if (*(int*) (v5 + 0x1a0) == 0) {
+					v0 = g_6b5de0;
+					(*(void (__cdecl**) (int, int, int, int, int, int*))
+					    (*(int*) v0 + 0x60))(v0, v11 * 6, 8, 0x65, 1,
+					    (int*) (v5 + 0x1a0));
+				}
+				memset(used, 0, 0x100);
+				v16 = 0;
+				v12 = *(int*) (e + 4);
+				v9 = v12 * v13;
+				v6 = (v13 + 1) * v12;
+				while (v9 < v6) {
+					v17 = v12 * v14;
+					v0 = (v14 + 1) * v12;
+					while (v17 < v0) {
+						v4 = *(int*) e * (v9 & *(int*) (e + 0xc))
+						    + (v17 & *(int*) (e + 0xc));
+						v11 = v7[v4] & 0xff;
+						if (used[v11] == 0) {
+							used[v11] = 1;
+							v16++;
+						}
+						v17++;
+					}
+					v9++;
+				}
+				if (*(int*) (v5 + 0x1b4) != 0 && *(int*) (v5 + 0x1a8) != v16) {
+					m_FreeTracked((void*) *(int*) (v5 + 0x1b4));
+					*(int*) (v5 + 0x1b4) = 0;
+				}
+				*(int*) (v5 + 0x1a8) = v16;
+				if (*(int*) (v5 + 0x1b4) == 0) {
+					*(int*) (v5 + 0x1b4) = (int) m_alloc(v16 * 20, (char*) 0x67a6f0);
+				}
+			}
+				v6 = *(int*) (v5 + 0x1a0);
+				if (v6 != 0) {
+					(*(void (__cdecl**) (int)) (*(int*) v6 + 0x30))(v6);
+				}
+				v6 = *(int*) (v5 + 0x1b8);
+				if (v6 != 0) {
+					v0 = *(int*) (e + 4) * *(int*) (e + 4) / 2 * 20;
+					v1 = 20;
+					rec = (char*) v6;
+					while (*(int*) (rec + 4) != -1) {
+						if (*(unsigned char*) (rec + 0x10) == 0xff) {
+							sprintf(fmt,
+							    "PrepareFloorWater: removed region @ %i:[%i - %i] idx %i (hsize = %i)",
+							    *(int*) (rec + 4), *(int*) (rec + 8),
+							    *(int*) (rec + 0xc), *(int*) e, *(int*) rec);
+							memmove(rec, rec + 20, v0 - v1);
+							v0 -= 20;
+						} else {
+							rec += 20;
+							v1 += 20;
+						}
+					}
+				}
+			v14++;
+		} while (v14 < 8);
+		v13++;
+	} while (v13 < 8);
+
+	m_FreeTracked(v7);
+	m_FreeTracked(v3);
+
+tiles:
+	if (*(unsigned char*) (e + 0x8034) == 0xff) {
+		if (*(int*) (e + 0x7da0) != 0) {
+			v13 = 0;
+			if (*(unsigned char*) (e + 0x8035) > 0) {
+				do {
+					fcn_0045bfb0(*(int*) (*(int*) (e + 0x7da0) + v13 * 0x158));
+					v13++;
+				} while (v13 < *(unsigned char*) (e + 0x8035));
+			}
+			m_FreeTracked((void*) *(int*) (e + 0x7da0));
+			*(int*) (e + 0x7da0) = 0;
+		}
+		*(unsigned char*) (e + 0x8035) = 0;
+		if (*(int*) (e + 0x18) != 0) {
+			m_FreeTracked((void*) *(int*) (e + 0x18));
+			*(int*) (e + 0x18) = 0;
+		}
+	}
+	*(unsigned char*) (e + 0x8036) |= 1;
 }
+
 /* Layout scaffolding: shifts the next source object to its reference
  * VA. 0x90 filler, not reconstruction. Generated by the text lead pass. */
 #pragma data_seg(".text")
@@ -55,7 +493,839 @@ void __cdecl fcn_0043db70(char* e)
 /* Layout scaffolding: shifts the next source object to its reference
  * VA. 0x90 filler, not reconstruction. Generated by the text lead pass. */
 #pragma data_seg(".text")
-unsigned char _tlead_GOLDTL_fcn_0043db70[3728] = {
+unsigned char _tlead_GOLDTL_fcn_0043db70[4560] = {
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
     0x90,
     0x90,
     0x90,

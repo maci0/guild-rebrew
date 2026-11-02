@@ -17535,3 +17535,16 @@ passes through io_FormatTextBuffer plus fcn_005c9090 and fcn_0046f740), ending w
 and the two global gates. All 18 callees resolve. Two DATA symbols do not resolve in the TL target:
 g_14ce8e0 and g_67d370 exist only as GOLD rows, so the tester reports those DIR32 operands
 unresolved.
+
+`0x43DB70` body transcribed from the native listing in address order, first real body for this row.
+The function is PrepareFloorWater, attested by the literal "PrepareFloorWater: removed region @ %i:[%i - %i] idx %i (hsize = %i)"
+at 0x67a6a8 (GOLD twin: string 0x5FB730, pushing site 0x440B64, function start 0x440360, 3856 bytes). The transcribed range is
+0x43db70..0x43ebd4: prologue with the name-slot search for "WASSER" (0x67a790), the 8x8 valid-byte reset at +0x25c/500,
+the water-mask scan with wrapped 8-neighbour 0xff marks, the height merge, the horizontal strip runs through fcn_0043c0d0,
+the 4-sample alpha-bit switch (jump table 0x43ed08, byte map 0x43ed14, cases 1/7/8/9/14 set 0x80, 2/4/6/11/13 clear 0x7f),
+the region-pool rebuild through fcn_0045bde0/fcn_0045c5b0/fcn_0045ce90/fcn_0045c310, the per-tile strip record scan,
+the region-label pass and the record cleanup with the sprintf/memmove removal. All game callees resolve to project
+definitions; strupr, strstr, sprintf, memmove, strcpy, memset and memcpy are CRT/intrinsic. Still missing: the min/max
+triple pass 0x43e7f1..0x43eb10 and the tile teardown loop 0x43ebf7..0x43ec78. Test at 0x43db70 size 4544: SIZE_MISMATCH,
+match bytes 148 of 4544 (from 19), object 3430 bytes (from 187), first mismatch at offset 5 because the emitted frame is
+0x278 against the native 0x28c and the `sub esp` immediate differs; the push order also still differs from native.
