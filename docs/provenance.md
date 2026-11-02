@@ -19543,3 +19543,24 @@ the packed-struct copy costs two to four. Alternates on disk: v28_alt_msgorder.c
 v_z3a at 1031 with the object exactly 3600, v_z4q at 1105, z4f with float zeros at case 5 0x48a, and v_z4s.c
 with case 5 0x478 but case 6 0x7c. Tools: vb.sh, cases.py and d.py in .scratch/r561380/, with the notes in
 NOTES.md round 6 and the current source v28_kept_round6.c.
+
+## 2026-11-03 — crew dialog case seven dataflow corrected
+
+`0x5744C0` 456 to 467 with the object at 4024 from 4032, 28 relocations, equal prefix still 39 and lint clean.
+The kept edit is a semantic correction in case 7: the best-object pointer is now v13 while the element stays v8,
+so the second loop's fcn_00445600 argument reads `*(int*)(v13 + 0x61)` and the checks plus fcn_00428340's fourth
+argument use the element. The reference stores the best pointer to [S+0x18] at 0x57494b and reads [ecx+0x61] from
+it at 0x5749df while the element sits in ebp, so the previous `(v15 + 0x61)` had the wrong dataflow. The round
+also inverted a premise from the previous entry, and the bytes decide it: the reference does NOT merge the two
+`fcn_004c5620(-1, v5)` failure tails. 0x5745ff and 0x57469a are separate 25 and 26-byte blocks with their own
+epilogues, and what is shared is the success tail at 0x5746e0 reached by cases 2, 3 and 5. The reference has
+seven fcn_004c5620 call sites against our object's nine, so the extra unmerged blocks are success paths and a
+common failure label would diverge, which is why none was added. The slot swap is still unlanded: the target has
+v15 at 0x10, v21 at 0x14, v29 at 0x18 and v30 at 0x1c, while ours puts v30 at 0x18 and v29 at 0x1c. All
+twenty-four declaration permutations of v30, v29, v21 and v15 produce byte-identical objects, so declaration order
+is ignored for these slots, and swapping the case-7 init statements, an early v29 init, a v30 initialiser form
+and moving the v30 assignment into case 6 all failed, the last killing the prologue hoist and landing at 4064
+bytes, so only a structural change to their live ranges will move them. The kept fix also flipped the compiler's
+array packing, with v18 at 0x44 and v16 at 0xc8 against the reference's v16 at 0x44 and v18 at 0x98, and swapping
+the array declarations does not move them. Findings in .scratch/row5744c0/FINDINGS.md with the kept copy
+kept_v30_0x18_dataflowfix_*.c and backup_preswap_1793653291.c.

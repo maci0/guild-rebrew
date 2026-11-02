@@ -193,7 +193,7 @@ void __cdecl fcn_005744c0(int a0)
 			fcn_004432d0(v30, 1);
 			return;
 		}
-		v8 = 0;
+		v13 = 0;
 		v21 = 1e+35f;
 		v29 = 0.0f;
 		v11 = 0;
@@ -209,12 +209,12 @@ void __cdecl fcn_005744c0(int a0)
 					&& fcn_00445600(*(int*) (v11 + *(int*) 0x90e094 + 0x61),
 						0x100, 0, 0x68149c)) {
 					v21 = v29;
-					v8 = v11 + *(int*) 0x90e094;
+					v13 = v11 + *(int*) 0x90e094;
 				}
 			}
 			v11 += 0xa9;
 		} while (v11 < 0xa900);
-		if (!v8) {
+		if (!v13) {
 			*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
 			fcn_004432d0(v30, 1);
 			return;
@@ -229,7 +229,7 @@ void __cdecl fcn_005744c0(int a0)
 			v11 = 0;
 			do {
 				v8 = v18[v11];
-				v14 = (unsigned char*) fcn_00445600(*(int*) (v15 + 0x61), 0x100, 0, 0x68149c);
+				v14 = (unsigned char*) fcn_00445600(*(int*) (v13 + 0x61), 0x100, 0, 0x68149c);
 				if (v8 && *(int*) (v8 + 0x218) != 1 && v14) {
 					v24 = fcn_00426fd0((char*) 0x6a7dd4);
 					if (v24) {
