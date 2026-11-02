@@ -17939,3 +17939,34 @@ like native. The volatile idx remains the frame lever. Rejected with backups: sw
 idx=max and nb=min reaches delta sum 731 and lookup deficit -34 but compiles the hover tail as setne and
 shrinks the hover block to 0x15e; hoisting tabB[2].y into t0, rows or a new local gives frame 0x43c or
 0x434. The 373-match state is preserved at .scratch/660/kept-v9-baseline.c.
+
+## 2026-11-03 — trade name dialog transcribed
+
+`0x5B7880` goes from a 3-byte match with no prefix to 299 at object 3980, ten relocations and an equal
+prefix of 76 bytes (0x00..0x4b), first mismatch at 0x4c. The frame is reproduced exactly by one FRAME
+struct of 0x110c bytes: chkstk 0x110c, args at 0x1110 and 0x1114, saves ebx/ebp/esi with a late push
+edi, 15 scalars (pIt, pg, cnt, hA, win, tv, hB, hC, tv3, hD, ent, hRadio, nSlots, tv2, hE), the MSG
+packet of 0xf8 at 0x3c, rows[12] of 0x5c at 0x134, buffers at 0x584/0x5e4/0x664/0x6e4, slots[0x26] at
+0x764, buffers at 0x7fc/0x85c, the 0x400 text buffer at 0x8bc and old[12] at 0xcbc ending at 0x110c;
+the prologue and epilogue match (mov eax,0x110c, call __chkstk, push ebx/ebp/esi, add esp,0x1110 and a
+tail jmp fcn_00532ef0). Transcribed in native order: the building record through the global int
+lpGebaeudePROT plus a0[0]*0x24d, where writing the base as an extern int is what reproduces native's
+`add edx,ecx` chain while the pointer-deref form emitted base plus type*0x24d and broke at 0x2c; the
+fcn_00534c40 argument block; fcn_005350d0; the two fcn_00517c00 id buffers; fcn_0050dc90 with its
+strcpy and else path; the header labels (d2_SetForm, io_AppendText at 0x68beac, 0x6ac33c and 0x1a20,
+fcn_00472250, four slot buttons); the tv3 and tv2 table halves; the 12-row init; the three-page row
+loop (d2_SetForm, fcn_0046f740 icon, fcn_004693b0 and 0x469470 radio, two fcn_0046fac0 labels, GUI
+field writes); the dialog loop with its gating (0x14ce8e0 and 0x774654, fcn_005350d0, 0x534c20, 0x535550,
+0x535560, win+0x270, 0x100f1dc and 0x67d370); the hE and nSlots path (fcn_005b5750, fcn_0050b750,
+fcn_00526010, per-row 0x4c4eb0/5150/54c0/4ef0); the old-block copy and slot fill from fcn_00505d00; the
+diff and free pass; the fcn_005463a0 refresh do/while with icon, fcn_00517c00 plus fcn_0046f940 label,
+fcn_004677e0 value, the x87 bar scale through 128.0, 100.0 and 0.00392156862745098 rendering as fild
+plus __ftol, and the worker and default branches; the hA and hB guard; the 12-row icon scan; and the
+three packet builds (types 6, 0x31 and 0x32, fcn_004c5530) before the epilogue. Remaining: at 0x49 the
+target has `xor ebx,ebx` and `or ebp,-1`; the build now matches the xor after an `int i = 0;` block-top
+initialiser but materialises the -1 in EDI, so 0x4c is cf against cd and the prefix stops at 76.
+Rejected: nSlots/ent/hA statement orders, native store order, a block-top `int m1 = -1`, the
+0xffffffff spelling and chain assignment all still pick edi. Everything after that diverges in shape,
+mostly later-region argument order and loop strength reduction, and the object is 186 bytes over native
+with no tlead filler in the file. Callees all resolve except 0x00505370, which has only a zero-returning
+stub in stubs/goldtl/link_scaffold.c and is called once in the hC packet path.
