@@ -10,24 +10,28 @@
  * offsets are the native frame offsets, `f.buf` is the text buffer at 0x5c and
  * `f.v3c` the itoa scratch at 0x3c. Native frame is `sub esp,0x25c` with no
  * compiler temporary slots: native reuses the w0/w8/wc members as int-to-float
- * and 16-bit-load scratch, so those members are unions here.
+ * and 16-bit-load scratch, so those members are unions here. `f.w0.b` is the
+ * byte view native writes the label colour triple through (offsets 0..2).
  * Native body 0x467920..0x468b7a.
  *
  * Native regions, in order:
  *   0x467920  element fetch, sprite handle lookups, fill ratio, clamps
  *   0x467a5c  flag 0x02: bar frame and fill loops
+ *   0x467bc2  flag 0x400: split; else draws the label colour gradient, the
+ *             clipped label bitmaps, the bar rect and the tick marks
  *   0x4681cc  gauge body rect, icon hit test, icon fills and end marks
  *   0x468554  label text and the 0x468700 icon text block
  *   0x46882f  trailing element text
  *   0x4688d7  flag 0x01: gauge ends and their fill loops
  *
- * Status: SIZE_MISMATCH, match 349/4699, object 3842. The frame is one
+ * Status: SIZE_MISMATCH, match 477/4699, object 4256. The frame is one
  * compiler temporary slot from native: `sub esp,0x260` with the struct at +4
  * because the icon hit test spills e[4] (native keeps it in a register). The
  * native prefix is 34 bytes and diverges on the shared zero register (native
  * ebp, compiler edi). h3/h6 live in f.v1c/f.v28 as in native, so only h1/h0
- * stay in registers. The 0x468554 and 0x468700 blocks are transcribed from
- * the listing.
+ * stay in registers. The 0x468554, 0x468700 and 0x467bc2..0x4681cc blocks are
+ * transcribed from the listing; the 0x467bc2 split is `if (!(v20 & 0x400))`
+ * with the marks in the taken branch and the colour/bitmap path in the else.
  */
 
 extern char* g_1015ea0;			/* 0x01015ea0 element table */
@@ -35,6 +39,7 @@ extern float g_6628a8;			/* 0x006628a8 */
 extern float g_6628a0;			/* 0x006628a0 */
 extern float g_662cf8;			/* 0x00662cf8 */
 extern double g_662908;			/* 0x00662908 */
+extern double g_662950;			/* 0x00662950 */
 extern int g_1015ea4;			/* 0x01015ea4 */
 extern int g_67d370;			/* 0x0067d370 */
 extern int g_67d378;			/* 0x0067d378 */
@@ -45,7 +50,13 @@ extern int g_102d028;			/* 0x0102d028 */
 extern int g_100f1e8;			/* 0x0100f1e8 */
 extern int g_1040490;			/* 0x01040490 */
 extern int g_1040494;			/* 0x01040494 */
-extern int g_77256c;			/* 0x0077256c */
+
+typedef struct {
+	char pad20[0x20];
+	int x20;
+} fcn_00467920_Surf;
+
+extern fcn_00467920_Surf* g_77256c;	/* 0x0077256c */
 
 extern char str_67d43c[];
 extern char str_67d444[];
@@ -71,7 +82,9 @@ char* __cdecl itoa(int value, char* buf, int radix);
  * unions are native's own scratch reuse, not extra members. */
 typedef struct {
 	union {
-		char v00, v01, v02, v03;
+		struct {
+			char v00, v01, v02, v03;
+		} b;
 		int idx;
 		float fl;
 	} w0;
@@ -166,7 +179,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 					    + GLYPH_W(h1) * f.w0.idx;
 					y = e[5] + (GLYPH_H(H3)
 						    - GLYPH_H(h1)) / 2;
-					fcn_0047cba0(x, y, (int) b,
+					fcn_0047cba0(x, y, a1,
 						     (char*) f.v14, 1);
 				}
 			}
@@ -183,88 +196,141 @@ void __cdecl fcn_00467920(int a0, int a1)
 			}
 		}
 
-		/* 0x467bc2: upper mark run and right cap */
-		if (f.v20 & 0x10) {
-			if (f.wc.f > 0.0f) {
+		/* 0x467bc2: bar end marks, or the label colour gradient */
+		if (!(f.v20 & 0x400)) {
+			if (f.v20 & 0x10) {
+				if (f.wc.f > 0.0f) {
+					f.wc.i = e[4] + GLYPH_W(h0);
+					fcn_0047a040(e[4], b[0xc],
+						     e[4] + GLYPH_W(h0), b[0xe]);
+					f.w8.i = GLYPH_W(h1);
+					n = (int) (f.wc.f / (float) f.w8.i
+						   + g_6628a0);
+					g_102d020 = n;
+					for (f.w0.idx = 0;
+					     f.w0.idx < g_102d020;
+					     f.w0.idx++) {
+						x = e[4] + GLYPH_W(h0)
+						    + GLYPH_W(h1) * f.w0.idx;
+						y = e[5] + (GLYPH_H(H3)
+							    - GLYPH_H(h1)) / 2;
+						fcn_0047cba0(x, y, (int) b,
+							     (char*) f.v14, 4);
+					}
+				}
+			}
+			fcn_0047a040(e[4], b[0xc],
+				     e[4] + GLYPH_W(h0) + f.v24 + f.v30,
+				     b[0xe]);
+
+			/* 0x467cce: second fill run */
+			if (f.v18 > 0.0f) {
+				if (f.v20 & 8) {
+					goto mark;
+				}
 				f.wc.i = e[4] + GLYPH_W(h0);
-				fcn_0047a040(e[4], b[0xc],
-					     e[4] + GLYPH_W(h0), b[0xe]);
+				fcn_0047a040(f.wc.i, b[0xc],
+					     (int) ((float) f.wc.i + f.v18),
+					     b[0xe]);
 				f.w8.i = GLYPH_W(h1);
-				n = (int) (f.wc.f / (float) f.w8.i
+				n = (int) (f.v18 / (float) f.w8.i
 					   + g_6628a0);
 				g_102d020 = n;
-				for (f.w0.idx = 0; f.w0.idx < g_102d020;
-				     f.w0.idx++) {
-					x = e[4] + GLYPH_W(h0)
-					    + GLYPH_W(h1) * f.w0.idx;
-					y = e[5] + (GLYPH_H(H3)
-						    - GLYPH_H(h1)) / 2;
-					fcn_0047cba0(x, y, (int) b,
-						     (char*) f.v14, 4);
+				if (!e[0x13]) {
+					for (f.w0.idx = 0;
+					     f.w0.idx < g_102d020;
+					     f.w0.idx++) {
+						x = e[4] + GLYPH_W(h0)
+						    + GLYPH_W(h1) * f.w0.idx;
+						y = e[5] + (GLYPH_H(H3)
+							    - GLYPH_H(h1)) / 2;
+						fcn_0047cbf0(x, y, (int) b,
+							     (char*) f.v14, 2);
+					}
 				}
+				else {
+					for (f.w0.idx = 0;
+					     f.w0.idx < g_102d020;
+					     f.w0.idx++) {
+						x = e[4] + GLYPH_W(h0)
+						    + GLYPH_W(h1) * f.w0.idx;
+						y = e[5] + (GLYPH_H(H3)
+							    - GLYPH_H(h1)) / 2;
+						fcn_0047cba0(x, y, (int) b,
+							     (char*) f.v14, 2);
+					}
+				}
+				fcn_0047a040(e[4], b[0xc],
+					     e[4] + GLYPH_W(h0) + f.v24,
+					     b[0xe]);
 			}
-		}
-		fcn_0047a040(e[4], b[0xc], e[4] + GLYPH_W(h0) + f.v24 + f.v30,
-			     b[0xe]);
 
-		/* 0x467cce: second fill run */
-		if (f.v18 > 0.0f) {
-			if (f.v20 & 8) {
-				goto mark;
-			}
-			f.wc.i = e[4] + GLYPH_W(h0);
-			fcn_0047a040(f.wc.i, b[0xc],
-				     (int) ((float) f.wc.i + f.v18), b[0xe]);
-			f.w8.i = GLYPH_W(h1);
-			n = (int) (f.v18 / (float) f.w8.i + g_6628a0);
-			g_102d020 = n;
-			if (!e[0x13]) {
-				for (f.w0.idx = 0; f.w0.idx < g_102d020;
-				     f.w0.idx++) {
-					x = e[4] + GLYPH_W(h0)
-					    + GLYPH_W(h1) * f.w0.idx;
-					y = e[5] + (GLYPH_H(H3)
-						    - GLYPH_H(h1)) / 2;
-					fcn_0047cbf0(x, y, (int) b,
-						     (char*) f.v14, 2);
-				}
+		mark:
+			/* 0x467f5c: closing rect of the bar frame */
+			fcn_0047a040(e[4], b[0xc],
+				     e[4] + GLYPH_W(h0) * 2 + f.v24, b[0xe]);
+		}
+		else {
+			/* 0x467f7d: label colour gradient */
+			fcn_0041bac0(0xff, 0x80, 0);
+			ratio = f.v18 / f.w8.f * 2.0f;
+			if (ratio < 1.0) {
+				f.w0.b.v00 = 0xc4 - (int) (-24.0f * ratio);
+				f.w0.b.v01 = (int) (220.0f * ratio);
+				f.w0.b.v02 = (int) (g_6628a8 * ratio);
 			}
 			else {
-				for (f.w0.idx = 0; f.w0.idx < g_102d020;
+				f.w0.b.v00 = 0xdc - (int) ((ratio - 1.0) * 194.0);
+				f.w0.b.v01 = 0xdc - (int) ((ratio - 1.0) * 135.0);
+				f.w0.b.v02 = (int) ((ratio - 1.0) * g_662950);
+			}
+			fcn_00479e00((unsigned char) f.w0.b.v00,
+				     (unsigned char) f.w0.b.v01,
+				     (unsigned char) f.w0.b.v02);
+
+			/* 0x46802e: label bitmap clipped into the bar rect */
+			n = fcn_0047bf80(e[4],
+					 e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+					 e[6], e[7], g_77256c->x20, 0);
+			if (n) {
+				fcn_0047b9a0((int*) n, 1, 1, 1);
+			}
+			f.wc.i = e[4] + GLYPH_W(h0);
+			fcn_0047a040(f.wc.i, ((int*) a1)[0xc],
+				     (int) ((float) f.wc.i + f.v18),
+				     ((int*) a1)[0xe]);
+
+			/* 0x4680b3: clamped label bitmap */
+			n = fcn_0047bf80(e[4] + GLYPH_W(h0),
+					 e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+					 (int) f.v18, e[7], g_77256c->x20, 0);
+			if (n) {
+				fcn_0047b9a0((int*) n, f.w0.b.v00, f.w0.b.v01,
+					     f.w0.b.v02);
+			}
+
+			/* 0x468119: bar rect and tick marks */
+			fcn_0047a040(e[4], ((int*) a1)[0xc],
+				     e[4] + GLYPH_W(h0) + f.v24,
+				     ((int*) a1)[0xe]);
+			if (!(f.v20 & 8)) {
+				f.wc.i = GLYPH_W(h0);
+				f.w8.i = (int) (f.w8.f / (float) f.wc.i
+					       + g_6628a0);
+				for (f.w0.idx = 0; f.w0.idx < f.w8.i;
 				     f.w0.idx++) {
 					x = e[4] + GLYPH_W(h0)
-					    + GLYPH_W(h1) * f.w0.idx;
+					    + GLYPH_W(h0) * f.w0.idx;
 					y = e[5] + (GLYPH_H(H3)
-						    - GLYPH_H(h1)) / 2;
-					fcn_0047cba0(x, y, (int) b,
-						     (char*) f.v14, 2);
+						    - GLYPH_H(h0)) / 2;
+					fcn_0047cba0(x, y, a1,
+						     (char*) f.v14, 1);
 				}
 			}
-			fcn_0047a040(e[4], b[0xc], e[4] + GLYPH_W(h0) + f.v24,
-				     b[0xe]);
+
+			/* 0x4681cc: gauge body rect */
+			fcn_0047a040(e[0x0a], e[0x0c], e[0x0b], e[0x0d]);
 		}
-
-	mark:
-		/* 0x467f5c: closing rect of the bar frame */
-		fcn_0047a040(e[4], b[0xc], e[4] + GLYPH_W(h0) * 2 + f.v24, b[0xe]);
-		fcn_0047a040(e[0x0a], e[0x0b], e[0x0c], e[0x0d]);
-
-		/* 0x467f7d: label text colour and text run */
-		if (f.v20 & 0x40) {
-			if (f.v30 & 0x04) {
-				fcn_00479e00((unsigned char) f.w0.v00,
-					     (unsigned char) f.w0.v01,
-					     (unsigned char) f.w0.v02);
-			}
-			fcn_00468c30(a0, f.v30, f.buf);
-			fcn_00472880(e[0x21] ? e[0x21] : g_67d398 + 1);
-			fcn_0046bd20(e[4] + GLYPH_W(h1) / 2 - g_1015ea4 / 2 + 1,
-				     e[5] + GLYPH_H(H6) / 2 + 2, (int) b,
-				     (int) f.buf, 8, 0, 0);
-		}
-
-		/* 0x4681cc: gauge body rect */
-		fcn_0047a040(e[0x0a], e[0x0c], e[0x0b], e[0x0d]);
 		if (f.v20 & 0x20) {
 			goto body;
 		}

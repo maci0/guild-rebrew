@@ -17023,3 +17023,29 @@ early at 0x2c below msg and puts the conversion temps at 0x78/0x80, where native
 v84 at 0x84, msg at 0x3c, vec at 0x2c and v68 at 0x68. Measured no-ops: buffer declaration order,
 msg/vec/v28/v24 order, `(void)&msg`, msg as int[11], and moving the case-2 candidate from v80 into
 `e`.
+
+## 2026-11-02 — panel colour gradient decoded
+
+`0x467920` 349 to 477 with the object growing 3842 to 4256. The old model was wrong twice: the split
+at 0x467bc2 is `if (!(v20 & 0x400))` (native `mov ecx,[esp+0x30]; test ch,4; jne 0x467f7d`), a test
+of bit 0x400 rather than 0x40, and the mark and fill path is the taken branch ending with the
+closing rect at 0x467f5c while the whole colour and bitmap path is the else at
+0x467f7d..0x4681cc. The gradient is now exact: `fcn_0041bac0(0xff, 0x80, 0)` with its result
+discarded because the ftol calls overwrite eax; `t = v18 / w8.f * 2.0f` from `fld v18; fdiv w8;
+fadd st,st` with the deferred `add esp,0xc`, then `fcom qword 0x6629c8` (double 1.0) and
+`fnstsw/test ah,5` deciding `t < 1.0`; the t<1 arm computes `0xc4 - (int)(-24.0f * t)` for byte 0,
+`(int)(220.0f * t)` for byte 1 and `(float)0.0 * t` for byte 2, while the else arm subtracts 1.0
+and uses 0x664070 (194.0) and 0x664068 (135.0) against 0xdc and g_662950 (double 0.0) for byte 2;
+the bytes at frame 0/1/2 are written through `f.w0.b.v00/v01/v02` and read back as overlapping
+dwords pushed to 0x479e00. Root cause of the old mis-model: the frame union put all four bytes at
+offset 0 so the compiler CSE'd the triple; now `union { struct { char v00, v01, v02, v03; } b;
+int idx; float fl; } w0` keeps the size and the offsets. Also transcribed: the 0x46802e quad with
+`e[4], e[5]+(H3-H(h0))/2, e[6], e[7], g_77256c->x20, 0` and its conditional fcn_0047b9a0; the wc.i
+spill with `rect(wc.i, a1[0xc], (int)((float)wc.i+v18), a1[0xe])`; the clamped bitmap quad and the
+colour-byte blit; the tick loop `f.w8.i = (int)(f.w8.f/(float)(f.wc.i=W(h0)) + 1.0f)` with
+`fcn_0047cba0(e[4]+W(h0)+W(h0)*idx, ...)` under `if (!(v20 & 8))`; and the closing
+`rect(e[0x0a], e[0x0c], e[0x0b], e[0x0d])`, an argument order that was wrong at one of the two old
+sites. g_77256c is declared as a surface pointer with field x20 as in GOLDTL.fcn_0046dd60.c, and
+`extern double g_662950` is new. The block checks at 203 instructions against 208 with LCS 0.89 and
+591 against 619 bytes, so no logic is missing there. The remaining shortfall is the mark and fill
+path, about 312 bytes short by 0x467f5c, with the object 443 under native overall.
