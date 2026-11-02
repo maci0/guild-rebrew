@@ -101,10 +101,9 @@ void __cdecl fcn_00547770(void)
     memset(cnt, 0, 0x84);
     memset(cnt2, 0, 0x84);
     rp = *(u8 **)0x90e094;
-    tb = *(u8 **)0x868050;
     for (j = 0; j < 0x100; j++, rp += REC_SIZE) {
         if (*rp != 0) {
-            q = tb + *rp + (u32)*rp * 0x24c;
+            q = *(u8 **)0x868050 + *rp + (u32)*rp * 0x24c;
             t = *q;
             if (t < 0x21) {
                 cnt[t]++;

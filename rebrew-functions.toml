@@ -423613,7 +423613,7 @@ blocker = "Complete decompiler-shaped body from the live disassembly (1751 instr
 blocker_delta = 1357
 
 ["GOLDTL.0x00547770".verification]
-source_hash = "232495c4dbbe99e2d96acc60e1aa47370f68cb741dc5fff432fbd7d5d84c0e80"
+source_hash = "b6681cd9b525296bbdb1a1bed98b1433deb1ae76c4c7dcbdf1fd647a9db22ef7"
 reference_hash = "0b712403e36dd12367840bf4a29933e0f13153b8f0e01e3fc04d6fdbf27d9ca3"
 reference_size = "5595"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423624,10 +423624,10 @@ module = "GOLDTL"
 va = "0x547770"
 context_hash = ""
 defines = "[]"
-input_hash = "bbcfeae890a5bc111f8b4bda32c3bd7d5db7b4c42dc8fc1db00ba22c4ad58110"
-writer = "verify"
+input_hash = "54d9dc421d608a7c64d2f11551ec2169cf0bc68d4012fdcc6fa9c01eec9fe968"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-02T07:45:57+00:00"
+writer = "test"
+measured_at = "2026-11-02T10:49:14+00:00"
 
 [["GOLDTL.0x00547770".status_history]]
 old_status = "STUB"

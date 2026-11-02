@@ -16199,3 +16199,17 @@ hoisted order[s20] before fcn_005358e0 (0x4daaa6 12 to 1), shrinking the scan ar
 132. Rejected: the placement loop as do/while or goto-to-tail (frame 0x904), the packet scan
 with an inner break (total grew), s70 as a register variable (+7), and dropping the s7C
 keepalive without a replacement slot (frame 0x8fc).
+
+## 2026-11-02 — find loop base rematerialisation in the type scan
+
+`0x547770` 731 to 760 with the object at 5566 against native 5595. The promotion of n7b into
+ebx is driven by whether the count loop references the `tb` source variable: when the loop
+computes the record base from the global directly (`q = *(u8**)0x868050 + *rp + *rp*0x24c`,
+no `tb`), MSVC 6 promotes n7b and emits native's prologue (push ebx, push ebp, xor ebx,ebx,
+push esi, cmp ecx,4, push edi, then the clamp's store order), giving match 760. Assigning
+tb inside the loop body compiles to the same object but the compiler does not hoist the load
+(per-iteration `mov ecx,[0x868050]`), while hoisting through any local pointer (tb or a
+separate base) puts the load back in a register, re-spills n7b and returns to 731. The object
+is 29 bytes short and the slot map is still off (n7a 0x28 against 0x10, thr 0x20 against 0x28,
+fild temp 0x18 against 0x14, mask still a stack slot where native keeps it in ebx); declaration
+order is not the lever, only the initialiser store order swaps n7a and n7b.
