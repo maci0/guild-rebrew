@@ -17771,3 +17771,23 @@ which shifts every esp displacement and the prologue scheduling (reference pushe
 `xor esi,esi`, then push edi; ours pushes ebx/ebp, then `xor ebx,ebx`, then push esi/edi). The ten
 spill words at 0x10..0x34 plus work[0x400] at 0x38 otherwise match, and declaration reordering of idx
 does not move it.
+
+## 2026-11-02 — inventory dialog frame gate restores the frame-correct state
+
+`0x5D0660` is at 285 match with object 4180 and frame 0x438, the correct immediate. A further
+candidate reached 325 match with object 4240 and three converged regions (text passes 0x274 against
+native 0x276, hover block exactly 0x15f with three distinct lookup sites and no tail merge, identical
+tail length) but the compiler dropped the frame to 0x434 because the reorder lets MSVC overlay one
+4-byte slot, which shifts the buffer lea offsets by four and changes the prologue immediate; the
+declared locals still sum to 0x438 there. Padding attempts (a pad scalar, pad[1], mid[1], renamed
+block locals, mid as a statement) were byte-identical. The state was reverted in favour of the
+frame-correct one because the frame is a structural invariant while the region gains can be
+reapplied on top. What that candidate had shown, to be reapplied: the hover lookup moved inside each
+scan loop with the last two loops testing `hid == -1 &&` in the condition while the first stays
+plain; the statement order matching native's call order (nb labels, tabA draw loop forward from
+tabA[0].x, tabB line loop plus final line, tabC[0].y=0x122, the `if (nc)` posC/posB label block and
+then the connector block, where the old order gave 8 draws then 4 labels instead of native's 3 draws,
+4 labels and 5 draws); and the text passes formatting the id as `unsigned short` for movzx with x and
+y read once into idx and t0 and reused by draw and redraw. Recorded caveat: .scratch/660/ann.txt
+operand offsets are unreliable (raw native asm shows 5d08ff as [esp+0x64] where ann says [base+0x38]),
+so slots must be re-derived from `rebrew binary asm show` bytes.
