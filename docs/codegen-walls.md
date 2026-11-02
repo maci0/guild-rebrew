@@ -2456,3 +2456,22 @@ at 0x5287da, 0x528839 and 0x528a90, keeps `push 0x551` and `push 0x585` interlea
 preceding field stores, emits `mov [0x774720],eax` where we store the constant 0, loads the two
 0x1015f48/0x10161bc slots through `lea ..,[ecx*4+0x1015f40]; mov eax,[eax+8]`, and hoists the
 shared `push 0` of the two d2_SetForm calls above the `je`.
+
+TL435910 is one scalar slot from its native frame, which is a live-range-start ordering effect. Native
+frame 0x154 is 340 bytes = 31 scalar slots of 4 plus 216 aggregate bytes (tapA[3][2], the two
+float-temp groups, m[3][2], tapB[3][2], and the record-0/1 a- and b-vectors ending exactly at 0x154);
+ours is 336 = 30 slots plus the same aggregates, so the immediate cannot come from aggregate sizing and
+needs one more value whose live range overlaps the existing set. The slot distribution shows where:
+native keeps 23 scalars below tapA and 8 in the 0x84..0xa4 window (five walk address spills plus t6,
+t7 and t8), while ours keeps 27 below tapA and only 3 late with tapB highest, so the late group is an
+ordering effect none of the tested schedules moved. Native's walk epilogue also reloads a0 from
+[esp+0x168] into edi where ours reloads into esi, the same register difference as the prologue, so it
+is downstream of the slot count. Rejected with measurements, each staying at 0x150 with esi: taps
+assigned last (match 231), taps after the call (~197), twelve direct `*(float*)(layer+0x3c)` reads that
+match native's `fld [esi+0x3c]` (229, and layer moves to edi), hfield with taps last (231), grouping all
+twelve temps then storing the arrays (251), emission locals block-scoped inside the switch, and two
+native-like declaration orders. Correction recorded here: `volatile int* dead;` does not emit the dead
+store under CL 6.0 /O2, the value is dropped (a minimal TU turns the function into a tail jump); the
+form that works is `int* volatile dead;`, which does emit `mov [esp+0x68],eax` and reuses a free slot at
+frame 0x150, but it lands before the still-unmatched walk and drops match to 197, so it is only worth
+adding once the prologue matches.

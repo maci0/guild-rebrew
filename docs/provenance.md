@@ -17819,3 +17819,20 @@ preamble and a 0x136c frame, while named extern doubles avoid it at 0x1360, and 
 0x666088, 0x662c38 and 0x665388 are unregistered. The agent removed the committed
 `_tlead_GOLDTL_fcn_005b88b0[4128]` filler because the function now supplies about 4283 of those bytes,
 so the text lead pass needs re-running for this row.
+
+## 2026-11-02 — terrain layer frame arithmetic and dead-store form
+
+`0x435910` keeps 272 at object 3834 with frame 0x150 and a0 in esi; the third pass produced no keeper
+and the file is byte-identical to the kept state. Two corrections are recorded. The frame arithmetic
+settles the blocker: native 0x154 is 340 bytes = 31 scalar slots of four plus 216 aggregate bytes,
+ours is 336 = 30 slots plus the same aggregates, so the immediate cannot come from aggregate sizing and
+needs one more value whose live range overlaps the existing set. The slot distribution localises it:
+native keeps 23 scalars below tapA and 8 in the 0x84..0xa4 window (five walk address spills plus t6,
+t7 and t8) where ours keeps 27 below tapA and only 3 late with tapB highest. And `volatile int* dead;`
+does not emit the dead store under CL 6.0 /O2 because the value is dropped, while `int* volatile dead;`
+does emit `mov [esp+0x68],eax` and reuses a free slot at frame 0x150, but placing it before the still
+unmatched walk drops match to 197, so it belongs after the prologue matches. Rejected variants, all at
+0x150 with esi: taps last (231), taps after the call (~197), twelve direct `*(float*)(layer+0x3c)`
+reads matching native's `fld [esi+0x3c]` (229, layer to edi), hfield plus taps last (231), group all
+twelve temps then store the arrays (251), emission locals block-scoped inside the switch, and two
+native-like declaration orders.
