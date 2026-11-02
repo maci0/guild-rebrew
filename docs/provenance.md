@@ -19564,3 +19564,33 @@ bytes, so only a structural change to their live ranges will move them. The kept
 array packing, with v18 at 0x44 and v16 at 0xc8 against the reference's v16 at 0x44 and v18 at 0x98, and swapping
 the array declarations does not move them. Findings in .scratch/row5744c0/FINDINGS.md with the kept copy
 kept_v30_0x18_dataflowfix_*.c and backup_preswap_1793653291.c.
+
+## 2026-11-03 — quest dialog reconstructed
+
+`0x512EE0` goes from 243 to 385 matching bytes (10.7 percent) with the object at 3452 from 3465, masked-equal
+prefix 0x35 from 0xb, three relocations and lint clean; all 43 callees resolve. The frame is confirmed as
+`sub esp,0x404` being the local region exactly, with the 0x10 hole made of the four saved registers and no
+chkstk, and the layout as i 0x00, total 0x04, inner 0x08, kinds[34] 0x0c, pos3[3] 0x30, found[8] 0x3c, path[16]
+0x5c, msg 0xf8 at 0x6c overlapping counts[34] at 0x88, handles[16] 0x164, name[96] 0x1a4 and list[128] 0x204.
+Five edits landed. The three array clears must be `memset(x, 0, sizeof x)` rather than `= {0}`, because `= {0}`
+makes MSVC 6 store element 0 and then run a `rep stosd` of n-1 where native runs one full-count `rep stosd` at
+0x7c, 0x4c and 0x174, and that alone moved the prefix from 0xa to 0x35. The counter n is a declarator initialiser
+declared before kinds and emitted between the three memsets and the kinds byte block at native 0x512f12. The first
+found loop needs `(int)` casts on both sides of the pointer-range compare so it emits `jl` as native does at
+`cmp eax,0x85a0a2`. fcn_00598150's first argument is `name` and not `kind`, since native pushes
+`lea edx,[esp+0x1b4]` then `lea ecx,[esp+0x214]`, and the prototype is corrected to `(char *, char **)`; this was
+a real transcription error in the existing file. And the found-loop counter is merged into total with a separate
+k for the 0xb to 0xd and g_6a3440 counters. Remaining gaps in rank order. The scalar slot permutation is
+systemic: native has i at 0x00, count and total at 0x04 and inner at 0x08, while ours has total at 0x00, i at 0x08
+and inner at 0x04, and docs/msvc6-allocator.md Finding 52 gives the rule that for same-size locals the j-th
+initialised takes 0x0, 0x8 and 0x4 in sequence with declaration position irrelevant, so native's pool order is i,
+inner, count against our count, i, inner; declarator-init order, statement-init order, renames and merging count
+into total all leave it identical, and every reference to those slots carries a wrong displacement byte, which
+caps the prefix at 0x35. The inner do-while's done test belongs at the top of the body as `if (done) break;` before
+`p = ...`: reproducing it grows the frame to 0x408 with a fourth scalar slot and drops the prefix to 0x2, so it
+must be solved together with the slot order. The found-loop success body should stay inline and jump to the loop
+tail as native does rather than sitting out of line near 0x32c, which needs else-wrapping or an inverted test with
+swapped bodies. The last block should use slot 0x00 for its index, shared with i, and 0x04 for `total = 0`, where
+our source still uses outer. And the g_6a3424 handles-release arm on the `outer <= 0xf` path is not byte
+verified. Tools in .scratch/512ee0/ (cmp.py, diff.py, frame.py) with variants orig.c, final.c, final2.c (current),
+step1.c, best3.c and var_dowhile.c.

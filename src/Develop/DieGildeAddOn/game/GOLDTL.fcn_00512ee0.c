@@ -103,51 +103,51 @@ void __cdecl fcn_005470a0(void);
 void __cdecl fcn_00547130(void);
 void __cdecl fcn_005471c0(void);
 int __cdecl fcn_00597ff0(int, char *);
-int __cdecl fcn_00598150(int, char **);
+int __cdecl fcn_00598150(char *, char **);
 void __cdecl fcn_00598740(float *, int);
 
 /* ADDRESS: GOLDTL 0x00512ee0 */
 void __cdecl fcn_00512ee0(void)
 {
+	int i = 0;
+	int total = 0;
 	char kinds[34] = {0, 0, 3, 0, 1, 1, 0, 1, 1, 1, 0, 2, 2, 2, 1, 0,
 			2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 3, 3, 1, 0, 1, 1, 0};
 	char *e;
 	char *f;
 	Player *p;
 	Office *o;
-	int i;
 	int j;
-	int n;
+	int k;
 	int h;
 	int q;
 	int res;
 	int done;
 	int outer;
-	int total;
 	int inner;
 	int count;
 	unsigned int kind;
 	unsigned short slot;
 	{
-	int counts[34] = {0};
-	int found[8] = {0};
-	int handles[16] = {0};
+	int counts[34];
+	int found[8];
+	int handles[16];
 	char path[16];
 	char name[96];
 	int list[128];
 	float pos3[3];
 
-	n = 0;
-	for (e = g_7f4ca0 + 2; e < g_7f4ca0 + 0x65402; e += 0x21c) {
-		if (n >= 8)
+	memset(counts, 0, sizeof(counts));
+	memset(found, 0, sizeof(found));
+	memset(handles, 0, sizeof(handles));
+	for (e = g_7f4ca0 + 2; (int)e < (int)(g_7f4ca0 + 0x65402); e += 0x21c) {
+		if (total >= 8)
 			break;
 		if (*(short *)(e - 2) != -1 && (*e == 6 || *e == 7 || *e == 5)) {
-			found[n] = (int)(e - 2);
-			n++;
+			found[total] = (int)(e - 2);
+			total++;
 		}
 	}
-	total = n;
-
 	for (i = 0; i < total; i++) {
 		e = (char *)found[i];
 		if (e == 0)
@@ -183,7 +183,7 @@ void __cdecl fcn_00512ee0(void)
 		if (!done) {
 			kind = fcn_005072c0(*(unsigned char *)(e + 0x164));
 			if (fcn_00597ff0(kind, name)
-					&& (res = fcn_00598150(kind, (char **)list)) != 0) {
+					&& (res = fcn_00598150(name, (char **)list)) != 0) {
 				j = 0;
 				if (res >= 1) {
 					do {
@@ -254,8 +254,8 @@ void __cdecl fcn_00512ee0(void)
 	}
 
 	fcn_0053f630(0, 0x5a);
-	for (n = 0xb; n <= 0xd; n++) {
-		e = (char *)gm_StartFilteredEntitySearch(2, 4, 0xffff, 5, n);
+	for (k = 0xb; k <= 0xd; k++) {
+		e = (char *)gm_StartFilteredEntitySearch(2, 4, 0xffff, 5, k);
 		if (e == 0)
 			continue;
 		count = fcn_0050cf50((unsigned char *)e, 100);
@@ -271,7 +271,7 @@ void __cdecl fcn_00512ee0(void)
 		fcn_004c6090((unsigned char *)e, 0, o->f22f, 0);
 		fcn_004c6090((unsigned char *)e, 0, o->f22f, 0);
 		fcn_004c51f0(*(int *)(e + 1), -1, 0x135, 1, g_773d75, 0);
-		counts[n]++;
+		counts[k]++;
 	}
 
 	fcn_0053f630(0, 0x5f);
@@ -441,15 +441,15 @@ handles_done:
 		e = (char *)gm_FindNextFilteredEntity();
 	}
 	if (g_6a3440 == 5) {
-		n = 0;
-		for (e = g_7f4ca0 + 2; e < g_7f4ca0 + 0x65402; e += 0x21c) {
+		k = 0;
+		for (e = g_7f4ca0 + 2; (int)e < (int)(g_7f4ca0 + 0x65402); e += 0x21c) {
 			if (*e == 6)
 				break;
-			n++;
+			k++;
 		}
 		memset(&msg, 0, sizeof(msg));
 		msg.b4 = 0x4c;
-		msg.f8 = *(int *)(g_7f4ca0 + n * 0x21c + 4);
+		msg.f8 = *(int *)(g_7f4ca0 + k * 0x21c + 4);
 		msg.fc = msg.f8;
 		msg.f10 = 0;
 		msg.f14 = 0;
