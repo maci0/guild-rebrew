@@ -15905,3 +15905,35 @@ chain once and reuses it (-84). The 0x5bcacf cleanup loops already matched nativ
 bytes there come from two loop tails placed before the 0x4737c0 call. Still open: native
 emits the l_5bcf9f chain immediately before the 0x5bd632 epilogue, and the 0x5bc874
 slot-refresh flag should be a plain boolean store rather than a setcc materialisation.
+
+## 2026-11-02 — 0x51C840 reaches object 6043 with the shared splice
+
+Source `src/Develop/Units/d2.v1/GOLDTL.fcn_0051c840.c` now carries the second-pass
+structural variant (single shared `memmove`/copy tail that case 'w' jumps into,
+native digit-loop prefaces, separate 'a'/'n' arms) plus one spill change: the
+digit-loop cursor `p` is written through `char** pp = &p` after the `/3` offset
+computation. Evidence: per jump-table anchors (casemap3.py) native code ends
+0x16E5 with `8d 49 00` alignment padding, keep_e4 ended 0x16E4 and so lost the
+padding; the address-taken cursor adds one code byte, which puts the 24-entry
+jump table at 0x16E8 and the 83-byte char map at 0x1748, byte-identical to
+native. Verified: `rebrew test <file> --va 0x0051c840 --size 6048 --no-promote`
+reports SIZE_MISMATCH with object 6043, match 1432/6048 (baseline 1388, e4
+1062), same-offset identity 297 (baseline 280); `.text` is 0x17A0 in both.
+Residual: the mid region is still 71 bytes larger than native (B arm shares a
+memmove native inlines, G block +86, hoisted -1 immediate at seven
+`cmp esi,-1` sites) while the 's' formatter and 'T' case carry the -72. Requested
+by the 0x51C840 work item; source kept, baseline copy at `.scratch/51c840/keep_combo1.c`.
+
+## 2026-11-02 — node walker reaches 99.7 percent
+
+`0x581E20` moves from NEAR_MATCHING 5282 to 5369 of 5386 with the object at native size.
+The lever is cyclic rotation of the source order of the three 35/142/71 stores: MSVC 6 emits
+the stores in source order, so each rotation costs bytes locally, but the ordering changes
+global vreg numbering and flips the register homes across the rest of the function. Three
+sites rotated (the first 0x2c block to 142,35,71 and the next 0x2c block and the
+0x13/0x14/0x15 triplet to 71,35,142) close the 0xba4..0xc3c base rotation, the 0xc55/0xc8c
+three-constant materialization and the 0xec7 hoisted-constant range, now byte-exact. The
+remaining 17 bytes are three store-order mismatches (0x47f, 0x888, 0x9bc); no arrangement
+keeps native ascending store order and native register homes at once: ascending order at
+those sites reverts global allocation to 5282, and a brute force over all 216 triplet
+permutations plus a one-site hill climb tops out at 5369.

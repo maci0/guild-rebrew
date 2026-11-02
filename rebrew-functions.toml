@@ -423732,7 +423732,7 @@ status = "NEAR_MATCHING"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00581e20".verification]
-source_hash = "77f37415714367576321ae7162e88393e71bf86c779ee816166176b69b903194"
+source_hash = "ba72251d051c2a735e829b84332a7a74edc4cccf7882100ba0bcc929966189af"
 reference_hash = "b33d73352a0e7a40557519c00a196b0da35753846c06d588bfc516b5d25e47f3"
 reference_size = "5386"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423743,10 +423743,10 @@ module = "GOLDTL"
 va = "0x581e20"
 context_hash = ""
 defines = "[]"
-input_hash = "95052ca5050a20f11d8e9e5ed0d53b8e36ce7fe576a4047ec0f371c8cf2760f4"
+input_hash = "b15eef30888b333b73a6a0b6105932da71caadc2a3676174dc5e3b4404daf5cc"
 status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-02T09:32:52+00:00"
+measured_at = "2026-11-02T09:53:28+00:00"
 
 [["GOLDTL.0x00581e20".status_history]]
 old_status = "STUB"
