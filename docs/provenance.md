@@ -22010,3 +22010,25 @@ at 0x398, totalling 0x3338, while this build's 0xfc tail is a filler that happen
 buys ebx, esi and edi with the check-stack immediate at 0x332c. Every variant that makes the sum a multiple of eight drops back
 to two pushes. So the winning geometry works by a filler that matches the frame rather than by modelling the band the reference
 actually has, and the honest band model would need a different way to keep the third register.
+
+## 2026-11-03 — production runner: the blocker is invariant under the faithful respellings
+
+`0x571870` (he_RunProduktion) keeps 2757 of 3816 with the object exactly at the extent, 135 relocations, status
+NEAR_MATCHING and an unchanged source, and the pass confirms its blocker rather than moving it. The first remaining
+divergence is at byte 0x537, where the reference stores the int-to-double conversion temporary to [esp+0x30] and this build
+stores it to [esp+0x24], that is frame 0x14 against 0x08, the sum slot against the count slot. The reference computes a
+pointer as the sum of a base and 0x60 and spills it to slot 0x08, using ebx for the constant-zero common subexpression with
+three `xor ebx,ebx` sites at 0x8cc, 0x955 and 0x96b followed by compares and pushes of ebx, while this build keeps that
+pointer in ebx from 0x793 and reuses it at 0xcee, so the zeroings and the 0x14 temporary never appear.
+Four candidates were measured and none was kept. Declaring the float from the difference at its initialiser produces a
+byte-identical object, so the declaration-versus-block-initialiser hint is a no-op here. Casting inline without the temporary
+closes 21 of 37 gap windows and restores allocation state B, but the first divergence jumps to offset 0x35 in the epilogue and
+235 matched bytes are lost. The parenthesised fallback that multiplies the cast product closes windows similarly and keeps the
+three zeroings and the integer load, at a cost of 223 matched bytes. Giving the store a named type adds three matched bytes but
+opens three structural events because it makes a second fourteen-byte copy where the reference makes one. As a diagnostic,
+removing the store entirely drops the row to 1392 at 3724, which proves that single-use pointers pin the value in ebx.
+The conclusion is recorded as it stands: shortening the pointer's use and giving the frame slot two values both change
+allocation, but the frame-slot choice is invariant under every faithful respelling tried, so this row needs an allocation
+shape rather than another wording. All seventy call and global bindings validate; the twenty-five conflicts that appear past
+0x8e3 are alignment artifacts of the two-byte shift at 0x8cc whose native values are ASCII junk, and the sixty-five unresolved
+entries are string literals, float constant pools and local labels rather than callees.
