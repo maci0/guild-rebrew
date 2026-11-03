@@ -24767,3 +24767,18 @@ register and leaves the second pointer with no home at all. The reference's own 
 a block-local choice.
 The row is restored and re-measured at 185 of 2277 with the object at 2277. The conclusion recorded is that source cannot express keeping a constant as an immediate, so this
 row needs a different approach than point editing: either the loop's shape has to change so the constant is not live across the back edge, or the row stays parked.
+
+## 2026-11-03 — a whole row closes: two thousand two hundred and thirty-eight bytes fully matched
+
+`0x517250` is now a relocation match at 2238 of 2238 bytes with the object exactly at its extent, 656 instructions of which 527 are exactly equal and 129 are relocation
+slots, and no structural difference at all. The stale blocker that called it a register-allocation wall is cleared.
+Six defects were responsible and every one is semantic. One inner loop tested a character with a locale macro where the reference compares against a space, while the two
+other loops genuinely use the macro, so the three loops are not interchangeable. Two values were parsed straight into the packet at a scaled offset, where the reference
+parses into a temporary array and then copies two elements into the two integer fields; restoring that also fixed the stack frame, because the temporary array had a real
+size and position. Two sets of stores were written through a pointer that had already advanced instead of being indexed from the packet base, with the reference's own
+strength reduction showing the index form. One default value passed a global where the reference passes the literal text four. And several initialisations had to move ahead
+of the calls that read them.
+The staged numbers show the shape of the work: 806 to 1104 when the character test was corrected, 1447 when the parse target was fixed, 1919 when the first store form was
+corrected, 2226 when the second was, and 2238 with the initialisation order.
+The conclusion worth recording is that the frame did not need padding at any point: the layout became reference-identical as soon as the temporary array's real use was
+restored, which is the opposite of the pattern where rows are padded to match a frame and stay structurally false.

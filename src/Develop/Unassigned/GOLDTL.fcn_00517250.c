@@ -48,8 +48,8 @@ int __cdecl fcn_00517250(char* name, int idx)
 	GetPrivateProfileStringA("A - ALLGEMEIN", "KartenOffset", "0, 0", buf, 0x100, datei);
 	fcn_005171a0(buf, (int*) (p + 0x2ec), 2);
 	if (idx == 0) {
-		GetPrivateProfileStringA("A - ALLGEMEIN", "NachbarStadt", g_6b5c60, buf, 0x100, datei);
 		count = 0;
+		GetPrivateProfileStringA("A - ALLGEMEIN", "NachbarStadt", g_6b5c60, buf, 0x100, datei);
 		tok = strtok(buf, ",");
 		while (tok != 0) {
 			if (count >= 8) {
@@ -59,24 +59,28 @@ int __cdecl fcn_00517250(char* name, int idx)
 				tok++;
 			}
 			strcpy(staedte[count], tok);
-			count++;
 			tok = strtok(0, ",");
+			count++;
 		}
 		for (i = 0; i < count; i++) {
 			fcn_00517250(staedte[i], i + 1);
 		}
 	}
-	GetPrivateProfileStringA("A - ALLGEMEIN", "MaxPlayer", g_6b5c60, buf, 0x100, datei);
+	GetPrivateProfileStringA("A - ALLGEMEIN", "MaxPlayer", "4", buf, 0x100, datei);
 	p[0x48] = (unsigned char) atoi(buf);
 	for (i = 0; i < 0xa; i++) {
 		sprintf(staedte[0], "Einwohner_%i", i);
 		GetPrivateProfileStringA("A - EINWOHNER", staedte[0], "1400,0", buf, 0x100, datei);
-		fcn_005171a0(buf, (int*) (p + 0x64 + i * 8), 2);
+		fcn_005171a0(buf, werte, 2);
+		*(int*) (p + 0x64 + i * 8) = werte[0];
+		*(int*) (p + 0x64 + i * 8 + 4) = werte[1];
 	}
 	for (i = 0; i < 0xa; i++) {
 		sprintf(staedte[0], "Prunk_%i", i);
 		GetPrivateProfileStringA("A - PRUNK", staedte[0], "1400,0", buf, 0x100, datei);
-		fcn_005171a0(buf, (int*) (p + 0xb4 + i * 8), 2);
+		fcn_005171a0(buf, werte, 2);
+		*(int*) (p + 0xb4 + i * 8) = werte[0];
+		*(int*) (p + 0xb4 + i * 8 + 4) = werte[1];
 	}
 	GetPrivateProfileStringA("B - WETTER", "Regenwahrscheinlichkeit", "0,0,0,0", buf, 0x100, datei);
 	fcn_005171a0(buf, (int*) (p + 0x108), 4);
@@ -89,18 +93,17 @@ int __cdecl fcn_00517250(char* name, int idx)
 	for (i = 0; i < 0xb; i++) {
 		p[0x12c + i] = (unsigned char) werte[i];
 	}
-	q = p + 0x145;
 	for (i = 0; i < 8; i++) {
+		q = p + 0x145 + i * 0x12;
+		k = 0;
 		sprintf(staedte[0], "Umland%i", i);
 		GetPrivateProfileStringA("E - UMLAND", staedte[0], g_6b5c60, buf, 0x100, datei);
 		tok = strtok(buf, ",");
-		k = 0;
 		while (tok != 0) {
 			if (k >= 0xa) {
 				break;
 			}
-			while (*(int*) 0x6b25b0 > 1 ? _isctype(*tok, 8)
-			    : (*(unsigned char*) (*(unsigned char**) 0x6b23a4 + *tok * 2) & 8)) {
+			while (*tok == ' ') {
 				tok++;
 			}
 			if (k == 0) {
@@ -108,12 +111,11 @@ int __cdecl fcn_00517250(char* name, int idx)
 			} else if (k == 1) {
 				q[0] = (unsigned char) atoi(tok);
 			} else {
-				*(unsigned short*) (q + 1 + (k - 2) * 2) = (unsigned short) fcn_00501490((char*) (tok + 3));
+				*(unsigned short*) (p + 0x142 + i * 0x12 + k * 2) = (unsigned short) fcn_00501490((char*) (tok + 3));
 			}
-			k++;
 			tok = strtok(0, ",");
+			k++;
 		}
-		q += 0x12;
 	}
 	GetPrivateProfileStringA("F - GESETZE", "Verfassungsgesetze", "0,0,0,0", buf, 0x100, datei);
 	fcn_005171a0(buf, (int*) (p + 0x1dc), 0xc);
@@ -130,10 +132,9 @@ int __cdecl fcn_00517250(char* name, int idx)
 	{
 		char sep[2] = ",";
 
-		GetPrivateProfileStringA("KONTOR", "Import", g_6b5c60, buf, 0x100, datei);
 		k = 0;
+		GetPrivateProfileStringA("KONTOR", "Import", g_6b5c60, buf, 0x100, datei);
 		tok = strtok(buf, sep);
-		q = p + 0x2ac;
 		while (tok != 0) {
 			if (k >= 0x10) {
 				break;
@@ -142,19 +143,17 @@ int __cdecl fcn_00517250(char* name, int idx)
 			    : (*(unsigned char*) (*(unsigned char**) 0x6b23a4 + *tok * 2) & 8)) {
 				tok++;
 			}
-			*(unsigned short*) q = (unsigned short) fcn_00501490((char*) (tok + 3));
-			k++;
-			q += 2;
+			((unsigned short*) (p + 0x2ac))[k] = (unsigned short) fcn_00501490((char*) (tok + 3));
 			tok = strtok(0, sep);
+			k++;
 		}
 	}
 	{
 		char sep[2] = ",";
 
-		GetPrivateProfileStringA("KONTOR", "Export", g_6b5c60, buf, 0x100, datei);
 		k = 0;
+		GetPrivateProfileStringA("KONTOR", "Export", g_6b5c60, buf, 0x100, datei);
 		tok = strtok(buf, sep);
-		q = p + 0x2cc;
 		while (tok != 0) {
 			if (k >= 0x10) {
 				break;
@@ -163,10 +162,9 @@ int __cdecl fcn_00517250(char* name, int idx)
 			    : (*(unsigned char*) (*(unsigned char**) 0x6b23a4 + *tok * 2) & 8)) {
 				tok++;
 			}
-			*(unsigned short*) q = (unsigned short) fcn_00501490((char*) (tok + 3));
-			k++;
-			q += 2;
+			((unsigned short*) (p + 0x2cc))[k] = (unsigned short) fcn_00501490((char*) (tok + 3));
 			tok = strtok(0, sep);
+			k++;
 		}
 	}
 	return 1;
