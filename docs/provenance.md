@@ -20936,3 +20936,37 @@ reverted. Nearby alternates were 1493 at object 6984, 1476 at 7015 with 72 reloc
 about 538 bytes short, which is the round-one finding, and the row has 73 relocations against native's 72, one extra
 address reference that the relocation-masked comparison tolerates. Kept copy in .scratch/4da690/r12_final_1488.c with
 notes in r12_NOTES.md.
+
+## 2026-11-03 — one hundred and forty more identity rows
+
+A hundred and forty globals now carry an evidence-backed reference address, applied in five digest-guarded batches of
+twenty-eight through `.venv/bin/rebrew data set` with a dry-run preview first, then the guarded apply, then lint and a
+readback. The selection started from the 197 unique exact-fit `.data` candidates, minus the twenty already applied,
+leaving 177, of which 140 passed every gate: exact fit to the next name-encoded anchor, a unique reference VA across all
+candidates, clear of every existing row extent, a definition present in stubs/goldtl/symbol_stubs.c, a stub declaration
+size equal to the emitted extent, and nonzero reference bytes decoding consistently with the declaration type. The batch
+digests were baaa78a2c699d043bc3b3ddd70f88e69c2dac8acbf8206ad4e07f3bd6d22f38d for 0x006772bc to 0x0067d388,
+3f4453759dbce94aabfffe0a9da97e0e8efd7211c782a8499b7ce395c50f1a65 for 0x0067d38c to 0x0067fca8,
+b31d20b4759f343d6f0d27fdadcf053ef6749aaa8cc8987b246229d6ce93bff2 for 0x0067fcac to 0x006a2558,
+09ef30eef546d506535f739b50bf5efb309a71e073df6abae752dc0cdcbf716a for 0x006a255c to 0x006a268c and
+afdd27ed09b79addd96b926f0de093efcb652489396683e5a1bf649787b4e22e for 0x006a2690 to 0x006ad630. Lint after every
+batch matched the baseline at no errors and the two pre-existing warnings, with no new data-shape warning, and no digest
+guard rejected a batch. Readback returned changed zero for three rows per batch and for all 140 together, with store
+digest c322325a20524f4ad48a3a0d52690960830dca57ba0457debc52e99f1eb7d3f7, and an audit of the store confirmed every row
+is kind GLOBAL with a size equal to the emitted extent, section `.data`, file stubs/goldtl/symbol_stubs.c, and no storage
+kind, backing or link symbol. The rows do not appear in `data_annotations` because identity-only rows carry no ADDRESS
+anchor and the stub definitions sit outside src, so the changed-zero dry run is the authoritative readback. Size is the
+emitted extent per row rather than a blanket four: most are four bytes but six are 1, 2, 16, 20, 112 and 232, and a
+blanket four would have disagreed with those declarations.
+Thirty-seven of the remaining 177 were skipped with reasons. Twenty-five have reference bytes that are entirely zero:
+0x67bbfc, 0x67bc00, 0x67bc0c, 0x67bc10, 0x67fbb0, 0x6a3764, 0x6a3768, 0x6a9b94, 0x6ad580, 0x6ad628, 0x6ad62c, 0x6b5c2c,
+0x6b5c30, 0x6b5c48, 0x6b5c4c, 0x6b5c50, 0x6b5c54, 0x6b5c58, 0x6b5c5c, 0x6b5c80, 0x6b5c84, 0x6b5c88, 0x6b5cb4, 0x6b5d08 and
+0x6b5de4. Seven have a stub declaration size that disagrees with the emitted extent: 0x68a9cc declared int 4 against 16,
+0x699396 unsigned char 1 against 2, 0x6a2574 1 against 4, 0x6a4758 1 against 4, 0x6a4760 2 against 4, 0x6a9b90 1 against
+4 and 0x6b5df0 1 against 4. Three lack a definition in symbol_stubs.c, since flt_677684 and g_6b5dc8 live in
+stubs/goldtl/data_scaffold.c and g_6b5dd4 has no file or type. One, 0x675318, already holds an identity row as
+gv_00675318, and one, 0x6b5e08, has an extent of 512 that crosses the raw `.data` end at 0x6b6000 so no complete reference
+bytes exist. A few applied four-byte identities land on ASCII-like dwords such as 0x6a2390 and 0x6a23b8, which is
+acceptable because the rows assert address identity only and claim neither type nor storage kind. A further 431 `.bss`
+exact-fit, unique, non-overlapping candidates exist but have no reference bytes and were left unapplied, so this pass
+stayed on the raw `.data` byte-corroborated route.

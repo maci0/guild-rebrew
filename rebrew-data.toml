@@ -5917,14 +5917,14 @@ built_va = "0x6a0b70"
 placement_method = "link-symbol"
 measured_at = "2026-10-31T12:39:26+00:00"
 ["GOLDTL.0x00690478"]
-file = ""
+file = "stubs/goldtl/symbol_stubs.c"
 name = "g_690478"
 kind = "GLOBAL"
 type = "char[]"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-31T12:39:26+00:00"
-status = "DISPLACED"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+size = 232
 
 ["GOLDTL.0x00690478".verification]
 status = "DISPLACED"
@@ -27671,3 +27671,1254 @@ file = "stubs/goldtl/symbol_stubs.c"
 kind = "GLOBAL"
 updated_by = "data"
 updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x006772bc"]
+name = "g_6772bc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x006772c0"]
+name = "g_6772c0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x006772c4"]
+name = "g_6772c4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x00678c08"]
+name = "g_678c08"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x00678de8"]
+name = "g_678de8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x00678dec"]
+name = "g_678dec"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x006791c8"]
+name = "g_6791c8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x00679e2c"]
+name = "g_679e2c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067a294"]
+name = "g_67a294"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067a298"]
+name = "g_67a298"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067a29c"]
+name = "g_67a29c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067a2a0"]
+name = "g_67a2a0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067a2a4"]
+name = "g_67a2a4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067a37c"]
+name = "g_67a37c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067a960"]
+name = "g_67a960"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067ab48"]
+name = "g_67ab48"
+size = 1
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067bbe0"]
+name = "g_67bbe0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067bbec"]
+name = "g_67bbec"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067bbf0"]
+name = "g_67bbf0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067bc1c"]
+name = "g_67bc1c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067bc20"]
+name = "g_67bc20"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067bd2c"]
+name = "g_67bd2c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067d368"]
+name = "g_67d368"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067d36c"]
+name = "g_67d36c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067d374"]
+name = "g_67d374"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067d380"]
+name = "g_67d380"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067d384"]
+name = "g_67d384"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067d388"]
+name = "g_67d388"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:17+00:00"
+
+["GOLDTL.0x0067d38c"]
+name = "g_67d38c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d390"]
+name = "g_67d390"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d394"]
+name = "g_67d394"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d398"]
+name = "g_67d398"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d39c"]
+name = "g_67d39c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d3a0"]
+name = "g_67d3a0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d3a4"]
+name = "g_67d3a4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d3a8"]
+name = "g_67d3a8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d3ac"]
+name = "g_67d3ac"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d3b0"]
+name = "g_67d3b0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d8c8"]
+name = "g_67d8c8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d8cc"]
+name = "g_67d8cc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d8d0"]
+name = "g_67d8d0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d8dc"]
+name = "g_67d8dc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d8e0"]
+name = "g_67d8e0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d8e4"]
+name = "g_67d8e4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d8e8"]
+name = "g_67d8e8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d91c"]
+name = "g_67d91c"
+size = 1
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d964"]
+name = "g_67d964"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067d968"]
+name = "g_67d968"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067dab8"]
+name = "g_67dab8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067dabc"]
+name = "g_67dabc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067dac0"]
+name = "g_67dac0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067e964"]
+name = "g_67e964"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067fba8"]
+name = "g_67fba8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067fbac"]
+name = "g_67fbac"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067fca4"]
+name = "g_67fca4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067fca8"]
+name = "g_67fca8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:32:46+00:00"
+
+["GOLDTL.0x0067fcac"]
+name = "g_67fcac"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x0067fcb0"]
+name = "g_67fcb0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006816d8"]
+name = "g_6816d8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x0068b7a4"]
+name = "g_68b7a4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x0068b7a8"]
+name = "g_68b7a8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x0068bfb8"]
+name = "g_68bfb8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x0068bfbc"]
+name = "g_68bfbc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x0068bfc0"]
+name = "g_68bfc0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x0068bfcc"]
+name = "g_68bfcc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x00696540"]
+name = "g_696540"
+size = 16
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x00696550"]
+name = "g_696550"
+size = 16
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x0069938c"]
+name = "g_69938c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x00699390"]
+name = "g_699390"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x00699394"]
+name = "g_699394"
+size = 2
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x00699b0c"]
+name = "g_699b0c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a2390"]
+name = "g_6a2390"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a2394"]
+name = "g_6a2394"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a2398"]
+name = "g_6a2398"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a23a8"]
+name = "g_6a23a8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a23ac"]
+name = "g_6a23ac"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a23b8"]
+name = "g_6a23b8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a23bc"]
+name = "g_6a23bc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a24e4"]
+name = "g_6a24e4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a251c"]
+name = "g_6a251c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a2520"]
+name = "g_6a2520"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a2524"]
+name = "g_6a2524"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a2558"]
+name = "g_6a2558"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:14+00:00"
+
+["GOLDTL.0x006a255c"]
+name = "g_6a255c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a2560"]
+name = "g_6a2560"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a2578"]
+name = "g_6a2578"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a257c"]
+name = "g_6a257c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a2580"]
+name = "g_6a2580"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a2584"]
+name = "g_6a2584"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a2588"]
+name = "g_6a2588"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a258c"]
+name = "g_6a258c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a2590"]
+name = "g_6a2590"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a259c"]
+name = "g_6a259c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25a0"]
+name = "g_6a25a0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25a4"]
+name = "g_6a25a4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25a8"]
+name = "g_6a25a8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25b4"]
+name = "g_6a25b4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25b8"]
+name = "g_6a25b8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25bc"]
+name = "g_6a25bc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25c0"]
+name = "g_6a25c0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25c4"]
+name = "g_6a25c4"
+size = 16
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25d4"]
+name = "g_6a25d4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25d8"]
+name = "g_6a25d8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25dc"]
+name = "g_6a25dc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25e0"]
+name = "g_6a25e0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25e4"]
+name = "g_6a25e4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25e8"]
+name = "g_6a25e8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a25ec"]
+name = "g_6a25ec"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a2640"]
+name = "g_6a2640"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a2644"]
+name = "g_6a2644"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a268c"]
+name = "g_6a268c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:33:39+00:00"
+
+["GOLDTL.0x006a2690"]
+name = "g_6a2690"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a28f0"]
+name = "g_6a28f0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a28f4"]
+name = "g_6a28f4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a2b68"]
+name = "g_6a2b68"
+size = 112
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a2bd8"]
+name = "g_6a2bd8"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a2bdc"]
+name = "g_6a2bdc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a2be0"]
+name = "g_6a2be0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a2bec"]
+name = "g_6a2bec"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a2bf0"]
+name = "g_6a2bf0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a2c04"]
+name = "g_6a2c04"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a2c08"]
+name = "g_6a2c08"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a2c20"]
+name = "g_6a2c20"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a342c"]
+name = "g_6a342c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a3430"]
+name = "g_6a3430"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a3434"]
+name = "g_6a3434"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a3760"]
+name = "g_6a3760"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a376c"]
+name = "g_6a376c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a3770"]
+name = "g_6a3770"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a3774"]
+name = "g_6a3774"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a475c"]
+name = "g_6a475c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a4764"]
+name = "g_6a4764"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a4768"]
+name = "g_6a4768"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a81dc"]
+name = "g_6a81dc"
+size = 20
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006a81f0"]
+name = "g_6a81f0"
+size = 20
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006ab3dc"]
+name = "g_6ab3dc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006acf80"]
+name = "g_6acf80"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006ad624"]
+name = "g_6ad624"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x006ad630"]
+name = "g_6ad630"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:34:05+00:00"
