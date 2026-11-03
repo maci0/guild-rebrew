@@ -22968,3 +22968,21 @@ recovered from scratch; nobody else should treat a bound file as scratch because
 claims no source binding or verification status, which is now stale tool-owned text rather than something to hand-edit. The partial body
 is kept because 132 matched bytes with a verified frame and first call screen is strictly more evidence than a three-byte stub, and it is
 explicitly not a reconstruction; if the project prefers unbound rows to partials, the binding can be retired and the file removed.
+
+## 2026-11-03 — vfs row: a wrong buffer argument and a duplicated fallback
+
+`0x4E2B70` moves from 588 to 618 matching bytes with the object at 1211 against the inventory extent of 1199, so the surplus falls from
+seventy-one bytes to twelve, and 24 relocations remain with twenty-two validated. Two defects were proved from the reference bytes and
+repaired. The call that takes a buffer and a length receives the buffer's base rather than the base plus twelve: the reference forms the
+address with three pushes pending, which puts it at the base, while this build passed an address twelve bytes higher, and the bytes at
+those two call sites now agree. And the fallback call to 0x5d0660 was emitted twice where the reference shares one site reached both by
+the flag guards and by the zero path of the earlier call; a shared label replaced the duplicate and closed about two hundred bytes of
+window, taking the object from 1270 to 1217.
+Two smaller repairs followed: a slot value is hoisted into a local so it survives the two-call pair the way the reference keeps it in a
+register, and the flags guard reads the record field directly instead of through a local, which makes the value land in the accumulator
+and produce the reference's two-byte tests. Those take the object to 1211 and the match to 618.
+The first mismatch at byte 38 is not source-controllable and is recorded so nobody chases it: the reference performs the four-byte cdecl
+cleanup immediately after the lookup call and then stores six words, while this build keeps the push allocated, stores four bytes higher
+and defers the same cleanup, with an identical instruction multiset; the shift closes by byte 240. The remaining twelve bytes are long
+jumps on one guard, an eight-byte float store against a three-byte store, a disp32 address form for one buffer, and a tail reload. The one
+callee without a bound address, at 0x4e4eb0, stays declared as a void cdecl function and unresolved.

@@ -56,7 +56,6 @@ void __cdecl fcn_004e2b70(void* arg)
 	int state;
 	int start;
 	int r;
-	int flags;
 	int idxval;
 	unsigned int mask;
 	__int64 q;
@@ -123,29 +122,29 @@ void __cdecl fcn_004e2b70(void* arg)
 	fcn_004234e0(0, (char*) 0x68d288, 1, 0x3f, 0x7f, 0, 0);
 	*(int*) 0x7725c8 = 0;
 	r = fcn_005095d0(obj, &f.yslot);
-	flags = *(int*) ((char*) obj + 0x1cc);
 	if (r != 0) {
-		if ((flags & 1) != 0 && (flags & 2) == 0) {
+		if ((*(int*) ((char*) obj + 0x1cc) & 1) != 0 && (*(int*) ((char*) obj + 0x1cc) & 2) == 0) {
 			idxval = *(unsigned short*) obj;
 			io_FormatTextBuffer(f.buf1, 0x40fb, 0x40f5, idxval);
-			if (fcn_004e6eb0(f.buf1, 0x10) != 0) {
-				r = *(int*) ((char*) obj + 4);
-				f.alo = 0;
-				f.f10 = 100.0f;
-				fcn_004c4510(obj, r);
-				fcn_004c4570(4, 1, 0x1c, &f.f10);
-				fcn_004c4570(4, 1, 0x24, &f.alo);
-				*(char*) ((char*) obj + 8) = 100;
-				fcn_004c5360();
-				fcn_004c5420(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
-			} else {
-				fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, *(int*) 0x68bfb8);
-			}
-		} else {
-			fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, *(int*) 0x68bfb8);
+			if (fcn_004e6eb0(f.buf1, 0x10) == 0)
+				goto dialog_fallback;
+			r = *(int*) ((char*) obj + 4);
+			f.alo = 0;
+			f.f10 = 100.0f;
+			fcn_004c4510(obj, r);
+			fcn_004c4570(4, 1, 0x1c, &f.f10);
+			fcn_004c4570(4, 1, 0x24, &f.alo);
+			*(char*) ((char*) obj + 8) = 100;
+			fcn_004c5360();
+			fcn_004c5420(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
+			goto dialog_done;
 		}
+	dialog_fallback:
+		fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, *(int*) 0x68bfb8);
+	dialog_done:
+		;
 	} else {
-		if ((flags & 1) != 0 && (flags & 2) == 0) {
+		if ((*(int*) ((char*) obj + 0x1cc) & 1) != 0 && (*(int*) ((char*) obj + 0x1cc) & 2) == 0) {
 			idxval = *(unsigned short*) obj;
 			f.f10 = 0.0f;
 			*(float*) &f.alo = 100.0f;
@@ -169,12 +168,13 @@ void __cdecl fcn_004e2b70(void* arg)
 			fcn_005356b0(0x5438c0);
 		} else {
 			fcn_00509fc0(obj, f.buf2, 1);
-			fcn_004e6eb0(f.buf2 + 0xc, 0x10);
+			fcn_004e6eb0(f.buf2, 0x10);
 		}
 	}
 	fcn_004e48b0();
-	fcn_004e4610((void*) f.xslot);
-	fcn_004e44f0((void*) f.xslot);
+	idxval = f.xslot;
+	fcn_004e4610((void*) idxval);
+	fcn_004e44f0((void*) idxval);
 	fcn_004e4c00();
 	fcn_004e4910();
 	fcn_004c09b0();
