@@ -312,7 +312,7 @@ void __cdecl fcn_00569ff0(char* e)
 			} else {
 				num = *(unsigned char*) (cnt2 + 0x37);
 				fv = (float) num * *(double*) 0x6640e8;
-				if (fv < *(float*) 0x662a2c) {
+				if (*(float*) 0x662a2c > fv) {
 					fv = 0.001f;
 				}
 			}
@@ -332,7 +332,8 @@ void __cdecl fcn_00569ff0(char* e)
 		        *(int*) (0x7f4ca4 + *(unsigned short*) (pb + 0x27) * 0x21c),
 		        *(int*) (px + 4), *(int*) (pa + 1));
 		if (flag != 0) {
-			memset(b400, *(char*) 0x6b5c60, 0x400);
+			memset(b400, 0, 0x400);
+			b400[0] = *(char*) 0x6b5c60;
 		}
 		pa = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 		if (pa == 0) {

@@ -22032,3 +22032,29 @@ allocation, but the frame-slot choice is invariant under every faithful respelli
 shape rather than another wording. All seventy call and global bindings validate; the twenty-five conflicts that appear past
 0x8e3 are alignment artifacts of the two-byte shift at 0x8cc whose native values are ASCII junk, and the sixty-five unresolved
 entries are string literals, float constant pools and local labels rather than callees.
+
+## 2026-11-03 — the float repair fits once the seeded clear is split
+
+`0x569FF0` now carries the proven float repair together with a split clear, measuring 976 of 3772 with the object at 3768, gap
+events 334 and the drift at reference 0x817 improved from minus twelve to minus six; status SIZE_MISMATCH, one relocation
+count of 62, lint clean. The float block is now the reference sequence exactly, `fld [0x662a2c]; fcomp; fnstsw ax; and
+eax,0x4100; jne`, differing only in the stack slot of the local, 0x28 here against 0x10 in the reference, which is the register
+wall rather than this repair.
+The byte budget for fitting it came from the other half of the same window. The reference clear is a seeded byte followed by
+a zero fill, so it loads the seed, then fills with a zero through repeated stores, whereas this build was calling a seeded
+memset over the whole 0x400 range. Splitting it into a zero memset and a first-byte store reproduces what the reference
+actually does and drops the sequence from 37 to 29 bytes, which is what makes the float repair fit inside the extent. The
+buffer is overwritten by the text formatter before any use on that path, so the change preserves behaviour.
+Twelve shapes were measured. The plain float candidate alone gives 952 at 3776 with 334 events and the same drift; the
+reference-shaped case 5, with the arguments pushed before the single jump, a duplicated call and no null check in the flag arm,
+gives 342 at 3744 with 322 events but wrecks the function's allocation, moving the entity back into ebx and restoring the
+minus twelve drift; adding various memset splits to it gives 335 to 359 events at 3740 to 3764; and the kept shape, which is
+the existing case-5 structure with the split clear, gives 976 at 3768 with 334 events and the improved drift. One alternative
+reaches the exact 3772 with the split done the other way round, at 949 with 335 events, and is noted as the exact-size option if
+a size verdict is preferred over the window count.
+The case-5 excess is not closed structurally: the shared call is still hoisted, with the object loading arguments, pushing,
+calling, then testing the result and jumping, where the reference pushes the arguments before a single jump and duplicates the
+call with no flag-arm null check. The parameter wall at object offset 7 also did not move: this build still subtracts 0x738 and
+keeps the entity in ebx with one zero register and stores at 0x10, 0x2c, 0x30 and 0x18, while the reference keeps it in esi with
+three zero registers and stores at 0x34, 0x2c, 0x30 and 0x1c, and only one spill slot moved. The gap tool reports the object
+and reference code both ending at 0xec0, so the code span agrees even though the object size reads 3768 against 3772.
