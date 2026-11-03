@@ -23852,3 +23852,19 @@ One experiment scored one byte higher but left the frame four bytes short of the
 recorded. Three other variants were reverted by copying scratch backups. The remaining divergence is register allocation: the reference reloads its parameter from
 the stack at each use group and keeps the current record in ebp, while this build hoists the parameter and spills the record, so the first difference is a parameter
 load before the register pushes; the largest remaining windows are in a switch region and an entity loop.
+
+## 2026-11-03 — geometry row: a narrowed comparator and three threshold forms
+
+`0x567590` moves from 204 to 254 matched bytes with the object at 2652 against the 2648 extent, four over where it was thirty-six over, and four repairs were taken
+from the reference. The kind comparison is an unsigned character, because the reference compares the building byte directly with a one-byte compare where this build
+zero-extended it into a full register per use; that is the largest single gain, removing twenty-eight bytes. One distance comparison is rewritten as the negation of
+the opposite one so the compiler emits the reference's mask-and-parity pair, though one branch polarity still differs. A converted call result is compared against
+0x20 rather than 0x1f, and a three-site accumulation compare is written as strictly greater than 0xc80 rather than at least 0xc81, both matching the reference's
+compare-and-jump forms.
+The windows covering the first case's loop are gone and that loop now tracks the reference instruction for instruction with deltas of three to eleven bytes, at the
+price of one resynchronisation later, because this build keeps a distance-skip store inline where the reference branches into a shared loop tail with a single store.
+Two variants were reverted because they changed no bytes.
+One disagreement is recorded: for the first case's loop the differ reports a large window while the accesses and calls are identical at the same absolute
+addresses, the only difference being which register holds the base and therefore which displacement appears. The structural reading was kept and the loop was not
+rewritten. Remaining divergence: the frame is eight bytes short of the reference, the found flag and two outputs are not spilled where the reference spills them, and
+a store to one field is duplicated where the reference shares it.

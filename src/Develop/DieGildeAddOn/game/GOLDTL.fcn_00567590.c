@@ -51,7 +51,7 @@ void __cdecl fcn_00567590(char* a0)
 	int out2;
 	int idx;
 	int count;
-	int kind;
+	unsigned char kind;
 	int c2;
 	int id;
 	float dist;
@@ -84,7 +84,7 @@ void __cdecl fcn_00567590(char* a0)
 					else {
 						kind = *(unsigned char*) (0x7f4ca2
 						       + *(unsigned short*) (*(int*) p + 0x27) * 0x21c);
-						if (kind != 6 && kind != 7 && (int) fcn_00402ba0(0, 0) <= 0x1f) {
+						if (kind != 6 && kind != 7 && (int) fcn_00402ba0(0, 0) < 0x20) {
 							other = gm_SearchTable67(*(int*) (*(int*) (p + 0x18) + 0x2c));
 							if (other != 0 && *(int*) (other + 0x61) != 0) {
 								char* src;
@@ -98,7 +98,7 @@ void __cdecl fcn_00567590(char* a0)
 								    (v10[0] - v11[0]) * (v10[0] - v11[0])
 								    + (v10[1] - v11[1]) * (v10[1] - v11[1])
 								    + (v10[2] - v11[2]) * (v10[2] - v11[2]));
-								if (g_665ec4 <= dist) {
+								if (!(dist < g_665ec4)) {
 									*(int*) (a0 + 0xac) = idx;
 									goto next0;
 								}
@@ -188,7 +188,7 @@ next0:
 					     + *(unsigned short*) (*(int*) (p - 0x18) + 0x27) * 0x21c);
 					if (c2 == 6 || c2 == 7) {
 						fcn_004c6650(*(int*) (p - 0x180));
-						if (count != 0 && gm_AccumulateTyped2(p - 0x184) >= 0xc81
+						if (count != 0 && gm_AccumulateTyped2(p - 0x184) > 0xc80
 						    && gm_RandomMod(2) != 0) {
 							if (fcn_00567410(p - 0x184, count, list, &out1, &out2) != 0) {
 								fcn_004c5da0(*(int*) (p - 0x180), out1, out2, 0, 0, "Go to wirtshaus");
@@ -232,7 +232,7 @@ after1:
 			        || out2 != *(int*) (*(int*) (p + 0x18) + 0x30))
 			    && (*(unsigned int*) (p + 0x5c) & 0x800) == 0) {
 				fcn_004c6650(*(int*) (p - 0x168));
-				if (count != 0 && gm_AccumulateTyped2(p - 0x16c) >= 0xc81 && gm_RandomMod(2) != 0) {
+				if (count != 0 && gm_AccumulateTyped2(p - 0x16c) > 0xc80 && gm_RandomMod(2) != 0) {
 					if (fcn_00567410(p - 0x16c, count, list, &out1, &out2) != 0) {
 						fcn_004c5da0(*(int*) (p - 0x168), out1, out2, 0, 0, "Go to wirtshaus");
 					}
@@ -275,7 +275,7 @@ after1:
 			        || out1 != *(int*) (*(int*) (p + 0x20) + 0x30))
 			    && (*(unsigned int*) (p + 0x64) & 0x800) == 0) {
 				fcn_004c6650(*(int*) (p - 0x160));
-				if (count != 0 && gm_AccumulateTyped2(p - 0x164) >= 0xc81 && gm_RandomMod(2) != 0) {
+				if (count != 0 && gm_AccumulateTyped2(p - 0x164) > 0xc80 && gm_RandomMod(2) != 0) {
 					if (fcn_00567410(p - 0x164, count, list, &out2, &out1) != 0) {
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, out1, "dummy_EINGANG");
 						fcn_004c5ba0(*(int*) (p - 0x160), out2, out1, g_6b5c60);
