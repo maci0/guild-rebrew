@@ -20367,3 +20367,24 @@ bytes. The source sum of 24,347,953 is 887 bytes below the earlier map figure of
 the sources, carrying three pads that no current source defines, so the source figure is the measured one. One caveat
 is recorded upstream-facing: `rebrew data layout fill` appends new `_dpad_` definitions at file end, after any
 `#endif`, so a later fill would reintroduce unguarded pads until the generator learns the guard.
+
+## 2026-11-03 — production message float compare block parked
+
+`0x569FF0` stays at 982 of 3772 with the object exact and lint clean; the evaluation-order pass kept no edit and the
+source is byte-identical to the 982 baseline. Native's target block at 0x56a84e is
+call gm_RandomFloat01; fld [esp+0x10]; fld [esp+0x20]; fmul qword [0x665ed0]; fsubp st(1); fst [esp+0x10];
+fcompp; fnstsw ax; and eax,0x4100; jne; mov [esp+0x14],1; jmp; mov [esp+0x14],0, which is 58 bytes, while the
+baseline at 0x82a does fld; fld; fmul; fsubp; fstp; call; fcomp; then test ah,0x5; jnp for 56 bytes. Four findings
+explain why source cannot bridge them. A plain store cannot emit the non-popping `fst`, because fv is dead after the
+comparison, so the compiler fuses `fv = fv - prod` into the compare and drops the store; only a volatile store, or a
+store to a slot that stays live, forces it. The `jne` polarity is reachable only through the negated condition
+`!(fv > rnd)`, since the forward condition emits `je` with a hoisted store. The `mov 1; jmp; mov 0` body is not
+produced by this compiler for a two-simple-store if-else, which always merges into one hoisted store plus one
+conditional store, so native's block is two bytes longer than ours and the case-5 tail sits 36 bytes ahead of native,
+meaning exact sequence content cannot add matches and only a two-byte length delta could shift downstream. And the
+same source under msvc-6.0-sp5 without the processor pack gives 724 at object 3788, so the `and eax,0x4100` forms are
+not a wrong-profile artifact and the processor-pack profile stays correct. The only probe that reproduced call before
+subtraction plus `fst`, `fcompp`, `and eax,0x4100` and `jne` in order at object 3772 was match-neutral and needed a
+fabricated volatile qualifier, so it was rejected under the restore rule. A blocker is set on the row. Probes and
+results in .scratch/569ff0/ including varA, varF, pr_p, sw_, wv_w1_0, s2, y1 to y3, z2, z3, t_A, t_s2, t_w1,
+t_plain and t_final_r3.
