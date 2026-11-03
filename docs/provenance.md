@@ -24604,3 +24604,12 @@ this target are all overlapped by drifting rows, which is why four verified rows
 That makes the number honest rather than broken: data verification reports the truth that almost every tracked data byte currently sits inside a drifting symbol, and the
 way to change it is to fix placement, which is what the pad reconciliation began. It also means the earlier claim about writing sizes for twelve hundred rows was aimed at
 the wrong problem and is withdrawn.
+
+## 2026-11-03 — an attempt to find the text rows that inflate the built image, and why the method failed
+
+With initialised data still a hundred thousand bytes past the reference and part of that caused by section layout, an attempt was made to find which functions inflate
+the built `.text` by comparing each built symbol span from the link map against the stored reference extent. The first rows it ranked are impossible: a hundred-and-seventy
+byte reference showing thirty-two thousand eight hundred built bytes, and a hundred-and-thirteen byte row showing thirty-one thousand. Those are not function bodies but
+gaps and alignment between map symbols, so the span-from-next-symbol assumption does not hold in a link whose text has holes.
+The method is therefore recorded as unreliable rather than acted on, and nothing was changed from it. A trustworthy version needs per-row object sizes from the compiler
+rather than spans from addresses, which means a batch compile; that is a separate, deliberate run rather than something to infer from a map.
