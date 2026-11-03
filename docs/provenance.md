@@ -20566,3 +20566,27 @@ set is eleven drops. The combined effect is 2,469,688 bytes removed and `.data` 
 239,806 and removing pads dropped the match, so any change here needs a relink comparison, and a pad another target
 needs should be guarded with the existing
 `#if defined(REBREW_SERVER) || defined(REBREW_GOLD)` form rather than deleted.
+
+## 2026-11-03 — d2 row: scattered constant stores reproduced
+
+`0x4DA690` rises from 882 to 1340 matching bytes (19.0 percent) with 72 relocations, status SIZE_MISMATCH and lint
+clean, and the object is 7048 against native 7057, having been exact before the pass, while the first divergence moves
+from offset 155 to 158. The root cause fixed was the six `blkB.order[]` constant stores: native scatters them into the
+string-copy fill stalls of the sitzung table, one after the `rep stosd` of sitzung[1] and five after sitzung[4]'s, at
+target offsets 155 and 392 to 436, whereas this build emitted them as one contiguous statement block after the local
+initialisers, which displaced every byte after offset 155. Declaring the values as an initialised array as the first
+local, before the string tables, reproduces the scatter exactly, and target offsets 155 to 838 now match apart from
+single-byte differences: the six store displacements at 158, 395, 406, 417, 428 and 439 and a few register-allocation
+bytes at 544, 565, 703, 765, 781, 797, 805, 814, 820, 824 and 834. The remaining first divergence at offset 158 is the
+store displacement, native `mov dword [esp+0xb8],6` against `[esp+0xa8]`, because the separate order array lands
+0x10 low.
+Three walls were measured and not chased. Five declaration shapes failed to move the order array from 0xa8 to native's
+0xb8; moving `s98[4]` before the order array collapses the frame from 0x900 to 0x8f0 and drops the match to 704, and
+putting the array back inside the aggregate kills the scatter and drops it to 882 at object 1280. `rebrew diagnose
+stack` reports a target frame of 0x980 against a compiled 0x924 while the esp-relative slots agree at sitzung 0x1e4,
+sD0 0xd0 and sF4 0x104. From about offset 0x30e native keeps `a0` in ebx and the zero in ebp where this build has them
+swapped, which costs the nine-byte size shortfall. The body from target offset 1058 onward is still approximate: loop
+shapes, `s44` kept in memory where native keeps it in a register, `order[s20]` constant-folded to 6 where native loads
+the slot at 0xc0, and the sel and s98 bases at 0xa8 against native's 0xc0, which is what keeps the row at STUB.
+Unresolved callees with null bound addresses: _fcn_004727a0 with 24 references, _fcn_0064d41a with 6, _fcn_0051af00
+with 2 and _fcn_004e4eb0 with 1.

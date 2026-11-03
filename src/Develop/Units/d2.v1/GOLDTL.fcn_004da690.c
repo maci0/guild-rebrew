@@ -113,6 +113,9 @@ void __cdecl fcn_004da690(unsigned int *a0)
     int s108;
     int s10C;
     int s110;
+    /* Declared before the string tables: the native body emits these six
+       stores scattered into the fill stalls of the sitzung copies. */
+    int order[6] = { 6, 5, 4, 3, 2, 1 };
     char sitzung[6][0x30] = {
         "Sitzung_Wohnsitz.ed3",
         "Sitzung_Kirche.ed3",
@@ -139,10 +142,9 @@ void __cdecl fcn_004da690(unsigned int *a0)
     } blkA;
     struct {
         int s98[4];
-        int order[6];
         int sD0[6];
-        /* native leaves 0xe8..0x103 untouched; inert filler keeps this
-           aggregate at 0x7c bytes so sF4 lands on native's 0x104 */
+        /* native leaves 0xe8..0x103 untouched; inert filler keeps
+           sF4 on native's 0x104 */
         int pad0;
         int pad1;
         char pad2[16];
@@ -150,12 +152,6 @@ void __cdecl fcn_004da690(unsigned int *a0)
         int sF4[8];
     } blkB;
     int n, k, i;
-    blkB.order[0] = 6;
-    blkB.order[1] = 5;
-    blkB.order[2] = 4;
-    blkB.order[3] = 3;
-    blkB.order[4] = 2;
-    blkB.order[5] = 1;
 
     memcpy(a0c, a0, 0x114);
     s2C = 0;
@@ -181,7 +177,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
             blkB.sF4[i] = 0;
 
     s20 = 0;
-    s28 = fcn_004e8b80(blkB.order[s20], 6, (char *)&mid[0x38]);
+    s28 = fcn_004e8b80(order[s20], 6, (char *)&mid[0x38]);
     s0C = 0;
     k = 0;
     if (s28 > 0) {
@@ -200,12 +196,12 @@ void __cdecl fcn_004da690(unsigned int *a0)
         s0C = k;
     }
 
-    ord = blkB.order[s20];
+    ord = order[s20];
     fcn_005358e0(0x6b5c60);
     if (fcn_004ea130(ord) == 0) {
         unsigned short v = *(unsigned short *)0x774970;
         if (*(int *)((char *)a0 + 0xc) == *(int *)(0x7f4ca4 + (unsigned int)v * 0x21c)) {
-            fcn_004e99e0(blkB.order[s20], n, (char *)&mid[0x38]);
+            fcn_004e99e0(order[s20], n, (char *)&mid[0x38]);
         }
         return;
     }
