@@ -3,7 +3,7 @@ int __cdecl fcn_004e4ec0(void);
 int __cdecl fcn_00536bb0(void);
 void __cdecl fcn_00459710(int, int);
 int __cdecl sb_LoadSampleBank(char *, int);
-void *__cdecl gm_StartFilteredEntitySearch(int);
+void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004d5450(void *);
 int __cdecl fcn_004c3100(char *, int);
 int __cdecl fcn_0044c310(char *, char *);
@@ -39,7 +39,6 @@ void __cdecl fcn_004d1ff0(void *arg)
 	int first;
 	int cur;
 	int base;
-	char *scen;
 	int mode;
 	int i;
 	int j;
@@ -55,23 +54,22 @@ void __cdecl fcn_004d1ff0(void *arg)
 	int v14;
 	int v10;
 	int slots[3];
-	char ids[4];
+	char ids[12];
 	unsigned char c;
 	unsigned char ty;
 	short *sp;
 	int **pp;
 	unsigned char *o;
-	unsigned char pathbuf[0x14];
+	unsigned char pathbuf[0x10];
 	char buf[0x100];
 
 	o = (unsigned char *) arg;
 	mode = 0xa;
-	scen = 0;
 	if ((o[0x7c] & 1) == 0) {
 		if ((o[0x7c] & 4) != 0) {
-			scen = "Kampfszenario_BERGPASS.ed3";
+			fcn_004e4730("Kampfszenario_BERGPASS.ed3");
 		} else {
-			ent = (int) gm_StartFilteredEntitySearch(1);
+			ent = (int) gm_StartFilteredEntitySearch(1, 1, *(int *) (o + 0x14));
 			r = gm_CheckEntityType((void *) ent, 1, 1, *(int *) (o + 0x14));
 			ty = *(unsigned char *) ent;
 			if (r == 0) {
@@ -80,19 +78,19 @@ void __cdecl fcn_004d1ff0(void *arg)
 				if (c == 4) {
 					c = *(unsigned char *) (base + 0x247);
 					if (c == 1)
-						scen = "Kampfszenario_SCHMUGGLERLOCH.ed3";
+						fcn_004e4730("Kampfszenario_SCHMUGGLERLOCH.ed3");
 					else if (c == 2)
-						scen = "Kampfszenario_UNTERSCHLUPF.ed3";
+						fcn_004e4730("Kampfszenario_UNTERSCHLUPF.ed3");
 					else if (c == 3)
-						scen = "Kampfszenario_DIEBESGILDE.ed3";
+						fcn_004e4730("Kampfszenario_DIEBESGILDE.ed3");
 				} else if (c == 0x13) {
 					c = *(unsigned char *) (base + 0x247);
 					if (c == 1)
-						scen = "Kampfszenario_STADTWACHE_KLEIN.ed3";
+						fcn_004e4730("Kampfszenario_STADTWACHE_KLEIN.ed3");
 					else if (c == 2)
-						scen = "Kampfszenario_STADTWACHE_MITTEL.ed3";
+						fcn_004e4730("Kampfszenario_STADTWACHE_MITTEL.ed3");
 					else if (c == 3)
-						scen = "Kampfszenario_STADTWACHE_GROSS.ed3";
+						fcn_004e4730("Kampfszenario_STADTWACHE_GROSS.ed3");
 				}
 			} else {
 				c = *(unsigned char *) (*(int *) 0x868050 + ty * 0x24d);
@@ -100,22 +98,19 @@ void __cdecl fcn_004d1ff0(void *arg)
 					fcn_004e4730("Kampfszenario_RAEUBERLAGER.ed3");
 					mode = 0xf;
 				} else if (c == 0xc)
-					scen = "Kampfszenario_STEINBRUCH.ed3";
+					fcn_004e4730("Kampfszenario_STEINBRUCH.ed3");
 				else if (c == 0xb)
-					scen = "Kampfszenario_WALDSTUECK.ed3";
+					fcn_004e4730("Kampfszenario_WALDSTUECK.ed3");
 				else if (c == 0xd)
-					scen = "Kampfszenario_MINE.ed3";
+					fcn_004e4730("Kampfszenario_MINE.ed3");
 			}
 		}
 	} else {
 		if ((o[0x7c] & 8) != 0)
-			scen = "Kampfszenario_STADT.ed3";
+			fcn_004e4730("Kampfszenario_STADT.ed3");
 		else
-			scen = "Kampfszenario_BERGPASS.ed3";
+			fcn_004e4730("Kampfszenario_BERGPASS.ed3");
 	}
-	if (scen != 0)
-		fcn_004e4730(scen);
-	first = (int) gm_StartFilteredEntitySearch(1);
 	cur = *(int *) (*(int *) 0x67a370 + 0xb0);
 	fcn_004e4ec0();
 	if (*(int *) 0x6b8300 != 0) {
@@ -149,6 +144,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 	*(int *) 0x772ec8 = sb_LoadSampleBank("kampf\\dolche.sbf", 1);
 	*(int *) 0x772ecc = sb_LoadSampleBank("kampf\\pistole.sbf", 1);
 	*(int *) 0x772ed0 = sb_LoadSampleBank("kampf\\schwerter.sbf", 1);
+	first = (int) gm_StartFilteredEntitySearch(1, 1, *(int *) (o + 0x10c));
 	if (first != 0)
 		*(int *) 0x772f00 = fcn_004d5450((void *) first);
 	switch (*(int *) 0x772f00) {
@@ -176,7 +172,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 	default:
 		break;
 	}
-	first = (int) gm_StartFilteredEntitySearch(1);
+	first = (int) gm_StartFilteredEntitySearch(1, 1, *(int *) (o + 0x14));
 	if (first != 0)
 		*(int *) 0x772f04 = fcn_004d5450((void *) first);
 	if (*(int *) 0x772f04 == *(int *) 0x772f00) {

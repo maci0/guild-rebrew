@@ -23837,3 +23837,18 @@ One divergence blocks any exact match and is recorded plainly: the compiler gave
 one dword, where the reference lets that temporary share a slot, so the four-byte local rotation propagates through every relative branch displacement. The other is
 a codegen device: this build hoists minus one into a register and compares against it where the reference uses an immediate at each site, and declaration order,
 register declarations, array-first ordering and both block and function scope variants did not steer the allocator.
+
+## 2026-11-03 — scenario row: buffer sizes from frame arithmetic and a fabricated variable
+
+`0x4D1FF0` moves from 403 to 454 matched bytes with the object at 2648 against the 2671 extent, and the frame is now exactly 0x13c. Three repairs were proved from
+the reference. The buffer chain was derived from normalised stack offsets: a three-slot array, a twelve-byte identifier buffer that is passed to a call asking for
+nine identifiers, a sixteen-byte path buffer and a 0x100 message buffer, so the source's four-byte identifier array and twenty-byte path buffer were both the wrong
+size and the frame was four bytes short. The scenario variable was fabricated: the reference pushes each scenario literal into a call and tail-merges to one shared
+call per branch, so the variable and its post-branch call are gone and each literal is passed directly. And a search routine takes three arguments, which the
+reference shows by pushing two constants and a field before cleaning twelve bytes, so the prototype and the three call sites now pass what the reference passes.
+A fourth repair removed a search call that had been placed before the current-record load where the reference loads a pointer, then a field, then calls a different
+routine. The second search call moved to where the reference issues it.
+One experiment scored one byte higher but left the frame four bytes short of the reference, and the structurally correct variant was kept with both measurements
+recorded. Three other variants were reverted by copying scratch backups. The remaining divergence is register allocation: the reference reloads its parameter from
+the stack at each use group and keeps the current record in ebp, while this build hoists the parameter and spills the record, so the first difference is a parameter
+load before the register pushes; the largest remaining windows are in a switch region and an entity loop.
