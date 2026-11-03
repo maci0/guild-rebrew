@@ -24112,3 +24112,9 @@ The second blocker's premise was stale: the three arrays already sit at the refe
 around them changes nothing, so the reported frame difference of 0x2d8 against 0x2f8 is stack-depth accounting through the call blocks, not a local frame difference.
 One out-of-scope observation is recorded because it may explain residual bytes: the object has two call sites to one routine where the reference has four, which is tail
 merging of a duplicated error block, and eighty-two direct calls against the reference's ninety-six, of which ten are register-indirect.
+
+## 2026-11-03 — a leftover experiment helper removed from the group row
+
+The group row's blocker pass reported its source restored byte for byte, but the file still carried one experiment: an inline helper that returns zero, added while testing
+whether a call could supply the zero constant. Its measurement was inert, so it changed no bytes, but it was dead code in a committed row and the tree is tidier without
+it. The file was restored from its committed copy and re-measured at the same 408 of 2593 with the object at 2593, which is the state the ledger records for that row.
