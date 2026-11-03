@@ -24739,3 +24739,18 @@ needed, while this build hoists a move of one into a callee-saved register early
 the two pointers from the stack. The object therefore carries nine extra moves, four fewer adds, six fewer pushes and four extra conditional jumps.
 The concrete lever is recorded rather than chased: stop the constant one from being hoisted so that the register it occupies is available for the pointer the reference
 keeps there. That is a full matching pass on the row, not a point repair, and no source change was made.
+
+## 2026-11-03 — switch row: a variadic call's argument counts, and case bodies in the reference's order
+
+`0x562BA0` moves to 544 matched bytes with the object at 2108 against the 2104 extent, its gap events from 67 to 45 and its absolute gap bytes from 14,856 to 184, and its
+case bodies now sit in the reference's emitted order rather than the source's.
+The largest repair is a variadic formatted-text call whose argument count was wrong at six sites: the source passed four arguments where the reference pushes two or three,
+and the counts are corrected per site to the reference's. One callee's third parameter is an unsigned character, which removes a register clear at every site. The trailing
+state assignment and break became an explicit assignment and return in three cases, matching the reference's flow. The case bodies are reordered to the reference's sequence,
+which is what brought the windows down. One case is inverted to test its value against zero with the packet copy through a character pointer, another writes its entity base
+through the reference's computed address and inlines the call arguments instead of passing locals, the case-four inner branch order is swapped to put the small arm first,
+and a call argument is inlined at one site.
+Nine classes were checked and eight are clean: argument order at every site, comparison directions, field offsets and lookups, the dispatch field and its bound, the buffer
+and frame layout, the table stride, the masked value and the overlaid buffers. The object is four bytes over the trimmed extent, and the breakdown is known: nine bytes
+from an unmerged case-four tail suffix, six bytes saved back by three packet copies that are each two bytes short, and four bytes of code and table alignment. The suffix
+merge is the only remaining size lever and could not be forced from source.
