@@ -248,13 +248,16 @@ int __cdecl fcn_005ba910(int a1, int a2)
 
 	if (f.v80 != 0) {
 		int i;
+		int* tp;
 
 		f.vA4 = fcn_00470820(*(int*) 0x1040494 - 0x68, 0x106, (char*) 0x6ac3b4);
+		tp = (int*) 0x14a56e8;
 		for (i = 0; i < 7; i++) {
 			int d;
 			int bo;
 
-			d = f.vD4[i] = fcn_0052dee0(0, 0xc + i * 0x18, *(int*) (0x14a56e8 + i * 4));
+			d = f.vD4[i] = fcn_0052dee0(0, 0xc + i * 0x18, *tp);
+			tp = tp + 1;
 			bo = d * 0x2f4;
 			if (*(unsigned short*) 0x7746cc == f.vF0[i]) {
 				{

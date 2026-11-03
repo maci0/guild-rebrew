@@ -22679,3 +22679,21 @@ including the sibling's signature and a nested switch, and none moved the saves;
 gives 3064 at 257, confirming the pack profile is right. Wrong-access checks came back clean: all 32 direct calls, all eight format
 strings with their exact contents, four table base pairs and eight record offsets, plus the case ladder and the guard chain, all
 agree with the reference bytes.
+
+## 2026-11-03 — camera row: the frame closes by iterating a table pointer
+
+`0x5BA910` now has the reference frame exactly: `mov eax,0x1848` with a 0x1848 frame, where the object previously held 0x184c because
+the compiler built a stack-relative address temporary. The change iterates a table pointer instead of indexing both the table and
+the array with the loop counter: the table address is held once and advanced, so one base plus a displacement replaces the
+object's pair of bases, and the temporary that forced the four extra bytes disappears. Measured here: match rises from 740 to 744,
+the object falls from 12160 to 12137 against a native extent of 12136, and the first divergence moves from offset zero, where the
+frame immediate differed, to offset 11. Both committed repairs on the row are intact, the initialiser order and the store to the v88
+slot.
+The cost is recorded and it is a real one: the gap event count rises from 507 to 1021 and the object's instruction count from 3473
+to 3478 against the reference 3417, because the pointer form makes the compiler keep three pointers and pair the array as a
+displacement off one of them rather than keeping a scaled index, which fragments the mismatch profile even though more bytes match
+and the object is nearly the right size. An earlier attempt at this lever reported 748 at 12137 with 586 events and was reverted for
+crossing its window threshold; the trade is taken here because the frame, the matched bytes and the object size all improve, and
+because the row's blocker was the frame. Four shapes were byte-identical to the old object and are recorded so they are not
+retried: an index product kept in a local, an explicit array-element store, a split store into a temporary first, and a pre-loop
+array pointer.
