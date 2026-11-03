@@ -20675,3 +20675,33 @@ data layout audit reports zero violations. `.data1` and `.rsrc` remain 0x38000 a
 GOLD map is empty, so the guarded pads were preserved there but not measured. What remains is the other partially
 redundant pads and the 2,404,142 bytes that could not be attributed per pad, and function verdicts were not re-measured
 because their stored addresses are already stale.
+
+## 2026-11-03 — largest row: colouring pass finds the loops already clean
+
+`0x5BA910` rises from 732 to 750 matching bytes with the object at 12136 from 12137, against native 11948, status
+SIZE_MISMATCH with 44 relocations and lint clean. One change was kept and four reverted. The kept change makes the
+fill-loop calls pass the `a1` parameter instead of `f.v14` at lines 607 and 608, matching native's load of
+`[esp+0x1864]` at 0x5bb463; that is worth 18 matched bytes and one object byte, and the same substitution in the release
+loop at lines 561 to 565 lost 45 matched bytes and added six object bytes because the zero constant occupies the natural
+register there, so it was reverted. The other reverted probes: adding the missing pointer dereference at the seven-loop
+compare, which is native-correct but cost 31 matched bytes and two object bytes with no structural gain; splitting the
+assignment from the call, which was byte-identical; writing the global as an indexed array, which was byte-identical; and
+the release-loop substitution above. The saved-register sequence did not move under any probe and still emits
+push ebx, `mov 0x1854(%esp),%edx`, push ebp, push esi, push edi and `xor ebx,ebx`, with arg1 in edi, the zero in ebx and
+minus one in ebp, where native pushes ebx, ebp and esi, moves arg1 to esi, pushes edi, zeroes ebp and sets edi to minus
+one.
+Three findings reset the plan. Both named loop regions already match native in shape, so loop-shape edits have no defect
+to fix: the entity and empty-slot scans at 0x5bb419..0x5bbdd5 are instruction-for-instruction identical with only the
+counter register differing, and the outer slot walk with its inner three-slot loop at 0x5bc240..0x5bcab6 reloads and
+decrements exactly as native does, so the divergence is colouring alone. The body spills more than native, with 771
+against 718 stack memory operands and 139 against 119 large-displacement forms, which accounts for the 188-byte excess
+better than any instruction shape and makes the size gap and the rotation the same symptom. And the first structural
+cause of the rotation is the seven-iteration packet loop at native 0x5baa9f, where this build materialises
+`0x14a56e8 - &f.vD4[0]` in a register with `mov $0x14a56e8,%ebp; lea 0xe0(%esp),%edx; sub %edx,%ebp;
+mov (%esi,%ebp,1),%eax`, clobbering the minus-one register and forcing a second minus-one range at object 0x210, where
+native uses `[esi+0x14a56e8]` with esi as `i*4` and keeps a single minus-one range from 0x5ba945 to 0x5bafc2; three
+source variants on that loop produce byte-identical code, so the pointer base is the allocator's choice. The
+recommendation is to stop treating the loop regions as the lever and work the 53 extra frame accesses instead, whose
+first fixable case is making the seven-loop use native's index form. Backups in .scratch/5ba910/ with g_p1.c as the kept
+state, base.c as the baseline and g_LEDGER.md as the probe ledger. A transient CatalogScanError from `rebrew diff`
+against another session's d2 file recovered without intervention and did not affect any number above.

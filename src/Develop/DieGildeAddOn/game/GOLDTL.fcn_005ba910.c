@@ -604,8 +604,8 @@ l_next:
 			break;
 		}
 		d2_SetForm(f.v2c, 2);
-		if (fcn_00505340(f.v14) != 0) {
-			if (fcn_005ba020(f.v14, f.v20) == 0) {
+		if (fcn_00505340(a1) != 0) {
+			if (fcn_005ba020(a1, f.v20) == 0) {
 				goto l_fill_next;
 			}
 		}
