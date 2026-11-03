@@ -20285,3 +20285,22 @@ is being made in the upstream checkout at /home/maci/Desktop/Projects/relumea/re
 that shows a `.rdata` row producing a non-const stub before the change and a const one after, followed by
 regenerating the scaffold in this project and re-measuring `.rdata` placement. No scaffold or generated file was
 edited by hand for this step.
+
+## 2026-11-03 — const stubs measured, and the section gap is elsewhere
+
+The const hypothesis was proved on copies before any tree edit. Compiling a copy of stubs/goldtl/symbol_stubs.c with
+const on 45 of the owners, using the build's own flags, moves `.rdata` in the object from 85 to 433 bytes and puts 45
+of the 46 symbols in `.rdata` with zero writes, verified by .scratch/check46.py. Substituting that object into the
+build's own object list with every other input unchanged, the relinked image in .scratch/relink shows `.rdata`
+VirtualSize 0xb36e (45,934) to 0xb4ce (46,286) for plus 352, `.data` VirtualSize 47,657,188 to 47,656,836 for minus
+352, `.data1` VA 0x33f6000 to 0x33f5000, and 45 of 46 rows reported in section 0002 by the link map, with g_662950
+left in `.data`. The arithmetic matters: those 46 rows total about 352 bytes rather than 30,788, so closing the 30,788
+`.rdata` gap is not this work, and after the change the gap is 30,436. The rows also land at the end of `.rdata`, at
+in-section offsets 0x1d90 to 0x1ec4, rather than at their reference offsets, for example g_662d40 at reference offset
+0xd40 now sitting at 0x1da0, which is the intra-section ordering defect already recorded as the first cause and not
+something a const change fixes. One row is blocked: g_662950's only shared declaration is in
+src/client_dialog_helpers.h:69, a protected file, so definition and declaration cannot be made consistent under the
+current rules. The conclusion is that the const work is a real but small section defect, worth doing through the
+upstream generator rather than by hand, while the 30,788-byte `.rdata` shortfall belongs to per-translation-unit
+`.rdata` contributions, meaning strings, literals, vtables and the import table, which is the same missing-source
+work that recovering function bodies adds.
