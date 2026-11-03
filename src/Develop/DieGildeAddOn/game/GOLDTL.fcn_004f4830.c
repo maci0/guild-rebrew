@@ -7,6 +7,7 @@ extern char g_68ff68[];
 
 #pragma intrinsic(memcpy, memset)
 
+/* ADDRESS: GOLDTL 0x004f4830 */
 int __cdecl fcn_004f4830(int idx, void* dst)
 {
 	if (idx >= 0x1d) {

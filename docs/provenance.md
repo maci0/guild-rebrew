@@ -22083,3 +22083,28 @@ windows are those x87 sites, the zero home, and two emission-loop allocation reg
 is a source shape that stops the compiler commoning zero into ebx without adding a frame slot. The row's recorded assembly
 evidence was left untouched, and its provenance hash now differs from the current source because a later dehoist edit landed
 after the evidence was recorded, which is why lint reports the stale-provenance warning.
+
+## 2026-11-03 — multi-anchor file resolution fixed, and one mistake recorded
+
+The file src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004f4830.c holds three anchored definitions, and the function 0x4f4830 had
+no anchor, so file-level commands resolved to the next definition: `rebrew diff` on the file reported a target size of 146
+because the resolver takes the first address-anchored definition in source order and never errors on the ambiguity. The
+listing proves the anchor: the inventory records 0x4f4830 with size 43 and an extent history of 48 to 43 from a reviewed
+linker-fill tail on 2026-10-29, disassembly ends with `ret` at 0x4f485a followed by five NOP bytes and the next function at
+0x4f4860, and the anchor was inserted directly above the declaration with only comments between it and the definition. All
+three rows in the file were re-tested by explicit VA and are unchanged: 0x4f4830 at RELOC 43 of 43 with one validated
+relocation, 0x4f48e0 at RELOC 146 of 146 with seven validated, and 0x4f5dd0 at RELOC 70 of 70 with two unresolved and one
+validated. The GOLD twins of those rows are unaffected, and the GOLD side still resolves to 0x4f27d0 because GOLD.0x4f2720
+has no GOLD anchor; that is recorded, not changed.
+The stale coverage snapshot db/coverage-Europa1400Gold_TL.exe.toml records size 48 for this row against the reviewed 43. It is
+wholesale-generated, dated 2026-10-27, predates the 2026-10-29 extent repair, and has one writer, the coverage export
+command; a scratch re-export writes 43 with both tool sizes agreeing and src-relative paths in place of the stale basenames.
+It was not edited, because regenerating is the repair.
+One mistake is recorded rather than hidden. While checking whether the GOLD twin needed the same anchor, a test was run as
+`rebrew test <file> --va 0x004f2720 --force-status` against the GoldTL target. That VA is a GOLD address and the GoldTL binary
+holds different bytes there, so the run created a metadata row for a function the target does not have, with status STUB, and
+reported a CONFLICT at offset 24 against native junk. The anchor added for GOLD was removed. The bogus row cannot be deleted
+through the locked writer, because the only removal path is the orphan prune and it acts on all 1340 orphans in every store at
+once, most of which are legitimate identity-only data rows whose definitions live in generated stubs outside src. The gap is
+logged in the upstream checkout's docs/IDEAS-GUILD.md with a request for store, module and VA filters on the prune. Until that
+lands, the row stays visible in the store and the next person should not test a GOLD VA against a GoldTL file.
