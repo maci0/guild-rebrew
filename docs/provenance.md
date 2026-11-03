@@ -21742,3 +21742,30 @@ integer and pointer casts in the rest, while the definition returns a float in s
 noted: src/client_dialog_helpers.h lines 95 to 99 declare the same extern in both preprocessor branches, which is harmless
 duplication in a protected file. The row's verification block was refreshed with the current compiler hash and no size,
 status, file or hand edit changed.
+
+## 2026-11-03 — command executor reconstructed
+
+`0x4C4B00` (cm_ExecCommand) was reconstructed from the listing and now measures 347 of 557 with object 557 against a stored
+extent of 551, 19 relocations and a stack frame matching the target exactly at 804 bytes without a frame pointer, up from
+224 at 572. The binding is src/Develop/DieGildeAddOn/command/command_c/GOLDTL.cm_ExecCommand.c, which was not a stub: it
+already held a 572-byte body matching 224 bytes while the stored blocker still claimed a returning-zero stub, so the blocker
+was wrong and has been refreshed with the real divergence and a delta of six.
+The derived signature is `int __cdecl cm_ExecCommand(void)`, with no parameters and every return path doing `xor eax,eax`
+then `ret`. There is no tail call: the 551-byte extent ends at 0x4c4d26 and the next inventory function starts at 0x4c4d30,
+so the premise of a tail call in the work item was wrong. Call sites disagree with the definition and declare `void`, in
+GOLDTL.fcn_00535960.c line 5, GOLDTL.fcn_004f3ef0.c line 32, GOLDTL.fcn_005373e0.c line 115, GOLDTL.fcn_00512ee0.c line 77
+and GOLDTL.fcn_005ac2d0.c line 63; that cleanup belongs to those rows and was reported rather than edited.
+Blocks translated: the prologue with the conditional drain of the command list and clear of the 0x8000-entry table, with the
+0x774954 initialisation through fcn_005356b0; the previous-pointer setup and outer list loop; the per-node next, previous
+and pass dispatch for types 5 and 6 with the entity chain processor; the gate on the node not being 7 with the pass check,
+unlinking the head or middle node, zeroing the previous pointer, pushing to the free list and calling fcn_004c4250; the
+`type < 0x6a` gate with the table writes, the two last-count diagnostics and three formatted messages; and the dispatch
+through the table at 0x68a9e0 with a node and cell argument, the loop tail and the zero return. No callee is unresolved,
+since every target has a row and sprintf comes from the CRT, and the prototypes were derived from the listing for the five
+helpers and the function-pointer table.
+The first remaining divergence is at plus 0x13c and is the known constant-rematerialisation wall already recorded in
+docs/codegen-walls.md section 47: the reference keeps one zero in callee-saved ebp across the fcn_004c4250 call and stores
+it twice with two- and six-byte forms, while this build materialises both stores as immediates of ten and seven bytes, which
+is exactly the six-byte excess. Everything from 0x00 to 0x13b and the message and dispatch blocks match under relocation.
+Attempts to move the zero-store encoding were reverted after failing: goto and natural forms, pointer, integer and shared
+zero variants, a packed struct, and store-order variants.
