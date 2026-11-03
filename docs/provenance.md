@@ -23306,3 +23306,21 @@ A tooling defect is filed upstream and recorded here because it invalidated the 
 scaffold section instead of the bound function, reporting an object end of 0x140 and a NOP fault before and after the edits, so the windows were
 unusable and the comparison was done with objdump and an instruction-stream alignment instead. This is the second row where a lead scaffold or filler
 misled the diagnostic, the earlier one being a d3 loader whose filler also moved the function's link address.
+
+## 2026-11-03 — duel row: a raw argument and a shared branch tail
+
+`0x4E0620` keeps 699 of 3335 with the object at 3333 against the extent and nine relocations, and the structural measures improve sharply: gap events fall from
+153 to 109, nonzero gaps from 44 to 29, the summed absolute gap from 923 to 308 and the largest window from 249 bytes to 26. Two repairs did it. The first
+call passes zero as its second argument where the source passed the same pointer twice, and the second call genuinely passes the pointer twice and was left
+alone; the two sites were read separately rather than treated as one pattern. And two conditional call sites were rewritten from a nested conditional
+expression into a branch that computes one argument in each arm and then calls once, which reproduces the reference's compare, branch, one push per arm and
+shared tail; the trace object now matches that region instruction for instruction.
+The positional match falls from 732 to 699 because the rewritten blocks change length, and the structural signals are kept with both numbers recorded. Three
+shapes were reverted: duplicating the full call in both arms grows the object past the extent and drops to 666, a loop rewrite is byte-identical, and
+swapping the float comparison order gives 690 at 3331.
+Thirteen defect classes were checked against the reference bytes with no finding, including all 126 call sites, where one address that looked misnamed is
+correctly named in the metadata, the argument cleanup, the prototype widths and signs, the table index expression built from a masked word, a block copy of
+six dwords, the frame layout with two 0x100 arrays and a six-entry scene table, the guards, the conversion placement, the dereferences, the record offsets
+and the sentinels. The first divergence is a partial-register zero extension: the reference moves into a sixteen-bit register and then masks, which
+zero-extends, while writing an expression as an unsigned short subtraction produces a full 32-bit move. That is recorded as unresolved rather than papered
+over, and the next window is a loop test rotated to the bottom.

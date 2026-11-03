@@ -196,10 +196,13 @@ void __cdecl cut_MainDuell(char* a0)
     io_AppendText(0x6811b0);
     fcn_004c3030(-7, 0, (int) 0x68cd18, -1);
 
-    fcn_004e51d0((unsigned int*) a0, (int) a0);
+    fcn_004e51d0((unsigned int*) a0, 0);
     e = (char*) fcn_004e6a70(sB.idx);
-    fcn_0040b730((char*) sB.entity, fcn_00445600(0, 0x100, 0,
-        (char*) (*(unsigned char*) (e + 0x94) == 1 ? 0x68cd00 : 0x68cd68)));
+    if (*(unsigned char*) (e + 0x94) == 1)
+        p = fcn_00445600(0, 0x100, 0, (char*) 0x68cd00);
+    else
+        p = fcn_00445600(0, 0x100, 0, (char*) 0x68cd68);
+    fcn_0040b730((char*) sB.entity, p);
     fcn_0040c120((char*) sB.entity, 0x35, *(int*) (sA.entity + 0x34));
     if (*(unsigned char*) (e + 0x94) == 1) {
         t = fcn_004de610(6);
@@ -215,8 +218,11 @@ void __cdecl cut_MainDuell(char* a0)
     }
 
     e = (char*) fcn_004e6a70(sA.idx);
-    fcn_0040b730((char*) sA.entity, fcn_00445600(0, 0x100, 0,
-        (char*) (*(unsigned char*) (e + 0x94) == 1 ? 0x68cccc : 0x68cd3c)));
+    if (*(unsigned char*) (e + 0x94) == 1)
+        p = fcn_00445600(0, 0x100, 0, (char*) 0x68cccc);
+    else
+        p = fcn_00445600(0, 0x100, 0, (char*) 0x68cd3c);
+    fcn_0040b730((char*) sA.entity, p);
     fcn_0040c120((char*) sA.entity, 0x35, *(int*) (sB.entity + 0x34));
     if (*(unsigned char*) (e + 0x94) == 1) {
         t = fcn_004de610(6);

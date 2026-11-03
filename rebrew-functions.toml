@@ -475872,7 +475872,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x0052ea30".verification]
-source_hash = "16e3832c5cc2528e40305a7a623d902786d32135d6848b676d5d2d03ba5a777a"
+source_hash = "6f06d3d9e670f8683dd975dd6f6cdbc7a89729a7825c9aa5d80cde0723d55eae"
 reference_hash = "6fc399d90f4f9e611385c7d08e0d76d4820573930b4a497bd1f601b5ffa4b863"
 reference_size = "3289"
 headers_hash = "b1c5da9a4d22a057614610e180fca418db7da4b0c55208e96a3fd68747650565"
@@ -475883,10 +475883,10 @@ module = "GOLDTL"
 va = "0x52ea30"
 context_hash = ""
 defines = "[]"
-input_hash = "d3acfe912eadcb929d342d9bb6da1b0e088613132b479080425da792093d90fd"
+input_hash = "2e2eb4c808ec076ec97a62bdddd0aa626deefb16e820e7e6f56158e016e0012d"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T14:09:28+00:00"
+measured_at = "2026-11-03T14:19:23+00:00"
 
 [["GOLDTL.0x0052ea30".status_history]]
 old_status = "STUB"
@@ -604624,7 +604624,7 @@ blocker = "Large per-frame movie/animation object state function; body extended 
 blocker_delta = 2852
 
 ["GOLDTL.0x0040aa00".verification]
-source_hash = "99fe60db8296930e1ad86efe73ec5f710950eaafe527d8da5ec63d5e2a5651ff"
+source_hash = "77151ff9835033f5457942e09a30972e339a71319fe3204a218070716888664d"
 reference_hash = "4c5242ff885397b4bb6e2ef8696fdeffe6de6289456a23bf0b74aa59cb154fc2"
 reference_size = "3370"
 headers_hash = "d426d837dd94c704001294ad250579f392bd5da5c3e7a35bfa82dae340f11881"
@@ -604635,10 +604635,10 @@ module = "GOLDTL"
 va = "0x40aa00"
 context_hash = ""
 defines = "[]"
-input_hash = "0ba3ef0e0c5da3fa7dd1827e560b5f06bc3e1c290a2d2b877ca8605497f4244d"
+input_hash = "556e290761219e4aa00aaa059918bd4d76b830430a3344face2a7dc9d88fb3e8"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T14:18:32+00:00"
+measured_at = "2026-11-03T14:19:40+00:00"
 
 [["GOLDTL.0x0040aa00".status_history]]
 old_status = "STUB"
