@@ -21988,3 +21988,25 @@ goto to the shared label which closed the size gap at 3588 but widened the large
 the case-5 tail, folded field access at p plus 0x70 and plus 0xcc, and an inverted case-6 branch. No wrong access was found to
 repair: the slot swaps at 0x515 and 0x51e and at 0x52a and 0x52e are spill scheduling rather than address errors. The blocker
 is rewritten to the tie-break with the refutations recorded, and the unbound data externs are listed for later binding work.
+
+## 2026-11-03 — text formatter: a reload indexed a value just proven zero
+
+`0x51AF00` moves from 939 to 956 matching bytes with object 6383 against 6455, still 72 short, gap windows 176 and the end
+drift improving from minus 89 to minus 71 with the largest drift window closed. One change landed and it repairs a defect: the
+`kind == 0xff` reload read `g_14a5320[(int)p]` where `p` is the value just proven zero, while the reference reloads through eax
+holding the raw vararg selector at 0x51b0be. The selector is now kept in its own local and indexes both the buffer table and
+the reload, so this build emits `mov esi,[eax*4+g_14a5320]` as native does and the S and s setup shape falls into place. The
+cost is five more gap events, 171 to 176, accepted because the drift and the positional count both improved.
+Six variants were measured and reverted. Restoring the aggregate tail to 0x100 makes the frame 0x3338 and loses ebx, leaving
+two pushes with the index in esi, so the object reaches 6455 but the match falls to 882 with 201 windows. Modelling the array
+band as nine 0x40 arrays with the buffer moved to 0x3a0 collapses the same way, at 881 with 201 windows. Inverting the six
+`if (e > -1)` sites to `if (e < 0)` gives 915 at 6359 with 175 windows. Reversing the three-branch grammar-state chain in both
+the S and G blocks produces a byte-identical object, which proves that branch layout there is not source-order driven, so the
+reference's 1/2, 3/4, 5/6 order cannot be forced by reordering the chain. Swapping two declarations changes nothing.
+One layout fact is recorded as an open modelling question rather than a result. With the 0xfc tail the band is 0x298 and the
+buffer and temporary sit at 0x394 and 0x1b64, and the slot at 0x298 is stack-coalesced onto the unused slot at 0xd8, so this
+build writes [esp+0xd8] where the reference writes [esp+0x298]. The reference's array band is 0x2d8 with 0xc0 before the buffer
+at 0x398, totalling 0x3338, while this build's 0xfc tail is a filler that happens to make the sum 0x3334, and that sum is what
+buys ebx, esi and edi with the check-stack immediate at 0x332c. Every variant that makes the sum a multiple of eight drops back
+to two pushes. So the winning geometry works by a filler that matches the frame rather than by modelling the band the reference
+actually has, and the honest band model would need a different way to keep the third register.

@@ -35,8 +35,8 @@
  * 0x51c78c) covers % B C D E F G I N S T U a b e f i r u v w; the case
  * bodies are laid out in native order.
  *
- * Remaining gaps: the object body is 6367 bytes against the native 6455, so
- * 88 bytes of native code are still unrecovered; the earlier 0xf8 build only
+ * Remaining gaps: the object body is 6383 bytes against the native 6455, so
+ * 72 bytes of native code are still unrecovered; the earlier 0xf8 build only
  * reached 6455 by spilling the loop index.  Gap trace shows the object
  * running 180 bytes ahead by native offset 819 (extra spill traffic in the
  * S/s grammar_state 1..4 blocks) and short by a few hundred bytes from
@@ -44,7 +44,11 @@
  * memcpy(dst, src, strlen(src)), which folds into the reference's shared
  * strlen+rep-movs tails.  The 'I' and 'f' itoa paths, the 'G' index (*14) and
  * the u/U/b/B/e/E directive length (2/1) are transcribed from the native
- * listing.  text.unrecovered has no user yet.
+ * listing.  The kind==0xff reload indexes g_14a5320 with the raw vararg
+ * selector, as native reloads it from eax at 0x51b0be; keeping that value in
+ * `j` also moved the reference's own S/s setup shape into place.  First
+ * remaining divergence is native 227 (inc ebx) against object 230.
+ * text.unrecovered has no user yet.
  */
 
 extern int g_1052de0;
@@ -173,14 +177,15 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 		case 's':
 			cursor += 4;
 			p = *(char**) (cursor - 4);
-			if ((int) p < 0x4800) {
-				kind = g_11bb000[(int) p];
-				p = g_14a5320[(int) p];
+			j = (int) p;
+			if (j < 0x4800) {
+				kind = g_11bb000[j];
+				p = g_14a5320[j];
 			}
 			k = (r != -1) ? 3 : 2;
 			if (kind == 0xff) {
 				if (p == 0) {
-					p = g_14a5320[(int) p];
+					p = g_14a5320[j];
 				}
 			} else {
 				if (r == -1) {
