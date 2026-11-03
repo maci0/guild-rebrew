@@ -65,7 +65,6 @@ void __cdecl fcn_004357b0(unsigned char* blend, float* w1, float* w0);
 /* ADDRESS: GOLDTL 0x00435910 */
 void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 {
-	unsigned char* e;
 	unsigned char* layout;
 	unsigned char* grid;
 	int* ids;
@@ -93,13 +92,12 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 	int o;
 	Vertex* v;
 
-	e = (unsigned char*) a0;
 	fcn_004356c0(a0);
-	layout = (unsigned char*) *(int*) (e + 0x318);
+	layout = (unsigned char*) *(int*) ((unsigned char*) a0 + 0x318);
 	grid = (unsigned char*) *(int*) (layout + 0x294);
 	ids = (int*) grid;
 	count = 1;
-	layer = e + LAYER_BASE;
+	layer = (unsigned char*) a0 + LAYER_BASE;
 	layers = 3;
 
 	/* ---- layer walk: blend both records of every visible layer ---- */
@@ -174,7 +172,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 	/* ---- emission: one unrolled block per visible layer count ---- */
 	switch (count) {
 	case 3:
-		n = *(int*) (e + 0x310);
+		n = *(int*) ((unsigned char*) a0 + 0x310);
 		if (n <= 0) {
 			return;
 		}
@@ -230,7 +228,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 		return;
 
 	case 2:
-		n = *(int*) (e + 0x310);
+		n = *(int*) ((unsigned char*) a0 + 0x310);
 		if (n <= 0) {
 			return;
 		}
@@ -280,7 +278,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 		return;
 
 	case 1:
-		n = *(int*) (e + 0x310);
+		n = *(int*) ((unsigned char*) a0 + 0x310);
 		if (n <= 0) {
 			return;
 		}

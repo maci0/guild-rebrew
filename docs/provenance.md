@@ -22901,3 +22901,19 @@ diagnostics that moved the zero to a caller-saved register or changed the frame.
 source spelling that keeps the intermediate form normal, so the cause must be a later structural difference rather than a prologue
 shape. A fast screening harness is recorded in .scratch/0046c5a0/ which compiles one variant with the target toolchain in about two
 seconds and prints the frame, push order and register homes, reproducing the gap object byte for byte.
+
+## 2026-11-03 — small row: a redundant local removed, and the gap tool traces a padding block
+
+`0x435910` moves from 272 to 287 matching bytes with the object at 3834 against the extent 4127 and one relocation, by removing a
+redundant unsigned char pointer local and casting the argument at its four sites instead, which is semantically identical. The first
+divergence remains the prologue frame size, 0x154 in the reference against 0x150 here, which needs the original local set and the
+argument's register home rather than a text edit.
+The row has only two calls, at offsets 0x12 and 0x1ea, and both are correct with cdecl cleanup of four bytes after the one-argument call
+and twelve after the three-argument one. The three-argument push order matches, the two record indices both scale by 0xc0 through the
+three-times then shift-by-six pattern with the allocator read through two pointer dereferences, the element select and its sentinel guard
+match, the vertex copy is eight dwords, and the clamp reads and stores the same offsets. No semantic defect was found in the checked
+classes, so the remaining drift is allocation shape.
+A diagnostic defect is recorded because it will mislead anyone who reads the trace: the stored source ends with a 1936-byte padding block,
+and the gap diagnostic traces that padding instead of the function, reporting its instruction count and a bogus first fault at offset
+zero. With the padding stripped for one run the trace is usable and shows the reference's 1074 instructions against 1025 here, with the
+drift concentrated in three emission blocks where the reference reloads stack slots per store. The padding was restored.
