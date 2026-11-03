@@ -23207,3 +23207,14 @@ Four shapes were reverted with numbers. Promoting the window variable to a regis
 copy loop with a block copy shortens the object by three bytes and costs twelve matched bytes. Local handles for the widget index cost 13 to 42 matched
 bytes. The last of those genuinely closes two instruction windows and moves toward the reference's single-index form, so its scratch copy is named
 here as the one to revisit if the project ever prefers object length and instruction count over the byte-offset match.
+
+## 2026-11-03 — a third hand-picked address that does not exist, and the rule that prevents it
+
+A row brief was written for an address that has no record at all. The precondition check refused it: there is no GOLDTL row for that address, the
+inventory places it inside an existing function at an offset of 0xb50 rather than at an entry start, the CLI reports it as not in the candidate list,
+and the other target has no entry there either. Nothing was tested, edited or measured, and the tree was untouched, which is the correct outcome
+for a bad brief.
+The pattern behind three of these now is that addresses were named from memory while working through a long list. The fix is mechanical and is
+adopted: a brief's address is copied from the picker's own output, which lists only rows that are entry starts with a bound file, the right module and
+a size mismatch or stub status, after de-duplication. The picker reports 988 such rows and prints them with their sizes, so there is no reason to
+name a row that it has not printed.
