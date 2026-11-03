@@ -20796,3 +20796,28 @@ prints JSON through the checkout CLI, the suite reports 13,730 passed with 29 sk
 issues across 413 files, with pre-commit hooks passing on the commit. One caveat is recorded: the PATH executable at
 /home/maci/.local/bin/rebrew is a uv tool install of release 6.16.0 and still carries the crash, and it was deliberately
 not reinstalled, since the project uses its pinned environment rather than an editable checkout.
+
+## 2026-11-03 — largest row parked on the colouring wall
+
+`0x5BA910` keeps 750 at object 12136 with 771 stack operands against native's 718 and a saved-register sequence of
+push ebx, arg1 into edx, push ebp, push esi, push edi and `xor ebx,ebx`, where native holds arg1 in esi, the zero in ebp
+and minus one in edi. Five probes this pass all regressed and were reverted. Using the slot offset as a new local in both
+three-slot loops took stack operands from 771 to 761 and big displacements to 121 but dropped the match to 735 at object
+12178, because the frame grew from 0x1848 to 0x184c and every displacement shifted by four. Reusing dead locals instead
+of declaring one gave an identical result, so the growth comes from extra cross-call liveness rather than the
+declaration. The seven-loop byte-offset index kept stack operands at 771 and dropped the match to 717 at object 12200,
+since MSVC then materialises two derived pointers. Folding `h` into the index was byte-identical, so `h` already shares a
+slot. Dropping the `i` temporary in the slot loop raised stack operands to 779 and dropped the match to 733 at object
+12255.
+Three findings redirect the plan. The frame is exactly at native size 0x1848 with zero slack, so any value live across a
+call costs a four-byte slot, and that shift is worth more than the ten stack operands it buys; introducing a local to
+keep a value in a register cannot work on this function as modelled. The seven-loop is worth only about two of the 53
+excess stack operands, because the excess is diffuse: 103 call-anchored windows differ and 80 of them have matching
+instruction counts at plus one to plus four, so even a perfect seven-loop fix cannot move the 53. And a real defect was
+found: the source uses `f.v9c` as a per-slot scratch at lines 1111 and 1383, while native never stores those values,
+keeping the per-slot offset in esi across ten calls at 0x5bc8ce..0x5bcbf1, with slot 0x9c holding only the scaled offset
+from line 484 that lines 1442 and 1446 read, so the loop writes also clobber that value. The fix is directionally right at
+ten stack operands but blocked on freeing a callee-saved register. Address taking is not the lever either: `lea` with esp
+is 64 in native against 69 here. The recommendation is to stop source-shape probes on this row until a register can be
+freed. A blocker records all of this, including the unfixed `f.v9c` defect. Instruments in .scratch/5ba910/ with
+s_probe.py, s_stack.py, s_align.py, s_region.py and s_pull.py.
