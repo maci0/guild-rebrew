@@ -23415,3 +23415,20 @@ server twin does not transfer here: the pragma is inert in this function althoug
 One byte-neutral change was kept for consistency: the row's private packed clock structure was replaced by the project's working clock declaration, the one the
 two EXACT siblings use, which compiles to an identical object. The row stays a size mismatch and the recommendation is that it needs an evidenced different
 translation-unit flag context or compiler build rather than more source shapes.
+
+## 2026-11-03 — vfs reopen row: a missing parameter and six operand repairs
+
+`0x44FC70` now has a 126-byte prefix that measures 12 matched bytes with no relocations, against a 3117-byte extent, and the prefix carries six repairs each proved
+from the reference bytes or from a callee's body. The function takes a second character parameter: the reference reads a byte from the second argument slot
+before reusing that slot, and independently the sibling row at 0x44b480 declares this function with a character argument and calls it with one. The copy
+buffer's first use was wrong: the reference passes the name pointer to the open call and copies into the buffer only for the later reopen, while the source
+passed the buffer. A third call's placeholder name was replaced by the attested function name the store already carries, which is a naming repair rather than a
+byte change and costs three masked operand bytes in the metric without changing the object. The two folder-open and stream-close signatures were corrected from
+the callees' own bodies, which shows the first argument is a pointer that is null-tested and the strings are read-only. The two buffers were resized from their
+frame offsets, 0x198 and 0x110 rather than the older declarations, which brings the frame from 0x46c to 0x2a8. And the two non-positive count rejects share one
+close site and return void, which the reference shows by a single call and a bare epilogue.
+Two experiments were rejected: a fabricated pad that forced the reference frame moved the first divergence by six bytes only, and two memset spellings did not
+reproduce the reference's alignment-checking clear. The gap diagnostic is unusable on this row because the file's lead scaffold is emitted as the first text
+section and the real function as the second, so the trace described the filler; the comparison was done with objdump against the second section.
+The remaining work is transcription rather than repair: the reference is 3117 bytes and the prefix covers 126, and the next blocks are the allocation call, the
+two field tests on the info structure and the loop that carries the strides at 0x18, 0x38 and 0xe0.
