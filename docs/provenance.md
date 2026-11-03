@@ -21487,3 +21487,29 @@ source spelling: a from [esp+4] in edx, b from [esp+8] in ecx, epsilon from [esp
 source returned EXACT 84 of 84 with object 84, so the compile cache is not masking a regression. No source change was made
 and nothing was reverted; the neighbour-row defect pattern of wrong callee targets and reversed arguments cannot apply
 because this body has no calls.
+
+## 2026-11-03 — d2 fifth row: neighbour defects absent, slot layout needs re-derivation
+
+`0x4D6170` keeps 959 of 4923 with object exactly 4923, status STUB and an unchanged source; no correction survived
+measurement. The binding is src/Develop/Units/d2.v1/GOLDTL.fcn_004d6170.c with a support header, the stored extent is
+4923 and disassembly of that size returns 1507 instructions without truncation, and the frame is 0x1124 from
+`mov eax,0x1124` and the check-stack call. The first 0x194 bytes match structurally with the same calls, arguments and
+order, and the differences are stack-slot encodings and relocated displacements: byte 24 is target `mov [esp+0x1c],ebp`
+against ours at 0x18, byte 28 is target `mov [esp+0x14]` against ours at 0x24, and the target keeps its tally at
+[esp+0x20] where ours keeps it at [esp+0x10]. The first size drift is at 0x105, where the jump over the
+`if (g_772ea4 == 0)` true block targets 0x1ab in native against 0x1b1 in ours, six bytes inside that block. The region
+0x195 to 0x1bc is the initiator: native selects the side pointer with `cmp ebp,[esp+0x20]; jle; mov edi,[0x772e9c]; jmp;
+mov edi,[0x772e98]; jmp` in 39 bytes with one spill at 0x1c5, and its else arm is
+`side = g_772e98; if (g_772ea4 != g_772e9c) side = g_772e9c;`, while the committed form compiles to a longer sequence that
+stores in both arms. Drift windows at 535 to 655, 940 to 952, 1042 to 1105, 1089 to 1113, 1296 to 1747, 1388 to 1393, 4835
+to 4904 and 4845 to 4904 run in both directions, so past 0x1b1 the streams are no longer offset-aligned.
+Three attempts were measured with `--no-promote` and reverted. Selecting the side pointer with a direct if/else in both
+arms plus the if-form else gives object 4938 and match 736. A ternary
+`side = n > tally ? g_772e9c : g_772e98` gives 4934 and 745. Declaring `int side; int rec;` with integer casts to test slot
+grouping gives 4938 and 738 with no layout change, so grouping is not the lever. The first two reproduce the native branch
+shape but cost bytes because MSVC stores the side in each arm instead of sinking one store to the join, so neither was
+kept. `rebrew diagnose stack` reports the frame matching with the same five slots and no differences, so it does not see
+this scalar permutation, and lint reports no errors for the file. All 45 call targets, including the check-stack helper and
+the two text functions, have GOLDTL rows, so there is no unresolved callee to prototype. The conclusion is that this row
+needs a full re-derivation of its declaration and slot layout rather than a row-local patch. Probes in .scratch/row0/ with
+native.txt, base.asm, base.obj, drift.json, stack.json, kuna.c and a backup of the source.
