@@ -2422,20 +2422,23 @@ at 7031-7035 but sel moves 0x74 to 0x70 and blkB 0xa8 to 0xac), char or short fi
 0x908). Within the pinned aggregate geometry the remaining gap is positional: the slot map
 and the interleaved initialiser schedule cannot be reproduced by source-level reordering.
 
-TL51af00 is capped by the missing ebx save. The nested skeleton reproduces native's block graph
-and the case targets sit in native order at object 6455, but the loop index lives in esi where
-native saves ebx and esi and edi (chkstk 0x3330 against native 0x332c). Every inlined rep movs
-clobbers esi, so i is spilled and reloaded around each copy tail, and a case-local k has no
-callee-saved register left: it lands in edx and is stored and reloaded around the memmove. That
-is exactly the +12 bytes and +5 instructions on u/U/b/B/e/E and the a/T/w gaps. `register int i`
-is byte-identical and moving i's declaration to the top is byte-identical. The per-case extent
-misattribution is cross-jump placement rather than body size: native T's 138 is its own 49-byte
-body plus a-path2's 89-byte tail because T falls through, while ours shares the group and owns it
-from a, so T -70 against a +123 is one fact; native a's two tails live in T's and D's buckets at
-0x51b98f and 0x51c100. Tail edits at 6455 all measured worse: a copies through strcpy 6555/799,
-a literal expressions 6535/804, a with strlen temporaries 6527/808, D with cp_n 6471/837, w with
-a literal memcpy 6495/842, T+a+D 6479/812, the u rewrite 6447/817, and w with u/U/b/B/e rewrites
-6259/785 where the now-identical bodies cross-jump into one block native keeps separate.
+TL51af00 was thought to be capped by a missing ebx save, and that was wrong. The lever is
+the aggregate's declared size, not a register hint: declaring the text aggregate's tail as
+`unrecovered[0xfc]` instead of `[0xf8]` makes the compiler emit push ebx, esi and edi with a
+chkstk immediate of 0x332c, which is exactly native's, and puts the loop index in ebx and the
+digit in esi. The earlier reading had the scope wrong: post-push esp was already identical
+(0x332c + 12 = 0x3330 + 8 = 0x3338), with buf at [esp+0x398] and tmp at [esp+0x1b68] matching
+exactly, and only the small-local band sat four bytes high because of an extra four-byte index
+spill at [esp+0x18]. The measured effect of the single change is match 884 to 939, object 6455 to
+6367, and gap windows 202 to 170. The cost is the aggregate's tail padding, which leaves buf and
+tmp four bytes low at 0x394 and 0x1b64 and the case selector at [esp+0x20] against native's
+[esp+0x24]. Probes that do not work and should not be repeated: the `register` keyword, moving
+the index and the digit to the top of the block, making the index unsigned, splitting declaration
+from assignment, initialising the digit from the index, caching the output pointer, and holding an
+opaque value live across a call. All kept two pushes. The remaining 88-byte shortfall is
+positional: the object runs 180 bytes ahead by native offset 819 through extra spill traffic in
+the grammar blocks and then finishes 88 short at the tail, so the next lever is the reference-only
+runs at native offsets 1021 (84 instructions), 2579 (40) and 6282 (34).
 
 TL527f60 is capped by a constant-register unification. Its object is 4183 against native 4198 with
 match 2120 (50.5 percent), instruction-level agreement 1090 of 1200 over the whole body and the

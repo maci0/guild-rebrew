@@ -21875,3 +21875,23 @@ argument into esi and edi as minus one. The loop-shape claim is neither refuted 
 example native's block pushing 0x299 is present here at 0x93f, so no block is missing. The allocator claim about the seven
 loops was not tested. Unresolved callees remain fcn_00472380, fcn_0051af00, fcn_005462a0, fcn_00502850, fcn_00466330,
 fcn_0064d41a, __chkstk and the float literal pools.
+
+## 2026-11-03 — the text formatter's register wall is refuted by aggregate geometry
+
+`0x51AF00` moves from 884 to 939 matching bytes, with the object at 6367 against native 6455, 136 relocations and status
+SIZE_MISMATCH, and the change is one aggregate size: the text aggregate's tail is declared `unrecovered[0xfc]` instead of
+`[0xf8]`. That single edit makes the compiler emit push ebx, esi and edi with a check-stack immediate of 0x332c, which is
+exactly native's, with the loop index in ebx and the digit in esi. Gap windows fall from 202 to 170.
+The wall this replaces was wrong, and the error was in scope rather than in direction. Two arguments settle it. Post-push esp
+was already identical before the change, since 0x332c plus twelve equals 0x3330 plus eight equals 0x3338, and buf at
+[esp+0x398] and tmp at [esp+0x1b68] already matched exactly; only the small-local band sat four bytes high, from an extra
+four-byte index spill at [esp+0x18]. And the third callee-saved register is reachable from C, so this was never an
+addressing or encoding wall. The cost is the aggregate's tail padding: buf and tmp land four bytes low at 0x394 and 0x1b64
+and the case selector at [esp+0x20] against native's [esp+0x24].
+Probes recorded as dead ends so nobody repeats them: the `register` keyword, moving the index and digit to the block top,
+an unsigned index, splitting declaration from assignment, initialising the digit from the index, caching the output pointer,
+and holding an opaque value live across a call. All kept two pushes. The remaining 88-byte shortfall is positional rather
+than structural: the object runs 180 bytes ahead by native offset 819 through extra spill traffic in the grammar blocks and
+finishes 88 short at the tail, so the next lever is the reference-only runs at native offsets 1021 with 84 instructions, 2579
+with 40 and 6282 with 34. The corresponding entry in docs/codegen-walls.md is rewritten from a cap claim into the refutation
+with these measurements.

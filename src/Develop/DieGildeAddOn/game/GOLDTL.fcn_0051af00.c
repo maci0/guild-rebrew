@@ -10,23 +10,24 @@
  *
  * chkstk immediate = total local bytes - 4 x saved-register pushes (verified
  * with a throwaway frame probe: 0x17e0 locals and four pushes produced
- * 0x17d0).  The align(8) aggregate below keeps the aligned prologue and the
- * native local displacements: buf at 0x398, tmp at 0x1b68, frame 0x3330.
- * Native is 0x332c because this CL saves only esi/edi here (loop index in
- * esi, directive digit in a scratch register) where the reference saves
- * ebx/esi/edi: 0x3338 - 2*4 = 0x3330 versus 0x3338 - 3*4 = 0x332c.  A third
- * live callee-saved value would land the reference immediate exactly.
+ * 0x17d0).  With text.unrecovered at 0xfc this TU now emits the native
+ * prologue: push ebx/esi/edi, immediate 0x332c, loop index in ebx and the
+ * directive digit in esi.  The 0xf8 size kept buf at the native 0x398 but
+ * collapsed to two pushes and carried an extra spill slot for the index.
+ * The 0xfc size adds 4 bytes of aggregate tail padding and leaves buf/tmp at
+ * 0x394/0x1b64, four below native.  The small locals occupy 0x10..0x28; the
+ * kind slot is 0x20 here where the native one is 0x24.
  *
  * Native locals, offsets from the post-push esp:
  *   0x10 res, 0x14 k, 0x18 vararg walker, 0x1c grammar_state,
  *   0x20 p, 0x24 kind, 0x28 flag, 0x2c num[0x14], 0x40 format scratch,
  *   0x78 tab78[8], 0x98/0x118/0x158/0x198/0x1d8/0x218/0x258/0x298
  *   per-branch scratch, 0x398 buf[0x17d0], 0x1b68 tmp[0x17d0].
- *   buf/tmp/num keep the native offsets; the smaller scratch arrays move when
- *   the spill set changes (this build: format scratch 0x48, tab78 0xc0,
- *   per-branch bases from 0x40), so their displacements are not held yet.
- *   text.unrecovered stands in for the native scratch at 0x2a8..0x397, whose
- *   users are not yet identified; it carries no source semantics.
+ *   The smaller scratch arrays move when the spill set changes (this build:
+ *   format scratch 0x48, tab78 0xc0, per-branch bases from 0x40), so their
+ *   displacements are not held yet.  text.unrecovered stands in for the
+ *   native scratch at 0x2a8..0x397, whose users are not yet identified; it
+ *   carries no source semantics.
  *
  * arg1 out buffer, arg2 text id (<0x4800 indexes g_14a5320) or a direct
  * char* template, then printf-style varargs read through one walking
@@ -34,14 +35,16 @@
  * 0x51c78c) covers % B C D E F G I N S T U a b e f i r u v w; the case
  * bodies are laid out in native order.
  *
- * Remaining gaps against the native body: the aligned prologue saves only
- * esi/edi, so the loop index runs in esi and the directive digit in a scratch
- * register (native: ebx and esi). Every body therefore differs in register
- * names, and the spill-heavy cases (r, N, S/s) carry extra stack traffic.
- * The copy bursts after each memmove use memcpy(dst, src, strlen(src)), which
- * folds into the reference's shared strlen+rep-movs tails. The 'I' and 'f'
- * itoa paths, the 'G' index (*14) and the u/U/b/B/e/E directive length (2/1)
- * are transcribed from the native listing. text.unrecovered has no user yet.
+ * Remaining gaps: the object body is 6367 bytes against the native 6455, so
+ * 88 bytes of native code are still unrecovered; the earlier 0xf8 build only
+ * reached 6455 by spilling the loop index.  Gap trace shows the object
+ * running 180 bytes ahead by native offset 819 (extra spill traffic in the
+ * S/s grammar_state 1..4 blocks) and short by a few hundred bytes from
+ * native 1021 onward.  The copy bursts after each memmove use
+ * memcpy(dst, src, strlen(src)), which folds into the reference's shared
+ * strlen+rep-movs tails.  The 'I' and 'f' itoa paths, the 'G' index (*14) and
+ * the u/U/b/B/e/E directive length (2/1) are transcribed from the native
+ * listing.  text.unrecovered has no user yet.
  */
 
 extern int g_1052de0;
@@ -99,8 +102,9 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 	char slot298[0x40];
 	__declspec(align(8)) struct {
 		/* native scratch 0x2a0..0x397; its users are not yet identified.
-		 * Sized so buf lands on the native 0x398 and the frame on 0x3330. */
-		char unrecovered[0xf8];
+		 * 0xfc makes the allocator save ebx/esi/edi and emit the native
+		 * 0x332c chkstk immediate; it puts buf/tmp at 0x394/0x1b64. */
+		char unrecovered[0xfc];
 		char buf[0x17d0];
 		char tmp[0x17d0];
 	} text;
