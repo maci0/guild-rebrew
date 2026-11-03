@@ -23988,3 +23988,43 @@ The first divergence is register allocation, not statement order: the reference 
 zeroing and its push sit earlier than this build's, which assigns them the other way round; four placements of the initialisation all produce the same result. The
 object is seventy-seven bytes over the extent, most of it in the final spawn loop where this compiler emits a larger form than the reference, and that was left alone
 rather than trimming matched code.
+
+## 2026-11-03 — switch row: block order rebuilt, and a merge the compiler will not make
+
+`0x54DA10` moves from 237 to 275 matched bytes with the object at 2155 against the 2230 extent, and its largest gap windows fall from 437, 382, 381, 370 and 330 bytes
+to a single 34-byte window and fourteen negative ones, none above 100. The block order was rebuilt to the reference layout with the cases in the reference's sequence,
+the initial four-entry path was split from the zero-entity path so it no longer copies a position, a loop condition became strictly positive matching the reference's
+signed jump, and the flags slot is at the reference offset.
+One attempt that would have matched better was reverted because it broke the extent: introducing a temporary variable stopped the compiler from cross-jumping two
+identical position-copy blocks, which raised the matched bytes to 290 but pushed the object to 2239, past the extent. The remaining differences are the compiler
+sinking a zero store to a later slot and assigning the counter to a different callee-saved register, both labelled as codegen devices.
+
+## 2026-11-03 — table row: two hundred and eight bytes of duplicated tails, and no flag set that merges them
+
+`0x576C90` keeps 376 of a 2576-byte extent with an object of 2784, and the pass found no source defect: the residual mismatch is a compiler behaviour. The reference calls
+one routine nine times where this build calls it twenty, because the reference merges the state-return tail at the call itself and reaches it from eight sites with a
+push and a jump and from four more with bare jumps, while this build keeps twenty inline copies of about twenty-eight bytes each and folds only two same-argument
+sites. Eleven extra tails at about twenty bytes account for the measured two hundred and eight bytes over the extent, and the reference has eleven returns where this
+build has twenty-two.
+Twelve classes were checked and none holds: the body covers the whole function, the globals are used at the right kinds, every call's argument count and cleanup agree
+at seven routines, the frame and buffer bases match, the branch polarities match wherever they align, the three dispatch tables and the case selector agree, no width
+or duplicate-body defect was found, and over all aligned instruction pairs there is no mnemonic or non-address operand difference at all, so every mismatch is layout.
+Six compiler profiles were built as diagnostics and none reproduces the reference's merging: the pinned compiler merges identical whole return blocks but never emits a
+push of differing arguments followed by a jump to a shared call, so this behaviour cannot be produced from C with this toolchain. A naked transcription would be
+assembly without evidence, which project policy forbids, so the row is left as a size mismatch with this evidence, and the recommendation is to route it as a
+toolchain finding rather than spend more source edits. An accidental optimisation-level flag change from an earlier attempt was reverted and the row record now matches
+its committed state.
+
+## 2026-11-03 — grid row: a ninety-two-line prefix rewritten into the whole function
+
+`0x557460` had 925 bytes of object code and 87 matching bytes from a ninety-two-line prefix; it now has 2568 bytes and 392 matching bytes, with the whole function
+written from the disassembly in address order. The prefix carried four wrong facts that the rewrite corrected: a prototype with the wrong argument count, a mask test
+at the wrong width, an equality test where the reference compares for inequality, and three cases missing entirely.
+The recovered body includes a five-case switch whose jump table sits at 0x557e30, a dark-corner scan over the building table with a kind-scaled stride, a mask built
+from a shift of the kind and a comparison against a dialogue offset, a target resolution comparing a scaled random value against a skill, two random building scans
+with different strides and remainders, a three-slot copy, and two nine-argument tails whose local seven-argument header prototype conflicts with the call site, so the
+call is cast rather than the header changed. The stack layout matches the reference at 0x418 with the hit, tries, step, found and text slots at the reference offsets.
+The first divergence is the prologue: this compiler hoists the minus-one constant into a register and pushes it for the repeated handle calls, where the reference
+pushes a register and materialises the constant inline, and that three-byte shift also stops the compiler from tail-merging those handle blocks, which the reference
+shares, leaving thirty-six bytes of duplicate tails. The next difference is a clamp block where the reference keeps a redundant third comparison in a three-test nested
+select and the compiler folds the two-test form to the opposite polarity.
