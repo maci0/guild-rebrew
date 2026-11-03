@@ -22158,3 +22158,26 @@ plan it has. The recommended next step is to reach the memset destination throug
 expansion and its two temporaries appear, and to apply the proven six-array layout in the same change rather than before it.
 All seventeen direct callees resolve; the thirty-four unresolved bindings are CRT inlines, string literals, five globals and
 local labels. Working notes, the native listing, the gap trace and the slot and drift helpers are in .scratch/0046c5a0/.
+
+## 2026-11-03 — text parser: one frame slot swap explains every large window
+
+`0x51C840` keeps 1425 of 6048 with object 6043, 125 relocations, frame 0x3294 matching with no diffs, the jump table at 0x16E8
+and character map at 0x1748 identical, and no window closed. The pass explains the failure rather than moving it: every large
+window is downstream of one frame slot swap where the reference keeps the state at [esp+0x14] and the pointer at [esp+0x18],
+while this build has them the other way round, so every reference to either costs one displacement byte and the state stores
+land 169 bytes away. The gap trace localises them: 251 non-equal opcodes with spans of 403 bytes at the jump-table artifact,
+293 at the prologue and digit guard, 231 at 0xA7B and 169 at the e/E join, while the two drift windows are artifacts of the
+accumulated shift rather than local size defects. The near analysis reports structural similarity at 95.6 with edge
+similarity at 21.4 over 185 of 190 blocks.
+The swap is inert to five declaration permutations, renaming the pointer, removing the address-of construct, retyping both
+locals, the register keyword, and all eight placements of the state initialisation. Two things flip it and both cost: making
+the state volatile gives the reference slots at object 6083 and match 1173, and a union of the pointer and the integer in the
+0x18 slot flips it at object 6093 and match 885. The reference's 0x18 slot carries the pointer and an integer across
+non-overlapping ranges, with the integer spilled at 0x51D537 while the pointer stays in a register, which no faithful C spelling
+expresses; this matches the allocator findings already recorded in docs/msvc6-allocator.md, findings 52 and 60.
+Other measured and reverted changes, with object and match: a signed digit guard gives 6043 and 1076, reusing one loaded
+character for two comparisons gives 6039 and 1046, an unsigned integer local alone gives 5751 and 669 while the same with the
+casts restored is byte-identical to the baseline at 6043 and 1425, and three if/else inversions give 6039 at 1087, 6039 at
+1090 and 6043 at 1422. The first divergence is prologue store scheduling at offset 0x20, native storing ecx to [esp+0x40]
+where this build stores eax to [esp+0x2c], while the inlined ten-byte template copy load order itself matches. Five bytes of
+the object shortfall are the native section tail's NOPs after the character map, which a COFF object never emits.
