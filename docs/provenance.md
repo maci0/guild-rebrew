@@ -22466,3 +22466,20 @@ the match falls by four. Making the pointer volatile gives 850 at 6503 with six 
 to 0x3334, which violates the pinned frame. The 71-byte code deficit is therefore the lost duplicate call plus tail-merge
 placement rather than missing bodies, and the lever would be getting the pointer into memory while holding the immediate at
 0x332c, which volatile does not do.
+
+## 2026-11-03 — trade row: the volatile qualifiers are attested, and the allocation is global
+
+`0x489A70` keeps 742 of 6075 with the first divergence at byte 230 and an unchanged source. The pass establishes two facts and
+leaves the next step clearly defined. First, several locals really are volatile in the reference: dropping the qualifier from the
+object local gives 444 at 6111 with the divergence at byte 51, and dropping it from either of two other locals gives 702 at 6044
+and 688 at 6005, both losing a stack home. Second, the allocation is a whole-function property rather than a property of the sell
+loop, because adding a copy of the object pointer makes the compiler hoist a value into ebx before the saved-register pushes.
+Removing the qualifier from the price local gives the best raw match of the session, 810 at 6029, but the first divergence moves
+earlier to byte 200 without changing the counter slot or the register plan, so it is a positional artifact and was reverted.
+Removing it from the sent flag is frame-neutral at 742, object 6066, with no divergence movement. Declaration order is inert,
+confirmed by a byte-identical reorder.
+The reference window shows the shape to reproduce: it moves the object pointer into edi, keeps the index at [esp+0x14] and reloads
+the global per comparison, while this build keeps the index at [esp+0x28], reloads the volatile object pointer and hoists the
+constant into ebx. Four pointer-copy shapes measured between 404 and 472 with the divergence at byte 12, and an extra volatile
+local gives 348 at 6094. The next lead recorded is to derive the native stack-home order by toggling one local at a time with a
+push-aware slot mapper, since guessing an ordered structure is blocked on that measurement.
