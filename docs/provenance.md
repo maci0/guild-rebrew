@@ -24580,3 +24580,17 @@ is genuinely pack-compiled elsewhere, since two sibling functions match fully un
 and the row is a code-generator ordering wall. A one-hundred-and-twenty-one-byte row swaps two registers that the prologue saves in the other order, and five declaration
 and initialisation shapes left it unchanged. A one-hundred-and-twenty-three-byte row places a copy-count move ten bytes from where the reference does, and six shapes were
 worse or equal. A one-hundred-and-thirty-byte row rotates three registers, and six shapes did not move it.
+
+## 2026-11-03 — the near-row batch closed with one row earned and four walls named
+
+The five-row near batch ends with one row earned and four walls documented with their exact shape and the number of shapes tried against each. `0x445EC0` is a relocation
+match at 135 of 135 with two validated relocations, earned by alternating two temporaries so six global loads pipeline one store ahead. One row is a one-hundred-and-ten-byte
+function that is exactly 98 of 110 under the processor-pack profile and 110 of 110 under plain service pack, with both images sharing the front end and differing in the code
+generator; the unit is pack-compiled elsewhere, so the override is not warranted and the row is a code-generator ordering wall, with fourteen shapes tried. One is a
+register-home swap across the whole function with identical statement order and five shapes tried. One is a single ten-byte block where a copy count is loaded one slot
+late, nine shapes tried and the current shape already the best. One is a three-value register permutation, six shapes tried.
+A stale blocker text was corrected through the locked writer for the register-home row, because its stored note claimed a delta of one hundred and four where the measured
+value is one hundred.
+The near batch therefore changes how the remaining work should be scheduled: rows that differ only in allocation, scheduler ordering or code-generator ordering are not
+worth a pass each, while rows missing whole blocks and rows with a pipelined load or store pattern are worth taking, because the pipelining class is source-shapeable and
+was just demonstrated on a row that had resisted earlier attempts.

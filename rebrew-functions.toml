@@ -433919,10 +433919,10 @@ file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0050e170.c"
 symbol = "_fcn_0050e170"
 name = "fcn_0050e170"
 kind = "FUNCTION"
-updated_by = "test"
-updated_at = "2026-11-01T08:40:42+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-03T22:07:38+00:00"
 status = "NEAR_MATCHING"
-blocker = "faithful C89 body compiles to the exact 121-byte extent; residual is register allocation: reference keeps a1 in ecx across fcn_0050dfd0 and pushes that ecx as fcn_00502cd0's 4th argument, our compiler reloads a1 from the stack and duplicates p0, so 104 of 121 bytes differ"
+blocker = "register home swap: reference ebx=total, edi=i with push ebx/push esi prologue; build edi=total, ebx=i with push esi/push edi. Five declaration and initialiser shapes unchanged, statement order identical. measured 100/121"
 blocker_delta = 104
 
 ["GOLDTL.0x0050e170".verification]
