@@ -24206,3 +24206,15 @@ Three variants were reverted. One that inlined the value lost a pop. A batch of 
 that scored much higher was rejected on link grounds: it needed six data symbols that have no stub backing, so the row would fail to link with unresolved externals. The
 link-clean form was kept and both numbers are recorded. The first remaining divergence is a scheduler ordering after a call, which is a codegen difference rather than a
 defect.
+
+## 2026-11-03 — a stub row measured before repair, and the facts a later session needs
+
+`0x586C10` was listed as a size mismatch and is in fact a thirty-six-line stub with a ninety-three-byte object against a 2476-byte body, so no defect repair applies and
+nothing was changed. A whole body was hand-translated as an experiment and compiled, and the best positional result was thirty-four bytes: the reference keeps a call
+result in one callee-saved register and the argument in another, while every draft spills the result or moves the argument, and the frame comes out eight bytes short. A
+partial body cannot reproduce the reference prologue, which is why the experiment was not applied.
+The facts that took the disassembly work are recorded for a later full reconstruction: the frame base is the post-adjustment stack pointer, so listings relative to the
+frame register read sixteen bytes high; the layout is flags at zero, table pointer at four, count at eight, a 0x4c-byte state array to 0x130, two sixteen-byte float
+buffers at 0x130 and 0x140, and a 0x400-word array at 0x150 running to 0x950. Four scan loops use signed jumps with strict bounds, one global is a pointer reloaded after
+a store through it, two calls clean their stack merged at twenty-eight and sixty-two bytes, and three callees take nine, seven and two arguments by their own source. This
+row needs a full-body session, not a defect pass, and is recorded as such rather than left looking like an easy row.
