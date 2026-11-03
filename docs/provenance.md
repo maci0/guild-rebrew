@@ -24449,3 +24449,20 @@ order is exactly the source's, and the machine code confirms the compiler does n
 discriminators are runtime item handles rather than integer constants, and a switch would add a comparison chain before the switch and move the first divergence.
 What remains is register allocation around the loop header and one reload inside a loop, not field offsets: the first divergence at reference 0x13a is a sunk zero on the
 latch paths, and the last two bytes of drift are a register restored after the loop instead of inside it.
+
+## 2026-11-03 — wire row: one union restores the frame, and a conversion stops calling a helper
+
+`0x56B700` moves from 153 to 499 matched bytes with the object at 2140 against the 2188 extent and the frame now exactly 0x158 where it began at 0x20c. The first
+forty-two bytes are now identical to the reference where the baseline diverged at offset two.
+The repairs are structural as well as semantic. The decoded record buffer and the wire packet were separate locals; one union over both restores the reference frame,
+the buffer base and the counted zeroing at the reference address. The position field was declared as three floats where the reference has a fourteen-byte structure, and
+the seven copy sites now write its four fields explicitly in the reference's order. An unsigned integer widened to double is written so the compiler loads it with an
+integer-to-float load, multiplies by the constant and converts in the floating-point register, where the old form pushed a float and called a conversion routine with an
+extra stack adjustment. A bound written as at most two is now strictly less than three. A zero-count branch is written so the error block goes out of line, matching the
+reference. A mode-and-count test now emits two calls on one path and one call on the other, as the reference does. And a value saved before the switch was moved into the
+case that uses it, which removed a stale spill.
+Relocations rise from nine to sixteen without new mismatches, because more relocated operands now sit at reference offsets. Five variants were measured and rejected,
+including two spellings of a limit, a counter rewrite and a structure assignment.
+The remaining difference is a stack-slot rotation: the reference keeps a nearby-record pointer in a callee-saved register while this build spills it and puts a different
+value there. Four declaration orders produced identical objects, so the layout is driven by liveness rather than declaration order, and that is recorded as unsolved
+rather than guessed. The body is also forty-eight bytes short, and the first content divergence is a jump displacement followed by two slot displacements.
