@@ -21137,3 +21137,33 @@ slots, since the prefix only moves once the allocator sees a near-native body, a
 metric rather than the prefix. Tools added: fslots.py to list every reference to one folded frame slot, slotmap.py to learn
 the object-to-native slot map from a shape-blind alignment, and score.py to print the slot-blind body score with its
 mismatched regions.
+
+## 2026-11-03 — d2 row: the block relocation premise is an alignment artifact
+
+`0x4DA690` keeps 1489 at object 7020 with frame 0x900 and an unchanged source, and the score to beat is a mismatch of
+1329 giving shape 0.663 with 1309 aligned instructions out of 1975 native and 1972 object instructions. The previous
+round's region list reproduces exactly only when general-purpose registers are folded before diffing, which yields native
+0x170a with 113 instructions against the object's 0x18f1 with 1, a deleted native block at 0x1668 of 40 instructions, an
+inserted object block at 0x15c7 of 138 and a native 0x1995 block of 51; with the score canonicalisation that is
+register-sensitive, the same code aligns as many small opcodes. A content check settles it: the candidate's second-pass
+scan `push #12de` sits at 0x168e against native's 0x171b, a delta of 0x8d, and the apparently missing native 0x1668 to
+0x16fc block is the candidate's 0x15c7 to 0x1644 block, with `push eax`, call, `push #3e8`, and `cmp eax,#-1`
+identically shaped. Mnemonic-only alignment gives shape 0.875 with a single gap, the known object-only escape block at
+0x1b01 to 0x1b62 of 35 instructions, so no statements are relocated or missing and there is only drift.
+The real cause is push-depth drift. The score folds slots relative to minus four times the push depth, and the depth
+diverges at the vote and packet pass and never returns: an aligned block at native 0x00e8c has depth 14 against the
+object's 4, and by the count-is-zero and count-greater-than-one bodies it is 29 against 16, a delta of 13. From that point
+every scaled slot token differs, which is exactly what appeared as the 138-instruction insert and 113-instruction delete.
+Native also keeps roughly 0x140 bytes more code before the second pass than the object, which supplies the offset shift.
+Four experiments were discarded with the source restored and the score unchanged at 1329: the parked
+c3_loop_recompute_s00 variant gives 1977 object bytes and 7055 with a mismatch of 1496, worse alignment and closer size;
+rewriting the initialisation loop at source lines 211 to 219 as one stepped base with `pb += 0x35c/4` and negative indexed
+access to match native's single-base form gives 1984 at 7039 and a mismatch of 1341; declaring sDC as `unsigned char` in
+both positions changes object bytes but leaves the score at 1329; and removing the synthetic escape block at source lines
+818 to 823 gives 1828 object bytes at 6527 with a mismatch of 1314 and shape 0.654, worse because the denominator shrinks.
+Two concrete leads were measured for the next attempt. Native's packet struct at &sD8 is an int at [esp+0xf4], a hole at
+[esp+0xf8], then ints at 0xfc, 0x100 and 0x104, plus a byte store at [esp+0xf0], while the source lays out five contiguous
+ints so fcn_004e51d0 receives a 0x10-byte object where native passes 0x14. And the push depth first diverges between
+native 0xbd9 and 0xe8c. No source shape was established for either, and the hole cannot be produced by a plain unused
+local because the compiler drops it. Tools in .scratch/4da690/r15/ with rep.py for merged regions, shift.py for the
+drift, pdrift.py for push-depth drift, rb.py for the register-folded dump and side.py for the pair view.
