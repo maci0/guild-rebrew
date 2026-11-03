@@ -23236,3 +23236,21 @@ structural difference and the next attempt should settle whether the shared head
 Nine defect classes were checked against the reference bytes and the rest came back clean, covering seven call targets, cdecl throughout, argument order
 at ten search sites and two table-call sites, the office stride and three slot offsets, the zeroing counts, the array widths, a sign-extended field read,
 the sentinel bound before its increment, and the message offsets.
+
+## 2026-11-03 — building row: four type repairs judged structurally
+
+`0x5744C0` keeps 1178 of 3976 with the object at 3972, four bytes under where it was four over, thirteen drift windows instead of nineteen, and 130
+gap spans instead of 141, after four repairs taken from the reference bytes. A callee returns a char rather than an int, which the reference shows by
+testing the low byte instead of the whole register. A value is an unsigned char, which the reference shows by loading the byte into the low register and
+comparing at byte width with unsigned jumps, where this build sign-extended and compared as integers. The numerator of one division is unsigned, which
+the reference shows by zeroing the high half and using an unsigned divide instead of a signed one. And a floating-point conversion is hoisted out of an
+inner condition into the outer branch, where the reference converts before the call rather than after; that change is size-neutral and takes the spans
+from 861 to 828.
+The positional match falls from 1246 to 1178 while every structural measure improves, because each of the first repairs shortens the body and every byte
+after it shifts. The structural signal is kept and the numbers are recorded. The call sequence matches the reference at 108 calls one for one.
+Every other checked class came back clean: cleanup is balanced and cdecl throughout, the argument order at two cases was verified through the reference's
+own register homes, four strides are correct, the copy counts of four, four, four and two match, two array extents are correct though their frame
+placement is inverted between the two builds, both duplicated scans are present, the byte counter has its sentinel guard, and every store offset used in
+the source appears in the reference.
+The remaining divergence is register and home allocation, with two locals occupying swapped slots at the first difference, and the object being four bytes
+short, so one reference sequence of that length is still unidentified.

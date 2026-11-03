@@ -1,4 +1,4 @@
-int __cdecl fcn_00413680(int, int, void*, void*);
+char __cdecl fcn_00413680(int, int, void*, void*);
 int __cdecl fcn_00415300(int);
 int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
 int __cdecl fcn_00426cc0(int);
@@ -55,10 +55,11 @@ void __cdecl fcn_005744c0(int a0)
 {
 	int v5;
 	int v8;
-	int v9;
+	unsigned char v9;
 	int v11;
 	int v13;
 	int v24;
+	int v31;
 	int v27;
 	unsigned char* v14;
 	int v30;
@@ -181,7 +182,7 @@ LfailB:
 		else {
 			v11 = fcn_00574150(v5);
 			*(int*) (v5 + 0xc4) = v11;
-			*(int*) (v5 + 0xc0) = *(int*) (v27 + 0x243) * 0x3fc / v11;
+			*(int*) (v5 + 0xc0) = *(unsigned int*) (v27 + 0x243) * 0x3fc / v11;
 		}
 		*(int*) (v5 + 0xc8) = 0;
 		fcn_00500bb0((void*) (v5 + 0x52), 0, 1, 0);
@@ -400,10 +401,11 @@ LfailB:
 			fcn_00598510();
 			if (*(int*) (*(int*) (v15 + 0x61) + 0x1ec)) {
 				if (fcn_00413680(*(int*) (v15 + 0x61), *(int*) 0x6b8014, v17, &v21)) {
+					v31 = (int) (v21 * 1.8);
 					v8 = fcn_00426fd0((char*) 0x6a7da0);
 					if (v8) {
 						fcn_00428340(v8, 6, (int) v17[0], (int) v17[1], (int) v17[2],
-							(int) v21, (int) (v21 * 1.8), *(int*) (v15 + 0x61));
+							(int) v21, v31, *(int*) (v15 + 0x61));
 						*(int*) (v8 + 0x104) = 0;
 					}
 				}
