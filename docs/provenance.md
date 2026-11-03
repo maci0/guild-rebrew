@@ -22535,3 +22535,25 @@ plain for over the same counter, a redundant copy of the value, and adding brace
 7070 and was reverted. The replace and addend clusters before the first structural event rise from 31 to 37, and the six extra are
 displacement and register substitutions inside the newly aligned span rather than new defects. The first byte mismatch remains at
 0x9e, where the order array base is 0xb8 in the reference and 0xc8 here.
+
+## 2026-11-03 — palette row: the scalar block is declaration order in the reference, live range here
+
+`0x46C5A0` keeps 440 of 6108 with the first divergence at offset 12 and an unchanged source, and the scalar permutation is now
+mapped exactly rather than approximately. The reference's zero stores sit at minus 8 for the image index, minus 0x28 for the
+extra-length flag, minus 0x64 for a loop flag, minus 0x18 for the line count, minus 0x1c for the colour and minus 0x60 for
+another flag, each confirmed through that slot's later uses: the image index is read with `mov ecx,[ebp-8]` then indexed into a
+table and incremented later, the extra flag guards three separate blocks as well as being stored and recomputed, the line count
+feeds two indexed uses, and the colour receives four different immediate stores. This build keeps the same six values at minus 8,
+minus 0x24, minus 0x64, minus 0x20, minus 0x18 and minus 0x60.
+The decisive observation is structural: the reference's scalar block is exactly contiguous declaration order from the first
+integer at minus 4 through the last locals, while this build packs by live range, with several names sharing one slot and two pairs
+of locals transposed. That means the six zero stores are a symptom of the packing policy, not a reachable cause.
+Every lever was measured with a compiler listing and disassembly. Six declaration permutations, including a full reverse and the
+declaration-initialiser form, leave both the slot map and the frame byte-identical. Initialiser permutations change the store
+order but not the slots. Volatile pins do move slots, with one local giving five of the six reference offsets and the line count
+still at minus 0x20, but the best of them measures 446 at 6120 with the divergence still at 12, so it is worse and was rejected.
+An ordered scalar structure holding twenty-four members in reverse order puts the block at minus 0x7c and shifts all six arrays by
+0x10, breaking the frame. Compiling at a size or processor variant is not available under the translation unit's own flags.
+The cause of the divergence at offset 12 is therefore register-home competition, with the reference keeping the zero in edi and the
+slot in esi while this build keeps the zero in esi and the slot in ebx. That competition is upstream of the slot map, so no store
+order or declaration change can reach it.
