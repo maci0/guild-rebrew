@@ -21715,3 +21715,30 @@ than a behaviour difference. The stale header comment claiming a different frame
 row 0x5101e0 was refined: that file holds two definitions with their own anchors, at 0x00507910 line 2 and 0x005101e0 line
 53, so the file is named for its first function while the row's symbol and address agree, making the mismatch cosmetic and
 the row itself RELOC at 116 bytes.
+
+## 2026-11-03 — a flagged binding is correct and a neighbour row needs the work
+
+The row flagged as a name and file mismatch is clean. `0x5101E0` binds src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00507910.c
+with symbol _fcn_005101e0, and the file legitimately holds two anchored definitions, at line 2 for 0x00507910 and line 53
+for 0x005101e0, so it is named for its first function while the row's own symbol and address agree. A repo-wide search finds
+exactly one address anchor for 0x005101e0, one definition at line 54, and no second file claiming the VA; the anchor listing
+reports the symbol once among 5219, and lint raises no binding warning. The inventory agrees at 116 bytes with an extent
+history of 128 to 116 from a reviewed NOP and INT3 tail trim, and bytes 0x510254 to 0x51025f are twelve NOPs before the next
+function at 0x510260. Multi-anchor translation units are routine here, with twelve in that directory including one holding
+seven. No rebind is needed.
+The row measures RELOC at 116 of 116 with object 116 and six relocations, and the diff reports 42 instructions with 36 exact
+and 6 relocation-only. The listing confirms the source: the entity access is the byte at lpGebaeudePROT plus 589 times the
+index with the type at offset zero, call one targets 0x507910 with the zero-extended byte, the compare is `cmp eax,0xa`,
+`0xb` and `0xc` jumping to the 9.0f path, the second call targets 0x50b8d0 at both sites pushing four arguments in the
+source's order, and the global at 0x868050 binds lpGebaeudePROT as validated; the two float relocations are unresolved in
+the resolver, so the reference pool was read directly at 0x6628b0 for 3.0f and 0x665c0c for 9.0f. A falsification
+experiment swapping two arguments on line 60 gave 114 of 116 with mismatches at offsets 57 and 61, confirming the measured
+result is live, and was reverted. The row's ceiling is RELOC because six relocation sites are inherent in 116 bytes: an
+absolute global, a relative call to 0x507910, two relative calls to 0x50b8d0 and two float-pool absolutes.
+Two items are reported for later work rather than changed here. The row that actually needs attention is its neighbour in
+the same file, `0x00507910`, a SIZE_MISMATCH of 224 against an object of 213, which is the likely origin of the false flag.
+And callers disagree about the callee's return type across seven translation units, with `void` in one and a float with
+integer and pointer casts in the rest, while the definition returns a float in st0; that cleanup belongs to those rows. Also
+noted: src/client_dialog_helpers.h lines 95 to 99 declare the same extern in both preprocessor branches, which is harmless
+duplication in a protected file. The row's verification block was refreshed with the current compiler hash and no size,
+status, file or hand edit changed.
