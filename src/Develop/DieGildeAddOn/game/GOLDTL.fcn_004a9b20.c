@@ -28,6 +28,8 @@ int __cdecl fcn_004a9780(char*, char*, int, char*, int);
 int __cdecl fcn_004a9820(char*, char*, int, char*, int);
 int __cdecl fcn_004a99a0(char*, char*, int, char*, int);
 
+int __cdecl fcn_004a8d30(char*, char*, int, char*, int);
+
 /* ADDRESS: GOLDTL 0x004a9b20 */
 int __cdecl fcn_004a9b20(char* a0, char* a1, int a2, char* a3, int a4)
 {
@@ -36,12 +38,13 @@ int __cdecl fcn_004a9b20(char* a0, char* a1, int a2, char* a3, int a4)
 	int ids2[19];
 	int* p;
 	int n1;
-	int n2;
+	int n2 = 0;
 	int id;
 	int sel;
 	char* e;
 
 	memset(&c, 0, sizeof(c));
+	c.found = 0;
 	if (*(int*) (a1 + 0x1c8) & 0x100) {
 		e = fcn_005463a0(1, 0, 0x45);
 		while (e != 0) {
@@ -52,34 +55,19 @@ int __cdecl fcn_004a9b20(char* a0, char* a1, int a2, char* a3, int a4)
 			e = he_fn_Handlung();
 		}
 	}
-	if (*a3 != 0) {
-		if (*a3 != 0x10) {
-			return 0;
-		}
-		id = *(int*) (a3 + 4);
-		*(int*) c.text = 1;
-		if (fcn_004fa5b0(id, a1, (int) &c) & 2) {
-			*(int*) (a3 + 8) = 3;
-		} else {
-			*(int*) c.text = 2;
-			if (!(fcn_004fa5b0(id, a1, (int) &c) & 2)) {
-				return 0;
-			}
-			*(int*) (a3 + 8) = 4;
-		}
-	} else {
+	if (*a3 == 0) {
 		*(int*) c.text = 1;
 		n1 = 0;
-		for (p = (int*) 0x67fa58; p < (int*) 0x67faa4; p++) {
+		for (p = (int*) 0x67fa58; (int) p < (int) 0x67faa4; p++) {
 			if (fcn_004fa5b0(*p, a1, (int) &c) & 2) {
 				ids1[n1] = *p;
 				n1++;
 			}
 		}
-		n2 = 0;
 		if (c.found != 0) {
 			*(int*) c.text = 2;
-			for (p = (int*) 0x67fa58; p < (int*) 0x67faa4; p++) {
+			n2 = 0;
+			for (p = (int*) 0x67fa58; (int) p < (int) 0x67faa4; p++) {
 				if (fcn_004fa5b0(*p, a1, (int) &c) & 2) {
 					ids2[n2] = *p;
 					n2++;
@@ -111,9 +99,21 @@ pick_second:
 		*a3 = 0x10;
 		*(int*) (a3 + 4) = id;
 		*(int*) (a3 + 8) = sel;
-	}
-	if ((unsigned int) (id - 0x12) > 0x25) {
-		return 0;
+	} else {
+		if (*a3 != 0x10) {
+			return 0;
+		}
+		id = *(int*) (a3 + 4);
+		*(int*) c.text = 1;
+		if (fcn_004fa5b0(id, a1, (int) &c) & 2) {
+			*(int*) (a3 + 8) = 3;
+		} else {
+			*(int*) c.text = 2;
+			if (!(fcn_004fa5b0(id, a1, (int) &c) & 2)) {
+				return 0;
+			}
+			*(int*) (a3 + 8) = 4;
+		}
 	}
 	switch (id) {
 	case 0x12:
@@ -126,9 +126,7 @@ pick_second:
 	case 0x1d:
 		return fcn_004a8d10(a0, a1, (int) &c, a3, a4);
 	case 0x21:
-		/* native 0x004a8d30 has no function inventory row */
-		return ((int (__cdecl*) (char*, char*, int, char*, int)) 0x4a8d30)(a0, a1,
-			(int) &c, a3, a4);
+		return fcn_004a8d30(a0, a1, (int) &c, a3, a4);
 	case 0x24:
 		return fcn_004a8d40(a0, a1, (int) &c, a3, a4);
 	case 0x25:

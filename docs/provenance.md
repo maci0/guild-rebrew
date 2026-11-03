@@ -21571,3 +21571,31 @@ where native keeps it in SI and does `mov ax,si`, and `m[0x8d] |= 0x10` compiles
 native's fused `or byte [eax+0x8d],0x10`, with the unsigned cast form making no difference. Every callee has a GOLDTL row,
 and the remaining unresolved relocation entries are compiler literals and local labels only. Backups under
 .scratch/row535ec0/ with baseline, v2a, v2b, v3 and final sources.
+
+## 2026-11-03 — dispatch row: declaration-time initialisation was the key
+
+`0x4A9B20` moves from 209 to 426 matching bytes with object 1410 against native 1440, 27 relocations and status
+SIZE_MISMATCH; the binding is src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004a9b20.c with stored extent 1440 and a confirmed
+frame of 732 without a frame pointer. The decisive finding is that `n1` is not initialised at its declaration: `n1 = 0` is
+assigned inside the `*a3 == 0` block, where the compiler hoists the zeroing, and that single change took the early body
+from 360 to 401 and made it byte-identical from 0x4a9b20 to 0x4a9c42, covering the prologue, the memset, entity iteration,
+both loops over the 0x67fa58 to 0x67faa4 range, the pick logic and the a3 case, with only relocation targets differing.
+Earlier steps along the way: the memset of 0x220 and the explicit zeroing were scheduled with the initialisation block,
+integer casts on the loop bounds produced the reference `jl`, and the large block became the then branch of `if (*a3 == 0)`
+with the a3 case in else for 269 at 1410; moving the redundant second zeroing inside `if (c.found != 0)` gave 360 at 1402.
+The last kept change is correct-but-costly and is reported with both numbers: 0x4a8d30 now has a project row at
+src/Develop/Unassigned/fcn_004a8d30.c, so a stale direct cast call became a call through a five-argument prototype, which
+reproduces the listing's `call rel32` and gives 426 at 1410, raising the match by 25 while moving the object four bytes
+further from the extent.
+The first remaining divergence is native's `and eax,0xffff` followed by `test eax,eax` at 0x4a9c43 against this build's
+`test ax,ax`, and the earlier reported `jne` displacement difference at 0x4a9ba1 is only the shorter target block. The wall
+is confirmed: this compiler folds `(unsigned short)gm_RandomMod(2) != 0` to `test ax,ax` in every source form tried,
+including an unsigned short prototype, an int prototype with explicit casts, unsigned short, int and long temporaries, a
+mask into a dead temporary, the comparisons `0u`, greater than zero and greater or equal to one, nested ifs and the
+disjunctive form; the `and` materialises only when the value stays live, as in fcn_004a0bb0 where the masked result is used
+later, so reproducing the five-byte conversion here would require changing behaviour or adding a use. Two smaller walls:
+the sparse switch at 0x4a9d32 emits `add edi,-0x12; xor eax,eax` and a byte-table load where this build emits
+`lea eax,[edi-0x12]`, and the early-return block at 0x4a9c8e orders `jne pick2` against this build's `je return0`; the tail
+padding is nop in native against `mov edi,edi` here. The object is 30 bytes short of the extent, consistent with those
+deltas. Every callee has a project row, with the eighteen case targets declared as the listing implies. Original and
+variants under .scratch/row-4a9b20/.
