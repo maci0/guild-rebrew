@@ -23076,3 +23076,24 @@ reference inlines a small structure comparison that this build emits out of line
 The first divergence is the frame layout: the reference folds a zeroed value and a loop initialiser into one register and stores it at two slots
 that sit four bytes lower than this build's, with the base and message slots also transposed relative to the references. That layout difference is
 the root of the remaining shift, not a source-level defect.
+
+## 2026-11-03 — fallback routine: convention derived, one shared tail refused
+
+`0x5D0660` keeps 1258 of 4389 with 43 relocations and an object already covering the whole extent, so no blocks were missing and the earlier
+stacked gap events were alignment artifacts. The row's calling convention is now derived from the bytes rather than assumed, because other rows
+call it as a fallback: it is cdecl with four stack arguments, where the second arrives as a byte and is used as flag bits, the epilogue adds
+0x438 and returns without an immediate, every one of the 66 calls is direct and followed by caller cleanup, and both known callers pass four
+arguments, so the two declarations agree. The one imprecision, a K&R-style declaration in a caller, is recorded and was not changed.
+Thirteen defect classes were checked against the reference bytes and came back clean, covering call targets and order, argument order at six
+multi-argument sites including constants in the last position, the two index products, three zeroed regions whose counts match their structure
+sizes, five array row counts and widths proven from frame slots, three duplicated hover scans at the same native sites, a masked conversion
+inside the same branch arms, sentinel comparisons that load values, dereferenced entity comparisons, a slot bound before its increment, and
+three record offsets.
+One structural difference is real and was deliberately not restored: the reference reaches a visibility-store tail at 0x5d0bf2 from two
+positive arms, one by fallthrough and one by jump, while this build duplicates the block. Writing it as a shared tail, which is the native form,
+measures 727 matched bytes with the object shrinking to 4327, so it loses 531 matched bytes and 62 bytes of length; the saved bytes are
+compensated elsewhere in the current body, so restoring the form moves away from both signals. That is recorded as a case where structural
+fidelity and the measured signals disagree, with the numbers.
+The first divergence at byte 155 is a scalar home difference rather than a semantic one: the count sits at frame 0x28 here against 0x30 in the
+reference, and two more values are homed differently, with the same declaration set and the same 0x438 frame. The instruction streams agree
+wherever the homes agree.
