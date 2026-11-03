@@ -474780,7 +474780,7 @@ blocker = "Partial reconstruction kept (no STUB): SIZE_MISMATCH 11/2592, obj 93.
 blocker_delta = 2581
 
 ["GOLDTL.0x005a76b0".verification]
-source_hash = "d9c9cab1c0072c9687407e06d41387a4d6089b1345148c5d7f21a510600bd030"
+source_hash = "10aaa03fbe0ecb878a926594f9b2e65be85143f7796bc58adac8e8b1da777667"
 reference_hash = "6b2bc2ac9406f7493cae7161d8693bfe7c344a0d13eff42c17f056fb460705c9"
 reference_size = "2592"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -474791,10 +474791,10 @@ module = "GOLDTL"
 va = "0x5a76b0"
 context_hash = ""
 defines = "[]"
-input_hash = "8527825bdcd62e1bc50827f13b4768898056c6d07bdfe4d92d4715db522833c9"
+input_hash = "620cf614f45973dfa7f4a23fe0daf562e6a49a428c2c77a77fbfde6adfc5d20e"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T17:38:41+00:00"
+measured_at = "2026-11-03T17:43:09+00:00"
 
 [["GOLDTL.0x005a76b0".status_history]]
 old_status = "STUB"
@@ -475019,7 +475019,7 @@ defines = "[]"
 input_hash = "cb9d2a14eaafb97faf7b8f6e3dfdca94a3d0e8fa3eb69614027a62cfed8183fb"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T17:39:45+00:00"
+measured_at = "2026-11-03T17:44:36+00:00"
 
 [["GOLDTL.0x004c16c0".status_history]]
 old_status = "STUB"
@@ -475105,7 +475105,7 @@ blocker = "Body kept (Handels-Lageroptionen dialog builder, from pdg at true ent
 blocker_delta = 85
 
 ["GOLDTL.0x005be140".verification]
-source_hash = "d7b7e846d720d1182137c8c2c78043d76e0bf40198e35f3d30e429d5f39e90f8"
+source_hash = "e2f947a8d316fc8a6f0c2941e576c9c070989fffa989dee1fbcefa6d5c885ec4"
 reference_hash = "8fc4de719391a54a162fb972c3d5d4dd3564408cd26074e1d79bedef127c31cd"
 reference_size = "2676"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -475116,10 +475116,10 @@ module = "GOLDTL"
 va = "0x5be140"
 context_hash = ""
 defines = "[]"
-input_hash = "7af1f804d7a1554b29f0af7ff82eed6c01d2038e162394f6d31d89457b5ced4d"
+input_hash = "6b3f5946c063aa2ae9e2a96248c82d945af3328684a22138f3fc7a67ca27c240"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T17:40:03+00:00"
+measured_at = "2026-11-03T17:45:06+00:00"
 
 [["GOLDTL.0x005be140".status_history]]
 old_status = "STUB"

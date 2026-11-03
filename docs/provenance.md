@@ -23883,3 +23883,17 @@ The remaining gap is not a surgical fix and is now detailed: the reference body 
 routines and one more, and the round loop reads a table at 0x9b0eb4 with a stride of 0x35c and a per-entry flag where the source has a simple comparison. The frame
 difference follows from the declaration set: the reference uses 0x154 bytes of locals plus an unused 0x200 region at the top, with eight arrays, while the source has
 five arrays including one the reference does not.
+
+## 2026-11-03 — audio row: fabricated volume arguments and an inverted branch
+
+`0x4C16C0` moves from 467 to 1171 matched bytes with the object at 2624 against the 2621 extent, a rewrite that repaired several real defects. A float value that
+feeds the frame was missing entirely, which is what made the frame four bytes short. A branch testing a global against one was inverted. Three comparisons were
+written as inclusive where the reference is strict, and the widths were wrong in two ways: a character pointer where the reference compares sixteen-bit values, and a
+field loaded repeatedly where the reference loads it once.
+The largest repair is a set of seven fabricated volume arguments: the source computed them from a conversion of a call that has nothing to do with the value, and
+they are now the product of a float, a table field and the maximum, with a shift where the reference shifts. Two more call arguments were being passed as zero where
+the reference passes the truncated minimum of a constant and a scaled count. And the return value of the last call is reused where the reference reuses it.
+Four prototypes were derived from the callees' own bodies, one returning a float pointer and one an integer, and two taking two arguments.
+Three variants were reverted: a void return type, dropping the final return, and numeric floating-point address macros. The three bytes over the extent are a codegen
+device: this compiler canonicalises a floating-point product to load the direct operand first, while the reference loads the table or local operand first, and
+flipping the source order, casting, or using numeric addresses produced identical bytes. The first content divergence is a reload order that nets zero bytes.
