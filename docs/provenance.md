@@ -23721,3 +23721,20 @@ Fourteen callees were checked and all are cdecl with argument counts derived fro
 adjustment, and the random-modulus callee's binding matches the reference call target. A structurally terser variant of the same source measured two bytes shorter and
 two matched bytes fewer, so the higher-match version is kept and both numbers are recorded. The remaining divergence is the prologue: the reference frame is 0x1ac
 and this build 0x1b4, two spilled locals beyond the reference set, with a register assigned differently so every downstream byte inherits the shift.
+
+## 2026-11-03 — layout row: float globals, an unsigned byte and an off-by-one copy
+
+`0x408540` keeps 481 of 2776 with the object at 2768, and three defects were repaired against the reference. Three globals are read as floats, which the
+reference shows by loading through the floating-point load opcode where this build used the integer-to-float load, a one-byte difference in the opcode with the
+same effect. A byte read is unsigned, because the reference zero-extends it with a zeroed register and a byte move where this build sign-extended; that repair
+makes the object one byte longer because the reference form is the longer one. And a character-pair copy loop read one byte early, copying the second and third
+bytes of each pair where the reference copies the first and second, which is a real off-by-one defect in the source.
+The positional count falls from 496 to 481 while the object shrinks by two bytes, six operand-only windows close with none opened, the object's instruction count
+falls from 849 to 835 against the same reference, and the mismatch runs fall from 105 to 95, so the structural signal is kept and both numbers are recorded. The
+count is not offset-invariant on a shrinking object, which is why it moves against the other measures.
+The remaining windows trace to one extra stack slot: the reference frame is fourteen dword scalars, a ninety-six element array and a staging buffer totalling
+0x9b8, while this build has fifteen scalars with the array four bytes higher. Two attempts to free the slot were reverted rather than traded for another bug, and
+the fix needs the original variable set, which the export over-declares. Sixteen callee prototypes and their cleanup were checked, along with the record offsets,
+loop forms, branch orders, the comparison forms, the constant-versus-pointer globals, a scan the reference really does perform twice, and a dead pair of stores the
+reference keeps. Two codegen-only differences remain and are labelled: the reference reloads a field per use and pops the floating-point stack where this build
+eliminates both.
