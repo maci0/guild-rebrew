@@ -24628,3 +24628,14 @@ Two blocker texts were stale and were corrected through the locked writer rather
 matching, and one claimed a size mismatch where the reviewed extent was split to sixty-five and the row is a near match at fifty-four of sixty-five.
 The pattern from this batch and the previous one is consistent enough to act on: the near band of this target is now almost entirely allocation and scheduler walls, so the
 remaining effort belongs in rows that are missing code rather than rows that are missing registers.
+
+## 2026-11-03 — a missing store and three initialiser variants that cost more than they buy
+
+`0x56CFC0` keeps 581 of 2300 with the object ending exactly where the reference does, and its first divergence is one missing store: the reference writes four dwords
+from offset 0x18, the last of them zero at 0x24, interleaved with a test and a register load, while the source's three-element vector initialiser stops at 0x20. That one
+store is the difference; everything else in the neighbourhood matches.
+Three variants were measured against it. Declaring the vector as four elements with an explicit zero, and then as four elements with an implicit zero, both lower the match
+to 525 and turn the row into a stub, because the wider local moves everything after it. A separate zero-valued float declared beside the vector changes nothing at all,
+which means the compiler either eliminated it or placed it where it produces no store.
+The row is restored and the result recorded: the missing store is real and the shape that produces it is not a wider array, so the next attempt should look for a
+four-field structure or for the fourth value being written by a different statement than the initialiser.
