@@ -23448,3 +23448,21 @@ reproduced there with inline assembly, which would require register save and res
 Thirty-five call sites were checked in order and all match, along with the cleanup amounts, the argument order and raw-versus-scaled forms, four callee prototypes
 derived from their own bodies, five strides and a sentinel division, three copy counts, and seven field offsets. The gap tool is unusable on this row because the
 lead scaffold is emitted as an earlier text section, so the comparison was done against the function's own section.
+
+## 2026-11-03 — zone row: two wrong call targets and a wrong counter field
+
+`0x47F6B0` keeps 506 of 3193 with the object at 3129 and 32 relocations, and the pass found defects rather than shapes. Two direct call targets were wrong. The
+first called an address that is not a function start at all, being mid-instruction, where the reference calls a different address whose relocation now validates
+against the native value. The second called a three-argument zone lookup where the reference calls a one-argument plant-info routine, and the result's uses match
+that routine's structure, with an identifier word, a name word and a byte at offset 0x42; the bound address now equals the reference target.
+A counter was being kept in the wrong field of the state record: the reference increments the available count, compares the wanted count against it and stores it
+to a global, and only later zeroes the total and the sent count, where the source used the total for all of it; the four uses are corrected and the tail stores
+reordered to the reference's order. Two conditions were rewritten to the shapes the reference emits, a byte test followed by an unsigned jump rather than a zero
+test, and a strict comparison replaced by an inclusive one. A duplicated call in the scan loop was removed where the reference calls once and loops. And a cached
+pointer was left cached only in the loop that needed it, with its assignment moved after four setup calls so the first load lands where the reference's does.
+That last repair partially inlined the pointer, and the full inline was measured: it reaches a structural ratio of 0.9658 but grows the object past the extent and
+drops the match, so only the partial form was kept.
+The positional count falls from 683 to 506 while the structural ratio reaches 0.8975 and several of the largest windows close, including three of 92, 84 and 35
+bytes and two more at 26 and 14. The drop comes from the object being 64 bytes short, and the negative gaps around the scan block show this build's code is
+condensed relative to the reference there, which is recorded as a shortfall rather than a regression. Every other checked class came back clean: push counts and
+widths at every call site, both variadic argument counts, five strides, both bounds, the copy count, the argument orders at two calls, and the guards.

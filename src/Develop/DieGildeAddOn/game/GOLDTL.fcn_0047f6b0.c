@@ -103,13 +103,13 @@ extern int g_100b0a8;
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl fcn_005463a0(int, int, int, int, int);
-char* __cdecl find_zone_record(int);
+char* __cdecl plt_FindPlantInfo(int);
 void* __cdecl fcn_00503d10(int);
 void __cdecl fcn_004849b0(char*, char*, char*);
 int __cdecl fcn_00486640(char*, int*, int);
 void __cdecl fcn_004868d0(char*, int*);
 void __cdecl fcn_00487000(char*);
-void __cdecl fcn_00484740(char*);
+void __cdecl fcn_00487470(char*);
 void __cdecl fcn_00487970(char*, char*, int);
 void __cdecl fcn_00487c00(char*, char*, int);
 void __cdecl fcn_00487e60(char*, int);
@@ -177,11 +177,11 @@ int __cdecl fcn_0047f6b0(char* a)
 		}
 	}
 
-	h = *(char**) (a + 0x16c);
 	fcn_00487000(a);
 	fcn_00487970(t2, a, 0xa);
 	fcn_00487c00(t2, a, 0x19);
-	fcn_00484740(a);
+	fcn_00487470(a);
+	h = *(char**) (a + 0x16c);
 	q = 0;
 	if ((*(unsigned char*) (a + 0x1c8) & 0x10) == 0) {
 		if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) h].kind != 0xb) {
@@ -304,10 +304,6 @@ scan:
 				fcn_004868d0(a, (int*) &g_100d0c0[i]);
 				goto after;
 			}
-			if (fcn_00486640(a, (int*) &g_100d0c0[i], 0)) {
-				fcn_004868d0(a, (int*) &g_100d0c0[i]);
-				goto after;
-			}
 			continue;
 		}
 		q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].f0);
@@ -386,10 +382,10 @@ after:
 	fcn_00487e60(a, 8);
 	fcn_00487e60(a, 3);
 
-	st.total = 0;
+	st.avail = 0;
 	st.sent = 0;
 	for (j = 0; j < 0x300; j++) {
-		if (g_7f4ca0[j].f8 != 0 && g_7f4ca0[j].id != 0xffff
+		if (g_7f4ca0[j].f8 > 0 && g_7f4ca0[j].id != 0xffff
 		    && g_7f4ca0[j].f2 != 0xa
 		    && g_7f4ca0[j].f16c == *(int*) h
 		    && g_7f4ca0[j].f165 != 0
@@ -398,11 +394,11 @@ after:
 		    && (g_7f4ca0[j].host == 0 || *(unsigned char*) g_7f4ca0[j].host != 0x28)
 		    && !(flag != 0 && (char*) a == (char*) &g_7f4ca0[j])) {
 			fcn_00529160(h, 0, g_7f4ca0[j].id, 0);
-			st.total++;
+			st.avail++;
 		}
 	}
 	if (*(char**) 0x100dc20 == h) {
-		*(int*) 0x100dc34 = st.total;
+		*(int*) 0x100dc34 = st.avail;
 	}
 	st.want = 0;
 	{
@@ -421,20 +417,20 @@ after:
 			f = (int*) ((char*) f + 0x58);
 		}
 	}
-	if (st.want > st.total) {
-		st.want = st.total;
+	if (st.want >= st.avail) {
+		st.want = st.avail;
 	}
-	if (st.total == 0 || st.want == 0) {
+	if (st.avail == 0 || st.want == 0) {
 		ai_MeisterCollectTrans(a);
 		ai_MeisterTrade(a, t2);
 		return 0;
 	}
 
-	st.self = a;
 	st.p0c = t2;
 	st.p10 = t3;
-	st.sent = 0;
+	st.self = a;
 	st.total = 0;
+	st.sent = 0;
 	if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) h].kind != 0xb) {
 		goto ltail;
 	}
@@ -471,7 +467,7 @@ after:
 		if (((ItemDef*) g_item_def_table)[g_100d0c0[j].f0].kind != 0x17) {
 			goto lflag;
 		}
-		g = find_zone_record(g_100d0c0[j].f0);
+		g = plt_FindPlantInfo(g_100d0c0[j].f0);
 		v = 0;
 		for (i = 0; i < *(int*) p2 && v < 4; i++) {
 			for (j = 0; j < *(int*) p2 && v < 4; j++) {
@@ -497,7 +493,7 @@ ltail:
 		rec = (char*) &g_100d0c0[0];
 		for (i = 0; i < g_100b0ac; i++) {
 			if (((Ord*) rec)->flags & 0x10) {
-				if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) h].kind != 0xb) {
+				if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].kind != 0xb) {
 					st.kind = 8;
 					st.rec = rec;
 					fcn_00487f90((int*) &st);
@@ -505,7 +501,7 @@ ltail:
 				if (((Ord*) rec)->flags & 8) {
 					if (((ItemDef*) g_item_def_table)[((Ord*) rec)->f0].kind == 0x17) {
 						st.rec = rec;
-						if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) h].kind == 0xb) {
+						if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].kind == 0xb) {
 							st.kind = 0x28;
 							fcn_00487f90((int*) &st);
 						} else {
@@ -517,7 +513,7 @@ ltail:
 						st.rec = rec;
 						fcn_00487f90((int*) &st);
 					}
-					if (*(char**) 0x100dc20 == h && *(int*) 0x100dc3c < 4) {
+					if (*(char**) 0x100dc20 == *(char**)(a + 0x16c) && *(int*) 0x100dc3c < 4) {
 						*(Ord*) (0x100ddc0 + *(int*) 0x100dc3c * 0x58) =
 						    *(Ord*) st.rec;
 						*(int*) 0x100dc3c = *(int*) 0x100dc3c + 1;
