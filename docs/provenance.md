@@ -21198,3 +21198,33 @@ source form. Drift windows from `rebrew diagnose drift` are 511 to 516 and 632 t
 minus 48. Every direct callee resolves to a project file or to the linked CRT, so the unresolved part is names rather than
 bodies, and no prototype was speculative. Instruments in .scratch/ with score.py, esp4.py, shape.py, mk.sh and the target
 assembly dump.
+
+## 2026-11-03 — m_alloc row audited, stale blocker replaced
+
+`0x547770` keeps 760 of 5595 with object 5566, 36 relocations and lint clean. One byte-neutral edit was kept: three
+callee declarations the listing never calls are removed, m_alloc, m_FreeTracked and fcn_004c4330, with the match and
+object size identical either way. The row's blocker text was stale, describing an earlier decompiler transliteration at
+object 6952 with 404 matching bytes and x87 temporaries as doubles, and the hand reconstruction is already past that, so
+the blocker is replaced with the current wall.
+The remaining gap is stack-slot assignment: the first divergence is byte 24 at 0x00547788, the last byte of
+`mov [esp+0x10],ebx`, because native homes the two counting-loop counters at [esp+0x10] and [esp+0x20] while the object
+picks [esp+0x28] and [esp+0x18], so every stack-referencing byte after that point differs even where the C is identical.
+A long list of regions was verified against the listing and needs no re-derivation: the record stride 0xa9 over 0x100
+records, the type stride 0x24c, the class stride 0x21c from 0x7f4cac, the wi clamp, the signed divide by four plus one,
+`thr = a/(a + flt[wi])` with its `fld st(0)` and `fstp st(0)` pair, both 0x84 memsets, the arm order 1, 2, 3, 0, 4, every
+call's argument order and count, `e2 = 2*callee` at both the 0x50d170 and 0x50cf50 sites, all the e2 and level constant
+pairs, fcn_004c4fc0's eight arguments including the byte, and the tail `jmp 0x4c5360` after frame restore.
+Four corrections were measured and reverted because they cost match. The clamp as if/else-if takes the match from 760 to
+731 and object size to 5564, since native defers the wi=4 block to 0x54786f while the object inlines it and all five
+variants give the same inline layout. Hoisting `tb = *(u8**)0x868050` out of the counting loop, which the listing loads
+once at 0x5477d7, takes it to 731 and moves the first divergence from 24 to 12 by perturbing the prologue push order.
+Rewriting the arm-1 chain into the listing's nested shape with and without temporaries takes it to 388. And giving the nine
+undefined callees real prototypes, which is correct per the listing and costs 19 matched bytes at 741, is deferred: the
+implied prototypes are fcn_0042e410 taking an int and returning int, fcn_0042e450 returning float, fcn_004c4fc0 taking
+eight ints and returning int, fcn_004c4510 taking a pointer and an int, fcn_004c5150 taking two ints, a byte and an int,
+fcn_004c5360 returning void, fcn_0050d170 taking an int and returning int, fcn_00535960 returning void and fcn_00547670
+returning void, and they should be applied when those bodies are recovered. A float temporary for the two uses of `(float)a`
+is neutral and the plain expression was left. The diff reports structural 0.9288 and mnemonic 0.5647 over 1755
+instructions with the usual blockers of compare direction, lea folding, jump condition, loop rotation and zero-extension
+form, plus relocation conflicts that are symptoms of the six-byte prologue shift rather than wrong callees. Instruments in
+.scratch/547770/ with FINDINGS.md, m.py and blocks.py.

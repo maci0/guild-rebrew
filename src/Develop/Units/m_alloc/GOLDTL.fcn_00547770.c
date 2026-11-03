@@ -20,14 +20,11 @@ typedef unsigned short u2;
 typedef unsigned char u8;
 typedef unsigned int u4;
 
-extern void *__cdecl m_alloc(u32 size, const char *tag);
-extern void __cdecl m_FreeTracked(void *p);
 extern void *__cdecl memset(void *p, int v, u32 n);
 int __cdecl rand(void);
 
 int __cdecl fcn_0042e410();
 float __cdecl fcn_0042e450();
-int __cdecl fcn_004c4330();
 int __cdecl fcn_004c4450();
 int __cdecl fcn_004c4480();
 int __cdecl fcn_004c4510();
