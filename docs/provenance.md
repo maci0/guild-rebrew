@@ -20851,3 +20851,28 @@ with no errors and no new size, overlap or stale-evidence warnings. Two caveats 
 `.data` VirtualSize, since only extents do, and only the 936 exact-fit objects have extent evidence; and these rows are
 placeholder-owned, so `rebrew verify --data` must not be run against them because the built bytes are zeros while the
 reference bytes are real, and they must never be given a storage kind of object.
+
+## 2026-11-03 — d2 row two: block structure right, local set wrong
+
+`0x4DCF50` keeps its state at 2495 of 8798 with object size exactly 8798 and 319 relocations, frame 0x7e0 on both sides
+by `rebrew diagnose stack`, status STUB and lint clean; no source change was kept. Two corrections were measured and
+reverted. Reordering the head statements to listing order made the handle and table store order and their frames match
+native exactly, but the listing's two leading scalar zero initialisations, at frames 0x24 and then 0x14 between hnd[6] and
+hnd[7], could not be reproduced, so the head stayed eight bytes short and everything shifted, taking the raw match from
+1509 to 843. Slot probes that inserted `V = 0` for each declared variable were mostly dead-store eliminated, and the
+survivors landed at 0x18 and 0x38 with none reproducing 0x24.
+The recovered layout, with push displacements corrected, is msg at 0x40 holding state, f04, i08, f0c, text, id, pad and
+hnd at 0x90, tbl at 0xb0, rec at 0x240 with rec.i[6] at 0x258, list at 0x370 and the entity argument at 0x774; the
+object already agrees on msg 0x40, hnd 0x90, tbl 0xb0 and rec 0x240. The reason the body still diverges despite a
+faithful transcription is measured, not guessed: direct call sites are 345 on both sides with an identical per-callee
+multiset except sprintf and a call-order LCS ratio of 0.966, 329 of 345 in twelve blocks, while 278 of 319 rel32 operand
+bindings conflict and only 41 validate, and the instruction-shape LCS is 0.402 with the largest run 11 and 40 of 2340
+instructions equal. So block structure is right and instruction widths and operand displacements are wrong.
+Two walls are confirmed. The frame wall is pre-existing, native 0x760 against an honest 0x6b4, and was not re-litigated.
+The real blocker is the local set: native scalar locals occupy 0x14 to 0x38, twelve words, zeroed at 0x24 then 0x14,
+where the source declares 33 scalars and the object puts attribution pointers at 0x3f0, so declaration-driven slots cannot
+coincide. Body fidelity needs the native local set recovered first, with at most twelve scalars, because statement-level
+edits cannot pay off before that. sprintf remains unresolved across nine call sites, since native target 0x64d41a lies
+inside the declared D3DX8 external band and has no project definition; the prototype is declared as
+`int __cdecl sprintf(char*, const char*, ...)` and reported rather than renamed. Details in
+.scratch/004dcf50-findings.md.
