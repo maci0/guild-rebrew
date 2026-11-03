@@ -40,17 +40,17 @@ typedef struct {
 } Plan483f20;
 
 extern char* lpObjektePROT;			/* entity type table, entry stride 0x41 */
-extern char* g_7f4ca0;			/* slot table, stride 0x21c */
-extern Prod483f20* g_100d0c0;		/* production entries */
+extern char g_7f4ca0[];			/* slot table, stride 0x21c */
+extern Prod483f20 g_100d0c0[];		/* production entries */
 extern int g_100b0ac;			/* production entry count */
-extern Res483f20* g_100b0c4;		/* resource entries */
+extern char g_100b0c4[];		/* resource entry table, stride 0x40 */
 extern int g_100b0a8;			/* resource entry count */
-extern char* g_100b0e8;
+extern char g_100b0e8[];
 extern int g_100dc20;			/* owner production building */
 extern int g_100dc34;
 extern int g_100dc38;
 extern int g_100dc3c;
-extern int* g_100dc40;
+extern int g_100dc40[];
 extern int* g_100dc48;
 extern unsigned short g_7f4c04;
 
@@ -106,7 +106,7 @@ static __inline int can_start(Ent483f20* e, void* rec, Prod483f20* p, int human)
 		return 0;
 	}
 	amount = gm_eval_SlotVoll(obj, p->id, 1000000);
-	if (amount < *(unsigned short*) (type + 0x36) + p->cost) {
+	if (amount < *(unsigned short*) (type_entry(p->id) + 0x36) + p->cost) {
 		return 0;
 	}
 	return fcn_00486640(e, p, human);
@@ -136,7 +136,6 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 	void* stk;
 	int order[0x20];
 	char msg[0x100];
-	int count;
 	int built;
 	int found;
 	int i;
@@ -144,9 +143,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 	int r;
 	int t;
 	int n;
-	int n2;
 	int id;
-	int owner;
 
 	rec = fcn_00502cd0(*(int*) ((char*) e->root + 0x5d), 2, 6, 0, 0xff);
 	if (rec == 0) {
@@ -161,7 +158,6 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 	fcn_00487970(stk, e, 0x4b);
 	fcn_00487c00(stk, e, 0x19);
 	fcn_00487470(e);
-	owner = e->root;
 
 	if (g_7f4c04 == 8 || g_7f4c04 == 0xd) {
 		if ((e->flags & 0x100) == 0) {
@@ -172,7 +168,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 				if (g_100d0c0[i].id != e->item) {
 					continue;
 				}
-				if (*(unsigned short*) (type_entry(g_100d0c0[i].id) + 0x36) <= g_100d0c0[i].limit &&
+				if (g_100d0c0[i].limit >= *(unsigned short*) (type_entry(g_100d0c0[i].id) + 0x36) &&
 				    fcn_00486640(e, &g_100d0c0[i], 1) != 0) {
 					start_production(e, &g_100d0c0[i], 0, msg);
 					goto after_start;
@@ -186,7 +182,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 			if (g_100d0c0[i].id != e->item) {
 				continue;
 			}
-			if (*(unsigned short*) (type_entry(g_100d0c0[i].id) + 0x36) <= g_100d0c0[i].limit &&
+			if (g_100d0c0[i].limit >= *(unsigned short*) (type_entry(g_100d0c0[i].id) + 0x36) &&
 			    fcn_00486640(e, &g_100d0c0[i], 1) != 0) {
 				start_production(e, &g_100d0c0[i], 0, msg);
 				found = 1;
@@ -226,8 +222,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 		order[i] = order[r];
 		order[r] = t;
 	}
-	count = g_100b0ac;
-	if (count > 0) {
+	if (g_100b0ac > 0) {
 		i = 0;
 		do {
 			prod = &g_100d0c0[order[i]];
@@ -236,9 +231,9 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 				goto after_start;
 			}
 			i++;
-		} while (i < count);
+		} while (i < g_100b0ac);
 	}
-	if (count > 0) {
+	if (g_100b0ac > 0) {
 		i = 0;
 		do {
 			prod = &g_100d0c0[order[i]];
@@ -247,7 +242,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 				goto after_start;
 			}
 			i++;
-		} while (i < count);
+		} while (i < g_100b0ac);
 	}
 	e->item = 0;
 
@@ -255,7 +250,7 @@ after_start:
 	fcn_0047e220(rec);
 	fcn_0047e0e0(e, rec);
 
-	for (prod = g_100d0c0, i = 0; i < count; i++, prod = &g_100d0c0[i]) {
+	for (prod = g_100d0c0, i = 0; i < g_100b0ac; i++, prod = &g_100d0c0[i]) {
 		if ((prod->flags & 8) != 0) {
 			for (k = 0; k < 4; k++) {
 				id = *(int*) ((char*) prod + 4 + k * 4);
@@ -266,12 +261,12 @@ after_start:
 			}
 		}
 	}
-	for (prod = g_100d0c0, i = 0; i < count; i++, prod = &g_100d0c0[i]) {
+	for (prod = g_100d0c0, i = 0; i < g_100b0ac; i++, prod = &g_100d0c0[i]) {
 		if ((prod->flags & 0x400) != 0) {
 			prod->flags &= ~8;
 		}
 	}
-	for (res = g_100b0c4, i = 0; i < g_100b0a8; i++, res = (Res483f20*) ((char*) res + 0x40)) {
+	for (res = (Res483f20*) g_100b0c4, i = 0; i < g_100b0a8; i++, res = (Res483f20*) ((char*) res + 0x40)) {
 		if ((res->flags & 0x400) != 0 && (res->flags & 0x10) != 0 && res->id >= 0) {
 			g_100d0c0[res->id].flags |= 0x10;
 		}
@@ -280,7 +275,7 @@ after_start:
 	if (g_100dc20 == e->root && g_100dc38 < 4) {
 		i = 0;
 		do {
-			if (count <= i) {
+			if (g_100b0ac <= i) {
 				break;
 			}
 			memcpy((char*) 0x100dc60 + g_100dc38 * 0x58, &g_100d0c0[i], 0x58);
@@ -288,7 +283,7 @@ after_start:
 				id = *(int*) ((char*) &g_100d0c0[i] + 4 + k * 4);
 				if (id >= 0) {
 					memcpy((char*) 0x100df20 +
-						   (g_100dc40[g_100dc38] + g_100dc38) * 0x40,
+						   (g_100dc40[g_100dc38] + g_100dc38 * 4) * 0x40,
 					       (char*) 0x100b0c0 + id * 0x40, 0x40);
 					g_100dc40[g_100dc38]++;
 				}
@@ -301,8 +296,8 @@ after_start:
 	fcn_00487e60(e, 4);
 
 	built = 0;
-	for (slot = g_7f4ca0; slot < g_7f4ca0 + 0x600 * 0x21c; slot += 0x21c) {
-		if (*(unsigned char*) (slot + 8) == 0) {
+	for (slot = g_7f4ca0; slot < g_7f4ca0 + 0x300 * 0x21c; slot += 0x21c) {
+		if (*(unsigned char*) (slot + 8) <= 0) {
 			continue;
 		}
 		if (*(unsigned short*) slot == 0xffff) {
@@ -335,7 +330,7 @@ after_start:
 	}
 
 	n = 0;
-	for (prod = g_100d0c0, i = 0; i < count; i++, prod = &g_100d0c0[i]) {
+	for (prod = g_100d0c0, i = 0; i < g_100b0ac; i++, prod = &g_100d0c0[i]) {
 		if ((prod->flags & 8) != 0) {
 			n++;
 		}
@@ -352,7 +347,7 @@ after_start:
 		return;
 	}
 
-	for (prod = g_100d0c0, i = 0; i < count; i++, prod = &g_100d0c0[i]) {
+	for (prod = g_100d0c0, i = 0; i < g_100b0ac; i++, prod = &g_100d0c0[i]) {
 		plan.ent = (int) e;
 		plan.entry = (int) prod;
 		if ((prod->flags & 0x10) != 0) {

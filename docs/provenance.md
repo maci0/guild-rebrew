@@ -23788,3 +23788,20 @@ complete version was kept and both numbers are recorded: the larger byte count c
 The remaining divergence is register allocation and scheduling in the prologue, where the reference pushes three registers and loads its argument while this build
 loads a global into the accumulator first and routes the type argument through another register. The divergence is otherwise fine-grained, with eighty-one matching
 runs whose longest is ten bytes.
+
+## 2026-11-03 — plan row: five globals are arrays, and a bound was twice too large
+
+`0x483F20` moves from 246 to 328 matched bytes with the object at 2445 against the 2694 extent, and seven repairs landed. Five globals declared as pointers are
+addressed as absolute arrays in the reference, which shows by moving a constant address into a register and indexing it, never by loading a pointer from the
+global's address; the positional count dips on that change because the operands shift, and the operand form is proven. A snapshot destination index uses the
+reference's shape, a count plus four times the index scaled by sixty-four, which a sibling caller confirms. A limit comparison is rewritten to the reference's form,
+which is a compare followed by a signed jump. A stock comparison re-reads a global instead of the source's cached value, matching the reference's reload. A count
+cached in a local is removed so the compiler reloads it at all eleven loop bounds as the reference does, which is the largest single gain in the row. A slot-scan
+bound was twice too large: the reference's end minus start is 0x65400, which is 0x300 records of 0x21c, not 0x600. And a slot guard is an unsigned byte comparison
+that jumps on below-or-equal, with two dead locals removed.
+One experiment was reverted: rewriting an animal scan as an indexed do-while reproduced the reference's rotation but made this build keep a second pointer copy, so
+the match fell and the source was restored from a scratch backup. Two buffer-size probes turned out to be compile-cache artifacts with no source effect.
+Twenty-three other checks came back clean: both copy loops and the identifier scan have correct endpoints, the widths and signedness of the word loads match, there
+are no uninitialised reads, all 41 call sites are cdecl with argument counts matching the callees' reads, and the structure sizes, offsets, slot stride and scan caps
+all agree. The remaining 249 bytes are register allocation and stack spills of two values plus four zeroed frame slots the reference keeps before the plan loop,
+with the first divergence the frame immediate and then the argument's register.
