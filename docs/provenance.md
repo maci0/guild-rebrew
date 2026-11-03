@@ -24403,3 +24403,18 @@ two shapes that reserved the slot explicitly, a volatile integer and a pointer, 
 The row is left at the faithful macro with both numbers recorded, because the previous state matched more bytes while allocating the parameter to a register the reference
 never uses, and keeping that would mean keeping a wrong register home for a byte count. The next pass has to find what makes the compiler reserve a slot it never reads;
 until then this row cannot convert its structural gain into bytes.
+
+## 2026-11-03 — event row: a key written to the wrong packet offset, and a shared entity type
+
+`0x5B3B60` moves from 1111 to 1146 matched bytes with the object at 2251, inside the 2293 extent, two gap windows closed and none opened, and the gap event count from
+49 to 46.
+Three repairs were kept. One branch wrote an item's key at a packet offset one field too high, leaving the real key slot zero so the first record found overwrote it;
+the reference stores to the lower offset and then fills consecutive slots from that base, which is what proves the correct field. A loop's two conditions were in the
+wrong order, which put one test at the loop top and the other at the latch, while the reference tests the pointer bound at the top and the index at the latch. And the
+row's private entity structure is replaced by the shared entity type that uses the same 0x21c stride and identifier offset, which a sibling row already uses for the same
+table; the output is byte-identical, so this is fidelity rather than a metric change.
+A claim from my own notes was disproved and is recorded as such: I had read the reference's index chain and two stores as evidence that the key offsets were wrong, but
+tracking the stack through the branch's push shows the stores land where the source already had them, the scale chain is the one the source uses, and the load is the
+shared record's identifier field. So that part of the notes was wrong and no change was made for it.
+The remaining divergence is where the compiler places a loop-header zero and how it cross-jumps branch tails: the reference cross-jumps one item's tail with another's,
+this build cross-jumps a different pair, so the tails sit at different offsets although every reference instruction still pairs with an object instruction to the end.

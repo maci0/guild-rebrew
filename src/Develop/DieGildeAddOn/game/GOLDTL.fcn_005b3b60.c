@@ -9,21 +9,12 @@ typedef struct Time5b3b60 {
 } Time5b3b60;
 #pragma pack(pop)
 
-typedef struct Ent5b3b60 {
-	unsigned short id;
-	unsigned char kind;
-	char pad3;
-	int key;
-	char pad8[0x166 - 8];
-	unsigned char active;
-	char pad167[0x21c - 0x167];
-} Ent5b3b60;
-
 extern int g_7f4c00;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
+#include "Develop/DieGildeAddOn/game/entity.h"
 extern char* g_773da8;
 extern char g_7f4ca0[];
 
@@ -80,14 +71,14 @@ void __cdecl fcn_005b3b60(void)
 				*(int*) (m + 0x14) = -1;
 				*(char*) (m + 0x30) = 2;
 				*(int*) (m + 0x34) = *(int*) 0x7f5730;
-				*(int*) (m + 0xc) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
-				*(int*) (m + 0x38) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
+				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0x38) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(char*) (m + 0x7c) = (char) gm_RandomMod(5);
 				i = 0;
 				p = 0x7f4e06;
 				while (p < 0x85a206) {
 					if (*(char*) p == 0xd) {
-						*(int*) (m + 0x3c) = ((Ent5b3b60*) g_7f4ca0)[i].key;
+						*(int*) (m + 0x3c) = ((EntityStruct*) g_7f4ca0)[i].entity_id;
 						break;
 					}
 					p += 0x21c;
@@ -97,7 +88,7 @@ void __cdecl fcn_005b3b60(void)
 				p = 0x7f4e06;
 				while (p < 0x85a206) {
 					if (*(char*) p == 0xf) {
-						*(int*) (m + 0x40) = ((Ent5b3b60*) g_7f4ca0)[i].key;
+						*(int*) (m + 0x40) = ((EntityStruct*) g_7f4ca0)[i].entity_id;
 						break;
 					}
 					p += 0x21c;
@@ -107,7 +98,7 @@ void __cdecl fcn_005b3b60(void)
 				p = 0x7f4e06;
 				while (p < 0x85a206) {
 					if (*(char*) p == 0xe) {
-						*(int*) (m + 0x44) = ((Ent5b3b60*) g_7f4ca0)[i].key;
+						*(int*) (m + 0x44) = ((EntityStruct*) g_7f4ca0)[i].entity_id;
 						break;
 					}
 					p += 0x21c;
@@ -122,8 +113,8 @@ void __cdecl fcn_005b3b60(void)
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = *(int*) (r + 1);
 				*(char*) (m + 0x30) = 2;
-				*(int*) (m + 0xc) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
-				*(int*) (m + 0x34) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
+				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(int*) (m + 0x38) = *(int*) ((char*) g_7f4ca0 + g_774970 * 0x21c + 0x858);
 				fcn_004e5a00(m);
 			} else if (k == item[8]) {
@@ -131,14 +122,14 @@ void __cdecl fcn_005b3b60(void)
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
 				*(char*) (m + 0x30) = 1;
-				*(int*) (m + 0xc) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
-				*(int*) (m + 0x34) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
+				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				fcn_004e5a00(m);
 			} else if (k == item[4]) {
 				*(char*) (m + 8) = 8;
 				*(char*) (m + 0x30) = 1;
-				*(int*) (m + 0xc) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
-				*(int*) (m + 0x34) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
+				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
 				fcn_004e5a00(m);
@@ -147,9 +138,9 @@ void __cdecl fcn_005b3b60(void)
 				memset(m, 0, sizeof(m));
 				*(char*) (m + 8) = 7;
 				*(char*) (m + 0x30) = 2;
-				*(int*) (m + 0xc) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
-				*(int*) (m + 0x34) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
-				*(int*) (m + 0x38) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
+				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0x38) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(Time5b3b60*) &m[0x18] = *(Time5b3b60*) &g_7f4c00;
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
@@ -161,7 +152,7 @@ void __cdecl fcn_005b3b60(void)
 				types[2] = 0xc;
 				i = 0;
 				p = 0x7f4ca2;
-				while (p < 0x85a0a2 && i < 8) {
+				while (i < 8 && p < 0x85a0a2) {
 					if (*(char*) p == 6 || *(char*) p == 7 || *(char*) p == 5 || *(char*) p == 4) {
 						*(int*) (m + 0x34 + i * 4) = *(int*) (p + 2);
 						i++;
@@ -175,7 +166,7 @@ void __cdecl fcn_005b3b60(void)
 					*(int*) (m + 0x14) = -1;
 					*(char*) (m + 0x30) = (char) i;
 					*(int*) (m + 0x80) = 0x3e80;
-					*(int*) (m + 0xc) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
+					*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 					*(int*) (m + 0x7c) = *(int*) (r + 1);
 					*(Time5b3b60*) &m[0x18] = *(Time5b3b60*) &g_7f4c00;
 					fcn_00500bb0(m + 0x18, 0, 0x1e, 0);
@@ -246,8 +237,8 @@ void __cdecl fcn_005b3b60(void)
 				*(char*) (m + 0x26) = 0x22;
 				*(int*) (m + 0x14) = -1;
 				*(char*) (m + 0x30) = 2;
-				*(int*) (m + 0xc) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
-				*(int*) (m + 0x38) = ((Ent5b3b60*) g_7f4ca0)[g_774970].key;
+				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				k = 1;
 				p = 0x7f4ca0;
 				while (p < 0x85a0a0) {
