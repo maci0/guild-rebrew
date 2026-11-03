@@ -21421,3 +21421,27 @@ exact and 51 relocation-masked, zero structural, zero register and zero invalid,
 labels with no store symbol, so masking them is the strongest claim available, and the row is RELOC rather than EXACT.
 Flag trials confirmed the row's own flags: `/O2 /Gd /G6` gives 193 at 743 and `/Ox /Gd` gives 313 at 739, so nothing was
 promoted. Instruments and measurement table in .scratch/fcn_00535bd0/.
+
+## 2026-11-03 — dialogue row: percentage and byte-width corrections
+
+`0x5B7880` measures 290 of 4008 with object 4008 against native 3794, nine relocations, 1143 instructions against native's
+1068, and status SIZE_MISMATCH with lint clean. The file binding is src/Develop/DieGildeAddOn/game/fcn_005b7880.c and the
+store's native extent is 3794. Three corrections landed, each verified against the listing. The row value percentage at
+native 0x5b80e4 to 0x5b810a was being folded by the source into one multiply by 0.39215686, where native adds 128.0,
+multiplies by 100.0 and then by 1/255, so a `double percent` now holds the first product and the sequence matches. Two byte
+compares, at 0x14cf950 for the 0xcd and 0xcb tests and at obj plus 0x165 for native 0x5b7cb1 to 0x5b7cd5 and 0x5b83c6 to
+0x5b83d9, were being emitted with `movsx` because a signed char made the 0xcd test impossible, and changing them to
+unsigned char makes the byte compares identical. The message sender id at msg plus 0x58, native 0x5b8620, was assigned to a
+single char so only one byte was stored where native copies a dword, and both packet builders now write
+`*(int*)&f.msg.b58`. The percentage repair is correct per the listing yet the stored match count drops from 300 to 290 and
+the object from 4019 to 4008, and it is kept because the corrected form equals the native bytes and the size moves toward
+native.
+The first remaining divergence is at offset 0x4c, where native has `or ebp,0xffffffff` and this build has `or edi,0xffffffff`.
+The wall is the window handle: native keeps f.win in a callee-saved register, EDI in the header and row fill from 0x5b7978 to
+0x5b7a79 and ESI in the dialog loop at 0x5b7ca1, 0x5b7d04, 0x5b851f and 0x5b857b, reloading only at 0x5b7b6b and 0x5b7d04,
+while this build reloads the struct member at every use, so EDI takes the minus-one common subexpression and all later
+scheduling differs. A local `char* win` grows the frame from 0x110c to 0x1110 and lowers the match, and countdown-loop and
+scalar-local rewrites measured worse, so all were reverted with backups in .scratch/5b7880/. No callee lacks a row, but the
+translation unit calls placeholder symbols whose real definitions are d2_CreateRadioGroup at 0x4693b0, d2_ShowTxt at
+0x46fac0, gm_CheckEntityType at 0x505370 and io_FormatTextBuffer at 0x51af00, with prototypes left as the listing implies.
+The blocker was updated with the current delta of 214. Report in .scratch/5b7880/report.md.

@@ -147,6 +147,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 	int i = 0;
 	int n;
 	int y;
+	double percent;
 
 	f.nSlots = 0;
 	f.hC = -1;
@@ -251,10 +252,10 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 		}
 		fcn_005350d0(f.win);
 		fcn_00534c20(f.win);
-		if (*(char*) 0x14cf950 == 0xcd) {
+		if (*(unsigned char*) 0x14cf950 == 0xcd) {
 			fcn_00535550(f.win);
 		}
-		if (*(char*) 0x14cf950 == 0xcb) {
+		if (*(unsigned char*) 0x14cf950 == 0xcb) {
 			fcn_00535560(f.win);
 		}
 		if (*(char*) (f.win + 0x270)) {
@@ -397,10 +398,10 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 						f.tv = fcn_0050f950(
 						    *(unsigned short*) r->obj,
 						    *(unsigned short*) 0x774970);
+						percent = (f.tv + 128.0) * 100.0;
 						fcn_00472380(
 						    r->value, 0, 0x64,
-						    (int) ((f.tv + 128.0) * 100.0
-						           * 0.00392156862745098));
+						    (int) (percent * 0.00392156862745098));
 					}
 				} else if (f.pg != 0
 				           && ((char*) f.pg)[0xac] == 0x13
@@ -485,7 +486,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 				    io_AppendText(
 				        (char*) 0x1a21,
 				        *(unsigned short*) f.rows[i].obj));
-				if (*(char*) (f.rows[i].obj + 0x165)
+				if (*(unsigned char*) (f.rows[i].obj + 0x165)
 				    == f.ent[0x230]) {
 					f.hD = fcn_00472250(
 					    f.rows[i].win, 2,
@@ -548,7 +549,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 				f.msg.f2c = *(int*) 0x7f4c04;
 				f.msg.f30 = *(int*) 0x7f4c08;
 				f.msg.w34 = *(short*) 0x7f4c0c;
-				f.msg.b58 = *(int*) (f.rows[f.hA].obj + 4);
+				*(int*) &f.msg.b58 = *(int*) (f.rows[f.hA].obj + 4);
 				fcn_004c5530(&f.msg);
 				f.hA = -1;
 			}
@@ -571,7 +572,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 				f.msg.f2c = *(int*) 0x7f4c04;
 				f.msg.f30 = *(int*) 0x7f4c08;
 				f.msg.w34 = *(short*) 0x7f4c0c;
-				f.msg.b58 = *(int*) (p + 4);
+				*(int*) &f.msg.b58 = *(int*) (p + 4);
 				fcn_004c5530(&f.msg);
 				f.hA = -1;
 			}
