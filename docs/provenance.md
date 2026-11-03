@@ -23381,3 +23381,21 @@ The evidence for its extent and type is in the sources that use it: one function
 compares it against zero, and a third writes zero to it through an integer pointer. A data row was created through the metadata CLI at that address, four
 bytes, typed as an integer, named as its users already name it, with object storage, guarded by the reviewed digest. The lint passes with no errors
 afterwards.
+
+## 2026-11-03 — the coordinate type layout claim is refuted, header untouched
+
+A pass was opened to repair a declared layout in src/client_types.h on the strength of two readers that take a word at offset four and dwords at six and ten.
+The evidence refutes the claim and the header was not changed. The declared layout is four-byte, four-byte, four-byte and a two-byte member at 0xc inside a
+packed region, giving a size of fourteen, and a probe translation unit compiled with the project compiler confirms both the size and every member offset with
+compile-time assertions. The two readers the claim rested on do not read through this type at all: one uses a ten-byte prefix of a different source type and
+its row is EXACT at 58 bytes, while the other and a third helper use a clock view declared separately in their own rows, of which one is EXACT at 111 bytes and
+one is a size mismatch at 145 against 147.
+What does read through the type requires the declared layout. One row stores packet fields from the first, second and third four-byte members and a two-byte
+member at 0xc, and a probe compiled with each candidate layout shows the reference matching the declared layout and not the clock layout; that row is a RELOC
+at 715 of 715. Another row's block copies are layout-neutral because this compiler copies fourteen bytes as three dwords and a word under either layout, which
+two more RELOC rows and one EXACT row demonstrate. The stride of fourteen is established by two rows that copy the value into calendar slots fourteen bytes
+apart, one of them EXACT.
+The type store has no binding for this type, so nothing needed refreshing, and the data row that names the object was left alone. Nine rows were re-measured to
+show they are unchanged, covering three RELOC rows at full length, three EXACT rows and two size mismatches. The conclusion recorded for the future is that an
+offset reading from a function only constrains the type that function actually uses, and overlapping views of the same bytes are separate types rather than
+evidence of a single wrong declaration.
