@@ -20304,3 +20304,26 @@ current rules. The conclusion is that the const work is a real but small section
 upstream generator rather than by hand, while the 30,788-byte `.rdata` shortfall belongs to per-translation-unit
 `.rdata` contributions, meaning strings, literals, vtables and the import table, which is the same missing-source
 work that recovering function bodies adds.
+
+## 2026-11-03 — 45 read-only stubs moved to rdata
+
+Forty-five of the 46 read-only stubs now emit into `.rdata`. The edit is the `const` qualifier on 45 definitions in
+stubs/goldtl/symbol_stubs.c with initialisers and sizes unchanged, plus one declaration alignment:
+`extern const float g_662d70[4];` in src/Develop/DieGildeAddOn/game/ch_motion.h:10 so the shared header matches the
+definition. That definition was also corrected from the scalar `float g_662d70 = 0;` to
+`const float g_662d70[4] = { 0 };`, because both users, GOLDTL.fcn_00417180.c:48 and
+GOLDTL.fcn_0040fea0.c:93, declare it as `extern float g_662d70[4]` and only pass its address, so the scalar
+definition was four bytes where the row is sixteen. One stub took `int *const` rather than `const int *` because its
+136 writes all go through the pointer and never to the pointer object. No caller writes any of the 45 objects: the
+scan over src, stubs and references found only reads, and the two address-taken uses are reads. Evidence: the edited
+translation unit compiles with the project flags into .scratch/relink/symbol_stubs.const2.obj, and the COFF symbol
+table reports 45 of 46 symbols in a read-only section with zero write sections, the remaining symbol being the
+blocked g_662950, which stays in `.data` because its only shared declaration is in the protected
+src/client_dialog_helpers.h:69. A relink of the target with the build's own object list and link line, with outputs
+in .scratch/relink and only this object substituted, produces an empty link log with no duplicate symbol warnings,
+`.rdata` VirtualSize 45,934 to 46,286 for plus 352, `.data` down by the same 352, and `.data1` moving from 0x33f6000
+to 0x33f5000, with 45 rows in section 0002 of the map. The caveat recorded with the edit is that this file is
+auto-generated and `rebrew build symbol-stubs` has no const rule, so a regeneration would revert it; the durable form
+is the generator change being made upstream, and until that lands this tree edit is provisional. The rows also land
+contiguously at `.rdata` offsets 0x1d20 to 0x1ec4 rather than at their reference offsets, which is the ordering defect
+recorded separately. Lint passes after the change.

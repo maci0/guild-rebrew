@@ -7,7 +7,7 @@ void __cdecl ch_PreloadModelMotions(char* model, int n, ...);
 void __cdecl ch_FinishAni(char* obj);
 
 /* Provisional game views; extern declarations allocate no storage. */
-extern float g_662d70[4];
+extern const float g_662d70[4];
 extern unsigned char g_6752a4;
 extern int g_67a370;
 extern char* g_6b7ebc;
