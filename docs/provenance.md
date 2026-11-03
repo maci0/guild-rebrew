@@ -24480,3 +24480,17 @@ but a frame pointer the reference does not have. So the reference's shape needs 
 spelling tried; that is a per-translation-unit flag question and needs evidence about the original unit before it can be applied, not a source edit.
 Nothing was kept and the row is restored byte for byte. The sweep is recorded because a later pass with translation-unit evidence can use it directly, and because it
 prevents the next session from repeating five dead ends.
+
+## 2026-11-03 — message row: three strict compares that had to be inclusive, and a store order
+
+`0x4FE5F0` moves from 1323 to 1346 matched bytes with the object at 2137 against the 2138 extent, three structural windows closed and none opened, and the first
+divergence moves from byte 257 to byte 821.
+Six repairs were kept. Three floating-point comparisons were strict where the reference is inclusive, which is visible in the parity-and-mask byte the compiler emits: a
+micro-test proved that the less-or-equal form produces the mask the reference carries while the less-than form produces a different one, so the three conditions are now
+inclusive. And in three duplicated message-initialisation blocks the byte store was emitted after the wider stores, where the reference emits it first, so the byte store
+moved to the front of each block; that alone closed three windows and moved the first divergence four hundred bytes later.
+Twelve classes were checked and only the rotation class is left open, with its exact shape: the reference keeps one value at one slot and an integer temporary at
+another, and this build has the two exchanged, which propagates to a second exchange higher in the frame and to two register swaps. Seven declaration orders compiled to
+identical slot patterns, so the layout is liveness-driven and no source ordering will move it; that is recorded rather than guessed at.
+The micro-test result is worth keeping beyond this row: for this compiler, a floating-point comparison against zero emits one parity mask when written as less-than and
+another when written as less-or-equal, which makes the strictness of a float compare provable from the reference's own mask byte rather than inferred.
