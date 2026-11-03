@@ -21228,3 +21228,39 @@ is neutral and the plain expression was left. The diff reports structural 0.9288
 instructions with the usual blockers of compare direction, lea folding, jump condition, loop rotation and zero-extension
 form, plus relocation conflicts that are symptoms of the six-byte prologue shift rather than wrong callees. Instruments in
 .scratch/547770/ with FINDINGS.md, m.py and blocks.py.
+
+## 2026-11-03 — d2 packet struct reshaped, frame reclaimed
+
+`0x4DA690` rises from 1489 to 1518 with the object at 7071 against native 7057, overshooting by 14 where it previously
+undershot by 37, and 77 relocations, frame 0x900 and lint clean. The five packet locals are now a 0x14 struct with one
+unwritten member: sD8 at plus zero, a pad hole at plus four that is never stored, sE0 at plus eight, sE4 at plus twelve and
+sE8 at plus sixteen, while sDC stays a separate int for native's byte store at 0xf0. Both fcn_004e51d0 sites pass this
+struct, and an object check confirms the first site passes it at 0xa4 with stores at plus zero, plus eight, plus twelve and
+plus sixteen and no store at plus four, where native passes 0xd8 with the same member offsets and the hole at 0xdc; the
+second site puts it at 0xa0 against native's 0x5c, with store order unchanged. So a struct member does allocate the hole
+that a plain unused local cannot.
+The struct alone pushed the frame to 0x910 and dropped the score, so it was not kept alone: match 1457 at object 7071 with
+mismatch 1369, aligned 1018 and shape 0.515. Removing the dead `blkB.pad2[16]` filler, which is never referenced, reclaimed
+the frame and produced the kept state: match 1518 at object 7071 with frame 0x900, mismatch 1266, aligned 1140 and shape
+0.577 against the baseline's 1489, 7020, 0x900, 1329, 1107 and 0.561. Versus baseline that is plus 29 match bytes, minus 63
+mismatched instructions and plus 33 aligned ones.
+A metric discrepancy is recorded because it affects future gates: the baseline mismatch of 1329 reproduces exactly, but
+shape and aligned count do not. On disk `.scratch/4da690/r14/score.py` prints only the mismatch, while
+`.scratch/4da690/r15/rep.py` gives aligned 1107 and shape 0.561 for the r14 and r15 objects and for a fresh compile alike,
+so the earlier stated 1309 aligned and 0.663 shape are not reproducible with the tools on disk and those literal thresholds
+were not reachable as written. Alternate folds after the change move register-blind from 1077 to 1092, which is slightly
+worse, mnemonic from 1727 to 1749, and the slot-plus-displacement fold matches the slot-blind figure.
+The push-depth divergence was measured and not landed. The delta is zero at entry, minus one at native 0xbbd, plus three at
+0xbd9, plus six at 0xc25, plus eight at 0xd66 and plus ten at 0xe8c. Native at 0x4db269 jumps to 0x4db1e1 with seven dwords
+pending: two pushes, a push of s60, the call to 0x4727a0, then a push of one as fcn_004da510's third argument, and it lands
+in a shared tail at 0x4db1e1 that does `mov ecx,[0x772514]; push 0; push ecx; call 0x4da510; add esp,0x14; jmp`, where one
+`add esp,0x14` clears both calls' five argument dwords. Several arms push their own third argument and reuse that tail, at
+0xb4f pushing zero, at 0xbd7 pushing one and at 0xc10 pushing one, while one path does not share it and keeps an inline copy
+at 0xc47 to 0xc57 that pushes two and cleans `esp,0x2c` locally. The candidate never tail-merges: each arm carries its own
+`mov edx,[0x772514]; push const; push 0; push edx; call 0x4da510; add esp,0x14; jmp`, so it carries at most one argument
+push across a jump and its depth stays lower; the window from native 0xbd9 to 0xe8c holds 212 instructions with 66 pushes
+against the candidate's 216 and 64, and the biggest block difference is native 0xbba to 0xbd6 of 20 instructions, a shared
+tail with merged cleanup, deleted on the candidate side in favour of a 9-instruction inline copy at 0xbc6. The next probe is
+to rewrite the three-way `*(int*)s80` if/else-if dispatch as a switch so that this compiler tail-merges the fcn_004da510
+call. Artifacts in .scratch/4da690/r16/ with NOTES.md, list.py, slots.py, count.py and findcall.py plus base, struct-only and
+kept objects.

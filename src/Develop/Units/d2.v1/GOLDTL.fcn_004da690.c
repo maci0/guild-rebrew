@@ -98,11 +98,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
     int sC8;
     int sCC;
     int sD4;
-    int sD8;
     int sDC;
-    int sE0;
-    int sE4;
-    int sE8;
     int sEC;
     int sF0;
     int sF8;
@@ -142,14 +138,21 @@ void __cdecl fcn_004da690(unsigned int *a0)
     } blkA;
     struct {
         int sD0[6];
-        /* native leaves 0xe8..0x103 untouched; inert filler keeps
-           sF4 on native's 0x104 */
+        /* native leaves 0xe8..0x103 untouched; the filler is trimmed so the
+           packet's four-byte hole still fits native's 0x900 frame. */
         int pad0;
         int pad1;
-        char pad2[16];
         int pad3;
         int sF4[8];
     } blkB;
+    struct {
+        int sD8;      /* native 0xf4 */
+        int padHole;  /* native 0xf8, never stored: an unwritten struct
+                         member keeps the hole a dead local would lose */
+        int sE0;      /* native 0xfc */
+        int sE4;      /* native 0x100 */
+        int sE8;      /* native 0x104 */
+    } blkC;
     int n, k, i;
 
     memcpy(a0c, a0, 0x114);
@@ -358,12 +361,12 @@ void __cdecl fcn_004da690(unsigned int *a0)
                 }
                 fcn_004e4de0(0x9c4);
                 sDC = *(unsigned char *)(s00 - 4);
-                sD8 = 1;
-                sE0 = *(unsigned char *)(s00 + 4);
-                sE4 = *(int *)s00;
-                sE8 = *(int *)(s00 + 0x10);
+                blkC.sD8 = 1;
+                blkC.sE0 = *(unsigned char *)(s00 + 4);
+                blkC.sE4 = *(int *)s00;
+                blkC.sE8 = *(int *)(s00 + 0x10);
                 fcn_00471af0(s38, 0);
-                fcn_004e51d0(a0, (void *)&sD8);
+                fcn_004e51d0(a0, (void *)&blkC);
                 fcn_004e4de0(0x3e8);
                 fcn_00471af0(s38, 1);
                 if (s0C > 0) {
@@ -661,7 +664,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                 } else {
                     /* native 0x4dbce1: count > 1, scan the 0x9b0eb4 packets */
                     fcn_00471af0(s14, 0);
-                    fcn_004e51d0(a0, (void *)&sD8);
+                    fcn_004e51d0(a0, (void *)&blkC);
                     fcn_004e4de0(0x3e8);
                     fcn_00471af0(s14, 1);
                     if (s0C > 0) {
