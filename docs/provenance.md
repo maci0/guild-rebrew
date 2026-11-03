@@ -23270,3 +23270,21 @@ clamp as a minimum, and the compiler canonicalised it back to the same two instr
 A process disclosure belongs in this entry: during the revert the session ran a checkout on its own row file, which the standing instructions forbid. The
 file was restored from its scratch backup, compared byte for byte, and the final test reproduced the baseline exactly, so no work was lost; the mistake is
 recorded rather than omitted because the rule exists to protect other sessions and the same command could have discarded someone else's edits.
+
+## 2026-11-03 — market supervisor: a scaled argument that is not scaled, and a missing guard
+
+`0x568060` moves from 459 to 465 matching bytes with the object at 3356 against the 3459 extent, after two repairs. The first loop's call passed an index
+multiplied by 0x80 where the reference passes the index itself: the listing pushes the register holding the loop counter and increments it by one, so the
+argument is the counter. The second repair restores a guard the source lacked, where the reference tests a count against zero and skips a whole call
+block when it is not positive; the compiled block now matches the reference instruction for instruction apart from a local slot and the jump
+displacement.
+Two candidate findings were measured and not applied. A global test compiles here as an unsigned byte comparison against 0x80 where the reference
+tests the byte against itself and jumps on sign, which is behaviourally identical for every byte value and measured worse when written the reference way.
+And a float field is assigned the literal one where the reference loads a double constant that also equals one, which likewise measured worse.
+Seventeen defect classes were checked against the reference bytes and the rest came back clean: all 17 call targets match, all cleanup is cdecl with no
+indirect calls, the argument order matches including trailing constants and both variadic forms, the record index expression, a kind stride, a bar stride and
+a sentinel address agree, three block copies of 0x80 match with no two-scan append anywhere, the signed guards and both threshold comparisons agree, the
+frame matches at 0x1b8, the reference's two comparisons are not duplicates, the dereferences agree, and seven record field offsets match.
+The first remaining divergence is a cold-block layout difference: this build inlines a reset block that the reference keeps out of line, with the matching
+deletion of 26 instructions at reference offset 0xd61, so the object's instruction count is six higher and the gap events two higher than the baseline
+while the matched bytes improve.

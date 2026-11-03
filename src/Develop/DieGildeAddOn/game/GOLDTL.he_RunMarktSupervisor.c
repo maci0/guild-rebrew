@@ -333,11 +333,13 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 				if (up.n < ub.n) {
 					ub.n = up.n;
 				}
-				if (ub.n < 1) {
-					ub.n = 1;
+				if (ub.n > 0) {
+					if (ub.n < 1) {
+						ub.n = 1;
+					}
+					fcn_004c51f0(-1, *(int*) (ent + 2),
+					    rec.id, ub.n, g_773d75, 0);
 				}
-				fcn_004c51f0(-1, *(int*) (ent + 2),
-				    rec.id, ub.n, g_773d75, 0);
 			}
 			if (ub.n < g) {
 				rec.f24 = rec.f24 + (g - ub.n) * g_662b20;
@@ -363,7 +365,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 				}
 			}
 			if ((unsigned short) gm_RandomMod(100) > 0x4b) {
-				rec.f38 = fcn_005025a0(i, t * 0x80);
+				rec.f38 = fcn_005025a0(i, t);
 			}
 			fcn_004c61d0(&rec, i);
 		}
