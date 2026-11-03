@@ -22948,3 +22948,23 @@ structural trade accepted under the rule that restores reference widths and call
 reference uses for eight spilled scalar dwords against six here plus a sixteen-byte top pad, and one scan loop still differs in six
 instructions due to a register choice. Because every stack displacement carries that remaining delta, raw byte agreement is a poor
 progress signal on this row; the frame and the object length are the better ones.
+
+## 2026-11-03 — a GOLD row rebound with a corrected extent and a partial body
+
+`GOLD.0x005aacd0` now has a bound source at src/Develop/Units/d2.v1/GOLD.fcn_005aacd0.c with a corrected extent of 5520 rather than the
+stored 9680. The extent history settles it: rizin found an entry inside the span so the row was split, and 9680 is the sum of three
+functions, 5520 at this address plus 3824 at 0x5ac260 plus 336 at 0x5ad150, while the disassembly shows a tail jump at 0x5ac252, nine fill
+bytes and a new prologue at 0x5ac260. The retired binding needed an explicit rebind with a digest guard before the new file could be
+registered, and the row now records SIZE_MISMATCH with a blocker.
+The body is a partial and is recorded as such: it covers the opening region from 0x5aacd0 to 0x5aaf02 across five blocks, measuring 132
+matched bytes with an object of 564 against the stub's zero matched and three bytes. The structure it establishes is substantial: a
+0x1a4c-byte frame allocated through the check-stack probe with four saved registers and no frame pointer, three arguments whose first is a
+row record with a type byte, two words and two dwords, 1576 instructions over 95 blocks, 53 direct callees and one tail jump to 0x52d7d0
+after a 0x1a60 adjustment, and a frame map covering the message, selection, record, text and two twelve-row tables. Thirty of the callees
+have GOLD rows with bound files and twenty-three do not, the largest called seven times; no names were invented for those, and three rows
+bound to GoldTL-named files are named only from those rows.
+Two hazards are recorded. My own cleanup command moved this file out of the tree while the rebind was in progress, and the file was
+recovered from scratch; nobody else should treat a bound file as scratch because a row can have a rebind in flight. And the row note still
+claims no source binding or verification status, which is now stale tool-owned text rather than something to hand-edit. The partial body
+is kept because 132 matched bytes with a verified frame and first call screen is strictly more evidence than a three-byte stub, and it is
+explicitly not a reconstruction; if the project prefers unbound rows to partials, the binding can be retired and the file removed.
