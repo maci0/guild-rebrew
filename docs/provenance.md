@@ -22883,3 +22883,21 @@ against 164, which is 55 instructions and 39 stack operands consistent with extr
 iteration imposes. No single construct can be removed to find 188 bytes.
 Two experiments were reverted: making the byte store volatile gives 785 at 12138, and using an outer counter for one loop gives 777 at
 12152.
+
+## 2026-11-03 — palette row: a running maximum was being reset before its use
+
+`0x46C5A0` now measures 437 of 6104 with 48 relocations after a correctness repair that costs three matched bytes. The source assigned
+`maxW = *(int*)(slot + 4)` before using maxW, which threw away the value the prologue had stored into it. The reference stores the field
+at offset 0xc into the slot at [ebp-0x5c] in the prologue, compares the computed expression against that stored value at 0x46da4c to
+0x46da5e, reading it back with a load, and only rewrites the slot when the new value is greater. The assignment is removed and the field
+at offset 4 is read inline in both arms, so the running maximum now starts from the prologue value. The cost is three matched bytes and
+four object bytes, and the first divergence remains at offset 12 because the register homes do not move; the repair is kept because
+discarding a running maximum before the comparison is wrong behaviour, not a formatting difference.
+That also closes the pass's search: fourteen shapes were measured and none moved the divergence, including the slot as a pointer, the
+slot computation moved before the initialisers, a pre-read of the first field in evaluation order, a named zero local, chained
+initialisers, reversed comparisons, reordered arithmetic, two cursor-copy forms, swapped flag tests, a folded slot alias, a removed
+redundant reload, two aggregate size changes that moved the frame without changing the save set, a removed dead store, and two
+diagnostics that moved the zero to a caller-saved register or changed the frame. The zero and slot homes are a fixed point for every
+source spelling that keeps the intermediate form normal, so the cause must be a later structural difference rather than a prologue
+shape. A fast screening harness is recorded in .scratch/0046c5a0/ which compiles one variant with the target toolchain in about two
+seconds and prints the frame, push order and register homes, reproducing the gap object byte for byte.

@@ -738,11 +738,10 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				}
 				tmp += 1;
 			}
-			maxW = *(int*) (slot + 4);
 			span = g_1015ea4;
 			len = *(int*) (slot + 0x2c);
-			if ((g_67d380 - maxW) + span + g_102d020 > maxW) {
-				maxW = (g_67d380 - maxW) + span + g_102d020;
+			if ((g_67d380 - *(int*) (slot + 4)) + span + g_102d020 > maxW) {
+				maxW = (g_67d380 - *(int*) (slot + 4)) + span + g_102d020;
 			}
 			if (extra) {
 				g_102d020 += g_67d380 + span;
