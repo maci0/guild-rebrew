@@ -22520,3 +22520,18 @@ spill or recomputed from a global rather than kept, so no register is saved for 
 allocator must prefer a second variable over the index for esi, and none of the eight allocation levers tried did that. The frame
 invariant still holds and is the way to check any future attempt: the immediate plus four times the number of pushes equals the
 text offset plus 0x2fa0, so the reference immediate at 0x31f4 follows only from a third push.
+
+## 2026-11-03 — d2 row: loop entry emits the store before the compare
+
+`0x004DA690` moves from 1462 to 1469 matching bytes with the object still exactly at 7057 and 71 relocations, by changing the
+array-clearing block after the party-identifier loop from a guarded for into a while whose store comes before the test. The
+object now emits `mov [esp+0x24],ebp`, then `cmp ebp,8`, then `jge`, with the entry skip as `jbe`, which is the reference order
+where the store lands first and the compare follows. Drift windows fall from three to two, the window at 844 to 889 closes and none
+opens, and the first structural divergence moves from 0x375 to 0x3fb, where the reference increments a register and this build
+reloads the inner loop bound from 0x40.
+The count slot itself stays at 0x24 here against the reference 0x54, and that displacement is the slot assignment this row has
+already established as uncontrollable rather than the ordering defect. Three other shapes were byte-identical to the baseline, a
+plain for over the same counter, a redundant copy of the value, and adding braces only, and a guarded memset grew the object to
+7070 and was reverted. The replace and addend clusters before the first structural event rise from 31 to 37, and the six extra are
+displacement and register substitutions inside the newly aligned span rather than new defects. The first byte mismatch remains at
+0x9e, where the order array base is 0xb8 in the reference and 0xc8 here.

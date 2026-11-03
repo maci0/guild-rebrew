@@ -174,9 +174,11 @@ void __cdecl fcn_004da690(unsigned int *a0)
         } while (n < (int)*(unsigned char *)((char *)a0 + 0x30));
     }
     k = s44;
-    if (k < 8)
-        for (i = k; i < 8; i++)
-            blkB.sF4[i] = 0;
+    i = k;
+    while (i < 8) {
+        blkB.sF4[i] = 0;
+        i += 1;
+    }
 
     s30 = 0;
     do {
