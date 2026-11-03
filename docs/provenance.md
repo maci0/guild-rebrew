@@ -24261,3 +24261,12 @@ transition between two functions directly, where the second starts with its own 
 So the conclusion recorded here is a method limit rather than a clean bill: no over-merged game row is known beyond the one that was split, and a reliable scan needs
 control-flow-aware decoding that starts from each row's entry and follows branches, ignoring bytes that no path reaches. The scratch script that produced the candidate
 list is kept with that caveat and must not be treated as evidence without disassembling each hit at its own boundary.
+
+## 2026-11-03 — a compiler hash changed under the rows, and what it means
+
+Five row records now carry a different compiler hash than they did, and the cause is tooling rather than source: the project environment runs Rebrew from the local
+checkout so the fixes made in this session are in effect, and the recorded hash reflects that environment. The bytes measured are unchanged; the hash is provenance,
+and it is the honest record that these verdicts were taken with the development tooling rather than the released wheel.
+The consequence for the goal is stated plainly rather than buried: reproducing these rows from a clean environment requires either installing the same checkout or
+releasing the upstream fixes, and until one of those happens the stored hashes will differ on a released wheel even where the object bytes agree. That is the pending
+release note already recorded for this session, and this entry is the same fact from the metadata side.
