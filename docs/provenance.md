@@ -23112,3 +23112,18 @@ The remaining asymmetry is recorded without a repair: the reference supplies the
 supplies an array element or the surface pointer, and the record pointer at eleven others where the source already does, and since the third
 argument is never read those are equivalent in behaviour. The row stays at 437 of 4699 with the frame difference already recorded, and the
 conclusion is that a pattern spanning seventeen call sites was not evidence of a defect until one site was decoded end to end.
+
+## 2026-11-03 — hover row: complete body, allocation-only remainder
+
+`0x50A7E0` keeps 967 of 3872 with the object already at the extent, 56 relocations and 2943 mismatched bytes, and the source was not touched. The
+stored blocker still claims an object of 107 bytes of 3872, which is stale: the body spans the extent and both code ends are 0xf20, so there were
+no uncovered blocks and nothing to add.
+Every defect class checked against the reference bytes came back clean. The 58 direct calls match in identity and order across a wide set of game
+and runtime routines, everything is cdecl with no indirect calls and a bare return, the printf argument order matches with the constant last, four
+index strides and three bounds match, seven copy counts match, both sentinel scans are present with their bounds before the increment, there is no
+filler or data-segment pragma, and the stack diagnostic reports identical frames of 1080 with 53 slots where the only difference is a folded
+addressing form.
+The remainder is register allocation: the reference keeps the loop index in esi and this build in ebx, so the prologue differs at the third
+instruction and the divergence cascades through temporary choices, an increment that the reference performs in place where this build loads, decrements
+and stores, and store scheduling. Six shapes were measured and reverted, being five index declaration variants that all reproduce 967 and one
+store-order rewrite that drops to 362 with an object of 3868. The row is parked as allocation-bound with that evidence rather than a shape list.
