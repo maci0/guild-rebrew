@@ -20327,3 +20327,43 @@ auto-generated and `rebrew build symbol-stubs` has no const rule, so a regenerat
 is the generator change being made upstream, and until that lands this tree edit is provisional. The rows also land
 contiguously at `.rdata` offsets 0x1d20 to 0x1ec4 rather than at their reference offsets, which is the ordering defect
 recorded separately. Lint passes after the change.
+
+## 2026-11-03 — upstream idea entries and the server pad measurement
+
+Three entries were appended to the upstream idea list at
+/home/maci/Desktop/Projects/relumea/repos/rebrew/docs/IDEAS-GUILD.md, and one cause stated in the project diagnosis was
+corrected by reading the 6.16.0 source. The first entry covers `rebrew build check-data-placement`, where the zero
+symbols do not come from pairing rows through their `file` field, since the placement verifier never reads a link map
+or a row file at all; the reproducible zero comes from rsp directory selection. The TL image sits in `build/`, whose
+CMakeFiles tree belongs to the server link and holds `bss_late.dir` and `server_dll.dir` with no `link.txt` naming
+`Europa1400Gold_TL.exe`, so the command takes the first rsp directory and inventories an object with no `.data`
+symbols; the same image in its own build tree reports 2085 symbols and 49 row matches against 452 rows. The proposed
+capability is to resolve the object list from the image's own link, choose the rsp directory whose `link.txt` names
+its output, fail when none matches, and pair rows to the object that defines their link symbol while reporting the
+route used. The second entry covers `rebrew data layout audit --section .data`, which returns only
+`src/bss_layout/bss_late.c.obj` with dsize 0 and bsize 24,316,304, an object that is not on the TL link line, because
+it takes the first rsp directory when no `link.txt` names the selected target's output; the TL link lives in
+`build-goldtl-audit` with 5215 objects that are never read. The third entry covers `rebrew data layout converge`,
+which accepts no image path or build command, reads `build/Europa1400Gold_TL.exe` (a leftover TL image in the server
+build tree) while the TL link output is elsewhere, resolves objects from `build/` so it measures the unrelated
+scaffold, and reuses the same image between rounds so an adjustment cannot reach a fixed point; the proposed
+capability is to accept the round's build command or image path, relink before each measurement, and refuse to
+converge against an image that does not match its objects.
+The read-only pad measurement found 239 COMMON symbols in the map, of which 191 are `_dpad_*`: 188 have current
+source definitions and 3 come from stale objects whose sources no longer define them. Sixty carry server-layout VAs in
+0x10034610..0x11766208 and all sixty sit in translation units the TL target compiles and links, across eight files,
+each present in the TL object response files and in the server map's source set. Every pad name occurs once in source,
+with no externs and no references, and eighteen further in-range pad definitions totalling 23,260 bytes sit in
+translation units not on the TL link line. The only per-target mechanism is the target `defines` list: server.dll
+defines REBREW_SERVER and REBREW_LEGACY_SERVER_LAYOUT, Europa1400Gold.exe defines REBREW_GOLD, and Europa1400Gold_TL.exe
+defines nothing, while the same files already use `#if defined(REBREW_SERVER) && defined(REBREW_LEGACY_SERVER_LAYOUT)`
+for server-only code at eleven sites in server.c, seven in m_alloc.c and one in vfs.c, with no pad inside any guard.
+The recommended minimal change is to wrap each of the eight trailing pad blocks in
+`#if defined(REBREW_SERVER) || defined(REBREW_GOLD)` and `#endif`, so the TL preprocessor drops all sixty while server
+and Gold preprocess identically; every block ends its file, so no compiled-code line numbers shift. The expected TL
+`.data` VirtualSize drop is at least 24,347,953 bytes plus per-symbol alignment, and `.data1` and `.rsrc` move down
+from 0x33f6000 without returning to 0x157f000 because the remaining 128 `_dpad_` COMMON pads still add 16,823,361
+bytes. The source sum of 24,347,953 is 887 bytes below the earlier map figure of 24,348,840, and the map is older than
+the sources, carrying three pads that no current source defines, so the source figure is the measured one. One caveat
+is recorded upstream-facing: `rebrew data layout fill` appends new `_dpad_` definitions at file end, after any
+`#endif`, so a later fill would reintroduce unguarded pads until the generator learns the guard.
