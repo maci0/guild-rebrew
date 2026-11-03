@@ -23706,3 +23706,18 @@ scaled-index operands match, no lookup is duplicated or invented, the guards and
 remaining divergence is an ordering difference in the prologue, where this compiler swaps which of two values is held in which register and then loads the argument
 after the pushes instead of before, and a later guard whose sense is inverted relative to the reference, which swaps a large block and collapses the alignment from
 that point.
+
+## 2026-11-03 — request row: a pointer global, a request layout and a real swap
+
+`0x47EBC0` moves from 232 to 272 matched bytes with the object at 2386 against the 2788 extent and 24 relocations, after seven repairs taken from the reference and
+from the callees' own bodies. A global is a pointer rather than an array: the reference loads the table pointer from its address and then indexes by identifier times
+0x41, where the source passed the table's own address. The request structure passed to one routine is 0x24 bytes with nine fields, derived from that routine's reads
+and from a sibling caller with the same shape, where the source had a twelve-byte structure with a different first field. The order shuffle is a true swap over a
+thirty-two entry array, where the source rotated entries and declared thirty-three. One scan bound was a constant that is too large by a factor of eight, and the
+reference's bound is the one that yields the documented record count. The three dispatch branches share one post-call copy and increment block, which the source
+duplicated three times. Both random-order loops test two record flag bits before the goods-type test, where the source had them after. And the frame locals are
+reduced to the reference set.
+Fourteen callees were checked and all are cdecl with argument counts derived from their own reads and cleanup, two variadic call sites account for their stack
+adjustment, and the random-modulus callee's binding matches the reference call target. A structurally terser variant of the same source measured two bytes shorter and
+two matched bytes fewer, so the higher-match version is kept and both numbers are recorded. The remaining divergence is the prologue: the reference frame is 0x1ac
+and this build 0x1b4, two spilled locals beyond the reference set, with a register assigned differently so every downstream byte inherits the shift.

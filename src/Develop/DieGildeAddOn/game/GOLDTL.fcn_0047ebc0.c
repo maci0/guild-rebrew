@@ -35,16 +35,22 @@ typedef struct {
 } Craft;
 
 typedef struct {
-	int mode;          /* +0x00 */
-	int pad4;
-	int rec;           /* +0x08 */
-} PutArg;
+	int kind;          /* +0x00: request kind */
+	int bld;           /* +0x04: owning building */
+	int rec;           /* +0x08: building record */
+	int craft;         /* +0x0c: crafting slot */
+	int x10;           /* +0x10 */
+	int flags;         /* +0x14: flagged record count */
+	int count;         /* +0x18: scanned record count */
+	int x1c;           /* +0x1c */
+	int x20;           /* +0x20 */
+} Req; /* 0x24 */
 
-extern char lpObjektePROT[];     /* +0x41 stride goods records: type byte, name */
-extern char g_100d0c0[];    /* +0x58 stride building records */
-extern char g_100b0c0[];    /* +0x40 stride ware records */
-extern int g_100b0a8;       /* ware count */
-extern int g_100b0ac;       /* building count */
+extern char* lpObjektePROT;  /* +0x41 stride goods records: type byte, name */
+extern char g_100d0c0[];     /* +0x58 stride building records */
+extern char g_100b0c0[];     /* +0x40 stride ware records */
+extern int g_100b0a8;        /* ware count */
+extern int g_100b0ac;        /* building count */
 extern int g_100dc20;
 extern int g_100dc34;
 extern int g_100dc38;
@@ -67,15 +73,14 @@ void __cdecl fcn_004868d0(Bld*, BldRec*);
 int __cdecl fcn_005b1e40(int);
 int __cdecl fcn_00503d10(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
-int __cdecl gm_RandomMod(int);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0047e220(int);
 void __cdecl fcn_0047e0e0(Bld*, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl fcn_00487e60(Bld*, int);
-void __cdecl fcn_00487f90(int*);
-void __cdecl ai_MeisterCollectTrans(Bld*);
-void __cdecl ai_MeisterTrade(Bld*, int);
-
+void __cdecl fcn_00487f90(Req*);
+void __cdecl fcn_00489250(Bld*);
+void __cdecl fcn_00489a70(Bld*, int);
 
 /* Starts the production of the current goods if any producer in the building
  * table can run it in the current town. */
@@ -83,22 +88,21 @@ void __cdecl ai_MeisterTrade(Bld*, int);
 void __cdecl fcn_0047ebc0(Bld* bld)
 {
 	char name[0x100];
-	int order[0x21];
-	int prod;
+	int order[0x20];
+	Req put;
 	int craft;
-	int hit;
-	int count;
-	int flags;
 	int i;
+
+	int prod;
+	int hit;
 	int j;
 	int r;
 	int n;
 	int val;
 	BldRec* rec;
-	Craft* cr;
 	char* goods;
-	PutArg put;
 
+	hit = 0;
 	prod = fcn_00502cd0(*(int*) (bld->x16c + 0x5d), 2, 6, 0, 0xff);
 	if (prod == 0)
 		return;
@@ -110,8 +114,6 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 	fcn_00487970(craft, bld, 0x4b);
 	fcn_00487c00(craft, bld, 0x19);
 	fcn_00487470(bld);
-	cr = (Craft*) craft;
-	hit = 0;
 	if (g_7f4c04 != 8 && g_7f4c04 != 0xd) {
 		for (i = 0; i < g_100b0ac; i++) {
 			rec = (BldRec*) (g_100d0c0 + i * 0x58);
@@ -145,7 +147,7 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 					bld->id = (unsigned short) rec->id;
 					goto done;
 				}
-				goto pick;
+				break;
 			}
 		}
 	}
@@ -153,17 +155,16 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 		bld->id = 0;
 		bld->f1b4 = bld->f1b4 | 0x100;
 	}
-pick:
 	if (*(unsigned char*) (g_7f4ca0 + *(unsigned short*) (bld->x16c + 0x27) * 0x21c + 2) == 6) {
 		n = fcn_005b1e40(bld->x16c);
 		if (n != 0) {
-			for (rec = (BldRec*) g_100d0c0; (char*) rec < g_100d0c0 + 0x5900; rec = (BldRec*) ((char*) rec + 0x58)) {
+			for (rec = (BldRec*) g_100d0c0; (char*) rec < g_100d0c0 + 0xb00; rec = (BldRec*) ((char*) rec + 0x58)) {
 				if (rec->id != n)
 					continue;
 				goods = lpObjektePROT + rec->id * 0x41;
-				if ((int) cr->x1c < rec->x1c)
+				if ((int) ((Craft*) craft)->x1c < rec->x1c)
 					break;
-				if ((int) cr->x1d < rec->x20)
+				if ((int) ((Craft*) craft)->x1d < rec->x20)
 					break;
 				if (rec->f40 < (int) *(unsigned short*) (goods + 0x36))
 					break;
@@ -193,18 +194,20 @@ pick:
 		order[i] = i;
 	for (i = 0; i < 0x20; i++) {
 		r = gm_RandomMod(0x20) & 0xffff;
-		val = order[r];
+		val = order[i];
 		order[i] = order[r];
-		order[r] = order[i + 1];
+		order[r] = val;
 	}
 	for (i = 0; i < g_100b0ac; i++) {
 		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
+		if ((rec->f54 & 0x20) || (rec->f54 & 0x200))
+			continue;
 		goods = lpObjektePROT + rec->id * 0x41;
 		if ((*(unsigned char*) goods == 0x17 || *(unsigned char*) goods == 0x25) && rec->f3c >= 5)
 			continue;
-		if ((int) cr->x1c < rec->x1c)
+		if ((int) ((Craft*) craft)->x1c < rec->x1c)
 			continue;
-		if ((int) cr->x1d < rec->x20)
+		if ((int) ((Craft*) craft)->x1d < rec->x20)
 			continue;
 		if (rec->f40 < (int) *(unsigned short*) (goods + 0x36))
 			continue;
@@ -223,12 +226,14 @@ pick:
 	}
 	for (i = 0; i < g_100b0ac; i++) {
 		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
+		if ((rec->f54 & 0x20) || (rec->f54 & 0x200))
+			continue;
 		goods = lpObjektePROT + rec->id * 0x41;
 		if ((*(unsigned char*) goods == 0x17 || *(unsigned char*) goods == 0x25) && rec->f3c >= 5)
 			continue;
-		if ((int) cr->x1c < rec->x1c)
+		if ((int) ((Craft*) craft)->x1c < rec->x1c)
 			continue;
-		if ((int) cr->x1d < rec->x20)
+		if ((int) ((Craft*) craft)->x1d < rec->x20)
 			continue;
 		if (rec->f40 < (int) *(unsigned short*) (goods + 0x36))
 			continue;
@@ -248,8 +253,7 @@ pick:
 done:
 	fcn_0047e220(craft);
 	fcn_0047e0e0(bld, craft);
-	flags = g_100b0ac;
-	if (flags > 0) {
+	if (g_100b0ac > 0) {
 		for (i = 0; i < g_100b0ac; i++) {
 			rec = (BldRec*) (g_100d0c0 + i * 0x58);
 			if (rec->f54 & 8) {
@@ -261,7 +265,7 @@ done:
 			}
 		}
 	}
-	if (flags > 0) {
+	if (g_100b0ac > 0) {
 		for (i = 0; i < g_100b0ac; i++) {
 			rec = (BldRec*) (g_100d0c0 + i * 0x58);
 			val = rec->f54;
@@ -296,7 +300,7 @@ done:
 		}
 	}
 	fcn_00487e60(bld, 4);
-	count = 0;
+	put.count = 0;
 	for (n = 0x7f4ca2; n < 0x85a0a2; n += 0x21c) {
 		if (*(unsigned char*) (n + 6) == 0)
 			continue;
@@ -319,62 +323,65 @@ done:
 				continue;
 		}
 		fcn_00529160(bld->x16c, 0, (int) *(unsigned short*) (n - 2), 0);
-		count = count + 1;
+		put.count = put.count + 1;
 	}
 	if (g_100dc20 == bld->x16c)
-		g_100dc34 = count;
-	flags = 0;
+		g_100dc34 = put.count;
+	put.flags = 0;
 	if (g_100b0ac > 0) {
 		for (i = 0; i < g_100b0ac; i++) {
 			rec = (BldRec*) (g_100d0c0 + i * 0x58);
 			if (rec->f54 & 8)
-				flags = flags + 1;
+				put.flags = put.flags + 1;
 			if (rec->f54 & 0x10)
-				flags = flags + 1;
+				put.flags = put.flags + 1;
 		}
 	}
-	if (flags >= count)
-		flags = count;
-	if (count == 0 || flags == 0) {
-		ai_MeisterCollectTrans(bld);
-		ai_MeisterTrade(bld, craft);
+	if (put.flags >= put.count)
+		put.flags = put.count;
+	if (put.count == 0 || put.flags == 0) {
+		fcn_00489250(bld);
+		fcn_00489a70(bld, craft);
 		return;
 	}
-	for (i = 0; i < g_100b0ac; i++) {
-		rec = (BldRec*) (g_100d0c0 + i * 0x58);
-		val = rec->f54;
-		if (val & 0x10) {
-			if (val & 0x20) {
-				put.mode = 0x14;
-				put.rec = (int) rec;
-				fcn_00487f90(&put.mode);
-				if (g_100dc20 == bld->x16c && g_100dc3c < 4) {
-					memcpy(g_100ddc0 + g_100dc3c * 0x58, rec, 0x58);
-					g_100dc3c = g_100dc3c + 1;
+	if (put.count > 0) {
+		put.bld = (int) bld;
+		put.craft = craft;
+		put.x10 = 0;
+		put.x20 = 0;
+		put.x1c = 0;
+		i = 0;
+		for (; i < put.count; i++) {
+			val = *(int*) (g_100d0c0 + i * 0x58 + 0x54);
+			if (val & 0x10) {
+				if (val & 0x20) {
+					put.kind = 0x14;
+					put.rec = (int) (g_100d0c0 + i * 0x58);
+					fcn_00487f90(&put);
 				}
-			}
-			else if (val & 0x200) {
-				put.mode = 0x15;
-				put.rec = (int) rec;
-				fcn_00487f90(&put.mode);
-				if (g_100dc20 == bld->x16c && g_100dc3c < 4) {
-					memcpy(g_100ddc0 + g_100dc3c * 0x58, rec, 0x58);
-					g_100dc3c = g_100dc3c + 1;
+				else if (val & 0x200) {
+					put.kind = 0x15;
+					put.rec = (int) (g_100d0c0 + i * 0x58);
+					fcn_00487f90(&put);
 				}
+				else
+					continue;
 			}
-		}
-		else if (val & 8) {
-			put.mode = 4;
-			put.rec = (int) rec;
-			fcn_00487f90(&put.mode);
+			else if (val & 8) {
+				put.kind = 4;
+				put.rec = (int) (g_100d0c0 + i * 0x58);
+				fcn_00487f90(&put);
+			}
+			else
+				continue;
 			if (g_100dc20 == bld->x16c && g_100dc3c < 4) {
-				memcpy(g_100ddc0 + g_100dc3c * 0x58, rec, 0x58);
+				memcpy(g_100ddc0 + g_100dc3c * 0x58, (void*) put.rec, 0x58);
 				g_100dc3c = g_100dc3c + 1;
 			}
 		}
 	}
-	ai_MeisterCollectTrans(bld);
-	ai_MeisterTrade(bld, craft);
+	fcn_00489250(bld);
+	fcn_00489a70(bld, craft);
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_930600[452112];
