@@ -21445,3 +21445,27 @@ scalar-local rewrites measured worse, so all were reverted with backups in .scra
 translation unit calls placeholder symbols whose real definitions are d2_CreateRadioGroup at 0x4693b0, d2_ShowTxt at
 0x46fac0, gm_CheckEntityType at 0x505370 and io_FormatTextBuffer at 0x51af00, with prototypes left as the listing implies.
 The blocker was updated with the current delta of 214. Report in .scratch/5b7880/report.md.
+
+## 2026-11-03 — d2 fourth row: callee target and argument order corrected
+
+`0x4D8D00` measures 399 of 4632 with object exactly 4632, 37 relocations and status STUB; two corrections landed and the
+positional count falls from 468, which is accepted because both corrections are semantic. The file binding is
+src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004d8d00.c. In case 4 the callee was wrong: native calls 0x4cf0f0 at both sites
+0x4d9b7c and 0x4d9cfe while the source called fcn_004ce270, and the target is corrected. In case 2 the first branch's
+argument order was wrong for fcn_004c6680: native builds `(buffer, v10, v14, ENT34(obj))` where the source had
+`(ENT34(obj), v14, v10, buffer)`, so the first and fourth arguments were swapped and v10 with v14 as well, and the order is
+now corrected.
+A claimed extent of 4640 is refuted independently: the switch jump table's eight dwords sit at 0x4d9ef8 to 0x4d9f17,
+ending with 0x004d9e7e, and 0x4d9f18 onward is a run of 0x90 bytes, so the row plus 4632 lands exactly where the fill begins
+and the stored extent of 4632 is correct. The object equals it, so the row is not a size mismatch and no repair was needed.
+The remaining wall is stack-slot assignment. Native places obj at 0x08, base at 0x0c, v28 at 0x18, vec at 0x1c, msg at
+0x2c, v68 at 0x58, i at 0x5c and the buffers at 0x78, 0xa8, 0xd8 and 0x108, while this build puts base at 0x08, obj at 0x0c,
+msg at 0x20, vec at 0x4c, i at 0x5c and v68 at 0x60, so native keeps vec before msg and has one extra slot below msg. A
+sweep of 24 permutations over the four 0x30-byte buffer declarations produced identical slots, which confirms that slot
+order follows emission and first use rather than declaration order. The prologue also differs in zero-constant commoning,
+where native uses one edx for both zero stores and this build uses ebx and eax plus an extra xor where native has test.
+Reverted with numbers: comparing `p->type` to minus one instead of the current form gives 443 at object 4644; inlining the
+ent34 helper at all 21 sites gives 298 at 4580 even though native makes no such call across its 119 call sites; and two
+declaration reorders had no effect. Every direct callee has a project row, so no prototype was invented, and the surviving
+unresolved item is the ent34 local static helper that the native body inlines, whose original translation unit and spelling
+remain unresolved. Findings in .scratch/m4d8_004d8d00_findings.md.

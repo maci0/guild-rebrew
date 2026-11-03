@@ -425411,22 +425411,21 @@ status = "STUB"
 blocker = "slot permutation: mode at [esp+0x18] against native [esp+0x1c] and rec at [esp+0x24] against [esp+0x14] are allocator output, first mismatch offset 24"
 
 ["GOLDTL.0x004d6170".verification]
-source_hash = "3b877d64a97a74d6623d07c432eb3a5ae7e73d631c7da031d35515e20154ced1"
+source_hash = "595efea887d2527b3eb2f10b4420be9a98572aeaa19745d5136751e28c90f31b"
 reference_hash = "14725d25255807ed54f0a178341a25e1afcef429a32775fbec3f343ee0e45870"
 reference_size = "4923"
 headers_hash = "715e465ca14c6143fd5b6ea46de554ac822b0104969453b838363aefd91f2b60"
-compiler_hash = "0e8a99954f54c9a4a83e18dc30c2c78d371ee084f27f0d787482cfc91082426c"
+compiler_hash = "65f13e99c377985b8d6acea9b4d608e038366b42943f6d1475d7da3c79d5514d"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x4d6170"
 context_hash = ""
 defines = "[]"
-input_hash = "452999c01367d05fcee8d219dc3db9d47a2816dc3c9f22d114c6b0aa20e86571"
+input_hash = "941f15d9fe1c1ba0a998887f1939b5f97855835c890c123ebb1362a30ae89962"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T12:25:29+00:00"
-
+measured_at = "2026-11-03T05:55:46+00:00"
 
 [["GOLDTL.0x004d6170".status_history]]
 old_status = "SIZE_MISMATCH"
@@ -468751,7 +468750,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x004a9b20".verification]
-source_hash = "a76ca406b6740f2d41f7f0b428ac82b1bdc9eef5a6b0808089aecb9121e41bc3"
+source_hash = "7e776a30dbd8ad8f0c6b691119ede1a00f66b7f5df0b7acabc86eed1607472d4"
 reference_hash = "c70c9136d59368371491607e0946daee89870b720ebb9871158c499acbfb36c0"
 reference_size = "1440"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -468762,10 +468761,10 @@ module = "GOLDTL"
 va = "0x4a9b20"
 context_hash = ""
 defines = "[]"
-input_hash = "14ca18eba30e10d5377a371b1e5b15edc98fc90d39bc6c036685b1fe2a1f47e2"
+input_hash = "e7e3fcccdfee94e455f84dcfe0b4809638a739decd04a889e6f785ffacb4a53c"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T05:54:38+00:00"
+measured_at = "2026-11-03T05:56:31+00:00"
 
 [["GOLDTL.0x004a9b20".status_history]]
 old_status = "STUB"

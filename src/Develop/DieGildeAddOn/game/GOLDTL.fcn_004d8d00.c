@@ -40,7 +40,7 @@ char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
 int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00455350(char*, float*, float*);
-int __cdecl fcn_004ce270(char*, char*);
+int __cdecl fcn_004cf0f0(char*, char*);
 int __cdecl fcn_004c6820(int, void*);
 int __cdecl fcn_004c6680(char*, int, int, char*);
 unsigned int __cdecl fcn_004d89c0(int, unsigned int, int);
@@ -297,7 +297,7 @@ void __cdecl fcn_004d8d00(char* a0)
 				p->f14 = v10;
 				p->f18 = v14;
 				sprintf(b88, (char*)0x68b85c, *(int*)(obj + 4));
-				p->timer = fcn_004c6680((char*)ent34(obj), v14, v10, b88);
+				p->timer = fcn_004c6680(b88, v10, v14, (char*)ent34(obj));
 				goto after2;
 			}
 			if (*(int*)(ent + 0x58) == 1 || *(int*)ent == 0x176) {
@@ -453,7 +453,7 @@ tail1_body:
 			v68 = *(int*)(e + 0x204);
 			fcn_00455350(e, (float*)(e + 0x4c), vec);
 			if (v68) {
-				if (!fcn_004ce270(obj, (char*)v68))
+				if (!fcn_004cf0f0(obj, (char*)v68))
 					goto case4b;
 				if (*((unsigned char*)v68 + 8) != 0
 				    && CompareVector3WithinTolerance(vec,
@@ -490,7 +490,7 @@ tail1_body:
 			break;
 case4b:
 			fcn_00455350(e, (float*)(e + 0x4c), vec);
-			if (fcn_004ce270(obj, (char*)*(int*)(e + 0x204))) {
+			if (fcn_004cf0f0(obj, (char*)*(int*)(e + 0x204))) {
 				if (*((unsigned char*)v68 + 8) != 0
 				    && CompareVector3WithinTolerance(vec,
 					(float*)(ent34((char*)v68) + 0x4c), 49.5f)) {
