@@ -24378,3 +24378,15 @@ definition; the rest of each is reference content that nothing else emits, and s
 so the final plan over 160 pads has nothing left to shrink and would grow initialised data by 10,592. Attributing the remaining bytes needs a reference link map or
 reference data extents for objects whose symbols do not encode a reference address, and neither exists in this tree.
 The data store's verification blocks were refreshed against the fresh link from this pass, which supersedes the stale-image measurements recorded earlier.
+
+## 2026-11-03 — data verification passes by row, but cannot report bytes, because rows carry no size
+
+Verifying data against the fresh link from the pad pass reports 768 rows matching, and the store counts eight verified and four drifting rows, but the status summary
+reports zero verified bytes and a byte percentage of zero. The cause is the store rather than the bytes: data rows mostly have no size recorded, so a row-level verdict
+cannot be turned into a byte count, and the section breakdown shows 330,752 bytes untracked for the same reason. A spot check of the listing confirms it: entries such as
+the record and limit globals carry a null size while their declarations state a length.
+This matters for the goal because it requires data bytes, placements and owners to be verified, and right now the only data number the project can print at byte level is
+zero. The gap is metadata, not measurement: sizes need to be recorded from reviewed extents, which for globals with declarations can be derived from the declaration and
+confirmed against the reference section, and for the generated stub globals needs the owner evidence that is already recorded as missing.
+This is recorded as the next data task rather than attempted here, because writing sizes for twelve hundred rows without per-row evidence would replace an honest zero
+with an unearned number.
