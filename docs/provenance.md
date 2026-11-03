@@ -23588,3 +23588,16 @@ displacement on a texture slot. Closing it needs the local lifetimes restructure
 guessed to force it.
 Thirteen distinct callees were checked and all their sites and counts match the reference, three prototypes were confirmed from the callees' own argument reads,
 and the argument order, constant-versus-value operands, seven record fields, the signed comparisons and the clamps all agree.
+
+## 2026-11-03 — inventory row: one structure restores the reference frame
+
+`0x485970` keeps 159 of 2953 with the object at 2837, one relocation, and the frame now exactly 0x120. Four changes were kept. A spurious wrapper condition around
+the record lookup loop was removed, since the reference loops directly, which closes the drift window at reference offset 219. A slot array is declared unsigned
+short, because the reference compares it at sixteen bits against a register. The found-flag scan is written as a bounded loop that tests the flag at the back edge,
+which is the loop shape the reference has. And the three arrays were packed into one local structure, which restores the reference layout exactly with the record
+array at 0x78, the slots at 0xc0, the values at 0xe0 and the temporary copy at 0x20; the values array needs twenty entries to reach the 0x120 frame even though
+only sixteen are read.
+Two drift windows remain open and both are recorded as codegen rather than semantic: one in a count loop and one in the final sort loop, where the reference
+reloads a record field and counts down with a decrement-and-branch while this build hoists the value and compares against the global with an increment. The first
+divergence is the prologue: the reference pushes a register at entry where this build tests a value first, which is register allocation and scheduling rather than
+an operand defect.

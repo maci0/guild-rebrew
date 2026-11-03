@@ -82,9 +82,7 @@ int __cdecl fcn_00485970(char* a0, int a1, int a2)
 	char* obj;
 	char* rec;
 	char* recs2;
-	int recs[18];
-	short slots[16];
-	int vals[20];
+	struct { int recs[18]; unsigned short slots[16]; int vals[20]; } rb;
 	int i;
 	int j;
 	int k;
@@ -115,18 +113,16 @@ int __cdecl fcn_00485970(char* a0, int a1, int a2)
 						f1 = fcn_0050bb50(id, (unsigned char) *(char*) (ent + 0x65));
 						f0 = eval_ObjektPreis2Credits(id, 100) - f1;
 						idx = 0;
-						if (1 <= g_100b0a8) {
-							while (idx < g_100b0a8) {
-								if (pa[idx].id == id) {
-									if (f0 < pa[idx].f20)
-										goto label_485b77;
-									break;
-								}
-								idx++;
+						while (idx < g_100b0a8) {
+							if (pa[idx].id == id) {
+								if (f0 < pa[idx].f20)
+									goto label_485b77;
+								break;
 							}
-							if (0x80 <= idx)
-								goto label_485b77;
+							idx++;
 						}
+						if (0x80 <= idx)
+							goto label_485b77;
 						pa[idx].f20 = f0;
 						pa[idx].id = id;
 						pa[idx].f04 = -1;
@@ -308,26 +304,24 @@ label_485f7e:
 	while (rec) {
 		recs2 = gm_FindRecordById(*(int*) (rec + 0xac));
 		if (recs2) {
-			fcn_0050de80((int) recs2, recs);
-			for (i = 0; i < recs[0]; i++) {
-				if (!slots[i])
+			fcn_0050de80((int) recs2, rb.recs);
+			for (i = 0; i < rb.recs[0]; i++) {
+				if (!rb.slots[i])
 					continue;
 				found = 0;
-				for (j = 0; j < 3; j++) {
-					if (*(unsigned short*) (rec + 0xd0 + j * 2) == slots[i]) {
+				for (j = 0; !found && j < 3; j++) {
+					if (*(unsigned short*) (rec + 0xd0 + j * 2) == rb.slots[i])
 						found = 1;
-						break;
-					}
 				}
 				if (found)
 					continue;
 				for (j = 0; j < g_100b0ac; j++) {
-					if (pb[j].id == (slots[i] & 0xffff))
-						pb[j].f38 += vals[i];
+					if (pb[j].id == (rb.slots[i] & 0xffff))
+						pb[j].f38 += rb.vals[i];
 				}
 				for (j = 0; j < g_100b0a8; j++) {
-					if (pa[j].id == (slots[i] & 0xffff))
-						pa[j].f24 += vals[i];
+					if (pa[j].id == (rb.slots[i] & 0xffff))
+						pa[j].f24 += rb.vals[i];
 				}
 			}
 			for (j = 0; j < 3; j++) {
