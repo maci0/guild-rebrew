@@ -23432,3 +23432,19 @@ reproduce the reference's alignment-checking clear. The gap diagnostic is unusab
 section and the real function as the second, so the trace described the filler; the comparison was done with objdump against the second section.
 The remaining work is transcription rather than repair: the reference is 3117 bytes and the prefix covers 126, and the next blocks are the allocation call, the
 two field tests on the info structure and the loop that carries the strides at 0x18, 0x38 and 0xe0.
+
+## 2026-11-03 — polygon row: a redundant guard removed and a zero test rewritten
+
+`0x44B480` keeps 116 of 3131 with the object at 2864, seven relocations, and two repairs that reproduce reference shapes while the positional count falls from
+133. A redundant guard was removed from the polygon material scan: the object tested a count twice in a row where the reference tests once and then lets the
+loop's own entry test do the second, which closed twelve windows and none opened, and moved that span from seventeen bytes short of the reference to one. And a
+compaction-loop condition was written as a comparison against minus one rather than a zero test, because the reference emits a compare against minus one with a
+signed jump there; the object now matches that instruction pair, at a cost of three new windows elsewhere.
+The matched byte count falls because the remaining deficit is concentrated elsewhere and every edit shifts later offsets, which is recorded rather than argued away.
+The row's blocker is named and not attempted: the reference expands its zeroing and three copy sites with the unaligned alignment prelude, a leading
+three-times computation, an alignment mask, a subtraction and a jump, then byte move, dword move and byte move, while this toolchain emits the two-move fast
+form. That accounts for roughly one hundred and fifty to two hundred of the remaining 267 bytes. The same idiom is documented on another row and has only been
+reproduced there with inline assembly, which would require register save and restore that the reference does not have, so it was not added here.
+Thirty-five call sites were checked in order and all match, along with the cleanup amounts, the argument order and raw-versus-scaled forms, four callee prototypes
+derived from their own bodies, five strides and a sentinel division, three copy counts, and seven field offsets. The gap tool is unusable on this row because the
+lead scaffold is emitted as an earlier text section, so the comparison was done against the function's own section.

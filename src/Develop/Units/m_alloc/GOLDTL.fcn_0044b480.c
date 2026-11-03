@@ -266,12 +266,10 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 		/* Drop texture records no polygon refers to. */
 		list = m_alloc(hdr.anzahl_tex, (char*) 0x67af94);
 		n = hdr.anzahl_tex;
-		if (hdr.anzahl_pol > 0) {
-			for (k = 0; k < hdr.anzahl_pol; k++) {
-				idx = hdr.pol[k].material;
-				if (idx >= 0) {
-					list[idx] = 1;
-				}
+		for (k = 0; k < hdr.anzahl_pol; k++) {
+			idx = hdr.pol[k].material;
+			if (idx >= 0) {
+				list[idx] = 1;
 			}
 		}
 		i = 0;
@@ -309,7 +307,7 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 	copyoff = 0;
 	for (k = 0; k < obj->anzahl_polys; k++) {
 		idx = hdr.pol[k].material;
-		if (idx >= 0 && seen[idx] == 0) {
+		if (idx > -1 && seen[idx] == 0) {
 			seen[idx] = 1;
 			for (m = 0; m < obj->anzahl_polys; m++) {
 				if (hdr.pol[m].material == idx) {
