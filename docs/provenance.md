@@ -22339,3 +22339,31 @@ along with the rest. Both files are back to their committed content and re-measu
 the third run left nothing, and the row still measures 976 at 3768. Copies of both discarded edits are kept under .scratch for
 anyone who wants to see what was tried. The lesson from the earlier silent-run episode holds and is now applied as routine: read
 the tree, re-measure the rows, restore what does not pay.
+
+## 2026-11-03 — text appender: the stream is offset by one frame fact, and the environment is repaired
+
+`0x519190` keeps 660 of 7527 with object 7527 and no window closed. The pass explains why nothing moves: the whole stream is
+offset by one frame fact rather than by source shape. The reference saves three callee-saved registers, pushing ebx, esi and edi
+with locals based at esp+0xc and a frame immediate of 0x31f4, while this build saves two, pushing esi and edi with the base at
+esp+8 and an immediate of 0x31f0. On top of that the reference's integer slab holds sixteen slots from 0xc to 0x4c where this
+build has fifteen from 0x8 to 0x44, so every array and structure local sits exactly eight bytes low: the source buffer at 0x44
+against 0x4c, two more at 0x6c against 0x74 and 0x78 against 0x80, the text buffer at 0x258 against 0x260 and another at 0x98
+against 0xa0, with the argument pointer at 0x14 against 0x10. Fixing either one alone cannot align the slots; both the third push
+and one extra live integer slot are needed. The structure size is already exact, since the text and work buffers plus one
+four-byte alignment pad total 0x2fa0 and put the first array at 0x260 when the pad exists, so the aggregate lever cannot supply
+the missing slot, which two probes confirmed in both directions.
+Five attempts were reverted with numbers. The six provably overlapping copies still present in the file, at lines 251, 281, 534,
+561, 660 and 762, were converted to memmove and measured 645 at 7411 with 196 windows, so they are correct in principle but cost
+fifteen matched bytes and 116 bytes of object here; the first content divergence is at reference offset 77 where the argument
+pointer slot is 0x10 in the reference and 0x14 here. Raising the work buffer to 0x17c4 is inert. Raising it to 0x17d0 leaves the
+immediate at 0x31f0 because padding absorbs it. A dead integer local with a zero initialiser is dropped by the compiler. And one
+inline copy at line 95 was written as strcpy, which the reference really does inline at 0x519268, but measured 621 at 7519 with
+192 windows.
+A census is recorded for the next session: the reference has sixteen inline copy sequences and twenty-two calls to the memmove
+entry at 0x64d740, while this object has seventeen inline copies, twenty-one memmove calls and three calls through a differently
+named binding, which is two or three more memmove-class calls than the reference. That surplus is a concrete target, and the six
+committed conversions must stay.
+The tooling environment is repaired as part of this record. During the run, another session hand-patched the bytearray fix into
+the installed wheel inside the project virtual environment, which is not reproducible and does not carry the tests. The local
+checkout was installed over it, so the environment again resolves to the checkout whose suite passes, and the gap diagnostic runs
+from it.
