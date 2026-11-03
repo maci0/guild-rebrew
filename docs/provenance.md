@@ -22295,3 +22295,36 @@ The caveat is recorded as stated: the volatile guard is a compiler-shape lever r
 behaviour beyond one extra read of the same word. Shapes that did not move the base cost nothing to thirteen matched bytes, and
 the kept shape gains 188. The residual six bytes are register allocation only, with two argument loads using edx and ecx swapped
 while the push order agrees, and a post-loop pointer reload using eax where the reference uses edx.
+
+## 2026-11-03 — interior address corrected to the row that owns it, and two repairs kept
+
+A task aimed at 0x505790 found no metadata row at that address in either module: it is interior code inside larger functions, with
+the GOLD row retired and the GoldTL row at 0x5053c0 already matching 1151 of 1151. The shared binding for that code is
+`0x5086f0`, file src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005086f0.c with an extent of 413, and all work used that VA against the
+GoldTL binary, never the interior address. Two repairs are kept there. Declaring the slot array as signed integers rather than
+unsigned makes the frame exactly 0x34, with the reference using `fild` on a dword confirming signedness, and lifts the match from
+147 to 167 while the object shrinks from 429 to 421. Rewriting the scan as a `while (n != 0)` loop with a `goto found` exit and
+an explicit zero return makes the loop block byte-exact, including `cmp n,0; jne top`, and lifts the match to 186 with the object
+at 397, sixteen bytes shorter than the extent.
+Four trials were reverted: four separate comparisons against the identifier values give 170 at 439, a while loop with a post-loop
+test gives 174 at 439, passing the address of a different array element gives 76 and 77 at 401 and 405, and making the value
+unsigned gives 155 at 425 while making the flags unsigned changes nothing. Two windows are genuinely closed, the frame-size window
+because every slot offset shifts by eight, and the loop window because its bytes now agree; the drift window count falls from two
+to one and the remaining window of about 170 to 182 bytes is real rather than re-alignment. The first remaining divergence is
+tail-merge and block order, where the reference tests against minus one and returns zero inline while this build jumps to a merged
+tail, and the flags section still differs because the reference tests the four identifier values in order and shares only one tail
+while this build pre-masks the shifts.
+
+## 2026-11-03 — m_alloc row: the base hoist is mechanical, the register choice is not
+
+Two remaining levers on `0x547770` were tried and neither was kept, with the source restored. The base load can be hoisted
+mechanically: every shape put exactly one `mov ...,[0x868050]` in the loop preheader and none inside it, and two of them
+reproduced the reference's own addressing form with a single offset expression used twice, `lea eax,[edx+ecx*4]` followed by
+`mov dl,[edx+ecx*4]`. All of them cost match bytes because the allocator puts the hoisted base in edi, displacing the counter
+from edi to ebx so the prologue zero initialisation moves from ebx to esi and the divergence returns to byte 14; the reference
+wants the base in ebp with the counter in edi and the second counter in ebx, and no source shape changed that choice. The second
+lever is inert at source level: three shapes giving the compare its own block-local copies compiled byte-identical to the
+baseline, because this compiler forwards every block-local copy back to the underlying memory load, so the reference's copies
+are allocator placements rather than source locals. The slot histogram is recorded for the future: reference and object agree on
+the six slots from 0x20 to 0x28 and differ in the four from 0x10 to 0x1c. The open problem is the callee-saved assignment, where
+the base must take ebp for the rest to fall into place.

@@ -13,7 +13,7 @@ int __cdecl _ftol(void);
 /* ADDRESS: GOLDTL 0x005086f0 */
 unsigned int __cdecl fcn_005086f0(unsigned short* a0)
 {
-	unsigned int slots[8];
+	int slots[8];
 	int flags;
 	int id;
 	int i;
@@ -43,16 +43,18 @@ unsigned int __cdecl fcn_005086f0(unsigned short* a0)
 	}
 	i = gm_RandomMod(4) & 0xffff;
 	n = 4;
-	while (slots[i + 4] != 1) {
+	while (n != 0) {
+		if (slots[i + 4] == 1) {
+			goto found;
+		}
 		n--;
 		i = (i + 1) & 0x80000003;
 		if (i < 0) {
 			i = (i - 1 | 0xfffffffc) + 1;
 		}
-		if (n == 0) {
-			return 0;
-		}
 	}
+	return 0;
+found:
 	if (i == -1) {
 		return 0;
 	}
