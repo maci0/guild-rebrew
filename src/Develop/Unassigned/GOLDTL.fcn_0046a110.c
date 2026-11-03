@@ -14,8 +14,8 @@ extern int g_1015ea0;
 extern int g_1015ea4;
 extern int g_1040490;
 extern int g_1040494;
-extern int g_1052be4;
-extern int g_1052bec;
+extern unsigned g_1052be4;
+extern unsigned g_1052bec;
 extern int g_14ce8d4;
 extern int g_67d370;
 extern int g_67d378;
@@ -65,16 +65,14 @@ void __cdecl fcn_00472050(int a, int* w, int* h);
 /* ADDRESS: GOLDTL 0x0046a110 */
 void __cdecl fcn_0046a110(int a1)
 {
-	fcn_0046a110_Rect screen;
-	fcn_0046a110_Rect clip[2];
-	float uv[2];
+	struct { fcn_0046a110_Rect screen; float uv[2]; } loc;
+	union { fcn_0046a110_Rect clip[2]; char buf[40]; } u;
 	char* ent;
 	char* tab;
 	char* child;
 	char* e2;
 	char* font;
 	fcn_0046a110_Rect* rects;
-	char buf[40];
 	int i;
 	int n;
 	int dx;
@@ -95,37 +93,38 @@ void __cdecl fcn_0046a110(int a1)
 	g_7725a0 = 0;
 	g_7725a4 = 0;
 	fcn_0047a090();
-	screen.left = 0;
-	screen.top = 0;
-	screen.right = g_1040494;
-	screen.bottom = g_1040490;
-	uv[0] = 0.0f;
-	uv[1] = 1.0f;
-	(*(void (__cdecl **)(void*, void*)) (*(int*) g_6b5de0 + 0xa0))(g_6b5de0, &screen);
+	loc.screen.left = 0;
+	loc.screen.top = 0;
+	loc.screen.right = g_1040494;
+	loc.screen.bottom = g_1040490;
+	loc.uv[0] = 0.0f;
+	loc.uv[1] = 1.0f;
+	(*(void (__stdcall **)(void*, void*)) (*(int*) g_6b5de0 + 0xa0))(g_6b5de0, &loc.screen);
 	if (a1) {
 		n = 0;
 		rects = 0;
 	}
 	else {
-		if (g_1052be4) {
-			clip[0].left = 0;
-			clip[0].top = 0;
-			clip[0].right = g_1040494;
-			clip[0].bottom = g_1052be4;
+		n = 0;
+		if (g_1052be4 > 0) {
+			u.clip[0].left = 0;
+			u.clip[0].top = 0;
+			u.clip[0].right = g_1040494;
+			u.clip[0].bottom = g_1052be4;
+			n = 1;
 		}
-		n = (g_1052be4 != 0);
 		if (g_1052bec < g_1040490 - g_1052be4) {
-			clip[n].left = 0;
-			clip[n].top = g_1052bec + g_1052be4;
-			clip[n].right = g_1040494;
-			clip[n].bottom = g_1040490;
+			u.clip[n].left = 0;
+			u.clip[n].top = g_1052bec + g_1052be4;
+			u.clip[n].right = g_1040494;
+			u.clip[n].bottom = g_1040490;
 			n++;
 		}
 		if (!n)
 			goto label_46a1f2;
-		rects = clip;
+		rects = u.clip;
 	}
-	(*(void (__cdecl **)(void*, int, void*, int, int, float, int)) (*(int*) g_6b5de0 + 0x90))(g_6b5de0, n, rects, 1, 0, 1.0f, 0);
+	(*(void (__stdcall **)(void*, int, void*, int, int, float, int)) (*(int*) g_6b5de0 + 0x90))(g_6b5de0, n, rects, 1, 0, 1.0f, 0);
 label_46a1f2:
 	if (g_7725a8) {
 		fcn_0047a040(0, 0, g_1040494, g_1040490);
@@ -249,11 +248,11 @@ label_46a1f2:
 						f = *(float*) (ent + 0x1f4);
 						if (!(f <= g_6629c8))
 							f = (float) g_6629c8;
-						sprintf(buf, (char*) 0x67d43c, (int) (f * g_662c38));
+						sprintf(u.buf, (char*) 0x67d43c, (int) (f * g_662c38));
 						fcn_00472880(g_67d398 + 1);
 						fcn_0046bd20(dx, dy + *(int*) (ent + 0x1c) - 0xf,
 						             *(unsigned short*) (*(char**) (ent + 0xc) + 6),
-						             *(int*) (ent + 0x1c), g_77250c, buf, 0x28);
+						             *(int*) (ent + 0x1c), g_77250c, u.buf, 0x28);
 					}
 				}
 				if (*(char*) (ent + 0x8c)) {

@@ -23625,3 +23625,20 @@ the store actually binds, which is a different path in a different directory. Th
 fifty characters, and a truncated path cannot be reconstructed, so the brief was written by guessing the missing prefix. The picker now prints every path whole, so
 a brief can quote the store verbatim. This is the same class of mistake as naming addresses from memory, and it has the same fix: quote the tool's output instead
 of reconstructing it.
+
+## 2026-11-03 — panel row: the vtable calls are stdcall
+
+`0x46A110` moves from 330 to 362 matched bytes with the object at 2695 against the 2848 extent and 38 relocations, and the pass found two real defects.
+The two virtual calls through the object's table were declared cdecl; the reference leaves their arguments on the stack for the callee to pop, which the listing
+shows by reading an argument from the same stack offset immediately after the first call with no adjustment in between, so both are stdcall and the caller's stack
+now agrees with the reference.
+Two globals compared with unsigned jumps are declared unsigned, and the clipping block is restructured so each condition computes one of two values, which
+reproduces the reference's comparison shapes exactly.
+A frame difference was partly repaired: the reference frame carries a screen rectangle, a dead pair of coordinates and the clip buffer, while the source had dropped
+the dead pair and placed the clip four bytes higher. Grouping the screen and the dead pair in one structure whose address is passed to the virtual call makes the
+compiler keep the stores without a volatile qualifier, and a union of the clip array and the character buffer places them where the reference does. That alone is
+worth 38 matched bytes; the frame is still four bytes low because the screen sits at 0x30 against the reference 0x34.
+Four shapes were reverted, including a volatile qualifier on the dead pair and three ways of laying out the clip and buffer separately. Two differences are recorded
+and not fixed: the reference keeps the loop bound check at the loop head where this build rotates it to the tail, and the reference hoists a field load before the
+conversion and reuses it where this build reloads it, which is a codegen difference rather than a semantic one. Every one of the 54 direct call targets matches the
+reference, so no wrong target remains.
