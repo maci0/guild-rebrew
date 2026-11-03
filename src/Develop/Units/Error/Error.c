@@ -873,7 +873,9 @@ void __cdecl LogMessage(char* msg)
 		DispatchLogOutput(msg, g_log_mode_flags, 1);
 	}
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_10027084[96];
 unsigned char _dpad_10034348[712];
 unsigned char _dpad_117640e0[8192];
 unsigned char _dpad_11766100[260];
+#endif

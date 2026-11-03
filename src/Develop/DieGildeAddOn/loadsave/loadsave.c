@@ -2811,5 +2811,7 @@ int srv_RecvGame(void)
 	CloseVfsStream(file_handle);
 	return 1;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1002d444[168];
 unsigned char _dpad_10035a10[414352];
+#endif

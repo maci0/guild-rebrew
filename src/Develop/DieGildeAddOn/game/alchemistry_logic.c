@@ -1451,4 +1451,6 @@ int ahm_GetCommandPayloadSize(unsigned char* cmd_payload)
 	}
 	return total_size;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1002a1cc[7812];
+#endif

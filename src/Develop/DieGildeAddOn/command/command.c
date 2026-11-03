@@ -5170,6 +5170,7 @@ int __cdecl cm_GetBuildingStatCount(uchar* cmd)
 	return stat_count;
 }
 #endif
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1002c050[928];
 unsigned char _dpad_1002c3f8[424];
 unsigned char _dpad_1002c5a0[424];
@@ -5179,3 +5180,4 @@ unsigned char _dpad_1002caf0[67];
 unsigned char _dpad_1002cc39[1307];
 unsigned char _dpad_1002d361[115];
 unsigned char _dpad_100a8c40[84];
+#endif

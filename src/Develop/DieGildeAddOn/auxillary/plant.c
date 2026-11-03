@@ -331,6 +331,8 @@ BK_BOX* __cdecl plt_LookupBauplatzBox(char* name)
 	return 0;
 }
 
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1002d4f9[895];
 unsigned char _dpad_1002d878[280];
 unsigned char _dpad_101de468[244];
+#endif

@@ -20423,3 +20423,35 @@ link_scaffold.c:288, and `_fcn_004012b0`, either of which would raise LNK2005. A
 stub translation unit, which is a whole build and outside this step's scope. The committed tree edit that adds const to
 45 definitions and fixes `g_662d70` to an array therefore stands as the provisional state, with no behaviour change to
 the server or Gold scaffolds, until a fresh unresolved log exists and the generator can rewrite the file.
+
+## 2026-11-03 — server layout pads excluded from the client link
+
+Sixty server-layout `_dpad_*` globals no longer reach the TL link. The edit adds exactly sixteen lines and removes
+none: `#if defined(REBREW_SERVER) || defined(REBREW_GOLD)` and `#endif` around eight trailing pad blocks, in
+auxillary/plant.c at 334 to 338, command/command.c at 5173 to 5183, game/alchemistry_logic.c at 1454 to 1456,
+game/spiel.c at 7220 to 7237, loadsave/loadsave.c at 2814 to 2817, DieGildeAddOnServer/server.c at 2248 to 2270,
+Units/Error/Error.c at 876 to 881 and Units/m_alloc/m_alloc.c at 1441 to 1446, with each block ending its file so no
+compiled line number shifts and no pad line itself was touched. The define check confirms the three targets and their
+defines: server.dll has REBREW_SERVER and REBREW_LEGACY_SERVER_LAYOUT, Europa1400Gold.exe has REBREW_GOLD, and
+Europa1400Gold_TL.exe has none, with the generated flag files agreeing and the TL compile commands carrying only
+-DREBREW_ALLOW_NAKED=1, so no target that needs a pad loses one. All 287 `_dpad_` occurrences across src and stubs were
+confirmed to be definitions with no readers.
+Object evidence used the TL flags from the build's compile_commands. Before the edit all three define sets gave 60 pads
+and 24,348,001 declared bytes. With TL defines after the edit there are 0 pads and 0 bytes, and the symbol tables differ
+only by those 60 pads plus VC6 debug label renumbering while every `.text`, `.data`, `.rdata` and `.drectve` section is
+byte-identical, so no code changed. With REBREW_SERVER after the edit the 60 pads return with an identical name-to-size
+table and every section is byte-identical except `.debug$S`, whose only difference is the embedded object path between
+the before and after scratch directories; REBREW_GOLD gives the same result, so the server and Gold scaffolds preprocess
+identically.
+A controlled relink in .scratch/pad-guard/relink used the build-goldtl-audit object set twice, once with pre-edit copies
+of the eight translation units so the pads are present and once with post-edit copies. The control reproduced the
+existing image exactly at section level. `.data` VirtualSize falls from 47,657,188 to 23,308,324, a drop of 24,348,864,
+above the 24,347,953 minimum computed from source. `.data` VA stays 0x00282000, `.data1` moves to 0x018BD000
+(25,939,968) and `.rsrc` to 0x018BE000 (25,944,064), with `.data1` VirtualSize 2272 and `.rsrc` 1288 unchanged. The
+`.data` symbol count falls from 6152 to 6092, exactly sixty removed, and 118 surviving COMMON symbols move, which
+explains 1807 changed operand bytes in `.text` between the two images since absolute data addresses are baked into
+code. `.text` and `.rdata` sizes are unchanged and the import table still has 275 imports from 11 DLLs. Lint reports no
+errors with two pre-existing warnings, a stale provenance warning for GOLDTL.fcn_0043c640.c and the generated skill
+file mismatch. `build/` was not written and no CMake ran; the link used `rebrew build driver link` into scratch.
+The caveat from the upstream idea entry still applies: `rebrew data layout fill` appends new `_dpad_` definitions at
+file end after any `#endif`, so a later fill would reintroduce unguarded pads until the generator learns the guard.

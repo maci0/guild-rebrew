@@ -1438,7 +1438,9 @@ void __cdecl m_pool_stats(struct M_POOL_BLOCK* block, int* blocks, int* used, in
 		*avg_size = d;
 	}
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_10027490[5112];
 unsigned char _dpad_100288ab[141];
 unsigned char _dpad_10028940[428];
 unsigned char _dpad_10028b04[92];
+#endif

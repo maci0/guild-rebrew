@@ -7217,6 +7217,7 @@ int __cdecl gm_CountHouseUpgradesD(char* house)
 	}
 	return n;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_10029402[74];
 unsigned char _dpad_1002dcf4[84];
 unsigned char _dpad_1002dd48[152];
@@ -7233,3 +7234,4 @@ unsigned char _dpad_10139820[100];
 unsigned char _dpad_101398a0[81952];
 unsigned char _dpad_1014d8e0[589824];
 unsigned char _dpad_101dd8e0[2928];
+#endif

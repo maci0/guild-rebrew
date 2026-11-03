@@ -2245,6 +2245,7 @@ int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out)
 	*out = g_office_float_table[((int (*)[6]) g_office_role_templates)[entity[0x166]][1]][((int (*)[6]) g_office_role_templates)[role][1]];
 	return 1;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_10028b93[73];
 unsigned char _dpad_10028bf8[297];
 unsigned char _dpad_10028d24[121];
@@ -2266,3 +2267,4 @@ unsigned char _dpad_10029af0[196];
 unsigned char _dpad_101de9a0[260];
 unsigned char _dpad_101deb18[20058888];
 unsigned char _dpad_114ffe24[2507360];
+#endif
