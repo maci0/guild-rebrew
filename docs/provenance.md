@@ -23561,3 +23561,15 @@ Every other checked class came back clean: twenty distinct callees match the dec
 remaining reload-versus-register difference in the argument pointer is not a single proven edit. The first divergence is a scheduling difference in the zeroing of a
 row index before a push, which resynchronises three bytes later. The largest open window is a transfer block where the reference converts two float expressions into
 a call argument while the source calls a different routine there, and closing it needs the original expressions rather than a narrow operand fix.
+
+## 2026-11-03 — the gap diagnostic now picks the function's own text section, fixed upstream
+
+The defect this session hit on four rows is fixed in the upstream checkout with a regression test rather than worked around here. The gap diagnostic took the
+first text section of the compiled object, which is wrong whenever a translation unit emits more than one: a lead pad or filler becomes a section of its own
+ahead of the body, so the trace described padding and every window it reported was meaningless. The helper now counts the function symbols each text section
+defines and decodes the section that defines the most, falling back to the first text section when none defines any, which keeps the old behaviour for ordinary
+objects that have a single section. Two tests cover both paths with a synthetic object: one where a pad section precedes the function's section, and one where
+no section defines functions.
+Verified against the live tree: on the row that carried a 3008-byte lead pad the diagnostic previously reported the pad's instructions and a NOP as the first
+fault, and it now reports 873 object instructions ending at 0xaf0 with a push as the first event, which is the real body. The project environment was
+reinstalled from the checkout so the fix is what runs here, and the upstream commit is ef93c5a1 with the affected test file and the type check passing.
