@@ -23752,3 +23752,20 @@ The row is not close to matching by any narrow patch: its frame is 340 bytes sho
 off, distributed rather than a single missing block, so it needs the local layout and the divergent blocks rebuilt from the reference. One residual is recorded
 rather than guessed: a local is assigned from another local that is never set, where the reference reads the second dword of the block passed to a call, which
 needs a structure type rather than a scrape.
+
+## 2026-11-03 — production row: the whole body rewritten from the disassembly
+
+`0x483480` moves from 143 to 295 matched bytes with the object at 2620 against the 2711 extent and 18 relocations, after the body was rewritten from the
+disassembly. The rewrite corrected the layout facts that the old body guessed: the message buffer is 0x100 bytes declared first, since four printf sites form their
+buffer address while two pushes are pending, which puts the steady-state base where the reference has it; the shuffle uses one thirty-two entry array with a true
+swap rather than two arrays and a rotation; and the record passed to a routine is 0x24 bytes with fields at 0, 4, 8, 0xc, 0x10, 0x14, 0x18, 0x1c and 0x20,
+derived from both call sites and from that routine's own reads, with every store surviving because the record's address escapes.
+Four more facts were corrected. The random-modulus callee is cdecl with one argument, read from the first stack slot after saving a register, and the caller cleans
+four bytes; the bogus call that was not the callee is gone. A probe call's result is stored once and reused as a later routine's first argument, where the old body
+called it twice per site. The two queue-start passes are separate loops, of which only the first sets a flag and prints the start message while the second prints the
+shortage text. And two fields are read as zero-extended unsigned shorts, matching the reference's zeroed register and sixteen-bit move.
+The first 200 bytes are now largely aligned: the prologue and both probe calls are byte-identical, the mode load and both comparisons match in position and length,
+and the frame, message base, record offsets and shuffle array all match the reference layout. The remaining differences are branch-distance displacements caused by
+later size differences, two register-assignment differences, and block reordering that moves the success paths after the loops, which accounts for the ninety-one
+byte shortfall. No window opened. The next probe recorded is to keep the scan bound in the same register and recompute the entry from the loop index on the hit
+path so the jump distances match.
