@@ -423351,39 +423351,45 @@ measured_at = "2026-10-22T08:35:56+00:00"
 
 ["GOLD.0x004d8e20".binding_history.replacement]
 ["GOLDTL.0x0051af00"]
-size = 6464
+size = 6455
 note = "Goal72 io_Text-family output-buffer grammar expansion. Shared native diagnostic establishes family, not a unique overload identity; retain existing address name. Full6282 code bytes plus2 alignment,88-byte jump table and83-byte selector are retained. Existing933 source calls discard return; source contracts remain open. Complete native pair/effect/caller evidence .scratch/goal72/credit-deps/native-pairs.json, caller-matrix.json and REPORT.md. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
 name = "io_FormatTextBuffer"
-updated_by = "blocker"
-updated_at = "2026-11-02T15:09:22+00:00"
+updated_by = "test"
+updated_at = "2026-11-03T04:32:04+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0051af00.c"
 symbol = "_io_FormatTextBuffer"
 kind = "FUNCTION"
-status = "SIZE_MISMATCH"
+status = "STUB"
 blocker = "third callee-saved register unreachable: the loop index sits in esi where native saves ebx too (chkstk 0x3330 against 0x332c), so every inlined rep movs spills it and case-local k lands in edx"
 blocker_delta = 2108
 
 ["GOLDTL.0x0051af00".verification]
 source_hash = "1bc7857e396428ae5f3c753d6686d1ffa604540a538675e8ded126502154c5a7"
-reference_hash = "1a5a0fcc3c96b5e63a7087a546fe535837f30271f04358bc5d9b7ebc2ddb58ab"
-reference_size = "6464"
+reference_hash = "c6bd6d6ba884065835a337f9a38dbc2f121ae36caf3a92475315fbba33d9a8b4"
+reference_size = "6455"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "7abcb079717a76f6d448fa4f910ea5f9116c386c77fd93b0df08395841ecd51f"
+compiler_hash = "65f13e99c377985b8d6acea9b4d608e038366b42943f6d1475d7da3c79d5514d"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x51af00"
 context_hash = ""
 defines = "[]"
-input_hash = "2dfcf4dc760a6842750d81e337d3a596ab3b94514482c972db39f46674d8d475"
-status = "SIZE_MISMATCH"
+input_hash = "b4a938f366b862433133d65a97bf9af72978e8e20fe16463b59c989795f9ec4f"
+status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T14:55:47+00:00"
+measured_at = "2026-11-03T04:32:04+00:00"
 
 [["GOLDTL.0x0051af00".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-24T05:11:33.215469+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0051af00".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "STUB"
+changed_at = "2026-11-03T04:32:04.920086+00:00"
 updated_by = "test"
 ["GOLD.0x00517700"]
 size = 6455

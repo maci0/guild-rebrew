@@ -20876,3 +20876,35 @@ edits cannot pay off before that. sprintf remains unresolved across nine call si
 inside the declared D3DX8 external band and has no project definition; the prototype is declared as
 `int __cdecl sprintf(char*, const char*, ...)` and reported rather than renamed. Details in
 .scratch/004dcf50-findings.md.
+
+## 2026-11-03 — text format buffer extent corrected, body verified faithful
+
+`0x51AF00` keeps 888 matching bytes but its extent is corrected from 6464 to 6455, so the object now equals the
+reference extent exactly at 6455 with 135 relocations and status STUB. The repair is evidenced directly: the function's
+code and its selector table end at 0x51c836 and nine 0x90 bytes fill 0x51c837 to 0x51c83f before the next row at
+0x51c840, so the code extent is 0x1937. It ran through `rebrew binary repair-extents 0x51af00=6455 --sync-rows` with
+preview digest 8fe498984006afead8c8ee87e14b92fea2843ffa4a4994ed05708169f40575bd.
+No source change was kept and the file is byte-identical to its pre-work state at sha256 1bc7857e. The wall is confirmed
+rather than re-litigated: the third callee-saved register is unreachable, since native's prologue saves ebx, esi and edi
+at 0x15, 0x18 and 0x1b for a check stack of 0x3338 minus twelve, while this build saves only esi and edi, so every local
+displacement above the saved-register area is four bytes larger and matched runs collapse to accidental singles, of which
+the only ones at least twelve bytes long are 0x221 and the selector table with its tail padding at 0x18e3. The object's
+jump table at 0x188c and selector table at 0x18e4 both sit at native offsets.
+Body fidelity was verified against the listing and no defect was found, reusing the earlier receipt. The call multiset by
+project binding matches native exactly at 86 calls, including 23 sprintf, 22 fcn_0064d740, 10 and 9 of fcn_0042b2f0, 6 and
+6 of fcn_00517b90, 6 and 6 of fcn_0051e070, 4 of fcn_00657a73, 3 __isctype, 2 fcn_0064d530, 2 toupper and one each of
+0x500d60, fcn_004fe330, 0x50bc10, 0x517c00, 0x64eeec, 0x41d9e0 and 0x42e410, with the differing counts on fcn_0042b2f0
+and ReportClientMessage being block duplication and rotation rather than wrong callees. The dispatch byte map decoded
+from 0x51c7e4, base `%` with range 0x52, covers 22 cases C, S and s, i and I, T, w, f, v, F, u, U, b, B, e, E, N, a, D, G,
+r and `%` with default 0x15, and this build emits the same 0x52 range and an identical 83-byte map. The 'G' seven-copy
+chain with the 0x4800 split and suffix, the 'w' 0x8680b4 arithmetic with the 0x14a79c0 index, the 'D' call pair with the
+0x14a5450 read, the 'I' argument order, the 'r' memset and random-mod sequence with its 0x6b7f98 bound, the 'a' sprintf
+pair and the 'T' call were all checked and found faithful.
+One real divergence was found and reverted because it moved neither metric: native compares the buffer bound unsigned with
+`cmp ecx,0x17cb; ja` at six sites, while this build emits signed `jg` because the source casts `(int) strlen(...) + i`.
+Dropping the six casts emits `ja` but leaves the match at 888 and the object at 6455, so it was restored under the
+keep-only-improvements rule. A second measured experiment merged the two 'a' sprintf branches onto a shared insert, giving
+match 872 at object 6459, and was also restored. Unresolved callees without project definitions are 0x64d530, 0x64d740,
+0x64d41a, 0x64eeec, 0x64efb1 for __isctype, 0x64f367 for toupper and 0x657a73, all with declared prototypes, while all
+nine project callees resolve. The tree already held the faithful j2 skeleton at 888 rather than an earlier 1027 receipt,
+and that higher figure is accidental alignment rather than block-order fidelity.
