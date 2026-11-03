@@ -22405,3 +22405,24 @@ equal-aligned locals, since both orders place them the same way while the refere
 The first remaining divergence is at offset 227 against 230, and the shape is that the object runs about 180 bytes ahead through
 the S and s blocks and then ends about 70 bytes of code short, so the missing bytes are in the tail case bodies rather than in the
 prologue.
+
+## 2026-11-03 — d2 two: the aggregate levers refute themselves, one fidelity find recorded
+
+A fifth pass on `0x4DCF50` freed no slot; the source is restored byte-identically at 2345 of 8798 at frame 0x760 with 365 gap
+windows. The aggregate levers were tried from a base shape with the native head order so the two leading initialisations exist:
+shrinking the buffer to 0x1fc closes the frame to 0x760 and gives 1618 at 8818 with 309 windows, but the flag lands at 0x18
+where the reference has 0x24 and every head store is four bytes high; shrinking it to 0x100 gives 1616 at 0x664 with 318
+windows; making the pointer a four-byte struct member or an array element is byte-identical because the compiler scalar-replaces
+it; recomputing the pointer at its later use keeps the home and gives 1534 at 8829 with 312 windows; and making the head
+initialisations volatile gives 1659 at 8814 with 420 windows, worse.
+The reason the aggregate lever cannot work here is measured: the aggregate sizes already match the reference, so with the
+thirteen-word scalar block the whole aggregate block is merely shifted by four bytes, with the record at 0x244 against 0x240,
+two more at 0x28c and 0x294 against 0x288 and 0x290, the list at 0x380 against 0x37c, the selection at 0x3f4 against 0x3f0 and
+the work buffer at 0x478 against 0x474. No aggregate is oversized, so shrinking one changes the frame total without changing the
+scalar block. The cheapest routes to fewer windows, 309 for 727 matched bytes lost and 316 for 656 lost, are both dominated by the
+committed state.
+One real fidelity find is recorded for later. Source line 283 re-zeroes the float accumulator, and the reference has no
+counterpart for it: its only initialisation of that value is the head store at 0x4dcf74. Dropping the redundant assignment is
+worth 72 matched bytes and two fewer windows on the native-head base shape, so it should be applied as part of whichever change
+next makes that shape competitive rather than on its own, since the native-head shape is currently 728 matched bytes below the
+committed state.
