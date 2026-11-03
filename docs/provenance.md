@@ -20705,3 +20705,34 @@ recommendation is to stop treating the loop regions as the lever and work the 53
 first fixable case is making the seven-loop use native's index form. Backups in .scratch/5ba910/ with g_p1.c as the kept
 state, base.c as the baseline and g_LEDGER.md as the probe ledger. A transient CatalogScanError from `rebrew diff`
 against another session's d2 file recovered without intervention and did not affect any number above.
+
+## 2026-11-03 — io_AppendText copy forms and a wrong extent
+
+`0x519190` rises from 681 to 684 matching bytes and its extent is corrected from 7536 to 7527, so the object now equals
+the reference extent exactly at 7527 with 79 relocations and lint clean; status is STUB because 684 of 7527 is below
+the sixty percent threshold. Two edits landed. The case 'f' join copy became `memmove` instead of `memcpy`, matching
+native's call to 0x64d740, where the object had inlined a `rep movs`; that is worth three matched bytes. And the local
+prototype of fcn_00517c00 took an `unsigned char` second argument, matching the owning definition in
+src/Develop/Unassigned/GOLDTL.fcn_00517c00.c and the listing, which clears the C4047 and C4024 diagnostics without
+changing bytes. Reverted with measurements: the else-branch copy plus length became `strcpy` for 588 at object 7515; a
+global `memcpy` to `memmove` sweep cost the local equality case and gave 761 from 807; recomputing the carry-block value
+gave 700; replacing the fail label and goto with `return -1` gave 753; a manual digit loop for case 'r' gave 735; case
+'S' as `memmove` gave 710; and five declaration-order permutations produced byte-identical objects.
+The extent repair is evidenced directly: the function's code ends at 0x51aef6 and nine 0x90 bytes fill 0x51aef7 to
+0x51aeff before the next row at 0x51af00, so the true extent is 0x1D67 or 7527. The earlier nine-byte size difference
+was that padding, and the object's own section is already 0x1d70 with identical padding, so the recorded extent could
+never be reached from C. The repair ran through `rebrew binary repair-extents 0x519190=7527 --sync-rows` with preview
+digest 81abfa4fb7116091bb5a6da4e73878f48467184d47c6e1735534c622d70b85ae.
+Walls confirmed and recorded: the frame immediate is unreachable because a `work[]` sweep from 0x17c8 to 0x17d0 yields
+only 0x31f0 or 0x31f8, since the eight-byte-aligned aggregate rounds to eight while the text buffer stays at esp+0x260;
+`/O2` always merges this function's minus-one returns into one epilogue, so native's four inline guard epilogues and one
+fail block cannot be reproduced from C, and the earlier blocker text claiming `and esp,-8` is never emitted is stale
+because the first seven bytes do match; and the stack and register layout differ with native's ap at 0x10, v14 at 0x20,
+v10 at 0x1c, v1c at 0x28, v30 at 0x38 and v2c at 0x3c against this build's ap at 0x18, v14 at 0x2c, v10 at 0x24, v1c at
+0x30, v30 at 0x3c and v2c at 0x38, while the buffers agree at text 0x260, work 0x1a30, abuf 0xa0 and rbuf 0x80, which
+makes the slots liveness-driven rather than declaration-order driven. The switch index table at 0x1d14 to 0x1d67 is
+byte-identical with all 26 index-to-case mappings matching, and the case layout follows source order except that the
+optimizer places case 'F' after 'm'. Unresolved callees without project definitions: fcn_0064d530, fcn_0064d740,
+fcn_0064d41a, fcn_00657a73 and fcn_0064eeec, plus the CRT toupper, isdigit and string helpers, and fcn_004fe330 has only
+a GOLD definition. One tool defect was found: `rebrew diagnose gap 0x00519190 --json` crashes with a TypeError about a
+bytearray used as a dict key at rebrew/gap_trace.py:143, and that failure belongs upstream.

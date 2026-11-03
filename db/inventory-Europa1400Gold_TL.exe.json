@@ -69108,8 +69108,17 @@
   },
   {
     "va": 5345680,
-    "size": 7536,
-    "name": "fcn.00519190"
+    "size": 7527,
+    "name": "fcn.00519190",
+    "extent_history": [
+      {
+        "old_size": 7536,
+        "new_size": 7527,
+        "reason": "reviewed extent: the function's code ends at 0x51aef6 and nine 0x90 padding bytes fill 0x51aef7..0x51aeff before the next row at 0x51af00, so the code extent is 0x1D67 = 7527 rather than the inventoried 7536",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T04:11:37.046559+00:00"
+      }
+    ]
   },
   {
     "va": 5353216,

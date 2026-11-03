@@ -422904,7 +422904,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005ba910".verification]
-source_hash = "22ae9418b7f8ee3fa4397330ae3fb010df5b3e5bb024ceee50ae530e96d1eceb"
+source_hash = "2afccbc4eb6630b519afe372efe36b6082936642dd35d35dbddaa9a10451c29d"
 reference_hash = "5011dfe5394eca8b074b60d11c0199028276af8cc7256e0aa95e5ad4751f9ad2"
 reference_size = "11948"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -422915,10 +422915,10 @@ module = "GOLDTL"
 va = "0x5ba910"
 context_hash = ""
 defines = "[]"
-input_hash = "e858ef43ca4b0d0b447328339811208e38ade604837e1e06653d8eb5ad8b76b4"
+input_hash = "d33b159b9695548f564791bd7da8bf99c147fe20563d6f8b693da5d14e8839ec"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T04:03:04+00:00"
+measured_at = "2026-11-03T04:11:43+00:00"
 
 [["GOLDTL.0x005ba910".status_history]]
 old_status = "STUB"
@@ -423078,21 +423078,21 @@ measured_at = "2026-10-22T08:36:00+00:00"
 
 ["GOLD.0x005aacd0".binding_history.replacement]
 ["GOLDTL.0x00519190"]
-size = 7536
+size = 7527
 note = "Goal63 native mapping. io_Text-family GUI text expansion and append. Resolves a text ID or literal, expands percent/dollar/brace markup in a 0x17d0-scale temporary buffer, appends to the selected text-box storage and schedules redraw. Exact original identifier is not unique from the repeated io_Text diagnostics. Evidence: 0x519ce3 -> io_Text(): too many icons before redraw!. retain fcn_00519190; role mapping only. Gold counterpart GOLD.0x00515990, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 99.793176 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
 name = "io_AppendText"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00519190.c"
 symbol = "_io_AppendText"
 kind = "FUNCTION"
-updated_by = "rename"
-updated_at = "2026-10-31T08:54:28+00:00"
-status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-11-03T04:12:21+00:00"
+status = "STUB"
 blocker = "prologue wall: native push ebp;mov ebp,esp;and esp,-8 is never emitted by /O2 with this profile (15-construct matrix), so byte 0 differs; slots solved via aggregate (text esp+0x25c vs 0x260, +4 = the alignment slack); frame honest 0x31ec vs native 0x31f4"
 
 ["GOLDTL.0x00519190".verification]
-source_hash = "94585985508df1c51bd759896891649d63ccde90c342891aaab3c12a1649236b"
-reference_hash = "3066b0a5b202927dbba2b64e11fbe7ae60c09679647b57d48273a92c99e6de7e"
-reference_size = "7536"
+source_hash = "3027df3de31b0f239f9c59005c81bc7cec1e21aac4ba146ff125b724ac4138cc"
+reference_hash = "283201a1d2df5b8c13d4f629ea92321371b62b9ddb9ed52e57a428bb3f3d01b6"
+reference_size = "7527"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 compiler_hash = "65f13e99c377985b8d6acea9b4d608e038366b42943f6d1475d7da3c79d5514d"
 toolchain = "(default)"
@@ -423101,10 +423101,10 @@ module = "GOLDTL"
 va = "0x519190"
 context_hash = ""
 defines = "[]"
-input_hash = "63d7c63982432641ec5cb64292f3b4c7306087a518b10f5dd4674961e20a7aed"
-status = "SIZE_MISMATCH"
+input_hash = "0b395382eeefd3b90a47bc63ef696458993619b098dd56441bed7ca3aad39298"
+status = "STUB"
 writer = "test"
-measured_at = "2026-11-03T04:02:02+00:00"
+measured_at = "2026-11-03T04:12:21+00:00"
 
 [["GOLDTL.0x00519190".status_history]]
 old_status = "STUB"
@@ -423122,6 +423122,12 @@ updated_by = "verify"
 old_status = "COMPILE_ERROR"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-21T13:22:39.565620+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00519190".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "STUB"
+changed_at = "2026-11-03T04:12:21.346406+00:00"
 updated_by = "test"
 ["GOLD.0x00515990"]
 size = 7536

@@ -13,7 +13,7 @@ void __cdecl d2_SetForm(char*, int, int);
 int __cdecl fcn_00500d60(int, char*);
 int __cdecl fcn_004fe330(char*, int);
 int __cdecl fcn_0050bc10(int, int, char*);
-int __cdecl fcn_00517c00(int, char*, int, char*);
+int __cdecl fcn_00517c00(int, unsigned char, int, char*);
 int __cdecl fcn_00517b90(char*, int, char*);
 int __cdecl fcn_0051e070(void);
 char* __cdecl fcn_0064d41a(char*, char*, ...);
@@ -444,7 +444,7 @@ fmt:
 			v08 = (int)strlen(S.text) - text_index + 1;
 			v24 = (int)strlen(S.work);
 			memmove((char*)v0c + v24, S.text + text_index, v08);
-			memcpy((char*)v0c, S.work, v24);
+			memmove((char*)v0c, S.work, v24);
 		} else {
 			fcn_00657a73(digit, nbuf, 10);
 			*(short*)sbuf = *(short*)0x6a238c;
