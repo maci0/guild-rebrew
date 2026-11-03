@@ -22445,3 +22445,24 @@ ebx and a reused local in esi where this build keeps the index in esi and spills
 One diagnostic is recorded as a trap rather than a result: compiling at /O1 does reproduce the reference's x87 form and drops the
 window count to 51 with a match of 796, but the object shrinks to 6544, so it is a false realignment rather than the right flags,
 and the row's own flag set stays as configured.
+
+## 2026-11-03 — text formatter: no missing tail bodies, one missing call
+
+The tail-body hypothesis on `0x51AF00` is refuted, and the real structural deficit is identified. The three reference-only runs
+are not missing case bodies: the one at 0x3fd is the S and s grammar-state sprintf block, which the reference emits inline and
+this build places at another offset; the run at 0xa13 is the shared strlen, memmove and copy tail spanning two cases, which this
+build reaches through a merged copy with the two length calls reordered; and the run at 0x188a is not code at all, being the
+switch jump table's 22 dwords plus the selector table and fill, shifted because real code is 0x47 bytes shorter. The tail letter
+bodies were measured per case and already agree, with u, U, b, e and E at 0x49 on both sides, B at 0x58 on both sides, and three
+more exact, so no tail body is missing and the plus and minus pairs are one shared copy tail attributed to different case starts.
+The structural difference is a call count: the reference makes ten calls to fcn_0042b2f0 and this build makes nine, the missing one
+being the second call of the grammar-state-zero if and else. This compiler if-converts the pair because the pointer lives in esi
+here while the reference keeps it at [esp+0x20] with the kind at [esp+0x24] and the length in esi, and this build has the kind at
+0x20 and the length in edi.
+Three shapes were measured and reverted. Passing the branch result through a local is byte-identical and the call stays merged.
+Writing the state zero case as two separate ifs does produce the tenth call, with the object at 6411, four windows closed, the
+code ending at 0x1910 and the prologue intact at 0x332c, but it tests the same condition twice, which the reference does not, and
+the match falls by four. Making the pointer volatile gives 850 at 6503 with six windows closed but moves the check-stack immediate
+to 0x3334, which violates the pinned frame. The 71-byte code deficit is therefore the lost duplicate call plus tail-merge
+placement rather than missing bodies, and the lever would be getting the pointer into memory while holding the immediate at
+0x332c, which volatile does not do.
