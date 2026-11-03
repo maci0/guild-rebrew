@@ -198,13 +198,12 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 				f = (float) bit * SF(slot + 0x60) * (float) delta +
 					SF(slot + 0x64);
 				SF(slot + 0x64) = f;
-				r = (int) f;
 				if (SB(slot + 0x6d) & 2) {
-					SI(slot + 8) -= r;
+					SI(slot + 8) -= (int) f;
 				} else {
-					SI(slot + 8) += r;
+					SI(slot + 8) += (int) f;
 				}
-				SF(slot + 0x64) = f - (float) r;
+				SF(slot + 0x64) = f - (float) (int) f;
 
 				/* cursor step, retried until the cursor lands in range */
 	adv:
@@ -581,13 +580,12 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 	bit = (flags >> 1) & 1;
 	f = (float) bit * SF(st + 0x38) * (float) delta + SF(st + 0x3c);
 	SF(st + 0x3c) = f;
-	r = (int) f;
 	if (SB(st + 0x2d) & 2) {
-		SI(st + 0xc) -= r;
+		SI(st + 0xc) -= (int) f;
 	} else {
-		SI(st + 0xc) += r;
+		SI(st + 0xc) += (int) f;
 	}
-	SF(st + 0x3c) = f - (float) r;
+	SF(st + 0x3c) = f - (float) (int) f;
 
 	sfr = SP(st + 0x40);
 	flags = SB(st + 0x2d);
@@ -659,7 +657,7 @@ adv2:
 	SI(st + 4) = SI(st + 8);
 	SI(st + 0xc) = QI(WR(cur), 0) -
 		((SB(st + 0x34) >> 1) & 1) - 1;
-	goto cl2;
+	goto cl2b;
 fwd2:
 	if (cur < cnt - 1) {
 		if (!(prev < cnt - 1)) {
@@ -677,7 +675,7 @@ fwd2:
 		}
 		SI(st + 0xc) = SI(st + 0xc) - QI(sfr + SI(st + 4) * 0x58, 0);
 		SI(st + 4) = SI(st + 4) + 1;
-		goto cl2;
+		goto cl2b;
 	}
 
 reset:
@@ -687,20 +685,20 @@ reset:
 			SI(st + 4) = SI(st + 8);
 			SI(st + 0xc) = QI(WR(cur), 0) -
 				((SB(st + 0x34) >> 1) & 1) - 1;
-			goto cl2;
+			goto cl2b;
 		}
 		SI(st) = SI(st) - 1;
 		fs->sb = 1;
 		SI(st + 4) = SI(st);
 		SI(st + 0xc) = QI(sfr + SI(st + 4) * 0x58, 0) - 1;
-		goto cl2;
+		goto cl2b;
 	}
 	if (flags & 1) {
 		SB(st + 0x2d) = (unsigned char) (flags | 2);
 		SI(st + 4) = SI(st + 8);
 		SI(st + 0xc) = QI(WR(cur), 0) -
 			((SB(st + 0x34) >> 1) & 1) - 1;
-		goto cl2;
+		goto cl2b;
 	}
 	SI(st + 0xc) = off - QI(WR(cur), 0);
 	SI(st + 4) = 0;
@@ -710,7 +708,11 @@ reset:
 			SB(st + 0x2d) |= 0x10;
 		}
 	}
-	goto cl2;
+
+cl2b:
+	SI(st + 8) = fcn_004321a0(*(ClampBlk*) (st + 0x2c),
+		SI(st + 4), 0, cnt - 1, cnt);
+	goto place2;
 
 place2:
 	if (fs->sb) {

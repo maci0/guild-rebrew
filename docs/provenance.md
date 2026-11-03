@@ -22642,3 +22642,20 @@ and that displacement, so they cannot close while the frame differs, and the oth
 register test against a compare with a zero register, one signed-jump choice after a byte test, two store orderings, two extra
 additions from address association, and one tail adjustment. Five probes were byte-identical and reverted, and the frame probe that
 would close it measures 758 at 12123 with 586 windows, which is not a keeper.
+
+## 2026-11-03 — dispatch row: the second clamp site and the per-arm conversions
+
+`0x432480` moves from 206 to 231 matching bytes with the object at 4970 against a stored extent of 4850, and two reference call
+sites are restored. The second half's clamp at 0x433609 is its own site rather than a shared one, taking the same arguments as the
+first, with the clamp block, the slot, zero and the count bounds, and it is reached both by fallthrough from the prune and reset
+paths and by the forward jump when the low flag is set, so a labelled copy was added and the forward jump, prune and reset paths
+were routed to it while the advance paths stay on the first site. That gives 213 at 4968 with deletions falling from 94 to 85.
+The clock carry converts the float inside each arm in the reference, so the conversion appears twice per half where the source
+hoisted one conversion and emitted a single call. Rewriting both carries to convert in their branches and to convert back in the
+fraction update restores the two missing call sites and the first half's carry becomes byte-identical in shape, giving 231 at 4970.
+The cost is recorded: drift windows rise from one to five and deletions from 85 to 97, and the trade is kept because a missing call
+site is a defect rather than an alignment difference. A hybrid touching only the first half measures 218 at 4963 with three
+windows and 91 deletions, and was reverted.
+Every direct call target was checked against the reference order and all agree, covering the entity, clamp and conversion helpers
+and the several per-half routines, so there is no wrong target on this row. The first divergence remains the prologue stack slot,
+with the reference frame at 0x120 and this build at 0xe4.
