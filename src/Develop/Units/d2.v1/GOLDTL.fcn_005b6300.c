@@ -135,7 +135,7 @@ int __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c4eb0(int);
 void __cdecl fcn_004c4ef0(int);
-void __cdecl fcn_004c5150(int, int, int, int);
+void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_004727a0(int, int);
 void __cdecl fcn_00519190(int, ...);
@@ -155,7 +155,7 @@ int __cdecl fcn_005373e0(int, int);
 int __cdecl fcn_004c53b0(void);
 int __cdecl fcn_00505d00(int, void*);
 int __cdecl fcn_005b5750(void);
-int __cdecl fcn_0050b750(int, int);
+int __cdecl fcn_0050b750(int, char);
 extern double g_6640e8;
 float __cdecl fcn_0050b8d0(unsigned char*, int, int, int);
 int __cdecl fcn_00526010(int, int);
@@ -393,7 +393,7 @@ L69b6:
 				goto L6cb7;
 			y = (int) e / f.v38;
 			x = y % 3;
-			t = fcn_0050b750((int) e, 0x773d75);
+			t = fcn_0050b750((int) e, *(char*) 0x773d75);
 			if (fcn_00526010((int) ((x * 0x21c) + 0x7f4ca0), t) == 0)
 				goto L6cb7;
 			if (f.v30 > 0) {
@@ -403,8 +403,8 @@ L69b6:
 					e = *(char**) f.v10;
 					if (e != 0) {
 						fcn_004c4eb0(0x6ac2bc);
-						fcn_004c5150(G(e + 4), -1, 0x773d75,
-							fcn_0050b750(y, 0x773d75));
+						fcn_004c5150(G(e + 4), -1, *(char*) 0x773d75,
+							fcn_0050b750(y, *(char*) 0x773d75));
 						fcn_004c54c0(G(0x7f4ca4 + x * 0x21c), G(e + 4), x, 0);
 						fcn_004c4ef0(0x6ac2bc);
 					}
@@ -413,12 +413,12 @@ L69b6:
 			}
 			if (f.sel.a08 != 0) {
 				fcn_004c4eb0(0x6ac2b0);
-				fcn_004c5150(G(f.sel.a08 + 4), -1, 0x773d75,
-					fcn_0050b750(y, 0x773d75));
+				fcn_004c5150(G(f.sel.a08 + 4), -1, *(char*) 0x773d75,
+					fcn_0050b750(y, *(char*) 0x773d75));
 				fcn_004c54c0(G(0x7f4ca4 + x * 0x21c), G(f.sel.a08 + 4), x, 0);
 				fcn_004c4ef0(0x6ac2b0);
 			}
-			fcn_004c5150(G(0x7f4ca4 + x * 0x21c), -1, 0x773d75, fcn_0050b750((int) e, 0x773d75));
+			fcn_004c5150(G(0x7f4ca4 + x * 0x21c), -1, *(char*) 0x773d75, fcn_0050b750((int) e, *(char*) 0x773d75));
 		}
 L6cb7:
 		if (G(0x100f1dc) == -1)
@@ -575,7 +575,7 @@ L6fa2:
 				e = fcn_0064d228();
 				fcn_004727a0(f.rows[k].a58, 2);
 				f.v28 = fcn_00472250(f.rows[k].a58, 2,
-					io_AppendText(0x1a22, (int) e, f.row[0x230] + 0x20d));
+					io_AppendText(0x1a22, (int) e, (unsigned char) f.row[0x230] + 0x20d));
 			} else if (f.rows[k].a20 == 1) {
 				fcn_004727a0(f.rows[k].a58, 2);
 				io_AppendText(0x6811b0);

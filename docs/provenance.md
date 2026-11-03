@@ -22108,3 +22108,25 @@ through the locked writer, because the only removal path is the orphan prune and
 once, most of which are legitimate identity-only data rows whose definitions live in generated stubs outside src. The gap is
 logged in the upstream checkout's docs/IDEAS-GUILD.md with a request for store, module and VA filters on the prune. Until that
 lands, the row stays visible in the store and the next person should not test a GOLD VA against a GoldTL file.
+
+## 2026-11-03 — d2 sixth row: two byte-width repairs, and a third held back
+
+`0x5B6300` now measures 559 of 5503 against native 5499 with 36 relocations and status SIZE_MISMATCH, after two repairs that
+are kept and one finding that is not, because its claimed measurement could not be reproduced. The first repair widens a row
+byte to unsigned before adding a constant: the call at line 578 passed `f.row[0x230] + 0x20d` where the reference loads the
+byte with `xor eax,eax; mov al,[row+0x230]`, so the expression is now cast to unsigned char and the match rises from 596 to
+606 with the object unchanged at 5495. The second passes the byte value at four call sites instead of its address: the
+reference loads the byte at 0x773d75 with `mov dl,` and `mov al,` forms, so the calls now pass `*(char*) 0x773d75` and the
+parameters are declared `char` on fcn_0050b750 and fcn_004c5150, which reproduces the partial-byte loads in the object and
+closes the 93-byte drift window at 0x8a0 to 0x8fd, taking the drift windows from eight to six while the object moves from
+5495 to 5503.
+The third repair is a proven semantic mismatch that is deliberately not landed. Three calls pass `G(0x7f4ca4 + x * 0x21c)`
+as the table record while the reference indexes the table by `*(unsigned short*)0x774970 * 0x21c`, keeping the third argument
+as the modulo value; that is the wrong record, so the reads and writes in those calls target a different slot than native.
+The reported measurements were a drop from 596 to 493 with the object at 5529 and drift windows from eight to three, on the
+baseline before the two kept repairs. Applying the same edit re-measured here at 384 with the object at 5617 and five drift
+windows, and on top of the two kept repairs at 559 for the kept pair and 384 with the index change included, so the reported
+figures do not reproduce from the source as described and the exact shape used for that measurement is unknown. The finding is
+therefore recorded as an open semantic defect with both sets of numbers rather than landed on a measurement that cannot be
+reproduced, and the next pass should reproduce the 493-at-5529 shape before keeping it. The packet field split, the plus one
+record offset and the existing d2_ShowTxt and fcn_0050b8d0 call forms were left untouched.
