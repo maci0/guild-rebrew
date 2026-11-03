@@ -423546,7 +423546,7 @@ blocker = "Full body reconstructed from the native listing (frame 0x6f8, saved e
 blocker_delta = 943
 
 ["GOLDTL.0x0046c5a0".verification]
-source_hash = "1b14b85bf833b9877b271e129b92b1374b5a39f17173c2b57ac0d3e4532effb9"
+source_hash = "1cc21f43bd260e723d677cfd9941b5f92c50f4fa29a35898feee01fc59bdc1fa"
 reference_hash = "d8be1a122f5c6a5df52cb4c68974ebc029ae7da682bc2da59ba22e24636ba23e"
 reference_size = "6080"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423557,10 +423557,10 @@ module = "GOLDTL"
 va = "0x46c5a0"
 context_hash = ""
 defines = "[]"
-input_hash = "20ea4b5a48d6456c3c567f4aa2d51c3c06384de92f26288bbbbd0edb6296ed49"
+input_hash = "5a7b6917abbcaed019ff41f20e83b1b7f68701ae04932281d676f40c201b4a7b"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T11:13:41+00:00"
+measured_at = "2026-11-03T12:21:38+00:00"
 
 [["GOLDTL.0x0046c5a0".status_history]]
 old_status = "STUB"
@@ -468817,7 +468817,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x004a9b20".verification]
-source_hash = "8ba79741647bf001f541e42321e045573f400ec11235d7f04caa697a7abd8dc7"
+source_hash = "6e2aa518558684d729113d052305339fdb324f9c64ea0dc9a7b918fdd50b300a"
 reference_hash = "c70c9136d59368371491607e0946daee89870b720ebb9871158c499acbfb36c0"
 reference_size = "1440"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -468828,10 +468828,10 @@ module = "GOLDTL"
 va = "0x4a9b20"
 context_hash = ""
 defines = "[]"
-input_hash = "4f4520aa99281db67b28c814fc7444f5a4c3c459c0606db73019eb5df9c64c41"
+input_hash = "6931dda3fad20c963c84466a01d69e9f82a1218439c70ad240ea27f4573d2a59"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T12:06:54+00:00"
+measured_at = "2026-11-03T12:21:22+00:00"
 
 [["GOLDTL.0x004a9b20".status_history]]
 old_status = "STUB"
@@ -587779,9 +587779,9 @@ name = "fcn_004dcf50"
 symbol = "_fcn_004dcf50"
 kind = "FUNCTION"
 updated_by = "blocker"
-updated_at = "2026-11-03T07:29:20+00:00"
+updated_at = "2026-11-03T12:21:57+00:00"
 status = "STUB"
-blocker = "allocator wall, narrowed to one fact: the p38 pointer is not address-taken and is not a declaration-scope artifact, it is stack-homed because its value stays live across regions where the allocator reuses ebx. Baseline object evidence: stored once at 0x197 mov [esp+0x18],ebx, ebx reused as a counter at 0x4fa, 0x54d, 0xab0, 0x148d, 0x193c and 0x1c6d, reloaded at 0x16b9 and 0x1c8a; native pins p38 in ebx at 0x4dd0f2 and never rewrites ebx. The value is genuinely read at source lines 813-820, so the live range is real. Deferring the first load to the first use, or to after the p48 guard, moves the home but does not remove it, and neither does deferring p34, p3c, p40 or p44; all keep the frame at 0x764 once native leading initialisers are present. Removing the home requires the loop region to stop reusing ebx, which is allocator shape rather than source-level load placement. Do not retry load deferral, register hints, or statement reordering: measured negative across nine variants"
+blocker = "the thirteenth stack slot's POSITION is the blocker, not the frame total. Baseline has twelve live words at V 0x10..0x3c with p38's home at 0x18, message at 0x40, table at 0xb0 and record at 0x240, which reproduces every native aggregate base at frame 0x760. Adding the native head initialisations makes thirteen live values, and the thirteenth, p38's home, is placed between the message and the table at V 0xb0, pushing the table to 0xb4 and the record to 0x244, so the whole aggregate block shifts by four whatever the frame total is. Shrinking a buffer therefore cannot fix it, and no aggregate is oversized. Dropping the didFolter head store is the only move that restores 0x760 and it removes a native initialisation, so it is not admissible. p38 never gets a register here because ebx is reused as a loop counter in the selection fill, the filter, the float accumulation and the copy loops; freeing it needs those loop shapes changed, not a frame give-back. Measured: baseline 2345 at 8798/0x760; native head 1617 at 8818/0x764; native head without the redundant float re-zero 1689; that plus removing an unused padding local 1887 at 8804, the best native-head result; without the didFolter head store 1635 at 8811/0x760 with the first 21 bytes matching native exactly; and the best native-head shape plus a smaller buffer 1888 at 8804 with the first fault moving from offset 2 to 10 because the record base is 0x244 against native 0x240"
 
 ["GOLDTL.0x004dcf50".verification]
 source_hash = "2110c3a7878658eb64eb54753a63de020167a3ae387b91ebbe0aec327da4a06d"

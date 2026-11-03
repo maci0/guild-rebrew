@@ -22776,3 +22776,24 @@ using a register test where the reference compares memory and reloads per branch
 shared epilogue with a six-byte jump where the reference has a local two-byte jump, worth four bytes. The next pass should decide
 between the multi-region save-insertion problem and re-deriving the source from these per-site differences; three shapes that tried
 the second direction measured 297 at 2804, 390 at 2736 and unchanged respectively.
+
+## 2026-11-03 — d2 two: the blocker is where the thirteenth slot lands
+
+`0x4DCF50` keeps 2345 of 8798 with frame 0x760 and an unchanged source, and the attempt to fit the native head order with a four-byte
+give-back came back negative with a sharper explanation than the row had. The frame total is not the obstacle: the position of the
+thirteenth stack slot is. The committed baseline has twelve live words from V 0x10 to 0x3c with the pointer's home at 0x18, the
+message at 0x40, the table at 0xb0 and the record at 0x240, which reproduces every native aggregate base at frame 0x760. Adding the
+native head initialisations makes thirteen live values, and the thirteenth, the pointer's home, lands between the message and the table
+at V 0xb0, pushing the table to 0xb4 and the record to 0x244, so the whole aggregate block shifts by four bytes regardless of the frame
+total. Shrinking a buffer therefore cannot move that word, and no aggregate is oversized: every baseline aggregate base already equals
+the native one, and the only slot-freeing move is dropping the didFolter head store, which removes a native initialisation and is not
+admissible.
+Measured shapes, each built and restored: the baseline at 2345 with frame 0x760; the native head at 1617 with frame 0x764; the native
+head without the later redundant float zeroing at 1689; that shape plus removing an unused padding local at 1887, the best native-head
+result; the native head without the didFolter store at 1635 with frame 0x760 and the first twenty-one bytes matching native exactly;
+and the best native-head shape plus a smaller buffer at 1888 but with the first fault moving from offset two to offset ten because the
+record base is 0x244 against the native 0x240. Three give-back classes were eliminated by inspection: no aggregate is oversized, the
+message structure has no usable padding member and the record and table only carry the rounding bytes of a 45-byte copy, and scalar
+live-range work does not free a slot. The pointer never receives a register here because ebx is reused as a loop counter in the
+selection fill, the filter, the float accumulation and the copy loops, so freeing it needs those loop shapes changed rather than a frame
+give-back.
