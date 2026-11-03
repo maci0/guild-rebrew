@@ -21769,3 +21769,13 @@ it twice with two- and six-byte forms, while this build materialises both stores
 is exactly the six-byte excess. Everything from 0x00 to 0x13b and the message and dispatch blocks match under relocation.
 Attempts to move the zero-store encoding were reverted after failing: goto and natural forms, pointer, integer and shared
 zero variants, a packed struct, and store-order variants.
+
+## 2026-11-03 — camera row: the scratch-variable clobber removed
+
+`0x5BA910` keeps 750 of 12136 with the object exactly at the extent and 44 relocations, and one correctness repair landed
+with no positional cost. The row's listed scratch field was being overwritten with the result of a call and then read again
+later as if it still held the loop record: at the site near line 1376 the code did `idx = fcn_00502cd0(...)` and then used
+`*(int*)(idx + 2)` after the loop, while the reference keeps the record pointer live and uses the call result separately.
+The result now goes to `h` and the later read uses `h`, so the record pointer survives. The object size and the match count
+are unchanged by the repair, so this is a behaviour fix with no byte trade. Attempts to change the surrounding frame or
+loop shape were not made in this pass.
