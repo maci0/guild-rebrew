@@ -21802,3 +21802,13 @@ local checkout of the same version, so the declared pin described a toolchain th
 install is an explicit tooling-development opt-in recorded earlier today; a `uv sync` will replace it with the released
 6.16.0 wheel, which is the reproducible state, while the local checkout stays the place where the three tooling repairs from
 tonight live. Nothing about the target or the compiler profile changes with this bump, so no verdict was refreshed.
+
+## 2026-11-03 — where the remaining text actually is
+
+The uncovered-function candidate list holds 873 entries and 275,248 bytes, which looks like the largest remaining
+opportunity until the addresses are split by band. Of those, 864 entries and 273,857 bytes sit inside 0x5e0000 to 0x64ffff,
+the statically linked D3DX8 range that the project already treats as external, so they are library code whose reconstruction
+is not game recovery and whose bytes are accounted through library attribution rather than C. Only nine candidates and 1,391
+bytes fall outside that band, the largest being 306, 270 and 209 bytes at 0x4623c0, 0x4615b0 and 0x4631b0. The practical
+consequence is that the road to a byte-identical text section runs through the 969 size-mismatched rows already bound to
+source, not through new function discovery, and the largest single gaps are concentrated in a handful of large rows.
