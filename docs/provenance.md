@@ -22205,3 +22205,27 @@ not move the pair, and volatile on the selection variable changes the frame and 
 that the slot pick follows the initialiser store order for this pair, and that the surrounding pool is shifted by other register
 allocation differences, with the object spilling a value to the 0x18 slot that the reference keeps elsewhere. The next
 direction is therefore register pressure on the mask and selection variables rather than more slot levers.
+
+## 2026-11-03 — palette row: frame reproduced through the project's existing fill idiom
+
+`0x46C5A0` moves from 376 to 440 matching bytes with the object at 6108 against native 6080, 48 relocations, status
+SIZE_MISMATCH, and the kept shape reproduces the reference frame exactly: the scalar block is 0x78, the six array offsets sit
+at minus 0x178, 0x1f8, 0x2f8, 0x3f8, 0x5f8 and 0x6f8, the palette local is at minus 0x58 and the frame is 0x6f8. The cost is
+recorded: gap events rose from 526 to 567 and the object grew from 6072 to 6108, so this is a frame and offset win taken with a
+window-count loss.
+Two findings decide how it was built. The align-up prelude is not reachable from C, which the pass established with eleven
+probes, direct array and destination through a pointer, size as a local, both as locals, volatile size, unsigned short size,
+pointer parameter, integer cast of a pointer, global pointer, runtime size, and the /O1, /Ox and /Od builds, all of which emit
+`shr ecx,2` with `rep stosd` and `and ecx,3` with `rep stosb`, never the `lea` with a times-three, the mask, the subtraction,
+the branch and the three store forms; that matches the wall already recorded in docs/codegen-walls.md section 6b, and the
+project already carries the idiom as inline assembly in nine GOLDTL files, so the same pattern was used here with block-scope
+destination and size. Second, six separate arrays cannot produce the reference order with this allocator, because equal-aligned
+local arrays are placed size-sorted rather than in declaration order: six equal 0x100 arrays land bottom-up in the order 0, 5,
+1, 4, 2, 3 and mixed sizes put the 0x200 lowest and the 0x80 highest, while the reference has a 0x100 array below the 0x200
+one. The kept shape therefore uses one struct whose members are ordered 0x100, 0x200, 0x100, 0x100, 0x80 and 0x100, which
+totals 0x680 and reproduces every native offset.
+The first divergence is still offset 12 because the reference saves esi and edi at entry and defers pushing ebx to 0x46c617,
+while this build pushes ebx at entry and uses esi as the zero register, with the slot in ebx where the reference keeps it in esi.
+That is register allocation rather than frame, and the next lever recorded is the scalar declaration order and slot permutation,
+since the reference zeroes minus 8, minus 0x28, minus 0x64, minus 0x18, minus 0x1c and minus 0x60 where this build zeroes minus
+8, minus 0x24, minus 0x64, minus 0x20, minus 0x18 and minus 0x60, and that order also drives the push sequence.

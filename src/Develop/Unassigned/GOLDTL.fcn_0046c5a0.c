@@ -81,11 +81,14 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 	int sv70;
 	int sv74;
 	int sv78;
-	char bufA[0x100];
-	char bufB[0x88];
-	char bufC[0x200];
-	char bufD[0x200];
-	char bufE[0x100];
+	struct {
+		char e[0x100];
+		char d[0x200];
+		char c[0x100];
+		char sp[0x100];
+		char b[0x80];
+		char a[0x100];
+	} bufs;
 	char* t;
 	char* s;
 	char* e;
@@ -209,15 +212,37 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 						    g_102d024 - *(int*) (slot + 8),
 						    fcn_00465950("_IMG"), 0x6b5c60, a1);
 						if (*(char*) (p + 2) == '[') {
+							char* zp;
+							int zn;
+
 							s = p + 3;
-							memset(bufD, 0, 0x200);
+							zn = 0x200;
+							zp = bufs.d;
+							/* block-fill prelude, see docs/codegen-walls.md section 6b */
+							__asm {
+								mov edi, zp
+								mov ebx, zn
+								xor eax, eax
+								lea ecx, [edi+edi*2]
+								and ecx, 3
+								sub ebx, ecx
+								jle short Lz1
+								rep stosb
+								mov ecx, ebx
+								and ebx, 3
+								shr ecx, 2
+								rep stosd
+							Lz1:
+								add ecx, ebx
+								rep stosb
+							}
 							e = strchr(s, ']');
 							if (!e) {
-								sprintf(bufD, (char*) 0x67d540);
+								sprintf(bufs.sp, (char*) 0x67d540);
 								continue;
 							}
-							strncpy(bufD, s, (int) (e - s));
-							fcn_0046f9b0(img, bufD);
+							strncpy(bufs.d, s, (int) (e - s));
+							fcn_0046f9b0(img, bufs.d);
 							if (!*(char*) (e + 1)) {
 								*(char*) (p + 2) = 0;
 							} else {
@@ -287,18 +312,40 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				} else if ((*(char*) (p + 1) == 't') || (*(char*) (p + 1) == 'a') ||
 				    (*(char*) (p + 1) == 'n')) {
 					if (*(char*) (p + 2) == '[') {
+						char* zp;
+						int zn;
+
 						s = p + 3;
-						memset(bufB, 0, 0x80);
+						zn = 0x80;
+						zp = bufs.b;
+						/* block-fill prelude, see docs/codegen-walls.md section 6b */
+						__asm {
+							mov edi, zp
+							mov ebx, zn
+							xor eax, eax
+							lea ecx, [edi+edi*2]
+							and ecx, 3
+							sub ebx, ecx
+							jle short Lz2
+							rep stosb
+							mov ecx, ebx
+							and ebx, 3
+							shr ecx, 2
+							rep stosd
+						Lz2:
+							add ecx, ebx
+							rep stosb
+						}
 						*(int*) (g_1015ea0 + img * 0x2f4 + 0x5c) = 1;
 						*(int*) (g_1015ea0 + img * 0x2f4 + 0x84) = *(int*) (slot + 0x28c);
 						*(int*) (g_1015ea0 + img * 0x2f4 + 0x1d0) = 3;
 						e = strchr(s, ']');
 						if (!e) {
-							sprintf(bufD, (char*) 0x67d540);
+							sprintf(bufs.sp, (char*) 0x67d540);
 							continue;
 						}
-						strncpy(bufB, s, (int) (e - s));
-						fcn_0046f9b0(img, bufB);
+						strncpy(bufs.b, s, (int) (e - s));
+						fcn_0046f9b0(img, bufs.b);
 						if (!*(char*) (e + 1)) {
 							*(char*) (p + 2) = 0;
 						} else {
@@ -552,7 +599,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				v60 = 1;
 				continue;
 			default:
-				sprintf(bufD, (char*) 0x67d504, *(char*) (p - 1));
+				sprintf(bufs.sp, (char*) 0x67d504, *(char*) (p - 1));
 				continue;
 			}
 		}
@@ -584,23 +631,23 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 		}
 		len = (int) (e - s);
 		if (len) {
-			memset(bufA, 0, 0x100);
+			memset(bufs.a, 0, 0x100);
 			if (len >= 0) {
-				memcpy(bufA, s, len);
-				bufA[len] = 0;
+				memcpy(bufs.a, s, len);
+				bufs.a[len] = 0;
 			}
-			span = fcn_0046b520(bufA, *(int*) (slot + 0x28c));
+			span = fcn_0046b520(bufs.a, *(int*) (slot + 0x28c));
 			if (span + g_102d020 > yr) {
 				if (!(*(int*) (slot + 0x14) & 0x2000)) {
 					tmp = 0;
 					g_772530 = g_772530;
-					strcpy(bufE, bufA);
-					strcpy(bufC, bufA);
-					len = (int) strlen(bufA);
+					strcpy(bufs.e, bufs.a);
+					strcpy(bufs.c, bufs.a);
+					len = (int) strlen(bufs.a);
 					if (len >= 0) {
-						e = (char*) (bufE - len - bufA);
+						e = (char*) (bufs.e - len - bufs.a);
 						for (;;) {
-							p = &bufA[len];
+							p = &bufs.a[len];
 							if ((*p != '~') && (*p != '-')) {
 								len -= 1;
 								e += 1;
@@ -613,7 +660,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 							tmp = (*p == '-');
 							*p = '-';
 							p[1] = 0;
-							if (fcn_0046b520(bufA, *(int*) (slot + 0x28c)) +
+							if (fcn_0046b520(bufs.a, *(int*) (slot + 0x28c)) +
 							    g_102d020 <= yr) {
 								break;
 							}
@@ -626,23 +673,23 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					}
 					if (len > 0) {
 						len += tmp;
-						textLen = (int) strlen(bufA);
-						strcpy((char*) (g_772530 * 0x10c + 0x10119e0), bufA);
-						span = fcn_0046b520(bufA, *(int*) (slot + 0x28c));
+						textLen = (int) strlen(bufs.a);
+						strcpy((char*) (g_772530 * 0x10c + 0x10119e0), bufs.a);
+						span = fcn_0046b520(bufs.a, *(int*) (slot + 0x28c));
 						*(int*) (g_772530 * 0x10c + 0x1011ae8) = span;
 						i += tmp + textLen - 1;
 						g_772530 += 1;
 					} else {
-						strcpy(bufA, bufC);
+						strcpy(bufs.a, bufs.c);
 					}
 					DRAW_RUN(0, g_102d020);
 					g_102d024 += g_1015ea4;
 					*(int*) (slot + 0x4c + (*(int*) (slot + 0x248) + nLine) * 4) = i;
 					nLine += 1;
 					if (len > 0) {
-						strcpy(bufA, &bufC[len]);
-						textLen = (int) strlen(bufA);
-						span = fcn_0046b520(bufA, *(int*) (slot + 0x28c));
+						strcpy(bufs.a, &bufs.c[len]);
+						textLen = (int) strlen(bufs.a);
+						span = fcn_0046b520(bufs.a, *(int*) (slot + 0x28c));
 					}
 				} else if (span + g_102d020 < g_1040494) {
 					fcn_0046eda0((short) ((short) span + *(short*) (slot + 0xc)),
@@ -700,7 +747,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 			if (extra) {
 				g_102d020 += g_67d380 + span;
 			}
-			strcpy((char*) (g_772530 * 0x10c + 0x10119e0), bufA);
+			strcpy((char*) (g_772530 * 0x10c + 0x10119e0), bufs.a);
 			*(int*) (g_772530 * 0x10c + 0x1011ae8) = span;
 			*(int*) (g_772530 * 0x10c + 0x1011ae4) = g_7725b4;
 			*(unsigned short*) (g_772530 * 0x10c + 0x1011ae0) = *(unsigned short*) (tail);
