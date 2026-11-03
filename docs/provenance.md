@@ -21624,3 +21624,32 @@ carries the two fixes made earlier tonight, the const-emitting stub generator an
 switch, `rebrew diagnose gap 0x005b39c0 --json` returns structured output instead of raising, which is what unblocked the
 diagnosis above. This is an explicit tooling-development opt-in and must be reverted to the released wheel, or shipped as a
 release carrying those fixes, before any result is treated as reproducible from a clean environment.
+
+## 2026-11-03 — dialogue row: six semantic defects identified, repair started
+
+`0x5B88B0` keeps 404 of 4300 against native 4297 with status SIZE_MISMATCH and an unchanged source in this pass, but six
+semantic defects were proved against the listing and are being repaired deliberately under the policy that wrong behaviour
+is never traded for matched bytes. The binding is src/Develop/Units/d2.v1/GOLDTL.fcn_005b88b0.c with its own address
+anchor, stored extent 4297 and 1213 instructions. The defects: eight reversed `d2_SetForm` argument pairs at lines 199, 320,
+395, 411, 540, 550, 556 and 569, where native pushes the constant and then the window field so the window field is the first
+argument and the constant the second while the source has them the other way; a missing store of `p` into `gage.obj` before
+the fcn_005b59c0 call at line 301, which native performs at 0x5b8f4e and the callee reads back; the state==1 body at lines
+333 to 338, where native calls `d2_SetForm(gage.win, 2)`, appends two texts including one from a 16-bit load and refreshes
+through fcn_00472250, while the source calls `fcn_005b59c0(p, &gage, 0)` and omits the form and refresh calls entirely; the
+first `fcn_005463a0` call's third argument at line 346, which is 7 in native and 6 in the source while the second call
+correctly has 6; and the post-loop `fcn_0045150` arguments at lines 287 to 290, where native passes the minus one, a table
+entry indexed by `0x7f4ca4 + idx*0x21c`, the style and the fcn_0050b750 result, while the source passes the result first and
+the minus one second. Each repair costs positional match bytes and grows the object by two to four bytes, with the reversed
+argument pairs being byte-neutral at 405 against 404, and all were reverted in the earlier pass; they are now applied one at
+a time with each delta recorded.
+The first remaining divergence is at offset 0x17: native loads lpGebaeudePROT into edx and keeps the entity in eax, the
+minus one in ebx and the zero in ebp, while this compiler loads the global into ebp, the entity into ebx and the minus one
+into eax. The whole object is three bytes longer and misaligned from there, and the diff still reports 39 exact and 1173
+structural instructions at a mnemonic ratio of 0.89 and structural ratio of 0.967, so the shape agrees and the allocation
+does not. That is the wall: no C form tried moves the base, entity, minus-one and zero assignment, and each semantic repair
+shifts allocation further, which is why they could not pay before allocation matches. All 106 direct call targets map to
+rows that have source files, one being a SIZE_MISMATCH of its own, and no prototype had to be invented. The stored blocker
+narrative is stale, describing a 428-byte candidate with a volatile local, zero slots and a smaller buffer that the on-disk
+source no longer has, and it was refreshed; the status itself was already correct. One observation is recorded for a later
+look: row 0x5101e0 binds file GOLDTL.fcn_00507910.c with symbol _fcn_005101e0, a name and file mismatch. Backups and step
+JSONs under .scratch/row5b88b0/.
