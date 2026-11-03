@@ -22697,3 +22697,23 @@ crossing its window threshold; the trade is taken here because the frame, the ma
 because the row's blocker was the frame. Four shapes were byte-identical to the old object and are recorded so they are not
 retried: an index product kept in a local, an explicit array-element store, a split store into a temporary first, and a pre-loop
 array pointer.
+
+## 2026-11-03 — m_alloc row: the element stride was one hundred and thirty-five bytes short
+
+`0x527F60` moves from 1937 to 1956 matching bytes with the object at 4188 against a stored extent of 4198, and the repair is a
+record stride proved from the reference bytes: two copy sources indexed by the global at 0x773d75 with a stride of 0x21c, where the
+reference computes 756 times that value at both sites. The bytes show the multiplication plainly, a shift by six and a subtraction,
+a `lea` triplet and a quadruple giving 189 and then 756 times, used as an index into the two tables at 0x868060 and 0x868080. The
+stride is now 0x2f4 at both sites, which also matches the element stride this file uses elsewhere, and the windows that covered the
+multiply sequence close with none opened, taking the register-aware diff from 698 to 597 starred entries and from 358 to 419 equal
+ones while mismatched bytes fall from 2291 to 2274.
+Nine defect classes were checked against the reference bytes and came back clean: every call site resolves to the reference callee
+in order, including a shared second site reached by a jump; the push order per site matches; the copy destinations and counts agree
+at three offsets; there is no loop whose bound is an array address, because every comparison dereferences; and the four frame slots
+agree, with the remaining differences being pending-push shifts rather than layout. Four differences are register and scheduling
+rather than wrong accesses: a constant that the reference rematerialises inside one branch and this build hoists and keeps live, a
+double round trip that the reference performs and this build folds, a load the reference duplicates per branch where this build
+hoists it, and argument cleanup the reference defers to the end where this build pops earlier. The last explains why the stack
+diagnostic reports a mismatch even though both prologues subtract the same 0x310 and the deepest point is the final push.
+One correct-but-costly repair was reverted: writing a zero through a local so the store's instruction form matches costs five bytes
+and one matched byte, and inlining a rounded conversion into a call did not restore the round trip.

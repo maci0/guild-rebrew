@@ -344,7 +344,7 @@ hidden:
 		}
 	} else {
 		if (g_6a2580 == -1) {
-			strcpy(fr.name, (char*) (0x868060 + g_773d75 * 0x21c));
+			strcpy(fr.name, (char*) (0x868060 + g_773d75 * 0x2f4));
 			fcn_0066080a(fr.name);
 			sprintf(fr.buf, (char*) 0x6a2e38, fr.name);
 			id = fcn_00465950(fr.buf);
@@ -367,7 +367,7 @@ hidden:
 			*(ELEM(g_6a2580) + 0xcc) = *g_6b5c60;
 		}
 		fcn_00472880(0x56);
-		strcpy(fr.name, (char*) (0x868080 + g_773d75 * 0x21c));
+		strcpy(fr.name, (char*) (0x868080 + g_773d75 * 0x2f4));
 		fcn_0046bd20(g_1040494 - 0x70, 0x5d, 0x68, 0x14, g_77250c,
 			     fr.name, 8);
 	}
