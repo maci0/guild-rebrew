@@ -24248,3 +24248,16 @@ translation unit and rebound through the reviewed binding path with the previous
 And a flag diagnostic is recorded as diagnostic only: an optimise-while flag reproduces the reference's register choice for the zero constant and measures four more matched
 bytes, but the neighbouring function from the same translation unit already matches fully under the canonical flags, which is evidence that the canonical flag context is
 the right one for the unit. The row keeps canonical flags, and the two conflicting measurements stand in the record.
+
+## 2026-11-03 — an over-merged-row scan, and why a linear sweep cannot decide it
+
+Because one row this session turned out to cover three functions and became a full relocation match once split, every inventory row was scanned for the same defect: a
+second function prologue inside a row's extent, preceded by a return or a jump and not itself a branch target. Readings outside the same binary's library band were
+listed, and each candidate in the game band was checked by disassembling at the reported offset.
+That check refuted the list. Disassembling at three GOLD candidates gives misaligned instruction text, which means the reported offsets are not instruction boundaries.
+The cause is the method, not the rows: a linear disassembly from the row start desynchronises when a row contains an inline jump table or a constant pool, which many
+game rows do, so every byte after the table is decoded at the wrong boundary and spurious prologues appear. The one real case this session was found by reading the
+transition between two functions directly, where the second starts with its own stack adjustment and two pushes and the boundary is unambiguous.
+So the conclusion recorded here is a method limit rather than a clean bill: no over-merged game row is known beyond the one that was split, and a reliable scan needs
+control-flow-aware decoding that starts from each row's entry and follows branches, ignoring bytes that no path reaches. The scratch script that produced the candidate
+list is kept with that caveat and must not be treated as evidence without disassembling each hit at its own boundary.
