@@ -21031,3 +21031,48 @@ allocation rather than declarations: recover what native keeps in ebx, esi and e
 one extra simultaneously live scalar, and once the spill disappears the two head initialisations fit without growing the
 frame. Evidence and the variant table are in .scratch/004dcf50-findings.md with helpers in
 .scratch/goldtl-004dcf50-tools/.
+
+## 2026-11-03 — stub sizes corrected and thirty two more identity rows
+
+Six stub definitions whose declared size disagreed with the reference extent are corrected in
+stubs/goldtl/symbol_stubs.c, and 32 identity rows are recorded, including the 25 that were skipped only because their
+reference bytes are all zero. The file's hash moves from 2215182f to 29b23529. Each edit changes only the length, keeping
+the element type every caller already declares: `unsigned char g_699396[2]` where the declaration said one byte and the
+extent is two, with reference bytes `ff 00` and a caller writing and reading one byte as a 0xff sentinel;
+`char g_6a2574[4]` for a reference dword `01 00 00 00` used as a flag with a `!= 0` test; `unsigned char g_6a4758[4]`
+for `ff 00 00 00` with a sentinel caller; `unsigned short g_6a4760[2]` for `ff ff 00 00`, a dword `0xffff` sentinel;
+`char g_6a9b90[4]` for `ff ff ff ff` with its address taken with length two; and `char g_6b5df0[4]` for zeros, dereferenced
+by its caller as a four-byte pointer slot. These six edits are provisional in the same way as the earlier const work,
+since the file is auto-generated and its regeneration is deferred.
+One candidate was rejected rather than changed: 0x68a9cc keeps its `int` declaration and its row size of four, because the
+extent of sixteen is an anchor artifact. Bytes 0x68a9d0, 0x68a9d4 and 0x68a9d8 are the int stubs `cm_LastEntityId`,
+`cm_LastBuildingId` and `cm_LastObjectId` in the same file, the map emits five symbols consecutively at 0x887374, 0x887378,
+0x88737c, 0x887380 and 0x887384, and the reference bytes are two then -1, -1, -1 as last-id sentinels. Forcing
+`char g_68a9cc[16]` was compiled and measured and moves `.bss` from 0x590d10 to 0x590d18 and g_68a9dc from 0x1705fc to
+0x170608, swallowing the three counters and overlapping their rows, so it was dropped from the size-disagreement list.
+The 32 rows were applied in one request with preview digest
+c322325a20524f4ad48a3a0d52690960830dca57ba0457debc52e99f1eb7d3f7 and a guarded apply reporting 32 changes, with kind
+GLOBAL, name, size, section `.data`, file stubs/goldtl/symbol_stubs.c and no storage kind, backing or link symbol; sizes
+are four except 0x699396 at two. The seven are 0x68a9cc, 0x699396, 0x6a2574, 0x6a4758, 0x6a4760, 0x6a9b90 and 0x6b5df0;
+the twenty-five all-zero ones are 0x67bbfc, 0x67bc00, 0x67bc0c, 0x67bc10, 0x67fbb0, 0x6a3764, 0x6a3768, 0x6a9b94,
+0x6ad580, 0x6ad628, 0x6ad62c, 0x6b5c2c, 0x6b5c30, 0x6b5c48, 0x6b5c4c, 0x6b5c50, 0x6b5c54, 0x6b5c58, 0x6b5c5c,
+0x6b5c80, 0x6b5c84, 0x6b5c88, 0x6b5cb4, 0x6b5d08 and 0x6b5de4. Readback matched all 32 rows with every declaration size
+equal to its row size, and repeating the request reports nothing to update. One extra fix was needed: the 0x68a9cc row
+arrived with `type = "char[]"`, inherited from the same-named GOLD row at GOLD.0x0060bd64 and contradicting its `int`
+definition, so it was corrected with `--type 0x68a9cc=int` under digest
+6137d5280f2af4c72e7806b7a1578bacd8d9b04662590a9b3f9fc59c849d2558.
+Layout is unchanged by the six size edits. The stub translation unit compiled with its project flags keeps object `.bss` at
+0x590d10, `.data` at 0x5 and `.rdata` at 0x1b9, with all 3458 `.bss` symbol offsets identical because the new sizes fit
+padding the compiler already emitted for the next dword, and only `.debug$S` shrinks from 151 to 150. A twice-run relink
+with the project link line into scratch exits zero on both sides with 16,743 publics, zero VA changes, zero changes in
+section 3 and identical section headers at `.data` VirtualSize 0x02d72f84, and the images differ in exactly one byte, the
+PE TimeDateStamp at 0x130, with maps differing only in their timestamp lines, so no named data row moved. The harness
+still names the pre-move path of GOLDTL.fcn_005413d0.c.obj and that stale object references `_fcn_004e6b10`, so the relink
+compiles that translation unit from its current source into scratch and substitutes it, writing nothing into build/ or any
+source file. Lint reports no errors and the same two pre-existing warnings, with no new size, overlap or stale-evidence
+warning.
+Three caveats are owed. The six stub edits are provisional until the generator is regenerated. Four callers still spell a
+scalar extern of the smaller size, 0x699396, 0x6a2574, 0x6a4758 and 0x6a4760, where the element type is unchanged and only
+the head element is used, so their declarations understate the object until those four function files are edited. And the
+reference order of the three counters at 0x68a9d0, 0x68a9d4 and 0x68a9d8 is not resolvable from bytes because all three are
+-1, so only their occupancy is proved.

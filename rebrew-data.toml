@@ -5508,14 +5508,14 @@ built_va = "0x875640"
 placement_method = "link-symbol"
 measured_at = "2026-10-31T12:39:26+00:00"
 ["GOLDTL.0x0068a9cc"]
-file = ""
+file = "stubs/goldtl/symbol_stubs.c"
 name = "g_68a9cc"
 kind = "GLOBAL"
-type = "char[]"
+type = "int"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-31T12:39:26+00:00"
-status = "DISPLACED"
+updated_by = "data"
+updated_at = "2026-11-03T04:50:28+00:00"
+size = 4
 
 ["GOLDTL.0x0068a9cc".verification]
 status = "DISPLACED"
@@ -28922,3 +28922,282 @@ file = "stubs/goldtl/symbol_stubs.c"
 kind = "GLOBAL"
 updated_by = "data"
 updated_at = "2026-11-03T04:34:05+00:00"
+
+["GOLDTL.0x0067bbfc"]
+name = "g_67bbfc"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x0067bc00"]
+name = "g_67bc00"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x0067bc0c"]
+name = "g_67bc0c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x0067bc10"]
+name = "g_67bc10"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x0067fbb0"]
+name = "g_67fbb0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x00699396"]
+name = "g_699396"
+size = 2
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006a2574"]
+name = "g_6a2574"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006a3764"]
+name = "g_6a3764"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006a3768"]
+name = "g_6a3768"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006a4758"]
+name = "g_6a4758"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006a4760"]
+name = "g_6a4760"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006a9b90"]
+name = "g_6a9b90"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006a9b94"]
+name = "g_6a9b94"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006ad580"]
+name = "g_6ad580"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006ad628"]
+name = "g_6ad628"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006ad62c"]
+name = "g_6ad62c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5c2c"]
+name = "g_6b5c2c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5c30"]
+name = "g_6b5c30"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5c48"]
+name = "g_6b5c48"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5c4c"]
+name = "g_6b5c4c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5c50"]
+name = "g_6b5c50"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5c54"]
+name = "g_6b5c54"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5c58"]
+name = "g_6b5c58"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5c5c"]
+name = "g_6b5c5c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5c80"]
+name = "g_6b5c80"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5c84"]
+name = "g_6b5c84"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5c88"]
+name = "g_6b5c88"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5cb4"]
+name = "g_6b5cb4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5d08"]
+name = "g_6b5d08"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5de4"]
+name = "g_6b5de4"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
+
+["GOLDTL.0x006b5df0"]
+name = "g_6b5df0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:46:53+00:00"
