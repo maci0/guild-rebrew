@@ -24270,3 +24270,16 @@ and it is the honest record that these verdicts were taken with the development 
 The consequence for the goal is stated plainly rather than buried: reproducing these rows from a clean environment requires either installing the same checkout or
 releasing the upstream fixes, and until one of those happens the stored hashes will differ on a released wheel even where the object bytes agree. That is the pending
 release note already recorded for this session, and this entry is the same fact from the metadata side.
+
+## 2026-11-03 — physics row: a prefix-only row transcribed into its body
+
+`0x52C060` had 170 bytes of object code and 57 matching bytes; it now has 2331 bytes and 580 matching bytes, with 553 instructions against the reference's 572 and the
+object's code end ninety-six bytes short of the reference's.
+The row was prefix-only, so the work was transcription rather than defect repair. The body now covers the prologue with its 0x90 frame, the early gates and state restore,
+the first physics block, the one-shot update block, and the matrix and sine-cosine prediction tail. The layout is three vector pairs, a rotation vector, a position vector
+and a sixteen-float matrix at 0x60, which is what makes the frame match. Two pairs of globals are declared as sixteen-bit because the reference reads them with a
+sign-extending word load. The entity table stride is 0x21c. Seven callee conventions and arities were derived from the callees themselves, including a two-argument
+stdcall, a two-argument cdecl returning a float, and a three-argument cdecl.
+Two variants were reverted: a position vector typed wrongly, which shrank the frame, and a declaration swap that gained nothing. The first remaining divergence is
+callee-saved register assignment, where the reference holds three constants in three registers and this build assigns the same three to different registers, so every
+block offset after the prologue shifts; no convention, operand or precision defect remains identified.

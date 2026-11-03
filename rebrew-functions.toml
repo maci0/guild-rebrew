@@ -421632,7 +421632,7 @@ blocker = "STUB, best body kept unchanged this pass: 179/2357 exact, object 2357
 blocker_delta = 2178
 
 ["GOLDTL.0x00480330".verification]
-source_hash = "e11017c414b7be45060477b0d205748ad9c9de2db9dd5e2c52f7c632ccc49d68"
+source_hash = "3fc8a0e714bd4cce76651511ef74e0be3af568c6b4e45b97ffd0c7a3cc226128"
 reference_hash = "9d7abcbfbe8e1770a2319c84b23173e4eaed926d361645ee2f1a986c0fe208c1"
 reference_size = "2340"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -421643,10 +421643,10 @@ module = "GOLDTL"
 va = "0x480330"
 context_hash = ""
 defines = "[]"
-input_hash = "e5be7a97ec732ce8eb1271cfffdbb6c35363bcd000f3efb45cd161b50121f4d0"
+input_hash = "49a9ae6baeb19e83f41b1f5201ba4d2cbfbda8522e037f7237ea0e4a2bf9073a"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T19:44:43+00:00"
+measured_at = "2026-11-03T20:01:36+00:00"
 
 [["GOLDTL.0x00480330".status_history]]
 old_status = "STUB"
@@ -474007,7 +474007,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00487f90".verification]
-source_hash = "a7faf8c79b0995d4e4e5681d3d6968455e670f90d4c4f6ee0417f710c0fb8c56"
+source_hash = "51258bcc78982a5682d802661621ddab0c2f7f36f2d1858ccfb3261665a8e20c"
 reference_hash = "784839c2284298c2f5ac0625114ef94ea4e3aab907e304d92655b92afdb5f463"
 reference_size = "2309"
 headers_hash = "c23ebdf26082c3b8224e5d244740b71b635b44c55fd86df34e59c897a87797df"
@@ -474018,10 +474018,10 @@ module = "GOLDTL"
 va = "0x487f90"
 context_hash = ""
 defines = "[]"
-input_hash = "e818aa5e0da00ae2e8d37d9d88cdf4fb456d626506899ebef30c0308bd6584ea"
+input_hash = "e4356507f1e257cac342fbfe6f85eda77c104ca1e0d5fff5baa853faf1ee627e"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T19:44:07+00:00"
+measured_at = "2026-11-03T20:03:22+00:00"
 
 [["GOLDTL.0x00487f90".status_history]]
 old_status = "STUB"
@@ -474266,14 +474266,14 @@ file = "src/Develop/Unassigned/GOLDTL.fcn_0052c060.c"
 symbol = "_fcn_0052c060"
 name = "fcn_0052c060"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:35:08+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-03T19:59:24+00:00"
 status = "SIZE_MISMATCH"
-blocker = "Genuine prefix body only: g_6b5cbc guard plus the g_774774 coordinate-range init block. Remaining 0x52c129-0x52c9a7 (per-frame x87 transforms, 0x451840/0x438b40/0x509570/0x52ac60 calls, fsin/fcos prediction path) not transcribed; obj 170/2376."
-blocker_delta = 2206
+blocker = "Full body transcribed from live disassembly (was prefix-only 170/2376). Object 2331/2376, 580 bytes matched, 91 relocations, status SIZE_MISMATCH. Restored the 0x90 frame (3x Vec4 v/q/d, Vec3 rot, Vec4 pos, mat[16] at 0x60), short globals g_14ce8c0/c2 and g_14cf900/902, entity-table stride 0x21c, 1-float cdecl to 0x52ac60, __stdcall 0x5ebbb9, float return from 0x4514d0, and the int*double*0.004 velocity convert. Remaining diff is allocator/scheduler: first divergence offset 32 (g_14ce8e8 cached in ecx vs target eax); callee-saved map differs (ours ebp=0x7d00, di=g_14cf902, ebx=-0x7d00 vs target ebx=0x7d00, bp=g_14cf902, edi=-0x7d00), so reference block offsets shift; object ends 0x920 vs 0x950 (553 vs 572 insns). Structural CFG and call sites align; no convention/operand/precision defect remains identified."
+blocker_delta = 45
 
 ["GOLDTL.0x0052c060".verification]
-source_hash = "4896f97985a0da69406c5d3c949fe9a1f487b5fb77acc552bca2a4cfa2573771"
+source_hash = "81062ce868faa4ceed909146b3f8096992e349be7360cf00e61182307b16431f"
 reference_hash = "b7bc645dba01ea56ca03efcccc296fea32c3bde6d2f223e49fa0028d51e4a13b"
 reference_size = "2376"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -474284,10 +474284,10 @@ module = "GOLDTL"
 va = "0x52c060"
 context_hash = ""
 defines = "[]"
-input_hash = "c5dc050c123d12330c6b525912c9209eef487ba3c8129e76d980029986818751"
+input_hash = "78a5454976856c09021652c9cf6307826fa551d7b0eed6e6601dc3841c717364"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T19:44:26+00:00"
+measured_at = "2026-11-03T20:01:55+00:00"
 
 [["GOLDTL.0x0052c060".status_history]]
 old_status = "STUB"
