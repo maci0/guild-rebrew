@@ -24163,3 +24163,17 @@ The remaining divergence is the callee-saved register assignment: the reference 
 push scheduling and the message fill follows from that colouring, which the project already documents as unavailable from C. No further proven defect was found: the
 copied-body, width, prototype, frame, global-kind, table-base, duplicated-scan and tail-merge checks all came back clean, and a callee was decoded to confirm the argument
 order rather than to change it.
+
+## 2026-11-03 — command row: one structure restores a zeroing loop, and a swap of two large blocks
+
+`0x4E51D0` moves from 200 to 230 matched bytes with the object at 1943 against the 1953 extent, and its cumulative alignment movement falls from 1825 bytes to 574 with
+the largest single gap from 809 bytes to 54.
+Two repairs were kept. A trailing text buffer and its header were separate locals, which made the compiler drop the reference's counted zeroing loop and placed the buffer
+at the wrong frame offset; merging them into one structure with a header and a text array restores the counted fill and puts the buffer, the next value and two further
+slots at the reference's offsets. And a three-way branch was written so that one arm went out of line, which swapped two blocks of about 0x300 bytes against the
+reference; writing the arms in the reference's order places the equality arm as the fall-through.
+Three variants were reverted: two copies of the structure assignment, and two placements of a pair of loop increments, both of which grew the object past the extent.
+The first divergence is a scheduling difference in a formatted string block, where the reference stores a byte after its argument pushes and this build stores it before and
+zeros a register for the load, with the same values in both. One class is found and not fixed: the reference copies records with four counted dword moves where this build
+emits a rolled loop at two of the four sites under register pressure, which is labelled as a codegen difference. Prototypes were verified at fifteen call sites and the
+widths, bases, index reloads, fabricated arguments and duplicate scans all came back clean.
