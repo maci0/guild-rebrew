@@ -34,13 +34,15 @@ typedef struct {
 	int p2c;
 	int p30;
 	unsigned short p34;
-	char pad36[0x58 - 0x36];
+	unsigned char flag2;  /* +0x36 */
+	char pad37[0x58 - 0x37];
 	int f58;
-	char pad5c[0x04];
-	int f60;
+	int f5c;              /* +0x5c */
+	int f60;              /* +0x60 */
 	int slots[6];         /* +0x64 */
 	unsigned short ids[6];/* +0x7c */
-	char pad88[0x9d - 0x88];
+	int f88[4];           /* +0x88 */
+	char pad98[0x9d - 0x98];
 	unsigned char skip;   /* +0x9d */
 	char pad9e[0xf8 - 0x9e];
 } Msg; /* 0xf8 */
@@ -64,7 +66,7 @@ int __cdecl fcn_004c5150(int, int, char, int);
 int __cdecl fcn_004c4eb0(int);
 int __cdecl fcn_004c4ef0(int);
 int __cdecl fcn_004c51f0(int, int, short, int, char, int);
-int __cdecl fcn_00500bb0(void*, int, int);
+int __cdecl fcn_00500bb0(void*, int, int, int);
 int __cdecl gm_QueryEntitySum(int, int);
 
 
@@ -73,7 +75,8 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 {
 	Msg m;
 	Stats st;
-	char line[0x100];
+	char name[0xb8];
+	char line[0x400];
 	int totals[4];
 	char* v2;
 	char* e;
@@ -90,9 +93,10 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 	int want;
 	float price;
 
-	if (*(float*) 0x100d0f4 < *(float*) 0x6628a8 || *(int*) 0x100d10c == 0)
+	n = k = 0;
+	if (*(float*) 0x100d0f4 <= *(float*) 0x6628a8 || *(int*) 0x100d10c == 0)
 		return 0;
-	fcn_0050cce0(*(char**) (o + 0x16c), line, 0);
+	fcn_0050cce0(*(char**) (o + 0x16c), name, 0);
 	for (i = 0; i < *(int*) 0x100e74c; i++) {
 		v2 = (char*) *(int*) (0x100dbc0 + i * 4);
 		if (*(unsigned char*) (v2 + 0x12) >= 0x21) {
@@ -107,7 +111,6 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			}
 			fcn_0050de80(v2, &st);
 			q = fcn_00502cd0(*(int*) (v2 + 0x14), 1, 0, 0x1dd);
-			n = 0;
 			if (st.x0 > 0) {
 				for (i = 0; i < st.x0; i++) {
 					if (st.x48[i] == 0)
@@ -137,15 +140,15 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 				amt = *(int*) 0x100d10c;
 			fcn_004c51f0(*(int*) (q + 2), *(int*) (req + 2), *(short*) 0x100d0c0, amt, (char) g_773d75, 0);
 			m.ids[n] = *(unsigned short*) 0x100d0c0;
-			n++;
 			m.slots[n] = *(int*) (*(int*) 0x100d0d4 + 1);
-			m.ids[0] = *(unsigned short*) 0x100d0c0;
+			n++;
+			st.x48[0] = *(unsigned short*) 0x100d0c0;
 			j = 1;
 			while (j < *(int*) 0x100b0ac && n < 3) {
 				e = (char*) (0x100d118 + j * 0x58);
-				if (*(float*) (e + 0x34) <= *(float*) 0x6628a8)
+				if (*(float*) (e + 0x34) > *(float*) 0x6628a8)
 					break;
-				if (*(int*) (*(int*) (e + 0x14) + 1) != 0 && *(int*) (e + 0x4c) != 0) {
+				if (*(int*) (*(int*) (e + 0x14) + 1) != m.slots[3] && *(int*) (e + 0x4c) != 0) {
 					lim = fcn_0050dfd0(q, *(int*) e);
 					if (st.x0 > 0) {
 						for (k = 0; k < st.x0; k++) {
@@ -154,14 +157,14 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 							want = *(int*) (e + 0x4c);
 							if (lim < want)
 								want = lim;
-							sprintf(line, (char*) 0x67e358, *(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, g_773d75);
+							sprintf(line, (char*) 0x67e358, *(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, g_773d75, 0);
 							want = *(int*) (e + 0x4c);
 							if (lim < want)
 								want = lim;
-							fcn_004c51f0(*(int*) (q + 2), *(int*) (req + 2), *(short*) e, want, (char) g_773d75, 0);
+							fcn_004c51f0(*(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, (char) g_773d75, 0);
 							m.ids[n] = *(unsigned short*) e;
-							n++;
 							m.slots[n] = *(int*) (*(int*) (e + 0x14) + 1);
+							n++;
 							st.x48[k] = *(unsigned short*) e;
 							break;
 						}
@@ -171,42 +174,44 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			}
 			memset(totals, 0, sizeof(totals));
 			j = 0;
-			while (j < *(int*) 0x100b0a8 && j < 3) {
+			while (j < *(int*) 0x100b0a8 && k < 3) {
 				e = (char*) (0x100b0c0 + j * 0x40);
-				if (*(float*) (e + 0x20) <= *(float*) 0x6628a8)
+				if (*(float*) (e + 0x20) > *(float*) 0x6628a8)
 					break;
 				g = (char*) *(int*) (e + 8);
-				if (*(int*) (g + 1) != m.slots[1] || *(int*) (e + 0x34) == 0) {
+				if (*(int*) (g + 1) != m.slots[0] || *(int*) (e + 0x34) == 0) {
 					j++;
 					continue;
 				}
+				amt = fcn_0050dfd0(q, *(int*) (e + 0x0c));
 				if (g == 0) {
 					j++;
 					continue;
 				}
-				m.ids[j + 3] = *(unsigned short*) e;
-				m.slots[j + 4] = *(int*) (g + 1);
-				amt = fcn_0050dfd0(q, (int) m.ids[j + 3]);
+				m.ids[k + 3] = *(unsigned short*) e;
+				m.slots[k + 3] = *(int*) (g + 1);
 				if (*(int*) (e + 0x34) <= amt)
 					amt = *(int*) (e + 0x34);
-				totals[j + 1] = amt;
+				m.f88[k] = amt;
 				if (*g == 'G')
-					totals[*(int*) (g + 0x65)] = (int) fcn_0050bb50((int) m.ids[j + 3], g_773d75);
+					totals[*(int*) (g + 0x65)] += (int) (amt * *(float*) (e + 0x1c));
+				k++;
 				j++;
 			}
-			lim = m.slots[1];
-			if (m.slots[1] == -1)
-				lim = 0;
+			lim = m.slots[0];
+			if (lim == -1)
+				lim = m.slots[3];
 			m.type = 0x0b;
-			m.state = *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c + 0x7f4ca4;
+			m.state = *(int*) (*(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c + 0x7f4ca4);
 			m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
 			m.p28 = g_7f4c00;
 			m.p2c = g_7f4c04;
 			m.p30 = g_7f4c08;
 			m.p34 = g_7f4c0c;
-			m.flag = 1;
+			m.flag2 = 1;
 			m.f58 = *(int*) (v2 + 2);
-			m.slots[0] = *(int*) (o + 4);
+			m.f5c = lim;
+			m.f60 = *(int*) (o + 4);
 			for (k = 1; k < 4; k++) {
 				sum = gm_QueryEntitySum(*(int*) (0x7f4e18 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), 1);
 				want = totals[k];
@@ -231,21 +236,21 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			}
 		}
 		else {
-			memset(&m, 0, 0x28);
+			memset(&m, 0, 0xf8);
 			m.type = 0x10;
-			m.flag = 1;
-			m.state = *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c + 0x7f4ca4;
+			m.flag2 = 1;
+			m.state = *(int*) (*(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c + 0x7f4ca4);
 			m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
 			m.p28 = g_7f4c00;
 			m.p2c = g_7f4c04;
 			m.p30 = g_7f4c08;
 			m.p34 = g_7f4c0c;
-			fcn_00500bb0(&m.p28, 0, 0);
+			fcn_00500bb0(&m.p28, 0, 0, 10);
 			m.f58 = *(int*) (v2 + 2);
 			m.slots[0] = 5;
 			m.ids[4] = 0;
 			m.ids[5] = 0;
-			m.f60 = 100 - (int) *(unsigned char*) (v2 + 0x12);
+			m.f5c = 100 - (int) *(unsigned char*) (v2 + 0x12);
 			fcn_004c5530(&m);
 		}
 	}

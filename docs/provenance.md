@@ -24796,3 +24796,17 @@ the frame and buffer layout, the table strides, the masked floating-point test, 
 What remains is scheduler and tail behaviour. The object keeps one argument in a callee-saved register across two calls and spills the sign where the reference reloads it,
 and the function tail shares one cold epilogue in the reference while this build inlines an epilogue at two sites, which is where most of the remaining excess sits. The loop
 induction form was tried as a pointer with a pre-decremented bound and collapsed the match to 170, so it is reverted and recorded as a negative.
+
+## 2026-11-03 — shop row: a four-hundred-byte line buffer where the source had a hundred
+
+`0x48CDB0` moves from 140 to 160 matched bytes with the object at 2080 against the 2131 extent, and the first divergence from byte 8 to byte 33.
+The structural repairs are real. A line buffer declared as 0x100 bytes is 0x400 in the reference, with a separate 0xb8-byte name buffer for a call that takes one, which
+brings the frame to exactly 0x694 with every block at its reference offset. The packet fields moved to their reference offsets: a flag byte at one field, two value fields at
+two more, and a small array at another, with the small path writing one value field and the big path writing that field and the next. Both floating-point guards were
+reversed relative to the reference. One call takes four arguments at this site, and a formatted call inside a loop needs one more argument than the source passed. The
+selection stores an identifier and a slot before incrementing the index, and writes to one array where the source wrote to the packet. A second loop keeps its own match
+counter separate from the identifier index, and a state value comes from a table load rather than address arithmetic.
+One complete reconstruction of the sell-and-buy block was proved and **not kept** because it measures fifty bytes over the extent (2181 against 2131): it is saved and
+recorded as a candidate, and the under-extent version is in the tree. That is the correct call: exceeding a reviewed extent is evidence the reconstruction is still wrong
+somewhere, not a reason to re-review the extent.
+The remaining difference is early local allocation, where the compiler sinks the zeroing of a second integer local, and the sell and buy block.
