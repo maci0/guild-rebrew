@@ -23511,3 +23511,20 @@ filler from each object's deficit against the link map; running it again would r
 it stands. Removing the pads does not change any object's match count, and it makes the pad rows' measurements describe the function for the first time.
 Removal was by copying scratch backups, not by version control. The twenty-six files that carry the empty scaffold comment and pragma with no array were left
 alone, as were two `_dpad_` arrays in 0x448360 and 0x457630, which are tentative data definitions rather than text fillers. Lint passes with no errors.
+
+## 2026-11-03 — vfs reopen row: the body transcribed from the listing
+
+`0x44FC70` now has its whole body transcribed in address order: 2795 object bytes against the 3117 extent, 191 matched bytes where the 126-byte prefix had 12, 24
+relocation sites, and 66 call sites in the same order and count as the reference. Instruction-level alignment against the reference body rises from 35 to 494
+longest-common-subsequence matches, with the strict ordered prefix still three instructions because the prologue differs.
+The transcription covered the allocation and duplicate-point merge, the vertex allocation and rotation, the duplicate-material removal pass with two compactions, the
+material ordering arrays and used-material compaction, the face-corner transform through each material's transform fields and angle, the radius and bounding-box
+and normal routines, the file rewrite through a buffer, and the full serialization including counts, vertex pairs, faces, material strings, packed flag bytes,
+bones and the six cleanup frees.
+Five source facts were corrected against the reference in the process. The two count rejects are one short-circuit guard sharing one close site rather than two
+separate conditions. The rotation reads the input points and writes the output copy, with the count set after the merge. The open modes are the addresses of the
+read and write mode strings rather than raw addresses. And five log tags are attested in the binary and are used verbatim, which is what the naming schema requires.
+The remaining divergence is the prologue: the reference frame is eight bytes larger and it saves a register at entry because a register is zeroed before the shared
+reject test, while this build at its optimisation level allocates less and defers the save. The second divergence is the inlined clearing, where the reference spills
+its arguments and runs the alignment pre-pass while this build emits one direct fill. Both shift the whole body, which caps the matched byte count, and the
+reference also schedules the shared close block after the face loop while this build places it last.
