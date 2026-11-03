@@ -22986,3 +22986,20 @@ cleanup immediately after the lookup call and then stores six words, while this 
 and defers the same cleanup, with an identical instruction multiset; the shift closes by byte 240. The remaining twelve bytes are long
 jumps on one guard, an eight-byte float store against a three-byte store, a disp32 address form for one buffer, and a tail reload. The one
 callee without a bound address, at 0x4e4eb0, stays declared as a void cdecl function and unresolved.
+
+## 2026-11-03 — branch inversion on the frame row
+
+`0x5438C0` moves from 584 to 618 matching bytes with the object at 3759 against the extent 3724. Two condition inversions were taken from the
+reference and kept. The first swaps a test's arms so the loop is inline and the load is the taken branch, which the reference shows by
+jumping to the load at 0x543921 while the loop follows inline, and it closes the early window that had drifts of plus nineteen, fourteen and
+minus sixty-eight down to minus two, nine and twelve. The second inverts a flag test so the four-flag block is out of line, which the
+reference does by jumping forward to 0x543c71, and it takes the match from 591 to 618 at a cost of two object bytes while shrinking the
+largest remaining window's drift from about 140 to about 80, at the price of one new window of 65 bytes inside it.
+Every defect class checked against the reference bytes came back clean: all call and jump targets agree, including twelve calls to the same
+routine, and an apparent swap of two call addresses turned out to be a duplicate address naming artifact. The indirect call through a
+resolved procedure address is followed by a four-byte caller cleanup so it is cdecl, a sleep call through a register has none so it is
+stdcall, and the longest cleanup chain of 0x38 matches. Both memsets match at 0xf8 and 0x114 bytes, the message scan walks the table at
+0x7f4ca4 in steps of 0x21c up to its bound, and nine record offsets and a shared store site agree.
+The remaining wall is the frame composition: the reference keeps 0x74 bytes of locals below the buffer that this build does not have, so its
+frame is 0x4bc against 0x448 and every stack displacement differs by that amount. The largest remaining window is about a hundred bytes of
+extra object code in the sprintf and record block.
