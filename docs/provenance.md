@@ -24361,3 +24361,20 @@ The frame is one four-byte slot over because a record pointer is spilled in the 
 fixed: this build merges four formatting sites into one call block where the reference inlines four. Three variants were reverted after measurement.
 The first divergence is that frame adjustment, and the remaining windows are positional rather than missing code, since the call sequences now match one for one at
 thirty-eight calls against the reference's forty, of which two are duplicated tail calls.
+
+## 2026-11-03 — initialised pads reconciled against emitted definitions: 24,064 bytes removed
+
+The over-allocation that displaces data was measured properly and then partly removed. The project's flat audit rule counted the whole span after the next registered row as
+duplicate and reported 24 pads totalling 138,808 bytes; measured instead against the emitted COFF definition extents, those same pads duplicate only 14,669 bytes, and
+all 169 initialised pads whose encoded address falls in the reference raw region match the reference image byte for byte at that address, so the pads are reference
+content rather than waste. The rule overstated the problem by an order of magnitude, and that correction is recorded because it changes what the remaining excess means.
+Thirteen pads across eleven translation units were then split so each keeps only the runs no definition emits, with pieces named for the gap they hold. Initialised data
+falls from 0x5C8B4 to 0x56AB4, which is 354,996 bytes against the reference 0x40FC0, so the excess falls from 112,884 to 88,820. The two displaced symbols improve with it:
+the large matrix moves from 0x8889C0 to 0x882BD8 and the second one from 0x9189D0 to 0x912BE8. One intermediate step caused a data row to go from verified to drifting
+because a split moved the initialised spill boundary onto a reference BSS byte; the next step that removed another 320 bytes put it back, and the final state has the same
+four drifting rows as the baseline and eight verified, with no layout violations and a clean lint.
+What remains is blocked rather than skipped, and the reason is stated: the eighteen pads the flat audit still flags hold only 1,766 bytes covered by an emitted
+definition; the rest of each is reference content that nothing else emits, and splitting around the duplicated bytes would cost a thirty-two-byte piece per uncovered run,
+so the final plan over 160 pads has nothing left to shrink and would grow initialised data by 10,592. Attributing the remaining bytes needs a reference link map or
+reference data extents for objects whose symbols do not encode a reference address, and neither exists in this tree.
+The data store's verification blocks were refreshed against the fresh link from this pass, which supersedes the stale-image measurements recorded earlier.
