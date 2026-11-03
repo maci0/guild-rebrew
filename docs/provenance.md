@@ -24418,3 +24418,18 @@ tracking the stack through the branch's push shows the stores land where the sou
 shared record's identifier field. So that part of the notes was wrong and no change was made for it.
 The remaining divergence is where the compiler places a loop-header zero and how it cross-jumps branch tails: the reference cross-jumps one item's tail with another's,
 this build cross-jumps a different pair, so the tails sit at different offsets although every reference instruction still pairs with an object instruction to the end.
+
+## 2026-11-03 — list row: three conversion and predicate defects, kept against the count
+
+`0x529890` ends this pass at 108 matched bytes with the object at 2107 against the 2095 extent, having started at 111 and 2119, so the positional count is one byte worse and the
+object is twelve bytes closer to its extent. Four defects were repaired and they are all correctness rather than shape.
+Two index and argument reads were signed characters where the reference zero-extends them, shown by a zeroed register and a byte move against a sign-extending load; both
+are now unsigned reads, and the arithmetic that scales one of them by a 0x24d stride is unsigned too. A bound written as at most 0x1f is now strictly less than 0x20,
+which is the comparison the reference emits. Two blocks had their arms laid out with the not-equal arm as the fall-through where the reference falls through the equal
+arm, so both are rewritten with the bodies swapped, which preserves meaning. And one arm tested a numerical range where the reference tests the value against zero, so
+that arm now branches on zero and calls one routine, falling through to the other call with a zero argument.
+The measurements are recorded in the order they were taken because they show the signal problem clearly: drift windows fell to a single one at an intermediate step while
+the byte count stayed near eighty, and the final step traded one apparent window for four real layout drifts, which is still the right trade because the change it
+carried is a proven conversion fix. The remaining differences are frame and register assignment: the reference keeps a pointer in one callee-saved register and carries
+eight more bytes above one array and eight fewer below it, so the first divergence is a load into one register rather than another at byte zero. That class stays open and
+was not guessed at.
