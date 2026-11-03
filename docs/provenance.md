@@ -24833,3 +24833,16 @@ two counters did not move it, so it is reported as allocation-driven rather than
 is the same signal pattern seen on other rows: fixing operands while the frame stays displaced produces more, shorter runs.
 Ten other classes were checked and are clean: no classification macros, the message field offsets, the advanced-pointer stores, the literals, the initialisation order, the
 call argument order, the buffer bound, the table pointer and its stride chain, and the shared return tail.
+
+## 2026-11-03 — a copy-paste constant, a dead initialiser, and a correction to my own reading
+
+`0x56CFC0` keeps one repair: the tolerance passed to a vector comparison in the first case is 80.0 in the reference, proven by the pushed constant 0x42a00000, where the source
+had 750.0. A sibling row uses 750.0 at its own site, so this looks like a copy-paste from that sibling. The change does not raise the matched count because the site sits past
+the first structural divergence, and it is kept because the constant is wrong rather than because it scores.
+Two of my own claims were corrected. I had said the reference passes the address of a scratch slot as that comparison's second argument. Tracking the stack through the three
+outstanding pushes shows the same displacement resolves to the position vector, so our object already passes the right argument and there is no scratch-slot form to restore;
+passing an array instead made the bytes worse. And the missing seven-byte store of zero at frame 0x24 is not a live local: the reference never reads that slot in any of its
+four switch entries, so it is a dead initialiser the compiler kept, while in our build the slot is occupied by the floating value that the reference places elsewhere. Every
+source shape tried is either eliminated as a dead store or displaces the frame; a volatile qualifier forces the store but costs the frame and drops the match to 541.
+The row therefore stays at 581 of 2300 with the object at 2296 and both code ends equal, and the seven-byte gap is recorded as blocked local allocation rather than as a defect
+waiting for a shape.

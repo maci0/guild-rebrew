@@ -250,7 +250,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 							fcn_00455350(m, m + 0x4c, pos);
 							if (CompareVector3WithinTolerance(
 								    (float *)(*(int *)(*(int *)(r + 0x184) + 0x34) + 0x4c),
-								    pos, 750.0f) != 0) {
+								    pos, 80.0f) != 0) {
 								if (i != 0)
 									fcn_004c5da0(*p, *(int *)(i + 1), -1, 0, 1,
 										     g_6a6af4);
