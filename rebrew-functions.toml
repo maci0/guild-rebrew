@@ -474239,7 +474239,7 @@ blocker = "Second-pass body written from the live 0x52b720 disassembly and the r
 blocker_delta = 2203
 
 ["GOLDTL.0x0052b720".verification]
-source_hash = "dfe2ab930b1037baf3a37c7fb92da7bb1dc4a2bbc1e95f6c93118fa511511989"
+source_hash = "1c0eeb3cc4a74a98a3910728f5b0c7b701fd36dbbc86538075b810da5c87cd1e"
 reference_hash = "c4577c1f738a5f5dd29d89b7ca5cc2e41b5933807875b33d3400874857777623"
 reference_size = "2367"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -474250,10 +474250,10 @@ module = "GOLDTL"
 va = "0x52b720"
 context_hash = ""
 defines = "[]"
-input_hash = "50845a1cab2779227947f64a4157d54e46c5a62fbf7c7c5a5e14202c42522229"
+input_hash = "bb97514059947e4f7b01d1431fe34a4ef67ea60b145be4d5aad02a0dd4aee536"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T19:14:29+00:00"
+measured_at = "2026-11-03T19:32:18+00:00"
 
 [["GOLDTL.0x0052b720".status_history]]
 old_status = "STUB"

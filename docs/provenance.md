@@ -24218,3 +24218,19 @@ frame register read sixteen bytes high; the layout is flags at zero, table point
 buffers at 0x130 and 0x140, and a 0x400-word array at 0x150 running to 0x950. Four scan loops use signed jumps with strict bounds, one global is a pointer reloaded after
 a store through it, two calls clean their stack merged at twenty-eight and sixty-two bytes, and three callees take nine, seven and two arguments by their own source. This
 row needs a full-body session, not a defect pass, and is recorded as such rather than left looking like an easy row.
+
+## 2026-11-03 — damping row: an import thunk called through the wrong convention
+
+`0x52B720` moves from 167 to 344 matched bytes with the object from 1716 to 2352, fifteen bytes under the 2367 extent, and the frame now opens with the reference's
+0x80 adjustment. The largest repair is a call the source made through a convention and arity that are both wrong: the target is a two-argument stdcall import thunk that
+jumps through an import slot and cleans its own stack, while the source declared it cdecl with three arguments and passed a scale value the reference never pushes. The
+reference pushes only one field and the address of a matrix.
+A second repair is the tick conversion, which must be an unsigned integer widened to a double, because that is what makes the compiler store a zero and the value as a
+quadword and load it with an integer-to-float load, exactly as the reference does. The damping rewrite follows the reference's shape: subtract when positive else add when
+negative, with clamps. The local set was reduced so the matrix lands at the reference's frame offset and a negated angle reuses another slot rather than adding a local.
+One arm order was kept against a positional gain: reversing the distance test scored seven more bytes but emitted a mask-and-jump where the reference emits a parity test,
+so the reference order and idiom were kept and both numbers recorded.
+The frame, the verified slots, the float constants and the collision clamps were checked against the reference, and the tail merge at the shared return path is labelled as
+the codegen device it is. The remaining blocker is the zero constant going into one callee-saved register instead of another, which pushes that register at byte twelve and
+delays its restore, so every tail displacement is four bytes out; an isolated probe with the same prologue picks the reference's register, so the full-function allocator
+is choosing differently because of the later body shape and the next step is to converge the collision and rotate blocks first.
