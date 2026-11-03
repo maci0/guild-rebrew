@@ -21917,3 +21917,22 @@ an early-break if, measures 577 at 7547 with a 28-byte larger object, so the ref
 is a net regression here and was reverted. Every one of the 118 relocation bindings is unresolved, with the top ones being
 memmove at 21 sites, sprintf at 19, and the two message helpers and the integer printer behind them; call-count differences
 against the reference remain in the report client message, two other helpers, strncat and isctype.
+
+## 2026-11-03 — d2 two: the home follows the live range, so deferral cannot free it
+
+The probe proposed for `0x4DCF50` was run and came back negative, which settles the row's blocker rather than merely restating it.
+The native first load of the p38 pointer is at 0x4dd0f2 through `mov ebx,eax`, after every head store, while this build assigns
+it at source line 177, also after the head, so moving the assignment to match is a no-op. Deferring it to its first use at
+line 208, or to after the p48 guard, was tested anyway along with deferring p34, p3c, p40 and p44. Nine variants, and the slot
+is freed in none of them: with native's leading initialisers the frame stays at 0x764 and the first divergence sits at offset
+zero on the frame byte, with 316 to 323 gap windows against the baseline 365, and on the baseline head the object shrinks to
+8795 with 380 to 382 windows. The frame fix never appears, so the window count never drops sharply.
+The evidence explains why. The pointer is not address-taken: there is no address-of in the source and no load-effective-address
+of its slot in the object. It is stack-homed because its value stays live across regions where the allocator reuses ebx: the
+baseline object stores it once at 0x197 with `mov [esp+0x18],ebx`, reuses ebx as a counter at 0x4fa, 0x54d, 0xab0, 0x148d,
+0x193c and 0x1c6d, and reloads the value at 0x16b9 and 0x1c8a, while the reference pins p38 in ebx at 0x4dd0f2 and never
+rewrites ebx. The value is really read at source lines 813 to 820, so the long live range is genuine rather than an artifact of
+where the declaration sits, and deferring the first load moves the home without removing it, as the E2 variant shows when it
+lands at 0x24 instead of 0x18. Freeing the slot therefore needs the loop region to stop reusing ebx, which is register
+allocation shape and not source-level load placement. The row's blocker is rewritten with this and with the explicit list of
+probes not to repeat. The source is restored byte-identically and nothing was kept.
