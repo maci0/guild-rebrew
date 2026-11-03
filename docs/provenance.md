@@ -24698,3 +24698,20 @@ The dominant remaining difference is allocation: the reference frame is 0x1cc ag
 vectors preloaded in spill slots rather than recomputing them. That is not padding material and is reported unsolved. The mode-two floating-point spill ordering is a second
 unsolved remainder. Thirteen callee arities were checked and all match, the dispatch field matches, the loop comparisons match, and the particle structure is 0x68 in both
 with the third instance ending exactly at the reference frame boundary.
+
+## 2026-11-03 — packet row: an argument order wrong on ten calls, and a comparison pointing the wrong way
+
+`0x56BFD0` moves from 281 to 341 matched bytes with the object at 2252 against the 2324 extent, and five repairs were kept from the reference bytes.
+The largest is an argument order repeated ten times: every call to one routine pushes the identifier first and two constants after it, and because the reference pushes
+right to left the identifier is the last argument, not the first, so the source had the call reversed at all ten sites. A variadic formatting call takes five arguments in
+the reference, including a converted field and a loop index, where the source passed four. A comparison decided entry into the packet body with the wrong operand order, so
+it is reversed to match the reference's branch, which falls through on the packet path. In one case the first entity lookup must use one field of the record and the second a
+different field, and the source used the second field for both. And a match counter is used by both a table loop and a non-zero test, where the reference tests the entity
+slot count and the table match count separately.
+Three more discrepancies are proven and were left out because they measure neutral or worse: the packet header belongs at four offsets one dword below where the source
+writes it, with the entity identifier after three minus-one fills; two fields belong at lower packet offsets; and one minus-one fill order differs. The case-two lookup role
+is the most important of these and costs sixty-eight matched bytes when applied, so it is recorded with the reason it must land together with the packet offsets: both
+depend on the same sixteen-byte frame difference.
+The measurements disagree in a way worth recording: matched bytes rose by sixty while the count of instruction pairs that are exactly equal fell from fifty-seven to
+twenty-five, the object shrank by eight bytes and its code end moved backwards. That is consistent with fixing operands while the frame stays displaced, and both numbers
+are recorded rather than the flattering one.

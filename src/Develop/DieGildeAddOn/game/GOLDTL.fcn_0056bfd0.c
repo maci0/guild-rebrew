@@ -30,6 +30,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 	float prob;
 	int slot;
 	int rnd;
+	int n;
 	char* e2;
 	char* target;
 	int i;
@@ -42,8 +43,8 @@ void __cdecl fcn_0056bfd0(char* ent)
 	value = 1.0f;
 	switch (*(int*) (ent + 0x70)) {
 	case 0:
-		e2 = fcn_00503fe0(*(int*) (ent + 0xb0), 1, 1);
-		target = fcn_00503fe0(*(int*) (ent + 0xac), 1, 1);
+		e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xac));
+		target = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 		if (e2 != 0 && target != 0) {
 			count = 8;
 			do {
@@ -97,7 +98,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 		*(int*) (ent + 0x70) = 2;
 		return;
 	case 2:
-		e2 = fcn_00503fe0(*(int*) (ent + 0xb0), 1, 1);
+		e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 		if (e2 == 0) {
 			*(int*) (ent + 0x70) = -1;
 			return;
@@ -108,7 +109,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 		    + *(unsigned short*) (ent + 8) * 0x21c);
 		slot = fcn_0050c710(e2, 5, 1);
 		prob = (float) ((double) slot * 0.01 + 1.0);
-		e2 = fcn_00503fe0(*(int*) (ent + 0xb0), 1, 1);
+		e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 		target = fcn_00502cd0(*(int*) (e2 + 0x5d), 1, 0, 0xca);
 		count = (int) target;
 		while (target != 0) {
@@ -124,7 +125,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 			value = 10.0f;
 		}
 		rnd = fcn_0042e410(0x4b) & 0xffff;
-		if ((float) rnd + value * 100.0f < prob * 125.0f) {
+		if ((float) rnd + value * 100.0f > prob * 125.0f) {
 			memset(msg, 0, 0x114);
 			msg[8] = 3;
 			msg[0x26] = 0xa2;
@@ -139,24 +140,24 @@ void __cdecl fcn_0056bfd0(char* ent)
 				*(int*) (msg + 0x80 + i * 4) = -1;
 				*(int*) (msg + 0xc0 + i * 4) = -1;
 			}
-			slot = 0;
+			n = 0;
 			i = 0x7f4e0c;
 			do {
-				if (slot >= 6) {
+				if (n >= 6) {
 					break;
 				}
 				if (*(char*) (i - 0x164) != 0
 				    && *(int*) i == (int) e2) {
-					*(int*) (msg + 0x80 + slot * 4) =
+					*(int*) (msg + 0x80 + n * 4) =
 					    *(int*) (i - 0x168);
-					slot++;
+					n++;
 				}
 				i += 0x21c;
 			} while (i < 0x85a20c);
 			*(int*) (msg + 0x100) = -1;
 			*(int*) (msg + 0x104) = -1;
 			*(int*) (msg + 0x108) = -1;
-			e2 = fcn_00503fe0(*(int*) (ent + 0xb0), 1, 1);
+			e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 			*(int*) (msg + 0x100) = *(int*) (e2 + 1);
 			slot = 0;
 			e2 = ent + 0x8c;
@@ -173,7 +174,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 				i++;
 				e2 += 4;
 			} while (i < 8);
-			if (slot != 0 && count != 0) {
+			if (slot != 0 && n != 0) {
 				*(int*) (msg + 0x1c) = *(int*) 0x7f4c00;
 				*(int*) (msg + 0x20) = *(int*) 0x7f4c04;
 				*(int*) (msg + 0x24) = *(int*) 0x7f4c08;
@@ -188,8 +189,8 @@ void __cdecl fcn_0056bfd0(char* ent)
 				*(int*) (ent + 0x70) = 3;
 				goto tail;
 			}
-			e2 = fcn_00503fe0(*(int*) (ent + 0xb0), 1, 1);
-			target = fcn_00503fe0(*(int*) (ent + 0xac), 1, 1);
+			e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
+			target = fcn_00503fe0(1, 1, *(int*) (ent + 0xac));
 			j = fcn_004d5110(target, e2, (char*) i,
 			    (char*) (0x7f4ca0
 			    + *(unsigned short*) (e2 + 0x27) * 0x21c));
@@ -200,7 +201,9 @@ void __cdecl fcn_0056bfd0(char* ent)
 			fcn_00545e80(*(int*) (0x7f4ca4
 			    + *(unsigned short*) (e2 + 0x27) * 0x21c),
 			    -1, text, 0, 0x5f0, *(int*) (e2 + 1), -1, 0, 0);
-			io_FormatTextBuffer(text2, 0x1c55, target, j);
+			io_FormatTextBuffer(text2, 0x1c55,
+			    (int) *(unsigned short*) (target + 0x27),
+			    target, j);
 			fcn_00545e80(*(int*) (0x7f4ca4
 			    + *(unsigned short*) (ent + 8) * 0x21c),
 			    -1, text2, 0, 0x5f0, *(int*) (e2 + 1), -1, 0, 0);
@@ -221,8 +224,8 @@ tail:
 			}
 			return;
 		}
-		e2 = fcn_00503fe0(*(int*) (ent + 0xb0), 1, 1);
-		target = fcn_00503fe0(*(int*) (ent + 0xac), 1, 1);
+		e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
+		target = fcn_00503fe0(1, 1, *(int*) (ent + 0xac));
 		j = fcn_004d5450(e2) + 0x1125;
 		io_FormatTextBuffer(text, 0x114b, j,
 		    (int) *(unsigned short*) (target + 0x27), target, j);
@@ -273,7 +276,7 @@ tail:
 	case -2:
 	case -1:
 	case 5:
-		e2 = fcn_00503fe0(*(int*) (ent + 0xb0), 1, 1);
+		e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 		if (e2 != 0) {
 			slot = (int) fcn_00504b30(e2);
 		}
