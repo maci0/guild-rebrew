@@ -23466,3 +23466,17 @@ The positional count falls from 683 to 506 while the structural ratio reaches 0.
 bytes and two more at 26 and 14. The drop comes from the object being 64 bytes short, and the negative gaps around the scan block show this build's code is
 condensed relative to the reference there, which is recorded as a shortfall rather than a regression. Every other checked class came back clean: push counts and
 widths at every call site, both variadic argument counts, five strides, both bounds, the copy count, the argument orders at two calls, and the guards.
+
+## 2026-11-03 — the row picker was hiding rows, and the frontier is not empty
+
+A read-only pass across the untouched rows corrected two beliefs about what work remains. The picker had a bug: it recorded a row's address in its de-duplication
+set before checking the module, so any GOLDTL row whose address is also used by a GOLD row was dropped from the list while the GOLD row consumed the address. The
+fix is to check the module first and only then de-duplicate, which raises the workable set from 986 to 1010 and reveals 24 hidden rows. The largest hidden row is
+0x42bf20 with an extent of 5840 bytes, whose file attempts the whole body and measures 1232 matched bytes, so it is the largest single unmatched span known.
+The pass also tested twelve picker candidates and ranked them by extent minus matched bytes, which is the amount of unmatched code they represent. Four rows have
+objects far below their extent, meaning a lead scaffold or a partial transcription rather than a body: 0x5c3f10 at 583 of 2768, 0x511c60 at 131 of 2577,
+0x557460 at 925 of 2532 and 0x55f300 at 608 of 2504. The rest sit at or near their extent, which means their files already attempt the whole body and a pass on
+them is repair rather than reconstruction.
+Two further facts are recorded so later passes do not misread the store: a generic blocker line means no session has recorded work, not that the row is untouched,
+since files under those rows contain real bodies; and the twelve untested candidates above 2700 bytes remain the frontier, from 0x5a59d0 at 2962 down to
+0x5186c0 at 2756.
