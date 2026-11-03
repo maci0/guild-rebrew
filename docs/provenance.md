@@ -24715,3 +24715,15 @@ depend on the same sixteen-byte frame difference.
 The measurements disagree in a way worth recording: matched bytes rose by sixty while the count of instruction pairs that are exactly equal fell from fifty-seven to
 twenty-five, the object shrank by eight bytes and its code end moved backwards. That is consistent with fixing operands while the frame stays displaced, and both numbers
 are recorded rather than the flattering one.
+
+## 2026-11-03 — the fourth vector slot is a shared scratch, and one call's arguments are wrong
+
+The missing store on `0x56CFC0` is now explained rather than guessed. The reference initialises four dwords from frame offset 0x18: three vector components and a fourth
+that is zero here, then reuses that same fourth slot twice later, once as an integer temporary for an integer-to-float conversion and once as the address of a scratch
+vector passed to a call. So it is not a four-element vector; it is a shared scratch local whose first use initialises it to zero, which is why widening the vector to four
+elements moved everything after it and dropped the row to a stub at 525 matched bytes.
+Tracing that second use also exposed a real argument defect at a later call. The reference passes the address of that scratch slot as the second argument and a tolerance
+of 80.0, where the source passes the position vector and a tolerance of 750.0. The push of the constant in the reference is 0x42a00000, which is 80.0, so the source has
+both the pointer and the tolerance wrong at that site. That is recorded for the next pass rather than edited here, because the scratch local has to exist first for the
+pointer form to be expressible.
+The row is back at its baseline, 581 of 2300, and no change was kept from this investigation.
