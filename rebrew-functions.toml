@@ -423133,10 +423133,10 @@ name = "io_AppendText"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00519190.c"
 symbol = "_io_AppendText"
 kind = "FUNCTION"
-updated_by = "test"
-updated_at = "2026-11-03T04:12:21+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-03T11:21:19+00:00"
 status = "STUB"
-blocker = "prologue wall: native push ebp;mov ebp,esp;and esp,-8 is never emitted by /O2 with this profile (15-construct matrix), so byte 0 differs; slots solved via aggregate (text esp+0x25c vs 0x260, +4 = the alignment slack); frame honest 0x31ec vs native 0x31f4"
+blocker = "third callee-saved register unreachable from source, with the register roles mapped on both sides. Reference keeps the text index in ebx, zeroed at 0x5191a6 and used as the zero for early stores, compared at 0x519289 and indexed as [esp+ebx+0x260]; it keeps the state base in esi, loaded at 0x519295 and reused at 0x519902; edi is scratch. This build keeps the index in esi and spills it to [esp+0x8] around the copy intrinsic, and the state base is memory-resident at [esp+0x24], reloaded thirteen times. Twelve shapes measured and none produced the third push: aggregate sizes that do not change the aligned size are inert, both 0x17cc and 0x17d0 give 0x2fa0; separate state pointer, retyped pointer, declaration-first, initialiser form, split reuse, live-across-call and nested-loop rotation all keep two pushes and 0x31f0. The state base is not a register candidate in this build at all, since it is rematerialised rather than kept. Frame invariant to respect: immediate plus four times pushes equals text offset plus 0x2fa0, so the reference immediate 0x31f4 follows only from a third push. Do not change flags: an /O1 build reproduces the x87 form and drops windows to 51 but shrinks the object to 6544, a false realignment"
 
 ["GOLDTL.0x00519190".verification]
 source_hash = "1ea5754e03d347f07e35447fd7178736d4299c9d5d9b0278c3b1507d96ac57ce"

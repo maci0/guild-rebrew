@@ -22501,3 +22501,22 @@ a division instead of the modulo measures 537 at 5520, so neither reproduced the
 part of the picture.
 The row's stored status was refreshed with `--force-status` because the metadata still claimed STUB while the source compiles to a
 size mismatch at 5571 against 5499.
+
+## 2026-11-03 — text appender: the register map closes the third-push question
+
+`0x519190` keeps 660 of 7527 with 185 windows and an unchanged source, and the register map is now complete on both sides, which
+closes the question rather than leaving it open. The reference keeps the text index in ebx, zeroed at 0x5191a6, used as the zero
+for the early stores, compared at 0x519289 and indexed as [esp+ebx+0x260], while it keeps the state base in esi, loaded at
+0x519295 and reused at 0x519902, with edi as scratch and the other registers transient. This build keeps the same index in esi,
+spills it to [esp+0x8] because the copy intrinsic uses esi, and keeps the state base in memory at [esp+0x24], reloading it thirteen
+times into scratch registers.
+Twelve shapes were measured and none produced the third push. Aggregate sizes that do not change the aligned size are inert, with
+0x17cc and 0x17d0 both giving 0x2fa0. A separate state pointer gives 606 at 7503, splitting the reused local gives the same 606 at
+7503, retyping it gives an identical object, declaring or initialising the index first is byte-identical, computing the state base
+earlier gives 631 at 7527, nested loops matching the reference control flow give 617 at 7579, and making the base live across the
+call still reloads it. Every shape keeps two pushes, the base at esp+8 and the immediate at 0x31f0.
+The named negative is decisive: the state base is not a register candidate in this build at all, being rematerialised from its
+spill or recomputed from a global rather than kept, so no register is saved for it and the index keeps esi. For ebx to appear the
+allocator must prefer a second variable over the index for esi, and none of the eight allocation levers tried did that. The frame
+invariant still holds and is the way to check any future attempt: the immediate plus four times the number of pushes equals the
+text offset plus 0x2fa0, so the reference immediate at 0x31f4 follows only from a third push.
