@@ -24566,3 +24566,17 @@ register swap is confirmed again.
 Two further shapes were tried here on the reassociation row and both produce identical bytes: separating the offset into its own local and adding the base there, and
 advancing a typed pointer by the index so that scaling happens through pointer arithmetic. That makes six shapes on that row, all folded by the compiler, so the
 reassociation is recorded as a wall rather than an open question.
+
+## 2026-11-03 — near row closed: a pipelined load needs two alternating temporaries
+
+`0x445EC0` closes from a near match to a relocation match at 135 of 135 with two validated relocations. The reference pipelines six global loads one ahead of their
+stores: each load is issued before the previous value is stored, so the store order and the register that holds each value differ from a plain sequence. A source shape
+with one cached temporary produces load, load, store, store and then strict pairs. Rewriting it with two alternating temporaries, assigning the second before the first
+is stored, reproduces the reference byte for byte. That makes this a source-shapeable class rather than a wall, and it is recorded as a technique: when the reference
+interleaves loads and stores, alternate two temporaries instead of caching one.
+Three more near rows were measured to walls in the same pass. A one-hundred-and-ten-byte row is exactly 98 of 110 under the processor-pack profile, but the same source is
+110 of 110 under the plain service-pack profile, and both images share the same compiler front end while the pack ships a different code generator; the translation unit
+is genuinely pack-compiled elsewhere, since two sibling functions match fully under the pack and not under the plain profile, so a per-row override would be unjustified
+and the row is a code-generator ordering wall. A one-hundred-and-twenty-one-byte row swaps two registers that the prologue saves in the other order, and five declaration
+and initialisation shapes left it unchanged. A one-hundred-and-twenty-three-byte row places a copy-count move ten bytes from where the reference does, and six shapes were
+worse or equal. A one-hundred-and-thirty-byte row rotates three registers, and six shapes did not move it.
