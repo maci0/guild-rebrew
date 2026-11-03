@@ -22659,3 +22659,23 @@ windows and 91 deletions, and was reverted.
 Every direct call target was checked against the reference order and all agree, covering the entity, clamp and conversion helpers
 and the several per-half routines, so there is no wrong target on this row. The first divergence remains the prologue stack slot,
 with the reference frame at 0x120 and this build at 0xe4.
+
+## 2026-11-03 — the sibling idiom does not transfer, and a false lead is ruled out
+
+`0x5186C0` keeps 317 of 2772 with object 2772 against the reference 2756 and no window closed. The brief asked whether this
+sibling of 0x517c00 shares that row's defect, and the answer is no, for a measured reason: the sibling's reference tests the copied
+destination because its inline copy reuses esi for the destination, while this row's reference keeps the source pointer in esi and
+computes all four genitive tests on the source, with `mov ebx,[esp+0x53c]` for the destination, `lea edx,[esi+0x30]` and the copy
+loop, then four byte comparisons against `[ecx+esi+0x2f]`. The unmodified source compiles to exactly that pattern, so applying the
+sibling's destination form was structurally wrong and was reverted. The lesson is recorded plainly: a defect proved from the bytes
+on one row is not evidence about its neighbour, and the bytes have to be read again.
+A false lead is also ruled out. Seven genitive comparisons looked like a size defect because one disassembler prints the
+sign-extended immediate while another prints the negative constant, but the reference and object bytes are identical there, so no
+fix is needed.
+The wall is the save placement that two rows share: the object pushes ebx and ebp in the prologue while the reference defers both
+into the switch dispatch, after loading the selector and masking it, so everything downstream shifts by eight stack bytes and object
+case 1 carries its own inline tail while the reference shares that tail inside another case's extent. Five shapes were tried,
+including the sibling's signature and a nested switch, and none moved the saves; a compile with the plain non-processor-pack profile
+gives 3064 at 257, confirming the pack profile is right. Wrong-access checks came back clean: all 32 direct calls, all eight format
+strings with their exact contents, four table base pairs and eight record offsets, plus the case ladder and the guard chain, all
+agree with the reference bytes.
