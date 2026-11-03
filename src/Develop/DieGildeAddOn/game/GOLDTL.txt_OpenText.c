@@ -63,6 +63,7 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 	int v20;
 	char* p;
 	char* q;
+	char* r;
 	FILE* fp;
 	int v2c;
 	int k;
@@ -168,10 +169,11 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 				goto fail_free;
 			}
 			p++;
-			if (fcn_0064e790(p, '"') == 0) {
+			q = (char*) fcn_0064e790(p, '"');
+			if (q == 0) {
 				goto fail_free;
 			}
-			*fcn_0064e790(p, '"') = 0;
+			*q = 0;
 			strcpy(g_1052e00, p);
 		}
 		p = (char*) strstr(line, "#headerfile");
@@ -181,10 +183,11 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 				goto fail_free;
 			}
 			p++;
-			if (fcn_0064e790(p, '"') == 0) {
+			q = (char*) fcn_0064e790(p, '"');
+			if (q == 0) {
 				goto fail_free;
 			}
-			*fcn_0064e790(p, '"') = 0;
+			*q = 0;
 			strcpy(g_1335000, p);
 		}
 		p = (char*) strstr(line, "#include");
@@ -194,10 +197,11 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 				goto fail_free;
 			}
 			p++;
-			if (fcn_0064e790(p, '"') == 0) {
+			q = (char*) fcn_0064e790(p, '"');
+			if (q == 0) {
 				goto fail_free;
 			}
-			*fcn_0064e790(p, '"') = 0;
+			*q = 0;
 			strcpy(inc[v3c], p);
 			v3c++;
 			if (v3c > 0x80) {
@@ -282,17 +286,18 @@ pass1_done:
 						v10 += k;
 						v14 += k;
 						while (p != 0) {
-							if (strstr(msg, "*/") != 0 && strstr(msg, "*/") < p) {
+							r = (char*) strstr(msg, "*/");
+							if (r < p) {
 								fcn_0064d41a(msg, "Syntax error in file %s in line %i: Missing '/*'", p, v24);
 								MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
 								break;
 							}
-							if (strstr(msg, "*/") == 0) {
+							if (r == 0) {
 								fcn_0064d41a(msg, "Syntax error in file %s in line %i: Missing '*/'", p, v24);
 								MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
 								break;
 							}
-							memcpy(p, strstr(msg, "*/") + 2, strlen(strstr(msg, "*/") + 2));
+							memcpy(p, r + 2, strlen(r + 2) + 1);
 							p = (char*) strstr(msg, "/*");
 						}
 						k = (int) strlen(msg);

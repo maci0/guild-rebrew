@@ -23528,3 +23528,19 @@ The remaining divergence is the prologue: the reference frame is eight bytes lar
 reject test, while this build at its optimisation level allocates less and defers the save. The second divergence is the inlined clearing, where the reference spills
 its arguments and runs the alignment pre-pass while this build emits one direct fill. Both shift the whole body, which caps the matched byte count, and the
 reference also schedules the shared close block after the face loop while this build places it last.
+
+## 2026-11-03 — text parser: three duplicated lookups and a missing terminator
+
+`0x42BF20` (txt_OpenText) keeps 1235 of 5840 with the object at 5787 and 224 relocations, and the gap windows fall from 337 to 315 and the mismatched bytes from
+4639 to 4584. Three real defects were repaired. The comment loop called the terminator search three times where the reference calls it once and reuses the result,
+and the source also carried a null guard the reference does not have: the reference compares the missing-open-marker case with an unsigned jump and then tests the
+result for zero. The length passed to the copy was one short, because the reference measures with the terminator included, which the byte scan shows by not
+decrementing the count. And each of the three directives searched twice for its closing quote where the reference searches once and reuses it.
+Three things that look like defects were checked and confirmed correct, so they were left alone: the comma-loop index expression that computes a large multiple of
+a counter is real reference behaviour and appears as a shift of 0x17 in the listing, the semicolon block's copies and subtraction and counters match, and the
+resource writer's fields and the zeroing sizes and allocation size match.
+One repair was kept against the positional count: dropping the duplicated directive searches reduced the matched bytes by two relative to the previous step while
+shrinking the windows and restoring the reference's call shape, so the structural signal was preferred and both numbers are recorded.
+The remaining divergence is the frame: the object's local area is four bytes smaller and two buffers sit in the opposite order, because the reference keeps fifteen
+four-byte slots including one that is never read. A local was not invented to force the frame, so every stack displacement stays four bytes off, which caps the
+matched bytes on this row.
