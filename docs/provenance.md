@@ -21812,3 +21812,20 @@ is not game recovery and whose bytes are accounted through library attribution r
 bytes fall outside that band, the largest being 306, 270 and 209 bytes at 0x4623c0, 0x4615b0 and 0x4631b0. The practical
 consequence is that the road to a byte-identical text section runs through the 969 size-mismatched rows already bound to
 source, not through new function discovery, and the largest single gaps are concentrated in a handful of large rows.
+
+## 2026-11-03 — alignment fill is trimmed, continuation code is not
+
+`0x507910` now measures RELOC at 213 of 213 with the object exactly at the extent and 18 relocations, after its extent was
+settled at 213 against an inventoried 224. The row is the case that clarifies the boundary rule, because two policies met
+here and one of them wins on the evidence. The body ends with `ret` at 0x507985, followed by a 16-entry jump table at
+0x507988 and a 29-byte case-index table ending at 0x5079E5; every case target and table value already matched the source.
+The eleven bytes from 0x5079E5 to the 16-aligned next row at 0x5079F0 are `0x90` fill, and the byte-identical GOLD twin at
+0x5048E0 is already recorded at 213. C cannot emit table-trailing NOPs: eleven `__asm nop` statements after the switch were
+tried and produced a 225-byte object with the match falling to 185, because the NOPs land before the compiler's own tables and
+overwrite the return. So the eleven bytes are alignment, not code, and the extent is 213.
+This refines the lesson recorded earlier for four other rows rather than contradicting it. A residual run that capstone
+decodes continuously as code, with no new prologue, is a continuation of the same function and is kept inside the extent even
+when the source stops short of it, which is why 0x5efd86, 0x65a20a, 0x64d1df and 0x5fc0c8 were restored to their reviewed
+sizes. A run of `0x90` or `0xCC` after the last real content, filling to the next row's alignment, is padding and is trimmed,
+which is why 0x51af00, 0x535bd0, 0x4f4830 and now 0x507910 are recorded at their content length. The distinguishing question
+is not whether the object is short of the extent but whether the bytes are instruction-bearing code or fill.

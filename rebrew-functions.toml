@@ -192423,7 +192423,7 @@ measured_at = "2026-11-02T07:45:55+00:00"
 size = 213
 status = "RELOC"
 updated_by = "test"
-updated_at = "2026-11-03T06:58:46+00:00"
+updated_at = "2026-11-03T07:05:02+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00507910.c"
 symbol = "_fcn_00507910"
 kind = "FUNCTION"
@@ -192444,7 +192444,7 @@ defines = "[]"
 input_hash = "6713f2ac07296fe149e6137d98d15364be2bbf3f93e58a36affd9efd63eea7d7"
 status = "RELOC"
 writer = "test"
-measured_at = "2026-11-03T06:58:46+00:00"
+measured_at = "2026-11-03T07:05:02+00:00"
 
 [["GOLDTL.0x00507910".status_history]]
 old_status = "RELOC"
@@ -192456,6 +192456,18 @@ updated_by = "verify"
 old_status = "SIZE_MISMATCH"
 new_status = "RELOC"
 changed_at = "2026-11-03T06:58:46.834638+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00507910".status_history]]
+old_status = "RELOC"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-11-03T07:02:55.331395+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00507910".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "RELOC"
+changed_at = "2026-11-03T07:05:02.522509+00:00"
 updated_by = "test"
 ["GOLDTL.0x005079f0"]
 size = 20
@@ -422949,7 +422961,7 @@ defines = "[]"
 input_hash = "c1adb1a6e597039662d9c17b9e7b502675ee9b4c9db2d873e1880b96cececd89"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T06:59:15+00:00"
+measured_at = "2026-11-03T07:03:36+00:00"
 
 [["GOLDTL.0x005ba910".status_history]]
 old_status = "STUB"

@@ -65373,6 +65373,20 @@
         "reason": "0x507910 body+switch tables end at 0x5079E5; the 11 bytes to 0x5079F0 are 0x90 alignment fill and the next inventory row starts at 0x5079F0. The byte-identical twin at GOLD 0x5048E0 has the same 11-byte gap and was recorded at 213. C cannot emit table-trailing NOPs.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-11-03T06:57:46.910470+00:00"
+      },
+      {
+        "old_size": 213,
+        "new_size": 224,
+        "reason": "Restore the reviewed 2026-10-25 boundary: the 11 bytes at 0x5079E5 are 0x90 text padding folded into this row so no text byte stays unowned. The source body and switch tables are byte-complete at 213; the padding cannot be emitted by C and was not part of the function body.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T07:01:42.493575+00:00"
+      },
+      {
+        "old_size": 224,
+        "new_size": 213,
+        "reason": "reviewed extent: the body and both switch tables end at 0x5079E5 with ret at 0x507985, and the eleven bytes to the 16-aligned next row at 0x5079F0 are 0x90 alignment fill. Fill is not code, the byte-identical GOLD twin at 0x5048E0 is already recorded at 213, and C cannot emit table-trailing NOPs, so the code extent is 213",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T07:04:25.535426+00:00"
       }
     ]
   },
