@@ -24551,3 +24551,18 @@ break, an unsigned counter, and a form with no intermediate value at all. The fi
 shorter object that is further from the reference.
 Both rows are restored byte for byte. The conclusion recorded for scheduling is that a near row differing only in register allocation is as expensive as a row missing
 whole blocks, so future passes should prefer rows with missing code over rows with single-register deltas.
+
+## 2026-11-03 — four near rows measured to their walls, and a fifth shape tried
+
+Four more near rows were worked and none closed, each with its cause pinned to a compiler behaviour rather than a source defect. All sources are restored and match the
+store's own hashes.
+A seventy-four-byte row hoists an address computation before a global store and pushes it, where the reference stores first, computes the address, pushes it and then
+finishes its buffer stores; a pointer local written for that purpose produced identical bytes, and the row already carried the same finding from an earlier pass. An
+eighty-four-byte row differs in six bytes of address arithmetic: the reference shifts an index then adds a constant base, while this compiler reassociates the constant
+into the index and shifts afterwards, which is algebraically the same and produces different bytes; that row also carries an older compiler hash in its record, so its
+stored verdict came from the previous environment. An eighteen-byte-wide window in a one-hundred-and-eighteen-byte row is a single instruction pair the scheduler orders
+differently, a compare before a move against a move before a compare, and the one shape that changed it regressed the branch layout instead. And the thirty-two-byte row's
+register swap is confirmed again.
+Two further shapes were tried here on the reassociation row and both produce identical bytes: separating the offset into its own local and adding the base there, and
+advancing a typed pointer by the index so that scaling happens through pointer arithmetic. That makes six shapes on that row, all folded by the compiler, so the
+reassociation is recorded as a wall rather than an open question.
