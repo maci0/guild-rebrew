@@ -20590,3 +20590,23 @@ shapes, `s44` kept in memory where native keeps it in a register, `order[s20]` c
 the slot at 0xc0, and the sel and s98 bases at 0xa8 against native's 0xc0, which is what keeps the row at STUB.
 Unresolved callees with null bound addresses: _fcn_004727a0 with 24 references, _fcn_0064d41a with 6, _fcn_0051af00
 with 2 and _fcn_004e4eb0 with 1.
+
+## 2026-11-03 — terrain object nine byte ordering wall
+
+`0x447110` stays at 3339 of 3348 with object 3348, 114 relocations and status NEAR_MATCHING; the pair-ordering pass kept
+no edit and the source is byte-identical to the session start. Both remaining regions are pure instruction
+permutations with no encoding difference. At 1638 the reference emits `xor edi,edi; mov [esp+0x1c],esi` for
+`left = count` and then `mov [esp+0x18],esi` for `start = count`, while this build emits `mov [esp+0x18],esi;
+xor edi,edi; mov [esp+0x1c],esi`, and at 2183 the reference writes left then start where this build swaps them. The
+reference order equals the source statement order, and 19 compiles were byte-identical at nine differences: statement
+swap, full reverse, `start = left`, a temporary local, an unfoldable expression between the stores, a pointer store
+through `*(int*)(void*)&start`, a comma statement, a for-init comma list, declaration swap, combined declaration,
+renaming, a long form, an unsigned form with a cast on the guard, a nested block, `do { } while (0)`, and a folded if,
+each applied to the first loop only, the second loop only and both. Order is not globally forced, since the pair at
+offsets 31 and 35 keeps descending source order in both images, and only this count-valued pair reorders. As a
+diagnostic, deleting `start = count` from the first loop changed the size to 3324 and swapped the slot assignment with
+start at 0x1c and left at 0x18 while the emitted order stayed start then left, so the earlier apparent flip was slot
+renaming rather than an ordering change. With start fixed at 0x18, left at 0x1c and both stores sourced from esi, the
+required order is not reachable from C within the allowed edit scope, and closing only the pair would leave the
+`xor edi,edi` placement wrong, so it would not have been a kept improvement. A blocker is set on the row. Variant
+matrix and details in .scratch/rd_object/NOTES-row-00447110.md.

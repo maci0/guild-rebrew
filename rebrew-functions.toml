@@ -425740,12 +425740,13 @@ updated_by = "test"
 size = 3348
 note = "Goal72 rd_object name attested by directly referenced native diagnostic; recursive four-argument scene-object reader, pointer/NULL result. Kuna omits main switch; no C adopted. Exact native tables, version branches, callers and real Gold differences saved in .scratch/goal72/scene-deps/manifest.json and REPORT.md. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
 name = "rd_object"
-updated_by = "test"
-updated_at = "2026-11-03T03:47:33+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-03T03:53:50+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.rd_object.c"
 symbol = "_rd_object"
 kind = "FUNCTION"
 status = "NEAR_MATCHING"
+blocker = "nine byte ordering wall: both regions are pure instruction permutations with identical encodings. At 1638 the reference does xor edi,edi; mov [esp+0x1c],esi (left=count); mov [esp+0x18],esi (start=count) while ours emits mov [esp+0x18],esi; xor edi,edi; mov [esp+0x1c],esi, and at 2183 the reference writes left then start where ours swaps them. Reference order equals source statement order, but this compiler does not reproduce it for this pair: 19 compiles, all byte-identical at nine diffs, covering statement swap, full reverse, start=left, temp local, unfoldable expression between, pointer store, comma statement, for-init list, declaration swap and combination, renaming, long and unsigned forms, nested block, do-while(0), folded if, each applied to loop 1 only, loop 2 only and both. Order is not globally forced, since the pair at offsets 31 and 35 keeps descending source order in both images. Deleting start=count changes size to 3324 and renames slots without changing the emitted order, so the apparent flip was slot renaming. Not reachable from C within the allowed scope"
 
 ["GOLDTL.0x00447110".verification]
 source_hash = "5cd9dda1143e549c874f28bd7b1a290fc3eda05ec6160097320c7b95f3476bf2"
