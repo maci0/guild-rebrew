@@ -423540,7 +423540,7 @@ blocker = "Full body reconstructed from the native listing (frame 0x6f8, saved e
 blocker_delta = 943
 
 ["GOLDTL.0x0046c5a0".verification]
-source_hash = "1b14b85bf833b9877b271e129b92b1374b5a39f17173c2b57ac0d3e4532effb9"
+source_hash = "ae1991f65e4c0d220d14fb1fcc39c745dec2b3c2abbca47628a4818b35c1834f"
 reference_hash = "d8be1a122f5c6a5df52cb4c68974ebc029ae7da682bc2da59ba22e24636ba23e"
 reference_size = "6080"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423551,10 +423551,10 @@ module = "GOLDTL"
 va = "0x46c5a0"
 context_hash = ""
 defines = "[]"
-input_hash = "20ea4b5a48d6456c3c567f4aa2d51c3c06384de92f26288bbbbd0edb6296ed49"
+input_hash = "8238dbbc7efc4c6bcbb6c92208333f3e8018a1f484b17966bea22b70022deb02"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T08:21:51+00:00"
+measured_at = "2026-11-03T08:43:31+00:00"
 
 [["GOLDTL.0x0046c5a0".status_history]]
 old_status = "STUB"
@@ -447060,12 +447060,12 @@ symbol = "_fcn_005b39c0"
 name = "fcn_005b39c0"
 kind = "FUNCTION"
 updated_by = "blocker"
-updated_at = "2026-11-03T06:34:45+00:00"
-status = "SIZE_MISMATCH"
-blocker = "codegen wall on register representation only: call targets, varargs lane order, field offsets, both strides (0x2f4 and 0x2a90) and store order all match the listing, and every effective field address is identical. The single divergence is the base that is materialised: the reference keeps the slot pointer 0x85abac (record base + 0x1c) in esi and addresses [esi-0x1c..esi+0x1c], while this compiler materialises the record base 0x85ab90 and addresses [esi..esi+0x1c], which also flips the guard load form and causes the one byte of object excess. Twenty plus shapes tried, including char, unsigned char, short and int bases, one pointer with a derived record, two pointers, a slot walker, an indexed inner loop, a biased reloc form, nested and for/goto guards, a volatile probe, and the /O1, /Ox, /Os, /Oy-, /Ob1, /Ot and /G6 flag sets, none of which moved the base; semantics are exact and byte exactness is blocked on codegen"
+updated_at = "2026-11-03T08:40:51+00:00"
+status = "NEAR_MATCHING"
+blocker = "register allocation only: slot pointer 0x85abac now materialises in esi, every field address, both strides, varargs lane order and store order match. Residual 6 bytes in 3 instructions: the f10/f14 argument loads swap edx/ecx, and the post-loop win-pointer reload uses eax where the reference uses edx (gap diagnostic: events at ref_off 245-247 and 347). Shapes that moved the base: (a) an inner cursor p = save with the record derived as (Rec80*)(p - 0x1c) and p advanced 0x80, which materialises f18's address as the base; (b) a first read of the f1c field before the call, which pins the base at the source literal 0x85abac. The reference's in-memory guard compare plus fresh zero-extending id load is reproduced by reading the guard through a volatile lvalue; with (b) plus that guard the object is 404 bytes and match is 398/404."
 
 ["GOLDTL.0x005b39c0".verification]
-source_hash = "a31a6f959a8f9d3c16d8883445770edd54b444baafcd6880065c024e2d2eb9aa"
+source_hash = "f95bf897a82137228fb751228c237a5ad08ea933b4012bb5348e2f7e002a5129"
 reference_hash = "cf4df8ff217d84f424fdb230af74e573b862be9ae55da58555c3c5a6fb22319f"
 reference_size = "404"
 headers_hash = "f9183ca8e9fd3262df3d17e235f5c324859c20e0bac8cf5013d0e8f2c7293e7f"
@@ -447076,15 +447076,21 @@ module = "GOLDTL"
 va = "0x5b39c0"
 context_hash = ""
 defines = "[]"
-input_hash = "1eee1d96b1ae913dd7f0519493d4cf6176e0effe8382fcf5a50af3a0e7091795"
-status = "SIZE_MISMATCH"
+input_hash = "b7c2b46edcc4b588ea9be1fc4c5d83269a75d395d411e4c960b7e4e03f6721f4"
+status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-03T08:06:21+00:00"
+measured_at = "2026-11-03T08:39:21+00:00"
 
 [["GOLDTL.0x005b39c0".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-19T02:59:28.061881+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005b39c0".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-03T08:39:21.325204+00:00"
 updated_by = "test"
 ["GOLDTL.0x005efeda"]
 size = 404
@@ -447331,21 +447337,21 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005086f0".verification]
-source_hash = "6a4511c6914152436f6ccedad309ce350dd64dc53ffceca2964a149274d27030"
+source_hash = "7e12ae9f7462c4c6b0dc77a2d591cb45f55dda912dc1a326d39c92a0ef6702e9"
 reference_hash = "1406a696e2fdde9079eb70ddf33622cb9ffa543b6f0c46f8ae26fa06cd2e7c96"
 reference_size = "413"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "0e8a99954f54c9a4a83e18dc30c2c78d371ee084f27f0d787482cfc91082426c"
+compiler_hash = "ee2a7ba71128a7a5f141c89ff77ffafa305188730195a02693d575d0c24e4133"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x5086f0"
 context_hash = ""
 defines = "[]"
-input_hash = "ec19775946b1eb8b9fe64d648e98eca5d6499f0b8aa28bd647ffa2d47f4b94ee"
-writer = "verify"
+input_hash = "07f53a8fbb94a1de0559809fa9e8ce57591951571e760f16de68be009ba1c8a4"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-02T07:45:55+00:00"
+writer = "test"
+measured_at = "2026-11-03T08:43:43+00:00"
 
 [["GOLDTL.0x005086f0".status_history]]
 old_status = "STUB"

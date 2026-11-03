@@ -22278,3 +22278,20 @@ the threshold the first, and this build does the opposite; adding one local push
 so the permutation is sensitive to the variable set without moving the counter toward 0x10. Two levers remain untried and are
 recorded for a later pass: giving the count loop a single use of the base that also feeds the second index, which is what the
 reference shows, and giving the third-branch compare its own copies so the counter dies earlier.
+
+## 2026-11-03 — the representation wall falls: base moved to the reference pointer
+
+`0x5B39C0` moves from 210 to 398 of 404 with the object exactly at the extent, 20 relocations and status NEAR_MATCHING. The
+recorded wall said the base could not be steered, and it is now steered: the instruction counts agree at 134 on both sides and
+the gap trace is down to two register windows at reference offsets 245 to 247 and 347.
+Three things moved it. A per-record cursor copy, where the cursor advances by 0x80 and an outer pointer by 0x2a90 and the record
+is derived as the cursor minus 0x1c, makes the compiler materialise a field address as the induction base instead of the record
+base, which reaches 0x85aba8 for 199 of 405. The decisive lever is that the base is the address of the first record field read
+in evaluation order: pre-reading the field at 0x85abac into a local before the call pins the base at exactly the reference
+pointer, 0x85abac, for 208 of 405 with the argument order right. And the guard form follows: the reference's word compare
+against [esi-0x1c] with a fresh zero-extending reload is reproduced only when the guard read is opaque to common subexpression
+elimination, which a volatile lvalue achieves, and with all three the row reaches 398.
+The caveat is recorded as stated: the volatile guard is a compiler-shape lever rather than attested source, though it changes no
+behaviour beyond one extra read of the same word. Shapes that did not move the base cost nothing to thirteen matched bytes, and
+the kept shape gains 188. The residual six bytes are register allocation only, with two argument loads using edx and ecx swapped
+while the push order agrees, and a post-loop pointer reload using eax where the reference uses edx.

@@ -35,11 +35,13 @@ void __cdecl fcn_005b39c0(void)
 {
 	Rec80* rec;
 	char* save;
+	char* p;
 	char* base;
 	int idx;
 	int n;
 	int id;
 	int slot;
+	int v1c;
 
 	idx = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
 	fcn_00472900(*(int*) (g_1015f40 + idx * 0x3cc + 0x27c), 0x54);
@@ -58,17 +60,23 @@ void __cdecl fcn_005b39c0(void)
 				}
 				io_AppendText(0x6ab848, base);
 				io_AppendText(0x6ab834);
-				rec = (Rec80*) (save - 0x1c);
 				n = 0x55;
+				p = save;
 				do {
-					if (rec->f00 != 0 && rec->f04 != 0) {
+					rec = (Rec80*) (p - 0x1c);
+					/* The reference compares the id word in memory and
+					   zero-extends a second load for the slot math, so the
+					   guard reads through a volatile lvalue. The f1c read
+					   below keeps 0x85abac as the addressing base. */
+					if (*(volatile unsigned short*) (p - 0x1c) != 0 && rec->f04 != 0) {
 						id = rec->f00;
 						slot = (int) lpObjektePROT + id * 0x40 + id;
+						v1c = rec->f1c;
 						io_AppendText(0x6ab804, slot + 1, (int) rec->f20, rec->f24,
 							(int) rec->f38, (int) eval_ObjektPreis2Credits(id, 100), rec->f10,
-							rec->f14, rec->f1c, rec->f18);
+							rec->f14, v1c, rec->f18);
 					}
-					rec++;
+					p += 0x80;
 					n--;
 				} while (n);
 				base += 0x2f4;
