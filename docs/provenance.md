@@ -21599,3 +21599,28 @@ the sparse switch at 0x4a9d32 emits `add edi,-0x12; xor eax,eax` and a byte-tabl
 padding is nop in native against `mov edi,edi` here. The object is 30 bytes short of the extent, consistent with those
 deltas. Every callee has a project row, with the eighteen case targets declared as the listing implies. Original and
 variants under .scratch/row-4a9b20/.
+
+## 2026-11-03 — small row blocked on representation, and the tool environment moved
+
+`0x5B39C0` keeps 210 of 404 with object 405 and status SIZE_MISMATCH; the source is restored byte-identically and nothing
+was kept. The binding is src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005b39c0.c with extent 404 ending at the `ret` at
+0x5b3b53 and the next inventory start at 0x005b3b60. The listing check passed on everything except one register
+representation: all call targets match, including the text append and the price evaluation functions and the conversion
+helper; the varargs lane order matches including a float promoted to double and the 0x2c stack cleanup; field offsets match,
+as do the inner bound 0x55, the outer comparison against 0x868c30, both strides of 0x2f4 and 0x2a90, and the store order of
+the two globals. The only divergence is the base that gets materialised: the reference keeps the slot pointer 0x85abac,
+which is the record base plus 0x1c, in esi and addresses [esi-0x1c] through [esi+0x1c], while this compiler materialises the
+record base 0x85ab90 and addresses [esi] through [esi+0x1c], which also flips the guard load form and causes the single byte
+of object excess. Every effective field address is identical, so the semantics are exact.
+More than twenty shapes were tried and all were reverted: char, unsigned char, short and int bases; declaration and
+assignment orders; one pointer with a derived record; two pointers for next and save; a slot walker; an indexed inner loop;
+a biased relocation form; nested-if, for, goto and continue guards; a volatile probe; and the flag sets /O1, /Ox, /Os, /Oy-,
+/Ob1, /Ot and /G6. None moved esi to 0x85abac; the best stayed 210 at 405 and most were worse, down to 144 at 390. The row's
+blocker is rewritten to describe this codegen wall rather than the generic pending-decompilation text.
+A tool environment change is recorded because it affects every future measurement: the project virtual environment was
+installing the released 6.16.0 wheel, which still carries the bytearray crash in the gap diagnostic, so the same version was
+installed from the local checkout at /home/maci/Desktop/Projects/relumea/repos/rebrew. Both report 6.16.0, and the checkout
+carries the two fixes made earlier tonight, the const-emitting stub generator and the bytearray crash repair. After the
+switch, `rebrew diagnose gap 0x005b39c0 --json` returns structured output instead of raising, which is what unblocked the
+diagnosis above. This is an explicit tooling-development opt-in and must be reverted to the released wheel, or shipped as a
+release carrying those fixes, before any result is treated as reproducible from a clean environment.
