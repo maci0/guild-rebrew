@@ -22917,3 +22917,17 @@ A diagnostic defect is recorded because it will mislead anyone who reads the tra
 and the gap diagnostic traces that padding instead of the function, reporting its instruction count and a bogus first fault at offset
 zero. With the padding stripped for one run the trace is usable and shows the reference's 1074 instructions against 1025 here, with the
 drift concentrated in three emission blocks where the reference reloads stack slots per store. The padding was restored.
+
+## 2026-11-03 — a GOLD twin scaffold, recorded as unverified
+
+The row `GOLD.0x005af320` now has a body at src/Develop/DieGildeAddOn/game/GOLD.fcn_005af320.c, measuring 1034 of 12127 bytes with 141
+relocation sites, structural ratio 0.9898 and mnemonic ratio 0.7251, and its status is SIZE_MISMATCH because the object is 166 bytes longer
+than the target's 11961. The block structure was mapped as 442 basic blocks over ten regions from the prologue through the teardown, and the
+first divergence is the same saved-register rotation already recorded on the GoldTL twin, where the target pushes ebx, ebp, esi and loads
+the argument into esi while the candidate loads it into edx between the pushes.
+The caveat is recorded as prominently as the result: this body is the GoldTL twin's source ported to the GOLD identity with anchors,
+function and type names changed, not a transcription from the GOLD listing. The two texts are offset by 0xb5f0 in this region, so the twin's
+block comments map onto GOLD block starts, and the project's twin naming resolves fifty of the ninety-two direct callee targets. Forty-two
+callees have no GOLD source definition, the largest called twelve, seven, six, six and five times. The body therefore compiles and aligns
+structurally but is not byte-verified, and it should be treated as an unverified scaffold: it must not be promoted, counted as recovered, or
+described as byte matching until the prologue rotation and the unbound callees are resolved against the GOLD listing.

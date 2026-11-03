@@ -422971,29 +422971,30 @@ updated_by = "test"
 ["GOLD.0x005af320"]
 size = 11961
 note = "Goal63 native role counterpart of GOLDTL.0x005ba910. Trade/transport inventory panel controller. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 99.770286 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
-updated_by = "rehome"
-updated_at = "2026-11-03T12:38:07+00:00"
-file = "src/fcn_005af320.c"
+updated_by = "test"
+updated_at = "2026-11-03T12:51:18+00:00"
+file = "src/Develop/DieGildeAddOn/game/GOLD.fcn_005af320.c"
 name = "fcn_005af320"
 symbol = "_fcn_005af320"
 kind = "FUNCTION"
+status = "SIZE_MISMATCH"
 
 ["GOLD.0x005af320".verification]
-source_hash = "e6a593678b894112ebc0996063cc1e85cd8cf24d2ba016720599ff2abd404222"
+source_hash = "ab67ec58383049a3f8f63925ff4c0a7236a1e7b2a1bd7fb866cfdf7e07794211"
 reference_hash = "7456bac5a5e60a552af3993453358c44d324a635de3f5d7df49b39b13b64a53c"
 reference_size = "11961"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "e3394f8c63a7abb27f03679999ab75cf99e9de888ef53217d8bb69cbde8215cd"
+compiler_hash = "4371955fa08d3d43e74c364516acf5253ec374ef803381ba46eccde5fc485230"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLD"
 va = "0x5af320"
 context_hash = ""
 defines = "[\"REBREW_GOLD\"]"
-input_hash = "b5f8be9e01ca2a73cd58c9029b51fa85e3b924fbf6e9b5d30a11122eea70e092"
-writer = "verify"
-status = "STUB"
-measured_at = "2026-10-22T08:36:00+00:00"
+input_hash = "c905c251bfc736ff40c68a931f9702e945935dea00dd86540b091a1bff0d8ddc"
+status = "SIZE_MISMATCH"
+writer = "test"
+measured_at = "2026-11-03T12:51:18+00:00"
 
 [["GOLD.0x005af320".binding_history]]
 action = "retire"
@@ -423029,6 +423030,7 @@ measured_at = "2026-10-22T08:36:00+00:00"
 
 ["GOLD.0x005af320".binding_history.replacement]
 
+
 [["GOLD.0x005af320".binding_history]]
 action = "rebind"
 reason = "GOLD inventory row 0x5af320 extent 11961 and full disassembly show a frameless function start: mov eax,0x1848; call __chkstk; push ebx/ebp/esi/edi, matching the retired row's extent. New GOLD-only definition; verdict must be earned by comparison."
@@ -423057,6 +423059,42 @@ measured_at = "2026-10-22T08:36:00+00:00"
 
 ["GOLD.0x005af320".binding_history.replacement]
 file = "src/fcn_005af320.c"
+name = "fcn_005af320"
+symbol = "_fcn_005af320"
+kind = "FUNCTION"
+
+[["GOLD.0x005af320".binding_history]]
+action = "rebind"
+reason = "Moved the new GOLD definition under the module tree after the root src path was removed by concurrent cleanup. Native evidence: GOLD inventory row 0x5af320 extent 11961; disassembly prologue mov eax,0x1848 / call __chkstk / push ebx,ebp,esi,edi. Verdict must be earned by comparison."
+changed_at = "2026-11-03T12:48:26.465929+00:00"
+counterpart_va = 0
+
+["GOLD.0x005af320".binding_history.previous]
+size = 11961
+file = "src/fcn_005af320.c"
+name = "fcn_005af320"
+symbol = "_fcn_005af320"
+kind = "FUNCTION"
+
+["GOLD.0x005af320".binding_history.previous.verification]
+source_hash = "e6a593678b894112ebc0996063cc1e85cd8cf24d2ba016720599ff2abd404222"
+reference_hash = "7456bac5a5e60a552af3993453358c44d324a635de3f5d7df49b39b13b64a53c"
+reference_size = "11961"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "e3394f8c63a7abb27f03679999ab75cf99e9de888ef53217d8bb69cbde8215cd"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x5af320"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "b5f8be9e01ca2a73cd58c9029b51fa85e3b924fbf6e9b5d30a11122eea70e092"
+writer = "verify"
+status = "STUB"
+measured_at = "2026-10-22T08:36:00+00:00"
+
+["GOLD.0x005af320".binding_history.replacement]
+file = "src/Develop/DieGildeAddOn/game/GOLD.fcn_005af320.c"
 name = "fcn_005af320"
 symbol = "_fcn_005af320"
 kind = "FUNCTION"
@@ -423107,10 +423145,14 @@ new_status = "SIZE_MISMATCH"
 changed_at = "2026-11-03T11:17:41.953545+00:00"
 updated_by = "test"
 ["GOLD.0x005aacd0"]
-size = 9680
+size = 5520
 note = "Goal63 native role counterpart of GOLDTL.0x005b6300. Personnel/mercenary book controller. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 99.93022 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
-updated_by = "rehome"
-updated_at = "2026-10-24T13:58:53+00:00"
+updated_by = "test"
+updated_at = "2026-11-03T12:52:31+00:00"
+file = "src/Develop/Units/d2.v1/GOLD.fcn_005aacd0.c"
+name = "fcn_005aacd0"
+symbol = "_fcn_005aacd0"
+kind = "FUNCTION"
 
 ["GOLD.0x005aacd0".verification]
 source_hash = "e93274da6b4ea68b057d0be45d565b86d85c9b320ef5c663c448b675d70db9dd"
@@ -423162,6 +423204,38 @@ status = "STUB"
 measured_at = "2026-10-22T08:36:00+00:00"
 
 ["GOLD.0x005aacd0".binding_history.replacement]
+
+[["GOLD.0x005aacd0".binding_history]]
+action = "rebind"
+reason = "Native evidence: rizin inventory entry 0x5aacd0 size 5520 in db/inventory-Europa1400Gold.exe.json (extent_history 9680 -> 5520 after the split at 0x5ac260); reference bytes run to the tail jmp at 0x5ac252 plus 9 filler bytes and 0x5ac260 is a separate prologue. Body transcribed from GOLD bytes only."
+changed_at = "2026-11-03T12:50:59.140129+00:00"
+counterpart_va = 0
+
+["GOLD.0x005aacd0".binding_history.previous]
+size = 9680
+
+["GOLD.0x005aacd0".binding_history.previous.verification]
+source_hash = "e93274da6b4ea68b057d0be45d565b86d85c9b320ef5c663c448b675d70db9dd"
+reference_hash = "7698046eec21d1b30a5c852820bafcc551b8dd8dda2711919121d7cb4410d3d5"
+reference_size = "9680"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "e3394f8c63a7abb27f03679999ab75cf99e9de888ef53217d8bb69cbde8215cd"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x5aacd0"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "715ddeaca1bf18310f9352ad7a2066fb647a76bf24fdf1725639c5c36da2c6cf"
+writer = "verify"
+status = "STUB"
+measured_at = "2026-10-22T08:36:00+00:00"
+
+["GOLD.0x005aacd0".binding_history.replacement]
+file = "src/Develop/Units/d2.v1/GOLD.fcn_005aacd0.c"
+name = "fcn_005aacd0"
+symbol = "_fcn_005aacd0"
+kind = "FUNCTION"
 ["GOLDTL.0x00519190"]
 size = 7527
 note = "Goal63 native mapping. io_Text-family GUI text expansion and append. Resolves a text ID or literal, expands percent/dollar/brace markup in a 0x17d0-scale temporary buffer, appends to the selected text-box storage and schedules redraw. Exact original identifier is not unique from the repeated io_Text diagnostics. Evidence: 0x519ce3 -> io_Text(): too many icons before redraw!. retain fcn_00519190; role mapping only. Gold counterpart GOLD.0x00515990, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 99.793176 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
@@ -476344,7 +476418,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x0053b6b0".verification]
-source_hash = "506aa753ab8239ae27246a29dc13f8c5ef859a4e80fc90a01601028ff22da454"
+source_hash = "ec0dba6e3dd49a32124df9d73f9c1d2481c8443cefaa82c0c3392630dae49227"
 reference_hash = "b12fbfc68ff3f86b2c0f0d4d8c74f33c2a7a9f2846d59946680e912ffe8f56ee"
 reference_size = "3759"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -476355,10 +476429,10 @@ module = "GOLDTL"
 va = "0x53b6b0"
 context_hash = ""
 defines = "[]"
-input_hash = "129f0cc42cd1b226b21a47240d084c40330cb3b915f7ed4ff11ee5dd3900ebb7"
+input_hash = "c67811a7ce6d79b54b1eee910e4645007b3f00696b8650e1ee0f7874e439e33d"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T12:46:29+00:00"
+measured_at = "2026-11-03T12:51:42+00:00"
 
 [["GOLDTL.0x0053b6b0".status_history]]
 old_status = "STUB"
@@ -621807,7 +621881,7 @@ new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-26T20:05:42.468335+00:00"
 updated_by = "test"
 ["GOLDTL.0x004e2b70".verification]
-source_hash = "a3352bf9b2d24b5984ec8bdffe3cbdaf9dc3992cfccef9ade72da4f6d0222cb8"
+source_hash = "e0fd8af3ccf1942bb912423bcde1b456770715423e4b6c2bf1478e9746167130"
 reference_hash = "a007d41f0c9a096adbe3c995a8a1241d6fce723ee666bc6ea740b08d558a016f"
 reference_size = "1199"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -621818,10 +621892,10 @@ module = "GOLDTL"
 va = "0x4e2b70"
 context_hash = ""
 defines = "[]"
-input_hash = "0b9d55d53f376aa1f5f0bc5b11a0cb9f4b7cf2402792b0d7cad6b21070b0870c"
+input_hash = "bc521ded67f216e78fa0736cef9cc7d07f117d549abb776ea87464bdff473811"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T12:47:02+00:00"
+measured_at = "2026-11-03T12:52:08+00:00"
 ["GOLDTL.0x004e2bfa"]
 note = "Inferred address-only identity for an inventory start admitted by the coverage repair; the stub body is an unreconstructed work item, not a match."
 updated_by = "rehome"
