@@ -22818,3 +22818,20 @@ identical apart from relocation slots, all eighteen arm callees resolve in order
 match, the five stores and both loops with a stride of four match, and no wrong access was found. The padding limitation is filed in the
 upstream checkout's docs/IDEAS-GUILD.md, since a row whose reference extent ends in alignment fill can never report a size verdict
 that reflects its code.
+
+## 2026-11-03 — a row already at its ceiling, and a note on address ambiguity
+
+`0x4e6650` was picked for work without checking its status first and turned out to be complete: RELOC at 630 of 630 with object 630,
+all 33 relocations validated, exact 162 instructions plus 33 relocation-only for 195 real instructions at a mnemonic ratio of 1.0,
+no structural difference, and no blocker. Eleven defect classes were audited against the reference bytes and all came back negative,
+covering call targets, calling convention of one indirect call which is cdecl because the reference cleans four bytes, push order at
+every site, three index strides including the 20-byte type stride and the 0x21c table and the 0x114 entry stride, a fourteen-byte
+time copy, call counts per callee, the loop bound which walks exactly 96 entries inside a 26500-byte buffer, pointee reads, a
+sentinel bound, and five frame fields with the frame matching at 52 with no diffs. The gap diagnostic's fault and its 640-byte
+extent are both artifacts: the extent is the row's 630 plus ten NOP bytes before the next row, and every replace event is a
+relocation immediate.
+The row also demonstrates an address ambiguity worth recording: the same VA exists in the GOLD target bound to a different file and a
+36-byte function, so the binding has to be read from the store rather than inferred from a name. From here on a row's stored status is
+checked before it is handed out, and the picker lists only size-mismatch and stub rows, which is how the rows below with no source at
+all were found: 0x5af320 at 11961 bytes, 0x5aacd0 at 9680, 0x4d8e20 at 7089, 0x46fb90 at 6176 and 0x48a4c0 at 6055, all STUB with no
+bound file.
