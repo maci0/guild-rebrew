@@ -422947,7 +422947,7 @@ status = "SIZE_MISMATCH"
 blocker = "colouring wall with a full frame: the frame is exactly native 0x1848 with zero slack, so any value live across a call costs a 4-byte slot and the shift outweighs the 10 stack operands it buys. Nine source-shape probes across two sessions never moved the saved-register rotation from push ebx; mov arg1->edx; push ebp; push esi; push edi; xor ebx,ebx (zero=ebx, minus one=ebp) toward native's esi/ebp/edi. The 7-loop fix is worth only about 2 of the 53 excess stack operands; the excess is diffuse across 103 call-anchored windows, 80 with matching instruction counts at +1..+4. Real defect recorded but unfixed because it needs a freed callee-saved register: our source uses f.v9c as a per-slot scratch at lines 1111 and 1383 where native keeps the offset in esi across ten calls at 0x5bc8ce..0x5bcbf1, and slot 0x9c should hold only the scaled offset from line 484 that lines 1442/1446 read, so the loop writes currently clobber that value. Address taking is not the lever: lea with esp is 64 native against 69 here"
 
 ["GOLDTL.0x005ba910".verification]
-source_hash = "2f841f30df18b0a099da9bd315c5d2cbac99acdb7c2efa7ac1a4876671c8bbf1"
+source_hash = "051404d40683b992f42ffb5312044e9fb79fc654931f0ec11579dd981d8821cb"
 reference_hash = "5011dfe5394eca8b074b60d11c0199028276af8cc7256e0aa95e5ad4751f9ad2"
 reference_size = "11948"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -422958,10 +422958,10 @@ module = "GOLDTL"
 va = "0x5ba910"
 context_hash = ""
 defines = "[]"
-input_hash = "fa0624234ecdba69d090d07aae0a9709a1a22c9a7898f107041ae5fb63b6ec09"
+input_hash = "7d7ebf2bf242e7385e12e6a042e52ef2a0463772915e539d53a566e89df5499d"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T11:56:59+00:00"
+measured_at = "2026-11-03T12:15:14+00:00"
 
 [["GOLDTL.0x005ba910".status_history]]
 old_status = "STUB"

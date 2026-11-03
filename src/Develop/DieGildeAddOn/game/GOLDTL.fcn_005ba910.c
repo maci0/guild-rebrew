@@ -247,7 +247,6 @@ int __cdecl fcn_005ba910(int a1, int a2)
 	f.v80 = a2 & 8;
 
 	if (f.v80 != 0) {
-		int i;
 		int* tp;
 
 		f.vA4 = fcn_00470820(*(int*) 0x1040494 - 0x68, 0x106, (char*) 0x6ac3b4);
@@ -463,7 +462,7 @@ l_after:
 		io_AppendText(0xcf, (char*) (0x868060 + *(int*) (f.v14 + 0x65) * 0x2f4));
 	} else if (*(int*) 0x7746cc != 0 && *(int*) 0x7746c4 == 0
 	           && *(int*) 0x7746c8 == 0) {
-		io_AppendText(0x9a8 + *(unsigned short*) 0x7746cc * 2);
+		io_AppendText(0x9a8 + *(unsigned short*) (*(int*) 0x7746cc) * 2);
 	} else {
 		io_AppendText(f.v3c != 0 ? 0xcd : 0xcc);
 	}

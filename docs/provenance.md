@@ -22738,3 +22738,41 @@ sentinel-terminated list, and the store fields apart from one tile-record offset
 with unchanged windows and was reverted. The switch dispatch was decoded from its byte table and jump table and matches the source's
 case sets exactly. The first remaining divergence is the prologue register allocation at offset 0x0a, where the reference pushes esi
 and this build loads ebx, which is the same wall recorded on sibling rows.
+
+## 2026-11-03 — camera row: two more repairs, and a correction about its size
+
+`0x5BA910` moves from 744 to 753 matching bytes with the object at 12136 and 45 relocations. Two changes are kept. A shadowing
+`int i` declaration is dropped where the function-scope counter is not read until a later loop, which is behaviour-neutral and fixes
+two matched bytes. And a wrong access is repaired: the text append indexed a table at 0x9a8 plus the low word of the pointer stored
+at 0x7746cc, while the reference dereferences that pointer first, with `mov eax,[0x7746cc]` followed by a word load through it, so the
+value is the type the pointer points at rather than the pointer's own low word. That repair takes the match from 747 to 753.
+A size correction is recorded because an earlier entry described this row's object as being exactly at its extent, and that was
+wrong. The stored extent is 11948, the reference body ends with `ret` at 0x5bd7bb followed by four fill bytes to the next function
+at 0x5bd7c0, and the object is 12136, so the reconstruction is 188 bytes longer than the reference rather than exactly sized. The
+frame claim does hold: the object prologue loads 0x1848, which is the reference frame. The row's status is a size mismatch for the
+length reason, not for the frame.
+One more instance of the same pointer-versus-pointee defect remains unlanded: the same indirection inside the pointer loop gives 785
+matched bytes with the frame intact, but the object becomes 12138, two bytes over its current length, so it needs two bytes freed
+elsewhere before it can be kept. Three experiments were rejected: an indexed table access instead of the pointer iteration restores a
+lower event count but grows the frame to 0x184c and the object past 12159, because this compiler builds a four-byte stack temporary
+for the base difference when the index is shared, which is exactly what the pointer form avoids; dropping a loop copy drops the match
+to 743; and replacing two float literals with their reference addresses gives 695 at 12235 with the frame growing again.
+
+## 2026-11-03 — genitive row: the save premise was false, and the bodies differ per site
+
+The save-placement task on `0x517C00` came back negative, and it corrects the premise it was given. No callee-saved value is live
+across the dispatch: the only value live there is the pointer in esi, the destination stays in memory and is reloaded inside each case,
+and both other registers first appear inside case 3, where ebx receives a computed address and ebp receives a table pointer. The eight
+byte frame difference reported by the stack diagnostic is exactly the two extra saves rather than any local. Measured on reduced
+copies with the same compiler, one case region using those registers defers the saves into the switch, two or three case regions that
+are not disjoint still defer them, but case sets that include two specific cases hoist all four saves to function entry, so this
+compiler's placement is controlled by how many disjoint regions use the registers and not by any source shape. Fifteen flag variants,
+including processor and optimisation families, changed nothing, and the plain service-pack toolchain gave a different text size with
+entry saves as well.
+The bodies are also not identical modulo the shift, contrary to what an earlier entry claimed. Case 1's third test is a six-byte
+compare in this build against a five-byte byte comparison in the reference, while cases 3 and 4 in the reference do use the six-byte
+form, so the expression differs per site rather than being uniform. Case 3 schedules differently, with this build hoisting a load and
+using a register test where the reference compares memory and reloads per branch. And a pre-switch return tail-merges into a far
+shared epilogue with a six-byte jump where the reference has a local two-byte jump, worth four bytes. The next pass should decide
+between the multi-region save-insertion problem and re-deriving the source from these per-site differences; three shapes that tried
+the second direction measured 297 at 2804, 390 at 2736 and unchanged respectively.
