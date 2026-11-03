@@ -24234,3 +24234,17 @@ The frame, the verified slots, the float constants and the collision clamps were
 the codegen device it is. The remaining blocker is the zero constant going into one callee-saved register instead of another, which pushes that register at byte twelve and
 delays its restore, so every tail displacement is four bytes out; an isolated probe with the same prologue picks the reference's register, so the full-function allocator
 is choosing differently because of the later body shape and the next step is to converge the collision and rotate blocks first.
+
+## 2026-11-03 — the admitted function transcribed, and its file moved to its module
+
+The 1800-byte function admitted by splitting the over-merged row is now transcribed: `0x55F5C0` measures 260 of 1800 with 28 relocations and an object of 1832, thirty-two
+bytes over the extent under the canonical flags. The body covers the entry guard on two sixteen-bit fields, an unsigned switch on a record field with four table entries
+whose raw values match the reference table, a template chain selected by record flags with the message calls at two separate sites, the text build with two length reads
+and a copy into a 0x80 buffer, a fourteen-byte structure copy written as scalar stores, the counted repeat under an unsigned bound, and the second case's two dispatch paths
+with the record index reloaded per use and the shared exits. Argument order for one call was corrected from a mask and target to its reverse, prototypes were derived from
+pushes and merged cleanups, and the copied structure was measured to be worth nine matched bytes as scalar stores.
+Two things are recorded rather than acted on. The generator wrote the new source at the repository root, so it was moved into the game module beside the other rows of its
+translation unit and rebound through the reviewed binding path with the previous path in the record.
+And a flag diagnostic is recorded as diagnostic only: an optimise-while flag reproduces the reference's register choice for the zero constant and measures four more matched
+bytes, but the neighbouring function from the same translation unit already matches fully under the canonical flags, which is evidence that the canonical flag context is
+the right one for the unit. The row keeps canonical flags, and the two conflicting measurements stand in the record.

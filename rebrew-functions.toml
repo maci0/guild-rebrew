@@ -627549,9 +627549,28 @@ updated_at = "2026-11-03T19:19:03+00:00"
 
 ["GOLDTL.0x0055f5c0"]
 size = 1800
-updated_by = "skeleton"
-updated_at = "2026-11-03T19:21:33+00:00"
+updated_by = "rehome"
+updated_at = "2026-11-03T19:42:50+00:00"
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0055f5c0.c"
+name = "fcn_0055f5c0"
+symbol = "_fcn_0055f5c0"
+kind = "FUNCTION"
+
+[["GOLDTL.0x0055f5c0".binding_history]]
+action = "rebind"
+reason = "the row was admitted by the reviewed extent split of the over-merged 0x55f300 inventory entry; the skeleton was generated at the repository root and belongs in the game module beside the other rows of that translation unit"
+changed_at = "2026-11-03T19:42:50.900901+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0055f5c0".binding_history.previous]
+size = 1800
 file = "src/fcn_0055f5c0.c"
 symbol = "_fcn_0055f5c0"
 name = "fcn_0055f5c0"
+kind = "FUNCTION"
+
+["GOLDTL.0x0055f5c0".binding_history.replacement]
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0055f5c0.c"
+name = "fcn_0055f5c0"
+symbol = "_fcn_0055f5c0"
 kind = "FUNCTION"
