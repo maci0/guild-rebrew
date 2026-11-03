@@ -24028,3 +24028,18 @@ The first divergence is the prologue: this compiler hoists the minus-one constan
 pushes a register and materialises the constant inline, and that three-byte shift also stops the compiler from tail-merging those handle blocks, which the reference
 shares, leaving thirty-six bytes of duplicate tails. The next difference is a clamp block where the reference keeps a redundant third comparison in a three-test nested
 select and the compiler folds the two-test form to the opposite polarity.
+
+## 2026-11-03 — menu row: a frame-pointer pragma from native evidence and a copy shape
+
+`0x53A400` (main_Menue) moves from 100 to 148 matched bytes with the object at 2001 against the 2014 extent and its gap windows from 99 to 80. The largest repair is a
+flag fact rather than a source shape: the reference frame keeps a frame pointer, with `push ebp`, `mov ebp,esp`, every local addressed from ebp and an epilogue that
+restores esp from ebp, so the source now disables the optimisation that omits it for this function. A probe confirmed the reference's exact stack offsets under that
+setting, and it is recorded here as flag evidence reproduced at source level rather than as a source edit, since the project's policy is to apply an evidenced
+per-translation-unit flag context to the whole unit.
+Three source repairs followed. Nine consecutive byte copies became two dword copies and one byte, which is the exact shape the reference emits. A condition was
+inverted and its arms swapped so the out-of-line block is the one the reference jumps to. And a comparison against a global is a full-width compare, matching the
+reference; that change cost one matched byte while shrinking the object, and the structural reading was kept with both numbers recorded.
+Four variants were reverted for losing bytes. The largest remaining window is an inlined clearing where the reference uses the alignment-head prelude with its size
+spilled to a frame slot while this build emits a counted dword fill; the project already documents that no spelling of the routine emits that prelude, it is carried as
+inline assembly at six sites by decision, and adding another needs an authorship decision that was not taken. Other differences are labelled codegen: the reference
+homes two values in specific registers, saves only two registers, and hoists an import address out of the loop where this build calls the import directly.

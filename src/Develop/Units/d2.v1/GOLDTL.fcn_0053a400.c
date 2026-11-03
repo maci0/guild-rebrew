@@ -51,6 +51,10 @@ void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00420120(int, int);
 
+/* Frame pointer kept: the reference restores esp from ebp and homes every
+   local at [ebp-*] (FPO off). */
+#pragma optimize("y", off)
+
 /* ADDRESS: GOLDTL 0x0053a400 */
 void __cdecl main_Menue(void)
 {
@@ -132,15 +136,15 @@ void __cdecl main_Menue(void)
 	v24 = fcn_0053a3a0(4, *(int *)0x14ac498, v5);
 	v27 = fcn_0053a3a0(7, *(int *)0x14ac4b4, v5);
 	v22 = fcn_0053a3a0(8, *(int *)0x14ac4b8, v5);
-	if (*(int *)0x774814 != 0) {
+	if (*(int *)0x774814 == 0) {
+		v25 = fcn_0053a3a0(5, *(int *)0x14ac49c, v5);
+		v17 = fcn_0053a3a0(6, *(int *)0x14ac4a0, v5);
+		v28 = d2_CreateRadioGroup(9, v20, v23, v26, v19, v24, v25, v17, v27, v22);
+	} else {
 		v18 = fcn_0053a3a0(4, (int)(char *)0x6a3b48, v5);
 		v21 = fcn_0053a3a0(5, (int)(char *)0x6a3b30, v5);
 		v16 = fcn_0053a3a0(6, (int)(char *)0x6a3b20, v5);
 		v28 = d2_CreateRadioGroup(9, v20, v23, v26, v19, v24, v18, v21, v27, v22);
-	} else {
-		v25 = fcn_0053a3a0(5, *(int *)0x14ac49c, v5);
-		v17 = fcn_0053a3a0(6, *(int *)0x14ac4a0, v5);
-		v28 = d2_CreateRadioGroup(9, v20, v23, v26, v19, v24, v25, v17, v27, v22);
 	}
 	if (*(int *)0x774930 != 0) {
 		v6 = fcn_0064d3f8() % 3;
@@ -163,7 +167,7 @@ void __cdecl main_Menue(void)
 			fcn_00469e30(0x797);
 			v29 = 0;
 		}
-		if (*(unsigned char *)0x14ce8d8 != 0 && *(int *)0x67d370 != -1) {
+		if (*(int *)0x14ce8d8 != 0 && *(int *)0x67d370 != -1) {
 			if (*(int *)0x67d370 == v20) {
 				fcn_00472170(v5, 0);
 				fcn_00469e70();
@@ -179,14 +183,8 @@ void __cdecl main_Menue(void)
 				if (fcn_005845e0()) {
 					fcn_00584530();
 					*(int *)0x6a375c = 1;
-					*(char *)0x7e1d00 = *(char *)0x6a3ad0;
-					*(char *)0x7e1d01 = *(char *)0x6a3ad1;
-					*(char *)0x7e1d02 = *(char *)0x6a3ad2;
-					*(char *)0x7e1d03 = *(char *)0x6a3ad3;
-					*(char *)0x7e1d04 = *(char *)0x6a3ad4;
-					*(char *)0x7e1d05 = *(char *)0x6a3ad5;
-					*(char *)0x7e1d06 = *(char *)0x6a3ad6;
-					*(char *)0x7e1d07 = *(char *)0x6a3ad7;
+					*(int *)0x7e1d00 = *(int *)0x6a3ad0;
+					*(int *)0x7e1d04 = *(int *)0x6a3ad4;
 					*(char *)0x7e1d08 = *(char *)0x6a3ad8;
 					*(int *)0x7747b0 = 0x89;
 					*(int *)0x774654 = 1;
