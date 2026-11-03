@@ -23659,3 +23659,21 @@ copy under every optimisation and processor flag tried, which was confirmed with
 class of difference the project already documents for the allocator.
 One candidate was measured and not kept: declaring the accumulators as arrays gained a single matched byte and moved the frame, but is less faithful to the
 reference's scalar homes. A pragma sweep and a toolchain sweep were both measured, and the current settings are the best of them.
+
+## 2026-11-03 — stock row: a field read from the wrong array and five idiom repairs
+
+`0x595330` moves from 137 to 201 matched bytes with the frame now exactly 0xf0 where it was 0xf4. Six defects were repaired against the reference. A stock value
+comparison and its delta read the value at one array's offset while the reference reads the cap array's offset, so both are corrected. Two loop shapes are
+rewritten to the reference's forms: a guard written as a comparison against one, and a scan with a sentinel variable becomes an indexed search that tests the match
+inside the loop and then compares the index against the count, which is the reference's inline match check. The append dispatch becomes a switch, which reproduces
+the reference's subtract, compare and decrement sequence exactly. A floating-point predicate written as a negated disjunction becomes the positive conjunction the
+reference emits, which reproduces its mask and parity tests. And a negation written as a unary minus becomes a subtraction from zero, because the reference performs
+a reverse subtract of a constant that the data row confirms is zero.
+The two callees were re-derived from their own bodies, four arguments read from four offsets and six arguments read from the sixth position first, and the source's
+argument counts and order are correct. One codegen device is labelled as such: a slot expression is used directly so the compiler reloads it per use instead of
+keeping it in a register.
+Five shapes were reverted, including hoisting a key and reordering two chains and declarations. One step lowered the positional count by two while raising the
+object's instruction count from 700 to 710 against the reference's 788 and matching the reference's idioms exactly, so it was kept on structural evidence and the dip
+is recorded. The remaining 384 bytes are shortfall rather than error: the reference reloads two accessor results per use where this build eliminates them, and one
+block is placed out of line where the reference keeps it inline. That block is reported below as a diagnostic inconsistency: the stack diagnostic reports a frame
+that contradicts both the object's own prologue and the gap trace, so a follow-up was opened to see whether it reads the wrong text section the way the gap tool did.

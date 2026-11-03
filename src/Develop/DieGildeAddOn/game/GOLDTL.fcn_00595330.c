@@ -64,8 +64,10 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 	int j;
 	int i;
 
-	ent = (char*) *(int*) 0x7746c4;
-	if (ent == 0) {
+	ent = 0;
+	if (*(int*) 0x7746c4) {
+		ent = (char*) *(int*) 0x7746c4;
+	} else if (*(int*) 0x7746c8) {
 		ent = (char*) *(int*) 0x7746c8;
 	}
 	gm_GetBuildingTypeCategory((unsigned char) *ent);
@@ -73,9 +75,9 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 	d2_SetForm(a0, a1);
 	fcn_0050cce0(ent, &stock, 1);
 
-	if (a2 >= 1) {
+	if (a2 > 0) {
 		row = g_row(0);
-		for (i = a2; i != 0; i--) {
+		for (i = a2; i > 0; i--) {
 			g_row_sel(row) = -1;
 			if (*(int*) 0x7798a0) {
 				for (j = 0; j < 4; j++) {
@@ -90,8 +92,9 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 
 	for (i = 0; i < a2; i++) {
 		row = g_row(i);
-		status = 0;
-		if (g_row_handle(row) <= -1) {
+		delta = 0;
+		pick = 0;
+		if (g_row_handle(row) < 0) {
 			idx = fcn_0046f100(g_row_arg0(row), g_row_arg1(row), 0xcd, 0x57, 0x10,
 			                   *(int*) 0x772514);
 			g_row_handle(row) = idx;
@@ -107,10 +110,10 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			*(int*) (g_object(g_row_sub(row)) + 0x1ec) = -1;
 			do {
 				if (*(int*) (slot - 0x38)) {
-					idx = fcn_0046f7e0(delta, 0x3a, *(int*) (slot - 0x38) + 0xdf,
-					                  g_row_handle(row), -2);
-					*(int*) slot = idx;
-					*(int*) (g_object(idx) + 0x5c) = 1;
+					*(int*) slot = fcn_0046f7e0(delta, 0x3a,
+					                            *(int*) (slot - 0x38) + 0xdf,
+					                            g_row_handle(row), -2);
+					*(int*) (g_object(*(int*) slot) + 0x5c) = 1;
 					fcn_00472900(*(int*) slot, 0x54);
 					itoa(numbuf, g_id_field(row, key), 10);
 					fcn_0046f9b0(*(int*) slot, (int) numbuf);
@@ -128,25 +131,19 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			*(int*) (idx * 0x3cc + 0x10161cc) = 0x54;
 		}
 
-		delta = 0;
-		pick = 0;
 		key = 0x26;
 		status = 0;
 		cnt = 0;
 		slot = row + 0x3c;
 		do {
 			if (*(int*) (slot - 0x38)) {
-				j = -1;
-				if (stock.n >= 1) {
-					for (idx = 0; idx < stock.n; idx++) {
-						if ((unsigned int) stock.ids[idx] == (unsigned int) *(int*) (slot - 0x38)) {
-							j = idx;
-							break;
-						}
+				for (idx = 0; idx < stock.n; idx++) {
+					if ((unsigned int) stock.ids[idx] == (unsigned int) *(int*) (slot - 0x38)) {
+						break;
 					}
 				}
-				if (j >= 0 && j < stock.n) {
-					if ((int) g_id_field(row, key) <= stock.vals[j]) {
+				if (idx < stock.n) {
+					if ((int) g_id_field(row, key) <= stock.caps[idx]) {
 						*(int*) (g_object(*(int*) slot) + 0x1e4) = 0x74d;
 						pick = delta;
 					} else {
@@ -154,7 +151,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 						if (status <= 1) {
 							status = 1;
 						}
-						delta = (unsigned int) g_id_field(row, key) - stock.vals[j];
+						delta = (unsigned int) g_id_field(row, key) - stock.caps[idx];
 						pick = delta;
 					}
 				} else {
@@ -193,14 +190,12 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			state = 0;
 			idx = fcn_00500e20((int*) 0x7f4c00);
 			key = *(int*) 0x7f4c04 & 0xffff;
-			if (!((float) key < *(float*) (idx * 4 + 0x696540)
-			      || *(float*) (idx * 4 + 0x696550) <= (float) key)) {
-				if (*found == 4) {
-					if (*(int*) (found + 0xc8) == 0) {
-						state = 0x4fc;
-					} else {
-						state = 0x50b;
-					}
+			if ((float) key >= *(float*) (idx * 4 + 0x696540)
+			    && (float) key < *(float*) (idx * 4 + 0x696550)) {
+				if (*found == 4 && *(int*) (found + 0xc8) == 0) {
+					state = 0x4fc;
+				} else if (*found == 4) {
+					state = 0x50b;
 				} else if (*found == 3) {
 					state = 0x50c;
 				}
@@ -220,14 +215,12 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 				g_row_extra(row) = fcn_0046f740(0xd, 5, state, g_row_handle(row));
 			}
 			delta = *(int*) (found + 0x18) + *(int*) (found + 0x14);
-			if (*found != 4) {
-				if (*found == 3) {
-					*(float*) (g_object(g_row_sub(row)) + 0x1f4) =
-						-(float) *(int*) (found + 0xb0) / *(float*) (found + 0xb4);
-				}
-			} else {
+			if (*found == 4) {
 				*(float*) (g_object(g_row_sub(row)) + 0x1f4) =
-					-*(float*) (found + 0xb4) / *(float*) (found + 0xb8);
+					0.0f - *(float*) (found + 0xb4) / *(float*) (found + 0xb8);
+			} else if (*found == 3) {
+				*(float*) (g_object(g_row_sub(row)) + 0x1f4) =
+					0.0f - (float) *(int*) (found + 0xb0) / *(float*) (found + 0xb4);
 			}
 		} else {
 			if (g_row_extra(row) != -1) {
@@ -264,22 +257,26 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			*(int*) (g_object(g_row_item(row, key)) + 0x3c) = 1;
 			*(int*) 0x772514 = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
-				j = fcn_0051e070();
-				if (j == 0) {
+				switch (fcn_0051e070()) {
+				case 0:
 					io_AppendText(0xc1, (unsigned int) g_id_field(row, 0x36),
 					             g_row_type(row) * 2 + 0x9a8);
-				} else if (j == 1) {
+					break;
+				case 1:
 					io_AppendText(0xc1, g_row_type(row) * 2 + 0x9a8,
 					             (unsigned int) g_id_field(row, 0x36));
+					break;
 				}
 			} else {
-				j = fcn_0051e070();
-				if (j == 0) {
+				switch (fcn_0051e070()) {
+				case 0:
 					io_AppendText(0xc2, g_row_type(row) * 2 + 0x9a8,
 					             (unsigned int) g_id_field(row, 0x36));
-				} else if (j == 1) {
+					break;
+				case 1:
 					io_AppendText(0xc2, (unsigned int) g_id_field(row, 0x36),
 					             g_row_type(row) * 2 + 0x9a8);
+					break;
 				}
 			}
 			state = g_row_val(row, key);
@@ -298,22 +295,26 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			*(int*) (g_object(g_row_item(row, key)) + 0x3c) = 1;
 			*(int*) 0x772514 = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
-				j = fcn_0051e070();
-				if (j == 0) {
+				switch (fcn_0051e070()) {
+				case 0:
 					io_AppendText(0xc1, (unsigned int) g_id_field(row, 0x36),
 					             g_row_type(row) * 2 + 0x9a8);
-				} else if (j == 1) {
+					break;
+				case 1:
 					io_AppendText(0xc1, g_row_type(row) * 2 + 0x9a8,
 					             (unsigned int) g_id_field(row, 0x36));
+					break;
 				}
 			} else {
-				j = fcn_0051e070();
-				if (j == 0) {
+				switch (fcn_0051e070()) {
+				case 0:
 					io_AppendText(0xc2, g_row_type(row) * 2 + 0x9a8,
 					             (unsigned int) g_id_field(row, 0x36));
-				} else if (j == 1) {
+					break;
+				case 1:
 					io_AppendText(0xc2, (unsigned int) g_id_field(row, 0x36),
 					             g_row_type(row) * 2 + 0x9a8);
+					break;
 				}
 			}
 			state = g_row_val(row, key);
