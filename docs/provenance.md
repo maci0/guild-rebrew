@@ -24466,3 +24466,17 @@ including two spellings of a limit, a counter rewrite and a structure assignment
 The remaining difference is a stack-slot rotation: the reference keeps a nearby-record pointer in a callee-saved register while this build spills it and puts a different
 value there. Four declaration orders produced identical objects, so the layout is driven by liveness rather than declaration order, and that is recorded as unsolved
 rather than guessed. The body is also forty-eight bytes short, and the first content divergence is a jump displacement followed by two slot displacements.
+
+## 2026-11-03 — a twenty-eight-byte row, and the tail call this compiler will not stop making
+
+A rounding hunt began on the store's smallest size-mismatched rows because closing small ones is cheap and each one adds to the exact count. The smallest, `0x4DA170`, is
+twenty-eight bytes and turned into a clean negative that says something about the compiler. The reference tests a global, jumps when it is set, and in the other arm
+pushes its argument, calls one routine, adjusts the stack and returns, while the set path is a single jump to the other routine. This build instead emits a jump to each
+routine from both arms, with no call, because both calls are in tail position and the optimiser converts them.
+Five source shapes were measured: a call with a return, an if and else with a trailing return, the zero path first, a goto form with an out-of-line block, and a prototype
+that returns an integer instead of nothing. All five produce the same two-jump object. A flag sweep is informative rather than a fix: with the frame pointer disabled the
+object keeps the two jumps, and with the frame pointer enabled the calls become plain calls with a stack adjustment and a return, which is the shape the reference has,
+but a frame pointer the reference does not have. So the reference's shape needs both an inlined call and no frame pointer, which this toolchain does not produce from any
+spelling tried; that is a per-translation-unit flag question and needs evidence about the original unit before it can be applied, not a source edit.
+Nothing was kept and the row is restored byte for byte. The sweep is recorded because a later pass with translation-unit evidence can use it directly, and because it
+prevents the next session from repeating five dead ends.
