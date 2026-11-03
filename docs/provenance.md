@@ -22483,3 +22483,21 @@ the global per comparison, while this build keeps the index at [esp+0x28], reloa
 constant into ebx. Four pointer-copy shapes measured between 404 and 472 with the divergence at byte 12, and an extra volatile
 local gives 348 at 6094. The next lead recorded is to derive the native stack-home order by toggling one local at a time with a
 push-aware slot mapper, since guessing an ordered structure is blocked on that measurement.
+
+## 2026-11-03 — d2 sixth row: the record index defect landed from the reference bytes
+
+The table-record defect on `0x5B6300` is proven from the target bytes and landed at four sites. At each call the reference pushes
+`dword ptr [eax*4 + 0x7f4ca4]` after loading the word at 0x774970 and building the product through the three, nine and five
+scales, and the modulo value is the third argument: the word load is at 0x005b6bd0 with the table load at 0x005b6be3 and the
+modulo pushed for the first call at 0x005b6beb, the same pattern at 0x005b6c53, 0x005b6c66 and 0x005b6c6e for the second, and at
+0x005b6c96, 0x005b6ca2 and 0x005b6ca5 for the third. A fourth site, the guard call at 0x005b6b6d, also indexes the table by the
+word, loading it at 0x005b6b56 and forming the address at 0x005b6b65.
+The three call sites were landed with the product computed immediately before each call, which is where the reference computes it,
+and measure 394 at 5619 with the drift windows falling from six to three. The guard was repaired as well, against the reference
+bytes, and the four-site form measures 490 at 5571 with four drift windows, one of them 279 bytes wide; that is a hundred more
+matched bytes and 48 bytes closer to the extent than the three-site form, so the four-site form is kept even though it adds one
+window of drift. Both earlier attempts are now explained: the plain three-site inline edit measures 384 at 5617 and the copy with
+a division instead of the modulo measures 537 at 5520, so neither reproduced the reported 493 at 5529 because the guard site was
+part of the picture.
+The row's stored status was refreshed with `--force-status` because the metadata still claimed STUB while the source compiles to a
+size mismatch at 5571 against 5499.

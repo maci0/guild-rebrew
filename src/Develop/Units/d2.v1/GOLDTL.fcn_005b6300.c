@@ -190,6 +190,7 @@ int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
 	int x;
 	int y;
 	int n;
+	int trec;
 
 	t = *a1;
 	f.sel.type = 0;
@@ -393,8 +394,9 @@ L69b6:
 				goto L6cb7;
 			y = (int) e / f.v38;
 			x = y % 3;
+			trec = *(unsigned short*) 0x774970 * 0x21c;
 			t = fcn_0050b750((int) e, *(char*) 0x773d75);
-			if (fcn_00526010((int) ((x * 0x21c) + 0x7f4ca0), t) == 0)
+			if (fcn_00526010((int) (trec + 0x7f4ca0), t) == 0)
 				goto L6cb7;
 			if (f.v30 > 0) {
 				f.v38 = f.v30;
@@ -405,7 +407,8 @@ L69b6:
 						fcn_004c4eb0(0x6ac2bc);
 						fcn_004c5150(G(e + 4), -1, *(char*) 0x773d75,
 							fcn_0050b750(y, *(char*) 0x773d75));
-						fcn_004c54c0(G(0x7f4ca4 + x * 0x21c), G(e + 4), x, 0);
+						trec = *(unsigned short*) 0x774970 * 0x21c;
+						fcn_004c54c0(G(0x7f4ca4 + trec), G(e + 4), x, 0);
 						fcn_004c4ef0(0x6ac2bc);
 					}
 					f.v10 += 0x5c;
@@ -415,10 +418,12 @@ L69b6:
 				fcn_004c4eb0(0x6ac2b0);
 				fcn_004c5150(G(f.sel.a08 + 4), -1, *(char*) 0x773d75,
 					fcn_0050b750(y, *(char*) 0x773d75));
-				fcn_004c54c0(G(0x7f4ca4 + x * 0x21c), G(f.sel.a08 + 4), x, 0);
+				trec = *(unsigned short*) 0x774970 * 0x21c;
+				fcn_004c54c0(G(0x7f4ca4 + trec), G(f.sel.a08 + 4), x, 0);
 				fcn_004c4ef0(0x6ac2b0);
 			}
-			fcn_004c5150(G(0x7f4ca4 + x * 0x21c), -1, *(char*) 0x773d75, fcn_0050b750((int) e, *(char*) 0x773d75));
+			trec = *(unsigned short*) 0x774970 * 0x21c;
+			fcn_004c5150(G(0x7f4ca4 + trec), -1, *(char*) 0x773d75, fcn_0050b750((int) e, *(char*) 0x773d75));
 		}
 L6cb7:
 		if (G(0x100f1dc) == -1)
