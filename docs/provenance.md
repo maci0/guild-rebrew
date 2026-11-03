@@ -23677,3 +23677,15 @@ object's instruction count from 700 to 710 against the reference's 788 and match
 is recorded. The remaining 384 bytes are shortfall rather than error: the reference reloads two accessor results per use where this build eliminates them, and one
 block is placed out of line where the reference keeps it inline. That block is reported below as a diagnostic inconsistency: the stack diagnostic reports a frame
 that contradicts both the object's own prologue and the gap trace, so a follow-up was opened to see whether it reads the wrong text section the way the gap tool did.
+
+## 2026-11-03 — the frame diagnostic note is corrected: it reports peak depth
+
+The note filed two entries ago is wrong and is corrected here. The frame diagnostic was reported as disagreeing with the object's prologue on row 0x00595330, and the
+gap trace's section-selection bug was blamed. The diagnosis refutes that. The stack path already resolves the object bytes through the symbol table and slices from
+the function's own section, so it never took the first text section; the object in question has a single text section anyway, and both diagnostics see the same
+bytes starting with the same frame adjustment.
+The real cause is the metric: the frame analysis returns peak stack depth, which its own docstring and an existing test confirm, and the depth model does not credit
+argument pushes back after a call while assuming that stdcall callees pop their arguments. On this row both prologues are identical, each subtracting 0xf0 and
+pushing four registers for a peak of 0x100, and the reported eight-byte difference is the instruction stream's divergence amplified by that model. The fix, if one
+is wanted, is to report the local frame by crediting arguments at each call, which changes existing expectations and touches the near-analysis caller, so it belongs
+in its own change with updated tests. The upstream note was rewritten to describe this rather than the imagined section bug.
