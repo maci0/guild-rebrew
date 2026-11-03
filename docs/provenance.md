@@ -23022,3 +23022,21 @@ offset agrees.
 The residual is a frame difference: the reference allocates 0x80 and this build 0x64, with the stack diagnostic reporting 0xa4 against 0x88, so
 every stack displacement differs and the raw byte match is not a meaningful signal on this row. The body is 80 bytes under the extent, explained
 by the 28-byte frame delta and folded tails, and no remaining semantic gap was found in the checked classes.
+
+## 2026-11-03 — draw row: a suspected argument defect, left unresolved
+
+`0x467920` keeps 437 of 4699 with the object already spanning the extent, and no change was kept. The row's first fault is the frame: the
+reference subtracts 0x25c and this build 0x260, the four extra bytes being a compiler temporary that holds one handle across the second
+handle call, which shifts every structure access. The underlying cause is the register plan, with this build assigning one handle to ebp,
+another to ebx and a third to edi where the reference assigns them to ebx, edi and ebp, and hand edits rotate the plan at a cost.
+One suspected defect is recorded as unresolved rather than repaired, because the evidence points two ways. At seventeen five-argument draw
+calls the reference pushes the handle in the third argument position, while the source passes three different expressions there, an argument,
+a cast variable and a cast array element. Repairing it to the handle in one shape measures 271 matched bytes with the object growing to 4786,
+which is 87 bytes past the extent, and a variant that changes the fourth argument instead measures 253 at 4782. A repair that overflows the
+extent and loses 166 matched bytes on the strength of a pattern seen at a distance needs its own pass: the next step is to take one call site,
+decode its complete push sequence and derive the prototype from the callee's own argument reads, then decide whether the source argument
+expression is wrong at that site or whether the seventeen sites are not in fact identical.
+The rest of the checked classes came back clean: all call targets resolve, everything is cdecl with no indirect call, the index arithmetic
+matches, no copies or arrays exist beyond the frame, the reference's duplicated fill count has both sites in the source, the ratio is hoisted
+before the flag tests as the reference does, the loops compare values rather than addresses, and six record fields and three entity offsets
+agree. The frame diagnostic and the object length are the useful signals on this row, not the raw byte match.
