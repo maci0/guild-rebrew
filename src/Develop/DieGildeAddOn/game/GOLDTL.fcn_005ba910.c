@@ -783,7 +783,7 @@ l_slot_handles:
 	fcn_0050de80(idx, (int*) &f.v158);
 	d2_SetForm(f.v2c, 2);
 	for (f.v20 = 0; f.v20 < f.v158; f.v20++) {
-		for (j = 0; j < f.v15C; j++) {
+		for (j = 0; j < *(int*) &f.v15C; j++) {
 			if (*(int*) ((char*) e + 0xd8 + f.v20 * 4) != -1
 			    && *(short*) (f.v15C + 0x44 + j * 2) != 0
 			    && *(int*) (*(int*) 0x1015ea0
@@ -792,7 +792,7 @@ l_slot_handles:
 				break;
 			}
 		}
-		if (j >= f.v15C) {
+		if (j >= *(int*) &f.v15C) {
 			if (*(int*) ((char*) e + 0xd8 + f.v20 * 4) != -1) {
 				fcn_0046b2b0(*(int*) ((char*) e + 0xd8 + f.v20 * 4));
 				if (*(int*) ((char*) e + 0xe4 + f.v20 * 4) != -1) {

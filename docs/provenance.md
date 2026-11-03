@@ -22367,3 +22367,21 @@ The tooling environment is repaired as part of this record. During the run, anot
 the installed wheel inside the project virtual environment, which is not reproducible and does not carry the tests. The local
 checkout was installed over it, so the environment again resolves to the checkout whose suite passes, and the gap diagnostic runs
 from it.
+
+## 2026-11-03 — camera row: a loop bounded by a stack address
+
+`0x5BA910` now measures 733 of 12160 with 44 relocations and status SIZE_MISMATCH, down from 745 at 12166, after a correctness
+repair that is kept at a measured cost. Two comparisons at lines 786 and 795 tested the loop index against the array `f.v15C`
+itself, which decays to its address, so the compiler emitted a load-effective-address, a test and a jump that was always taken:
+the loop was bounded by a stack address rather than by the count in the array's first dword. The reference loads the count from
+[esp+0x15c] and tests against it, which is the value form the same file already used at line 808, so both sites now read
+`*(int*)&f.v15C`. The repair costs twelve matched bytes and closes nineteen windows while opening twenty-one, for a net two worse,
+and it moves the object six bytes toward the extent. It is kept because a loop bounded by an address is a defect rather than a
+style difference.
+Two probes were reverted: declaring one array as twenty-eight integers instead of 0x80 bytes leaves the frame and the match
+unchanged, and writing the reversed comparison is byte-identical. The first divergence is the frame immediate at offset zero,
+0x1848 in the reference against 0x184c here, and the first instruction-shape divergence is at offset 11, where the reference
+pushes ebp and this build hoists the second argument's load above the remaining pushes. The four-byte frame delta is exactly the
+`slot_value` scalar committed earlier, which is the only spill slot below the structure and which the reference does not have, so
+every frame displacement is four bytes high and dominates the window count; no C-level shape was found that keeps the value and
+frees its slot. Calls and globals otherwise agree one to one at 273 relocations each side.
