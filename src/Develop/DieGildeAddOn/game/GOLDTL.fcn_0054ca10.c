@@ -9,7 +9,7 @@ extern char g_7f4ca4[];
 extern float g_664174;
 extern char g_6a5a48[];
 
-char* __cdecl gm_LookupEntityRecordById(int);
+unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_005d2950(int, int);
 int __cdecl fcn_005d2a40(int, int);
@@ -37,10 +37,10 @@ unsigned short __cdecl gm_RandomMod(int);
 /* ADDRESS: GOLDTL 0x0054ca10 */
 void __cdecl fcn_0054ca10(char* e)
 {
-	char* a;
-	char* b;
-	char* pa;
-	char* pb;
+	unsigned char* a;
+	unsigned char* b;
+	unsigned char* pa;
+	unsigned char* pb;
 	unsigned char* rec;
 	void* hit;
 	int v;
@@ -93,18 +93,17 @@ void __cdecl fcn_0054ca10(char* e)
 			if (v == 0) {
 				if (a[2] == 6) {
 					pa = gm_LookupEntityRecordById(*(int*) (b + 0x60));
-					pb = gm_LookupEntityRecordById(*(int*) (b + 0x5c));
 					if (pa != 0 && pa[8] > 0 && b[2] != 5) {
 						io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) pa, *(unsigned short*) a);
 						io_FormatTextBuffer(line + strlen(line), 0x1cec);
 						io_FormatTextBuffer(line + strlen(line), 0x1cf2, *(unsigned short*) b);
-						io_FormatTextBuffer(line + strlen(line), 0x1ced, *(unsigned short*) pb);
+						io_FormatTextBuffer(line + strlen(line), 0x1ced);
 						io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) pa);
 					} else {
 						io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) b, *(unsigned short*) a);
 						io_FormatTextBuffer(line + strlen(line), 0x1cec);
 						io_FormatTextBuffer(line + strlen(line), 0x1cf1);
-						io_FormatTextBuffer(line + strlen(line), 0x1ced, *(unsigned short*) pb);
+						io_FormatTextBuffer(line + strlen(line), 0x1ced);
 						io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) b);
 					}
 					fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
@@ -185,28 +184,7 @@ void __cdecl fcn_0054ca10(char* e)
 		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 		return;
 	case 5:
-		if (*(int*) (a + 0x5c) != *(int*) (b + 4) || *(int*) (b + 0x5c) != *(int*) (a + 4)) {
-			if (a[2] != 6) {
-				goto Lneg;
-			}
-			pa = gm_LookupEntityRecordById(*(int*) (b + 0x60));
-			pb = gm_LookupEntityRecordById(*(int*) (b + 0x5c));
-			if (pa != 0 && pa[8] > 0 && b[2] != 5) {
-				io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) pa, *(unsigned short*) a);
-				io_FormatTextBuffer(line + strlen(line), 0x1cee);
-				io_FormatTextBuffer(line + strlen(line), 0x1cf2, *(unsigned short*) b);
-				io_FormatTextBuffer(line + strlen(line), 0x1cef, *(unsigned short*) pb);
-				io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) pa);
-			} else {
-				io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) b, *(unsigned short*) a);
-				io_FormatTextBuffer(line + strlen(line), 0x1cee);
-				io_FormatTextBuffer(line + strlen(line), 0x1cf1);
-				io_FormatTextBuffer(line + strlen(line), 0x1cef, *(unsigned short*) pb);
-				io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) b);
-			}
-			fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
-			goto Lneg;
-		}
+		if ((*(int*) (a + 0x5c) == *(int*) (b + 4)) & (*(int*) (b + 0x5c) == *(int*) (a + 4))) {
 		fcn_004c54c0(*(int*) (a + 4), *(int*) (b + 4), 0x7f - g_869480[*(unsigned short*) a][*(unsigned short*) b], 1);
 		fcn_004c54c0(*(int*) (b + 4), *(int*) (a + 4), 0x7f - g_869480[*(unsigned short*) b][*(unsigned short*) a], 1);
 		if (a[2] == 6 || a[2] == 5) {
@@ -248,6 +226,27 @@ void __cdecl fcn_0054ca10(char* e)
 		fcn_004c5620(4, e);
 		fcn_004c5980(msg);
 		return;
+		}
+		if (a[2] != 6) {
+			goto Lneg;
+		}
+		pa = gm_LookupEntityRecordById(*(int*) (b + 0x60));
+		pb = gm_LookupEntityRecordById(*(int*) (b + 0x5c));
+		if (pa != 0 && pa[8] > 0 && b[2] != 5) {
+			io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) pa, *(unsigned short*) a);
+			io_FormatTextBuffer(line + strlen(line), 0x1cee);
+			io_FormatTextBuffer(line + strlen(line), 0x1cf2, *(unsigned short*) b);
+			io_FormatTextBuffer(line + strlen(line), 0x1cef, *(unsigned short*) pb);
+			io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) pa);
+		} else {
+			io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) b, *(unsigned short*) a);
+			io_FormatTextBuffer(line + strlen(line), 0x1cee);
+			io_FormatTextBuffer(line + strlen(line), 0x1cf1);
+			io_FormatTextBuffer(line + strlen(line), 0x1cef, *(unsigned short*) pb);
+			io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) b);
+		}
+		fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
+		goto Lneg;
 	default:
 		return;
 	}

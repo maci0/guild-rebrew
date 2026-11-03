@@ -23146,3 +23146,24 @@ sites, argument order at eight call families, the row stride constructed through
 duplicated pointer-walking scans, conversion sites inside their branches, comparisons against element values rather than addresses, both loop
 bounds, twelve record offsets, and the minus-one sentinels. The first remaining divergence is a slot assignment for one loop counter that sits
 twelve bytes higher than the reference while the frame sizes agree, so the object length and the drift are the meaningful measures on this row.
+
+## 2026-11-03 — market row: unsigned records and a duplicated lookup removed
+
+`0x54CA10` keeps 215 of 3480 with the object at 3276, 104 bytes longer than the baseline, and the gap events fall from 163 to 125 with 38 spans
+closed and no new structural block opened. Three repairs were taken from the reference bytes. The record pointers are declared unsigned, because the
+reference compares bytes with a test and an unsigned jump above where the source's signed pointers produced a signed jump, at both sites, and the
+change also matches the byte comparisons the reference performs on three fields. A duplicated lookup was removed from the zero branch, along with
+its spurious variadic argument: the reference performs exactly one lookup there and pushes no argument for that format, and the call histogram now
+matches the reference exactly at 33 format calls, 7 lookups and 25 inline length scans. And a case guard was rewritten in the positive equality
+form the reference uses, from a negated disjunction to a conjunction of equalities with the equal path first; the two forms are equivalent because both
+operands are side-effect free, and this compiler still lowers the conjunction to short-circuit compares, so the shape is closer without being
+byte-identical.
+Fourteen defect classes were checked against the reference bytes and the rest came back clean: every call target matches across seven callees, all
+calls are cdecl with matching cleanup and there are no indirect calls, the argument order matches at four call families, the table stride is 0x300
+with the header dimensions agreeing, the message zeroing of 0x114 and its twelve field offsets match, twenty-five repeated inline length scans now
+match, the conversion site is inside its branch, every dereference agrees, the sentinel comparison is a byte compare with a signed jump in both, and
+eleven record offsets agree.
+One difference is recorded as open rather than repaired: the reference keeps three separate send-block copies where this build tail-merges the zero
+branch into the other send, so the reference has one more site for three routines. The first divergence is the frame, 0x614 against 0x610, because the
+reference spills a pointer and reuses an argument slot where this build keeps the pointer in a register, and that four-byte difference drives the
+operand encoding of the rest of the body.
