@@ -23689,3 +23689,20 @@ argument pushes back after a call while assuming that stdcall callees pop their 
 pushing four registers for a peak of 0x100, and the reported eight-byte difference is the instruction stream's divergence amplified by that model. The fix, if one
 is wanted, is to report the local frame by crediting arguments at each call, which changes existing expectations and touches the near-analysis caller, so it belongs
 in its own change with updated tests. The upstream note was rewritten to describe this rather than the imagined section bug.
+
+## 2026-11-03 — command row: an uninitialised read and a wrong base operand
+
+`0x4CA970` (cm_ExChrGotoBuilding) moves from 221 to 448 matched bytes with the object at 2708 against the 2779 extent, and the frame is now exactly 0x12c. Two lines did
+it, and both are real defects rather than shapes. A value was read without being initialised on the path where one field is zero and another is not: the reference
+zeroes a register in the prologue and spills another value to a frame slot, so the source now zeroes it, which restores the reference's eleven scalar slots at their
+exact offsets. And a call's first argument dereferenced the wrong base, reading the offset from one structure where the reference reads it from another, which three
+independent uses of that structure elsewhere in the body confirm, since it is passed to an entity-type check and to two other routines.
+The positional count preferred the wrong base by three bytes, and the edit also perturbed the allocator and shortened the object by twelve bytes. The structural
+evidence was kept and the metric dip is recorded rather than hidden. Four spellings of the guard and two ways of initialising the value were measured and made no
+difference.
+Eleven other defect classes were checked against the reference and came back clean: two record layouts were verified against the reference's own copies, the nine
+byte-copy loops match with none rolled, all 87 call sites are present in the same callee order, two multi-argument call orders match, the constant-address and
+scaled-index operands match, no lookup is duplicated or invented, the guards and the minus-one comparisons match, and the buffers are sized to the exact frame. The
+remaining divergence is an ordering difference in the prologue, where this compiler swaps which of two values is held in which register and then loads the argument
+after the pushes instead of before, and a later guard whose sense is inverted relative to the reference, which swaps a large block and collapses the alignment from
+that point.

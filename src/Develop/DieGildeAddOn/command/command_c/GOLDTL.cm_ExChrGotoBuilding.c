@@ -75,6 +75,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 
 	/* chunk 0: native ins 0-99 */
 	C = 0;
+	u = 0;
 	fcn_0064d41a(buf2, g_68b0d8, *(int*) (e + 0x10));
 	o = fcn_004032b0(buf2);
 	if (o == 0)
@@ -145,7 +146,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 				u = fcn_00445600(*(int*) (C + 0x61), 0x100, 0,
 				    (char*) &g_68149c);
 				if (u == 0)
-					u = fcn_004456e0(*(int*) (C + 0x61), 0x100, 0,
+					u = fcn_004456e0(*(int*) (B + 0x61), 0x100, 0,
 					    (char*) &g_68149c);
 				if (u == 0)
 					u = *(char**) (C + 0x61);
