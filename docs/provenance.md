@@ -20777,3 +20777,22 @@ empty so the guard preserves the server and Gold layouts without measuring them,
 re-measured because the stored addresses come from an older image. Final image SHA-256
 ab4f9271f9e21560864fb0dde45c88bc79577aa7cc6a6b2284d6abe4c135210c, artifacts under
 .scratch/pad-split-remaining/.
+
+## 2026-11-03 — upstream gap trace crash fixed
+
+The `rebrew diagnose gap` crash found while working `0x519190` is fixed upstream in commit bf6a0bbe on the main branch of
+the checkout at /home/maci/Desktop/Projects/relumea/repos/rebrew, not pushed. The traceback reproduced from this project
+is `TypeError: cannot use 'bytearray' as a dict key (unhashable type: 'bytearray')` raised inside
+difflib.SequenceMatcher's chain_b when `trace_gaps` builds the matcher at gap_trace.py:143. The cause is that capstone
+exposes `insn.bytes` as a bytearray and the masked-key branch computed `raw[:1] + b"\x00" * (...)`; slicing a bytearray
+yields a bytearray, and difflib uses those masked keys as dictionary keys. The fix makes `_masked_key` return
+`bytes(raw[:1]) + ...` on that branch so every path returns bytes, and a review found no other dictionary key in the file
+that could receive a bytearray, since `first_fault` and `_obj_text` key by integer and `_seq` uses the masked key tuple.
+The regression test `tests/test_new_commands.py::TestGapTraceHelpers::test_diagnose_gap_keeps_bytearray_stream_hashable`
+drives `diagnose gap f.c --va 0x1000 --json` through `rebrew.app.main` with compile and disassembly patched so both sides
+carry an equal byte run, asserts exit zero and a structured payload with va, instruction counts and a null fault, and it
+was confirmed to fail before the fix with the same TypeError. Verification: the exact failing command now exits zero and
+prints JSON through the checkout CLI, the suite reports 13,730 passed with 29 skipped, ruff passes and mypy reports no
+issues across 413 files, with pre-commit hooks passing on the commit. One caveat is recorded: the PATH executable at
+/home/maci/.local/bin/rebrew is a uv tool install of release 6.16.0 and still carries the crash, and it was deliberately
+not reinstalled, since the project uses its pinned environment rather than an editable checkout.
