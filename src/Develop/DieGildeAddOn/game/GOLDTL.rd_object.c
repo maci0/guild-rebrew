@@ -251,17 +251,17 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 					left = count;
 					start = count;
 					for (; left != 0; left--) {
-						fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x28);
-						fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x24);
-						fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x2c);
-						fcn_00401280(stream, RD_LIGHTS(object) + off + 0x18);
-						fcn_00401280(stream, RD_LIGHTS(object) + off);
-						fcn_00401280(stream, RD_LIGHTS(object) + off + 0x0c);
+						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
+						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
+						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
+						fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
+						fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38);
+						fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x0c);
 						if (version >= 0x3a6c00acu) {
-							fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x30);
-							fcn_004011f0(stream, RD_LIGHTS(object) + off + 0x34);
+							fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x30);
+							fcn_004011f0(stream, RD_LIGHTS(object) + off * 0x38 + 0x34);
 						}
-						off += 0x38;
+						off++;
 					}
 				}
 				if (start < 7) {
@@ -293,12 +293,12 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 						left = count;
 						start = count;
 						for (; left != 0; left--) {
-							fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x28);
-							fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x24);
-							fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x2c);
-							fcn_00401280(stream, RD_LIGHTS(object) + off + 0x18);
-							fcn_00401280(stream, RD_LIGHTS(object) + off);
-							off += 0x38;
+							fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
+							fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
+							fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
+							fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
+							fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38);
+							off++;
 						}
 					}
 					if (start < 7) {
@@ -307,19 +307,19 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 						}
 					}
 				} else {
-					for (off = 0; off < 0x188; off += 0x38) {
-						*(int*) (off + RD_LIGHTS(object) + 0x28) = *(int*) (object + 0x90);
-						*(int*) (off + RD_LIGHTS(object) + 0x24) = *(int*) (object + 0x94);
-						*(int*) (off + RD_LIGHTS(object) + 0x2c) = *(int*) (object + 0x98);
-						*(int*) (off + RD_LIGHTS(object) + 0x00) = *(int*) (object + 0x4c);
-						*(int*) (off + RD_LIGHTS(object) + 0x04) = *(int*) (object + 0x50);
-						*(int*) (off + RD_LIGHTS(object) + 0x08) = *(int*) (object + 0x54);
-						*(int*) (off + RD_LIGHTS(object) + 0x18) = *(int*) (object + 0x5c);
-						*(int*) (off + RD_LIGHTS(object) + 0x1c) = *(int*) (object + 0x60);
-						*(int*) (off + RD_LIGHTS(object) + 0x20) = *(int*) (object + 0x64);
-						*(int*) (off + RD_LIGHTS(object) + 0x0c) = *(int*) (object + 0x90);
-						*(int*) (off + RD_LIGHTS(object) + 0x10) = *(int*) (object + 0x94);
-						*(int*) (off + RD_LIGHTS(object) + 0x14) = *(int*) (object + 0x98);
+					for (i = 0; i < 7; i++) {
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x28) = *(int*) (object + 0x90);
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x24) = *(int*) (object + 0x94);
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x2c) = *(int*) (object + 0x98);
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x00) = *(int*) (object + 0x4c);
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x04) = *(int*) (object + 0x50);
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x08) = *(int*) (object + 0x54);
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x18) = *(int*) (object + 0x5c);
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x1c) = *(int*) (object + 0x60);
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x20) = *(int*) (object + 0x64);
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x0c) = *(int*) (object + 0x90);
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x10) = *(int*) (object + 0x94);
+						*(int*) (RD_LIGHTS(object) + i * 0x38 + 0x14) = *(int*) (object + 0x98);
 					}
 				}
 			}
@@ -375,12 +375,12 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			*(int*) (object + 0x224) = -1;
 		}
 		if (resources != 0 && RD_DRAW(object) != 0) {
-			for (off = 0; off < 0xdec; off += 0x4a4) {
+			for (off = 0; off < 3; off++) {
 				char* entries;
-				if (*(char**) (RD_DRAW(object) + off + 0x40c) != 0) {
-					entries = *(char**) (RD_DRAW(object) + off + 0x410);
+				if (*(char**) (RD_DRAW(object) + off * 0x4a4 + 0x40c) != 0) {
+					entries = *(char**) (RD_DRAW(object) + off * 0x4a4 + 0x410);
 					if (entries != 0) {
-						count = *(int*) (*(char**) (RD_DRAW(object) + off + 0x40c) + 0x1e4);
+						count = *(int*) (*(char**) (RD_DRAW(object) + off * 0x4a4 + 0x40c) + 0x1e4);
 						for (type = 0; type < count; type++) {
 							if (*(char**) (entries + type * 4) != 0) {
 								fcn_0045ce90(*(char**) (entries + type * 4));

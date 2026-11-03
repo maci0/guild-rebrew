@@ -20476,3 +20476,29 @@ One row in that set, fcn_004c6e20, carried an uncommitted edit from another sess
 `memcpy(dst, src, 0x40)` with `memcpy(dst, src, sizeof(((char*)0)[0x40]))`, which evaluates to one byte rather than
 sixty-four and would copy one byte of each record. That is wrong behaviour, not a matching trade, so it was restored to
 `memcpy(dst, src, 0x40)` and the row returns from SIZE_MISMATCH at 51 of 123 to NEAR_MATCHING at 113 of 123.
+
+## 2026-11-03 — terrain object SIB base rule closes twenty-five bytes
+
+`0x447110` rises from 3319 to 3339 of 3348 with the object still exactly 3348, 114 relocations and status
+NEAR_MATCHING; nine byte differences remain and lint is clean. The root cause of the SIB swaph was found and it is a
+rule: MSVC 6 keeps the loaded pointer as the SIB base when the address uses a byte-offset accumulator such as
+`lights + off + disp`, but keeps the materialised multiply register as base when the byte offset is written as
+`index * stride` inside the address, which is why the RD_LIGHT_NINE copies already matched and the byte-offset
+accumulator loops did not. Four loops were rewritten to the multiply form with identical address sequences: the two
+lights loops use `RD_LIGHTS(object) + off * 0x38 + disp` with `off++` instead of `off += 0x38`, the light-fill loop
+iterates `for (i = 0; i < 7; i++)` indexing `RD_LIGHTS(object) + i * 0x38 + disp` in place of
+`for (off = 0; off < 0x188; off += 0x38)`, and the resource loop iterates `for (off = 0; off < 3; off++)` indexing
+`RD_DRAW(object) + off * 0x4a4 + ...` in place of `for (off = 0; off < 0xdec; off += 0x4a4)`; iteration counts and
+strides are unchanged and `off` is dead after each loop, so no value dependence changed. Twenty-five offsets closed:
+1656, 1673, 1690, 1707, 1739, 1773, 1790, 2199, 2216, 2233 and 2250 for `lea` SIB swaps, 2489, 2505, 2521, 2545, 2558,
+2570, 2583, 2596, 2612, 2628 and 2644 for light-fill store SIB swaps, 2762 for an inline strcpy SIB that closed as a
+side effect, and 3182 and 3189 for resource-loop SIB swaps. The nine still open are pure instruction order: at 2186 and
+2190 the stores `mov [esp+0x1c],esi` and `mov [esp+0x18],esi`, which are `left = count` and `start = count`, are
+emitted in the opposite order to the reference, which writes left then start, and at 1638 to 1642, 1643 and 1647 the
+first light loop schedules the induction variable `xor edi,edi` after our `start = count` store rather than before the
+two stores. Source permutations that all produced identical bytes: swapping the assignments, a comma statement,
+chained `start = left = count`, `start = left`, declaration-order swap, a for-init comma list, pointer and integer
+domain casts, `(char*)off + disp`, array subscript, a named offset local and an unsigned counter. Reverting the first
+lights loop to the byte-offset form would trade its seven SIB fixes for the five ordering bytes, so the multiply form is
+the net win at nine rather than eleven. Sources in .scratch/rd_object/ with base.c as the pre-change state and expF.c as
+the current one.

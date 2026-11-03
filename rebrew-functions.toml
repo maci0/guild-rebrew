@@ -422904,7 +422904,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005ba910".verification]
-source_hash = "7e8bfb5381f3975debf4929fb009cbed87b0307141e1aa9b6164383bb9410c82"
+source_hash = "d786d91f9493e97b3e7806c16db3f29ab0e06fd5f821a4b45c8da933cdc7c89f"
 reference_hash = "5011dfe5394eca8b074b60d11c0199028276af8cc7256e0aa95e5ad4751f9ad2"
 reference_size = "11948"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -422915,10 +422915,10 @@ module = "GOLDTL"
 va = "0x5ba910"
 context_hash = ""
 defines = "[]"
-input_hash = "c0a35c2f31d5a5d148e6e7ae5c8e25c69bea8a1a68ff1af555bc39e5b6bf6a7e"
+input_hash = "5faf67a3b651ec6c44f134f4079a8fdc73a0bae1f0ffc5b07d48d9073c26a6e2"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T03:29:43+00:00"
+measured_at = "2026-11-03T03:36:35+00:00"
 
 [["GOLDTL.0x005ba910".status_history]]
 old_status = "STUB"
@@ -423229,21 +423229,21 @@ blocker = "Body ported from the Kuna decompilation of the native 0x900 frame: pa
 blocker_delta = 697
 
 ["GOLDTL.0x004da690".verification]
-source_hash = "c544743be53bcc2885caaf46d3ef0ab60ea186e187b889451f52b93acef976f7"
+source_hash = "c54d52d4e94c84a932b6f3d0dc07a5ab5ec851e80c3c274fcb55873ab07eecd3"
 reference_hash = "217cf950d461ae3aff7e23c906f4b9cd6e9e683cac0694b5f715363c23fefb02"
 reference_size = "7057"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "7abcb079717a76f6d448fa4f910ea5f9116c386c77fd93b0df08395841ecd51f"
+compiler_hash = "65f13e99c377985b8d6acea9b4d608e038366b42943f6d1475d7da3c79d5514d"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x4da690"
 context_hash = ""
 defines = "[]"
-input_hash = "f2746b6448866cbc98f1f9366eb09307749cdc2e369b74b2bcf650ac277c1431"
+input_hash = "d3c37879a8293e114776fe6ec94939955fdb8bf5361658c291ab9f1040fb89f0"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-02T14:24:39+00:00"
+measured_at = "2026-11-03T03:36:12+00:00"
 
 [["GOLDTL.0x004da690".binding_history]]
 action = "rebind"
