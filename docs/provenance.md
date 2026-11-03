@@ -22577,3 +22577,25 @@ GOLDTL.fcn_005186c0.c has the same defect, compiling to 0xae0 against a 2756-byt
 where its reference defers them, so a fix would pay on both rows.
 A correct-but-costly variant was reverted: inlining the first case's four tests so the byte comparison fuses grows the object to
 2804 and 971 instructions, and the reference fuses only that one site while using a wider comparison at the other five.
+
+## 2026-11-03 — dispatch row: a missing call restored and a duplicate removed
+
+`0x432480` now measures 206 of 4906 with the object at 4906 against a stored extent of 4850 and three relocations. Two wrong
+accesses were repaired, both from the reference bytes. In the first half's post path the source was missing an entire reference
+call: at 0x4329f1 the reference gates on an owner field equal to 0x169 and then calls 0x431330 with five arguments, the object
+pointer, the slot, the slot's eighth byte, the slot's first byte and a bit, and that call is now present. The second repair removes a
+duplicate: the path that stores the high half re-emitted the shared clamp call at 0x4321a0, while the reference pushes its
+arguments and jumps into the single call site at 0x4328ff, so the duplicate became a jump to a label above the shared call, which
+is what accounts for the object shrinking by 49 bytes.
+Measured in sequence, the baseline is 302 at 4918 with 202 windows and 118 deleted instructions; the first repair gives 351 at
+4955 with 205 windows and 106 deletions; and the second gives 206 at 4906 with 198 windows and 94 deletions, closing seven windows
+including the 19-instruction deletion at 0x432773 and the duplicate call, and opening none. The match falls because the restored
+call and the removed duplicate change the positional alignment, and the trade is accepted because a missing call and a wrong call
+count are defects.
+One costly repair was measured and not kept: splitting the clock-carry integer conversion into both arms, which the reference does
+with two conversion sites per half where this build has one, improves aligned instructions from 453 to 464 but closes no windows,
+costs 147 matched bytes and grows the object to 4966. Three items remain unreachable from source within scope: the reference's sign
+test uses a shift and a bit test where this build emits a compare and a jump, with every spelling tried compiling identically; the
+conversion spill lands after the if and else join in the reference and inside each arm here, for every form tried; and one array
+base sits sixteen bytes lower in this build than in the reference while the rest of the frame map agrees. The second half also
+still lacks the reference's second clamp call site after the prune path at 0x433609.

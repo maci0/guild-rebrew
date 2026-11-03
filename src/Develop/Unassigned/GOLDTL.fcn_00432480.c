@@ -251,10 +251,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 					SI(slot) = hi;
 					frames = SP(owner + 0x15c);
 					SI(slot + 8) = QI(BF(hi), 4) + SI(slot + 8);
-					SI(slot + 4) = fcn_004321a0(
-						*(ClampBlk*) (slot + 0x6c),
-						hi, lo, hi, max);
-					goto geom;
+					goto clamp1;
 				}
 
 				/* forward step */
@@ -299,6 +296,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 							(SI(slot + 0x70) << 30) >> 30);
 					}
 				}
+	clamp1:
 				SI(slot + 4) = fcn_004321a0(*(ClampBlk*) (slot + 0x6c),
 					SI(slot), lo, hi, max);
 
@@ -342,6 +340,10 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 				}
 
 	post:
+				if (SB(owner + 0x169) == 0) {
+					fcn_00431330(o, slot, SI(slot + 8), SI(slot),
+						(SI(slot + 0x70) << 30) >> 30);
+				}
 				if (SI(slot + 0x14) != -1 && SI(slot + 0x18) != -1 &&
 				    SI(slot + 0x1c) != -1 && SI(slot + 0x30) != 0 &&
 				    SI(slot) >= SI(slot + 0x14)) {
