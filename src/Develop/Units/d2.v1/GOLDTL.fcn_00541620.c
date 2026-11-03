@@ -21,6 +21,7 @@ extern int g_100f1dc;
 extern char g_14cf950;
 extern char g_7f4c00[];
 extern char g_7f4ca0[];
+extern double g_6640e8;
 
 int __cdecl io_AppendText(int, ...);
 char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
@@ -45,7 +46,6 @@ int __cdecl fcn_0050d5d0(int, char*, int*);
 int __cdecl fcn_0050d2a0(int);
 int __cdecl fcn_004fcda0(unsigned short, int, int*);
 int __cdecl fcn_004fcb50(unsigned short, int*, int);
-int __cdecl fcn_0064d228(void);
 void __cdecl fcn_005459a0(int);
 void __cdecl fcn_00476970(int);
 void __cdecl fcn_00469e30(int);
@@ -87,6 +87,7 @@ void __cdecl fcn_00541620(void)
 	int k;
 	int sel;
 	int kind;
+	double dbl;
 
 	b200 = 0;
 	e1ec = 0;
@@ -222,9 +223,11 @@ void __cdecl fcn_00541620(void)
 	i = 0;
 	if (n > 0) {
 		do {
-			c1fc = fcn_0064d228();
-			k = fcn_0064d228();
-			d1f8 = fcn_0064d228();
+			dbl = (double) *(int*) ((char*) (int) v1d0[i] + 0xc0) * g_6640e8
+				* *(int*) ((char*) (int) v1d0[i] + 0xb4);
+			c1fc = (int) (c1fc + dbl);
+			k = (int) (k + dbl);
+			d1f8 = (int) (d1f8 + dbl);
 			i++;
 		} while (i < n);
 		if (k != 0) {
@@ -272,9 +275,11 @@ void __cdecl fcn_00541620(void)
 	i = 0;
 	if (n > 0) {
 		do {
-			b200 = fcn_0064d228();
-			a7 = fcn_0064d228();
-			d1f8 = fcn_0064d228();
+			dbl = (double) *(int*) ((char*) (int) v1d0[i] + 0xc0) * g_6640e8
+				* *(int*) ((char*) (int) v1d0[i] + 0xb4);
+			b200 = (int) (b200 + dbl);
+			a7 = (int) (a7 + dbl);
+			d1f8 = (int) (d1f8 - dbl);
 			i++;
 		} while (i < n);
 	}

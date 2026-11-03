@@ -24134,3 +24134,18 @@ One disagreement is recorded and left alone: the reference allocates three scala
 do not, and declaring them in the reference's order produces identical output. The first remaining divergence is a string literal operand that needs a data binding rather
 than a code change, then an immediate encoding of the same subtraction, then instruction scheduling in one loop. A diagnostic fault reported early in the row is a
 display artifact, since the binding it complains about validates one byte later.
+
+## 2026-11-03 — assembly row: two fabricated conversion loops replaced by the real product
+
+`0x541620` keeps 158 of 2511 with the object at 2330, inside the extent and fifty-five bytes longer than before, and the single kept change replaces two loops that called a
+conversion routine with the computation the reference performs. The reference computes a product of a record field, a floating constant and another field, accumulates it,
+and divides one accumulated value by another; the row now does the same in double precision. That closes the 677-instruction window and the small windows beside it, and
+the two loops pair one instruction for one against the reference.
+The positional count falls from 167 to 158 while structural agreement rises from 15 to 20 and the missing tail falls from 70 to 44, because the reference and the object
+differ in instruction count so the positional tally is dominated by an offset shift. The structural evidence is kept and both numbers are recorded.
+One repair was proved and reverted on the extent rule: the reference re-reads a global sixteen times where the row caches it once, and fixing that raised structural
+agreement to 39 and left a missing tail of four, but grew the object twenty-four bytes past the extent. A callee was decoded to disprove a candidate argument swap, which
+is recorded as a negative rather than a change, and two further variants were reverted as no-ops.
+The first real divergence is a register home: the reference defers pushing a callee-saved register and this build pushes it in the prologue, so everything downstream
+inherits the allocator difference. The remaining lever recorded for a later pass is the local layout, since the reference's arrays sit low in the frame and this build's sit
+high, which costs three bytes on each large displacement and is the residual growth.
