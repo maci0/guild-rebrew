@@ -24528,3 +24528,14 @@ so those arms and the block are identical.
 The remaining difference is register allocation and basic-block layout: the reference loads a global into one register before pushing the saved registers and this build
 loads it after the pushes into another register, and the reference places two blocks after the jump-table dispatch where this build places them before it. That accounts
 for the switch sitting eight bytes early and the function being twelve bytes short, and no declaration order changes it.
+
+## 2026-11-03 — two-byte near miss: order solved, register not
+
+A rounding pass over the store's nearest rows found a thirty-three-byte function that differs in exactly two bytes, both from one register choice. The reference loads a
+global into edx after a call, stores a converted result to an absolute address, then stores zero through the pointer; this build loads it into ecx. Four source shapes
+were measured. The baseline and one variant both keep the byte count at 31 of 33. Moving the pointer's assignment next to its use makes the instruction order identical to
+the reference, load then the absolute store then the pointer store, but the register stays ecx. An explicit reload expression gets edx but puts the load after the
+absolute store. A volatile pointer produced a spill and a stack store, which is worse.
+So the two signals cannot both be satisfied from source here: the order and the register are chosen independently by the allocator, and no spelling tried gets both. The row
+is restored byte for byte and the result is recorded, because two bytes on a thirty-three-byte row is not worth a shape that trades order for register; the lesson is that
+near rows with a single register difference are as hard as large ones and should be scheduled after rows that are missing whole blocks.
