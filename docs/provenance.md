@@ -24317,3 +24317,18 @@ needs real owner translation units for those globals rather than common declarat
 A measurement caveat is recorded with the change: the required data verification ran against a build image from before this session's pad split, so it rewrote 1,260
 verification blocks in the data store with measurements from that stale image, including status changes. Those blocks are tool-written measurements, not hand edits, and
 they must be refreshed by re-running the verification after a fresh link.
+
+## 2026-11-03 — meister row: a double-returning gate and a packet that absorbed the identifier array
+
+`0x480330` moves from 179 to 294 matched bytes with the object at 2321, inside the 2340 extent, and the frame now matches at 0x50c with the message buffer at 0x14 and
+the data buffer at 0x10c. Instruction comparison shows 45 exact, 7 differing only in relocation slots and 650 structural of 702, against 25 exact and 677 structural
+before.
+The repairs are semantic and mostly derived from the callees. One callee takes five arguments and cleans twenty bytes, another takes two constants' worth, and a gate
+compares a double-returning call against a constant held as a quadword, where the source had a float return and a float literal. An identifier array that had been a
+separate local is part of the packet, at three offsets holding six, one and four entries, and merging it is what restores the reference frame. Two formatted messages had
+the wrong argument count, one missing an offset and one carrying an argument the reference never passes. A best-cell index is corrected to a weighted sum, a table read
+is hoisted once, two scan bounds and two clamps are corrected.
+Two things are reported rather than solved. The reference keeps the meister pointer in one callee-saved register and its zero temporary in another, and this build assigns
+them the other way round, so every operand-bearing instruction after the prologue differs from the second instruction on. And the compiler lays three packet branches in
+the opposite order from the reference; two source orderings were tried and it reordered both. The fifth frame slot is forced with a volatile pointer so the reference
+frame size is reached, which is labelled as a codegen device rather than proved original source, and it costs three memory accesses.

@@ -421625,10 +421625,10 @@ name = "ai_CalcMeisterWache"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.ai_CalcMeisterWache.c"
 symbol = "_ai_CalcMeisterWache"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T07:41:46+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-03T20:07:29+00:00"
 status = "SIZE_MISMATCH"
-blocker = "STUB, best body kept unchanged this pass: 179/2357 exact, object 2357 == target 2357 (25 exact / 677 structural instructions; mnemonic match 86.4%, structural ratio 96.4%). The semantic body is complete and its frame happens to match, but every operand-bearing instruction still differs: local/argument stack slots, callee-saved colouring and the 0x50c frame layout were never derived from the reference disassembly (source comment says 'frame/slot layout and codegen do not match the target yet'). Reaching NEAR (1421/2357) needs a codegen-level rewrite against the live bytes and the 375-line hint at .scratch/decomp/GOLDTL/0x00480330.c.pseudo."
+blocker = "SIZE_MISMATCH: object 2321B vs 2340B target, 294/2340 bytes exact, 23 relocs. Frame now matches the reference exactly (0x50c: idx1/idx2/dist/count/name at 0x0/0x4/0x8/0xc/0x10, msg[0xf8] at 0x14, buf[0x400] at 0x10c). Fixed against the reference: 0x502cd0 arity 5 (was 4, cleanup 0x14), 0x503fe0 arity 2 (1,6), 0x42e450 return type double and the 0.85 gate as a double with >, ids merged into the 0xf8 packet at +0x38/+0x58/+0x70 instead of a separate int[8], sprintf arities for the two-string messages (missing cand+5) and the gm_GetGebaeudeHauptraum error (no master arg), table index idx1+idx2*8, kind computed once. Residual is codegen shape: the reference keeps meister in EDI and the zero temp in EBX while this build keeps meister in EBX and the zero in EDI, and MSVC lays the city/pruefen/umland packet blocks in the opposite order (umland, pruefen, city vs city, pruefen, umland), so every operand-bearing instruction differs from the prologue on. First divergence at offset 6 (push ebp vs mov ebx,[esp+0x510])."
 blocker_delta = 2178
 
 ["GOLDTL.0x00480330".verification]
@@ -421646,7 +421646,7 @@ defines = "[]"
 input_hash = "62a0ed048fabedf1b053a361123482aaffa95295dc1e9daf5519791fb398e7e5"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T20:06:05+00:00"
+measured_at = "2026-11-03T20:10:01+00:00"
 
 [["GOLDTL.0x00480330".status_history]]
 old_status = "STUB"
