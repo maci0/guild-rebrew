@@ -20234,3 +20234,41 @@ native's flag slot D4. The first divergence past the slot colouring is the fv co
 stack and orders the call before the `fv - num*0x665ed0` step, a genuine evaluation-order difference at
 `if (fv > gm_RandomFloat01())`. Scratch probes in .scratch/569ff0/ with probe.sh, nextdiv.py, V1.c, V2.c, V3.c and
 BAK_982_pre.c.
+
+## 2026-11-03 — data drift diagnosed to five causes
+
+The 427 data-drift rows were diagnosed read only, with the full report at .scratch/data-drift-diagnosis.md. Image
+facts from the reference and the 2026-11-02 build: .text 0x2603ea against 0x274dc0 for plus 84,438, .rdata VA
+0x662000 against 0x676000 with size 0x12bb2 against 0xb36e for minus 30,788, .data VA 0x675000 against 0x682000
+for plus 0xd000 with VirtualSize 0xf09424 against 0x2d730e4 for plus 31,890,624, and .data1 and .rsrc moved from
+0x157f000 to 0x33f6000. The reference .data has no file bytes above 0x6b6000, so everything from 0x6b6000 to
+0x157e424 is virtual zero fill. The link map shows regular contributions ending at offset 0x626aec, the first
+COMMON at 0x626b00, and 239 COMMON symbols totalling 41,207,264 bytes of which 60 pads belong to the server's
+0x10034610..0x11766208 layout for 24,348,840 bytes, for example
+src/Develop/DieGildeAddOnServer/server.c:2267 _dpad_101deb18[20058888],
+m_alloc/GOLDTL.fcn_42d670.c:21 _dpad_1052c50[4498744] and vfs/GOLDTL.fcn_00525b40.c:159 _dpad_aed32c[5014548];
+COMMON is appended after the sections so those pads do not move named rows, they inflate VirtualSize and push
+.data1 and .rsrc. Three dossiers were built. g_869480 sits at reference 0x00869480 in .data with a linked VA of
+0x0088f640 from symbol_stubs.c.obj, a delta of 0x261c0 made of the 0xd000 base shift plus 0x191c0 in-section, and
+its only definition is scaffold `char g_869480[0x300][0x300] = {0};` at stubs/goldtl/symbol_stubs.c:2886 while
+game_matrices.h holds the extern. g_90e0a0 has reference 0x0090e0a0 and linked 0x0091f650 with delta 0x115b0,
+because the stub translation unit packs g_869480 then g_90d520 at plus 0x90000 while the reference leaves 0x140a0
+more between them. flt_0_3, a four-byte compiler literal, keeps the same bytes at 0x0066414c and 0x00677950 with
+delta 0x13804, and its surviving pool symbol belongs to GOLDTL.fcn_0048d6c0.c.obj rather than the row's file. The
+causes rank as intra-.data ordering for 388 rows, because one translation unit defines every global and the linker
+emits its data contiguously while the reference interleaves per-TU data in load order; a wrong output section for 46
+read-only rows whose reference VAs are .rdata but whose owners are writable definitions, which is why the build
+.rdata is 30,788 bytes short; a uniform base shift from .text overflow of plus 0x14000 for .rdata and plus 0xd000
+for .data that no data command can move; the foreign COMMON pads, which are the entire VirtualSize error rather than
+a row displacement; stale verdicts, since every verification record is from 2026-10-31T12:39:26 and the stored
+built_va values disagree with the current map, so the drift counts describe the old image even though the
+displacement is real; and section metadata noise, with 173 rows declared .bss whose reference VA is .data, 13
+.rdata rows in reference .data and 6 .data rows in reference .rdata. The plan in impact order is per-TU data
+placement through the `_dlead_<tu>` mechanism that `rebrew data layout converge` adjusts, premised on
+`rebrew data layout audit --section .data --json` listing this target's objects, then emitting the 46 read-only rows
+into .rdata by making their owners const, then deleting the 60 server-space pads from translation units the TL
+target compiles, and only later re-measuring verdicts. Two tool gaps were recorded for the upstream idea list:
+`rebrew build check-data-placement` pairs rows to map objects through the row file, so scaffold-owned rows report
+zero symbols even though the map names symbol_stubs.c.obj, and `rebrew data layout audit --section .data` misses the
+client target's objects entirely, listing only bss_late.c.obj which is not on the TL link line. No metadata or
+source change was made by this diagnosis.
