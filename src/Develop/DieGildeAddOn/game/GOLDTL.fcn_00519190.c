@@ -128,7 +128,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		v0c = (int)(S.text - 1);
 		v20 = v0c + text_index;
 		if (*(char*)v20 == '$') {
-			memcpy(S.text + text_index + 9, S.text + text_index + 1, strlen(S.text) - text_index);
+			memmove(S.text + text_index + 9, S.text + text_index + 1, strlen(S.text) - text_index);
 			*(int*)v20 = 0x20202020;
 			*(int*)(v20 + 4) = 0x20202020;
 			*(short*)(v20 + 8) = 0x2020;
@@ -254,7 +254,7 @@ fmt:
 	}
 	v10 = 0;
 	text_index = v20;
-	memcpy(S.text + v20, (char*)v18, strlen((char*)v18));
+	memmove(S.text + v20, (char*)v18, strlen((char*)v18));
 	v32 = 0;
 	continue;
 
@@ -362,7 +362,7 @@ fmt:
 		v08 = (int)strlen(S.text) - text_index + 1;
 		memmove(S.text + text_index + v24 - 1,
 			S.text + text_index + 1, v08);
-		memcpy(S.text + text_index - 1, S.work, v24);
+		memmove(S.text + text_index - 1, S.work, v24);
 		continue;
 	icon:
 		v08 = *(int*)(v14 + 0x10162d4);
@@ -466,7 +466,7 @@ fmt:
 		v08 = (int)strlen(S.text) - text_index + 1;
 		v24 = (int)strlen(S.work);
 		memmove((char*)v0c + v24, S.text + text_index, v08);
-		memcpy((char*)v0c, S.work, v24);
+		memmove((char*)v0c, S.work, v24);
 		continue;
 	case 'v':
 		v08 = (unsigned char)S.text[text_index];
@@ -568,7 +568,7 @@ fmt:
 		}
 		v10 = 4;
 		v24 = (int)strlen(S.text) - text_index;
-		memcpy(S.text + v0c + 2, S.text + text_index + 1, v24);
+		memmove(S.text + v0c + 2, S.text + text_index + 1, v24);
 		text_index = v0c;
 		continue;
 	case 'e':
@@ -618,7 +618,7 @@ fmt:
 		memmove(S.text + text_index + strlen(S.work) - 1,
 			S.text + text_index + 1,
 			strlen(S.text) - text_index + 1);
-		memcpy(S.text + text_index - 1, S.work, strlen(S.work));
+		memmove(S.text + text_index - 1, S.work, strlen(S.work));
 		continue;
 	case 'r':
 		if (directive != 'r') {

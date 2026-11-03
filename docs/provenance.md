@@ -21895,3 +21895,25 @@ than structural: the object runs 180 bytes ahead by native offset 819 through ex
 finishes 88 short at the tail, so the next lever is the reference-only runs at native offsets 1021 with 84 instructions, 2579
 with 40 and 6282 with 34. The corresponding entry in docs/codegen-walls.md is rewritten from a cap claim into the refutation
 with these measurements.
+
+## 2026-11-03 — six overlapping copies repaired in the text appender
+
+`0x519190` keeps 660 of 7527 with the object exactly at the extent and 85 relocations, down from 684, after six memcpy calls
+were converted to memmove because the regions overlap. The row's recorded claim that the case 'f' copy is a memmove holds:
+the callee at 0x64d740 contains the overlap test, comparing the destination against the source and branching backwards, and
+22 call sites in the reference use it. Two sites were already correct, four were not, and the repairs measured in sequence
+as 594 at 7519, 607 at 7519, 622 at 7507, 643 at 7523 and 660 at 7527, with gap windows falling from 213 to 185. The first
+repair, at line 131 where the destination is the source plus eight and the overlap is provable, costs 90 positional bytes on
+its own and removes eight object bytes; it is kept because copying overlapping ranges with memcpy is undefined behaviour, not
+a formatting difference.
+The claim that fcn_00517c00's second argument is an unsigned char is half confirmed: the callee reads a single byte at
+0x517cec with `cmp byte ptr [esp+0x52c],2`, so the width holds, while signedness is not observable because cdecl passes a
+dword, so the unsigned prototype is consistent but unproven.
+The first remaining divergence is at offset 7 in the frame immediate: the reference loads 0x31f4 where this build loads
+0x31f0, and the compiler aligns the frame to eight after `and esp,-8`, so 0x31f4 is unreachable from C; the baseline had
+0x31f8. Two systemic differences sit behind it: the reference keeps the zero in ebx and duplicates early epilogues, while this
+build uses esi and shares one failure epilogue. The case 'r' digit loop written with the isdigit macro, both as a while and as
+an early-break if, measures 577 at 7547 with a 28-byte larger object, so the reference genuinely uses the macro but the shape
+is a net regression here and was reverted. Every one of the 118 relocation bindings is unresolved, with the top ones being
+memmove at 21 sites, sprintf at 19, and the two message helpers and the integer printer behind them; call-count differences
+against the reference remain in the report client message, two other helpers, strncat and isctype.
