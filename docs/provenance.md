@@ -23324,3 +23324,36 @@ six dwords, the frame layout with two 0x100 arrays and a six-entry scene table, 
 and the sentinels. The first divergence is a partial-register zero extension: the reference moves into a sixteen-bit register and then masks, which
 zero-extends, while writing an expression as an unsigned short subtraction produces a full 32-bit move. That is recorded as unresolved rather than papered
 over, and the next window is a loop test rotated to the bottom.
+
+## 2026-11-03 — morph row: a lead filler removed and the body rewritten from the listing
+
+`0x40AA00` moves from 46 to 717 matching bytes with the object at 3192 against the 3370 extent and 105 relocations, after the file's 2944-byte NOP filler was
+removed and the body rewritten from the reference listing. The filler was not reconstruction: it carried a data-segment pragma and the gap diagnostic
+disassembled it as the body, so every measurement before this pass described padding.
+The rewrite corrected several real defects rather than shapes. One callee takes a single argument and the source called it with none. A second takes two
+arguments and the source passed four, including a spurious variadic. A third takes its arguments in the order record, name, flag, where the source passed
+the flag first. A printf prints the instance pointer rather than a field of it. A two-pointer call takes map, x, y and a float pointer, verified against the
+callee's own argument reads. The waypoint table entries are two bytes with the coordinate bytes first and second, indexed by one field and bounded by
+another. And the create branch compares a name field of the instance rather than of the record. All calls are cdecl, verified by their cleanup, with one
+callee's cleanup deferred into the following call.
+One experiment was reverted honestly: a fabricated structure pad made the frame and local base match the reference exactly and moved the first fault to
+offset 21, but the matched byte count rose only five, so the invented padding was removed and the plain array is kept. The reference's extra 0x28 bytes of
+scalar area remain unexplained, with ten slots reserved and only four referenced.
+
+## 2026-11-03 — dialog row: a buffer width, an unsigned char and three ratio sites
+
+`0x52EA30` moves from 330 to 713 matching bytes with the object at 3198 against the 3289 extent and a frame of 424 that now matches the reference exactly. Three
+repairs did it. The buffer is 0x40 bytes rather than 0x2c, and that alone supplies the twenty missing frame bytes. A global pointer is an unsigned char
+pointer, because the reference zero-extends the byte it loads where the source sign-extended, at both header-path sites. And three unguarded ratio sites
+convert the denominator and then divide, which the reference shows as a load, a store and a reverse divide, where the source divided in place.
+The eight guarded ratio sites were rewritten to a float denominator and reproduce the reference's compare-and-branch sequence, but the change adds about 160
+bytes, overshoots the extent at 3358 and scores lower at 705, so the positional winner was kept and the disagreement recorded rather than resolved by
+preference.
+Every other checked class came back clean: all call targets match across thirteen routines, cleanup is cdecl and one callee returns plainly with the caller
+cleaning up, a six-argument call's count and order match with three constants, two cleanup loops already compile to bounded pointer walks, and no swapped
+constant, scaled argument, spurious variadic, wrong copy or count, wrong field store, duplicated call, missing guard or array bound defect was proven. The
+first divergence is a scalar slot: the reference stores a ratio four bytes lower than this build, so it has one more scalar below it, and the largest
+remaining window is a cleanup loop and a display call.
+A proven defect outside this row's path is recorded for a follow-up: a coordinate structure in src/client_types.h is declared with three integers and a short,
+but the two functions that read it take a word at offset four, a dword at offset six and a dword at offset ten, which the declared layout cannot produce. The
+finding is byte-neutral for this row, so it was not applied here; it needs its own pass with the affected readers and the type binding checked.

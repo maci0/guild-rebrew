@@ -14,7 +14,7 @@ extern int g_7e46ac;
 extern int g_7746f0;
 extern int g_772514;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char* g_7e2aa0;
+extern unsigned char* g_7e2aa0;
 extern int* g_7e2a9c;
 extern int g_7ea360;
 extern char* lpObjektePROT;
@@ -58,7 +58,7 @@ int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 void __cdecl fcn_0052ea30(void)
 {
 	char name[256];
-	char buf[0x2c];
+	char buf[0x40];
 	int kinds[8];
 	pos14_7f4c00 pos;
 	int pct;
@@ -102,8 +102,8 @@ header_done:
 		if (e == 0) {
 			return;
 		}
-		n = fcn_00500d20(e + 0x44, e + 0xb8);
-		ratio = (float) fcn_00500d20(e + 0x44, (char*) 0x7f4c00) / (float) n;
+		ratio = (float) fcn_00500d20(e + 0x44, e + 0xb8);
+		ratio = (float) fcn_00500d20(e + 0x44, (char*) 0x7f4c00) / ratio;
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
@@ -134,8 +134,8 @@ header_done:
 		if (e == 0) {
 			return;
 		}
-		n = fcn_00500d20(e + 0x44, e + 0x52);
-		ratio = (float) fcn_00500d20(e + 0x44, (char*) 0x7f4c00) / (float) n;
+		ratio = (float) fcn_00500d20(e + 0x44, e + 0x52);
+		ratio = (float) fcn_00500d20(e + 0x44, (char*) 0x7f4c00) / ratio;
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
@@ -154,8 +154,8 @@ header_done:
 	if (e == 0) {
 		return;
 	}
-	n = fcn_00500d20(e + 0x44, e + 0x52);
-	ratio = (float) fcn_00500d20(e + 0x44, (char*) 0x7f4c00) / (float) n;
+	ratio = (float) fcn_00500d20(e + 0x44, e + 0x52);
+	ratio = (float) fcn_00500d20(e + 0x44, (char*) 0x7f4c00) / ratio;
 	*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 	if (g_6a25c4[0] == -1) {
 		d2_SetForm(g_6a25b8, 0);
