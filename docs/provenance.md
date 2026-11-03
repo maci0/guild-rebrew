@@ -23928,3 +23928,34 @@ extent even though the code is nearly complete. The remaining divergence is the 
 allocated but never referenced, while this build has five and puts the first saved global in the argument slot, so seventeen frame-relative instructions differ by
 eight bytes. Two source shapes were tried and reverted. After that only three scheduler-only reorderings remain, and no semantic, width, polarity, threshold, guard or
 prototype defect is open.
+
+## 2026-11-03 — auction body completed: the call sites reach the reference count
+
+`0x4E33A0` moves from 289 to 387 matched bytes with the object at 2566 against the 2616 extent, and the call-site count now matches the reference at eighty-six.
+The body was written in address order: the prologue with a three-argument filtered search, a random model choice and an early return; the kind switch that feeds the
+name; the bidder record loop and its fill loop; the bank loads and the texture selection with the extra non-player argument; a model switch filling both a line and a
+four-byte label; two inlined twelve-byte auctioneer names; a per-bidder loop with three-way default model names and object creation; the intro lines and dialog; the
+round loop reading the table at 0x9b0eb4 with a stride of 0x35c and a flag at one offset; the two result blocks and the entity scan; and the outro with cleanup and
+the tail call to 0x4e4eb0, where the previous body had called an unrelated routine.
+Both repairs that the previous pass measured as costly now pay on the completed body: the three-argument search form measures 387 against 335 for the one-argument
+form with the same twenty-byte cleanup as the reference, and passing literals straight into the formatting calls measures 387 against 364 for copying into a label
+first. That reverses the earlier finding, and it is recorded as a reversal rather than quietly changed.
+The first divergence is the frame: the reference subtracts 0x354 and this build 0x330, because the reference keeps seventeen dword scalars where this build allocates
+eight and coalesces the identifier array into the object array's slot; declaration permutations do not change it in this compiler. The consequences are two array
+bases and a price slot at different offsets, and a code end sixty-four bytes short.
+
+## 2026-11-03 — group row: a fourteen-byte stub rebuilt into the whole function
+
+`0x5926F0` had 157 bytes of object code, 13 matching bytes and 47 of the reference's 750 instructions; it now has 2593 bytes, 408 matching bytes and 743
+instructions. The whole function was transcribed from the reference's disassembly and cross-checked against a decompiler export and the callees' bodies, because
+every forward jump displacement encodes the entire body, so no window could close while the body was absent. The frame is reproduced exactly at 0x250 with three
+arrays at their reference offsets and two integer slots that one value shares: a memset count that becomes a dialog flag.
+The zero-fill prelude uses inline assembly because no spelling of the copy routine in this compiler emits the alignment-head form, which the project already documents
+as a wall with six in-tree sites; the block follows the established convention and is labelled with that reference. It is the only assembly in the row.
+Six classes were checked with findings. A global declared as an integer is a pointer, read at an offset and returned by a call as an address. Two more globals are
+pointers with named fields. A loop comparing an index uses unsigned jumps for the found item while its guard is a signed comparison, so the pointee is unsigned and
+the index signed. The stub declared a dialog routine as taking nothing where the reference pushes three arguments and uses the result as a handle, and all
+thirty-five callee argument counts were derived from push counts and merged cleanups, including one cleanup of 0x34 that covers thirteen arguments across four
+calls. One global is a pointer variable while three others are absolute arrays. And a record index and a base pointer are reloaded per use in the reference, so they
+are kept as repeated expressions. The object is nine bytes over the extent, which is residual mismatch rather than padding, and the first divergence is the
+callee-saved home for two constants that the reference keeps live across a call while this build keeps only one.
