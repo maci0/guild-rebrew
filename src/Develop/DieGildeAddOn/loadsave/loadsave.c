@@ -769,7 +769,7 @@ int __cdecl ls_SaveEntities(void* file)
 		return 0;
 	}
 	count = 0;
-	for (slot = (char*) g_slot_table; slot < (char*) g_slot_table + 0x65400; slot += 0x21c) {
+	for (slot = (char*) g_slot_table; (int) slot < (int) g_slot_table + 0x65400; slot += 0x21c) {
 		if (*(unsigned short*) slot != 0xffff) {
 			count++;
 		}
@@ -789,7 +789,7 @@ int __cdecl ls_SaveEntities(void* file)
 			return 0;
 		}
 	}
-	for (slot = (char*) g_slot_table; slot < (char*) g_slot_table + 0x65400; slot += 0x21c) {
+	for (slot = (char*) g_slot_table; (int) slot < (int) g_slot_table + 0x65400; slot += 0x21c) {
 		if (*(unsigned short*) slot == 0xffff) {
 			continue;
 		}

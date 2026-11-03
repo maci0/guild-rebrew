@@ -24494,3 +24494,17 @@ another, and this build has the two exchanged, which propagates to a second exch
 identical slot patterns, so the layout is liveness-driven and no source ordering will move it; that is recorded rather than guessed at.
 The micro-test result is worth keeping beyond this row: for this compiler, a floating-point comparison against zero emits one parity mask when written as less-than and
 another when written as less-or-equal, which makes the strictness of a float compare provable from the reference's own mask byte rather than inferred.
+
+## 2026-11-03 — save row: two signed loop bounds, and a rejected shape that matched better
+
+`0x51F480` (ls_SaveEntities) keeps 828 matched bytes of a 2167-byte extent with the object at 2168, and two repairs were kept: both table loops compared their slot pointer unsigned where the reference uses a signed jump, so the casts are now signed and the object emits the reference's jump. The count does not move because the
+stream is already shifted by five bytes by the tail placement described below, so no window could align yet.
+One shape is recorded as rejected rather than kept, and this is the interesting measurement: expressing the extra-field loop as a pointer induction reproduces the
+reference's own form, a load of an absolute address advanced by four and compared against another absolute address, and raises matched bytes from 828 to 900. It also
+grows the object from 2168 to 2170 and raises the window count from 124 to 135, so it was reverted under the extent rule. The row was already one byte over its extent
+before that change, which is worth noting for whoever revisits the extent: if the reviewed size is 2170 rather than 2167, this shape becomes keepable and is worth about
+seventy matched bytes.
+The remaining differences are all placement and liveness rather than source defects, and each is pinned down: a register rotation where the reference loads one local into
+esi before pushing edi while this build pushes first and loads the other register, a shared return tail where the reference reaches a ten-byte block by a near jump and
+this build emits a short jump over an inline copy of the same block, which is the source of the five-byte shift, and a stack-slot rotation that reuses the dead parameter
+home in the reference and a different slot here, with the frame size identical on both sides.

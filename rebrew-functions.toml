@@ -196905,7 +196905,7 @@ name = "ls_SaveEntities"
 blocker = "Recorded STATUS STUB is stale: current diff vs GOLDTL 0x51f480 shows 251/278 exact + 27 reloc-masked, 0 structural, sizes 682/682; full match after relocation masking, needs rebrew test to re-record RELOC."
 
 ["GOLDTL.0x0051f480".verification]
-source_hash = "035aaa9b92eccb4651a5448f3e563567b04d5279c20fea70a0a26bc4609076c0"
+source_hash = "c1ec5b7aff7d6f2f9d7527660eab9b952571db73c03fe6b094a504cfe02ab501"
 reference_hash = "87f987440d8c4da7341ce33c0c40a32801cac5774315c536a091b7682c36cec4"
 reference_size = "2167"
 headers_hash = "8c393f1fcc165b7b74024842341203d87c2692ae0cfcf9484395424063d0b27a"
@@ -196916,10 +196916,10 @@ module = "GOLDTL"
 va = "0x51f480"
 context_hash = ""
 defines = "[]"
-input_hash = "8d23a34ada93e7f7ec74596ad1fddf89ca2f2cac63c1dde4f670fd612484d86b"
+input_hash = "979ceee0e0044644c18bb2d916fee4821877495f42741ef3d409c4de9043d1ea"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T21:21:58+00:00"
+measured_at = "2026-11-03T21:24:00+00:00"
 
 [["GOLDTL.0x0051f480".status_history]]
 old_status = "SIZE_MISMATCH"
@@ -474107,7 +474107,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00531d20".verification]
-source_hash = "6b059eb879aaa0de49fb25b961c7e31e51263b01ea38f0f6914a303a51d8c434"
+source_hash = "68ce3655ac364fa051f5f91c6846f48e6d474da7047e2a6258869e0794e72bc3"
 reference_hash = "5d2873c06a912c81dcfe6174c191b3a9d562af448b20cbe6b06e6e0ee33d3e3e"
 reference_size = "2352"
 headers_hash = "b5f46e677822a188ca01d3d7df9a362f4fa17d71ace8f5ba9e180eab2179102e"
@@ -474118,10 +474118,10 @@ module = "GOLDTL"
 va = "0x531d20"
 context_hash = ""
 defines = "[]"
-input_hash = "3a3dc22a69f2a400b89b6e9afa7693a7e5a093d3df12ad31b363e0309f69dfe6"
+input_hash = "32deee41ec2a6f0656850a704a2d8d076d68f50d30c527aca3df36d7db11e1c8"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T21:22:31+00:00"
+measured_at = "2026-11-03T21:25:01+00:00"
 
 [["GOLDTL.0x00531d20".status_history]]
 old_status = "STUB"
