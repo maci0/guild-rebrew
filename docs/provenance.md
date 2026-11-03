@@ -21513,3 +21513,31 @@ this scalar permutation, and lint reports no errors for the file. All 45 call ta
 the two text functions, have GOLDTL rows, so there is no unresolved callee to prototype. The conclusion is that this row
 needs a full re-derivation of its declaration and slot layout rather than a row-local patch. Probes in .scratch/row0/ with
 native.txt, base.asm, base.obj, drift.json, stack.json, kuna.c and a backup of the source.
+
+## 2026-11-03 — trade row: a wrong base address corrected
+
+`0x489A70` (ai_MeisterTrade) keeps 742 of 6075 with object 6075 against native 6055, 32 relocation matches and status
+SIZE_MISMATCH; one line was corrected and three measured attempts were reverted. The binding was confirmed from the store
+before testing: name ai_MeisterTrade, symbol _ai_MeisterTrade, size 6055, file
+src/Develop/DieGildeAddOn/game/GOLDTL.ai_MeisterTrade.c, with the native extent confirmed independently at 1785
+instructions spanning 0x489a70 to 0x48b217. The kept correction is in the town sell loop at line 699: the source addressed
+`(Town*)0x100d104 + i - 0x11`, which lands at 0x100cb2c plus 0x58 per index, while the listing uses esi as 0x100d104 for
+`&qty44` with the id at [esi-0x44], so the base is 0x100d0c0 plus 0x58 per index and the expression is now
+`(Town*)0x100d0c0 + i`. The correction is metric-neutral because those instructions were already mismatched, and only that
+line differs from the backup.
+Checked and passing: all 95 call targets in order, each resolving to a project row at the native address, including a row
+bound at a different spelling of its own name and the float-to-int conversion helper, so there is no wrong-callee defect;
+all 22 string constants in order with matching identities; and the message layout verified against the listing with
+push-adjusted offsets for the type, state, selector, parameter range, flag and slot fields, so there is no field-offset
+defect. Reverted with measurements: dropping volatile from five locals gives 421 at object 5878 with the first divergence
+at 54; moving the float ahead of the int is byte-identical; and comparing `o` to the dword at 0x100e748 rather than to its
+address, which the listing does load at five sites, gives 602 at object 6095 with the first divergence at 200.
+The remaining wall is whole-body allocation. The first divergence at offset 230 is the pricing-loop counter, where native
+uses [esp+0x14] and the object uses [esp+0x28]; redeclaring locals does not move it, since two declaration orders gave
+byte-identical objects, so the slot assignment follows the whole function's expression set. Native keeps `o` in edi across
+the pricing loop while the object reloads it because `o` is volatile and hoists 0x100e748 into ebx, and 1662 of the 1785
+instructions are structural. This is the same allocator wall recorded on the sibling trade function. Stale metadata was
+noticed and corrected: the stored blocker described a candidate of 5575 bytes and a source hash that no longer matched the
+on-disk file, and the stored status claimed STUB while the current source compiles to 6075 against 6055 native, so the item
+was refreshed through `rebrew test --force-status` and the blocker rewritten with the measured facts. Notes in
+.scratch/mt/FINDINGS.md.

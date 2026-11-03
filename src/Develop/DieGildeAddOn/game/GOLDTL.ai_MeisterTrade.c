@@ -696,7 +696,7 @@ next_auto:
 	/* 0x0d30-0x0f60: sell collected stock, town first */
 	if (cnt < 3) {
 		for (i = 0; i < *(int*) 0x100b0ac && cnt < 3; i++) {
-			t = (Town*) 0x100d104 + i - 0x11;
+			t = (Town*) 0x100d0c0 + i;
 			if (t->qty44 == 0) {
 				continue;
 			}
