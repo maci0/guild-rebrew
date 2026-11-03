@@ -7,7 +7,7 @@ void* __cdecl fcn_00426fd0(char* script);
 void __cdecl fcn_00428340(void* obj, int argc, ...);
 void* __cdecl fcn_00445600(void* dev, int flags, void* ptr, char* name);
 void __cdecl fcn_00455350(void* dev, void* pos, void* out);
-int __cdecl fcn_00469c30(int kind, int x, int y);
+int __cdecl fcn_00469c30(int x, int y, int a3);
 void __cdecl fcn_0046b2b0(int kind);
 int __cdecl fcn_004fdec0(char* name);
 int __cdecl gm_MapEntityStatRange(int arg);
@@ -16,22 +16,22 @@ int __cdecl fcn_005373e0(int task, int time);
 /* ADDRESS: GOLDTL 0x0053b6b0 */
 unsigned int __cdecl fcn_0053b6b0(int a0)
 {
+	float pos[4];
 	char name[0x20];
-	char maenner[16][0x20] = {
+	char maenner[17][0x20] = {
 		"patrizier_MANN2", "wirt_DICKER", "arbeiter_MANN", "wirt3_MANN",
 		"wirt2_DICKER", "buerger_MANN", "buerger2_MANN", "domherr_KUTTE",
 		"buerger3_DICKER", "patrizier_MANN2", "offizier_SOLDAT", "DIEB2_KUTTE",
 		"raeubermeister_SOLDAT", "Nekromant_MEISTER", "zigeunermeister_MANN3",
 		"schneider3_DICKER"
 	};
-	char frauen[16][0x20] = {
+	char frauen[17][0x20] = {
 		"patrizierin_FRAU", "handwerkerin3_FRAU", "handwerkerin2_FRAU",
 		"handwerkerin_FRAU", "magd_FRAU", "buergerin3_FRAU", "Bauerin_FRAU",
 		"minerin2_FRAU", "buergerin2_FRAU", "buergerin2_FRAU",
 		"buergerin_FRAU", "arbeiterin_FRAU", "minerin_FRAU",
 		"feldarbeiterin_FRAU", "zigeunerin_FRAU", "schneiderin3_FRAU"
 	};
-	int pos[4];
 	void* view;
 	void* obj;
 	void* dev;
@@ -39,6 +39,7 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 	int id2;
 	int id3;
 	int count;
+	int count2;
 	int idx;
 	int prev;
 	int selected;
@@ -54,20 +55,20 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 	}
 
 	d = *(float*) 0x67d368;
-	id1 = fcn_00469c30(0x1a, (int) (d * *(float*) 0x665e60),
-		(int) (d * (*(float*) 0x662d98 + *(float*) 0x665e5c)));
+	id1 = fcn_00469c30((int) (d * *(float*) 0x662d98 + d * *(float*) 0x665e5c),
+		(int) (d * *(float*) 0x665e60), 0x1a);
 	*(int*) ((char*) *(void**) 0x1015ea0 + id1 * 0x2f4 + 0x5c) = 1;
 	*(int*) ((char*) *(void**) 0x1015ea0 + id1 * 0x2f4 + 0x1d0) = 3;
 
 	d = *(float*) 0x67d368;
-	id2 = fcn_00469c30(0x1b, (int) (d * *(float*) 0x665e60),
-		(int) (d * *(float*) 0x665e5c));
+	id2 = fcn_00469c30((int) (d * *(float*) 0x665e5c),
+		(int) (d * *(float*) 0x665e60), 0x1b);
 	*(int*) ((char*) *(void**) 0x1015ea0 + id2 * 0x2f4 + 0x5c) = 1;
 	*(int*) ((char*) *(void**) 0x1015ea0 + id2 * 0x2f4 + 0x1d0) = 3;
 
 	d = *(float*) 0x67d368;
-	id3 = fcn_00469c30(0x51b, (int) (d * (*(float*) 0x662920 + *(float*) 0x665e60)),
-		(int) (d * (*(float*) 0x6628b8 + *(float*) 0x665e5c)));
+	id3 = fcn_00469c30((int) (d * *(float*) 0x6628b8 + d * *(float*) 0x665e5c),
+		(int) (d * *(float*) 0x662920 + d * *(float*) 0x665e60), 0x51b);
 	*(int*) ((char*) *(void**) 0x1015ea0 + id3 * 0x2f4 + 0x5c) = 1;
 	*(int*) ((char*) *(void**) 0x1015ea0 + id3 * 0x2f4 + 0x1d0) = 3;
 
@@ -77,6 +78,14 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 		do {
 			p += 0x20;
 			count += 1;
+		} while (*p != 0);
+	}
+	count2 = 0;
+	if (maenner[0][0] != 0) {
+		p = &maenner[0][0];
+		do {
+			p += 0x20;
+			count2 += 1;
 		} while (*p != 0);
 	}
 
@@ -112,9 +121,9 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 			if (view != 0) {
 				d = *(float*) 0x67d368;
 				fcn_00428340(view, 6,
-					(int) (d * *(float*) 0x665e5c),
-					(int) (d * *(float*) 0x665e5c) + 0x14,
-					(int) (d * *(float*) 0x665e60),
+					(int) pos[0],
+					(int) pos[1] + 0x14,
+					(int) pos[2],
 					0x28, 0x5a, (void*) 0x6b5c60);
 			}
 			if (obj != 0) {
@@ -127,9 +136,9 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 				fcn_004030e0(obj);
 			}
 			if (*(char*) 0x7e23e8 != 0) {
-				idx = idx % count;
+				idx = idx % count2;
 				if (idx <= -1) {
-					idx = count - 1;
+					idx = count2 - 1;
 				}
 				p = &frauen[idx][0];
 			} else {

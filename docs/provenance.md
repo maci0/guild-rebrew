@@ -22931,3 +22931,20 @@ block comments map onto GOLD block starts, and the project's twin naming resolve
 callees have no GOLD source definition, the largest called twelve, seven, six, six and five times. The body therefore compiles and aligns
 structurally but is not byte-verified, and it should be treated as an unverified scaffold: it must not be promoted, counted as recovered, or
 described as byte matching until the prologue rotation and the unbound callees are resolved against the GOLD listing.
+
+## 2026-11-03 — array width, a duplicated scan and three argument forms
+
+`0x53B6B0` keeps 860 of 3759 with the object at 3741 against the extent, closing most of its size gap from 93 bytes to 18, with the frame
+delta improving from 0x5c to 0x18 and gap events falling from 182 to 174. Four defects were proved from the reference bytes and repaired.
+The two name tables are seventeen rows each rather than sixteen, and the reference's zero-filled seventeenth row sits at the bytes between
+the bases, which also fixes the base offsets of both tables and the name table. The source counted the men array once where the reference
+counts it twice into two locals, one serving as the divisor for each table, so a second identical scan now feeds the second divisor. The
+position vector is four floats rather than four integers, which the reference shows as three loads of the vector slots feeding an escape
+call whose arguments are therefore the integer parts of the first three elements with a fourteen-byte bias on the middle one. And the
+six-argument call takes its constant last: the reference pushes the three constants first and then two computed values, so the argument
+order is now x, y then constant, matching the prototype the listing implies.
+The raw match moves down slightly, from 866 to 860, while the object grows from 3666 to 3741 and the frame closes by 0x44, so this is a
+structural trade accepted under the rule that restores reference widths and call forms. The residual frame difference is 0x18, which the
+reference uses for eight spilled scalar dwords against six here plus a sixteen-byte top pad, and one scan loop still differs in six
+instructions due to a register choice. Because every stack displacement carries that remaining delta, raw byte agreement is a poor
+progress signal on this row; the frame and the object length are the better ones.
