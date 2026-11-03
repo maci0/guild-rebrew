@@ -22717,3 +22717,24 @@ hoists it, and argument cleanup the reference defers to the end where this build
 diagnostic reports a mismatch even though both prologues subtract the same 0x310 and the deepest point is the final push.
 One correct-but-costly repair was reverted: writing a zero through a local so the store's instruction form matches costs five bytes
 and one matched byte, and inlining a rounded conversion into a call did not restore the round trip.
+
+## 2026-11-03 — m_alloc row: a missing sentinel bound and a calling convention
+
+`0x43DB70` keeps 192 of 4544 with the object at 4390 and 10 relocations, after two defects that were not in the usual classes and both
+proved from the reference bytes. The first is a missing sentinel predicate in the loop that counts used entries: the reference stores
+the used flag and then compares the index against 0xff before incrementing the counter, while the source incremented unconditionally,
+so the count could exceed the bound that sizes a later region array whose labels run from zero to 254. The guard is restored, at a
+cost of thirteen positional bytes and four object bytes, with the window count falling by one. The second is a calling convention:
+the reference performs no caller cleanup after seven virtual calls through offsets in the object, and every `add esp` in the
+reference is accounted for by direct cdecl calls, so those callees pop their own arguments and are stdcall. The source cast them as
+cdecl pointers, which made the object emit seven spurious stack adjustments totalling 64 bytes; changing the casts fixes the frame
+mismatch reported by the stack diagnostic, which now matches at 0x300 with no diffs, and takes the match from 186 to 192 while the
+object shrinks from 4418 to 4390 and one more window closes. The independent byte-level comparison also improves, from 1041 to 1063
+matched reference bytes across both changes.
+Seven defect classes were checked against the reference bytes and found clean: every direct call target and the multiset of 32 direct
+and 7 indirect calls, the push order at eleven call sites, the index arithmetic including the eight-times and count-times products and
+the division, the copy destinations and counts, the call counts per callee, the loop bounds including a constant comparison and a
+sentinel-terminated list, and the store fields apart from one tile-record offset cluster whose byte-exact rewrite measured 187 at 4418
+with unchanged windows and was reverted. The switch dispatch was decoded from its byte table and jump table and matches the source's
+case sets exactly. The first remaining divergence is the prologue register allocation at offset 0x0a, where the reference pushes esi
+and this build loads ebx, which is the same wall recorded on sibling rows.

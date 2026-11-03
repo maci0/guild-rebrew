@@ -387,19 +387,19 @@ void __cdecl fcn_0043db70(char* e)
 				*(int*) (rec + 4) = -1;
 				v6 = *(int*) (v5 + 0x1a4);
 				if (v6 != 0 && *(int*) (v5 + 0x1ac) != v8) {
-					g_14ce728 = (*(int (__cdecl**) (int)) (*(int*) v6 + 8))(v6);
+					g_14ce728 = (*(int (__stdcall**) (int)) (*(int*) v6 + 8))(v6);
 					*(int*) (v5 + 0x1a4) = 0;
 				}
 				*(int*) (v5 + 0x1ac) = v8;
 				v6 = *(int*) (v5 + 0x1a0);
 				if (v6 != 0 && *(int*) (v5 + 0x1b0) != v11) {
-					g_14ce728 = (*(int (__cdecl**) (int)) (*(int*) v6 + 8))(v6);
+					g_14ce728 = (*(int (__stdcall**) (int)) (*(int*) v6 + 8))(v6);
 					*(int*) (v5 + 0x1a0) = 0;
 				}
 				*(int*) (v5 + 0x1b0) = v11;
 				if (*(int*) (v5 + 0x1a0) == 0) {
 					v0 = g_6b5de0;
-					(*(void (__cdecl**) (int, int, int, int, int, int*))
+					(*(void (__stdcall**) (int, int, int, int, int, int*))
 					    (*(int*) v0 + 0x60))(v0, v11 * 6, 8, 0x65, 1,
 					    (int*) (v5 + 0x1a0));
 				}
@@ -417,7 +417,9 @@ void __cdecl fcn_0043db70(char* e)
 						v11 = v7[v4] & 0xff;
 						if (used[v11] == 0) {
 							used[v11] = 1;
-							v16++;
+							if (v11 < 0xff) {
+								v16++;
+							}
 						}
 						v17++;
 					}
@@ -433,7 +435,7 @@ void __cdecl fcn_0043db70(char* e)
 				}
 				/* Per water label: two cell triangles, base and span
 				 * of the corner region indices. */
-				(*(void (__cdecl**) (int, int, int, void**, int))
+				(*(void (__stdcall**) (int, int, int, void**, int))
 				    (*(int*) *(int*) (v5 + 0x1a0) + 0x2c))(
 				    *(int*) (v5 + 0x1a0), 0, 0, (void**) &v30, 0);
 				v20 = 0;
@@ -500,7 +502,7 @@ void __cdecl fcn_0043db70(char* e)
 				} while (v19 < 0x156a8);
 				v6 = *(int*) (v5 + 0x1a0);
 				if (v6 != 0) {
-					(*(void (__cdecl**) (int)) (*(int*) v6 + 0x30))(v6);
+					(*(void (__stdcall**) (int)) (*(int*) v6 + 0x30))(v6);
 				}
 				v6 = *(int*) (v5 + 0x1b8);
 				if (v6 != 0) {
@@ -546,12 +548,12 @@ teardown:
 					*(int*) (v6 - 4) = 0;
 				}
 				if (*(int*) (v6 - 0x18) != 0) {
-					g_14ce728 = (*(int (__cdecl**) (int))
+					g_14ce728 = (*(int (__stdcall**) (int))
 					    (*(int*) *(int*) (v6 - 0x18) + 8))(*(int*) (v6 - 0x18));
 					*(int*) (v6 - 0x18) = 0;
 				}
 				if (*(int*) (v6 - 0x14) != 0) {
-					g_14ce728 = (*(int (__cdecl**) (int))
+					g_14ce728 = (*(int (__stdcall**) (int))
 					    (*(int*) *(int*) (v6 - 0x14) + 8))(*(int*) (v6 - 0x14));
 					*(int*) (v6 - 0x14) = 0;
 				}
