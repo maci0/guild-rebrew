@@ -423540,21 +423540,21 @@ blocker = "Full body reconstructed from the native listing (frame 0x6f8, saved e
 blocker_delta = 943
 
 ["GOLDTL.0x0046c5a0".verification]
-source_hash = "ae1991f65e4c0d220d14fb1fcc39c745dec2b3c2abbca47628a4818b35c1834f"
+source_hash = "1b14b85bf833b9877b271e129b92b1374b5a39f17173c2b57ac0d3e4532effb9"
 reference_hash = "d8be1a122f5c6a5df52cb4c68974ebc029ae7da682bc2da59ba22e24636ba23e"
 reference_size = "6080"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "ee2a7ba71128a7a5f141c89ff77ffafa305188730195a02693d575d0c24e4133"
+compiler_hash = "65f13e99c377985b8d6acea9b4d608e038366b42943f6d1475d7da3c79d5514d"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x46c5a0"
 context_hash = ""
 defines = "[]"
-input_hash = "8238dbbc7efc4c6bcbb6c92208333f3e8018a1f484b17966bea22b70022deb02"
+input_hash = "374211010a88bc673a721307986364d2b37254b97704d42db315299fdc06077b"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T08:43:31+00:00"
+measured_at = "2026-11-03T10:33:32+00:00"
 
 [["GOLDTL.0x0046c5a0".status_history]]
 old_status = "STUB"

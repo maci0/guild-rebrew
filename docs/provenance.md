@@ -22328,3 +22328,14 @@ baseline, because this compiler forwards every block-local copy back to the unde
 are allocator placements rather than source locals. The slot histogram is recorded for the future: reference and object agree on
 the six slots from 0x20 to 0x28 and differ in the four from 0x10 to 0x1c. The open problem is the callee-saved assignment, where
 the base must take ebp for the rest to fall into place.
+
+## 2026-11-03 — three silent runs audited from disk, edits reverted
+
+Three delegated runs ended without a report, one of them after failing. The workspace was audited directly rather than trusting
+silence, and two of the three had left edits behind. On `0x46C5A0` an edit replacing two integer locals with a struct plus
+preprocessor aliases measured 439 of 6108, one byte below the committed state, so it was reverted. On `0x5B6300` an edit that
+also changed a modulo into a division measured 537 at 5520, and the division is not what the listing shows, so it was reverted
+along with the rest. Both files are back to their committed content and re-measured at 440 and 559 respectively. On `0x569FF0`
+the third run left nothing, and the row still measures 976 at 3768. Copies of both discarded edits are kept under .scratch for
+anyone who wants to see what was tried. The lesson from the earlier silent-run episode holds and is now applied as routine: read
+the tree, re-measure the rows, restore what does not pay.
