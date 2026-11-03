@@ -24283,3 +24283,17 @@ stdcall, a two-argument cdecl returning a float, and a three-argument cdecl.
 Two variants were reverted: a position vector typed wrongly, which shrank the frame, and a declaration swap that gained nothing. The first remaining divergence is
 callee-saved register assignment, where the reference holds three constants in three registers and this build assigns the same three to different registers, so every
 block offset after the prologue shifts; no convention, operand or precision defect remains identified.
+
+## 2026-11-03 — request row: a loop compared the wrong operand, and a local that fixes the frame
+
+`0x487F90` moves from 196 to 297 matched bytes with the frame now exactly 0x100, matching the reference at 292 bytes and the same two slot offsets. The object is 2368
+bytes against the 2309 extent, so it is over by fifty-nine, where the baseline was thirty-eight over and shorter.
+Three repairs were kept. A scan loop compared a request field against a base pointer where the reference compares the count it reloaded from a slot, which is worth
+sixty-seven matched bytes. A forty-entry free-record scan tested the flag first where the reference tests the bound at the top and the flag at the bottom, so the
+condition order is swapped, worth another thirty-four. And one pointer local was added so the frame grows to the reference size, which by itself moved no matched bytes
+but aligned every stack displacement.
+Two leads from an earlier row were confirmed rather than assumed: the request really is 0x24 bytes with nine fields at multiples of four, and the record field offset of
+0x16c is right. All seven callees match in push count and argument order, and the globals are at their reference widths.
+Two defects are found and not fixed, both labelled. The reference shares one call-and-return tail across five source tails, reached by a jump, where this build emits five
+separate tails; that is the same codegen behaviour already documented for other rows and it accounts for about thirty of the fifty-nine excess bytes. And the four walks
+over a 0x21c stride address the same bytes from a different anchor, which costs an extra address computation per iteration without changing what is read.

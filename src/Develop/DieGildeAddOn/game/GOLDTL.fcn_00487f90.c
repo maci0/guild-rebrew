@@ -25,6 +25,7 @@ void __cdecl fcn_00487f90(int* a0)
 	char m[0xf8];
 	char* e;
 	char* rec;
+	char* r;
 	char* free_rec;
 	int n;
 	int base;
@@ -47,46 +48,44 @@ void __cdecl fcn_00487f90(int* a0)
 				n = n - 1;
 			}
 		}
-		if (a0[8] < n) {
-			for (e = (char*) 0x7f4e05;
-			     (int) e <= 0x85a204 && a0[8] < base;
-			     e += 0x21c) {
-				if (*(short*) (e - 0x165) == -1 ||
-				    *(int*) (e + 7) != *(int*) (a0[1] + 0x16c) ||
-				    *e == 0 || *(int*) (e + 0x17) != 0 ||
-				    *(int*) (e + 0x1f) == 0 ||
-				    *(int*) (*(int*) (e + 0x1f) + 0x2c) !=
-				        *(int*) (*(int*) (e + 7) + 1)) {
-					continue;
-				}
-				free_rec = 0;
-				for (k = 0; k < 0x40 && free_rec == 0; k++) {
-					if (*(char*) ((char*) base + k * 0x18 + 0xd) > 1 &&
-					    *(int*) ((char*) base + k * 0x18 + 0x10) == -1) {
-						free_rec = (char*) base + k * 0x18;
-					}
-				}
-				if (free_rec == 0) {
-					return;
-				}
-				memset(m, 0, sizeof(m));
-				m[4] = (char) a0[0];
-				*(int*) (m + 8) = *(int*) (g_7f4ca4 +
-				                           *(unsigned short*) (*(int*) (a0[1] + 0x16c) + 0x27) * 0x21c);
-				*(int*) (m + 0xc) = *(int*) (*(int*) (a0[1] + 0x16c) + 1);
-				*(int*) (m + 0x28) = *(int*) &g_7f4c00;
-				*(int*) (m + 0x2c) = g_7f4c04;
-				*(int*) (m + 0x30) = g_7f4c08;
-				*(short*) (m + 0x34) = g_7f4c0c;
-				*(int*) (m + 0x10) = 1;
-				*(int*) (m + 0x14) = 0;
-				m[0x36] = 1;
-				*(int*) (m + 0x64) = *(int*) free_rec;
-				*(int*) (m + 0x58) = *(int*) (*(int*) (a0[1] + 0x16c) + 1);
-				*(int*) (m + 0x5c) = *(int*) (e + 4);
-				fcn_004c5530(m);
-				a0[8] = a0[8] + 1;
+		for (e = (char*) 0x7f4e05;
+		     a0[8] < n && (int) e <= 0x85a204; e += 0x21c) {
+			r = e - 0x165;
+			if (*(short*) (e - 0x165) == -1 ||
+			    *(int*) (e + 7) != *(int*) (a0[1] + 0x16c) ||
+			    *e == 0 || *(int*) (e + 0x17) != 0 ||
+			    *(int*) (e + 0x1f) == 0 ||
+			    *(int*) (*(int*) (e + 0x1f) + 0x2c) !=
+			        *(int*) (*(int*) (e + 7) + 1)) {
+				continue;
 			}
+			free_rec = 0;
+			for (k = 0; free_rec == 0 && k < 0x40; k++) {
+				if (*(char*) ((char*) base + k * 0x18 + 0xd) > 1 &&
+				    *(int*) ((char*) base + k * 0x18 + 0x10) == -1) {
+					free_rec = (char*) base + k * 0x18;
+				}
+			}
+			if (free_rec == 0) {
+				return;
+			}
+			memset(m, 0, sizeof(m));
+			m[4] = (char) a0[0];
+			*(int*) (m + 8) = *(int*) (g_7f4ca4 +
+			                           *(unsigned short*) (*(int*) (a0[1] + 0x16c) + 0x27) * 0x21c);
+			*(int*) (m + 0xc) = *(int*) (*(int*) (a0[1] + 0x16c) + 1);
+			*(int*) (m + 0x28) = *(int*) &g_7f4c00;
+			*(int*) (m + 0x2c) = g_7f4c04;
+			*(int*) (m + 0x30) = g_7f4c08;
+			*(short*) (m + 0x34) = g_7f4c0c;
+			*(int*) (m + 0x10) = 1;
+			*(int*) (m + 0x14) = 0;
+			m[0x36] = 1;
+			*(int*) (m + 0x64) = *(int*) free_rec;
+			*(int*) (m + 0x58) = *(int*) (*(int*) (a0[1] + 0x16c) + 1);
+			*(int*) (m + 0x5c) = *(int*) (r + 0x169);
+			fcn_004c5530(m);
+			a0[8] = a0[8] + 1;
 		}
 		a0[7] = a0[7] + 1;
 		return;

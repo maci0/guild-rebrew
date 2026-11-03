@@ -421632,7 +421632,7 @@ blocker = "STUB, best body kept unchanged this pass: 179/2357 exact, object 2357
 blocker_delta = 2178
 
 ["GOLDTL.0x00480330".verification]
-source_hash = "3fc8a0e714bd4cce76651511ef74e0be3af568c6b4e45b97ffd0c7a3cc226128"
+source_hash = "8f4ddb1857bec7af2e9b08cfe9be0360e25b286d82eaa9b67cdbe895b498257b"
 reference_hash = "9d7abcbfbe8e1770a2319c84b23173e4eaed926d361645ee2f1a986c0fe208c1"
 reference_size = "2340"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -421643,10 +421643,10 @@ module = "GOLDTL"
 va = "0x480330"
 context_hash = ""
 defines = "[]"
-input_hash = "49a9ae6baeb19e83f41b1f5201ba4d2cbfbda8522e037f7237ea0e4a2bf9073a"
+input_hash = "62a0ed048fabedf1b053a361123482aaffa95295dc1e9daf5519791fb398e7e5"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T20:01:36+00:00"
+measured_at = "2026-11-03T20:04:13+00:00"
 
 [["GOLDTL.0x00480330".status_history]]
 old_status = "STUB"
