@@ -23805,3 +23805,35 @@ Twenty-three other checks came back clean: both copy loops and the identifier sc
 are no uninitialised reads, all 41 call sites are cdecl with argument counts matching the callees' reads, and the structure sizes, offsets, slot stride and scan caps
 all agree. The remaining 249 bytes are register allocation and stack spills of two values plus four zeroed frame slots the reference keeps before the plan loop,
 with the first divergence the frame immediate and then the argument's register.
+
+## 2026-11-03 — night row: a body transcribed from five hundred to two thousand seven hundred
+
+`0x5C3F10` had 583 bytes of object code and 25 matching bytes; it now has 2788 bytes and 434 matching bytes, with the first hundred and twelve bytes identical to the
+reference including the frame adjustment and fifteen stores of minus one in the reference's order. The blocks were written in address order: the panel-open gate and
+two setup calls, a slot scan before the loop, the do-while message loop head, a rebuild block with thirteen handle resets and a formatted buffer whose conversion
+result is reused twice and about fifteen controls, a fourteen-way dispatch with every case body, and the post-loop copy and cleanup. The object grew monotonically
+from 583 to 2788 bytes, twenty over the extent.
+Six facts were proved from the reference rather than assumed. The building table is a pointer, not an array. The record stride comes from the callee's own address
+chain. The frame follows from a sixteen-byte structure alignment plus declared buffer sizes of 0xf8, 0x80, two of 0x200 and one of 0x400. Two callees take zero and
+two arguments respectively, from their own pushes, and two more take their arguments in the order their pushes show. The floating-point probe is computed once into
+one temporary and reused for both field offsets. Every call uses caller cleanup.
+The remaining divergence is a scheduling difference at offset 0x70, where the reference tests a flag byte in memory and this build pushes a register first and moves
+the test later, one byte longer, followed by three structural overshoots of five, eleven and twenty instructions against one deletion of eight, which together
+account for the twenty bytes over.
+
+## 2026-11-03 — dispatch row: the frame and the extent both closed, with one rotated slot
+
+`0x54E390` now has an object exactly at its 2676-byte extent with the stack frame at 0x924, matching the reference, and the matched bytes rise from 230 to 295 while
+the gap events fall from 56 to 31, replacements from 111 to 91, insertions from 13 to 8 and deletions from 13 to 7, with the object's code end reaching the
+reference's. The status is now STUB rather than a size mismatch, because the remaining differences are structural rather than a length deficit.
+Nine repairs were made from the reference stream. A case was missing its guard entirely and now returns early on a flag test, in the odd source form the reference
+uses for two of its cases while the others use the simpler one, a mapping a probe confirmed. The third case's comparison was wrong in both form and layout: the
+reference tests a register's high byte against a mask and branches on parity with the jump taken on the false path, so the packet path is the then-block, and the
+threshold and the own-row pointer are computed once before the record search as the reference does. A table read was going through the wrong base and now reads the
+row at the reference's address. Three byte comparisons use unsigned characters so the compare is eight-bit as in the reference, saving four bytes at each site. A
+packet initialisation loop's store order is corrected, a fabricated pair of locals was removed where the reference reads the fields directly, and two call argument
+counts were re-derived from the callees' cleanups.
+One divergence blocks any exact match and is recorded plainly: the compiler gave the integer-to-float conversion temporary slot zero and pushed the two locals up by
+one dword, where the reference lets that temporary share a slot, so the four-byte local rotation propagates through every relative branch displacement. The other is
+a codegen device: this build hoists minus one into a register and compares against it where the reference uses an immediate at each site, and declaration order,
+register declarations, array-first ordering and both block and function scope variants did not steer the allocator.
