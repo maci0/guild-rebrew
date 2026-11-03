@@ -55,7 +55,7 @@ void __cdecl fcn_004e33a0(int* arg)
 	char line[0x3c];
 	char label[0x3c];
 	int bidders[8];
-	short ids[8];
+	int ids[8];
 	int states[8];
 	void* objs[8];
 	void* actors[8];
@@ -118,8 +118,8 @@ void __cdecl fcn_004e33a0(int* arg)
 	fcn_0064d41a(name, (char*) 0x679060, label);
 	n = *(unsigned char*) (((char*) arg) + 0x30);
 	for (i = 0; i < n && i < 8; i++) {
-		bidders[i] = gm_LookupEntityRecordById(arg[8 + i]);
-		ids[i] = (short) arg[8 + i];
+		bidders[i] = gm_LookupEntityRecordById(arg[0x34 / 4 + i]);
+		ids[i] = arg[0x34 / 4 + i];
 		states[i] = bidders[i] != 0 ? -1 : 0;
 	}
 	bank_intro = (int) fcn_004e4ae0("VERSTEIGERUNG_INTRO.sbf", 0);

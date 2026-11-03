@@ -23868,3 +23868,18 @@ One disagreement is recorded: for the first case's loop the differ reports a lar
 addresses, the only difference being which register holds the base and therefore which displacement appears. The structural reading was kept and the loop was not
 rewritten. Remaining divergence: the frame is eight bytes short of the reference, the found flag and two outputs are not spilled where the reference spills them, and
 a store to one field is duplicated where the reference shares it.
+
+## 2026-11-03 — auction row: two width and offset repairs, and the real gap named
+
+`0x4E33A0` moves from 281 to 289 matched bytes with the object at 2164 against the 2616 extent, after two repairs. An identifier array was declared as shorts
+where the reference stores dwords at stride four from a known base, so it is now an integer array without the narrowing cast. And a bidder record was being read at
+one offset where the reference adds four to a base that is already 0x34 into the argument, so the offset is corrected.
+Three repairs were proved but reverted because they moved the metric the wrong way, with their numbers recorded. A filtered-entity search takes three arguments and
+the routine it feeds takes one, which the callee shows by reading only one stack slot while its caller cleans twenty bytes for three pushes plus two; applying that
+with the width and offset repairs measured eight matched bytes lower and left more instructions inside the replaced windows. Passing literals straight into the
+formatting call, which the reference does from three constant addresses, also scored lower across four combinations. Both are recorded as correct-but-costly pending
+the rest of the body.
+The remaining gap is not a surgical fix and is now detailed: the reference body has eighty-six call sites against this build's seventy-seven, missing sites for three
+routines and one more, and the round loop reads a table at 0x9b0eb4 with a stride of 0x35c and a per-entry flag where the source has a simple comparison. The frame
+difference follows from the declaration set: the reference uses 0x154 bytes of locals plus an unused 0x200 region at the top, with eight arrays, while the source has
+five arrays including one the reference does not.
