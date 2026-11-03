@@ -1,93 +1,88 @@
-void __cdecl sub_533a40(void *);
-void __cdecl sub_5b54b0(void *);
-void __cdecl sub_4bfe00(void *);
-void * __cdecl sub_502cd0(int, int, int, int, int);
-void __cdecl sub_4ff210(int, int);
-void __cdecl sub_4c5790(int, void *);
+void __cdecl fcn_00533a40(char *);
+void __cdecl fcn_005b54b0(char *);
+int __cdecl fcn_004bfe00(char *);
+unsigned short * __cdecl fcn_00502cd0(int, int, ...);
+float __cdecl fcn_004ff210(unsigned short, int);
+void __cdecl fcn_004c5790(char, char *);
 
 /* ADDRESS: GOLDTL 0x00535bd0 */
 void __cdecl fcn_00535bd0(void)
 {
+    char *object_entry;
     int i;
-    char buf[124];
+    char dialog_buf[124];
 
     switch ((unsigned char)*(unsigned char *)0x14cf950) {
-    case 4:
-        if (*(void **)0x7e2a9c)
-            sub_5b54b0(*(void **)0x7e2a9c);
+    case 37:
+        object_entry = *(void **)0x7e2a9c;
+        if (object_entry)
+            fcn_005b54b0(object_entry);
         break;
-    case 12:
-        if (*(int *)0x6a3438 == 0) {
-            *(int *)0x6a3438 = 1;
-            sub_533a40((void *)0x6a3330);
+    case 35:
+        if (*(int *)0x6a3438 = (*(int *)0x6a3438 == 0)) {
+            fcn_00533a40((char *)0x6a3330);
         } else
-            sub_533a40((void *)0x6a3320);
-        break;
-    case 13:
-        if (*(void **)0x7e2a9c)
-            sub_4bfe00(*(void **)0x7e2a9c);
-        else
-            sub_4bfe00(sub_502cd0(0, 2, 7, 4, 0x1d));
-        break;
-    case 14:
-        sub_4ff210(*(short *)0x774970, 0xfffffc18);
-        break;
-    case 15:
-        if (*(unsigned char *)0x7747b0 & 4) {
-            for (i = 0; i < 31; i++)
-                ((int *)buf)[i] = 0;
-            *(int *)buf = -1;
-            sub_4c5790(0x11, buf);
-        }
-        break;
-    case 17:
-        if (*(int *)0x6a3434 == 0) {
-            *(int *)0x6a3434 = 1;
-            sub_533a40((void *)0x6a330c);
-        } else
-            sub_533a40((void *)0x6a32f8);
+            fcn_00533a40((char *)0x6a3320);
         break;
     case 19:
-        if (*(int *)0x6a2c0c == 0) {
-            *(int *)0x6a2c0c = 1;
-            sub_533a40((void *)0x6a3224);
-        } else
-            sub_533a40((void *)0x6a3210);
+        object_entry = *(void **)0x7e2a9c;
+        if (object_entry)
+            fcn_004bfe00(object_entry);
+        else
+            fcn_004bfe00((char *)fcn_00502cd0(0, 2, 7, 4, 0x1d));
         break;
-    case 22:
-        if (*(int *)0x6a3430 == 0) {
-            *(int *)0x6a3430 = 1;
-            sub_533a40((void *)0x6a32e4);
+    case 23:
+        if (*(int *)0x6a3434 = (*(int *)0x6a3434 == 0)) {
+            fcn_00533a40((char *)0x6a330c);
         } else
-            sub_533a40((void *)0x6a32d0);
-        break;
-    case 24:
-        if (*(int *)0x6a343c == 0) {
-            *(int *)0x6a343c = 1;
-            sub_533a40((void *)0x6a32bc);
-        } else
-            sub_533a40((void *)0x6a32a8);
-        break;
-    case 27:
-        if (*(int *)0x6a2c10 == 0) {
-            *(int *)0x6a2c10 = 1;
-            sub_533a40((void *)0x6a3268);
-        } else
-            sub_533a40((void *)0x6a3254);
-        break;
-    case 29:
-        if (*(int *)0x6a2c08 == 0) {
-            *(int *)0x6a2c08 = 1;
-            sub_533a40((void *)0x6a3244);
-        } else
-            sub_533a40((void *)0x6a3234);
+            fcn_00533a40((char *)0x6a32f8);
         break;
     case 30:
-        if (*(int *)0x6a2c04 == 0) {
-            *(int *)0x6a2c04 = 1;
-            sub_533a40((void *)0x6a3294);
+        if (*(int *)0x6a3430 = (*(int *)0x6a3430 == 0)) {
+            fcn_00533a40((char *)0x6a32e4);
         } else
-            sub_533a40((void *)0x6a327c);
+            fcn_00533a40((char *)0x6a32d0);
+        break;
+    case 32:
+        if (*(int *)0x6a343c = (*(int *)0x6a343c == 0)) {
+            fcn_00533a40((char *)0x6a32bc);
+        } else
+            fcn_00533a40((char *)0x6a32a8);
+        break;
+    case 46:
+        if (*(int *)0x6a2c04 = (*(int *)0x6a2c04 == 0)) {
+            fcn_00533a40((char *)0x6a3294);
+        } else
+            fcn_00533a40((char *)0x6a327c);
+        break;
+    case 20:
+        fcn_004ff210(*(unsigned short *)0x774970, -1000);
+        break;
+    case 21:
+        if (*(unsigned char *)0x7747b0 & 4) {
+            for (i = 0; i < 31; i++)
+                ((int *)dialog_buf)[i] = 0;
+            *(int *)dialog_buf = -1;
+            fcn_004c5790(0x11, dialog_buf);
+        }
+        break;
+    case 18:
+        if (*(int *)0x6a2c10 = (*(int *)0x6a2c10 == 0)) {
+            fcn_00533a40((char *)0x6a3268);
+        } else
+            fcn_00533a40((char *)0x6a3254);
+        break;
+    case 4:
+        if (*(int *)0x6a2c08 = (*(int *)0x6a2c08 == 0)) {
+            fcn_00533a40((char *)0x6a3244);
+        } else
+            fcn_00533a40((char *)0x6a3234);
+        break;
+    case 25:
+        if (*(int *)0x6a2c0c = (*(int *)0x6a2c0c == 0)) {
+            fcn_00533a40((char *)0x6a3224);
+        } else
+            fcn_00533a40((char *)0x6a3210);
         break;
     default:
         break;

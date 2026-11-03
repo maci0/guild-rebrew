@@ -21391,3 +21391,33 @@ fcn_00505370 taking a pointer and returning int, and fcn_0064d228 returning int 
 cast. One tooling note is recorded for other rows: the `rebrew test` compile cache makes a change such as `a1+4` to `a1+1`
 look metric-identical at 778, so an edit must be judged by the mismatch list rather than by the match count alone.
 Instruments in .scratch/5b6300-wave/ with report.md, base_778.c and final.c.
+
+## 2026-11-03 — a function reaches full relocation match
+
+`0x535BD0` now measures RELOC with 739 of 739 bytes matching, object 739, zero byte mismatches and 37 relocations, of
+which 22 call sites validate and 15 are compiler-generated local labels. Three things had to be corrected and one extent
+repaired. The file binding is src/Develop/Unassigned/fcn_00535bd0.c, since the d2 path named in the request does not exist.
+The store's extent was 752, and independent confirmation found the code plus its embedded switch tables ending at 0x535eb3
+for 739 bytes with thirteen 0x90 fill bytes up to the next 16-aligned function at 0x535ec0, so the extent was repaired to
+739 through `rebrew binary repair-extents 0x535bd0=739 --sync-rows` with preview digest bd1c4781; that repair excluded the
+fill and is what cleared the size mismatch, since source can never emit it.
+The switch dispatch was wrong in both set and mapping. The source had cases 4, 12, 13, 14, 15, 17, 19, 22, 24, 27, 29 and
+30 with a range bound of 0x1a, while native bounds at 0x2a with a 43-entry index table; decoding the jump table at 0x535e54
+of 13 dwords and the index bytes at 0x535e88 gives the real cases as 4, 18, 19, 20, 21, 23, 25, 30, 32, 35, 37 and 46, and
+the value-to-block mapping was also wrong, with native value 4 running the 0x6a2c08 toggle rather than the 0x7e2a9c call.
+Because MSVC 6 emits switch bodies in source order, the native body order 37, 35, 19, 23, 30, 32, 46, 20, 21, 18, 4, 25 is
+the case order. Eight toggle cases were rewritten from `if (x == 0) { x = 1; ... }`, which stores only on the true path, to
+`if (*(int*)p = (*(int*)p == 0))`, which computes the boolean, stores it unconditionally and then branches, as native does
+with `sete`. Case 20's callee returns a float, since native has `fstp st(0)`, its first argument is a 16-bit load and its
+second is -1000, giving the prototype `float __cdecl fcn_004ff210(unsigned short, int)`. Cases 37 and 19 share a single
+`char* object_entry` local, without which MSVC copies the pointer and hoists the case-21 buffer push, and that sharing is
+load-bearing at 739 bytes against 313 for independent locals. Six callee prototypes were replaced with the project's real
+identities, `fcn_00533a40(char*)`, `fcn_005b54b0(char*)`, `fcn_004bfe00(char*)` returning int, `fcn_00502cd0(int, int, ...)`
+returning an `unsigned short*`, `fcn_004ff210` and `fcn_004c5790(char, char*)`, which took all 24 call relocations from
+unresolved to validating at the right VAs.
+There is no remaining body divergence: `rebrew diff` reports target 739 and candidate 739 across 244 instructions with 193
+exact and 51 relocation-masked, zero structural, zero register and zero invalid, and `rebrew diagnose stack` shows a
+128-byte frame with no frame pointer and no slot differences. The wall is that 15 relocations are compiler-generated local
+labels with no store symbol, so masking them is the strongest claim available, and the row is RELOC rather than EXACT.
+Flag trials confirmed the row's own flags: `/O2 /Gd /G6` gives 193 at 743 and `/Ox /Gd` gives 313 at 739, so nothing was
+promoted. Instruments and measurement table in .scratch/fcn_00535bd0/.

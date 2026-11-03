@@ -73143,7 +73143,7 @@
   },
   {
     "va": 5462992,
-    "size": 752,
+    "size": 739,
     "name": "fcn.00535bd0",
     "extent_history": [
       {
@@ -73159,6 +73159,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.725950+00:00"
+      },
+      {
+        "old_size": 752,
+        "new_size": 739,
+        "reason": "code+switch tables end at 0x535eb3; remaining 0x535eb3-0x535ebf are 0x90 fill up to 16-aligned next function 0x535ec0",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T05:47:09.409316+00:00"
       }
     ]
   },
