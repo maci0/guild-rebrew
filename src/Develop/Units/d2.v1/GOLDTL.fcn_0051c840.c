@@ -333,7 +333,7 @@ body:
 				strcat(num, "i");
 				flag = 2;
 				sprintf(tmp, num, 0x3e7);
-				res = strlen(tmp) / 3 + strlen(tmp) - 1;
+				res = strlen(tmp) / 3 + strlen(tmp);
 				{
 					char** pp = &p;
 					*pp = num + res;
@@ -559,7 +559,7 @@ body:
 			fcn_00500d60(st.dt, rec58);
 			res = fcn_004fe330(rec58, *(short*) (rec58 + 2));
 			sprintf(tmp, g_6a2310, g_14a5450[res]);
-			memmove(buf + strlen(tmp), buf + i, strlen(tmp) + 2 - i);
+			memmove(buf + i - 2 + strlen(tmp), buf + i, strlen(buf) + 2 - i);
 			memcpy(buf + i - 1, tmp, strlen(tmp));
 			break;
 		case 'G':

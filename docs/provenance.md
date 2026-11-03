@@ -21325,3 +21325,38 @@ switch form lays cases out in decreasing value order, default then one then zero
 the case source order produces byte-identical output. An `/Os` diagnostic does produce the merged constant-push arm tail
 but adds a frame pointer and memory-push arguments, so it is unusable since native is /Ot. The previous state is preserved
 at .scratch/4da690/r16/pre_switch_1518.c, and the variants live beside it.
+
+## 2026-11-03 — text formatter: two wrong operands corrected
+
+`0x51C840` rises from 1397 to 1425 matching bytes with object 6043 against native 6048 and 125 relocations, keeping the
+jump table at 0x16E8 and the character map at 0x1748 byte-identical. Two listing-verified corrections landed, both of them
+wrong operands rather than alignment. In case 'D' at native 0x125f to 0x12dc the source had
+`memmove(buf + strlen(tmp), buf + i, strlen(tmp) + 2 - i)` where native has
+`memmove(buf + i - 2 + strlen(tmp), buf + i, strlen(buf) + 2 - i)`, with the count built as `len(buf) + 2 - i` through
+`mov eax,2; sub eax,ebp; add ecx,eax` and the destination as `lea eax,[ecx+edx-2]` with the length in ecx and buf+i in edx,
+so both operands were wrong and not merely unaligned; measured alone it gives object 6047 with the table at 0x16EC and
+match 1059. In case 'i' with r not equal to minus one at native 0x87b to 0x8aa the source had
+`res = strlen(tmp)/3 + strlen(tmp) - 1` where the listing computes a multiply by 0xaaaaaaab, shifts edx right by one, adds
+the length, and forms `lea edi,[esp+esi+0x24]` as num plus res with no decrement; measured alone it gives object 6039 with
+the table at 0x16E4 and match 1086. Combined the object is 6043 at table 0x16E8 with match 1425.
+The first divergence after the parked prologue is the digit guard at offset 0x192: native spans 25 bytes from 0x186 with
+`movsx esi,buf[i+1]; inc ebp; sub esi,0x30; js L; cmp esi,9; jg L; inc ebp; jmp J; L: or esi,-1`, while this build spans 28
+with `cmp $0x9,%esi; ja L2; inc ebp; or ecx,-1; jmp J; L2: or ecx,-1; mov esi,ecx`. The body root is minus-one common
+subexpression elimination: this build carries eleven two-byte `cmp %ecx,%esi` and sixty-eight `or $0xffffffff,%ecx` where
+native has thirteen three-byte `cmp esi,-1` and immediate `mov dword [mem],0xffffffff` at both case 'm' stores, which is
+the whole eight-byte case 'm' difference, and the constant is commoned by value rather than spelling, which is why earlier
+respellings produced byte-identical objects.
+Size cannot be fixed piecemeal: the net size before the table must stay exactly zero or the 0x16E8 table, the 0x1748 map
+and the 439, 291, 66, 52 and 33-byte matching runs all move. The per-case extents are +1, +1, -52, -27, -1, +3, +18, -8,
+-45, +19, -41, -1, +19, -9, -26, +48, +15 and +86 for S, F, T, w, i, I, m, W, u, b, B, E, N, a, r, D and G, summing to zero.
+Correct-but-costly changes were measured and reverted with both numbers: converting case T's strcpy to a length copy gives
+object 6059, table 0x16F8 and match 1083; the same in case 'I' with r equal to minus one gives 6071, 0x1704 and 1093;
+dropping three unsigned-char casts on the G toupper gives 6027, 0x16D8 and 1090; combining the T fix with the cast fix holds
+the table at 0x16E8 with object 6043 but still costs 288 matched bytes because the movsx rewrite collapses a 439-byte run to
+a 184-byte table run; and converting case S's initial strcpy to a length copy gives 6023, 0x16D4 and 973. Unresolved callees:
+fcn_0064eeec has no row and only a link scaffold stub, with the prototype retained as `int __cdecl fcn_0064eeec(char*)`;
+fcn_004fe330 is not unresolved, since it is the cross-target row 0x00500e00 bound at 5246464; every other callee has a row.
+Also recorded: the five-byte object shortfall is the native section tail's five padding NOPs after the character map at
+0x179B to 0x17A0, which a COFF object never emits, so object 6048 is unreachable from C. The prologue blocker stands
+untouched, with native loading [0x6a23a0] before [0x6a239c] and the first mismatched byte at 0x21. Notes in
+.scratch/51c840/NOTES_block3.md with the harness at try.py.
