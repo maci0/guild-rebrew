@@ -23056,3 +23056,23 @@ reference 0x1c and then diverges at offsets 28, 104, 129, 263 and 270, together 
 keeps one in a register and this build pushes it, hoists a load where the object folds a test, and defers a stack adjustment. Those are not
 source-level defects and cannot be reached by guessing expression forms, so the row is parked with an accurate blocker rather than a shape
 list.
+
+## 2026-11-03 — guard form on the variant row: plus one hundred and sixty-two bytes
+
+`0x4D8D00` moves from 399 to 561 matching bytes, from STUB to SIZE_MISMATCH, with 42 relocations and an object of 4640 against the 4632 extent,
+by rewriting one guard. The source tested a pointer's state flag then negated the type and compared to zero, which compiled to a complement and
+a materialised zero comparison; the reference tests the state against zero with a test and then compares the type to minus one, which the
+listing shows as `mov ecx,[ebp+4]; test ecx,ecx; je` followed by `mov eax,[ebp]; cmp eax,-1; je`, both jumping to the same target. The guard
+is now written as the state equal to zero or the type equal to minus one, which reproduces both tests. The object grows eight bytes past the
+extent as a result, which is recorded rather than hidden: the gain in matched bytes is one hundred and sixty-two, and the extent overrun is
+eight.
+Five shapes were reverted: two declaration reorders and an initialiser move that changed nothing, splitting the guard into two separate
+conditions, which restores the reference's type comparison but drops the match to 446, and inlining a small structure comparison, which drops it
+to 333 with an object of 4588. The rest of the checked classes came back clean: four call targets bind correctly, both sides are cdecl with the
+same cleanup, the printf push order matches, the row stride arithmetic matches at 0x2c, the copy count of eleven dwords matches, the
+eleven-integer structure matches, the duplicated scan has both sites, the sentinel bound compares against 0x10 on both sides, and the record
+offsets agree. One real difference is recorded without a repair: the reference makes 119 calls where this build makes 140, because the
+reference inlines a small structure comparison that this build emits out of line, and the inline attempt measured worse.
+The first divergence is the frame layout: the reference folds a zeroed value and a loop initialiser into one register and stores it at two slots
+that sit four bytes lower than this build's, with the base and message slots also transposed relative to the references. That layout difference is
+the root of the remaining shift, not a source-level defect.

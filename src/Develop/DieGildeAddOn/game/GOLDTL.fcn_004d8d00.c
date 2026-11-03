@@ -107,7 +107,7 @@ void __cdecl fcn_004d8d00(char* a0)
 		p = (TaskRec*)(a0 + 0x94) + i;
 		if (p)
 			msg = *(MsgRec*)p;
-		if (!p->state || ~p->type == 0)
+		if (p->state == 0 || p->type == -1)
 			continue;
 		obj = (p->state == 5)
 		    ? gm_LookupEntityRecordById(p->type)
