@@ -24,7 +24,7 @@ extern int g_6a99e8;
 extern int g_14ce8e8;
 extern int g_774668;
 extern int g_7e46ac;
-extern char g_6a2574;
+extern char g_6a2574[4];
 extern char g_14cf70f;
 extern int g_774650;
 extern int g_774658;
@@ -66,7 +66,7 @@ int __cdecl fcn_0052c9b0(void)
 			if (!(g_7e46ac & 0x8000)) {
 				fcn_0052c060();
 			}
-			if (g_6a2574 != 0 && g_14cf70f == 0) {
+			if (g_6a2574[0] != 0 && g_14cf70f == 0) {
 				fcn_0052ad70();
 			}
 			if (g_774668 != 0 && g_774650 == g_774658 && (*(int*)&g_7746c4) == 0 && (*(int*)&g_7746c8) == 0) {

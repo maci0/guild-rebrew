@@ -8,7 +8,7 @@ extern char* lpObjektePROT;
 extern int g_69938c;
 extern unsigned int g_699390;
 extern unsigned short g_699394;
-extern unsigned char g_699396;
+extern unsigned char g_699396[2];
 extern unsigned char g_773d9a;
 extern unsigned char g_773d98;
 extern unsigned char g_773d99;
@@ -34,7 +34,7 @@ unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...)
 	g_69938c = 0x7fff;
 	g_699390 = 0xffffffff;
 	g_699394 = 0xffff;
-	g_699396 = 0xff;
+	g_699396[0] = 0xff;
 	g_773d9a = 0;
 
 	flag1 = 0;
@@ -67,7 +67,7 @@ unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...)
 				arg_ptr++;
 				break;
 			case 4:
-				g_699396 = *(char*) (arg_ptr + 1);
+				g_699396[0] = *(char*) (arg_ptr + 1);
 				arg_ptr++;
 				break;
 			case 5:

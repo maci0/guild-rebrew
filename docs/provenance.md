@@ -21264,3 +21264,42 @@ tail with merged cleanup, deleted on the candidate side in favour of a 9-instruc
 to rewrite the three-way `*(int*)s80` if/else-if dispatch as a switch so that this compiler tail-merges the fcn_004da510
 call. Artifacts in .scratch/4da690/r16/ with NOTES.md, list.py, slots.py, count.py and findcall.py plus base, struct-only and
 kept objects.
+
+## 2026-11-03 — 629 bss identity rows and a view conflict resolved
+
+Six hundred and twenty-nine `.bss` globals now carry an evidence-backed reference address, applied in 21 digest-guarded
+batches of at most 30 with a dry-run preview, a guarded apply, lint and three readbacks each; every batch reported the
+expected change count and every readback matched. The store's GOLDTL rows rise from 646 to 1,275. Derivation was rebuilt
+against the live store so the 192 previously applied rows act as anchors: 1,633 encoded `.bss` objects were bounded, 684
+are exact-fit and non-overlapping, and 629 pass every gate, leaving 55 skipped. The gates were exact fit to the next
+anchor with that anchor being the immediately next emitted symbol, a unique reference VA, clearance from existing row
+extents, a definition in stubs/goldtl/symbol_stubs.c whose declaration size equals the emitted extent, and no row already
+at the VA; all rows are kind GLOBAL with section `.bss`, file stubs/goldtl/symbol_stubs.c, size equal to the emitted
+extent, and no storage kind, backing, link symbol or type. The earlier count of 431 did not reproduce because the 738
+exact-fit figure was measured on the 432-row store and the 192 rows added since became anchors that re-cut the runs. Batch
+digests ran from 4aaa4761 for the first 30 rows at 0x006b6b18 to 4fb3f7d7 for the last 29 at 0x014b5ebc, and re-requesting
+three applied rows reports nothing to update.
+The 55 skips have reasons: 29 lack a definition in symbol_stubs.c, being 8 layout names such as dpad and dword plus 22
+VA-named stubs; 20 have a declaration size different from the extent, in the same understatement class as the four
+callers, including 0x773d90 and 0x7749dc; 4 share a reference VA between two encoded names, at 0x14b556c, 0x7725a8,
+0x7725ec and 0xaecde0; 2 overlap an existing row extent, 0x773d6c and the 0x776664 cluster; and six already have a row at
+the VA, 0x7f4c00, 0x7f4c04, 0x773d6c, 0xaecde0, 0x7e23e0 and 0x100af80.
+A new warning appeared at batch 10 and was resolved rather than left standing. The pre-existing row GOLDTL.0x00776664 is
+typed `int` with no stored size, so its type-derived four-byte extent overlapped three new one-byte rows at 0x00776665,
+0x00776666 and 0x00776667, which the overlap gate could not see because it read stored sizes only. The reference uses the
+range both ways, with a dword load from 0x776664 at 0x00598387 and byte loads from 0x776667, 0x776666 and 0x776665 at
+0x005e22a3, 0x005e2300 and 0x005e2353, so the honest model is that the three bytes are views into the four-byte object
+rather than separate allocations. They are now recorded as aliases backed by 0x00776664 through
+`rebrew data set --storage-kind ...=alias --backing ...=0x00776664` with digest
+c4ce9fbd8a0a25ebd847439ef33bf4b78a85dd8597ef6e82f4d6679dd84c78fb, which clears all three W038 warnings; lint is back to
+its baseline of no errors and the two pre-existing warnings W031 and W033.
+Four caller externs were corrected to match the resized stub objects, with no allocated byte changed. In
+GOLDTL.fcn_0052c9b0.c `extern char g_6a2574[4]` with the first element used; in GOLDTL.fcn_00502cd0.c
+`extern unsigned char g_699396[2]` with both uses indexed; in GOLDTL.fcn_005463a0.c `g_6a4758[4]` and `g_6a4760[2]` with
+four indexed uses; and in GOLDTL.fcn_005462a0.c `g_6a4758[4]` kept while `g_6a4760` was reverted to a scalar, because with
+an array type `g_6a4760[0] != 0xffff` compiles to a six-byte dword load instead of the seven-byte word load and moves the
+whole text, so that one declaration still understates a four-byte object in that unit. Each translation unit was
+recompiled with its own build command, before and after, comparing COFF sections and relocations: only `.debug$S`
+differed, and a control that changed only `/Fd` moves that section by the same 83 bytes, so the difference is the harness
+PDB path. Stored verdicts were refreshed for the four and none changed because no object byte changed. Instruments in
+.scratch/varefx/ with REPORT.md, derive.py, batch_driver.py, callers.py and compare_coff.py.

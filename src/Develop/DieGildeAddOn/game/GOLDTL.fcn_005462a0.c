@@ -4,7 +4,7 @@ extern unit_77e980 g_77e980[1024];
 extern unit_77e980* g_7dc420;
 extern char g_7749dc;
 extern int g_7749d4;
-extern unsigned char g_6a4758;
+extern unsigned char g_6a4758[4];
 extern int g_6a475c;
 extern unsigned short g_6a4760;
 extern int g_6a4764;
@@ -37,8 +37,8 @@ unit_77e980* __cdecl he_fn_Handlung(void)
 	}
 	for (;;) {
 		if (e->kind != 0) {
-			if (g_6a4758 != 0xff) {
-				if (e->kind != g_6a4758) {
+			if (g_6a4758[0] != 0xff) {
+				if (e->kind != g_6a4758[0]) {
 					goto nomatch;
 				}
 				matched = 1;

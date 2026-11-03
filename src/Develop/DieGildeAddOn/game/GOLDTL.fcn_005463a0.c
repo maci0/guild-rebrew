@@ -14,9 +14,9 @@ extern unit_77e980 g_77e980[1024];
 extern struct unit* g_7dc420;
 extern char g_7749dc;
 extern int g_7749e0;
-extern unsigned char g_6a4758;
+extern unsigned char g_6a4758[4];
 extern int g_6a475c;
-extern unsigned short g_6a4760;
+extern unsigned short g_6a4760[2];
 extern int g_6a4764;
 
 struct unit* __cdecl he_fn_Handlung(void);
@@ -26,9 +26,9 @@ struct unit* __cdecl fcn_005463a0(int n, ...)
 	va_list ap;
 	int i;
 
-	g_6a4758 = 0xff;
+	g_6a4758[0] = 0xff;
 	g_6a475c = -1;
-	g_6a4760 = 0xffff;
+	g_6a4760[0] = 0xffff;
 	g_6a4764 = -1;
 	g_7749dc = 1;
 	g_7749e0 = 0;
@@ -36,13 +36,13 @@ struct unit* __cdecl fcn_005463a0(int n, ...)
 	for (i = 0; i < n; i++) {
 		switch (va_arg(ap, unsigned char)) {
 		case 0:
-			g_6a4758 = va_arg(ap, unsigned char);
+			g_6a4758[0] = va_arg(ap, unsigned char);
 			break;
 		case 1:
 			g_6a475c = va_arg(ap, int);
 			break;
 		case 2:
-			g_6a4760 = va_arg(ap, unsigned short);
+			g_6a4760[0] = va_arg(ap, unsigned short);
 			break;
 		case 3:
 			g_6a4764 = va_arg(ap, int);
