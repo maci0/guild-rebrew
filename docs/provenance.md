@@ -24332,3 +24332,19 @@ Two things are reported rather than solved. The reference keeps the meister poin
 them the other way round, so every operand-bearing instruction after the prologue differs from the second instruction on. And the compiler lays three packet branches in
 the opposite order from the reference; two source orderings were tried and it reordered both. The fifth frame slot is forced with a volatile pointer so the reference
 frame size is reached, which is labelled as a codegen device rather than proved original source, and it costs three memory accesses.
+
+## 2026-11-03 — the message row's whole-row blocker: a macro that weights its own argument
+
+`0x569FF0` keeps 976 of 3772 with the object four bytes short and the frame matching at 0x738, and no change was kept, but the pass located the blocker that explains the
+row. A message-copy macro in that file expands its destination argument four times, which raises the parameter's allocation weight enough that the compiler keeps the
+parameter in one callee-saved register for the entire function where the reference keeps it in another. Everything downstream is register-permuted, which is why the row
+shows 169 replace events and a head window of 909 bytes.
+The reference's own expansion computes the destination once and stores through it, and rewriting the macro that way flips the parameter into the reference's register and
+makes the first sixteen bytes identical. Doing that alone exposes a four-byte frame shortfall, because the reference keeps one value in a local that the source does not
+have: at entry it zeroes three separate registers with four zero stores where the fixed build uses one. The pass measured the macro variants as structurally closer but
+650 matched bytes worse, and reverted them rather than trade position for structure without the missing local, which is the right call; the two changes have to land
+together and that is what the next pass is asked to do.
+A float wording is also recorded as disproved: the value near the first stack slot is a four-byte float, since the reference loads a dword, multiplies by a quadword
+constant and stores a dword back, and the flag beside it is separate. A variant that declared it double was reverted on that evidence.
+One brief mistake is recorded too: the task statement quoted an extent of 2273 where the store and the inventory both say 3772, which the reading agent caught before
+editing. Addresses and sizes belong to the tool outputs, not to memory, and the brief for a row must be built from the record rather than typed.
