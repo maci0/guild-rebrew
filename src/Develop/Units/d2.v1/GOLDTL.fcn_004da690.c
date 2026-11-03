@@ -382,7 +382,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
                             io_AppendText((char *)0x12c7, *(unsigned short *)s58);
                             fcn_004e4de0(0x3e8);
                             fcn_004727a0(s14, 0);
-                            if (*(int *)s80 == 0) {
+                            switch (*(int *)s80) {
+                            case 0:
                                 fcn_004e4b40(*(unsigned short *)s58, s34, 0x68c0e0,
                                              (int)fcn_004e6cb0(4), 0x64);
                                 io_AppendText((char *)0x12c8);
@@ -392,7 +393,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
                                     io_AppendText((char *)((int)fcn_004e6cb0(2, *(unsigned short *)s18) + 0x12cf));
                                 fcn_004727a0(s60, 2);
                                 fcn_004da510(*(int *)0x772514, 0, 0);
-                            } else if (*(int *)s80 == 1) {
+                                break;
+                            case 1:
                                 fcn_004e4b40(*(unsigned short *)s58, s34, 0x68c0d0,
                                              (int)fcn_004e6cb0(4), 0x64);
                                 io_AppendText((char *)0x12ca);
@@ -403,12 +405,14 @@ void __cdecl fcn_004da690(unsigned int *a0)
                                     io_AppendText((char *)((int)fcn_004e6cb0(2, *(unsigned short *)s10) + 0x12d1));
                                 fcn_004727a0(s60, 2);
                                 fcn_004da510(*(int *)0x772514, 0, 1);
-                            } else {
+                                break;
+                            default:
                                 fcn_004e4b40(*(unsigned short *)s58, s34, 0x68c0b8,
                                              (int)fcn_004e6cb0(4), 0x64);
                                 io_AppendText((char *)0x12c9);
                                 fcn_004727a0(s60, 2);
                                 fcn_004da510(*(int *)0x772514, 0, 2);
+                                break;
                             }
                             fcn_004e4de0(0xfa0);
                             *(int *)(0x1015ea0 + *(int *)((char *)&mid + 0x3ac) * 0x30c + 0x3c) = 0;

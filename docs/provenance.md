@@ -21303,3 +21303,25 @@ recompiled with its own build command, before and after, comparing COFF sections
 differed, and a control that changed only `/Fd` moves that section by the same 83 bytes, so the difference is the harness
 PDB path. Stored verdicts were refreshed for the four and none changed because no object byte changed. Instruments in
 .scratch/varefx/ with REPORT.md, derive.py, batch_driver.py, callers.py and compare_coff.py.
+
+## 2026-11-03 — d2 row reaches exact size via the switch form
+
+`0x4DA690` now has object 7057, exactly native, with match 1456, 71 relocations, frame 0x900 and status STUB. The switch
+form trades 62 matched bytes for size parity, and the trade is taken deliberately: clearing the size gate is the ladder's
+requirement before a row can be matched further, and this row's measured depth anchors improve at the same time, from plus
+one and plus one at 0xbbd and 0xbd9 to zero and zero, with the later anchors moving from plus six, plus eight and plus ten
+to plus four, plus three and plus five.
+The root finding is a compiler rule: this compiler cross-jumps `call` plus `add esp` only, never argument setup, unless the
+arm block ends at the differing parameter push. Three probes establish it, with identical call tails still merging only the
+call and cleanup, while a hoisted register argument lets it merge `push 0`, `push reg`, the call and the `add`. Native's
+six-instruction tail needs `mov ecx,[0x772514]` to be common after the constant push, whereas our arms schedule that load
+before the push and into three different registers, so only the call and cleanup can merge.
+Measured variants: the baseline is 1518 at object 7071 with window 216 instructions and 64 pushes, aligned 1140, shape
+0.577 and mismatch 1266; the switch form is 1456 at object 7057 with 215 and 63, aligned 1110, shape 0.560 and mismatch
+1342; a common tail for all three arms is 1435 at 7037 with 217 and 62, aligned 1154, shape 0.585 and mismatch 1229; a
+common tail for two arms with the third inline is 1517 at 7060 with 215 and 64, aligned 1158, shape 0.585 and mismatch
+1234; and hoisting the load to a local is 1473 at 7056 with 215 and 65, aligned 1021, shape 0.518 and mismatch 1549. The
+switch form lays cases out in decreasing value order, default then one then zero, against native's 0, 1, 2, and rewriting
+the case source order produces byte-identical output. An `/Os` diagnostic does produce the merged constant-push arm tail
+but adds a frame pointer and memory-push arguments, so it is unusable since native is /Ot. The previous state is preserved
+at .scratch/4da690/r16/pre_switch_1518.c, and the variants live beside it.
