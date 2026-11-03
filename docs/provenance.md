@@ -21829,3 +21829,25 @@ when the source stops short of it, which is why 0x5efd86, 0x65a20a, 0x64d1df and
 sizes. A run of `0x90` or `0xCC` after the last real content, filling to the next row's alignment, is padding and is trimmed,
 which is why 0x51af00, 0x535bd0, 0x4f4830 and now 0x507910 are recorded at their content length. The distinguishing question
 is not whether the object is short of the extent but whether the bytes are instruction-bearing code or fill.
+
+## 2026-11-03 — d2 two: the spill is the thirteenth stack word
+
+A third pass on `0x4DCF50` kept nothing, but it sharpened the blocker and narrowed the next probe. The gap diagnostic reports
+2342 reference instructions against 2352 in the object with 365 windows, 285 replacements, 47 deletions and 33 insertions, and
+the first divergence is at offset 0x15 where the reference stores the folter flag to [esp+0x2c] inside a 0x24 frame while this
+build stores the message state to [esp+0x48] inside a 0x40 frame. The native head order was recovered with frame-accurate
+slots: the flag to 0x24, the seventh handle to 0xa8, the float accumulator to 0x14, then the remaining handles, the table at
+0xb0, the record scan, the clamp, the weight at 0x30, two calls and a filename, then the message fields at 0x44, 0x48 and
+0x4c with the identifier array and the text, and finally the state at 0x40.
+Every variant that reproduces those leading initialisations grows the frame from 0x760 to exactly 0x764, even after dropping
+the padding local and shrinking the buffer: native head order alone gives 1538 at 8808 with 321 windows, keeping the padding
+gives 1720 at 8818 with 318, adding the buffer change gives 1539 at 8808 with 312, and the minimal three-initialiser form
+gives 1617 at 8805 with 317. Declaring the pointer `register` changes nothing, staying at 2345. The conclusion sharpens the
+earlier analysis: native has twelve stack words and leaves the p38 pointer in ebx with no home, while this build gives p38 a
+home at 0x18 and the pointer to p34 at 0x14, so the thirteenth long-lived value is p38's stack home itself, and statement
+order cannot close the gap. The next probe is therefore to shorten that live range rather than reorder the head, loading p38
+at its first use after the leading initialisations so the slot is free for the flag.
+The largest remaining windows are recorded for the next pass: a 75-instruction aggregate initialisation of the folter file and
+name at reference 0x4ddb82 with differing load order and store widths, a 125-instruction block at 0x4dee1a that exists in both
+but is emitted 116 bytes earlier here, and the selector and flags loops at 0x4dd4b3 at 50 instructions against 49. Two
+unresolved items remain: sprintf across nine sites with no definition at 0x64d41a, and a global at 0x662b28 with no data row.
