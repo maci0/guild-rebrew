@@ -23601,3 +23601,19 @@ Two drift windows remain open and both are recorded as codegen rather than seman
 reloads a record field and counts down with a decrement-and-branch while this build hoists the value and compares against the global with an increment. The first
 divergence is the prologue: the reference pushes a register at entry where this build tests a value first, which is register allocation and scheduling rather than
 an operand defect.
+
+## 2026-11-03 — class scan row: a record type, a rolled loop and two swapped calls
+
+`0x4A3530` keeps 296 of 2951 with the object at 2888, up from 2696, and the instruction-level divergence roughly halves: 921 object instructions against 937
+reference where the baseline had 834, gap events falling from 85 gaps, 20 insertions, 16 deletions and 71 replacements to 51, 7, 14 and 55. The positional count
+falls by 32 while all of that improves, and the structural signal was kept with both numbers recorded.
+Seven defects were repaired from the reference bytes. The output records are of a different type than the source assumed: the routines that fill them write an
+identifier at offset four and a class byte at offset eight, so every read through the record was off by a field. The branch order is inverted relative to the
+reference, which lays one scan inline and the class block later, and it is restored with a constant on the left because this compiler canonicalises the natural
+spellings and swaps the blocks back. The group scan runs three times explicitly in the reference rather than as a rolled loop, so it is unrolled. The slot array is
+five entries at one frame offset and the class writes land in entries two to four and two to three, where the source reused the first three and carried fabricated
+de-duplication loops the reference does not have. Four comparison forms are corrected to the reference's strict inequalities. A global is a pointer whose elements
+are written, where the source assigned the pointer itself. And two calls passed their first two arguments the other way round.
+All seven call targets were verified against the reference and none is wrong, and the output buffer that aliases the slot array is modelled from the reference's own
+argument address, which brings the frame to 0xe0 with the same offsets as the reference. The remaining divergence is the prologue: the reference takes the argument
+in ebx while this build uses another register, because the allocator hoists a constant into ebx, which no source experiment reached without breaking the tail.
