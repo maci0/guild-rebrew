@@ -20455,3 +20455,24 @@ errors with two pre-existing warnings, a stale provenance warning for GOLDTL.fcn
 file mismatch. `build/` was not written and no CMake ran; the link used `rebrew build driver link` into scratch.
 The caveat from the upstream idea entry still applies: `rebrew data layout fill` appends new `_dpad_` definitions at
 file end after any `#endif`, so a later fill would reintroduce unguarded pads until the generator learns the guard.
+
+## 2026-11-03 — fix delta sweep and a reverted copy length
+
+The fix-delta sweep measured fourteen rows, each file confirmed against rebrew-functions.toml before testing, and
+closed none: every attempt regressed or stayed unchanged and was reverted to the measured baseline. The rows and their
+unchanged verdicts are fcn_0057a3d0 at 799 of 801, fcn_004bd1e0 at 752 of 758, fcn_00420db0 at 659 of 667,
+fcn_00495180 at 623 of 625, fcn_0047c1f0 at 603 of 607, fcn_004763e0 at 556 of 570, fcn_0040fb80 at 323 of 328,
+fcn_004f4440 at 250 of 267, fcn_0050b840 at 125 of 136, fcn_004f0f60 at 109 of 133, fcn_00490c10 at 113 of 118,
+fcn_004ce210 at 68 of 74 and fcn_00509570 at 54 of 65. Attempts that failed: splitting a rate assignment from its
+compare leaves fcn_00495180 unchanged at 623 with the cmp versus test difference persisting; swapping the clamp blocks
+in fcn_0047c1f0 drops it to 441; loading the value before the base in fcn_0050b840 leaves 125 unchanged; rewriting the
+clamp in fcn_004f0f60 as if/else-if or two ifs drops it to 33 as a stub; swapping the __max and __min operands in
+fcn_004f4440 gives 108 at object 269 and 90 at object 250; converting fcn_00490c10 to if/else, inverted if/else or a
+ternary gives 58 as a stub, 113 and 113; adding an address temporary in fcn_004ce210 leaves 68 unchanged; and treating
+the index as short or nesting the check in fcn_00509570 gives 28 at object 70, 54, 36 at object 68 and 52. The
+remaining deltas are the documented walls: x87 and integer scratch-slot choice, loop-tail scheduling, register
+allocation tie-breaks, clamp branch layout and epilogue shape.
+One row in that set, fcn_004c6e20, carried an uncommitted edit from another session that replaced
+`memcpy(dst, src, 0x40)` with `memcpy(dst, src, sizeof(((char*)0)[0x40]))`, which evaluates to one byte rather than
+sixty-four and would copy one byte of each record. That is wrong behaviour, not a matching trade, so it was restored to
+`memcpy(dst, src, 0x40)` and the row returns from SIZE_MISMATCH at 51 of 123 to NEAR_MATCHING at 113 of 123.
