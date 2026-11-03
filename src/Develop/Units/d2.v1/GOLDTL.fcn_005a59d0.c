@@ -21,7 +21,7 @@ extern int g_14ab710;
 extern int g_14ab718;
 extern int g_14ab6fc;
 extern int g_14ce8e0;
-extern int g_100f8c0;
+extern char g_100f8c0;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -44,7 +44,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00533a40(char*);
 int __cdecl fcn_005a5440(int, void*, int, int, int);
 int __cdecl fcn_005a5980(void*);
-int __cdecl fcn_0059c830(void*);
+int __cdecl fcn_005a59b0(void*);
 int __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_0046ed00(int, int, int);
 int __cdecl fcn_00472170(int, int);
@@ -163,14 +163,14 @@ int __cdecl fcn_005a59d0(char* a0)
 			d2_SetElementImage(e4, 0x4f7);
 		}
 	label_image_done:
-		v15 = fcn_0059c830(ownRows);
-		v16 = fcn_0059c830(globRows);
+		v15 = fcn_005a59b0(ownRows);
+		v16 = fcn_005a59b0(globRows);
 		if (v15 > 4) {
 			fcn_00472170(e1, 1);
 			fcn_00472170(e0, 1);
-			fcn_00472170(e3, 1);
+			fcn_00472170(h1, 1);
 			itoa(v15, buf, 10);
-			fcn_0046f940(e3, buf);
+			fcn_0046f940(h1, buf);
 		} else {
 			fcn_00472170(e1, 0);
 			fcn_00472170(e0, 0);
@@ -178,26 +178,26 @@ int __cdecl fcn_005a59d0(char* a0)
 		}
 		if (v16 > 4) {
 			fcn_00472170(e2, 1);
-			fcn_00472170(e2, 1);
-			fcn_00472170(e4, 1);
+			fcn_00472170(h1, 1);
+			fcn_00472170(h2, 1);
 			itoa(v16, buf, 10);
-			fcn_0046f940(e2, buf);
+			fcn_0046f940(h2, buf);
 		} else {
 			fcn_00472170(e2, 0);
-			fcn_00472170(e2, 0);
-			fcn_00472170(e4, 0);
+			fcn_00472170(h1, 0);
+			fcn_00472170(h2, 0);
 		}
 		if (g_100f1dc == 3 || g_100f1dc == 4) {
-			if (g_67d370 == e0) {
+			if (g_67d370 == e2) {
 				d2_SetForm(v8, 4);
-				fcn_0046ed00(0, -0x4c, g_772514);
-			} else if (g_67d370 == e1) {
-				d2_SetForm(v8, 4);
-				fcn_0046ed00(0, 0x4c, g_772514);
-			} else if (g_67d370 == e2) {
-				d2_SetForm(v8, 5);
 				fcn_0046ed00(0, -0x4c, g_772514);
 			} else if (g_67d370 == e3) {
+				d2_SetForm(v8, 4);
+				fcn_0046ed00(0, 0x4c, g_772514);
+			} else if (g_67d370 == e1) {
+				d2_SetForm(v8, 5);
+				fcn_0046ed00(0, -0x4c, g_772514);
+			} else if (g_67d370 == e0) {
 				d2_SetForm(v8, 5);
 				fcn_0046ed00(0, 0x4c, g_772514);
 			}
@@ -208,32 +208,32 @@ int __cdecl fcn_005a59d0(char* a0)
 				v2 = globRows[v16].val;
 				v3 = ownRows[v29].val;
 				if (v2 != v3) {
+					v4 = ownRows[v29].x14;
 					v30 = globRows[v16].x18;
-					if (ownRows[v29].x14 <= globRows[v16].x18)
-						v30 = ownRows[v29].x14;
+					if (v4 <= v30)
+						v30 = v4;
 					if ((g_774970 != *(unsigned short*)(a0 + 0x27))
-						&& (*(int*)(a0 + 0x6d) * 0.1 * (float)fcn_00508620(v30, v2)
+						&& (*(int*)(a0 + 0x6d) * 0.1 * (float)fcn_00508620(v4, v3)
 							<= (float)fcn_00508620(1, v3)))
 						fcn_00508620(1, v3);
-					v4 = ownRows[v29].x14;
 					if ((float)fcn_00508620(v30, v2) <= (float)fcn_00508620(v4, v3)) {
 						fcn_004c4eb0(g_6aac7c);
 						v28 = fcn_00508620(0, v3);
 						fcn_004c51f0(-1,
-							*(int*)(g_774970 * 0x21c + 0x7f4ca4), v3, v28,
+							*(int*)(g_774970 * 0x21c + 0x7f4ca4), v2, v28,
 							g_773d75,
 							0);
 						v17 = fcn_00508620(0, v3);
 						fcn_004c51f0(*(int*)(g_774970 * 0x21c + 0x7f4ca4), -1,
-							v2, v17,
+							v3, v17,
 							g_773d75,
 							0);
 						v18 = fcn_00508620(0, v3);
-						fcn_004c51f0(-1, *(int*)(a0 + 1), v2, v18,
+						fcn_004c51f0(-1, *(int*)(a0 + 1), v3, v18,
 							g_773d75,
 							0);
 						v19 = fcn_00508620(0, v3);
-						fcn_004c51f0(*(int*)(a0 + 1), -1, v3, v19,
+						fcn_004c51f0(*(int*)(a0 + 1), -1, v2, v19,
 							g_773d75,
 							0);
 						v5 = fcn_004c4ef0(g_6aac7c);
@@ -264,12 +264,15 @@ int __cdecl fcn_005a59d0(char* a0)
 				v3 = globRows[v29].val;
 				if (v2 != v3) {
 					v4 = globRows[v29].x14;
+					v30 = ownRows[v16].x18;
+					if (v30 >= v4)
+						v30 = v4;
 					if ((g_774970 != *(unsigned short*)(a0 + 0x27))
-						&& (*(int*)(a0 + 0x6d) * 0.1 * (float)fcn_00508620(v4, v3)
+						&& (*(int*)(a0 + 0x6d) * 0.1 * (float)fcn_00508620(v30, v2)
 							<= (float)fcn_00508620(1, v3)))
 						fcn_00508620(1, v3);
-					v30 = ownRows[v16].x18;
-					if ((float)fcn_00508620(v4, v3) <= (float)fcn_00508620(v30, v2)) {
+					if ((float)fcn_00508620(globRows[v29].x18, v3)
+						<= (float)fcn_00508620(v30, v2)) {
 						fcn_004c4eb0(g_6aac7c);
 						fcn_004c51f0(-1,
 							*(int*)(g_774970 * 0x21c + 0x7f4ca4), v2,

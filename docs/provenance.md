@@ -23544,3 +23544,20 @@ shrinking the windows and restoring the reference's call shape, so the structura
 The remaining divergence is the frame: the object's local area is four bytes smaller and two buffers sit in the opposite order, because the reference keeps fifteen
 four-byte slots including one that is never read. A local was not invented to force the frame, so every stack displacement stays four bytes off, which caps the
 matched bytes on this row.
+
+## 2026-11-03 — frontier row: a wrong target and seven operand and field repairs
+
+`0x5A59D0` moves from 432 to 729 matched bytes with the object at 2950 against the 2962 extent, 57 relocations, and the frame now exactly 0x4b8. Eight defects were
+repaired, all proved against the reference bytes. Two calls targeted an address that decodes without a prologue, where the reference calls the row-counter routine
+sixteen bytes earlier, which the source now does. A global tested twice as a byte is declared as a character rather than an integer. A comparison chain is ordered
+the way the reference orders it. Four calls in one arm were passing two variables the other way round: the reference passes one for the first and fourth call and
+the other for the second and third. Two blocks wrote the count text into the wrong element, one of them also duplicating a call that was removed, and the second
+block's arguments become the two handle fields. One arm's guard operands were computed from the wrong rows and are now the converted row values the reference
+passes. And the second arm was missing a clamp that bounds one value against another row's field, which is added.
+The positional count dipped at two of the intermediate steps while the frame was still misaligned, and those steps were kept on their structural proof with the
+numbers recorded; the final state gains the frame and nearly three hundred matched bytes. One reverted step is recorded: taking an arm's main comparison from the
+globals table instead of the converted row value gave 699 with a broken frame, so it was restored from a scratch copy rather than from version control.
+Every other checked class came back clean: twenty distinct callees match the declared shapes, the buffer sits at the same offsets once the frame aligns, and the
+remaining reload-versus-register difference in the argument pointer is not a single proven edit. The first divergence is a scheduling difference in the zeroing of a
+row index before a push, which resynchronises three bytes later. The largest open window is a transfer block where the reference converts two float expressions into
+a call argument while the source calls a different routine there, and closing it needs the original expressions rather than a narrow operand fix.
