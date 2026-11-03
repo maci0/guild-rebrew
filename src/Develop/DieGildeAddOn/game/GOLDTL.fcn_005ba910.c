@@ -201,6 +201,7 @@ int __cdecl fcn_005ba910(int a1, int a2)
 	int i;
 	int j;
 	int h;
+	int slot_value;
 	Ent5ba910* e;
 
 	f.v158 = 0;
@@ -1108,21 +1109,21 @@ l_5bc253:
 		if (j == -1) {
 			continue;
 		}
-		f.v9c = *(int*) (*(int*) 0x1015ea0 + j * 0x2f4 + 8) - 0xdf;
+		slot_value = *(int*) (*(int*) 0x1015ea0 + j * 0x2f4 + 8) - 0xdf;
 		if (f.v40 == 0) {
 			i = 0;
 		} else if (f.v68 == 0) {
-			i = (int) (fcn_0050bb50(f.v9c, f.v34) * *(float*) (f.v14 + 0x49));
+			i = (int) (fcn_0050bb50(slot_value, f.v34) * *(float*) (f.v14 + 0x49));
 		} else {
-			i = (int) (fcn_0050bb50(f.v9c, f.v34) * 0.9);
+			i = (int) (fcn_0050bb50(slot_value, f.v34) * 0.9);
 		}
 		if (a2 == 2 || a2 == 4) {
-			i = (int) fcn_0050bb50(f.v9c, (int) (*(unsigned char*) (f.v14 + 0x65)));
+			i = (int) fcn_0050bb50(slot_value, (int) (*(unsigned char*) (f.v14 + 0x65)));
 		}
 		f.v10 = i;
 		idx = 1;
 		if (f.v34 != 0
-		    && fcn_00502cd0(*(int*) (f.v34 + 0x14), 1, 0, f.v9c) == 0) {
+		    && fcn_00502cd0(*(int*) (f.v34 + 0x14), 1, 0, slot_value) == 0) {
 			idx = 0;
 		}
 		j = fcn_00471f80(j);
@@ -1132,7 +1133,7 @@ l_5bc253:
 		if (j <= 0) {
 			continue;
 		}
-		idx = gm_eval_SlotVoll(f.v18, f.v9c, j);
+		idx = gm_eval_SlotVoll(f.v18, slot_value, j);
 		f.v28 = idx * i;
 		f.vA4 = (int) fcn_0050b750(1, (int) (*(unsigned char*) 0x773d75));
 		*(float*) &f.v84 = (float) f.v28;
@@ -1141,20 +1142,20 @@ l_5bc253:
 			*(float*) &f.v64 = 1.0f;
 		}
 		if (f.v80 != 0) {
-			if (fcn_0057eba0(0x28, f.v14, 0, f.v9c) == 0) {
+			if (fcn_0057eba0(0x28, f.v14, 0, slot_value) == 0) {
 				continue;
 			}
-			fcn_0057e880(0x28, f.v14, 0, f.v9c);
+			fcn_0057e880(0x28, f.v14, 0, slot_value);
 		} else if (f.v70 != 0) {
-			if (fcn_0057eba0(0x26, f.v14, 0, f.v9c) == 0) {
+			if (fcn_0057eba0(0x26, f.v14, 0, slot_value) == 0) {
 				continue;
 			}
-			fcn_0057e880(0x26, f.v14, 0, f.v9c);
+			fcn_0057e880(0x26, f.v14, 0, slot_value);
 		}
 		if (idx <= 0) {
 			continue;
 		}
-		fcn_004c51f0(*(int*) (f.v18 + 2), *(int*) (f.v98 + 2), f.v9c, idx,
+		fcn_004c51f0(*(int*) (f.v18 + 2), *(int*) (f.v98 + 2), slot_value, idx,
 		             f.v34, (int) (*(float*) &f.v10 * *(float*) &f.v64));
 		if (*(float*) &f.v64 == 1.0f) {
 			fcn_0051af00((int) (f.v210 + 0x238), 0xed,
@@ -1169,7 +1170,7 @@ l_5bc253:
 		if (j <= 0) {
 			continue;
 		}
-		fcn_0051af00((int) (f.v210 + 0x238), 0xeb, f.v9c + f.v9c + 0x9a8);
+		fcn_0051af00((int) (f.v210 + 0x238), 0xeb, slot_value + slot_value + 0x9a8);
 		fcn_00526120((int) (f.v210 + 0x238), 0x100);
 	}
 l_5bcab6:
@@ -1380,9 +1381,9 @@ l_5bcb82:
 		if (j == -1) {
 			continue;
 		}
-		f.v9c = *(int*) (*(int*) 0x1015ea0 + j * 0x2f4 + 8) - 0xdf;
+		slot_value = *(int*) (*(int*) 0x1015ea0 + j * 0x2f4 + 8) - 0xdf;
 		if (f.v34 != 0
-		    && fcn_00502cd0(*(int*) (f.v34 + 0x14), 1, 1, f.v9c) == 0) {
+		    && fcn_00502cd0(*(int*) (f.v34 + 0x14), 1, 1, slot_value) == 0) {
 			continue;
 		}
 		f.v38 = fcn_00471f80(j);
@@ -1391,13 +1392,13 @@ l_5bcb82:
 		}
 		f.v38 = gm_CheckInventoryCapacity(
 			(char*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c),
-			f.v9c, f.v38);
+			slot_value, f.v38);
 		if (f.v38 <= 0) {
 			continue;
 		}
 		fcn_004c51f0(*(int*) (0x7f4ca4
 		                      + *(unsigned short*) 0x774970 * 0x21c),
-		             f.v9c, *(int*) (h + 2), f.v38, f.v24, 0);
+		             slot_value, *(int*) (h + 2), f.v38, f.v24, 0);
 		fcn_00472380(j, 0, 0x64, 0);
 	}
 l_5bcc9f:
@@ -1512,12 +1513,12 @@ l_5bcd9a:
 				if (*(int*) f.v30 == -1) {
 					continue;
 				}
-				f.v9c = *(int*) (*(int*) 0x1015ea0 + *(int*) f.v30 * 0x2f4 + 8) - 0xdf;
+				slot_value = *(int*) (*(int*) 0x1015ea0 + *(int*) f.v30 * 0x2f4 + 8) - 0xdf;
 				j = fcn_00471f80(*(int*) f.v30);
 				if (j <= 0) {
 					continue;
 				}
-				fcn_004c51f0(-1, *(int*) (f.vA4 + 2), f.v9c, j,
+				fcn_004c51f0(-1, *(int*) (f.vA4 + 2), slot_value, j,
 				             (int) (*(unsigned char*) 0x773d75), 0);
 				fcn_00472380(*(int*) f.v30, 0,
 				             ((int*) (f.v15C + 0x64))[f.v24], 0);

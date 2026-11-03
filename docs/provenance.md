@@ -21851,3 +21851,27 @@ The largest remaining windows are recorded for the next pass: a 75-instruction a
 name at reference 0x4ddb82 with differing load order and store widths, a 125-instruction block at 0x4dee1a that exists in both
 but is emitted 116 bytes earlier here, and the selector and flags loops at 0x4dd4b3 at 50 instructions against 49. Two
 unresolved items remain: sprintf across nine sites with no definition at 0x64d41a, and a global at 0x662b28 with no data row.
+
+## 2026-11-03 — camera row: two values were sharing one slot
+
+`0x5BA910` now measures 745 of 12166 with 44 relocations and status SIZE_MISMATCH, down from 750 at 12136, after one
+correctness repair that is kept at a measured cost. The frame field at 0x9c was doing two jobs in the source: it carried the
+scaled row offset and it was also used as a per-slot scratch at three sites. Native stores that field exactly once, at
+0x5bb156, and reads it once, at 0x5bcd4f and 0x5bcd81, while the per-slot value stays in esi across 0x5bc8ce to 0x5bcbf1.
+A new local now carries the per-slot value and the frame field keeps the scaled offset. The repair closes 291 of 1153 gap
+windows, taking the count to 862, but the frame grows from 0x1848 to 0x184c and every displacement shifts, so the positional
+match falls by five and the object grows by thirty bytes; the honest body-only meter, comparing below 11952 bytes, moves from
+617 to 604. It is kept because one slot holding two live values is a defect, not a formatting difference, and the window count
+is the better long-run signal.
+Three probes were reverted with numbers. Reordering the initialisation block to native order gives 740 at 12136 with 1156
+windows. Moving the deferred assignment to the frame field gives 711 at 12256. Modelling the entity local as the reference's
+argument slot gives 779 positional at 12217 with a frame of 0x1850 and 961 windows, so it wins the positional count while
+worsening both the size and the window count. An intermediate edit that renamed the wrong arm of the second assignment
+measured 755 at 12211 and was corrected before the kept change.
+Blocker status: the frame wall holds, with the saved-register sequence unchanged, push ebx then the argument into edx then
+push ebp, esi and edi with the zero and minus-one registers in different places than native's push ebx, ebp, esi with the
+argument into esi and edi as minus one. The loop-shape claim is neither refuted nor confirmed: the long unaligned runs of 168,
+77, 70, 68 and 47 instructions are phase shifts of a single block-order difference, and the blocks exist on both sides, for
+example native's block pushing 0x299 is present here at 0x93f, so no block is missing. The allocator claim about the seven
+loops was not tested. Unresolved callees remain fcn_00472380, fcn_0051af00, fcn_005462a0, fcn_00502850, fcn_00466330,
+fcn_0064d41a, __chkstk and the float literal pools.
