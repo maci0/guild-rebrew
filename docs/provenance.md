@@ -22426,3 +22426,22 @@ counterpart for it: its only initialisation of that value is the head store at 0
 worth 72 matched bytes and two fewer windows on the native-head base shape, so it should be applied as part of whichever change
 next makes that shape competitive rather than on its own, since the native-head shape is currently 728 matched bytes below the
 committed state.
+
+## 2026-11-03 — text appender: the frame invariant proves only one fact is missing
+
+`0x519190` keeps 660 of 7527 with 185 gap windows and an unchanged source. Six shapes were measured and the third saved register
+never appeared: computing the text base into an integer local leaves the prologue identical; taking the address of one local in the
+cold early return produces the reference extent of 0x3200 with the text buffer at 0x260, but the match falls to 565 and the object
+grows to 7659; taking the address of two cold-path locals gives 620 at 7543 with 200 windows; a double local for the two variadic
+double pushes reproduces the reference's `fld` and `fstp` at both sites, which explains that sequence, but leaves the frame
+unchanged and costs fifty matched bytes; sixteen integer locals in one ordered struct gives 601 at 7579; and splitting a reused
+local in one case gives 606 at 7503. Every shape keeps two callee-saved pushes with the base at esp+8 and the immediate at 0x31f0.
+The invariant that organises the whole row is now explicit and holds on both sides: the frame immediate plus four times the number
+of callee-saved pushes equals the text buffer offset plus 0x2fa0. Here that is 0x31f0 plus eight, which is 0x31f8, and 0x258 plus
+0x2fa0, the same number; in the reference it is 0x31f4 plus twelve, which is 0x3200, and 0x260 plus 0x2fa0. Two of the shapes
+already reach the reference extent of 0x3200, so the reference immediate at 0x31f4 follows automatically from a third push and is
+not separately reachable. The single missing fact is the third callee-saved register, with the reference keeping the text index in
+ebx and a reused local in esi where this build keeps the index in esi and spills the local.
+One diagnostic is recorded as a trap rather than a result: compiling at /O1 does reproduce the reference's x87 form and drops the
+window count to 51 with a match of 796, but the object shrinks to 6544, so it is a false realignment rather than the right flags,
+and the row's own flag set stays as configured.
