@@ -24594,3 +24594,13 @@ value is one hundred.
 The near batch therefore changes how the remaining work should be scheduled: rows that differ only in allocation, scheduler ordering or code-generator ordering are not
 worth a pass each, while rows missing whole blocks and rows with a pipelined load or store pattern are worth taking, because the pipelining class is source-shapeable and
 was just demonstrated on a row that had resisted earlier attempts.
+
+## 2026-11-03 — correction: data verified bytes are zero because drift outranks verified, not because rows lack sizes
+
+The earlier entry that blamed the zero byte count on data rows carrying no size is wrong and is corrected here. The rows have sizes: the large verified ones declare
+thirty-six thousand and thirty-five thousand bytes and their computed sizes agree with the declarations, and the small ones declare one and four bytes. The accounting
+instead buckets each byte once with a stated precedence, so a byte inside a drifting span is counted as drift and cannot also count as verified. The four verified rows in
+this target are all overlapped by drifting rows, which is why four verified rows contribute nothing at byte level while the drift bucket carries what they cover.
+That makes the number honest rather than broken: data verification reports the truth that almost every tracked data byte currently sits inside a drifting symbol, and the
+way to change it is to fix placement, which is what the pad reconciliation began. It also means the earlier claim about writing sizes for twelve hundred rows was aimed at
+the wrong problem and is withdrawn.
