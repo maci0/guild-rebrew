@@ -24810,3 +24810,12 @@ One complete reconstruction of the sell-and-buy block was proved and **not kept*
 recorded as a candidate, and the under-extent version is in the tree. That is the correct call: exceeding a reviewed extent is evidence the reconstruction is still wrong
 somewhere, not a reason to re-review the extent.
 The remaining difference is early local allocation, where the compiler sinks the zeroing of a second integer local, and the sell and buy block.
+
+## 2026-11-03 — the gap window note is corrected: the symbol-spacing default is deliberate
+
+The upstream note filed earlier said the gap diagnostic should prefer the reviewed extent. Reading the function that derives the window shows why it does not: a function with
+an out-of-line jump table or case map is longer than its metadata size, and decoding only the metadata window turns table bytes into phantom instructions, which is the worse
+failure. So the default is correct and preferring metadata outright is not proposed.
+What remains worth asking for is a note: when the metadata size and the symbol-derived window differ, print both and say which the window came from. A caller who wants the
+reviewed window can already pass the size explicitly, so the missing piece is visibility, not a different default. The upstream note is rewritten to that, and this replaces
+the earlier version rather than adding a second entry.
