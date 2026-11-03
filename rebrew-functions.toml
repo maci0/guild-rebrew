@@ -425572,7 +425572,7 @@ status = "STUB"
 blocker = "slot permutation: mode at [esp+0x18] against native [esp+0x1c] and rec at [esp+0x24] against [esp+0x14] are allocator output, first mismatch offset 24"
 
 ["GOLDTL.0x004d6170".verification]
-source_hash = "d996621222c6faeb9c9f0231211172891e009808fb864957dc34cc969a69d2d4"
+source_hash = "595efea887d2527b3eb2f10b4420be9a98572aeaa19745d5136751e28c90f31b"
 reference_hash = "14725d25255807ed54f0a178341a25e1afcef429a32775fbec3f343ee0e45870"
 reference_size = "4923"
 headers_hash = "715e465ca14c6143fd5b6ea46de554ac822b0104969453b838363aefd91f2b60"
@@ -425583,10 +425583,10 @@ module = "GOLDTL"
 va = "0x4d6170"
 context_hash = ""
 defines = "[]"
-input_hash = "98a12d8ab3ec8a260de2b991fe55ca779faec3f35594822f9c24874a1fe0bbcd"
+input_hash = "7a0520d0487577377c155e74d301ac69af9e4f29b0252a32ec0d0d6d46b198e8"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-03T13:17:51+00:00"
+measured_at = "2026-11-03T13:19:37+00:00"
 
 [["GOLDTL.0x004d6170".status_history]]
 old_status = "SIZE_MISMATCH"

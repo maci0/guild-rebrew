@@ -23040,3 +23040,19 @@ The rest of the checked classes came back clean: all call targets resolve, every
 matches, no copies or arrays exist beyond the frame, the reference's duplicated fill count has both sites in the source, the ratio is hoisted
 before the flag tests as the reference does, the loops compare values rather than addresses, and six record fields and three entity offsets
 agree. The frame diagnostic and the object length are the useful signals on this row, not the raw byte match.
+
+## 2026-11-03 — text panel row: fourteen classes clean, allocation is the whole remainder
+
+`0x4D6170` keeps 959 of 4923 with the object already spanning the extent, 72 relocations, and an unchanged source: two experiments were
+byte-identical and reverted, a dead store removal and a pair of declaration swaps. The gap diagnostic's 212-instruction deletion at reference
+0x4d69cc is an alignment artifact rather than missing code, since the object and the reference end at the same address and all 137 direct
+call sites align one for one with equal per-target counts.
+Fourteen defect classes were checked against reference bytes and none is provable: all direct targets match, there are no indirect calls, the
+frame matches, the argument push order agrees at eight call families, five index strides and the four-step expression for one of them match,
+the memset length and every copy destination match, the duplicated scans and clamps have both sites, the sentinel increment and both loop
+bounds compare values, the pointee reads agree, and three record offsets agree. Nothing is missing and nothing is duplicated.
+The remainder is the stack-slot and register allocation already recorded on this family, where the object writes a slot at 0x18 against the
+reference 0x1c and then diverges at offsets 28, 104, 129, 263 and 270, together with constant materialisation differences where the reference
+keeps one in a register and this build pushes it, hoists a load where the object folds a test, and defers a stack adjustment. Those are not
+source-level defects and cannot be reached by guessing expression forms, so the row is parked with an accurate blocker rather than a shape
+list.
