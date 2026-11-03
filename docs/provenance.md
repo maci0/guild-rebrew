@@ -23003,3 +23003,22 @@ stdcall, and the longest cleanup chain of 0x38 matches. Both memsets match at 0x
 The remaining wall is the frame composition: the reference keeps 0x74 bytes of locals below the buffer that this build does not have, so its
 frame is 0x4bc against 0x448 and every stack displacement differs by that amount. The largest remaining window is about a hundred bytes of
 extra object code in the sprintf and record block.
+
+## 2026-11-03 — d3 loader: a second read, a split call site, and a fake filler removed
+
+`0x44E1E0` (d3_LoadBinaryAnimStream) keeps 134 of 3632 with the object at 3550 and one relocation, after three changes taken from the link map
+and the reference bytes. The reference calls the read helper again after the stream check returns one, before comparing the value to its tag,
+where the source reused the first read, so the second read is restored. The allocator call belongs in both arms of the block that adds either a
+count or a size, and the source stored after the if and else, which made the compiler merge the two calls into one shared site; moving the store
+into each branch restores two sites and takes the call count to 66, matching the reference. And the source carried a 0x70-byte filler block and
+data-segment pragmas that made the link map place the function at 0x44e250 instead of the row address, which also caused the gap diagnostic to
+read 112 NOP instructions as the object; that filler was not real code and is gone.
+The match moves down from 143 to 134 while the object grows from 3506 to 3550 toward the 3632 extent, so this is a structural trade: one missing
+call, one merged call site and a misplaced filler were worth more than the positional bytes they cost. Fourteen defect classes were checked
+against the reference bytes and the rest came back clean: all 66 call targets and their order agree, every cleanup matches, the argument orders
+including constants in the last position agree, five index strides agree, the copy destinations and counts agree, the array row counts and widths
+agree, nothing compares an array address, three table dereferences agree, every loop bound is a register compare, and every frame and record
+offset agrees.
+The residual is a frame difference: the reference allocates 0x80 and this build 0x64, with the stack diagnostic reporting 0xa4 against 0x88, so
+every stack displacement differs and the raw byte match is not a meaningful signal on this row. The body is 80 bytes under the extent, explained
+by the 28-byte frame delta and folded tails, and no remaining semantic gap was found in the checked classes.
