@@ -73,7 +73,6 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 	int v40;
 	int v44;
 	int v48;
-	int v30;
 	int starts[10];
 	char line[0xc8];
 	char msg[0x100];
@@ -332,7 +331,7 @@ pass1_done:
 							msg[0] = '|';
 							strcpy(msg + 1, line + v10);
 							if (strlen(&g_6b7fa0[g_6b7f98 * 0x4800000]) + strlen(msg) > 0xfff) {
-								fcn_0064d41a(msg, "String too long in file %s in line %i", inc[v30], v24);
+								fcn_0064d41a(msg, "String too long in file %s in line %i", inc[v2c], v24);
 								m_FreeTracked(g_6b7fa0);
 								g_6b7fa0 = 0;
 								return 0;

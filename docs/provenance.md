@@ -21167,3 +21167,34 @@ ints so fcn_004e51d0 receives a 0x10-byte object where native passes 0x14. And t
 native 0xbd9 and 0xe8c. No source shape was established for either, and the hole cannot be produced by a plain unused
 local because the compiler drops it. Tools in .scratch/4da690/r15/ with rep.py for merged regions, shift.py for the
 drift, pdrift.py for push-depth drift, rb.py for the register-folded dump and side.py for the pair view.
+
+## 2026-11-03 — text reader: uninitialised index repaired at match cost
+
+`0x42BF20` now measures 1232 of 5919 with object 5919 against native 5840, 234 relocations, status SIZE_MISMATCH and
+lint clean. The edit is a correctness repair, not a match gain: the third "String too long in file %s in line %i"
+diagnostic at source line 335 indexed `inc[v30]` where `v30` is declared at line 76 and never assigned anywhere, which
+the compiler flags as C4700 and which would read a garbage index at runtime. The target indexes `inc[v2c]` at all four
+sites, at 0x42d160, 0x42d22c, 0x42d278 and 0x42d2c4, each loading v2c and shifting eight over the inc base. The index is
+corrected to `inc[v2c]` and the dead `int v30;` declaration removed. The repair costs 29 matched bytes and adds 52 object
+bytes, because dropping the only read of v30 removes that stack slot and shifts every later offset, taking the object from
+5867 to 5919; it is kept because an uninitialised memory read is not an acceptable trade for matched bytes.
+Measurement caveat: this row's reported match moved from 1420 at session start to 1261 before this edit with a
+byte-identical text section, because other sessions changed managed relocation bindings and the relocation count fell from
+276 to 232, so a deterministic local metric was pinned instead, with the text at 5872 before the repair for plus 32 over
+native, 307 equal bytes outside relocation spans out of 4660, and the first divergence at offset 1. An audit found no other
+defect: the prologue and epilogue, the check-stack frame with four saved registers and the early-return block, the
+zero-initialisation group order with the 0x149d120 walk, all seven memset sizes and their order, both parse passes with
+their directive handling and sprintf forms, the comma list loop with its 0x4800000 and 0x1000 split, the ';', '+' and '_'
+cases with their tables and record strides, the write sequence with all eight calls in native argument order, the third
+pass header and the success and failure epilogues were all checked instruction by instruction against the listing and
+found faithful, including the 0x4800000 index built as `shl edi,0x17` through `lea edx,[edx+edx*8]` which is faithful
+rather than defective.
+The remaining wall is stack-slot allocation, not C semantics: native's frame is exactly the sum of its declared locals with
+fifteen int scalars from 0x10 to 0x48 giving 0xeb6c, while this source compiles to fourteen int slots giving 0xeb68, so
+starts[] sits at 0x48 against native's 0x4c and every array base is four bytes low, with the scalar permutation differing
+as well, v18 at 0x28 against native's 0x18 and ebx chosen as the zero register where native picks ebp. Forcing a fifteenth
+slot by initialising v30 or by declaring a volatile length left the frame at 0xeb68, so the slot is not reproducible from
+source form. Drift windows from `rebrew diagnose drift` are 511 to 516 and 632 to 664 at minus 13, and 3963 to 3971 at
+minus 48. Every direct callee resolves to a project file or to the linked CRT, so the unresolved part is names rather than
+bodies, and no prototype was speculative. Instruments in .scratch/ with score.py, esp4.py, shape.py, mk.sh and the target
+assembly dump.
