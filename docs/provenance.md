@@ -21793,3 +21793,12 @@ otherwise belong to no row. All four are restored to their reviewed sizes, 4, 29
 `rebrew binary repair-extents` with the reason recorded in the history of each row. The general lesson is worth stating
 because it will recur: a row whose object is shorter than its extent is not automatically an over-long extent, and shrinking
 one must first re-derive the boundary, not just measure where the compiler stopped emitting bytes.
+
+## 2026-11-03 — the project pins the toolchain version it now runs
+
+The project's dependency pin moves from 6.14.3 to 6.16.0 for both the main and binsync extras, with the lockfile updated to
+match. The reason is that the environment was already measuring with 6.16.0, first from the released wheel and then from the
+local checkout of the same version, so the declared pin described a toolchain the project was not using. The editable
+install is an explicit tooling-development opt-in recorded earlier today; a `uv sync` will replace it with the released
+6.16.0 wheel, which is the reproducible state, while the local checkout stays the place where the three tooling repairs from
+tonight live. Nothing about the target or the compiler profile changes with this bump, so no verdict was refreshed.
