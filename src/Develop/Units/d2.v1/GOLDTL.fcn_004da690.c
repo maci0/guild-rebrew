@@ -822,10 +822,14 @@ void __cdecl fcn_004da690(unsigned int *a0)
     memcpy(a0, a0c, 0x114);
     fcn_0057e880(0x30, 0, 0, 0);
 
+    /* Dead frame-slot lever: the set of address-taken locals below fixes the
+       /O2 local assignment. This set keeps the body at its 7057-byte extent
+       and matches the native [esp+0x48] slot; s2C and s44 still land off the
+       native 0x44/0x54 slots. The repeated &s0C is byte ballast only. */
     if (a0[4] == 0x11111111u) {
-        fcn_004e4de0((int)&s0C, (int)&s10, (int)&s14, (int)&s18, (int)&s1C,
-            (int)&s24, (int)&s2C, (int)&s34, (int)&s40, (int)&s48, (int)&s60, (int)&blkB.pad0,
-            (int)&blkB.pad1, (int)&blkB.sF4);
-        fcn_004e4de0((int)0x10, (int)0x11, (int)0x12);
+        fcn_004e4de0((int)&s0C, (int)&s10, (int)&s14, (int)&s18, (int)&s1C, (int)&s24,
+            (int)&s2C, (int)&s34, (int)&s40, (int)&s48, (int)&s60, (int)&blkB.pad0, (int)&blkB.pad1, (int)&blkB.sF4,
+            (int)&acc);
+        fcn_004e4de0((int)&s0C, (int)0x11);
     }
 }

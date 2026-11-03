@@ -423278,7 +423278,7 @@ blocker = "Body ported from the Kuna decompilation of the native 0x900 frame: pa
 blocker_delta = 697
 
 ["GOLDTL.0x004da690".verification]
-source_hash = "7387a0a664e1482c470f119e3893489e4b2a3b63857d4ca5f78ad817585d6bd4"
+source_hash = "a589441a9d5036fd45699c9446784b8836116e46aa2c0fc764a841bf7bad2d9c"
 reference_hash = "217cf950d461ae3aff7e23c906f4b9cd6e9e683cac0694b5f715363c23fefb02"
 reference_size = "7057"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423289,10 +423289,10 @@ module = "GOLDTL"
 va = "0x4da690"
 context_hash = ""
 defines = "[]"
-input_hash = "a34dcea7104121b10721e985f45f152640413b22771c38370d7c49519ae98e9e"
+input_hash = "9c3b462f45f97e280c8603b51c03471bec063174fef7bb67c9e083770028ecfc"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-03T07:46:42+00:00"
+measured_at = "2026-11-03T08:27:39+00:00"
 
 [["GOLDTL.0x004da690".binding_history]]
 action = "rebind"

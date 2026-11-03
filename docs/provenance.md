@@ -22229,3 +22229,26 @@ while this build pushes ebx at entry and uses esi as the zero register, with the
 That is register allocation rather than frame, and the next lever recorded is the scalar declaration order and slot permutation,
 since the reference zeroes minus 8, minus 0x28, minus 0x64, minus 0x18, minus 0x1c and minus 0x60 where this build zeroes minus
 8, minus 0x24, minus 0x64, minus 0x20, minus 0x18 and minus 0x60, and that order also drives the push sequence.
+
+## 2026-11-03 — d2 row: one slot pinned by address-taking, and the honest caveat
+
+`0x4DA690` moves from 1456 to 1462 matching bytes with the object exactly at 7057, 71 relocations and status STUB, after a
+change confined to the dead `if (a0[4] == 0x11111111u)` block: taking the address of the accumulator and repeating the address
+of one existing local as five bytes of ballast. The non-gap window count falls from 386 to 271, with the part above offset 0x375
+going from 354 to 240 and the part below from 32 to 31.
+The caveat is recorded as plainly as the gain: 296 windows closed and 181 opened, so most of the count drop is diff
+re-alignment rather than repaired code, and there is exactly one genuine closure, the store at 0x335 now using the reference's
+0x48 slot. The store and compare order at 0x375 and the other two divergent slots are unchanged. A correction to an earlier
+brief is also recorded: below offset 0x375 there are 32 non-gap windows, but only 27 are pure string-COMDAT addends, and the
+other five are real, being the order array at raw 0xc8 against the reference 0xb8 with its six initialiser stores and indexed
+reads, plus three stores at 0x31c, 0x335 and 0x348 landing in different slots.
+The slot work itself is now measured thoroughly. The native map below frame 0x1d4 has 56 distinct slots, all scalar ones four
+bytes wide, and from frame 0x114 upward the two maps agree slot for slot, so the string and lane table was already right. In the
+scalar region 47 offsets are common, with nine native-only and nine object-only. Address-taking does move slots, but it moves
+the whole spilled block: the two pointer locals keep a 0x1c to 0x24 separation where the reference's pair is four bytes apart,
+so the native spacing is unreachable by this lever, and every extra forced local costs five to thirty bytes of extent. A sweep
+of seventy variants plus twenty-four random sets produced none that reaches 0x44, 0x48 and 0x54 together or holds the extent at
+7057 except by luck. Three specific stores resist: the one at instruction 153 wants raw 0x44 and lands at 0x28, the one at 166
+wants 0x54 and lands at 0x24, while the one at 160 can be pinned exactly at 0x48 by taking one more address. The first true
+divergence remains instruction 183, where the reference stores before comparing and this build stores after, and no variant
+moved it.
