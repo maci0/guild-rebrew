@@ -21541,3 +21541,33 @@ noticed and corrected: the stored blocker described a candidate of 5575 bytes an
 on-disk file, and the stored status claimed STUB while the current source compiles to 6075 against 6055 native, so the item
 was refreshed through `rebrew test --force-status` and the blocker rewritten with the measured facts. Notes in
 .scratch/mt/FINDINGS.md.
+
+## 2026-11-03 — switch row: case order, stride and record fields corrected
+
+`0x535EC0` moves from 218 to 231 matching bytes with object 1840 against native 1808, 25 relocations and status
+SIZE_MISMATCH; the binding is src/Develop/Units/m_alloc/GOLDTL.fcn_00535ec0.c with stored extent 1808, which the inventory
+also records. The first divergence is at offset 4, where native does `sub esp,0x304` and this build does `sub esp,0x280`,
+so the frame is 0x84 short and every epilogue and stack displacement inherits it. All the corrections that landed reduced
+the mismatch list, measured in sequence from 218 at object 1828 to 156, 162, 214 and finally 231 at 1840.
+Corrections kept: the case bodies were reordered to the native order 0x20, 0x19, 0x22, 0x24, 0x16, 0x30, 0x23, 0x17, 0x11,
+0x25, 0x26, 0x2e, 0x1e, 0x1f, decoded from the jump table at 0x53656c and the index table at 0x5365a8 with 14 real cases
+and index 14 as the default at 0x53655f, while the case set itself was already right; the slot-table stride in seven cases
+was 0x2f4 and became 0x21c as native has everywhere, from the `lea` chain of times three, times five, times nine then
+times four; case 0x20 was missing the store `buf+0x30 = 2` with the value 0x5f17; two 16-bit act record fields moved from
+buf+0x62 and buf+0x60 to buf+0x64 and buf+0x62 with values 0x1d76 and 0x1d6d, and the slot value is stored twice to
+buf+0x5c as native does at 0x6105 and 0x6138; the seat record value moved from buf+0x58 to buf+0x5c; case 0x23 uses a
+single `slot_off = g_774970*0x21c` because native keeps ecx live across the scan, with the found block inside the do-while
+so the exit falls through to return like 0x61ae; case 0x2e shares one slot_off between the seat byte at 0x7f4ca9 and the
+slot value, stores the slot value to buf+0x0c then buf+0x34, and moves the record fields after the scan as native does; the
+toggle in 0x1e is written `*p = *p == 0 ? 0x0f : 0`, which reproduces native's setne, decrement and and with 0xf where the
+inverted form produced neg and sbb; and the two slot-value stores share one value temporary because native loads once and
+stores twice. The only discarded attempt was a fourth permutation of the buffer declarations, which produced identical
+output.
+Beyond the frame, the remaining divergence is stack-slot assignment: native's buffers sit at esp 0xc, 0x120 and 0x218 inside
+a 0x304 frame with 0x88 of dead frame above act_buf, while this build has them at 0x80, 0x194 and 0x10 inside 0x280, and
+neither declaration order nor an unused 0x88 local changed it, since locals appear to be size-ordered rather than
+source-ordered. Two smaller items: case 0x20 spills the 16-bit slot index to [esp+0xc] and reloads it with `and 0xffff`
+where native keeps it in SI and does `mov ax,si`, and `m[0x8d] |= 0x10` compiles to a load, or and store rather than
+native's fused `or byte [eax+0x8d],0x10`, with the unsigned cast form making no difference. Every callee has a GOLDTL row,
+and the remaining unresolved relocation entries are compiler literals and local labels only. Backups under
+.scratch/row535ec0/ with baseline, v2a, v2b, v3 and final sources.
