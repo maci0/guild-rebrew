@@ -22797,3 +22797,24 @@ message structure has no usable padding member and the record and table only car
 live-range work does not free a slot. The pointer never receives a register here because ebx is reused as a loop counter in the
 selection fill, the filter, the float accumulation and the copy loops, so freeing it needs those loop shapes changed rather than a frame
 give-back.
+
+## 2026-11-03 — dispatch row: the thirty-byte shortfall is fully decomposed
+
+`0x4A9B20` keeps 426 of 1440 with object 1410 and 27 relocations, and the shortfall is now accounted for byte by byte rather than
+described as a range: four bytes from a conversion fold that this compiler cannot express, where the reference materialises a masked
+value and this build tests a narrower register; two bytes from the switch preamble, where the reference adds a negative constant and
+xor-zeroes a register while this build uses an address-forming load; thirteen bytes because the reference has a second return-zero
+epilogue reached from two sites, with the second block also serving the switch default, while this build tail-merges all six
+return-zero sites into one block; one alignment byte in the reference that the object does not need because its code is shorter; and
+ten bytes of tail padding inside the 1440-byte slice. That last group cannot be emitted from C, so the object tops out at 1430 even
+with all nineteen code bytes recovered, and the row cannot reach its extent.
+The thirteen and two are downstream of the conversion: the reference keeps the masked value live, so a register is free at the
+dispatch, the compiler zeroes it there and shares the xor-first tail. Every attempt to flip the tail merge without changing the
+conversion produced byte-identical objects. Five shapes were tried and reverted, being a goto-based else, an explicit default return,
+an unsigned short local, a probe that stored the value into a field but changed the prologue, and seven flag variants, of which none
+moved the object past 1410 except the size and one optimise variants that shrank it.
+The tail itself was audited against the reference and found correct: the case table of 38 bytes and the jump table's 19 dwords are
+identical apart from relocation slots, all eighteen arm callees resolve in order, the five-argument push order and the 0x14 cleanup
+match, the five stores and both loops with a stride of four match, and no wrong access was found. The padding limitation is filed in the
+upstream checkout's docs/IDEAS-GUILD.md, since a row whose reference extent ends in alignment fill can never report a size verdict
+that reflects its code.
