@@ -22835,3 +22835,20 @@ The row also demonstrates an address ambiguity worth recording: the same VA exis
 checked before it is handed out, and the picker lists only size-mismatch and stub rows, which is how the rows below with no source at
 all were found: 0x5af320 at 11961 bytes, 0x5aacd0 at 9680, 0x4d8e20 at 7089, 0x46fb90 at 6176 and 0x48a4c0 at 6055, all STUB with no
 bound file.
+
+## 2026-11-03 — the rows without source are retired interior splits, not functions
+
+Two picks made from the bare row list turned out to be unusable in a way worth recording, because it explains a whole class rather
+than two mistakes. `0x52EEB7` has a GOLDTL record with extent 2130 and no bound file, and the arithmetic shows it is exactly the
+tail of an existing function: 0x52eeb7 plus 2130 equals 0x52f709, which is the end of the entry at 0x52ea30 with size 3289, and 3289
+minus 0x487 equals 2130. Its own metadata already retired the binding, with the reason that the split cut one routine at an internal
+branch target so the arm starts without a prologue, and the bytes confirm it: the first instructions test a global and branch, with a
+store into a frame the earlier arm established. Writing a standalone body there would be wrong by construction rather than merely
+unmatchable. The recommendation is to leave the row alone or restore the split as an interior label inside its owner, which is a
+metadata-ownership decision and was not taken.
+A second pick, `0x49B7E0`, does not exist as a row in either target and is not even an entry start: it lies inside a function whose
+bytes place it mid-instruction, and the containing row already matches 611 of 611 with four validated relocations. Its apparent call
+target defect is a relocation placeholder, whose zero addend disassembles as the following instruction, so it must not be fixed.
+The class is therefore clear: the unbound GOLDTL rows are retired interior splits left over from earlier boundary work, not
+unreconstructed functions, and only rows that are entry starts with a bound file are workable. The picker now filters for a bound file,
+a size-mismatch status, the GOLDTL module and game-band addresses, which leaves 939 rows.
