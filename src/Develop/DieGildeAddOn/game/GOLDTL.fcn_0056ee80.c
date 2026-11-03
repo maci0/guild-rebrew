@@ -1,6 +1,6 @@
 #include <string.h>
 
-#pragma intrinsic(memcpy, memset, strcpy, strlen)
+#pragma intrinsic(memcpy, memset, strcpy, strlen, strcat)
 
 extern char g_7f4c00[];
 extern char g_7f4ca0[];
@@ -85,28 +85,28 @@ void __cdecl fcn_0056ee80(char* a0)
 	i = 0;
 	count = 0;
 	switch (*(int*) (a0 + 0x70)) {
-	case 0:
+	case 0: {
+		int e;
+
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
 		if (rec1 == 0) {
 			goto tail;
 		}
 		for (cnt = 0; cnt < 8; cnt++) {
 			if (*(int*) (a0 + 0x8c + cnt * 4) != -1) {
-				ent = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + cnt * 4));
-				if (ent != 0) {
-					fcn_00529160(rec1, 0, *(unsigned short*) ent, (int) a0);
+				e = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + cnt * 4));
+				if (e != 0) {
+					fcn_00529160(rec1, 0, *(unsigned short*) e, (int) a0);
 					fcn_004c5c80(*(int*) (a0 + 0x8c + cnt * 4));
 					fcn_004c5da0(*(int*) (a0 + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 1, s_6a6dc4);
 				}
 			}
 		}
-		*(int*) (a0 + 0x52) = *(int*) g_7f4c00;
-		*(int*) (a0 + 0x56) = *(int*) (g_7f4c00 + 4);
-		*(int*) (a0 + 0x5a) = *(int*) (g_7f4c00 + 8);
-		*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) (g_7f4c00 + 0xc);
+		memcpy(a0 + 0x52, g_7f4c00, 14);
 		fcn_00500bb0(a0 + 0x52, 0, 4, 0);
 		*(int*) (a0 + 0x70) = 1;
 		return;
+	}
 	case 1:
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
 		i = 0;
@@ -119,19 +119,13 @@ void __cdecl fcn_0056ee80(char* a0)
 			}
 			i++;
 			if (i >= 8) {
-				*(int*) (a0 + 0x52) = *(int*) g_7f4c00;
-				*(int*) (a0 + 0x56) = *(int*) (g_7f4c00 + 4);
-				*(int*) (a0 + 0x5a) = *(int*) (g_7f4c00 + 8);
-				*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) (g_7f4c00 + 0xc);
+				memcpy(a0 + 0x52, g_7f4c00, 14);
 				fcn_00500bb0(a0 + 0x52, 0, 0, 1);
 				*(int*) (a0 + 0x70) = 2;
 				return;
 			}
 		}
-		*(int*) (a0 + 0x52) = *(int*) g_7f4c00;
-		*(int*) (a0 + 0x56) = *(int*) (g_7f4c00 + 4);
-		*(int*) (a0 + 0x5a) = *(int*) (g_7f4c00 + 8);
-		*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) (g_7f4c00 + 0xc);
+		memcpy(a0 + 0x52, g_7f4c00, 14);
 		fcn_00500bb0(a0 + 0x52, 0, 4, 0);
 		return;
 	case 2:
@@ -152,10 +146,7 @@ void __cdecl fcn_0056ee80(char* a0)
 			*(int*) (a0 + 0xb8) = *(int*) (h + 4);
 			*(int*) (a0 + 0xbc) = *(int*) (h + 0xb0);
 			*(int*) (a0 + 0x70) = 3;
-			*(int*) (a0 + 0x52) = *(int*) g_7f4c00;
-			*(int*) (a0 + 0x56) = *(int*) (g_7f4c00 + 4);
-			*(int*) (a0 + 0x5a) = *(int*) (g_7f4c00 + 8);
-			*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) (g_7f4c00 + 0xc);
+			memcpy(a0 + 0x52, g_7f4c00, 14);
 			return;
 		}
 label_1bc:
@@ -171,10 +162,7 @@ label_1bc:
 			}
 		}
 		*(int*) (a0 + 0x70) = 5;
-		*(int*) (a0 + 0x52) = *(int*) g_7f4c00;
-		*(int*) (a0 + 0x56) = *(int*) (g_7f4c00 + 4);
-		*(int*) (a0 + 0x5a) = *(int*) (g_7f4c00 + 8);
-		*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) (g_7f4c00 + 0xc);
+		memcpy(a0 + 0x52, g_7f4c00, 14);
 		fcn_00500bb0(a0 + 0x52, 0, 0xf, 0);
 		return;
 	case 3:
@@ -287,7 +275,7 @@ label_1bc:
 		fcn_0050c5d0((char*) rec1, req);
 		val = (int) (*(int*) req * g_665ed0);
 		io_FormatTextBuffer(str, 0x68bea4, val);
-		strcpy(msg, str);
+		strcat(msg, str);
 		fcn_004c5150(*(int*) (ent + 4), *(int*) (row + 4), g_773d75, val);
 		fcn_004c4510(rec1, *(int*) (rec1 + 1));
 		fcn_004c4670(4, 1, 0x69, &val);
@@ -303,7 +291,7 @@ label_1bc:
 							cnt = 1;
 						}
 						fcn_0064d41a(str, s_68be9c, cnt, *(int*) (*(int*) q * 8 + 0x14a79c0));
-						strcpy(msg, str);
+						strcat(msg, str);
 						fcn_004c51f0(*(int*) (i + 2), *(int*) (h + 2), *(int*) q, cnt, g_773d75, strlen(msg));
 						val = (int) (fcn_0050bb50(*(int*) q, g_773d75) * cnt + val);
 					}
@@ -319,7 +307,7 @@ label_1bc:
 		}
 		if (*(char*) (ent + 2) == 6 || *(char*) (ent + 2) == 7) {
 			io_FormatTextBuffer(buf, 0x1a85, *(unsigned short*) row, rec1);
-			strcpy(msg, buf);
+			strcat(msg, buf);
 			he_MessageBoxQuickjump(*(int*) (ent + 4), *(int*) (ent + 4), msg, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
 		}
 		if (*(char*) (row + 2) == 6 || *(char*) (row + 2) == 7) {

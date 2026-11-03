@@ -23127,3 +23127,22 @@ The remainder is register allocation: the reference keeps the loop index in esi 
 instruction and the divergence cascades through temporary choices, an increment that the reference performs in place where this build loads, decrements
 and stores, and store scheduling. Six shapes were measured and reverted, being five index declaration variants that all reproduce 967 and one
 store-order rewrite that drops to 362 with an object of 3868. The row is parked as allocation-bound with that evidence rather than a shape list.
+
+## 2026-11-03 — message row: three copy and scope repairs, judged by drift rather than match
+
+`0x56EE80` keeps 820 of 3556 with the object at 3548, six drift windows and a net end drift of minus ten, where the baseline had twelve windows and
+a net drift of minus 124. Three repairs were taken from the reference bytes. The three string appends were written as copy calls, which this
+compiler emits as a byte loop, while the reference contains the two-scan append shape, so they are now append calls and the gap events fall from
+305 to 257. Five scalar stores that build a fourteen-byte block were replaced by a single block copy of that size, which is the shape the
+reference has, taking the windows from sixteen to eight. And the case-zero result now lives in a block-scoped local so it stays in the accumulator
+the way the reference does instead of spilling, which takes the windows from eight to six, makes the frame 0x7f4 in both, and puts the counter at
+the same slot.
+The matched byte count falls from 844 to 820 while the windows and the drift improve, so this is a case where the positional signal and the
+structural signals disagree and the structural ones win, with the numbers recorded. One arithmetic grouping was measured and reverted: the
+reference computes a product in floating point and truncates, while the source multiplies integers first, and rewriting it opened the surrounding
+window and dropped the match to 708.
+Thirteen defect classes were checked against the reference bytes and the rest came back clean, covering call targets and cleanup amounts at seven
+sites, argument order at eight call families, the row stride constructed through three scales, five array widths proven from the frame, three
+duplicated pointer-walking scans, conversion sites inside their branches, comparisons against element values rather than addresses, both loop
+bounds, twelve record offsets, and the minus-one sentinels. The first remaining divergence is a slot assignment for one loop counter that sits
+twelve bytes higher than the reference while the frame sizes agree, so the object length and the drift are the meaningful measures on this row.
