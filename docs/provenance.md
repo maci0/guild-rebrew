@@ -24433,3 +24433,19 @@ the byte count stayed near eighty, and the final step traded one apparent window
 carried is a proven conversion fix. The remaining differences are frame and register assignment: the reference keeps a pointer in one callee-saved register and carries
 eight more bytes above one array and eight fewer below it, so the first divergence is a load into one register rather than another at byte zero. That class stays open and
 was not guessed at.
+
+## 2026-11-03 — event row placement: six missing masks were the gap, and the cross-jump pair will not move
+
+`0x5B3B60` moves from 1146 to 1312 matched bytes with the object at 2291 against the 2293 extent, and two landmarks now land exactly on their reference offsets. The whole
+gain comes from six call sites where the reference masks a random argument to sixteen bits after the call and the source passed the raw value, so six instructions were
+missing and the branches after them sat early. Masking both arguments at those sites puts the fourth and sixth item branches at the reference offsets.
+The placement question is answered negatively and that answer is the useful result. The compiler pairs the first and fourth item tails in this build where the reference
+pairs the first and fourth differently: the reference gives the shared finish copy the accumulator form of the address computation and the first item the other register,
+while this build gives the first item that form and the second item the shared one, exactly reversed. That single register choice decides which two tails merge. Nine
+shapes were measured, including chain reorder, condition inversion, store reorder, hoisting and a dropped duplicate; none moved the pair, and the chain reorder proved the
+compiler emits these branches in source order rather than reordering them. Two shapes are recorded as byte-identical no-ops rather than kept as changes.
+One claim in the brief used to drive that pass was wrong and is corrected here: the reference does not test the items in a different order from the source. Its comparison
+order is exactly the source's, and the machine code confirms the compiler does not reorder the chain. A switch is not expressible for this row either, because the
+discriminators are runtime item handles rather than integer constants, and a switch would add a comparison chain before the switch and move the first divergence.
+What remains is register allocation around the loop header and one reload inside a loop, not field offsets: the first divergence at reference 0x13a is a sunk zero on the
+latch paths, and the last two bytes of drift are a register restored after the loop instead of inside it.
