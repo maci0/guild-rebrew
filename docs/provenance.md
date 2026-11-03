@@ -21106,3 +21106,34 @@ scalars in native order changes no byte. Hoisting `if (s1C == 0) break` out of t
 are unported: the prologue count handling, where native stores the count to slot 0x44 twice at 0x348 and 0x375 while the
 source keeps a separate `k`, and `s00 = &mid[0x3c]`, which native keeps in slot 0x10 against this build's 0x14, plus the
 extra `mov ebp,edx; jmp` loop entry. Kept copy at .scratch/4da690/r13/r13_final_1489.c with notes in r13_NOTES.md.
+
+## 2026-11-03 — d2 row: slots are not addressable and the loop shape was misread
+
+`0x4DA690` keeps 1489 at object 7020 with prefix 0x31f and an unchanged source; three findings change the plan for this
+row. First, slot layout is not addressable and therefore cannot be iterated: probes in .scratch/4da690/r14 where one int
+declaration list is reversed, where eight separate int statements are reversed, and where the same declarations keep their
+order but the assignment order swaps show the first two compile to byte-identical text while only the assignment-order
+change differs, so stack slots follow the generated body alone. Reordering all sixty declarations is the same negative and
+adding locals moves the frame instead, with two addressed ints taking the prefix to 0x2, so "iterate the scalar set with
+the frame held at 0x900" has no lever: a slot moves only when the whole function's liveness moves. Second, the count
+handling was already native: keeping the count in s44 and dropping `k` produces an object byte-identical to the baseline,
+and native storing the count to one slot twice at 0x348 and 0x375 matches the object storing at 0x348 and 0x378, so the
+earlier claim of a second slot is not in the object and the item is closed. Third, the row's loop shape is already native's
+and the e4 variant is the wrong shape: native's per-row back edge is `jl 0x4dae03`, offset 0x773, which is the s1C load
+and test, while 0x77f is the body entry rather than a branch target, and the object back-edges to its own s1C load and test
+at 0x788. Both test s1C on every row, so `if (s1C == 0) break;` at the top of the do loop is correct and the e4 hoist
+contradicts native; e4 also costs 92 matched bytes and improves the slot-blind body score only from 1314 to 1317 aligned
+instructions, so it was reverted.
+Sizes bracket the target without prefix growth: the baseline is 7020, e4 is 7065 and a variant that recomputes `s00` at the
+head without the incremental add is 7049, with native 7057 between the last two; all failed the keep rule and were
+reverted, with that variant kept at .scratch/4da690/r14/c3_loop_recompute_s00.c. The slot-blind score shows where the body
+really differs: 1975 native instructions against 1972 in the object with shape similarity 0.666 and 1314 aligned, and all
+large gaps sit in the second packet pass, where native 0x170a to 0x1892 of 113 instructions has 1 in the object, the
+object's 0x15c7 to 0x17bd of 138 has none in native, native 0x1668 to 0x16fc of 40 is missing, the object's 0x148c to
+0x1595 of 70 is extra and native 0x1995 to 0x1a50 of 51 has 1. That region therefore does not merely run 41 bytes over;
+it holds two relocated blocks of roughly 110 instructions, and the epilogue figure is polluted by the escape block at
+object 0x1b01 to 0x1b63 which native has nowhere. The next round should drive the body to native shape and stop chasing
+slots, since the prefix only moves once the allocator sees a near-native body, and should use the slot-blind score as its
+metric rather than the prefix. Tools added: fslots.py to list every reference to one folded frame slot, slotmap.py to learn
+the object-to-native slot map from a shape-blind alignment, and score.py to print the slot-blind body score with its
+mismatched regions.
