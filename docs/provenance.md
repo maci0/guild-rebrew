@@ -23357,3 +23357,27 @@ remaining window is a cleanup loop and a display call.
 A proven defect outside this row's path is recorded for a follow-up: a coordinate structure in src/client_types.h is declared with three integers and a short,
 but the two functions that read it take a word at offset four, a dword at offset six and a dword at offset ten, which the declared layout cannot produce. The
 finding is byte-neutral for this row, so it was not applied here; it needs its own pass with the affected readers and the type binding checked.
+
+## 2026-11-03 — model row: a pointer parameter that is a float pointer
+
+`0x585910` moves from 1786 to 3224 matching bytes and from SIZE_MISMATCH to NEAR_MATCHING, with the object exactly at the 3288 extent and 64 mismatched bytes
+left where there were 1505. The decisive repair is a prototype: a callee's third parameter is a float pointer rather than an int pointer, and the caller's local
+must therefore be a float. The evidence is the callee's own body, which writes through that parameter as a float quotient, so the caller was passing an
+integer address to a routine that stores a float into it. Closing that window alone took the mismatch from 1505 bytes to 93.
+Three smaller repairs followed. The element-value argument reads the float out-parameter rather than re-loading a field from the source structure, which the
+reference shows by loading the out-parameter. One sentinel assignment moves before a zeroing call so the compiler emits the constant before the count, as the
+reference does. And a loop's counter and pointer are initialised and incremented in the order the reference schedules them, which the source's combined
+increment did not produce.
+Every one of the 121 call targets and their pushed argument sequences match, and no other defect class was proven; the frame matches at 0x240. The first
+remaining divergence is a local slot four bytes higher than the reference, and the remaining 64 bytes are ten bytes of deferred stack adjustment after a
+text append, twenty-five bytes of x87 multiply operand order at three sites where the source order was byte-neutral, and single-byte stack displacements that
+follow from the first.
+
+## 2026-11-03 — a missing data row for a global referenced thirty times
+
+A row pass noticed that the address 0x100b0ac is referenced thirty times in the project but has no data row: the neighbouring row at 0x100b0a8 is four bytes and
+the next row starts at 0x100b0c0, so the address falls in an unowned gap and every reference showed as an unresolved relocation.
+The evidence for its extent and type is in the sources that use it: one function declares it as an integer and loops a count up to it three times, another
+compares it against zero, and a third writes zero to it through an integer pointer. A data row was created through the metadata CLI at that address, four
+bytes, typed as an integer, named as its users already name it, with object storage, guarded by the reviewed digest. The lint passes with no errors
+afterwards.

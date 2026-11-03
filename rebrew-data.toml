@@ -34868,3 +34868,12 @@ file = "stubs/goldtl/symbol_stubs.c"
 kind = "GLOBAL"
 updated_by = "data"
 updated_at = "2026-11-03T05:06:41+00:00"
+
+["GOLDTL.0x0100b0ac"]
+storage_kind = "object"
+type = "int"
+name = "g_100b0ac"
+size = 4
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T14:35:29+00:00"

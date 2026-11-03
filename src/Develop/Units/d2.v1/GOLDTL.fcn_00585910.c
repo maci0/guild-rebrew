@@ -39,7 +39,7 @@ void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
 
 void* __cdecl fcn_004ec7d0(unsigned char*);
-int __cdecl fcn_004ecf00(char*, int*, int*, int);
+int __cdecl fcn_004ecf00(char*, int*, float*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
@@ -71,7 +71,7 @@ void __cdecl fcn_00585910(char* e)
 	char buf[0x100];
 	int prev;
 	int stamp;
-	int frac;
+	float frac;
 	int owner;
 	int item;
 	int ids[10];
@@ -85,8 +85,8 @@ void __cdecl fcn_00585910(char* e)
 	src = *(int**) (e + 0x65);
 	prev = fcn_004ecf00(e, &owner, &frac, 0);
 	stamp = g_6b7fac;
-	memset(ids, -1, 0x24);
 	g_100f1dc = -1;
+	memset(ids, -1, 0x24);
 	ids[0] = fcn_00470820(0, 0, g_6a93c0);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(ids[0]);
@@ -169,7 +169,7 @@ void __cdecl fcn_00585910(char* e)
 			((Ctl*) g_1015ea0)[item].x18 = ((Screen*) g_77255c)->xc;
 			((Ctl*) g_1015ea0)[item].x6c = 1;
 			fcn_00472900(item, 0x54);
-			d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * g_662cf8));
+			d2_SetElementValue(ids[2], 0, 0x64, (int) (frac * g_662cf8));
 		}
 		if (sel != prev || g_6b7fac > (unsigned int) (stamp + 0x32)) {
 			data = fcn_004ec7d0((unsigned char*) e);
@@ -228,15 +228,13 @@ void __cdecl fcn_00585910(char* e)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			p = &ids[5];
-			for (i = 0; i < 4; i++) {
+			for (i = 0, p = &ids[5]; i < 4; i++, p++) {
 				if (*p == g_67d370) {
 					fcn_00471af0(ids[0], 0);
 					fcn_005865f0(e, src, i);
 					fcn_00471af0(ids[0], 1);
 					g_67d370 = -1;
 				}
-				p++;
 			}
 			if (g_67d370 == ids[4]) {
 				fcn_00471af0(ids[0], 0);
