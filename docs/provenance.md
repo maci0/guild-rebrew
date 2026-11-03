@@ -22852,3 +22852,17 @@ target defect is a relocation placeholder, whose zero addend disassembles as the
 The class is therefore clear: the unbound GOLDTL rows are retired interior splits left over from earlier boundary work, not
 unreconstructed functions, and only rows that are entry starts with a bound file are workable. The picker now filters for a bound file,
 a size-mismatch status, the GOLDTL module and game-band addresses, which leaves 939 rows.
+
+## 2026-11-03 — the row picker was parsing the store wrongly
+
+The mis-picks above have a mechanical cause, and it is mine. The throwaway picker read the functions store with a record pattern that
+did not match the file's actual headers, so it never opened a record at all and instead accumulated keys across unrelated lines. That is
+why rows looked unbound, why sizes were stale values taken from history blocks, and why a GOLD row could appear in a GoldTL list: the
+tool was reporting whatever the last stray key happened to say. After fixing the pattern to the real header form and requiring a bound
+file, a size-mismatch or stub status, the GoldTL module and an inventory entry start, the picker reports 988 workable rows, and the
+first entries are the rows this session has already been working, so its output is now consistent with what the store says.
+Two stale-metadata facts were also confirmed while checking one pick: `0x4e2b70` has an inventory extent of 1199 rather than the 1733
+recorded against a pre-correction snapshot, and it already has a bound source whose body measures 588 of 1270 against that 1199
+reference, so it is an in-progress reconstruction rather than a missing one. Its stored blocker text likewise still quotes 1212 against
+1199 while the object is 1270. The lesson applied from here: a row is only handed out after the picker confirms its status, module,
+bound file and inventory presence, and the numbers in a brief come from that fresh read rather than from a record written earlier.
