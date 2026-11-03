@@ -24754,3 +24754,16 @@ Nine classes were checked and eight are clean: argument order at every site, com
 and frame layout, the table stride, the masked value and the overlaid buffers. The object is four bytes over the trimmed extent, and the breakdown is known: nine bytes
 from an unmerged case-four tail suffix, six bytes saved back by three packet copies that are each two bytes short, and four bytes of code and table alignment. The suffix
 merge is the only remaining size lever and could not be forced from source.
+
+## 2026-11-03 — the constant hoist is not reachable from source, proved three ways
+
+The lever recorded for `0x50EE80` was chased and closed. Four source shapes were tried and three of them compile to byte-identical text: division by one, per-arm
+temporaries that are then copied into the state variable, and a cast through an unsigned short. The fourth, moving the state assignment below a loop, made every metric
+worse and still hoisted the constant at the same address. So the compiler reaches one constant node from every preserving spelling and folds it.
+A diagnostic settles the cause rather than leaving it inferred. Changing four of the eleven literal-one call arguments to zero, which breaks the semantics and was never
+kept, still produces the hoisted move at function entry and still leaves the pointer out of the register the reference uses it for. That rules out use count and spelling:
+the allocator's decision is set by that constant being live across the outer loop's back edge, where the loop head pushes it, and that liveness evicts the pointer from the
+register and leaves the second pointer with no home at all. The reference's own use of a register for the same constant sits inside one block, which is the same pass making
+a block-local choice.
+The row is restored and re-measured at 185 of 2277 with the object at 2277. The conclusion recorded is that source cannot express keeping a constant as an immediate, so this
+row needs a different approach than point editing: either the loop's shape has to change so the constant is not live across the back edge, or the row stays parked.
