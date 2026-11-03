@@ -23617,3 +23617,11 @@ are written, where the source assigned the pointer itself. And two calls passed 
 All seven call targets were verified against the reference and none is wrong, and the output buffer that aliases the slot array is modelled from the reference's own
 argument address, which brings the frame to 0xe0 with the same offsets as the reference. The remaining divergence is the prologue: the reference takes the argument
 in ebx while this build uses another register, because the allocator hoists a constant into ebx, which no source experiment reached without breaking the tail.
+
+## 2026-11-03 — the picker's paths were truncated, so one brief carried an invented path
+
+A row brief named a source file that does not exist. The row itself is real and the address matches the store and the inventory, so the run continued against the file
+the store actually binds, which is a different path in a different directory. The cause is the row picker: it printed each candidate's path truncated to its last
+fifty characters, and a truncated path cannot be reconstructed, so the brief was written by guessing the missing prefix. The picker now prints every path whole, so
+a brief can quote the store verbatim. This is the same class of mistake as naming addresses from memory, and it has the same fix: quote the tool's output instead
+of reconstructing it.
