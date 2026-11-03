@@ -23972,3 +23972,19 @@ kept for correctness.
 Two variants were reverted for losing matched bytes, a ternary form and a clamp. The first divergence is the frame, sixteen bytes short, with the reference keeping
 six zeroed stack slots against this build's five, so one more value is live at entry in the original source; the message and buffer offsets match and the reference
 has more slack above the buffer. Five windows remain, each an insert or a replace of tens of instructions.
+
+## 2026-11-03 — spawn row: a one-hundred-and-thirty-one-byte stub transcribed into the body
+
+`0x511C60` had 131 bytes of object code and 13 matching bytes; it now has 2654 bytes and 354 matching bytes, with the first twenty-nine bytes of the function exact.
+The body was written in address order: the prologue with a fifty-integer table initialised in the reference's emission order and six shuffles, a frame-wide zero of the
+entry array and a shift loop that rebuilds each table entry from the next plus a random remainder, a player scan over a 768-slot table with a cap of twelve, an
+identifier fill with six more shuffles feeding a spawn routine, a first spawn loop with two arms, threshold setup and the main entity loop including records, scaled
+random arguments through a conversion, packet calls, a type switch and wait loops, a selection and pairing loop, and a final spawn loop with a return of one.
+The staged measurements are recorded because they show what each correction was worth: the first full pass with a natural array initialiser gave 391 matched bytes with
+the body smaller than the extent, the decompiler-informed version with the table as one fifty-integer array and the thresholds as its last twenty elements gave 225 at
+2697 because the first divergence moved from offset 7 to 29, sharing the type switch's wait gave 225 at 2651, and moving a counter's initialisation into the sequence
+where the reference emits it gave 354 at 2654.
+The first divergence is register allocation, not statement order: the reference gives the counter one callee-saved register and the constant sixteen another, so its
+zeroing and its push sit earlier than this build's, which assigns them the other way round; four placements of the initialisation all produce the same result. The
+object is seventy-seven bytes over the extent, most of it in the final spawn loop where this compiler emits a larger form than the reference, and that was left alone
+rather than trimming matched code.
