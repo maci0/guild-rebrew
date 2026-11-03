@@ -23738,3 +23738,17 @@ the fix needs the original variable set, which the export over-declares. Sixteen
 loop forms, branch orders, the comparison forms, the constant-versus-pointer globals, a scan the reference really does perform twice, and a dead pair of stores the
 reference keeps. Two codegen-only differences remain and are labelled: the reference reloads a field per use and pops the floating-point stack where this build
 eliminates both.
+
+## 2026-11-03 — d2 row: a copied body that belongs to another function
+
+`0x5C18E0` keeps 146 of 2753 with the object at 2489, and the change removed 121 lines that were a verbatim copy of a different function's body. The proof is a
+callee histogram: the copied region calls eight routines, and none of them appears anywhere in the reference's 754 instructions, while the reference restores the
+frame and tail-jumps to 0x532ef0, a 409-byte function with its own source file whose body is exactly the code that had been copied in. The region is now a single
+call to that function, and the compiler emits the same restore, adjust and jump shape as the reference.
+Every structural measure improves: divergence windows close from sixty to seventeen with none opened, events fall from 239 to 185, replacements from 106 to 86, gaps
+from 98 to 75, insertions from 20 to 13 and deletions from 15 to 11. The positional count falls from 164 to 146, and the compared window also changes because the
+object is now shorter than the extent, so the two numbers are not measuring the same span; the structural and semantic evidence is kept and both are recorded.
+The row is not close to matching by any narrow patch: its frame is 340 bytes short of the reference and its middle is about seventy-five reference instructions
+off, distributed rather than a single missing block, so it needs the local layout and the divergent blocks rebuilt from the reference. One residual is recorded
+rather than guessed: a local is assigned from another local that is never set, where the reference reads the second dword of the block passed to a call, which
+needs a structure type rather than a scrape.

@@ -425400,7 +425400,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005c18e0".verification]
-source_hash = "0db7ed748c5f12431a75080d40083b152df531987d7be7d463b9baad2a9f4cd8"
+source_hash = "cf6253fe66f227c2312fbd84402335cb3ff2dfaf2b2a2d6b6a416677eeb22a14"
 reference_hash = "fb463f66bb7a46cef62c28ff0ccaaef680ae915514943c60b93ef6700bf6d8fc"
 reference_size = "2753"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -425411,10 +425411,10 @@ module = "GOLDTL"
 va = "0x5c18e0"
 context_hash = ""
 defines = "[]"
-input_hash = "3b690024cfeda5098bb7725b4d561e1bf3867383ff1266e91ecc8cc84e8abd35"
+input_hash = "dea5f5a5218b27100d370b3708bc18bad80f6a181e908179956c7d6c7bd828bc"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T16:19:24+00:00"
+measured_at = "2026-11-03T16:27:27+00:00"
 
 [["GOLDTL.0x005c18e0".status_history]]
 old_status = "STUB"
@@ -475205,21 +475205,21 @@ blocker = "Faithful body written from the true-entry pdg plus 788-instruction di
 blocker_delta = 206
 
 ["GOLDTL.0x00483f20".verification]
-source_hash = "bae43c8df7fc954e0ceb55e8b7568cd8d72d1426e62fe9b9278702d8b1dbf197"
+source_hash = "bce522c4b035026692be8ec49ffb419be2f1008df61174050d62ee864702c1b4"
 reference_hash = "7643b541f3204605bb8dde7087839fb4ad7e595c1132b7896e6c3c799512a794"
 reference_size = "2694"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "0e8a99954f54c9a4a83e18dc30c2c78d371ee084f27f0d787482cfc91082426c"
+compiler_hash = "65a1000bf28aa2b83554b7df27aa95b5e00a20caca95c781df314ebdfa19993e"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x483f20"
 context_hash = ""
 defines = "[]"
-input_hash = "abb5966354543d349f8620014d3f58ff1e00fb261aa55b175aff99ec2c377cd5"
-writer = "verify"
+input_hash = "10f68fb3307b7b5b0463004dee14d9112930ab02a14bca3dc33b5079d8e4895a"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-02T07:45:55+00:00"
+writer = "test"
+measured_at = "2026-11-03T16:31:22+00:00"
 
 [["GOLDTL.0x00483f20".status_history]]
 old_status = "STUB"
