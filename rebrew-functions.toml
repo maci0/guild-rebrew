@@ -476358,17 +476358,17 @@ source_hash = "00f4cdbf65e3a3bbb9851cc27902a8746ea25230c17cd4d015663bf6abe80fc1"
 reference_hash = "849791c6525d0e5864aa13360eadcb8ddf36fa4d9b25e099736cc0614c0074bd"
 reference_size = "3610"
 headers_hash = "c23ebdf26082c3b8224e5d244740b71b635b44c55fd86df34e59c897a87797df"
-compiler_hash = "7abcb079717a76f6d448fa4f910ea5f9116c386c77fd93b0df08395841ecd51f"
+compiler_hash = "ee2a7ba71128a7a5f141c89ff77ffafa305188730195a02693d575d0c24e4133"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x512ee0"
 context_hash = ""
 defines = "[]"
-input_hash = "a53d02ac85051089df8a4f18a0addf9bc79abde84eda13b33bf63ff515eefc8d"
+input_hash = "6272ece2a77698ee0df74c49ecad29708d1496e52ee4fe4af8ab2b45713be392"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-02T21:38:45+00:00"
+measured_at = "2026-11-03T13:46:38+00:00"
 
 [["GOLDTL.0x00512ee0".status_history]]
 old_status = "STUB"
@@ -604542,7 +604542,7 @@ blocker = "SIZE_MISMATCH, obj 4008 vs native 3794 (+214), match 290/4008, 9 relo
 blocker_delta = 214
 
 ["GOLDTL.0x005b7880".verification]
-source_hash = "4979f5e99282a8d4e1cd70e24adcd3fdd2b09f60ccb75ce1595334ca76d04951"
+source_hash = "9f134ea09e6cbc1388b38c78ad28f6fa7045121cd65884deed9e185242ba3642"
 reference_hash = "066d956be0d2df38cf99af278fd7c9a2ffef443c532f49d0b236f55f25d3628b"
 reference_size = "3794"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -604553,10 +604553,10 @@ module = "GOLDTL"
 va = "0x5b7880"
 context_hash = ""
 defines = "[]"
-input_hash = "69f6d035e86f48016d0cf88e171ff44e403266fbe50614d35d767c8ab611508f"
+input_hash = "b9edef615cd791ac41c343648646fe09cc699ee29c33af20e2f840ab6adbc0df"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T13:44:16+00:00"
+measured_at = "2026-11-03T13:49:00+00:00"
 ["GOLDTL.0x0054ac70"]
 size = 1209
 file = "src/Develop/DieGildeAddOn/game/fcn_0054ac70.c"

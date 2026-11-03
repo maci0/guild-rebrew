@@ -23167,3 +23167,25 @@ One difference is recorded as open rather than repaired: the reference keeps thr
 branch into the other send, so the reference has one more site for three routines. The first divergence is the frame, 0x614 against 0x610, because the
 reference spills a pointer and reuses an argument slot where this build keeps the pointer in a register, and that four-byte difference drives the
 operand encoding of the rest of the body.
+
+## 2026-11-03 — shelter row: a missing guard pair, an array width and a guard inversion
+
+`0x5422C0` moves from 298 to 335 matching bytes with the object at 3459 against the 3510 extent, fifteen relocations and a final drift of minus 51
+against minus 144. Three repairs came from the reference bytes. A second temperature-delta guard pair on one record field was missing entirely, and
+restoring it accumulates into the same byte delta and closes most of the drift. The output array was declared with sixteen entries where the
+reference frame puts it at an offset that only twenty-one entries reach, ending exactly at the frame top, so the width is twenty-one and both the
+frame adjustment and the argument read now match. And the protection-type guard was inverted: the reference tests equality against 0x1e and falls
+through into one call before jumping to the other branch, while the source tested inequality with the bodies swapped, which was worth 34 matched
+bytes and shortened the object by 24.
+Fourteen classes were checked against the reference and the rest came back clean, with two further defects found and fixed in the process, an array
+width and a duplicated scan. The call targets agree as multisets apart from one routine the reference calls twice where this build merges two
+identical tails into one site. Everything is cdecl, and a single stack adjustment after an eight-and-four push pair is deferred caller cleanup rather
+than a different convention, while the indirect call through a global is stdcall in both because neither pops. Argument order and trailing constants
+agree at five call families, three index strides and a message base with two buffers ending at the output offset match, the conversion stays inside
+its branch, the scan compares a field value rather than an address, the double dereference matches, sentinel bounds precede their increments, and no
+record offset is wrong, a suspicion at one site having been a push-adjusted stack artifact.
+The first divergence is a slot assignment, where the reference keeps the count at 0x10 and uses 0x14 as a temporary while this build keeps it at
+0x14; the remaining windows are a mixture of undershoot and overshoot with the tail shorter than the reference because the loop keeps the count in a
+stack slot and the second index in a register where the reference keeps the count in a register and the index in another. One tooling fact is
+recorded again because it has misled readers: the trace object is refreshed only by the gap diagnostic, never by a test, so a session that reads it
+after only a test is reading the previous source.

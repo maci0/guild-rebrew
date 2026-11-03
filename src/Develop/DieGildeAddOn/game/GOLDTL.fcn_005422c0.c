@@ -66,7 +66,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 	unsigned char* r;
 	unsigned char* p;
 	unsigned char* slot;
-	int out[16];
+	int out[21];
 	int buf4[4];
 	unsigned char msg[0x2e8];
 	int count;
@@ -230,7 +230,14 @@ void __cdecl fcn_005422c0(unsigned int arg)
 	while (p != 0) {
 		if (*(unsigned short*) (p + 0x27) == (unsigned short) arg) {
 			tile = g_7f4ca0 + (*(unsigned short*) (p + 0x27)) * 0x21c;
-			if (*(lpGebaeudePROT + *p * 0x24d) != 0x1e) {
+			if (*(lpGebaeudePROT + *p * 0x24d) == 0x1e) {
+				r = (unsigned char*) fcn_004ec7d0(p);
+				if (r != 0) {
+					v = fcn_004ee160((char*) p);
+					fcn_004c51a0(*(int*) (r + 4), *(int*) (tile + 4), g_773d75, v);
+					count++;
+				}
+			else {
 				if (fcn_00505d00((char*) p, (int*) msg)) {
 					for (a = 0; a < 2; a++) {
 						for (j = 0; j < 12; j++) {
@@ -280,6 +287,24 @@ void __cdecl fcn_005422c0(unsigned int arg)
 										b1 = 1;
 									}
 									delta = (char) b1;
+								}
+							}
+							if (*(int*) (p + 0x41) < 100) {
+								if (fcn_0050f950(idx, *(unsigned short*) tile2) > -120) {
+									b1 = (*(int*) (p + 0x41) - 100) / 3;
+									if (b1 < 1) {
+										b1 = 1;
+									}
+									delta = (char) (delta + b1);
+								}
+							}
+							else if (*(int*) (p + 0x41) > 100) {
+								if (fcn_0050f950(idx, *(unsigned short*) tile2) < 100) {
+									b1 = (100 - *(int*) (p + 0x41)) / 3;
+									if (b1 < 1) {
+										b1 = 1;
+									}
+									delta = (char) (delta - b1);
 								}
 							}
 							if (delta != 0) {
@@ -352,13 +377,6 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					}
 				}
 			}
-			else {
-				r = (unsigned char*) fcn_004ec7d0(p);
-				if (r != 0) {
-					v = fcn_004ee160((char*) p);
-					fcn_004c51a0(*(int*) (r + 4), *(int*) (tile + 4), g_773d75, v);
-					count++;
-				}
 			}
 		}
 		p = (unsigned char*) gm_FindNextFilteredEntity();
