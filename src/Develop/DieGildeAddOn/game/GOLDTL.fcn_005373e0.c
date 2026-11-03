@@ -82,7 +82,7 @@ extern int g_6a3760;
 extern char g_7747ad;
 extern char g_774988[];
 extern int g_774980;
-extern int g_772e84;
+extern unsigned int g_772e84;
 extern int g_14ac5e8;
 #include "GOLDTL.fcn_005373e0_gconf.h"
 extern char g_5438c0[];
@@ -524,7 +524,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 	i = flags & 0x10000;
 	if (i == 0) {
 		if ((g_774654 == 0 && g_7e2700 == 0 && g_fb5744 != 0 && g_774960 == 0) ||
-			(g_14cbca0 == -1 && (unsigned short) g_7f4c04 >= 0x17 && g_774960 == 0)) {
+			(g_14cbca0 == -1 && (unsigned short) g_7f4c04 >= 0x17 && *(volatile int *)&g_774960 == 0)) {
 			if ((char) g_7747b0 >= 0) {
 				g_774960 = 1;
 				fcn_0042df30(g_538060, 1);
@@ -555,9 +555,8 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 		}
 		i = 0;
 		do {
-			s[i] = g_774988[i];
-			i++;
-		} while (s[i - 1] != 0);
+			buf[i] = g_774988[i];
+		} while (g_774988[i++] != 0);
 		g_774988[0] = 0;
 		fcn_005e41b0(s, buf);
 	}

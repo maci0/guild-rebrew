@@ -23480,3 +23480,18 @@ them is repair rather than reconstruction.
 Two further facts are recorded so later passes do not misread the store: a generic blocker line means no session has recorded work, not that the row is untouched,
 since files under those rows contain real bodies; and the twelve untested candidates above 2700 bytes remain the frontier, from 0x5a59d0 at 2962 down to
 0x5186c0 at 2756.
+
+## 2026-11-03 — form row: one byte from a full match
+
+`0x5373E0` moves from 2676 to 3070 matched bytes and from SIZE_MISMATCH to NEAR_MATCHING, with the object exactly at the 3071-byte extent and a single mismatched
+byte left. Four repairs did it, all proved against the reference bytes. The copy loop wrote the wrong local: the source stored into one buffer while the reference
+stores into another and passes the first at the call, so the destination is corrected and the call's argument pair now matches. The loop condition re-read the
+destination where the reference tests the byte it just loaded from the source, which the rewritten condition reproduces byte for byte. A global that the reference
+compares with an unsigned jump above is declared unsigned rather than int. And the second clause of a disjunction was being common-subexpression-eliminated into
+one load where the reference reloads the global for each clause, so a volatile reread reproduces the reference shape; that is recorded as a codegen device rather
+than a proven semantic defect, since it changes which of two behaviourally equivalent readings the compiler emits.
+The remaining byte is an opcode choice: the reference uses a sign jump where this build uses a less-than jump after a test, which sets the overflow flag to zero
+so the two are equivalent. Seven spellings were tried for it and all were rejected, including negations, unsigned casts, a signed char cast and a plain
+non-volatile reread, which regressed the row. Fifteen other defect classes were checked and the rest came back clean: every call relocation validates, the
+cleanup matches, the frame matches at 576, the sentinel store matches, and no wrong stride, guard, duplicated scan, hoisted conversion, pointer read or record
+offset was found.
