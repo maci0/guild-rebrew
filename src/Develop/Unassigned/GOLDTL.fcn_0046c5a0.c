@@ -18,7 +18,7 @@ extern int g_67d968;
 extern int g_6b23a4;
 extern int g_6b25b0;
 extern int g_772500;
-extern int g_772524;
+extern char* g_772524;
 extern int g_772530;
 extern int g_772554;
 extern int g_7725b4;
@@ -124,7 +124,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 	sv68 = g_7725f8;
 	g_102d024 = v38 - *(int*) (slot + 0x258);
 	sv70 = g_67d968;
-	g_1015ea4 = *(unsigned short*) (&g_772524 + 2);
+	g_1015ea4 = *(unsigned short*) (g_772524 + 8);
 	g_102d020 = xr;
 	g_772530 = 0;
 	i = 0;
@@ -534,7 +534,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				pal[7][0] = 0;
 				pal[7][2] = 0xc4;
 				pal[8][0] = 0x96;
-				if (d < 9) {
+				if (d == 9) {
 					g_7725b4 &= ~0x40;
 					i += 2;
 					continue;

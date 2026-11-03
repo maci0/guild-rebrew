@@ -20970,3 +20970,30 @@ bytes exist. A few applied four-byte identities land on ASCII-like dwords such a
 acceptable because the rows assert address identity only and claim neither type nor storage kind. A further 431 `.bss`
 exact-fit, unique, non-overlapping candidates exist but have no reference bytes and were left unapplied, so this pass
 stayed on the raw `.data` byte-corroborated route.
+
+## 2026-11-03 — palette guard corrected and a pointer dereference restored
+
+`0x46C5A0` now measures 855 of 6080 with object 6072, 169 relocations, structural ratio 0.9696 and lint clean. Two edits
+landed. The case 'F' palette guard at line 537 was `if (d < 9)` where native has `if (d == 9)`, which emitted a seven-byte
+`jge 0x46d499` against native's two-byte `jne 0x46d4db` with the `and al,0xbf` path as fall-through, and the corrected
+form emits `75 1d jne` with the same short encoding. The second edit is a correctness repair that costs match bytes: the
+source read `g_1015ea4 = *(unsigned short*)(&g_772524 + 2)` with a local `extern int g_772524`, which takes the address
+of the global slot and reads eight bytes past it, while native loads the pointer with `mov ecx,[0x772524]` and then
+`mov ax,[ecx+8]`, and the symbol is declared and assigned as a `char*` elsewhere, in GOLDTL.fcn_00472880.c. The type is
+corrected to `extern char*` and the read to `*(unsigned short*)(g_772524 + 8)`, which drops the positional match from 938
+to 855 and moves the object from 6068 to 6072, and it is kept because a wrong memory read is not an acceptable trade for
+matched bytes.
+The remaining gap is the register and stack-slot assignment that the blocker names, confirmed rather than re-litigated:
+the first divergence is at offset 12, native `push esi` against this build's `push ebx`, with native holding the slot in
+esi, the zero in edi and the temporary in ebx where this build rotates those roles, and the prologue zero-store order and
+a missing [ebp-0x34] spill follow it, while the palette frame base at -0x50 against native's -0x58 is a uniform eight-byte
+shift with a faithful relative layout. A third candidate was measured in scratch and not applied: native re-reads
+[slot+0x3c] twenty-two times where the source caches `t` and the object does it eight times, an inline-field variant gives
+seventeen reads and a function end at 0x46dcb5 against native's 0x46dcac with masked equal bytes at 193 against 251, so
+it trades match for size. Body statements were otherwise checked out against the listing: frame 0x6f8, the palette store
+order, the '-' and '~' wrap search, the `cmp eax,0x4800` table indirection, the 3*span 'T' geometry, the call argument
+constants and the `_isctype` and `1 < g_6b25b0` shapes. None of the sixteen game callees lacks a row, so no prototype was
+added; the library calls are memset 0x64d530, strncpy 0x64d740, strchr 0x64e790, sprintf 0x64d41a, _isctype 0x64efb1 and
+d2_GetResourceData 0x466190, and 17 relocations stay unresolved for lack of a project VA binding, with standard prototypes
+kept and no header or store touched. Instruments in .scratch/g46c5a0b/ with patch.py, cmp5.py and the base and final
+objects.
