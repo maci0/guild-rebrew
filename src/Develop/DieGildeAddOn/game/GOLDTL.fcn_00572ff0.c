@@ -45,7 +45,7 @@ void __cdecl fcn_00572ff0(char* a)
 	char* r;
 	char* r2;
 	char* tmp;
-	short* ps;
+	unsigned short* ps;
 	int* pi;
 	int n = 0;
 	int i;
@@ -112,7 +112,7 @@ void __cdecl fcn_00572ff0(char* a)
 	}
 	found = 0;
 	i = 0;
-	ps = (short*) (a + 0xd6);
+	ps = (unsigned short*) (a + 0xd6);
 	while (i < n) {
 		if (ps[-3] != 0 || ps[0] != 0) {
 			found = 1;
@@ -124,15 +124,15 @@ void __cdecl fcn_00572ff0(char* a)
 		}
 	}
 	if (!found) {
-		e2 = fcn_00502cd0(*(int*) (pktA + 0x5d), 2, 6, 0, 0x2a);
+		e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
 		if (e2 == 0) {
-			e2 = fcn_00502cd0(*(int*) (pktA + 0x5d), 2, 6, 0, 0x116);
+			e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x116);
 		}
 		if (e2 != 0) {
 			r = fcn_00502cd0(*(int*) (q + 0x14), 1, 5);
 			while (r != 0) {
 				*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (e2 + 2),
-				    *(int*) (q + 2), *(int*) r, *(int*) (r + 0xe),
+				    *(int*) (q + 2), *(unsigned short*) r, *(int*) (r + 0xe),
 				    g_773d75, 0);
 				r = gm_NextEntityQueryMatch();
 			}
@@ -146,7 +146,7 @@ void __cdecl fcn_00572ff0(char* a)
 	}
 	found = 0;
 	i = 0;
-	ps = (short*) (a + 0xd0);
+	ps = (unsigned short*) (a + 0xd0);
 	while (i < n) {
 		if (ps[0] != 0) {
 			found = 1;
@@ -157,24 +157,16 @@ void __cdecl fcn_00572ff0(char* a)
 			break;
 		}
 	}
-	if (!found) {
-		if (itm != 0 && *(int*) (itm + 0x16c) != 0) {
-			left = fcn_0050d320((char*) 0x7f4ca0
-			    + *(unsigned short*) (*(int*) (itm + 0x16c) + 0x27) * 0x21c,
-			    g_773d75);
-			if (left >= *(int*) (itm + 0x1b8)) {
-				left = *(int*) (itm + 0x1b8);
-			}
-		}
+	if (found) {
 		if (n <= 0) {
 			goto done;
 		}
-		pi = (int*) (a + 0xc4);
-		ps = (short*) (a + 0xd6);
+		pi = (int*) (a + 0xb8);
+		ps = (unsigned short*) (a + 0xd0);
 		cnt = n;
 		do {
 			if (ps[0] == 0 || pi[0] != *(int*) (pktB + 1)) {
-				goto i2next;
+				goto i1next;
 			}
 			if (lpGebaeudePROT[*(unsigned char*) pktB * 0x24d] == '\n') {
 				e2 = fcn_00503d10(ps[0]);
@@ -186,98 +178,114 @@ void __cdecl fcn_00572ff0(char* a)
 				}
 			}
 			if (e2 == 0) {
-				goto i2next;
+				goto i1next;
 			}
 			r2 = fcn_00502cd0(*(int*) (e2 + 0x14), 1, 0, ps[0]);
 			if (r2 == 0) {
-				goto i2next;
+				goto i1next;
 			}
-			if (lpGebaeudePROT[*(unsigned char*) pktB * 0x24d] != '\n') {
-				amt = (int) (fcn_0050bb50(*(int*) r2, g_773d75)
-				    * *(float*) (pktB + 0x49));
-			} else {
-				amt = (int) (fcn_0050bb50(*(int*) r2, g_773d75)
-				    * g_664ef8);
+			t = gm_GetMsgField(q, r2);
+			m = gm_eval_SlotVoll(e2, *(unsigned short*) r2, t);
+			d = (int) (fcn_0050bb50(*(unsigned short*) r2, g_773d75)
+			    * g_664128);
+			if (t < m) {
+				m = t;
 			}
-			lim = pi[6];
-			cand = gm_GetMsgField(e2, r2)
-			    - ((fcn_0050dfd0(e2, *(int*) r2) * *(int*) (r2 + 0x1c)) >> 2);
-			if (cand <= lim) {
-				lim = cand;
-			}
-			m = lim;
-			if (left / amt <= m) {
-				m = left / amt;
-			}
-			if (m < 0) {
-				m = 0;
-			}
-			if (m != 0) {
-				*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (e2 + 2),
-				    *(int*) (q + 2), *(int*) r2, m, g_773d75, d);
-			}
-			if (itm != 0 && *(int*) (itm + 0x16c) != 0) {
-				sprintf(buf, (char*) 0x6a7d00, itm + 0x30,
-				    *(int*) (itm + 0x16c) + 5, amt * m, left, m,
-				    (int) (lpObjektePROT + *(unsigned short*) r2 * 0x41 + 1));
-			}
-			left -= amt * m;
+			*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (e2 + 2),
+			    *(int*) (q + 2), *(unsigned short*) r2, m, g_773d75, d);
 			if (itm != 0) {
-				*(int*) (itm + 0x1b8) = *(int*) (itm + 0x1b8) - amt * m;
+				*(int*) (itm + 0x1b8) = *(int*) (itm + 0x1b8) + d * m;
 			}
-i2next:
-			if (m != 0 || *(char*) (a + 0xf0) == 0) {
-				ps[0] = 0;
-				pi[0] = -1;
-			} else {
-				flag |= 1;
+			if (t - m != 0) {
+				d = (int) (fcn_0050bb50(*(unsigned short*) r2,
+				    g_773d75) * g_664108);
+				*(int*) (a + 0xe8) = fcn_004c51f0(-1,
+				    *(int*) (q + 2), *(unsigned short*) r2, t - m,
+				    g_773d75, d);
 			}
+i1next:
+			ps[0] = 0;
+			pi[0] = -1;
 			ps++;
 			pi++;
 		} while (--cnt != 0);
 		goto done;
 	}
-	pi = (int*) (a + 0xb8);
-	ps = (short*) (a + 0xd0);
+	if (itm != 0 && *(int*) (itm + 0x16c) != 0) {
+		left = fcn_0050d320((char*) 0x7f4ca0
+		    + *(unsigned short*) (*(int*) (itm + 0x16c) + 0x27) * 0x21c,
+		    g_773d75);
+		if (left >= *(int*) (itm + 0x1b8)) {
+			left = *(int*) (itm + 0x1b8);
+		}
+	}
+	if (n <= 0) {
+		goto done;
+	}
+	pi = (int*) (a + 0xc4);
+	ps = (unsigned short*) (a + 0xd6);
 	cnt = n;
 	do {
 		if (ps[0] == 0 || pi[0] != *(int*) (pktB + 1)) {
-			goto i1next;
+			goto i2next;
 		}
 		if (lpGebaeudePROT[*(unsigned char*) pktB * 0x24d] == '\n') {
 			e2 = fcn_00503d10(ps[0]);
 		} else {
 			e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
 			if (e2 == 0) {
-				e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x116);
+				e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6,
+				    0, 0x116);
 			}
 		}
 		if (e2 == 0) {
-			goto i1next;
+			goto i2next;
 		}
 		r2 = fcn_00502cd0(*(int*) (e2 + 0x14), 1, 0, ps[0]);
 		if (r2 == 0) {
-			goto i1next;
+			goto i2next;
 		}
-		t = gm_GetMsgField(q, r2);
-		m = gm_eval_SlotVoll(e2, *(int*) r2, t);
-		d = (int) (fcn_0050bb50(*(int*) r2, g_773d75) * g_664128);
-		if (t < m) {
-			m = t;
+		if (lpGebaeudePROT[*(unsigned char*) pktB * 0x24d] != '\n') {
+			amt = (int) (fcn_0050bb50(*(unsigned short*) r2, g_773d75)
+			    * *(float*) (pktB + 0x49));
+		} else {
+			amt = (int) (fcn_0050bb50(*(unsigned short*) r2, g_773d75)
+			    * g_664ef8);
 		}
-		*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (e2 + 2), *(int*) (q + 2),
-		    *(int*) r2, m, g_773d75, d);
+		lim = pi[6];
+		cand = gm_GetMsgField(e2, r2)
+		    - ((fcn_0050dfd0(e2, *(unsigned short*) r2)
+		    * *(int*) (r2 + 0x1c)) >> 2);
+		if (cand <= lim) {
+			lim = cand;
+		}
+		m = lim;
+		if (left / amt <= m) {
+			m = left / amt;
+		}
+		if (m < 0) {
+			m = 0;
+		}
+		if (m != 0) {
+			*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (e2 + 2),
+			    *(int*) (q + 2), *(unsigned short*) r2, m, g_773d75, amt);
+		}
+		if (itm != 0 && *(int*) (itm + 0x16c) != 0) {
+			sprintf(buf, (char*) 0x6a7d00, itm + 0x30,
+			    *(int*) (itm + 0x16c) + 5, amt * m, left, m,
+			    (int) (lpObjektePROT + *(unsigned short*) r2 * 0x41 + 1));
+		}
+		left -= amt * m;
 		if (itm != 0) {
-			*(int*) (itm + 0x1b8) = *(int*) (itm + 0x1b8) + d * m;
+			*(int*) (itm + 0x1b8) = *(int*) (itm + 0x1b8) - amt * m;
 		}
-		if (t - m != 0) {
-			d = (int) (fcn_0050bb50(*(int*) r2, g_773d75) * g_664108);
-			*(int*) (a + 0xe8) = fcn_004c51f0(-1, *(int*) (q + 2),
-			    *(int*) r2, t - m, g_773d75, d);
+i2next:
+		if (m != 0 || *(char*) (a + 0xf0) == 0) {
+			ps[0] = 0;
+			pi[0] = -1;
+		} else {
+			flag |= 1;
 		}
-i1next:
-		ps[0] = 0;
-		pi[0] = -1;
 		ps++;
 		pi++;
 	} while (--cnt != 0);
@@ -295,7 +303,7 @@ done:
 	*(int*) (a + 0xb0) = -1;
 	i = 0;
 	pi = (int*) (a + 0xb8);
-	ps = (short*) (a + 0xd0);
+	ps = (unsigned short*) (a + 0xd0);
 	while (i < n) {
 		if (ps[0] != 0) {
 			*(int*) (a + 0xb0) = pi[0];
@@ -310,7 +318,7 @@ done:
 	if (*(int*) (a + 0xb0) == -1) {
 		i = 0;
 		pi = (int*) (a + 0xc4);
-		ps = (short*) (a + 0xd6);
+		ps = (unsigned short*) (a + 0xd6);
 		while (i < n) {
 			if (ps[0] != 0) {
 				*(int*) (a + 0xb0) = pi[0];

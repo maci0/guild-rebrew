@@ -23959,3 +23959,16 @@ thirty-five callee argument counts were derived from push counts and merged clea
 calls. One global is a pointer variable while three others are absolute arrays. And a record index and a base pointer are reloaded per use in the reference, so they
 are kept as repeated expressions. The object is nine bytes over the extent, which is residual mismatch rather than padding, and the first divergence is the
 callee-saved home for two constants that the reference keeps live across a call while this build keeps only one.
+
+## 2026-11-03 — guard row: two loop blocks reordered and six width repairs
+
+`0x572FF0` moves from 118 to 163 matched bytes with the object at 2488 against the 2583 extent, and its largest gap window falls from 1981 bytes to 545. The
+biggest repair is a block reorder with a guard that was missing: the reference tests a found flag, then returns early when a count is not positive, then runs two
+loops over a record, and only after that computes the left value and runs two more loops, where the source had those in the other order and lacked the early return.
+Six width repairs followed: a pointer to shorts is a pointer to unsigned shorts because the reference zero-extends the value, and five expressions that read an
+integer through a cast are unsigned short reads because the reference loads a word in each case. A call's sixth argument was being passed from an uninitialised local
+where the reference passes a live value. And one block's base pointer was the wrong packet, which is byte-identical in this build because of slot assignment and was
+kept for correctness.
+Two variants were reverted for losing matched bytes, a ternary form and a clamp. The first divergence is the frame, sixteen bytes short, with the reference keeping
+six zeroed stack slots against this build's five, so one more value is live at entry in the original source; the message and buffer offsets match and the reference
+has more slack above the buffer. Five windows remain, each an insert or a replace of tens of instructions.
