@@ -27491,3 +27491,183 @@ section = ".data"
 note = "Family count. The reference folds both the load and the increment into dir32 forms (mov eax,ds:0x773d6c at 0x50b4xx and inc dword ptr ds:0x773d6c at 0x50b50a), which an absolute-address cast cannot produce, so the source uses this extern. Managed row created to mask the two dir32 operands; the increment's high-byte or ah,0x80 sets the 0x8000 bit of the count."
 updated_by = "data"
 updated_at = "2026-11-02T16:37:50+00:00"
+
+["GOLDTL.0x00675308"]
+name = "g_675308"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x0067530c"]
+name = "g_67530c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x00675310"]
+name = "g_675310"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x00675314"]
+name = "g_675314"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x0067531c"]
+name = "g_67531c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x00675320"]
+name = "g_675320"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x00675324"]
+name = "g_675324"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x00677188"]
+name = "g_677188"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x0067718c"]
+name = "g_67718c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x00677190"]
+name = "g_677190"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x00677194"]
+name = "g_677194"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x00677198"]
+name = "g_677198"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x0067719c"]
+name = "g_67719c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x006771a0"]
+name = "g_6771a0"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x00678150"]
+name = "g_678150"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x00678154"]
+name = "g_678154"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x00678158"]
+name = "g_678158"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x0067815c"]
+name = "g_67815c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x0067a28c"]
+name = "g_67a28c"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"
+
+["GOLDTL.0x0067a290"]
+name = "g_67a290"
+size = 4
+section = ".data"
+file = "stubs/goldtl/symbol_stubs.c"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-03T04:26:38+00:00"

@@ -20821,3 +20821,33 @@ ten stack operands but blocked on freeing a callee-saved register. Address takin
 is 64 in native against 69 here. The recommendation is to stop source-shape probes on this row until a register can be
 freed. A blocker records all of this, including the unfixed `f.v9c` defect. Instruments in .scratch/5ba910/ with
 s_probe.py, s_stack.py, s_align.py, s_region.py and s_pull.py.
+
+## 2026-11-03 — identity rows for globals that had no reference address
+
+A read-only derivation pass established which globals can be given a reference address from evidence and which cannot.
+Inventory: 4,344 globals were scanned and 432 row names found, so 3,912 have no row, of which 3,775 are source-defined
+and 137 declaration-only; the 3,775 split into 545 pad, lead and gap names whose VA is in the name, 3,202 scaffold stub
+definitions and 28 real source definitions, with the stubs encoding 2,794 `.data` or `.bss` addresses, 268 `.rdata`
+addresses, 6 `.text` addresses and 134 without a hex value. The audit's earlier figure of 3,982 is 4,344 minus the 362
+globals whose name matches a row, so it counted declaration-only rows and treated names as having no VA.
+The evidence route was tested rather than assumed. Anchors are the 3,233 map symbols with a known reference VA, 415 rows
+and 2,818 name-encoded, and their emitted order disagrees with reference order in only 34 of 3,232 consecutive pairs, or
+1.05 percent, but only 4 anchor runs have equal built and reference spans, which fixes just 6 interior symbols, while
+2,639 interior symbols sit in unequal spans. Emitted order plus boundary VAs is therefore not sufficient, and the
+structural reason is that pad piece starts were themselves computed as previous reference VA plus built extent, so pad
+spans re-encode the same built extents and add no independent bound. What does work is the name encoding corroborated by
+an exact fit, where the next encoded VA minus this VA equals the emitted extent: 936 objects pass, 738 `.bss` and 198 raw
+`.data`, of which 197 raw `.data` ones are unique and collision-free and 155 have nonzero reference bytes that decode
+consistently with the declared type. The ambiguous remainder is 1,865 encoded without an exact fit, 32 overlapping the
+next anchor, 42 sharing a reference VA, 408 stubs without a `.data` hex, 28 real definitions and 23 absent from the map.
+The convention applied follows docs/data-ownership.md line 39, which allows an unsized identity-only GLOBAL row to
+record an address without asserting ownership, so rows carry `--kind GLOBAL`, name, size only where the exact fit proves
+it, section and file, with no storage kind, backing or link symbol, and placeholder names stay. The first batch of 20 rows
+was previewed with digest 2e9595fe7bf7b5e03f75055c4ab6849eddece9dd6280c14b03e3f48a64c117d6 and applied through
+`rebrew data set --expected-digest`: 0x675308 as float 1.0f, 0x67530c, 0x675310 and 0x675314 as int -1, 0x67531c as
+int 1, 0x675320 and 0x675324 as int 256, 0x677188 through 0x6771a0 as int -1 to -7, 0x678150 as float 1.0f, 0x678154 and
+0x678158 as float -1.0f, 0x67815c as unsigned 5000 and 0x67a28c and 0x67a290 as float -1.0f. Lint passes after the write
+with no errors and no new size, overlap or stale-evidence warnings. Two caveats are recorded: address rows do not move
+`.data` VirtualSize, since only extents do, and only the 936 exact-fit objects have extent evidence; and these rows are
+placeholder-owned, so `rebrew verify --data` must not be run against them because the built bytes are zeros while the
+reference bytes are real, and they must never be given a storage kind of object.
