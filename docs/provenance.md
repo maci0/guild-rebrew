@@ -20997,3 +20997,37 @@ added; the library calls are memset 0x64d530, strncpy 0x64d740, strchr 0x64e790,
 d2_GetResourceData 0x466190, and 17 relocations stay unresolved for lack of a project VA binding, with standard prototypes
 kept and no header or store touched. Instruments in .scratch/g46c5a0b/ with patch.py, cmp5.py and the base and final
 objects.
+
+## 2026-11-03 — d2 two: slot table recovered, spill is the blocker
+
+`0x4DCF50` keeps its state with object exactly 8798 and an unchanged source; the local-set pass reverted everything and lint
+passes. One measurement caveat is recorded first because it affects every number on this row: at pass start the same
+unchanged source measured 2495 with 319 relocations, and by the end it measured 2345 with 274, because shared managed
+metadata changed under the pass, so binding-based masking moved. All variant figures were therefore taken in one
+environment with a raw unmasked comparison, where the baseline is 1509.
+The native scalar slot table was recovered from raw bytes. Slot 0x10 is the list-merge offset accumulator, addressed as
+[esp+edx+0xe0] and [esp+edx*4+0x370], later reused for a handle freed at 0x4df0fc; 0x14 is the second head zero
+initialisation at 0x4dcf74 and then the fsum float accumulator with `fadd` and `fstp [esp+0x14]` at 0x4dd5e7 and
+0x4dd5eb, reused for a handle later; 0x18 is p34, the lookup of a0+0x34 stored at 0x4dd0df and live to the end; 0x1c is
+p3c from a0+0x3c stored at 0x4dd10d; 0x20 is n, the return of fcn_004f5740 stored at 0x4dd0ca and used as a loop bound;
+0x24 is the first body store at 0x4dcf65 and later the folter-result 0/1 flag at 0x4de4f2 and 0x4de5f4, read before the
+didFolter test at 0x4de765, then reused for a handle freed at 0x4df11a; 0x28 is p40 from a0+0x40; 0x2c is p48 from
+a0+0x48; 0x30 is the weight tbl.f[i] stored with `fstp` at 0x4dd00c and reused for temporaries; 0x34 is p44 from
+a0+0x44, reused later; 0x38 is h2, the return of fcn_004e4ae0 stored at 0x4dd1c4 and freed at 0x4df0eb; and 0x3c is a
+short-lived integer temporary at 0x4dd46e that is not live at the head. A correction to the previous pass: native keeps
+p38 in ebx with no stack store, while our object spills p38 to 0x18, and that spill is the thirteenth long-lived stack
+value against native's twelve, which is why the head cannot grow.
+Seven declaration and head variants were measured and reverted. Reordering the head with a volatile xpad first and a new
+volatile ypad after hnd[6] gives frame 0x760, object 8798 and raw 1109 with the first difference at 0x14; reordering the
+head with the fsum and didFolter initialisations moved up and xpad deleted gives frame 0x764 and raw 1201 with the first
+difference at 0x02; reordering with didFolter first and fsum after hnd[6] gives 0x764 and raw 983; removing xpad alone
+gives frame 0x760, object 8791 and raw 886; reordering the pointer declarations with p38 last is byte-identical, which
+proves declaration order does not affect slot assignment; declarator initialisers give 0x764 and raw 951; and fsum before
+didFolter gives 0x764 and raw 919. The reason is that every variant producing the two head zero stores extends the fsum
+and didFolter live ranges to the function top, and with the p38 spill already occupying the twelfth slot the frame grows
+by four bytes, with `sub esp,0x764` and msg at 0x44 and rec at 0x244, so divergence moves to offset 0x02 instead of past
+0x18. Removing xpad costs 623 matched bytes, so it is load-bearing. The recommendation is that the blocker is register
+allocation rather than declarations: recover what native keeps in ebx, esi and ebp and why this compile spills p38, likely
+one extra simultaneously live scalar, and once the spill disappears the two head initialisations fit without growing the
+frame. Evidence and the variant table are in .scratch/004dcf50-findings.md with helpers in
+.scratch/goldtl-004dcf50-tools/.
