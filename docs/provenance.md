@@ -22866,3 +22866,20 @@ recorded against a pre-correction snapshot, and it already has a bound source wh
 reference, so it is an in-progress reconstruction rather than a missing one. Its stored blocker text likewise still quotes 1212 against
 1199 while the object is 1270. The lesson applied from here: a row is only handed out after the picker confirms its status, module,
 bound file and inventory presence, and the numbers in a brief come from that fresh read rather than from a record written earlier.
+
+## 2026-11-03 — camera row: the insert clusters are alignment, and the excess is diffuse
+
+`0x5BA910` moves from 753 to 771 matching bytes with the object at 12127 against the reference 11948, 44 relocations and the frame
+still exactly 0x1848. Two repairs landed. The pointee read was fixed a second time, at the seven-loop comparison, where the source read
+the low word of the pointer stored at 0x7746cc rather than the word behind it, and the byte store at the record clear now writes a
+byte rather than a dword, which the reference does and which also removes a hoisted constant, a store and a two-byte insert, saving
+eleven bytes. Together they take the object from 12136 to 12127.
+The 188-byte excess was then accounted for, and the answer is not a cluster. The insert events sum to 888 bytes, deletions to 2122 and
+the replacement delta to 1426, for a net 192 over the 11952 window and 188 over the 11948 body. Seven clusters of thirty bytes or more
+were examined, at object offsets 0x08e6, 0x0954, 0x0db6, 0x18f5, 0x2830, 0x2bf2 and 0x2e4a, and every one carries the same instruction
+shapes as the reference at the aligned position, so all seven are diff alignment artifacts rather than extra constructs. The real
+excess is diffuse: 3472 object instructions against 3417, 757 stack operands against 718, and 143 large-displacement stack operands
+against 164, which is 55 instructions and 39 stack operands consistent with extra spills from the register assignment the pointer
+iteration imposes. No single construct can be removed to find 188 bytes.
+Two experiments were reverted: making the byte store volatile gives 785 at 12138, and using an outer counter for one loop gives 777 at
+12152.

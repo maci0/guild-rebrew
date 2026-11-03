@@ -258,7 +258,7 @@ int __cdecl fcn_005ba910(int a1, int a2)
 			d = f.vD4[i] = fcn_0052dee0(0, 0xc + i * 0x18, *tp);
 			tp = tp + 1;
 			bo = d * 0x2f4;
-			if (*(unsigned short*) 0x7746cc == f.vF0[i]) {
+			if (*(unsigned short*) *(int*) 0x7746cc == f.vF0[i]) {
 				{
 					int k;
 					k = bo;
@@ -1696,7 +1696,8 @@ l_5bd26b:
 				*(short*) (f.v210 + 0x84) = *(short*) 0x7f4c0c;
 				fcn_00500bb0((int) (f.v210 + 0x78), 0, 0, 0xa);
 				*(int*) (f.v210 + 0xa8) = *(int*) (e->f00 + 2);
-				*(int*) (f.v210 + 0xb4) = 4;
+				/* the record was zeroed above, so this byte store still leaves 4 */
+				f.v210[0xb4] = 4;
 				*(int*) (f.v210 + 0xd4) = 1;
 				*(int*) (f.v210 + 0xac) =
 					0x64 - *(unsigned char*) (e->f00 + 0x12);
