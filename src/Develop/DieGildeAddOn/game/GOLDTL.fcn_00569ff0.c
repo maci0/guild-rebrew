@@ -55,10 +55,11 @@ void* __cdecl fcn_00509570(char*);
 /* The 14-byte message block published by the server at 0x7f4c00. */
 #define MSG_COPY(dst) \
 	do { \
-		*(int*) (dst) = *(int*) 0x7f4c00; \
-		*(int*) ((dst) + 4) = *(int*) 0x7f4c04; \
-		*(int*) ((dst) + 8) = *(int*) 0x7f4c08; \
-		*(unsigned short*) ((dst) + 12) = *(unsigned short*) 0x7f4c0c; \
+		char* _msg = (dst); \
+		*(int*) _msg = *(int*) 0x7f4c00; \
+		*(int*) (_msg + 4) = *(int*) 0x7f4c04; \
+		*(int*) (_msg + 8) = *(int*) 0x7f4c08; \
+		*(unsigned short*) (_msg + 12) = *(unsigned short*) 0x7f4c0c; \
 	} while (0)
 
 /* Advances the active message of the player object through its states. */

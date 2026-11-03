@@ -24390,3 +24390,16 @@ zero. The gap is metadata, not measurement: sizes need to be recorded from revie
 confirmed against the reference section, and for the generated stub globals needs the owner evidence that is already recorded as missing.
 This is recorded as the next data task rather than attempted here, because writing sizes for twelve hundred rows without per-row evidence would replace an honest zero
 with an unearned number.
+
+## 2026-11-03 — the message row's copy macro now computes its destination once
+
+The message-copy macro expanded its destination argument four times, so the parameter it names carried four times the weight in allocation and the compiler kept it
+in a register the reference does not use. The macro now takes the address once and stores through it, which puts the parameter in the reference's register and drops three
+relocations. The reference does exactly this at its own expansion sites, so the change is more faithful than what it replaces.
+The cost is measured rather than hidden: matched bytes fall from 976 to 324 because the frame is four bytes short, which shifts every stack displacement, and the two
+signals therefore disagree. The missing slot was searched for and not found. It is a reserved dead slot: the reference frame has a four-byte scalar slot that no
+instruction in the 1,224-instruction body touches at any push depth. Six candidate initialisations were tried and none changed the frame or the zero-register count, and
+two shapes that reserved the slot explicitly, a volatile integer and a pointer, produced the correct adjustment on neither side or were elided entirely.
+The row is left at the faithful macro with both numbers recorded, because the previous state matched more bytes while allocating the parameter to a register the reference
+never uses, and keeping that would mean keeping a wrong register home for a byte count. The next pass has to find what makes the compiler reserve a slot it never reads;
+until then this row cannot convert its structural gain into bytes.
