@@ -23097,3 +23097,18 @@ fidelity and the measured signals disagree, with the numbers.
 The first divergence at byte 155 is a scalar home difference rather than a semantic one: the count sits at frame 0x28 here against 0x30 in the
 reference, and two more values are homed differently, with the same declaration set and the same 0x438 frame. The instruction streams agree
 wherever the homes agree.
+
+## 2026-11-03 — draw row: the suspected argument defect is refuted, the argument is dead
+
+The prior claim about `0x467920` is false, and it is corrected here rather than landed. One call site was taken apart completely, at source line 435
+to the callee at 0x47cba0. The reference pushes, in order, zero for the fifth argument early enough to be shared by both arms, then the surface
+pointer from the stack, then the record pointer held in ebx for the third argument, then two computed values; the object pushes the same five
+positions but supplies an array element in the third. The callee reads the fourth argument as a pointer, the fifth as a table index, the first and
+then the second, and forwards seven arguments onward, and it never reads the third argument at all, so the difference there is semantically dead.
+Changing the third argument to the record pointer measures 416 matched bytes at 4696, and to the surface pointer 413 at 4692, which is 21 to 24
+matched bytes worse and a shorter object, so it is neither a repair nor a size win. The earlier reports of 166 lost bytes and an 87-byte extent
+overrun did not reproduce.
+The remaining asymmetry is recorded without a repair: the reference supplies the record pointer at ten sites in this block where the source
+supplies an array element or the surface pointer, and the record pointer at eleven others where the source already does, and since the third
+argument is never read those are equivalent in behaviour. The row stays at 437 of 4699 with the frame difference already recorded, and the
+conclusion is that a pattern spanning seventeen call sites was not evidence of a defect until one site was decoded end to end.
