@@ -22058,3 +22058,28 @@ call with no flag-arm null check. The parameter wall at object offset 7 also did
 keeps the entity in ebx with one zero register and stores at 0x10, 0x2c, 0x30 and 0x18, while the reference keeps it in esi with
 three zero registers and stores at 0x34, 0x2c, 0x30 and 0x1c, and only one spill slot moved. The gap tool reports the object
 and reference code both ending at 0xec0, so the code span agrees even though the object size reads 3768 against 3772.
+
+## 2026-11-03 — fill row: geometry cleared, the zero home is what costs
+
+`0x43C640` keeps 432 of 5512 with object 5512 against 5419 and 32 relocations, and no window closed, but the pass clears two
+candidate causes and localises the cost. Geometry is reproduced exactly on both sides: the region base computed as the sum plus
+eight times the row times 500 through three `lea` instructions and a shift, the record at thirteen times the index times four
+through two `lea`s, the 0xa0 base, the 0xbc material, the 0x34 stride, eight materials, the square and squared-plus-one length
+products, and the 0x802c and 0x8030 offsets all match native's displacements, so neither aggregate size nor table geometry is
+the cause. The first mismatch is at offset 11, where native pushes edi and this build zeroes ebx.
+The difference is the constant-zero home. The reference carries no function-wide zero register and remakes it per block, with
+`xor ecx,ecx` at 0x43CA10 for four stores and `xor ebx,ebx` at 0x43D4AC as a row counter, while this build hoists
+`xor ebx,ebx` and `xor edx,edx` into the prologue and keeps zero in ebx. That hoist wins two bytes at offset 11 and loses
+fifty-two in the f2 to f3 region, where six frees store `mov [edi+X],ebx` in three bytes instead of reloading the record and
+storing an immediate zero, plus three bytes for the record's own home. Something forces it: this compiler's inline assembly has
+no clobber list, so any value live across the five fill blocks must be homed, and the allocator cannot keep the counters where
+the reference does.
+The sixteen x87 sites cost 32 bytes through an `fxch` before `fadd st(0),st(0)` that is not reachable from C: reversing the
+association to match the native float order measures 429 at the same size, and both spellings round to the same form, so the
+operand order is not the lever here, unlike the comparison that paid off on another row. Every shape that removes the exchange
+moves the frame to 0x64 and breaks the prologue. Declaring the counters `register` is byte-identical. The duplicate free of
+the field at plus eight looks wrong but the reference frees it twice at 0x43CA3C and 0x43CA58, so it is faithful. The remaining
+windows are those x87 sites, the zero home, and two emission-loop allocation regions, and the evidence that would settle them
+is a source shape that stops the compiler commoning zero into ebx without adding a frame slot. The row's recorded assembly
+evidence was left untouched, and its provenance hash now differs from the current source because a later dehoist edit landed
+after the evidence was recorded, which is why lint reports the stale-provenance warning.

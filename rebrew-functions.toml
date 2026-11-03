@@ -185659,7 +185659,7 @@ kind = "FUNCTION"
 name = "fcn_004f4830"
 
 ["GOLDTL.0x004f4830".verification]
-source_hash = "4be61fce4703730d1d16206727c77d1b48b1875324617ba4d2840e208c984b5e"
+source_hash = "e695a254fa675154c6168c9f1a978095b1030f1edc12ac2d1affe19949be0993"
 reference_hash = "5b62ae6be03059695674d91bc75e3c667993b2aeae3ddb4fbc18b874b8173caa"
 reference_size = "43"
 headers_hash = "7a89e20e4527aef3f3de7879effb55fe7ce08872b3fd6ee01e99b023951f4071"
@@ -185670,10 +185670,10 @@ module = "GOLDTL"
 va = "0x4f4830"
 context_hash = ""
 defines = "[]"
-input_hash = "4018bd02a0f7b4be61fcbb5e7b84f9004c7279fd15c26bbb72daa53774ed9dc6"
+input_hash = "2a1f537d8bb03a1fc1e2f3b5ee3f719c161e7d0122ccb6565c63ff6a94d57e3c"
 status = "RELOC"
 writer = "test"
-measured_at = "2026-11-03T06:46:22+00:00"
+measured_at = "2026-11-03T07:41:52+00:00"
 
 ["GOLDTL.0x004f4860"]
 size = 117
@@ -185713,7 +185713,7 @@ kind = "FUNCTION"
 name = "fcn_004f48e0"
 
 ["GOLDTL.0x004f48e0".verification]
-source_hash = "4be61fce4703730d1d16206727c77d1b48b1875324617ba4d2840e208c984b5e"
+source_hash = "e695a254fa675154c6168c9f1a978095b1030f1edc12ac2d1affe19949be0993"
 reference_hash = "276bed1edd3310094678e79a76808cea6ebc058aacbd84a84c7ba5384ecc8bcc"
 reference_size = "146"
 headers_hash = "7a89e20e4527aef3f3de7879effb55fe7ce08872b3fd6ee01e99b023951f4071"
@@ -185724,10 +185724,10 @@ module = "GOLDTL"
 va = "0x4f48e0"
 context_hash = ""
 defines = "[]"
-input_hash = "cbbac5d9595d7423df5d50324937c323a9660ea276cc4411581bbe2c86f2bd0d"
+input_hash = "217fbef45f0197b8bfa8cd10c276d872705993d7ab61ec27550187588511356f"
 status = "RELOC"
 writer = "test"
-measured_at = "2026-11-03T07:36:12+00:00"
+measured_at = "2026-11-03T07:42:19+00:00"
 
 ["GOLDTL.0x004f4980"]
 size = 83
@@ -186399,7 +186399,7 @@ kind = "FUNCTION"
 name = "fcn_004f5dd0"
 
 ["GOLDTL.0x004f5dd0".verification]
-source_hash = "4be61fce4703730d1d16206727c77d1b48b1875324617ba4d2840e208c984b5e"
+source_hash = "e695a254fa675154c6168c9f1a978095b1030f1edc12ac2d1affe19949be0993"
 reference_hash = "ab1b0f8bce523138b287447730af2e96115ef2b9d01f278d618c086502d9489a"
 reference_size = "70"
 headers_hash = "7a89e20e4527aef3f3de7879effb55fe7ce08872b3fd6ee01e99b023951f4071"
@@ -186410,10 +186410,10 @@ module = "GOLDTL"
 va = "0x4f5dd0"
 context_hash = ""
 defines = "[]"
-input_hash = "b2007b17b4e3999bd21db12dc7bbefd29e10061af5bb58b49792fe321687ba42"
+input_hash = "b8c07689173d218454a5e77e445347f19e5d268e25f9df437a237d8f389d295a"
 status = "RELOC"
 writer = "test"
-measured_at = "2026-11-03T07:36:39+00:00"
+measured_at = "2026-11-03T07:42:44+00:00"
 
 ["GOLDTL.0x004f5e20"]
 size = 266
@@ -423943,9 +423943,9 @@ file = "src/Develop/Units/m_alloc/GOLDTL.fcn_0043c640.c"
 symbol = "_fcn_0043c640"
 kind = "FUNCTION"
 updated_by = "blocker"
-updated_at = "2026-11-02T23:18:07+00:00"
+updated_at = "2026-11-03T07:44:24+00:00"
 status = "SIZE_MISMATCH"
-blocker = "segment-shape wall: the five align-up fill blocks are byte-identical and the object is redistributed rather than oversized. Segments anchored on the fill entries (native|ours|delta): entry-f1 343|351|+8, f1-f2 456|448|-8, f2-f3 376|324|-52, f3-f4 401|412|+11, f4-f5 1784|1849|+65, tail 2059|2148|+69. fill1..fill3 has no native operation our C lacks; the -52 is native homing the record pointer in edx and reloading it after each of the six frees where ours keeps edi, and the remaining -8 needs zero-extended byte temps that push the frame to 0x64 and break the prologue. The vertex-emission surplus needs an fxch-free float shape that does not move the frame"
+blocker = "register live range around the inline assembly fills, with geometry and aggregate sizes cleared. Region base (x + y*8)*500, record 13*i*4, the 0xa0 base, 0xbc material, 0x34 stride, 8 materials, the H*H and (H+1)*(H+1)*4 lengths and the 0x802c and 0x8030 offsets all reproduce native's displacements exactly, so the layout is right. The first mismatch is offset 11 where native does push edi and this build does xor ebx,ebx: native carries no function-wide zero register and remakes it per block, while this build hoists xor ebx,ebx and xor edx,edx into the prologue. That home costs 52 bytes in the f2 to f3 region, where six frees store mov [edi+X],ebx in three bytes instead of reloading r and storing an immediate zero in eleven, and the inline assembly has no clobber list, so values live across the five fill blocks are homed. The 32 bytes across sixteen x87 sites come from an fxch before fadd st(0),st(0) that C cannot avoid: every shape removing it moves the frame to 0x64 and breaks the prologue, and reversing the float association is not the lever since both spellings round to the same form"
 blocker_delta = 411
 
 ["GOLDTL.0x0043c640".verification]
