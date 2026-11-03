@@ -6,7 +6,7 @@ extern int g_67d370;
 extern int g_14ce8e0;
 extern int g_14ce8e8;
 #include "client_dialog_state.h"
-extern int g_6b7fac;
+extern unsigned int g_6b7fac;
 extern char* g_1015ea0;
 extern char g_7f4ca0[];
 
@@ -24,7 +24,7 @@ typedef struct {
 // SIZE 0x14
 typedef struct {
 	int bild;
-	int count;
+	unsigned int count;
 	int element;
 	int (__cdecl *create)(void*, int, void*, void*);
 	void (__cdecl *present)(int, int, int, int, void*);
@@ -47,8 +47,7 @@ void __cdecl fcn_005ccbe0(void);
 void __cdecl fcn_005ccc00(int, int, void*);
 
 /* ADDRESS: GOLDTL 0x005ccca0 */
-int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback, int dlg,
-                         int unused)
+int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 {
 	SelRow_5ccca0 rows[16];
 	void* cur;
@@ -62,12 +61,12 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback, int dlg,
 	int rem;
 	int state;
 	int result;
-	int time0;
+	unsigned int time0;
 	int sel;
 	int win;
 
-	time0 = g_6b7fac;
 	sel = 0;
+	time0 = g_6b7fac;
 	fcn_005ccbe0();
 	if (tab > -1 && tab < 8) {
 		g_775344 = tab;
@@ -75,7 +74,6 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback, int dlg,
 	if (g_775344 >= 8) {
 		g_775344 = 0;
 	}
-	win = g_772514;
 	for (i = 0; i < 8; i++) {
 		g_6ac8a8[i].count = g_6ac8a8[i].create(
 				(char*) 0x7f4ca0 + g_774970 * 0x21c, 0, rows, ent);
@@ -92,6 +90,7 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback, int dlg,
 	h = fcn_00470820(0, 0, "panel\\geb_liste");
 	fcn_00471b60(h);
 	d2_SetForm(h, 2);
+	win = g_772514;
 	d2_SetForm(h, 1);
 	io_AppendText(name);
 	d2_SetForm(h, 4);
@@ -117,10 +116,10 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback, int dlg,
 	do {
 		if (state == 3) {
 			old = -1;
-			if (g_775344 < 8) {
-				old = g_6ac8a8[g_775344].count;
-			} else {
+			if (g_775344 >= 8) {
 				g_775344 = 0;
+			} else {
+				old = g_6ac8a8[g_775344].count;
 			}
 			for (i = 0; i < 8; i++) {
 				g_6ac8a8[i].count = g_6ac8a8[i].create(
@@ -136,7 +135,7 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback, int dlg,
 				}
 			}
 			for (i = 0; i < 8; i++) {
-				fcn_00472640(g_6ac8a8[i].element, g_6ac8a8[i].count != 0);
+				fcn_00472640(g_6ac8a8[i].element, g_6ac8a8[i].count > 0);
 				*(int*) (g_1015ea0 + g_6ac8a8[i].element * 0x2f4 + 0x38) =
 						i == g_775344;
 			}
@@ -144,8 +143,8 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback, int dlg,
 				n = g_6ac8a8[g_775344].create(
 						(char*) 0x7f4ca0 + g_774970 * 0x21c, 0x10, rows, ent);
 				g_6ac8a8[g_775344].count = n;
-				g_6ac8a8[g_775344].present(state, 2, n != old ? 3 : -1, n, rows);
-				fcn_005ccc00(state, g_6ac8a8[g_775344].count, rows);
+				g_6ac8a8[g_775344].present(h, 2, n != old ? 3 : -1, n, rows);
+				fcn_005ccc00(cur, g_6ac8a8[g_775344].count, rows);
 			} else {
 				fcn_005cc240(h, 2, 3);
 				cur = (char*) 0x7f4ca0 + g_774970 * 0x21c;
@@ -166,7 +165,7 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback, int dlg,
 				fcn_00472640(g_6ac8a8[sel].element, 0);
 			}
 		} else if (state == 4) {
-			fcn_005ccc00(state, g_6ac8a8[g_775344].count, rows);
+			fcn_005ccc00(cur, g_6ac8a8[g_775344].count, rows);
 		} else if (state == 2) {
 			time0 = 0;
 		}
@@ -176,19 +175,18 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback, int dlg,
 			g_774654 = 1;
 		} else if (g_14ce8e8 != 0) {
 			if (cur == (void*) ((char*) 0x7f4ca0 + g_774970 * 0x21c)) {
-				n = g_6ac8a8[g_775344].count;
-				if (n != 0) {
-					for (i = 0; i < n; i++) {
-						if (rows[i].key2 == g_67d370) {
-							break;
-						}
+				result = 0;
+				cur = 0;
+				for (i = 0; i < g_6ac8a8[g_775344].count; i++) {
+					if (rows[i].key2 == g_67d370) {
+						break;
 					}
-					if (i > -1 && i < n) {
-						if (rows[i].ent != 0 &&
-								*(unsigned short*) rows[i].ent != 0xffff) {
-							state = 4;
-							cur = rows[i].ent;
-						}
+				}
+				if (i > -1 && i < g_6ac8a8[g_775344].count) {
+					if (rows[i].ent != 0 &&
+							*(unsigned short*) rows[i].ent != 0xffff) {
+						state = 4;
+						cur = rows[i].ent;
 					}
 				}
 				goto after;
@@ -212,25 +210,22 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback, int dlg,
 					goto after;
 				}
 			}
-			n = g_6ac8a8[g_775344].count;
-			if (n > 0) {
-				for (i = 0; i < n; i++) {
-					if (rows[i].key1 == g_67d370) {
-						state = 2;
-						sel = i;
-						if (callback != 0) {
-							fcn_00471af0(h, 0);
-							if (((int (__cdecl*) (void*, int)) callback)(
-										rows[i].ent, 0) != 0) {
-								result = (int) rows[i].ent;
-							} else {
-								result = 0;
-							}
-							fcn_00471af0(h, 1);
-						} else {
+			for (i = 0; i < g_6ac8a8[g_775344].count; i++) {
+				if (rows[i].key1 == g_67d370) {
+					state = 2;
+					sel = i;
+					if (callback == 0) {
+						result = (int) rows[i].ent;
+						g_774654 = 1;
+					} else {
+						fcn_00471af0(h, 0);
+						if (((int (__cdecl*) (void*, int)) callback)(
+									rows[i].ent, 0) != 0) {
 							result = (int) rows[i].ent;
-							g_774654 = 1;
+						} else {
+							result = 0;
 						}
+						fcn_00471af0(h, 1);
 					}
 				}
 			}

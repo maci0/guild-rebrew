@@ -24118,3 +24118,19 @@ merging of a duplicated error block, and eighty-two direct calls against the ref
 The group row's blocker pass reported its source restored byte for byte, but the file still carried one experiment: an inline helper that returns zero, added while testing
 whether a call could supply the zero constant. Its measurement was inert, so it changed no bytes, but it was dead code in a committed row and the tree is tidier without
 it. The file was restored from its committed copy and re-measured at the same 408 of 2593 with the object at 2593, which is the state the ledger records for that row.
+
+## 2026-11-03 — panel list row: four wrong arguments and one wrong signedness
+
+`0x5CCCA0` moves from 606 to 919 matched bytes with the object at 1938 against the 1952 extent, its mismatch bytes falling from 1358 in 91 runs to 1032 in 64, and its
+gap events from 45 to 18 with the largest from 55 bytes to 26.
+Six defects were repaired. Two globals are compared unsigned, which the reference shows by its unsigned jump, so both are declared unsigned along with a record field.
+The row was declared with six parameters where the reference reads only four and both callers pass four. Two calls passed the state pointer where the reference passes
+the handle and the current record, proved by the reference loading those frame slots while pushes are pending. A loop count comparison written as not-equal compiled
+to a set-and-test pair where the reference materialises an unsigned less-than with a compare, a borrow and a negation, so it is written as strictly positive. And two
+loop bounds lost their redundant local so the count expression is re-evaluated, which is what the reference does after the calls.
+Three placements were also corrected to the reference's order: a selection value stored before a time read, a handle assignment moved after a form call, and two
+zero-initialisations added in the branch where the reference sets them. Two variants were reverted because they changed no bytes.
+One disagreement is recorded and left alone: the reference allocates three scalars in one order and this build in another, so their frame slots differ while the semantics
+do not, and declaring them in the reference's order produces identical output. The first remaining divergence is a string literal operand that needs a data binding rather
+than a code change, then an immediate encoding of the same subtraction, then instruction scheduling in one loop. A diagnostic fault reported early in the row is a
+display artifact, since the binding it complains about validates one byte later.
