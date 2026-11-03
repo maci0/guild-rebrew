@@ -211,13 +211,6 @@ int __cdecl fcn_005ba910(int a1, int a2)
 	f.v94 = 0;
 	f.v7c = a1;
 	f.v88 = 0;
-	f.vF0[0] = 0x95;
-	f.vF0[1] = 0x92;
-	f.vF0[2] = 0x93;
-	f.vF0[3] = 0x94;
-	f.vF0[4] = 0x97;
-	f.vF0[5] = 0x96;
-	f.vF0[6] = 0x2db;
 	f.v10C[0] = 0x51;
 	f.v10C[1] = 0;
 	f.v10C[2] = 0;
@@ -242,6 +235,13 @@ int __cdecl fcn_005ba910(int a1, int a2)
 	f.vD4[4] = -1;
 	f.vD4[5] = -1;
 	f.vD4[6] = -1;
+	f.vF0[0] = 0x95;
+	f.vF0[1] = 0x92;
+	f.vF0[2] = 0x93;
+	f.vF0[3] = 0x94;
+	f.vF0[4] = 0x97;
+	f.vF0[5] = 0x96;
+	f.vF0[6] = 0x2db;
 	f.vA4 = -1;
 	f.v14 = a1;
 	f.v80 = a2 & 8;
@@ -399,8 +399,8 @@ l_after:
 	} else {
 		if (*(char*) f.v74 == 0xa) {
 			f.v58 = 1;
-			/* /O2 colours stack slots: this slot held a1 at 0x5ba95f */
-			f.v7c = (int) gm_StartFilteredEntitySearch(1, 0, 0x44);
+			/* 0x5bae4e: the search result lands in the v88 slot, not a1 */
+			f.v88 = (int) gm_StartFilteredEntitySearch(1, 0, 0x44);
 			f.v40 = 1;
 			f.v50 = fcn_0050bbb0(*(unsigned short*) 0x774970);
 		}

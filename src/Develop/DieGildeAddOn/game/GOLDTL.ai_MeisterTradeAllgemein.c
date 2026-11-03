@@ -183,8 +183,8 @@ int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld)
 						continue;
 					}
 				}
-				fr = eval_ObjektPreis2Credits(t->id, 100) /
-				    fcn_0050bb50(t->id, g_773d75);
+				fr = eval_ObjektPreis2Credits(t->id, 100);
+				fr = fr / fcn_0050bb50(t->id, g_773d75);
 				if (fr >= g_6628a0) {
 					continue;
 				}

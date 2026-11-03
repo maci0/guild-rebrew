@@ -22599,3 +22599,46 @@ test uses a shift and a bit test where this build emits a compare and a jump, wi
 conversion spill lands after the if and else join in the reference and inside each arm here, for every form tried; and one array
 base sits sixteen bytes lower in this build than in the reference while the rest of the frame map agrees. The second half also
 still lacks the reference's second clamp call site after the prune path at 0x433609.
+
+## 2026-11-03 — trade row general: the ratio keeps one slot
+
+`0x48B220` (ai_MeisterTradeAllgemein) keeps 589 of 5062 with 27 relocations and 82 gap windows, and one window closed with none
+opened. The repair is in the town-stock sell loop: the price ratio was one expression dividing the evaluated price by the result of
+a second call, which this compiler evaluated through two slots, a temporary and the destination. The reference keeps the
+intermediate and the result in the same slot, with `fstp` to the destination at 0x48b327, a reverse divide at 0x48b332 and a
+store back at 0x48b339, so the source now assigns the intermediate first and divides in place, and the object does the same at one
+slot. The object and the match are unchanged by it, which is expected because the change only merges two slots.
+A comparison written the other way round reproduces the reference's branch idioms exactly, with the parity test and the wider
+compare appearing as in the reference, but it opens five windows and was reverted. Two volatile probes lose frame and match.
+Declaration order is neutral, with two permutations byte-identical.
+The verification pass found no wrong accesses: all 78 calls match in order, 58 bound call relocations resolve to the exact
+reference target and the remaining 20 are unbound sprintf, the six-argument call at 0x48b614 has the reference's argument order,
+and the record indices all agree with the bytes, the producers at 0x100b0c0 with a 0x40 stride and fields at plus 0x3c, 0x28 and
+0x18, the towns at 0x100d0c0 with a 0x58 stride and the flags at plus 0x54, the market stall base at 0x7f4ca0 plus the word at
+plus 0x27 times 0x21c, and the string table at 0x99ec10 with an identifier stride of 0x41, with one global passed as a byte value.
+The field at plus 0x1b8 has six accesses on both sides, so there is no phantom read, and the sibling row's table index at 0x774970
+does not appear in this body at all.
+The wall is whole-body slot assignment: the reference has eleven four-byte local homes from 0x00 to 0x28 and this build has ten
+from 0x04 to 0x28, while the aggregate is at 0x2c on both sides and the frame is 0x694 on both, so region-level repairs leave the
+byte match where it is.
+
+## 2026-11-03 — camera row: two keeps and a frame correction
+
+`0x5BA910` moves from 733 to 740 matching bytes with the object at 12160 and 44 relocations. Two changes are kept. The
+initialiser order was wrong: the reference emits the first array's nine elements before the second array's seven, sharing one
+constant load that feeds both stores, while the source had the second array first, and moving that block fixes the order for seven
+matched bytes. And a wrong access was repaired: the source stored the filtered-entity-search result into f.v7c, but the reference
+writes that slot once, with the argument, at 0x005ba95f, and reads it at 0x5bb32e, 0x5bb419 and 0x5bd79a expecting the argument,
+while the call result goes to the v88 slot with `mov [esp+0x88],eax` at 0x005bae4e; the assignment now targets v88.
+An earlier record on this row is corrected. The four-byte frame delta was attributed to the `slot_value` scalar, and that is wrong:
+a probe replacing the loop call's third argument with a constant gives the frame exactly 0x1848, and the scalar is fully
+register-resident at all three of its sites in the current object. The real cause is an address temporary the object builds for the
+table. The compiler holds the address of the array's first element in edi and re-expresses the table as the table base minus that
+address, which needs a stack-relative temporary: the object loads the table base, forms the address of the array, subtracts, and
+stores the difference before indexing. The reference keeps the scaled index in esi and indexes both the table and the array
+directly with it. Every displacement therefore carries the plus-four frame delta.
+The window shape is recorded too: 342 of the 358 gap windows have identical mnemonic sequences and differ only in register roles
+and that displacement, so they cannot close while the frame differs, and the other 16 differ in mnemonics, being nine cases of a
+register test against a compare with a zero register, one signed-jump choice after a byte test, two store orderings, two extra
+additions from address association, and one tail adjustment. Five probes were byte-identical and reverted, and the frame probe that
+would close it measures 758 at 12123 with 586 windows, which is not a keeper.
