@@ -20531,3 +20531,38 @@ arg2 into edx, pushes ebp, esi and edi, zeroes ebx, puts arg1 in edi and minus o
 rotated by four cycles, and native holds 0x10 in ebx at 0x5bac9f where ours holds zero. Because the colouring depends
 on per-pseudo benefit across the whole body, the next step is a matching pass on loop shape in 0x5bb419..0x5bbdd5 and
 0x5bc240..0x5bcab6 rather than more transcription, and a continuation is doing that.
+
+## 2026-11-03 — remaining pad audit: spans duplicate emitted bytes
+
+The 128 remaining `_dpad_*` definitions were audited read only, with the full table at .scratch/dpad-audit/report.md.
+The guarded relink map has 131 COMMON `_dpad_` symbols: 128 match a current source definition and their sizes sum to
+16,823,361 exactly, while three (100f8c0, 99ef80, 99ec10) have no current source definition and are excluded. The
+reference `.data` spans 0x675000 to 0x157e424 for VirtualSize 0xf09424, but its raw bytes end at 0x6b6000, so everything
+from 0x6b6000 to 0x157e424, 15,500,324 bytes, is zero-fill virtual space. Every one of the 128 pads has its entire
+encoded range inside that tail: none starts before 0x6b6000, the last ends exactly at 0x157e424, and none is
+raw-backed, so no pad is out of section. Their encoded union is 14,833,349 bytes, 666,975 short of the tail, and they
+duplicate each other by 1,990,012 bytes.
+The root cause of the remaining 7,541,760-byte excess is that the pads are COMMON: they never sit at their encoded VAs
+but are appended after the real objects, which already emit 6,450,496 bytes of `.data` and `.bss`, so the same reference
+bytes are modelled twice. The defect is therefore not a wrong pad VA but a pad span over bytes that are already
+emitted. Grouping the 128 pads: 13 are fully redundant for 1,990,600 bytes, 115 are partly redundant for 14,832,761
+bytes of which 3,147,018 bytes are proven redundant while the remainder stands for reference zero fill nothing else
+emits, and none is needed with no proven overlap. Proven redundancy totals 5,137,618 bytes against the measured excess
+of 7,541,760, and 2,404,142 bytes cannot be attributed per pad because 3,982 defined globals have no reference VA and
+the scaffold source is smaller than the linked symbol_stubs.c.obj. A robust lower bound independent of object sizes is
+the pad-to-pad duplication of 1,990,012 bytes plus 1,125,492 bytes of overrun past the next modelled row, which is
+3,115,504.
+Six pads overrun the next modelled row, for 1,125,492 bytes: _dpad_6b89e4 from 760,604 to 4, _dpad_fb5740 from 327,904
+to 32, _dpad_9b0e20 from 36,896 to 16, _dpad_14ce8c2 from 94 to 30, _dpad_773de8 from 2,200 to 2,156 and _dpad_6b870c
+from 728 to 696. The documented rule from the data-analysis skill and the ownership documents is that a pad is
+warranted only for proven uncovered storage or alignment, and a pad over bytes already emitted is not, with the further
+guidance that reference fillers must not be recreated. The recommended order is to trim the six overruns first, then
+delete the eleven pads that are still fully covered after the trims, because deleting all thirteen at once is not
+consistent: trimming _dpad_6b89e4 releases _dpad_6f2578, _dpad_770ae8 and _dpad_6b870c from containment, so the joint
+set is eleven drops. The combined effect is 2,469,688 bytes removed and `.data` VirtualSize from 23,308,324 to
+20,838,636, leaving 5,072,072 of excess concentrated in _dpad_aed32c at 5,014,548 bytes and _dpad_1052c50 at
+4,498,744 bytes, which must be split around the named objects inside them rather than deleted. A caveat from the
+2026-10-29 entry is carried forward: shrinking oversized pads once dropped same-offset agreement from 249,682 to
+239,806 and removing pads dropped the match, so any change here needs a relink comparison, and a pad another target
+needs should be guarded with the existing
+`#if defined(REBREW_SERVER) || defined(REBREW_GOLD)` form rather than deleted.
