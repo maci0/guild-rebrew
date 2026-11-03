@@ -22557,3 +22557,23 @@ An ordered scalar structure holding twenty-four members in reverse order puts th
 The cause of the divergence at offset 12 is therefore register-home competition, with the reference keeping the zero in edi and the
 slot in esi while this build keeps the zero in esi and the slot in ebx. That competition is upstream of the slot map, so no store
 order or declaration change can reach it.
+
+## 2026-11-03 — genitive helper: the tests run on the copied buffer, and a family blocker
+
+`0x517C00` keeps 335 of 2764 with the object at 2764, 59 relocations and status SIZE_MISMATCH, after a one-line repair proved
+from the reference bytes: the four genitive tests read the copied buffer rather than the source pointer. After the copy, the
+reference computes all four tests on the destination, with `mov edx,[esp+0x53c]` at 0x140 and byte comparisons against
+`[ecx+edx-1]` at 0x172, 0x185, 0x198 and 0x1ab, and the concatenation stores to that same destination with `mov [edi-1],dx` at
+0x1c4. The source passed the source pointer to the test macro, which kept it live in esi. Passing the destination instead closes
+seven windows and opens none, with gap events falling from 175 to 168, and the object and match stay where they were.
+The row's blocker is proven and shared with a sibling: the reference saves ebx and ebp lazily inside the switch dispatch block at
+0x125 and 0x12c, after the selector is masked, and pops them on every exit, while this compiler emits them in the prologue
+alongside esi and edi. Everything downstream is that eight-byte shift, with two displacements widening from byte to dword form,
+four extra bytes in total, and the whole body plus the 36-byte jump table moving twelve bytes. The bodies were compared
+instruction by instruction and cases 1, 3, 4, 7, 8 and 9 and the shared tails are identical modulo the shift, so no other source
+defect is visible. Seven flag and shape attempts were rejected, including a size or processor variant, wrapping the switch in its
+own block, one aggregate for the four buffers, and changing the buffer or pointer signedness. The sibling file
+GOLDTL.fcn_005186c0.c has the same defect, compiling to 0xae0 against a 2756-byte reference with its prologue pushing ebx and ebp
+where its reference defers them, so a fix would pay on both rows.
+A correct-but-costly variant was reverted: inlining the first case's four tests so the byte comparison fuses grows the object to
+2804 and 971 instructions, and the reference fuses only that one site while using a wider comparison at the other five.
