@@ -22181,3 +22181,27 @@ casts restored is byte-identical to the baseline at 6043 and 1425, and three if/
 1090 and 6043 at 1422. The first divergence is prologue store scheduling at offset 0x20, native storing ecx to [esp+0x40]
 where this build stores eax to [esp+0x2c], while the inlined ten-byte template copy load order itself matches. Five bytes of
 the object shortfall are the native section tail's NOPs after the character map, which a COFF object never emits.
+
+## 2026-11-03 — m_alloc row: five levers fail on the counter homes
+
+`0x547770` keeps 760 of 5595 with object 5566 and an unchanged source after all five of the levers that worked elsewhere
+tonight were applied and measured. The first divergence stays at byte 24, where the reference stores ebx to [esp+0x10] and this
+build stores it to [esp+0x28], with the partner at byte 28 storing to [esp+0x20] against 0x18 here. The gap diagnostic confirms
+the frame matches at 0x124 with 1756 reference and 1757 object instructions, so the difference is slot choice rather than size.
+Lever results. Declaring the two counters as a sized array grows the frame and drops the match to 432 at 5775; turning four
+floats into one array gives 483 at 5590 with the divergence at byte 2; a padded struct holding the two counters gives 483 at
+5590 with the same divergence; a one-element float array is identical to the baseline. Reaching the memset destination through
+a pointer local is byte-identical. Address-taken locals in a rare block move the prologue instead: taking the address of one
+local in a return path is optimised away, escaping through a call gives 527 at 5648 with the divergence at byte 6, taking the
+address of the selection variable gives 489 at 5565 with the divergence at byte 6, and taking the address of a pad pair grows
+the frame to 0x128 for 737 at 5583. Passing a byte by value is neutral for the divergence at 748 and 5572, and by value with
+the second operand gives 762 at 5532, which moves the object further from the extent without moving the divergence, so it was
+not kept. Writing the comparison the other way round is byte-identical.
+Two diagnostics are recorded because they narrow the next attempt. Declaration order is inert, with several reorders
+byte-identical, while initialiser order does swap the two stores: with the second counter initialised before the first the
+prologue stores become 0x18 then 0x28, so the pair swaps places but never lands on 0x10 and 0x20. A unique constant in one
+initialiser confirms that counter lives in ebx and its partner in the 0x28 slot. Volatile on either counter or on the array does
+not move the pair, and volatile on the selection variable changes the frame and drops the match to 620. The interpretation is
+that the slot pick follows the initialiser store order for this pair, and that the surrounding pool is shifted by other register
+allocation differences, with the object spilling a value to the 0x18 slot that the reference keeps elsewhere. The next
+direction is therefore register pressure on the mask and selection variables rather than more slot levers.
