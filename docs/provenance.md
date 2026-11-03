@@ -24074,3 +24074,13 @@ No source edit was needed. The only change is the verdict the tool refreshed, fr
 2536. The row's twelve-class sweep is therefore vacuous by construction, and it is recorded as such rather than as a clean bill of health: bytes agree, so no class
 can differ. One cosmetic note is left unaddressed: the row's two allocator shims are named differently from the convention used in a sibling row, and renaming them
 would change no bytes.
+
+## 2026-11-03 — the pad generator refuses to run by default
+
+The layout pass that writes text lead pads now exits unless an explicit environment override is set, because its pads are the defect that was removed this session: a
+pad becomes its own text section ahead of a body, so a tool decoding a positional section traces filler instead of the function, and the pad itself only fabricates a
+link offset in place of fixing a size. The docstring says the pad is written at the end of the previous translation unit, which is why the failure was invisible while
+the pads existed: the padding lands in a different object from the function whose extent is short.
+The guard prints what to do instead of failing silently, and the pass still works when the override is set, since a layout experiment may legitimately need it while
+the whole-pad premise is being re-examined. Verified by running the pass after the edit and observing the refusal, and by confirming the file parses. My first attempt
+at this edit corrupted the module by replacing a docstring delimiter, which the parse check caught immediately and the file was rebuilt from the committed copy.

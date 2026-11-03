@@ -16,6 +16,20 @@ import sys
 import tomllib
 from pathlib import Path
 
+# The pads this pass writes are emitted as their own text section ahead of a body,
+# so a tool that decodes a positional section traces filler instead of the function.
+# All eighty pads were removed from the row sources and the gap diagnostic now picks
+# the section that defines the function; a pad only fabricates a link offset instead
+# of fixing a size, so the pass needs an explicit override to run.
+import os
+
+if os.environ.get("REBREW_ALLOW_TEXT_LEAD") != "1":
+    raise SystemExit(
+        "gen_text_lead is disabled: its pads make positional diagnostics trace filler. "
+        "Set REBREW_ALLOW_TEXT_LEAD=1 to force it, and read the pad removal entry in "
+        "docs/provenance.md first."
+    )
+
 ROOT = Path(__file__).resolve().parents[1]
 MAP = ROOT / 'build-goldtl-audit/Europa1400Gold_TL.map'
 OBJDIR = ROOT / 'build-goldtl-audit/CMakeFiles/europa1400gold_tl.dir'
