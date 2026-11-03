@@ -24539,3 +24539,15 @@ absolute store. A volatile pointer produced a spill and a stack store, which is 
 So the two signals cannot both be satisfied from source here: the order and the register are chosen independently by the allocator, and no spelling tried gets both. The row
 is restored byte for byte and the result is recorded, because two bytes on a thirty-three-byte row is not worth a shape that trades order for register; the lesson is that
 near rows with a single register difference are as hard as large ones and should be scheduled after rows that are missing whole blocks.
+
+## 2026-11-03 — near rows: two measured walls on thirty-two and thirty-three bytes
+
+Two of the store's nearest rows were worked and both ended where they started, with the wall identified rather than guessed. On the thirty-three-byte function the only
+difference is which register holds a reloaded global: making the instruction order match the reference keeps a different register, an explicit reload gets the reference's
+register but moves the load after a store, and a volatile pointer spills to the stack. Order and register are chosen independently, so no spelling gets both.
+On the thirty-two-byte counting loop the reference keeps the loop counter in one register and the loaded value in another, pushes a saved register, and orders its prologue
+one way; this build assigns the two values to the opposite registers and orders the pushes differently. Four shapes were measured: a do-while, an endless loop with a
+break, an unsigned counter, and a form with no intermediate value at all. The first three compile identically to the baseline, and dropping the intermediate produces a
+shorter object that is further from the reference.
+Both rows are restored byte for byte. The conclusion recorded for scheduling is that a near row differing only in register allocation is as expensive as a row missing
+whole blocks, so future passes should prefer rows with missing code over rows with single-register deltas.
