@@ -24684,3 +24684,17 @@ table entry over a size; and the frame is exactly the two rectangles short, whic
 One more real difference is recorded: the reference copies a shape header with a counted dword copy where the source emits six explicit stores.
 The object is now under the extent, and the first divergence is still the frame immediate while the first structural one is the missing rectangle pair, so the next pass has a
 concrete target: reconstruct the per-shape branch with the two rectangle locals and the two column counts, using the reference's own division sites.
+
+## 2026-11-03 — particle row: a wrong tail value, and two metrics that must be named
+
+`0x588AA0` gained three repairs, but the entry leads with a measurement lesson: the pass reported its numbers as a byte difference over the whole extent, where this project's
+comparison reports a positional match count. On the same state the byte difference is 572 of 2286 while the positional count is 160, so the two are not interchangeable and
+both are recorded here rather than one replacing the other.
+The repairs themselves are real. The conditional arm order now tests the selector in the reference's order. A tail call's fourth argument was a literal zero where the
+reference passes minus three, which the reference's own push proves. And the mode-two position computations are ordered as the reference orders them, two positions swapped
+back into place. The object shrinks from 1857 to 1850 bytes and the byte difference rises from 551 to 572, while the window count rises from 66 to 74, so the three metrics
+disagree and the honest report is all three.
+The dominant remaining difference is allocation: the reference frame is 0x1cc against 0x188, because it zero-initialises five slots where the source has three and keeps six
+vectors preloaded in spill slots rather than recomputing them. That is not padding material and is reported unsolved. The mode-two floating-point spill ordering is a second
+unsolved remainder. Thirteen callee arities were checked and all match, the dispatch field matches, the loop comparisons match, and the particle structure is 0x68 in both
+with the third instance ending exactly at the reference frame boundary.

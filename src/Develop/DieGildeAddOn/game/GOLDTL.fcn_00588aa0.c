@@ -167,15 +167,15 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 			+ a0->dir3.y * *(float*) 0x66444c + py;
 		pos2.z = a0->dir2.z * *(float*) 0x662a98
 			+ a0->dir3.z * *(float*) 0x66444c + pz;
+		pos1.x = a0->dir3.x * *(float*) 0x662a98 + px;
+		pos1.y = a0->dir3.y * *(float*) 0x662a98 + py;
+		pos1.z = a0->dir3.z * *(float*) 0x662a98 + pz;
 		pos0.x = a0->dir2.x * *(float*) 0x664450
 			+ a0->dir3.x * *(float*) 0x66444c + px;
 		pos0.y = a0->dir2.y * *(float*) 0x664450
 			+ a0->dir3.y * *(float*) 0x66444c + py;
 		pos0.z = a0->dir2.z * *(float*) 0x664450
 			+ a0->dir3.z * *(float*) 0x66444c + pz;
-		pos1.x = a0->dir3.x * *(float*) 0x662a98 + px;
-		pos1.y = a0->dir3.y * *(float*) 0x662a98 + py;
-		pos1.z = a0->dir3.z * *(float*) 0x662a98 + pz;
 		fcn_005e8e80(&p2, &pos2, &a0->dir1, speed, b, *(float*) 0x6660f4);
 		fcn_005e8e80(&p0, &pos0, &a0->dir1, speed, b, *(float*) 0x6660f4);
 		fcn_005e8e80(&p1, &pos1, &a0->dir1, speed, b, *(float*) 0x6660f4);
@@ -203,11 +203,14 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 			fcn_005373e0(0, 0x20007);
 		}
 	}
+	if (sel == 0) {
+		return 0;
+	}
 	if (sel == 3) {
 		h = fcn_00426fd0("LOCATIONS\\DOMIZIL\\KANONE1.esc");
 		h2 = fcn_00426fd0("LOCATIONS\\DOMIZIL\\KANONE1.esc");
 		h3 = fcn_00426fd0("LOCATIONS\\DOMIZIL\\KANONE1.esc");
-		fcn_00428340(h, 4, 5, 0, 40, a0->frame2);
+		fcn_00428340(h, 4, 5, dy, 40, a0->frame2);
 		fcn_00428340(h2, 4, dx, dy, ey, a0->frame2);
 		fcn_00428340(h3, 4, 0, ex, ez, a0->frame2);
 		return fcn_004235b0(0, "Explosion", 1, 1, 0x3f, 0x7f, 0);
@@ -219,10 +222,7 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 		fcn_00428340(h2, 4, dx, dy, ey, a0->frame1);
 		return fcn_004235b0(0, "Explosion", 2, 1, 0x3f, 0x7f, 0);
 	}
-	if (sel != 0) {
-		h = fcn_00426fd0("LOCATIONS\\DOMIZIL\\KANONE1.esc");
-		fcn_00428340(h, 4, 0, 0, 50, a0->frame0);
-		return fcn_004235b0(0, "Explosion", 3, 1, 0x3f, 0x7f, 0);
-	}
-	return 0;
+	h = fcn_00426fd0("LOCATIONS\\DOMIZIL\\KANONE1.esc");
+	fcn_00428340(h, 4, 0, 0, 50, a0->frame0);
+	return fcn_004235b0(0, "Explosion", 3, 1, 0x3f, 0x7f, 0);
 }
