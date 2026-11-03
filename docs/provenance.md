@@ -24508,3 +24508,23 @@ The remaining differences are all placement and liveness rather than source defe
 esi before pushing edi while this build pushes first and loads the other register, a shared return tail where the reference reaches a ten-byte block by a near jump and
 this build emits a short jump over an inline copy of the same block, which is the source of the five-byte shift, and a stack-slot rotation that reuses the dead parameter
 home in the reference and a different slot here, with the frame size identical on both sides.
+
+## 2026-11-03 — switch row: a missing float buffer, variadic arity and a per-arm call
+
+`0x531D20` moves from 296 to 510 matched bytes, its object from 1886 to 2340 against the 2352 extent, and its aligned-instruction comparison from 12 exact and 2
+relocation-only to 43 and 8. The extracted switch region, the shared float tail, the jump and byte tables and the tail dispatch are now byte-identical to the reference.
+The largest repair is a local the source did not have: a ten-float buffer passed by address to a routine that copies forty bytes and whose first three elements the
+reference reads from a known frame offset. Adding it brings the frame from 0x204 to the reference's 0x22c, and the callee's own source plus the reference's address
+computation is what proves the size.
+Four arity and prototype defects were repaired. One routine is variadic and takes two constants beyond its first argument where the source passed one. Another is called
+with one argument at both sites, not three. The formatted-text routine does not have a uniform arity: its plain arms take two arguments, its lookup arms three and its
+search arms four, and the source added a spurious third argument on twelve arms while missing the entity argument on six. And the tail gate is a two-part test on a
+random result and a call's return, not a comparison of an index against minus one.
+Three more structural repairs followed. A table pointer global is a pointer to shorts rather than a short. The text buffer initialisation sets its first element and then
+zeroes the remaining bytes from index one, which is the reference's counted fill plus two smaller stores, where the source zeroed everything and then set the first
+element. The identifier selection had three copies, one per branch, where the reference has one shared check; it is now one check with the identifier block shared across
+the object-null and default paths. The four float arms share one math block in the reference, and reordering the branch and the switch cases made the compiler cross-jump
+so those arms and the block are identical.
+The remaining difference is register allocation and basic-block layout: the reference loads a global into one register before pushing the saved registers and this build
+loads it after the pushes into another register, and the reference places two blocks after the jump-table dispatch where this build places them before it. That accounts
+for the switch sitting eight bytes early and the function being twelve bytes short, and no declaration order changes it.
