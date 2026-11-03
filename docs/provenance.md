@@ -24654,3 +24654,19 @@ One variant is worth recording because it was rejected on principle: padding a l
 bytes occupy scalar slots the reference uses, so it is structurally false and was discarded. The frame instead remains twelve bytes short with three scalar values not
 spilled, and declaration order does not change it. The object is six bytes over the extent, so the remaining differences are the slot layout, a zero-register choice, the
 arm order and an early copy's scheduling, all of them allocation-driven.
+
+## 2026-11-03 — the stub that measured ninety-three bytes is now a whole body
+
+`0x586C10` was a thirty-six-line stub with a ninety-three-byte object and five matched bytes against a 2476-byte extent. It now has 2475 bytes and 385 matched bytes, with
+its first forty-four bytes byte-exact: the frame adjustment, push order, the argument load, an immediate byte store and the counted zero fill at the reference's own 0x950
+offset.
+The body was written in address order in ten blocks, and the staged numbers show what each block bought: the entry gate, the probe and retry, the flag and field copies
+with their calls, the 986-dword scan at the reference stride, a nine-argument viewport call with its counter reset, the overlay block, the object chain with five calls,
+the second sprite and texture block, the main animation loop, and the cleanup and tail. Size grew monotonically from eight bytes to 2475 and matched bytes from zero to
+385.
+The prologue took three separate findings. An explicit local for a call result put that result in the register the reference uses with no spill. Expressing two field groups
+as integer arrays forced the reference's sixteen-slot scalar block and moved the state object to the reference offset, which fixed the frame size. Caching a global in a
+local and reloading it exactly where the reference reloads it removed fifty-nine bytes and raised the count by sixty. Ordering the flag load before the clear, a store before
+a zero fill, and an or after the fill, took the matched bytes to the final number.
+Four variants were measured and rejected: an aggregate initialiser, an earlier byte store and an early flag load all cost bytes, and one of them grew the object past the
+extent. What remains is a one-byte short object, then a nine-byte loop rotation in a wait loop, then allocation after that point.
