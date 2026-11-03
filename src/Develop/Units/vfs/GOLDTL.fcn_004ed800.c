@@ -114,5 +114,12 @@ done:
 	g_772fd8 = 0;
 	return 0;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_772f90[76];
 unsigned char _dpad_772fe4[468];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_772f9c[60];
+unsigned char _dpad_772fec[12];
+unsigned char _dpad_773018[416];
+#endif

@@ -41,4 +41,24 @@ char* __cdecl fcn_0040dbb0(char** a, int* range)
 	}
 	return result;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_14d0020[532480];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_14d0024[3100];
+unsigned char _dpad_14d0c44[4860];
+unsigned char _dpad_14d1f44[262140];
+unsigned char _dpad_1511f48[262136];
+unsigned char _dpad_1552004[12];
+unsigned char _dpad_1552014[12];
+#endif
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_14d0024[3100];
+unsigned char _dpad_14d0c44[4860];
+unsigned char _dpad_14d1f44[262140];
+unsigned char _dpad_1511f48[262136];
+unsigned char _dpad_1552004[12];
+unsigned char _dpad_1552014[12];
+#endif

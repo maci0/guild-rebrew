@@ -150,4 +150,11 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 	fcn_005b18c0(&ctx.dlg);
 	return v;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1015f50[620];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_10160c0[216];
+unsigned char _dpad_1016199[27];
+unsigned char _dpad_10161b5[7];
+#endif

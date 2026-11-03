@@ -379,4 +379,9 @@ done:
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_930600[452112];
 #endif
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_90e0a0[592752];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_99e0a4[2924];
+#endif

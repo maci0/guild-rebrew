@@ -163,4 +163,11 @@ void __cdecl fcn_004d0070(void)
 	fcn_004cfca0();
 }
 unsigned char _dpad_7e3a58[2056];
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7e4260[324];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7e42e4[28];
+unsigned char _dpad_7e4324[92];
+unsigned char _dpad_7e4384[28];
+#endif

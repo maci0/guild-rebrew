@@ -279,4 +279,14 @@ unsigned char _tlead_GOLDTL_fcn_004432d0[144] = {
     0x90,
     0x90
 };
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_10432c0[172];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_10432c8[120];
+#endif
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_10432c8[120];
+#endif

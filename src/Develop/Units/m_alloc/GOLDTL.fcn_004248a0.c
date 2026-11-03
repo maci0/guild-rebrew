@@ -177,4 +177,9 @@ int __cdecl fcn_004248a0(char* name)
 	}
 	return result;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_6b72b4[2756];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_6b72b4[2700];
+#endif

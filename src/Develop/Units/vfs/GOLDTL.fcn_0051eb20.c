@@ -30,4 +30,10 @@ int __cdecl fcn_0051eb20(int a)
 	fcn_004432d0(save, 1);
 	return 1;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_869480[674836];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_8f9480[82080];
+unsigned char _dpad_90d524[2924];
+#endif

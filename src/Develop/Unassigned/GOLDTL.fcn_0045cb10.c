@@ -51,4 +51,10 @@ Tex* __cdecl fcn_0045cb10(int idx, char kind)
 	return 0;
 }
 unsigned char _dpad_1038144[33624];
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_104049c[324];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_10404a4[28];
+unsigned char _dpad_10405d0[16];
+#endif

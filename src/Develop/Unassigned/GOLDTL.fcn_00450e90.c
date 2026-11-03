@@ -130,4 +130,15 @@ void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
 	}
 }
 unsigned char _dpad_1041d04[1180];
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_10405e0[5924];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_10405e4[24];
+unsigned char _dpad_1040604[12];
+unsigned char _dpad_1040614[8];
+unsigned char _dpad_1040628[24];
+unsigned char _dpad_1040644[784];
+unsigned char _dpad_1040964[784];
+unsigned char _dpad_1040c7c[4];
+#endif

@@ -219,5 +219,11 @@ tail15:
 	}
 	return;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7725d0[68];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7725d4[4];
+unsigned char _dpad_7725f4[4];
+#endif
 unsigned char _dpad_14ce922[3592];

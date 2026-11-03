@@ -366,4 +366,11 @@ no_target:
 	return;
 }
 unsigned char _dpad_7e2760[828];
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7e2aa0[2848];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7e2aa4[28];
+unsigned char _dpad_7e2b80[1344];
+unsigned char _dpad_7e3140[1152];
+#endif

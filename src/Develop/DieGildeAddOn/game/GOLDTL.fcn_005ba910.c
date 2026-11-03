@@ -1373,7 +1373,7 @@ l_5bcb82:
 	if ((*(char*) (idx + 0x20) & 1) != 0) {
 		goto l_5bcc9f;
 	}
-	h = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
+	idx = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
 	f.v30 = f.v10 + 0xd8;
 	for (f.v1c = 3; f.v1c != 0; f.v1c--, f.v30 += 4) {
 		j = *(int*) f.v30;
@@ -1397,7 +1397,7 @@ l_5bcb82:
 		}
 		fcn_004c51f0(*(int*) (0x7f4ca4
 		                      + *(unsigned short*) 0x774970 * 0x21c),
-		             f.v9c, *(int*) (h + 2), f.v38, f.v24, 0);
+		             f.v9c, *(int*) (idx + 2), f.v38, f.v24, 0);
 		fcn_00472380(j, 0, 0x64, 0);
 	}
 l_5bcc9f:

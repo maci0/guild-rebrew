@@ -113,4 +113,17 @@ int __cdecl fcn_004f49e0(int fp)
 	}
 	return 1;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_99f5e0[544];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_99f5f0[20];
+unsigned char _dpad_99f608[24];
+unsigned char _dpad_99f688[24];
+unsigned char _dpad_99f6a4[60];
+unsigned char _dpad_99f6e4[64];
+unsigned char _dpad_99f728[64];
+unsigned char _dpad_99f76c[64];
+unsigned char _dpad_99f7b0[64];
+unsigned char _dpad_99f7f4[12];
+#endif

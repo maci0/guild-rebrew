@@ -58,4 +58,14 @@ int __cdecl am_RegisterMethod(AM_METHOD* d, char* ini)
  }
  return 1;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1008420[260];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_1008424[256];
+#endif
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_1008424[256];
+#endif

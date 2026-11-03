@@ -490,4 +490,12 @@ done:
 	fcn_00412830(0x10);
 	return fcn_00471e30(screen);
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_772d14[392];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_772d54[4];
+unsigned char _dpad_772d5c[252];
+unsigned char _dpad_772e78[4];
+unsigned char _dpad_772e90[4];
+#endif

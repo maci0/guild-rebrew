@@ -270,4 +270,14 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         return;
     }
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_100e760[2684];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_100e778[40];
+unsigned char _dpad_100e860[800];
+unsigned char _dpad_100eb84[1020];
+unsigned char _dpad_100ef84[540];
+unsigned char _dpad_100f1a4[4];
+unsigned char _dpad_100f1ac[12];
+#endif

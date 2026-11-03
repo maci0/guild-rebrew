@@ -173,4 +173,21 @@ char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
 	fcn_00452280();
 	return 1;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1042a08[2204];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_1042a30[16];
+unsigned char _dpad_1042a44[500];
+unsigned char _dpad_1042c40[164];
+unsigned char _dpad_1042cec[20];
+unsigned char _dpad_1042d04[500];
+unsigned char _dpad_1042f00[164];
+unsigned char _dpad_1042fa8[24];
+unsigned char _dpad_1043028[8];
+unsigned char _dpad_1043034[12];
+unsigned char _dpad_1043044[28];
+unsigned char _dpad_1043064[496];
+unsigned char _dpad_1043258[31];
+unsigned char _dpad_104327b[13];
+#endif

@@ -446,4 +446,18 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 }
 unsigned char _dpad_100af80[320];
 unsigned char _dpad_100b0c0[8192];
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_100d0c0[2884];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_100d0c4[48];
+unsigned char _dpad_100d0f8[20];
+unsigned char _dpad_100d114[2732];
+#endif
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_100d0c4[48];
+unsigned char _dpad_100d0f8[20];
+unsigned char _dpad_100d114[2732];
+#endif

@@ -147,4 +147,9 @@ done:
 	fcn_0047c520();
 	return 1;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1552020[181252];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_1553020[177156];
+#endif

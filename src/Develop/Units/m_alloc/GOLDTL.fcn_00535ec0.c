@@ -267,5 +267,21 @@ void __cdecl fcn_00535ec0(void)
 		return;
 	}
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7e6068[17144];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7e6160[16896];
+#endif
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7ea360[38816];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7ea364[28];
+unsigned char _dpad_7ea3bc[4];
+unsigned char _dpad_7ea3c2[38398];
+unsigned char _dpad_7f39c2[110];
+unsigned char _dpad_7f3a38[36];
+unsigned char _dpad_7f3a60[96];
+unsigned char _dpad_7f3ae0[32];
+#endif

@@ -121,4 +121,14 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 	}
 	return 0;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7731b8[2944];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7731d8[2912];
+#endif
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7731d8[2912];
+#endif

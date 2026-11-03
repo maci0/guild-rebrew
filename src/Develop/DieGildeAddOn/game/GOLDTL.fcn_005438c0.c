@@ -6805,7 +6805,14 @@ unsigned char _dpad_6f23f8[384] = {
     0x00,
     0x00
 };
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7e46ac[6588];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7e46b4[12];
+unsigned char _dpad_7e4740[6272];
+unsigned char _dpad_7e5fc8[152];
+#endif
 unsigned char _dpad_1460a20[192] = {
     0x00,
     0x00,
@@ -7000,4 +7007,14 @@ unsigned char _dpad_1460a20[192] = {
     0x00,
     0x00
 };
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7746d8[216];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7746ec[4];
+unsigned char _dpad_774700[8];
+unsigned char _dpad_774720[4];
+unsigned char _dpad_774738[28];
+unsigned char _dpad_77475c[24];
+unsigned char _dpad_774778[32];
+#endif

@@ -37,5 +37,22 @@ void __cdecl fcn_00546d10(void)
 		}
 	}
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_77dda0[3040];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_77dda1[383];
+unsigned char _dpad_77df21[255];
+unsigned char _dpad_77e021[127];
+unsigned char _dpad_77e0a1[3];
+unsigned char _dpad_77e0ac[2036];
+unsigned char _dpad_77e8a8[24];
+unsigned char _dpad_77e900[128];
+#endif
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_77e980[340992];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_77f980[335872];
+unsigned char _dpad_7d1984[1020];
+#endif

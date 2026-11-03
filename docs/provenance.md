@@ -20736,3 +20736,44 @@ optimizer places case 'F' after 'm'. Unresolved callees without project definiti
 fcn_0064d41a, fcn_00657a73 and fcn_0064eeec, plus the CRT toupper, isdigit and string helpers, and fcn_004fe330 has only
 a GOLD definition. One tool defect was found: `rebrew diagnose gap 0x00519190 --json` crashes with a TypeError about a
 bytearray used as a dict key at rebrew/gap_trace.py:143, and that failure belongs upstream.
+
+## 2026-11-03 — forty six more pads split, with the alignment rule
+
+The remaining partially redundant pads were split in three measured batches, taking `.data` VirtualSize from 19,233,092
+to 17,902,244 for a drop of 1,330,848 and leaving an excess of 2,135,680 over the reference 15,766,564. A new fact gated
+the method: COMMON contributions are thirty-two-byte aligned, which the giant split proved because its fifteen pieces
+sum to 7,907,840 under align32 and that is exactly what was allocated. A split therefore only shrinks `.data` when
+align32 of the original size exceeds the sum of align32 of the pieces, and of 113 pads with named coverage only 48 had a
+positive delta, the other 65 having gaps of one to a hundred bytes where each piece costs thirty-two. Only the 48 were
+edited, in three batches with measurements: batch 1 changed 3 pads in 3 files for a predicted 1,301,664 and a measured
+1,301,696; batch 2 changed 17 pads in 14 files for a predicted 27,040 and measured 27,296; batch 3 changed 28 pads in 24
+files for a predicted 1,664 and measured 2,080; and two pads in one file were reverted for 224 bytes, giving 46 pads
+across 37 files, a predicted 1,330,144 and a measured 1,330,848. The 46 originals became 186 pieces, each original stays
+inside the `#if defined(REBREW_SERVER) || defined(REBREW_GOLD)` guard and the client branch holds only gap pieces, and a
+checker asserts for all 37 files and 46 pads that the pieces equal the computed gaps, that the guard keeps the original
+size, and that pieces plus named objects equal the span.
+Sections before and after: `.text` falls from 2,575,744 to 2,575,232, `.rdata` stays 45,934, `.data` falls from
+19,233,092 to 17,902,244, `.data1` moves from 0x18da000 to 0x1795000 and `.rsrc` from 0x18db000 to 0x1796000, with map
+symbols from 15,778 to 15,918 and section-3 rows from 6,094 to 6,234. The 512-byte `.text` drop is not from the pads:
+rebuilding src/Develop/Units/d2.v1/GOLDTL.fcn_004d6170.c, which holds `_dpad_772d14`, showed that the stale
+build-goldtl-audit object predates a committed change, since the current source compiles to 4,928 bytes of `.text` where
+the stale object has 5,440, and rebuilding the pre-edit file also gives 4,928 while all data sections are byte-identical
+between old and new, so 5,077 `.text` symbols shifted by 512 for that reason alone and `.data` is unaffected. No GOLDTL
+data row moved or lost its symbol: 424 of 456 rows resolve in both links, the same set as before, none moved and none
+became one-sided, and the 32 rows without a map symbol in either link are unchanged.
+One revert is recorded because it cost 224 bytes: src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004e6650.c carries the
+event.validator_view type binding whose source hash sits at rebrew-types.toml:416, and splitting `_dpad_9a9220` and
+`_dpad_9a9660` there raised a new stale-type-evidence warning, so the file was restored from the pre-edit backup and both
+pads dropped. Any future edit to that file has the same effect and needs a type rebind by whoever owns that store. Lint
+passes with no errors and the two pre-existing warnings, no size or overlap warning appears, and the data layout audit
+reports zero violations.
+The remaining 2,135,680 of excess breaks down as 3,243 named-object bytes still covered by 66 pads but blocked by the
+thirty-two-byte piece alignment, 220 bytes inside the two reverted pads, 2,934 bytes of alignment slack across the 270
+remaining pad declarations, and 2,129,283 bytes that cannot be attributed per pad because 3,982 source-defined globals
+still have no reference VA. An independent check shows named objects plus pads model 14,603,041 of the reference
+`.data` and `.bss` span, which is 92.62 percent, with 1,163,523 reference bytes unmodelled and pad-on-pad duplication now
+zero. The 65 skipped pads keep their overlap because no cheaper piece layout exists under this method, the GOLD map is
+empty so the guard preserves the server and Gold layouts without measuring them, and data byte verdicts were not
+re-measured because the stored addresses come from an older image. Final image SHA-256
+ab4f9271f9e21560864fb0dde45c88bc79577aa7cc6a6b2284d6abe4c135210c, artifacts under
+.scratch/pad-split-remaining/.

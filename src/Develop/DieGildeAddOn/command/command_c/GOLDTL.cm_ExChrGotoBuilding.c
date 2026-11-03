@@ -400,4 +400,18 @@ unsigned char _dpad_6811b0[748] = {
     0x74, 0x65, 0x53, 0x68, 0x65, 0x65, 0x70, 0x00, 0x62, 0x65, 0x77, 0x65, 0x67, 0x75, 0x6e, 0x67,
     0x2f, 0x66, 0x72, 0x65, 0x73, 0x73, 0x65, 0x6e, 0x00, 0x00, 0x00, 0x00,
 };
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1043370[63064];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_1043440[592];
+unsigned char _dpad_1043691[4];
+unsigned char _dpad_104369c[62248];
+#endif
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_1043440[592];
+unsigned char _dpad_1043691[4];
+unsigned char _dpad_104369c[62248];
+#endif

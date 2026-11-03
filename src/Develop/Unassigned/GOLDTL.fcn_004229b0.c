@@ -43,4 +43,9 @@ Voice* __cdecl fcn_004229b0(void)
 	}
 	return best;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_6b7d7c[268];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_6b7d8c[252];
+#endif

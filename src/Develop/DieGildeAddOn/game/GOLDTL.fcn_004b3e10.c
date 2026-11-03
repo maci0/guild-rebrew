@@ -39,5 +39,41 @@ rec24* __cdecl fcn_004b3e10(int a1, int a2)
 	}
 	return 0;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_10058a0[4352];
 unsigned char _dpad_10069a0[6784];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_10058c0[32];
+unsigned char _dpad_10058e8[24];
+unsigned char _dpad_1005914[2044];
+unsigned char _dpad_1006118[2044];
+unsigned char _dpad_1006918[8];
+unsigned char _dpad_1006924[124];
+unsigned char _dpad_10069ac[20];
+unsigned char _dpad_10069c1[4575];
+unsigned char _dpad_1007ba1[31];
+unsigned char _dpad_1007bc2[270];
+unsigned char _dpad_1007cd8[8];
+unsigned char _dpad_1007d40[288];
+unsigned char _dpad_1007e68[1080];
+unsigned char _dpad_10082a4[380];
+#endif
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_10058c0[32];
+unsigned char _dpad_10058e8[24];
+unsigned char _dpad_1005914[2044];
+unsigned char _dpad_1006118[2044];
+unsigned char _dpad_1006918[8];
+unsigned char _dpad_1006924[124];
+unsigned char _dpad_10069ac[20];
+unsigned char _dpad_10069c1[4575];
+unsigned char _dpad_1007ba1[31];
+unsigned char _dpad_1007bc2[270];
+unsigned char _dpad_1007cd8[8];
+unsigned char _dpad_1007d40[288];
+unsigned char _dpad_1007e68[1080];
+unsigned char _dpad_10082a4[380];
+#endif

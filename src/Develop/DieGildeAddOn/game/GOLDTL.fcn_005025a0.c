@@ -75,4 +75,13 @@ float __cdecl fcn_005025a0(int season, int slot)
 	}
 	return (float) (((double) eval_ObjektPreis2Credits(id, 100) * (double) stock - (double) last) * 0.4f + (double) last);
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7f4e51[417087];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7f4e55[19];
+unsigned char _dpad_7f4e6c[414260];
+unsigned char _dpad_85a0e0[2688];
+unsigned char _dpad_85ab64[28];
+unsigned char _dpad_85ab88[8];
+#endif

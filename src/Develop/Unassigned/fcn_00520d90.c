@@ -164,6 +164,20 @@ int __cdecl fcn_00520d90(void* stream)
 	return 1;
 }
 unsigned char _dpad_7d1d80[672];
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7d2020[41984];
 unsigned char _dpad_7dc440[1696];
 unsigned char _dpad_7dcae0[21648];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7d2420[7536];
+unsigned char _dpad_7d4194[33420];
+unsigned char _dpad_7dc444[668];
+unsigned char _dpad_7dc7e0[768];
+unsigned char _dpad_7dcee0[19456];
+unsigned char _dpad_7e1ae1[255];
+unsigned char _dpad_7e1be1[287];
+unsigned char _dpad_7e1d02[62];
+unsigned char _dpad_7e1d44[28];
+unsigned char _dpad_7e1f64[12];
+#endif

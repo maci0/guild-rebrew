@@ -187,4 +187,11 @@ unsigned char _dpad_fe7a20[128] = {
     0x00,
     0x00
 };
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_fe7aa0[122240];
+#else
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_1005764[4];
+unsigned char _dpad_100576c[20];
+unsigned char _dpad_1005784[152];
+#endif
