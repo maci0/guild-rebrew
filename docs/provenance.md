@@ -20908,3 +20908,31 @@ match 872 at object 6459, and was also restored. Unresolved callees without proj
 0x64d41a, 0x64eeec, 0x64efb1 for __isctype, 0x64f367 for toupper and 0x657a73, all with declared prototypes, while all
 nine project callees resolve. The tree already held the faithful j2 skeleton at 888 rather than an earlier 1027 receipt,
 and that higher figure is accidental alignment rather than block-order fidelity.
+
+## 2026-11-03 — d2 row: session loop lands and the colouring flips
+
+`0x4DA690` rises from 1340 to 1488 matching bytes with object 7020 against native 7057, 73 relocations, frame 0x900 and
+equal prefix 0x31f, status SIZE_MISMATCH. The key finding is that the eight spare bytes were never missing: `blkB.s98[4]`
+was on the wrong side of `order[6]`. Native allocates s98 at 0xa8 to 0xb8 and order at 0xb8 to 0xd0, addressing
+`[esp+idx*4+0xa8]` for s98 and `[esp+0xb8]` for the order scatter, while the source had order at 0xa8 and s98 at 0xc0.
+Moving `s98[4]` out of blkB into blkA after `s54[3]` fills native's 0x9c to 0xb8 gap, puts every array base back, and
+keeps the frame at 0x900 without adding or removing a byte. It also fixed the register allocation: a0 lands in ebx and the
+zero in ebp, matching native's `mov al,[ebx+0x30]` and `lea edi,[ebx+0x34]`, where previous builds had them swapped, and
+the equal prefix grew from 0x9e to 0x31f.
+Anchors kept, with raw displacements: s98 at 0xa8, order 0xb8, sD0 0xd0, sF4 0x104, flug 0x124, sitzung 0x1e4, mid
+0x304 and a0c 0x7fc, with `sub esp,0x900`, one epilogue and the loop tail `inc eax; cmp 6; jl 0x398`. The body from the
+loop variant landed as well: the session loop is `do { s20 = order[s30]; ... } while (s30 < 6)` with s20 in slot 0x50 at
+the fcn_004ea2b0 and `s20 - 1` and `s20 + 0x12a9/0x12bb` sites, the vote loop and arm io second argument is s34, the first
+copy bound and dedupe scan bound are s0C, the dedupe block is `s4C = s0C` with base `0x9b0e24 + s0C * 0x35c` and outer
+bound s44, and the per-row counter is s40. The escape set was retuned to blkA.s98, blkB.pad0, blkB.pad1, sF4 and the
+scalars s0C, s10, s14, s18, s1C, s20, s24, s2C, s34, s40, s48 and s60, since other subsets give frame 0x904 or 0x8fc or
+drop the prefix to 0x220.
+Measured attempts, all with frame and order verified from fresh object compiles: the single-pass baseline is 1340 at object
+7048 with order 0xa8, sixteen bytes low; the loop with six escapes dropped is 1326 at 7001; the loop with body fixes is
+1253 at 7103 with frame 0x908; the s98 move alone on the baseline is 1346 at 7030 with order 0xb8 and prefix 0x31f; and the
+landed combination is 1488 at 7020 with frame 0x900. Applying `s1C -= 1` per row measured worse at 1295 and was
+reverted. Nearby alternates were 1493 at object 6984, 1476 at 7015 with 72 relocations and prefix 0x220, 1452 at 7026 and
+1430 at 7028. Two caveats are recorded: the object is 37 bytes short of native because the per-row scene pass is still
+about 538 bytes short, which is the round-one finding, and the row has 73 relocations against native's 72, one extra
+address reference that the relocation-masked comparison tolerates. Kept copy in .scratch/4da690/r12_final_1488.c with
+notes in r12_NOTES.md.
