@@ -24043,3 +24043,22 @@ Four variants were reverted for losing bytes. The largest remaining window is an
 spilled to a frame slot while this build emits a counted dword fill; the project already documents that no spelling of the routine emits that prelude, it is carried as
 inline assembly at six sites by decision, and adding another needs an authorship decision that was not taken. Other differences are labelled codegen: the reference
 homes two values in specific registers, saves only two registers, and hoists an import address out of the loop where this build calls the import directly.
+
+## 2026-11-03 — price row: a nine-hundred-byte inlined body and six width repairs
+
+`0x5A1430` moves from 186 to 223 matched bytes with the object from 3459 down to 2561, inside the 2567 extent, and its object code end now equals the reference's at
+0x0a10. Its largest gap windows of 896, 892 and 552 bytes are gone, leaving one 172-byte window as the largest, and the instruction count falls from 926 to 769
+against the reference's 774.
+The largest single repair is a copied body: the function's exit contained the whole inlined body of a routine that has its own row and source, where the reference
+restores the stack and tail-jumps to it; replacing that with two calls removed about nine hundred and forty bytes. Six width and kind repairs followed. Three
+globals read as sixteen-bit and byte values were read as thirty-two-bit, and three more are floating-point constants that were cast to integers. A callee returns a
+float rather than an integer or double, which the listing shows by loading, multiplying and returning without storing, and two others take a short and an integer
+with a character. The row itself takes no arguments, since the reference never reads its argument slots, and the source's two argument locals came from a fabricated
+compound value. The fourth argument of one call is a dword at the frame base where the source passed a higher slot, and the table base is bound to its reference
+slot.
+One comparison polarity was wrong: the reference compares against the loaded price straight after the call with a parity test, so the condition is that the price is
+greater than the return value where the source had less-or-equal, and a probe confirmed the float-returning callee plus a float compare emits exactly the reference's
+sequence.
+The gating defect is the frame, which is eight bytes over the reference because two scalar spills remain below the array, so every stack operand is shifted by eight
+and the positional count cannot rise until they are eliminated. The remaining codegen devices are a table-base spill and shared poll tails, which are labelled and not
+forced.
