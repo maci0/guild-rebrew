@@ -20202,3 +20202,15 @@ keeps edi, and the remaining minus eight needs the frame-breaking temporaries. K
 deliberate choice even though the object grew, since anchor alignment is structural and the size target cannot be
 met before the vertex-emission surplus is removed. A blocker is set on the row. Backups v38-pre-round7.c as the
 previous source, v45-kept.c as the current one and v45-dehoist.c, with NOTES.md round 7.
+
+## 2026-11-03 — terrain object light loops hoist their offset
+
+`0x447110` rises from 3314 to 3319 matching bytes with the object still exactly 3348 and 114 relocations,
+status NEAR_MATCHING. The edit hoists `off = 0` out of the two light loops so each becomes
+`off = 0; left = count; start = count; for (; left != 0; left--)` with the body indexing
+`RD_LIGHTS(object) + off + 0x28` and its neighbours, which matches native initialising the offset before the loop
+rather than in its increment clause. The change was measured but left uncommitted when its authoring session ended;
+it is committed here after a canonical `rebrew test` on VA 0x00447110 confirmed 3319 of 3348 at object 3348. The
+remaining 29 bytes are the same-length SIB base and index role swaps recorded earlier in the RD_LIGHT_NINE region
+and two in the tail prologue. This commit also carries the metadata store as it stands, which includes an unrelated
+improvement recorded for `0x50c4e0` moving from NEAR_MATCHING to RELOC by another session working in the same tree.

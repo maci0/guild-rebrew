@@ -247,9 +247,10 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				}
 				start = 0;
 				if (count > 0) {
+					off = 0;
 					left = count;
 					start = count;
-					for (off = 0; left != 0; left--) {
+					for (; left != 0; left--) {
 						fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x28);
 						fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x24);
 						fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x2c);
@@ -288,9 +289,10 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 					count = fcn_00446ca0(version);
 					start = 0;
 					if (count > 0) {
+						off = 0;
 						left = count;
 						start = count;
-						for (off = 0; left != 0; left--) {
+						for (; left != 0; left--) {
 							fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x28);
 							fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x24);
 							fcn_004011d0(stream, RD_LIGHTS(object) + off + 0x2c);
