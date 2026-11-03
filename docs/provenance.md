@@ -21779,3 +21779,17 @@ later as if it still held the loop record: at the site near line 1376 the code d
 The result now goes to `h` and the later read uses `h`, so the record pointer survives. The object size and the match count
 are unchanged by the repair, so this is a behaviour fix with no byte trade. Attempts to change the surrounding frame or
 loop shape were not made in this pass.
+
+## 2026-11-03 — four extent shrinks reverted, and why
+
+Four inventory extents were shrunk earlier tonight on the strength of a small-row sweep that reported the function bodies
+ending before their extents. The shrinks were 0x5efd86 from 4 to 3, 0x65a20a from 29 to 5, 0x64d1df from 73 to 56 and
+0x5fc0c8 from 68 to 44, each reasoned as the body length with the remainder belonging to a following function. Reading the
+extent history showed that three of the four had been deliberately widened on 2026-10-25 by a reviewed boundary pass whose
+stated invariant is that no text byte stays unowned: it folds a residual gap into the preceding entry because capstone
+decodes the gap continuously with no new prologue, and it admits a gap as its own entry only when the gap starts a new
+boundary. Under that invariant an over-long extent is the lesser defect, because the bytes are real code that would
+otherwise belong to no row. All four are restored to their reviewed sizes, 4, 29, 73 and 68, through
+`rebrew binary repair-extents` with the reason recorded in the history of each row. The general lesson is worth stating
+because it will recur: a row whose object is shorter than its extent is not automatically an over-long extent, and shrinking
+one must first re-derive the boundary, not just measure where the compiler stopped emitting bytes.

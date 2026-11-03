@@ -65364,8 +65364,17 @@
   },
   {
     "va": 5273872,
-    "size": 224,
-    "name": "fcn.00507910"
+    "size": 213,
+    "name": "fcn.00507910",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 213,
+        "reason": "0x507910 body+switch tables end at 0x5079E5; the 11 bytes to 0x5079F0 are 0x90 alignment fill and the next inventory row starts at 0x5079F0. The byte-identical twin at GOLD 0x5048E0 has the same 11-byte gap and was recorded at 213. C cannot emit table-trailing NOPs.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T06:57:46.910470+00:00"
+      }
+    ]
   },
   {
     "va": 5274096,
@@ -102261,6 +102270,20 @@
         "reason": "Restore full .text coverage after the control-flow boundary work: each residual unattributed range is either a gap between entries or code that the head entry's resize left outside its extent. Trim any container that crosses a range start and admit the range (and any remainder past it) as its own native entry, so no byte stays unowned; the rows for these entries remain unreconstructed work items, not matches.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T10:22:31.128843+00:00"
+      },
+      {
+        "old_size": 4,
+        "new_size": 3,
+        "reason": "reviewed extent: the body is three bytes, mov eax,ecx then ret, and the fourth byte is the next function's first byte, so the code extent is 3",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T06:52:37.537085+00:00"
+      },
+      {
+        "old_size": 3,
+        "new_size": 4,
+        "reason": "revert my earlier shrink: the previous reviewed boundary kept the fourth byte in this entry so no text byte stays unowned, and this project treats an unowned byte as worse than an over-long extent. The byte is the next code's first byte and it belongs to the external range with no inventory row, so it stays folded in",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T06:57:24.422970+00:00"
       }
     ]
   },
@@ -103996,7 +104019,23 @@
   {
     "va": 6275272,
     "size": 68,
-    "name": "fcn.005fc0c8"
+    "name": "fcn.005fc0c8",
+    "extent_history": [
+      {
+        "old_size": 68,
+        "new_size": 44,
+        "reason": "reviewed extent: the constructor body is 44 bytes and the remaining extent bytes belong to a following function at 0x5fc0f4 with no inventory row, so the code extent is 44",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T06:53:57.226162+00:00"
+      },
+      {
+        "old_size": 44,
+        "new_size": 68,
+        "reason": "revert my earlier shrink: the previous reviewed boundary kept the following bytes in this entry so no text byte stays unowned. They are continuation code at 0x5fc0f4 with no inventory row, and an over-long extent is the lesser defect against an unowned byte",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T06:58:24.015343+00:00"
+      }
+    ]
   },
   {
     "va": 6275340,
@@ -111391,6 +111430,20 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729724+00:00"
+      },
+      {
+        "old_size": 73,
+        "new_size": 56,
+        "reason": "reviewed extent: the body is 56 bytes and the remaining extent bytes belong to a following setter function with no inventory row, so the code extent is 56",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T06:53:23.602714+00:00"
+      },
+      {
+        "old_size": 56,
+        "new_size": 73,
+        "reason": "revert my earlier shrink: the previous reviewed boundary extended this entry over the following gap because capstone decodes it continuously with no new prologue, so it is the same code. Splitting it off would leave those bytes unowned, which is worse than an over-long extent",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T06:58:00.757939+00:00"
       }
     ]
   },
@@ -112239,6 +112292,20 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.729793+00:00"
+      },
+      {
+        "old_size": 29,
+        "new_size": 5,
+        "reason": "reviewed extent: the body is a five byte jump to 0x65756f and the remaining extent bytes belong to a following function with no inventory row, so the code extent is 5",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T06:52:57.965372+00:00"
+      },
+      {
+        "old_size": 5,
+        "new_size": 29,
+        "reason": "revert my earlier shrink: the previous reviewed boundary folded the following gap bytes into this entry so no text byte stays unowned, and the gap continues the same external-range code with no new inventory row. An over-long extent is the lesser defect against an unowned byte",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T06:57:42.142926+00:00"
       }
     ]
   },
