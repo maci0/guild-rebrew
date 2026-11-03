@@ -23897,3 +23897,34 @@ Four prototypes were derived from the callees' own bodies, one returning a float
 Three variants were reverted: a void return type, dropping the final return, and numeric floating-point address macros. The three bytes over the extent are a codegen
 device: this compiler canonicalises a floating-point product to load the direct operand first, while the reference loads the table or local operand first, and
 flipping the source order, casting, or using numeric addresses produced identical bytes. The first content divergence is a reload order that nets zero bytes.
+
+## 2026-11-03 — cost row: the frame rebuilt from tracked stack offsets
+
+`0x5BE140` moves from 239 to 316 matched bytes with the frame now exactly 0x724 where it was 0xb44, after the reference's stack offsets were tracked instruction by
+instruction. The old source declared a 0x724-byte frame plus a separate 1024-byte buffer and separate scalars, which made the frame 0xb44 and put every address 0x20
+high. The buffer is now a macro into the frame at 0x324, three record blocks are placed at 0x3c, 0x134 and 0x22c with the reference's fill of sixty-two dwords,
+and the scalars are bound to the reference's slots. Two values were promoted to real locals so the register allocation matches, which was the single largest gain at
+178 to 316 matched bytes.
+The frame is declared eight bytes shorter than the buffer tail so those two promoted locals occupy the trailing bytes and the prologue adjustment stays at 0x724. That
+is a reconstruction device rather than a faithful declaration, it is labelled as one in the source and here, and it means the frame array does not cover the buffer's
+last eight bytes even though the object code is unchanged by it. The object is 2791 bytes against the 2676 extent, ninety-one over, and the status is a size
+mismatch.
+Six classes were checked and three are still open. The copied-block check found the callee histograms agree, the copy loops match at three fills of sixty-two dwords,
+the widths and signedness match with no floating-point load in the reference, the calling convention is cdecl with the push order matching the callee's reads, the
+loop form and the dispatch bounds match, and the argument orders at two call families match. What remains is a class-12 device where four values are read through a
+compound build without being assigned, and the reference does the same with prior register contents, so it is not a fabricated read; and the first divergence is the
+argument register, where the reference pushes ebp and this build pushes ebx.
+
+## 2026-11-03 — cost dispatch row: a body transcribed to ninety-five percent
+
+`0x5A76B0` had 93 bytes of object code and 11 matched bytes; it now has 2584 bytes and 2463 matched bytes, which is ninety-five percent of the extent, with all 121
+mismatched bytes inside the code region and everything from offset 0x884 onward byte-identical, including seven switch jump tables and three byte maps.
+The body was transcribed in stages, and each stage was measured: the full body with its two-argument signature, a 0x1c frame shape, a forty-three case switch, a loop
+and a tail took the match to 600; converting a ternary string select into an if and else took it to 715 because the reference emits a plain branch rather than a
+negate, a sign-propagate and a mask; keeping the type table byte as a byte and adding a base pointer for the subobjects took it to 978 because the reference compares
+the one byte; and two locals for the base plus fixed offsets took it to 1235 and then 2463, matching the reference's single load and address computation.
+The eight-byte gap between the compiled text and the extent is the reference's trailing alignment fill, which no C construct can emit, so the row cannot reach its
+extent even though the code is nearly complete. The remaining divergence is the frame: the reference has seven dword slots, six holding saved globals and one
+allocated but never referenced, while this build has five and puts the first saved global in the argument slot, so seventeen frame-relative instructions differ by
+eight bytes. Two source shapes were tried and reverted. After that only three scheduler-only reorderings remain, and no semantic, width, polarity, threshold, guard or
+prototype defect is open.

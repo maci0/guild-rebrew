@@ -73,11 +73,23 @@ int __cdecl fcn_005bdfc0();
 #define v60 (*(char *)(frame + 0x262))
 #define v61 (*(unsigned int *)(frame + 0x284))
 #define v62 (*(unsigned int *)(frame + 0x288))
+#define v18 (*(int *)(frame + 0x4))
+#define v6 (*(int *)(frame + 0x14))
+#define v7 (*(int *)(frame + 0x18))
+#define v26 ((char *)(frame + 0x324))
+#define v2 a0
+
+/* Frame layout follows the native 0x724-byte allocation: record blocks at
+   frame+0x3c/0x134/0x22c, scratch buffer at frame+0x324. The array is declared
+   0x71c so the register-allocated locals v3/v5 occupy the two trailing slots,
+   keeping the native prologue frame size; this is a reconstruction device. */
 
 /* ADDRESS: GOLDTL 0x005be140 */
 void __cdecl fcn_005be140(unsigned char *a0,int a1)
 {
 	unsigned int *  v1;
+	int v3;
+	unsigned int v5;
 	int v10;
 	unsigned int v11;
 	int v12;
@@ -86,24 +98,14 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
 	unsigned int v15;
 	unsigned int v16;
 	unsigned int v17;
-	int v18;
 	unsigned int v19;
-	unsigned char *  v2;
 	unsigned int v20;
 	unsigned int v21;
 	unsigned int v22;
-	int v24;
-	int v25;
-	char v26[1024];
-	int v27;
-	int v3;
 	short *  v4;
-	unsigned int v5;
-	int v6;
-	int v7;
 	unsigned int v8;
 	int v9;
-	unsigned char frame[0x724];
+	unsigned char frame[0x71c];
   v2 = a0;
   v3 = fcn_00525fb0(a0);
   if (v3)
@@ -194,7 +196,7 @@ label_5be43c:
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 0x3200;
               if (!v7) {
                 v12 = 0x3e;
-                v14 = &v27;
+                v14 = (unsigned int *)(frame + 0x22c);
                 while (v12) {
                   v1 = &v14[1];
                   *v14 = 0;
@@ -211,7 +213,7 @@ label_5be43c:
                 v61 = *(unsigned int *)&v4[1];
                 v58 = (*(int *)0x7f4c08);
                 v59 = (*(int *)0x7f4c0c);
-                v14 = &v27;
+                v14 = (unsigned int *)(frame + 0x22c);
                 goto label_5be96f;
               }
               *(int *)(v7 + 0xb0) = *(int *)(v7 + 0xb0) + 1;
@@ -243,7 +245,7 @@ label_5be43c:
               if (!v6) {
                 v11 = *(unsigned int *)&v2[1];
                 v12 = 0x3e;
-                v14 = &v25;
+                v14 = (unsigned int *)(frame + 0x134);
                 while (v12) {
                   v1 = &v14[1];
                   *v14 = 0;
@@ -252,7 +254,7 @@ label_5be43c:
                 }
                 v42 = 0x12;
                 v47 = (*(int *)0x7f4c08);
-                v14 = &v25;
+                v14 = (unsigned int *)(frame + 0x134);
                 v49 = 1;
                 v51 = 0;
                 v52 = 1;
@@ -285,7 +287,7 @@ label_5be43c:
                 *(int *)(v3 + 0xb0) = *(int *)(v3 + 0xb0) + 1;
               else {
                 v12 = 0x3e;
-                v14 = &v24;
+                v14 = (unsigned int *)(frame + 0x3c);
                 while (v12) {
                   v1 = &v14[1];
                   *v14 = 0;
@@ -303,7 +305,7 @@ label_5be43c:
                 v39 = *(unsigned int *)&v4[1];
                 v36 = (*(int *)0x7f4c08);
                 v37 = (*(int *)0x7f4c0c);
-                v14 = &v24;
+                v14 = (unsigned int *)(frame + 0x3c);
 label_5be96f:
 label_5be970:
                 fcn_004c5530(v14);
