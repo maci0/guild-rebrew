@@ -36,8 +36,9 @@ void __cdecl fcn_006114ff(int, int, int*, int, int, int*, int, int);
 /* ADDRESS: GOLDTL 0x0047acf0 */
 char* __cdecl fcn_0047acf0(char* list)
 {
-	int sizes[0x20];
 	int hdr[0x17];
+	int sizes[0x20];
+	char path[0x100];
 	char* bank;
 	char* shape;
 	char* node;
@@ -170,7 +171,7 @@ char* __cdecl fcn_0047acf0(char* list)
 					}
 				}
 				k = fcn_00475fd0(surf);
-				sprintf((char*) 0x6806280, "d:\\develop\\d2_test\\textures\\surf%02i.bmp", g_77260c);
+				sprintf(path, "d:\\develop\\d2_test\\textures\\surf%02i.bmp", g_77260c);
 				if (g_67dabc != 0 && *(int*) (bank + 0x1c) != 0) {
 					memset(hdr, 0, 0x17 * 4);
 					hdr[1] = *(int*) (shape + 8);

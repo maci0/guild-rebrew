@@ -24670,3 +24670,17 @@ local and reloading it exactly where the reference reloads it removed fifty-nine
 a zero fill, and an or after the fill, took the matched bytes to the final number.
 Four variants were measured and rejected: an aggregate initialiser, an earlier byte store and an early flag load all cost bytes, and one of them grew the object past the
 extent. What remains is a one-byte short object, then a nine-byte loop rotation in a wait loop, then allocation after that point.
+
+## 2026-11-03 — image row: a local buffer where the source wrote an absolute address, and three defects left standing
+
+`0x47ACF0` moves from 191 to 196 matched bytes with the object at 2235 against the 2268 extent, and one repair was kept: a formatted write that went to an absolute address in
+read-only data is now a 0x100-byte local buffer, which the reference proves by forming a stack address one push deep and passing it to the formatting call. The frame grows
+to 0x218 with it.
+Twelve classes were checked. One examined arm inversion compiled byte-identically because this compiler canonicalises the predicate, so that class is not actionable here.
+The remaining defects are named with their evidence rather than guessed: the reference builds a full sixteen-byte rectangle pair at two stack slots and passes their
+addresses, where the source passes four-byte addresses of two scalars, which is a width and base defect; the per-shape branch uses one column count for both the destination
+rectangle and the source tile grid, where the reference divides by two different quantities at two different points, one of them a shape width over a size and the other a
+table entry over a size; and the frame is exactly the two rectangles short, which cannot be closed by padding because padding would occupy slots the reference uses.
+One more real difference is recorded: the reference copies a shape header with a counted dword copy where the source emits six explicit stores.
+The object is now under the extent, and the first divergence is still the frame immediate while the first structural one is the missing rectangle pair, so the next pass has a
+concrete target: reconstruct the per-shape branch with the two rectangle locals and the two column counts, using the reference's own division sites.
