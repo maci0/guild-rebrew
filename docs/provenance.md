@@ -22252,3 +22252,29 @@ of seventy variants plus twenty-four random sets produced none that reaches 0x44
 wants 0x54 and lands at 0x24, while the one at 160 can be pinned exactly at 0x48 by taking one more address. The first true
 divergence remains instruction 183, where the reference stores before comparing and this build stores after, and no variant
 moved it.
+
+## 2026-11-03 — m_alloc row: pressure is not the constraint, one register short in the mask region
+
+`0x547770` keeps 760 of 5595 with object 5566 and an unchanged source after eight register-pressure shapes, none of which moved
+the first divergence past byte 24. The live-range measurement explains the failure: both builds use the same seven scalar slots
+from 0x10 to 0x28 plus arrays at 0x2c and 0xb0, and only the role assignment differs. The reference keeps the mask in edi and
+spills it twice, while this build keeps it in memory and read-modify-writes it twenty-one times with `or DWORD PTR [esp+0x14]`;
+the reference keeps the type-table base in ebp across the count loop and restores it after the 0x773da8 clobber, while this
+build reloads the base every iteration and spills a value to the byte at [esp+0x18] before the comparison. Scalar memory
+references total 80 in the reference against 89 here, which is one register short in the mask region.
+Shapes and their measurements, object and first divergence: turning the clamp into two branches gives 411 at 5564 from byte 24;
+hoisting the table base into a local gives 731 at 5564 from byte 14 and only changes the prologue save interleaving, since the
+compiler still reloads per iteration and still spills, so pressure was not the constraint there; declaring the counters last is
+byte-identical, confirming declaration order is inert; dropping the selection initialiser gives 551 at 5568; dropping the
+redundant assignment in one branch gives 483 at 5563 from byte 14; flattening a constant condition is byte-identical because the
+compiler eliminates it; splitting the bit-loop index out of a shared counter gives 762 at 5566 with the second prologue store
+moving from 0x18 to 0x14 and the slot histogram closer to the reference, but the divergence stays at byte 24, so it was reverted
+under the rule and kept as a patch; recomputing a difference inside the mask block gives 385 at 5582.
+Two instrument caveats are recorded. The gap trace object file is only rewritten by the gap command, so slot histograms printed
+between test runs are stale unless the gap command runs first; the match, object and divergence figures quoted here come from the
+test output and are sound, while the shape readings that depended on stale histograms were re-measured for the baseline and the
+split-index variant. Structurally, slot 0x28 is allocated first and 0x10 last, the reference gives the counter the last slot and
+the threshold the first, and this build does the opposite; adding one local pushed the later-allocated slot down by exactly one,
+so the permutation is sensitive to the variable set without moving the counter toward 0x10. Two levers remain untried and are
+recorded for a later pass: giving the count loop a single use of the base that also feeds the second index, which is what the
+reference shows, and giving the third-branch compare its own copies so the counter dies earlier.
