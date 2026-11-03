@@ -473924,7 +473924,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00470820".verification]
-source_hash = "c244f76d5fbd06cc5278919bbf61e25b7abab54767832ff0017345452f63cd9c"
+source_hash = "d29721c95d6cab3ab611fabf7504665f3411ffc7750fd95bfe42db6f59ce6d8c"
 reference_hash = "e2668049768439c05966e4c37a7f3f9a73c3892334d8bfa318798aa594d61bf8"
 reference_size = "2307"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -473935,10 +473935,10 @@ module = "GOLDTL"
 va = "0x470820"
 context_hash = ""
 defines = "[]"
-input_hash = "fe94136de1a851b73e65c81d0574954a5bf9680c39ae9d7f0fac2aeba0405f1b"
+input_hash = "ec6d5ca182c33f7a9657c186b57d021b6661010b143dc543b78bc10867d0edb0"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T22:08:50+00:00"
+measured_at = "2026-11-03T22:25:18+00:00"
 
 [["GOLDTL.0x00470820".status_history]]
 old_status = "STUB"
@@ -587739,13 +587739,13 @@ name = "fcn_0056bfd0"
 symbol = "_fcn_0056bfd0"
 kind = "FUNCTION"
 updated_by = "test"
-updated_at = "2026-11-03T22:24:45+00:00"
-status = "EXTRACT_ERROR"
+updated_at = "2026-11-03T22:25:37+00:00"
+status = "SIZE_MISMATCH"
 blocker = "STUB, best body kept unchanged this pass: 144/2324 exact, object 1428 vs 2324 (255 target instructions still uncovered; diff reports first missing at 'mov ecx, [mem]'). Target frame is 0x928 (sub esp,0x928) and the live disassembly shows an 8-case jump table at 0x56c8c4 on arg+0x70; the current body covers only part of the switch (cases 0-5 plus -1/-2) and its buf[0x800] frame does not match 0x928, so operands and branch encodings diverge throughout. Needs a full codegen-faithful rewrite from the 357-line hint at .scratch/decomp/GOLDTL/0x0056bfd0.c.pseudo."
 blocker_delta = 2180
 
 ["GOLDTL.0x0056bfd0".verification]
-source_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+source_hash = "020d53dcad6b3c4d07351795213ad8dbc57d18f7caf9235f1bf96a5ecea61c14"
 reference_hash = "f6d32f19c2b35a28f30d69e5717880f99c34c149137d1f9805e77a89885ae13f"
 reference_size = "2324"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -587756,10 +587756,10 @@ module = "GOLDTL"
 va = "0x56bfd0"
 context_hash = ""
 defines = "[]"
-input_hash = "816920819ba1192806bd3cac7825cd7ea21f325c337e25a652c8aad7ebd33002"
-status = "EXTRACT_ERROR"
+input_hash = "fdb33d90e47aad76e4059934e77fc813f93a375b615ee1ae1f425186952a3b0b"
+status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T22:24:45+00:00"
+measured_at = "2026-11-03T22:26:14+00:00"
 
 [["GOLDTL.0x0056bfd0".status_history]]
 old_status = "STUB"
@@ -587771,6 +587771,12 @@ updated_by = "test"
 old_status = "SIZE_MISMATCH"
 new_status = "EXTRACT_ERROR"
 changed_at = "2026-11-03T22:24:45.410870+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0056bfd0".status_history]]
+old_status = "EXTRACT_ERROR"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-11-03T22:25:37.496194+00:00"
 updated_by = "test"
 ["GOLDTL.0x0056e3c0"]
 size = 1458

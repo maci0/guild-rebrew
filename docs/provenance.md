@@ -24639,3 +24639,18 @@ to 525 and turn the row into a stub, because the wider local moves everything af
 which means the compiler either eliminated it or placed it where it produces no store.
 The row is restored and the result recorded: the missing store is real and the shape that produces it is not a wider array, so the next attempt should look for a
 four-field structure or for the fourth value being written by a different statement than the initialiser.
+
+## 2026-11-03 — vfs row: a dispatch testing the wrong field, and a rejected pad that would have faked the frame
+
+`0x470820` moves from 174 to 219 matched bytes with the object at 2313 against the 2307 extent, and five repairs were kept from the reference bytes. The dispatch chain
+tested one field where the reference tests a different one thirty-some bytes earlier for three of its cases; that is proven by the reference's own load address. A loop
+bound written as at least one is now strictly positive, matching a compare-and-jump against zero. A character buffer was four bytes where the reference reads four bytes
+at one offset and writes a zero eight bytes in, so it is eight bytes with the zero at the later offset, which moves the frame four bytes toward the target. A pointer
+subtraction was arithmetic on an integer pointer, which scaled by four, where the reference subtracts a byte count; the cast makes it a byte difference. And a float
+comparison read the wrong base, where the reference loads from a field of the record the loop walks.
+Two claims were refuted rather than fixed: the row takes three arguments and returns the slot handle, confirmed from the argument slots and the plain return, and the
+duplicated call in one arm is real in the reference too.
+One variant is worth recording because it was rejected on principle: padding a local to twenty bytes made the frame match and raised the count to 224, but the twelve pad
+bytes occupy scalar slots the reference uses, so it is structurally false and was discarded. The frame instead remains twelve bytes short with three scalar values not
+spilled, and declaration order does not change it. The object is six bytes over the extent, so the remaining differences are the slot layout, a zero-register choice, the
+arm order and an early copy's scheduling, all of them allocation-driven.

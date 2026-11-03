@@ -41,7 +41,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 {
 	char v21[256];
 	char v22[256];
-	char v23[4];
+	char v23[8];
 	int v24;
 	int v25;
 	int* v26;
@@ -106,7 +106,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 	}
 	vfs_ReadData(v23, 1, 4, (void*) v15);
 	v40 = (signed char) v23[3] - 0x30;
-	v23[2] = 0;
+	v23[4] = 0;
 	if (v40 != 2) {
 		v40 = 0;
 		fcn_00430a80((void*) v15, 0, 0);
@@ -133,7 +133,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 	v44 = 0;
 	v15 = v35 * 700;
 	*(int*) (v15 + 0x10382d4) = g_772528 - 1;
-	if (v24 >= 1) {
+	if (v24 > 0) {
 		v39 = (int*) 0x6b8b00;
 		v36 = (int*) 0x712950;
 		v43 = v35 * 0xaf;
@@ -142,7 +142,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 		do {
 			v13 = v40;
 			v10 = v39;
-			v26 = v36 - 0xed0;
+			v26 = (int*) ((char*) v36 - 0xed0);
 			if (v40) {
 				v33 = v26;
 				if (v40 == 2) {
@@ -173,7 +173,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 							g_772514);
 					v11 = g_772514 * 0x3cc;
 					if ((*(unsigned char*) (v11 + 0x1015f54) & 1)
-						&& *(float*) (v11 + 0x10162e4)
+						&& *(float*) ((char*) v36 + 0xbc)
 						== g_6628a8)
 						*(unsigned int*) (v11 + 0x10162e4) =
 							0x3f266666;
@@ -275,9 +275,9 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 							+ v13 * 0x2f4) =
 							v15 + 0x1038140;
 					}
-					if (*t != 0x43) {
-						if (*t != 0x41) {
-							if (*t == 0x45) {
+					if (t[-0x330] != 0x43) {
+						if (t[-0x330] != 0x41) {
+							if (t[-0x330] == 0x45) {
 								v37 = *t & 0xff;
 								v12 = fcn_00465950(
 									(char*) v19);
