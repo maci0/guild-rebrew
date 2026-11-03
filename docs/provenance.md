@@ -21936,3 +21936,31 @@ where the declaration sits, and deferring the first load moves the home without 
 lands at 0x24 instead of 0x18. Freeing the slot therefore needs the loop region to stop reusing ebx, which is register
 allocation shape and not source-level load placement. The row's blocker is rewritten with this and with the explicit list of
 probes not to repeat. The source is restored byte-identically and nothing was kept.
+
+## 2026-11-03 — a recorded codegen wall turns out to be operand order
+
+A gap-diagnostic pass on `0x569FF0` landed nothing but rewrote two of the row's recorded walls. The first claimed wall, a
+native float-compare block of 58 bytes against 56 here, does not reproduce and is not a compiler wall: it is the order the
+operands are written in. The reference block from 0x7f2 to 0x811 is 31 bytes of `fstp [fv]; fld [0x662a2c]; fcomp [fv];
+fnstsw ax; and eax,0x4100; jne; mov [fv],0x3a83126f`, while this build produced 25 bytes of `fst [fv]; fcomp [0x662a2c];
+test ah,0x5; jp`. A probe compiled with the project flags shows the mapping directly: `if (fv < *(float*)0x662a2c)` emits
+this build's 25-byte form, and `if (*(float*)0x662a2c > fv)` emits the reference 31-byte form, with the `<=` variants giving
+`test ah,0x41` and `and 0x100`. In place the corrected statement makes the object block instruction-identical to the reference
+apart from the local's slot, and closes the window: gap events fall from 335 to 334, the streams realign at reference 0x7fc,
+and the drift at reference 0x817 improves from minus twelve to minus six. The corrected source is held as a candidate at
+.scratch/569ff0/CAND_fcmp_proven.c and was not landed because it takes the object from 3772 to 3776, four bytes over the
+extent, with the positional match falling from 982 to 952.
+The second recorded wall, an if-else body the compiler will not emit, survives, and the reference shape is now known exactly.
+The reference pushes the search arguments once at 0x56a8c0 and then jumps to a duplicated search call in the else arm at the
+end of case 5; the flag arm calls search at 0x56a8eb after the memset and does not null-check the pointer, while the else arm
+does. Three source shapes were tested and this compiler normalises all of them by hoisting one common search call above a
+second flag test and re-splitting the memset guard. That hoisting is the nine to eleven byte case-5 excess which stops the
+float repair from fitting, so the two walls are one window rather than two.
+The first remaining divergence is at object offset 7 and is the parameter register wall. The reference prologue subtracts
+0x738, pushes ebx, ebp and esi, loads the entity into esi, pushes edi, and keeps three zero registers with zero stores at
+slots 0x34, 0x2c, 0x30 and 0x1c; this build pushes ebx, loads the entity into ebx, pushes ebp and keeps one zero register with
+stores at 0x10, 0x34, 0x30 and 0x18. The four-byte prologue surplus plus the three-register zero set is what every later
+offset inherits, and nothing tried changed it; the case-5 repair that fixes sizes is the likely lever, since the reference
+reuses esi for another pointer at 0x900. The call sequence is one to one with the reference at 101 sites through case 5, and
+no wrong callee was found. Five callees remain declared without a bound address: fcn_00508e40, fcn_00545e80, fcn_0050df70,
+fcn_0064d41a and fcn_00509570.
