@@ -24297,3 +24297,23 @@ Two leads from an earlier row were confirmed rather than assumed: the request re
 Two defects are found and not fixed, both labelled. The reference shares one call-and-return tail across five source tails, reached by a jump, where this build emits five
 separate tails; that is the same codegen behaviour already documented for other rows and it accounts for about thirty of the fifty-nine excess bytes. And the four walks
 over a 0x21c stride address the same bytes from a different anchor, which costs an extra address computation per iteration without changing what is read.
+
+## 2026-11-03 — the displaced data symbol: cause found, one duplicate pad removed, and a measurement caveat
+
+The action list's largest item was a 589,824-byte data symbol reported as displaced. The extent is not the defect: the header declares a 768 by 768 byte matrix and
+every use indexes it that way, so 0x300 times 0x300 is the reference extent. The displacement decomposes exactly on the current tree into three parts. Initialised data
+is 0x63534 bytes where the reference raw section is 0x40FC0, an excess of 140,660 caused by initialised pad declarations sized against an older metadata set that now
+cover rows that have definitions of their own. The .bss side is short by 37,824 because the symbol is defined in a generated stub translation unit and the stub packs it
+next to its neighbours, while every one of the 273 BSS pads in this tree is a tentative definition that the compiler emits as a common symbol, so the linker appends it
+at the end of the section and a pad cannot hold a reference gap at all. The remaining 53,248 bytes are section layout, from text and read-only data sizes, not data
+declarations.
+One defect in this tree was fixed and measured. A translation unit declared the same reference bytes twice with two pads whose initialisers are byte-identical over the
+overlapping span; the second declaration was removed, so the same bytes are still emitted once. A rebuild and relink of that unit takes initialised data from 0x63534 to
+0x5C8B4, the displaced symbol from 0x88f640 to 0x8889c0, and the second largest displaced symbol from 0x91f650 to 0x9189d0, and the row's function still measures a
+full relocation match at 808 of 808 with 49 relocations.
+Two things are recorded as not established. Removing the remaining 112,884 bytes of over-allocation needs the stale pads reconciled or regenerated from current metadata
+and then relinked, and the padding fill command skips existing pad names, so the pads have to be removed first. And holding a gap inside the bottom of the data section
+needs real owner translation units for those globals rather than common declarations, which the reference does not tell us because it carries no link map.
+A measurement caveat is recorded with the change: the required data verification ran against a build image from before this session's pad split, so it rewrote 1,260
+verification blocks in the data store with measurements from that stale image, including status changes. Those blocks are tool-written measurements, not hand edits, and
+they must be refreshed by re-running the verification after a fresh link.
