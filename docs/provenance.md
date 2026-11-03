@@ -24782,3 +24782,17 @@ The staged numbers show the shape of the work: 806 to 1104 when the character te
 corrected, 2226 when the second was, and 2238 with the initialisation order.
 The conclusion worth recording is that the frame did not need padding at any point: the layout became reference-identical as soon as the temporary array's real use was
 restored, which is the opposite of the pattern where rows are padded to match a frame and stay structurally false.
+
+## 2026-11-03 — caravan row: constants on the left, and a duplicated call site where the reference has one
+
+`0x4EBA60` moves from 964 to 1005 matched bytes with the object from 2196 to 2174 against the 2148 extent, and its gap windows from 43 to 20 with none opened.
+Two repairs were kept. Six comparisons of a byte against six or seven now put the constants on the left, which is what the reference emits: every one of its eight byte
+tests compares against seven first and six second, so the source order decides the emitted order. And a block that set a format and an output pointer in variables before a
+shared call is now two call sites, one for the found case writing one buffer and one for the not-found case writing the other, because the reference duplicates four pushes
+between the arms and shares only the tail. That change alone closed twenty-three windows and shrank the object by twenty-two bytes, which is why duplicating a site is
+sometimes the faithful shape rather than the tidy one.
+Nine other classes were checked and are clean: variadic argument counts per site, push order at every site, field and slot offsets, the loop counts and their signed jumps,
+the frame and buffer layout, the table strides, the masked floating-point test, and the two buffers being genuinely separate rather than overlaid.
+What remains is scheduler and tail behaviour. The object keeps one argument in a callee-saved register across two calls and spills the sign where the reference reloads it,
+and the function tail shares one cold epilogue in the reference while this build inlines an epilogue at two sites, which is where most of the remaining excess sits. The loop
+induction form was tried as a pointer with a pre-decremented bound and collapsed the match to 170, so it is reverted and recorded as a negative.

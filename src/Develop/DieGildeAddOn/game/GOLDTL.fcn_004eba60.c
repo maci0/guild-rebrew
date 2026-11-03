@@ -66,7 +66,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 			io_FormatTextBuffer(buf, 0x1682, *(unsigned short*) h, *(unsigned short*) h);
 			p = g_7f4ca4;
 			do {
-				if ((p[-2] == 6 || p[-2] == 7) && *(int*) p != *(int*) (h + 4) && *(int*) p != *(int*) (e + 4))
+				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (h + 4) && *(int*) p != *(int*) (e + 4))
 					fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
@@ -82,7 +82,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 			io_FormatTextBuffer(buf, 0x1683, *(unsigned short*) h, *(unsigned short*) h);
 			p = g_7f4ca4;
 			do {
-				if ((p[-2] == 6 || p[-2] == 7) && *(int*) p != *(int*) (h + 4) && *(int*) p != *(int*) (e + 4))
+				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (h + 4) && *(int*) p != *(int*) (e + 4))
 					fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
@@ -125,18 +125,16 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 			io_FormatTextBuffer(buf2, 0x1670, a1[1] + 0x1663);
 			p = g_7f4ca4;
 			do {
-				if ((p[-2] == 6 || p[-2] == 7) && *(int*) p != *(int*) (e + 4)) {
-					fmt = 0x5fe;
-					out = buf2;
+				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4)) {
 					for (k = 0; k < n; k++) {
 						if (arr[k].mplayerid == *(int*) p) {
-							fmt = 0x5fb;
-							out = buf;
-							break;
+							fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fb, g_6b5c60);
+							goto next_p1;
 						}
 					}
-					fcn_00545d40(*(int*) p, -1, out, 0, fmt, g_6b5c60);
+					fcn_00545d40(*(int*) p, -1, buf2, 0, 0x5fe, g_6b5c60);
 				}
+			next_p1:
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
@@ -149,18 +147,16 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 			io_FormatTextBuffer(buf2, 0x1671, a1[1] + 0x1663);
 			p = g_7f4ca4;
 			do {
-				if ((p[-2] == 6 || p[-2] == 7) && *(int*) p != *(int*) (e + 4)) {
-					fmt = 0x5fe;
-					out = buf2;
+				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4)) {
 					for (k = 0; k < n; k++) {
 						if (arr[k].mplayerid == *(int*) p) {
-							fmt = 0x5fb;
-							out = buf;
-							break;
+							fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fb, g_6b5c60);
+							goto next_p2;
 						}
 					}
-					fcn_00545d40(*(int*) p, -1, out, 0, fmt, g_6b5c60);
+					fcn_00545d40(*(int*) p, -1, buf2, 0, 0x5fe, g_6b5c60);
 				}
+			next_p2:
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
@@ -193,7 +189,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 		io_FormatTextBuffer(buf, 0x167a, a1[1] + 0x1663);
 		p = g_7f4ca4;
 		do {
-			if ((p[-2] == 6 || p[-2] == 7) && *(int*) p != *(int*) (e + 4))
+			if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
 				fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fd, g_6b5c60);
 			p += 0x21c;
 		} while ((int) p < (int) (g_7f4ca4 + 0x65400));
@@ -204,7 +200,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 		io_FormatTextBuffer(buf, 0x167b, a1[1] + 0x1663);
 		p = g_7f4ca4;
 		do {
-			if ((p[-2] == 6 || p[-2] == 7) && *(int*) p != *(int*) (e + 4))
+			if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
 				fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
 			p += 0x21c;
 		} while ((int) p < (int) (g_7f4ca4 + 0x65400));
