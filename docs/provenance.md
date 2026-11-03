@@ -23769,3 +23769,22 @@ and the frame, message base, record offsets and shuffle array all match the refe
 later size differences, two register-assignment differences, and block reordering that moves the success paths after the loops, which accounts for the ninety-one
 byte shortfall. No window opened. The next probe recorded is to keep the scan bound in the same register and recompute the entry from the loop index on the hit
 path so the jump distances match.
+
+## 2026-11-03 — orientation row: a body of one hundred and thirty-six bytes rebuilt
+
+`0x5988B0` (lc_GebaeudeAusrichten) had 136 bytes of object code against a 2718-byte extent; it now has 2708 bytes with the object's code end matching the
+reference's and the frame exactly 0x4110, and the matched bytes rise from 13 to 212. Eight defects or omissions were repaired.
+The building table is a pointer variable loaded from its address, not an array, so the old declaration could not reproduce the loads. The routine takes two
+arguments, not four: the filtered-entity search takes five arguments including a masked word from a global and pops 0x14, and the buffer is formatted with a length
+and a computed offset then passed with a count of one to the next routine, where the old body passed a different length and a name pointer. The colour key is a
+four-byte value that is zeroed, flagged and given an identifier before being passed by value. The frame was rebuilt from the reference's own displacements into an
+exact 0x4110 layout with nine named regions including two 0x100-element object arrays, a 0x400 text buffer and a 128-entry name table, and the reference zeroes two
+separate 0x400 regions rather than one. The found-entity comparison is a zero-extended unsigned byte, where the old body sign-extended. Eight helper prototypes were
+derived from the callees' own bodies, none of which had a declaration. And a semantic step was missing entirely: the orientation vector is built from three fields
+with pi added to the second, passed through a matrix routine before the report block, and the reference also scans a 128-entry file table with a step of one and a
+computed character suffix, and runs a placement and retry loop.
+A variant that omitted the orientation block scored 335 matching bytes but was fifteen instructions short of the reference's composition and ended earlier, so the
+complete version was kept and both numbers are recorded: the larger byte count came from a scheduling coincidence, not from the missing step being right.
+The remaining divergence is register allocation and scheduling in the prologue, where the reference pushes three registers and loads its argument while this build
+loads a global into the accumulator first and routes the type argument through another register. The divergence is otherwise fine-grained, with eighty-one matching
+runs whose longest is ten bytes.

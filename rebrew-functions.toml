@@ -422752,7 +422752,7 @@ status = "SIZE_MISMATCH"
 blocker = "Building-alignment / 3D object-group loader; SIZE_MISMATCH 29/2718, object 136B. Frame is reproduced exactly: target is mov eax,0x4110 / call __chkstk then push ebx/ebp/esi with the argument loaded at [esp+0x4120], no frame pointer (no optimize y pragma); the body declares char loc[0x4110] and compiles to the same mov eax,0x4110 + __chkstk prologue. Only the entry validation prefix is translated so far: g_868050[type*0x24d] == 2 gate, the fcn_00503fe0/fcn_00503e80 entity scan comparing *p against the type, and the fcn_0051af00/fcn_00526120 text check with the early return. The pdg hint at the true entry is not usable for the rest: with the 0x4110 chkstk frame rz-ghidra splits the frame into 30+ fake stack arguments (arg_410h, arg_810h, arg_1110h, arg_4114h, arg_c10h, arg_4934h ... all reported as removed because they do not fit the proto model) and addresses the real locals as stack0x00000410/810/1110, so every call in the hint has lost its arguments. What is established from the strings and the frame: the function enumerates 3D object groups for the building type through the '%sgebaeude/*%s.ogr' and '%sgebaeude/*%s_%c.ogr' patterns into a 0x60-stride table at frame+0x1110, keeps up to 128 entries, falls back to '%*sp_BAU_WIMPEL.ogr' and 'sonstiges\\sp_WIMPEL.baf', and reports \"lc_GebaeudeAusrichten(): Could not load 3D-Object-Group '%s'...\" and \"...Could not find any 3D-Object-Group fitting this building...\". Next step is a manual frame-slot map (0x410 and 0x810 buffers, 0x1110 table, and the two stack arrays at 0x114/0x1110) recovered from the disassembly rather than the pdg, then translate the group enumeration and the instance placement loop against it."
 
 ["GOLDTL.0x005988b0".verification]
-source_hash = "fce04a15e3787aa035a82191ec12639127c104e7e2980351fcaf00dc4f00d773"
+source_hash = "bb9ce6fbc9834ad14aecd594d03e53d5be0c70a6719ce50ecf95d8eddf00b17b"
 reference_hash = "53c995db0ea0b2f01a2ea5a6c881b5b3ccf6e3a2ff2e4971ba06a3e4a2eb7bf9"
 reference_size = "2718"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -422763,10 +422763,10 @@ module = "GOLDTL"
 va = "0x5988b0"
 context_hash = ""
 defines = "[]"
-input_hash = "931985678d958d276f18b8a0fe8d26d5b9d82bfea9484798b86a2fb2e11f6511"
+input_hash = "6e2d524c56a4a260e591be716bb78c8ad4fe46063ae18ad82ae81a8d1fb0b76c"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T16:38:25+00:00"
+measured_at = "2026-11-03T16:42:32+00:00"
 
 [["GOLDTL.0x005988b0".status_history]]
 old_status = "STUB"
@@ -475105,7 +475105,7 @@ blocker = "Body kept (Handels-Lageroptionen dialog builder, from pdg at true ent
 blocker_delta = 85
 
 ["GOLDTL.0x005be140".verification]
-source_hash = "2cea725cd41f6ba25e399acc78d6108bf358b02c2e3440fe940a74b3d97955d7"
+source_hash = "d88474d93b09ab80e032e63bbcc0fe9e95169be4d2a6fba3e031b9fdd1904db4"
 reference_hash = "8fc4de719391a54a162fb972c3d5d4dd3564408cd26074e1d79bedef127c31cd"
 reference_size = "2676"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -475116,10 +475116,10 @@ module = "GOLDTL"
 va = "0x5be140"
 context_hash = ""
 defines = "[]"
-input_hash = "bd0683784afe079c48324b34af884b2f7d7229ffc46a3e836eabc3ba13a2059b"
+input_hash = "867f65652b02500feeace0cfcd4a8d309fed65cbd95dc493c64a842bd472538e"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T16:41:52+00:00"
+measured_at = "2026-11-03T16:45:27+00:00"
 
 [["GOLDTL.0x005be140".status_history]]
 old_status = "STUB"
@@ -475139,20 +475139,20 @@ blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x0054e390".verification]
 source_hash = "8afdf2e0bb107d42cb2e438fdd1ab197ae1ed2f542dfd8697072b338845bec22"
-reference_hash = "fb431f9b5d14fce0ef593f59d4e393edd4fa6956c753d75bff2ca8e2463f236d"
-reference_size = "2688"
+reference_hash = "e00d3d7b48f4001319e67b294722d012563ce149daa08a5652fad2cbf0001a96"
+reference_size = "2676"
 headers_hash = "f5265e0613eb6048630f6f35e3b0c38bbc99ec0ad0abf2c64a27d3eee61cfba6"
-compiler_hash = "0e8a99954f54c9a4a83e18dc30c2c78d371ee084f27f0d787482cfc91082426c"
+compiler_hash = "65a1000bf28aa2b83554b7df27aa95b5e00a20caca95c781df314ebdfa19993e"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x54e390"
 context_hash = ""
 defines = "[]"
-input_hash = "e4d4d1c46b96734ae7f7f5a7b4afd93c301e20be1a08952f106743337184d797"
-writer = "verify"
+input_hash = "d232db47abce964df30635da6be33343c1d56d7c1fe1a3765dcd2a660ab51129"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-02T09:00:59+00:00"
+writer = "test"
+measured_at = "2026-11-03T16:43:14+00:00"
 
 [["GOLDTL.0x0054e390".status_history]]
 old_status = "STUB"
@@ -475205,7 +475205,7 @@ blocker = "Faithful body written from the true-entry pdg plus 788-instruction di
 blocker_delta = 206
 
 ["GOLDTL.0x00483f20".verification]
-source_hash = "92032b1dd360a010afee90925c5a6a5af1488be87be203c92b623763ae6d5a12"
+source_hash = "cc69f734f33eda8f31e67e0b72dca1f059365a73fb751053421908c458d635f3"
 reference_hash = "7643b541f3204605bb8dde7087839fb4ad7e595c1132b7896e6c3c799512a794"
 reference_size = "2694"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -475216,10 +475216,10 @@ module = "GOLDTL"
 va = "0x483f20"
 context_hash = ""
 defines = "[]"
-input_hash = "6b0e5b23dd94955391a95f615cf20e50d42bb4afc39988c1e67109d4c684521a"
+input_hash = "cdba28380cbd86b822c95bdcf7a9e66c745b0aa7773cec659567f552ef7e5eb9"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T16:39:29+00:00"
+measured_at = "2026-11-03T16:44:27+00:00"
 
 [["GOLDTL.0x00483f20".status_history]]
 old_status = "STUB"
