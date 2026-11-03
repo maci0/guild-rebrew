@@ -23189,3 +23189,21 @@ The first divergence is a slot assignment, where the reference keeps the count a
 stack slot and the second index in a register where the reference keeps the count in a register and the index in another. One tooling fact is
 recorded again because it has misled readers: the trace object is refreshed only by the gap diagnostic, never by a test, so a session that reads it
 after only a test is reading the previous source.
+
+## 2026-11-03 — trade window: the progress bar read the wrong record field
+
+`0x5B7880` keeps 290 of 4008 with the object at 4008 against the 3794 extent, nine relocations and a frame that matches at 0x110c without a frame
+pointer, and one repair landed that is byte-neutral but behavioural. The progress-bar block wrote a call's result into the record's value field and
+then gated and used that field, while the reference writes it to the record's bar field and gates on that: the listing stores into a field at
+row-plus-sixteen, compares it against minus one, passes it to a widget call and uses it as a widget index, so the source's use of the value field
+meant the progress bar was never created or driven. The four sites in that block now use the bar field, and the object stores to the same field.
+The byte count does not move because only displacements change and the region is already divergent, which is exactly the case where a positional
+metric hides a real defect.
+Eighty-eight call and jump sites were checked in order against the reference, including the final tail jump, along with the cleanup after every
+call, the argument order at ten call families including trailing constants, two entity strides and a slot index, a row stride with a twelve-row copy
+count of 0x114 dwords, the message packet zeroing and eight field offsets, three absolute frame offsets once push drift is accounted for, both scans
+into the row object, and the conversion site. No other defect was found.
+Four shapes were reverted with numbers. Promoting the window variable to a register drops the match by 51 and changes the frame. Replacing a dword
+copy loop with a block copy shortens the object by three bytes and costs twelve matched bytes. Local handles for the widget index cost 13 to 42 matched
+bytes. The last of those genuinely closes two instruction windows and moves toward the reference's single-index form, so its scratch copy is named
+here as the one to revisit if the project ever prefers object length and instruction count over the byte-offset match.

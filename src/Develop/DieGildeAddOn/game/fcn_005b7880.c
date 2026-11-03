@@ -387,20 +387,20 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 						fcn_0046f940(r->label, f.txtNum);
 						GUI(r->label).f6c = 1;
 						GUI(r->label).w = 0xa0;
-						r->value = fcn_004677e0(
+						r->bar = fcn_004677e0(
 						    r->x + 0xc, r->y + 0x32, 0x40,
 						    0, 0x64, 0x75, 0x42,
 						    *(int*) 0x772514);
 						r->state = 1;
-						GUI(r->value).f4c = 1;
+						GUI(r->bar).f4c = 1;
 					}
-					if (r->value != -1) {
+					if (r->bar != -1) {
 						f.tv = fcn_0050f950(
 						    *(unsigned short*) r->obj,
 						    *(unsigned short*) 0x774970);
 						percent = (f.tv + 128.0) * 100.0;
 						fcn_00472380(
-						    r->value, 0, 0x64,
+						    r->bar, 0, 0x64,
 						    (int) (percent * 0.00392156862745098));
 					}
 				} else if (f.pg != 0
