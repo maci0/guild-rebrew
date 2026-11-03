@@ -24613,3 +24613,18 @@ byte reference showing thirty-two thousand eight hundred built bytes, and a hund
 gaps and alignment between map symbols, so the span-from-next-symbol assumption does not hold in a link whose text has holes.
 The method is therefore recorded as unreliable rather than acted on, and nothing was changed from it. A trustworthy version needs per-row object sizes from the compiler
 rather than spans from addresses, which means a batch compile; that is a separate, deliberate run rather than something to infer from a map.
+
+## 2026-11-03 — four more near rows parked, and two blocker texts corrected
+
+Four near rows were worked and none improved, all four now parked with their exact wall, and the two temporary-load check was applied first on each: none of these references
+has a load-and-store run of the shape the two-temporary technique fixes, and where a loop does already emit the alternating form it matches byte for byte.
+On the one-hundred-and-thirty-three-byte row the whole body matches including the loop, the floating-point chain and the out-of-line clamp, and only prologue scheduling
+remains: the reference hoists the output pointer's load above a spill and interleaves two moves and a multiply, and its loop-counter temporary sits in the output argument's
+slot. Four shapes left the count unchanged. On the one-hundred-and-thirty-six-byte row everything matches except one callee-saved pair: the reference saves two registers
+in the other order and loads the identifier into the first, and three assignment and declaration shapes did not change it. On the sixty-five-byte row one index temporary
+is copied where the reference keeps it in place, which swaps the whole strength-reduction chain's registers, and three shapes were unchanged. On the one-hundred-and-fifty-
+three-byte row the remaining six bytes are one exchange of two temporaries, and the shape that broke it made the object shorter and the row worse.
+Two blocker texts were stale and were corrected through the locked writer rather than left to mislead the next pass: one claimed a clamp was inlined where it is present and
+matching, and one claimed a size mismatch where the reviewed extent was split to sixty-five and the row is a near match at fifty-four of sixty-five.
+The pattern from this batch and the previous one is consistent enough to act on: the near band of this target is now almost entirely allocation and scheduler walls, so the
+remaining effort belongs in rows that are missing code rather than rows that are missing registers.
