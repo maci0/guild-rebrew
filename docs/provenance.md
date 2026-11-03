@@ -24819,3 +24819,17 @@ failure. So the default is correct and preferring metadata outright is not propo
 What remains worth asking for is a note: when the metadata size and the symbol-derived window differ, print both and say which the window came from. A caller who wants the
 reviewed window can already pass the size explicitly, so the missing piece is visibility, not a different default. The upstream note is rewritten to that, and this replaces
 the earlier version rather than adding a second entry.
+
+## 2026-11-03 — item row: seven packet reads at the wrong field, and two call arities
+
+`0x59B260` moves from 199 to 213 matched bytes with the object at 1944, and its exactly-equal instruction count from 26 to 66 while the largest mismatch run shrinks from 281
+instructions to 233.
+Three semantic defects were kept. Seven packet reads used a field at offset four where the reference reads offset one, which affects every identifier, two flags, a
+discriminator and the message field. Two calls had the wrong shape: one takes six arguments including three output pointers where the source passed two, and the other takes
+four where the source passed eight. And a division block loaded the previous value after a call and shared one division where the reference saves the value first and emits
+the lookup and the division twice.
+The frame is four bytes too large and the object's first divergence is the stack adjustment, with the argument in a different register; four declaration orders and a merge of
+two counters did not move it, so it is reported as allocation-driven rather than padded. The mismatch runs split from fourteen to thirty even as the matched bytes rose, which
+is the same signal pattern seen on other rows: fixing operands while the frame stays displaced produces more, shorter runs.
+Ten other classes were checked and are clean: no classification macros, the message field offsets, the advanced-pointer stores, the literals, the initialisation order, the
+call argument order, the buffer bound, the table pointer and its stride chain, and the shared return tail.

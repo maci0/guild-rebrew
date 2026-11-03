@@ -13,6 +13,7 @@ extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char g_7f4ca4[];
+extern int g_774654;
 
 void* __cdecl memset(void*, int, unsigned int);
 char* __cdecl itoa(int, char*, int);
@@ -21,7 +22,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00472830(int, int);
+int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
 int __cdecl fcn_0046f940(int, char*);
 int __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl io_AppendText(int, ...);
@@ -29,7 +30,7 @@ void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00533dc0(int, int, int);
-void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
+void __cdecl fcn_00533f40(int, int, int, int);
 void __cdecl fcn_00594340(void);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
@@ -73,13 +74,13 @@ typedef struct Msg59b {
 } Msg59b;
 
 /* ADDRESS: GOLDTL 0x0059b260 */
-int __cdecl fcn_0059b260(int a0)
+int __cdecl fcn_0059b260(char* a0)
 {
-	char buf[4];
 	Msg59b msg;
-	int id1;
-	int id2;
-	int id3;
+	char buf[4];
+	int v15;
+	int v16;
+	int item;
 	int count;
 	int hasAny;
 	int n;
@@ -94,14 +95,13 @@ int __cdecl fcn_0059b260(int a0)
 	char* e;
 	int v;
 	int prev;
-	int div;
 
-	if (fcn_00525fb0(a0) != 0) {
+	if (fcn_00525fb0((int) a0) != 0) {
 		return 0;
 	}
 	h = fcn_00470820(0, 0, (char*) 0x6aa148);
 	fcn_00471b60(h);
-	fcn_0052a0c0(a0, 0);
+	fcn_0052a0c0((int) a0, 0);
 	d2_SetForm(h, 3);
 	io_AppendText(0xc7);
 	fcn_00594340();
@@ -114,8 +114,8 @@ int __cdecl fcn_0059b260(int a0)
 	*(int*) (k + 0x10162f0) = 0xe;
 	*(int*) (k + 0x10162f4) = 0xe;
 	fcn_00533dc0(g_772514, 0x70b, 0x742);
-	fcn_00533f40(0x270, 0x15e, g_772514, fcn_00472830(h, 2), 0x78, &id2, &id1, &id3);
-	*(int*) (g_1015ea0 + id3 * 0x2f4 + 0x84) = 0x54;
+	fcn_00533f40(0x270, 0x15e, g_772514, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
+	*(int*) (g_1015ea0 + item * 0x2f4 + 0x84) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
 	do {
 		d2_SetForm(h, 2);
@@ -154,20 +154,20 @@ int __cdecl fcn_0059b260(int a0)
 						if (hasAny != 0) {
 							if (i == 0) {
 								fcn_004c35f0();
-								p = fcn_005463a0(2, 0, 9, 3, *(int*) (a0 + 4));
+								p = fcn_005463a0(2, 0, 9, 3, *(int*) (a0 + 1));
 								if (p == 0) {
 									memset(&msg, 0, 0xf8);
 									msg.f28 = g_7f4c00;
 									msg.f30 = g_7f4c08;
 									msg.type = 9;
-									msg.f08 = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
-									msg.f0c = *(int*) (a0 + 4);
+									msg.f08 = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
+									msg.f0c = *(int*) (a0 + 1);
 									msg.f10 = 0;
 									msg.f14 = 0;
 									msg.f36 = 1;
 									msg.f2c = g_7f4c04;
 									msg.f34 = (unsigned short) g_7f4c0c;
-									msg.f58 = *(int*) (a0 + 4);
+									msg.f58 = *(int*) (a0 + 1);
 									msg.f5c = *(int*) (p1 + 2);
 									msg.f60 = *(int*) (p3 + 2);
 									k = fcn_004c5530((char*) &msg);
@@ -181,7 +181,7 @@ int __cdecl fcn_0059b260(int a0)
 							}
 							else {
 								fcn_004c35f0();
-								p = fcn_005463a0(2, 0, 8, 3, *(int*) (a0 + 4));
+								p = fcn_005463a0(2, 0, 8, 3, *(int*) (a0 + 1));
 								while (p != 0) {
 									if (*(unsigned short*) (p + 0xac) == *(int*) e) {
 										break;
@@ -195,13 +195,13 @@ int __cdecl fcn_0059b260(int a0)
 									msg.f30 = g_7f4c08;
 									msg.f36 = 1;
 									*(unsigned short*) &msg.f58 = (unsigned short) *(int*) e;
-									msg.f0c = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+									msg.f0c = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
 									msg.f14 = 0;
 									msg.f18 = 0;
-									msg.f10 = *(int*) (a0 + 4);
+									msg.f10 = *(int*) (a0 + 1);
 									msg.f30 = g_7f4c04;
 									msg.f38 = (unsigned short) g_7f4c0c;
-									msg.f60 = *(int*) (a0 + 4);
+									msg.f60 = *(int*) (a0 + 1);
 									msg.f64 = *(int*) (p2 + 2);
 									k = fcn_004c5530((char*) &msg);
 									e = (char*) fcn_004c4450(k);
@@ -220,7 +220,7 @@ int __cdecl fcn_0059b260(int a0)
 										break;
 									}
 									if (*(int*) (q + 0x10) != 0) {
-										fcn_00529160((char*) a0, g_7746cc, n, p);
+										fcn_00529160(a0, g_7746cc, n, p);
 										*(unsigned char*) (0x7f4e28 + n * 0x21c) = 0;
 									}
 									q += 0x28;
@@ -239,12 +239,12 @@ int __cdecl fcn_0059b260(int a0)
 								}
 								p = *(char**) (0x7f4e1c + n * 0x21c);
 								if (i == 0) {
-									if (p != 0 && *(char*) p == 9 && *(int*) (p + 0x10) == *(int*) (a0 + 4)) {
+									if (p != 0 && *(char*) p == 9 && *(int*) (p + 0x10) == *(int*) (a0 + 1)) {
 										*(unsigned char*) (0x7f4e28 + n * 0x21c) = 0;
 									}
 								}
 								else {
-									if (p != 0 && *(char*) p == 8 && *(int*) (p + 0x10) == *(int*) (a0 + 4)
+									if (p != 0 && *(char*) p == 8 && *(int*) (p + 0x10) == *(int*) (a0 + 1)
 										&& *(unsigned short*) (p + 0xac) == *(int*) e) {
 										*(unsigned char*) (0x7f4e28 + n * 0x21c) = 1;
 									}
@@ -330,12 +330,10 @@ int __cdecl fcn_0059b260(int a0)
 							*(int*) p = 0;
 						}
 						else {
-							div = *(unsigned short*) (g_item_def_table + i * 0x41 + k);
-							v = gm_GetMsgField(p2, e);
 							prev = *(int*) p;
-							v = v / div;
+							v = gm_GetMsgField(p2, e) / *(unsigned short*) (g_item_def_table + i * 0x41 + k);
 							if (prev >= v) {
-								v = gm_GetMsgField(p2, e) / div;
+								v = gm_GetMsgField(p2, e) / *(unsigned short*) (g_item_def_table + i * 0x41 + k);
 							}
 							else {
 								v = prev;
@@ -360,10 +358,10 @@ int __cdecl fcn_0059b260(int a0)
 			} while (--n);
 		}
 		itoa(count - 1, buf, 10);
-		fcn_0046f940(id3, buf);
+		fcn_0046f940(item, buf);
 		fcn_00594de0(h, 2, count, p3);
-		fcn_00595e20(a0, (int) p2);
-		fcn_005963f0(h, 1, 0, a0);
+		fcn_00595e20((int) a0, (int) p2);
+		fcn_005963f0(h, 1, 0, (int) a0);
 	} while (fcn_005373e0(fcn_005944d0, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_0052a2d0();
