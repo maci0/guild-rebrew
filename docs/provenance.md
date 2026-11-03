@@ -23288,3 +23288,21 @@ frame matches at 0x1b8, the reference's two comparisons are not duplicates, the 
 The first remaining divergence is a cold-block layout difference: this build inlines a reset block that the reference keeps out of line, with the matching
 deletion of 26 instructions at reference offset 0xd61, so the object's instruction count is six higher and the gap events two higher than the baseline
 while the matched bytes improve.
+
+## 2026-11-03 — d2 row: four reference shapes restored, judged structurally
+
+`0x5D1790` keeps 379 of 3295 with the object at 3278, 31 relocations, and four repairs taken from the reference bytes, all of which restore a shape rather
+than a byte position. A conversion site was hoisted into the call argument so the reference's convert-then-push sequence replaces a store-then-convert
+sequence. A guard pair was restored by rewriting a nested condition as three exclusive branches, which reproduces the reference's re-test of one byte
+after another. And two sites that passed the wrong operand now pass a constant address: the reference does not pass the result of the chain walk but
+pushes the address 0x679794, and a two-byte read that the source took from a string literal is taken from that same address, whose bytes the listing shows
+as a hyphen and two zeros, so both sites are now byte-identical.
+The matched byte count falls from 387 to 379 because inserted bytes shift every later offset, while the four restored shapes are exact; the positional
+count is not meaningful on this row while the frame differs, so the reference-shape signal is kept. The frame is four bytes short, 0x46c against 0x470,
+and one local sits twelve bytes high relative to entry where another matches, which is the same layout difference this family has shown before. The
+residual seventeen-byte deficit is displacement width, where the reference uses a seven-byte stack-relative load and this build a four-byte one, plus
+near against short jump encodings, so nothing was padded or resized to chase it.
+A tooling defect is filed upstream and recorded here because it invalidated the row's diagnostics: the gap tool disassembled the object's 320-byte lead
+scaffold section instead of the bound function, reporting an object end of 0x140 and a NOP fault before and after the edits, so the windows were
+unusable and the comparison was done with objdump and an instruction-stream alignment instead. This is the second row where a lead scaffold or filler
+misled the diagnostic, the earlier one being a d3 loader whose filler also moved the function's link address.

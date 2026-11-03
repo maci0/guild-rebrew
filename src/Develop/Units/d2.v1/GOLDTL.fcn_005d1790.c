@@ -97,8 +97,8 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 		io_AppendText("$3>$L%s$A$0>", buf12);
 		ok = 1;
 	} else {
-		fcn_00505e30(*a0);
-		io_AppendText("$5<$R%s$0<$3>$L%i$A$0>", 0x1f54, _ftol());
+		io_AppendText("$5<$R%s$0<$3>$L%i$A$0>", 0x1f54,
+		    (int)fcn_00505e30(*a0));
 	}
 	if (*((char *)a0 + 0x164) != 0) {
 		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f55,
@@ -112,27 +112,26 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 		io_FormatTextBuffer(buf12, "%s", "-");
 		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f57, buf12);
 	}
-	if (*((char *)a0 + 0x166) != 0) {
-		if (*((char *)a0 + 0x169) != 0) {
-			io_AppendText("$5<$R%s$0<$3>$L%s$A%s$A$0>", 0x1f57,
-			    *((unsigned char *)a0 + 0x166) + t,
-			    *((unsigned char *)a0 + 0x169) + t);
-		} else {
-			io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f57,
-			    *((unsigned char *)a0 + 0x166) + t);
-		}
+	if (*((char *)a0 + 0x166) != 0 && *((char *)a0 + 0x169) != 0) {
+		io_AppendText("$5<$R%s$0<$3>$L%s$A%s$A$0>", 0x1f57,
+		    *((unsigned char *)a0 + 0x166) + t,
+		    *((unsigned char *)a0 + 0x169) + t);
+	} else if (*((char *)a0 + 0x166) != 0) {
+		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f57,
+		    *((unsigned char *)a0 + 0x166) + t);
 	} else if (*((char *)a0 + 0x169) != 0) {
 		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f57,
 		    *((unsigned char *)a0 + 0x169) + t);
 	}
 	if (ok != 0) {
-		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f58, gm_WalkEntityChain(*a0));
+		gm_WalkEntityChain(*a0);
+		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f58, 0x679794);
 	} else {
 		io_AppendText("$5<$R%s$0<$3>$L%T$A$0>", 0x1f58, gm_WalkEntityChain(*a0));
 	}
 	p = gm_LookupEntityRecordById(*(int *)((char *)a0 + 0x5c));
 	if (ok != 0) {
-		*(unsigned short *)buf12 = *(unsigned short *)"-";
+		*(unsigned short *)buf12 = *(unsigned short *)0x679794;
 		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", g_14ad084, buf12);
 	} else if (p != 0 && *((unsigned char *)p + 8) > 0) {
 		io_FormatTextBuffer(buf12, 0x1f5f, *(unsigned short *)p);
