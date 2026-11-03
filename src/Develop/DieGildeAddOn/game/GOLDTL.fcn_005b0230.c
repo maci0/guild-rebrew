@@ -41,7 +41,6 @@ void __cdecl fcn_005b0230(char* town)
 	char* obj;
 	char* p;
 	int* tab;
-	char scratch[0x18];
 	int offs[16] = { 0, -1, 1, 0, 1, 0, 1, 1, 0, 1, -1, 1, -1, 0, -1, -1 };
 	int tex;
 	int base_x;
@@ -52,6 +51,7 @@ void __cdecl fcn_005b0230(char* town)
 	int mode;
 	int handle;
 	int count;
+	int idx;
 	int i;
 	int j;
 	int kind;
@@ -59,8 +59,9 @@ void __cdecl fcn_005b0230(char* town)
 	float height;
 
 	tex = *(int*) 0x1043370;
-	base_x = *(int*) (*(unsigned char*) 0x773d75 * 0x2f4 + 0x86834c);
-	base_y = *(int*) (*(unsigned char*) 0x773d75 * 0x2f4 + 0x868350);
+	idx = *(unsigned char*) 0x773d75 * 0x2f4;
+	base_x = *(int*) (idx + 0x86834c);
+	base_y = *(int*) (idx + 0x868350);
 
 	slot = (ScrollSlot*) (town + 0xdc);
 	for (i = 0x100; i != 0; i--) {
@@ -252,11 +253,11 @@ void __cdecl fcn_005b0230(char* town)
 			if (obj != 0) {
 				fcn_00455350(obj, (float*) (obj + 0x4c), pos);
 				fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);
-				*(int*) (scratch + 8) = bld_x;
-				*(int*) (scratch + 0xc) = bld_y;
-				fcn_005b00f0(scratch, base_x, base_y);
-				bld_x = (int) *(float*) (scratch + 0x10);
-				bld_y = (int) *(float*) (scratch + 0x14);
+				tmp.x = bld_x;
+				tmp.y = bld_y;
+				fcn_005b00f0((char*) &tmp, base_x, base_y);
+				bld_x = (int) tmp.fx;
+				bld_y = (int) tmp.fy;
 				handle = fcn_0046f740(bld_x, bld_y, 0x550, g_cur_dir);
 				*(int*) (g_1015ea0 + 0x5c + handle * 0x2f4) = 1;
 				*(int*) (g_1015ea0 + 0x1d0 + handle * 0x2f4) = 0x43;
@@ -279,11 +280,11 @@ void __cdecl fcn_005b0230(char* town)
 			if (obj != 0) {
 				fcn_00455350(obj, (float*) (obj + 0x4c), pos);
 				fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);
-				*(int*) (scratch + 8) = bld_x;
-				*(int*) (scratch + 0xc) = bld_y;
-				fcn_005b00f0(scratch, base_x, base_y);
-				bld_x = (int) *(float*) (scratch + 0x10);
-				bld_y = (int) *(float*) (scratch + 0x14);
+				tmp.x = bld_x;
+				tmp.y = bld_y;
+				fcn_005b00f0((char*) &tmp, base_x, base_y);
+				bld_x = (int) tmp.fx;
+				bld_y = (int) tmp.fy;
 				handle = fcn_0046f740(bld_x, bld_y, 0x54f, g_cur_dir);
 				*tab = handle;
 				*(int*) (g_1015ea0 + 0x5c + handle * 0x2f4) = 1;
@@ -309,13 +310,13 @@ void __cdecl fcn_005b0230(char* town)
 
 	fcn_00455350((char*) handle, (float*) (handle + 0x4c), pos);
 	fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);
-	*(int*) (scratch + 8) = bld_x;
-	*(int*) (scratch + 0xc) = bld_y;
-	fcn_005b00f0(scratch, base_x, base_y);
+	tmp.x = bld_x;
+	tmp.y = bld_y;
+	fcn_005b00f0((char*) &tmp, base_x, base_y);
 	g_cur_dir = g_town_dir(town);
 	g_cur_building = g_town_dir(town) * 0x3cc + 0x1015f40;
-	bld_x = (int) *(float*) (scratch + 0x10) - *(int*) (g_cur_building + 0xc) / 2;
-	bld_y = (int) *(float*) (scratch + 0x14) - *(int*) (g_cur_building + 0x10) / 2;
+	bld_x = (int) tmp.fx - *(int*) (g_cur_building + 0xc) / 2;
+	bld_y = (int) tmp.fy - *(int*) (g_cur_building + 0x10) / 2;
 	if (bld_x < 0) {
 		bld_x = 0;
 	}

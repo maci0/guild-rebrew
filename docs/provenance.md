@@ -23573,3 +23573,18 @@ no section defines functions.
 Verified against the live tree: on the row that carried a 3008-byte lead pad the diagnostic previously reported the pad's instructions and a NOP as the first
 fault, and it now reports 873 object instructions ending at 0xaf0 with a push as the first event, which is the real body. The project environment was
 reinstalled from the checkout so the fix is what runs here, and the upstream commit is ef93c5a1 with the affected test file and the type check passing.
+
+## 2026-11-03 — market list row: one temporary where the source had two
+
+`0x5B0230` moves from 185 to 370 matched bytes with the object at 2746 against the 2962 extent, and the frame now matches at 0x8c. Two defects were repaired
+against the reference. The source declared two separate 24-byte scratch areas, one for a copy and one for a slot, while the reference has a single 24-byte
+temporary that serves both the six-dword copy and the call's scratch slot, so merging them removes the duplicate and brings the frame into agreement. And both
+coordinate expressions recomputed the same table index from the same global, where the reference computes the index once and uses it for both loads, so the index
+now has its own local and the object gains nearly two hundred matched bytes.
+Two experiments were reverted: replacing the sort's loop bound with a call that reloads a count grew the frame and lost a hundred matched bytes, and hoisting a
+global into a local gained size but lost positional match. The remaining divergence is the scalar block: this build spills two more dwords than the reference,
+carrying a slot pointer in a frame slot where the reference keeps it in a register and uses another register for the count, so the first difference is a
+displacement on a texture slot. Closing it needs the local lifetimes restructured, which is transcription work rather than a narrow edit, and nothing was
+guessed to force it.
+Thirteen distinct callees were checked and all their sites and counts match the reference, three prototypes were confirmed from the callees' own argument reads,
+and the argument order, constant-versus-value operands, seven record fields, the signed comparisons and the clamps all agree.
