@@ -22130,3 +22130,31 @@ figures do not reproduce from the source as described and the exact shape used f
 therefore recorded as an open semantic defect with both sets of numbers rather than landed on a measurement that cannot be
 reproduced, and the next pass should reproduce the 493-at-5529 shape before keeping it. The packet field split, the plus one
 record offset and the existing d2_ShowTxt and fcn_0050b8d0 call forms were left untouched.
+
+## 2026-11-03 — palette row: one defect in two halves, and the lever that follows
+
+`0x46C5A0` keeps 376 of 6080 with object 6072 and no window closed, but the pass explains the whole shape of the failure and
+leaves a specific lever. The gap trace reports 1884 reference instructions against 1913 object ones with both code ends equal
+at 0x17c0, 526 events and 229 drift windows whose largest constant-drift span is only six instructions, so the streams are
+misaligned from instruction four onward and no window is independently addressable. The first divergence is at offset 12,
+native pushing esi where this build pushes ebx, and the register-aware diff reports 41 exact, 3 relocation, 59 register and
+1806 structural of 1909.
+The layout defect is proven from the native bytes: the reference has six arrays packed in declaration order totalling 0x680,
+a buffer at minus 0x178, one at minus 0x1f8, a separate sprintf scratch at minus 0x2f8, and buffers at minus 0x3f8, minus
+0x5f8 and minus 0x6f8, while this source has five arrays totalling 0x688. All three sprintf sites in the reference target the
+0x100 scratch at minus 0x2f8 and none targets the 0x200 buffer, which only ever receives a copy of the first array, so 0x100
+is its true extent. Applying the corrected sizes moves the frame from 0x6f8 to 0x6f0, moves the first mismatch to offset 5,
+and costs one matched byte, so the sizing repair alone cannot pay.
+The remaining eight bytes are explained: the reference's two memsets use the alignment-aware expansion, which spills the
+destination and size to compiler temporaries at minus 0x24 and minus 0x20, while this build picks the fast expansion with
+`rep stosd` and no temporaries. Those eight bytes of temporaries are exactly the difference between the reference's 0x78 and
+this build's 0x70 scalar block, which is why the reference's palette local sits at minus 0x58 against minus 0x50 here and why
+every array is eight bytes higher. Promoting the two values to function scope or marking them volatile both failed to produce
+the homes, at 375 with frame 0x6f0 and at 331 with object 6204 and frame 0x6f4, because this compiler only homes a value that
+its own inline memset or memcpy spills.
+The root cause is therefore one defect in two halves. The register plan is a full permutation, with the reference using esi 145,
+edi 228 and ebx 159 times against 219, 194 and 107 here, and the reference's extra spills are what give its blocks the register
+plan it has. The recommended next step is to reach the memset destination through a pointer local so the alignment-aware
+expansion and its two temporaries appear, and to apply the proven six-array layout in the same change rather than before it.
+All seventeen direct callees resolve; the thirty-four unresolved bindings are CRT inlines, string literals, five globals and
+local labels. Working notes, the native listing, the gap trace and the slot and drift helpers are in .scratch/0046c5a0/.
