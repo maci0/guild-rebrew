@@ -20214,3 +20214,23 @@ it is committed here after a canonical `rebrew test` on VA 0x00447110 confirmed 
 remaining 29 bytes are the same-length SIB base and index role swaps recorded earlier in the RD_LIGHT_NINE region
 and two in the tail prologue. This commit also carries the metadata store as it stands, which includes an unrelated
 improvement recorded for `0x50c4e0` moving from NEAR_MATCHING to RELOC by another session working in the same tree.
+
+## 2026-11-03 — production message clamp slot and next divergences
+
+`0x569FF0` keeps 982 at object exactly 3772 with 65 relocations, frame `sub esp,0x738` and lint clean; the clamp
+probe kept nothing and the source is restored to the baseline. Native spills the clamped value into frame slot D+4,
+which is flag's slot, storing `mov [esp+0x58],eax` at 0x099a, while the object spills into D+0 with
+`mov [esp+0x48],eax` at 0x0984, a slot that belongs to pc in this object rather than to flag. Three probes all
+regressed and the frame stayed at 0x738, so the plus four is code bytes: a block-local `int clamped` used for
+FormatTextBuffer and fcn_004c51a0 gives match 922 at object 3776, reusing `n` for the clamped value gives 922 at
+3776, and carrying the clamp in `flag` gives 922 at 3776. The baseline was restored. The next divergences were
+mapped. After the known prologue parameter wall at byte 0x7, the first real difference is the zero-init slot
+permutation: the object stores `mov [esp+0x10],ebp` at 0x001c against native's `mov [esp+0x34],ebx` at 0x0020, with
+initialisation slots object D0, D24, D20 and D8 against native D24, D1c, D20 and Dc, so num at D24 and hits at D20
+agree while pc and cnt2 are permuted, which is also why the clamp temporary landed in the object's D0 instead of
+native's flag slot D4. The first divergence past the slot colouring is the fv comparison: the object emits
+`test ah,0x5; jp` after a `fstp` spill at 0x07fe where native emits `and eax,0x4100; jne` after `fst` and
+`fcompp` at 0x086b, because the object spills fv before the gm_RandomFloat01 call while native keeps it on the x87
+stack and orders the call before the `fv - num*0x665ed0` step, a genuine evaluation-order difference at
+`if (fv > gm_RandomFloat01())`. Scratch probes in .scratch/569ff0/ with probe.sh, nextdiv.py, V1.c, V2.c, V3.c and
+BAK_982_pre.c.
