@@ -21653,3 +21653,34 @@ narrative is stale, describing a 428-byte candidate with a volatile local, zero 
 source no longer has, and it was refreshed; the status itself was already correct. One observation is recorded for a later
 look: row 0x5101e0 binds file GOLDTL.fcn_00507910.c with symbol _fcn_005101e0, a name and file mismatch. Backups and step
 JSONs under .scratch/row5b88b0/.
+
+## 2026-11-03 — upstream checkout made releasable
+
+The local Rebrew checkout at /home/maci/Desktop/Projects/relumea/repos/rebrew is now releasable: six commits from bf6a0bbe
+to 850843a2, clean tree, not pushed. Gates after the work: the suite reports 13,733 passed with 29 skipped, ruff check and
+ruff format check both pass over 903 files, and mypy reports no issues across 413 source files. Before three additional
+tests were added the suite stood at 13,730 passed.
+The two diagnostics were exercised through the project virtual environment, which imports the checkout at version 6.16.0,
+over three near-matching rows with known divergence, all exiting zero with JSON on stdout. On `0x004f2ee0` the gap
+diagnostic reports 77 reference and 77 object instructions ending at 0xb0 on both sides, three gaps, two replacements, one
+deletion and a fault at offset 18, while drift reports no windows. On `0x00571870` the gap window is 3824 bytes with 1164
+and 1166 instructions, 37 gaps, 115 replacements, 4 insertions and 9 deletions, and drift reports three windows at minus
+two, minus two and plus six. On `0x0049f290` the gap window is 816 with 289 and 290 instructions, 16 gaps, 13 replacements,
+3 insertions and 6 deletions, and drift reports one window at plus four. One limitation was observed and is recorded: the
+gap diagnostic reads only the first text section, so a multi-function translation unit gives a misleading body, which is
+why a candidate with 708 against 63 instructions was rejected. The project was not edited; the diagnostics wrote only cache
+files under the project's metadata directory.
+The audit found no remaining bytearray hashing path. Every producer converts `Insn.raw` with `bytes()`, the direct capstone
+`insn.bytes` hashing was the one masked-key site and now always returns bytes, and the other users are display, byte
+comparison, mask-buffer indexing or already convert first, with no other dictionary or set key path found. The const rule
+for arrays of pointers is handled and was verified against the pinned toolchain image: `int * const table[8] = {0}` lands in
+`.rdata` at 0x20 bytes, while `int * table[8]` lands in `.bss`. One clear defect was found and fixed in commit 850843a2:
+`*p = x` was counted as writing the pointer object because only subscript and arrow forms were excluded, so a read-only
+pointer whose pointee was written stayed writable; the pattern now captures a leading unary dereference, so a pointee store
+skips non-array pointer objects while `*table = x` on an array still marks the array writable. Three tests were added: a
+unary dereference is not an object write, an array dereference still writes the array, and a read-only pointer array emits
+per-element const. The CHANGELOG's second entry was already accurate, with the quote being the real Python 3.15 message, and
+the full unhashable-type text was added; the first entry was incomplete and now names the reference flag, declaration-driven
+const, pointer-object qualification for arrays of pointers and the pointee-store exclusion. The missing `--module` and
+`--reference` rows and a const note were added to the CLI reference in commit 41503bf0, since the earlier change added
+those flags without documenting them. No push was made.
