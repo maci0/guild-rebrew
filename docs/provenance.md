@@ -22385,3 +22385,23 @@ pushes ebp and this build hoists the second argument's load above the remaining 
 `slot_value` scalar committed earlier, which is the only spill slot below the structure and which the reference does not have, so
 every frame displacement is four bytes high and dominates the window count; no C-level shape was found that keeps the value and
 frees its slot. Calls and globals otherwise agree one to one at 273 relocations each side.
+
+## 2026-11-03 — text formatter: the coalesced slot and the trap behind it
+
+`0x51AF00` keeps 956 of 6383 with 176 gap windows, end drift minus 72 and the object's code ending at 0x18f0 against the
+reference 0x1940, and nothing was kept. One layout fact explains the four-byte blocker and one trap explains why the obvious
+repair cannot be taken. The slot at 0x298 is coalesced with the unused slot at 0xd8, so the store that writes a minus sign into
+it compiles to a byte store at [esp+0xd8]; the frame is 0x40 short and the arrays end at 0x298 rather than 0x2d8. Changing the
+unrecovered filler cannot move the buffers because the structure end stays pinned at 0x3334 whichever filler is declared, 0xfc
+or 0x100, and both give a buffer at 0x394.
+Putting the nine buffers in one ordered struct removes the coalescing and moves the buffers and temporary to the reference
+offsets, and with fillers of 0xb8 or 0xc0 it even puts the object's code end at 0x1940 with drift plus four, but it shifts the
+four-byte scalars up by eight, leaving the grammar state at 0x24 against the reference's 0x1c, and it drops ebx from the saved
+set. Measured, that is 879 at 6459 for the 0xc0 filler and 881 at 6459 for 0xb8, with 173 and 170 windows for one and 201 and
+197 for the other, so the trade loses the third saved register and was reverted under the rule that the register must not be lost.
+Three other negatives are recorded: declaring the filler as 0x100 gives 875 at 6459, aligning the coalesced slot to eight gives
+873 at 6459, and swapping the order of two locals is byte-identical, which confirms the allocator is not source-order driven for
+equal-aligned locals, since both orders place them the same way while the reference has them the other way round.
+The first remaining divergence is at offset 227 against 230, and the shape is that the object runs about 180 bytes ahead through
+the S and s blocks and then ends about 70 bytes of code short, so the missing bytes are in the tail case bodies rather than in the
+prologue.
