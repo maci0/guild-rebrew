@@ -24149,3 +24149,17 @@ is recorded as a negative rather than a change, and two further variants were re
 The first real divergence is a register home: the reference defers pushing a callee-saved register and this build pushes it in the prologue, so everything downstream
 inherits the allocator difference. The remaining lever recorded for a later pass is the local layout, since the reference's arrays sit low in the frame and this build's sit
 high, which costs three bytes on each large displacement and is the residual growth.
+
+## 2026-11-03 — dialogue row: two arm layouts inverted and a signedness that changed a jump
+
+`0x599350` moves from 623 to 728 matched bytes with the object at 1954 against the 1955 extent, and its instruction-stream alignment reaches 0.950 with 554 reference
+instructions against 551.
+Three repairs were kept. Two conditional blocks had their arms laid out the other way round from the reference, which emits a test and a not-equal jump to a far arm with
+the other arm inline, so the source now spells the condition inverted with the arms swapped; one of the two is worth 101 matched bytes and closes the largest window.
+A loop bound was compared unsigned where the reference uses a signed jump, so the operands are cast to signed, which changes no bytes at that site but makes the jump
+agree.
+One experiment that reordered two initialisations was reverted because it moved the zero constant into a different register and gained nothing.
+The remaining divergence is the callee-saved register assignment: the reference pushes one register where this build pushes another, and every later difference in the
+push scheduling and the message fill follows from that colouring, which the project already documents as unavailable from C. No further proven defect was found: the
+copied-body, width, prototype, frame, global-kind, table-base, duplicated-scan and tail-merge checks all came back clean, and a callee was decoded to confirm the argument
+order rather than to change it.

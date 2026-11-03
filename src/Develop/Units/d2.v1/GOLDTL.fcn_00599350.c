@@ -138,15 +138,15 @@ void __cdecl fcn_00599350(void)
 		}
 		id = fcn_0046f740((count % 2) * 0x46 + 0x30, (count / 2) * 0x5a + 0x0f, i + 0x6d4, g_772514);
 		ids[i] = id;
-		if (flag != 0) {
-			*(int*) (g_1015ea0 + id * 0x2f4 + 0x4c) = 1;
-			*(int*) (g_1015ea0 + id * 0x2f4 + 0x60) = 1;
-		} else {
+		if (flag == 0) {
 			*(int*) (g_1015ea0 + id * 0x2f4 + 0x5c) = 1;
 			strcpy((char*) (g_1015ea0 + id * 0x2f4 + 0xcc), g_14a7898[i]);
 			*(int*) (g_1015ea0 + id * 0x2f4 + 0x1d0) = 3;
 			*(int*) (g_1015ea0 + id * 0x2f4 + 0x1cc) = 0x54;
 			*(int*) (g_1015ea0 + id * 0x2f4 + 0x1e0) = -1;
+		} else {
+			*(int*) (g_1015ea0 + id * 0x2f4 + 0x4c) = 1;
+			*(int*) (g_1015ea0 + id * 0x2f4 + 0x60) = 1;
 		}
 		count++;
 		flag = 0;
@@ -209,7 +209,7 @@ void __cdecl fcn_00599350(void)
 				rec += 0x38;
 				off += 0x24d;
 				idx++;
-			} while (rec < (char*) 0x14a7898);
+			} while ((int) rec < (int) 0x14a7898);
 			prev = g_6aa0a8;
 		}
 		if (g_100f1dc >= 0x427 && g_100f1dc <= 0x47f) {
@@ -232,9 +232,7 @@ void __cdecl fcn_00599350(void)
 			}
 			fcn_00471af0(hwnd, 0);
 			obj = (char*) lc_GebaeudeAusrichten(i, path);
-			if (obj == 0) {
-				fcn_00471af0(hwnd, 1);
-			} else {
+			if (obj != 0) {
 				msg.f28 = g_7f4c00;
 				msg.type = 0x0d;
 				msg.f2c = g_7f4c04;
@@ -256,6 +254,8 @@ void __cdecl fcn_00599350(void)
 				strncpy(msg.name, path, 0x3f);
 				fcn_004c5530((char*) &msg);
 				g_774654 = 1;
+			} else {
+				fcn_00471af0(hwnd, 1);
 			}
 		}
 skip_place:
