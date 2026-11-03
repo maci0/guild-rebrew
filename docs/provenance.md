@@ -20645,3 +20645,33 @@ pre-existing warnings outside this edit set, and neither the size nor the overla
 The remaining excess over the reference `.data` VirtualSize of 15,766,564 is 5,072,000, held by `_dpad_aed32c` at
 5,014,548 bytes in Units/vfs/GOLDTL.fcn_00525b40.c and `_dpad_1052c50` at 4,498,744 bytes in
 Units/m_alloc/GOLDTL.fcn_42d670.c, which must be split around the named objects inside them rather than deleted.
+
+## 2026-11-03 — giant pads split around their named objects
+
+The two remaining oversized pads were split around the named objects inside their spans, taking `.data` VirtualSize
+from 20,838,564 to 19,233,092 for a measured drop of 1,605,472 and leaving an excess of 3,466,528 over the reference
+15,766,564. Only the two owning files changed, plus twenty-two lines and one removed. In
+src/Develop/Units/vfs/GOLDTL.fcn_00525b40.c the original `_dpad_aed32c[5014548]` stays inside the
+REBREW_SERVER and REBREW_GOLD guard, while the client branch carries four pieces, `_dpad_aed334[12]`,
+`_dpad_aed341[247]`, `_dpad_aed43b[773]` and `_dpad_b0d740[4882432]`, which sum with the 131,084 bytes of named objects
+to the original 5,014,548. In src/Develop/Units/m_alloc/GOLDTL.fcn_42d670.c the original `_dpad_1052c50[4498744]` stays
+guarded and the client branch carries eleven pieces, 1052c54 of 12, 1052c64 of 380, 1052de4 of 28, 1052e01 of 255,
+1052f01 of 255, 1053002 of 1,474,558, 11bb004 of 73,724, 1334fb0 of 80, 1335001 of 287, 1335121 of 1,474,559 and
+149d122 of 102, which sum with the 1,474,504 bytes of named objects to the original 4,498,744. The named objects come
+from the link map using each name-encoded reference VA and an emitted extent measured as the distance to the next
+section-3 symbol, the same method the audit used, and it reproduces the audit's 131,084 and 1,474,504 figures exactly,
+with no new owners invented.
+The measurement reproduced the relink harness with SOURCE_DATE_EPOCH=1073664562 and /OPT:NOREF into
+.scratch/pad-split/relink, and the before image reproduces 20,838,564. `.text` stays 2,575,744 at VA 0x401000 and
+`.rdata` stays 45,934 at 0x676000, `.data` VA stays 0x682000, `.data1` moves from 0x1a62000 to 0x18da000 with
+VirtualSize 2,272 and `.rsrc` from 0x1a63000 to 0x18db000 with 1,288. Map rows rise from 15,765 to 15,778 and
+section-3 rows from 6,081 to 6,094, thirteen more, being fifteen pieces minus two pads. The declared split total is
+1,605,588 against a measured 1,605,472, the 116-byte difference being sixteen-byte COMMON allocation on the fifteen
+pieces. No GOLDTL data row moved and none lost its symbol, with 424 of 456 resolving in both links, the same set as
+before. Of the 122 map symbols that moved, 44 moved by 1,605,472 and 78 by 131,040, all CRT and heap internals, `_prog`
+and foreign pads, with no `g_*` row in either group, so the 2026-10-29 caveat about pads and same-offset agreement did
+not trigger. Lint passes with no errors and the two pre-existing warnings, no size or overlap warning appears, and the
+data layout audit reports zero violations. `.data1` and `.rsrc` remain 0x38000 above the reference 0x157f000. The
+GOLD map is empty, so the guarded pads were preserved there but not measured. What remains is the other partially
+redundant pads and the 2,404,142 bytes that could not be attributed per pad, and function verdicts were not re-measured
+because their stored addresses are already stale.

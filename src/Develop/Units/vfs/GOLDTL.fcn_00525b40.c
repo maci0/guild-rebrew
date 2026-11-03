@@ -156,6 +156,12 @@ int __cdecl fcn_00525b40(void)
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_fa6038[63240];
+unsigned char _dpad_aed32c[5014548];
+#else
+/* Reference gaps only; 0xaed32c..0xb0d740 is covered by emitted objects. */
+unsigned char _dpad_aed334[12];
+unsigned char _dpad_aed341[247];
+unsigned char _dpad_aed43b[773];
+unsigned char _dpad_b0d740[4882432];
 #endif
 unsigned char _dpad_fb5740[32];
-unsigned char _dpad_aed32c[5014548];
