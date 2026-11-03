@@ -24062,3 +24062,15 @@ sequence.
 The gating defect is the frame, which is eight bytes over the reference because two scalar spills remain below the array, so every stack operand is shifted by eight
 and the positional count cannot rise until they are eliminated. The remaining codegen devices are a table-base spill and shared poll tails, which are labelled and not
 forced.
+
+## 2026-11-03 — a row whose stored status was stale, now correctly reloc
+
+`0x4DF1B0` was listed as a size mismatch and turned out to be complete: the row measures 2536 of 2536 with every byte agreeing modulo 173 relocation slots, and an
+independent extraction of the reference text and the cached object text over the full 2544-byte span shows that every differing byte lies inside one of those slots.
+The last eight bytes of the object equal the reference's alignment padding, and the object's first apparent fault is a relocation slot in a direct call whose operand is
+unlinked in the object. The gap diagnostic defaults to a 2544-byte window that includes that padding and decodes it as an inserted instruction, which is a diagnostic
+artifact rather than a code difference; the reviewed 2536-byte extent is what the store and inventory hold.
+No source edit was needed. The only change is the verdict the tool refreshed, from a size mismatch to a relocation match, with the reference size corrected from 2544 to
+2536. The row's twelve-class sweep is therefore vacuous by construction, and it is recorded as such rather than as a clean bill of health: bytes agree, so no class
+can differ. One cosmetic note is left unaddressed: the row's two allocator shims are named differently from the convention used in a sibling row, and renaming them
+would change no bytes.
