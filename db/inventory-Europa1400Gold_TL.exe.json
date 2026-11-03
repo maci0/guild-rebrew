@@ -80150,7 +80150,7 @@
   },
   {
     "va": 5632768,
-    "size": 2504,
+    "size": 656,
     "name": "fcn.0055f300",
     "extent_history": [
       {
@@ -80180,6 +80180,41 @@
         "reason": "trailing alignment padding before the next inventory row; trim to the run start: 0x557fe0 trim 412: 0x55817c..0x55817f (4 x 0x90/0xcc) | 0x5599c0 trim 212: 0x559a94..0x559a9f (12 x 0x90/0xcc) | 0x55c740 trim 1272: 0x55cc38..0x55cc3f (8 x 0x90/0xcc) | 0x55cc80 trim 1092: 0x55d0c4..0x55d0cf (12 x 0x90/0xcc) | 0x55ea30 trim 1972: 0x55f1e4..0x55f1ef (12 x 0x90/0xcc) | 0x55f300 trim 2504: 0x55fcc8..0x55fccf (8 x 0x90/0xcc) | 0x55fd10 trim 644: 0x55ff94..0x55ff9f (12 x 0x90/0xcc) | 0x55ffe0 trim 504: 0x5601d8..0x5601df (8 x 0x90/0xcc)",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-11-02T22:23:38.750507+00:00"
+      },
+      {
+        "old_size": 2504,
+        "new_size": 656,
+        "reason": "three native functions in one over-merged row: 0x55f300 is a 656-byte function with its own 4-entry switch table at +0x280; 0x55f590 is a 48-byte prologue-less leaf whose argument is at [esp+4] and which tail-jumps to 0x546190; 0x55f5c0 opens with sub esp,0x80 and two pushes and has its own switch table at 0x55fcb8; the three spans sum to the stored 2504",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T19:18:28.323661+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5633424,
+    "size": 48,
+    "name": "fcn.0055f590",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 48,
+        "reason": "three native functions in one over-merged row: 0x55f300 is a 656-byte function with its own 4-entry switch table at +0x280; 0x55f590 is a 48-byte prologue-less leaf whose argument is at [esp+4] and which tail-jumps to 0x546190; 0x55f5c0 opens with sub esp,0x80 and two pushes and has its own switch table at 0x55fcb8; the three spans sum to the stored 2504",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T19:18:28.326816+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5633472,
+    "size": 1800,
+    "name": "fcn.0055f5c0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1800,
+        "reason": "three native functions in one over-merged row: 0x55f300 is a 656-byte function with its own 4-entry switch table at +0x280; 0x55f590 is a 48-byte prologue-less leaf whose argument is at [esp+4] and which tail-jumps to 0x546190; 0x55f5c0 opens with sub esp,0x80 and two pushes and has its own switch table at 0x55fcb8; the three spans sum to the stored 2504",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-03T19:18:28.330587+00:00"
       }
     ]
   },

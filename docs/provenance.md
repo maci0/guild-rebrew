@@ -24177,3 +24177,18 @@ The first divergence is a scheduling difference in a formatted string block, whe
 zeros a register for the load, with the same values in both. One class is found and not fixed: the reference copies records with four counted dword moves where this build
 emits a rolled loop at two of the four sites under register pressure, which is labelled as a codegen difference. Prototypes were verified at fifteen call sites and the
 widths, bases, index reloads, fabricated arguments and duplicate scans all came back clean.
+
+## 2026-11-03 — an over-merged row split into three native functions
+
+`0x55F300` stored an extent of 2504 bytes, and the row could never match because that span covers three separate native functions. The disassembly shows the boundary
+evidence plainly: 0x55f300 to 0x55f58f is a 656-byte function with its own four-entry switch table at +0x280; 0x55f590 to 0x55f5bf is 48 bytes of prologue-less leaf whose
+argument is at the first stack slot and which tail-jumps to 0x546190; and 0x55f5c0 opens with its own stack adjustment and two pushes and runs to 0x55fcc7 with its own
+switch table at 0x55fcb8. The three spans sum to exactly the stored 2504, and the earlier note that claimed the gap continued the same function without a new prologue is
+contradicted by that prologue and by the separate leaf entry.
+The extents were repaired through the reviewed path with a reason, an expected digest and row synchronisation, so 0x55f300 now stores 656 and the two following spans are
+admitted as reviewed missing entries at 48 and 1800 bytes. The effect on the row is decisive: it measures 656 of 656 with 29 relocation slots and the verdict is a
+relocation match, where before the split it was a size mismatch at 220 of 2504. Every call and global relocation validates, and the four switch-table entries land on the
+reference's offsets.
+Two defects in the old prefix were repaired on the way: the message-box value had been merged into one call site where the reference has two sites with per-branch table
+reads, and the fourteen-byte clock field is a structure copy from a global rather than four scalar stores, which is where the reference's extra move comes from. The tree
+lints clean with 5,487 checks passing and no errors.
