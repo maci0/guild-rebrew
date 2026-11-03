@@ -23642,3 +23642,20 @@ Four shapes were reverted, including a volatile qualifier on the dead pair and t
 and not fixed: the reference keeps the loop bound check at the loop head where this build rotates it to the tail, and the reference hoists a field load before the
 conversion and reuses it where this build reloads it, which is a codegen difference rather than a semantic one. Every one of the 54 direct call targets matches the
 reference, so no wrong target remains.
+
+## 2026-11-03 — hopper row: no defect class found, and two backend traits named
+
+`0x433BE0` keeps 178 of 2824 with the object at 2694, 123 gap windows and four relocations, and the pass found no repair: it is recorded as a codegen wall rather
+than a defect row. All twelve classes were checked against the reference bytes and none holds. The frame difference is not a source defect but a placement
+difference, with the reference keeping fifteen float homes where this build puts six of the same values into argument home slots, and reordering declarations does
+not move it. Both branches common-subexpression-eliminate their base address exactly as the reference does. All eleven call sites match, and the three callees were
+decoded to confirm they are real function starts with prologues. The two allocation and free routines take their arguments in the reference order at all seven and
+one sites, the multiplication and shifts match, the two globals are absolute addresses as in the reference, the byte loop includes its terminator, the comparisons
+are signed as in the reference, and the guards and the min/max chains are in the reference order.
+Two backend traits are named as the blockers, with the evidence. The reference merges all five zero returns into one shared tail with two register depths, so the
+epilogue is emitted once, while this build emits five inline epilogues and is twenty bytes longer in that region. And the reference expands its four copies with the
+alignment-head form, a three-times computation, a mask, a subtraction and byte, dword and byte moves, while this compiler puts the dword move first at every
+copy under every optimisation and processor flag tried, which was confirmed with a minimal test across seven flag sets and two processor variants. That is the same
+class of difference the project already documents for the allocator.
+One candidate was measured and not kept: declaring the accumulators as arrays gained a single matched byte and moved the frame, but is less faithful to the
+reference's scalar homes. A pragma sweep and a toolchain sweep were both measured, and the current settings are the best of them.
