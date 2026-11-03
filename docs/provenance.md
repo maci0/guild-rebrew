@@ -21684,3 +21684,34 @@ the full unhashable-type text was added; the first entry was incomplete and now 
 const, pointer-object qualification for arrays of pointers and the pointee-store exclusion. The missing `--module` and
 `--reference` rows and a const note were added to the CLI reference in commit 41503bf0, since the earlier change added
 those flags without documenting them. No push was made.
+
+## 2026-11-03 — dialogue row: six semantic repairs landed deliberately
+
+The six defects recorded earlier are now repaired and kept, taking the row from 404 to 248 matching bytes with object 4314
+against native 4297 and three relocations, status SIZE_MISMATCH and lint clean apart from two warnings on other files. The
+trade is deliberate: each repair costs positional bytes and the total is 156, accepted because the source was doing the
+wrong thing at each site. Per-step measurements, with a promotion run last: the eight swapped `d2_SetForm` argument pairs
+give 405 for plus one; storing `gage.obj` before the fcn_005b59c0 call gives 240 for minus 165; the state==1 body rewrite
+gives 236 for minus four; the `fcn_005463a0` third argument moving from 6 to 7 gives 228 for minus eight; the
+`fcn_004c5150` argument order gives 227 for minus one; `nSlots = 0` gives 246 for plus 19; and shrinking the packet buffer
+from 0x100 to 0xfc gives 248 for plus two.
+Each repair was checked against the listing before editing. Native pushes the constant and then the field at every site, for
+example `push 3` followed by `mov edx,[ebx]` at 0x5b8b14 and the equivalent at 0x5b8b16, `push 2` then `push ecx` at
+0x5b8fba, and `push 2` then `mov esi,[ebp+0x50]` at 0x5b9850, while the source had the constant and field in the opposite
+order at lines 199, 319, 393, 409, 538, 548, 554 and 567. The `gage.obj` store is `mov [esp+0x60],ebp` at 0x5b8f4e inside
+the three pushes, so the object field is set before the call. The state==1 body is
+`cmp [esp+0x6c],1` at 0x5b9064, then `push 2` and `push esi` for the window at 0x5b9072 and 0x5b9074, the text append of
+0x6811b0, a 16-bit load of `gage.obj` through `mov dx,[edi]` at 0x5b9086, the append of 0x1a21 and the refresh call
+fcn_00472250 with the window and two, with no fcn_005b59c0 in that block. The first `fcn_005463a0` call pushes 7 at
+0x5b90da while the second correctly pushes 6 at 0x5b94cd. The post-loop `fcn_004c5150` pushes minus one at 0x5b8f09, the
+table entry at 0x5b8f08, the style at 0x5b8ef7 and the fcn_0050b750 result at 0x5b8ee8, so the result is last; the inner-loop
+call at line 278 was already correct and untouched. `nSlots` must be zero because 0x5b8907 stores ebp with `xor ebp,ebp` at
+0x5b88f9 and the slot field is read at 0x5b8dce before its later assignment. The packet buffer is 0xfc rather than 0x100
+because native memsets 0xf8 at 0x5b9102 with rows based at B+0x190, and with the slot count moved onto the stack a 0x100
+buffer puts the frame at 0x136c while 0xfc reproduces native's 0x1368 and rows at esp+0x1a0, verified in a scratch object
+against `mov eax,0x1368`, `lea esi,[esp+0x1a0]` and `lea ...,[esp+0x1ac]`; the remaining four-byte difference from native's
+0xf8 is one scalar that native stack-allocates while this build keeps it in a register, a pre-existing layout gap rather
+than a behaviour difference. The stale header comment claiming a different frame was corrected, and the observation about
+row 0x5101e0 was refined: that file holds two definitions with their own anchors, at 0x00507910 line 2 and 0x005101e0 line
+53, so the file is named for its first function while the row's symbol and address agree, making the mismatch cosmetic and
+the row itself RELOC at 116 bytes.

@@ -12,7 +12,9 @@
  * Bar scale uses the compiler-literal doubles 0x666088 (128.0), 0x662c38
  * (100.0) and 0x665388 (1.0/255.0) through named externs: the pointer-cast
  * dereference forces an 8-byte aligned EBP frame and breaks the prologue.
- * Remaining gap: the frame is 0x1360, not 0x1368. Evidence: .scratch/5b88b0/.
+ * Frame and local offsets match native (0x1368); the object is over native
+ * because one scalar native keeps on the stack stays in a register here, and
+ * pkt[0xfc] absorbs that. Evidence: .scratch/row5b88b0/.
  */
 
 typedef struct
@@ -117,7 +119,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 	int hD;
 	int hE;
 	Row gage;
-	char pkt[0x100];
+	char pkt[0xfc];
 	Row rows[12];
 	char txtName[0x60];
 	char txtNum[0x80];
@@ -136,6 +138,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 
 	cnt = 0;
 	ent = (unsigned char*) (*(void**) 0x868050) + *(unsigned char*) a0 * 0x24d;
+	nSlots = 0;
 	hA = -1;
 	sel = -1;
 	hB = -1;
@@ -196,7 +199,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 				break;
 			}
 		}
-		d2_SetForm(3, *pIt);
+		d2_SetForm(*pIt, 3);
 		tv = cnt % 2 * tv3 + 0x10;
 		rows[i].win = *pIt;
 		rows[i].x = tv;
@@ -284,10 +287,11 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 					fcn_004c4ef0(0x6ac2bc);
 				}
 			}
-			fcn_004c5150(fcn_0050b750(ret, *(unsigned char*) 0x773d75), -1,
-			             *(unsigned char*) 0x773d75,
+			fcn_004c5150(-1,
 			             *(int*) (0x7f4ca4
-			                      + *(unsigned short*) 0x774970 * 0x21c));
+			                      + *(unsigned short*) 0x774970 * 0x21c),
+			             *(unsigned char*) 0x773d75,
+			             fcn_0050b750(ret, *(unsigned char*) 0x773d75));
 		}
 		p = fcn_0050dc90((int) a0);
 		if (p != 0) {
@@ -298,6 +302,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 				if (gage.x1c != -1) {
 					goto keep_gage;
 				}
+				gage.obj = (unsigned char*) p;
 				fcn_005b59c0((unsigned char*) p, &gage, 0);
 				goto after_gage;
 			}
@@ -316,7 +321,7 @@ after_gage:
 		if (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == gage.icon
 		    && gage.icon != -1) {
 			for (i = 0; i < 3; i++) {
-				d2_SetForm(2, *(int*) (win + 0x228 + i * 4));
+				d2_SetForm(*(int*) (win + 0x228 + i * 4), 2);
 				io_AppendText((char*) 0x6811b0);
 			}
 			hA = -1;
@@ -331,10 +336,11 @@ after_gage:
 				                                ent[0x223] + 0x130));
 			}
 			if (gage.state == 1) {
-				fcn_005b59c0((unsigned char*) p, &gage, 0);
+				d2_SetForm(gage.win, 2);
+				io_AppendText((char*) 0x6811b0);
 				hB = fcn_00472250(gage.win, 2,
 				                  io_AppendText((char*) 0x1a21,
-				                                *(unsigned short*) p));
+				                                *(unsigned short*) gage.obj));
 			}
 		}
 		if (*(int*) 0x100f1dc == -1) {
@@ -343,7 +349,7 @@ after_gage:
 		if (*(int*) 0x67d370 != hD || gage.obj != 0) {
 			goto packet2;
 		}
-		p = (char*) fcn_005463a0(2, 0, 6, 3, *(int*) (a0 + 1));
+		p = (char*) fcn_005463a0(2, 0, 7, 3, *(int*) (a0 + 1));
 		if (p != 0) {
 			if (p[0xac] == 0) {
 				goto packet2;
@@ -390,7 +396,7 @@ packet2:
 			goto after2;
 		}
 		for (i = 0; i < 3; i++) {
-			d2_SetForm(2, *(int*) (win + 0x228 + i * 4));
+			d2_SetForm(*(int*) (win + 0x228 + i * 4), 2);
 			io_AppendText((char*) 0x6811b0);
 		}
 		memset(pkt, 0, 0xf8);
@@ -406,7 +412,7 @@ packet2:
 		*(int*) (pkt + 0x5c) = *(int*) (gage.obj + 4);
 		fcn_004c5530(pkt);
 		for (i = 0; i < 3; i++) {
-			d2_SetForm(2, *(int*) (win + 0x228 + i * 4));
+			d2_SetForm(*(int*) (win + 0x228 + i * 4), 2);
 			io_AppendText((char*) 0x6811b0);
 		}
 		hA = -1;
@@ -535,7 +541,7 @@ after2:
 			hA = -1;
 			sel = -1;
 			for (i = 0; i < 3; i++) {
-				d2_SetForm(2, *(int*) (win + 0x228 + i * 4));
+				d2_SetForm(*(int*) (win + 0x228 + i * 4), 2);
 				io_AppendText((char*) 0x6811b0);
 			}
 		}
@@ -545,13 +551,13 @@ after2:
 					continue;
 				}
 				for (tv = 0; tv < 3; tv++) {
-					d2_SetForm(2, *(int*) (win + 0x228 + tv * 4));
+					d2_SetForm(*(int*) (win + 0x228 + tv * 4), 2);
 					io_AppendText((char*) 0x6811b0);
 				}
 				hA = -1;
 				sel = i;
 				if (rows[i].obj != 0 && rows[i].state == 1) {
-					d2_SetForm(2, rows[i].win);
+					d2_SetForm(rows[i].win, 2);
 					io_AppendText((char*) 0x6811b0);
 					hA = fcn_00472250(
 					    rows[i].win, 2,
@@ -564,7 +570,7 @@ after2:
 				             *(unsigned short*) rows[sel].obj);
 				if (fcn_00526120(textB, 1) != 0) {
 					for (i = 0; i < 3; i++) {
-						d2_SetForm(2, *(int*) (win + 0x228 + i * 4));
+						d2_SetForm(*(int*) (win + 0x228 + i * 4), 2);
 						io_AppendText((char*) 0x6811b0);
 					}
 					fcn_004ff210(*(unsigned short*) rows[sel].obj, -1000);
