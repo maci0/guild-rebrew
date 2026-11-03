@@ -24097,3 +24097,18 @@ the indexed store back into a walked pointer and spills that induction pointer, 
 cannot be moved from source. The remaining lever is the allocator spending a callee-saved register on a constant.
 Side checks found no fabricated local, since the spilled slot holds the next-slot address the reference also computes, and no comparison with the wrong strictness; the
 only encoding difference is how a guard of at least one is spelled. Three of the eleven shapes were reverted, two of them because they changed the frame.
+
+## 2026-11-03 — group row blockers: one closed as a compiler behaviour, one premise stale
+
+`0x5926F0` keeps 408 of 2593 with 30 relocations and no shape moved it, so the source is restored byte for byte and the result is recorded as evidence rather than a
+change. Nine shapes were tried and every accepted one compiled to identical text: a zero local used at the store and both comparisons, a null pointer constant, a
+return value, the same value as the default for four profile reads, a minus-one local for the second store, swapping the two constant stores, an aggregate holding the
+three arrays, and a null handle used as the zero.
+An isolated helper that returns zero is the only shape that changes anything, and it makes the build call the helper, which the reference does not, so the conclusion is
+that this is constant rematerialisation and colouring in the compiler rather than a reachable source shape: the pinned image always materialises an immediate zero for
+a store, a push and a comparison and gives the callee-saved register to minus one. The project already documents this behaviour, so the blocker is closed rather than
+left open for another session to repeat.
+The second blocker's premise was stale: the three arrays already sit at the reference displacements with an identical slot set, and declaration order or an aggregate
+around them changes nothing, so the reported frame difference of 0x2d8 against 0x2f8 is stack-depth accounting through the call blocks, not a local frame difference.
+One out-of-scope observation is recorded because it may explain residual bytes: the object has two call sites to one routine where the reference has four, which is tail
+merging of a duplicated error block, and eighty-two direct calls against the reference's ninety-six, of which ten are register-indirect.
