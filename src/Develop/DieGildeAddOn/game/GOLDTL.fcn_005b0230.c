@@ -75,11 +75,11 @@ void __cdecl fcn_005b0230(char* town)
 	for (i = 0; i < 0x300; i++) {
 		*(int*) (town + 0x18dc + i * 4) = -1;
 	}
-	count = 0;
 	g_town_count(town) = 0;
 
 	p = (char*) gm_StartFilteredEntitySearch(2, 5, 9, 4, *(unsigned short*) 0x774970);
 	ent = gm_StartFilteredEntitySearch(1, 6);
+	count = 0;
 	slot = (ScrollSlot*) (town + 0xdc);
 	if (ent != 0) {
 		do {

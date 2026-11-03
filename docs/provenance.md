@@ -24084,3 +24084,16 @@ the pads existed: the padding lands in a different object from the function whos
 The guard prints what to do instead of failing silently, and the pass still works when the override is set, since a layout experiment may legitimately need it while
 the whole-pad premise is being re-examined. Verified by running the pass after the edit and observing the refusal, and by confirming the file parses. My first attempt
 at this edit corrupted the module by replacing a docstring delimiter, which the parse check caught immediately and the file was rebuilt from the committed copy.
+
+## 2026-11-03 — market row: a counter moved late, and a spill proved unreachable
+
+`0x5B0230` moves from 370 to 397 matched bytes with the frame at 0x8c on both sides. The one kept change moves a counter's initialisation after two entity searches,
+which is where the reference issues it. Eleven shapes were measured in all, and the pass corrected the premise it was given: the frame was not two dwords larger, it
+already matched, and what differs is that one loop's slot pointer is spilled to a frame slot where the reference keeps it in a register, displacing a texture slot by
+four bytes and later scalars by eight.
+The decisive result is negative and worth recording: five different source shapes for the pointer, including a block-local pointer with a short live range, an index
+expression with no pointer variable at all, and recomputing the address from the count each iteration, all compile to byte-identical text. This compiler strength-reduces
+the indexed store back into a walked pointer and spills that induction pointer, so the pointer's source home and live range never reach the allocator, and the spill
+cannot be moved from source. The remaining lever is the allocator spending a callee-saved register on a constant.
+Side checks found no fabricated local, since the spilled slot holds the next-slot address the reference also computes, and no comparison with the wrong strictness; the
+only encoding difference is how a guard of at least one is spelled. Three of the eleven shapes were reverted, two of them because they changed the frame.
