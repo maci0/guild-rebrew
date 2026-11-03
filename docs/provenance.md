@@ -24727,3 +24727,15 @@ of 80.0, where the source passes the position vector and a tolerance of 750.0. T
 both the pointer and the tolerance wrong at that site. That is recorded for the next pass rather than edited here, because the scratch local has to exist first for the
 pointer form to be expressible.
 The row is back at its baseline, 581 of 2300, and no change was kept from this investigation.
+
+## 2026-11-03 — duty row: twelve classes clean, and the one hoist that blocks it
+
+`0x50EE80` was examined and left unchanged: the object is twenty-six bytes over its extent with 185 matched bytes, and every one of the twelve classes comes back clean
+against the reference. Forty-three call sites have identical push counts and verified argument order, every argument count including the variadic ones matches, every
+comparison matches in direction and signedness, thirteen field offsets and four strides match, the dispatch chain, the loop bounds and the floating-point sequence match,
+the global is used as an array with the same stride chain, and the frame is the same sixteen bytes with the same slot roles and the same declaration order.
+The residual is code motion: the reference keeps the constant one as an immediate in the arms that use it and materialises a register copy only inside the paths where it is
+needed, while this build hoists a move of one into a callee-saved register early, which costs the other callee-saved register its intended value and makes it reload one of
+the two pointers from the stack. The object therefore carries nine extra moves, four fewer adds, six fewer pushes and four extra conditional jumps.
+The concrete lever is recorded rather than chased: stop the constant one from being hoisted so that the register it occupies is available for the pointer the reference
+keeps there. That is a full matching pass on the row, not a point repair, and no source change was made.
