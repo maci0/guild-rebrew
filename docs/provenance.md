@@ -21469,3 +21469,21 @@ ent34 helper at all 21 sites gives 298 at 4580 even though native makes no such 
 declaration reorders had no effect. Every direct callee has a project row, so no prototype was invented, and the surviving
 unresolved item is the ent34 local static helper that the native body inlines, whose original translation unit and spelling
 remain unresolved. Findings in .scratch/m4d8_004d8d00_findings.md.
+
+## 2026-11-03 — a row already at exact match re-verified
+
+`0x451840` was picked from a neighbouring report's callee list and turned out to be already matched, so the round only
+re-verified it. The binding is src/Develop/Units/d3/CompareVector3WithinTolerance.c with the symbol
+_CompareVector3WithinTolerance, keyed at rebrew-functions.toml:137538; no GOLD row exists at that VA, and the only mention
+elsewhere is a retired binding history on GOLD.0x00453e70. The extent is 84 from the store and the inventory agrees, with
+extent history showing 96 to 84 as a reviewed linker-fill tail on 2026-10-29, and disassembly of 84 bytes reports no
+truncation and no stale size. The row measures EXACT at 84 of 84 with zero relocations and no mismatches, and its stored
+source hash equals the file's sha256.
+The listing was checked against the object independently: 30 instructions of i386 with x87, no relocations and no direct
+calls since fabs is inlined, and all 30 compare equal, being the three lane checks with `fld`, `fsub`, `fabs`, `fld` of the
+epsilon, `fcompp`, `fnstsw`, `and 0x100` and the 1-or-0 return. Argument order was verified from the listing rather than the
+source spelling: a from [esp+4] in edx, b from [esp+8] in ecx, epsilon from [esp+0xc] as a float, so the prototype
+`int __cdecl (float*, float*, float)` is what the listing implies. A fresh-path, fresh-flags, no-promote test of the same
+source returned EXACT 84 of 84 with object 84, so the compile cache is not masking a regression. No source change was made
+and nothing was reverted; the neighbour-row defect pattern of wrong callee targets and reversed arguments cannot apply
+because this body has no calls.
