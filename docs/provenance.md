@@ -20388,3 +20388,38 @@ subtraction plus `fst`, `fcompp`, `and eax,0x4100` and `jne` in order at object 
 fabricated volatile qualifier, so it was rejected under the restore rule. A blocker is set on the row. Probes and
 results in .scratch/569ff0/ including varA, varF, pr_p, sw_, wv_w1_0, s2, y1 to y3, z2, z3, t_A, t_s2, t_w1,
 t_plain and t_final_r3.
+
+## 2026-11-03 — stub generator learns read-only rows, scaffold regeneration deferred
+
+The upstream generator gap is fixed and committed in the upstream checkout as a8370e56 with tests, plus ec9e2c29 for
+the three tool-gap entries. Before the change, `rebrew build symbol-stubs` emitted every global as a writable
+zero-initialised definition derived only from extern declarations, never reading the data store, the row section, the
+storage kind or the native section, which is why 46 rows whose reference VAs lie in `.rdata` landed in writable data.
+The fix adds `--reference IMAGE`, which resolves each row VA against the reference PE section table, and `--module
+NAME`, which scopes rows to one target; a global is emitted `const` when its native row section is `.rdata` or its
+declaration qualifies the object const, with the initialiser unchanged and pointer objects taking `int * const` rather
+than `const int *`, while `.data`, `.data1` and `.bss` rows, per-target conflicts and any symbol a source store writes
+stay writable; writes reachable only through `&symbol` or a callee argument are invisible to the source scan and are
+documented as such. A mypy failure in the new section-selection code was repaired before the commit by giving the
+section variable an explicit optional type and keeping the stored row section in a separate local. Tests cover an
+`.rdata` row emitting const, an unchanged `.data` row, pointer constness placement, a const array initialiser, a
+declared const, pointer-index versus direct store, module conflict, reference-range override, and a CLI regression that
+records an `.rdata` row and asserts `const int g_ro = 0;`. The suite runs 93 tests in tests/test_gen_stubs.py and 13,727
+passed with 29 skipped across tests, exit zero, with ruff check and format clean and the CHANGELOG updated under
+Unreleased.
+Project-side evidence at object level: collecting the reference `.rdata` symbols for GOLDTL and subtracting caller
+writes yields 50 names, which intersect the current scaffold definitions to exactly 46; a 46-symbol stub TU generated
+with the fixed tool compiles through `rebrew build driver cl` with the build's own flags to an object whose `.rdata`
+section length is 0x178 (376 bytes) with all 46 symbols in that section and none elsewhere. A controlled before and
+after on the same 3,486-symbol log, comparing the unmodified 6.16.0 wheel with the fixed code, moves object `.rdata`
+from 0x61 to 0x1f4 and `.bss` down by 0x1a0. Both build images currently report `.rdata` VirtualSize 0xb36e against the
+reference 0x12bb2, a gap of 30,788, and the predicted value after these rows is 0xb4e6 with the gap at 30,412, though
+that is not measured because no rebuild was run.
+Regenerating stubs/goldtl/symbol_stubs.c is deferred, not attempted. The tracked stubs/goldtl/unresolved.txt dates from
+2026-10-22 and no longer matches the scaffold's generation set: the canonical command against it produces 5,699 lines
+against the current 3,544 and adds about 167 function names as data stubs, and it also duplicates symbols now owned by
+stubs/goldtl/link_scaffold.c, for example `_GetPrimaryLen`, which is line 4 of the log and is defined at
+link_scaffold.c:288, and `_fcn_004012b0`, either of which would raise LNK2005. A fresh log needs a link without the
+stub translation unit, which is a whole build and outside this step's scope. The committed tree edit that adds const to
+45 definitions and fixes `g_662d70` to an array therefore stands as the provisional state, with no behaviour change to
+the server or Gold scaffolds, until a fresh unresolved log exists and the generator can rewrite the file.
