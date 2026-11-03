@@ -33,8 +33,21 @@ typedef struct {
 	unsigned char x1d;
 } Craft;
 
-extern char lpObjektePROT[];     /* +0x41 stride goods records: type byte, name */
+typedef struct {
+	int kind;          /* +0x00: request kind */
+	int bld;           /* +0x04: owning building */
+	int rec;           /* +0x08: building record */
+	int craft;         /* +0x0c: crafting slot */
+	int x10;           /* +0x10 */
+	int flags;         /* +0x14: flagged record count */
+	int count;         /* +0x18: scanned record count */
+	int x1c;           /* +0x1c */
+	int x20;           /* +0x20 */
+} Req; /* 0x24 */
+
+extern char* lpObjektePROT;  /* +0x41 stride goods records: type byte, name */
 extern char g_100d0c0[];    /* +0x58 stride building records */
+extern char g_100b0c0[];
 extern int g_100b0ac;       /* building count */
 extern int g_100dc20;
 extern int g_100dc34;
@@ -44,7 +57,6 @@ extern char g_100dc40[];
 extern char g_100dc60[];
 extern char g_100ddc0[];
 extern char g_100df20[];
-extern char g_100b0c0[];
 extern unsigned short g_7f4c04;
 extern char g_7f4ca0[];
 
@@ -59,13 +71,13 @@ void __cdecl fcn_004868d0(Bld*, BldRec*);
 int __cdecl fcn_005b1e40(int);
 int __cdecl fcn_00503d10(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
-int __cdecl gm_RandomMod(int);
-int __cdecl fcn_0064d41a(char*, char*, ...);
+unsigned short __cdecl gm_RandomMod(unsigned short);
+void __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0047e220(int);
 void __cdecl fcn_0047e0e0(Bld*, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl fcn_00487e60(Bld*, int);
-void __cdecl fcn_00487f90(int*);
+void __cdecl fcn_00487f90(Req*);
 void __cdecl ai_MeisterCollectTrans(Bld*);
 void __cdecl ai_MeisterTrade(Bld*, int);
 
@@ -76,20 +88,17 @@ void __cdecl ai_MeisterTrade(Bld*, int);
 void __cdecl fcn_0047e270(Bld* bld)
 {
 	char name[0x100];
-	int order[0x21];
+	int order[0x20];
+	Req put;
 	int craft;
+	int i;
+	int j;
 	int prod;
 	int hit;
-	int i;
-	int n;
 	int r;
-	int id;
-	int val;
-	int count;
-	int slot;
-	char* goods;
+	int n;
 	BldRec* rec;
-	Craft* cr;
+	char* goods;
 
 	prod = fcn_00502cd0(*(int*) (bld->x16c + 0x5d), 2, 6, 0, 0xff);
 	if (prod == 0)
@@ -102,7 +111,6 @@ void __cdecl fcn_0047e270(Bld* bld)
 	fcn_00487970(craft, bld, 0x4b);
 	fcn_00487c00(craft, bld, 0x19);
 	fcn_00487470(bld);
-	cr = (Craft*) craft;
 	hit = 0;
 	if (g_7f4c04 != 8 && g_7f4c04 != 0xd) {
 		for (i = 0; i < g_100b0ac; i++) {
@@ -137,7 +145,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 					bld->id = (unsigned short) rec->id;
 					goto done;
 				}
-				goto pick;
+				break;
 			}
 		}
 	}
@@ -149,20 +157,20 @@ pick:
 	if (*(unsigned char*) (g_7f4ca0 + *(unsigned short*) (bld->x16c + 0x27) * 0x21c + 2) == 6) {
 		n = fcn_005b1e40(bld->x16c);
 		if (n != 0) {
-			for (rec = (BldRec*) g_100d0c0; (char*) rec < g_100d0c0 + 0x5900; rec = (BldRec*) ((char*) rec + 0x58)) {
+			for (rec = (BldRec*) g_100d0c0; (char*) rec < g_100d0c0 + 0xb00; rec = (BldRec*) ((char*) rec + 0x58)) {
 				if (rec->id != n)
 					continue;
 				goods = lpObjektePROT + rec->id * 0x41;
-				if ((int) cr->x1c < rec->x1c)
+				if ((int) ((Craft*) craft)->x1c < rec->x1c)
 					break;
-				if ((int) cr->x1d < rec->x20)
+				if ((int) ((Craft*) craft)->x1d < rec->x20)
 					break;
 				if (rec->f40 < (int) *(unsigned short*) (goods + 0x36))
 					break;
-				id = fcn_00503d10(rec->id);
-				if (id == 0)
+				n = fcn_00503d10(rec->id);
+				if (n == 0)
 					break;
-				if ((int) ((unsigned short) *(unsigned short*) (goods + 0x36) + rec->f3c) <= gm_eval_SlotVoll(id, rec->id, 1000000)) {
+				if ((int) ((unsigned short) *(unsigned short*) (goods + 0x36) + rec->f3c) <= gm_eval_SlotVoll(n, rec->id, 1000000)) {
 					if (fcn_00486640(bld, rec, 1)) {
 						rec->f54 = rec->f54 | 8;
 						fcn_004868d0(bld, rec);
@@ -185,19 +193,17 @@ pick:
 		order[i] = i;
 	for (i = 0; i < 0x20; i++) {
 		r = gm_RandomMod(0x20) & 0xffff;
-		val = order[r];
 		order[i] = order[r];
 		order[r] = order[i + 1];
 	}
 	for (i = 0; i < g_100b0ac; i++) {
 		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
-		id = rec->id;
-		goods = lpObjektePROT + id * 0x41;
+		goods = lpObjektePROT + rec->id * 0x41;
 		if ((*(unsigned char*) goods == 0x17 || *(unsigned char*) goods == 0x25) && rec->f3c >= 5)
 			continue;
-		if ((int) cr->x1c < rec->x1c)
+		if ((int) ((Craft*) craft)->x1c < rec->x1c)
 			continue;
-		if ((int) cr->x1d < rec->x20)
+		if ((int) ((Craft*) craft)->x1d < rec->x20)
 			continue;
 		if (rec->f40 < (int) *(unsigned short*) (goods + 0x36))
 			continue;
@@ -208,6 +214,7 @@ pick:
 			continue;
 		if (!fcn_00486640(bld, rec, 1))
 			continue;
+		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
 		rec->f54 = rec->f54 | 8;
 		fcn_004868d0(bld, rec);
 		bld->id = (unsigned short) rec->id;
@@ -216,13 +223,12 @@ pick:
 	}
 	for (i = 0; i < g_100b0ac; i++) {
 		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
-		id = rec->id;
-		goods = lpObjektePROT + id * 0x41;
+		goods = lpObjektePROT + rec->id * 0x41;
 		if ((*(unsigned char*) goods == 0x17 || *(unsigned char*) goods == 0x25) && rec->f3c >= 5)
 			continue;
-		if ((int) cr->x1c < rec->x1c)
+		if ((int) ((Craft*) craft)->x1c < rec->x1c)
 			continue;
-		if ((int) cr->x1d < rec->x20)
+		if ((int) ((Craft*) craft)->x1d < rec->x20)
 			continue;
 		if (rec->f40 < (int) *(unsigned short*) (goods + 0x36))
 			continue;
@@ -243,27 +249,29 @@ done:
 	fcn_0047e220(craft);
 	fcn_0047e0e0(bld, craft);
 	if (g_100dc20 == bld->x16c && g_100dc38 < 4) {
-		slot = 0;
-		while (slot < g_100b0ac && g_100dc38 < 4) {
-			rec = (BldRec*) (g_100d0c0 + slot * 0x58);
+		i = 0;
+		while (i < g_100b0ac) {
+			rec = (BldRec*) (g_100d0c0 + i * 0x58);
 			memcpy(g_100dc60 + g_100dc38 * 0x58, rec, 0x58);
-			for (i = 0; i < 4; i++) {
-				id = rec->cand[i];
-				if (id >= 0) {
-					memcpy(g_100df20 + (*(int*) (g_100dc40 + g_100dc38 * 4) + g_100dc38) * 0x40, g_100b0c0 + id * 0x40, 0x40);
+			for (j = 0; j < 4; j++) {
+				if (rec->cand[j] >= 0) {
+					n = *(int*) (g_100dc40 + g_100dc38 * 4);
+					memcpy(g_100df20 + (n + g_100dc38 * 4) * 0x40, g_100b0c0 + rec->cand[j] * 0x40, 0x40);
 					*(int*) (g_100dc40 + g_100dc38 * 4) = *(int*) (g_100dc40 + g_100dc38 * 4) + 1;
 				}
 			}
 			g_100dc38 = g_100dc38 + 1;
-			slot = slot + 1;
+			i = i + 1;
+			if (g_100dc38 >= 4)
+				break;
 		}
 	}
 	fcn_00487e60(bld, 4);
-	count = 0;
+	put.count = 0;
 	for (n = 0x7f4ca2; n < 0x85a0a2; n += 0x21c) {
 		if (*(unsigned char*) (n + 6) == 0)
 			continue;
-		if (*(short*) (n - 2) == -1)
+		if (*(unsigned short*) (n - 2) == 0xffff)
 			continue;
 		if (*(unsigned char*) n == 0xa)
 			continue;
@@ -275,33 +283,42 @@ done:
 			continue;
 		if (*(int*) (*(int*) (n + 0x182) + 0x2c) != *(int*) (*(int*) (n + 0x16a) + 1))
 			continue;
-		fcn_00529160(bld->x16c, 0, (int) *(short*) (n - 2), 0);
-		count = count + 1;
+		fcn_00529160(bld->x16c, 0, (int) *(unsigned short*) (n - 2), 0);
+		put.count = put.count + 1;
 	}
 	if (g_100dc20 == bld->x16c)
-		g_100dc34 = count;
-	n = 0;
+		g_100dc34 = put.count;
+	put.flags = 0;
 	if (g_100b0ac > 0) {
 		for (i = 0; i < g_100b0ac; i++) {
 			rec = (BldRec*) (g_100d0c0 + i * 0x58);
 			if (rec->f54 & 8)
-				n = n + 1;
+				put.flags = put.flags + 1;
 			if (rec->f54 & 0x10)
-				n = n + 1;
+				put.flags = put.flags + 1;
 		}
 	}
-	if (count >= n)
-		count = n;
-	if (n != 0 && count != 0) {
-		for (i = 0; i < g_100b0ac; i++) {
+	if (put.flags >= put.count)
+		put.flags = put.count;
+	if (put.count != 0 && put.flags != 0 && g_100b0ac > 0) {
+		put.bld = (int) bld;
+		put.craft = craft;
+		put.x10 = 0;
+		put.x20 = 0;
+		put.x1c = 0;
+		i = 0;
+		for (; i < g_100b0ac; i++) {
 			rec = (BldRec*) (g_100d0c0 + i * 0x58);
 			if (rec->f54 & 8) {
-				val = 4;
-				fcn_00487f90(&val);
-				if (g_100dc20 == bld->x16c && g_100dc3c < 4) {
-					memcpy(g_100ddc0 + g_100dc3c * 0x58, rec, 0x58);
-					g_100dc3c = g_100dc3c + 1;
-				}
+				put.kind = 4;
+				put.rec = (int) rec;
+				fcn_00487f90(&put);
+			}
+			else
+				continue;
+			if (g_100dc20 == bld->x16c && g_100dc3c < 4) {
+				memcpy(g_100ddc0 + g_100dc3c * 0x58, (void*) put.rec, 0x58);
+				g_100dc3c = g_100dc3c + 1;
 			}
 		}
 	}

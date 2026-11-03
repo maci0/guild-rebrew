@@ -24348,3 +24348,16 @@ A float wording is also recorded as disproved: the value near the first stack sl
 constant and stores a dword back, and the flag beside it is separate. A variant that declared it double was reverted on that evidence.
 One brief mistake is recorded too: the task statement quoted an extent of 2273 where the store and the inventory both say 3772, which the reading agent caught before
 editing. Addresses and sizes belong to the tool outputs, not to memory, and the brief for a row must be built from the record rather than typed.
+
+## 2026-11-03 — sibling row: a table declared as an array, and a scan bound eight times too large
+
+`0x47E270` moves from 193 to 214 matched bytes with the object at 2043 and the frame at 0x1b4 against the reference's 0x1b0, with seventeen fewer gap windows. The
+largest repair is the same class as its sibling: the object table is a pointer, since the reference loads a pointer from the global's address and adds a scaled
+identifier, while the source declared it as a character array and indexed the symbol address itself. A pick-scan bound was 0x5900 where the reference and the sibling both
+use 0x0b00, which is thirty-two records rather than two hundred and fifty-six. An identifier read is an unsigned short because the reference zero-extends it. A copy
+destination index is corrected to add four times the count rather than the count itself. And the request structure, its size and its nine fields were confirmed against
+the reference's own construction at the frame tail, which the sibling row had also derived, so the request is now built and used.
+The frame is one four-byte slot over because a record pointer is spilled in the done-copy loop where the reference keeps it in a register. One shared call tail is not
+fixed: this build merges four formatting sites into one call block where the reference inlines four. Three variants were reverted after measurement.
+The first divergence is that frame adjustment, and the remaining windows are positional rather than missing code, since the call sequences now match one for one at
+thirty-eight calls against the reference's forty, of which two are duplicated tail calls.
