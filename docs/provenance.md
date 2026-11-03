@@ -21360,3 +21360,34 @@ Also recorded: the five-byte object shortfall is the native section tail's five 
 0x179B to 0x17A0, which a COFF object never emits, so object 6048 is unreachable from C. The prologue blocker stands
 untouched, with native loading [0x6a23a0] before [0x6a239c] and the first mismatched byte at 0x21. Notes in
 .scratch/51c840/NOTES_block3.md with the harness at try.py.
+
+## 2026-11-03 — d2 third row: field offsets and call forms corrected at byte cost
+
+`0x5B6300` measures 596 of 5499 with object 5495, down from 778 at the previous object size of 5499, and 38 relocations;
+status moves from STUB to SIZE_MISMATCH because the object is now four bytes short of the extent, and lint is clean. The
+matched byte count fell because five corrections repaired wrong field offsets and a missing multiply, and the trade is
+kept: structure improved even as the positional count dropped, with mnemonic ratio from 0.8608 to 0.8707, structural ratio
+from 0.9391 to 0.9455, and exact instructions from 88 to 78. Reverting the field-swap and call-form corrections would
+restore 778 at 5499 but would leave wrong field stores and a missing rate multiply, so they stay.
+The corrections were measured one at a time from the baseline. The record field offset changed from plus four to plus one
+across the loop call `fcn_004c4510(a1, G(a1+1))`, the epilogue call, three `fcn_005463a0(..., G(a1+1))` sites, the
+`msg.f0c = *(int*)(a1+1)` stores in all five packet blocks, and the slot-owner compare `G(e+0x184)+0x2c == G(a1+1)`, which
+is metric-neutral at native size. The message packet fields f08 and f0c were swapped in eight dwords across the 0x31, 0x31,
+0x32 and 6 blocks, where f08 is the 0x7f4ca4 slot record and f0c the sender id, giving 659 at 5494. The local identities
+were corrected: the pay handle result is v3c, used by the compare and the later export, the pending-row count is v38 rather
+than v48, with v48 keeping the fcn_00472250 handle, and the clickable-row guard reads `rows[k].a20` rather than a24, which
+is again metric-neutral. The `d2_ShowTxt` argument order became `(short)(sel.a10-0x38)`, `(short)(sel.a0c-0x20)`,
+`*(int*)0x14abbd4` and `*(int*)0x772514`, `fcn_0050b8d0` received its real prototype of `unsigned char*, int, int, int` with
+arguments `(slot, *a1, -1, 1)` and `(slot, *a1, -1, 0)`, the missing
+`(double)*(int*)(a1+0x3d) * g_6640e8` rate scaling was restored with its integer casts per the idiom in
+fcn_0050c1b0.c line 70, and `fcn_00505370` took a `void*` prototype; that group measures 561 at 5500 and the combination is
+596 at 5495. A rename of fcn_004727a0 to d2_SetForm was reverted because it cost eight bytes, since fcn_004727a0 is a
+duplicate spelling of that project-defined function.
+The first remaining divergence is at file offset 12, where the target saves ebx, ebp, esi and edi with a1 in esi, the book
+in edi and the row in ebp, while this build saves three registers with a1 in ebp, the book in esi and the row spilled; that
+register file plus deferred cdecl cleanup drives the rest of the drift. The row's blocker is unchanged and no whole-body
+decompilation was attempted. Unresolved callees with implied prototypes: fcn_00473a90 taking two ints and returning void,
+fcn_00505370 taking a pointer and returning int, and fcn_0064d228 returning int as the CRT conversion for every float to int
+cast. One tooling note is recorded for other rows: the `rebrew test` compile cache makes a change such as `a1+4` to `a1+1`
+look metric-identical at 778, so an edit must be judged by the mismatch list rather than by the match count alone.
+Instruments in .scratch/5b6300-wave/ with report.md, base_778.c and final.c.
