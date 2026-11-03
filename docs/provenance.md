@@ -20502,3 +20502,32 @@ domain casts, `(char*)off + disp`, array subscript, a named offset local and an 
 lights loop to the byte-offset form would trade its seven SIB fixes for the five ordering bytes, so the multiply form is
 the net win at nine rather than eleven. Sources in .scratch/rd_object/ with base.c as the pre-change state and expF.c as
 the current one.
+
+## 2026-11-03 — largest row: structure up, byte count down, one semantic bug fixed
+
+`0x5BA910` is not stub level, contrary to the earlier todo description: the body is a full transcription of 3413 native
+instructions with 223 direct call sites and 92 distinct callees, every one of which has a project symbol, and the
+blocker is whole-body register allocation rather than coverage. This pass kept edits that raise structural agreement
+from 0.9883 to 0.9933 and mnemonic agreement from 0.6973 to 0.7024 while cutting the missing tail from eleven
+instructions to one, and the byte match fell from 758 to 732 with the object from 12169 to 12137 against native 11948.
+The trade is deliberate: byte agreement here is a longest-common-subsequence count over 3413 instructions that swings
+by about thirty bytes per small scheduling change, so a faithful edit can lower it while fidelity improves. Four changes
+landed. The status-message chain at 0x5baec2..0x5baf72 was rewritten from a jump-table switch to the native else-if
+ladder over the `al` byte with the message ids 0x72f, 0x70f, 0x713, 0x717, 0x71b, 0x737 and default 0x70b in ecx, which
+mirrors the native cmp al and je order and removes the ten trailing jump-table instructions. The same site carried a
+real semantic bug: the third argument of fcn_00533dc0 was inverted, since native sets 0x73f when the flag is set and
+0x741 when it is clear at 0x5baf49..0x5baf65, and the source had them the other way round. The entity loop compare at
+0x5baabf became a zero-extending `*(unsigned short*)0x7746cc`, matching `xor ecx,ecx; mov cx,[edx]` rather than a
+sign-extending load. The slot clear at 0x5bac98 was verified against the listing, three zero stores and four minus-one
+stores followed by a three-iteration paired loop writing -1, and its in-iteration store order was left as the
+better-encoding variant because reordering to native order cost 28 bytes of agreement. Two callees the body already
+called were declared: `void fcn_0050de80(int, int*)` and `int fcn_005373e0(int, int)`, and a duplicate fcn_0046f740
+prototype was removed. Unresolved call bindings remain for __chkstk, fcn_00466330, fcn_00472380, fcn_00502850,
+fcn_0051af00, fcn_005462a0 and fcn_0064d41a, with another six outside the extent only because the object is 189 bytes
+longer than native.
+The first divergence is the saved-register sequence at byte 11. Native pushes ebx, ebp and esi, moves arg1 to esi,
+zeroes ebp for the zero register, sets edi to minus one and uses ebx as the loop counter; this build pushes ebx, loads
+arg2 into edx, pushes ebp, esi and edi, zeroes ebx, puts arg1 in edi and minus one in ebp, which is the same four roles
+rotated by four cycles, and native holds 0x10 in ebx at 0x5bac9f where ours holds zero. Because the colouring depends
+on per-pseudo benefit across the whole body, the next step is a matching pass on loop shape in 0x5bb419..0x5bbdd5 and
+0x5bc240..0x5bcab6 rather than more transcription, and a continuation is doing that.

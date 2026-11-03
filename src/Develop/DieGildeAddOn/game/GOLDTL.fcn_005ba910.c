@@ -33,7 +33,6 @@ void __cdecl fcn_0046b2b0(int);
 void __cdecl fcn_00469880(int);
 void __cdecl fcn_0046f280(int);
 int __cdecl fcn_005463a0(int, int, int, int, int, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_004677e0(int, ...);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl fcn_00472900(int, int);
@@ -91,6 +90,8 @@ int __cdecl fcn_005bdc30(int, int, int, int, int);
 int __cdecl gm_CheckEntityType(int);
 int __cdecl fcn_004c35f0(void);
 int __cdecl fcn_005ba0e0(int, int, int, int, int, float, int, int);
+void __cdecl fcn_0050de80(int, int*);
+int __cdecl fcn_005373e0(int, int);
 
 /* One 0xf0-byte inventory entity slot. Only the eight bytes at +0x0c..+0x18
    and the two three-int arrays at +0xd8 are written by the native body so far;
@@ -254,7 +255,7 @@ int __cdecl fcn_005ba910(int a1, int a2)
 
 			d = f.vD4[i] = fcn_0052dee0(0, 0xc + i * 0x18, *(int*) (0x14a56e8 + i * 4));
 			bo = d * 0x2f4;
-			if (*(short*) 0x7746cc == f.vF0[i]) {
+			if (*(unsigned short*) 0x7746cc == f.vF0[i]) {
 				{
 					int k;
 					k = bo;
@@ -421,44 +422,28 @@ l_after:
 		fcn_00533dc0(*(int*) 0x772514, 0x70b, 0x73f);
 	} else {
 		int msg;
+		unsigned char kind;
 
-		/* The native chain tests al in case order. Written here as an
-		   else-if ladder it needs one more 4-byte local, which moves the
-		   0x1848 frame; the switch keeps the frame until the rest of the
-		   body is present. */
-		switch (*(unsigned char*) f.v74) {
-		case 0x13:
-		case 4:
-		case 0x10:
+		kind = *(unsigned char*) f.v74;
+		msg = 0x70b;
+		if (kind == 0x13 || kind == 4 || kind == 0x10) {
 			msg = 0x72f;
-			break;
-		case 8:
-		case 0xe:
+		} else if (kind == 8 || kind == 0xe) {
 			msg = 0x70f;
-			break;
-		case 6:
+		} else if (kind == 6) {
 			msg = 0x713;
-			break;
-		case 0x16:
+		} else if (kind == 0x16) {
 			msg = 0x717;
-			break;
-		case 0xd:
-		case 0xc:
-		case 0xb:
+		} else if (kind == 0xd || kind == 0xc || kind == 0xb) {
 			msg = 0x71b;
-			break;
-		case 2:
-		case 7:
+		} else if (kind == 2 || kind == 7) {
 			msg = 0x737;
-			break;
-		default:
-			msg = 0x70b;
-			break;
 		}
+		/* the native arms push 0x73f when the trade flag is set */
 		if (f.v3c != 0) {
-			fcn_00533dc0(*(int*) 0x772514, msg, 0x741);
-		} else {
 			fcn_00533dc0(*(int*) 0x772514, msg, 0x73f);
+		} else {
+			fcn_00533dc0(*(int*) 0x772514, msg, 0x741);
 		}
 	}
 

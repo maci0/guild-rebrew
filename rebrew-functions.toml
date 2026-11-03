@@ -422904,7 +422904,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005ba910".verification]
-source_hash = "d786d91f9493e97b3e7806c16db3f29ab0e06fd5f821a4b45c8da933cdc7c89f"
+source_hash = "c9340e12586c9c1a5e6ae88304d8db24e7382fc3b7ec72f36f557a1edae35781"
 reference_hash = "5011dfe5394eca8b074b60d11c0199028276af8cc7256e0aa95e5ad4751f9ad2"
 reference_size = "11948"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -422915,10 +422915,10 @@ module = "GOLDTL"
 va = "0x5ba910"
 context_hash = ""
 defines = "[]"
-input_hash = "5faf67a3b651ec6c44f134f4079a8fdc73a0bae1f0ffc5b07d48d9073c26a6e2"
+input_hash = "6f8fe6770696438adb92e766787c939b53962515196068f148dcd38b0b3b2f13"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T03:36:35+00:00"
+measured_at = "2026-11-03T03:43:47+00:00"
 
 [["GOLDTL.0x005ba910".status_history]]
 old_status = "STUB"
@@ -425741,14 +425741,14 @@ size = 3348
 note = "Goal72 rd_object name attested by directly referenced native diagnostic; recursive four-argument scene-object reader, pointer/NULL result. Kuna omits main switch; no C adopted. Exact native tables, version branches, callers and real Gold differences saved in .scratch/goal72/scene-deps/manifest.json and REPORT.md. Native-only mapping; original TU, source spelling and selected build provider remain unresolved. No source, symbol, status, verification or storage owner is registered. Complete comparison span includes local tables/internal alignment; separately verified trailing NOPs are excluded. No new matched bytes."
 name = "rd_object"
 updated_by = "test"
-updated_at = "2026-11-03T03:33:54+00:00"
+updated_at = "2026-11-03T03:46:24+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.rd_object.c"
 symbol = "_rd_object"
 kind = "FUNCTION"
-status = "NEAR_MATCHING"
+status = "SIZE_MISMATCH"
 
 ["GOLDTL.0x00447110".verification]
-source_hash = "497eb96738c5f9abef6d0545bd414c2ee6ec5b751c5e9edad58d01182dcb4b3d"
+source_hash = "900330bde13feab51dfde08bbd0b056f445126a538a633bd25826ef215e6ccb5"
 reference_hash = "0e8c54efb89dc41d4d75559bd0778299738dad975187fa6f37fc1938ed68b9a9"
 reference_size = "3348"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -425759,10 +425759,10 @@ module = "GOLDTL"
 va = "0x447110"
 context_hash = ""
 defines = "[]"
-input_hash = "d9b3a02d9194943569752cfaeed5442fbdc00676ecc8ed35020c99a5f57ff5cf"
-status = "NEAR_MATCHING"
+input_hash = "d043b46ab65108e53c083c0884416e9550d547d895ccba4af37bf297a57f26e2"
+status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T03:34:41+00:00"
+measured_at = "2026-11-03T03:46:24+00:00"
 
 [["GOLDTL.0x00447110".status_history]]
 old_status = "SIZE_MISMATCH"
@@ -425780,6 +425780,24 @@ updated_by = "test"
 old_status = "SIZE_MISMATCH"
 new_status = "NEAR_MATCHING"
 changed_at = "2026-11-03T03:33:54.466760+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00447110".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-11-03T03:41:51.725722+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00447110".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-03T03:42:29.033976+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00447110".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-11-03T03:46:24.285136+00:00"
 updated_by = "test"
 ["GOLD.0x0044abb0"]
 size = 3432
