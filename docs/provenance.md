@@ -23399,3 +23399,19 @@ The type store has no binding for this type, so nothing needed refreshing, and t
 show they are unchanged, covering three RELOC rows at full length, three EXACT rows and two size mismatches. The conclusion recorded for the future is that an
 offset reading from a function only constrains the type that function actually uses, and overlapping views of the same bytes are separate types rather than
 evidence of a single wrong declaration.
+
+## 2026-11-03 — clock helper: one allocation explains both the overrun and the mismatch
+
+`0x500BB0` keeps 30 of 147 with the object at 147 against a 145-byte extent, and the pass settles that the two-byte overrun and the poor match are one defect:
+the reference build allocated a second callee-saved register for the minute accumulator, pushing edi and keeping the constant sixty in esi across both
+divisions, while this build does not push edi, reuses esi for the accumulator and re-emits the constant before the second division. The byte arithmetic is
+exact: one push and one pop per branch is three bytes short, the re-emitted constant is five bytes, and the net is the two-byte overrun, which the stack
+diagnostic states directly as a frame of 0x8 against 0x4. Every instruction difference follows from that allocation, including the hoisted load of the minute
+accumulator over the first division and the order of the two stores after the addition.
+No type or call defect exists in the row: the field offsets and widths match, the zero extension is reproduced, the argument slots match, the function has no
+calls, and both comparisons are signed. A type-permutation sweep of five field spellings either leaves one push or changes the tail width. Nine flag variants
+were tried and only two change the code, both worse. Two spellings do reach 145 bytes but score lower. Notably the aliasing pragma that was used to explain a
+server twin does not transfer here: the pragma is inert in this function although a probe confirms it reaches the compiler.
+One byte-neutral change was kept for consistency: the row's private packed clock structure was replaced by the project's working clock declaration, the one the
+two EXACT siblings use, which compiles to an identical object. The row stays a size mismatch and the recommendation is that it needs an evidenced different
+translation-unit flag context or compiler build rather than more source shapes.

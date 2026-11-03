@@ -1,36 +1,37 @@
-#pragma pack(push, 1)
+#pragma pack(push, 2)
 typedef struct {
-	int x00;
-	unsigned short x04;
-	int x06;
-	int x0a;
-} SIM_CLOCK;
+	int day;
+	unsigned short hour;
+	int min;
+	int sec;
+} Time;
+// SIZE 0xe
 #pragma pack(pop)
 
 #pragma optimize("a", on)
 /* ADDRESS: GOLDTL 0x00500bb0 */
-void __cdecl fcn_00500bb0(SIM_CLOCK* clock, int arg2, int arg3, int arg4)
+void __cdecl fcn_00500bb0(Time* clock, int arg2, int arg3, int arg4)
 {
-	unsigned short* p4 = &clock->x04;
+	unsigned short* p4 = &clock->hour;
 	int minutes;
 	int days;
 
-	clock->x06 = clock->x06 + (arg4 + clock->x0a) / 60;
-	clock->x0a = (arg4 + clock->x0a) % 60;
-	clock->x04 = (unsigned short) (clock->x04 + (arg3 + clock->x06) / 60);
-	clock->x06 = (arg3 + clock->x06) % 60;
+	clock->min = clock->min + (arg4 + clock->sec) / 60;
+	clock->sec = (arg4 + clock->sec) % 60;
+	clock->hour = (unsigned short) (clock->hour + (arg3 + clock->min) / 60);
+	clock->min = (arg3 + clock->min) % 60;
 	minutes = *p4;
 	minutes += *(volatile int*) &arg2;
 	if (minutes >= 24) {
 		days = (unsigned int) minutes / 24;
 		minutes = minutes - days * 24;
-		clock->x00 += days;
+		clock->day += days;
 	}
 	if (minutes < 0) {
 		days = (unsigned int) (-1 - minutes) / 24 + 1;
-		clock->x00 -= days;
+		clock->day -= days;
 		minutes = minutes + days * 24;
 	}
-	clock->x04 = (unsigned short) minutes;
+	clock->hour = (unsigned short) minutes;
 }
 #pragma optimize("", on)
