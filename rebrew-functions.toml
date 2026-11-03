@@ -423407,7 +423407,7 @@ blocker = "third callee-saved register unreachable: the loop index sits in esi w
 blocker_delta = 2108
 
 ["GOLDTL.0x0051af00".verification]
-source_hash = "45a41a9b36dc7d67e66ce3a53a3d3ffb2c75c46a7245fa6ea975eb796b7ddce8"
+source_hash = "d34710a457cf9cb599f9a5a78eedca778d56c84aa22b9faeba82d2b725634006"
 reference_hash = "c6bd6d6ba884065835a337f9a38dbc2f121ae36caf3a92475315fbba33d9a8b4"
 reference_size = "6455"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -423418,10 +423418,10 @@ module = "GOLDTL"
 va = "0x51af00"
 context_hash = ""
 defines = "[]"
-input_hash = "e09ef9cda4571b9b88c42b83be41513e4dc69786af2d5f6e3a87914a346ae941"
+input_hash = "50dcfa1251ff5780123004e112bd415a5cb2f22afb36150fe2d94233b1df023c"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-03T07:24:59+00:00"
+measured_at = "2026-11-03T07:31:23+00:00"
 
 [["GOLDTL.0x0051af00".status_history]]
 old_status = "STUB"
@@ -587393,13 +587393,13 @@ file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00561380.c"
 name = "fcn_00561380"
 symbol = "_fcn_00561380"
 kind = "FUNCTION"
-updated_by = "test"
-updated_at = "2026-11-03T07:28:33+00:00"
-status = "NEAR_MATCHING"
-blocker = "case-4 fail representative wall after eight rounds: the triple case5 0x47c + case6 0x80 + object 3588 needs the case-5 r==0 fail emitted as movl $-1,0x70(%esi) while case 4 keeps a 6-byte far je, and MSVC 6 cannot choose both: it picks the shared fail representative at case 4's tail (2-byte je, case4 0x418) whenever case 5's fail has a local copy, and at case 5's end (or $-1,%ebx remat, case5 0x47f) when only gotos exist. v10 never moves to ebp by any source shape tried; it does take ebp only when the zero constant stops needing a callee-saved register, which costs case 4"
+updated_by = "blocker"
+updated_at = "2026-11-03T07:34:10+00:00"
+status = "SIZE_MISMATCH"
+blocker = "callee-saved constant register tie-break, and the earlier claims about unreachable case bodies are refuted. Case 5's 0x47c is table geometry between adjacent handler entries and this build already reproduces it exactly, with case 5 entering at 0x8b3 and case 6 at 0xd2f. Case 6 measures 0x7c against 0x80 because the reference takes a six-byte near jump to the shared label at 0x56148f while this build emits a two-byte short jump to the byte-identical epilogue, which is jump-threading target choice rather than C unreachability. The dispatch is one switch at 0x5613be with eleven entries based at minus two, case set and body order both matching the source. The frame and slot set match exactly. The remaining wall is a constant-register permutation: at offset 0x10 the reference does or ebx,0xffffffff where this build does or ebp,0xffffffff, and the same swap recurs in case 5 where the reference holds the zero constant in ebx and the query in ebp, while case 4 agrees. Four shapes tested, none steered it: explicit store and return, a goto to the shared label, folded field access, and an inverted branch"
 
 ["GOLDTL.0x00561380".verification]
-source_hash = "3a20ebdb6812a5933e26df2673fb0fad52e1776fdfae96472c103a296bb6083c"
+source_hash = "c7496a23f68c379fa477d44c390df12c102f3882fa4c48eb4d0507b75bfdec3e"
 reference_hash = "a4863edfa57b22d87b19716744c41b82fb9a4334c6e9c0fc60b254a6e248e7a1"
 reference_size = "3588"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -587410,10 +587410,10 @@ module = "GOLDTL"
 va = "0x561380"
 context_hash = ""
 defines = "[]"
-input_hash = "b27e5b8928be36599057dbc205717dc910ab0a32ad8f9a6ee6d8b295c608842e"
-status = "NEAR_MATCHING"
+input_hash = "bdf2a1976d29f9c4f79f1d26a4540a369dfc9b9fb1daa74fadca0c213c3602ae"
+status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-03T07:28:33+00:00"
+measured_at = "2026-11-03T07:33:20+00:00"
 
 [["GOLDTL.0x00561380".status_history]]
 old_status = "STUB"
@@ -587425,6 +587425,12 @@ updated_by = "test"
 old_status = "SIZE_MISMATCH"
 new_status = "NEAR_MATCHING"
 changed_at = "2026-11-03T07:28:33.105368+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00561380".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-11-03T07:30:02.868355+00:00"
 updated_by = "test"
 ["GOLDTL.0x00566d00"]
 size = 806

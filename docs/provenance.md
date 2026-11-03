@@ -21964,3 +21964,27 @@ offset inherits, and nothing tried changed it; the case-5 repair that fixes size
 reuses esi for another pointer at 0x900. The call sequence is one to one with the reference at 101 sites through case 5, and
 no wrong callee was found. Five callees remain declared without a bound address: fcn_00508e40, fcn_00545e80, fcn_0050df70,
 fcn_0064d41a and fcn_00509570.
+
+## 2026-11-03 — two claimed walls in the switch row are refuted
+
+`0x561380` keeps 2451 of 3588 with object 3584 and an unchanged source, but the pass refuted two of the row's recorded claims.
+Case 5's 0x47c is table geometry, the distance between adjacent handler entries, and this build already reproduces it exactly:
+case 5 enters at 0x8b3 and case 6 at 0xd2f on both sides. Case 6 measures 0x7c against 0x80 for a different reason: the
+reference takes a six-byte near jump at offset 0xd5e to the shared label at 0x56148f, while this build emits a two-byte short
+jump to the byte-identical epilogue at 0xd42 that the compiler also places for `if (r == 0) return;`. That is jump-threading
+target choice, not C unreachability, and the third claimed unreachable body was not substantiated at all since every other body
+and the minus one and minus two handler sit at identical offsets.
+The switch decode is clean. There is one dispatch at 0x5613be loading a field, adding two, comparing against 0xa and jumping
+through a table at 0x562158 with eleven entries based at minus two; the case set minus two, minus one and zero through eight
+plus the default matches the source, and the body order 0, 1, 2, 3, 7, 8, 4, 5, 6, minus one and minus two matches the source
+order, so neither of the failure modes found on two other switch rows applies here. An aggregate-size lead was tested and does
+not apply: the stack diagnostic reports the frame matching at 1556 with no diffs, and the full slot comparison shows the same
+slot set on both sides, so an apparent shift at positions 0x28 and 0x2c is instruction scheduling rather than layout.
+The remaining wall is a constant-register permutation. At offset 0x10 the reference does `or ebx,0xffffffff` where this build
+does `or ebp,0xffffffff`, and the same swap recurs in case 5, where the reference holds the zero constant in ebx and the query
+in ebp while this build holds them in ebp and edi; case 4 agrees on both sides, so the divergence is confined to the prologue
+through case 3 and to case 5. Four shapes were tested and none steered it: an explicit store and return in the case-6 else, a
+goto to the shared label which closed the size gap at 3588 but widened the largest window from 231 to 365 and desynchronised
+the case-5 tail, folded field access at p plus 0x70 and plus 0xcc, and an inverted case-6 branch. No wrong access was found to
+repair: the slot swaps at 0x515 and 0x51e and at 0x52a and 0x52e are spill scheduling rather than address errors. The blocker
+is rewritten to the tie-break with the refutations recorded, and the unbound data externs are listed for later binding work.
