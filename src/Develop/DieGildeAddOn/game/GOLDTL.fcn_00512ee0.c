@@ -143,7 +143,8 @@ void __cdecl fcn_00512ee0(void)
 	for (e = g_7f4ca0 + 2; (int)e < (int)(g_7f4ca0 + 0x65402); e += 0x21c) {
 		if (total >= 8)
 			break;
-		if (*(short *)(e - 2) != -1 && (*e == 6 || *e == 7 || *e == 5)) {
+		if (*(unsigned short *)(e - 2) != 0xffff
+				&& (*e == 6 || *e == 7 || *e == 5)) {
 			found[total] = (int)(e - 2);
 			total++;
 		}

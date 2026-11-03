@@ -23218,3 +23218,21 @@ The pattern behind three of these now is that addresses were named from memory w
 adopted: a brief's address is copied from the picker's own output, which lists only rows that are entry starts with a bound file, the right module and
 a size mismatch or stub status, after de-duplication. The picker reports 988 such rows and prints them with their sizes, so there is no reason to
 name a row that it has not printed.
+
+## 2026-11-03 — market supervisor candidate: the sentinel is unsigned
+
+`0x512EE0` moves from 393 to 454 matching bytes with the object at 3449 against the 3610 extent and four relocations, by changing one comparison. The
+found-scan sentinel was written as a signed short against minus one, which this compiler encodes with a one-byte immediate, while the reference compares
+as an unsigned sixteen-bit value against 0xffff and encodes it with a two-byte immediate. The truth value is identical, the object grows one byte, and 61
+matched bytes follow. The window that contained it closes with none opened.
+One experiment was reverted: replacing a hoisted office pointer with the full expression at each use, to restore the twelve recomputations the reference
+performs where this build performs five, was recompiled and the compiler common-subexpression-eliminated it across the intervening calls anyway, leaving
+five and dropping the match to 381, so the baseline source was restored.
+Two findings are recorded for a later pass. The first divergence is a scalar at slot 0x14 that this build carries as an integer count and the reference
+does not, so the two frames agree at 1132 bytes with the same slot set but three scalars sit in a different order. And the call count differs by one,
+121 against 120, because the reference shares the loop-head wait site between a request path and the polling loops while this build emits a duplicated
+first test for each polling loop; the per-callee counts show fourteen against twelve for one routine and seven against eight for another. That is a real
+structural difference and the next attempt should settle whether the shared head is reachable from C without changing behaviour.
+Nine defect classes were checked against the reference bytes and the rest came back clean, covering seven call targets, cdecl throughout, argument order
+at ten search sites and two table-call sites, the office stride and three slot offsets, the zeroing counts, the array widths, a sign-extended field read,
+the sentinel bound before its increment, and the message offsets.
