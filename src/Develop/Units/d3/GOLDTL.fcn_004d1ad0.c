@@ -52,5 +52,5 @@ char __cdecl fcn_004d1ad0(char* a0)
 	}
 	return 1;
 }
-unsigned char _dpad_9b0e20[36896];
+unsigned char _dpad_9b0e20[16];
 unsigned char _dpad_9b9e40[896];

@@ -28,4 +28,4 @@ void __cdecl fcn_004116d0(void)
 	g_14cf900[10] = 0;
 	g_14ce920[10] = 0;
 }
-unsigned char _dpad_14ce8c2[94];
+unsigned char _dpad_14ce8c2[30];

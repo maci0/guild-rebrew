@@ -23,4 +23,6 @@ char* __cdecl fcn_004228c0(char* key)
 	}
 	return p;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_14483c4[99324];
+#endif

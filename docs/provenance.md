@@ -20610,3 +20610,38 @@ renaming rather than an ordering change. With start fixed at 0x18, left at 0x1c 
 required order is not reachable from C within the allowed edit scope, and closing only the pair would leave the
 `xor edi,edi` placement wrong, so it would not have been a kept improvement. A blocker is set on the row. Variant
 matrix and details in .scratch/rd_object/NOTES-row-00447110.md.
+
+## 2026-11-03 — pad trims and drops measured by relink
+
+Fourteen files were edited, six trims and eleven guarded drops, and the effect was measured with a relink rather than
+projected. Six pads were trimmed to the extent the audit proved: `_dpad_6b89e4` from 760,604 to 4 in
+GOLDTL.fcn_00473400.c, `_dpad_fb5740` from 327,904 to 32 in vfs/GOLDTL.fcn_00525b40.c, `_dpad_9b0e20` from 36,896 to 16
+in d3/GOLDTL.fcn_004d1ad0.c, `_dpad_14ce8c2` from 94 to 30 in GOLDTL.fcn_004116d0.c, `_dpad_773de8` from 2,200 to 2,156
+in GOLDTL.fcn_005279f0.c and `_dpad_6b870c` from 728 to 696 in d3/GOLDTL.fcn_00448360.c. Eleven pads were wrapped in
+`#if defined(REBREW_SERVER) || defined(REBREW_GOLD)` so other targets keep them: `_dpad_6b6000` in
+GOLDTL.fcn_0041c3b0.c, `_dpad_6b6008` and `_dpad_6b6108` in GOLDTL.fcn_0041bd80.c, `_dpad_fa6038` in
+vfs/GOLDTL.fcn_00525b40.c, `_dpad_774a34` in m_alloc/GOLDTL.fcn_005b1b30.c, `_dpad_930600` in
+GOLDTL.fcn_0047ebc0.c, `_dpad_f8f0a0` in m_alloc/GOLDTL.fcn_004730c0.c, `_dpad_14483c4` in GOLDTL.fcn_004228c0.c,
+`_dpad_1469700` in GOLDTL.fcn_00406210.c and `_dpad_14eaae0` in GOLDTL.fcn_00402220.c, with the trimmed remainder of
+`_dpad_6b89e4` also guarded. `_dpad_aed32c` and `_dpad_1052c50` were left alone and still link, as were `_dpad_6f2578`,
+`_dpad_770ae8` and `_dpad_6b870c`.
+The measurement rebuilt the fourteen translation units from build-goldtl-audit/compile_commands.json, since
+build/compile_commands.json carries no client rows, and reproduced the earlier relink harness's link line with
+SOURCE_DATE_EPOCH=1073664562 and /OPT:NOREF, because that harness's edited list covers only the first eight units. The
+text, data and rdata of all fifteen rebuilt objects are byte-identical to the audit objects. The baseline link used the
+existing response file without the new pads and the after link substituted all fourteen. `.data` VirtualSize falls from
+23,308,324 to 20,838,564 for a delta of 2,469,760, with VA unchanged at 0x282000; `.data1` moves from 0x18bd000 to
+0x1662000 and `.rsrc` from 0x18be000 to 0x1663000, with `.text` at 2,575,744 and `.rdata` at 45,934 unchanged; the map's
+section-3 symbol count falls from 6,092 to 6,081, exactly the eleven dropped pads with none added. The measured figure
+is 72 bytes above the audited projection of 20,838,636, and that difference is linker COMMON allocation padding rather
+than content, since `_dpad_6b6000` allocates 24 for a declared 8, `_dpad_774a34` 96 for 68, `_dpad_930600` 452,128 for
+452,112, `_dpad_1469700` 211,616 for 211,592, `_dpad_fa6038` 63,264 for 63,240, `_dpad_f8f0a0` 94,112 for 94,104,
+`_dpad_14483c4` 99,328 for 99,324 and `_dpad_6b89e4` 8 for 4; the audit summed declared bytes only.
+Row integrity: of the 456 GOLDTL data rows, 426 resolve to map symbols in both links with none moved and none lost, and
+the other 30 have no map symbol, being literals, aliases or interior views, and none of those changed. Forty
+non-GOLDTL internal CRT and `.bss` symbols moved with the shrink, 37 by 2,469,760, `_prog` by 1,734,976 and
+`_f1_5eb25c` with `_f2_5eb218` by 96, and no named data row is among them. Lint passes with no errors and two
+pre-existing warnings outside this edit set, and neither the size nor the overlap warning appears.
+The remaining excess over the reference `.data` VirtualSize of 15,766,564 is 5,072,000, held by `_dpad_aed32c` at
+5,014,548 bytes in Units/vfs/GOLDTL.fcn_00525b40.c and `_dpad_1052c50` at 4,498,744 bytes in
+Units/m_alloc/GOLDTL.fcn_42d670.c, which must be split around the named objects inside them rather than deleted.

@@ -113,4 +113,6 @@ char* __cdecl fcn_005b1b30(char* a)
 	}
 	return 0;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_774a34[68];
+#endif

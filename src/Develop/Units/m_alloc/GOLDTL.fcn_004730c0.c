@@ -46,4 +46,6 @@ Sprite* __cdecl fcn_004730c0(int a1, int a2, int a3, int a4, int a5, int a6, int
 	((Sprite**)g_1015ec0)[i] = p;
 	return p;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_f8f0a0[94104];
+#endif

@@ -17,5 +17,7 @@ void __cdecl fcn_0041bd80(char* p)
 		p[i + 0x200] = *(char*) (g_6b6208 + i);
 	}
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_6b6008[256];
 unsigned char _dpad_6b6108[256];
+#endif

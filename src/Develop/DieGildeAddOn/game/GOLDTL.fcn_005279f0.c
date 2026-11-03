@@ -247,7 +247,7 @@ label_527db2:
 done:
 	g_774714 = 0;
 }
-unsigned char _dpad_773de8[2200];
+unsigned char _dpad_773de8[2156];
 unsigned char _dpad_7f4cc0[401] = {
     0x00,
     0x00,

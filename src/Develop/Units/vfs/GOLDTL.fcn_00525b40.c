@@ -154,6 +154,8 @@ int __cdecl fcn_00525b40(void)
 	cm_LoadBuf = 0;
 	return 1;
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_fa6038[63240];
-unsigned char _dpad_fb5740[327904];
+#endif
+unsigned char _dpad_fb5740[32];
 unsigned char _dpad_aed32c[5014548];

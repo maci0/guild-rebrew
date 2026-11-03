@@ -555,4 +555,6 @@ unsigned char _dpad_6b5df8[520] = {
     0x00,
     0x00
 };
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_6b6000[8];
+#endif

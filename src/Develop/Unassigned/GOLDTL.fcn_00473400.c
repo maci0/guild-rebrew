@@ -82,4 +82,6 @@ int __cdecl fcn_00473400(char* path, char* name)
 	return d2_Show(save, path);
 }
 unsigned char _dpad_770ae8[6680];
-unsigned char _dpad_6b89e4[760604];
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+unsigned char _dpad_6b89e4[4];
+#endif

@@ -3131,4 +3131,6 @@ unsigned char _dpad_1468ae0[3104] = {
     0x00,
     0x00
 };
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1469700[211592];
+#endif

@@ -376,5 +376,7 @@ done:
 	ai_MeisterCollectTrans(bld);
 	ai_MeisterTrade(bld, craft);
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_930600[452112];
+#endif
 unsigned char _dpad_90e0a0[592752];

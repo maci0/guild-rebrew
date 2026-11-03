@@ -46,4 +46,6 @@ void __cdecl fcn_00402220(unsigned short port)
 	g_1552000.addr = htonl(0xffffffff);
 	g_1552000.port = htons(port);
 }
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_14eaae0[423232];
+#endif
