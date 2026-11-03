@@ -160,7 +160,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
 
     n = 0;
     s44 = 0;
-    if (*(unsigned char *)((char *)a0 + 0x30)) {
+    if (0u < (unsigned int)*(unsigned char *)((char *)a0 + 0x30)) {
         do {
             k = gm_LookupEntityRecordById(*(int *)((char *)a0 + 0x34 + n * 4));
             if (k) {

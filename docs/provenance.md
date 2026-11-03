@@ -21076,3 +21076,33 @@ scalar extern of the smaller size, 0x699396, 0x6a2574, 0x6a4758 and 0x6a4760, wh
 the head element is used, so their declarations understate the object until those four function files are edited. And the
 reference order of the three counters at 0x68a9d0, 0x68a9d4 and 0x68a9d8 is not resolvable from bytes because all three are
 -1, so only their occupancy is proved.
+
+## 2026-11-03 — d2 row: unsigned guard and the size premise corrected
+
+`0x4DA690` moves from 1488 to 1489 with object 7020 against native 7057, 73 relocations, frame 0x900, equal prefix 0x31f
+and lint clean. One line was kept: `if (*(unsigned char*)((char*)a0 + 0x30))` became
+`if (0u < (unsigned int)*(unsigned char*)((char*)a0 + 0x30))`, because native's 0x34c is `test al,al; jbe` and this
+compiler emits `jbe` only for an unsigned positive test, confirmed with a four-guard probe.
+The earlier 538-byte deficit premise is stale and is corrected by measuring the landed object with `rebrew diff` alignment:
+the prefix from 0 to 0x31f is native 799 against 796, the region 0x31f to 0x757 is 1080 against 1047 for minus 33, the
+per-row scene pass from 0x757 to 0x1165 is 2574 against 2577 for plus 3, the second packet pass from 0x1165 to 0x1b09 is
+2468 against 2509 for plus 41, and the epilogue from 0x1b09 to 0x1b91 is 136 against 91 for minus 45, giving minus 37 in
+total. So the per-row pass is three bytes over rather than short, and the call sequences are identical on both sides at 223
+calls in one-to-one correspondence, which means no native block and no callee is missing; the deficit is the pre-pass
+region at minus 33, the second pass at plus 41 and the tail at minus 45, the last being the fourteen-argument escape block
+native does not have.
+The prefix stops at 0x31f because of scalar frame slots: the first mismatch is the displacement of native's
+`mov [esp+0x2c],ebp` for `s2C = 0`, and every mismatch to about 0x47e is a scalar slot, with native s2C at 0x2c, s34 at
+0x38, s38 at 0x24, s44 at 0x44, s30 at 0x20, s20 at 0x40 and s28 at 0x28 against this build's 0x10, 0x38, 0x28, 0x14,
+0x40, 0x58 and 0x34. Slots are not declaration-order controllable, since reordering all sixty scalar declarations into
+native slot order produced a byte-identical text section: the allocator state is a whole-function liveness result, so slots
+follow only once the body is otherwise identical. The escape block cannot be dropped either, as that collapses the frame
+and code to 6528 bytes with prefix 0x2.
+Three attempts were measured and reverted. Dropping the escape block gives object 6528 and prefix 0x2. Ordering all sixty
+scalars in native order changes no byte. Hoisting `if (s1C == 0) break` out of the per-row loop as
+`if (s1C != 0) do { ... } while (...)` is the correct source shape, since native tests s1C once at 0x773 and back-edges to
+0x77f, and it lands eight bytes from 7057, but it moves every scalar slot and costs 92 matched bytes, so it is parked at
+.scratch/4da690/r13/e4_loop.c for the round that solves slots. Two native blocks the source still expresses differently
+are unported: the prologue count handling, where native stores the count to slot 0x44 twice at 0x348 and 0x375 while the
+source keeps a separate `k`, and `s00 = &mid[0x3c]`, which native keeps in slot 0x10 against this build's 0x14, plus the
+extra `mov ebp,edx; jmp` loop entry. Kept copy at .scratch/4da690/r13/r13_final_1489.c with notes in r13_NOTES.md.
