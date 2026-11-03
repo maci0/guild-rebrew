@@ -24192,3 +24192,17 @@ reference's offsets.
 Two defects in the old prefix were repaired on the way: the message-box value had been merged into one call site where the reference has two sites with per-branch table
 reads, and the fourteen-byte clock field is a structure copy from a global rather than four scalar stores, which is where the reference's extra move comes from. The tree
 lints clean with 5,487 checks passing and no errors.
+
+## 2026-11-03 — tier row: the object reaches its extent and its instruction count
+
+`0x4C0CD0` moves from 617 to 898 matched bytes with the object at exactly the 2542-byte extent, its code end now equal to the reference's, its instruction count at 750
+against the reference's 750, and its gap events from 63 down to 37 with the largest window from 76 bytes to 19. Instruction-level comparison shows 328 exact, 42
+differing only in relocation slots, and 378 structural, with mnemonic agreement at 97.7 percent.
+Five repairs were kept. Sixteen create-or-update sites had their branch inverted, since the reference tests the handle for zero and jumps to the update arm. Five
+floating-point constants are declared as the symbol-typed values the reference uses, which reproduces a comparison against a mask. A global is read through a volatile
+qualifier three times as the reference does. A table index is written as the reference's stride expression. And explicit parentheses keep a value in the
+floating-point register so the store does not pop, matching the reference's store form.
+Three variants were reverted. One that inlined the value lost a pop. A batch of parentheses made the object shorter with fewer matched bytes. And a set of float externs
+that scored much higher was rejected on link grounds: it needed six data symbols that have no stub backing, so the row would fail to link with unresolved externals. The
+link-clean form was kept and both numbers are recorded. The first remaining divergence is a scheduler ordering after a call, which is a codegen difference rather than a
+defect.

@@ -474628,7 +474628,7 @@ status = "STUB"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x004c0cd0".verification]
-source_hash = "49d055a5153b73a6802dd4780f24b7a11fc0e948599af23ec47445cd192774dc"
+source_hash = "74af0448f17c8f716c48b64a3f72cfa8be111ebb7da1e603e34d262dc8f302e9"
 reference_hash = "6df01bae1bb3a18425b20a0bc1d0f9aa133c6f823a771c390c0ffd1751137c94"
 reference_size = "2542"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -474639,10 +474639,10 @@ module = "GOLDTL"
 va = "0x4c0cd0"
 context_hash = ""
 defines = "[]"
-input_hash = "fb00a6297c3ae489c6a64649581d5560999af5eaa41d78892d6eac2655dcb90a"
+input_hash = "228dae2b041d97fd25f2a5540dc78f09a3d88e85882e725c856edd8de0337ded"
 status = "STUB"
 writer = "test"
-measured_at = "2026-11-03T19:17:20+00:00"
+measured_at = "2026-11-03T19:22:04+00:00"
 
 [["GOLDTL.0x004c0cd0".status_history]]
 old_status = "STUB"
@@ -627549,5 +627549,9 @@ updated_at = "2026-11-03T19:19:03+00:00"
 
 ["GOLDTL.0x0055f5c0"]
 size = 1800
-updated_by = "fix-sizes"
-updated_at = "2026-11-03T19:19:24+00:00"
+updated_by = "skeleton"
+updated_at = "2026-11-03T19:21:33+00:00"
+file = "src/fcn_0055f5c0.c"
+symbol = "_fcn_0055f5c0"
+name = "fcn_0055f5c0"
+kind = "FUNCTION"
