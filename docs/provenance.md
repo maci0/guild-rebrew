@@ -23495,3 +23495,19 @@ so the two are equivalent. Seven spellings were tried for it and all were reject
 non-volatile reread, which regressed the row. Fifteen other defect classes were checked and the rest came back clean: every call relocation validates, the
 cleanup matches, the frame matches at 576, the sentinel store matches, and no wrong stride, guard, duplicated scan, hoisted conversion, pointer read or record
 offset was found.
+
+## 2026-11-03 — eighty lead pads removed, and what that changes
+
+Eighty GoldTL row sources carried a lead pad: a `_tlead_` byte array of 0x90 filled into a data segment named as text, placed ahead of the bound function. Every one
+compiled into its own text section before the function, which is why the gap diagnostic described padding instead of code on the rows this session had already found
+by hand. All eighty were removed, 70,432 bytes of text pads in total, and the object's text section now starts at the function in every case.
+The evidence that they were not original content: each is a run of 0x90 with a comment saying it is not reconstruction, and the link map shows the pad occupying the
+row's own address while the function lands later, with the matched byte count and the function's object size unchanged before and after in all eighty rows. The gap
+diagnostic now leads with real instructions on the rows that were named in the audit, 0x44fc70, 0x44b480 and 0x4079f0 among them, and its first fault is the frame
+or slot difference that the row is actually blocked on.
+Two consequences are recorded rather than left to be discovered. The raw link layout is now stale by the removed amount, since the pads were shifting objects
+forward, so any link-based placement measurement must be re-taken before it is trusted. And the script that writes these pads, scripts/gen_text_lead.py, sizes a
+filler from each object's deficit against the link map; running it again would recreate the pads and the diagnostic defect, so it must not be run on this tree as
+it stands. Removing the pads does not change any object's match count, and it makes the pad rows' measurements describe the function for the first time.
+Removal was by copying scratch backups, not by version control. The twenty-six files that carry the empty scaffold comment and pragma with no array were left
+alone, as were two `_dpad_` arrays in 0x448360 and 0x457630, which are tentative data definitions rather than text fillers. Lint passes with no errors.
