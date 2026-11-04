@@ -24950,3 +24950,21 @@ register, which is recorded as the next lever with the exact instruction shape.
 `0x4E5A00` moves from 122 to 171 with the object at 1991 against 2033, and its first twenty-seven bytes are now identical: four locals that the reference zeroes at entry are
 initialised in the declaration block, which also fixes a resume path that read an uninitialised counter. The spill-slot assignment that follows is liveness-driven, with the
 reference's slots in declaration order and this build's not, for identical live ranges, so it is reported rather than padded.
+
+## 2026-11-03 — a dense switch that overran the extent, and a local the callee takes by address
+
+`0x55EA30` moves from 193 to 895 matched bytes with the object landing exactly on its extent, and the largest single lever was a dispatch shape: a four-case switch compiles
+to a jump table, whose sixteen bytes pushed two labels past the end of the function. The reference tests the four cases as a chain, so writing the chain takes the object back
+inside the extent and raises the match by a hundred and thirty before anything else is fixed.
+Four more repairs followed. The comparison multiplies a float by a double and by an integer converted to double, so the casts had to come off; the product needed parentheses so
+the two floating operands multiply before the integer one, which is the reference's instruction order. An integer whose address is passed to a call needed to be a separate
+local, because in the reference the counted value itself never has a memory home; that change alone added nearly four hundred matched bytes by removing four spills. Two
+callees take a character parameter, so the signed extension disappears and the slot dword is pushed directly.
+`0x434BA0` moves from 123 to 390 with the object at 2013 against 2053. Three findings are structural: the position, minimum and maximum vectors are four floats wide, which
+makes the frame the reference's 0x48; the bounding box clamp loads both operands and selects, so it is written as two ternaries with the box first, which reproduces the
+reference's parity masks; and a pointer loaded from the animation record must be reloaded per comparison because a cached local cannot alias, which the reference shows by
+reloading it. The point comparisons also had to be written in negated form so that unordered results take the same branch as the reference; that change lowered the positional
+count from 439 to 390 while making six branch sequences byte-identical and raising exactly-equal instructions from 60 to 84, so it was kept for correctness and both numbers
+are recorded.
+Both rows report an allocation remainder rather than a defect: one frame is 104 bytes larger in the reference with no code touching the gap, and the other reuses argument space
+for scratch counters where a C local cannot be placed.

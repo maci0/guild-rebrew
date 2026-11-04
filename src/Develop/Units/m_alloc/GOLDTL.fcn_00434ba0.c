@@ -18,9 +18,9 @@ void __cdecl fcn_00434ba0(char* anim, char* mesh)
 	float* normals;
 	float* bbox;
 	char* frame;
-	float pmin[3];
-	float pmax[3];
-	float sum[3];
+	float pmin[4];
+	float pmax[4];
+	float sum[4];
 	float v;
 	int i;
 	int j;
@@ -69,22 +69,22 @@ void __cdecl fcn_00434ba0(char* anim, char* mesh)
 		pmax[1] = -1e+10f;
 		pmax[2] = -1e+10f;
 		for (j = 0; j < *(int*) (anim + 0x140); j++) {
-			if (points[j * 4 + 0] <= pmin[0]) {
+			if (!(points[j * 4 + 0] > pmin[0])) {
 				pmin[0] = points[j * 4 + 0];
 			}
-			if (points[j * 4 + 1] <= pmin[1]) {
+			if (!(points[j * 4 + 1] > pmin[1])) {
 				pmin[1] = points[j * 4 + 1];
 			}
-			if (points[j * 4 + 2] <= pmin[2]) {
+			if (!(points[j * 4 + 2] > pmin[2])) {
 				pmin[2] = points[j * 4 + 2];
 			}
-			if (pmax[0] <= points[j * 4 + 0]) {
+			if (!(points[j * 4 + 0] < pmax[0])) {
 				pmax[0] = points[j * 4 + 0];
 			}
-			if (pmax[1] <= points[j * 4 + 1]) {
+			if (!(points[j * 4 + 1] < pmax[1])) {
 				pmax[1] = points[j * 4 + 1];
 			}
-			if (pmax[2] <= points[j * 4 + 2]) {
+			if (!(points[j * 4 + 2] < pmax[2])) {
 				pmax[2] = points[j * 4 + 2];
 			}
 			sum[0] = 0.0f;
@@ -118,65 +118,63 @@ void __cdecl fcn_00434ba0(char* anim, char* mesh)
 	m_FreeTracked(points);
 	bbox = (float*) m_alloc(*(int*) (anim + 0x148) << 5, s_67a1ec);
 	for (i = 0; i < *(int*) (anim + 0x148); i++) {
-		frame = *(char**) (anim + 0x15c) + i * 0xc0;
-		bbox[i * 8 + 0] = *(float*) (frame + 0x3c);
-		bbox[i * 8 + 1] = *(float*) (frame + 0x40);
-		bbox[i * 8 + 2] = *(float*) (frame + 0x44);
-		bbox[i * 8 + 4] = *(float*) (frame + 0x48);
-		bbox[i * 8 + 5] = *(float*) (frame + 0x4c);
-		bbox[i * 8 + 6] = *(float*) (frame + 0x50);
+		bbox[i * 8 + 0] = *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x3c);
+		bbox[i * 8 + 1] = *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x40);
+		bbox[i * 8 + 2] = *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x44);
+		bbox[i * 8 + 4] = *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x48);
+		bbox[i * 8 + 5] = *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x4c);
+		bbox[i * 8 + 6] = *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x50);
 	}
 	for (i = 0; i < *(int*) (anim + 0x148); i++) {
-		frame = *(char**) (anim + 0x15c) + i * 0xc0;
 		if (i > 0) {
-			if (*(float*) (frame - 0x84) <= bbox[i * 8 + 0]) {
-				bbox[i * 8 + 0] = *(float*) (frame - 0x84);
-			}
-			if (*(float*) (frame - 0x80) <= bbox[i * 8 + 1]) {
-				bbox[i * 8 + 1] = *(float*) (frame - 0x80);
-			}
-			if (*(float*) (frame - 0x7c) <= bbox[i * 8 + 2]) {
-				bbox[i * 8 + 2] = *(float*) (frame - 0x7c);
-			}
-			if (bbox[i * 8 + 4] <= *(float*) (frame - 0x78)) {
-				bbox[i * 8 + 4] = *(float*) (frame - 0x78);
-			}
-			if (bbox[i * 8 + 5] <= *(float*) (frame - 0x74)) {
-				bbox[i * 8 + 5] = *(float*) (frame - 0x74);
-			}
-			if (bbox[i * 8 + 6] <= *(float*) (frame - 0x70)) {
-				bbox[i * 8 + 6] = *(float*) (frame - 0x70);
-			}
+			bbox[i * 8 + 0] =
+			    bbox[i * 8 + 0] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x84) ?
+			    bbox[i * 8 + 0] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x84);
+			bbox[i * 8 + 1] =
+			    bbox[i * 8 + 1] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x80) ?
+			    bbox[i * 8 + 1] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x80);
+			bbox[i * 8 + 2] =
+			    bbox[i * 8 + 2] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x7c) ?
+			    bbox[i * 8 + 2] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x7c);
+			bbox[i * 8 + 4] =
+			    bbox[i * 8 + 4] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x78) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x78) : bbox[i * 8 + 4];
+			bbox[i * 8 + 5] =
+			    bbox[i * 8 + 5] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x74) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x74) : bbox[i * 8 + 5];
+			bbox[i * 8 + 6] =
+			    bbox[i * 8 + 6] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x70) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x70) : bbox[i * 8 + 6];
 		}
 		if (i < *(int*) (anim + 0x148) - 1) {
-			if (*(float*) (frame + 0xfc) <= bbox[i * 8 + 0]) {
-				bbox[i * 8 + 0] = *(float*) (frame + 0xfc);
-			}
-			if (*(float*) (frame + 0x100) <= bbox[i * 8 + 1]) {
-				bbox[i * 8 + 1] = *(float*) (frame + 0x100);
-			}
-			if (*(float*) (frame + 0x104) <= bbox[i * 8 + 2]) {
-				bbox[i * 8 + 2] = *(float*) (frame + 0x104);
-			}
-			if (bbox[i * 8 + 4] <= *(float*) (frame + 0x108)) {
-				bbox[i * 8 + 4] = *(float*) (frame + 0x108);
-			}
-			if (bbox[i * 8 + 5] <= *(float*) (frame + 0x10c)) {
-				bbox[i * 8 + 5] = *(float*) (frame + 0x10c);
-			}
-			if (bbox[i * 8 + 6] <= *(float*) (frame + 0x110)) {
-				bbox[i * 8 + 6] = *(float*) (frame + 0x110);
-			}
+			bbox[i * 8 + 0] =
+			    bbox[i * 8 + 0] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0xfc) ?
+			    bbox[i * 8 + 0] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0xfc);
+			bbox[i * 8 + 1] =
+			    bbox[i * 8 + 1] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x100) ?
+			    bbox[i * 8 + 1] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x100);
+			bbox[i * 8 + 2] =
+			    bbox[i * 8 + 2] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x104) ?
+			    bbox[i * 8 + 2] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x104);
+			bbox[i * 8 + 4] =
+			    bbox[i * 8 + 4] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x108) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x108) : bbox[i * 8 + 4];
+			bbox[i * 8 + 5] =
+			    bbox[i * 8 + 5] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x10c) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x10c) : bbox[i * 8 + 5];
+			bbox[i * 8 + 6] =
+			    bbox[i * 8 + 6] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x110) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x110) : bbox[i * 8 + 6];
 		}
 	}
 	for (i = 0; i < *(int*) (anim + 0x148); i++) {
-		frame = *(char**) (anim + 0x15c) + i * 0xc0;
-		*(float*) (frame + 0x3c) = bbox[i * 8 + 0];
-		*(float*) (frame + 0x40) = bbox[i * 8 + 1];
-		*(float*) (frame + 0x44) = bbox[i * 8 + 2];
-		*(float*) (frame + 0x48) = bbox[i * 8 + 4];
-		*(float*) (frame + 0x4c) = bbox[i * 8 + 5];
-		*(float*) (frame + 0x50) = bbox[i * 8 + 6];
+		*(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x3c) = bbox[i * 8 + 0];
+		*(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x40) = bbox[i * 8 + 1];
+		*(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x44) = bbox[i * 8 + 2];
+		*(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x48) = bbox[i * 8 + 4];
+		*(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x4c) = bbox[i * 8 + 5];
+		*(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x50) = bbox[i * 8 + 6];
 	}
+
 	m_FreeTracked(bbox);
 }

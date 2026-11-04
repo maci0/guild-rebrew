@@ -33,8 +33,8 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c5620(int, char *);
 char *__cdecl fcn_004be320(int, int);
-int __cdecl fcn_004c0240(void *, int);
-int __cdecl fcn_004c0460(void *, int);
+int __cdecl fcn_004c0240(void *, char);
+int __cdecl fcn_004c0460(void *, char);
 void __cdecl fcn_004c5790(int, void *);
 void __cdecl fcn_004c6530(int);
 int __cdecl fcn_00500bb0(char *, int, int, int);
@@ -67,6 +67,7 @@ void __cdecl he_RunTransport(char *e)
 	char c;
 	float f;
 	int n;
+	int v;
 	char buf[1024];
 	pos14_7f4c00 stamp;
 
@@ -114,22 +115,16 @@ void __cdecl he_RunTransport(char *e)
 		}
 		n = *(int *)(e + 0xc8);
 		*(int *)(e + 0xec) = -1;
-		switch (n) {
-		case 1:
-			fcn_0055dab0(e);
-			break;
-		case 2:
+		if (n == 2) {
 			fcn_0055d770(e);
-			break;
-		case 3:
+		} else if (n == 1) {
+			fcn_0055dab0(e);
+		} else if (n == 3) {
 			he_TransportStadtStadt(e);
-			break;
-		case 4:
+		} else if (n == 4) {
 			fcn_0055e4a0(e);
-			break;
-		default:
+		} else {
 			ReportClientMessage(g_6a63ec);
-			break;
 		}
 		*(int *)(e + 0xd4) = *(int *)(e + 0xd4) + 1;
 		*(pos14_7f4c00 *)(e + 0x60) = g_7f4c00;
@@ -165,7 +160,7 @@ void __cdecl he_RunTransport(char *e)
 				f = f - g_6640cc;
 			}
 		}
-		if ((float)(unsigned short)gm_RandomMod(0x69) <= f * g_6640e8 * (float)*(unsigned char *)(q + 0x12)) {
+		if ((unsigned short)gm_RandomMod(0x69) <= (f * g_6640e8) * *(unsigned char *)(q + 0x12)) {
 			*(char *)(e + 0xf1) = 1;
 			return;
 		}
@@ -187,8 +182,8 @@ void __cdecl he_RunTransport(char *e)
 			stamp = g_7f4c00;
 			fcn_00500bb0((char *)&stamp, 0, 0, 1);
 			q = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
-			n = *(int *)(q + 1);
-			fcn_004c5790(4, &n);
+			v = *(int *)(q + 1);
+			fcn_004c5790(4, &v);
 			if (g_7746c4 == q || g_7746c8 == q) {
 				fcn_004234e0(g_7747cc, g_6a63dc, 1, 0x3f, 0x7f, 0, 0);
 			}
