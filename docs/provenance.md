@@ -24898,3 +24898,11 @@ One measured variant keeps the two large blocks as independent ifs rather than m
 the extent, so it is recorded as a candidate rather than kept. The under-extent shape stays, with the intermediate nested shape at 265.
 Two allocation facts are recorded as unsolved and unpadded: the reference keeps a float in one slot and a window handle in the next and this build swaps them for every
 declaration order tried, and the selection index is held in a different register from byte ten.
+
+## 2026-11-03 — the opposite tail merge: the reference repeats an epilogue this build shares
+
+`0x57E0A0` was taken up because its object already equals its extent with 1029 of 1976 bytes matching, so the difference is ordering. The first three gates in the reference
+each end with their own copy of the same epilogue: pop two registers, load minus four, pop the third, return. The source already writes three separate returns, and this build
+merges them into one shared tail, so the object is fourteen instructions longer than the reference and every offset after the first gate drifts.
+That is the reverse of the usual tail-merge wall: here the faithful shape is the duplicated one, and no source spelling forces a compiler to stop sharing an identical
+epilogue. The row is parked with that evidence rather than worked further, because every window after the first gate is a consequence of it.
