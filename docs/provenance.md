@@ -24906,3 +24906,11 @@ each end with their own copy of the same epilogue: pop two registers, load minus
 merges them into one shared tail, so the object is fourteen instructions longer than the reference and every offset after the first gate drifts.
 That is the reverse of the usual tail-merge wall: here the faithful shape is the duplicated one, and no source spelling forces a compiler to stop sharing an identical
 epilogue. The row is parked with that evidence rather than worked further, because every window after the first gate is a consequence of it.
+
+## 2026-11-03 — two addresses written from memory instead of read from the store, and how it surfaced
+
+This round I wrote two row addresses into a delegation brief from memory rather than copying them from the store listing. Neither address exists in the function store, so
+both delegated passes had nothing to compare against and stopped instead of touching a file. The check that caught it was cheap: looking the two keys up in the store before
+the sessions could do work, which returned missing for both.
+The rule this repeats is already in the ledger and was broken again: copy every address and every path verbatim from tool output, never reconstruct one. The replacement
+briefs were built from a store scan that printed the address, the extent and the bound path together, and both of those addresses exist.
