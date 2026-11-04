@@ -24914,3 +24914,14 @@ both delegated passes had nothing to compare against and stopped instead of touc
 the sessions could do work, which returned missing for both.
 The rule this repeats is already in the ledger and was broken again: copy every address and every path verbatim from tool output, never reconstruct one. The replacement
 briefs were built from a store scan that printed the address, the extent and the bound path together, and both of those addresses exist.
+
+## 2026-11-03 — an invalid address left a row behind, and the tool cannot remove just that one
+
+The two addresses I wrote from memory turned out to be interior addresses of existing functions, and one of the delegated passes ran the prescribed comparison anyway on a guess
+at the owning file. That comparison wrote a row for the interior address with no file, symbol or name, and reported 45 of 240 matched against a window that starts
+mid-instruction, so those numbers describe nothing. The pass was right to say so rather than report progress.
+The row cannot be removed narrowly. Listing orphans finds it among 1342 entries, and pruning takes no selector, only a switch to include rows that carry earned verdicts, so
+running it would remove far more history than the one mistaken row. The row is therefore left in place with status stub and no binding, which is inert, and the gap is filed
+upstream: comparison should refuse an address that is not an entry start, and pruning should accept a selector so a single mistaken row can be removed.
+This is the third time an address reconstructed rather than copied has cost a pass. The remedy is procedural and already in the ledger: take the address, extent and path from
+one store scan and paste them together.
