@@ -24980,3 +24980,13 @@ at a call block where the reference reuses an inner argument slot and this build
 The reconstruction itself is semantically complete for the first function: a 0xe user-interface stamp layout, a 0xf8 panel record, the house stride, both timer ranges, the
 gate on a timer against a stored value, the focus dispatch by two identifiers, the payout chain and the tail call, with the variadic call argument counts corrected site by site.
 The second function has no source yet and now stands as an admitted, uncovered row rather than hidden inside another function's extent.
+
+## 2026-11-03 — the environment reverted mid-session, and a scan that finds no more merged rows
+
+The venv reverted from the editable checkout to the released wheel during this round without any command I ran, which announced itself the same way as before: the gap
+diagnostic crashed again on the bytearray key after a repair was verified in the same environment minutes earlier. Reinstalling from the checkout with the compat editable
+mode restores it, and the check that makes this visible is one line that prints the loaded module path and whether the repaired expression is present. Every measurement that
+matters should be preceded by that check while a tooling repair is in flight, because a reverted environment silently measures with different code.
+A scan for rows whose extent covers a second function found no further cases. The detector looked for a first-argument load followed by a stack adjustment, or a frame-pointer
+prologue, at a point preceded by a return, an unconditional jump or nop padding, inside each row's own extent. It reproduces the one known case at the right offset, and it
+reports no others across the store, so that split appears to have been singular rather than a class.
