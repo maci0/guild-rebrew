@@ -25115,3 +25115,15 @@ byte-identical to the baseline, because the compiler folds the extra name into t
 register assignment order is, and no source shape reaches it.
 The row is restored and re-measured at its baseline. Together with the copy row, this closes the device lever's boundary: it pays when the reference reloads a value from memory
 and the frame can absorb the home, and it cannot help a swap that exists only in the allocator's ordering.
+
+## 2026-11-03 — the swap isolated to one pair, and the pointer-induction alternative measured worse
+
+`0x599350` stays at 728 of 1955 after seven device shapes, and the register evidence now isolates the swap to one pair. Forcing the flag to memory left the loop counter in
+the same register, and forcing the counter to memory left the flag in the same register, so neither value holds the other out. Shifting the colours at all moved the counter
+to a third register and never to the reference's, which locates the decision in the allocator's preference for the register that carries the constant material and the flag,
+fixed at function entry before the early-return call. Two of the shapes were literal no-ops: a separate named local for the flag and a plain array of one both compiled to
+objects byte-identical to the baseline.
+The previous pass suggested the reference's second-loop accumulator, which stays in a register across the whole loop where this build homes it and recomputes the base each
+iteration, as the cause of the colour choice. That was tested from the other direction: replacing the accumulating offset with an advancing pointer changes the live range in
+exactly that way and measured 701 matched bytes against the baseline 728, with the object three bytes past its extent. So the live range is not the lever either, and the row is
+restored and parked with both measurements.
