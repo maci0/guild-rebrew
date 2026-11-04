@@ -99894,7 +99894,7 @@
   },
   {
     "va": 6184608,
-    "size": 1961,
+    "size": 1215,
     "name": "fcn.005e5ea0",
     "extent_history": [
       {
@@ -99903,6 +99903,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:44.131658+00:00"
+      },
+      {
+        "old_size": 1961,
+        "new_size": 1215,
+        "reason": "row 0x5e5ea0 spans two functions: its body ends at 0x5e635f after add esp,0x128; jmp 0x532ef0 and a nop pad, and 0x5e6360 begins a separate callback with its own prologue mov eax,[esp+4]; sub esp,0x458 and its own ret. splitting at the boundary, 1215 bytes and 752 bytes to the next inventory entry at 0x5e6650",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-04T01:02:04.926984+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6185824,
+    "size": 752,
+    "name": "fcn.005e6360",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 752,
+        "reason": "row 0x5e5ea0 spans two functions: its body ends at 0x5e635f after add esp,0x128; jmp 0x532ef0 and a nop pad, and 0x5e6360 begins a separate callback with its own prologue mov eax,[esp+4]; sub esp,0x458 and its own ret. splitting at the boundary, 1215 bytes and 752 bytes to the next inventory entry at 0x5e6650",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-04T01:02:04.929756+00:00"
       }
     ]
   },

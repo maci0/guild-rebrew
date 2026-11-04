@@ -24968,3 +24968,15 @@ count from 439 to 390 while making six branch sequences byte-identical and raisi
 are recorded.
 Both rows report an allocation remainder rather than a defect: one frame is 104 bytes larger in the reference with no code touching the gap, and the other reuses argument space
 for scratch counters where a C local cannot be placed.
+
+## 2026-11-03 — an inventory row that spanned two functions, split on reviewed boundary evidence
+
+`0x5e5ea0` was carried as a 1961-byte row, and a pass reconstructing it found that the row covers two functions: the first ends at `0x5e635f` after restoring four registers,
+adjusting the stack and tail-jumping to `0x532ef0`, with a nop pad closing it, and `0x5e6360` begins a separate callback that loads its first argument, adjusts a 0x458 frame
+and branches on a word field, with its own return. The next inventory entry starts at `0x5e6650`, so the two extents are 1215 and 752 bytes.
+`rebrew binary repair-extents` applied that split with the evidence in the reason: the first row shrinks to 1215, and the second is admitted as a reviewed missing entry of
+752 bytes, with both function rows synced. The row now measures 344 of 1228 against a 1215-byte extent, so its reconstruction is thirteen bytes long, with the first divergence
+at a call block where the reference reuses an inner argument slot and this build pre-pushes an argument and cleans twelve bytes.
+The reconstruction itself is semantically complete for the first function: a 0xe user-interface stamp layout, a 0xf8 panel record, the house stride, both timer ranges, the
+gate on a timer against a stored value, the focus dispatch by two identifiers, the payout chain and the tail call, with the variadic call argument counts corrected site by site.
+The second function has no source yet and now stands as an admitted, uncovered row rather than hidden inside another function's extent.

@@ -472531,21 +472531,21 @@ new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-19T23:55:28.899629+00:00"
 updated_by = "test"
 ["GOLDTL.0x005e5ea0"]
-size = 1961
+size = 1215
 updated_by = "fix-sizes"
-updated_at = "2026-10-29T11:14:46+00:00"
+updated_at = "2026-11-04T01:02:23+00:00"
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_005e5ea0.c"
 name = "fcn_005e5ea0"
 symbol = "_fcn_005e5ea0"
 kind = "FUNCTION"
 status = "SIZE_MISMATCH"
-blocker = "Rebound from the D3DX8 external-range retirement to game source (gold-i classified 0x5e5ea0 as game-standalone: entry reads game UI snapshot globals 0x7f4c00..0x7f4c0c, opens Locations\\zigeuner\\blutrache via 0x470820 and calls only game code). Partial body implemented from live disassembly: 0x14-byte UI snapshot copy, 0x500bb0(ui,0x18,0,0) with 0x42e410(2)+0x15 jitter, dialog open 0x470820/0x473a90/0x471b60/0x4727a0, 0x5340f0 install, timer 0x4677e0((g_77255c->0xc-300)/2,10,300,0,100,0x75,0x42,g_772514) and 0x4677e0(0x57,7,200,0,100,0x7b,2,g_772514), 0x472380 range setup, 0x510550/0x510550b choice list, 0x533a60 list build, and the 0x5373e0(fcn_005e5ea0,0x677c7) modal frame loop with 0x471e30 close. Measured SIZE_MISMATCH: object 367B vs 1968B, 51/1968 bytes, 9 relocations. Missing: the whole per-frame update block (0x5719d0 choice query and its >0x8c tick gate, 0x500d20/0x500bb0 snapshot refresh for both null and entity branches, entity +0x52..+0x5e UI copy and +0x70 gate bias, 0x519190 text ids 0x6811b0/0x41f5/0x41f4/0x41f8/0x41f9/0x41fb, 0x472640/0x472170 enable toggles, and the 0x67d370-click payout arm with 0x5260f0/0x5100f0, the 0x7f4ca0 entity fill, 0x500d20 +0xac counter and 0x4c5530 panel record), plus the post-loop aftermath (g_6b5cc0 block with 0x451840, iStack_c=0x3dcccccd, 0x433780 call, g_6b5cc0/g_6b5cbc clears) and the exact 0x510550/0x510550b signatures."
-blocker_delta = 1601
+blocker = "Extent defect: the stored 1961-byte row spans two functions. This body ends at 0x5e635f (add esp,0x128; jmp 0x532ef0, 1215 bytes); bytes 0x5e6360-0x5e664f are a separate dialog callback (frame 0x458, own ret at 0x5e63b8) that the inventory has not split out. Reconstructed the full first function (frame 0x128, 587 instructions; object 1228 bytes): bytes 0x0-0x111 are byte-exact, first divergence is the nested fcn_00510550(participant,0,1) argument block at 0x112 where this build pre-pushes the fourth fcn_00472380 argument and the reference reuses the inner slot (1-byte length difference). Structural agreement 497/587 instructions. Remaining work: align that schedule, then repair the row extent so the sibling function has its own row."
+blocker_delta = 733
 
 ["GOLDTL.0x005e5ea0".verification]
-source_hash = "d9e1e17f92f4e086771046bf8e6941e135220911bbb9e4e94766f5b69e7e6290"
-reference_hash = "dc7a7274917fdedb1cc34a731a23ac83f4116ba63f63b339fc4e4ed05ede2013"
-reference_size = "1961"
+source_hash = "cca9a0dea1197fe7d2843a879c0eb4e25eb079b0bf63788136efd7de8f60a791"
+reference_hash = "20f81dce83cf46da671282479be608c5373b352923df5f4c9aa233ed4e50a930"
+reference_size = "1215"
 headers_hash = "78991ea07a43eed1b93d409a9450c4accab6e1d8d9acd89a26d7887b09873447"
 compiler_hash = "65f13e99c377985b8d6acea9b4d608e038366b42943f6d1475d7da3c79d5514d"
 toolchain = "(default)"
@@ -472554,10 +472554,10 @@ module = "GOLDTL"
 va = "0x5e5ea0"
 context_hash = ""
 defines = "[]"
-input_hash = "e9d7088f3cbea129b600ef8e176e29b9b1a353f6005223165b29d3b81e883dc7"
+input_hash = "375ec150cc9f7f256336091ef035964156aa74e3524fe5dd624776887d570c8a"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-04T00:57:10+00:00"
+measured_at = "2026-11-04T01:03:11+00:00"
 
 [["GOLDTL.0x005e5ea0".binding_history]]
 action = "retire"
@@ -627667,3 +627667,8 @@ input_hash = "19930f969a881d17adbc9cc9630a1c09ca4b03c673d3b65aa00880b080a53a64"
 status = "STUB"
 writer = "test"
 measured_at = "2026-11-04T00:38:06+00:00"
+
+["GOLDTL.0x005e6360"]
+size = 752
+updated_by = "fix-sizes"
+updated_at = "2026-11-04T01:02:41+00:00"
