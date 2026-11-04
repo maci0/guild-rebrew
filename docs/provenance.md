@@ -25127,3 +25127,13 @@ The previous pass suggested the reference's second-loop accumulator, which stays
 iteration, as the cause of the colour choice. That was tested from the other direction: replacing the accumulating offset with an advancing pointer changes the live range in
 exactly that way and measured 701 matched bytes against the baseline 728, with the object three bytes past its extent. So the live range is not the lever either, and the row is
 restored and parked with both measurements.
+
+2026-11-05 — Updated the project Rebrew dependency and BinSync extra from
+6.16.0 to the published 6.20.0 wheel, refreshed the lockfile and installation
+instructions, and synced the project environment with its dashboard, BinSync,
+and development extras. Decision owner: project maintainer. The prior project
+virtual environment pointed at an editable checkout; the installed package now
+comes from the published release. Verification: `uv lock --check`,
+`uv run --frozen rebrew --version`, `uv pip check --python .venv/bin/python`,
+and `uv run --frozen rebrew status --all-targets --json` succeeded. Gold's
+configured raw-link image was absent during the status check.

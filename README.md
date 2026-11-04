@@ -194,7 +194,7 @@ uv sync
 uv run rebrew --version
 ```
 
-`uv sync` installs pinned Rebrew 6.9.0 and the project dependencies into
+`uv sync` installs pinned Rebrew 6.20.0 and the project dependencies into
 `.venv`. On CPython 3.15 for Linux x86_64, Linux aarch64, macOS arm64, and Windows
 x64, the lock selects the published python-flirt wheels. PyPy and any other
 3.15 interpreter, other Python versions, and other platforms keep Rebrew's
@@ -210,7 +210,7 @@ released source on Python 3.15. Put a JDK and [Apache Ant](https://ant.apache.or
 on `PATH` before running it; qualification used JDK 27 and Ant 1.10.18.
 
 Install the optional dashboard with `uv sync --extra dashboard`; it pins
-Recoverage 8.7.1 alongside Rebrew 6.9.0. Keep `--extra dashboard` on later
+Recoverage 8.8.2 alongside Rebrew 6.20.0. Keep `--extra dashboard` on later
 syncs to retain it.
 
 ### 3. Supply the original server DLL
