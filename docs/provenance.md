@@ -24869,3 +24869,18 @@ already keeps the value in a register across the conversions; swapping the secon
 Both variants are reverted and the row stays at 596 of 990 with its object at the extent. The result is recorded because it is another instance of a pattern now seen
 several times: when two independent conversions are in flight, the compiler's scheduling decides their interleaving and source order does not, so a row whose only remaining
 difference is that interleaving should be parked rather than worked.
+
+## 2026-11-03 — two shop rows: a bound that could not fold, and a ratio compared in the wrong width
+
+`0x48C5B0` moves from 158 to 182 matched bytes with the object from 2180 down to 2127 against the 2046 extent. Four repairs were kept: two packet writes went to the first
+flag byte where the reference writes the second; a record loop indexed one slot too high, which matches the identifier array it pairs with; both packet fill loops now stop
+at three, which the reference tests at each back edge; and a redundant early return was removed because the loop condition already covers it and the reference jumps to one
+shared return tail. The object is still eighty-one bytes over the extent, and that difference is the message local sitting sixteen bytes later than the reference with all
+other slots equal, which four declaration and initialiser experiments did not move.
+`0x568ED0` moves from 671 to 691 with its object landing exactly on the extent and its frame becoming the reference's 0x310. Three findings are semantic: the table scan used
+an address expression the compiler could not fold, so it emitted an initial bounds test the reference does not have, and the literal bound removes it; a pointer local for the
+table slot produced an extra scaled load where indexing from the base folds into the reference's addressing form; and a ratio comparison was computed in double and compared
+as a quadword where the reference truncates to float and compares as a dword, which also evaluated the two sides in the opposite order. Two items remain unsolved and are
+recorded rather than padded: the first zero-initialised slot is at a different frame offset with every other slot equal, and one case keeps an inline copy of a store-and-return
+in the reference where this build cross-jumps to another case's copy.
+The row now reports a stub verdict with its object exactly at the extent, while its frame, code end and instruction count are within three instructions of the reference.

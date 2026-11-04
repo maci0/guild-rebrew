@@ -91,9 +91,6 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		return 0;
 	}
 	fcn_0050cce0(*(char**) (o + 0x16c), &st2, 0);
-	if (*(int*) 0x100e74c <= 0) {
-		return 1;
-	}
 	for (i2 = 0; i2 < *(int*) 0x100e74c; i2++) {
 		if (k > 3) {
 			__asm { int 3 }
@@ -109,7 +106,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			m.p2c = g_7f4c04;
 			m.p30 = g_7f4c08;
 			m.p34 = g_7f4c0c;
-			m.flag = 1;
+			m.flag2 = 1;
 			fcn_00500bb0(&m.p28, 0, 0, 10);
 			m.f58 = *(int*) (ent + 2);
 			m.slots[0] = 5;
@@ -192,7 +189,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 				continue;
 			}
 			m.ids[n + 3] = *(unsigned short*) (0x100b0c0 + i * 0x40);
-			m.slots[n + 4] = *(int*) (*(int*) (0x100b0c0 + i * 0x40 + 8) + 1);
+			m.slots[n + 3] = *(int*) (*(int*) (0x100b0c0 + i * 0x40 + 8) + 1);
 			tmp = fcn_0050dfd0(q, (int) m.ids[n + 3]);
 			if (tmp > *(int*) (0x100b0c0 + i * 0x40 + 0x34)) {
 				tmp = *(int*) (0x100b0c0 + i * 0x40 + 0x34);
@@ -203,6 +200,9 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 				sums[*(int*) (*(int*) (0x100b0c0 + i * 0x40 + 8) + 0x65)]
 				    = (int) ((float) tmp * *(float*) (0x100b0c0 + i * 0x40 + 0x1c)
 				    + sums[*(int*) (*(int*) (0x100b0c0 + i * 0x40 + 8) + 0x65)]);
+			}
+			if (n >= 3) {
+				break;
 			}
 		}
 		{
@@ -269,6 +269,9 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 					st.x48[k] = *(unsigned short*) (0x100d0c0 + i * 0x58);
 				}
 			}
+			if (n >= 3) {
+				break;
+			}
 			k = n;
 		}
 		tmp = m.slots[0];
@@ -283,7 +286,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		m.p2c = g_7f4c04;
 		m.p30 = g_7f4c08;
 		m.p34 = g_7f4c0c;
-		m.flag = 1;
+		m.flag2 = 1;
 		m.f58 = *(int*) (ent + 2);
 		m.f5c = tmp;
 		m.f60 = *(int*) (o + 4);

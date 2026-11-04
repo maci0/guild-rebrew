@@ -64,7 +64,6 @@ void __cdecl fcn_00568ed0(char* a1)
 	char buf[0x200];
 	char* obj;
 	char* ent;
-	char* slot;
 	char* hs;
 	char* ent2;
 	char* p;
@@ -133,8 +132,8 @@ void __cdecl fcn_00568ed0(char* a1)
 		return;
 	case 2:
 		obj = (char*) gm_LookupEntityRecordById(*(int*) (a1 + 0xac));
-		slot = g_7f4ca0 + (unsigned short) *(unsigned short*) (a1 + 8) * 0x21c;
-		hs = (char*) gm_LookupEntityRecordById(*(int*) (slot + 4));
+		hs = (char*) gm_LookupEntityRecordById(
+		    *(int*) (0x7f4ca4 + (unsigned short) *(unsigned short*) (a1 + 8) * 0x21c));
 		ent = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (a1 + 0xb4));
 		if (ent == 0 || obj == 0 || hs == 0 || *(unsigned char*) (obj + 0x1b1) != 0) {
 			*(int*) (a1 + 0x70) = -1;
@@ -156,10 +155,11 @@ void __cdecl fcn_00568ed0(char* a1)
 			p += 4;
 		} while (--n != 0);
 		t = fcn_0050c710((unsigned char*) ent, 0xf, 1);
-		if ((gm_RandomFloat01() + g_6628cc) <
-		    (float) *(unsigned char*) (obj + 0x83) /
-		    (((float) t * g_662910 + g_6629c8) *
-		     ((float) cnt * g_662a3c + g_6628a0) * (total / (float) cnt))) {
+		if ((float) ((float) *(unsigned char*) (obj + 0x83) /
+		             (((float) t * g_662910 + g_6629c8) *
+		              ((float) cnt * g_662a3c + g_6628a0) *
+		              (total / (float) cnt))) >
+		    (gm_RandomFloat01() + g_6628cc)) {
 			sel = 1;
 		}
 		if (fcn_005c6270(obj, 0x17c) != 0) {
@@ -193,7 +193,7 @@ void __cdecl fcn_00568ed0(char* a1)
 				             (char*) 0x6a6980);
 			}
 			if (*(unsigned char*) (obj + 2) == 6 || *(unsigned char*) (obj + 2) == 5) {
-				for (n = (int) (g_7f4ca0 + 4); n < 0x85a0a4; n += 0x21c) {
+				for (n = 0x7f4ca4; n < 0x85a0a4; n += 0x21c) {
 					if (*(unsigned char*) (n - 2) != 6 &&
 					    *(unsigned char*) (n - 2) != 7) {
 						continue;
