@@ -4,97 +4,99 @@
  * the per-type handler and its associated window.
  */
 
-extern int g_1015ea0;           /* 0x01015ea0 */
-extern int g_1040490;           /* 0x01040490 */
-extern int g_1040494;           /* 0x01040494 */
-extern int g_10421a0;           /* 0x010421a0 */
-extern int g_10432a4;           /* 0x010432a4 */
-extern int g_10529c8;           /* 0x010529c8 */
-extern int g_14ac5e8;           /* 0x014ac5e8 */
-extern int g_14ac5ec;           /* 0x014ac5ec */
-extern int g_68bfb8;            /* 0x0068bfb8 */
-extern int g_68bfbc;            /* 0x0068bfbc */
-extern int g_6a3764;            /* 0x006a3764 */
-extern int g_6a3768;            /* 0x006a3768 */
-extern int g_6a376c;            /* 0x006a376c */
-extern int g_6a3770;            /* 0x006a3770 */
-extern int g_772f24;            /* 0x00772f24 */
-extern int g_772f28;            /* 0x00772f28 */
-extern int g_772f2c;            /* 0x00772f2c */
-extern int g_772f30;            /* 0x00772f30 */
-extern int g_772f34;            /* 0x00772f34 */
-extern int g_772f38;            /* 0x00772f38 */
-extern int g_772f3c;            /* 0x00772f3c */
-extern int g_7747b0;            /* 0x007747b0 */
-#include "Develop/DieGildeAddOn/game/game_player.h" /* 0x00774970 */
-extern int g_6b5c60;            /* 0x006b5c60 */
+#include <string.h>
+
+#include "Develop/DieGildeAddOn/game/game_player.h"
+
+typedef struct {
+	int f0;
+	int f4;
+	int f8;
+	int fc;
+	int f10;
+	char f14;
+	char pad15[0x347];
+} rec35c;
+/* SIZE 0x35c */
+
+typedef void (__cdecl* cmd_handler)(void*, int);
+
+typedef struct {
+	cmd_handler f0;
+	cmd_handler f4;
+	unsigned char f8;
+	char pad9[0xb];
+} cmd_entry;
+/* SIZE 0x14 */
+
+extern unsigned char g_7747b0;   /* 0x007747b0 */
+extern int g_68bfb8;             /* 0x0068bfb8 */
+extern int g_68bfbc;             /* 0x0068bfbc */
+extern int g_6b5c60;             /* 0x006b5c60 */
+extern int g_772f24;             /* 0x00772f24 */
+extern int g_772f28;             /* 0x00772f28 */
+extern int g_772f2c;             /* 0x00772f2c */
+extern int g_772f30;             /* 0x00772f30 */
+extern int g_772f34;             /* 0x00772f34 */
+extern int g_772f38;             /* 0x00772f38 */
+extern int g_772f3c;             /* 0x00772f3c */
+extern int g_14ac5e8;            /* 0x014ac5e8 */
+extern int g_14ac5ec;            /* 0x014ac5ec */
+
+extern char g_9b0e20[];          /* 0x009b0e20 */
+extern cmd_entry g_9b0844[];     /* 0x009b0844 */
 
 extern char s_68d580[]; /* "cut_type:%i" */
 extern char s_68b300[]; /* 0x0068b300 */
 
 int __cdecl fcn_004e6c80(void);
-void __cdecl fcn_004e4f10(int);
+void __cdecl fcn_004e4f10(unsigned char*);
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004c5790(int, int*);
+int __cdecl fcn_004c5790(int, void*);
 void __cdecl fcn_005358e0(int);
 int __cdecl fcn_00533a40(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472500(int);
-int __cdecl fcn_004c4450(int);
+int __cdecl fcn_004c4df0(int, rec35c*);
 int __cdecl cm_RequestSendCutInfo(int, int);
-int __cdecl fcn_004c4df0(int, int*);
+int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_004e4fc0(unsigned int*);
-void __cdecl fcn_004e5140(unsigned int*);
+int __cdecl fcn_004e4fc0(unsigned char*);
+void __cdecl fcn_004e5140(unsigned char*);
 int __cdecl fcn_005373e0(int, int);
-int __cdecl fcn_004e51a0(unsigned int*, int);
+int __cdecl fcn_004e51a0(unsigned char*, int);
 void __cdecl fcn_004e6c60(int);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x004e51d0 */
-void __cdecl fcn_004e51d0(unsigned int* a0, int a1)
+void __cdecl fcn_004e51d0(unsigned char* s, int id)
 {
-	unsigned char v13[0x35c];
-	unsigned char v14[0x35c];
+	rec35c c1;
+	rec35c c2;
 	struct {
-		unsigned int head;
+		int head;
 		char text[120];
-	} v11;
-	unsigned int* v6;
-	int v7;
-	int v8;
-	int v9;
-	int v10;
-	int v15;
-	int v17;
-	int v20;
-	int v21;
-	int v22;
-	unsigned char* v16;
-	unsigned char* v18;
-	unsigned char* v19;
+	} msg;
+	int saved;
+	int i;
+	unsigned char kind;
+	int h;
+	int ent;
+	int pos;
+	int found;
+	rec35c* rec;
 
-	v7 = fcn_004e6c80();
-	v6 = a0;
-	fcn_004e4f10((int) a0);
-	if ((g_7747b0 & 4) != 0) {
-		if (v6[3] == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
+	saved = fcn_004e6c80();
+	fcn_004e4f10(s);
+	if (g_7747b0 & 4) {
+		if (*(int*) (s + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
 			if (g_772f3c != 0) {
 				goto label_4e526f;
 			}
-			v8 = *v6;
-			v9 = 0x1f;
-			v18 = (unsigned char*) &v11;
-			while (v9 != 0) {
-				v16 = v18 + 4;
-				*(unsigned int*) v18 = 0;
-				v9 -= 1;
-				v18 = v16;
-			}
-			v11.head = v8;
-			sprintf(v11.text, s_68d580, *(unsigned char*) &v6[2]);
-			fcn_004c5790(0x11, (int*) &v11);
+			memset(&msg, 0, sizeof(msg));
+			msg.head = *(int*) s;
+			sprintf(msg.text, s_68d580, s[8]);
+			fcn_004c5790(0x11, &msg);
 		}
 label_4e526f:
 		if (g_772f3c == 0) {
@@ -102,299 +104,151 @@ label_4e526f:
 		}
 	}
 	fcn_00533a40((int) &g_6b5c60);
-	if ((g_7747b0 & 8) != 0) {
-		v9 = 0;
-		if (*(unsigned char*) &v6[0xc] != 0) {
-			v15 = (int) v13;
-			v17 = (int) &v6[0xd];
-			do {
-				g_772f28 = v9;
-				if (*(int*) v17 != -1) {
-					g_772f24 = gm_LookupEntityRecordById(*(int*) v17);
-					if (g_772f24 != 0) {
-						if (*(unsigned char*) (g_772f24 + 2) != 6) {
-							int* v5;
-							v5 = *(int**) ((unsigned int) *(unsigned char*) &v6[2] * 0x14 + 0x9b0848);
-							if (v5 != 0) {
-								((void (__cdecl*) (int, int)) v5)(v15, a1);
-							}
-						} else {
-							g_772f34 = g_68bfbc + g_772f30;
-							g_772f38 = 0;
-							((void (__cdecl*) (int, int)) *(int*) ((unsigned int) *(unsigned char*) &v6[2] * 0x14 + 0x9b0844))(v15, a1);
-						}
-						d2_SetForm(v6[0xb], 0);
-						io_AppendText(v15 + 0x14);
-						io_AppendText(0x68b300);
-					} else {
-						*(int*) v17 = -1;
-					}
-				}
-				v9 += 1;
-				v17 += 4;
-				v15 += 0x35c;
-			} while (v9 < (int) (unsigned int) *(unsigned char*) &v6[0xc]);
+	if (g_7747b0 & 8) {
+		for (i = 0; i < (int) s[0x30]; i++) {
+			g_772f28 = i;
+			if (*(int*) (s + 0x34 + i * 4) == -1) {
+				continue;
+			}
+			g_772f24 = gm_LookupEntityRecordById(*(int*) (s + 0x34 + i * 4));
+			if (g_772f24 == 0) {
+				*(int*) (s + 0x34 + i * 4) = -1;
+				continue;
+			}
+			rec = &((rec35c*) g_9b0e20)[i];
+			if (*(unsigned char*) (g_772f24 + 2) == 6) {
+				g_772f34 = g_68bfbc + g_772f30;
+				g_772f38 = 0;
+				((cmd_entry*) g_9b0844)[s[8]].f0(rec, id);
+			} else if (((cmd_entry*) g_9b0844)[s[8]].f4 != 0) {
+				((cmd_entry*) g_9b0844)[s[8]].f4(rec, id);
+			}
+			d2_SetForm(*(int*) (s + 0x2c), 0);
+			io_AppendText((int) ((char*) rec + 0x14));
+			io_AppendText((int) s_68b300);
 		}
-	} else if ((g_7747b0 & 4) != 0) {
-		v9 = (unsigned int) g_774970 * 0x21c;
-		g_772f24 = v9 + 0x7f4ca0;
-		{
-			unsigned char v3;
-			v3 = *(unsigned char*) ((unsigned int) *(unsigned char*) &v6[2] * 0x14 + 0x9b084c);
-			if (v3 == 1) {
-				if (v6[3] == *(int*) (v9 + 0x7f4ca4)) {
-					v21 = 0;
-					if (*(unsigned char*) &v6[0xc] != 0) {
-						unsigned char* v18e;
-						unsigned int* v20b;
-						v18e = (unsigned char*) &v6[0xd];
-						v20b = (unsigned int*) 0x9b0e20;
-						do {
-							int v8c;
-							int v15c;
-							v9 = gm_LookupEntityRecordById(*(int*) v18e);
-							if (v9 != 0 && *(unsigned char*) (v9 + 2) != 6
-									&& *(unsigned char*) (v9 + 2) != 7
-									&& v20b[2] == 0) {
-								unsigned int* v16d;
-								unsigned int* v19c;
-								int v10c;
-								int* v5;
-								v8c = *(unsigned char*) &v6[2];
-								v15c = 0xd7;
-								v16d = v20b;
-								v19c = (unsigned int*) v13;
-								while (v15c != 0) {
-									unsigned int* v1;
-									unsigned int* v2;
-									v1 = v19c + 1;
-									v2 = v16d + 1;
-									*v19c = *v16d;
-									v15c -= 1;
-									v16d = v2;
-									v19c = v1;
-								}
-								v5 = *(int**) ((unsigned int) v8c * 0x14 + 0x9b0848);
-								g_772f24 = v9;
-								if (v5 != 0) {
-									((void (__cdecl*) (void*, int)) v5)(v13, a1);
-								}
-								*(int*) (&v13[8]) = 1;
-								*(int*) (&v13[4]) = 0;
-								fcn_004c4df0(0x35c, (int*) v13);
-								v8c = cm_RequestSendCutInfo(*(unsigned int*) (v9 + 4), *v6);
-								v9 = fcn_004c4450(v8c);
-								while (v9 == 0) {
-									fcn_00535960();
-									v9 = fcn_004c4450(v8c);
-								}
-								fcn_004e5140(v6);
-								fcn_005373e0(0, g_68bfb8 | 0x8000);
-							}
-							v21 += 1;
-							v18e += 4;
-							v20b = (unsigned int*) ((char*) v20b + 0x35c);
-						} while (v21 < (int) (unsigned int) *(unsigned char*) &v6[0xc]);
-					}
-				}
-				v9 = 0;
-				g_772f24 = (unsigned int) g_774970 * 0x21c + 0x7f4ca0;
-				if (*(unsigned char*) &v6[0xc] != 0) {
-					int* v17c;
-					v17c = (int*) &v6[0xd];
-label_4e551b:
-					if (*v17c != *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
-						goto label_4e551f;
-					}
-					{
-						unsigned int* v18f;
-						unsigned int* v16e;
-						int v15d;
-						g_772f34 = g_68bfbc + g_772f30;
-						v15d = 0xd7;
-						v18f = (unsigned int*) (v9 * 0x35c + 0x9b0e20);
-						v16e = (unsigned int*) v13;
-						while (v15d != 0) {
-							unsigned int* v1;
-							unsigned int* v2;
-							v1 = v16e + 1;
-							v2 = v18f + 1;
-							*v16e = *v18f;
-							v15d -= 1;
-							v18f = v2;
-							v16e = v1;
+	} else if (g_7747b0 & 4) {
+		g_772f24 = (unsigned int) g_774970 * 0x21c + 0x7f4ca0;
+		kind = *(unsigned char*) ((unsigned int) s[8] * 0x14 + 0x9b084c);
+		if (kind == 1) {
+			if (*(int*) (s + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
+				rec = (rec35c*) g_9b0e20;
+				for (i = 0; i < (int) s[0x30]; i++) {
+					ent = gm_LookupEntityRecordById(*(int*) (s + 0x34 + i * 4));
+					if (ent != 0
+							&& *(unsigned char*) (ent + 2) != 6
+							&& *(unsigned char*) (ent + 2) != 7
+							&& rec->f8 == 0) {
+						c1 = *rec;
+						g_772f24 = ent;
+						if (((cmd_entry*) g_9b0844)[s[8]].f4 != 0) {
+							((cmd_entry*) g_9b0844)[s[8]].f4(&c1, id);
 						}
-					}
-					g_772f38 = 0;
-					((void (__cdecl*) (void*, int)) *(int*) ((unsigned int) *(unsigned char*) &v6[2] * 0x14 + 0x9b0844))(v13, a1);
-					*(int*) (&v13[8]) = 1;
-					*(int*) (&v13[4]) = 0;
-					fcn_004c4df0(0x35c, (int*) v13);
-					{
-						int v8d;
-						v8d = cm_RequestSendCutInfo(*(unsigned int*) (g_772f24 + 4), *v6);
-						v9 = fcn_004c4450(v8d);
-						while (v9 == 0) {
+						c1.f8 = 1;
+						c1.fc = 0;
+						fcn_004c4df0(0x35c, &c1);
+						h = cm_RequestSendCutInfo(*(int*) (ent + 4), *(int*) s);
+						while (fcn_004c4450(h) == 0) {
 							fcn_00535960();
-							v9 = fcn_004c4450(v8d);
 						}
+						fcn_004e5140(s);
+						fcn_005373e0(0, g_68bfb8 | 0x8000);
 					}
-					goto label_4e55e3;
+					rec++;
 				}
-label_4e55e3:
-				v9 = fcn_004e4fc0(v6);
-				while (v9 == 0) {
-					fcn_004e5140(v6);
-					fcn_00533a40(g_14ac5ec);
+			}
+			g_772f24 = (unsigned int) g_774970 * 0x21c + 0x7f4ca0;
+			ent = *(int*) (g_772f24 + 4);
+			rec = (rec35c*) g_9b0e20;
+			for (i = 0; i < (int) s[0x30]; i++) {
+				if (*(int*) (s + 0x34 + i * 4) == ent) {
+					g_772f34 = g_68bfbc + g_772f30;
+					c1 = *rec;
+					g_772f38 = 0;
+					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
+					c1.f8 = 1;
+					c1.fc = 0;
+					fcn_004c4df0(0x35c, &c1);
+					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) s);
+					while (fcn_004c4450(h) == 0) {
+						fcn_00535960();
+					}
+					break;
+				}
+				rec++;
+			}
+			while (fcn_004e4fc0(s) == 0) {
+				fcn_004e5140(s);
+				fcn_00533a40(g_14ac5ec);
+				fcn_005373e0(0, g_68bfb8 | 0x8000);
+			}
+		} else if (kind == 0) {
+			pos = -1;
+			found = -1;
+			for (i = 0; i < (int) s[0x30]; i++) {
+				if (*(int*) (s + 0x34 + i * 4) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
+					pos = i;
+					if (pos != -1) {
+						found = fcn_004e51a0(s, pos);
+					}
+					break;
+				}
+			}
+			while (fcn_004e4fc0(s) == 0) {
+				fcn_004e5140(s);
+				fcn_005373e0(0, g_68bfb8 | 0x8000);
+				if (pos != -1
+						&& (pos == 0 || ((rec35c*) g_9b0e20)[found].f8 == 1)
+						&& ((rec35c*) g_9b0e20)[pos].f8 == 0) {
+					g_772f28 = pos;
+					c1 = ((rec35c*) g_9b0e20)[pos];
+					g_772f24 = gm_LookupEntityRecordById(*(int*) (s + 0x34 + pos * 4));
+					fcn_004e5140(s);
+					g_772f34 = g_68bfbc + g_772f30;
+					g_772f38 = 0;
+					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
+					c1.f8 = 1;
+					c1.fc = 0;
+					fcn_004c4df0(0x35c, &c1);
+					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) s);
+					while (fcn_004c4450(h) == 0) {
+						fcn_00535960();
+					}
+					fcn_004e5140(s);
 					fcn_005373e0(0, g_68bfb8 | 0x8000);
-					v9 = fcn_004e4fc0(v6);
 				}
-			} else if (v3 == 0) {
-				int v15b;
-				v15b = 0;
-				v22 = -1;
-				v21 = -1;
-				if (*(unsigned char*) &v6[0xc] != 0) {
-					v17 = (int) &v6[0xd];
-					do {
-						if (*(int*) v17 == *(int*) (v9 + 0x7f4ca4)) {
-							v22 = v15b;
-							if (v15b != -1) {
-								v21 = fcn_004e51a0(v6, v15b);
+				if (*(int*) (s + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
+					rec = (rec35c*) g_9b0e20;
+					for (i = 0; i < (int) s[0x30]; i++) {
+						ent = gm_LookupEntityRecordById(*(int*) (s + 0x34 + i * 4));
+						if (ent != 0
+								&& *(unsigned char*) (ent + 2) != 6
+								&& *(unsigned char*) (ent + 2) != 7
+								&& (i == 0 || ((rec35c*) g_9b0e20)[fcn_004e51a0(s, i)].f8 == 1)
+								&& rec->f8 == 0) {
+							g_772f28 = i;
+							c2 = *rec;
+							g_772f24 = ent;
+							if (((cmd_entry*) g_9b0844)[s[8]].f4 != 0) {
+								((cmd_entry*) g_9b0844)[s[8]].f4(&c2, id);
+							}
+							c2.f8 = 1;
+							c2.fc = 0;
+							fcn_004c4df0(0x35c, &c2);
+							h = cm_RequestSendCutInfo(*(int*) (ent + 4), *(int*) s);
+							while (fcn_004c4450(h) == 0) {
+								fcn_00535960();
 							}
 							break;
 						}
-						v15b += 1;
-						v17 += 4;
-					} while (v15b < (int) (unsigned int) *(unsigned char*) &v6[0xc]);
-				}
-				v9 = fcn_004e4fc0(v6);
-				while (v9 == 0) {
-					unsigned int v8b;
-					fcn_004e5140(v6);
-					fcn_005373e0(0, g_68bfb8 | 0x8000);
-					if (v22 != -1
-							&& ((v22 == 0
-								|| *(int*) (v21 * 0x35c + 0x9b0e28) == 1)
-								&& *(int*) (v22 * 0x35c + 0x9b0e28) == 0)) {
-						unsigned int* v18b;
-						unsigned int* v16b;
-						int v19b;
-						g_772f28 = v22;
-						v8b = v6[v22 + 0xd];
-						v9 = 0xd7;
-						v18b = (unsigned int*) (v22 * 0x35c + 0x9b0e20);
-						v16b = (unsigned int*) v13;
-						v19b = v9;
-						v9 = v19b;
-						while (v9 != 0) {
-							unsigned int* v1;
-							unsigned int* v2;
-							v1 = v16b + 1;
-							v2 = v18b + 1;
-							*v16b = *v18b;
-							v9 -= 1;
-							v18b = v2;
-							v16b = v1;
-						}
-						g_772f24 = gm_LookupEntityRecordById(v8b);
-						fcn_004e5140(v6);
-						g_772f34 = g_68bfbc + g_772f30;
-						g_772f38 = 0;
-						((void (__cdecl*) (void*, int)) *(int*) ((unsigned int) *(unsigned char*) &v6[2] * 0x14 + 0x9b0844))(v13, a1);
-						*(int*) (&v13[8]) = 1;
-						*(int*) (&v13[4]) = 0;
-						fcn_004c4df0(0x35c, (int*) v13);
-						v8b = cm_RequestSendCutInfo(*(unsigned int*) (g_772f24 + 4), *v6);
-						v9 = fcn_004c4450(v8b);
-						while (v9 == 0) {
-							fcn_00535960();
-							v9 = fcn_004c4450(v8b);
-						}
-						fcn_004e5140(v6);
-						fcn_005373e0(0, g_68bfb8 | 0x8000);
+						rec++;
 					}
-					if (v6[3] == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
-						v9 = 0;
-						if (*(unsigned char*) &v6[0xc] != 0) {
-							int* v17b;
-							int* v18c;
-							v17b = (int*) 0x9b0e28;
-							v18c = (int*) &v6[0xd];
-label_4e5801:
-							v15 = gm_LookupEntityRecordById(*v18c);
-							if (v15 == 0 || *(unsigned char*) (v15 + 2) == 6
-									|| *(unsigned char*) (v15 + 2) == 7
-									|| (v17b != (int*) 0x9b0e28
-										&& *(int*) (fcn_004e51a0(v6, v9) * 0x35c + 0x9b0e28) != 1)
-									|| *v17b != 0) {
-								goto label_4e5852;
-							}
-							{
-								unsigned char v4;
-								unsigned int* v18d;
-								unsigned int* v16c;
-								int v10b;
-								int* v5;
-								v4 = *(unsigned char*) &v6[2];
-								v10b = 0xd7;
-								v18d = (unsigned int*) (v9 * 0x35c + 0x9b0e20);
-								v16c = (unsigned int*) v14;
-								while (v10b != 0) {
-									unsigned int* v1;
-									unsigned int* v2;
-									v1 = v16c + 1;
-									v2 = v18d + 1;
-									*v16c = *v18d;
-									v10b -= 1;
-									v18d = v2;
-									v16c = v1;
-								}
-								v5 = *(int**) ((unsigned int) v4 * 0x14 + 0x9b0848);
-								g_772f24 = v15;
-								g_772f28 = v9;
-								if (v5 != 0) {
-									((void (__cdecl*) (void*, int)) v5)(v14, a1);
-								}
-								*(int*) (&v14[8]) = 1;
-								*(int*) (&v14[4]) = 0;
-								fcn_004c4df0(0x35c, (int*) v14);
-								v8b = cm_RequestSendCutInfo(*(unsigned int*) (v15 + 4), *v6);
-								v9 = fcn_004c4450(v8b);
-								while (v9 == 0) {
-									fcn_00535960();
-									v9 = fcn_004c4450(v8b);
-								}
-								goto label_4e5922;
-							}
-						}
-					}
-label_4e5922:
-					v9 = fcn_004e4fc0(v6);
 				}
-				fcn_004e5140(v6);
-				fcn_005373e0(0, g_68bfb8 | 0x8000);
 			}
+			fcn_004e5140(s);
+			fcn_005373e0(0, g_68bfb8 | 0x8000);
 		}
 	}
 	g_772f2c += 1;
-	fcn_004e6c60(v7);
-	return;
-label_4e5852:
-	v9 += 1;
-	{
-		int* v17d;
-		int* v18g;
-		v17d = (int*) 0x9b0e28;
-		v18g = (int*) &v6[0xd];
-		(void) v17d;
-		(void) v18g;
-	}
-	goto label_4e5922;
-label_4e551f:
-	v9 += 1;
-	if ((int) (unsigned int) *(unsigned char*) &v6[0xc] <= v9) {
-		goto label_4e55e3;
-	}
-	goto label_4e551b;
+	fcn_004e6c60(saved);
 }

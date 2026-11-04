@@ -25025,3 +25025,16 @@ changed one value raised the object size by five and dropped the match from 728 
 The interesting number is diagnostic rather than a change: normalising the one register swap between the accumulation index and the flag register would raise exactly-equal
 instructions from 171 to 245 of 541, and the object loses its one-byte shortfall in a store where it materialises an immediate zero because the zero register is occupied.
 That is an allocation-order lever, not a source defect, and the row is parked with the measurement rather than edited.
+
+## 2026-11-03 — command row: a table stride two entries too wide, and a kind that is a byte
+
+`0x4E51D0` moves from 230 to 625 matched bytes with the object at 1923 against the 1953 extent, its structural ratio from 0.746 to 0.851 mnemonic and 0.518 to 0.411
+structural, and its mismatch runs from 62 to 60 with five windows closed and none of the closed ones reopened.
+Five repairs were kept. The command table's entry stride is 0x14, not 0x18: the padding field the source declared was four bytes too wide, and correcting it makes the record
+copies compile to the counted dword form. A discriminator declared as an integer is an unsigned character in the reference, which shows as a byte compare. The bit-eight path
+passed an empty local where the reference dispatches the record itself and reads a field from it. Two `count > 0` wrappers were removed because the reference's loops already
+cover the empty case. And the record type was reshaped to the reference: a 0x35c structure with byte fields, built by a zero fill and a struct copy.
+Three shapes were measured and reverted: explicit pointer induction in the two record loops, and an indexed form for the kind-one loop, and an indexed form for the kind-zero
+loop which grew the object past the extent and is recorded as a candidate.
+What remains is allocation: the epilogue sits thirty bytes early so every branch displacement differs, and two of the record loops show the same instruction sequence with
+different register and slot assignments. The frame, the message and both large locals already sit at the reference's offsets.
