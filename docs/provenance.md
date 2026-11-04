@@ -24925,3 +24925,15 @@ running it would remove far more history than the one mistaken row. The row is t
 upstream: comparison should refuse an address that is not an entry start, and pruning should accept a selector so a single mistaken row can be removed.
 This is the third time an address reconstructed rather than copied has cost a pass. The remedy is procedural and already in the ledger: take the address, extent and path from
 one store scan and paste them together.
+
+## 2026-11-03 — the venv was measuring with the released wheel, which crashes the gap diagnostic
+
+A delegated pass reported that `rebrew diagnose gap` crashes on one row with a type error from the aligner, and that the local checkout already contains the repair while the
+installed package does not. That was correct and it is the more important finding of the round: the project venv held the released 6.16.0 wheel rather than the checkout, so
+every gap diagnostic run in this session executed the released code, which lacks the masked-key repair and the object-text section selection repair.
+Two consequences. First, the crash is real on Python 3.15 for any translation unit whose disassembly yields a branch key, because capstone returns a bytearray and the released
+helper returns a bytearray slice for branch keys, which the aligner cannot hash. Second, diagnostics on translation units that emit more than one text section were run against
+the older selector, so any window list produced from a lead-padded unit in this session is suspect and should be recomputed rather than trusted.
+The repair is upstream and now complete: the helper's signature admits a bytearray, the body returns bytes for every path, and a regression test covers all three key kinds.
+The venv is reinstalled from the checkout in compat editable mode, which is the tooling-development opt-in the ledger already describes; the reproducible state is the released
+wheel and returning to it is `uv sync` once no tooling repair is in flight.
