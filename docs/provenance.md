@@ -25085,3 +25085,13 @@ carries this pattern for a field home in another row, and the device is commente
 Two candidate shapes were rejected: an integer-typed loop pointer and a conditional-expression argument both compiled identically, and a shared-tail restructure with a new
 temporary measured worse. What remains is a register colour for the constant zero and three bytes of length, with the reference also null-checking a record pointer in a tail
 shared by two cases where this build's merged condition drops the check.
+
+## 2026-11-03 — the device lever does not generalise blindly: two rows measured against it
+
+The labelled codegen device that moved one row from 148 to 408 was tried on two more rows this round and refused on both, with numbers rather than impressions. On the row
+whose difference is one instruction of scheduling around a count load, a volatile output pointer cost sixty-seven matched bytes and a volatile argument cost eighty-four, both
+because the qualifier removed the register reuse the reference depends on. On the row whose difference is which register receives each of three loaded globals, reordering the
+assignment statements produced the identical object, confirming again that statement order at that level is not a lever.
+The conclusion recorded for scheduling is that the device is a per-row diagnostic, not a default: it pays when the reference demonstrably keeps a value in a frame slot that this
+build folds away, and it costs when the reference keeps the value in a register. The evidence to check first is whether the reference loads the value from memory more than once;
+if it does, the device is the right shape, and if it does not, the device cannot help.
