@@ -65,7 +65,9 @@ void __cdecl fcn_00533090(unsigned int a0)
 	char* p;
 	char* q;
 	char* e;
-	char* d;
+	/* codegen device: the reference keeps this zero in a frame slot and reloads it,
+	   so the pointer is volatile to force a memory home; semantics are unchanged. */
+	char* volatile d;
 	char* v4;
 	char* v5;
 	int* ip;
@@ -112,7 +114,7 @@ void __cdecl fcn_00533090(unsigned int a0)
 			}
 			ip += 3;
 			i += 1;
-		} while (ip < (int*) 0x77e984);
+		} while ((int) ip < 0x77e984);
 	}
 	if (a0 & 0x800) {
 		fcn_00599f90();
@@ -254,11 +256,10 @@ done:
 	}
 	if ((a0 & 8) && v4 != 0) {
 		if (g_7746cc != 0) {
-			v5 = g_7746cc;
+			g_7746dc = fcn_00506380(g_774970, v4, g_7746cc, 0);
 		} else {
-			v5 = 0;
+			g_7746dc = fcn_00506380(g_774970, v4, 0, 0);
 		}
-		g_7746dc = fcn_00506380(g_774970, v4, v5, 0);
 		if (*(unsigned short*) (v4 + 0x27) == g_774970 || (g_7746dc & 0x1000)) {
 			fcn_0052ae80();
 		}

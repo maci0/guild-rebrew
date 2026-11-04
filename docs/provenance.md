@@ -25072,3 +25072,16 @@ counter that the reference keeps in a register. Since the reference's own last b
 candidate stays a candidate.
 The frame excess of seventy-six bytes is tied to a double temporary the reference keeps at one slot and the source lacks, used with the absolute-value routine in two places
 where the source computes the absolute value by comparison and negation.
+
+## 2026-11-03 — a labelled codegen device worth two hundred and sixty bytes, and two operand fixes
+
+`0x533090` moves from 141 to 408 matched bytes with the object at 1795 against the 1798 extent. Two operand repairs came first: the end test of a do loop was unsigned where the
+reference uses a signed jump, and one call site exists twice in the reference with its argument setup duplicated per path where the source had one call through a temporary, so
+the call is written once in each branch and the temporary assignments, dead past the call, are gone.
+The large gain is a codegen device and is labelled as one in the source: the reference keeps a pointer that is only ever zero in a frame slot and reloads it, and keeps the
+constant zero in a register this build assigns differently, which propagates into six shorter instruction forms and a different epilogue. Declaring that pointer volatile forces
+a memory home and moves the row from 148 to 408 with the object inside its extent, semantics unchanged because the pointer is only compared and reloaded. The project already
+carries this pattern for a field home in another row, and the device is commented in place rather than left as a bare qualifier.
+Two candidate shapes were rejected: an integer-typed loop pointer and a conditional-expression argument both compiled identically, and a shared-tail restructure with a new
+temporary measured worse. What remains is a register colour for the constant zero and three bytes of length, with the reference also null-checking a record pointer in a tail
+shared by two cases where this build's merged condition drops the check.
