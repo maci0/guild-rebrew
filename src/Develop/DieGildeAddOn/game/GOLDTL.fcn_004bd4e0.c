@@ -137,7 +137,7 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 		count--;
 	}
 	g_1006110 = g_1006914;
-	if (fcn_004bdbe0((int) &g_1005900, (int) ox2, (int) oy2, -1, -1) == 0) {
+	if (fcn_004bdbe0((int) &g_1005900, (int) oy2, (int) ox2, -1, -1) == 0) {
 		gv_Free3Fields(g_1005904);
 		return 0;
 	}
@@ -246,16 +246,16 @@ line:
 					}
 				} else {
 					for (n = 0; n < g_1006110; n++) {
-						for (k = -1; k < 1; k++) {
-							for (i = -1; i < 1; i++) {
+						for (k = -1; k < 2; k++) {
+							for (i = -1; i < 2; i++) {
 								map = *(char**) (g_1005900 + 5);
 								*(map + ((unsigned int) g_1006114[n * 2 + 1] + k) * *g_1005900 + (unsigned int) g_1006114[n * 2] + i) = (unsigned char) g_1005908;
 							}
 						}
 					}
 					for (n = 0; n < g_1006914; n++) {
-						for (k = -1; k < 1; k++) {
-							for (i = -1; i < 1; i++) {
+						for (k = -1; k < 2; k++) {
+							for (i = -1; i < 2; i++) {
 								map = *(char**) (g_1005900 + 5);
 								*(map + ((unsigned int) g_1005910[n * 2 + 1] + k) * *g_1005900 + (unsigned int) g_1005910[n * 2] + i) = (unsigned char) g_1005908;
 							}

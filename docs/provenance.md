@@ -25059,3 +25059,16 @@ byte-wise was declared as something else; and one message field belongs eight by
 largest single win.
 What remains is a local-set gap: the reference frame holds twenty-eight more bytes below the output structure, sixteen of which no instruction in the range touches, so the
 occupant cannot be identified and no dummy was added. One rejected shape widened a vector to four floats and lost sixty-eight matched bytes by moving the prologue.
+
+## 2026-11-03 — two correct operand fixes that cost a byte, and a candidate that would break the extent
+
+`0x4BD4E0` keeps two repairs that are correct and byte-neutral: four loop bounds written as two iterations become three, which the reference shows with an increment, a
+compare against two and a signed jump at four sites; and one call's second and third arguments were exchanged so that each passes the value the reference passes at that
+position. The matched byte count moves from 370 to 369 and the object size does not change, because the object is misaligned by about fifty bytes in that region and the
+constant-only fix cannot align anything. Both edits are kept on the evidence that they make the operands right, and the one-byte drop is stated rather than hidden.
+One candidate is recorded and not applied: a guard call the reference makes before its first copy, which is entirely absent from the source. Adding it raises matched
+instructions from 101 to 156 and equal blocks from 38 to 68, and removes the missing tail, but grows the object eleven bytes past the extent because this build spills a
+counter that the reference keeps in a register. Since the reference's own last byte is a return at exactly the extent, the extent is right and the spill is ours, so the
+candidate stays a candidate.
+The frame excess of seventy-six bytes is tied to a double temporary the reference keeps at one slot and the source lacks, used with the absolute-value routine in two places
+where the source computes the absolute value by comparison and negation.
