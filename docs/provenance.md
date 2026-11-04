@@ -25000,3 +25000,16 @@ arguments is not possible because the translation unit's prototype declares four
 perform from this source.
 The row is restored to that state and the finding is recorded as the last remaining difference on a function whose reconstruction is otherwise complete, rather than as a
 missing piece of the body.
+
+## 2026-11-03 — correction: the venv never reverted, two installs of the tool were in play
+
+The earlier entry blamed a silent environment revert for the gap diagnostic crashing after a repair had been verified in the same venv. That is wrong and is corrected here.
+The venv stayed on the editable checkout throughout. The crash came from a second installation: a global `uv tool` copy at `~/.local/bin/rebrew`, built from the released wheel,
+which sits ahead of the project venv on `PATH`. Delegated passes that ran `rebrew` by name therefore executed released code, while the checks I ran through `.venv/bin/rebrew`
+executed the checkout, and both reports were true about their own process.
+Two consequences. Every delegated brief must name the absolute `.venv/bin/rebrew` path rather than saying "use the project virtual environment", because a bare command can
+resolve to a different tool with different code. And the global tool is now reinstalled from the checkout, so both binaries carry the key repair and a bare command can no
+longer produce the stale failure.
+A separate correction concerns the row this round attacked: a diagnostic that removed only the loop-head push of the constant left the entry hoist in place, so the recorded
+cause for `0x50ee80` is wrong. The body's own uses of the constant force the loop-wide register home; loop shape is not a lever, and four loop forms compiled to byte-identical
+text. That row now has no open source lever at all.
