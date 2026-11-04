@@ -24990,3 +24990,13 @@ matters should be preceded by that check while a tooling repair is in flight, be
 A scan for rows whose extent covers a second function found no further cases. The detector looked for a first-argument load followed by a stack adjustment, or a frame-pointer
 prologue, at a point preceded by a return, an unconditional jump or nop padding, inside each row's own extent. It reproduces the one known case at the right offset, and it
 reports no others across the store, so that split appears to have been singular rather than a class.
+
+## 2026-11-03 — the row that spans two functions is now bounded, and its last call block is a merge wall
+
+With the extent corrected to 1215 bytes, `0x5e5ea0` measures 344 of 1228, so the reconstruction is thirteen bytes long. The first divergence is at offset 0x112 where this
+build pushes a fourth argument before a variadic call and the reference does not: the reference cleans four bytes after the inner call and lands three pushes for the outer
+call, which means its compiler reused the zero it had already pushed for the variadic argument as the outer call's fourth argument. Writing the outer call with three
+arguments is not possible because the translation unit's prototype declares four, and the compiler rejects it, so the reuse is a code-generation merge this toolchain does not
+perform from this source.
+The row is restored to that state and the finding is recorded as the last remaining difference on a function whose reconstruction is otherwise complete, rather than as a
+missing piece of the body.
