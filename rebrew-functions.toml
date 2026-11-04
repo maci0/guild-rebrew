@@ -433711,13 +433711,13 @@ symbol = "_fcn_004c6e20"
 name = "fcn_004c6e20"
 kind = "FUNCTION"
 updated_by = "test"
-updated_at = "2026-11-04T01:58:45+00:00"
-status = "SIZE_MISMATCH"
+updated_at = "2026-11-04T02:04:25+00:00"
+status = "NEAR_MATCHING"
 blocker = "NEAR kept at 113/123 same-offset bytes (delta 10; was 107). Remaining delta is one 10-byte block: reference expands the 0x40-byte memcpy as mov edi,edx / mov ecx,0x10 / mov esi,ebx / mov ebx,[ebx+0x3c] / add edx,0x40 / dec ebp / rep movsd, while the compiled body orders it mov edi,edx / mov esi,ebx / mov ebx,[ebx+0x3c] / mov ecx,0x10 / add / dec / rep; same instruction set, only the loop-invariant mov ecx,0x10 placement differs (the three reloc call sites are masked). Source shape now advances the list pointer before the copy through a saved src pointer, which matches the reference's load-before-rep order; all other statement orders, struct-temp copies, do/while, unsigned and pointer-type variants reproduce the same or worse bytes. No C-level form found that moves the rep count setup ahead of the src setup under MSVC 6 PP."
 blocker_delta = 10
 
 ["GOLDTL.0x004c6e20".verification]
-source_hash = "41816722f76662606f838fbb4dce286455574df40e13de816bcc1da3d1701c71"
+source_hash = "83c177b7f94676a0a43da14101b88b626f5bc6cd6b92ceda0f20b6dfa839de94"
 reference_hash = "5d5dc3de1f6a4c5cf8989f9ab3142aaaf969fd8bfe712ad73ffceaf72dc8181b"
 reference_size = "123"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -433728,10 +433728,10 @@ module = "GOLDTL"
 va = "0x4c6e20"
 context_hash = ""
 defines = "[]"
-input_hash = "61466a26f0eab861f93467927e1269f78717807bf5fab3bc074c8ac3e3814eef"
-status = "SIZE_MISMATCH"
+input_hash = "bcd734c19a50dd61547cbc3ac7be1c6a7da27c869a1c885ff0919c00e2ae5e60"
+status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-04T01:58:45+00:00"
+measured_at = "2026-11-04T02:04:25+00:00"
 
 [["GOLDTL.0x004c6e20".status_history]]
 old_status = "STUB"
@@ -433773,6 +433773,24 @@ updated_by = "test"
 old_status = "NEAR_MATCHING"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-11-04T01:58:45.143926+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x004c6e20".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-04T02:02:34.237900+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x004c6e20".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-11-04T02:03:41.633187+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x004c6e20".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-04T02:04:25.911139+00:00"
 updated_by = "test"
 ["GOLDTL.0x00650338"]
 size = 126
@@ -433925,8 +433943,8 @@ file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0050e170.c"
 symbol = "_fcn_0050e170"
 name = "fcn_0050e170"
 kind = "FUNCTION"
-updated_by = "blocker"
-updated_at = "2026-11-03T22:07:38+00:00"
+updated_by = "test"
+updated_at = "2026-11-04T02:04:07+00:00"
 status = "NEAR_MATCHING"
 blocker = "register home swap: reference ebx=total, edi=i with push ebx/push esi prologue; build edi=total, ebx=i with push esi/push edi. Five declaration and initialiser shapes unchanged, statement order identical. measured 100/121"
 blocker_delta = 104
@@ -433946,7 +433964,7 @@ defines = "[]"
 input_hash = "dde730fdde6a62d4ed4f3689f82e798d0d18bef39b1b50aaa22c5d4cf818d622"
 status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-04T01:56:25+00:00"
+measured_at = "2026-11-04T02:06:32+00:00"
 
 [["GOLDTL.0x0050e170".status_history]]
 old_status = "STUB"
@@ -433976,6 +433994,18 @@ updated_by = "test"
 old_status = "STUB"
 new_status = "NEAR_MATCHING"
 changed_at = "2026-11-01T08:40:42.557497+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0050e170".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-11-04T02:01:08.638106+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0050e170".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-04T02:04:07.801013+00:00"
 updated_by = "test"
 ["GOLDTL.0x0042a2d0"]
 size = 125
@@ -472521,7 +472551,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00599350".verification]
-source_hash = "6e9886cbc79ed4cd873904e90159734b43d3262d8bc5eb2954757e9bcecb69c1"
+source_hash = "f7fab8163a6d4ca311ac3e1ef793546db8812843859bf41899dbc207cac46cba"
 reference_hash = "d257b25f9492ab1e43780565bd2301cf7be3c25cc2f40418cb33a5fa2cacc180"
 reference_size = "1955"
 headers_hash = "06145c026d6a5034fbf26cde24d0ea80e0932bad8282792a9f37192e5a74c70d"
@@ -472532,10 +472562,10 @@ module = "GOLDTL"
 va = "0x599350"
 context_hash = ""
 defines = "[]"
-input_hash = "1f7ae23a5ef1a2eca6261bfd3ef3646fe13b2adb2cc152ba897fe5208d445274"
+input_hash = "5cdcbedbcddd4299223f3a294d39d58e9316cbeb4a2459579b37d966091904a5"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-04T01:24:15+00:00"
+measured_at = "2026-11-04T02:06:18+00:00"
 
 [["GOLDTL.0x00599350".status_history]]
 old_status = "STUB"

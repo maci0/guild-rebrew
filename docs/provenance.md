@@ -25104,3 +25104,14 @@ base by four bytes, which alone prevents a match at this row, and the shapes tha
 cost eighty-nine matched bytes and moved the frame base, a volatile destination cost sixty-two and spilled the pointer, a volatile source cost fifty-seven and reloaded it, a
 separate accumulator compiled identically, and a volatile remaining count cost sixty-four and turned the counter into a memory increment.
 The row is restored byte-identically and the recorded conclusion is that a memory home cannot be the lever where the frame base itself is part of the evidence.
+
+## 2026-11-03 — a register swap that is allocator ordering, proved by six refusals
+
+`0x50E170` stays at 100 of 121 with its object at the extent, after six shapes failed to change which register receives the call result and which receives the loop index. The
+reference colours the result to one callee-saved register and the index to another; this build reverses them for every shape tried.
+The measurements separate the two possible causes. Volatile homes move the frame, grow the body by ten to twenty-six bytes and lose forty-eight to ninety-six matched bytes, and
+two of the three volatile shapes also change the save order away from the reference. A separate accumulator and single-element arrays of either value compile to objects that are
+byte-identical to the baseline, because the compiler folds the extra name into the same scalar allocation. So the value's home is not the question at all: the allocator's
+register assignment order is, and no source shape reaches it.
+The row is restored and re-measured at its baseline. Together with the copy row, this closes the device lever's boundary: it pays when the reference reloads a value from memory
+and the frame can absorb the home, and it cannot help a swap that exists only in the allocator's ordering.
