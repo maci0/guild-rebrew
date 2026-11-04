@@ -24884,3 +24884,17 @@ as a quadword where the reference truncates to float and compares as a dword, wh
 recorded rather than padded: the first zero-initialised slot is at a different frame offset with every other slot equal, and one case keeps an inline copy of a store-and-return
 in the reference where this build cross-jumps to another case's copy.
 The row now reports a stub verdict with its object exactly at the extent, while its frame, code end and instruction count are within three instructions of the reference.
+
+## 2026-11-03 — gate row: two type gates on the wrong field, and a record whose layout was wrong
+
+`0x4D5940` moves from 171 to 265 matched bytes with the object at 2066 against the 2087 extent, and its gap windows from 81 to 30 with 70 closed and 19 opened.
+The repairs are semantic and mostly about types and layout. Both type gates tested the wrong field: the first tests an element of one global array, not the first element of
+the other, and the second block tests a field of a names table, not the list. One formatted append takes three converted integers drawn from two doubles and a float, where
+the source passed two arguments and re-fetched a skill value. Five of those globals are doubles and one is a float, so the old float casts were the wrong width, and the
+scaling by the float and by the two multipliers was missing. A counter loop must continue from an existing count instead of resetting it. And the largest is a record: a
+callee fills a 0xb8-byte structure with two counts, sixteen values, sixteen identifiers at a two-byte stride, sixteen weights at a four-byte stride and then three totals,
+where the source declared the identifier array fifty-six entries wide and never accumulated the weighted form.
+One measured variant keeps the two large blocks as independent ifs rather than merging them, which raised the count to 523 but grew the object to 2100, thirteen bytes past
+the extent, so it is recorded as a candidate rather than kept. The under-extent shape stays, with the intermediate nested shape at 265.
+Two allocation facts are recorded as unsolved and unpadded: the reference keeps a float in one slot and a window handle in the next and this build swaps them for every
+declaration order tried, and the selection index is held in a different register from byte ten.
