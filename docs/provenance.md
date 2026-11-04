@@ -24859,3 +24859,13 @@ padded, and it accounts for the residual.
 Nine other classes were checked and are clean: no classification macro, no packet parsing, the advanced-pointer copies are strength reduction, all literal and global
 arguments and their push order match at more than forty call sites, the variadic call counts match, the comparisons differ only in constant materialisation, the buffer rows
 are the same size, the global is a pointer in both, and the parent-copy tail merges in the same place.
+
+## 2026-11-03 — a float scheduling order that source cannot move
+
+`0x589930` was taken up because its object already equals its extent, so the difference is ordering rather than missing code. The reference converts a count to floating
+point once and multiplies it by three constants, and the divergence is one instruction: it issues the multiply for the third conversion before storing the second result,
+where this build stores first and multiplies after. Removing the cached float and writing each conversion inline as one expression changed nothing, because the compiler
+already keeps the value in a register across the conversions; swapping the second and third assignments lowered the match from 596 to 591.
+Both variants are reverted and the row stays at 596 of 990 with its object at the extent. The result is recorded because it is another instance of a pattern now seen
+several times: when two independent conversions are in flight, the compiler's scheduling decides their interleaving and source order does not, so a row whose only remaining
+difference is that interleaving should be parked rather than worked.
