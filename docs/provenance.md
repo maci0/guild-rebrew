@@ -25013,3 +25013,15 @@ longer produce the stale failure.
 A separate correction concerns the row this round attacked: a diagnostic that removed only the loop-head push of the constant left the entry hoist in place, so the recorded
 cause for `0x50ee80` is wrong. The body's own uses of the constant force the loop-wide register home; loop shape is not a lever, and four loop forms compiled to byte-identical
 text. That row now has no open source lever at all.
+
+## 2026-11-03 — a row with no semantic defect left, and the swap that would buy seventy-four instructions
+
+`0x599350` was examined class by class and nothing was kept, because every class is clean: no switch, three separate address-taken locals plus the message, floating-point and
+integer divides identical in form, a full argument register rather than a truncated one, every global and field offset matching, a message structure rebuilt from the reference's
+stores and matching the existing declaration, reloads in both places, no parity compare, matching variadic counts, identical message, buffer and path slots, and a guard the
+reference also has.
+The frame difference is three scalar slots permuted within the same sixteen bytes, and three declaration-order experiments produced byte-identical objects. A control edit that
+changed one value raised the object size by five and dropped the match from 728 to 320, which proves the measurement path was responsive and the three null results are real.
+The interesting number is diagnostic rather than a change: normalising the one register swap between the accumulation index and the flag register would raise exactly-equal
+instructions from 171 to 245 of 541, and the object loses its one-byte shortfall in a store where it materialises an immediate zero because the zero register is occupied.
+That is an allocation-order lever, not a source defect, and the row is parked with the measurement rather than edited.
