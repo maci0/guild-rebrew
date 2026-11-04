@@ -25046,3 +25046,16 @@ address it already holds in a register where this build recomputes the address w
 zero store two slots up. In the second, the reference folds a record's base and index into one register chain before a counted copy where this build keeps the two apart, which
 accounts for the rest of the shift. Both are register allocation, not missing statements, so the row cannot be closed by transcription and stays parked with its measured
 numbers rather than being padded.
+
+## 2026-11-03 — a slot record with two fields exchanged, and four constants that came from a sibling
+
+`0x4F01C0` moves from 118 to 147 matched bytes with the object from 1697 to 1712 against the 1799 extent, whose last byte is the function's return, so the extent is one function
+and not two.
+Seven repairs were kept, and four of them are constants that were simply wrong: a call takes the integer two hundred where the source passed a float; another takes eighty
+rather than twenty as a float; a third takes minus three rather than minus six; and a fourth takes twelve thousand two hundred rather than fifteen thousand two hundred and
+thirty two. That pattern, constants that belong to a sibling row, has now appeared on three rows and is worth checking first on any row whose windows are small and scattered.
+The other three are structural: a slot record had two fields exchanged at both store sites and in the replacement comparison; a four-byte record of byte fields assigned
+byte-wise was declared as something else; and one message field belongs eight bytes higher. One counter assignment had to move to the top of the record loop, which was the
+largest single win.
+What remains is a local-set gap: the reference frame holds twenty-eight more bytes below the output structure, sixteen of which no instruction in the range touches, so the
+occupant cannot be identified and no dummy was added. One rejected shape widened a vector to four floats and lost sixty-eight matched bytes by moving the prologue.

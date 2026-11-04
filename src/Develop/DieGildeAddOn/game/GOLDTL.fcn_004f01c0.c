@@ -24,6 +24,13 @@ typedef struct Ff01c0Out {
 	Ff01c0Slot slot[3];
 } Ff01c0Out;
 
+typedef struct Ff01c0Color {
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+	unsigned char a;
+} Ff01c0Color;
+
 typedef struct Ff01c0Vec {
 	float x;
 	float y;
@@ -39,7 +46,7 @@ int __cdecl fcn_004185a0(int a1, float* pos, int n, float a4, float a5,
                          float a6, float a7, float a8, float a9, float a10,
                          float a11, int a12);
 int* __cdecl fcn_00417d00(int a1, float* pos, int n, float a4, float a5,
-                          float a6, float a7, float a8);
+                          float a6, float a7, int a8);
 int __cdecl fcn_00422460(int a1, char* name);
 void __cdecl fcn_004193f0(int a1, int a2, int a3, float a4);
 int __cdecl gm_ResolveEntityById(char** out, int a, int b, int c);
@@ -86,7 +93,8 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 	int k;
 	int i;
 	char neg;
-	char msg[0xf4];
+	Ff01c0Color col;
+	char msg[0xf8];
 
 	in = (char*) a2;
 	out.h1 = a1;
@@ -104,6 +112,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 	count = 0;
 	for (off = 0; off < 0xa900; off += 0xa9) {
 		rec = (char*) g_entity_ptr + off;
+		k = -1;
 		type = 0;
 		rr = *(float*) (in + 0x58) * *(float*) 0x662a3c;
 		if (*(int*) (rec + 1) == -1) {
@@ -162,7 +171,6 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 			tmp = *(float*) 0x662cf8;
 		}
 		best = rec;
-		k = -1;
 		for (i = 0; i < 3; i++) {
 			if (out.slot[i].id == -1) {
 				k = i;
@@ -170,36 +178,40 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 			}
 		}
 		if (k >= 0) {
-			out.slot[k].dist = tmp;
+			out.slot[k].strength = tmp;
 			out.slot[k].id = *(int*) (rec + 1);
 			out.slot[k].type = type;
-			out.slot[k].strength = dist;
+			out.slot[k].dist = dist;
 		} else {
 			for (i = 0; i < 3; i++) {
-				if (out.slot[i].dist < tmp &&
-				    (k == -1 || out.slot[i].dist < out.slot[k].dist)) {
+				if (out.slot[i].strength < tmp &&
+				    (k == -1 || out.slot[i].strength < out.slot[k].strength)) {
 					k = i;
 				}
 			}
 			if (k != -1) {
-				out.slot[k].dist = tmp;
+				out.slot[k].strength = tmp;
 				out.slot[k].id = *(int*) (rec + 1);
 				out.slot[k].type = type;
-				out.slot[k].strength = dist;
+				out.slot[k].dist = dist;
 			}
 		}
 	}
 	rr = *(float*) (in + 0x58) * *(float*) 0x662a3c;
 	f1 = *(float*) (in + 0x4c);
+	col.r = 0xc0;
+	col.g = 0xc0;
+	col.b = 0xc0;
+	col.a = 0x7f;
 	xhi = f1 * *(float*) (in + 0x40);
 	zhi = f1 * *(float*) (in + 0x48);
 	yhi = 0.0f;
 	cy = cy + *(float*) 0x6640cc;
 	fcn_00418000(0, &cx, 200, 25.0f, 70.0f,
 	             rr * *(float*) 0x6628bc, 900.0f, 100.0f, 70.0f, &xhi,
-	             0x5dc, 7, 0x7fc0c0c0);
-	if (fcn_004185a0(0, &ov.x, 100, 5.0f, 2.5f, 1.0f, 3.0f, -6.0f, 4.0f,
-	                 7.0f, 8.0f, 0x7fc0c0c0) != 0) {
+	             0x5dc, 7, *(int*) &col);
+	if (fcn_004185a0(0, &ov.x, 100, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f,
+	                 7.0f, 8.0f, *(int*) &col) != 0) {
 		f1 = rr * *(float*) 0x6652c8;
 		f2 = rr * *(float*) 0x662d34;
 		f3 = rr * *(float*) 0x6629d0;
@@ -208,10 +220,10 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 		f2 = rr * *(float*) 0x66414c;
 		f3 = rr * *(float*) 0x662a3c;
 	}
-	fcn_00417d00(0, &cx, 0x96, f3, f2, f1, 20.0f, 200);
+	fcn_00417d00(0, &cx, 0x96, f3, f2, f1, 80.0f, 200);
 	p = (char*) fcn_00422460(0, g_677640);
 	if (p != 0) {
-		fcn_004193f0((int) p, *(int*) (best + 0x61), 0x6b, 15232.0f);
+		fcn_004193f0((int) p, *(int*) (best + 0x61), 0x6b, 12200.0f);
 	}
 	if (a0) {
 		for (i = 0; i < 3; i++) {
