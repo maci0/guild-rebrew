@@ -25095,3 +25095,12 @@ assignment statements produced the identical object, confirming again that state
 The conclusion recorded for scheduling is that the device is a per-row diagnostic, not a default: it pays when the reference demonstrably keeps a value in a frame slot that this
 build folds away, and it costs when the reference keeps the value in a register. The evidence to check first is whether the reference loads the value from memory more than once;
 if it does, the device is the right shape, and if it does not, the device cannot help.
+
+## 2026-11-03 — a ten-byte block where every memory home also moves the frame base
+
+`0x4C6E20` stays at 113 of 123 after five device shapes were measured and refused. The block itself is an instruction-order swap with an identical instruction set: the reference
+hoists the inlined copy count ahead of the two source-register moves, and this build places it after them. Every shape that gave the count a memory home also moved the frame
+base by four bytes, which alone prevents a match at this row, and the shapes that left the count in a register produced byte-identical objects. Concretely: a volatile count
+cost eighty-nine matched bytes and moved the frame base, a volatile destination cost sixty-two and spilled the pointer, a volatile source cost fifty-seven and reloaded it, a
+separate accumulator compiled identically, and a volatile remaining count cost sixty-four and turned the counter into a memory increment.
+The row is restored byte-identically and the recorded conclusion is that a memory home cannot be the lever where the frame base itself is part of the evidence.
