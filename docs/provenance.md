@@ -24846,3 +24846,16 @@ four switch entries, so it is a dead initialiser the compiler kept, while in our
 source shape tried is either eliminated as a dead store or displaces the frame; a volatile qualifier forces the store but costs the frame and drops the match to 541.
 The row therefore stays at 581 of 2300 with the object at 2296 and both code ends equal, and the seven-byte gap is recorded as blocked local allocation rather than as a defect
 waiting for a shape.
+
+## 2026-11-03 — figure row: a base load hoisted before both null tests
+
+`0x53C560` moves from 205 to 287 matched bytes with the object at 2004 against the 2012 extent, after one semantic-form repair: a global base pointer is loaded once and
+tested, then its field is used, where the source loaded the global again inside the call and produced an extra register move. The reference keeps the loaded base in one
+register and the field in another, so after the change both virtual-call blocks match the reference exactly.
+Four declaration and initialisation experiments compiled to byte-identical objects, which confirms again that this compiler's local slot layout is not declaration-order
+controlled, and two attempts to hoist other loads made the row worse. The remaining difference is the frame: the reference reserves 0x16c with a four-byte slot that is never
+addressed, while this build reserves 0x168 and places the buffer four bytes earlier, so every stack offset shifts. That is recorded as allocation-driven and unsolved, not
+padded, and it accounts for the residual.
+Nine other classes were checked and are clean: no classification macro, no packet parsing, the advanced-pointer copies are strength reduction, all literal and global
+arguments and their push order match at more than forty call sites, the variadic call counts match, the comparisons differ only in constant materialisation, the buffer rows
+are the same size, the global is a pointer in both, and the parent-copy tail merges in the same place.

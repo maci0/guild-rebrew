@@ -95,8 +95,8 @@ int __cdecl fcn_0053c560(void)
 	fcn_00533880();
 	fcn_005338a0();
 	fcn_004432d0(1, 0);
-	if (*(int *) 0x67a370 != 0) {
-		base = *(int *) 0x67a370;
+	base = *(int *) 0x67a370;
+	if (base != 0) {
 		sub = *(int *) (base + 0x3c8);
 		if (sub != 0) {
 			fn = *(VirtFn *) (sub + 0x210);
@@ -255,8 +255,8 @@ slot_found:
 		*(int *) (*(int *) 0x67a370 + 0xb0) = 0;
 	}
 	fcn_004e4c00();
-	if (*(int *) 0x67a370 != 0) {
-		base = *(int *) 0x67a370;
+	base = *(int *) 0x67a370;
+	if (base != 0) {
 		sub = *(int *) (base + 0x3c8);
 		if (sub != 0) {
 			fn = *(VirtFn *) (sub + 0x294);
