@@ -24937,3 +24937,16 @@ the older selector, so any window list produced from a lead-padded unit in this 
 The repair is upstream and now complete: the helper's signature admits a bytearray, the body returns bytes for every path, and a regression test covers all three key kinds.
 The venv is reinstalled from the checkout in compat editable mode, which is the tooling-development opt-in the ledger already describes; the reproducible state is the released
 wheel and returning to it is `uv sync` once no tooling repair is in flight.
+
+## 2026-11-03 — two rows advanced: an inverted near-plane gate, and four locals the reference zeroes at entry
+
+`0x45A9D0` moves from 127 to 148 matched bytes with the object from 1542 to 1820 against the 2040 extent. The body was rebuilt to the native shape and the repairs are semantic:
+a near-plane gate was inverted, including which side sets the split flag and that the split picks its neighbours from a minimum or maximum vertex chosen by comparing two
+absolute differences rather than always the maximum; the copy of texture coordinates and depths and the min/max search run in one loop in the reference where the source used
+two; the clamp is one ternary store per component, ordered below one then above two hundred and fifty four; the split delta multiplies two of the plane components by 0.875
+rather than a range; the return is a character; and a three-entry neighbour table replaces arithmetic on an index modulo three. Flag packing is written as one expression
+whose mask order matches the reference. What remains is allocation plus one clamp path where the reference keeps the high bound in a floating register and compares stack to
+register, which is recorded as the next lever with the exact instruction shape.
+`0x4E5A00` moves from 122 to 171 with the object at 1991 against 2033, and its first twenty-seven bytes are now identical: four locals that the reference zeroes at entry are
+initialised in the declaration block, which also fixes a resume path that read an uninitialised counter. The spill-slot assignment that follows is liveness-driven, with the
+reference's slots in declaration order and this build's not, for identical live ranges, so it is reported rather than padded.

@@ -48,12 +48,12 @@ void __cdecl fcn_004c53a0(void);
 void __cdecl fcn_004e5a00(int* event)
 {
     unsigned char* e;
-    int flag;
-    int ready;
-    int saved_675308;
-    int count;
-    int saved_6b8061;
-    int saved_6b5c34;
+    int flag = 0;
+    int ready = 0;
+    int saved_675308 = *(int*) 0x675308;
+    int count = 0;
+    int saved_6b8061 = 0;
+    int saved_6b5c34 = *(int*) 0x6b5c34;
     int g480c;
     int g4808;
     int g4804;
@@ -85,8 +85,6 @@ void __cdecl fcn_004e5a00(int* event)
     int* hop;
 
     e = (unsigned char*) event;
-    saved_675308 = *(int*) 0x675308;
-    saved_6b5c34 = *(int*) 0x6b5c34;
     sprintf(text, (char*) 0x68d604, e[8], *(int*) e);
     g4800 = *(int*) 0x1040480;
     g4804 = *(int*) 0x1040484;
@@ -168,7 +166,6 @@ void __cdecl fcn_004e5a00(int* event)
     ResetDisplayCounters();
     fcn_00525ef0();
     unit = (int*) *(int*) 0x1015ea0;
-    count = 0;
     *(unsigned char*) 0x100f8c0 = 0;
     for (i = 0; i < 0x400; i++) {
         if (*(int*) ((char*) unit + i * 0x2f4 + 0x20) != 0
