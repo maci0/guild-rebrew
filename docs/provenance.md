@@ -25038,3 +25038,11 @@ Three shapes were measured and reverted: explicit pointer induction in the two r
 loop which grew the object past the extent and is recorded as a candidate.
 What remains is allocation: the epilogue sits thirty bytes early so every branch displacement differs, and two of the record loops show the same instruction sequence with
 different register and slot assignments. The frame, the message and both large locals already sit at the reference's offsets.
+
+## 2026-11-03 — where the command row's thirty bytes go
+
+The command row is thirty bytes short of its extent, and the deficit decomposes into two regions rather than a missing block. In the first, the reference pushes a buffer
+address it already holds in a register where this build recomputes the address with a load-effective and pushes the new register, which costs three bytes and also moves the
+zero store two slots up. In the second, the reference folds a record's base and index into one register chain before a counted copy where this build keeps the two apart, which
+accounts for the rest of the shift. Both are register allocation, not missing statements, so the row cannot be closed by transcription and stays parked with its measured
+numbers rather than being padded.
