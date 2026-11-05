@@ -44,7 +44,7 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 
 	if (!m || m[8] < 1)
 		return;
-	if (*(int*) (m + 0x28) == 0)
+	if (m[10] == 0)
 		return;
 	if (!g_6b8014)
 		return;

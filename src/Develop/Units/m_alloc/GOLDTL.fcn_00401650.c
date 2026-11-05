@@ -219,7 +219,7 @@ release:
 		m_FreeTracked(pal2);
 	}
 	if ((flags & 0x10) == 0x10 && buf != 0) {
-		n = abs(bih.biHeight) * bpr;
+		n = abs(bih.biHeight) * bih.biWidth;
 		rowB = buf + n * 3 - 3;
 		rowA = buf + n * 4 - 4;
 		if ((flags & 0x20) != 0x20) {

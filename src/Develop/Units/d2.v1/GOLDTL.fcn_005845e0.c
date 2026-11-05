@@ -19,6 +19,7 @@ int __cdecl fcn_005845e0(void)
 	int n;
 	int index;
 	int result;
+	int result2;
 	int flag;
 
 	menu = fcn_00470820(0, 0, (char*) 0x6a9298);
@@ -32,7 +33,7 @@ int __cdecl fcn_005845e0(void)
 		ids[i] = (int) item;
 		index = (int) item;
 		base = (char*) *(int*) 0x1015ea0;
-		index = index * 0x3c - index;
+		index = index * 0x40 - index;
 		index = index * 0xc;
 		*(int*) (base + index + 0x58) = 1;
 		*(int*) (base + index + 0x38) = *(int*) (0x6a81dc + i * 4);
@@ -41,15 +42,16 @@ int __cdecl fcn_005845e0(void)
 	item = io_AppendText((char*) 0x681140, 0x3f20);
 	result = (int) fcn_00472250(menu, 2, item);
 	item = io_AppendText((char*) 0x681140, 0x3f21);
-	fcn_00472250(menu, 2, item);
+	result2 = (int) fcn_00472250(menu, 2, item);
 	d2_SetForm(menu, 2);
+	flag = 0;
 	if (fcn_005373e0((char*) 0x5845e0, 0x86) != 0) {
 		do {
 			base = (char*) *(int*) 0x1015ea0;
 			n = 0;
 			for (k = 0; k < 5; k++) {
 				index = ids[k];
-				index = index * 0x3c - index;
+				index = index * 0x40 - index;
 				index = index * 0xc;
 				if (*(int*) (base + index + 0x38) != 0) {
 					fcn_00472640((char*) result, 1);
@@ -66,14 +68,14 @@ int __cdecl fcn_005845e0(void)
 				*(int*) 0x774654 = 1;
 			}
 			if (*(int*) 0x100f1dc != -1) {
-				if (*(int*) 0x67d370 == ids[0]) {
+				if (*(int*) 0x67d370 == result2) {
 					*(int*) 0x774654 = 1;
 				} else if (*(int*) 0x67d370 == result) {
 					*(int*) 0x774654 = 1;
 					n = 0;
 					for (k = 0; k < 5; k++) {
 						index = ids[k];
-						index = index * 0x3c - index;
+						index = index * 0x40 - index;
 						index = index * 0xc;
 						if (*(int*) (base + index + 0x38) != 0) {
 							n++;
@@ -90,5 +92,5 @@ int __cdecl fcn_005845e0(void)
 		} while (fcn_005373e0((char*) 0x5845e0, 0x86) != 0);
 	}
 	fcn_00471e30(menu);
-	return result;
+	return flag;
 }

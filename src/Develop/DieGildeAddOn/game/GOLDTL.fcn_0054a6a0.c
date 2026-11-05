@@ -100,7 +100,7 @@ void __cdecl fcn_0054a6a0(int a0)
 			                       0x21c +
 			                   0x7f4ca2);
 				if (v1 == 6 || v1 == 7) {
-					io_FormatTextBuffer(v12, 0x19a7, pair[1], pair[0]);
+					io_FormatTextBuffer(v12, 0x19a7, pair[0], pair[1]);
 					fcn_00545d40(*(int*) ((unsigned int) *
 					                              (unsigned short*) (v7 + 0x27) *
 					                              0x21c +
@@ -111,9 +111,9 @@ void __cdecl fcn_0054a6a0(int a0)
 				                          (unsigned short*) (v7 + 0x27) *
 				                          0x21c +
 				                      0x7f4ca4),
-				             0xffffffff, g_773d75, pair[0]);
+				             0xffffffff, g_773d75, pair[1]);
 				fcn_004c4510(v7, *(int*) (v7 + 1));
-				fcn_004c4570(4, 1, 0x69, (int*) &pair[0]);
+				fcn_004c4570(4, 1, 0x69, (int*) (v12 + 4));
 				fcn_004c5360();
 			}
 		}

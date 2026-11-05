@@ -31,13 +31,13 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 	if ((int) (h + x) < *(int*) 0x7725f8) {
 		return 0;
 	}
-	if (*(int*) 0x67d968 < (int) ((int) (v2 / zoom) + (int) y)) {
+	if (*(int*) 0x67d968 < (int) ((int) v2 / (int) zoom + (int) y)) {
 		v2 = (*(int*) 0x67d968 - (int) y) * zoom;
 	}
 	off = 0;
 	row = 0;
 	if ((int) y < *(int*) 0x7725fc) {
-		while ((int) v2 > 0) {
+		while (row < (int) v2) {
 			first = (row % (int) zoom) == 0;
 			end = q;
 			d = dst;
@@ -77,7 +77,7 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 		}
 		return 1;
 	}
-	while ((int) v2 > 0) {
+	while (row < (int) v2) {
 		first = (row % (int) zoom) == 0;
 		end = q;
 		d = dst;

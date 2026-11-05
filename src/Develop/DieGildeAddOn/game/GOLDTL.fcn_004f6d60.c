@@ -120,7 +120,7 @@ void __cdecl fcn_004f6d60(unsigned int a0)
 			*(short*) (msg + 0x34) = g_7f4c00.d;
 			*(int*) (msg + 0x30) = g_7f4c00.c;
 			*(unsigned char*) (msg + 4) = 0x69;
-			*(int*) ((char*) msg + 8) = *(int*) (slot + 4);
+			*(int*) ((char*) msg + 8) = *(int*) (other + 2);
 			*(int*) (msg + 0xc) = -1;
 			*(unsigned char*) (msg + 0x36) = 9;
 			*(short*) (msg + 0x2c) = 7;

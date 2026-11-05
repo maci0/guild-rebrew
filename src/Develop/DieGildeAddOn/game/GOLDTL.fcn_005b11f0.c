@@ -48,6 +48,7 @@ void __cdecl fcn_005b11f0(int* a0)
 	int* slot;
 	int* list;
 	int obj;
+	unsigned short w;
 	unsigned char kind;
 
 	view = *(char**) g_1043370;
@@ -55,6 +56,7 @@ void __cdecl fcn_005b11f0(int* a0)
 	oy = *(int*) (g_773d75 * 0x2f4 + 0x868350);
 	g_772514 = a0[2];
 	g_77255c = (char*) (a0[2] * 0x3cc + 0x1015f40);
+	t = g_77255c;
 	if (g_6ab3dc) {
 		a0[0x9e7] = 0;
 		a0[0x9e7] = fcn_005b0f00((char*) (a0[2] * 0x3cc + 0x1015f40));
@@ -72,8 +74,8 @@ void __cdecl fcn_005b11f0(int* a0)
 			if (i != -1 && i == *(int*) (p - 4)) {
 				id = *(unsigned short*) (*(int*) p + 0x27);
 				if (id != 0xffff
-				    && *(unsigned char*) (id * 0x2f4 + 0x7f4ca2) < 10) {
-					fcn_005918f0((char*) (id * 0x2f4 + 0x7f4ca0));
+				    && *(unsigned char*) (id * 0x21c + 0x7f4ca2) < 10) {
+					fcn_005918f0((char*) (id * 0x21c + 0x7f4ca0));
 					i = g_67d370;
 				}
 			}
@@ -94,7 +96,6 @@ void __cdecl fcn_005b11f0(int* a0)
 		}
 		e = *(char**) (obj + 0x34);
 		fcn_00455350(e, e + 0x4c, pos);
-		t = g_77255c;
 		view = *(char**) g_1043370;
 		x = (float) (((double) pos[0] - *(int*) t) / *(float*) (t + 0x10)
 		    - *(int*) (view + 0x20) * 0.5);
@@ -133,10 +134,10 @@ void __cdecl fcn_005b11f0(int* a0)
 				if (id == 0xffff) {
 					goto check;
 				}
-				kind = *(unsigned char*) (id * 0x2f4 + 0x7f4ca2);
+				kind = *(unsigned char*) (id * 0x21c + 0x7f4ca2);
 				if (kind == 5 || kind == 6 || kind == 7) {
 					n = fcn_00469c30(*(int*) (t + 4) + sx, *(int*) (t + 8) + sy,
-					    *(int*) (id * 0x2f4 + 0x7f4cf4) - 0x53);
+					    *(int*) (id * 0x21c + 0x7f4cf4) - 0x53);
 					*slot = n;
 					if (n == -1) {
 						goto next;

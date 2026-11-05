@@ -102,23 +102,23 @@ void __cdecl fcn_0054ac70(char* e)
 		for (i = 0; i < 0x45; i++)
 			pkt[i] = 0;
 		*(unsigned char*) (m + 0x74) = *(unsigned char*) (e + 0xc4);
-		*(int*) (m + 0x28) = *(int*) (e + 0xb0);
-		*(int*) (m + 0x34) = *(int*) (e + 0xbc);
-		*(int*) (m + 0x6c) = *(int*) (e + 4);
-		*(int*) (m + 0x2c) = *(int*) (e + 0xb4);
-		*(int*) (m + 0x38) = *(int*) (e + 0xc0);
-		*(int*) (m + 0x30) = *(int*) (e + 0xb8);
-		*(int*) (m + 0x24) = *(int*) (e + 0xac);
-		*(unsigned char*) (m + 0x20) =
+		*(int*) (m + 0x38) = *(int*) (e + 0xb0);
+		*(int*) (m + 0x44) = *(int*) (e + 0xbc);
+		*(int*) (m + 0x7c) = *(int*) (e + 4);
+		*(int*) (m + 0x3c) = *(int*) (e + 0xb4);
+		*(int*) (m + 0x48) = *(int*) (e + 0xc0);
+		*(int*) (m + 0x40) = *(int*) (e + 0xb8);
+		*(int*) (m + 0x34) = *(int*) (e + 0xac);
+		*(unsigned char*) (m + 0x30) =
 			(unsigned char) ((*(int*) (e + 0xc0) != -1) + 5);
-		*(int*) (m + 0x10) = g_7f4c08;
-		*(int*) (m + 0x04) = -1;
-		*(int*) (m + 0x0c) = g_7f4c04;
-		*(unsigned short*) (m + 0x14) = g_7f4c0c;
-		*(int*) (m + 0x08) = g_7f4c00;
-		*(unsigned char*) (m + 0x16) = 0xa2;
-		*(int*) (m + 0) = *(int*) (g_7f4ca4 + (unsigned short) g_774970 * 0x21c);
-		fcn_00500bb0((pos14_7f4c00*) m, 0, 0x2d, 0);
+		*(int*) (m + 0x20) = g_7f4c08;
+		*(int*) (m + 0x14) = -1;
+		*(int*) (m + 0x1c) = g_7f4c04;
+		*(unsigned short*) (m + 0x24) = g_7f4c0c;
+		*(int*) (m + 0x18) = g_7f4c00;
+		*(unsigned char*) (m + 0x26) = 0xa2;
+		*(int*) (m + 0x0c) = *(int*) (g_7f4ca4 + (unsigned short) g_774970 * 0x21c);
+		fcn_00500bb0((pos14_7f4c00*) (m + 0x18), 0, 0x2d, 0);
 		fcn_004c5980(pkt);
 		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 		*(int*) (e + 0x84) = fcn_004c5620(-1, e);

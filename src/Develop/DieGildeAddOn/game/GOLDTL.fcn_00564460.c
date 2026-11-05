@@ -9,7 +9,7 @@ extern unsigned char g_773d75;
 extern int g_100f1dc;
 extern int g_100f884;
 extern int g_7f4c00;
-extern float g_662a08;
+extern double g_662a08;
 extern float g_662910;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -33,14 +33,13 @@ void __cdecl fcn_00545780(char* e);
 /* ADDRESS: GOLDTL 0x00564460 */
 void __cdecl fcn_00564460(char* e)
 {
+	float f;
+	int n;
 	char buf[1024];
-	Gfx gfx;
 	unsigned char* p;
 	unsigned char* rec;
 	unsigned short* q;
 	unsigned char type;
-	float f;
-	int n;
 	int k;
 	int a;
 	int b;
@@ -103,8 +102,7 @@ void __cdecl fcn_00564460(char* e)
 				}
 			}
 		}
-		if ((double) n * (g_662a08 - (double) fcn_0050f980(*q, *(unsigned short*) (p + 0x25), 1) * g_662910)
-			* (double) f < (double) *(int*) (e + 0xb0)) {
+		if ((double)n * ((double)f * (g_662a08 - (double)fcn_0050f980(*q, *(unsigned short*) (p + 0x25), 1) * g_662910)) < (double) *(int*) (e + 0xb0)) {
 			io_FormatTextBuffer(buf, 0x17e9, *(unsigned short*) (p + 0x27), p);
 			he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
 			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 2, 0x200);

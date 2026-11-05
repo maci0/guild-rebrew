@@ -46,7 +46,7 @@ void __cdecl fcn_0047a090(void)
 		if ((signed char) c == 0x19) {
 			p[0] = 0x19;
 		}
-		if (*(signed char*) p < *(unsigned short*) (obj + 4) && cl == 0) {
+		if (*(signed char*) p >= *(unsigned short*) (obj + 4) && cl == 0) {
 			if (obj[0x14] == 0) {
 				p[0] = 0;
 				*(short*) (p + 2) = 0;

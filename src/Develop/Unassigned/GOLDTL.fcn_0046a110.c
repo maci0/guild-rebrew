@@ -194,14 +194,16 @@ label_46a1f2:
 					else
 						fcn_0047cc80(dx, dy, g_77250c, *(void**) (ent + 0xc), 0, f, 0);
 				}
-				if (!*(int*) (ent + 0x68))
-					fcn_0047cba0(dx, dy, g_77250c, *(char**) (ent + 0xc), 0);
-				if (*(int*) (ent + 0x3c))
-					fcn_0047ccd0(dx, dy, g_77250c, *(char**) (ent + 0xc), 0);
-				else if (*(int*) (ent + 0x68))
-					fcn_0047cba0(dx, dy, g_77250c, *(char**) (ent + 0xc), 0);
-				else if (*(int*) (ent + 0x60))
-					fcn_0047cbf0(dx, dy, g_77250c, *(char**) (ent + 0xc), 0);
+				else {
+					if (!*(int*) (ent + 0x68))
+						fcn_0047cba0(dx, dy, g_77250c, *(char**) (ent + 0xc), 0);
+					if (*(int*) (ent + 0x3c))
+						fcn_0047ccd0(dx, dy, g_77250c, *(char**) (ent + 0xc), 0);
+					else if (*(int*) (ent + 0x68))
+						fcn_0047cba0(dx, dy, g_77250c, *(char**) (ent + 0xc), 0);
+					else if (*(int*) (ent + 0x60))
+						fcn_0047cbf0(dx, dy, g_77250c, *(char**) (ent + 0xc), 0);
+				}
 				break;
 			case 4:
 				fcn_0047cd70(*(int*) (ent + 0x88), g_77250c);
@@ -226,6 +228,7 @@ label_46a1f2:
 						fcn_0047cc80(dx, dy, g_77250c, *(void**) (ent + 0xc), *(int*) (ent + 0x88), f, 1);
 					else
 						fcn_0047cc80(dx, dy, g_77250c, *(void**) (ent + 0xc), *(int*) (ent + 0x88), f, 0);
+					goto label_46a7ab;
 				}
 				if (*(int*) (ent + 0x3c))
 					fcn_0047ccd0(dx, dy, g_77250c, *(char**) (ent + 0xc), *(int*) (ent + 0x88));
@@ -237,6 +240,7 @@ label_46a1f2:
 				}
 				else
 					fcn_0047cba0(dx, dy, g_77250c, *(char**) (ent + 0xc), *(int*) (ent + 0x88));
+label_46a7ab:
 				if (*(float*) (ent + 0x1f4) != g_6628a8) {
 					y2 = (int) ((g_6628a0 - *(float*) (ent + 0x1f4)) * (float) *(int*) (ent + 0x1c)) + dy;
 					if (bottom < y2)
@@ -246,7 +250,7 @@ label_46a1f2:
 					fcn_0047a040(left, top, right, bottom);
 					if (g_67d370 != *(int*) ent) {
 						f = *(float*) (ent + 0x1f4);
-						if (!(f <= g_6629c8))
+						if (f > g_6629c8)
 							f = (float) g_6629c8;
 						sprintf(u.buf, (char*) 0x67d43c, (int) (f * g_662c38));
 						fcn_00472880(g_67d398 + 1);

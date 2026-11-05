@@ -96,7 +96,7 @@ void __cdecl fcn_004dff50(char* task)
 			y = *(float*) (foe + 0x1c) * g_6640e8 * n;
 			x = (float) *(int*) (foe + 0x24) - y;
 			*(int*) (foe + 0x24) = (int) x;
-			fcn_004ff210(*(unsigned short*) foe, (int) -x);
+			fcn_004ff210(*(unsigned short*) foe, (int) -y);
 		}
 	} else {
 		if (*(int*) (*(char**) (foe + 0x184) + 0x128) == 0) {

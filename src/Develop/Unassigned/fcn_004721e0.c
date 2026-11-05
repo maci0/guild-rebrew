@@ -10,8 +10,8 @@ int* __cdecl fcn_004721e0(int a, int b, int c)
 
 	n = *(int*) 0x772534;
 	value = *(int*) (0x1038144 + (b + n * 175) * 4);
-	ptr = (int*) (0x1015f40 + value * 108);
-	count = *(int*) (0x1015f6c + value * 108);
+	ptr = (int*) (0x1015f40 + value * 0x3cc);
+	count = *(int*) (0x1015f6c + value * 0x3cc);
 	if (a > count - 1) {
 		return ptr;
 	}

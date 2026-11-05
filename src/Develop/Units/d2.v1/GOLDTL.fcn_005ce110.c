@@ -66,7 +66,7 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 		io_AppendText(0x139d);
 	}
 	d2_SetForm(v8, 3);
-	if (level >= 8) {
+	if (a0 >= 8) {
 		k = fcn_004ad190();
 		v9 = 0;
 		pick[0] = 0;
@@ -78,7 +78,7 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 				if (k != 0x25) {
 					v9 = 0x4000;
 				} else {
-					v9 = 0;
+					v9 = 0x10000;
 				}
 			} else {
 				v9 = 0x8000;

@@ -9,7 +9,7 @@
  * record carries two equal handles, a two bit field packed across four bytes,
  * three floats and two 16 byte blocks, plus a trailing dword from the newest
  * format. The older formats scale the first block by dat_662a68 and default
- * the middle float to 60.0. Strings are read NUL terminated into 0x40 byte
+ * the middle float to 63.0. Strings are read NUL terminated into 0x40 byte
  * slots.
  */
 
@@ -132,7 +132,7 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 					if (version >= 0x3a6c00b6) {
 						fcn_004011d0(stream, &rec->f14);
 					} else {
-						rec->f14 = 60.0f;
+						rec->f14 = 63.0f;
 					}
 					fcn_004011d0(stream, &rec->f0c);
 					fcn_004011d0(stream, &rec->f10);
@@ -192,6 +192,10 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 		m_FreeTracked(recs);
 		recs = 0;
 	}
+	if (listE != 0) {
+		m_FreeTracked((void*) listE);
+		listE = 0;
+	}
 	if (listD != 0) {
 		m_FreeTracked((void*) listD);
 		listD = 0;
@@ -203,10 +207,6 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 	if (listC != 0) {
 		m_FreeTracked((void*) listC);
 		listC = 0;
-	}
-	if (listE != 0) {
-		m_FreeTracked((void*) listE);
-		listE = 0;
 	}
 	return (int) obj;
 }

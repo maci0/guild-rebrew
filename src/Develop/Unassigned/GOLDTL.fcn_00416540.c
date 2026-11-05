@@ -1,6 +1,7 @@
 extern char* g_6b8014;
 extern float g_6628a8;
 extern float g_6628a0;
+extern float g_6629b8;
 extern float g_662a70;
 extern float g_6628b0;
 extern float g_662a90;
@@ -69,7 +70,7 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	in[1] = self->y - *(float*) (g_6b8014 + 0x88);
 	in[2] = self->z - *(float*) (g_6b8014 + 0x8c);
 	fcn_00451900(in, out);
-	b0 = (out[6] + out[2]) * g_6628a8 + out[8] * g_6628a0;
+	b0 = (out[6] + out[2]) * g_6628a8 + out[8] * g_6629b8;
 	self->x = *(float*) (g_6b8014 + 0x84);
 	self->y = *(float*) (g_6b8014 + 0x88);
 	self->z = *(float*) (g_6b8014 + 0x8c);
@@ -79,7 +80,7 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	a0 = (in[0] * m[0] + in[1] * m[4] + in[2] * m[8]) * g_662a70;
 	a1 = (in[0] * m[1] + in[1] * m[5] + in[2] * m[9]) * g_662a70;
 	a2 = (in[0] * m[2] + in[1] * m[6] + in[2] * m[10]) * g_662a70;
-	b1 = (out[5] + out[1]) * g_6628a8 + out[9] * g_6628a0;
+	b1 = (out[5] + out[1]) * g_6628a8 + out[9] * g_6629b8;
 	self->px = *(float*) (g_6b8014 + 0x4c);
 	self->py = *(float*) (g_6b8014 + 0x50);
 	self->pz = *(float*) (g_6b8014 + 0x54);

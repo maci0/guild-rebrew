@@ -6,7 +6,10 @@
  * the two passes whose operands are fully defined are reconstructed here. */
 
 char __cdecl fcn_0043c140(int*, int, int, int);
-void __cdecl fcn_0043db70(int*);
+void __cdecl fcn_0043db70(char*);
+typedef struct Tile Tile;
+void __cdecl fcn_0043c640(Tile*);
+void __cdecl fcn_0043b990(char*);
 
 /* ADDRESS: GOLDTL 0x0043c2c0 */
 void __cdecl fcn_0043c2c0(int* a0)
@@ -127,7 +130,7 @@ void __cdecl fcn_0043c2c0(int* a0)
 		v17++;
 		v23++;
 	} while ((int) v17 < 3);
-	fcn_0043db70(a0);
+	fcn_0043db70((char*) a0);
 	/* Trailing pass: min/max alpha per progressive level and tile. */
 	v17 = 0;
 	p = (unsigned char*) (a0 + 0xa3);
@@ -176,4 +179,10 @@ void __cdecl fcn_0043c2c0(int* a0)
 		} while ((int) esi < 8);
 		v18 += 1;
 	} while ((int) v18 < 8);
+	/* Tail: jitter/vstep, material mesh, surface recreate, ready flag. */
+	*(float*) ((char*) a0 + 0x802c) = 0.05f;
+	*(float*) ((char*) a0 + 0x8030) = 0.25f;
+	fcn_0043c640((Tile*) a0);
+	fcn_0043b990((char*) a0);
+	*(unsigned char*) ((char*) a0 + 0x8036) |= 1;
 }

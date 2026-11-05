@@ -13,22 +13,22 @@ extern double g_664ef8;
 
 char* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
+char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 int __cdecl fcn_004c5530(char*);
 void __cdecl fcn_00500bb0(char*, int, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl fcn_00549330(char*, int);
 char* __cdecl fcn_005463a0(int, int, int, int, int);
-char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_005ba020(char*, char*);
 char* __cdecl fcn_00503d10(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_0050d320(char*, unsigned char);
-int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl fcn_0050dfd0(char*, int);
+int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
-void __cdecl fcn_00549330(char*, int);
+int __cdecl fcn_0050d320(char*, unsigned char);
+void __cdecl fcn_00546190(char*);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x00572ff0 */
@@ -57,7 +57,6 @@ void __cdecl fcn_00572ff0(char* a)
 	int left = 0;
 	int amt = 0;
 	int flag = 0;
-	int k;
 	int lim;
 	int cand;
 
@@ -65,17 +64,15 @@ void __cdecl fcn_00572ff0(char* a)
 		*(int*) (a + 0x70) = 0;
 		fcn_00549330(a, *(unsigned short*) g_773da8);
 	}
-	k = *(int*) (a + 0xe8);
-	if (k != -1) {
-		if (!fcn_004c4450(k)) {
+	if (*(int*) (a + 0xe8) != -1) {
+		if (!fcn_004c4450(*(int*) (a + 0xe8))) {
 			fcn_00500bb0(a + 0x52, 0, 1, 0);
 			return;
 		}
 		*(int*) (a + 0xe8) = -1;
 	}
-	k = *(int*) (a + 0xec);
-	if (k != -1) {
-		if (!fcn_004c4450(k)) {
+	if (*(int*) (a + 0xec) != -1) {
+		if (!fcn_004c4450(*(int*) (a + 0xec))) {
 			fcn_00500bb0(a + 0x52, 0, 1, 0);
 			return;
 		}
@@ -98,7 +95,7 @@ void __cdecl fcn_00572ff0(char* a)
 			fcn_00500bb0(a + 0x52, 0, 5, 0);
 			return;
 		}
-		ent = gm_NextEntityQueryMatch();
+		ent = he_fn_Handlung();
 	}
 	if (*(char*) (a + 0xf1) == 0 && fcn_005ba020(pktB, pktA) == 0) {
 		fcn_005ba020(pktB, pktA);
@@ -168,6 +165,10 @@ void __cdecl fcn_00572ff0(char* a)
 			if (ps[0] == 0 || pi[0] != *(int*) (pktB + 1)) {
 				goto i1next;
 			}
+			r2 = fcn_00502cd0(*(int*) (q + 0x14), 1, 0, ps[0]);
+			if (r2 == 0) {
+				goto i1next;
+			}
 			if (lpGebaeudePROT[*(unsigned char*) pktB * 0x24d] == '\n') {
 				e2 = fcn_00503d10(ps[0]);
 			} else {
@@ -178,10 +179,6 @@ void __cdecl fcn_00572ff0(char* a)
 				}
 			}
 			if (e2 == 0) {
-				goto i1next;
-			}
-			r2 = fcn_00502cd0(*(int*) (e2 + 0x14), 1, 0, ps[0]);
-			if (r2 == 0) {
 				goto i1next;
 			}
 			t = gm_GetMsgField(q, r2);
@@ -256,7 +253,7 @@ i1next:
 		cand = gm_GetMsgField(e2, r2)
 		    - ((fcn_0050dfd0(e2, *(unsigned short*) r2)
 		    * *(int*) (r2 + 0x1c)) >> 2);
-		if (cand <= lim) {
+		if ((unsigned int) lim >= (unsigned int) cand) {
 			lim = cand;
 		}
 		m = lim;

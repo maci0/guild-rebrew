@@ -18,7 +18,8 @@ struct msg {
 	char pad10[0x18];
 	pos14_7f4c00 when;
 	unsigned char code;
-	char pad37[0x25];
+	char pad37[0x21];
+	int f58;
 	int f5c;
 	int f60;
 	int f64;
@@ -156,7 +157,7 @@ void __cdecl fcn_00589930(char* a0)
 					                               0x774970 *
 					                           0x21c),
 					    0, 0x7b4c4a0, 0, 0.0f, 100.0f, &act.count);
-					m.f60 = act.count;
+					m.f58 = act.count;
 					i = fcn_004c5530(&m);
 					if (i != -1) {
 						for (;;) {

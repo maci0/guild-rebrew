@@ -126,7 +126,8 @@ int __cdecl fcn_00428800(char* pEnd)
 					n = ((char*) sym->data)[index];
 					break;
 				case 6:
-					n = (int) strcpy(g_14cb440, (char*) sym->data + index * 0x60);
+					n = (int) ((char*) sym->data + index * 0x60);
+					strcpy(g_14cb440, (char*) n);
 					break;
 				case 7:
 					break;

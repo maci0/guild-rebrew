@@ -25,6 +25,7 @@ int __cdecl fcn_0049e900(int code, short* target, char* ent, char* out1, char* o
 	double dd;
 
 	step = *(int*) ((gm_RandomMod(0x10) & 0xffff) * 4 + 0x6643d8);
+	v[0] = step;
 	if (*(char*) (ent + 2) == 3)
 		return 0;
 	if (code != 0x33 && code != 0x13 && code != 0x10 && code != 0x11)
@@ -39,10 +40,11 @@ int __cdecl fcn_0049e900(int code, short* target, char* ent, char* out1, char* o
 		return 0;
 	if (code != 0x33)
 		goto branch2;
-	if ((*(int*) 0x7f4c04 & 0xffff) - 8 >= 0xa)
+	j = (*(int*) 0x7f4c04 & 0xffff) - 8;
+	if (j < 0)
+		j = 0;
+	if (j >= 0xa)
 		j = 0xa;
-	else
-		j = (*(int*) 0x7f4c04 & 0xffff) - 8;
 	d = (double) (10 - j) * *(float*) 0x662a3c;
 	dd = d * d;
 	v[1] = (int) (*(float*) 0x664378 * dd);
@@ -124,18 +126,21 @@ search2:
 		return 0;
 	if (best > 2)
 		return 0;
+	out2[0] = 0x14;
 	if (code == 0x33) {
 		out1[0] = 4;
 		*(int*) (out1 + 4) = *(int*) (found + 1);
-		*(int*) (out1 + 8) = -1;
+		*(int*) (out1 + 8) = *(int*) (found + 1);
+		*(int*) (out2 + 4) = rec[best * 3];
+		*(int*) (out2 + 8) = rec[best * 3 + 1];
+		*(int*) (out2 + 0x10) = rec[best * 3 + 2];
 	} else {
 		out1[0] = 4;
 		*(int*) (out1 + 4) = *(int*) (found + 1);
 		*(int*) (out1 + 8) = -1;
+		*(int*) (out2 + 4) = rec[best * 3 + 1];
+		*(int*) (out2 + 8) = rec[best * 3 + 1];
+		*(int*) (out2 + 0x10) = rec[best * 3 + 2];
 	}
-	out2[0] = 0x14;
-	*(int*) (out2 + 4) = rec[best * 3];
-	*(int*) (out2 + 8) = rec[best * 3 + 1];
-	*(int*) (out2 + 0x10) = rec[best * 3 + 2];
 	return 0x33;
 }

@@ -50,6 +50,7 @@ void __cdecl fcn_004316c0(int obj)
 	int nblock;
 	int count;
 	int lane;
+	int fresh;
 	int i;
 	int j;
 	int k;
@@ -81,8 +82,9 @@ void __cdecl fcn_004316c0(int obj)
 					continue;
 				}
 				cand = (unsigned char*) (nblock + (id + 1) * 0x40);
-				names = (unsigned char*) plan + 0x2a0;
+				names = (unsigned char*) *(int*) ((char*) plan + 0x40c);
 				j = -1;
+				fresh = 0;
 				for (k = 0; k < count; k++) {
 					if (strcmp(rec[k].name, (char*) cand) == 0) {
 						j = k;
@@ -94,29 +96,31 @@ void __cdecl fcn_004316c0(int obj)
 						continue;
 					}
 					strcpy(rec[count].name, (char*) cand);
+					rec[count].flag = 1;
+					fresh = 1;
 					j = count;
 					for (k = 0; k < *names; k++) {
-						if (strcmp((char*) plan + 0x74 + k * 0x58, (char*) cand) == 0) {
-							rec[j].target[0] = *(float*) ((char*) plan + k * 0x58 + 0xb4);
-							rec[j].target[1] = *(float*) ((char*) plan + k * 0x58 + 0xb8);
-							rec[j].target[2] = *(float*) ((char*) plan + k * 0x58 + 0xbc);
+						if (strcmp((char*) names + 0x74 + k * 0x58, (char*) cand) == 0) {
+							rec[j].target[0] = *(float*) ((char*) names + k * 0x58 + 0xb4);
+							rec[j].target[1] = *(float*) ((char*) names + k * 0x58 + 0xb8);
+							rec[j].target[2] = *(float*) ((char*) names + k * 0x58 + 0xbc);
 							break;
 						}
 					}
 					count++;
 				}
-				edge = (Edge*) (nblock + 0x40 + lane * 0x40);
+				edge = (Edge*) sec;
 				node = (int*) *(int*) ((char*) plan + 0x15c);
 				t = (float) edge->weight / *(int*) ((char*) node + edge->from * 0xc0 + 4);
-				fcn_00451340((float*) ((char*) node + (edge->from * 8 + lane) * 0x18 + 0x54), (float*) ((char*) node + (edge->to * 8 + lane) * 0x18 + 0x54), t, out);
+				fcn_00451340((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x54), (float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x54), t, out);
 				v[0] = out[0] - rec[j].pos[0];
 				v[1] = out[1] - rec[j].pos[1];
 				v[2] = out[2] - rec[j].pos[2];
 				rec[j].target[0] = edge->k * v[0] + rec[j].pos[0];
 				rec[j].target[1] = edge->k * v[1] + rec[j].pos[1];
 				rec[j].target[2] = edge->k * v[2] + rec[j].pos[2];
-				fcn_00451900((float*) ((char*) node + (edge->from * 8 + lane) * 0x18 + 0x60), left);
-				fcn_00451900((float*) ((char*) node + (edge->to * 8 + lane) * 0x18 + 0x60), right);
+				fcn_00451900((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x60), left);
+				fcn_00451900((float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x60), right);
 				for (k = 0; k < 3; k++) {
 					fcn_00451340(left + k * 4, right + k * 4, t, out);
 					trail[j][k * 4 + 0] = out[0] + trail[j][k * 4 + 0];
@@ -124,12 +128,14 @@ void __cdecl fcn_004316c0(int obj)
 					trail[j][k * 4 + 2] = out[2] + trail[j][k * 4 + 2];
 					trail[j][k * 4 + 3] = out[3] + trail[j][k * 4 + 3];
 				}
-				rec[j].flag = 1;
+				if (!fresh) {
+					rec[j].flag++;
+				}
 			}
 		}
 		if (count != 0) {
 			for (i = 0; i < count; i++) {
-				w = (float) (g_6628a0 / trail[i][0]);
+				w = (float) g_6628a0 / (float) rec[i].flag;
 				for (k = 0; k < 3; k++) {
 					trail[i][k * 4 + 0] = w * trail[i][k * 4 + 0];
 					trail[i][k * 4 + 1] = w * trail[i][k * 4 + 1];
@@ -143,7 +149,7 @@ void __cdecl fcn_004316c0(int obj)
 				for (nblock = *(int*) (obj + 0x200); nblock != 0; nblock = *(int*) (nblock + 500)) {
 					if (*(int*) (nblock + 0x1ec) != 0) {
 						if (strcmp((char*) (*(int*) (nblock + 0x1ec) + 0xb4), rec[i].name) == 0) {
-							fcn_00438b40(nblock, &rec[i].pos[0]);
+							fcn_00438b40(nblock, &rec[i].target[0]);
 							fcn_00438cb0(nblock, &path[i * 0x29]);
 						}
 					}

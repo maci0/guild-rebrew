@@ -24,7 +24,7 @@ extern int __cdecl fcn_0050dc90(void* p);
 extern int __cdecl gm_eval_SlotVoll(int a, int b, int c);
 extern void __cdecl fcn_004c51f0(int a, int b, int c, int d, char e, int f);
 extern void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-extern void __cdecl he_MessageBoxQuickjump(int a, int b, int c, char* d, int e,
+extern void __cdecl he_MessageBoxQuickjump(int a, int b, char* c, int d, int e,
 	int f, int g, int h, char* i);
 extern void __cdecl fcn_00529160(int a, int b, int c, int d);
 
@@ -150,7 +150,7 @@ void __cdecl fcn_005797a0(char* a0)
 				else
 					io_FormatTextBuffer(line, 0x4223);
 			}
-			strcat(line, name);
+			strcat(text, line);
 		} else {
 			if (*row != 0x1f) {
 				io_FormatTextBuffer(text, 0x412f, 0x4128, 0x228, (void*) search);
@@ -163,8 +163,8 @@ void __cdecl fcn_005797a0(char* a0)
 		i = *(unsigned short*) (a0 + 8) * 0x21c;
 		if ((*(char*) (i + 0x7f4ca2) == 6 || *(char*) (i + 0x7f4ca2) == 7)
 			&& (count == 0 || (*(unsigned char*) (count + 0x1b4) & 1) == 0))
-			he_MessageBoxQuickjump(*(int*) (i + 0x7f4ca4), -1, 0, name, 0x5ec,
-				*(int*) (search + 1), -1, 0, text);
+			he_MessageBoxQuickjump(*(int*) (i + 0x7f4ca4), -1, text, 0, 0x5ec,
+				*(int*) (search + 1), -1, 0, name);
 	}
 	p8c = (unsigned int*) (a0 + 0x8c);
 	for (i = 0; i < 4; i++) {

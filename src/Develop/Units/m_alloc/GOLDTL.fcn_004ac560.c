@@ -15,7 +15,15 @@ typedef struct HistRec {
 } HistRec;
 /* SIZE 0x2c */
 
-int __cdecl fcn_004ac9c0(void* p);
+typedef struct HistPair {
+	int n0;
+	int n1;
+	HistRec* r0;
+	HistRec* r1;
+} HistPair;
+/* SIZE 0x10 */
+
+int __cdecl fcn_004ac9c0(HistPair* p);
 
 /* ADDRESS: GOLDTL 0x004ac560 */
 unsigned int __cdecl fcn_004ac560(void)
@@ -31,12 +39,11 @@ unsigned int __cdecl fcn_004ac560(void)
 	int i;
 	int id;
 	char* p;
+	HistPair hist;
 
 	GetModuleFileNameA(*(HMODULE*) 0x7e1f80, path, 0x104);
 	p = strrchr(path, '\\');
-	if (p != 0) {
-		p[1] = 0;
-	}
+	p[1] = 0;
 	strcat(path, "historical.ini");
 	GetPrivateProfileStringA("main", "kcnt", g_6b5c60, buf, 0x100, path);
 	kcnt = atoi(buf);
@@ -86,7 +93,11 @@ unsigned int __cdecl fcn_004ac560(void)
 		GetPrivateProfileStringA(key, "vname", g_6b5c60, val, 0x100, path);
 		strncpy(prec[i].vname, val, 0xf);
 	}
-	if (fcn_004ac9c0(&prec) != 0) {
+	hist.n0 = 0;
+	hist.n1 = kcnt;
+	hist.r0 = prec;
+	hist.r1 = krec;
+	if (fcn_004ac9c0(&hist) != 0) {
 		m_FreeTracked(krec);
 		m_FreeTracked(prec);
 		return 0xffffffff;

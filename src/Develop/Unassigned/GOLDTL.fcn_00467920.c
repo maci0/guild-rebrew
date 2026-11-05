@@ -539,7 +539,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 			x = fcn_0046b520(f.v3c, g_67d378);
 			fcn_0046bbc0(e[4] - x - 4, e[5] - n,
 				     (int) b, f.v3c, 0);
-			sprintf(f.v3c, str_67d444, f.v10);
+			sprintf(f.v3c, str_67d444, f.v24);
 			fcn_0046bbc0(e[4] + e[6] + 4, e[5] - n,
 				     (int) b, f.v3c, 0);
 		}
@@ -547,17 +547,14 @@ void __cdecl fcn_00467920(int a0, int a1)
 		/* 0x46882f: trailing text of the element */
 		if (*(char*) ((char*) e + 0xa8)) {
 			fcn_0047a040(0, 0, FLD(b, 4), FLD(b, 8));
-			*(int*) ((char*) e + 0x10) = 8;
+			/* Native 0x46884f mov byte [esp+0x30],8 clobbers the
+			 * flags low byte, so the test at 0x468885 (flags&0x80)
+			 * is always false natively and the 46b520 width arm
+			 * is dead. No record store exists natively. */
 			fcn_00472880(e[0x21] ? e[0x21] : g_67d398 + 1);
-			if (f.v20 & 0x80) {
-				n = fcn_0046b520((char*) e + 0xa8, g_67d398);
-				x = e[4] - n - 0x18;
-			}
-			else {
-				x = e[4] - 0xd;
-			}
+			x = e[4] - 0xd;
 			fcn_0046bd20(x, e[5] - 0x18, FLD(b, 8), (char*) e + 0xa8,
-				     0x20, f.v10, (int) b);
+				     0x20, 0x10, (int) b);
 		}
 
 		e[0x1d] = 0;
@@ -572,10 +569,10 @@ void __cdecl fcn_00467920(int a0, int a1)
 	/* 0x4688d7: gauge ends */
 	f.w8.f = (float) f.v24;
 	if (f.w8.f - f.v18 > 0.0f && !(f.v20 & 8)) {
-		g_102d024 = (int) (f.w8.f / (float) GLYPH_H(hs) + g_6628a0);
+		g_102d024 = (int) (f.w8.f / (float) GLYPH_H(h1) + g_6628a0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
 			y = e[5] + GLYPH_H(h0)
-			    + GLYPH_H(hs) * (f.w0.idx - 1);
+			    + GLYPH_H(h1) * (f.w0.idx - 1);
 			x = e[4] + (GLYPH_W(H3) - GLYPH_W(hs)) / 2;
 			fcn_0047cba0(x, y, a1, (char*) f.v14, 1);
 		}
@@ -584,11 +581,11 @@ void __cdecl fcn_00467920(int a0, int a1)
 	if ((f.v20 & 0x10) && f.wc.f > 0.0f) {
 		fcn_0047a040(e[4], e[5] + GLYPH_H(h0),
 			     e[4] + e[6], e[5] + e[7] - GLYPH_H(h0));
-		g_102d024 = (int) (f.wc.f / (float) GLYPH_H(hs) + g_6628a0);
+		g_102d024 = (int) (f.wc.f / (float) GLYPH_H(h1) + g_6628a0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
 			y = (int) ((float) e[7] - f.wc.f - (float) GLYPH_H(h0)
 				   + (float) (e[5]
-					      + GLYPH_H(hs) * f.w0.idx));
+					      + GLYPH_H(h1) * f.w0.idx));
 			x = e[4] + (GLYPH_W(H3) - GLYPH_W(hs)) / 2;
 			fcn_0047cba0(x, y, a1, (char*) f.v14, 4);
 		}
@@ -598,11 +595,11 @@ void __cdecl fcn_00467920(int a0, int a1)
 		f.v10 = e[5] + e[7] - GLYPH_H(h0);
 		fcn_0047a040(e[4], (int) ((float) GLYPH_H(h0) - f.v18),
 			     e[4] + e[6], f.v10);
-		g_102d024 = (int) (f.v18 / (float) GLYPH_H(hs) + g_6628a0);
+		g_102d024 = (int) (f.v18 / (float) GLYPH_H(h1) + g_6628a0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
 			y = (int) ((float) e[7] - f.v18 - (float) GLYPH_H(h0)
 				   + (float) (e[5]
-					      + GLYPH_H(hs) * f.w0.idx));
+					      + GLYPH_H(h1) * f.w0.idx));
 			x = e[4] + (GLYPH_W(H3) - GLYPH_W(hs)) / 2;
 			fcn_0047cba0(x, y, a1, (char*) f.v14, 1);
 		}

@@ -76,17 +76,23 @@ void __cdecl fcn_004fbdd0(void)
 	}
 	min = sum0;
 	index = 0;
-	if (sum1 < min) {
-		min = sum1;
+	if (sum1 > min) {
 		index = 1;
 	}
-	if (lit < min) {
-		min = lit;
+	else {
+		min = sum1;
+	}
+	if (lit > min) {
 		index = 2;
 	}
-	if (sum2 < min) {
-		min = sum2;
+	else {
+		min = lit;
+	}
+	if (sum2 > min) {
 		index = 3;
+	}
+	else {
+		min = sum2;
 	}
 	have = 0;
 	if (min > g_dbl_6628f0) {

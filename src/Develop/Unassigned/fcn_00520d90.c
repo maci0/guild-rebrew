@@ -15,6 +15,7 @@ typedef struct {
 	char f60[0xe];
 	char pad6e[2];
 	int f70;
+	char pad74[4];
 	unsigned char f78;
 	char pad79[3];
 	void* blob;

@@ -17,7 +17,7 @@ extern char g_10432c0[];
 extern void* g_14d0020[];
 extern int g_67a370;
 extern int g_6b8300;
-extern char g_662d70[];
+extern float g_662d70[];
 extern char s_67d67c[];
 extern char s_6a1c1c[];
 extern char s_6a1c30[];
@@ -117,7 +117,7 @@ void __cdecl init_LoadObjektScene(int a0)
 					obj = (char*) *p;
 					if (obj != 0
 					    && *(int*) (obj + 0x88) == (int) (g_10432c0 + slot * 4)) {
-						if (CompareVector3WithinTolerance((float*) (obj + 0x38), (float*) g_662d70, 0.5f) != 0) {
+						if (CompareVector3WithinTolerance((float*) (obj + 0x38), g_662d70, 0.5f) != 0) {
 							if ((*(int*) (obj + 0x124) != 0
 							     && (found = fcn_00445600(0, 0x100, 0, s_68b0f4)) != 0)
 							    || (found = fcn_00407330()) != 0

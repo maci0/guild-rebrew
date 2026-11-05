@@ -309,12 +309,7 @@ send:
 			fcn_0052a2d0();
 			fcn_00471e30(dlg);
 			fcn_00532ef0();
-			g_7ea360 = 0;
-			g_7746c0 = 0;
-			for (p = (char*) 0x7f4e28; (int) p < 0x85a228; p += 0x21c) {
-				*p = 0;
-			}
-			g_7746f0 = 0;
+			sv_ClearObjectSelection();
 			return;
 		}
 	}

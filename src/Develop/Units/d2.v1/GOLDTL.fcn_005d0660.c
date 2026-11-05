@@ -346,7 +346,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 					}
 				}
 
-				t0 = (*((int*) (&tabB[2].y))) & 0xffff;
+				t0 = (*((int*) (&tabB[2].x))) & 0xffff;
 				posY[1] = (((int) t0 - h - 0xa) / 2) + h + 0xa;
 				{
 					char* p;

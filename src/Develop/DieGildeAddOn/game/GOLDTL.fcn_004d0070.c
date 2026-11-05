@@ -149,7 +149,7 @@ void __cdecl fcn_004d0070(void)
 				e34 = o + 0x34;
 				g34 = *(char**) (g + 0x184) + 0x34;
 				if (CompareVector3WithinTolerance((float*) (e34 + 0x4c), (float*) (g34 + 0x4c), 10.0f) == 0) {
-					v = fcn_00444700((char*) (e34 + 0x4c), (float*) (g34 + 0x4c));
+					v = fcn_00444700(e34, (float*) (g34 + 0x4c));
 					s = (char*) *(int*) (o + 0x128);
 					if (s == 0 || (*(char*) (s + 9) != 0x2d && *(char*) (s + 9) != 0x3a)) {
 						if (g_664ee8 < (double) fabs(v)) {

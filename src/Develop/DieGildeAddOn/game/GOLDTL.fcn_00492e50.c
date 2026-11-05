@@ -81,7 +81,7 @@ int __cdecl fcn_00492e50(Cmd92e50* a, char* b)
 			return 3;
 		}
 		n = 6 - count;
-		if (!(v - (float) v2 * 3.5f < (float) n)) {
+		if (!(v - (float) v2 * 3.5f <= (float) n)) {
 			return 4;
 		}
 		return 3;

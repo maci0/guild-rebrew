@@ -14,6 +14,7 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 	int r1;
 	int idx5;
 	int idx4;
+	int idx5idx;
 	unsigned int mode;
 	int kind;
 	int e;
@@ -92,6 +93,7 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 				p += 0x300;
 			}
 		} else {
+			idx5idx = idx4;
 			idx4 = 0;
 			for (i = 0; i < 0x65400; i += 0x21c) {
 				if (SLOT_DWORD(i) == r1) {
@@ -108,9 +110,9 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 			if (SLOT_WORD(idx4 * 0x21c) == 0xffff) {
 				return 1;
 			}
-			p = (char*) (0x869480 + idx4 * 0x300);
+			p = (char*) (0x869480 + idx4 * 0x300 + idx5idx);
 			if (kind == 2) {
-				*(unsigned char*) ((char*) 0x90e0a0 + idx4 * 0x300) = 0;
+				*(unsigned char*) ((char*) 0x90e0a0 + idx4 * 0x300 + idx5idx) = 0;
 				v = *(signed char*) p + t[6];
 				if (v <= -0x7f) {
 					v = -0x7f;
@@ -129,13 +131,13 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 				if (t[6] >= 0) {
 					v = v / 2;
 				}
-				v += *(signed char*) ((char*) 0x90e0a0 + idx4 * 0x300);
+				v += *(signed char*) ((char*) 0x90e0a0 + idx4 * 0x300 + idx5idx);
 				if (v <= -0x7f) {
-					*(unsigned char*) ((char*) 0x90e0a0 + idx4 * 0x300) = 0x81;
+					*(unsigned char*) ((char*) 0x90e0a0 + idx4 * 0x300 + idx5idx) = 0x81;
 				} else if (v >= 0x7f) {
-					*(unsigned char*) ((char*) 0x90e0a0 + idx4 * 0x300) = 0x7f;
+					*(unsigned char*) ((char*) 0x90e0a0 + idx4 * 0x300 + idx5idx) = 0x7f;
 				} else {
-					*(signed char*) ((char*) 0x90e0a0 + idx4 * 0x300) = (signed char) v;
+					*(signed char*) ((char*) 0x90e0a0 + idx4 * 0x300 + idx5idx) = (signed char) v;
 				}
 			} else if (kind == 0) {
 				v = *(signed char*) p + t[6];

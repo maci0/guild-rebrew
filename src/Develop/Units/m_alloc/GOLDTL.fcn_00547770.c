@@ -514,7 +514,7 @@ void __cdecl fcn_00547770(void)
                     lvl = fcn_00507400(7, 3);
                 }
             } else {
-                if (cnt[5] < 2) {
+                if (cnt[5] < 1) {
                     e2 = fcn_0050d170(0xe) * 2;
                     lvl = fcn_00507400(9, 1);
                 } else {
@@ -594,8 +594,8 @@ void __cdecl fcn_00547770(void)
                 r = (u2)((r + 1) % 3);
             }
         }
-        v = 0;
         for (j = 0; j < 3; j++) {
+            v = 0;
             if ((sel & (1 << j)) == 0) {
                 continue;
             }

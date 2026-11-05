@@ -166,7 +166,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 			memset(&rec, 0, sizeof(rec));
 			rec.kind = 0x74;
 			rec.x36 = 2;
-			rec.x8 = *(int*) (g_7f4ca4 + (*(unsigned short*) &g_774970) * 540 - 4);
+			rec.x8 = *(int*) (g_7f4ca4 + (*(unsigned short*) &g_774970) * 540);
 			rec.xc = *(int*) (a0 + 1);
 			rec.x28 = g_7f4c00;
 			rec.x2c = g_7f4c04;

@@ -80,20 +80,31 @@ int __cdecl fcn_00509620(int a0, int a1)
 	rec_a.is_active = p->is_active;
 	rec_a.current_building = p->current_building;
 
+	/* Native stores p->age at rec_a+0x164 only on the rank==0 path
+	 * (0x5097cd) and on the opposite-stat jge path (0x5097be). On the
+	 * found==NULL (0x50976e -> 0x5097d4), level==0 (0x509784 -> 0x5097d4)
+	 * and jl paths there is no store, so rec_a.age keeps the q copy.
+	 * The 0x4fd9d0 state argument is rec_a.age (reloaded as a dword at
+	 * 0x509800 and masked 0xff), so state must default to q->age; the
+	 * production form left it uninitialized on those three paths. */
+	state = q->age;
 	rank = gm_MapEntityStatRange(q->age);
 	if (rank != 0) {
 		found = gm_GetEntityTableEntry(p);
 		if (found != 0) {
 			item = (char*) gm_CheckStatLevel(p->entity_index, rank);
 			if (item != 0) {
-				if (gm_GetOppositeStatIndex(q->age) <= gm_GetOppositeStatIndex((int) item))
+				if (gm_GetOppositeStatIndex(q->age) <= gm_GetOppositeStatIndex((int) item)) {
 					state = p->age;
-				else
+					rec_a.age = p->age;
+				} else {
 					*(char*) ((char*) found + 0x74 + rank) = q->age;
+				}
 			}
 		}
 	} else {
 		state = p->age;
+		rec_a.age = p->age;
 	}
 
 	name = (char*) &rec_a + 0x1f4;

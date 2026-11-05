@@ -72,8 +72,7 @@ void __cdecl fcn_0054c240(u8* o)
             id2 = *((u32*)(p + 1));
         else
             id2 = -1;
-        fcn_004f4f60(id2, *((u32*)(o + 0xbc)),
-                      *((u32*)(0x7f4ca4 + k)), 1, 3);
+        fcn_004f4f60(3, 1, *((u32*)(0x7f4ca4 + k)), *((u32*)(o + 0xbc)), id2);
     }
 
     *((u32*)(o + 0xc4)) = (u32)(gm_RandomMod(0x300) & 0xffff);

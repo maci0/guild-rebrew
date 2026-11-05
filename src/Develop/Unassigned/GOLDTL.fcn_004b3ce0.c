@@ -1,10 +1,10 @@
-
 /* ADDRESS: GOLDTL 0x004b3ce0 */
 int* __cdecl fcn_004b3ce0(int a0, int* a1)
 {
 	int i;
 	int* p;
 	char* end;
+	char* q;
 
 	if (a1 == 0) {
 		i = 0;
@@ -31,7 +31,7 @@ int* __cdecl fcn_004b3ce0(int a0, int* a1)
 			return p;
 		}
 		p = (int*) ((char*) p + 0x1c);
-	} while ((char*) p <= (char*) 0x6810f4);
+	} while ((char*) p <= end);
 	return 0;
 }
 unsigned char _dpad_67fca0[3888] = {

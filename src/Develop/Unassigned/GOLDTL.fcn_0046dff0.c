@@ -2,6 +2,8 @@ extern char* g_1015ea0;
 extern char* g_772500;
 extern int g_1040490;
 extern int g_1040494;
+extern int g_67d3a0;
+extern int g_67d3a4;
 
 void __cdecl fcn_0046c5a0(int, int);
 void __cdecl fcn_0046c310(int);
@@ -108,7 +110,7 @@ void __cdecl fcn_0046dff0(int a0, int a1)
 		y = *(int*) (b + 8);
 		w = *(int*) (b + 0xc);
 		h = *(int*) (b + 0x10);
-		if (rec != 0x67d3a0 && rec != 0x67d3a4) {
+		if (rec != g_67d3a0 && rec != g_67d3a4) {
 			horiz = *(short*) (g_772500 + 0x50 + rec * 0x54);
 			vert = *(short*) (g_772500 + 0x52 + rec * 0x54);
 			fcn_0047cba0(x, y, a1, surf, 0);

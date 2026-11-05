@@ -35,6 +35,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 	if (a5) {
 		r = SET_MODE(0x1c);
 		if (r >= 0) {
+			r = 0x1c;
 			*(int*) 0x6b89b8 = r;
 			goto chosen;
 		}
@@ -44,6 +45,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		}
 		r = SET_MODE(0x19);
 		if (r >= 0) {
+			r = 0x19;
 			*(int*) 0x6b89b8 = r;
 			goto chosen;
 		}
@@ -53,6 +55,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		}
 		r = SET_MODE(0x1a);
 		if (r >= 0) {
+			r = 0x1a;
 			*(int*) 0x6b89b8 = r;
 			goto chosen;
 		}
@@ -62,6 +65,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		}
 		r = SET_MODE(0x1d);
 		if (r >= 0) {
+			r = 0x1d;
 			*(int*) 0x6b89b8 = r;
 			goto chosen;
 		}
@@ -71,6 +75,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		}
 		r = SET_MODE(0x15);
 		if (r >= 0) {
+			r = 0x15;
 			*(int*) 0x6b89b8 = r;
 			goto chosen;
 		}
@@ -80,6 +85,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		}
 		r = SET_MODE(0x1f);
 		if (r >= 0) {
+			r = 0x1f;
 			*(int*) 0x6b89b8 = r;
 			goto chosen;
 		}

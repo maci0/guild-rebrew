@@ -202,6 +202,7 @@ int __cdecl fcn_005ba910(int a1, int a2)
 	int j;
 	int h;
 	int slot_value;
+	int slot_off;
 	Ent5ba910* e;
 
 	f.v158 = 0;
@@ -1122,7 +1123,7 @@ l_5bc253:
 		if (a2 == 2 || a2 == 4) {
 			i = (int) fcn_0050bb50(slot_value, (int) (*(unsigned char*) (f.v14 + 0x65)));
 		}
-		f.v10 = i;
+		slot_off = i;
 		idx = 1;
 		if (f.v34 != 0
 		    && fcn_00502cd0(*(int*) (f.v34 + 0x14), 1, 0, slot_value) == 0) {
@@ -1158,7 +1159,7 @@ l_5bc253:
 			continue;
 		}
 		fcn_004c51f0(*(int*) (f.v18 + 2), *(int*) (f.v98 + 2), slot_value, idx,
-		             f.v34, (int) (*(float*) &f.v10 * *(float*) &f.v64));
+		             f.v34, (int) (*(float*) &slot_off * *(float*) &f.v64));
 		if (*(float*) &f.v64 == 1.0f) {
 			fcn_0051af00((int) (f.v210 + 0x238), 0xed,
 			             (int) (*(float*) &f.v28 * *(float*) &f.v64

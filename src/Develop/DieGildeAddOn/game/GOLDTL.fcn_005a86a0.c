@@ -126,10 +126,10 @@ void __cdecl fcn_005a86a0(void* a0)
 		fcn_005e6840(*(void**) 0x7746c8);
 		break;
 	case 0x27f:
-		fcn_005e68e0(*(void**) 0x7746c8);
+		fcn_005e6950(*(void**) 0x7746c8);
 		break;
 	case 0x28a:
-		fcn_005e6950(*(void**) 0x7746c8);
+		fcn_005e68e0(*(void**) 0x7746c8);
 		break;
 	default:
 		fcn_0058f700(a0);

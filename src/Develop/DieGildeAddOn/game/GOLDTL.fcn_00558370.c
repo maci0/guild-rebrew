@@ -8,7 +8,7 @@ extern void __cdecl fcn_004432d0(int a0, int a1);
 extern void __cdecl fcn_00455350(int a0, int a1, float *a2);
 extern float __cdecl fcn_004514d0(float *a0, float *a1);
 extern int __cdecl fcn_00442910(int a0, float *a1, float *a2, char *a3);
-extern void __cdecl fcn_00412f10(int a0, char *a1);
+extern void __cdecl fcn_00412f10(int a0, char *a1, int a2);
 
 typedef struct
 {
@@ -109,7 +109,7 @@ int __cdecl fcn_00558370(int a0)
         *(unsigned char *)(v5 + 0x214) = *(unsigned char *)(v5 + 0x214) & 0x7f;
         *(unsigned char *)(v5 + 0x216) = *(unsigned char *)(v5 + 0x216) | 3;
         *(unsigned char *)(v5 + 0x217) = *(unsigned char *)(v5 + 0x217) & 0xfe;
-        fcn_00412f10(v5, (char *)0x6a5fb4);
+        fcn_00412f10(v5, (char *)0x6a5fb4, 1);
         *(int *)(v3 + 0xec) = g_6b7fac;
         fcn_004432d0(v2, 1);
         return 1;

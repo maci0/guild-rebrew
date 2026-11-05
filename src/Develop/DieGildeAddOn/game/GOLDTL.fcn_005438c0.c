@@ -381,7 +381,7 @@ void __cdecl fcn_005438c0(int a0)
 				if ((*(char*) (p + 6) != 0) &&
 				    ((*(char*) p == 6) || (*(char*) p == 7))) {
 					c = fcn_0050b750(n, g_773d75);
-					fcn_004c5150(c, g_773d75, -1, *(int*) (p + 2));
+					fcn_004c5150(*(int*) (p + 2), -1, g_773d75, c);
 				}
 				p += 0x21c;
 			} while (p < 0x85a0a2);
@@ -574,7 +574,7 @@ void __cdecl fcn_005438c0(int a0)
 			r2.w = *(int*) 0x7f4c08;
 			r2.h = *(short*) 0x7f4c0c;
 			while ((unsigned short) r2.y < 0x17) {
-				fcn_00500bb0(&r2, 0x1e, 0, 0);
+				fcn_00500bb0(&r2, 0, 0x1e, 0);
 				x = fcn_004c5700(&r2);
 				while (fcn_004c4450(x) == 0) {
 					fcn_00535960();
@@ -604,7 +604,7 @@ l_gate:
 			r1.w = *(int*) 0x7f4c08;
 			r1.h = *(short*) 0x7f4c0c;
 			while ((unsigned short) r1.y < 0x17) {
-				fcn_00500bb0(&r1, 0x1e, 0, 0);
+				fcn_00500bb0(&r1, 0, 0x1e, 0);
 				x = fcn_004c5700(&r1);
 				while (fcn_004c4450(x) == 0) {
 					fcn_00535960();

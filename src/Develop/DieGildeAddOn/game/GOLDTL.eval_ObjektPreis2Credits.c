@@ -57,7 +57,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int a1)
     if (v6) {
         acc = g_6628a8;
         for (i = 0; i < 2; i++) {
-            acc += g_entity_type_table[v6 + v6 * 0x24d + 0x233 + i] *
+            acc += g_entity_type_table[v6 * 0x24d + 0x233 + i] *
                    g_665be0 * g_665bd8;
         }
     } else {
@@ -79,7 +79,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int a1)
                     + price;
         } else {
             sprintf(buf,
-                    "eval_ObjektPreis2Credits:Unterobjekt f\x81r"
+                    "eval_ObjektPreis2Credits:Unterobjekt f\xfcr"
                     " '%s' nicht vorhanden!!!",
                     g_14a79c0[id * 2]);
         }

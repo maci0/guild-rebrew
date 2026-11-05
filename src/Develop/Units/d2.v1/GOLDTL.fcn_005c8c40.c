@@ -164,7 +164,7 @@ void __cdecl fcn_005c8c40(void)
 		if (v4 != -1) {
 			fcn_00471e30(v4);
 		}
-		fcn_0057e880(0x13, 0, 0, 0);
+		fcn_0057e880(0x13, 0, 1, 0);
 		return;
 	}
 }

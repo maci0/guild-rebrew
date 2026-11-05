@@ -8,6 +8,7 @@ extern int g_14ce8c0;
 extern int g_14ce8c2;
 extern int g_14cf900;
 extern int g_14cf902;
+extern int g_6772c4;
 
 int __stdcall ClientToScreen(int hwnd, int* pt);
 int __stdcall SetCursorPos(int x, int y);
@@ -56,8 +57,9 @@ void __cdecl fcn_004123a0(void)
 		g_14ce8d8 = 0;
 		g_14ce8d0 = 0;
 	}
-	dx = g_14ce920 + state[0];
-	dy = (int) (*(short*) (state + 1) + *(short*) &g_14ce922);
+	g_6772c4 = 1;
+	dx = (short) (g_14ce920 + state[0]);
+	dy = (short) (*(short*) (state + 1) + *(short*) &g_14ce922);
 	*(short*) &g_14ce8c0 = (short) dx;
 	*(short*) &g_14cf900 = (short) dx;
 	*(short*) &g_14ce8c2 = (short) dy;

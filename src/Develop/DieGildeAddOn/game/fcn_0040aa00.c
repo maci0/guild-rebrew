@@ -124,8 +124,8 @@ void __cdecl fcn_0040aa00(char* obj)
 				fcn_00402aa0(inst);
 			}
 			p = fcn_00404dc0(inst,
-			                 *(int*) (obj + 0x124) != 0 ? "bewegung/karren_ziehen"
-			                                            : "bewegung/gehen",
+			                 *(int*) (inst + 0x124) != 0 ? "bewegung/karren_ziehen"
+			                                             : "bewegung/gehen",
 			                 1);
 			*(char**) (inst + 0x70) = p;
 			if (p == 0) {

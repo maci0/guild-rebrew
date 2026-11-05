@@ -74,7 +74,7 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 		ent = *(char**) (0x7e4260 + i * 4);
 		if (ent != 0 && (info = *(char**) (ent + 0x184)) != 0
 		    && *(int*) (info + 0x2c) == *(int*) (a0 + 1)
-		    && *(char*) (ent + 8) > 0
+		    && *(unsigned char*) (ent + 8) != 0
 		    && *(int*) (info + 0x88) == g_67a370) {
 			mode = 0;
 			job[0] = 0;
@@ -99,7 +99,7 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 					}
 				}
 				else {
-					if (c == 8 && g_7746cc != 0 && *(unsigned short*) g_7746cc == 0xdd
+					if (c == 8 && *(unsigned short*) g_7746cc == 0xdd
 					    && *(char*) (ent + 0x180) == 0x15) {
 						goto flag_on;
 					}

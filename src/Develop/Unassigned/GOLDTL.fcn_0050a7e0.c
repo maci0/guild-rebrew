@@ -462,8 +462,8 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         F(slot, 0x1c) = decay;
     }
     fcn_004fdfe0(slot);
-    ahm_ResetEntityState(slot);
     memset(slot + 0x1b4, 0, 0x10);
+    ahm_ResetEntityState(slot);
     if (B(slot, 2) == 3 || B(slot, 2) == 2 || B(slot, 2) == 4 || B(slot, 2) == 0x13) {
         rnd = gm_RandomMod(3) & 0xffff;
         B(slot, 0x82 + rnd) = (char) (B(slot, 0x82 + rnd) + 0x2a);

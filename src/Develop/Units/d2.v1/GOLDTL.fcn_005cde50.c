@@ -37,7 +37,10 @@ void __cdecl fcn_005cde50(void (*a0)(int), int a1, int a2)
 	dlg = fcn_00470820(0, 0, s_6ac994);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 2);
-	io_AppendText(a1 ? a1 : 0xa2);
+	if (a1)
+		io_AppendText(a1);
+	else
+		io_AppendText(0xa2);
 	d2_SetForm(dlg, 1);
 	btn[0] = fcn_0046f740(0x10f, 0x25, 0x599, g_772514);
 	btn[1] = fcn_0046f740(0x10f, 0x93, 0x58d, g_772514);

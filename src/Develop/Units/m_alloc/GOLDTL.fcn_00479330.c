@@ -6,7 +6,7 @@ void __cdecl fcn_00477560(int*, int*);
 int* __cdecl fcn_00479330(int* src)
 {
 	int* in;
-	int* out;
+	char* out;
 	int j;
 	int i;
 	int k;

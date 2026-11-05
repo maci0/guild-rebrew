@@ -138,7 +138,7 @@ stock_done:
 				*(int*) (g_7f4ca4 +
 				         *(unsigned short*) (o + 0x27) * 0x21c),
 				*(int*) (o + 1), (char) g_773d75,
-				(int) (total * 2.25 - t));
+				(int) (t - total * 2.25));
 		}
 	}
 	*(int*) (e + 0x1c8) |= 8;

@@ -126,5 +126,5 @@ void __cdecl main_RundenBeginn(void)
 			*(int*) (disp + 0x31) + 4 + fcn_00546fb0(*(unsigned short*) slot));
 next:
 		slot += 0x21c;
-	} while ((int) slot <= (int) 0x85a0a1);
+	} while ((int) slot <= (int) 0x85a09f);
 }

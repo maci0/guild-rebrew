@@ -1,6 +1,7 @@
 #include <string.h>
 
 #include "client_types.h"
+#include "g_7f4ca2.h"
 
 extern unsigned short g_774970;
 extern unsigned char g_774964;
@@ -17,6 +18,7 @@ extern int g_14ce8d8;
 extern int g_6b5c8c;
 extern int g_6b7fc0;
 extern pos14_7f4c00 g_7f4c00;
+extern Slot7f4ca2 g_7f4ca2[768];
 extern int g_7f4ca4;
 
 int __cdecl fcn_00500cb0(void*, void*);
@@ -37,6 +39,16 @@ int __cdecl fcn_00503fe0(int, int, int);
 void __cdecl fcn_00526920(char*, int, char*);
 void __cdecl fcn_004116d0(void);
 void __cdecl fcn_00545780(char*);
+
+/* ADDRESS: GOLDTL 0x0055f590 */
+void __cdecl fcn_0055f590(char* e)
+{
+    *(int*) (e + 0x70) = 0;
+    *(int*) (e + 0xec) = 0;
+    if (g_7f4ca2[*(unsigned short*) (e + 8)].kind == 6)
+        return;
+    fcn_00546190(e);
+}
 
 /* One stage of the event message-box tick; state lives at +0x70. */
 /* ADDRESS: GOLDTL 0x0055f5c0 */

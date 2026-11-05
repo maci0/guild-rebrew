@@ -26,8 +26,8 @@ void __cdecl fcn_0050bc10(int value, unsigned char mode, char* dst)
 			}
 			itoa(scaled, digits, 10);
 			n = strlen(digits);
-			p = (int) ((double) (strlen(digits) - 1) * *(float *) 0x662a68
-				+ (double) n);
+			p = (int) ((double) (strlen(digits) - 2) * *(float *) 0x662a68
+				+ (strlen(digits) - 1));
 			c = text + p;
 			written = -1;
 			for (i = strlen(digits); i >= 0; i--) {
@@ -51,8 +51,8 @@ void __cdecl fcn_0050bc10(int value, unsigned char mode, char* dst)
 	} else {
 		itoa(scaled, digits, 10);
 		n = strlen(digits);
-		p = (int) ((double) (strlen(digits) - 1) * *(float *) 0x662a68
-			+ (double) n);
+		p = (int) ((double) (strlen(digits) - 2) * *(float *) 0x662a68
+			+ (strlen(digits) - 1));
 		c = text + p;
 		written = -1;
 		for (i = strlen(digits); i >= 0; i--) {

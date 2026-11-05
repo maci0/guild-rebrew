@@ -35,6 +35,8 @@ void __cdecl fcn_005513d0(char* a0)
 	if (rec == 0 || rec[8] == 0 || entry[8] == 0)
 		goto tail;
 	state = *(int*) (a0 + 0x70);
+	if (state == -2)
+		goto tail;
 	if (state != 0) {
 		if (state != 1)
 			return;

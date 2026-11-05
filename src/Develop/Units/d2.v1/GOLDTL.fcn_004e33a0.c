@@ -79,6 +79,7 @@ void __cdecl fcn_004e33a0(int* arg)
 	int other;
 	int found;
 	int foundName;
+	int cur;
 	int j;
 	void* npc2;
 
@@ -278,9 +279,10 @@ void __cdecl fcn_004e33a0(int* arg)
 					break;
 				}
 			}
+			cur = *(int*) 0x7f4c00;
 			fcn_004c4510((char*) npc, *(int*) ((char*) npc + 1));
 			fcn_004c4570(4, 1, 0x69, &done);
-			fcn_004c4570(4, 1, 0x6d, &round);
+			fcn_004c4570(4, 1, 0x6d, &cur);
 			fcn_004c5360();
 			fcn_004c5f60(*(int*) ((char*) npc + 1),
 			    *(int*) (*(int*) 0x773da8 + 4),

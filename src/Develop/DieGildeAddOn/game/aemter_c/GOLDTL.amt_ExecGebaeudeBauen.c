@@ -50,8 +50,8 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 	}
 	v3 = *(unsigned int*) (a2 + 4);
 	*(int*) v8 = g_6798d4;
-	strcat(v8 + 8, (char*) (lpGebaeudePROT + *(int*) (a1 + 4) * 0x24d + 1));
-	_strupr(v8 + 10);
+	strcat(v8, (char*) (lpGebaeudePROT + *(int*) (a1 + 4) * 0x24d + 1));
+	_strupr(v8 + 2);
 	v4 = 0;
 	for (;;) {
 		if (v4) {

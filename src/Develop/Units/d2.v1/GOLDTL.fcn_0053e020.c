@@ -57,7 +57,7 @@ int __cdecl fcn_0053e020(void)
 	if (*(unsigned char*) 0x6a375c > 1) {
 		v13 = fcn_00472250(v2, 0, io_AppendText(0x681164, 2, 0x1acb));
 	}
-	if (*(int*) 0x776700 > -1) {
+	if (*(int*) 0x776700 <= -1) {
 		*(int*) 0x776700 = -1;
 	}
 	v7 = d2_CreateRadioGroup(4, v4, v5, v6, v3);
@@ -110,7 +110,6 @@ int __cdecl fcn_0053e020(void)
 					*(int*) 0x6a37f8 = fcn_005268c0(*(int*) 0x14abf04, 0);
 					if (fcn_0053c560(0) == 0) {
 						fcn_004432d0(0, 0);
-						v12 = 0;
 						v1 = 1;
 					}
 				} else if (r == 0) {

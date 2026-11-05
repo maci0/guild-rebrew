@@ -176,10 +176,10 @@ void __cdecl fcn_0044fc70(char* name, char flag)
 	}
 	obj->anzahl_poi = info.anzahl_poi;
 	obj->poi = (FL_POI*) m_alloc((info.anzahl_poi * 3 + 0x18) * 8, "d3_io_fs:AddFLChunk(poi)");
-	sina = (float) sin(-1.5707963267948966);
-	cosa = (float) cos(-1.5707963267948966);
-	sinb = (float) sin(3.14159265358979323846);
-	cosb = (float) cos(3.14159265358979323846);
+	sina = (float) sin(-1.5707963705062866);
+	cosa = (float) cos(-1.5707963705062866);
+	sinb = (float) sin(3.1415927410125732);
+	cosb = (float) cos(3.1415927410125732);
 	for (i = 0; i < obj->anzahl_poi; i++) {
 		vx = info.poi[i].pos[0];
 		vy = cosa * info.poi[i].pos[1] - sina * info.poi[i].pos[2];

@@ -29,6 +29,8 @@ int __cdecl fcn_004b19c0(void)
 	stamp = *(stamp14*) &g_7f4c00;
 	mode = 0xc;
 	stamp.v[2] = (short) mode;
+	stamp.v[3] = 0;
+	stamp.v[4] = 0;
 	rec = (char*) 0x7f4ca4;
 	while (sent < 8 && (int) rec < 0x85a0a4) {
 		if (fcn_004ae210(n) != 0) {

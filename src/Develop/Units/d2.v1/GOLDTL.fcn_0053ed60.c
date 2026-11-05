@@ -61,6 +61,7 @@ void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_0053e9a0(void);
 int __cdecl fcn_0053dc20(void);
 int __cdecl fcn_004130b0(char*, char*);
+void __cdecl fcn_00471e30(int);
 void __cdecl d3_DestroyObject(char*);
 void __cdecl fcn_00412cf0(char*, float*, float*, int, int);
 
@@ -95,17 +96,17 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	int highlight;
 	int prev;
 
+	obj = 0;
+	result = 0;
+	highlight = -1;
+	prev = 0;
+	sel = 0;
 	fcn_00533880();
 	fcn_005338a0();
 	fcn_004432d0(0, 0);
 	fcn_00438b40(g_6b8014, (int*) (g_6b8014 + 0x5c));
 	fcn_00438cb0(g_6b8014, (int*) (g_6b8014 + 0x90));
 	fcn_00445f50(0, 0, 1.0f, 0);
-	obj = 0;
-	result = 0;
-	highlight = -1;
-	prev = 0;
-	sel = 0;
 	count = fcn_005dfa40((char*) 0x6a3778, network == 0 ? (char*) 0x6a41b8 : (char*) 0x6a41b0, path);
 	for (i = 0; i < count; i++) {
 		h = vfs_Tfopen(names[i], (char*) 0x6750e8, g_6b7fdc);
@@ -164,6 +165,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	d2_SetForm(win2, 2);
 	fcn_00533a60(g_772514, 0, ids, 2, g_14b5e50, g_14b5e54);
 	while (fcn_005373e0((void*) fcn_0053ed60, 0x10d6) != 0) {
+		g_7746a0 = 0;
 		image = fcn_00443bf0((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
 		g_7746a4 = image;
 		if (g_14ce8cc != 0) {

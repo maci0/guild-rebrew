@@ -36,7 +36,6 @@ unsigned int __cdecl fcn_00444ff0(int a0, int* a1)
 	int j;
 	int px;
 	int py;
-	int zero;
 
 	if (*(int*) (a0 + 0x1ec) == 0)
 		return 1;
@@ -60,7 +59,6 @@ unsigned int __cdecl fcn_00444ff0(int a0, int* a1)
 	}
 	if (index >= count)
 		return 1;
-	zero = 0;
 	one = 1.0f;
 	fcn_00438100(a0, g_6b8014, 0);
 	total = *(int*) (model + 0x44);
@@ -94,7 +92,7 @@ unsigned int __cdecl fcn_00444ff0(int a0, int* a1)
 				f = verts + i * 6;
 				fcn_005eb2e4(f, src, g_1052be0, g_1052c00, &one,
 					(void*) (*(int*) (a0 + 0x1ec) + 0x48));
-				fcn_005eb225(f + 3, (unsigned int*) &zero,
+				fcn_005eb225(f + 3, src,
 					(void*) (*(int*) (a0 + 0x1ec) + 0x48));
 			}
 		}

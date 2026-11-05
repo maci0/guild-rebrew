@@ -1,14 +1,41 @@
-/* Entity slot-walk arm: scans the 16-entry (stride 0x1c) block at entity+0x1a4
- * downwards for the first entry with a non-zero id at +0xc and owner != -1,
- * records that slot index and bails when none is found. The remainder
- * (0x5a5206-0x5a5439: per-slot setup and the 0x5a5430 exit) is not
- * transcribed yet. */
+#include <string.h>
+
+void __cdecl fcn_00469c40(int, int, int);
+
+/* Slot scan + descending name sort + exit-loop render.
+ * Return contract: int, returns 0. Native leaves EAX as leftover (no
+ * xor eax on any exit); the sole observed caller at 0x005a5744 ignores
+ * EAX (overwrites at 0x005a574c). Return 0 documented as scoped
+ * limitation, not native-evidenced void. */
 /* ADDRESS: GOLDTL 0x005a51c0 */
 int __cdecl fcn_005a51c0(unsigned char* entity)
 {
 	int* p;
 	int i;
 	int slot;
+	int k;
+	int j;
+	int remaining;
+	char* slot_ptr;
+	char* prev_ptr;
+	char* next_field;
+	char* next_record;
+	unsigned short sort_key;
+	int slot_val;
+	unsigned char* byte_idx;
+	int cl;
+	char name_a[0x80];
+	char name_b[0x80];
+	char tmp[0x1c];
+	int* gbase;
+	int* obj_tbl;
+	int off;
+	int count;
+	char* str;
+	unsigned char* dst;
+	unsigned char* src;
+	int c;
+	int cmp;
 
 	slot = 0;
 	p = (int*) (entity + 0x1a4);
@@ -19,8 +46,109 @@ int __cdecl fcn_005a51c0(unsigned char* entity)
 		}
 		p = (int*) ((char*) p - 0x1c);
 	}
-	if (slot <= 0) {
+	if (slot <= 0)
 		return 0;
+	slot_ptr = (char*) entity + 0xc;
+	for (k = 1; k < slot; k++) {
+		remaining = slot - k;
+		prev_ptr = slot_ptr - 0xc;
+		next_field = slot_ptr + 0x1c;
+		j = remaining;
+		while (j > 0) {
+			byte_idx = (unsigned char*) 0x773d75;
+			cl = *byte_idx;
+			sort_key = *(unsigned short*) (0x8680b4 + cl * 0x2f4);
+			slot_val = *(int*) slot_ptr;
+			if (slot_val == (int) sort_key) {
+				*(int*) name_a = *(int*) 0x6aac64;
+				*(int*) (name_a + 4) = *(int*) 0x6aac68;
+				*(unsigned short*) (name_a + 8) = *(unsigned short*) 0x6aac6c;
+			} else if (slot_val == 0) {
+				*(int*) name_a = *(int*) 0x6aac58;
+				*(int*) (name_a + 4) = *(int*) 0x6aac5c;
+				*(unsigned short*) (name_a + 8) = *(unsigned short*) 0x6aac60;
+			} else {
+				str = *(char**) (0x14a79c0 + slot_val * 8);
+				dst = (unsigned char*) name_a;
+				src = (unsigned char*) str;
+				do {
+					c = *src;
+					*dst = (unsigned char) c;
+					dst++;
+					src++;
+				} while (c != 0);
+			}
+			slot_val = *(int*) next_field;
+			if (slot_val == (int) sort_key) {
+				*(int*) name_b = *(int*) 0x6aac64;
+				*(int*) (name_b + 4) = *(int*) 0x6aac68;
+				*(unsigned short*) (name_b + 8) = *(unsigned short*) 0x6aac6c;
+			} else if (slot_val == 0) {
+				*(int*) name_b = *(int*) 0x6aac58;
+				*(int*) (name_b + 4) = *(int*) 0x6aac5c;
+				*(unsigned short*) (name_b + 8) = *(unsigned short*) 0x6aac60;
+			} else {
+				str = *(char**) (0x14a79c0 + slot_val * 8);
+				dst = (unsigned char*) name_b;
+				src = (unsigned char*) str;
+				do {
+					c = *src;
+					*dst = (unsigned char) c;
+					dst++;
+					src++;
+				} while (c != 0);
+			}
+			cmp = 0;
+			{
+				unsigned char* pa;
+				unsigned char* pb;
+				pa = (unsigned char*) name_a;
+				pb = (unsigned char*) name_b;
+				for (;;) {
+					unsigned char da;
+					unsigned char db;
+					da = *pa;
+					db = *pb;
+					if (da != db) {
+						cmp = (da > db) ? 1 : -1;
+						break;
+					}
+					if (da == 0) {
+						cmp = 0;
+						break;
+					}
+					pa++;
+					pb++;
+				}
+			}
+			if (cmp == 1) {
+				next_record = next_field - 0xc;
+				memcpy(tmp, prev_ptr, 0x1c);
+				memcpy(prev_ptr, next_record, 0x1c);
+				memcpy(next_record, tmp, 0x1c);
+			}
+			next_field += 0x1c;
+			j--;
+		}
+		slot_ptr += 0x1c;
+	}
+	p = (int*) entity;
+	off = 0;
+	count = slot;
+	while (count > 0) {
+		int owner;
+		int rec1;
+		owner = p[0];
+		rec1 = p[1];
+		if (owner != -1) {
+			gbase = *(int**) 0x77255c;
+			obj_tbl = *(int**) 0x1015ea0;
+			fcn_00469c40(*(int*) ((char*) obj_tbl + owner * 0x2f4 + 0x10), *(int*) ((char*) gbase + 8) + off, owner);
+			fcn_00469c40(*(int*) ((char*) obj_tbl + rec1 * 0x2f4 + 0x10), *(int*) ((char*) gbase + 8) + off + 0x30, rec1);
+			off += 0x4c;
+		}
+		p = (int*) ((char*) p + 0x1c);
+		count--;
 	}
 	return 0;
 }

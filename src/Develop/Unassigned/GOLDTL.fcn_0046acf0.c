@@ -78,7 +78,7 @@ found:
 		list = *(int**) (t + 0x28);
 		{
 			for (j = 0; j < cnt; j++) {
-				obj = (char*) 0x1015ea0 + list[j] * 0x2f4;
+				obj = (char*) *(int*) 0x1015ea0 + list[j] * 0x2f4;
 				if (px < *(int*) (obj + 0x10)) {
 					continue;
 				}

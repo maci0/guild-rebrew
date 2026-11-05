@@ -68,8 +68,8 @@ void __cdecl fcn_00441f90(unsigned char* base, int w, int x0, int y0, int size, 
 				y2 = (yy + step) & mask;
 				f1 = (float) base[idx];
 				f2 = (float) base[y2 * w + xx];
-				f3 = (float) (base[((idx + step) & mask) * w + xx] -
-					      base[((idx - step) & mask) * w + xx]);
+				f3 = (float) (base[(((yy & mask) + step) & mask) * w + xx] -
+					      base[((yy - step) & mask) * w + xx]);
 				f4 = (float) (base[((y2 + step) & mask) * w + xx] -
 					      base[((y2 - step) & mask) * w + xx]);
 				t = inv;

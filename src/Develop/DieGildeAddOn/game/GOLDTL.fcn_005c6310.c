@@ -79,7 +79,7 @@ void __cdecl fcn_005c6310(void)
 								obj = fcn_0047dca0((char*) 0x7f4ca0 + off);
 								if (obj != 0 && *(char*) ((char*) 0x7f4ca2 + off) != 7) {
 									fcn_004c51f0(-1, *(int*) (rec + 6), *item, 1,
-										((obj >> 8) & 0xffffff) | (g_773d75 << 24), 0);
+										g_773d75, 0);
 								}
 							}
 						}

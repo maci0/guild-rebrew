@@ -87,8 +87,8 @@ void __cdecl he_TransportStadtStadt(char *v2)
 			}
 			fcn_004c5b50(*(int *)(v6 + 2), l_a, l_b, 0);
 			if (!fcn_00505340((unsigned char *)v4))
-				*(int *)(v2 + 0xec) = fcn_004c5290(*(int *)(v5 + 1),
-								   *(int *)(v3 + 1),
+				*(int *)(v2 + 0xec) = fcn_004c5290(*(int *)(v3 + 1),
+								   *(int *)(v2 + 0xb0),
 								   *(int *)(v2 + 0xac));
 		} else {
 			fcn_00502cd0(0, 2, 7, 1, *(int *)(v2 + 0xac));

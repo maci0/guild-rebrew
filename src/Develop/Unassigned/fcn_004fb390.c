@@ -8,7 +8,7 @@ void __cdecl fcn_004fb390(void)
 	int buf[0x19];
 
 	fcn_004faed0(buf);
-	if (*(float*) 0x773d4c < *(float*) 0x6628a8) {
+	if (*(float*) 0x773d4c == *(float*) 0x6628a8) {
 		*(float*) 0x773d50 = (float) buf[5];
 		*(float*) 0x773d4c = (float) buf[5]
 		    * (float) *(double*) 0x6640f0;

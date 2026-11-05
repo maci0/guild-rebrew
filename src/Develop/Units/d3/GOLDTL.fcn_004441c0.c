@@ -1,9 +1,9 @@
-void __cdecl fcn_00438da0(float, float, int, int, int, int, int, int, int);
-int __cdecl fcn_00439c60();
+void __cdecl fcn_00438da0(float, float, float, float, int, int, int, unsigned int, unsigned int);
+int __cdecl fcn_00439c60(int);
 void __cdecl fcn_0043ad20(int, int);
-int __cdecl fcn_0043b170();
-int __cdecl _ftol();
-int __cdecl fcn_0064d41a();
+int __cdecl fcn_0043b170(int, int, int, int);
+int __cdecl _ftol(double);
+int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004441c0 */
 void __cdecl fcn_004441c0(void)
@@ -19,7 +19,7 @@ void __cdecl fcn_004441c0(void)
 	if (!*(char*) 0x6b85a1 && *(char*) 0x6b8018 && *(int*) 0x6b86d4 <= 0) {
 		*(char*) 0x6b85a1 = 1;
 		if (*(char*) 0x6b85a0) {
-			fcn_00438da0((float) ((int) *(int*) 0x10529e0 >> 1) - 1, (float) ((int) *(int*) 0x10529e4 >> 1), 0, 0,
+			fcn_00438da0((float) (((int) *(int*) 0x10529e0 >> 1) - 1), (float) ((int) *(int*) 0x10529e4 >> 1), 0, 0,
 				*(int*) 0x1052a2c, *(int*) 0x1052a30, *(int*) 0x1052a34, *(int*) 0x10529e0, *(int*) 0x10529e4);
 			fcn_00439c60(*(int*) 0x6b8478);
 			fcn_0043ad20(0x17e, 0);
@@ -53,8 +53,8 @@ void __cdecl fcn_004441c0(void)
 		if (p) {
 			switch (p[0x86]) {
 			case 0:
-				v5 = _ftol(p);
-				fcn_0064d41a(v9, 0x67aa40, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), v5);
+				v5 = _ftol((double) *((float*) p + 0x1a));
+				fcn_0064d41a(v9, (char*) 0x67aa40, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), v5, p);
 				*(char*) 0x6b85a1 = 0;
 				return;
 			case 1:
@@ -64,35 +64,37 @@ void __cdecl fcn_004441c0(void)
 				v1 = *((float*) p + 0x23) * 57.2957763671875f;
 				v2 = *((float*) p + 0x22) * 57.2957763671875f;
 				v3 = *((float*) p + 0x21) * 57.2957763671875f;
-				fcn_0064d41a(v9, 0x67aab8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), (double) v3, (double) v2, (double) v1, p);
+				fcn_0064d41a(v9, (char*) 0x67aab8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), (double) v3, (double) v2, (double) v1, p);
 				*(char*) 0x6b85a1 = 0;
 				return;
 			case 5:
 			case 6:
-				v5 = _ftol((double) *((float*) p + 0x26), p);
-				v5 = _ftol(v5);
-				fcn_0064d41a(v9, 0x67aa70, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), v5);
+				v5 = _ftol((double) *((float*) p + 0x24));
+				fcn_0064d41a(v9, (char*) 0x67aa70,
+				             (double) *((float*) p + 0x13), (double) *((float*) p + 0x14),
+				             (double) *((float*) p + 0x15), v5,
+				             _ftol((double) *((float*) p + 0x25)), (double) *((float*) p + 0x26), p);
 				*(char*) 0x6b85a1 = 0;
 				return;
 			case 7:
-				v5 = _ftol(p);
+				v5 = _ftol((double) *((float*) p + 0x25));
 				v1 = *((float*) p + 0x23) * 57.2957763671875f;
 				v2 = *((float*) p + 0x22) * 57.2957763671875f;
 				v3 = *((float*) p + 0x21) * 57.2957763671875f;
-				fcn_0064d41a(v9, 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), (double) v3, (double) v2, (double) v1, v5);
+				fcn_0064d41a(v9, (char*) 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), (double) v3, (double) v2, (double) v1, v5, p);
 				break;
 			case 8:
 				if (!(*((unsigned char*) p + 0x215) & 4)) {
-					v5 = _ftol(p);
-					fcn_0064d41a(v9, 0x67a9cc, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), v5);
+					v5 = _ftol((double) *((float*) p + 0x25));
+					fcn_0064d41a(v9, (char*) 0x67a9cc, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), v5, p);
 					*(char*) 0x6b85a1 = 0;
 					return;
 				}
-				v5 = _ftol(p);
+				v5 = _ftol((double) *((float*) p + 0x25));
 				v1 = *((float*) p + 0x23) * 57.2957763671875f;
 				v2 = *((float*) p + 0x22) * 57.2957763671875f;
 				v3 = *((float*) p + 0x21) * 57.2957763671875f;
-				fcn_0064d41a(v9, 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), (double) v3, (double) v2, (double) v1, v5);
+				fcn_0064d41a(v9, (char*) 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), (double) v3, (double) v2, (double) v1, v5, p);
 				*(char*) 0x6b85a1 = 0;
 				return;
 			}

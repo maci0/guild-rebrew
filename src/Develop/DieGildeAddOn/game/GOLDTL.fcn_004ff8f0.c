@@ -29,6 +29,7 @@ void __cdecl fcn_004ff8f0(void)
 	int count;
 	int top;
 	int passes;
+	int rnd2;
 	int handle;
 	int v10;
 	int v11;
@@ -60,8 +61,8 @@ void __cdecl fcn_004ff8f0(void)
 			continue;
 		if (!(652.8f <= (float) active)) {
 			if (s[0] == 8) {
-				p = (unsigned char*) gm_LookupEntityRecordById(*(int*) (s + 0x60));
-				q = (unsigned char*) gm_LookupEntityRecordById(*(int*) (s + 0x64));
+				p = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0x60));
+				q = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0x64));
 				if ((!p || p[2] == 0x0f) && (!q || q[2] == 0x0f)) {
 					if (fcn_004ff860(e)) {
 						v10 = (int) (-(*(float*) (s + 0x1a) + 1.0f));
@@ -73,25 +74,25 @@ void __cdecl fcn_004ff8f0(void)
 			}
 		}
 		if (s[0] == 8 && !fcn_004fffb0(*(unsigned short*) e)) {
-			p = (unsigned char*) gm_LookupEntityRecordById(*(int*) (s + 0x60));
-			q = (unsigned char*) gm_LookupEntityRecordById(*(int*) (s + 0x64));
+			p = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0x60));
+			q = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0x64));
 			if ((p && p[2] != 0x0f) || (q && q[2] != 0x0f))
 				continue;
 			v11 = 3;
 			v12 = 2;
-			fcn_004c4510(e, *(int*) (s + 4));
+			fcn_004c4510(e, *(int*) (e + 4));
 			fcn_004c4700(1, 1, (short) ((int) s - g_aed32c), &v11);
 			if (s[0xb] < 2)
 				fcn_004c4700(1, 1, (short) ((int) s - g_aed32c + 0xb), &v12);
 			fcn_004c53a0();
-			fcn_004c51a0(*(int*) (s + 4), -1, g_773d75,
+			fcn_004c51a0(*(int*) (e + 4), -1, g_773d75,
 				((gm_RandomMod(0x800) & 0xffff) + 0x800) * v12 * 0x20);
 			count++;
 			continue;
 		}
 		if (fcn_0047dd60(e)) {
 			count++;
-			if (*(int*) (s + 0x1f0))
+			if (*(int*) (e + 0x1f0))
 				top++;
 		}
 	}
@@ -117,9 +118,10 @@ void __cdecl fcn_004ff8f0(void)
 		else
 			v10 = 0;
 		while (v10 >= 1) {
+			rnd2 = gm_RandomMod(2);
 			passes = gm_RandomMod(0xc);
 			handle = fcn_004c4fc0(3, -1, -1, 0x14, -1,
-				fcn_00507400((gm_RandomMod(2) & 0xffff) + 1, (passes & 0xffff) + 1), 0, 2);
+				fcn_00507400((passes & 0xffff) + 1, (rnd2 & 0xffff) + 1), 0, 2);
 			if (handle != -1) {
 				while (!fcn_004c4450(handle)) {
 					fcn_00535960();

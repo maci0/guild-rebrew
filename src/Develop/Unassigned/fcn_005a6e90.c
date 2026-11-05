@@ -23,7 +23,7 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
     s14 = 1;
 
     if (a1 == 0)
-        goto done;
+        return 1;
 
     for (i = 0; i < 9; i++)
     {
@@ -141,8 +141,7 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
             }
         }
 
-        ((pfn_1)0x471e30)(esi);
-        break;
+        return ((pfn_1)0x471e30)(esi);
     }
 
 done:

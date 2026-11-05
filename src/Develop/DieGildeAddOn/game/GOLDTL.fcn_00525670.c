@@ -60,10 +60,12 @@ unsigned int __cdecl fcn_00525670(void)
 			*(int*) (p + 0x184) = 0;
 		}
 	}
-	for (v9 = 0; v9 < *(int*) 0x773d8c; v9++) {
-		obj = (char*) (0x868054 + v9 * 0x43);
+	v9 = 0;
+	p = (char*) *(int*) 0x868054;
+	while (v9 < *(int*) 0x773d8c) {
+		obj = p;
 		if (*(char*) (*(int*) 0x99ec10 +
-		               (unsigned int) *(unsigned short*) (v9 * 0x43 + 0x868054) * 0x41) == 0x1d)
+		               (unsigned int) *(unsigned short*) p * 0x41) == 0x1d)
 			*(unsigned int*) (obj + 0x24) = 0;
 		v5 = *(int*) (obj + 6);
 		if (v5 != -1 && gm_ResolveEntityById(&v8, &v7, &v6, v5)) {
@@ -95,6 +97,8 @@ unsigned int __cdecl fcn_00525670(void)
 				*(int*) (v6 + 0x178) = (int) obj;
 			}
 		}
+		v9++;
+		p += 0x43;
 	}
 	v3 = *(int*) 0x6b8010;
 	fcn_004432d0(0, 0);
@@ -107,11 +111,11 @@ unsigned int __cdecl fcn_00525670(void)
 			v9 = *(int*) (p + 0x70);
 			if (v9) {
 				*(int*) (p + 0x70) = 0;
-				*(int*) 0x774964 = 2;
+				*(unsigned char*) 0x774964 = 2;
 				if (kind == 0x11)
 					*(unsigned char*) (p + 0xf0) &= 0xef;
 				(*(void(__cdecl**)(char*)) (kind * 4 + 0x7dc440))(p);
-				*(int*) 0x774964 = 0;
+				*(unsigned char*) 0x774964 = 0;
 				*(int*) (p + 0x70) = v9;
 			}
 		}

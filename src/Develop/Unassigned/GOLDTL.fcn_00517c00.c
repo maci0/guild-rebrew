@@ -137,10 +137,10 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 		return 1;
 	case 8:
 		if (*(unsigned char*) (p + 0xd)) {
-			strcpy((char*) b3, fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4));
+			strcpy((char*) b3, fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], a2, 4));
 		}
 		if (*(unsigned char*) (p + 0x166)) {
-			strcpy((char*) b2, fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
+			strcpy((char*) b2, fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], a2, 4));
 		}
 		if (a2 == 2) {
 			if (ENDS_APOSTROPHE((char*) p + 0x30)) {

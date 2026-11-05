@@ -121,8 +121,8 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 				memset(msg, 0, sizeof msg);
 				if (fcn_0057eba0(0x2b, (int) a0, 0, sel)) {
 					node = lpObjektePROT + sel * 0x41;
-					if (house)
-						v7 = (int) fcn_00502cd0(*(int*) (house + 0x14), 1, 0, sel);
+					if (q)
+						v7 = (int) fcn_00502cd0(*(int*) ((char*) q + 0x14), 1, 0, sel);
 					else
 						v7 = (int) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, sel);
 					if (v7) {
@@ -135,7 +135,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 							}
 							_strupr(name);
 							fcn_0064d41a(text, s_68b7ac, name);
-							fcn_00526920(a0, *(int*) (house + 2), text);
+							fcn_00526920(a0, *(int*) ((char*) q + 2), text);
 						}
 					} else {
 						*(unsigned char*) (msg + 0x36) = 1;
@@ -221,7 +221,7 @@ wait:
 				fcn_005373e0(0, 0x657c7);
 		}
 tail:
-		fcn_0050ee80(a0, house);
+		fcn_0050ee80(a0, q);
 	}
 	fcn_0050f900();
 	g_7746f8 = 0;

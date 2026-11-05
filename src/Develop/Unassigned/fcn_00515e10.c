@@ -24,7 +24,7 @@ int __cdecl fcn_00515e10(char* p)
 		s++;
 	}
 
-	bn = (int) strstr(buf, (char*) 0x6a1f78);
+	bn = (strstr(buf, (char*) 0x6a1f78) == 0);
 	br = (int) strstr(buf + 8, (char*) 0x6a1f74);
 	if (br != 0) {
 		br = 0x7d0;

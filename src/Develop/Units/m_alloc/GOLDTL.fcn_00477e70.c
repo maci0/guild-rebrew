@@ -15,7 +15,7 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, int a6,
 	unsigned short maxx;
 	unsigned short miny;
 	unsigned short maxy;
-	unsigned short color;
+	unsigned int color;
 	int offs[865];
 	char* b;
 	char* block;
@@ -31,14 +31,14 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, int a6,
 	int i;
 	int j;
 
-	b = (char*) m_alloc((a3 * 8 + 4) * a4 + 0x32, (char*) 0x67d9c0);
-	minx = a3;
+	b = (char*) m_alloc((a2 * 8 + 4) * a4 + 0x32, (char*) 0x67d9c0);
+	minx = a2;
 	miny = a4;
 	maxx = 0;
 	maxy = 0;
 	if (a4 > 0) {
 		g = (char*) a5;
-		p = (char*) (a5 + (a1 + a3 * a7) * 2);
+		p = (char*) (a5 + (a1 + a2 * a7) * 2);
 		for (i = 0; i < a4; i++) {
 			q = p;
 			for (j = 0; j < a3; j++) {
@@ -85,11 +85,11 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, int a6,
 	*(unsigned short*) (b + 0x1a) = maxx;
 	*(unsigned short*) (b + 0x1c) = maxy;
 	*(int*) b = 0x32;
-	color = (unsigned short) fcn_0041bac0(*(unsigned char*) 0x100f1a0,
+	color = fcn_0041bac0(*(unsigned char*) 0x100f1a0,
 	                                      *(unsigned short*) 0x100f1a1,
 	                                      *(unsigned char*) 0x100f1a2);
 	g = (char*) a5;
-	rowstride = a3 * a7;
+	rowstride = a2 * a7;
 	if (*(unsigned short*) (b + 0xa) != 0) {
 		for (i = 0; i < *(unsigned short*) (b + 0xa); i++) {
 			bytes = *(int*) b;
@@ -105,14 +105,14 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, int a6,
 					*(int*) (q + 4) = 0;
 					count = 0;
 					while (j < *(unsigned short*) (b + 6)
-					       && *(unsigned short*) (g + (rb + j) * 2) == color) {
+					       && *(unsigned short*) (g + (rb + j) * 2) == (unsigned short) color) {
 						count++;
 						j++;
 					}
 					*(int*) q = count * 2;
 					count = 0;
 					while (j + count < *(unsigned short*) (b + 6)
-					       && *(unsigned short*) (g + (rb + j + count) * 2) != color) {
+					       && *(unsigned short*) (g + (rb + j + count) * 2) != (unsigned short) color) {
 						count++;
 					}
 					*(int*) (q + 4) = count;

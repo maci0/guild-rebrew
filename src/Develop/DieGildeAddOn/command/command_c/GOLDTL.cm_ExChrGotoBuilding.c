@@ -117,7 +117,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 
 		/* chunk 2: native ins 200-299 */
 		if (*(int*) (B + 1) != *(int*) (C + 1)) {
-			k = fcn_005155e0(B);
+			k = fcn_005155e0(C);
 			if (k < 0)
 				goto end;
 			fcn_004432d0(k, 1);

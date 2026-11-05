@@ -2,6 +2,7 @@
 
 extern char* g_6b8014;
 extern float g_6628a8;
+extern float g_6628cc;
 extern float g_6628b0;
 extern float g_6629b0;
 extern float g_662a68;
@@ -164,7 +165,7 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 				s[2] -= g_662a48;
 			} while (g_6629c8 <= s[2]);
 		}
-		num = ((float) self->count * 0.5f + k) * g_6628b0;
+		num = ((float) self->count * g_6628cc + k) * g_6628b0;
 		sv = s[3] * wz + s[2];
 		f = num / (s[2] + s[2] + g_6628b0);
 		f2 = num / (sv + sv + g_6628b0);

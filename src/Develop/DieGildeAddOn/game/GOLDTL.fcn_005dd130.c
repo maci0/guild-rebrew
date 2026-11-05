@@ -12,12 +12,17 @@ int __cdecl fcn_005dd130(char *a0, int *a1)
 	if (a0[2] == 6) {
 		io_FormatTextBuffer(buf, 0x9d);
 		r = fcn_005cad70(a0, buf);
+		if (r != 0) {
+			fcn_005dcf40((unsigned char *) r, 4);
+			return 1;
+		}
+		return 0;
 	} else {
 		r = gm_LookupEntityRecordById(a1[1]);
+		if (r != 0) {
+			fcn_005dcf40((unsigned char *) r, 4);
+			return 1;
+		}
+		return 0;
 	}
-	if (r != 0) {
-		fcn_005dcf40((unsigned char *) r, 4);
-		return 1;
-	}
-	return 0;
 }

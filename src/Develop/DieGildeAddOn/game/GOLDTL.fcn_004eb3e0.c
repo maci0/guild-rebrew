@@ -35,6 +35,7 @@ int __cdecl gm_RandomMod(int a1);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int a1, int a2, void* p, int a4, int a5, void* p6);
 int __cdecl fcn_00526120(void* a1, int a2);
+extern unsigned char* lpGebaeudePROT;
 
 /* ADDRESS: GOLDTL 0x004eb3e0 */
 unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
@@ -75,7 +76,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 		return 0;
 	best = 0;
 	do {
-		q = (unsigned char*) (0x868050 + *(unsigned char*) e * 0x24d + 0x247);
+		q = lpGebaeudePROT + *(unsigned char*) e * 0x24d + 0x247;
 		if (best < (int) *q) {
 			v20 = *(unsigned char*) e;
 			best = (int) *q;
@@ -136,7 +137,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 			packet[4] = v25;
 		}
 		fcn_004c5420(*(int*) (self + 4), 0x1c8, 4, 0x4000000, 0);
-		fcn_005100f0(*(int*) (self + 4), -1);
+		fcn_005100f0(*(int*) (self + 4), -3);
 		found = gm_RandomMod(3);
 		if (packet[2] != 1) {
 			io_FormatTextBuffer(buf1, (found & 0xffff) + 0x165a, packet[1] + 0x1648);

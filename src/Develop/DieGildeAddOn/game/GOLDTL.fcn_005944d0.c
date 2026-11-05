@@ -61,7 +61,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	int rect1[4];
 	int rect2[4];
 	int list[10];
-	char tmpl[0x78];
+	char tmpl[0xf8];
 	unsigned short v3;
 
 	p = a0;
@@ -171,7 +171,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 										}
 									}
 									k++;
-									q += 4;
+									q++;
 								} while (k < 4);
 								if (ok) {
 									int found;
@@ -186,7 +186,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 									}
 									if (fcn_0057eba0(0x20, p, 0,
 									                 *(unsigned int*) (row + 0x779160)) == 1) {
-										for (i = 0; i < 0x1e; i++) {
+										for (i = 0; i < 0x3e; i++) {
 											*(int*) (tmpl + i * 4) = 0;
 										}
 										if (*(unsigned short*) (p + 0x27) != 0xffff) {
@@ -195,22 +195,22 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 											v33 = *(unsigned int*) (*(int*) 0x774970 * 0x21c + 0x7f4ca4);
 										}
 										v34 = *(unsigned int*) (p + 1);
-										*(int*) (tmpl + 0x0c) = *(int*) (entry + 2);
-										*(int*) (tmpl + 0x10) = v34;
-										*(int*) (tmpl + 0x1c) = 0xffffffff;
-										*(unsigned short*) (tmpl + 0x20) =
-										    *(unsigned short*) (row + 0x779160);
-										*(char*) (tmpl + 0x42) = 1;
-										*(unsigned short*) (tmpl + 0x44) =
+										*(char*) (tmpl + 0x04) = 4;
+										*(unsigned int*) (tmpl + 0x08) = v33;
+										*(int*) (tmpl + 0x0c) = v34;
+										*(int*) (tmpl + 0x10) = 0;
+										*(int*) (tmpl + 0x14) = 0;
+										*(int*) (tmpl + 0x28) = *(int*) 0x7f4c00;
+										*(int*) (tmpl + 0x2c) = *(int*) 0x7f4c04;
+										*(int*) (tmpl + 0x30) = *(int*) 0x7f4c08;
+										*(unsigned short*) (tmpl + 0x34) =
 										    *(unsigned short*) 0x7f4c0c;
-										*(int*) (tmpl + 0x48) = *(int*) 0x7f4c08;
-										*(int*) (tmpl + 0x4c) = *(int*) 0x7f4c04;
-										*(int*) (tmpl + 0x50) = *(int*) 0x7f4c00;
-										*(int*) (tmpl + 0x64) = 0;
-										*(int*) (tmpl + 0x68) = 0;
-										*(int*) (tmpl + 0x6c) = v34;
-										*(int*) (tmpl + 0x70) = v33;
-										*(int*) (tmpl + 0x74) = 4;
+										*(char*) (tmpl + 0x36) = 1;
+										*(unsigned short*) (tmpl + 0x58) =
+										    *(unsigned short*) (row + 0x779160);
+										*(int*) (tmpl + 0x5c) = 0xffffffff;
+										*(int*) (tmpl + 0x68) = v34;
+										*(int*) (tmpl + 0x6c) = *(int*) (entry + 2);
 										found = fcn_004c5530(tmpl);
 										if (found != -1) {
 											while (!fcn_004c4450(found)) {

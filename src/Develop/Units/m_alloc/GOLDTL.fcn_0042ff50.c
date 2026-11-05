@@ -37,13 +37,14 @@ int __cdecl unzGoToNextFile(void* file);
 void* __cdecl m_PoolAlloc(void*, int, int);
 void* __cdecl gzopen(char*, char*);
 void* __cdecl fopen(char*, char*);
+extern char g_file_extension_names[];
 char* __cdecl strupr(char*);
 int __cdecl fcn_0042fcd0(char*, struct VFS_DIR*);
 void __cdecl fcn_0042ed00(char*, struct VFS_DIR*, int, int, int, int, int);
 void __cdecl ReportClientMessage(char*);
 int __cdecl sprintf(char*, const char*, ...);
 
-/* ADDRESS: GOLDTL 0x0042ff50 */
+/* CAND42 */
 void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* root)
 {
 	char* path;
@@ -52,6 +53,27 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 	unsigned char packed;
 	unsigned char binary;
 	unsigned char read;
+	char pad123;
+	char pad124;
+	char pad125;
+	char pad126;
+	char pad127;
+	char pad128;
+	char pad129;
+	char pad130;
+	char pad131;
+	char pad132;
+	char pad133;
+	char pad134;
+	char pad135;
+	char pad136;
+	char pad137;
+	char pad138;
+	char pad139;
+	char pad140;
+	char pad141;
+	char pad142;
+	char pad143;
 	struct VFS_DIR* dir;
 	char* modes[2];
 	char* p;
@@ -62,13 +84,13 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 	char name[0x100];
 	char entry[0x100];
 	char arch[0x100];
-	unsigned long info[0x14];
+	unsigned long info[0x15];
 
 	path = (char*) cpath;
 	mode = (char*) cmode;
 	stream = 0;
 	if (!path || !*path || !mode || !root)
-		return 0;
+		return stream;
 	read = 1;
 	binary = 1;
 	packed = 1;
@@ -99,8 +121,12 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 	file = (VFS_FILE_42ff50*) fcn_0042f120(path, root, &dir);
 	if (file) {
 		if (file->source) {
+			if (!binary) {
+				ReportClientMessage("Unsupported Read-Mode in vfs:Open (textfile inside zip)");
+				return 0;
+			}
 			fcn_0042f240(0, file->source, 0, arch);
-			strcat(arch, (char*) 0x6790c4 + file->archive * 6);
+			strcat(arch, g_file_extension_names + file->archive * 6);
 			fcn_0042e570(arch);
 			zip = (char*) unzOpen(arch);
 			if (zip) {
@@ -209,6 +235,6 @@ write_path:
 	goto set_mode;
 
 not_found:
-	sprintf(name, "vfs_Tfopen: Could not find \"%s\"!!", path);
-	return 0;
+	sprintf(entry, "vfs_Tfopen: Could not find \"%s\"!!", path);
+	return stream;
 }

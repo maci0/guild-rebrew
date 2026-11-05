@@ -75,13 +75,13 @@ void __cdecl fcn_0054bc90(char* a0)
 		goto dialog;
 	if (state == 1)
 		goto state1;
-	if (state != 2) {
-	close:
+	if (state != 2)
+		return;
+close:
 		if (*(int*) (a0 + 0x74))
 			fcn_00545780(a0);
 		fcn_00546190(a0);
 		return;
-	}
 	if (fcn_004943e0(v7, v3) != 1)
 		goto state2_unequal;
 	v16 = *(int*) (v3 + 2);

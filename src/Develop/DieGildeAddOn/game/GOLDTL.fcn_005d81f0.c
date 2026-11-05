@@ -68,7 +68,7 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 			fcn_004c5420(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
 			if (*(unsigned char*) ((*(unsigned short*) (rec + 0x27)) * 0x21c + 0x7f4ca2) == 6 ||
 			    *(unsigned char*) ((*(unsigned short*) (rec + 0x27)) * 0x21c + 0x7f4ca2) == 7) {
-				io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) a0, rec, *ent);
+				io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) a0, rec, *(unsigned short*) ent);
 				fcn_00545d40(*(unsigned short*) (rec + 0x27), *(unsigned short*) (rec + 0x27),
 					text, 0, 0x5fb, (char*) 0x6a59fc);
 			}
@@ -89,7 +89,7 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 	} else {
 		other = a0;
 	}
-	if (*(unsigned char*) (other + 0x1c8) <= 0xff) {
+	if ((*(unsigned char*) (other + 0x1c8) & 0x80) != 0) {
 		io_FormatTextBuffer(name, 0x1ce0);
 		fcn_00526120(name, 0);
 		return 0x81;
@@ -134,8 +134,8 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 					count = 0x300;
 					do {
 						ent = (char*) ((r & 0xffff) * 0x21c + 0x7f4ca0);
-						if (*(short*) (ent + 0x27) != -1 &&
-						    *(int*) (ent + 0x6c) == rec &&
+						if (*(short*) ent != -1 &&
+						    *(int*) (ent + 0x16c) == rec &&
 						    *(unsigned char*) (ent + 2) == 0) {
 							other = ent;
 							if (*(unsigned char*) ((state + 0x7f4ca2)) == 6 ||
@@ -147,7 +147,7 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 									(char*) 0x6a59fc);
 							}
 							fcn_005099e0(other, *(int*) 0x773da8);
-							fcn_004c57e0(*(int*) (state + 0x7f4ca4), 1);
+							fcn_004c57e0(*(int*) (ent + 4), 1);
 							ret = 0x81;
 							*(int*) 0x774654 = 1;
 							break;

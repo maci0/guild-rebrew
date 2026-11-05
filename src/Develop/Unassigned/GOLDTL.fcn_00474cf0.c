@@ -1,7 +1,7 @@
 int __cdecl CountDisplayCounters(void);
 int __cdecl fcn_0046b520(char*, int);
 void __cdecl fcn_0046b2b0(int);
-int __cdecl fcn_00469c30(int, int, char*);
+int __cdecl fcn_00469c30(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
 
 typedef struct List0474cf0 {
@@ -84,8 +84,8 @@ void __cdecl fcn_00474cf0(int slot)
 		y = *(int*) 0x100f89c - 7;
 		if (*(int*) 0x67d8ec == -1) {
 			*(int*) 0x67d8ec = fcn_00469c30(
-			    *(int*) 0x100f898, y,
-			    (char*) (*(int*) 0x67d3b0 + 8));
+			    (short) *(int*) 0x100f898, (short) y,
+			    *(int*) 0x67d3b0 + 8);
 			return;
 		}
 		fcn_00469c40(*(int*) 0x100f898, y, *(int*) 0x67d8ec);

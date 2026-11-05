@@ -137,12 +137,12 @@ int __cdecl fcn_00449130(void)
 		v10[0] = (float) d
 			/ (((float) fabs((float) v16) + *(double*) 0x6629c8)
 			* *(float*) 0x66293c);
-		if (v10[0] < *(float*) 0x6628b0)
+		if (v10[0] > *(float*) 0x6628b0)
 			v10[0] = *(float*) 0x6628b0;
 		v10[1] = ((float) fabs((float) v17) + *(double*) 0x6629c8)
 			* *(float*) 0x66293c
 			/ (float) (unsigned int) g_14ce864;
-		if (v10[1] < *(float*) 0x6628b0)
+		if (v10[1] > *(float*) 0x6628b0)
 			v10[1] = *(float*) 0x6628b0;
 		v21 = v21 * v10[0] * *(float*) 0x662d00;
 		v19 = v19 * v10[1] * *(float*) 0x662cfc;

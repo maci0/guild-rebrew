@@ -44,7 +44,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
         v15 = (float) fcn_0050c710((void*) v3, 4, 1);
     }
     if (*(char*) (v9 + 0x7f4e06)) {
-        fcn_004e8b40(*(char*) (v9 + 0x7f4e06), q);
+        fcn_004e8b40(*(unsigned char*) (v9 + 0x7f4e06), q);
         v16 = *(int*) (q + 4);
         if (v16 == 4) {
             v3 = fcn_0050e4a0(1);
@@ -102,7 +102,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
     v14 = fcn_004e7990((void*) v3, (void*) (v11 + 0x7f4ca0), v7, a2);
     v15 = v14 + (v13 + v15);
     if (*(char*) (v11 + 0x7f4e06)) {
-        fcn_004e8b40(*(char*) (v11 + 0x7f4e06), q);
+        fcn_004e8b40(*(unsigned char*) (v11 + 0x7f4e06), q);
         v17 = *(unsigned char*) (q + 8);
         if (v17 && v17 <= 3) {
             a1 = fcn_005c6270((void*) v3, 0x155);

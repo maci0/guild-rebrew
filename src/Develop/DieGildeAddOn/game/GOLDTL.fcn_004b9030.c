@@ -90,15 +90,15 @@ int __cdecl fcn_004b9030(int *msg)
 	gm_ResolveEntityById((void **) (&a), 0, 0, *(int *) (e + 0xb4));
 	if (b != 0 && a != 0) {
 		if (*b == 0x47) {
-			io_FormatTextBuffer(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7,
+			io_FormatTextBuffer(buf, *(unsigned short *) (p + 4) + 0x12e7,
 			             ((Dyn *) g_868060)[*(int *) (b + 0x65)].name,
 			             ((Dyn *) g_868060)[0].name, t);
 		} else {
-			io_FormatTextBuffer(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7,
+			io_FormatTextBuffer(buf, *(unsigned short *) (p + 4) + 0x12e7,
 			             ((Dyn *) g_868060)[0].name,
 			             ((Dyn *) g_868060)[*(int *) (a + 0x65)].name, t);
 		}
-		fcn_00545d40(*(int *) (p + 4), *(int *) (p + 4), buf, strlen(buf) > 0x100, 0x603, 0);
+		fcn_00545d40(*(int *) (p + 4), *(int *) (p + 4), buf, strlen(buf) > 0x100, 0x5ef, 0);
 	}
 	return 0;
 }

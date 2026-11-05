@@ -182,7 +182,7 @@ void __cdecl main_Menue(void)
 				fcn_00472170(v5, 0);
 				if (fcn_005845e0()) {
 					fcn_00584530();
-					*(int *)0x6a375c = 1;
+					*(unsigned char *)0x6a375c = 1;
 					*(int *)0x7e1d00 = *(int *)0x6a3ad0;
 					*(int *)0x7e1d04 = *(int *)0x6a3ad4;
 					*(char *)0x7e1d08 = *(char *)0x6a3ad8;

@@ -24,7 +24,7 @@ void __cdecl fcn_00590670(void)
 	p = 0;
 	v3 = *(int*) 0x100f888;
 	v5 = *(int*) 0x6a99e8;
-	if ((v3 == -1 && v5 != -1)
+	if ((v3 == -1 && *(int*) 0x6a99ec != -1)
 		|| (*(int*) 0x774a24 != 0 && *(int*) 0x14ce8e8 == 0 && v5 != -1)) {
 		fcn_00471e30(*(int*) 0x6a99e8);
 		*(int*) 0x6a99e8 = -1;
@@ -60,23 +60,23 @@ void __cdecl fcn_00590670(void)
 					p = 0;
 				}
 			}
-			else if ((unsigned int) p >= 0x90e094 && (unsigned int) p < 0x90e094 + 0x5480) {
+			else if ((unsigned int) p >= (unsigned int) *(int*) 0x90e094 && (unsigned int) p < (unsigned int) (*(int*) 0x90e094 + 0xa900)) {
 				v6 = *(unsigned char*) p;
 				if (v6 >= 0x58) {
 					v6 = 0;
 				}
 			}
-			else if ((unsigned int) p >= 0x868050 && (unsigned int) p < 0x868050 + 0x653c) {
-				v6 = ((int) p - 0x868050) / 0x24d;
+			else if ((unsigned int) p >= (unsigned int) *(int*) 0x868050 && (unsigned int) p < (unsigned int) (*(int*) 0x868050 + 0xca78)) {
+				v6 = ((int) p - *(int*) 0x868050) / 0x24d;
 			}
-			else if ((unsigned int) p >= 0x868054 && (unsigned int) p < 0x868054 + 0xa790c) {
+			else if ((unsigned int) p >= (unsigned int) *(int*) 0x868054 && (unsigned int) p < (unsigned int) (*(int*) 0x868054 + 0x14f218)) {
 				v4 = *p;
 				if (v4 >= 0x2dc) {
 					v4 = 0;
 				}
 			}
-			else if ((unsigned int) p >= 0x99ec10 && (unsigned int) p < 0x99ec10 + 0x5cee) {
-				v4 = ((int) p - 0x99ec10) / 0x41;
+			else if ((unsigned int) p >= (unsigned int) *(int*) 0x99ec10 && (unsigned int) p < (unsigned int) (*(int*) 0x99ec10 + 0xb9dc)) {
+				v4 = ((int) p - *(int*) 0x99ec10) / 0x41;
 			}
 			else {
 				p = 0;
@@ -108,7 +108,7 @@ void __cdecl fcn_00590670(void)
 			v3 = *(int*) 0x100f888;
 		}
 		if (v4 != 0) {
-			b = *(unsigned char*) (0x99ec10 + v4 * 0x41);
+			b = *(unsigned char*) (*(int*) 0x99ec10 + v4 * 0x41);
 			if (b != 0x20 && b != 0x17 && b != 0x25 && b != 0x27) {
 				v5 = fcn_00591190(v4);
 			}

@@ -82,15 +82,15 @@ int __cdecl fcn_0047bdd0(int x, int y, Sprite47bdd0 *sprite, float scale,
 			return (int) q;
 		}
 	} else {
-		n = (int) ((float) sprite->tile / (float) tile + 0.5f);
+		n = (int) ((float) sprite->tile / (float) whole + 0.5f);
 		i = 0;
 		off = 0;
 		if (sprite->count2 >= 1) {
 			do {
 				cell = (Cell47bdd0 *) ((char *) sprite->cells + off);
 				q = fcn_0047c1f0(
-				    cell->u, cell->v, tile, tile, cell->tex,
-				    (i % n) * tile + x, (i / n) * tile + y);
+				    cell->u, cell->v, whole, whole, cell->tex,
+				    (i % n) * whole + x, (i / n) * whole + y);
 				if (q)
 					fcn_0047b9a0(q, r, g, b);
 				i++;

@@ -2,15 +2,13 @@
  * node into four quadrants until either the size limit or the recursion depth
  * limit is reached.  Leaves that survive one level are collapsed. */
 
-unsigned int __cdecl fcn_004546e0(unsigned int a0, float* a1, float* a2);
-unsigned int __cdecl fcn_00454630(unsigned int a0, float* a1, float* a2);
-void __cdecl fcn_00454560(unsigned int a0);
+char __cdecl fcn_004546e0(char* e, float* lo, float* hi);
+char* __cdecl fcn_00454630(char* src, float* lo, float* hi);
+void __cdecl fcn_00454560(char** n);
 
 /* ADDRESS: GOLDTL 0x00454850 */
 void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, unsigned int a3)
 {
-	float minv[4];
-	float maxv[4];
 	float lo[4];
 	float hi[4];
 	unsigned int* p;
@@ -47,19 +45,19 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 			}
 		} else {
 			for (p = (unsigned int*) a0[0xf]; p != 0; p = (unsigned int*) p[1]) {
-				if (fcn_004546e0(*p, minv, maxv)) {
-					*((float*) (a0 + 4)) = (*((float*) (a0 + 4)) < minv[0])
-						? *((float*) (a0 + 4)) : minv[0];
-					*((float*) (a0 + 5)) = (*((float*) (a0 + 5)) < minv[1])
-						? *((float*) (a0 + 5)) : minv[1];
-					*((float*) (a0 + 6)) = (*((float*) (a0 + 6)) < minv[2])
-						? *((float*) (a0 + 6)) : minv[2];
-					*((float*) (a0 + 8)) = (*((float*) (a0 + 8)) <= maxv[0])
-						? maxv[0] : *((float*) (a0 + 8));
-					*((float*) (a0 + 9)) = (*((float*) (a0 + 9)) <= maxv[1])
-						? maxv[1] : *((float*) (a0 + 9));
-					*((float*) (a0 + 10)) = (*((float*) (a0 + 10)) <= maxv[2])
-						? maxv[2] : *((float*) (a0 + 10));
+				if (fcn_004546e0((char*) *p, lo, hi)) {
+					*((float*) (a0 + 4)) = (*((float*) (a0 + 4)) < lo[0])
+						? *((float*) (a0 + 4)) : lo[0];
+					*((float*) (a0 + 5)) = (*((float*) (a0 + 5)) < lo[1])
+						? *((float*) (a0 + 5)) : lo[1];
+					*((float*) (a0 + 6)) = (*((float*) (a0 + 6)) < lo[2])
+						? *((float*) (a0 + 6)) : lo[2];
+					*((float*) (a0 + 8)) = (*((float*) (a0 + 8)) <= hi[0])
+						? hi[0] : *((float*) (a0 + 8));
+					*((float*) (a0 + 9)) = (*((float*) (a0 + 9)) <= hi[1])
+						? hi[1] : *((float*) (a0 + 9));
+					*((float*) (a0 + 10)) = (*((float*) (a0 + 10)) <= hi[2])
+						? hi[2] : *((float*) (a0 + 10));
 				}
 			}
 		}
@@ -71,22 +69,22 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 		lo[2] = *((float*) (a0 + 6));
 		hi[0] = dx + *((float*) (a0 + 4));
 		hi[2] = dz + *((float*) (a0 + 6));
-		a0[0] = fcn_00454630((unsigned int) a0, lo, hi);
+		a0[0] = (unsigned int) fcn_00454630((char*) a0, lo, hi);
 		lo[0] = dx + *((float*) (a0 + 4));
 		lo[2] = *((float*) (a0 + 6));
 		hi[0] = *((float*) (a0 + 8));
 		hi[2] = dz + *((float*) (a0 + 6));
-		a0[1] = fcn_00454630((unsigned int) a0, lo, hi);
+		a0[1] = (unsigned int) fcn_00454630((char*) a0, lo, hi);
 		lo[0] = dx + *((float*) (a0 + 4));
 		lo[2] = dz + *((float*) (a0 + 6));
 		hi[0] = *((float*) (a0 + 8));
 		hi[2] = *((float*) (a0 + 10));
-		a0[2] = fcn_00454630((unsigned int) a0, lo, hi);
+		a0[2] = (unsigned int) fcn_00454630((char*) a0, lo, hi);
 		lo[0] = *((float*) (a0 + 4));
 		lo[2] = dz + *((float*) (a0 + 6));
 		hi[0] = dx + *((float*) (a0 + 4));
 		hi[2] = *((float*) (a0 + 10));
-		a0[3] = fcn_00454630((unsigned int) a0, lo, hi);
+		a0[3] = (unsigned int) fcn_00454630((char*) a0, lo, hi);
 		first = 0xffffffff;
 		for (i = 0; i < 4; i++) {
 			v = a0[i];
@@ -103,7 +101,7 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 			v = a0[i];
 			if (v != 0) {
 				if (ok != 0) {
-					fcn_00454560(v);
+					fcn_00454560((char**) v);
 					a0[i] = 0;
 				} else {
 					fcn_00454850((unsigned int*) v, a1, a2 + 1, a3);

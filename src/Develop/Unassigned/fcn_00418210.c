@@ -48,13 +48,13 @@ int __cdecl fcn_00418210(char* obj, int now)
 				    (unsigned char) (i % n);
 				r = fcn_0064d3f8();
 				*(float*) (p + 0x38) = (float) r
-				    * 3.0518509e-05f * 4.0f - 2.0f;
+				    * 3.0518509e-05f * 4.0 - 2.0f;
 				r = fcn_0064d3f8();
 				*(float*) (p + 0x3c) = (float) r
 				    * 3.0518509e-05f * 1.5f;
 				r = fcn_0064d3f8();
 				*(float*) (p + 0x40) = (float) r
-				    * 3.0518509e-05f * 4.0f - 2.0f;
+				    * 3.0518509e-05f * 4.0 - 2.0f;
 				r = fcn_0064d3f8();
 				*(float*) p = (float) r * 3.0518509e-05f
 				    * (*(float*) (obj + 0x10) * 2.0f)
@@ -72,8 +72,8 @@ int __cdecl fcn_00418210(char* obj, int now)
 				len = (float) sqrt((double)
 				    (*(float*) p * *(float*) p
 				    + *(float*) (p + 8) * *(float*) (p + 8)));
-				if (len < *(float*) (obj + 0x10)
-				    || len > *(float*) (obj + 0x10) * 0.4f) {
+				if (len > *(float*) (obj + 0x10)
+				    || len < *(float*) (obj + 0x10) * 0.4) {
 					half = *(float*) (obj + 0x10)
 					    * 0.25f;
 					r = fcn_0064d3f8();
@@ -106,7 +106,8 @@ int __cdecl fcn_00418210(char* obj, int now)
 	alive = 0;
 	for (i = 0; i < count; i++) {
 		if (*(unsigned char*) (p + 0x51) & 1) {
-			dt = (float) (now - *(int*) (p + 0x30))
+			dt = (float) (unsigned int)
+			    (now - *(int*) (p + 0x30))
 			    * 0.33333334f;
 			*(int*) (p + 0x30) = now;
 			*(float*) (p + 0x38) += dt * *(float*) p;
@@ -135,7 +136,7 @@ int __cdecl fcn_00418210(char* obj, int now)
 			}
 			f = dt * *(float*) (obj + 8);
 			*(float*) (p + 0x10) = *(float*) (p + 0x10) - f;
-			if (*(float*) (p + 0x10) < 0.0) {
+			if (*(float*) (p + 0x10) <= 0.0) {
 				*(unsigned char*) (p + 0x51) &=
 				    (unsigned char) ~1;
 			} else {

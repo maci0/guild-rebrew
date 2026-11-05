@@ -91,7 +91,7 @@ int __cdecl fcn_004e7ff0(unsigned char* arg)
 	if (rec.f0 != c) {
 		return 0;
 	}
-	if (rec.f4 != 0) {
+	if (rec.f4 == 0) {
 		return 0;
 	}
 	if (slot->id != -1) {

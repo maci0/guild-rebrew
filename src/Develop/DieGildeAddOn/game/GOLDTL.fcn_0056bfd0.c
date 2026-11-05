@@ -15,7 +15,7 @@ int __cdecl fcn_004c5980(void* p);
 void __cdecl fcn_004c5a60(int a, int b, int c);
 int __cdecl fcn_004c4450(int h);
 int* __cdecl fcn_004c4480(int h);
-int __cdecl cut_FindCutsceneById(int h);
+char* __cdecl cut_FindCutsceneById(int h);
 char* __cdecl fcn_00504b30(char* p);
 void __cdecl fcn_00546190(char* e);
 int __cdecl fcn_004d5450(char* e);
@@ -37,7 +37,6 @@ void __cdecl fcn_0056bfd0(char* ent)
 	int j;
 	unsigned char msg[0x114];
 	char text[0x400];
-	char text2[0x3f0];
 
 	count = 0;
 	value = 1.0f;
@@ -68,7 +67,8 @@ void __cdecl fcn_0056bfd0(char* ent)
 			*(int*) (ent + 0x70) = 1;
 			return;
 		}
-		break;
+		fcn_00546190(ent);
+		return;
 	case 1:
 		for (i = 0; i < 8; i++) {
 			j = *(int*) (ent + 0x8c + i * 4);
@@ -134,8 +134,8 @@ void __cdecl fcn_0056bfd0(char* ent)
 			msg[0x7c] = 2;
 			*(int*) (msg + 0xc) = *(int*) (0x7f4ca4
 			    + *(unsigned short*) 0x774970 * 0x21c);
-			*(int*) (msg + 0x10) = *(int*) ((char*) i + 4);
-			*(int*) (msg + 0x34) = *(int*) ((char*) j + 4);
+			*(int*) (msg + 0x34) = *(int*) ((char*) i + 4);
+			*(int*) (msg + 0x38) = *(int*) ((char*) j + 4);
 			for (i = 0; i < 0x10; i++) {
 				*(int*) (msg + 0x80 + i * 4) = -1;
 				*(int*) (msg + 0xc0 + i * 4) = -1;
@@ -158,7 +158,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 			*(int*) (msg + 0x104) = -1;
 			*(int*) (msg + 0x108) = -1;
 			e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
-			*(int*) (msg + 0x100) = *(int*) (e2 + 1);
+			*(int*) (msg + 0x10c) = *(int*) (e2 + 1);
 			slot = 0;
 			e2 = ent + 0x8c;
 			i = 0;
@@ -175,11 +175,11 @@ void __cdecl fcn_0056bfd0(char* ent)
 				e2 += 4;
 			} while (i < 8);
 			if (slot != 0 && n != 0) {
-				*(int*) (msg + 0x1c) = *(int*) 0x7f4c00;
-				*(int*) (msg + 0x20) = *(int*) 0x7f4c04;
-				*(int*) (msg + 0x24) = *(int*) 0x7f4c08;
-				*(short*) (msg + 0x28) = *(short*) 0x7f4c0c;
-				fcn_00500bb0((char*) msg + 0x1c, 0, 0x1e, 0);
+				*(int*) (msg + 0x18) = *(int*) 0x7f4c00;
+				*(int*) (msg + 0x1c) = *(int*) 0x7f4c04;
+				*(int*) (msg + 0x20) = *(int*) 0x7f4c08;
+				*(short*) (msg + 0x24) = *(short*) 0x7f4c0c;
+				fcn_00500bb0((char*) msg + 0x18, 0, 0x1e, 0);
 				*(int*) (ent + 0xb4) = fcn_004c5980(msg);
 				*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
 				*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
@@ -191,7 +191,8 @@ void __cdecl fcn_0056bfd0(char* ent)
 			}
 			e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 			target = fcn_00503fe0(1, 1, *(int*) (ent + 0xac));
-			j = fcn_004d5110(target, e2, (char*) i,
+			j = fcn_004d5110(target, e2, (char*) (0x7f4ca0
+			    + *(unsigned short*) (ent + 8) * 0x21c),
 			    (char*) (0x7f4ca0
 			    + *(unsigned short*) (e2 + 0x27) * 0x21c));
 			if (e2 != 0) {
@@ -201,12 +202,12 @@ void __cdecl fcn_0056bfd0(char* ent)
 			fcn_00545e80(*(int*) (0x7f4ca4
 			    + *(unsigned short*) (e2 + 0x27) * 0x21c),
 			    -1, text, 0, 0x5f0, *(int*) (e2 + 1), -1, 0, 0);
-			io_FormatTextBuffer(text2, 0x1c55,
+			io_FormatTextBuffer(text, 0x1c55,
 			    (int) *(unsigned short*) (target + 0x27),
 			    target, j);
 			fcn_00545e80(*(int*) (0x7f4ca4
 			    + *(unsigned short*) (ent + 8) * 0x21c),
-			    -1, text2, 0, 0x5f0, *(int*) (e2 + 1), -1, 0, 0);
+			    -1, text, 0, 0x5f0, *(int*) (e2 + 1), -1, 0, 0);
 			*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
 			*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
 			*(int*) (ent + 0x5a) = *(int*) 0x7f4c08;
@@ -215,8 +216,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 			*(int*) (ent + 0x70) = 5;
 tail:
 			if (count != 0) {
-				e2 = fcn_00503fe0(*(int*) (ent + 0xb0),
-				    1, 1);
+				e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 				if (e2 != 0) {
 					fcn_004c5a60(*(int*) (e2 + 1), -1,
 					    *(int*) ((char*) count + 2));
@@ -236,10 +236,10 @@ tail:
 		    + *(unsigned short*) (target + 0x27) * 0x21c) == 6
 		    || *(unsigned char*) (0x7f4ca2
 		    + *(unsigned short*) (target + 0x27) * 0x21c) == 7) {
-			io_FormatTextBuffer(text2, 0x1c56, target);
+			io_FormatTextBuffer(text, 0x1c56, target);
 			fcn_00545e80(*(int*) (0x7f4ca4
 			    + *(unsigned short*) (target + 0x27) * 0x21c),
-			    -1, text2, 0, 0x5f0,
+			    -1, text, 0, 0x5f0,
 			    *(int*) (target + 1), -1, 0, 0);
 		}
 		*(int*) (ent + 0x70) = 5;

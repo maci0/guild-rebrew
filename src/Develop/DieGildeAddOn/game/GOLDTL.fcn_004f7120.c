@@ -11,6 +11,8 @@ int __cdecl fcn_004f7120(int id, short* a1, int* a2, short* a3, int* a4)
 	int idx;
 	char* o;
 	int sum;
+	int extra;
+	float f;
 
 	if (id != -1) {
 		idx = FindStraftatIndexById(id);
@@ -21,9 +23,9 @@ int __cdecl fcn_004f7120(int id, short* a1, int* a2, short* a3, int* a4)
 					o = gm_LookupEntityRecordById(*(int*) (0x9a3816 + idx * 0x2d));
 					if (o != 0) {
 						*a3 = *(short*) o;
-						sum = fcn_00508eb0(*(unsigned short*) o, 1) + sum;
-						*a2 = (int) ((fcn_0050f980(*(unsigned short*) o, *(unsigned short*) a1, 1)
-						    * *(float*) 0x664138 + *(float*) 0x6628cc) * sum * *(float*) 0x664334);
+						extra = fcn_00508eb0(*(unsigned short*) o, 1);
+						f = fcn_0050f980(*(unsigned short*) o, *(unsigned short*) a1, 1);
+						*a2 = (int) ((f * *(float*) 0x664138 + *(float*) 0x6628cc) * (extra + sum) * *(float*) 0x664334);
 						*a4 = rec[0] & 0xff;
 						return 1;
 					}

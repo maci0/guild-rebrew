@@ -80,7 +80,7 @@ Bank* __cdecl sb_LoadSampleBank(char* name, int init)
 	}
 	strncpy(bank->title, hdr.title, 0x32);
 	strncpy(bank->file, path, 0x100);
-	bank->count = hdr.total164;
+	bank->count = hdr.count;
 	bank->next = 0;
 	bank->samples = (Sample*) (bank + 1);
 	if (fread(bank->samples, 0x40, bank->count, fp) != bank->count) {

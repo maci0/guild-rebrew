@@ -20,7 +20,7 @@ void __cdecl fcn_00473150(unsigned char*);
 int __cdecl fcn_00511040(int idx, char* out);
 void __cdecl fcn_004432d0(int a, int b);
 char __cdecl fcn_00448360(const char* filename, void* stream, int progress);
-void __cdecl fcn_00516c50(void* p, void* unit);
+void __cdecl fcn_00516de0(char* a1, unsigned char a2);
 int __cdecl fcn_004026f0(char* p);
 void __cdecl gv_Free3Fields(int);
 void __cdecl fcn_0045b290(int, int);
@@ -76,7 +76,7 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 		strupr(name);
 		if (fcn_00448360(name, 0, restore)) {
 			if (g_6b8300 != 0) {
-				fcn_00516c50(g_6b8300, (void*) 1);
+				fcn_00516de0(g_6b8300, 1);
 			}
 			fcn_004432d0(saved, 0);
 			gv_Free3Fields(*(int*) (g_67a370 + 0xb0));
@@ -100,6 +100,9 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 				}
 			}
 			*(char*) (*(unsigned char*) p * 0x3dc + 0x1043695) = 0;
+		} else {
+			fcn_004432d0((int) p, 0);
+			goto label_511541;
 		}
 	} else {
 		if (g_774964 != 0 && (g_774670 <= 0 || g_7e2700 != 0)) {
@@ -118,11 +121,10 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 		fcn_00511040(a0, tmp);
 		sprintf(name, "scenes/*gb_%s.ed3", tmp);
 		strupr(name);
-		sprintf(tmp, "init_LoadGebaeudeScene: %s", name);
 		if (fcn_00448360(name, 0, restore)) {
 			fcn_004432d0(v, 0);
 			if (g_6b8300 != 0) {
-				fcn_00516c50(g_6b8300, (void*) 1);
+				fcn_00516de0(g_6b8300, 1);
 			}
 			fcn_004432d0(saved, 0);
 			fcn_00437ac0((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);

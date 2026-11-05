@@ -14,6 +14,7 @@ void* __cdecl fcn_004d1970(int a1, int a2)
 	char* rec;
 	char* obj;
 	char* e;
+	char* e2;
 	int i;
 	int f;
 
@@ -35,17 +36,17 @@ void* __cdecl fcn_004d1970(int a1, int a2)
 	*(unsigned char*) (obj + 0x240) = 4;
 	*(unsigned char*) (obj + 0x8d) |= 0x80;
 	fcn_004ce9e0(rec);
-	e = (char*) fcn_004ce610((char*) a1);
+	e = (char*) fcn_004ce610(src);
 	obj = *(char**) (rec + 0x184);
 	*(float*) (obj + 0x1a0) = (float) ((double) *(unsigned char*) (e + 9) * *(double*) 0x662ae8);
 	f = *(int*) (obj + 0x34);
 	sprintf((char*) f, (char*) 0x68b85c, rec + 4);
-	e = (char*) fcn_004ce680((char*) a1);
-	if (e != 0) {
+	e2 = (char*) fcn_004ce680(src);
+	if (e2 != 0) {
 		if (*(int*) (e + 0x58) == 2) {
-			*(int*) (e + 0x20) = 6;
+			*(int*) (e2 + 0x20) = 6;
 		} else {
-			*(int*) (e + 0x20) = 0x0f;
+			*(int*) (e2 + 0x20) = 0x0f;
 		}
 	}
 	return rec;

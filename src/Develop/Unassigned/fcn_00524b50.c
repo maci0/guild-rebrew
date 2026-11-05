@@ -54,18 +54,18 @@ int __cdecl fcn_00524b50(unsigned char *S)
                     return 0;
             }
             if (*(unsigned char *)(rec + 0x00) == 0x0c) {
-                if (!sub_5218f0(rec + 0xac, 4, 1, S))
+                if (!sub_5218f0(rec + 0xac, c2, 1, S))
                     return 0;
                 *(unsigned char **)(rec + 0xbc) =
                     (unsigned char *)sub_41db70(0x58, 0x6a24b4);
             } else if (*(unsigned char *)(rec + 0x00) == 0x0d) {
-                if (!sub_5218f0(rec + 0xac, 4, 1, S))
+                if (!sub_5218f0(rec + 0xac, c2, 1, S))
                     return 0;
                 *(int *)(rec + 0xbc) = -1;
                 if (*(int *)(rec + 0x70) == 6)
                     *(unsigned char *)(rec + 0xd0) = 0;
             } else {
-                if (!sub_5218f0(rec + 0xac, 4, 1, S))
+                if (!sub_5218f0(rec + 0xac, c2, 1, S))
                     return 0;
             }
             if (*(unsigned char *)(rec + 0x78) & 8) {

@@ -46,7 +46,7 @@ extern int g_100f950;
 void __cdecl fcn_0046b2b0(int id);
 int __cdecl fcn_0046b520(char* s, int font);
 void __cdecl fcn_00469c40(int x, int y, int slot);
-int __cdecl fcn_00469c30(int x, int y, int a3);
+int __cdecl fcn_004699c0(int x, int y, int a3);
 char __cdecl fcn_00411610(int shift, int ctrl, int alt, char key);
 int __cdecl fcn_00657a73(char* s, int len, int base);
 
@@ -158,8 +158,7 @@ tail15:
 				if (g_67d8ec != -1) {
 					fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
 				} else {
-					fcn_00469c30((short) g_100f898, (short) (g_100f89c - 7), g_67d3b0 + 8);
-					g_67d8ec = g_100f898;
+					g_67d8ec = fcn_004699c0((short) g_100f898, (short) (g_100f89c - 7), g_67d3b0 + 8);
 				}
 			}
 			g_14cf950 = 0;
@@ -186,6 +185,8 @@ tail15:
 				fcn_00657a73(w->text, w->text_len, 10);
 				c = g_14cf950;
 				w = (*(Combo**) &g_7725d0);
+			} else {
+				goto common_tail;
 			}
 		}
 		len = strlen(w->text);
@@ -204,7 +205,19 @@ tail15:
 		g_14cf950 = 0;
 		}
 		break;
+	case 60:
+	case 61:
+	case 62:
+	case 63:
+	case 64:
+	case 65:
+	case 66:
+	case 67:
+	case 68:
+	case 69:
+		break;
 	}
+common_tail:
 	w = (*(Combo**) &g_7725d0);
 	if (w == 0) {
 		return;

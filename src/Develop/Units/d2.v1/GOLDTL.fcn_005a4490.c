@@ -118,7 +118,7 @@ void __cdecl fcn_005a4490(char* p)
 				first = -1;
 				second = sel[0];
 			} else {
-				fcn_00533a60(g_772514, 0, sel, 2, g_14ab658);
+				fcn_00533a60(g_772514, 0, sel, 2, g_14ab658, g_14ab65c);
 				first = sel[0];
 				second = sel[1];
 			}
@@ -145,11 +145,11 @@ void __cdecl fcn_005a4490(char* p)
 				prev = -1;
 			}
 			if (count == 1) {
-				prev = d2_CreateRadioGroup(1, rows[0].image);
+				prev = d2_CreateRadioGroup(1, rows[0].text);
 			} else if (count == 2) {
-				prev = d2_CreateRadioGroup(2, rows[0].image, rows[1].image);
+				prev = d2_CreateRadioGroup(2, rows[0].text, rows[1].text);
 			} else if (count == 3) {
-				prev = d2_CreateRadioGroup(3, rows[0].image, rows[1].image, rows[2].image);
+				prev = d2_CreateRadioGroup(3, rows[0].text, rows[1].text, rows[2].text);
 			}
 			slot = prev;
 		}

@@ -20,6 +20,7 @@ int __stdcall MessageBoxA(void*, char*, char*, int);
 int __cdecl fcn_0042bd20(char* path)
 {
 	char* p;
+	char* inc;
 	char line[0xc8];
 	char names[0x80][0x200];
 	char* f;
@@ -49,9 +50,10 @@ int __cdecl fcn_0042bd20(char* path)
 	do {
 		memset(line, 0, 0xc8);
 		fgets(line, 0xc8, f);
-		if (!strstr(line, "<")) {
-			if (strstr(line, "#include")) {
-				p = fcn_0064e790(line, '"');
+		if (!strstr(line, "//")) {
+			inc = strstr(line, "#include");
+			if (inc) {
+				p = fcn_0064e790(inc, '"');
 				if (!p)
 					goto fail;
 				q = fcn_0064e790(p + 1, '"');

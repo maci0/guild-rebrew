@@ -89,7 +89,7 @@ void __cdecl fcn_00459050(int self)
 		for (c = 0; c < 7; c++) {
 			idx = c + r * 8;
 			cell = p + 0x60 + idx;
-			if (cell[0] && *(unsigned char*) (p + 0x31 + idx) && *(unsigned char*) (p + 0x38 + idx) && *(unsigned char*) (p + 0x39 + idx)) {
+			if (*(unsigned char*) (p + 0x30 + idx) && *(unsigned char*) (p + 0x31 + idx) && *(unsigned char*) (p + 0x38 + idx) && *(unsigned char*) (p + 0x39 + idx)) {
 				if (cell[0] || *(unsigned char*) (p + 0x61 + idx) || *(unsigned char*) (p + 0x68 + idx) || *(unsigned char*) (p + 0x39 + idx)) {
 					ind[count] = (short) idx;
 					count++;
