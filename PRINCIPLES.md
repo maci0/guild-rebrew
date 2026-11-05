@@ -1,97 +1,31 @@
 # Rebrew design principles
 
-## 1. Idempotency First
+These principles describe tooling. [AGENTS.md](AGENTS.md) owns project rules.
 
-Repeating a command with unchanged inputs must be safe. Identical writes preserve
-content and timestamps; retries must not destroy evidence.
+- Repeating a command with unchanged inputs must preserve content, timestamps and
+  evidence. Retries must be safe.
+- Resolve inputs from `rebrew-project.toml`. Make overrides explicit and replayable.
+- Use focused `rebrew` commands and public APIs rather than duplicate tools.
+- Record measured improvements and regressions. Respect SKIP; tooling failure must
+  not erase earned evidence. PROVEN remains a bounded semantic result.
+- Match each claim to its artifact: object, raw linked image or complete file.
+  Renames, comments and scores earn no verdict.
+- Probe in scratch and verify every affected target before adopting a change.
+- Recover names, types, calls and ownership from native evidence. Generated source
+  is a hypothesis, not evidence.
+- Keep analysis exchange separate from verdicts. BinSync carries reviewed analysis;
+  Rebrew owns statuses, flags, blockers and verification. A preview or failure must
+  not advance a sync baseline.
+- Preserve evidenced calling conventions, widths, precision and compiler-sensitive
+  forms. Follow the selected language constraints, including C89 declarations.
+- Check code, data and the whole file. Account for overlapping bytes once; BSS has
+  no file-backed payload.
+- Promote near matches only from actual comparisons. Search effort proves nothing.
+- Keep source separate from managed identity and state. Use locked atomic writers;
+  registration, edit stamps, external origins and verification are distinct facts.
 
-## 2. Config-Driven Execution
+Atomic replacement protects one file or store at a time. It is not a multi-file
+transaction. Managed stores return to mode `0444` after writes.
 
-Resolve project inputs from `rebrew-project.toml`. CLI overrides must remain
-explicit and reproducible.
-
-## 3. Composability and Modularity
-
-Expose focused operations through `rebrew <command>`. CMake and objdiff use
-`rebrew build driver` and `rebrew build objdiff-driver`; do not add duplicate
-`rebrew-*` executables.
-
-## 4. Verdict Fidelity (No Silent Status Loss)
-
-Record measured improvements and regressions. Respect SKIP and preserve earned
-verdicts on tooling failure. PROVEN is semantic evidence, replaced by the next
-byte verdict. Placeholder-size results must not erase an existing STUB.
-
-## 5. Byte-Identical Ground Truth
-
-Use complete reference/object/raw-image comparisons for the corresponding claim.
-A score, rename or comment edit earns no verdict; reverify changed inputs.
-
-## 6. Safe by Default (Shadow Workspaces)
-
-Probe in scratch, preserve known matches, and verify every affected target before
-adopting a source, declaration or compiler change.
-
-## 7. The Snowball Effect (Iterative Enrichment)
-
-Start with well-supported, tractable work. Feed verified names, types, calls and
-library identities back into the canonical catalog.
-
-## 8. Bi-Directional Synchronization
-
-BinSync carries native names, signatures, comments, locals, globals and types.
-Rebrew owns statuses, flags, blockers and verification. Preview/failure must not
-advance a shared baseline; remote deletions require explicit resolution.
-
-## 9. RAG over Hallucination
-
-Retrieve addresses, offsets, conventions and ownership from native evidence and
-canonical inputs. Derived coverage and declarations are not evidence owners.
-
-## 10. AI as a Baseline, Not a Finisher
-
-Use generated code as a hypothesis. Native review, compiler comparisons and
-bounded matching tools decide whether it holds.
-
-## 11. Tiered Context Budgets
-
-Prioritize referenced types, callee contracts and direct native evidence over
-distant context. Retrieve more when a concrete question requires it.
-
-## 12. Explicit Typing and Code Clarity
-
-State evidenced calling conventions, widths and precision. Prefer clear control
-flow, preserving compiler-sensitive forms where measurements require them.
-
-## 13. Predictable C89 Structural Conformity
-
-Follow the selected compiler's language constraints. For C89, declare locals at
-block top; verify emitted code after changing control flow or declarations.
-
-## 14. Continuous Linting and Validation
-
-Lint source/store edits and compare changed compile inputs. ADDRESS anchors bind
-the next declaration; identity and state belong in managed metadata, separate
-from source comments.
-
-## 15. Full-Binary Scope (Beyond `.text`)
-
-Check code, data, virtual layout, headers, imports, exports, resources and
-relocations. Report file agreement, accounted text and stored data verdicts
-separately. Count overlapping data once; BSS has no file-backed payload.
-
-## 16. Automated Near-Miss Promotion
-
-Use bounded, delta-ordered matching for eligible near misses. Promote only from
-actual comparison results, never the search budget or a proposed source shape.
-
-## 17. Source / Metadata Separation
-
-Locked writers own function/data/source/type stores. Registration preserves
-existing evidence; edit stamps, external origins, verification and caches remain
-separate. Never hand-edit managed stores or put STATUS in C.
-
-## Atomicity
-
-Source rewrites use atomic replacement. Managed stores use locked atomic writes
-and return to mode `0444`. Atomicity is per file/store, not a multi-file transaction.
+<!-- Section aliases retained for existing links. -->
+<a id="1-idempotency-first"></a><a id="10-ai-as-a-baseline-not-a-finisher"></a><a id="11-tiered-context-budgets"></a><a id="12-explicit-typing-and-code-clarity"></a><a id="13-predictable-c89-structural-conformity"></a><a id="14-continuous-linting-and-validation"></a><a id="15-full-binary-scope-beyond-text"></a><a id="16-automated-near-miss-promotion"></a><a id="17-source--metadata-separation"></a><a id="2-config-driven-execution"></a><a id="3-composability-and-modularity"></a><a id="4-verdict-fidelity-no-silent-status-loss"></a><a id="5-byte-identical-ground-truth"></a><a id="6-safe-by-default-shadow-workspaces"></a><a id="7-the-snowball-effect-iterative-enrichment"></a><a id="8-bi-directional-synchronization"></a><a id="9-rag-over-hallucination"></a><a id="atomicity"></a>

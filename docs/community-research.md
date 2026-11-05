@@ -1,100 +1,69 @@
-# Community research leads
+# Community research
 
-## EXE branch follow-up, 2026-10-19
+External analysis supplies hypotheses and test cases. Confirm each against the
+exact local binary before accepting a name, signature, field or counterpart.
+The reviews below imported no source, types, storage or verdicts.
 
-Reviewed [`exe-decompilation` at `181935f64a2a754c468420503ef7b57bbe27f64b`](https://github.com/europa1400-community/europa1400-decompilation/tree/181935f64a2a754c468420503ef7b57bbe27f64b),
-228 commits after the review below. Their `GOLD` remains German TL; their
-`GOLD_EN` corresponds to our English TL. Their non-identical C and behavioral
-test results are research leads, not local byte verdicts.
+## Match the binary
 
-Twenty English native windows were inspected. Thirteen original names were
-confirmed, including `gs_AddBeweis`, `bio_rd_array_quick`, `ch_UseGate`,
-`ecmd_RotateObject`, `evt_EnterFunction`, `txt_ReloadTextFile`,
-`txt_loadTextFile`, and six historical-text parsers. Preserve their original
-spelling: the community source translates `gs_AddBeweis` to `gs_AddEvidence`
-despite its own diagnostic ledger. Generated labels need independent review.
+The reviewed community project calls its German TL target GOLD and its English TL
+target GOLD_EN. This project calls the English non-TL target GOLD. Use the
+[reference hashes](build.md#reference-inputs), not labels or filenames.
 
-| Priority | Local TL work | Useful external evidence |
-| --- | --- | --- |
-| Original names | `0x4f5770`, `0x401500`, `0x406850`, `0x40eac0`, `0x427c40` | [Diagnostic ledger](https://github.com/europa1400-community/europa1400-decompilation/blob/181935f64a2a754c468420503ef7b57bbe27f64b/docs/anchors/GOLD.md), checked against our native operands. |
-| Historical text | Six placeholders at `0x4b20e0`, `0x4b2300`, `0x4b2670`, `0x4b2a10`, `0x4b2e20`, `0x4b3010` | [Two-pass parser](https://github.com/europa1400-community/europa1400-decompilation/blob/181935f64a2a754c468420503ef7b57bbe27f64b/src/game/game_g_historical_text.c): selectors, replacements and callback contracts. |
-| EVT | Tokenizer, preprocessing, parameter/frame entry and evaluation placeholders | [Interpreter design](https://github.com/europa1400-community/europa1400-decompilation/blob/181935f64a2a754c468420503ef7b57bbe27f64b/docs/modules/GOLD-evt.md); retain our repaired command-slot contracts. |
-| Quantization | `0x41bdc0`, `0x41bf90`, `0x41c290`, `0x41c470` | [Octree reconstruction](https://github.com/europa1400-community/europa1400-decompilation/blob/181935f64a2a754c468420503ef7b57bbe27f64b/src/game/game_g_quantize.c) and failure/tie fixtures; reuse our existing `octree.h`. |
-| TXT boundary | Loader `0x42d880`, possible separate writer `0x42dac0` | Our native loader returns at `0x42dabe`, before another prologue and `txt_SaveTextFile` diagnostics. Review the recorded 1,040-byte extent before implementation. |
-| Further algorithms | A*, BMP decoding, mouse state, scene morphing and AI | Corresponding [module notes](https://github.com/europa1400-community/europa1400-decompilation/tree/181935f64a2a754c468420503ef7b57bbe27f64b/docs/modules) and fixtures supply bounded behavior checklists. |
+The October 19 review is pinned to
+[181935f64a2a754c468420503ef7b57bbe27f64b](https://github.com/europa1400-community/europa1400-decompilation/tree/181935f64a2a754c468420503ef7b57bbe27f64b).
+Its diagnostic ledger, historical-text parsers, EVT notes, quantization work and
+asset decoders are useful leads. Its reconstructed game_g_ files do not attest
+original TUs, and its reported harness results were not reproduced here.
 
-Unique exported hashes locate 1,268 descriptive hypotheses after excluding
-address-generated labels, explicit guesses and tagged library ranges. Of these,
-233 have community C and no local stored verdict. These are triage counts,
-not missing-function counts or recovered bytes. Their newer harness covers
-return widths, immediate 80-bit ST0 capture, callback mutations and call order;
-its reported results were not reproduced here.
+## Retained native checks
 
-Their `game_g_*.c` files are reconstruction packages, not original TU
-attestations. Proposed local homes remain inferred and require provider,
-type-layout and native-order review. No new original TU was established, and
-no community source, types, storage or verdicts were imported. No general
-repository source license was found; zlib's separate license does not cover
-the reconstruction. Use the factual leads for independent native recovery.
+- TL 0x00402a00 pushes `ch_SetVisible(): invalid character`; the spelling is attested.
+- TL 0x00403200 pushes `ch_Create:Too many characters!`; use ch_Create rather than
+  the proposed ch_Create_Character name.
+- TL 0x004050c0 unlinks and clears a queue record, but its original name remains
+  unproved. The descriptive role is not a naming attestation.
+- Preserve `gs_AddBeweis` from its original diagnostic rather than translating it
+  to a community spelling.
 
-Full review: `.scratch/community-exe-review/REPORT.md` (13 ranked groups,
-47 checked pinned links), with external candidate lists and native JSON receipts.
+[Naming](naming_conventions.md) owns adoption rules. Current bindings may already
+incorporate a reviewed fact; a historical candidate count is not a work queue.
 
-## Earlier review, 2026-10-18
+## Reuse research carefully
 
-Reviewed 2026-10-18: [europa1400-decompilation](https://github.com/europa1400-community/europa1400-decompilation/tree/eabb183f6fecc3607ce661ca3810e03da7e336bc), commit `eabb183f6fecc3607ce661ca3810e03da7e336bc` (2026-10-09). This records independently checked facts and bounded research leads; it imports no source, types, storage or verdicts.
+Record/replay and shadow fixtures offer designs for API results, call order,
+callback mutation, random calls and x87 rounding. Their build hashes, modeled
+regions and masks limit the conclusions. Deliberate wrong-output controls help
+show whether a harness detects the claimed fault.
 
-## Match the build first
+The reviewed snapshots did not establish a general license for copied
+reconstruction source or harnesses. Do not treat a dependency's license as covering
+the surrounding repository. The complete pinned review, scope and links remain
+in the archive below; it is not a current license or repository-health audit.
 
-Their main reconstructed target is **German v2.06**. Guild's reference SHA-256 values exactly match their **English reference** entries in the [binary manifest](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/tools/binaries-gog.sha256):
+## Archived findings
 
-| Guild reference | SHA-256 | Their reference |
-| --- | --- | --- |
-| `original/Server/server.dll` | `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1` | SERVER_EN |
-| `original/Europa1400Gold_TL.exe` | `6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45` | GOLD_EN |
-| `original/Europa1400Gold.exe` | `7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8` | GOG English non-TL |
+<details>
+<summary>Historical sections and address lookup</summary>
 
-Their **GOLD** means German D3D8; Guild **GOLD** means English non-TL. Their German SERVER addresses also differ. Use hashes and native operands before transferring a name, signature or offset. Their [binary/version notes](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/docs/binaries.md) explain the filename/module mismatch.
-
-## Accepted native naming evidence
-
-These three leads came from their [English TL symbol export](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/symbols/GOLD_EN/functions.csv). Reviewed against Guild's current C sources and the native English TL instructions, including direct string operands:
-
-| TL function VA | Community name | Native evidence and accepted finding |
-| --- | --- | --- |
-| `0x00402a00` | `ch_SetVisible` | **Original name attested.** At `0x00402a83`, `push 0x00675328` supplies `ch_SetVisible(): invalid character`. The body forwards visibility to attached objects, clears/sets bit `0x20` in the byte at character `+0x8c`, and calls `ch_Updatelowpoly`. Current source: `src/GOLDTL.fcn_00402a00.c`. |
-| `0x00403200` | `ch_Create_Character` | **Accept original name `ch_Create`, not the proposed spelling.** At `0x0040325c`, `push 0x0067534c` supplies `ch_Create:Too many characters!`; the allocation label at `0x0067536c` is `ch:Create:Character`. The body allocates/zeros `0x244` bytes, finds a slot in the `0x300`-entry table, stores its index, or frees the allocation on exhaustion. Current source: `src/GOLDTL.fcn_00403200.c`. |
-| `0x004050c0` | `Deinit_QueueEntry` | **Accept unlink-and-clear semantics; original spelling unproved.** Native `+0x24/+0x28` links and owner `+0x14` update the owner's head at `+0x128`; `rep stosd` clears `0x65` DWORDs (`0x194` bytes). NULL returns 0, successful removal returns 1. No naming string occurs in the complete body. Current source: `src/GOLDTL.fcn_00405080.c`. |
-
-The first two names are ready evidence for a separately reviewed rename through `rebrew source rename`; no rename or STATUS change is performed by this research ingestion. The third remains a semantic lead under the [naming rules](naming_conventions.md).
-
-The wider source scan found **422 unreviewed candidates** where their export supplies a descriptive name and our active TL identity still uses `fcn_`/`FUN_`. That is a search queue, not 422 accepted names. Some rows are guesses or repeat facts already in our comments. For example, their `d3_LoadBinaryAnimationStream` at TL `0x004011f0` is broader than the locally visible four-byte VFS read establishes; `vfs_Tfopen` at TL `0x0042ff50` is already documented and implemented here.
-
-## Useful native review checklists
-
-Their [character creator notes](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/docs/modules/SERVER-character-create.md) and [fixtures](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/src/server/shadow_character_create.c) offer concrete cases: free/dead/full slots, mutations retained after late failure, parent/child aliases, consumed random calls, matrix intersections, and x87 store rounding. Their German creator is `0x10016f60`; Guild's known English creator is `gm_AllocSpieler`, `0x10018850`. This is a semantic correspondence, not a cross-build byte proof. Our [historical behavioral review](behavioral-verdicts.md) already covers the English function.
-
-Their [trade-command notes](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/docs/modules/SERVER-command-handler-trade.md) propose meanings for Character counters `+0x198/+0x19c/+0x1a0/+0x1a4` and town-good fields `+0x18/+0x1c`. Their German `cm_ExSellObjekt` is `0x1000ca10`; ours is `0x1000d930`. Some field meanings are explicitly guesses. Check our operands and owning layouts before using them in canonical types.
-
-Their [coverage audit](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/docs/modules/SERVER-standalone-audit.md) found 57 overlooked address-taken functions by following two 106-slot command tables. Their [table tests](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/src/server/shadow_command_tables.c) and [partial-read notes](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/docs/modules/SERVER-load-structure.md) are useful test designs. These do not establish missing Guild server bodies: the current Guild server build already matches the complete reference file, while source-fidelity work remains. Compare current status through Rebrew rather than their differently scoped 248-function count.
-
-## Testing design worth retaining
-
-Their [session recorder](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/src/server/record.h) intercepts socket/time APIs and writes E1REC records containing inputs, results and payloads. The [replayer](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/src/tools/replay.c) compares outgoing messages with an explicit mask for nondeterministic bytes. Their [shadow framework](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/src/hook/shadow.h) snapshots explicit regions, normalizes listed pointer fields and journals dependent calls; [fault counterchecks](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/scripts/verify-shadow.ps1) verify that deliberate errors are detected. This could complement our byte gates when testing intentional behavior changes.
-
-Their [suspended-process EXE harness](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/docs/exe/exetest.md) tests four pure functions at the reviewed commit. Its executable hash gate and hardcoded addresses target German, and the game CRT is uninitialized. Recordings are ignored rather than shipped in Git. Their reported replay and fuzz results were not reproduced here. A future English harness needs its own build bindings and bounded fixtures. This note implements no harness.
-
-## Import limits and replay
-
-No general repository LICENSE/COPYING or source license declaration was found in the tracked paths, README, CMake and docs inspected. Establish permission before copying their reconstructed source or harness. Their separately licensed [zlib provenance](https://github.com/europa1400-community/europa1400-decompilation/blob/eabb183f6fecc3607ce661ca3810e03da7e336bc/third_party/zlib-1.1.3/PROVENANCE.md) does not license the rest; Guild already has zlib providers. No new asset corpus/parser was established here, and separately linked community repositories were outside the scan.
-
-The review covered the 597-file tracked-path inventory, selected binary/strategy/server/type/testing docs and source, English/German symbol exports, and Guild source/catalog searches. It was not a line-by-line audit of the repository. Native naming checks are reproducible without compiling:
+The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
+`docs/community-research.md` notebook, including corrections and receipt paths. Entries below locate
+historical claims, not current instructions or verdicts. Hex values include
+code/data addresses and constants.
 
 ```sh
-rebrew binary asm show 0x00402a00 --size 146 --strings --target Europa1400Gold_TL.exe --json
-rebrew binary asm show 0x00403200 --size 110 --strings --target Europa1400Gold_TL.exe --json
-rebrew binary asm show 0x004050c0 --size 110 --strings --target Europa1400Gold_TL.exe --json
-sha256sum original/Server/server.dll original/Europa1400Gold_TL.exe original/Europa1400Gold.exe
+tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/community-research.md | less
 ```
 
-Only documentation is ingested. No source copies, native execution, builds, metadata renames, type bindings or storage definitions were added.
+| Historical section | Referenced hex values |
+| --- | --- |
+| <a id="community-research-leads"></a>Community research leads | - |
+| <a id="exe-branch-follow-up-2026-10-19"></a>EXE branch follow-up, 2026-10-19 | `0x401500`, `0x406850`, `0x40eac0`, `0x41bdc0`, `0x41bf90`, `0x41c290`, `0x41c470`, `0x427c40`, `0x42d880`, `0x42dabe`, `0x42dac0`, `0x4b20e0`, `0x4b2300`, `0x4b2670`, `0x4b2a10`, `0x4b2e20`, `0x4b3010`, `0x4f5770` |
+| <a id="earlier-review-2026-10-18"></a>Earlier review, 2026-10-18 | - |
+| <a id="match-the-build-first"></a>Match the build first | - |
+| <a id="accepted-native-naming-evidence"></a>Accepted native naming evidence | `0x004011f0`, `0x00402a00`, `0x00402a83`, `0x00403200`, `0x0040325c`, `0x004050c0`, `0x0042ff50`, `0x00675328`, `0x0067534c`, `0x0067536c` |
+| <a id="useful-native-review-checklists"></a>Useful native review checklists | `0x1000ca10`, `0x1000d930`, `0x10016f60`, `0x10018850` |
+| <a id="testing-design-worth-retaining"></a>Testing design worth retaining | - |
+| <a id="import-limits-and-replay"></a>Import limits and replay | `0x00402a00`, `0x00403200`, `0x004050c0` |
+
+</details>

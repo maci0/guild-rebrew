@@ -1,65 +1,69 @@
-# Documentation
+<a id="documentation"></a>
 
-[AGENTS.md](../AGENTS.md) owns project rules. [Goal history](goal-history.md)
-indexes milestones and archived notebooks.
+# Knowledge base
 
-## Reading order
+Each topic has one owner below. Link to that owner instead of copying its rules,
+status or findings. Historical measurements belong in archives; current verdicts
+belong in managed metadata.
 
-1. [Objective](../goal.md): acceptance criteria.
-2. [Current work](TODO.md): latest verified checkpoint and actionable queue.
-3. [Build/compare](../stubs/README.md): client scaffolds and their limits.
-4. A technical reference below, selected by the native question.
+<a id="reading-order"></a>
 
-Current procedure lives in AGENTS/skills and CLI help. Technical notebooks retain
-measured findings; their old scores, flags, helper names and failed-build states
-are not current instructions. Superseded conclusions point to corrections; full
-original text remains in the [archives](goal-history.md#full-notebooks).
+## Start and continue
 
-## Reference map
-
-| Question | Read |
+| Need | Canonical page |
 | --- | --- |
-| Which C shape changes the emitted bytes? | [C shapes](msvc6-c-shapes.md), indexed by symptom |
-| Why these registers or stack slots? | [Allocator findings](msvc6-allocator.md), indexed by topic |
-| Has this matching lever already failed? | [Codegen walls](codegen-walls.md), indexed by wall |
-| Which runner/cache path does verification use? | [Verification performance](verify-performance.md) |
-| Which assembly has reviewed evidence? | [Assembly audit](assembly-audit.md) |
-| What does this score or verdict establish? | [Measurement traps](measure-traps.md), indexed by trap |
-| What controls sections, imports and relocation layout? | [Link layout](msvc6-link-layout.md), indexed by topic |
-| Does this client function have server storage? | [Client-only sweep](client-only-sweep.md) |
-| Who owns this global or interior view? | [Data ownership](data-ownership.md) |
-| Where does this source/type belong? | [Source layout](source-layout.md) |
-| What name is attested or inferred? | [Naming conventions](naming_conventions.md) |
-| What useful community findings have been reviewed? | [Community research](community-research.md), build boundaries and native naming evidence |
-| How do contributors share source and analysis? | [Collaboration](collaboration.md), Git/PRs and optional BinSync |
-| Which tool replaces an old script? | [Tooling](tooling-upstream.md) |
-| How are vendor patches reproduced? | [Vendoring](vendoring.md) |
-| What process mistakes should I avoid? | [Workflow traps](workflow-traps.md), indexed by trap |
-| What principles guide project work? | [Project principles](project-principles.md); generated tool rules remain in [PRINCIPLES.md](../PRINCIPLES.md) |
-| What is known about a residue function's behavior? | [Behavioral reviews](behavioral-verdicts.md), historical |
-| What is known about the original build? | [Build facts](general-knowledge.md); the index names the retracted rounds |
-| What are the game, network and asset conventions? | [Game compendium](game-compendium.md) |
+| Project overview | [Repository README](../README.md) |
+| Completion criteria | [Objective](../goal.md) |
+| Current validation and priorities | [Current work](TODO.md) |
+| Unfinished source questions | [Handoff](HANDOFF.md) |
+| Server setup/build | [Build guide](build.md) |
+| Client comparison builds | [Client guide](../stubs/README.md) |
+| Implementation and metadata rules | [AGENTS.md](../AGENTS.md) |
+| Releases | [1.10.0](releases/1.10.0.md) |
 
-## Evidence lookup
+## Workflows
+
+| Topic | Canonical page |
+| --- | --- |
+| Shared source and analysis | [Git and BinSync](collaboration.md) |
+| CLI selection and upstream tooling | [Tooling](tooling-upstream.md) |
+| Verification and caches | [Verification](verify-performance.md) |
+| Vendor inputs and patches | [Vendoring](vendoring.md) |
+| Process mistakes | [Workflow checks](workflow-traps.md) |
+| Tool design | [Principles](../PRINCIPLES.md) |
+
+<a id="reference-map"></a>
+
+## Technical reference
+
+| Question | Canonical page |
+| --- | --- |
+| Which names are attested or inferred? | [Naming](naming_conventions.md) |
+| Where does a definition belong? | [Source layout](source-layout.md) |
+| Who allocates these bytes? | [Data ownership](data-ownership.md) |
+| What compiler/runtime did each target use? | [Build facts](general-knowledge.md) |
+| Which C expression changes the emitted code? | [C shapes](msvc6-c-shapes.md) |
+| Why these registers or stack slots? | [Register allocation](msvc6-allocator.md) |
+| What controls the linked image? | [Link layout](msvc6-link-layout.md) |
+| What does a comparison prove? | [Measurement](measure-traps.md) |
+| Has a probe family already failed? | [Negative results](codegen-walls.md) |
+| Which assembly is evidenced? | [Assembly audit](assembly-audit.md) |
+| What is known about the game and formats? | [Game reference](game-compendium.md) |
+| Which external findings were reviewed? | [Community research](community-research.md) |
+
+<a id="evidence-lookup"></a><a id="keep-it-short"></a>
+
+## Research and history
+
+[Goal history](goal-history.md) lists the notebooks and how to read them.
+The [client/server sharing survey](client-only-sweep.md) and
+[behavioral reviews](behavioral-verdicts.md) are historical research indexes.
+Technical pages retain searchable address indexes and old section anchors where
+needed. An index entry locates a historical claim; it does not validate that claim.
 
 ```sh
 uv run rebrew source findings 0x<VA> --json
-uv run rebrew source findings 0x<VA> --window 64 --json
 ```
 
-These search live Markdown under `docs/`. Retired logs are in the
-[archives](goal-history.md#full-notebooks). A figure belongs to its checkpoint.
-Report status from current metadata and the gate. Historical postlink agreement
-is an old pipeline result. Bare commands use the default target, GoldTL; name
-`server.dll` for the server. Store layout is in the
-[project principles](project-principles.md).
-
-## Keep it short
-
-- Link to the owning fact instead of copying a status report or another guide.
-- Findings retain target/VA, result, limits and receipt/replay. Omit running-job
-  transcripts and repeated whole-project status reports.
-- Keep cited section numbers/anchors. Replace a superseded body with its concise
-  correction and evidence pointer; do not leave the invalid instruction beside it.
-- Qualify client VAs with TL or Gold; server VAs start `0x100…`.
-- Leave generated coverage, vendor documents and managed metadata to their owners.
+[Provenance](provenance.md) is an append-only decision ledger, not a procedure.
+Generated instructions, managed stores and vendor documents stay with their owners.
