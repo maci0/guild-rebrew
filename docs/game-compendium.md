@@ -64,14 +64,7 @@ Detailed native paths, packet cases and older surveys are indexed below.
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/game-compendium.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
-
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/game-compendium.md | less
-```
+Original notebook: `docs/game-compendium.md` in the [documentation archive](goal-history.md#full-notebooks).
 
 | Historical section | Referenced hex values |
 | --- | --- |
@@ -81,8 +74,8 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/game-compendium.md | 
 | <a id="3-editions-versions-executables-patches"></a>3. Editions, versions, executables, patches | - |
 | <a id="4-binaries-in-this-repo"></a>4. Binaries in this repo | `0x10000000`, `0x10009320`, `0x10009350` |
 | <a id="5-original-source-tree-attested"></a>5. Original source tree (attested) | - |
-| <a id="6-architecture"></a>6. Architecture | `0x264264`, `0x100093a0`, `0x10014db0` |
-| <a id="7-network"></a>7. Network | `0x264264`, `0x101deb00`, `0x114ffe20`, `0x8004667e` |
+| <a id="6-architecture"></a>6. Architecture | `0x00264264`, `0x100093a0`, `0x10014db0` |
+| <a id="7-network"></a>7. Network | `0x00264264`, `0x101deb00`, `0x114ffe20`, `0x8004667e` |
 | <a id="8-persistence-saveload"></a>8. Persistence (save/load) | `0x10012440`, `0x10012470`, `0x100127d0`, `0x100128f0`, `0x10012eb0`, `0x10013230`, `0x10013b10`, `0x10014070`, `0x10014260` |
 | <a id="9-diagnostics-errorlogging"></a>9. Diagnostics (error/logging) | - |
 | <a id="10-memory-m_alloc"></a>10. Memory (m_alloc) | - |

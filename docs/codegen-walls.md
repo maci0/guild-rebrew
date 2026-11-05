@@ -27,20 +27,12 @@ Use [C shapes](msvc6-c-shapes.md) for expression hypotheses and
 [register allocation](msvc6-allocator.md) for value/slot analysis. Preserve canonical
 whole-TU game flags; diagnostic overrides do not become production policy.
 
-
 ## Archived findings
 
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/codegen-walls.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
-
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/codegen-walls.md | less
-```
+Original notebook: `docs/codegen-walls.md` in the [documentation archive](goal-history.md#full-notebooks).
 
 | Historical section | Referenced hex values |
 | --- | --- |
@@ -106,6 +98,6 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/codegen-walls.md | le
 | <a id="51-task-removal-memset-setup-two-scheduling-ties-remain"></a>51. Task-removal memset setup: two scheduling ties remain | `0x004050c0` |
 | <a id="52-sound-request-rotation-resolved-in-a-later-staged-candidate"></a>52. Sound request: rotation resolved in a later staged candidate | `0x004193f0` |
 | <a id="53-pair-copy-allocation-after-correcting-the-tails-alias-behavior"></a>53. Pair-copy allocation after correcting the tail's alias behavior | `0x00407760` |
-| <a id="bounded-tl-setup-and-return-ordering-controls-2026-10-04"></a>Bounded TL setup and return ordering controls, 2026-10-04 | `0x4d8d17`, `0x4d9ce3`, `0x528166`, `0x5287da`, `0x528839`, `0x528a90`, `0x528b49`, `0x57486d`, `0x5748f5`, `0x57494b`, `0x774720`, `0x100df20`, `0x1015f40`, `0x1015f48`, `0x10161bc` |
+| <a id="bounded-tl-setup-and-return-ordering-controls-2026-10-04"></a>Bounded TL setup and return ordering controls, 2026-10-04 | `0x004d8d17`, `0x004d9ce3`, `0x00528166`, `0x005287da`, `0x00528839`, `0x00528a90`, `0x00528b49`, `0x0057486d`, `0x005748f5`, `0x0057494b`, `0x00774720`, `0x0100df20`, `0x01015f40`, `0x01015f48`, `0x010161bc` |
 
 </details>

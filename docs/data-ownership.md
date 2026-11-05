@@ -34,7 +34,7 @@ The private 24-byte VFS directory entry is distinct from the pooled stream whose
 constructor requests 320 bytes and accesses mode flags at +0x13c. A pointer
 contract can remain opaque while its full layout is unknown.
 
-Likewise, changing stream formals, adding declaration identities or binding a
+Likewise, changing stream parameters, adding declaration identities or binding a
 literal does not create storage or earn a data verdict. Keep native access width,
 C type, complete extent and allocation ownership as separate claims.
 
@@ -54,22 +54,14 @@ owns the full storage rules.
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/data-ownership.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
-
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/data-ownership.md | less
-```
+Original notebook: `docs/data-ownership.md` in the [documentation archive](goal-history.md#full-notebooks).
 
 | Historical section | Referenced hex values |
 | --- | --- |
-| Data ownership | - |
 | <a id="extents-and-layout"></a>Extents and layout | - |
 | <a id="historical-storage-investigation-october-4"></a>Historical storage investigation, October 4 | `0x10034684`, `0x10035408`, `0x11766788` |
 | <a id="check-changes"></a>Check changes | - |
-| <a id="vfs-stream-and-directory-entry-are-distinct-goal81-2026-10-17"></a>VFS stream and directory entry are distinct (Goal81, 2026-10-17) | `0x6b7fe4`, `0x6b7fec` |
-| <a id="stream-contracts-do-not-create-storage-owners-goal82-2026-10-17"></a>Stream contracts do not create storage owners (Goal82, 2026-10-17) | `0x6500c2`, `0x699820`, `0x6a22a8`, `0x6a22c0`, `0x6a23ac`, `0x6a23d0`, `0x10058e0`, `0x10058e4` |
+| <a id="vfs-stream-and-directory-entry-are-distinct-goal81-2026-10-17"></a>VFS stream and directory entry are distinct (Goal81, 2026-10-17) | `0x006b7fe4`, `0x006b7fec` |
+| <a id="stream-contracts-do-not-create-storage-owners-goal82-2026-10-17"></a>Stream contracts do not create storage owners (Goal82, 2026-10-17) | `0x006500c2`, `0x00699820`, `0x006a22a8`, `0x006a22c0`, `0x006a23ac`, `0x006a23d0`, `0x010058e0`, `0x010058e4` |
 
 </details>

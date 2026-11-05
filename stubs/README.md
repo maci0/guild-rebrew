@@ -15,14 +15,14 @@ uv run rebrew toolchain build msvc-6.0-sp5-pp
 ```
 
 Supply the pinned [Miles 6.1c archive](../references/mss-6.1c/README.md).
-GoldTL also needs the SDK libraries selected in CMakeLists.txt, `llvm-ar`, and
+GoldTL also needs the SDK libraries selected in `CMakeLists.txt`, `llvm-ar`, and
 `references/dxsdk8/lib/d3dx8-xpsp1.lib`. Configure checks these SDK inputs:
 
 | Input | SHA-256 |
 | --- | --- |
 | XP SP1 archive | `c02e4fedf3e2e0964a1eed98ca02b28d68a0a7ac184594b04212216253bfbd9d` |
-| obj\i386\cd3dximage.obj | `d0c91f1bf7550ae39709f738416a48710e75aba61749203d8c7b03d5a07fe592` |
-| obj\i386\jerror.obj | `e1203fbdc8cb43231d4952b24843030fdd4f332c51e858807bdaf6cbda0516ba` |
+| `obj\i386\cd3dximage.obj` | `d0c91f1bf7550ae39709f738416a48710e75aba61749203d8c7b03d5a07fe592` |
+| `obj\i386\jerror.obj` | `e1203fbdc8cb43231d4952b24843030fdd4f332c51e858807bdaf6cbda0516ba` |
 
 The pristine archive stays local and unpatched. Matching a member alone does not
 establish original raw-link composition.
@@ -40,17 +40,17 @@ uv run cmake -S . -B build/clients \
 uv run cmake --build build/clients --parallel 2
 ```
 
-Gold uses /ML with LIBC; GoldTL uses /MT with LIBCMT. The configured backend runs
+Gold uses `/ML` with LIBC; GoldTL uses `/MT` with LIBCMT. The configured backend runs
 CL/LINK/LIB in the pinned images. The historical toolchain filename does not
 select Docker execution.
 
-The scaffold's /OPT:NOREF retains selected contributions while WinMain is a stub.
+The scaffold's `/OPT:NOREF` retains selected contributions while WinMain is a stub.
 It does not establish original retention, providers or successful gameplay.
 
 ## Compare
 
 Use the image and map from that build. Pass `--built` because the configured
-GoldTL raw_link points to a different historical build directory.
+GoldTL `raw_link` points to a different historical build directory.
 
 ```sh
 uv run rebrew verify --target Europa1400Gold.exe \
@@ -86,5 +86,6 @@ become available. Conflicting decorated signatures may need separate TUs.
 
 `specials.toml` records explicit comparison capacities/initial values, not recovered
 allocations. `omitted-sources.cmake` records collision choices, not native identity.
-Do not link server BSS-owner files into client scaffolds. Refresh `gold/symbols.json`
-with [linked_manifest.py](linked_manifest.py) only after a successful link.
+Do not link server BSS-owner files into client scaffolds. Generate link manifests
+with [linked_manifest.py](linked_manifest.py) only after a successful link, writing
+them under ignored `build/` rather than checking them into Git.

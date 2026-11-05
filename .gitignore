@@ -24,6 +24,7 @@ htmlcov/
 # Editors and operating systems
 .idea/
 .vscode/
+/.obsidian/
 *.swp
 *.swo
 *~
@@ -78,6 +79,8 @@ compile_commands.json
 /flag_sweep_output.txt
 /cand.c
 /cand_swap.c
+/v[0-9]*.c.txt
+/stubs/*/symbols.json
 
 # Local decompiler databases can contain original binaries
 *.gpr

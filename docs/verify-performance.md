@@ -46,22 +46,13 @@ for the current environment.
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/verify-performance.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
+Original notebook: `docs/verify-performance.md` in the [documentation archive](goal-history.md#full-notebooks).
 
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/verify-performance.md | less
-```
-
-| Historical section | Referenced hex values |
-| --- | --- |
-| <a id="verification-and-runner-performance"></a>Verification and runner performance | - |
-| <a id="choose-the-check"></a>Choose the check | - |
-| <a id="causes-and-fixes"></a>Causes and fixes | - |
-| <a id="runner-and-caches"></a>Runner and caches | - |
-| <a id="imported-slots"></a>Imported slots | - |
-| <a id="replays"></a>Replays | - |
+- <a id="verification-and-runner-performance"></a>Verification and runner performance
+- <a id="choose-the-check"></a>Choose the check
+- <a id="causes-and-fixes"></a>Causes and fixes
+- <a id="runner-and-caches"></a>Runner and caches
+- <a id="imported-slots"></a>Imported slots
+- <a id="replays"></a>Replays
 
 </details>

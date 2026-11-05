@@ -1,6 +1,6 @@
 # Git and BinSync
 
-The project repository owns C, headers, configuration, layouts, native evidence and
+The project repository contains C, headers, configuration, layouts, native evidence and
 managed metadata. Use a narrow branch/worktree, agree on definition ownership,
 and submit affected-target checks with changes. Rebrew writers own metadata edits.
 
@@ -10,7 +10,7 @@ byte-match claims, and does not replace source review.
 
 ## State repositories
 
-Use one separate state Git repository per exact reference binary. Give each
+Use one state Git repository per exact reference binary. Give each
 analyst and bridge its own BinSync username and branch. Use separate checkouts
 for live clients with different users; do not switch branches under another client.
 
@@ -53,19 +53,12 @@ private names must not become bulk canonical types.
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/collaboration.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
-
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/collaboration.md | less
-```
+Original notebook: `docs/collaboration.md` in the [documentation archive](goal-history.md#full-notebooks).
 
 | Historical section | Referenced hex values |
 | --- | --- |
 | <a id="collaborating-with-git-and-binsync"></a>Collaborating with Git and BinSync | - |
-| <a id="live-ghidra-analysis"></a>Live Ghidra analysis | `0x4b6f00` |
+| <a id="live-ghidra-analysis"></a>Live Ghidra analysis | `0x004b6f00` |
 | <a id="state-repository-and-users"></a>State repository and users | - |
 | <a id="review-each-exchange"></a>Review each exchange | - |
 

@@ -51,20 +51,11 @@ full status report, work queue or procedure to the notebooks.
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/goal-history.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
-
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/goal-history.md | less
-```
+Original notebook: `docs/goal-history.md` in the [documentation archive](goal-history.md#full-notebooks).
 
 | Historical section | Referenced hex values |
 | --- | --- |
 | <a id="goal-history"></a>Goal history | - |
-| Milestones | - |
-| <a id="recent-milestones"></a>Recent milestones | `0x4364f0` |
-| Full notebooks | - |
+| <a id="recent-milestones"></a>Recent milestones | `0x004364f0` |
 
 </details>

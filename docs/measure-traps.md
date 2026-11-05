@@ -31,14 +31,15 @@ A residue count is not a count of independent semantic errors.
 ## Stack arithmetic
 
 Resolve ESP-relative addresses with the pushes still pending at that instruction.
-Keep decimal and hexadecimal arithmetic explicit. At GoldTL 0x004fdfe0, five held pushes
-subtract 20 decimal bytes, or 0x14. The later displacement 0x2c therefore reaches
-B+0x18, the original buffer, not buffer+0x14.
+Keep decimal and hexadecimal arithmetic explicit. At GoldTL `0x004fdfe0`, let B
+be ESP before five pending pushes. They subtract 20 decimal bytes, or `0x14`.
+The later displacement `0x2c` reaches `B - 0x14 + 0x2c = B + 0x18`, the original
+buffer.
 
 ## x87 conditions
 
-For FCOM/FCOMP, AH condition bits are greater=0x00, less=0x01, equal=0x40,
-unordered=0x45. PF describes even parity of the masked byte, not equality.
+FCOM/FCOMP encode the comparison bits in `AH & 0x45`: greater=`0x00`, less=`0x01`,
+equal=`0x40`, unordered=`0x45`. PF reports even parity of the masked byte.
 
 | Idiom | Branch taken for |
 | --- | --- |
@@ -46,7 +47,7 @@ unordered=0x45. PF describes even parity of the masked byte, not equality.
 | TEST AH,0x44; JP | Greater, less, unordered |
 | AND AX,0x4100; JNE | Less, equal, unordered |
 
-Trace ST0/ST1 order, pops and branch destinations separately. m32/m64 widths do not
+Trace ST0/ST1 order, pops and branch destinations separately. Memory operand widths do not
 prove intermediate rounding or a source type. Signed zero and unordered values
 can distinguish expressions that agree on ordinary inputs.
 
@@ -60,29 +61,21 @@ An unchanged byte result does not validate a changed native identity or provider
 Write corrections as new provenance entries. Do not overwrite a failed receipt or
 restore a verdict merely to recover an aggregate count.
 
-
 ## Archived findings
 
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/measure-traps.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
-
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/measure-traps.md | less
-```
+Original notebook: `docs/measure-traps.md` in the [documentation archive](goal-history.md#full-notebooks).
 
 | Historical section | Referenced hex values |
 | --- | --- |
 | <a id="measurement-traps"></a>Measurement traps | - |
 | <a id="index"></a>Index | - |
 | <a id="recent-findings"></a>Recent findings | - |
-| <a id="diagnostic-compilers-can-change-floating-point-observations-2026-10-14"></a>Diagnostic compilers can change floating-point observations (2026-10-14) | `0x5722ef`, `0x66419c`, `0x3fa66666` |
+| <a id="diagnostic-compilers-can-change-floating-point-observations-2026-10-14"></a>Diagnostic compilers can change floating-point observations (2026-10-14) | `0x005722ef`, `0x0066419c`, `0x3fa66666` |
 | <a id="a-literal-value-change-can-retain-function-reloc-2026-10-14"></a>A literal-value change can retain function RELOC (2026-10-14) | `0x004b6b10`, `0x005eb8a8` |
-| <a id="actual-compiler-fixtures-need-input-and-boundary-controls-2026-10-14"></a><a id="1-only-the-linked-residue-decides"></a>Actual compiler fixtures need input and boundary controls (2026-10-14) | `0x41e1d0`, `0x422a20`, `0x499a50` |
+| <a id="actual-compiler-fixtures-need-input-and-boundary-controls-2026-10-14"></a><a id="1-only-the-linked-residue-decides"></a>Actual compiler fixtures need input and boundary controls (2026-10-14) | `0x0041e1d0`, `0x00422a20`, `0x00499a50` |
 | <a id="1-use-the-artifact-that-decides-the-claim"></a>1. Use the artifact that decides the claim | - |
 | <a id="2-one-candidate-one-full-rebuild-one-number"></a>2. One candidate, one full rebuild, one number | - |
 | <a id="3-relocation-accounting-makes-the-object-metrics-lie-about-what-is-left"></a>3. Relocation accounting makes the object metrics lie about what is left | - |
@@ -163,19 +156,19 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/measure-traps.md | le
 | <a id="a-trailing-nop-can-hide-a-wrong-cross-target-call-binding"></a>A trailing NOP can hide a wrong cross-target call binding | `0x005b1b10`, `0x005b1eb0`, `0x006628a0`, `0x00774a78` |
 | <a id="undefined-external-string-labels-need-complete-payload-proof"></a>Undefined external string labels need complete payload proof | - |
 | <a id="compiler-local-label-counters-are-not-relocation-identity-2026-10-04"></a>Compiler-local label counters are not relocation identity (2026-10-04) | - |
-| <a id="padding-scores-donor-gaps-and-the-installed-cli-2026-10-10"></a>Padding scores, donor gaps and the installed CLI (2026-10-10) | `0x405970`, `0x406510` |
+| <a id="padding-scores-donor-gaps-and-the-installed-cli-2026-10-10"></a>Padding scores, donor gaps and the installed CLI (2026-10-10) | `0x00405970`, `0x00406510` |
 | <a id="a-source-rename-can-leave-a-live-linker-anchor-2026-10-11"></a>A source rename can leave a live linker anchor (2026-10-11) | - |
 | <a id="a-shared-import-verdict-can-carry-the-wrong-identity-or-inputs-2026-10-11"></a>A shared import verdict can carry the wrong identity or inputs (2026-10-11) | - |
 | <a id="retire-a-shared-source-only-after-its-last-owner-moves-2026-10-11"></a>Retire a shared source only after its last owner moves (2026-10-11) | - |
 | <a id="discovery-overlap-can-hide-an-already-correct-source-extent-2026-10-15"></a>Discovery overlap can hide an already-correct source extent (2026-10-15) | - |
-| <a id="immediate-callback-stores-were-missing-from-upstream-xrefs-2026-10-15"></a>Immediate callback stores were missing from upstream xrefs (2026-10-15) | `0x50d350`, `0x5107f0` |
+| <a id="immediate-callback-stores-were-missing-from-upstream-xrefs-2026-10-15"></a>Immediate callback stores were missing from upstream xrefs (2026-10-15) | `0x0050d350`, `0x005107f0` |
 | <a id="a-probe-object-name-can-be-a-windows-device-name-2026-10-15"></a>A probe object name can be a Windows device name (2026-10-15) | - |
 | <a id="keep-rotations-executable-extent-separate-from-alignment-2026-10-15"></a>Keep rotation's executable extent separate from alignment (2026-10-15) | - |
 | <a id="inspect-each-targets-fixed-bytes-before-a-shared-drift-point-2026-10-15"></a>Inspect each target's fixed bytes before a shared drift point (2026-10-15) | - |
-| <a id="a-masked-diff-can-conceal-an-ambiguous-call-binding-2026-10-15"></a>A masked diff can conceal an ambiguous call binding (2026-10-15) | `0x4297c0`, `0x5012b0`, `0x5392a0` |
+| <a id="a-masked-diff-can-conceal-an-ambiguous-call-binding-2026-10-15"></a>A masked diff can conceal an ambiguous call binding (2026-10-15) | `0x004297c0`, `0x005012b0`, `0x005392a0` |
 | <a id="registration-extents-and-type-counts-are-separate-measurements-2026-10-16"></a>Registration, extents and type counts are separate measurements (2026-10-16) | - |
 | <a id="native-cutscene-allocation-failure-rejoins-a-pointer-read-goal67"></a>Native cutscene allocation failure rejoins a pointer read (Goal67) | - |
-| <a id="a-matching-loop-prefix-omitted-com-shutdown-goal76-2026-10-17"></a>A matching loop prefix omitted COM shutdown (Goal76, 2026-10-17) | `0x422d90`, `0x422db6`, `0x422dc0`, `0x46bc60`, `0x5de8c0`, `0x5eb36c`, `0xf8f080` |
-| <a id="copied-assembly-hid-a-fifth-dialog-argument-goal77-2026-10-17"></a>Copied assembly hid a fifth dialog argument (Goal77, 2026-10-17) | `0x41c830`, `0x41cf60`, `0x41d0d8`, `0x435f13` |
+| <a id="a-matching-loop-prefix-omitted-com-shutdown-goal76-2026-10-17"></a>A matching loop prefix omitted COM shutdown (Goal76, 2026-10-17) | `0x00422d90`, `0x00422db6`, `0x00422dc0`, `0x0046bc60`, `0x005de8c0`, `0x005eb36c`, `0x00f8f080` |
+| <a id="copied-assembly-hid-a-fifth-dialog-argument-goal77-2026-10-17"></a>Copied assembly hid a fifth dialog argument (Goal77, 2026-10-17) | `0x0041c830`, `0x0041cf60`, `0x0041d0d8`, `0x00435f13` |
 
 </details>

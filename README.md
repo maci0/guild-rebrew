@@ -4,10 +4,39 @@ C89 reconstruction of Europa 1400: The Guild using the original MSVC6 toolchains
 The [objective](goal.md) is one shared source tree that reproduces the complete
 server, GoldTL and Gold reference binaries.
 
+<a id="reconstruction-status"></a><a id="data-verification"></a>
+
 The latest source release is [1.10.0](docs/releases/1.10.0.md). Its rebuilt server
 matches all 286,720 reference bytes. Both clients remain incomplete, and the
 full project gate still fails. See [current work](docs/TODO.md) for the checks,
 limits and next actions.
+
+![Reconstruction progress: code-byte accounting, C function matches and raw-file comparison for each target](docs/assets/reconstruction-status.svg)
+
+C function progress counts `EXACT` and `RELOC` matches among non-library functions,
+excluding whole-function assembly. Code accounting also includes libraries and
+padding. These stored results are separate measures, not gameplay completion;
+the snapshot date is printed on each graphic.
+
+<details>
+<summary>Function map and data verification</summary>
+
+![Address-ordered function map with separate colors for C matches, libraries, assembly and unfinished functions](docs/assets/function-map.svg)
+
+![Data verification: initialized bytes, verified records and exact placement](docs/assets/data-verification.svg)
+
+</details>
+
+Refresh all three graphics from one read-only status snapshot:
+
+```sh
+uv run rebrew status --all-targets --json > /tmp/guild-rebrew-status.json
+uv run python scripts/progress_svg.py < /tmp/guild-rebrew-status.json > docs/assets/reconstruction-status.svg
+uv run python scripts/progress_svg.py --map < /tmp/guild-rebrew-status.json > docs/assets/function-map.svg
+uv run python scripts/progress_svg.py --data < /tmp/guild-rebrew-status.json > docs/assets/data-verification.svg
+```
+
+<a id="get-started"></a><a id="build-and-compare"></a><a id="4-build-the-compiler-images"></a><a id="5-compile-serverdll-with-cmake"></a><a id="6-compare-the-result-with-the-original"></a><a id="work-together"></a>
 
 ## Start here
 
@@ -15,6 +44,8 @@ limits and next actions.
 - [Build the client comparison scaffolds](stubs/README.md).
 - [Find documentation](docs/README.md) or review the [project rules](AGENTS.md).
 - [Contribute source or analysis](docs/collaboration.md).
+
+<a id="1-install-and-check-build-dependencies"></a><a id="2-clone-and-create-the-python-environment"></a>
 
 Quick setup after installing the [build prerequisites](docs/build.md#prerequisites):
 
@@ -25,6 +56,8 @@ uv python install 3.15.1
 uv sync
 uv run rebrew --version
 ```
+
+<a id="3-supply-the-original-server-dll"></a><a id="reference-provenance"></a>
 
 Reference binaries and compiler inputs are local dependencies, not release assets.
 Supply your own legally obtained game files. Build and comparison commands are in
@@ -43,6 +76,8 @@ the default target; select `server.dll` or `Europa1400Gold.exe` explicitly.
 Metadata stores hold identities and verdicts. Change them through Rebrew's locked
 writers, never by hand.
 
+<a id="project-map"></a>
+
 ## Project layout
 
 | Path | Purpose |
@@ -54,6 +89,8 @@ writers, never by hand.
 | `layout/` | Link-order and layout inputs |
 | `rebrew-*.toml` | Project configuration and managed metadata |
 | `docs/` | Build guides, current work and native research |
+
+<a id="optional-coverage-dashboard"></a>
 
 ## Optional dashboard
 
@@ -69,6 +106,3 @@ coverage is not gameplay completion or whole-image identity.
 ## License
 
 Project code is MIT licensed. Third-party sources retain their own notices.
-
-<!-- Section aliases retained for existing links. -->
-<a id="1-install-and-check-build-dependencies"></a><a id="2-clone-and-create-the-python-environment"></a><a id="3-supply-the-original-server-dll"></a><a id="4-build-the-compiler-images"></a><a id="5-compile-serverdll-with-cmake"></a><a id="6-compare-the-result-with-the-original"></a><a id="build-and-compare"></a><a id="data-verification"></a><a id="get-started"></a><a id="optional-coverage-dashboard"></a><a id="project-map"></a><a id="reconstruction-status"></a><a id="reference-provenance"></a><a id="work-together"></a>

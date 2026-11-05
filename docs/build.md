@@ -17,16 +17,19 @@ Install [uv](https://docs.astral.sh/uv/), allow your user to run Docker, then ch
 ```sh
 docker info
 unshare --user --map-root-user true
-uv python install 3.15.1
-uv sync
-uv run rebrew --version
 ```
 
-`pyproject.toml` and `uv.lock` pin the Python dependencies. The configured compiler
-backend is `unshare`; Docker prepares its immutable toolchain filesystems. The
-runner also needs rootless overlayfs, `openat2`, `pidfd_open` and `close_range`.
+The configured compiler backend is `unshare`. Docker prepares its immutable
+toolchain filesystems. The runner also needs rootless overlayfs, `openat2`,
+`pidfd_open` and `close_range`.
 The namespace command alone does not test all requirements. See the
 [toolchain guide](https://github.com/maci0/rebrew/blob/main/docs/TOOLCHAIN.md#experimental-unshare-backend).
+
+## Project environment
+
+Follow the [README quick setup](../README.md#start-here) to clone the repository
+and create its environment. Run subsequent project commands from the checkout
+root. `.python-version` selects Python; `pyproject.toml` and `uv.lock` pin dependencies.
 
 ## Reference inputs
 
@@ -60,7 +63,7 @@ The `-docker.cmake` filename is historical; the driver uses the configured backe
 
 ## Build the server
 
-Run from the repository root with a fresh build directory:
+Use a fresh build directory:
 
 ```sh
 uv run cmake -S . -B build/server-example \

@@ -1,7 +1,7 @@
 # Tooling
 
 Use `uv run rebrew <command>` and its public APIs before adding a helper.
-`pyproject.toml` and `uv.lock` own package pins. A sibling tooling checkout is not
+`pyproject.toml` and `uv.lock` specify package pins. A sibling tooling checkout is not
 needed for normal reconstruction.
 
 ## Choose an existing command
@@ -55,21 +55,12 @@ and review ownership before using it; do not infer permission to emit storage.
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/tooling-upstream.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
+Original notebook: `docs/tooling-upstream.md` in the [documentation archive](goal-history.md#full-notebooks).
 
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/tooling-upstream.md | less
-```
-
-| Historical section | Referenced hex values |
-| --- | --- |
-| <a id="project-tooling-and-upstream-rebrew"></a>Project tooling and upstream Rebrew | - |
-| <a id="retained-scripts"></a>Retained scripts | - |
-| <a id="replacements-for-retired-helpers"></a>Replacements for retired helpers | - |
-| <a id="upstream-receipts"></a>Upstream receipts | - |
-| <a id="import-table-api-extraction-2026-10-20"></a>Import-table API extraction (2026-10-20) | - |
+- <a id="project-tooling-and-upstream-rebrew"></a>Project tooling and upstream Rebrew
+- <a id="retained-scripts"></a>Retained scripts
+- <a id="replacements-for-retired-helpers"></a>Replacements for retired helpers
+- <a id="upstream-receipts"></a>Upstream receipts
+- <a id="import-table-api-extraction-2026-10-20"></a>Import-table API extraction (2026-10-20)
 
 </details>

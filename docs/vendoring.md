@@ -55,23 +55,14 @@ runtime witnesses. Client configuration and pre-link checks enforce that pin.
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/vendoring.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
-
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/vendoring.md | less
-```
+Original notebook: `docs/vendoring.md` in the [documentation archive](goal-history.md#full-notebooks).
 
 | Historical section | Referenced hex values |
 | --- | --- |
-| Vendored libraries | - |
 | <a id="layout"></a>Layout | - |
 | <a id="mechanism"></a>Mechanism | - |
-| Miles 6.1c | - |
-| <a id="zlib-113"></a>zlib 1.1.3 | `0x45ee00`, `0x45ee20`, `0x45f060`, `0x45f0a0`, `0x45f110`, `0x45f240`, `0x45f2c0`, `0x45f380`, `0x45f630`, `0x45f6d0`, `0x45f890`, `0x45f9e0`, `0x45fa90`, `0x462c40`, `0x462c60`, `0x462ea0`, `0x462fd0`, `0x463050`, `0x463100`, `0x463330`, `0x463490`, `0x4635e0`, `0x463670`, `0x64e66a`, `0x1040498`, `0x1002706c` |
-| <a id="minizip-unzipc"></a>minizip (unzip.c) | `0x4649d2`, `0x465750`, `0x465790` |
+| <a id="zlib-113"></a>zlib 1.1.3 | `0x0045ee00`, `0x0045ee20`, `0x0045f060`, `0x0045f0a0`, `0x0045f110`, `0x0045f240`, `0x0045f2c0`, `0x0045f380`, `0x0045f630`, `0x0045f6d0`, `0x0045f890`, `0x0045f9e0`, `0x0045fa90`, `0x00462c40`, `0x00462c60`, `0x00462ea0`, `0x00462fd0`, `0x00463050`, `0x00463100`, `0x00463330`, `0x00463490`, `0x004635e0`, `0x00463670`, `0x0064e66a`, `0x01040498`, `0x1002706c` |
+| <a id="minizip-unzipc"></a>minizip (unzip.c) | `0x004649d2`, `0x00465750`, `0x00465790` |
 | <a id="version-and-patch-audit-2026-10-11"></a>Version and patch audit (2026-10-11) | - |
 | <a id="workaround-removal-probes-2026-10-11"></a>Workaround removal probes (2026-10-11) | - |
 

@@ -21,7 +21,7 @@ limits; [register allocation](msvc6-allocator.md) covers homes and slots.
 | Register-only difference | Live ranges and original TU context before expression variations |
 
 A declaration change can alter addressing, aliasing, induction or register liveness.
-A byte-neutral result at one call site does not make it neutral everywhere.
+A change that preserves bytes at one call site may change them elsewhere.
 Likewise, algebraic equality does not establish equivalence under signed overflow,
 FP rounding or observable reloads.
 
@@ -42,20 +42,12 @@ FP rounding or observable reloads.
 Use [negative results](codegen-walls.md) before reopening an exhausted probe family.
 A failed search grants no [assembly exception](assembly-audit.md).
 
-
 ## Archived findings
 
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/msvc6-c-shapes.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
-
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-c-shapes.md | less
-```
+Original notebook: `docs/msvc6-c-shapes.md` in the [documentation archive](goal-history.md#full-notebooks).
 
 | Historical section | Referenced hex values |
 | --- | --- |
@@ -111,16 +103,16 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-c-shapes.md | l
 | <a id="160-proven-status-is-lost-by-a-stub-result-and-that-is-a-real-regression"></a>160. PROVEN status is lost by a STUB result, and that is a real regression | - |
 | <a id="162-relocation-masking-can-hide-a-wrong-symbol-the-false-reloc-same-rule-as-34"></a>162. Relocation masking can hide a wrong symbol: the false RELOC (same rule as §34) | `0x100100a0`, `0x10015950`, `0x100256a4`, `0x100256cc`, `0x100311f0`, `0x10031204` |
 | <a id="39-a-volatile-argument-read-defers-a-parameter-load-past-the-prologue-pushes"></a>39. A volatile argument read defers a parameter load past the prologue pushes | `0x10010710`, `0x10017c40` |
-| <a id="40-a-struct-assignment-breaks-a-register-tie-without-changing-a-byte"></a>40. A struct assignment breaks a register tie without changing a byte | `0x2641f8`, `0x2641fc`, `0x1000a080`, `0x10012470`, `0x1002d4f0` |
+| <a id="40-a-struct-assignment-breaks-a-register-tie-without-changing-a-byte"></a>40. A struct assignment breaks a register tie without changing a byte | `0x002641f8`, `0x002641fc`, `0x1000a080`, `0x10012470`, `0x1002d4f0` |
 | <a id="41-two-levers-that-each-regress-can-be-exact-together"></a>41. Two levers that each regress can be exact together | `0x10017c40` |
-| <a id="42-the-number-of-reaching-definitions-decides-loadstore-scheduling"></a>42. The number of reaching definitions decides load/store scheduling | `0x132154`, `0x2641f8`, `0x2641fc`, `0x264264`, `0x1000a080`, `0x101deb00`, `0x114ffe20` |
+| <a id="42-the-number-of-reaching-definitions-decides-loadstore-scheduling"></a>42. The number of reaching definitions decides load/store scheduling | `0x00132154`, `0x002641f8`, `0x002641fc`, `0x00264264`, `0x1000a080`, `0x101deb00`, `0x114ffe20` |
 | <a id="43-and-eax0xff-is-one-byte-shorter-than-the-same-mask-on-any-other-register"></a>43. `and eax,0xff` is one byte shorter than the same mask on any other register | - |
 | <a id="44-pragma-optimizea-on-reorders-a-field-read-against-a-store"></a>44. `#pragma optimize("a", on)` reorders a field read against a store | `0x100155c0` |
 | <a id="45-merging-duplicated-tail-stores-sinks-a-loop-store-below-the-decrement"></a>45. Merging duplicated tail stores sinks a loop store below the decrement | - |
 | <a id="46-the-x87-fxch-slot-and-a-folded-byte-compare-are-set-by-one-type-choice"></a>46. The x87 `fxch` slot and a folded byte compare are set by one type choice | `0x10019720`, `0x100257d0` |
 | <a id="47-a-loops-form-not-its-text-decides-where-c2-puts-its-cold-exit-block"></a>47. A loop's form, not its text, decides where C2 puts its cold exit block | `0x100093a0` |
 | <a id="48-msvc6-folds-a-compared-variable-into-a-later-store-and-no-spelling-keeps-it-in-the-register"></a>48. msvc6 folds a compared variable into a later store, and no spelling keeps it in the register | `0x100093a0`, `0x10009846`, `0x101deac0`, `0xffffffff` |
-| <a id="49-a-cflags-sweep-on-one-function-inert-negative-and-one-near-miss"></a>49. A CFLAGS sweep on one function: inert, negative, and one near miss | `0x10018850`, `0x1001A0F0` |
+| <a id="49-a-cflags-sweep-on-one-function-inert-negative-and-one-near-miss"></a>49. A CFLAGS sweep on one function: inert, negative, and one near miss | `0x10018850`, `0x1001a0f0` |
 | <a id="50-the-residual-codegen-classes-as-instructions"></a>50. The residual codegen classes, as instructions | `0x100097fb`, `0x1000984b`, `0x100098e3`, `0x10009baf`, `0xffffffff` |
 | <a id="51-volatile-on-a-local-is-a-scheduling-barrier-qualify-at-the-use-site"></a>51. `volatile` on a local is a scheduling barrier; qualify at the use site | `0x10008a90` |
 | <a id="52-the-16-bit-zero-extend-idiom-is-selected-by-volatile-not-by-c-spelling"></a>52. The 16-bit zero-extend idiom is selected by `volatile`, not by C spelling | `0x10009020`, `0x10011bf0`, `0x10018850`, `0xffffff86` |
@@ -177,12 +169,12 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-c-shapes.md | l
 | <a id="95-a-jcc-width-difference-is-a-readout-of-stub-distance-never-a-source-lever"></a>95. A jcc width difference is a readout of stub distance, never a source lever | `0x10016f80` |
 | <a id="96-four-rulers-one-object-always-state-which-convention-a-number-used"></a>96. Four rulers, one object: always state which convention a number used | - |
 | <a id="97-spec-audit-every-live-__asm-block-is-inside-the-original-used-asm-carve-out"></a>97. Spec audit: every live `__asm` block is inside the "original used asm" carve-out | `0x10006580`, `0x100068e0`, `0x10006d20`, `0x10008e40`, `0x10008f0c`, `0x1000b040`, `0x100174d0` |
-| <a id="98-byte-identical-outside-text-means-copied-outside-text"></a>98. "Byte-identical outside `.text`" means *copied* outside `.text` | `0x174059c`, `0x10024040`, `0x404015ff` |
+| <a id="98-byte-identical-outside-text-means-copied-outside-text"></a>98. "Byte-identical outside `.text`" means *copied* outside `.text` | `0x0174059c`, `0x10024040`, `0x404015ff` |
 | <a id="99-the-measuring-script-and-the-shipping-pipeline-had-drifted-apart"></a>99. The measuring script and the shipping pipeline had drifted apart | `0x10139820`, `0x117f65b4` |
 | <a id="100-data-is-placement-bound-msvc6-puts-every-string-literal-in-its-own-comdat"></a>100. `.data` is placement-bound: MSVC6 puts every string literal in its own COMDAT | `0x10027448` |
 | <a id="101-data-placement-was-dominated-by-the-link-order-of-the-length-pad-not-by-comdats"></a>101. `.data` placement was dominated by the link-order of the length pad, not by COMDATs | `0x10027030`, `0x10028940`, `0x1002e4d0`, `0x10030268` |
 | <a id="102-fold-priority-only-needs-to-beat-the-first-member-comdat-not-the-whole-link"></a>102. Fold priority only needs to beat the first *member* COMDAT, not the whole link | - |
-| <a id="103-rdatas-whole-residue-is-the-import-table-and-the-symbol-order-is-already-correct"></a>103. `.rdata`'s whole residue is the import table, and the symbol order is already correct | `0x025000`, `0x026000`, `0x00026acc`, `0x00026bb2`, `0x029000`, `0x02c000`, `0x031000`, `0x033000`, `0x034000` |
+| <a id="103-rdatas-whole-residue-is-the-import-table-and-the-symbol-order-is-already-correct"></a>103. `.rdata`'s whole residue is the import table, and the symbol order is already correct | `0x00025000`, `0x00026000`, `0x00026acc`, `0x00026bb2`, `0x00029000`, `0x0002c000`, `0x00031000`, `0x00033000`, `0x00034000` |
 | <a id="104-inlining-is-not-the-residue-call-counts-already-match"></a>104. Inlining is not the residue: call counts already match | `0x10003640`, `0x1000bd50`, `0x1000c600`, `0x100122e0`, `0x10018130`, `0x10018150`, `0x10024008` |
 | <a id="the-related-question-does-emitting-missing-data-content-help-text"></a>The related question: does emitting missing `.data` content help `.text`? | - |
 | <a id="105-the-ga-flag-sweep-finally-run-and-why-it-says-nothing-new"></a>105. The GA flag sweep, finally run, and why it says nothing new | - |
@@ -259,7 +251,7 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-c-shapes.md | l
 | <a id="quirk-a-text-byte-that-is-not-codegen"></a>Quirk: a `.text` byte that is not codegen | - |
 | <a id="quirk-the-gap-blob-overlaps-40-real-symbols-and-that-is-correct"></a>Quirk: the gap blob overlaps ~40 real symbols, and that is correct | - |
 | <a id="152-the-predictor-ask-whether-the-bytes-after-the-edit-want-to-move-round-5-of-the-data-pass"></a>152. The predictor: ask whether the bytes *after* the edit want to move (round 5 of the data pass) | - |
-| <a id="the-trap-walked-into-deliberately-and-then-understood"></a>The trap, walked into deliberately and then understood | `0x10002692`, `0x100026C3`, `0x100033F3`, `0x100270f8`, `0x100270fc` |
+| <a id="the-trap-walked-into-deliberately-and-then-understood"></a>The trap, walked into deliberately and then understood | `0x10002692`, `0x100026c3`, `0x100033f3`, `0x100270f8`, `0x100270fc` |
 | <a id="the-measurement-that-would-have-vetoed-it"></a>The measurement that would have vetoed it | `0x10027360`, `0x100273e0` |
 | <a id="what-it-found-next-a-global-nothing-defined"></a>What it found next: a global nothing defined | `0x10028938`, `0x1002893c`, `0x100366dc` |
 | <a id="quirk-link_stubsc-hides-missing-data-as-successfully-linked-zeros"></a>Quirk: `link_stubs.c` hides missing data as successfully-linked zeros | `0x1002c3f0`, `0x11766204` |
@@ -294,21 +286,21 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-c-shapes.md | l
 | <a id="159-gm_allocspielers-interpolation-loop-the-reference-caches-two-floats-in-locals-round-985"></a>159. `gm_AllocSpieler`'s interpolation loop: the reference caches two floats in locals (round 985) | `0x10018bc8`, `0x10018bcb`, `0x10018bcd`, `0x10018bdd` |
 | <a id="163-msvc6-canonicalises-independent-operations-the-order-of-two-independent-statements-is-inert-round-1105"></a>163. msvc6 canonicalises independent operations: the ORDER of two independent statements is inert (round 1105) | `0x10002c5c` |
 | <a id="164-msvc6-sinks-a-load-past-an-intervening-store-and-hoists-it-back-when-the-value-is-used-first-round-1106"></a>164. msvc6 SINKS a load past an intervening store, and hoists it back when the value is USED first (round 1106) | `0x1000e21d` |
-| <a id="173-a-pointer-comparison-against-a-constant-is-unsigned-an-int-cast-makes-it-jl"></a>173. A pointer comparison against a constant is unsigned; an int cast makes it `jl` | `0x4e7390`, `0x53f8f0`, `0x14d0020`, `0x14d0c20` |
-| <a id="165-nan-safe-fcom-vs-fcomp-test-ah5--jp-is-a--not-a-"></a>165. NaN-safe `fcom` vs `fcomp`: `test ah,5 / jp` is a `<`, not a `<=` | `0x4514d0`, `0x6628c8`, `0x6628f8` |
-| <a id="174-a-constant-size-struct-assignment-is-rep-movsd-memcpy-of-the-same-size-is-not"></a>174. A constant-size struct assignment is `rep movsd`; `memcpy` of the same size is not | `0x4c5b00`, `0x4c62c0`, `0x4c6360`, `0x4c63f0`, `0x4c6b60`, `0x4ce210`, `0x4ce260` |
-| <a id="175-fld-dword-ptr-g--call--with-no-stack-store-is-a-floatint-cast"></a>175. `fld dword ptr [g]` + `call <helper>` with no stack store is a float→int cast | `0x4c54c0`, `0x64d228`, `0x67db50`, `0x67db54` |
-| <a id="176-push-imm32-of-a-data-address-is-push-offset-g-not-push-g"></a>176. `push imm32` of a data address is `push offset g`, not `push [g]` | `0x4c5700`, `0x7f4c00` |
-| <a id="177-a-destination-struct-with-internal-gaps-spell-the-offsets-not-the-struct"></a>177. A destination struct with internal gaps: spell the offsets, not the struct | `0x4c64b0` |
-| <a id="178-locals-whose-only-use-is-an-escaping-pointer-are-dead-store-eliminated-group-them"></a>178. Locals whose only use is an escaping pointer are dead-store-eliminated: group them | `0x403040` |
-| <a id="179-esp--n-argument-reads-count-every-push-that-is-still-on-the-stack"></a>179. `[esp + N]` argument reads: count every push that is still on the stack | `0x4f7740`, `0x5b2810`, `0x5b33a0` |
-| <a id="180-an-early-int-i--0-puts-the-loop-counter-in-esi-for-i--0--drops-it-to-eax"></a>180. An early `int i = 0;` puts the loop counter in `esi`; `for (i = 0; …)` drops it to `eax` | `0x4029c0`, `0x403200` |
+| <a id="173-a-pointer-comparison-against-a-constant-is-unsigned-an-int-cast-makes-it-jl"></a>173. A pointer comparison against a constant is unsigned; an int cast makes it `jl` | `0x004e7390`, `0x0053f8f0`, `0x014d0020`, `0x014d0c20` |
+| <a id="165-nan-safe-fcom-vs-fcomp-test-ah5--jp-is-a--not-a-"></a>165. NaN-safe `fcom` vs `fcomp`: `test ah,5 / jp` is a `<`, not a `<=` | `0x004514d0`, `0x006628c8`, `0x006628f8` |
+| <a id="174-a-constant-size-struct-assignment-is-rep-movsd-memcpy-of-the-same-size-is-not"></a>174. A constant-size struct assignment is `rep movsd`; `memcpy` of the same size is not | `0x004c5b00`, `0x004c62c0`, `0x004c6360`, `0x004c63f0`, `0x004c6b60`, `0x004ce210`, `0x004ce260` |
+| <a id="175-fld-dword-ptr-g--call--with-no-stack-store-is-a-floatint-cast"></a>175. `fld dword ptr [g]` + `call <helper>` with no stack store is a float→int cast | `0x004c54c0`, `0x0064d228`, `0x0067db50`, `0x0067db54` |
+| <a id="176-push-imm32-of-a-data-address-is-push-offset-g-not-push-g"></a>176. `push imm32` of a data address is `push offset g`, not `push [g]` | `0x004c5700`, `0x007f4c00` |
+| <a id="177-a-destination-struct-with-internal-gaps-spell-the-offsets-not-the-struct"></a>177. A destination struct with internal gaps: spell the offsets, not the struct | `0x004c64b0` |
+| <a id="178-locals-whose-only-use-is-an-escaping-pointer-are-dead-store-eliminated-group-them"></a>178. Locals whose only use is an escaping pointer are dead-store-eliminated: group them | `0x00403040` |
+| <a id="179-esp--n-argument-reads-count-every-push-that-is-still-on-the-stack"></a>179. `[esp + N]` argument reads: count every push that is still on the stack | `0x004f7740`, `0x005b2810`, `0x005b33a0` |
+| <a id="180-an-early-int-i--0-puts-the-loop-counter-in-esi-for-i--0--drops-it-to-eax"></a>180. An early `int i = 0;` puts the loop counter in `esi`; `for (i = 0; …)` drops it to `eax` | `0x004029c0`, `0x00403200` |
 | <a id="181-a-look-ahead-gi-scan-is-the-only-spelling-that-rotates-the-free-slot-loop"></a>181. A look-ahead `g[++i]` scan is the only spelling that rotates the free-slot loop | - |
 | <a id="182-k--c--3--0-fuses-into-an-lea-c--k3--k-does-not"></a>182. `K + (c ? 3 : 0)` fuses into an LEA; `c ? K+3 : K` does not | - |
-| <a id="183-one-source-for-two-targets-only-data-addresses-need-per-target-markers"></a>183. One source for two targets: only data addresses need per-target markers | `0x4e7150`, `0x4e8d10`, `0x4ea8e0`, `0x4ec660`, `0x517700`, `0x51af00`, `0x53e000`, `0x545d40`, `0x60f188`, `0x68deb8` |
-| <a id="184-a-bound-spelled-base--constant-still-encodes-as-one-immediate"></a>184. A bound spelled `base + constant` still encodes as one immediate | `0x4ea560`, `0x770b84`, `0x7d5f84`, `0x7f4ca4`, `0x85a0a4` |
+| <a id="183-one-source-for-two-targets-only-data-addresses-need-per-target-markers"></a>183. One source for two targets: only data addresses need per-target markers | `0x004e7150`, `0x004e8d10`, `0x004ea8e0`, `0x004ec660`, `0x00517700`, `0x0051af00`, `0x0053e000`, `0x00545d40`, `0x0060f188`, `0x0068deb8` |
+| <a id="184-a-bound-spelled-base--constant-still-encodes-as-one-immediate"></a>184. A bound spelled `base + constant` still encodes as one immediate | `0x004ea560`, `0x00770b84`, `0x007d5f84`, `0x007f4ca4`, `0x0085a0a4` |
 | <a id="185-servermainthreads-transfer-size-packet-dropping-volatile-fixes-the-push-order-and-costs-4-linked-bytes"></a>185. `ServerMainThread`'s transfer-size packet: dropping `volatile` fixes the push order and costs 4 linked bytes | `0x100093a0`, `0x101deac0`, `0xffffffff` |
-| <a id="186-gm_allocspieler-has-unreversed-client-twins-the-same-compiler-with-the-processor-pack-code-generator"></a>186. `gm_AllocSpieler` has unreversed client twins: the same compiler with the Processor Pack code generator | `0x507690`, `0x507f63`, `0x50a7e0`, `0x50b0b3`, `0x10018850`, `0x1001911b` |
+| <a id="186-gm_allocspieler-has-unreversed-client-twins-the-same-compiler-with-the-processor-pack-code-generator"></a>186. `gm_AllocSpieler` has unreversed client twins: the same compiler with the Processor Pack code generator | `0x00507690`, `0x00507f63`, `0x0050a7e0`, `0x0050b0b3`, `0x10018850`, `0x1001911b` |
 | <a id="187-a-raw-integer-address-is-not-a-symbol-msvc6-keeps-loads-through-it-across-calls"></a>187. A raw integer address is not a symbol: msvc6 keeps loads through it across calls | `0x10018850`, `0x10035434`, `0x100358a0`, `0x100a8c30` |
 | <a id="188-read-a-parameter-load-net-of-the-pushes-still-on-the-stack"></a>188. Read a parameter load net of the pushes still on the stack | `0x10018d2d`, `0x10018d35`, `0x10019572` |
 | <a id="189-double-on-one-factor-of-a-float--float-product-decides-which-operand-loads"></a>189. `(double)` on one factor of a `float * float` product decides which operand loads | - |
@@ -324,7 +316,7 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-c-shapes.md | l
 | <a id="199-a-two-constant-ternary-of-the-spellings-tried-only-c--a--b-gives-setcc-dec-and-a-b-add-b-with-a-dword-add"></a>199. A two-constant ternary: of the spellings tried, only `c ? A : B` gives `setcc; dec; and A-B; add B` with a dword add | `0x10018bb7`, `0x10019245`, `0x1001928a` |
 | <a id="200-carrier-wave-round-1145-the-documented-walls-that-were-source-shapes"></a>200. Carrier wave, round 1145: the documented walls that were source shapes | `0x1000bebb`, `0x1000bf38`, `0x1000d930`, `0x1000dd46`, `0x1000dec7`, `0x1002cd14`, `0x1002cd48`, `0x10035434` |
 | <a id="201-gv_exallocgraveyardworker-0x10011bf0-closes-under-plain-o2-the-ow-flag-was-the-wall"></a>201. `gv_ExAllocGraveyardWorker` (0x10011bf0) closes under plain `/O2`: the `/Ow` flag was the wall | `0x10011dd2`, `0x10011df5`, `0x10011dff`, `0x1071f7b3`, `0x10727977` |
-| <a id="202-goldtl-near-misses-closed-by-source-shape-processor-pack-client"></a>202. GOLDTL near misses closed by source shape (Processor Pack client) | `0x402090`, `0x41c190`, `0x41f8f0`, `0x43a3f0`, `0x4af050`, `0x4af800`, `0x4afb60`, `0x4c8a30`, `0x4dc5f0`, `0x4ee6d0`, `0x4f0cc0`, `0x4f45b0`, `0x4f58b0`, `0x4fc280`, `0x4fc2e0`, `0x4fc3a0`, `0x4ff080`, `0x5a89a0`, `0x5b1e20`, `0x5b4f70`, `0x5c80f0`, `0x5c8400`, `0x5d63e0`, `0x5dc990`, `0x6628a8`, `0x1015f40`, `0x1016198` |
+| <a id="202-goldtl-near-misses-closed-by-source-shape-processor-pack-client"></a>202. GOLDTL near misses closed by source shape (Processor Pack client) | `0x00402090`, `0x0041c190`, `0x0041f8f0`, `0x0043a3f0`, `0x004af050`, `0x004af800`, `0x004afb60`, `0x004c8a30`, `0x004dc5f0`, `0x004ee6d0`, `0x004f0cc0`, `0x004f45b0`, `0x004f58b0`, `0x004fc280`, `0x004fc2e0`, `0x004fc3a0`, `0x004ff080`, `0x005a89a0`, `0x005b1e20`, `0x005b4f70`, `0x005c80f0`, `0x005c8400`, `0x005d63e0`, `0x005dc990`, `0x006628a8`, `0x01015f40`, `0x01016198` |
 | <a id="203-a-separate-product-local-preserves-the-field-first-x87-load-with-a-shared-constant"></a>203. A separate product local preserves the field-first x87 load with a shared constant | `0x1000bdf0`, `0x100256b8` |
 | <a id="204-extern-float-reads-can-change-scheduling-even-when-the-value-and-width-agree"></a>204. Extern float reads can change scheduling even when the value and width agree | `0x10011bf0`, `0x41400000` |
 | <a id="205-recover-a-native-address-operand-without-changing-its-scale-or-access-width"></a>205. Recover a native address operand without changing its scale or access width | `0x1000b4d0`, `0x100151b0`, `0x10017330`, `0x100174d0`, `0x10017fb0`, `0x10029bb8`, `0x10029bc0`, `0x10029bc8`, `0x1002da30`, `0x10030860`, `0x10030b6a`, `0x10035880` |
@@ -346,11 +338,11 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-c-shapes.md | l
 | <a id="221-native-order-rejects-ordinary-initialized-data-as-well-as-ordinary-bss"></a>221. Native ORDER rejects ordinary initialized data as well as ordinary BSS | `0xc0300040` |
 | <a id="222-native-build-clocks-change-cls-builtins-and-coff-stamp-preserving-this-full-code-shape"></a>222. Native build clocks change CL's builtins and COFF stamp, preserving this full code shape | `0x60501020`, `0xc0300040` |
 | <a id="223-removing-stale-size-comments-and-wrapping-tables-preserves-complete-native-contributions"></a>223. Removing stale size comments and wrapping tables preserves complete native contributions | `0x1000e7d0`, `0x1000eb70`, `0x60501020` |
-| <a id="224-five-late-server-globals-become-common-without-changing-their-complete-code"></a>224. Five late server globals become COMMON without changing their complete code | `0x264264`, `0x1585584`, `0x11762e84`, `0x11762e94`, `0x11764084`, `0x11764094`, `0x60501020` |
+| <a id="224-five-late-server-globals-become-common-without-changing-their-complete-code"></a>224. Five late server globals become COMMON without changing their complete code | `0x00264264`, `0x01585584`, `0x11762e84`, `0x11762e94`, `0x11764084`, `0x11764094`, `0x60501020` |
 | <a id="225-splitting-gm_opens-six-zero-definitions-does-not-establish-their-placement"></a>225. Splitting gm_Open's six zero definitions does not establish their placement | `0x10034624`, `0x1003463c`, `0x10034640`, `0x10034670`, `0x10034678`, `0x1003467c`, `0x60501020`, `0xc0301080` |
 | <a id="226-eight-real-allocator-globals-form-one-ordinary-32-byte-bss-block"></a>226. Eight real allocator globals form one ordinary 32-byte BSS block | `0x10034624`, `0x10034628`, `0x1003462c`, `0x10034630`, `0x10034634`, `0x10034638`, `0x1003463c`, `0x10034640`, `0x117663a8`, `0x60501020`, `0xc0300080` |
 | <a id="227-a-live-common-request-can-select-a-hidden-member-before-its-code-is-discarded"></a>227. A live COMMON request can select a hidden member before its code is discarded | `0x10033bc8`, `0x10034110`, `0xc0300040` |
-| <a id="228-data-roots-can-preserve-code-while-moving-alignment-or-move-existing-code-too"></a>228. Data roots can preserve CODE while moving alignment, or move existing CODE too | `0x173f820`, `0x10034034`, `0x1003403c`, `0x100340a0`, `0x100340a8`, `0x10034260`, `0x101dd920`, `0xc0300040`, `0xc0400040` |
+| <a id="228-data-roots-can-preserve-code-while-moving-alignment-or-move-existing-code-too"></a>228. Data roots can preserve CODE while moving alignment, or move existing CODE too | `0x0173f820`, `0x10034034`, `0x1003403c`, `0x100340a0`, `0x100340a8`, `0x10034260`, `0x101dd920`, `0xc0300040`, `0xc0400040` |
 | <a id="229-redundant-import-retention-pragmas-do-not-determine-this-winsock-iat"></a>229. Redundant import retention pragmas do not determine this WinSock IAT | - |
 | <a id="230-eliminated-function-address-expressions-do-not-seed-vc6-undefined-symbols"></a>230. Eliminated function-address expressions do not seed VC6 undefined symbols | - |
 | <a id="231-tentative-globals-have-stable-coff-order-independent-of-their-textual-declaration-order"></a>231. Tentative globals have stable COFF order independent of their textual declaration order | - |
@@ -358,12 +350,12 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-c-shapes.md | l
 | <a id="233-removing-unreferenced-common-placeholders-leaves-the-native-image-unchanged"></a>233. Removing unreferenced COMMON placeholders leaves the native image unchanged | `0x100241a0` |
 | <a id="234-an-empty-stock-data-section-still-contributes-native-alignment"></a>234. An empty stock data section still contributes native alignment | `0x10034018`, `0xc0300040`, `0xc0400040`, `0xc0500040` |
 | <a id="235-an-unused-stock-duplicate-can-change-the-native-icf-survivor"></a>235. An unused stock duplicate can change the native ICF survivor | `0x1001f855`, `0x1002350a`, `0x10023812`, `0x60101020` |
-| <a id="236-a-tentative-pointer-and-an-initialized-pointer-use-different-native-storage"></a>236. A tentative pointer and an initialized pointer use different native storage | `0x173f7e0`, `0x173f800`, `0x10034610`, `0x10035408`, `0x1014c6c4` |
-| <a id="237-a-preceding-common-array-can-consume-an-apparent-alignment-gap"></a>237. A preceding COMMON array can consume an apparent alignment gap | `0x173f7f0`, `0x10034614`, `0x10034620`, `0x10034660`, `0x1003466c`, `0x10034680` |
-| <a id="238-one-real-common-provider-preserves-storage-sizes-but-changes-physical-order"></a>238. One real COMMON provider preserves storage sizes but changes physical order | `0x173f81c`, `0x10034b00` |
+| <a id="236-a-tentative-pointer-and-an-initialized-pointer-use-different-native-storage"></a>236. A tentative pointer and an initialized pointer use different native storage | `0x0173f7e0`, `0x0173f800`, `0x10034610`, `0x10035408`, `0x1014c6c4` |
+| <a id="237-a-preceding-common-array-can-consume-an-apparent-alignment-gap"></a>237. A preceding COMMON array can consume an apparent alignment gap | `0x0173f7f0`, `0x10034614`, `0x10034620`, `0x10034660`, `0x1003466c`, `0x10034680` |
+| <a id="238-one-real-common-provider-preserves-storage-sizes-but-changes-physical-order"></a>238. One real COMMON provider preserves storage sizes but changes physical order | `0x0173f81c`, `0x10034b00` |
 | <a id="239-debug-records-can-change-coff-without-changing-the-runtime-dll"></a>239. Debug records can change COFF without changing the runtime DLL | - |
 | <a id="240-live-common-extent-can-change-relocation-reservation-without-changing-code"></a>240. Live COMMON extent can change relocation reservation without changing code | - |
-| <a id="241-actual-allocator-commons-can-occupy-the-reference-run-without-moving-bulk-arrays"></a>241. Actual allocator COMMONs can occupy the reference run without moving bulk arrays | `0x173f7d0`, `0x10034620`, `0x10034624`, `0x10034640` |
+| <a id="241-actual-allocator-commons-can-occupy-the-reference-run-without-moving-bulk-arrays"></a>241. Actual allocator COMMONs can occupy the reference run without moving bulk arrays | `0x0173f7d0`, `0x10034620`, `0x10034624`, `0x10034640` |
 | <a id="242-pool-root-access-does-not-establish-an-ida-array-extent-a-separate-flag-can-be-common"></a>242. Pool-root access does not establish an IDA array extent; a separate flag can be COMMON | - |
 | <a id="243-uninitialized-section-roots-affect-common-placement-and-can-split-data"></a>243. Uninitialized section roots affect COMMON placement and can split `.data` | `0xc0300080` |
 | <a id="244-real-game-definitions-can-move-into-native-data-archives-without-changing-their-readers"></a>244. Real game definitions can move into native data archives without changing their readers | `0xc0400080` |
@@ -381,18 +373,18 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-c-shapes.md | l
 | <a id="256-an-indexed-table-load-can-numerically-coincide-with-another-global"></a>256. An indexed table load can numerically coincide with another global | `0x10016420`, `0x1013869c`, `0x1013989c` |
 | <a id="257-track-ecx-definitions-before-assigning-a-thiscall-signature"></a>257. Track ECX definitions before assigning a thiscall signature | `0x10006e30`, `0x10006e65`, `0x10008e1d`, `0x10008e1f`, `0x10008e2a`, `0x10008e2f`, `0x1000921a`, `0x1000921b`, `0x10009220`, `0x10009225`, `0x10034670`, `0x10034674`, `0x10034677`, `0x1003467f` |
 | <a id="258-preserve-the-stream-handle-when-its-argument-slot-becomes-the-read-count"></a>258. Preserve the stream handle when its argument slot becomes the read count | `0x004013b0`, `0x004013f0` |
-| <a id="259-early-pointer-return-and-ordered-copy-setup-recover-the-animation-builder"></a>259. Early pointer return and ordered copy setup recover the animation builder | `0x405970`, `0x00406510`, `0x0040d7f7` |
+| <a id="259-early-pointer-return-and-ordered-copy-setup-recover-the-animation-builder"></a>259. Early pointer return and ordered copy setup recover the animation builder | `0x00405970`, `0x00406510`, `0x0040d7f7` |
 | <a id="260-compare-operand-order-in-the-task-removal-owner-guard"></a>260. Compare operand order in the task-removal owner guard | `0x004050c0` |
-| <a id="261-keep-the-sound-scale-temporary-double-until-its-final-float-store"></a>261. Keep the sound scale temporary double until its final float store | `0x418c80`, `0x4193f0`, `0x5eba10`, `0x662b40` |
+| <a id="261-keep-the-sound-scale-temporary-double-until-its-final-float-store"></a>261. Keep the sound scale temporary double until its final float store | `0x00418c80`, `0x004193f0`, `0x005eba10`, `0x00662b40` |
 | <a id="262-separate-float-distance-assignment-from-the-positional-sound-scale"></a>262. Separate float distance assignment from the positional sound scale | - |
 | <a id="263-typed-directinput-prefix-calls-preserve-indexed-vtable-code"></a>263. Typed DirectInput prefix calls preserve indexed-vtable code | - |
-| <a id="biased-table-displacement-from-a-zero-based-read-view"></a>Biased table displacement from a zero-based read view | `0x662ba8`, `0x662bf8` |
+| <a id="biased-table-displacement-from-a-zero-based-read-view"></a>Biased table displacement from a zero-based read view | `0x00662ba8`, `0x00662bf8` |
 | <a id="pointer-typed-conditional-crt-tail-wrapper"></a>Pointer-typed conditional CRT tail wrapper | - |
 | <a id="additional-unused-crt-prototypes-can-disturb-a-large-server-function"></a>Additional unused CRT prototypes can disturb a large server function | - |
 | <a id="typed-table-view-retains-signed-integer-address-iteration"></a>Typed table view retains signed integer address iteration | - |
 | <a id="byte-parameter-suppresses-integer-extension-at-the-call-boundary"></a>Byte parameter suppresses integer extension at the call boundary | - |
 | <a id="existing-byteconstant-callers-can-share-a-byte-width-prototype"></a>Existing byte/constant callers can share a byte-width prototype | - |
-| <a id="random-helper-return-declarations-affect-copies-before-widening-2026-10-04"></a>Random-helper return declarations affect copies before widening (2026-10-04) | `0x4a9000`, `0x4ad1c0`, `0x4faa90` |
+| <a id="random-helper-return-declarations-affect-copies-before-widening-2026-10-04"></a>Random-helper return declarations affect copies before widening (2026-10-04) | `0x004a9000`, `0x004ad1c0`, `0x004faa90` |
 | <a id="random-helper-return-width-changes-both-epilogues-2026-10-04"></a>Random-helper return width changes both epilogues (2026-10-04) | - |
 | <a id="slot-byte-signedness-changes-equality-promotion-2026-10-04"></a>Slot byte signedness changes equality promotion (2026-10-04) | `0x005be320`, `0x005ca560` |
 | <a id="unused-named-variadic-parameter-does-not-establish-a-prototype-2026-10-04"></a>Unused named variadic parameter does not establish a prototype (2026-10-04) | - |
@@ -405,26 +397,26 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-c-shapes.md | l
 | <a id="six-element-array-loops-reduce-to-native-display-counter-address-loops-2026-10-14"></a>Six-element array loops reduce to native display-counter address loops (2026-10-14) | - |
 | <a id="typed-scene-draw-data-cleanup-preserves-both-137-byte-bodies-2026-10-15"></a>Typed scene draw-data cleanup preserves both 137-byte bodies (2026-10-15) | - |
 | <a id="auxiliary-record-cleanup-shares-one-typed-133-byte-algorithm-2026-10-15"></a>Auxiliary-record cleanup shares one typed 133-byte algorithm (2026-10-15) | - |
-| <a id="full-spielc-context-and-allocator-byte-condition-residue-2026-10-15"></a>Full spiel.c context and allocator byte-condition residue (2026-10-15) | `0x500190` |
-| <a id="character-model-flag-word-emits-the-native-high-byte-or-2026-10-15"></a>Character model flag word emits the native high-byte OR (2026-10-15) | `0x403070`, `0x40342a`, `0x403880` |
-| <a id="a-forwarded-stack-dword-does-not-establish-an-int-parameter-2026-10-15"></a>A forwarded stack DWORD does not establish an int parameter (2026-10-15) | `0x404a00`, `0x418b40`, `0x44c620`, `0x44e1e0`, `0x44e309`, `0x44e32d`, `0x44e4a0`, `0x44f8b0`, `0x44f9d9`, `0x44f9fd` |
+| <a id="full-spielc-context-and-allocator-byte-condition-residue-2026-10-15"></a>Full spiel.c context and allocator byte-condition residue (2026-10-15) | `0x00500190` |
+| <a id="character-model-flag-word-emits-the-native-high-byte-or-2026-10-15"></a>Character model flag word emits the native high-byte OR (2026-10-15) | `0x00403070`, `0x0040342a`, `0x00403880` |
+| <a id="a-forwarded-stack-dword-does-not-establish-an-int-parameter-2026-10-15"></a>A forwarded stack DWORD does not establish an int parameter (2026-10-15) | `0x00404a00`, `0x00418b40`, `0x0044c620`, `0x0044e1e0`, `0x0044e309`, `0x0044e32d`, `0x0044e4a0`, `0x0044f8b0`, `0x0044f9d9`, `0x0044f9fd` |
 | <a id="implicit-final-row-in-a-local-string-matrix-2026-10-16"></a>Implicit final row in a local string matrix (2026-10-16) | - |
-| <a id="character-camera-script-exits-and-separation-probe-2026-10-16"></a>Character camera script exits and separation probe (2026-10-16) | `0x402d00`, `0x40ca60`, `0x40d980` |
-| <a id="six-participant-event-validator-2026-10-16"></a>Six-participant event validator (2026-10-16) | `0x4daf80`, `0x4dc7d0` |
-| <a id="court-decision-source-and-stateful-sum-2026-10-16"></a>Court decision source and stateful sum (2026-10-16) | `0x4dd960`, `0x4df1b0` |
+| <a id="character-camera-script-exits-and-separation-probe-2026-10-16"></a>Character camera script exits and separation probe (2026-10-16) | `0x00402d00`, `0x0040ca60`, `0x0040d980` |
+| <a id="six-participant-event-validator-2026-10-16"></a>Six-participant event validator (2026-10-16) | `0x004daf80`, `0x004dc7d0` |
+| <a id="court-decision-source-and-stateful-sum-2026-10-16"></a>Court decision source and stateful sum (2026-10-16) | `0x004dd960`, `0x004df1b0` |
 | <a id="goal59-participant-reset-cursor-bias-and-unreachable-runner-test"></a>Goal59: participant-reset cursor bias and unreachable runner test | - |
 | <a id="goal60-one-texture-loop-two-native-backends"></a>Goal60: one texture loop, two native backends | - |
 | <a id="goal61-typed-periodic-callbacks-without-changing-timer-behavior"></a>Goal61: typed periodic callbacks without changing timer behavior | - |
 | <a id="goal62-resolver-output-locals-can-reuse-a-dead-id-argument"></a>Goal62: resolver output locals can reuse a dead ID argument | - |
 | <a id="method-registrations-explicit-memcpy-goal66-2026-10-16"></a>Method registration's explicit memcpy (Goal66, 2026-10-16) | - |
 | <a id="script-animation-options-ordering-goal67-2026-10-16"></a>Script animation options ordering (Goal67, 2026-10-16) | - |
-| <a id="list-search-result-after-the-loop-goal75-2026-10-17"></a>List-search result after the loop (Goal75, 2026-10-17) | `0x423720`, `0x423740`, `0x6323a4` |
-| <a id="declared-globals-preserve-cursordialog-scheduling-goal78-2026-10-17"></a>Declared globals preserve cursor/dialog scheduling (Goal78, 2026-10-17) | `0x4113f0`, `0x41cf60` |
-| <a id="gui-pool-loads-need-declarations-not-assembly-goal79-2026-10-17"></a>GUI pool loads need declarations, not assembly (Goal79, 2026-10-17) | `0x472640`, `0x472770`, `0x475e30`, `0x475f30` |
-| <a id="scene-command-tests-al-and-always-returns-one-goal80-2026-10-17"></a>Scene command tests AL and always returns one (Goal80, 2026-10-17) | `0x40ddf0`, `0x40ed00`, `0x50d6d0`, `0x50d725`, `0x50d730` |
-| <a id="vfs-closer-needs-the-named-counter-object-goal81-2026-10-17"></a>VFS closer needs the named counter object (Goal81, 2026-10-17) | `0x430580`, `0x43068f`, `0x522e30`, `0x525b40`, `0x6b7fe4`, `0x10034670` |
-| <a id="opaque-stream-boundary-preserves-target-objects-goal82-2026-10-17"></a>Opaque stream boundary preserves target objects (Goal82, 2026-10-17) | `0x41cf55`, `0x41cf60`, `0x522510`, `0x522abe`, `0x522ac0`, `0x524605`, `0x524610` |
-| <a id="conditional-com-release-through-an-inline-helper"></a>Conditional COM release through an inline helper | `0x460e40`, `0x460e9a` |
-| <a id="tail-wrapper-contracts-before-instruction-scheduling-searches"></a>Tail wrapper contracts before instruction-scheduling searches | `0x4c24c0` |
+| <a id="list-search-result-after-the-loop-goal75-2026-10-17"></a>List-search result after the loop (Goal75, 2026-10-17) | `0x00423720`, `0x00423740`, `0x006323a4` |
+| <a id="declared-globals-preserve-cursordialog-scheduling-goal78-2026-10-17"></a>Declared globals preserve cursor/dialog scheduling (Goal78, 2026-10-17) | `0x004113f0`, `0x0041cf60` |
+| <a id="gui-pool-loads-need-declarations-not-assembly-goal79-2026-10-17"></a>GUI pool loads need declarations, not assembly (Goal79, 2026-10-17) | `0x00472640`, `0x00472770`, `0x00475e30`, `0x00475f30` |
+| <a id="scene-command-tests-al-and-always-returns-one-goal80-2026-10-17"></a>Scene command tests AL and always returns one (Goal80, 2026-10-17) | `0x0040ddf0`, `0x0040ed00`, `0x0050d6d0`, `0x0050d725`, `0x0050d730` |
+| <a id="vfs-closer-needs-the-named-counter-object-goal81-2026-10-17"></a>VFS closer needs the named counter object (Goal81, 2026-10-17) | `0x00430580`, `0x0043068f`, `0x00522e30`, `0x00525b40`, `0x006b7fe4`, `0x10034670` |
+| <a id="opaque-stream-boundary-preserves-target-objects-goal82-2026-10-17"></a>Opaque stream boundary preserves target objects (Goal82, 2026-10-17) | `0x0041cf55`, `0x0041cf60`, `0x00522510`, `0x00522abe`, `0x00522ac0`, `0x00524605`, `0x00524610` |
+| <a id="conditional-com-release-through-an-inline-helper"></a>Conditional COM release through an inline helper | `0x00460e40`, `0x00460e9a` |
+| <a id="tail-wrapper-contracts-before-instruction-scheduling-searches"></a>Tail wrapper contracts before instruction-scheduling searches | `0x004c24c0` |
 
 </details>

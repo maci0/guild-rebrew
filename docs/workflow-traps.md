@@ -39,14 +39,7 @@ A green object score does not clear link, data, load or source-fidelity failures
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/workflow-traps.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
-
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/workflow-traps.md | less
-```
+Original notebook: `docs/workflow-traps.md` in the [documentation archive](goal-history.md#full-notebooks).
 
 | Historical section | Referenced hex values |
 | --- | --- |
@@ -79,9 +72,9 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/workflow-traps.md | l
 | <a id="24-some-source-experiments-need-a-full-object-rebuild-to-recover-from-and-linktestsh-cannot-tell-you-round-1064"></a>24. Some source experiments need a full object rebuild to recover from, and `linktest.sh` cannot tell you (round 1064) | - |
 | <a id="25-rebrew-source-rename-leaves-the-cmake-tree-stale-and-both-guards-miss-it-round-1080"></a><a id="26-cmake---build-build---target-final-needed-two-passes-after-a-clean-configure-and-reported-a-fake-residue-of-86676-round-1102"></a>25. `rebrew source rename` leaves the CMake tree stale, and both guards miss it (round 1080) | - |
 | <a id="26-the-retired-final-target-hid-a-failed-first-build-round-1102"></a>26. The retired `final` target hid a failed first build (round 1102) | - |
-| <a id="27-the-goldtl-client-statically-links-d3dx8-run-lib-match-against-d3dx8lib-not-just-libcmt-round-1143"></a>27. The GOLDTL client statically links D3DX8: run `lib-match` against `d3dx8.lib`, not just LIBCMT (round 1143) | `0x45fa70`, `0x460a40`, `0x5e0000`, `0x64ffff` |
+| <a id="27-the-goldtl-client-statically-links-d3dx8-run-lib-match-against-d3dx8lib-not-just-libcmt-round-1143"></a>27. The GOLDTL client statically links D3DX8: run `lib-match` against `d3dx8.lib`, not just LIBCMT (round 1143) | `0x0045fa70`, `0x00460a40`, `0x005e0000`, `0x0064ffff` |
 | <a id="28-pin-both-the-cmake-toolchain-and-the-verification-target-2026-10-15"></a>28. Pin both the CMake toolchain and the verification target (2026-10-15) | - |
-| <a id="same-target-names-need-reviewed-reference-ownership-2026-10-16"></a>Same-target names need reviewed reference ownership (2026-10-16) | `0x5012b0`, `0x5392a0` |
+| <a id="same-target-names-need-reviewed-reference-ownership-2026-10-16"></a>Same-target names need reviewed reference ownership (2026-10-16) | `0x005012b0`, `0x005392a0` |
 | <a id="run-contract-audits-after-metadata-writes-finish-2026-10-16"></a>Run contract audits after metadata writes finish (2026-10-16) | - |
 
 </details>

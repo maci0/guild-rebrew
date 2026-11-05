@@ -5,9 +5,9 @@ is ``symbol_stubs.c.obj`` or ``abi_stubs.c.obj``. ``WinMain`` and a renamed func
 attributes to another object are real definitions, not scaffold.
 
     uv run python stubs/linked_manifest.py \
-        build/Europa1400Gold.map stubs/gold/symbols.json
+        build/Europa1400Gold.map build/gold-symbols.json
     uv run python stubs/linked_manifest.py \
-        build/Europa1400Gold_TL.map stubs/goldtl/symbols.json
+        build/Europa1400Gold_TL.map build/goldtl-symbols.json
 """
 
 from __future__ import annotations

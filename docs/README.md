@@ -23,6 +23,11 @@ belong in managed metadata.
 
 ## Workflows
 
+Obsidian users can open the repository root as a vault and start with this page.
+Use Markdown links with relative paths; keep `.obsidian/` settings local. New notes
+belong in `docs/`, and attachments in `docs/assets/`. Git remains the source of truth;
+no plugins are required.
+
 | Topic | Canonical page |
 | --- | --- |
 | Shared source and analysis | [Git and BinSync](collaboration.md) |
@@ -35,6 +40,9 @@ belong in managed metadata.
 <a id="reference-map"></a>
 
 ## Technical reference
+
+A translation unit, or TU, is a source file with its included headers. VA means
+virtual address.
 
 | Question | Canonical page |
 | --- | --- |

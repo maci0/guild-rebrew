@@ -34,23 +34,15 @@ Resolve each displacement at that instruction. Compilers can reuse dead paramete
 or saved-register slots; reserved frame bytes do not prove a local array or struct.
 A diagnostic sentinel can identify a slot, but must not become production state.
 
-Compare complete objects after a type/context change. Keep rejected variants
+Compare complete objects after a type or context change. Keep rejected variants
 bounded and consult [negative results](codegen-walls.md) before repeating them.
-
 
 ## Archived findings
 
 <details>
 <summary>Historical sections and address lookup</summary>
 
-The [November 5 archive](archive/2026-11-05-documentation.tar.xz) preserves the full
-`docs/msvc6-allocator.md` notebook, including corrections and receipt paths. Entries below locate
-historical claims, not current instructions or verdicts. Hex values include
-code/data addresses and constants.
-
-```sh
-tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-allocator.md | less
-```
+Original notebook: `docs/msvc6-allocator.md` in the [documentation archive](goal-history.md#full-notebooks).
 
 | Historical section | Referenced hex values |
 | --- | --- |
@@ -71,7 +63,7 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-allocator.md | 
 | <a id="finding-8d-value-propagation-splits-shared-blocks"></a>Finding 8d: value propagation splits shared blocks | `0x10017400` |
 | <a id="finding-8c-the-convertible-head-pattern-summary"></a>Finding 8c: the convertible head pattern (summary) | `0x10013230` |
 | <a id="finding-8-multi-call-value-base-converts-cleanly"></a>Finding 8: multi-call value base converts cleanly | `0x10013230` |
-| <a id="finding-8e-a-convertible-recipe-verified"></a>Finding 8e: a CONVERTIBLE recipe (verified) | `0x203bcb6`, `0x10006cc0`, `0x1000b1c0`, `0x1000b290`, `0x1000baf0`, `0x1002a0a0`, `0x101de5a4` |
+| <a id="finding-8e-a-convertible-recipe-verified"></a>Finding 8e: a CONVERTIBLE recipe (verified) | `0x0203bcb6`, `0x10006cc0`, `0x1000b1c0`, `0x1000b290`, `0x1000baf0`, `0x1002a0a0`, `0x101de5a4` |
 | <a id="open-questions"></a>Open questions | - |
 | <a id="gm_calculateproductionvalue-0x10019720-recursion--fpu"></a>gm_CalculateProductionValue (0x10019720): recursion + FPU | `0x101de450` |
 | <a id="gm_eval_slotvoll-0x10019d30-converted-patterns-that-mattered"></a>gm_eval_SlotVoll (0x10019d30): CONVERTED, patterns that mattered | - |
@@ -91,7 +83,7 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-allocator.md | 
 | <a id="cm_exmodifystat-0x100100a0-blocked-fpu-clamp-compare-forms"></a>cm_ExModifyStat (0x100100a0): blocked (FPU clamp compare forms) | - |
 | <a id="plt_checkzoneavailability-0x10014ff0-done-induction-base-folding"></a>plt_CheckZoneAvailability (0x10014ff0): DONE (induction-base folding) | `0x10014f30`, `0x100150a0` |
 | <a id="plt_setplantmap-0x100150a0-done-constant-coalescing--byte-reg-pairing"></a>plt_SetPlantMap (0x100150a0): DONE (constant coalescing + byte-reg pairing) | `0xffffffff` |
-| <a id="processsenddata-0x1000a860-solved-reloc-delta-0"></a>ProcessSendData (0x1000a860): SOLVED (RELOC, delta 0) | `0x264143`, `0x2641f4`, `0x264264`, `0x101deb00`, `0x114ffe20` |
+| <a id="processsenddata-0x1000a860-solved-reloc-delta-0"></a>ProcessSendData (0x1000a860): SOLVED (RELOC, delta 0) | `0x00264143`, `0x002641f4`, `0x00264264`, `0x101deb00`, `0x114ffe20` |
 | <a id="m_poolalloc-0x10006d20--srv_initbuildingtypetable-0x1000b040-blocked-alignment-prefixed-memset"></a>m_PoolAlloc (0x10006d20) / srv_InitBuildingTypeTable (0x1000b040): blocked (alignment-prefixed memset) | `0x10006728`, `0x10006730`, `0x10006929`, `0x10006e0d`, `0x10008f0c`, `0x1000b057`, `0x10017611` |
 | <a id="the-prelude-is-hand-written-asm-not-a-compiler-expansion-2026-09-04"></a>The prelude is hand-written asm, not a compiler expansion (2026-09-04) | - |
 | <a id="reviewed-goldtl-inline-helpers-2026-10-09"></a>Reviewed GOLDTL inline helpers (2026-10-09) | `0x0043f6b0`, `0x0043f76b`, `0x00449ba0`, `0x00449c6f`, `0x00469140`, `0x004691f8` |
@@ -104,7 +96,7 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-allocator.md | 
 | <a id="srv_init-0x10009d30-solved-reloc-delta-0"></a>srv_Init (0x10009d30): SOLVED (RELOC, delta 0) | `0x10024068`, `0x1002406c`, `0x10117688`, `0x10117690`, `0x101176ec` |
 | <a id="cm_exchangebits-0x1000eaa0-solved-reloc-delta-0"></a>cm_ExChangeBits (0x1000eaa0): SOLVED (RELOC, delta 0) | - |
 | <a id="ls_id2ptr-0x10014070-blocked-lazy-ebp-save-first-draft"></a>ls_ID2Ptr (0x10014070): blocked (lazy ebp save, first draft) | - |
-| <a id="cm_exallocthemapredigt-0x1000f2f0-solved-reloc-172172"></a>cm_ExAllocThemaPredigt (0x1000f2f0): SOLVED (RELOC 172/172) | `0x264264`, `0x1000f379` |
+| <a id="cm_exallocthemapredigt-0x1000f2f0-solved-reloc-172172"></a>cm_ExAllocThemaPredigt (0x1000f2f0): SOLVED (RELOC 172/172) | `0x00264264`, `0x1000f379` |
 | <a id="cm_exclearlagerslot-0x1000e690-solved-reloc-delta-0"></a>cm_ExClearLagerslot (0x1000e690): SOLVED (RELOC, delta 0) | - |
 | <a id="m_pool_free-0x10006e30-solved-reloc-delta-0"></a>m_pool_free (0x10006e30): SOLVED (RELOC, delta 0) | `0x10028888`, `0x10028b94` |
 | <a id="m_shutdownallocator-0x10006c00-done-reloc-283283"></a>m_ShutdownAllocator (0x10006c00): DONE (RELOC 283/283) | - |
@@ -130,7 +122,7 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-allocator.md | 
 | <a id="ahm_getcommandpayloadsize-follow-up-494--742-three-more-levers-found"></a>ahm_GetCommandPayloadSize follow-up: 494 → 742 (three more levers found) | - |
 | <a id="register-role-residue-confirmed-for-ahm_getcommandpayloadsize-742752"></a>Register-role residue confirmed for ahm_GetCommandPayloadSize (742/752) | - |
 | <a id="finding-12-named-local-vs-anonymous-csed-load-the-eaxecx-lever"></a>Finding 12: named local vs anonymous CSE'd load (the eax↔ecx lever) | - |
-| <a id="allocator-internals-from-reversing-c2dll-p2-backend"></a>Allocator internals (from reversing c2.dll, p2 backend) | `0x4af800`, `0x10016290`, `0x10018850`, `0x10018c28`, `0x10018c38`, `0x10700000`, `0x10703558`, `0x10703ed5`, `0x10705166`, `0x10705193`, `0x107053c9`, `0x10705507`, `0x1070de4c`, `0x10713312`, `0x1071431d`, `0x107169f2`, `0x1071b8c0`, `0x1071b94b`, `0x1071da32`, `0x1071e238`, `0x1071e25e`, `0x1071f87a`, `0x1071f895`, `0x1071f8de`, `0x1071f94e`, `0x10720802`, `0x1072090e`, `0x10721daa`, `0x10724a49`, `0x10726e85`, `0x10727781`, `0x10727977`, `0x107279c2`, `0x10727a51`, `0x10727ca9`, `0x10727d01`, `0x107351b7`, `0x107603b2`, `0x10799204`, `0x10799214`, `0x10799218`, `0x1079d6ec`, `0x1079d710`, `0x1079d74c`, `0x1079d750`, `0x1079d88c`, `0x1079f220`, `0x107a04dc`, `0x107ac0b4`, `0x107ac2dc`, `0x107ac730`, `0x107adff4`, `0x107ae038`, `0x107ae040`, `0x107b15fc` |
+| <a id="allocator-internals-from-reversing-c2dll-p2-backend"></a>Allocator internals (from reversing c2.dll, p2 backend) | `0x004af800`, `0x10016290`, `0x10018850`, `0x10018c28`, `0x10018c38`, `0x10700000`, `0x10703558`, `0x10703ed5`, `0x10705166`, `0x10705193`, `0x107053c9`, `0x10705507`, `0x1070de4c`, `0x10713312`, `0x1071431d`, `0x107169f2`, `0x1071b8c0`, `0x1071b94b`, `0x1071da32`, `0x1071e238`, `0x1071e25e`, `0x1071f87a`, `0x1071f895`, `0x1071f8de`, `0x1071f94e`, `0x10720802`, `0x1072090e`, `0x10721daa`, `0x10724a49`, `0x10726e85`, `0x10727781`, `0x10727977`, `0x107279c2`, `0x10727a51`, `0x10727ca9`, `0x10727d01`, `0x107351b7`, `0x107603b2`, `0x10799204`, `0x10799214`, `0x10799218`, `0x1079d6ec`, `0x1079d710`, `0x1079d74c`, `0x1079d750`, `0x1079d88c`, `0x1079f220`, `0x107a04dc`, `0x107ac0b4`, `0x107ac2dc`, `0x107ac730`, `0x107adff4`, `0x107ae038`, `0x107ae040`, `0x107b15fc` |
 | <a id="finding-13-lb_explayerlist-0x100145e0-struct-fields-beat-array-index-counters"></a>Finding 13: lb_ExPlayerlist (0x100145e0): struct-fields beat array-index counters | - |
 | <a id="finding-14-ah-relative-masks-read-the-byte-before-the-mask"></a>Finding 14: AH-relative masks (read the byte before the mask) | `0x10014a50` |
 | <a id="finding-15-comdat-placement-functions-in-a-file-must-be-va-contiguous"></a>Finding 15: COMDAT placement: functions in a file must be VA-contiguous | `0x10002770`, `0x10014bf0`, `0x10014ee0`, `0x10014f80`, `0x10018850` |
@@ -197,10 +189,10 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-allocator.md | 
 | <a id="finding-71-crashdumps-register-roles-hinge-on-one-priority-comparison-stack-slots-follow-references-per-byte-round-1145-traced-in-c2"></a>Finding 71: CrashDump's register roles hinge on one priority comparison; stack slots follow references per byte (round 1145, traced in c2) | `0x10002c5c`, `0x107405b6` |
 | <a id="finding-72-a-multi-use-constant-is-a-colouring-candidate-its-register-follows-range-overlap-round-1145"></a>Finding 72: a multi-use constant is a colouring candidate; its register follows range overlap (round 1145) | `0x1071f7b3` |
 | <a id="finding-73-crashdumps-frame-fill-tie-0x10002c5c-against-the-cross-jump-picker-and-dag-rules-traced-in-c2"></a>Finding 73: CrashDump's frame-fill tie (0x10002c5c) against the cross-jump, picker and DAG rules (traced in c2) | `0x00200800`, `0x00800000`, `0x00800800`, `0x00a00800`, `0x00a40800`, `0x10002770`, `0x10002c5d`, `0x10002e9c`, `0x10002f1c`, `0x107028f1`, `0x107047f9`, `0x1070481b`, `0x10704a6d`, `0x10704b70`, `0x1070fbbc`, `0x10711276`, `0x10711aef`, `0x107146ce`, `0x107146d9`, `0x1071774d`, `0x1071b184`, `0x1071c086`, `0x1071d000`, `0x10720798`, `0x10720e12`, `0x10721ab2`, `0x10722246`, `0x1072351f`, `0x10723553`, `0x10723701`, `0x10723779`, `0x10723ad5`, `0x10723c43`, `0x10723d07`, `0x10723d1d`, `0x10723d22`, `0x10723ff1`, `0x10723ffa`, `0x10724395`, `0x10724569`, `0x10724590`, `0x10724597`, `0x10724599`, `0x1072459e`, `0x10724677`, `0x107258b7`, `0x1072631f`, `0x10726361`, `0x10726408`, `0x1072642b`, `0x10726c99`, `0x1072700d`, `0x10727042`, `0x10727781`, `0x107278ae`, `0x10727977`, `0x107280c0`, `0x107280d4`, `0x107290e7`, `0x1072ff79`, `0x107308df`, `0x1073090b`, `0x1073f57c`, `0x1073f5ba`, `0x1073f646`, `0x1073f648`, `0x107400e7`, `0x1074f598`, `0x107601e5`, `0x107603e8`, `0x10760434`, `0x10760541`, `0x10760574`, `0x107605d5`, `0x107606cc`, `0x107664db`, `0x10767b45`, `0x10786ef0`, `0x10799204`, `0x10799214`, `0x1079d6b0`, `0x1079f144`, `0x1079f16c`, `0x107ac054`, `0x107ac058`, `0x107ac098`, `0x107ac0a4`, `0x107ac0b4`, `0x107ac0b8`, `0x107ac0bc`, `0x107ac0d8`, `0x107ac118`, `0x107ac11c`, `0x107ac348`, `0x107ac34c`, `0x107ac378`, `0x107ae23c`, `0x80a00800`, `0xc000001d`, `0xc000008e`, `0xc00000fd`, `0xffffffff` |
-| <a id="finding-74-processor-pack-c2-client-targets-routine-map-rules-and-open-cases"></a>Finding 74: Processor Pack c2 (client targets): routine map, rules and open cases | `0x402090`, `0x414830`, `0x414960`, `0x4af800`, `0x4c6090`, `0x4ce210`, `0x4fc3a0`, `0x50be50`, `0x58ee70`, `0x5c8400`, `0x5ce800`, `0x5d63e0`, `0x5db8e0`, `0x4000003`, `0x10700000`, `0x107044e9`, `0x10704511`, `0x10707a0b`, `0x10707b6e`, `0x10708374`, `0x10708393`, `0x107083bd`, `0x107083c0`, `0x10708a6e`, `0x10709a8e`, `0x10709a99`, `0x1070a2e4`, `0x1070c32b`, `0x1070c645`, `0x1070c662`, `0x1070c669`, `0x1070de4c`, `0x1070f234`, `0x1070f273`, `0x1070f289`, `0x1070f297`, `0x1070f6b1`, `0x1070f91d`, `0x1070f96f`, `0x10713312`, `0x10715094`, `0x107150b4`, `0x10715107`, `0x107159a9`, `0x10715bc0`, `0x1071d925`, `0x1071f7b3`, `0x10721c0f`, `0x107278ae`, `0x10731413`, `0x10731552`, `0x1073a2c4`, `0x1073cf92`, `0x107ac480`, `0x107ac5b4`, `0x107ad5fc`, `0x107ae398`, `0x107ae3cc`, `0x107b1418`, `0x107b15fc`, `0x107b1a00`, `0x107b1b8c`, `0x107b6888`, `0x107b690c`, `0x107b6978`, `0x107b6998`, `0x107b69a8`, `0x107c49d4` |
-| <a id="unused-shared-function-declarations-can-alter-spill-slot-assignment"></a>Unused shared function declarations can alter spill-slot assignment | `0x482f20` |
-| <a id="vfs-client-copy-provenance-2026-10-09"></a>VFS client copy provenance (2026-10-09) | `0x42e740`, `0x42e8f7`, `0x42e949`, `0x430910`, `0x4309e9` |
-| <a id="addfile-operand-lifetime-controls-2026-10-12"></a>AddFile operand lifetime controls (2026-10-12) | `0x42e740`, `0x42e8f7`, `0x42e949` |
+| <a id="finding-74-processor-pack-c2-client-targets-routine-map-rules-and-open-cases"></a>Finding 74: Processor Pack c2 (client targets): routine map, rules and open cases | `0x00402090`, `0x00414830`, `0x00414960`, `0x004af800`, `0x004c6090`, `0x004ce210`, `0x004fc3a0`, `0x0050be50`, `0x0058ee70`, `0x005c8400`, `0x005ce800`, `0x005d63e0`, `0x005db8e0`, `0x04000003`, `0x10700000`, `0x107044e9`, `0x10704511`, `0x10707a0b`, `0x10707b6e`, `0x10708374`, `0x10708393`, `0x107083bd`, `0x107083c0`, `0x10708a6e`, `0x10709a8e`, `0x10709a99`, `0x1070a2e4`, `0x1070c32b`, `0x1070c645`, `0x1070c662`, `0x1070c669`, `0x1070de4c`, `0x1070f234`, `0x1070f273`, `0x1070f289`, `0x1070f297`, `0x1070f6b1`, `0x1070f91d`, `0x1070f96f`, `0x10713312`, `0x10715094`, `0x107150b4`, `0x10715107`, `0x107159a9`, `0x10715bc0`, `0x1071d925`, `0x1071f7b3`, `0x10721c0f`, `0x107278ae`, `0x10731413`, `0x10731552`, `0x1073a2c4`, `0x1073cf92`, `0x107ac480`, `0x107ac5b4`, `0x107ad5fc`, `0x107ae398`, `0x107ae3cc`, `0x107b1418`, `0x107b15fc`, `0x107b1a00`, `0x107b1b8c`, `0x107b6888`, `0x107b690c`, `0x107b6978`, `0x107b6998`, `0x107b69a8`, `0x107c49d4` |
+| <a id="unused-shared-function-declarations-can-alter-spill-slot-assignment"></a>Unused shared function declarations can alter spill-slot assignment | `0x00482f20` |
+| <a id="vfs-client-copy-provenance-2026-10-09"></a>VFS client copy provenance (2026-10-09) | `0x0042e740`, `0x0042e8f7`, `0x0042e949`, `0x00430910`, `0x004309e9` |
+| <a id="addfile-operand-lifetime-controls-2026-10-12"></a>AddFile operand lifetime controls (2026-10-12) | `0x0042e740`, `0x0042e8f7`, `0x0042e949` |
 | <a id="narrow-factory-inputs-and-a-reused-count-slot-goal68-2026-10-16"></a>Narrow factory inputs and a reused count slot (Goal68, 2026-10-16) | - |
 
 </details>
