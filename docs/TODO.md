@@ -73,6 +73,7 @@ Open, in order:
   with retired-claim history, 5 VERIFIED data rows). Function verdicts, lint and the canary did not
   change; the GoldTL data section went from 1,270 to 417 rows.
 - GA batches on 2026-11-09 (`--improve` three times, `--size-mismatch` once, 100 functions) matched one, `fcn_004763e0`. The rest need hand diagnosis from `rebrew diff`; see provenance for the two that were tried by hand and did not close (`fcn_0048ddd0`, `fcn_004b64b0`, `fcn_00495180`).
+- Upstream gap entry for the eight unbindable zlib functions (`library bind-source` rejects conditional and K&R definitions; probe: `zError` absent from `function_signatures`, `zcfree`/`zcalloc` fail `has_unique_source_definition`) is written but uncommitted in the upstream checkout's `docs/IDEAS-GUILD.md`: that repo's pre-commit mypy step fails on seven existing errors. A copy of the diff is in `.scratch/ideas-guild-zlib-gap.patch`.
 5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
    Matching: 112 GoldTL functions remain NEAR_MATCHING. A 2026-11-08 round tried the 89 with 48 or fewer
    differing bytes (reorder commutative operands, independent statements, equivalent rewrites; tests
