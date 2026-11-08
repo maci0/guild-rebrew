@@ -39,7 +39,8 @@ Open, in order:
    preview, 4 touch more than 60 files and 1 failed its before-test.
 5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
 6. The compiler image `rebrew/msvc:6.0-sp5-pp-win32` disappeared from Docker on 2026-11-08
-   (another session was running `docker builder prune`) and was rebuilt with
+   (cause not established; a `docker builder prune` from another session was seen
+   running afterwards) and was rebuilt with
    `rebrew toolchain build msvc-6.0-sp5-pp` using the local recipes checkout
    (`REBREW_TOOLCHAINS_DIR`, see [build.md](build.md#prepare-compiler-images)). A pull is not
    possible: rebrew images are built from pinned sources, not published.
