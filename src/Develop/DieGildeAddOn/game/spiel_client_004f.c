@@ -13,7 +13,7 @@ extern pos14_7f4c00 g_7f4c00;
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, void* d, int e);
 int __cdecl fcn_004f1840(void*, int*);
-void __cdecl fcn_00503930(int, int, int);
+void __cdecl gm_SubObjectNoKill(int, int, int);
 void __cdecl gm_AddObjekt(int, int, int);
 void __cdecl fcn_005b2cb0(char*, void*, void*, int, int, int);
 
@@ -71,7 +71,7 @@ int __cdecl fcn_004f25a0(char* req)
 		*(int*) (*(char**) (slot + 0x10) + j * 0x44) = -1;
 	}
 	if (*(int*) (req + 0x13) > 0) {
-		fcn_00503930(*(int*) ((char*) entity2 + 4), (unsigned short) ((int*)g_8680b4)[g_773d75 * 189],
+		gm_SubObjectNoKill(*(int*) ((char*) entity2 + 4), (unsigned short) ((int*)g_8680b4)[g_773d75 * 189],
 			*(int*) (req + 0x13));
 		gm_AddObjekt(*(int*) (g_7f4ca0 + 4 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c),
 			(unsigned short) ((int*)g_8680b4)[g_773d75 * 189],

@@ -1183,7 +1183,7 @@ int __cdecl gv_eval_SlotFrei(void* unused, int* p);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);
 #if !defined(REBREW_SERVER)
-int __cdecl fcn_00503930(int a, int b, int c);
+int __cdecl gm_SubObjectNoKill(int a, int b, int c);
 int __cdecl gm_AddObjekt(int a, int b, int c);
 #endif
 
@@ -1401,7 +1401,7 @@ done:
 
 	count = *(int*) ((char*) cmd + 0x11);
 	if (count > 0) {
-		fcn_00503930(*(int*) ((char*) entity + 4),
+		gm_SubObjectNoKill(*(int*) ((char*) entity + 4),
 		             *(unsigned short*) ((unsigned char) g_773d75 * 756 + 0x8680b4),
 		             count);
 		gm_AddObjekt(*(int*) ((char*) g_slot_table + 4 +

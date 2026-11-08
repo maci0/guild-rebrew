@@ -2333,8 +2333,10 @@ int __cdecl gm_SubObjectNoKill(int a, int b, int c)
 	void* sta;
 
 	if (!gm_ResolveEntityById(&dyn, &exi, &sta, a)) {
+#if defined(REBREW_SERVER)
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xe5c,
 		                   "gm_SubObjectNoKill(): Parent not found", 1);
+#endif
 		return 0;
 	}
 	if (dyn != 0) list_head = (char*) dyn + 0x5d;
@@ -6410,7 +6412,9 @@ int __cdecl gm_SumTreasury(char* entity)
 	int sum;
 
 	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+#if defined(REBREW_SERVER)
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_SumTreasury(): enter", 1);
+#endif
 	sum = 0;
 	r = (char*) gm_ff_Objekt(*(int*) (entity + 0x178), 1, 4, 9);
 	if (r) {
@@ -6446,7 +6450,9 @@ int __cdecl gm_SumSlotTreasury(int slot)
 	owner = (char*) gm_LookupEntityRecordById(*(int*) (g_slot_table + 4 + slot * 0x21c));
 	if (owner == 0) {
 		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+#if defined(REBREW_SERVER)
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_SumSlotTreasury(): owner not found", 1);
+#endif
 		return -1;
 	}
 	sum = 0;

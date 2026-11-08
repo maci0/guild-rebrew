@@ -10,7 +10,7 @@ void __cdecl fcn_004c5f60(int, int, int);
 int __cdecl fcn_0050cf50(void *, int);
 void __cdecl fcn_004c5530(void *);
 void *__cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_0050d2f0(void *);
+int __cdecl gm_SumTreasury(void *);
 void __cdecl fcn_004c5150(int, int, int, int);
 int __cdecl gm_WalkEntityChain(int);
 void __cdecl fcn_004c4510(void *, int);
@@ -100,7 +100,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 		ent = gm_FindNextFilteredEntity();
 	}
 	if (arg2 != (void *) g_773da8) {
-		val = fcn_0050d2f0(arg1);
+		val = gm_SumTreasury(arg1);
 		i = 4 + (*((unsigned char *) arg1 + 2) == 5);
 		fcn_004c5150(*(int *) ((char *) arg2 + 4), -1, *(unsigned char *) 0x773d75, val);
 		type = gm_WalkEntityChain(*(unsigned short *) arg1);
@@ -165,7 +165,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 			strcat(out, buf);
 		}
 	}
-	val = fcn_0050d2f0(arg1);
+	val = gm_SumTreasury(arg1);
 	io_FormatTextBuffer(buf, 0x1c4c, val);
 	strcat(out, buf);
 	fcn_00545d40(*(int *) ((char *) arg2 + 4), -1, (int) out, 1, 0x5ff, "_NACHRICHTEN_HS_63");

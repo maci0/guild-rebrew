@@ -10,7 +10,7 @@ typedef struct Obj4c7bb0 {
 #pragma pack(pop)
 
 int __cdecl fcn_004c4dc0(Obj4c7bb0* obj, int h);
-void __cdecl fcn_00503930(int h, unsigned int w, int v);
+void __cdecl gm_SubObjectNoKill(int h, unsigned int w, int v);
 void __cdecl gm_AddObjekt(int h, unsigned int w, int v);
 
 /* ADDRESS: GOLDTL 0x004c7bb0 */
@@ -27,7 +27,7 @@ int __cdecl fcn_004c7bb0(Obj4c7bb0* obj, char* out)
 		h = fcn_004c4dc0(obj, h);
 		obj->h14 = h;
 		w = *(unsigned short*) (0x8680b4 + (unsigned int) obj->idx1c * 0x2f4);
-		fcn_00503930(h, w, obj->f1d);
+		gm_SubObjectNoKill(h, w, obj->f1d);
 	}
 	h = obj->h10;
 	if (h != -1) {

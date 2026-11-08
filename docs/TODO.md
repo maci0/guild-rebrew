@@ -15,10 +15,16 @@ new full client image was built; the byte results below are per-function compari
 - Three merged units (`main.c`, `aemter.c`, `d2_windows.c`) were split back to one file
   per function because the literal-pool string evidence did not support them as native
   units. Every row kept its status. See [source layout](source-layout.md).
-- Three loose duplicates were bound to the shared definitions (`gm_RemoveObjectByType`,
-  `gm_RemoveLinkedNodeById`, `gm_FindKind47ByOwner`). Eight other pairs were tried and
-  restored because the TL bytes changed: the shared bodies carry server-only log calls.
-  Guarded patches for six of them are drafted under `.scratch/` and untested.
+- Six loose duplicates are bound to their shared definitions: `gm_RemoveObjectByType`,
+  `gm_RemoveLinkedNodeById`, `gm_FindKind47ByOwner`, and, after guarding the server-only
+  log call with `#if defined(REBREW_SERVER)` in `spiel.c`, `gm_SumSlotTreasury`,
+  `gm_SumTreasury` and `gm_SubObjectNoKill`. Every row of `spiel.c` compared equal on all
+  three targets before and after each guard. Six other pairs still regress because the
+  shared body differs from the TL body beyond log calls: `gm_SubObjekt` (a guard was tried
+  and reverted), `gm_AllocBuildingDefaults` (different loop shapes), `cm_ExProdObjekt`
+  (different function entry), `gm_ResolveEntityRecord`, `gm_AssignBuildingOwner`,
+  `gm_ResolveEntitySlot`. `gm_ff_Objekt` (310 callers) and three pairs that failed the
+  preview were not retried.
 - `rebrew lint --json` reports 0 errors. Seven GoldTL functions that were recorded as RELOC
   on 2026-11-02 now test as NEAR_MATCHING (`0x00452360`, `0x00474780`, `0x004e4b60`,
   `0x00526db0`, `0x00537080`, `0x005e3c40`, `0x00451150`), with 4 to 24 mismatching bytes.

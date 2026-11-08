@@ -62,7 +62,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 unsigned char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0050cf50(int, int);
-int __cdecl fcn_0050d2f0(unsigned short*);
+int __cdecl gm_SumTreasury(unsigned short*);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_0050b710(int, unsigned char);
 int __cdecl fcn_0050b750(int, unsigned char);
@@ -171,7 +171,7 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 		}
 		p = gm_FindNextFilteredEntity();
 	}
-	r = fcn_0050d2f0(a0);
+	r = gm_SumTreasury(a0);
 	fcn_004c5150(*(int*) (sp + 4), -1, g_773d75, r);
 	p = (unsigned char*) fcn_00502cd0(*(int*) (a0 + 0xbc), 1, 5);
 	while (p != 0) {

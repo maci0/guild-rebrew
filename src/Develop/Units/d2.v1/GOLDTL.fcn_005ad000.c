@@ -14,7 +14,7 @@ int __cdecl fcn_00472250(void*, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0050d360(int);
+int __cdecl gm_SumSlotTreasury(int);
 int __cdecl fcn_0050b710(int, char);
 int __cdecl fcn_0050b750(int, char);
 int __cdecl fcn_00471f80(int, char);
@@ -65,7 +65,7 @@ void __cdecl fcn_005ad000(void)
 	ctl2 = fcn_00472250(dlg, 1, id + 1);
 	id = *(unsigned short*) 0x774970;
 	msg.ctl = ctl2;
-	h = fcn_0050d360(id);
+	h = gm_SumSlotTreasury(id);
 	fcn_00472380(ctl1, 0x96,
 	             fcn_0050b710(h, *(unsigned char*) 0x773d75), 0xfa);
 	d2_SetOverlayAnimation(0, 0);
