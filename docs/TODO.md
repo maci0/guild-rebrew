@@ -72,6 +72,7 @@ Open, in order:
   function rows, 2 empty-status data rows) and held back 489 earned rows (484 GOLDTL function rows
   with retired-claim history, 5 VERIFIED data rows). Function verdicts, lint and the canary did not
   change; the GoldTL data section went from 1,270 to 417 rows.
+- GA batches on 2026-11-09 (`--improve` twice, `--size-mismatch` once, 70 functions) matched one, `fcn_004763e0`. The rest need hand diagnosis from `rebrew diff`; see provenance for the two that were tried by hand and did not close (`fcn_0048ddd0`, `fcn_004b64b0`, `fcn_00495180`).
 5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
    Matching: 112 GoldTL functions remain NEAR_MATCHING. A 2026-11-08 round tried the 89 with 48 or fewer
    differing bytes (reorder commutative operands, independent statements, equivalent rewrites; tests
