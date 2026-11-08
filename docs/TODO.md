@@ -62,6 +62,12 @@ Open, in order:
    `MODULE.name.c`. The other 30 were skipped: 19 previews include a data row, 6 failed the
    preview, 4 touch more than 60 files and 1 failed its before-test.
 5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
+   Matching: 112 GoldTL functions remain NEAR_MATCHING. A 2026-11-08 round tried the 89 with 48 or fewer
+   differing bytes (reorder commutative operands, independent statements, equivalent rewrites; tests
+   with `--no-promote` only). None reached a full match; three gained 1 to 4 bytes only by changing
+   behaviour (swapped constants or call arguments, an extra assignment) and were rejected. What is left
+   is mostly register allocation, jump direction and instruction order, which need a different
+   source shape, not operand swaps. Details: `.scratch/consolidation-2026-11-05/slot-2/match/`.
 6. The compiler image `rebrew/msvc:6.0-sp5-pp-win32` disappeared from Docker on 2026-11-08
    (cause not established; a `docker builder prune` from another session was seen
    running afterwards) and was rebuilt with
