@@ -57,7 +57,10 @@ Open, in order:
    Nine stayed loose because the guessed vendored function was wrong, the function is already
    bound at another address, or the bytes did not match: `deflateCopy`, `deflateReset`, `deflate_slow`,
    `inflate_blocks`, `inflate`, `inflateReset`, `inflateSync`, `inflate_blocks_sync_point`, `crc32`. The 12 d3dx8 matches were
-   already `LIBRARY` rows. Library functions do not count as reversing progress.
+   already `LIBRARY` rows. Library functions do not count as reversing progress. A search for the
+   real vendored function (try each function name in the unit, keep the one whose row matches the
+   original bytes) found nothing for `fcn_0045dfd0` and took over ten minutes per row, because each
+   candidate compiles the whole vendored file; it was stopped and the claim restored.
 4. 133 of the 164 files named `fcn_<VA>.c` that define a real name were renamed to
    `MODULE.name.c`. The other 30 were skipped: 19 previews include a data row, 6 failed the
    preview, 4 touch more than 60 files and 1 failed its before-test.
