@@ -48,9 +48,6 @@ void __cdecl fcn_0057a3d0(char* e)
 	char* r;
 	char* s;
 	unsigned char* p;
-	unsigned char add;
-	float skill;
-	double months;
 	char buf[0x200];
 
 	switch (*(int*) (e + 0x70)) {
@@ -58,6 +55,9 @@ void __cdecl fcn_0057a3d0(char* e)
 		who = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 		if (who != 0 && (unsigned char) who[*(int*) (e + 0xb0) + 0x80] < 252.0f
 		    && fcn_00500cb0(&g_7f4c00, (struct pos14*) (e + 0xb8)) < 0) {
+			unsigned char add;
+			float skill;
+			double months;
 			q = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0x10));
 			if (q == 0) {
 				break;

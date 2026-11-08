@@ -215355,18 +215355,16 @@ measured_at = "2026-11-08T09:02:35+00:00"
 
 ["GOLDTL.0x0057a3d0"]
 size = 801
-status = "NEAR_MATCHING"
-updated_by = "blocker"
-updated_at = "2026-10-31T10:15:27+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-11-08T18:00:50+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0057a3d0.c"
 symbol = "_fcn_0057a3d0"
 kind = "FUNCTION"
 name = "fcn_0057a3d0"
-blocker = "Canonical MSVC6 SP5 PP /O2 /Gd: 799/801 bytes; integer-to-float scratch slot is [esp+0x10] instead of native [esp+0x18] at offsets 0x56 and 0x5a. Twelve C variants: eleven unchanged, one worse. Operand review: 37 validated, eight unresolved literals; native literal contents agree but do not prove linked layout. Evidence: .scratch/goal-matching-20261031/57a3d0/."
-blocker_delta = 2
 
 ["GOLDTL.0x0057a3d0".verification]
-source_hash = "350359b566382f72ab6066aa88d12f8494871b2ac9339e134aa5c42a9d767fc6"
+source_hash = "d2dde040de49681760f08af09ce8231cc7ba99538ca945ba7c3813e22b897d1f"
 reference_hash = "381f84532219685fff7156c979d3fc238a833c5ea939809b3a7649a700addb9e"
 reference_size = "801"
 headers_hash = "b89d8c0c2f0a8e6c47f617c7f3aa5ff3a3d9350efd64e59364427d386907db31"
@@ -215377,10 +215375,10 @@ module = "GOLDTL"
 va = "0x57a3d0"
 context_hash = ""
 defines = "[]"
-input_hash = "25355ef08945a431be4c06514145f3e9949fb1a602549824f80f1f7fd1ac091b"
-writer = "verify"
-status = "NEAR_MATCHING"
-measured_at = "2026-11-07T17:02:38+00:00"
+input_hash = "0bf82dffdd730f727662d5c3d07eeaabc2ee6949b85da5a35d79c1de8b8c8b50"
+status = "RELOC"
+writer = "test"
+measured_at = "2026-11-08T18:00:50+00:00"
 
 [["GOLDTL.0x0057a3d0".status_history]]
 old_status = "NEAR_MATCHING"
@@ -215393,6 +215391,12 @@ old_status = "SIZE_MISMATCH"
 new_status = "NEAR_MATCHING"
 changed_at = "2026-10-29T11:21:26.397021+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0057a3d0".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "RELOC"
+changed_at = "2026-11-08T18:00:50.118549+00:00"
+updated_by = "test"
 ["GOLDTL.0x0057a700"]
 size = 394
 status = "RELOC"
