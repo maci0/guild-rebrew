@@ -46,20 +46,11 @@ void __cdecl fcn_00401260(int a, int b)
 
 
 /* Function stubs */
-int __cdecl CloseVideo(int id)
-{
-	return 0;
-}
 
-char* __cdecl FindVideoById(int id)
-{
-	return (void*) 0;
-}
 
-char* __cdecl FindVideoByWindow(void* hwnd)
-{
-	return (void*) 0;
-}
+
+
+
 
 void __cdecl UpdateSceneLighting(unsigned char a)
 {
@@ -99,14 +90,9 @@ int __cdecl ch_ExecFinishAnimation(void)
 	return 0;
 }
 
-int __cdecl ch_FinishAnimation(char* task)
-{
-	return 0;
-}
 
-void __cdecl ch_RunAnimationScript(void)
-{
-}
+
+
 
 void __cdecl ch_SetVisible(void* a, int b)
 {
@@ -169,10 +155,7 @@ void __cdecl evt_EnterFunction(char* a, int b)
 {
 }
 
-void* __cdecl evt_LoadGfxScript(char* name)
-{
-	return (void*) 0;
-}
+
 
 void __cdecl evt_RunScript(char* a)
 {
@@ -182,15 +165,9 @@ void __cdecl fcn_00404300(char* e, char* name, int n)
 {
 }
 
-int __cdecl fcn_00405180(void)
-{
-	return 0;
-}
 
-int __cdecl fcn_00408270(int a, float* b, int c, int d)
-{
-	return 0;
-}
+
+
 
 int __stdcall fcn_0041c460(int a1, int a2, int a3, int a4, int a5, int a6)
 {
@@ -211,10 +188,7 @@ void __cdecl fcn_00427070(void)
 {
 }
 
-int __cdecl fcn_00427b40(int a)
-{
-	return 0;
-}
+
 
 void __cdecl fcn_00428d50(int a)
 {
@@ -224,9 +198,7 @@ void __cdecl fcn_00429490(char* a)
 {
 }
 
-void __cdecl fcn_00429d30(char* a)
-{
-}
+
 
 int __cdecl fcn_0042b2f0(char* a, int b, int c)
 {
@@ -256,22 +228,16 @@ int __cdecl fcn_00430c50(void* a)
 	return 0;
 }
 
-void __cdecl fcn_00438b40(void* a, float* b)
-{
-}
 
-void __cdecl fcn_00442d50(char* record, int mode)
-{
-}
+
+
 
 char __cdecl fcn_004463f0(unsigned int a, unsigned int b, float t)
 {
 	return 0;
 }
 
-void __cdecl fcn_004518a0(float* a)
-{
-}
+
 
 int __cdecl fcn_00466330(int a, int b)
 {
@@ -362,9 +328,7 @@ int __cdecl fcn_0048e4b0(int a1, char* p, int a3)
 	return 0;
 }
 
-void __cdecl fcn_004942a0(char* e, void* out)
-{
-}
+
 
 void* __cdecl fcn_004a34d0(void)
 {
@@ -380,9 +344,7 @@ int __cdecl fcn_004a4550(float* o1, float* o2, int a3, unsigned short* e, int a5
 	return 0;
 }
 
-void __cdecl fcn_004a51d0(char* e, int n, void* slots, void* cnt)
-{
-}
+
 
 void __cdecl fcn_004a7b40(void)
 {
@@ -404,10 +366,7 @@ void __cdecl fcn_004a8810(void)
 {
 }
 
-int __cdecl fcn_004ab010(unsigned short* e, void* o1, void* o2)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_004acc00(int* a)
 {
@@ -423,91 +382,43 @@ void __cdecl fcn_004b1e60(void)
 {
 }
 
-int __cdecl fcn_004b46c0(char* t, void* s)
-{
-	return 0;
-}
 
-int __cdecl fcn_004b4760(char* t, void* s)
-{
-	return 0;
-}
 
-int __cdecl fcn_004b47a0(char* t, void* s)
-{
-	return 0;
-}
 
-int __cdecl fcn_004b47e0(char* t, void* s)
-{
-	return 0;
-}
 
-int __cdecl fcn_004b4c10(char* t, void* c, void* s)
-{
-	return 0;
-}
 
-int __cdecl fcn_004b4c60(char* t, void* s)
-{
-	return 0;
-}
 
-int __cdecl fcn_004b4dc0(char* t, void* c, void* s)
-{
-	return 0;
-}
 
-int __cdecl fcn_004b4ec0(char* t, void* s)
-{
-	return 0;
-}
 
-int __cdecl fcn_004b5020(char* t, void* s)
-{
-	return 0;
-}
 
-int __cdecl fcn_004bac00(unsigned short* a, int* b, float c)
-{
-	return 0;
-}
 
-int __cdecl fcn_004bc8a0(int a, int b, void* c)
-{
-	return 0;
-}
+
+
+
+
+
+
+
+
+
+
+
 
 void __cdecl fcn_004bfe00(int a)
 {
 }
 
-void __cdecl fcn_004c09b0(void)
-{
-}
 
-void __cdecl fcn_004c30a0(int a, int b, char* c, int d, int e)
-{
-}
 
-int __cdecl fcn_004c3fa0(void)
-{
-	return 0;
-}
 
-int __cdecl fcn_004c4450(int handle)
-{
-	return 0;
-}
 
-char* __cdecl fcn_004c4480(int a)
-{
-	return (void*) 0;
-}
 
-void __cdecl fcn_004c4570(unsigned char a, unsigned char b, short c, void* d)
-{
-}
+
+
+
+
+
+
 
 int __cdecl fcn_004c5da0(int a, int b, int c, char* d, int e, char* f)
 {
@@ -518,23 +429,15 @@ void __cdecl fcn_004ce430(void)
 {
 }
 
-void __cdecl fcn_004e4910(void)
-{
-}
+
 
 void __cdecl fcn_004e71a0(void)
 {
 }
 
-int __cdecl fcn_004e8810(char* a)
-{
-	return 0;
-}
 
-int __cdecl fcn_004e8d10(void* p, int n, void* out)
-{
-	return 0;
-}
+
+
 
 int __cdecl fcn_004e8ee0(void* a, int b, void* c, int* d)
 {
@@ -546,25 +449,16 @@ int __cdecl fcn_004f1790(char* a, void* e)
 	return 0;
 }
 
-int __cdecl fcn_004f3e60(char* e, int* out)
-{
-	return 0;
-}
 
-int __cdecl fcn_00505340(void* entry)
-{
-	return 0;
-}
+
+
 
 int __cdecl fcn_00507910(int a)
 {
 	return 0;
 }
 
-float __cdecl fcn_00507ed0(float a, float b)
-{
-	return 0.0f;
-}
+
 
 float __cdecl fcn_0050bbb0(int a)
 {
@@ -576,10 +470,7 @@ int __cdecl fcn_0050c4e0(unsigned char* a)
 	return 0;
 }
 
-int __cdecl fcn_0050dfd0(char* a1, int a2)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_00515540(char* a)
 {
@@ -608,36 +499,21 @@ void __cdecl fcn_00533dc0(int a0, int a1, int a2)
 {
 }
 
-void __cdecl fcn_005356b0(void)
-{
-}
 
-char* __cdecl fcn_00557f00(char* a)
-{
-	return (void*) 0;
-}
 
-char* __cdecl fcn_00557f70(char* a)
-{
-	return (void*) 0;
-}
 
-void __cdecl fcn_00573a10(char* a)
-{
-}
 
-void __cdecl fcn_00577790(void)
-{
-}
+
+
+
+
+
 
 void __cdecl fcn_0057c860(void)
 {
 }
 
-int __cdecl fcn_0057eba0(int a, int b, int c, int d)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_00595e20(int a, int b)
 {
@@ -669,19 +545,11 @@ int __cdecl fcn_00597940(int a, int b, int c, int d, int e)
 	return 0;
 }
 
-int __cdecl fcn_00598550(void)
-{
-	return 0;
-}
 
-char* __cdecl fcn_005b1a80(int a)
-{
-	return (void*) 0;
-}
 
-void __cdecl fcn_005b1b30(void* a)
-{
-}
+
+
+
 
 void __cdecl fcn_005b6300(int a, char* b)
 {
@@ -697,9 +565,7 @@ int __cdecl fcn_005ba910(void)
 	return 0;
 }
 
-void __cdecl fcn_005c1090(int a)
-{
-}
+
 
 void __cdecl fcn_005e7858(void)
 {
@@ -718,9 +584,7 @@ void __cdecl he_RunNone(void)
 {
 }
 
-void __cdecl init_Betrieb(void* a)
-{
-}
+
 
 void __cdecl nt_LogWinsockError(int err)
 {

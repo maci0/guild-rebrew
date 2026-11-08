@@ -426,6 +426,10 @@ if(REBREW_BUILD_GOLD)
   # rebrew build symbol-stubs from the 2026-11-08 link log).
   rebrew_append_scaffold(GOLD_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_extra.c")
+  # Callees of the adopted shared bodies that Gold has no definition for
+  # (generated from the 2026-11-09 link log).
+  rebrew_append_scaffold(GOLD_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_adopted.c")
 
   if(GOLD_SOURCES)
     add_executable(europa1400gold WIN32 ${GOLD_SOURCES})

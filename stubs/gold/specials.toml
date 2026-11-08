@@ -256,3 +256,161 @@ void __cdecl fcn_00401260(int a, int b)
 {
 }
 """
+
+# Real Gold translation units now define these symbols; no placeholder is emitted.
+[specials.g_6791d0]
+impl = ""
+
+[specials.CloseVideo]
+impl = ""
+
+[specials.FindVideoById]
+impl = ""
+
+[specials.FindVideoByWindow]
+impl = ""
+
+[specials.ch_FinishAnimation]
+impl = ""
+
+[specials.ch_RunAnimationScript]
+impl = ""
+
+[specials.evt_LoadGfxScript]
+impl = ""
+
+[specials.fcn_00405180]
+impl = ""
+
+[specials.fcn_00408270]
+impl = ""
+
+[specials.fcn_00427b40]
+impl = ""
+
+[specials.fcn_00429d30]
+impl = ""
+
+[specials.fcn_00438b40]
+impl = ""
+
+[specials.fcn_00442d50]
+impl = ""
+
+[specials.fcn_004518a0]
+impl = ""
+
+[specials.fcn_004942a0]
+impl = ""
+
+[specials.fcn_004a51d0]
+impl = ""
+
+[specials.fcn_004ab010]
+impl = ""
+
+[specials.fcn_004b46c0]
+impl = ""
+
+[specials.fcn_004b4760]
+impl = ""
+
+[specials.fcn_004b47a0]
+impl = ""
+
+[specials.fcn_004b47e0]
+impl = ""
+
+[specials.fcn_004b4c10]
+impl = ""
+
+[specials.fcn_004b4c60]
+impl = ""
+
+[specials.fcn_004b4dc0]
+impl = ""
+
+[specials.fcn_004b4ec0]
+impl = ""
+
+[specials.fcn_004b5020]
+impl = ""
+
+[specials.fcn_004bac00]
+impl = ""
+
+[specials.fcn_004bc8a0]
+impl = ""
+
+[specials.fcn_004c09b0]
+impl = ""
+
+[specials.fcn_004c30a0]
+impl = ""
+
+[specials.fcn_004c3fa0]
+impl = ""
+
+[specials.fcn_004c4450]
+impl = ""
+
+[specials.fcn_004c4480]
+impl = ""
+
+[specials.fcn_004c4570]
+impl = ""
+
+[specials.fcn_004e4910]
+impl = ""
+
+[specials.fcn_004e8810]
+impl = ""
+
+[specials.fcn_004e8d10]
+impl = ""
+
+[specials.fcn_004f3e60]
+impl = ""
+
+[specials.fcn_00505340]
+impl = ""
+
+[specials.fcn_00507ed0]
+impl = ""
+
+[specials.fcn_0050dfd0]
+impl = ""
+
+[specials.fcn_005356b0]
+impl = ""
+
+[specials.fcn_00557f00]
+impl = ""
+
+[specials.fcn_00557f70]
+impl = ""
+
+[specials.fcn_00573a10]
+impl = ""
+
+[specials.fcn_00577790]
+impl = ""
+
+[specials.fcn_0057eba0]
+impl = ""
+
+[specials.fcn_00598550]
+impl = ""
+
+[specials.fcn_005b1a80]
+impl = ""
+
+[specials.fcn_005b1b30]
+impl = ""
+
+[specials.fcn_005c1090]
+impl = ""
+
+[specials.init_Betrieb]
+impl = ""
+

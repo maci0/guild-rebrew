@@ -7,7 +7,7 @@ comparison scaffolds link (below); no byte-level image comparison was run, so th
 
 - Status snapshot (`rebrew status --all-targets --json`, graphics regenerated): GoldTL
   4,124 of 5,194 C functions matched and 54.1% code accounted (28 stock zlib functions moved
-  to library, seven operand-order fixes below); Gold 1,916 of 4,421; the server unchanged at 251 of 251.
+  to library, seven operand-order fixes below); Gold 1,968 of 4,421 (51 twin adoptions below); the server unchanged at 251 of 251.
 - 123 loose `fcn_<VA>` functions were renamed from literal evidence (script
   registrations, AI method registrations, tag strings with twin names). Each row is in
   [name-ledger.tsv](name-ledger.tsv); the method is in [naming conventions](naming_conventions.md).
@@ -36,7 +36,7 @@ comparison scaffolds link (below); no byte-level image comparison was run, so th
 Open, in order:
 
 1. Link: both client scaffolds build and link on 2026-11-08 (`europa1400gold_tl` 3.0 MB,
-   `europa1400gold` 0.7 MB) with generated placeholder stubs, which prove nothing about ABI or
+   `europa1400gold` 0.7 MB, relinked on 2026-11-09 after the twin adoptions) with generated placeholder stubs, which prove nothing about ABI or
    storage ownership. GoldTL had 51 unresolved externals before the stubs and Gold had 184;
    they are now defined in `stubs/goldtl/symbol_stubs_extra.c` and `stubs/gold/symbol_stubs_extra.c`
    (`rebrew build symbol-stubs`, one special for `fcn_00401260`). One real fix: the Gold file
