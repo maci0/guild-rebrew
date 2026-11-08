@@ -240,3 +240,11 @@ impl = ""
 # The GOLD source translation unit supplies this definition.
 [specials.fcn_005af320]
 impl = ""
+
+# The GOLD source translation unit supplies this definition.
+[specials.fcn_00438920]
+impl = ""
+
+# The GOLD source translation unit supplies this definition.
+[specials.fcn_00445600]
+impl = ""

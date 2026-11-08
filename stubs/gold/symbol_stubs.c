@@ -2823,10 +2823,7 @@ int __cdecl fcn_00438100(void* a, char* b, char c)
 	return 0;
 }
 
-int __cdecl fcn_00438920(int a, int b, int c)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_00438af0(unsigned char a)
 {
@@ -2902,10 +2899,7 @@ float __cdecl fcn_00444700(int a, float * b)
 	return 0.0f;
 }
 
-char* __cdecl fcn_00445600(int a, int b, int c, char* d)
-{
-	return (void*) 0;
-}
+
 
 int __cdecl fcn_00445760(int a, int b, int c, void* d, void* e)
 {

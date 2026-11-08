@@ -47,8 +47,14 @@ Open, in order:
    no row was created from the plan's 4-byte `int` default. 49 proposed global names have no
    store row. The upstream tool gaps are written in its `docs/IDEAS-GUILD.md` (2026-11-08
    entries, not yet committed there).
-2. Gold link gaps: 133 of 284 classified unresolved externals (2026-11-05 log) are cross-target aliases.
-   Only one GOLD loose file could be named from a TL twin.
+2. Gold link gaps: a Gold build on 2026-11-08 compiles every unit and links with 184 unresolved
+   externals, against 284 in the 2026-11-05 classification (124 of those resolved, 24 new
+   names appeared). The new names come from renaming: Gold callers now reference the TL
+   names (`_ch_FinishAnimation`, `_d2_SelectRadioGroup`, `_d3_FindAnimByName` and similar),
+   but no Gold definition exists under them. 124 of the 184 are old class a (an active GoldTL
+   definition exists, no active Gold row); a Gold adopt was refused earlier because the Gold
+   bytes differ from the TL function at the same address. Only one Gold loose file could be
+   named from a TL twin.
 3. 66 stock-library functions (zlib, d3dx8, a few more) need `rebrew library bind-source`, not game names.
 4. 133 of the 164 files named `fcn_<VA>.c` that define a real name were renamed to
    `MODULE.name.c`. The other 30 were skipped: 19 previews include a data row, 6 failed the
