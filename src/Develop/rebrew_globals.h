@@ -7,12 +7,27 @@
 #define REBREW_GLOBALS_H
 
 /* .data */
+/* Server keeps three log levels; the client (GOLDTL/GOLD) keeps twelve.
+ * Sizes differ genuinely per target; see error-contract-evidence. */
+#if defined(REBREW_SERVER)
 /* ADDRESS: SERVER 0x10027078 */
 extern int g_log_level_table[3]; /* 0x10027078 */
 /* ADDRESS: SERVER 0x10027084 */
 extern char g_log_format_table[96]; /* 0x10027084, three 0x20-byte names */
+#else
+/* ADDRESS: GOLDTL 0x00677918 */
+/* ADDRESS: GOLD 0x005f6d48 */
+extern int g_log_level_table[12]; /* 0x677918 */
+/* ADDRESS: GOLDTL 0x00677948 */
+/* ADDRESS: GOLD 0x005f6d78 */
+extern char g_log_format_table[384]; /* 0x677948, twelve 0x20-byte names */
+#endif
 extern char g_log_newline[2]; /* 0x100270E4 */
+#if defined(REBREW_SERVER)
 extern char g_log_default_name[13]; /* 0x100270E8 */
+#else
+extern char g_log_default_name[12]; /* 0x677acc */
+#endif
 extern char g_crash_newline[4]; /* 0x10027314 */
 extern char g_crash_space[4]; /* 0x10027328 */
 extern char s_m_alloc_header[1]; /* 0x10028888 */

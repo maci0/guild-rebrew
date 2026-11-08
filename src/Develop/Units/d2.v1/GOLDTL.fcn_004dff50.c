@@ -17,8 +17,8 @@ extern float g_662a6c;
 void __cdecl d2_SetForm(int, int);
 float __cdecl gm_GetEntitySkill(char*, int);
 int __cdecl fcn_005c6270(void*, int);
-float __cdecl fcn_004e6d20(void);
-int __cdecl fcn_004e6cb0(int);
+float __cdecl cut_RandFloat(void);
+int __cdecl cut_RandMod(int);
 void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 int __cdecl fcn_004dfe40(char*, int);
 void __cdecl fcn_00417b50(char*, int, float, float, float, float);
@@ -53,7 +53,7 @@ void __cdecl fcn_004dff50(char* task)
 	if ((e == g_9afde4 && g_772f5b) || (e == g_9afde0 && g_772f5a)) {
 		a = a * g_664180;
 	}
-	if (fcn_004e6d20() < a) {
+	if (cut_RandFloat() < a) {
 		hit = 1;
 	} else {
 		hit = 0;
@@ -61,9 +61,9 @@ void __cdecl fcn_004dff50(char* task)
 	}
 	if (hit) {
 		if ((e == g_9afde4 && g_772f5d) || (e == g_9afde0 && g_772f5c)) {
-			n = fcn_004e6cb0(0xf) + 5;
+			n = cut_RandMod(0xf) + 5;
 		} else {
-			n = fcn_004e6cb0(0x1e) + 0xf;
+			n = cut_RandMod(0x1e) + 0xf;
 		}
 		if (fcn_005c6270(foe, 0x2b5) != 0) {
 			n = (int) ((float) n * g_662a6c);

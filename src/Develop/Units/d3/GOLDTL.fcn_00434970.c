@@ -24,7 +24,7 @@ char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS optio
 	int table;
 
 	if (context != 0) {
-		object = fcn_00433ba0(name);
+		object = d3_FindAnimByName(name);
 		slot = 0;
 		scan = context + 0x390;
 		for (slot = 0; slot < 3; slot++) {

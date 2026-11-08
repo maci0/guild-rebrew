@@ -18,7 +18,7 @@ extern short g_005fe73c; /* 0x005fe73c */
 int __cdecl fcn_0046c9e0(void);
 int __cdecl fcn_004690a0(int);
 void __cdecl fcn_00473530(int, int);
-void __cdecl fcn_00469900(int);
+void __cdecl d2_AddRefcount(int);
 
 int __cdecl fcn_0046bdf0(int a1, int a2, int a3, int a4)
 {
@@ -39,6 +39,6 @@ int __cdecl fcn_0046bdf0(int a1, int a2, int a3, int a4)
 	g_00f8f080[idx].font = g_005fe73c;
 	g_00f8f080[idx].data = (char*) fcn_004690a0(a3);
 	fcn_00473530(idx, a4);
-	fcn_00469900(a3);
+	d2_AddRefcount(a3);
 	return idx;
 }

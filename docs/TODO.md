@@ -1,5 +1,43 @@
 # Current work
 
+## Working checkpoint, 2026-11-08
+
+State of the tree after the translation-unit consolidation and naming rounds. No
+new full client image was built; the byte results below are per-function comparisons.
+
+- Status snapshot (`rebrew status --all-targets --json`, graphics regenerated): GoldTL
+  4,146 of 5,222 C functions matched and 54.1% code accounted; Gold 1,897 of 4,428 and
+  21.2%; the server unchanged at 251 of 251.
+- 123 loose `fcn_<VA>` functions were renamed from literal evidence (script
+  registrations, AI method registrations, tag strings with twin names). Each row is in
+  [name-ledger.tsv](name-ledger.tsv); the method is in [naming conventions](naming_conventions.md).
+  Names that rest on a position or an allocation tag alone were held out.
+- Three merged units (`main.c`, `aemter.c`, `d2_windows.c`) were split back to one file
+  per function because the literal-pool string evidence did not support them as native
+  units. Every row kept its status. See [source layout](source-layout.md).
+- Three loose duplicates were bound to the shared definitions (`gm_RemoveObjectByType`,
+  `gm_RemoveLinkedNodeById`, `gm_FindKind47ByOwner`). Eight other pairs were tried and
+  restored because the TL bytes changed: the shared bodies carry server-only log calls.
+  Guarded patches for six of them are drafted under `.scratch/` and untested.
+- `rebrew lint --json` reports 0 errors. After an agent ran `rebrew verify` outside a
+  transaction, seven GoldTL functions that were RELOC show NEAR_MATCHING on retest
+  (`0x00452360`, `0x00474780`, `0x004e4b60`, `0x00526db0`, `0x00537080`, `0x005e3c40`,
+  `0x00451150`). The cause is not traced.
+
+Open, in order:
+
+1. TL link gaps (55 unresolved externals): three placeholder bindings
+   (`fcn_00442be0`, `fcn_004e6bd0`, `fcn_00504e70`) fail because the callers declare
+   a different signature; `rebrew types reconcile` refuses with "incomplete source/include
+   contexts". Forty data externals need storage rows, and 49 proposed global names have
+   no store row. Gaps for the upstream tool go to its `docs/IDEAS-GUILD.md`.
+2. Gold link gaps: 133 of 284 classified unresolved externals (2026-11-05 log) are cross-target aliases.
+   Only one GOLD loose file could be named from a TL twin.
+3. 66 stock-library functions (zlib, d3dx8, a few more) need `rebrew library bind-source`, not game names.
+4. 164 files are still named `fcn_<VA>.c` although they define a real name; the rename
+   to `MODULE.name.c` is decided but not done.
+5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
+
 ## Verified checkpoint, 2026-11-05
 
 [Release 1.10.0](releases/1.10.0.md) records the last full binary validation. Its server build

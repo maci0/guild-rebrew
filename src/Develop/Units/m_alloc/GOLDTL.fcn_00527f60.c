@@ -80,7 +80,7 @@ void __cdecl fcn_0046f940(int, const char*);
 int __cdecl fcn_00517c00(int, int, int, char*);
 char* __cdecl fcn_00507ab0(int);
 int __cdecl fcn_0050d270(int);
-int __cdecl fcn_0050b7c0(int, int);
+int __cdecl gm_QueryEntitySum(int, int);
 int __cdecl fcn_0050b710(int, int);
 int __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl fcn_00465950(const char*);
@@ -379,7 +379,7 @@ hidden:
 		} else {
 			si = g_773d75;
 		}
-		val = fcn_0050b7c0(
+		val = gm_QueryEntitySum(
 			      *(int*) (0x7f4e18 + g_774970 * 0x21c), si)
 			+ g_774698;
 	} else {

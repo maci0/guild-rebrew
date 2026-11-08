@@ -17,7 +17,7 @@ int __cdecl fcn_0048fa60(char* e, char* home, Msg* m, Msg* out);
 int __cdecl fcn_0048fba0(char* e, char* home, Msg* m, Msg* out);
 
 /* ADDRESS: GOLDTL 0x0048fdd0 */
-int __cdecl fcn_0048fdd0(char* e, Msg* m, Msg* out)
+int __cdecl ai_RunGraveyardOwner(char* e, Msg* m, Msg* out)
 {
 	{
 		char* home;

@@ -28,7 +28,7 @@ int __cdecl fcn_004a4bb0(char* a1, char* e, int a3, Blk24* b1, Blk24* b2, int wa
 /* The fallback's b1.kind is never written (as in the reference). The
  * pair structs are block-scoped: at function scope the b1.kind store is
  * scheduled ahead of the b1.a load. */
-int __cdecl fcn_0049e1e0(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
+int __cdecl ai_StartBaumeister(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 {
 	unsigned char* rec;
 	unsigned char* fr[3];

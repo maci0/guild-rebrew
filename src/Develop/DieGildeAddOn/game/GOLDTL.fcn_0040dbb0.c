@@ -10,7 +10,7 @@ void __cdecl fcn_00455350(char* src, char* pos, float* out);
 #include "client_scene_transform.h"
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-char* __cdecl fcn_0040dbb0(char** a, int* range)
+char* __cdecl DummyBlocked(char** a, int* range)
 {
 	float pos[4];
 	char* result;

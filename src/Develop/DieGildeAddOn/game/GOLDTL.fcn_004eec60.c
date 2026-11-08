@@ -5,7 +5,7 @@
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
-void __cdecl fcn_00502e30(void* list, unsigned int id);
+void __cdecl gm_RemoveObjectByType(void* list, unsigned int id);
 void __cdecl gm_KillSpieler(unsigned int idx, int param);
 
 int __cdecl fcn_004eec60(int cmd, int* ids, char* parent)
@@ -25,7 +25,7 @@ int __cdecl fcn_004eec60(int cmd, int* ids, char* parent)
 		do {
 			if (*slot != 0) {
 				if (query != 0) {
-					fcn_00502e30(query + 0x14, *slot);
+					gm_RemoveObjectByType(query + 0x14, *slot);
 				}
 				slot[0] = 0;
 				slot[1] = 0;

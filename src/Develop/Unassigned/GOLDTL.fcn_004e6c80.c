@@ -8,7 +8,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLD 0x004e52c0 */
 /* ADDRESS: GOLDTL 0x004e6c80 */
-char* __cdecl fcn_004e6c80(void)
+char* __cdecl cut_GetRandSeed(void)
 {
 	char buf[0x40];
 

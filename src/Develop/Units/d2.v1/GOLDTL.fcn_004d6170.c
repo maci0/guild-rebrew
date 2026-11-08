@@ -44,7 +44,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_004e6eb0(char*, unsigned int);
 void __cdecl fcn_00412830(int);
 int __cdecl fcn_00471e30(int);
-int __cdecl fcn_004e6cb0(int);
+int __cdecl cut_RandMod(int);
 int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl fcn_004c5150(int, int, int, int);
 int __cdecl gm_MapEntityStatRange(int);
@@ -314,7 +314,7 @@ sync:
 				pay = 0x9c400;
 			}
 			qhi = 0;
-			qlo = fcn_004e6cb0(0x32);
+			qlo = cut_RandMod(0x32);
 			if (pay < 0) {
 				pay = 0;
 			}
@@ -325,7 +325,7 @@ sync:
 			if (cur != 0 && rec != 0) {
 				ent = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
 				while (ent != 0) {
-					qlo = fcn_004e6cb0(0x14) + 0x50;
+					qlo = cut_RandMod(0x14) + 0x50;
 					qhi = 0;
 					n = (int) (*(int*) (ent + 0xe) * ((double) (unsigned) qlo * 0.01));
 					if (n < 1) {
@@ -348,7 +348,7 @@ reduce:
 			io_FormatTextBuffer(s.buf, 0x11a6, *(unsigned short*) g_772e9c, ent);
 			fcn_004e6eb0(s.buf, 0);
 			if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
-				fcn_0050ff70(ent, 0x14 - fcn_004e6cb0(0x14));
+				fcn_0050ff70(ent, 0x14 - cut_RandMod(0x14));
 			}
 		} else if (choice == 0) {
 			io_FormatTextBuffer(s.msg, 0x11a7, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e9c);
@@ -425,7 +425,7 @@ reduce:
 					if (pay >= 0x9c400) {
 						pay = 0x9c400;
 					}
-					flo = fcn_004e6cb0(0x32);
+					flo = cut_RandMod(0x32);
 					fhi = 0;
 					if (pay < 0) {
 						pay = 0;
@@ -436,7 +436,7 @@ reduce:
 					if (cur != 0 && rec != 0) {
 						p = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
 						while (p != 0) {
-							qlo = fcn_004e6cb0(0x14) + 0x50;
+							qlo = cut_RandMod(0x14) + 0x50;
 							qhi = 0;
 							n = (int) (*(int*) (p + 0xe) * ((double) (unsigned) qlo * 0.01));
 							if (n < 1) {

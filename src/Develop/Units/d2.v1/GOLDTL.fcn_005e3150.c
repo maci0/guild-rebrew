@@ -44,7 +44,7 @@ void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_00471f80(int);
 void __cdecl fcn_00427370(int);
-void __cdecl fcn_0041fc80(int);
+void __cdecl SetMasterVolume(int);
 int __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 void __cdecl fcn_005e12d0(void);
 void __cdecl fcn_005e2590(void);
@@ -123,7 +123,7 @@ void __cdecl fcn_005e3150(void)
 			music = (float)(fcn_00471f80(s1));
 			sfx = (float)(fcn_00471f80(s2));
 			fcn_00427370((int) (music * master));
-			fcn_0041fc80((int) (sfx * master));
+			SetMasterVolume((int) (sfx * master));
 			if (g_67d370 == s1 && playing == 0) {
 				playing = fcn_004234e0(g_7747b8, s_6ad2e8, 1, 0x3f, 0x7f, 0, 0);
 			}

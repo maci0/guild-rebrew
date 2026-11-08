@@ -48,7 +48,7 @@ int __cdecl fcn_0055c050(char*);
 float __cdecl fcn_004ff210(short, int);
 float __cdecl fcn_0050bb50(int, int);
 int __cdecl gm_GetMsgField(char*, char*);
-int __cdecl fcn_0050df70(char*, char*);
+int __cdecl gm_GetMsgField(char*, char*);
 unsigned char* __cdecl fcn_00508e40(int);
 void* __cdecl fcn_00509570(char*);
 
@@ -386,7 +386,7 @@ void __cdecl fcn_00569ff0(char* e)
 					        && *(unsigned short*) cnt2 != 0x1c1
 					        && *(unsigned short*) cnt2 != 0x1c2
 					        && *(unsigned short*) cnt2 != 0x1c3) {
-						num = (int) ((float) fcn_0050df70(pa, cnt2)
+						num = (int) ((float) gm_GetMsgField(pa, cnt2)
 						        * ((float) hits * 0.1));
 						if (num < 1) {
 							num = 1;

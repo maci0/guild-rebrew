@@ -9,7 +9,7 @@ typedef struct {
 
 extern char* g_6b7e98;
 void __cdecl fcn_00426680(char* pos, Token* t);
-char* __cdecl fcn_00426fd0(const char* name);
+char* __cdecl evt_LoadGfxScript(const char* name);
 void __cdecl fcn_00427f00(char* s);
 void __cdecl fcn_00425bf0(char* g, char* pos, const char* msg);
 int __cdecl fcn_00428720(char* c);
@@ -22,7 +22,7 @@ void __cdecl fcn_00427480(void)
 
 	fcn_00426680(*(char**) (g_6b7e98 + 0x118), &tok);
 	if (tok.type == 7) {
-		s = fcn_00426fd0(tok.text);
+		s = evt_LoadGfxScript(tok.text);
 		if (s != 0) {
 			fcn_00427f00(s);
 			for (i = 0; i < 8; i++) {

@@ -3,7 +3,7 @@
 
 void __cdecl fcn_00433780(void*);
 
-void __cdecl fcn_0040fdb0(void)
+void __cdecl d3_RemoveCameraAnim(void)
 {
 	fcn_00433780(g_6b8014);
 	*(int*) 0x6b5cc0 = 0;

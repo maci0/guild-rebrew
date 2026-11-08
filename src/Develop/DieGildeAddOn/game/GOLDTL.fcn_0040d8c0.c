@@ -4,7 +4,7 @@
 extern char* g_6b7e98;
 
 void __cdecl fcn_00425bf0(char*, int, const char*);
-void __cdecl fcn_004056a0(char*, int);
+void __cdecl ch_SetCameraView(char*, int);
 
 
 /* SetCharacterCamera(): puts the camera into one of the character views. */
@@ -16,13 +16,13 @@ int __cdecl SetCharacterCamera(char** ch, char** view)
 		return 1;
 	}
 	if (strcmp("CLOSEUP", *view) == 0) {
-		fcn_004056a0(*ch, 0);
+		ch_SetCameraView(*ch, 0);
 	} else if (strcmp("LEFT_SHOULDER", *view) == 0) {
-		fcn_004056a0(*ch, 1);
+		ch_SetCameraView(*ch, 1);
 	} else if (strcmp("RIGHT_SHOULDER", *view) == 0) {
-		fcn_004056a0(*ch, 2);
+		ch_SetCameraView(*ch, 2);
 	} else if (strcmp("EGO", *view) == 0) {
-		fcn_004056a0(*ch, 3);
+		ch_SetCameraView(*ch, 3);
 	}
 	return 0;
 }

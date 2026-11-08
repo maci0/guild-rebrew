@@ -5,7 +5,7 @@ void __cdecl fcn_005100f0(int, int);
 
 
 /* ADDRESS: GOLDTL 0x0049f230 */
-int __cdecl fcn_0049f230(char* a, char* b, int c)
+int __cdecl ai_RunChangeProfession(char* a, char* b, int c)
 {
 	if (amt_ExecGebaeudeBauen(a, b, c) != 0) {
 		fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0x1000000, 0);

@@ -15,7 +15,7 @@ void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_004030e0(char*);
 char* __cdecl fcn_004fe2e0(char*, int, int*, int*, int, int);
 void __cdecl fcn_00407800(int, int, char*);
-char* __cdecl fcn_00426fd0(char*);
+char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(char*, int, ...);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_00546190(char*);
@@ -128,7 +128,7 @@ void __cdecl fcn_00566360(char* a0)
 			if (name[0]) {
 				fcn_00407800(*(int*) (ent + 0x184), 2, name);
 			}
-			p = fcn_00426fd0((char*) 0x6a68bc);
+			p = evt_LoadGfxScript((char*) 0x6a68bc);
 			if (p != 0) {
 				fcn_00428340(p, 5, (int) f13, (int) f16, (int) f17, 0x28, 0xb4);
 				if (v30 != -1) {

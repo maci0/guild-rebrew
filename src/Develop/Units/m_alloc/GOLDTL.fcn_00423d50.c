@@ -7,7 +7,7 @@ void __cdecl fcn_00425810(void);
 char* __cdecl m_alloc(int size, char* tag);
 char* __cdecl fcn_0064d530(char* dst, const char* src, unsigned int n);
 
-int __cdecl fcn_00423d50(char* s)
+int __cdecl sbs_CreateSB(char* s)
 {
 	int n;
 

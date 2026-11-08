@@ -7,7 +7,7 @@ extern char g_6997e8[];
 
 void* __cdecl fcn_00502cd0(int list, int a, int b, int c);
 char* __cdecl gm_AllocObjekt(int a, int b, int c);
-int __cdecl fcn_00502e30(char* list, int b);
+int __cdecl gm_RemoveObjectByType(char* list, int b);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 
 int __cdecl fcn_00503930(int a, int b, int c)
@@ -37,7 +37,7 @@ int __cdecl fcn_00503930(int a, int b, int c)
 	}
 	*(int*) (r + 0xe) -= c;
 	if (*(int*) (r + 0xe) == 0) {
-		fcn_00502e30(list_head, b);
+		gm_RemoveObjectByType(list_head, b);
 	}
 	return 1;
 }

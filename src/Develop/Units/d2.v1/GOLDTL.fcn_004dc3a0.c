@@ -19,7 +19,7 @@ void __cdecl d2_SetForm(int, int);
 unsigned int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, char*);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-int __cdecl fcn_004e6e20(int, int, int);
+int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -79,10 +79,10 @@ int __cdecl fcn_004dc3a0(char* a0, int a1, int* a2, int* a3)
 	}
 	n = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100,
 	    0x75, 0x42, g_772514);
-	fcn_004e6e20(n, 0x5dc, 1);
+	d2_UpdateProgressBar(n, 0x5dc, 1);
 	g_100f1dc = -1;
 	while (fcn_005373e0((void*) 0x4dc230, g_68bfb8) != 0) {
-		if (fcn_004e6e20(n, 0, 0) != 0) {
+		if (d2_UpdateProgressBar(n, 0, 0) != 0) {
 			if (g_100f1dc != -1) {
 				for (i = 0; i < found; i++) {
 					if (g_67d370 == handles[i]) {

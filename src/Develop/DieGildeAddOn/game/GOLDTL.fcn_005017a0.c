@@ -20,7 +20,7 @@ typedef struct {
 
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
-void* __cdecl fcn_00503e50(int);
+void* __cdecl gm_FindKind47ByOwner(int);
 char* __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_004c4450(int);
@@ -152,7 +152,7 @@ void __cdecl fcn_005017a0(int a0)
 			}
 		}
 	} else {
-		e = (unsigned char*) fcn_00503e50(a0);
+		e = (unsigned char*) gm_FindKind47ByOwner(a0);
 		if (e == 0) {
 			return;
 		}

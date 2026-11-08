@@ -13,7 +13,7 @@ int __cdecl fcn_004ac150(short);
 unsigned short __cdecl fcn_004ac290(int);
 char* __cdecl fcn_004ac1e0(short);
 char* __cdecl fcn_00426cc0(int);
-char* __cdecl fcn_00426fd0(char*);
+char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(char*, int, int);
 void __cdecl fcn_00428720(char*);
 void __cdecl fcn_004432d0(int, int);
@@ -92,7 +92,7 @@ void __cdecl fcn_00555d30(char* obj)
 				sprintf(buf, (char*) 0x67d444, *(int*) (x + 8));
 				t = *(int*) 0x6b8010;
 				fcn_004432d0(0, 1);
-				q = fcn_00426fd0((char*) 0x6a5edc);
+				q = evt_LoadGfxScript((char*) 0x6a5edc);
 				if (q != 0) {
 					*(int*) q = 0x68427244;
 					*(int*) (obj + 0xb4) = *(int*) (q + 0x100);

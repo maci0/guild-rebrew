@@ -8,7 +8,7 @@ int __cdecl fcn_00423670(int o, int a, int b);
 void __cdecl fcn_004238f0(int o, int v);
 #include "client_sound.h"
 
-int __cdecl fcn_00410fc0(int* a, int* b, int* c, int* d)
+int __cdecl PlaySample3D(int* a, int* b, int* c, int* d)
 {
 	int o;
 

@@ -8,10 +8,10 @@ int __cdecl fcn_0050d170(int);
 int __cdecl fcn_0050d200(char*, int);
 int __cdecl fcn_0050b810(int, unsigned char);
 int __cdecl fcn_004a4bb0(int, char*, int, int*, int*, int);
-int __cdecl fcn_0049e900(int, char*, int, int*, int*);
+int __cdecl ai_StartKreditNehmen(int, char*, int, int*, int*);
 
 /* ADDRESS: GOLDTL 0x0048d6c0 */
-int __cdecl fcn_0048d6c0(int a0, char* a1, int a2, int* a3, int* a4)
+int __cdecl ai_StartDomizil(int a0, char* a1, int a2, int* a3, int* a4)
 {
 	int v12[6];
 	int v13[6];
@@ -53,7 +53,7 @@ int __cdecl fcn_0048d6c0(int a0, char* a1, int a2, int* a3, int* a4)
 		if ((float) rem / (float) first < g_6628bc) {
 			a3[2] = rem;
 			*(char*) a3 = 0x12;
-			return fcn_0049e900(0x40, a1, 0, a3, a4);
+			return ai_StartKreditNehmen(0x40, a1, 0, a3, a4);
 		}
 	} else {
 		v12[0] = 5;
@@ -74,7 +74,7 @@ int __cdecl fcn_0048d6c0(int a0, char* a1, int a2, int* a3, int* a4)
 		if ((float) rem / (float) first < g_6628bc) {
 			a3[2] = rem;
 			*(char*) a3 = 0x12;
-			return fcn_0049e900(0x40, a1, 0, a3, a4);
+			return ai_StartKreditNehmen(0x40, a1, 0, a3, a4);
 		}
 	}
 	return 0;

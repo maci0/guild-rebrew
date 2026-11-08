@@ -11,7 +11,7 @@ void __cdecl fcn_004bf8e0(void *, void *);
 void __cdecl fcn_004bfc10(void);
 void __cdecl fcn_004bfca0(void *, void *);
 int __cdecl fcn_00469510(int);
-void __cdecl fcn_004695a0(int, int);
+void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_004c4510(int, int);
@@ -71,7 +71,7 @@ int __cdecl fcn_004bfe00(char *obj)
 		*(int *) (head + 4) = *(int *) (obj + 0x1c);
 		*(int *) head = *(int *) (obj + 2);
 		fcn_004be3d0(town, obj, (void *) head, (void *) head);
-		fcn_004695a0(*(int *) 0x6816d8, 0);
+		d2_SelectRadioGroup(*(int *) 0x6816d8, 0);
 		*(int *) 0x772904 = 0;
 	} else {
 		for (p = (char *) head; p != 0; p = *(char **) (p + 0x3c)) {
@@ -101,7 +101,7 @@ int __cdecl fcn_004bfe00(char *obj)
 				*(int *) (p + 4) = *(int *) (*(int *) 0x772904 + 1);
 				*(int *) p = *(int *) (obj + 2);
 				fcn_004be3d0(town, obj, (void *) *(int *) 0x772908, p);
-				fcn_004695a0(*(int *) 0x6816d8, *(int *) 0x772900 - 1);
+				d2_SelectRadioGroup(*(int *) 0x6816d8, *(int *) 0x772900 - 1);
 				*(int *) 0x772904 = 0;
 			}
 		}
@@ -117,7 +117,7 @@ int __cdecl fcn_004bfe00(char *obj)
 						v = *(int *) (0x10058a4 + j * 8);
 						if (v != 0 && (v = *(int *) (v + 4)) != -1 &&
 						    gm_SearchTable67(v) == *(int *) 0x772904) {
-							fcn_004695a0(*(int *) 0x6816d8, j);
+							d2_SelectRadioGroup(*(int *) 0x6816d8, j);
 							*(int *) 0x772904 = 0;
 						}
 					}

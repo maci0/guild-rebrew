@@ -22,7 +22,7 @@ void __cdecl fcn_004bc270(slot1c* s)
 
 	if (fcn_004bc7f0(v) == 0)
 		return;
-	s->obj = fcn_00403b90(g_6813e8, v);
+	s->obj = ch_CreateAtPosition(g_6813e8, v);
 	if (s->obj == 0)
 		return;
 	*(float*) (s->obj + 0x1a0) = 1.0f;

@@ -6,7 +6,7 @@ extern int g_6791c8;
 int __cdecl fcn_00422460(int a, int b);
 int __cdecl fcn_00423670(int o, int a, int b);
 
-int __cdecl fcn_00410f10(int* a, int* b)
+int __cdecl PlaySampleHandle(int* a, int* b)
 {
 	int o;
 

@@ -28,7 +28,7 @@ int* __cdecl fcn_004b3ce0(int, int*);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00469470(int, int);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl fcn_004b3ec0(int, int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
@@ -62,7 +62,7 @@ int __cdecl fcn_004b3fe0(int a1)
 		fcn_00469470(lst, k);
 	}
 	while (fcn_005373e0(fcn_004b3fe0, 0x1c6) != 0) {
-		fcn_00469630(lst);
+		d2_UpdateRadioGroup(lst);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1)
 			g_774654 = 1;
 		if (g_100f1dc != -1 && ((struct list_4b3fe0*)g_102cbc8)[lst].sel != -1

@@ -16,7 +16,7 @@ extern char* g_6b7e98;
 void __cdecl fcn_0043a3f0(int a, int b, Bytes4 c);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040e080(char** a, unsigned char* v)
+int __cdecl SetCharacterTransperancy(char** a, unsigned char* v)
 {
 	Bytes4 col;
 	int o;

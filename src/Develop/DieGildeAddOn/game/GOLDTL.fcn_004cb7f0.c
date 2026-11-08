@@ -34,7 +34,7 @@ void __cdecl fcn_00598860(int, void*);
 void __cdecl fcn_004550b0(int, int);
 void __cdecl d3_DestroyObject(int);
 char __cdecl fcn_00413680(char*, char*, float*, float*);
-char* __cdecl fcn_00426fd0(int);
+char* __cdecl evt_LoadGfxScript(int);
 void __cdecl fcn_00428340(char*, int, ...);
 void __cdecl fcn_00510820(int, void*, int);
 void __cdecl fcn_0052d9d0(void*);
@@ -130,7 +130,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 		d3_DestroyObject(h);
 		if (*(int*) (obj + 0x1ec) != 0 && fcn_00413680((char*) obj, (char*) g_6b8014, center, &radius)) {
 			res = (int) _ftol(radius * g_664ec0);
-			h = (int) fcn_00426fd0(0x68b228);
+			h = (int) evt_LoadGfxScript(0x68b228);
 			if (h != 0) {
 				f = center[0];
 				fcn_00428340((char*) h, 6, (int) _ftol(f), (int) _ftol(f), (int) _ftol(f),

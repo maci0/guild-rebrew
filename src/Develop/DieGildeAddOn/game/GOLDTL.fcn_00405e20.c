@@ -27,7 +27,7 @@ char* __cdecl fcn_0040c120(char* e, int kind, int a, int b, int c);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 char* __cdecl ch_AttachAni(char* e, char* name, int flag);
 #include "Develop/Units/Error/error_message.h"
-void __cdecl fcn_004027b0(void);
+void __cdecl ch_UpdateFades(void);
 
 int __cdecl ch_Update(void)
 {
@@ -116,7 +116,7 @@ int __cdecl ch_Update(void)
 			ReportClientMessage(g_67567c);
 		}
 	}
-	fcn_004027b0();
+	ch_UpdateFades();
 	g_67529c = g_6b7fac;
 	return 1;
 }

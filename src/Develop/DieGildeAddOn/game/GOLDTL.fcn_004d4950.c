@@ -7,7 +7,7 @@ unsigned short* __cdecl fcn_004ce680(char*);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
-unsigned int __cdecl fcn_004e6cb0(unsigned int, ...);
+unsigned int __cdecl cut_RandMod(unsigned int, ...);
 void __cdecl fcn_004cfc40(char*, int, int);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
 void* __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
@@ -74,7 +74,7 @@ void __cdecl fcn_004d4950(int a0)
         }
     }
     if (v22) {
-        r = fcn_004e6cb0(10);
+        r = cut_RandMod(10);
         fcn_004cfc40((char*) v4, v22,
                      (*(int*) ((char*) v4 + 0x16c) != *(int*) 0x772e9c) ? 2 : 1);
         if (r > 8) {
@@ -134,7 +134,7 @@ draw:
         if (!v8 || *(char*) (v8 + 9) == ';') {
             ch_CancelActionQueue((char*) *(int*) ((char*) v4 + 0x184));
             fcn_004063b0(*(unsigned int*) ((char*) v4 + 0x184),
-                         v12 + fcn_004e6cb0(2, 1, 0x3fb33333) * 0x20, 1, 1.4f);
+                         v12 + cut_RandMod(2, 1, 0x3fb33333) * 0x20, 1, 1.4f);
         }
         if (*v7 == 0x16e) {
             *(char*) ((char*) v4 + 8) = 4;

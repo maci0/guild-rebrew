@@ -7,7 +7,7 @@
 /* ADDRESS: GOLD 0x00a68d40 */
 extern unsigned char g_aed340[];
 
-char* __cdecl fcn_004e6ae0(void* source);
+char* __cdecl cut_AllocCutscene(void* source);
 
 struct pkt99;
 int __cdecl fcn_004c4330(struct pkt99* packet);

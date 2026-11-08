@@ -7,7 +7,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 extern char* g_6b7e98;
 void __cdecl fcn_00425bf0(void*, int, char*);
 
-int __cdecl fcn_0040e5b0(int* a1)
+int __cdecl GetObjectHandle(int* a1)
 {
 	char buf[0x200];
 	int r;

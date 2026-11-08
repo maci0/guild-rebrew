@@ -13,7 +13,7 @@ int __cdecl _ftol(void);
 int __cdecl fcn_005463a0(int a0, int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x0049bfa0 */
-unsigned int __cdecl fcn_0049bfa0(unsigned int a0, unsigned short* a1, int a2, char* a3, char* a4)
+unsigned int __cdecl ai_StartSpionage(unsigned int a0, unsigned short* a1, int a2, char* a3, char* a4)
 {
 	int v7;
 	int out;

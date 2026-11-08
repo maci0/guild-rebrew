@@ -109,7 +109,7 @@ extern void ReportClientMessage();
 extern void fcn_00545aa0();
 extern void fcn_00546d90();
 extern void fcn_004c5700();
-extern int fcn_004e6650();
+extern int cut_UpdateCutscenes();
 extern void fcn_004c3ff0();
 extern void fcn_004c4940();
 extern void cm_ExecCommand();
@@ -164,7 +164,7 @@ extern void fcn_00472a50();
 extern void fcn_00411fe0();
 extern void fcn_00537320();
 extern void fcn_0041bcb0();
-extern void fcn_0041fc80();
+extern void SetMasterVolume();
 extern void fcn_00427370();
 extern void fcn_5e43f0();
 extern void fcn_00536b10();
@@ -273,7 +273,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 			fcn_004c5700(g_7e1f70);
 		}
 		if (!(flags & 0x10000) && g_774964 != 0 && g_7e2700 == 0 &&
-			fcn_004e6650() != 0 && g_774660 != 0) {
+			cut_UpdateCutscenes() != 0 && g_774660 != 0) {
 			g_774654 = 1;
 		}
 	}
@@ -454,11 +454,11 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 	}
 	if (g_14cf950 == 1 && (flags & 0x2000)) {
 		t = (float) (g_7766a0 & 0xff) * g_665e44;
-		fcn_0041fc80((int) (((float) *((unsigned char *) &g_7766a0 + 2) * t) * g_662a68));
+		SetMasterVolume((int) (((float) *((unsigned char *) &g_7766a0 + 2) * t) * g_662a68));
 		fcn_00427370((int) (((float) *((unsigned char *) &g_7766a0 + 1) * t) * g_662a68));
 		fcn_5e43f0();
 		t = (float) (g_7766a0 & 0xff) * g_665e44;
-		fcn_0041fc80((int) ((float) *((unsigned char *) &g_7766a0 + 2) * t));
+		SetMasterVolume((int) ((float) *((unsigned char *) &g_7766a0 + 2) * t));
 		fcn_00427370((int) ((float) *((unsigned char *) &g_7766a0 + 1) * t));
 	}
 	fcn_00536b10();

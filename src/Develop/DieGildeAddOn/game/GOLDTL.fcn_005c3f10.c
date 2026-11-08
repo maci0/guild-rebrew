@@ -84,14 +84,14 @@ int __cdecl fcn_00504f30(int a, int b);
 int __cdecl fcn_005463a0(int a, int b, int c);
 int __cdecl fcn_005462a0(void);
 int __cdecl fcn_00504e70(int a);
-int __cdecl fcn_0050bfe0(char* ent);
+int __cdecl fcn_00508da0(char* ent);
 void __cdecl fcn_004727a0(int a, int b);
 int __cdecl fcn_00519190(int id, ...);
 void __cdecl io_FormatTextBuffer(char* out, int id, ...);
 int __cdecl fcn_00526120(char* text, int mode);
 int __cdecl fcn_00472250(int dlg, int a, int b);
 void __cdecl fcn_00472640(int a, int b);
-void __cdecl fcn_00472770(int a, int b);
+void __cdecl d2_SetBildArgument(int a, int b);
 void __cdecl fcn_00471af0(int a, int b);
 void __cdecl fcn_00471e30(int a);
 int __cdecl fcn_00471f80(int a);
@@ -209,7 +209,7 @@ void __cdecl fcn_005c3f10(char* ent)
 			v.h48 = -1;
 			v.h58 = -1;
 			fcn_004727a0(dlg, 1);
-			v.len = fcn_0050bfe0(ent);
+			v.len = fcn_00508da0(ent);
 			if (*(unsigned short*) (ent + 0x27) == g_774970) {
 				if (*(unsigned short*) (ent + 0x25) == g_774970)
 					goto build_other;
@@ -252,7 +252,7 @@ build_other:
 				else
 					v.h38 = fcn_00472250(dlg, 1,
 					    fcn_00519190(0x17a1, ent + 5));
-				fcn_00472770(v.h38, 0x10);
+				d2_SetBildArgument(v.h38, 0x10);
 			}
 			if (v.rec[0] == 1)
 				fcn_00519190(0x17a2,

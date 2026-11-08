@@ -33,7 +33,7 @@ typedef struct ShiftDlg {
 	int owner;
 } ShiftDlg;
 
-int __cdecl fcn_004e6c80(void);
+int __cdecl cut_GetRandSeed(void);
 void __cdecl fcn_004e6c60(int);
 Ent* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_FindRecordById(int);
@@ -78,7 +78,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 	char buf[0x800];
 
 	flag = 0;
-	saved = fcn_004e6c80();
+	saved = cut_GetRandSeed();
 	changed = 0;
 	for (i = 0; i < 0x10; i++) {
 		if (p->list_a[i] != -1 && gm_LookupEntityRecordById(p->list_a[i]) == 0) {

@@ -3,7 +3,7 @@
 #include "Develop/Units/d3/d3_animation.h"
 
 char* __cdecl fcn_00401040(char* path);
-char* __cdecl fcn_00433ba0(const char* name);
+char* __cdecl d3_FindAnimByName(const char* name);
 char* __cdecl d3_LoadAnimStream(char* path, char* name, char loop);
 char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS options);
 char* __cdecl d3_LoadObjectAnim(char* path, char* object, char loop);
@@ -28,7 +28,7 @@ int __cdecl fcn_00412f10(char* obj, char* name, int flags)
 	}
 	strcpy(buf, name);
 	stream = fcn_00401040(buf);
-	if (fcn_00433ba0(stream) == 0) {
+	if (d3_FindAnimByName(stream) == 0) {
 		d3_LoadAnimStream(name, stream, 0);
 	}
 	memset(&opt, 0, sizeof(opt));

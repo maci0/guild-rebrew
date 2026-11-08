@@ -15,8 +15,8 @@ int __cdecl fcn_00472250(int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
 int __cdecl d2_CreateRadioGroup(int, ...);
-void __cdecl fcn_004695a0(int, int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_SelectRadioGroup(int, int);
+void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
 
@@ -43,9 +43,9 @@ int __cdecl fcn_0053e9a0(void)
 	a3 = fcn_00472250(h, 0, s + 3);
 	a4 = fcn_00472250(h, 0, s + 4);
 	list = d2_CreateRadioGroup(6, a0, a1, a2, a3, a4, fcn_00472250(h, 0, s + 5));
-	fcn_004695a0(list, g_7747b4);
+	d2_SelectRadioGroup(list, g_7747b4);
 	while (fcn_005373e0(fcn_0053e9a0, 0xc6) != 0) {
-		fcn_00469630(list);
+		d2_UpdateRadioGroup(list);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			result = 0;
 			g_774654 = 1;

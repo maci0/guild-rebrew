@@ -9,7 +9,7 @@ extern VFS_DIR* g_6b7fdc;
 extern int g_1005760;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
-void __cdecl fcn_00430a80(void*, int, int);
+void __cdecl vfs_fseek(void*, int, int);
 int __cdecl fcn_00430c50(void*);
 char* __cdecl m_alloc(int, char*);
 #include "Develop/Units/vfs/vfs.h"
@@ -35,10 +35,10 @@ int __cdecl ls_SendGame(char* path)
 	if (h == 0) {
 		return 0;
 	}
-	fcn_00430a80(h, 0, 2);
+	vfs_fseek(h, 0, 2);
 	size = fcn_00430c50(h);
 	total = (size / 128 + 1) * 128;
-	fcn_00430a80(h, 0, 0);
+	vfs_fseek(h, 0, 0);
 	buf = m_alloc(total, "ls_SendGame");
 	if (buf == 0) {
 		CloseVfsStream(h);

@@ -17,7 +17,7 @@ long __cdecl fcn_0064e561(long* t);
 void __cdecl fcn_0064d3eb(unsigned int seed);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 
-int __cdecl fcn_00421fe0(int id, int count, int a, int b, int c)
+int __cdecl sb_Init(int id, int count, int a, int b, int c)
 {
 	int r;
 	int i;

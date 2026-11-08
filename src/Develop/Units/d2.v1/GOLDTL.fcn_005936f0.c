@@ -38,15 +38,15 @@ int __cdecl fcn_00533a60(int, int, void*, int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00469470(int, int);
-void __cdecl fcn_004695a0(int, int);
-void __cdecl fcn_00472770(int, int);
+void __cdecl d2_SelectRadioGroup(int, int);
+void __cdecl d2_SetBildArgument(int, int);
 void __cdecl fcn_00476b60(void);
 void __cdecl fcn_00474cf0(int);
 int __cdecl fcn_00472170(int, int);
 char* __cdecl fcn_00471f80(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00469510(int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl fcn_004ce190(int);
 int __cdecl fcn_004ce1d0(void);
 int __cdecl fcn_004c4450(int);
@@ -130,16 +130,16 @@ int __cdecl fcn_005936f0(int msg, int param)
 	d2_SetElementValue(second, g_7e240a);
 	for (i = 0; i < 8; i++) {
 		if (*(int*) (g_1015ea0 + ids[i] * 0x2f4 + 8) == g_7e23e4) {
-			fcn_004695a0(group, i);
+			d2_SelectRadioGroup(group, i);
 			break;
 		}
 	}
-	fcn_00472770(first, 0xc);
-	fcn_00472770(second, 0xc);
+	d2_SetBildArgument(first, 0xc);
+	d2_SetBildArgument(second, 0xc);
 	w8 = d2_CreateRadioGroup(2, np, s);
-	fcn_004695a0(w8, g_7e23e8 & 0xff);
+	d2_SelectRadioGroup(w8, g_7e23e8 & 0xff);
 	w24 = d2_CreateRadioGroup(2, n, ep);
-	fcn_004695a0(w24, g_7e23e9 & 0xff);
+	d2_SelectRadioGroup(w24, g_7e23e9 & 0xff);
 	fcn_00476b60();
 	g_14cf950 = 0;
 	for (i = 0; i < 8; i++)
@@ -225,7 +225,7 @@ dispatch:
 			}
 		}
 		else if (sel == 2) {
-			fcn_00469630(second);
+			d2_UpdateRadioGroup(second);
 			if (g_100f1dc != -1) {
 				if (g_67d370 == np) {
 					g_7e23e8 = 0;
@@ -240,7 +240,7 @@ dispatch:
 			}
 		}
 		else if (sel == 3) {
-			fcn_00469630(w8);
+			d2_UpdateRadioGroup(w8);
 			if (g_100f1dc != -1) {
 				if (g_67d370 == n) {
 					g_7e23e9 = 1;
@@ -255,7 +255,7 @@ dispatch:
 			}
 		}
 		else if (sel == 4) {
-			fcn_00469630(group);
+			d2_UpdateRadioGroup(group);
 			if (g_14cf950 == 0x1c) {
 				sel = 5;
 				redraw = 1;

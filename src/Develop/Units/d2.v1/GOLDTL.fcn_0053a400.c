@@ -29,7 +29,7 @@ int __cdecl fcn_0041fd70(char *, int);
 void __cdecl fcn_00473150(int);
 void __cdecl fcn_00420200(int);
 void __cdecl fcn_0042a070(void);
-int __cdecl fcn_00469630(int);
+int __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00472170(int, int);
 int __cdecl fcn_005dfb40(int, int, char *, char *, char *, char *);
 int __cdecl fcn_0064d41a(char *, char *, char *, ...);
@@ -162,7 +162,7 @@ void __cdecl main_Menue(void)
 	*(unsigned char *)0x14cf950 = 0;
 	fcn_00420200(2000);
 	do {
-		fcn_00469630(v28);
+		d2_UpdateRadioGroup(v28);
 		if (v29) {
 			fcn_00469e30(0x797);
 			v29 = 0;

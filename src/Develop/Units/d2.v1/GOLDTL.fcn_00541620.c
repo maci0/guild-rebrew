@@ -33,7 +33,7 @@ void __cdecl fcn_00438cb0(char*, int*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_005272e0(void);
 void __cdecl fcn_00537320(int);
-int __cdecl fcn_00535570(void);
+int __cdecl d2_CreateScrollPerga(void);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00500d60(void*, void*);
@@ -51,7 +51,7 @@ void __cdecl fcn_00476970(int);
 void __cdecl fcn_00469e30(int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
-void __cdecl fcn_00535630(void);
+void __cdecl d2_UpdateScrollPerga(void);
 void __cdecl fcn_005355f0(void);
 int __cdecl fcn_0050db40(char*, int);
 void __cdecl fcn_004e5a00(void*);
@@ -115,7 +115,7 @@ void __cdecl fcn_00541620(void)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005272e0();
 	fcn_00537320(0x24087);
-	i = fcn_00535570();
+	i = d2_CreateScrollPerga();
 	fcn_00471b60(i);
 	if (g1f4 != 0) {
 		fcn_00473150((unsigned char*) g1f4);
@@ -312,7 +312,7 @@ void __cdecl fcn_00541620(void)
 	fcn_004234e0(0, "RollenKurz_s_01", 1, 0x3f, 0x7f, 0, 0);
 	i = fcn_005373e0((int) fcn_00541620, 0x24087);
 	while (i != 0) {
-		fcn_00535630();
+		d2_UpdateScrollPerga();
 		if (g_100f1dc == 2 || g_14cf950 == 0x1c) {
 			g_774654 = 1;
 		}

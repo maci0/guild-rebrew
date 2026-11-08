@@ -20,7 +20,7 @@ extern char g_6b5c28;
 
 void __cdecl fcn_00435500(char*, char*);
 #include "Develop/Units/d3/d3_animation.h"
-void __cdecl fcn_00413120(void*);
+void __cdecl d3_RemoveObjectAnim(void*);
 void __cdecl fcn_00402aa0(char*);
 struct anim_409ae0* __cdecl ch_AttachAni(char*, const char*, int);
 void __cdecl m_FreeTracked(void*);
@@ -42,11 +42,11 @@ int __cdecl fcn_00409ae0(char* ev, char* step)
 	if (*(int*) (obj + 0x7c) != 0) {
 		sprintf(name, "morph_%i", (int) obj);
 		fcn_00435500(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, name);
-		morph = fcn_00433ba0(name);
-		fcn_00434760(morph, 1);
+		morph = d3_FindAnimByName(name);
+		d3_ReleaseAnim(morph, 1);
 		*(int*) (obj + 0x7c) = 0;
 	}
-	fcn_00413120(*(void**) (obj + 0x34));
+	d3_RemoveObjectAnim(*(void**) (obj + 0x34));
 	if (*(int*) (*(char**) (obj + 0x34) + 0x1cc) == 0) {
 		fcn_00402aa0(obj);
 	}

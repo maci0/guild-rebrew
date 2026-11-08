@@ -17,7 +17,7 @@ extern int __cdecl ReportClientMessage(char* text);
  * record file for it, then reads counts, pointer tables and record payloads
  * into the slot. Native body ends at 0x42dabe (extent 0x240). */
 /* ADDRESS: GOLDTL 0x0042d880 */
-unsigned int __cdecl fcn_0042d880(char* name)
+unsigned int __cdecl txt_loadTextFile(char* name)
 {
 	int a;
 	int b;

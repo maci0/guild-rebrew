@@ -12,7 +12,7 @@ void __cdecl fcn_00423850(void*, int);
 /* Pans a sound source by the angle between the camera's forward axis and
  * the direction to the emitting object. */
 /* ADDRESS: GOLDTL 0x00418fb0 */
-void __cdecl fcn_00418fb0(char* src)
+void __cdecl d3_UpdateSoundSourcePan(char* src)
 {
 	float pos[4];
 	float fwd[4];

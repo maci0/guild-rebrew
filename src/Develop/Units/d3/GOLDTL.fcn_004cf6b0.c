@@ -17,7 +17,7 @@ int __cdecl fcn_00417d00(int a1, float* v, int n, float f1, float f2,
 int __cdecl fcn_004234e0(char* bank, const char* name, int loop, int pan,
     int vol, int a, int b);
 void __cdecl fcn_0045b920(int g, int x, int z, float* out);
-unsigned int __cdecl fcn_004e6cb0(unsigned int n);
+unsigned int __cdecl cut_RandMod(unsigned int n);
 void __cdecl fcn_004cfc40(int a1, int a2, int a3);
 int __cdecl fcn_004d4790(char* e);
 int __cdecl fcn_00406340(char* e, const char* name, int param);
@@ -87,7 +87,7 @@ int __cdecl fcn_004cf6b0(void)
 						v8[2] -= *(float*) (*(int*) (other + 0x34) + 0x54);
 						d = (float) sqrt(v8[2] * v8[2] + v8[1] * v8[1] + v8[0] * v8[0]);
 						if (d < 100.0f) {
-							n = (int) fcn_004e6cb0((unsigned int) ((unsigned char) ((char*) obj)[6] - (unsigned char) ((char*) obj)[5]));
+							n = (int) cut_RandMod((unsigned int) ((unsigned char) ((char*) obj)[6] - (unsigned char) ((char*) obj)[5]));
 							dmg = (int) ((double) (unsigned int) (n + (unsigned char) ((char*) obj)[5]) * (*(float*) (e + 0x1c) * 0.01));
 							dmg2 = (int) ((double) dmg * (1.0 - d * 0.01f));
 							*(int*) (e + 0x24) -= dmg2;

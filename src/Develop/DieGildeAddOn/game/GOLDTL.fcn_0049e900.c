@@ -7,7 +7,7 @@ extern int __cdecl fcn_004f4830(int, char*);
 /* Rates the records returned for an action and fills the action packets with
  * the best-scoring record; 0x33 on success. */
 /* ADDRESS: GOLDTL 0x0049e900 */
-int __cdecl fcn_0049e900(int code, short* target, char* ent, char* out1, char* out2)
+int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1, char* out2)
 {
 	float score[4];
 	int rec[9];

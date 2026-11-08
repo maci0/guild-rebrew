@@ -19,7 +19,7 @@ void __cdecl fcn_004c5150(int a, int b, char c, int n);
 void __cdecl fcn_004c5530(char* msg);
 int __cdecl amt_ExecGebaeudeBauen(char* a1, char* a2, char* a3);
 
-int __cdecl fcn_0048eaa0(char* a1, char* a2, char* a3)
+int __cdecl ai_RunSculpture(char* a1, char* a2, char* a3)
 {
 	char msg[0xf8];
 

@@ -9,7 +9,7 @@ void __cdecl fcn_00520f40(void);
 void __cdecl fcn_00422100(void);
 void __cdecl fcn_00418c60(void);
 void __cdecl fcn_0041fb80(void);
-void __cdecl fcn_0042a0b0(void);
+void __cdecl msx_ShutdownAIL(void);
 void __cdecl fcn_004195f0(void);
 void __cdecl fcn_0057de00(void);
 void __cdecl fcn_0042d5f0(void);
@@ -40,7 +40,7 @@ void __cdecl fcn_005381a0(void)
 		fcn_0041fb80();
 	}
 	if (g_774934 != 0) {
-		fcn_0042a0b0();
+		msx_ShutdownAIL();
 		fcn_004195f0();
 	}
 	fcn_0057de00();

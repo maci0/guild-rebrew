@@ -1,9 +1,9 @@
 void __cdecl ch_SetVisible(void* obj, int value);
 void __cdecl fcn_00402b00(void* obj, void* dev);
 void __cdecl fcn_004030e0(void* obj);
-void* __cdecl fcn_00403b90(char* name, void* pos);
+void* __cdecl ch_CreateAtPosition(char* name, void* pos);
 void __cdecl fcn_0040c120(void* obj, int mode, int value);
-void* __cdecl fcn_00426fd0(char* script);
+void* __cdecl evt_LoadGfxScript(char* script);
 void __cdecl fcn_00428340(void* obj, int argc, ...);
 void* __cdecl fcn_00445600(void* dev, int flags, void* ptr, char* name);
 void __cdecl fcn_00455350(void* dev, void* pos, void* out);
@@ -117,7 +117,7 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 			*(unsigned char*) ((char*) obj + 0x8c) |= 8;
 		}
 		if (prev != idx) {
-			view = fcn_00426fd0("Effekte/choose_character.esc");
+			view = evt_LoadGfxScript("Effekte/choose_character.esc");
 			if (view != 0) {
 				d = *(float*) 0x67d368;
 				fcn_00428340(view, 6,
@@ -160,7 +160,7 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 				i += 1;
 			} while (name[i - 1] != 0);
 			*(int*) 0x7e2468 = fcn_004fdec0(name) + 0x639;
-			obj = fcn_00403b90(name, pos);
+			obj = ch_CreateAtPosition(name, pos);
 			fcn_00402b00(obj, dev);
 			ch_SetVisible(obj, 0);
 			*(unsigned char*) (*(int*) ((char*) obj + 0x34) + 0x215) &= 0xfe;

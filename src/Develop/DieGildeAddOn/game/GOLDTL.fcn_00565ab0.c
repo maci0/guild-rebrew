@@ -24,7 +24,7 @@ void __cdecl fcn_00529160(char*, int, int, int);
 char* __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(char*);
 char* __cdecl evt_LoadScript(char*);
-int __cdecl fcn_0042f120(char*, void*, void**);
+int __cdecl vfs_LookupPath(char*, void*, void**);
 int __cdecl fcn_00428340(char*, int, ...);
 void __cdecl fcn_004c5aa0(int, char, char, short, char, int);
 char* __cdecl fcn_00502cd0(int, int, ...);
@@ -69,7 +69,7 @@ void __cdecl fcn_00565ab0(char* ev)
 							sprintf(erm, "Ernten_start_%s", v6 + 2);
 							sprintf(path, "%slocations/%s/%s_%s.esc", "x:\\engine\\gfx\\scripts\\",
 							        ent + 1, erm, ent + 1);
-							if (fcn_0042f120(path, g_6b7fdc, &found)) {
+							if (vfs_LookupPath(path, g_6b7fdc, &found)) {
 								char* script = evt_LoadScript(path);
 
 								if (script != 0) {
@@ -112,7 +112,7 @@ void __cdecl fcn_00565ab0(char* ev)
 							sprintf(erm, "Ernten_end_%s", v6 + 2);
 							sprintf(path, "%slocations/%s/%s_%s.esc", "x:\\engine\\gfx\\scripts\\",
 							        ent + 1, erm, ent + 1);
-							if (fcn_0042f120(path, g_6b7fdc, &found)) {
+							if (vfs_LookupPath(path, g_6b7fdc, &found)) {
 								char* script = evt_LoadScript(path);
 
 								if (script != 0) {

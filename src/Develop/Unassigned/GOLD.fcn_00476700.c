@@ -10,6 +10,7 @@ extern char s_005feb3c[]; /* 0x005feb3c */
 void __cdecl fcn_004222b0(const char* msg);
 void __cdecl fcn_004796b0(int a);
 
+/* ADDRESS: GOLD 0x00476700 */
 void __cdecl fcn_00476700(void)
 {
 	GuiWin* m;

@@ -4,7 +4,7 @@ extern char* g_6b7e98;
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_00410020(char** a, int* x, int* y, int* z, int* w, int* v)
+int __cdecl SetEmitterAmplitude(char** a, int* x, int* y, int* z, int* w, int* v)
 {
 	char* e;
 	float fx;

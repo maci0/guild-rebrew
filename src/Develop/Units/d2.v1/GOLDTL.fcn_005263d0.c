@@ -40,10 +40,10 @@ void __cdecl io_AppendText(char *);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_CreateRadioGroup(int);
 void __cdecl fcn_00469470(int, int);
-void __cdecl fcn_004695a0(int, int);
+void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_005373e0(void *, int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00469510(int);
@@ -89,14 +89,14 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 			fcn_00469470(list, k);
 		}
 	}
-	fcn_004695a0(list, 0);
+	d2_SelectRadioGroup(list, 0);
 	d2_SetForm(h, 0);
 	f80 = flags & 0x80;
 	if (f80) {
 		id = fcn_004677e0(0x1c, ((Screen*)g_77255c)->h - 0x18, ((Screen*)g_77255c)->w - 0x40, 0, 500, 0x83, 0x42, g_772514);
 	}
 	while (fcn_005373e0(fcn_005263d0, mode) != 0) {
-		fcn_00469630(list);
+		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			fcn_004707d0(h);
 		}

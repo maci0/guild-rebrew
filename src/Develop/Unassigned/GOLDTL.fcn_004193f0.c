@@ -19,8 +19,8 @@ int __cdecl fcn_004193f0(char* obj, void* label, int mode, float amount)
 	*(int*) (obj + 0x14) = 0;
 	req.volume = mode;
 	req.range = (float)scaled;
-	fcn_00418fb0(&req);
-	fcn_004190d0(&req);
+	d3_UpdateSoundSourcePan(&req);
+	d3_UpdateSoundSourceVolume(&req);
 	if (*(int*) (obj + 0x24) == 0) {
 		return 0;
 	}

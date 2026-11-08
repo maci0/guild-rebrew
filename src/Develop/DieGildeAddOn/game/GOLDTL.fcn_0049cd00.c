@@ -17,7 +17,7 @@ int __cdecl fcn_004aa920(short* a1, int a2, char* a3);
 int __cdecl fcn_00495400(int kind, int id, int n, Blk24* b1, Blk24* b2);
 
 /* ADDRESS: GOLDTL 0x0049cd00 */
-int __cdecl fcn_0049cd00(int a1, char* ent, int a3, Blk24* o1, Blk24* o2)
+int __cdecl ai_StartAnschwaerzen(int a1, char* ent, int a3, Blk24* o1, Blk24* o2)
 {
 	Blk24 b1;
 	Blk24 b2;

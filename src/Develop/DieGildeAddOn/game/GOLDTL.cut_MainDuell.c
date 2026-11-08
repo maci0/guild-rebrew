@@ -53,7 +53,7 @@ int __cdecl fcn_004e4b20(int a, int b, char* c, int d);
 int __cdecl fcn_00423460(int* a);
 void __cdecl fcn_004e4c90(int dur);
 char* __cdecl fcn_00445600(int o, int flags, int ptr, char* name);
-void __cdecl fcn_0040b730(char* owner, char* text);
+void __cdecl ch_QueueWalkToDummy(char* owner, char* text);
 char* __cdecl fcn_0040c120(char* e, int kind, int p);
 char* __cdecl fcn_0040c230(char* e, int a, int b, int c, int d);
 int __cdecl fcn_004c3030(int a, int b, int c, int d);
@@ -63,7 +63,7 @@ int __cdecl fcn_004e6a70(int a1);
 int __cdecl fcn_004de610(int v);
 float __cdecl fcn_004ff040(char* p);
 float __cdecl fcn_004ff210(int a, int b);
-int __cdecl fcn_004e6cb0(int n);
+int __cdecl cut_RandMod(int n);
 void __cdecl fcn_004e0210(char* a, char* b, char* c);
 int __cdecl srv_GetEntityOfficeSlot(char* ent, int* role, int* slot);
 int __cdecl fcn_004e8240(int id, int ea, int eb, int x1, int x2);
@@ -184,9 +184,9 @@ void __cdecl cut_MainDuell(char* a0)
         i++;
     } while (i < 3);
 
-    fcn_0040b730((char*) sB.entity, fcn_00445600(0, 0x100, 0, (char*) 0x68cd80));
+    ch_QueueWalkToDummy((char*) sB.entity, fcn_00445600(0, 0x100, 0, (char*) 0x68cd80));
     fcn_0040c120((char*) sB.entity, 0x35, fcn_00445600(0, 0x100, 0, (char*) 0x68cd68));
-    fcn_0040b730((char*) sA.entity, fcn_00445600(0, 0x100, 0, (char*) 0x68cd54));
+    ch_QueueWalkToDummy((char*) sA.entity, fcn_00445600(0, 0x100, 0, (char*) 0x68cd54));
     fcn_0040c120((char*) sA.entity, 0x35, fcn_00445600(0, 0x100, 0, (char*) 0x68cd3c));
 
     d2_SetForm(g_68bfc0, 0);
@@ -202,7 +202,7 @@ void __cdecl cut_MainDuell(char* a0)
         p = fcn_00445600(0, 0x100, 0, (char*) 0x68cd00);
     else
         p = fcn_00445600(0, 0x100, 0, (char*) 0x68cd68);
-    fcn_0040b730((char*) sB.entity, p);
+    ch_QueueWalkToDummy((char*) sB.entity, p);
     fcn_0040c120((char*) sB.entity, 0x35, *(int*) (sA.entity + 0x34));
     if (*(unsigned char*) (e + 0x94) == 1) {
         t = fcn_004de610(6);
@@ -222,7 +222,7 @@ void __cdecl cut_MainDuell(char* a0)
         p = fcn_00445600(0, 0x100, 0, (char*) 0x68cccc);
     else
         p = fcn_00445600(0, 0x100, 0, (char*) 0x68cd3c);
-    fcn_0040b730((char*) sA.entity, p);
+    ch_QueueWalkToDummy((char*) sA.entity, p);
     fcn_0040c120((char*) sA.entity, 0x35, *(int*) (sB.entity + 0x34));
     if (*(unsigned char*) (e + 0x94) == 1) {
         t = fcn_004de610(6);
@@ -256,7 +256,7 @@ void __cdecl cut_MainDuell(char* a0)
             fcn_004e0210((char*) &sA, (char*) &sB, (char*) 0x68ccc4);
         }
         if ((g_772f5a != 0 || g_772f5c != 0) && (g_772f5b != 0 || g_772f5d != 0)) {
-            t = fcn_004e6cb0(9);
+            t = cut_RandMod(9);
             d2_SetForm(g_68bfc0, 0);
             io_AppendText(t + 0x1113);
             fcn_004c3030(-5, 0, (int) 0x68ccac, t);

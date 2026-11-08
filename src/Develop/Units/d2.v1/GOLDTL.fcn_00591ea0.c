@@ -29,10 +29,10 @@ void* __cdecl gm_SearchTable67(int);
 void* __cdecl gm_FindRecordById(int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl d2_ShowTxt(int, int, char*, int);
-void __cdecl fcn_004695a0(int, int);
+void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00591c30(char*);
 void __cdecl fcn_00591da0(int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00591d00(void);
 int __cdecl fcn_005373e0(int, int);
@@ -127,7 +127,7 @@ void __cdecl fcn_00591ea0(void)
 				row += 3;
 				y += 0x38;
 			}
-			fcn_004695a0(last_win, old_sel);
+			d2_SelectRadioGroup(last_win, old_sel);
 			redraw = 0;
 			item = old_sel;
 			y = slot;
@@ -145,7 +145,7 @@ void __cdecl fcn_00591ea0(void)
 				redraw = 1;
 			}
 		}
-		fcn_00469630(last_win);
+		d2_UpdateRadioGroup(last_win);
 		i = *(int*) (y + 0x102cbc8) != -1 &&
 			*(int*) (*(int*) (y + 0x102cbc8) * 0xc + 0x779d04) != -1;
 		fcn_00472640(clicks[1], i);

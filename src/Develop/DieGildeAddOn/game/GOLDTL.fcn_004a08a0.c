@@ -20,7 +20,7 @@ int __cdecl fcn_0050d170(int k);
 void __cdecl fcn_004c5150(int a, int b, char c, int n);
 void __cdecl fcn_004c5530(char* msg);
 
-int __cdecl fcn_004a08a0(char* a1, char* a2, char* a3)
+int __cdecl ai_RunUpgradeZunft(char* a1, char* a2, char* a3)
 {
 	char* p;
 	char* q;

@@ -8,12 +8,12 @@ void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-int __cdecl fcn_004e6e20(int, int, int);
+int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00508cf0(unsigned char, int*);
 int __cdecl fcn_00472250(int, int, int);
-unsigned int __cdecl fcn_004e6cb0(unsigned int);
+unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_00493be0(char*);
 int __cdecl fcn_004f6810(char*, unsigned int);
@@ -69,9 +69,9 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         *(int*) (participant + 0x94) = 0;
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, g_772514);
-        fcn_004e6e20(timer, 1500, 1);
+        d2_UpdateProgressBar(timer, 1500, 1);
         while (fcn_005373e0((void*) fcn_004df1b0, g_68bfb8)) {
-            if (!fcn_004e6e20(timer, 0, 0)) {
+            if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
                 g_774654 = 1;
@@ -94,9 +94,9 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         *(int*) (participant + 0x94) = 0;
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, g_772514);
-        fcn_004e6e20(timer, 1500, 1);
+        d2_UpdateProgressBar(timer, 1500, 1);
         while (fcn_005373e0((void*) fcn_004df1b0, g_68bfb8)) {
-            if (!fcn_004e6e20(timer, 0, 0)) {
+            if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
                 g_774654 = 1;
@@ -124,12 +124,12 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
                 choice * 2 + 0xb20, rates[choice] * value));
         }
         g_100f1dc = -1;
-        *(int*) (participant + 0x94) = order[fcn_004e6cb0(3)];
+        *(int*) (participant + 0x94) = order[cut_RandMod(3)];
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, g_772514);
-        fcn_004e6e20(timer, 1500, 1);
+        d2_UpdateProgressBar(timer, 1500, 1);
         while (fcn_005373e0((void*) fcn_004df1b0, g_68bfb8)) {
-            if (!fcn_004e6e20(timer, 0, 0)) {
+            if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
                 for (i = 0; i < 3; i++) {
@@ -153,9 +153,9 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         *(int*) (participant + 0x94) = 0;
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, g_772514);
-        fcn_004e6e20(timer, 1500, 1);
+        d2_UpdateProgressBar(timer, 1500, 1);
         while (fcn_005373e0((void*) fcn_004df1b0, g_68bfb8)) {
-            if (!fcn_004e6e20(timer, 0, 0)) {
+            if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
                 g_774654 = 1;
@@ -179,9 +179,9 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         *(int*) (participant + 0x94) = 0;
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, g_772514);
-        fcn_004e6e20(timer, 1500, 1);
+        d2_UpdateProgressBar(timer, 1500, 1);
         while (fcn_005373e0((void*) fcn_004df1b0, g_68bfb8)) {
-            if (!fcn_004e6e20(timer, 0, 0)) {
+            if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
                 g_774654 = 1;
@@ -207,9 +207,9 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         *(int*) (participant + 0x94) = 1;
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, g_772514);
-        fcn_004e6e20(timer, 1500, 1);
+        d2_UpdateProgressBar(timer, 1500, 1);
         while (fcn_005373e0((void*) fcn_004df1b0, g_68bfb8)) {
-            if (!fcn_004e6e20(timer, 0, 0)) {
+            if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
                 g_774654 = 1;
@@ -243,7 +243,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         } while (i < 3);
         if (available[1] != -1) {
             *(int*) (participant + 0x94) = base + 1;
-        } else if (fcn_004e6cb0(2)) {
+        } else if (cut_RandMod(2)) {
             *(int*) (participant + 0x94) = base + 2;
         } else {
             *(int*) (participant + 0x94) = base;
@@ -251,9 +251,9 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         g_100f1dc = -1;
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, g_772514);
-        fcn_004e6e20(timer, 1500, 1);
+        d2_UpdateProgressBar(timer, 1500, 1);
         while (fcn_005373e0((void*) fcn_004df1b0, g_68bfb8)) {
-            if (!fcn_004e6e20(timer, 0, 0)) {
+            if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
                 g_774654 = 1;

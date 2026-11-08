@@ -47,7 +47,7 @@ void __cdecl fcn_004193f0(int, int, int, float);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl he_MessageBoxQuickjump(int, int, char *, unsigned char, int, int, int, char *, char *);
 int __cdecl gm_RandomMod(unsigned short);
-char *__cdecl fcn_00426fd0(char *);
+char *__cdecl evt_LoadGfxScript(char *);
 int __cdecl fcn_00428340(int, int, int, int, int);
 char *__cdecl fcn_00504c90(char *, int);
 void __cdecl fcn_004c6430(int, int, int);
@@ -122,7 +122,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 						pos[0] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[0] - 32.0f;
 						pos[2] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[2] - 32.0f;
 						pos[1] = pos[1] - 20.0;
-						m = fcn_00426fd0(g_6a6b0c);
+						m = evt_LoadGfxScript(g_6a6b0c);
 						if (m != 0) {
 							sprintf(m, g_6a6afc, *(int *)(a0 + 4),
 								*(unsigned char *)(a0 + 0xb4));

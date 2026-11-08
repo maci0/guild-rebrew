@@ -10,7 +10,7 @@ int __cdecl fcn_004ceac0(int, int);
 int __cdecl fcn_004cec00(int, int, int*, int*);
 float __cdecl fcn_004cefb0(int, unsigned int);
 int __cdecl fcn_004d1020(int, int, int, int, int);
-void __cdecl fcn_004e6cb0(int);
+void __cdecl cut_RandMod(int);
 int __cdecl fcn_005c6270(int, int);
 int __cdecl _ftol(void);
 
@@ -88,7 +88,7 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 	if ((int) v11 <= 0xff - v8)
 		v19 = 0;
 	else {
-		fcn_004e6cb0(*((unsigned char*) v5 + 6)
+		cut_RandMod(*((unsigned char*) v5 + 6)
 		    - *((unsigned char*) v5 + 5));
 		v19 = _ftol();
 	}

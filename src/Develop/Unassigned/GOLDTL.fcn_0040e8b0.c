@@ -6,7 +6,7 @@ void __cdecl fcn_00438b40(char* h, float* pos);
 void __cdecl fcn_00455240(char* src, float* out);
 void __cdecl fcn_00438cb0(char* h, float* v);
 
-int __cdecl fcn_0040e8b0(char** name, char** a)
+int __cdecl CreateObjectGroupAtDummy(char** name, char** a)
 {
 	float rot[3];
 	float pos[4];

@@ -13,7 +13,7 @@ int __cdecl fcn_0064e1fd(char*);
 char* __cdecl fgets(char*, int, char*);
 void __cdecl fcn_0064d710(void);
 void __cdecl m_FreeTracked(void*);
-int __cdecl fcn_0042d880(char*);
+int __cdecl txt_loadTextFile(char*);
 int __stdcall MessageBoxA(void*, char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x0042bd20 */
@@ -71,7 +71,7 @@ int __cdecl fcn_0042bd20(char* path)
 	} while (!(f[0xc] & 0x10));
 	fcn_0064e1fd(f);
 	for (i = 0; i < n; i++) {
-		if (!fcn_0042d880(names[i]))
+		if (!txt_loadTextFile(names[i]))
 			return 0;
 	}
 	g_1052de0 = 1;

@@ -11,7 +11,7 @@ __declspec(dllimport) int __stdcall CreateDirectoryA(const char*, void*);
 void __cdecl InitializeLogAndErrorHandler(void*, void*, int, int);
 void __cdecl m_init(int);
 void __cdecl fcn_0042dfb0(int);
-void __cdecl fcn_00431070(char*, int);
+void __cdecl vfs_init(char*, int);
 void __cdecl fcn_0042dde0(int, int);
 void __cdecl fcn_00538220(void);
 void __cdecl fcn_00538700(void);
@@ -25,7 +25,7 @@ int __cdecl fcn_00538710(void)
 	fcn_0042dfb0(0x80);
 	sprintf(path, "%sgamedata\\Screenshots", g_6a3448);
 	CreateDirectoryA(path, 0);
-	fcn_00431070(g_6a3448, 0);
+	vfs_init(g_6a3448, 0);
 	fcn_0042dde0(0xe, 0);
 	return 1;
 }

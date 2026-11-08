@@ -12,7 +12,7 @@ void __cdecl m_FreeTracked(void*);
 /* Drops a reference to an animation; an unreferenced one stays cached
  * while the cache has room, otherwise it is unlinked and freed. */
 /* ADDRESS: GOLDTL 0x00434760 */
-void __cdecl fcn_00434760(char* a, char force)
+void __cdecl d3_ReleaseAnim(char* a, char force)
 {
 	char* e;
 	unsigned int n;

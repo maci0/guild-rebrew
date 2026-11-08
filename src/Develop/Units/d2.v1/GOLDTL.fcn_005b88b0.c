@@ -60,7 +60,7 @@ char* __cdecl fcn_0050dc90(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char*, ...);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_005b58a0(int, int, Row*);
+void __cdecl d2_CreateGauge(int, int, Row*);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 int __cdecl fcn_005b5eb0(int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -75,7 +75,7 @@ void __cdecl fcn_004c4eb0(int);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c4ef0(int);
-void __cdecl fcn_005b59c0(unsigned char*, Row*, int);
+void __cdecl d2_UpdateGauge(unsigned char*, Row*, int);
 void __cdecl fcn_005b5c70(Row*);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 int __cdecl fcn_00526120(char*, int);
@@ -240,7 +240,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 
 	tv2 = i;
 	d2_SetForm(*(int*) (win + 0x228), 3);
-	fcn_005b58a0(*(int*) (*(int*) 0x77255c + 0xc) / 2 - 0x18, 0x20, &gage);
+	d2_CreateGauge(*(int*) (*(int*) 0x77255c + 0xc) / 2 - 0x18, 0x20, &gage);
 	cnt = d2_ShowTxt(gage.x, gage.y - 0x20, *(char**) 0x14abbd4,
 	                 *(int*) 0x772514);
 	GUI(cnt).f6c = 1;
@@ -303,7 +303,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 					goto keep_gage;
 				}
 				gage.obj = (unsigned char*) p;
-				fcn_005b59c0((unsigned char*) p, &gage, 0);
+				d2_UpdateGauge((unsigned char*) p, &gage, 0);
 				goto after_gage;
 			}
 		}

@@ -20,7 +20,7 @@ void __cdecl fcn_00417b50(int, int, float, float, float, float);
 int __cdecl fcn_004d4700(void);
 char* __cdecl fcn_0040c230(char*, int (__cdecl*)(void), int, int, int);
 void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
-unsigned int __cdecl fcn_004e6cb0(int);
+unsigned int __cdecl cut_RandMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_004458a0(char*, char*, char*);
 void __cdecl fcn_00442c00(char*, int);
@@ -43,7 +43,7 @@ int __cdecl fcn_004d4790(char* e)
 		e[8] = 0;
 		*(int*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x220) = 0;
 		fcn_004234e0(0, "Schmerzschrei", 1, 0x3f, 0x7f, 0, 0);
-		if (fcn_004e6cb0(100) > 50) {
+		if (cut_RandMod(100) > 50) {
 			*(int*) (e + 0x24) = (int) (-(int) *(float*) (e + 0x1c) - 20.0);
 			io_FormatTextBuffer(buf, 0x1181, *(unsigned short*) e);
 		} else {

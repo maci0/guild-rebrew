@@ -1,7 +1,7 @@
 
 
 
-int __cdecl fcn_00545580(int, void (__cdecl*)(char*), void (__cdecl*)(char*));
+int __cdecl he_RegisterHandler(int, void (__cdecl*)(char*), void (__cdecl*)(char*));
 int __cdecl fcn_00530ab0(int, char*, int, int, int);
 void __cdecl fcn_00578380(void);
 void __cdecl fcn_005784d0(void);
@@ -32,13 +32,13 @@ void __cdecl fcn_0057b1f0(void);
 
 int __cdecl fcn_005780b0(void)
 {
-	if (fcn_00545580(0x88, fcn_00578380, fcn_005784d0) || fcn_00545580(0x89, fcn_00578860, fcn_00578a10)
-	    || fcn_00545580(0x8c, fcn_00579690, fcn_005797a0) || fcn_00545580(0x8d, fcn_00579cf0, fcn_00579de0)
-	    || fcn_00545580(0x8a, fcn_00578e10, fcn_00578ed0) || fcn_00545580(0x8b, fcn_00579320, fcn_00579460)
-	    || fcn_00545580(0x8d, fcn_00579cf0, fcn_00579de0) || fcn_00545580(0x8e, fcn_0057a130, fcn_0057a180)
-	    || fcn_00545580(0x8f, fcn_0057a260, fcn_0057a3d0) || fcn_00545580(0x90, fcn_0057a700, fcn_0057ad50)
-	    || fcn_00545580(0x91, fcn_0057ae40, fcn_0057ae50) || fcn_00545580(0x93, fcn_0057b330, fcn_0057b390)
-	    || fcn_00545580(0x94, fcn_0057b770, fcn_0057b7a0) || fcn_00545580(0x92, fcn_0057b000, fcn_0057b1f0)) {
+	if (he_RegisterHandler(0x88, fcn_00578380, fcn_005784d0) || he_RegisterHandler(0x89, fcn_00578860, fcn_00578a10)
+	    || he_RegisterHandler(0x8c, fcn_00579690, fcn_005797a0) || he_RegisterHandler(0x8d, fcn_00579cf0, fcn_00579de0)
+	    || he_RegisterHandler(0x8a, fcn_00578e10, fcn_00578ed0) || he_RegisterHandler(0x8b, fcn_00579320, fcn_00579460)
+	    || he_RegisterHandler(0x8d, fcn_00579cf0, fcn_00579de0) || he_RegisterHandler(0x8e, fcn_0057a130, fcn_0057a180)
+	    || he_RegisterHandler(0x8f, fcn_0057a260, fcn_0057a3d0) || he_RegisterHandler(0x90, fcn_0057a700, fcn_0057ad50)
+	    || he_RegisterHandler(0x91, fcn_0057ae40, fcn_0057ae50) || he_RegisterHandler(0x93, fcn_0057b330, fcn_0057b390)
+	    || he_RegisterHandler(0x94, fcn_0057b770, fcn_0057b7a0) || he_RegisterHandler(0x92, fcn_0057b000, fcn_0057b1f0)) {
 		return 1;
 	}
 	fcn_00530ab0(0x8d, "grabpflege", 1, 0x513, -1);

@@ -74,7 +74,7 @@ void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl fcn_005e0140(int, int, Slot*, Rec*, char*, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_0042f120(char*, int, int*);
+int __cdecl vfs_LookupPath(char*, int, int*);
 void __cdecl fcn_00472170(int, int);
 int __cdecl fcn_005e0b40(int, int, char*);
 int __cdecl fcn_005dfe80(char*, int);
@@ -129,7 +129,7 @@ int __cdecl fcn_005e0f90(void)
 				}
 				flag = 0;
 				sprintf(tmp, s_6a3a54, slots[i].rec.name);
-				if (fcn_0042f120(tmp, g_6b7fdc, &st)) {
+				if (vfs_LookupPath(tmp, g_6b7fdc, &st)) {
 					flag = 1;
 				}
 				fcn_00472170(slots[i].h, 0);

@@ -1,6 +1,6 @@
 #include "msx.h"
 
-void __cdecl fcn_004200d0(const char* name, int a2)
+void __cdecl StopTrackByName(const char* name, int a2)
 {
 	Chan_14cc460* p;
 

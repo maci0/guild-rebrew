@@ -4,14 +4,14 @@
 
 #include "Develop/DieGildeAddOn/game/ch_action.h"
 
-CH_ACTION* __cdecl fcn_0040c0a0(char* e);
+CH_ACTION* __cdecl ch_NewAction(char* e);
 void __cdecl ch_DroppingObject(CH_ACTION* t);
 
 int __cdecl fcn_00406d10(char* e, const char* name, const char* name2, int param)
 {
 	CH_ACTION* t;
 
-	t = fcn_0040c0a0(e);
+	t = ch_NewAction(e);
 	if (t == 0) {
 		return 0;
 	}

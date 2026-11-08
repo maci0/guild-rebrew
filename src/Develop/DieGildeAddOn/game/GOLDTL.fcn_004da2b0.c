@@ -6,7 +6,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00455350(char*, char*, float*);
 char* __cdecl fcn_004fda30(int);
-int __cdecl fcn_004e6cb0(int);
+int __cdecl cut_RandMod(int);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00402b00(char*, char*);
 
@@ -32,7 +32,7 @@ char* __cdecl fcn_004da2b0(unsigned short* a1, char* prefix, int idx)
 	fcn_00455350(w, w + 0x4c, pos);
 	r = fcn_004fda30(*a1);
 	if (r == 0) {
-		k = fcn_004e6cb0(3);
+		k = cut_RandMod(3);
 		if (k == 1)
 			strcpy(name, "buerger_MANN");
 		else if (k == 2)

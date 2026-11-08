@@ -11,9 +11,9 @@ extern int g_678160;
 extern int g_6b7190;
 extern int g_6b7fac;
 extern CRITICAL_SECTION g_14cc5a0;
-void __cdecl fcn_0041fc80(int vol);
+void __cdecl SetMasterVolume(int vol);
 
-void __cdecl fcn_00420530(float fade, int time)
+void __cdecl FadeMasterVolume(float fade, int time)
 {
 	if (g_6b71a4 == 0 || fade < 0.0f || fade > 1.0f) {
 		return;
@@ -21,7 +21,7 @@ void __cdecl fcn_00420530(float fade, int time)
 	EnterCriticalSection(&g_14cc5a0);
 	if (time == 0) {
 		g_678150 = fade;
-		fcn_0041fc80(g_678160);
+		SetMasterVolume(g_678160);
 		LeaveCriticalSection(&g_14cc5a0);
 		return;
 	}

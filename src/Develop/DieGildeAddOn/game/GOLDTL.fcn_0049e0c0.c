@@ -19,7 +19,7 @@ int __cdecl fcn_0050d170(int k);
 void __cdecl fcn_004c5150(int a, int b, char c, int n);
 void __cdecl fcn_004c5530(char* msg);
 
-int __cdecl fcn_0049e0c0(char* a1, char* a2, char* a3)
+int __cdecl ai_RunBuergermeisterKerker(char* a1, char* a2, char* a3)
 {
 	char msg[0xf8];
 	char* p;

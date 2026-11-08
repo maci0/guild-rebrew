@@ -6,7 +6,7 @@ void __cdecl fcn_005eaad0(void);
 __declspec(dllimport) int __stdcall AIL_startup(void);
 __declspec(dllimport) char* __stdcall AIL_last_error(void);
 
-int __cdecl fcn_0042a080(void)
+int __cdecl msx_InitAIL(void)
 {
 	int r = 0;
 

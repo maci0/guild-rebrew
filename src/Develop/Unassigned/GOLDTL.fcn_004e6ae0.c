@@ -11,7 +11,7 @@ char* __cdecl cut_FindFreeCutscene(void);
 
 #include "client_packet_queue.h"
 
-char* __cdecl fcn_004e6ae0(void* src)
+char* __cdecl cut_AllocCutscene(void* src)
 {
 	char* p;
 

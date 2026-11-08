@@ -14,7 +14,7 @@ typedef struct {
 } Entry;
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-CH_ACTION* __cdecl fcn_0040c0a0(char* e);
+CH_ACTION* __cdecl ch_NewAction(char* e);
 
 
 
@@ -34,7 +34,7 @@ CH_ACTION* __cdecl fcn_0040c120(char* e, int kind, ...)
 	if (((Entry*) g_14d0c40)[kind].handler == 0) {
 		kind = 0;
 	}
-	t = fcn_0040c0a0(e);
+	t = ch_NewAction(e);
 	if (t == 0) {
 		return 0;
 	}
@@ -62,7 +62,7 @@ CH_ACTION* __cdecl fcn_0040c120(char* e, int kind, ...)
 		}
 	}
 	fcn_00405180(e, t);
-	if (t->ausfuehren == fcn_004079d0) {
+	if (t->ausfuehren == ch_ExecFinishAnimation) {
 		t->parameter = (unsigned char) t->art;
 	}
 	return t;

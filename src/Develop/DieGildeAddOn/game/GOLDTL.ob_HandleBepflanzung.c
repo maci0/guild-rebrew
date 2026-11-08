@@ -39,7 +39,7 @@ int __cdecl _ftol(void);
 void __cdecl fcn_004c5150(int a, int b, unsigned char c, int d);
 int __cdecl init_SetPflanzenMap(int a, int b);
 void __cdecl fcn_00412cf0(int a, float* p, int b, int c, int d);
-void __cdecl fcn_004695a0(int a, int b);
+void __cdecl d2_SelectRadioGroup(int a, int b);
 int __cdecl plt_FindPlantInfo(int a);
 void __cdecl d3_DestroyObject(int a);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
@@ -273,7 +273,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 				if (v23 <= -1) {
 					v23 = v16 - 1;
 				}
-				fcn_004695a0(v24, v23);
+				d2_SelectRadioGroup(v24, v23);
 			}
 		}
 		else {
@@ -281,7 +281,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 			if (v16 - 1 < v23) {
 				v23 = 0;
 			}
-			fcn_004695a0(v24, v23);
+			d2_SelectRadioGroup(v24, v23);
 		}
 		v23 = *(int*) (v35 * 4 + 0x102cbc8);
 		if (v23 != v33) {

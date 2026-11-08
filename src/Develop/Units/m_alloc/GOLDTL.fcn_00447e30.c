@@ -33,7 +33,7 @@ int __cdecl fcn_004011f0(char*, int*);
 int __cdecl fcn_004011d0(char*, float*);
 int __cdecl ReadVfsFourDwords(char*, void*);
 int __cdecl fcn_00401280(char*, void*);
-int __cdecl fcn_00401500(char*, int, int*);
+int __cdecl bio_rd_array_quick(char*, int, int*);
 void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
 int __cdecl fcn_0045c5b0(char*, int, int, int);
@@ -87,9 +87,9 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 	fcn_004011a0(stream, name);
 	if (name[0] != 0 && version >= 0x3a6c00ad) {
 		fcn_004011f0(stream, &listA);
-		fcn_00401500(stream, listA, &listB);
+		bio_rd_array_quick(stream, listA, &listB);
 		if (version >= 0x3a6c00bb) {
-			fcn_00401500(stream, listA * 4, &listC);
+			bio_rd_array_quick(stream, listA * 4, &listC);
 		}
 	}
 	if (version >= 0x3a6c00aa) {
@@ -98,7 +98,7 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 			fcn_004011f0(stream, &count);
 			if (count > 0) {
 				if (version >= 0x3a6c00ad) {
-					fcn_00401500(stream, listA, &listD);
+					bio_rd_array_quick(stream, listA, &listD);
 				}
 				recs = (S447e30Rec*) m_alloc(count * 0x158, (char*) 0x67ac08);
 				saved = 0;
@@ -157,7 +157,7 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 	}
 	fcn_004011a0(stream, name);
 	if (version >= 0x3a6c00ad && name[0] != 0) {
-		fcn_00401500(stream, listA, &listE);
+		bio_rd_array_quick(stream, listA, &listE);
 	}
 	if (version <= 0x3a6c000f) {
 		for (i = 0; i < 5; i++) {

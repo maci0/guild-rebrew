@@ -13,7 +13,7 @@ struct kind_404150 {
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 extern int g_675318;
 
-void __cdecl fcn_0042e540(char*);
+void __cdecl vfs_ToSlashes(char*);
 int __cdecl fcn_00413190(int);
 
 
@@ -29,7 +29,7 @@ char* __cdecl ch_AttachMotion(char* obj, int kind)
 
 	sprintf(path, "character/%s/%s_%s.baf", obj + 0x130, ((struct kind_404150*)g_14d0c40)[kind].name, obj + 0x130);
 	sprintf(ani, "%s_%s", ((struct kind_404150*)g_14d0c40)[kind].name, obj + 0x130);
-	fcn_0042e540(ani);
+	vfs_ToSlashes(ani);
 	if (path[0] != 0) {
 		memset(&opt, 0, sizeof(opt));
 		opt.queue = 1;
@@ -38,7 +38,7 @@ char* __cdecl ch_AttachMotion(char* obj, int kind)
 		*(int*) &opt = 0;
 		opt.layer = 0x18;
 		opt.mode = 0;
-		if (fcn_00433ba0(ani) == 0) {
+		if (d3_FindAnimByName(ani) == 0) {
 			d3_LoadAnimStream(path, ani, 1);
 		}
 		anim = fcn_00434970(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani, opt);

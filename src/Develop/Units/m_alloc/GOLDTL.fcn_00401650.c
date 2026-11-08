@@ -20,7 +20,7 @@ typedef struct {
 
 extern VFS_DIR* g_6b7fdc;
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, VFS_DIR* root);
-void __cdecl fcn_00430a80(void* f, int off, int whence);
+void __cdecl vfs_fseek(void* f, int off, int whence);
 int __cdecl vfs_ReadData(char* buf, int size, int count, void* f);
 void __cdecl CloseVfsStream(void* f);
 void* __cdecl m_alloc(int size, const char* tag);
@@ -60,7 +60,7 @@ int __cdecl fcn_00401650(const char* name, char* buf, char* palbuf, int flags)
 	if (f == 0) {
 		return 0;
 	}
-	fcn_00430a80(f, 0xe, 0);
+	vfs_fseek(f, 0xe, 0);
 	vfs_ReadData((char*) &bih, 1, 0x28, f);
 	pixels = 0;
 	pal2 = 0;
@@ -126,7 +126,7 @@ have_pixels:
 	    ? (char*) m_alloc(0x300, "!bmp:tLoadBMP4bPal")
 	    : palbuf;
 	tmp = (char*) m_alloc(0x400, "!bmp:tLoadBMPPal");
-	fcn_00430a80(f, bih.biClrUsed * 4 + 0x36, 0);
+	vfs_fseek(f, bih.biClrUsed * 4 + 0x36, 0);
 	vfs_ReadData(tmp, 4, bih.biClrUsed, f);
 	for (i = 0; i < bih.biClrUsed; i++) {
 		pal2[i * 3 + 0] = tmp[i * 4 + 2];
@@ -138,7 +138,7 @@ read_pixels:
 	if (!flip) {
 		goto close_stream;
 	}
-	fcn_00430a80(f, bih.biClrUsed * 4 + 0x36, 0);
+	vfs_fseek(f, bih.biClrUsed * 4 + 0x36, 0);
 	if (bih.biCompression != 1) {
 		vfs_ReadData(pixels, bpr, abs(bih.biHeight), f);
 	} else {

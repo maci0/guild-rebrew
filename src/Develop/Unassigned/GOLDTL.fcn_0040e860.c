@@ -3,7 +3,7 @@
 void __cdecl fcn_00455350(char*, char*, char*);
 int __cdecl fcn_00442910(int, char*, char*, int);
 
-int __cdecl fcn_0040e860(int* a1, char** a2)
+int __cdecl CreateObjectAtDummy(int* a1, char** a2)
 {
 	char x[0x10];
 

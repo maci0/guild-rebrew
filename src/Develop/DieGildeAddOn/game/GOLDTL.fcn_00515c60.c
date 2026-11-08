@@ -1,7 +1,7 @@
 int __cdecl fcn_0050dc90(void*);
 int __cdecl gm_CheckEntityType(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-int __cdecl fcn_0042f120(char*, int, char*);
+int __cdecl vfs_LookupPath(char*, int, char*);
 int __cdecl evt_LoadScript(char*);
 int __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(int);
@@ -58,7 +58,7 @@ found:
 	}
 	v3++;
 	fcn_0064d41a(v5, (char*) 0x6a1f54, (char*) 0x6790c8, v3, v3);
-	r = fcn_0042f120(v5, *(int*) 0x6b7fdc, v6);
+	r = vfs_LookupPath(v5, *(int*) 0x6b7fdc, v6);
 	if (!r) {
 		return;
 	}

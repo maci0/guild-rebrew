@@ -6,7 +6,7 @@ extern char g_676330[];
 
 void __cdecl fcn_00425bf0(void*, int, void*);
 
-int __cdecl fcn_0040dfb0(char** pp, int* on)
+int __cdecl SetLowPoly(char** pp, int* on)
 {
 	void* g;
 

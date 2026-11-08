@@ -89,7 +89,7 @@ extern float g_773e18;
 extern float g_773e1c;
 
 void __cdecl fcn_004125c0(int, int);
-int __cdecl fcn_00451840(float*, float*, float);
+int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_00438b40(void*, void*);
 void __cdecl fcn_00438cb0(void*, void*);
 char* __cdecl fcn_00509570(void*);
@@ -215,8 +215,8 @@ main:
 	rot.z = cam->rot.z;
 	rot.x = (g_6a2564 - g_6a255c) * g_774694 + g_6a255c;
 	rot.y = g_77476c - ((int) g_14cf900 - g_774644) * g_665e00;
-	if (fcn_00451840((float*) &cam->pos, (float*) &pos, g_662a3c) == 0
-	    || fcn_00451840((float*) &cam->rot, (float*) &rot, 0.001f) == 0) {
+	if (CompareVector3WithinTolerance((float*) &cam->pos, (float*) &pos, g_662a3c) == 0
+	    || CompareVector3WithinTolerance((float*) &cam->rot, (float*) &rot, 0.001f) == 0) {
 		fcn_00438b40((void*) g_6b8014, &pos);
 		fcn_00438cb0((void*) g_6b8014, &rot);
 		ent = fcn_00509570(&((Entity*) g_7f4ca0)[g_774970]);
@@ -294,7 +294,7 @@ predict:
 	v.x = cam->pos.x + q.x;
 	v.y = cam->pos.y;
 	v.z = cam->pos.z + d.y;
-	if (fcn_00451840(&g_773e14, (float*) &v, g_662a3c) == 0) {
+	if (CompareVector3WithinTolerance(&g_773e14, (float*) &v, g_662a3c) == 0) {
 		if (*(int*) (g_67a370 + 0xb0) != 0) {
 			ent = *(char**) (g_67a370 + 0xb0);
 			t = *(float*) ent + *(float*) (ent + 0x10) * g_66430c;

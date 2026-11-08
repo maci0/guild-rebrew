@@ -3,7 +3,7 @@
 
 void __cdecl fcn_00407800(int, int, int);
 
-int __cdecl fcn_0040d550(int* a1, int* a2)
+int __cdecl GiveObject(int* a1, int* a2)
 {
 	if (*a1 == 0) {
 		return 0;

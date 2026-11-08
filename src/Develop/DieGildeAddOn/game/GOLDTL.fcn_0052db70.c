@@ -6,7 +6,7 @@ extern int g_6b8010;
 int __cdecl fcn_00500e20(int*);
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
-void* __cdecl fcn_00426fd0(char*);
+void* __cdecl evt_LoadGfxScript(char*);
 void* __cdecl fcn_00426cc0(int);
 char __cdecl fcn_00428720(char*);
 void __cdecl fcn_00455350(char*, float*, float*);
@@ -56,7 +56,7 @@ void __cdecl fcn_0052db70(char* a0)
 			if (obj == 0) {
 				goto unlock;
 			}
-			found = fcn_00426fd0("6a2ee8");
+			found = evt_LoadGfxScript("6a2ee8");
 			if (found == 0) {
 				goto unlock;
 			}

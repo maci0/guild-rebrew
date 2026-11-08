@@ -16,7 +16,7 @@ extern void __cdecl fcn_004fc460(void *a0);
 extern int __cdecl fcn_0050d170(int a0);
 
 /* ADDRESS: GOLDTL 0x0049dd90 */
-int __cdecl fcn_0049dd90(int a0, unsigned short *a1, int a2, char *a3, int *a4)
+int __cdecl ai_StartBuergermeisterKerker(int a0, unsigned short *a1, int a2, char *a3, int *a4)
 {
     char *v10;
     char v15[0x1c];

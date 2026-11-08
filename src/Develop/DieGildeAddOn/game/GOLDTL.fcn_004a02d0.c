@@ -4,7 +4,7 @@ int __cdecl fcn_0049fe50(char* e);
 int __cdecl fcn_004a0020(char* e);
 
 /* ADDRESS: GOLDTL 0x004a02d0 */
-int __cdecl fcn_004a02d0(int a1, char* e, int a3, char* out)
+int __cdecl ai_StartZunftLevel3(int a1, char* e, int a3, char* out)
 {
 	char c;
 	char* p;

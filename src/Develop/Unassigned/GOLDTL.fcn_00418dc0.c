@@ -27,8 +27,8 @@ SOUND_SOURCE* __cdecl fcn_00418c80(char* voice, char* objekt, int volume, float 
             source->volume = volume;
             source->range = (float)scaled;
             source->keepVoice = 1;
-            fcn_004190d0(source);
-            fcn_00418fb0(source);
+            d3_UpdateSoundSourceVolume(source);
+            d3_UpdateSoundSourcePan(source);
             source->keepVoice = 0;
             source->idleCounter = 0;
         }

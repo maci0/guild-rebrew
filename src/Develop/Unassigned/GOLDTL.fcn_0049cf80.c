@@ -14,7 +14,7 @@ typedef struct Msg {
 int __cdecl fcn_004aa240(int a1, int a2, int a3, Msg* a, Msg* b);
 
 /* ADDRESS: GOLDTL 0x0049cf80 */
-int __cdecl fcn_0049cf80(int a1, int a2, int k, Msg* out1, Msg* out2)
+int __cdecl ai_StartBeleidigen(int a1, int a2, int k, Msg* out1, Msg* out2)
 {
 	Msg a;
 	Msg b;

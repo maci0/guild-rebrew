@@ -49,7 +49,7 @@ extern cmd_entry g_9b0844[];     /* 0x009b0844 */
 extern char s_68d580[]; /* "cut_type:%i" */
 extern char s_68b300[]; /* 0x0068b300 */
 
-int __cdecl fcn_004e6c80(void);
+int __cdecl cut_GetRandSeed(void);
 void __cdecl fcn_004e4f10(unsigned char*);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c5790(int, void*);
@@ -86,7 +86,7 @@ void __cdecl fcn_004e51d0(unsigned char* s, int id)
 	int found;
 	rec35c* rec;
 
-	saved = fcn_004e6c80();
+	saved = cut_GetRandSeed();
 	fcn_004e4f10(s);
 	if (g_7747b0 & 4) {
 		if (*(int*) (s + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {

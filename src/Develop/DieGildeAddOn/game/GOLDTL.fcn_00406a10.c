@@ -4,7 +4,7 @@
 
 #include "Develop/DieGildeAddOn/game/ch_action.h"
 
-CH_ACTION* __cdecl fcn_0040c0a0(char* e);
+CH_ACTION* __cdecl ch_NewAction(char* e);
 void __cdecl ch_TakingObject(CH_ACTION* t);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
@@ -15,7 +15,7 @@ int __cdecl fcn_00406a10(char* e, const char* name, char* src, int param)
 	char* d;
 	char c;
 
-	t = fcn_0040c0a0(e);
+	t = ch_NewAction(e);
 	if (t != 0) {
 		t->besitzer = e;
 		t->parameter = param;

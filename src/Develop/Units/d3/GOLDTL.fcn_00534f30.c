@@ -30,7 +30,7 @@ extern Item g_10382e0[];
 extern int g_7747c4;
 extern char g_6a3194[];
 
-void __cdecl fcn_00413120(char* o);
+void __cdecl d3_RemoveObjectAnim(char* o);
 void __cdecl fcn_00442c00(char* o, int v);
 
 void __cdecl fcn_00471340(int h);
@@ -47,7 +47,7 @@ void __cdecl fcn_00534f30(Pager* p)
 	int j;
 
 	if (p != 0) {
-		fcn_00413120(p->obj);
+		d3_RemoveObjectAnim(p->obj);
 		if (p->next != 0) {
 			fcn_00442c00(p->next, 1);
 			for (j = 0; j < *(int*) (*(char**) (*(char**) (p->obj + 0x1cc) + 0x318) + 0x1e4); j++) {

@@ -3,7 +3,7 @@ char* __cdecl fcn_00449ac0(char*, char*);
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl fcn_004011f0(void*, void*);
 char* __cdecl m_alloc(int, char*);
-int __cdecl fcn_00401500(void*, int, void**);
+int __cdecl bio_rd_array_quick(void*, int, void**);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl CloseVfsStream(void*);
 
@@ -40,7 +40,7 @@ char* __cdecl d3_LoadObjectAnim(char* path, char* object, char loop)
 			((unsigned char*) r)[0x34] =
 				((((unsigned char*) r)[0x34] ^ ((unsigned char) loop << 1)) & 2)
 				^ ((unsigned char*) r)[0x34];
-			n = fcn_00401500(h, 0x58, (void**) (r + 0x40));
+			n = bio_rd_array_quick(h, 0x58, (void**) (r + 0x40));
 			if (n != *(int*) r) {
 				ReportClientMessage((char*) 0x67aff4);
 			}

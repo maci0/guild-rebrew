@@ -45,7 +45,7 @@ void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_00469470(int, int);
 void __cdecl fcn_00469510(int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472640(int, int);
@@ -199,7 +199,7 @@ void __cdecl fcn_00585030(int a0)
 				count++;
 			}
 			g_102cbc8[list].n = owner;
-			fcn_00469630(list);
+			d2_UpdateRadioGroup(list);
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

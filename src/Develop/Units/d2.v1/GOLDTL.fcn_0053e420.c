@@ -17,8 +17,8 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
 int __cdecl d2_CreateRadioGroup(int, ...);
-void __cdecl fcn_004695a0(int, int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_SelectRadioGroup(int, int);
+void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
 
@@ -53,12 +53,12 @@ int __cdecl fcn_0053e420(void)
 	}
 	list = d2_CreateRadioGroup(7, a0, a1, a2, a3, a4, a5, a6);
 	if (g_776704 != -1) {
-		fcn_004695a0(list, g_776704 + 1);
+		d2_SelectRadioGroup(list, g_776704 + 1);
 	} else {
-		fcn_004695a0(list, 0);
+		d2_SelectRadioGroup(list, 0);
 	}
 	while (fcn_005373e0(fcn_0053e420, 0xc6) != 0) {
-		fcn_00469630(list);
+		d2_UpdateRadioGroup(list);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
 		}
@@ -80,9 +80,9 @@ int __cdecl fcn_0053e420(void)
 			}
 			g_776704 = (*(char*)&g_6a3440);
 			if (g_776704 != -1) {
-				fcn_004695a0(list, g_776704 + 1);
+				d2_SelectRadioGroup(list, g_776704 + 1);
 			} else {
-				fcn_004695a0(list, 0);
+				d2_SelectRadioGroup(list, 0);
 			}
 			result = 1;
 			g_774654 = 1;

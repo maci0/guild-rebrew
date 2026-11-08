@@ -13,7 +13,7 @@ extern volatile int g_6b7fac;
 
 int __cdecl fcn_0042af10(int h);
 int __cdecl fcn_0042ae10(int h, int v);
-void __cdecl fcn_0041fc80(int vol);
+void __cdecl SetMasterVolume(int vol);
 
 void __cdecl fcn_00420210(void)
 {
@@ -127,7 +127,7 @@ void __cdecl fcn_00420210(void)
 				g_678150 = g_678158;
 				g_678158 = -1.0f;
 			}
-			fcn_0041fc80(g_678160);
+			SetMasterVolume(g_678160);
 		}
 	}
 }

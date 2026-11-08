@@ -14,7 +14,7 @@ extern int g_675318;
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00435500(char*, char*);
 void __cdecl fcn_004311a0(char*, char*, int, int, int);
-void __cdecl fcn_00434760(char*, char);
+void __cdecl d3_ReleaseAnim(char*, char);
 int __cdecl fcn_00413190(char*);
 int __cdecl fcn_00433be0(char*, char*, int, int, int, int, char*, int);
 int __cdecl fcn_004316c0(char*);
@@ -59,7 +59,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 		if ((*(char**) (obj + 0x7c))[0x6d] & 0x20) {
 			sprintf(buf, g_67553c, obj);
 			fcn_00435500(*(char**) (entity + 0x1ec) + 0xf4, buf);
-			fcn_00434760(fcn_00433ba0(buf), 1);
+			d3_ReleaseAnim(d3_FindAnimByName(buf), 1);
 			*(char**) (obj + 0x7c) = 0;
 			cleared = 1;
 		} else {
@@ -124,7 +124,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 			name = *(char**) (obj + 0x80);
 			*(int*) (anim + 0x14c) = *(int*) (anim + 0x14c) - 1;
 			sprintf(path, g_675584, obj + 0x130, name);
-			if (fcn_00433ba0(name) == 0) {
+			if (d3_FindAnimByName(name) == 0) {
 				d3_LoadAnimStream(path, name, 0);
 			}
 			opt.mode = (unsigned char) obj[0x84] >= 1 ? (unsigned char) obj[0x84] : 1;

@@ -16,7 +16,7 @@ int __cdecl fcn_0050bb50(int, int);
 int __cdecl _ftol(void);
 
 /* ADDRESS: GOLDTL 0x004a04b0 */
-int __cdecl fcn_004a04b0(int a0, unsigned short* a1, int a2, int* a3, int* a4)
+int __cdecl ai_StartUpgradeZunft(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 {
 	unsigned char* v4;
 	int v5;

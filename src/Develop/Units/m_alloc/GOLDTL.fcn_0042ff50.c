@@ -23,11 +23,11 @@ typedef struct {
 	unsigned char b7 : 1;
 } VFS_MODE_BITS_42ff50;
 
-void* __cdecl fcn_0042f120(char*, struct VFS_DIR*, struct VFS_DIR**);
+void* __cdecl vfs_LookupPath(char*, struct VFS_DIR*, struct VFS_DIR**);
 void __cdecl fcn_0042f240(VFS_FILE_42ff50*, struct VFS_DIR*, struct VFS_DIR*, char*);
-void __cdecl fcn_0042e540(char*);
-void __cdecl fcn_0042e570(char*);
-void __cdecl fcn_0042e520(char*);
+void __cdecl vfs_ToSlashes(char*);
+void __cdecl vfs_ToBackslashes(char*);
+void __cdecl vfs_NormalizeCase(char*);
 void* __cdecl unzOpen(const char* path);
 int __cdecl unzClose(char*);
 int __cdecl unzGoToFilePos(void* file, unsigned long pos, unsigned long num);
@@ -39,7 +39,7 @@ void* __cdecl gzopen(char*, char*);
 void* __cdecl fopen(char*, char*);
 extern char g_file_extension_names[];
 char* __cdecl strupr(char*);
-int __cdecl fcn_0042fcd0(char*, struct VFS_DIR*);
+int __cdecl vfs_MakeDirs(char*, struct VFS_DIR*);
 void __cdecl fcn_0042ed00(char*, struct VFS_DIR*, int, int, int, int, int);
 void __cdecl ReportClientMessage(char*);
 int __cdecl sprintf(char*, const char*, ...);
@@ -118,7 +118,7 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 	}
 	if (!read)
 		goto write_path;
-	file = (VFS_FILE_42ff50*) fcn_0042f120(path, root, &dir);
+	file = (VFS_FILE_42ff50*) vfs_LookupPath(path, root, &dir);
 	if (file) {
 		if (file->source) {
 			if (!binary) {
@@ -127,7 +127,7 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 			}
 			fcn_0042f240(0, file->source, 0, arch);
 			strcat(arch, g_file_extension_names + file->archive * 6);
-			fcn_0042e570(arch);
+			vfs_ToBackslashes(arch);
 			zip = (char*) unzOpen(arch);
 			if (zip) {
 				fcn_0042f240(file, dir, file->source, entry);
@@ -136,7 +136,7 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 					unzGoToFilePos(zip, file->stamp, file->packed);
 					if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
 						strupr(name);
-						fcn_0042e540(name);
+						vfs_ToSlashes(name);
 						if (info[8] > 0 && strcmp(entry, name) == 0)
 							goto open_member;
 					}
@@ -145,7 +145,7 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 				do {
 					if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
 						strupr(name);
-						fcn_0042e540(name);
+						vfs_ToSlashes(name);
 						if (info[8] > 0 && strcmp(entry, name) == 0)
 							goto open_member;
 					}
@@ -168,7 +168,7 @@ open_member:
 		modes[0] = "rt";
 		modes[1] = "rb";
 		fcn_0042f240(file, dir, 0, arch);
-		fcn_0042e570(arch);
+		vfs_ToBackslashes(arch);
 	} else {
 		goto not_found;
 	}
@@ -196,16 +196,16 @@ write_path:
 	for (p = path; *p == '\\' || *p == '/'; p++) {
 	}
 	strcpy(name, p);
-	fcn_0042e540(name);
+	vfs_ToSlashes(name);
 	strcpy(entry, name);
-	fcn_0042e520(name);
-	file = (VFS_FILE_42ff50*) fcn_0042f120(name, root, &dir);
+	vfs_NormalizeCase(name);
+	file = (VFS_FILE_42ff50*) vfs_LookupPath(name, root, &dir);
 	if (!file || file->source) {
-		if (!fcn_0042fcd0(entry, root))
+		if (!vfs_MakeDirs(entry, root))
 			return 0;
 		if (!file) {
 			fcn_0042ed00(name, root, 0, 0, 0, 0, -1);
-			file = (VFS_FILE_42ff50*) fcn_0042f120(name, root, &dir);
+			file = (VFS_FILE_42ff50*) vfs_LookupPath(name, root, &dir);
 			if (!file) {
 				sprintf(entry, "vfs_Tfopen: Could write to \"%s\"!!", path);
 				ReportClientMessage(entry);
@@ -219,7 +219,7 @@ write_path:
 	file->source = 0;
 	file->stamp = 0;
 	fcn_0042f240(file, dir, 0, arch);
-	fcn_0042e570(arch);
+	vfs_ToBackslashes(arch);
 	if (packed) {
 		h = gzopen(arch, modes[binary]);
 	} else {

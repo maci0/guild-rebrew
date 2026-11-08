@@ -23,7 +23,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int a1, int idx);
 void __cdecl fcn_00471db0(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00426fd0(char* name);
+int __cdecl evt_LoadGfxScript(char* name);
 char* __cdecl fcn_004fd9d0(int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_004284d0(int, char*);
@@ -58,7 +58,7 @@ int __cdecl fcn_0058e220(int a1, S58* a2)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471db0(w, 1);
 	d2_SetForm(w, 0);
-	h = fcn_00426fd0(g_6a97d4);
+	h = evt_LoadGfxScript(g_6a97d4);
 	if (h != 0) {
 		p = fcn_004fd9d0(g_7f4ca0[g_774970].b9, g_7f4ca0[g_774970].b164);
 		if (p == 0)

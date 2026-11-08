@@ -22,7 +22,7 @@ int __cdecl fcn_004c4450(unsigned int);
 int __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(void*);
 char* __cdecl evt_LoadScript(char*);
-int __cdecl fcn_0042f120(char*, void*, void**);
+int __cdecl vfs_LookupPath(char*, void*, void**);
 int __cdecl fcn_00428340(char*, int, ...);
 void __cdecl fcn_00511040(int, char*);
 
@@ -196,11 +196,11 @@ after:
 					}
 					sprintf(path, "%slocations\\%s\\%s%i_%s.esc", "x:\\engine\\gfx\\scripts\\",
 					        name, job, k, name);
-					if (!fcn_0042f120(path, (void*) g_6b7fdc, &found)) {
+					if (!vfs_LookupPath(path, (void*) g_6b7fdc, &found)) {
 						sprintf(path, "%slocations\\%s\\%s0_%s.esc", "x:\\engine\\gfx\\scripts\\",
 						        name, job, name);
 					}
-					if (fcn_0042f120(path, (void*) g_6b7fdc, &found)) {
+					if (vfs_LookupPath(path, (void*) g_6b7fdc, &found)) {
 						sprintf(sp, "sp_%i", *(int*) (ent + 4));
 						script = evt_LoadScript(path);
 						if (script != 0) {

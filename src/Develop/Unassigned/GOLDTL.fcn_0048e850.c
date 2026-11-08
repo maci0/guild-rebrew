@@ -4,7 +4,7 @@ int __cdecl fcn_0050d170(int k);
 int __cdecl fcn_0050d200(char* e, int k);
 int __cdecl fcn_0050b810(int a, char b);
 int __cdecl fcn_004a4bb0(int action, char* e, int a, char* b, char* c, int d);
-int __cdecl fcn_0049e900(int a, char* e, int b, char* out1, char* out2);
+int __cdecl ai_StartKreditNehmen(int a, char* e, int b, char* out1, char* out2);
 int __cdecl _ftol(void);
 
 typedef struct Rec6 {
@@ -12,7 +12,7 @@ typedef struct Rec6 {
 } Rec6;
 
 /* ADDRESS: GOLDTL 0x0048e850 */
-int __cdecl fcn_0048e850(int action, char* ent, char* opt, char* out1, char* out2)
+int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char* out2)
 {
 	Rec6 rec1;
 	Rec6 rec2;
@@ -43,7 +43,7 @@ int __cdecl fcn_0048e850(int action, char* ent, char* opt, char* out1, char* out
 								if ((float) d / (float) need < *(float*) 0x6628bc) {
 									*(unsigned char*) out1 = 0x12;
 									*(int*) (out1 + 8) = d;
-									return fcn_0049e900(0x43, e, 0, out1, out2);
+									return ai_StartKreditNehmen(0x43, e, 0, out1, out2);
 								}
 							} else {
 								*(Rec6*) out1 = rec2;
@@ -64,7 +64,7 @@ int __cdecl fcn_0048e850(int action, char* ent, char* opt, char* out1, char* out
 							if ((float) d / (float) need < *(float*) 0x6628bc) {
 								*(unsigned char*) out1 = 0x12;
 								*(int*) (out1 + 8) = d;
-								return fcn_0049e900(0x43, e, 0, out1, out2);
+								return ai_StartKreditNehmen(0x43, e, 0, out1, out2);
 							}
 						} else {
 							*(Rec6*) out1 = rec1;

@@ -9,7 +9,7 @@ extern int g_6b8010;
 extern int g_6b5c34;
 int __cdecl fcn_00413190(int p);
 void __cdecl fcn_004432d0(int a, int b);
-void __cdecl fcn_00413120(int h);
+void __cdecl d3_RemoveObjectAnim(int h);
 
 void __cdecl fcn_00403870(char* e);
 
@@ -27,7 +27,7 @@ void __cdecl fcn_00403330(unsigned char mode)
 			fcn_004432d0(fcn_00413190(*(int*) (e + 0x88)), 1);
 			if (mode == 2) {
 				if (*(int*) (e + 0x22c) != 0) {
-					fcn_00413120(*(int*) (e + 0x22c));
+					d3_RemoveObjectAnim(*(int*) (e + 0x22c));
 					d3_DestroyObject((D3_OBJECT*) (*(int*) (e + 0x22c)));
 					*(int*) (e + 0x22c) = 0;
 				}

@@ -4,7 +4,7 @@
 #include "Develop/Units/d3/d3_animation.h"
 
 extern int gv_00675318;
-void __cdecl fcn_0042e540(char* name);
+void __cdecl vfs_ToSlashes(char* name);
 int __cdecl fcn_00413190(int object);
 
 #pragma intrinsic(memcmp, memcpy, memset, strcmp, strcpy, strlen, abs, labs, fabs)
@@ -18,10 +18,10 @@ char* __cdecl ch_AttachAni(char* obj, char* name, unsigned char force)
     char path[0x110];
     char msg[0x200];
 
-    fcn_0042e540(name);
+    vfs_ToSlashes(name);
     sprintf(path, "character/%s/%s_%s.baf", obj + 0x130, name, obj + 0x130);
     sprintf(ani, "%s_%s", name, obj + 0x130);
-    fcn_0042e540(ani);
+    vfs_ToSlashes(ani);
     if (*name) {
         memset(&opt, 0, sizeof(opt));
         *(int*) &opt = 0;
@@ -30,7 +30,7 @@ char* __cdecl ch_AttachAni(char* obj, char* name, unsigned char force)
         opt.layer = 0x10 | (force & 1) << 3;
         opt.loop = 1;
         opt.reverse = 1;
-        if (!fcn_00433ba0(ani)) {
+        if (!d3_FindAnimByName(ani)) {
             if (strcmp(name, "bewegung/gehen") == 0 ||
                 strcmp(name, "bewegung/karren_ziehen") == 0) {
                 d3_LoadAnimStream(path, ani, 1);

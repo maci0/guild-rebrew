@@ -10,7 +10,7 @@ int __cdecl fcn_004a5c40(int*, int, int, float, float, int, unsigned short*);
 int __cdecl fcn_004e99c0(unsigned char);
 
 /* ADDRESS: GOLDTL 0x004ab500 */
-unsigned int __cdecl fcn_004ab500(unsigned int a0, unsigned short* a1, int a2,
+unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* a1, int a2,
                                   char* a3, int a4)
 {
 	unsigned int v8;

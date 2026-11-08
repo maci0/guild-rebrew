@@ -52,7 +52,7 @@ int __cdecl fcn_00468df0(int, int, int, int, int);
 void __cdecl fcn_00472900(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00472770(int, int);
+void __cdecl d2_SetBildArgument(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00474cf0(int);
 char* __cdecl fcn_00471f80(int);
@@ -95,7 +95,7 @@ void __cdecl fcn_00536810(void)
 	fcn_00472900(win, 0x54);
 	d2_SetForm(dlg, 2);
 	edit = fcn_00472250(dlg, 2, io_AppendText(0x1cc3, g_6b5c60));
-	fcn_00472770(edit, 0x60);
+	d2_SetBildArgument(edit, 0x60);
 	while (fcn_005373e0(fcn_00536810, 0x657c7)) {
 		d2_SetForm(dlg, 1);
 		io_AppendText((int) "$C");

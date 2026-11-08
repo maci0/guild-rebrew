@@ -5,7 +5,7 @@
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl ch_AttachAni(char* e, char* name, int flag);
-int __cdecl fcn_00404f60(CH_ACTION* t);
+int __cdecl ch_FinishAnimation(CH_ACTION* t);
 
 
 void __cdecl fcn_004065c0(CH_ACTION* t)
@@ -35,7 +35,7 @@ void __cdecl fcn_004065c0(CH_ACTION* t)
 		*(unsigned char*) (*(char**) (e + 0x70) + 0x6d) |= 0x10;
 		return;
 	}
-	if (fcn_00404f60(t) == -1) {
+	if (ch_FinishAnimation(t) == -1) {
 		ch_ClearSitting((unsigned char*) e);
 		ch_RemoveQueueEntry((char*) (t));
 	}

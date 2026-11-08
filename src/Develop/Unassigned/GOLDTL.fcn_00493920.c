@@ -3,8 +3,8 @@ extern float g_662948;
 extern double g_6640f8;
 
 char* __cdecl fcn_00493f50(int);
-float __cdecl fcn_004e6d20(void);
-int __cdecl fcn_004e6cb0(int);
+float __cdecl cut_RandFloat(void);
+int __cdecl cut_RandMod(int);
 
 /* ADDRESS: GOLDTL 0x00493920 */
 int __cdecl fcn_00493920(char* e)
@@ -32,11 +32,11 @@ int __cdecl fcn_00493920(char* e)
 		if (*(int*) (e + 0x40) == 0) {
 			weight = 1.0f;
 		}
-		delta = fcn_004e6d20() * *(float*) (rec + 0xc) * weight + *(float*) (rec + 8);
+		delta = cut_RandFloat() * *(float*) (rec + 0xc) * weight + *(float*) (rec + 8);
 		t = sum + delta;
 		if (t >= limit) {
 			sum = t;
-			if (fcn_004e6cb0(4) != 0) {
+			if (cut_RandMod(4) != 0) {
 				sum = sum * g_6640f8;
 			}
 			*(int*) (e + 0x48) = 1;

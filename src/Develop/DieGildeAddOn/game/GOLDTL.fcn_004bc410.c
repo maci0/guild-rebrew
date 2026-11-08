@@ -28,7 +28,7 @@ void __cdecl fcn_004bc410(char** a1, int kind)
 		strcpy(buf, "pferd_PFERD");
 	else if (kind == 6)
 		strcpy(buf, "schwein_SCHWEIN");
-	obj = fcn_00403b90(buf, pos);
+	obj = ch_CreateAtPosition(buf, pos);
 	a1[0] = obj;
 	if (obj != 0) {
 		*(float*) (obj + 0x1a0) = 1.0f;

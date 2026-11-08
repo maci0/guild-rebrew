@@ -16,7 +16,7 @@ int __cdecl fcn_0050d320(short*, unsigned char);
 int __cdecl fcn_0050d200(short*, int);
 int __cdecl fcn_0050d170(int);
 int __cdecl fcn_004a4bb0(int, short*, int, Cmd*, Cmd*, int);
-int __cdecl fcn_0049e900(int, short*, int, Cmd*, Cmd*);
+int __cdecl ai_StartKreditNehmen(int, short*, int, Cmd*, Cmd*);
 
 /* ADDRESS: GOLDTL 0x00497ec0 */
 int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
@@ -108,7 +108,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 								if ((float) rem / (float) need < *(float*) 0x6628bc) {
 									a3->kind = 0x12;
 									a3->f2 = rem;
-									return fcn_0049e900(0x11, a1, a2, a3, a4);
+									return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
 								}
 								return 0;
 							}
@@ -130,7 +130,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 						if ((float) rem / (float) need < *(float*) 0x6628bc) {
 							a3->kind = 0x12;
 							a3->f2 = rem;
-							return fcn_0049e900(0x11, a1, a2, a3, a4);
+							return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
 						}
 					}
 					cmd.kind = 5;
@@ -148,7 +148,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					if ((float) rem / (float) need < *(float*) 0x6628bc) {
 						a3->kind = 0x12;
 						a3->f2 = rem;
-						return fcn_0049e900(0x11, a1, a2, a3, a4);
+						return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
 					}
 					return 0;
 				}
@@ -182,7 +182,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					if ((float) rem / (float) need < *(float*) 0x6628bc) {
 						a3->kind = 0x12;
 						a3->f2 = rem;
-						return fcn_0049e900(0x11, a1, a2, a3, a4);
+						return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
 					}
 					return 0;
 				}
@@ -202,7 +202,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 				if ((float) rem / (float) need < *(float*) 0x6628bc) {
 					a3->kind = 0x12;
 					a3->f2 = rem;
-					return fcn_0049e900(0x11, a1, a2, a3, a4);
+					return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
 				}
 				return 0;
 			}

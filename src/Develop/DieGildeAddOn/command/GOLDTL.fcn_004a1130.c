@@ -83,65 +83,65 @@ int __cdecl fcn_0049bbc0(void);
 int __cdecl fcn_0049bd50(void);
 int __cdecl fcn_0049bdf0(void);
 int __cdecl fcn_0049be10(void);
-int __cdecl fcn_0049bfa0(void);
-int __cdecl fcn_0049c130(void);
-int __cdecl fcn_0049c1c0(void);
-int __cdecl fcn_0049c2b0(void);
-int __cdecl fcn_0049c310(void);
-int __cdecl fcn_0049c590(void);
-int __cdecl fcn_0049c760(void);
-int __cdecl fcn_0049c7e0(void);
-int __cdecl fcn_0049c800(void);
-int __cdecl fcn_0049c880(void);
-int __cdecl fcn_0049ca60(void);
-int __cdecl fcn_0049ca80(void);
-int __cdecl fcn_0049cb20(void);
-int __cdecl fcn_0049ccb0(void);
-int __cdecl fcn_0049cd00(void);
-int __cdecl fcn_0049ce90(void);
-int __cdecl fcn_0049cee0(void);
-int __cdecl fcn_0049cf80(void);
-int __cdecl fcn_0049d010(void);
-int __cdecl fcn_0049d030(void);
-int __cdecl fcn_0049d0d0(void);
-int __cdecl fcn_0049d160(void);
-int __cdecl fcn_0049d180(void);
-int __cdecl fcn_0049d200(void);
-int __cdecl fcn_0049d220(void);
-int __cdecl fcn_0049d300(void);
+int __cdecl ai_StartSpionage(void);
+int __cdecl ai_RunSpionage(void);
+int __cdecl ai_StartObjektKaufen(void);
+int __cdecl ai_RunObjektKaufen(void);
+int __cdecl ai_StartAblassKaufen(void);
+int __cdecl ai_RunAblassKaufen(void);
+int __cdecl ai_StartUseAmt(void);
+int __cdecl ai_RunUseAmt(void);
+int __cdecl ai_ScoreDrohen(void);
+int __cdecl ai_StartDrohen(void);
+int __cdecl ai_RunDrohen(void);
+int __cdecl ai_ScorePamphlete(void);
+int __cdecl ai_StartPamphlete(void);
+int __cdecl ai_RunPamphlete(void);
+int __cdecl ai_StartAnschwaerzen(void);
+int __cdecl ai_RunAnschwaerzen(void);
+int __cdecl ai_ScoreBeleidigen(void);
+int __cdecl ai_StartBeleidigen(void);
+int __cdecl ai_RunBeleidigen(void);
+int __cdecl ai_ScoreErpressen(void);
+int __cdecl ai_StartErpressen(void);
+int __cdecl ai_RunErpressen(void);
+int __cdecl ai_StartUsePrivs(void);
+int __cdecl ai_RunUsePrivs(void);
+int __cdecl ai_ScoreBuergermeister(void);
+int __cdecl ai_StartBuergermeister(void);
 #include "client_actions.h"
 int __cdecl fcn_0049d7c0(void);
 int __cdecl fcn_0049d920(void);
-int __cdecl fcn_0049d930(void);
-int __cdecl fcn_0049dc70(void);
-int __cdecl fcn_0049dd90(void);
-int __cdecl fcn_0049e0c0(void);
-int __cdecl fcn_0049e1e0(void);
-int __cdecl fcn_0049e4d0(void);
-int __cdecl fcn_0049e650(void);
-int __cdecl fcn_0049e750(void);
-int __cdecl fcn_0049e860(void);
-int __cdecl fcn_0049e900(void);
-int __cdecl fcn_0049edb0(void);
-int __cdecl fcn_0049ef30(void);
-int __cdecl fcn_0049f000(void);
-int __cdecl fcn_0049f230(void);
-int __cdecl fcn_0049f290(void);
-int __cdecl fcn_0049f5c0(void);
-int __cdecl fcn_0049f6d0(void);
+int __cdecl ai_StartBuergermeisterRathaus(void);
+int __cdecl ai_RunBuergermeisterRathaus(void);
+int __cdecl ai_StartBuergermeisterKerker(void);
+int __cdecl ai_RunBuergermeisterKerker(void);
+int __cdecl ai_StartBaumeister(void);
+int __cdecl ai_RunBaumeister(void);
+int __cdecl ai_ScoreDunkleEcke(void);
+int __cdecl ai_StartDunkleEcke(void);
+int __cdecl ai_RunDunkleEcke(void);
+int __cdecl ai_StartKreditNehmen(void);
+int __cdecl ai_RunKreditNehmen(void);
+int __cdecl ai_ScoreChangeProfession(void);
+int __cdecl ai_StartChangeProfession(void);
+int __cdecl ai_RunChangeProfession(void);
+int __cdecl ai_StartStammtisch(void);
+int __cdecl ai_RunStammtisch(void);
+int __cdecl ai_StartZunftPreismanipulation(void);
 int __cdecl fcn_0049fa80(void);
-int __cdecl fcn_0049fad0(void);
-int __cdecl fcn_0049fc30(void);
-int __cdecl fcn_004a02d0(void);
-int __cdecl fcn_004a0380(void);
-int __cdecl fcn_004a03d0(void);
-int __cdecl fcn_004a04b0(void);
-int __cdecl fcn_004a08a0(void);
-int __cdecl fcn_004a0a40(void);
-int __cdecl fcn_004a0bb0(void);
-int __cdecl fcn_004a0da0(void);
-int __cdecl fcn_004a0e20(void);
-int __cdecl fcn_004a1080(void);
+int __cdecl ai_StartZunftAufruhr(void);
+int __cdecl ai_RunZunftAufruhr(void);
+int __cdecl ai_StartZunftLevel3(void);
+int __cdecl ai_RunZunftLevel3(void);
+int __cdecl ai_ScoreUpgradeZunft(void);
+int __cdecl ai_StartUpgradeZunft(void);
+int __cdecl ai_RunUpgradeZunft(void);
+int __cdecl ai_ScoreBerufsausbildung(void);
+int __cdecl ai_StartBerufsausbildung(void);
+int __cdecl ai_RunBerufsausbildung(void);
+int __cdecl ai_StartStudium(void);
+int __cdecl ai_RunStudium(void);
 
 /* ADDRESS: GOLDTL 0x004a1130 */
 int __cdecl fcn_004a1130(char* e)
@@ -1370,8 +1370,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x25;
 	strcpy(d.name, "Spionage");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049bfa0;
-	d.run = fcn_0049c130;
+	d.start = ai_StartSpionage;
+	d.run = ai_RunSpionage;
 	d.flags = 0x69;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1404,8 +1404,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0xc;
 	strcpy(d.name, "Objekt Kaufen (Markt)");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049c1c0;
-	d.run = fcn_0049c2b0;
+	d.start = ai_StartObjektKaufen;
+	d.run = ai_RunObjektKaufen;
 	d.flags = 0xff;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1438,8 +1438,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x26;
 	strcpy(d.name, "Ablass Kaufen");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049c310;
-	d.run = fcn_0049c590;
+	d.start = ai_StartAblassKaufen;
+	d.run = ai_RunAblassKaufen;
 	d.flags = 0x39;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1472,8 +1472,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x27;
 	strcpy(d.name, "UseAmt");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049c760;
-	d.run = fcn_0049c7e0;
+	d.start = ai_StartUseAmt;
+	d.run = ai_RunUseAmt;
 	d.flags = 0xff;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1505,9 +1505,9 @@ int __cdecl fcn_004a1130(char* e)
 	}
 	d.type = 0x28;
 	strcpy(d.name, "Drohen");
-	d.score = fcn_0049c800;
-	d.start = fcn_0049c880;
-	d.run = fcn_0049ca60;
+	d.score = ai_ScoreDrohen;
+	d.start = ai_StartDrohen;
+	d.run = ai_RunDrohen;
 	d.flags = 0x5d;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1539,9 +1539,9 @@ int __cdecl fcn_004a1130(char* e)
 	}
 	d.type = 0x29;
 	strcpy(d.name, "Pamphlete");
-	d.score = fcn_0049ca80;
-	d.start = fcn_0049cb20;
-	d.run = fcn_0049ccb0;
+	d.score = ai_ScorePamphlete;
+	d.start = ai_StartPamphlete;
+	d.run = ai_RunPamphlete;
 	d.flags = 0x5d;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1574,8 +1574,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x2a;
 	strcpy(d.name, "Anschwaerzen");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049cd00;
-	d.run = fcn_0049ce90;
+	d.start = ai_StartAnschwaerzen;
+	d.run = ai_RunAnschwaerzen;
 	d.flags = 0x39;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1607,9 +1607,9 @@ int __cdecl fcn_004a1130(char* e)
 	}
 	d.type = 0x2b;
 	strcpy(d.name, "Beleidigen");
-	d.score = fcn_0049cee0;
-	d.start = fcn_0049cf80;
-	d.run = fcn_0049d010;
+	d.score = ai_ScoreBeleidigen;
+	d.start = ai_StartBeleidigen;
+	d.run = ai_RunBeleidigen;
 	d.flags = 0xc9;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1641,9 +1641,9 @@ int __cdecl fcn_004a1130(char* e)
 	}
 	d.type = 0x2c;
 	strcpy(d.name, "Erpressen");
-	d.score = fcn_0049d030;
-	d.start = fcn_0049d0d0;
-	d.run = fcn_0049d160;
+	d.score = ai_ScoreErpressen;
+	d.start = ai_StartErpressen;
+	d.run = ai_RunErpressen;
 	d.flags = 0xc9;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1676,8 +1676,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x2d;
 	strcpy(d.name, "UsePrivs");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049d180;
-	d.run = fcn_0049d200;
+	d.start = ai_StartUsePrivs;
+	d.run = ai_RunUsePrivs;
 	d.flags = 0xff;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1709,8 +1709,8 @@ int __cdecl fcn_004a1130(char* e)
 	}
 	d.type = 0x2e;
 	strcpy(d.name, "Buergermeister");
-	d.score = fcn_0049d220;
-	d.start = fcn_0049d300;
+	d.score = ai_ScoreBuergermeister;
+	d.start = ai_StartBuergermeister;
 	d.run = RunBuergermeister;
 	d.flags = 0x39;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -1744,8 +1744,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x2f;
 	strcpy(d.name, "Baumeister");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049e1e0;
-	d.run = fcn_0049e4d0;
+	d.start = ai_StartBaumeister;
+	d.run = ai_RunBaumeister;
 	d.flags = 0x3b;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1812,8 +1812,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x31;
 	strcpy(d.name, "Buergermeister Rathaus");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049d930;
-	d.run = fcn_0049dc70;
+	d.start = ai_StartBuergermeisterRathaus;
+	d.run = ai_RunBuergermeisterRathaus;
 	d.flags = 0x39;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1846,8 +1846,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x3c;
 	strcpy(d.name, "Buergermeister Kerker");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049dd90;
-	d.run = fcn_0049e0c0;
+	d.start = ai_StartBuergermeisterKerker;
+	d.run = ai_RunBuergermeisterKerker;
 	d.flags = 0x39;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1879,9 +1879,9 @@ int __cdecl fcn_004a1130(char* e)
 	}
 	d.type = 0x32;
 	strcpy(d.name, "Dunkle Ecke");
-	d.score = fcn_0049e650;
-	d.start = fcn_0049e750;
-	d.run = fcn_0049e860;
+	d.score = ai_ScoreDunkleEcke;
+	d.start = ai_StartDunkleEcke;
+	d.run = ai_RunDunkleEcke;
 	d.flags = 0x69;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1914,8 +1914,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x33;
 	strcpy(d.name, "Kredit Nehmen");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049e900;
-	d.run = fcn_0049edb0;
+	d.start = ai_StartKreditNehmen;
+	d.run = ai_RunKreditNehmen;
 	d.flags = 0x7;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1947,9 +1947,9 @@ int __cdecl fcn_004a1130(char* e)
 	}
 	d.type = 0x34;
 	strcpy(d.name, "Change Profession");
-	d.score = fcn_0049ef30;
-	d.start = fcn_0049f000;
-	d.run = fcn_0049f230;
+	d.score = ai_ScoreChangeProfession;
+	d.start = ai_StartChangeProfession;
+	d.run = ai_RunChangeProfession;
 	d.flags = 0x7;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1982,8 +1982,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x35;
 	strcpy(d.name, "Stammtisch");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049f290;
-	d.run = fcn_0049f5c0;
+	d.start = ai_StartStammtisch;
+	d.run = ai_RunStammtisch;
 	d.flags = 0x19;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -2016,7 +2016,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x36;
 	strcpy(d.name, "Zunft Preismanipulation");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049f6d0;
+	d.start = ai_StartZunftPreismanipulation;
 	d.run = fcn_0049fa80;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -2050,8 +2050,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x37;
 	strcpy(d.name, "Zunft Aufruhr");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049fad0;
-	d.run = fcn_0049fc30;
+	d.start = ai_StartZunftAufruhr;
+	d.run = ai_RunZunftAufruhr;
 	d.flags = 0x43;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -2084,8 +2084,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x38;
 	strcpy(d.name, "Zunft Level 3");
 	d.score = fcn_004a4410;
-	d.start = fcn_004a02d0;
-	d.run = fcn_004a0380;
+	d.start = ai_StartZunftLevel3;
+	d.run = ai_RunZunftLevel3;
 	d.flags = 0x4b;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -2117,9 +2117,9 @@ int __cdecl fcn_004a1130(char* e)
 	}
 	d.type = 0x39;
 	strcpy(d.name, "Upgrade Zunft");
-	d.score = fcn_004a03d0;
-	d.start = fcn_004a04b0;
-	d.run = fcn_004a08a0;
+	d.score = ai_ScoreUpgradeZunft;
+	d.start = ai_StartUpgradeZunft;
+	d.run = ai_RunUpgradeZunft;
 	d.flags = 0x1b;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -2151,9 +2151,9 @@ int __cdecl fcn_004a1130(char* e)
 	}
 	d.type = 0x3a;
 	strcpy(d.name, "Berufsausbildung");
-	d.score = fcn_004a0a40;
-	d.start = fcn_004a0bb0;
-	d.run = fcn_004a0da0;
+	d.score = ai_ScoreBerufsausbildung;
+	d.start = ai_StartBerufsausbildung;
+	d.run = ai_RunBerufsausbildung;
 	d.flags = 0x1f;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -2186,8 +2186,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x3b;
 	strcpy(d.name, "Studium");
 	d.score = fcn_004a4410;
-	d.start = fcn_004a0e20;
-	d.run = fcn_004a1080;
+	d.start = ai_StartStudium;
+	d.run = ai_RunStudium;
 	d.flags = 0x13;
 	return am_RegisterMethod(&d, e) != 0;
 }

@@ -8,7 +8,7 @@ int __cdecl fcn_004a4680(float* o1, float* o2, int a3, char* e, Stat* st);
 int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x0049cee0 */
-int __cdecl fcn_0049cee0(float* o1, float* o2, int a3, char* e, int skip, int a6, int a7)
+int __cdecl ai_ScoreBeleidigen(float* o1, float* o2, int a3, char* e, int skip, int a6, int a7)
 {
 	Stat st;
 

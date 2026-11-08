@@ -18,7 +18,7 @@ char* __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x004a0a40 */
-int __cdecl fcn_004a0a40(float* s1, float* s2, int idx, char* e, int flag, int a6, int a7)
+int __cdecl ai_ScoreBerufsausbildung(float* s1, float* s2, int idx, char* e, int flag, int a6, int a7)
 {
 	char* o;
 	Unit* t;

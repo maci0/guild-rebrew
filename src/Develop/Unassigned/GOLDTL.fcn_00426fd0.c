@@ -4,7 +4,7 @@
 
 int __cdecl evt_LoadScript(char* path);
 
-int __cdecl fcn_00426fd0(const char* name)
+int __cdecl evt_LoadGfxScript(const char* name)
 {
 	char path[0x100];
 

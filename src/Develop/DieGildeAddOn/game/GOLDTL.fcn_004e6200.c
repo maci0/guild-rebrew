@@ -4,7 +4,7 @@
 
 void* __cdecl gm_LookupEntityRecordById(int);
 
-int __cdecl fcn_004e6200(int id, unsigned char* a2)
+int __cdecl cut_IsParticipant(int id, unsigned char* a2)
 {
 	int i;
 

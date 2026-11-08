@@ -8,7 +8,7 @@ void __cdecl fcn_00407800(char* e, int slot, int v);
 
 /* `slot` is left unset for an unknown name; the reference reads it from the
  * homed parameter slot. */
-int __cdecl fcn_0040e000(char** a, const char* name, int* v)
+int __cdecl AttachObject(char** a, const char* name, int* v)
 {
 	int slot;
 

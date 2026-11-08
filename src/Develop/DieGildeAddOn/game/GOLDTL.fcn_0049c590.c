@@ -24,7 +24,7 @@ void __cdecl fcn_005100f0(int a0, int a1);
 void __cdecl fcn_005b21d0(int a0, char* a1, int a2);
 
 /* ADDRESS: GOLDTL 0x0049c590 */
-int __cdecl fcn_0049c590(int a0, char* a1, char* a2, int a3)
+int __cdecl ai_RunAblassKaufen(int a0, char* a1, char* a2, int a3)
 {
 	int rec;
 	int v5;

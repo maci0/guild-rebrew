@@ -6,10 +6,10 @@
 #include <string.h>
 
 int __cdecl fcn_0052f390(int, int, int, int, int, int, int);
-void __cdecl fcn_0052f630(int);
+void __cdecl fcn_005350d0(int);
 void __cdecl fcn_00576300(int, int, int, int);
 int __cdecl fcn_00514400(int, int, int, void*);
-int __cdecl fcn_0050a810(void*);
+int __cdecl fcn_0050dc90(void*);
 void __cdecl fcn_00475f60(int, int);
 int __cdecl fcn_00475b70(int, int, int);
 void __cdecl fcn_00475ca0(int, int, int, int);
@@ -129,11 +129,11 @@ int __cdecl fcn_005aacd0(unsigned char* a1, int a2, int a3)
 			0x62cc18, 0x62cc2c, 0x62cc40);
 	}
 	f.book = book;
-	fcn_0052f630((int) book);
+	fcn_005350d0((int) book);
 	fcn_00576300(0x21, (int) book, 0, 0);
 	fcn_00514400(*(unsigned short*) (a1 + 0x27), 1, 2, f.txt7b0);
 	fcn_00514400(*(unsigned short*) (a1 + 0x25), 1, 2, f.txt760);
-	r = (char*) fcn_0050a810(a1);
+	r = (char*) fcn_0050dc90(a1);
 	if (r != 0) {
 		fcn_00514400(*(unsigned short*) r, 1, 1, f.txt204);
 	} else {

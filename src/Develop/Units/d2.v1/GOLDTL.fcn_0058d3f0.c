@@ -34,7 +34,7 @@ int __cdecl fcn_004f3280(int, int, int, int, int);
 int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
 int __cdecl sprintf(char*, const char*, ...);
-int __cdecl fcn_00426fd0(char*);
+int __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(int, int, char*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -89,7 +89,7 @@ int __cdecl fcn_0058d3f0(int a1, Req* a2)
 					p = fcn_004c4480(h);
 					if (p != 0) {
 						sprintf(line, s_6a9748, *(int*) (p + 4));
-						id = fcn_00426fd0(s_6a9714);
+						id = evt_LoadGfxScript(s_6a9714);
 						fcn_00428340(id, 1, line);
 					}
 					r = 1;

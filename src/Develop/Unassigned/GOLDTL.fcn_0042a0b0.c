@@ -7,7 +7,7 @@ void __cdecl fcn_0042a350(void);
 __declspec(dllimport) void __stdcall AIL_shutdown(void);
 extern int g_6b7f90;
 
-int __cdecl fcn_0042a0b0(void)
+int __cdecl msx_ShutdownAIL(void)
 {
 	int r = 0;
 

@@ -1,9 +1,6 @@
 
 
 
-extern char g_6a8428[];
-extern char g_6a840c[];
-extern char g_6a83f8[];
 extern int g_7749f8[];
 
 int* __cdecl m_alloc(int size, char* tag);
@@ -18,7 +15,7 @@ int* __cdecl fcn_00580d50(void)
 	char* fdest;
 	int flen;
 
-	p = m_alloc(0x74, g_6a8428);
+	p = m_alloc(0x74, "FTInitMainIntro");
 	fdest = (char*) p;
 	if (p == 0) {
 		fcn_00580cf0(0);
@@ -46,7 +43,7 @@ int* __cdecl fcn_00580d50(void)
 	p[1] = 0x494e5452;
 	p[2] = 4;
 	p[3] = 0x3f24;
-	p[4] = (int) g_6a83f8;
+	p[4] = (int) "TUTORIAL_MAIN_INTRO";
 	p[5] = 0;
 	p[6] = 0;
 	p[7] = 0;
@@ -61,7 +58,7 @@ int* __cdecl fcn_00580d50(void)
 	p[0x1a] = 0;
 	p[0x1b] = 0;
 	p[0x1c] = 0;
-	(*(int*)g_7749f8) = fcn_004c3100(g_6a840c, 0);
+	(*(int*)g_7749f8) = fcn_004c3100("TUTORIAL_INTRO_OUTRO.sbf", 0);
 	return p;
 }
 #pragma optimize("", on)

@@ -30,7 +30,7 @@ void __cdecl fcn_00405540(unsigned char* object, int enabled)
 
 /* Returns the camera offset and rotation for one of the four character
  * views, relative to the character's node. */
-void __cdecl fcn_004055a0(char* obj, int view, float* pos, float* rot)
+void __cdecl ch_GetCameraView(char* obj, int view, float* pos, float* rot)
 {
 	if (obj == 0) {
 		return;

@@ -5,11 +5,11 @@ extern int __cdecl fcn_0051e070(void);
 extern int __cdecl io_AppendText(int id, ...);
 extern int __cdecl fcn_00472250(int obj, int a, int b);
 extern int __cdecl d2_CreateRadioGroup(int a, int b, int c, int d);
-extern void __cdecl fcn_004695a0(int obj, int a);
+extern void __cdecl d2_SelectRadioGroup(int obj, int a);
 extern int __cdecl fcn_005373e0(int proc, int a);
 extern void __cdecl fcn_00469510(int obj);
 extern void __cdecl fcn_00471e30(int obj);
-extern void __cdecl fcn_00469630(int obj);
+extern void __cdecl d2_UpdateRadioGroup(int obj);
 extern void __cdecl fcn_004b20d0(int a);
 extern void __cdecl fcn_00471af0(int obj, int a);
 extern int __cdecl fcn_004b41b0(void);
@@ -70,7 +70,7 @@ int __cdecl fcn_0053dc20(void)
 	} else {
 		goto label_53dd68;
 	}
-	fcn_004695a0(dlg, mode);
+	d2_SelectRadioGroup(dlg, mode);
 label_53dd68:
 	r = fcn_005373e0(0x53dc20, 0xc6);
 	while (1) {
@@ -84,7 +84,7 @@ label_53dd68:
 			*(int *) 0x7747b0 |= 8;
 			return again;
 		}
-		fcn_00469630(dlg);
+		d2_UpdateRadioGroup(dlg);
 		if (*(int *) 0x14ce8e0 || *(char *) 0x14cf950 == 1) {
 			*(int *) 0x774654 = 1;
 		}
@@ -110,13 +110,13 @@ label_53de0b:
 			if (*(int *) 0x7766fc == 0) {
 				mode = 2;
 label_53de37:
-				fcn_004695a0(dlg, mode);
+				d2_SelectRadioGroup(dlg, mode);
 			} else if (*(int *) 0x7766fc == 1) {
 				mode = 0;
 				goto label_53de37;
 			} else if (*(int *) 0x7766fc == 2) {
 				mode = 1;
-				fcn_004695a0(dlg, mode);
+				d2_SelectRadioGroup(dlg, mode);
 			}
 			fcn_00471af0(obj, 0);
 			v13 = fcn_004b41b0();

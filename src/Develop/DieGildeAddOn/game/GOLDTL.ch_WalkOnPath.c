@@ -31,7 +31,7 @@ void __cdecl fcn_00433780(void*);
 void __cdecl fcn_00438b40(char*, int*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_0042e540(char*);
+void __cdecl vfs_ToSlashes(char*);
 void __cdecl ch_WalkOnPathRotation(char*);
 
 /* ADDRESS: GOLDTL 0x0040a600 */
@@ -58,7 +58,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 	}
 	if (*(char*) (obj + 0x190) != 0) {
 		sprintf(buf, g_675504, g_6753fc, inst + 0x130);
-		fcn_0042e540(buf);
+		vfs_ToSlashes(buf);
 		anim = *(char**) (inst + 0x70);
 		if (anim != 0) {
 			fcn_00435500(*(char**) (*(char**) (*(char**) (obj + 0x14) + 0x34) + 0x1ec) + 0xf4,

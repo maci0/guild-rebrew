@@ -12,7 +12,7 @@ int __cdecl fcn_005155e0(char*);
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00406670(char*, char*);
-char* __cdecl fcn_0040b730(char*, char*);
+char* __cdecl ch_QueueWalkToDummy(char*, char*);
 char* __cdecl fcn_0040c120(char*, int, int);
 
 
@@ -56,7 +56,7 @@ int __cdecl cm_ExChrWalkToDummy(char* a1, char* a2)
 		if (w == 0)
 			return 4;
 		fcn_00406670(o, "sitzend/aufstehen");
-		q = fcn_0040b730(o, w);
+		q = ch_QueueWalkToDummy(o, w);
 		if (q != 0)
 			strcpy(q + 0x70, "cm_ExChrWalkToDummy");
 	} else {

@@ -18,7 +18,7 @@ char* __cdecl d3_LoadAnimStream(char* name, char* a, int b)
 
 	strcpy(buf, g_67ac98);
 	strcat(buf, name);
-	o = fcn_00433ba0(a);
+	o = d3_FindAnimByName(a);
 	if (o != 0) {
 		sprintf(buf, g_67b04c, name);
 		return o;

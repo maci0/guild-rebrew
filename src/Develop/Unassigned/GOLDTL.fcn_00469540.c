@@ -3,7 +3,7 @@ extern char* g_1015ea0;
 extern Group_102cbc4 g_102cbc4[8];
 
 /* ADDRESS: GOLDTL 0x00469540 */
-void __cdecl fcn_00469540(int g, int flag)
+void __cdecl d2_SetRadioGroupEnabled(int g, int flag)
 {
 	int j;
 

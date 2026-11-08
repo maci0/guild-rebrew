@@ -30,7 +30,7 @@ extern char s_67d46c[];
 
 #include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_00465950(char* name);
-void __cdecl fcn_00469900(int def);
+void __cdecl d2_AddRefcount(int def);
 int __cdecl fcn_00469890(void);
 
 /* ADDRESS: GOLDTL 0x00466cb0 */
@@ -66,7 +66,7 @@ int __cdecl fcn_00466cb0(int x, int y, int def, unsigned char flags)
 	f->flags = flags | 0x100;
 	f->used = 1;
 	f->font = fcn_00465950(s_67d474);
-	fcn_00469900(def);
+	d2_AddRefcount(def);
 	if (flags & 2) {
 		char buf[24];
 

@@ -2,9 +2,9 @@
 
 extern int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...);
 extern int __cdecl fcn_00435500();
-extern int __cdecl fcn_00434760();
-extern int __cdecl fcn_00433ba0();
-extern int __cdecl fcn_00413120();
+extern int __cdecl d3_ReleaseAnim();
+extern int __cdecl d3_FindAnimByName();
+extern int __cdecl d3_RemoveObjectAnim();
 extern int __cdecl fcn_00413190();
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 extern int __cdecl fcn_004032b0();
@@ -39,11 +39,11 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	if (*(int*) (obj + 0x7c) != 0) {
 		fcn_0064d41a(buf, (char*) 0x67553c, obj);
 		fcn_00435500(*(int*) (*(int*) (obj + 0x34) + 0x1ec) + 0xf4, buf);
-		r = fcn_00433ba0(buf);
-		fcn_00434760(r, 1);
+		r = d3_FindAnimByName(buf);
+		d3_ReleaseAnim(r, 1);
 		*(int*) (obj + 0x7c) = 0;
 	}
-	fcn_00413120(*(int*) (obj + 0x34));
+	d3_RemoveObjectAnim(*(int*) (obj + 0x34));
 	*(int*) (obj + 0x80) = 0;
 	*(int*) (obj + 0x7c) = 0;
 	*(int*) (obj + 0x70) = 0;

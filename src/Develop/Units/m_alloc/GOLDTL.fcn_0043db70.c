@@ -39,7 +39,7 @@ extern unsigned long g_14ce728;
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x0043db70 */
-void __cdecl fcn_0043db70(char* e)
+void __cdecl PrepareFloorWater(char* e)
 {
 	char flag;
 	int v17, v16, v15, v14, v13, v12, v11, v10, v9, v8, v6, v5, v4, v2, v1, v0;

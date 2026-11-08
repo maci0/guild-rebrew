@@ -9,7 +9,7 @@ float __cdecl fcn_00444700(int h, float* pos);
 char* __cdecl fcn_0040c120(char* e, int kind, ...);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040ddc0(char** a, char** b)
+int __cdecl LookAtObject(char** a, char** b)
 {
 	float pos[4];
 	float f;

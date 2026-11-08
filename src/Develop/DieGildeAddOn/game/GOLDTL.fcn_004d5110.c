@@ -8,7 +8,7 @@ int __cdecl gm_AccumulateTyped2(char* entity);
 int __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
 int __cdecl fcn_004c51f0(int a1, int a2, int a3, int a4, char a5, int a6);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
-unsigned int __cdecl fcn_004e6cb0(unsigned int n);
+unsigned int __cdecl cut_RandMod(unsigned int n);
 int __cdecl _ftol(void);
 char* __cdecl gm_NextEntityQueryMatch(void);
 short* __cdecl gm_GetEntityTableEntry(char* entity);
@@ -29,12 +29,12 @@ int __cdecl fcn_004d5110(char* a1, char* a2, char* a3, char* a4)
 	if (v >= 0x9c400) {
 		v = 0x9c400;
 	}
-	v = (int) (((double) fcn_004e6cb0(0x32) * g_662a20 + g_664f18) * v);
+	v = (int) (((double) cut_RandMod(0x32) * g_662a20 + g_664f18) * v);
 	fcn_004c5150(*(int*) (a3 + 4), *(int*) (a4 + 4), g_773d75, v);
 	if (p2 != 0 && p1 != 0) {
 		match = fcn_00502cd0(*(int*) (p2 + 0x14), 1, 5);
 		while (match != 0) {
-			delay = (int) (((double) (fcn_004e6cb0(0x14) + 0x50) * g_6640e8) * *(int*) (match + 0xe));
+			delay = (int) (((double) (cut_RandMod(0x14) + 0x50) * g_6640e8) * *(int*) (match + 0xe));
 			if (delay < 1) {
 				delay = 1;
 			}

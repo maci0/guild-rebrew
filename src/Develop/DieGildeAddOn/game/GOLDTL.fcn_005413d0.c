@@ -113,7 +113,7 @@ void __cdecl fcn_005413d0(int idx)
 		memset(h->slots, 0xff, sizeof(h->slots));
 		g_773d68++;
 		for (j = 0; j < 96; j++) {
-			if (((struct building*)g_9a9660)[j].used != 0 && fcn_004e6200(h->owner, (unsigned char*) &((struct building*)g_9a9660)[j]) != 0) {
+			if (((struct building*)g_9a9660)[j].used != 0 && cut_IsParticipant(h->owner, (unsigned char*) &((struct building*)g_9a9660)[j]) != 0) {
 				if (((struct building*)g_9a9660)[j].kind == 3 || ((struct building*)g_9a9660)[j].kind == 5 || ((struct building*)g_9a9660)[j].kind == 4
 				    || ((struct building*)g_9a9660)[j].kind == 6 || ((struct building*)g_9a9660)[j].kind == 9 || ((struct building*)g_9a9660)[j].kind == 7) {
 					cut_FreeCutscene(((struct building*)g_9a9660)[j].handle);

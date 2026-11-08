@@ -14,7 +14,7 @@ int __cdecl fcn_004ab010(unsigned short* e, Blk24* o1, Blk24* o2);
 int __cdecl fcn_004a4410(float* o1, float* o2, int a3, unsigned short* e, int a5, Blk24* a6, Blk24* a7);
 int __cdecl fcn_004a4550(float* o1, float* o2, int a3, unsigned short* e, int a5, Blk24* a6, Blk24* a7);
 
-int __cdecl fcn_0049e650(float* o1, float* o2, int a3, unsigned short* e, int skip, Blk24* a6, Blk24* a7)
+int __cdecl ai_ScoreDunkleEcke(float* o1, float* o2, int a3, unsigned short* e, int skip, Blk24* a6, Blk24* a7)
 {
 	Blk24 b1;
 	Blk24 b2;

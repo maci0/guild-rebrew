@@ -1,7 +1,7 @@
 void __cdecl fcn_004c5530(char* msg);
 
 /* ADDRESS: GOLDTL 0x004a0da0 */
-int __cdecl fcn_004a0da0(char* a1, char* x, char* y)
+int __cdecl ai_RunBerufsausbildung(char* a1, char* x, char* y)
 {
 	char msg[0xf8];
 

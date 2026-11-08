@@ -155,7 +155,7 @@ float __cdecl fcn_0050bb50(int id, unsigned char kind);
  * argument shapes come from their own definitions; see conflicts above. */
 int __cdecl fcn_00497ec0(int action, short* target, int a2, Cmd* out1,
     Cmd* out2);
-int __cdecl fcn_0049e900(int code, short* target, char* ent, char* out1,
+int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
     char* out2);
 int __cdecl fcn_004a4bb0(int action, short* ent, int mode, Cmd* cmd,
     Cmd* out, int want);

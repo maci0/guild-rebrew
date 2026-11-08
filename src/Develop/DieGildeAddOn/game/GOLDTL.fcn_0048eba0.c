@@ -47,7 +47,7 @@ int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
  * availability select either a pickup or a drop message, and one slot is
  * picked at random. */
 /* ADDRESS: GOLDTL 0x0048eba0 */
-int __cdecl fcn_0048eba0(int kind, char* e, int busy, Msg* a, Msg* b)
+int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b)
 {
 	Slot slot[0xf];
 	Counts cnt;

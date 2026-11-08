@@ -8,7 +8,7 @@ int __cdecl fcn_0050d170(int);
 int __cdecl fcn_004a4bb0(int, char*, int, void*, void*, int);
 
 /* ADDRESS: GOLDTL 0x0049d300 */
-int __cdecl fcn_0049d300(int a0, unsigned short* a1, int a2,
+int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 	unsigned int* a3, unsigned int* a4)
 {
 	int ptrs[6];

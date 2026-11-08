@@ -4,7 +4,7 @@ int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, 
 int __cdecl fcn_004a4550(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x004a03d0 */
-int __cdecl fcn_004a03d0(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7)
+int __cdecl ai_ScoreUpgradeZunft(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7)
 {
 	unsigned char c;
 	char* g;

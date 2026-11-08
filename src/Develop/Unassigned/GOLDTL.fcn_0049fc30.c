@@ -2,7 +2,7 @@ void __cdecl fcn_004eb780(int, int*);
 
 
 /* ADDRESS: GOLDTL 0x0049fc30 */
-int __cdecl fcn_0049fc30(int a, char* e)
+int __cdecl ai_RunZunftAufruhr(int a, char* e)
 {
 	int msg[5];
 

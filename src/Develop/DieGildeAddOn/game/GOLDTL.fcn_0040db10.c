@@ -7,7 +7,7 @@ extern char g_6761c8[];
 void __cdecl fcn_00425bf0(int*, int, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
-int __cdecl fcn_0040db10(void* a1)
+int __cdecl StopCharacter(void* a1)
 {
 	void* p;
 

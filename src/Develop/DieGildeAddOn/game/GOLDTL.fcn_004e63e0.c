@@ -15,7 +15,7 @@ int __cdecl cut_CheckMaster(int* a1)
 	int i;
 	int r;
 
-	if (fcn_004e6200(a1[3], (unsigned char*) a1) == 0) {
+	if (cut_IsParticipant(a1[3], (unsigned char*) a1) == 0) {
 		flag = 1;
 		e = gm_LookupEntityRecordById(a1[3]);
 		fcn_0064d41a(buf, "cut_CheckMaster(): invalid master for id %i", a1[0]);

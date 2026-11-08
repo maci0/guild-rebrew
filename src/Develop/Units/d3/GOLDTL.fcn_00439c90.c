@@ -53,7 +53,7 @@ void __cdecl fcn_00439c90(char* o)
 	slots = (Slot*) (o + 0x390);
 	for (i = 0; i < 3; i++) {
 		if (slots[i].name != 0) {
-			fcn_00434760(slots[i].name, 0);
+			d3_ReleaseAnim(slots[i].name, 0);
 			slots[i].name = 0;
 		}
 	}

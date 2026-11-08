@@ -11,7 +11,7 @@ float __cdecl fcn_00451380(float* a, float* b);
 void __cdecl fcn_00438cb0(char* h, float* v);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040de40(char** a, char** b)
+int __cdecl SetCharacterToDummy(char** a, char** b)
 {
 	float v[3];
 	float c[3];

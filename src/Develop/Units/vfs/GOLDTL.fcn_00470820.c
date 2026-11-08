@@ -17,10 +17,10 @@ extern char* g_14a5320[];
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, int root);
 int __cdecl vfs_ReadData(char* buf, int size, int count, void* stream);
-int __cdecl fcn_00430a80(void* f, int off, int whence);
+int __cdecl vfs_fseek(void* f, int off, int whence);
 void __cdecl CloseVfsStream(void* f);
 int __cdecl fcn_00465950(const char* name);
-void __cdecl fcn_00469900(int a0);
+void __cdecl d2_AddRefcount(int a0);
 int __cdecl fcn_0046f100(int a, int b, int c, int d, int e, int f);
 int __cdecl fcn_0046e940(int a, int b, int c, int d, int e);
 void __cdecl d2_SetBackgroundTexture(const char* name, int win);
@@ -109,7 +109,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 	v23[4] = 0;
 	if (v40 != 2) {
 		v40 = 0;
-		fcn_00430a80((void*) v15, 0, 0);
+		vfs_fseek((void*) v15, 0, 0);
 		vfs_ReadData((char*) &v24, 4, 1, (void*) v15);
 		vfs_ReadData((char*) 0x6b8b00, 0xed4, v24, (void*) v15);
 	} else {
@@ -223,7 +223,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 						(char*) v26 + 0xed4);
 					*(unsigned int*) (v11 + 0x10162d8) =
 						v12;
-					fcn_00469900(v12);
+					d2_AddRefcount(v12);
 				}
 				v13 = v26[0x3c6];
 				v5 = *(short*) ((char*) v26 + 0xf16);

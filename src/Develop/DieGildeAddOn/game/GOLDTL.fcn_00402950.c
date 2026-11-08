@@ -21,7 +21,7 @@ extern int g_6b5c24;
 void __cdecl ch_SetVisible(char* e, int on);
 void __cdecl fcn_0043a3f0(char* o, int v, V402950 c);
 
-void __cdecl fcn_00402950(char* e, char b)
+void __cdecl ch_StartFade(char* e, char b)
 {
 	int i;
 	V402950 v;

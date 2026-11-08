@@ -30,7 +30,7 @@ void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 
-int __cdecl fcn_0049edb0(char* a1, char* a2, char* a3)
+int __cdecl ai_RunKreditNehmen(char* a1, char* a2, char* a3)
 {
 	char* p1;
 	char* p2;

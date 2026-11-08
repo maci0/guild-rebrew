@@ -236,3 +236,7 @@ impl = ""
 
 [specials.fcn_00406120]
 impl = ""
+
+# The GOLD source translation unit supplies this definition.
+[specials.fcn_005af320]
+impl = ""

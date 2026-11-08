@@ -3,7 +3,7 @@
 
 /* Name inferred from the task allocation and animation callback. */
 
-void* __cdecl fcn_0040c0a0(char*);
+void* __cdecl ch_NewAction(char*);
 void __cdecl fcn_00406410(char*);
 
 char* __cdecl CreateAnimationEvent(char* owner, char* name)
@@ -12,7 +12,7 @@ char* __cdecl CreateAnimationEvent(char* owner, char* name)
 	char* d;
 	char* s;
 
-	obj = (unsigned char*) fcn_0040c0a0(owner);
+	obj = (unsigned char*) ch_NewAction(owner);
 	if (obj == 0) {
 		return 0;
 	}

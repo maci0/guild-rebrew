@@ -8,7 +8,7 @@ void __cdecl fcn_00451720(float* out, char* base, float* a, float* b);
 char* __cdecl fcn_0040c120(char* e, int kind, ...);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040dcd0(char** a, char** b)
+int __cdecl LookAtCharacter(char** a, char** b)
 {
 	float d;
 	float v[3];

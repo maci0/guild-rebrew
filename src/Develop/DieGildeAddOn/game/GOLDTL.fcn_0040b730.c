@@ -6,7 +6,7 @@ char __cdecl fcn_0045b990(char* g, float* v, int* a, int* b, int* c);
 int __cdecl fcn_00413190(char* p);
 char* __cdecl fcn_0040c120(char* e, int kind, int a, int b, int c);
 
-char* __cdecl fcn_0040b730(char* owner, char* e)
+char* __cdecl ch_QueueWalkToDummy(char* owner, char* e)
 {
 	char* result;
 	char* g;

@@ -4,7 +4,7 @@
 
 #include "Develop/Units/d3/d3_animation.h"
 
-void __cdecl fcn_0042e540(char*);
+void __cdecl vfs_ToSlashes(char*);
 
 /* ADDRESS: GOLDTL 0x00404b60 */
 void __cdecl fcn_00404b60(char* obj, int n, ...)
@@ -24,8 +24,8 @@ void __cdecl fcn_00404b60(char* obj, int n, ...)
 		}
 		sprintf(path, "lowpolycharacter/%s/%s_%s_LOW.baf", obj + 0x230, name, obj + 0x230);
 		sprintf(low, "%s_%s_LOW.baf", name, obj + 0x230);
-		fcn_0042e540(low);
-		if (fcn_00433ba0(low) == 0 && d3_LoadAnimStream(path, low, 1) == 0) {
+		vfs_ToSlashes(low);
+		if (d3_FindAnimByName(low) == 0 && d3_LoadAnimStream(path, low, 1) == 0) {
 			continue;
 		}
 		memset(&opt, 0, sizeof(opt));

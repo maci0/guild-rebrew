@@ -18,7 +18,7 @@ int __cdecl fcn_0050b810(int a, char b);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 /* ADDRESS: GOLDTL 0x004ab910 */
-int __cdecl fcn_004ab910(int a1, unsigned short* a2, int a3, char* a4)
+int __cdecl ai_StartVerfluchen(int a1, unsigned short* a2, int a3, char* a4)
 {
 	int lim;
 	unsigned short id;

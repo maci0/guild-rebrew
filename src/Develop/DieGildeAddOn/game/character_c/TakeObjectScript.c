@@ -23,7 +23,7 @@ char __cdecl fcn_00443900(void*, void*, void*);
 void __cdecl fcn_00438c40(void*, float*);
 int __cdecl fcn_00413190(void*);
 void __cdecl fcn_00402aa0(char*);
-void __cdecl fcn_0040cfb0();
+void __cdecl ch_RunAnimationScript();
 char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
@@ -49,8 +49,8 @@ char __cdecl fcn_00442c00(char*, char);
 
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl fcn_00438cb0(char*, float*);
-void __cdecl fcn_0042e540(char*);
-int __cdecl fcn_00413120(char*);
+void __cdecl vfs_ToSlashes(char*);
+int __cdecl d3_RemoveObjectAnim(char*);
 
 
 
@@ -90,7 +90,7 @@ int __cdecl TakeObjectScript(char** ch, char** ani, int* kind, char** dummy, uns
 		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "TakeObjectScript(): Invalid dummy");
 		return 1;
 	}
-	task = fcn_0040c230(*ch, fcn_0040cfb0, *level, 0x31, *kind);
+	task = fcn_0040c230(*ch, ch_RunAnimationScript, *level, 0x31, *kind);
 	if (task != 0) {
 		strcpy(task + 0xf0, *ani);
 		if (*dummy != 0 && *(D3_OBJECT_DRAW_DATA**) (*dummy + 0x1ec) != 0 && (*(D3_OBJECT_DRAW_DATA**) (*dummy + 0x1ec))->teile[0].name != 0) {

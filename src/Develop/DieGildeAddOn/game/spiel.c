@@ -2161,13 +2161,13 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 		if (type != 0x136) {
 			choice = (unsigned short) gm_RandomMod(3);
 			if (choice == 0)
-				model = fcn_00403b90("arbeiter_KARREN", position);
+				model = ch_CreateAtPosition("arbeiter_KARREN", position);
 			else if (choice == 1)
-				model = fcn_00403b90("holzfaeller_KARREN", position);
+				model = ch_CreateAtPosition("holzfaeller_KARREN", position);
 			else
-				model = fcn_00403b90("handwerker_KARREN", position);
+				model = ch_CreateAtPosition("handwerker_KARREN", position);
 		} else {
-			model = fcn_00403b90("pferd_PFERD", position);
+			model = ch_CreateAtPosition("pferd_PFERD", position);
 		}
 		*(char**) (slot + 0x3b) = model;
 		fcn_00404a00(model, 1, "bewegung/karren_ziehen");

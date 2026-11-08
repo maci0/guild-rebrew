@@ -12,7 +12,7 @@ void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_004c5530(char* msg);
 
 /* ADDRESS: GOLDTL 0x004abb10 */
-int __cdecl fcn_004abb10(char* a0, char* a1)
+int __cdecl ai_RunVerfluchen(char* a0, char* a1)
 {
 	char msg[0xf8];
 

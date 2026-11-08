@@ -26,7 +26,7 @@ int __cdecl fcn_0050d320(char* e, char k);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
 
-int __cdecl fcn_0049fad0(int a1, char* e, int a3, char* out)
+int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 {
 	int v;
 	int found;

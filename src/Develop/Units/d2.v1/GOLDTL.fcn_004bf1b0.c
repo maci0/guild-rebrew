@@ -27,7 +27,7 @@ void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472830(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
-void __cdecl fcn_004695a0(int, int);
+void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
@@ -230,7 +230,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 					fcn_004be3d0(a1, rec, g_772908, (int) a0);
 					a0 = (int*) a0[0xf];
 				}
-				fcn_004695a0(g_6816d8, 0);
+				d2_SelectRadioGroup(g_6816d8, 0);
 				g_774654 = 1;
 			}
 		}

@@ -18,7 +18,7 @@ extern int __cdecl fcn_00471e30(void*);
 extern int __cdecl fcn_00471f80(void*);
 extern int __cdecl fcn_00472250(void*, int, int);
 extern int __cdecl fcn_00472380(void*, char*);
-extern int __cdecl fcn_00472770(void*, int);
+extern int __cdecl d2_SetBildArgument(void*, int);
 extern int __cdecl fcn_004727a0(void*, int);
 extern int __cdecl fcn_00474cf0(void*);
 extern int __cdecl fcn_00469e30(int);
@@ -173,7 +173,7 @@ int __cdecl fcn_005926f0(void)
 	fcn_00593550();
 	fcn_004727a0(g_6a9b9c, 1);
 	h = (void*)fcn_00472250(g_6a9b9c, 0, 0);
-	fcn_00472770(h, 0x40);
+	d2_SetBildArgument(h, 0x40);
 	flag = 0;
 	fcn_00472380(h, (char*)0x6b5c60);
 	*(int*)((char*)g_1015ea0 + (int)h * 0x2f4 + 0x18) = 0x26c;

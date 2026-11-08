@@ -18,7 +18,7 @@ void __cdecl fcn_004e44f0(int a1);
 int __cdecl fcn_004e4ae0(char* name, int a2);
 int __cdecl fcn_004e4b20(int a1, int a2, char* name, int mode);
 int __cdecl fcn_00420780(char* snd, int flag);
-int __cdecl fcn_004e6cb0(int n);
+int __cdecl cut_RandMod(int n);
 void __cdecl fcn_004e4e90(char* snd);
 int __cdecl fcn_00423460(int a1);
 void __cdecl fcn_004e4c90(int dur);
@@ -199,7 +199,7 @@ int __cdecl fcn_004dcf50(int a0)
 	if (g_772f3c == 0) {
 		msg.hnd[7] = fcn_00420780("Athmos\\Athmo_sitzung.mp3", 0x40);
 	}
-	if (fcn_004e6cb0(2) != 0) {
+	if (cut_RandMod(2) != 0) {
 		fcn_004e4e90("cd2\\ArmerDelinquent.mp3");
 	} else {
 		fcn_004e4e90("cd2\\ImKerker.mp3");
@@ -295,7 +295,7 @@ int __cdecl fcn_004dcf50(int a0)
 					fcn_004e4c90(1);
 				}
 				fcn_004e4c90(1);
-				fcn_004e6cb0(0x1e);
+				cut_RandMod(0x1e);
 				io_AppendText(0x6811b0);
 				fcn_004e44f0(h);
 			}
@@ -410,8 +410,8 @@ int __cdecl fcn_004dcf50(int a0)
 		d2_SetForm(g_68bfc0, 0);
 		io_AppendText(0x6811b0);
 		if (st == 1) {
-			rnd = fcn_004e6cb0(6);
-			votes = fcn_004e6cb0(6);
+			rnd = cut_RandMod(6);
+			votes = cut_RandMod(6);
 			msg.hnd[2] = fcn_004e4ae0("PROZESS_4_FOLTER_1.sbf", 0);
 			msg.hnd[5] = fcn_004e4ae0("PROZESS_4_FOLTER_2.sbf", 0);
 			fcn_004e4b40(*(unsigned short*) p34, msg.hnd[2], "_PROZESS_4_FOLTER_1", rnd, 0x32);
@@ -557,7 +557,7 @@ int __cdecl fcn_004dcf50(int a0)
 			fcn_004e4c90(5);
 			fcn_004e4450(g_68bfc0, 1);
 			d2_SetForm(g_68bfc0, 0);
-			rnd = fcn_004e6cb0(5);
+			rnd = cut_RandMod(5);
 			fcn_004e4b40(*(unsigned short*) p34, msg.hnd[3], buf, rnd, 0x320);
 			io_AppendText(0x6811b0);
 			io_AppendText(0x14ec, tbl.i[msg.pad[3]] + rnd);
@@ -568,7 +568,7 @@ int __cdecl fcn_004dcf50(int a0)
 			fcn_004e4450(g_68bfc0, 1);
 			d2_SetForm(g_68bfc0, 0);
 			if (msg.pad[7] != 0) {
-				rnd = fcn_004e6cb0(0xa);
+				rnd = cut_RandMod(0xa);
 				fcn_004e4b40(*(unsigned short*) p38, msg.hnd[4], "_PROZESS_5_FOLTER2_GESTEHEN", rnd, 0);
 				fcn_004e4b40(*(unsigned short*) p38, msg.hnd[1], "_PROZESS_5_FOLTER2_WEITER", 0, 0x1f4);
 				fcn_004e4450(g_68bfc0, 1);
@@ -581,7 +581,7 @@ int __cdecl fcn_004dcf50(int a0)
 				didFolter = 1;
 			} else {
 				didFolter = 0;
-				rnd = fcn_004e6cb0(6);
+				rnd = cut_RandMod(6);
 				fcn_004e4450(g_68bfc0, 1);
 				d2_SetForm(g_68bfc0, 0);
 				io_AppendText(0x6811b0);
@@ -668,7 +668,7 @@ int __cdecl fcn_004dcf50(int a0)
 	io_AppendText(0x1528, *(unsigned short*) p3c);
 	fcn_004e4c90(2);
 	acc = *(int*) (g_9b0eb4 + i * 0x35c);
-	votes = fcn_004e6cb0(3) + *(int*) (g_9b0eb4 + i * 0x35c) * 3;
+	votes = cut_RandMod(3) + *(int*) (g_9b0eb4 + i * 0x35c) * 3;
 	fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_6_ABSTIMMUNG_ERGEBNISSE", votes, 0x64);
 	io_AppendText(acc + 0x152c);
 	fcn_004e4c90(2);
@@ -684,7 +684,7 @@ int __cdecl fcn_004dcf50(int a0)
 		io_AppendText(0x1528, *(unsigned short*) nam);
 		fcn_004e4c90(2);
 		io_AppendText(x74 + 0x152c);
-		votes = fcn_004e6cb0(3) + *(int*) (g_9b1210 + i * 0x35c) * 3;
+		votes = cut_RandMod(3) + *(int*) (g_9b1210 + i * 0x35c) * 3;
 		fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_6_ABSTIMMUNG_ERGEBNISSE", votes, 0x64);
 		fcn_004e4c90(2);
 		acc += *(int*) (g_9b1210 + i * 0x35c);
@@ -699,7 +699,7 @@ int __cdecl fcn_004dcf50(int a0)
 		io_AppendText(0x1528, *(unsigned short*) nam);
 		fcn_004e4c90(2);
 		io_AppendText(x74 + 0x152c);
-		votes = fcn_004e6cb0(3) + *(int*) (g_9b156c + i * 0x35c) * 3;
+		votes = cut_RandMod(3) + *(int*) (g_9b156c + i * 0x35c) * 3;
 		fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_6_ABSTIMMUNG_ERGEBNISSE", votes, 0x64);
 		fcn_004e4c90(2);
 		acc += *(int*) (g_9b156c + i * 0x35c);

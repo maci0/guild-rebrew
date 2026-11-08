@@ -19,7 +19,7 @@ typedef struct S00469900 {
 extern char* g_772500;
 extern int g_6b7fac;
 
-void __cdecl fcn_00469900(int i)
+void __cdecl d2_AddRefcount(int i)
 {
 	S00469900* e;
 	int kind;

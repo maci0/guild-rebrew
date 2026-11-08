@@ -8,7 +8,7 @@ extern void __cdecl fcn_004a4410(void* a0, void* a1, int a2, int a3, int a4, int
 
 
 /* ADDRESS: GOLDTL 0x0049c800 */
-void __cdecl fcn_0049c800(int* a0, int* a1, int a2, int a3, int a4, int a5, int a6)
+void __cdecl ai_ScoreDrohen(int* a0, int* a1, int a2, int a3, int a4, int a5, int a6)
 {
 	Stat0049c800 st;
 

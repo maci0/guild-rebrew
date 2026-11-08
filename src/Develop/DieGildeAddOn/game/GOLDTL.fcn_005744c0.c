@@ -2,7 +2,7 @@ char __cdecl fcn_00413680(int, int, void*, void*);
 int __cdecl fcn_00415300(int);
 int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
 int __cdecl fcn_00426cc0(int);
-int __cdecl fcn_00426fd0(char*);
+int __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(int, int, ...);
 int __cdecl fcn_00428720(int);
 void __cdecl fcn_00429670(int);
@@ -236,7 +236,7 @@ LfailB:
 				v8 = v18[v11];
 				v14 = (unsigned char*) fcn_00445600(*(int*) (v13 + 0x61), 0x100, 0, 0x68149c);
 				if (v8 && *(int*) (v8 + 0x218) != 1 && v14) {
-					v24 = fcn_00426fd0((char*) 0x6a7dd4);
+					v24 = evt_LoadGfxScript((char*) 0x6a7dd4);
 					if (v24) {
 						fcn_00428340(v24, 4, v14, v8, 0x573d90, v5);
 						*(int*) (v24 + 0x104) = 0;
@@ -333,7 +333,7 @@ LfailB:
 				}
 				v11 += 0xa9;
 			} while (v11 < 0xa900);
-			if (v13 && v8 && (v24 = fcn_00426fd0((char*) 0x6a7db8)) != 0) {
+			if (v13 && v8 && (v24 = evt_LoadGfxScript((char*) 0x6a7db8)) != 0) {
 				fcn_00428340(v24, 3, v8, v13, 2);
 				*(int*) (v24 + 0xc8c) = 1;
 				*(int*) (v24 + 0x104) = 0;
@@ -402,7 +402,7 @@ LfailB:
 			if (*(int*) (*(int*) (v15 + 0x61) + 0x1ec)) {
 				if (fcn_00413680(*(int*) (v15 + 0x61), *(int*) 0x6b8014, v17, &v21)) {
 					v31 = (int) (v21 * 1.8);
-					v8 = fcn_00426fd0((char*) 0x6a7da0);
+					v8 = evt_LoadGfxScript((char*) 0x6a7da0);
 					if (v8) {
 						fcn_00428340(v8, 6, (int) v17[0], (int) v17[1], (int) v17[2],
 							(int) v21, v31, *(int*) (v15 + 0x61));

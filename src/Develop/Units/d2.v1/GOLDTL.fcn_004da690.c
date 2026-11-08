@@ -27,7 +27,7 @@ int __cdecl fcn_005ca740(int, int, int, int, int *, int);
 void __cdecl fcn_004da510(int, int, int);
 int __cdecl fcn_004e4b40(int, ...);
 int __cdecl io_AppendText(char *, ...);
-unsigned int __cdecl fcn_004e6cb0(unsigned int, ...);
+unsigned int __cdecl cut_RandMod(unsigned int, ...);
 int __cdecl fcn_0046f2c0(int, int);
 int __cdecl fcn_004e51d0(unsigned int *, void *);
 int __cdecl fcn_004e9180(void *, int);
@@ -387,30 +387,30 @@ void __cdecl fcn_004da690(unsigned int *a0)
                             switch (*(int *)s80) {
                             case 0:
                                 fcn_004e4b40(*(unsigned short *)s58, s34, 0x68c0e0,
-                                             (int)fcn_004e6cb0(4), 0x64);
+                                             (int)cut_RandMod(4), 0x64);
                                 io_AppendText((char *)0x12c8);
                                 if (*(int *)(s80 + 4) == 1)
-                                    io_AppendText((char *)((int)fcn_004e6cb0(2, *(unsigned short *)s18) + 0x12cb));
+                                    io_AppendText((char *)((int)cut_RandMod(2, *(unsigned short *)s18) + 0x12cb));
                                 else if (*(int *)(s80 + 4) == 2)
-                                    io_AppendText((char *)((int)fcn_004e6cb0(2, *(unsigned short *)s18) + 0x12cf));
+                                    io_AppendText((char *)((int)cut_RandMod(2, *(unsigned short *)s18) + 0x12cf));
                                 fcn_004727a0(s60, 2);
                                 fcn_004da510(*(int *)0x772514, 0, 0);
                                 break;
                             case 1:
                                 fcn_004e4b40(*(unsigned short *)s58, s34, 0x68c0d0,
-                                             (int)fcn_004e6cb0(4), 0x64);
+                                             (int)cut_RandMod(4), 0x64);
                                 io_AppendText((char *)0x12ca);
                                 if (*(int *)(s80 + 4) == 1)
-                                    io_AppendText((char *)((int)fcn_004e6cb0(2, *(unsigned short *)s18,
+                                    io_AppendText((char *)((int)cut_RandMod(2, *(unsigned short *)s18,
                                                                              *(unsigned short *)s10) + 0x12cd));
                                 else if (*(int *)(s80 + 4) == 2)
-                                    io_AppendText((char *)((int)fcn_004e6cb0(2, *(unsigned short *)s10) + 0x12d1));
+                                    io_AppendText((char *)((int)cut_RandMod(2, *(unsigned short *)s10) + 0x12d1));
                                 fcn_004727a0(s60, 2);
                                 fcn_004da510(*(int *)0x772514, 0, 1);
                                 break;
                             default:
                                 fcn_004e4b40(*(unsigned short *)s58, s34, 0x68c0b8,
-                                             (int)fcn_004e6cb0(4), 0x64);
+                                             (int)cut_RandMod(4), 0x64);
                                 io_AppendText((char *)0x12c9);
                                 fcn_004727a0(s60, 2);
                                 fcn_004da510(*(int *)0x772514, 0, 2);
@@ -425,7 +425,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                 }
                 /* native 0x4db332..0x4db5c5: vote result text and packet pass */
                 if (s48 > s4C) {
-                    fcn_004e4b40(-8, s60, 0x68c098, (int)fcn_004e6cb0(3), 0x64);
+                    fcn_004e4b40(-8, s60, 0x68c098, (int)cut_RandMod(3), 0x64);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12d6, (char *)s48, (char *)s4C,
@@ -451,7 +451,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                     }
                 } else {
                     s70 = gm_LookupEntityRecordById(*(int *)s00);
-                    fcn_004e4b40(-8, s60, 0x68c074, (int)fcn_004e6cb0(3), 0x64);
+                    fcn_004e4b40(-8, s60, 0x68c074, (int)cut_RandMod(3), 0x64);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12d7, (char *)s48, (char *)s4C,
@@ -647,7 +647,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                     }
                 } else if (rs20 == 0) {
                     /* native 0x4dbbed: count == 0, single picked row */
-                    s68 = (int)fcn_004e6cb0((unsigned int)rs20);
+                    s68 = (int)cut_RandMod((unsigned int)rs20);
                     fcn_004e4b40(-8, s38, 0x68c038, 1, 0x64);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
@@ -755,7 +755,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                         }
                     } else if (s6C != -1) {
                         /* native 0x4dbfd5: tie, walk forward modulo rs20 */
-                        s78 = (int)fcn_004e6cb0((unsigned int)rs20);
+                        s78 = (int)cut_RandMod((unsigned int)rs20);
                         i = rs20;
                         do {
                             if (blkA.s54[s78] == s68) {

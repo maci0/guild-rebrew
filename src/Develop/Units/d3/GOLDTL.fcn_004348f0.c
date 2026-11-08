@@ -30,7 +30,7 @@ char __cdecl fcn_004348f0(int need, int have)
 			return 0;
 		}
 		have -= fcn_004346f0(best);
-		fcn_00434760(best, 1);
+		d3_ReleaseAnim(best, 1);
 	}
 	return 1;
 }

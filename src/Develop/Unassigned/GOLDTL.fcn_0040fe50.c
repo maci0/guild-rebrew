@@ -8,7 +8,7 @@ typedef struct {
 
 void __cdecl fcn_00425bf0(void*, int, char*);
 
-int __cdecl fcn_0040fe50(S40fe50** a1, char* a2)
+int __cdecl SetTransient(S40fe50** a1, char* a2)
 {
 	S40fe50* p;
 

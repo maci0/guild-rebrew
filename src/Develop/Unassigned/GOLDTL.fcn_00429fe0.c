@@ -2,7 +2,7 @@ extern int g_6791d0;
 
 
 
-void* __cdecl fcn_00426fd0(int);
+void* __cdecl evt_LoadGfxScript(int);
 void __cdecl evt_RunScript(void*);
 
 int __cdecl fcn_00429fe0(int a1, int a2, int a3)
@@ -10,7 +10,7 @@ int __cdecl fcn_00429fe0(int a1, int a2, int a3)
 	int v;
 	void* p;
 
-	p = fcn_00426fd0(a3);
+	p = evt_LoadGfxScript(a3);
 	if (p != 0) {
 		evt_RunScript(p);
 		v = *(int*) ((char*) p + 0x100);

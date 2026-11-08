@@ -31,7 +31,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_0050d170(int n);
 
 /* ADDRESS: GOLDTL 0x0049d930 */
-int __cdecl fcn_0049d930(int a1, char* e, char* q, Blk24* o1, Blk24* o2)
+int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, Blk24* o2)
 {
 	int v0;
 	int v1;

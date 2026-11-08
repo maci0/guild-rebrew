@@ -16,7 +16,7 @@ extern int __cdecl io_AppendText(int a0);
 extern int __cdecl fcn_00472250(int a0, int a1, int a2);
 extern void __cdecl fcn_00533dc0(int a0, int a1, int a2);
 extern int __cdecl d2_CreateRadioGroup(int a0, int a1, int a2, int a3);
-extern int __cdecl fcn_004695a0(int a0, int a1);
+extern int __cdecl d2_SelectRadioGroup(int a0, int a1);
 extern int __cdecl _ftol(void);
 extern int __cdecl fcn_005373e0(void *a0, int a1);
 extern void __cdecl fcn_00471e30(int a0);
@@ -65,7 +65,7 @@ void __cdecl fcn_005b9980(int a0)
     d2_SetForm(h, 3);
     v5 = fcn_00472250(h, 3, io_AppendText(0xdb));
     v1 = d2_CreateRadioGroup(3, v14[0], v14[1], v14[2]);
-    fcn_004695a0(v1, 0);
+    d2_SelectRadioGroup(v1, 0);
     v16 = 35 * v1;
     do
     {

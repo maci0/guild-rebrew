@@ -19,8 +19,16 @@ prefix is attested. A `fio_` infix identifies module file I/O, as in
 | `ch_`, `ai_`, `he_`, `cut_` | Characters, AI, events, cutscenes |
 | `d2_`, `d3_`, `txt_`, `lc_`, `rd_` | UI, renderer, text, location, records |
 | `sv_`, `io_`, `init_`, `main_`, `nt_`, `ob_`, `gs_`, `am_` | Client state, I/O, startup, main loop, network, objects, court, method registry |
+| `evt_`, `ecmd_`, `hst_`, `msx_`, `sbs_` | Event scripts, event commands, script host, MSX audio, sample banks |
 
 Asset/config prefixes are not automatically function prefixes.
+
+New prefixes, each attested by a binary string, __FILE__ path or twin name:
+- `evt_` in "evt_LoadScript: Could not load script" at src/Develop/Units/vfs/GOLDTL.evt_LoadScript.c:71 and "evt_ImportCommand: Too many commands!" at src/Develop/Unassigned/GOLDTL.fcn_00429ed0.c:42.
+- `ecmd_` in "ecmd_LoadScene: Could not find scene" at src/Develop/Unassigned/GOLDTL.ecmd_LoadScene.c:9 and "ecmd_Dummy" at src/Develop/Unassigned/GOLDTL.fcn_0040c7c0.c:25.
+- `hst_` in log strings for hst_ParseContext at src/Develop/Unassigned/GOLDTL.fcn_004b2300.c:9 and in "hst_ParseText_Fake_1st_Pass() failed" at src/Develop/Unassigned/GOLDTL.fcn_004b20e0.c:7.
+- `msx_` from the `__FILE__` path "D:\develop\units\Msx\msx.c" in the assertion at src/Develop/Units/Msx/msx.c:258. The path attests the unit name, not a function spelling.
+- `sbs_` in the "sbs:CreateSB" A-strings tag for sbs_CreateSB at docs/name-ledger.tsv:62, defined at src/Develop/Units/m_alloc/GOLDTL.fcn_00423d50.c:10.
 
 ## Function naming
 
@@ -62,6 +70,12 @@ Use `rebrew source rename` with the target-qualified `MODULE.0xVA` identity wher
 spelling is ambiguous. Preview scope, providers, callers and linker anchors;
 apply the reviewed digest, then verify affected targets. Naming does not earn a
 byte verdict. [Source layout](source-layout.md) owns placement guidance.
+
+[`name-ledger.tsv`](name-ledger.tsv) lists every name assigned through a reviewed
+batch: old and new name, `attested` or `inferred`, confidence, TL/GOLD/server twins
+and the evidence. An `attested` name comes from a string, script command or twin
+symbol in the binary; an `inferred` name is a description of the verified body and
+may change when better evidence appears.
 
 The index below locates historical attestations and inference limits. Recheck the
 current managed binding before using a recorded name or address.

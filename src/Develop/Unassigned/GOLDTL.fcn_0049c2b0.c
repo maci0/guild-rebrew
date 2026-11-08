@@ -5,7 +5,7 @@ int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
 
 /* ADDRESS: GOLDTL 0x0049c2b0 */
-int __cdecl fcn_0049c2b0(int* a, char* e, int* b)
+int __cdecl ai_RunObjektKaufen(int* a, char* e, int* b)
 {
 	int n;
 

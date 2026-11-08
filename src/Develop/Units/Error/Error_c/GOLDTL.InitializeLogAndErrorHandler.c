@@ -34,6 +34,8 @@ extern char g_677ca8[];
 extern char g_677cc8[];
 LONG __stdcall fcn_0041cbc0(struct _EXCEPTION_POINTERS* info);
 
+/* ADDRESS: GOLD 0x004220b0 */
+/* ADDRESS: GOLDTL 0x0041d6b0 */
 void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned int d)
 {
 	int now;

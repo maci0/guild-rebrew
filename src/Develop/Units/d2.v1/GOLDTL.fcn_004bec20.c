@@ -11,7 +11,7 @@ int __cdecl d2_CreateRadioGroup(int);
 int __cdecl fcn_0052dee0(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl fcn_00469470(int, int);
-void __cdecl fcn_004695a0(int, int);
+void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00476b60(void);
 int __cdecl fcn_0046f2c0(int, int);
 int __cdecl fcn_00472830(int, int);
@@ -66,7 +66,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 		*(int*) (g_1015ea0 + 0x2f0 + v6 * 0x2f4) = v7;
 		fcn_00469470(k, v6);
 	}
-	fcn_004695a0(k, 0);
+	d2_SelectRadioGroup(k, 0);
 	fcn_00476b60();
 	for (;;) {
 		n = g * 0x8c;

@@ -10,7 +10,7 @@ void __cdecl fcn_00435500(char* o, char* name);
  * return, and a separate copy of the -1 epilogue. */
 
 /* ADDRESS: GOLDTL 0x00404f60 */
-int __cdecl fcn_00404f60(char* ev)
+int __cdecl ch_FinishAnimation(char* ev)
 {
 	char* obj;
 	char* an;

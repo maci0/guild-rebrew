@@ -15,7 +15,7 @@ typedef struct {
 
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-CH_ACTION* __cdecl fcn_0040c0a0(char* e);
+CH_ACTION* __cdecl ch_NewAction(char* e);
 
 CH_ACTION* __cdecl fcn_0040c230(char* e, void (__cdecl* done)(CH_ACTION* t), unsigned char level, int kind, ...)
 {
@@ -29,7 +29,7 @@ CH_ACTION* __cdecl fcn_0040c230(char* e, void (__cdecl* done)(CH_ACTION* t), uns
 	if (((Entry*)g_14d0c40)[kind].handler == 0) {
 		kind = 0;
 	}
-	t = fcn_0040c0a0(e);
+	t = ch_NewAction(e);
 	if (t == 0) {
 		return 0;
 	}
@@ -46,7 +46,7 @@ CH_ACTION* __cdecl fcn_0040c230(char* e, void (__cdecl* done)(CH_ACTION* t), uns
 	t->merkmale = 0;
 	t->abschluss = done;
 	t->stufe = level;
-	if (t->ausfuehren == fcn_004079d0) {
+	if (t->ausfuehren == ch_ExecFinishAnimation) {
 		t->parameter = (unsigned char) t->art;
 	}
 	return t;

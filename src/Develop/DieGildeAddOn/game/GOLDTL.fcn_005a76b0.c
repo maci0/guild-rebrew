@@ -20,7 +20,7 @@ void __cdecl fcn_00516c50(char*, char*);
 void __cdecl fcn_00438b40(void*, void*);
 void __cdecl fcn_00438cb0(void*, void*);
 int __cdecl fcn_00504bd0(int);
-int __cdecl fcn_00451840(void*, void*, float);
+int __cdecl CompareVector3WithinTolerance(void*, void*, float);
 void __cdecl fcn_0057e880(int, void*, int, int);
 int __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(void*);
@@ -165,9 +165,9 @@ int __cdecl fcn_005a76b0(char* o, int p2)
                 if (*(u16*) (o + 0x27) != *(u16*) 0x774970) {
                     i = fcn_00504bd0((int) *(u8*) o);
                     if (i == 1 || i == 8) {
-                        if (fcn_00451840((char*) *(void**) 0x6b8014 + 0x114,
+                        if (CompareVector3WithinTolerance((char*) *(void**) 0x6b8014 + 0x114,
                                          (void*) 0x662d70, 0.1f) == 0) {
-                            if (fcn_00451840((char*) *(void**) 0x6b8014 + 0x120,
+                            if (CompareVector3WithinTolerance((char*) *(void**) 0x6b8014 + 0x120,
                                              (void*) 0x662d70, 0.1f) == 0) {
                                 t = *(int*) 0x6b8014;
                                 fcn_00438b40((void*) t, (char*) t + 0x114);

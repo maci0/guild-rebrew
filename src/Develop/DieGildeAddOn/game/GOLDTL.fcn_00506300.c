@@ -8,7 +8,7 @@ int __cdecl fcn_00413190(int x);
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl fcn_004030e0(char* r);
 char* __cdecl gm_EntityAccumulate(char* p);
-int __cdecl fcn_00502f00(char* list, int id);
+int __cdecl gm_RemoveLinkedNodeById(char* list, int id);
 
 void __cdecl fcn_00506300(char* p)
 {
@@ -30,6 +30,6 @@ void __cdecl fcn_00506300(char* p)
 	}
 	e = gm_EntityAccumulate(p);
 	if (e != 0) {
-		fcn_00502f00(e + 0x5d, *(int*) (p + 2));
+		gm_RemoveLinkedNodeById(e + 0x5d, *(int*) (p + 2));
 	}
 }

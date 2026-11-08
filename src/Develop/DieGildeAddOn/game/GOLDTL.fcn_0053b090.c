@@ -46,7 +46,7 @@ Figure* __cdecl fcn_0053b090(char* res, char* kind, int anim)
 		return 0;
 	}
 	fcn_00455350(h, (float*) (h + 0x4c), box);
-	f = (Figure*) fcn_00403b90(kind, box);
+	f = (Figure*) ch_CreateAtPosition(kind, box);
 	if (f != 0) {
 		float pos[3];
 		float at[3];

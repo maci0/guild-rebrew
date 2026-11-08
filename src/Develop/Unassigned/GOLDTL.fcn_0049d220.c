@@ -9,7 +9,7 @@ int __cdecl fcn_004a4550(float* a0, float* a1, int a2, char* a3, int a4,
     int a5, int a6);
 
 /* ADDRESS: GOLDTL 0x0049d220 */
-int __cdecl fcn_0049d220(float* a0, float* a1, int a2, char* a3, int a4,
+int __cdecl ai_ScoreBuergermeister(float* a0, float* a1, int a2, char* a3, int a4,
     int a5, int a6)
 {
     float buf[10];

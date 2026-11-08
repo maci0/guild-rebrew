@@ -21,7 +21,7 @@ void __cdecl fcn_004e4c90(int);
 char* __cdecl fcn_0040c230(char*, void*, int, int, int);
 void __cdecl fcn_004dff50(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-float __cdecl fcn_004e6d20(void);
+float __cdecl cut_RandFloat(void);
 int __cdecl fcn_00406340(char*, const char*, int);
 
 
@@ -55,7 +55,7 @@ void __cdecl fcn_004e0210(char* e, char* foe)
 		case 3:
 			d2_SetForm(g_68bfc0, 0);
 			a = gm_GetEntitySkill(e, 2);
-			if (fcn_004e6d20() < a) {
+			if (cut_RandFloat() < a) {
 				if (e[2] == 6 || e[2] == 7) {
 					io_AppendText(0x10f6, *(unsigned short*) e);
 				} else {
@@ -86,8 +86,8 @@ void __cdecl fcn_004e0210(char* e, char* foe)
 			fcn_004e4c90(2);
 			a = gm_GetEntitySkill(e, 4);
 			b = gm_GetEntitySkill(foe, 4);
-			a += fcn_004e6d20();
-			if (fcn_004e6d20() + b < a) {
+			a += cut_RandFloat();
+			if (cut_RandFloat() + b < a) {
 				d2_SetForm(g_68bfc0, 0);
 				if (foe[2] == 6 || foe[2] == 7) {
 					io_AppendText(0x10f2, *(unsigned short*) foe);

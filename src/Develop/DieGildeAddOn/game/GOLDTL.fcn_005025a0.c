@@ -9,7 +9,7 @@ extern double g_664e78;
 extern double dbl_1_0;
 
 char* __cdecl fcn_00503d10(int id);
-char* __cdecl fcn_00503e50(int owner);
+char* __cdecl gm_FindKind47ByOwner(int owner);
 char* __cdecl fcn_00502cd0(int a, int b, ...);
 float __cdecl eval_ObjektPreis2Credits(int id, int arg);
 
@@ -33,7 +33,7 @@ float __cdecl fcn_005025a0(int season, int slot)
 	def = g_item_def_table + id * 0x41;
 	store = fcn_00503d10(id);
 	if (store == 0 && season != g_773d75) {
-		e = fcn_00503e50(season);
+		e = gm_FindKind47ByOwner(season);
 		if (e != 0) {
 			store = fcn_00502cd0(*(int*) (e + 0x5d), 2, 0, 0x1db, 6);
 		}

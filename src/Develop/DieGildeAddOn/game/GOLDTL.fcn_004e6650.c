@@ -49,7 +49,7 @@ void __cdecl fcn_004c6a70(int);
 #include "Develop/DieGildeAddOn/game/cutscene.h"
 
 /* ADDRESS: GOLDTL 0x004e6650 */
-int __cdecl fcn_004e6650(void)
+int __cdecl cut_UpdateCutscenes(void)
 {
 	Time t;
 	int i;
@@ -88,7 +88,7 @@ int __cdecl fcn_004e6650(void)
 				((Ent*)g_9a9660)[i].done = 1;
 			}
 			if (fcn_00500cb0(&(*(Time*)&g_7f4c00), &((Ent*)g_9a9660)[i].t) > 0 && ((Ent*)g_9a9660)[i].done == 0) {
-				if (fcn_004e6200(*(int *) (g_7f4ca4 + g_774970 * 0x21c), (unsigned char*) &((Ent*)g_9a9660)[i]) != 0 &&
+				if (cut_IsParticipant(*(int *) (g_7f4ca4 + g_774970 * 0x21c), (unsigned char*) &((Ent*)g_9a9660)[i]) != 0 &&
 				    (((Ent*)g_9a9660)[i].flags & 0x80) != 0) {
 					if (*(int *) (g_7f4ca4 + g_774970 * 0x21c + 0x208) == ((Ent*)g_9a9660)[i].id) {
 						((Ent*)g_9a9660)[i].done = 1;

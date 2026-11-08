@@ -17,7 +17,7 @@ int __cdecl fcn_004a4bb0(int, int, int, int*, int*, int);
 int __cdecl fcn_0050d170(int);
 
 /* ADDRESS: GOLDTL 0x0049f000 */
-unsigned int __cdecl fcn_0049f000(int a0, char* a1, int a2, int* a3, int* a4)
+unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3, int* a4)
 {
 	int v8;
 	int v15[6];

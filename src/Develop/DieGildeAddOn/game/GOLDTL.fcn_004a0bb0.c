@@ -12,7 +12,7 @@ int __cdecl gm_MapEntityStatRange(int);
 int __cdecl fcn_00507400(int, int);
 
 /* ADDRESS: GOLDTL 0x004a0bb0 */
-int __cdecl fcn_004a0bb0(int a0, char* ent, int a2, char* out1, char* out2)
+int __cdecl ai_StartBerufsausbildung(int a0, char* ent, int a2, char* out1, char* out2)
 {
 	char* q;
 	char* best;

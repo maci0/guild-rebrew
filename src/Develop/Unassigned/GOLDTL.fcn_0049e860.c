@@ -7,7 +7,7 @@ void __cdecl fcn_004c5420(int id, int a2, int a3, int a4, int a5);
 #endif
 
 /* ADDRESS: GOLDTL 0x0049e860 */
-int __cdecl fcn_0049e860(char* e, char* a, char* b)
+int __cdecl ai_RunDunkleEcke(char* e, char* a, char* b)
 {
 	if (a[0] == 4 && b[0] == 1) {
 		if (fcn_004ab0d0(e, a, b)) {

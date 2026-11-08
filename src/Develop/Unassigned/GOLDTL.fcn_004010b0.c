@@ -4,14 +4,14 @@
 #include <string.h>
 
 extern char g_6b5b20[];
-char* __cdecl fcn_004308a0(char* buf, int size, void* f);
+char* __cdecl vfs_fgets(char* buf, int size, void* f);
 
 char* __cdecl fcn_004010b0(void* f)
 {
 	int i;
 	char* p;
 
-	while (fcn_004308a0(g_6b5b20, 0x100, f)) {
+	while (vfs_fgets(g_6b5b20, 0x100, f)) {
 		i = strlen(g_6b5b20) - 1;
 		while (i > -1 && (g_6b5b20[i] == '\n' || g_6b5b20[i] == '\r' ||
 				  g_6b5b20[i] == '\t' || g_6b5b20[i] == ' ')) {

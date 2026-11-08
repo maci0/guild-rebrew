@@ -2,7 +2,7 @@
 
 void __cdecl fcn_00442910(int, int*, float*, int);
 
-void __cdecl fcn_0040e800(int* a1, int* a2, int* a3, int* a4)
+void __cdecl CreateObject(int* a1, int* a2, int* a3, int* a4)
 {
 	float a[3];
 	int b[4];

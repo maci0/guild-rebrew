@@ -145,7 +145,7 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 							}
 							out1->f2 = ratio;
 							out1->kind = 0x12;
-							return fcn_0049e900(0x13, ent, mode, out1, out2);
+							return ai_StartKreditNehmen(0x13, ent, mode, out1, out2);
 						}
 					} else if (v != 7) {
 						idx += 0xa9;
@@ -227,7 +227,7 @@ use_slot:
 							}
 							out1->f2 = ratio;
 							out1->kind = 0x12;
-							return fcn_0049e900(0x13, ent, mode, out1, out2);
+							return ai_StartKreditNehmen(0x13, ent, mode, out1, out2);
 						}
 						c1.kind = 4;
 						c1.f1 = *(int *) (p + 1);
@@ -255,7 +255,7 @@ accept:
 		if ((float) (v - ratio) / (float) v < 0.25f) {
 			out1->f2 = v - ratio;
 			out1->kind = 0x12;
-			return fcn_0049e900(0, ent, mode, out1, out2);
+			return ai_StartKreditNehmen(0, ent, mode, out1, out2);
 		}
 	}
 	return 0;

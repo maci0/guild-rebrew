@@ -4,7 +4,7 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 long __cdecl fcn_00430c50(char* a);
 int __cdecl fcn_0044d770(void* h);
 int __cdecl fcn_004011f0(void* a, void* x);
-int __cdecl fcn_00430a80(char* s, int off, int whence);
+int __cdecl vfs_fseek(char* s, int off, int whence);
 void __cdecl CloseVfsStream(void* f);
 
 /* ADDRESS: GOLDTL 0x0044f010 */
@@ -29,13 +29,13 @@ int __cdecl fcn_0044f010(char* a1)
 				CloseVfsStream(p);
 				return result;
 			}
-			fcn_00430a80(p, a1 - 4, 1);
+			vfs_fseek(p, a1 - 4, 1);
 		} else if (c == 0x2b) {
 			CloseVfsStream(p);
 			return -1;
 		} else {
 			fcn_004011f0(p, &a1);
-			fcn_00430a80(p, a1, 1);
+			vfs_fseek(p, a1, 1);
 		}
 	}
 }

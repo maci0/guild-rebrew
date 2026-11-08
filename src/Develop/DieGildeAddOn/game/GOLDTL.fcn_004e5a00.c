@@ -135,7 +135,7 @@ void __cdecl fcn_004e5a00(int* event)
                 goto mark;
         } else if (*(unsigned char*) 0x7747b0 & 4) {
             n = *(unsigned short*) 0x774970;
-            if (fcn_004e6200(((int*) 0x7f4ca0)[n * 135 + 1], e) == 0)
+            if (cut_IsParticipant(((int*) 0x7f4ca0)[n * 135 + 1], e) == 0)
                 goto mark;
         }
     }

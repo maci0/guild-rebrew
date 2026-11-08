@@ -6,7 +6,7 @@ extern double g_662ad8;
 float* __cdecl fcn_004d3c60(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 float __cdecl fcn_004d3e90(void*, unsigned int);
-float __cdecl fcn_004e6d20(void);
+float __cdecl cut_RandFloat(void);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004d4250(char*, char*);
 
@@ -74,7 +74,7 @@ void __cdecl fcn_004d3fe0(char* a0)
 				}
 			}
 			e = ent[chosen];
-			if (e[0x1c4] == 0 || fcn_004e6d20() > g_662ad8) {
+			if (e[0x1c4] == 0 || cut_RandFloat() > g_662ad8) {
 				e[0x1c4] = (char) auswahl;
 				ent[chosen] = 0;
 			}

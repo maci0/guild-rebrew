@@ -3,7 +3,7 @@
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00425bf0(void*, int, char*);
 
-int __cdecl fcn_004107b0(char** a1)
+int __cdecl TriggerEmitter(char** a1)
 {
 	char* p;
 

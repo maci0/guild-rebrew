@@ -80,7 +80,7 @@ float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 int __cdecl fcn_004c61d0(MarktSlot*, unsigned char);
 float __cdecl fcn_005025a0(int, int);
-char* __cdecl fcn_00503e50(int);
+char* __cdecl gm_FindKind47ByOwner(int);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 void __cdecl fcn_00549330(char*, int);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
@@ -300,7 +300,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		if (*bar == 0) {
 			break;
 		}
-		q = fcn_00503e50(i);
+		q = gm_FindKind47ByOwner(i);
 		if (q == 0) {
 			goto next_lager;
 		}

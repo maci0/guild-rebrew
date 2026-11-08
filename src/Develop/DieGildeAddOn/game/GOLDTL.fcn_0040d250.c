@@ -8,7 +8,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 extern char* g_6b7e98;
 void __cdecl fcn_00425bf0(void*, int, char*);
 
-int __cdecl fcn_0040d250(int* a1)
+int __cdecl GetCharacterHandle(int* a1)
 {
 	char buf[0x80];
 	int r;

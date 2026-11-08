@@ -117,7 +117,7 @@ int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005b58a0(void*, int, int);
+int __cdecl d2_CreateGauge(void*, int, int);
 int __cdecl d2_ShowTxt(int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
 void __cdecl fcn_0046b2b0(int);
@@ -144,10 +144,10 @@ int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_0050c1b0(int, int, void*);
 int __cdecl fcn_004693b0(void);
 void __cdecl fcn_00469470(int, int);
-void __cdecl fcn_004695a0(int, int);
+void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_005b5eb0(char*, char*);
-void __cdecl fcn_005b59c0(int, int, int);
+void __cdecl d2_UpdateGauge(int, int, int);
 void __cdecl fcn_005b5c70(int);
 void __cdecl fcn_005b5ce0(int, int, int, int);
 void __cdecl fcn_00473a90(int, int);
@@ -239,7 +239,7 @@ int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
 	f.msg.f0c = fcn_00472250(*(int*) (book + 0x228), 3, io_AppendText(0x1a20));
 	if (f.row[0] != 5 && f.row[0] != 9) {
 		d2_SetForm(*(int*) (book + 0x228), 3);
-		fcn_005b58a0(&f.sel.a08, 0x20, *(int*) (0x77255c + 0xc) / 2 - 0x18);
+		d2_CreateGauge(&f.sel.a08, 0x20, *(int*) (0x77255c + 0xc) / 2 - 0x18);
 		el = d2_ShowTxt((short) (f.sel.a10 - 0x38), (short) (f.sel.a0c - 0x20),
 			(char*) *(int*) 0x14abbd4, *(int*) 0x772514);
 		G(G(0x1015ea0) + el * 756 + 0x6c) = 1;
@@ -290,7 +290,7 @@ int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
 		e = *(char**) p;
 		fcn_004727a0((int) e, 3);
 		f.rows[f.v10].a58 = (int) e;
-		fcn_005b58a0((void*) ((k % 2) * f.v44 + 0x28), y * f.v2c + 0x11,
+		d2_CreateGauge((void*) ((k % 2) * f.v44 + 0x28), y * f.v2c + 0x11,
 			(int) &f.rows[f.v10]);
 		if (f.v10 == 0 && f.v40 == -1) {
 			f.v40 = fcn_004693b0();
@@ -304,7 +304,7 @@ int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
 		}
 		k++;
 	}
-	fcn_004695a0(f.v40, -1);
+	d2_SelectRadioGroup(f.v40, -1);
 	f.v30 = f.v10;
 	fcn_005b5eb0(f.book, a1);
 	fcn_00473a90(0, 0);
@@ -346,7 +346,7 @@ L6901:
 		if (n != -1)
 			goto L698c;
 		f.sel.a08 = f.v2c;
-		fcn_005b59c0(f.v2c, (int) &f.sel, 0);
+		d2_UpdateGauge(f.v2c, (int) &f.sel, 0);
 		goto L69b6;
 L698c:
 		if (*(char*) (f.v2c + 8) != 0)
@@ -542,7 +542,7 @@ L6fa2:
 			if (f.rows[i].a08 != 0) {
 				if (f.rows[i].a1c != -1)
 					continue;
-				fcn_005b59c0(f.rows[i].a08, (int) &f.rows[i], 0);
+				d2_UpdateGauge(f.rows[i].a08, (int) &f.rows[i], 0);
 			} else {
 				fcn_005b5ce0((int) a1, 6, (int) &f.rows[i], i);
 			}

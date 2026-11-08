@@ -17,7 +17,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c2c50(char*);
 void __cdecl fcn_00536bb0(void);
 void __cdecl fcn_0052a960(char*);
-char* __cdecl fcn_00426fd0(char*);
+char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl evt_RunScript(char*);
 void __cdecl fcn_004cfa00(int);
 
@@ -43,7 +43,7 @@ void __cdecl fcn_004d2e60(void)
 	g_7e46ac = 0x7d6c6;
 	fcn_00536bb0();
 	fcn_0052a960(((char*)&g_7f4c00));
-	p = fcn_00426fd0(g_68bcec);
+	p = evt_LoadGfxScript(g_68bcec);
 	if (p != 0) {
 		evt_RunScript(p);
 		fcn_004cfa00(*(int*) (p + 0x100));

@@ -15,7 +15,7 @@ extern int g_67a370;
 void __cdecl fcn_004379a0(int a, int b, int c, void (__cdecl* cb)(void), Query* q);
 void __cdecl fcn_0040e610(void);
 
-int __cdecl fcn_0040e660(char** name)
+int __cdecl GetRndObjectHandle(char** name)
 {
 	Query q;
 

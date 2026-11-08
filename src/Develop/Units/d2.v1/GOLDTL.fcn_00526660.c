@@ -31,10 +31,10 @@ void __cdecl io_AppendText(int);
 void __cdecl fcn_00471b60(int);
 int __cdecl d2_CreateRadioGroup(int);
 void __cdecl fcn_00469470(int, int);
-void __cdecl fcn_004695a0(int, int);
+void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
 void __cdecl d2_SetElementValue(int, int, int, int);
 void __cdecl fcn_00469510(int);
@@ -85,14 +85,14 @@ int __cdecl fcn_00526660(int parent, int flags)
 			fcn_00469470(list, id);
 		}
 	}
-	fcn_004695a0(list, 0);
+	d2_SelectRadioGroup(list, 0);
 	d2_SetForm(dlg, 0);
 	big = flags & 0x80;
 	if (big != 0) {
 		h = fcn_004677e0(0x1c, g_77255c->x10 - 0x20, g_77255c->xc - 0x40, 0, 0x1f4, 0x83, 0x42, g_772514);
 	}
 	while (fcn_005373e0((void*) fcn_00526660, style) != 0) {
-		fcn_00469630(list);
+		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			fcn_004707d0(dlg);
 		}

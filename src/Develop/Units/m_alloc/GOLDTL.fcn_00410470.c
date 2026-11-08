@@ -4,7 +4,7 @@ extern char* g_6b7e98;
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_00410470(char** a, char* r, char* g, char* b, char* al)
+int __cdecl SetEmitterColor(char** a, char* r, char* g, char* b, char* al)
 {
 	char* e;
 

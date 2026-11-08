@@ -15,7 +15,7 @@ int __cdecl fcn_004a5340(unsigned short* e, int n, int* lim, float a4, float r, 
 
 
 /* ADDRESS: GOLDTL 0x004abe20 */
-int __cdecl fcn_004abe20(int a1, unsigned short* a2, int a3, char* a4)
+int __cdecl ai_StartEhrerbietung(int a1, unsigned short* a2, int a3, char* a4)
 {
 	int lim;
 	unsigned short id;

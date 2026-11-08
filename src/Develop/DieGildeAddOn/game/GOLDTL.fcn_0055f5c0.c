@@ -32,7 +32,7 @@ void __cdecl fcn_00545c50(int);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_004237f0(void*, int);
 void __cdecl fcn_00500bb0(void*, int, int, int);
-char* __cdecl fcn_004e6a30(int);
+char* __cdecl cut_FindCutsceneById(int);
 void __cdecl fcn_004e6bd0(int, int);
 void __cdecl fcn_004c5a20(int, int);
 int __cdecl fcn_00503fe0(int, int, int);
@@ -149,7 +149,7 @@ done:
     case 1:
         state = -1;
         if (*(unsigned char*) (e + 0xf0) & 4) {
-            rec = fcn_004e6a30(*(int*) (e + 0xb8));
+            rec = cut_FindCutsceneById(*(int*) (e + 0xb8));
             if (rec == 0) {
                 *(int*) (e + 0x70) = state;
                 goto tail;
@@ -198,7 +198,7 @@ test_dl:
             goto exit_a;
 body1:
         if (*(unsigned char*) (e + 0xf0) & 4) {
-            rec = fcn_004e6a30(*(int*) (e + 0xb8));
+            rec = cut_FindCutsceneById(*(int*) (e + 0xb8));
             if (rec != 0) {
                 if (*(signed char*) (rec + 0x26) < 0) {
                     if (!((*(unsigned char*) (e + 0xf0) & 2)
@@ -231,7 +231,7 @@ exit_a:
         return;
 body2:
         if (*(unsigned char*) (e + 0xf0) & 4) {
-            rec = fcn_004e6a30(*(int*) (e + 0xb8));
+            rec = cut_FindCutsceneById(*(int*) (e + 0xb8));
             if (!((*(unsigned char*) (e + 0xf0) & 2)
                   && *(int*) (e + 0xb0) != -1
                   && (*(unsigned char*) (rec + 0x26) & 0x10)))

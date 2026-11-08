@@ -17,7 +17,7 @@ int __cdecl fcn_005c6270(void*, int);
 #define MINV(a, b) ((a) < (b) ? (a) : (b))
 
 /* ADDRESS: GOLDTL 0x0049c310 */
-int __cdecl fcn_0049c310(int unused, char* e, int busy, char* out, char* kind)
+int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char* kind)
 {
 	int v1;
 	int v3;

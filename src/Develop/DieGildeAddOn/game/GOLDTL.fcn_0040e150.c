@@ -21,7 +21,7 @@ int __cdecl CharacterSitsDown(char** object)
 
 
 
-int __cdecl fcn_0040e150(char** a1, int* a2)
+int __cdecl FindInCharacterName(char** a1, int* a2)
 {
 	char* p;
 

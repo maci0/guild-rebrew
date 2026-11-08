@@ -28,7 +28,7 @@ char* __cdecl CreateCharacterAtDummy(char** file, char** dummy, char** name)
 		return 0;
 	}
 	fcn_00455350(*dummy, *dummy + 0x4c, pos);
-	ch = fcn_00403b90(*file, pos);
+	ch = ch_CreateAtPosition(*file, pos);
 	if (ch != 0) {
 		strcpy(ch + 8, *name);
 		strcpy(*(char**) (ch + 0x34), *name);

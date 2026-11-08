@@ -5,7 +5,7 @@ void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c4ef0(char* s);
 
 /* ADDRESS: GOLDTL 0x0049c130 */
-int __cdecl fcn_0049c130(char* a1, char* x)
+int __cdecl ai_RunSpionage(char* a1, char* x)
 {
 	char msg[0xf8];
 

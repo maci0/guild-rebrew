@@ -2,7 +2,7 @@
 int __cdecl fcn_004c4dc0(void*, int);
 
 char* __cdecl fcn_00502cd0(int, int, int, ...);
-int __cdecl fcn_00502e30(char*, int);
+int __cdecl gm_RemoveObjectByType(char*, int);
 
 
 /* ADDRESS: GOLDTL 0x004c8920 */
@@ -21,7 +21,7 @@ int __cdecl fcn_004c8920(char* a1, char* a2)
 		return 1;
 	if (*(int*) (e + 0xe) != 1)
 		return 1;
-	fcn_00502e30(f + 0x14, *(unsigned short*) (a1 + 0x14));
+	gm_RemoveObjectByType(f + 0x14, *(unsigned short*) (a1 + 0x14));
 	if (a2 != 0)
 		*a2 = 1;
 	return 0;

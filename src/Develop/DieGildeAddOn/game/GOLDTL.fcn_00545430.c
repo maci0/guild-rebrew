@@ -9,7 +9,7 @@ extern Rec7dc6e0 g_7dc6e0[64];
 
 #include <string.h>
 
-int __cdecl fcn_00545580(int, void*, void*);
+int __cdecl he_RegisterHandler(int, void*, void*);
 void __cdecl he_AllocNone(void*);
 void __cdecl he_RunNone(void);
 void __cdecl fcn_00545410(void);
@@ -25,10 +25,10 @@ int __cdecl fcn_0057ba30(void);
 
 int __cdecl fcn_00545430(void)
 {
-	if (fcn_00545580(0, (void*) he_AllocNone, (void*) he_RunNone) != 0) {
+	if (he_RegisterHandler(0, (void*) he_AllocNone, (void*) he_RunNone) != 0) {
 		return 1;
 	}
-	if (fcn_00545580(1, (void*) fcn_00545410, (void*) fcn_00545420) != 0) {
+	if (he_RegisterHandler(1, (void*) fcn_00545410, (void*) fcn_00545420) != 0) {
 		return 1;
 	}
 	if (fcn_0055b3e0() != 0) {

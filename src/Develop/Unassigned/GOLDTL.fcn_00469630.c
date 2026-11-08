@@ -1,8 +1,8 @@
-void __cdecl fcn_004695a0(int, int);
+void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl fcn_004125c0(int, int);
 
 /* ADDRESS: GOLDTL 0x00469630 */
-void __cdecl fcn_00469630(int a0)
+void __cdecl d2_UpdateRadioGroup(int a0)
 {
 	int count;
 	int sel;
@@ -68,7 +68,7 @@ scan:
 skip:
 	if (sel == -1) {
 		if (*(int*) (a0 * 0x8c + 0x102cbc8) != -1) {
-			fcn_004695a0(a0, -1);
+			d2_SelectRadioGroup(a0, -1);
 		}
 		return;
 	}
@@ -77,7 +77,7 @@ skip:
 	}
 	sel %= *(int*) (a0 * 0x8c + 0x102cbc4);
 	if (sel != *(int*) (a0 * 0x8c + 0x102cbc8) || !*(int*) 0x67d3d0) {
-		fcn_004695a0(a0, sel);
+		d2_SelectRadioGroup(a0, sel);
 	}
 	if (*(char*) 0x14cf950 != 0x1c) {
 		return;

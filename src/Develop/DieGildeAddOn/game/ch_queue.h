@@ -11,7 +11,7 @@ typedef struct CH_QUEUE_SLOT {
 
 CH_QUEUE_SLOT* __cdecl ch_GetFreeQueueEntry(void);
 struct CH_ACTION;
-void __cdecl fcn_004079d0(struct CH_ACTION* task);
+void __cdecl ch_ExecFinishAnimation(struct CH_ACTION* task);
 int __cdecl ch_RemoveQueueEntry(char* task);
 int __cdecl ch_CancelActionQueue(char* object);
 int __cdecl ch_ClearActionQueue(void* object);

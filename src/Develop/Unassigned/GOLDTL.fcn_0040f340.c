@@ -16,7 +16,7 @@ extern int g_67a370;
 void __cdecl fcn_004379a0(int a, int b, int c, void (__cdecl* cb)(void), Query* q);
 void __cdecl fcn_0040f1c0(void);
 
-int __cdecl fcn_0040f340(char** name, char** name2, int* a, int* b)
+int __cdecl AttachAnimLoopedToAll(char** name, char** name2, int* a, int* b)
 {
 	Query q;
 

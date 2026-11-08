@@ -16,22 +16,22 @@ extern int g_67530c;
 extern int g_67a370;
 
 extern int __cdecl fcn_00402610(char*);
-extern void __cdecl fcn_00413120(char*);
+extern void __cdecl d3_RemoveObjectAnim(char*);
 extern int __cdecl fcn_00413190(int);
 extern int __cdecl fcn_0041db70(int, const char*);
 extern void __cdecl fcn_0045b920(char*, int, int, float*);
-extern int __cdecl fcn_00433ba0(char*);
-extern void __cdecl fcn_00434760(int, int);
+extern int __cdecl d3_FindAnimByName(char*);
+extern void __cdecl d3_ReleaseAnim(int, int);
 extern void __cdecl fcn_00435500(int, char*);
 extern char* __cdecl fcn_00404dc0(char*, char*, int);
-extern void __cdecl fcn_0042e540(char*);
+extern void __cdecl vfs_ToSlashes(char*);
 extern char* __cdecl fcn_00407610(char*);
 extern void __cdecl fcn_00402aa0(char*);
 extern void __cdecl fcn_004193f0(char*, char*, int, float);
 extern char* __cdecl fcn_00422460(int, char*);
 extern float __cdecl fcn_00444700(char*, float*);
 extern void __cdecl fcn_00438d70(char*, int, int, int);
-extern void __cdecl fcn_00404410(char*);
+extern void __cdecl ch_FinishAni(char*);
 extern void __cdecl fcn_0041ddd0(char*);
 
 /* ADDRESS: GOLDTL 0x0040aa00 */
@@ -69,11 +69,11 @@ void __cdecl fcn_0040aa00(char* obj)
 		if (*(int*) (inst + 0x7c) != 0) {
 			sprintf(buf, "morph_%i", (int) inst);
 			fcn_00435500(*(int*) (*(int*) (inst + 0x34) + 0x1ec) + 0xf4, buf);
-			r = fcn_00433ba0(buf);
-			fcn_00434760(r, 1);
+			r = d3_FindAnimByName(buf);
+			d3_ReleaseAnim(r, 1);
 			*(int*) (inst + 0x7c) = 0;
 		}
-		fcn_00413120(*(char**) (inst + 0x34));
+		d3_RemoveObjectAnim(*(char**) (inst + 0x34));
 		*(float*) (inst + 0x1a4) = 1.0f;
 		*(int*) (inst + 0x80) = 0;
 		*(int*) (inst + 0x7c) = 0;
@@ -115,11 +115,11 @@ void __cdecl fcn_0040aa00(char* obj)
 			if (*(int*) (inst + 0x7c) != 0) {
 				sprintf(buf, "morph_%i", (int) inst);
 				fcn_00435500(*(int*) (*(int*) (inst + 0x34) + 0x1ec) + 0xf4, buf);
-				r = fcn_00433ba0(buf);
-				fcn_00434760(r, 1);
+				r = d3_FindAnimByName(buf);
+				d3_ReleaseAnim(r, 1);
 				*(int*) (inst + 0x7c) = 0;
 			}
-			fcn_00413120(*(char**) (inst + 0x34));
+			d3_RemoveObjectAnim(*(char**) (inst + 0x34));
 			if (*(int*) (*(int*) (inst + 0x34) + 0x1cc) == 0) {
 				fcn_00402aa0(inst);
 			}
@@ -155,7 +155,7 @@ void __cdecl fcn_0040aa00(char* obj)
 	}
 	if (*(unsigned char*) (obj + 0x190) != 0) {
 		sprintf(name, "%s_%s", "bewegung/gehen", inst + 0x130);
-		fcn_0042e540(name);
+		vfs_ToSlashes(name);
 		if (*(int*) (inst + 0x70) != 0) {
 			fcn_00435500(*(int*) (*(int*) (inst + 0x34) + 0x1ec) + 0xf4,
 			             *(int*) (*(int*) (inst + 0x70) + 0x68));
@@ -255,7 +255,7 @@ next:
 		i = *(int*) (obj + 0xf8) + 1;
 		*(int*) (obj + 0xf8) = i;
 		if (i >= *(int*) (obj + 0xf0)) {
-			fcn_00404410(inst);
+			ch_FinishAni(inst);
 			if (g_6b5c28) {
 				*(unsigned char*) (*(int*) (obj + 0x14) + 0x8c) |= 8;
 			}

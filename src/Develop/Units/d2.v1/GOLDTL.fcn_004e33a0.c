@@ -12,7 +12,7 @@ extern unsigned short g_774970;
 
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
-int __cdecl fcn_004e6cb0(int a);
+int __cdecl cut_RandMod(int a);
 void __cdecl fcn_004e4e90(int a);
 int __cdecl gm_LookupEntityRecordById(int id);
 void* __cdecl fcn_004e4ae0(char* name, int a);
@@ -85,7 +85,7 @@ void __cdecl fcn_004e33a0(int* arg)
 
 	npc = (int) gm_StartFilteredEntitySearch(1, 1, arg[0x7c / 4]);
 	besti = -1;
-	result = fcn_004e6cb0(3);
+	result = cut_RandMod(3);
 	fcn_004e4e90(0);
 	if (npc == 0)
 		return;
@@ -162,7 +162,7 @@ void __cdecl fcn_004e33a0(int* arg)
 			fcn_0064d41a(temp, (char*) 0x679060,
 			    (char*) (foundName + 4));
 		} else {
-			switch (fcn_004e6cb0(3)) {
+			switch (cut_RandMod(3)) {
 			case 1:
 				strcpy(temp, "buerger_MANN");
 				break;
@@ -188,7 +188,7 @@ void __cdecl fcn_004e33a0(int* arg)
 	fcn_0064d41a(temp, (char*) 0x68d3b8, label);
 	fcn_004e4b40(-7, bank_intro, temp, -1, 0);
 	fcn_0064d41a(temp, (char*) 0x68d3a0, name);
-	fcn_004e4b40(result, bank_intro, temp, fcn_004e6cb0(3), 500);
+	fcn_004e4b40(result, bank_intro, temp, cut_RandMod(3), 500);
 	dlg = (int) fcn_00470820(0, 0, "cutscenes\\pacht_main");
 	if (g_772f3c != 0)
 		fcn_00471af0(dlg, 0);
@@ -205,10 +205,10 @@ void __cdecl fcn_004e33a0(int* arg)
 		best = 0;
 		bestFrom = start;
 		fcn_004e51d0((int) arg, states);
-		if (start > 6 && fcn_004e6cb0(3) != 0)
-			fcn_004e4b40(fcn_004e6cb0(4) != 0 ? -4 : -2,
+		if (start > 6 && cut_RandMod(3) != 0)
+			fcn_004e4b40(cut_RandMod(4) != 0 ? -4 : -2,
 			    bank_comments, "_VERSTEIGERUNG_KOMMENTARE",
-			    fcn_004e6cb0(6), fcn_004e6cb0(0x200) + 0x32);
+			    cut_RandMod(6), cut_RandMod(0x200) + 0x32);
 		bidCount = 0;
 		n = *(unsigned char*) (((char*) arg) + 0x30);
 		table = (int*) 0x9b0eb4;
@@ -233,11 +233,11 @@ void __cdecl fcn_004e33a0(int* arg)
 			if (bidCount < n) {
 				fcn_004e4b40(result, bank_bids,
 				    "_VERSTEIGERUNG_GEBOTE",
-				    fcn_004e6cb0(4) + 2, 500);
+				    cut_RandMod(4) + 2, 500);
 			} else {
 				fcn_004e4b40(result, bank_bids,
 				    "_VERSTEIGERUNG_GEBOTE",
-				    fcn_004e6cb0(2), 500);
+				    cut_RandMod(2), 500);
 			}
 			price += 0x20;
 			d2_SetForm(dlg, 0);

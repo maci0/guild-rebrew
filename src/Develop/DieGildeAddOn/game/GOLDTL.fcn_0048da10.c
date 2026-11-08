@@ -20,7 +20,7 @@ int __cdecl fcn_0048ddd0(char* e, Msg* a, Msg* b);
 int __cdecl fcn_0048df90(char* e, Msg* a, Msg* b);
 
 /* ADDRESS: GOLDTL 0x0048da10 */
-int __cdecl fcn_0048da10(int kind, char* e, int busy, Msg* out1, Msg* out2)
+int __cdecl ai_StartSecretRoom(int kind, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Msg a;
 	Msg b;

@@ -18,7 +18,7 @@ void __cdecl fcn_004379a0(char*, int, int, int (__cdecl*)(), struct query_40f400
 /* Script command: runs the name query callback over every object of the
  * current room. */
 /* ADDRESS: GOLDTL 0x0040f400 */
-int __cdecl fcn_0040f400(char** args)
+int __cdecl DetachAnimFromAll(char** args)
 {
 	struct query_40f400 q;
 

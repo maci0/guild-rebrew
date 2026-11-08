@@ -5,7 +5,7 @@
 char* __cdecl fcn_00401040(char* path);
 
 /* ADDRESS: GOLDTL 0x0040ed40 */
-int __cdecl fcn_0040ed40(char** character, char** animation, int* kind)
+int __cdecl AttachAnim(char** character, char** animation, int* kind)
 {
 	D3_ANIMATION_OPTIONS options;
 	char path[256];
@@ -17,13 +17,13 @@ int __cdecl fcn_0040ed40(char** character, char** animation, int* kind)
 	char copied;
 
 	object = *character;
-	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) fcn_0040ed40) {
+	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) AttachAnim) {
 		draw = *(char**) (object + 0x1ec);
 		i = 0;
 		slot = (char**) (draw + 0x484);
 		for (; i < 3; i++, slot = (char**) ((char*) slot + 0x7c)) {
 			if (*slot != 0) {
-				*(void**) (g_6b7e98 + 0xc60) = (void*) fcn_0040ed40;
+				*(void**) (g_6b7e98 + 0xc60) = (void*) AttachAnim;
 				return 0;
 			}
 		}
@@ -39,7 +39,7 @@ int __cdecl fcn_0040ed40(char** character, char** animation, int* kind)
 	} while (copied != 0);
 	fcn_00401040(name);
 	if (path[0] != 0 && object != 0 && *(char**) (object + 0x1cc) != 0) {
-		if (fcn_00433ba0(name) == 0) {
+		if (d3_FindAnimByName(name) == 0) {
 			d3_LoadAnimStream(path, name, 0);
 		}
 		memset(&options, 0, sizeof(options));
@@ -52,7 +52,7 @@ int __cdecl fcn_0040ed40(char** character, char** animation, int* kind)
 		fcn_00434970(*(char**) (object + 0x1cc), name, options);
 	}
 	if (*(int*) (g_6b7e98 + 0xc84) == 1) {
-		*(void**) (g_6b7e98 + 0xc60) = (void*) fcn_0040ed40;
+		*(void**) (g_6b7e98 + 0xc60) = (void*) AttachAnim;
 	}
 	return 0;
 }

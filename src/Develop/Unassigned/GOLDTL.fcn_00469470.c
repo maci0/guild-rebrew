@@ -14,7 +14,7 @@ typedef struct Slot {
 extern Group_102cbc4 g_102cbc4[8];
 extern char* g_1015ea0;
 
-void __cdecl fcn_004695a0(int g, int sel);
+void __cdecl d2_SelectRadioGroup(int g, int sel);
 
 /* ADDRESS: GOLDTL 0x00469470 */
 void __cdecl fcn_00469470(int g, int id)
@@ -24,6 +24,6 @@ void __cdecl fcn_00469470(int g, int id)
 	((Slot*)g_1015ea0)[id].flags &= ~2;
 	g_102cbc4[g].count++;
 	if (g_102cbc4[g].sel == -1) {
-		fcn_004695a0(g, 0);
+		d2_SelectRadioGroup(g, 0);
 	}
 }

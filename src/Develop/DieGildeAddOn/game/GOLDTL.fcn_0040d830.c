@@ -6,11 +6,11 @@ extern char* g_6b7e98;
 char* __cdecl fcn_00406670(char* e, int v);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040d830(char** a, int* v)
+int __cdecl GetUp(char** a, int* v)
 {
-	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) fcn_0040d830) {
+	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) GetUp) {
 		if (*(int*) (*a + 0x128) != 0) {
-			*(void**) (g_6b7e98 + 0xc60) = (void*) fcn_0040d830;
+			*(void**) (g_6b7e98 + 0xc60) = (void*) GetUp;
 		}
 		return 0;
 	}
@@ -20,7 +20,7 @@ int __cdecl fcn_0040d830(char** a, int* v)
 	}
 	fcn_00406670(*a, *v);
 	if (*(int*) (g_6b7e98 + 0xc84) == 1) {
-		*(void**) (g_6b7e98 + 0xc60) = (void*) fcn_0040d830;
+		*(void**) (g_6b7e98 + 0xc60) = (void*) GetUp;
 	}
 	return 0;
 }

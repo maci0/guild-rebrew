@@ -17,12 +17,12 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_004b33c0(char* name, char* text);
-int __cdecl fcn_00535570(void);
+int __cdecl d2_CreateScrollPerga(void);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
-void __cdecl fcn_00535630(void);
+void __cdecl d2_UpdateScrollPerga(void);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_005355f0(void);
 
@@ -87,7 +87,7 @@ void __cdecl fcn_004b3490(void)
 	if (fcn_004b33c0(name, text) != 1) {
 		return;
 	}
-	h = fcn_00535570();
+	h = d2_CreateScrollPerga();
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 1);
 	w = g_772514;
@@ -101,7 +101,7 @@ void __cdecl fcn_004b3490(void)
 	io_AppendText((int) "$C$Z$[%s$]", name);
 	g_100f1dc = -1;
 	do {
-		fcn_00535630();
+		d2_UpdateScrollPerga();
 		if (g_100f1dc == 2) {
 			{
 				char* p;

@@ -9,7 +9,7 @@ float __cdecl fcn_00507e70(char* a, char* b, int c);
 float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x0049c880 */
-int __cdecl fcn_0049c880(int a0, unsigned short* a1, int a2, int* a3, int* a4)
+int __cdecl ai_StartDrohen(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 {
 	int v7[6];
 	int v8[6];

@@ -1,7 +1,7 @@
 
 
 int __cdecl fcn_004011f0(void* f, void* x);
-int __cdecl fcn_00430a80(char* f, int off, int whence);
+int __cdecl vfs_fseek(char* f, int off, int whence);
 #include "Develop/Units/Error/error_message.h"
 void* __cdecl m_alloc(int size, const char* tag);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* f);
@@ -14,7 +14,7 @@ int __cdecl fcn_00401470(void* f, int count, void** out, const char* tag)
 	fcn_004011f0(f, &size);
 	fcn_004011f0(f, &n);
 	if (n != count) {
-		fcn_00430a80(f, n * size, 1);
+		vfs_fseek(f, n * size, 1);
 		*out = 0;
 		ReportClientMessage("array count mismatch");
 		return 0;

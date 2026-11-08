@@ -11,7 +11,7 @@ extern char s_6a99c4[];
 
 double __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_00426fd0(char*);
+int __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(int, int, int, int, int);
 
 void __cdecl fcn_00590500(void)
@@ -70,7 +70,7 @@ void __cdecl fcn_00590500(void)
 			vb = *(unsigned int*) (e2 + 4) % 3;
 		}
 	}
-	s = fcn_00426fd0(s_6a99c4);
+	s = evt_LoadGfxScript(s_6a99c4);
 	if (s != 0) {
 		fcn_00428340(s, 3, *(int*) (e1 + 0x184), va, vb);
 	}

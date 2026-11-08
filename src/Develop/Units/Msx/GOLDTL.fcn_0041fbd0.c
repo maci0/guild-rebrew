@@ -1,6 +1,6 @@
 #include "msx.h"
 
-void __cdecl fcn_0041fbd0(const char* name, int a2)
+void __cdecl SetTrackVolume(const char* name, int a2)
 {
 	Chan_14cc460* p;
 

@@ -3,14 +3,14 @@
 
 #include <string.h>
 
-char* __cdecl fcn_0040c0a0(int);
+char* __cdecl ch_NewAction(int);
 void __cdecl fcn_00406280(void);
 
 char* __cdecl fcn_004063b0(int a1, char* s, int a3, float a4)
 {
 	char* e;
 
-	e = fcn_0040c0a0(a1);
+	e = ch_NewAction(a1);
 	if (e == 0) {
 		return e;
 	}

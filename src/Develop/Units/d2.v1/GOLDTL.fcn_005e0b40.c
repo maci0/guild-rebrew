@@ -16,7 +16,7 @@ int __cdecl fcn_00467240(int, int, int, int, int);
 void __cdecl fcn_00472900(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00474cf0(int);
-void __cdecl fcn_00472770(int, int);
+void __cdecl d2_SetBildArgument(int, int);
 int __cdecl fcn_005373e0(void*, int);
 char* __cdecl fcn_00471f80(int);
 void __cdecl fcn_0046b2b0(int);
@@ -33,7 +33,7 @@ int __cdecl fcn_005e0b40(int a, int b, char* text)
 	fcn_00474cf0(h);
 	*(int*) (g_102d150 + *(int*) (g_1015ea0 + h * 0x2f4 + 0x88) * 0x160) = 0x80;
 	*(int*) (g_102d29c + *(int*) (g_1015ea0 + h * 0x2f4 + 0x88) * 0x160) = 0x110;
-	fcn_00472770(h, 0x1f);
+	d2_SetBildArgument(h, 0x1f);
 	while (fcn_005373e0(fcn_005e0b40, g_7e46ac) != 0) {
 		if ((*(unsigned char*)&g_14cf950) == 0x1c) {
 			strcpy(text, fcn_00471f80(h));

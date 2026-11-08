@@ -36,8 +36,8 @@ unsigned int __cdecl vfs_fwrite(void* data, int size, int count, char* f);
 unsigned int __cdecl vfs_ReadData(char* buf, int size, int count, char* f);
 void __cdecl CloseVfsStream(char* f);
 int __cdecl fcn_004a1130(char* ini);
-int __cdecl fcn_004901d0(char* ini);
-int __cdecl fcn_0048f110(char* ini);
+int __cdecl ai_RegisterGraveyardMethods(char* ini);
+int __cdecl ai_RegisterDomizilMethods(char* ini);
 int __cdecl fcn_004abff0(char* ini);
 
 /* ADDRESS: GOLDTL 0x00494820 */
@@ -62,10 +62,10 @@ int __cdecl fcn_00494820(void)
 		if (fcn_004a1130(g_77481c) == 0) {
 			goto bad;
 		}
-		if (fcn_004901d0(g_77481c) == 0) {
+		if (ai_RegisterGraveyardMethods(g_77481c) == 0) {
 			goto bad;
 		}
-		if (fcn_0048f110(g_77481c) == 0) {
+		if (ai_RegisterDomizilMethods(g_77481c) == 0) {
 			goto bad;
 		}
 		if (fcn_004abff0(g_77481c) == 0) {
@@ -147,10 +147,10 @@ int __cdecl fcn_00494820(void)
 	if (fcn_004a1130(g_77481c) == 0) {
 		goto fail;
 	}
-	if (fcn_004901d0(g_77481c) == 0) {
+	if (ai_RegisterGraveyardMethods(g_77481c) == 0) {
 		goto fail;
 	}
-	if (fcn_0048f110(g_77481c) == 0) {
+	if (ai_RegisterDomizilMethods(g_77481c) == 0) {
 		goto fail;
 	}
 	if (fcn_004abff0(g_77481c) == 0) {

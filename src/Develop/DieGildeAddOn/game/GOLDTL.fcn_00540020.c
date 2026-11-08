@@ -123,7 +123,7 @@ int __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_004bbc30(int, int);
 int __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005459a0(int);
-int __cdecl fcn_00535570(void);
+int __cdecl d2_CreateScrollPerga(void);
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
@@ -138,12 +138,12 @@ void* __cdecl fcn_00503fe0(int, int, int);
 void* __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl fcn_00502850(void);
 int __cdecl fcn_0047dca0(void*);
-void __cdecl fcn_00402a00(int, int);
+void __cdecl ch_SetVisible(int, int);
 void* __cdecl fcn_00503e80(void);
 int __cdecl fcn_00504bd0(int);
 int __cdecl fcn_0047d240(void*);
 int __cdecl fcn_0042e410(int);
-int __cdecl fcn_0050bfe0(void*);
+int __cdecl fcn_00508da0(void*);
 int __cdecl fcn_0050cf50(void*, int);
 int __cdecl fcn_0047dd60(void*);
 int __cdecl fcn_00567170(void*, int*, int*, int*);
@@ -321,7 +321,7 @@ void __cdecl fcn_00540020(void)
 	}
 	fcn_005459a0(0xffff);
 	if (g_6a3420 != 0) {
-		w = fcn_00535570();
+		w = d2_CreateScrollPerga();
 		fcn_004727a0(w, 2);
 		fcn_00519190(0x7d);
 		fcn_0046e830(-1, -1, g_772514, fcn_00472830(w, 1), 0x767);
@@ -436,9 +436,9 @@ void __cdecl fcn_00540020(void)
 				if (p != 0
 				    && (s = SLOTPTR(*(unsigned short*) (p + 0x27))) != 0
 				    && fcn_0047dca0(s) != 0)
-					fcn_00402a00(ent, 1);
+					ch_SetVisible(ent, 1);
 				else
-					fcn_00402a00(ent, 0);
+					ch_SetVisible(ent, 0);
 			} while ((obj = fcn_00502850()) != 0);
 		}
 	}
@@ -474,7 +474,7 @@ void __cdecl fcn_00540020(void)
 				}
 				if (fcn_0047d240(SLOTPTR(i)) != 0 || *(unsigned char*) (SLOTPTR(i) + 2) == 1) {
 					w = (int) (fcn_0042e410(0x5a) & 0xffff);
-					if (fcn_0050bfe0(obj) < w) {
+					if (fcn_00508da0(obj) < w) {
 						int ent;
 
 						cand = fcn_0050cf50(obj, 0x64);

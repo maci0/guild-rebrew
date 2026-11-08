@@ -27,7 +27,7 @@ int __cdecl fcn_0048f710(char* e, char* q, Blk24* b1, Blk24* b2);
 int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2);
 int __cdecl fcn_0048fb10(char* e, char* q, Blk24* b1, Blk24* b2);
 
-int __cdecl fcn_0048fc30(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
+int __cdecl ai_StartGraveyardOwner(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 {
 	char* q;
 	int res[4];

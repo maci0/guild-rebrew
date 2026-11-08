@@ -7,7 +7,7 @@ void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* roo
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 int __cdecl fcn_0044d770(void*);
 int __cdecl fcn_004011f0(void* stream, void* dst);
-int __cdecl fcn_00430a80(void*, int, int);
+int __cdecl vfs_fseek(void*, int, int);
 #include "Develop/Units/vfs/vfs.h"
 
 void* __cdecl fcn_0044f190(char* name)
@@ -31,14 +31,14 @@ void* __cdecl fcn_0044f190(char* name)
 			if (id == 0xfab50005) {
 				return h;
 			}
-			fcn_00430a80(h, size - 4, 1);
+			vfs_fseek(h, size - 4, 1);
 		} else {
 			if (t == 0x2b) {
 				CloseVfsStream(h);
 				return 0;
 			}
 			fcn_004011f0(h, &size);
-			fcn_00430a80(h, size, 1);
+			vfs_fseek(h, size, 1);
 		}
 	}
 }

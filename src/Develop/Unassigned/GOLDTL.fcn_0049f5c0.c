@@ -16,7 +16,7 @@ void __cdecl fcn_004c4ef0(char* s);
 void __cdecl fcn_004c6900(Small3i* a1);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-int __cdecl fcn_0049f5c0(char* a1, char* a2)
+int __cdecl ai_RunStammtisch(char* a1, char* a2)
 {
 	Small3i m;
 

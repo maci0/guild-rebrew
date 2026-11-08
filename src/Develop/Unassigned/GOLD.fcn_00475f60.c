@@ -11,6 +11,7 @@ extern char s_005feaf4[]; /* 0x005feaf4 */
 
 void __cdecl fcn_004222b0(const char* msg);
 
+/* ADDRESS: GOLD 0x00475f60 */
 int __cdecl d2_SetForm(int k, int i)
 {
 	if (k) {

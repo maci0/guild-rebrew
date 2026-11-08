@@ -7,11 +7,11 @@ extern char* g_6b7e98;
 void __cdecl fcn_0040b920(char* a, char* b);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040cba0(char** a, char** b)
+int __cdecl WalkToDummyRotate(char** a, char** b)
 {
-	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) fcn_0040cba0) {
+	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) WalkToDummyRotate) {
 		if (*(int*) (*a + 0x128) != 0) {
-			*(void**) (g_6b7e98 + 0xc60) = (void*) fcn_0040cba0;
+			*(void**) (g_6b7e98 + 0xc60) = (void*) WalkToDummyRotate;
 		}
 		return 0;
 	}
@@ -27,7 +27,7 @@ int __cdecl fcn_0040cba0(char** a, char** b)
 	}
 	fcn_0040b920(*a, *b);
 	if (*(int*) (g_6b7e98 + 0xc84) == 1) {
-		*(void**) (g_6b7e98 + 0xc60) = (void*) fcn_0040cba0;
+		*(void**) (g_6b7e98 + 0xc60) = (void*) WalkToDummyRotate;
 	}
 	return 1;
 }

@@ -6,7 +6,7 @@ extern char* g_6b7e98;
 void __cdecl fcn_004526d0(char* e, float* v);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_00410800(char** a, int* x, int* y, int* z)
+int __cdecl SetParticlePos(char** a, int* x, int* y, int* z)
 {
 	float v[4];
 	char* e;

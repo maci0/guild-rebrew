@@ -17,8 +17,8 @@ extern char* g_6b5d08;
 
 void __cdecl fcn_004237f0(char*, int);
 void __cdecl fcn_00426170(char*, int);
-void __cdecl fcn_004190d0(struct snd_418e00*);
-void __cdecl fcn_00418fb0(struct snd_418e00*);
+void __cdecl d3_UpdateSoundSourceVolume(struct snd_418e00*);
+void __cdecl d3_UpdateSoundSourcePan(struct snd_418e00*);
 int __cdecl fcn_00423460(char*);
 void __cdecl fcn_00418d70(struct snd_418e00*);
 
@@ -53,8 +53,8 @@ void __cdecl fcn_00418e00(void)
 			}
 			continue;
 		}
-		fcn_004190d0(&((struct snd_418e00*)g_6b5d08)[i]);
-		fcn_00418fb0(&((struct snd_418e00*)g_6b5d08)[i]);
+		d3_UpdateSoundSourceVolume(&((struct snd_418e00*)g_6b5d08)[i]);
+		d3_UpdateSoundSourcePan(&((struct snd_418e00*)g_6b5d08)[i]);
 		if (((struct snd_418e00*)g_6b5d08)[i].voice == 0 || fcn_00423460(((struct snd_418e00*)g_6b5d08)[i].voice) != 0) {
 			continue;
 		}

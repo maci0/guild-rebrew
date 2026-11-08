@@ -10,6 +10,8 @@ void __cdecl fcn_00438b40(char* h, char* pos);
 void __cdecl fcn_00438cb0(char* h, char* rot);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLD 0x0040ee10 */
+/* ADDRESS: GOLDTL 0x0040fd20 */
 int __cdecl SetCameraToDummy(char** name)
 {
 	char buf[0x80];

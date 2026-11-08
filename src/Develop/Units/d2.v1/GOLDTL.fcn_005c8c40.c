@@ -20,7 +20,7 @@ int __cdecl fcn_005c8400(void);
 int __cdecl fcn_005c86b0(void);
 int __cdecl fcn_005c89a0(void);
 int __cdecl d2_CreateRadioGroup(int, int, int, int);
-void __cdecl fcn_004695a0(int, int);
+void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005a5440(int, char*, int, int, int);
@@ -76,7 +76,7 @@ void __cdecl fcn_005c8c40(void)
 	idx = d2_CreateRadioGroup(3, out[0], out[1], out[2]);
 	ofs = idx * 0x8c;
 	*(int*) (ofs + 0x102cbc0) = *(int*) (ofs + 0x102cbc0) | 1;
-	fcn_004695a0(idx, *(int*) 0x77533c);
+	d2_SelectRadioGroup(idx, *(int*) 0x77533c);
 	if (v4 == -1) {
 		fcn_00472640(out[2], 0);
 	}

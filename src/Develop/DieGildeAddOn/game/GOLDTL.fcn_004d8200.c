@@ -14,7 +14,7 @@ char* __cdecl fcn_0040c230(char*, void (__cdecl*)(int), int, int, int);
 char* __cdecl fcn_0040c120(char*, int, ...);
 int __cdecl fcn_00406340(char*, char*, int);
 void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
-unsigned int __cdecl fcn_004e6cb0(unsigned int);
+unsigned int __cdecl cut_RandMod(unsigned int);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
 int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
 int __cdecl fcn_004c6680(char*, int, int, char*);
@@ -115,7 +115,7 @@ make_task:
 		}
 	}
 	fcn_0040c120(*(char**) ((char*) rec + 0x184), 0x3b,
-	             fcn_004e6cb0(0x1e) + 0x8c);
+	             cut_RandMod(0x1e) + 0x8c);
 check_174:
 	if (*(int*) r != 0x174) {
 		goto label_4d84fc;
@@ -158,7 +158,7 @@ label_4d84fc:
 	*(int*) (task + 0x188) = *(int*) (save + 4);
 	strcpy(task + 0xf0, r + 0x11);
 	fcn_0040c120(*(char**) ((char*) rec + 0x184), 0x3b,
-	             fcn_004e6cb0(0x1e) + 0x8c);
+	             cut_RandMod(0x1e) + 0x8c);
 	fcn_004234e0((char*) g_772ec4, "topfwerfen_s", 1, 0x3f, 0x7f, 0, 0);
 	p[0] = -1;
 	p[1] = 0;

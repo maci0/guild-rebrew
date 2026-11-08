@@ -47,6 +47,7 @@ virtual address.
 | Question | Canonical page |
 | --- | --- |
 | Which names are attested or inferred? | [Naming](naming_conventions.md) |
+| Which function renames were made, with their evidence? | [Name ledger](name-ledger.tsv) |
 | Where does a definition belong? | [Source layout](source-layout.md) |
 | Who allocates these bytes? | [Data ownership](data-ownership.md) |
 | What compiler/runtime did each target use? | [Build facts](general-knowledge.md) |

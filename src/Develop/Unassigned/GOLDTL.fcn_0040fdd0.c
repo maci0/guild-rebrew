@@ -5,7 +5,7 @@
 
 #pragma intrinsic(strlen, strcpy, strcat)
 
-int __cdecl fcn_0040fdd0(int* a1, int* a2)
+int __cdecl RenameObject(int* a1, int* a2)
 {
 	char* dst;
 

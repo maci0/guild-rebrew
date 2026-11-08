@@ -1,14 +1,14 @@
 
 
 extern char* g_6b7e98;
-char* __cdecl fcn_00426fd0(int id);
+char* __cdecl evt_LoadGfxScript(int id);
 void __cdecl fcn_00428340(char* o, int n, ...);
 
 char* __cdecl fcn_0040c4c0(int* a, int* b)
 {
 	char* o;
 
-	o = fcn_00426fd0(*a);
+	o = evt_LoadGfxScript(*a);
 	if (o == 0) {
 		return 0;
 	}

@@ -21,7 +21,7 @@ char __cdecl fcn_004e6910(int idx)
 	saved = *(int*) (g_7f4ca4 + idx * 0x21c + 0x208);
 	p = fcn_004e68d0();
 	while (p != 0) {
-		if (fcn_004e6200(*(int*) (g_7f4ca4 + idx * 0x21c), (unsigned char*) p) != 0) {
+		if (cut_IsParticipant(*(int*) (g_7f4ca4 + idx * 0x21c), (unsigned char*) p) != 0) {
 			*(int*) (g_7f4ca4 + idx * 0x21c + 0x208) = *p;
 			fcn_004e5a00(p);
 			*(int*) (g_7f4ca4 + idx * 0x21c + 0x208) = -1;

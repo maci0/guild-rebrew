@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void __cdecl fcn_0042e540(char*);
+void __cdecl vfs_ToSlashes(char*);
 #include "Develop/Units/d3/d3_animation.h"
 int __cdecl fcn_0065f220(const char*, const char*);
 
@@ -18,11 +18,11 @@ char* __cdecl fcn_00404300(char* obj, char* name, char slot)
 	if (*(char**) (obj + 0x80) != 0) {
 		return 0;
 	}
-	fcn_0042e540(name);
+	vfs_ToSlashes(name);
 	sprintf(path, "character/%s/%s_%s.baf", obj + 0x130, name, obj + 0x130);
 	sprintf(ani, "%s_%s", name, obj + 0x130);
-	fcn_0042e540(ani);
-	ani_obj = fcn_00433ba0(ani);
+	vfs_ToSlashes(ani);
+	ani_obj = d3_FindAnimByName(ani);
 	if (fcn_0065f220(name, "bewegung/gehen") == 0 || fcn_0065f220(name, "bewegung/karren_ziehen") == 0) {
 		looped = 1;
 	}

@@ -17,7 +17,7 @@ int __cdecl fcn_00495400(int kind, int id, int n, Msg* b1, Msg* b2);
 int __cdecl fcn_004aa580(char* e, char* a2, char* out);
 
 /* ADDRESS: GOLDTL 0x0049cb20 */
-int __cdecl fcn_0049cb20(int a1, char* e, int busy, Msg* out1, Msg* out2)
+int __cdecl ai_StartPamphlete(int a1, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Msg a;
 	Msg b;

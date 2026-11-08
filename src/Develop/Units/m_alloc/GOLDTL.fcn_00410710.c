@@ -13,7 +13,7 @@ extern char* g_6b7e98;
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_00410710(char** a, unsigned char* v)
+int __cdecl SetEmitterTriggerOnce(char** a, unsigned char* v)
 {
 	char* e;
 

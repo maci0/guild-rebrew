@@ -23,7 +23,7 @@ char __cdecl fcn_00443900(void*, void*, void*);
 void __cdecl fcn_00438c40(void*, float*);
 int __cdecl fcn_00413190(void*);
 void __cdecl fcn_00402aa0(char*);
-void __cdecl fcn_0040cfb0();
+void __cdecl ch_RunAnimationScript();
 char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
@@ -49,8 +49,8 @@ char __cdecl fcn_00442c00(char*, char);
 
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl fcn_00438cb0(char*, float*);
-void __cdecl fcn_0042e540(char*);
-int __cdecl fcn_00413120(char*);
+void __cdecl vfs_ToSlashes(char*);
+int __cdecl d3_RemoveObjectAnim(char*);
 
 
 
@@ -149,7 +149,7 @@ void __cdecl ch_Updatelowpoly(char* obj)
 					}
 					sprintf(path, "lowpolycharacter/%s/%s_%s_LOW.baf", obj + 0x230, "gehen", obj + 0x230);
 					sprintf(ani, "%s_%s_LOW.baf", "gehen", obj + 0x230);
-					fcn_0042e540(ani);
+					vfs_ToSlashes(ani);
 					memset(&opt, 0, sizeof(opt));
 					opt.queue = 1;
 					opt.reverse = 0;
@@ -157,7 +157,7 @@ void __cdecl ch_Updatelowpoly(char* obj)
 					*(int*) &opt = 0;
 					opt.layer = 8;
 					opt.mode = 0;
-					if (fcn_00433ba0(ani) == 0) {
+					if (d3_FindAnimByName(ani) == 0) {
 						d3_LoadAnimStream(path, ani, 1);
 					}
 					anim = fcn_00434970(*(char**) (*(char**) (obj + 0x22c) + 0x1ec) + 0xf4, ani, opt);
@@ -175,7 +175,7 @@ void __cdecl ch_Updatelowpoly(char* obj)
 				}
 			}
 			if (*(char**) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x390) != 0) {
-				fcn_00413120(*(char**) (obj + 0x22c));
+				d3_RemoveObjectAnim(*(char**) (obj + 0x22c));
 				return;
 			}
 			if (*(char**) (obj + 0x70) == 0) {

@@ -36,7 +36,7 @@ int __cdecl fcn_0050d320(char* e, unsigned char b);
 
 /* r[] is block-scoped so it shares the slot of the Rec6 return temporary.
  * `p[8] > 0` on the unsigned byte gives the reference's jbe. */
-int __cdecl fcn_004a0e20(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
+int __cdecl ai_StartStudium(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 {
 	Share sh[3];
 	Rec6 s;

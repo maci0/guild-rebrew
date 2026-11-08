@@ -28,7 +28,7 @@ void __cdecl gm_ResolveEntityById(void**, int, int, int);
 int __cdecl fcn_004a6210(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x0048e5b0 */
-int __cdecl fcn_0048e5b0(int a0, char* a1, int a2, char* a3, char* a4)
+int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* a3, char* a4)
 {
 	char* p;
 	char* e;

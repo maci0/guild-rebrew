@@ -21,7 +21,7 @@ int __cdecl CharacterSitting(char** object)
 
 
 
-int __cdecl fcn_0040df40(char** a1, int* a2)
+int __cdecl GetCharacterSubObjectHandle(char** a1, int* a2)
 {
 	char* p;
 

@@ -17,7 +17,7 @@ int __cdecl fcn_004185a0(int a1, float* pos, int n, float a4, float a5,
                          float a11, int a12);
 int __cdecl fcn_00417d00(int a1, float* pos, int n, float a4, float a5,
                          float a6, float a7, int a8);
-unsigned int __cdecl fcn_004e6cb0(unsigned int n);
+unsigned int __cdecl cut_RandMod(unsigned int n);
 void __cdecl fcn_004cfc40(char* a1, int a2, int a3);
 int __cdecl fcn_004d4790(char* e);
 int __cdecl fcn_00406340(char* e, const char* name, int param);
@@ -91,7 +91,7 @@ int __cdecl fcn_004cf180(void)
                             dist = (float) sqrt(dx * dx + dy * dy +
                                                 dz * dz);
                             if (dist < g_664ed4) {
-                                t = (int) fcn_004e6cb0((unsigned char) r[6] -
+                                t = (int) cut_RandMod((unsigned char) r[6] -
                                                        (unsigned char) r[5]);
                                 t += (unsigned char) r[5];
                                 d = (int) ((double) t *

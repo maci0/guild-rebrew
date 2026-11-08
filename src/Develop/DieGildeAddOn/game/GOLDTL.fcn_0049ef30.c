@@ -4,7 +4,7 @@ int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, 
 int __cdecl fcn_004a4550(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x0049ef30 */
-int __cdecl fcn_0049ef30(float* o1, float* o2, int a3, char* e, int skip, int a6, int a7)
+int __cdecl ai_ScoreChangeProfession(float* o1, float* o2, int a3, char* e, int skip, int a6, int a7)
 {
 	int n;
 

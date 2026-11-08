@@ -15,7 +15,7 @@ typedef struct {
 
 char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_004ff210(unsigned short, int);
-int __cdecl fcn_0048fc30(int, char*, int, Blk24*, Blk24*);
+int __cdecl ai_StartGraveyardOwner(int, char*, int, Blk24*, Blk24*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004a6210(char*, char*, int);
 int __cdecl fcn_004a6550(char*, char*);
@@ -76,7 +76,7 @@ int __cdecl fcn_005359c0(void)
 		if (g_7e2aa0 == 0) {
 			return;
 		}
-		fcn_0048fc30(0, g_7f4ca0 + g_774970 * 0x21c, 0, &b2, &b1);
+		ai_StartGraveyardOwner(0, g_7f4ca0 + g_774970 * 0x21c, 0, &b2, &b1);
 		return;
 	case 0x16:
 		o = g_7e2aa0;

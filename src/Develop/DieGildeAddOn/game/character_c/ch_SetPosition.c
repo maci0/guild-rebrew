@@ -23,7 +23,7 @@ char __cdecl fcn_00443900(void*, void*, void*);
 void __cdecl fcn_00438c40(void*, float*);
 int __cdecl fcn_00413190(void*);
 void __cdecl fcn_00402aa0(char*);
-void __cdecl fcn_0040cfb0();
+void __cdecl ch_RunAnimationScript();
 char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
@@ -49,8 +49,8 @@ char __cdecl fcn_00442c00(char*, char);
 
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl fcn_00438cb0(char*, float*);
-void __cdecl fcn_0042e540(char*);
-int __cdecl fcn_00413120(char*);
+void __cdecl vfs_ToSlashes(char*);
+int __cdecl d3_RemoveObjectAnim(char*);
 
 
 extern char g_6b5c60[];

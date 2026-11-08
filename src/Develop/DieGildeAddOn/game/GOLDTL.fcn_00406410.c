@@ -21,7 +21,7 @@ extern int g_6b8010;
 
 struct anim_406410* __cdecl ch_AttachAni(char* obj, char* name, int mode);
 void __cdecl fcn_00436a00(int h, struct anim_406410* a, int n);
-int __cdecl fcn_00404f60(char* ev);
+int __cdecl ch_FinishAnimation(char* ev);
 int __cdecl fcn_00413190(char* p);
 void __cdecl fcn_004432d0(int a, int b);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -52,7 +52,7 @@ void __cdecl fcn_00406410(char* ev)
 			(*(struct anim_406410**) (obj + 0x70))->flags &= ~3;
 			(*(struct anim_406410**) (obj + 0x70))->looping = 1;
 		}
-	} else if (fcn_00404f60(ev) == -1) {
+	} else if (ch_FinishAnimation(ev) == -1) {
 		saved = g_6b8010;
 		fcn_004432d0(fcn_00413190(*(char**) (obj + 0x88)), 1);
 		*(short*) (*(char**) (ev + 0x14) + 0x8c) |= 0x10;

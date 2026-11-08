@@ -8,7 +8,7 @@ void __cdecl CloseVfsStream(void*);
 void __cdecl fcn_0044a770(void*, int);
 void __cdecl fcn_0044e190(void*, void*);
 char __cdecl fcn_0044f0e0(char*);
-void __cdecl fcn_0044fc70(char*, char);
+void __cdecl d3_AddFLChunk(char*, char);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 int __cdecl fcn_0045c5b0(char*, int, int, int);
 char* __cdecl fcn_0064d530(char*, const char*, unsigned int);
@@ -150,7 +150,7 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 	ok = fcn_0044f0e0(buf);
 	obj = fcn_0044f250(buf, a1, nametab, namestep, namecount);
 	if (obj == 0) {
-		fcn_0044fc70(buf, ok);
+		d3_AddFLChunk(buf, ok);
 		obj = fcn_0044f250(buf, a1, nametab, namestep, namecount);
 		res = (int) obj;
 	}

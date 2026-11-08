@@ -14,7 +14,7 @@ extern int __cdecl fcn_00501490(char* key);
 extern int __cdecl fcn_00506380(int a, void* table, void* record, int mode);
 extern void __cdecl fcn_00442d50(char* record, int mode);
 extern int __cdecl fcn_00413680(char* record, char* scene, char* out, int* value);
-extern void* __cdecl fcn_00426fd0(char* name);
+extern void* __cdecl evt_LoadGfxScript(char* name);
 extern void __cdecl fcn_00428340(void* handle, int a, int b);
 extern void __cdecl SelectTextureSet(char* record, int target, char mode, int flag);
 
@@ -192,7 +192,7 @@ label_5aab:
 		if (*(int*) (record + 0x1ec) != 0) {
 			rc = fcn_00413680(record, g_6b8014, buf, &value);
 			if (rc != 0) {
-				handle = fcn_00426fd0((char*) 0x6a1f3c);
+				handle = evt_LoadGfxScript((char*) 0x6a1f3c);
 				if (handle != 0)
 					fcn_00428340(handle, 6, value);
 			}

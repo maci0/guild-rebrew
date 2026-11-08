@@ -57,7 +57,7 @@ int __cdecl fcn_00547770();
 int __cdecl fcn_005490a0();
 int __cdecl fcn_005490d0();
 int __cdecl io_FormatTextBuffer();
-int __cdecl fcn_00535570();
+int __cdecl d2_CreateScrollPerga();
 int __cdecl fcn_00535960();
 int __cdecl gm_RandomMod(int);
 
@@ -223,7 +223,7 @@ void __cdecl fcn_00543080(void)
 	} while ((int) v4 < 0x85a28c);
 	if (*(int*) 0x6a3420) {
 		if (*(int*) 0x774965 && !(*(int*) 0x7747b0 & 4)) {
-			v2 = fcn_00535570();
+			v2 = d2_CreateScrollPerga();
 			d2_SetForm(v2, 2);
 			io_AppendText(0x7d);
 			d2_SetForm(v2, 1);

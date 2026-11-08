@@ -6021,10 +6021,7 @@ int __cdecl fcn_005ae6a0(void)
 	return 0;
 }
 
-int __cdecl fcn_005af320(void* obj, int n)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_005af550(void)
 {
@@ -6600,3 +6597,5 @@ int* g_6f2594 = 0;
 
 
 char* g_dynasty_name[64] = {0};
+char* g_14c9320[0x20] = {0};
+int g_6b7ec8 = 0;

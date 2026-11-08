@@ -7,7 +7,7 @@ void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00445600(int, int, int, int*);
 void __cdecl fcn_00455350(char*, char*, int*);
 int __cdecl fcn_004fda30(int);
-char* __cdecl fcn_00403b90(char*, float*);
+char* __cdecl ch_CreateAtPosition(char*, float*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00438cb0(char*, int*);
 void __cdecl fcn_004fdcf0(char*);
@@ -59,7 +59,7 @@ have:
 	v5 = fcn_004fda30(*(unsigned short*) a0);
 	if (v5 != 0) {
 		v6 = (char*) (v5 + 4);
-		*(char**) (a0 + 0x184) = fcn_00403b90(v6, opt);
+		*(char**) (a0 + 0x184) = ch_CreateAtPosition(v6, opt);
 		if (*(char**) (a0 + 0x184) != 0) {
 			fcn_0064d41a(*(char**) (*(char**) (a0 + 0x184) + 0x34), g_68b0d8, *(int*) (a0 + 4));
 			*(void**) (*(char**) (*(char**) (a0 + 0x184) + 0x34) + 0x204) = a0;

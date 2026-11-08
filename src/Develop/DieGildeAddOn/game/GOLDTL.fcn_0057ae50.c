@@ -9,7 +9,7 @@ extern int g_6b8010;
 char* __cdecl fcn_005463a0(int, int, int, ...);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl fcn_00426cc0(int);
-char* __cdecl fcn_00426fd0(const char* name);
+char* __cdecl evt_LoadGfxScript(const char* name);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00455350(char*, char*, float*);
 void __cdecl fcn_00428340(char* o, int n, ...);
@@ -47,11 +47,11 @@ void __cdecl fcn_0057ae50(char* u)
 		}
 	}
 	if (*(int*) (u + 0xb4) == 2) {
-		o = fcn_00426fd0("LOCATIONS\\NEKROMANTENTURM\\NEBEL_DES_GRAUENS_GROSS.esc");
+		o = evt_LoadGfxScript("LOCATIONS\\NEKROMANTENTURM\\NEBEL_DES_GRAUENS_GROSS.esc");
 	} else if (*(int*) (u + 0xb4) == 1) {
-		o = fcn_00426fd0("LOCATIONS\\NEKROMANTENTURM\\NEBEL_DES_GRAUENS_MITTEL.esc");
+		o = evt_LoadGfxScript("LOCATIONS\\NEKROMANTENTURM\\NEBEL_DES_GRAUENS_MITTEL.esc");
 	} else {
-		o = fcn_00426fd0("LOCATIONS\\NEKROMANTENTURM\\NEBEL_DES_GRAUENS_KLEIN.esc");
+		o = evt_LoadGfxScript("LOCATIONS\\NEKROMANTENTURM\\NEBEL_DES_GRAUENS_KLEIN.esc");
 	}
 	if (o == 0) {
 		return;

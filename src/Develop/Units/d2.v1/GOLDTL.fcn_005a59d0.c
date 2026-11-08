@@ -44,7 +44,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00533a40(char*);
 int __cdecl fcn_005a5440(int, void*, int, int, int);
 int __cdecl fcn_005a5980(void*);
-int __cdecl fcn_005a59b0(void*);
+int __cdecl fcn_0059c830(void*);
 int __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_0046ed00(int, int, int);
 int __cdecl fcn_00472170(int, int);
@@ -163,8 +163,8 @@ int __cdecl fcn_005a59d0(char* a0)
 			d2_SetElementImage(e4, 0x4f7);
 		}
 	label_image_done:
-		v15 = fcn_005a59b0(ownRows);
-		v16 = fcn_005a59b0(globRows);
+		v15 = fcn_0059c830(ownRows);
+		v16 = fcn_0059c830(globRows);
 		if (v15 > 4) {
 			fcn_00472170(e1, 1);
 			fcn_00472170(e0, 1);

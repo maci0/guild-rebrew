@@ -8,7 +8,7 @@ extern char g_7f4ca4[];
 extern int g_14cbca0;
 int g_699368 = 1;
 
-char* __cdecl fcn_004e6ae0(void* src);
+char* __cdecl cut_AllocCutscene(void* src);
 
 /* ADDRESS: GOLDTL 0x004c9e20 */
 int __cdecl cm_ExAllocCutscene(int* obj, char* result)
@@ -22,7 +22,7 @@ int __cdecl cm_ExAllocCutscene(int* obj, char* result)
     memcpy(payload, g_aed340, sizeof(payload));
     if (g_14cbca0 != -1)
         g_699368 = *(int*) ((char*) obj + 0x10);
-    entry = fcn_004e6ae0(payload);
+    entry = cut_AllocCutscene(payload);
     if (entry != 0) {
         if (g_7747b0 & 4)
             *(unsigned char*) (entry + 0x26) |= 0x80;

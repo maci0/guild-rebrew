@@ -12,7 +12,7 @@ int __cdecl cm_ExCreateCutsceneEntry(char* command, char* result)
 
     (void) command;
     memcpy(payload, g_aed340, sizeof(payload));
-    entry = fcn_004e6ae0(payload);
+    entry = cut_AllocCutscene(payload);
     if (entry == 0) {
         ReportClientMessage("cm_ExAllocCutscene(): Cutscene-Queue is full!");
         return 1;

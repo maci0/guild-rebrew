@@ -17,7 +17,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_005e3b10(int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005e3520(void);
 void __cdecl fcn_005e2b60(void);
@@ -45,7 +45,7 @@ void __cdecl fcn_005e4820(void)
 		if (g_14ce8e0 != 0 || (*(unsigned char*)&g_14cf950) == 1) {
 			g_774654 = 1;
 		}
-		fcn_00469630(p);
+		d2_UpdateRadioGroup(p);
 		if (g_14ce8d8 != 0 && g_67d370 != -1) {
 			if (g_67d370 == b1) {
 				fcn_00471af0(h, 0);

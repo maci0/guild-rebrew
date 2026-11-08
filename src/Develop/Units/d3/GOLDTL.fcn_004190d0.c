@@ -11,7 +11,7 @@ void __cdecl fcn_004238f0(char*, int);
 void __cdecl fcn_004192b0(char*, int, int, int);
 
 
-void __cdecl fcn_004190d0(SOUND_SOURCE* source)
+void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source)
 {
     float position[4];
     float x, y, z;

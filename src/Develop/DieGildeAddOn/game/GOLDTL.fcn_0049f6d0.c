@@ -24,7 +24,7 @@ int __cdecl gm_RandomMod(int);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x0049f6d0 */
-unsigned int __cdecl fcn_0049f6d0(int a0, unsigned short* a1, int* a2, char* a3)
+unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* a1, int* a2, char* a3)
 {
 	Calc calc[7];
 	int matched[7];

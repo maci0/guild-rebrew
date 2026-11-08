@@ -31,7 +31,7 @@ int __cdecl fcn_00408220(float);
 
 /* Allocates the character action queue and registers the action handlers. */
 /* ADDRESS: GOLDTL 0x0040bde0 */
-int __cdecl fcn_0040bde0(void)
+int __cdecl ch_InitActionQueue(void)
 {
 	g_6b5c20 = m_alloc(0xc5440, "ch:Open:ActionQueue");
 	if (g_6b5c20 == 0) {
@@ -40,7 +40,7 @@ int __cdecl fcn_0040bde0(void)
 	memset(((int*)g_14d0c40), 0, sizeof(int[0x4c0]));
 	memset(((int*)g_14d0020), 0, sizeof(int[0x300]));
 	ch_DeclareAction(7, fcn_004079f0, 1, "bewegung/dreh_90_rechts", 2);
-	ch_DeclareAction(0, fcn_004079d0, 1, &(*(char*)g_6b5c60), 0);
+	ch_DeclareAction(0, ch_ExecFinishAnimation, 1, &(*(char*)g_6b5c60), 0);
 	ch_DeclareAction(23, fcn_00406280, 1, &(*(char*)g_6b5c60), 0);
 	ch_DeclareAction(45, ch_WalkOnPath, 1, "bewegung/gehen", 3);
 	ch_DeclareAction(58, fcn_0040aa00, 1, "bewegung/gehen", 3);

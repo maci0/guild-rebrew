@@ -5,7 +5,7 @@ int __cdecl fcn_0048e4b0(int a1, char* p, int a3);
 
 /* ADDRESS: GOLD 0x0048eaa0 */
 /* ADDRESS: GOLDTL 0x0048e050 */
-int __cdecl fcn_0048e050(int a1, char* p, int a3)
+int __cdecl ai_RunSecretRoom(int a1, char* p, int a3)
 {
 	switch (*(int*) (p + 0x10)) {
 	case 0:

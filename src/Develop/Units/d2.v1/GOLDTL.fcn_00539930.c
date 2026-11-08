@@ -57,7 +57,7 @@ int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl fcn_00472900(int, int);
 int __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_005397c0(void);
-int __cdecl fcn_004695a0(int, int);
+int __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl WritePrivateProfileStringA(char*, char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x00539930 */

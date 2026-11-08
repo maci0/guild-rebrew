@@ -7,7 +7,7 @@ extern char g_6761ec[];
 extern char* g_6b7e98;
 void __cdecl fcn_00425bf0(void*, int, char*);
 
-int __cdecl fcn_0040db50(char** a1)
+int __cdecl KillCharacterAnimations(char** a1)
 {
 	char* p;
 	char* q;

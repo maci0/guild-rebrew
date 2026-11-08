@@ -5,7 +5,7 @@ extern char g_7dc440[];
 
 /* ADDRESS: GOLD 0x0053d860 */
 /* ADDRESS: GOLDTL 0x00545580 */
-int __cdecl fcn_00545580(int a1, int a2, int a3)
+int __cdecl he_RegisterHandler(int a1, int a2, int a3)
 {
 	if (a1 < 0 || a1 >= 0xa7) {
 		return 1;

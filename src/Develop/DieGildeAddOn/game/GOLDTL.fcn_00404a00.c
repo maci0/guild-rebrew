@@ -5,7 +5,7 @@
 #include "../../Units/d3/d3_animation.h"
 
 int __cdecl fcn_0065f220(const char*, const char*);
-void __cdecl fcn_0042e540(char*);
+void __cdecl vfs_ToSlashes(char*);
 void __cdecl fcn_00435500(char*, char*);
 
 
@@ -35,7 +35,7 @@ void __cdecl ch_FinishAni(char* obj)
         return;
     }
     sprintf(name, "morph_%i", (int) obj);
-    if (fcn_00433ba0(name) != 0) {
+    if (d3_FindAnimByName(name) != 0) {
         return;
     }
     if (*(char**) (node + 0x1cc) != 0) {
@@ -100,8 +100,8 @@ void __cdecl fcn_00404a00(char* obj, int n, ...)
 		}
 		sprintf(path, "character/%s/%s_%s.baf", obj + 0x130, name, obj + 0x130);
 		sprintf(ani, "%s_%s", name, obj + 0x130);
-		fcn_0042e540(ani);
-		if (fcn_00433ba0(ani) != 0) {
+		vfs_ToSlashes(ani);
+		if (d3_FindAnimByName(ani) != 0) {
 			continue;
 		}
 		d3_LoadAnimStream(path, ani, looped);
@@ -136,8 +136,8 @@ void __cdecl ch_PreloadModelMotions(char* model, int n, ...)
         }
         sprintf(path, "character/%s/%s_%s.baf", model, name, model);
         sprintf(ani, "%s_%s", name, model);
-        fcn_0042e540(ani);
-        if (fcn_00433ba0(ani) != 0) {
+        vfs_ToSlashes(ani);
+        if (d3_FindAnimByName(ani) != 0) {
             continue;
         }
         d3_LoadAnimStream(path, ani, 0);

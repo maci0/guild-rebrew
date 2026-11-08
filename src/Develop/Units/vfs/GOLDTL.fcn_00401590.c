@@ -21,7 +21,7 @@ typedef struct {
 typedef struct VFS_DIR VFS_DIR;
 extern VFS_DIR* g_6b7fdc;
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
-void __cdecl fcn_00430a80(void* f, int off, int whence);
+void __cdecl vfs_fseek(void* f, int off, int whence);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* f);
 void __cdecl CloseVfsStream(void* f);
 
@@ -34,7 +34,7 @@ char __cdecl fcn_00401590(const char* name, int* width, int* height, int* bpp)
 	result = 0;
 	f = vfs_Tfopen(name, "rb", g_6b7fdc);
 	if (f != 0) {
-		fcn_00430a80(f, 0xe, 0);
+		vfs_fseek(f, 0xe, 0);
 		vfs_ReadData((char*)&bih, 1, 0x28, f);
 		CloseVfsStream(f);
 		if (bih.biPlanes == 1 && (bih.biBitCount == 8 || bih.biBitCount == 0x18) &&

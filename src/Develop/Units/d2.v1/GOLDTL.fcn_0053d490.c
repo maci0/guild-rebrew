@@ -32,8 +32,8 @@ extern char s_6a3fe0[]; /* "Menu\\CHOOSEPLAYER" */
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_00469470(int, int);
 void __cdecl fcn_00469510(int);
-void __cdecl fcn_004695a0(int, int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_SelectRadioGroup(int, int);
+void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -42,7 +42,7 @@ char* __cdecl fcn_00471f80(int);
 void __cdecl fcn_00472170(int, int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472380(int, ...);
-void __cdecl fcn_00472770(int, int);
+void __cdecl d2_SetBildArgument(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00476b60(void);
 void __cdecl fcn_00474cf0(int);
@@ -133,16 +133,16 @@ int __cdecl fcn_0053d490(int a0, int a1)
 	fcn_00472380(v21, g_7e240a);
 	for (j = 0; j < 8; j++) {
 		if (*(int*) (g_1015ea0 + sel[j] * 0x2f4 + 8) == g_7e23e4) {
-			fcn_004695a0(list, j);
+			d2_SelectRadioGroup(list, j);
 			break;
 		}
 	}
-	fcn_00472770(v20, 0xc);
-	fcn_00472770(v21, 0xc);
+	d2_SetBildArgument(v20, 0xc);
+	d2_SetBildArgument(v21, 0xc);
 	list1 = d2_CreateRadioGroup(2, s1a, s1b);
-	fcn_004695a0(list1, g_7e23e8 & 0xff);
+	d2_SelectRadioGroup(list1, g_7e23e8 & 0xff);
 	list2 = d2_CreateRadioGroup(2, s2a, s2b);
-	fcn_004695a0(list2, g_7e23e9);
+	d2_SelectRadioGroup(list2, g_7e23e9);
 	fcn_00476b60();
 	g_14cf950 = 0;
 	for (;;) {
@@ -186,7 +186,7 @@ int __cdecl fcn_0053d490(int a0, int a1)
 				g_14cf950 = 0;
 			}
 		} else if (v9 == 2) {
-			fcn_00469630(list1);
+			d2_UpdateRadioGroup(list1);
 			if (g_100f1dc != -1) {
 				if (g_67d370 == (int) s1a) {
 					g_7e23e8 = 0;
@@ -199,7 +199,7 @@ int __cdecl fcn_0053d490(int a0, int a1)
 				}
 			}
 		} else if (v9 == 3) {
-			fcn_00469630(list2);
+			d2_UpdateRadioGroup(list2);
 			if (g_100f1dc != -1) {
 				if (g_67d370 == (int) s2b) {
 					g_7e23e9 = 1;
@@ -212,7 +212,7 @@ int __cdecl fcn_0053d490(int a0, int a1)
 				}
 			}
 		} else if (v9 == 4) {
-			fcn_00469630(list);
+			d2_UpdateRadioGroup(list);
 			if (g_14cf950 == 0x1c) {
 				v9 = 5;
 				redraw = 1;

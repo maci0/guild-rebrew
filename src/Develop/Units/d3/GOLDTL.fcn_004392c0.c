@@ -89,7 +89,7 @@ void __cdecl fcn_004392c0(void)
 		(*(node_fn_4392c0*) (g_1042c38 + 0x1ec))(g_1042c38);
 	}
 	while (g_1042320 != g_1052a40) {
-		fcn_00434760(g_1042320, 1);
+		d3_ReleaseAnim(g_1042320, 1);
 	}
 	fcn_0045c110();
 }

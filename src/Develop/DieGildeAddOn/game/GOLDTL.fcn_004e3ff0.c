@@ -1,8 +1,8 @@
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_AccumulateTyped2(char*);
-float __cdecl fcn_004e6d20(void);
-unsigned int __cdecl fcn_004e6cb0(int);
+float __cdecl cut_RandFloat(void);
+unsigned int __cdecl cut_RandMod(int);
 
 
 /* ADDRESS: GOLDTL 0x004e3ff0 */
@@ -30,16 +30,16 @@ void __cdecl fcn_004e3ff0(char* a, int* b)
 	if (o == 0)
 		return;
 	fv = (float) (val + b[0x13] * 32000);
-	n = (int) ((fcn_004e6d20() / 6.0f + 0.3f) * gm_AccumulateTyped2(o) < fv
-	    ? (fcn_004e6d20() / 6.0f + 0.3f) * gm_AccumulateTyped2(o) : fv);
+	n = (int) ((cut_RandFloat() / 6.0f + 0.3f) * gm_AccumulateTyped2(o) < fv
+	    ? (cut_RandFloat() / 6.0f + 0.3f) * gm_AccumulateTyped2(o) : fv);
 	if (n < val)
 		return;
-	if (!(fcn_004e6d20() > (float) val / n))
+	if (!(cut_RandFloat() > (float) val / n))
 		return;
 	if (n > val * 2)
 		n = val * 2;
 	n -= val;
 	*(int*) (a + 0x98) = 1;
-	n = (int) ((float) val + fcn_004e6cb0(n) * (b[0x13] * 0.1f));
+	n = (int) ((float) val + cut_RandMod(n) * (b[0x13] * 0.1f));
 	*(int*) (a + 0x94) = n % 32 + n;
 }

@@ -19,7 +19,7 @@ int __cdecl fcn_004c51f0(int a, int b, int c, int d, unsigned char k, int n);
 void __cdecl fcn_004c5420(int id, int a2, int a3, int a4, int a5);
 
 /* ADDRESS: GOLDTL 0x0048ef30 */
-int __cdecl fcn_0048ef30(char* e, char* p, char* q)
+int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 {
 	float* d;
 	char* s;

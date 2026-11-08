@@ -6,7 +6,7 @@ extern char g_68d6d0[];
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
-unsigned int __cdecl fcn_004e6cb0(unsigned int n)
+unsigned int __cdecl cut_RandMod(unsigned int n)
 {
 	char buf[0x40];
 

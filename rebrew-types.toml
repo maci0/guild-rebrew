@@ -816,7 +816,7 @@ extent = "allocation"
 evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged."
 cflags = "/O2 /Gd"
 source_hash = "2981343282d09abfef36ae870db21c98f874577fe484b6e67100707b3eb5193b"
-headers_hash = "cebb71296f5ded27ad51c0c91ad3ebfe994892fb9642406a31141dbd89225037"
+headers_hash = "78086b5cfc05c8007fae52165dd3cc17335539e18911a94936b76547be1f3d84"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -830,7 +830,7 @@ extent = "allocation"
 evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged."
 cflags = "/O2 /Gd"
 source_hash = "2981343282d09abfef36ae870db21c98f874577fe484b6e67100707b3eb5193b"
-headers_hash = "cebb71296f5ded27ad51c0c91ad3ebfe994892fb9642406a31141dbd89225037"
+headers_hash = "78086b5cfc05c8007fae52165dd3cc17335539e18911a94936b76547be1f3d84"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -900,3 +900,29 @@ unbekannt_170 = 368
 unbekannt_174 = 372
 unbekannt_178 = 376
 unbekannt_190 = 400
+
+[types."d2.win.tl".GOLDTL]
+file = "src/Develop/Units/d2.v1/d2_win.h"
+symbol = "D2_WIN"
+size = 972
+native_size = 972
+extent = "allocation"
+evidence = "TL stride evidence: 0x46e7a0 lea eax*4 plus 0x1015f40 with tex at 0x3a0 and alpha at 0x3a4; 0x472960 lea same base with width at 0xc, height at 0x10, surf at 0x38, active at 0x290; 0x4727a0 same lea base and stride; d2_ShowTxt left at 4, top at 8, children at 0x28, count at 0x2c. Views agree or lie in padding, no overlap. Inferred names; size equals 0x3cc."
+cflags = "/O2 /Gd"
+source_hash = "9bc4e2e1408fe27137a8826e20ec0abdd04fa634a9eb37b25ea95a90cb33191a"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."d2.win.tl".GOLDTL.offsets]
+left = 4
+top = 8
+width = 12
+height = 16
+children = 40
+count = 44
+surf = 56
+slot = 636
+active = 656
+tex = 928
+alpha = 932

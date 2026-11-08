@@ -3,7 +3,7 @@ void __cdecl fcn_004c5530(int a1);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
 
 /* ADDRESS: GOLDTL 0x004a1080 */
-int __cdecl fcn_004a1080(char* a0, char* a1, char* a2)
+int __cdecl ai_RunStudium(char* a0, char* a1, char* a2)
 {
 	char buf[0xf8];
 	char* e;

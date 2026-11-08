@@ -2,7 +2,7 @@
 #include <string.h>
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004e6cb0(int);
+int __cdecl cut_RandMod(int);
 void __cdecl fcn_004e4730(char*);
 void __cdecl fcn_004e4b60(char*);
 void __cdecl fcn_004e4e90(char*);
@@ -36,7 +36,7 @@ void __cdecl fcn_004e1b00(int a0)
 	int id;
 	int len;
 
-	mode = fcn_004e6cb0(3);
+	mode = cut_RandMod(3);
 	ranges[0] = 14000;
 	ranges[1] = 12000;
 	ranges[2] = 12000;
@@ -55,11 +55,11 @@ void __cdecl fcn_004e1b00(int a0)
 	fcn_00445f50(0, 0, 1.0f, 1);
 	fcn_004463f0(0, 0, 0);
 	if (mode == 1) {
-		scene = (char*) (fcn_004e6cb0(3) * 0x4c + 0x6a2818);
+		scene = (char*) (cut_RandMod(3) * 0x4c + 0x6a2818);
 	} else if (mode == 2) {
-		scene = (char*) (fcn_004e6cb0(3) * 0x4c + 0x6a2730);
+		scene = (char*) (cut_RandMod(3) * 0x4c + 0x6a2730);
 	} else {
-		scene = (char*) (fcn_004e6cb0(4) * 0x4c + 0x6a2600);
+		scene = (char*) (cut_RandMod(4) * 0x4c + 0x6a2600);
 	}
 	fcn_004e4b60(scene);
 	fcn_004e4e90((char*) 0x68cb08);

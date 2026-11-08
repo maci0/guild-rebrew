@@ -31,6 +31,6 @@ void __cdecl d2_SetElementImage(int element, int bild)
     eintrag->f20 = g_1040494;
 #endif
     if (eintrag->kind < 0x40) {
-        fcn_00469900(eintrag->f08);
+        d2_AddRefcount(eintrag->f08);
     }
 }

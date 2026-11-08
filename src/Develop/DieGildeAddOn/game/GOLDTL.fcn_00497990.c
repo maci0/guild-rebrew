@@ -12,7 +12,7 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_004fa5b0(int, int, int);
-int __cdecl fcn_0049e900(int, char*, int, char*, int);
+int __cdecl ai_StartKreditNehmen(int, char*, int, char*, int);
 int __cdecl fcn_0050cf50(char*, int);
 int __cdecl fcn_0050d320(char*, char);
 int __cdecl fcn_00505e20(int, int, int, char*, int);
@@ -198,7 +198,7 @@ fraction:
 	}
 	*(int*) (a4 + 8) = B - A;
 	*(char*) a4 = 0x12;
-	return fcn_0049e900(0x10, a2, a3, a4, a5);
+	return ai_StartKreditNehmen(0x10, a2, a3, a4, a5);
 }
 
 /* ADDRESS: GOLDTL 0x00497e60 */

@@ -36,8 +36,8 @@ void __cdecl fcn_00426170(int* voice, int enabled);
 SOUND_SOURCE* __cdecl fcn_00418dc0(void);
 SOUND_SOURCE* __cdecl fcn_00418c80(char* voice, char* objekt, int volume, float range);
 void __cdecl fcn_00418d70(SOUND_SOURCE* source);
-void __cdecl fcn_00418fb0(SOUND_SOURCE* source);
-void __cdecl fcn_004190d0(SOUND_SOURCE* source);
+void __cdecl d3_UpdateSoundSourcePan(SOUND_SOURCE* source);
+void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source);
 
 int __cdecl fcn_004193f0(char* obj, void* label, int mode, float amount);
 

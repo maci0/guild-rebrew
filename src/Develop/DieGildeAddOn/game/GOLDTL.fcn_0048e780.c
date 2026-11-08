@@ -3,7 +3,7 @@
 int __cdecl fcn_004a6550(int a1, int x);
 
 /* ADDRESS: GOLDTL 0x0048e780 */
-int __cdecl fcn_0048e780(int a1, char* a, char* b)
+int __cdecl ai_RunCannonTower(int a1, char* a, char* b)
 {
 	int x;
 	int y;

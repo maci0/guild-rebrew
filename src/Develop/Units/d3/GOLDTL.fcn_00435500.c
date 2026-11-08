@@ -30,7 +30,7 @@ void __cdecl fcn_00435500(char* o, char* name)
 	for (i = 0; i < 3; i++) {
 		if (slots[i].name != 0 && strcmp(name, slots[i].name) == 0) {
 			slots[i].active = 0;
-			fcn_00434760(slots[i].name, 0);
+			d3_ReleaseAnim(slots[i].name, 0);
 			slots[i].name = 0;
 		}
 	}

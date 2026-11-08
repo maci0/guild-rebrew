@@ -2,7 +2,7 @@
 
 void __cdecl fcn_00435500(char*, int);
 
-int __cdecl fcn_00413120(char* p)
+int __cdecl d3_RemoveObjectAnim(char* p)
 {
 	int i;
 	char* q;

@@ -3,7 +3,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x0049ce90 */
-int __cdecl fcn_0049ce90(char* a, int b, int c)
+int __cdecl ai_RunAnschwaerzen(char* a, int b, int c)
 {
 	if (fcn_004aac00(a, b, c) != 0) {
 		fcn_004c5420(*(int*) (a + 4), 0x1e8, 4, 0x200, 0);

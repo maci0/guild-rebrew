@@ -32,7 +32,7 @@ unsigned short* __cdecl fcn_004ce680(char*);
 float __cdecl fcn_004cefb0(char*, int);
 float __cdecl fcn_004cf000(void*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
-unsigned int __cdecl fcn_004e6cb0(int);
+unsigned int __cdecl cut_RandMod(int);
 int __cdecl fcn_005c6270(void*, int);
 char* __cdecl fcn_004ceac0(char*, char*);
 int __cdecl fcn_004d1020(char*, char*, char*, int, int);
@@ -40,7 +40,7 @@ char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
 int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00455350(char*, float*, float*);
-int __cdecl fcn_004cf0f0(char*, char*);
+int __cdecl fcn_004ce270(char*, char*);
 int __cdecl fcn_004c6820(int, void*);
 int __cdecl fcn_004c6680(char*, int, int, char*);
 unsigned int __cdecl fcn_004d89c0(int, unsigned int, int);
@@ -242,7 +242,7 @@ void __cdecl fcn_004d8d00(char* a0)
 						v24 = 1;
 					}
 					if (v24) {
-						u = fcn_004e6cb0(*((unsigned char*)ent + 6)
+						u = cut_RandMod(*((unsigned char*)ent + 6)
 						    - *((unsigned char*)ent + 5));
 						u += *((unsigned char*)ent + 5);
 						if (tgt)
@@ -453,7 +453,7 @@ tail1_body:
 			v68 = *(int*)(e + 0x204);
 			fcn_00455350(e, (float*)(e + 0x4c), vec);
 			if (v68) {
-				if (!fcn_004cf0f0(obj, (char*)v68))
+				if (!fcn_004ce270(obj, (char*)v68))
 					goto case4b;
 				if (*((unsigned char*)v68 + 8) != 0
 				    && CompareVector3WithinTolerance(vec,
@@ -490,7 +490,7 @@ tail1_body:
 			break;
 case4b:
 			fcn_00455350(e, (float*)(e + 0x4c), vec);
-			if (fcn_004cf0f0(obj, (char*)*(int*)(e + 0x204))) {
+			if (fcn_004ce270(obj, (char*)*(int*)(e + 0x204))) {
 				if (*((unsigned char*)v68 + 8) != 0
 				    && CompareVector3WithinTolerance(vec,
 					(float*)(ent34((char*)v68) + 0x4c), 49.5f)) {

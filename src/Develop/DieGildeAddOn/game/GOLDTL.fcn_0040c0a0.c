@@ -9,7 +9,7 @@
 #include "Develop/Units/Error/error_message.h"
 
 
-CH_ACTION* __cdecl fcn_0040c0a0(char* e)
+CH_ACTION* __cdecl ch_NewAction(char* e)
 {
 	CH_ACTION* t;
 	CH_ACTION* p;

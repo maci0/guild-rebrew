@@ -11,7 +11,7 @@ extern char g_6b7090[];
 extern CRITICAL_SECTION g_14cc5a0;
 void __cdecl fcn_0042a0e0(int h, int vol);
 
-void __cdecl fcn_0041fc80(int vol)
+void __cdecl SetMasterVolume(int vol)
 {
 	if (g_6b71a4 == 0) {
 		return;

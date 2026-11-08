@@ -14,7 +14,7 @@ void __cdecl fcn_004056f0(char* a1, int a2, int a3)
 	float b[4];
 
 	if (a1 != 0) {
-		fcn_004055a0(a1, a2, b, a);
+		ch_GetCameraView(a1, a2, b, a);
 		fcn_00433780(g_6b8014);
 		g_6b5cbc = 0;
 		g_6b5cc0 = 0;

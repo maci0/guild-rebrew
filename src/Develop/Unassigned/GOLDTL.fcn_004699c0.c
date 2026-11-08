@@ -1,6 +1,6 @@
 int __cdecl fcn_00469890(void);
 int __cdecl fcn_00466260(int, int*, int*);
-void __cdecl fcn_00469900(int);
+void __cdecl d2_AddRefcount(int);
 int __cdecl fcn_0047a200(int, int, int, int);
 int __cdecl fcn_0047b620(int, int);
 
@@ -38,7 +38,7 @@ int __cdecl fcn_004699c0(unsigned int a0, int a1, int a2)
 	*(int*) (v1 + 0x34) = *(int*) 0x67d968;
 	*(int*) (v1 + 0x24) = 2;
 	*(int*) (v1 + 0x84) = *(int*) 0x67d398;
-	fcn_00469900(a2);
+	d2_AddRefcount(a2);
 	kind = *(int*) (v1 + 0x20);
 	if (kind == 8) {
 		*(int*) (v1 + 0x5c) = 1;

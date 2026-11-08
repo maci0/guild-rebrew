@@ -34,7 +34,7 @@ void __cdecl fcn_00471b60(int);
 int __cdecl d2_CreateRadioGroup(int);
 void __cdecl fcn_00469470(int, int);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
@@ -81,7 +81,7 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 		}
 	}
 	while (fcn_005373e0(fcn_005dfe80, wflags)) {
-		fcn_00469630(ctx);
+		d2_UpdateRadioGroup(ctx);
 		if (flags & 0x40) {
 			fcn_004707d0(h);
 		}

@@ -30,7 +30,7 @@ int __cdecl d2_CreateRadioGroup(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00469470(int, int);
 int __cdecl fcn_005373e0(int (__cdecl*)(int), int);
-void __cdecl fcn_00469630(int);
+void __cdecl d2_UpdateRadioGroup(int);
 unsigned char __cdecl fcn_00507400(int, int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
@@ -75,7 +75,7 @@ int __cdecl fcn_0053cd40(int flags)
 	}
 	g_100f1dc = -1;
 	while (fcn_005373e0(fcn_0053cd40, flags) != 0) {
-		fcn_00469630(list);
+		d2_UpdateRadioGroup(list);
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 11; i++) {
 				if (g_67d370 == ids[i]) {

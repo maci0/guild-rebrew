@@ -16,7 +16,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 
 
 /* ADDRESS: GOLDTL 0x004abbe0 */
-int __cdecl fcn_004abbe0(int a1, unsigned short* a2, int a3, char* a4)
+int __cdecl ai_StartTheater(int a1, unsigned short* a2, int a3, char* a4)
 {
 	int lvl;
 	int best;

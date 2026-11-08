@@ -37,7 +37,7 @@ char __cdecl fcn_0040f1c0(char* a0, char* a1)
 		strcpy(resolved, short_name);
 	}
 	if (path[0] != 0 && object != 0 && *(char**) (object + 0x1cc) != 0) {
-		if (fcn_00433ba0(name) == 0) {
+		if (d3_FindAnimByName(name) == 0) {
 			d3_LoadAnimStream(path, name, 0);
 		}
 		memset(&options, 0, sizeof(options));

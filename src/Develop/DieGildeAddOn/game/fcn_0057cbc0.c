@@ -15,7 +15,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*,
                           char*);
 int __cdecl fcn_00515540(int);
 void __cdecl fcn_004432d0(int, int);
-void* __cdecl fcn_00426fd0(char*);
+void* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(void*, int, int);
 void __cdecl fcn_00546190(char*);
 void __cdecl fcn_0057c9f0(char*);
@@ -51,7 +51,7 @@ void __cdecl fcn_0057cbc0(char* p)
                          *(int*) (s + 1), *(int*) (wnd + 2), g_6b5c60,
                          g_6b5c60);
             fcn_004432d0(fcn_00515540((int) wnd), 1);
-            e = (char*) fcn_00426fd0(g_6a80c0);
+            e = (char*) evt_LoadGfxScript(g_6a80c0);
             if (e != 0) {
                 *(int*) (e + 0xc8c) = 1;
                 *(int*) (e + 0x104) = *(int*) (wnd + 2);

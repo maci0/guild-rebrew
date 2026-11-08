@@ -31,7 +31,7 @@ char* __cdecl fcn_00502cd0(int id, int a, int b, int c, int d);
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 
-int __cdecl fcn_0049f290(int busy, unsigned short* self, int pending, Act* out)
+int __cdecl ai_StartStammtisch(int busy, unsigned short* self, int pending, Act* out)
 {
 	int sel;
 	int step;

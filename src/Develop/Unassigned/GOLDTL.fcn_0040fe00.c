@@ -9,7 +9,7 @@ typedef struct {
 
 void __cdecl fcn_00425bf0(void*, int, char*);
 
-int __cdecl fcn_0040fe00(S40fe00** a1, char* a2)
+int __cdecl SetBlocked(S40fe00** a1, char* a2)
 {
 	S40fe00* p;
 

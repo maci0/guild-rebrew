@@ -29,7 +29,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action);
 void __cdecl fcn_004e5a00(int* event);
 void __cdecl fcn_004e4f10(int* event);
 int __cdecl cut_CutsceneReady(int* event);
-int __cdecl fcn_004e6200(int participant, unsigned char* event);
+int __cdecl cut_IsParticipant(int participant, unsigned char* event);
 int __cdecl cut_CheckMaster(int* event);
 
 int __cdecl fcn_004dc7d0(char* event);

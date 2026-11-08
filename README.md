@@ -30,10 +30,10 @@ the snapshot date is printed on each graphic.
 Refresh all three graphics from one read-only status snapshot:
 
 ```sh
-uv run rebrew status --all-targets --json > /tmp/guild-rebrew-status.json
-uv run python scripts/progress_svg.py < /tmp/guild-rebrew-status.json > docs/assets/reconstruction-status.svg
-uv run python scripts/progress_svg.py --map < /tmp/guild-rebrew-status.json > docs/assets/function-map.svg
-uv run python scripts/progress_svg.py --data < /tmp/guild-rebrew-status.json > docs/assets/data-verification.svg
+uv run rebrew status --all-targets --json > .scratch/status.json
+uv run python scripts/progress_svg.py < .scratch/status.json > docs/assets/reconstruction-status.svg
+uv run python scripts/progress_svg.py --map < .scratch/status.json > docs/assets/function-map.svg
+uv run python scripts/progress_svg.py --data < .scratch/status.json > docs/assets/data-verification.svg
 ```
 
 <a id="get-started"></a><a id="build-and-compare"></a><a id="4-build-the-compiler-images"></a><a id="5-compile-serverdll-with-cmake"></a><a id="6-compare-the-result-with-the-original"></a><a id="work-together"></a>
@@ -52,7 +52,7 @@ Quick setup after installing the [build prerequisites](docs/build.md#prerequisit
 ```sh
 git clone https://github.com/maci0/guild-rebrew.git
 cd guild-rebrew
-uv python install 3.15.1
+uv python install 3.15.2
 uv sync
 uv run rebrew --version
 ```

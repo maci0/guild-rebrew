@@ -10,7 +10,7 @@ typedef struct {
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00425bf0(void*, int, char*);
 
-int __cdecl fcn_00410600(S410600** a1, char* a2)
+int __cdecl SetEmitterRebirthFill(S410600** a1, char* a2)
 {
 	S410600* p;
 

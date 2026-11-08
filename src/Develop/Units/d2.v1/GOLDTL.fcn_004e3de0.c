@@ -17,7 +17,7 @@ char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-int __cdecl fcn_004e6e20(int, int, int);
+int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 char* __cdecl fcn_00471f80(int);
 int __cdecl fcn_0050b750(char*, unsigned char);
@@ -70,10 +70,10 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 	w = fcn_00472250(dlg, 0, t);
 	d2_SetElementValue(w, lo, hi, lo);
 	bar = fcn_004677e0((*(int*) (g_77255c + 0xc) - 0x12c) / 2 - 8, 8, 0x12c, 0, 100, 0x75, 0x42, g_772514);
-	fcn_004e6e20(bar, 0x5dc, 1);
+	d2_UpdateProgressBar(bar, 0x5dc, 1);
 	g_100f1dc = -1;
 	while (fcn_005373e0(fcn_004e3de0, g_68bfb8) != 0) {
-		if (fcn_004e6e20(bar, 0, 0) == 0) {
+		if (d2_UpdateProgressBar(bar, 0, 0) == 0) {
 			g_774654 = 1;
 		} else {
 			x = g_100f1dc;

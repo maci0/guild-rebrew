@@ -5,7 +5,7 @@
 
 #include "Develop/DieGildeAddOn/game/ch_action.h"
 
-CH_ACTION* __cdecl fcn_0040c0a0(char* e);
+CH_ACTION* __cdecl ch_NewAction(char* e);
 void __cdecl UsingGate(CH_ACTION* t);
 #include "Develop/Units/Error/error_message.h"
 
@@ -13,7 +13,7 @@ CH_ACTION* __cdecl ch_UseGate(char* e, const char* name, const char* name2, int 
 {
 	CH_ACTION* t;
 
-	t = fcn_0040c0a0(e);
+	t = ch_NewAction(e);
 	if (t == 0) {
 		return 0;
 	}

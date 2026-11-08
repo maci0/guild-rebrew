@@ -15,7 +15,7 @@ int __cdecl gm_GetOppositeStatIndex(int job);
 int __cdecl fcn_004ab010(unsigned short* e, Blk24* o1, Blk24* o2);
 int __cdecl fcn_004ab1a0(unsigned short* e, Blk24* o1, Blk24* o2);
 
-int __cdecl fcn_0049e750(int a1, unsigned short* e, int a3, Blk24* o1, Blk24* o2)
+int __cdecl ai_StartDunkleEcke(int a1, unsigned short* e, int a3, Blk24* o1, Blk24* o2)
 {
 	Blk24 b1;
 	Blk24 b2;
