@@ -19,10 +19,14 @@ new full client image was built; the byte results below are per-function compari
   `gm_RemoveLinkedNodeById`, `gm_FindKind47ByOwner`). Eight other pairs were tried and
   restored because the TL bytes changed: the shared bodies carry server-only log calls.
   Guarded patches for six of them are drafted under `.scratch/` and untested.
-- `rebrew lint --json` reports 0 errors. After an agent ran `rebrew verify` outside a
-  transaction, seven GoldTL functions that were RELOC show NEAR_MATCHING on retest
-  (`0x00452360`, `0x00474780`, `0x004e4b60`, `0x00526db0`, `0x00537080`, `0x005e3c40`,
-  `0x00451150`). The cause is not traced.
+- `rebrew lint --json` reports 0 errors. Seven GoldTL functions that were recorded as RELOC
+  on 2026-11-02 now test as NEAR_MATCHING (`0x00452360`, `0x00474780`, `0x004e4b60`,
+  `0x00526db0`, `0x00537080`, `0x005e3c40`, `0x00451150`), with 4 to 24 mismatching bytes.
+  All seven have relocation bindings that are UNRESOLVED or CONFLICT against the current data
+  rows (for example `_g_67bc4c` unresolved and `_g_6b8714` bound to 0x6b8714 where the original
+  operand is 0x67bc4c in `fcn_00452360`). The result reproduces on the rebuilt compiler image,
+  none of the seven source files changed this session, and `check_known_bindings` has been on
+  since 2026-10-14. When the data rows diverged from the sources is not established.
 
 Open, in order:
 
