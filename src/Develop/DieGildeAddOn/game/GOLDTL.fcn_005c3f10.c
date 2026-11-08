@@ -83,7 +83,7 @@ int __cdecl fcn_0050cf50(char* ent, int kind);
 int __cdecl fcn_00504f30(int a, int b);
 int __cdecl fcn_005463a0(int a, int b, int c);
 int __cdecl fcn_005462a0(void);
-int __cdecl fcn_00504e70(int a);
+void* __cdecl gm_SearchTable67(int a);
 int __cdecl fcn_00508da0(char* ent);
 void __cdecl fcn_004727a0(int a, int b);
 int __cdecl fcn_00519190(int id, ...);
@@ -179,7 +179,7 @@ void __cdecl fcn_005c3f10(char* ent)
 	}
 	do {
 		if ((*(unsigned char*) (ent + 0x5b) & 4) != 0
-		    || fcn_00504e70(v.id) == 0)
+		    || gm_SearchTable67(v.id) == 0)
 			g_774654 = 1;
 		if (*(unsigned short*) (ent + 0x5a) != v.prev)
 			changed = 1;

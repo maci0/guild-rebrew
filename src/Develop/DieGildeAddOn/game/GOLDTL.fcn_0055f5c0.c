@@ -33,7 +33,7 @@ int __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_004237f0(void*, int);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 char* __cdecl cut_FindCutsceneById(int);
-void __cdecl fcn_004e6bd0(int, int);
+int __cdecl cut_RemoveParticipant(int, int);
 void __cdecl fcn_004c5a20(int, int);
 int __cdecl fcn_00503fe0(int, int, int);
 void __cdecl fcn_00526920(char*, int, char*);
@@ -164,7 +164,7 @@ done:
                 goto exit_b;
             }
             if (g_7747b0 & 8) {
-                fcn_004e6bd0(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + 0x7f4ca4));
+                cut_RemoveParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + 0x7f4ca4));
             } else if (g_7747b0 & 4) {
                 fcn_004c5a20(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + 0x7f4ca4));
             }
@@ -206,7 +206,7 @@ body1:
                           && (*(unsigned char*) (rec + 0x26) & 0x10)))
                         *(int*) (rec + 4) = 1;
                 } else if (g_7747b0 & 8) {
-                    fcn_004e6bd0(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + 0x7f4ca4));
+                    cut_RemoveParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + 0x7f4ca4));
                 } else if (g_7747b0 & 4) {
                     fcn_004c5a20(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + 0x7f4ca4));
                 }

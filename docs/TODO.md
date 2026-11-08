@@ -26,11 +26,13 @@ new full client image was built; the byte results below are per-function compari
 
 Open, in order:
 
-1. TL link gaps (55 unresolved externals): three placeholder bindings
-   (`fcn_00442be0`, `fcn_004e6bd0`, `fcn_00504e70`) fail because the callers declare
-   a different signature; `rebrew types reconcile` refuses with "incomplete source/include
-   contexts". Forty data externals need storage rows, and 49 proposed global names have
-   no store row. Gaps for the upstream tool go to its `docs/IDEAS-GUILD.md`.
+1. TL link gaps (55 unresolved externals): the three placeholder calls `fcn_00442be0`,
+   `fcn_004e6bd0` and `fcn_00504e70` now call `d3_DestroyObject`, `cut_RemoveParticipant`
+   and `gm_SearchTable67` through hand-edited caller prototypes, because
+   `rebrew types reconcile` refuses with "incomplete source/include contexts". Their caller rows
+   stay SIZE_MISMATCH, with match counts 4 to 20 bytes lower. Forty data externals need
+   storage rows, and 49 proposed global names have no store row. Gaps for the upstream tool
+   go to its `docs/IDEAS-GUILD.md`.
 2. Gold link gaps: 133 of 284 classified unresolved externals (2026-11-05 log) are cross-target aliases.
    Only one GOLD loose file could be named from a TL twin.
 3. 66 stock-library functions (zlib, d3dx8, a few more) need `rebrew library bind-source`, not game names.

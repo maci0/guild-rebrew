@@ -7,7 +7,7 @@ void __cdecl fcn_00428340(int, int, ...);
 int __cdecl fcn_00428720(int);
 void __cdecl fcn_00429670(int);
 void __cdecl fcn_004379a0(int, int, int, int, void*);
-void __cdecl fcn_00442be0(int);
+char __cdecl d3_DestroyObject(int);
 void __cdecl fcn_00442d50(int, int);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_004550b0(int, int);
@@ -278,7 +278,7 @@ LfailB:
 			if (*(int*) 0x773dd8) {
 				fcn_004550b0(v18[v11], *(int*) 0x773dd8);
 			}
-			fcn_00442be0(v18[v11]);
+			d3_DestroyObject(v18[v11]);
 		}
 		*(int*) (v5 + 0x60) = *(int*) 0x7f4c00;
 		*(int*) (v5 + 0x64) = *(int*) 0x7f4c04;

@@ -35,7 +35,7 @@ int __cdecl fcn_00587f90(char*);
 int __cdecl fcn_00588aa0(void*, char*);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0046b2b0(int);
-void __cdecl fcn_00442be0(int);
+char __cdecl d3_DestroyObject(int);
 void __cdecl fcn_00533a40(char*);
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl fcn_00438cb0(char*, int*);
@@ -260,15 +260,15 @@ void __cdecl fcn_00586c10(char* obj)
     fcn_0046b2b0(*(int*) ((char*) S + 0xd4));
     fcn_0046b2b0(*(int*) ((char*) S + 0xd8));
     if (*(int*) ((char*) S + 0x8c) != 0)
-        fcn_00442be0(*(int*) ((char*) S + 0x8c));
+        d3_DestroyObject(*(int*) ((char*) S + 0x8c));
     if (*(int*) ((char*) S + 0x90) != 0)
-        fcn_00442be0(*(int*) ((char*) S + 0x90));
+        d3_DestroyObject(*(int*) ((char*) S + 0x90));
     if (*(int*) ((char*) S + 0x94) != 0)
-        fcn_00442be0(*(int*) ((char*) S + 0x94));
+        d3_DestroyObject(*(int*) ((char*) S + 0x94));
     if (*(int*) ((char*) S + 0x9c) != 0)
-        fcn_00442be0(*(int*) ((char*) S + 0x9c));
+        d3_DestroyObject(*(int*) ((char*) S + 0x9c));
     if (*(int*) ((char*) S + 0x98) != 0)
-        fcn_00442be0(*(int*) ((char*) S + 0x98));
+        d3_DestroyObject(*(int*) ((char*) S + 0x98));
     fcn_00442d50(*(int*) (obj + 0x61), 1);
     fcn_00546bb0(*(int*) (obj + 0x61), 1);
     for (i = 0; i < count; i++)
