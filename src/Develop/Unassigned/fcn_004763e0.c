@@ -33,8 +33,9 @@ int __cdecl fcn_00476120(int left, int top, int width, int height, char* src, ch
 /* ADDRESS: GOLDTL 0x004763e0 */
 int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused)
 {
-	int srcLocked;
+	unsigned char shift = 3;
 	int dstLocked;
+	int srcLocked;
 	int sbase;
 	int dbase;
 
@@ -73,7 +74,7 @@ int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int 
 			return 0;
 	} else if (fcn_00475fd0(dst) != 0 && fcn_00475fd0(src) != 0) {
 		sbase = src->pitch * y + (src->bpp >> 3) * x;
-		dbase = dst->pitch * sy + (dst->bpp >> 3) * sx;
+		dbase = dst->pitch * sy + (dst->bpp >> shift) * sx;
 		for (y = 0; y < h; y++) {
 			memcpy(dst->bits + dst->pitch * y + dbase,
 			       src->pitch * y + sbase + src->bits,
