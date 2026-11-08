@@ -48,7 +48,7 @@ Open, in order:
    and 124 Gold externals need Gold definitions (a Gold adopt was refused because the Gold bytes
    differ from the TL function at the same address). Placeholder bindings done by hand for
    `fcn_00402a00`, `fcn_00442be0`, `fcn_004e6bd0` and `fcn_00504e70`. The upstream tool gaps are
-   written in its `docs/IDEAS-GUILD.md` (2026-11-08 entries, not yet committed there).
+   written in its `docs/IDEAS-GUILD.md` (2026-11-08 entries, committed locally in that checkout as `5d4ca98a`, not pushed; that checkout is ahead 1 and behind 1 on origin).
 2. Next step for the link: replace stubs with recovered code or reviewed data rows, then compare
    the images with `rebrew verify --whole-binary --built` (see [client builds](../stubs/README.md)).
 3. Stock zlib code is attributed as library, not renamed as game code: 22 zlib rows were already
