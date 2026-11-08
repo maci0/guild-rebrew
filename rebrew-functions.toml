@@ -26657,15 +26657,46 @@ name = "putShortMSB"
 kind = "LIBRARY"
 ["GOLD.0x00461fc0"]
 size = 147
+updated_by = "verify"
+updated_at = "2026-11-08T13:41:34+00:00"
+file = "references/zlib/deflate.c"
+symbol = "_lm_init"
+kind = "LIBRARY"
+name = "lm_init"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:27:36+00:00"
+
+["GOLD.0x00461fc0".verification]
+source_hash = "c1a8719d66e91fe80334a7344f7d7b7fc714ae008024446aa69a83dddfca0c9e"
+reference_hash = "049d270bcf0d2c380f8473987a703660bd3694f14ad20f46bd1073274cd6dbb4"
+reference_size = "147"
+headers_hash = "41fea2d54b55244ce22a34e1814e1eca2b3c06d30e9f969320d7f56d362046ae"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x461fc0"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "8ea167e69fdf498e61d0244ec44e75d7e3481aa67193b94e2abb2c6be837e45f"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T13:41:34+00:00"
+
+[["GOLD.0x00461fc0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; its loose file was removed when the library attribution was applied"
+changed_at = "2026-11-08T13:39:47.626604+00:00"
+counterpart_va = 0
+
+["GOLD.0x00461fc0".binding_history.previous]
+size = 147
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0045e180.c"
 symbol = "_fcn_0045e180"
 kind = "FUNCTION"
 name = "fcn_0045e180"
 
-["GOLD.0x00461fc0".verification]
+["GOLD.0x00461fc0".binding_history.previous.verification]
 source_hash = "962be8ab4eba7aa1bab9358e8e8ad90fff30b6e99d5064e68d8c3d569e667e2a"
 reference_hash = "049d270bcf0d2c380f8473987a703660bd3694f14ad20f46bd1073274cd6dbb4"
 reference_size = "147"
@@ -26682,6 +26713,39 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-08T09:03:56+00:00"
 
+["GOLD.0x00461fc0".binding_history.replacement]
+
+[["GOLD.0x00461fc0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/deflate.c provides _lm_init."
+changed_at = "2026-11-08T13:40:09.583308+00:00"
+counterpart_va = 0
+
+["GOLD.0x00461fc0".binding_history.previous]
+size = 147
+
+["GOLD.0x00461fc0".binding_history.previous.verification]
+source_hash = "962be8ab4eba7aa1bab9358e8e8ad90fff30b6e99d5064e68d8c3d569e667e2a"
+reference_hash = "049d270bcf0d2c380f8473987a703660bd3694f14ad20f46bd1073274cd6dbb4"
+reference_size = "147"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x461fc0"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "f96a30429ff46e9514abdba0f141584509d96ab74ee893aed3470fa6350b2572"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T09:03:56+00:00"
+
+["GOLD.0x00461fc0".binding_history.replacement]
+file = "references/zlib/deflate.c"
+symbol = "_lm_init"
+kind = "LIBRARY"
+name = "lm_init"
 ["GOLD.0x00462060"]
 size = 324
 updated_by = "rehome"
@@ -80622,7 +80686,7 @@ kind = "FUNCTION"
 name = "fcn_00537080"
 
 ["GOLD.0x005306a0".verification]
-source_hash = "4460d6b059eec900ca3bd297e4c15a5a66a585cec6273ad22a1ecfa80e06af0b"
+source_hash = "9673a7b875740a12256f0e4cbcfd2028550136e90c1c37a149d05b9655e047ed"
 reference_hash = "ccb6a15452e21e88564b90e7af3cc72f1033bafcee3f21502b77f2a49b9f3d3b"
 reference_size = "380"
 headers_hash = "af2fe4ac7fa48a5ede8ed06740730e5e6bade90c6a4688b2662eab30bd22543f"
@@ -80633,10 +80697,10 @@ module = "GOLD"
 va = "0x5306a0"
 context_hash = ""
 defines = "[\"REBREW_GOLD\"]"
-input_hash = "ba2edff6a42a8ac7aed1f25aaaad46d7d3619135522d007a536168f0e7c5c750"
+input_hash = "c117092dfe1f0fa47204cc5e117b7e1b8323f6eafd92506290816f09bbb37272"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-11-08T09:03:57+00:00"
+measured_at = "2026-11-08T13:41:34+00:00"
 
 ["GOLD.0x005315f0"]
 size = 166
@@ -144464,15 +144528,46 @@ measured_at = "2026-11-07T17:02:37+00:00"
 
 ["GOLDTL.0x0045e180"]
 size = 147
+updated_by = "verify"
+updated_at = "2026-11-08T13:40:50+00:00"
+file = "references/zlib/deflate.c"
+symbol = "_lm_init"
+kind = "LIBRARY"
+name = "lm_init"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x0045e180".verification]
+source_hash = "c1a8719d66e91fe80334a7344f7d7b7fc714ae008024446aa69a83dddfca0c9e"
+reference_hash = "9cb1788a84e9999380a9e99a828c38f832dd80061e944a7d6430b05614cbd32c"
+reference_size = "147"
+headers_hash = "41fea2d54b55244ce22a34e1814e1eca2b3c06d30e9f969320d7f56d362046ae"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45e180"
+context_hash = ""
+defines = "[]"
+input_hash = "79dfab02cf110032237af8966837e423313e2ac6d9858ff3771126b1b51972b1"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T13:40:50+00:00"
+
+[["GOLDTL.0x0045e180".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T13:27:50.608375+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045e180".binding_history.previous]
+size = 147
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0045e180.c"
 symbol = "_fcn_0045e180"
 kind = "FUNCTION"
 name = "fcn_0045e180"
 
-["GOLDTL.0x0045e180".verification]
+["GOLDTL.0x0045e180".binding_history.previous.verification]
 source_hash = "962be8ab4eba7aa1bab9358e8e8ad90fff30b6e99d5064e68d8c3d569e667e2a"
 reference_hash = "9cb1788a84e9999380a9e99a828c38f832dd80061e944a7d6430b05614cbd32c"
 reference_size = "147"
@@ -144489,6 +144584,39 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x0045e180".binding_history.replacement]
+
+[["GOLDTL.0x0045e180".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/deflate.c provides _lm_init."
+changed_at = "2026-11-08T13:28:24.336341+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045e180".binding_history.previous]
+size = 147
+
+["GOLDTL.0x0045e180".binding_history.previous.verification]
+source_hash = "962be8ab4eba7aa1bab9358e8e8ad90fff30b6e99d5064e68d8c3d569e667e2a"
+reference_hash = "9cb1788a84e9999380a9e99a828c38f832dd80061e944a7d6430b05614cbd32c"
+reference_size = "147"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45e180"
+context_hash = ""
+defines = "[]"
+input_hash = "d265e01afee555f8dfee3f1890f32d1d9e1b547c4b8e8ab8992ccda273a6d87d"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x0045e180".binding_history.replacement]
+file = "references/zlib/deflate.c"
+symbol = "_lm_init"
+kind = "LIBRARY"
+name = "lm_init"
 ["GOLDTL.0x0045e220"]
 size = 324
 updated_by = "verify"
@@ -147381,15 +147509,46 @@ kind = "LIBRARY"
 name = "inflateSetDictionary"
 ["GOLDTL.0x00461ba0"]
 size = 196
+updated_by = "verify"
+updated_at = "2026-11-08T13:40:50+00:00"
+file = "references/zlib/inflate.c"
+symbol = "_inflateSync"
+kind = "LIBRARY"
+name = "inflateSync"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00461ba0".verification]
+source_hash = "ce6c2ab0741a93b8369de471723521147b239a5cf276fad7c9f9e33a51c9878f"
+reference_hash = "feb7be75fa208985b19f45a92f82b84821fec24b4082fa7071f5a3bda90befeb"
+reference_size = "196"
+headers_hash = "2c66245c0178ffbc3c1e8fae95e55f346c3eca55d32ec9601e19397ad027d46e"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x461ba0"
+context_hash = ""
+defines = "[]"
+input_hash = "acdf06c83cb16839f1ae3aa2972ab622405f4551658be3008cde1780ba740e59"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T13:40:50+00:00"
+
+[["GOLDTL.0x00461ba0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T13:31:26.991570+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00461ba0".binding_history.previous]
+size = 196
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00461ba0.c"
 symbol = "_fcn_00461ba0"
 kind = "FUNCTION"
 name = "fcn_00461ba0"
 
-["GOLDTL.0x00461ba0".verification]
+["GOLDTL.0x00461ba0".binding_history.previous.verification]
 source_hash = "405fe8fb7b91f46feb0e16677faab887446e941c9b6df977f9d978d562bceb3a"
 reference_hash = "feb7be75fa208985b19f45a92f82b84821fec24b4082fa7071f5a3bda90befeb"
 reference_size = "196"
@@ -147406,17 +147565,81 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00461ba0".binding_history.replacement]
+
+[["GOLDTL.0x00461ba0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/inflate.c provides _inflateSync."
+changed_at = "2026-11-08T13:31:43.840620+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00461ba0".binding_history.previous]
+size = 196
+
+["GOLDTL.0x00461ba0".binding_history.previous.verification]
+source_hash = "405fe8fb7b91f46feb0e16677faab887446e941c9b6df977f9d978d562bceb3a"
+reference_hash = "feb7be75fa208985b19f45a92f82b84821fec24b4082fa7071f5a3bda90befeb"
+reference_size = "196"
+headers_hash = "d63de320cadcfaa1a4aadb87d817d0ed469389d9e13e61bc7416264442778cd2"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x461ba0"
+context_hash = ""
+defines = "[]"
+input_hash = "d9d3b6612d9819c9829aa705d3800c522e47266af49b8b964105a441132df7d5"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00461ba0".binding_history.replacement]
+file = "references/zlib/inflate.c"
+symbol = "_inflateSync"
+kind = "LIBRARY"
+name = "inflateSync"
 ["GOLDTL.0x00461c70"]
 size = 37
+updated_by = "verify"
+updated_at = "2026-11-08T13:40:50+00:00"
+file = "references/zlib/inflate.c"
+symbol = "_inflateSyncPoint"
+kind = "LIBRARY"
+name = "inflateSyncPoint"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00461c70".verification]
+source_hash = "ce6c2ab0741a93b8369de471723521147b239a5cf276fad7c9f9e33a51c9878f"
+reference_hash = "a1e4189a45959c0c2f2299d224433b677e0fdb77cd3cf2f9a3167519cf76e158"
+reference_size = "37"
+headers_hash = "2c66245c0178ffbc3c1e8fae95e55f346c3eca55d32ec9601e19397ad027d46e"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x461c70"
+context_hash = ""
+defines = "[]"
+input_hash = "b02583254338e9fbc69af229dfb227ba7d4092a7188d4dc4899fa5e8ac93a165"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T13:40:50+00:00"
+
+[["GOLDTL.0x00461c70".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T13:32:50.842691+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00461c70".binding_history.previous]
+size = 37
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00461c70.c"
 symbol = "_fcn_00461c70"
 kind = "FUNCTION"
 name = "fcn_00461c70"
 
-["GOLDTL.0x00461c70".verification]
+["GOLDTL.0x00461c70".binding_history.previous.verification]
 source_hash = "ca24a29d02ee425cec96d3866ae10407de418d5bba2ae44cda9379b60cd2afd1"
 reference_hash = "a1e4189a45959c0c2f2299d224433b677e0fdb77cd3cf2f9a3167519cf76e158"
 reference_size = "37"
@@ -147433,6 +147656,39 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00461c70".binding_history.replacement]
+
+[["GOLDTL.0x00461c70".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/inflate.c provides _inflateSyncPoint."
+changed_at = "2026-11-08T13:33:07.403056+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00461c70".binding_history.previous]
+size = 37
+
+["GOLDTL.0x00461c70".binding_history.previous.verification]
+source_hash = "ca24a29d02ee425cec96d3866ae10407de418d5bba2ae44cda9379b60cd2afd1"
+reference_hash = "a1e4189a45959c0c2f2299d224433b677e0fdb77cd3cf2f9a3167519cf76e158"
+reference_size = "37"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x461c70"
+context_hash = ""
+defines = "[]"
+input_hash = "cdef2af1f982b0605988218271feec3b3eff8a3f86a7b9bc34cc8e3cd5a3e0fc"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00461c70".binding_history.replacement]
+file = "references/zlib/inflate.c"
+symbol = "_inflateSyncPoint"
+kind = "LIBRARY"
+name = "inflateSyncPoint"
 ["GOLDTL.0x00461d50"]
 size = 1198
 updated_by = "verify"
@@ -431351,7 +431607,7 @@ kind = "FUNCTION"
 status = "SIZE_MISMATCH"
 
 ["GOLD.0x005af320".verification]
-source_hash = "ab67ec58383049a3f8f63925ff4c0a7236a1e7b2a1bd7fb866cfdf7e07794211"
+source_hash = "9bc78bd4f5172a43a955d6045dfa972932a36ce5915b792cbdeefba33fe7db1f"
 reference_hash = "7456bac5a5e60a552af3993453358c44d324a635de3f5d7df49b39b13b64a53c"
 reference_size = "11961"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -431362,10 +431618,10 @@ module = "GOLD"
 va = "0x5af320"
 context_hash = ""
 defines = "[\"REBREW_GOLD\"]"
-input_hash = "b0e4e5da02641602ae459de68eca493b6e5abdbb10da37ad88f1c4f58b80a18b"
+input_hash = "ce15348d0929833983f44e9332f917944cb75ec853999e25e21cf4df8ee8eaf4"
 writer = "verify"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-08T09:03:57+00:00"
+measured_at = "2026-11-08T13:41:34+00:00"
 
 [["GOLD.0x005af320".binding_history]]
 action = "retire"
