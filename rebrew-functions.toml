@@ -27605,15 +27605,46 @@ name = "inflate_flush"
 kind = "LIBRARY"
 ["GOLD.0x00465ed0"]
 size = 160
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:40+00:00"
+file = "references/zlib/trees.c"
+symbol = "__tr_stored_block"
+kind = "LIBRARY"
+name = "_tr_stored_block"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:27:36+00:00"
+
+["GOLD.0x00465ed0".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "e5ba500a322f8695e429e1260f4c98607983fe300de6c315565129dd326073f5"
+reference_size = "160"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x465ed0"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "4ff454a4f078b340e8de9b7296238269b5261d549b85c1ed3b07b0983cb93067"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:40+00:00"
+
+[["GOLD.0x00465ed0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; its loose file was removed when the library attribution was applied"
+changed_at = "2026-11-08T10:13:34.417303+00:00"
+counterpart_va = 0
+
+["GOLD.0x00465ed0".binding_history.previous]
+size = 160
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00462af0.c"
 symbol = "_fcn_00462af0"
 kind = "FUNCTION"
 name = "fcn_00462af0"
 
-["GOLD.0x00465ed0".verification]
+["GOLD.0x00465ed0".binding_history.previous.verification]
 source_hash = "8ecebe123a067be46b5f85a03875c794a06a81ef344bf743add639f59ee604f6"
 reference_hash = "e5ba500a322f8695e429e1260f4c98607983fe300de6c315565129dd326073f5"
 reference_size = "160"
@@ -27630,6 +27661,39 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-08T09:03:56+00:00"
 
+["GOLD.0x00465ed0".binding_history.replacement]
+
+[["GOLD.0x00465ed0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides __tr_stored_block."
+changed_at = "2026-11-08T10:13:52.461972+00:00"
+counterpart_va = 0
+
+["GOLD.0x00465ed0".binding_history.previous]
+size = 160
+
+["GOLD.0x00465ed0".binding_history.previous.verification]
+source_hash = "8ecebe123a067be46b5f85a03875c794a06a81ef344bf743add639f59ee604f6"
+reference_hash = "e5ba500a322f8695e429e1260f4c98607983fe300de6c315565129dd326073f5"
+reference_size = "160"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x465ed0"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "afd085267a4d2ebd857a7cab8aa9a7bd7cbeb2de3e323954b0d0a7480745b199"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T09:03:56+00:00"
+
+["GOLD.0x00465ed0".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "__tr_stored_block"
+kind = "LIBRARY"
+name = "_tr_stored_block"
 ["GOLD.0x00465f70"]
 size = 517
 updated_by = "rehome"
@@ -27794,15 +27858,46 @@ measured_at = "2026-10-22T08:35:53+00:00"
 ["GOLD.0x00466670".binding_history.replacement]
 ["GOLD.0x00466880"]
 size = 119
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:40+00:00"
+file = "references/zlib/trees.c"
+symbol = "_gen_codes"
+kind = "LIBRARY"
+name = "gen_codes"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:27:36+00:00"
+
+["GOLD.0x00466880".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "bc3cfcb99f88a2b3e33e239fd55f9ea1cab599499a07bf30c78a38df72e17b55"
+reference_size = "119"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x466880"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "9c79b7136da7b167137c47241389fd357eca41511ba4b0f6b9fdde2b7d481d59"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:40+00:00"
+
+[["GOLD.0x00466880".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; its loose file was removed when the library attribution was applied"
+changed_at = "2026-11-08T10:14:36.230451+00:00"
+counterpart_va = 0
+
+["GOLD.0x00466880".binding_history.previous]
+size = 119
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_004634a0.c"
 symbol = "_fcn_004634a0"
 kind = "FUNCTION"
 name = "fcn_004634a0"
 
-["GOLD.0x00466880".verification]
+["GOLD.0x00466880".binding_history.previous.verification]
 source_hash = "28f67a986cd31174ef86a5de34491efb6f4f3a58249313f441398c5c266c5b2e"
 reference_hash = "bc3cfcb99f88a2b3e33e239fd55f9ea1cab599499a07bf30c78a38df72e17b55"
 reference_size = "119"
@@ -27819,6 +27914,39 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-08T09:03:56+00:00"
 
+["GOLD.0x00466880".binding_history.replacement]
+
+[["GOLD.0x00466880".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _gen_codes."
+changed_at = "2026-11-08T10:14:53.568049+00:00"
+counterpart_va = 0
+
+["GOLD.0x00466880".binding_history.previous]
+size = 119
+
+["GOLD.0x00466880".binding_history.previous.verification]
+source_hash = "28f67a986cd31174ef86a5de34491efb6f4f3a58249313f441398c5c266c5b2e"
+reference_hash = "bc3cfcb99f88a2b3e33e239fd55f9ea1cab599499a07bf30c78a38df72e17b55"
+reference_size = "119"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x466880"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "7295dc5ecb1287c763964d1498c7b3806c20314ebea80a6e53daef1795213afd"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T09:03:56+00:00"
+
+["GOLD.0x00466880".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_gen_codes"
+kind = "LIBRARY"
+name = "gen_codes"
 ["GOLD.0x00466970"]
 updated_by = "verify"
 updated_at = "2026-11-08T09:03:56+00:00"
@@ -27945,15 +28073,46 @@ measured_at = "2026-10-22T08:35:53+00:00"
 ["GOLD.0x00466a60".binding_history.replacement]
 ["GOLD.0x00466cb0"]
 size = 1303
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:40+00:00"
+file = "references/zlib/trees.c"
+symbol = "_send_tree"
+kind = "LIBRARY"
+name = "send_tree"
 status = "EXACT"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:27:36+00:00"
+
+["GOLD.0x00466cb0".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "0ddc5046847d35836ade594c27368f44681611116f0c6d0285f7fb268fde1b29"
+reference_size = "1303"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x466cb0"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "4b340071e8c5947c2731046b9cb4a97e6e69ff3c47707e5c655a30c974c9bdc3"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T10:26:40+00:00"
+
+[["GOLD.0x00466cb0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; its loose file was removed when the library attribution was applied"
+changed_at = "2026-11-08T10:15:53.180022+00:00"
+counterpart_va = 0
+
+["GOLD.0x00466cb0".binding_history.previous]
+size = 1303
+status = "EXACT"
 file = "src/Develop/Unassigned/GOLDTL.fcn_004638d0.c"
 symbol = "_fcn_004638d0"
 kind = "FUNCTION"
 name = "fcn_004638d0"
 
-["GOLD.0x00466cb0".verification]
+["GOLD.0x00466cb0".binding_history.previous.verification]
 source_hash = "76be44eabd82ae5321d9fe7b0d30335d33ca7d8dcc78cc0b90c5b39b78c873fc"
 reference_hash = "0ddc5046847d35836ade594c27368f44681611116f0c6d0285f7fb268fde1b29"
 reference_size = "1303"
@@ -27970,6 +28129,39 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-08T09:03:56+00:00"
 
+["GOLD.0x00466cb0".binding_history.replacement]
+
+[["GOLD.0x00466cb0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _send_tree."
+changed_at = "2026-11-08T10:16:12.605020+00:00"
+counterpart_va = 0
+
+["GOLD.0x00466cb0".binding_history.previous]
+size = 1303
+
+["GOLD.0x00466cb0".binding_history.previous.verification]
+source_hash = "76be44eabd82ae5321d9fe7b0d30335d33ca7d8dcc78cc0b90c5b39b78c873fc"
+reference_hash = "0ddc5046847d35836ade594c27368f44681611116f0c6d0285f7fb268fde1b29"
+reference_size = "1303"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x466cb0"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "ec5a721ea18936362f6606a55763cb22ddfbf4dd4b739eb68990b47f4987e267"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T09:03:56+00:00"
+
+["GOLD.0x00466cb0".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_send_tree"
+kind = "LIBRARY"
+name = "send_tree"
 ["GOLD.0x004671d0"]
 size = 1037
 updated_by = "rehome"
@@ -28097,18 +28289,18 @@ kind = "LIBRARY"
 ["GOLD.0x00467660"]
 size = 31
 updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
-file = "src/Develop/Unassigned/GOLDTL.fcn_00464330.c"
-name = "fcn_00464330"
-symbol = "_fcn_00464330"
-kind = "FUNCTION"
+updated_at = "2026-11-08T10:26:40+00:00"
+file = "references/zlib/trees.c"
+symbol = "_bi_reverse"
+kind = "LIBRARY"
+name = "bi_reverse"
 status = "EXACT"
 
 ["GOLD.0x00467660".verification]
-source_hash = "fc20da5b3023aa0bcaedb1cb33c8aac90360f58a02ce10880a6295ab20ed4722"
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
 reference_hash = "ff419a302ca0a963afdc594930d87d34cfa566dc55af545bf882280351773c1b"
 reference_size = "31"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
 compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -28116,10 +28308,10 @@ module = "GOLD"
 va = "0x467660"
 context_hash = ""
 defines = "[\"REBREW_GOLD\"]"
-input_hash = "6f6aeed5b2df0bd1d7af767d3ec4cfbfb35b5c35e31ee1654ef2b1b5779ddfbd"
+input_hash = "aacfbe595123224ab4d1e668135f67c9ea9b5418edfbd235dae974cc60b1b4c4"
 writer = "verify"
 status = "EXACT"
-measured_at = "2026-11-08T09:03:56+00:00"
+measured_at = "2026-11-08T10:26:40+00:00"
 
 [["GOLD.0x00467660".binding_history]]
 action = "retire"
@@ -28154,6 +28346,8 @@ measured_at = "2026-10-22T08:35:53+00:00"
 
 ["GOLD.0x00467660".binding_history.replacement]
 
+
+
 [["GOLD.0x00467660".binding_history]]
 action = "rebind"
 reason = "Original Gold 0x467660 is byte-identical to TL 0x464330 for 31 bytes"
@@ -28185,17 +28379,114 @@ file = "src/Develop/Unassigned/GOLDTL.fcn_00464330.c"
 name = "fcn_00464330"
 symbol = "_fcn_00464330"
 kind = "FUNCTION"
+
+
+[["GOLD.0x00467660".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; its loose file was removed when the library attribution was applied"
+changed_at = "2026-11-08T10:16:59.369344+00:00"
+counterpart_va = 0
+
+["GOLD.0x00467660".binding_history.previous]
+size = 31
+file = "src/Develop/Unassigned/GOLDTL.fcn_00464330.c"
+name = "fcn_00464330"
+symbol = "_fcn_00464330"
+kind = "FUNCTION"
+status = "EXACT"
+
+["GOLD.0x00467660".binding_history.previous.verification]
+source_hash = "fc20da5b3023aa0bcaedb1cb33c8aac90360f58a02ce10880a6295ab20ed4722"
+reference_hash = "ff419a302ca0a963afdc594930d87d34cfa566dc55af545bf882280351773c1b"
+reference_size = "31"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x467660"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "6f6aeed5b2df0bd1d7af767d3ec4cfbfb35b5c35e31ee1654ef2b1b5779ddfbd"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T09:03:56+00:00"
+
+["GOLD.0x00467660".binding_history.replacement]
+
+[["GOLD.0x00467660".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _bi_reverse."
+changed_at = "2026-11-08T10:17:18.794649+00:00"
+counterpart_va = 0
+
+["GOLD.0x00467660".binding_history.previous]
+size = 31
+
+["GOLD.0x00467660".binding_history.previous.verification]
+source_hash = "fc20da5b3023aa0bcaedb1cb33c8aac90360f58a02ce10880a6295ab20ed4722"
+reference_hash = "ff419a302ca0a963afdc594930d87d34cfa566dc55af545bf882280351773c1b"
+reference_size = "31"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x467660"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "6f6aeed5b2df0bd1d7af767d3ec4cfbfb35b5c35e31ee1654ef2b1b5779ddfbd"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T09:03:56+00:00"
+
+["GOLD.0x00467660".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_bi_reverse"
+kind = "LIBRARY"
+name = "bi_reverse"
 ["GOLD.0x00467680"]
 size = 135
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:40+00:00"
+file = "references/zlib/trees.c"
+symbol = "_bi_flush"
+kind = "LIBRARY"
+name = "bi_flush"
 status = "EXACT"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:27:36+00:00"
+
+["GOLD.0x00467680".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "ee04c0ac28cee4bb5e18674736079fa25d30cc3c21af67750ce9a38d51353b80"
+reference_size = "135"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x467680"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "acb7283b5bc89a95faf597ca4948da860630263852f0e050c21a883ef02f2db7"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T10:26:40+00:00"
+
+[["GOLD.0x00467680".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; its loose file was removed when the library attribution was applied"
+changed_at = "2026-11-08T10:18:04.680357+00:00"
+counterpart_va = 0
+
+["GOLD.0x00467680".binding_history.previous]
+size = 135
+status = "EXACT"
 file = "src/Develop/Unassigned/Unassigned-zlib-00464350_00464350.c"
 symbol = "_fcn_00464350"
 kind = "FUNCTION"
 name = "fcn_00464350"
 
-["GOLD.0x00467680".verification]
+["GOLD.0x00467680".binding_history.previous.verification]
 source_hash = "28d3ce88dff0c125c9598644b39da0289b654c0b342540d34431c6b5b4767625"
 reference_hash = "ee04c0ac28cee4bb5e18674736079fa25d30cc3c21af67750ce9a38d51353b80"
 reference_size = "135"
@@ -28212,17 +28503,81 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-08T09:03:56+00:00"
 
+["GOLD.0x00467680".binding_history.replacement]
+
+[["GOLD.0x00467680".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _bi_flush."
+changed_at = "2026-11-08T10:18:27.596376+00:00"
+counterpart_va = 0
+
+["GOLD.0x00467680".binding_history.previous]
+size = 135
+
+["GOLD.0x00467680".binding_history.previous.verification]
+source_hash = "28d3ce88dff0c125c9598644b39da0289b654c0b342540d34431c6b5b4767625"
+reference_hash = "ee04c0ac28cee4bb5e18674736079fa25d30cc3c21af67750ce9a38d51353b80"
+reference_size = "135"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x467680"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "e6f2a839870372caabd3b043c0fbab9eefe440c4d514cf08dc684703cf398bf1"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T09:03:56+00:00"
+
+["GOLD.0x00467680".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_bi_flush"
+kind = "LIBRARY"
+name = "bi_flush"
 ["GOLD.0x00467710"]
 size = 121
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:40+00:00"
+file = "references/zlib/trees.c"
+symbol = "_bi_windup"
+kind = "LIBRARY"
+name = "bi_windup"
 status = "EXACT"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:27:36+00:00"
+
+["GOLD.0x00467710".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "a8bdaa752b422f8df7fc30469a09fe6a09778d7479f035f6cbb4f70f35b759f3"
+reference_size = "121"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x467710"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "d59fb6454cc3f68bd9d7902196eedcf4265a5df0718286f34fb39de57c637cae"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T10:26:40+00:00"
+
+[["GOLD.0x00467710".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; its loose file was removed when the library attribution was applied"
+changed_at = "2026-11-08T10:19:14.675283+00:00"
+counterpart_va = 0
+
+["GOLD.0x00467710".binding_history.previous]
+size = 121
+status = "EXACT"
 file = "src/Develop/Unassigned/Unassigned-zlib-00464350_00464350.c"
 symbol = "_fcn_004643e0"
 kind = "FUNCTION"
 name = "fcn_004643e0"
 
-["GOLD.0x00467710".verification]
+["GOLD.0x00467710".binding_history.previous.verification]
 source_hash = "28d3ce88dff0c125c9598644b39da0289b654c0b342540d34431c6b5b4767625"
 reference_hash = "a8bdaa752b422f8df7fc30469a09fe6a09778d7479f035f6cbb4f70f35b759f3"
 reference_size = "121"
@@ -28239,6 +28594,39 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-08T09:03:56+00:00"
 
+["GOLD.0x00467710".binding_history.replacement]
+
+[["GOLD.0x00467710".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _bi_windup."
+changed_at = "2026-11-08T10:19:32.374360+00:00"
+counterpart_va = 0
+
+["GOLD.0x00467710".binding_history.previous]
+size = 121
+
+["GOLD.0x00467710".binding_history.previous.verification]
+source_hash = "28d3ce88dff0c125c9598644b39da0289b654c0b342540d34431c6b5b4767625"
+reference_hash = "a8bdaa752b422f8df7fc30469a09fe6a09778d7479f035f6cbb4f70f35b759f3"
+reference_size = "121"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "cd97460031ee059696e196174ddf42d71524381c75c09e2e9116cb4f96120bac"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x467710"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "ef48d78bf3cfdd1e513332359082d6235f7511baee0a8be0d9c20a8b9ff658ab"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T09:03:56+00:00"
+
+["GOLD.0x00467710".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_bi_windup"
+kind = "LIBRARY"
+name = "bi_windup"
 ["GOLD.0x00467830"]
 size = 398
 updated_by = "rehome"
@@ -143420,15 +143808,46 @@ changed_at = "2026-11-07T17:02:37.158283+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0045d520"]
 size = 169
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/compress.c"
+symbol = "_compress2"
+kind = "LIBRARY"
+name = "compress2"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x0045d520".verification]
+source_hash = "52423a5208259ba5645c3e9b82564b215d0fb4b24d16f5eeeddf91ad173c04e8"
+reference_hash = "3bce782037778220abeb2ac436212215198bb9bf5e2449e5d67d64a7eea8b9ff"
+reference_size = "169"
+headers_hash = "7c49d0d98800a6a6596aa95b6272aaf7ec7095e393c88e29b972a8539bfcc219"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45d520"
+context_hash = ""
+defines = "[]"
+input_hash = "054b22e541c81f040c844682b2dd6fac54711ffbeadc6c8f93bda5453574dceb"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x0045d520".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3; attribute as library"
+changed_at = "2026-11-08T09:25:53.207426+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045d520".binding_history.previous]
+size = 169
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0045d520.c"
 symbol = "_fcn_0045d520"
 kind = "FUNCTION"
 name = "fcn_0045d520"
 
-["GOLDTL.0x0045d520".verification]
+["GOLDTL.0x0045d520".binding_history.previous.verification]
 source_hash = "750771caa8c9087614b26d945110e4a9ae8a1c67b3127ba798ad33b879edbccd"
 reference_hash = "3bce782037778220abeb2ac436212215198bb9bf5e2449e5d67d64a7eea8b9ff"
 reference_size = "169"
@@ -143445,21 +143864,54 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x0045d520".binding_history.replacement]
+
+[["GOLDTL.0x0045d520".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/compress.c provides _compress2."
+changed_at = "2026-11-08T09:26:55.855832+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045d520".binding_history.previous]
+size = 169
+
+["GOLDTL.0x0045d520".binding_history.previous.verification]
+source_hash = "750771caa8c9087614b26d945110e4a9ae8a1c67b3127ba798ad33b879edbccd"
+reference_hash = "3bce782037778220abeb2ac436212215198bb9bf5e2449e5d67d64a7eea8b9ff"
+reference_size = "169"
+headers_hash = "31750a53cac1a3383ec81988dac10c380ab036e93c9da0f25b0fb7832230a432"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45d520"
+context_hash = ""
+defines = "[]"
+input_hash = "5c23e4098997ee675f2e84df4bd7d1e33995be86cf85d4040c89b4bb0b6afd27"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x0045d520".binding_history.replacement]
+file = "references/zlib/compress.c"
+symbol = "_compress2"
+kind = "LIBRARY"
+name = "compress2"
 ["GOLDTL.0x0045d5d0"]
 size = 31
-status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-11-07T17:02:37+00:00"
-file = "src/Develop/Unassigned/GOLDTL.fcn_0045d5d0.c"
-symbol = "_fcn_0045d5d0"
-kind = "FUNCTION"
-name = "fcn_0045d5d0"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/compress.c"
+symbol = "_compress"
+kind = "LIBRARY"
+name = "compress"
+status = "RELOC"
 
 ["GOLDTL.0x0045d5d0".verification]
-source_hash = "61da2d2847231ee6f08d64be1ba9edc9ebf519b9dfb50a2c395b4ace4782937e"
+source_hash = "52423a5208259ba5645c3e9b82564b215d0fb4b24d16f5eeeddf91ad173c04e8"
 reference_hash = "a70871886afa39a2ded4eea6624fcac5bde4b22bbddb168e365297c1552f4423"
 reference_size = "31"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+headers_hash = "7c49d0d98800a6a6596aa95b6272aaf7ec7095e393c88e29b972a8539bfcc219"
 compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -143467,10 +143919,10 @@ module = "GOLDTL"
 va = "0x45d5d0"
 context_hash = ""
 defines = "[]"
-input_hash = "a8fbe15f4e88e58783da0bd213a259d49732e05557917dffdbd2b6fbce5ac260"
+input_hash = "339d400fec3997b2e293125674b90d8f24e25a587a9f9ae2ae84d0bc33cad62c"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-11-07T17:02:37+00:00"
+measured_at = "2026-11-08T10:26:08+00:00"
 
 [["GOLDTL.0x0045d5d0".status_history]]
 old_status = "RELOC"
@@ -143639,17 +144091,113 @@ old_status = "EXACT"
 new_status = "RELOC"
 changed_at = "2026-11-07T17:02:37.167691+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0045d5d0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3; attribute as library"
+changed_at = "2026-11-08T09:26:32.566736+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045d5d0".binding_history.previous]
+size = 31
+status = "RELOC"
+file = "src/Develop/Unassigned/GOLDTL.fcn_0045d5d0.c"
+symbol = "_fcn_0045d5d0"
+kind = "FUNCTION"
+name = "fcn_0045d5d0"
+
+["GOLDTL.0x0045d5d0".binding_history.previous.verification]
+source_hash = "61da2d2847231ee6f08d64be1ba9edc9ebf519b9dfb50a2c395b4ace4782937e"
+reference_hash = "a70871886afa39a2ded4eea6624fcac5bde4b22bbddb168e365297c1552f4423"
+reference_size = "31"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45d5d0"
+context_hash = ""
+defines = "[]"
+input_hash = "a8fbe15f4e88e58783da0bd213a259d49732e05557917dffdbd2b6fbce5ac260"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x0045d5d0".binding_history.replacement]
+
+[["GOLDTL.0x0045d5d0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/compress.c provides _compress."
+changed_at = "2026-11-08T09:27:11.048446+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045d5d0".binding_history.previous]
+size = 31
+
+["GOLDTL.0x0045d5d0".binding_history.previous.verification]
+source_hash = "61da2d2847231ee6f08d64be1ba9edc9ebf519b9dfb50a2c395b4ace4782937e"
+reference_hash = "a70871886afa39a2ded4eea6624fcac5bde4b22bbddb168e365297c1552f4423"
+reference_size = "31"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45d5d0"
+context_hash = ""
+defines = "[]"
+input_hash = "a8fbe15f4e88e58783da0bd213a259d49732e05557917dffdbd2b6fbce5ac260"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x0045d5d0".binding_history.replacement]
+file = "references/zlib/compress.c"
+symbol = "_compress"
+kind = "LIBRARY"
+name = "compress"
 ["GOLDTL.0x0045d740"]
 size = 37
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/deflate.c"
+symbol = "_deflateInit_"
+kind = "LIBRARY"
+name = "deflateInit_"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x0045d740".verification]
+source_hash = "c1a8719d66e91fe80334a7344f7d7b7fc714ae008024446aa69a83dddfca0c9e"
+reference_hash = "e4183e627bc011bbea63b2a0ccb8f6cac335f87310522c85733bb95218e9410d"
+reference_size = "37"
+headers_hash = "41fea2d54b55244ce22a34e1814e1eca2b3c06d30e9f969320d7f56d362046ae"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45d740"
+context_hash = ""
+defines = "[]"
+input_hash = "1655b4cad17dc5e2f86cf9784e1bc365866854fb10d84581384f2a95c1d91313"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x0045d740".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:31:13.175460+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045d740".binding_history.previous]
+size = 37
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0045d740.c"
 symbol = "_fcn_0045d740"
 kind = "FUNCTION"
 name = "fcn_0045d740"
 
-["GOLDTL.0x0045d740".verification]
+["GOLDTL.0x0045d740".binding_history.previous.verification]
 source_hash = "6eb29788adb53077861d01fef06b32792cdb104bd9b0e42435e9b942ddb67e01"
 reference_hash = "e4183e627bc011bbea63b2a0ccb8f6cac335f87310522c85733bb95218e9410d"
 reference_size = "37"
@@ -143666,17 +144214,81 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x0045d740".binding_history.replacement]
+
+[["GOLDTL.0x0045d740".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/deflate.c provides _deflateInit_."
+changed_at = "2026-11-08T09:31:32.167172+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045d740".binding_history.previous]
+size = 37
+
+["GOLDTL.0x0045d740".binding_history.previous.verification]
+source_hash = "6eb29788adb53077861d01fef06b32792cdb104bd9b0e42435e9b942ddb67e01"
+reference_hash = "e4183e627bc011bbea63b2a0ccb8f6cac335f87310522c85733bb95218e9410d"
+reference_size = "37"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45d740"
+context_hash = ""
+defines = "[]"
+input_hash = "2ad8c797a70c85b2487c550181a692b923f4567945f02fb60f21558cdb7932e5"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x0045d740".binding_history.replacement]
+file = "references/zlib/deflate.c"
+symbol = "_deflateInit_"
+kind = "LIBRARY"
+name = "deflateInit_"
 ["GOLDTL.0x0045d970"]
 size = 247
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/deflate.c"
+symbol = "_deflateSetDictionary"
+kind = "LIBRARY"
+name = "deflateSetDictionary"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x0045d970".verification]
+source_hash = "c1a8719d66e91fe80334a7344f7d7b7fc714ae008024446aa69a83dddfca0c9e"
+reference_hash = "56259e55784168ee3ff6895b2fc4766706c92d10998c4f6809a8266aea1c5bc2"
+reference_size = "247"
+headers_hash = "41fea2d54b55244ce22a34e1814e1eca2b3c06d30e9f969320d7f56d362046ae"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45d970"
+context_hash = ""
+defines = "[]"
+input_hash = "9873fb98c9d039e737efa3b4380c2e368aac311a19b4b9248842a3d6f6f86d9f"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x0045d970".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:32:51.287238+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045d970".binding_history.previous]
+size = 247
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0045d970.c"
 symbol = "_fcn_0045d970"
 kind = "FUNCTION"
 name = "fcn_0045d970"
 
-["GOLDTL.0x0045d970".verification]
+["GOLDTL.0x0045d970".binding_history.previous.verification]
 source_hash = "ae82e9235b385c7c2a0dd95415649057e186486b0b567331bb2d79979ce0d6bb"
 reference_hash = "56259e55784168ee3ff6895b2fc4766706c92d10998c4f6809a8266aea1c5bc2"
 reference_size = "247"
@@ -143693,17 +144305,81 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x0045d970".binding_history.replacement]
+
+[["GOLDTL.0x0045d970".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/deflate.c provides _deflateSetDictionary."
+changed_at = "2026-11-08T09:33:08.930821+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045d970".binding_history.previous]
+size = 247
+
+["GOLDTL.0x0045d970".binding_history.previous.verification]
+source_hash = "ae82e9235b385c7c2a0dd95415649057e186486b0b567331bb2d79979ce0d6bb"
+reference_hash = "56259e55784168ee3ff6895b2fc4766706c92d10998c4f6809a8266aea1c5bc2"
+reference_size = "247"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45d970"
+context_hash = ""
+defines = "[]"
+input_hash = "82fdbc92e0f12944d3e588b4422a87e045902eeaed8adfe4d204c343407326a7"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x0045d970".binding_history.replacement]
+file = "references/zlib/deflate.c"
+symbol = "_deflateSetDictionary"
+kind = "LIBRARY"
+name = "deflateSetDictionary"
 ["GOLDTL.0x0045daf0"]
 size = 202
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/deflate.c"
+symbol = "_deflateParams"
+kind = "LIBRARY"
+name = "deflateParams"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x0045daf0".verification]
+source_hash = "c1a8719d66e91fe80334a7344f7d7b7fc714ae008024446aa69a83dddfca0c9e"
+reference_hash = "0cce0b561ca7e4aa3655e5ed888de48c640f0b08443a7eac5782b803622db986"
+reference_size = "202"
+headers_hash = "41fea2d54b55244ce22a34e1814e1eca2b3c06d30e9f969320d7f56d362046ae"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45daf0"
+context_hash = ""
+defines = "[]"
+input_hash = "e707e678be8763a13b3f0e469e4531a3f84d98f1d62491f5f1d269f421ff12e7"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x0045daf0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:34:12.850460+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045daf0".binding_history.previous]
+size = 202
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0045daf0.c"
 symbol = "_fcn_0045daf0"
 kind = "FUNCTION"
 name = "fcn_0045daf0"
 
-["GOLDTL.0x0045daf0".verification]
+["GOLDTL.0x0045daf0".binding_history.previous.verification]
 source_hash = "baf9334174f2e17772853585990cd0b1cd9948f11f4d8bd435bb2a0975152b28"
 reference_hash = "0cce0b561ca7e4aa3655e5ed888de48c640f0b08443a7eac5782b803622db986"
 reference_size = "202"
@@ -143720,6 +144396,39 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x0045daf0".binding_history.replacement]
+
+[["GOLDTL.0x0045daf0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/deflate.c provides _deflateParams."
+changed_at = "2026-11-08T09:34:28.402972+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045daf0".binding_history.previous]
+size = 202
+
+["GOLDTL.0x0045daf0".binding_history.previous.verification]
+source_hash = "baf9334174f2e17772853585990cd0b1cd9948f11f4d8bd435bb2a0975152b28"
+reference_hash = "0cce0b561ca7e4aa3655e5ed888de48c640f0b08443a7eac5782b803622db986"
+reference_size = "202"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45daf0"
+context_hash = ""
+defines = "[]"
+input_hash = "7901d4ce08b9513abc5831ede2b8f55403c6a2a492dab42da12adb9e1819da64"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x0045daf0".binding_history.replacement]
+file = "references/zlib/deflate.c"
+symbol = "_deflateParams"
+kind = "LIBRARY"
+name = "deflateParams"
 ["GOLDTL.0x0045dfd0"]
 size = 431
 status = "RELOC"
@@ -143776,15 +144485,46 @@ measured_at = "2026-11-07T17:02:37+00:00"
 
 ["GOLDTL.0x0045e220"]
 size = 324
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/deflate.c"
+symbol = "_deflate_stored"
+kind = "LIBRARY"
+name = "deflate_stored"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x0045e220".verification]
+source_hash = "c1a8719d66e91fe80334a7344f7d7b7fc714ae008024446aa69a83dddfca0c9e"
+reference_hash = "c54100b1ceac76d5840d58ce4353c9fb4829a8583541fb21194b11a3866b20d2"
+reference_size = "324"
+headers_hash = "41fea2d54b55244ce22a34e1814e1eca2b3c06d30e9f969320d7f56d362046ae"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45e220"
+context_hash = ""
+defines = "[]"
+input_hash = "ab59ec7b790cea269714dfd2f3829699b85834cff9511ac6fab632cf26f4d63a"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x0045e220".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:38:47.435502+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045e220".binding_history.previous]
+size = 324
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0045e220.c"
 symbol = "_fcn_0045e220"
 kind = "FUNCTION"
 name = "fcn_0045e220"
 
-["GOLDTL.0x0045e220".verification]
+["GOLDTL.0x0045e220".binding_history.previous.verification]
 source_hash = "3874542a176e06a5495a8ae28de3c775c60c0815dbf12dad19e5baf4b07319ec"
 reference_hash = "c54100b1ceac76d5840d58ce4353c9fb4829a8583541fb21194b11a3866b20d2"
 reference_size = "324"
@@ -143801,6 +144541,39 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x0045e220".binding_history.replacement]
+
+[["GOLDTL.0x0045e220".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/deflate.c provides _deflate_stored."
+changed_at = "2026-11-08T09:39:02.947678+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045e220".binding_history.previous]
+size = 324
+
+["GOLDTL.0x0045e220".binding_history.previous.verification]
+source_hash = "3874542a176e06a5495a8ae28de3c775c60c0815dbf12dad19e5baf4b07319ec"
+reference_hash = "c54100b1ceac76d5840d58ce4353c9fb4829a8583541fb21194b11a3866b20d2"
+reference_size = "324"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45e220"
+context_hash = ""
+defines = "[]"
+input_hash = "c13ff7ce0be0bfdbb10ca193d182dce5c827a52ac8070ea738f66a0a6e48ae8d"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x0045e220".binding_history.replacement]
+file = "references/zlib/deflate.c"
+symbol = "_deflate_stored"
+kind = "LIBRARY"
+name = "deflate_stored"
 ["GOLDTL.0x0045e520"]
 size = 821
 status = "RELOC"
@@ -146511,15 +147284,46 @@ changed_at = "2026-11-02T22:03:07.550903+00:00"
 updated_by = "test"
 ["GOLDTL.0x00461b10"]
 size = 130
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/inflate.c"
+symbol = "_inflateSetDictionary"
+kind = "LIBRARY"
+name = "inflateSetDictionary"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00461b10".verification]
+source_hash = "ce6c2ab0741a93b8369de471723521147b239a5cf276fad7c9f9e33a51c9878f"
+reference_hash = "6087c85b9602541d819683779c53cf4d045010931142f28f0c9196211b81b0b1"
+reference_size = "130"
+headers_hash = "2c66245c0178ffbc3c1e8fae95e55f346c3eca55d32ec9601e19397ad027d46e"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x461b10"
+context_hash = ""
+defines = "[]"
+input_hash = "e5f688df5d312157a74657274b37b4fab34d157a523f87097b1edbf6886494ea"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00461b10".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:42:55.226321+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00461b10".binding_history.previous]
+size = 130
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00461b10.c"
 symbol = "_fcn_00461b10"
 kind = "FUNCTION"
 name = "fcn_00461b10"
 
-["GOLDTL.0x00461b10".verification]
+["GOLDTL.0x00461b10".binding_history.previous.verification]
 source_hash = "2db006f1dbd0eecbc370088e962bf55a1fa8810aee07ddeb4894fba38fdbe283"
 reference_hash = "6087c85b9602541d819683779c53cf4d045010931142f28f0c9196211b81b0b1"
 reference_size = "130"
@@ -146536,6 +147340,39 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00461b10".binding_history.replacement]
+
+[["GOLDTL.0x00461b10".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/inflate.c provides _inflateSetDictionary."
+changed_at = "2026-11-08T09:43:13.653120+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00461b10".binding_history.previous]
+size = 130
+
+["GOLDTL.0x00461b10".binding_history.previous.verification]
+source_hash = "2db006f1dbd0eecbc370088e962bf55a1fa8810aee07ddeb4894fba38fdbe283"
+reference_hash = "6087c85b9602541d819683779c53cf4d045010931142f28f0c9196211b81b0b1"
+reference_size = "130"
+headers_hash = "d63de320cadcfaa1a4aadb87d817d0ed469389d9e13e61bc7416264442778cd2"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x461b10"
+context_hash = ""
+defines = "[]"
+input_hash = "270408e3bedd934ceed39fe29352e63ad4416f7eda298137f934bf73388c27d4"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00461b10".binding_history.replacement]
+file = "references/zlib/inflate.c"
+symbol = "_inflateSetDictionary"
+kind = "LIBRARY"
+name = "inflateSetDictionary"
 ["GOLDTL.0x00461ba0"]
 size = 196
 status = "RELOC"
@@ -146592,15 +147429,58 @@ measured_at = "2026-11-07T17:02:37+00:00"
 
 ["GOLDTL.0x00461d50"]
 size = 1198
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/inftrees.c"
+symbol = "_huft_build"
+kind = "LIBRARY"
+name = "huft_build"
 status = "EXACT"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00461d50".verification]
+source_hash = "e2ff5577fbfc161bdbb983fd329a03cad0c27ff94125ece28f6f9ca010a8b261"
+reference_hash = "fd4abfa022f3a993e2706301597f369b8c19832897060493c97dfc0882e7b9cd"
+reference_size = "1198"
+headers_hash = "345d27021c05858f8c760f6b371e8cd3edd1f733dfa206dda2617c83f3d467ce"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x461d50"
+context_hash = ""
+defines = "[]"
+input_hash = "38da8c8f13832bdfa2e67c01e5e49cc1985508bfcdf7260822fda7c9ffae749d"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00461d50".status_history]]
+old_status = "EXACT"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-03T21:17:10.897223+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00461d50".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-04T03:20:51.149333+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00461d50".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:48:11.290681+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00461d50".binding_history.previous]
+size = 1198
+status = "EXACT"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00461d50.c"
 symbol = "_fcn_00461d50"
 kind = "FUNCTION"
 name = "fcn_00461d50"
 
-["GOLDTL.0x00461d50".verification]
+["GOLDTL.0x00461d50".binding_history.previous.verification]
 source_hash = "4a91420f712ec01776f19e60e08af25f047775e40b6f7a9a72fcabdc53e58951"
 reference_hash = "fd4abfa022f3a993e2706301597f369b8c19832897060493c97dfc0882e7b9cd"
 reference_size = "1198"
@@ -146617,17 +147497,39 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-07T17:02:37+00:00"
 
-[["GOLDTL.0x00461d50".status_history]]
-old_status = "EXACT"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-03T21:17:10.897223+00:00"
-updated_by = "verify"
+["GOLDTL.0x00461d50".binding_history.replacement]
 
-[["GOLDTL.0x00461d50".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-04T03:20:51.149333+00:00"
-updated_by = "verify"
+[["GOLDTL.0x00461d50".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/inftrees.c provides _huft_build."
+changed_at = "2026-11-08T09:48:33.013612+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00461d50".binding_history.previous]
+size = 1198
+
+["GOLDTL.0x00461d50".binding_history.previous.verification]
+source_hash = "4a91420f712ec01776f19e60e08af25f047775e40b6f7a9a72fcabdc53e58951"
+reference_hash = "fd4abfa022f3a993e2706301597f369b8c19832897060493c97dfc0882e7b9cd"
+reference_size = "1198"
+headers_hash = "c0e7eabf86c62c2fec37354a5be8c00ac2e244b9434aca8791d91a8e2bede5f9"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x461d50"
+context_hash = ""
+defines = "[]"
+input_hash = "cc56fe4c734bcedce4a5581e5325be74448ab7e4eefeddab57e609e4f7c2e65c"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00461d50".binding_history.replacement]
+file = "references/zlib/inftrees.c"
+symbol = "_huft_build"
+kind = "LIBRARY"
+name = "huft_build"
 ["GOLDTL.0x00462500"]
 size = 37
 note = "Pristine zlib 1.1.3 minigzip.c sample: complete native body and all typed relocations match; stock LIBCMT exit confirmed; main retains three unreachable compiler epilogue bytes. No game-code or raw-link/data verdict claim."
@@ -147476,15 +148378,46 @@ name = "main"
 symbol = "_main"
 ["GOLDTL.0x00462af0"]
 size = 160
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "__tr_stored_block"
+kind = "LIBRARY"
+name = "_tr_stored_block"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00462af0".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "4ba3ba7b94a4aa66a9b11ac285e5af82ceff73a7de2f1db8ac635b84c55bdb7c"
+reference_size = "160"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x462af0"
+context_hash = ""
+defines = "[]"
+input_hash = "23078de4a52ab4d91a08e06a76b47459a46277ffec0cb4435063aedcfe878d75"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00462af0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:49:44.626388+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00462af0".binding_history.previous]
+size = 160
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00462af0.c"
 symbol = "_fcn_00462af0"
 kind = "FUNCTION"
 name = "fcn_00462af0"
 
-["GOLDTL.0x00462af0".verification]
+["GOLDTL.0x00462af0".binding_history.previous.verification]
 source_hash = "8ecebe123a067be46b5f85a03875c794a06a81ef344bf743add639f59ee604f6"
 reference_hash = "4ba3ba7b94a4aa66a9b11ac285e5af82ceff73a7de2f1db8ac635b84c55bdb7c"
 reference_size = "160"
@@ -147501,17 +148434,81 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00462af0".binding_history.replacement]
+
+[["GOLDTL.0x00462af0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides __tr_stored_block."
+changed_at = "2026-11-08T09:50:01.982099+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00462af0".binding_history.previous]
+size = 160
+
+["GOLDTL.0x00462af0".binding_history.previous.verification]
+source_hash = "8ecebe123a067be46b5f85a03875c794a06a81ef344bf743add639f59ee604f6"
+reference_hash = "4ba3ba7b94a4aa66a9b11ac285e5af82ceff73a7de2f1db8ac635b84c55bdb7c"
+reference_size = "160"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x462af0"
+context_hash = ""
+defines = "[]"
+input_hash = "2e90c20a38f0a3ca661b33328fb0040d0b8c713fd6bf2ce74c61fb8935d43b6c"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00462af0".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "__tr_stored_block"
+kind = "LIBRARY"
+name = "_tr_stored_block"
 ["GOLDTL.0x00462b90"]
 size = 517
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "__tr_align"
+kind = "LIBRARY"
+name = "_tr_align"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00462b90".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "4e4894647cf9d696d622ab2bd1531243a86d88c65c68b914a02cee966226b69a"
+reference_size = "517"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x462b90"
+context_hash = ""
+defines = "[]"
+input_hash = "05f36618b9f7336519abb9b3ef861c1974da7e155dd2f87d220cb47958b9307a"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00462b90".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:51:14.782572+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00462b90".binding_history.previous]
+size = 517
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00462b90.c"
 symbol = "_fcn_00462b90"
 kind = "FUNCTION"
 name = "fcn_00462b90"
 
-["GOLDTL.0x00462b90".verification]
+["GOLDTL.0x00462b90".binding_history.previous.verification]
 source_hash = "69813892a781a6243b2eae9c95398a992caa1284d91bd92acba83406dd42b003"
 reference_hash = "4e4894647cf9d696d622ab2bd1531243a86d88c65c68b914a02cee966226b69a"
 reference_size = "517"
@@ -147528,17 +148525,81 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00462b90".binding_history.replacement]
+
+[["GOLDTL.0x00462b90".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides __tr_align."
+changed_at = "2026-11-08T09:51:34.313202+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00462b90".binding_history.previous]
+size = 517
+
+["GOLDTL.0x00462b90".binding_history.previous.verification]
+source_hash = "69813892a781a6243b2eae9c95398a992caa1284d91bd92acba83406dd42b003"
+reference_hash = "4e4894647cf9d696d622ab2bd1531243a86d88c65c68b914a02cee966226b69a"
+reference_size = "517"
+headers_hash = "12b4c3160af52f8a1f5e7912d646bbeab315562d97b42f733d1b573525deab01"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x462b90"
+context_hash = ""
+defines = "[]"
+input_hash = "725e7000956eb98b983dc8eb16a9ac146fcf17a662499acc49c821c37241b69d"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00462b90".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "__tr_align"
+kind = "LIBRARY"
+name = "_tr_align"
 ["GOLDTL.0x00462f90"]
 size = 537
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "_build_tree"
+kind = "LIBRARY"
+name = "build_tree"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00462f90".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "a2aa7ac56be48f9625855123f77fe2adf7a6b9f4295422651da37429f15c810f"
+reference_size = "537"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x462f90"
+context_hash = ""
+defines = "[]"
+input_hash = "14938cd4ba8492ee450d3f839911561b460a1215790aa2df7772e1dbb82b5cec"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00462f90".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:52:47.130445+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00462f90".binding_history.previous]
+size = 537
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00462f90.c"
 symbol = "_fcn_00462f90"
 kind = "FUNCTION"
 name = "fcn_00462f90"
 
-["GOLDTL.0x00462f90".verification]
+["GOLDTL.0x00462f90".binding_history.previous.verification]
 source_hash = "e5846d6ada5113fb02f431a398afd271bffc7f0d59819793d12e249c566147b0"
 reference_hash = "a2aa7ac56be48f9625855123f77fe2adf7a6b9f4295422651da37429f15c810f"
 reference_size = "537"
@@ -147555,17 +148616,81 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00462f90".binding_history.replacement]
+
+[["GOLDTL.0x00462f90".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _build_tree."
+changed_at = "2026-11-08T09:53:06.095852+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00462f90".binding_history.previous]
+size = 537
+
+["GOLDTL.0x00462f90".binding_history.previous.verification]
+source_hash = "e5846d6ada5113fb02f431a398afd271bffc7f0d59819793d12e249c566147b0"
+reference_hash = "a2aa7ac56be48f9625855123f77fe2adf7a6b9f4295422651da37429f15c810f"
+reference_size = "537"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x462f90"
+context_hash = ""
+defines = "[]"
+input_hash = "f975b5779bc157ea94b4a2b4057807e8e11660e19e3d950e627f398ea2592628"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00462f90".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_build_tree"
+kind = "LIBRARY"
+name = "build_tree"
 ["GOLDTL.0x00463290"]
 size = 528
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "_gen_bitlen"
+kind = "LIBRARY"
+name = "gen_bitlen"
 status = "EXACT"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00463290".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "961831bead58b469d3460cb7ad8db28c98021f93d96783171e2337175a5007e1"
+reference_size = "528"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x463290"
+context_hash = ""
+defines = "[]"
+input_hash = "9c41a253d9bd2ca6c0e203cdfbaa45ccc0b3f38df36b0da7d2864d7faab62d30"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00463290".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:54:36.134406+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00463290".binding_history.previous]
+size = 528
+status = "EXACT"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00463290.c"
 symbol = "_fcn_00463290"
 kind = "FUNCTION"
 name = "fcn_00463290"
 
-["GOLDTL.0x00463290".verification]
+["GOLDTL.0x00463290".binding_history.previous.verification]
 source_hash = "a9db336821b6813b13d322f9b6440050bb99fd5fed409741f365cd1435424632"
 reference_hash = "961831bead58b469d3460cb7ad8db28c98021f93d96783171e2337175a5007e1"
 reference_size = "528"
@@ -147582,17 +148707,81 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00463290".binding_history.replacement]
+
+[["GOLDTL.0x00463290".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _gen_bitlen."
+changed_at = "2026-11-08T09:54:54.424653+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00463290".binding_history.previous]
+size = 528
+
+["GOLDTL.0x00463290".binding_history.previous.verification]
+source_hash = "a9db336821b6813b13d322f9b6440050bb99fd5fed409741f365cd1435424632"
+reference_hash = "961831bead58b469d3460cb7ad8db28c98021f93d96783171e2337175a5007e1"
+reference_size = "528"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x463290"
+context_hash = ""
+defines = "[]"
+input_hash = "7cb88313de5f61a5da458f080772770bbcc757cbd6b13492404e467e789e05ce"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00463290".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_gen_bitlen"
+kind = "LIBRARY"
+name = "gen_bitlen"
 ["GOLDTL.0x004634a0"]
 size = 119
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "_gen_codes"
+kind = "LIBRARY"
+name = "gen_codes"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x004634a0".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "e829a6a06d8bb0aedb5e348956a30b31a37fca0c65f603adccf76c65f3e39c23"
+reference_size = "119"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x4634a0"
+context_hash = ""
+defines = "[]"
+input_hash = "d6f71635a39096ffd7bcdbeb8e720a5190b57b0a98923535b858fc348b85e326"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x004634a0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:56:04.936753+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x004634a0".binding_history.previous]
+size = 119
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_004634a0.c"
 symbol = "_fcn_004634a0"
 kind = "FUNCTION"
 name = "fcn_004634a0"
 
-["GOLDTL.0x004634a0".verification]
+["GOLDTL.0x004634a0".binding_history.previous.verification]
 source_hash = "28f67a986cd31174ef86a5de34491efb6f4f3a58249313f441398c5c266c5b2e"
 reference_hash = "e829a6a06d8bb0aedb5e348956a30b31a37fca0c65f603adccf76c65f3e39c23"
 reference_size = "119"
@@ -147609,17 +148798,81 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x004634a0".binding_history.replacement]
+
+[["GOLDTL.0x004634a0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _gen_codes."
+changed_at = "2026-11-08T09:56:22.628685+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x004634a0".binding_history.previous]
+size = 119
+
+["GOLDTL.0x004634a0".binding_history.previous.verification]
+source_hash = "28f67a986cd31174ef86a5de34491efb6f4f3a58249313f441398c5c266c5b2e"
+reference_hash = "e829a6a06d8bb0aedb5e348956a30b31a37fca0c65f603adccf76c65f3e39c23"
+reference_size = "119"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x4634a0"
+context_hash = ""
+defines = "[]"
+input_hash = "d3d0dc0a327ef35c85625886a97e6f4ad7e0511c917b54a2e332b754462cf27c"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x004634a0".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_gen_codes"
+kind = "LIBRARY"
+name = "gen_codes"
 ["GOLDTL.0x00463680"]
 size = 586
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "_send_all_trees"
+kind = "LIBRARY"
+name = "send_all_trees"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00463680".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "2924e38775b82f768f07d97897acdc378dd88ae272697e9bf1d2200459b8c40f"
+reference_size = "586"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x463680"
+context_hash = ""
+defines = "[]"
+input_hash = "ba4f24e12108ec033b0d74871dc835f5fb95ab454bc288e6da7282bafb230530"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00463680".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:57:30.180436+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00463680".binding_history.previous]
+size = 586
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00463680.c"
 symbol = "_fcn_00463680"
 kind = "FUNCTION"
 name = "fcn_00463680"
 
-["GOLDTL.0x00463680".verification]
+["GOLDTL.0x00463680".binding_history.previous.verification]
 source_hash = "dbae3fe6386f1717d40897abcbfa513fe835cc2d3820a384f88e9a9ab74b2872"
 reference_hash = "2924e38775b82f768f07d97897acdc378dd88ae272697e9bf1d2200459b8c40f"
 reference_size = "586"
@@ -147636,17 +148889,81 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00463680".binding_history.replacement]
+
+[["GOLDTL.0x00463680".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _send_all_trees."
+changed_at = "2026-11-08T09:57:46.881653+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00463680".binding_history.previous]
+size = 586
+
+["GOLDTL.0x00463680".binding_history.previous.verification]
+source_hash = "dbae3fe6386f1717d40897abcbfa513fe835cc2d3820a384f88e9a9ab74b2872"
+reference_hash = "2924e38775b82f768f07d97897acdc378dd88ae272697e9bf1d2200459b8c40f"
+reference_size = "586"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x463680"
+context_hash = ""
+defines = "[]"
+input_hash = "76c887f9c649b9ace3f4779001c37e4c2373f2bf4cfac764d6bf0301d01e68fd"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00463680".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_send_all_trees"
+kind = "LIBRARY"
+name = "send_all_trees"
 ["GOLDTL.0x004638d0"]
 size = 1303
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "_send_tree"
+kind = "LIBRARY"
+name = "send_tree"
 status = "EXACT"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x004638d0".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "0ddc5046847d35836ade594c27368f44681611116f0c6d0285f7fb268fde1b29"
+reference_size = "1303"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x4638d0"
+context_hash = ""
+defines = "[]"
+input_hash = "92caa7f049910b5ca922aae2393530ce26563453648932ebdae321aac831653f"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x004638d0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:58:55.305705+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x004638d0".binding_history.previous]
+size = 1303
+status = "EXACT"
 file = "src/Develop/Unassigned/GOLDTL.fcn_004638d0.c"
 symbol = "_fcn_004638d0"
 kind = "FUNCTION"
 name = "fcn_004638d0"
 
-["GOLDTL.0x004638d0".verification]
+["GOLDTL.0x004638d0".binding_history.previous.verification]
 source_hash = "76be44eabd82ae5321d9fe7b0d30335d33ca7d8dcc78cc0b90c5b39b78c873fc"
 reference_hash = "0ddc5046847d35836ade594c27368f44681611116f0c6d0285f7fb268fde1b29"
 reference_size = "1303"
@@ -147663,17 +148980,81 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x004638d0".binding_history.replacement]
+
+[["GOLDTL.0x004638d0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _send_tree."
+changed_at = "2026-11-08T09:59:24.101507+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x004638d0".binding_history.previous]
+size = 1303
+
+["GOLDTL.0x004638d0".binding_history.previous.verification]
+source_hash = "76be44eabd82ae5321d9fe7b0d30335d33ca7d8dcc78cc0b90c5b39b78c873fc"
+reference_hash = "0ddc5046847d35836ade594c27368f44681611116f0c6d0285f7fb268fde1b29"
+reference_size = "1303"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x4638d0"
+context_hash = ""
+defines = "[]"
+input_hash = "788c901ab5a5484eeaeef721fe78aeefa6b03e268301bda00d130d47c3c035f2"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x004638d0".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_send_tree"
+kind = "LIBRARY"
+name = "send_tree"
 ["GOLDTL.0x00463df0"]
 size = 171
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "__tr_tally"
+kind = "LIBRARY"
+name = "_tr_tally"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00463df0".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "952eca023277cb86bb6129127c71f36ccd9f5ee0a3021a614063314a3fd64a5a"
+reference_size = "171"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x463df0"
+context_hash = ""
+defines = "[]"
+input_hash = "3a0f8f4a25d98aa857f245403d471f3fdabf9faeeb860c046a5301a9c2b56d89"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00463df0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T10:00:42.088723+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00463df0".binding_history.previous]
+size = 171
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00463df0.c"
 symbol = "_fcn_00463df0"
 kind = "FUNCTION"
 name = "fcn_00463df0"
 
-["GOLDTL.0x00463df0".verification]
+["GOLDTL.0x00463df0".binding_history.previous.verification]
 source_hash = "4a10422ea652cdae1abe908573274e5473c91da5f093d597a9a6299aee7cce75"
 reference_hash = "952eca023277cb86bb6129127c71f36ccd9f5ee0a3021a614063314a3fd64a5a"
 reference_size = "171"
@@ -147690,17 +149071,81 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00463df0".binding_history.replacement]
+
+[["GOLDTL.0x00463df0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides __tr_tally."
+changed_at = "2026-11-08T10:01:02.116269+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00463df0".binding_history.previous]
+size = 171
+
+["GOLDTL.0x00463df0".binding_history.previous.verification]
+source_hash = "4a10422ea652cdae1abe908573274e5473c91da5f093d597a9a6299aee7cce75"
+reference_hash = "952eca023277cb86bb6129127c71f36ccd9f5ee0a3021a614063314a3fd64a5a"
+reference_size = "171"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x463df0"
+context_hash = ""
+defines = "[]"
+input_hash = "2c1d3589b33f92aa435b1b82c0927201754fce90bc3b89d1611a5949f672e2cb"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00463df0".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "__tr_tally"
+kind = "LIBRARY"
+name = "_tr_tally"
 ["GOLDTL.0x00463ea0"]
 size = 1037
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "_compress_block"
+kind = "LIBRARY"
+name = "compress_block"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00463ea0".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "804c39b96b684848338b972ce0f26d2fc2f63de117fb31224fe75b1b654522ef"
+reference_size = "1037"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x463ea0"
+context_hash = ""
+defines = "[]"
+input_hash = "703cea22370b6b9097ad54063aa17aab408c4f3c83bbe809d891d3354045bf89"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00463ea0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T10:02:27.206666+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00463ea0".binding_history.previous]
+size = 1037
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00463ea0.c"
 symbol = "_fcn_00463ea0"
 kind = "FUNCTION"
 name = "fcn_00463ea0"
 
-["GOLDTL.0x00463ea0".verification]
+["GOLDTL.0x00463ea0".binding_history.previous.verification]
 source_hash = "1b7de49be0694659176217199137caaad7ec7f875afc98ada82353ec65a0c06c"
 reference_hash = "804c39b96b684848338b972ce0f26d2fc2f63de117fb31224fe75b1b654522ef"
 reference_size = "1037"
@@ -147717,17 +149162,81 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00463ea0".binding_history.replacement]
+
+[["GOLDTL.0x00463ea0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _compress_block."
+changed_at = "2026-11-08T10:02:44.844094+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00463ea0".binding_history.previous]
+size = 1037
+
+["GOLDTL.0x00463ea0".binding_history.previous.verification]
+source_hash = "1b7de49be0694659176217199137caaad7ec7f875afc98ada82353ec65a0c06c"
+reference_hash = "804c39b96b684848338b972ce0f26d2fc2f63de117fb31224fe75b1b654522ef"
+reference_size = "1037"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x463ea0"
+context_hash = ""
+defines = "[]"
+input_hash = "dbeac3dd6d75cccf894ad9b5d0b55ffa13b777da399766e1ecadc8b35f2f0843"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00463ea0".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_compress_block"
+kind = "LIBRARY"
+name = "compress_block"
 ["GOLDTL.0x00464330"]
 size = 31
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "_bi_reverse"
+kind = "LIBRARY"
+name = "bi_reverse"
 status = "EXACT"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00464330".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "ff419a302ca0a963afdc594930d87d34cfa566dc55af545bf882280351773c1b"
+reference_size = "31"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x464330"
+context_hash = ""
+defines = "[]"
+input_hash = "3df186ee27f72e0b57ca3d6b4029624e6b46bed6d8fde78be13312f7e2d544ef"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00464330".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T10:05:52.684731+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00464330".binding_history.previous]
+size = 31
+status = "EXACT"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00464330.c"
 symbol = "_fcn_00464330"
 kind = "FUNCTION"
 name = "fcn_00464330"
 
-["GOLDTL.0x00464330".verification]
+["GOLDTL.0x00464330".binding_history.previous.verification]
 source_hash = "fc20da5b3023aa0bcaedb1cb33c8aac90360f58a02ce10880a6295ab20ed4722"
 reference_hash = "ff419a302ca0a963afdc594930d87d34cfa566dc55af545bf882280351773c1b"
 reference_size = "31"
@@ -147744,17 +149253,81 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00464330".binding_history.replacement]
+
+[["GOLDTL.0x00464330".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _bi_reverse."
+changed_at = "2026-11-08T10:06:11.072344+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00464330".binding_history.previous]
+size = 31
+
+["GOLDTL.0x00464330".binding_history.previous.verification]
+source_hash = "fc20da5b3023aa0bcaedb1cb33c8aac90360f58a02ce10880a6295ab20ed4722"
+reference_hash = "ff419a302ca0a963afdc594930d87d34cfa566dc55af545bf882280351773c1b"
+reference_size = "31"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x464330"
+context_hash = ""
+defines = "[]"
+input_hash = "c9f2283b9940ddaef92f2d7082e2d687c46ca8b7e7ba1a8a9ad613ccc122d311"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00464330".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_bi_reverse"
+kind = "LIBRARY"
+name = "bi_reverse"
 ["GOLDTL.0x00464350"]
 size = 135
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "_bi_flush"
+kind = "LIBRARY"
+name = "bi_flush"
 status = "EXACT"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00464350".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "ee04c0ac28cee4bb5e18674736079fa25d30cc3c21af67750ce9a38d51353b80"
+reference_size = "135"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x464350"
+context_hash = ""
+defines = "[]"
+input_hash = "79e22e2aefcee9c6e9457b37b3a1acb40421744e02232772c1ca779caa491e8d"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00464350".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T10:09:22.330584+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00464350".binding_history.previous]
+size = 135
+status = "EXACT"
 file = "src/Develop/Unassigned/Unassigned-zlib-00464350_00464350.c"
 symbol = "_fcn_00464350"
 kind = "FUNCTION"
 name = "fcn_00464350"
 
-["GOLDTL.0x00464350".verification]
+["GOLDTL.0x00464350".binding_history.previous.verification]
 source_hash = "28d3ce88dff0c125c9598644b39da0289b654c0b342540d34431c6b5b4767625"
 reference_hash = "ee04c0ac28cee4bb5e18674736079fa25d30cc3c21af67750ce9a38d51353b80"
 reference_size = "135"
@@ -147771,17 +149344,81 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00464350".binding_history.replacement]
+
+[["GOLDTL.0x00464350".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _bi_flush."
+changed_at = "2026-11-08T10:09:39.020159+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00464350".binding_history.previous]
+size = 135
+
+["GOLDTL.0x00464350".binding_history.previous.verification]
+source_hash = "28d3ce88dff0c125c9598644b39da0289b654c0b342540d34431c6b5b4767625"
+reference_hash = "ee04c0ac28cee4bb5e18674736079fa25d30cc3c21af67750ce9a38d51353b80"
+reference_size = "135"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x464350"
+context_hash = ""
+defines = "[]"
+input_hash = "411ef9cb29d9fdff62fac6f47a7b78d8da48020446151279149f7bde605998b8"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00464350".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_bi_flush"
+kind = "LIBRARY"
+name = "bi_flush"
 ["GOLDTL.0x004643e0"]
 size = 121
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "_bi_windup"
+kind = "LIBRARY"
+name = "bi_windup"
 status = "EXACT"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x004643e0".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "a8bdaa752b422f8df7fc30469a09fe6a09778d7479f035f6cbb4f70f35b759f3"
+reference_size = "121"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x4643e0"
+context_hash = ""
+defines = "[]"
+input_hash = "62fe4602a17c668ab52ac650839022930c49283eafdb83976ddf7f50b04938cd"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x004643e0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; its loose file was removed when the library attribution was applied"
+changed_at = "2026-11-08T10:12:36.731811+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x004643e0".binding_history.previous]
+size = 121
+status = "EXACT"
 file = "src/Develop/Unassigned/Unassigned-zlib-00464350_00464350.c"
 symbol = "_fcn_004643e0"
 kind = "FUNCTION"
 name = "fcn_004643e0"
 
-["GOLDTL.0x004643e0".verification]
+["GOLDTL.0x004643e0".binding_history.previous.verification]
 source_hash = "28d3ce88dff0c125c9598644b39da0289b654c0b342540d34431c6b5b4767625"
 reference_hash = "a8bdaa752b422f8df7fc30469a09fe6a09778d7479f035f6cbb4f70f35b759f3"
 reference_size = "121"
@@ -147798,17 +149435,81 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x004643e0".binding_history.replacement]
+
+[["GOLDTL.0x004643e0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _bi_windup."
+changed_at = "2026-11-08T10:12:53.410872+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x004643e0".binding_history.previous]
+size = 121
+
+["GOLDTL.0x004643e0".binding_history.previous.verification]
+source_hash = "28d3ce88dff0c125c9598644b39da0289b654c0b342540d34431c6b5b4767625"
+reference_hash = "a8bdaa752b422f8df7fc30469a09fe6a09778d7479f035f6cbb4f70f35b759f3"
+reference_size = "121"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x4643e0"
+context_hash = ""
+defines = "[]"
+input_hash = "8cd1504370629475e7e906a31e397ce29a344659f2385db844c7da3c8e9676de"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x004643e0".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_bi_windup"
+kind = "LIBRARY"
+name = "bi_windup"
 ["GOLDTL.0x00464500"]
 size = 156
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/uncompr.c"
+symbol = "_uncompress"
+kind = "LIBRARY"
+name = "uncompress"
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
+
+["GOLDTL.0x00464500".verification]
+source_hash = "4f771ea1070726e0e2c3b16dfd95783049c5bca4b0218d23db8ddfdd87ba1e97"
+reference_hash = "302a3b2c2ea772ca893d13a0a5ad6e57c85cab4a1f4978416ebac6760c47116e"
+reference_size = "156"
+headers_hash = "7c49d0d98800a6a6596aa95b6272aaf7ec7095e393c88e29b972a8539bfcc219"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x464500"
+context_hash = ""
+defines = "[]"
+input_hash = "f403dcb7110ce1d5d150cfedd86a348fd7500208a182c14db367ba4441e7841c"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x00464500".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T10:07:22.937597+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00464500".binding_history.previous]
+size = 156
+status = "RELOC"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00464500.c"
 symbol = "_fcn_00464500"
 kind = "FUNCTION"
 name = "fcn_00464500"
 
-["GOLDTL.0x00464500".verification]
+["GOLDTL.0x00464500".binding_history.previous.verification]
 source_hash = "f41f7e30293f2c1c60dd8e4b2de06194b426d32bc5ced1921780a033fb05b267"
 reference_hash = "302a3b2c2ea772ca893d13a0a5ad6e57c85cab4a1f4978416ebac6760c47116e"
 reference_size = "156"
@@ -147825,6 +149526,39 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
+["GOLDTL.0x00464500".binding_history.replacement]
+
+[["GOLDTL.0x00464500".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/uncompr.c provides _uncompress."
+changed_at = "2026-11-08T10:07:42.147178+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00464500".binding_history.previous]
+size = 156
+
+["GOLDTL.0x00464500".binding_history.previous.verification]
+source_hash = "f41f7e30293f2c1c60dd8e4b2de06194b426d32bc5ced1921780a033fb05b267"
+reference_hash = "302a3b2c2ea772ca893d13a0a5ad6e57c85cab4a1f4978416ebac6760c47116e"
+reference_size = "156"
+headers_hash = "31750a53cac1a3383ec81988dac10c380ab036e93c9da0f25b0fb7832230a432"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x464500"
+context_hash = ""
+defines = "[]"
+input_hash = "9bdcb2a5375aa852b95d65e72d5546c5bfa8a56e90e455c267d215e29c454088"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x00464500".binding_history.replacement]
+file = "references/zlib/uncompr.c"
+symbol = "_uncompress"
+kind = "LIBRARY"
+name = "uncompress"
 ["GOLDTL.0x004645a0"]
 size = 91
 updated_by = "verify"
@@ -153865,7 +155599,7 @@ kind = "FUNCTION"
 name = "fcn_00476620"
 
 ["GOLDTL.0x00476620".verification]
-source_hash = "609e9ae8beebb87ec672015b196a36301b20885ec82d68107292783cfd93ad63"
+source_hash = "8ae3859846e360eb16010ec9c06c6398bc0276db6ca6573d0e941bf1559cd4a4"
 reference_hash = "fb1e29572c9239e11f4b12cc8f44e4bebcf7d5c84c21da17de5251a17033d4cf"
 reference_size = "51"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -153876,10 +155610,10 @@ module = "GOLDTL"
 va = "0x476620"
 context_hash = ""
 defines = "[]"
-input_hash = "1a0ed4df008807c5fe75e516454cbc1573343e2b077b3ad2dc167ad20f80249b"
+input_hash = "cdd46bcb0b74d364a4e6fd911de227e1b1e3d4b8767e1d27c04caec1f2c6be00"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-11-07T17:02:37+00:00"
+measured_at = "2026-11-08T10:26:08+00:00"
 
 ["GOLDTL.0x00476660"]
 size = 396
@@ -161711,7 +163445,7 @@ kind = "FUNCTION"
 name = "fcn_004a7b40"
 
 ["GOLDTL.0x004a7b40".verification]
-source_hash = "f067d2e222087cdc1424ed6a08403e02d1ea0a1138547a0c2be953362c3997e4"
+source_hash = "4d845e6078420a2ddc0fb042973edb1409ebaf91b3e8b00ea83a6cd042b6aa6e"
 reference_hash = "5e377996191a052b6c78333b8aaaad9c8446d8ddc1bdfa8d50be0c5d7f4f4bd4"
 reference_size = "149"
 headers_hash = "1c6853035bb47eb5c26dde2ab3ba107f04caaaaf523aad31742cad45b966452a"
@@ -161722,10 +163456,10 @@ module = "GOLDTL"
 va = "0x4a7b40"
 context_hash = ""
 defines = "[]"
-input_hash = "c8e4502380327fd0ffc1f1b3b545810267df6ae1dfea1f2d2b6ea7bfc64be6c3"
+input_hash = "070d1a84cdde6a154f8326752573291cd4e2bd686ecdbb21592e4e31bc858236"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-11-08T09:02:34+00:00"
+measured_at = "2026-11-08T10:26:08+00:00"
 
 ["GOLDTL.0x004a7f90"]
 size = 219
@@ -161738,7 +163472,7 @@ kind = "FUNCTION"
 name = "fcn_004a7f90"
 
 ["GOLDTL.0x004a7f90".verification]
-source_hash = "f067d2e222087cdc1424ed6a08403e02d1ea0a1138547a0c2be953362c3997e4"
+source_hash = "ab77c5669721db02dcef8ab3d656516b46ccea3f3b965204d4e6e7369d307ae6"
 reference_hash = "6a082b41950ca2c4a9a3de14a585f2b4cbc12ce992da0f98d3ed4c4a0847a8e6"
 reference_size = "219"
 headers_hash = "1c6853035bb47eb5c26dde2ab3ba107f04caaaaf523aad31742cad45b966452a"
@@ -161749,10 +163483,10 @@ module = "GOLDTL"
 va = "0x4a7f90"
 context_hash = ""
 defines = "[]"
-input_hash = "09820cd0f7afc75472851ed7019b2cf8cf2cf5b70f9b4aaf2abe91fb33bd605c"
+input_hash = "b56429e7531fa21d5b755d25f6310c2348f69bf1db58b19ac76ca12e6c3bc9ac"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-11-08T09:02:34+00:00"
+measured_at = "2026-11-08T10:26:08+00:00"
 
 [["GOLDTL.0x004a7f90".status_history]]
 old_status = "RELOC"
@@ -451304,7 +453038,7 @@ blocker = "Application code — pending per-function decompilation"
 cflags = "/O2 /Gd /G6"
 
 ["GOLDTL.0x004a7be0".verification]
-source_hash = "f067d2e222087cdc1424ed6a08403e02d1ea0a1138547a0c2be953362c3997e4"
+source_hash = "e408c5dda7d90dd451e201fde99d76f71f0b74845ebc159389f49de83468a149"
 reference_hash = "9f1b7eff070a72b389a022436ea6e74f7a756b66dafe515893570b1635063847"
 reference_size = "345"
 headers_hash = "1c6853035bb47eb5c26dde2ab3ba107f04caaaaf523aad31742cad45b966452a"
@@ -451315,10 +453049,10 @@ module = "GOLDTL"
 va = "0x4a7be0"
 context_hash = ""
 defines = "[]"
-input_hash = "ad04e78dff22f40899c4475e30da0d294ad742ad05c507dc8bbe029fede3cbd7"
+input_hash = "052c09ebb68ec84b4ac327d46081caf2fe8d14bf01ea0e6e5e603e593329f75e"
 writer = "verify"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-08T09:02:34+00:00"
+measured_at = "2026-11-08T10:26:08+00:00"
 
 [["GOLDTL.0x004a7be0".status_history]]
 old_status = "STUB"
@@ -460484,7 +462218,7 @@ blocker = "NEAR 556/570; 5 structural instructions are pure scheduling reorder (
 blocker_delta = 14
 
 ["GOLDTL.0x004763e0".verification]
-source_hash = "609e9ae8beebb87ec672015b196a36301b20885ec82d68107292783cfd93ad63"
+source_hash = "f670dcab701aaf9deb381690ef1b579324a7601444c459330812e8c824b26e76"
 reference_hash = "0c2a56d35aad90c0476b4b98ae060237939cf448bb757404234282acf6f67f69"
 reference_size = "570"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -460495,10 +462229,10 @@ module = "GOLDTL"
 va = "0x4763e0"
 context_hash = ""
 defines = "[]"
-input_hash = "66f5786b5b0d536fca8d9c0d5d96a93c99ea805e6f9fcc2f1ba02358766f5748"
+input_hash = "98119d301aa318393942b7522970fdbf8cc60df81bbaedf943dc42567cfe1563"
 writer = "verify"
 status = "NEAR_MATCHING"
-measured_at = "2026-11-07T17:02:37+00:00"
+measured_at = "2026-11-08T10:26:08+00:00"
 
 [["GOLDTL.0x004763e0".status_history]]
 old_status = "STUB"
@@ -463160,15 +464894,58 @@ changed_at = "2026-10-19T20:49:45.815210+00:00"
 updated_by = "test"
 ["GOLDTL.0x0045dbc0"]
 size = 685
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/deflate.c"
+symbol = "_deflate"
+kind = "LIBRARY"
+name = "deflate"
+status = "RELOC"
+
+["GOLDTL.0x0045dbc0".verification]
+source_hash = "c1a8719d66e91fe80334a7344f7d7b7fc714ae008024446aa69a83dddfca0c9e"
+reference_hash = "e7a5fae64c740cff8183d2dc2c4a2c8e18d00b129ea71f8b43f65126457ced22"
+reference_size = "685"
+headers_hash = "41fea2d54b55244ce22a34e1814e1eca2b3c06d30e9f969320d7f56d362046ae"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45dbc0"
+context_hash = ""
+defines = "[]"
+input_hash = "45a02bf3bbc36e4255750a037e02451e2f58096005cd2b1a92b4b60e32e974f5"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x0045dbc0".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-19T20:45:01.359423+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0045dbc0".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "RELOC"
+changed_at = "2026-10-19T21:08:19.096949+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0045dbc0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T09:35:39.927133+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045dbc0".binding_history.previous]
+size = 685
 file = "src/Develop/Unassigned/GOLDTL.fcn_0045dbc0.c"
 symbol = "_fcn_0045dbc0"
 name = "fcn_0045dbc0"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:31:46+00:00"
 status = "RELOC"
 
-["GOLDTL.0x0045dbc0".verification]
+["GOLDTL.0x0045dbc0".binding_history.previous.verification]
 source_hash = "031a75d9f3cd75362dd8778aff14e0790aedcfcd7a2d3a9ba8112cc635308dcc"
 reference_hash = "e7a5fae64c740cff8183d2dc2c4a2c8e18d00b129ea71f8b43f65126457ced22"
 reference_size = "685"
@@ -463185,17 +464962,39 @@ writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-07T17:02:37+00:00"
 
-[["GOLDTL.0x0045dbc0".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-19T20:45:01.359423+00:00"
-updated_by = "test"
+["GOLDTL.0x0045dbc0".binding_history.replacement]
 
-[["GOLDTL.0x0045dbc0".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "RELOC"
-changed_at = "2026-10-19T21:08:19.096949+00:00"
-updated_by = "test"
+[["GOLDTL.0x0045dbc0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/deflate.c provides _deflate."
+changed_at = "2026-11-08T09:35:56.224626+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0045dbc0".binding_history.previous]
+size = 685
+
+["GOLDTL.0x0045dbc0".binding_history.previous.verification]
+source_hash = "031a75d9f3cd75362dd8778aff14e0790aedcfcd7a2d3a9ba8112cc635308dcc"
+reference_hash = "e7a5fae64c740cff8183d2dc2c4a2c8e18d00b129ea71f8b43f65126457ced22"
+reference_size = "685"
+headers_hash = "65f516eecb94aa7d9b3bfda8aa02e9daa3b10965cd2701f5a1fd4a1e09b272e7"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x45dbc0"
+context_hash = ""
+defines = "[]"
+input_hash = "29bbbcdc149d61255c92fee8e8b11d9737ea080d76d8d57ec6ead902006bd4bd"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x0045dbc0".binding_history.replacement]
+file = "references/zlib/deflate.c"
+symbol = "_deflate"
+kind = "LIBRARY"
+name = "deflate"
 ["GOLDTL.0x0040ed40"]
 size = 398
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0040ed40.c"
@@ -463328,7 +465127,7 @@ cflags = "/O2 /Gd /G6"
 blocker_delta = 7
 
 ["GOLDTL.0x00476120".verification]
-source_hash = "609e9ae8beebb87ec672015b196a36301b20885ec82d68107292783cfd93ad63"
+source_hash = "4193cbcfa113bd33c863454c8da60f5db50f9609b8e53178ed1902d6e40664ce"
 reference_hash = "d9624e3c35f93407eae8ac98dbb28bd077e0aa1232d7f7d14618c1c5fd36b8ac"
 reference_size = "690"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -463339,10 +465138,10 @@ module = "GOLDTL"
 va = "0x476120"
 context_hash = ""
 defines = "[]"
-input_hash = "86748c6667892cf16797760228b7c4f164c432c7050b7392bb9e87a213dd1788"
+input_hash = "64062f2481bf1e7e99a7f4117ea9bfba82cca20696cb9fe16754e52d505a62e8"
 writer = "verify"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-07T17:02:37+00:00"
+measured_at = "2026-11-08T10:26:08+00:00"
 
 [["GOLDTL.0x00476120".status_history]]
 old_status = "STUB"
@@ -615295,16 +617094,47 @@ kind = "LIBRARY"
 
 ["GOLDTL.0x00652da5".binding_history.replacement]
 ["GOLDTL.0x004642b0"]
+size = 116
+updated_by = "verify"
+updated_at = "2026-11-08T10:26:08+00:00"
+file = "references/zlib/trees.c"
+symbol = "_set_data_type"
+kind = "LIBRARY"
+name = "set_data_type"
+status = "EXACT"
+
+["GOLDTL.0x004642b0".verification]
+source_hash = "9ba430e73ea7547052b6d86ad76810840542bded23e3229646e13a66827e6ed4"
+reference_hash = "264e8424fbba3d644f3bf74d2afe688dba1cb78881a525614c7b54c8c7f22701"
+reference_size = "116"
+headers_hash = "e68338e86c0ba42cb045264e78202c6e87c592d86326ec9a8b1c207a8ce6db1c"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x4642b0"
+context_hash = ""
+defines = "[]"
+input_hash = "59f2a26d7880814324748514a34ef8bde372ed59fa283f5b3b8d0203d4d72278"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-08T10:26:08+00:00"
+
+[["GOLDTL.0x004642b0".binding_history]]
+action = "retire"
+reason = "stock zlib 1.1.3 body; attribute as library, vendored source provides it"
+changed_at = "2026-11-08T10:04:23.198439+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x004642b0".binding_history.previous]
 file = "src/Develop/Unassigned/fcn_004642b0.c"
 name = "fcn_004642b0"
 kind = "FUNCTION"
 symbol = "_fcn_004642b0"
 size = 116
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:42+00:00"
 status = "EXACT"
 
-["GOLDTL.0x004642b0".verification]
+["GOLDTL.0x004642b0".binding_history.previous.verification]
 source_hash = "e2b8e5ec138011909f6c5193331489c86a7b534cb5bb3458ec847a90bf647e81"
 reference_hash = "264e8424fbba3d644f3bf74d2afe688dba1cb78881a525614c7b54c8c7f22701"
 reference_size = "116"
@@ -615320,6 +617150,40 @@ input_hash = "a8b3e65fb81c82f167d672f5780a4b056a94c53806272a035035408383434e89"
 writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x004642b0".binding_history.replacement]
+
+[["GOLDTL.0x004642b0".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/trees.c provides _set_data_type."
+changed_at = "2026-11-08T10:04:41.210444+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x004642b0".binding_history.previous]
+size = 116
+
+["GOLDTL.0x004642b0".binding_history.previous.verification]
+source_hash = "e2b8e5ec138011909f6c5193331489c86a7b534cb5bb3458ec847a90bf647e81"
+reference_hash = "264e8424fbba3d644f3bf74d2afe688dba1cb78881a525614c7b54c8c7f22701"
+reference_size = "116"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "bf4dc524c0663ec62a8ea54b8cadabb50f23a76123b9e4fb861a5e1f62df7948"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x4642b0"
+context_hash = ""
+defines = "[]"
+input_hash = "a8b3e65fb81c82f167d672f5780a4b056a94c53806272a035035408383434e89"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-07T17:02:37+00:00"
+
+["GOLDTL.0x004642b0".binding_history.replacement]
+file = "references/zlib/trees.c"
+symbol = "_set_data_type"
+kind = "LIBRARY"
+name = "set_data_type"
 ["GOLDTL.0x0065e019"]
 updated_by = "rehome"
 updated_at = "2026-10-24T13:11:24+00:00"

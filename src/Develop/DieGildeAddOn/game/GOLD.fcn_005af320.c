@@ -29,7 +29,7 @@ int __cdecl fcn_005974e0(int, int);
 int __cdecl fcn_00597940(int, int, int, int, int);
 int __cdecl fcn_00505340(int);
 int __cdecl fcn_005ba020(int, int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl fcn_0046e700(int);
 void __cdecl fcn_00469880(int);
 void __cdecl fcn_0046f280(int);
 int __cdecl fcn_005463a0(int, int, int, int, int, ...);
@@ -569,7 +569,7 @@ l_sel:
 			}
 			if (e->f0c != -1) {
 				e->f00 = 0;
-				fcn_0046b2b0(e->f0c);
+				fcn_0046e700(e->f0c);
 				e->f0c = -1;
 				e->f04 = 0;
 			}
@@ -577,7 +577,7 @@ l_sel:
 			idx = (int) e->fD8;
 			do {
 				if (*(int*) idx != -1) {
-					fcn_0046b2b0(*(int*) idx);
+					fcn_0046e700(*(int*) idx);
 					fcn_00469880(*(int*) (idx + 0xc));
 					*(int*) idx = -1;
 					*(int*) (idx + 0xc) = -1;
@@ -585,8 +585,8 @@ l_sel:
 				idx += 4;
 			} while (--j != 0);
 			fcn_00469880(e->f14);
-			fcn_0046b2b0(e->f18);
-			fcn_0046b2b0(e->f1c);
+			fcn_0046e700(e->f18);
+			fcn_0046e700(e->f1c);
 			e->f14 = -1;
 			e->f18 = -1;
 			e->f1c = -1;
@@ -796,7 +796,7 @@ l_slot_handles:
 		}
 		if (j >= *(int*) &f.v15C) {
 			if (*(int*) ((char*) e + 0xd8 + f.v20 * 4) != -1) {
-				fcn_0046b2b0(*(int*) ((char*) e + 0xd8 + f.v20 * 4));
+				fcn_0046e700(*(int*) ((char*) e + 0xd8 + f.v20 * 4));
 				if (*(int*) ((char*) e + 0xe4 + f.v20 * 4) != -1) {
 					fcn_00469880(*(int*) ((char*) e + 0xe4 + f.v20 * 4));
 				}

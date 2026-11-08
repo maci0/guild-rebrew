@@ -2,12 +2,12 @@
 
 ## Working checkpoint, 2026-11-08
 
-State of the tree after the translation-unit consolidation and naming rounds. No
-new full client image was built; the byte results below are per-function comparisons.
+State of the tree after the translation-unit consolidation and naming rounds. Both client
+comparison scaffolds link (below); no byte-level image comparison was run, so the byte results here are per-function.
 
 - Status snapshot (`rebrew status --all-targets --json`, graphics regenerated): GoldTL
-  4,146 of 5,222 C functions matched and 54.1% code accounted; Gold 1,897 of 4,428 and
-  21.2%; the server unchanged at 251 of 251.
+  4,122 of 5,199 C functions matched and 54.1% code accounted (23 stock zlib functions moved
+  to library); Gold and the server unchanged at their earlier counts.
 - 123 loose `fcn_<VA>` functions were renamed from literal evidence (script
   registrations, AI method registrations, tag strings with twin names). Each row is in
   [name-ledger.tsv](name-ledger.tsv); the method is in [naming conventions](naming_conventions.md).
@@ -36,26 +36,29 @@ new full client image was built; the byte results below are per-function compari
 
 Open, in order:
 
-1. TL link gaps: a GoldTL build on 2026-11-08 compiles every unit and links with 51
-   unresolved externals, down from 55. The four that resolved are the placeholder calls
-   `fcn_00402a00`, `fcn_00442be0`, `fcn_004e6bd0` and `fcn_00504e70`; no new name appeared. The
-   last three were bound by hand-edited caller prototypes because `rebrew types reconcile`
-   refuses with "incomplete source/include contexts". Forty data externals need storage
-   rows: extent evidence for 25 of them (read from the original binary's accesses) shows
-   interior views of a larger object (`g_773e18` and `g_773e1c` lie inside the 12-byte
-   vector at `g_773e14`), a conflict with a string at 0x6a42f8, and 14 with no established size, so
-   no row was created from the plan's 4-byte `int` default. 49 proposed global names have no
-   store row. The upstream tool gaps are written in its `docs/IDEAS-GUILD.md` (2026-11-08
-   entries, not yet committed there).
-2. Gold link gaps: a Gold build on 2026-11-08 compiles every unit and links with 184 unresolved
-   externals, against 284 in the 2026-11-05 classification (124 of those resolved, 24 new
-   names appeared). The new names come from renaming: Gold callers now reference the TL
-   names (`_ch_FinishAnimation`, `_d2_SelectRadioGroup`, `_d3_FindAnimByName` and similar),
-   but no Gold definition exists under them. 124 of the 184 are old class a (an active GoldTL
-   definition exists, no active Gold row); a Gold adopt was refused earlier because the Gold
-   bytes differ from the TL function at the same address. Only one Gold loose file could be
-   named from a TL twin.
-3. 66 stock-library functions (zlib, d3dx8, a few more) need `rebrew library bind-source`, not game names.
+1. Link: both client scaffolds build and link on 2026-11-08 (`europa1400gold_tl` 3.0 MB,
+   `europa1400gold` 0.7 MB) with generated placeholder stubs, which prove nothing about ABI or
+   storage ownership. GoldTL had 51 unresolved externals before the stubs and Gold had 184;
+   they are now defined in `stubs/goldtl/symbol_stubs_extra.c` and `stubs/gold/symbol_stubs_extra.c`
+   (`rebrew build symbol-stubs`, one special for `fcn_00401260`). One real fix: the Gold file
+   `GOLD.fcn_005af320.c` called `fcn_0046b2b0` (the TL spelling) where the native calls target
+   `fcn_0046e700`; five relocations that were UNRESOLVED now bind to it. What the stubs stand in
+   for is still open: 40 TL data externals need storage rows (extent evidence for 25 shows
+   interior views, a conflict with a string at 0x6a42f8 and 14 with no established size, so no
+   row came from the plan's 4-byte `int` default), 49 proposed global names have no store row,
+   and 124 Gold externals need Gold definitions (a Gold adopt was refused because the Gold bytes
+   differ from the TL function at the same address). Placeholder bindings done by hand for
+   `fcn_00402a00`, `fcn_00442be0`, `fcn_004e6bd0` and `fcn_00504e70`. The upstream tool gaps are
+   written in its `docs/IDEAS-GUILD.md` (2026-11-08 entries, not yet committed there).
+2. Next step for the link: replace stubs with recovered code or reviewed data rows, then compare
+   the images with `rebrew verify --whole-binary --built` (see [client builds](../stubs/README.md)).
+3. Stock zlib code is attributed as library, not renamed as game code: 22 zlib rows were already
+   `LIBRARY` rows, and 23 loose zlib functions (plus six Gold twin rows) were retired and bound to the vendored sources
+   with `rebrew library bind-source` (2026-11-08; each vendored row matches the original bytes).
+   Nine stayed loose because the guessed vendored function was wrong, the function is already
+   bound at another address, or the bytes did not match: `deflateCopy`, `deflateReset`, `deflate_slow`,
+   `inflate_blocks`, `inflate`, `inflateReset`, `inflateSync`, `inflate_blocks_sync_point`, `crc32`. The 12 d3dx8 matches were
+   already `LIBRARY` rows. Library functions do not count as reversing progress.
 4. 133 of the 164 files named `fcn_<VA>.c` that define a real name were renamed to
    `MODULE.name.c`. The other 30 were skipped: 19 previews include a data row, 6 failed the
    preview, 4 touch more than 60 files and 1 failed its before-test.
@@ -63,7 +66,8 @@ Open, in order:
 6. The compiler image `rebrew/msvc:6.0-sp5-pp-win32` disappeared from Docker on 2026-11-08
    (cause not established; a `docker builder prune` from another session was seen
    running afterwards) and was rebuilt with
-   `rebrew toolchain build msvc-6.0-sp5-pp` using the local recipes checkout
+   `rebrew toolchain build msvc-6.0-sp5-pp` (and `msvc-6.0-sp5` and `msvc-6.0-sp5-crt`, which the
+   server target needs) using the local recipes checkout
    (`REBREW_TOOLCHAINS_DIR`, see [build.md](build.md#prepare-compiler-images)). A pull is not
    possible: rebrew images are built from pinned sources, not published.
 
