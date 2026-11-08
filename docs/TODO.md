@@ -34,15 +34,15 @@ Open, in order:
 2. Gold link gaps: 133 of 284 classified unresolved externals (2026-11-05 log) are cross-target aliases.
    Only one GOLD loose file could be named from a TL twin.
 3. 66 stock-library functions (zlib, d3dx8, a few more) need `rebrew library bind-source`, not game names.
-4. 131 of the 164 files named `fcn_<VA>.c` that define a real name were renamed to
-   `MODULE.name.c`. The other 33 were skipped (17 have a data row in the preview, 4 touch
-   more than 60 files, 6 failed the preview) or were not reached; one run stopped when the
-   compiler image disappeared (item 6).
+4. 133 of the 164 files named `fcn_<VA>.c` that define a real name were renamed to
+   `MODULE.name.c`. The other 30 were skipped: 19 previews include a data row, 6 failed the
+   preview, 4 touch more than 60 files and 1 failed its before-test.
 5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
-6. The compiler image `rebrew/msvc:6.0-sp5-pp-win32` is missing from Docker (only two unrelated
-   images remain), so `rebrew test` fails with `--experimental-unshare requires an admitted
-   immutable image id`. Rebuild or pull it (`rebrew toolchain build msvc-6.0-sp5-pp`, see
-   [build.md](build.md#prepare-compiler-images)) before any further transaction.
+6. The compiler image `rebrew/msvc:6.0-sp5-pp-win32` disappeared from Docker on 2026-11-08
+   (another session was running `docker builder prune`) and was rebuilt with
+   `rebrew toolchain build msvc-6.0-sp5-pp` using the local recipes checkout
+   (`REBREW_TOOLCHAINS_DIR`, see [build.md](build.md#prepare-compiler-images)). A pull is not
+   possible: rebrew images are built from pinned sources, not published.
 
 ## Verified checkpoint, 2026-11-05
 
