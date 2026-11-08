@@ -35,7 +35,10 @@ Open, in order:
    and `gm_SearchTable67` through hand-edited caller prototypes, because
    `rebrew types reconcile` refuses with "incomplete source/include contexts". Their caller rows
    stay SIZE_MISMATCH, with match counts 4 to 20 bytes lower. Forty data externals need
-   storage rows, and 49 proposed global names have no store row. The upstream tool gaps
+   storage rows: extent evidence for 25 of them (read from the original binary's accesses) shows
+   interior views of a larger object (`g_773e18` and `g_773e1c` lie inside the 12-byte
+   vector at `g_773e14`), a conflict with a string at 0x6a42f8, and 14 with no established size, so
+   no row was created from the plan's 4-byte `int` default. 49 proposed global names have no store row. The upstream tool gaps
    are written in its `docs/IDEAS-GUILD.md` (2026-11-08 entries, not yet committed there).
 2. Gold link gaps: 133 of 284 classified unresolved externals (2026-11-05 log) are cross-target aliases.
    Only one GOLD loose file could be named from a TL twin.
