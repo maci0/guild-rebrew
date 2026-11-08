@@ -123,7 +123,10 @@ void __cdecl fcn_00526db0(char* name)
 	m_FreeTracked(data);
 	memset(g_7ea380, 0xff, sizeof(g_7ea380));
 	(*(char**)&g_6a25ac) = name;
-	(*(Rect*)&g_1040480) = (*(Rect*)&g_6a3764);
+	((Rect*)&g_1040480)->right = ((Rect*)&g_6a3764)->right;
+	((Rect*)&g_1040480)->left = ((Rect*)&g_6a3764)->left;
+	((Rect*)&g_1040480)->top = ((Rect*)&g_6a3764)->top;
+	((Rect*)&g_1040480)->bottom = ((Rect*)&g_6a3764)->bottom;
 	memset(&desc2, 0, sizeof(desc2));
 	desc2.width = 0x68;
 	desc2.height = 0x6e;

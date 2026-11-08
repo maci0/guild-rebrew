@@ -6,8 +6,8 @@ State of the tree after the translation-unit consolidation and naming rounds. Bo
 comparison scaffolds link (below); no byte-level image comparison was run, so the byte results here are per-function.
 
 - Status snapshot (`rebrew status --all-targets --json`, graphics regenerated): GoldTL
-  4,122 of 5,199 C functions matched and 54.1% code accounted (23 stock zlib functions moved
-  to library); Gold and the server unchanged at their earlier counts.
+  4,129 of 5,199 C functions matched and 54.1% code accounted (23 stock zlib functions moved
+  to library, seven operand-order fixes below); Gold 1,917 of 4,422; the server unchanged at 251 of 251.
 - 123 loose `fcn_<VA>` functions were renamed from literal evidence (script
   registrations, AI method registrations, tag strings with twin names). Each row is in
   [name-ledger.tsv](name-ledger.tsv); the method is in [naming conventions](naming_conventions.md).
@@ -25,14 +25,13 @@ comparison scaffolds link (below); no byte-level image comparison was run, so th
   (different function entry), `gm_ResolveEntityRecord`, `gm_AssignBuildingOwner`,
   `gm_ResolveEntitySlot`. `gm_ff_Objekt` (310 callers) and three pairs that failed the
   preview were not retried.
-- `rebrew lint --json` reports 0 errors. Seven GoldTL functions that were recorded as RELOC
-  on 2026-11-02 now test as NEAR_MATCHING (`0x00452360`, `0x00474780`, `0x004e4b60`,
-  `0x00526db0`, `0x00537080`, `0x005e3c40`, `0x00451150`), with 4 to 24 mismatching bytes.
-  All seven have relocation bindings that are UNRESOLVED or CONFLICT against the current data
-  rows (for example `_g_67bc4c` unresolved and `_g_6b8714` bound to 0x6b8714 where the original
-  operand is 0x67bc4c in `fcn_00452360`). The result reproduces on the rebuilt compiler image,
-  none of the seven source files changed this session, and `check_known_bindings` has been on
-  since 2026-10-14. When the data rows diverged from the sources is not established.
+- `rebrew lint --json` reports 0 errors. Seven GoldTL functions recorded as RELOC on 2026-11-02 had
+  tested as NEAR_MATCHING (`0x00452360`, `0x00474780`, `0x004e4b60`, `0x00526db0`, `0x00537080`,
+  `0x005e3c40`, `0x00451150`). Each differed from the original only in operand order, shown by
+  swapped relocation targets in `relocation_bindings`: commutative operands (`a * b`, `a + b`), a
+  chained assignment (`a = b = f()`), two adjacent statements, and a 16-byte `Rect` copy that the
+  original wrote field by field (right, left, top, bottom). They are RELOC again after those source
+  edits; the underlying cause of the earlier change is not established.
 
 Open, in order:
 

@@ -46,8 +46,8 @@ int __cdecl fcn_00474780(void)
 	if (g_7725e8 == 0) {
 		step = d2_GetValueStep((char*) (*(Spin**)&g_7725d0));
 		g_7725e8 = 1;
-		g_100f1e0 = g_6b5c84;
 		g_100f1d8 = g_6772c0;
+		g_100f1e0 = g_6b5c84;
 		p = (*(Spin**)&g_7725d0);
 		g_7725b8 = p->value;
 		g_7725dc = g_14ce8c0;

@@ -100,7 +100,7 @@ char __cdecl fcn_00451150(int index, char* e, float scale, float* m4, float* m7)
 			power = g_67bc20 * *(float*) (e + 0x94);
 		}
 		power *= scale;
-		light.Attenuation0 = g_67bc0c * *(float*) (e + 0x98) + g_67bbfc + g_662d30;
+		light.Attenuation0 = g_67bc0c * *(float*) (e + 0x98) + g_662d30 + g_67bbfc;
 		light.Attenuation1 = g_67bc10 * *(float*) (e + 0x98) + g_67bc00 + g_662d30;
 		light.Attenuation2 = g_67bc14 * *(float*) (e + 0x98) + g_67bc04 + g_662d30;
 	}

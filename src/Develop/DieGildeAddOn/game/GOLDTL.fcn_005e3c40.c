@@ -38,7 +38,10 @@ void __cdecl fcn_005e3c40(void)
 		g_774670 = 6;
 		return;
 	}
-	(*(Rect*)&g_1040480) = (*(Rect*)&g_6a3764);
+	((Rect*)&g_1040480)->right = ((Rect*)&g_6a3764)->right;
+	((Rect*)&g_1040480)->left = ((Rect*)&g_6a3764)->left;
+	((Rect*)&g_1040480)->top = ((Rect*)&g_6a3764)->top;
+	((Rect*)&g_1040480)->bottom = ((Rect*)&g_6a3764)->bottom;
 	fcn_0046b4f0();
 	fcn_005270c0(1);
 	fcn_00528fd0();
