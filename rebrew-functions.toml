@@ -642229,29 +642229,6 @@ size = 329
 updated_by = "fix-sizes"
 updated_at = "2026-11-02T22:01:58+00:00"
 
-["GOLDTL.0x004f2720"]
-size = 43
-updated_by = "test"
-updated_at = "2026-11-03T07:47:42+00:00"
-status = "STUB"
-
-["GOLDTL.0x004f2720".verification]
-source_hash = "7f2e1118098c559b44d0cbc8f2f39472c90dc8e8215bb653a54cf172315acb4f"
-reference_hash = "41d4da0f441ee0e2f32af1c35969122ae4213751364068a04e6a9e8dc5c22db3"
-reference_size = "43"
-headers_hash = "7a89e20e4527aef3f3de7879effb55fe7ce08872b3fd6ee01e99b023951f4071"
-compiler_hash = "ee2a7ba71128a7a5f141c89ff77ffafa305188730195a02693d575d0c24e4133"
-toolchain = "(default)"
-cflags = "/O2 /Gd"
-module = "GOLDTL"
-va = "0x4f2720"
-context_hash = ""
-defines = "[]"
-input_hash = "b12a0755cfa51b7bdb3c6ae23c483ff36a6501ff3ceb8d3c1e35d1f0c93b224f"
-status = "STUB"
-writer = "test"
-measured_at = "2026-11-03T07:47:42+00:00"
-
 ["GOLDTL.0x0055f590"]
 size = 48
 updated_by = "test"
@@ -642323,29 +642300,6 @@ input_hash = "653d76aa2b444611fbb8b24d24a4f73afda5fdc6d0369a3477ecd9b205436a5a"
 writer = "verify"
 status = "SIZE_MISMATCH"
 measured_at = "2026-11-08T09:02:35+00:00"
-["GOLDTL.0x00499a80"]
-size = 240
-updated_by = "test"
-updated_at = "2026-11-04T00:38:06+00:00"
-status = "STUB"
-
-["GOLDTL.0x00499a80".verification]
-source_hash = "f2558b7a94759915e9f5b9688f76a1814d7893045c22a706b4116ea5a6b2241e"
-reference_hash = "41a5d4e4e6c425d9ea23818d8e10d9de332ab2b097ecb3f024e65c7ba52e9b86"
-reference_size = "240"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "65a1000bf28aa2b83554b7df27aa95b5e00a20caca95c781df314ebdfa19993e"
-toolchain = "(default)"
-cflags = "/O2 /Gd"
-module = "GOLDTL"
-va = "0x499a80"
-context_hash = ""
-defines = "[]"
-input_hash = "19930f969a881d17adbc9cc9630a1c09ca4b03c673d3b65aa00880b080a53a64"
-status = "STUB"
-writer = "test"
-measured_at = "2026-11-04T00:38:06+00:00"
-
 ["GOLDTL.0x005e6360"]
 size = 752
 updated_by = "rehome"

@@ -68,12 +68,10 @@ Open, in order:
 4. 133 of the 164 files named `fcn_<VA>.c` that define a real name were renamed to
    `MODULE.name.c`. The other 30 were skipped: 19 previews include a data row, 6 failed the
    preview, 4 touch more than 60 files and 1 failed its before-test.
-- `rebrew orphans list --json` (2026-11-09) reports 1,348 metadata rows without a source binding:
-  855 DISPLACED and 7 other data rows, 484 GOLDTL function rows with empty status and one history
-  entry each (VAs 0x40f7f4 to 0x660ada), and 2 STUB function rows. A plain `rebrew orphans prune`
-  (859 rows, 489 held back) was applied and reverted the same day: GoldTL verify fell from 4,221 to
-  4,208 passed (475 EXACT, 3,733 RELOC) and the status data section changed, while Gold and the
-  server were unchanged. Find which pruned rows those 13 functions depend on before pruning again.
+- `rebrew orphans prune` (2026-11-09) deleted 859 orphaned rows (855 DISPLACED data rows, 2 STUB
+  function rows, 2 empty-status data rows) and held back 489 earned rows (484 GOLDTL function rows
+  with retired-claim history, 5 VERIFIED data rows). Function verdicts, lint and the canary did not
+  change; the GoldTL data section went from 1,270 to 417 rows.
 5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
    Matching: 112 GoldTL functions remain NEAR_MATCHING. A 2026-11-08 round tried the 89 with 48 or fewer
    differing bytes (reorder commutative operands, independent statements, equivalent rewrites; tests
