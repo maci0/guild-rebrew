@@ -6,7 +6,7 @@ State of the tree after the translation-unit consolidation and naming rounds. Bo
 comparison scaffolds link (below); no byte-level image comparison was run, so the byte results here are per-function.
 
 - Status snapshot (`rebrew status --all-targets --json`, graphics regenerated): GoldTL
-  4,126 of 5,196 C functions matched and 54.1% code accounted (26 stock zlib functions moved
+  4,124 of 5,194 C functions matched and 54.1% code accounted (28 stock zlib functions moved
   to library, seven operand-order fixes below); Gold 1,916 of 4,421; the server unchanged at 251 of 251.
 - 123 loose `fcn_<VA>` functions were renamed from literal evidence (script
   registrations, AI method registrations, tag strings with twin names). Each row is in
@@ -52,15 +52,16 @@ Open, in order:
 2. Next step for the link: replace stubs with recovered code or reviewed data rows, then compare
    the images with `rebrew verify --whole-binary --built` (see [client builds](../stubs/README.md)).
 3. Stock zlib code is attributed as library, not renamed as game code: 22 zlib rows were already
-   `LIBRARY` rows, and 26 loose zlib functions (plus seven Gold twin rows) were retired and bound to the vendored sources
+   `LIBRARY` rows, and 28 loose zlib functions (plus seven Gold twin rows) were retired and bound to the vendored sources
    with `rebrew library bind-source` (2026-11-08; each vendored row matches the original bytes).
    Matching each loose function's bytes against the compiled vendored sections (relocations and `call`
    operands masked, names from the COFF symbol table) identified all but one of the nine that stayed
    loose, and showed several earlier guesses were wrong: `fcn_0045e180` is `lm_init`, `fcn_0045e520` is
    `deflate_fast`, `fcn_00461ba0` is `inflateSync` and `fcn_00461c70` is `inflateSyncPoint`. `lm_init`,
-   `inflateSync` and `inflateSyncPoint` are now library rows. `deflate_fast` (0x0045e520), `deflateCopy`
-   (0x0045dfd0), `inflate_blocks` (0x0045fd70), `inflate` (0x004616e0) and `inflate_blocks_sync_point`
-   (0x00460a40) match the vendored bytes, but `rebrew library bind-source` refuses their definitions
+   `inflateSync`, `inflateSyncPoint`, and from a sweep of all loose GoldTL functions against every compiled
+   vendored object (`gzputs`, `inflateInit_`) are now library rows. `deflate_fast` (0x0045e520), `deflateCopy`
+   (0x0045dfd0), `inflate_blocks` (0x0045fd70), `inflate` (0x004616e0), `inflate_blocks_sync_point`
+   (0x00460a40), `inflate_set_dictionary` (0x00460a00), `zError` (0x00465800) and `zcfree` (0x00465840) match the vendored bytes, but `rebrew library bind-source` refuses their definitions
    ("one complete definition with matching C symbol"), so they stay loose. `fcn_00401000` (52 bytes)
    matches nothing in the vendored zlib objects. The 12 d3dx8 matches were already `LIBRARY` rows.
    Library functions do not count as reversing progress.
