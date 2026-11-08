@@ -8,23 +8,6 @@ typedef Card_1007ce0 Card;
 
 extern Card_1007ce0 g_1007ce0[24];
 
-/* ADDRESS: GOLDTL 0x004a7b40 */
-void __cdecl fcn_004a7b40(void)
-{
-	int i;
-
-	for (i = 0; i < 3; i++) {
-		if (*(int*) (g_1007cd4 + 0x2c + i * 0x34) < 0) {
-			*(int*) (g_1007cd4 + 0xa0) += *(int*) (g_1007cd4 + 0xac);
-			if (i == 0) {
-				fcn_0050b750(*(int*) (g_1007cd4 + 0xac), g_773d75);
-				fcn_004c51a0(-1, *(int*) (*(char**) (g_1007cd4 + 4) + 4), g_773d75, *(int*) (g_1007cd4 + 0xac));
-			}
-			*(int*) (g_1007cd4 + 0x20 + i * 0x34) += *(int*) (g_1007cd4 + 0xac);
-		}
-	}
-}
-
 /* The 0x180-byte native table is addressed literally; no data row owns it. */
 /* ADDRESS: GOLDTL 0x004a7be0 */
 void __cdecl fcn_004a7be0(void)
@@ -101,35 +84,4 @@ void __cdecl fcn_004a7be0(void)
 		off += 0x34;
 		i++;
 	} while (off < 0x9c);
-}
-
-/* ADDRESS: GOLDTL 0x004a7f90 */
-void __cdecl fcn_004a7f90(int* h, int* rank_n, int* rank, int* suit_n, int* suit)
-{
-	int suits[4] = { 0 };
-	int ranks[6] = { 0 };
-	int n;
-	int i;
-
-	n = ((unsigned char*)g_1007cd4)[0xb5];
-	for (i = 2; i < n; i++) {
-		suits[g_1007ce0[h[i + 2]].suit]++;
-		ranks[g_1007ce0[h[i + 2]].rank]++;
-	}
-	*rank_n = ranks[0];
-	*rank = 0;
-	for (i = 1; i < 6; i++) {
-		if (ranks[i] > *rank_n) {
-			*rank_n = ranks[i];
-			*rank = i;
-		}
-	}
-	*suit_n = suits[0];
-	*suit = 0;
-	for (i = 1; i < 4; i++) {
-		if (suits[i] > *suit_n) {
-			*suit_n = suits[i];
-			*suit = i;
-		}
-	}
 }
