@@ -11,10 +11,15 @@ int __cdecl fcn_005dd0c0(void *a1, void *a2)
 
     if (*(char *)((char *)a1 + 2) == 6) {
         io_FormatTextBuffer(buf, 0x9d);
-        r = fcn_005cad70(a1, buf);
     } else {
         r = gm_LookupEntityRecordById(*(int *)((char *)a2 + 4));
+        if (r != 0) {
+            fcn_005dcf40(r, 3);
+            return 1;
+        }
+        return 0;
     }
+    r = fcn_005cad70(a1, buf);
     if (r != 0) {
         fcn_005dcf40(r, 3);
         return 1;
