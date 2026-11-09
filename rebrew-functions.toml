@@ -441032,31 +441032,12 @@ measured_at = "2026-10-23T19:04:48+00:00"
 ["GOLDTL.0x005eb2e4".binding_history.replacement]
 ["GOLDTL.0x0062af4d"]
 size = 35
-file = "src/Develop/Unassigned/GOLDTL.fcn_0062af4d.c"
-symbol = "@fcn_0062af4d@4"
-name = "fcn_0062af4d"
-kind = "FUNCTION"
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
-status = "EXACT"
-blocker = "Application code — pending per-function decompilation"
-
-["GOLDTL.0x0062af4d".verification]
-source_hash = "703b2d55f93f675c35420964792b84f86e9131ff7391501593fd10dfffec48d4"
-reference_hash = "6c2b9d03e58507cbf66c842d4d00da9ae0fa7331ed277869f6f719f3896729b5"
-reference_size = "35"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
-toolchain = "(default)"
-cflags = "/O2 /Gd"
-module = "GOLDTL"
-va = "0x62af4d"
-context_hash = ""
-defines = "[]"
-input_hash = "637d622431ad76d15f878235c480e36b9e708996a3143c181b147b91ad9d1326"
-writer = "verify"
-status = "EXACT"
-measured_at = "2026-11-09T07:20:00+00:00"
+updated_at = "2026-11-09T08:19:56+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?OnDeleteFont@CD3DXText@@QAEJXZ"
+name = "OnDeleteFont_CD3DXText_QAEJXZ"
+kind = "LIBRARY"
 
 [["GOLDTL.0x0062af4d".status_history]]
 old_status = "STUB"
@@ -441075,6 +441056,44 @@ old_status = "SIZE_MISMATCH"
 new_status = "EXACT"
 changed_at = "2026-10-25T19:31:38.573710+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x0062af4d".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?OnDeleteFont@CD3DXText@@QAEJXZ (d3dx8.lib:obj\\i386\\cd3dxtext.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:19:56.777268+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0062af4d".binding_history.previous]
+size = 35
+file = "src/Develop/Unassigned/GOLDTL.fcn_0062af4d.c"
+symbol = "@fcn_0062af4d@4"
+name = "fcn_0062af4d"
+kind = "FUNCTION"
+status = "EXACT"
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x0062af4d".binding_history.previous.verification]
+source_hash = "703b2d55f93f675c35420964792b84f86e9131ff7391501593fd10dfffec48d4"
+reference_hash = "6c2b9d03e58507cbf66c842d4d00da9ae0fa7331ed277869f6f719f3896729b5"
+reference_size = "35"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x62af4d"
+context_hash = ""
+defines = "[]"
+input_hash = "637d622431ad76d15f878235c480e36b9e708996a3143c181b147b91ad9d1326"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:20:00+00:00"
+
+["GOLDTL.0x0062af4d".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?OnDeleteFont@CD3DXText@@QAEJXZ"
+name = "OnDeleteFont_CD3DXText_QAEJXZ"
+kind = "LIBRARY"
 ["GOLDTL.0x006194de"]
 size = 24
 updated_by = "rehome"
@@ -442091,16 +442110,42 @@ changed_at = "2026-10-19T18:39:36.451723+00:00"
 updated_by = "test"
 ["GOLDTL.0x0062ade8"]
 size = 48
+updated_by = "rehome"
+updated_at = "2026-11-09T08:17:53+00:00"
+cflags = "/O2 /Gd /G6"
+file = "src/library_d3dx8.h"
+symbol = "?End@CD3DXText@@QAEJXZ"
+name = "End_CD3DXText_QAEJXZ"
+kind = "LIBRARY"
+
+[["GOLDTL.0x0062ade8".status_history]]
+old_status = "STUB"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-10-20T06:25:27.756688+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0062ade8".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "EXACT"
+changed_at = "2026-10-24T05:03:50.738848+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0062ade8".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?End@CD3DXText@@QAEJXZ (d3dx8.lib:obj\\i386\\cd3dxtext.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:17:53.621588+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0062ade8".binding_history.previous]
+size = 48
 file = "src/Develop/Unassigned/GOLDTL.fcn_0062ade8.c"
 symbol = "@fcn_0062ade8@4"
 name = "fcn_0062ade8"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 cflags = "/O2 /Gd /G6"
 
-["GOLDTL.0x0062ade8".verification]
+["GOLDTL.0x0062ade8".binding_history.previous.verification]
 source_hash = "06f732e9d2d5a008c2a9a2457cadddc2fcc6fdf4a6ecafab75ddafbb3babfa7e"
 reference_hash = "8d3978d047a9773da65dd629aad7bd2fdf5f7b3d917e313f46728065b8575edd"
 reference_size = "48"
@@ -442117,17 +442162,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x0062ade8".status_history]]
-old_status = "STUB"
-new_status = "NEAR_MATCHING"
-changed_at = "2026-10-20T06:25:27.756688+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x0062ade8".status_history]]
-old_status = "NEAR_MATCHING"
-new_status = "EXACT"
-changed_at = "2026-10-24T05:03:50.738848+00:00"
-updated_by = "test"
+["GOLDTL.0x0062ade8".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?End@CD3DXText@@QAEJXZ"
+name = "End_CD3DXText_QAEJXZ"
+kind = "LIBRARY"
 ["GOLDTL.0x00619504"]
 size = 22
 updated_by = "rehome"
@@ -443628,16 +443667,41 @@ name = "fcn_0065a7ce"
 symbol = "fcn_0065a7ce"
 ["GOLDTL.0x005f6d83"]
 size = 78
+updated_by = "rehome"
+updated_at = "2026-11-09T08:08:50+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?HashRemove@@YAXKKKPAPAUhashentry@@K@Z"
+name = "HashRemove_YAXKKKPAPAUhashentry_K_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005f6d83".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-20T06:49:26.605307+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005f6d83".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T19:20:28.237566+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005f6d83".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?HashRemove@@YAXKKKPAPAUhashentry@@K@Z (d3dx8.lib:obj\\i386\\createmesh.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:08:50.517591+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f6d83".binding_history.previous]
+size = 78
 file = "src/Develop/Unassigned/GOLDTL.fcn_005f6d83.c"
 symbol = "_fcn_005f6d83"
 name = "fcn_005f6d83"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 blocker = "Application code — pending per-function decompilation"
 
-["GOLDTL.0x005f6d83".verification]
+["GOLDTL.0x005f6d83".binding_history.previous.verification]
 source_hash = "e7b43e28e0ec4fae0637f09407f5ea12bf06bc33f947cb04d07e7389345adca0"
 reference_hash = "8a607d9a29ecd106f93e803a22daeb56221392578d1273132a5f441eef32f2ed"
 reference_size = "78"
@@ -443654,17 +443718,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x005f6d83".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-20T06:49:26.605307+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x005f6d83".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T19:20:28.237566+00:00"
-updated_by = "test"
+["GOLDTL.0x005f6d83".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?HashRemove@@YAXKKKPAPAUhashentry@@K@Z"
+name = "HashRemove_YAXKKKPAPAUhashentry_K_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x004042b0"]
 size = 80
 file = "src/Develop/Unassigned/GOLDTL.fcn_004042b0.c"
@@ -444234,32 +444292,13 @@ measured_at = "2026-10-25T06:09:26+00:00"
 ["GOLDTL.0x006500c2".binding_history.replacement]
 ["GOLDTL.0x0060e654"]
 size = 88
-file = "src/Develop/Unassigned/GOLDTL.fcn_0060e654.c"
-symbol = "_fcn_0060e654"
-name = "fcn_0060e654"
-kind = "FUNCTION"
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
-status = "EXACT"
-blocker = "Application code — pending per-function decompilation"
+updated_at = "2026-11-09T08:12:26+00:00"
 cflags = "/O2 /Gd /G6"
-
-["GOLDTL.0x0060e654".verification]
-source_hash = "622b93d8c211e3fa59c479ae850789f9b3e0df037464fa7ff9aea1f5ec21d5e3"
-reference_hash = "60d254a353e8163c03f332257e8c76c84ccf468badfb6001d4aea00055d52d9a"
-reference_size = "88"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
-toolchain = "(default)"
-cflags = "/O2 /Gd /G6"
-module = "GOLDTL"
-va = "0x60e654"
-context_hash = ""
-defines = "[]"
-input_hash = "fc7e649745674d993606241d5e30a74acf87036b801f7ecdc35ba9703b7027c3"
-writer = "verify"
-status = "EXACT"
-measured_at = "2026-11-09T07:20:00+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?AddHEPoint@?$GXSimplifyMesh@G$00$0PPPP@@@AAEXPAEGG@Z"
+name = "AddHEPoint_GXSimplifyMesh_G_00_0PPPP_AAEXPAEGG_Z"
+kind = "LIBRARY"
 
 [["GOLDTL.0x0060e654".status_history]]
 old_status = "STUB"
@@ -444290,19 +444329,84 @@ old_status = "SIZE_MISMATCH"
 new_status = "EXACT"
 changed_at = "2026-10-25T15:26:28.038086+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x0060e654".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?AddHEPoint@?$GXSimplifyMesh@G$00$0PPPP@@@AAEXPAEGG@Z (d3dx8.lib:obj\\i386\\createmesh.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:12:26.399738+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0060e654".binding_history.previous]
+size = 88
+file = "src/Develop/Unassigned/GOLDTL.fcn_0060e654.c"
+symbol = "_fcn_0060e654"
+name = "fcn_0060e654"
+kind = "FUNCTION"
+status = "EXACT"
+blocker = "Application code — pending per-function decompilation"
+cflags = "/O2 /Gd /G6"
+
+["GOLDTL.0x0060e654".binding_history.previous.verification]
+source_hash = "622b93d8c211e3fa59c479ae850789f9b3e0df037464fa7ff9aea1f5ec21d5e3"
+reference_hash = "60d254a353e8163c03f332257e8c76c84ccf468badfb6001d4aea00055d52d9a"
+reference_size = "88"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd /G6"
+module = "GOLDTL"
+va = "0x60e654"
+context_hash = ""
+defines = "[]"
+input_hash = "fc7e649745674d993606241d5e30a74acf87036b801f7ecdc35ba9703b7027c3"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:20:00+00:00"
+
+["GOLDTL.0x0060e654".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?AddHEPoint@?$GXSimplifyMesh@G$00$0PPPP@@@AAEXPAEGG@Z"
+name = "AddHEPoint_GXSimplifyMesh_G_00_0PPPP_AAEXPAEGG_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x0060cde0"]
+size = 89
+updated_by = "rehome"
+updated_at = "2026-11-09T08:11:39+00:00"
+cflags = "/O2 /Gd /G6"
+file = "src/library_d3dx8.h"
+symbol = "?AddHEPoint@?$GXSimplifyMesh@I$0A@$0?0@@AAEXPAEIG@Z"
+name = "AddHEPoint_GXSimplifyMesh_I_0A_0_0_AAEXPAEIG_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x0060cde0".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-20T06:28:48.641475+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0060cde0".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T15:24:31.189286+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0060cde0".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?AddHEPoint@?$GXSimplifyMesh@I$0A@$0?0@@AAEXPAEIG@Z (d3dx8.lib:obj\\i386\\createmesh.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:11:39.116065+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0060cde0".binding_history.previous]
 size = 89
 file = "src/Develop/Unassigned/GOLDTL.fcn_0060cde0.c"
 symbol = "@fcn_0060cde0@20"
 name = "fcn_0060cde0"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 blocker = "Application code — pending per-function decompilation"
 cflags = "/O2 /Gd /G6"
 
-["GOLDTL.0x0060cde0".verification]
+["GOLDTL.0x0060cde0".binding_history.previous.verification]
 source_hash = "e297914035b1e77d65e7ee139a31c7d93bcc66af183b291b3ef6ee988524baa6"
 reference_hash = "337192e80eaffbf38c486e670ac4b7b29685af0c0c389bd42bc50dcf091bebcb"
 reference_size = "89"
@@ -444319,17 +444423,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x0060cde0".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-20T06:28:48.641475+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x0060cde0".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T15:24:31.189286+00:00"
-updated_by = "test"
+["GOLDTL.0x0060cde0".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?AddHEPoint@?$GXSimplifyMesh@I$0A@$0?0@@AAEXPAEIG@Z"
+name = "AddHEPoint_GXSimplifyMesh_I_0A_0_0_AAEXPAEIG_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x005f022d"]
 size = 28
 file = "src/Develop/Unassigned/GOLDTL.fcn_005f022d.c"
@@ -444371,31 +444469,13 @@ changed_at = "2026-10-25T08:17:04.122889+00:00"
 updated_by = "test"
 ["GOLDTL.0x005f0288"]
 size = 28
-file = "src/Develop/Unassigned/GOLDTL.fcn_005f0288.c"
-symbol = "@fcn_005f0288@16"
-name = "fcn_005f0288"
-kind = "FUNCTION"
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
-status = "EXACT"
+updated_at = "2026-11-09T08:07:52+00:00"
 cflags = "/O2 /Gd /G6"
-
-["GOLDTL.0x005f0288".verification]
-source_hash = "1b84a5fbfd7c7294b67374ea2416be230bfc8493d87cdef5455fd8e39028c0b1"
-reference_hash = "04fe7945a7251a277324213cc6b4d45e1b5e883baf936c86f6453c59cc4d6218"
-reference_size = "28"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
-toolchain = "(default)"
-cflags = "/O2 /Gd /G6"
-module = "GOLDTL"
-va = "0x5f0288"
-context_hash = ""
-defines = "[]"
-input_hash = "ac0dd00f861ec485b82b708dd8263d987f1c9efb0f5542564d36714b09bacd2b"
-writer = "verify"
-status = "EXACT"
-measured_at = "2026-11-09T07:20:00+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?SetIndices@DXCrackFVF@@QAEXPAXK@Z"
+name = "SetIndices_DXCrackFVF_QAEXPAXK_Z"
+kind = "LIBRARY"
 
 [["GOLDTL.0x005f0288".status_history]]
 old_status = "STUB"
@@ -444420,6 +444500,44 @@ old_status = "SIZE_MISMATCH"
 new_status = "EXACT"
 changed_at = "2026-10-24T05:22:41.913074+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x005f0288".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?SetIndices@DXCrackFVF@@QAEXPAXK@Z (d3dx8.lib:obj\\i386\\createmesh.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:07:52.241413+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f0288".binding_history.previous]
+size = 28
+file = "src/Develop/Unassigned/GOLDTL.fcn_005f0288.c"
+symbol = "@fcn_005f0288@16"
+name = "fcn_005f0288"
+kind = "FUNCTION"
+status = "EXACT"
+cflags = "/O2 /Gd /G6"
+
+["GOLDTL.0x005f0288".binding_history.previous.verification]
+source_hash = "1b84a5fbfd7c7294b67374ea2416be230bfc8493d87cdef5455fd8e39028c0b1"
+reference_hash = "04fe7945a7251a277324213cc6b4d45e1b5e883baf936c86f6453c59cc4d6218"
+reference_size = "28"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd /G6"
+module = "GOLDTL"
+va = "0x5f0288"
+context_hash = ""
+defines = "[]"
+input_hash = "ac0dd00f861ec485b82b708dd8263d987f1c9efb0f5542564d36714b09bacd2b"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:20:00+00:00"
+
+["GOLDTL.0x005f0288".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?SetIndices@DXCrackFVF@@QAEXPAXK@Z"
+name = "SetIndices_DXCrackFVF_QAEXPAXK_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x005fe153"]
 size = 95
 file = "src/Develop/Unassigned/GOLDTL.fcn_005fe153.c"
@@ -445890,16 +446008,41 @@ name = "fcn_00628e2d"
 symbol = "fcn_00628e2d"
 ["GOLDTL.0x0062b5d0"]
 size = 117
+updated_by = "rehome"
+updated_at = "2026-11-09T08:24:45+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?Create@CD3DXText@@SAJPAUIDirect3DDevice8@@PAPAV1@@Z"
+name = "Create_CD3DXText_SAJPAUIDirect3DDevice8_PAPAV1_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x0062b5d0".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-19T01:40:12.390914+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0062b5d0".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T18:50:13.463035+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0062b5d0".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?Create@CD3DXText@@SAJPAUIDirect3DDevice8@@PAPAV1@@Z (d3dx8.lib:obj\\i386\\cd3dxtext.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:24:45.973746+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0062b5d0".binding_history.previous]
+size = 117
 file = "src/Develop/Unassigned/GOLDTL.fcn_0062b5d0.c"
 symbol = "_fcn_0062b5d0"
 name = "fcn_0062b5d0"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 blocker = "Application code — pending per-function decompilation"
 
-["GOLDTL.0x0062b5d0".verification]
+["GOLDTL.0x0062b5d0".binding_history.previous.verification]
 source_hash = "0af342ac2da8321275f5d932dd5bf883f4a744247ffbbdc280f00958793d4513"
 reference_hash = "16d2e398ffbdc0e280028d63d877fbbd1a4bd5e12583bb29ff7a6291ce039f32"
 reference_size = "117"
@@ -445916,17 +446059,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x0062b5d0".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-19T01:40:12.390914+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x0062b5d0".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T18:50:13.463035+00:00"
-updated_by = "test"
+["GOLDTL.0x0062b5d0".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?Create@CD3DXText@@SAJPAUIDirect3DDevice8@@PAPAV1@@Z"
+name = "Create_CD3DXText_SAJPAUIDirect3DDevice8_PAPAV1_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x004fdcf0"]
 size = 119
 file = "src/Develop/Unassigned/GOLDTL.fcn_004fdcf0.c"
@@ -446274,17 +446411,43 @@ measured_at = "2026-10-25T06:09:26+00:00"
 ["GOLDTL.0x00607eb8".binding_history.replacement]
 ["GOLDTL.0x0062ae18"]
 size = 123
+updated_by = "rehome"
+updated_at = "2026-11-09T08:18:50+00:00"
+cflags = "/O2 /Gd /G6"
+file = "src/library_d3dx8.h"
+symbol = "?OnLostDevice@CD3DXText@@QAEJXZ"
+name = "OnLostDevice_CD3DXText_QAEJXZ"
+kind = "LIBRARY"
+
+[["GOLDTL.0x0062ae18".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-20T06:49:03.180587+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0062ae18".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T19:31:14.487240+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0062ae18".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?OnLostDevice@CD3DXText@@QAEJXZ (d3dx8.lib:obj\\i386\\cd3dxtext.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:18:50.652112+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0062ae18".binding_history.previous]
+size = 123
 file = "src/Develop/Unassigned/GOLDTL.fcn_0062ae18.c"
 symbol = "@fcn_0062ae18@4"
 name = "fcn_0062ae18"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 blocker = "Application code — pending per-function decompilation"
 cflags = "/O2 /Gd /G6"
 
-["GOLDTL.0x0062ae18".verification]
+["GOLDTL.0x0062ae18".binding_history.previous.verification]
 source_hash = "b0525343b4b96645787fcf1f41e29560674d4550629eb1adc01f431762237d9c"
 reference_hash = "3914c88dff4677afe2d11225d0805b4efcb44d45b8a3a9f9eabb347910879e2b"
 reference_size = "123"
@@ -446301,17 +446464,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x0062ae18".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-20T06:49:03.180587+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x0062ae18".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T19:31:14.487240+00:00"
-updated_by = "test"
+["GOLDTL.0x0062ae18".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?OnLostDevice@CD3DXText@@QAEJXZ"
+name = "OnLostDevice_CD3DXText_QAEJXZ"
+kind = "LIBRARY"
 ["GOLDTL.0x004c6e20"]
 size = 123
 file = "src/Develop/Unassigned/GOLDTL.fcn_004c6e20.c"
@@ -446463,31 +446620,12 @@ measured_at = "2026-10-25T06:09:26+00:00"
 ["GOLDTL.0x00650338".binding_history.replacement]
 ["GOLDTL.0x005ef94b"]
 size = 126
-file = "src/Develop/Unassigned/GOLDTL.fcn_005ef94b.c"
-symbol = "_fcn_005ef94b"
-name = "fcn_005ef94b"
-kind = "FUNCTION"
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
-status = "EXACT"
-blocker = "Application code — pending per-function decompilation"
-
-["GOLDTL.0x005ef94b".verification]
-source_hash = "206ae73576fee6dd6a8f90341db8a118f5181fcf58892ba17bba038c66b1e28a"
-reference_hash = "93d4c803bdfe04ce75ae86832b65dcb687684cb41d723bea42750356356a1c77"
-reference_size = "126"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
-toolchain = "(default)"
-cflags = "/O2 /Gd"
-module = "GOLDTL"
-va = "0x5ef94b"
-context_hash = ""
-defines = "[]"
-input_hash = "a61eaafbd20db5a7bd7abfd575637b7bb6c2faea050b4bc846817a4b92d4c842"
-writer = "verify"
-status = "EXACT"
-measured_at = "2026-11-09T07:20:00+00:00"
+updated_at = "2026-11-09T08:06:55+00:00"
+file = "src/library_d3dx8.h"
+symbol = "_D3DXCreateRenderToEnvMap@24"
+name = "D3DXCreateRenderToEnvMap"
+kind = "LIBRARY"
 
 [["GOLDTL.0x005ef94b".status_history]]
 old_status = "STUB"
@@ -446506,18 +446644,81 @@ old_status = "SIZE_MISMATCH"
 new_status = "EXACT"
 changed_at = "2026-10-25T19:19:13.526289+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x005ef94b".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib _D3DXCreateRenderToEnvMap@24 (d3dx8.lib:obj\\i386\\d3dx8core.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:06:55.797511+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005ef94b".binding_history.previous]
+size = 126
+file = "src/Develop/Unassigned/GOLDTL.fcn_005ef94b.c"
+symbol = "_fcn_005ef94b"
+name = "fcn_005ef94b"
+kind = "FUNCTION"
+status = "EXACT"
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x005ef94b".binding_history.previous.verification]
+source_hash = "206ae73576fee6dd6a8f90341db8a118f5181fcf58892ba17bba038c66b1e28a"
+reference_hash = "93d4c803bdfe04ce75ae86832b65dcb687684cb41d723bea42750356356a1c77"
+reference_size = "126"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x5ef94b"
+context_hash = ""
+defines = "[]"
+input_hash = "a61eaafbd20db5a7bd7abfd575637b7bb6c2faea050b4bc846817a4b92d4c842"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:20:00+00:00"
+
+["GOLDTL.0x005ef94b".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "_D3DXCreateRenderToEnvMap@24"
+name = "D3DXCreateRenderToEnvMap"
+kind = "LIBRARY"
 ["GOLDTL.0x00614789"]
+size = 127
+updated_by = "rehome"
+updated_at = "2026-11-09T08:14:18+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?Begin@CD3DXRenderToEnvMap@@QAEJXZ"
+name = "Begin_CD3DXRenderToEnvMap_QAEJXZ"
+kind = "LIBRARY"
+
+[["GOLDTL.0x00614789".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-20T06:45:51.400583+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00614789".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T19:29:19.500750+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00614789".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?Begin@CD3DXRenderToEnvMap@@QAEJXZ (d3dx8.lib:obj\\i386\\cd3dxrendertoenvmap.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:14:18.790309+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00614789".binding_history.previous]
 size = 127
 file = "src/Develop/Unassigned/GOLDTL.fcn_00614789.c"
 symbol = "@fcn_00614789@4"
 name = "fcn_00614789"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 blocker = "Application code — pending per-function decompilation"
 
-["GOLDTL.0x00614789".verification]
+["GOLDTL.0x00614789".binding_history.previous.verification]
 source_hash = "a226a1021b6362c5863dc6ca5b8d98cd8a909de21572fb9cf925259692475d28"
 reference_hash = "3eeb2454792c04a81a87be49af01e1051d50f193bf31e479f278e334b9cb091b"
 reference_size = "127"
@@ -446534,17 +446735,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x00614789".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-20T06:45:51.400583+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x00614789".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T19:29:19.500750+00:00"
-updated_by = "test"
+["GOLDTL.0x00614789".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?Begin@CD3DXRenderToEnvMap@@QAEJXZ"
+name = "Begin_CD3DXRenderToEnvMap_QAEJXZ"
+kind = "LIBRARY"
 ["GOLDTL.0x0050e170"]
 size = 121
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0050e170.c"
@@ -447469,17 +447664,43 @@ changed_at = "2026-10-29T11:21:26.342659+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0060100a"]
 size = 139
+updated_by = "rehome"
+updated_at = "2026-11-09T08:09:53+00:00"
+cflags = "/O2 /Gd /G6"
+file = "src/library_d3dx8.h"
+symbol = "?Print@?$CSimplificationHeap@I@@QAEJXZ"
+name = "Print_CSimplificationHeap_I_QAEJXZ"
+kind = "LIBRARY"
+
+[["GOLDTL.0x0060100a".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-20T06:55:27.524997+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0060100a".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T19:28:30.384549+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0060100a".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?Print@?$CSimplificationHeap@I@@QAEJXZ (d3dx8.lib:obj\\i386\\createmesh.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:09:53.653465+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0060100a".binding_history.previous]
+size = 139
 file = "src/Develop/Unassigned/GOLDTL.fcn_0060100a.c"
 symbol = "@fcn_0060100a@4"
 name = "fcn_0060100a"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 blocker = "Application code — pending per-function decompilation"
 cflags = "/O2 /Gd /G6"
 
-["GOLDTL.0x0060100a".verification]
+["GOLDTL.0x0060100a".binding_history.previous.verification]
 source_hash = "19b16e3b831d575cb2caba096a73d6a9fe3af710b83a84a5f5bdc5f666e4471d"
 reference_hash = "fc8c2ada897cc72f13c756c1ef870700e0ebdd85b622acd1881f16f7df124651"
 reference_size = "139"
@@ -447496,17 +447717,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x0060100a".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-20T06:55:27.524997+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x0060100a".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T19:28:30.384549+00:00"
-updated_by = "test"
+["GOLDTL.0x0060100a".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?Print@?$CSimplificationHeap@I@@QAEJXZ"
+name = "Print_CSimplificationHeap_I_QAEJXZ"
+kind = "LIBRARY"
 ["GOLDTL.0x005ef254"]
 size = 140
 updated_by = "rehome"
@@ -447876,31 +448091,12 @@ name = "fcn_0062ab2e"
 symbol = "fcn_0062ab2e"
 ["GOLDTL.0x006010c0"]
 size = 143
-file = "src/Develop/Unassigned/GOLDTL.fcn_006010c0.c"
-symbol = "_fcn_006010c0"
-name = "fcn_006010c0"
-kind = "FUNCTION"
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
-status = "EXACT"
-blocker = "Application code — pending per-function decompilation"
-
-["GOLDTL.0x006010c0".verification]
-source_hash = "3980e5a369dadd127912f42cfa66b6b0facf5742024fb2101d88f872a7c29c48"
-reference_hash = "cc3d076408b4920026fb4b53a6ebe157584a892ad0394177fb8a1376eeb8e894"
-reference_size = "143"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
-toolchain = "(default)"
-cflags = "/O2 /Gd"
-module = "GOLDTL"
-va = "0x6010c0"
-context_hash = ""
-defines = "[]"
-input_hash = "e8c8ecdc96891034dd87ef04a89226c151e70f4213e185d2c2a3bdbefe3a6e6e"
-writer = "verify"
-status = "EXACT"
-measured_at = "2026-11-09T07:20:00+00:00"
+updated_at = "2026-11-09T08:10:51+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?Print@?$CSimplificationHeap@G@@QAEJXZ"
+name = "Print_CSimplificationHeap_G_QAEJXZ"
+kind = "LIBRARY"
 
 [["GOLDTL.0x006010c0".status_history]]
 old_status = "STUB"
@@ -447961,6 +448157,44 @@ old_status = "SIZE_MISMATCH"
 new_status = "EXACT"
 changed_at = "2026-10-25T19:22:15.201198+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x006010c0".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?Print@?$CSimplificationHeap@G@@QAEJXZ (d3dx8.lib:obj\\i386\\createmesh.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:10:51.074945+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x006010c0".binding_history.previous]
+size = 143
+file = "src/Develop/Unassigned/GOLDTL.fcn_006010c0.c"
+symbol = "_fcn_006010c0"
+name = "fcn_006010c0"
+kind = "FUNCTION"
+status = "EXACT"
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x006010c0".binding_history.previous.verification]
+source_hash = "3980e5a369dadd127912f42cfa66b6b0facf5742024fb2101d88f872a7c29c48"
+reference_hash = "cc3d076408b4920026fb4b53a6ebe157584a892ad0394177fb8a1376eeb8e894"
+reference_size = "143"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x6010c0"
+context_hash = ""
+defines = "[]"
+input_hash = "e8c8ecdc96891034dd87ef04a89226c151e70f4213e185d2c2a3bdbefe3a6e6e"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:20:00+00:00"
+
+["GOLDTL.0x006010c0".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?Print@?$CSimplificationHeap@G@@QAEJXZ"
+name = "Print_CSimplificationHeap_G_QAEJXZ"
+kind = "LIBRARY"
 ["GOLDTL.0x005ef437"]
 size = 143
 updated_by = "rehome"
@@ -451697,17 +451931,43 @@ changed_at = "2026-10-19T18:38:18.199320+00:00"
 updated_by = "test"
 ["GOLDTL.0x0061772e"]
 size = 214
+updated_by = "rehome"
+updated_at = "2026-11-09T08:16:06+00:00"
+cflags = "/O2 /Gd /G6"
+file = "src/library_d3dx8.h"
+symbol = "?UpdateDebugText@CD3DXAssembler@@QAEXXZ"
+name = "UpdateDebugText_CD3DXAssembler_QAEXXZ"
+kind = "LIBRARY"
+
+[["GOLDTL.0x0061772e".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-20T06:59:47.835205+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0061772e".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T19:29:44.196091+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0061772e".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?UpdateDebugText@CD3DXAssembler@@QAEXXZ (d3dx8.lib:obj\\i386\\cd3dxassembler.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:16:06.160001+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0061772e".binding_history.previous]
+size = 214
 file = "src/Develop/Unassigned/GOLDTL.fcn_0061772e.c"
 symbol = "@fcn_0061772e@4"
 name = "fcn_0061772e"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 blocker = "Application code — pending per-function decompilation"
 cflags = "/O2 /Gd /G6"
 
-["GOLDTL.0x0061772e".verification]
+["GOLDTL.0x0061772e".binding_history.previous.verification]
 source_hash = "4dd76612034546480aab836b440ac153dae64260557a3ec1fcb07eba56e065c2"
 reference_hash = "b363066ddf0077b3f35289c5679aa4d41f39ab1374e5153c5a073b13dd0f4709"
 reference_size = "214"
@@ -451724,17 +451984,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x0061772e".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-20T06:59:47.835205+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x0061772e".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T19:29:44.196091+00:00"
-updated_by = "test"
+["GOLDTL.0x0061772e".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?UpdateDebugText@CD3DXAssembler@@QAEXXZ"
+name = "UpdateDebugText_CD3DXAssembler_QAEXXZ"
+kind = "LIBRARY"
 ["GOLDTL.0x00476f90"]
 size = 216
 file = "src/Develop/Unassigned/GOLDTL.fcn_00476f90.c"
@@ -452281,16 +452535,41 @@ changed_at = "2026-10-19T19:31:39.369370+00:00"
 updated_by = "test"
 ["GOLDTL.0x0060f791"]
 size = 226
+updated_by = "rehome"
+updated_at = "2026-11-09T08:13:19+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?D3DXFindClosestDeviceFormat@@YA?AW4_D3DFORMAT@@PAUIDirect3DDevice8@@KW4_D3DRESOURCETYPE@@PBU_D3DXFORMAT_INFO@@@Z"
+name = "D3DXFindClosestDeviceFormat_YA_AW4_D3DFORMAT_PAUIDirect3DDevice8_KW4_D3DRESOURCETYPE_PBU_D3DXFORMAT_INFO_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x0060f791".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-20T06:44:27.387639+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0060f791".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T19:24:01.658491+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0060f791".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?D3DXFindClosestDeviceFormat@@YA?AW4_D3DFORMAT@@PAUIDirect3DDevice8@@KW4_D3DRESOURCETYPE@@PBU_D3DXFORMAT_INFO@@@Z (d3dx8.lib:obj\\i386\\d3dx8tex.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:13:19.950825+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0060f791".binding_history.previous]
+size = 226
 file = "src/Develop/Unassigned/GOLDTL.fcn_0060f791.c"
 symbol = "_fcn_0060f791"
 name = "fcn_0060f791"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 blocker = "Application code — pending per-function decompilation"
 
-["GOLDTL.0x0060f791".verification]
+["GOLDTL.0x0060f791".binding_history.previous.verification]
 source_hash = "c536c4395c1b7ab2fd1824a11cf099266811dd69bb782335cced7ca4951f00ef"
 reference_hash = "9da9c0c641076a6894aeb2e0161c5ac2699723644ba51d4c4070b4eee3096ebe"
 reference_size = "226"
@@ -452307,17 +452586,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x0060f791".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-20T06:44:27.387639+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x0060f791".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T19:24:01.658491+00:00"
-updated_by = "test"
+["GOLDTL.0x0060f791".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?D3DXFindClosestDeviceFormat@@YA?AW4_D3DFORMAT@@PAUIDirect3DDevice8@@KW4_D3DRESOURCETYPE@@PBU_D3DXFORMAT_INFO@@@Z"
+name = "D3DXFindClosestDeviceFormat_YA_AW4_D3DFORMAT_PAUIDirect3DDevice8_KW4_D3DRESOURCETYPE_PBU_D3DXFORMAT_INFO_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x0060c91e"]
 size = 226
 updated_by = "rehome"
@@ -453708,17 +453981,43 @@ changed_at = "2026-10-19T02:53:24.584748+00:00"
 updated_by = "test"
 ["GOLDTL.0x0062ac43"]
 size = 249
+updated_by = "rehome"
+updated_at = "2026-11-09T08:16:59+00:00"
+cflags = "/O2 /G6 /Gd"
+file = "src/library_d3dx8.h"
+symbol = "??1CD3DXText@@IAE@XZ"
+name = "_1CD3DXText_IAE_XZ"
+kind = "LIBRARY"
+
+[["GOLDTL.0x0062ac43".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-20T06:45:41.669365+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0062ac43".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T19:30:35.976010+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0062ac43".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ??1CD3DXText@@IAE@XZ (d3dx8.lib:obj\\i386\\cd3dxtext.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:16:59.109638+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0062ac43".binding_history.previous]
+size = 249
 file = "src/Develop/Unassigned/GOLDTL.fcn_0062ac43.c"
 symbol = "@fcn_0062ac43@4"
 name = "fcn_0062ac43"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 blocker = "Application code — pending per-function decompilation"
 cflags = "/O2 /G6 /Gd"
 
-["GOLDTL.0x0062ac43".verification]
+["GOLDTL.0x0062ac43".binding_history.previous.verification]
 source_hash = "96415c720576c663597b0e593a7af5726f6db26c98fc89d73e563436ab1a5d91"
 reference_hash = "8a8d34863f36a4a57458e4db542a29c39b0f723cb7c91fa6bf4395bdfebf631b"
 reference_size = "249"
@@ -453735,17 +454034,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x0062ac43".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-20T06:45:41.669365+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x0062ac43".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T19:30:35.976010+00:00"
-updated_by = "test"
+["GOLDTL.0x0062ac43".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "??1CD3DXText@@IAE@XZ"
+name = "_1CD3DXText_IAE_XZ"
+kind = "LIBRARY"
 ["GOLDTL.0x004f7210"]
 size = 251
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004f7210.c"
@@ -455871,31 +456164,12 @@ changed_at = "2026-10-19T03:24:12.923122+00:00"
 updated_by = "test"
 ["GOLDTL.0x0062af7c"]
 size = 321
-file = "src/Develop/Unassigned/GOLDTL.fcn_0062af7c.c"
-symbol = "@fcn_0062af7c@12"
-name = "fcn_0062af7c"
-kind = "FUNCTION"
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
-status = "EXACT"
-blocker = "Application code — pending per-function decompilation"
-
-["GOLDTL.0x0062af7c".verification]
-source_hash = "6e2996d6a90a41b886e34d025a80ddf8af9e4f4f4c1afef33c2e91058f881b46"
-reference_hash = "5fa30c1db0b84ac0ace906d9e7a80a23bf5b85d8aa929f76232d1aa173fd0bbe"
-reference_size = "321"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
-toolchain = "(default)"
-cflags = "/O2 /Gd"
-module = "GOLDTL"
-va = "0x62af7c"
-context_hash = ""
-defines = "[]"
-input_hash = "c8d349eef2616ca66860a38fb46b785b09d3d67817c3ad248f1b0a2ddeab7cca"
-writer = "verify"
-status = "EXACT"
-measured_at = "2026-11-09T07:20:00+00:00"
+updated_at = "2026-11-09T08:22:30+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?Initialize@CD3DXText@@IAEJPAUIDirect3DDevice8@@@Z"
+name = "Initialize_CD3DXText_IAEJPAUIDirect3DDevice8_Z"
+kind = "LIBRARY"
 
 [["GOLDTL.0x0062af7c".status_history]]
 old_status = "STUB"
@@ -455914,6 +456188,44 @@ old_status = "SIZE_MISMATCH"
 new_status = "EXACT"
 changed_at = "2026-10-25T17:16:21.552238+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x0062af7c".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?Initialize@CD3DXText@@IAEJPAUIDirect3DDevice8@@@Z (d3dx8.lib:obj\\i386\\cd3dxtext.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:22:30.515664+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0062af7c".binding_history.previous]
+size = 321
+file = "src/Develop/Unassigned/GOLDTL.fcn_0062af7c.c"
+symbol = "@fcn_0062af7c@12"
+name = "fcn_0062af7c"
+kind = "FUNCTION"
+status = "EXACT"
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x0062af7c".binding_history.previous.verification]
+source_hash = "6e2996d6a90a41b886e34d025a80ddf8af9e4f4f4c1afef33c2e91058f881b46"
+reference_hash = "5fa30c1db0b84ac0ace906d9e7a80a23bf5b85d8aa929f76232d1aa173fd0bbe"
+reference_size = "321"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x62af7c"
+context_hash = ""
+defines = "[]"
+input_hash = "c8d349eef2616ca66860a38fb46b785b09d3d67817c3ad248f1b0a2ddeab7cca"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:20:00+00:00"
+
+["GOLDTL.0x0062af7c".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?Initialize@CD3DXText@@IAEJPAUIDirect3DDevice8@@@Z"
+name = "Initialize_CD3DXText_IAEJPAUIDirect3DDevice8_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x00489920"]
 size = 322
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00489920.c"
@@ -457183,29 +457495,11 @@ updated_by = "test"
 ["GOLDTL.0x00614808"]
 size = 343
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:57+00:00"
-file = "src/Develop/Unassigned/fcn_00614808.c"
-kind = "FUNCTION"
-name = "fcn_00614808"
-symbol = "_fcn_00614808"
-status = "EXACT"
-
-["GOLDTL.0x00614808".verification]
-source_hash = "aa820b70b54786f017aca4b8945a787494ae0f08e279e2e5261df77f8d3e4c15"
-reference_hash = "1a513e3c4e65abc34566b10c9bc3580dbd8f6fa320bfd71e0223c01d93a5b118"
-reference_size = "343"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
-toolchain = "(default)"
-cflags = "/O2 /Gd"
-module = "GOLDTL"
-va = "0x614808"
-context_hash = ""
-defines = "[]"
-input_hash = "fd5ea6edac8f9ca9f874b48d0a89c48f4eb35d10cd854887dc513b8082b3c05c"
-writer = "verify"
-status = "EXACT"
-measured_at = "2026-11-09T07:20:00+00:00"
+updated_at = "2026-11-09T08:27:26+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?BeginScene@CD3DXRenderToEnvMap@@QAEJW4_D3DCUBEMAP_FACES@@@Z"
+name = "BeginScene_CD3DXRenderToEnvMap_QAEJW4_D3DCUBEMAP_FACES_Z"
+kind = "LIBRARY"
 
 [["GOLDTL.0x00614808".binding_history]]
 action = "retire"
@@ -457241,6 +457535,7 @@ measured_at = "2026-10-20T07:14:10+00:00"
 
 ["GOLDTL.0x00614808".binding_history.replacement]
 
+
 [["GOLDTL.0x00614808".binding_history]]
 action = "rebind"
 reason = "Reviewed rebind of a row that carries no source identity: the address is a native inventory start admitted by the coverage repair; the row gets an inferred address-only source path and a stub body as an unreconstructed work item, not a match."
@@ -457273,6 +457568,43 @@ kind = "FUNCTION"
 name = "fcn_00614808"
 symbol = "_fcn_00614808"
 
+
+[["GOLDTL.0x00614808".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?BeginScene@CD3DXRenderToEnvMap@@QAEJW4_D3DCUBEMAP_FACES@@@Z (d3dx8.lib:obj\\i386\\cd3dxrendertoenvmap.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:27:26.140432+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00614808".binding_history.previous]
+size = 343
+file = "src/Develop/Unassigned/fcn_00614808.c"
+kind = "FUNCTION"
+name = "fcn_00614808"
+symbol = "_fcn_00614808"
+status = "EXACT"
+
+["GOLDTL.0x00614808".binding_history.previous.verification]
+source_hash = "aa820b70b54786f017aca4b8945a787494ae0f08e279e2e5261df77f8d3e4c15"
+reference_hash = "1a513e3c4e65abc34566b10c9bc3580dbd8f6fa320bfd71e0223c01d93a5b118"
+reference_size = "343"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x614808"
+context_hash = ""
+defines = "[]"
+input_hash = "fd5ea6edac8f9ca9f874b48d0a89c48f4eb35d10cd854887dc513b8082b3c05c"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:20:00+00:00"
+
+["GOLDTL.0x00614808".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?BeginScene@CD3DXRenderToEnvMap@@QAEJW4_D3DCUBEMAP_FACES@@@Z"
+name = "BeginScene_CD3DXRenderToEnvMap_QAEJW4_D3DCUBEMAP_FACES_Z"
+kind = "LIBRARY"
 [["GOLDTL.0x00614808".status_history]]
 old_status = "STUB"
 new_status = "EXACT"
@@ -473047,29 +473379,11 @@ updated_by = "test"
 ["GOLDTL.0x006172e4"]
 size = 929
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:57+00:00"
-file = "src/Develop/Unassigned/fcn_006172e4.c"
-kind = "FUNCTION"
-name = "fcn_006172e4"
-symbol = "_fcn_006172e4"
-status = "EXACT"
-
-["GOLDTL.0x006172e4".verification]
-source_hash = "abd895b818b2344ec22e82f3f0672490c84af395a90a53fea5329f53f9ccf9e7"
-reference_hash = "9abc7c41c0a3f6fbe910c76688f5cc65dbc53f0e3808fd48fc97f887a1387fb4"
-reference_size = "929"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
-toolchain = "(default)"
-cflags = "/O2 /Gd"
-module = "GOLDTL"
-va = "0x6172e4"
-context_hash = ""
-defines = "[]"
-input_hash = "2c63203188c161fc96302aba5c59e6c25cd838c68c773f6c7265b78f2a88c622"
-writer = "verify"
-status = "EXACT"
-measured_at = "2026-11-09T07:20:00+00:00"
+updated_at = "2026-11-09T08:28:21+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?DecodeRegister@CD3DXAssembler@@QAEKPADKH@Z"
+name = "DecodeRegister_CD3DXAssembler_QAEKPADKH_Z"
+kind = "LIBRARY"
 
 [["GOLDTL.0x006172e4".binding_history]]
 action = "retire"
@@ -473105,6 +473419,7 @@ measured_at = "2026-10-23T09:43:41+00:00"
 
 ["GOLDTL.0x006172e4".binding_history.replacement]
 
+
 [["GOLDTL.0x006172e4".binding_history]]
 action = "rebind"
 reason = "Reviewed rebind of a row that carries no source identity: the address is a native inventory start admitted by the coverage repair; the row gets an inferred address-only source path and a stub body as an unreconstructed work item, not a match."
@@ -473137,6 +473452,43 @@ kind = "FUNCTION"
 name = "fcn_006172e4"
 symbol = "_fcn_006172e4"
 
+
+[["GOLDTL.0x006172e4".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?DecodeRegister@CD3DXAssembler@@QAEKPADKH@Z (d3dx8.lib:obj\\i386\\cd3dxassembler.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:28:21.929764+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x006172e4".binding_history.previous]
+size = 929
+file = "src/Develop/Unassigned/fcn_006172e4.c"
+kind = "FUNCTION"
+name = "fcn_006172e4"
+symbol = "_fcn_006172e4"
+status = "EXACT"
+
+["GOLDTL.0x006172e4".binding_history.previous.verification]
+source_hash = "abd895b818b2344ec22e82f3f0672490c84af395a90a53fea5329f53f9ccf9e7"
+reference_hash = "9abc7c41c0a3f6fbe910c76688f5cc65dbc53f0e3808fd48fc97f887a1387fb4"
+reference_size = "929"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x6172e4"
+context_hash = ""
+defines = "[]"
+input_hash = "2c63203188c161fc96302aba5c59e6c25cd838c68c773f6c7265b78f2a88c622"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:20:00+00:00"
+
+["GOLDTL.0x006172e4".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?DecodeRegister@CD3DXAssembler@@QAEKPADKH@Z"
+name = "DecodeRegister_CD3DXAssembler_QAEKPADKH_Z"
+kind = "LIBRARY"
 [["GOLDTL.0x006172e4".status_history]]
 old_status = "STUB"
 new_status = "EXACT"
@@ -475227,29 +475579,11 @@ updated_by = "test"
 ["GOLDTL.0x0060481e"]
 size = 1034
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:57+00:00"
-file = "src/Develop/Unassigned/fcn_0060481e.c"
-kind = "FUNCTION"
-name = "fcn_0060481e"
-symbol = "_fcn_0060481e"
-status = "EXACT"
-
-["GOLDTL.0x0060481e".verification]
-source_hash = "9d657c1a888ba9561360fb8bf506444990c48abb651b134bf29fb8625fdd71bd"
-reference_hash = "e06cd6b53b94f0da307073b5ad4f2fa0b089496ee316291b1c775f196eaa4114"
-reference_size = "1034"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
-toolchain = "(default)"
-cflags = "/O2 /Gd"
-module = "GOLDTL"
-va = "0x60481e"
-context_hash = ""
-defines = "[]"
-input_hash = "45047f43d78695b61c0bbce52934b565e7ca2dfd969b4d5cbd4387b77a15ab84"
-writer = "verify"
-status = "EXACT"
-measured_at = "2026-11-09T07:20:00+00:00"
+updated_at = "2026-11-09T08:26:26+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?Trim@?$GXHalfEdgePMesh@I$0A@$0?0@@EAGJKKKKKPAU_D3DXATTRIBUTERANGE@@PAK1@Z"
+name = "Trim_GXHalfEdgePMesh_I_0A_0_0_EAGJKKKKKPAU_D3DXATTRIBUTERANGE_PAK1_Z"
+kind = "LIBRARY"
 
 [["GOLDTL.0x0060481e".binding_history]]
 action = "retire"
@@ -475285,6 +475619,7 @@ measured_at = "2026-10-23T09:43:41+00:00"
 
 ["GOLDTL.0x0060481e".binding_history.replacement]
 
+
 [["GOLDTL.0x0060481e".binding_history]]
 action = "rebind"
 reason = "Reviewed rebind of a row that carries no source identity: the address is a native inventory start admitted by the coverage repair; the row gets an inferred address-only source path and a stub body as an unreconstructed work item, not a match."
@@ -475317,6 +475652,43 @@ kind = "FUNCTION"
 name = "fcn_0060481e"
 symbol = "_fcn_0060481e"
 
+
+[["GOLDTL.0x0060481e".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?Trim@?$GXHalfEdgePMesh@I$0A@$0?0@@EAGJKKKKKPAU_D3DXATTRIBUTERANGE@@PAK1@Z (d3dx8.lib:obj\\i386\\createmesh.obj), unique after callee resolution; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T08:26:26.729207+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x0060481e".binding_history.previous]
+size = 1034
+file = "src/Develop/Unassigned/fcn_0060481e.c"
+kind = "FUNCTION"
+name = "fcn_0060481e"
+symbol = "_fcn_0060481e"
+status = "EXACT"
+
+["GOLDTL.0x0060481e".binding_history.previous.verification]
+source_hash = "9d657c1a888ba9561360fb8bf506444990c48abb651b134bf29fb8625fdd71bd"
+reference_hash = "e06cd6b53b94f0da307073b5ad4f2fa0b089496ee316291b1c775f196eaa4114"
+reference_size = "1034"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x60481e"
+context_hash = ""
+defines = "[]"
+input_hash = "45047f43d78695b61c0bbce52934b565e7ca2dfd969b4d5cbd4387b77a15ab84"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:20:00+00:00"
+
+["GOLDTL.0x0060481e".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?Trim@?$GXHalfEdgePMesh@I$0A@$0?0@@EAGJKKKKKPAU_D3DXATTRIBUTERANGE@@PAK1@Z"
+name = "Trim_GXHalfEdgePMesh_I_0A_0_0_EAGJKKKKKPAU_D3DXATTRIBUTERANGE_PAK1_Z"
+kind = "LIBRARY"
 [["GOLDTL.0x0060481e".status_history]]
 old_status = "STUB"
 new_status = "EXACT"
