@@ -8711,8 +8711,17 @@
   },
   {
     "va": 4312000,
-    "size": 1936,
-    "name": "fcn.0041cbc0"
+    "size": 1931,
+    "name": "fcn.0041cbc0",
+    "extent_history": [
+      {
+        "old_size": 1936,
+        "new_size": 1931,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386747+00:00"
+      }
+    ]
   },
   {
     "va": 4313936,
@@ -8744,8 +8753,17 @@
   },
   {
     "va": 4314368,
-    "size": 240,
-    "name": "fcn.0041d500"
+    "size": 235,
+    "name": "fcn.0041d500",
+    "extent_history": [
+      {
+        "old_size": 240,
+        "new_size": 235,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386767+00:00"
+      }
+    ]
   },
   {
     "va": 4314608,
@@ -10159,8 +10177,17 @@
   },
   {
     "va": 4327584,
-    "size": 720,
-    "name": "fcn.004208a0"
+    "size": 710,
+    "name": "fcn.004208a0",
+    "extent_history": [
+      {
+        "old_size": 720,
+        "new_size": 710,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386770+00:00"
+      }
+    ]
   },
   {
     "va": 4328304,
@@ -12238,7 +12265,7 @@
   },
   {
     "va": 4352704,
-    "size": 512,
+    "size": 507,
     "name": "fcn.00426ac0",
     "extent_history": [
       {
@@ -12254,6 +12281,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.722042+00:00"
+      },
+      {
+        "old_size": 512,
+        "new_size": 507,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386772+00:00"
       }
     ]
   },
@@ -30720,8 +30754,17 @@
   },
   {
     "va": 4680464,
-    "size": 352,
-    "name": "fcn.00476b10"
+    "size": 349,
+    "name": "fcn.00476b10",
+    "extent_history": [
+      {
+        "old_size": 352,
+        "new_size": 349,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386775+00:00"
+      }
+    ]
   },
   {
     "va": 4680816,
@@ -39860,8 +39903,17 @@
   },
   {
     "va": 4890816,
-    "size": 384,
-    "name": "fcn.004aa0c0"
+    "size": 382,
+    "name": "fcn.004aa0c0",
+    "extent_history": [
+      {
+        "old_size": 384,
+        "new_size": 382,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386781+00:00"
+      }
+    ]
   },
   {
     "va": 4891200,
@@ -42410,8 +42462,17 @@
   },
   {
     "va": 4933200,
-    "size": 112,
-    "name": "fcn.004b4650"
+    "size": 102,
+    "name": "fcn.004b4650",
+    "extent_history": [
+      {
+        "old_size": 112,
+        "new_size": 102,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386783+00:00"
+      }
+    ]
   },
   {
     "va": 4933312,
@@ -42770,8 +42831,17 @@
   },
   {
     "va": 4935792,
-    "size": 608,
-    "name": "fcn.004b5070"
+    "size": 605,
+    "name": "fcn.004b5070",
+    "extent_history": [
+      {
+        "old_size": 608,
+        "new_size": 605,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386786+00:00"
+      }
+    ]
   },
   {
     "va": 4936400,
@@ -51770,8 +51840,17 @@
   },
   {
     "va": 5040304,
-    "size": 304,
-    "name": "fcn.004ce8b0"
+    "size": 303,
+    "name": "fcn.004ce8b0",
+    "extent_history": [
+      {
+        "old_size": 304,
+        "new_size": 303,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386788+00:00"
+      }
+    ]
   },
   {
     "va": 5040608,
@@ -58065,8 +58144,17 @@
   },
   {
     "va": 5164800,
-    "size": 656,
-    "name": "fcn.004ecf00"
+    "size": 652,
+    "name": "fcn.004ecf00",
+    "extent_history": [
+      {
+        "old_size": 656,
+        "new_size": 652,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386789+00:00"
+      }
+    ]
   },
   {
     "va": 5165456,
@@ -64554,7 +64642,7 @@
   },
   {
     "va": 5259568,
-    "size": 288,
+    "size": 276,
     "name": "fcn.00504130",
     "extent_history": [
       {
@@ -64570,6 +64658,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.725349+00:00"
+      },
+      {
+        "old_size": 288,
+        "new_size": 276,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386792+00:00"
       }
     ]
   },
@@ -64662,8 +64757,17 @@
   },
   {
     "va": 5262288,
-    "size": 192,
-    "name": "fcn.00504bd0"
+    "size": 181,
+    "name": "fcn.00504bd0",
+    "extent_history": [
+      {
+        "old_size": 192,
+        "new_size": 181,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386794+00:00"
+      }
+    ]
   },
   {
     "va": 5262480,
@@ -65153,8 +65257,17 @@
   },
   {
     "va": 5271072,
-    "size": 80,
-    "name": "fcn.00506e20"
+    "size": 70,
+    "name": "fcn.00506e20",
+    "extent_history": [
+      {
+        "old_size": 80,
+        "new_size": 70,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386796+00:00"
+      }
+    ]
   },
   {
     "va": 5271152,
@@ -65441,13 +65554,31 @@
   },
   {
     "va": 5274368,
-    "size": 304,
-    "name": "fcn.00507b00"
+    "size": 291,
+    "name": "fcn.00507b00",
+    "extent_history": [
+      {
+        "old_size": 304,
+        "new_size": 291,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386798+00:00"
+      }
+    ]
   },
   {
     "va": 5274672,
-    "size": 224,
-    "name": "fcn.00507c30"
+    "size": 211,
+    "name": "fcn.00507c30",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 211,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386799+00:00"
+      }
+    ]
   },
   {
     "va": 5274896,
@@ -67204,8 +67335,17 @@
   },
   {
     "va": 5301536,
-    "size": 224,
-    "name": "fcn.0050e520"
+    "size": 215,
+    "name": "fcn.0050e520",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 215,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386801+00:00"
+      }
+    ]
   },
   {
     "va": 5301760,
@@ -73145,7 +73285,7 @@
   },
   {
     "va": 5462464,
-    "size": 528,
+    "size": 527,
     "name": "fcn.005359c0",
     "extent_history": [
       {
@@ -73161,6 +73301,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.725947+00:00"
+      },
+      {
+        "old_size": 528,
+        "new_size": 527,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386803+00:00"
       }
     ]
   },
@@ -75727,8 +75874,17 @@
   },
   {
     "va": 5531728,
-    "size": 752,
-    "name": "fcn.00546850"
+    "size": 746,
+    "name": "fcn.00546850",
+    "extent_history": [
+      {
+        "old_size": 752,
+        "new_size": 746,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386805+00:00"
+      }
+    ]
   },
   {
     "va": 5532480,
@@ -75779,8 +75935,17 @@
   },
   {
     "va": 5532640,
-    "size": 256,
-    "name": "fcn.00546be0"
+    "size": 253,
+    "name": "fcn.00546be0",
+    "extent_history": [
+      {
+        "old_size": 256,
+        "new_size": 253,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386808+00:00"
+      }
+    ]
   },
   {
     "va": 5532896,
@@ -97067,8 +97232,17 @@
   },
   {
     "va": 6092128,
-    "size": 448,
-    "name": "fcn.005cf560"
+    "size": 437,
+    "name": "fcn.005cf560",
+    "extent_history": [
+      {
+        "old_size": 448,
+        "new_size": 437,
+        "reason": "native bytes after each compiled body are only 0x90 alignment padding (rebrew binary asm show at VA+compiled size); the compiled body matches the native prefix with zero differing bytes (rebrew verify SIZE_MISMATCH 'N byte diffs' = 0)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-09T17:14:32.386810+00:00"
+      }
+    ]
   },
   {
     "va": 6092576,
