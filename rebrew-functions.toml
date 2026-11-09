@@ -463525,7 +463525,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x0043ed30".verification]
-source_hash = "685d86ba685b58d57d1ef878b2d4b91f552e4d9f6e8b3be7f76cff8e187785db"
+source_hash = "c580f8073c31b51ab35290d317f097029595094a3e25cf9c98cade1b04d251b1"
 reference_hash = "71923f7fe4fe22b07a4dc561cced3f0dea7491cc6527e4defd64a8e5c28f7dbb"
 reference_size = "495"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -463536,10 +463536,10 @@ module = "GOLDTL"
 va = "0x43ed30"
 context_hash = ""
 defines = "[]"
-input_hash = "0664530cb6a7f671c1c758d758b77fa22aa00070324d9c2a555c1e0ee7089e0c"
+input_hash = "9e3ac3ce44c688c8ad33287ad49827313c0766ab9854ebb9810161832608626e"
 writer = "verify"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-09T07:19:59+00:00"
+measured_at = "2026-11-09T16:46:30+00:00"
 
 [["GOLDTL.0x0043ed30".status_history]]
 old_status = "STUB"
@@ -466817,13 +466817,13 @@ file = "src/Develop/Units/m_alloc/GOLDTL.fcn_00416300.c"
 symbol = "_fcn_00416300"
 name = "fcn_00416300"
 kind = "FUNCTION"
-updated_by = "fix-sizes"
-updated_at = "2026-11-02T21:49:42+00:00"
-status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-11-09T16:46:30+00:00"
+status = "NEAR_MATCHING"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00416300".verification]
-source_hash = "41d4a3e945e707336dea6706ddb520a060f95e256513a36010b6fed965392fe2"
+source_hash = "bd9d63f33ebec012ab9759c3d4434d832f9fffee50138032202e09ea92126ed4"
 reference_hash = "56c38e4099cbcedce6e18aec6f4d0835d4456a0dddc790bd7a0ef1c2dd16b154"
 reference_size = "572"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -466834,16 +466834,22 @@ module = "GOLDTL"
 va = "0x416300"
 context_hash = ""
 defines = "[]"
-input_hash = "08b29534db838af8d6e541e9e73556c657f9b434cd8091bccc3d9c0edf69660c"
-writer = "verify"
-status = "SIZE_MISMATCH"
-measured_at = "2026-11-09T07:19:57+00:00"
+input_hash = "190ce9860ce233acd7513007da262222c8e7aee744960d183c105df7ceaf52f3"
+status = "NEAR_MATCHING"
+writer = "test"
+measured_at = "2026-11-09T16:47:45+00:00"
 
 [["GOLDTL.0x00416300".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-19T03:58:19.019856+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x00416300".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-09T16:46:30.971260+00:00"
+updated_by = "verify"
 ["GOLDTL.0x004763e0"]
 size = 570
 file = "src/Develop/Unassigned/fcn_004763e0.c"
@@ -469402,9 +469408,9 @@ va = "0x5091d0"
 context_hash = ""
 defines = "[]"
 input_hash = "d9bfc4252805a3c8bdf5745baedf0bf55e9a3f41032d9d0743723cb175fef853"
-writer = "verify"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-09T07:20:00+00:00"
+writer = "test"
+measured_at = "2026-11-09T16:45:07+00:00"
 
 [["GOLDTL.0x005091d0".status_history]]
 old_status = "STUB"
@@ -469784,7 +469790,7 @@ defines = "[]"
 input_hash = "285ba70c92c7681b0b7501c233fc8fa156928bb2003c58a419fa6e3f90f8731f"
 writer = "verify"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-09T07:19:59+00:00"
+measured_at = "2026-11-09T16:53:01+00:00"
 
 [["GOLDTL.0x00476120".status_history]]
 old_status = "STUB"
@@ -607711,7 +607717,7 @@ blocker = "Faithful body kept: full geldleihe dialog flow, gm_QueryEntitySum, it
 blocker_delta = 46
 
 ["GOLDTL.0x005a4bb0".verification]
-source_hash = "f29cbc87e689dbf4cf515a686e6b72af82b461887a18c94b3fc90bed6ec62ab7"
+source_hash = "249c62fc691b0bafba8f0c6f0180e34ab0e89b0993ae8c3b37d75ecf7fa184ee"
 reference_hash = "ca9d63a60de513f8ac7f7bbe4c4d83e667e35be89c05b1e260a581fe7cd3f186"
 reference_size = "588"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -607722,10 +607728,10 @@ module = "GOLDTL"
 va = "0x5a4bb0"
 context_hash = ""
 defines = "[]"
-input_hash = "a91dacf84829b7b95eeb7b5018ac476f0fcccbabe788f77bd7d362e7f51a52a8"
+input_hash = "8317cd450510b5c1c71c2a513fd7ff83720ba38bc31c1f579956aa95a68ec862"
 writer = "verify"
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-09T07:20:00+00:00"
+measured_at = "2026-11-09T16:46:30+00:00"
 
 [["GOLDTL.0x005a4bb0".status_history]]
 old_status = "STUB"
