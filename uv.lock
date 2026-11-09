@@ -1,5 +1,5 @@
 version = 1
-revision = 5
+revision = 3
 requires-python = ">=3.15"
 resolution-markers = [
     "python_full_version >= '3.16'",
@@ -487,8 +487,8 @@ requires-dist = [
     { name = "isort", marker = "extra == 'dev'", specifier = ">=9.0.2" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=2.4.1" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.2.0" },
-    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.20.0/rebrew-6.20.0-py3-none-any.whl" },
-    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.20.0/rebrew-6.20.0-py3-none-any.whl" },
+    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.24.0/rebrew-6.24.0-py3-none-any.whl" },
+    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.24.0/rebrew-6.24.0-py3-none-any.whl" },
     { name = "recoverage", marker = "extra == 'dashboard'", url = "https://github.com/maci0/recoverage/releases/download/v8.8.2/recoverage-8.8.2-py3-none-any.whl" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.17.3" },
 ]
@@ -1199,8 +1199,8 @@ wheels = [
 
 [[package]]
 name = "rebrew"
-version = "6.20.0"
-source = { url = "https://github.com/maci0/rebrew/releases/download/v6.20.0/rebrew-6.20.0-py3-none-any.whl" }
+version = "6.24.0"
+source = { url = "https://github.com/maci0/rebrew/releases/download/v6.24.0/rebrew-6.24.0-py3-none-any.whl" }
 dependencies = [
     { name = "capstone" },
     { name = "click" },
@@ -1213,7 +1213,7 @@ dependencies = [
     { name = "python-flirt", version = "0.10.2+relumea.1", source = { url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1-cp315-cp315-manylinux_2_28_aarch64.whl" }, marker = "python_full_version < '3.16' and implementation_name == 'cpython' and platform_machine == 'aarch64' and sys_platform == 'linux'" },
     { name = "python-flirt", version = "0.10.2+relumea.1", source = { url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1-cp315-cp315-manylinux_2_28_x86_64.whl" }, marker = "python_full_version < '3.16' and implementation_name == 'cpython' and platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "python-flirt", version = "0.10.2+relumea.1", source = { url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1-cp315-cp315-win_amd64.whl" }, marker = "python_full_version < '3.16' and implementation_name == 'cpython' and platform_machine == 'AMD64' and sys_platform == 'win32'" },
-    { name = "python-flirt", version = "0.10.2+relumea.1", source = { url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz" }, marker = "python_full_version >= '3.16' or implementation_name != 'cpython' or (platform_machine != 'AMD64' and platform_machine != 'aarch64' and platform_machine != 'arm64' and platform_machine != 'x86_64') or (platform_machine == 'AMD64' and sys_platform == 'darwin') or (platform_machine == 'aarch64' and sys_platform == 'darwin') or (platform_machine == 'x86_64' and sys_platform == 'darwin') or (platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'arm64' and sys_platform == 'linux') or (platform_machine == 'aarch64' and sys_platform == 'win32') or (platform_machine == 'arm64' and sys_platform == 'win32') or (platform_machine == 'x86_64' and sys_platform == 'win32') or (sys_platform != 'darwin' and sys_platform != 'linux' and sys_platform != 'win32')" },
+    { name = "python-flirt", version = "0.10.2+relumea.1", source = { url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz" }, marker = "(python_full_version >= '3.16' and platform_machine == 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.16' and platform_machine == 'x86_64' and sys_platform == 'linux') or (python_full_version >= '3.16' and sys_platform == 'darwin') or (python_full_version >= '3.16' and sys_platform == 'win32') or (implementation_name != 'cpython' and platform_machine == 'aarch64' and sys_platform == 'linux') or (implementation_name != 'cpython' and platform_machine == 'x86_64' and sys_platform == 'linux') or (implementation_name != 'cpython' and sys_platform == 'darwin') or (implementation_name != 'cpython' and sys_platform == 'win32') or (platform_machine != 'aarch64' and platform_machine != 'x86_64' and sys_platform == 'linux') or (platform_machine != 'arm64' and sys_platform == 'darwin') or (platform_machine != 'AMD64' and sys_platform == 'win32') or (sys_platform != 'darwin' and sys_platform != 'linux' and sys_platform != 'win32')" },
     { name = "rich" },
     { name = "tomlkit" },
     { name = "tree-sitter" },
@@ -1222,7 +1222,7 @@ dependencies = [
     { name = "zstandard" },
 ]
 wheels = [
-    { url = "https://github.com/maci0/rebrew/releases/download/v6.20.0/rebrew-6.20.0-py3-none-any.whl", hash = "sha256:b300b6c34b734eeb0794b8bde5b960c87cac8e231026c0135e0b0b47e43f7286" },
+    { url = "https://github.com/maci0/rebrew/releases/download/v6.24.0/rebrew-6.24.0-py3-none-any.whl", hash = "sha256:0b6a2725f5cb10d36aae8258baf832860a3fb87562c9210582fd95f0318524f1" },
 ]
 
 [package.optional-dependencies]
@@ -1246,6 +1246,7 @@ requires-dist = [
     { name = "idna", specifier = ">=3.20,<4" },
     { name = "lief", specifier = ">=1.0.0,<2" },
     { name = "numpy", specifier = ">=2.5.4,<3" },
+    { name = "psycopg", marker = "extra == 'pgsql'", specifier = ">=3.3.8,<4" },
     { name = "python-flirt", url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz" },
     { name = "rich", specifier = ">=15.0.0,<16" },
     { name = "tomlkit", specifier = ">=0.15.2,<1" },
@@ -1254,7 +1255,7 @@ requires-dist = [
     { name = "typer", specifier = ">=0.27.3,<1" },
     { name = "zstandard", specifier = ">=0.25.0,<1" },
 ]
-provides-extras = ["prove", "binsync"]
+provides-extras = ["prove", "binsync", "pgsql"]
 
 [[package]]
 name = "recoverage"
