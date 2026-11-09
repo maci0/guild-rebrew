@@ -80,6 +80,7 @@ Open, in order:
   the signature map or the file (`zError`, `zcfree`, `zcalloc`, `deflate_fast`, `deflateCopy`,
   `inflate_blocks`, `inflate`), and `inflate_set_dictionary` and `inflate_blocks_sync_point` are missing
   from `function_signatures`. Filed in the upstream `docs/IDEAS-GUILD.md` (local commits, not pushed).
+- Server gate (2026-11-09, rebrew 6.24.0): `server.dll` raw link is byte-identical to the reference (286,720 bytes), 316 of 316 functions, 652 of 652 data rows, all whole-binary sections, Wine load OK. `GATE: FAIL` remains for two checks: `rebrew lint` warnings (113, required 0) and the d3dx8 library screening (3,618 findings, required 0; 679 have one candidate symbol). Both are on the objective's acceptance list.
 5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
    Matching: 112 GoldTL functions remain NEAR_MATCHING. A 2026-11-08 round tried the 89 with 48 or fewer
    differing bytes (reorder commutative operands, independent statements, equivalent rewrites; tests
