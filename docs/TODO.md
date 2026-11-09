@@ -75,10 +75,11 @@ Open, in order:
 - GA batches on 2026-11-09 (`--improve` three times, `--size-mismatch` once, 100 functions) matched one, `fcn_004763e0`. The rest need hand diagnosis from `rebrew diff`; see provenance for the two that were tried by hand and did not close (`fcn_0048ddd0`, `fcn_004b64b0`, `fcn_00495180`).
 - Upstream gap: `rebrew library bind-source` refuses eight loose zlib functions that match the compiled
   vendored objects byte for byte (`zError`, `zcfree`, `deflate_fast`, `deflateCopy`, `inflate_blocks`,
-  `inflate`, `inflate_blocks_sync_point`, `inflate_set_dictionary`). `zError` (K&R) is missing from
-  `function_signatures` and `zcfree`/`zcalloc` fail `has_unique_source_definition` (three conditional
-  definitions each); the other five were not probed. Filed in the upstream `docs/IDEAS-GUILD.md` as local
-  commit `922483f5` (not pushed).
+  `inflate`, `inflate_blocks_sync_point`, `inflate_set_dictionary`). The pinned zlib 1.1.3 definitions are
+  K&R style behind macros: `has_unique_source_definition` is false for the seven probed names that exist in
+  the signature map or the file (`zError`, `zcfree`, `zcalloc`, `deflate_fast`, `deflateCopy`,
+  `inflate_blocks`, `inflate`), and `inflate_set_dictionary` and `inflate_blocks_sync_point` are missing
+  from `function_signatures`. Filed in the upstream `docs/IDEAS-GUILD.md` (local commits, not pushed).
 5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
    Matching: 112 GoldTL functions remain NEAR_MATCHING. A 2026-11-08 round tried the 89 with 48 or fewer
    differing bytes (reorder commutative operands, independent statements, equivalent rewrites; tests
