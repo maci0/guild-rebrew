@@ -14637,13 +14637,14 @@ name = "DefWindowProcA"
 
 ["GOLD.0x00422d60"]
 size = 33
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00422d60.c"
 name = "fcn_00422d60"
 symbol = "_fcn_00422d60"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00422d60".verification]
 source_hash = "ba66f05cb7ccd731556bf2890b98afee72dee1ab482a0787a01aac9b8822b7d4"
@@ -21592,13 +21593,14 @@ symbol = "_fcn_004378c0"
 kind = "FUNCTION"
 ["GOLD.0x00438d40"]
 size = 288
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00438d40.c"
 name = "fcn_00438d40"
 symbol = "_fcn_00438d40"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00438d40".verification]
 source_hash = "3e3255fccd34618edbed7dad4c857c42eec98b04c20794e0be819ae30032694a"
@@ -25219,13 +25221,14 @@ symbol = "_fcn_00451840"
 kind = "FUNCTION"
 ["GOLD.0x00454030"]
 size = 46
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00454030.c"
 name = "fcn_00454030"
 symbol = "_fcn_00454030"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00454030".verification]
 source_hash = "3a2c22ebb8f792790bdeb8ee50178b34c2878ee5c9d751cd9e403609ab9ef7b8"
@@ -25933,13 +25936,14 @@ measured_at = "2026-11-09T07:09:31+00:00"
 
 ["GOLD.0x00458a10"]
 size = 254
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00458a10.c"
 name = "fcn_00458a10"
 symbol = "_fcn_00458a10"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00458a10".verification]
 source_hash = "2455762214582e2972fd8c806d213510ee1c0f9db1372aa16d357107f86403f4"
@@ -64307,13 +64311,14 @@ measured_at = "2026-11-09T07:09:31+00:00"
 
 ["GOLD.0x004e6f10"]
 size = 23
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004e6f10.c"
 name = "fcn_004e6f10"
 symbol = "_fcn_004e6f10"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004e6f10".verification]
 source_hash = "5f157383e0aaff585ab573a5bf3fdae0fae50b9bd38fc2956e05b5b3062472f2"
@@ -68710,13 +68715,14 @@ measured_at = "2026-11-09T07:09:31+00:00"
 
 ["GOLD.0x004f39b0"]
 size = 34
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004f39b0.c"
 name = "fcn_004f39b0"
 symbol = "_fcn_004f39b0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004f39b0".verification]
 source_hash = "3e6d585f125bc2417681bb51fbb07e1c89c227413d4339a485017dbf609cf6a0"
@@ -71146,13 +71152,14 @@ measured_at = "2026-10-22T08:35:57+00:00"
 ["GOLD.0x004f9710".binding_history.replacement]
 ["GOLD.0x004f97a0"]
 size = 19
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004f97a0.c"
 name = "fcn_004f97a0"
 symbol = "_fcn_004f97a0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004f97a0".verification]
 source_hash = "f754a37bc7459eb456479128861b4a2e06919517276ad77f27e33ec4a16a53e8"
@@ -81368,13 +81375,14 @@ measured_at = "2026-10-22T08:35:58+00:00"
 ["GOLD.0x0052e1a0".binding_history.replacement]
 ["GOLD.0x0052e1c0"]
 size = 34
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0052e1c0.c"
 name = "fcn_0052e1c0"
 symbol = "_fcn_0052e1c0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0052e1c0".verification]
 source_hash = "656a6311151a85ba969cf26fcb1e623a92434e2814d511b367b3867142868e33"
@@ -83449,13 +83457,14 @@ measured_at = "2026-11-09T07:09:31+00:00"
 
 ["GOLD.0x0053f100"]
 size = 31
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0053f100.c"
 name = "fcn_0053f100"
 symbol = "_fcn_0053f100"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0053f100".verification]
 source_hash = "727028f7ac76bd9436b44eb23376c124d0981330bd0f33660915e1a90699c384"
@@ -97026,13 +97035,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005a8490".binding_history.replacement]
 ["GOLD.0x005a84e0"]
 size = 32
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_005a84e0.c"
 name = "fcn_005a84e0"
 symbol = "_fcn_005a84e0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x005a84e0".verification]
 source_hash = "67f5dab9b863cd6d47410f8d59334746286c2c420f00f2edc7fe5334e899941c"
@@ -97306,13 +97316,14 @@ measured_at = "2026-11-09T07:09:31+00:00"
 
 ["GOLD.0x005a8690"]
 size = 31
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_005a8690.c"
 name = "fcn_005a8690"
 symbol = "_fcn_005a8690"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x005a8690".verification]
 source_hash = "db444e3c79632cf1c288e909635b22ef3baad64c960fe34ec63596a32fabd098"
@@ -442783,9 +442794,10 @@ file = "src/Develop/Unassigned/GOLDTL.fcn_005fc0c8.c"
 symbol = "@fcn_005fc0c8@4"
 name = "fcn_005fc0c8"
 kind = "FUNCTION"
-updated_by = "fix-sizes"
-updated_at = "2026-11-03T06:58:34+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:35+00:00"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x005fc0c8".verification]
 source_hash = "2b700d5e1c097a9047b69b23dce98b3950f6012b542e7bbd965214ad1239287a"
@@ -443420,9 +443432,10 @@ file = "src/Develop/Unassigned/GOLDTL.fcn_0064d1df.c"
 symbol = "_fcn_0064d1df"
 name = "fcn_0064d1df"
 kind = "FUNCTION"
-updated_by = "fix-sizes"
-updated_at = "2026-11-03T06:58:17+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:35+00:00"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x0064d1df".verification]
 source_hash = "2bda62a547e69049c8abde8b33e0e85063b91eec8a6bd6275d66198b70733f90"
@@ -494759,13 +494772,14 @@ measured_at = "2026-10-22T23:09:30+00:00"
 ["GOLD.0x004788e0".binding_history.replacement]
 ["GOLD.0x0045da90"]
 size = 50
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0045da90.c"
 name = "fcn_0045da90"
 symbol = "_fcn_0045da90"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0045da90".verification]
 source_hash = "1b003117209563eff967aeb9e0fef2fc4e6371d1a5917eeeb35cff389ad4d741"
@@ -497392,13 +497406,14 @@ measured_at = "2026-10-22T08:35:53+00:00"
 ["GOLD.0x00458900".binding_history.replacement]
 ["GOLD.0x00411b70"]
 size = 63
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00411b70.c"
 name = "fcn_00411b70"
 symbol = "_fcn_00411b70"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00411b70".verification]
 source_hash = "145e1cbf48fc1e26b36cf85ccb27a6bb8a8047c01e56d01ed7d0e5686c48c8ec"
@@ -497483,13 +497498,14 @@ symbol = "_fcn_00411b70"
 kind = "FUNCTION"
 ["GOLD.0x0045cc80"]
 size = 63
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0045cc80.c"
 name = "fcn_0045cc80"
 symbol = "_fcn_0045cc80"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0045cc80".verification]
 source_hash = "a3c785b5d074ca745316412c60fc562471b41a5315eb7bd6c1cf7153faad1424"
@@ -498343,13 +498359,14 @@ measured_at = "2026-10-22T08:35:57+00:00"
 ["GOLD.0x005127b0".binding_history.replacement]
 ["GOLD.0x00476850"]
 size = 55
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00476850.c"
 name = "fcn_00476850"
 symbol = "_fcn_00476850"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00476850".verification]
 source_hash = "d6b931c9843413fb39f81c43adcda4d4ab7d4df445f06aa95442854ba1d0bbb4"
@@ -500270,14 +500287,15 @@ measured_at = "2026-10-22T20:57:39+00:00"
 ["GOLD.0x004cd650".binding_history.replacement]
 ["GOLD.0x004aca90"]
 size = 74
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 source = "naked"
 file = "src/Develop/Unassigned/GOLD.fcn_004aca90.c"
 name = "fcn_004aca90"
 symbol = "_fcn_004aca90"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004aca90".verification]
 source_hash = "b6572258438af3239cf0c5c5f59c60b4dc9e383659db72442dbff7cf5f9fe7c4"
@@ -501116,13 +501134,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x00479770".binding_history.replacement]
 ["GOLD.0x004177b0"]
 size = 79
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004177b0.c"
 name = "fcn_004177b0"
 symbol = "_fcn_004177b0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004177b0".verification]
 source_hash = "e0d3fb66c19b37cf98dc0be15bc1ec3dd0366e3966b9aa74492c1d0076b69014"
@@ -502724,13 +502743,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x0041a4aa".binding_history.replacement]
 ["GOLD.0x0041e670"]
 size = 82
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0041e670.c"
 name = "fcn_0041e670"
 symbol = "_fcn_0041e670"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0041e670".verification]
 source_hash = "d271e98359abb47a411c1a4a3d7d42ac85f1032a398c9cc7b1a5141664b98e08"
@@ -505010,13 +505030,14 @@ name = "xtoa"
 kind = "LIBRARY"
 ["GOLD.0x0045ef50"]
 size = 92
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0045ef50.c"
 name = "fcn_0045ef50"
 symbol = "_fcn_0045ef50"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0045ef50".verification]
 source_hash = "aa62ddd2b1d6560bfef569ec0c29d1223d1f7d5729b18c8f5d1504bf4bbac12b"
@@ -505574,13 +505595,14 @@ measured_at = "2026-10-23T14:15:09+00:00"
 ["GOLD.0x0041e0a0".binding_history.replacement]
 ["GOLD.0x004760a0"]
 size = 87
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004760a0.c"
 name = "fcn_004760a0"
 symbol = "_fcn_004760a0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004760a0".verification]
 source_hash = "9c246ec2dd751863b354302b16bb34c564121f9ce429f094fa5ef01af59128b2"
@@ -506356,13 +506378,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x00479b80".binding_history.replacement]
 ["GOLD.0x00404c20"]
 size = 94
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00404c20.c"
 name = "fcn_00404c20"
 symbol = "_fcn_00404c20"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00404c20".verification]
 source_hash = "4535676841488787a4cce49bef79f5aebc47216016c1d97159d1b31d5b54fa3b"
@@ -507520,13 +507543,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x0046cfc0".binding_history.replacement]
 ["GOLD.0x00475580"]
 size = 103
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00475580.c"
 name = "fcn_00475580"
 symbol = "_fcn_00475580"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00475580".verification]
 source_hash = "1d4382bc075a4c1d9bd81243e02d1713aa0c8ad82d4e0d9f978a44496ee5827a"
@@ -508222,13 +508246,14 @@ measured_at = "2026-10-22T08:35:53+00:00"
 ["GOLD.0x00442210".binding_history.replacement]
 ["GOLD.0x00410620"]
 size = 108
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00410620.c"
 name = "fcn_00410620"
 symbol = "_fcn_00410620"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00410620".verification]
 source_hash = "b39876aa281ec8c231a57d355fb14ebd17dd7d9d1a95a0ba7a787b0f1eda184c"
@@ -509376,13 +509401,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x0041d1c0".binding_history.replacement]
 ["GOLD.0x00448200"]
 size = 102
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00448200.c"
 name = "fcn_00448200"
 symbol = "_fcn_00448200"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00448200".verification]
 source_hash = "06deb2d06efb5e70ccb059cf3c6e519c9dd91b89aaf57d74a758ab087090b2d5"
@@ -509865,13 +509891,14 @@ measured_at = "2026-10-23T13:46:43+00:00"
 ["GOLD.0x005d0b20".binding_history.replacement]
 ["GOLD.0x00475b70"]
 size = 112
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00475b70.c"
 name = "fcn_00475b70"
 symbol = "_fcn_00475b70"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00475b70".verification]
 source_hash = "6414a52015b4f96f8e1da5a81cb00e2d7b8ad3299e2cbfb51a2e9fef118af8f0"
@@ -510128,13 +510155,14 @@ measured_at = "2026-10-23T13:47:31+00:00"
 ["GOLD.0x005d0c00".binding_history.replacement]
 ["GOLD.0x00474c90"]
 size = 100
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00474c90.c"
 name = "fcn_00474c90"
 symbol = "_fcn_00474c90"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00474c90".verification]
 source_hash = "f1a860858df1b36198865ab045d678f0e22c2036ded2b3f8ecb11b249cdb50d1"
@@ -513224,13 +513252,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x00491640".binding_history.replacement]
 ["GOLD.0x004756a0"]
 size = 123
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004756a0.c"
 name = "fcn_004756a0"
 symbol = "_fcn_004756a0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004756a0".verification]
 source_hash = "195095a4b0ae2275de295e7929c6e60277b066d085622de81ad8a45c5c34caeb"
@@ -513996,13 +514025,14 @@ measured_at = "2026-10-22T08:35:59+00:00"
 ["GOLD.0x00577f90".binding_history.replacement]
 ["GOLD.0x0043f270"]
 size = 130
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0043f270.c"
 name = "fcn_0043f270"
 symbol = "_fcn_0043f270"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0043f270".verification]
 source_hash = "b64cf50aab527c2f23cff4ef8ccdda6ea1b47b19c78abb71a275c8cfeda3a8e7"
@@ -514198,13 +514228,14 @@ measured_at = "2026-10-21T14:37:08+00:00"
 ["GOLD.0x0041f220".binding_history.replacement]
 ["GOLD.0x0046bc90"]
 size = 131
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0046bc90.c"
 name = "fcn_0046bc90"
 symbol = "_fcn_0046bc90"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0046bc90".verification]
 source_hash = "f110a2a0ba9146cc2aeb72457d821963c27b72f5f8f4a57a031a3a12e497a705"
@@ -515595,13 +515626,14 @@ measured_at = "2026-10-21T14:37:10+00:00"
 ["GOLD.0x004721d0".binding_history.replacement]
 ["GOLD.0x004758e0"]
 size = 143
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004758e0.c"
 name = "fcn_004758e0"
 symbol = "_fcn_004758e0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004758e0".verification]
 source_hash = "4105bfe702f3541465429451813f293a08424b2a1eba76883844172d1ba49890"
@@ -517984,13 +518016,14 @@ measured_at = "2026-10-22T08:35:58+00:00"
 ["GOLD.0x00530130".binding_history.replacement]
 ["GOLD.0x004fe140"]
 size = 145
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004fe140.c"
 name = "fcn_004fe140"
 symbol = "_fcn_004fe140"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004fe140".verification]
 source_hash = "7979841c1f3af6951110ae12c551652ec84d00d1792c59525ac28309e365c39a"
@@ -518358,13 +518391,14 @@ measured_at = "2026-10-22T08:35:51+00:00"
 ["GOLD.0x0040c440".binding_history.replacement]
 ["GOLD.0x00417650"]
 size = 154
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00417650.c"
 name = "fcn_00417650"
 symbol = "_fcn_00417650"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00417650".verification]
 source_hash = "f136354750c68cfd026b9efcd8e768b2e7d6b526817306bfe95ece67854c7dc5"
@@ -518926,13 +518960,14 @@ measured_at = "2026-10-23T15:34:14+00:00"
 ["GOLD.0x0056a9b0".binding_history.replacement]
 ["GOLD.0x0047d9d0"]
 size = 158
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0047d9d0.c"
 name = "fcn_0047d9d0"
 symbol = "_fcn_0047d9d0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0047d9d0".verification]
 source_hash = "869121120bbf01b36f3374b591b854eacf8bec7c7d06e3840a3c38e242bbe015"
@@ -522712,13 +522747,14 @@ measured_at = "2026-10-23T18:16:16+00:00"
 ["GOLD.0x004ec3d0".binding_history.replacement]
 ["GOLD.0x00402480"]
 size = 191
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00402480.c"
 name = "fcn_00402480"
 symbol = "_fcn_00402480"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00402480".verification]
 source_hash = "7bcb6ca2a16232349b253010df56a0f9854bdc63a7ba731e7eda7cb5476e3941"
@@ -522933,13 +522969,14 @@ measured_at = "2026-10-23T18:06:54+00:00"
 ["GOLD.0x0040c660".binding_history.replacement]
 ["GOLD.0x004796b0"]
 size = 178
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004796b0.c"
 name = "fcn_004796b0"
 symbol = "_fcn_004796b0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004796b0".verification]
 source_hash = "aa847060aed45abfe5437da25a771044a52874a550608090c0498eec089ee048"
@@ -523575,13 +523612,14 @@ measured_at = "2026-10-22T08:35:59+00:00"
 ["GOLD.0x00570970".binding_history.replacement]
 ["GOLD.0x0046ea00"]
 size = 182
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0046ea00.c"
 name = "fcn_0046ea00"
 symbol = "_fcn_0046ea00"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0046ea00".verification]
 source_hash = "fef41e6e41e5e64260cd2fa9851864f93beff0ca170da25f9795499072e1ae78"
@@ -524641,13 +524679,14 @@ name = "adj_fprem1"
 kind = "LIBRARY"
 ["GOLD.0x00455750"]
 size = 200
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00455750.c"
 name = "fcn_00455750"
 symbol = "_fcn_00455750"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00455750".verification]
 source_hash = "ad99f1c4379af4abe81580301c1d007c72943becf3a4a1ad854ec525a3f7ba98"
@@ -524859,13 +524898,14 @@ name = "tolower"
 kind = "LIBRARY"
 ["GOLD.0x00435740"]
 size = 203
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00435740.c"
 name = "fcn_00435740"
 symbol = "_fcn_00435740"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00435740".verification]
 source_hash = "7ecc729fe2c86b27e219376663ee7da7d1a1cca26e5afb3a5acd9bb6686e2cee"
@@ -525754,13 +525794,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x00412480".binding_history.replacement]
 ["GOLD.0x00413550"]
 size = 198
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00413550.c"
 name = "fcn_00413550"
 symbol = "_fcn_00413550"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00413550".verification]
 source_hash = "ca9fd15f28252d9c4a4d81472813eda09b507e613eb511ce2eb59eddd5565ff1"
@@ -526174,13 +526215,14 @@ measured_at = "2026-10-22T08:35:57+00:00"
 ["GOLD.0x00505e60".binding_history.replacement]
 ["GOLD.0x00458d90"]
 size = 193
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00458d90.c"
 name = "fcn_00458d90"
 symbol = "_fcn_00458d90"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00458d90".verification]
 source_hash = "047bbf4310244bf65580d100facd3aca401297b524d719ae237763743f4c10f9"
@@ -526611,13 +526653,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005d70f0".binding_history.replacement]
 ["GOLD.0x00475a90"]
 size = 212
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00475a90.c"
 name = "fcn_00475a90"
 symbol = "_fcn_00475a90"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00475a90".verification]
 source_hash = "82a7747caecce2c9a3b216709341df05bd2b6f8fe5c857c1bf840f2595261d3d"
@@ -528730,13 +528773,14 @@ measured_at = "2026-10-22T08:35:53+00:00"
 ["GOLD.0x0043f180".binding_history.replacement]
 ["GOLD.0x0043cc90"]
 size = 239
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0043cc90.c"
 name = "fcn_0043cc90"
 symbol = "_fcn_0043cc90"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0043cc90".verification]
 source_hash = "becb6bfb58ab0b2f624a77f50b1f4a63c54e5b2d098104c86c99060347d8808f"
@@ -528877,13 +528921,14 @@ measured_at = "2026-10-21T14:37:10+00:00"
 ["GOLD.0x004ce040".binding_history.replacement]
 ["GOLD.0x004730d0"]
 size = 227
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004730d0.c"
 name = "fcn_004730d0"
 symbol = "_fcn_004730d0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004730d0".verification]
 source_hash = "7e721a170701e880aeb5ac2ab03e976d72b243c5ec3aa6bf88d75eb608607fe0"
@@ -529482,13 +529527,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x004798e0".binding_history.replacement]
 ["GOLD.0x00458b10"]
 size = 229
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00458b10.c"
 name = "fcn_00458b10"
 symbol = "_fcn_00458b10"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00458b10".verification]
 source_hash = "c921585c00a555be86b9b63cd29c9b7c37b963f6d5e9d34ab07895204bb806a7"
@@ -531558,13 +531604,14 @@ measured_at = "2026-10-22T08:35:57+00:00"
 ["GOLD.0x004f4e20".binding_history.replacement]
 ["GOLD.0x00438e60"]
 size = 244
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00438e60.c"
 name = "fcn_00438e60"
 symbol = "_fcn_00438e60"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00438e60".verification]
 source_hash = "4fc364f852e62b64a1c900d44d2711ad7db622c3e8deb355c15f2ae94d0f153e"
@@ -532747,13 +532794,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005c0200".binding_history.replacement]
 ["GOLD.0x0040b2f0"]
 size = 264
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0040b2f0.c"
 name = "fcn_0040b2f0"
 symbol = "_fcn_0040b2f0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0040b2f0".verification]
 source_hash = "b0ee3ef5a10dc27ca2efac0adb9d113664bb1b7258d42633664b8a8acab4e72e"
@@ -532894,13 +532942,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005c0310".binding_history.replacement]
 ["GOLD.0x00473530"]
 size = 265
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00473530.c"
 name = "fcn_00473530"
 symbol = "_fcn_00473530"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00473530".verification]
 source_hash = "cbdc7720d638515b5ac20e1b1be242cdb9c51e03827a961d5de9d979399d140d"
@@ -533261,13 +533310,14 @@ measured_at = "2026-10-22T08:35:55+00:00"
 ["GOLD.0x004bc7c0".binding_history.replacement]
 ["GOLD.0x0042f7e0"]
 size = 270
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0042f7e0.c"
 name = "fcn_0042f7e0"
 symbol = "_fcn_0042f7e0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0042f7e0".verification]
 source_hash = "c535cca3e2ab4d73a58e5bc262508208324951271d56fbc90331e5fe50819a93"
@@ -536547,14 +536597,15 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005a79f0".binding_history.replacement]
 ["GOLD.0x0045fbb0"]
 size = 318
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 note = "Goal83 canonical native resource destructor contract is void(SCENE_RESOURCE*); native318-byte body remains unimplemented. Definition is an argument-aware void placeholder, not matched C. Inferred resource type/fields have stride0x80; no storage owner established. .scratch/goal83-resource-thunk/REPORT.md and Goal73 native evidence."
 file = "src/Develop/Unassigned/GOLD.fcn_0045fbb0.c"
 name = "fcn_0045fbb0"
 symbol = "_fcn_0045fbb0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0045fbb0".verification]
 source_hash = "d1a1d61a70af8d25124384f78245d94d315ded9d1bade11505c007358078b3ea"
@@ -536640,13 +536691,14 @@ symbol = "_fcn_0045fbb0"
 kind = "FUNCTION"
 ["GOLD.0x0045f160"]
 size = 314
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0045f160.c"
 name = "fcn_0045f160"
 symbol = "_fcn_0045f160"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0045f160".verification]
 source_hash = "4d23eb835261f201662de706c8331e03faeff9a790135b7f09570a0135489151"
@@ -538101,13 +538153,14 @@ measured_at = "2026-10-22T08:35:55+00:00"
 ["GOLD.0x004aa430".binding_history.replacement]
 ["GOLD.0x004539e0"]
 size = 334
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004539e0.c"
 name = "fcn_004539e0"
 symbol = "_fcn_004539e0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004539e0".verification]
 source_hash = "b5cea2e43979c740c7b761f5c3f2b978f8aefc5ffde489e206b5fb7bff5a4896"
@@ -538980,13 +539033,14 @@ measured_at = "2026-10-22T08:35:53+00:00"
 ["GOLD.0x0045fe00".binding_history.replacement]
 ["GOLD.0x00453ed0"]
 size = 342
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00453ed0.c"
 name = "fcn_00453ed0"
 symbol = "_fcn_00453ed0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00453ed0".verification]
 source_hash = "fdaae75b83f4dc3f7911e643fc54b6abd06cdeaaaab9fb732a589fc37863d19d"
@@ -539465,13 +539519,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x0058bb50".binding_history.replacement]
 ["GOLD.0x0043a000"]
 size = 343
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0043a000.c"
 name = "fcn_0043a000"
 symbol = "_fcn_0043a000"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0043a000".verification]
 source_hash = "7baf912c3097b38cf408fa8b48f203521a596a8da3c8a58dcba04bf7d6cdcd10"
@@ -540326,13 +540381,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x0046dd81".binding_history.replacement]
 ["GOLD.0x004f9020"]
 size = 357
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004f9020.c"
 name = "fcn_004f9020"
 symbol = "_fcn_004f9020"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004f9020".verification]
 source_hash = "6e00923f6f8b03f66b3d0e64b5061a66e317cf70d2cf12e08d8b99347163c62b"
@@ -540866,13 +540922,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x00420450".binding_history.replacement]
 ["GOLD.0x00439870"]
 size = 366
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00439870.c"
 name = "fcn_00439870"
 symbol = "_fcn_00439870"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00439870".verification]
 source_hash = "ba78101787b721aef6a758fa99750a27493fbc9b080db22c0ef421cad6e0d611"
@@ -542305,13 +542362,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x00427110".binding_history.replacement]
 ["GOLD.0x004731c0"]
 size = 384
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004731c0.c"
 name = "fcn_004731c0"
 symbol = "_fcn_004731c0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004731c0".verification]
 source_hash = "d396618ba441fe24139b87f9fa7b2fee28ee776937f054aebc41de5f390843e3"
@@ -542837,13 +542895,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005b2680".binding_history.replacement]
 ["GOLD.0x00473340"]
 size = 379
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00473340.c"
 name = "fcn_00473340"
 symbol = "_fcn_00473340"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00473340".verification]
 source_hash = "7809b607204e68ed2804e9528251a84f4b808ca5af841b9aeca45e914c1ef8f7"
@@ -544347,13 +544406,14 @@ measured_at = "2026-10-22T08:35:59+00:00"
 ["GOLD.0x00550910".binding_history.replacement]
 ["GOLD.0x00429ab0"]
 size = 396
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00429ab0.c"
 name = "fcn_00429ab0"
 symbol = "_fcn_00429ab0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00429ab0".verification]
 source_hash = "739305229c69c04cdce0c485cf85da4cf797b33b0c4177e40fdd27095a0a6ba2"
@@ -544841,13 +544901,14 @@ name = "setmbcp"
 kind = "LIBRARY"
 ["GOLD.0x0044aa10"]
 size = 414
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0044aa10.c"
 name = "fcn_0044aa10"
 symbol = "_fcn_0044aa10"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0044aa10".verification]
 source_hash = "33bae01dbd41977806f3e123487954c64b79f0af23d7517b0f5e8a5fcfae397f"
@@ -545208,13 +545269,14 @@ measured_at = "2026-10-22T08:35:57+00:00"
 ["GOLD.0x005056a0".binding_history.replacement]
 ["GOLD.0x00411960"]
 size = 407
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00411960.c"
 name = "fcn_00411960"
 symbol = "_fcn_00411960"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00411960".verification]
 source_hash = "f95fa71329b7c7127f62d4c4980075d79061151aafbf47e32ee0a9e95fd65c5f"
@@ -545712,13 +545774,14 @@ measured_at = "2026-10-22T08:35:56+00:00"
 ["GOLD.0x004dfdd0".binding_history.replacement]
 ["GOLD.0x0043e4d0"]
 size = 424
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0043e4d0.c"
 name = "fcn_0043e4d0"
 symbol = "_fcn_0043e4d0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0043e4d0".verification]
 source_hash = "f1b1cdee6fad8dbde5a439488d40129f307a2238470f62fad02254f19a561baf"
@@ -547643,13 +547706,14 @@ measured_at = "2026-10-22T08:35:58+00:00"
 ["GOLD.0x00532ae0".binding_history.replacement]
 ["GOLD.0x00430bd0"]
 size = 446
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00430bd0.c"
 name = "fcn_00430bd0"
 symbol = "_fcn_00430bd0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00430bd0".verification]
 source_hash = "1545912f014b330c7139ba0f9109f6cafb6dd578eb9f23a435e7215d6b8e5805"
@@ -548230,13 +548294,14 @@ measured_at = "2026-10-22T08:35:56+00:00"
 ["GOLD.0x004d7190".binding_history.replacement]
 ["GOLD.0x0052f390"]
 size = 452
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0052f390.c"
 name = "fcn_0052f390"
 symbol = "_fcn_0052f390"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0052f390".verification]
 source_hash = "01240e88843e154630bf4dca830141ef65996d96b63b8a1e8ba984c3314cd7e5"
@@ -548542,13 +548607,14 @@ measured_at = "2026-10-22T08:35:56+00:00"
 ["GOLD.0x004d0570".binding_history.replacement]
 ["GOLD.0x00508820"]
 size = 454
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00508820.c"
 name = "fcn_00508820"
 symbol = "_fcn_00508820"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00508820".verification]
 source_hash = "84760b6ea55a1010a68eb0ec8471c273668edc454141b1884572f38229d66358"
@@ -548634,13 +548700,14 @@ symbol = "_fcn_00508820"
 kind = "FUNCTION"
 ["GOLD.0x00413b30"]
 size = 451
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00413b30.c"
 name = "fcn_00413b30"
 symbol = "_fcn_00413b30"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00413b30".verification]
 source_hash = "5e98686809c0537f7d7d0486d7f0276ff897c05a810497523068a3099fc9d567"
@@ -549945,13 +550012,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005a7b30".binding_history.replacement]
 ["GOLD.0x00406c60"]
 size = 466
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00406c60.c"
 name = "fcn_00406c60"
 symbol = "_fcn_00406c60"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00406c60".verification]
 source_hash = "4a32868a011080efd32426d60dfcc4ecc82a8eb201c858221abea40857252dc7"
@@ -551641,13 +551709,14 @@ measured_at = "2026-10-22T08:35:56+00:00"
 ["GOLD.0x004e2e60".binding_history.replacement]
 ["GOLD.0x004473f0"]
 size = 502
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004473f0.c"
 name = "fcn_004473f0"
 symbol = "_fcn_004473f0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004473f0".verification]
 source_hash = "1b18f643bea420c5743a5d71f14e2f081cd4567311ef441106440d2345ec91fd"
@@ -552850,13 +552919,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x00420990".binding_history.replacement]
 ["GOLD.0x0042c9c0"]
 size = 498
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0042c9c0.c"
 name = "fcn_0042c9c0"
 symbol = "_fcn_0042c9c0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0042c9c0".verification]
 source_hash = "ccf843f6e3eb9b2eda80f993955037eaadd62f989bb780379050fe61e51283d5"
@@ -554430,13 +554500,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005c3af0".binding_history.replacement]
 ["GOLD.0x00426ba0"]
 size = 521
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00426ba0.c"
 name = "fcn_00426ba0"
 symbol = "_fcn_00426ba0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00426ba0".verification]
 source_hash = "0aee482c498cb89535a5af367200a1e0e9ad5446c3755d9878f8aa959782e591"
@@ -555492,13 +555563,14 @@ measured_at = "2026-10-22T08:35:59+00:00"
 ["GOLD.0x005723f0".binding_history.replacement]
 ["GOLD.0x004764e0"]
 size = 531
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004764e0.c"
 name = "fcn_004764e0"
 symbol = "_fcn_004764e0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004764e0".verification]
 source_hash = "54c03e28f7c74b1af88157575c9313c453a97868eb6437b27fd930a1a893bbad"
@@ -556700,13 +556772,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005d41d0".binding_history.replacement]
 ["GOLD.0x00446180"]
 size = 550
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00446180.c"
 name = "fcn_00446180"
 symbol = "_fcn_00446180"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00446180".verification]
 source_hash = "4ec110fecfdda77c043256d0fcea2132f8ca24f3d0b0f3cd940348d66238b37c"
@@ -558139,13 +558212,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x00490fb0".binding_history.replacement]
 ["GOLD.0x0047daa0"]
 size = 580
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0047daa0.c"
 name = "fcn_0047daa0"
 symbol = "_fcn_0047daa0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0047daa0".verification]
 source_hash = "873cf8c2b453864022824cd7008b04b50fb7b54443db235f009d270c17e1a723"
@@ -558973,13 +559047,14 @@ measured_at = "2026-10-22T08:35:55+00:00"
 ["GOLD.0x004c2510".binding_history.replacement]
 ["GOLD.0x00426950"]
 size = 588
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00426950.c"
 name = "fcn_00426950"
 symbol = "_fcn_00426950"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00426950".verification]
 source_hash = "e0d3fb18b583b6f45a58e1a714d27f9f5bb74819856c75adef222ef99a0b5fe3"
@@ -560283,13 +560358,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x004359f0".binding_history.replacement]
 ["GOLD.0x0046cb10"]
 size = 608
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0046cb10.c"
 name = "fcn_0046cb10"
 symbol = "_fcn_0046cb10"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0046cb10".verification]
 source_hash = "91b5e9432cdf900866bdeba2f93739295230ceff91459357c74c4b767a5048a8"
@@ -561062,13 +561138,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x00412800".binding_history.replacement]
 ["GOLD.0x00476890"]
 size = 612
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00476890.c"
 name = "fcn_00476890"
 symbol = "_fcn_00476890"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00476890".verification]
 source_hash = "7c07e7f210f91bc0a4c9e1dfce4ee7f47c316db4ac892807fcaf0f741a8465ae"
@@ -561877,13 +561954,14 @@ name = "crtCompareStringA"
 kind = "LIBRARY"
 ["GOLD.0x0043c7a0"]
 size = 637
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0043c7a0.c"
 name = "fcn_0043c7a0"
 symbol = "_fcn_0043c7a0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0043c7a0".verification]
 source_hash = "407e2de8a056c797c9c7879ee1bb900c0488853f6fe8aff9d0b56cdb63a3f88f"
@@ -562271,13 +562349,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x00428530".binding_history.replacement]
 ["GOLD.0x004fe570"]
 size = 625
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004fe570.c"
 name = "fcn_004fe570"
 symbol = "_fcn_004fe570"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004fe570".verification]
 source_hash = "21df5501acc76dccb50c6df74481122243919ac6b964467bb1ed74eb622ab7be"
@@ -562363,13 +562442,14 @@ symbol = "_fcn_004fe570"
 kind = "FUNCTION"
 ["GOLD.0x0046e700"]
 size = 640
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0046e700.c"
 name = "fcn_0046e700"
 symbol = "_fcn_0046e700"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0046e700".verification]
 source_hash = "e6efe0ebf31b8baff03f6d898ef698fc095d43ef6612af0490aba908847336e4"
@@ -563170,13 +563250,14 @@ measured_at = "2026-10-22T08:35:58+00:00"
 ["GOLD.0x00521440".binding_history.replacement]
 ["GOLD.0x0041c460"]
 size = 644
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0041c460.c"
 name = "fcn_0041c460"
 symbol = "_fcn_0041c460"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0041c460".verification]
 source_hash = "161c8fea1a4a0ecc9dbef057e84de98a2b3efce20226bfd0f77223d460b20db1"
@@ -564507,13 +564588,14 @@ measured_at = "2026-10-22T08:35:55+00:00"
 ["GOLD.0x004bb860".binding_history.replacement]
 ["GOLD.0x00424990"]
 size = 667
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00424990.c"
 name = "fcn_00424990"
 symbol = "_fcn_00424990"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00424990".verification]
 source_hash = "43508d0426be2a342dbd5383b7a96069c66a345c54eaf703d4d9cb8987f17355"
@@ -564735,13 +564817,14 @@ status = "RELOC"
 measured_at = "2026-11-09T07:09:30+00:00"
 ["GOLD.0x004f0ed0"]
 size = 671
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004f0ed0.c"
 name = "fcn_004f0ed0"
 symbol = "_fcn_004f0ed0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004f0ed0".verification]
 source_hash = "cf5b97ec4fcb991f87764e4f2b7909d79bc20f06f9b28f6276986bb3c7862f16"
@@ -566172,13 +566255,14 @@ measured_at = "2026-10-22T08:35:56+00:00"
 ["GOLD.0x004e5470".binding_history.replacement]
 ["GOLD.0x0047b630"]
 size = 699
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0047b630.c"
 name = "fcn_0047b630"
 symbol = "_fcn_0047b630"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0047b630".verification]
 source_hash = "6a5b68d928a8cfc01561427fae42b9e583982f430f2cb796abff8e578188c9c2"
@@ -566649,13 +566733,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x00493bd0".binding_history.replacement]
 ["GOLD.0x0043e200"]
 size = 705
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0043e200.c"
 name = "fcn_0043e200"
 symbol = "_fcn_0043e200"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0043e200".verification]
 source_hash = "6a0843c09d4d2e218f79df323641934fe2c7dceeac27474bb7ce99d3aa1bfd86"
@@ -568642,13 +568727,14 @@ name = "assert"
 kind = "LIBRARY"
 ["GOLD.0x0043dbc0"]
 size = 748
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0043dbc0.c"
 name = "fcn_0043dbc0"
 symbol = "_fcn_0043dbc0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0043dbc0".verification]
 source_hash = "0e1f67043a0022f93917536e0458af79358b115e72ff4bfae6f2701c625e93c4"
@@ -569339,13 +569425,14 @@ measured_at = "2026-10-21T14:37:10+00:00"
 ["GOLD.0x0049ab50".binding_history.replacement]
 ["GOLD.0x0047b340"]
 size = 741
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0047b340.c"
 name = "fcn_0047b340"
 symbol = "_fcn_0047b340"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0047b340".verification]
 source_hash = "bca32d042e27483b0bd570eeae128de9356c0d1124a9177fb5a7aa5e459aba22"
@@ -569659,13 +569746,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x0043b300".binding_history.replacement]
 ["GOLD.0x00453270"]
 size = 760
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00453270.c"
 name = "fcn_00453270"
 symbol = "_fcn_00453270"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00453270".verification]
 source_hash = "6922e02e6a4095935a92cb11b889ffcac181c8280941272d08f54480a8e21585"
@@ -569806,13 +569894,14 @@ measured_at = "2026-10-22T08:35:59+00:00"
 ["GOLD.0x005502c0".binding_history.replacement]
 ["GOLD.0x00576300"]
 size = 763
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00576300.c"
 name = "fcn_00576300"
 symbol = "_fcn_00576300"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00576300".verification]
 source_hash = "ea3a6a5b6b783f684f4bbc11a401ff86f2af95d96cfb122a3de6c759ff9fa2a0"
@@ -574575,13 +574664,14 @@ name = "inflate_fast"
 kind = "LIBRARY"
 ["GOLD.0x004ff550"]
 size = 866
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004ff550.c"
 name = "fcn_004ff550"
 symbol = "_fcn_004ff550"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004ff550".verification]
 source_hash = "b09e75f521d81b68671bcdece0111466c0a1f034a4835fea96845df655ddb4c2"
@@ -575299,13 +575389,14 @@ status = "STUB"
 measured_at = "2026-11-09T07:09:31+00:00"
 ["GOLD.0x0044ce40"]
 size = 882
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0044ce40.c"
 name = "fcn_0044ce40"
 symbol = "_fcn_0044ce40"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0044ce40".verification]
 source_hash = "5bebfd3516750e06ee8d2bc625ccb4b9198c84b9177a0bbde78e19e9a4bf1d86"
@@ -576271,13 +576362,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005b6c70".binding_history.replacement]
 ["GOLD.0x00449de0"]
 size = 898
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00449de0.c"
 name = "fcn_00449de0"
 symbol = "_fcn_00449de0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00449de0".verification]
 source_hash = "fcf556782135e49c9fe7da1bc97478f74ab80a5154d53be0b1e02b5caa136d5d"
@@ -576775,13 +576867,14 @@ measured_at = "2026-10-22T08:35:56+00:00"
 ["GOLD.0x004e67a0".binding_history.replacement]
 ["GOLD.0x004f4970"]
 size = 922
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004f4970.c"
 name = "fcn_004f4970"
 symbol = "_fcn_004f4970"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004f4970".verification]
 source_hash = "119741155218591869b0b799199e387b0267426bed28167c3e4438a7c3c8148a"
@@ -577472,13 +577565,14 @@ measured_at = "2026-10-22T08:35:55+00:00"
 ["GOLD.0x004b2ed0".binding_history.replacement]
 ["GOLD.0x0042b050"]
 size = 948
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0042b050.c"
 name = "fcn_0042b050"
 symbol = "_fcn_0042b050"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0042b050".verification]
 source_hash = "b3c8760dc1a81d96d664ef7258139014e62c446858672d7aadf4f99343a08ca6"
@@ -582280,13 +582374,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005b5b70".binding_history.replacement]
 ["GOLD.0x004d27a0"]
 size = 1115
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004d27a0.c"
 name = "fcn_004d27a0"
 symbol = "_fcn_004d27a0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004d27a0".verification]
 source_hash = "e534d581023ba3066e521da16aa3272b5011d6fa98075c3388572762b928ef1d"
@@ -582482,13 +582577,14 @@ measured_at = "2026-10-22T08:35:53+00:00"
 ["GOLD.0x0045dbf0".binding_history.replacement]
 ["GOLD.0x004ac440"]
 size = 1117
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004ac440.c"
 name = "fcn_004ac440"
 symbol = "_fcn_004ac440"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004ac440".verification]
 source_hash = "2470d3830f18209f5136b84f6a8f3d28b129cd2cd83f5fdd0af944ee945b4fc0"
@@ -583619,13 +583715,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x0042c4b0".binding_history.replacement]
 ["GOLD.0x00454060"]
 size = 1176
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00454060.c"
 name = "fcn_00454060"
 symbol = "_fcn_00454060"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00454060".verification]
 source_hash = "a2a8db48d1ecfce28ad87e59d898e63ce9f3bf965797f4bbb8c78d0b3fdce31e"
@@ -583766,13 +583863,14 @@ measured_at = "2026-10-22T08:35:57+00:00"
 ["GOLD.0x004fd120".binding_history.replacement]
 ["GOLD.0x0050dc30"]
 size = 1180
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0050dc30.c"
 name = "fcn_0050dc30"
 symbol = "_fcn_0050dc30"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0050dc30".verification]
 source_hash = "e5c217374759254520cad792b645558ef613ebbec581ab4236a554fb8f35a910"
@@ -588100,13 +588198,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005c8790".binding_history.replacement]
 ["GOLD.0x004478e0"]
 size = 1400
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004478e0.c"
 name = "fcn_004478e0"
 symbol = "_fcn_004478e0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004478e0".verification]
 source_hash = "0dfc8cc6a63c1675e9b4344d4242f51b969444cf0a53ba985cbe3ab6e68eb463"
@@ -588522,14 +588621,15 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x00473c00".binding_history.replacement]
 ["GOLD.0x0044be60"]
 size = 1417
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 note = "Complete Gold scene-loader C body1428/native1417, SIZE_MISMATCH. Corrected clone helper to one pointer; earlier node push is deferred cleanup, not argument2. Native ret0x44c3e8 excludes7 alignment NOPs. Catalog13 VALIDATED,44 CONFLICT,6 UNRESOLVED from63 COFF slots; actual instructions diverge, so masked operands are not proof. Pointer-global and primitive reader contracts remain open. .scratch/goal83-gold-scene/contracts-root/"
 file = "src/Develop/Unassigned/GOLD.fcn_0044be60.c"
 name = "fcn_0044be60"
 symbol = "_fcn_0044be60"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0044be60".verification]
 source_hash = "203351365faae1dd75dc85684751cb5b01df5b9e6d583f1526cb3bfadb2a77e4"
@@ -588834,12 +588934,13 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x005cb640".binding_history.replacement]
 ["GOLD.0x004626a0"]
 size = 1440
-updated_by = "rehome"
-updated_at = "2026-10-23T16:19:37+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "references/zlib/deflate.c"
 symbol = "_longest_match"
 name = "longest_match"
 kind = "LIBRARY"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004626a0".verification]
 source_hash = "a36e271e17625f31ec0c3769ac469b0ebfc391ae4a32898d83512b8b515b23ed"
@@ -591014,13 +591115,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x00474e70".binding_history.replacement]
 ["GOLD.0x0040f960"]
 size = 1623
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0040f960.c"
 name = "fcn_0040f960"
 symbol = "_fcn_0040f960"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0040f960".verification]
 source_hash = "22c0a22d2f867cba57b08ef67e5538dd7c59bf5e3d80c5dabd1292a5f0ca31a5"
@@ -594002,13 +594104,14 @@ measured_at = "2026-10-22T08:35:59+00:00"
 ["GOLD.0x00575b20".binding_history.replacement]
 ["GOLD.0x00416980"]
 size = 1986
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00416980.c"
 name = "fcn_00416980"
 symbol = "_fcn_00416980"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00416980".verification]
 source_hash = "9dad56985aa5ea1c4dab504201b9d5d587ff11ad1bd5a5c12c2f2c13ac166f1a"
@@ -596459,13 +596562,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x00480e60".binding_history.replacement]
 ["GOLD.0x004741e0"]
 size = 2358
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004741e0.c"
 name = "fcn_004741e0"
 symbol = "_fcn_004741e0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x004741e0".verification]
 source_hash = "745a98f0471eb2957be021f9e193c0f962778c6b2608083bf4ca5e9b2f79e82c"
@@ -598154,13 +598258,14 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x0058ffe0".binding_history.replacement]
 ["GOLD.0x00514400"]
 size = 2752
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00514400.c"
 name = "fcn_00514400"
 symbol = "_fcn_00514400"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00514400".verification]
 source_hash = "a04f52889f6ae5ec7152db921cfdef76c817d043ccb9fa666d9227648eefeb27"
@@ -599126,13 +599231,14 @@ measured_at = "2026-10-22T08:35:53+00:00"
 ["GOLD.0x0044d330".binding_history.replacement]
 ["GOLD.0x005309d0"]
 size = 3100
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_005309d0.c"
 name = "fcn_005309d0"
 symbol = "_fcn_005309d0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x005309d0".verification]
 source_hash = "bef1cde8f4fca273c3b21b5810615943d368657eebfcdf104f9824bfa809cafe"
@@ -600950,13 +601056,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x0048bc70".binding_history.replacement]
 ["GOLD.0x00418e90"]
 size = 5017
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00418e90.c"
 name = "fcn_00418e90"
 symbol = "_fcn_00418e90"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00418e90".verification]
 source_hash = "e5c818ea03ad012b2c269f68a2e43115c7f3b0d64df410fe9bbbc2f3c89547f1"
@@ -605140,10 +605247,6 @@ evidence = "Inference: very likely original inline assembly at the reviewed nati
 source_hash = "631fb7d6cd24d8ff44b280cc7af7f73d73764287aa2b046c0ee7bf4bbe87edec"
 evidence = "Inference: very likely original inline assembly at the reviewed native SERVER core sites 0x10017611. Positive structural evidence is the fixed EBX count, LEA(3*EDI)&3 alignment and three REP passes across distinct native contexts. Native building-table instances in both clients spill literal 0x3f0 and reload EBX before the core; that operand homing supports the family inference. Goal108 freshly checks 209 distinct target/site pairs, including these sites; the building-table spill/reload is independently rechecked in both clients. Compiler controls and stock-library exclusions only corroborate that structural inference. Neither an unsuccessful C search nor byte agreement establishes provenance or impossibility of a C spelling. No original macro name, authorship, whole-function verdict, provider, layout or storage owner is claimed. Native checks and historical receipt details: .scratch/goal108-assembly-provenance/native-cores.json and before.json; docs/assembly-audit.md and docs/msvc6-allocator.md."
 
-[source.definitions."src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00405080.c".fcn_004050c0.GOLD]
-source_hash = "22f9d079add9c27bf93d90288429bd3b868e67ecc1ee4d2263da4692b237af35"
-evidence = "Native Gold 0x004047a0 contains mov ecx,0x65; xor eax,eax; rep stosd at both clearing sites, confirmed at 0x004047c9 and 0x004047fe."
-
 [source.definitions."src/Develop/Units/vfs/GOLDTL.SaveBMP24.c".fill0.GOLDTL]
 source_hash = "a96490e1058a711b6647278271f4d5385cd8816a4a35d68f4f6b795fab9927c1"
 evidence = "Inference: very likely original inline assembly in native GOLDTL parent SaveBMP24 at 0x401ed0; complete 26-byte fill cores at 0x401eee, 0x401f1d. Positive structural evidence is the fixed EBX count, LEA(3*EDI)&3 alignment and three REP passes across native contexts, with operand homing directly checked in both client building-table instances. This family inference is independent of failed C searches; compiler controls and archive exclusions only corroborate it. Goal108 independently checks these 2 cores and rejects a one-byte slide at each. The existing source block is preserved; helper names and original macro spelling/authorship are not recovered. This receipt supplies no full-function byte verdict, raw-link placement, provider or storage-owner proof. Evidence: .scratch/goal108-assembly-provenance/warning-core-checks.json and native-cores.json; docs/assembly-audit.md and docs/msvc6-allocator.md."
@@ -605314,7 +605417,7 @@ source_hash = "275aea1012f84e561d3c7bd6dddf27307206cfe78f3d0a8ad7d0955418e5694c"
 evidence = "Inference: very likely original inline assembly at the reviewed native GOLD core sites 0x543b0d. Positive structural evidence is the fixed EBX count, LEA(3*EDI)&3 alignment and three REP passes across distinct native contexts. Native building-table instances in both clients spill literal 0x3f0 and reload EBX before the core; that operand homing supports the family inference. Goal108 freshly checks 209 distinct target/site pairs, including these sites; the building-table spill/reload is independently rechecked in both clients. Compiler controls and stock-library exclusions only corroborate that structural inference. Neither an unsuccessful C search nor byte agreement establishes provenance or impossibility of a C spelling. No original macro name, authorship, whole-function verdict, provider, layout or storage owner is claimed. Native checks and historical receipt details: .scratch/goal108-assembly-provenance/native-cores.json and before.json; docs/assembly-audit.md and docs/msvc6-allocator.md."
 
 [source.definitions."src/Develop/Units/m_alloc/GOLDTL.fcn_00580d50.c".fcn_00580d50.GOLD]
-source_hash = "b1dc4693a6d50bff3099ce5030f60d41ee35bddb582c73e334116662a6d716b9"
+source_hash = "3394380b69b0b368086b3face2f03e583578e29aec954dcbe9d68e63ce3cf782"
 evidence = "Inference: very likely original inline assembly at the reviewed native GOLD core sites 0x5787a2. Positive structural evidence is the fixed EBX count, LEA(3*EDI)&3 alignment and three REP passes across distinct native contexts. Native building-table instances in both clients spill literal 0x3f0 and reload EBX before the core; that operand homing supports the family inference. Goal108 freshly checks 209 distinct target/site pairs, including these sites; the building-table spill/reload is independently rechecked in both clients. Compiler controls and stock-library exclusions only corroborate that structural inference. Neither an unsuccessful C search nor byte agreement establishes provenance or impossibility of a C spelling. No original macro name, authorship, whole-function verdict, provider, layout or storage owner is claimed. Native checks and historical receipt details: .scratch/goal108-assembly-provenance/native-cores.json and before.json; docs/assembly-audit.md and docs/msvc6-allocator.md."
 
 [source.definitions."src/Develop/Units/m_alloc/GOLDTL.fcn_00580e20.c".fcn_00580e20.GOLD]
@@ -605590,7 +605693,7 @@ source_hash = "e6652cbd04955f15518c3445986c2baf94bd2d4d6b76fd63483baaa008301b61"
 evidence = "Whole-function naked assembly: the reference extent is an ABI shape MSVC 6 C mode cannot express; bytes transcribed instruction for instruction."
 
 [source.definitions."src/Develop/Units/m_alloc/GOLDTL.fcn_0043c640.c".fcn_0043c640.GOLDTL]
-source_hash = "a9a6bb3cbf97b091d9a84a06be9c43c0b04bc099f69cdbacd6e6bf3d7f113397"
+source_hash = "536468efcf2256f0849a653ea571666213df0c60f9f1b65f3d4d6b4f144a18f5"
 evidence = "five align-up fill blocks at 0x43c797, 0x43c95f, 0x43cad7, 0x43cc68 and 0x43d360 are hand-written: three local MSVC 6 C1.DLL copies contain no lea ecx,[edi+edi*2]; and ecx,3 pattern (8d 0c 7f 83 e1 03) and no align-up memcpy, the sp5 C1 align-up memset opens neg ecx; and ecx,3 (f7 d9 83 e1 03) where the reference opens with the three-byte lea, and seventeen mock translation units and seven real-source spellings all produce the two-stage form or de-inline to calls"
 
 [source.definitions."src/Develop/DieGildeAddOn/game/GOLDTL.ai_RegisterDomizilMethods.c".ai_RegisterDomizilMethods.GOLD]
@@ -610740,13 +610843,14 @@ measured_at = "2026-10-22T08:35:54+00:00"
 ["GOLD.0x0046d759".binding_history.replacement]
 ["GOLD.0x0046e980"]
 size = 113
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0046e980.c"
 name = "fcn_0046e980"
 symbol = "_fcn_0046e980"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0046e980".verification]
 source_hash = "d7d8c4d8b8cce4bb4018d1f10b904693195327b708eea2af0e71e3ecc331a5d0"
@@ -611738,13 +611842,14 @@ measured_at = "2026-10-22T08:35:58+00:00"
 ["GOLD.0x00529ff0".binding_history.replacement]
 ["GOLD.0x0052fbb0"]
 size = 133
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:57+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0052fbb0.c"
 name = "fcn_0052fbb0"
 symbol = "_fcn_0052fbb0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0052fbb0".verification]
 source_hash = "46edfc2fc961756737272d715446d5150e3ea5e0af0da2aa1f7bf8562e7ee6b4"
@@ -612632,13 +612737,14 @@ measured_at = "2026-10-22T08:35:52+00:00"
 ["GOLD.0x00420c90".binding_history.replacement]
 ["GOLD.0x0040b8a0"]
 size = 360
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_0040b8a0.c"
 name = "fcn_0040b8a0"
 symbol = "_fcn_0040b8a0"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x0040b8a0".verification]
 source_hash = "6e3ad9f804ef053c14f6be23a125c1d33f221b835670e1b45728682f495dde37"
@@ -612723,13 +612829,14 @@ symbol = "_fcn_0040b8a0"
 kind = "FUNCTION"
 ["GOLD.0x00410220"]
 size = 382
-updated_by = "verify"
-updated_at = "2026-11-08T09:03:56+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:16+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_00410220.c"
 name = "fcn_00410220"
 symbol = "_fcn_00410220"
 kind = "FUNCTION"
 status = "STUB"
+blocker = "Application code — pending per-function decompilation"
 
 ["GOLD.0x00410220".verification]
 source_hash = "1cf4cf0d81bb5565635f8674195f483fc5b4d692996e181c0f989ea40195990e"
@@ -636221,9 +636328,10 @@ file = "src/Develop/Unassigned/fcn_005efd86.c"
 symbol = "_fcn_005efd86"
 name = "fcn_005efd86"
 kind = "FUNCTION"
-updated_by = "fix-sizes"
-updated_at = "2026-11-03T06:57:35+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:35+00:00"
 status = "STUB"
+blocker = "Short body or unknown size — pending native review and decompilation"
 
 ["GOLDTL.0x005efd86".verification]
 source_hash = "3897e8b34a84db7af0fa2ae0a38dc2cede6798ec74234ae7562acff8229524f8"
@@ -642487,8 +642595,9 @@ file = "references/zlib/deflate.c"
 symbol = "_deflate_slow"
 name = "deflate_slow"
 kind = "LIBRARY"
-updated_by = "match"
-updated_at = "2026-10-30T10:36:20+00:00"
+updated_by = "document-unmatched"
+updated_at = "2026-11-09T07:33:35+00:00"
+blocker = "Short body or unknown size — pending native review and decompilation"
 
 ["GOLDTL.0x005e6840"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_005e6840.c"

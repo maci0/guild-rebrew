@@ -167,7 +167,16 @@ APIs update the owning fragment and put new records in the main TOML.
 TOML is the default backend. Experimental project-wide SQLite is selected with
 `rebrew metadata migrate sqlite` (preview with `--dry-run`); switch back with
 `rebrew metadata migrate toml`. All managed reads and writes use the storage API;
-project configuration stays in `rebrew-project.toml`.
+project configuration stays in `rebrew-project.toml`. PostgreSQL uses `backend = "pgsql"`
+with required `[metadata.pgsql]` fields `dsn` and `project`; install `rebrew[pgsql]`
+and system libpq. Configure those fields before `rebrew metadata migrate pgsql`
+to import existing metadata. PostgreSQL backups use `pg_dump`/`pg_restore`.
+For replication, use `[metadata] read_backends = ["sqlite", "toml"]` and
+`write_backends = ["sqlite", "toml"]` instead of `backend`. Reads fall back only
+on unavailability; writes use a durable `.rebrew/metadata-journal.toml` and
+per-backend replication receipts. Back up those files. Recovered writers catch
+up on the next write or `rebrew metadata reconcile`; `--dry-run` previews.
+Independent changes conflict rather than being overwritten by wall-clock order.
 `source = "naked"`, STRUCT/CALLERS information and support file purposes are
 metadata-only. Old inline blocks and earlier metadata formats are rejected;
 ordinary readers have no compatibility parser or legacy fallback. Use
@@ -352,7 +361,8 @@ watch loops or publish to external services only when requested.
 ## Operand evidence and project bindings
 
 Set `check_known_bindings = true` in the selected `[targets.<name>]` table to
-reject contradictory resolved DIR32 bindings in test/verify/cross-import.
+reject contradictory resolved DIR32 bindings in test/verify and
+`rebrew source import-related`.
 Inspect `relocation_bindings`: unresolved names remain unresolved, and explicit
 IAT policy stays separate. This is stronger than tolerant masked agreement and
 does not prove every operand or the selected raw-link provider. Stored verify
