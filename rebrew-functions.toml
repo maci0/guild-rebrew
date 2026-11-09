@@ -461779,12 +461779,11 @@ symbol = "_fcn_00420bf0"
 name = "fcn_00420bf0"
 kind = "FUNCTION"
 updated_by = "test"
-updated_at = "2026-10-29T14:21:49+00:00"
-status = "NEAR_MATCHING"
-blocker = "Application code — pending per-function decompilation"
+updated_at = "2026-11-09T11:43:26+00:00"
+status = "RELOC"
 
 ["GOLDTL.0x00420bf0".verification]
-source_hash = "3e697b32a922233800e8b80400026493c95539e041b5aade6a5d9e49701ad60d"
+source_hash = "be998c185dfe3e5c02db97883d8da5f497be341d66b53875629fe3903ed32b40"
 reference_hash = "bde62de7a6f29d82f93a0e10ce1bc36bbfd90cde595e3b0d6a9b40b213a735c5"
 reference_size = "302"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -461795,10 +461794,10 @@ module = "GOLDTL"
 va = "0x420bf0"
 context_hash = ""
 defines = "[]"
-input_hash = "c2f87a0e38ea84732d3b8c611aa02ccc50ddfdbc065b6701f6ea8cc45092ec24"
-writer = "verify"
-status = "NEAR_MATCHING"
-measured_at = "2026-11-09T07:19:57+00:00"
+input_hash = "0f0348de3772039a371c75868ee29ef8940e5bc33b0532faca8b6d561853c59b"
+status = "RELOC"
+writer = "test"
+measured_at = "2026-11-09T11:43:26+00:00"
 
 [["GOLDTL.0x00420bf0".status_history]]
 old_status = "STUB"
@@ -461822,6 +461821,12 @@ updated_by = "verify"
 old_status = "SIZE_MISMATCH"
 new_status = "NEAR_MATCHING"
 changed_at = "2026-10-29T14:21:49.854514+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x00420bf0".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "RELOC"
+changed_at = "2026-11-09T11:43:26.585856+00:00"
 updated_by = "test"
 ["GOLDTL.0x0048ddd0"]
 size = 444
