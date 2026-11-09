@@ -641885,15 +641885,34 @@ changed_at = "2026-10-25T15:56:39.326344+00:00"
 updated_by = "test"
 ["GOLDTL.0x005ec915"]
 size = 35
+updated_by = "rehome"
+updated_at = "2026-11-09T09:10:37+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?D3DXVec3LengthSq@@YAMPBUD3DXVECTOR3@@@Z"
+name = "D3DXVec3LengthSq_YAMPBUD3DXVECTOR3_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005ec915".status_history]]
+old_status = "STUB"
+new_status = "EXACT"
+changed_at = "2026-10-25T16:03:46.280831+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005ec915".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?D3DXVec3LengthSq@@YAMPBUD3DXVECTOR3@@@Z; the candidates are one symbol defined in several objects with identical bytes; rebrew library match with the corrected masked comparison, 2026-11-09"
+changed_at = "2026-11-09T09:10:37.484778+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005ec915".binding_history.previous]
+size = 35
 file = "src/Develop/Unassigned/fcn_005ec915.c"
 symbol = "_fcn_005ec915"
 name = "fcn_005ec915"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:57+00:00"
 status = "EXACT"
 
-["GOLDTL.0x005ec915".verification]
+["GOLDTL.0x005ec915".binding_history.previous.verification]
 source_hash = "308d1f8a219f16cfa2529bcad1b3a62dd325c41000f3becb00d5c79d39f414d6"
 reference_hash = "d1f94853dc3c014ee20998a0ad771ae9fba1cc90cc961fb255ca42b26094a3f2"
 reference_size = "35"
@@ -641910,11 +641929,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x005ec915".status_history]]
-old_status = "STUB"
-new_status = "EXACT"
-changed_at = "2026-10-25T16:03:46.280831+00:00"
-updated_by = "test"
+["GOLDTL.0x005ec915".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?D3DXVec3LengthSq@@YAMPBUD3DXVECTOR3@@@Z"
+name = "D3DXVec3LengthSq_YAMPBUD3DXVECTOR3_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x005ec938"]
 size = 6
 file = "src/Develop/Unassigned/fcn_005ec938.c"
