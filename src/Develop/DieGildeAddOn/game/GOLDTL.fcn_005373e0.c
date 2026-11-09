@@ -525,7 +525,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 	if (i == 0) {
 		if ((g_774654 == 0 && g_7e2700 == 0 && g_fb5744 != 0 && g_774960 == 0) ||
 			(g_14cbca0 == -1 && (unsigned short) g_7f4c04 >= 0x17 && *(volatile int *)&g_774960 == 0)) {
-			if ((char) g_7747b0 >= 0) {
+			if (!((g_7747b0 & 0x80))) {
 				g_774960 = 1;
 				fcn_0042df30(g_538060, 1);
 				g_7e46ac |= 0x100000;
