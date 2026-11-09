@@ -30,13 +30,15 @@ void __cdecl main_RundenBeginn(void)
 	char bufF[512];
 	char bufG[512];
 	char bufH[512];
-	char disp[512];
+	char disp[544];
 	char* p;
 	char* slot;
+	char* slot2;
 	int n;
 	int i;
 	int v5;
 	int v18;
+	int tmp;
 
 	bufA[0] = *(char*) 0x6b5c60;
 	for (i = 1; i < 0x100; i++)
@@ -44,19 +46,20 @@ void __cdecl main_RundenBeginn(void)
 	fcn_00420bf0();
 	fcn_00420b70();
 	fcn_0064d41a(bufA, (char*) 0x6a42d0, *(int*) 0x774950);
-	slot = (char*) 0x7f4ca0;
+	slot2 = (char*) 0x7f4ca2;
 	do {
-		if (*(short*) slot == -1)
+		if (*(unsigned short*) (slot2 - 2) == 0xffff)
 			goto next;
-		if (*(unsigned char*) (slot + 2) < 1 || *(unsigned char*) (slot + 2) > 8)
+		slot = slot2 - 2;
+		if (*(unsigned char*) slot2 < 1 || *(unsigned char*) slot2 > 8)
 			goto next;
 		if (*(int*) 0x14cbca0 != -1) {
 			if (fcn_0047dca0(slot) == 0)
 				goto next;
-			if (*(int*) 0x14cbca0 != -1 && *(unsigned char*) (slot + 2) == 7)
+			if (*(int*) 0x14cbca0 != -1 && *(unsigned char*) slot2 == 7)
 				goto next;
 		}
-		if (*(unsigned char*) (slot + 2) == 6 || *(unsigned char*) (slot + 2) == 5) {
+		if (*(unsigned char*) slot2 == 6 || *(unsigned char*) slot2 == 5) {
 			v5 = gm_GetEntityTableEntry(slot);
 			n = 0;
 			do {
@@ -82,7 +85,7 @@ void __cdecl main_RundenBeginn(void)
 			if (p)
 				*p -= 1;
 		}
-		v5 = fcn_005c6270(slot, 0x2c4);
+		v5 = fcn_005c6270(slot, 0x2c4) != 0;
 		if (*(int*) (slot + 0x1cc) & 0x100000) {
 			if (v5 == 0) {
 				io_FormatTextBuffer(bufC, 0x2054, 0xf18);
@@ -122,9 +125,10 @@ void __cdecl main_RundenBeginn(void)
 			}
 			p = (char*) gm_FindNextFilteredEntity();
 		}
-		fcn_004c6ae0(*(int*) (slot + 4),
-			*(int*) (disp + 0x31) + 4 + fcn_00546fb0(*(unsigned short*) slot));
+		tmp = *(int*) (disp + 0x31) + 4;
+		tmp += fcn_00546fb0(*(unsigned short*) slot);
+		fcn_004c6ae0(*(int*) (slot + 4), tmp);
 next:
-		slot += 0x21c;
-	} while ((int) slot <= (int) 0x85a09f);
+		slot2 += 0x21c;
+	} while ((int) slot2 < (int) 0x85a0a2);
 }

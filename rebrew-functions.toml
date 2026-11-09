@@ -435122,13 +435122,12 @@ name = "main_RundenBeginn"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.main_RundenBeginn.c"
 symbol = "_main_RundenBeginn"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:26+00:00"
-status = "SIZE_MISMATCH"
-blocker = "Application code — pending per-function decompilation"
+updated_by = "test"
+updated_at = "2026-11-09T19:35:30+00:00"
+status = "RELOC"
 
 ["GOLDTL.0x0053fc80".verification]
-source_hash = "1ddafdf734b6279c5b2a349a886835fbaf76ced9f7a577fc8b0bdc07706f9b84"
+source_hash = "0c00599f623261fb4c8acbc73d7b55f43e28f9e862b1d1ec04fe52b5a3796a27"
 reference_hash = "4e2893e10ec4b04b986cf6c15e973f424df50709ec44e99ff8fcb418249e0709"
 reference_size = "916"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -435139,15 +435138,21 @@ module = "GOLDTL"
 va = "0x53fc80"
 context_hash = ""
 defines = "[]"
-input_hash = "60ce82bc77312a3b0805b173c356e921269333786af5d3bd244758e563d568dd"
-writer = "verify"
-status = "SIZE_MISMATCH"
-measured_at = "2026-11-09T07:20:00+00:00"
+input_hash = "93ec93219659aa82a61c08a2ab9740a2cf275a5872cce926b62c5a77532f6d0a"
+status = "RELOC"
+writer = "test"
+measured_at = "2026-11-09T19:35:30+00:00"
 
 [["GOLDTL.0x0053fc80".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-19T18:28:34.254054+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0053fc80".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "RELOC"
+changed_at = "2026-11-09T19:35:30.760124+00:00"
 updated_by = "test"
 ["GOLDTL.0x005462a0"]
 size = 252
