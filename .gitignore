@@ -114,4 +114,5 @@ compile_commands.json
 /rebrew-data.toml.lock
 /rebrew-source.toml.lock
 /rebrew-types.toml.lock
+/rebrew-libraries.toml.lock
 /rebrew-project.toml.lock
