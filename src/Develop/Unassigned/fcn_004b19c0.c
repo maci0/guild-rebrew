@@ -2,10 +2,15 @@
 
 #include "client_types.h"
 
+#pragma pack(2)
 typedef struct
 {
-	short v[7];
+	int a;
+	short b;
+	int c;
+	int d;
 } stamp14;
+#pragma pack()
 // SIZE 0xe
 
 extern pos14_7f4c00 g_7f4c00;
@@ -19,34 +24,34 @@ int __cdecl fcn_004b19c0(void)
 {
 	char msg[0xf8];
 	stamp14 stamp;
-	int mode;
 	char* rec;
 	int n;
 	int sent;
+	int id;
 
-	n = 0;
-	sent = 0;
 	stamp = *(stamp14*) &g_7f4c00;
-	mode = 0xc;
-	stamp.v[2] = (short) mode;
-	stamp.v[3] = 0;
-	stamp.v[4] = 0;
+	stamp.b = 0xc;
+	stamp.c = 0;
+	sent = 0;
+	n = 0;
 	rec = (char*) 0x7f4ca4;
-	while (sent < 8 && (int) rec < 0x85a0a4) {
+	do {
+		if (sent >= 8) {
+			break;
+		}
 		if (fcn_004ae210(n) != 0) {
 			memset(msg, 0, sizeof(msg));
+			id = *(int*) rec;
+			*(int*) (msg + 8) = id;
+			*(int*) (msg + 0xc) = id;
 			msg[4] = 0x54;
-			*(int*) (msg + 8) = *(int*) rec;
-			*(int*) (msg + 0xc) = *(int*) rec;
-			*(stamp14*) (msg + 0x28) = stamp;
-			*(int*) (msg + 0x2e) = 0;
-			*(short*) (msg + 0x34) = g_7f4c0c;
 			msg[0x36] = 9;
+			*(stamp14*) (msg + 0x28) = stamp;
 			fcn_004c5530(msg);
 			sent++;
 		}
 		n++;
 		rec += 0x21c;
-	}
+	} while ((int) rec < 0x85a0a4);
 	return 1;
 }
