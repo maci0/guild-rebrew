@@ -444682,16 +444682,41 @@ name = "SetIndices_DXCrackFVF_QAEXPAXK_Z"
 kind = "LIBRARY"
 ["GOLDTL.0x005fe153"]
 size = 95
+updated_by = "rehome"
+updated_at = "2026-11-10T10:30:53+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?Optimize@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPAK0PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z"
+name = "Optimize_GXHalfEdgePMesh_G_00_0PPPP_UAGJKPAK0PAPAUID3DXBuffer_PAPAUID3DXMesh_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005fe153".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-20T06:32:52.217596+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005fe153".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T19:21:21.853309+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005fe153".binding_history]]
+action = "rebind"
+reason = "bytes match both d3dx8.lib GXHalfEdgePMesh Optimize instantiations (createmesh.obj); the G instance is selected because the reference vtable at 0x666748 holds this VA at slot 31 and 0x00603705, uniquely matched by rebrew library match as Trim of the G instantiation, at slot 37; .scratch/vtable_ctx.py, 2026-11-10"
+changed_at = "2026-11-10T10:30:53.894343+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005fe153".binding_history.previous]
+size = 95
 file = "src/Develop/Unassigned/GOLDTL.fcn_005fe153.c"
 symbol = "_fcn_005fe153@24"
 name = "fcn_005fe153"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 blocker = "Application code — pending per-function decompilation"
 
-["GOLDTL.0x005fe153".verification]
+["GOLDTL.0x005fe153".binding_history.previous.verification]
 source_hash = "069a341d3eb56bf75a114d3dc47565d6b74d1eb236255aa7787104bda6bd16ac"
 reference_hash = "4baa7a27d3f6f1c43ba33cc251f4e2d653320e43b052a28e9ad1ad7728b0d9da"
 reference_size = "95"
@@ -444708,17 +444733,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x005fe153".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-20T06:32:52.217596+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x005fe153".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T19:21:21.853309+00:00"
-updated_by = "test"
+["GOLDTL.0x005fe153".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?Optimize@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPAK0PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z"
+name = "Optimize_GXHalfEdgePMesh_G_00_0PPPP_UAGJKPAK0PAPAUID3DXBuffer_PAPAUID3DXMesh_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x0064e168"]
 size = 9
 updated_by = "rehome"
@@ -444787,16 +444806,41 @@ measured_at = "2026-10-25T06:09:26+00:00"
 ["GOLDTL.0x0064e168".binding_history.replacement]
 ["GOLDTL.0x005fecdb"]
 size = 95
+updated_by = "rehome"
+updated_at = "2026-11-10T10:30:02+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?Optimize@?$GXHalfEdgePMesh@I$0A@$0?0@@UAGJKPAK0PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z"
+name = "Optimize_GXHalfEdgePMesh_I_0A_0_0_UAGJKPAK0PAPAUID3DXBuffer_PAPAUID3DXMesh_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005fecdb".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-20T06:39:50.989235+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005fecdb".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T19:21:47.069979+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005fecdb".binding_history]]
+action = "rebind"
+reason = "bytes match both d3dx8.lib GXHalfEdgePMesh Optimize instantiations (createmesh.obj); the I instance is selected because the reference vtable at 0x6667e8 holds this VA at slot 31 and 0x0060481e, uniquely matched as Trim of the I instantiation, at slot 37; .scratch/vtable_ctx.py, 2026-11-10"
+changed_at = "2026-11-10T10:30:02.715063+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005fecdb".binding_history.previous]
+size = 95
 file = "src/Develop/Unassigned/GOLDTL.fcn_005fecdb.c"
 symbol = "_fcn_005fecdb@24"
 name = "fcn_005fecdb"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 blocker = "Application code — pending per-function decompilation"
 
-["GOLDTL.0x005fecdb".verification]
+["GOLDTL.0x005fecdb".binding_history.previous.verification]
 source_hash = "9a05f7a42d8fea1afd83481c72990af69d544d30246c26182e5ee94e452c9a97"
 reference_hash = "4baa7a27d3f6f1c43ba33cc251f4e2d653320e43b052a28e9ad1ad7728b0d9da"
 reference_size = "95"
@@ -444813,17 +444857,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x005fecdb".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-20T06:39:50.989235+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x005fecdb".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T19:21:47.069979+00:00"
-updated_by = "test"
+["GOLDTL.0x005fecdb".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?Optimize@?$GXHalfEdgePMesh@I$0A@$0?0@@UAGJKPAK0PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z"
+name = "Optimize_GXHalfEdgePMesh_I_0A_0_0_UAGJKPAK0PAPAUID3DXBuffer_PAPAUID3DXMesh_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x00406120"]
 size = 87
 updated_by = "rename"
