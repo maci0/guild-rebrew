@@ -1,10 +1,12 @@
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
+#include "client_types.h"
+
+extern Sample_99ec20 g_99ec20[16];
+extern Cell_99ef80 g_99ef80[9][8];
 
 /* ADDRESS: GOLDTL 0x005246e0 */
 unsigned int __cdecl fcn_005246e0(unsigned int stream)
 {
-	char* p;
-	char* q;
 	int i;
 	int j;
 	int value;
@@ -62,19 +64,17 @@ unsigned int __cdecl fcn_005246e0(unsigned int stream)
 		return 0;
 	if (!ls_ReadVfsDataChecked((void*) 0x99f5c0, 4, 1, (void*) stream))
 		return 0;
-	p = (char*) 0x99ec24;
-	while ((int) p < 0x99ed64) {
-		if (!ls_ReadVfsDataChecked(p - 4, 4, 1, (void*) stream))
+	for (i = 0; i < 16; i++) {
+		if (!ls_ReadVfsDataChecked(&g_99ec20[i].a, 4, 1, (void*) stream))
 			return 0;
-		if (!ls_ReadVfsDataChecked(p, 4, 1, (void*) stream))
+		if (!ls_ReadVfsDataChecked(&g_99ec20[i].b, 4, 1, (void*) stream))
 			return 0;
-		if (!ls_ReadVfsDataChecked(p + 4, 4, 1, (void*) stream))
+		if (!ls_ReadVfsDataChecked(&g_99ec20[i].c, 4, 1, (void*) stream))
 			return 0;
-		if (!ls_ReadVfsDataChecked(p + 8, 4, 1, (void*) stream))
+		if (!ls_ReadVfsDataChecked(&g_99ec20[i].d, 4, 1, (void*) stream))
 			return 0;
-		if (!ls_ReadVfsDataChecked(p + 0x0c, 4, 1, (void*) stream))
+		if (!ls_ReadVfsDataChecked(&g_99ec20[i].e, 4, 1, (void*) stream))
 			return 0;
-		p += 0x14;
 	}
 	if (!ls_ReadVfsDataChecked((void*) 0x99f6a0, 0x44, 1, (void*) stream))
 		return 0;
@@ -86,21 +86,17 @@ unsigned int __cdecl fcn_005246e0(unsigned int stream)
 		return 0;
 	if (!ls_ReadVfsDataChecked((void*) 0x99f7b0, 0x44, 1, (void*) stream))
 		return 0;
-	p = (char*) 0x99ef82;
-	while ((int) p < 0x99f582) {
-		q = p;
+	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
-			if (!ls_ReadVfsDataChecked(q - 2, 2, 1, (void*) stream))
+			if (!ls_ReadVfsDataChecked(&g_99ef80[i][j].demand, 2, 1, (void*) stream))
 				return 0;
-			if (!ls_ReadVfsDataChecked(q, 2, 1, (void*) stream))
+			if (!ls_ReadVfsDataChecked(&g_99ef80[i][j].supply, 2, 1, (void*) stream))
 				return 0;
-			if (!ls_ReadVfsDataChecked(q + 2, 1, 1, (void*) stream))
+			if (!ls_ReadVfsDataChecked(&g_99ef80[i][j].pad4[0], 1, 1, (void*) stream))
 				return 0;
-			if (!ls_ReadVfsDataChecked(q + 6, 4, 1, (void*) stream))
+			if (!ls_ReadVfsDataChecked(&g_99ef80[i][j].pad4[4], 4, 1, (void*) stream))
 				return 0;
-			q += 0x18;
 		}
-		p += 0xc0;
 	}
 	return 1;
 }

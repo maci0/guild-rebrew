@@ -1,13 +1,15 @@
 unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 
+#include "client_types.h"
+
+extern Sample_99ec20 g_99ec20[16];
+extern Cell_99ef80 g_99ef80[9][8];
+
 /* ADDRESS: GOLDTL 0x005208e0 */
 int __cdecl fcn_005208e0(char* fp)
 {
-	char* p;
-	char* q;
-	char* e;
-	char* s;
 	int i;
+	int r;
 
 	if (vfs_fwrite((void*) 0x99f5e0, 4, 1, fp) <= 0) {
 		return 0;
@@ -87,26 +89,23 @@ int __cdecl fcn_005208e0(char* fp)
 	if (vfs_fwrite((void*) 0x99f5c0, 4, 1, fp) <= 0) {
 		return 0;
 	}
-	p = (char*) 0x99ec24;
-	do {
-		if (vfs_fwrite(p - 4, 4, 1, fp) <= 0) {
+	for (i = 0; i < 16; i++) {
+		if (vfs_fwrite(&g_99ec20[i].a, 4, 1, fp) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(p, 4, 1, fp) <= 0) {
+		if (vfs_fwrite(&g_99ec20[i].b, 4, 1, fp) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(p + 4, 4, 1, fp) <= 0) {
+		if (vfs_fwrite(&g_99ec20[i].c, 4, 1, fp) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(p + 8, 4, 1, fp) <= 0) {
+		if (vfs_fwrite(&g_99ec20[i].d, 4, 1, fp) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(p + 0xc, 4, 1, fp) <= 0) {
+		if (vfs_fwrite(&g_99ec20[i].e, 4, 1, fp) <= 0) {
 			return 0;
 		}
-		e = p + 0x14;
-		p = e;
-	} while ((int) e < 0x99ed64);
+	}
 	if (vfs_fwrite((void*) 0x99f6a0, 0x44, 1, fp) <= 0) {
 		return 0;
 	}
@@ -122,29 +121,21 @@ int __cdecl fcn_005208e0(char* fp)
 	if (vfs_fwrite((void*) 0x99f7b0, 0x44, 1, fp) <= 0) {
 		return 0;
 	}
-	p = (char*) 0x99ef82;
-	do {
-		i = 0;
-		q = p;
-		do {
-			if (vfs_fwrite(q - 2, 2, 1, fp) <= 0) {
+	for (r = 0; r < 8; r++) {
+		for (i = 0; i < 8; i++) {
+			if (vfs_fwrite(&g_99ef80[r][i].demand, 2, 1, fp) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite(q, 2, 1, fp) <= 0) {
+			if (vfs_fwrite(&g_99ef80[r][i].supply, 2, 1, fp) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite(q + 2, 1, 1, fp) <= 0) {
+			if (vfs_fwrite(&g_99ef80[r][i].pad4[0], 1, 1, fp) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite(q + 6, 4, 1, fp) <= 0) {
+			if (vfs_fwrite(&g_99ef80[r][i].pad4[4], 4, 1, fp) <= 0) {
 				return 0;
 			}
-			i++;
-			s = q + 0x18;
-			q = s;
-		} while (i < 8);
-		e = p + 0xc0;
-		p = e;
-	} while ((int) e < 0x99f582);
+		}
+	}
 	return 1;
 }
