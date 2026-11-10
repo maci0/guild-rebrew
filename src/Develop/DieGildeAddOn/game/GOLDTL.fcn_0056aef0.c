@@ -67,7 +67,7 @@ void __cdecl fcn_0056aef0(char* a1)
 	switch (*(int*)(a1 + 0x70)) {
 	case -2:
 	case -1:
-		h = (char*)gm_StartFilteredEntitySearch(*(int*)(a1 + 0xb0), 1, 1);
+		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xb0));
 		if (h != 0) {
 			q = (char*)gm_SetupEntityQuery((unsigned char*)h);
 		}
@@ -89,7 +89,7 @@ void __cdecl fcn_0056aef0(char* a1)
 		return;
 
 	case 0:
-		h = (char*)gm_StartFilteredEntitySearch(*(int*)(a1 + 0xac), 1, 1);
+		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xac));
 		if (h == 0) {
 			*(int*)(a1 + 0x70) = -1;
 			return;
@@ -113,7 +113,7 @@ void __cdecl fcn_0056aef0(char* a1)
 
 	case 1:
 		v = 1;
-		h = (char*)gm_StartFilteredEntitySearch(*(int*)(a1 + 0xac), 1, 1);
+		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xac));
 		if (h == 0) {
 			*(int*)(a1 + 0x70) = -1;
 			return;
@@ -157,7 +157,7 @@ void __cdecl fcn_0056aef0(char* a1)
 		}
 		t = t / k;
 		d = ((double)t > 1.0) ? 1.0 : (double)t;
-		h = (char*)gm_StartFilteredEntitySearch(*(int*)(a1 + 0xac), 1, 1);
+		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xac));
 		if (h == 0) {
 			*(int*)(a1 + 0x70) = -1;
 			return;
@@ -176,7 +176,7 @@ void __cdecl fcn_0056aef0(char* a1)
 		return;
 
 	case 2:
-		h = (char*)gm_StartFilteredEntitySearch(*(int*)(a1 + 0xb0), 1, 1);
+		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xb0));
 		if (h == 0) {
 			*(int*)(a1 + 0x70) = -1;
 			return;
@@ -209,7 +209,7 @@ void __cdecl fcn_0056aef0(char* a1)
 		if (t > 42) {
 			t = 42;
 		}
-		h2 = (char*)gm_StartFilteredEntitySearch(*(int*)(a1 + 0xac), 1, 1);
+		h2 = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xac));
 		if (h2 == 0) {
 			*(int*)(a1 + 0x70) = -1;
 			return;

@@ -63,7 +63,7 @@ void __cdecl fcn_00576c90(char* e)
 			*(int*) (e + 0x84) = fcn_004c5620(6, e);
 			return;
 		}
-		r = gm_StartFilteredEntitySearch(*(int*) (e + 0xac), 1, 1);
+		r = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 		if (r != 0) {
 			*(int*) (e + 0xcc) = fcn_004c5da0(*(int*) (p + 4), *(int*) (r + 1), -1, 0, 1, (char*) 0x6a7e18);
 			*(int*) (e + 0x84) = fcn_004c5620(1, e);
@@ -85,7 +85,7 @@ void __cdecl fcn_00576c90(char* e)
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 4, 0);
 			return;
 		}
-		if (gm_StartFilteredEntitySearch(*(int*) (e + 0xac), 1, 1) != 0) {
+		if (gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac)) != 0) {
 			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 1, 0, 0);
 			*(int*) (e + 0x84) = fcn_004c5620(3, e);
@@ -100,7 +100,7 @@ void __cdecl fcn_00576c90(char* e)
 			goto minus_one;
 		}
 		q = gm_LookupEntityRecordById(*(int*) (e + 0xb4));
-		r = gm_StartFilteredEntitySearch(*(int*) (e + 0xb0), 1, 1);
+		r = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 		if (h != 0 && q != 0 && r != 0) {
 			switch (*(int*) (e + 0xbc)) {
 			case 1:
