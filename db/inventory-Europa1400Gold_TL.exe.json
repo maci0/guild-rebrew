@@ -91672,8 +91672,17 @@
   },
   {
     "va": 5932704,
-    "size": 1424,
-    "name": "fcn.005a86a0"
+    "size": 1418,
+    "name": "fcn.005a86a0",
+    "extent_history": [
+      {
+        "old_size": 1424,
+        "new_size": 1418,
+        "reason": "the inventory extent of 0x005a86a0 included six 0x90 alignment bytes at 0x005a8c2a..0x005a8c2f after the switch index table that ends the function; rebrew binary asm show, reported by the brief 195 agent, 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T15:27:49.118672+00:00"
+      }
+    ]
   },
   {
     "va": 5934128,

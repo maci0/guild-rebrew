@@ -482135,13 +482135,13 @@ measured_at = "2026-10-23T09:43:41+00:00"
 
 ["GOLDTL.0x00615e99".binding_history.replacement]
 ["GOLDTL.0x005a86a0"]
-size = 1424
+size = 1418
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005a86a0.c"
 symbol = "_fcn_005a86a0"
 name = "fcn_005a86a0"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:36:39+00:00"
+updated_by = "fix-sizes"
+updated_at = "2026-11-10T15:28:02+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
