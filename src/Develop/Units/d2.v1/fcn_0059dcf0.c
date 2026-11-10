@@ -1,3 +1,5 @@
+#include "client_types.h"
+
 typedef struct {
 	char pad_00[4];
 	unsigned char v04;
@@ -5,10 +7,7 @@ typedef struct {
 	int v08;
 	int v0c;
 	char pad_10[0x18];
-	int v28;
-	int v2c;
-	int v30;
-	unsigned short v34;
+	pos14_7f4c00 v28;
 	unsigned char v36;
 	char pad_37[0x21];
 	int v58;
@@ -19,10 +18,7 @@ typedef struct {
 
 extern void* g_7e4260[];
 extern int g_7f4ca4[];
-extern int g_7f4c00;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern pos14_7f4c00 g_7f4c00;
 
 int __cdecl fcn_00525fb0(void*);
 void __cdecl fcn_0052a0c0(void*, int);
@@ -32,6 +28,7 @@ void __cdecl fcn_004c35f0(void);
 void __cdecl fcn_005305a0(void);
 void __cdecl fcn_0052a2d0(void);
 
+extern char g_7746cc[];
 /* ADDRESS: GOLDTL 0x0059dcf0 */
 void __cdecl fcn_0059dcf0(void* a)
 {
@@ -59,10 +56,7 @@ void __cdecl fcn_0059dcf0(void* a)
 		s.v08 = g_7f4ca4[idx * 0x87];
 		s.v0c = *(int*) ((char*) a + 1);
 		s.v28 = g_7f4c00;
-		s.v30 = g_7f4c08;
-		s.v2c = g_7f4c04;
-		q = *(void**) 0x7746cc;
-		s.v34 = g_7f4c0c;
+		q = *(void**) g_7746cc;
 		s.v58 = *(int*) ((char*) e + 4);
 		s.v70 = (q != 0 && *(unsigned short*) q != 0xfd) ? *(int*) ((char*) q + 2) : -1;
 		fcn_004c5530(&s);
