@@ -83,8 +83,8 @@ int __cdecl fcn_0049a880(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				if (r != 0) {
 					*out1 = m1;
 					*out2 = m2;
-					return r;
 				}
+				return r;
 			}
 		}
 	}
