@@ -49,8 +49,7 @@ Open, in order:
    differ from the TL function at the same address). Placeholder bindings done by hand for
    `fcn_00402a00`, `fcn_00442be0`, `fcn_004e6bd0` and `fcn_00504e70`. The upstream tool gaps are
    written in its `docs/IDEAS-GUILD.md` (2026-11-08 entries, committed locally in that checkout as `5d4ca98a`, not pushed; that checkout is ahead 1 and behind 1 on origin).
-2. Next step for the link: replace stubs with recovered code or reviewed data rows, then compare
-   the images with `rebrew verify --whole-binary --built` (see [client builds](../stubs/README.md)).
+2. GoldTL image comparison (2026-11-10, `build/consolidation-baseline-pp/Europa1400Gold_TL.exe`, rebrew 6.31.0, dry runs): whole-binary exports, imports, relocations, headers and layout match; file bytes, sections (`.text` 2,560,380 vs 2,491,370, `.rdata` 46,382 vs 76,722, `.data` 17,822,628 vs 15,766,564) and resources differ. Text placement: 43 of 5,168 functions at their reference VA, 5,125 misplaced; the raw-link pass finds 5 functions whose linked bytes equal the reference out of 3,789 candidates. Data: 167 of 270 comparable rows match, 408 displaced. Next: replace stubs with recovered code or reviewed data rows, then repeat `rebrew verify --whole-binary --text --raw-link --built` (see [client builds](../stubs/README.md)); run the promoting raw-link pass only while no agent edits sources, since it records statuses from the working tree.
 3. Stock zlib code is attributed as library, not renamed as game code: 22 zlib rows were already
    `LIBRARY` rows, and 28 loose zlib functions (plus seven Gold twin rows) were retired and bound to the vendored sources
    with `rebrew library bind-source` (2026-11-08; each vendored row matches the original bytes).
