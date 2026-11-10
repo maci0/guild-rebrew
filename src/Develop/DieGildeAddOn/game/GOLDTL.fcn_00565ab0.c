@@ -160,20 +160,20 @@ void __cdecl fcn_00565ab0(char* ev)
 											int first = *(int*) rec2;
 
 											memset(pkt, 0, 0xf8);
-											*(int*) (pkt + 0x28) = g_7f4c00.a;
-											*(int*) (pkt + 0x2c) = g_7f4c00.b;
 											pkt[4] = 0x28;
-											*(int*) (pkt + 0x30) = g_7f4c00.c;
-											*(int*) (pkt + 0x14) = 0;
-											*(short*) (pkt + 0x34) = g_7f4c00.d;
-											*(int*) (pkt + 0x64) = first;
 											*(int*) (pkt + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (ev + 8) * 0x21c);
-											*(int*) (pkt + 0x10) = 1;
-											pkt[0x36] = 1;
 											id = *(int*) (v4 + 1);
 											*(int*) (pkt + 0x0c) = id;
+											*(int*) (pkt + 0x10) = 1;
+											*(int*) (pkt + 0x14) = 0;
+											*(int*) (pkt + 0x28) = g_7f4c00.a;
+											*(int*) (pkt + 0x2c) = g_7f4c00.b;
+											*(int*) (pkt + 0x30) = g_7f4c00.c;
+											*(short*) (pkt + 0x34) = g_7f4c00.d;
+											pkt[0x36] = 1;
 											*(int*) (pkt + 0x58) = id;
 											*(int*) (pkt + 0x5c) = *(int*) (ev + 0xb0);
+											*(int*) (pkt + 0x64) = first;
 											fcn_004c5530((int) pkt);
 										}
 										break;
