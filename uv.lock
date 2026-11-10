@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.15"
 resolution-markers = [
     "python_full_version >= '3.16'",
@@ -496,8 +496,8 @@ requires-dist = [
     { name = "isort", marker = "extra == 'dev'", specifier = ">=9.0.2" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=2.4.1" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.2.0" },
-    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.30.0/rebrew-6.30.0-py3-none-any.whl" },
-    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.30.0/rebrew-6.30.0-py3-none-any.whl" },
+    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.31.0/rebrew-6.31.0-py3-none-any.whl" },
+    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.31.0/rebrew-6.31.0-py3-none-any.whl" },
     { name = "recoverage", marker = "extra == 'dashboard'", url = "https://github.com/maci0/recoverage/releases/download/v8.8.2/recoverage-8.8.2-py3-none-any.whl" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.17.3" },
 ]
@@ -1270,8 +1270,8 @@ wheels = [
 
 [[package]]
 name = "rebrew"
-version = "6.30.0"
-source = { url = "https://github.com/maci0/rebrew/releases/download/v6.30.0/rebrew-6.30.0-py3-none-any.whl" }
+version = "6.31.0"
+source = { url = "https://github.com/maci0/rebrew/releases/download/v6.31.0/rebrew-6.31.0-py3-none-any.whl" }
 dependencies = [
     { name = "capstone" },
     { name = "click" },
@@ -1284,7 +1284,7 @@ dependencies = [
     { name = "python-flirt", version = "0.10.2+relumea.1", source = { url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1-cp315-cp315-manylinux_2_28_aarch64.whl" }, marker = "python_full_version < '3.16' and implementation_name == 'cpython' and platform_machine == 'aarch64' and sys_platform == 'linux'" },
     { name = "python-flirt", version = "0.10.2+relumea.1", source = { url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1-cp315-cp315-manylinux_2_28_x86_64.whl" }, marker = "python_full_version < '3.16' and implementation_name == 'cpython' and platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "python-flirt", version = "0.10.2+relumea.1", source = { url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1-cp315-cp315-win_amd64.whl" }, marker = "python_full_version < '3.16' and implementation_name == 'cpython' and platform_machine == 'AMD64' and sys_platform == 'win32'" },
-    { name = "python-flirt", version = "0.10.2+relumea.1", source = { url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz" }, marker = "(python_full_version >= '3.16' and platform_machine == 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.16' and platform_machine == 'x86_64' and sys_platform == 'linux') or (python_full_version >= '3.16' and sys_platform == 'darwin') or (python_full_version >= '3.16' and sys_platform == 'win32') or (implementation_name != 'cpython' and platform_machine == 'aarch64' and sys_platform == 'linux') or (implementation_name != 'cpython' and platform_machine == 'x86_64' and sys_platform == 'linux') or (implementation_name != 'cpython' and sys_platform == 'darwin') or (implementation_name != 'cpython' and sys_platform == 'win32') or (platform_machine != 'aarch64' and platform_machine != 'x86_64' and sys_platform == 'linux') or (platform_machine != 'arm64' and sys_platform == 'darwin') or (platform_machine != 'AMD64' and sys_platform == 'win32') or (sys_platform != 'darwin' and sys_platform != 'linux' and sys_platform != 'win32')" },
+    { name = "python-flirt", version = "0.10.2+relumea.1", source = { url = "https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz" }, marker = "python_full_version >= '3.16' or implementation_name != 'cpython' or (platform_machine != 'AMD64' and platform_machine != 'aarch64' and platform_machine != 'arm64' and platform_machine != 'x86_64') or (platform_machine == 'AMD64' and sys_platform == 'darwin') or (platform_machine == 'aarch64' and sys_platform == 'darwin') or (platform_machine == 'x86_64' and sys_platform == 'darwin') or (platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'arm64' and sys_platform == 'linux') or (platform_machine == 'aarch64' and sys_platform == 'win32') or (platform_machine == 'arm64' and sys_platform == 'win32') or (platform_machine == 'x86_64' and sys_platform == 'win32') or (sys_platform != 'darwin' and sys_platform != 'linux' and sys_platform != 'win32')" },
     { name = "pyyaml" },
     { name = "rich" },
     { name = "tomlkit" },
@@ -1294,7 +1294,7 @@ dependencies = [
     { name = "zstandard" },
 ]
 wheels = [
-    { url = "https://github.com/maci0/rebrew/releases/download/v6.30.0/rebrew-6.30.0-py3-none-any.whl", hash = "sha256:121334fbdc3ad112abdf6f4188916803f397dffd9c3d51fb1523191acbed7781" },
+    { url = "https://github.com/maci0/rebrew/releases/download/v6.31.0/rebrew-6.31.0-py3-none-any.whl", hash = "sha256:bb60f7c0b273e923ea2e6039980ed47a9e4ba7ad4501da88a4aa14000ab38309" },
 ]
 
 [package.optional-dependencies]
