@@ -6,6 +6,7 @@
 int __cdecl fcn_00500e20(char*);
 int __cdecl fcn_004c27f0(void);
 int __cdecl fcn_004c2820(int);
+extern char g_772d58[];
 void* __cdecl fcn_0041fd70(char*, int);
 unsigned short __cdecl gm_RandomMod(int);
 
@@ -100,12 +101,12 @@ void __cdecl fcn_004c2430(void)
 		default:
 			break;
 		}
-		if (strlen((char*) 0x772d58) == 0) {
+		if (strlen(g_772d58) == 0) {
 			break;
 		}
-	} while (strcmp((char*) 0x772d58, dst) == 0);
+	} while (strcmp(g_772d58, dst) == 0);
 	*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) + 0x1e);
-	*(char*) 0x772d58 = 0;
+	g_772d58[0] = 0;
 	*(char*) (0x68822a + idx) = 1;
 	g_772d1c = g_772d20 = (Chan_14cc460*) fcn_0041fd70(dst, 0);
 	return;
