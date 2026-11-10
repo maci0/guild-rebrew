@@ -624510,13 +624510,8 @@ updated_at = "2026-10-24T13:24:08+00:00"
 
 ["GOLDTL.0x00460a40"]
 size = 13
-file = "src/Develop/Unassigned/fcn_00460a40.c"
-symbol = "_fcn_00460a40"
-name = "fcn_00460a40"
-kind = "FUNCTION"
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:42+00:00"
-status = "EXACT"
+updated_at = "2026-11-10T10:44:55+00:00"
 
 ["GOLDTL.0x00460a40".verification]
 source_hash = "264212cecc9ef89870fcd36cc5cf9fdb7eaf8ce02b51c6676b5226e90d335885"
@@ -624534,6 +624529,39 @@ input_hash = "426d5de0a47e56254517bdc1d23582d18fad2e1feb66a686e035d5c9d3f29970"
 writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:19:59+00:00"
+
+[["GOLDTL.0x00460a40".binding_history]]
+action = "retire"
+reason = "0x00460a40 is zlib inflate_blocks_sync_point (references/zlib/infblock.c:394): it lies between inflate_blocks_free 0x004609c0 and inflate_codes_new 0x00460a50, and its only reference is the tail jump at 0x00461c8a in inflateSyncPoint 0x00461c70; the standalone fcn_00460a40.c claim duplicated library code"
+changed_at = "2026-11-10T10:44:55.031830+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00460a40".binding_history.previous]
+size = 13
+file = "src/Develop/Unassigned/fcn_00460a40.c"
+symbol = "_fcn_00460a40"
+name = "fcn_00460a40"
+kind = "FUNCTION"
+status = "EXACT"
+
+["GOLDTL.0x00460a40".binding_history.previous.verification]
+source_hash = "264212cecc9ef89870fcd36cc5cf9fdb7eaf8ce02b51c6676b5226e90d335885"
+reference_hash = "a5f7a1ac1a5c198f2711d6be3981a4657c68e4a46050851db29a09d07c6e0777"
+reference_size = "13"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x460a40"
+context_hash = ""
+defines = "[]"
+input_hash = "426d5de0a47e56254517bdc1d23582d18fad2e1feb66a686e035d5c9d3f29970"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:19:59+00:00"
+
+["GOLDTL.0x00460a40".binding_history.replacement]
 ["GOLDTL.0x0045dea0"]
 size = 114
 updated_by = "rehome"
