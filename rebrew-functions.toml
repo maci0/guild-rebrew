@@ -444552,16 +444552,42 @@ name = "AddHEPoint_GXSimplifyMesh_I_0A_0_0_AAEXPAEIG_Z"
 kind = "LIBRARY"
 ["GOLDTL.0x005f022d"]
 size = 28
+updated_by = "rehome"
+updated_at = "2026-11-10T10:26:42+00:00"
+cflags = "/O1"
+file = "src/library_d3dx8.h"
+symbol = "?SetNormal@DXCrackFVF@@QAEXPAXPAUD3DXVECTOR3@@@Z"
+name = "SetNormal_DXCrackFVF_QAEXPAXPAUD3DXVECTOR3_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005f022d".status_history]]
+old_status = "STUB"
+new_status = "SIZE_MISMATCH"
+changed_at = "2026-10-20T06:30:26.092255+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005f022d".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "EXACT"
+changed_at = "2026-10-25T08:17:04.122889+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005f022d".binding_history]]
+action = "rebind"
+reason = "byte match against d3dx8.lib ?SetNormal@DXCrackFVF@@QAEXPAXPAUD3DXVECTOR3@@@Z, an inline COMDAT emitted identically in createmesh.obj and loadutil.obj; provider object unresolved; rebrew library match --resolve-callees, 2026-11-10"
+changed_at = "2026-11-10T10:26:42.651779+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f022d".binding_history.previous]
+size = 28
 file = "src/Develop/Unassigned/GOLDTL.fcn_005f022d.c"
 symbol = "@fcn_005f022d@16"
 name = "fcn_005f022d"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 cflags = "/O1"
 
-["GOLDTL.0x005f022d".verification]
+["GOLDTL.0x005f022d".binding_history.previous.verification]
 source_hash = "d1c1981b115cb35feaf26a6cec353d8954bb560bfacebb3d8c427dba0389ec60"
 reference_hash = "c35b323ad7e248b61d59c71dc7a1827302ec95cfd0bb297d0bf078c015f310bf"
 reference_size = "28"
@@ -444578,17 +444604,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x005f022d".status_history]]
-old_status = "STUB"
-new_status = "SIZE_MISMATCH"
-changed_at = "2026-10-20T06:30:26.092255+00:00"
-updated_by = "test"
-
-[["GOLDTL.0x005f022d".status_history]]
-old_status = "SIZE_MISMATCH"
-new_status = "EXACT"
-changed_at = "2026-10-25T08:17:04.122889+00:00"
-updated_by = "test"
+["GOLDTL.0x005f022d".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?SetNormal@DXCrackFVF@@QAEXPAXPAUD3DXVECTOR3@@@Z"
+name = "SetNormal_DXCrackFVF_QAEXPAXPAUD3DXVECTOR3_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x005f0288"]
 size = 28
 updated_by = "rehome"
