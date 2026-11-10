@@ -37,7 +37,7 @@ char __cdecl fcn_0045b7e0(int a0, int a1, int a2, int* a3, int* a4)
 			col = (a1 - span < 0) ? 0 : a1 - span;
 			while (col <= colEnd) {
 				if (row >= 0 && row < n && col >= 0 && col < n) {
-					type = base[(n * row + col) * 7];
+					type = base[(*(int*) (a0 + 0x20) * row + col) * 7];
 					if (type != 0 && type != 0x0d) {
 						*a3 = col;
 						*a4 = row;
