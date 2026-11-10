@@ -97,7 +97,7 @@ void __cdecl fcn_00565ab0(char* ev)
 
 							*(pos14_7f4c00*) (ev + 0x52) = g_7f4c00;
 							fcn_00500bb0(ev + 0x52, 0,
-							             (int) ((double) (*(char*) (v5 + 0xd) * *(int*) (def + 0x22)) * 0.25), 0);
+							             (int) ((double) (*(char*) (v5 + 0xd) * *(unsigned int*) (def + 0x22)) * 0.25), 0);
 						}
 						*(int*) (ev + 0x70) = *(int*) (ev + 0x70) + 1;
 						return;
