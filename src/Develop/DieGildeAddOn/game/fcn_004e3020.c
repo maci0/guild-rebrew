@@ -9,6 +9,17 @@ typedef struct {
 	char big[0x1fb8];    /* 0x318 work buffer */
 } Frame4e3020;
 
+#include "client_types.h"
+
+extern pos14_7f4c00 g_7f4c00;
+extern int g_68bfb8;
+extern int g_7725c8;
+extern unsigned char g_7747b0;
+extern int g_772f54;
+extern int g_774954;
+extern char g_5438c0[];
+extern char g_67d444[];
+
 int __cdecl gm_LookupEntityRecordById(void* p);
 int __cdecl fcn_004c3100(char* s, int a);
 void __cdecl fcn_004e4e90(char* s);
@@ -59,9 +70,8 @@ void __cdecl fcn_004e3020(void* arg)
 	table[4] = 0x12;
 	table[5] = 0x14;
 	state = 6;
-	*(int*) 0x68bfb8 = 0x702c6;
-	*(int*) 0x7725c8 = 1;
-	mask &= 0xffff;
+	g_68bfb8 = 0x702c6;
+	g_7725c8 = 1;	mask &= 0xffff;
 	while (i < 6) {
 		if ((int) mask < table[i]) {
 			state = i;
@@ -75,7 +85,7 @@ void __cdecl fcn_004e3020(void* arg)
 	fcn_00445f50(state, 0, 1.0f, 1);
 	fcn_004463f0(0, 0, 0.0f);
 	fcn_004e4b60((char*) 0x68d308);
-	sprintf(f.path, "%i", state);
+	sprintf(f.path, g_67d444, state);
 	h2 = fcn_004e44b0((char*) 0x68d2e4, f.path);
 	r = fcn_004e4d00(0x1770, 0, 0);
 	if (r == 0) {
@@ -94,8 +104,8 @@ void __cdecl fcn_004e3020(void* arg)
 			}
 		}
 	}
-	flags = *(unsigned char*) 0x7747b0;
-	*(int*) 0x7725c8 = 0;
+	flags = g_7747b0;
+	g_7725c8 = 0;
 	if ((flags & 4) != 0) {
 		io_FormatTextBuffer(f.msg, 0x3fda, *(unsigned short*) obj);
 	} else {
@@ -111,12 +121,12 @@ void __cdecl fcn_004e3020(void* arg)
 	fcn_004c09b0();
 	fcn_004230e0((void*) handle);
 	fcn_004e4eb0();
-	flags = *(unsigned char*) 0x7747b0;
-	*(int*) 0x772f54 = 0;
+	flags = g_7747b0;
+	g_772f54 = 0;
 	if ((flags & 8) != 0) {
 		*(char*) ((char*) obj + 8) = 0;
-		*(int*) 0x774954 = 1;
-		fcn_005356b0(0x5438c0);
+		g_774954 = 1;
+		fcn_005356b0(g_5438c0);
 	} else {
 		fcn_00509fc0(obj, f.big, 0);
 	}
