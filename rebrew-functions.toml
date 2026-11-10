@@ -624526,17 +624526,17 @@ source_hash = "000f64dfdb65901f6a73622d5cc80e8cc4c7df7b907b1e1a8cecc71d2ec6d1b6"
 reference_hash = "f159aed4ee14499cfbab310b53c9779ec95ffafdb7fd02ba814dc5640f40368a"
 reference_size = "123"
 headers_hash = "22f7e926ebf614ccf96e0cda09f53b6f8125f0d693a479aa2dd88667e95bf8af"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+compiler_hash = "49980e0d41bfcaa174dc2f38bfb94be296c4547f35ada3520985a096e424a97d"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x45fc50"
 context_hash = ""
 defines = "[]"
-input_hash = "9bab26a455ccf277cbc0b77f6e701fd919c368ed52e44e2e1981863cd221a288"
-writer = "verify"
+input_hash = "909a69a9d981a38bd7664ac6c151fbca138d812d0bcd9e4e51ad0e2b0b9896f2"
 status = "RELOC"
-measured_at = "2026-11-09T07:19:59+00:00"
+writer = "test"
+measured_at = "2026-11-10T13:37:14+00:00"
 ["GOLDTL.0x0045d770"]
 size = 505
 updated_by = "fix-sizes"
@@ -624574,25 +624574,30 @@ updated_at = "2026-10-24T13:24:08+00:00"
 
 ["GOLDTL.0x00460a40"]
 size = 13
-updated_by = "rehome"
-updated_at = "2026-11-10T10:44:55+00:00"
+updated_by = "test"
+updated_at = "2026-11-10T13:37:57+00:00"
+file = "references/zlib/infblock.c"
+symbol = "_inflate_blocks_sync_point"
+kind = "LIBRARY"
+name = "inflate_blocks_sync_point"
+status = "EXACT"
 
 ["GOLDTL.0x00460a40".verification]
-source_hash = "264212cecc9ef89870fcd36cc5cf9fdb7eaf8ce02b51c6676b5226e90d335885"
+source_hash = "000f64dfdb65901f6a73622d5cc80e8cc4c7df7b907b1e1a8cecc71d2ec6d1b6"
 reference_hash = "a5f7a1ac1a5c198f2711d6be3981a4657c68e4a46050851db29a09d07c6e0777"
 reference_size = "13"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+headers_hash = "22f7e926ebf614ccf96e0cda09f53b6f8125f0d693a479aa2dd88667e95bf8af"
+compiler_hash = "49980e0d41bfcaa174dc2f38bfb94be296c4547f35ada3520985a096e424a97d"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x460a40"
 context_hash = ""
 defines = "[]"
-input_hash = "426d5de0a47e56254517bdc1d23582d18fad2e1feb66a686e035d5c9d3f29970"
-writer = "verify"
+input_hash = "5fb464a58725e71a08dc0b54ef05ff7b28c93b12d8ceb1bbe835a93135c4f406"
 status = "EXACT"
-measured_at = "2026-11-09T07:19:59+00:00"
+writer = "test"
+measured_at = "2026-11-10T13:37:57+00:00"
 
 [["GOLDTL.0x00460a40".binding_history]]
 action = "retire"
@@ -624626,6 +624631,38 @@ status = "EXACT"
 measured_at = "2026-11-09T07:19:59+00:00"
 
 ["GOLDTL.0x00460a40".binding_history.replacement]
+
+[["GOLDTL.0x00460a40".binding_history]]
+action = "rebind"
+reason = "Compiled library source references/zlib/infblock.c provides _inflate_blocks_sync_point."
+changed_at = "2026-11-10T13:36:38.673164+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00460a40".binding_history.previous]
+size = 13
+
+["GOLDTL.0x00460a40".binding_history.previous.verification]
+source_hash = "264212cecc9ef89870fcd36cc5cf9fdb7eaf8ce02b51c6676b5226e90d335885"
+reference_hash = "a5f7a1ac1a5c198f2711d6be3981a4657c68e4a46050851db29a09d07c6e0777"
+reference_size = "13"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x460a40"
+context_hash = ""
+defines = "[]"
+input_hash = "426d5de0a47e56254517bdc1d23582d18fad2e1feb66a686e035d5c9d3f29970"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:19:59+00:00"
+
+["GOLDTL.0x00460a40".binding_history.replacement]
+file = "references/zlib/infblock.c"
+symbol = "_inflate_blocks_sync_point"
+kind = "LIBRARY"
+name = "inflate_blocks_sync_point"
 ["GOLDTL.0x0045dea0"]
 size = 114
 updated_by = "rehome"
@@ -625352,17 +625389,17 @@ source_hash = "000f64dfdb65901f6a73622d5cc80e8cc4c7df7b907b1e1a8cecc71d2ec6d1b6"
 reference_hash = "aea1890ccb3d9f211dac2eea98772dc30b0beb54dcfa68650b8e0e3690357af4"
 reference_size = "160"
 headers_hash = "22f7e926ebf614ccf96e0cda09f53b6f8125f0d693a479aa2dd88667e95bf8af"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+compiler_hash = "49980e0d41bfcaa174dc2f38bfb94be296c4547f35ada3520985a096e424a97d"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x45fcd0"
 context_hash = ""
 defines = "[]"
-input_hash = "f801020bc38b9843213e4ea153a601fb322a209041b3fde4897874ceb87741b7"
-writer = "verify"
+input_hash = "25e40fe5a44b923432a9533d97f3af55af59f7f8e1185e09c6f633118fa9a8a2"
 status = "RELOC"
-measured_at = "2026-11-09T07:19:59+00:00"
+writer = "test"
+measured_at = "2026-11-10T13:37:28+00:00"
 ["GOLDTL.0x004609c0"]
 updated_by = "verify"
 updated_at = "2026-10-25T06:16:03+00:00"
@@ -625414,17 +625451,17 @@ source_hash = "000f64dfdb65901f6a73622d5cc80e8cc4c7df7b907b1e1a8cecc71d2ec6d1b6"
 reference_hash = "dade79d4a6e12c75983d0a8c86027c1271d7ba7d342b3df0291861e588708e03"
 reference_size = "57"
 headers_hash = "22f7e926ebf614ccf96e0cda09f53b6f8125f0d693a479aa2dd88667e95bf8af"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+compiler_hash = "49980e0d41bfcaa174dc2f38bfb94be296c4547f35ada3520985a096e424a97d"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x4609c0"
 context_hash = ""
 defines = "[]"
-input_hash = "cc0a560a955df7c599b4f8cd3627df206a94e23897f3d26854ec8a8f6df86d0a"
-writer = "verify"
+input_hash = "0701f0e0308c8d5c5f9f3ef85589464ceb89681b7da2c57f401261a86e82186b"
 status = "RELOC"
-measured_at = "2026-11-09T07:19:59+00:00"
+writer = "test"
+measured_at = "2026-11-10T13:37:43+00:00"
 ["GOLDTL.0x00460a50"]
 updated_by = "verify"
 updated_at = "2026-10-25T06:16:03+00:00"
@@ -627283,11 +627320,12 @@ name = "fcn_005ee04a"
 symbol = "_fcn_005ee04a"
 ["GOLDTL.0x005f020c"]
 updated_by = "rehome"
-updated_at = "2026-10-25T07:16:03+00:00"
+updated_at = "2026-11-10T14:02:26+00:00"
+size = 15
 file = "src/library_d3dx8.h"
+symbol = "?GetArrayElem@DXCrackFVF@@QAEPAEPAXK@Z"
+name = "GetArrayElem_DXCrackFVF_QAEPAEPAXK_Z"
 kind = "LIBRARY"
-name = "fcn_005f020c"
-symbol = "_fcn_005f020c"
 
 [["GOLDTL.0x005f020c".binding_history]]
 action = "rebind"
@@ -627303,13 +627341,45 @@ file = "src/library_d3dx8.h"
 kind = "LIBRARY"
 name = "fcn_005f020c"
 symbol = "_fcn_005f020c"
-["GOLDTL.0x005f0249"]
-updated_by = "rehome"
-updated_at = "2026-10-25T07:16:03+00:00"
+
+
+[["GOLDTL.0x005f020c".binding_history]]
+action = "retire"
+reason = "placeholder LIBRARY row named for a merged inventory extent; the extent was split and the piece is identified as ?GetArrayElem@DXCrackFVF@@QAEPAEPAXK@Z, 2026-11-10"
+changed_at = "2026-11-10T13:59:48.269114+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f020c".binding_history.previous]
 file = "src/library_d3dx8.h"
 kind = "LIBRARY"
-name = "fcn_005f0249"
-symbol = "_fcn_005f0249"
+name = "fcn_005f020c"
+symbol = "_fcn_005f020c"
+size = 15
+
+["GOLDTL.0x005f020c".binding_history.replacement]
+
+[["GOLDTL.0x005f020c".binding_history]]
+action = "rebind"
+reason = "unique byte match against d3dx8.lib ?GetArrayElem@DXCrackFVF@@QAEPAEPAXK@Z; position in the createmesh.obj DXCrackFVF COMDAT run after the extent split; rebrew library match and library inspect, 2026-11-10"
+changed_at = "2026-11-10T14:02:26.340489+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f020c".binding_history.previous]
+size = 15
+
+["GOLDTL.0x005f020c".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?GetArrayElem@DXCrackFVF@@QAEPAEPAXK@Z"
+name = "GetArrayElem_DXCrackFVF_QAEPAEPAXK_Z"
+kind = "LIBRARY"
+["GOLDTL.0x005f0249"]
+updated_by = "rehome"
+updated_at = "2026-11-10T14:05:28+00:00"
+size = 21
+file = "src/library_d3dx8.h"
+symbol = "?SetPointSize@DXCrackFVF@@QAEXPAXM@Z"
+name = "SetPointSize_DXCrackFVF_QAEXPAXM_Z"
+kind = "LIBRARY"
 
 [["GOLDTL.0x005f0249".binding_history]]
 action = "rebind"
@@ -627325,13 +627395,45 @@ file = "src/library_d3dx8.h"
 kind = "LIBRARY"
 name = "fcn_005f0249"
 symbol = "_fcn_005f0249"
+
+
+[["GOLDTL.0x005f0249".binding_history]]
+action = "retire"
+reason = "placeholder LIBRARY row named for a merged inventory extent; the extent was split and the piece is identified as ?SetPointSize@DXCrackFVF@@QAEXPAXM@Z, 2026-11-10"
+changed_at = "2026-11-10T14:04:46.547350+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f0249".binding_history.previous]
+file = "src/library_d3dx8.h"
+kind = "LIBRARY"
+name = "fcn_005f0249"
+symbol = "_fcn_005f0249"
+size = 21
+
+["GOLDTL.0x005f0249".binding_history.replacement]
+
+[["GOLDTL.0x005f0249".binding_history]]
+action = "rebind"
+reason = "unique byte match against d3dx8.lib ?SetPointSize@DXCrackFVF@@QAEXPAXM@Z; position in the createmesh.obj DXCrackFVF COMDAT run after the extent split; rebrew library match and library inspect, 2026-11-10"
+changed_at = "2026-11-10T14:05:28.836772+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f0249".binding_history.previous]
+size = 21
+
+["GOLDTL.0x005f0249".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?SetPointSize@DXCrackFVF@@QAEXPAXM@Z"
+name = "SetPointSize_DXCrackFVF_QAEXPAXM_Z"
+kind = "LIBRARY"
 ["GOLDTL.0x005f02a4"]
-updated_by = "rehome"
-updated_at = "2026-10-25T07:16:04+00:00"
+updated_by = "fix-sizes"
+updated_at = "2026-11-10T13:55:52+00:00"
 file = "src/library_d3dx8.h"
 kind = "LIBRARY"
 name = "fcn_005f02a4"
 symbol = "_fcn_005f02a4"
+size = 7
 
 [["GOLDTL.0x005f02a4".binding_history]]
 action = "rebind"
@@ -645458,3 +645560,188 @@ measured_at = "2026-11-09T07:09:30+00:00"
 size = 969
 updated_by = "fix-sizes"
 updated_at = "2026-11-10T12:19:02+00:00"
+
+["GOLDTL.0x005f021b"]
+size = 18
+updated_by = "rehome"
+updated_at = "2026-11-10T14:03:51+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?SetPosition@DXCrackFVF@@QAEXPAXPAUD3DXVECTOR3@@@Z"
+name = "SetPosition_DXCrackFVF_QAEXPAXPAUD3DXVECTOR3_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005f021b".binding_history]]
+action = "rebind"
+reason = "unique byte match against d3dx8.lib ?SetPosition@DXCrackFVF@@QAEXPAXPAUD3DXVECTOR3@@@Z; position in the createmesh.obj DXCrackFVF COMDAT run after the extent split; rebrew library match and library inspect, 2026-11-10"
+changed_at = "2026-11-10T14:03:51.445370+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f021b".binding_history.previous]
+size = 18
+
+["GOLDTL.0x005f021b".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?SetPosition@DXCrackFVF@@QAEXPAXPAUD3DXVECTOR3@@@Z"
+name = "SetPosition_DXCrackFVF_QAEXPAXPAUD3DXVECTOR3_Z"
+kind = "LIBRARY"
+["GOLDTL.0x005f025e"]
+size = 21
+updated_by = "rehome"
+updated_at = "2026-11-10T14:06:56+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?SetDiffuse@DXCrackFVF@@QAEXPAXK@Z"
+name = "SetDiffuse_DXCrackFVF_QAEXPAXK_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005f025e".binding_history]]
+action = "rebind"
+reason = "unique byte match against d3dx8.lib ?SetDiffuse@DXCrackFVF@@QAEXPAXK@Z; position in the createmesh.obj DXCrackFVF COMDAT run after the extent split; rebrew library match and library inspect, 2026-11-10"
+changed_at = "2026-11-10T14:06:56.275836+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f025e".binding_history.previous]
+size = 21
+
+["GOLDTL.0x005f025e".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?SetDiffuse@DXCrackFVF@@QAEXPAXK@Z"
+name = "SetDiffuse_DXCrackFVF_QAEXPAXK_Z"
+kind = "LIBRARY"
+["GOLDTL.0x005f0273"]
+size = 21
+updated_by = "rehome"
+updated_at = "2026-11-10T14:08:19+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?SetSpecular@DXCrackFVF@@QAEXPAXK@Z"
+name = "SetSpecular_DXCrackFVF_QAEXPAXK_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005f0273".binding_history]]
+action = "rebind"
+reason = "unique byte match against d3dx8.lib ?SetSpecular@DXCrackFVF@@QAEXPAXK@Z; position in the createmesh.obj DXCrackFVF COMDAT run after the extent split; rebrew library match and library inspect, 2026-11-10"
+changed_at = "2026-11-10T14:08:19.860123+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f0273".binding_history.previous]
+size = 21
+
+["GOLDTL.0x005f0273".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?SetSpecular@DXCrackFVF@@QAEXPAXK@Z"
+name = "SetSpecular_DXCrackFVF_QAEXPAXK_Z"
+kind = "LIBRARY"
+["GOLDTL.0x005f02ab"]
+size = 10
+updated_by = "rehome"
+updated_at = "2026-11-10T14:09:37+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?PvGetNormal@DXCrackFVF@@QAEPAUD3DXVECTOR3@@PAX@Z"
+name = "PvGetNormal_DXCrackFVF_QAEPAUD3DXVECTOR3_PAX_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005f02ab".binding_history]]
+action = "rebind"
+reason = "unique byte match against d3dx8.lib ?PvGetNormal@DXCrackFVF@@QAEPAUD3DXVECTOR3@@PAX@Z; position in the createmesh.obj DXCrackFVF COMDAT run after the extent split; rebrew library match and library inspect, 2026-11-10"
+changed_at = "2026-11-10T14:09:37.511227+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f02ab".binding_history.previous]
+size = 10
+
+["GOLDTL.0x005f02ab".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?PvGetNormal@DXCrackFVF@@QAEPAUD3DXVECTOR3@@PAX@Z"
+name = "PvGetNormal_DXCrackFVF_QAEPAUD3DXVECTOR3_PAX_Z"
+kind = "LIBRARY"
+["GOLDTL.0x005f02b5"]
+size = 13
+updated_by = "rehome"
+updated_at = "2026-11-10T14:11:19+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?FGetPointSize@DXCrackFVF@@QAEMPAX@Z"
+name = "FGetPointSize_DXCrackFVF_QAEMPAX_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005f02b5".binding_history]]
+action = "rebind"
+reason = "unique byte match against d3dx8.lib ?FGetPointSize@DXCrackFVF@@QAEMPAX@Z; position in the createmesh.obj DXCrackFVF COMDAT run after the extent split; rebrew library match and library inspect, 2026-11-10"
+changed_at = "2026-11-10T14:11:19.587078+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f02b5".binding_history.previous]
+size = 13
+
+["GOLDTL.0x005f02b5".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?FGetPointSize@DXCrackFVF@@QAEMPAX@Z"
+name = "FGetPointSize_DXCrackFVF_QAEMPAX_Z"
+kind = "LIBRARY"
+["GOLDTL.0x005f02c2"]
+size = 13
+updated_by = "rehome"
+updated_at = "2026-11-10T14:12:34+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?ColorGetDiffuse@DXCrackFVF@@QAEKPAX@Z"
+name = "ColorGetDiffuse_DXCrackFVF_QAEKPAX_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005f02c2".binding_history]]
+action = "rebind"
+reason = "unique byte match against d3dx8.lib ?ColorGetDiffuse@DXCrackFVF@@QAEKPAX@Z; position in the createmesh.obj DXCrackFVF COMDAT run after the extent split; rebrew library match and library inspect, 2026-11-10"
+changed_at = "2026-11-10T14:12:34.584432+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f02c2".binding_history.previous]
+size = 13
+
+["GOLDTL.0x005f02c2".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?ColorGetDiffuse@DXCrackFVF@@QAEKPAX@Z"
+name = "ColorGetDiffuse_DXCrackFVF_QAEKPAX_Z"
+kind = "LIBRARY"
+["GOLDTL.0x005f02cf"]
+size = 13
+updated_by = "rehome"
+updated_at = "2026-11-10T14:13:46+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?ColorGetSpecular@DXCrackFVF@@QAEKPAX@Z"
+name = "ColorGetSpecular_DXCrackFVF_QAEKPAX_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005f02cf".binding_history]]
+action = "rebind"
+reason = "unique byte match against d3dx8.lib ?ColorGetSpecular@DXCrackFVF@@QAEKPAX@Z; position in the createmesh.obj DXCrackFVF COMDAT run after the extent split; rebrew library match and library inspect, 2026-11-10"
+changed_at = "2026-11-10T14:13:46.748242+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f02cf".binding_history.previous]
+size = 13
+
+["GOLDTL.0x005f02cf".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?ColorGetSpecular@DXCrackFVF@@QAEKPAX@Z"
+name = "ColorGetSpecular_DXCrackFVF_QAEKPAX_Z"
+kind = "LIBRARY"
+["GOLDTL.0x005f02dc"]
+size = 10
+updated_by = "rehome"
+updated_at = "2026-11-10T14:15:02+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?PuvGetTex1@DXCrackFVF@@QAEPAUD3DXVECTOR2@@PAX@Z"
+name = "PuvGetTex1_DXCrackFVF_QAEPAUD3DXVECTOR2_PAX_Z"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005f02dc".binding_history]]
+action = "rebind"
+reason = "unique byte match against d3dx8.lib ?PuvGetTex1@DXCrackFVF@@QAEPAUD3DXVECTOR2@@PAX@Z; position in the createmesh.obj DXCrackFVF COMDAT run after the extent split; rebrew library match and library inspect, 2026-11-10"
+changed_at = "2026-11-10T14:15:02.104216+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f02dc".binding_history.previous]
+size = 10
+
+["GOLDTL.0x005f02dc".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?PuvGetTex1@DXCrackFVF@@QAEPAUD3DXVECTOR2@@PAX@Z"
+name = "PuvGetTex1_DXCrackFVF_QAEPAUD3DXVECTOR2_PAX_Z"
+kind = "LIBRARY"

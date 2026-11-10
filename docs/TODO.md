@@ -80,7 +80,7 @@ Open, in order:
   the signature map or the file (`zError`, `zcfree`, `zcalloc`, `deflate_fast`, `deflateCopy`,
   `inflate_blocks`, `inflate`), and `inflate_set_dictionary` and `inflate_blocks_sync_point` are missing
   from `function_signatures`. Filed in the upstream `docs/IDEAS-GUILD.md` (local commits, not pushed).
-- Server gate (2026-11-10, rebrew 6.31.0): `uv run bash scripts/gate.sh` passes (`GATE: pass`, exit 0): lint 0/0, 316 of 316 functions, 652 of 652 data rows, whole-binary and Wine checks, d3dx8 screening 0 findings, raw link byte-identical at 286,720 bytes. Open follow-ups from the d3dx8 work: `0x00460a40` (zlib `inflate_blocks_sync_point`) has a retired game claim and no source binding because `library bind-source` cannot parse that definition in `references/zlib/infblock.c`; `0x005f022d` records `createmesh.obj` although the symbol is also in `loadutil.obj`.
+- Server gate (2026-11-10, rebrew 6.31.0): `uv run bash scripts/gate.sh` passes (`GATE: pass`, exit 0): lint 0/0, 316 of 316 functions, 652 of 652 data rows, whole-binary and Wine checks, d3dx8 screening 0 findings, raw link byte-identical at 286,720 bytes. `0x00460a40` is bound to `references/zlib/infblock.c` (EXACT; the parser fix is upstream commit cae18e2c, unreleased). `0x005f022d` has no stored provider field; COMDAT order puts it in `createmesh.obj`. `0x005f02a4` is an unnamed 7-byte LIBRARY row below the matcher minimum.
 5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
    Matching: 112 GoldTL functions remain NEAR_MATCHING. A 2026-11-08 round tried the 89 with 48 or fewer
    differing bytes (reorder commutative operands, independent statements, equivalent rewrites; tests

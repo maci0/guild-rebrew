@@ -102573,7 +102573,7 @@
   },
   {
     "va": 6226444,
-    "size": 33,
+    "size": 15,
     "name": "fcn.005f020c",
     "extent_history": [
       {
@@ -102582,6 +102582,27 @@
         "reason": "Reviewed accounting admission: these ranges are .text import thunks, jump tables, or interior code fragments that no inventory entry names and no preceding function owns. Admitting them from the native inventory removes the unattributed gap; they are not claimed as reconstructed game functions.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:15.705389+00:00"
+      },
+      {
+        "old_size": 33,
+        "new_size": 15,
+        "reason": "Three GoldTL inventory rows merged d3dx8 DXCrackFVF inline COMDATs: 0x005f020c (33) is GetArrayElem 15 + SetPosition 18, 0x005f0249 (63) is SetPointSize, SetDiffuse, SetSpecular at 21 each, 0x005f02a4 (66) is PvGetPosition 7, PvGetNormal 10, FGetPointSize 13, ColorGetDiffuse 13, ColorGetSpecular 13, PuvGetTex1 10. Sizes and order are createmesh.obj section order (rebrew library inspect d3dx8.lib -m createmesh.obj) and every piece ends in ret (rebrew binary asm show), 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T13:54:09.496282+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6226459,
+    "size": 18,
+    "name": "fcn.005f021b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 18,
+        "reason": "Three GoldTL inventory rows merged d3dx8 DXCrackFVF inline COMDATs: 0x005f020c (33) is GetArrayElem 15 + SetPosition 18, 0x005f0249 (63) is SetPointSize, SetDiffuse, SetSpecular at 21 each, 0x005f02a4 (66) is PvGetPosition 7, PvGetNormal 10, FGetPointSize 13, ColorGetDiffuse 13, ColorGetSpecular 13, PuvGetTex1 10. Sizes and order are createmesh.obj section order (rebrew library inspect d3dx8.lib -m createmesh.obj) and every piece ends in ret (rebrew binary asm show), 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T13:54:09.496282+00:00"
       }
     ]
   },
@@ -102601,7 +102622,7 @@
   },
   {
     "va": 6226505,
-    "size": 63,
+    "size": 21,
     "name": "fcn.005f0249",
     "extent_history": [
       {
@@ -102610,6 +102631,41 @@
         "reason": "Reviewed accounting admission: these ranges are .text import thunks, jump tables, or interior code fragments that no inventory entry names and no preceding function owns. Admitting them from the native inventory removes the unattributed gap; they are not claimed as reconstructed game functions.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:15.709646+00:00"
+      },
+      {
+        "old_size": 63,
+        "new_size": 21,
+        "reason": "Three GoldTL inventory rows merged d3dx8 DXCrackFVF inline COMDATs: 0x005f020c (33) is GetArrayElem 15 + SetPosition 18, 0x005f0249 (63) is SetPointSize, SetDiffuse, SetSpecular at 21 each, 0x005f02a4 (66) is PvGetPosition 7, PvGetNormal 10, FGetPointSize 13, ColorGetDiffuse 13, ColorGetSpecular 13, PuvGetTex1 10. Sizes and order are createmesh.obj section order (rebrew library inspect d3dx8.lib -m createmesh.obj) and every piece ends in ret (rebrew binary asm show), 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T13:54:09.496282+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6226526,
+    "size": 21,
+    "name": "fcn.005f025e",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 21,
+        "reason": "Three GoldTL inventory rows merged d3dx8 DXCrackFVF inline COMDATs: 0x005f020c (33) is GetArrayElem 15 + SetPosition 18, 0x005f0249 (63) is SetPointSize, SetDiffuse, SetSpecular at 21 each, 0x005f02a4 (66) is PvGetPosition 7, PvGetNormal 10, FGetPointSize 13, ColorGetDiffuse 13, ColorGetSpecular 13, PuvGetTex1 10. Sizes and order are createmesh.obj section order (rebrew library inspect d3dx8.lib -m createmesh.obj) and every piece ends in ret (rebrew binary asm show), 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T13:54:09.496282+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6226547,
+    "size": 21,
+    "name": "fcn.005f0273",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 21,
+        "reason": "Three GoldTL inventory rows merged d3dx8 DXCrackFVF inline COMDATs: 0x005f020c (33) is GetArrayElem 15 + SetPosition 18, 0x005f0249 (63) is SetPointSize, SetDiffuse, SetSpecular at 21 each, 0x005f02a4 (66) is PvGetPosition 7, PvGetNormal 10, FGetPointSize 13, ColorGetDiffuse 13, ColorGetSpecular 13, PuvGetTex1 10. Sizes and order are createmesh.obj section order (rebrew library inspect d3dx8.lib -m createmesh.obj) and every piece ends in ret (rebrew binary asm show), 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T13:54:09.496282+00:00"
       }
     ]
   },
@@ -102629,7 +102685,7 @@
   },
   {
     "va": 6226596,
-    "size": 66,
+    "size": 7,
     "name": "fcn.005f02a4",
     "extent_history": [
       {
@@ -102638,6 +102694,83 @@
         "reason": "Reviewed accounting admission: these ranges are .text import thunks, jump tables, or interior code fragments that no inventory entry names and no preceding function owns. Admitting them from the native inventory removes the unattributed gap; they are not claimed as reconstructed game functions.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:15.712686+00:00"
+      },
+      {
+        "old_size": 66,
+        "new_size": 7,
+        "reason": "Three GoldTL inventory rows merged d3dx8 DXCrackFVF inline COMDATs: 0x005f020c (33) is GetArrayElem 15 + SetPosition 18, 0x005f0249 (63) is SetPointSize, SetDiffuse, SetSpecular at 21 each, 0x005f02a4 (66) is PvGetPosition 7, PvGetNormal 10, FGetPointSize 13, ColorGetDiffuse 13, ColorGetSpecular 13, PuvGetTex1 10. Sizes and order are createmesh.obj section order (rebrew library inspect d3dx8.lib -m createmesh.obj) and every piece ends in ret (rebrew binary asm show), 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T13:54:09.496282+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6226603,
+    "size": 10,
+    "name": "fcn.005f02ab",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 10,
+        "reason": "Three GoldTL inventory rows merged d3dx8 DXCrackFVF inline COMDATs: 0x005f020c (33) is GetArrayElem 15 + SetPosition 18, 0x005f0249 (63) is SetPointSize, SetDiffuse, SetSpecular at 21 each, 0x005f02a4 (66) is PvGetPosition 7, PvGetNormal 10, FGetPointSize 13, ColorGetDiffuse 13, ColorGetSpecular 13, PuvGetTex1 10. Sizes and order are createmesh.obj section order (rebrew library inspect d3dx8.lib -m createmesh.obj) and every piece ends in ret (rebrew binary asm show), 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T13:54:09.496282+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6226613,
+    "size": 13,
+    "name": "fcn.005f02b5",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 13,
+        "reason": "Three GoldTL inventory rows merged d3dx8 DXCrackFVF inline COMDATs: 0x005f020c (33) is GetArrayElem 15 + SetPosition 18, 0x005f0249 (63) is SetPointSize, SetDiffuse, SetSpecular at 21 each, 0x005f02a4 (66) is PvGetPosition 7, PvGetNormal 10, FGetPointSize 13, ColorGetDiffuse 13, ColorGetSpecular 13, PuvGetTex1 10. Sizes and order are createmesh.obj section order (rebrew library inspect d3dx8.lib -m createmesh.obj) and every piece ends in ret (rebrew binary asm show), 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T13:54:09.496282+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6226626,
+    "size": 13,
+    "name": "fcn.005f02c2",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 13,
+        "reason": "Three GoldTL inventory rows merged d3dx8 DXCrackFVF inline COMDATs: 0x005f020c (33) is GetArrayElem 15 + SetPosition 18, 0x005f0249 (63) is SetPointSize, SetDiffuse, SetSpecular at 21 each, 0x005f02a4 (66) is PvGetPosition 7, PvGetNormal 10, FGetPointSize 13, ColorGetDiffuse 13, ColorGetSpecular 13, PuvGetTex1 10. Sizes and order are createmesh.obj section order (rebrew library inspect d3dx8.lib -m createmesh.obj) and every piece ends in ret (rebrew binary asm show), 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T13:54:09.496282+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6226639,
+    "size": 13,
+    "name": "fcn.005f02cf",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 13,
+        "reason": "Three GoldTL inventory rows merged d3dx8 DXCrackFVF inline COMDATs: 0x005f020c (33) is GetArrayElem 15 + SetPosition 18, 0x005f0249 (63) is SetPointSize, SetDiffuse, SetSpecular at 21 each, 0x005f02a4 (66) is PvGetPosition 7, PvGetNormal 10, FGetPointSize 13, ColorGetDiffuse 13, ColorGetSpecular 13, PuvGetTex1 10. Sizes and order are createmesh.obj section order (rebrew library inspect d3dx8.lib -m createmesh.obj) and every piece ends in ret (rebrew binary asm show), 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T13:54:09.496282+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6226652,
+    "size": 10,
+    "name": "fcn.005f02dc",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 10,
+        "reason": "Three GoldTL inventory rows merged d3dx8 DXCrackFVF inline COMDATs: 0x005f020c (33) is GetArrayElem 15 + SetPosition 18, 0x005f0249 (63) is SetPointSize, SetDiffuse, SetSpecular at 21 each, 0x005f02a4 (66) is PvGetPosition 7, PvGetNormal 10, FGetPointSize 13, ColorGetDiffuse 13, ColorGetSpecular 13, PuvGetTex1 10. Sizes and order are createmesh.obj section order (rebrew library inspect d3dx8.lib -m createmesh.obj) and every piece ends in ret (rebrew binary asm show), 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T13:54:09.496282+00:00"
       }
     ]
   },
