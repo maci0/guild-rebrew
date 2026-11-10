@@ -629538,31 +629538,13 @@ kind = "FUNCTION"
 ["GOLDTL.0x004a722f".binding_history.replacement]
 ["GOLDTL.0x005f0e46"]
 size = 10
-file = "src/Develop/Unassigned/fcn_005f0e46.c"
-symbol = "@fcn_005f0e46@4"
-name = "fcn_005f0e46"
-kind = "FUNCTION"
-updated_by = "test"
-updated_at = "2026-10-27T23:50:02+00:00"
-status = "EXACT"
+updated_by = "rehome"
+updated_at = "2026-11-10T10:42:36+00:00"
 cflags = "/O2 /Gd /G6"
-
-["GOLDTL.0x005f0e46".verification]
-source_hash = "dd0fe69e37f3db8abf86ba033acbf208db5681bdd9021ea9e1000db40a177c83"
-reference_hash = "9adc6a3d08eeb96e9745321d8a8d9e321ec4676a46cb9e7f41aaaa6c2786294f"
-reference_size = "10"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
-toolchain = "(default)"
-cflags = "/O2 /Gd /G6"
-module = "GOLDTL"
-va = "0x5f0e46"
-context_hash = ""
-defines = "[]"
-input_hash = "0bf64e0b10861ea84d76412104d5cd6d75e67314f756b4502feb14d896930e2d"
-writer = "verify"
-status = "EXACT"
-measured_at = "2026-11-09T07:20:00+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?UnlockVB@?$GXTri3Mesh@I$0A@$0?0@@QAEJXZ"
+name = "UnlockVB_GXTri3Mesh_I_0A_0_0_QAEJXZ"
+kind = "LIBRARY"
 
 [["GOLDTL.0x005f0e46".status_history]]
 old_status = "SIZE_MISMATCH"
@@ -629593,6 +629575,44 @@ old_status = "SIZE_MISMATCH"
 new_status = "EXACT"
 changed_at = "2026-10-27T23:50:02.429927+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x005f0e46".binding_history]]
+action = "rebind"
+reason = "bytes match both d3dx8.lib GXTri3Mesh UnlockVB instantiations (createmesh.obj); selected as the I instance by layout, not by a caller: the reference holds two identical four-function runs (LockVB, UnlockVB, LockIB, UnlockIB) at 0x005f0e27 and 0x005f0eb0; LockVB at 0x005f0e27 has uniquely matched I callers (0x005f8f40 CopyMesh, 0x005fa198 AddVertex, 0x006002f9 DefragmentWedges) and LockVB at 0x005f0eb0 uniquely matched G callers; this VA is the second function of the first run and 0x005f0ecf is its twin in the G run; neither UnlockVB has a direct reference; .scratch/callers_ctx.py and refs_ctx.py, 2026-11-10"
+changed_at = "2026-11-10T10:42:36.558917+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f0e46".binding_history.previous]
+size = 10
+file = "src/Develop/Unassigned/fcn_005f0e46.c"
+symbol = "@fcn_005f0e46@4"
+name = "fcn_005f0e46"
+kind = "FUNCTION"
+status = "EXACT"
+cflags = "/O2 /Gd /G6"
+
+["GOLDTL.0x005f0e46".binding_history.previous.verification]
+source_hash = "dd0fe69e37f3db8abf86ba033acbf208db5681bdd9021ea9e1000db40a177c83"
+reference_hash = "9adc6a3d08eeb96e9745321d8a8d9e321ec4676a46cb9e7f41aaaa6c2786294f"
+reference_size = "10"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd /G6"
+module = "GOLDTL"
+va = "0x5f0e46"
+context_hash = ""
+defines = "[]"
+input_hash = "0bf64e0b10861ea84d76412104d5cd6d75e67314f756b4502feb14d896930e2d"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:20:00+00:00"
+
+["GOLDTL.0x005f0e46".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?UnlockVB@?$GXTri3Mesh@I$0A@$0?0@@QAEJXZ"
+name = "UnlockVB_GXTri3Mesh_I_0A_0_0_QAEJXZ"
+kind = "LIBRARY"
 ["GOLDTL.0x004cd492"]
 size = 11
 updated_by = "rehome"
