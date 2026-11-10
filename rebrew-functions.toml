@@ -443391,25 +443391,12 @@ updated_by = "test"
 ["GOLDTL.0x00613555"]
 size = 58
 updated_by = "rehome"
-updated_at = "2026-10-25T10:19:03+00:00"
+updated_at = "2026-11-10T14:53:04+00:00"
 cflags = "/O2 /Gd /G6"
-
-["GOLDTL.0x00613555".verification]
-source_hash = "f169e6a1248e6bf54499dc306226ae77540e0c86edb405adcce0fd50dba08ef1"
-reference_hash = "a5827d3565ed728d70f69000b4502613076d774e24f209a809e564752aae3c31"
-reference_size = "58"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "1a15f18f3252384c9aab6285a1b834666514515de54f459deca277eed385dbf2"
-toolchain = "(default)"
-cflags = "/O2 /Gd /G6"
-module = "GOLDTL"
-va = "0x613555"
-context_hash = ""
-defines = "[]"
-input_hash = "9cf6ebac7d5ec90fe99e19adae8c8d07812dc8de9db3ac9abcca88ae15c7dce9"
-writer = "verify"
-status = "RELOC"
-measured_at = "2026-10-25T06:09:26+00:00"
+file = "src/library_d3dx8.h"
+symbol = "??1CD3DXFont@@QAE@XZ"
+name = "_1CD3DXFont_QAE_XZ"
+kind = "LIBRARY"
 
 [["GOLDTL.0x00613555".status_history]]
 old_status = "STUB"
@@ -443464,6 +443451,7 @@ measured_at = "2026-10-24T11:02:40+00:00"
 ["GOLDTL.0x00613555".binding_history.replacement]
 
 
+
 [["GOLDTL.0x00613555".binding_history]]
 action = "rebind"
 reason = "Rollback of an over-broad merged-row retirement: the VA was still a live inventory row or a live claim, so the previous identity is restored."
@@ -443496,6 +443484,7 @@ file = "src/GOLDTL.fcn_00613555.c"
 kind = "FUNCTION"
 name = "fcn_00613555"
 symbol = "@fcn_00613555@4"
+
 
 [["GOLDTL.0x00613555".binding_history]]
 action = "retire"
@@ -443530,6 +443519,39 @@ status = "RELOC"
 measured_at = "2026-10-25T06:09:26+00:00"
 
 ["GOLDTL.0x00613555".binding_history.replacement]
+
+[["GOLDTL.0x00613555".binding_history]]
+action = "rebind"
+reason = "unique byte match against d3dx8.lib ??1CD3DXFont@@QAE@XZ (cd3dxfont.obj) with callees resolved; rebrew library match --resolve-callees, 2026-11-10"
+changed_at = "2026-11-10T14:53:04.333496+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x00613555".binding_history.previous]
+size = 58
+cflags = "/O2 /Gd /G6"
+
+["GOLDTL.0x00613555".binding_history.previous.verification]
+source_hash = "f169e6a1248e6bf54499dc306226ae77540e0c86edb405adcce0fd50dba08ef1"
+reference_hash = "a5827d3565ed728d70f69000b4502613076d774e24f209a809e564752aae3c31"
+reference_size = "58"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "1a15f18f3252384c9aab6285a1b834666514515de54f459deca277eed385dbf2"
+toolchain = "(default)"
+cflags = "/O2 /Gd /G6"
+module = "GOLDTL"
+va = "0x613555"
+context_hash = ""
+defines = "[]"
+input_hash = "9cf6ebac7d5ec90fe99e19adae8c8d07812dc8de9db3ac9abcca88ae15c7dce9"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-10-25T06:09:26+00:00"
+
+["GOLDTL.0x00613555".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "??1CD3DXFont@@QAE@XZ"
+name = "_1CD3DXFont_QAE_XZ"
+kind = "LIBRARY"
 ["GOLDTL.0x0060d8c7"]
 size = 71
 updated_by = "rehome"
@@ -606266,10 +606288,6 @@ evidence = "Whole-function naked assembly: the reference extent is an ABI shape 
 
 [source.definitions."src/Develop/Unassigned/GOLDTL.fcn_0062ae18.c".fcn_0062ae18.GOLDTL]
 source_hash = "5c0524c59b21a62b7b6b9b361f2d8f73cd014045ab145c13b9dc35438f1569bb"
-evidence = "Whole-function naked assembly: the reference extent is an ABI shape MSVC 6 C mode cannot express; bytes transcribed instruction for instruction."
-
-[source.definitions."src/Develop/Unassigned/GOLDTL.fcn_0062af4d.c".fcn_0062af4d.GOLDTL]
-source_hash = "dfd000234b7a70aca77d19b42cc1700f9fc84e4ad6adea136d14396b3b436b08"
 evidence = "Whole-function naked assembly: the reference extent is an ABI shape MSVC 6 C mode cannot express; bytes transcribed instruction for instruction."
 
 [source.definitions."src/Develop/Unassigned/GOLDTL.fcn_0062af7c.c".fcn_0062af7c.GOLDTL]

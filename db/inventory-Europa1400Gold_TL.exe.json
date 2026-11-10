@@ -106923,6 +106923,20 @@
     ]
   },
   {
+    "va": 6370645,
+    "size": 58,
+    "name": "fcn.00613555",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 58,
+        "reason": "0x00613555 starts after ret 4 at 0x00613552 and ends with ret at 0x0061358e, where the existing row 0x0061358f begins; it is called as the CD3DXFont teardown (stores vtable 0x66701c, calls CD3DXText::OnDeleteFont 0x0062af4d, DeleteObject); rebrew binary asm show, 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T14:52:26.451634+00:00"
+      }
+    ]
+  },
+  {
     "va": 6370703,
     "size": 13,
     "name": "fcn.0061358f",
