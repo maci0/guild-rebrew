@@ -483823,13 +483823,13 @@ new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-19T05:56:47.371172+00:00"
 updated_by = "test"
 ["GOLDTL.0x005c0020"]
-size = 1609
+size = 638
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_005c0020.c"
 symbol = "_fcn_005c0020"
 name = "fcn_005c0020"
 kind = "FUNCTION"
 updated_by = "fix-sizes"
-updated_at = "2026-10-29T11:14:46+00:00"
+updated_at = "2026-11-10T12:18:47+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
@@ -645441,3 +645441,8 @@ input_hash = "c5bc4c65fc12cdbf10bf84b4717457231dbf67de838710b0e7d00dc4bec7e006"
 writer = "verify"
 status = "RELOC"
 measured_at = "2026-11-09T07:09:30+00:00"
+
+["GOLDTL.0x005c02a0"]
+size = 969
+updated_by = "fix-sizes"
+updated_at = "2026-11-10T12:19:02+00:00"

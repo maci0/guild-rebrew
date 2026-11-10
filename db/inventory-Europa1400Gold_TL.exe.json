@@ -95163,7 +95163,7 @@
   },
   {
     "va": 6029344,
-    "size": 1609,
+    "size": 638,
     "name": "fcn.005c0020",
     "extent_history": [
       {
@@ -95186,6 +95186,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:40.611626+00:00"
+      },
+      {
+        "old_size": 1609,
+        "new_size": 638,
+        "reason": "0x005c0020 ends with the tail jump at 0x005c0299 (jmp 0x532ef0) followed by two NOPs; 0x005c02a0 opens a separate frame (sub esp, 0x430), is referenced by absolute address at 0x005c063d and 0x005c06b5, and returns at 0x005c0668 before NOP padding to 0x005c0670; rebrew binary asm show and .scratch/refs_ctx.py, 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T12:18:36.748028+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6029984,
+    "size": 969,
+    "name": "fcn.005c02a0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 969,
+        "reason": "0x005c0020 ends with the tail jump at 0x005c0299 (jmp 0x532ef0) followed by two NOPs; 0x005c02a0 opens a separate frame (sub esp, 0x430), is referenced by absolute address at 0x005c063d and 0x005c06b5, and returns at 0x005c0668 before NOP padding to 0x005c0670; rebrew binary asm show and .scratch/refs_ctx.py, 2026-11-10",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-10T12:18:36.748446+00:00"
       }
     ]
   },
