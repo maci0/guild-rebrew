@@ -80,7 +80,7 @@ Open, in order:
   the signature map or the file (`zError`, `zcfree`, `zcalloc`, `deflate_fast`, `deflateCopy`,
   `inflate_blocks`, `inflate`), and `inflate_set_dictionary` and `inflate_blocks_sync_point` are missing
   from `function_signatures`. Filed in the upstream `docs/IDEAS-GUILD.md` (local commits, not pushed).
-- Server gate (2026-11-09, released rebrew 6.24.0): everything passes (lint 0/0, 316 of 316 functions, 652 of 652 data rows, whole-binary and Wine checks, raw link byte-identical at 286,720 bytes) except the d3dx8 screening, which reports 3,598 findings because of an upstream `library match` bug (fixed locally upstream as `b98b4dd1`, unreleased). With the fix the screening reports 8 rows: `0x005f022d` (adoption timed out in Docker under load, retry), five identical-byte `I`/`G` template pairs (`0x005fc10c`, `0x005fe153`, `0x005fecdb`, `0x005f0e46`, `0x005f0eb0`, `0x005f9734`) and `0x00460a40` (also matches vendored zlib). The gate passes once a release carries the fix and those 8 rows are attributed or allowed.
+- Server gate (2026-11-10, rebrew 6.31.0): `uv run bash scripts/gate.sh` passes (`GATE: pass`, exit 0): lint 0/0, 316 of 316 functions, 652 of 652 data rows, whole-binary and Wine checks, d3dx8 screening 0 findings, raw link byte-identical at 286,720 bytes. Open follow-ups from the d3dx8 work: `0x00460a40` (zlib `inflate_blocks_sync_point`) has a retired game claim and no source binding because `library bind-source` cannot parse that definition in `references/zlib/infblock.c`; `0x005f022d` records `createmesh.obj` although the symbol is also in `loadutil.obj`.
 5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
    Matching: 112 GoldTL functions remain NEAR_MATCHING. A 2026-11-08 round tried the 89 with 48 or fewer
    differing bytes (reorder commutative operands, independent statements, equivalent rewrites; tests
@@ -102,8 +102,7 @@ Open, in order:
 matches the complete 286,720-byte reference: 316 function checks, 652 data checks,
 structural checks and Wine load/export resolution passed.
 
-The full gate still fails on five lint warnings and 28 GoldTL D3DX library-screening
-findings. Both clients remain incomplete. The release compiled all 123 changed C
+That gate state is superseded by the passing run above. Both clients remain incomplete. The release compiled all 123 changed C
 translation units, but did not establish a new complete client image or gameplay
 result. Older client link counts and image scores are historical.
 
