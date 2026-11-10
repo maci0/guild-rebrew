@@ -432220,12 +432220,11 @@ updated_by = "verify"
 size = 31
 note = "Provisional address-only identity. Complete 31-byte native body equals both stock D3DX8 createmesh.obj template aliases without relocation masking; fixed-byte and shifted-start controls reject. Extent ends at native ret 8, before the following method; no credited library overlap. Template identity and selected raw-link provider remain unresolved. See docs/TODO.md, 2026-10-15 D3DX lock audit; .scratch/goal45/d3dx-lock-full-proof.json."
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:57+00:00"
-file = "src/Develop/Unassigned/fcn_005f0eb0.c"
-kind = "FUNCTION"
-name = "fcn_005f0eb0"
-symbol = "_fcn_005f0eb0"
-status = "EXACT"
+updated_at = "2026-11-10T10:33:48+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?LockVB@?$GXTri3Mesh@G$00$0PPPP@@@QAEJPAPAEK@Z"
+name = "LockVB_GXTri3Mesh_G_00_0PPPP_QAEJPAPAEK_Z"
+kind = "LIBRARY"
 
 [["GOLDTL.0x005f0eb0".binding_history]]
 action = "retire"
@@ -432240,6 +432239,7 @@ kind = "LIBRARY"
 name = "fcn_005f0eb0"
 
 ["GOLDTL.0x005f0eb0".binding_history.replacement]
+
 
 [["GOLDTL.0x005f0eb0".binding_history]]
 action = "rebind"
@@ -432256,7 +432256,22 @@ kind = "FUNCTION"
 name = "fcn_005f0eb0"
 symbol = "_fcn_005f0eb0"
 
-["GOLDTL.0x005f0eb0".verification]
+
+[["GOLDTL.0x005f0eb0".binding_history]]
+action = "rebind"
+reason = "bytes match both d3dx8.lib GXTri3Mesh LockVB instantiations (createmesh.obj); the G instance is selected because the three direct callers with a unique rebrew library match are all G instantiations (0x005f8383 LoadFromData GXHalfEdgePMesh, 0x005f9145 CopyMesh GXTri3Mesh, 0x00600930 DefragmentWedges GXSimplifyMesh) and no caller matches an I instantiation uniquely; .scratch/callers_ctx.py, 2026-11-10"
+changed_at = "2026-11-10T10:33:48.520304+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f0eb0".binding_history.previous]
+size = 31
+file = "src/Develop/Unassigned/fcn_005f0eb0.c"
+kind = "FUNCTION"
+name = "fcn_005f0eb0"
+symbol = "_fcn_005f0eb0"
+status = "EXACT"
+
+["GOLDTL.0x005f0eb0".binding_history.previous.verification]
 source_hash = "01a0658f65528c1065d7c823ddbd07d6e93810d6c75e74391ca2ddaad41ceccf"
 reference_hash = "59e82d7db59fe993503089ebf167e7b14fc7c5d203289ab9e9df6c40625b5221"
 reference_size = "31"
@@ -432273,6 +432288,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
+["GOLDTL.0x005f0eb0".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?LockVB@?$GXTri3Mesh@G$00$0PPPP@@@QAEJPAPAEK@Z"
+name = "LockVB_GXTri3Mesh_G_00_0PPPP_QAEJPAPAEK_Z"
+kind = "LIBRARY"
 [["GOLDTL.0x005f0eb0".status_history]]
 old_status = "STUB"
 new_status = "EXACT"
@@ -456673,29 +456693,11 @@ measured_at = "2026-10-20T07:14:10+00:00"
 ["GOLDTL.0x005f9734"]
 size = 328
 updated_by = "rehome"
-updated_at = "2026-10-27T08:37:57+00:00"
-file = "src/Develop/Unassigned/fcn_005f9734.c"
-kind = "FUNCTION"
-name = "fcn_005f9734"
-symbol = "_fcn_005f9734"
-status = "EXACT"
-
-["GOLDTL.0x005f9734".verification]
-source_hash = "3c9ed183550e4b4af4adfbf31847dc66d973e555d49d6280ef93f1a4cc691038"
-reference_hash = "5a3172e44bd85a564e3c639fd5df6d43f30223c8a8d119767dba882799b8067e"
-reference_size = "328"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
-toolchain = "(default)"
-cflags = "/O2 /Gd"
-module = "GOLDTL"
-va = "0x5f9734"
-context_hash = ""
-defines = "[]"
-input_hash = "bf465c4a71ffbfde867092c681d8c8a100a6000d18f544546a012bf1148b0694"
-writer = "verify"
-status = "EXACT"
-measured_at = "2026-11-09T07:20:00+00:00"
+updated_at = "2026-11-10T10:34:39+00:00"
+file = "src/library_d3dx8.h"
+symbol = "?CreateEmptyMesh@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ"
+name = "CreateEmptyMesh_GXSimplifyMesh_G_00_0PPPP_AAEJXZ"
+kind = "LIBRARY"
 
 [["GOLDTL.0x005f9734".binding_history]]
 action = "retire"
@@ -456731,6 +456733,7 @@ measured_at = "2026-10-20T07:14:10+00:00"
 
 ["GOLDTL.0x005f9734".binding_history.replacement]
 
+
 [["GOLDTL.0x005f9734".binding_history]]
 action = "rebind"
 reason = "Reviewed rebind of a row that carries no source identity: the address is a native inventory start admitted by the coverage repair; the row gets an inferred address-only source path and a stub body as an unreconstructed work item, not a match."
@@ -456763,6 +456766,43 @@ kind = "FUNCTION"
 name = "fcn_005f9734"
 symbol = "_fcn_005f9734"
 
+
+[["GOLDTL.0x005f9734".binding_history]]
+action = "rebind"
+reason = "bytes match both d3dx8.lib GXSimplifyMesh CreateEmptyMesh instantiations (createmesh.obj); the G instance is selected because the only direct caller, 0x006088ef, matches SetupSimplification of the G instantiation uniquely; .scratch/callers_ctx.py, 2026-11-10"
+changed_at = "2026-11-10T10:34:39.746742+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005f9734".binding_history.previous]
+size = 328
+file = "src/Develop/Unassigned/fcn_005f9734.c"
+kind = "FUNCTION"
+name = "fcn_005f9734"
+symbol = "_fcn_005f9734"
+status = "EXACT"
+
+["GOLDTL.0x005f9734".binding_history.previous.verification]
+source_hash = "3c9ed183550e4b4af4adfbf31847dc66d973e555d49d6280ef93f1a4cc691038"
+reference_hash = "5a3172e44bd85a564e3c639fd5df6d43f30223c8a8d119767dba882799b8067e"
+reference_size = "328"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x5f9734"
+context_hash = ""
+defines = "[]"
+input_hash = "bf465c4a71ffbfde867092c681d8c8a100a6000d18f544546a012bf1148b0694"
+writer = "verify"
+status = "EXACT"
+measured_at = "2026-11-09T07:20:00+00:00"
+
+["GOLDTL.0x005f9734".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "?CreateEmptyMesh@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ"
+name = "CreateEmptyMesh_GXSimplifyMesh_G_00_0PPPP_AAEJXZ"
+kind = "LIBRARY"
 [["GOLDTL.0x005f9734".status_history]]
 old_status = "STUB"
 new_status = "EXACT"
