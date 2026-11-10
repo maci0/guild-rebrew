@@ -442113,15 +442113,34 @@ measured_at = "2026-10-23T09:43:41+00:00"
 ["GOLDTL.0x005eb225".binding_history.replacement]
 ["GOLDTL.0x005fc10c"]
 size = 44
+updated_by = "rehome"
+updated_at = "2026-11-10T10:48:51+00:00"
+file = "src/library_d3dx8.h"
+symbol = "??0?$CD3DXSkinMesh@G$00$0PPPP@@@QAE@XZ"
+name = "_0_CD3DXSkinMesh_G_00_0PPPP_QAE_XZ"
+kind = "LIBRARY"
+
+[["GOLDTL.0x005fc10c".status_history]]
+old_status = "STUB"
+new_status = "EXACT"
+changed_at = "2026-10-20T06:17:13.388804+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005fc10c".binding_history]]
+action = "rebind"
+reason = "bytes match both d3dx8.lib CD3DXSkinMesh constructor instantiations (createmesh.obj); the G instance is selected because the constructor stores vtable 0x666650 (mov dword ptr [eax], 0x666650 at 0x005fc110) and that table holds 0x005f6294, uniquely matched by rebrew library match as GetMaxFaceInfluences of the G instantiation; .scratch/vtable_at.py, 2026-11-10"
+changed_at = "2026-11-10T10:48:51.979132+00:00"
+counterpart_va = 0
+
+["GOLDTL.0x005fc10c".binding_history.previous]
+size = 44
 file = "src/Develop/Unassigned/GOLDTL.fcn_005fc10c.c"
 symbol = "@fcn_005fc10c@4"
 name = "fcn_005fc10c"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:10+00:00"
 status = "EXACT"
 
-["GOLDTL.0x005fc10c".verification]
+["GOLDTL.0x005fc10c".binding_history.previous.verification]
 source_hash = "66bb3379487bebea466c7def7f9fcb5587c3fb70efa463669a9a5f99b9debc63"
 reference_hash = "5538ba886a2215ece65ed38a8ad536c62fb246ba9f78ff63473f73e1ffab7134"
 reference_size = "44"
@@ -442138,11 +442157,11 @@ writer = "verify"
 status = "EXACT"
 measured_at = "2026-11-09T07:20:00+00:00"
 
-[["GOLDTL.0x005fc10c".status_history]]
-old_status = "STUB"
-new_status = "EXACT"
-changed_at = "2026-10-20T06:17:13.388804+00:00"
-updated_by = "test"
+["GOLDTL.0x005fc10c".binding_history.replacement]
+file = "src/library_d3dx8.h"
+symbol = "??0?$CD3DXSkinMesh@G$00$0PPPP@@@QAE@XZ"
+name = "_0_CD3DXSkinMesh_G_00_0PPPP_QAE_XZ"
+kind = "LIBRARY"
 ["GOLDTL.0x006214c2"]
 size = 47
 file = "src/Develop/Unassigned/GOLDTL.fcn_006214c2.c"
