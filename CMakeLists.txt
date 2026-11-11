@@ -430,6 +430,10 @@ if(REBREW_BUILD_GOLD)
   # (generated from the 2026-11-09 link log).
   rebrew_append_scaffold(GOLD_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_adopted.c")
+  # The same for the 2026-11-11 adoptions: GoldTL names that Gold defines under
+  # other names or not at all (generated from that day's link log).
+  rebrew_append_scaffold(GOLD_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_adopted2.c")
 
   if(GOLD_SOURCES)
     add_executable(europa1400gold WIN32 ${GOLD_SOURCES})

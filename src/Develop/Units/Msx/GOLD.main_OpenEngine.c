@@ -51,7 +51,7 @@ void __cdecl fcn_0046cd90(int, short, int);
 void __cdecl fcn_00515990(int, char*);
 void __cdecl fcn_00424990(int, int);
 void __cdecl fcn_004c3480(void);
-void __cdecl fcn_005880b0(void);
+void __cdecl fcn_00590650(void);
 void __cdecl fcn_004fe570(char*);
 void __cdecl fcn_004eddf0(void);
 void __cdecl fcn_004fde90(void);
@@ -73,17 +73,17 @@ void __cdecl fcn_00416980(void);
 void __cdecl fcn_0047d9d0(void);
 void __cdecl fcn_004eb480(int);
 void __cdecl fcn_004ac440(void);
-void __cdecl fcn_004aca90(void);
+void __cdecl fcn_004acbb0(void);
 void __cdecl fcn_004d27a0(void);
 void __cdecl fcn_004758e0(int);
 unsigned char* __cdecl fcn_004767c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_005309d0(int, int);
 #include "client_sprites.h"
 void __cdecl fcn_0042b050(void);
-void __cdecl fcn_0040b8a0(void);
+void __cdecl fcn_0040c7c0(void);
 void __cdecl fcn_0040f960(void);
 void __cdecl fcn_0040d270(void);
-void __cdecl fcn_00410220(void);
+void __cdecl fcn_00411130(void);
 void __cdecl fcn_0042b700(void);
 void __cdecl fcn_005d5fe0(void);
 void __cdecl fcn_0052fbb0(void);
@@ -116,7 +116,7 @@ int __cdecl main_OpenEngine(void)
 	fcn_00515990(0x73, g_75e760);
 	fcn_00424990(0, 0);
 	fcn_004c3480();
-	fcn_005880b0();
+	fcn_00590650();
 	sprintf(path, "%sdata\\", g_624698);
 	fcn_004fe570(path);
 	fcn_004eddf0();
@@ -159,7 +159,7 @@ int __cdecl main_OpenEngine(void)
 		fcn_004ac440();
 	}
 	g_6f246c = 0;
-	fcn_004aca90();
+	fcn_004acbb0();
 	fcn_004d27a0();
 	fcn_004758e0(screen);
 	fade = fcn_004767c0(0, 0, g_fb9072, g_fb9070, "BLACK", 0x5a, 1);
@@ -191,10 +191,10 @@ int __cdecl main_OpenEngine(void)
 	}
 	g_6f258c = 1;
 	fcn_0042b050();
-	fcn_0040b8a0();
+	fcn_0040c7c0();
 	fcn_0040f960();
 	fcn_0040d270();
-	fcn_00410220();
+	fcn_00411130();
 	g_5fb920 = (int) fcn_0042b700;
 	g_5f927c = 0x400000;
 	fcn_005d5fe0();

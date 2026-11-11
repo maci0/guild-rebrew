@@ -414,3 +414,50 @@ impl = ""
 [specials.init_Betrieb]
 impl = ""
 
+
+# Real Gold sources define these since the 2026-11-11 Gold twin adoptions.
+[specials.fcn_00403df0]
+impl = ""
+
+[specials.fcn_0040c120]
+impl = ""
+
+[specials.fcn_0040d0f0]
+impl = ""
+
+[specials.fcn_0040f3d0]
+impl = ""
+
+[specials.fcn_004116d0]
+impl = ""
+
+[specials.fcn_004c5480]
+impl = ""
+
+[specials.fcn_004d4ec0]
+impl = ""
+
+[specials.fcn_004e99c0]
+impl = ""
+
+[specials.fcn_00535560]
+impl = ""
+
+[specials.fcn_0057c9d0]
+impl = ""
+
+[specials.fcn_005805e0]
+impl = ""
+
+[specials.fcn_005809d0]
+impl = ""
+
+[specials.fcn_005809f0]
+impl = ""
+
+[specials.fcn_005ba8e0]
+impl = ""
+
+[specials.fcn_005ba900]
+impl = ""
+

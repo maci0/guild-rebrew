@@ -2052,10 +2052,7 @@ int __cdecl fcn_00403ce0(void* a, void* b)
 	return 0;
 }
 
-int __cdecl fcn_00403df0(char* a)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_004042b0(char* a)
 {
@@ -2163,10 +2160,7 @@ int __cdecl fcn_0040bdc0(void)
 	return 0;
 }
 
-char* __cdecl fcn_0040c120(char* a, int b, ...)
-{
-	return (void*) 0;
-}
+
 
 int __cdecl fcn_0040cba0(void)
 {
@@ -2188,10 +2182,7 @@ int __cdecl fcn_0040cfb0(void)
 	return 0;
 }
 
-int __cdecl fcn_0040d0f0(void)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_0040d270(void)
 {
@@ -2248,19 +2239,13 @@ int __cdecl fcn_0040f1c0(void)
 	return 0;
 }
 
-int __cdecl fcn_0040f3d0(void)
-{
-	return 0;
-}
+
 
 void __cdecl fcn_004116c0(int a)
 {
 }
 
-int __cdecl fcn_004116d0(void)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_00412b10(char* e, float x, float y, float z, float rx, float ry, float rz, int w, int f)
 {
@@ -4165,10 +4150,7 @@ int __cdecl fcn_004c49f0(void* a)
 	return 0;
 }
 
-int __cdecl fcn_004c5480(int id, int kind, float v)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_004c5580(char* a, int b, char* c)
 {
@@ -4285,10 +4267,7 @@ int __cdecl fcn_004d4700(void)
 	return 0;
 }
 
-int __cdecl fcn_004d4ec0(void)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_004d74b0(void)
 {
@@ -4484,10 +4463,7 @@ int __cdecl fcn_004e9180(char* a, int v)
 	return 0;
 }
 
-int __cdecl fcn_004e99c0(int k)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_004e9ee0(void)
 {
@@ -5211,10 +5187,7 @@ int __cdecl fcn_00535550(void)
 	return 0;
 }
 
-int __cdecl fcn_00535560(void)
-{
-	return 0;
-}
+
 
 void __cdecl fcn_005356e0(void)
 {
@@ -5600,10 +5573,7 @@ int __cdecl fcn_0057c7b0(void)
 	return 0;
 }
 
-int __cdecl fcn_0057c9d0(unsigned char* a)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_0057cbc0(void)
 {
@@ -5670,20 +5640,11 @@ int __cdecl fcn_00580560(void)
 	return 0;
 }
 
-int __cdecl fcn_005805e0(void)
-{
-	return 0;
-}
 
-int __cdecl fcn_005809d0(void)
-{
-	return 0;
-}
 
-int __cdecl fcn_005809f0(void)
-{
-	return 0;
-}
+
+
+
 
 int __cdecl fcn_005848b0(char* a)
 {
@@ -6052,20 +6013,14 @@ int __cdecl fcn_005b7880(int a, char* b)
 	return 0;
 }
 
-int __cdecl fcn_005ba8e0(char* a)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_005ba8f0(int a)
 {
 	return 0;
 }
 
-int __cdecl fcn_005ba900(int a)
-{
-	return 0;
-}
+
 
 char* __cdecl fcn_005bdc30(int a, int* b, char* c, int d, int e)
 {

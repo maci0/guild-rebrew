@@ -7,7 +7,7 @@ void __cdecl fcn_00458800(char* src, float* v, float* out);
 float __cdecl fcn_004539e0(float* a, float* b);
 char __cdecl fcn_0045f160(char* g, float* v, int* a, int* b, int* c);
 int __cdecl fcn_00411be0(char* p);
-char* __cdecl fcn_0040b2f0(char* e, int kind, ...);
+char* __cdecl fcn_0040c120(char* e, int kind, ...);
 
 void __cdecl fcn_0040aaf0(char* owner, char* e)
 {
@@ -25,11 +25,11 @@ void __cdecl fcn_0040aaf0(char* owner, char* e)
 	fcn_00458800(e, g_662d40, b);
 	ang = fcn_004539e0(g_662d40, b);
 	if (fcn_0045f160(g, a, &x, &y, &z)) {
-		r = fcn_0040b2f0(owner, 0x2d, x, y, fcn_00411be0(*(char**) (e + 0x208)));
+		r = fcn_0040c120(owner, 0x2d, x, y, fcn_00411be0(*(char**) (e + 0x208)));
 		*(int*) (r + 0x160) |= 0x10;
 		*(float*) (r + 0x144) = a[0];
 		*(float*) (r + 0x148) = a[1];
 		*(float*) (r + 0x14c) = a[2];
-		fcn_0040b2f0(owner, 7, (int) (-ang * 57.29577791868204), 1);
+		fcn_0040c120(owner, 7, (int) (-ang * 57.29577791868204), 1);
 	}
 }
