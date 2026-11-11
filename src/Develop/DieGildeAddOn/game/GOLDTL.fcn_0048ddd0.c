@@ -20,19 +20,21 @@ int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
 int __cdecl fcn_0048ddd0(char* e, char* a2, char* a3)
 {
 	int mask;
-	int idx;
+	Ent* t;
 	int n;
 	int nv;
 	int tot[3];
 	int thr[3];
-	Ent* t;
 	int total;
 
 	mask = 0xf00500;
-	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + *(float*) 0x664154, &idx) == 0) {
-		return 0;
+	{
+		int idx;
+		if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + *(float*) 0x664154, &idx) == 0) {
+			return 0;
+		}
+		t = &((Ent*) g_7f4ca0)[(unsigned short) idx];
 	}
-	t = &((Ent*) g_7f4ca0)[(unsigned short) idx];
 	n = fcn_004e99c0(t->x166) / 3 + 2;
 	thr[0] = (int) (float) n;
 	thr[1] = (int) ((float) n * *(float*) 0x662acc);
