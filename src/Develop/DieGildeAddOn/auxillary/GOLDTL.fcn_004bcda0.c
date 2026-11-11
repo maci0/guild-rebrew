@@ -1,6 +1,8 @@
 #include "Develop/DieGildeAddOn/auxillary/plant.h"
 #include "Develop/Units/d3/d3_object.h"
 
+extern int g_7728f8;
+
 typedef struct PLANT_SLOT {
 	int counter;
 	char pad4[4];
@@ -44,8 +46,8 @@ char* __cdecl fcn_004bcda0(void* tab, unsigned int a2, unsigned int a3, int id, 
 	if (i == 0x40) {
 		for (i = 0, slot = table; i < 0x40; i++, slot++) {
 			if (slot->state == (char) 0xff) {
-				slot->counter = *(int*) 0x7728f8;
-				*(int*) 0x7728f8 += 1;
+				slot->counter = g_7728f8;
+				g_7728f8 += 1;
 				break;
 			}
 		}
