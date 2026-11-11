@@ -33,23 +33,21 @@ unsigned int __cdecl fcn_004ea130(unsigned int a0)
 			id = args[i].ref;
 			obj = gm_LookupEntityRecordById(id);
 			obj2 = gm_LookupEntityRecordById(args[i].id);
-			if (obj == 0 || obj[8] == 0 || obj[0x1b1] != 0 || obj2 == 0 || obj2[8] == 0) {
+			if (obj == 0 || (unsigned char) obj[8] <= 0 || obj[0x1b1] != 0 || obj2 == 0 || (unsigned char) obj2[8] <= 0) {
 				continue;
 			}
 			for (j = 0; j < n; j++) {
 				if (args[j].id == id) {
+					flag = flag | 1;
 					break;
 				}
-			}
-			if (j < n) {
-				flag = flag | 1;
 			}
 		} else if ((char) args[i].type == 3) {
 			if (args[i].n <= 0) {
 				continue;
 			}
 			p = (char*) 0x7f4ca2;
-			while (p < (char*) 0x85a0a2) {
+			while ((int) p < 0x85a0a2) {
 				if ((char) p[0x166] == (char) args[i].c8) {
 					flag = flag | 1;
 					if ((*p == 6 || *p == 7) && p[0x1af] == 0) {
@@ -72,9 +70,9 @@ done:
 			    *(unsigned char*) (obj + 0x1b1) != 0) {
 				continue;
 			}
-			args[i].id = args[i].id | 2;
+			flag = flag | 2;
 			break;
 		}
 	}
-	return (unsigned int) ((flag & 2) >> 1);
+	return (flag & 2) >> 1;
 }

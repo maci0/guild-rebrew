@@ -38,8 +38,11 @@ void __cdecl fcn_004cfe60(int a, char* b)
 		if (fcn_0045b990(top, x + 0x4c, &p, &q, &r)) {
 			fcn_00414be0(x, 0xff, 0, 0);
 		}
-		io_FormatTextBuffer(buf, 0x1177, *(int*) (ent + 0x54), *(unsigned short*) b,
-			*(int*) (fcn_004ce610(slot) + 0x54), *(unsigned short*) slot);
+		{
+			char* t = fcn_004ce610(slot);
+			io_FormatTextBuffer(buf, 0x1177, *(int*) (ent + 0x54), *(unsigned short*) b,
+				*(int*) (t + 0x54), *(unsigned short*) slot);
+		}
 		fcn_00533a40(buf);
 		return;
 	case 3:
