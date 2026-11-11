@@ -38,16 +38,21 @@ void __cdecl fcn_004dc6e0(char* obj, int* a1)
 		}
 		r = fcn_004aacb0((unsigned short*) v3, (unsigned short*) v4, (unsigned short*) v5, &tmp);
 		*(int*) (obj + 0x98) = tmp;
-	} else if (a1[0] == 2) {
+		*(int*) (obj + 0x94) = r;
+		obj += 0x14;
+		sprintf(obj, g_6b5c60);
+		return;
+	}
+	if (a1[0] == 2) {
 		r = fcn_004e9180(v3, a1[2]);
 		if (r == 0) {
 			return;
 		}
 		r = fcn_004aae50(*(char*) (a1 + 1), (unsigned short*) v3, a1 + 3, &tmp);
 		*(int*) (obj + 0x98) = tmp;
-	} else {
+		*(int*) (obj + 0x94) = r;
+		obj += 0x14;
+		sprintf(obj, g_6b5c60);
 		return;
 	}
-	*(int*) (obj + 0x94) = r;
-	sprintf(obj + 0x14, g_6b5c60);
 }
