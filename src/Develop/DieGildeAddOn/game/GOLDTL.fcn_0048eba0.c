@@ -51,9 +51,8 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 {
 	Slot slot[0xf];
 	Counts cnt;
-	F8 f;
 	int picked;
-	register int idx;
+	int idx;
 
 	if (busy != 0) {
 		return 0;
@@ -121,7 +120,8 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 		b->a = -1;
 		b->b = -1;
 		if (idx < 6) {
-			int mask = 0xf00500;
+			int mask;
+			mask = 0xf00500;
 			if (fcn_004a5340(e, 1, &mask, 0, (float) gm_RandomMod(0x20) + 10.0f, &picked)) {
 				b->type = 7;
 				b->b = -1;
@@ -131,19 +131,21 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 			}
 		} else {
 			if (idx == 6) {
-			cnt.total = -1;
-			f.mask = 0xa0744380;
-			f.b = 1;
-			if (g_77261c != 0) {
-				fcn_004a5e60(g_77261c, 4, f, 0, 100.0f, &cnt.total);
-			}
-			if (cnt.total != -1 || fcn_004a5e60(e, 6, f, 0, (float) gm_RandomMod(0x20) + 16.0f, &cnt.total)) {
-				b->type = 4;
-				b->a = cnt.total;
-				b->b = -1;
-				b->d = 0x48;
-				return 0x48;
-			}
+				int out;
+				F8 f;
+				out = -1;
+				f.mask = 0xa0744380;
+				f.b = 1;
+				if (g_77261c != 0) {
+					fcn_004a5e60(g_77261c, 4, f, 0, 100.0f, &out);
+				}
+				if (out != -1 || fcn_004a5e60(e, 6, f, 0, (float) gm_RandomMod(0x20) + 16.0f, &out)) {
+					b->type = 4;
+					b->a = out;
+					b->b = -1;
+					b->d = 0x48;
+					return 0x48;
+				}
 			}
 			if (idx == 7 && *(int*) (e + 0x194) < 3) {
 				return 0;
