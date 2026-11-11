@@ -100,15 +100,14 @@ Open, in order:
    (`REBREW_TOOLCHAINS_DIR`, see [build.md](build.md#prepare-compiler-images)). A pull is not
    possible: rebrew images are built from pinned sources, not published.
 
-## Verified checkpoint, 2026-11-05
+## Verified checkpoint, 2026-11-11
 
-[Release 1.10.0](releases/1.10.0.md) records the last full binary validation. Its server build
-matches the complete 286,720-byte reference: 316 function checks, 652 data checks,
-structural checks and Wine load/export resolution passed.
-
-That gate state is superseded by the passing run above. Both clients remain incomplete. The release compiled all 123 changed C
-translation units, but did not establish a new complete client image or gameplay
-result. Older client link counts and image scores are historical.
+[Release 1.11.0](releases/1.11.0.md) records the last full binary validation. The server gate
+passes: 316 of 316 functions, 652 of 652 data rows, every whole-binary check, Wine load and
+exports, and a raw link byte-identical to the 286,720-byte reference. Both clients were
+relinked from the release tree in `build/consolidation-baseline-pp/` and differ from their
+references in file bytes, sections and resources; the release notes list the numbers.
+Older client link counts and image scores are historical.
 
 Build trees and caches were cleared after validation. Local receipts and preserved
 images are outside the checkout at `../guild-rebrew-archive/2026-11-05/`. Historical

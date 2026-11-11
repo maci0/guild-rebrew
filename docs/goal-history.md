@@ -10,7 +10,7 @@ release states and running-job instructions do not describe the current tree.
 | --- | --- |
 | September 2026 | Server recovery and early codegen/layout experiments; later postlink claims were withdrawn. |
 | October 2026 | Raw server identity, shared client recovery, native contracts, library attribution and source-organization reviews. |
-| November 2026 | [1.10.0 source checkpoint](releases/1.10.0.md), reviewed client corrections and fleet shutdown. |
+| November 2026 | [1.10.0](releases/1.10.0.md) and [1.11.0](releases/1.11.0.md) source checkpoints, reviewed client corrections and matching fleets. |
 
 Detailed goal-by-goal chronology is archived. Resume from the
 [handoff](HANDOFF.md), not a historical "next" instruction.

@@ -19,7 +19,7 @@ belong in managed metadata.
 | Server setup/build | [Build guide](build.md) |
 | Client comparison builds | [Client guide](../stubs/README.md) |
 | Implementation and metadata rules | [AGENTS.md](../AGENTS.md) |
-| Releases | [1.10.0](releases/1.10.0.md) |
+| Releases | [1.11.0](releases/1.11.0.md), [1.10.0](releases/1.10.0.md) |
 
 ## Workflows
 

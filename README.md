@@ -6,10 +6,11 @@ server, GoldTL and Gold reference binaries.
 
 <a id="reconstruction-status"></a><a id="data-verification"></a>
 
-The latest source release is [1.10.0](docs/releases/1.10.0.md). Its rebuilt server
-matches all 286,720 reference bytes. Both clients remain incomplete, and the
-full project gate still fails. See [current work](docs/TODO.md) for the checks,
-limits and next actions.
+The latest source release is [1.11.0](docs/releases/1.11.0.md). Its rebuilt server
+matches all 286,720 reference bytes and the server gate passes. Both clients link
+with placeholder stubs but are far from byte-identical: 4.8% of GoldTL and 1.0% of
+Gold raw bytes equal the reference at original offsets. See [current work](docs/TODO.md)
+for the checks, limits and next actions.
 
 ![Reconstruction progress: code-byte accounting, C function matches and raw-file comparison for each target](docs/assets/reconstruction-status.svg)
 

@@ -56,8 +56,9 @@ It does not establish original retention, providers or successful gameplay.
 
 ## Compare
 
-Use the image and map from that build. Pass `--built` because the configured
-GoldTL `raw_link` points to a different historical build directory.
+Use the image and map from that build. Pass `--built` because both configured
+`raw_link` paths point to `build/consolidation-baseline-pp/`, the tree the
+status graphics read.
 
 ```sh
 uv run rebrew verify --target Europa1400Gold.exe \
