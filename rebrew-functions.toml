@@ -6637,7 +6637,11 @@ measured_at = "2026-11-09T07:09:30+00:00"
 ["GOLD.0x004022e0"]
 size = 404
 updated_by = "rehome"
-updated_at = "2026-10-24T13:58:54+00:00"
+updated_at = "2026-11-11T06:02:29+00:00"
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.ch_UpdateFades.c"
+name = "ch_UpdateFades"
+symbol = "_ch_UpdateFades"
+kind = "FUNCTION"
 
 ["GOLD.0x004022e0".verification]
 source_hash = "e65232e165147cfa5601ca42cfc64ea0baee0b389d0ad70fecb9f12469384038"
@@ -6688,6 +6692,38 @@ status = "RELOC"
 measured_at = "2026-10-22T08:35:51+00:00"
 
 ["GOLD.0x004022e0".binding_history.replacement]
+
+[["GOLD.0x004022e0".binding_history]]
+action = "rebind"
+reason = "same code as GoldTL 0x004027b0 found by byte match; shared source"
+changed_at = "2026-11-11T06:02:29.044483+00:00"
+counterpart_va = 0
+
+["GOLD.0x004022e0".binding_history.previous]
+size = 404
+
+["GOLD.0x004022e0".binding_history.previous.verification]
+source_hash = "e65232e165147cfa5601ca42cfc64ea0baee0b389d0ad70fecb9f12469384038"
+reference_hash = "d873206f2e7f8895e3c28f4922f10ffe4345428242399da94c9fdd730df10446"
+reference_size = "404"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "e3394f8c63a7abb27f03679999ab75cf99e9de888ef53217d8bb69cbde8215cd"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x4022e0"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "0e1cb75514681958f3924e8598666d83ac8302b1825ecadfb83cde08a284e166"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-10-22T08:35:51+00:00"
+
+["GOLD.0x004022e0".binding_history.replacement]
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.ch_UpdateFades.c"
+name = "ch_UpdateFades"
+symbol = "_ch_UpdateFades"
+kind = "FUNCTION"
 ["GOLD.0x004025c0"]
 size = 118
 status = "RELOC"
@@ -8531,7 +8567,11 @@ measured_at = "2026-11-09T07:09:30+00:00"
 ["GOLD.0x00406a70"]
 size = 326
 updated_by = "rehome"
-updated_at = "2026-10-24T13:58:54+00:00"
+updated_at = "2026-11-11T06:22:27+00:00"
+file = "src/Develop/Unassigned/GOLDTL.fcn_00407610.c"
+name = "fcn_00407610"
+symbol = "_fcn_00407610"
+kind = "FUNCTION"
 
 ["GOLD.0x00406a70".verification]
 source_hash = "77b9f1dd473379c65043c45f1ef99bb63cd59c7e77ecefdcb9fe760e38fac88f"
@@ -8594,6 +8634,38 @@ status = "RELOC"
 measured_at = "2026-10-22T08:35:51+00:00"
 
 ["GOLD.0x00406a70".binding_history.replacement]
+
+[["GOLD.0x00406a70".binding_history]]
+action = "rebind"
+reason = "same code as GoldTL 0x00407610 found by byte match; shared source"
+changed_at = "2026-11-11T06:22:27.410946+00:00"
+counterpart_va = 0
+
+["GOLD.0x00406a70".binding_history.previous]
+size = 326
+
+["GOLD.0x00406a70".binding_history.previous.verification]
+source_hash = "77b9f1dd473379c65043c45f1ef99bb63cd59c7e77ecefdcb9fe760e38fac88f"
+reference_hash = "fcd987d99147531a748bcd8cd62ae4ea7b966e482c764d806264a11a40f6c7c8"
+reference_size = "326"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "e3394f8c63a7abb27f03679999ab75cf99e9de888ef53217d8bb69cbde8215cd"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLD"
+va = "0x406a70"
+context_hash = ""
+defines = "[\"REBREW_GOLD\"]"
+input_hash = "2942144002254dff3c0c1ef9b306fc2c8e016352c5ff526313e4b1aaf99c0275"
+writer = "verify"
+status = "RELOC"
+measured_at = "2026-10-22T08:35:51+00:00"
+
+["GOLD.0x00406a70".binding_history.replacement]
+file = "src/Develop/Unassigned/GOLDTL.fcn_00407610.c"
+name = "fcn_00407610"
+symbol = "_fcn_00407610"
+kind = "FUNCTION"
 ["GOLD.0x00407200"]
 size = 146
 status = "RELOC"
