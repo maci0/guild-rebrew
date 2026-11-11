@@ -608665,33 +608665,39 @@ file = "src/Develop/DieGildeAddOn/game/fcn_0057cbc0.c"
 symbol = "_fcn_0057cbc0"
 name = "fcn_0057cbc0"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:37:57+00:00"
-status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-11-11T08:27:54+00:00"
+status = "NEAR_MATCHING"
 blocker = "Faithful body written from the 3-byte placeholder: SIZE_MISMATCH 268/394, obj 394 vs 389 (delta 5). Whole control flow matches (three guards on p+0x84/p+0x70, arm-by-arm: early fcn_004c4450 exit, fcn_00546190 close, p+0x70==0 window build with fcn_00504e70/fcn_00502cd0/fcn_00500bb0/fcn_0051af00(0x4205)/9-arg fcn_00545e80 with table 0x7f4ca0+w*0x21c/fcn_00515540+fcn_004432d0/fcn_00426fd0(0x6a80c0)+fcn_00428340 then p+0x58=0/p+0x70=1, and p+0x70==1 path fcn_0057c9f0 + fcn_0045620). Remaining delta is MSVC 6 codegen grouping: target defers stack cleanup across the fcn_0051af00/fcn_00545e80/fcn_00515540/fcn_004432d0/fcn_00426fd0 sequence into one add esp,0x40 (candidate cleans 0x30 then 0xc then 8), target hoists mov esi,[0x6b8010] before the fcn_00515540 call, and target keeps the 0x7f4ca0 table addend fused in lea while candidate splits it; plus unresolved abs32 relocations for g_6b5c60 (no data row) and the 0x6a80c0 literal. No #pragma optimize needed: target does not keep a frame pointer (prologue is sub esp,0x400; push ebp; mov ebp,[esp+0x408], i.e. ebp just holds the arg)."
 blocker_delta = 5
 
 ["GOLDTL.0x0057cbc0".verification]
-source_hash = "e41298d2902a3c99239e149c18ccb26e1792fd832758909607e9f06190b2108f"
+source_hash = "895505db09d8fb70230dc9ec5c7d658fa1c9c5c06e7efe3c31fa5aa55473b3ac"
 reference_hash = "398a49f5bc33cda2b577b146a640d3c92788a10df7724067b01bbbe6312322eb"
 reference_size = "389"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "92446fa5a7edfb0046a864dba70193f19c7917f7c4c64e30feb1c14855cc447b"
+compiler_hash = "03720b38d630e9b65026c65db3d4eb6151720092ea5609ea676d1d07a884bf4c"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x57cbc0"
 context_hash = ""
 defines = "[]"
-input_hash = "4e0c34c23bad72ed8c27afe6a61f0e744b94648f304516655511e3b0630649a0"
-writer = "verify"
-status = "SIZE_MISMATCH"
-measured_at = "2026-11-09T07:20:00+00:00"
+input_hash = "ba686a8c38acffbca595e8abc6663f60341c2cfbf0e2dbbfa88296be9d3c804d"
+status = "NEAR_MATCHING"
+writer = "test"
+measured_at = "2026-11-11T08:27:54+00:00"
 
 [["GOLDTL.0x0057cbc0".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-24T04:52:10.619603+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0057cbc0".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-11T08:27:54.178791+00:00"
 updated_by = "test"
 ["GOLDTL.0x00584f00"]
 size = 301

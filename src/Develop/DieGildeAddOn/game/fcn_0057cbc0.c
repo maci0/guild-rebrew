@@ -19,7 +19,7 @@ void* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(void*, int, int);
 void __cdecl fcn_00546190(char*);
 void __cdecl fcn_0057c9f0(char*);
-int __cdecl fcn_004c5620(char*, int);
+int __cdecl fcn_004c5620(int, char*);
 
 /* ADDRESS: GOLDTL 0x0057cbc0 */
 void __cdecl fcn_0057cbc0(char* p)
@@ -30,6 +30,9 @@ void __cdecl fcn_0057cbc0(char* p)
     char* e;
     char* tbl;
     int w;
+    int r;
+    int gfx;
+    int wnd2;
 
     if (*(int*) (p + 0x84) != -1 && fcn_004c4450(*(int*) (p + 0x84)) == 0)
         return;
@@ -50,14 +53,17 @@ void __cdecl fcn_0057cbc0(char* p)
             he_MessageBoxQuickjump(*(int*) (tbl + 4), *(int*) (tbl + 4), buf, 0, 0x5fc,
                          *(int*) (s + 1), *(int*) (wnd + 2), g_6b5c60,
                          g_6b5c60);
-            fcn_004432d0(fcn_00515540((int) wnd), 1);
+            gfx = g_6b8010;
+            r = fcn_00515540((int) wnd);
+            fcn_004432d0(r, 1);
             e = (char*) evt_LoadGfxScript(g_6a80c0);
             if (e != 0) {
+                wnd2 = *(int*) (wnd + 2);
                 *(int*) (e + 0xc8c) = 1;
-                *(int*) (e + 0x104) = *(int*) (wnd + 2);
+                *(int*) (e + 0x104) = wnd2;
                 fcn_00428340(e, 1, *(int*) (p + 0xac));
             }
-            fcn_004432d0(g_6b8010, 1);
+            fcn_004432d0(gfx, 1);
         }
         *(int*) (p + 0x58) = 0;
         *(int*) (p + 0x70) = 1;
@@ -65,6 +71,6 @@ void __cdecl fcn_0057cbc0(char* p)
     }
     if (*(int*) (p + 0x70) == 1 && (*(u8*) (p + 0x78) & 4) == 0) {
         fcn_0057c9f0(p);
-        *(int*) (p + 0x84) = fcn_004c5620(p, -1);
+        *(int*) (p + 0x84) = fcn_004c5620(-1, p);
     }
 }
