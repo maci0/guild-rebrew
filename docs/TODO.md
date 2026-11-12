@@ -1,143 +1,147 @@
 # Current work
 
-## Working checkpoint, 2026-11-08
+## Read-only snapshot, 2026-11-12
 
-State of the tree after the translation-unit consolidation and naming rounds. Both client
-comparison scaffolds link (below); no byte-level image comparison was run, so the byte results here are per-function.
+The status read reports 4,148 EXACT or RELOC GoldTL functions out of 5,167,
+1,977 Gold functions out of 4,422, and 251 of 251 server game functions.
+Gold includes two naked matches, so its C recovery count is 1,975.
+Accounted `.text` is 55.2% GoldTL, 21.8% Gold and 100.0% server.
+These are stored verdicts, not a fresh compile of the working tree.
 
-- Status snapshot (`rebrew status --all-targets --json`, graphics regenerated): GoldTL
-  4,124 of 5,194 C functions matched and 54.1% code accounted (28 stock zlib functions moved
-  to library, seven operand-order fixes below); Gold 1,968 of 4,421 (51 twin adoptions below); the server unchanged at 251 of 251.
-- 123 loose `fcn_<VA>` functions were renamed from literal evidence (script
-  registrations, AI method registrations, tag strings with twin names). Each row is in
-  [name-ledger.tsv](name-ledger.tsv); the method is in [naming conventions](naming_conventions.md).
-  Names that rest on a position or an allocation tag alone were held out.
-- Three merged units (`main.c`, `aemter.c`, `d2_windows.c`) were split back to one file
-  per function because the literal-pool string evidence did not support them as native
-  units. Every row kept its status. See [source layout](source-layout.md).
-- Six loose duplicates are bound to their shared definitions: `gm_RemoveObjectByType`,
-  `gm_RemoveLinkedNodeById`, `gm_FindKind47ByOwner`, and, after guarding the server-only
-  log call with `#if defined(REBREW_SERVER)` in `spiel.c`, `gm_SumSlotTreasury`,
-  `gm_SumTreasury` and `gm_SubObjectNoKill`. Every row of `spiel.c` compared equal on all
-  three targets before and after each guard. Six other pairs still regress because the
-  shared body differs from the TL body beyond log calls: `gm_SubObjekt` (a guard was tried
-  and reverted), `gm_AllocBuildingDefaults` (different loop shapes), `cm_ExProdObjekt`
-  (different function entry), `gm_ResolveEntityRecord`, `gm_AssignBuildingOwner`,
-  `gm_ResolveEntitySlot`. `gm_ff_Objekt` (310 callers) and three pairs that failed the
-  preview were not retried.
-- `rebrew lint --json` reports 0 errors. Seven GoldTL functions recorded as RELOC on 2026-11-02 had
-  tested as NEAR_MATCHING (`0x00452360`, `0x00474780`, `0x004e4b60`, `0x00526db0`, `0x00537080`,
-  `0x005e3c40`, `0x00451150`). Each differed from the original only in operand order, shown by
-  swapped relocation targets in `relocation_bindings`: commutative operands (`a * b`, `a + b`), a
-  chained assignment (`a = b = f()`), two adjacent statements, and a 16-byte `Rect` copy that the
-  original wrote field by field (right, left, top, bottom). They are RELOC again after those source
-  edits; the underlying cause of the earlier change is not established.
+Measured: 2026-11-12, `rebrew status --all-targets --json` (the first review's
+saved status read); `.venv/bin/rebrew todo --json` confirms the GoldTL totals.
 
-Open, in order:
+| Target | NEAR_MATCHING | SIZE_MISMATCH | STUB | Without verdict |
+| --- | ---: | ---: | ---: | ---: |
+| GoldTL | 102 | 885 | 30 | 0 |
+| Gold | 9 | 55 | 138 | 1 |
+| server.dll | 0 | 0 | 0 | 0 |
 
-1. Link: both client scaffolds build and link on 2026-11-08 (`europa1400gold_tl` 3.0 MB,
-   `europa1400gold` 0.7 MB, relinked on 2026-11-09 after the twin adoptions) with generated placeholder stubs, which prove nothing about ABI or
-   storage ownership. GoldTL had 51 unresolved externals before the stubs and Gold had 184;
-   they are now defined in `stubs/goldtl/symbol_stubs_extra.c` and `stubs/gold/symbol_stubs_extra.c`
-   (`rebrew build symbol-stubs`, one special for `fcn_00401260`). One real fix: the Gold file
-   `GOLD.fcn_005af320.c` called `fcn_0046b2b0` (the TL spelling) where the native calls target
-   `fcn_0046e700`; five relocations that were UNRESOLVED now bind to it. What the stubs stand in
-   for is still open: 40 TL data externals need storage rows (extent evidence for 25 shows
-   interior views, a conflict with a string at 0x6a42f8 and 14 with no established size, so no
-   row came from the plan's 4-byte `int` default), 49 proposed global names have no store row,
-   and 124 Gold externals need Gold definitions (a Gold adopt was refused because the Gold bytes
-   differ from the TL function at the same address). Placeholder bindings done by hand for
-   `fcn_00402a00`, `fcn_00442be0`, `fcn_004e6bd0` and `fcn_00504e70`. The upstream tool gaps are
-   written in its `docs/IDEAS-GUILD.md` (2026-11-08 entries, committed locally in that checkout as `5d4ca98a`, not pushed; that checkout is ahead 1 and behind 1 on origin).
-2. GoldTL image comparison (2026-11-10, `build/consolidation-baseline-pp/Europa1400Gold_TL.exe`, rebrew 6.31.0, dry runs): whole-binary exports, imports, relocations, headers and layout match; file bytes, sections (`.text` 2,560,380 vs 2,491,370, `.rdata` 46,382 vs 76,722, `.data` 17,822,628 vs 15,766,564) and resources differ. Text placement: 43 of 5,168 functions at their reference VA, 5,125 misplaced; the raw-link pass finds 5 functions whose linked bytes equal the reference out of 3,789 candidates. Data: 167 of 270 comparable rows match, 408 displaced. Next: replace stubs with recovered code or reviewed data rows, then repeat `rebrew verify --whole-binary --text --raw-link --built` (see [client builds](../stubs/README.md)); run the promoting raw-link pass only while no agent edits sources, since it records statuses from the working tree.
-   Lead: `fcn_00499950` (GoldTL 0x00499950) tests RELOC 250 of 250 when its eight raw float addresses 0x1009354 to 0x100938c (stride 8) are read and written through typed `extern float` globals (`.scratch/fcn_00499950.named-reloc.c`); it is not committed because no data row or definition owns that range, so the client link would need placeholder stubs. Establish the table's extent and owner first.
-   Lead: `GOLDTL.fcn_00495180.c` (GoldTL 0x00495180) tests RELOC 625 of 625 only with a redundant check: `if (res2 == 0) continue;` followed by `if (res2 != 0 && (x >= bx || y >= by))` (`.scratch/fcn_00495180.redundant-reloc.c`). Folding the two into one `if (res2 != 0 && ...)` tests NEAR_MATCHING 623 of 625: the reference compares the `rate` result with `cmp eax, esi` against the zero register it also pushes as the fifth argument, where that form emits `test eax, eax`. Not committed; find a faithful form that makes the compiler reuse `esi`.
-   Lead: `fcn_00418210.c` (GoldTL 0x00418210, 904 bytes) tests NEAR_MATCHING 880 of 904 (`.scratch/fcn_00418210.near-880.c`, from the brief 903 partial): both particle loops step as `i++, p += 0x54`, the lifetime tail tests `p[0x10] > 0.0` with the `_ftol` store first. Of the 17 remaining structural differences, 2 are the `obj+0xdc` and `[esp+0x1f]` loads in swapped order (moving the `e` assignment above `mask` in the source did not change it) and 15 are stack slots: the reference keeps `len`, the `fild` temporaries and `alive` in the dead `obj` argument slot `[esp+0x28]` and `n` at `[esp+0x10]`; the candidate puts `len` at `[esp+0x10]`. Reordering or block-scoping the `len` and `half` declarations changed nothing.
-   Lead (unverified cause): small GoldTL functions whose reference codegen the default `/O2 /Gd` build does not reproduce from any tried C form. (1) Float locals spilled to a stack frame: 0x004cefb0 (70 bytes, `sub esp, 0x10`, `dx` and a copy of `p->y` stored and reloaded) and 0x004cf000 (102 bytes, 0x20 frame) compile to 46 and 98 bytes with the values kept on the FPU stack. (2) Mixed tail calls: 0x004da170 tail-jumps to `fcn_004d9f20` but calls `fcn_004d7d30` with `call; add esp, 4; ret`, and 0x005d0460 does the same with `fcn_005cff10`/`fcn_005cff20`; the build tail-jumps both (19 vs 28 bytes for 0x004da170; tried if/else orders, an unprototyped declaration and an `int` return type). Both may point to a different compilation context for their original TUs; check neighbouring functions of the same TU before any flag change, which would apply to the whole TU.
-   Lead: SIB base/index order. Three GoldTL functions differ only in the order of the two registers of an indexed address, the reference putting the loop index register first: 0x00446540 (1165 of 1172, `[edi + eax + 0x28]` where `edi` is the byte offset `i` and `eax` is `n->data`, 7 bytes), 0x004a0bb0 `ai_StartBerufsausbildung` (491 of 492, `[esi + eax + 0x74]` for `q[rnd + 0x74]`) and 0x0041bf90 (503 of 510, three accesses in its propagation loop). Rewriting the operand order (`i + data`, `(q + 0x74)[rnd]`, `q[0x74 + rnd]`), integer instead of pointer arithmetic, and `unsigned char*` for the base changed nothing. A form that makes MSVC 6 treat the index as the base register would likely close all three.
-3. Stock zlib code is attributed as library, not renamed as game code: 22 zlib rows were already
-   `LIBRARY` rows, and 28 loose zlib functions (plus seven Gold twin rows) were retired and bound to the vendored sources
-   with `rebrew library bind-source` (2026-11-08; each vendored row matches the original bytes).
-   Matching each loose function's bytes against the compiled vendored sections (relocations and `call`
-   operands masked, names from the COFF symbol table) identified all but one of the nine that stayed
-   loose, and showed several earlier guesses were wrong: `fcn_0045e180` is `lm_init`, `fcn_0045e520` is
-   `deflate_fast`, `fcn_00461ba0` is `inflateSync` and `fcn_00461c70` is `inflateSyncPoint`. `lm_init`,
-   `inflateSync`, `inflateSyncPoint`, and from a sweep of all loose GoldTL functions against every compiled
-   vendored object (`gzputs`, `inflateInit_`) are now library rows. `deflate_fast` (0x0045e520), `deflateCopy`
-   (0x0045dfd0), `inflate_blocks` (0x0045fd70), `inflate` (0x004616e0), `inflate_blocks_sync_point`
-   (0x00460a40), `inflate_set_dictionary` (0x00460a00), `zError` (0x00465800) and `zcfree` (0x00465840) match the vendored bytes, but `rebrew library bind-source` refuses their definitions
-   ("one complete definition with matching C symbol"), so they stay loose. `fcn_00401000` (52 bytes)
-   matches nothing in the vendored zlib objects. The 12 d3dx8 matches were already `LIBRARY` rows.
-   Library functions do not count as reversing progress.
-4. 133 of the 164 files named `fcn_<VA>.c` that define a real name were renamed to
-   `MODULE.name.c`. The other 30 were skipped: 19 previews include a data row, 6 failed the
-   preview, 4 touch more than 60 files and 1 failed its before-test.
-- `rebrew orphans prune` (2026-11-09) deleted 859 orphaned rows (855 DISPLACED data rows, 2 STUB
-  function rows, 2 empty-status data rows) and held back 489 earned rows (484 GOLDTL function rows
-  with retired-claim history, 5 VERIFIED data rows). Function verdicts, lint and the canary did not
-  change; the GoldTL data section went from 1,270 to 417 rows.
-- GA batches on 2026-11-09 (`--improve` three times, `--size-mismatch` once, 100 functions) matched one, `fcn_004763e0`. The rest need hand diagnosis from `rebrew diff`; see provenance for the two that were tried by hand and did not close (`fcn_0048ddd0`, `fcn_004b64b0`, `fcn_00495180`).
-- Upstream gap: `rebrew library bind-source` refuses eight loose zlib functions that match the compiled
-  vendored objects byte for byte (`zError`, `zcfree`, `deflate_fast`, `deflateCopy`, `inflate_blocks`,
-  `inflate`, `inflate_blocks_sync_point`, `inflate_set_dictionary`). The pinned zlib 1.1.3 definitions are
-  K&R style behind macros: `has_unique_source_definition` is false for the seven probed names that exist in
-  the signature map or the file (`zError`, `zcfree`, `zcalloc`, `deflate_fast`, `deflateCopy`,
-  `inflate_blocks`, `inflate`), and `inflate_set_dictionary` and `inflate_blocks_sync_point` are missing
-  from `function_signatures`. Filed in the upstream `docs/IDEAS-GUILD.md` (local commits, not pushed).
-- Server gate (2026-11-10, rebrew 6.31.0): `uv run bash scripts/gate.sh` passes (`GATE: pass`, exit 0): lint 0/0, 316 of 316 functions, 652 of 652 data rows, whole-binary and Wine checks, d3dx8 screening 0 findings, raw link byte-identical at 286,720 bytes. `0x00460a40` is bound to `references/zlib/infblock.c` (EXACT; the parser fix is upstream commit cae18e2c, unreleased). `0x005f022d` has no stored provider field; COMDAT order puts it in `createmesh.obj`. `0x005f02a4` is an unnamed 7-byte LIBRARY row below the matcher minimum.
-5. About 5,000 loose `fcn_*.c` files have no literal evidence for a name.
-   Matching: 112 GoldTL functions remain NEAR_MATCHING. A 2026-11-08 round tried the 89 with 48 or fewer
-   differing bytes (reorder commutative operands, independent statements, equivalent rewrites; tests
-   with `--no-promote` only). None reached a full match; three gained 1 to 4 bytes only by changing
-   behaviour (swapped constants or call arguments, an extra assignment) and were rejected. What is left
-   is mostly register allocation, jump direction and instruction order, which need a different
-   source shape, not operand swaps. Details: `.scratch/consolidation-2026-11-05/slot-2/match/`.
-6. The compiler image `rebrew/msvc:6.0-sp5-pp-win32` disappeared from Docker on 2026-11-08
-   (cause not established; a `docker builder prune` from another session was seen
-   running afterwards) and was rebuilt with
-   `rebrew toolchain build msvc-6.0-sp5-pp` (and `msvc-6.0-sp5` and `msvc-6.0-sp5-crt`, which the
-   server target needs) using the local recipes checkout
-   (`REBREW_TOOLCHAINS_DIR`, see [build.md](build.md#prepare-compiler-images)). A pull is not
-   possible: rebrew images are built from pinned sources, not published.
+Measured: 2026-11-12,
+`.venv/bin/python .scratch/review/docs-todo/measure-counts-2.py`.
+Counts select source-bound FUNCTION rows in `rebrew-functions.toml`.
+The Gold row without a verdict is separate from STUB.
 
-## Verified checkpoint, 2026-11-11
+Lint passed on all targets. Each checked 5,397 files with 0 errors and 0 warnings.
+Measured: 2026-11-12, `.venv/bin/rebrew lint --all-targets` (exit 0).
 
-[Release 1.11.0](releases/1.11.0.md) records the last full binary validation. The server gate
-passes: 316 of 316 functions, 652 of 652 data rows, every whole-binary check, Wine load and
-exports, and a raw link byte-identical to the 286,720-byte reference. Both clients were
-relinked from the release tree in `build/consolidation-baseline-pp/` and differ from their
-references in file bytes, sections and resources; the release notes list the numbers.
-Older client link counts and image scores are historical.
+[Release 1.11.0](releases/1.11.0.md) records the last full release validation:
+316 server function checks, 652 data checks, Wine load and exports passed;
+the raw server image matched the 286,720-byte reference. Both clients differed
+in file bytes, sections and resources. The November 11 twin-adoption relink
+also succeeded with placeholder stubs. Neither client is byte-identical.
+See [provenance](provenance.md) for the individual changes and measurements.
 
-Build trees and caches were cleared after validation. Local receipts and preserved
-images are outside the checkout at `../guild-rebrew-archive/2026-11-05/`. Historical
-`.scratch/` paths resolve under that archive's `scratch/` directory. Rebuild before
-claiming a current image result. [Build instructions](build.md) and
-[client instructions](../stubs/README.md) describe how.
+Measured: 2026-11-11, release validation commands and counts are recorded in
+[Release 1.11.0](releases/1.11.0.md#validation). They were not rerun in this review.
 
-## Next actions
+The configured images exist under `build/` and `build/consolidation-baseline-pp/`.
+Their presence does not establish that they reflect current sources. Rebuild
+before claiming a new image result. [Build instructions](build.md) and
+[client instructions](../stubs/README.md) describe the checks.
 
-1. Review the five lint warnings: three STUB rows lack blocker explanations,
-   `amt.office_slot:SERVER` has stale type evidence, and generated instructions
-   differ from the installed template. Rebind or refresh only after review.
-2. Resolve the 28 D3DX screening findings with complete native/operand/provider
-   evidence. Do not count library bodies as game recovery or suppress the gate.
-3. Review the unresolved source questions in the [handoff](HANDOFF.md). Recheck
-   current source before adopting a candidate.
-4. Rebuild each client and record fresh link, placement, data and whole-file checks.
-   Repair actual provider/ownership failures before interpreting layout scores.
-5. Recover remaining C bodies and reconcile shared declarations/types across all
-   targets. Preserve the server after each shared change.
+## Open work
 
-The November 5 cleanup stopped the reconstruction fleet and removed its heartbeat.
-Its reservations are closed.
+The default-target TODO read ranks displaced `g_869480` and `g_90e0a0` first.
+Check their linked placement and native ownership as part of the provider work
+below. The first code actions are `fcn_005ba910` (SIZE_MISMATCH),
+`fcn_004dcf50` (STUB) and `io_AppendText` (STUB). Review their stored blockers
+before another source-shape experiment. Naming and consolidation are separate
+review work, not the top-ranked recovery actions.
+
+Measured: 2026-11-12, `.venv/bin/rebrew todo --json` (GoldTL, the configured
+default). The read reports 409 data-drift actions, 1,003 improve-match actions,
+13 fix-delta actions, two start-function actions, eight start-data actions,
+one run-prover action and 3,726 exact-only actions. These are action categories,
+not status counts. Raw-link verification records linked EXACT only when its
+requirements are met.
+
+1. Replace client placeholder stubs with evidenced function providers or data
+   owners. `CMakeLists.txt` still includes `symbol_stubs_extra.c` for both
+   clients and the Gold `symbol_stubs_adopted.c` and `symbol_stubs_adopted2.c`.
+   The latter was added after the November 11 twin adoptions. Placeholder
+   definitions establish neither ABI nor storage ownership. The November 8
+   extent review found interior vector views at `g_773e18` and `g_773e1c`, and
+   a string conflict at `g_6a42f8`/`g_6a42fc`; those names still have no data
+   rows. Establish complete extents and backing objects before adding storage.
+   Rebuild clients and repeat placement, data, imports and whole-file checks
+   after provider changes. Run promoting verification only while sources are stable.
+2. Review remaining shared-source candidates. Earlier regressions involved
+   `gm_SubObjekt`, `gm_AllocBuildingDefaults`, `cm_ExProdObjekt`,
+   `gm_ResolveEntityRecord`, `gm_AssignBuildingOwner` and `gm_ResolveEntitySlot`;
+   their original failed comparisons are in provenance. `gm_ff_Objekt` was
+   not completed. Recheck current bindings and whole-TU results before retrying.
+   Preserve the server after shared declaration, type or body changes.
+3. Review seven remaining zlib identities that still bind to loose game files:
+   `deflate_fast` (0x0045e520), `deflateCopy` (0x0045dfd0),
+   `inflate_blocks` (0x0045fd70), `inflate` (0x004616e0),
+   `inflate_set_dictionary` (0x00460a00), `zError` (0x00465800) and
+   `zcfree` (0x00465840). The November 8 compiled-vendored-object comparison
+   identified these bodies, but the source binder then refused their definitions.
+   The later parser fix enabled `inflate_blocks_sync_point` (0x00460a40),
+   now LIBRARY and EXACT on `references/zlib/infblock.c`. Do not assume the
+   other binding failures persist without a new preview. `fcn_00401000`
+   (52 bytes) had no vendored zlib match in that sweep. Library bodies do not
+   count as game recovery.
+
+   Measured: 2026-11-12,
+   `.venv/bin/python .scratch/review/docs-todo/measure-counts-2.py` confirms
+   seven remaining FUNCTION bindings. The earlier byte-identity sweep and
+   parser repair are recorded in [provenance](provenance.md).
+4. Continue evidence-based naming and file renames. There are 5,029 paths
+   matching `*fcn_*.c` under `src/`; that filename count does not establish
+   whether literal evidence exists. Of files bound in the function store,
+   137 existing address-named C files have at least one non-`fcn_` row name.
+   Review identity, shared declarations and data rows before renaming.
+
+   Measured: 2026-11-12,
+   `.venv/bin/python .scratch/review/docs-todo/measure-counts-2.py`.
+5. Recover remaining C bodies and review the unresolved source questions in
+   [HANDOFF.md](HANDOFF.md). The status snapshot has 102 GoldTL NEAR_MATCHING
+   functions. Earlier operand-order and declaration-order sweeps did not close
+   all candidates. Use current diffs before repeating an old experiment.
+
+   Measured: 2026-11-12, `.venv/bin/rebrew todo --json`,
+   `coverage.statuses.NEAR_MATCHING`.
+
+## Matching leads
+
+These leads remain open in the function store. Scores below describe the earlier
+experiments, not fresh tests. `.scratch/` candidates are local evidence;
+older receipts may be under `../guild-rebrew-archive/2026-11-05/scratch/`.
+
+- `fcn_00499950` (250 bytes, stored NEAR_MATCHING): the named-float candidate
+  `.scratch/fcn_00499950.named-reloc.c` measured RELOC 250 of 250. Its eight
+  float addresses, 0x01009354 to 0x0100938c at stride 8, still have no data
+  rows. Establish the table's extent and owner before adopting the candidate.
+- `fcn_00495180` (625 bytes, stored NEAR_MATCHING):
+  `.scratch/fcn_00495180.redundant-reloc.c` measured RELOC with a redundant
+  zero check. The kept source uses the single rate check. Its earlier score
+  was 623 of 625: `test eax, eax` instead of the reference's `cmp eax, esi`.
+  Find a faithful form that reuses the zero register.
+- `fcn_00418210` (904 bytes, stored NEAR_MATCHING): the 880-of-904 form landed
+  on November 11. Two of the 17 structural differences were swapped loads
+  of `obj+0xdc` and `[esp+0x1f]`; the other 15 were stack slots. The reference
+  reuses the dead `obj` argument slot for `len`, conversion temporaries and
+  `alive`. Declaration reordering and block-scoping `len`/`half` did not help.
+- Compilation-context questions: 0x004cefb0 (70 bytes) and 0x004cf000
+  (102 bytes) remain SIZE_MISMATCH; earlier builds kept float locals on the
+  FPU stack where the reference spilled them. 0x004da170 (28 bytes) and
+  0x005d0460 (81 bytes) remain SIZE_MISMATCH; earlier builds tail-jumped both
+  branches where the reference used one call and one tail jump. Check native
+  TU neighbours before changing flags, and apply evidenced flags to the whole TU.
+- SIB base/index order: 0x00446540 (1,165 of 1,172),
+  `ai_StartBerufsausbildung` at 0x004a0bb0 (491 of 492), and 0x0041bf90
+  (503 of 510) remain NEAR_MATCHING. Earlier operand swaps, integer pointer
+  arithmetic and byte-pointer bases did not reproduce the reference register
+  order. Diagnose the current compiled operands before another rewrite.
 
 ## Choose work from canonical inputs
 
 ```sh
-uv run rebrew todo --target Europa1400Gold_TL.exe --json
-uv run rebrew source findings 0x<VA> --json
-uv run rebrew lint --all-targets --json
+.venv/bin/rebrew todo --target Europa1400Gold_TL.exe --json
+.venv/bin/rebrew source findings 0x<VA> --json
+.venv/bin/rebrew lint --all-targets --json
 ```
 
 [goal.md](../goal.md) defines completion. [AGENTS.md](../AGENTS.md) owns project

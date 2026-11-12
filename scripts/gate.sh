@@ -222,9 +222,23 @@ done
 # fine: their output is byte-identical here.
 echo "== per-file toolchain pins"
 pin_dir=build/CMakeFiles/server_dll.dir
-pins=$(grep -h -oE '/REBREW_TOOLCHAIN:[A-Za-z0-9._-]+' \
-    "$pin_dir/flags.make" "$pin_dir/build.make" "$pin_dir/link.txt" | sort -u || true)
-if [ -z "$pins" ]; then
+pin_scan_rc=0
+pins=""
+for pin_file in "$pin_dir/flags.make" "$pin_dir/build.make" "$pin_dir/link.txt"; do
+    if [ ! -f "$pin_file" ] || [ ! -r "$pin_file" ]; then
+        echo "REGRESSION: missing or unreadable pin input: $pin_file"
+        pin_scan_rc=2
+    fi
+done
+if [ "$pin_scan_rc" -eq 0 ]; then
+    pins=$(grep -h -oE '/REBREW_TOOLCHAIN:[A-Za-z0-9._-]+' \
+        "$pin_dir/flags.make" "$pin_dir/build.make" "$pin_dir/link.txt")
+    pin_scan_rc=$?
+fi
+if [ "$pin_scan_rc" -gt 1 ]; then
+    echo "REGRESSION: cannot check per-file toolchain pins"
+    rc=1
+elif [ -z "$pins" ]; then
     echo "no per-file toolchain pins"
 else
     srv_codegen=$(rebrew toolchain detect original/Server/server.dll --target server.dll --json 2>/dev/null |

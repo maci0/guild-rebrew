@@ -2,9 +2,9 @@
 
 # Knowledge base
 
-Each topic has one owner below. Link to that owner instead of copying its rules,
-status or findings. Historical measurements belong in archives; current verdicts
-belong in managed metadata.
+Use the topic owners below instead of copying their rules, status or findings.
+Historical measurements belong in archives; current verdicts belong in managed
+metadata.
 
 <a id="reading-order"></a>
 
@@ -14,7 +14,9 @@ belong in managed metadata.
 | --- | --- |
 | Project overview | [Repository README](../README.md) |
 | Completion criteria | [Objective](../goal.md) |
+| Project rule owners | [Project principles](project-principles.md) |
 | Current validation and priorities | [Current work](TODO.md) |
+| Work and completion pointers | [Remaining work](remaining-work.md) |
 | Unfinished source questions | [Handoff](HANDOFF.md) |
 | Server setup/build | [Build guide](build.md) |
 | Client comparison builds | [Client guide](../stubs/README.md) |
@@ -23,10 +25,9 @@ belong in managed metadata.
 
 ## Workflows
 
-Obsidian users can open the repository root as a vault and start with this page.
-Use Markdown links with relative paths; keep `.obsidian/` settings local. New notes
-belong in `docs/`, and attachments in `docs/assets/`. Git remains the source of truth;
-no plugins are required.
+For an Obsidian vault, open the repository root and start with this page.
+Use relative Markdown links; keep `.obsidian/` settings local. Put new notes
+in `docs/` and attachments in `docs/assets/`.
 
 | Topic | Canonical page |
 | --- | --- |

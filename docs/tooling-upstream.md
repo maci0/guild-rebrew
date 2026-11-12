@@ -1,6 +1,6 @@
 # Tooling
 
-Use `uv run rebrew <command>` and its public APIs before adding a helper.
+Use `.venv/bin/rebrew <command>` and its public APIs before adding a helper.
 `pyproject.toml` and `uv.lock` specify package pins. A sibling tooling checkout is not
 needed for normal reconstruction.
 
@@ -30,37 +30,30 @@ the returned digest. [AGENTS.md](../AGENTS.md) owns metadata and upstream repair
 | `scripts/gate.sh` | Server acceptance checks |
 | `scripts/verify_objective.py` | Independent raw-file equality check |
 | `scripts/wine_load_check.sh` | Load the server DLL and resolve Init/Exit |
-| `scripts/gen_bss_layout.py` | Measured server allocation/layout recipe |
 | `scripts/gen_import_includes.py` | Native import retention/order recipe |
-| `scripts/gen_data_lead.py`, `scripts/gen_text_lead.py` | Existing measured link-layout generators |
 | `scripts/progress_svg.py` | Graphics from a canonical status report |
 | `stubs/linked_manifest.py` | Scaffold attribution from a successful link map |
 
-Layout generators do not establish original storage owners. Retired split-link,
+Layout generators do not establish original storage owners.
+`scripts/gen_text_lead.py` is disabled by default and is not a reconstruction
+procedure. The BSS and data-lead generators were retired on 2026-11-12: their
+outputs (`src/bss_layout/*.c`) are committed and verified, and rerunning them
+would reassign ADDRESS bindings and split complete objects. Retired split-link,
 copied-CRT and replacement-import emitters are not build alternatives.
 
 ## Open gaps
 
 Reusable issues belong in the upstream checkout's `docs/IDEAS-GUILD.md`, with
-replay evidence. Do not treat an old local "unreleased" label as current release
-state; the archived repair reports below describe their own package versions.
+replay evidence. Check installed help and preview the selected target's writes
+before using `data layout fill`. Review the proposed source paths and storage
+ownership before applying the plan.
 
-The earlier `data layout fill` audit wrote client pads into shared server BSS
-source. Installed help still has no output-source selector. This documentation
-pass checked help only, not the write behavior. Preview the exact target/files
-and review ownership before using it; do not infer permission to emit storage.
-
-## Archived findings
-
-<details>
-<summary>Historical sections and address lookup</summary>
+## Archived techniques
 
 Original notebook: `docs/tooling-upstream.md` in the [documentation archive](goal-history.md#full-notebooks).
 
-- <a id="project-tooling-and-upstream-rebrew"></a>Project tooling and upstream Rebrew
-- <a id="retained-scripts"></a>Retained scripts
-- <a id="replacements-for-retired-helpers"></a>Replacements for retired helpers
-- <a id="upstream-receipts"></a>Upstream receipts
-- <a id="import-table-api-extraction-2026-10-20"></a>Import-table API extraction (2026-10-20)
-
-</details>
+- Project tooling and upstream Rebrew
+- Retained scripts
+- Replacements for retired helpers
+- Upstream receipts
+- Import-table API extraction (2026-10-20)

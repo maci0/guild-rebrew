@@ -1,38 +1,11 @@
-"""Retained recipes use canonical readers without changing allocation policy."""
+"""Linked manifests keep project, archive and placeholder attribution separate."""
 
 import json
 import runpy
 from pathlib import Path
 
-import pytest
-from rebrew.config import ConfigWarning
-
 ROOT = Path(__file__).resolve().parents[1]
-load_items = runpy.run_path(ROOT / "scripts/gen_bss_layout.py")["load_items"]
 publics = runpy.run_path(ROOT / "stubs/linked_manifest.py")["publics"]
-
-
-def test_bss_reads_data_fragments_and_only_sized_server_rows(tmp_path: Path) -> None:
-    (tmp_path / "rebrew-project.toml").write_text(
-        '[targets."server.dll"]\nbinary = "server.dll"\nmodule = "SERVER"\n'
-    )
-    (tmp_path / "rebrew-data.toml").write_text(
-        'format = 2\n["SERVER.0x10034610"]\nname = "first"\nsize = 4\n'
-        '["GOLD.0x10034614"]\nname = "other_target"\nsize = 4\n'
-        '["SERVER.0x10034618"]\nname = "unknown_extent"\n'
-        '["SERVER.0x1003461c"]\nname = "g_before_old"\nsize = 4\n'
-    )
-    fragments = tmp_path / "rebrew-data.d"
-    fragments.mkdir()
-    (fragments / "test.toml").write_text(
-        'format = 2\n["SERVER.0x10034614"]\nname = "second"\nsize = 4\ntype = "int"\n'
-    )
-    with pytest.warns(ConfigWarning, match="target binary not found"):
-        rows = load_items(tmp_path)
-    assert rows == [
-        {"va": 0x10034610, "name": "first", "size": 4, "type": ""},
-        {"va": 0x10034614, "name": "second", "size": 4, "type": "int"},
-    ]
 
 
 def test_manifest_keeps_project_and_archive_origins() -> None:

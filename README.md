@@ -6,18 +6,19 @@ server, GoldTL and Gold reference binaries.
 
 <a id="reconstruction-status"></a><a id="data-verification"></a>
 
-The latest source release is [1.11.0](docs/releases/1.11.0.md). Its rebuilt server
-matches all 286,720 reference bytes and the server gate passes. Both clients link
-with placeholder stubs but are far from byte-identical: 4.8% of GoldTL and 1.0% of
-Gold raw bytes equal the reference at original offsets. See [current work](docs/TODO.md)
-for the checks, limits and next actions.
+The [1.11.0 source checkpoint](docs/releases/1.11.0.md) records a passing server
+gate. The current server image matches all 286,720 reference bytes. Both client
+comparison images use placeholder stubs and differ from their references: 4.8%
+of GoldTL and 1.0% of Gold raw bytes equal the reference at original offsets.
+These are existing-image comparisons, not fresh builds or gate runs. See
+[current work](docs/TODO.md) for the checks, limits and next actions.
 
 ![Reconstruction progress: code-byte accounting, C function matches and raw-file comparison for each target](docs/assets/reconstruction-status.svg)
 
 C function progress counts `EXACT` and `RELOC` matches among non-library functions,
 excluding whole-function assembly. Code accounting also includes libraries and
 padding. These stored results are separate measures, not gameplay completion;
-the snapshot date is printed on each graphic.
+each graphic prints its snapshot date and may predate the current tree.
 
 <details>
 <summary>Function map and data verification</summary>
@@ -28,7 +29,8 @@ the snapshot date is printed on each graphic.
 
 </details>
 
-Refresh all three graphics from one read-only status snapshot:
+Refresh the graphics from a read-only status snapshot while sources and metadata
+are unchanged. The function map also reads live project state:
 
 ```sh
 uv run rebrew status --all-targets --json > .scratch/status.json

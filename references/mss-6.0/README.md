@@ -1,12 +1,18 @@
 # Rejected Miles import-library candidate
 
-This archive is retained locally as an audit input, not a link dependency.
-Although it supplies all 51 API names imported by the TL reference, **none of
-its 51 import hints match**. The earlier name-only acceptance was insufficient.
+`references/mss-6.0/mss32.lib` is a local audit input. Neither client selects it
+in `rebrew-project.toml`; both select the [6.1c archive](../mss-6.1c/README.md).
 
-Source: `../openmiles/references/MSS-6.0/mss32.lib`.
-Size: 238,328 bytes. SHA-256:
-`dadb9a3e8db1f0359cafda6ffed71565237549f53e9e62a24265b26a8e36e78d`.
+| Property | Value |
+| --- | --- |
+| Local source, relative to the checkout root | `../openmiles/references/MSS-6.0/mss32.lib` |
+| Bytes | 238,328 |
+| SHA-256 | `dadb9a3e8db1f0359cafda6ffed71565237549f53e9e62a24265b26a8e36e78d` |
 
-See [the Miles 6.1c requirement](../mss-6.1c/README.md) for current evidence
-and the selected archive's link-time hash guard.
+The local copy matches that source. The archived
+`text-accounting-20261016/all-miles-library-fingerprints.json` records all 51
+GoldTL import names present and zero matching import hints for this hash.
+The directory label alone does not establish the SDK version.
+
+That receipt is under `../guild-rebrew-archive/2026-11-05/scratch/`, relative
+to the checkout root. See [receipt locations](../../docs/goal-history.md#local-receipts).

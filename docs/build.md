@@ -5,7 +5,7 @@ The [current checkpoint](TODO.md) records validation. This guide builds the serv
 
 ## Prerequisites
 
-The tested host is Linux x86_64. Install Git, CMake 3.19+, Make, a C compiler,
+These commands use Linux x86_64. Install Git, CMake 3.19+, Make, a C compiler,
 json-c headers, Docker and util-linux. On Debian/Ubuntu:
 
 ```sh
@@ -42,23 +42,21 @@ Supply your own game files at these ignored paths. These are the reference hashe
 | `original/Europa1400Gold.exe` | 2,301,952 | `7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8` |
 
 Only the DLL is needed for the server recipe. A different hash is a different
-reference, even if the filename agrees. The server hash was also checked against
-the GOG Gold installer and Steam Gold v2.06 English DLL on 2026-10-02.
+reference, even if the filename agrees.
 
 ## Prepare compiler images
 
-Use the public recipes and the project's overlays:
+Build the two server images from the toolchain recipes:
 
 ```sh
 git clone https://github.com/maci0/recompile-toolchains.git ../recompile-toolchains
 export REBREW_TOOLCHAINS_DIR="$PWD/../recompile-toolchains"
-export REBREW_TOOLCHAIN_OVERLAY_DIR="$PWD/cmake/toolchain-overlays"
 uv run rebrew toolchain build msvc-6.0-sp5
 uv run rebrew toolchain build msvc-6.0-sp5-crt
 ```
 
-The server uses plain VC6 SP5 with `/MT` and LIBCMT. Client compiler/runtime
-contexts are documented in [build facts](general-knowledge.md#original-build).
+The server compiles with plain VC6 SP5, `/MT` and LIBCMT. Its link uses the
+`msvc-6.0-sp5-crt` image. Client compiler/runtime contexts are documented in [build facts](general-knowledge.md#configured-build).
 The `-docker.cmake` filename is historical; the driver uses the configured backend.
 
 ## Build the server
@@ -66,7 +64,7 @@ The `-docker.cmake` filename is historical; the driver uses the configured backe
 Use a fresh build directory:
 
 ```sh
-uv run cmake -S . -B build/server-example \
+uv run cmake -G "Unix Makefiles" -S . -B build/server-example \
   -DCMAKE_TOOLCHAIN_FILE="$PWD/cmake/toolchain-msvc-6.0-sp5-docker.cmake" \
   -DCMAKE_BUILD_TYPE=Release \
   -DREBREW_BUILD_SERVER=ON \
@@ -76,7 +74,9 @@ uv run cmake --build build/server-example --parallel 2
 ```
 
 This produces `server.dll` and `server.map` in that directory. Keep each image
-with its own map. Successful compilation does not establish byte identity.
+with its own map. CMake reads source selection and TU flags through Rebrew.
+The server target currently selects `REBREW_LEGACY_SERVER_LAYOUT` through
+`rebrew-project.toml`. Successful compilation does not establish byte identity.
 
 ## Compare the raw output
 
@@ -93,7 +93,11 @@ existing image without a function compile pass or verdict writes; exit 1 reports
 differences. Name the target explicitly because the project defaults to GoldTL.
 
 The broader [server gate](../scripts/gate.sh) expects the conventional `build/`
-tree and also checks functions, lint, toolchain alignment and Wine load/exports:
+tree and also checks functions, lint, toolchain alignment and Wine load/exports.
+It also screens GoldTL functions against D3DX8 when that archive is present.
+Configure that tree separately with the server options above, replacing
+`build/server-example` with `build`. The gate also requires host `wine` and
+`i686-w64-mingw32-gcc`; its loader check fails when either is absent:
 
 ```sh
 uv run bash scripts/gate.sh

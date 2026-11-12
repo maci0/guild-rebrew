@@ -1,21 +1,13 @@
-# Historical behavioral reviews
+# Behavioral review limits
 
-Rounds 288-297 reviewed nineteen server residue regions. Their "clean" labels mean
-no divergence was found in those reviewed inputs, not exhaustive semantic proof
-or byte identity. The old bug counts and residue sizes are historical.
+A review that finds no divergence covers only its inspected inputs. It does not
+establish exhaustive semantic proof or byte identity.
 
 Use [current work](TODO.md) for status and [measurement](measure-traps.md) for proof
-limits. The original review table is preserved in the archive below.
+limits.
 
-## Archived findings
-
-<details>
-<summary>Historical sections and address lookup</summary>
+## Archived techniques
 
 Original notebook: `docs/behavioral-verdicts.md` in the [documentation archive](goal-history.md#full-notebooks).
 
-| Historical section | Referenced hex values |
-| --- | --- |
-| Historical behavioral reviews | `0x10002770`, `0x10006580`, `0x10008a90`, `0x10009020`, `0x100092bc`, `0x100093a0`, `0x1000a570`, `0x1000aac0`, `0x1000bdf0`, `0x1000d930`, `0x1000e140`, `0x1000ec00`, `0x10011bf0`, `0x100128f0`, `0x10015f70`, `0x10016f80`, `0x100174d0`, `0x10018850`, `0x10019ed0` |
-
-</details>
+- Historical behavioral reviews (`0x10002770`, `0x10006580`, `0x10008a90`, `0x10009020`, `0x100092bc`, `0x100093a0`, `0x1000a570`, `0x1000aac0`, `0x1000bdf0`, `0x1000d930`, `0x1000e140`, `0x1000ec00`, `0x10011bf0`, `0x100128f0`, `0x10015f70`, `0x10016f80`, `0x100174d0`, `0x10018850`, `0x10019ed0`)

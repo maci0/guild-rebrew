@@ -30,9 +30,10 @@ does not justify a new allocation.
 
 ## Keep access views bounded
 
-The private 24-byte VFS directory entry is distinct from the pooled stream whose
-constructor requests 320 bytes and accesses mode flags at +0x13c. A pointer
-contract can remain opaque while its full layout is unknown.
+The private `VFS_FILE` record in `src/Develop/Units/vfs/vfs.c` is 24 bytes
+on x86. It is distinct from `VFS_DIR` and from the pooled stream, which requests
+320 bytes and accesses mode flags at +0x13c. A pointer contract can remain opaque
+while its full layout is unknown.
 
 Likewise, changing stream parameters, adding declaration identities or binding a
 literal does not create storage or earn a data verdict. Keep native access width,
@@ -40,8 +41,9 @@ C type, complete extent and allocation ownership as separate claims.
 
 ## Review and verify
 
-Use `rebrew data list --all-targets --json`, target-specific `data bss`, and
-`lint --all-targets` to inspect the catalog. Change rows only through locked
+Use `.venv/bin/rebrew data list --all-targets --json`,
+`.venv/bin/rebrew data bss --target server.dll --json`, and
+`.venv/bin/rebrew lint --all-targets --json` to inspect the catalog. Change rows only through locked
 writers. Compare bytes and placement against the matching raw image/map; owner
 assignment itself does not promote a verdict.
 
@@ -49,19 +51,12 @@ The [ownership audit](data-ownership-evidence.json) retains CRT/overlap evidence
 [Link layout](msvc6-link-layout.md) covers physical placement; [AGENTS.md](../AGENTS.md)
 owns the full storage rules.
 
-## Archived findings
-
-<details>
-<summary>Historical sections and address lookup</summary>
+## Archived techniques
 
 Original notebook: `docs/data-ownership.md` in the [documentation archive](goal-history.md#full-notebooks).
 
-| Historical section | Referenced hex values |
-| --- | --- |
-| <a id="extents-and-layout"></a>Extents and layout | - |
-| <a id="historical-storage-investigation-october-4"></a>Historical storage investigation, October 4 | `0x10034684`, `0x10035408`, `0x11766788` |
-| <a id="check-changes"></a>Check changes | - |
-| <a id="vfs-stream-and-directory-entry-are-distinct-goal81-2026-10-17"></a>VFS stream and directory entry are distinct (Goal81, 2026-10-17) | `0x006b7fe4`, `0x006b7fec` |
-| <a id="stream-contracts-do-not-create-storage-owners-goal82-2026-10-17"></a>Stream contracts do not create storage owners (Goal82, 2026-10-17) | `0x006500c2`, `0x00699820`, `0x006a22a8`, `0x006a22c0`, `0x006a23ac`, `0x006a23d0`, `0x010058e0`, `0x010058e4` |
-
-</details>
+- Extents and layout
+- Historical storage investigation, October 4 (`0x10034684`, `0x10035408`, `0x11766788`)
+- Check changes
+- VFS stream and directory entry are distinct (Goal81, 2026-10-17) (`0x006b7fe4`, `0x006b7fec`)
+- Stream contracts do not create storage owners (Goal82, 2026-10-17) (`0x006500c2`, `0x00699820`, `0x006a22a8`, `0x006a22c0`, `0x006a23ac`, `0x006a23d0`, `0x010058e0`, `0x010058e4`)

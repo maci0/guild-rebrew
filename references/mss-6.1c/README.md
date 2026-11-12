@@ -1,6 +1,6 @@
 # Miles 6.1c build dependency
 
-Both clients link the pristine SDK archive at `references/mss-6.1c/mss32.lib`.
+Both clients select the SDK archive at `references/mss-6.1c/mss32.lib`.
 It is a reproducible build input, not proof of the exact archive used by the
 original linker.
 
@@ -28,12 +28,18 @@ changed or substituted archives fail; do not generate a replacement import libra
 
 ## Evidence
 
-The pinned snapshot's header identifies 6.1c. Isolated link probes reproduced all
-51 GoldTL and 31 Gold MSS32 imports, including hints. Those probes do not establish
-a complete client image. The [6.0 candidate](../mss-6.0/README.md) supplied the names
-but failed every hint check.
+The saved snapshot header identifies 6.1c. The archived `link-probe.json` records
+51 GoldTL and 31 Gold MSS32 imports with matching names and hints. These isolated
+probes do not establish a complete client image. The [6.0 candidate](../mss-6.0/README.md)
+supplied the names but failed every hint check.
 
-The full runtime witnesses, alternate candidates and receipts are preserved as
+Local receipts are under
+`../guild-rebrew-archive/2026-11-05/scratch/goal83-miles-candidates/`, relative to
+the checkout root. `source-pin.json` records the commit and blob above;
+`downloads.json` records the archive hash and size. `area51-mss.h` contains the
+version label. See [receipt locations](../../docs/goal-history.md#local-receipts).
+
+Historical analysis and receipt paths are preserved as
 `references/mss-6.1c/README.md` in the
 [documentation archive](../../docs/goal-history.md#full-notebooks). Reference game
 hashes belong in the [build guide](../../docs/build.md#reference-inputs).

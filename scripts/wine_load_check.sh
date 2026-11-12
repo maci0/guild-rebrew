@@ -5,15 +5,15 @@
 # criterion, and round 934 found no script checked it: gate.sh covers lint,
 # compile, verify and residue, but nothing ever loaded the built DLL.
 #
-# Why the copy-to-$TMPDIR dance: passing a deep path straight to Wine's Z: drive
+# Why the copy: passing a deep path straight to Wine's Z: drive
 # fails with error 193 (BAD_EXE_FORMAT) on this host even for the *reference*
 # DLL, which is a harness artefact and not a property of the file.  Copying to a
-# short temp path loads correctly, so the check copies.
+# local filename loads correctly, so Wine runs inside the scratch directory.
 #
 # Usage: scripts/wine_load_check.sh [path/to/server.dll]
 # Exit status: 0 when the DLL loads and both exports resolve, 1 otherwise.
 set -uo pipefail
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit 1
 
 DLL=${1:-build/server.dll}
 [ -f "$DLL" ] || { echo "no $DLL -- build first"; exit 1; }
@@ -23,7 +23,9 @@ command -v i686-w64-mingw32-gcc >/dev/null || { echo "no i686-w64-mingw32-gcc --
 export WINEPREFIX=${WINEPREFIX:-$HOME/.wine-rebrew}
 mkdir -p "$WINEPREFIX" || exit 1
 
-tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
+mkdir -p .scratch || exit 1
+tmp=$(mktemp -d "$PWD/.scratch/wine-load.XXXXXX") || exit 1
+trap 'rm -rf "$tmp"' EXIT
 
 cat > "$tmp/load.c" <<'C'
 #include <windows.h>
@@ -47,10 +49,10 @@ C
 i686-w64-mingw32-gcc -o "$tmp/load.exe" "$tmp/load.c" 2>"$tmp/cc.log" \
     || { echo "loader build failed:"; tail -5 "$tmp/cc.log"; exit 1; }
 
-cp "$DLL" "$tmp/target.dll"
+cp "$DLL" "$tmp/target.dll" || exit 1
 
 # WINEDEBUG=-all silences Wine's noise; the loader's own output is what is read.
-out=$(WINEDEBUG=-all wine "$tmp/load.exe" "Z:$tmp/target.dll" Init Exit 2>/dev/null)
+out=$(cd "$tmp" && WINEDEBUG=-all timeout --kill-after=5 60 wine ./load.exe target.dll Init Exit 2>/dev/null)
 rc=$?
 echo "$out"
 

@@ -37,22 +37,15 @@ cache state and host load before comparing timings. A timeout gives no verdict;
 confirm the process/lock state before retrying.
 
 Clear disposable compiled objects with `rebrew cache clear --force`. Preserve
-verification baselines and research receipts when cleaning local state. Historical
-local timings and upstream repair measurements are indexed below, not benchmarks
-for the current environment.
+verification baselines and research receipts when cleaning local state.
 
-## Archived findings
-
-<details>
-<summary>Historical sections and address lookup</summary>
+## Archived techniques
 
 Original notebook: `docs/verify-performance.md` in the [documentation archive](goal-history.md#full-notebooks).
 
-- <a id="verification-and-runner-performance"></a>Verification and runner performance
-- <a id="choose-the-check"></a>Choose the check
-- <a id="causes-and-fixes"></a>Causes and fixes
-- <a id="runner-and-caches"></a>Runner and caches
-- <a id="imported-slots"></a>Imported slots
-- <a id="replays"></a>Replays
-
-</details>
+- Verification and runner performance
+- Choose the check
+- Causes and fixes
+- Runner and caches
+- Imported slots
+- Replays
