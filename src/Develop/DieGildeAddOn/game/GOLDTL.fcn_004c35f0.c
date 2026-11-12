@@ -2,10 +2,10 @@ extern double g_662b20;
 extern int g_772e6c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004c3100(char*, int);
 void __cdecl fcn_004c3030(int, int, char*, int);
-float __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* Aggregates the city records by vote state, averages a weighted random score
  * over them and posts one of three localized messages for the winning side, or

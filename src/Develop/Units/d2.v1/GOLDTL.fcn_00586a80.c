@@ -21,7 +21,7 @@ void __cdecl fcn_004ed190(char*);
 void __cdecl fcn_004eec10(char*);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_00586a80(char* a)
+int __cdecl fcn_00586a80(char* a, int* unused)
 {
 	int result;
 	int h;

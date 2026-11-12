@@ -5,7 +5,7 @@ extern void* g_1468ae0[];
 #include <string.h>
 
 void* __cdecl m_alloc(int, char*);
-void __cdecl fcn_00422620(void*);
+void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_004222b0(char*);
 
 /* ADDRESS: GOLD 0x004029c0 */
@@ -25,7 +25,7 @@ void* __cdecl fcn_004029c0(void)
 		*(int*) p = i;
 		return p;
 	}
-	fcn_00422620(p);
+	m_FreeTracked(p);
 	fcn_004222b0((char*) 0x5f12d4);
 	return 0;
 }

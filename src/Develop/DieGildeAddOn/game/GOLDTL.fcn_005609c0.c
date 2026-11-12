@@ -9,7 +9,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_005049a0(int);
 int __cdecl fcn_0050dc90(int);
 void __cdecl fcn_0050c710(int, int, int);
-int __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl _ftol(void);
 void __cdecl fcn_004c51f0(int, int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(char*, int, int, int);

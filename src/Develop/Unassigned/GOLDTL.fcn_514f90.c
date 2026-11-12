@@ -1,5 +1,5 @@
 
-// fcn_00511840 — if([a+0x220] in {3,4,1,0}) a[0x213] |= 4.
+/* fcn_00511840: if (*(int*)(a+0x220) is 3, 4, 1 or 0) a[0x217] |= 1. */
 
 /* ADDRESS: GOLDTL 0x00514f90 */
 void __cdecl fcn_00511840(char* a)

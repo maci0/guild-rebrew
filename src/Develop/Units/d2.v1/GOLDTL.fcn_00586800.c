@@ -39,7 +39,7 @@ void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_00586800(char* e)
+int __cdecl fcn_00586800(char* e, int* unused)
 {
 	int r;
 	int ok;

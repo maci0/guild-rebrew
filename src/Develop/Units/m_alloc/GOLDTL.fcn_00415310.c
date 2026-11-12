@@ -12,7 +12,7 @@ extern float g_662a44;
 
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00415310 */
 int* __cdecl fcn_00415310(int count)
 {
@@ -36,23 +36,23 @@ int* __cdecl fcn_00415310(int count)
 	rain[8] = 0;
 	rain[9] = 0x3f800000;
 	rain[10] = 0;
-	rain[11] = *(int*) 0x6b7fac;
-	rain[12] = *(int*) 0x6b7fac;
-	rain[13] = *(int*) 0x6b7fac;
-	rain[14] = *(int*) 0x6b7fac;
-	rain[15] = *(int*) 0x6b7fac;
-	cam = *(char**) 0x6b8014;
+	rain[11] = *(int*) &g_6b7fac;
+	rain[12] = *(int*) &g_6b7fac;
+	rain[13] = *(int*) &g_6b7fac;
+	rain[14] = *(int*) &g_6b7fac;
+	rain[15] = *(int*) &g_6b7fac;
+	cam = *(char**) &g_6b8014;
 	if (cam != 0) {
 		rain[16] = *(int*) (cam + 0x84);
-		cam = *(char**) 0x6b8014;
+		cam = *(char**) &g_6b8014;
 		rain[17] = *(int*) (cam + 0x88);
-		cam = *(char**) 0x6b8014;
+		cam = *(char**) &g_6b8014;
 		rain[18] = *(int*) (cam + 0x8c);
-		cam = *(char**) 0x6b8014;
+		cam = *(char**) &g_6b8014;
 		rain[20] = *(int*) (cam + 0x4c);
-		cam = *(char**) 0x6b8014;
+		cam = *(char**) &g_6b8014;
 		rain[21] = *(int*) (cam + 0x50);
-		cam = *(char**) 0x6b8014;
+		cam = *(char**) &g_6b8014;
 		rain[22] = *(int*) (cam + 0x54);
 	}
 	n = count;

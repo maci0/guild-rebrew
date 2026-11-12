@@ -39,7 +39,7 @@ struct act {
 extern pos14_7f4c00 g_7f4c00;
 extern float g_662910;
 extern float g_664150;
-
+#include "client_data.h"
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -66,7 +66,7 @@ int __cdecl fcn_004c5530(struct msg*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_00532ef0(void);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00589930 */
 void __cdecl fcn_00589930(char* a0)
 {
@@ -81,7 +81,7 @@ void __cdecl fcn_00589930(char* a0)
 	int j;
 	float f;
 
-	act.count = gm_WalkEntityChain(*(unsigned short*) 0x774970);
+	act.count = gm_WalkEntityChain(*(unsigned short*) &g_774970);
 	f = (float) act.count;
 	act.amt[0] = (int) (f * g_662910);
 	act.amt[1] = (int) (f * g_664150);
@@ -90,15 +90,15 @@ void __cdecl fcn_00589930(char* a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(*(int*) 0x772514);
+	fcn_005340f0(*(int*) &g_772514);
 	d2_SetForm(dlg, 2);
-	i = fcn_0046fac0(0, 3, *(int*) 0x14b53a0, *(int*) 0x772514);
-	*(int*) (*(int*) 0x1015ea0 + i * 0x2f4 + 0x6c) = 1;
-	*(int*) (*(int*) 0x1015ea0 + i * 0x2f4 + 0x18) =
-	    *(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f4c);
+	i = fcn_0046fac0(0, 3, *(int*) 0x14b53a0, *(int*) &g_772514);
+	*(int*) (*(int*) &g_1015ea0 + i * 0x2f4 + 0x6c) = 1;
+	*(int*) (*(int*) &g_1015ea0 + i * 0x2f4 + 0x18) =
+	    *(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c);
 	fcn_00472900(i, 0x54);
 	lst = fcn_004677e0(0x57, 0x14, 200, 0, 100, 0x7b, 2,
-	                   *(int*) 0x772514);
+	                   *(int*) &g_772514);
 	act.item = lst;
 	fcn_00472380(lst, 0, 2, 0, 1);
 	fcn_00468bb0(lst, 3, *(int*) 0x14b53a4, *(int*) 0x14b53a8,
@@ -107,7 +107,7 @@ void __cdecl fcn_00589930(char* a0)
 	btn = io_AppendText(0x4024);
 	act.no = fcn_00472250(dlg, 3, btn);
 	act.yes = fcn_00472250(dlg, 3, btn + 1);
-	*(int*) 0x100f1dc = -1;
+	*(int*) &g_100f1dc = -1;
 	do {
 		j = fcn_00471f80(lst);
 		d2_SetForm(dlg, 1);
@@ -117,28 +117,28 @@ void __cdecl fcn_00589930(char* a0)
 		io_AppendText(0x401f, amt);
 		if (*(int*) 0x14ce8e0) {
 			*(int*) 0x774654 = 1;
-		} else if (*(int*) 0x100f1dc != -1) {
+		} else if (*(int*) &g_100f1dc != -1) {
 			if (act.no == *(int*) 0x67d370) {
 				if (fcn_00526010(
-				        (char*) (0x7f4ca0 +
-				                 (unsigned int) *(unsigned short*) 0x774970 *
+				        (char*) ((unsigned long)&g_7f4ca0 +
+				                 (unsigned int) *(unsigned short*) &g_774970 *
 				                     0x21c),
-				        amt, *(char*) 0x773d75) &&
+				        amt, *(char*) &g_773d75) &&
 				    fcn_005898f0(a0)) {
 					p = gm_GetEntityTableEntry(
-					    (char*) (0x7f4ca0 +
+					    (char*) ((unsigned long)&g_7f4ca0 +
 					             (unsigned int) *(unsigned short*)
-					                     0x774970 *
+					                     &g_774970 *
 					                 0x21c));
 					if (p)
 						*(int*) (p + 0x28) += amt;
 					fcn_004c51a0(
 					    -1,
-					    *(int*) (0x7f4ca4 +
+					    *(int*) ((unsigned long)&g_7f4ca4 +
 					             (unsigned int) *(unsigned short*)
-					                     0x774970 *
+					                     &g_774970 *
 					                 0x21c),
-					    *(char*) 0x773d75, amt);
+					    *(char*) &g_773d75, amt);
 					memset(&m, 0, sizeof(m));
 					m.kind = 0x99;
 					m.code = 2;
@@ -147,14 +147,14 @@ void __cdecl fcn_00589930(char* a0)
 					m.f68 = 3;
 					m.f6c = j;
 					act.count = -1;
-					m.owner = ((struct house*) 0x7f4ca0)[*(unsigned short*) (a0 + 0x27)].owner;
+					m.owner = ((struct house*) &g_7f4ca0)[*(unsigned short*) (a0 + 0x27)].owner;
 					m.target = *(int*) (a0 + 1);
 					m.when = g_7f4c00;
 					m.f5c = *(int*) (a0 + 1);
 					fcn_004a5e60(
-					    (unsigned short*) (0x7f4ca0 +
+					    (unsigned short*) ((unsigned long)&g_7f4ca0 +
 					                       (unsigned int) *(unsigned short*)
-					                               0x774970 *
+					                               &g_774970 *
 					                           0x21c),
 					    0, 0x7b4c4a0, 0, 0.0f, 100.0f, &act.count);
 					m.f58 = act.count;

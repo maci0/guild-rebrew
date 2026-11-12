@@ -25,7 +25,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-void __cdecl fcn_005c4d00(int win, int sub, int idx)
+void __cdecl fcn_005c4d00(int win, int sub, int idx, int unused)
 {
 	char buf[0x220];
 	int k;

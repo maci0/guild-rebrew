@@ -21,7 +21,7 @@ int __cdecl fcn_004faaf0(unsigned short*);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5530(void*);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005bf9e0 */
 int __cdecl fcn_005bf9e0(unsigned short* a0)
 {
@@ -41,16 +41,16 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 	for (i = 0; i < 136; i++) {
 		data[i] = 0;
 	}
-	timeout = *(unsigned short*) 0x774970;
+	timeout = *(unsigned short*) &g_774970;
 	idx = -1;
 	res = 0;
 	data[0] = 1;
-	r = gm_WalkEntityChain(*(unsigned short*) (timeout * 0x21c + 0x7f4ca0));
+	r = gm_WalkEntityChain(*(unsigned short*) (timeout * 0x21c + (unsigned long)&g_7f4ca0));
 	timeout = (int) ((float) r * 0.0085f);
-	if (fcn_004fa5b0(0x1b, *(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0, data) & 2) {
+	if (fcn_004fa5b0(0x1b, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0, data) & 2) {
 		timeout /= 2;
 	}
-	p = fcn_005463a0(2, 2, *(unsigned short*) 0x774970, 0, 0x1a);
+	p = fcn_005463a0(2, 2, *(unsigned short*) &g_774970, 0, 0x1a);
 	while (p) {
 		if (*(int*) (p + 0xb4) == *(int*) (a0 + 2)) {
 			io_FormatTextBuffer(text, 0x170a, *a0);
@@ -59,20 +59,20 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 		}
 		p = he_fn_Handlung();
 	}
-	if (!fcn_00526010(*(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0, timeout, *(char*) 0x773d75)) {
+	if (!fcn_00526010(*(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0, timeout, *(char*) &g_773d75)) {
 		return 0;
 	}
-	if (!fcn_0055c0f0(a0, *(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0)) {
+	if (!fcn_0055c0f0(a0, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
 		io_FormatTextBuffer(tiny, 0x170b, *a0);
 		fcn_00526120(tiny, 0);
 		return 0;
 	}
-	if (!fcn_0055c0a0(a0, *(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0)) {
+	if (!fcn_0055c0a0(a0, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
 		io_FormatTextBuffer(tiny, 0x170c, *a0);
 		fcn_00526120(tiny, 0);
 		return 0;
 	}
-	if (!fcn_00579640(a0, *(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0)) {
+	if (!fcn_00579640(a0, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
 		io_FormatTextBuffer(tiny, 0x409f);
 		fcn_00526120(tiny, 0);
 		return 0;
@@ -96,13 +96,13 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 	t[5] = 0x15;
 	fcn_005c9220(t);
 	while (fcn_005373e0(0x5bf9e0, 0x677c7)) {
-		if (*(int*) 0x14ce8e0 || *(int*) 0x100f1dc == 1) {
+		if (*(int*) 0x14ce8e0 || *(int*) &g_100f1dc == 1) {
 			*(int*) 0x774654 = 1;
 		}
-		if (*(int*) 0x100f1dc == 2 && idx != -1 && *(int*) 0x67d370 == idx) {
+		if (*(int*) &g_100f1dc == 2 && idx != -1 && *(int*) 0x67d370 == idx) {
 			*(unsigned char*) (evt + 0) = 0x1a;
-			*(unsigned int*) (evt + 4) = *(unsigned int*) (*(unsigned short*) 0x774970 * 0x21c + 0x7f4ca4);
-			*(unsigned int*) (evt + 8) = *(unsigned int*) 0x7746c8;
+			*(unsigned int*) (evt + 4) = *(unsigned int*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
+			*(unsigned int*) (evt + 8) = *(unsigned int*) &g_7746c8;
 			*(unsigned char*) (evt + 0x32) = 1;
 			*(unsigned int*) (evt + 0x80) = timeout;
 			*(unsigned int*) (evt + 0x5c) = *(unsigned int*) (a0 + 2);

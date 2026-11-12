@@ -17,7 +17,7 @@ extern int g_774804;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 void __cdecl fcn_00406340(char*, char*, int);
-void __cdecl CreateAnimationEvent(char*, char*);
+char* __cdecl CreateAnimationEvent(char*, char*);
 int __cdecl fcn_00406670(char*, char*);
 void __cdecl fcn_00407800(char*, int, char*);
 void __cdecl m_FreeTracked(void*);

@@ -25,7 +25,7 @@ int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindRecordById(int);
 int __cdecl fcn_0050de80(char*, int*);
-float __cdecl fcn_0050bb50(int, int);
+float __cdecl fcn_0050bb50(int id, unsigned char a);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_004d5490(int, int, int);
 void __cdecl fcn_004d5740(char*, int, int);

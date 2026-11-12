@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* Watch the cursor and the two button click latches, then publish the new
  * /selection state into the shared UI state block. */
 /* ADDRESS: GOLDTL 0x00411b80 */
@@ -20,10 +20,10 @@ void __cdecl fcn_00411b80(void)
 	pressed = *(int*) 0x6b5c98;
 	other = *(int*) 0x6b5ca4;
 	if (pressed != 0) {
-		if (t - pressed > 0xf || (int) *(short*) 0x14ce920 < other - 3 ||
-		    other + 3 < (int) *(short*) 0x14ce920 ||
-		    *(int*) 0x6b5ca8 + 3 < (int) *(short*) 0x14ce922 ||
-		    (int) *(short*) 0x14ce922 < *(int*) 0x6b5ca8 - 3) {
+		if (t - pressed > 0xf || (int) *(short*) &g_14ce920 < other - 3 ||
+		    other + 3 < (int) *(short*) &g_14ce920 ||
+		    *(int*) 0x6b5ca8 + 3 < (int) *(short*) &g_14ce922 ||
+		    (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {
 			*(int*) 0x14ce934 = 1;
 			*(int*) 0x6b5c98 = 0;
 			*(int*) 0x6b5cac = -1;
@@ -40,8 +40,8 @@ after_check:
 		goto label_411cbe;
 	}
 	if (*(int*) 0x14ce930 && !pressed) {
-		other = (int) *(short*) 0x14ce920;
-		*(int*) 0x6b5ca8 = (int) *(short*) 0x14ce922;
+		other = (int) *(short*) &g_14ce920;
+		*(int*) 0x6b5ca8 = (int) *(short*) &g_14ce922;
 		*(int*) 0x6b5c98 = t;
 		*(int*) 0x6b5ca4 = other;
 	}
@@ -75,8 +75,8 @@ label_411cca:
 	pressed = *(int*) 0x14ce948;
 	if (*(int*) 0x14ce944) {
 		if (!*(int*) 0x6b5c9c) {
-			other = (int) *(short*) 0x14ce920;
-			*(int*) 0x6b5ca8 = (int) *(short*) 0x14ce922;
+			other = (int) *(short*) &g_14ce920;
+			*(int*) 0x6b5ca8 = (int) *(short*) &g_14ce922;
 			*(int*) 0x6b5c9c = t;
 			armed = t;
 			*(int*) 0x6b5ca4 = other;
@@ -89,7 +89,7 @@ label_411d08:
 				*(int*) 0x6b5c9c = 0;
 				*(int*) 0x14ce948 = 1;
 			}
-			if ((int) *(short*) 0x14ce920 < other - 3 || other + 3 < (int) *(short*) 0x14ce920 || *(int*) 0x6b5ca8 + 3 < (int) *(short*) 0x14ce922 || (int) *(short*) 0x14ce922 < *(int*) 0x6b5ca8 - 3) {
+			if ((int) *(short*) &g_14ce920 < other - 3 || other + 3 < (int) *(short*) &g_14ce920 || *(int*) 0x6b5ca8 + 3 < (int) *(short*) &g_14ce922 || (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {
 				*(int*) 0x6b5c9c = 0;
 				*(int*) 0x14ce948 = 1;
 				pressed = 1;
@@ -117,8 +117,8 @@ label_411d04:
 	timedout = *(int*) 0x14ce958;
 	if (*(int*) 0x14ce954) {
 		if (!*(int*) 0x6b5ca0) {
-			other = (int) *(short*) 0x14ce920;
-			*(int*) 0x6b5ca8 = (int) *(short*) 0x14ce922;
+			other = (int) *(short*) &g_14ce920;
+			*(int*) 0x6b5ca8 = (int) *(short*) &g_14ce922;
 			*(int*) 0x6b5ca0 = t;
 			state = t;
 			*(int*) 0x6b5ca4 = other;
@@ -136,7 +136,7 @@ label_411ddd:
 			*(int*) 0x6b5ca0 = 0;
 			*(int*) 0x14ce958 = 1;
 		}
-		if ((int) *(short*) 0x14ce920 < other - 3 || other + 3 < (int) *(short*) 0x14ce920 || *(int*) 0x6b5ca8 + 3 < (int) *(short*) 0x14ce922 || (int) *(short*) 0x14ce922 < *(int*) 0x6b5ca8 - 3) {
+		if ((int) *(short*) &g_14ce920 < other - 3 || other + 3 < (int) *(short*) &g_14ce920 || *(int*) 0x6b5ca8 + 3 < (int) *(short*) &g_14ce922 || (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {
 			*(int*) 0x6b5ca0 = 0;
 			*(int*) 0x14ce958 = 1;
 			timedout = 1;
@@ -167,9 +167,9 @@ label_411e58:
 		if (armed < 0x1f) {
 label_411f42:
 			armed += 1;
-			memcpy((void*) (armed * 0x4c + 0x14ce980), (void*) 0x14ce920, 0x4c);
+			memcpy((void*) (armed * 0x4c + 0x14ce980), (void*) &g_14ce920, 0x4c);
 			*(unsigned int*) (armed * 0x4c + 0x14ce9c8) = 1;
 		}
 	}
-	memcpy((void*) 0x14cf900, (void*) 0x14ce920, 0x4c);
+	memcpy((void*) &g_14cf900, (void*) &g_14ce920, 0x4c);
 }

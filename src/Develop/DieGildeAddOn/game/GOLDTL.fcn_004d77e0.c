@@ -32,7 +32,7 @@ typedef struct ShiftDlg {
 	int list_c[3];
 	int owner;
 } ShiftDlg;
-
+#include "client_data.h"
 int __cdecl cut_GetRandSeed(void);
 void __cdecl fcn_004e6c60(int);
 Ent* __cdecl gm_LookupEntityRecordById(int);
@@ -61,7 +61,7 @@ void __cdecl fcn_004e6eb0(char*, unsigned int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl fcn_004d5110(int, int, int, int);
 void __cdecl fcn_004d52a0(ShiftDlg*, int, int, int, float);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x004d77e0 */
 void __cdecl fcn_004d77e0(ShiftDlg* p)
 {
@@ -109,7 +109,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 	if (gm_StartFilteredEntitySearch(1, 1, p->owner) == 0 || flag == 2 || changed == 0) {
 		return;
 	}
-	if (*(int*) 0x772f3c == 0) {
+	if (*(int*) &g_772f3c == 0) {
 		*(int*) 0x68bfbc = 0xc8;
 		*(int*) 0x68b79c = p->rec;
 		fcn_004d1ff0(p);
@@ -120,20 +120,20 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		if (*(int*) 0x774804 != 0) {
 			fcn_00445f50(2, 0, 1.0f, 1);
 		} else {
-			fcn_0052a960((void*) 0x7f4c00);
+			fcn_0052a960((void*) &g_7f4c00);
 		}
-		*(int*) 0x772ea4 = 0;
-		*(int*) 0x772ea8 = 0;
-		*(int*) 0x772eac = 0;
+		*(int*) &g_772ea4 = 0;
+		*(int*) &g_772ea8 = 0;
+		*(int*) &g_772eac = 0;
 		fcn_004d5940(p);
 		fcn_004e6c60(saved);
 		fcn_004d1a80();
 		fcn_004d1a80();
 		fcn_004e51d0(p, 0);
-		if (*(int*) 0x772ea4 == 0 && *(int*) 0x772ea8 == 0) {
+		if (*(int*) &g_772ea4 == 0 && *(int*) &g_772ea8 == 0) {
 			fcn_004e51d0(p, 0);
 		}
-		if (*(int*) 0x772ea8 == 0) {
+		if (*(int*) &g_772ea8 == 0) {
 			for (t = 0x9b4908; t < 0x9b4a48; t += 0x14) {
 				if (*(int*) t != -1) {
 					fcn_0046b2b0(*(int*) t);
@@ -147,18 +147,18 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 			fcn_004d2a60(p);
 			return;
 		}
-		if (*(int*) 0x772eac != 0 && *(char*) (*(int*) 0x772e9c + 2) == 6) {
+		if (*(int*) &g_772eac != 0 && *(char*) (*(int*) &g_772e9c + 2) == 6) {
 			v = 0;
 			w = gm_StartFilteredEntitySearch(1, 1, *(int*) (*(int*) 0x772eb4 + 0x10c));
 			if (w != 0) {
 				v = fcn_00502cd0(*(int*) (w + 0x5d), 2, 6, 0, 0x116);
 			}
-			if (*(int*) 0x772eac <= 0) {
+			if (*(int*) &g_772eac <= 0) {
 				io_FormatTextBuffer(buf, 0x1146);
 			} else if (v == 0) {
-				io_FormatTextBuffer(buf, 0x1144, *(int*) 0x772eac);
+				io_FormatTextBuffer(buf, 0x1144, *(int*) &g_772eac);
 			} else {
-				io_FormatTextBuffer(buf, 0x1145, *(int*) 0x772eac);
+				io_FormatTextBuffer(buf, 0x1145, *(int*) &g_772eac);
 			}
 			fcn_004e6eb0(buf, 0x10);
 		}
@@ -167,7 +167,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 	}
 	changed = 0;
 	saved = 0;
-	*(int*) 0x772e9c = (int) gm_LookupEntityRecordById(p->first);
+	*(int*) &g_772e9c = (int) gm_LookupEntityRecordById(p->first);
 	*(int*) 0x772e98 = (int) gm_LookupEntityRecordById(p->second);
 	for (i = 0; i < 0x10; i++) {
 		if (p->list_a[i] != -1) {
@@ -188,7 +188,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		}
 	}
 	if (gm_RandomMod(0x1e) + saved > gm_RandomMod(0x1e) + changed) {
-		changed = *(int*) 0x772e9c;
+		changed = *(int*) &g_772e9c;
 	} else {
 		changed = *(int*) 0x772e98;
 	}
@@ -203,9 +203,9 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		}
 	}
 	if (p->flags & 2) {
-		if (changed == *(int*) 0x772e9c) {
+		if (changed == *(int*) &g_772e9c) {
 			fcn_004d5110(gm_StartFilteredEntitySearch(1, 1, p->actor), gm_StartFilteredEntitySearch(1, 1, p->owner),
-			             *(int*) 0x772e9c, *(int*) 0x772e98);
+			             *(int*) &g_772e9c, *(int*) 0x772e98);
 		}
 		return;
 	}
@@ -215,8 +215,8 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 	if (!(p->flags & 1)) {
 		return;
 	}
-	if (changed == *(int*) 0x772e9c) {
-		fcn_004d52a0(p, gm_StartFilteredEntitySearch(1, 1, p->owner), *(int*) 0x772e9c,
+	if (changed == *(int*) &g_772e9c) {
+		fcn_004d52a0(p, gm_StartFilteredEntitySearch(1, 1, p->owner), *(int*) &g_772e9c,
 		             *(int*) 0x772e98, 100.0f);
 	}
 }

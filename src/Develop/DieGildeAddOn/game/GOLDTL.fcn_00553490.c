@@ -17,7 +17,7 @@ typedef struct Msg553490 {
 
 extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
-
+#include "client_data.h"
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
@@ -35,7 +35,7 @@ int __cdecl fcn_0050cf50(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00546190(char*);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00553490 */
 void __cdecl fcn_00553490(char* self)
 {
@@ -95,7 +95,7 @@ void __cdecl fcn_00553490(char* self)
 		}
 		*(int*) (self + 0xb4) = (int) (fcn_0050cf50(p, 100) * *(float*) 0x665e98);
 		slotofs = *(unsigned short*) (p + 0x27) * 0x21c;
-		kind = *(unsigned char*) (slotofs + 0x7f4ca2);
+		kind = *(unsigned char*) (slotofs + (unsigned long)&g_7f4ca2);
 		if (kind != 6 && kind != 7) {
 			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &g_7f4c00);
 			fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0, (gm_RandomMod(0x10) & 0xffff) + 2, 0);
@@ -115,7 +115,7 @@ void __cdecl fcn_00553490(char* self)
 		}
 		memset(&msg, 0, sizeof(msg));
 		msg.id = *(int*) (p + 1);
-		msg.seed = *(int*) (slotofs + 0x7f4ca4);
+		msg.seed = *(int*) (slotofs + (unsigned long)&g_7f4ca4);
 		msg.value = *(int*) (self + 4);
 		msg.pos = (*(pos14_7f4c00*) &g_7f4c00);
 		msg.type = 0x63;
@@ -130,7 +130,7 @@ void __cdecl fcn_00553490(char* self)
 	case 3:
 		if (*(int*) (self + 0xb8) == 1) {
 			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0x100, 0);
-			fcn_004c51a0(*(int*) (*(unsigned short*) (self + 8) * 0x21c + 0x7f4ca4), *(int*) (*(unsigned short*) (p + 0x27) * 0x21c + 0x7f4ca4), 0, *(int*) (self + 0xb4));
+			fcn_004c51a0(*(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (*(unsigned short*) (p + 0x27) * 0x21c + (unsigned long)&g_7f4ca4), 0, *(int*) (self + 0xb4));
 			if (*(int*) (self + 0xbc) != -1) {
 				q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0xbc));
 				*(int*) (q + 0x4d) = *(int*) (q + 0x4d) + *(int*) (self + 0xb4);
@@ -141,7 +141,7 @@ void __cdecl fcn_00553490(char* self)
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
 			io_FormatTextBuffer(buf, 0x1a8d, *(unsigned short*) (p + 0x27), p, *(int*) (self + 0xb4));
-			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + 0x7f4ca4);
+			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
 			fcn_00545d40(i, i, buf, 0, 0x5f3, (char*) 0x6a5c10);
 			return;
 		}
@@ -151,7 +151,7 @@ void __cdecl fcn_00553490(char* self)
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
 			io_FormatTextBuffer(buf, 0x1a8f, *(unsigned short*) (p + 0x27), p);
-			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + 0x7f4ca4);
+			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
 			fcn_00545d40(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
 			return;
 		} else {
@@ -160,16 +160,16 @@ void __cdecl fcn_00553490(char* self)
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
 			io_FormatTextBuffer(buf, 0x1a8e, *(unsigned short*) (p + 0x27), p);
-			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + 0x7f4ca4);
+			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
 			fcn_00545d40(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
 			return;
 		}
 	case 4:
 		if (*(int*) (self + 0xb8) == 1) {
 			io_FormatTextBuffer(buf, 0x1a90, p);
-			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + 0x7f4ca4);
+			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
 			fcn_00545d40(i, i, buf, 0, 0x5f3, 0);
-			i = *(int*) (*(unsigned short*) (p + 0x27) * 0x21c + 0x7f4ca4);
+			i = *(int*) (*(unsigned short*) (p + 0x27) * 0x21c + (unsigned long)&g_7f4ca4);
 			fcn_00545d40(i, i, buf, 0, 0x5f3, 0);
 		}
 		fcn_00529160(p, 0, *(unsigned short*) ent, 0);

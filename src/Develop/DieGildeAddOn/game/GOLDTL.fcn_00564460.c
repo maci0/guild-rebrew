@@ -22,7 +22,7 @@ int __cdecl fcn_00500cb0(int* pos, int base);
 int __cdecl fcn_0050cf50(char* e, int n);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id, int c, int d);
 int __cdecl gm_FindNextFilteredEntity(void);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, int h);
 void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);

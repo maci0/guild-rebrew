@@ -60,7 +60,7 @@ int __cdecl io_FormatTextBuffer();
 int __cdecl d2_CreateScrollPerga();
 int __cdecl fcn_00535960();
 int __cdecl gm_RandomMod(int);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00543080 */
 void __cdecl fcn_00543080(void)
 {
@@ -76,7 +76,7 @@ void __cdecl fcn_00543080(void)
 	char* v9;
 	int st[2];
 
-	v1 = *(unsigned char*) 0x772d10;
+	v1 = *(unsigned char*) &g_772d10;
 	v5 = -1;
 	fcn_004fa750();
 	v11 = 0;
@@ -91,13 +91,13 @@ void __cdecl fcn_00543080(void)
 		v8 = &v8[0x87];
 		v11 += 1;
 	} while ((int) v8 < 0x85a268);
-	*(short*) 0x774970 = (short) v5;
+	*(short*) &g_774970 = (short) v5;
 	fcn_00546de0();
-	if (!(*(int*) 0x7747b0 & 4) && 7 <= (unsigned short) gm_RandomMod(10)) {
+	if (!(*(int*) &g_7747b0 & 4) && 7 <= (unsigned short) gm_RandomMod(10)) {
 		v11 = fcn_005435d0();
 		while (v11 != 1) {
 			*(int*) 0x7725c8 = 0;
-			*(int*) 0x7e46ac = 0x24087;
+			*(int*) &g_7e46ac = 0x24087;
 			io_FormatTextBuffer(v6, 0x79);
 			if (!fcn_00526120(v6, 1)) {
 				*(int*) 0x774954 = 1;
@@ -109,8 +109,8 @@ void __cdecl fcn_00543080(void)
 			v11 = fcn_005435d0();
 		}
 	}
-	*(int*) 0x7e46ac = 0x24087;
-	if (*(int*) 0x7747b0 & 4) {
+	*(int*) &g_7e46ac = 0x24087;
+	if (*(int*) &g_7747b0 & 4) {
 		fcn_00535770(0x24087);
 	}
 	fcn_004e4f10(0);
@@ -119,7 +119,7 @@ void __cdecl fcn_00543080(void)
 		*(int*) 0x1040480 = *(int*) 0x1040494;
 		*(int*) 0x1040484 = 0;
 		*(int*) 0x104048c = *(int*) 0x1040490;
-		fcn_00476970(*(int*) 0x77250c);
+		fcn_00476970(*(int*) &g_77250c);
 		fcn_00469e30(0x79d);
 	}
 	fcn_0053f100();
@@ -136,7 +136,7 @@ void __cdecl fcn_00543080(void)
 	v3 = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 	while (v3) {
 		if (*v3 != 0x1e) {
-			if (*(char*) (*(int*) 0x868050 + *v3 * 0x24d) == 7) {
+			if (*(char*) (*(int*) &lpGebaeudePROT + *v3 * 0x24d) == 7) {
 				v3[0x69] = 0;
 				v3[0x6a] = 0;
 				v3[0x6b] = 0;
@@ -144,9 +144,9 @@ void __cdecl fcn_00543080(void)
 			}
 		} else {
 			v5 = fcn_005155e0(v3);
-			v2 = *(unsigned short*) 0x6b8010;
+			v2 = *(unsigned short*) &g_6b8010;
 			if (v5 != -1) {
-				fcn_004432d0((int) *(char*) (*(unsigned char*) (*(int*) 0x868050 + *v3 * 0x24d) + 0x7f3b00), 1);
+				fcn_004432d0((int) *(char*) (*(unsigned char*) (*(int*) &lpGebaeudePROT + *v3 * 0x24d) + (unsigned long)&g_7f3b00), 1);
 				fcn_0043aa30(3);
 				fcn_004bceb0(*(unsigned int*) &v3[0x71]);
 				fcn_0043a9c0(3);
@@ -158,7 +158,7 @@ void __cdecl fcn_00543080(void)
 	v5 = 0;
 	fcn_005016c0();
 	fcn_004facb0();
-	if ((*(int*) 0x77494c & 8) || *(int*) 0x14cbca0 == -1) {
+	if ((*(int*) &g_77494c & 8) || *(int*) 0x14cbca0 == -1) {
 		fcn_004f5830();
 		fcn_00535960();
 		Sleep(100);
@@ -201,12 +201,12 @@ void __cdecl fcn_00543080(void)
 		if (st[1] != -1) {
 			fcn_004fb7a0();
 		} else {
-			fcn_004fb650(1, 0x3f800000, 0x3f000000, *(double*) 0x662aa0 - (double) (4 - *(int*) 0x7747b4) * *(double*) 0x662cc0);
+			fcn_004fb650(1, 0x3f800000, 0x3f000000, *(double*) &g_662aa0 - (double) (4 - *(int*) &g_7747b4) * *(double*) 0x662cc0);
 		}
 		fcn_00547770();
 		fcn_00535960();
 		Sleep(100);
-		v4 = (unsigned int*) 0x7f4ca4;
+		v4 = (unsigned int*) &g_7f4ca4;
 		do {
 			fcn_004c54c0(0xffffffff, *v4, 0, 3);
 			v4 = &v4[0x87];
@@ -222,16 +222,16 @@ void __cdecl fcn_00543080(void)
 		v4 = &v4[0x87];
 	} while ((int) v4 < 0x85a28c);
 	if (*(int*) 0x6a3420) {
-		if (*(int*) 0x774965 && !(*(int*) 0x7747b0 & 4)) {
+		if (*(int*) 0x774965 && !(*(int*) &g_7747b0 & 4)) {
 			v2 = d2_CreateScrollPerga();
 			d2_SetForm(v2, 2);
 			io_AppendText(0x7d);
 			d2_SetForm(v2, 1);
-			io_AppendText(0x1ba0, *(int*) 0x774970 & 0xffff, *(int*) 0x774970 & 0xffff);
+			io_AppendText(0x1ba0, *(int*) &g_774970 & 0xffff, *(int*) &g_774970 & 0xffff);
 			fcn_004c30a0(0xfffffff9, 0, 0x6a438c, 0xffffffff, 0);
 			v5 = fcn_005373e0(0x543080, 0x66087);
 			while (v5) {
-				if (*(int*) 0x100f1dc == 2) {
+				if (*(int*) &g_100f1dc == 2) {
 					*(int*) 0x774654 = 1;
 				}
 				v5 = fcn_005373e0(0x543080, 0x66087);
@@ -241,14 +241,14 @@ void __cdecl fcn_00543080(void)
 			*(int*) 0x774954 = 1;
 		}
 		if (*(int*) 0x6a3420 && !*(int*) 0x774954) {
-			v2 = (*(int*) 0x77494c & 8) || *(int*) 0x14cbca0 == -1;
+			v2 = (*(int*) &g_77494c & 8) || *(int*) 0x14cbca0 == -1;
 			fcn_004b3aa0(v2);
 		}
 	}
-	if (!(*(int*) 0x77494c & 8) && *(int*) 0x14cbca0 != -1) {
-		*(char*) 0x772d10 = (char) v1;
+	if (!(*(int*) &g_77494c & 8) && *(int*) 0x14cbca0 != -1) {
+		*(char*) &g_772d10 = (char) v1;
 		return;
 	}
 	fcn_005421f0();
-	*(char*) 0x772d10 = (char) v1;
+	*(char*) &g_772d10 = (char) v1;
 }

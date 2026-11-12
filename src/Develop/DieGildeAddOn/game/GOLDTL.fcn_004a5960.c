@@ -27,7 +27,7 @@ extern char g_7f4ca0[];
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508f80(unsigned short, int);
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, Query* q, int c);
-float __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 
 /* Collects up to max entities near e's level into out, walking the entity

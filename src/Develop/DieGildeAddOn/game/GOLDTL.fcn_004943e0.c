@@ -1,5 +1,5 @@
 int __cdecl fcn_00508eb0(unsigned short id, int a2);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004943e0 */

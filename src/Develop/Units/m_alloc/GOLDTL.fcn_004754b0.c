@@ -8,7 +8,7 @@ void* __cdecl m_alloc(int, int);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLDTL 0x004754b0 */
-int __cdecl fcn_004754b0(void* a0, void* a1, int a2, int a3)
+unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3)
 {
 	char hdr[0x28];
 	unsigned char v10[4];

@@ -1,5 +1,5 @@
 
-// fcn_005a89a0 — if(e=fcn_005a8600(*(int*)(a+1))) fcn_005a8500(a, e).
+/* fcn_005a89a0: load edx=a; call fcn_005a8600(*(int*)(edx+1)); if eax!=0 call fcn_005b1980(edx, eax). */
 
 int __cdecl fcn_005a8600(int);
 int __cdecl fcn_005b1980(void*, int);

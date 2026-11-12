@@ -6,7 +6,7 @@ typedef struct Stat {
 int __cdecl fcn_00493be0(char* p);
 void __cdecl fcn_004f4830(int a, Stat* st);
 char* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x00493ce0 */
 int __cdecl fcn_00493ce0(unsigned short* home, char* p)

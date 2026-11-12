@@ -1,6 +1,6 @@
 extern unsigned char g_773d75;
 
-float __cdecl fcn_0050bb50(int, char);
+float __cdecl fcn_0050bb50(int id, unsigned char a);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
 

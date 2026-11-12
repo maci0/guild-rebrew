@@ -1,7 +1,7 @@
-int __cdecl fcn_004f39b0(void);
-int __cdecl fcn_004f5dd0(void);
+#include "Develop/DieGildeAddOn/game/game_data.h"
+int __cdecl fcn_004f39b0(void); int __cdecl fcn_004f5dd0(void);
 int __cdecl gm_WalkEntityChain(unsigned short);
-void __cdecl fcn_0050f980(unsigned short, unsigned short, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_005c6270(char *, int);
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -61,11 +61,11 @@ void __cdecl fcn_005ab3e0(int a0)
 	kind = fcn_004f5dd0();
 	cost = 0;
 	if (kind != 0) {
-		cost = (int) ((float) gm_WalkEntityChain(*(unsigned short *) 0x774970) * 0.005f);
-		if (*(unsigned short *) (a0 + 0x27) != *(unsigned short *) 0x774970) {
-			fcn_0050f980(*(unsigned short *) 0x774970, *(unsigned short *) (a0 + 0x27), 1);
+		cost = (int) ((float) gm_WalkEntityChain(*(unsigned short *) &g_774970) * 0.005f);
+		if (*(unsigned short *) (a0 + 0x27) != *(unsigned short *) &g_774970) {
+			fcn_0050f980(*(unsigned short *) &g_774970, *(unsigned short *) (a0 + 0x27), 1);
 		}
-		if (fcn_005c6270((char *) (*(unsigned short *) 0x774970 * 0x21c + 0x7f4ca0), 0x2c6) != 0) {
+		if (fcn_005c6270((char *) (*(unsigned short *) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0), 0x2c6) != 0) {
 			cost = cost / 2;
 		}
 	}
@@ -73,11 +73,11 @@ void __cdecl fcn_005ab3e0(int a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(*(int *) 0x772514);
+	fcn_005340f0(*(int *) &g_772514);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1960, "Locations\\Kirche\\Ablass2");
 	if (cost < 1) {
-		io_AppendText(0x1961, *(unsigned short *) 0x774970);
+		io_AppendText(0x1961, *(unsigned short *) &g_774970);
 		item = 0;
 	} else {
 		io_AppendText(0x1962, count, cost);
@@ -85,33 +85,33 @@ void __cdecl fcn_005ab3e0(int a0)
 		io_AppendText(0x1963, count, cost);
 		item = fcn_00472250(dlg, 2, 0);
 	}
-	*(int *) 0x100f1dc = -1;
+	*(int *) &g_100f1dc = -1;
 	changed = 0;
 	do {
 		if (*(int *) 0x14ce8e0 == 0) {
-			if (*(int *) 0x100f1dc != -1 && *(int *) 0x67d370 == item &&
-			    fcn_00526010((char *) (*(unsigned short *) 0x774970 * 0x21c + 0x7f4ca0), cost, *(unsigned char *) 0x773d75) != 0) {
-				fcn_004c4510((int) *(unsigned short *) 0x774970 * 0x21c + 0x7f4ca0,
-					     *(int *) ((int) *(unsigned short *) 0x774970 * 0x21c + 0x7f4ca4));
+			if (*(int *) &g_100f1dc != -1 && *(int *) 0x67d370 == item &&
+			    fcn_00526010((char *) (*(unsigned short *) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0), cost, *(unsigned char *) &g_773d75) != 0) {
+				fcn_004c4510((int) *(unsigned short *) &g_774970 * 0x21c + 0x7f4ca0,
+					     *(int *) ((int) *(unsigned short *) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
 				fcn_004c4670(4, 1, 0x1ac, &cost);
 				fcn_004c5360();
 				if (*(unsigned short *) (a0 + 0x27) == 0xffff ||
-				    *(unsigned short *) (a0 + 0x27) == *(unsigned short *) 0x774970) {
-					sel = fcn_004c5150(-1, *(int *) ((int) *(unsigned short *) 0x774970 * 0x21c + 0x7f4ca4),
-							   *(unsigned char *) 0x773d75, cost);
+				    *(unsigned short *) (a0 + 0x27) == *(unsigned short *) &g_774970) {
+					sel = fcn_004c5150(-1, *(int *) ((int) *(unsigned short *) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4),
+							   *(unsigned char *) &g_773d75, cost);
 				} else {
 					val = count;
-					sel = fcn_004c5150(-1, *(int *) ((int) *(unsigned short *) 0x774970 * 0x21c + 0x7f4ca4),
-							   *(unsigned char *) 0x773d75, val);
-					sel = fcn_004c5150(*(int *) ((int) *(unsigned short *) (a0 + 0x27) * 0x21c + 0x7f4ca4), -1,
-							   *(unsigned char *) 0x773d75, val);
+					sel = fcn_004c5150(-1, *(int *) ((int) *(unsigned short *) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4),
+							   *(unsigned char *) &g_773d75, val);
+					sel = fcn_004c5150(*(int *) ((int) *(unsigned short *) (a0 + 0x27) * 0x21c + (unsigned long)&g_7f4ca4), -1,
+							   *(unsigned char *) &g_773d75, val);
 					fcn_005b2150();
 				}
 				while (sel != -1 && fcn_004c4450(sel) == 0) {
 					fcn_00535960();
 				}
 				ent = fcn_0050e600();
-				io_FormatTextBuffer((char *) text, 0x1964, cost, ent, *(unsigned short *) 0x774970);
+				io_FormatTextBuffer((char *) text, 0x1964, cost, ent, *(unsigned short *) &g_774970);
 				fcn_00526120((char *) text, 0x100);
 				changed = 1;
 				*(int *) 0x774654 = 1;
@@ -125,9 +125,9 @@ void __cdecl fcn_005ab3e0(int a0)
 		dlg = fcn_00470820(0, 0, (char *) 0x6ab048);
 		fcn_00471b60(dlg);
 		d2_SetForm(dlg, 0);
-		fcn_005340f0(*(int *) 0x772514);
+		fcn_005340f0(*(int *) &g_772514);
 		d2_SetOverlayAnimation(0, 0);
-		*(int *) 0x100f1dc = -1;
+		*(int *) &g_100f1dc = -1;
 		do {
 			fcn_0050e670(prev, cur);
 			changed = 0;
@@ -138,15 +138,15 @@ void __cdecl fcn_005ab3e0(int a0)
 				idx[i] = cur[i];
 			}
 			if (changed) {
-				fcn_0046f2c0(*(int *) 0x772514, 1);
-				io_AppendText(0x196b, *(int *) 0x772514);
+				fcn_0046f2c0(*(int *) &g_772514, 1);
+				io_AppendText(0x196b, *(int *) &g_772514);
 				for (col = 0; col < 5; col++) {
 					row[0] = 0;
 					if (idx[col] != -1) {
 						row[0] = idx[col] * 0x21c + 0x7f4ca0;
 					}
 					fcn_005ca560(row);
-					fcn_005caaa0(row[1], row[2], *(int *) 0x772514, row);
+					fcn_005caaa0(row[1], row[2], *(int *) &g_772514, row);
 					if (row[0] == 0) {
 						strcpy((char *) text, *(char **) 0x14a6554);
 					} else {
@@ -162,13 +162,13 @@ void __cdecl fcn_005ab3e0(int a0)
 			}
 		} while (fcn_005373e0((void *) 0x5abd60, 0x677c7) != 0);
 	}
-	if (*(int *) 0x6b5cc0 != 0) {
-		if (CompareVector3WithinTolerance((void *) 0x14ce880, (void *) 0x7e3a40) == 0) {
-			*(int *) 0x6b5cc0 = 0;
+	if (*(int *) &g_6b5cc0 != 0) {
+		if (CompareVector3WithinTolerance((void *) &g_14ce880, (void *) &g_7e3a40) == 0) {
+			*(int *) &g_6b5cc0 = 0;
 		} else {
-			*(int *) 0x6b5cc0 = 0;
-			fcn_00438b40(*(int *) 0x6b8014, (void *) 0x7e3a40);
-			fcn_00438cb0(*(int *) 0x6b8014, (void *) 0x7e3a50);
+			*(int *) &g_6b5cc0 = 0;
+			fcn_00438b40(*(int *) &g_6b8014, (void *) &g_7e3a40);
+			fcn_00438cb0(*(int *) &g_6b8014, (void *) &g_7e3a50);
 		}
 	}
 	fcn_0052d820();

@@ -26,7 +26,7 @@ int __cdecl fcn_005ca560();
 int __cdecl fcn_005ca740();
 int __cdecl gm_LookupEntityRecordById();
 int __cdecl fcn_00591990();
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005a1130 */
 unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 {
@@ -46,9 +46,9 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 
 	self = a0;
 	d2_SetForm(self, 2);
-	fcn_0046f2c0(*(int*) 0x772514, 1);
+	fcn_0046f2c0(*(int*) &g_772514, 1);
 	d2_SetForm(self, 3);
-	fcn_0046f2c0(*(int*) 0x772514, 1);
+	fcn_0046f2c0(*(int*) &g_772514, 1);
 
 	if (*(char*) (*(int*) (self + 0xc) + 2) != 6) {
 		d2_SetForm(self, 3);
@@ -56,7 +56,7 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 		count = *(unsigned char*) (self + 0x10);
 		for (i = 0; i < count; i++) {
 			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),
-				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) 0x772514);
+				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
 		}
 	}
 	else {
@@ -65,7 +65,7 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 		count = *(unsigned char*) (self + 0x10);
 		for (i = 0; i < count; i++) {
 			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),
-				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) 0x772514);
+				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
 		}
 	}
 
@@ -75,7 +75,7 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 		count = *(unsigned char*) (self + 0x34);
 		for (i = 0; i < count; i++) {
 			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),
-				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) 0x772514);
+				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
 		}
 	}
 	else {
@@ -84,12 +84,12 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 		count = *(unsigned char*) (self + 0x34);
 		for (i = 0; i < count; i++) {
 			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),
-				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) 0x772514);
+				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
 		}
 	}
 
 	d2_SetForm(self, 2);
-	fcn_0046f2c0(*(int*) 0x772514, 1);
+	fcn_0046f2c0(*(int*) &g_772514, 1);
 
 	if (((*(int*) (self + 8) != 5) || (*(char*) (*(int*) (self + 0xc) + 2) != 6))
 		&& ((*(int*) (self + 8) != 6) || (*(char*) (*(int*) (self + 0x30) + 2) != 6))) {
@@ -105,8 +105,8 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 	if (*(int*) 0x1052de0 == 0) {
 		return 0xffffffff;
 	}
-	entity = (char*) (*(int*) 0x772514 * 0x3cc);
-	if (*(int*) (entity + 0x10161d0) == 0) {
+	entity = (char*) (*(int*) &g_772514 * 0x3cc);
+	if (*(int*) (entity + (unsigned long)&g_10161d0) == 0) {
 		return 0xffffffff;
 	}
 
@@ -122,7 +122,7 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 		} while (*p++ != 0);
 	}
 	else {
-		p = *(char**) (room * 4 + 0x14a5320);
+		p = *(char**) (room * 4 + (unsigned long)&g_14a5320);
 		if (p == 0) {
 			return 0xffffffff;
 		}
@@ -163,22 +163,22 @@ unsigned int __cdecl fcn_005a1130(char* a0, int a1)
 	}
 
 	i = 0;
-	while (*(char*) (*(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f7c) + i) != 0) {
+	while (*(char*) (*(int*) (*(int*) &g_772514 * 0x3cc + 0x1015f7c) + i) != 0) {
 		i++;
 	}
 	if (0x17d0 <= i - 2) {
 		return 0xffffffff;
 	}
 
-	fcn_005ca560((char*) (*(int*) 0x772514 * 0x3cc + 0x1015f7c),
+	fcn_005ca560((char*) (*(int*) &g_772514 * 0x3cc + 0x1015f7c),
 		work, i + 1);
-	*(int*) (*(int*) 0x772514 * 0x3cc + 0x10161b8) = 2;
-	value = *(unsigned int*) (*(int*) 0x772514 * 0x3cc + 0x1015f6c);
+	*(int*) (*(int*) &g_772514 * 0x3cc + 0x10161b8) = 2;
+	value = *(unsigned int*) (*(int*) &g_772514 * 0x3cc + 0x1015f6c);
 	if (a1 == 0) {
 		return value;
 	}
 	*(int*) 0x772554 = 1;
-	other = (char*) *(int*) (0x1015ea0 + 0x50 + *(int*) (*(int*) 0x772514 * 0x3cc + 0x10161bc) * 0x2f4);
+	other = (char*) *(int*) ((unsigned long)&g_1015ea0 + 0x50 + *(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_10161bc) * 0x2f4);
 	if (other == 0) {
 		*(int*) 0x772554 = mode;
 		return value;

@@ -1,5 +1,5 @@
-extern void __cdecl gm_ResolveEntityById(char**, int, int, int);
-extern char* __cdecl fcn_00502cd0(int, ...);
+#include "client_data.h"
+extern void __cdecl gm_ResolveEntityById(char**, int, int, int); extern char* __cdecl fcn_00502cd0(int, ...);
 extern void __cdecl fcn_00546190(char*);
 extern char* __cdecl fcn_005463a0(int, int, int, ...);
 extern int __cdecl fcn_004943e0(unsigned short*, unsigned short*);
@@ -16,7 +16,7 @@ extern int __cdecl d2_SetForm(int, int);
 extern void __cdecl io_AppendText(int, ...);
 extern void __cdecl fcn_00500bb0(void*, int, int, int);
 extern int __cdecl fcn_004c3030(int, int, char*, int);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x0054bc90 */
 void __cdecl fcn_0054bc90(char* a0)
 {
@@ -62,12 +62,12 @@ void __cdecl fcn_0054bc90(char* a0)
 		return;
 	}
 	v1 = (unsigned int) v5 * 0x21c;
-	v7 = (unsigned short*) (v1 + 0x7f4ca0);
+	v7 = (unsigned short*) (v1 + (unsigned long)&g_7f4ca0);
 	if (v7 == 0)
 		goto close;
-	v4 = *(char*) ((unsigned int) *(unsigned short*) (a0 + 8) * 0x21c + 0x7f4ca2);
+	v4 = *(char*) ((unsigned int) *(unsigned short*) (a0 + 8) * 0x21c + (unsigned long)&g_7f4ca2);
 	v2 = (unsigned int) *(unsigned short*) (a0 + 8) * 0x21c;
-	v3 = (unsigned short*) (v2 + 0x7f4ca0);
+	v3 = (unsigned short*) (v2 + (unsigned long)&g_7f4ca0);
 	if (v4 != 6 && v4 != 7)
 		*(int*) (a0 + 0x70) = 2;
 	state = *(int*) (a0 + 0x70);
@@ -143,12 +143,12 @@ state2_unequal:
 		goto close2;
 	io_FormatTextBuffer(text, 0x1786, *v3);
 state2_report:
-	v16 = *(int*) (v1 + 0x7f4ca4);
+	v16 = *(int*) (v1 + (unsigned long)&g_7f4ca4);
 	fcn_00545d40(v16, -1, text, 0, 0x5ec, 0);
 	fcn_00546190(a0);
 	return;
 state1:
-	if (fcn_00500cb0((char*) 0x7f4c00, a0 + 0x52) > 0) {
+	if (fcn_00500cb0((char*) &g_7f4c00, a0 + 0x52) > 0) {
 		fcn_00545780(a0);
 		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
 		return;
@@ -156,9 +156,9 @@ state1:
 	if (*(int*) 0x100f884 != *(int*) (*(int*) (a0 + 0x74) + 8))
 		return;
 	v11 = -1;
-	if (*(int*) 0x100f1dc == -1)
+	if (*(int*) &g_100f1dc == -1)
 		return;
-	if (*(int*) 0x100f1dc == 2) {
+	if (*(int*) &g_100f1dc == 2) {
 		v16 = *(int*) (v3 + 2);
 		idx = 0;
 		if (*(int*) (a0 + 0xbc) == 0)
@@ -181,7 +181,7 @@ state1:
 			return;
 		}
 		io_FormatTextBuffer(text, 0x1785, *v3);
-	} else if (*(int*) 0x100f1dc == 1) {
+	} else if (*(int*) &g_100f1dc == 1) {
 		v16 = *(int*) (v3 + 2);
 		idx = 0;
 		if (*(int*) (a0 + 0xbc) == 0) {
@@ -225,7 +225,7 @@ state1:
 		fcn_00546190(a0);
 		return;
 	}
-	v16 = *(int*) (v1 + 0x7f4ca4);
+	v16 = *(int*) (v1 + (unsigned long)&g_7f4ca4);
 	fcn_00545d40(v16, -1, text, 0, 0x5ec, 0);
 	fcn_00545780(a0);
 	fcn_00546190(a0);
@@ -242,12 +242,12 @@ dialog:
 		io_AppendText(0x1771, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v6, *v3);
 	else
 		io_AppendText(0x1770, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v10, v6, *v3);
-	*(int*) (a0 + 0x44) = *(int*) 0x7f4c00;
-	*(int*) (a0 + 0x48) = *(int*) 0x7f4c04;
+	*(int*) (a0 + 0x44) = *(int*) &g_7f4c00;
+	*(int*) (a0 + 0x48) = *(int*) &g_7f4c04;
 	*(int*) (a0 + 0x4c) = *(int*) 0x7f4c08;
 	*(unsigned short*) (a0 + 0x50) = *(unsigned short*) 0x7f4c0c;
-	*(int*) (a0 + 0x52) = *(int*) 0x7f4c00;
-	*(int*) (a0 + 0x56) = *(int*) 0x7f4c04;
+	*(int*) (a0 + 0x52) = *(int*) &g_7f4c00;
+	*(int*) (a0 + 0x56) = *(int*) &g_7f4c04;
 	*(int*) (a0 + 0x5a) = *(int*) 0x7f4c08;
 	*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) 0x7f4c0c;
 	fcn_00500bb0(a0 + 0x52, 0x18, 0, 0);

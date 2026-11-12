@@ -63,9 +63,9 @@ void __cdecl fcn_00417650(int);
 void __cdecl fcn_00417ec0(int);
 void __cdecl fcn_004226b0(char*);
 int __cdecl fcn_00426950(char*, int);
-void __cdecl fcn_00537ed0(char*);
+void __cdecl main_PreloadSound(char*);
 void __cdecl fcn_00423830(int, int, int);
-void __cdecl fcn_005d6060(void);
+void __cdecl fcn_005e2590(void);
 void __cdecl fcn_00520f10(void);
 void __cdecl fcn_0050d460(void);
 void __cdecl fcn_0040afb0(void);
@@ -85,7 +85,7 @@ void __cdecl fcn_0040f960(void);
 void __cdecl fcn_0040d270(void);
 void __cdecl fcn_00411130(void);
 void __cdecl fcn_0042b700(void);
-void __cdecl fcn_005d5fe0(void);
+void __cdecl fcn_005e2510(void);
 void __cdecl fcn_0052fbb0(void);
 
 int __cdecl main_OpenEngine(void)
@@ -141,14 +141,14 @@ int __cdecl main_OpenEngine(void)
 		fcn_004226b0(path);
 		g_6f2400 = fcn_00426950("system.sbf", 0);
 		sprintf(ini, "%s\\include_sfx.ini", g_75e240);
-		fcn_00537ed0(ini);
+		main_PreloadSound(ini);
 	}
 	if (g_6f2578 != 0) {
 		fcn_00423830(2, 0x10, 44100);
 		sprintf(path, "%smsx\\", g_624698);
 		SetTrackPath(path);
 	}
-	fcn_005d6060();
+	fcn_005e2590();
 	fcn_00520f10();
 	fcn_0050d460();
 	fcn_0040afb0();
@@ -197,7 +197,7 @@ int __cdecl main_OpenEngine(void)
 	fcn_00411130();
 	g_5fb920 = (int) fcn_0042b700;
 	g_5f927c = 0x400000;
-	fcn_005d5fe0();
+	fcn_005e2510();
 	fcn_0052fbb0();
 	return 1;
 }

@@ -31,7 +31,7 @@ typedef struct {
 } TabRec_5ccca0;
 
 extern TabRec_5ccca0 g_6ac8a8[];
-
+#include "client_data.h"
 int __cdecl fcn_00468df0(int, int, int, int, int);
 void __cdecl fcn_00469110(int, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -45,7 +45,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_005cc240(int, int, int);
 void __cdecl fcn_005ccbe0(void);
 void __cdecl fcn_005ccc00(int, int, void*);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005ccca0 */
 int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 {
@@ -76,7 +76,7 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 	}
 	for (i = 0; i < 8; i++) {
 		g_6ac8a8[i].count = g_6ac8a8[i].create(
-				(char*) 0x7f4ca0 + g_774970 * 0x21c, 0, rows, ent);
+				(char*) &g_7f4ca0 + g_774970 * 0x21c, 0, rows, ent);
 	}
 	if (g_6ac8a8[g_775344].count == 0) {
 		g_775344 = 8;
@@ -94,11 +94,11 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 	d2_SetForm(h, 1);
 	io_AppendText(name);
 	d2_SetForm(h, 4);
-	step = (*(int*) (0x1015f40 + g_772514 * 0x3cc + 0x10) - 0x107) / 7;
-	rem = (*(int*) (0x1015f40 + g_772514 * 0x3cc + 0x10) - 0x107) % 7;
+	step = (*(int*) ((unsigned long)&g_1015f40 + g_772514 * 0x3cc + 0x10) - 0x107) / 7;
+	rem = (*(int*) ((unsigned long)&g_1015f40 + g_772514 * 0x3cc + 0x10) - 0x107) % 7;
 	y = 0;
 	for (i = 0; i < 8; i++) {
-		x = (*(int*) (0x1015f40 + g_772514 * 0x3cc + 0xc) - 0xb9) / 2;
+		x = (*(int*) ((unsigned long)&g_1015f40 + g_772514 * 0x3cc + 0xc) - 0xb9) / 2;
 		g_6ac8a8[i].element = fcn_00468df0(x, y, 0xbf,
 				*(int*) (0x14aad40 + g_6ac8a8[i].bild * 4), g_772514);
 		fcn_00469110(g_6ac8a8[i].element, 0xb9);
@@ -107,12 +107,12 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 	if (g_775344 < 8) {
 		d2_SetForm(h, 2);
 		g_6ac8a8[g_775344].count = g_6ac8a8[g_775344].create(
-				(char*) 0x7f4ca0 + g_774970 * 0x21c, 0x10, rows, ent);
+				(char*) &g_7f4ca0 + g_774970 * 0x21c, 0x10, rows, ent);
 		g_6ac8a8[g_775344].present(h, 2, 3, g_6ac8a8[g_775344].count, rows);
 	}
 	g_100f1dc = -1;
 	state = 3;
-	cur = (char*) 0x7f4ca0 + g_774970 * 0x21c;
+	cur = (char*) &g_7f4ca0 + g_774970 * 0x21c;
 	do {
 		if (state == 3) {
 			old = -1;
@@ -123,7 +123,7 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 			}
 			for (i = 0; i < 8; i++) {
 				g_6ac8a8[i].count = g_6ac8a8[i].create(
-						(char*) 0x7f4ca0 + g_774970 * 0x21c, 0, rows, ent);
+						(char*) &g_7f4ca0 + g_774970 * 0x21c, 0, rows, ent);
 			}
 			if (g_6ac8a8[g_775344].count == 0) {
 				g_775344 = 8;
@@ -141,24 +141,24 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 			}
 			if (g_775344 < 8) {
 				n = g_6ac8a8[g_775344].create(
-						(char*) 0x7f4ca0 + g_774970 * 0x21c, 0x10, rows, ent);
+						(char*) &g_7f4ca0 + g_774970 * 0x21c, 0x10, rows, ent);
 				g_6ac8a8[g_775344].count = n;
 				g_6ac8a8[g_775344].present(h, 2, n != old ? 3 : -1, n, rows);
 				fcn_005ccc00(cur, g_6ac8a8[g_775344].count, rows);
 			} else {
 				fcn_005cc240(h, 2, 3);
-				cur = (char*) 0x7f4ca0 + g_774970 * 0x21c;
+				cur = (char*) &g_7f4ca0 + g_774970 * 0x21c;
 			}
 		} else if (state == 1) {
 			i = g_6ac8a8[sel].create(
-					(char*) 0x7f4ca0 + g_774970 * 0x21c, 0, 0, ent);
+					(char*) &g_7f4ca0 + g_774970 * 0x21c, 0, 0, ent);
 			g_6ac8a8[sel].count = i;
 			if (i != 0) {
 				*(int*) (g_1015ea0 + g_6ac8a8[g_775344].element * 0x2f4 + 0x38) = 0;
 				g_775344 = sel;
 				*(int*) (g_1015ea0 + g_6ac8a8[sel].element * 0x2f4 + 0x38) = 1;
 				n = g_6ac8a8[g_775344].create(
-						(char*) 0x7f4ca0 + g_774970 * 0x21c, 0x10, rows, ent);
+						(char*) &g_7f4ca0 + g_774970 * 0x21c, 0x10, rows, ent);
 				g_6ac8a8[g_775344].count = n;
 				g_6ac8a8[g_775344].present(h, 2, 3, n, rows);
 			} else {
@@ -174,7 +174,7 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_14ce8e8 != 0) {
-			if (cur == (void*) ((char*) 0x7f4ca0 + g_774970 * 0x21c)) {
+			if (cur == (void*) ((char*) &g_7f4ca0 + g_774970 * 0x21c)) {
 				result = 0;
 				cur = 0;
 				for (i = 0; i < g_6ac8a8[g_775344].count; i++) {
@@ -193,9 +193,9 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 			}
 			goto hit;
 		} else {
-			if (cur != (void*) ((char*) 0x7f4ca0 + g_774970 * 0x21c)) {
+			if (cur != (void*) ((char*) &g_7f4ca0 + g_774970 * 0x21c)) {
 				state = 4;
-				cur = (char*) 0x7f4ca0 + g_774970 * 0x21c;
+				cur = (char*) &g_7f4ca0 + g_774970 * 0x21c;
 			} else {
 				goto hit;
 			}
@@ -230,7 +230,7 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 				}
 			}
 		} else if (time0 <= g_6b7fac &&
-				*(int*) (0x1015f40 + win * 0x3cc + 0x260) == 0) {
+				*(int*) ((unsigned long)&g_1015f40 + win * 0x3cc + 0x260) == 0) {
 			state = 3;
 			time0 = g_6b7fac + 0xd8;
 		}

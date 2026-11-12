@@ -1,4 +1,4 @@
-# GUID placeholders for `extern const GUID` in src/GOLD.fcn_0041c830.c.
+# GUID placeholders for `extern const GUID` in src/Develop/Units/d3/GOLD.fcn_0041c830.c.
 # 16 bytes is the GUID type size. Stock DXGUID.LIB in the PP image defines
 # IID_IDirectDraw2 and IID_IDirect3D2, not these two. Not a recovered allocation.
 

@@ -9,7 +9,7 @@ typedef struct {
 	int pad[11];
 } Match;
 
-float __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl fcn_005ccc00(unsigned short* self, unsigned int n, Match* arr)

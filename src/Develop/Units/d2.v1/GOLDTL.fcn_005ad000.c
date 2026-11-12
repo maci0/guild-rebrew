@@ -29,7 +29,7 @@ typedef struct Dlg005ad000 {
 	int ctl;
 	char pkt[0x910];
 } Dlg005ad000;
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005ad000 */
 void __cdecl fcn_005ad000(void)
 {
@@ -50,7 +50,7 @@ void __cdecl fcn_005ad000(void)
 		fcn_00532ef0();
 		return;
 	}
-	if (fcn_005463a0(2, 0, 0x39, 2, *(unsigned short*) 0x774970) != 0) {
+	if (fcn_005463a0(2, 0, 0x39, 2, *(unsigned short*) &g_774970) != 0) {
 		io_FormatTextBuffer(msg.pkt + 0x110, 0x19b6, *(unsigned short*) obj);
 		fcn_00526120((int) (msg.pkt + 0x110), 0);
 		fcn_00532ef0();
@@ -59,35 +59,35 @@ void __cdecl fcn_005ad000(void)
 	dlg = fcn_00470820(0, 0, (void*) 0x6ab180);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	h = *(unsigned char*) 0x773d75;
+	h = *(unsigned char*) &g_773d75;
 	id = io_AppendText(0x19b1, h, h, *(unsigned short*) obj);
 	ctl1 = fcn_00472250(dlg, 1, id);
 	ctl2 = fcn_00472250(dlg, 1, id + 1);
-	id = *(unsigned short*) 0x774970;
+	id = *(unsigned short*) &g_774970;
 	msg.ctl = ctl2;
 	h = gm_SumSlotTreasury(id);
 	fcn_00472380(ctl1, 0x96,
-	             fcn_0050b710(h, *(unsigned char*) 0x773d75), 0xfa);
+	             fcn_0050b710(h, *(unsigned char*) &g_773d75), 0xfa);
 	d2_SetOverlayAnimation(0, 0);
 	do {
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;
 		}
-		if (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == msg.ctl) {
+		if (*(int*) &g_100f1dc != -1 && *(int*) 0x67d370 == msg.ctl) {
 			*(char*) (msg.pkt + 0x1c) = 0x39;
 			*(int*) (msg.pkt + 0x20) = *(int*) (obj + 4);
 			*(int*) (msg.pkt + 0x24) = -1;
 			*(char*) (msg.pkt + 0x4e) = 9;
 			*(int*) (msg.pkt + 0x74) = *(int*) (obj + 4);
-			*(int*) (msg.pkt + 0x70) = *(int*) (0x7f4ca4 +
-			                                    *(unsigned short*) 0x774970 * 0x21c);
+			*(int*) (msg.pkt + 0x70) = *(int*) ((unsigned long)&g_7f4ca4 +
+			                                    *(unsigned short*) &g_774970 * 0x21c);
 			*(int*) (msg.pkt + 0x78) = fcn_0050b750(
-			    fcn_00471f80(ctl1, *(unsigned char*) 0x773d75),
-			    *(unsigned char*) 0x773d75);
+			    fcn_00471f80(ctl1, *(unsigned char*) &g_773d75),
+			    *(unsigned char*) &g_773d75);
 			fcn_004c4eb0((void*) 0x6ab168);
 			fcn_004c5150(*(int*) (obj + 4),
-			             *(int*) (0x7f4ca4 + *(unsigned short*) 0x774970 * 0x21c),
-			             *(char*) 0x773d75, *(int*) (msg.pkt + 0x78));
+			             *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c),
+			             *(char*) &g_773d75, *(int*) (msg.pkt + 0x78));
 			fcn_004c5530(msg.pkt + 0x14);
 			fcn_004c4ef0((void*) 0x6ab168);
 			*(int*) 0x774654 = 1;

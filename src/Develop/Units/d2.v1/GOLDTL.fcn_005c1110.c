@@ -13,7 +13,7 @@ typedef struct {
 	char padc0[1];
 	unsigned char fc1;
 } Ent5c1110;
-
+#include "client_data.h"
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -31,7 +31,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00532ef0(void);
 int __cdecl fcn_005100f0(int, int);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005c1110 */
 int __cdecl fcn_005c1110(void)
 {
@@ -49,7 +49,7 @@ int __cdecl fcn_005c1110(void)
 	int r;
 	int* q;
 
-	t = *(int*) 0x6b7fac;
+	t = *(int*) &g_6b7fac;
 	a[0] = -1;
 	a[1] = -1;
 	a[2] = -1;
@@ -63,11 +63,11 @@ int __cdecl fcn_005c1110(void)
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
 	io_AppendText(0x1912);
-	*(int*) 0x100f1dc = -1;
+	*(int*) &g_100f1dc = -1;
 	do {
-		if ((unsigned int) t <= (unsigned int) *(int*) 0x6b7fac) {
+		if ((unsigned int) t <= (unsigned int) *(int*) &g_6b7fac) {
 			n = 1;
-			t = *(int*) 0x6b7fac + 0x1f4;
+			t = *(int*) &g_6b7fac + 0x1f4;
 			a[0] = -1;
 			b[0] = -1;
 			a[1] = -1;
@@ -95,8 +95,8 @@ int __cdecl fcn_005c1110(void)
 							*(int*) ((char*) a + k) = fcn_00472250(h, i,
 							    io_AppendText(0x1914, 2));
 							*(int*) ((char*) b + k) = ent->f4;
-							fcn_00472170(*(int*) ((char*) 0x10161bc
-							    + 0x3cc * *(int*) ((char*) 0x1038140
+							fcn_00472170(*(int*) ((char*) &g_10161bc
+							    + 0x3cc * *(int*) ((char*) &g_1038140
 							    + h * 0x2bc + n * 8)), 1);
 							n++;
 							i += 2;
@@ -109,11 +109,11 @@ int __cdecl fcn_005c1110(void)
 				}
 			}
 			if (n < 5) {
-				q = (int*) ((char*) 0x1038140 + h * 0x2bc + n * 8);
+				q = (int*) ((char*) &g_1038140 + h * 0x2bc + n * 8);
 				for (j = n * 2 - 1; j < 9; j += 2) {
 					d2_SetForm(h, j);
 					io_AppendText(0x6811b0);
-					fcn_00472170(*(int*) ((char*) 0x10161bc
+					fcn_00472170(*(int*) ((char*) &g_10161bc
 					    + 0x3cc * *q), 0);
 					q += 2;
 				}
@@ -123,7 +123,7 @@ done:
 		}
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;
-		} else if (*(int*) 0x100f1dc != n && *(int*) 0x67d370 != n) {
+		} else if (*(int*) &g_100f1dc != n && *(int*) 0x67d370 != n) {
 			for (k = 0; k < 4; k++) {
 				if (a[k] == *(int*) 0x67d370) {
 					break;
@@ -132,10 +132,10 @@ done:
 			if (k < 4) {
 				o = fcn_005463a0(1, 1, b[k]);
 				if (o != 0) {
-					if (fcn_00525f60((char*) 0x7f4ca0 + 0x21c
-					    * (unsigned int) *(unsigned short*) 0x774970, 2) != 0) {
+					if (fcn_00525f60((char*) &g_7f4ca0 + 0x21c
+					    * (unsigned int) *(unsigned short*) &g_774970, 2) != 0) {
 						*(pos14_7f4c00*) ((char*) o + 0x52) =
-						    *(pos14_7f4c00*) 0x7f4c00;
+						    *(pos14_7f4c00*) &g_7f4c00;
 						r = fcn_004c5620(n, (char*) o);
 						if (r != n) {
 							while (fcn_004c4450(r) == 0) {
@@ -143,11 +143,11 @@ done:
 							}
 						}
 						if (fcn_004c4450(r) == 1) {
-							fcn_005100f0(*(int*) ((char*) 0x7f4ca0
+							fcn_005100f0(*(int*) ((char*) &g_7f4ca0
 							    + 4 + 0x21c
-							    * (unsigned int) *(unsigned short*) 0x774970), -2);
+							    * (unsigned int) *(unsigned short*) &g_774970), -2);
 						}
-						t = *(int*) 0x6b7fac;
+						t = *(int*) &g_6b7fac;
 					}
 				}
 			}

@@ -13,7 +13,7 @@ void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00533a60(int, int, int*, int, ...);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_005373e0(void*, int);
-
+extern int g_100f1dc; extern char * g_1015ea0; extern int g_772514; extern unsigned short g_774970; extern char g_7f4ca0[];
 /* ADDRESS: GOLDTL 0x005aa480 */
 void __cdecl fcn_005aa480(void)
 {
@@ -36,79 +36,79 @@ void __cdecl fcn_005aa480(void)
 	int n;
 	int h;
 
-	n = fcn_004eb220((char*) (0x7f4ca0 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c));
+	n = fcn_004eb220((char*) ((unsigned long)&g_7f4ca0 + (unsigned int) *(unsigned short*) &g_774970 * 0x21c));
 	if (n != 1) {
 		if (n == -1) {
 			fcn_00526120((void*) *(int*) 0x14aad38, 0);
 			return;
 		}
-		fcn_00525f60((void*) (0x7f4ca0 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c), 3);
+		fcn_00525f60((void*) ((unsigned long)&g_7f4ca0 + (unsigned int) *(unsigned short*) &g_774970 * 0x21c), 3);
 		return;
 	}
 	h = fcn_00470820(0, 0, "LOCATIONS\\ZUNFTHAUS\\LEVEL1");
 	fcn_00471b60(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
-	fcn_005340f0(*(int*) 0x772514);
+	fcn_005340f0(*(int*) &g_772514);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1643);
 	d2_SetForm(h, 2);
 	i = 0;
 	do {
-		n = fcn_0046f740(pos[i][0] - 0x28, pos[i][1] - 0x46, i + 0x5a2, *(int*) 0x772514);
+		n = fcn_0046f740(pos[i][0] - 0x28, pos[i][1] - 0x46, i + 0x5a2, *(int*) &g_772514);
 		ids[i] = n;
 		i++;
-		*(int*) ((char*) *(void**) 0x1015ea0 + n * 0x2f4 + 0x5c) = 1;
+		*(int*) ((char*) *(void**) &g_1015ea0 + n * 0x2f4 + 0x5c) = 1;
 	} while (i < 7);
 	cur = 0;
-	*(int*) ((char*) *(void**) 0x1015ea0 + ids[0] * 0x2f4 + 0x3c) = 1;
+	*(int*) ((char*) *(void**) &g_1015ea0 + ids[0] * 0x2f4 + 0x3c) = 1;
 	d2_SetForm(h, 3);
-	n = (unsigned int) *(unsigned short*) 0x774970 * 0x21c;
-	if (*(char*) (0x7f4ca0 + n + 9) == 0) {
-		n = *(unsigned char*) (0x7f4ca0 + n + 0x169) + 0x253;
+	n = (unsigned int) *(unsigned short*) &g_774970 * 0x21c;
+	if (*(char*) ((unsigned long)&g_7f4ca0 + n + 9) == 0) {
+		n = *(unsigned char*) ((unsigned long)&g_7f4ca0 + n + 0x169) + 0x253;
 	} else {
-		n = *(unsigned char*) (0x7f4ca0 + n + 0x169) + 0x27b;
+		n = *(unsigned char*) ((unsigned long)&g_7f4ca0 + n + 0x169) + 0x27b;
 	}
 	io_AppendText(0x1644, n, 3, 0x1649);
 	d2_SetForm(h, 4);
-	fcn_00533a60(*(int*) 0x772514, 0, sel, 3,
+	fcn_00533a60(*(int*) &g_772514, 0, sel, 3,
 	    *(char**) 0x14aac34, *(char**) 0x14aac38, *(char**) 0x14aac3c);
-	*(int*) 0x100f1dc = -1;
+	*(int*) &g_100f1dc = -1;
 	do {
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;
 		}
-		if (*(int*) 0x100f1dc != -1) {
+		if (*(int*) &g_100f1dc != -1) {
 			n = *(int*) 0x67d370;
 			if (n == sel[2]) {
 				*(int*) 0x774654 = 1;
 			} else if (n == sel[0]) {
-				n = *(unsigned short*) 0x774970;
+				n = *(unsigned short*) &g_774970;
 				pb[0] = 3;
 				pb[1] = cur + 1;
 				pb[2] = 1;
-				fcn_004eb3e0((int) (0x7f4ca0 + (unsigned int) n * 0x21c), pb);
+				fcn_004eb3e0((int) ((unsigned long)&g_7f4ca0 + (unsigned int) n * 0x21c), pb);
 				*(int*) 0x774654 = 1;
 			} else if (n == sel[1]) {
 				pa[0] = 3;
 				pa[1] = cur + 1;
 				pa[2] = -1;
-				fcn_004eb3e0((int) (0x7f4ca0 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c), pa);
+				fcn_004eb3e0((int) ((unsigned long)&g_7f4ca0 + (unsigned int) *(unsigned short*) &g_774970 * 0x21c), pa);
 				*(int*) 0x774654 = 1;
 			} else {
 				j = 0;
 				do {
 					if (n == ids[j] && cur != j) {
-						*(int*) ((char*) *(void**) 0x1015ea0 + ids[cur] * 0x2f4 + 0x3c) = 0;
+						*(int*) ((char*) *(void**) &g_1015ea0 + ids[cur] * 0x2f4 + 0x3c) = 0;
 						cur = j;
-						*(int*) ((char*) *(void**) 0x1015ea0 + ids[j] * 0x2f4 + 0x3c) = 1;
+						*(int*) ((char*) *(void**) &g_1015ea0 + ids[j] * 0x2f4 + 0x3c) = 1;
 						d2_SetForm(h, 3);
 						io_AppendText(0x6811b0);
-						n = (unsigned int) *(unsigned short*) 0x774970 * 0x21c;
-						if (*(char*) (0x7f4ca0 + n + 9) == 0) {
-							n = *(unsigned char*) (0x7f4ca0 + n + 0x169) + 0x253;
+						n = (unsigned int) *(unsigned short*) &g_774970 * 0x21c;
+						if (*(char*) ((unsigned long)&g_7f4ca0 + n + 9) == 0) {
+							n = *(unsigned char*) ((unsigned long)&g_7f4ca0 + n + 0x169) + 0x253;
 						} else {
-							n = *(unsigned char*) (0x7f4ca0 + n + 0x169) + 0x27b;
+							n = *(unsigned char*) ((unsigned long)&g_7f4ca0 + n + 0x169) + 0x27b;
 						}
 						io_AppendText(0x1644, n, 3, j + 0x1649);
 						break;

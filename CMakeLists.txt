@@ -11,6 +11,21 @@ include(CMakePushCheckState)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
+# Watch membership here; metadata still selects each target's sources.
+file(GLOB_RECURSE rebrew_sources CONFIGURE_DEPENDS
+  "${PROJECT_SOURCE_DIR}/src/*.c"
+  "${PROJECT_SOURCE_DIR}/src/*.h")
+file(GLOB_RECURSE _REBREW_LIBRARY_INPUTS CONFIGURE_DEPENDS
+  "${PROJECT_SOURCE_DIR}/src/*.toml"
+  "${PROJECT_SOURCE_DIR}/references/*.toml"
+  "${PROJECT_SOURCE_DIR}/stubs/*.toml")
+list(FILTER _REBREW_LIBRARY_INPUTS INCLUDE REGEX "/rebrew-libraries(\\.toml|\\.d/[^/]+\\.toml)$")
+file(GLOB _REBREW_ROOT_LIBRARY_INPUTS CONFIGURE_DEPENDS
+  "${PROJECT_SOURCE_DIR}/rebrew-libraries.toml"
+  "${PROJECT_SOURCE_DIR}/rebrew-libraries.d/*.toml")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+  ${_REBREW_LIBRARY_INPUTS} ${_REBREW_ROOT_LIBRARY_INPUTS})
+
 # ---------------------------------------------------------------------------
 # Options
 # ---------------------------------------------------------------------------
@@ -118,15 +133,7 @@ endif()
 # ---------------------------------------------------------------------------
 
 if(REBREW_BUILD_SERVER)
-  # CONFIGURE_DEPENDS makes the build system re-glob on every build. Without it
-  # CMake expands the glob once at configure time, so renaming or adding a source
-  # leaves build.make, objects1.rsp and link.txt pointing at a .obj that no
-  # longer compiles. The build then fails with no obvious cause while
-  # `rebrew build check` still reports clean, because that check compares flags
-  # on the objects CMake already listed -- it cannot see an object that should
-  # have left the list. Measured in round 1080: `rebrew source rename` renamed a .c,
-  # split_link.sh died at exit 157, and the fix was a re-configure.
-  #
+  # Source metadata selects server TUs.
   # Unified tree: game logic shared by all three binaries lives once in
   # src/ (target identities live in the metadata stores). The source list is
   # metadata-selected (rebrew build cmake-sources), not globbed: a GOLD/GOLDTL-only
@@ -151,11 +158,7 @@ if(REBREW_BUILD_SERVER)
   set(SERVER_SOURCES ${REBREW_SOURCES})
 
   list(FILTER SERVER_SOURCES INCLUDE REGEX "\\.c$")
-  # A scratch file dropped in the tree (an agent's probe named _something.c) would
-  # be swept up by the recursive glob and linked as an extra object, which moves
-  # every symbol after it. This happened once. No tracked source has a leading
-  # underscore, so excluding the prefix makes a stray probe harmless instead of
-  # composition-breaking.
+  # Exclude leading-underscore probes from the metadata-selected source list.
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/_[^/]*\\.c$")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt/")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/zlib/")
@@ -204,8 +207,10 @@ if(REBREW_BUILD_SERVER)
   # the original. The --first-va table supplies the
   # vendored files' first-function VAs (pristine vendor C remains unchanged); the
   # --exclude list drops files absent from the original server.dll.
+  list(APPEND SERVER_SOURCES ${ZLIB_SOURCES} ${MINIZIP_SOURCES})
+  list(REMOVE_DUPLICATES SERVER_SOURCES)
   execute_process(
-    COMMAND "${_REBREW_SRC_BIN}" build order-sources ${SERVER_SOURCES} ${ZLIB_SOURCES} ${MINIZIP_SOURCES}
+    COMMAND "${_REBREW_SRC_BIN}" build order-sources ${SERVER_SOURCES}
       --target server.dll --module SERVER
       --first-va adler32.c=0x10001000
       --first-va crc32.c=0x100011f0
@@ -234,9 +239,8 @@ if(REBREW_BUILD_SERVER)
   endif()
   string(REPLACE "\n" ";" SERVER_SOURCES "${ORDERED_SOURCES}")
 
-  # The game's zero-initialized data sits in two generated objects (docs/msvc6-link-layout.md 5c):
-  # bss_head.c is an ordinary object (its .bss precedes the CRT's); bss_late.c is a static library
-  # listed after the stock archives, so LINK loads it after the CRT and its .bss follows theirs.
+  # Early BSS owners are ordinary objects. The bss_late static archive follows
+  # the stock libraries to place its retained BSS later.
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/bss_late\\.c$")
   add_library(server_dll SHARED ${SERVER_SOURCES})
   add_library(bss_late STATIC "${PROJECT_SOURCE_DIR}/src/bss_layout/bss_late.c")
@@ -332,9 +336,8 @@ endif()
 # ---------------------------------------------------------------------------
 # Client comparison link helpers
 # ---------------------------------------------------------------------------
-# Vendored zlib members that game TUs call but that carry no target binding
-# are the same references/zlib sources server.dll already compiles. The zlib
-# sample program minigzip is omitted from these comparison scaffolds.
+# Reuse vendored zlib sources in client comparison builds.
+# The helper omits minigzip; GoldTL adds it back below.
 
 function(rebrew_append_client_zlib source_var)
   set(_sources ${${source_var}})
@@ -368,13 +371,12 @@ function(rebrew_append_client_zlib source_var)
   set(${source_var} ${_sources} PARENT_SCOPE)
 endfunction()
 
-# Scaffold selection for a measured LNK2005 pair. The omit list is a
-# comparison-build choice: each dropped TU's external definitions are
-# provided by another TU that stays on the link. It does not change
-# metadata and it does not drop a TU that still has a unique symbol.
+# Apply reviewed comparison-build omissions by path.
+# This helper does not validate replacement providers or change metadata.
 function(rebrew_apply_scaffold_omits source_var omit_file)
   set(_sources ${${source_var}})
   set(REBREW_SCAFFOLD_OMITS "")
+  file(GLOB _omit_presence CONFIGURE_DEPENDS "${omit_file}")
   if(EXISTS "${omit_file}")
     include("${omit_file}")
   endif()
@@ -389,6 +391,7 @@ endfunction()
 
 function(rebrew_append_scaffold source_var scaffold_path)
   set(_sources ${${source_var}})
+  file(GLOB _scaffold_presence CONFIGURE_DEPENDS "${scaffold_path}")
   if(EXISTS "${scaffold_path}")
     list(APPEND _sources "${scaffold_path}")
   endif()
@@ -506,45 +509,34 @@ if(REBREW_BUILD_GOLDTL)
 
   # The XP image member uses the plain-C JPEG/PNG objects selected below.
   set(_GOLDTL_XP_D3DX "${PROJECT_SOURCE_DIR}/references/dxsdk8/lib/d3dx8-xpsp1.lib")
-  if(NOT EXISTS "${_GOLDTL_XP_D3DX}")
-    message(FATAL_ERROR "Provide the pristine XP SP1 D3DX8 archive at ${_GOLDTL_XP_D3DX} (SHA-256 c02e4fedf3e2e0964a1eed98ca02b28d68a0a7ac184594b04212216253bfbd9d)")
-  endif()
-  file(SHA256 "${_GOLDTL_XP_D3DX}" _GOLDTL_XP_D3DX_HASH)
-  if(NOT _GOLDTL_XP_D3DX_HASH STREQUAL "c02e4fedf3e2e0964a1eed98ca02b28d68a0a7ac184594b04212216253bfbd9d")
-    message(FATAL_ERROR "Unexpected XP SP1 D3DX8 archive SHA-256: ${_GOLDTL_XP_D3DX_HASH}")
-  endif()
   find_program(_GOLDTL_LLVM_AR NAMES llvm-ar REQUIRED)
   set(_GOLDTL_XP_IMAGE "${CMAKE_CURRENT_BINARY_DIR}/xp-cd3dximage.obj")
-  execute_process(COMMAND "${_GOLDTL_LLVM_AR}" p "${_GOLDTL_XP_D3DX}" "obj\\i386\\cd3dximage.obj"
-    OUTPUT_FILE "${_GOLDTL_XP_IMAGE}" RESULT_VARIABLE _GOLDTL_XP_EXTRACT_RC)
-  if(NOT _GOLDTL_XP_EXTRACT_RC EQUAL 0)
-    message(FATAL_ERROR "Failed to extract XP SP1 cd3dximage.obj")
-  endif()
-  file(SHA256 "${_GOLDTL_XP_IMAGE}" _GOLDTL_XP_IMAGE_HASH)
-  if(NOT _GOLDTL_XP_IMAGE_HASH STREQUAL "d0c91f1bf7550ae39709f738416a48710e75aba61749203d8c7b03d5a07fe592")
-    message(FATAL_ERROR "Unexpected XP SP1 cd3dximage.obj SHA-256: ${_GOLDTL_XP_IMAGE_HASH}")
-  endif()
   set(_GOLDTL_XP_JERROR "${CMAKE_CURRENT_BINARY_DIR}/xp-jerror.obj")
-  execute_process(COMMAND "${_GOLDTL_LLVM_AR}" p "${_GOLDTL_XP_D3DX}" "obj\\i386\\jerror.obj"
-    OUTPUT_FILE "${_GOLDTL_XP_JERROR}" RESULT_VARIABLE _GOLDTL_XP_EXTRACT_RC)
-  if(NOT _GOLDTL_XP_EXTRACT_RC EQUAL 0)
-    message(FATAL_ERROR "Failed to extract XP SP1 jerror.obj")
-  endif()
-  file(SHA256 "${_GOLDTL_XP_JERROR}" _GOLDTL_XP_JERROR_HASH)
-  if(NOT _GOLDTL_XP_JERROR_HASH STREQUAL "e1203fbdc8cb43231d4952b24843030fdd4f332c51e858807bdaf6cbda0516ba")
-    message(FATAL_ERROR "Unexpected XP SP1 jerror.obj SHA-256: ${_GOLDTL_XP_JERROR_HASH}")
-  endif()
+  set(XP_ARCHIVE "${_GOLDTL_XP_D3DX}")
+  set(XP_AR "${_GOLDTL_LLVM_AR}")
+  set(XP_OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+  include("${PROJECT_SOURCE_DIR}/cmake/extract-xp-objects.cmake")
+  add_custom_command(
+    OUTPUT "${_GOLDTL_XP_IMAGE}" "${_GOLDTL_XP_JERROR}"
+    COMMAND "${CMAKE_COMMAND}"
+      "-DXP_ARCHIVE=${_GOLDTL_XP_D3DX}" "-DXP_AR=${_GOLDTL_LLVM_AR}"
+      "-DXP_OUTPUT_DIR=${CMAKE_CURRENT_BINARY_DIR}"
+      -P "${PROJECT_SOURCE_DIR}/cmake/extract-xp-objects.cmake"
+    DEPENDS "${_GOLDTL_XP_D3DX}" "${PROJECT_SOURCE_DIR}/cmake/extract-xp-objects.cmake"
+    COMMENT "Extract and verify XP SP1 D3DX8 objects"
+    VERBATIM)
+  set_source_files_properties("${_GOLDTL_XP_IMAGE}" "${_GOLDTL_XP_JERROR}"
+    PROPERTIES GENERATED TRUE EXTERNAL_OBJECT TRUE)
   set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${_GOLDTL_XP_D3DX}")
   list(APPEND GOLDTL_SOURCES "${_GOLDTL_XP_IMAGE}" "${_GOLDTL_XP_JERROR}")
 
-  # The DX8 supplementary png/jpeg objects are prebuilt and carry no metadata
-  # rows, so they need reference first VAs and must be ordered with the rest.
-  file(GLOB GOLDTL_DX8_SUPP "${PROJECT_SOURCE_DIR}/references/dxsdk8/supp/*.obj")
+  # Supplementary objects include code and PCH records.
+  # First-VA overrides order selected code objects; unknown VAs sort last.
+  file(GLOB GOLDTL_DX8_SUPP CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/references/dxsdk8/supp/*.obj")
   list(APPEND GOLDTL_SOURCES ${GOLDTL_DX8_SUPP})
 
-  # Order objects by their original function VA so the linked image places every
-  # body at the reference address. The vendored files are outside src/, so their
-  # first-function VAs come from the metadata rows that name them.
+  # Sort inputs by first-function VA using bindings and explicit overrides.
+  # Verify actual linked placement after the link.
   execute_process(
     COMMAND "${_REBREW_GOLDTL_BIN}" build order-sources ${GOLDTL_SOURCES}
       --target "Europa1400Gold_TL.exe" --module GOLDTL
@@ -609,26 +601,16 @@ if(REBREW_BUILD_GOLDTL)
     # Force the reference's import members; see layout/.../import-includes.rsp.
     target_link_options(europa1400gold_tl PRIVATE
       "@${PROJECT_SOURCE_DIR}/layout/Europa1400Gold_TL.exe/import-includes.rsp")
-    # Pull the D3DX8 archive members the reference links. The list excludes the
-    # members that cannot come in (amdmath.lib directive, unresolved D3DX
-    # resource helpers, archive zlib colliding with the project zlib) and the
-    # members whose imports the reference does not have.
-    # The forced d3dx8 member list was removed on 2026-10-30: 13 of its members
-    # do not appear in the reference image at all (btri, cassignment,
-    # cd3dxstateblock, ceffect, cleanmesh, cparameter, cpass, createmesh,
-    # ctechnique, cvalue, intersect, jdmaster, shapes), and forcing them added
-    # ~190 KB of code the reference does not carry. Only loadutil.obj and
-    # loadx.obj are present in the reference; they stay unlinked until their
-    # CTLFWR32 globals resolve. The unused list is kept in
-    # layout/Europa1400Gold_TL.exe/d3dx8-includes.rsp as evidence.
+    # The old forced-member list was removed on 2026-10-30 and remains in
+    # layout/Europa1400Gold_TL.exe/d3dx8-includes.rsp as historical evidence.
+    # readd-symbols.rsp still forces archive symbols. The explicit member list
+    # is currently empty; neither list proves original provider selection.
     target_include_directories(europa1400gold_tl PRIVATE
       "${PROJECT_SOURCE_DIR}/src"
     )
 
-    # Data-only stubs cannot go through order-sources, and the CTL globals need
-    # C++ mangled names, so compile that TU directly and link it with the
-    # reference-present d3dx8 members after the archives. The member list lives in
-    # stubs/goldtl/readd-members.cmake so the subset is reviewable in one place.
+    # Compile the C++ CTL globals explicitly with /TP.
+    # Link the resulting object after the archives; the member list is optional.
     set(_GOLDTL_CTL_STUB "${CMAKE_CURRENT_BINARY_DIR}/ctl_locale_stubs.obj")
     add_custom_command(
       OUTPUT "${_GOLDTL_CTL_STUB}"
@@ -652,6 +634,9 @@ if(REBREW_BUILD_GOLDTL)
     target_link_libraries(europa1400gold_tl PRIVATE ${_GOLDTL_READD_OBJS})
     target_link_options(europa1400gold_tl PRIVATE
       "@${PROJECT_SOURCE_DIR}/stubs/goldtl/readd-symbols.rsp")
+    set_property(TARGET europa1400gold_tl APPEND PROPERTY LINK_DEPENDS
+      "${PROJECT_SOURCE_DIR}/layout/Europa1400Gold_TL.exe/import-includes.rsp"
+      "${PROJECT_SOURCE_DIR}/stubs/goldtl/readd-symbols.rsp")
 
 
     # Resource section, TL only. The reference .rsrc holds RT_ICON ids 1 and 2
@@ -798,7 +783,8 @@ foreach(_client europa1400gold europa1400gold_tl)
         "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
       target_link_options(${_client} PRIVATE
         "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp"
-        # shortcut: retain the game graph while WinMain is a stub; remove when its real references are restored.
+        # shortcut: retain the comparison graph until each target's native references are verified.
+        # Gold's WinMain is still a stub; GoldTL has a reconstructed body.
         "/OPT:NOREF")
       if(_client STREQUAL "europa1400gold")
         set_property(TARGET ${_client} PROPERTY MSVC_RUNTIME_LIBRARY "")
@@ -895,10 +881,6 @@ if(EXISTS "${CLANGFORMAT_BIN}")
     set(CLANGFORMAT_VERSION_REQUIRED "17.0")
     message(DEBUG "Found clang-format version ${CLANGFORMAT_VERSION} (needs ${CLANGFORMAT_VERSION_REQUIRED})")
     if(CLANGFORMAT_VERSION VERSION_GREATER_EQUAL "${CLANGFORMAT_VERSION_REQUIRED}")
-      file(GLOB_RECURSE rebrew_sources CONFIGURE_DEPENDS
-        "${PROJECT_SOURCE_DIR}/src/*.c"
-        "${PROJECT_SOURCE_DIR}/src/*.h"
-      )
       string(REPLACE ";" "\n" rebrew_sources_lines "${rebrew_sources}")
       file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/rebrew_sources.txt" "${rebrew_sources_lines}\n")
       add_custom_target(clang-format ${CLANGFORMAT_BIN} -i "--files=${CMAKE_CURRENT_BINARY_DIR}/rebrew_sources.txt")

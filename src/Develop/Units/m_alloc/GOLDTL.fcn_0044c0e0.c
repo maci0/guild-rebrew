@@ -10,7 +10,7 @@ char* __cdecl fcn_0044b480(char* buf, char* name, int a, int b, int c);
 void __cdecl m_FreeTracked(int p);
 void __cdecl fcn_0044a120(void);
 void __cdecl fcn_00455910(void);
-void __cdecl fcn_0044c0c0(void);
+float __cdecl fcn_0044c0c0(int, char*);
 
 /* ADDRESS: GOLDTL 0x0044c0e0 */
 char* __cdecl fcn_0044c0e0(char* path, char* name)

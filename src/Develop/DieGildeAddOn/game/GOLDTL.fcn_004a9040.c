@@ -14,7 +14,7 @@ extern float g_6629e8;
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, unsigned short* out);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 int __cdecl fcn_004a9040(char* a1, char* e, char* a3, char* a4, char* out)
 {

@@ -8,9 +8,9 @@
  * matches the live handle, and the frame is re-run while 0x5373e0 accepts
  * this function.
  */
-
-int __cdecl fcn_0057ec20(int);
-void __cdecl fcn_0057e880(int, int, int, int);
+#include "Develop/DieGildeAddOn/game/game_data.h"
+#include "client_data.h"
+int __cdecl fcn_0057ec20(int); void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
@@ -38,7 +38,7 @@ int __cdecl fcn_0050dc90(int);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
-
+#include "client_packet_builder.h"
 /* ADDRESS: GOLDTL 0x005c8c40 */
 void __cdecl fcn_005c8c40(void)
 {
@@ -67,15 +67,15 @@ void __cdecl fcn_005c8c40(void)
 	save = fcn_00470820(0, 0, (char*) 0x6ac890);
 	fcn_00471b60(save);
 	d2_SetForm(save, 0);
-	fcn_005340f0(*(int*) 0x772514);
+	fcn_005340f0(*(int*) &g_772514);
 	d2_SetForm(save, 3);
-	fcn_00533a60(*(int*) 0x772514, 0, out, 3, *(int*) 0x14b5294, *(int*) 0x14b5298, *(int*) 0x14b529c);
+	fcn_00533a60(*(int*) &g_772514, 0, out, 3, *(int*) 0x14b5294, *(int*) 0x14b5298, *(int*) 0x14b529c);
 	v2 = fcn_005c8400();
 	v3 = fcn_005c86b0();
 	v4 = fcn_005c89a0();
 	idx = d2_CreateRadioGroup(3, out[0], out[1], out[2]);
 	ofs = idx * 0x8c;
-	*(int*) (ofs + 0x102cbc0) = *(int*) (ofs + 0x102cbc0) | 1;
+	*(int*) (ofs + (unsigned long)&g_102cbc0) = *(int*) (ofs + (unsigned long)&g_102cbc0) | 1;
 	d2_SelectRadioGroup(idx, *(int*) 0x77533c);
 	if (v4 == -1) {
 		fcn_00472640(out[2], 0);
@@ -84,7 +84,7 @@ void __cdecl fcn_005c8c40(void)
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;
 		}
-		state = *(int*) (ofs + 0x102cbc8);
+		state = *(int*) (ofs + (unsigned long)&g_102cbc8);
 		if (state == 0) {
 			fcn_00471af0(v2, 1);
 			fcn_00471af0(v3, 0);
@@ -100,13 +100,13 @@ void __cdecl fcn_005c8c40(void)
 		}
 		if (v2 != -1) {
 			d2_SetForm(v2, 1);
-			fcn_005a5440(*(int*) (0x7f4e18 + (*(unsigned short*) 0x774970) * 0x21c), (char*) 0x776aa0, v2, 1, 0);
+			fcn_005a5440(*(int*) (0x7f4e18 + (*(unsigned short*) &g_774970) * 0x21c), (char*) 0x776aa0, v2, 1, 0);
 		}
-		if (v3 != -1 && *(int*) 0x100f1dc != -1 && *(int*) 0x775338 > 0) {
+		if (v3 != -1 && *(int*) &g_100f1dc != -1 && *(int*) 0x775338 > 0) {
 			for (i = 0; i < *(int*) 0x775338; i++) {
 				if (*(int*) 0x67d370 == *(int*) (0x778900 + i * 4)) {
 					fcn_00471a30(save, 0);
-					fcn_005c8770(*(int*) (*(int*) 0x1015ea0 + 0x2f0 + (*(int*) 0x67d370) * 0x2f4));
+					fcn_005c8770(*(int*) (*(int*) &g_1015ea0 + 0x2f0 + (*(int*) 0x67d370) * 0x2f4));
 					fcn_00471a30(save, 1);
 					break;
 				}
@@ -114,7 +114,7 @@ void __cdecl fcn_005c8c40(void)
 		}
 		if (v4 != -1) {
 			d2_SetForm(v4, 0);
-			if (*(int*) 0x100f1dc != -1) {
+			if (*(int*) &g_100f1dc != -1) {
 				t1 = fcn_00472830(v4, 3);
 				t2 = fcn_00472830(v4, 2);
 				if (*(int*) 0x67d370 == *(int*) 0x776c90) {
@@ -131,17 +131,17 @@ void __cdecl fcn_005c8c40(void)
 				if (h != -1) {
 					cur = fcn_00471f80(h);
 					if (*(int*) (i - 4) != cur) {
-						cur = fcn_00471f80(*(int*) (i - 0x10), *(unsigned char*) 0x773d75);
+						cur = fcn_00471f80(*(int*) (i - 0x10), *(unsigned char*) &g_773d75);
 						n = fcn_0050b750(cur);
 						obj = *(int*) i;
 						fcn_004c4510(obj, *(int*) (obj + 1));
-						delta = (int) (*(unsigned short*) i) - (int) (*(unsigned short*) 0xaed32c) + 0x39;
+						delta = (int) (*(unsigned short*) i) - (int) (*(unsigned short*) &g_aed32c) + 0x39;
 						fcn_004c4570(4, 1, delta, &n);
 						fcn_004c5360();
 						q = fcn_0050dc90(*(int*) i);
 						n = n - *(int*) (*(int*) i + 0x39);
 						fcn_004c4510(q, *(int*) (q + 4));
-						fcn_004c4670(4, 1, (q - *(int*) 0xaed32c) + 0x1b8, &n);
+						fcn_004c4670(4, 1, (q - *(int*) &g_aed32c) + 0x1b8, &n);
 						fcn_004c5360();
 						*(int*) (i - 4) = fcn_00471f80(*(int*) (i - 0x10));
 					}
@@ -152,7 +152,7 @@ void __cdecl fcn_005c8c40(void)
 		if (fcn_005373e0(0x5c8c40, 0x657c7) != 0) {
 			continue;
 		}
-		*(int*) 0x77533c = *(int*) (ofs + 0x102cbc8);
+		*(int*) 0x77533c = *(int*) (ofs + (unsigned long)&g_102cbc8);
 		fcn_00469510(idx);
 		fcn_00471e30(save);
 		if (v2 != -1) {

@@ -1,5 +1,5 @@
 // LIBRARY markers for functions the linker supplies from d3dx8.lib.
-// Auto-generated (see .scratch/gen_d3dx8_library.py) -- the linker supplies
+// Auto-generated library catalog. The linker supplies
 // these bytes, so they are not worth reversing.
 
 

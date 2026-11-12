@@ -4,7 +4,7 @@ extern void* g_773da8;
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fffb0(unsigned int);
 int __cdecl fcn_0047dd60(void*);
-float __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x005cf720 */
 int __cdecl fcn_005cf720(unsigned int a0, unsigned int a1, unsigned char* p)

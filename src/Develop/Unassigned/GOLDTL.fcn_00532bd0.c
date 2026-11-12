@@ -16,7 +16,7 @@ extern int g_1040494;
 
 extern int __cdecl fcn_00506380(int a0, int a1, int a2, int a3);
 extern int __cdecl d2_GetResourceData(int a0);
-extern int __cdecl CompareVector3WithinTolerance(char *p, int a1, float a2);
+int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 extern void __cdecl fcn_0047a040(int a0, int a1, int a2, int a3);
 extern void __cdecl fcn_0047cba0(int a0, int a1, int a2, int a3, int a4);
 

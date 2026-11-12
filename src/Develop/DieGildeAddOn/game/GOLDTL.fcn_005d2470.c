@@ -21,7 +21,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
 #define SHP_ID (*(unsigned short*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c))
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005d2470 */
 int __cdecl fcn_005d2470(int* arg1, int* arg2, unsigned short* arg3)
 {
@@ -76,38 +76,38 @@ int __cdecl fcn_005d2470(int* arg1, int* arg2, unsigned short* arg3)
 	io_AppendText(0x1f4c);
 	if (flag == 0) {
 		v10 = fcn_00472250(dlg, 1,
-		    io_AppendText(0x1f4d, *arg3, *(unsigned char*) 0x773d75));
+		    io_AppendText(0x1f4d, *arg3, *(unsigned char*) &g_773d75));
 		hv = io_AppendText(0x1f4e);
 		v18 = fcn_00472250(dlg, 1, hv);
 		vc = fcn_00472250(dlg, 1, hv + 1);
 		fcn_00472380(v10,
-		    fcn_0050b710(v14, *(unsigned char*) 0x773d75),
-		    fcn_0050b710(ebp, *(unsigned char*) 0x773d75),
-		    fcn_0050b710(v14, *(unsigned char*) 0x773d75));
+		    fcn_0050b710(v14, *(unsigned char*) &g_773d75),
+		    fcn_0050b710(ebp, *(unsigned char*) &g_773d75),
+		    fcn_0050b710(v14, *(unsigned char*) &g_773d75));
 	} else {
 		io_AppendText(0x1f4f);
 	}
-	*(int*) 0x100f1dc = -1;
+	*(int*) &g_100f1dc = -1;
 	r = 0;
 	while (fcn_005373e0((void*) fcn_005d2470, 0x677c7) != 0) {
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;
 		}
-		if (*(int*) 0x100f1dc == -1 || flag != 0) {
+		if (*(int*) &g_100f1dc == -1 || flag != 0) {
 			continue;
 		}
 		if (*(int*) 0x67d370 == v10) {
 			hv = fcn_00471f80(v18);
-			uv = fcn_0050b750(hv, *(unsigned char*) 0x773d75);
-			if (fcn_00526010((void*) (0x7f4ca0 +
-				*(unsigned short*) 0x774970 * 0x21c), uv,
-				*(unsigned char*) 0x773d75) != 0) {
+			uv = fcn_0050b750(hv, *(unsigned char*) &g_773d75);
+			if (fcn_00526010((void*) ((unsigned long)&g_7f4ca0 +
+				*(unsigned short*) &g_774970 * 0x21c), uv,
+				*(unsigned char*) &g_773d75) != 0) {
 				*(unsigned int*) ((char*) arg2 + 0x1c8) |= 0x20;
 				uv = *(unsigned int*) ((char*) arg2 + 0x1c8);
 				fcn_004c4eb0((char*) 0x6acba4);
 				fcn_004c5150(*(int*) ((char*) arg1 + 4),
 				    *(int*) ((char*) arg2 + 4),
-				    *(unsigned char*) 0x773d75, uv);
+				    *(unsigned char*) &g_773d75, uv);
 				fcn_004c4510(arg2, *(int*) ((char*) arg2 + 4));
 				fcn_004c4570(4, 1, 0x1c8, &uv);
 				fcn_004c5360();

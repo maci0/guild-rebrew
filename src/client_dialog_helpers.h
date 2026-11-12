@@ -5,10 +5,10 @@
  * body-level confirmation.
  *
  * Conflicting declarations found while collecting this list:
- *  - fcn_0051af00 is variadic at every TL call site (buffer, id, then
- *    format arguments), but src/GOLD.fcn_0051af00.c declares it with no
- *    parameters. The call sites govern the TL target; the GOLD stub is
- *    not authoritative here.
+ *  - Historical formatter conflict: an old GOLD stub had no parameters.
+ *    io_FormatTextBuffer is now shared by GOLDTL and GOLD in
+ *    game/GOLDTL.fcn_0051af00.c, with buffer, id and format arguments.
+ *    The removed stub is not a current declaration context.
  *  - fcn_00471f80 appears with one argument in several files and with
  *    two in fcn_005a4bb0.c. The two-argument form is kept and marked
  *    inferred.
@@ -20,7 +20,7 @@
  *    call sites treat the entity as a short* record and the season as
  *    an unsigned char (GOLDTL.fcn_004976e0.c:6, GOLDTL.fcn_0049c310.c:11).
  *    The short pointer form with unsigned char is kept.
- *  - fcn_0049e900 is defined (int, short*, char*, char*, char*) in
+ *  - ai_StartKreditNehmen (GoldTL 0x0049e900) is defined (int, short*, char*, char*, char*) in
  *    GOLDTL.fcn_0049e900.c:10 and declared with other shapes at
  *    GOLDTL.fcn_0048d6c0.c:11, GOLDTL.fcn_00497990.c:15,
  *    GOLDTL.fcn_0048e850.c:7, and with no arguments in
@@ -37,7 +37,7 @@
  *  - g_868050 and g_90e094 appear as both char* and unsigned char*
  *    across files. unsigned char* is the majority form and is kept.
  *
- * Sample_99ec20 and g_99ec20[16] are declared in client_types.h.
+ * client_types.h defines Sample_99ec20; users declare g_99ec20[16].
  */
 #ifndef CLIENT_DIALOG_HELPERS_H
 #define CLIENT_DIALOG_HELPERS_H
@@ -150,7 +150,7 @@ int __cdecl fcn_00545d40(int id, int arg, char* text1, int flags, int value,
 float __cdecl fcn_0050bb50(int id, unsigned char kind);
 
 /* AI action selection and scoring. fcn_00497ec0 picks the records for one
- * action code; fcn_0049e900 rates them and fills the two action packets;
+ * action code; ai_StartKreditNehmen (GoldTL 0x0049e900) rates them and fills the two action packets;
  * fcn_004a4bb0 checks whether the unit can start the action. Types and
  * argument shapes come from their own definitions; see conflicts above. */
 int __cdecl fcn_00497ec0(int action, short* target, int a2, Cmd* out1,

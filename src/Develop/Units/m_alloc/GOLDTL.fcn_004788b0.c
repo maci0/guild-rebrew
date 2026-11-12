@@ -16,7 +16,7 @@ typedef struct {
 } Img;
 
 Img* __cdecl fcn_00477590(int, int, int, int, int, int, int);
-Img* __cdecl fcn_00477e70(int, int, int, int, int, int, int);
+char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char a8, int a7);
 Img* __cdecl fcn_00478400(int, int, int, int, int, int, int);
 Img* __cdecl fcn_00477ae0(int, int, int, int, int, int, int);
 Img* __cdecl fcn_004781e0(int, int, int, int, int, int, int);

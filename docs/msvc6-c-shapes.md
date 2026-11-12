@@ -35,6 +35,9 @@ FP rounding or observable reloads.
   and EDX:EAX output do not prove the caller's declared return type.
 - Unused declarations and definition order can affect code generation. Preserve
   the original TU context during probes.
+- A `return` inside a loop can trigger epilogue merging. Check return placement
+  before treating shared epilogues as a compiler limit. See the later
+  [loop-context controls](codegen-walls.md#archived-techniques).
 - Keep logging literals, argument order and even native API-format mismatches
   faithful. Correcting the game is a different task from reconstructing it.
 
@@ -133,7 +136,7 @@ Original notebook: `docs/msvc6-c-shapes.md` in the [documentation archive](goal-
 - 72. a callee-saved sentinel and a CSE can be one mechanism, not two (`0x100128f0`, `0xffffffff`)
 - 72b. a locally exact nesting fix can still lose to the cascade it triggers (`0xffffffff`)
 - 73. `base + idx*0x40 + idx` always folds to one `[reg+reg]` operand (`0x100174d0`)
-- 74. msvc6 folds byte-identical early-return epilogues unconditionally; the reference folds none (`0x10016f80`, `0x100170d2`)
+- 74. Superseded claim: msvc6 folds byte-identical early-return epilogues unconditionally; the reference folds none (`0x10016f80`, `0x100170d2`)
 - 75. A prologue-fidelity lever, and a past "climb win" that cost it (`0x10016f80`)
 - 76. A `volatile` read at a *post*-loop test blocks the loop's entry-guard fold (`0x10008a90`, `0x10008b0f`, `0x10008c51`, `0x10008c59`)
 - 77. Group same-kind memory operations to match the reference's store sequence (`0x1000d930`, `0x1000ddc8`, `0x1000de10`, `0x100128f0`, `0x10018850`)

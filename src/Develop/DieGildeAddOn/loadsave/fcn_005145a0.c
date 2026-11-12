@@ -3,7 +3,7 @@
  * retries until the session exists, then hands the session to the game and
  * tears the scene down. Returns 1 when the city path check fails, 2 when the
  * network scene check fails, 0 after a completed startup. */
-
+extern signed char g_6a3440; extern unsigned char g_6a375c; extern int g_6b8010; extern int g_77250c; extern unsigned char g_773d75; extern int g_77494c; extern char g_868060[];
 #pragma intrinsic(strcpy)
 
 int __cdecl sprintf(char *buf, const char *fmt, ...);
@@ -60,21 +60,21 @@ int __cdecl fcn_005145a0(char *path)
     int i;
     char *p;
 
-    sprintf(text, *(char **) 0x14ac600, *(unsigned char *) 0x6a375c);
+    sprintf(text, *(char **) 0x14ac600, *(unsigned char *) &g_6a375c);
     fcn_00514570((unsigned int) text);
-    *(int *) 0x77494c = 0;
+    *(int *) &g_77494c = 0;
     do {
         fcn_005356e0();
         fcn_00535960();
-    } while (*(int *) 0x77494c == 0);
-    if (*(int *) 0x77494c & 1) {
+    } while (*(int *) &g_77494c == 0);
+    if (*(int *) &g_77494c & 1) {
         if (*path == 0)
             sprintf(path, "%s/AUGSBURG.NET", "gamedata/cities");
         fcn_00514570(*(unsigned int *) 0x14ac5f0);
         if (ls_SendGame(path) == 0)
             return 1;
     }
-    flag = *(int *) 0x77494c & 1;
+    flag = *(int *) &g_77494c & 1;
     fcn_00514570(*(unsigned int *) 0x14ac5f4);
     if (fcn_00525b40() == 0)
         return 2;
@@ -87,15 +87,15 @@ int __cdecl fcn_005145a0(char *path)
     fcn_00471af0(*(int *) 0x7e1d40, 0);
     *(int *) 0x7725c8 = 1;
     fcn_00442e30();
-    fcn_004432d0(*(int *) 0x6b8010, 0);
+    fcn_004432d0(*(int *) &g_6b8010, 0);
     fcn_00471af0(*(int *) 0x7e1d40, 1);
     WritePrivateProfileStringA("Network", "Name", (char *) 0x7e23ea, file);
     WritePrivateProfileStringA("Network", "Familienname", (char *) 0x7e240a, file);
-    fcn_00476970(*(int *) 0x77250c);
+    fcn_00476970(*(int *) &g_77250c);
     fcn_00469e30(((short) gm_RandomMod(2) != 1) ? 0x791 : 0x78e);
     fcn_0046ac30();
-    if (*(int *) 0x77494c & 1) {
-        msg[0] = *(unsigned char *) 0x6a375c;
+    if (*(int *) &g_77494c & 1) {
+        msg[0] = *(unsigned char *) &g_6a375c;
         fcn_004c5790(6, msg);
     }
     session = fcn_004c5040(-1, -1, *(unsigned char *) 0x7e23e2,
@@ -119,43 +119,43 @@ int __cdecl fcn_005145a0(char *path)
         fcn_00535960();
     }
     handle = fcn_004c4480(session);
-    if (*(int *) 0x77494c & 1) {
-        *(unsigned char *) 0x6a3440 = 0xff;
+    if (*(int *) &g_77494c & 1) {
+        *(unsigned char *) &g_6a3440 = 0xff;
         msg[0] = -1;
         stamp = (int) timeGetTime();
         *(int *) 0x7e1f60 = stamp;
         msg[1] = stamp;
         fcn_004c5790(9, msg);
     }
-    while (*(unsigned char *) 0x6a3440 == 0xfe) {
+    while (*(unsigned char *) &g_6a3440 == 0xfe) {
         fcn_005356e0();
         fcn_00535960();
     }
-    if (*(unsigned char *) 0x6a3440 != 0xff) {
-        if (*(unsigned char *) 0x6a3440 != 5)
+    if (*(unsigned char *) &g_6a3440 != 0xff) {
+        if (*(unsigned char *) &g_6a3440 != 5)
             *(int *) 0x7e1f60 = (int) timeGetTime();
-        fcn_004b3d80(*(int *) (handle + 4), *(signed char *) 0x6a3440, 1);
+        fcn_004b3d80(*(int *) (handle + 4), *(signed char *) &g_6a3440, 1);
     }
     result = fcn_0050b750(*(int *) 0x7747fc == 0 ? 2000 : 500000,
-                          *(unsigned char *) 0x773d75);
-    fcn_004c5150(*(int *) (handle + 4), -1, *(unsigned char *) 0x773d75,
+                          *(unsigned char *) &g_773d75);
+    fcn_004c5150(*(int *) (handle + 4), -1, *(unsigned char *) &g_773d75,
                  result);
-    while ((*(int *) 0x77494c & 4) == 0) {
+    while ((*(int *) &g_77494c & 4) == 0) {
         fcn_005356e0();
         fcn_00535960();
     }
     if (flag != 0) {
         fcn_00514570(*(unsigned int *) 0x14ac5f8);
-        fcn_00514b50(*(unsigned char *) 0x773d75);
+        fcn_00514b50(*(unsigned char *) &g_773d75);
     }
     fcn_00535770(0x24087);
     fcn_00514570(*(unsigned int *) 0x14ac5fc);
     init_LocalData();
     fcn_00535770(0x24087);
     if (flag != 0) {
-        fcn_00515340(*(unsigned char *) 0x773d75);
+        fcn_00515340(*(unsigned char *) &g_773d75);
         i = 0;
-        p = (char *) 0x868060;
+        p = (char *) &g_868060;
         do {
             if (*p == 0)
                 break;
@@ -167,12 +167,12 @@ int __cdecl fcn_005145a0(char *path)
         fcn_004c4860(2);
     }
     *(int *) 0x7725c8 = 0;
-    if (*(signed char *) 0x6a3440 > -1 && *(signed char *) 0x6a3440 < 6) {
+    if (*(signed char *) &g_6a3440 > -1 && *(signed char *) &g_6a3440 < 6) {
         fcn_004432d0(fcn_00413160(), 0);
         fcn_00448360("scenes/*network.ed3", 0, 0);
         fcn_004b54e0(*(int *) (handle + 4));
         fcn_00442e30();
-        fcn_004432d0(*(int *) 0x6b8010, 0);
+        fcn_004432d0(*(int *) &g_6b8010, 0);
     }
     return 0;
 }

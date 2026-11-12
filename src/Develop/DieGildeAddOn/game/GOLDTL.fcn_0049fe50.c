@@ -19,7 +19,7 @@ typedef struct Rec18 {
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
 int __cdecl fcn_004e8c00(int k, int max, Rec18* out);
 Ent* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x0049fe50 */

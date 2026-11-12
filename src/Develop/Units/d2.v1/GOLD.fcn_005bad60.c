@@ -37,7 +37,7 @@ void __cdecl fcn_005c6540(char*);
 
 int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_00471f80(int);
-void __cdecl fcn_005ba750(void);
+void __cdecl fcn_005c61c0(void);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl fcn_005bad60(void)
@@ -95,7 +95,7 @@ void __cdecl fcn_005bad60(void)
 			}
 		} while (fcn_005373e0((void*) fcn_005bad60, 0x657c7) != 0);
 	}
-	fcn_005ba750();
+	fcn_005c61c0();
 	fcn_00471e30(dlg);
 	fcn_0057e880(0x14, 0, 1, 0);
 }

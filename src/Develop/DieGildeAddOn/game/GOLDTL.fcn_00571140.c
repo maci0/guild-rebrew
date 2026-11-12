@@ -6,6 +6,7 @@ typedef struct {
 	short d;
 } Cpy14;
 #pragma pack(pop)
+extern char* lpObjektePROT;
 
 double __cdecl fcn_0050fdb0(int, int, void*);
 int __cdecl gm_SearchTable67(int);
@@ -19,15 +20,20 @@ void __cdecl fcn_00571140(char* obj)
 	int id;
 	Cpy14* dst;
 	char* p;
+	double scaled;
+	char* table;
+	unsigned int index;
 
-	value = *(int*) ((char*) *(int*) 0x99ec10 + *(unsigned short*) (obj + 0xac) * 0x41 + 0x22);
+	table = lpObjektePROT; index = *(unsigned short*) (obj + 0xac);
+	value = *(int*) (table + (index << 6) + index + 0x22);
 	*(int*) (obj + 0xb0) = value;
 	dst = (Cpy14*) (obj + 0x52);
 	*dst = *(Cpy14*) (obj + 0x44);
 	*(Cpy14*) (obj + 0x60) = *(Cpy14*) (obj + 0x44);
 	*(float*) (obj + 0xb4) = (float) value;
-	*(float*) (obj + 0xc4) = (float) ((fcn_0050fdb0(*(unsigned short*) (obj + 8), 8, obj + 0x8c) - *(double*) 0x662908) * *(double*) 0x662ad8);
+	scaled = fcn_0050fdb0(*(unsigned short*) (obj + 8), 8, obj + 0x8c) - *(double*) 0x662908;
 	*(char*) (obj + 0xc8) = 0;
+	*(float*) (obj + 0xc4) = (float) (scaled * *(double*) 0x662ad8);
 	id = gm_SearchTable67(*(int*) (obj + 0xb8));
 	for (p = (char*) 0x7f4ca0; (int) p < 0x85a0a0; p += 0x21c) {
 		if (*(int*) (p + 0x17c) == (int) obj) {

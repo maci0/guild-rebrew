@@ -26,7 +26,7 @@ typedef struct Calc {
 extern Rec15_699058 g_699058[37];
 extern unsigned char g_773d75;
 
-float __cdecl fcn_0050bb50(int id, char k);
+float __cdecl fcn_0050bb50(int id, unsigned char a);
 float __cdecl eval_ObjektPreis2Credits(int id, int k);
 
 int __cdecl fcn_004a40c0(Calc* p)

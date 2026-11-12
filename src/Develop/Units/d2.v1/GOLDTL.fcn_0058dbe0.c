@@ -1,6 +1,6 @@
 /* Open the arena betting page: query the match, build the layout and poll
  * input until the page is closed. */
-
+#include "client_data.h"
 void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl fcn_005463a0(int, int, int, int, int);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
@@ -24,7 +24,7 @@ void __cdecl fcn_004c5530(int*);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* The reference frame keeps EBP; /O2 /Gd omits the frame pointer, so restore
  * it here instead of overriding the locked CFLAGS. */
 #pragma optimize("y", off)
@@ -78,18 +78,18 @@ void __cdecl fcn_0058dbe0(int a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(v2);
 	d2_SetForm(v2, 0);
-	fcn_005340f0(*(int*) 0x772514);
+	fcn_005340f0(*(int*) &g_772514);
 	d2_SetForm(v2, 1);
 	io_AppendText(0x40b7, 0x40b6, *(unsigned short*) (v6 + 0x27), v6);
 	v3 = fcn_004677e0(100, 0xa0, 200, 0, 2, 0x7b, 0x82,
-	                  *(int*) 0x772514);
+	                  *(int*) &g_772514);
 	fcn_00472380(v3, 0, 2, 0);
 	fcn_00468cd0(v3, 0x82);
 	fcn_00468b80(v3, *(int*) 0x14b561c);
 	fcn_00468bb0(v3, 3, *(int*) 0x14b5620, *(int*) 0x14b5624,
 	             *(int*) 0x14b5628);
 	v4 = fcn_004677e0(100, 0xbe, 200, 0, 2, 0x7b, 0x82,
-	                  *(int*) 0x772514);
+	                  *(int*) &g_772514);
 	fcn_00472380(v4, 0, 2, 0);
 	fcn_00468cd0(v4, 0x82);
 	fcn_00468b80(v4, *(int*) 0x14b562c);
@@ -99,7 +99,7 @@ void __cdecl fcn_0058dbe0(int a0)
 	v30 = (int*) io_AppendText(0x40be);
 	v27 = (int*) fcn_00472250(v2, 2, (int) v30);
 	v30 = (int*) fcn_00472250(v2, 2, (int) v30 + 1);
-	*(int*) 0x100f1dc = -1;
+	*(int*) &g_100f1dc = -1;
 	do {
 		d2_SetForm(v2, 3);
 		io_AppendText(0x6811b0);
@@ -110,23 +110,23 @@ void __cdecl fcn_0058dbe0(int a0)
 		if (*(int*) 0x14ce8e0) {
 			goto label_58df76;
 		}
-		if (*(int*) 0x100f1dc != -1) {
+		if (*(int*) &g_100f1dc != -1) {
 			if (*(int**) 0x67d370 != v27) {
 				if (*(int**) 0x67d370 == v30) {
 					goto label_58df76;
 				}
 			} else {
-				v5 = *(int*) 0x774970;
+				v5 = *(int*) &g_774970;
 				if (fcn_00525f60(v5 * 0x21c + 0x7f4ca0, v6) == 1) {
 					for (v9 = 0; v9 < 0x3e; v9++) {
 						req[v9] = 0;
 					}
 					v11 = 0x90;
 					v18 = 2;
-					v12 = *(int*) (*(int*) 0x774970 * 0x21c + 0x7f4ca4);
+					v12 = *(int*) (*(int*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
 					v13 = *(int*) (a0 + 1);
-					v14 = *(int*) 0x7f4c00;
-					v15 = *(int*) 0x7f4c04;
+					v14 = *(int*) &g_7f4c00;
+					v15 = *(int*) &g_7f4c04;
 					v16 = *(int*) 0x7f4c08;
 					v17 = *(unsigned short*) 0x7f4c0c;
 					v20 = fcn_00471f80(v3);

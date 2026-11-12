@@ -4,7 +4,7 @@
 extern float g_6628cc;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 float __cdecl fcn_0050fdb0(int k, int n, int* ids)
 {

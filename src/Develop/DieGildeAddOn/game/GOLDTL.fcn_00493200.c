@@ -2,7 +2,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004e8b40(int kind, int* out);
 int __cdecl fcn_004e8b80(int kind, int max, void* out);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_004a55c0(char* obj, int flag, float* value, int extra);
 void __cdecl fcn_004c4510(char* obj, int id);
 void __cdecl fcn_004c4570(int a, int b, int offset, void* value);

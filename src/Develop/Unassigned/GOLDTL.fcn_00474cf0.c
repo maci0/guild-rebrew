@@ -36,63 +36,74 @@ typedef struct Item0474cf0 {
 	int font;
 } Item0474cf0;
 
-/* Selects one GUI pool record: clears the previous selection, marks the new
- * one, stores its index when its id appears in the owner's id list, refreshes
- * the display counter flags and reports the record's screen placement. */
+extern int g_1015ea0;
+extern int g_7725d0;
+extern int g_100f1cc;
+extern int g_100f898;
+extern int g_100f89c;
+extern int g_67d8ec;
+extern int g_67d3b0;
+
+/* Selects one GUI pool record */
 /* ADDRESS: GOLDTL 0x00474cf0 */
 void __cdecl fcn_00474cf0(int slot)
 {
 	Item0474cf0* it;
+	Slot0474cf0* slots;
 	List0474cf0* list;
 	int i;
 	int y;
+	int sel;
 
-	it = (*(Slot0474cf0**) 0x1015ea0)[slot].item;
-	if (*(Item0474cf0**) 0x7725d0 == it) {
+	slots = *(Slot0474cf0**) &g_1015ea0;
+	it = slots[slot].item;
+	if (*(Item0474cf0**) &g_7725d0 == it) {
 		return;
 	}
-	if (*(Item0474cf0**) 0x7725d0 != 0) {
-		(*(Slot0474cf0**) 0x1015ea0)[(*(Item0474cf0**) 0x7725d0)->slot].active = 0;
+	if (*(Item0474cf0**) &g_7725d0 != 0) {
+		slots[(*(Item0474cf0**) &g_7725d0)->slot].active = 0;
+		slots = *(Slot0474cf0**) &g_1015ea0;
 	}
-	*(Item0474cf0**) 0x7725d0 = it;
-	(*(Slot0474cf0**) 0x1015ea0)[it->slot].active = 1;
-	list = (*(Slot0474cf0**) 0x1015ea0)[(*(Item0474cf0**) 0x7725d0)->slot].list;
+	*(Item0474cf0**) &g_7725d0 = it;
+	slots[it->slot].active = 1;
+	sel = it->slot;
+	list = slots[sel].list;
 	i = 0;
 	while (list != 0 && i < list->count) {
-		if (list->ids[i] == it->slot) {
-			*(int*) 0x100f1cc = i;
+		if (list->ids[i] == sel) {
+			g_100f1cc = i;
 		}
 		i++;
 	}
-	if (((*(Item0474cf0**) 0x7725d0)->flags & 0x40) &&
-	    (*(Item0474cf0**) 0x7725d0)->x18 == 0 &&
-	    (*(Item0474cf0**) 0x7725d0)->x1c == 0 &&
+	if ((it->flags & 0x40) &&
+	    it->x18 == 0 &&
+	    it->x1c == 0 &&
 	    CountDisplayCounters() == 0 &&
-	    (*(Item0474cf0**) 0x7725d0)->x12c == 0) {
-		(*(Item0474cf0**) 0x7725d0)->x12c = -1;
+	    it->x12c == 0) {
+		it->x12c = -1;
 	}
-	if (((*(Item0474cf0**) 0x7725d0)->flags & 2) &&
-	    (*(Item0474cf0**) 0x7725d0)->x18 != 0) {
-		(*(Item0474cf0**) 0x7725d0)->x12c = 1;
+	if ((it->flags & 2) &&
+	    it->x18 != 0) {
+		it->x12c = 1;
 	}
-	if (((*(Item0474cf0**) 0x7725d0)->flags & 1) != 0) {
-		*(int*) 0x100f898 =
-		    fcn_0046b520((*(Item0474cf0**) 0x7725d0)->text,
-				 (*(Item0474cf0**) 0x7725d0)->font) +
-		    (*(Item0474cf0**) 0x7725d0)->x;
-		*(int*) 0x100f89c = (*(Item0474cf0**) 0x7725d0)->y;
-		y = *(int*) 0x100f89c - 7;
-		if (*(int*) 0x67d8ec == -1) {
-			*(int*) 0x67d8ec = fcn_00469c30(
-			    (short) *(int*) 0x100f898, (short) y,
-			    *(int*) 0x67d3b0 + 8);
+	if ((it->flags & 1) != 0) {
+		g_100f898 =
+		    fcn_0046b520(it->text, it->font) +
+		    (*(Item0474cf0**) &g_7725d0)->x;
+		g_100f89c = (*(Item0474cf0**) &g_7725d0)->y;
+		y = g_100f89c - 7;
+		if (g_67d8ec == -1) {
+			g_67d8ec = fcn_00469c30(
+			    (short) g_100f898, (short) y,
+			    g_67d3b0 + 8);
 			return;
 		}
-		fcn_00469c40(*(int*) 0x100f898, y, *(int*) 0x67d8ec);
+		fcn_00469c40(g_100f898, y, g_67d8ec);
 		return;
 	}
-	if (*(int*) 0x67d8ec != -1) {
-		fcn_0046b2b0(*(int*) 0x67d8ec);
-		*(int*) 0x67d8ec = -1;
+	if (g_67d8ec != -1) {
+		fcn_0046b2b0(g_67d8ec);
+		g_67d8ec = -1;
 	}
 }
+

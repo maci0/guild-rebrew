@@ -9,7 +9,7 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_0047d220(void*);
 int __cdecl fcn_00508eb0(int, int);
-float __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl fcn_0042e410(int);
 void __cdecl fcn_004c4510(int, int);
 void __cdecl fcn_004c4570(int, int, int, void*);

@@ -10,7 +10,7 @@ extern void __cdecl fcn_004090d0(void *);
 extern void __cdecl m_FreeTracked(void *);
 extern void __cdecl fcn_00438b40(int, void *);
 extern float __cdecl fcn_00444700(int, float *);
-extern int __cdecl CompareVector3WithinTolerance(void *, void *, float);
+int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 extern char __cdecl fcn_0045b920(void *, int, int, float *);
 
 /* ADDRESS: GOLDTL 0x00409c90 */

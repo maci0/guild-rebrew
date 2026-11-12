@@ -2,7 +2,7 @@ extern char g_67d934[];
 
 unsigned int __cdecl fcn_00475360(void*);
 void* __cdecl m_alloc(unsigned int, char*);
-void __cdecl fcn_004754b0(void*, void*, int);
+unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3);
 
 
 /* ADDRESS: GOLDTL 0x00475740 */

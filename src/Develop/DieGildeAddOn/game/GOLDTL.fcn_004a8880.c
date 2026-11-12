@@ -45,7 +45,7 @@ typedef struct {
 int __cdecl fcn_004e8b40(int idx, Rec* out);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 Ent* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
 
 int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)

@@ -1,7 +1,7 @@
 int __cdecl fcn_004e8af0(int, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/aemter.h"
-double __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_005c6270(void*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 

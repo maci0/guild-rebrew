@@ -1,5 +1,5 @@
-int __cdecl fcn_00443bf0(float, float, int, int);
-int __cdecl fcn_00442c00(int, int);
+#include "Develop/DieGildeAddOn/game/game_data.h"
+int __cdecl fcn_00443bf0(float, float, int, int); int __cdecl fcn_00442c00(int, int);
 int __cdecl fcn_0045bad0(int, int, int, int*, int*);
 float __cdecl fcn_0045b920(int, int, int, char*);
 int __cdecl fcn_004cef70(int, int);
@@ -23,19 +23,19 @@ void __cdecl fcn_004d06d0(void)
 	int same;
 	unsigned short code;
 
-	v4 = *(unsigned int*) (*(int*) 0x67a370 + 0xb0);
+	v4 = *(unsigned int*) (*(int*) &g_67a370 + 0xb0);
 	count = 0;
 	code = 0x23;
 	i = 0;
-	*(int*) 0x7746a4 = 0;
-	*(int*) 0x7725c4 = 0;
-	if (1 <= *(short*) 0x14ce8c0 && *(short*) 0x14ce8c0 < *(int*) 0x1040494
-		&& 1 <= *(short*) 0x14ce8c2 && *(short*) 0x14ce8c2 < *(int*) 0x1040490
+	*(int*) &g_7746a4 = 0;
+	*(int*) &g_7725c4 = 0;
+	if (1 <= *(short*) &g_14ce8c0 && *(short*) &g_14ce8c0 < *(int*) 0x1040494
+		&& 1 <= *(short*) &g_14ce8c2 && *(short*) &g_14ce8c2 < *(int*) 0x1040490
 		&& *(int*) 0x67d370 == -1) {
-		x = *(short*) 0x14ce8c0;
-		y = *(short*) 0x14ce8c2;
-		*(int*) 0x7746a4 = fcn_00443bf0((float) x, (float) y, 0x40, 1);
-		if (*(int*) 0x7746a4 != 0) {
+		x = *(short*) &g_14ce8c0;
+		y = *(short*) &g_14ce8c2;
+		*(int*) &g_7746a4 = fcn_00443bf0((float) x, (float) y, 0x40, 1);
+		if (*(int*) &g_7746a4 != 0) {
 			/* object spawned */
 		}
 		else if (*(int*) 0x772eb8 != 0) {
@@ -46,14 +46,14 @@ void __cdecl fcn_004d06d0(void)
 		else if ((fcn_0045bad0(v4, x + 0x1a, y + 0x1a, &ids[0], &ids[1]) & 0xff) != 0xffffffff) {
 			fcn_0045b920(v4, ids[0], ids[1], buf);
 			*(float*) 0x7725c8 = *(float*) 0x7725c8 + *(float*) 0x6640cc;
-			*(int*) 0x7725c4 = 0;
+			*(int*) &g_7725c4 = 0;
 		}
-		if (*(int*) 0x7746a4 != 0) {
-			for (rec = (int*) 0x7e4260; rec < (int*) 0x7e42dc; rec++) {
+		if (*(int*) &g_7746a4 != 0) {
+			for (rec = (int*) &g_7e4260; rec < (int*) 0x7e42dc; rec++) {
 				i = *rec;
 				if (i != 0 && *(char*) (i + 0x188) != 0) {
-					if ((fcn_004cef70(*(unsigned short*) 0x772f24, i) & 0x800) != 0
-						&& *(int*) 0x14cf736 == 0) {
+					if ((fcn_004cef70(*(unsigned short*) &g_772f24, i) & 0x800) != 0
+						&& *(int*) &g_14cf736 == 0) {
 						kind = 0;
 						rec = fcn_004ce610(i);
 						if (rec != 0) {
@@ -76,42 +76,42 @@ void __cdecl fcn_004d06d0(void)
 			if (2 <= count) {
 				code = 0x23;
 			}
-			if (*(int*) 0x7746a4 == 0 || *(int*) 0x67d370 != -1) {
-				*(int*) 0x7725c4 = 0;
+			if (*(int*) &g_7746a4 == 0 || *(int*) 0x67d370 != -1) {
+				*(int*) &g_7725c4 = 0;
 				return;
 			}
-			obj = (char*) *(int*) 0x7746a4;
+			obj = (char*) *(int*) &g_7746a4;
 			if (strncmp(obj, (char*) 0x68b82c, 10) == 0 && count != 0) {
-				*(int*) 0x7725c4 = 0x1c;
-				*(int*) 0x772e90 = (int) *(int*) 0x7746a4;
+				*(int*) &g_7725c4 = 0x1c;
+				*(int*) 0x772e90 = (int) *(int*) &g_7746a4;
 				return;
 			}
-			if (fcn_0064f170((char*) *(int*) 0x7746a4, (char*) 0x68b820, 10) == 0 && count != 0) {
-				*(int*) 0x7725c4 = 0x1b;
-				*(int*) 0x772e90 = (int) *(int*) 0x7746a4;
+			if (fcn_0064f170((char*) *(int*) &g_7746a4, (char*) 0x68b820, 10) == 0 && count != 0) {
+				*(int*) &g_7725c4 = 0x1b;
+				*(int*) 0x772e90 = (int) *(int*) &g_7746a4;
 				return;
 			}
-			if (fcn_0064f170((char*) *(int*) 0x7746a4, (char*) 0x68b818, 4) == 0 && count != 0) {
-				*(int*) 0x7725c4 = 0xe;
-				*(int*) 0x772e90 = (int) *(int*) 0x7746a4;
+			if (fcn_0064f170((char*) *(int*) &g_7746a4, (char*) 0x68b818, 4) == 0 && count != 0) {
+				*(int*) &g_7725c4 = 0xe;
+				*(int*) 0x772e90 = (int) *(int*) &g_7746a4;
 				return;
 			}
-			if (*(int*) (*(int*) 0x7746a4 + 0x220) == 2 && count != 0) {
-				v4 = *(unsigned int*) (*(int*) 0x7746a4 + 0x204);
-				if ((fcn_004cef70(*(unsigned short*) 0x772f24, v4) & 0x800) != 0
-					&& *(int*) 0x14cf736 == 0) {
-					*(int*) 0x7725c4 = code;
-					*(int*) 0x772e90 = (int) *(int*) 0x7746a4;
+			if (*(int*) (*(int*) &g_7746a4 + 0x220) == 2 && count != 0) {
+				v4 = *(unsigned int*) (*(int*) &g_7746a4 + 0x204);
+				if ((fcn_004cef70(*(unsigned short*) &g_772f24, v4) & 0x800) != 0
+					&& *(int*) &g_14cf736 == 0) {
+					*(int*) &g_7725c4 = code;
+					*(int*) 0x772e90 = (int) *(int*) &g_7746a4;
 					return;
 				}
 			}
 			else {
-				*(int*) 0x7725c4 = 0;
+				*(int*) &g_7725c4 = 0;
 			}
-			*(int*) 0x772e90 = (int) *(int*) 0x7746a4;
+			*(int*) 0x772e90 = (int) *(int*) &g_7746a4;
 			return;
 		}
 	}
 	*(int*) 0x772e90 = 0;
-	*(int*) 0x7746b4 = 0;
+	*(int*) &g_7746b4 = 0;
 }

@@ -10,7 +10,7 @@ typedef struct {
 int __cdecl fcn_0050d2a0(void*);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_00502850(void);
-float __cdecl fcn_0050bb50(int, char);
+float __cdecl fcn_0050bb50(int id, unsigned char a);
 
 /* ADDRESS: GOLDTL 0x0050d0c0 */
 int __cdecl fcn_0050d0c0(char* e, int flag)

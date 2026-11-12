@@ -1,10 +1,10 @@
 
 // fcn_0040b6f0 — calls fcn_00429e90(*arg).
 
-int __cdecl fcn_00429e90(int);
+int __cdecl fcn_00428720(int);
 
 int __cdecl fcn_0040b6f0(int* a)
 {
-	fcn_00429e90(*a);
+	fcn_00428720(*a);
 	return 0;
 }

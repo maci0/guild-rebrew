@@ -6,15 +6,15 @@
 #include <stdlib.h>
 
 /*
- * Common extern declarations shared by command handler .c files.
- * Only includes functions/globals with IDENTICAL signatures across all usage.
- * Functions with per-file signature variations (LogMessageInternal,
- * gm_AllocObjekt, gm_StartEntityQuery, etc.) must remain declared locally.
+ * Preserved declaration context shared by command handlers.
+ * Known signature exceptions remain, including gm_QueryEntitySum:
+ * this header uses (int, int); server command.c uses (int, unsigned char).
+ * Review compiler context before changing these declarations.
  *
  * NOTE: game_structs.h provides PlayerSlot with data at offset 8.
  * command/player_slot.h provides player_slot with data at 0x264204
- * (shared by cm_ExAllocRaum.c / cm_ExCreateGeb.c). Files with other
- * layouts (e.g. cm_ExSysMessage.c, flags at offset 0) must keep
+ * (server command.c:1574 cm_ExAllocRaum, :4371 cm_ExCreateGeb). Other
+ * layouts (historically cm_ExSysMessage, now server command.c:3615, flags at 0) keep
  * those local definitions.
  */
 
@@ -37,10 +37,10 @@ extern int __cdecl gm_LookupEntityRecordById(int);
  * cm_ExSellObjekt sites byte-exact -- but it costs +37 linked,
  * because dropping those 6 bytes displaces ~325B of otherwise
  * aligned tail in that function.  Measured round 183.  The two other
- * callers already route around this decl -- cm_ChkSellObjekt.c via a
- * function-pointer cast, cm_ChkMoveCredits.c via a file-local narrow
- * declaration -- and both are RELOC; leave them alone.  Fix this only
- * once cm_ExSellObjekt's tail alignment is solved. */
+ * server callers were cm_ChkSellObjekt (now command.c:1158) via a
+ * function-pointer cast, cm_ChkMoveCredits (now command.c:1124) via a narrow
+ * declaration; both were RELOC in round 183. Recheck before changing
+ * this declaration or cm_ExSellObjekt's tail alignment. */
 extern int __cdecl gm_QueryEntitySum(int, int);
 extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 extern char* __cdecl gm_FindSlotById(unsigned int, unsigned int);
@@ -68,7 +68,7 @@ extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern char* __cdecl gm_AllocObjekt(int, int, int);
 extern int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
-/* server_c/srv_SeedRandom.c -- the reference's srand(seed) thunk at
+/* game/zufall.c contains the reference's srand(seed) thunk at
  * 0x1001a150.  The command handlers call THIS, not the CRT `_srand`; calling
  * `srand` directly is relocation-masked by `rebrew test`, so the difference
  * hid behind six RELOC passes. */

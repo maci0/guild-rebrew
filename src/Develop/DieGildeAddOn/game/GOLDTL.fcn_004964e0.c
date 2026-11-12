@@ -48,7 +48,7 @@ extern char* gm_RichterEvangelisch;
 extern char* g_77261c;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 char* __cdecl fcn_005463a0(int type, int a, int b);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004f4830(int idx, void* dst);

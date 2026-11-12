@@ -19,7 +19,7 @@ int __cdecl fcn_00525fb0(char*);
 void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005bdc30(int, Query*, char*, void*, int);
-void __cdecl fcn_0059da50(char*);
+void __cdecl fcn_0059da50(int, char*);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
 

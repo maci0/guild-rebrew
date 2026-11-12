@@ -1,4 +1,4 @@
-extern int g_6b7fb8;
+extern int g_6b7fb8; extern char g_77250c[];
 
 typedef struct Fade Fade;
 
@@ -61,7 +61,7 @@ void __cdecl fcn_004732c0(void)
 	for (a = 0x1015ec0; a < 0x1015f40; a += 4) {
 		v = *(int*) a;
 		if (v != 0) {
-			fcn_00473190(v, *(int*) 0x77250c);
+			fcn_00473190(v, *(int*) &g_77250c);
 		}
 	}
 }

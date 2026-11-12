@@ -27048,3 +27048,45 @@ note = "GOLD twin of TL g_7749f8: int[6] array 24 bytes, GOLD loop 0x6f2640 to 0
 updated_by = "data"
 updated_at = "2026-11-06T03:14:24+00:00"
 
+["GOLDTL.0x00675170"]
+kind = "GLOBAL"
+name = "g_675170"
+type = "int"
+section = ".data"
+
+["GOLDTL.0x0066234c"]
+kind = "GLOBAL"
+name = "g_66234c"
+type = "void (__stdcall *)(int)"
+section = ".rdata"
+
+["GOLDTL.0x006791c8"]
+kind = "GLOBAL"
+name = "g_6791c8"
+size = 4
+type = "int"
+section = ".data"
+
+["GOLDTL.0x01015ec0"]
+kind = "GLOBAL"
+name = "g_1015ec0"
+type = "char *[]"
+section = ".data"
+
+["GOLD.0x006ed924"]
+kind = "GLOBAL"
+name = "g_77250c"
+type = "int"
+section = ".data"
+
+["GOLD.0x00f8f120"]
+kind = "GLOBAL"
+name = "g_1015f40"
+type = "Win_1015f40[0x60]"
+section = ".data"
+
+["GOLD.0x0062c418"]
+kind = "GLOBAL"
+name = "g_6abb00"
+type = "int"
+section = ".data"

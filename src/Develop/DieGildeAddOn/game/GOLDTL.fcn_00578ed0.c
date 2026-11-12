@@ -19,7 +19,7 @@ typedef struct Req578 {
 	int c;
 	int d;
 } Req578;
-
+#include "client_data.h"
 typedef struct Msg578 {
 	char pad0[4];
 	unsigned char kind;
@@ -40,7 +40,7 @@ typedef struct Msg578 {
 	int f64;
 	int f68;
 } Msg578;
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* Death-pact action state machine; resolves the target entity and reports the
  * chosen announcement to the message queue. */
 /* ADDRESS: GOLDTL 0x00578ed0 */
@@ -95,31 +95,31 @@ void __cdecl fcn_00578ed0(char* a0)
 			return;
 		}
 		if (*(int*) (*(int*) (e + 0x184) + 0x128) != 0) {
-			*(int*) (a0 + 0x52) = *(int*) 0x7f4c00;
-			*(int*) (a0 + 0x56) = *(int*) 0x7f4c04;
+			*(int*) (a0 + 0x52) = *(int*) &g_7f4c00;
+			*(int*) (a0 + 0x56) = *(int*) &g_7f4c04;
 			*(int*) (a0 + 0x5a) = *(int*) 0x7f4c08;
 			*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) 0x7f4c0c;
 			fcn_00500bb0(a0 + 0x52, 0, 10, 0);
 			return;
 		}
-		if (fcn_004a57a0((char*) ((*(unsigned short*) (a0 + 8)) * 0x21c + 0x7f4ca0),
+		if (fcn_004a57a0((char*) ((*(unsigned short*) (a0 + 8)) * 0x21c + (unsigned long)&g_7f4ca0),
 				0x700408, 4, a0 + 0xc8, 0, 0x42c80000, &found) == 0) {
 			*(int*) (a0 + 0x70) = -1;
 			return;
 		}
-		ref = fcn_004f45b0((char*) ((found & 0xffff) * 0x21c + 0x7f4ca0));
-		k = fcn_0050b710(gm_WalkEntityChain(found), *(unsigned char*) 0x773d75);
+		ref = fcn_004f45b0((char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
+		k = fcn_0050b710(gm_WalkEntityChain(found), *(unsigned char*) &g_773d75);
 		*(unsigned short*) (a0 + 0xc8 + *(int*) (a0 + 0xb0) * 2) = (unsigned short) found;
 		if (k > ref &&
 		    (*(unsigned char*) ((found & 0xffff) * 0x21c + 0x7f4e6c) & 1) == 0) {
-			if (*(unsigned char*) ((found & 0xffff) * 0x21c + 0x7f4ca2) == 6 ||
-			    *(unsigned char*) ((found & 0xffff) * 0x21c + 0x7f4ca2) == 7) {
-				msg.f0c = *(int*) ((found & 0xffff) * 0x21c + 0x7f4ca4);
+			if (*(unsigned char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca2) == 6 ||
+			    *(unsigned char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca2) == 7) {
+				msg.f0c = *(int*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca4);
 				msg.f10 = msg.f0c;
 				msg.f64 = msg.f0c;
 				msg.kind = 0x8b;
-				msg.f2c = *(int*) 0x7f4c00;
-				msg.f30 = *(int*) 0x7f4c04;
+				msg.f2c = *(int*) &g_7f4c00;
+				msg.f30 = *(int*) &g_7f4c04;
 				msg.f34 = *(int*) 0x7f4c08;
 				msg.f38 = *(unsigned short*) 0x7f4c0c;
 				msg.f3a = 9;
@@ -132,12 +132,12 @@ void __cdecl fcn_00578ed0(char* a0)
 			} else {
 				req.a = *(int*) (a0 + 0xc);
 				req.b = *(int*) (a0 + 0xac);
-				req.c = *(int*) ((found & 0xffff) * 0x21c + 0x7f4ca4);
+				req.c = *(int*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca4);
 				req.d = ref;
 				if ((gm_RandomMod(2) & 0xffff) != 0)
-					fcn_00579390((char*) &req, (char*) ((found & 0xffff) * 0x21c + 0x7f4ca0));
+					fcn_00579390((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
 				else
-					fcn_00579410((char*) &req, (char*) ((found & 0xffff) * 0x21c + 0x7f4ca0));
+					fcn_00579410((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
 			}
 		}
 		idx = *(int*) (a0 + 0xb0) + 1;
@@ -165,8 +165,8 @@ void __cdecl fcn_00578ed0(char* a0)
 			*(int*) (a0 + 0x70) = -1;
 			return;
 		}
-		*(int*) (a0 + 0x52) = *(int*) 0x7f4c00;
-		*(int*) (a0 + 0x56) = *(int*) 0x7f4c04;
+		*(int*) (a0 + 0x52) = *(int*) &g_7f4c00;
+		*(int*) (a0 + 0x56) = *(int*) &g_7f4c04;
 		*(int*) (a0 + 0x5a) = *(int*) 0x7f4c08;
 		*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) 0x7f4c0c;
 		fcn_00500bb0(a0 + 0x52, 0, 4, 0);

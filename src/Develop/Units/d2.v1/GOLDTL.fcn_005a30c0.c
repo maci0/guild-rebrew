@@ -4,7 +4,7 @@ extern int g_772514;
 extern char* g_1015ea0;
 
 int __cdecl fcn_0046f740(int, int, int, int);
-float __cdecl fcn_0050bb50(int, int);
+float __cdecl fcn_0050bb50(int id, unsigned char a);
 void __cdecl fcn_0050bc10(int, int, char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 

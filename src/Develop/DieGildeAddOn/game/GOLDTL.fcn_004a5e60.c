@@ -8,7 +8,7 @@ float __cdecl fcn_0050f980(unsigned short a0, unsigned short a1, int a2);
 /* ADDRESS: GOLDTL 0x004a5e60 */
 int __cdecl fcn_004a5e60(unsigned short* a0, int a1, int a2, int a3, float a4, float a5, int* a6)
 {
-	int buf[20];
+	int buf[21];
 	int step;
 	int flag;
 	int found;
@@ -44,7 +44,7 @@ int __cdecl fcn_004a5e60(unsigned short* a0, int a1, int a2, int a3, float a4, f
 		}
 		if (flag != 0) {
 			f = fcn_0050f980(*(unsigned short*) (ent + 0x27), *a0, 1);
-			if (!(f >= *(float*) (buf + 0x11) && f <= *(float*) (buf + 0x11))) {
+			if (!(f <= *(float*) (buf + 0x13) && f >= *(float*) (buf + 0x10))) {
 				goto next;
 			}
 		}

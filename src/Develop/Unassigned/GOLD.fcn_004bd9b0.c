@@ -3,7 +3,7 @@
 
 // fcn_004bd9b0 — unlink a from 0x38/0x3c chain; free; return 1.
 
-int __cdecl fcn_00422620(int);
+int __cdecl m_FreeTracked(int);
 
 int __cdecl fcn_004bd9b0(char* a)
 {
@@ -17,7 +17,7 @@ int __cdecl fcn_004bd9b0(char* a)
 	if (q != 0) {
 		*(char**) (q + 0x38) = *(char**) (a + 0x38);
 	}
-	fcn_00422620((int) a);
+	m_FreeTracked((int) a);
 	return 1;
 }
 

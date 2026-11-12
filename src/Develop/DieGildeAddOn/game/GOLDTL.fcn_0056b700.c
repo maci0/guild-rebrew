@@ -20,7 +20,7 @@ typedef union
 	Stats stats;
 	unsigned char msg[0x114];
 } MsgBuf;
-
+#include "client_data.h"
 extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl fcn_00529160(int, int, int, char*);
 extern int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
@@ -46,7 +46,7 @@ extern void* __cdecl fcn_004e69e0(int, int);
 extern int __cdecl gm_RandomMod(int);
 extern void __cdecl fcn_004d1d40(char*, unsigned char);
 extern int __cdecl fcn_004c5980(void*);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x0056b700 */
 void __cdecl fcn_0056b700(char* obj)
 {
@@ -101,8 +101,8 @@ void __cdecl fcn_0056b700(char* obj)
 				return;
 			}
 		}
-		*(int*) (obj + 0x52) = *(int*) 0x7f4c00;
-		*(int*) (obj + 0x52 + 0x4) = *(int*) 0x7f4c04;
+		*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
+		*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
 		*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
 		*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
 		fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 0x1e, 0);
@@ -116,8 +116,8 @@ void __cdecl fcn_0056b700(char* obj)
 		cur = fcn_004c4480(*(int*) (obj + 0xdc));
 		if (cur != 0) {
 			*(int*) (obj + 0xe0) = *(int*) cur;
-			*(int*) (obj + 0x52) = *(int*) 0x7f4c00;
-			*(int*) (obj + 0x52 + 0x4) = *(int*) 0x7f4c04;
+			*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
+			*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
 			*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
 			*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
 			fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 1, 0);
@@ -128,16 +128,16 @@ void __cdecl fcn_0056b700(char* obj)
 		return;
 	case 3:
 		if (!cut_FindCutsceneById(*(int*) (obj + 0xe0))) {
-			*(int*) (obj + 0x52) = *(int*) 0x7f4c00;
-			*(int*) (obj + 0x52 + 0x4) = *(int*) 0x7f4c04;
+			*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
+			*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
 			*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
 			*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
 			fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 0, 1);
 			*(int*) (obj + 0x70) = -1;
 			return;
 		}
-		*(int*) (obj + 0x52) = *(int*) 0x7f4c00;
-		*(int*) (obj + 0x52 + 0x4) = *(int*) 0x7f4c04;
+		*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
+		*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
 		*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
 		*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
 		fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 5, 0);
@@ -166,7 +166,7 @@ void __cdecl fcn_0056b700(char* obj)
 	}
 label_56b858:
 	if (*(unsigned char*) (obj + 0x78) & 2) {
-		saved = *(int*) 0x6b8010;
+		saved = *(int*) &g_6b8010;
 		nearby = 1;
 		door = 0;
 		prev = -1;
@@ -198,7 +198,7 @@ label_56b858:
 				if (*(char*) (ent + 0xf0) == 0 &&
 				    *(unsigned short*) (ent + 8) != *(unsigned short*) (obj + 8) &&
 				    (prev == -1 ||
-				     prev == *(int*) ((unsigned int) *(unsigned short*) (ent + 8) * 0x21c + 0x7f4ca4))) {
+				     prev == *(int*) ((unsigned int) *(unsigned short*) (ent + 8) * 0x21c + (unsigned long)&g_7f4ca4))) {
 					cur = gm_FindRecordById(*(int*) (ent + 0xac));
 					if (cur == 0)
 						goto next;
@@ -248,7 +248,7 @@ label_56b858:
 						goto next;
 				accept:
 					sel[count] = ent;
-					prev = *(int*) ((unsigned int) *(unsigned short*) (ent + 8) * 0x21c + 0x7f4ca4);
+					prev = *(int*) ((unsigned int) *(unsigned short*) (ent + 8) * 0x21c + (unsigned long)&g_7f4ca4);
 					*(char*) (ent + 0xf0) = 1;
 					list[count] = fcn_00502cd0(0, 2, 7, 1, *(int*) (ent + 0xac));
 					count++;
@@ -260,7 +260,7 @@ label_56b858:
 		limit = 0x50;
 		if (list[3] != 0)
 			limit -= 0x32;
-		if (*(int*) 0x774800)
+		if (*(int*) &g_774800)
 			limit = 0;
 		fcn_004432d0(saved, 1);
 		if (door != 0 && fcn_004e69e0(3, -1) == 0 &&
@@ -270,12 +270,12 @@ label_56b858:
 				memset(buf.msg, 0, sizeof(buf.msg));
 				buf.msg[8] = 3;
 				buf.msg[0x26] = 0xa2;
-				*(int*) (buf.msg + 0xc) = *(int*) ((unsigned int) *(unsigned short*) 0x774970 * 0x21c + 0x7f4ca4);
+				*(int*) (buf.msg + 0xc) = *(int*) ((unsigned int) *(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
 				*(int*) (buf.msg + 0x14) = -1;
 				buf.msg[0x30] = 2;
 				buf.msg[0x7c] = 1;
 				*(int*) (buf.msg + 0x38) = prev;
-				*(int*) (buf.msg + 0x34) = *(int*) ((unsigned int) *(unsigned short*) (slot + 0x27) * 0x21c + 0x7f4ca4);
+				*(int*) (buf.msg + 0x34) = *(int*) ((unsigned int) *(unsigned short*) (slot + 0x27) * 0x21c + (unsigned long)&g_7f4ca4);
 				if (door != 0 && strstr(door, (char*) 0x6a1d10) != 0)
 					buf.msg[0x7c] |= 8;
 				for (i = 0; i < 0x10; i++) {
@@ -300,14 +300,14 @@ label_56b858:
 				*(int*) (buf.msg + 0x10c) = *(int*) (slot + 1);
 				for (i = 0; i < 8; i++)
 					*(int*) (buf.msg + 0xc0 + i * 4) = *(int*) (obj + 0x8c + i * 4);
-				*(int*) (buf.msg + 0x18) = *(int*) 0x7f4c00;
-				*(int*) (buf.msg + 0x18 + 0x4) = *(int*) 0x7f4c04;
+				*(int*) (buf.msg + 0x18) = *(int*) &g_7f4c00;
+				*(int*) (buf.msg + 0x18 + 0x4) = *(int*) &g_7f4c04;
 				*(int*) (buf.msg + 0x18 + 0x8) = *(int*) 0x7f4c08;
 				*(short*) (buf.msg + 0x18 + 0xc) = *(short*) 0x7f4c0c;
 				fcn_00500bb0((pos14_7f4c00*) (buf.msg + 0x18), 0xf, 0, 0);
 				*(int*) (obj + 0xdc) = fcn_004c5980(buf.msg);
-				*(int*) (obj + 0x52) = *(int*) 0x7f4c00;
-				*(int*) (obj + 0x52 + 0x4) = *(int*) 0x7f4c04;
+				*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
+				*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
 				*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
 				*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
 				*(int*) (obj + 0x70) = 2;
@@ -317,12 +317,12 @@ label_56b858:
 			return;
 		}
 	}
-	if (fcn_00500cb0((pos14_7f4c00*) 0x7f4c00, (pos14_7f4c00*) (obj + 0xcc)) >= 0) {
+	if (fcn_00500cb0((pos14_7f4c00*) &g_7f4c00, (pos14_7f4c00*) (obj + 0xcc)) >= 0) {
 		*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
 		return;
 	}
-	*(int*) (obj + 0x52) = *(int*) 0x7f4c00;
-	*(int*) (obj + 0x52 + 0x4) = *(int*) 0x7f4c04;
+	*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
+	*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
 	*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
 	*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
 	limit = (gm_RandomMod(5) & 0xffff) + 10;

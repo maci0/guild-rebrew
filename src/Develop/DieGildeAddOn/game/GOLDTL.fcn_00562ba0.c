@@ -1,5 +1,5 @@
-int __cdecl fcn_004c4450(int a0);
-int __cdecl fcn_004c4480(int a0);
+#include "client_data.h"
+int __cdecl fcn_004c4450(int a0); int __cdecl fcn_004c4480(int a0);
 int __cdecl gm_GetEntityTableEntry(int a0);
 int __cdecl fcn_004c51a0(int a0, int a1, unsigned char a2, int a3);
 void __cdecl fcn_00529160(int a0, int a1, int a2, int a3);
@@ -20,7 +20,7 @@ int __cdecl fcn_005463a0(int a0, int a1, int a2);
 int __cdecl fcn_004c58b0(int a0, int a1);
 void __cdecl fcn_004c57e0(int a0, int a1);
 void __cdecl fcn_00546190(int a0);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00562ba0 */
 void __cdecl fcn_00562ba0(int a0)
 {
@@ -54,7 +54,7 @@ void __cdecl fcn_00562ba0(int a0)
 				*(int*) (v4 + 0x28) = *(int*) (v4 + 0x28) + *(int*) (v3 + 0xd8);
 			}
 			*(int*) (v3 + 0xc8) = *(int*) (v7 + 4);
-			fcn_004c51a0(-1, *(int*) (*(unsigned short*) (v3 + 8) * 0x21c + 0x7f4ca4), *(unsigned char*) 0x773d75, *(int*) (v3 + 0xd8));
+			fcn_004c51a0(-1, *(int*) (*(unsigned short*) (v3 + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(unsigned char*) &g_773d75, *(int*) (v3 + 0xd8));
 			fcn_00529160(0, 0, *(unsigned short*) v7, v3);
 			*(int*) (v3 + 0xcc) = -1;
 			*(int*) (v3 + 0x70) = *(int*) (v3 + 0x70) + 1;
@@ -80,8 +80,8 @@ void __cdecl fcn_00562ba0(int a0)
 		}
 		if (*(int*) (*(int*) (v6 + 0x184) + 0x128) != 0) {
 			pkt = (char*) (v3 + 0x52);
-			*(int*) (pkt) = *(int*) 0x7f4c00;
-			*(int*) (pkt + 4) = *(int*) 0x7f4c04;
+			*(int*) (pkt) = *(int*) &g_7f4c00;
+			*(int*) (pkt + 4) = *(int*) &g_7f4c04;
 			*(int*) (pkt + 8) = *(int*) 0x7f4c08;
 			*(unsigned short*) (pkt + 0xc) = *(unsigned short*) 0x7f4c0c;
 			fcn_00500bb0((int*) pkt, 0, 4, 0);
@@ -99,12 +99,12 @@ void __cdecl fcn_00562ba0(int a0)
 			v10[2] = v3;
 			v10[3] = 0;
 			if (fcn_0055be70(v10) != 0) {
-				*(int*) (v3 + 0xcc) = fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (v3 + 8) * 0x21c + 0x7f4ca4), *(int*) (v4 + 4), *(int*) (v6 + 1));
+				*(int*) (v3 + 0xcc) = fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (v3 + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (v4 + 4), *(int*) (v6 + 1));
 				pkt = (char*) (v3 + 0x52);
 				*(int*) (v3 + 0x70) = 8;
 				*(int*) (v3 + 0xd4) = *(int*) (v10[3] + 4);
-				*(int*) (pkt) = *(int*) 0x7f4c00;
-				*(int*) (pkt + 4) = *(int*) 0x7f4c04;
+				*(int*) (pkt) = *(int*) &g_7f4c00;
+				*(int*) (pkt + 4) = *(int*) &g_7f4c04;
 				*(int*) (pkt + 8) = *(int*) 0x7f4c08;
 				*(unsigned short*) (pkt + 0xc) = *(unsigned short*) 0x7f4c0c;
 				return;
@@ -143,8 +143,8 @@ label_562e74:
 			return;
 		}
 		fcn_004c5da0(*(int*) (v3 + 0xc8), *(int*) (v3 + 0x10), -1, 0, 1, 0x6a659c);
-		*(int*) (v3 + 0x52) = *(int*) 0x7f4c00;
-		*(int*) (v3 + 0x56) = *(int*) 0x7f4c04;
+		*(int*) (v3 + 0x52) = *(int*) &g_7f4c00;
+		*(int*) (v3 + 0x56) = *(int*) &g_7f4c04;
 		*(int*) (v3 + 0x5a) = *(int*) 0x7f4c08;
 		*(unsigned short*) (v3 + 0x5e) = *(unsigned short*) 0x7f4c0c;
 		fcn_00500bb0((int*) (v3 + 0x52), 0, 4, 0);
@@ -158,7 +158,7 @@ label_562e74:
 		if (0 <= fcn_00500cb0((int*) (v3 + 0x52), 0x7f4c00)) {
 			return;
 		}
-		ep = (char*) (*(unsigned short*) (v3 + 8) * 0x21c + 0x7f4ca0);
+		ep = (char*) (*(unsigned short*) (v3 + 8) * 0x21c + (unsigned long)&g_7f4ca0);
 		v7 = gm_LookupEntityRecordById(*(int*) (v3 + 0xb4));
 		if (v7 == 0) {
 			*(int*) (v3 + 0x70) = -1;
@@ -208,7 +208,7 @@ label_562e74:
 					fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 				}
 			}
-			fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (v3 + 8) * 0x21c + 0x7f4ca4), *(int*) (v3 + 0xb4), *(int*) (v3 + 0xac));
+			fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (v3 + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (v3 + 0xb4), *(int*) (v3 + 0xac));
 			if (*(char*) (v7 + 2) != 6 && *(char*) (v7 + 2) != 7) {
 				fcn_004c54c0(*(int*) (ep + 4), *(int*) (v7 + 4), -0x19, 1);
 				*(int*) (v3 + 0x70) = *(int*) (v3 + 0x70) + 1;
@@ -226,8 +226,8 @@ label_563129:
 			return;
 		}
 		if (*(int*) (*(int*) (v6 + 0x184) + 0x128) != 0) {
-			*(int*) (v3 + 0x52) = *(int*) 0x7f4c00;
-			*(int*) (v3 + 0x56) = *(int*) 0x7f4c04;
+			*(int*) (v3 + 0x52) = *(int*) &g_7f4c00;
+			*(int*) (v3 + 0x56) = *(int*) &g_7f4c04;
 			*(int*) (v3 + 0x5a) = *(int*) 0x7f4c08;
 			*(unsigned short*) (v3 + 0x5e) = *(unsigned short*) 0x7f4c0c;
 			fcn_00500bb0((int*) (v3 + 0x52), 0, 4, 0);

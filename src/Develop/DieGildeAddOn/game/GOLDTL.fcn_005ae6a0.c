@@ -26,7 +26,7 @@ void __cdecl fcn_004c6ae0(int a1, int a2);
 void __cdecl fcn_004f4f60(int a1, int a2, int a3, int a4, int a5);
 void __cdecl fcn_004c35f0(void);
 void __cdecl sv_ClearObjectSelection(void);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005ae6a0 */
 int __cdecl fcn_005ae6a0(void* a0)
 {
@@ -46,7 +46,7 @@ int __cdecl fcn_005ae6a0(void* a0)
 
 	res = 0;
 	if (a0 != 0 &&
-	    fcn_00525f60((char*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), 3) != 0 &&
+	    fcn_00525f60((char*) ((unsigned long)&g_7f4ca0 + *(unsigned short*) &g_774970 * 0x21c), 3) != 0 &&
 	    (*(int*) ((char*) a0 + 0x16c) == 0 ||
 	     *(short*) (*(int*) ((char*) a0 + 0x16c) + 0x27) != *(short*) a0)) {
 	if (*(unsigned char*) ((char*) a0 + 0x1b1) != 0) {
@@ -69,11 +69,11 @@ int __cdecl fcn_005ae6a0(void* a0)
 	v9 = io_AppendText(0x19b9, *(short*) a0, 3, *(short*) a0);
 	v10 = fcn_00472250(v8, 1, v9);
 	v9 = fcn_00472250(v8, 1, v9 + 1);
-	*(int*) 0x100f1dc = -1;
+	*(int*) &g_100f1dc = -1;
 	do {
 		if (*(int*) 0x14ce8e0 != 0)
 			*(int*) 0x774654 = 1;
-		if (*(int*) 0x100f1dc != -1) {
+		if (*(int*) &g_100f1dc != -1) {
 			if (*(int*) 0x67d370 != v10) {
 				if (*(int*) 0x67d370 == v9)
 					*(int*) 0x774654 = 1;
@@ -82,15 +82,15 @@ int __cdecl fcn_005ae6a0(void* a0)
 					((int*) msg)[i] = 0;
 				*(unsigned char*) (msg + 4) = 0x3c;
 				*(unsigned char*) (msg + 0x36) = 1;
-				slot = *(int*) (0x7f4ca4 + *(unsigned short*) 0x774970 * 0x21c);
+				slot = *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c);
 				*(int*) (msg + 8) = slot;
 				*(int*) (msg + 0x58) = *(int*) ((char*) a0 + 4);
 				*(int*) (msg + 0x5c) = *(int*) ((char*) p + 1);
-				*(int*) (msg + 0x60) = *(int*) (*(int*) 0x7746c4 + 1);
+				*(int*) (msg + 0x60) = *(int*) (*(int*) &g_7746c4 + 1);
 				for (i = 0; i < 8; i++)
 					*(int*) (msg + 0x38 + i * 4) = -1;
 				k = 0;
-				for (q = (char*) 0x7f4ca4; (int) q < (int) 0x85a0a4; q += 0x21c) {
+				for (q = (char*) &g_7f4ca4; (int) q < (int) 0x85a0a4; q += 0x21c) {
 					if (*(unsigned char*) (q + 0x184) != 0) {
 						*(int*) (msg + 0x38 + k * 4) = *(int*) q;
 						k++;
@@ -98,8 +98,8 @@ int __cdecl fcn_005ae6a0(void* a0)
 				}
 				if (k != 0) {
 					fcn_004c5530(msg);
-					fcn_004c6ae0(*(int*) (0x7f4ca4 + *(unsigned short*) 0x774970 * 0x21c), -3);
-					fcn_004f4f60(0x1a, 1, *(int*) (0x7f4ca4 + *(unsigned short*) 0x774970 * 0x21c),
+					fcn_004c6ae0(*(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c), -3);
+					fcn_004f4f60(0x1a, 1, *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c),
 						*(int*) ((char*) a0 + 4), -1);
 					fcn_004c35f0();
 					sv_ClearObjectSelection();
@@ -107,7 +107,7 @@ int __cdecl fcn_005ae6a0(void* a0)
 					*(int*) 0x774654 = 3;
 				} else {
 					fcn_00526120((void*) *(int*) 0x14abaac, 0);
-					*(int*) 0x100f1dc = -1;
+					*(int*) &g_100f1dc = -1;
 				}
 			}
 		}

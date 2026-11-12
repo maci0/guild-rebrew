@@ -24,7 +24,7 @@ extern unsigned char g_entity_base[];
 // Field map merged from two independently gathered sources, then each claim
 // checked against the reference rather than trusted:
 //   - the offset sweep over the tree (every `slot + 0xNN` in use), and
-//   - the map written out in spiel62.c's header, derived from EXE cross-reference.
+//   - a historical spiel62.c header map derived from EXE cross-reference.
 // The two agree on every offset they share; the sweep supplies the scalar fields
 // the map omits, the map supplies the large blocks the sweep cannot see.
 //
@@ -39,7 +39,7 @@ extern unsigned char g_entity_base[];
 // NOT a field of this record: `+0x27`.  It is read as a 2-byte slot index in
 // cm_ChkJoinLeaveElection / cm_ExSellObjekt and scaled by 0x21c, but the base there is
 // the record gm_StartFilteredEntitySearch returns, which walks with stride 0xa9
-// (spiel_dumpD.c: `list_head += 0xa9`, reading +0x25 and +0x27).  A word at 0x27 cannot
+// (server spiel.c:2505: `list_head += 0xa9`, reading +0x25 and +0x27). A word at 0x27 cannot
 // coexist with the 4-byte season_born at 0x28, and disassembly puts them on different
 // bases.  Do not add +0x27 here.
 //

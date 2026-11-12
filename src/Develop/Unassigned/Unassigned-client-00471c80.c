@@ -4,7 +4,7 @@ typedef Obj_1038140 Obj;
 
 extern Obj_1038140 g_1038140[];
 
-void __cdecl fcn_00471c80(int win, int flags);
+void __cdecl fcn_00471c80(int win, unsigned char flags);
 extern char* g_1015ea0;
 extern int g_772534;
 extern Win_1015f40 g_1015f40[0x60];
@@ -33,7 +33,7 @@ typedef struct Slot {
 int __cdecl fcn_00471f80(int id);
 
 /* ADDRESS: GOLDTL 0x00471c80 */
-void __cdecl fcn_00471c80(int idx, unsigned char flags, float limit)
+void __cdecl fcn_00471c80(int idx, unsigned char flags)
 {
 	int* p;
 	float value;

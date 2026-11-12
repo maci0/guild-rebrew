@@ -20,9 +20,9 @@ typedef unsigned char  byte;
 typedef unsigned long  uLong;
 
 /*
- * Wrapper for auto-generated types.h to avoid conflicts with windows.h.
- * Since we can't edit types.h, we use preprocessor defines to skip its
- * redundant definitions of standard types.
+ * Historical skip macros for generated-type conflicts with windows.h.
+ * This header defines scalar aliases above; no project types.h remains.
+ * Retain the macros pending a compiler-context review.
  */
 #define _CONTEXT _SKIP_CONTEXT
 #define _iobuf _SKIP_IOBUF
@@ -37,8 +37,8 @@ typedef unsigned long  uLong;
 #define _SYSTEMTIME _SKIP_SYSTEMTIME
 
 /*
- * Note: types.h must be included relatively from the source file.
- * We don't include it here to avoid complex path issues in common header.
+ * Project type headers are client_types.h and Develop/rebrew_types.h.
+ * This header has no generated types.h include requirement.
  */
 
 #endif /* GAME_COMMON_H */

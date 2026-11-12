@@ -34,7 +34,7 @@ int __cdecl fcn_004c5aa0(int a, int b, int c, int d, int e, int f);
 int __cdecl fcn_004c4450(int a);
 int __cdecl fcn_005373e0(void* fn, int msg);
 int __cdecl fcn_004c4480(int a);
-void __cdecl eval_ObjektPreis2Credits(int a, int b);
+float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl _ftol(void);
 void __cdecl fcn_004c5150(int a, int b, unsigned char c, int d);
 int __cdecl init_SetPflanzenMap(int a, int b);

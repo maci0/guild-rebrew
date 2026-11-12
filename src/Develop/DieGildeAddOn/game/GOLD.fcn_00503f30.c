@@ -1,5 +1,5 @@
 
-// fcn_00503f30 — r=fcn_00504ad0(a); return (r in [0xa,0xe]) ? 0 : 2.
+/* fcn_00503f30: r=gm_MapEntityStatRange(a); return 0 for 0xa <= r <= 0xe, otherwise 2. */
 
 #include "spiel.h"
 

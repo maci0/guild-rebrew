@@ -56,7 +56,7 @@ extern char* g_1015ea0;
 void __cdecl fcn_0047a040(int, int, int, int);
 int __cdecl fcn_00475290(int, int, int, int, int);
 int __cdecl fcn_0046e940(int, int, int, int, int);
-void __cdecl fcn_00471c80(int, int);
+void __cdecl fcn_00471c80(int, unsigned char);
 char* __cdecl fcn_00465ba0(char*, int);
 Surface* __cdecl fcn_004770a0(SurfaceDesc*, int);
 int __cdecl fcn_00475fd0(Surface*);

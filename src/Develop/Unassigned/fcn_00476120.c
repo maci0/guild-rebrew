@@ -1,5 +1,5 @@
 #include <string.h>
-
+extern void * g_6b5de0; extern int g_772614;
 int __cdecl fcn_0047b8b0(int a1, int a2, int a3, int a4, void* out);
 void __cdecl fcn_004372d0(int a1, int a2, int a3, int a4, int a5);
 
@@ -47,22 +47,22 @@ int __cdecl fcn_00476120(int left, int top, int width, int height, char* src,
 		surface_src = *(int*) (src + 0x20);
 		target = (void*) surface_src;
 		if ((*(int (__stdcall**) (int, int, int, int*, int))
-			 (*(char**) *(void**) 0x772614 + 0x2c))(*(int*) 0x772614, 0, 0x18,
+			 (*(char**) *(void**) &g_772614 + 0x2c))(*(int*) &g_772614, 0, 0x18,
 													&surface_src, 0x2000) < 0) {
 			return 0;
 		}
 		target = (void*) surface_src;
 		memcpy(target, frame, 0xa8);
-		(*(int (__stdcall**) (int)) (*(char**) *(void**) 0x772614 + 0x30))
-			(*(int*) 0x772614);
+		(*(int (__stdcall**) (int)) (*(char**) *(void**) &g_772614 + 0x30))
+			(*(int*) &g_772614);
 		(*(int (__stdcall**) (int, int, int, int))
-		 (*(char**) *(void**) 0x6b5de0 + 0x14c))(*(int*) 0x6b5de0, 0,
-												*(int*) 0x772614, 0x1c);
+		 (*(char**) *(void**) &g_6b5de0 + 0x14c))(*(int*) &g_6b5de0, 0,
+												*(int*) &g_772614, 0x1c);
 		(*(int (__stdcall**) (int, int))
-		 (*(char**) *(void**) 0x6b5de0 + 0x130))(*(int*) 0x6b5de0, 0x144);
+		 (*(char**) *(void**) &g_6b5de0 + 0x130))(*(int*) &g_6b5de0, 0x144);
 		fcn_004372d0(0xfe, 0, 0, 1, 1);
 		(*(int (__stdcall**) (int, int, int))
-		 (*(char**) *(void**) 0x6b5de0 + 0xc8))(*(int*) 0x6b5de0, 7, 0);
+		 (*(char**) *(void**) &g_6b5de0 + 0xc8))(*(int*) &g_6b5de0, 7, 0);
 		area[0] = 0;
 		area[1] = 0;
 		area[2] = *(int*) (dest + 0x54);
@@ -73,20 +73,20 @@ int __cdecl fcn_00476120(int left, int top, int width, int height, char* src,
 			 (*(char**) *(void**) 0x7725ec + 0x14))(*(int*) 0x7725ec,
 													*(int*) (dest + 0x24), area) >= 0) {
 			(*(int (__stdcall**) (int, int, int))
-			 (*(char**) *(void**) 0x6b5de0 + 0xc8))(*(int*) 0x6b5de0, 7, 0);
+			 (*(char**) *(void**) &g_6b5de0 + 0xc8))(*(int*) &g_6b5de0, 7, 0);
 			(*(int (__stdcall**) (int, int, int, int, int, int))
-			 (*(char**) *(void**) 0x6b5de0 + 0x90))(*(int*) 0x6b5de0, 0, 1, 0xff,
+			 (*(char**) *(void**) &g_6b5de0 + 0x90))(*(int*) &g_6b5de0, 0, 1, 0xff,
 												   0x3f800000, 0);
 			(*(int (__stdcall**) (int, int, int))
-			 (*(char**) *(void**) 0x6b5de0 + 0xf4))(*(int*) 0x6b5de0, 0,
+			 (*(char**) *(void**) &g_6b5de0 + 0xf4))(*(int*) &g_6b5de0, 0,
 													*(int*) (src + 0x20));
 			(*(int (__stdcall**) (int, int, int, int))
-			 (*(char**) *(void**) 0x6b5de0 + 0x118))(*(int*) 0x6b5de0, 4, 0, 2);
+			 (*(char**) *(void**) &g_6b5de0 + 0x118))(*(int*) &g_6b5de0, 4, 0, 2);
 			(*(int (__stdcall**) (int))
 			 (*(char**) *(void**) 0x7725ec + 0x18))(*(int*) 0x7725ec);
 		}
 		(*(int (__stdcall**) (int, int, int))
-		 (*(char**) *(void**) 0x6b5de0 + 0xc8))(*(int*) 0x6b5de0, 7, 1);
+		 (*(char**) *(void**) &g_6b5de0 + 0xc8))(*(int*) &g_6b5de0, 7, 1);
 		return 1;
 	}
 
@@ -117,7 +117,7 @@ int __cdecl fcn_00476120(int left, int top, int width, int height, char* src,
 		surface_src = *(int*) (src + 0x24);
 	}
 	(*(int (__stdcall**) (int, int, int*, int, int, int*))
-	 (*(char**) *(void**) 0x6b5de0 + 0x70))(*(int*) 0x6b5de0, surface_dest,
+	 (*(char**) *(void**) &g_6b5de0 + 0x70))(*(int*) &g_6b5de0, surface_dest,
 											area, 1, surface_src, params);
 	return 1;
 }

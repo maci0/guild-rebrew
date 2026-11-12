@@ -1,4 +1,4 @@
-double __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_005c6270(void*, int);
 int __cdecl abs(int);

@@ -46,7 +46,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_0055c050(char*);
 float __cdecl fcn_004ff210(short, int);
-float __cdecl fcn_0050bb50(int, int);
+float __cdecl fcn_0050bb50(int id, unsigned char a);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_GetMsgField(char*, char*);
 unsigned char* __cdecl fcn_00508e40(int);

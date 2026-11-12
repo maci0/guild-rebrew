@@ -23,7 +23,7 @@ typedef struct
 int __cdecl fcn_004e8b40(int idx, fcn_004a0020_Rec* out);
 int __cdecl fcn_004e8c00(int k, int max, fcn_004a0020_Rec* out);
 fcn_004a0020_Ent* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004a0020 */

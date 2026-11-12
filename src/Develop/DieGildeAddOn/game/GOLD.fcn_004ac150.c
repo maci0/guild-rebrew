@@ -1,7 +1,7 @@
 
 
 
-// fcn_004ac150 — do { r=fcn_0042ec00(0x33); } while ((r & 0xffff) == si).
+/* fcn_004ac150: repeat gm_RandomMod(0x33) until its low 16 bits differ from si. */
 
 int __cdecl gm_RandomMod(int);
 

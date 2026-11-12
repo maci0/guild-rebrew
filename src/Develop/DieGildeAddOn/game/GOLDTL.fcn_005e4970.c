@@ -28,7 +28,7 @@ void __cdecl fcn_00473150(unsigned char*);
 void __cdecl fcn_0046b4f0(void);
 void __cdecl fcn_00469e30(int);
 int __cdecl fcn_0046e940(int, int, int, int, int);
-void __cdecl fcn_00471c80(int, int);
+void __cdecl fcn_00471c80(int, unsigned char);
 void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046f280(int);
 

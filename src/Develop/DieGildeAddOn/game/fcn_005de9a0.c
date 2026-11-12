@@ -1,5 +1,5 @@
 #include <string.h>
-
+extern __int64 g_666018;
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void* __cdecl gm_LookupEntityRecordById(int id);
 void* __cdecl fcn_005cd440(void* desc, void* buf, int a, int b);
@@ -18,11 +18,11 @@ int __cdecl fcn_005de9a0(char* a0, char* a1)
 		memset(desc, 0, 0x50);
 		memset(desc + 0x1c, 0xff, 0x20);
 		io_FormatTextBuffer(bufA, 0x9c);
-		*(int*) (desc + 0x08) = *(int*) 0x666018;
-		*(int*) (desc + 0x0c) = *(int*) 0x66601c;
+
 		*(int*) (desc + 0x00) = 0;
 		*(int*) (desc + 0x04) = 0x400;
 		*(int*) (desc + 0x10) = 6;
+		*(__int64*) (desc + 0x08) = g_666018;
 		p = fcn_005cd440(desc, bufA, 0, 0);
 	} else {
 		p = gm_LookupEntityRecordById(*(int*) (a1 + 4));

@@ -10,7 +10,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 int __cdecl fcn_0050d320(char*, unsigned char);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-float __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_005c6270(void*, int);
 
 #define MAXV(a, b) ((a) > (b) ? (a) : (b))

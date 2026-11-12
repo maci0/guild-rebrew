@@ -1,4 +1,4 @@
-float __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_004e99c0(int);
 int __cdecl fcn_004e6f10(int);
 float __cdecl fcn_004ec340(unsigned char*, int);

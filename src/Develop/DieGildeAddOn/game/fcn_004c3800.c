@@ -1,5 +1,5 @@
 unsigned short __cdecl gm_RandomMod(int);
-float __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_0050cce0(void *, void *, int);
 int __cdecl fcn_0050ce20(void *, void *, int);
 void __cdecl fcn_004c3030(int, int, int, int);

@@ -43,10 +43,10 @@ iat_thunks = [
 ]
 dll_exports = { 0x10009320 = "Init", 0x10009350 = "Exit" }
 
-# External .lib code ("not our work"): identified library modules leave the
-# progress accounting, `rebrew library match` ingests the archives by default,
-# and `rebrew build cmake-sources` emits the non-empty specs as
-# REBREW_EXTERNAL_LIBS — link order is this order (static archives last).
+# External library identities are excluded from game reversing progress.
+# `rebrew library match` uses these archives by default.
+# `rebrew build cmake-sources` emits non-empty specs in this order as
+# REBREW_EXTERNAL_LIBS; CMake selects the final link inputs and order.
 [targets."server.dll".external_libs]
 KERNEL32 = "KERNEL32.lib"
 USER32 = "USER32.lib"
@@ -82,8 +82,8 @@ inventory_file = "db/inventory-Europa1400Gold_TL.exe.json"
 bin_dir = "bin/Europa1400Gold_TL.exe"
 module = "GOLDTL"
 raw_link = "build/consolidation-baseline-pp/Europa1400Gold_TL.exe"
-# Provisional link list — measured import/static names for the identified
-# external modules; adjust when the TL link lands (REBREW_EXTERNAL_LIBS).
+# Provisional external archive list emitted as REBREW_EXTERNAL_LIBS.
+# CMake reorders CTLFWR32 and adds DirectX inputs for the TL link.
 [targets."Europa1400Gold_TL.exe".external_libs]
 KERNEL32 = "KERNEL32.lib"
 USER32 = "USER32.lib"
@@ -117,8 +117,8 @@ arch = "x86_32"
 reversed_dir = "src"
 inventory_file = "db/inventory-Europa1400Gold.exe.json"
 bin_dir = "bin/Europa1400Gold.exe"
-# Provisional link list — identified external modules; adjust when the
-# GOLD link lands (REBREW_EXTERNAL_LIBS).
+# Provisional external archive list emitted as REBREW_EXTERNAL_LIBS.
+# CMake uses this list for the Gold link.
 [targets."Europa1400Gold.exe".external_libs]
 KERNEL32 = "KERNEL32.lib"
 USER32 = "USER32.lib"

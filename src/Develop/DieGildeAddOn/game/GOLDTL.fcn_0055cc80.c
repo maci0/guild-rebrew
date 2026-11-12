@@ -19,7 +19,7 @@ typedef struct S55cc80Packet {
 	char pad4d[0x10];
 	char kind;
 } S55cc80Packet;
-
+#include "client_data.h"
 int __cdecl fcn_00500cb0(char*, char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_005101e0(char*, int, int, int);
@@ -37,7 +37,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 int __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(char*, int, int);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x0055cc80 */
 void __cdecl fcn_0055cc80(char* self)
 {
@@ -63,7 +63,7 @@ void __cdecl fcn_0055cc80(char* self)
 		*(int*) (self + 0x70) = state;
 		return;
 	case 1:
-		if (fcn_00500cb0(self + 0x52, (char*) 0x7f4c00) >= 0) {
+		if (fcn_00500cb0(self + 0x52, (char*) &g_7f4c00) >= 0) {
 			return;
 		}
 		packet = (S55cc80Packet*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10));
@@ -72,12 +72,12 @@ void __cdecl fcn_0055cc80(char* self)
 			return;
 		}
 		slot = packet->slot;
-		fcn_005101e0((char*) 0x7f4ca0 + slot * 0x21c, packet->idx0, *(int*) &packet->handle, -1);
+		fcn_005101e0((char*) &g_7f4ca0 + slot * 0x21c, packet->idx0, *(int*) &packet->handle, -1);
 		t = _ftol();
-		src = gm_AccumulateTyped2((char*) 0x7f4ca0 + slot * 0x21c);
+		src = gm_AccumulateTyped2((char*) &g_7f4ca0 + slot * 0x21c);
 		if (t > src) {
 			io_FormatTextBuffer(buf, 0x1a41, (char*) packet);
-			he_MessageBoxQuickjump(*(int*) (0x7f4ca4 + slot * 0x21c), *(int*) (self + 0x10), buf, 0, 0x5f2, *(int*) &packet->handle, *(int*) (self + 0xb4), 0, 0);
+			he_MessageBoxQuickjump(*(int*) ((unsigned long)&g_7f4ca4 + slot * 0x21c), *(int*) (self + 0x10), buf, 0, 0x5f2, *(int*) &packet->handle, *(int*) (self + 0xb4), 0, 0);
 			fcn_00546190(self);
 			return;
 		}
@@ -89,7 +89,7 @@ void __cdecl fcn_0055cc80(char* self)
 			if (*p <= 0) {
 				started = 1;
 			} else {
-				q = (char*) fcn_004c6090((char*) packet, 1, 0, *(unsigned char*) ((*(unsigned char*) (self + 0xac)) + 0x868050 + packet->idx0 * 0x24d + 0x223));
+				q = (char*) fcn_004c6090((char*) packet, 1, 0, *(unsigned char*) ((*(unsigned char*) (self + 0xac)) + (unsigned long)&lpGebaeudePROT + packet->idx0 * 0x24d + 0x223));
 				*(int*) (self + 0xb8) = (int) q;
 			}
 		}
@@ -106,7 +106,7 @@ void __cdecl fcn_0055cc80(char* self)
 		}
 		answer = (unsigned short*) fcn_004c4480(*(int*) (self + 0xb8));
 		if (answer == 0) {
-			fcn_00545d40(*(int*) (0x7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), -1, (char*) 0x6a628c, 0, 0x5f8, 0);
+			fcn_00545d40(*(int*) ((unsigned long)&g_7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), -1, (char*) 0x6a628c, 0, 0x5f8, 0);
 			fcn_00546190(self);
 			return;
 		}
@@ -119,7 +119,7 @@ void __cdecl fcn_0055cc80(char* self)
 		}
 		q = fcn_004c4480(*(int*) (self + 0xb8));
 		*(unsigned char*) (q + 0x165) = 0;
-		*(unsigned char*) (q + 0x164) = *(unsigned char*) ((*(unsigned char*) (self + 0xac)) + 0x868050 + packet->idx0 * 0x24d + 0x223);
+		*(unsigned char*) (q + 0x164) = *(unsigned char*) ((*(unsigned char*) (self + 0xac)) + (unsigned long)&lpGebaeudePROT + packet->idx0 * 0x24d + 0x223);
 		{
 			int* p;
 
@@ -127,14 +127,14 @@ void __cdecl fcn_0055cc80(char* self)
 			if (*p <= 0) {
 				goto move;
 			}
-			fcn_005101e0((char*) 0x7f4ca0 + packet->slot * 0x21c, packet->idx0, *(int*) &packet->handle, -1);
+			fcn_005101e0((char*) &g_7f4ca0 + packet->slot * 0x21c, packet->idx0, *(int*) &packet->handle, -1);
 			t = _ftol();
 			*(int*) (self + 0xb0) = *(int*) (self + 0xb0) - 1;
-			if (*(unsigned char*) (0x7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 6 || *(unsigned char*) (0x7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
+			if (*(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 6 || *(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
 				io_FormatTextBuffer(buf, 0x1bb1, (char*) packet);
-				he_MessageBoxQuickjump(*(int*) (0x7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(int*) &packet->handle, buf, 0, 0x5f2, *(int*) &packet->handle, *(int*) (self + 0xb4), 0, 0x6a6278);
+				he_MessageBoxQuickjump(*(int*)((unsigned long)&g_7f4ca4+(*(unsigned short*)(self+8)) * 0x21c), *(int*) &packet->handle, buf, 0, 0x5f2, *(int*) &packet->handle, *(int*)(self+0xb4), 0, 0x6a6278);
 			}
-			fcn_004c51a0(*(int*) (0x7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(int*) (answer + 2), t, *(unsigned char*) 0x773d75);
+			fcn_004c51a0(*(int*) ((unsigned long)&g_7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(int*) (answer + 2), t, *(unsigned char*) &g_773d75);
 		}
 	move:
 		t = *(int*) (self + 0xb4);

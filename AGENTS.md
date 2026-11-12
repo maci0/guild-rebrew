@@ -433,6 +433,11 @@ selected link inputs, archive extraction and `/OPT:REF` before explaining a gap.
 A compiled TU can lose contributions in one target; a gap alone establishes
 neither a missing source function nor permission to insert bytes.
 
+A RELOC or EXACT verdict masks call and data targets, so it cannot show that a
+call names the right function. Before committing a change to a shared source, a
+declaration, a function or global name, or a provider, relink every target that
+compiles the affected files and require zero new LNK2001/LNK2019/LNK2005.
+
 ## Upstream Rebrew feature gaps and bugs
 
 - Submit every upstream feature gap to `docs/IDEAS-GUILD.md` in the upstream

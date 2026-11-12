@@ -4,7 +4,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00503d10(int);
 int __cdecl fcn_0050dfd0(int, int);
 int __cdecl gm_GetMsgField(int, int);
-float __cdecl fcn_0050bb50(int, int);
+float __cdecl fcn_0050bb50(int id, unsigned char a);
 
 /* ADDRESS: GOLDTL 0x00503a70 */
 int __cdecl fcn_00503a70(int a0)

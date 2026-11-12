@@ -11,15 +11,15 @@ extern int __stdcall ServerMainThread(void* param);
 extern int __cdecl Init(void* param);
 extern void __cdecl Exit(void);
 
-/* Command-dispatch handler fn type (212-entry table at 0x1002c3f8).
- * Used by cm_ProcessCommandQueue.c. */
+/* Handler type for two adjacent 106-entry tables at 0x1002c3f8 and 0x1002c5a0.
+ * Used by server.c; the tables have separate storage identities. */
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
-/* Round-trip catalog names.  DllMain and ServerMainThread are __stdcall,
- * so every cross-TU reference is decorated with @N (the CRT entry calls
- * _DllMain@12, Init takes &_ServerMainThread@4).  A FUNCTION
- * definition's catalog name cannot carry the @N suffix, so these LIBRARY
- * markers supply the decorated spelling round-trip resolves against. */
+/* DllMain and ServerMainThread are __stdcall, so cross-TU references
+ * carry the @N decoration: the CRT entry calls _DllMain@12 and Init
+ * takes &_ServerMainThread@4. Their managed FUNCTION rows record
+ * these decorated symbols; the comments below are name references.
+ * This header supplies no LIBRARY bindings for these functions. */
 
 // _DllMain@12
 

@@ -6112,11 +6112,6 @@ int __cdecl fcn_005c5e70(void)
 	return 0;
 }
 
-int __cdecl fcn_005c61c0(void)
-{
-	return 0;
-}
-
 int __cdecl fcn_005c6310(void)
 {
 	return 0;

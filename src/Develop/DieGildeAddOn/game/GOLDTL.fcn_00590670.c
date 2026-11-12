@@ -1,12 +1,12 @@
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_004125c0(int, int);
+#include "client_data.h"
+void __cdecl fcn_00471e30(int); void __cdecl fcn_004125c0(int, int);
 int __cdecl fcn_00591190(int);
 int __cdecl fcn_00590b80(int);
 int __cdecl fcn_005909d0(int);
 int __cdecl fcn_005913e0(int);
 int __cdecl fcn_00591490(int*);
 void __cdecl fcn_004707d0(int);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00590670 */
 void __cdecl fcn_00590670(void)
 {
@@ -36,23 +36,23 @@ void __cdecl fcn_00590670(void)
 		v3 = *(int*) 0x100f888;
 		v5 = *(int*) 0x6a99e8;
 	}
-	if (*(int*) 0x7746a4 != 0 && *(int*) 0x774a24 != *(int*) 0x7746a4
+	if (*(int*) &g_7746a4 != 0 && *(int*) 0x774a24 != *(int*) &g_7746a4
 		&& *(int*) 0x14ce8e8 != 0) {
 		v4 = 0;
-		if (*(int*) 0x7746ac == 0) {
-			v7 = *(int*) 0x7746a4;
+		if (*(int*) &g_7746ac == 0) {
+			v7 = *(int*) &g_7746a4;
 		}
 		else {
-			v4 = *(unsigned short*) 0x7746ac;
+			v4 = *(unsigned short*) &g_7746ac;
 			if (v4 == 0) {
-				v7 = *(int*) 0x7746a4;
+				v7 = *(int*) &g_7746a4;
 			}
 		}
-		*(int*) 0x774a24 = *(int*) 0x7746a4;
+		*(int*) 0x774a24 = *(int*) &g_7746a4;
 		*(int*) 0x6a99ec = -1;
 	}
 	if (v3 != -1 && v3 != *(int*) 0x6a99ec) {
-		p = *(unsigned short**) (*(int*) 0x1015ea0 + 0x2f0
+		p = *(unsigned short**) (*(int*) &g_1015ea0 + 0x2f0
 			+ *(int*) 0x67d370 * 0x2f4);
 		if (p != 0) {
 			if ((unsigned int) p >= 0x7f4ca0 && (unsigned int) p <= 0x85a09f) {
@@ -60,23 +60,23 @@ void __cdecl fcn_00590670(void)
 					p = 0;
 				}
 			}
-			else if ((unsigned int) p >= (unsigned int) *(int*) 0x90e094 && (unsigned int) p < (unsigned int) (*(int*) 0x90e094 + 0xa900)) {
+			else if ((unsigned int) p >= (unsigned int) *(int*) &lpGebaeudeINST && (unsigned int) p < (unsigned int) (*(int*) &lpGebaeudeINST + 0xa900)) {
 				v6 = *(unsigned char*) p;
 				if (v6 >= 0x58) {
 					v6 = 0;
 				}
 			}
-			else if ((unsigned int) p >= (unsigned int) *(int*) 0x868050 && (unsigned int) p < (unsigned int) (*(int*) 0x868050 + 0xca78)) {
-				v6 = ((int) p - *(int*) 0x868050) / 0x24d;
+			else if ((unsigned int) p >= (unsigned int) *(int*) &lpGebaeudePROT && (unsigned int) p < (unsigned int) (*(int*) &lpGebaeudePROT + 0xca78)) {
+				v6 = ((int) p - *(int*) &lpGebaeudePROT) / 0x24d;
 			}
-			else if ((unsigned int) p >= (unsigned int) *(int*) 0x868054 && (unsigned int) p < (unsigned int) (*(int*) 0x868054 + 0x14f218)) {
+			else if ((unsigned int) p >= (unsigned int) *(int*) &lpObjekteINST && (unsigned int) p < (unsigned int) (*(int*) &lpObjekteINST + 0x14f218)) {
 				v4 = *p;
 				if (v4 >= 0x2dc) {
 					v4 = 0;
 				}
 			}
-			else if ((unsigned int) p >= (unsigned int) *(int*) 0x99ec10 && (unsigned int) p < (unsigned int) (*(int*) 0x99ec10 + 0xb9dc)) {
-				v4 = ((int) p - *(int*) 0x99ec10) / 0x41;
+			else if ((unsigned int) p >= (unsigned int) *(int*) &lpObjektePROT && (unsigned int) p < (unsigned int) (*(int*) &lpObjektePROT + 0xb9dc)) {
+				v4 = ((int) p - *(int*) &lpObjektePROT) / 0x41;
 			}
 			else {
 				p = 0;
@@ -108,7 +108,7 @@ void __cdecl fcn_00590670(void)
 			v3 = *(int*) 0x100f888;
 		}
 		if (v4 != 0) {
-			b = *(unsigned char*) (*(int*) 0x99ec10 + v4 * 0x41);
+			b = *(unsigned char*) (*(int*) &lpObjektePROT + v4 * 0x41);
 			if (b != 0x20 && b != 0x17 && b != 0x25 && b != 0x27) {
 				v5 = fcn_00591190(v4);
 			}
@@ -138,7 +138,7 @@ void __cdecl fcn_00590670(void)
 			*(int*) 0x774a24 = 0;
 		}
 		else {
-			*(int*) 0x6a99f0 = *(int*) (v5 * 700 + 0x1038144);
+			*(int*) 0x6a99f0 = *(int*) (v5 * 700 + (unsigned long)&g_1038144);
 			*(int*) 0x6a99ec = v3;
 			if (*(int*) 0x14ce8e8 != 0) {
 				*(int*) 0x6772c4 = 0;

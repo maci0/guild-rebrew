@@ -12,7 +12,7 @@ int __cdecl fcn_004a48a0(int, int);
 int __cdecl fcn_004a4fb0(int*, int*, int*);
 int __cdecl fcn_0050d170(int);
 int __cdecl fcn_0050d320(int, int);
-int __cdecl fcn_0050bb50(int, int);
+float __cdecl fcn_0050bb50(int id, unsigned char a);
 int __cdecl _ftol(void);
 
 /* ADDRESS: GOLDTL 0x004a04b0 */

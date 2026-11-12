@@ -1,5 +1,5 @@
 
-// fcn_005a8a70 — if([0x6f26c0]) fcn_005a84e0(h); reset 0.
+/* fcn_005a8a70: if ([0x6f26c0]) fcn_005b1960([0x6f26c0]); [0x6f26c0]=0. */
 
 int __cdecl fcn_005b1960(int);
 

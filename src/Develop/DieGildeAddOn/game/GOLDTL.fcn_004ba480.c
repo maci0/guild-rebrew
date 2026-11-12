@@ -25,7 +25,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
-float __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 char* __cdecl fcn_005049a0(unsigned char*);
 void __cdecl fcn_004c5530(void*);
 

@@ -53,9 +53,9 @@ typedef struct {
 /* --- Office role template row (0x18 bytes, six dwords) ---
  *
  * The 24-byte copy payload fetched from the g_office_role_templates table
- * by aemter.c (whole-struct copy). cm_ExAllocRaum.c's copy_12_dwords is
- * byte-identical for the 0x18 span it touches (office row at building+0x65);
- * this copy names the only two fields any surviving code reads. */
+ * by aemter.c (whole-struct copy). The server command.c:1618 assignment
+ * uses copy_12_dwords, a separate 0x30-byte copy at building+0x65;
+ * this 0x18-byte office-role type names the two fields read here. */
 // SIZE 0x18
 typedef struct {
 	int f0;    /* +0x00  compared against arg1_value & 0xff */
@@ -72,10 +72,10 @@ typedef struct {
  * which is the block gm_Open allocates and zero-fills, and the bound
  * gm_SearchStruct and gm_FindNextFilteredEntity walk against.
  *
- * Six translation units index it with the same stride
- * (spiel.c, spiel5.c, spiel6.c, gm_ChangePlayerIdentityImpl.c) and read its
- * filter words (spiel_dumpD.c), so this is a shared layout rather than a local
- * one -- the condition the round brief sets for lifting a type into a header.
+ * Formerly separate server source contexts now reside in game/spiel.c:
+ * gm_FindNextFilteredEntity, gm_SearchStruct, gm_AllocBuildingDefaults
+ * and gm_ChangePlayerIdentityImpl share the stride and filter words.
+ * These users share this layout.
  *
  * Verified against the reference, not inferred:
  *   0x10017210 gm_SearchStruct:  lea ecx,[eax + 0xa900]   ; total span
@@ -110,7 +110,7 @@ typedef struct EntityQueryRecord {
 
 /* --- Building default objects (0x15 bytes, 1-byte packed) ---
  *
- * One record per building type: gm_AllocBuildingDefaults (spiel5.c) matches
+ * One record per building type: server gm_AllocBuildingDefaults (spiel.c:2675) matches
  * the type byte and allocates each non-zero object id.  Defined in
  * spiel_data.c at 0x10030860. */
 // SIZE 0x15

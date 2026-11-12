@@ -20,7 +20,7 @@ extern char g_7f4ca0[];
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 int __cdecl fcn_004e9310(int k, int max, Ent** out);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_004a5340(Ent* e, int a, int* b, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0049fc80 */

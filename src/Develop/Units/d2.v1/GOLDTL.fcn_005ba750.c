@@ -18,7 +18,7 @@ extern double g_664ef8;
 extern int g_774698;
 
 int __cdecl fcn_00471f80(int);
-float __cdecl fcn_0050bb50(int, char);
+float __cdecl fcn_0050bb50(int id, unsigned char a);
 
 void __cdecl fcn_005af160(unsigned char* p, int unused, int mode)
 {

@@ -76,12 +76,12 @@ float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
 int __cdecl fcn_00526010(int, int, int);
 int __cdecl fcn_00471e30(int);
-int __cdecl fcn_005c61c0(void);
+void __cdecl fcn_005c61c0(void);
 int __cdecl fcn_005b9cb0(int, int);
 int __cdecl fcn_005b9df0(int, int, int, int);
 void __cdecl fcn_005b9fb0(int);
 int __cdecl fcn_005b9980(int);
-int __cdecl fcn_005ba750(int, float, int);
+void __cdecl fcn_005af160(int, float, int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl fcn_0057eba0(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
@@ -1768,7 +1768,7 @@ l_5bd632:
 		fcn_00472170(*(int*) (0x10161bc + *(int*) 0x772514 * 0x3cc), 1);
 	}
 	if (f.v3c != 0 && f.v38 != 0) {
-		fcn_005ba750(f.v14, f.v50, a2);
+		fcn_005af160(f.v14, f.v50, a2);
 	} else {
 		*(int*) 0x774698 = 0;
 	}

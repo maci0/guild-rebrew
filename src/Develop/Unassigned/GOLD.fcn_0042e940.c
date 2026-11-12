@@ -1,5 +1,5 @@
 
-// fcn_0042e940 — init callback globals + call [0x5eb274].
+/* fcn_0042e940: if (e=[0x6333c8]) and [0x5eb288](e)==0, clear [0x6333c8]; call [0x5eb274]([0xfe7a80]+5). */
 
 int (__stdcall* f1_5eb288)(int);
 int (__stdcall* f2_5eb274)(int);

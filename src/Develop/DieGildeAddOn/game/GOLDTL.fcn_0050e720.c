@@ -1,6 +1,6 @@
 extern float g_662910;
 
-double __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 double __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x0050e720 */

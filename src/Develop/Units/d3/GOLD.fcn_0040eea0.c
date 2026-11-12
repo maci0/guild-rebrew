@@ -1,6 +1,6 @@
 #include "Develop/Units/d3/d3_camera.h"
 
-// fcn_0040eea0 — fcn_00433b10([0xfc2dec]); zero [0x6310e8] [0x6310e4].
+/* fcn_0040eea0: fcn_00433780(g_6b8014); zero [0x6310e8] and [0x6310e4]. */
 
 void __cdecl fcn_00433780(void*);
 

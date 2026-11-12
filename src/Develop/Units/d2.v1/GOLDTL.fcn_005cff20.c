@@ -79,7 +79,7 @@ void __cdecl fcn_0046f2c0(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl d2_CreateRadioGroup(int);
 void __cdecl fcn_00469470(int, int);
-float __cdecl fcn_0050f980(int, int, int);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 int __cdecl fcn_0046fac0(int, int, char*, int);
 void __cdecl fcn_00472900(int, int);

@@ -6,7 +6,7 @@ extern float g_6628a8;
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
-double __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 float __cdecl fcn_004ec340(unsigned short* p, int kind)
 {

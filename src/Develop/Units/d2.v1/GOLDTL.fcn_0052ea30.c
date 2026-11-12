@@ -53,7 +53,7 @@ char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(int a, int b);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
-
+#include "client_data.h"
 /* ADDRESS: GOLDTL 0x0052ea30 */
 void __cdecl fcn_0052ea30(void)
 {
@@ -103,7 +103,7 @@ header_done:
 			return;
 		}
 		ratio = (float) fcn_00500d20(e + 0x44, e + 0xb8);
-		ratio = (float) fcn_00500d20(e + 0x44, (char*) 0x7f4c00) / ratio;
+		ratio = (float) fcn_00500d20(e + 0x44, (char*) &g_7f4c00) / ratio;
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
@@ -135,7 +135,7 @@ header_done:
 			return;
 		}
 		ratio = (float) fcn_00500d20(e + 0x44, e + 0x52);
-		ratio = (float) fcn_00500d20(e + 0x44, (char*) 0x7f4c00) / ratio;
+		ratio = (float) fcn_00500d20(e + 0x44, (char*) &g_7f4c00) / ratio;
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
@@ -155,7 +155,7 @@ header_done:
 		return;
 	}
 	ratio = (float) fcn_00500d20(e + 0x44, e + 0x52);
-	ratio = (float) fcn_00500d20(e + 0x44, (char*) 0x7f4c00) / ratio;
+	ratio = (float) fcn_00500d20(e + 0x44, (char*) &g_7f4c00) / ratio;
 	*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 	if (g_6a25c4[0] == -1) {
 		d2_SetForm(g_6a25b8, 0);
@@ -218,13 +218,13 @@ no_header:
 	case 0x8f:
 		n = fcn_00500d20(p + 0x44, p + 0xb8);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) 0x7f4c00) / (float) n;
+			ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
 		}
 		break;
 	case 0x16:
 		n = fcn_00500d20(p + 0x44, p + 0xb8);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) 0x7f4c00) / (float) n;
+			ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
 		}
 		break;
 	case 0x40:
@@ -233,7 +233,7 @@ no_header:
 		} else if (*(int*) (p + 0x70) == 2) {
 			n = fcn_00500d20(p + 0x44, p + 0x52);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) 0x7f4c00) / (float) n;
+				ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
 			}
 		}
 		break;
@@ -242,7 +242,7 @@ no_header:
 		fcn_00500bb0(&pos, 8, 0, 0);
 		n = fcn_00500d20(p + 0xc4, &pos);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0xc4, (char*) 0x7f4c00) / (float) n;
+			ratio = (float) fcn_00500d20(p + 0xc4, (char*) &g_7f4c00) / (float) n;
 		}
 		break;
 	case 0x43:
@@ -250,7 +250,7 @@ no_header:
 		fcn_00500bb0(&pos, 0x18, 0, 0);
 		n = fcn_00500d20(p + 0x44, &pos);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) 0x7f4c00) / (float) n;
+			ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
 		}
 		break;
 	case 0x62:
@@ -261,7 +261,7 @@ no_header:
 			fcn_00500bb0(&pos, 0x60, 0, 0);
 			n = fcn_00500d20(p + 0x44, &pos);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) 0x7f4c00) / (float) n;
+				ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
 			}
 		}
 		break;
@@ -273,7 +273,7 @@ no_header:
 			fcn_00500bb0(&pos, 0x18, 0, 0);
 			n = fcn_00500d20(p + 0x44, &pos);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) 0x7f4c00) / (float) n;
+				ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
 			}
 		}
 		break;
@@ -283,14 +283,14 @@ no_header:
 		} else if (*(int*) (p + 0x70) == 1) {
 			n = fcn_00500d20(p + 0x44, p + 0xcc);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) 0x7f4c00) / (float) n;
+				ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
 			}
 		}
 		break;
 	case 0x6c:
 		n = fcn_00500d20(p + 0x44, p + 0xb4);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) 0x7f4c00) / (float) n;
+			ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
 		}
 		break;
 	}

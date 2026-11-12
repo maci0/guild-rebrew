@@ -50,7 +50,7 @@ int __cdecl fcn_0046f740(int x, int y, int a3, int win);
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00472640(int i, int flag);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x005caaa0 */
 int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* s)

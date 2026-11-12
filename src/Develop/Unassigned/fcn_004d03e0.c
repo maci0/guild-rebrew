@@ -2,7 +2,7 @@
  * g_774688 mode switch are recovered; the rest is listed in the row blocker. */
 
 int __cdecl d2_GetResourceData(int size);
-int __cdecl CompareVector3WithinTolerance(int a, int b, float c);
+int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 
 /* ADDRESS: GOLDTL 0x004d03e0 */
 int __cdecl fcn_004d03e0(void)

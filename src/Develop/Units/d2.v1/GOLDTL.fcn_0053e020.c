@@ -25,7 +25,7 @@ int __cdecl fcn_0053d490();
 int __cdecl fcn_0053e8a0();
 
 
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x0053e020 */
 int __cdecl fcn_0053e020(void)
 {
@@ -54,7 +54,7 @@ int __cdecl fcn_0053e020(void)
 	v5 = fcn_00472250(v2, 0, v3 + 1);
 	v6 = fcn_00472250(v2, 0, v3 + 2);
 	v3 = fcn_00472250(v2, 0, v3 + 3);
-	if (*(unsigned char*) 0x6a375c > 1) {
+	if (*(unsigned char*) &g_6a375c > 1) {
 		v13 = fcn_00472250(v2, 0, io_AppendText(0x681164, 2, 0x1acb));
 	}
 	if (*(int*) 0x776700 <= -1) {
@@ -73,24 +73,24 @@ int __cdecl fcn_0053e020(void)
 			break;
 		}
 		d2_UpdateRadioGroup(v7);
-		r = *(int*) 0x100f1dc;
-		if (*(int*) 0x14ce8e0 || *(unsigned char*) 0x14cf950 == 1 || r == 1) {
+		r = *(int*) &g_100f1dc;
+		if (*(int*) 0x14ce8e0 || *(unsigned char*) &g_14cf950 == 1 || r == 1) {
 			*(int*) 0x774654 = 1;
 		}
 		if (r == 2 || v1) {
 			v1 = 0;
 			if (*(int*) 0x67d370 == v4) {
-				*(unsigned char*) 0x6a3440 = 0xff;
+				*(unsigned char*) &g_6a3440 = 0xff;
 			} else if (*(int*) 0x67d370 == v5) {
-				*(unsigned char*) 0x6a3440 = 1;
+				*(unsigned char*) &g_6a3440 = 1;
 			} else if (*(int*) 0x67d370 == v6) {
-				*(unsigned char*) 0x6a3440 = 2;
+				*(unsigned char*) &g_6a3440 = 2;
 			} else if (*(int*) 0x67d370 == v3) {
-				*(unsigned char*) 0x6a3440 = 3;
+				*(unsigned char*) &g_6a3440 = 3;
 			} else if (*(int*) 0x67d370 == v13) {
-				*(unsigned char*) 0x6a3440 = 5;
+				*(unsigned char*) &g_6a3440 = 5;
 			}
-			r = *(signed char*) 0x6a3440;
+			r = *(signed char*) &g_6a3440;
 			*(int*) 0x776700 = r;
 			if (r != -1) {
 				v8 = r + 1;
@@ -99,7 +99,7 @@ int __cdecl fcn_0053e020(void)
 			}
 			d2_SelectRadioGroup(v7, v8);
 			fcn_00471af0(v2, 0);
-			*(int*) 0x7e46ac = 0x12d6;
+			*(int*) &g_7e46ac = 0x12d6;
 			*(int*) 0x68bfb8 = 0x12d6;
 			fcn_004e44f0(fcn_004e4470(0x6a4040));
 			v12 = fcn_0053d490(0xc6, 0);
@@ -128,14 +128,14 @@ int __cdecl fcn_0053e020(void)
 					v1 = 1;
 				}
 			} else {
-				*(int*) 0x7e46ac = 0x12d6;
+				*(int*) &g_7e46ac = 0x12d6;
 				*(int*) 0x68bfb8 = 0x12d6;
 				fcn_004e44f0(fcn_004e4470(0x6a4024));
 			}
 			fcn_00471af0(v2, 1);
 			if (v12 != 0) {
-				if (*(unsigned char*) 0x6a375c >= 1) {
-					*(int*) 0x7747b0 |= 8;
+				if (*(unsigned char*) &g_6a375c >= 1) {
+					*(int*) &g_7747b0 |= 8;
 				}
 				*(int*) 0x774654 = 1;
 				v12 = 1;
@@ -151,7 +151,7 @@ int __cdecl fcn_0053e020(void)
 	fcn_00471e30(v2);
 	if (v12 != 0) {
 		v3 = fcn_004730c0(0, 0, *(int*) 0x1040494, *(int*) 0x1040490, 0x67d67c, 100, 1);
-		*(int*) 0x7e46ac = 0x12d6;
+		*(int*) &g_7e46ac = 0x12d6;
 		*(int*) 0x68bfb8 = 0x12d6;
 		fcn_004e44f0(fcn_004e4470(0x6a4060));
 		if (v3 != 0) {
@@ -159,7 +159,7 @@ int __cdecl fcn_0053e020(void)
 			return v12;
 		}
 	} else {
-		*(int*) 0x7e46ac = 0x12d6;
+		*(int*) &g_7e46ac = 0x12d6;
 		*(int*) 0x68bfb8 = 0x12d6;
 		fcn_004e44f0(fcn_004e4470(0x6a4024));
 	}

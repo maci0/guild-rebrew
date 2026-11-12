@@ -21,7 +21,7 @@ typedef struct Unit {
 
 unsigned int __cdecl fcn_004938c0(Plan* p);
 Unit* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x00493640 */

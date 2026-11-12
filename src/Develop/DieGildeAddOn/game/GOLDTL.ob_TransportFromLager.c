@@ -21,7 +21,7 @@ void __cdecl fcn_00535960(void);
 int __cdecl fcn_00471f80(int);
 int __cdecl gm_CheckInventoryCapacity(char*, int, int);
 int __cdecl fcn_0050e170(int, int, int);
-float __cdecl fcn_0050bb50(int, char);
+float __cdecl fcn_0050bb50(int id, unsigned char a);
 int __cdecl fcn_00526010(void*, int, int);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl fcn_0057eba0(int, int, int, int);
