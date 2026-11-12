@@ -1,4 +1,7 @@
-#include "client_types.h"
+#include "client_actions.h"
+#include "client_data.h"
+#include "Develop/Units/d2.v1/d2_gui.h"
+extern char g_7f4ca0[];
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_772514;
@@ -12,15 +15,12 @@ extern int g_14b5e0c;
 extern int g_14b5e10;
 extern int g_14b5e14;
 extern int g_14b5e18;
-extern int g_1015ea0;
-extern int g_1015f4c;
-extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl fcn_005463a0(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_004c5620(char*, int);
+int __cdecl fcn_004c5620(char, unsigned char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
@@ -53,7 +53,7 @@ int __cdecl fcn_005bf580(char* rec)
 	int ret;
 	int row;
 	unsigned char pkt[0xf8];
-	char buf[0x3fc];
+	char buf[0x400];
 	unsigned char* tbl;
 	int slot;
 	int row2;
@@ -65,15 +65,15 @@ int __cdecl fcn_005bf580(char* rec)
 	float f;
 	float f2;
 
+	ret = 0; tries = 0;
 	q = fcn_005463a0(2, 2, g_774970, 0, 0x18);
-	tries = 0;
 	if (q != 0) {
 		for (;;) {
 			if (*(int*) (q + 0xc4) == *(int*) (rec + 4)) {
 				io_FormatTextBuffer(buf, 0x42c1, *(unsigned short*) rec);
 				if (fcn_00526120(buf, 0x101) != 0) {
 					*(pos14_7f4c00*) (q + 0x52) = g_7f4c00;
-					*(int*) (q + 0x84) = fcn_004c5620(q, -1);
+					*(int*) (q + 0x84) = fcn_004c5620(-1, (unsigned char*) q);
 				}
 				return 0;
 			}
@@ -95,17 +95,16 @@ int __cdecl fcn_005bf580(char* rec)
 	fcn_005340f0(g_772514);
 	d2_SetForm((int) h, 2);
 	row = fcn_0046fac0(0, 3, g_14b5e18, g_772514);
-	slot = g_1015ea0 + row * 0x2f4;
+	slot = (int) g_1015ea0 + row * 0x2f4;
 	*(int*) (slot + 0x6c) = 1;
-	*(int*) (slot + 0x18) = *(int*) (g_1015f4c + g_772514 * 0x3cc);
+	*(int*) (g_1015ea0 + row * 0x2f4 + 0x18) = g_1015f40[g_772514].xc;
 	fcn_00472900(row, 0x54);
 	row2 = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 0x82, g_772514);
 	fcn_00472380(row2, 0, 2, 0, 1);
 	fcn_00468bb0(row2, 3, g_14b5e0c, g_14b5e10, g_14b5e14);
 	d2_SetForm((int) h, 3);
 	fcn_00533a60(g_772514, 0, sel, 2, g_14b5e04, g_14b5e08);
-	ret = 0;
-	tbl = (unsigned char*) (0x7f4ca0 + g_774970 * 0x21c);
+	tbl = (unsigned char*) (g_7f4ca0 + g_774970 * 0x21c);
 	while (fcn_005373e0((void*) fcn_005bf580, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
@@ -113,18 +112,20 @@ int __cdecl fcn_005bf580(char* rec)
 			g_774654 = 1;
 		} else {
 			v = fcn_00471f80(row2);
-			f = (float) v * *(float*) 0x664188 + *(float*) 0x6628a0;
+			f = (float) v * 0.33f + 1.0f;
+			tbl = (unsigned char*) (g_7f4ca0 + g_774970 * 0x21c);
 			w1 = gm_WalkEntityChain(*(unsigned short*) tbl);
-			f2 = (float) w1 * *(float*) 0x664138;
+			f2 = (float) w1 * 0.005f;
 			w2 = gm_WalkEntityChain(*(unsigned short*) rec);
-			n = (int) ((float) w2 * *(float*) 0x664138 + f2);
+			n = (int) ((float) w2 * 0.005f + f2);
 			n = (int) ((float) n * f);
 			d2_SetForm((int) h, 1);
 			io_AppendText((int) 0x6811b0);
 			io_AppendText(0x42b8, n, *(unsigned short*) rec);
 			if (g_100f1dc != -1) {
 				if (g_67d370 == sel[0]
-					&& fcn_00526010(tbl, n, *(unsigned char*) 0x773d75) != 0) {
+					&& fcn_00526010(g_7f4ca0 + g_774970 * 0x21c, n, g_773d75) != 0) {
+					tbl = (unsigned char*) (g_7f4ca0 + g_774970 * 0x21c);
 					pkt[4] = 0x18;
 					*(int*) (pkt + 8) = *(int*) (tbl + 4);
 					*(int*) (pkt + 0xc) = -1;
@@ -133,8 +134,8 @@ int __cdecl fcn_005bf580(char* rec)
 					ea = *(int*) (tbl + 0x16c);
 					*(int*) (pkt + 0x58) = ea != 0 ? *(int*) (ea + 1) : -1;
 					*(int*) (pkt + 0x94) = n;
-					*(int*) (pkt + 0x9c) = fcn_00471f80(row2);
 					fcn_004c4eb0("spionage");
+					*(int*) (pkt + 0x9c) = fcn_00471f80(row2);
 					fcn_004c5530(pkt);
 					fcn_004c4ef0("spionage");
 					io_FormatTextBuffer(buf, 0x42bf, *(unsigned short*) rec);

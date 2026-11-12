@@ -117,7 +117,7 @@ void __cdecl fcn_005a1430(void)
   d2_SetForm(v6,1);
   d2_SetOverlayAnimation(0,0);
   io_AppendText(0x1874);
-  if (((*(float *)(v7 + 0x5c) > fcn_0042e450()) || ((*(unsigned short *)&g_7f4c04) <= 0xb)) || (v11 < 10000)) {
+  if (((!(fcn_0042e450() < *(float *)(v7 + 0x5c))) || ((*(unsigned short *)&g_7f4c04) <= 0xb)) || (v11 < 10000)) {
     d2_SetForm(v6,2);
     io_AppendText(0x1875);
     if (0xc <= (*(unsigned short *)&g_7f4c04)) {
@@ -354,8 +354,8 @@ label_5a1b81:
                 }
                 if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
                   fcn_005a1130(&v14,v6);
-                  if (((v13[1] == 5) || (v13[2] = v21[0], v13[1] == 6)) && (v3 == v13[2]))
-                    fcn_004c51a0(*(unsigned int *)(v5 * 0x21c + (unsigned long)&g_7f4ca4),0xffffffff,0,v28);
+                  if (((v13[1] == 5 && v3 == v13[2]) || (v13[1] == 6 && v3 == v21[0])))
+                    fcn_004c51a0(*(unsigned int *)(v5 * 0x21c + (unsigned long)&g_7f4ca4),0xffffffff,0,v34);
                   do {
                     if ((*(int *)0x14ce8e0))
                       (*(int *)0x774654) = 1;

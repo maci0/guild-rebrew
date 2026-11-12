@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include <stdlib.h>
 typedef struct Combo {
 	char pad0[4];
 	int f4;			/* +0x04 */
@@ -48,7 +48,7 @@ int __cdecl fcn_0046b520(char* s, int font);
 void __cdecl fcn_00469c40(int x, int y, int slot);
 int __cdecl fcn_004699c0(int x, int y, int a3);
 char __cdecl fcn_00411610(int shift, int ctrl, int alt, char key);
-int __cdecl fcn_00657a73(char* s, int len, int base);
+
 
 /* ADDRESS: GOLDTL 0x00474300 */
 void __cdecl fcn_00474300(void)
@@ -182,7 +182,7 @@ tail15:
 		w = (*(Combo**) &g_7725d0);
 		if (w->flags & 2) {
 			if (c >= 2 && c <= 0xb && g_14cf736 == 0 && g_14cf72a == 0) {
-				fcn_00657a73(w->text, w->text_len, 10);
+				_itoa(w->text_len, w->text, 10);
 				c = g_14cf950;
 				w = (*(Combo**) &g_7725d0);
 			} else {
@@ -223,7 +223,7 @@ common_tail:
 		return;
 	}
 	if (w->flags & 2) {
-		w->text_len = strlen(w->text);
+		w->text_len = atoi(w->text);
 		w = (*(Combo**) &g_7725d0);
 	}
 	g_100f898 = fcn_0046b520(w->text, w->text_px) + w->f4;

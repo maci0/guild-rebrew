@@ -13,11 +13,12 @@ int __cdecl fcn_004fb2c0(void)
 
 	v = fcn_004fc460((char*) buf);
 	memcpy((void*) 0x99f5e0, buf, 40);
-	d = ((double) v + *(double*) 0x6629c8) * *(float*) 0x773d54;
 	if (*(float*) 0x773d4c == *(float*) 0x6628a8) {
+		d = ((double) v + *(double*) 0x6629c8) * *(float*) 0x773d54;
 		*(float*) 0x773d50 = (float) d;
 		*(float*) 0x773d4c = (float) (d * *(double*) 0x6640f8);
 	} else {
+		d = ((double) v + *(double*) 0x6629c8) * *(float*) 0x773d54;
 		*(float*) 0x773d50 = (float) ((d - *(float*) 0x773d50) * *(float*) 0x6628cc + *(float*) 0x773d50);
 	}
 	*(float*) 0x99ec14 = (float) ((*(float*) 0x773d50 - *(float*) 0x773d4c) * *(double*) 0x6653d0);

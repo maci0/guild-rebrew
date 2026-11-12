@@ -7,7 +7,8 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 #define g_entity_table_end (*(unsigned int*) 0x773da8)
-#define g_entity_type_table ((char*) *(unsigned int*) 0x868050)
+#include "Develop/DieGildeAddOn/game/game_data.h"
+typedef struct { unsigned char kind; char rest[0x24c]; } GRAVE_BUILDING_ROW;
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl fcn_004f1ad0(void* entity, int cmd_arg);
 
@@ -24,7 +25,7 @@ int __cdecl gv_ValidateEntityAction(void* cmd)
 		if (grave_id != 0xffff) {
 			if ((char*) 0x7f4ca0 + grave_id * 0x21c != (char*) g_entity_table_end) {
 				field_id = *(unsigned char*) entity;
-				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
+				if (((GRAVE_BUILDING_ROW*)lpGebaeudePROT)[field_id].kind != 0x1d) {
 					return -2;
 				}
 				if (*(void**) ((char*) entity + 0x65) == 0) {

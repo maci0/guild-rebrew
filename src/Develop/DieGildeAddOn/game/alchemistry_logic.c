@@ -38,12 +38,12 @@ extern double g_const_900; /* 0x10025f98 */
 float g_alchemy_one = 1.0f;
 
 float g_alchemy_half = 0.5f;
-
-
-
-
-
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+#define AHM_BUILDING_PROTOTYPES g_entity_type_table
+#else
+extern unsigned char* lpGebaeudePROT;
+#define AHM_BUILDING_PROTOTYPES ((char*)lpGebaeudePROT)
+#endif
 extern unsigned char g_alchemy_random_table[];
 extern int g_alchemy_entity_table[];
 
@@ -131,11 +131,11 @@ int __cdecl ahm_CheckFlag(void* a)
 		rec = *(char**) ((char*) a + 0x16c);
 		if (rec != 0) {
 #if defined(REBREW_SERVER)
-			if (*(unsigned char*) (g_entity_type_table +
+			if (*(unsigned char*) (AHM_BUILDING_PROTOTYPES +
 			    *(unsigned char*) rec + *(unsigned char*) rec * 0x24c) == 0x1e)
 				return *(int*) (rec + 0x65) != 0;
 #else
-			return (*(unsigned char*) (g_entity_type_table +
+			return (*(unsigned char*) (AHM_BUILDING_PROTOTYPES +
 			    *(unsigned char*) rec + *(unsigned char*) rec * 0x24c) == 0x1e) ?
 			    (*(int*) (rec + 0x65) != 0) : 0;
 #endif
@@ -339,7 +339,7 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	}
 
 	building_type = (unsigned char) *(char*) dynamic;
-	if (*((char*) (g_entity_type_table + building_type + building_type * 0x24c)) != 0x1e) {
+	if (*((char*) (AHM_BUILDING_PROTOTYPES + building_type + building_type * 0x24c)) != 0x1e) {
 #if defined(REBREW_SERVER)
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", 0x451, "ahm_ExAllocAlchemist: wrong type of target geb...", 1);
 		goto ret_false;

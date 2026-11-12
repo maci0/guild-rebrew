@@ -35,18 +35,18 @@ int __cdecl fcn_00441050(char* e)
 	float dx;
 	float dy;
 	float dz;
-	float sx;
-	float sy;
-	float sz;
+
+
+
 	float* f;
 	float* p;
 	char* w;
 	void** v10;
 	Fn_441050 fn;
 	int count;
-	float len;
-	/* x87 spill homes: [0] and [2] are 8 bytes apart, [1] and [3] pad the frame. */
-	float scratch[4];
+
+
+	float center[4];
 	unsigned int i;
 	unsigned int j;
 	int k;
@@ -88,26 +88,26 @@ int __cdecl fcn_00441050(char* e)
 			} else {
 				*(char*) (w + 0xe) = 1;
 				f = p + 0x16;
-				scratch[0] = p[0];
-				sy = p[1];
-				scratch[2] = p[2];
+				center[0] = p[0];
+				center[1] = p[1];
+				center[2] = p[2];
 				k = 7;
 				do {
-					scratch[0] = scratch[0] + f[-2];
-					sy = sy + f[-1];
-					scratch[2] = scratch[2] + *f;
+					center[0] = center[0] + f[-2];
+					center[1] = center[1] + f[-1];
+					center[2] = center[2] + *f;
 					f = f + 0x14;
 					k -= 1;
 				} while (k != 0);
-				scratch[0] = scratch[0] * 0.125f;
+				center[0] = center[0] * 0.125f;
 				count += 1;
-				sy = sy * 0.125f;
-				scratch[2] = scratch[2] * 0.125f;
-				*(float*) (w - 0x20) = scratch[0];
-				*(float*) (w - 0x1c) = sy;
-				*(float*) (w - 0x18) = scratch[2];
-				len = (float) sqrt(scratch[2] * scratch[2] + sy * sy + scratch[0] * scratch[0]);
-				*(float*) (w - 4) = len;
+				center[1] = center[1] * 0.125f;
+				center[2] = center[2] * 0.125f;
+				*(float*) (w - 0x20) = center[0];
+				*(float*) (w - 0x1c) = center[1];
+				*(float*) (w - 0x18) = center[2];
+				center[3] = (float) sqrt(center[2] * center[2] + center[1] * center[1] + center[0] * center[0]);
+				*(float*) (w - 4) = center[3];
 			}
 			v10 = (void**) (w - 0x1cc);
 			k = 8;

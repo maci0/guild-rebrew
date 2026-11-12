@@ -1,10 +1,12 @@
+extern int g_7f4c08;
+extern short g_7f4c0c;
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00500bb0(char* sel, int a, int b, int c);
 int __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
 float __cdecl fcn_00507e70(char* a, char* b, int c);
 float __cdecl fcn_0042e450(void);
 int __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
-int __cdecl fcn_004c5620(char* e, int a);
+int __cdecl fcn_004c5620(int a, char* e);
 int __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 int __cdecl fcn_00545d40(int a, int b, char* s, int c, int d, int e);
 int __cdecl fcn_004e7b70(char* e, void* a, void* b);
@@ -32,8 +34,8 @@ int __cdecl fcn_0054f910(char* ent)
 	*(int*) (ent + 0x84) = -1;
 	*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
 	*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
-	*(int*) (ent + 0x5a) = *(int*) 0x7f4c08;
-	*(short*) (ent + 0x5e) = *(short*) 0x7f4c0c;
+	*(int*) (ent + 0x5a) = g_7f4c08;
+	*(short*) (ent + 0x5e) = g_7f4c0c;
 	fcn_00500bb0(ent + 0x52, 0x18, 0, 0);
 	flags = *(unsigned char*) (ent + 0x78);
 	*(short*) (ent + 0x56) = 6;
@@ -48,10 +50,10 @@ int __cdecl fcn_0054f910(char* ent)
 		    || (*(int*) (e2 + 0x1c8) & 0x400) != 0) {
 			*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
 			*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
-			*(int*) (ent + 0x5a) = *(int*) 0x7f4c08;
-			*(short*) (ent + 0x5e) = *(short*) 0x7f4c0c;
-			fcn_00500bb0(ent + 0x52, 2, 0, 0);
-			*(int*) (ent + 0x84) = fcn_004c5620(ent, -1);
+			*(int*) (ent + 0x5a) = g_7f4c08;
+			*(short*) (ent + 0x5e) = g_7f4c0c;
+			fcn_00500bb0(ent + 0x52, 0, 2, 0);
+			*(int*) (ent + 0x84) = fcn_004c5620(-1, ent);
 			return 0;
 		}
 	}
@@ -75,8 +77,8 @@ int __cdecl fcn_0054f910(char* ent)
 		fcn_004c5420(*(int*) (e2 + 4), 0x1c8, 4, 0x400, 0);
 		*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
 		*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
-		*(int*) (ent + 0x5a) = *(int*) 0x7f4c08;
-		*(short*) (ent + 0x5e) = *(short*) 0x7f4c0c;
+		*(int*) (ent + 0x5a) = g_7f4c08;
+		*(short*) (ent + 0x5e) = g_7f4c0c;
 		fcn_00500bb0(ent + 0x52, 0x18, 0, 0);
 		*(short*) (ent + 0x56) = 6;
 		*(int*) (ent + 0x58) = 0x1e;
@@ -84,20 +86,19 @@ int __cdecl fcn_0054f910(char* ent)
 		    || *(unsigned char*) (e1 + 2) == 7) {
 			io_FormatTextBuffer(text, 0x1d83,
 			    *(unsigned short*) (e2), ent + 0x52,
-			    *(unsigned short*) (e2), *(int*) (e1 + 4));
+			    *(unsigned short*) (e2));
 			fcn_00545d40(*(int*) (e1 + 4), *(int*) (e1 + 4),
 			    text, 0, 0x5fa, (int) (char*) 0x6a5b08);
 		}
-		*(int*) (ent + 0x84) = fcn_004c5620(ent, 2);
+		*(int*) (ent + 0x84) = fcn_004c5620(2, ent);
 		return 0;
 	}
 	v = 0;
 	if (*(unsigned char*) (e1 + 2) == 6
 	    || *(unsigned char*) (e1 + 2) == 7) {
 		io_FormatTextBuffer(text, 0x1d81,
-		    (*(unsigned char*) (e2 + 9) != 0) + 0x1d68,
 		    *(unsigned short*) (e2), *(unsigned short*) (e2),
-		    *(int*) (e1 + 4));
+		    (*(unsigned char*) (e2 + 9) != 0) + 0x1d68);
 		fcn_00545d40(*(int*) (e1 + 4), *(int*) (e1 + 4),
 		    text, 0, 0x5fa, 0);
 	}
@@ -116,30 +117,30 @@ int __cdecl fcn_0054f910(char* ent)
 	fcn_004c54c0(*(int*) (e2 + 4), *(int*) (e1 + 4), -0x14, 1);
 	*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
 	*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
-	*(int*) (ent + 0x5a) = *(int*) 0x7f4c08;
-	*(short*) (ent + 0x5e) = *(short*) 0x7f4c0c;
+	*(int*) (ent + 0x5a) = g_7f4c08;
+	*(short*) (ent + 0x5e) = g_7f4c0c;
 	fcn_00500bb0(ent + 0x52, 0, 2, 0);
-	*(int*) (ent + 0x84) = fcn_004c5620(ent, -1);
+	*(int*) (ent + 0x84) = fcn_004c5620(-1, ent);
 	return 0;
 big:
 	for (w = 0; w < 0x3e; w++) {
 		blk[w] = 0;
 	}
-	*(int*) (&blk[3]) = *(int*) (e2 + 4);
-	*(int*) (&blk[4]) = *(int*) (e2 + 4);
-	*((unsigned char*) &blk[6]) = 0x46;
-	*((unsigned char*) &blk[0x12]) = 9;
-	*(int*) (&blk[0x1b]) = *(int*) (ent + 4);
-	fcn_00500de0((char*) &blk[0x0c], *(unsigned short*) (e2), 6, 0, 0);
-	fcn_004c5530(&blk[5]);
+	blk[2] = *(int*) (e2 + 4);
+	blk[3] = blk[2];
+	*((unsigned char*) &blk[1]) = 0x46;
+	*((unsigned char*) blk + 0x36) = 9;
+	blk[0x16] = *(int*) (ent + 4);
+	fcn_00500de0((char*) &blk[10], *(unsigned short*) (e2), 6, 0, 0);
+	fcn_004c5530(blk);
 	*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
 	*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
-	*(int*) (ent + 0x5a) = *(int*) 0x7f4c08;
-	*(short*) (ent + 0x5e) = *(short*) 0x7f4c0c;
+	*(int*) (ent + 0x5a) = g_7f4c08;
+	*(short*) (ent + 0x5e) = g_7f4c0c;
 	fcn_00500bb0(ent + 0x52, 0x18, 0, 0);
 	*(short*) (ent + 0x56) = 6;
 	*(int*) (ent + 0x58) = 0x1e;
-	*(int*) (ent + 0x84) = fcn_004c5620(ent, 1);
+	*(int*) (ent + 0x84) = fcn_004c5620(1, ent);
 	fcn_004c5420(*(int*) (e1 + 4), 0x1c8, 4, 0x400, 0);
 	fcn_004c5420(*(int*) (e2 + 4), 0x1c8, 4, 0x400, 0);
 	return 0;

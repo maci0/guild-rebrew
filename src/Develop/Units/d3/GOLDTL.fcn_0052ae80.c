@@ -106,7 +106,7 @@ void __cdecl fcn_0052ae80(void)
 		}
 	} else {
 		idx = g_77468c;
-		if ((short) g_14ce8c2 < idx) {
+		if ((short) g_14ce8c2 < miny) {
 			if (idx <= -1) {
 				return;
 			}
@@ -120,7 +120,14 @@ void __cdecl fcn_0052ae80(void)
 			g_77468c = idx;
 		}
 		g_774688 = 0;
-		if (idx == -1) {
+		if (idx == 0) {
+			cur[0] = *(int*) (g_6b8014 + 0x5c);
+			cur[1] = *(int*) (g_6b8014 + 0x60);
+			cur[2] = *(int*) (g_6b8014 + 0x64);
+			next[0] = *(int*) (g_6b8014 + 0x90);
+			next[1] = *(int*) (g_6b8014 + 0x94);
+			next[2] = *(int*) (g_6b8014 + 0x98);
+		} else if (idx == -1) {
 			if (CompareVector3WithinTolerance((float*) (g_6b8014 + 0xb4), ref, 0.2f)) {
 				return;
 			}
@@ -130,13 +137,6 @@ void __cdecl fcn_0052ae80(void)
 			next[0] = *(int*) (g_6b8014 + 0xc0);
 			next[1] = *(int*) (g_6b8014 + 0xc4);
 			next[2] = *(int*) (g_6b8014 + 0xc8);
-		} else if (idx == 0) {
-			cur[0] = *(int*) (g_6b8014 + 0x5c);
-			cur[1] = *(int*) (g_6b8014 + 0x60);
-			cur[2] = *(int*) (g_6b8014 + 0x64);
-			next[0] = *(int*) (g_6b8014 + 0x90);
-			next[1] = *(int*) (g_6b8014 + 0x94);
-			next[2] = *(int*) (g_6b8014 + 0x98);
 		} else if (idx == 1) {
 			if (CompareVector3WithinTolerance((float*) (g_6b8014 + 0xcc), ref, 0.2f)) {
 				return;

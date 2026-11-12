@@ -53,9 +53,9 @@ int __cdecl fcn_004d74b0(char* x)
 	}
 	if (x[0x7c] & 1) {
 		id = (int*) (x + 0x100);
-		for (i = 0; i < 3; i++, id++) {
-			if (*id != -1) {
-				r = gm_FindRecordById(*id);
+		for (i = 0; i < 3; i++) {
+			if (id[i] != -1) {
+				r = gm_FindRecordById(id[i]);
 				if (r == 0) {
 					return 0;
 				}

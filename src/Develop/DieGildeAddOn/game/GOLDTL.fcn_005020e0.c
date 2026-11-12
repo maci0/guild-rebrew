@@ -1,207 +1,155 @@
-/* Recomputes the wage/price curve of one profession slot: selects the curve
- * segment from the global tables, interpolates it and stores the per-goods
- * factors used by the economy tick.
- *
- * The reference body keeps the interpolated values in the x87 stack across
- * calls; kuna leaves the st(1) intermediate undefined, so the exact double
- * locals are reconstructed from the instruction sequence (low confidence). */
+/* Recomputes the wage/price curves of one town row: each curve is a list of
+ * (value, year) points in g_8680c0; the current date (from the given time
+ * source) selects and interpolates a segment by month, the result is scaled by
+ * the row's factor, and then every goods cell of the row is refreshed. */
 
-extern char* g_8680c0;
-extern char* g_85ab80;
+typedef struct {
+	int val;
+	int key;
+} CurvePt;
+
+/* SIZE 0x2f4 */
+typedef struct {
+	CurvePt a[10];
+	CurvePt b[10];
+	char pad[0x2f4 - 0xa0];
+} CurveRow;
+
+/* SIZE 0x80; row header words overlay cell 0, as in client_town.h */
+typedef struct {
+	int x0;
+	int x4;
+	int x8;
+	int xc;
+	unsigned short id;
+	char p12[0xe];
+	int x20;
+	int x24;
+	int x28;
+	int x2c;
+	float f30;
+	char p34[0xc];
+	int x40;
+	int x44;
+	float f48;
+	char p4c[4];
+	unsigned char b50;
+	char p51[0x2f];
+} Cell;
+
+/* SIZE 0x2a90 */
+typedef struct {
+	Cell c[85];
+	char tail[0x10];
+} TownRow;
+
+typedef struct {
+	char day;
+	char month;
+	short year;
+	char b4;
+	char b5;
+	short x6;
+	short x8;
+} Stamp;
+
+extern CurveRow g_8680c0[];
+extern TownRow g_85ab80[];
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
 extern int g_14cbca0;
 extern double g_662908;
 
-typedef struct Stamp {
-	char b[14];
-} Stamp;
-
-void __cdecl fcn_00500d60(int*, void*);
-int __cdecl fcn_005017a0(int);
-int __cdecl fcn_00501fe0(int);
+void __cdecl fcn_00500d60(char*, Stamp*);
+void __cdecl fcn_005017a0(int);
+void __cdecl fcn_00501fe0(int);
 int __cdecl fcn_00502450(int, int);
 int __cdecl fcn_005024e0(int, int);
 float __cdecl fcn_005025a0(int, int);
 
 /* ADDRESS: GOLDTL 0x005020e0 */
-double __cdecl fcn_005020e0(int a0, int a1)
+void __cdecl fcn_005020e0(int a0, char* a1)
 {
 	Stamp stamp;
-	char* base;
-	char* tab;
-	int v5;
-	int v6;
-	int v7;
-	int v8;
-	int v9;
-	int v10;
-	int v11;
-	int v12;
-	unsigned short id;
-	double d;
+	int year;
+	int n;
+	int k;
+	int i;
+	int v;
+	char kind;
 
-	fcn_00500d60((int*) a1, &stamp);
-	id = *(unsigned short*) (stamp.b + 0xa);
-	v5 = 0;
-	v11 = a0 * 0x2f4;
-	base = g_8680c0 + v11;
-	v7 = 0x4;
-	v6 = v7;
-	do {
-		if (*(int*) (base + v6) <= *(int*) (base + v6 - 4)) {
-			if (v5 <= 8) {
-				break;
-			}
+	fcn_00500d60(a1, &stamp);
+	year = stamp.year;
+
+	for (n = 0; n < 9; n++) {
+		if (g_8680c0[a0].a[n].key >= g_8680c0[a0].a[n + 1].key)
 			break;
-		}
-		v5++;
-		v6 += 8;
-	} while (v5 < 9);
-	if (v5 == 9) {
-		v5 = 9;
 	}
-	v8 = 0;
-	if (v5 >= 1) {
-		v7 = 0x4;
-		do {
-			if ((int) id <= *(int*) (base + v7 - 4)) {
-				break;
-			}
-			v8++;
-			v7 += 8;
-		} while (v8 < v5);
-	}
-	if (v5 - 1 <= v8) {
-		*(int*) (g_85ab80 + a0 * 0x2a90) = *(int*) (base + v5 * 8);
-	} else {
-		v9 = *(int*) (base + v8 * 8);
-		if ((int) id != v9) {
-			if (v8 >= 1) {
-				int lo;
-				int hi;
-
-				lo = *(int*) (base + v8 * 8 - 4);
-				hi = *(int*) (base + v8 * 8 + 4);
-				*(int*) (g_85ab80 + a0 * 0x2a90) =
-				    (int) (((*(int*) (stamp.b + 10) - lo) * 0xc)
-					* (hi - *(int*) (base + v8 * 8 - 8)))
-				    / ((v9 - lo) * 0xc)
-				    + *(int*) (base + v8 * 8 - 8);
-			} else {
-				*(int*) (g_85ab80 + a0 * 0x2a90) = *(int*) (base + 4);
-			}
-		} else {
-			int lo;
-
-			lo = *(int*) (base + v8 * 8 + 4);
-			*(int*) (g_85ab80 + a0 * 0x2a90) =
-			    (int) (((*(int*) (stamp.b + 10) - v9) * 0xc)
-				* (*(int*) (base + v8 * 8 + 12) - lo))
-			    / ((*(int*) (base + v8 * 8 + 8) - v9) * 0xc)
-			    + lo;
-		}
-	}
-	v8 = a0 * 0x2a90;
-	*(int*) (g_85ab80 + v8) = (*(int*) (g_85ab80 + v8 + 4)
-	    * *(int*) (g_85ab80 + v8)) / 1000;
-	v5 = 0;
-	base = g_8680c0 + v11;
-	tab = base + 0x54;
-	v7 = 0x4;
-	do {
-		if (*(int*) (tab + v7 - 4) <= *(int*) (tab + v7)) {
-			if (v5 <= 8) {
-				break;
-			}
+	if (n >= 9)
+		n = 9;
+	for (k = 0; k < n; k++) {
+		if (g_8680c0[a0].a[k].key >= year)
 			break;
-		}
-		v5++;
-		v7 += 8;
-	} while (v5 < 9);
-	if (v5 == 9) {
-		v5 = 9;
 	}
-	v9 = 0;
-	if (v5 >= 1) {
-		tab = base + 0x54;
-		do {
-			if ((int) id <= *(int*) (tab - 4)) {
-				break;
-			}
-			v9++;
-			tab += 8;
-		} while (v9 < v5);
-	}
-	if (v5 - 1 <= v9) {
-		*(int*) (g_85ab80 + v8 + 8) = *(int*) (base + 0x54 + v5 * 8);
+	if (k >= n - 1) {
+		g_85ab80[a0].c[0].x0 = g_8680c0[a0].a[n].val;
+	} else if (year == g_8680c0[a0].a[k].key) {
+		g_85ab80[a0].c[0].x0 = (stamp.month + (year - g_8680c0[a0].a[k].key) * 12) * (g_8680c0[a0].a[k + 2].val - g_8680c0[a0].a[k + 1].val)
+		    / ((g_8680c0[a0].a[k + 1].key - g_8680c0[a0].a[k].key) * 12) + g_8680c0[a0].a[k + 1].val;
+	} else if (k > 0) {
+		g_85ab80[a0].c[0].x0 = (stamp.month + (year - g_8680c0[a0].a[k - 1].key) * 12) * (g_8680c0[a0].a[k + 1].val - g_8680c0[a0].a[k].val)
+		    / ((g_8680c0[a0].a[k].key - g_8680c0[a0].a[k - 1].key) * 12) + g_8680c0[a0].a[k].val;
 	} else {
-		int hi;
-
-		hi = *(int*) (base + 0x54 + v9 * 8);
-		if ((int) id != hi) {
-			if (v9 >= 1) {
-				int lo;
-				int step;
-
-				lo = *(int*) (base + 0x54 + v9 * 8 - 4);
-				step = (*(int*) (stamp.b + 10) - lo) * 0xc;
-				v5 = (int) (step
-				    * (*(int*) (base + 0x54 + v9 * 8 + 4) - hi))
-				    / ((*(int*) (base + 0x54 + v9 * 8) - lo) * 0xc)
-				    + hi;
-			} else {
-				v5 = *(int*) (base + 0x54 + 4);
-			}
-		} else {
-			int lo;
-
-			lo = *(int*) (base + 0x54 + v9 * 8 + 4);
-			v5 = (int) (((*(int*) (stamp.b + 10) - hi) * 0xc)
-			    * (*(int*) (base + 0x54 + v9 * 8 + 12) - lo))
-			    / ((*(int*) (base + 0x54 + v9 * 8 + 8) - hi) * 0xc)
-			    + lo;
-		}
-		*(int*) (g_85ab80 + v8 + 8) = v5;
+		g_85ab80[a0].c[0].x0 = g_8680c0[a0].a[1].val;
 	}
-	*(int*) (g_85ab80 + v8 + 8) = (*(int*) (g_85ab80 + v8 + 0xc)
-	    * *(int*) (g_85ab80 + v8 + 8)) / 1000;
-	v5 = 0;
-	v12 = 0xc0;
-	do {
-		char kind;
+	g_85ab80[a0].c[0].x0 = g_85ab80[a0].c[0].x4 * g_85ab80[a0].c[0].x0 / 1000;
 
-		kind = *(char*) (lpObjektePROT + (unsigned short) *(int*) (g_85ab80 + v8 + v12 - 0x30) * 0x41);
+	for (n = 0; n < 9; n++) {
+		if (g_8680c0[a0].b[n].key >= g_8680c0[a0].b[n + 1].key)
+			break;
+	}
+	if (n >= 9)
+		n = 9;
+	for (k = 0; k < n; k++) {
+		if (g_8680c0[a0].b[k].key >= year)
+			break;
+	}
+	if (k >= n - 1) {
+		g_85ab80[a0].c[0].x8 = g_8680c0[a0].b[n].val;
+	} else {
+		if (year == g_8680c0[a0].b[k].key) {
+			v = (stamp.month + (year - g_8680c0[a0].b[k].key) * 12) * (g_8680c0[a0].b[k + 2].val - g_8680c0[a0].b[k + 1].val)
+			    / ((g_8680c0[a0].b[k + 1].key - g_8680c0[a0].b[k].key) * 12) + g_8680c0[a0].b[k + 1].val;
+		} else if (k > 0) {
+			v = (stamp.month + (year - g_8680c0[a0].b[k - 1].key) * 12) * (g_8680c0[a0].b[k + 1].val - g_8680c0[a0].b[k].val)
+			    / ((g_8680c0[a0].b[k].key - g_8680c0[a0].b[k - 1].key) * 12) + g_8680c0[a0].b[k].val;
+		} else {
+			v = g_8680c0[a0].b[1].val;
+		}
+		g_85ab80[a0].c[0].x8 = v;
+	}
+	g_85ab80[a0].c[0].x8 = g_85ab80[a0].c[0].xc * g_85ab80[a0].c[0].x8 / 1000;
+	for (i = 0; i < 85; i++) {
+		kind = lpObjektePROT[g_85ab80[a0].c[i].id * 0x41];
 		if (kind != 0x17 && kind != 0x25) {
-			d = (double) fcn_00502450(a0, v5);
-			d = (d - *(float*) (g_85ab80 + v8 + v12 - 0x10)) * g_662908
-			    + *(float*) (g_85ab80 + v8 + v12 - 0x10);
-			*(float*) (g_85ab80 + v8 + v12 - 0x10) = (float) d;
+			g_85ab80[a0].c[i].f30 = (float) (((double) fcn_00502450(a0, i) - g_85ab80[a0].c[i].f30) * g_662908 + g_85ab80[a0].c[i].f30);
 		}
-		if (a0 != g_773d75) {
-			*(int*) (g_85ab80 + v8 + v12 + 4) =
-			    *(int*) (g_85ab80 + v8 + v12);
+		if (a0 == g_773d75) {
+			g_85ab80[a0].c[i].x44 = fcn_005024e0(a0, i);
 		} else {
-			*(int*) (g_85ab80 + v8 + v12 + 4) =
-			    fcn_005024e0(a0, v5);
+			g_85ab80[a0].c[i].x44 = g_85ab80[a0].c[i].x40;
 		}
-		*(float*) (g_85ab80 + v8 + v12 + 8) =
-		    fcn_005025a0(a0, v5);
-		if (*(char*) (g_85ab80 + v8 + v12 + 0x10)) {
-			*(float*) (g_85ab80 + v8 + v12 - 0x10) =
-			    (float) *(int*) (g_85ab80 + v8 + v12 + 4);
+		g_85ab80[a0].c[i].f48 = fcn_005025a0(a0, i);
+		if (g_85ab80[a0].c[i].b50) {
+			g_85ab80[a0].c[i].f30 = (float) g_85ab80[a0].c[i].x44;
 		}
-		*(int*) (g_85ab80 + v8 + v12 - 0x20) = 0;
-		*(int*) (g_85ab80 + v8 + v12 - 0x1c) = 0;
-		*(int*) (g_85ab80 + v8 + v12 - 0x14) = 0;
-		*(int*) (g_85ab80 + v8 + v12 - 0x18) = 0;
-		v5++;
-		v12 += 0x80;
-	} while (v5 < 0x55);
-	d = 0.0;
+		g_85ab80[a0].c[i].x20 = 0;
+		g_85ab80[a0].c[i].x24 = 0;
+		g_85ab80[a0].c[i].x2c = 0;
+		g_85ab80[a0].c[i].x28 = 0;
+	}
 	if (g_14cbca0 == -1) {
 		fcn_005017a0(a0);
-		d = fcn_00501fe0(a0);
+		fcn_00501fe0(a0);
 	}
-	return d;
 }

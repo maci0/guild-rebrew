@@ -3,13 +3,13 @@ extern int __cdecl gm_RandomMod(int);
 extern float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004929e0 */
-int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
+void __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 {
 	unsigned char* p;
 	unsigned char* c;
 	unsigned char* tab;
 	unsigned char ix;
-	unsigned char md;
+	int md;
 	int i;
 	int n;
 	int n0;
@@ -39,17 +39,16 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 		ix = 4;
 	}
 	if (a2 != 0) {
-		md = (unsigned char) (gm_RandomMod(3) & 0xffff);
+		md = gm_RandomMod(3) & 0xffff;
 		*c = 3;
-		if (f > *(float*) 0x6642f8) {
+		if (f > 0.8888f) {
 			tier = 3 - (((unsigned short) gm_RandomMod(0x10)) != 0);
-		} else if (f > *(float*) 0x6642f4) {
+		} else if (f > 0.5555f) {
 			tier = 2 - (((unsigned short) gm_RandomMod(0x10)) != 0);
 		} else {
-			tier = 1 - (((unsigned short) gm_RandomMod(f > *(float*) 0x6642f0 ? 4 : 8)) != 0);
+			tier = 1 - (((unsigned short) gm_RandomMod(f > 0.3333f ? 4 : 8)) != 0);
 		}
 		tab = (unsigned char*) 0x6641e8 + ix * 0x18;
-		n0 = ix;
 		r = gm_RandomFloat01();
 		for (i = 0; i < 6; i++) {
 			if (r <= *(float*) (tab + i * 4)) {
@@ -57,7 +56,6 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 				break;
 			}
 		}
-		n1 = *(int*) &r;
 		r = gm_RandomFloat01();
 		for (i = 0; i < 6; i++) {
 			if (r <= *(float*) (tab + i * 4)) {
@@ -65,7 +63,6 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 				break;
 			}
 		}
-		n2 = *(int*) &r;
 		r = gm_RandomFloat01();
 		for (i = 0; i < 6; i++) {
 			if (r <= *(float*) (tab + i * 4)) {
@@ -77,10 +74,10 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 		p[1] = (unsigned char) n1;
 		p[2] = (unsigned char) n2;
 		if (n0 == n1 && n0 == n2) {
-			return 0;
+			return;
 		}
 		if (tier == 0) {
-			return 0;
+			return;
 		}
 		if (md == 0) {
 			for (i = 0; i < 3 && tier > 0; i++, tier--) {
@@ -100,7 +97,7 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 				}
 			}
 			if (n <= -1) {
-				return 0;
+				return;
 			}
 			v = p[n] + tier;
 			if (v > 6) {
@@ -123,10 +120,10 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 		for (i = 0; i < n; i++) {
 			sum += p[i];
 		}
-		if (f > *(double*) 0x664180) {
+		if (f > 0.66) {
 			lim = 12;
 			thr = 6;
-		} else if (f > *(double*) 0x6642e8) {
+		} else if (f > 0.44) {
 			lim = 13;
 			thr = 5;
 		} else {
@@ -157,5 +154,4 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 		p[*c] = (unsigned char) n;
 		*c = *c + 1;
 	}
-	return 0;
 }

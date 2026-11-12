@@ -21,6 +21,7 @@ void __cdecl fcn_00489010(char* e)
 	int i;
 	int k;
 	int idx;
+	int done;
 
 	p = (char*) 0x7f4e24;
 	do {
@@ -31,50 +32,41 @@ void __cdecl fcn_00489010(char* e)
 		    || *(int*) (*(char**) p + 0x2c) != *(int*) (*(char**) (p - 0x18) + 1)) {
 			goto next;
 		}
+		found = 0;
 		n = (char*) fcn_00502cd0(*(int*) (p - 0xc), 1, 4, 0xc);
 		if (n == 0) {
 			return;
 		}
-		found = 0;
-		for (b = (char*) 0x100e764, a = (char*) 0x100b100;; b += 4, a += 0x40) {
+		done = 0;
+		for (b = (char*) 0x100e764, a = (char*) 0x100b100; !done; b += 4, a += 0x40) {
 			if (*(int*) (b - 4) == 0 || *(int*) b == 0) {
 				break;
 			}
 			k = *(unsigned short*) n;
 			*(int*) (b - 4) = k;
-			if (k != 0 && found == 0) {
-				for (i = 0; i < *(int*) 0x100b0a8; i++) {
+			if (k != 0) {
+				for (i = 0; !done && i < *(int*) 0x100b0a8; i++) {
 					if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
 						found = a;
-						break;
+						done = 1;
 					}
 				}
 			}
-			b += 4;
-			a += 0x40;
-			if (found != 0) {
-				break;
-			}
 		}
-		if (found == 0) {
-			for (b = (char*) 0x100e724, a = (char*) 0x100b100;; b += 4, a += 0x40) {
+		if (!done) {
+			for (b = (char*) 0x100e724, a = (char*) 0x100b100; !done; b += 4, a += 0x40) {
 				if (*(int*) (b - 4) == 0 || *(int*) b == 0) {
 					break;
 				}
 				k = *(unsigned short*) n;
 				*(int*) (b - 4) = k;
-				if (k != 0 && found == 0) {
-					for (i = 0; i < *(int*) 0x100b0a8; i++) {
+				if (k != 0) {
+					for (i = 0; !done && i < *(int*) 0x100b0a8; i++) {
 						if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
 							found = a;
-							break;
+							done = 1;
 						}
 					}
-				}
-				b += 4;
-				a += 0x40;
-				if (found != 0) {
-					break;
 				}
 			}
 		}

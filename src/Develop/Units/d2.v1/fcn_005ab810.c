@@ -93,7 +93,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 						fcn_004c4570(1, 1, 0xc, &x);
 						fcn_004c5360();
 						for (i = 3; i <= 7; i++) {
-							h = (char*) p->ref_table[i];
+							h = (char*) ((struct house*) g_7f4ca0)[g_774970].ref_table[i];
 							if (h != (char*) -1) {
 								h = (char*) gm_LookupEntityRecordById((int) h);
 								if (h != 0) {
@@ -154,7 +154,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 						fcn_004c4570(1, 1, 0xc, &x);
 						fcn_004c5360();
 						if (q->type == 6 || q->type == 7) {
-							io_FormatTextBuffer(buf, 0x1974, p->id, t, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
+							io_FormatTextBuffer(buf, 0x1974, p->id, t);
 							fcn_00545d40(q->handle, -1, buf, 0, 0x5ff, 0);
 						}
 						io_FormatTextBuffer(buf, 0x1973, 2 * (0x75 <= g_7f4c00) + 0x197a + x);

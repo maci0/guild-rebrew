@@ -1,4 +1,5 @@
 #pragma optimize("y", off)
+#include <string.h>
 
 extern char g_7f4ca0[];
 extern char g_6a5e88[];
@@ -12,14 +13,14 @@ char* __cdecl fcn_00502cd0(int, ...);
 char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_00555490(short*, int*, int*);
-double __cdecl fcn_0050bb50(int, int);
-int __cdecl gm_RandomMod(int);
+float __cdecl fcn_0050bb50(int, unsigned char);
+int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_AccumulateTyped2(int);
 void __cdecl fcn_004c4eb0(unsigned int);
 void __cdecl fcn_004c4ef0(unsigned int);
-void __cdecl fcn_004c51f0(int, int, int, int, int, int);
-void __cdecl fcn_004c51a0(int, unsigned int, int, int);
-void __cdecl fcn_004c4670(int, int, int, int*);
+int __cdecl fcn_004c51f0(int, int, short, int, char, int);
+void __cdecl fcn_004c51a0(int, int, char, int);
+int __cdecl fcn_004c4670(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c4510(int, int);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00500bb0(int*, int, int, int);
@@ -49,9 +50,25 @@ void __cdecl fcn_00555510(char* a0)
 		fcn_00546190(a0);
 		return;
 	}
-	for (i = 0; i < 0x30; i++) {
-		ent[i] = 0;
+	p = (char*) ent; count = sizeof(ent);
+	__asm {
+		mov edi, p
+		mov ebx, count
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short fill_done_555510
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	fill_done_555510:
+		add ecx, ebx
+		rep stosb
 	}
+
 	i = 0;
 	ent[0] = (int) gm_StartFilteredEntitySearch(1, 5, 0x16);
 	if (ent[0] != 0) {
@@ -116,7 +133,7 @@ draw179:
 				fcn_004c4eb0((unsigned int) g_6a5e88);
 				fcn_004c51f0(-1, *(int*) (t + 6), 0x179, 1, g_773d75, 0);
 				fcn_004c51a0(-1, *(unsigned int*) (rec + 2), g_773d75, (int) ((double) x1 * g_665e9c));
-				fcn_004c51a0(-1, *(unsigned int*) (g_7f4ca0 + 4 + *(unsigned short*) (t0 + 0x27) * 0x21c), g_773d75, x1);
+				fcn_004c51a0(*(unsigned int*) (g_7f4ca0 + 4 + *(unsigned short*) (t0 + 0x27) * 0x21c), -1, g_773d75, x1);
 				fcn_004c4510((int) t0, *(int*) (t0 + 1));
 				c = (int) *(unsigned short*) (ent + idx * 3) - g_aed32c;
 				fcn_004c4670(4, 1, c + 0x65, &x1);
@@ -131,7 +148,7 @@ draw17a:
 				fcn_004c4eb0((unsigned int) g_6a5e88);
 				fcn_004c51f0(-1, *(int*) (t + 6), 0x17a, 1, g_773d75, 0);
 				fcn_004c51a0(-1, *(unsigned int*) (rec + 2), g_773d75, (int) ((double) y1 * g_665e9c));
-				fcn_004c51a0(-1, *(unsigned int*) (g_7f4ca0 + 4 + *(unsigned short*) (t0 + 0x27) * 0x21c), g_773d75, y1);
+				fcn_004c51a0(*(unsigned int*) (g_7f4ca0 + 4 + *(unsigned short*) (t0 + 0x27) * 0x21c), -1, g_773d75, y1);
 				fcn_004c4510((int) t0, *(int*) (t0 + 1));
 				c = (int) *(unsigned short*) (ent + idx * 3) - g_aed32c;
 				fcn_004c4670(4, 1, c + 0x65, &y1);

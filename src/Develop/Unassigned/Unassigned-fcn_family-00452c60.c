@@ -269,7 +269,7 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
 	if (e->d5 & 2)
 		e->d5 = e->d5 & 0xfd;
 	e->f24 = t;
-	return ((e->d5 & 1) && e->f20 >= den) ? 0 : 1;
+	return ((e->d5 & 1) && e->f20 >= lim) ? 0 : 1;
 }
 
 /* Emitter update, drift variant: spawn random-angle particles aimed along a

@@ -1,4 +1,5 @@
 #include <string.h>
+#include "client_data.h"
 
 extern char* g_772500;
 extern int g_772514;
@@ -6,10 +7,10 @@ extern char* g_77255c;
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_67d370;
-extern int g_7f4c00;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+
+
+
+
 extern int g_100f1dc;
 extern int g_14abc88;
 extern int g_14abc90;
@@ -86,63 +87,52 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	fcn_005ca740(v21, v22, g_772514, 0x54, cmd, 1);
 	g_100f1dc = -1;
 	for (;;) {
-		if (gm_LookupEntityRecordById(v3) && fcn_005463a0(1, 1, v4)) {
-			v5 = 1;
-			if (*(int*) (v7 + 0xbc) < g_7f4c00)
-				v19 = 1;
-			else
-				v19 = 0;
-		} else {
-			v5 = 0;
-			v19 = 0;
-		}
-		fcn_00472640(pair[1], v19);
+		v5 = gm_LookupEntityRecordById(v3) && fcn_005463a0(1, 1, v4);
+		fcn_00472640(pair[1], v5 && *(int*) (v7 + 0xbc) < g_7f4c00.a);
 		if (!g_14ce8e0 && v5) {
 			if (g_100f1dc != -1) {
-				if (g_67d370 != pair[0]) {
-					if (g_67d370 == pair[1]) {
-						memset(flags, 0, sizeof(flags));
-						flags[1] = 0x20400;
-						flags[4] = 6;
-						flags[2] = g_666018;
-						flags[3] = g_66601c;
-						io_FormatTextBuffer(cmd, 0x1a53);
-						io_FormatTextBuffer(buf, 0x1a54);
-						v10 = (unsigned short*) fcn_005cd440(flags,
-							g_14abc88, 0, 0);
-						if (v10 != 0) {
-							io_FormatTextBuffer(title, 0x1a5b, 2, *v6,
-								*v10);
-							if (fcn_00526120(title, 1) && (v11 = g_774970,
-								fcn_00525f60((char*) (v11 * 0x21c + 0x7f4ca0), 2))) {
-								*(int*) (v7 + 0xbc) = g_7f4c00;
-								fcn_004c5620(3, v7);
-								fcn_005100f0(*(unsigned int*) (a0 + 4),
-									0xfffffffe);
-								fcn_004c54c0(*(unsigned int*) &v10[2],
-									*(unsigned int*) &v6[2], 0xffffffdf, 1);
-								g_774654 = 1;
-							}
-						}
-					}
-				} else {
+				if (g_67d370 == pair[0]) {
 					if (*(char*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca9))
 						v19 = 0x1a58;
 					else
 						v19 = 0x1a57;
 					io_FormatTextBuffer(text, v19, *v6);
 					if (fcn_00526120(text, 1)) {
-						*(int*) (v7 + 0x52) = g_7f4c00;
-						*(unsigned int*) (v7 + 0x56) = g_7f4c04;
-						*(unsigned int*) (v7 + 0x5a) = g_7f4c08;
-						*(unsigned short*) (v7 + 0x5e) = g_7f4c0c;
-						*(int*) (v7 + 0xbc) = g_7f4c00;
+						*(pos14_7f4c00*) (v7 + 0x52) = g_7f4c00;
+
+
+
+						*(int*) (v7 + 0xbc) = g_7f4c00.a;
 						v9 = fcn_004c5620(1, v7);
 						if (v9 != -1) {
 							while (!fcn_004c4450(v9))
 								fcn_005373e0(0, 0x20007);
 						}
 						g_774654 = 1;
+					}
+			} else if (g_67d370 == pair[1]) {
+					memset(flags, 0, sizeof(flags));
+					flags[1] = 0x20400;
+					flags[4] = 6;
+					flags[2] = g_666018;
+					flags[3] = g_66601c;
+					io_FormatTextBuffer(cmd, 0x1a53);
+					io_FormatTextBuffer(buf, 0x1a54);
+					v10 = (unsigned short*) fcn_005cd440(flags,
+						g_14abc88, 0, 0);
+					if (v10 != 0) {
+						io_FormatTextBuffer(title, 0x1a5b, 2, *v6,
+							*v10);
+						if (fcn_00526120(title, 1) && (v11 = g_774970,
+							fcn_00525f60((char*) (v11 * 0x21c + 0x7f4ca0), 2))) {
+							*(int*) (v7 + 0xbc) = g_7f4c00.a;
+							fcn_004c5620(3, v7);
+							fcn_005100f0(*(unsigned int*) (a0 + 4),
+								0xfffffffe);
+							fcn_004c54c0(*(unsigned int*) &v10[2],
+								*(unsigned int*) &v6[2], 0xffffffdf, 1);
+							g_774654 = 1;
+						}
 					}
 				}
 			}

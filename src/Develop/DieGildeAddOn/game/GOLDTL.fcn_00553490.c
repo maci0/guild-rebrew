@@ -21,7 +21,7 @@ extern char g_7f4ca0[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl fcn_004c5c80(int);
@@ -49,6 +49,7 @@ void __cdecl fcn_00553490(char* self)
 	int slotofs;
 	int i;
 	int step;
+	float threshold;
 
 	p = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0xb0));
 	ent = gm_LookupEntityRecordById(*(int*) (self + 0xac));
@@ -104,7 +105,9 @@ void __cdecl fcn_00553490(char* self)
 				*(int*) (self + 0xb8) = 2;
 			} else {
 				slotofs = *(unsigned short*) (p + 0x27) * 0x21c;
-				if (*(unsigned char*) (slotofs + 0x7f4dd0) == 11 || *(float*) (slotofs + 0x7f4db4) * *(float*) 0x662a2c > gm_RandomFloat01()) {
+				if (*(unsigned char*) (slotofs + 0x7f4dd0) == 11 ||
+				    (threshold = *(float*) (slotofs + 0x7f4db4) * *(float*) 0x662a2c,
+				     threshold > gm_RandomFloat01())) {
 					*(int*) (self + 0xb8) = 1;
 				} else {
 					*(int*) (self + 0xb8) = gm_RandomMod(2) & 0xffff;

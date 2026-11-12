@@ -1,52 +1,52 @@
-extern double __cdecl gp_64dc80(double, double);
-extern long __cdecl gp_64d228(double);
+#include <math.h>
+#include <stdlib.h>
+extern float g_6777b0[3];
+extern float g_6777bc[3];
+extern float g_6b5df8[3];
+extern float g_662c30;
+extern void* g_6b5de0;
 
 /* ADDRESS: GOLDTL 0x0041b870 */
 int __cdecl fcn_0041b870(void)
 {
-    unsigned short t1[256], t2[256], t3[256];
+    unsigned short table[3][256];
     int i;
     float m;
     double lo, mid, hi, st;
-    double c28, lim, c9;
     void **obj, **vt;
-    void (__cdecl *mth)(void *, int, void *);
+    int (__stdcall *mth)(void *, int, void *);
 
-    lo = *(float *)0x6777bc / *(double *)0x6629c8;
-    mid = *(float *)0x6777c0 / *(double *)0x6629c8;
-    hi = *(float *)0x6777c4 / *(double *)0x6629c8;
-    c28 = *(double *)0x662c28;
-    lim = *(double *)0x662950;
-    c9 = *(double *)0x6629c8;
+    lo = 1.0 / g_6777bc[0];
+    mid = 1.0 / g_6777bc[1];
+    hi = 1.0 / g_6777bc[2];
 
     for (i = 0; i < 0x100; i++) {
-        m = (float)((double)i * *(float *)0x662c30);
+        m = (float)((double)i * g_662c30);
 
-        st = gp_64dc80(lo, *(float *)0x6777b0 * m) + *(float *)0x6b5df8;
-        if (st == lim)
-            st = c9;
-        else
-            st = lim;
-        t1[i] = (unsigned short)gp_64d228(st * c28);
+        st = pow(g_6777b0[0] * m, hi) + g_6b5df8[0];
+        st = __min(1.0, __max(0.0, st));
 
-        st = gp_64dc80(mid, *(float *)0x6777b4 * m) + *(float *)0x6b5dfc;
-        if (st == lim)
-            st = c9;
-        else
-            st = lim;
-        t2[i] = (unsigned short)gp_64d228(st * c28);
 
-        st = gp_64dc80(hi, *(float *)0x6777b8 * m) + *(float *)0x6b5e00;
-        if (st == lim)
-            st = c9;
-        else
-            st = lim;
-        t3[i] = (unsigned short)gp_64d228(st * c28);
+
+        table[2][i] = (unsigned short)(st * 65535.0);
+
+        st = pow(g_6777b0[1] * m, mid) + g_6b5df8[1];
+        st = __min(1.0, __max(0.0, st));
+
+
+
+        table[1][i] = (unsigned short)(st * 65535.0);
+
+        st = pow(g_6777b0[2] * m, lo) + g_6b5df8[2];
+        st = __min(1.0, __max(0.0, st));
+
+
+
+        table[0][i] = (unsigned short)(st * 65535.0);
     }
 
-    obj = *(void **)0x6b5de0;
+    obj = (void**)g_6b5de0;
     vt = *(void ***)obj;
-    mth = (void (__cdecl *)(void *, int, void *))vt[0x12];
-    mth(obj, 0, t3);
-    return 0;
+    mth = (int (__stdcall *)(void *, int, void *))vt[0x12];
+    return mth(obj, 0, table);
 }

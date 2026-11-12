@@ -1,6 +1,7 @@
 /* Select a placement candidate for an entity and fill the caller's packet
  * with the chosen node's keys. */
 
+extern unsigned char* lpGebaeudePROT;
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00510400(char*);
@@ -41,16 +42,18 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* a1, int 
 		v11 = (unsigned char*) *(unsigned int*) 0x90e094;
 		do {
 			if (*v11 != 0 && *(unsigned short*) (v11 + 0x27) == *a1 &&
-			    *(unsigned char*) (*(unsigned int*) 0x868050 +
-			                       (unsigned int) *v11 * 0x24c) == 0x1f &&
+			    *(unsigned char*) (lpGebaeudePROT +
+			                       (unsigned int) *v11 * 0x24d) == 0x1f &&
 			    fcn_00502cd0(*(int*) (v11 + 0x5d), 2, 6, 0, 0x27c) != 0) {
-				v5 = fcn_00510400((char*) v11);
 				if (v12 == 0) {
-					v6 = v5;
 					v12 = (unsigned short*) v11;
-				} else if (v5 > v6) {
-					v6 = v5;
-					v12 = (unsigned short*) v11;
+					v6 = fcn_00510400((char*) v11);
+				} else {
+					v5 = fcn_00510400((char*) v11);
+					if (v5 > v6) {
+						v6 = v5;
+						v12 = (unsigned short*) v11;
+					}
 				}
 			}
 			v11 += 0xa9;
@@ -58,12 +61,11 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* a1, int 
 		if (v12 != 0 && v6 != 0) {
 			unsigned int* v4 = (unsigned int*) 0xf00500;
 
-			a2 = (int) gm_RandomMod(0x20) & 0xffff;
 			if (fcn_004a5340((int*) a1, 1, (int*) &v4, 0,
-			                 (float) a2 + *(float*) 0x662da8,
+			                 (float) (gm_RandomMod(0x20) & 0xffff) + *(float*) 0x662da8,
 			                 (unsigned short*) &v8) != 0) {
-				v1 = *(unsigned char*) ((a2 & 0xffff) * 0x21c + 0x7f4e06);
-				a2 = (a2 & 0xffff) * 0x21c + 0x7f4ca0;
+				v1 = *(unsigned char*) ((v8 & 0xffff) * 0x21c + 0x7f4e06);
+				a2 = (v8 & 0xffff) * 0x21c + 0x7f4ca0;
 				v7 = fcn_004e99c0((unsigned char) v1) / 3;
 				v5 = v7 + 2;
 				if (v7 + 4 <= *(int*) ((char*) a1 + 0x194) &&
@@ -71,13 +73,14 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* a1, int 
 				                       75.0f, v6, v9)) != 0) {
 					v7 = 0;
 					v6 = 0;
-					if (1 <= a0) {
+					if (1 <= (int) a0) {
 						do {
 							v1 = *(unsigned char*) (
 							    (unsigned int) v9[v7] * 0x21c + 0x7f4e06);
-							v5 = fcn_004e99c0((unsigned char) v1) / 3 +
+							v1 = fcn_004e99c0((unsigned char) v1) / 3 +
 							     2 + v5;
-							if (*(int*) ((char*) a1 + 0x194) <= v5) {
+							if (*(int*) ((char*) a1 + 0x194) <= v1) {
+								v5 = v1;
 								v10[v6] = (unsigned int) v9[v7] *
 								              0x21c +
 								          0x7f4ca0;

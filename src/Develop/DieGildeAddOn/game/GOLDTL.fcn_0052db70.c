@@ -2,6 +2,10 @@ extern int g_7f4c00;
 extern int g_7f4c04;
 extern int lpGebaeudePROT;
 extern int g_6b8010;
+extern unsigned char g_slot_table[2];
+
+extern float g_696540[];
+extern float g_696550[];
 
 int __cdecl fcn_00500e20(int*);
 void __cdecl fcn_004432d0(int, int);
@@ -26,37 +30,37 @@ void __cdecl fcn_0052db70(char* a0)
 	float ft;
 
 	sel = fcn_00500e20(&g_7f4c00);
-	h = g_6b8010;
-	if (*(unsigned char*) (lpGebaeudePROT + (unsigned char) *a0 * 0x24c) == 7 ||
+
+	if (*(unsigned char*) (lpGebaeudePROT + (unsigned char) *a0 * 0x24d) == 7 ||
 	    *(int*) (a0 + 0x61) == 0) {
 		return;
 	}
 	idx = 0;
-	ent = (char*) 0x7f4ca0;
+	ent = (char*) g_slot_table;
 	do {
 		if (*(unsigned char*) (ent + 8) > 0 && *(unsigned short*) ent != 0xffff &&
 		    *(unsigned char*) (ent + 2) != 10 && *(int*) (ent + 0x16c) == (int) a0 &&
 		    *(unsigned char*) (ent + 0x180) == 4) {
-			found = (void*) *(int*) (idx * 0x21c + 0x7f4e1c);
+			found = *(void**) (g_slot_table + idx * 0x21c + 0x17c);
 			if (found != 0 && *(int*) ((char*) found + 0xc8) != 0) {
 				break;
 			}
 			if (*(int*) (a0 + 0x95) != -1) {
-				break;
+				return;
 			}
 			ft = (float) (g_7f4c04 & 0xffff);
-			if (ft < *(float*) (sel * 4 + 0x696540)) {
+			if (!(ft >= g_696540[sel])) {
 				return;
 			}
-			if (ft > *(float*) (sel * 4 + 0x696550)) {
+			if (!(ft < g_696550[sel])) {
 				return;
 			}
-			fcn_004432d0(0, 1);
-			obj = fcn_00445600(*(int*) (a0 + 0x61), 0x100, 0, "6a2f08");
+			h = g_6b8010; fcn_004432d0(0, 1);
+			obj = fcn_00445600(*(int*) (a0 + 0x61), 0x100, 0, "dummy_RAUCH_0");
 			if (obj == 0) {
 				goto unlock;
 			}
-			found = evt_LoadGfxScript("6a2ee8");
+			found = evt_LoadGfxScript("effekte\\Schornstein_dunkel.esc");
 			if (found == 0) {
 				goto unlock;
 			}
@@ -71,7 +75,7 @@ void __cdecl fcn_0052db70(char* a0)
 		}
 		ent += 0x21c;
 		idx++;
-	} while ((int) ent < 0x85a0a0);
+	} while ((int) ent < (int) g_slot_table + 0x65400);
 	if (*(int*) (a0 + 0x95) != -1) {
 		p = fcn_00426cc0(*(int*) (a0 + 0x95));
 		if (p != 0) {

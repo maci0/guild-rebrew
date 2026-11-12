@@ -21,7 +21,7 @@ extern double g_664ee8;
 extern double g_662ad8;
 
 char* __cdecl fcn_004ce590(int);
-int __cdecl cut_RandMod(unsigned int);
+unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl fcn_004c6880(int, int, int);
 char* __cdecl fcn_004ce610(char*);
 int __cdecl fcn_004cef70(int, char*);
@@ -52,7 +52,7 @@ void __cdecl fcn_004d0070(void)
 	char* g34;
 	char* g;
 	char* s;
-	__int64 num;
+	unsigned int num;
 	float v;
 	float best;
 	int found;
@@ -95,14 +95,16 @@ void __cdecl fcn_004d0070(void)
 			}
 			o = *(char**) (e + 0x184);
 			if (t & 0x800) {
-				e34 = o + 0x34;
+				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				fcn_00442d50((int) e34, 1);
 				c.r = 0x80;
 				c.g = 0;
 				c.f0 = 0;
 				c.f1 = 0;
 				c.x = 0;
+				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				*(unsigned char*) (e34 + 0x215) &= 0x7f;
+				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				fcn_0043a3f0(e34, *(char**) (e34 + 0x1cc), c);
 			} else {
 				best = 999999.0f;
@@ -117,7 +119,7 @@ void __cdecl fcn_004d0070(void)
 					if (*(char*) (*q + 8) == 0) {
 						continue;
 					}
-					v = fcn_004cefb0(e, *(char**) (*q + 0x184) + 0x34);
+					v = fcn_004cefb0(e, *(char**) (*(char**) (*q + 0x184) + 0x34));
 					if (v < g_662cf8) {
 						found = 1;
 						if (v < best) {
@@ -125,7 +127,7 @@ void __cdecl fcn_004d0070(void)
 						}
 					}
 				}
-				e34 = o + 0x34;
+				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				fcn_00442d50((int) e34, (unsigned char) found);
 				if (found) {
 					t = (int) (g_6628a4 - best * g_662910 * g_6628a4);
@@ -134,25 +136,34 @@ void __cdecl fcn_004d0070(void)
 					c.f0 = 0;
 					c.f1 = 0;
 					c.x = 0;
+					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 					*(unsigned char*) (e34 + 0x215) &= 0x7f;
+					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 					fcn_0043a3f0(e34, *(char**) (e34 + 0x1cc), c);
+				} else {
+					goto other_effect;
 				}
 			}
 			o = *(char**) (e + 0x184);
-			*(unsigned char*) (o + 0x34 + 0x215) |= 0x80;
+			*(unsigned char*) (*(char**) (o + 0x34) + 0x215) |= 0x80;
 		}
+	other_effect:
 		s = fcn_004ceb40(e);
 		if (s != 0 && *(int*) (s + 4) == 2 && *(char*) (s + 0x1d) != 0) {
 			g = gm_LookupEntityRecordIn32SlotTable(*(int*) (s + 0x10));
 			if (g != 0) {
 				o = *(char**) (e + 0x184);
-				e34 = o + 0x34;
-				g34 = *(char**) (g + 0x184) + 0x34;
+				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
+				g34 = *(char**) (*(char**) (g + 0x184) + 0x34);
 				if (CompareVector3WithinTolerance((float*) (e34 + 0x4c), (float*) (g34 + 0x4c), 10.0f) == 0) {
+					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
+					g34 = *(char**) (*(char**) (g + 0x184) + 0x34);
 					v = fcn_00444700(e34, (float*) (g34 + 0x4c));
+					o = *(char**) (e + 0x184);
 					s = (char*) *(int*) (o + 0x128);
 					if (s == 0 || (*(char*) (s + 9) != 0x2d && *(char*) (s + 9) != 0x3a)) {
 						if (g_664ee8 < (double) fabs(v)) {
+							e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 							fcn_00438d70(e34, *(int*) (e34 + 0x84), *(float*) (e34 + 0x88) + v * g_662ad8, *(int*) (e34 + 0x8c));
 						}
 					}

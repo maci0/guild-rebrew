@@ -1,3 +1,7 @@
+#include "Develop/DieGildeAddOn/game/game_data.h"
+extern float g_6628a8;
+extern float g_6628ac;
+
 typedef struct Share {
 	unsigned char kind;
 	char pad[3];
@@ -100,6 +104,8 @@ int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 			fv[0] = 100.0f;
 			fv[1] = 100.0f;
 			fv[2] = 100.0f;
+			best = 100.0f;
+			bi = -1;
 			sv[0] = gm_LookupEntityRecordById(p->val);
 			sv[1] = gm_LookupEntityRecordById(p->ref1);
 			sv[2] = gm_LookupEntityRecordById(p->ref2);
@@ -112,8 +118,6 @@ int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 			if (sv[2] != 0 && sv[2] != g_77261c) {
 				fv[2] = fcn_0050f980(e->w0, *(unsigned short*) sv[2], 1);
 			}
-			best = 100.0f;
-			bi = -1;
 			for (i = 0; i < 3; i++) {
 				if (fv[i] < best) {
 					best = fv[i];
@@ -138,21 +142,21 @@ fallback:
 	return fcn_004a4680(a0, a1, idx, e, rec);
 calc:
 	for (i = 0; i < 4; i++) {
-		if (t->a[i].val > *(float*) 0x6628a8) {
+		if (t->a[i].val > g_6628a8) {
 			if (t->a[i].kind == e->kind) {
-				best = *(float*) 0x6628ac;
+				*a0 += e->rate[t->a[i].kind].f * t->a[i].val * g_6628ac;
 			} else {
-				best = *(float*) 0x662910;
+				*a0 += e->rate[t->a[i].kind].f * t->a[i].val * g_662910;
 			}
-			*a0 += e->rate[t->a[i].kind].f * t->a[i].val * best;
+
 		}
-		if (t->b[i].val > *(float*) 0x6628a8) {
+		if (t->b[i].val > g_6628a8) {
 			if (t->b[i].kind == e->kind) {
-				best = *(float*) 0x6628ac;
+				*a1 += e->rate[t->b[i].kind].f * t->b[i].val * g_6628ac;
 			} else {
-				best = *(float*) 0x662910;
+				*a1 += e->rate[t->b[i].kind].f * t->b[i].val * g_662910;
 			}
-			*a1 += e->rate[t->b[i].kind].f * t->b[i].val * best;
+
 		}
 	}
 	return 1;

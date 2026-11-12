@@ -1,3 +1,13 @@
+extern int g_7747c8;
+extern int g_77468c;
+extern int g_774688;
+extern int g_774670;
+extern int g_774658;
+extern int g_774654;
+extern int g_774650;
+extern int g_7725c8;
+extern int g_675310;
+extern int g_67530c;
 typedef unsigned char u8;
 typedef unsigned short u16;
 
@@ -110,9 +120,9 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     if (p2 == 0)
         *(int*) &g_7746c4 = 0;
     if (*(u16*) (o + 0x27) == *(u16*) &g_774970)
-        fcn_004234e0(*(int*) 0x7747c8, (void*) 0x6aadc8, 1, 0x3f, 0x7f, 0, 0);
+        fcn_004234e0(g_7747c8, (void*) 0x6aadc8, 1, 0x3f, 0x7f, 0, 0);
     else
-        fcn_004234e0(*(int*) 0x7747c8, (void*) 0x6aadac, 1, 0x3f, 0x7f, 0, 0);
+        fcn_004234e0(g_7747c8, (void*) 0x6aadac, 1, 0x3f, 0x7f, 0, 0);
     *(int*) 0x6752a8 = *(int*) 0x6aada0;
     *(int*) 0x6752ac = *(int*) 0x6aada4;
     *(u8*) 0x6752b0 = *(u8*) 0x6aada8;
@@ -120,26 +130,26 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     fcn_004c3170(o);
 
     do {
-        *(int*) 0x774658 = *(int*) 0x774650 + 1;
+        g_774658 = g_774650 + 1;
         msg = (char*) fcn_00502cd0(*(int*) (o + 0x5d), 1, 0, (int) *(u16*) (o + 0x29));
         if (msg != 0) {
             c = ((u8*) &g_7f3b40)[*(u16*) msg];
             if (c != 0xfe) {
                 if (c == 0xff ||
                     *(signed char*) (0x1043695 + 0x3dc * (int) (signed char) c) != 0) {
-                    *(int*) 0x7725c8 = 1;
+                    g_7725c8 = 1;
                     fcn_005373e0((void*) 0, 0x603c7);
                     fcn_005373e0((void*) 0, 0x603c7);
                     fcn_00510c90((int) *(u16*) msg);
-                    *(int*) 0x7725c8 = 0;
+                    g_7725c8 = 0;
                 }
                 if (*(int*) &g_6b8010 != 0)
                     fcn_0043a9c0(3);
                 *(int*) &g_7746c4 = (int) o;
                 *(int*) &g_7746cc = (int) msg;
                 *(int*) &g_6791c8 = *(int*) (msg + 2);
-                *(int*) 0x67530c = *(int*) (o + 1);
-                *(int*) 0x675310 = *(int*) (msg + 2);
+                g_67530c = *(int*) (o + 1);
+                g_675310 = *(int*) (msg + 2);
                 *(u16*) (o + 0x29) = *(u16*) msg;
                 fcn_004432d0((int) (signed char) ((u8*) &g_7f3b40)[*(u16*) msg], 0);
                 fcn_0043aa30(3);
@@ -184,8 +194,8 @@ int __cdecl fcn_005a76b0(char* o, int p2)
                 *(int*) &g_7e3a50 = *(int*) (t + 0x84);
                 *(int*) &g_7e3a54 = *(int*) (t + 0x88);
                 *(int*) &g_7e3a58 = *(int*) (t + 0x8c);
-                *(int*) 0x774688 = 0;
-                *(int*) 0x77468c = 0;
+                g_774688 = 0;
+                g_77468c = 0;
             }
             fcn_0057e880(0x19, msg, 0, 0);
             switch (*(u16*) msg) {
@@ -343,9 +353,9 @@ int __cdecl fcn_005a76b0(char* o, int p2)
             if (i != -1)
                 fcn_005312d0(i);
             fcn_00516ed0(o);
-            *(int*) 0x774670 = 1;
+            g_774670 = 1;
             if (*(int*) &g_7746c4 == 0) {
-                *(int*) 0x774654 = 1;
+                g_774654 = 1;
                 fcn_0043a9c0(3);
             }
         }
@@ -357,8 +367,8 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     fcn_004c34d0();
     fcn_004432d0(x, 0);
     *(int*) &g_6791c8 = 0;
-    *(int*) 0x67530c = -1;
-    *(int*) 0x675310 = -1;
+    g_67530c = -1;
+    g_675310 = -1;
     *(int*) &g_7746c4 = 0;
     *(int*) &g_7746cc = 0;
     fcn_00516f60();
@@ -368,5 +378,5 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     *(int*) &g_7e3a50 = s3;
     *(int*) &g_7e3a54 = s4;
     *(int*) &g_7e3a58 = s5;
-    return fcn_004234e0(*(int*) 0x7747c8, (void*) 0x6aad8c, 1, 0x3f, 0x7f, 0, 0);
+    return fcn_004234e0(g_7747c8, (void*) 0x6aad8c, 1, 0x3f, 0x7f, 0, 0);
 }

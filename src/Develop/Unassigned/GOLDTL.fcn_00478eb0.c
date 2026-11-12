@@ -12,6 +12,7 @@ void __cdecl fcn_00478eb0(int a0, int a1, char* a2, char* a3, int a4, int a5, in
 	int col;
 	char* src;
 	short px;
+	short* out;
 
 	stride = *(int*) (a2 + 0x10);
 	v2 = a3[6];
@@ -23,10 +24,12 @@ void __cdecl fcn_00478eb0(int a0, int a1, char* a2, char* a3, int a4, int a5, in
 		row = 0;
 		do {
 			col = 0;
+			out = dest;
 			do {
 				px = *(short*) (src + ((col >> 8) & 0xff) * 2);
-				*dest++ = px;
+				*out = px;
 				col += a4;
+				out++;
 			} while ((char) (col >> 8) < v2);
 			dest += stride;
 			row += a5;
@@ -37,13 +40,14 @@ void __cdecl fcn_00478eb0(int a0, int a1, char* a2, char* a3, int a4, int a5, in
 	row = 0;
 	do {
 		col = 0;
+		out = dest;
 		do {
 			px = *(short*) (src + ((col >> 8) & 0xff) * 2);
 			if (px != 0) {
-				*dest = px;
+				*out = px;
 			}
-			dest++;
 			col += a4;
+			out++;
 		} while ((char) (col >> 8) < v2);
 		dest += stride;
 		row += a5;

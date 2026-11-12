@@ -1,6 +1,6 @@
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/aemter.h"
-#include "Develop/DieGildeAddOn/game/entity.h"
+#include "client_data.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e8240(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
@@ -56,10 +56,10 @@ int __cdecl fcn_004e9ee0(void)
 					}
 				} else if (rp->status == 3 && rp->pcount >= 1) {
 					m = rp->mamt;
-					for (h = (char*) g_slot_table + 2;
-						(int) h < (int) ((char*) g_slot_table + 768 * 0x21c + 2);
+					for (h = (char*) g_7f4ca2;
+						(int) h < (int) (g_7f4ca2 + 768);
 						h += 0x21c) {
-						if (h[0x166] == m) {
+						if (*(unsigned char*) (h + 0x166) == m) {
 							flags[i] |= 1;
 							if ((*h == 6 || *h == 7) && h[0x1af] == 0) {
 								flags[i] |= 2;

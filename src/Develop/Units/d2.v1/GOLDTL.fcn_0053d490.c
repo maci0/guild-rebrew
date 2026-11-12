@@ -77,7 +77,7 @@ int __cdecl fcn_0053d490(int a0, int a1)
 	unsigned char redraw;
 	int result;
 	char itoa_buf[0x30];
-	char buf[0xf0];
+	char buf[0x100];
 
 	redraw = 1;
 	result = 0;
@@ -142,7 +142,7 @@ int __cdecl fcn_0053d490(int a0, int a1)
 	list1 = d2_CreateRadioGroup(2, s1a, s1b);
 	d2_SelectRadioGroup(list1, g_7e23e8 & 0xff);
 	list2 = d2_CreateRadioGroup(2, s2a, s2b);
-	d2_SelectRadioGroup(list2, g_7e23e9);
+	d2_SelectRadioGroup(list2, (unsigned char) g_7e23e9);
 	fcn_00476b60();
 	g_14cf950 = 0;
 	for (;;) {
@@ -258,7 +258,7 @@ int __cdecl fcn_0053d490(int a0, int a1)
 		itoa(g_7e23e8 & 0xff, itoa_buf, 10);
 		WritePrivateProfileStringA(s_6a1e4c, s_6a3ffc, itoa_buf,
 		    g_7e22c0);
-		itoa(g_7e23e9, itoa_buf, 10);
+		itoa((unsigned char) g_7e23e9, itoa_buf, 10);
 		WritePrivateProfileStringA(s_6a1e4c, s_6a3ff4, itoa_buf,
 		    g_7e22c0);
 		return result;

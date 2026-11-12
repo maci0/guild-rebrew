@@ -8,11 +8,11 @@ int __cdecl fcn_005bdc30(int a, int* dlg, char* txt, int c, int d);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c4510(int a, int b);
-void __cdecl fcn_004c4570(int a, int b, int c, int d);
+int __cdecl fcn_004c4570(unsigned char a, unsigned char b, unsigned short c, char* d);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00508280(char* slot, int a, int b);
 int __cdecl fcn_005c6270(char* slot, int mode);
-float __cdecl fcn_0042e450();
+double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00503fe0(int a, int b, int c);
 void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
 
@@ -22,9 +22,9 @@ void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
 int __cdecl fcn_005dc270(char* cmd, char* arg2)
 {
 	int dlg[0x14];
-	char txt[0x110];
+	char txt[0x100];
 	char msg[0xf8];
-	char line[0x7f0];
+	char line[0x800];
 	char* esi;
 	char* slot;
 	short h;
@@ -35,11 +35,11 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		for (i = 7; i < 15; i++) {
 			dlg[i] = -1;
 		}
+		io_FormatTextBuffer(txt, 0x9a);
 		dlg[0] = 1;
 		dlg[1] = -1;
-		dlg[2] = 4;
 		dlg[4] = 6;
-		io_FormatTextBuffer(txt, 0x9a);
+		dlg[2] = 4;
 		esi = (char*) fcn_005bdc30(1, dlg, txt, 0, 0);
 		if (esi == 0 || *(short*) (esi + 0x27) == 0) {
 			return 0;
@@ -57,12 +57,14 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		fcn_004c5530(msg);
 		fcn_004c4510(*(int*) arg2, *(int*) (*(int*) arg2 + 2));
 		h = *(short*) arg2;
-		fcn_004c4570(4, 1, h - g_aed32c + 0x25, (int) (esi + 1));
+		fcn_004c4570(4, 1, h - g_aed32c + 0x25, esi + 1);
 		fcn_004c5360();
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 		fcn_00508280(slot, 0, 0);
+		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 		if (slot[2] == 6 || slot[2] == 7) {
 			io_FormatTextBuffer(line, 0xff1);
+		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 			fcn_00545d40(*(int*) (slot + 4), -1, line, 0, 0x5fb, 0);
 		}
 		return 1;
@@ -84,14 +86,17 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 	fcn_004c5530(msg);
 	fcn_004c4510(*(int*) arg2, *(int*) (*(int*) arg2 + 2));
 	h = *(short*) arg2;
-	fcn_004c4570(4, 1, h - g_aed32c + 0x25, (int) (esi + 1));
+	fcn_004c4570(4, 1, h - g_aed32c + 0x25, esi + 1);
 	fcn_004c5360();
 	slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
-	if (fcn_005c6270(slot, 0x2c4) == 0 || 0.75f < fcn_0042e450()) {
+	if (fcn_005c6270(slot, 0x2c4) == 0 || 0.75f < gm_RandomFloat01()) {
+		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 		fcn_00508280(slot, 0, 0);
 	}
+	slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 	if (slot[2] == 6 || slot[2] == 7) {
 		io_FormatTextBuffer(line, 0xff1);
+		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 		fcn_00545d40(*(int*) (slot + 4), -1, line, 0, 0x5fb, 0);
 	}
 	return 1;

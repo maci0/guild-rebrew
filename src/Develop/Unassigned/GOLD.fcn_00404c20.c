@@ -1,6 +1,25 @@
+void __cdecl fcn_00435810(char*, char*);
+void __cdecl fcn_00435870(char*, char*, int);
+
 /* ADDRESS: GOLD 0x00404c20 */
-int __cdecl fcn_00404c20(void)
+void __cdecl fcn_00404c20(char* obj, int paused)
 {
-	/* stub */
-	return 0;
+    char* stream;
+    char* frames;
+    char* context;
+
+    if (*(int*) (obj + 0x128) == 0)
+        return;
+    stream = *(char**) (obj + 0x70);
+    if (stream == 0)
+        return;
+    frames = *(char**) (stream + 0x68);
+    context = *(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4;
+    if (paused) {
+        fcn_00435810(context, frames);
+        obj[0x8c] |= 4;
+    } else {
+        fcn_00435870(context, frames, 1);
+        obj[0x8c] &= 0xfb;
+    }
 }

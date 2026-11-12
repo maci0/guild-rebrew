@@ -4,7 +4,7 @@ extern float g_6660e8;
 extern int g_1043370;
 extern int g_6b7fac;
 
-int __cdecl fcn_0045b990(int, float*, int*, int*, float*);
+char __cdecl fcn_0045b990(int, float*, int*, int*, float*);
 int __cdecl fcn_005ea2d0(int, float*, float*, int, int, int*, int*);
 
 /* Projectile integration step. Native facts (all from disassembly):
@@ -16,7 +16,7 @@ int __cdecl fcn_005ea2d0(int, float*, float*, int, int, int*, int*);
  * States: obj+0x5c 1 flying, 2 impact, 3 expired.
  */
 /* ADDRESS: GOLDTL 0x005e9da0 */
-int __cdecl fcn_005e9da0(char* obj, float* pos)
+int __cdecl fcn_005e9da0(char* obj)
 {
 	float step;
 	float inv;
@@ -47,21 +47,23 @@ int __cdecl fcn_005e9da0(char* obj, float* pos)
 	int nx;
 	int ny;
 
-	(void) pos;
+	int map;
+
+	map = g_1043370;
 	step = g_6660f0 * g_6660e8;
 	inv = g_6660f0 / *(float*) (obj + 0x54);
 	if (*(int*) (obj + 0x5c) != 1) {
 		return 0;
 	}
 	remain = g_6b7fac - *(int*) (obj + 0x60);
-	if (fcn_0045b990(g_1043370, (float*) (obj + 0x30), &ox, &oy, &h) == 0) {
+	if (fcn_0045b990(map, (float*) (obj + 0x30), &ox, &oy, &h) == 0) {
 		*(int*) (obj + 0x5c) = 3;
 		*(int*) (obj + 0x58) = 0;
 		return 0;
 	}
-	fx = (float) (*(float*) (obj + 0x40) > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * *(float*) (obj + 0x40) * *(float*) (obj + 0x40) * g_6ad620 * 1.2f * 0.5f;
+	fx = *(float*) (obj + 0x50) * *(float*) (obj + 0x40) * *(float*) (obj + 0x40) * (float) (*(float*) (obj + 0x40) > 0.0f ? 1.0f : -1.0f) * g_6ad620 * 1.2f * 0.5f;
 	fy = (float) (*(float*) (obj + 0x44) > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * *(float*) (obj + 0x44) * *(float*) (obj + 0x44) * g_6ad620 * 1.2f * 0.5f;
-	fz = (float) (*(float*) (obj + 0x48) > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * *(float*) (obj + 0x48) * *(float*) (obj + 0x48) * g_6ad620 * 1.2f * 0.5f;
+	fz = *(float*) (obj + 0x50) * *(float*) (obj + 0x48) * *(float*) (obj + 0x48) * (float) (*(float*) (obj + 0x48) > 0.0f ? 1.0f : -1.0f) * g_6ad620 * 1.2f * 0.5f;
 	n = 0;
 	while (n < remain) {
 		float vx = *(float*) (obj + 0x10);
@@ -80,6 +82,7 @@ int __cdecl fcn_005e9da0(char* obj, float* pos)
 		mx = (qx + fx) * inv;
 		my = (qy + fy) * inv - step;
 		mz = (qz + fz) * inv;
+		qx = mx; qy = my; qz = mz;
 		mx = mx + vx;
 		my = my + vy;
 		mz = mz + vz;
@@ -94,9 +97,9 @@ int __cdecl fcn_005e9da0(char* obj, float* pos)
 		tz = (rz + fz) * inv;
 		*(int*) (obj + 0x60) += 1;
 		*(int*) (obj + 0x64) += 1;
-		vx = tx * 0.5f + vx;
-		vy = ty * 0.5f + vy;
-		vz = tz * 0.5f + vz;
+		vx = (tx + qx) * 0.5f + vx;
+		vy = (ty + qy) * 0.5f + vy;
+		vz = (tz + qz) * 0.5f + vz;
 		*(float*) (obj + 0x10) = vx;
 		*(float*) (obj + 0x14) = vy;
 		*(float*) (obj + 0x18) = vz;
@@ -105,13 +108,13 @@ int __cdecl fcn_005e9da0(char* obj, float* pos)
 		pf[2] = vz * 39.37008f * g_6660f0 + wz;
 		nx = ox;
 		ny = oy;
-		if (fcn_005ea2d0(g_1043370, (float*) (obj + 0x30), pf, ox, oy, &nx, &ny) != 0 && *(unsigned int*) (obj + 0x64) > 0x32) {
+		if (fcn_005ea2d0(map, (float*) (obj + 0x30), pf, ox, oy, &nx, &ny) != 0 && *(unsigned int*) (obj + 0x64) > 0x32) {
 			*(float*) (obj + 0x30) = pf[0];
 			*(float*) (obj + 0x34) = pf[1];
 			*(float*) (obj + 0x38) = pf[2];
 			*(int*) (obj + 0x5c) = 2;
 			*(float*) (obj + 0x58) =
-				(vx * vx + vy * vy + vz * vz) * *(float*) (obj + 0x54) * 0.5f;
+				(*(float*)(obj + 0x18) * *(float*)(obj + 0x18) + *(float*)(obj + 0x14) * *(float*)(obj + 0x14) + *(float*)(obj + 0x10) * *(float*)(obj + 0x10)) * *(float*) (obj + 0x54) * 0.5f;
 			return 0;
 		}
 		*(float*) (obj + 0x30) = pf[0];

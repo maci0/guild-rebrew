@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 typedef struct
 {
@@ -10,7 +11,7 @@ typedef struct
 /* SIZE 0x10 */
 
 extern void* g_6b5de0;
-extern int g_1015ea0;
+
 extern int g_1015ea4;
 extern int g_1040490;
 extern int g_1040494;
@@ -68,7 +69,6 @@ void __cdecl fcn_0046a110(int a1)
 	struct { fcn_0046a110_Rect screen; float uv[2]; } loc;
 	union { fcn_0046a110_Rect clip[2]; char buf[40]; } u;
 	char* ent;
-	char* tab;
 	char* child;
 	char* e2;
 	char* font;
@@ -130,13 +130,12 @@ label_46a1f2:
 		fcn_0047a040(0, 0, g_1040494, g_1040490);
 		fcn_0047cba0(0, 0, g_77250c, (char*) g_7725a8, 0);
 	}
-	tab = (char*) g_772540;
-	if (!*(char**) tab)
+	if (!*(char**) g_772540)
 		goto label_46aadd;
 	for (;;) {
 		if (i >= 0x3fe)
 			goto label_46aadd;
-		ent = *(char**) (tab + i * 4);
+		ent = *(char**) ((char*) g_772540 + i * 4);
 		if ((!*(int*) (ent + 0x50) || !*(int*) (*(int*) (ent + 0x50) + 0x198))
 		    && *(int*) (ent + 4) && !*(int*) (ent + 0x48)) {
 			dx = *(int*) (ent + 0x10);
@@ -357,7 +356,7 @@ label_46a7ab:
 		}
 		fcn_0047a040(0, 0, g_1040494, g_1040490);
 		i++;
-		if (!*(char**) (tab + i * 4))
+		if (!*(char**) ((char*) g_772540 + i * 4))
 			break;
 	}
 label_46aadd:

@@ -90,7 +90,7 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 		if (slot < *(int*) (a1 + 0x194)) {
 			return 0;
 		}
-		if (!((float) b > g_66413c)) {
+		if ((float) b == g_66413c) {
 			return 0;
 		}
 		*(int*) (a3 + 0x10) = slot;
@@ -133,7 +133,7 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 		if (weight[i] > *(unsigned int*) (a1 + 0x194)) {
 			used[i] = 0;
 			left--;
-		} else if ((float) b > g_66413c) {
+		} else if ((float) b != g_66413c) {
 			ratio[i] = (float) b / (float) count[i];
 		} else {
 			used[i] = 0;

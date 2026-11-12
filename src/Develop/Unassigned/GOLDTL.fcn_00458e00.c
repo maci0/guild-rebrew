@@ -15,7 +15,7 @@ char __cdecl fcn_00458e00(char* a0, char* a1)
 	int row;
 	int col_idx;
 	int shade;
-
+	float* uv;
 	if (a0 != 0 && *(int*) (a0 + 0xc) > 0 && a1 != 0 && *(int*) (a1 + 0x1c) != 0) {
 		scale = *(float*) a1 * *(float*) 0x6628cc * *(float*) 0x662dc0;
 		if (((unsigned char*) a1)[0x2a] == 0) {
@@ -43,30 +43,30 @@ char __cdecl fcn_00458e00(char* a0, char* a1)
 		obj = *(void**) a0;
 		(*(void (__stdcall**) (void*, int, int, void**, int)) (*(int*) obj + 0x2c))(obj, 0,
 			*(int*) (a0 + 0xc) << 5, &buf, 0x2000);
-		y = (float) *(int*) 0x1042574;
-		for (row = 0; row < 0x30; row += 8) {
+		y = (float) *(int*) 0x1042574; uv = (float*) (a0 + 0x94);
+		row = 0; do {
 			x = (float) *(int*) 0x1042570;
-			for (col_idx = 0; col_idx < 8; col_idx++) {
-				if (a0[0x30 + row + col_idx] != 0) {
-					*(float*) (buf + 0x20 * (row + col_idx)) = x;
-					*(float*) (buf + 0x20 * (row + col_idx) + 4) = y;
-					*(float*) (buf + 0x20 * (row + col_idx) + 8) = 1.0f;
-					*(float*) (buf + 0x20 * (row + col_idx) + 0xc) = 1.0f;
-					*(unsigned int*) (buf + 0x20 * (row + col_idx) + 0x10) =
+			for (col_idx = 8; col_idx != 0; col_idx--, row++) {
+				if (a0[0x30 + row] != 0) {
+					*(float*) (buf + 0x20 * (row)) = x;
+					*(float*) (buf + 0x20 * (row) + 4) = y;
+					*(float*) (buf + 0x20 * (row) + 8) = 1.0f;
+					*(float*) (buf + 0x20 * (row) + 0xc) = 1.0f;
+					*(unsigned int*) (buf + 0x20 * (row) + 0x10) =
 						*(unsigned int*) col;
-					buf[0x20 * (row + col_idx) + 0x17] = a0[0x60 + row + col_idx];
-					*(float*) (buf + 0x20 * (row + col_idx) + 0x18) =
-						(*(float*) (a0 + 0x9c + 0x10 * (row + col_idx)) + *(float*) (a0 + 0x14))
+					buf[0x20 * (row) + 0x17] = a0[0x60 + row];
+					*(float*) (buf + 0x20 * (row) + 0x18) =
+						(uv[2] + *(float*) (a0 + 0x14))
 						* scale + *(float*) (a1 + 4);
-					*(float*) (buf + 0x20 * (row + col_idx) + 0x1c) =
-						*(float*) (a1 + 0x14)
-						- *(float*) (a1 + 0x18)
-						* *(float*) (a0 + 0x94 + 0x10 * (row + col_idx));
+					*(float*) (buf + 0x20 * (row) + 0x1c) =
+						-(*(float*) (a1 + 0x18)
+						* uv[0])
+						+ *(float*) (a1 + 0x14);
 				}
-				x += xstep;
+				x += xstep; uv += 4;
 			}
 			y += ystep;
-		}
+		} while (row < 0x30);
 		obj = *(void**) a0;
 		(*(void (__stdcall**) (void*)) (*(int*) obj + 0x30))(obj);
 		if (*(int*) (a0 + 0xc) != 0 && *(int*) (a0 + 0x10) != 0) {

@@ -4,15 +4,15 @@ extern unsigned char g_773d75;
 extern float g_662910;
 extern char g_868080[];
 
-typedef struct F8 {
-	int mask;
-	int b;
-} F8;
+
+
+
+
 
 void __cdecl fcn_00546190(void*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_004a5e60(char*, int, F8, int, float, int*);
+int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float, int*);
 void __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -23,14 +23,14 @@ void __cdecl fcn_005505b0(int a)
 {
 	char buf[0x800];
 	char msg[0x200];
-	F8 f;
+
 	char* p;
 	int id;
 	int found;
 	int n;
 
-	f.mask = 0x400080;
-	f.b = 0;
+
+
 	if (*(int*) (a + 0x70) == -2) {
 		fcn_00546190((void*) a);
 		return;
@@ -41,7 +41,7 @@ void __cdecl fcn_005505b0(int a)
 		id = 0;
 		if (*(short*) (p - 2) != -1 && *(unsigned char*) (p + 6) >= 2
 		    && (*(char*) p == 6 || *(char*) p == 7 || *(char*) p == 5)) {
-			if (fcn_004a5e60(p - 2, 4, f, 0, 100.0f, &found)) {
+			if (fcn_004a5e60((unsigned short*) (p - 2), 4, 0x400080, 0, 0.0f, 100.0f, &found)) {
 				gm_ResolveEntityById((void**) &id, 0, 0, found);
 			}
 			if (*(char*) p == 6 || *(char*) p == 7) {

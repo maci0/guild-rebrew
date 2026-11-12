@@ -5,7 +5,7 @@ typedef struct {
 } blk24;
 // SIZE 0x24
 
-blk24 g_68bef4 = { { 0x7a657073, 0, 0, 0, 0, 0, 0, 0, 0 } };
+blk24 g_68bef4 = { { 0x7a657073, 0x2f6c6169, 0x686e6965, 0x646e6561, 0x765f6769, 0x625f6d6f, 0x6e65646f, 0x68656e5f, 0x006e656d } };
 
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
@@ -98,11 +98,11 @@ make_task:
 		fcn_00406340(*(char**) ((char*) rec + 0x184), "kampf/schlagen1",
 		             1);
 	} else {
-		task = fcn_0040c230(*(char**) ((char*) rec + 0x184),
-		                    (void (__cdecl*)(int)) fcn_004d4950,
-		                    *(int*) r == 0 ? (i != 0 ? 8 : 2)
-		                                   : (i != 0 ? 6 : 2),
-		                    0x2e, 1);
+		if (*(int*) r == 0) {
+			if (i != 0) task = fcn_0040c230(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 8, 0x2e, 1);
+			else task = fcn_0040c230(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 2, 0x2e, 1);
+		} else if (i != 0) task = fcn_0040c230(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 6, 0x2e, 1);
+		else task = fcn_0040c230(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 2, 0x2e, 1);
 		*(float*) (task + 0x178) = 1.4f;
 		*(int**) (task + 0x17c) = ent;
 		*(unsigned short**) (task + 0x180) = rec;
@@ -139,7 +139,7 @@ block_174:
 		}
 		fcn_004d31d0((char*) rec, g_102d020, g_102d024, 8, &v13,
 		             (unsigned int*) &ent);
-		fcn_004c6680((char*) *(int*) (q + 0x34), v13, (int) ent, 0);
+		q = *(char**) ((char*) rec + 0x184); fcn_004c6680((char*) *(int*) (q + 0x34), v13, (int) ent, 0);
 		p[0] = -1;
 		p[1] = 0;
 	}

@@ -32,6 +32,7 @@ typedef struct {
 	float x;		/* +0x40 */
 	float y;		/* +0x44 */
 	float z;		/* +0x48 */
+	char pad4c[4];
 	float px;		/* +0x50 */
 	float py;		/* +0x54 */
 	float pz;		/* +0x58 */
@@ -49,7 +50,7 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 	float* s;
 	float in[3];
 	float out[16];
-	float a0;
+	float a0; double d0; double d1; double d2;
 	float a1;
 	float a2;
 	float b0;
@@ -74,26 +75,27 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 	float sv;
 	float f;
 	float f2;
-	char msg[0x100];
+	char msg[3][0x80];
 	int i;
 
 	cam = g_6b8014;
-	m = (float*) (cam + 0x18c);
+	
 	in[0] = self->x - *(float*) (cam + 0x84);
 	in[1] = self->y - *(float*) (cam + 0x88);
 	in[2] = self->z - *(float*) (cam + 0x8c);
 	fcn_00451900(in, out);
+	cam = g_6b8014; m = (float*) (cam + 0x18c);
 	b0 = (out[4] + out[0]) * g_6628a8 + out[8] * g_6629b0;
 	self->x = *(float*) (cam + 0x84);
 	self->y = *(float*) (cam + 0x88);
 	self->z = *(float*) (cam + 0x8c);
 	b1 = (out[5] + out[1]) * g_6628a8 + out[9] * g_6629b0;
-	in[0] = self->px - *(float*) (cam + 0x4c);
-	in[1] = self->py - *(float*) (cam + 0x50);
-	in[2] = self->pz - *(float*) (cam + 0x54);
-	a0 = (in[0] * m[0] + in[1] * m[4] + in[2] * m[8]) * g_662a70;
-	a1 = (in[0] * m[1] + in[1] * m[5] + in[2] * m[9]) * g_662a70;
-	a2 = (in[0] * m[2] + in[1] * m[6] + in[2] * m[10]) * g_662a70;
+	d0 = (double) self->px - *(float*) (cam + 0x4c);
+	d1 = (double) self->py - *(float*) (cam + 0x50);
+	d2 = (double) self->pz - *(float*) (cam + 0x54);
+	a0 = d2 * m[8] + d1 * m[4] + d0 * m[0]; a0 *= g_662a70;
+	a1 = d2 * m[9] + d1 * m[5] + d0 * m[1]; a1 *= g_662a70;
+	a2 = (d2 * m[10] + d1 * m[6] + d0 * m[2]) * g_662a70;
 	self->px = *(float*) (cam + 0x4c);
 	self->py = *(float*) (cam + 0x50);
 	self->pz = *(float*) (cam + 0x54);
@@ -118,8 +120,8 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 		wx = t0 * s[4] + u0 * s[5];
 		s[0] = wx * dt + s[0] + a0 + b0;
 		if (s[0] < g_662a60 || g_662a58 <= s[0]) {
-			sprintf(msg, (char*) 0x6775e0, (long) i, (double) s[0]);
-			sprintf(msg, (char*) 0x6775b8, (double) self->wind_x, (double) self->wind_z);
+			sprintf(msg[0], (char*) 0x6775e0, (long) i, (double) s[0]);
+			sprintf(msg[0], (char*) 0x6775b8, (double) self->wind_x, (double) self->wind_z);
 			s[0] = 0;
 		}
 		if (s[0] < g_662a50) {
@@ -133,10 +135,10 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 			} while (g_6629c8 <= s[0]);
 		}
 		wy = t1 * s[4] + u1 * s[5];
-		s[1] = wy * dt + s[1] + a1 + b1;
+		s[1] = wy * dt + a1 + b1 + s[1];
 		if (s[1] < g_662a60 || g_662a58 <= s[1]) {
-			sprintf(msg, (char*) 0x6775a4, (long) i, (double) s[1]);
-			sprintf(msg, (char*) 0x6775b8, (double) self->wind_x, (double) self->wind_z);
+			sprintf(msg[1], (char*) 0x6775a4, (long) i, (double) s[1]);
+			sprintf(msg[1], (char*) 0x6775b8, (double) self->wind_x, (double) self->wind_z);
 			s[1] = 0;
 		}
 		if (s[1] < g_662a50) {
@@ -152,7 +154,8 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 		wz = t2 * s[4] + u2 * s[5];
 		s[2] = wz * dt + dz + s[2];
 		if (s[2] < g_662a60 || g_662a58 <= s[2]) {
-			sprintf(msg, (char*) 0x677590, (long) i, (double) s[2]);
+			sprintf(msg[2], (char*) 0x677590, (long) i, (double) s[2]);
+			sprintf(msg[2], (char*) 0x6775b8, (double) self->wind_x, (double) self->wind_z);
 			s[2] = 0;
 		}
 		if (s[2] < g_662a50) {

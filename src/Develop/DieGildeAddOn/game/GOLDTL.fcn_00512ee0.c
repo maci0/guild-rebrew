@@ -314,6 +314,7 @@ void __cdecl fcn_00512ee0(void)
 				fcn_00535960();
 			}
 			q = fcn_004c4480(h);
+			fcn_004c5f60(p->id, *(int *)(q + 4), *(int *)(q + 4));
 			count = fcn_0050b750(3000, g_773d75);
 			fcn_004c5150(*(int *)(q + 4), -1, g_773d75, count);
 			if (outer <= 0xf) {
@@ -363,7 +364,7 @@ void __cdecl fcn_00512ee0(void)
 						goto release_handles;
 				}
 			}
-			fcn_004c6000(*(int *)(q + 1), *(int *)(e + 4));
+			fcn_004c6000(*(int *)(e + 4), *(int *)(q + 1));
 			h = fcn_004c5f60(*(int *)(q + 1), *(int *)(e + 4),
 					*(int *)(e + 4));
 			while (fcn_004c4450(h) == 0) {

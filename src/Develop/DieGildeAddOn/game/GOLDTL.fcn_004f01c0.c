@@ -50,7 +50,6 @@ int* __cdecl fcn_00417d00(int a1, float* pos, int n, float a4, float a5,
 int __cdecl fcn_00422460(int a1, char* name);
 void __cdecl fcn_004193f0(int a1, int a2, int a3, float a4);
 int __cdecl gm_ResolveEntityById(char** out, int a, int b, int c);
-int __cdecl _ftol(float v);
 void __cdecl fcn_004c4510(char* a1, int a2);
 void __cdecl fcn_004c4670(int a1, int a2, int a3, void* a4);
 void __cdecl fcn_004c5360(void);
@@ -210,8 +209,9 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 	fcn_00418000(0, &cx, 200, 25.0f, 70.0f,
 	             rr * *(float*) 0x6628bc, 900.0f, 100.0f, 70.0f, &xhi,
 	             0x5dc, 7, *(int*) &col);
-	if (fcn_004185a0(0, &ov.x, 100, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f,
-	                 7.0f, 8.0f, *(int*) &col) != 0) {
+	fcn_004185a0(0, &cx, 100, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f,
+	                 7.0f, 8.0f, *(int*) &col);
+	if (count != 0) {
 		f1 = rr * *(float*) 0x6652c8;
 		f2 = rr * *(float*) 0x662d34;
 		f3 = rr * *(float*) 0x6629d0;
@@ -253,11 +253,11 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 				msg[0x36] = 2;
 				*(int*) (msg + 0x58) = *(int*) (p + 1);
 				*(int*) (msg + 0x5c) =
-				    _ftol(out.slot[i].strength);
+				    (int) out.slot[i].strength;
 				msg[0xb0] = 1;
 				fcn_004c5530(msg);
 			} else if (out.slot[i].type == 2) {
-				neg = (char) _ftol(-out.slot[i].strength);
+				neg = (char) (int) -out.slot[i].strength;
 				fcn_004c4510(p, *(int*) (p + 1));
 				fcn_004c4670(1, 1, 0x5c, &neg);
 				fcn_004c5360();

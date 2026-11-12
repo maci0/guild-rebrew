@@ -71,7 +71,7 @@ void __cdecl fcn_004868d0(Bld*, BldRec*);
 int __cdecl fcn_005b1e40(int);
 int __cdecl fcn_00503d10(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
-unsigned short __cdecl gm_RandomMod(unsigned short);
+int __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0047e220(int);
 void __cdecl fcn_0047e0e0(Bld*, int);
@@ -114,7 +114,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 	hit = 0;
 	if (g_7f4c04 != 8 && g_7f4c04 != 0xd) {
 		for (i = 0; i < g_100b0ac; i++) {
-			rec = (BldRec*) (g_100d0c0 + i * 0x58);
+			rec = &((BldRec*) g_100d0c0)[i];
 			if (rec->id != (int) bld->id)
 				continue;
 			goods = lpObjektePROT + rec->id * 0x41;
@@ -134,7 +134,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 	else if (bld->f1b4 & 0x100) {
 		if (bld->id != 0) {
 			for (i = 0; i < g_100b0ac; i++) {
-				rec = (BldRec*) (g_100d0c0 + i * 0x58);
+				rec = &((BldRec*) g_100d0c0)[i];
 				if (rec->id != (int) bld->id)
 					continue;
 				goods = lpObjektePROT + rec->id * 0x41;
@@ -193,11 +193,12 @@ pick:
 		order[i] = i;
 	for (i = 0; i < 0x20; i++) {
 		r = gm_RandomMod(0x20) & 0xffff;
+		j = order[i];
 		order[i] = order[r];
-		order[r] = order[i + 1];
+		order[r] = j;
 	}
 	for (i = 0; i < g_100b0ac; i++) {
-		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
+		rec = &((BldRec*) g_100d0c0)[order[i]];
 		goods = lpObjektePROT + rec->id * 0x41;
 		if ((*(unsigned char*) goods == 0x17 || *(unsigned char*) goods == 0x25) && rec->f3c >= 5)
 			continue;
@@ -214,7 +215,7 @@ pick:
 			continue;
 		if (!fcn_00486640(bld, rec, 1))
 			continue;
-		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
+		rec = &((BldRec*) g_100d0c0)[order[i]];
 		rec->f54 = rec->f54 | 8;
 		fcn_004868d0(bld, rec);
 		bld->id = (unsigned short) rec->id;
@@ -222,7 +223,7 @@ pick:
 		goto done;
 	}
 	for (i = 0; i < g_100b0ac; i++) {
-		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
+		rec = &((BldRec*) g_100d0c0)[order[i]];
 		goods = lpObjektePROT + rec->id * 0x41;
 		if ((*(unsigned char*) goods == 0x17 || *(unsigned char*) goods == 0x25) && rec->f3c >= 5)
 			continue;
@@ -251,8 +252,8 @@ done:
 	if (g_100dc20 == bld->x16c && g_100dc38 < 4) {
 		i = 0;
 		while (i < g_100b0ac) {
-			rec = (BldRec*) (g_100d0c0 + i * 0x58);
-			memcpy(g_100dc60 + g_100dc38 * 0x58, rec, 0x58);
+			rec = &((BldRec*) g_100d0c0)[i];
+			((BldRec*) g_100dc60)[g_100dc38] = *rec;
 			for (j = 0; j < 4; j++) {
 				if (rec->cand[j] >= 0) {
 					n = *(int*) (g_100dc40 + g_100dc38 * 4);
@@ -291,7 +292,7 @@ done:
 	put.flags = 0;
 	if (g_100b0ac > 0) {
 		for (i = 0; i < g_100b0ac; i++) {
-			rec = (BldRec*) (g_100d0c0 + i * 0x58);
+			rec = &((BldRec*) g_100d0c0)[i];
 			if (rec->f54 & 8)
 				put.flags = put.flags + 1;
 			if (rec->f54 & 0x10)
@@ -308,7 +309,7 @@ done:
 		put.x1c = 0;
 		i = 0;
 		for (; i < g_100b0ac; i++) {
-			rec = (BldRec*) (g_100d0c0 + i * 0x58);
+			rec = &((BldRec*) g_100d0c0)[i];
 			if (rec->f54 & 8) {
 				put.kind = 4;
 				put.rec = (int) rec;
@@ -317,7 +318,7 @@ done:
 			else
 				continue;
 			if (g_100dc20 == bld->x16c && g_100dc3c < 4) {
-				memcpy(g_100ddc0 + g_100dc3c * 0x58, (void*) put.rec, 0x58);
+				((BldRec*) g_100ddc0)[g_100dc3c] = *(BldRec*) put.rec;
 				g_100dc3c = g_100dc3c + 1;
 			}
 		}

@@ -1,4 +1,4 @@
-extern int __cdecl sub_430910(void*, int, int, void*);
+unsigned int __cdecl vfs_fwrite(void* data, int size, int count, void* stream);
 
 #pragma pack(1)
 typedef struct {
@@ -53,67 +53,64 @@ extern ApEvent520d90 g_7dcae0[256];
 /* ADDRESS: GOLDTL 0x00520d90 */
 int __cdecl fcn_00520d90(void* stream)
 {
-	unsigned char* p;
 	Unit520d90* u;
 	int i;
 	int k;
 	int count;
-	int ver;
 	int tmp;
 
 	count = 0;
-	p = (unsigned char*) g_77e980;
-	do {
-		if (*p != 0)
+	for (i = 0; i < 1024; i++) {
+		if (g_77e980[i].kind != 0)
 			count++;
-		p += 0x14c;
-	} while (p < (unsigned char*) g_77e980 + 1024 * 0x14c);
-	if (sub_430910(&ver, 4, 1, stream) <= 0)
+	}
+	if (vfs_fwrite(&count, 4, 1, stream) <= 0)
 		return 0;
-	if (sub_430910(&tmp, 4, 1, stream) <= 0)
+	tmp = 0xa0;
+	if (vfs_fwrite(&tmp, 4, 1, stream) <= 0)
 		return 0;
 	for (i = 0; i < 1024; i++) {
 		u = &g_77e980[i];
 		if (u->kind == 0)
 			continue;
-		if (sub_430910(&u->kind, 1, 1, stream) <= 0)
+		if (vfs_fwrite(&u->kind, 1, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&u->f04, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&u->f04, 4, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&u->f08, 2, 1, stream) <= 0)
+		if (vfs_fwrite(&u->f08, 2, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&u->f0c, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&u->f0c, 4, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&u->f10, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&u->f10, 4, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(u->f14, 0x30, 1, stream) <= 0)
+		if (vfs_fwrite(u->f14, 0x30, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(u->f44, 0xe, 1, stream) <= 0)
+		if (vfs_fwrite(u->f44, 0xe, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(u->f52, 0xe, 1, stream) <= 0)
+		if (vfs_fwrite(u->f52, 0xe, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(u->f60, 0xe, 1, stream) <= 0)
+		if (vfs_fwrite(u->f60, 0xe, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&u->f70, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&u->f70, 4, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&u->f78, 1, 1, stream) <= 0)
+		if (vfs_fwrite(&u->f78, 1, 1, stream) <= 0)
 			return 0;
 		for (k = 0; k < 8; k++) {
-			if (sub_430910(&u->f8c[k], 4, 1, stream) <= 0)
+			if (vfs_fwrite(&u->f8c[k], 4, 1, stream) <= 0)
 				return 0;
 		}
 		if (u->blob != 0 && u->blob_len != 0) {
-			if (sub_430910(&u->blob_len, 4, 1, stream) <= 0)
+			if (vfs_fwrite(&u->blob_len, 4, 1, stream) <= 0)
 				return 0;
-			if (sub_430910(u->blob, u->blob_len, 1, stream) <= 0)
+			if (vfs_fwrite(u->blob, u->blob_len, 1, stream) <= 0)
 				return 0;
 		}
 		else {
 			tmp = 0;
-			if (sub_430910(&tmp, 4, 1, stream) <= 0)
+			if (vfs_fwrite(&tmp, 4, 1, stream) <= 0)
 				return 0;
 		}
-		if (sub_430910(u->f0ac, 0xa0, 1, stream) <= 0)
+		if (vfs_fwrite(u->f0ac, 0xa0, 1, stream) <= 0)
 			return 0;
 	}
 	count = 0;
@@ -121,24 +118,24 @@ int __cdecl fcn_00520d90(void* stream)
 		if (g_7d2020[i].id != 0)
 			count++;
 	}
-	if (sub_430910(&tmp, 4, 1, stream) <= 0)
+	if (vfs_fwrite(&count, 4, 1, stream) <= 0)
 		return 0;
 	for (i = 0; i < 256; i++) {
 		if (g_7d2020[i].id == 0)
 			continue;
-		if (sub_430910((void*) (g_7d2020[i].id + 4), 4, 1, stream) <= 0)
+		if (vfs_fwrite((void*) (g_7d2020[i].id + 4), 4, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&g_7d2020[i].state, 1, 1, stream) <= 0)
+		if (vfs_fwrite(&g_7d2020[i].state, 1, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&g_7d2020[i].has_amount, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&g_7d2020[i].has_amount, 4, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&g_7d2020[i].owner, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&g_7d2020[i].owner, 4, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&g_7d2020[i].amount, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&g_7d2020[i].amount, 4, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(g_7d2020[i].pos, 0xe, 1, stream) <= 0)
+		if (vfs_fwrite(g_7d2020[i].pos, 0xe, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(g_7d2020[i].name, 0x80, 1, stream) <= 0)
+		if (vfs_fwrite(g_7d2020[i].name, 0x80, 1, stream) <= 0)
 			return 0;
 	}
 	count = 0;
@@ -146,20 +143,20 @@ int __cdecl fcn_00520d90(void* stream)
 		if (g_7dcae0[i].f8 != 0 || g_7dcae0[i].fc != 0 || g_7dcae0[i].name[0] != 0)
 			count++;
 	}
-	if (sub_430910(&tmp, 4, 1, stream) <= 0)
+	if (vfs_fwrite(&count, 4, 1, stream) <= 0)
 		return 0;
 	for (i = 0; i < 256; i++) {
 		if (g_7dcae0[i].f8 == 0 && g_7dcae0[i].fc == 0 && g_7dcae0[i].name[0] == 0)
 			continue;
-		if (sub_430910(&g_7dcae0[i].b0, 1, 1, stream) <= 0)
+		if (vfs_fwrite(&g_7dcae0[i].b0, 1, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&g_7dcae0[i].f4, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&g_7dcae0[i].f4, 4, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&g_7dcae0[i].f8, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&g_7dcae0[i].f8, 4, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(&g_7dcae0[i].fc, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&g_7dcae0[i].fc, 4, 1, stream) <= 0)
 			return 0;
-		if (sub_430910(g_7dcae0[i].name, 0x40, 1, stream) <= 0)
+		if (vfs_fwrite(g_7dcae0[i].name, 0x40, 1, stream) <= 0)
 			return 0;
 	}
 	return 1;

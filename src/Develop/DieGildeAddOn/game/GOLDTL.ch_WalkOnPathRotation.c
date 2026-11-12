@@ -13,7 +13,7 @@ void __cdecl fcn_00438d70(int a1, int a2, int a3, int a4);
 /* ADDRESS: GOLDTL 0x0040a200 */
 void __cdecl ch_WalkOnPathRotation(char* obj)
 {
-	char buf[288];
+	char buf[256];
 	char* inst;
 	char* o;
 	float v;
@@ -43,7 +43,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 				*(float*) (inst + 0x1a4) = 0.4f;
 			}
 			if (fabs(v) > 1.5707964f) {
-				t *= 0.2f;
+				t *= 0.19999998807907104f;
 			} else if (fabs(v) > 1.0471976f) {
 				t *= 0.14f;
 			} else if (fabs(v) > 0.52359879f) {
@@ -83,7 +83,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 				*(float*) (inst + 0x1a4) = 0.4f;
 			}
 			if (fabs(v) > 1.5707964f) {
-				t *= 0.2f;
+				t *= 0.19999998807907104f;
 			} else if (fabs(v) > 1.0471976f) {
 				t *= 0.14f;
 			} else if (fabs(v) > 0.52359879f) {
@@ -110,7 +110,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 	if ((float) sqrt(dx * dx +
 	                 (*(float*) (o + 0x50) - *(float*) (obj + 0x128)) *
 	                     (*(float*) (o + 0x50) - *(float*) (obj + 0x128)) +
-	                 dz * dz) <=
+	                 dz * dz) >
 	    *(float*) (obj + 0x10c) * 1.4) {
 		if (*(int*) (obj + 0xf8) >= *(int*) (obj + 0xf0) - 1) {
 			ch_SetPosition(inst, (float*) (obj + 0x124), 0);

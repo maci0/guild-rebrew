@@ -77,7 +77,7 @@ void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 void __cdecl fcn_0046f2c0(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
-int __cdecl d2_CreateRadioGroup(int);
+int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_00469470(int, int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
@@ -202,7 +202,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 					s->btn = btn;
 					if (shown) {
 						if (holder == -1) {
-							holder = d2_CreateRadioGroup(1);
+							holder = d2_CreateRadioGroup(1, btn);
 						} else {
 							fcn_00469470(holder, btn);
 						}

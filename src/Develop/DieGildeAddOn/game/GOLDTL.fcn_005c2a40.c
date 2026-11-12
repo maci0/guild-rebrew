@@ -39,7 +39,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00476b60(void);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00526120(int, int);
-int __cdecl fcn_00526010(void*, int, int);
+int __cdecl fcn_00526010(void*, int, unsigned char);
 char* __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c4ef0(char*);
@@ -171,37 +171,35 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			sel = 0;
 			do {
 				if (g_67d370 == *ep) {
-					hi = eval_ObjektPreis2Credits(slots[sel * 3], 100);
-					val = (int) hi;
+					scale = (float) ((double) *(int*) 0x7747b4 * *(double*) 0x662ad8 +
+					                 *(double*) 0x662908);
+					val = (int) (eval_ObjektPreis2Credits(slots[sel * 3], 100) * scale);
 					if ((int) (unsigned char) *(base + 0x21) <=
 					    total + others) {
 						fcn_00526120(*(int*) 0x14ab260, 0);
 					} else if (fcn_00526010((void*) (g_7f4ca0 +
 					                                 (int) g_774970 * 0x21c),
-					                        val,
-					                        (total + others) << 8 |
-					                        g_773d75) != 0) {
-						for (i = 0; i < 0x3e; i++) {
-							cbuf[i] = 0;
-						}
-						cbuf[4] = 0x1f;
-						*(int*) ((char*) cbuf + 8) =
+					                        val, g_773d75) != 0) {
+						memset(msg, 0, sizeof(msg));
+						msg[4] = 0x1f;
+						*(int*) (msg + 8) =
 						    *(int*) (g_7f4ca4 +
 						             (int) g_774970 * 0x21c);
-						*(int*) ((char*) cbuf + 0xc) = *(int*) (a0 + 1);
-						*(int*) ((char*) cbuf + 0x28) = *(int*) &g_7f4c00;
-						*(int*) ((char*) cbuf + 0x2c) = g_7f4c04;
-						*(int*) ((char*) cbuf + 0x30) = g_7f4c08;
-						*(short*) ((char*) cbuf + 0x34) = g_7f4c0c;
-						*((char*) cbuf + 0x36) = 1;
-						*(short*) ((char*) cbuf + 0x5c) =
+						*(int*) (msg + 0xc) = *(int*) (a0 + 1);
+						*(int*) (msg + 0x28) = *(int*) &g_7f4c00;
+						*(int*) (msg + 0x2c) = g_7f4c04;
+						*(int*) (msg + 0x30) = g_7f4c08;
+						*(short*) (msg + 0x34) = g_7f4c0c;
+						msg[0x36] = 1;
+						*(short*) (msg + 0x5c) =
 						    (short) slots[sel * 3];
-						*(int*) ((char*) cbuf + 0x58) = *(int*) (a0 + 1);
+						*(int*) (msg + 0x58) = *(int*) (a0 + 1);
+						fcn_004c4eb0(g_6ac618);
 						fcn_004c5150(-1,
 						             *(int*) (g_7f4ca4 +
 						                     (int) g_774970 * 0x21c),
 						             (char) g_773d75, val);
-						fcn_004c5530((char*) cbuf);
+						fcn_004c5530(msg);
 						fcn_004c4ef0(g_6ac618);
 					}
 					break;

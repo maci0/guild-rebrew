@@ -1,7 +1,8 @@
 #include "client_types.h"
+typedef struct { unsigned char kind, unknown01[0x24c]; } BuildingProto5167c0;
 
 extern pos14_7f4c00 g_7f4c00;
-extern char* g_entity_type_table;
+extern unsigned char* lpGebaeudePROT;
 extern char* g_7f3b24;
 extern char g_7f3b40[];
 extern signed char g_7f3b00[];
@@ -53,14 +54,14 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	int type;
 	int count;
 	int i;
-	unsigned char* rec;
+	BuildingProto5167c0* rec;
 	unsigned char* entity;
 	unsigned char* obj;
 	unsigned char** p;
 
 	mode = fcn_00500e20(&(*(char*) &g_7f4c00));
 	gm_GetBuildingTypeCategory(*a0);
-	rec = (unsigned char*) (g_entity_type_table + *a0 * 0x24d);
+	rec = &((BuildingProto5167c0*)lpGebaeudePROT)[*a0];
 	entity = (unsigned char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, a1);
 	if (entity != 0 && *(unsigned short*) entity != 0xfd) {
 		type = ((signed char*) g_7f3b40)[*(unsigned short*) entity];
@@ -68,7 +69,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 		fcn_00516b70();
 	} else {
 		g_7f3b24 = 0;
-		type = ((signed char*) g_7f3b00)[*rec];
+		type = ((signed char*) g_7f3b00)[((BuildingProto5167c0*)lpGebaeudePROT)[*a0].kind];
 		fcn_00516be0();
 	}
 	if (g_6b8010 != type
@@ -110,22 +111,22 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	fcn_00437ac0(g_67a370, 0, 0x1e0, fcn_005156a0);
 	fcn_00437ac0(g_67a370, 0, 0x20, fcn_00515ef0);
 	fcn_00505c80((char*) a0);
-	if (*rec == 0x16) {
+	i = 0;
+	if (rec->kind == 0x16) {
 		count = 8;
 	} else {
-		count = (*rec != 1) ? 8 : 4;
+		count = (rec->kind != 1) * 4 + 4;
 	}
-	i = 0;
 	p = (unsigned char**) g_14d0020;
 	do {
 		obj = *p;
-		if (obj != 0 && (unsigned char*) fcn_00413190(*(int*) (obj + 0x88)) == entity) {
-			if (*(int*) (obj + 0x2c) == *(int*) (a0 + 1)
-			    || *(int*) (obj + 0x30) == *(int*) (entity + 2)) {
+		if (obj != 0 && fcn_00413190(*(int*) (obj + 0x88)) == type) {
+			if (*(int*) (obj + 0x2c) != *(int*) (a0 + 1)
+			    && *(int*) (obj + 0x30) != *(int*) (entity + 2)) {
+				ch_SetVisible((char*) obj, 0);
+			} else {
 				ch_SetVisible((char*) obj, 1);
 				ch_PlaceOnGround((char*) obj, 0);
-			} else {
-				ch_SetVisible((char*) obj, 0);
 			}
 		}
 		p++;
@@ -133,14 +134,15 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	p = (unsigned char**) (g_7f4ca0 + 0x184);
 	do {
 		obj = *p;
-		if (obj != 0 && (unsigned char*) fcn_00413190(*(int*) (obj + 0x88)) == entity) {
+		if (obj != 0 && fcn_00413190(*(int*) (obj + 0x88)) == type) {
+			obj = *p;
 			if ((*(int*) (obj + 0x2c) != *(int*) (a0 + 1)
 			     && *(int*) (obj + 0x30) != *(int*) (entity + 2))
 			    || i >= count) {
 				ch_SetVisible((char*) obj, 0);
 			} else {
 				ch_SetVisible((char*) obj, 1);
-				ch_PlaceOnGround((char*) obj, 0);
+				ch_PlaceOnGround((char*) *p, 0);
 				fcn_004fdcf0((char*) p - 0x184);
 				fcn_004fdfe0((char*) p - 0x184);
 				i++;

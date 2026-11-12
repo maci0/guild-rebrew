@@ -31,6 +31,7 @@ int __cdecl fcn_00495400(int kind, int id, int a3, Msg* b, Msg* a);
 /* ADDRESS: GOLDTL 0x0049a590 */
 int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
 {
+	int action = kind;
 	Counts cnt;
 	Slot slot[2];
 	Msg a;
@@ -38,8 +39,8 @@ int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
 	int r;
 	int i;
 
-	if (kind == 0) {
-		kind = 0x1d;
+	if (action == 0) {
+		action = 0x1d;
 	}
 	if (busy == 0) {
 		memset(slot, 0, sizeof(slot));
@@ -59,7 +60,7 @@ int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				b.type = 7;
 				b.a = *(int*) (e + 4);
 				b.b = 1;
-				r = fcn_00495400(kind, *(unsigned short*) e, 2, &a, &b);
+				r = fcn_00495400(action, *(unsigned short*) e, 2, &a, &b);
 				if (r != 0) {
 					*out1 = a;
 					*out2 = b;
@@ -79,9 +80,11 @@ int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				a.b = -1;
 				a.d = 0x1d;
 				if (i != 0) {
-					r = 0x1d;
+					*out1 = b;
+					*out2 = a;
+					return 0x1d;
 				} else {
-					r = fcn_00495400(kind, *(unsigned short*) e, 4, &b, &a);
+					r = fcn_00495400(action, *(unsigned short*) e, 4, &b, &a);
 				}
 				if (r != 0) {
 					*out1 = b;

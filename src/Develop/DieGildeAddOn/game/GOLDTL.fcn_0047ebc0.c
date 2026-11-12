@@ -344,14 +344,14 @@ done:
 		fcn_00489a70(bld, craft);
 		return;
 	}
-	if (put.count > 0) {
+	if (g_100b0ac > 0) {
 		put.bld = (int) bld;
 		put.craft = craft;
 		put.x10 = 0;
 		put.x20 = 0;
 		put.x1c = 0;
 		i = 0;
-		for (; i < put.count; i++) {
+		for (; i < g_100b0ac; i++) {
 			val = *(int*) (g_100d0c0 + i * 0x58 + 0x54);
 			if (val & 0x10) {
 				if (val & 0x20) {

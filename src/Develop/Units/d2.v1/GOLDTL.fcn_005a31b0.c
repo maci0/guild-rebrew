@@ -5,7 +5,9 @@ extern int g_772514;
 extern int g_14ce8e0;
 extern char g_1015f40[];
 extern char g_868060[];
-extern char* g_85ab80;
+#include "client_town.h"
+extern double g_665ed0;
+extern char g_6a40b0[];
 
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00412e50(int, int);
@@ -34,23 +36,24 @@ void __cdecl fcn_005a31b0(char* a0)
 	int k;
 	int idx;
 	int n;
-	int flag;
+	unsigned int flag;
+	int object;
 	double dt;
 	char* v12p;
 
 	flag = 0;
-	dt = 0.0f;
+	v12p = 0;
 	if (a0[0] != 'G') {
 		return;
 	}
-	p = (int) fcn_00445600(0, 0x100, 0, "dummy_Kartentisch_RECHTS_UNTEN");
+	p = (int) fcn_00445600(0, 0x100, 0, g_6a40b0);
 	if (p != 0) {
 		fcn_00412e50(p, g_6a256c);
 	}
-	p = (int) fcn_00445600(0, 0x40, 0, "ob_KARTENTISCH");
+	object = (int) fcn_00445600(0, 0x40, 0, "ob_KARTENTISCH");
 	idx = -1;
 	k = -1;
-	if (fcn_005373e0((void*) 0x5a31b0, 0x677c7)) {
+	if (fcn_005373e0((void*) fcn_005a31b0, 0x677c7)) {
 		do {
 			n = 0;
 			if (g_14ce8e0 != 0) {
@@ -71,7 +74,7 @@ void __cdecl fcn_005a31b0(char* a0)
 				d2_SetForm(idx, 1);
 				io_AppendText((char*) 0x1a11);
 				d2_SetForm(idx, 5);
-				io_AppendText((char*) 0x1a14, *(int*) (a0 + 0x65) * 0x2f4 + g_868060, *(int*) (*(int*) (a0 + 0x65) * 0x2a90 + (int) g_85ab80));
+				io_AppendText((char*) 0x1a14, *(int*) (a0 + 0x65) * 0x2f4 + g_868060, g_85ab80[*(int*) (a0 + 0x65)].c[0].x0);
 				win = *(int*) (idx * 700 + 0x103814c) * 0x3cc;
 				v12p = g_1015f40 + win;
 				sprintf(name, "Wappen128_ns_Stadt_%s", (char*) (*(int*) (a0 + 0x65) * 0x2f4 + (int) g_868060));
@@ -88,11 +91,11 @@ void __cdecl fcn_005a31b0(char* a0)
 				}
 				d2_SetForm(idx, 3);
 				io_AppendText((char*) 0x1a12);
-				it = gm_NextEntityQueryMatch();
+				it = (unsigned short*) fcn_00502cd0(*(int*) (slot + 0x14), 1, 5);
 				while (it != 0) {
 					p = (int) gm_FindSlotById(*(int*) (a0 + 0x65), *it);
 					if (p != 0 && *(int*) (p + 4) != 0) {
-						fcn_005a30c0((n & 3) * 0x3c + 0xe, (n >> 2) * 0x50 + 0x1e, g_772514, *it, *(int*) (a0 + 0x65));
+						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, g_772514, *it, *(int*) (a0 + 0x65));
 						n++;
 					}
 					it = gm_NextEntityQueryMatch();
@@ -100,25 +103,28 @@ void __cdecl fcn_005a31b0(char* a0)
 				n = 0;
 				d2_SetForm(idx, 4);
 				io_AppendText((char*) 0x1a13);
-				it = gm_NextEntityQueryMatch();
+				it = (unsigned short*) fcn_00502cd0(*(int*) (win2 + 0x14), 1, 5);
 				while (it != 0) {
 					p = (int) gm_FindSlotById(*(int*) (a0 + 0x65), *it);
 					if (p != 0 && *(int*) (p + 4) != 0) {
-						fcn_005a30c0((n & 3) * 0x3c + 0xe, (n >> 2) * 0x50 + 0x1e, g_772514, *it, *(int*) (a0 + 0x65));
+						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, g_772514, *it, *(int*) (a0 + 0x65));
 						n++;
 					}
 					it = gm_NextEntityQueryMatch();
 				}
 				k = 1;
 			}
-			dt = (double) (g_6b7fac - flag) * *(double*) 0x665fa8;
-			if (*(double*) 0x665ed0 <= dt) {
-				dt = *(double*) 0x665ed0;
+			dt = (double) ((unsigned int)g_6b7fac - flag) * *(double*) 0x665fa8;
+			if (!(dt < g_665ed0)) {
+				dt = g_665ed0;
 			}
 			*(float*) (v12p + 0x3a4) = (float) dt;
-		} while (fcn_005373e0((void*) 0x5a31b0, 0x677c7));
+		} while (fcn_005373e0((void*) fcn_005a31b0, 0x677c7));
 		if (idx != -1) {
 			fcn_00471e30(idx);
 		}
+	}
+	if (object != 0) {
+		fcn_00412e50(object, g_6a256c);
 	}
 }

@@ -54,8 +54,28 @@ void __cdecl fcn_00493f80(void)
 	int v8;
 	int stat;
 	int arg;
+	int fn;
+	char* fp;
 
-	memset(flags, 0, sizeof flags);
+	fn = sizeof flags;
+	fp = (char*) flags;
+	__asm {
+		mov edi, fp
+		mov ebx, fn
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L1:
+		add ecx, ebx
+		rep stosb
+	}
 	rec = (unsigned char*) 0x7f4ca2;
 	slot = flags;
 	do {

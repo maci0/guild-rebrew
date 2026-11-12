@@ -23,10 +23,13 @@ int __cdecl fcn_00545670(char* e, short a2, short a3, int a4, int a5)
 	}
 	for (i = 0, a = 0x77e8c4; a < 0x77e984; a += 0xc, i++) {
 		if (*(int*) a == -1) {
-			break;
+			goto found_slot;
 		}
 	}
+	goto allocate_slot;
+found_slot:
 	if (i >= 0x10) {
+allocate_slot:
 		i = fcn_005455b0();
 	}
 	if (i == -1) {

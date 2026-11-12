@@ -1,5 +1,9 @@
 extern char* g_1043370;
 extern char* g_1015ea0;
+extern int g_772514;
+extern char* g_77255c;
+extern unsigned char g_773d75;
+extern unsigned short g_774970;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
@@ -26,8 +30,8 @@ typedef struct ScrollSlot {
 #define g_town_flags(t) (((unsigned char*) (t))[4])
 #define g_town_dir(t) (*(int*) ((t) + 8))
 #define g_town_count(t) (*(int*) ((t) + 0x27a4))
-#define g_cur_dir (*(int*) 0x772514)
-#define g_cur_building (*(int*) 0x77255c)
+#define g_cur_dir g_772514
+#define g_cur_building (*(int*) &g_77255c)
 #define g_entity_type(t) ((unsigned char*) (0x7f4ca0 + (t) * 0x21c))
 
 /* ADDRESS: GOLDTL 0x005b0230 */
@@ -57,9 +61,11 @@ void __cdecl fcn_005b0230(char* town)
 	int kind;
 	float pos[4];
 	float height;
+	unsigned char copied;
+	ScrollSlot* candidate;
 
-	tex = *(int*) 0x1043370;
-	idx = *(unsigned char*) 0x773d75 * 0x2f4;
+	tex = (int) g_1043370;
+	idx = g_773d75 * 0x2f4;
 	base_x = *(int*) (idx + 0x86834c);
 	base_y = *(int*) (idx + 0x868350);
 
@@ -77,7 +83,7 @@ void __cdecl fcn_005b0230(char* town)
 	}
 	g_town_count(town) = 0;
 
-	p = (char*) gm_StartFilteredEntitySearch(2, 5, 9, 4, *(unsigned short*) 0x774970);
+	p = (char*) gm_StartFilteredEntitySearch(2, 5, 9, 4, g_774970);
 	ent = gm_StartFilteredEntitySearch(1, 6);
 	count = 0;
 	slot = (ScrollSlot*) (town + 0xdc);
@@ -138,10 +144,9 @@ void __cdecl fcn_005b0230(char* town)
 					p = (char*) (*(int*) (obj + 0x65) * 0x2f4 + 0x868060);
 					next = (unsigned char*) (g_1015ea0 + 0xcc + handle * 0x2f4);
 					do {
-						*next = *p;
-						p++;
-						next++;
-					} while (*next != 0);
+						copied = *p++;
+						*next++ = copied;
+					} while (copied != 0);
 				}
 				kind = *(unsigned short*) (obj + 0x27);
 				if (kind != 0xffff) {
@@ -159,16 +164,16 @@ void __cdecl fcn_005b0230(char* town)
 	}
 
 	count = g_town_count(town);
-	if (count != 1 && count - 1 >= 0) {
-		for (i = 1; i < count; i++) {
-			slot = (ScrollSlot*) (town + 0xe8);
-			for (j = i; j < count; j++) {
-				if (slot[1].y < slot[0].y) {
-					tmp = slot[0];
-					slot[0] = slot[1];
-					slot[1] = tmp;
+	if (count > 1) {
+		for (i = 1; i < g_town_count(town); i++) {
+			slot = (ScrollSlot*) (town + 0xdc) + i - 1;
+			for (j = i; j < g_town_count(town); j++) {
+				candidate = (ScrollSlot*) (town + 0xdc) + j;
+				if (candidate->y < slot->y) {
+					tmp = *slot;
+					*slot = *candidate;
+					*candidate = tmp;
 				}
-				slot++;
 			}
 		}
 	}
@@ -202,16 +207,15 @@ void __cdecl fcn_005b0230(char* town)
 					p = (char*) (*(int*) (slot->ent + 0x65) * 0x2f4 + 0x868060);
 					next = (unsigned char*) (g_1015ea0 + 0xcc + handle * 0x2f4);
 					do {
-						*next = *p;
-						p++;
-						next++;
-					} while (*next != 0);
+						copied = *p++;
+						*next++ = copied;
+					} while (copied != 0);
 				}
 				slot->x = bld_x - *(int*) (g_1015ea0 + 0x18 + handle * 0x2f4) / 2;
 				slot->y = bld_y - *(int*) (g_1015ea0 + 0x1c + handle * 0x2f4) / 2;
 				fcn_00469c40(*(int*) (g_cur_building + 4) + bld_x,
 				             *(int*) (g_cur_building + 8) + bld_y, handle);
-				if (!fcn_005cfd00((unsigned short*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c),
+				if (!fcn_005cfd00((unsigned short*) (0x7f4ca0 + g_774970 * 0x21c),
 				                  (int*) (town + 0xc), (unsigned char*) slot->ent)) {
 					*(int*) (g_1015ea0 + 0x5c + handle * 0x2f4) = 0;
 					*(int*) (g_1015ea0 + 0x1d0 + handle * 0x2f4) = 0;

@@ -55,7 +55,7 @@ typedef struct {
 	int f12;
 	int f16;
 	int f20;
-	char pad24[0x14];
+	char pad18[0x10];
 	int c28;
 	int c2c;
 	int c30;
@@ -239,7 +239,7 @@ located:
 		if (count < 0x10) {
 			p = (int*) 0x90d520;
 			acc = (int*) (0x779160 + count * 0x58);
-			for (i = 0; i < (int) (unsigned short) g_7f3ee4; i++) {
+			for (i = 0; i < (int) (unsigned short) g_7f3ee4 && (int) acc < 0x7796e0; i++) {
 				row = (char*) (lpObjektePROT + *p * 0x41);
 				if (*row == 0x17)
 					goto nextcand;

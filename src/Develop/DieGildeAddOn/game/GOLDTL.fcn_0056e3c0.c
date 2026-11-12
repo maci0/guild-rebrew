@@ -1,3 +1,4 @@
+#include "client_types.h"
 extern char g_7f4c00[];
 extern char g_7f4ca0[];
 extern char g_68cb58[];
@@ -46,10 +47,7 @@ void __cdecl fcn_0056e3c0(char* a0)
 		goto tail;
 	}
 	if (*(int*) (s + 0x20c) != -1 && *(int*) (a0 + 0x70) != 6) {
-		*(int*) (a0 + 0x52) = *(int*) g_7f4c00;
-		*(int*) (a0 + 0x56) = *(int*) (g_7f4c00 + 4);
-		*(int*) (a0 + 0x5a) = *(int*) (g_7f4c00 + 8);
-		*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) (g_7f4c00 + 0xc);
+		*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) g_7f4c00;
 		fcn_00500bb0((int*) (a0 + 0x52), 0, 5, 0);
 		return;
 	}
@@ -78,7 +76,7 @@ void __cdecl fcn_0056e3c0(char* a0)
 				if (c == 6 || c == 7) {
 					io_FormatTextBuffer((int*) (buf + 0x114), 0x42f4, *(unsigned short*) s, (int) p);
 					v = *(int*) (p + 1);
-					he_MessageBoxQuickjump(*(unsigned int*) (g_7f4ca0 + 4 + idx * 0x21c), v, buf + 0x120, 0, 0x60a, v, -1, g_6b5c60, g_6b5c60);
+					he_MessageBoxQuickjump(*(unsigned int*) (g_7f4ca0 + 4 + idx * 0x21c), v, buf + 0x114, 0, 0x60a, v, -1, g_6b5c60, g_6b5c60);
 				}
 			}
 		}
@@ -101,10 +99,7 @@ void __cdecl fcn_0056e3c0(char* a0)
 				memcpy(p + 0xf0, g_68cb58, 0x19);
 			}
 		}
-		*(int*) (a0 + 0x52) = *(int*) g_7f4c00;
-		*(int*) (a0 + 0x56) = *(int*) (g_7f4c00 + 4);
-		*(int*) (a0 + 0x5a) = *(int*) (g_7f4c00 + 8);
-		*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) (g_7f4c00 + 0xc);
+		*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) g_7f4c00;
 		fcn_00500bb0((int*) (a0 + 0x52), 0, 0x1e, 0);
 		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
 		if ((*(unsigned char*) (a0 + 0x78) & 4) != 0) {
@@ -164,10 +159,7 @@ void __cdecl fcn_0056e3c0(char* a0)
 			return;
 		}
 		if (v != 2) {
-			*(int*) (a0 + 0x52) = *(int*) g_7f4c00;
-			*(int*) (a0 + 0x56) = *(int*) (g_7f4c00 + 4);
-			*(int*) (a0 + 0x5a) = *(int*) (g_7f4c00 + 8);
-			*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) (g_7f4c00 + 0xc);
+			*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) g_7f4c00;
 			*(int*) (a0 + 0xb0) = *(int*) fcn_004c4480(*(int*) (a0 + 0xb4));
 			fcn_00500bb0((int*) (a0 + 0x52), 2, 0, 0);
 			*(int*) (a0 + 0x70) = 7;
@@ -179,10 +171,7 @@ void __cdecl fcn_0056e3c0(char* a0)
 			goto tail;
 		}
 		if (cut_FindCutsceneById(*(int*) (a0 + 0xb0)) != 0) {
-			*(int*) (a0 + 0x52) = *(int*) g_7f4c00;
-			*(int*) (a0 + 0x56) = *(int*) (g_7f4c00 + 4);
-			*(int*) (a0 + 0x5a) = *(int*) (g_7f4c00 + 8);
-			*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) (g_7f4c00 + 0xc);
+			*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) g_7f4c00;
 			fcn_00500bb0((int*) (a0 + 0x52), 2, 0, 0);
 			return;
 		}

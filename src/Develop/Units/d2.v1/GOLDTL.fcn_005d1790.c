@@ -1,9 +1,10 @@
+#include "client_data.h"
 extern int g_7e46ac;
 extern int g_772514;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char *g_1015ea0;
-extern int g_1015f4c[];
-extern int g_7f4c00;
+
+
 extern int g_14ad084;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -42,7 +43,7 @@ int __cdecl fcn_00526120(char *, int);
 void __cdecl fcn_00533a60(int, int, int *, int, char *, char *);
 void __cdecl fcn_00534210(int, int, char *, int, int);
 int __cdecl fcn_005373e0(int, int);
-char *__cdecl fcn_005463a0(int, int, int);
+char *__cdecl fcn_005463a0(int, ...);
 char *__cdecl he_fn_Handlung(void);
 int __cdecl fcn_005d2470(void *, void *);
 int __cdecl fcn_005db8e0(void *, void *);
@@ -61,7 +62,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 	int r4;
 	int r3;
 	struct d2_daterec dt;
-	int v23;
+	int buttons[2];
 	int v15;
 	int r2;
 	int r1;
@@ -160,7 +161,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 		;
 	}
 	io_AppendText("$5<$R%s $0<$3>$L%s$A$0>", 0x488,
-	    (g_7f4c00 >= 0x75 ? 0x483 : 0x486) + *((unsigned char *)a0 + 0xc));
+	    (g_7f4c00.a >= 0x75 ? 0x483 : 0x486) + *((unsigned char *)a0 + 0xc));
 	io_AppendText("$5<$R%s$0<", 0x1f5a);
 	ok = 0;
 	p = (char *)a0 + 0x68;
@@ -178,7 +179,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 		io_AppendText("$3>$L-$A$0>");
 	}
 	d2_SetForm(h, 3);
-	stamp = g_1015f4c[(int)g_772514 * 243];
+	stamp = g_1015f40[g_772514].xc;
 	io_FormatTextBuffer(buf12, 0x1f61);
 	idx = d2_ShowTxt(0, 1, buf12, g_772514);
 	*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
@@ -273,11 +274,11 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 				if ((*(int *)((char *)a0 + 0x1c8) & 0x10000) == 0) {
 					if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
 						io_FormatTextBuffer(bufA, 0x1f4b, *a0);
-						io_FormatTextBuffer(bufB, 0x1a96);
+						io_FormatTextBuffer(bufB, 0x1a97);
 						d2_SetForm(h, 4);
-						fcn_00533a60(g_772514, 0, &v15, 2, bufA, bufB);
-						r1 = v15;
-						r4 = v23;
+						fcn_00533a60(g_772514, 0, buttons, 2, bufA, bufB);
+						r1 = buttons[0];
+						r4 = buttons[1];
 					}
 				} else if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
 					io_FormatTextBuffer(bufA, 0x1f4b, *a0);
@@ -293,9 +294,9 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 							io_FormatTextBuffer(bufA, 0x1f4b, *a0);
 							io_FormatTextBuffer(bufB, 0x1a96);
 							d2_SetForm(h, 4);
-							fcn_00533a60(g_772514, 0, &v15, 2, bufA, bufB);
-							r1 = v15;
-							r2 = v23;
+							fcn_00533a60(g_772514, 0, buttons, 2, bufA, bufB);
+							r1 = buttons[0];
+							r2 = buttons[1];
 						}
 						goto label_2281;
 					}

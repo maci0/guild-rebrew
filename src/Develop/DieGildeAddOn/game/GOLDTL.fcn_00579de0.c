@@ -40,7 +40,7 @@ void __cdecl fcn_00529160(int a, int b, int id, int d);
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl gv_GetSlotEntry(int a, int b, int c);
 int __cdecl fcn_00500d20(Pos14* a, Pos14* b);
-int __cdecl _ftol(void);
+
 int __cdecl fcn_004f2d30(char* p, int a, int b, int c);
 char* __cdecl fcn_0050dc90(char* p);
 void __cdecl io_FormatTextBuffer(char* buf, int a, int b, int c, char* p);
@@ -95,7 +95,7 @@ void __cdecl fcn_00579de0(char* a0)
 	}
 	if (p->status == 0) {
 		v = fcn_00500d20(&p->posBC, &g_7f4c00);
-		f = (float) ((4 - *(int*) q) * v) * *(float*) 0x662a3c;
+		f = (float) (4 - *(int*) q) * v * *(float*) 0x662a3c;
 		if ((s[0x165] == 0x1b || s[0x165] == 0x1c)
 			&& (*(unsigned char*) (s + 0x1b4) & 1)) {
 			f *= *(float*) 0x6628bc;
@@ -109,7 +109,7 @@ void __cdecl fcn_00579de0(char* a0)
 		if (v <= 0) {
 			p->status = -1;
 		}
-		if ((int) (*(unsigned char*) (q + 0xc)) + _ftol() >= 0xff) {
+		if ((int) (*(unsigned char*) (q + 0xc)) + (int) p->add >= 0xff) {
 			p->status = -1;
 		}
 	}
@@ -119,8 +119,8 @@ void __cdecl fcn_00579de0(char* a0)
 	if (p->status >= 0) {
 		return;
 	}
-	v = _ftol();
-	if (q != 0 && v >= 1) {
+	v = (int) p->add;
+	if (q != 0 && v > 0) {
 		fcn_004f2d30(rec, p->xb0, p->xb4, v);
 		if (!s) {
 			fcn_00546190(a0);

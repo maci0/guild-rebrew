@@ -9,9 +9,9 @@ extern int g_772ec4;
 int __cdecl fcn_004ce590(int a1);
 int __cdecl fcn_00418000(int a1, float* v, int n, float f1, float f2,
     float f3, float f4, float f5, float f6, float* out, int a11, int a12,
-    float f13);
+    int a13);
 int* __cdecl fcn_004185a0(int a1, float* pos, int n, float f1, float f2,
-    float f3, float f4, float f5, float f6, float f7, float f8, float f9);
+    float f3, float f4, float f5, float f6, float f7, float f8, int a12);
 int __cdecl fcn_00417d00(int a1, float* v, int n, float f1, float f2,
     float f3, float f4, int a8);
 int __cdecl fcn_004234e0(char* bank, const char* name, int loop, int pan,
@@ -42,6 +42,7 @@ int __cdecl fcn_004cf6b0(void)
 	int* q;
 	float v8[4];
 	float v7[4];
+	unsigned char color[4];
 
 	world = *(int*) (((char*) g_67a370) + 0xb0);
 	count = 0;
@@ -61,19 +62,23 @@ int __cdecl fcn_004cf6b0(void)
 				v8[0] = *(float*) (p[-3] + 0x4c);
 				v8[1] = *(float*) (p[-3] + 0x50);
 				v8[2] = *(float*) (p[-3] + 0x54);
+				color[2] = 0xc0;
+				color[1] = 0xc0;
+				color[0] = 0xc0;
+				color[3] = 0x3f;
 				fcn_00418000(0, v8, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f,
-				    140.0f, 35.0f, v7, 0x190, 6, 1.5058822631835938f);
+				    140.0f, 35.0f, v7, 0x190, 6, *(int*) color);
 				fcn_004185a0(0, v8, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f,
-				    4.0f, 7.0f, 8.0f, 1.5058822631835938f);
+				    4.0f, 7.0f, 8.0f, *(int*) color);
 				fcn_00417d00(0, v8, 0x1e, 70.0f, 50.0f, 20.0f, 60.0f,
 				    0x3c);
-				map = *(int*) 0x6b8300;
-				n = p[0] * map + p[-1];
+				map = g_6b8300;
+				n = p[0] * *(int*) map + p[-1];
 				if (*(unsigned char*) (n + *(int*) (map + 0x14)) != 0) {
-					*(unsigned char*) (n + *(int*) (*(int*) 0x6b8300 + 0x10)) += 0xfb;
-					*(unsigned char*) (p[0] * *(int*) 0x6b8300 + p[-1] + *(int*) (*(int*) 0x6b8300 + 0x14)) = 0;
-					fcn_0043c2c0(*(int*) 0x6b8300);
-					fcn_0043ef20(*(int*) 0x6b8300);
+					*(unsigned char*) (n + *(int*) (map + 0x10)) += 0xfb;
+					*(unsigned char*) (p[0] * *(int*) g_6b8300 + p[-1] + *(int*) (g_6b8300 + 0x14)) = 0;
+					fcn_0043c2c0(g_6b8300);
+					fcn_0043ef20(g_6b8300);
 				}
 				fcn_004234e0((char*) g_772ec4, "Explosion_s", 1, 0x3f,
 				    0x7f, 0, 0);
@@ -90,8 +95,8 @@ int __cdecl fcn_004cf6b0(void)
 							n = (int) cut_RandMod((unsigned int) ((unsigned char) ((char*) obj)[6] - (unsigned char) ((char*) obj)[5]));
 							dmg = (int) ((double) (unsigned int) (n + (unsigned char) ((char*) obj)[5]) * (*(float*) (e + 0x1c) * 0.01));
 							dmg2 = (int) ((double) dmg * (1.0 - d * 0.01f));
-							*(int*) (e + 0x24) -= dmg2;
-							fcn_004cfc40((int) e, dmg2, *(int*) (e + 0x16c) == g_772e9c ? 1 : 2);
+							*(int*) (*(char**) q + 0x24) -= dmg2;
+							fcn_004cfc40(*q, dmg2, *(int*) (*(char**) q + 0x16c) == g_772e9c ? 1 : 2);
 							if (!fcn_004d4790(e)) {
 								fcn_00406340((char*) other, "kampf/arm_greifen", 1);
 							}

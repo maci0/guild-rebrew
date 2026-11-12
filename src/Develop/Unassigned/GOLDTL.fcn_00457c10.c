@@ -50,10 +50,9 @@ void* __cdecl fcn_00457c10(void* vb, void* ib, GOLDTL_TileMap* map, int step,
 	int* rect, GOLDTL_TileUv* uv, unsigned long diffuse)
 {
 	GOLDTL_BufferVtbl* ops;
-	GOLDTL_TerrainVertex* v;
 	unsigned short* idx;
 	unsigned char* tile;
-	void* verts;
+	GOLDTL_TerrainVertex* verts;
 	void* idxs;
 	int w;
 	int h;
@@ -67,6 +66,9 @@ void* __cdecl fcn_00457c10(void* vb, void* ib, GOLDTL_TileMap* map, int step,
 	float sx;
 	float sz;
 	float base_x;
+	float row_x;
+	float base_y;
+	float height_scale;
 	float base_z;
 	float u;
 	float u2;
@@ -76,16 +78,11 @@ void* __cdecl fcn_00457c10(void* vb, void* ib, GOLDTL_TileMap* map, int step,
 	w = (rect[1] - rect[0]) / step;
 	h = (rect[3] - rect[2]) / step;
 	ops = *(GOLDTL_BufferVtbl**) vb;
-	ops->Lock(vb, 0, (h + 1) * (w + 1) * 0x18, &verts, 0x2000);
+	ops->Lock(vb, 0, (h + 1) * (w + 1) * 0x18, (void**) &verts, 0x2000);
 	ops = *(GOLDTL_BufferVtbl**) ib;
 	ops->Lock(ib, 0, w * h * 0xc, &idxs, 0x2000);
-	if (verts == 0) {
-		return vb;
-	}
-	if (idxs == 0) {
-		ops = *(GOLDTL_BufferVtbl**) vb;
-		ops->Unlock(vb);
-		return vb;
+	if (verts == 0 || idxs == 0) {
+		goto cleanup;
 	}
 
 	fs = (float) step;
@@ -93,23 +90,25 @@ void* __cdecl fcn_00457c10(void* vb, void* ib, GOLDTL_TileMap* map, int step,
 	sz = fs * map->cell_z;
 	uv->du = fs * uv->du;
 	uv->dv = fs * uv->dv;
-	base_x = (float) rect[0] * sx + map->base_x;
+	row_x = (float) rect[0] * sx + map->base_x;
+	base_y = map->base_y + g_6628cc;
+	height_scale = map->height_scale;
 	base_z = (float) rect[2] * sz + map->base_z;
-	u = uv->u;
 	u2 = uv->v;
-	v = (GOLDTL_TerrainVertex*) verts;
 	y = rect[2];
 	while (y <= rect[3]) {
 		x = rect[0];
+		base_x = row_x;
+		u = uv->u;
 		while (x <= rect[1]) {
 			height = map->cells[map->stride * y + x];
-			v->x = base_x;
-			v->y = height * map->height_scale + (map->base_y + g_6628cc);
-			v->z = base_z;
-			v->diffuse = diffuse;
-			v->u = u;
-			v->v = u2;
-			v++;
+			verts->x = base_x;
+			verts->y = height * height_scale + base_y;
+			verts->z = base_z;
+			verts->diffuse = diffuse;
+			verts->u = u;
+			verts->v = u2;
+			verts++;
 			base_x += sx;
 			u += uv->du;
 			x += step;
@@ -158,6 +157,7 @@ void* __cdecl fcn_00457c10(void* vb, void* ib, GOLDTL_TileMap* map, int step,
 	ops = *(GOLDTL_BufferVtbl**) ib;
 	ops->Unlock(ib);
 	idxs = 0;
+cleanup:
 	if (verts != 0) {
 		ops = *(GOLDTL_BufferVtbl**) vb;
 		ops->Unlock(vb);

@@ -308,7 +308,7 @@ drop_elements:
 
 no_target:
 	if (g_6a25d4 == -1 || g_7e2a9c == 0) {
-		return;
+		goto drop_elements;
 	}
 	for (i = 0; i < 4; i++) {
 		if (g_6a25c4[i] != -1) {
@@ -316,7 +316,7 @@ no_target:
 			g_6a25c4[i] = -1;
 		}
 	}
-	if (lpObjektePROT[*(unsigned short*) g_7e2a9c * 0x41] != 0x1d) {
+	if (g_7e2a9c == 0 || lpObjektePROT[*(unsigned short*) g_7e2a9c * 0x41] != 0x1d) {
 		return;
 	}
 	if (g_6a25e8 != -1 && g_100f1dc != -1
@@ -324,7 +324,7 @@ no_target:
 		fcn_004bfe00((char*) g_7e2a9c);
 	}
 	if (g_6a25c0 != -1) {
-		d2_SetElementValue(g_6a25c0, 0, 100, *((char*) g_7e2a9c + 0x12));
+		d2_SetElementValue(g_6a25c0, 0, 100, *((unsigned char*) g_7e2a9c + 0x12));
 	}
 	d2_SetForm(g_6a25b8, 2);
 	for (i = 0; i < 4; i++) {

@@ -1,3 +1,13 @@
+#include "client_types.h"
+
+typedef struct {
+    int kind;
+    char pad4[0x10];
+} Lane;
+extern Lane g_778d4c[4];
+extern Slot_778da0 g_778da0[16];
+extern char* g_1015ea0;
+
 typedef unsigned char  u8;
 typedef unsigned short u16;
 typedef unsigned int   u32;
@@ -22,10 +32,12 @@ int __cdecl fcn_00597bb0(char* ep)
     int b;
     int id;
     int i, j, slot, idx;
+    Slot_778da0* rec;
 
-    b = ep[0x1c];
-    for (i = 0; i < 3; i++)
-        *(int*)(0x778d4c + 20 * i) = tbl[i + b * 4];
+    for (i = 0; i < 4; i++) {
+        b = *(u8*)(ep + 0x1c);
+        g_778d4c[i].kind = tbl[i + b * 4];
+    }
 
     q = (u16*)fcn_00502cd0(*(int*)(ep + 0x14), 1, 5);
     if (q != 0) {
@@ -33,52 +45,53 @@ int __cdecl fcn_00597bb0(char* ep)
             id = *q;
             idx = -1;
             for (j = 0; j < 16; j++) {
-                if (*(int*)(0x778da0 + 56 * j) == id) {
+                if (g_778da0[j].x0 == id) {
                     idx = j;
                     break;
                 }
             }
             if (idx >= 0) {
-                *(int*)(0x778dd0 + 56 * idx) =
+                g_778da0[idx].x30 =
                     gm_GetMsgField(ep, (char*)q);
             } else {
                 slot = -1;
                 for (j = 0; j < 16; j++) {
-                    if (*(int*)(0x778da0 + 56 * j) == 0) {
+                    if (g_778da0[j].x0 == 0) {
                         slot = j;
                         break;
                     }
                 }
                 if (slot >= 0 && slot < 16) {
-                    *(int*)(0x778da0 + 56 * slot) = id;
-                    *(int*)(0x778da0 + 56 * slot + 0x2c) = 0;
-                    *(int*)(0x778da0 + 56 * slot + 0x30) = 0;
-                    *(int*)(0x778da0 + 56 * slot + 0x34) = 0;
+                    g_778da0[slot].x0 = id;
+                    g_778da0[slot].x2c = 0;
+                    g_778da0[slot].x30 = 0;
+                    g_778da0[slot].x34 = 0;
                 }
             }
             q = gm_NextEntityQueryMatch();
         } while (q != 0);
     }
 
-    for (i = 0; i < 16; i++) {
+    for (rec = g_778da0; rec < g_778da0 + 16; rec++) {
         q = (u16*)fcn_00502cd0(*(int*)(ep + 0x14), 1, 0,
-                                *(int*)(0x778da0 + 56 * i));
+                                rec->x0);
         if (q != 0) {
-            *(int*)(0x778dd0 + 56 * i) =
+            rec->x30 =
                 gm_GetMsgField(ep, (char*)q);
-            *(int*)(0x778dd0 + 56 * i + 4) =
+            rec->x34 =
                 fcn_0050dfd0((char*)ep, *(u16*)q);
         }
     }
 
-    for (i = 0; i < 16; i++) {
-        id = *(int*)(0x778db0 + 56 * i);
+    b = 0;
+    for (rec = g_778da0; rec < g_778da0 + 16 && b == 0; rec++) {
+        id = rec->x10;
         if (id != -1) {
-            if (*(int*)(*(int*)0x1015ea0 + 756 * id + 0x20) == 0x41) {
+            if (*(int*)((int) g_1015ea0 + 756 * id + 0x20) == 0x41) {
                 if (fcn_00471f80(id))
-                    return 1;
+                    b = 1;
             }
         }
     }
-    return 0;
+    return b;
 }

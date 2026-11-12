@@ -24,7 +24,7 @@ int __cdecl fcn_00491680(char* e, int unused, int* out)
 		w = w * 0.9f;
 	}
 	fcn_004f4830(0x12, &st);
-	if (w < 6.2831855f && st.v[6] == 0) {
+	if (w < 0.5f && st.v[6] == 0) {
 		if (!(y > z)) {
 			return 0;
 		}

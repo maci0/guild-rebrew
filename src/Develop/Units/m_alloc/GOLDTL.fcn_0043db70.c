@@ -374,10 +374,10 @@ void __cdecl PrepareFloorWater(char* e)
 							} while (v15 <= v17);
 						}
 						if (flag) {
-							v16 = (v14 + 1) * v12;
-							*(int*) (rec + 0xc) = v16;
-							if (*(int*) (rec + 8) < v16) {
-								v8 += v16 - *(int*) (rec + 8) + 1;
+							v17 = (v14 + 1) * v12;
+							*(int*) (rec + 0xc) = v17;
+							if (*(int*) (rec + 8) < v17) {
+								v8 += v17 - *(int*) (rec + 8) + 1;
 								rec += 20;
 							}
 						}

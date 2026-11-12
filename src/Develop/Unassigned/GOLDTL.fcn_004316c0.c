@@ -5,9 +5,10 @@ extern double g_6628a0;
 typedef struct PathRec {
 	char name[0x40];
 	int flag;
-	float target[3];
-	float pos[3];
-	char pad[0x44];
+	float target[4];
+	float pos[4];
+	float mat[3][4];
+	char pad94[0x10];
 } PathRec;
 /* SIZE 0xa4 */
 
@@ -33,12 +34,10 @@ char* __cdecl strcpy(char* a, const char* b);
 void __cdecl fcn_004316c0(int obj)
 {
 	PathRec rec[4];
-	float trail[4][0x29];
-	float path[0x8a];
 	float left[0xc];
 	float right[0xc];
 	float out[4];
-	float v[3];
+	float q[4];
 	float w;
 	float t;
 	int* plan;
@@ -50,11 +49,12 @@ void __cdecl fcn_004316c0(int obj)
 	int nblock;
 	int count;
 	int lane;
-	int fresh;
 	int i;
 	int j;
 	int k;
 	int id;
+	char* fd;
+	int fn;
 
 	if (obj == 0) {
 		return;
@@ -68,7 +68,26 @@ void __cdecl fcn_004316c0(int obj)
 	}
 	count = 0;
 	if (*(char*) ((char*) plan + 0x594) != 0) {
-		memset(rec, 0, sizeof(rec));
+		fn = sizeof(rec);
+		fd = (char*) rec;
+		/* Reviewed original operand-homed fill (inline fill/copy block). */
+		__asm {
+			mov edi, fd
+			mov ebx, fn
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L1
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		L1:
+			add ecx, ebx
+			rep stosb
+		}
 		count = 0;
 		for (i = 0; i <= 0x173; i += 0x7c) {
 			sec = (unsigned char*) plan + i + 0x41c;
@@ -84,51 +103,64 @@ void __cdecl fcn_004316c0(int obj)
 				cand = (unsigned char*) (nblock + (id + 1) * 0x40);
 				names = (unsigned char*) *(int*) ((char*) plan + 0x40c);
 				j = -1;
-				fresh = 0;
 				for (k = 0; k < count; k++) {
 					if (strcmp(rec[k].name, (char*) cand) == 0) {
 						j = k;
 						break;
 					}
 				}
+				edge = (Edge*) sec;
+				node = (int*) *(int*) ((char*) plan + 0x15c);
 				if (j < 0) {
 					if (count >= 4) {
 						continue;
 					}
 					strcpy(rec[count].name, (char*) cand);
-					rec[count].flag = 1;
-					fresh = 1;
-					j = count;
-					for (k = 0; k < *names; k++) {
+					for (k = 0; k < names[0x2a0]; k++) {
 						if (strcmp((char*) names + 0x74 + k * 0x58, (char*) cand) == 0) {
-							rec[j].target[0] = *(float*) ((char*) names + k * 0x58 + 0xb4);
-							rec[j].target[1] = *(float*) ((char*) names + k * 0x58 + 0xb8);
-							rec[j].target[2] = *(float*) ((char*) names + k * 0x58 + 0xbc);
+							rec[count].pos[0] = *(float*) ((char*) names + k * 0x58 + 0xb4);
+							rec[count].pos[1] = *(float*) ((char*) names + k * 0x58 + 0xb8);
+							rec[count].pos[2] = *(float*) ((char*) names + k * 0x58 + 0xbc);
 							break;
 						}
 					}
+					t = (float) edge->weight / *(int*) ((char*) node + edge->from * 0xc0 + 4);
+					fcn_00451340((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x54),
+					    (float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x54), t, out);
+					out[0] -= rec[count].pos[0];
+					out[1] -= rec[count].pos[1];
+					out[2] -= rec[count].pos[2];
+					rec[count].target[0] = edge->k * out[0];
+					rec[count].target[1] = edge->k * out[1];
+					rec[count].target[2] = edge->k * out[2];
+					rec[count].target[0] += rec[count].pos[0];
+					rec[count].target[1] += rec[count].pos[1];
+					rec[count].target[2] += rec[count].pos[2];
+					fcn_00451900((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x60), left);
+					fcn_00451900((float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x60), right);
+					for (k = 0; k < 3; k++) {
+						fcn_00451340(left + k * 4, right + k * 4, t, rec[count].mat[k]);
+					}
+					rec[count].flag = 1;
 					count++;
-				}
-				edge = (Edge*) sec;
-				node = (int*) *(int*) ((char*) plan + 0x15c);
-				t = (float) edge->weight / *(int*) ((char*) node + edge->from * 0xc0 + 4);
-				fcn_00451340((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x54), (float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x54), t, out);
-				v[0] = out[0] - rec[j].pos[0];
-				v[1] = out[1] - rec[j].pos[1];
-				v[2] = out[2] - rec[j].pos[2];
-				rec[j].target[0] = edge->k * v[0] + rec[j].pos[0];
-				rec[j].target[1] = edge->k * v[1] + rec[j].pos[1];
-				rec[j].target[2] = edge->k * v[2] + rec[j].pos[2];
-				fcn_00451900((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x60), left);
-				fcn_00451900((float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x60), right);
-				for (k = 0; k < 3; k++) {
-					fcn_00451340(left + k * 4, right + k * 4, t, out);
-					trail[j][k * 4 + 0] = out[0] + trail[j][k * 4 + 0];
-					trail[j][k * 4 + 1] = out[1] + trail[j][k * 4 + 1];
-					trail[j][k * 4 + 2] = out[2] + trail[j][k * 4 + 2];
-					trail[j][k * 4 + 3] = out[3] + trail[j][k * 4 + 3];
-				}
-				if (!fresh) {
+				} else {
+					t = (float) edge->weight / *(int*) ((char*) node + edge->from * 0xc0 + 4);
+					fcn_00451340((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x54),
+					    (float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x54), t, out);
+					out[0] -= rec[j].pos[0];
+					out[1] -= rec[j].pos[1];
+					out[2] -= rec[j].pos[2];
+					rec[j].target[0] = edge->k * out[0] + rec[j].target[0];
+					rec[j].target[1] = edge->k * out[1] + rec[j].target[1];
+					rec[j].target[2] = edge->k * out[2] + rec[j].target[2];
+					fcn_00451900((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x60), left);
+					fcn_00451900((float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x60), right);
+					for (k = 0; k < 3; k++) {
+						fcn_00451340(left + k * 4, right + k * 4, t, out);
+						rec[j].mat[k][0] = out[0] + rec[j].mat[k][0];
+						rec[j].mat[k][1] = out[1] + rec[j].mat[k][1];
+						rec[j].mat[k][2] = out[2] + rec[j].mat[k][2];
+					}
 					rec[j].flag++;
 				}
 			}
@@ -137,44 +169,36 @@ void __cdecl fcn_004316c0(int obj)
 			for (i = 0; i < count; i++) {
 				w = (float) g_6628a0 / (float) rec[i].flag;
 				for (k = 0; k < 3; k++) {
-					trail[i][k * 4 + 0] = w * trail[i][k * 4 + 0];
-					trail[i][k * 4 + 1] = w * trail[i][k * 4 + 1];
-					trail[i][k * 4 + 2] = w * trail[i][k * 4 + 2];
-					trail[i][k * 4 + 3] = w * trail[i][k * 4 + 3];
+					rec[i].mat[k][0] = w * rec[i].mat[k][0];
+					rec[i].mat[k][1] = w * rec[i].mat[k][1];
+					rec[i].mat[k][2] = w * rec[i].mat[k][2];
 				}
-				fcn_004519d0(&rec[i].pos[0], out);
-				for (k = 0; k < 4; k++) {
-					path[i * 0x29 + k] = trail[i][k];
-				}
-				for (nblock = *(int*) (obj + 0x200); nblock != 0; nblock = *(int*) (nblock + 500)) {
-					if (*(int*) (nblock + 0x1ec) != 0) {
-						if (strcmp((char*) (*(int*) (nblock + 0x1ec) + 0xb4), rec[i].name) == 0) {
-							fcn_00438b40(nblock, &rec[i].target[0]);
-							fcn_00438cb0(nblock, &path[i * 0x29]);
-						}
+				fcn_004519d0(rec[i].mat[0], q);
+				for (nblock = *(int*) (obj + 0x200); nblock != 0; nblock = *(int*) (nblock + 0x1f4)) {
+					if (*(int*) (nblock + 0x1ec) != 0
+					    && strcmp(rec[i].name, (char*) (*(int*) (nblock + 0x1ec) + 0xb4)) == 0) {
+						fcn_00438b40(nblock, rec[i].target);
+						fcn_00438cb0(nblock, q);
 					}
 				}
 			}
 			return;
 		}
 	}
-	for (nblock = *(int*) (obj + 0x200); nblock != 0; nblock = *(int*) (nblock + 500)) {
-		plan = (int*) *(int*) (nblock + 0x1ec);
-		if (plan == 0) {
+	names = (unsigned char*) *(int*) ((char*) plan + 0x40c);
+	for (nblock = *(int*) (obj + 0x200); nblock != 0; nblock = *(int*) (nblock + 0x1f4)) {
+		cand = (unsigned char*) *(int*) (nblock + 0x1ec);
+		if (cand == 0 || cand[0xb4] == 0) {
 			continue;
 		}
-		if (*(char*) ((char*) plan + 0xb4) == 0) {
-			continue;
-		}
-		names = (unsigned char*) (*(int*) ((char*) plan + 0x40c) + 0x2a0);
-		cand = (unsigned char*) (*(int*) ((char*) plan + 0x40c) + 0x74);
-		for (k = 0; k < *names; k++) {
-			if (strcmp((char*) cand, (char*) plan + 0xb4) == 0) {
-				fcn_00438b40(nblock, (float*) (cand + 0xb4 - 0x74));
-				fcn_00438cb0(nblock, (float*) (cand + 0xc0 - 0x74));
+		for (k = 0; k < names[0x2a0]; k++) {
+			if (strcmp((char*) names + 0x74 + k * 0x58, (char*) cand + 0xb4) == 0) {
 				break;
 			}
-			cand += 0x58;
+		}
+		if (k < names[0x2a0]) {
+			fcn_00438b40(nblock, (float*) (names + k * 0x58 + 0xb4));
+			fcn_00438cb0(nblock, (float*) (names + k * 0x58 + 0xc0));
 		}
 	}
 }

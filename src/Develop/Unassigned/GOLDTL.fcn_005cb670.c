@@ -4,7 +4,7 @@ extern float g_66291c;
 
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 void __cdecl fcn_005ca560(void*);
-int __cdecl fcn_005cf720(int, int, int, int);
+int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 
 /* ADDRESS: GOLDTL 0x005cb670 */
 int __cdecl fcn_005cb670(char* a0, int n, char* a2, int a3)
@@ -41,7 +41,7 @@ int __cdecl fcn_005cb670(char* a0, int n, char* a2, int a3)
 					*(int*) (a2 + n * 0x38 - 0x38) = (int) h;
 					*(int*) (a2 + n * 0x38 - 0xc) = (int) d;
 					count++;
-					for (i = n - 1; i > 0; i--) {
+					for (i = n - 1; i != 0; i--) {
 						if (*(int*) (a2 + (i - 1) * 0x38 + 0x2c) < *(int*) (a2 + i * 0x38 + 0x2c)) {
 							d = (float) *(int*) (a2 + (i - 1) * 0x38 + 0x2c);
 							t = *(int*) (a2 + (i - 1) * 0x38);
@@ -56,7 +56,7 @@ int __cdecl fcn_005cb670(char* a0, int n, char* a2, int a3)
 		}
 		h += 0x21c;
 	}
-	if (n < count) {
+	if ((unsigned int) count >= (unsigned int) n) {
 		count = n;
 	}
 	for (i = 0; i < count; i++) {

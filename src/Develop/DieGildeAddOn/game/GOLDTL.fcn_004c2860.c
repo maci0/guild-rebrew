@@ -32,7 +32,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl fcn_00420120(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
-
+typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } BUILDING_ROW;
 /* Season/outdoor-track pump: retires the playing track when the season or the
  * running channel changed, otherwise decides at random whether to interrupt
  * the current track and pick a new one. */
@@ -125,7 +125,7 @@ check:
 	if (g_772e58 == 0) {
 		return;
 	}
-	if (lpGebaeudePROT[(unsigned char) *g_772e58 * 0x24d] != 2) {
+	if (((BUILDING_ROW*)lpGebaeudePROT)[(unsigned char)*g_772e58].kind != 2) {
 		return;
 	}
 restart:
@@ -136,7 +136,7 @@ restart:
 	thr = *(short*) (0x688228 + idx);
 	roll = gm_RandomMod(0x80);
 	if ((int) roll < thr) {
-		kind = g_772e58 != 0 ? lpGebaeudePROT[(unsigned char) *g_772e58 * 0x24d] : 0x2694;
+		kind = g_772e58 != 0 ? ((BUILDING_ROW*)lpGebaeudePROT)[(unsigned char)*g_772e58].kind : 0x2694;
 		j = 0;
 		e = *(int*) (0x688118 + idx);
 		while (e != 0) {
@@ -149,7 +149,7 @@ restart:
 		if (*(int*) (0x688118 + idx + j * 4) == 0) {
 			fcn_0064d41a(g_772a10, (char*) 0x68a388, (char*) (0x688128 + idx), thr);
 			g_772e68 = now;
-		}
+		} else return;
 		if (g_772e58 != 0) {
 			fcn_004c2100();
 		} else {

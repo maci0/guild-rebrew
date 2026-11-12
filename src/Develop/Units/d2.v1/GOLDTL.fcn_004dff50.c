@@ -26,7 +26,7 @@ int __cdecl fcn_00406340(char*, char*, int);
 int __cdecl fcn_004de610(int);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004c3030(int, int, char*, int);
-float __cdecl fcn_004ff210(int, int);
+float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_004cfc40(char*, int, int);
 
 /* Resolves the shot of a duel action: the challenger's skill decides whether
@@ -55,11 +55,6 @@ void __cdecl fcn_004dff50(char* task)
 	}
 	if (cut_RandFloat() < a) {
 		hit = 1;
-	} else {
-		hit = 0;
-		n = 0;
-	}
-	if (hit) {
 		if ((e == g_9afde4 && g_772f5d) || (e == g_9afde0 && g_772f5c)) {
 			n = cut_RandMod(0xf) + 5;
 		} else {
@@ -74,7 +69,12 @@ void __cdecl fcn_004dff50(char* task)
 			g_772f59 = g_772f59 + n;
 		}
 		fcn_004cfc40(foe, (int) (*(float*) (foe + 0x1c) * g_6640e8 * n), 0);
+	} else {
+		hit = 0;
+		n = 0;
 	}
+
+
 	fcn_004234e0(0, (char*) 0x68cbf4, 1, 0x3f, 0x7f, 0, 0);
 	if (fcn_004dfe40(foe, n) != 0) {
 		g_772f44 = 1;

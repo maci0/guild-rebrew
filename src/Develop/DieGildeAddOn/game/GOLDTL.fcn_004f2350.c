@@ -55,7 +55,7 @@ int __cdecl fcn_004f2350(int e)
 	base = *(int**) (slot + 0x10);
 	best = base;
 	cur = base;
-	for (i = 0; i < n; i++) {
+	for (i = 0; i < n; i++, cur += 0x11) {
 		if (*best == -1) {
 			break;
 		}
@@ -66,7 +66,7 @@ int __cdecl fcn_004f2350(int e)
 		if (best[0x10] > cur[0x10]) {
 			best = cur;
 		}
-		cur += 0x11;
+
 	}
 	*best = *(int*) (q + 4);
 	strcpy((char*) best + 4, q + 0x30);

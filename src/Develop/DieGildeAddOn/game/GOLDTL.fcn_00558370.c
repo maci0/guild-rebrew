@@ -107,9 +107,9 @@ int __cdecl fcn_00558370(int a0)
         *(float *)(v3 + 0xd4) = *(float *)(v5 + 0x50);
         *(float *)(v3 + 0xd8) = *(float *)(v5 + 0x54);
         *(unsigned char *)(v5 + 0x214) = *(unsigned char *)(v5 + 0x214) & 0x7f;
-        *(unsigned char *)(v5 + 0x216) = *(unsigned char *)(v5 + 0x216) | 3;
-        *(unsigned char *)(v5 + 0x217) = *(unsigned char *)(v5 + 0x217) & 0xfe;
-        fcn_00412f10(v5, (char *)0x6a5fb4, 1);
+        *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x216) = *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x216) | 3;
+        *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x217) = *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x217) & 0xfe;
+        fcn_00412f10(*(int *)(v3 + 0xc8), (char *)0x6a5fb4, 1);
         *(int *)(v3 + 0xec) = g_6b7fac;
         fcn_004432d0(v2, 1);
         return 1;

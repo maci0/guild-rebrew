@@ -13,7 +13,7 @@ void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl CloseVfsStream(void*);
-long __cdecl _ftol(float);
+
 
 /* Chunked binary animation-stream loader.  The returned record is 0x16c
  * bytes; its frame table is v12 entries of 0xc0 bytes. */
@@ -448,13 +448,13 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 							v25[1] = *(float*) (*(int*) (*(int*) (v26 + 0x15c) + 0xbc + v27) + 4 + (int) v2) - v35;
 							v25[2] = *(float*) (*(int*) (*(int*) (v26 + 0x15c) + 0xbc + v27) + 8 + (int) v2) - v36;
 							*(char*) (v29 + *(int*) (*(int*) (v26 + 0x15c) + 0xb4 + v27))
-								= (char) _ftol(v25[0] * *(float*) 0x6628a4 / v23[0]);
+								= (char) (int) (v25[0] * *(float*) 0x6628a4 / v23[0]);
 							*(char*) (*(int*) (v11 * 0xc0 + 0xb4 + *(int*) (v26 + 0x15c)) + 1 + v29)
-								= (char) _ftol(v25[1] * *(float*) 0x6628a4 / v23[1]);
+								= (char) (int) (v25[1] * *(float*) 0x6628a4 / v23[1]);
 							v2 = (char*) ((int) v2 + 0xc);
 							v29 += 3;
 							*(char*) (*(int*) (v11 * 0xc0 + 0xb4 + *(int*) (v26 + 0x15c)) + -1 + v29)
-								= (char) _ftol(v25[2] * *(float*) 0x6628a4 / v23[2]);
+								= (char) (int) (v25[2] * *(float*) 0x6628a4 / v23[2]);
 							v30++;
 						} while (v30 < v22);
 						v2 = (char*) v31;

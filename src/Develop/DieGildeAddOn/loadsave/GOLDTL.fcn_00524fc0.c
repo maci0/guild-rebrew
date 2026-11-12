@@ -65,7 +65,7 @@ int __cdecl fcn_00524fc0(void* fp)
 			if (!ls_ReadVfsDataChecked(buf, 0x40, 0x10, fp)) {
 				return 0;
 			}
-			memcpy(p->field34, buf, 0x40);
+			{ typedef struct { int v[16]; } SlotFields; *(SlotFields*)p->field34 = *(SlotFields*)buf; }
 		}
 		if (!ls_ReadVfsDataChecked(&p->field74, 1, 1, fp)) {
 			return 0;

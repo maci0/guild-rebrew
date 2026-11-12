@@ -329,7 +329,7 @@ hidden:
 		fcn_0046f940(g_6a25a0, fr.text);
 	}
 	sprintf(fr.text, (char*) 0x67d444,
-		*(int*) (0x7f4e34 + g_774970 * 0x12fc));
+		*(int*) (0x7f4e34 + g_774970 * 0x21c));
 	fcn_0046bbc0(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x23a, 0x17,
 		     g_77250c, fr.text, 0);
 	if (g_6a257c != -1) {

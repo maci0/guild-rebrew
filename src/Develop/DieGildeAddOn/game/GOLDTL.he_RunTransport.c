@@ -102,7 +102,7 @@ void __cdecl he_RunTransport(char *e)
 			break;
 		}
 		r = e + 0x52;
-		if (fcn_00500cb0(r, 0x7f4c00) >= 0) {
+		if (fcn_00500cb0(r, (int) &g_7f4c00) >= 0) {
 			break;
 		}
 		n = *(int *)(e + 0xec);
@@ -160,7 +160,8 @@ void __cdecl he_RunTransport(char *e)
 				f = f - g_6640cc;
 			}
 		}
-		if ((unsigned short)gm_RandomMod(0x69) <= (f * g_6640e8) * *(unsigned char *)(q + 0x12)) {
+		n = (unsigned short)gm_RandomMod(0x69);
+		if (!((f * g_6640e8) * *(unsigned char *)(q + 0x12) < n)) {
 			*(char *)(e + 0xf1) = 1;
 			return;
 		}
@@ -176,7 +177,7 @@ void __cdecl he_RunTransport(char *e)
 			break;
 		}
 		n = *(int *)(e + 0xec);
-		if (n != -1 && fcn_004c4450(n)) {
+		if (n == -1 || fcn_004c4450(n)) {
 			*(int *)(e + 0xec) = -1;
 			gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
 			stamp = g_7f4c00;

@@ -18,8 +18,8 @@ char* __cdecl fcn_0042b2f0(char* base, int count, int mode)
 	}
 	while (n < count - 1) {
 		i = 0;
-		while (p[i] != 0) {
-			i++;
+		while (p[i++] != 0) {
+
 		}
 		p = p + i - 1;
 		if (p == 0) {

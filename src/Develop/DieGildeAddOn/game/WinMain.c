@@ -155,7 +155,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 	p = fcn_0064d1a0((char*) 0x7e2080, 0x5c);
 	*p = 0;
 	p = fcn_0064d1a0((char*) 0x7e22c0, 0x5c) + 1;
-	*(Str9*) p = *(Str9*) 0x6a474c;
+	strcpy(p, "game.INI");
 
 	fcn_0057ddc0((char*) 0x7e22c0);
 
@@ -240,10 +240,12 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 	if (p != 0) {
 		p += 6;
 		e = fcn_0064e790(p, 0x22);
-		if (e != 0) {
+		if (e != 0 && p < e) {
 			i = e - p;
 			memcpy(pbuf, p, i);
 			pbuf[i] = 0;
+		} else {
+			pbuf[0] = 0;
 		}
 		*(int*) 0x7e2510 = fcn_0064eeec(pbuf);
 	}
@@ -251,7 +253,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 	if (fcn_00538680(&mutex) != 0)
 		exit(1);
 
-	if (fcn_00539090((HINSTANCE) instance, (int) command, windowed) == 0) {
+	if (fcn_00539090((HINSTANCE) instance, show, windowed) == 0) {
 		fcn_00538220();
 		return 0;
 	}
@@ -291,8 +293,8 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 			*(int*) 0x7e23e4 = val;
 			*(char*) 0x7e23e8 = 0;
 			*(char*) 0x7e23e9 = 1;
-			*(Str7*) 0x7e23ea = *(Str7*) 0x6a45f8;
-			*(Str8*) 0x7e240a = *(Str8*) 0x6a45f0;
+			strcpy((char*) 0x7e23ea, "Tobias");
+			strcpy((char*) 0x7e240a, "Severin");
 			*(int*) 0x7e2468 = fcn_004fdec0((char*) 0x6a3db4) + 0x639;
 			p = (char*) fcn_00506d50((Rec6*) (pbuf + 4), (int) *(unsigned char*) 0x7e23e3);
 			*(int*) 0x7e2430 = *(int*) p;

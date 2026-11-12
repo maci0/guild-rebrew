@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+extern int g_68bfb8, g_7725c8;
 extern char g_6b5c60[];
 extern char g_6811b0[];
 
@@ -31,11 +31,11 @@ void __cdecl fcn_004e2090(int a0)
 	char v5[256];
 	int v3;
 	int v4;
-	int v6;
-	int v8;
-	int v9;
-	int v10;
-	int v11;
+	int scene[4];
+
+
+
+
 
 	v1 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
 	if (v1 == 0) {
@@ -51,163 +51,162 @@ void __cdecl fcn_004e2090(int a0)
 	if (((char*) v2)[2] == 6) {
 		fcn_004b4650((char*) v2, 0x28);
 	}
-	*(int*) 0x68bfb8 = 0x702c6;
-	*(int*) 0x7725c8 = 1;
+	g_68bfb8 = 0x702c6;
+	g_7725c8 = 1;
 	fcn_004c5420(*(int*) &v1[2], 0x1c8, 4, 0, 0x40000);
 	fcn_004c5420(*(int*) &v2[2], 0x1c8, 4, 0, 0x40000);
 	v3 = (int) fcn_004fda30(*v1);
 	v4 = (int) fcn_004fda30(*v2);
-	if (((char*) v1)[9] != 0) {
-		v7 = v2;
-		v8 = v4 + 4;
-		v3 = v3 + 4;
+	if (((char*) v1)[9] == 0) {
+		sprintf(v5, "%s %s %i", (char*) (v3 + 4), (char*) (v4 + 4), 1);
 	} else {
-		v7 = v1;
-		v1 = v2;
-		v8 = v3 + 4;
-		v3 = v4 + 4;
+		v7 = v2; v2 = v1; v1 = v7;
+		sprintf(v5, "%s %s %i", (char*) (v4 + 4), (char*) (v3 + 4), 1);
 	}
-	sprintf(v5, "%s %s %i", (char*) v8, (char*) v3, 1);
-	v10 = fcn_004e4ae0("ADDON\\HOCHZEIT_NEU.sbf", 0);
+
+
+
+
+	scene[2] = fcn_004e4ae0("ADDON\\HOCHZEIT_NEU.sbf", 0);
 	fcn_004e4730("KIRCHE_HOCHZEIT.ed3");
 	fcn_004e4e90("cd2\\Hochzeit.mp3");
-	v9 = fcn_00470820(0, 0, "cutscenes\\hochzeit");
-	fcn_00471d80(v9, 3);
-	fcn_00471af0(v9, 0);
-	v6 = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-create.esc", v5);
-	v6 = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-intro.esc", g_6b5c60);
-	v6 = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden1.esc", g_6b5c60);
-	if (fcn_004e4d00(0x5dc, 0x4e1ff0, &v6)) {
+	scene[1] = fcn_00470820(0, 0, "cutscenes\\hochzeit");
+	fcn_00471d80(scene[1], 3);
+	fcn_00471af0(scene[1], 0);
+	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-create.esc", v5);
+	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-intro.esc", g_6b5c60);
+	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden1.esc", g_6b5c60);
+	if (fcn_004e4d00(0x5dc, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	fcn_00471af0(v9, 1);
-	d2_SetForm(v9, 0);
-	io_AppendText((char*) 0x1aa9, *v7, *v1);
-	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_MAIN_00", 0);
-	v3 = fcn_00423460(v11);
+	fcn_00471af0(scene[1], 1);
+	d2_SetForm(scene[1], 0);
+	io_AppendText((char*) 0x1aa9, *v1, *v2);
+	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_00", 0);
+	v3 = fcn_00423460(scene[3]);
 	while (v3 != 0) {
-		if (fcn_004e4d00(1000, 0x4e1ff0, &v6)) {
+		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
-		v3 = fcn_00423460(v11);
+		v3 = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(1000, 0x4e1ff0, &v6)) {
+	if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	d2_SetForm(v9, 0);
+	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
-	fcn_00471af0(v9, 0);
-	v3 = fcn_004e4540(v6, (void*) 0x4e1ff0, &v6);
+	fcn_00471af0(scene[1], 0);
+	v3 = fcn_004e4540(scene[0], (void*) fcn_004e1ff0, scene);
 	if (v3 != 0) {
 		return;
 	}
-	if (fcn_004e4d00(1000, 0x4e1ff0, &v6)) {
+	if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	v6 = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden2.esc", g_6b5c60);
-	d2_SetForm(v9, 0);
-	fcn_00471af0(v9, 1);
-	io_AppendText((char*) 0x1aac, *v7, *v1);
-	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_MAIN_03", 0);
-	v3 = fcn_00423460(v11);
+	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden2.esc", g_6b5c60);
+	d2_SetForm(scene[1], 0);
+	fcn_00471af0(scene[1], 1);
+	io_AppendText((char*) 0x1aac, *v1, *v2);
+	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_03", 0);
+	v3 = fcn_00423460(scene[3]);
 	while (v3 != 0) {
-		if (fcn_004e4d00(1000, 0x4e1ff0, &v6)) {
+		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
-		v3 = fcn_00423460(v11);
+		v3 = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(1000, 0x4e1ff0, &v6)) {
+	if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	d2_SetForm(v9, 0);
+	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
-	fcn_00471af0(v9, 0);
-	if (fcn_004e4d00(500, 0x4e1ff0, &v6)) {
+	fcn_00471af0(scene[1], 0);
+	if (fcn_004e4d00(500, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	fcn_00471af0(v9, 1);
-	d2_SetForm(v9, 0);
+	fcn_00471af0(scene[1], 1);
+	d2_SetForm(scene[1], 0);
 	io_AppendText((char*) 0x1aab);
-	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_M", 0);
-	v3 = fcn_00423460(v11);
+	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_M", 0);
+	v3 = fcn_00423460(scene[3]);
 	while (v3 != 0) {
-		if (fcn_004e4d00(1000, 0x4e1ff0, &v6)) {
+		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
-		v3 = fcn_00423460(v11);
+		v3 = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(1000, 0x4e1ff0, &v6)) {
+	if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	v3 = fcn_004e4540(v6, (void*) 0x4e1ff0, &v6);
+	v3 = fcn_004e4540(scene[0], (void*) fcn_004e1ff0, scene);
 	if (v3 != 0) {
 		return;
 	}
-	v6 = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden3.esc", g_6b5c60);
-	fcn_00471af0(v9, 0);
-	d2_SetForm(v9, 0);
+	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden3.esc", g_6b5c60);
+	fcn_00471af0(scene[1], 0);
+	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
-	if (fcn_004e4d00(0x5dc, 0x4e1ff0, &v6)) {
+	if (fcn_004e4d00(0x5dc, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	fcn_00471af0(v9, 1);
-	d2_SetForm(v9, 0);
-	io_AppendText((char*) 0x1aaa, *v1, *v7);
-	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_MAIN_01", 0);
-	v3 = fcn_00423460(v11);
+	fcn_00471af0(scene[1], 1);
+	d2_SetForm(scene[1], 0);
+	io_AppendText((char*) 0x1aaa, *v2, *v1);
+	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_01", 0);
+	v3 = fcn_00423460(scene[3]);
 	while (v3 != 0) {
-		if (fcn_004e4d00(1000, 0x4e1ff0, &v6)) {
+		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
-		v3 = fcn_00423460(v11);
+		v3 = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(500, 0x4e1ff0, &v6)) {
+	if (fcn_004e4d00(500, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	fcn_00471af0(v9, 0);
-	d2_SetForm(v9, 0);
+	fcn_00471af0(scene[1], 0);
+	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
-	if (fcn_004e4d00(500, 0x4e1ff0, &v6)) {
+	if (fcn_004e4d00(500, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	fcn_00471af0(v9, 1);
-	d2_SetForm(v9, 0);
+	fcn_00471af0(scene[1], 1);
+	d2_SetForm(scene[1], 0);
 	io_AppendText((char*) 0x1aab);
-	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_W", 0);
-	v3 = fcn_00423460(v11);
+	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_W", 0);
+	v3 = fcn_00423460(scene[3]);
 	while (v3 != 0) {
-		if (fcn_004e4d00(1000, 0x4e1ff0, &v6)) {
+		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
-		v3 = fcn_00423460(v11);
+		v3 = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(500, 0x4e1ff0, &v6)) {
+	if (fcn_004e4d00(500, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	v3 = fcn_004e4540(v6, (void*) 0x4e1ff0, &v6);
+	v3 = fcn_004e4540(scene[0], (void*) fcn_004e1ff0, scene);
 	if (v3 != 0) {
 		return;
 	}
-	v6 = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden4.esc", g_6b5c60);
-	d2_SetForm(v9, 0);
+	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden4.esc", g_6b5c60);
+	d2_SetForm(scene[1], 0);
 	io_AppendText((char*) 0x1aad);
-	v11 = fcn_004e4b20(0xfffffff9, v10, "_HOCHZEIT_NEU_MAIN_04", 0);
-	v3 = fcn_00423460(v11);
+	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_04", 0);
+	v3 = fcn_00423460(scene[3]);
 	while (v3 != 0) {
-		if (fcn_004e4d00(1000, 0x4e1ff0, &v6)) {
+		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
-		v3 = fcn_00423460(v11);
+		v3 = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(500, 0x4e1ff0, &v6)) {
+	if (fcn_004e4d00(500, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	fcn_00471af0(v9, 0);
-	d2_SetForm(v9, 0);
+	fcn_00471af0(scene[1], 0);
+	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
-	if (fcn_004e4540(v6, (void*) 0x4e1ff0, &v6)) {
+	if (fcn_004e4540(scene[0], (void*) fcn_004e1ff0, scene)) {
 		return;
 	}
-	v6 = 0xffffffff;
-	fcn_004e1ff0(&v6);
+	scene[0] = 0xffffffff;
+	fcn_004e1ff0(scene);
 }

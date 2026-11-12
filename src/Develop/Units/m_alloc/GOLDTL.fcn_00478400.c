@@ -1,4 +1,7 @@
 #include <string.h>
+#include "rgb.h"
+extern Rgb g_100f1a0;
+extern char g_100eb80[];
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void*);
@@ -32,7 +35,7 @@ unsigned int* __cdecl fcn_00478400(int a0, int a1, unsigned int a2,
     int v28;
     unsigned int* v3;
     int* v4;
-    int v6;
+    char v6;
     unsigned int* v7;
     unsigned int v8;
     int v9;
@@ -101,12 +104,12 @@ bounds_done:
             if (1 <= (int) a2) {
                 do {
                     v9 = (unsigned int) *(unsigned char*) (v13 + a4) * 4;
-                    if (*(unsigned char*) (v9 + 0x100eb80) ==
-                            *(unsigned char*) 0x100f1a0 &&
-                        *(unsigned char*) (v9 + 0x100eb81) ==
-                            *(unsigned char*) 0x100f1a1 &&
-                        *(unsigned char*) (v9 + 0x100eb82) ==
-                            *(unsigned char*) 0x100f1a2) {
+                    if ((unsigned char) g_100eb80[v9 + 0] ==
+                            g_100f1a0.r &&
+                        (unsigned char) g_100eb80[v9 + 1] ==
+                            g_100f1a0.g &&
+                        (unsigned char) g_100eb80[v9 + 2] ==
+                            g_100f1a0.b) {
                         *(char*) (v13 + a4) = 0;
                     }
                     v19 -= 1;
@@ -125,21 +128,21 @@ bounds_done:
             if (1 <= (int) a2) {
                 do {
                     v9 = (unsigned int) *(unsigned char*) (v13 + v18) * 4;
-                    if (*(unsigned char*) (v9 + 0x100eb80) ==
+                    if ((unsigned char) g_100eb80[v9 + 0] ==
                             *(unsigned char*) 0x67d960 &&
-                        *(unsigned char*) (v9 + 0x100eb81) ==
+                        (unsigned char) g_100eb80[v9 + 1] ==
                             *(unsigned char*) 0x67d961 &&
-                        *(unsigned char*) (v9 + 0x100eb82) ==
+                        (unsigned char) g_100eb80[v9 + 2] ==
                             *(unsigned char*) 0x67d962) {
                         *(char*) (v13 + v18) = 0;
                         v16 = v18;
                         v26 = v19;
                     }
-                    if (*(unsigned char*) (v9 + 0x100eb80) ==
+                    if ((unsigned char) g_100eb80[v9 + 0] ==
                             *(unsigned char*) 0x67d95c &&
-                        *(unsigned char*) (v9 + 0x100eb81) ==
+                        (unsigned char) g_100eb80[v9 + 1] ==
                             *(unsigned char*) 0x67d95d &&
-                        *(unsigned char*) (v9 + 0x100eb82) ==
+                        (unsigned char) g_100eb80[v9 + 2] ==
                             *(unsigned char*) 0x67d95e) {
                         *(char*) (v13 + v18) = 0;
                         v24 = v19;

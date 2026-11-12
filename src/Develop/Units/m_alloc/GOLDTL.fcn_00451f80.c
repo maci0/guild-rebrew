@@ -86,8 +86,8 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 		fcn_005eb970(*(char**) (e + 0x1ec) + 0x15fc, *(char**) (e + 0x1ec) + 0x15fc, &t);
 		fcn_005eb970(*(char**) (e + 0x1ec) + 0x15fc, *(char**) (e + 0x1ec) + 0x15fc, g_6b8014 + 0x18c);
 		if (!(fcn_00438270(e, o, *(char**) (e + 0x1ec) + 0x15fc) & 0x40)) {
-			f += *(float*) (*(char**) (o + 0x318) + 0x1dc);
 			g = *(float*) (*(char**) (e + 0x1ec) + 0x15f8);
+			f += *(float*) (*(char**) (o + 0x318) + 0x1dc);
 			if (*(int*) (e + 0x220) == 1) {
 				g = -g;
 			}

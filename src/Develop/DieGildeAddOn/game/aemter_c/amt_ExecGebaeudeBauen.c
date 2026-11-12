@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "client_data.h"
 extern int g_6798d4;
 extern unsigned char* lpGebaeudePROT;
 extern int g_6b7fdc;
-extern int g_7f4c00;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+
+
+
+
 extern int g_772514;
 
 int __cdecl fcn_0042f690(char* a, int b, int c, char* out);
@@ -48,21 +48,21 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 	char v8[260];
 	char v9[260];
 	char v10[256];
-	char v11[92];
-	char v12[16];
-	char v13[12];
-	char v14[4];
-	char v18;
-	unsigned int v19;
-	unsigned int v20;
-	unsigned int v21;
-	unsigned int v22;
-	unsigned int v23;
-	unsigned short v24;
-	char v25;
-	unsigned int v26;
-	unsigned int v27;
-	unsigned int v28;
+	char event[0xf8];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	int v3;
 	int v4;
 	int v6;
@@ -81,7 +81,7 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 	for (;;) {
 		if (v4) {
 			sprintf(v9, (char*) 0x67f0c0, (char*) 0x7e1ae0, v8,
-				v4 + '@');
+				(char) (v4 + '@'));
 		}
 		else {
 			sprintf(v9, (char*) 0x67f0ac, (char*) 0x7e1ae0, v8);
@@ -97,20 +97,20 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 		}
 		v4 = 1;
 	}
-	sprintf(v11, (char*) 0x679060, v9);
-	v21 = g_7f4c00;
-	v19 = *(unsigned int*) (a0 + 4);
-	v22 = g_7f4c04;
-	v23 = g_7f4c08;
-	v27 = *(unsigned int*) (a1 + 4);
-	v18 = 13;
-	v24 = g_7f4c0c;
-	v25 = 2;
-	v20 = v19;
-	v26 = v19;
-	v28 = fcn_0050d200(a0, v27);
-	fcn_005986f0(v12, v3);
-	fcn_00598740(v13, v3);
-	fcn_004c5530(v14);
+	sprintf(event + 0x9c, (char*) 0x679060, v9);
+	*(int*) (event + 0x28) = g_7f4c00.a;
+	v6 = *(unsigned int*) (a0 + 4);
+	*(int*) (event + 0x2c) = g_7f4c00.b;
+	*(int*) (event + 0x30) = g_7f4c00.c;
+	v4 = *(unsigned int*) (a1 + 4);
+	event[4] = 13;
+	*(short*) (event + 0x34) = g_7f4c00.d;
+	event[0x36] = 2;
+	*(int*) (event + 0xc) = *(int*) (event + 8) = v6;
+	*(int*) (event + 0x58) = v6;
+	*(int*) (event + 0x5c) = v4; *(int*) (event + 0x60) = fcn_0050d200(a0, v4);
+	fcn_005986f0(event + 0x80, v3);
+	fcn_00598740((float*) (event + 0x90), v3);
+	fcn_004c5530((int) event);
 	return 1;
 }

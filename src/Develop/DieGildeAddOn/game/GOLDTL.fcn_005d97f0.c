@@ -49,9 +49,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
     char* v17;
 
     v11 = a0;
-    if (*(char*) &a0[1] != '\x06') {
-        return 0;
-    }
+    if (*(char*) &a0[1] == '\x06') {
     v19 = 0;
     fcn_0057e880(9, 0, 0, 0);
     v4 = fcn_00470820(0, 0, (char*) 0x6ace10);
@@ -109,70 +107,58 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
         v8 = v1;
     }
     *(int*) 0x100f1dc = -1;
-    v7 = fcn_005373e0((void*) 0x5d97f0, 0x657c7);
-loop:
-    if (!v7) {
-        fcn_00471e30(v4);
-        fcn_0057e880(9, 0, 1, 0);
-        return v19;
-    }
-    if (*(int*) 0x14ce8e0) {
-        *(int*) 0x774654 = 1;
-    }
-    if (*(int*) 0x14ce8d8 && *(int*) 0x67d370 != -1) {
-        v7 = fcn_005463a0(2, 2, *(unsigned short*) 0x774970, 0, 0x26);
-        if (v7) {
-            v7 = (unsigned int) *(unsigned short*) 0x774970 * 0x21c;
-            io_FormatTextBuffer(v12, 0x15bd,
-                         *(unsigned char*) (v7 + 0x7f4e04) +
-                             (-(unsigned int) (*(char*) (v7 + 0x7f4ca9) != '\0') &
-                              0x5f) +
-                             0x12f);
-            fcn_00526120((int) v12, 4);
-            goto tail;
+    while (fcn_005373e0((void*) 0x5d97f0, 0x657c7)) {
+        if (*(int*) 0x14ce8e0) {
+            *(int*) 0x774654 = 1;
         }
-        fcn_00471a30(v4, 0);
-        v11 = a0;
-        v7 = 0;
-        do {
-            if (*(int*) 0x100f1dc == v7 + 0x5a2) {
-                if (v7 <= 0xf) {
-                    v5 = gm_CheckStatLevel(*a0, v7 + 1);
+        if (*(int*) 0x14ce8d8 && *(int*) 0x67d370 != -1) {
+            if (fcn_005463a0(2, 2, *(unsigned short*) 0x774970, 0, 0x26)) {
+                v7 = (unsigned int) *(unsigned short*) 0x774970 * 0x21c;
+                io_FormatTextBuffer(v12, 0x15bd, *(unsigned short*) 0x774970,
+                             *(unsigned char*) (v7 + 0x7f4e04) +
+                                 (-(unsigned int) (*(char*) (v7 + 0x7f4ca9) != '\0') &
+                                  0x5f) +
+                                 0x12f);
+                fcn_00526120((int) v12, 4);
+            } else {
+                fcn_00471a30(v4, 0);
+                for (v8 = 0; v8 <= 0xf; v8++) {
+                    if (*(int*) 0x100f1dc == v8 + 0x5a2) {
+                        break;
+                    }
+                }
+                if (v8 <= 0xf) {
+                    v5 = gm_CheckStatLevel(*a0, v8 + 1);
                     v7 = (unsigned int) (v5 != 0) * 4 + -8;
-                    if (v5 != *(unsigned char*) ((char*) v11 + 0x164)) {
-                        v15 = -v7;
-                        if (fcn_00525f60((char*) v11, v15)) {
-                            v8 = 0;
-                            goto inner;
+                    if (v5 != *(unsigned char*) ((char*) a0 + 0x164)
+                        && fcn_00525f60((char*) a0, -v7)) {
+                        for (v8 = 0; v8 <= 0xf; v8++) {
+                            if (*(int*) 0x100f1dc == v8 + 0x5a2) {
+                                break;
+                            }
+                        }
+                        if (v8 <= 0xf) {
+                            v14 = gm_CheckStatLevel(*a0, v8 + 1);
+                            if (!v14) {
+                                v14 = fcn_00507400(v8 + 1, 1);
+                            }
+                            io_FormatTextBuffer(v13, 0x1d37, -v7, v14 + v10);
+                            if (fcn_00526120((int) v13, 1)) {
+                                fcn_004c6470(*(int*) ((char*) a0 + 4), v14);
+                                fcn_004c6ae0(*(int*) ((char*) a0 + 4), v7);
+                                *(int*) 0x774654 = 1;
+                                v19 = 0x10;
+                            }
                         }
                     }
                 }
-                break;
+                fcn_00471a30(v4, 1);
             }
-            v7 += 1;
-        } while (v7 <= 0xf);
-        fcn_00471a30(v4, 1);
-    }
-    goto tail;
-inner:
-    while (v8 = v8 + 1, v8 <= 0xf) {
-        if (*(int*) 0x100f1dc == v8 + 0x5a2) {
-            v14 = gm_CheckStatLevel(*v11, v8 + 1);
-            if (!v14) {
-                v14 = fcn_00507400(v8 + 1, 1);
-            }
-            io_FormatTextBuffer(v13, 0x1d37, v15, v14 + v10);
-            if (fcn_00526120((int) v13, 1)) {
-                fcn_004c6470(*(int*) ((char*) v11 + 4), v14);
-                fcn_004c6ae0(*(int*) ((char*) v11 + 4), v7);
-                *(int*) 0x774654 = 1;
-                v19 = 0x10;
-            }
-            break;
         }
     }
-tail:
-    fcn_00471a30(v4, 1);
-    v7 = fcn_005373e0((void*) 0x5d97f0, 0x657c7);
-    goto loop;
+    fcn_00471e30(v4);
+    fcn_0057e880(9, 0, 1, 0);
+    return v19;
+    }
+    return 0;
 }

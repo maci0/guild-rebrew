@@ -1,5 +1,6 @@
 extern char* lpObjektePROT;
 extern char* g_1015ea0;
+extern int g_772514;
 
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl d2_SetForm(int, int);
@@ -15,7 +16,8 @@ void __cdecl fcn_0046b2b0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00500e20(int*);
 int __cdecl fcn_0051e070(void);
-char* __cdecl itoa(char*, int, int);
+#include <stdlib.h>
+extern const double g_6629c8;
 
 /* One stock row as produced by fcn_0050cce0. */
 typedef struct Stock {
@@ -115,7 +117,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 					                            g_row_handle(row), -2);
 					*(int*) (g_object(*(int*) slot) + 0x5c) = 1;
 					fcn_00472900(*(int*) slot, 0x54);
-					itoa(numbuf, g_id_field(row, key), 10);
+					_itoa(g_id_field(row, key), numbuf, 10);
 					fcn_0046f9b0(*(int*) slot, (int) numbuf);
 					*(int*) (g_object(*(int*) slot) + 0x1dc) = -8;
 					*(int*) (g_object(*(int*) slot) + 0x1e0) = 6;
@@ -143,7 +145,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 					}
 				}
 				if (idx < stock.n) {
-					if ((int) g_id_field(row, key) <= stock.caps[idx]) {
+					if ((int) g_id_field(row, key) <= stock.vals[idx]) {
 						*(int*) (g_object(*(int*) slot) + 0x1e4) = 0x74d;
 						pick = delta;
 					} else {
@@ -151,7 +153,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 						if (status <= 1) {
 							status = 1;
 						}
-						delta = (unsigned int) g_id_field(row, key) - stock.caps[idx];
+						delta = (unsigned int) g_id_field(row, key) - stock.vals[idx];
 						pick = delta;
 					}
 				} else {
@@ -217,10 +219,10 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			delta = *(int*) (found + 0x18) + *(int*) (found + 0x14);
 			if (*found == 4) {
 				*(float*) (g_object(g_row_sub(row)) + 0x1f4) =
-					0.0f - *(float*) (found + 0xb4) / *(float*) (found + 0xb8);
+					g_6629c8 - *(float*) (found + 0xb4) / *(float*) (found + 0xb8);
 			} else if (*found == 3) {
 				*(float*) (g_object(g_row_sub(row)) + 0x1f4) =
-					0.0f - (float) *(int*) (found + 0xb0) / *(float*) (found + 0xb4);
+					g_6629c8 - (float) *(int*) (found + 0xb0) / *(float*) (found + 0xb4);
 			}
 		} else {
 			if (g_row_extra(row) != -1) {
@@ -243,7 +245,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 
 		key = g_row_sel(row);
 		if (key <= -1) {
-			*(int*) 0x772514 = g_row_last(row);
+			g_772514 = g_row_last(row);
 			if (a4 != 0) {
 				if (a4 != 1) {
 					io_AppendText(0x6aa164, delta, 0x51e, 0xbb, g_row_type(row) * 2 + 0x9a8);
@@ -255,7 +257,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			}
 		} else if (pick != 0) {
 			*(int*) (g_object(g_row_item(row, key)) + 0x3c) = 1;
-			*(int*) 0x772514 = g_row_last(row);
+			g_772514 = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
 				switch (fcn_0051e070()) {
 				case 0:
@@ -293,7 +295,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 		} else {
 			pick = 1;
 			*(int*) (g_object(g_row_item(row, key)) + 0x3c) = 1;
-			*(int*) 0x772514 = g_row_last(row);
+			g_772514 = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
 				switch (fcn_0051e070()) {
 				case 0:

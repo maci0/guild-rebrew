@@ -21,6 +21,24 @@ typedef struct PathGrid {
 	int width;
 	PathNode* nodes;
 } PathGrid;
+extern int g_678c08;
+extern int g_678c0c;
+extern short g_678c20[8];
+extern float g_678c50[][15];
+extern float g_678db8[];
+extern float g_678dd0[];
+extern unsigned char g_14cbc60;
+extern float* g_14cbc64;
+extern unsigned char g_14cbc68;
+extern float g_14cbc6c;
+extern short g_14cbc70;
+extern short g_14cbc72;
+extern unsigned short g_14cbc74;
+extern unsigned short g_14cbc76;
+extern float g_14cbc78;
+extern unsigned short g_14cbc7c;
+extern unsigned short g_14cbc7e;
+extern float g_14cbc80;
 
 unsigned short __cdecl fcn_00421ba0(PathGrid* grid, unsigned short node);
 void __cdecl fcn_00421f10(PathGrid* grid, unsigned short node);
@@ -36,26 +54,26 @@ unsigned short __cdecl fcn_004214c0(PathGrid* grid, int x, int y, int goal_x, in
 	float* costs;
 
 	level = 0;
-	*(int*) 0x678c0c = level;
-	*(int*) 0x678c08 = grid->width - 1;
+	g_678c0c = level;
+	g_678c08 = grid->width - 1;
 	for (t = grid->width >> 1; t != 0; t >>= 1) {
 		level++;
 	}
-	*(int*) 0x678c0c = level;
-	((short*) 0x678c20)[0] = 0;
-	((short*) 0x678c20)[1] = -(short) grid->width;
-	((short*) 0x678c20)[2] = 0;
-	((short*) 0x678c20)[3] = (short) grid->width;
-	((short*) 0x678c20)[4] = -(short) grid->width;
-	((short*) 0x678c20)[5] = -(short) grid->width;
-	((short*) 0x678c20)[6] = (short) grid->width;
-	((short*) 0x678c20)[7] = (short) grid->width;
-	*(short*) 0x14cbc70 = 0;
+	g_678c0c = level;
+	g_678c20[0] = 0;
+	g_678c20[1] = -(short) grid->width;
+	g_678c20[2] = 0;
+	g_678c20[3] = (short) grid->width;
+	g_678c20[4] = -(short) grid->width;
+	g_678c20[5] = -(short) grid->width;
+	g_678c20[6] = (short) grid->width;
+	g_678c20[7] = (short) grid->width;
+	g_14cbc70 = 0;
 	node = (y << level) + x;
-	*(unsigned short*) 0x14cbc76 = node;
-	*(unsigned short*) 0x14cbc74 = (goal_y << level) + goal_x;
-	++*(short*) 0x14cbc72;
-	grid->nodes[node].mark = *(short*) 0x14cbc72;
+	g_14cbc76 = node;
+	g_14cbc74 = (goal_y << level) + goal_x;
+	++g_14cbc72;
+	grid->nodes[node].mark = g_14cbc72;
 	grid->nodes[node].g = 0;
 	grid->nodes[node].h = 0;
 	grid->nodes[node].f = grid->nodes[node].h + grid->nodes[node].g;
@@ -63,11 +81,11 @@ unsigned short __cdecl fcn_004214c0(PathGrid* grid, int x, int y, int goal_x, in
 	grid->nodes[node].f16 = 0xffff;
 	grid->nodes[node].f18 = 0xffff;
 	grid->nodes[node].parent = 0xffff;
-	if (*(unsigned short*) 0x14cbc76 == *(unsigned short*) 0x14cbc74) {
+	if (g_14cbc76 == g_14cbc74) {
 		return node;
 	}
-	goal = *(unsigned short*) 0x14cbc74;
-	grid->nodes[goal].mark = *(short*) 0x14cbc72;
+	goal = g_14cbc74;
+	grid->nodes[goal].mark = g_14cbc72;
 	grid->nodes[goal].g = 0;
 	grid->nodes[goal].h = 0;
 	grid->nodes[goal].f = grid->nodes[goal].h + grid->nodes[goal].g;
@@ -75,56 +93,56 @@ unsigned short __cdecl fcn_004214c0(PathGrid* grid, int x, int y, int goal_x, in
 	grid->nodes[goal].f16 = 0xffff;
 	grid->nodes[goal].f18 = 0xffff;
 	grid->nodes[goal].parent = 0xffff;
-	*(float*) 0x14cbc6c = ((float*) 0x678db8)[kind];
-	*(float*) 0x14cbc78 = ((float*) 0x678dd0)[kind];
-	costs = (float*) 0x678c50 + kind * 15;
-	*(float**) 0x14cbc64 = costs;
+	g_14cbc6c = g_678db8[kind];
+	g_14cbc78 = g_678dd0[kind];
+	costs = g_678c50[kind];
+	g_14cbc64 = costs;
 	if (costs[grid->nodes[node].type] < 0.0 || costs[grid->nodes[goal].type] < 0.0) {
 		return 0xffff;
 	}
-	*(float*) 0x14cbc80 = 0;
+	g_14cbc80 = 0;
 	for (i = 1; i < 15; i++) {
 		if (costs[i] > 0.0) {
-			*(float*) 0x14cbc80 += costs[i];
+			g_14cbc80 += costs[i];
 		}
 	}
-	*(float*) 0x14cbc80 = 7.0f;
-	*(unsigned short*) 0x14cbc7c = *(unsigned short*) 0x14cbc74;
-	*(unsigned char*) 0x14cbc60 = 4;
-	*(unsigned char*) 0x14cbc68 = 8;
+	g_14cbc80 = 7.0f;
+	g_14cbc7c = g_14cbc74;
+	g_14cbc60 = 4;
+	g_14cbc68 = 8;
 	node = fcn_00421ba0(grid, node);
 	if (node == 0xffff) {
 		return 0xffff;
 	}
 	for (;;) {
-		if (node == *(unsigned short*) 0x14cbc74) {
+		if (node == g_14cbc74) {
 			fcn_00421f10(grid, node);
-			return *(unsigned short*) 0x14cbc76;
+			return g_14cbc76;
 		}
 		if ((grid->nodes[node].flags & 0xc) == 0xc) {
 			fcn_00421f10(grid, node);
-			grid->nodes[node].parent = *(unsigned short*) 0x14cbc7e;
-			return *(unsigned short*) 0x14cbc76;
+			grid->nodes[node].parent = g_14cbc7e;
+			return g_14cbc76;
 		}
-		*(unsigned short*) 0x14cbc7c = *(unsigned short*) 0x14cbc76;
-		*(unsigned char*) 0x14cbc60 = 8;
-		*(unsigned char*) 0x14cbc68 = 4;
-		goal = fcn_00421ba0(grid, *(unsigned short*) 0x14cbc74);
+		g_14cbc7c = g_14cbc76;
+		g_14cbc60 = 8;
+		g_14cbc68 = 4;
+		goal = fcn_00421ba0(grid, goal);
 		if (goal == 0xffff) {
 			return 0xffff;
 		}
-		if (goal == *(unsigned short*) 0x14cbc76) {
-			return *(unsigned short*) 0x14cbc76;
+		if (goal == g_14cbc76) {
+			return g_14cbc76;
 		}
 		if ((grid->nodes[goal].flags & 0xc) == 0xc) {
-			fcn_00421f10(grid, *(unsigned short*) 0x14cbc7e);
-			grid->nodes[*(unsigned short*) 0x14cbc7e].parent = goal;
-			return *(unsigned short*) 0x14cbc76;
+			fcn_00421f10(grid, g_14cbc7e);
+			grid->nodes[g_14cbc7e].parent = goal;
+			return g_14cbc76;
 		}
-		++*(short*) 0x14cbc70;
-		*(unsigned short*) 0x14cbc7c = *(unsigned short*) 0x14cbc74;
-		*(unsigned char*) 0x14cbc60 = 4;
-		*(unsigned char*) 0x14cbc68 = 8;
+		++g_14cbc70;
+		g_14cbc7c = g_14cbc74;
+		g_14cbc60 = 4;
+		g_14cbc68 = 8;
 		node = fcn_00421ba0(grid, node);
 		if (node == 0xffff) {
 			return 0xffff;

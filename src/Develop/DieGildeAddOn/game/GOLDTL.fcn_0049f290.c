@@ -26,7 +26,7 @@ extern int g_6643d8[];
 extern int g_7f4ca4[];
 
 unsigned short __cdecl gm_RandomMod(int n);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 char* __cdecl fcn_00502cd0(int id, int a, int b, int c, int d);
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);

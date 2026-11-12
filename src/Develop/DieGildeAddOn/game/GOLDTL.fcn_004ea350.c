@@ -19,8 +19,8 @@ void __cdecl fcn_004ea350(void)
 	char* p;
 	char* e;
 	int res;
-	int v;
-	int n;
+
+
 
 	for (r = &g_9a9220[0].x10; (int) r < (int) &g_9a9220[30].x10; r += 0x18) {
 		e = gm_LookupEntityRecordById(*(int*) (r - 0xc));
@@ -34,7 +34,8 @@ void __cdecl fcn_004ea350(void)
 				res = fcn_004e81a0(*(unsigned char*) (r - 0x10));
 			}
 			if (e != 0 && *(unsigned char*) (e + 0x166) != 0) {
-				n = *(int*) (e + 4);
+				int n = *(int*) (e + 4);
+				int v;
 				v = 0;
 				fcn_004c4510(e, n);
 				fcn_004c4570(1, 1, 0x166, &v);
@@ -52,7 +53,7 @@ void __cdecl fcn_004ea350(void)
 	}
 	for (p = g_7f4ca0 + 0x168; (int) p < (int) (g_7f4ca0 + 0x168 + 0x65400); p += 0x21c) {
 		if (*(unsigned char*) p != 0) {
-			v = 0;
+			int v = 0;
 			fcn_004c4510(p - 0x168, *(int*) (p - 0x164));
 			fcn_004c4570(1, 1, 0x168, &v);
 			fcn_004c5360();

@@ -115,7 +115,7 @@ void __cdecl fcn_0054e390(char* e)
 			do {
 				if (*(int*) p != -1) {
 					u = gm_LookupEntityRecordById(*(int*) p);
-					if (u != 0 && *(char*) (u + 8) > 0) {
+					if (u != 0 && *(unsigned char*) (u + 8) > 0) {
 						fcn_004c5c80(*(int*) p);
 						fcn_004c5da0(*(int*) p, *(int*) (own + 1), *(int*) (slot + 2), 0, 0,
 						             (char*) 0x6a5ad8);

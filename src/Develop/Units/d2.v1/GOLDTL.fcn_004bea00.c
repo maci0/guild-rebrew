@@ -43,20 +43,20 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 	int menu;
 	int entry;
 	int active;
-	int flag;
-	int selected;
-	char* slot;
+
+	RouteItem* item;
+
 
 	result = 0;
 	count = 0;
 	(void) ctx;
 	for (node = list; node != 0; node = node->next) {
-		for (i = 0; i < 3; i++) {
-			if (node->items[i].value != 0 && node->items[i].weight > 0) {
-				values[count] = node->items[i].value;
+		i = 3; item = node->items; do {
+			if (item->value != 0 && item->weight > 0) {
+				values[count] = item->value;
 				count++;
 			}
-		}
+			item++; } while (--i);
 	}
 	menu = fcn_00470820(0, 0, (char*) 0x6816e8);
 	fcn_00471b60(menu);
@@ -67,30 +67,30 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 		entry = fcn_0046f740((i % 4) << 6, (i / 4) << 6, values[i] + 0xdf,
 			g_772514);
 		entries[i] = entry;
-		slot = (char*) g_1015ea0 + entry * 0x2f4;
-		*(int*) (slot + 0x5c) = 1;
-		*(int*) (slot + 0x1d0) = 3;
-		*(int*) (slot + 0x1e4) = 0x525;
+
+		*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x5c) = 1;
+		*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x1d0) = 3;
+		*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x1e4) = 0x525;
 	}
-	values[count] = 0;
-	entry = fcn_0046f740((count % 4) * 0x40 + 7, (count / 4) * 0x40 + 7, 0x527,
+	values[i] = 0;
+	entry = fcn_0046f740((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527,
 		g_772514);
-	entries[count] = entry;
-	slot = (char*) g_1015ea0 + entry * 0x2f4;
-	*(int*) (slot + 0x5c) = 1;
-	*(int*) (slot + 0x1d0) = 3;
+	entries[i] = entry;
+
+	*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x5c) = 1;
+	*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x1d0) = 3;
 
 	while (fcn_005373e0(0x4bea00, 0x657c7) != 0) {
-		selected = g_67d370;
-		flag = g_100f1dc;
+
+
 		if (g_14ce8e0 != 0 || result != 0) {
 			g_774654 = 1;
-		} else if (flag != -1 && selected == active) {
+		} else if (g_100f1dc != -1 && g_67d370 == active) {
 			g_774654 = 1;
 		}
-		if (flag != -1) {
-			for (i = 0; i <= count; i++) {
-				if (selected == entries[i]) {
+		if (g_100f1dc != -1) {
+			for (i = 0; i < count + 1; i++) {
+				if (g_67d370 == entries[i]) {
 					result = values[i];
 					break;
 				}

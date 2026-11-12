@@ -1,3 +1,4 @@
+#include "game_data.h"
 extern char g_7f4ca0[];
 extern char* g_entity_type_table;
 
@@ -38,34 +39,33 @@ unsigned int __cdecl fcn_00525670(void)
 	if (!*(int*) 0x773da8)
 		return 0;
 	*(int*) 0x773d78 = gm_StartFilteredEntitySearch(1, 5, 10);
-	if (*(unsigned int*) 0x6a23ac > 0x10016) {
+	if (*(int*) 0x6a23ac >= 0x10017) {
 		for (p = (char*) 0x773db4; (int) p < 0x773dd4; p += 4)
 			*(int*) p = gm_LookupEntityRecordById(*(int*) p);
 	}
-	for (p = g_7f4ca0; (int) p < 0x85a0a0; p += 0x21c) {
-		if (*(short*) p != -1) {
-			if (*(int*) (p + 0x16c) != -1)
-				gm_ResolveEntityById((int*) (p + 0x16c), 0, 0, *(int*) (p + 0x16c));
+	for (p = g_7f4ca0 + 0x170; (int) p < 0x85a210; p += 0x21c) {
+		if (*(short*) (p - 0x170) != -1) {
+			if (*(int*) (p - 4) != -1)
+				gm_ResolveEntityById((int*) (p - 4), 0, 0, *(int*) (p - 4));
 			else
-				*(int*) (p + 0x16c) = 0;
-			if (*(int*) (p + 0x170) != -1)
-				gm_ResolveEntityById((int*) (p + 0x170), 0, 0, *(int*) (p + 0x170));
+				*(int*) (p - 4) = 0;
+			if (*(int*) (p + 0) != -1)
+				gm_ResolveEntityById((int*) (p + 0), 0, 0, *(int*) (p + 0));
 			else
-				*(int*) (p + 0x170) = 0;
-			v9 = *(int*) (p + 0x17c);
+				*(int*) (p + 0) = 0;
+			v9 = *(int*) (p + 0xc);
 			if (v9 != -1)
-				*(int*) (p + 0x17c) = fcn_005463a0(1, 1, v9);
+				*(int*) (p + 0xc) = fcn_005463a0(1, 1, v9);
 			else
-				*(int*) (p + 0x17c) = 0;
-			*(int*) (p + 0x184) = 0;
+				*(int*) (p + 0xc) = 0;
+			*(int*) (p + 0x14) = 0;
 		}
 	}
 	v9 = 0;
-	p = (char*) *(int*) 0x868054;
-	while (v9 < *(int*) 0x773d8c) {
-		obj = p;
-		if (*(char*) (*(int*) 0x99ec10 +
-		               (unsigned int) *(unsigned short*) p * 0x41) == 0x1d)
+		while (v9 < *(int*) 0x773d8c) {
+		obj = (char*) (int) lpObjekteINST + v9 * 0x43;
+		if (*(char*) ((int) lpObjektePROT +
+		               (unsigned int) *(unsigned short*) obj * 0x41) == 0x1d)
 			*(unsigned int*) (obj + 0x24) = 0;
 		v5 = *(int*) (obj + 6);
 		if (v5 != -1 && gm_ResolveEntityById(&v8, &v7, &v6, v5)) {
@@ -98,7 +98,6 @@ unsigned int __cdecl fcn_00525670(void)
 			}
 		}
 		v9++;
-		p += 0x43;
 	}
 	v3 = *(int*) 0x6b8010;
 	fcn_004432d0(0, 0);
@@ -170,11 +169,11 @@ unsigned int __cdecl fcn_00525670(void)
 			if (*(char*) (rec - 5) == 1)
 				*(int*) rec = gm_LookupEntityRecordById(v9);
 			if (*(char*) (rec - 5) == 3)
-				*(int*) rec = gm_FindRecordById(v9);
+				*(int*) rec = gm_FindRecordById(*(int*)rec);
 			if (*(char*) (rec - 5) == 2)
-				*(int*) rec = gm_SearchTable67(v9);
+				*(int*) rec = gm_SearchTable67(*(int*)rec);
 			if (*(char*) (rec - 5) == 9)
-				*(int*) rec = cut_FindCutsceneById(v9);
+				*(int*) rec = cut_FindCutsceneById(*(int*)rec);
 		}
 	}
 	fcn_00510100();

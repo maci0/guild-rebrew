@@ -7,6 +7,34 @@ extern int g_680748;
 extern int g_68074d;
 extern int g_67fca0;
 
+/* Inferred helper name; the operand-homed fill is the reviewed original
+ * inline assembly (see .scratch/sol/RULES.md, inline fill/copy block). */
+static __inline void fill0(char* dst, int size)
+{
+	char* d;
+	int n;
+
+	n = size;
+	d = dst;
+	__asm {
+		mov edi, d
+		mov ebx, n
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L1:
+		add ecx, ebx
+		rep stosb
+	}
+}
+
 /* ADDRESS: GOLDTL 0x004b2670 */
 int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 {
@@ -30,8 +58,8 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 	if (g_1052de0 == 0) {
 		return 0;
 	}
-	memset(label, 0, 0x17d0);
-	memset(buf, 0, 0x100);
+	fill0(label, 0x17d0);
+	fill0(buf, 0x100);
 
 	if (a0 < 0x4800) {
 		if (g_14a5320[a0] == 0) {
@@ -63,7 +91,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 		p = label + 7;
 	}
 
-	memset(buf, 0, 0x100);
+	fill0(buf, 0x100);
 	wp = buf;
 
 	while (*p != 0) {
@@ -85,7 +113,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 					end = start + strlen((char*) (0x67fcb8 + i * 0x40));
 					(*(void (__cdecl**)(int, int, char*)) (0x680798 + i * 4))(rec, len, end);
 				}
-				memset(buf, 0, 0x100);
+				fill0(buf, 0x100);
 				wp = buf;
 				inToken = 0;
 			}
@@ -102,9 +130,9 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 	if (!inToken) {
 		return 1;
 	}
-	start = buf + 2;
+	a0 = 8; start = buf + 2;
 	if (*(int*) (buf + 1) == g_68074d) {
-		start = buf + 8;
+		a0 = atoi(buf); start = buf + 8;
 	}
 	for (i = 0; i < 27; i++) {
 		if (strcmp(start, (char*) (0x67fcb8 + i * 0x40)) == 0) {
@@ -113,7 +141,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 	}
 	if (i < 27 && i < 0x1b) {
 		end = start + strlen((char*) (0x67fcb8 + i * 0x40));
-		(*(void (__cdecl**)(int, int, char*)) (0x680798 + i * 4))(rec, (int) p, end);
+		(*(void (__cdecl**)(int, int, char*)) (0x680798 + i * 4))(rec, a0, end);
 	}
 	return 1;
 }

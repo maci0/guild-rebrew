@@ -437,6 +437,10 @@ if(REBREW_BUILD_GOLD)
   # other names or not at all (generated from that day's link log).
   rebrew_append_scaffold(GOLD_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_adopted2.c")
+  # GoldTL global names that shared bodies adopted in the 2026-11-13 matching
+  # lanes use and Gold does not define (generated from that day's link log).
+  rebrew_append_scaffold(GOLD_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_adopted3.c")
 
   if(GOLD_SOURCES)
     add_executable(europa1400gold WIN32 ${GOLD_SOURCES})
@@ -591,8 +595,8 @@ if(REBREW_BUILD_GOLDTL)
     list(APPEND _GOLDTL_EXTERNAL_LIBS ${_GOLDTL_CTL_LIBS})
     target_link_libraries(europa1400gold_tl PRIVATE ${_GOLDTL_EXTERNAL_LIBS})
     # DirectX 8 import libraries the reference imports but the project does
-    # not otherwise reference; vendored from the XP SP1 SDK (see
-    # references/dxsdk8/VENDOR.md). Their import descriptors add DDRAW,
+    # not otherwise reference; see docs/directx-inputs.md for provenance.
+    # Their import descriptors add DDRAW,
     # DINPUT8 and d3d8 entries to the import table when included.
     target_link_libraries(europa1400gold_tl PRIVATE
       "${PROJECT_SOURCE_DIR}/references/dxsdk8/lib/ddraw.lib"

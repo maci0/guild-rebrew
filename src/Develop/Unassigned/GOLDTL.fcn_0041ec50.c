@@ -1,3 +1,4 @@
+extern int g_14cc5bc;
 #include <stdio.h>
 #include <string.h>
 
@@ -168,22 +169,22 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 				goto fail;
 			}
 			num = (rc.right - rc.left) * client.top;
-			scaled = (int) ((float) num / (float) client.left);
-			rc.top = (rc.bottom - rc.top) / 2 - scaled / 2;
+			scaled = (int) ((double) num / (double) client.left);
+			rc.top = ((rc.bottom - rc.top) >> 1) - (scaled >> 1);
 			rc.bottom = scaled + rc.top;
 		}
-	} else if (x != 0 && y != 0) {
+	} else if (w != 0 && h != 0) {
 		if (flags & 4) {
 			filter = *(Com**) (v + 0x128);
 			if ((*(long (__stdcall**) (Com*, int*, int*)) (filter->vt + 0x88 / 4))(filter, &client.left, &client.top) < 0) {
 				goto fail;
 			}
 			num = w * client.top;
-			scaled = (int) ((float) num / (float) client.left);
+			scaled = (int) ((double) num / (double) client.left);
 			if (flags & 1) {
 				GetClientRect(hwnd, &client);
-				rc.left = (client.right - client.left) / 2 - w / 2;
-				rc.top = (client.bottom - client.top) / 2 - scaled / 2;
+				rc.left = ((client.right - client.left) >> 1) - (w >> 1);
+				rc.top = ((client.bottom - client.top) >> 1) - (scaled >> 1);
 				rc.right = w + rc.left;
 				rc.bottom = scaled + rc.top;
 			} else {
@@ -199,8 +200,8 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 			rc.bottom = y + h;
 			if (flags & 1) {
 				GetClientRect(hwnd, &client);
-				rc.left = (client.right - client.left) / 2 - (rc.right - rc.left) / 2;
-				rc.top = (client.bottom - client.top) / 2 - (rc.bottom - rc.top) / 2;
+				rc.left = ((client.right - client.left) >> 1) - ((rc.right - rc.left) >> 1);
+				rc.top = ((client.bottom - client.top) >> 1) - ((rc.bottom - rc.top) >> 1);
 			}
 		}
 	} else {
@@ -209,8 +210,8 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 		if ((*(long (__stdcall**) (Com*, int*, int*)) (filter->vt + 0x88 / 4))(filter, &client.left, &client.top) < 0) {
 			goto fail;
 		}
-		rc.left = (rc.right - rc.left) / 2 - client.left / 2;
-		rc.top = (rc.bottom - rc.top) / 2 - client.top / 2;
+		rc.left = ((rc.right - rc.left) >> 1) - (client.left >> 1);
+		rc.top = ((rc.bottom - rc.top) >> 1) - (client.top >> 1);
 		rc.right = rc.left + client.left;
 		rc.bottom = rc.top + client.top;
 	}
@@ -218,14 +219,12 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 	if ((*(long (__stdcall**) (Com*, int, int, int, int)) (window->vt + 0x9c / 4))(window, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top) < 0) {
 		goto fail;
 	}
-	*(int*) (v + 8) = *(int*) 0x14cc5bc;
-	id = *(int*) 0x14cc5bc;
-	*(int*) 0x14cc5bc = id + 1;
+	*(int*) (v + 8) = g_14cc5bc;
+	id = g_14cc5bc;
+	g_14cc5bc = id + 1;
 	if (flags & 8) {
-		window = *(Com**) (*(char**) (v + 0x3c));
-		if (window != 0) {
-			(*(long (__stdcall**) (Com*, void*, int, int)) (window->vt + 0x34 / 4))(window, hwnd, 0x9021, id);
-		}
+		window = *(Com**) (v + 0x124);
+		(*(long (__stdcall**) (Com*, void*, int, int)) (window->vt + 0x34 / 4))(window, hwnd, 0x9021, id);
 	}
 	return id;
 

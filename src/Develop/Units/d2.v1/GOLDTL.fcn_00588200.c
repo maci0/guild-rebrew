@@ -4,12 +4,12 @@
 int __cdecl fcn_00471f80(int);
 float __cdecl fcn_004f0eb0(int, int, int);
 void __cdecl fcn_004f10d0(char*, int*, int*);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl fcn_00472380(int, ...);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_004f0ff0(char*, int, int, int, int*, int*);
-float __cdecl fcn_005e8860(int);
-int __cdecl _ftol(void);
-void __cdecl fcn_00580070(char*, int);
+float __cdecl fcn_005e8860(void);
+
+float __cdecl fcn_00580070(float*);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046fac0(int, int, char*, int);
@@ -61,11 +61,10 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	fcn_00472640(*(int*) (a1 + 0xb8), show);
 	fcn_00472640(*(int*) (a1 + 0xbc),
 	             (~*(unsigned int*) (a2 + 4) >> 1) & 1);
-	fcn_005e8860(1);
-	fcn_00472380(*(int*) (a1 + 0xa8), 0, 100, _ftol());
-	fcn_00580070(a1, 1);
-	fcn_00472380(*(int*) (a1 + 0xac), 0, 100, _ftol());
-	fcn_00472380(*(int*) (a1 + 0xc4), 0, 100, _ftol());
+	fcn_00472380(*(int*) (a1 + 0xa8), 0, 100, (int) (fcn_005e8860() * 100.0f), 1);
+	fcn_00472380(*(int*) (a1 + 0xac), 0, 100, (int) (fcn_00580070((float*) a1) * 100.0f), 1);
+	fcn_00472380(*(int*) (a1 + 0xc4), 0, 100,
+	             (int) (*(float*) (a2 + 8 + *(int*) (a1 + 0xa0) * 4) * 100.0f), 1);
 	d2_SetForm(*(int*) (a1 + 0xc0), 2);
 	io_AppendText(0x6811b0);
 	rec = fcn_0046fac0(0, 0xf, (char*) 0x14b54c0, *(int*) &g_772514);

@@ -3,7 +3,7 @@
 extern char g_6811b0[];
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern float g_662cf8;
+extern float g_662cf8; extern int g_6652f8[]; extern float g_662c30;
 
 int __cdecl d2_SetForm(int win, int layer);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
@@ -37,7 +37,7 @@ void __cdecl fcn_0058bfd0(int* a0)
 
 	n = 0;
 	v1 = (int*) a0[7];
-	i = *(int*) (v1[0] * 4 + 0x6652f8);
+	i = g_6652f8[v1[0]];
 	if (i > 0) {
 		e = 0;
 		r = a0 + 0xc;
@@ -45,8 +45,9 @@ void __cdecl fcn_0058bfd0(int* a0)
 			if (*(int*) ((char*) v1[4] + e) != -1) {
 				r[-1] = v1[4] + e;
 				n++;
+				h = *(int*) ((char*) v1[4] + e);
 				r[-2] = -1;
-				r[0] = *(int*) ((char*) v1[4] + e);
+				r[0] = h;
 				r += 3;
 			}
 			e += 0x44;
@@ -128,6 +129,6 @@ void __cdecl fcn_0058bfd0(int* a0)
 	io_AppendText("$7<$R%s$0<$4>$L%s$A$0>", 0x4102, buf);
 	io_FormatTextBuffer(buf, "%i %%",
 	             (int) ((float) *(unsigned char*) ((char*) v1 + 0xc) *
-	                    *(float*) 0x662c30 * g_662cf8));
+	                    g_662c30 * g_662cf8));
 	io_AppendText("$7<$R%s$0<$4>$L%s$A$0>", 0x4103, buf);
 }

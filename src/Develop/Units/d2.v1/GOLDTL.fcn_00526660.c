@@ -49,7 +49,7 @@ int __cdecl fcn_00526660(int parent, int flags)
 	int style;
 	int n;
 	int h;
-	int saved;
+	unsigned int saved;
 	int big;
 	int dlg;
 	int list;
@@ -77,8 +77,8 @@ int __cdecl fcn_00526660(int parent, int flags)
 	}
 	io_AppendText(parent);
 	fcn_00471b60(dlg);
-	list = d2_CreateRadioGroup(0);
 	g_77470e = 1;
+	list = d2_CreateRadioGroup(0);
 	for (i = 0; i < g_77255c->count; i++) {
 		id = g_77255c->ids[i];
 		if (*(int*) (g_1015ea0 + id * 756 + 0x20) != 0x40) {
@@ -110,7 +110,7 @@ int __cdecl fcn_00526660(int parent, int flags)
 			d2_SetElementValue(h, 0, 0x1f4, g_6b7fac - saved);
 		}
 		if (flags & 4) {
-			if (g_6b7fac > saved + 0x1f4) {
+			if ((unsigned int) g_6b7fac > saved + 0x1f4u) {
 				g_774654 = 1;
 			}
 		}

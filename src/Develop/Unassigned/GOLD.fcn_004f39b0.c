@@ -1,6 +1,14 @@
 /* ADDRESS: GOLD 0x004f39b0 */
-int __cdecl fcn_004f39b0(void)
+int __cdecl fcn_004f39b0(int a)
 {
-	/* stub */
-	return 0;
+	int p;
+	int n;
+
+	n = 0;
+	for (p = 0x91f725; p < 0x925125; p += 0x2d) {
+		if (*(int*) (p - 0xf) == a && *(int*) p == 1) {
+			n++;
+		}
+	}
+	return n;
 }

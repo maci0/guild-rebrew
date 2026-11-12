@@ -1,4 +1,5 @@
 #include <string.h>
+extern __int64 g_666018;
 
 unsigned short* __cdecl fcn_005cd440(unsigned int*, char*, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
@@ -16,28 +17,16 @@ unsigned int __cdecl fcn_005dd2f0(int a0, int a1)
 	unsigned short* v2;
 	unsigned short* v3;
 	int v9;
-	int i;
 
-	if (*(char*) (a0 + 2) != 6) {
-		v2 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a1 + 4));
-		v3 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a1 + 8));
-		if (v2 == 0) {
-			return 0;
-		}
-		if (v3 == 0) {
-			return 0;
-		}
-	} else {
+
+	if (*(char*) (a0 + 2) == 6) {
 		memset(q, 0, 0x50);
-		for (i = 0; i < 8; i++) {
-			q[8 + i] = 0xffffffff;
-		}
+		memset(q + 7, 0xff, 0x20);
 		io_FormatTextBuffer(buf, 0x9c);
-		q[2] = *(int*) 0x666018;
 		q[0] = 0;
 		q[1] = 0x400;
 		q[4] = 6;
-		q[3] = *(int*) 0x66601c;
+		*(__int64*) (q + 2) = g_666018;
 		v2 = fcn_005cd440(q, buf, 0, 0);
 		if (v2 == 0) {
 			return 0;
@@ -46,6 +35,15 @@ unsigned int __cdecl fcn_005dd2f0(int a0, int a1)
 		*(unsigned short*) &q[7] = *v2;
 		io_FormatTextBuffer(buf, 0x9e);
 		v3 = fcn_005cd440(q, buf, 0, 0);
+		if (v3 == 0) {
+			return 0;
+		}
+	} else {
+		v2 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a1 + 4));
+		v3 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a1 + 8));
+		if (v2 == 0) {
+			return 0;
+		}
 		if (v3 == 0) {
 			return 0;
 		}

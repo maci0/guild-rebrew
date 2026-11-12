@@ -1,4 +1,10 @@
 #include <string.h>
+#pragma pack(push, 1)
+typedef struct {
+    unsigned char kind, unknown001[0x22];
+    short entries[0x40]; unsigned char unknown0a3[0x1aa];
+} BuildingProto5279f0;
+#pragma pack(pop)
 
 typedef struct {
 	int left;
@@ -35,7 +41,7 @@ extern int g_772568;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
 extern int g_7ea380[15];
-extern char g_6a24ec[45];
+
 extern char* g_14a79c0[];
 
 void __cdecl fcn_0046b2b0(int id);
@@ -85,14 +91,14 @@ void __cdecl fcn_005279f0(unsigned int a0)
 		|| g_7746c4 != g_774718 || g_774714 != 0) {
 		g_774718 = g_7746c4;
 		g_77471c = g_7746cc;
-		p = (char*) 0x7ea380;
+		p = (char*)g_7ea380;
 		do {
 			if (*(int*) p != -1) {
 				fcn_0046b2b0(*(int*) p);
 				*(int*) p = -1;
 			}
 			p += 4;
-		} while ((int) p < (int) 0x7ea3bc);
+		} while ((int) p < (int)(g_7ea380 + 15));
 		if (g_7746c4 || g_7746c8)
 			fcn_00527540();
 		g_6a2be4 = g_6b8010;
@@ -146,14 +152,14 @@ void __cdecl fcn_005279f0(unsigned int a0)
 			break;
 		q += 3;
 		v6++;
-	} while ((int) q < (int) 0x6a2519);
+	} while ((int) q < 0x6a2519);
 	fcn_00476060(g_774680);
 	if (v6 >= 0xf)
 		goto done;
 	if (g_7746c4) {
+		v8 = 0;
 		v9 = 0;
-		if (*(char*) (lpGebaeudePROT
-			+ (unsigned char) *g_7746c4 * 0x24d) == 2) {
+		if (((BuildingProto5279f0*)lpGebaeudePROT)[(unsigned char)*g_7746c4].kind == 2) {
 			v8 = fcn_00502cd0(*(int*) (g_7746c4 + 0x5d),
 				1, 4, 2);
 			while (v8) {
@@ -166,8 +172,7 @@ void __cdecl fcn_005279f0(unsigned int a0)
 			}
 		} else {
 			v7 = 0;
-			e = (short*) (lpGebaeudePROT
-				+ (unsigned char) *g_7746c4 * 0x24d + 0x23);
+			e = ((BuildingProto5279f0*)lpGebaeudePROT)[(unsigned char)*g_7746c4].entries;
 			do {
 				if (*e != (short) 0xffff) {
 					id = *e & 0x7fff;
@@ -209,7 +214,7 @@ label_527db2:
 	v7 = 0;
 	v8 = 0;
 	v9 = 0;
-	e = (short*) (lpGebaeudePROT + (unsigned char) *g_7746c8 * 0x24d + 0x23);
+	e = ((BuildingProto5279f0*)lpGebaeudePROT)[(unsigned char)*g_7746c8].entries;
 	do {
 		if (*e != (short) 0xffff) {
 			id = *e & 0x7fff;
@@ -230,9 +235,9 @@ label_527db2:
 	if (g_14ce8d8) {
 		if (!v8)
 			goto done;
-		if ((!g_7746cc || *v8 != *(short*) g_7746cc)
+		if ((!g_7746cc || (*v8 != *(short*) g_7746cc
 			&& fcn_0057eba0(0x19, (int) g_7746c8, 0,
-				(int) *v8) == 1
+				(int) *v8) == 1))
 			&& g_7f4e51[g_774970 * 0x21c] == 0) {
 			if (!(fcn_00506380(g_774970,
 				(int) g_7746c8, v8, 0) & 0x4000))

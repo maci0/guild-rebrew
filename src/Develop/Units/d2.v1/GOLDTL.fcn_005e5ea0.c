@@ -77,8 +77,8 @@ void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
-int __cdecl fcn_00510550(char*, ...);
+#include "d2_gui.h"
+int __cdecl fcn_00510550(char*);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 int __cdecl fcn_0057c9d0(char*);
 int __cdecl fcn_00500d20(void*, void*);
@@ -103,12 +103,12 @@ void __cdecl fcn_005e5ea0(char* participant)
 	int timer1;
 	int ids[2];
 	int n;
-	int last = 0;
+	unsigned int last = 0;
 	int value;
 	Panel msg;
 	char* entity;
 	int dlg;
-	float f;
+	double f;
 
 	st = *(Stamp*) &g_7f4c00;
 	fcn_00500bb0(&st, 0x18, 0, 0);
@@ -122,16 +122,16 @@ void __cdecl fcn_005e5ea0(char* participant)
 	fcn_005340f0(g_772514);
 	d2_SetForm(dlg, stage);
 	timer1 = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2, 10, 300, 0, 100, 0x75, 0x42, g_772514);
-	fcn_00472380(timer1, 0, 100, 0);
+	d2_SetElementValue(timer1, 0, 100, 0);
 	d2_SetForm(dlg, 2);
 	timer2 = fcn_004677e0(0x57, 7, 200, 0, 100, 0x7b, 2, g_772514);
 	fcn_00510550(participant);
-	fcn_00472380(timer2, 0, fcn_00510550(participant, 0, 1) - 1, 0);
+	d2_SetElementValue(timer2, 0, fcn_00510550(participant) - 1, 0, 1);
 	d2_SetForm(dlg, 3);
 	fcn_00533a60(g_772514, 0, ids, stage, g_14b5af8, g_14b5afc);
 
 	for (;;) {
-		if (g_6b7fac > last + 0x8c || fcn_00471f80(timer2) != idx) {
+		if ((unsigned int) g_6b7fac > last + 0x8c || fcn_00471f80(timer2) != idx) {
 			last = g_6b7fac;
 			entity = (char*) fcn_0057c9d0(participant);
 			if (entity != 0) {
@@ -139,19 +139,19 @@ void __cdecl fcn_005e5ea0(char* participant)
 				st.b += *(int*) (entity + 0x70) ? 0 : 2;
 				value = fcn_00500d20(entity + 0x44, (void*) 0x7f4c00);
 				n = fcn_00500d20(entity + 0x44, &st);
-				f = (float) value / (float) n;
+				f = (double) value / n;
 				if (!(f < g_6628a0)) {
 					f = g_6628a0;
 				}
 				f = f * g_662cf8;
-				fcn_00472380(timer1, 0, 100, (int) f);
+				d2_SetElementValue(timer1, 0, 100, (int) f);
 			}
 			else {
 				st = *(Stamp*) &g_7f4c00;
 				fcn_00500bb0(&st, 0x18, 0, 0);
 				st.b = (unsigned short) (fcn_0042e410(2) + 0x15);
 				*(int*) ((char*) &st + 6) = 0;
-				fcn_00472380(timer1, 0, 100, 0);
+				d2_SetElementValue(timer1, 0, 100, 0);
 			}
 			d2_SetForm(dlg, 1);
 			io_AppendText((int) s_6811b0);

@@ -22,16 +22,18 @@ void __cdecl fcn_00500bb0(Time* clock, int arg2, int arg3, int arg4)
 	clock->min = (arg3 + clock->min) % 60;
 	minutes = *p4;
 	minutes += arg2;
-	days = clock->day;
+
 	if (minutes >= 24) {
-		days += (unsigned int) minutes / 24;
+		days = clock->day; days += (unsigned int) minutes / 24;
 		minutes -= (unsigned int) minutes / 24 * 24;
+		clock->day = days;
 	}
 	if (minutes < 0) {
-		days -= (unsigned int) (-1 - minutes) / 24 + 1;
+		days = clock->day; days -= (unsigned int) (-1 - minutes) / 24 + 1;
+		clock->day = days;
 		minutes += ((unsigned int) (-1 - minutes) / 24 + 1) * 24;
 	}
-	clock->day = days;
+
 	clock->hour = (unsigned short) minutes;
 }
 #pragma optimize("", on)

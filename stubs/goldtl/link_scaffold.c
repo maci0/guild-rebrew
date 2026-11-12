@@ -53,7 +53,6 @@ int __cdecl fcn_0042e450(void) { return 0; }
 int __cdecl fcn_0042e9d0(void) { return 0; }
 int __cdecl fcn_00437840(void) { return 0; }
 int __cdecl fcn_004442be0(void) { return 0; }
-int __cdecl fcn_004507b00(void) { return 0; }
 int __cdecl fcn_00456b60(void) { return 0; }
 int __cdecl fcn_0045d3f0(void) { return 0; }
 int __cdecl fcn_0045d770(void) { return 0; }
@@ -85,7 +84,6 @@ int __cdecl fcn_004f4970(void) { return 0; }
 int __cdecl fcn_00501190(void) { return 0; }
 int __cdecl fcn_005015e0(void) { return 0; }
 int __cdecl fcn_00502850(void) { return 0; }
-int __cdecl fcn_00503e0(void) { return 0; }
 int __cdecl fcn_00503e80(void) { return 0; }
 int __cdecl fcn_00503fe0(void) { return 0; }
 int __cdecl fcn_00504b30(void) { return 0; }
@@ -109,13 +107,11 @@ int __cdecl fcn_00579320(void) { return 0; }
 int __cdecl fcn_00591990(void) { return 0; }
 int __cdecl fcn_005988b0(void) { return 0; }
 int __cdecl fcn_005a8690(void) { return 0; }
-int __cdecl fcn_005c02a0(void) { return 0; }
 int __cdecl fcn_005cff10(void) { return 0; }
 int __cdecl fcn_005e12d0(void) { return 0; }
 int __cdecl fcn_005e1ca0(void) { return 0; }
 int __cdecl fcn_005e2b60(void) { return 0; }
 int __cdecl fcn_005e3520(void) { return 0; }
-int __cdecl fcn_005e6360(void) { return 0; }
 int __cdecl fcn_005e6e00(void) { return 0; }
 int __cdecl fcn_005e8850(void) { return 0; }
 int __cdecl fcn_005e9870(void) { return 0; }
@@ -135,7 +131,6 @@ int __cdecl fcn_005fc008(void) { return 0; }
 int __cdecl fcn_005fc024(void) { return 0; }
 int __cdecl fcn_005fc0c8(void) { return 0; }
 int __cdecl fcn_005fc10c(void) { return 0; }
-int __cdecl fcn_00601a9b(void) { return 0; }
 int __cdecl fcn_0060223c(void) { return 0; }
 int __cdecl fcn_006022c0(void) { return 0; }
 int __stdcall fcn_0060f24d(int a0, int a1, int a2) { return 0; }
@@ -410,3 +405,12 @@ void __cdecl fcn_004737c0(void) { }
 
 /* Placeholder for the selection tail reached by the trade panel at 0x5BA910. */
 void __cdecl fcn_005ba750(void) { }
+/* D3DX8 math entry points that GOLDTL.fcn_004582d0.c calls by address
+ * (0x5edf4a, 0x5ed44c and 0x5ec4b3 are CPU-dispatch thunks; 0x5ed39b has no
+ * inventory extent). Usage fits D3DXPlaneFromPointNormal, D3DXMatrixShadow,
+ * D3DXMatrixRotationX and D3DXMatrixOrthoOffCenter; no byte match yet, so no
+ * provider is claimed. Scaffolding for the comparison link only. */
+int __stdcall fcn_005edf4a(int a0, int a1, int a2) { return 0; }
+int __stdcall fcn_005ed44c(int a0, int a1, int a2) { return 0; }
+int __stdcall fcn_005ec4b3(int a0, int a1) { return 0; }
+int __stdcall fcn_005ed39b(int a0, int a1, int a2, int a3, int a4, int a5, int a6) { return 0; }

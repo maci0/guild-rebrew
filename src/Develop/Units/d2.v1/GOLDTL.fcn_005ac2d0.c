@@ -1,3 +1,6 @@
+extern int g_774654;
+extern int g_67d370;
+extern int g_14ce8e0;
 #include <string.h>
 
 #include "client_types.h"
@@ -254,10 +257,10 @@ void __cdecl fcn_005ac2d0(char* a0)
 		}
 		flag = 0;
 	post:
-		if (*(int*) 0x14ce8e0 != 0 || state == 3) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 != 0 || state == 3) {
+			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (*(int*) 0x67d370 == btnState0) {
+			if (g_67d370 == btnState0) {
 				if (fcn_00525f60(g_7f4ca0 + g_774970 * 0x21c, 1) != 0) {
 					v12 = 1;
 					fcn_005100f0(*(int*) (g_7f4ca4 + g_774970 * 0x21c), -1);
@@ -272,7 +275,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 						}
 					}
 				}
-			} else if (*(int*) 0x67d370 == btnState1) {
+			} else if (g_67d370 == btnState1) {
 				memset(pkt2, 0, 0x50);
 				*(int*) (pkt2 + 4) = 0x400;
 				*(int*) (pkt2 + 0x10) = 6;
@@ -301,7 +304,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 						}
 					}
 				}
-			} else if (*(int*) 0x67d370 == btnState2) {
+			} else if (g_67d370 == btnState2) {
 				int id;
 
 				v12 = -1;
@@ -323,8 +326,8 @@ void __cdecl fcn_005ac2d0(char* a0)
 						fcn_005373e0((void*) 0, 0x677c7);
 					}
 				}
-			} else if (*(int*) 0x67d370 == btnCancel) {
-				*(int*) 0x774654 = 1;
+			} else if (g_67d370 == btnCancel) {
+				g_774654 = 1;
 			}
 		}
 	} while (fcn_005373e0((void*) fcn_005ac2d0, 0x677c7) != 0);

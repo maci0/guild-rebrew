@@ -1,3 +1,4 @@
+#include "client_data.h"
 /*
  * Rebuild the trade-goods tooltip list for object a0: item name, weight,
  * quality bar and the "contains" product rows, then place the window.
@@ -26,7 +27,7 @@ int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_0046f7e0(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 float __cdecl eval_ObjektPreis2Credits(int, int);
-float __cdecl fcn_0050bb50(int, int, int);
+float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0050c710(int, int, int);
 int __cdecl fcn_0050dc90(int);
 float __cdecl fcn_00510260(int, int, int*);
@@ -57,12 +58,12 @@ int __cdecl fcn_00590b80(int a0)
 		win = fcn_00470820(0, 0, s_6a9a38);
 	}
 	fcn_00471b60(win);
-	n = *(int*) (0x01038144 + win * 700);
-	val = *(int*) (0x01015f4c + n * 0x3cc);
-	if (*(int*) (0x01015f44 + n * 0x3cc) + val > g_1040494 - 0x10) {
+	n = g_1038144[win].i[0];
+	val = *(int*) ((char*) &g_1015f40[n] + 0xc);
+	if (*(int*) ((char*) &g_1015f40[n] + 0x4) + val > g_1040494 - 0x10) {
 		fcn_00469c40(g_1040494 - 0x10 - val,
-				*(int*) (0x01015f48 + n * 0x3cc),
-				*(int*) (0x010161bc + n * 0x3cc));
+				*(int*) ((char*) &g_1015f40[n] + 0x8),
+				g_1015f40[n].x274);
 	}
 	d2_SetForm(0, 2);
 	fcn_0046f740(0, 0, a0 + 0xdf, g_772514);
@@ -71,10 +72,10 @@ int __cdecl fcn_00590b80(int a0)
 	io_AppendText(a0 * 2 + 0x9a8);
 	d2_SetForm(0, 3);
 	if (def[0x40] != 0) {
-		io_AppendText(0x21, def[0x40]);
+		io_AppendText(0x21, (unsigned char) def[0x40]);
 	} else {
-		io_AppendText(0x1f, (int) fcn_0050bb50(a0, g_773d75,
-				(int) eval_ObjektPreis2Credits(a0, 100)));
+		io_AppendText(0x1f, (int) fcn_0050bb50(a0, g_773d75),
+				(int) eval_ObjektPreis2Credits(a0, 100));
 	}
 	ent = (int*) g_7746c4;
 	if (ent == 0) {

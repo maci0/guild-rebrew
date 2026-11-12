@@ -6,15 +6,14 @@
 float __cdecl fcn_004cefb0(char* a1, char* a2)
 {
 	char* p;
-	float ax;
-	float ay;
-	float px;
-	float py;
+	float a[2];
+	float b[2];
 
-	ax = *(float*) (a2 + 0x4c);
-	ay = *(float*) (a2 + 0x54);
+	a[0] = *(float*) (a2 + 0x4c);
+	a[1] = *(float*) (a2 + 0x54);
 	p = *(char**) (*(char**) (a1 + 0x184) + 0x34);
-	px = *(float*) (p + 0x4c);
-	py = *(float*) (p + 0x54);
-	return (float) sqrt((ax - px) * (ax - px) + (ay - py) * (ay - py));
+	b[0] = *(float*) (p + 0x4c);
+	b[1] = *(float*) (p + 0x54);
+	a[0] -= b[0];
+	return (float) sqrt((a[1] - b[1]) * (a[1] - b[1]) + a[0] * a[0]);
 }

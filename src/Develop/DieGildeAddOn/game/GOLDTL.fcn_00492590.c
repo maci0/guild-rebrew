@@ -16,12 +16,12 @@ unsigned int __cdecl fcn_00492590(int a0)
 	int row;
 	int i;
 	int col;
-	int res;
+	float* threshold;
 	int cs;
 	int v2;
 	int sel;
 	int v;
-	unsigned char bl;
+	int bl;
 	char* src;
 
 	tab[0] = 0.2f;
@@ -39,19 +39,19 @@ unsigned int __cdecl fcn_00492590(int a0)
 	tab[12] = 0.55f;
 	tab[13] = 0.8f;
 	tab[14] = 1.0f;
-	res = 0;
+
 	r = gm_RandomFloat01();
 	if (a0 == 1) {
 		row = 0;
 	} else {
 		row = (a0 != 2) + 1;
 	}
-	for (i = 1; i <= 5; i++) {
-		if (r <= tab[row * 5 + (i - 1)]) {
-			res = i;
+	i = 0; threshold = tab + row * 5; do {
+		i++; if (r <= *threshold) {
+			a0 = i;
 			break;
 		}
-	}
+		threshold++; } while (i < 5);
 	if (row == 1) {
 		cs = (unsigned short) gm_RandomMod(3);
 	} else {
@@ -63,7 +63,7 @@ unsigned int __cdecl fcn_00492590(int a0)
 		}
 	}
 	r = gm_RandomFloat01();
-	v2 = res;
+	v2 = a0;
 	for (col = 0; col < 5; col++) {
 		if (r <= tab[cs * 5 + col]) {
 			v2 = (col + 1) * 0x100;
@@ -78,7 +78,7 @@ unsigned int __cdecl fcn_00492590(int a0)
 		src = g_14a5dbc[gm_RandomMod(0xbf) & 0xffff];
 	}
 	fcn_0064d530(g_772628 + 0x30, src, 0xf);
-	switch (res) {
+	switch (a0) {
 	case 1:
 		bl = 0x15;
 		sel = 0x2a;
@@ -100,13 +100,13 @@ unsigned int __cdecl fcn_00492590(int a0)
 		sel = 0x54;
 		break;
 	default:
-		bl = (unsigned char) res;
-		sel = res;
+		bl = (unsigned char) a0;
+		sel = a0;
 		break;
 	}
 	for (i = 0; i < 5; i++) {
 		g_772628[0x80 + i] = (char) (gm_RandomMod(sel) + bl + 1);
 	}
 	g_772628[2] = 10;
-	return v2 | res;
+	return v2 | a0;
 }

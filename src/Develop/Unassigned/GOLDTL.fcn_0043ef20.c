@@ -24,8 +24,8 @@ char __cdecl fcn_004379a0(char* scene, char* node, unsigned int flags,
                           char (__cdecl* cb)(char*, void*), void* ctx);
 char __cdecl fcn_0043ed30(char* node, void* ctx);
 
-typedef void (__cdecl* LightLock)(char*, int, char**);
-typedef void (__cdecl* LightUnlock)(char*);
+typedef void (__stdcall* LightLock)(char*, int, char**);
+typedef void (__stdcall* LightUnlock)(char*);
 
 /* Iterator context: the handle lives at ctx+0, the first hit at ctx+4. */
 typedef struct LightIter {
@@ -78,11 +78,31 @@ void __cdecl fcn_0043ef20(char* a0)
 	float shade;
 	float chan;
 	LightIter it;
+	char* fillDst;
+	int fillCount;
 
 	if ((*(unsigned char*) (a0 + 0x8036) & 2) == 0 && *(int*) (a0 + 0x1c) != 0) {
 		fcn_0043bf20(a0);
 		w = *(int*) a0;
-		memset(*(void**) (a0 + 0x1c), 0, w * w);
+		fillDst = *(char**) (a0 + 0x1c);
+		fillCount = w * w;
+		__asm {
+			mov edi, fillDst
+			mov ebx, fillCount
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short LightFillTail
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		LightFillTail:
+			add ecx, ebx
+			rep stosb
+		}
 		it.obj = a0;
 		it.item = 0;
 		fcn_004379a0((char*) g_67a370, 0, 0xe, fcn_0043ed30, &it);
@@ -119,7 +139,7 @@ void __cdecl fcn_0043ef20(char* a0)
 						s2 = (float) d2 * kb;
 						nrm = g_6628a0 / (float) sqrt(s2 * s2 + s1 * s1 + kaa);
 						tot = u[0] * (nrm * s1) + u[1] * (ka * nrm) + u[2] * (nrm * s2);
-						if (tot > g_6628a8) {
+						if (tot < g_6628a8) {
 							idx = (int) (tot * g_662ca0);
 							chan = f27 * g_1040d00[idx];
 							val = (unsigned int) (int) chan;
@@ -155,12 +175,12 @@ void __cdecl fcn_0043ef20(char* a0)
 						if (n > 0) {
 							do {
 								texel = *(unsigned int*) (*(int*) (cellp - 0x1c) + (int) t * 4) & 0xffffff;
-								*(float*) dst = (float) (unsigned int) (texel % (unsigned int) w) *
+								*(float*) dst = (float) (unsigned int) (texel % *(unsigned int*) a0) *
 								                *(float*) (a0 + 0x60);
-								*(float*) (dst + 4) = (float) lum[texel] * *(float*) (a0 + 0x84);
-								*(float*) (dst + 8) = (float) (unsigned int) (texel / (unsigned int) w) *
+								*(float*) (dst + 4) = (float) (unsigned char) (*(char**) (a0 + 0x10))[texel] * *(float*) (a0 + 0x84);
+								*(float*) (dst + 8) = (float) (unsigned int) (texel / *(unsigned int*) a0) *
 								                *(float*) (a0 + 0x78);
-								b0 = (unsigned char) bmp[texel];
+								b0 = (unsigned char) (*(char**) (a0 + 0x1c))[texel];
 								shade = (float) (int) (b0 & 0x7f);
 								shade += shade;
 								if ((signed char) b0 < 0) {
@@ -193,7 +213,7 @@ void __cdecl fcn_0043ef20(char* a0)
 									}
 									blu = blu & 0xff;
 								}
-								*(unsigned int*) (dst + 0xc) = (texel & 0xff000000) + (unsigned int) blu +
+								*(unsigned int*) (dst + 0xc) = (*(unsigned int*) (*(int*) (cellp - 0x1c) + (int) t * 4) & 0xff000000) + (unsigned int) blu +
 								                               (unsigned int) (red * 0x100 + grn) * 0x100;
 								*(int*) (dst + 0x10) = *(int*) (*(int*) (a0 + 0x20) + (int) texel * 8);
 								*(int*) (dst + 0x14) = *(int*) (*(int*) (a0 + 0x20) + (int) texel * 8 + 4);
@@ -211,12 +231,12 @@ void __cdecl fcn_0043ef20(char* a0)
 						if (n > 0) {
 							do {
 								texel = *(unsigned int*) (*(int*) (cellp - 0x18) + (int) t * 4) & 0xffffff;
-								*(float*) dst = (float) (unsigned int) (texel % (unsigned int) w) *
+								*(float*) dst = (float) (unsigned int) (texel % *(unsigned int*) a0) *
 								                *(float*) (a0 + 0x60);
-								*(float*) (dst + 4) = (float) lum[texel] * *(float*) (a0 + 0x84);
-								*(float*) (dst + 8) = (float) (unsigned int) (texel / (unsigned int) w) *
+								*(float*) (dst + 4) = (float) (unsigned char) (*(char**) (a0 + 0x10))[texel] * *(float*) (a0 + 0x84);
+								*(float*) (dst + 8) = (float) (unsigned int) (texel / *(unsigned int*) a0) *
 								                *(float*) (a0 + 0x78);
-								b0 = (unsigned char) bmp[texel];
+								b0 = (unsigned char) (*(char**) (a0 + 0x1c))[texel];
 								shade = (float) (int) (b0 & 0x7f);
 								shade += shade;
 								if ((signed char) b0 < 0) {
@@ -249,7 +269,7 @@ void __cdecl fcn_0043ef20(char* a0)
 									}
 									blu = blu & 0xff;
 								}
-								*(unsigned int*) (dst + 0xc) = (texel & 0xff000000) + (unsigned int) blu +
+								*(unsigned int*) (dst + 0xc) = (*(unsigned int*) (*(int*) (cellp - 0x18) + (int) t * 4) & 0xff000000) + (unsigned int) blu +
 								                               (unsigned int) (red * 0x100 + grn) * 0x100;
 								*(int*) (dst + 0x10) = *(int*) (*(int*) (a0 + 0x20) + (int) texel * 8);
 								*(int*) (dst + 0x14) = *(int*) (*(int*) (a0 + 0x20) + (int) texel * 8 + 4);

@@ -9,6 +9,16 @@ typedef struct node99_load {
 } node99_load;
 #pragma pack(pop)
 /* SIZE 0x99 */
+extern char g_9bade0[];
+extern node99_load g_aed740[0x8000];
+extern cell10_fb5760 g_fb5760[0x8000];
+extern char* g_aed324;
+extern char* g_aed200;
+extern int g_6a23ac;
+extern int g_1005760;
+extern int g_1005768;
+extern unsigned int g_100581c;
+extern unsigned int g_aed204;
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 
@@ -22,84 +32,85 @@ int __cdecl fcn_005252d0(void* fp)
 	int n;
 	int i;
 
-	for (r = (char*) 0x9bae71; (int) r < (int) 0xaece71; r += 0x99) {
+	for (r = g_9bade0 + 0x91; (int) r < (int) g_9bade0 + 0x132091; r += 0x99) {
 		if (!ls_ReadVfsDataChecked(r - 0x91, 0x99, 1, fp)) {
-			return 0;
+			goto read_failed;
 		}
 		if (*(int*) r == -1) {
 			*(int*) r = 0;
 		} else {
-			*(int*) r = (int) &((node99_load*) 0x9bade0)[*(int*) r];
+			*(int*) r = (int) &((node99_load*) g_9bade0)[*(int*) r];
 		}
 		if (*(int*) (r + 4) == -1) {
 			*(int*) (r + 4) = 0;
 		} else {
-			*(int*) (r + 4) = (int) &((node99_load*) 0x9bade0)[*(int*) (r + 4)];
+			*(int*) (r + 4) = (int) &((node99_load*) g_9bade0)[*(int*) (r + 4)];
 		}
 	}
 	if (!ls_ReadVfsDataChecked(&n, 4, 1, fp)) {
-		return 0;
+read_failed: return 0;
 	}
+	i = 0;
 	if (n == -1) {
-		*(char**) 0xaed324 = 0;
+		g_aed324 = 0;
 	} else {
-		*(char**) 0xaed324 = (char*) &((node99_load*) 0x9bade0)[n];
+		g_aed324 = (char*) &((node99_load*) g_9bade0)[n];
 	}
 	if (!ls_ReadVfsDataChecked(&n, 4, 1, fp)) {
 		return 0;
 	}
 	if (n == -1) {
-		*(char**) 0xaed200 = 0;
+		g_aed200 = 0;
 	} else {
-		*(char**) 0xaed200 = (char*) &((node99_load*) 0x9bade0)[n];
+		g_aed200 = (char*) &((node99_load*) g_9bade0)[n];
 	}
-	n = (*(int*) 0x6a23ac < 0x1003c) ? 0x2000 : 0x8000;
-	for (r = (char*) 0xfb5760; r < (char*) 0x1005760; r += 0xa) {
-		*(int*) (r + 6) = 0;
-		*(int*) (r + 2) = -1;
-		*(char*) r = 1;
+	n = (g_6a23ac >= 0x1003c) ? 0x8000 : 0x2000;
+	for (r = (char*) g_fb5760 + 2; (int) r < (int) g_fb5760 + 0x50002; r += 0xa) {
+		*(int*) (r + 4) = 0;
+		*(int*) r = -1;
+		*(char*) (r - 2) = 1;
 	}
 	if (n > 0) {
-		for (i = 0; i < n; i++) {
-			r = (char*) 0xaed740 + i * 0x99;
-			if (!ls_ReadVfsDataChecked(r, 0x99, 1, fp)) {
-				return 0;
+		for (r = (char*) g_aed740 + 0x91; i < n; i++, r += 0x99) {
+			if (!ls_ReadVfsDataChecked(r - 0x91, 0x99, 1, fp)) {
+				goto read_failed;
 			}
-			if (*(int*) (r + 0x91) == -1) {
-				*(int*) (r + 0x91) = 0;
+			if (*(int*) r == -1) {
+				*(int*) r = 0;
 			} else {
-				*(int*) (r + 0x91) = (int) &((node99_load*) 0xaed740)[*(int*) (r + 0x91)];
+				*(int*) r = (int) &(g_aed740)[*(int*) r];
 			}
-			if (*(int*) (r + 0x95) == -1) {
-				*(int*) (r + 0x95) = 0;
+			if (*(int*) (r + 4) == -1) {
+				*(int*) (r + 4) = 0;
 			} else {
-				*(int*) (r + 0x95) = (int) &((node99_load*) 0xaed740)[*(int*) (r + 0x95)];
+				*(int*) (r + 4) = (int) &(g_aed740)[*(int*) (r + 4)];
 			}
 		}
 	}
+	i = 0;
 	if (!ls_ReadVfsDataChecked(&n, 4, 1, fp)) {
 		return 0;
 	}
 	if (n == -1) {
-		*(int*) 0x1005760 = 0;
+		g_1005760 = 0;
 	} else {
-		*(int*) 0x1005760 = (int) &((node99_load*) 0xaed740)[n];
+		g_1005760 = (int) &(g_aed740)[n];
 	}
-	if (!ls_ReadVfsDataChecked((void*) 0x1005768, 4, 1, fp)) {
+	if (!ls_ReadVfsDataChecked(&g_1005768, 4, 1, fp)) {
 		return 0;
 	}
-	n = (*(int*) 0x6a23ac < 0x1003c) ? 0x2000 : 0x8000;
+	n = (g_6a23ac >= 0x1003c) ? 0x8000 : 0x2000;
 	if (n > 0) {
-		for (i = 0; i < n; i++) {
-			if (!ls_ReadVfsDataChecked((void*) (0xfb5760 + i * 0xa), 0xa, 1, fp)) {
-				return 0;
+		for (r = (char*) g_fb5760; i < n; i++, r += 0xa) {
+			if (!ls_ReadVfsDataChecked(r, 0xa, 1, fp)) {
+				goto read_failed;
 			}
 		}
 	}
-	if (!ls_ReadVfsDataChecked((void*) 0x100581c, 4, 1, fp)) {
+	if (!ls_ReadVfsDataChecked(&g_100581c, 4, 1, fp)) {
 		return 0;
 	}
-	if (!ls_ReadVfsDataChecked((void*) 0xaed204, 4, 1, fp)) {
+	if (!ls_ReadVfsDataChecked(&g_aed204, 4, 1, fp)) {
 		return 0;
 	}
 	*(int*) 0x68a9d0 = 0;

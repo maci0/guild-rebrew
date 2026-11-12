@@ -24,7 +24,7 @@ int __cdecl fcn_00521530(void* fp)
 
 	for (r = (char*) 0x9bae71; (int) r < (int) 0xaece71; r += 0x99) {
 		buf = *(node99_save*) (r - 0x91);
-		buf.prev = *(unsigned int*) r ? (*(unsigned int*) r - 0x9bade0) / 0x99 : 0xffffffff;
+		index = *(unsigned int*) r ? (*(unsigned int*) r - 0x9bade0) / 0x99 : 0xffffffff; buf.prev = index;
 		index = *(unsigned int*) (r + 4) ? (*(unsigned int*) (r + 4) - 0x9bade0) / 0x99 : 0xffffffff;
 		buf.next = index;
 		if (vfs_fwrite(&buf, 0x99, 1, fp) <= 0) {
@@ -49,7 +49,7 @@ int __cdecl fcn_00521530(void* fp)
 	}
 	for (r = (char*) 0xaed7d1; (int) r < (int) 0xfb57d1; r += 0x99) {
 		buf = *(node99_save*) (r - 0x91);
-		buf.prev = *(unsigned int*) r ? (*(unsigned int*) r - 0xaed740) / 0x99 : 0xffffffff;
+		index = *(unsigned int*) r ? (*(unsigned int*) r - 0xaed740) / 0x99 : 0xffffffff; buf.prev = index;
 		index = *(unsigned int*) (r + 4) ? (*(unsigned int*) (r + 4) - 0xaed740) / 0x99 : 0xffffffff;
 		buf.next = index;
 		if (vfs_fwrite(&buf, 0x99, 1, fp) <= 0) {

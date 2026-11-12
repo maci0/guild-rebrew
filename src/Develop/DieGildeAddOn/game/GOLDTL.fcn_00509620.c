@@ -38,12 +38,11 @@ int __cdecl fcn_00509620(int a0, int a1)
 	int n;
 	int i;
 	int j;
-	int p_slot;
-	int q_slot;
+	unsigned short p_slot;
+	unsigned short q_slot;
 	int kind;
 	int value;
 	int rank;
-	unsigned char state;
 	unsigned char* ep;
 
 	slots = (EntityStruct*) g_slot_table;
@@ -84,10 +83,8 @@ int __cdecl fcn_00509620(int a0, int a1)
 	 * (0x5097cd) and on the opposite-stat jge path (0x5097be). On the
 	 * found==NULL (0x50976e -> 0x5097d4), level==0 (0x509784 -> 0x5097d4)
 	 * and jl paths there is no store, so rec_a.age keeps the q copy.
-	 * The 0x4fd9d0 state argument is rec_a.age (reloaded as a dword at
-	 * 0x509800 and masked 0xff), so state must default to q->age; the
-	 * production form left it uninitialized on those three paths. */
-	state = q->age;
+	 * The 0x4fd9d0 arguments are rec_a.gender and rec_a.age (reloaded at
+	 * 0x509800/0x509807 and masked 0xff). */
 	rank = gm_MapEntityStatRange(q->age);
 	if (rank != 0) {
 		found = gm_GetEntityTableEntry(p);
@@ -95,7 +92,6 @@ int __cdecl fcn_00509620(int a0, int a1)
 			item = (char*) gm_CheckStatLevel(p->entity_index, rank);
 			if (item != 0) {
 				if (gm_GetOppositeStatIndex(q->age) <= gm_GetOppositeStatIndex((int) item)) {
-					state = p->age;
 					rec_a.age = p->age;
 				} else {
 					*(char*) ((char*) found + 0x74 + rank) = q->age;
@@ -103,7 +99,6 @@ int __cdecl fcn_00509620(int a0, int a1)
 			}
 		}
 	} else {
-		state = p->age;
 		rec_a.age = p->age;
 	}
 
@@ -113,7 +108,7 @@ int __cdecl fcn_00509620(int a0, int a1)
 		*(int*) ((char*) &rec_a + 0x18c) = p->target_id;
 	} else {
 		name[0] = 0;
-		item = fcn_004fd9d0(q->gender, state);
+		item = fcn_004fd9d0((unsigned char) rec_a.gender, rec_a.age);
 		if (item != 0) {
 			strcpy(name, item + 4);
 			*(int*) ((char*) &rec_a + 0x18c) = *(int*) (item + 0x34) + 0x639;
@@ -134,12 +129,12 @@ int __cdecl fcn_00509620(int a0, int a1)
 		node = *(void**) ((char*) node + 0x3f))
 		*(int*) ((char*) node + 6) = slots[q_slot].entity_id;
 
-	for (i = 0; i < 0x300; i++) {
+	for (q = slots, i = 0x300; i != 0; i--, q++) {
 		for (j = 0; j < 8; j++) {
-			if (slots[i].ref_table[j] == a0)
-				slots[i].ref_table[j] = a1;
-			else if (slots[i].ref_table[j] == a1)
-				slots[i].ref_table[j] = a0;
+			if (q->ref_table[j] == a0)
+				q->ref_table[j] = a1;
+			else if (q->ref_table[j] == a1)
+				q->ref_table[j] = a0;
 		}
 	}
 

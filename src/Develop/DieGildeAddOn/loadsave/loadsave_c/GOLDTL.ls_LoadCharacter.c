@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
-extern char g_6b5c20;
+extern char* g_6b5c20;
 extern int g_6b8010;
 extern int g_6b7fdc;
 extern int g_6a23ac;
@@ -66,6 +66,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 	int tex;
 	unsigned char type;
 	unsigned char t;
+	unsigned short template_id;
 
 	found = 0;
 	alloc = 0;
@@ -99,7 +100,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 		rec = (char*) *list;
 		if (rec != 0) {
 			alloc = 0;
-			found = gm_StartFilteredEntitySearch(1, (int) *(unsigned int*) (rec + 0x2c));
+			found = gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (rec + 0x2c));
 			if (found != 0) {
 				alloc = fcn_00502cd0((int) *(unsigned int*) ((char*) found + 0x5d),
 						     2, 6, 1, *(unsigned int*) (rec + 0x30));
@@ -118,14 +119,14 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 			}
 			sprintf(path, s_6a2490, name);
 			_strupr(path);
-			if (fcn_0042f690(path, &g_6b7fdc, &g_6b7fdc, text) == 0) {
+			if (fcn_0042f690(path, (void*) g_6b7fdc, (void*) g_6b7fdc, text) == 0) {
 				p = *(char**) (rec + 0x12c);
-				t = *(unsigned short*) p;
+				template_id = *(unsigned short*) p;
 				p[0x1f4] = 0;
-				strcpy(rec + 0x170, (char*) (fcn_004fda30(t) + 4));
+				strcpy(rec + 0x170, (char*) (fcn_004fda30(template_id) + 4));
 				p = strchr(rec + 0x170, '_');
 				if (p != 0) {
-					strcpy(p + 1, rec + 0x130);
+					strcpy(rec + 0x130, p + 1);
 					*p = 0;
 				}
 				sprintf(name, s_675504, rec + 0x170, rec + 0x130);
@@ -155,7 +156,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 						fcn_00438cb0(target, rec + 0x48);
 						sprintf(target, s_68b0d8, u[1]);
 						*(unsigned int*) (target + 0x204) = (unsigned int) u;
-						*(unsigned int*) (target + 0x48) = *u | 0x3000000;
+						*(unsigned int*) (target + 0x48) = (unsigned int) *(unsigned short*) u | 0x3000000;
 						*(unsigned int*) ((char*) u + 0x184) = (unsigned int) rec;
 						if (*(char**) ((char*) u + 0x17c) != 0) {
 							*(char*) ((char*) u + 0x180) = **(char**) ((char*) u + 0x17c);
@@ -163,10 +164,11 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 						fcn_004ce9e0(u);
 					} else {
 						fcn_00510820(target, u, 1);
-						sprintf(target, s_68b0d8, u[2]);
+						target = *(char**) (rec + 0x34);
+						sprintf(target, s_68b0d8, *(unsigned int*) ((char*) u + 2));
 						type = *(unsigned char*) u;
 						*(unsigned int*) ((char*) u + 0x3b) = (unsigned int) rec;
-						if (type == 0x34 && *(unsigned short*) u == 0x134) {
+						if (*(unsigned short*) u == 0x134) {
 							found = (unsigned short*) fcn_00442910(0, rec + 0x38,
 											      rec + 0x48, s_699784);
 						} else if (*(unsigned short*) u == 0x135) {
@@ -317,9 +319,9 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 				}
 				n += 0x194;
 			} while (n < 0xc5440);
-		}
 	clear_record:
-		memset(rec, 0, 0x194);
+			memset(rec, 0, 0x194);
+		}
 		i += 0x194;
 	} while (i < 0xc5440);
 	return 1;

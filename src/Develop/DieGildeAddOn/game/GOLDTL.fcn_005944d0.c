@@ -10,8 +10,8 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00594340(void);
 void __cdecl fcn_00533dc0(int, int, int);
-void __cdecl fcn_00533f40(int, int, int, int);
-int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
+int __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
+int __cdecl fcn_00472830(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_eval_SlotVoll(int, int, int);
@@ -50,7 +50,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	int limit;
 	int i;
 	int n;
-	int row;
+	int row; int rowsLeft;
 	unsigned int id;
 	unsigned int v33;
 	unsigned int v34;
@@ -58,8 +58,8 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	unsigned int v38;
 	unsigned int v39;
 	int v13;
-	int rect1[4];
-	int rect2[4];
+	int rect1;
+	int rect2;
 	int list[10];
 	char tmpl[0xf8];
 	unsigned short v3;
@@ -106,7 +106,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	}
 	fcn_00533dc0(*(int*) 0x772514, id, 0x742);
 	fcn_00533f40(0x270, 0x15e, *(int*) 0x772514,
-	             fcn_00472830(window, 2, 0x78, rect2, rect1, &v13));
+	             fcn_00472830(window, 2), 0x78, &rect2, &rect1, &v13);
 	*(unsigned int*) (*(int*) 0x1015ea0 + 0x84 + v13 * 0x2f4) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
 	for (;;) {
@@ -136,7 +136,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 			} while (!any);
 			if (1 <= count) {
 				row = 0;
-				i = count;
+				rowsLeft = count;
 				do {
 					if (*(int*) 0x67d370 == *(int*) (row + 0x779194)) {
 						if (any) {
@@ -178,7 +178,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 
 									found = fcn_005463a0(2, 0, 4, 3, *(int*) (p + 1));
 									while (found) {
-										if (*(unsigned int*) (found + 0xac) ==
+										if (*(unsigned short*) (found + 0xac) ==
 										    *(unsigned int*) (row + 0x779160)) {
 											goto found_row;
 										}
@@ -192,7 +192,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 										if (*(unsigned short*) (p + 0x27) != 0xffff) {
 											v33 = *(unsigned int*) (*(unsigned short*) (p + 0x27) * 0x21c + 0x7f4ca4);
 										} else {
-											v33 = *(unsigned int*) (*(int*) 0x774970 * 0x21c + 0x7f4ca4);
+											v33 = *(unsigned int*) (*(unsigned short*) 0x774970 * 0x21c + 0x7f4ca4);
 										}
 										v34 = *(unsigned int*) (p + 1);
 										*(char*) (tmpl + 0x04) = 4;
@@ -274,8 +274,8 @@ found_row:
 						}
 					}
 					row += 0x58;
-					i--;
-				} while (i);
+					rowsLeft--;
+				} while (rowsLeft);
 			}
 		}
 		if (*(int*) 0x14ce8e0) {
@@ -332,12 +332,12 @@ after_input:
 							if (count <= k) {
 								if (dup && (int) cell <= 0x7796df) {
 									count++;
-									*cell = *(int*) shop;
+									*cell = (int) *shop;
 									cell += 0x16;
 								}
 								break;
 							}
-							if (*c == *(int*) shop) {
+							if (*c == (int) *shop) {
 								dup = 0;
 							}
 							k++;

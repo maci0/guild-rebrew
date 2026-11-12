@@ -25,6 +25,8 @@ extern int g_6b8478;
 extern int g_6b847c;
 extern int g_6b8480;
 extern int g_6b8484;
+extern float g_6628a8;
+extern float g_6628fc;
 
 int __cdecl fcn_00449600(int a);
 int __cdecl fcn_00448cc0(int self, float* dir, float* view, int pos,
@@ -39,13 +41,13 @@ int __cdecl fcn_00449600(int a1)
 {
 	switch (a1) {
 	case 1:
-		return *(int*) 0x6b8478;
+		return g_6b8478;
 	case 2:
-		return *(int*) 0x6b847c;
+		return g_6b847c;
 	case 3:
-		return *(int*) 0x6b8480;
+		return g_6b8480;
 	}
-	return *(int*) 0x6b8484;
+	return g_6b8484;
 }
 
 /* ADDRESS: GOLDTL 0x00449630 */
@@ -58,7 +60,7 @@ int __cdecl fcn_00449630(void)
 	int dy;
 	float f10;
 	float f14;
-	float a18[2];
+	float a18[3];
 	float ang;
 	int handle;
 	float p28[3];
@@ -79,7 +81,7 @@ int __cdecl fcn_00449630(void)
 	if (h == 0)
 		return 0;
 	handle = fcn_00449600(g_1041d68);
-	ang = *(float*) 0x6628a8;
+	ang = g_6628a8;
 	mx = g_14ce8c0;
 	ht = g_14ce864;
 	w = g_14ce860;
@@ -115,8 +117,8 @@ int __cdecl fcn_00449630(void)
 				dy = 0;
 			g_6b85b0 = (int) mx;
 			g_6b85b4 = (int) my;
-			ang = (float) dx / (float) w * *(float*) 0x6628fc;
-			f14 = (float) dy / (float) ht * *(float*) 0x6628fc;
+			ang = (float) dx / (float) w * g_6628fc;
+			f14 = (float) dy / (float) ht * g_6628fc;
 			h = g_1041d0c;
 		}
 	}

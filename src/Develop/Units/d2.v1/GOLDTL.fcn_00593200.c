@@ -3,7 +3,7 @@
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-extern int g_6a9b9c;
+extern int g_6a9b9c; extern int g_9baadc; extern unsigned char g_9baa96;
 extern int g_772514;
 extern char* g_1015ea0;
 
@@ -21,19 +21,19 @@ void __cdecl fcn_00593200(void)
 	unsigned char c;
 	int slot;
 	int row;
-	int x;
+	int x; int i;
 
 	d2_SetForm(g_6a9b9c, 2);
 	io_AppendText((int) 0x6811b0);
-	if (*(int*) 0x9baadc == 0x3f) {
-		strcpy(s1, (char*) 0x9baa76);
-		strcpy(s2, (char*) 0x9baa76);
+	if (g_9baadc == 0x3f) {
+		i = 0; do { c = ((unsigned char*) 0x9baa76)[i]; s1[i++] = c; } while (c);
+		i = 0; do { c = ((unsigned char*) 0x9baa76)[i]; s2[i++] = c; } while (c);
 	} else {
-		strcpy(s1, (char*) 0x9baa76);
-		strcpy(s2, (char*) 0x9baa76);
+		i = 0; do { c = ((unsigned char*) 0x9baa76)[i]; s1[i++] = c; } while (c);
+		i = 0; do { c = ((unsigned char*) 0x9baa76)[i]; s2[i++] = c; } while (c);
 	}
 	strupr(s1);
-	c = *(unsigned char*) 0x9baa96;
+	c = g_9baa96;
 	sprintf(s3, (char*) 0x6a2e38, s1);
 	slot = fcn_00465950(s3);
 	if (slot == -1) {

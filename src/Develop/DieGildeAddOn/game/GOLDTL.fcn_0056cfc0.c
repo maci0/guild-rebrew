@@ -1,3 +1,4 @@
+#include "client_types.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_6b7fb8;
 extern int g_6b8010;
@@ -135,14 +136,14 @@ void __cdecl fcn_0056cfc0(char *a0)
 					*(int *)(a0 + 0x84) = fcn_004c5620(-1, (char *)a0);
 					return;
 				}
-				*(int *)(a0 + 0x52) = g_7f4c00;
-				*(int *)(a0 + 0x56) = g_7f4c04;
-				*(int *)(a0 + 0x5a) = g_7f4c08;
-				*(unsigned short *)(a0 + 0x5e) = g_7f4c0c;
-				*(int *)(a0 + 0x60) = g_7f4c00;
-				*(int *)(a0 + 0x64) = g_7f4c04;
-				*(int *)(a0 + 0x68) = g_7f4c08;
-				*(unsigned short *)(a0 + 0x6c) = g_7f4c0c;
+				*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+
+
+
+				*(pos14_7f4c00*) (a0 + 0x60) = *(pos14_7f4c00*) &g_7f4c00;
+
+
+
 				fcn_00500bb0(a0 + 0x52, 0, 4, 0);
 				fcn_004432d0(v10, 1);
 			} else {
@@ -152,10 +153,10 @@ void __cdecl fcn_0056cfc0(char *a0)
 			*(int *)(a0 + 0x70) = *(int *)(a0 + 0x70) + 1;
 		}
 		if (e == 0) {
-			*(int *)(a0 + 0x52) = g_7f4c00;
-			*(int *)(a0 + 0x56) = g_7f4c04;
-			*(int *)(a0 + 0x5a) = g_7f4c08;
-			*(unsigned short *)(a0 + 0x5e) = g_7f4c0c;
+			*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+
+
+
 		}
 		if ((*(unsigned char *)(a0 + 0x78) & 2) &&
 		    *(unsigned char *)(a0 + 0xb4) == 1) {
@@ -219,14 +220,14 @@ void __cdecl fcn_0056cfc0(char *a0)
 						*(int *)(a0 + 0xfc) = g_6b7fb8;
 					}
 				}
-				*(int *)(a0 + 0x52) = g_7f4c00;
-				*(int *)(a0 + 0x56) = g_7f4c04;
-				*(int *)(a0 + 0x5a) = g_7f4c08;
-				*(unsigned short *)(a0 + 0x5e) = g_7f4c0c;
-				*(int *)(a0 + 0x60) = g_7f4c00;
-				*(int *)(a0 + 0x64) = g_7f4c04;
-				*(int *)(a0 + 0x68) = g_7f4c08;
-				*(unsigned short *)(a0 + 0x6c) = g_7f4c0c;
+				*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+
+
+
+				*(pos14_7f4c00*) (a0 + 0x60) = *(pos14_7f4c00*) &g_7f4c00;
+
+
+
 				fcn_00500bb0(a0 + 0x52, 0, 4, 0);
 				if (*(unsigned char *)(a0 + 0xb4) < 3)
 					*(int *)(a0 + 0x70) = 0;

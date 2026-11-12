@@ -16,7 +16,7 @@ int __cdecl fcn_00500cb0(void*, void*);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 
 extern pos14_7f4c00 g_7f4c00;
-
+extern float g_6628a0;
 /* ADDRESS: GOLDTL 0x0054b450 */
 void __cdecl fcn_0054b450(char* a0)
 {
@@ -68,11 +68,7 @@ void __cdecl fcn_0054b450(char* a0)
 				             *(unsigned short*) v3);
 				fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
 				fcn_004c54c0(*(int*) (v3 + 2), *(int*) (v5 + 2), -0x14, 1);
-				fcn_00545780(a);
-				fcn_00546190(a);
-				return;
-			}
-			if (*(int*) 0x100f1dc == 1) {
+			} else if (*(int*) 0x100f1dc == 1) {
 				io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) v5,
 				             *(unsigned short*) v3);
 				fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
@@ -86,7 +82,7 @@ void __cdecl fcn_0054b450(char* a0)
 		return;
 	case 2:
 		dist = fcn_00507e70((char*) v4, (char*) v3, 4);
-		if (0x6628a0f <= (float) (gm_RandomFloat01() + dist)) {
+		if (g_6628a0 <= gm_RandomFloat01() + dist) {
 			io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) v5, *(unsigned short*) v3);
 			v4 = (unsigned short*) *(int*) (v4 + 2);
 			fcn_00545d40((int) v4, (int) v4, buf, 0, 0x5fa, 0);

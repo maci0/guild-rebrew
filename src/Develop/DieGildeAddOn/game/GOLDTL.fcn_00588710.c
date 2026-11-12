@@ -14,6 +14,8 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int a3, int a4)
 	float f;
 	float vec[4];
 	float pos[4];
+	float target[4];
+	float factor;
 	int i;
 
 	if (a3 == *(int*) (a1 + 0xa0) || a3 > *(int*) (a1 + 0xdc)) {
@@ -31,15 +33,19 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int a3, int a4)
 			vec[2] = *(float*) (a1 + 0x2c);
 			vec[1] = 0.0f;
 			fcn_004518a0(vec);
-			f *= *(float*) 0x665f40;
-			vec[0] = *(float*) a1 - vec[0] * f;
-			vec[1] = *(float*) (a1 + 4) - f * vec[1];
-			vec[2] = *(float*) (a1 + 8) - f * vec[2];
+			factor = *(float*) 0x665f40 * f;
+			vec[0] *= factor; vec[1] *= factor; vec[2] *= factor;
+			vec[0] = *(float*) a1 - vec[0];
+			vec[1] = *(float*) (a1 + 4) - vec[1];
+			vec[2] = *(float*) (a1 + 8) - vec[2];
 			fcn_00438b40((char*) *(int*) (a1 + 0x98), (int*) vec);
-			vec[0] = *(float*) 0x665f28 + f * *(float*) 0x662d40;
-			vec[1] = *(float*) 0x665f2c + f * *(float*) 0x662d44;
-			vec[2] = *(float*) 0x665f30 + f * *(float*) 0x662d48;
-			fcn_00438b40((char*) *(int*) (a1 + 0x9c), (int*) vec);
+			target[0] = *(float*) 0x662d40; target[1] = *(float*) 0x662d44; target[2] = *(float*) 0x662d48;
+			factor = *(float*) 0x665f40 * f;
+			target[0] *= factor; target[1] *= factor; target[2] *= factor;
+			pos[0] = *(float*) 0x665f28 + target[0];
+			pos[1] = *(float*) 0x665f2c + target[1];
+			pos[2] = *(float*) 0x665f30 + target[2];
+			fcn_00438b40((char*) *(int*) (a1 + 0x9c), (int*) pos);
 		}
 	}
 	for (i = 0; i != 3; i++) {
@@ -61,14 +67,18 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int a3, int a4)
 			    (float) (*(unsigned int*) 0x6b7fac - start) /
 			        *(float*) 0x665f3c;
 			fcn_004518a0(vec);
-			f *= *(float*) 0x665f40;
-			pos[0] = *(float*) a1 - vec[0] * f;
-			pos[1] = *(float*) (a1 + 4) - f * vec[1];
-			pos[2] = *(float*) (a1 + 8) - f * vec[2];
-			fcn_00438b40((char*) *(int*) (a1 + 0x98), (int*) pos);
-			pos[0] = *(float*) 0x665f28 + f * *(float*) 0x662d40;
-			pos[1] = *(float*) 0x665f2c + f * *(float*) 0x662d44;
-			pos[2] = *(float*) 0x665f30 + f * *(float*) 0x662d48;
+			factor = *(float*) 0x665f40 * f;
+			vec[0] *= factor; vec[1] *= factor; vec[2] *= factor;
+			vec[0] = *(float*) a1 - vec[0];
+			vec[1] = *(float*) (a1 + 4) - vec[1];
+			vec[2] = *(float*) (a1 + 8) - vec[2];
+			fcn_00438b40((char*) *(int*) (a1 + 0x98), (int*) vec);
+			target[0] = *(float*) 0x662d40; target[1] = *(float*) 0x662d44; target[2] = *(float*) 0x662d48;
+			factor = *(float*) 0x665f40 * f;
+			target[0] *= factor; target[1] *= factor; target[2] *= factor;
+			pos[0] = *(float*) 0x665f28 + target[0];
+			pos[1] = *(float*) 0x665f2c + target[1];
+			pos[2] = *(float*) 0x665f30 + target[2];
 			fcn_00438b40((char*) *(int*) (a1 + 0x9c), (int*) pos);
 		}
 	}

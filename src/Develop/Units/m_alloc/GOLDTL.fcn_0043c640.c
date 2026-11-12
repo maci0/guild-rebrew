@@ -179,14 +179,14 @@ void __cdecl fcn_0043c640(Tile* t)
 					for (col = t->H * x; col < limitX; col++) {
 						m = count;
 						for (bit = 0; bit < 8; bit++) {
-							if (t->mat[row * t->W + col] == 0 ||
-							    t->mat[row * t->W + col + 1] == 0 ||
-							    t->mat[(row + 1) * t->W + col] == 0 ||
-							    t->mat[(row + 1) * t->W + col + 1] == 0) {
-								if (t->mat[row * t->W + col] != 0 ||
-								    t->mat[row * t->W + col + 1] != 0 ||
-								    t->mat[(row + 1) * t->W + col] != 0 ||
-								    t->mat[(row + 1) * t->W + col + 1] != 0) {
+							if (t->mat[row * t->W + col] == bit ||
+							    t->mat[row * t->W + col + 1] == bit ||
+							    t->mat[(row + 1) * t->W + col] == bit ||
+							    t->mat[(row + 1) * t->W + col + 1] == bit) {
+								if (t->mat[row * t->W + col] != bit ||
+								    t->mat[row * t->W + col + 1] != bit ||
+								    t->mat[(row + 1) * t->W + col] != bit ||
+								    t->mat[(row + 1) * t->W + col + 1] != bit) {
 									n = (row - t->H * y) * t->H + (col - t->H * x);
 									cand[n] |= 0x10;
 									if ((m & 1) == 1) {
@@ -247,7 +247,7 @@ void __cdecl fcn_0043c640(Tile* t)
 				mat = (int*) ((char*) mat + 0x34);
 			}
 			if (count2 < SCORE_LIMIT) {
-				m = v0;
+				m = v0; mat = (int*) ((char*) t + off + 0xbc);
 				for (; m > 0; m >>= 1) {
 					*mat = (m & 1) == 1 ? 1 : 2;
 					mat = (int*) ((char*) mat + 0x34);

@@ -1,5 +1,5 @@
-extern float g_664188;
-extern float g_662948;
+
+
 extern double g_6640f8;
 
 char* __cdecl fcn_00493f50(int);
@@ -14,14 +14,14 @@ int __cdecl fcn_00493920(char* e)
 	float sum;
 	float lim;
 	float weight;
-	volatile float limit;
+	float limit;
 	int i;
 	char* rec;
 
 	*(int*) (e + 0x48) = 0;
 	rec = (char*) fcn_00493f50(*(int*) (e + 0x38));
-	t = *(float*) (e + 0xc);
-	lim = t * g_664188;
+	limit = *(float*) (e + 0xc);
+	lim = limit * 0.33f;
 	i = 0;
 	sum = 0.0f;
 	if (*(int*) (e + 0x3c) <= 0) {
@@ -35,7 +35,7 @@ int __cdecl fcn_00493920(char* e)
 		delta = cut_RandFloat() * *(float*) (rec + 0xc) * weight + *(float*) (rec + 8);
 		t = sum + delta;
 		if (t >= limit) {
-			sum = t;
+			sum = sum + delta;
 			if (cut_RandMod(4) != 0) {
 				sum = sum * g_6640f8;
 			}
@@ -47,7 +47,7 @@ int __cdecl fcn_00493920(char* e)
 			*(int*) (e + 0x48) = 1;
 			goto done;
 		}
-		lim = lim * g_662948;
+		lim = lim * 0.8f;
 		i++;
 		sum = t;
 		if (i >= *(int*) (e + 0x3c)) {

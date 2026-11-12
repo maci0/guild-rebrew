@@ -32,19 +32,19 @@ void __cdecl fcn_00411fe0(void)
 		*(int*) 0x14ce950 = 0;
 		*(int*) 0x14ce960 = 0;
 		*(int*) 0x14ce964 = 0;
-		v = ((int (__stdcall*) (int, int, void*, int*, int)) *(void**) (*(int*) 0x14ce8a0 + 0x28))(*(int*) 0x14ce8a0, 0x14, ev, &flag, 0);
+		v = ((int (__stdcall*) (int, int, void*, int*, int)) *(void**) (**(int**) 0x14ce8a0 + 0x28))(*(int*) 0x14ce8a0, 0x14, ev, &flag, 0);
 		if (v < 0 || flag == 0) {
 			break;
 		}
 		switch (*(int*) ev) {
 		case 0:
-			v = (int) ((float) *(int*) 0x6772b8 * *(float*) 0x662a30 * (float) *(int*) (ev + 4));
-			*(short*) 0x14ce920 = (short) (*(short*) 0x14ce920 + v);
+			v = (int) (*(int*) 0x6772b8 * *(float*) 0x662a30 * *(int*) (ev + 4));
+			*(short*) 0x14ce920 += (short) v;
 			*(short*) 0x14ce926 = (short) v;
 			break;
 		case 4:
-			v = (int) ((float) *(int*) 0x6772b8 * *(float*) 0x662a30 * (float) *(int*) (ev + 4));
-			*(short*) 0x14ce922 = (short) (*(short*) 0x14ce922 + v);
+			v = (int) (*(int*) 0x6772b8 * *(float*) 0x662a30 * *(int*) (ev + 4));
+			*(short*) 0x14ce922 += (short) v;
 			*(short*) 0x14ce928 = (short) v;
 			break;
 		case 8:
@@ -55,12 +55,13 @@ void __cdecl fcn_00411fe0(void)
 			} else if (v < 0) {
 				*(int*) 0x14ce960 = 1;
 			}
-			*(short*) 0x14ce924 = (short) (*(short*) 0x14ce924 + v);
+			*(short*) 0x14ce924 += (short) v;
 			*(short*) 0x14ce92a = (short) v;
 			fcn_00411b80();
 			break;
 		case 12:
-			if (*(int*) (ev + 4) & 0x80) {
+			v = *(int*) (ev + 4) & 0x80;
+			if (v) {
 				*(int*) 0x14ce930 = 1;
 				*(int*) 0x14ce92c = 0;
 				if (*(int*) 0x14ce8e8 == 0) {
@@ -68,7 +69,8 @@ void __cdecl fcn_00411fe0(void)
 				}
 				fcn_00411f90();
 				fcn_00411b80();
-			} else {
+			}
+			if (!v) {
 				*(int*) 0x14ce92c = 1;
 				*(int*) 0x14ce930 = 0;
 				fcn_00411f90();
@@ -76,13 +78,15 @@ void __cdecl fcn_00411fe0(void)
 			}
 			break;
 		case 13:
-			if (*(int*) (ev + 4) & 0x80) {
+			v = *(int*) (ev + 4) & 0x80;
+			if (v) {
 				*(int*) 0x14ce944 = 1;
 				*(int*) 0x14ce940 = 0;
 				*(int*) 0x14ce94c = 1;
 				fcn_00411f90();
 				fcn_00411b80();
-			} else {
+			}
+			if (!v) {
 				*(int*) 0x14ce940 = 1;
 				*(int*) 0x14ce944 = 0;
 				fcn_00411f90();
@@ -90,13 +94,15 @@ void __cdecl fcn_00411fe0(void)
 			}
 			break;
 		case 14:
-			if (*(int*) (ev + 4) & 0x80) {
+			v = *(int*) (ev + 4) & 0x80;
+			if (v) {
 				*(int*) 0x14ce954 = 1;
 				*(int*) 0x14ce950 = 0;
 				*(int*) 0x14ce95c = 1;
 				fcn_00411f90();
 				fcn_00411b80();
-			} else {
+			}
+			if (!v) {
 				*(int*) 0x14ce950 = 1;
 				*(int*) 0x14ce954 = 0;
 				fcn_00411f90();

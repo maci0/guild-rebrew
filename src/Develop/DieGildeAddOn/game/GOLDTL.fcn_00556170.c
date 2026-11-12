@@ -23,12 +23,14 @@ void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004fac80(int, int*);
 float __cdecl fcn_004ff210(unsigned short, int);
 
+#pragma pack(push, 1)
 typedef struct {
 	int a;
 	int b;
 	int c;
 	short d;
 } UIPos;
+#pragma pack(pop)
 
 #define COPY_UI(q) \
 	*(UIPos*) ((q) + 0x52) = *(UIPos*) ((char*) g_7f4c00)
@@ -40,6 +42,7 @@ void __cdecl fcn_00556170(char* p)
 	char* ent;
 	char* obj;
 	int found;
+	int limits[2];
 	int n;
 	int i;
 	int key;
@@ -135,14 +138,15 @@ void __cdecl fcn_00556170(char* p)
 			ent = (char*) (lpGebaeudeINST + v * 0xa9);
 			type = *(unsigned char*) ent;
 			if (*(char*) (lpGebaeudePROT + type * 0x24d) == 1 &&
-			    fcn_004fac80(type, &i) != 0 &&
-			    *(unsigned char*) (ent + 0x65) < (unsigned short) i) {
+			    fcn_004fac80(type, limits) != 0 &&
+			    *(unsigned char*) (ent + 0x65) < (unsigned short) limits[0]) {
 				found = 1;
 			}
 			n--;
 			v = (unsigned short) ((v + 1) & 0xff);
 		} while (found == 0 && n != 0);
-		fcn_004c6000(*(int*) (obj + 4), *(int*) (ent + 1));
+		if (found)
+			fcn_004c6000(*(int*) (obj + 4), *(int*) (ent + 1));
 		i = fcn_0042e410(0x32);
 		key = *(int*) (obj + 4);
 		fcn_004c51a0(key, -1, g_773d75, ((i & 0xffff) + 0x33) * 0x20);
@@ -206,8 +210,8 @@ void __cdecl fcn_00556170(char* p)
 					ent = (char*) (lpGebaeudeINST + v34 * 0xa9);
 					type = *(unsigned char*) ent;
 					if (*(char*) (lpGebaeudePROT + type * 0x24d) == 1 &&
-					    fcn_004fac80(type, &v38) != 0 &&
-					    *(unsigned char*) (ent + 0x65) < (unsigned short) v38) {
+					    fcn_004fac80(type, limits) != 0 &&
+					    *(unsigned char*) (ent + 0x65) < (unsigned short) limits[0]) {
 						found = 1;
 					}
 					i--;

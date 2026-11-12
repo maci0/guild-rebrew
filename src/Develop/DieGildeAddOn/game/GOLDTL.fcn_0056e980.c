@@ -2,15 +2,8 @@
 extern int __cdecl fcn_00500e20(char*); extern void __cdecl fcn_004c30a0(int, int, char*, int, int);
 extern void __cdecl fcn_00546190(char*);
 extern void __cdecl fcn_00500bb0(char*, int, int, int);
-extern int __cdecl gm_RandomMod(int);
+extern int __cdecl gm_RandomMod(unsigned short);
 #include "Develop/DieGildeAddOn/game/game_data.h"
-static void copy_clock(char* a0)
-{
-	*(int*) (a0 + 0x52) = *(int*) &g_7f4c00;
-	*(int*) (a0 + 0x56) = *(int*) &g_7f4c04;
-	*(int*) (a0 + 0x5a) = *(int*) 0x7f4c08;
-	*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) 0x7f4c0c;
-}
 
 /* Night-watchman clock action: starts the evening/morning announce sequence
  * when the game time enters the action's window. */
@@ -30,8 +23,8 @@ void __cdecl fcn_0056e980(char* a0)
 	case 0:
 		w = *(int*) &g_7f4c04 & 0xffff;
 		tab = *(float*) (idx * 4 + 0x696540);
-		if ((float) w < tab || tab + *(float*) &g_6628a0 <= (float) w) {
-			copy_clock(a0);
+		if (!((float) w >= tab) || !((float) w < tab + *(float*) &g_6628a0)) {
+			*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 			fcn_00500bb0((char*) &g_7f4c00, 0, 0, 1);
 			return;
 		}
@@ -57,7 +50,7 @@ void __cdecl fcn_0056e980(char* a0)
 			if ((gm_RandomMod(10) & 0xffff) > 7)
 				fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6c8c, -1, 0x3e8);
 		}
-		copy_clock(a0);
+		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 		*(unsigned short*) (a0 + 0x56) = (unsigned short) (int) *(float*) (idx * 4 + 0x696550);
 		*(int*) (a0 + 0x58) = 0;
 		*(int*) (a0 + 0x70) += 1;
@@ -65,8 +58,8 @@ void __cdecl fcn_0056e980(char* a0)
 	case 1:
 		w = *(int*) &g_7f4c04 & 0xffff;
 		tab = *(float*) (idx * 4 + 0x696550);
-		if ((float) w < tab || tab + *(float*) &g_6628a0 <= (float) w) {
-			copy_clock(a0);
+		if (!((float) w >= tab) || !((float) w < tab + *(float*) &g_6628a0)) {
+			*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 			fcn_00500bb0((char*) &g_7f4c00, 0, 0, 1);
 			return;
 		}
@@ -92,7 +85,7 @@ void __cdecl fcn_0056e980(char* a0)
 			if ((gm_RandomMod(10) & 0xffff) > 7)
 				fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6be8, -1, 0x3e8);
 		}
-		copy_clock(a0);
+		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 		*(unsigned short*) (a0 + 0x56) = 0x16;
 		*(int*) (a0 + 0x58) = 0x1e;
 		*(int*) (a0 + 0x70) += 1;
@@ -100,7 +93,7 @@ void __cdecl fcn_0056e980(char* a0)
 	case 2:
 		if (*(unsigned short*) &g_7f4c04 < 0x16 || *(int*) 0x7f4c06 < 0x1e ||
 		    *(int*) 0x7f4c06 >= 0x32) {
-			copy_clock(a0);
+			*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 			fcn_00500bb0((char*) &g_7f4c00, 0, 0, 1);
 			return;
 		}

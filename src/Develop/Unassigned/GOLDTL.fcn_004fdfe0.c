@@ -21,6 +21,9 @@ typedef struct HeadSet {
 extern char g_10432c0;
 extern int g_773d40;
 extern char* g_773d44;
+extern char g_69649c[];
+extern char g_6964b4[];
+extern char g_696488[];
 
 char* __cdecl fcn_0064d1a0(char* s, int c);
 int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...);
@@ -92,11 +95,11 @@ void __cdecl fcn_004fdfe0(Figure* f)
 				*p = 0;
 			}
 			slot = hs->head;
+			*slot = 0;
 			for (i = 0; i < 4; i++, slot++) {
-				*slot = 0;
-				fcn_0064d41a(icon, "%s_HEAD%i_%s_ICON.bmp", base, i, kind);
-				if (strstr(base, "zigeunermeister") != 0) {
-					fcn_0064d41a(icon, "%s_HEAD%i_ICON.bmp", base, i);
+				fcn_0064d41a(icon, g_69649c, base, i, kind);
+				if (strstr(base, g_6964b4) != 0) {
+					fcn_0064d41a(icon, g_696488, base, i);
 				}
 				*slot = 0xff;
 				for (j = 0; j < g_773d40; j++) {

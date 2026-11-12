@@ -1,11 +1,25 @@
-typedef int (__cdecl *pfn_v)(void);
-typedef int (__cdecl *pfn_1)(int);
-typedef int (__cdecl *pfn_2)(int, int);
-typedef int (__cdecl *pfn_3)(int, int, int);
-typedef int (__cdecl *pfn_c3)(int, int, int);
-typedef int (__cdecl *pfn_6)(int, int, int, int, int, int);
-typedef int (__cdecl *pfn_5)(int, int, int, int, int);
-typedef int (__cdecl *pfn_4)(int, int, int, int);
+extern int g_772514;
+extern int g_100f1dc;
+extern int g_67d370;
+extern int g_14ce8e0;
+extern int g_774654;
+int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_AccumulateTyped2(int);
+int __cdecl fcn_00470820(int, int, int);
+void __cdecl d2_SetForm(int, int);
+int __cdecl io_AppendText(int, ...);
+int __cdecl fcn_00472250(int, int, int);
+int __cdecl fcn_00472830(int, int, ...);
+int __cdecl fcn_00533f40(int, int, int, int);
+int __cdecl fcn_00471b60(int);
+int __cdecl fcn_0046f280(int);
+int __cdecl fcn_0046b2b0(int);
+void __cdecl fcn_00472e50(void);
+int __cdecl fcn_0046f2c0(int, int);
+int __cdecl fcn_005c9450(int, int, int);
+int __cdecl fcn_005c9310(int, int, int, int, int);
+int __cdecl fcn_005373e0(int, int);
+int __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005a6e90 */
 int __cdecl fcn_005a6e90(unsigned short *a1)
@@ -32,40 +46,41 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
         arr[i][2] = 0;
     }
 
-    edi = ((pfn_1)0x50dac0)(*a1);
-    r = ((pfn_1)0x50d2a0)((int)a1);
-    esi = ((pfn_c3)0x470820)(0x6aad0c, 0, 0);
-    ((pfn_2)0x4727a0)(0, esi);
+    edi = gm_WalkEntityChain(*a1);
+    r = gm_AccumulateTyped2((int)a1);
+    esi = fcn_00470820(0, 0, 0x6aad0c);
+    d2_SetForm(esi, 0);
 
-    g = *(int *)0x772514;
+    g = g_772514;
     p = (int *)0x10162e8 + g * 243;
     p[0] = 0xc;
     p[1] = 0x14;
     p[2] = 0xc;
     p[3] = 0xc;
 
-    ((pfn_2)0x4727a0)(1, esi);
-    ((pfn_1)0x519190)(0x18ed);
-    ((pfn_2)0x4727a0)(4, esi);
-    ((pfn_2)0x519190)(0x18ee, *a1);
-    ((pfn_3)0x519190)(0x18ef, edi, r);
+    d2_SetForm(esi, 1);
+    io_AppendText(0x18ed);
+    d2_SetForm(esi, 4);
+    io_AppendText(0x18ee, *a1);
+    io_AppendText(0x18ef, edi, r);
 
-    ((pfn_2)0x4727a0)(3, esi);
-    q1 = ((pfn_3)0x472250)(esi, 3, ((pfn_v)0x519190)());
-    ((pfn_2)0x4727a0)(5, esi);
-    q2 = ((pfn_3)0x472250)(esi, 5, ((pfn_v)0x519190)());
-    ((pfn_2)0x4727a0)(0, esi);
+    d2_SetForm(esi, 3);
+    q1 = fcn_00472250(esi, 3, io_AppendText(0x18f0));
+    d2_SetForm(esi, 5);
+    q2 = fcn_00472250(esi, 5, io_AppendText(0x18f1));
+    d2_SetForm(esi, 0);
 
-    r = ((pfn_6)0x472830)(esi, 2, 0x100, (int)&s20, (int)&s24, (int)&s1c);
-    ((pfn_4)0x533f40)(0x206, 0x167, g, r);
-    ((pfn_1)0x471b60)(esi);
+    r = fcn_00472830(esi, 2, 0x100, (int)&s20, (int)&s24, (int)&s1c);
+    fcn_00533f40(0x206, 0x167, g_772514, r);
+    fcn_00471b60(esi);
 
-    *(int *)0x100f1dc = -1;
-    *(int *)0x67d370 = -1;
+    g_100f1dc = -1;
+    g_67d370 = -1;
 
-    while (s14 != 0)
+    while (1)
     {
         int k;
+        if (s14 != 0) {
         s14 = 0;
 
         for (k = 0; k < 9; k++)
@@ -75,8 +90,8 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
                 p = &arr[k][0];
                 if (*p != -1)
                 {
-                    ((pfn_1)0x46f280)(*p);
-                    ((pfn_1)0x46b2b0)(p[1]);
+                    fcn_0046f280(*p);
+                    fcn_0046b2b0(p[1]);
                     p[0] = -1;
                     p[1] = -1;
                     p[2] = 0;
@@ -84,27 +99,29 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
             }
         }
 
-        ((pfn_2)0x4727a0)(2, esi);
-        ((pfn_v)0x472e50)();
-        ((pfn_2)0x46f2c0)(*(int *)0x772514, 1);
+        d2_SetForm(esi, 2);
+        fcn_00472e50();
+        fcn_0046f2c0(g_772514, 1);
 
-        edi = s20;
+        edi = s10;
         if (edi == 1)
         {
-            if (((pfn_3)0x5c9450)(0, 0, (int)a1) <= 0)
-                ((pfn_2)0x519190)(0x18f2, *a1);
+            if (fcn_005c9450((int)a1, 0, 0) <= 0)
+                io_AppendText(0x18f2, *a1);
         }
         else if (edi == 2)
         {
-            r = ((pfn_5)0x5c9310)((int)a1, 9, (int)&s20, esi, edi);
+            r = fcn_005c9310((int)a1, 9, (int)arr, esi, edi);
             if (r == 0)
-                ((pfn_2)0x519190)(0x18f3, *a1);
+                io_AppendText(0x18f3, *a1);
         }
 
-        if (*(int *)0x100f1dc != -1)
+        }
+        edi = s10;
+        if (g_100f1dc != -1)
         {
-            int eax = *(int *)0x67d370;
-            if (eax == s1c)
+            int eax = g_67d370;
+            if (eax == q1)
             {
                 if (edi != 1)
                 {
@@ -112,7 +129,7 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
                     s14 = 1;
                 }
             }
-            else if (eax == s18)
+            else if (eax == q2)
             {
                 if (edi != 2)
                 {
@@ -122,10 +139,10 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
             }
         }
 
-        if (*(int *)0x14ce8e0 != 0)
-            *(int *)0x774654 = 1;
+        if (g_14ce8e0 != 0)
+            g_774654 = 1;
 
-        if (((pfn_2)0x5373e0)(0x5a6e90, 0x677c7) != 0)
+        if (fcn_005373e0(0x5a6e90, 0x677c7) != 0)
             continue;
 
         for (i = 0; i < 9; i++)
@@ -133,15 +150,15 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
             p = &arr[i][0];
             if (*p != -1)
             {
-                ((pfn_1)0x46f280)(*p);
-                ((pfn_1)0x46b2b0)(p[1]);
+                fcn_0046f280(*p);
+                fcn_0046b2b0(p[1]);
                 p[0] = -1;
                 p[1] = -1;
                 p[2] = 0;
             }
         }
 
-        return ((pfn_1)0x471e30)(esi);
+        return fcn_00471e30(esi);
     }
 
 done:

@@ -2,6 +2,9 @@
 
 #include "client_types.h"
 
+typedef struct { unsigned char kind; unsigned char rest[0x24c]; } BuildingProto572ff0;
+extern char g_7f4ca0[];
+
 extern pos14_7f4c00 g_7f4c00;
 extern unsigned char g_773d75;
 extern char* g_773da8;
@@ -52,7 +55,7 @@ void __cdecl fcn_00572ff0(char* a)
 	int found;
 	int cnt;
 	int t;
-	int m;
+	int m = 0;
 	int d;
 	int left = 0;
 	int amt = 0;
@@ -169,7 +172,7 @@ void __cdecl fcn_00572ff0(char* a)
 			if (r2 == 0) {
 				goto i1next;
 			}
-			if (lpGebaeudePROT[*(unsigned char*) pktB * 0x24d] == '\n') {
+			if (((BuildingProto572ff0*) lpGebaeudePROT)[*(unsigned char*) pktB].kind == '\n') {
 				e2 = fcn_00503d10(ps[0]);
 			} else {
 				e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
@@ -188,7 +191,7 @@ void __cdecl fcn_00572ff0(char* a)
 			if (t < m) {
 				m = t;
 			}
-			*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (e2 + 2),
+			fcn_004c51f0(*(int*) (e2 + 2),
 			    *(int*) (q + 2), *(unsigned short*) r2, m, g_773d75, d);
 			if (itm != 0) {
 				*(int*) (itm + 0x1b8) = *(int*) (itm + 0x1b8) + d * m;
@@ -209,7 +212,7 @@ i1next:
 		goto done;
 	}
 	if (itm != 0 && *(int*) (itm + 0x16c) != 0) {
-		left = fcn_0050d320((char*) 0x7f4ca0
+		left = fcn_0050d320(g_7f4ca0
 		    + *(unsigned short*) (*(int*) (itm + 0x16c) + 0x27) * 0x21c,
 		    g_773d75);
 		if (left >= *(int*) (itm + 0x1b8)) {
@@ -224,9 +227,9 @@ i1next:
 	cnt = n;
 	do {
 		if (ps[0] == 0 || pi[0] != *(int*) (pktB + 1)) {
-			goto i2next;
+			goto i2advance;
 		}
-		if (lpGebaeudePROT[*(unsigned char*) pktB * 0x24d] == '\n') {
+		if (((BuildingProto572ff0*) lpGebaeudePROT)[*(unsigned char*) pktB].kind == '\n') {
 			e2 = fcn_00503d10(ps[0]);
 		} else {
 			e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
@@ -240,9 +243,9 @@ i1next:
 		}
 		r2 = fcn_00502cd0(*(int*) (e2 + 0x14), 1, 0, ps[0]);
 		if (r2 == 0) {
-			goto i2next;
+			goto i2advance;
 		}
-		if (lpGebaeudePROT[*(unsigned char*) pktB * 0x24d] != '\n') {
+		if (((BuildingProto572ff0*) lpGebaeudePROT)[*(unsigned char*) pktB].kind != '\n') {
 			amt = (int) (fcn_0050bb50(*(unsigned short*) r2, g_773d75)
 			    * *(float*) (pktB + 0x49));
 		} else {
@@ -250,11 +253,13 @@ i1next:
 			    * g_664ef8);
 		}
 		lim = pi[6];
-		cand = gm_GetMsgField(e2, r2)
-		    - ((fcn_0050dfd0(e2, *(unsigned short*) r2)
-		    * *(int*) (r2 + 0x1c)) >> 2);
+		t = fcn_0050dfd0(e2, *(unsigned short*) r2);
+		cand = (unsigned int) (t * *(int*) (r2 + 0x1c)) >> 2;
+		cand = gm_GetMsgField(e2, r2) - cand;
 		if ((unsigned int) lim >= (unsigned int) cand) {
-			lim = cand;
+			t = fcn_0050dfd0(e2, *(unsigned short*) r2);
+			cand = (unsigned int) (t * *(int*) (r2 + 0x1c)) >> 2;
+			lim = gm_GetMsgField(e2, r2) - cand;
 		}
 		m = lim;
 		if (left / amt <= m) {
@@ -264,8 +269,8 @@ i1next:
 			m = 0;
 		}
 		if (m != 0) {
-			*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (e2 + 2),
-			    *(int*) (q + 2), *(unsigned short*) r2, m, g_773d75, amt);
+			*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (q + 2),
+			    *(int*) (e2 + 2), *(unsigned short*) r2, m, g_773d75, amt);
 		}
 		if (itm != 0 && *(int*) (itm + 0x16c) != 0) {
 			sprintf(buf, (char*) 0x6a7d00, itm + 0x30,
@@ -283,12 +288,13 @@ i2next:
 		} else {
 			flag |= 1;
 		}
+i2advance:
 		ps++;
 		pi++;
 	} while (--cnt != 0);
 done:
 	if (*(char*) (a + 0xf0) != 0 && flag != 0) {
-		if (*(unsigned short*) 0x7f4c04 >= 0x14) {
+		if ((unsigned short) g_7f4c00.b >= 0x14) {
 			fcn_00500bb0(a + 0x52, 0, 5, 0);
 			*(char*) (a + 0xf0) = 0;
 			return;
@@ -338,14 +344,11 @@ done:
 		return;
 	}
 	memset(msg, 0, sizeof(msg));
-	*(int*) (msg + 0x28) = *(int*) &g_7f4c00;
-	*(int*) (msg + 0x2c) = *(int*) 0x7f4c04;
-	*(int*) (msg + 0x30) = *(int*) 0x7f4c08;
-	*(short*) (msg + 0x34) = *(short*) 0x7f4c0c;
+	*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
 	msg[4] = 0x0f;
 	*(int*) (msg + 0xc) = -1;
 	msg[0x36] = 2;
-	*(int*) (msg + 8) = *(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (a + 8) * 0x21c);
+	*(int*) (msg + 8) = *(int*) (g_7f4ca0 + 4 + *(unsigned short*) (a + 8) * 0x21c);
 	*(int*) (msg + 0x58) = *(int*) (pktA + 2);
 	*(int*) (msg + 0x5c) = *(int*) (pktB + 1);
 	*(int*) (msg + 0x60) = *(int*) (a + 0xb0);

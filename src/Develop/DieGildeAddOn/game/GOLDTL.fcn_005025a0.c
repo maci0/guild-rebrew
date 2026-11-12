@@ -25,7 +25,7 @@ float __cdecl fcn_005025a0(int season, int slot)
 	float stock;
 	float last;
 	float ratio;
-	float scale;
+	double scale; float price;
 	int off;
 
 	off = season * 0x2a90 + slot * 0x80;
@@ -66,14 +66,14 @@ float __cdecl fcn_005025a0(int season, int slot)
 		scale = 5.0;
 	}
 	stock = scale;
-	if (last <= g_6628a8) {
-		stock = eval_ObjektPreis2Credits(id, 100);
-		if (stock < 512.0f) {
+	price = ((double) eval_ObjektPreis2Credits(id, 100) * scale - (double) last) * 0.4f + *(float*) (g_85ab90 + off + 0x38);
+	if (*(float*) (g_85ab90 + off + 0x38) <= g_6628a8) {
+		if (eval_ObjektPreis2Credits(id, 100) < 512.0f) {
 			return 512.0f;
 		}
-		return stock;
+		return eval_ObjektPreis2Credits(id, 100);
 	}
-	return (float) (((double) eval_ObjektPreis2Credits(id, 100) * (double) stock - (double) last) * 0.4f + (double) last);
+	return price;
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7f4e51[417087];

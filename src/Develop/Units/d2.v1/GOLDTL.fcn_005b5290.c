@@ -18,6 +18,8 @@ typedef struct {
 } Map5b52;
 
 extern int g_6b7fc0;
+extern int g_14ce8e0;
+extern int g_774654;
 extern char g_6abaec[];
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -78,11 +80,11 @@ void __cdecl fcn_005b5290(Map5b52* m, int x0, int y0, int x1, int y1)
 				}
 				d2_Plot(x0, y0, 0xff, 0xff, 0xff);
 				d2_Plot(x1, y1, 0xff, 0xff, 0xff);
+				frame++;
 			}
 		}
-		frame++;
-		if (*(int*) 0x14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 != 0) {
+			g_774654 = 1;
 		}
 	}
 	fcn_00471e30(h);

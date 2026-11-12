@@ -34,12 +34,14 @@ typedef struct {
 	char pad30[0x3cc - 0x30];
 } TextWin46b5f0;
 
+#pragma pack(push, 1)
 typedef struct {
 	char pad0[0x11];
 	unsigned short w;
 	char pad13[2];
 	unsigned short adv;
 } Glyph46b5f0;
+#pragma pack(pop)
 
 extern char* g_772524;
 extern char* g_1015ea0;

@@ -10,7 +10,8 @@ float __cdecl fcn_004f0eb0(int level, int percent, int count)
 {
 	float step;
 	float sum;
-	float k;
+	int k;
+	double percent_term;
 
 	if (level >= 4) {
 		level = 4;
@@ -25,13 +26,14 @@ float __cdecl fcn_004f0eb0(int level, int percent, int count)
 	else if (percent <= 0) {
 		percent = 0;
 	}
+	percent_term = percent * g_6628bc + g_662da8;
 	if (count >= 3) {
 		count = 3;
 	}
 	else if (count <= 1) {
 		count = 1;
 	}
-	step = k * (percent * g_6628bc + g_662da8) * g_662b28 + g_662a3c;
+	step = k * percent_term * g_662b28 + g_662a3c;
 	sum = g_6628a8;
 	while (count-- > 0) {
 		sum += step;

@@ -18,7 +18,7 @@ extern void __stdcall fcn_005eb2e4(float* dst, unsigned int* src, char* a, float
 	float* c, void* ctx);
 
 /* ADDRESS: GOLDTL 0x00444ff0 */
-unsigned int __cdecl fcn_00444ff0(int a0, int* a1)
+unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 {
 	char* holder;
 	char* model;
@@ -26,7 +26,7 @@ unsigned int __cdecl fcn_00444ff0(int a0, int* a1)
 	float* bbox;
 	unsigned int* flags;
 	unsigned int src[3];
-	float one;
+	float view[16];
 	float* f;
 	int count;
 	int total;
@@ -59,7 +59,22 @@ unsigned int __cdecl fcn_00444ff0(int a0, int* a1)
 	}
 	if (index >= count)
 		return 1;
-	one = 1.0f;
+	view[14] = 0.0f;
+	view[13] = 0.0f;
+	view[12] = 0.0f;
+	view[11] = 0.0f;
+	view[9] = 0.0f;
+	view[8] = 0.0f;
+	view[7] = 0.0f;
+	view[6] = 0.0f;
+	view[4] = 0.0f;
+	view[3] = 0.0f;
+	view[2] = 0.0f;
+	view[1] = 0.0f;
+	view[15] = 1.0f;
+	view[10] = 1.0f;
+	view[5] = 1.0f;
+	view[0] = 1.0f;
 	fcn_00438100(a0, g_6b8014, 0);
 	total = *(int*) (model + 0x44);
 	verts = (float*) m_alloc(total * 0x18, "!d3:TransformedPoints");
@@ -90,7 +105,7 @@ unsigned int __cdecl fcn_00444ff0(int a0, int* a1)
 				src[1] = *(unsigned int*) (*(int*) (model + 0x27c) + i * 0xc + 4);
 				src[2] = *(unsigned int*) (*(int*) (model + 0x27c) + i * 0xc + 8);
 				f = verts + i * 6;
-				fcn_005eb2e4(f, src, g_1052be0, g_1052c00, &one,
+				fcn_005eb2e4(f, src, g_1052be0, g_1052c00, view,
 					(void*) (*(int*) (a0 + 0x1ec) + 0x48));
 				fcn_005eb225(f + 3, src,
 					(void*) (*(int*) (a0 + 0x1ec) + 0x48));

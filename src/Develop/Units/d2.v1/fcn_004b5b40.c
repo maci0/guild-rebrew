@@ -73,7 +73,7 @@ void __cdecl fcn_004b5b40(int mode)
 	r1 = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b98));
 	r2 = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b99));
 	r3 = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b9a));
-	flags |= 0x80;
+
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
@@ -108,10 +108,10 @@ void __cdecl fcn_004b5b40(int mode)
 				while (fcn_004c4450(q) == 0) {
 					fcn_00535960();
 				}
-			}
+			} else { continue; }
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_004b5b40, flags) != 0);
+	} while (fcn_005373e0((void*) fcn_004b5b40, flags | 0x80) != 0);
 	fcn_00471e30(dlg);
 	if (changed) {
 		fcn_004b5530(*obj, flags);

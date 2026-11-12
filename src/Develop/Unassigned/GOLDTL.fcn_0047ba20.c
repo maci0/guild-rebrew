@@ -69,7 +69,7 @@ int __cdecl fcn_0047ba20(int x, int y, char* a2, float scale)
 	if (y < g_7725fc) {
 		oy = (float) (g_7725fc - y);
 		y = g_7725fc;
-		h = (int) ((float) h - oy);
+		h = (int) ((float) *(unsigned short*) (a2 + 6) - oy);
 	}
 	if ((float) g_67d964 < (float) w * scale + (float) x)
 		w = g_67d964 - x;
@@ -83,6 +83,8 @@ int __cdecl fcn_0047ba20(int x, int y, char* a2, float scale)
 	q = *(int**) (a2 + 0x28);
 	q = (int*) *q;
 	*(int*) (rec + 0xa8) = q[8];
+	q = *(int**) (a2 + 0x28);
+	q = (int*) *q;
 	val = (float) q[1];
 	inv = 1.0f / val;
 	ox = ox * inv;
@@ -90,33 +92,44 @@ int __cdecl fcn_0047ba20(int x, int y, char* a2, float scale)
 	term = (float) g_772608 * 0.001f;
 	zt = 1.0f - term;
 	rho = term + 0.01f;
-	fw = (float) w / val;
-	fh = (float) h / val;
-	tex = (float*) *(int**) (a2 + 0x30);
 	v = (Vtx47ba20*) rec;
 	v[0].z = zt;
 	v[0].rhw = rho;
+	tex = (float*) *(int**) (a2 + 0x30);
 	v[0].u = ox + tex[0];
+	tex = (float*) *(int**) (a2 + 0x30);
 	v[0].v = oy + tex[1];
 	v[1].z = zt;
 	v[1].rhw = rho;
+	tex = (float*) *(int**) (a2 + 0x30);
+	fw = (float) w / val;
 	v[1].u = fw + tex[0] + ox;
+	tex = (float*) *(int**) (a2 + 0x30);
 	v[1].v = oy + tex[1];
 	v[2].z = zt;
 	v[2].rhw = rho;
+	tex = (float*) *(int**) (a2 + 0x30);
 	v[2].u = ox + tex[0];
+	tex = (float*) *(int**) (a2 + 0x30);
+	fh = (float) h / val;
 	v[2].v = fh + tex[1] + oy;
 	v[3].z = zt;
 	v[3].rhw = rho;
+	tex = (float*) *(int**) (a2 + 0x30);
 	v[3].u = fw + tex[0] + ox;
+	tex = (float*) *(int**) (a2 + 0x30);
 	v[3].v = oy + tex[1];
 	v[4].z = zt;
 	v[4].rhw = rho;
+	tex = (float*) *(int**) (a2 + 0x30);
 	v[4].u = fw + tex[0] + ox;
+	tex = (float*) *(int**) (a2 + 0x30);
 	v[4].v = fh + tex[1] + oy;
 	v[5].z = zt;
 	v[5].rhw = rho;
+	tex = (float*) *(int**) (a2 + 0x30);
 	v[5].u = ox + tex[0];
+	tex = (float*) *(int**) (a2 + 0x30);
 	v[5].v = fh + tex[1] + oy;
 	fcn_0047b9a0(v, 200, 200, 200);
 	g_772604 = g_772604 + 1;

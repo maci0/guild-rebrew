@@ -30,15 +30,15 @@ int __cdecl fcn_00495690(int a0)
 	for (i = 0; i < 0x20; i += 8) {
 		t = (char*) (0x1008570 + (unsigned int) b[0x131] * 0x94 + i);
 		if ((unsigned char) t[0] < 0xe)
-			fcn_004c4820(t[0], *(float*) (t + 4) * *(float*) 0x664158);
+			fcn_004c4820((unsigned char) t[0], *(float*) (t + 4) * *(float*) 0x664158);
 	}
 	for (i = 0; i < 0x20; i += 8) {
 		t = (char*) (0x1008590 + (unsigned int) b[0x132] * 0x94 + i);
-		if ((unsigned char) t[0] < 0xe)
-			fcn_004c4820(t[0], *(float*) (t + 4) * *(float*) 0x664158);
+		if ((unsigned char) t[-0x20] < 0xe)
+			fcn_004c4820((unsigned char) t[0], *(float*) (t + 4) * *(float*) 0x664158);
 	}
 	if (b[0x131] != b[0x132]) {
-		fcn_004c4820(0xd, 1000.0f);
+		fcn_004c4820(0xd, 250.0f);
 		if (g_77261c && *(int*) (g_77261c + 4) == *(int*) (b + 0x210)) {
 			*(unsigned char*) &a0 = 1;
 			fcn_004c4510(b, *(int*) (b + 4));

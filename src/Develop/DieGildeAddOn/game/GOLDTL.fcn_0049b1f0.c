@@ -145,27 +145,36 @@ occupied:
 			}
 		}
 	}
-	if (id == 0x17b || id == 0x17d || id == 0x29a || id == 0x29c ||
-		(id >= 0x22b && id <= 0x22d)) {
-		b.type = 7;
-		b.a = *(int*) (g_7f4ca4 + (ids[0] & 0xffff) * 540);
-		b.b = -1;
-	} else if (id == 0x169 || id == 0x16d) {
+	switch (sv->id) {
+	case 0x169:
+	case 0x16d:
 		b.type = 7;
 		b.a = *(int*) (g_7f4ca4 + (ids[0] & 0xffff) * 540);
 		b.b = *(int*) (g_7f4ca4 + (ids[1] & 0xffff) * 540);
-	} else if (id == 0x177) {
-		char* p;
-
-		p = *(char**) (g_7f4ca4 + (ids[0] & 0xffff) * 540 + 0x16c);
-		b.type = 4;
-		b.a = *(int*) (p + 1);
+		break;
+	case 0x16a:
+	case 0x17b:
+	case 0x17d:
+	case 0x22b:
+	case 0x22c:
+	case 0x22d:
+	case 0x29a:
+	case 0x29c:
+		b.type = 7;
+		b.a = *(int*) (g_7f4ca4 + (ids[0] & 0xffff) * 540);
 		b.b = -1;
-	} else if (id == 0x178) {
+		break;
+	case 0x177:
+		b.type = 4;
+		b.a = *(int*) (*(char**) (g_7f4ca4 + (ids[0] & 0xffff) * 540 + 0x16c) + 1);
+		b.b = -1;
+		break;
+	case 0x178:
 		b.type = 4;
 		b.a = found;
 		b.b = -1;
-	} else {
+		break;
+	default:
 		return 0;
 	}
 	b.d = 0x21;

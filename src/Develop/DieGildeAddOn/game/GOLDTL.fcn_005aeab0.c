@@ -23,7 +23,7 @@ char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl gm_WalkEntityChain(unsigned short);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
@@ -45,7 +45,7 @@ void __cdecl fcn_005aeab0(char* rec)
 	char text[0x400];
 	char line[0x200];
 	char note[0x200];
-	char pkt[0x68];
+	char pkt[0xf8];
 	char* ent;
 	char* act;
 	char* ctx;
@@ -103,7 +103,7 @@ void __cdecl fcn_005aeab0(char* rec)
 	prob = (double) v;
 	if (((double) gm_RandomFloat01() * g_662908 + g_6640f8) * g_665fc0
 	    < prob) {
-		prob = (double) gm_RandomFloat01() * g_662908 + g_6640f8;
+		prob = ((double) gm_RandomFloat01() * g_662908 + g_6640f8) * g_665fc0;
 	}
 	cnt = (int) prob;
 	cnt = (int) ((double) cnt * (double) weight);
@@ -111,18 +111,12 @@ void __cdecl fcn_005aeab0(char* rec)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60((int) ctx);
 	d2_SetForm((int) ctx, 1);
-	*(unsigned char*) (pkt + 4) = 0x3e;
-	*(int*) (pkt + 8) = *(int*) (ent + 4);
-	*(int*) (pkt + 0xc) = *(int*) (rec + 1);
-	*(unsigned char*) (pkt + 0x3a) = 9;
-	*(int*) (pkt + 0x58) = *(int*) (ent + 4);
-	*(int*) (pkt + 0x60) = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
-	*(int*) (pkt + 0x64) = cnt;
-	b1 = io_AppendText(0x19c4, *(unsigned short*) ent, (int) (act + 0xb4),
+
+	v = io_AppendText(0x19c4, *(unsigned short*) ent, (int) (act + 0xb4),
 	    2, cnt, *(unsigned short*) ent, *(unsigned short*) ent);
-	b1 = fcn_00472250((int) ctx, 1, b1);
-	b2 = fcn_00472250((int) ctx, 1, b1 + 1);
-	b3 = fcn_00472250((int) ctx, 1, b1 + 2);
+	b1 = fcn_00472250((int) ctx, 1, v);
+	b2 = fcn_00472250((int) ctx, 1, v + 1);
+	b3 = fcn_00472250((int) ctx, 1, v + 2);
 	g_100f1dc = -1;
 	for (;;) {
 		if (g_14ce8e0 != 0) {
@@ -130,6 +124,13 @@ void __cdecl fcn_005aeab0(char* rec)
 		}
 		if (g_100f1dc != -1) {
 			if (g_67d370 == b1) {
+				*(unsigned char*) (pkt + 4) = 0x3e;
+				*(int*) (pkt + 8) = *(int*) (ent + 4);
+				*(int*) (pkt + 0xc) = *(int*) (rec + 1);
+				*(unsigned char*) (pkt + 0x36) = 9;
+				*(int*) (pkt + 0x58) = *(int*) (ent + 4);
+				*(int*) (pkt + 0x60) = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
+				*(int*) (pkt + 0x64) = cnt;
 				fcn_004c5530(pkt);
 				io_FormatTextBuffer(note, 0x19c5, cnt, *(unsigned short*) ent);
 				fcn_00526120(note, 0);
@@ -151,7 +152,7 @@ void __cdecl fcn_005aeab0(char* rec)
 				g_774654 = 1;
 			}
 		}
-		if (fcn_005373e0((void*) 0x5aeab0, 0x677c7) == 0) {
+		if (fcn_005373e0((void*) fcn_005aeab0, 0x677c7) == 0) {
 			fcn_00532ef0();
 			fcn_00471e30((int) ctx);
 			return;

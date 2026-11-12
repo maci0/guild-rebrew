@@ -25,6 +25,7 @@ void __cdecl fcn_00527540(void)
 {
 	char buf[256];
 	char key[4];
+	char white[3];
 	char* prefix;
 	char* p;
 	char* q;
@@ -34,7 +35,7 @@ void __cdecl fcn_00527540(void)
 	int v3;
 	int v13;
 	int v14;
-	int v18;
+	int j;
 	int v19;
 	int v21;
 	int v22;
@@ -46,10 +47,13 @@ void __cdecl fcn_00527540(void)
 	char c;
 	int i;
 
+	white[0] = (char) 0xff;
+	white[1] = (char) 0xff;
+	white[2] = (char) 0xff;
 	prefix = (char*) 0x1015da0;
 	v3 = 0;
 	c = 0;
-	v18 = 0;
+
 	v22 = 0;
 	v19 = 0;
 	v21 = 0;
@@ -84,22 +88,21 @@ void __cdecl fcn_00527540(void)
 			*(int*) 0x774680 = fcn_00475c10(buf);
 			if (*(int*) 0x774680)
 				goto have_image;
-			p = "%sbmp\\groundplans\\riss_handwerksbetrieb.";
+			p = "%sbmp\\groundplans\\riss_handwerksbetrieb.bmp";
 		}
 		goto format_image;
 	}
-	if (v3 == 2) {
+	if (v3 == 3) {
 		if (*q == 0x0f)
 			p = "%sbmp\\groundplans\\riss_rathaus.bmp";
 		else if (*q == 0x01) {
-			p = "%sbmp\\groundplans\\Riss_Arbeiterunterkunf";
-			sprintf(buf, p, prefix);
+			p = "%sbmp\\groundplans\\Riss_Arbeiterunterkunft.bmp";
+		} else {
+			goto have_image;
 		}
 		goto format_image;
 	}
-	if (v3 == 3)
-		p = "%sbmp\\groundplans\\riss_zunfthaus.bmp";
-	else if (v3 == 5)
+	if (v3 == 5)
 		p = "%sbmp\\groundplans\\riss_zunfthaus.bmp";
 	else {
 		switch (*q) {
@@ -121,7 +124,7 @@ void __cdecl fcn_00527540(void)
 			*(int*) 0x774680 = v3;
 			if (v3)
 				goto have_image;
-			p = "%sbmp\\groundplans\\riss_handwerksbetrieb.";
+			p = "%sbmp\\groundplans\\riss_handwerksbetrieb.bmp";
 			break;
 		}
 	}
@@ -153,19 +156,19 @@ have_image:
 	for (v3 = 0; *(int*) (v12 + 8) > v3; v3++) {
 		for (v14 = 0; v14 < *(int*) (v12 + 4); v14++) {
 			fcn_00476a50(v14, v3, v12, key);
-			if (fcn_00475780(key, &v8))
-				continue;
+			if (fcn_00475780(key, white))
+				goto next_pixel;
 			fcn_00476a50(v14 + 1, v3, *(int*) 0x774680, key);
 			for (i = 0, q = (char*) 0x6a24ec; q < (char*) 0x6a2519; q += 3, i++) {
 				if (!fcn_00475780(key, q)) {
 					if (i > 0xe)
-						goto next_row;
+						goto next_pixel;
 					v21 = 0;
 					if (*r == 2) {
 						v4 = (short*) fcn_00502cd0(*(unsigned int*) (v20 + 0x5d), 1, 4, 2);
 						do {
 							if (!v4)
-								goto next_row;
+								goto next_pixel;
 							if (*v4 != 0xfd) {
 								if (i == v21)
 									goto found;
@@ -175,7 +178,7 @@ have_image:
 						} while (1);
 					}
 					v7 = (short*) (r + 0x23);
-					for (i = 0; i <= 0x3f; i++) {
+					for (j = 0; j <= 0x3f; j++) {
 						if (*v7 != -1) {
 							v5 = *v7 & 0x7fff;
 							c = *(char*) (lpObjektePROT + v5 * 0x41);
@@ -187,24 +190,25 @@ have_image:
 						}
 						v7++;
 					}
-					goto next_row;
+					goto next_pixel;
 				}
 			}
-		}
-next_row:
-		v14 = v19 + 1;
-		v19 = v14;
-		continue;
-found:
-		;
+			goto next_pixel;
 found2:
-		v12 = fcn_005053c0(v4);
-		if (v12 == -1)
-			goto next_row;
-		v6 = fcn_00469c30((short) (*(int*) 0x1040494 - 0x7e + v19),
-			(short) (v18 + 0x4c), v12);
-		*(int*) (v22 * 4 + 0x7ea380) = v6;
-		v22++;
+			v4 = (short*) fcn_00502cd0(*(unsigned int*) (v20 + 0x5d), 1, 0, v5);
+found:
+			if (v4 != 0) {
+				v13 = fcn_005053c0(v4);
+				if (v13 != -1) {
+					v6 = fcn_00469c30((short) (*(int*) 0x1040494 - 0x7e + v14),
+						(short) (v3 + 0x4c), v13);
+					*(int*) (v22 * 4 + 0x7ea380) = v6;
+					v22++;
+				}
+			}
+next_pixel:
+			v12 = *(int*) 0x774680;
+		}
 	}
 	fcn_00476060(v12);
 }

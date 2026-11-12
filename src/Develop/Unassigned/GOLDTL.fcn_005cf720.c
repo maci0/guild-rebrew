@@ -116,9 +116,9 @@ int __cdecl fcn_005cf720(unsigned int a0, unsigned int a1, unsigned char* p)
 	}
 	if (!*(int*) (p + 0x40))
 		return 1;
-	f = fcn_0050f980((int) (a0 & 0xffff), (int) a1, 1);
-	if (*(float*) (p + 0x44) <= f) {
-		if (f <= *(float*) (p + 0x48))
+	f = fcn_0050f980((int) (a0 & 0xffff), (int) (a1 & 0xffff), 1);
+	if (!(f < *(float*) (p + 0x44))) {
+		if (!(f > *(float*) (p + 0x48)))
 			return 1;
 		return 0;
 	}

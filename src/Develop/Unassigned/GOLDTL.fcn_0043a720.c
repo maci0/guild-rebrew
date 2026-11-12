@@ -39,7 +39,7 @@ char __cdecl fcn_0043a720(Obj043a720* o, char* name)
 	int n;
 
 	if (o != 0 && name != 0 && o->parent != 0 && o->ov != 0) {
-		strcpy(o->ov->name, "");
+		o->ov->name[0] = g_6b5c60;
 		p = o->parent;
 		if (p->ov != 0) {
 			l = p->ov->list;

@@ -4,16 +4,16 @@
 typedef struct {
 	char pad0[4];
 	unsigned char type;
-	char pad5[7];
-	int owner;
+	char pad5[3];
 	int key;
-	char pad14[0x22];
+	int owner;
+	char pad10[0x26];
 	unsigned char flags;
 	char pad37[0x21];
 	int other;
-	char pad5c[8];
+
 	int extra;
-	char pad68[0x90];
+	char pad60[0x98];
 } Msg5c23b0;
 
 extern unsigned char g_773d75;
@@ -43,7 +43,7 @@ void __cdecl fcn_005c23b0(char* e)
 {
 	Msg5c23b0 m;
 	int id;
-	int x;
+
 	int win;
 	int p;
 	int v;
@@ -58,7 +58,7 @@ void __cdecl fcn_005c23b0(char* e)
 	d2_SetForm(win, 2);
 	ret = *(unsigned short*) (g_773d75 * 0x2f4 + 0x8680b4);
 	h = fcn_00472250(win, 2, io_AppendText(0x17c5, e, ret * 2 + 0x9a8));
-	fcn_00472380(h, (int) (x * 0.5), (int) (x * 1.5), v);
+	fcn_00472380(h, (int) (v * 0.5), (int) (v * 1.5), v);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005373e0(0, 0x677c7);
 	do {
@@ -74,7 +74,7 @@ void __cdecl fcn_005c23b0(char* e)
 			m.type = 0x1b;
 			m.owner = -1;
 			m.flags = 2;
-			m.other = id;
+			m.other = *(int*) (e + 1);
 			m.key = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
 			m.extra = fcn_0050b750(fcn_00471f80(h), g_773d75);
 			fcn_004c5530(&m);

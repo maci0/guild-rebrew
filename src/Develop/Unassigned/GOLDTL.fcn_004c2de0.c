@@ -3,10 +3,11 @@
 
 /* entry of the 0x21c-stride table at 0x7f4ca0 */
 typedef struct {
-	int value;
-	char pad4[4];
+	int unused0;
+	unsigned int value;
+	char unused8;
 	char type;
-	char pad[0x21c - 9];
+	char pad[0x21c - 10];
 } Rec_7f4ca0;
 
 extern Rec_7f4ca0 g_7f4ca0[];
@@ -40,42 +41,40 @@ int __cdecl fcn_004c2de0(int code, int a1, char* a2, int a3)
 	if (g_774934 == 0) {
 		return 0;
 	}
-	if (code == -7) {
-		sprintf(buf, a2);
-	} else {
-		if (code < 0 || code >= 0x300) {
-			switch (code) {
-			case -2:
-				strcpy(num, g_68a4e0);
-				break;
-			case -1:
-				strcpy(num, g_68a4dc);
-				break;
-			case -5:
-				strcpy(num, g_68a4d8);
-				break;
-			case -4:
-				strcpy(num, g_68a4d4);
-				break;
-			case -3:
-				strcpy(num, g_68a4d0);
-				break;
-			case -6:
-				strcpy(num, g_68a4cc);
-				break;
-			case -8:
+	if (code != -7) {
+		if (code >= 0x300 || code < 0) {
+			if (code == -2) {
+				memcpy(num, g_68a4e0, 4);
+			} else if (code == -1) {
+				memcpy(num, g_68a4dc, 4);
+			} else if (code == -5) {
+				memcpy(num, g_68a4d8, 4);
+			} else if (code == -4) {
+				memcpy(num, g_68a4d4, 4);
+			} else if (code == -3) {
+				memcpy(num, g_68a4d0, 4);
+			} else if (code == -6) {
+				memcpy(num, g_68a4cc, 4);
+			} else if (code == -8) {
 				num[0] = g_6b5c60;
-				break;
 			}
+
+
+
+
+
+
+
+
 		} else {
-			switch (g_7f4ca0[code].type) {
-			case 1:
+			if (g_7f4ca0[code].type == 1) {
 				sprintf(num, g_68a4ec, (g_7f4ca0[code].value & 1) + 1);
-				break;
-			case 0:
+			} else if (g_7f4ca0[code].type == 0) {
 				sprintf(num, g_68a4e4, g_7f4ca0[code].value % 3 + 1);
-				break;
 			}
+
+
+
 		}
 		sprintf(buf, g_67728c, a2, num);
 		res = fcn_004234a0(a1, buf);
@@ -91,6 +90,8 @@ int __cdecl fcn_004c2de0(int code, int a1, char* a2, int a3)
 			}
 			return res;
 		}
+	} else {
+		sprintf(buf, a2);
 	}
 	res = fcn_00422460(a1, buf);
 	if (res == 0) {

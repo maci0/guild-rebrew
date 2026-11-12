@@ -261,15 +261,15 @@ int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
 	g_1015ce0 = a0;
 	g_1040490 = a2;
 	fcn_0047a040(0, 0, a1, a2);
-	g_1015eac = g_14ce860 >> 1;
-	g_1015ea8 = g_14ce864 >> 1;
+	g_1015eac = (unsigned int) g_14ce860 >> 1;
+	g_1015ea8 = (unsigned int) g_14ce864 >> 1;
 	for (i = 0; i < 0x17; i++) {
-		((int*) (info + 0x10))[i] = 0;
+		((int*) info)[i] = 0;
 	}
 	g_77250c = 0;
-	*(int*) (info + 0x14) = g_14ce860;
-	*(int*) (info + 0x18) = g_14ce864;
-	(*(void (__cdecl**) (void*, int, int, void*)) (*(char**) g_6b5de0 + 0x40))(g_6b5de0, 0, 0, info + 0x34);
+	*(int*) (info + 4) = g_14ce860;
+	*(int*) (info + 8) = g_14ce864;
+	(*(void (__stdcall**) (void*, int, int, void*)) (*(char**) g_6b5de0 + 0x40))(g_6b5de0, 0, 0, info + 0x24);
 	g_77250c = fcn_004770a0(info, 4);
 	if (g_77250c) {
 		fcn_004760c0(g_77250c, info + 0x5c);
@@ -288,7 +288,7 @@ int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
 			fcn_00475fd0(g_77256c);
 			for (i = 0; i < 0x20; i++) {
 				for (j = 0; j < 0x20; j++) {
-					fcn_00476b10(i, j, 0xff, 0xff, 0xff, g_77256c);
+					fcn_00476b10(j, i, 0xff, 0xff, 0xff, g_77256c);
 				}
 			}
 			fcn_00476060(g_77256c);

@@ -1,3 +1,4 @@
+typedef struct { float f00, f04, f08; } CANNON_ROW_588AA0;
 typedef struct {
 	float x;
 	float y;
@@ -49,6 +50,7 @@ typedef struct {
 } Emitter;
 
 extern float g_662910;
+extern float g_662914, g_662c98, g_662a98, g_664450, g_66444c, g_6660f4;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "GOLDTL.fcn_00588aa0_gconf.h"
 
@@ -77,7 +79,7 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 	Particle p0;
 	Particle p1;
 	Particle p2;
-	Vec3 pos0;
+	Vec3 pos0; Vec3 dir1; Vec3 dir2; Vec3 dir3;
 	Vec3 pos1;
 	Vec3 pos2;
 	float spread;
@@ -115,17 +117,18 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 	}
 	fcn_004f11c0(a1, &spread, &scale);
 	k = fcn_004f1290(a1);
-	b = ((float*) 0x665288)[slot0 * 3 + 2];
-	speed = (float) slot1 * g_662910
-		* (k * ((float*) 0x665288)[slot0 * 3 + 1]
-			- ((float*) 0x665288)[slot0 * 3])
-		+ ((float*) 0x665288)[slot0 * 3];
+	b = ((CANNON_ROW_588AA0*)0x665288)[slot0].f08;
+	speed = (float) slot1 * 0.01f
+		* (k * ((CANNON_ROW_588AA0*)0x665288)[slot0].f04
+			- ((CANNON_ROW_588AA0*)0x665288)[slot0].f00)
+		+ ((CANNON_ROW_588AA0*)0x665288)[slot0].f00;
 	fcn_00589390();
+	dir1 = a0->dir1; dir2 = a0->dir2; dir3 = a0->dir3;
 	if (a0->mode == 0) {
-		pos0.x = a0->dir1.x * *(float*) 0x662914 + a0->pos.x;
-		pos0.y = a0->dir1.y * *(float*) 0x662914 + a0->pos.y;
-		pos0.z = a0->dir1.z * *(float*) 0x662914 + a0->pos.z;
-		fcn_005e8e80(&p0, &pos0, &a0->dir1, speed, b, *(float*) 0x6660f4);
+		pos0.x = dir1.x * 50.0f + a0->pos.x;
+		pos0.y = dir1.y * 50.0f + a0->pos.y;
+		pos0.z = dir1.z * 50.0f + a0->pos.z;
+		fcn_005e8e80(&p0, &pos0, &a0->dir1, speed, b, 7874.0f);
 		fcn_005e8fe0((float*) &p0, spread, &a0->dir2, spread, &a0->dir3,
 			scale);
 		h = fcn_004f0a30(a1,
@@ -134,17 +137,17 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 			fcn_004f0eb0(slot0, slot1, 1), o1, (unsigned int) o2);
 		sel = 1;
 	} else if (a0->mode == 1) {
-		px = a0->dir1.x * *(float*) 0x662c98 + a0->pos.x;
-		py = a0->dir1.y * *(float*) 0x662c98 + a0->pos.y;
-		pz = a0->dir1.z * *(float*) 0x662c98 + a0->pos.z;
-		pos1.x = a0->dir2.x * *(float*) 0x662a98 + px;
-		pos1.y = a0->dir2.y * *(float*) 0x662a98 + py;
-		pos1.z = a0->dir2.z * *(float*) 0x662a98 + pz;
-		pos0.x = a0->dir2.x * *(float*) 0x664450 + px;
-		pos0.y = a0->dir2.y * *(float*) 0x664450 + py;
-		pos0.z = a0->dir2.z * *(float*) 0x664450 + pz;
-		fcn_005e8e80(&p1, &pos1, &a0->dir1, speed, b, *(float*) 0x6660f4);
-		fcn_005e8e80(&p0, &pos0, &a0->dir1, speed, b, *(float*) 0x6660f4);
+		px = dir1.x * 40.0f + a0->pos.x;
+		py = dir1.y * 40.0f + a0->pos.y;
+		pz = dir1.z * 40.0f + a0->pos.z;
+		pos1.x = dir2.x * 5.0f + px;
+		pos1.y = dir2.y * 5.0f + py;
+		pos1.z = dir2.z * 5.0f + pz;
+		pos0.x = dir2.x * (-5.0f) + px;
+		pos0.y = dir2.y * (-5.0f) + py;
+		pos0.z = dir2.z * (-5.0f) + pz;
+		fcn_005e8e80(&p1, &pos1, &a0->dir1, speed, b, 7874.0f);
+		fcn_005e8e80(&p0, &pos0, &a0->dir1, speed, b, 7874.0f);
 		fcn_005e8fe0((float*) &p1, spread, &a0->dir2, spread, &a0->dir3,
 			scale);
 		fcn_005e8fe0((float*) &p0, spread, &a0->dir2, spread, &a0->dir3,
@@ -158,27 +161,27 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 		dy = 0;
 		ey = 40;
 	} else if (a0->mode == 2) {
-		px = a0->dir1.x * *(float*) 0x662c98 + a0->pos.x;
-		py = a0->dir1.y * *(float*) 0x662c98 + a0->pos.y;
-		pz = a0->dir1.z * *(float*) 0x662c98 + a0->pos.z;
-		pos2.x = a0->dir2.x * *(float*) 0x662a98
-			+ a0->dir3.x * *(float*) 0x66444c + px;
-		pos2.y = a0->dir2.y * *(float*) 0x662a98
-			+ a0->dir3.y * *(float*) 0x66444c + py;
-		pos2.z = a0->dir2.z * *(float*) 0x662a98
-			+ a0->dir3.z * *(float*) 0x66444c + pz;
-		pos1.x = a0->dir3.x * *(float*) 0x662a98 + px;
-		pos1.y = a0->dir3.y * *(float*) 0x662a98 + py;
-		pos1.z = a0->dir3.z * *(float*) 0x662a98 + pz;
-		pos0.x = a0->dir2.x * *(float*) 0x664450
-			+ a0->dir3.x * *(float*) 0x66444c + px;
-		pos0.y = a0->dir2.y * *(float*) 0x664450
-			+ a0->dir3.y * *(float*) 0x66444c + py;
-		pos0.z = a0->dir2.z * *(float*) 0x664450
-			+ a0->dir3.z * *(float*) 0x66444c + pz;
-		fcn_005e8e80(&p2, &pos2, &a0->dir1, speed, b, *(float*) 0x6660f4);
-		fcn_005e8e80(&p0, &pos0, &a0->dir1, speed, b, *(float*) 0x6660f4);
-		fcn_005e8e80(&p1, &pos1, &a0->dir1, speed, b, *(float*) 0x6660f4);
+		px = dir1.x * 40.0f + a0->pos.x;
+		py = dir1.y * 40.0f + a0->pos.y;
+		pz = dir1.z * 40.0f + a0->pos.z;
+		pos2.x = dir2.x * 5.0f
+			+ dir3.x * (-3.0f) + px;
+		pos2.y = dir2.y * 5.0f
+			+ dir3.y * (-3.0f) + py;
+		pos2.z = dir2.z * 5.0f
+			+ dir3.z * (-3.0f) + pz;
+		pos1.x = dir3.x * 5.0f + px;
+		pos1.y = dir3.y * 5.0f + py;
+		pos1.z = dir3.z * 5.0f + pz;
+		pos0.x = dir2.x * (-5.0f)
+			+ dir3.x * (-3.0f) + px;
+		pos0.y = dir2.y * (-5.0f)
+			+ dir3.y * (-3.0f) + py;
+		pos0.z = dir2.z * (-5.0f)
+			+ dir3.z * (-3.0f) + pz;
+		fcn_005e8e80(&p2, &pos2, &a0->dir1, speed, b, 7874.0f);
+		fcn_005e8e80(&p0, &pos0, &a0->dir1, speed, b, 7874.0f);
+		fcn_005e8e80(&p1, &pos1, &a0->dir1, speed, b, 7874.0f);
 		fcn_005e8fe0((float*) &p2, spread, &a0->dir2, spread, &a0->dir3,
 			scale);
 		fcn_005e8fe0((float*) &p0, spread, &a0->dir2, spread, &a0->dir3,

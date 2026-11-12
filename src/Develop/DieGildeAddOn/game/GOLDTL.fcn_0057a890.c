@@ -69,31 +69,22 @@ int __cdecl fcn_0057a890(char* off, float chance, int kind, float* out)
 	if (x == 0) {
 		return type;
 	}
-	switch (type) {
-	case 2:
-		flags ^= (x << 4) & 0xf0;
-		break;
-	case 3:
-		flags ^= (x << 8) & 0xf00;
-		break;
-	case 4:
-		flags ^= (x << 12) & 0x3000;
-		break;
-	case 5:
-		flags ^= (x << 14) & 0x1c000;
-		break;
-	case 6:
-		flags ^= (x << 17) & 0xe0000;
-		break;
-	case 7:
-		flags ^= (x << 20) & 0x700000;
-		break;
-	case 8:
-		flags ^= (x << 23) & 0x1800000;
-		break;
-	case 9:
-		flags ^= (x << 25) & 0x1e000000;
-		break;
+	if (type == 2) {
+		flags ^= ((x << 4) ^ flags) & 0xf0;
+	} else if (type == 3) {
+		flags ^= ((x << 8) ^ flags) & 0xf00;
+	} else if (type == 4) {
+		flags ^= ((x << 12) ^ flags) & 0x3000;
+	} else if (type == 5) {
+		flags ^= ((x << 14) ^ flags) & 0x1c000;
+	} else if (type == 6) {
+		flags ^= ((x << 17) ^ flags) & 0xe0000;
+	} else if (type == 7) {
+		flags ^= ((x << 20) ^ flags) & 0x700000;
+	} else if (type == 8) {
+		flags ^= ((x << 23) ^ flags) & 0x1800000;
+	} else if (type == 9) {
+		flags ^= ((x << 25) ^ flags) & 0x1e000000;
 	}
 	fcn_004c4510(off, *(int*) (off + 4));
 	fcn_004c4570(4, 1, 0x2c, &flags);

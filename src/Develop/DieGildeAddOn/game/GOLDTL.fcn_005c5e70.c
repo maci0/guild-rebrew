@@ -3,7 +3,7 @@ extern char* g_1015ea0;
 extern char* lpObjektePROT;
 extern char* g_6abb00;
 extern char* g_14b52c4;
-extern float g_6629c8;
+extern double g_6629c8;
 
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -40,7 +40,7 @@ unsigned int __cdecl fcn_005c5e70(void)
 				handle = fcn_00471f80(slot[-1]);
 				d2_SetElementValue(slot[-1], 0, *(unsigned int*) (*slot + 0xe), handle);
 				fcn_0064d41a(g_1015ea0 + 0xcc + slot[-1] * 0x2f4, "%s~ %li %s",
-				    *(unsigned int*) (id * 8 + 0x14a79c0), *(unsigned int*) (*slot + 0x1c), g_14b52c4);
+				    *(unsigned int*) (id * 8 + 0x14a79c0), *(unsigned int*) (*slot + 0xe), g_14b52c4);
 				used = fcn_005c61e0(id);
 				if (used != 0) {
 					if (*(int*) (*slot + 0x21) != 0) {
@@ -89,7 +89,7 @@ unsigned int __cdecl fcn_005c5e70(void)
 						*(unsigned int*) (g_1015ea0 + 0x1e0 + handle * 0x2f4) = 0;
 						fcn_0064d41a(g_1015ea0 + 0xcc + handle * 0x2f4, "%s~ %li St",
 						    *(unsigned int*) (*match * 8 + 0x14a79c0),
-						    *(unsigned int*) (match + 0xe));
+						    *(unsigned int*) ((char*) match + 0xe));
 						used = fcn_005c61e0(*match);
 						if (used != 0) {
 							if (*(int*) ((char*) match + 0x21) != 0) {

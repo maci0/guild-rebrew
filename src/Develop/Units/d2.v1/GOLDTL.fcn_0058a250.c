@@ -45,7 +45,7 @@ void __cdecl fcn_0058a250(int a0)
 {
 	int ids[3];
 	int q[20];
-	char req[0x100];
+	char req[0xf8];
 	char* v6;
 	int dlg;
 	int elem;
@@ -55,7 +55,7 @@ void __cdecl fcn_0058a250(int a0)
 	int sel;
 	int id;
 	int i;
-	int n;
+	int n; int cost;
 
 	for (i = 0; i < 20; i++) {
 		q[i] = 0;
@@ -94,19 +94,19 @@ void __cdecl fcn_0058a250(int a0)
 	v20 = fcn_00472250(dlg, 3, v16 + 1);
 	g_100f1dc = -1;
 	do {
-		v16 = fcn_00471f80(v16);
+		v16 = fcn_00471f80(elem);
 		d2_SetForm(dlg, 1);
 		io_AppendText(0x6811b0);
-		io_AppendText(0x3ffd, 0x3ffb, *(unsigned short*) v6);
-		io_AppendText(0x3ffe, ids[v16]);
+		io_AppendText(0x3ffd, 0x3ffb, *(unsigned short*) v6, n + 2);
+		cost = ids[v16]; io_AppendText(0x3ffe, cost);
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (g_67d370 == v22) {
-				if (fcn_00525f60(g_slot_table + g_774970 * 0x21c, v16) == 1 && fcn_005898f0((void*) a0) != 0) {
-					fcn_005100f0(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -v16);
+				if (fcn_00525f60(g_slot_table + g_774970 * 0x21c, cost) == 1 && fcn_005898f0((void*) a0) != 0) {
+					fcn_005100f0(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -cost);
 					for (i = 0; i < 0x3e; i++) {
-						*(int*) (req + 8 + i * 4) = 0;
+						*(int*) (req + i * 4) = 0;
 					}
 					req[4] = 0x99;
 					req[0x36] = 2;
@@ -115,8 +115,8 @@ void __cdecl fcn_0058a250(int a0)
 					*(int*) (req + 8) = *(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + (int) g_7f4ca4);
 					*(int*) (req + 0x2c) = g_7f4c04;
 					*(int*) (req + 0x28) = g_7f4c00;
-					*(int*) (req + 0xc) = *(int*) (v6 + 1);
-					*(int*) (req + 0x5c) = *(int*) (v6 + 1);
+					*(int*) (req + 0xc) = *(int*) (a0 + 1);
+					*(int*) (req + 0x5c) = *(int*) (a0 + 1);
 					*(int*) (req + 0x30) = g_7f4c08;
 					*(short*) (req + 0x34) = g_7f4c0c;
 					*(int*) (req + 0x60) = *(int*) (v6 + 4);

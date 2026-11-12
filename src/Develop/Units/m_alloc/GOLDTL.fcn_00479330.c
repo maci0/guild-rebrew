@@ -1,3 +1,4 @@
+#include <string.h>
 void* __cdecl m_alloc(unsigned int, char*);
 int __cdecl fcn_0041bac0(int, int, int);
 void __cdecl fcn_00477560(int*, int*);
@@ -19,10 +20,10 @@ int* __cdecl fcn_00479330(int* src)
 	if (*(int*) ((char*) src + 0x26) == -1) {
 		res = m_alloc(*(int*) src - *(int*) ((char*) src + 0x2e),
 		    (char*) 0x67d9fc);
-		for (i = 0; i < 0xc; i++) {
-			res[i] = src[i];
-		}
-		*(unsigned short*) (res + 0xc) = *(unsigned short*) (src + 0xc);
+		memcpy(res, src, 0x32);
+
+
+
 		*(int*) ((char*) res + 0x26) = -1;
 		*(int*) res = 0x32;
 		*(unsigned char*) ((char*) res + 0xc) = 1;
@@ -44,9 +45,9 @@ int* __cdecl fcn_00479330(int* src)
 					}
 					i++;
 				}
-				for (i = 0; i < *(unsigned short*) ((char*) src + 6) * 2; i++) {
-					out[i] = ((char*) work)[i];
-				}
+				memcpy(out, work, *(unsigned short*) ((char*) src + 6) * 2);
+
+
 				*(int*) res += *(unsigned short*) ((char*) src + 6) * 2;
 				out += *(unsigned short*) ((char*) src + 6) * 2;
 				j++;
@@ -57,10 +58,10 @@ int* __cdecl fcn_00479330(int* src)
 	}
 	res = m_alloc(*(int*) src - *(int*) ((char*) src + 0x2e),
 	    (char*) 0x67d9fc);
-	for (i = 0; i < 0xc; i++) {
-		res[i] = src[i];
-	}
-	*(unsigned short*) (res + 0xc) = *(unsigned short*) (src + 0xc);
+	memcpy(res, src, 0x32);
+
+
+
 	*(int*) res = 0x32;
 	*(unsigned char*) ((char*) res + 0xc) = 1;
 	*(int*) ((char*) res + 0x26) = 0;
@@ -83,7 +84,7 @@ int* __cdecl fcn_00479330(int* src)
 				*(int*) out = (int) (((unsigned int) *(int*) p * 2) / 3);
 				*(int*) (out + 4) = *(int*) (p + 4);
 				if (*(int*) (p + 4) != 0) {
-					for (k = 0; k < *(int*) (p + 4); k++) {
+					for (k = 0; k < *(unsigned int*) (p + 4); k++) {
 						work[k] = (unsigned short) fcn_0041bac0(
 						    *(unsigned char*) (p + 8 + k * 3),
 						    *(unsigned char*) (p + 9 + k * 3),
@@ -96,9 +97,9 @@ int* __cdecl fcn_00479330(int* src)
 							    *(unsigned short*) 0x100eb6c);
 						}
 					}
-					for (k = 0; k < *(int*) (p + 4) * 2; k++) {
-						out[8 + k] = ((char*) work)[k];
-					}
+					memcpy(out + 8, work, *(unsigned int*) (p + 4) * 2);
+
+
 				}
 				*(int*) ((char*) res + 0x26) += 1;
 				*(int*) ((char*) res + 0x2e) += *(int*) (p + 4);
@@ -106,7 +107,7 @@ int* __cdecl fcn_00479330(int* src)
 				p += *(int*) (p + 4) * 3 + 8;
 				out += *(int*) (out + 4) * 2 + 8;
 				i++;
-			} while (i < *(int*) in);
+			} while (i < *(unsigned int*) in);
 		}
 		in = p;
 		s = out;

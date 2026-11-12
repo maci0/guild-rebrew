@@ -72,12 +72,12 @@ void __cdecl fcn_005848b0(int a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(w);
 	d2_SetForm(w, 0);
-	fcn_005340f0(*(volatile unsigned int *)0x772514);
+	fcn_005340f0(*(unsigned int *)0x772514);
 	d2_SetForm(w, 1);
 	d2_SetForm(w, 2);
-	keep = *(volatile unsigned int *)0x772514;
+	keep = *(unsigned int *)0x772514;
 	d2_SetForm(w, 3);
-	last = *(volatile unsigned int *)0x772514;
+	last = *(unsigned int *)0x772514;
 	d2_SetForm(w, 1);
 	io_AppendText(0x4039);
 	d2_SetForm(w, 2);
@@ -89,54 +89,54 @@ void __cdecl fcn_005848b0(int a0)
 		do {
 			item[i] = fcn_0046f740(5, y - 0x19, 0x6c7, keep);
 			fields = (int *)((char *)pt[0] + 0x34);
-			item[i] = fcn_0046f740(7, y - 0x17, fields[i % 3] + 0x639, last);
-			ent = (int *)(*(volatile unsigned int *)0x1015ea0 + item[i] * 0x2f4);
+			item[i] = fcn_0046f740(7, y - 0x17, fields[i % 2] + 0x639, keep);
+			ent = (int *)(*(unsigned int *)0x1015ea0 + item[i] * 0x2f4);
 			ent[0x5c / 4] = 1;
 			fcn_00469470(idx, item[i]);
 			r = rec[off / 4];
 			rp = (char *)r;
 			io_FormatTextBuffer(buf, 0x68b3f8, *(unsigned int *)(0x14b5908 + *(int *)(rp + 0x10) * 4), *(unsigned int *)(0x14b596c + *(int *)(rp + 0x14) * 4));
-			id = fcn_0046fac0(0, y - 0x30, buf, last);
+			id = fcn_0046fac0(0, y - 0x30, buf, keep);
 			base = *(int *)(0x1015f4c + keep * 0x3cc);
-			ent = (int *)(*(volatile unsigned int *)0x1015ea0 + id * 0x2f4);
+			ent = (int *)(*(unsigned int *)0x1015ea0 + id * 0x2f4);
 			ent[0x18 / 4] = base;
 			ent[0x6c / 4] = 1;
 			fcn_00472900(id, 0x54);
 			io_FormatTextBuffer(buf, 0x679060, *(unsigned int *)0x14b58e8);
-			id = fcn_0046fac0(0x50, y - 0x1a, buf, last);
-			ent = (int *)(*(volatile unsigned int *)0x1015ea0 + id * 0x2f4);
+			id = fcn_0046fac0(0x50, y - 0x1a, buf, keep);
+			ent = (int *)(*(unsigned int *)0x1015ea0 + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0x50;
 			fcn_00472900(id, 0x54);
 			fcn_00534160(0x8c, y - 0x1a, *(unsigned char *)(rp + 4), 0x4df);
 			io_FormatTextBuffer(buf, 0x679060, *(unsigned int *)0x14b58ec);
-			id = fcn_0046fac0(0x50, y - 0xd, buf, last);
-			ent = (int *)(*(volatile unsigned int *)0x1015ea0 + id * 0x2f4);
+			id = fcn_0046fac0(0x50, y - 0xd, buf, keep);
+			ent = (int *)(*(unsigned int *)0x1015ea0 + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0x50;
 			fcn_00472900(id, 0x54);
 			fcn_00534160(0x8c, y - 0xd, *(unsigned char *)(rp + 5), 0x4df);
 			io_FormatTextBuffer(buf, 0x679060, *(unsigned int *)0x14b58f0);
-			id = fcn_0046fac0(0x50, y, buf, last);
-			ent = (int *)(*(volatile unsigned int *)0x1015ea0 + id * 0x2f4);
+			id = fcn_0046fac0(0x50, y, buf, keep);
+			ent = (int *)(*(unsigned int *)0x1015ea0 + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0x50;
 			fcn_00472900(id, 0x54);
 			fcn_00534160(0x8c, y, *(unsigned char *)(rp + 6), 0x4df);
 			io_FormatTextBuffer(buf, 0x679060, *(unsigned int *)0x14b58f4);
-			id = fcn_0046fac0(0x50, y + 0xd, buf, last);
-			ent = (int *)(*(volatile unsigned int *)0x1015ea0 + id * 0x2f4);
+			id = fcn_0046fac0(0x50, y + 0xd, buf, keep);
+			ent = (int *)(*(unsigned int *)0x1015ea0 + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0x50;
 			fcn_00472900(id, 0x54);
 			fcn_00534160(0x8c, y + 0xd, *(unsigned char *)(rp + 7), 0x4df);
 			io_FormatTextBuffer(buf, 0x403f, *(unsigned char *)(rp + 8));
-			id = fcn_0046fac0(0xfa, y - 0x1b, buf, last);
-			ent = (int *)(*(volatile unsigned int *)0x1015ea0 + id * 0x2f4);
+			id = fcn_0046fac0(0xfa, y - 0x1b, buf, keep);
+			ent = (int *)(*(unsigned int *)0x1015ea0 + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0xfa;
 			io_FormatTextBuffer(buf, 0x4040, fcn_004ee0b0(r));
-			id = fcn_0046fac0(0xfa, y - 0xe, buf, last);
-			ent = (int *)(*(volatile unsigned int *)0x1015ea0 + id * 0x2f4);
+			id = fcn_0046fac0(0xfa, y - 0xe, buf, keep);
+			ent = (int *)(*(unsigned int *)0x1015ea0 + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0xfa;
 			io_FormatTextBuffer(buf, 0x4041, *(int *)(rp + 0xc) * 2 + 0x9a8);
-			id = fcn_0046fac0(0xfa, y - 1, buf, last);
-			ent = (int *)(*(volatile unsigned int *)0x1015ea0 + id * 0x2f4);
+			id = fcn_0046fac0(0xfa, y - 1, buf, keep);
+			ent = (int *)(*(unsigned int *)0x1015ea0 + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0xfa;
 			off += 4;
 			y += 0x64;
@@ -145,24 +145,24 @@ void __cdecl fcn_005848b0(int a0)
 	}
 	d2_SetForm(w, 3);
 	fcn_00533a60(last, 0, pt, 2, *(int *)0x14b5428, *(int *)0x14b542c);
-	*(volatile unsigned int *)0x100f1dc = 0xffffffff;
+	*(unsigned int *)0x100f1dc = 0xffffffff;
 	do {
 		r = (void *)pt[0];
-		exp = *(volatile unsigned int *)(0x102cbc8 + idx * 0x8c);
+		exp = *(unsigned int *)(0x102cbc8 + idx * 0x8c);
 		fcn_00472640(r, (exp != 0xffffffff) && (i != 0));
-		if (*(volatile unsigned int *)0x14ce8e0) {
-			*(volatile unsigned int *)0x774654 = 1;
-		} else if (*(volatile unsigned int *)0x100f1dc != 0xffffffff) {
-			if (*(volatile unsigned int *)0x67d370 == pt[0]) {
+		if (*(unsigned int *)0x14ce8e0) {
+			*(unsigned int *)0x774654 = 1;
+		} else if (*(unsigned int *)0x100f1dc != 0xffffffff) {
+			if (*(unsigned int *)0x67d370 == pt[0]) {
 				for (id = 0; id < 3; id++) {
 					if (exp == (unsigned int)id) {
 						if (fcn_00584f00(a0, rec[id], val[id])) {
-							*(volatile unsigned int *)0x774654 = 1;
+							*(unsigned int *)0x774654 = 1;
 						}
 					}
 				}
-			} else if (*(volatile unsigned int *)0x67d370 == pt[1]) {
-				*(volatile unsigned int *)0x774654 = 1;
+			} else if (*(unsigned int *)0x67d370 == pt[1]) {
+				*(unsigned int *)0x774654 = 1;
 			}
 		}
 	} while (fcn_005373e0(0x5848b0, 0x677c7));

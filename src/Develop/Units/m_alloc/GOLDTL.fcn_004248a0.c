@@ -61,7 +61,24 @@ int __cdecl fcn_004248a0(char* name)
 	g_6b7d78 = (char*) root;
 	g_6b7d74 += (int) text;
 	step = 0x144;
-	memset(g_6b7d78, 0, step);
+	/* Reviewed original operand-homed fill (inline fill/copy block). */
+	__asm {
+		mov edi, g_6b7d78
+		mov ebx, step
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L1:
+		add ecx, ebx
+		rep stosb
+	}
 	strncpy(g_6b7d78, g_6b7d68, 0x32);
 	offset = root + step;
 	*(int*) (g_6b7d78 + 0x134) = n1 + n2;
@@ -92,7 +109,7 @@ int __cdecl fcn_004248a0(char* name)
 			if ((m = strstr(buf, g_679010)) != 0) {
 				*m = 0;
 				strcat(buf, name);
-				strcpy(buf, &node[5 + (m - buf)]);
+				strcat(buf, &node[5 + (m - buf)]);
 			}
 			if ((result = fcn_00423bf0(buf, p)) != 0) {
 				break;
@@ -120,14 +137,14 @@ int __cdecl fcn_004248a0(char* name)
 			p = (char*) (root + offset);
 			*(int*) p = fcn_00424700(node);
 			*(int*) (p + 8) = fcn_00423ce0(node);
-			strncpy(blocks + n2 + 4, node, 0x32);
+			strncpy(*(char**) (g_6b7d78 + 0x138) + n2 + 4, node, 0x32);
 			offset += 0xc;
 			if (*(int*) p != 0) {
 				*(int*) (p + 4) = root + offset;
+				sum = 0;
 				child = *(char**) (node + 0x38);
 				if (child != 0) {
 					i = 0;
-					sum = 0;
 					for (;;) {
 						if (result != 0) {
 							break;
@@ -148,7 +165,7 @@ int __cdecl fcn_004248a0(char* name)
 						if ((m = strstr(buf, g_679010)) != 0) {
 							*m = 0;
 							strcat(buf, name);
-							strcpy(buf, &child[5 + (m - buf)]);
+							strcat(buf, &child[5 + (m - buf)]);
 						}
 						if ((result = fcn_00423bf0(buf,
 						    (char*) (*(int*) (p + 4) + i))) != 0) {

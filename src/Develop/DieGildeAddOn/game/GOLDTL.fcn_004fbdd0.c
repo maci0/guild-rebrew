@@ -59,19 +59,19 @@ void __cdecl fcn_004fbdd0(void)
 	sum3 = (g_99ed1c + g_99ed30 + g_99ed44 + g_99ed58) * g_6628bc;
 	lit = fcn_004fc520();
 	id0 = 0x1c11;
-	if (g_dbl_6653e8 < sum0) {
+	if (!(sum0 <= g_dbl_6653e8)) {
 		id0 = 0x1c15;
 	}
 	id1 = 0x1c12;
-	if (g_dbl_6653e8 < sum1) {
+	if (!(sum1 <= g_dbl_6653e8)) {
 		id1 = 0x1c16;
 	}
 	id2 = 0x1c13;
-	if (lit < g_dbl_662950) {
+	if (!(lit >= g_dbl_662950)) {
 		id2 = 0x1c17;
 	}
 	id3 = 0x1c14;
-	if (g_dbl_6653e8 < sum2) {
+	if (!(sum2 <= g_dbl_6653e8)) {
 		id3 = 0x1c18;
 	}
 	min = sum0;
@@ -79,21 +79,15 @@ void __cdecl fcn_004fbdd0(void)
 	if (sum1 > min) {
 		index = 1;
 	}
-	else {
-		min = sum1;
-	}
+	min = min < sum1 ? min : sum1;
 	if (lit > min) {
 		index = 2;
 	}
-	else {
-		min = lit;
-	}
+	min = min < lit ? min : lit;
 	if (sum2 > min) {
 		index = 3;
 	}
-	else {
-		min = sum2;
-	}
+	min = min < sum2 ? min : sum2;
 	have = 0;
 	if (min > g_dbl_6628f0) {
 		table[0] = 0x1bf5;

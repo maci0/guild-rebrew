@@ -16,7 +16,8 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 extern int g_772514;
 extern int g_aed32c;
-extern char* g_14a79c0;
+extern char* g_14a79c0[];
+typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } Building4d6170;
 
 void __cdecl fcn_00475220(char*);
 void __cdecl fcn_00533a40(char*);
@@ -36,7 +37,7 @@ int __cdecl fcn_004d5490(int, int, int);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl fcn_0050d490(char*);
 void __cdecl fcn_004c51f0(int, int, int, int, int, int);
-double __cdecl fcn_0050bb50(int, int);
+float __cdecl fcn_0050bb50(int, unsigned char);
 char* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_004b4650(char*, int);
 void __cdecl fcn_004c5f60(int, int, int);
@@ -58,7 +59,7 @@ void __cdecl fcn_004c5360(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00507910(int);
 int __cdecl gm_CheckStatLevel(int, int);
-int __cdecl gm_RandomMod(int);
+int __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0050ff70(char*, int);
 
 /* ADDRESS: GOLDTL 0x004d6170 */
@@ -86,7 +87,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	char* ent;
 	char* cur;
 	int flags;
-	int kind;
+	unsigned char kind;
 	char* row;
 	int i;
 	int col;
@@ -197,7 +198,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	io_AppendText((int) "$C");
 	io_AppendText(0x1191);
 	ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10c));
-	kind = lpGebaeudePROT[(unsigned char) *ent * 0x24d];
+	kind = ((Building4d6170*) lpGebaeudePROT)[(unsigned char) *ent].kind;
 	if (kind == 0x13) {
 		mode = 0;
 	} else if (kind == 0x10) {
@@ -211,7 +212,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	if (ent == 0) {
 		mode = 0;
 	} else {
-		kind = lpGebaeudePROT[(unsigned char) *ent * 0x24d];
+		kind = ((Building4d6170*) lpGebaeudePROT)[(unsigned char) *ent].kind;
 		if (kind == 0x13) {
 			mode = 0;
 		} else if (kind == 0x10) {
@@ -293,7 +294,7 @@ sync:
 			choice++;
 		}
 		if (choice == 1) {
-			kind = lpGebaeudePROT[(unsigned char) *ent * 0x24d];
+			kind = ((Building4d6170*) lpGebaeudePROT)[(unsigned char) *ent].kind;
 			if (kind == 4 || kind == 0x10) {
 				fcn_004b4650(g_772e9c, 0x1c);
 			}
@@ -331,7 +332,7 @@ sync:
 					if (n < 1) {
 						n = 1;
 					}
-					sprintf(s.small, "%i %s$A", n, *(char**) ((char*) g_14a79c0 + *(unsigned short*) ent * 8));
+					sprintf(s.small, "%i %s$A", n, g_14a79c0[*(unsigned short*) ent * 2]);
 					strcat(s.buf, s.small);
 					if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
 						fcn_004c51f0(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) ent, n, g_773d75, 0);
@@ -365,7 +366,7 @@ reduce:
 		}
 	} else if (flags & 4) {
 		ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10c));
-		if (lpGebaeudePROT[(unsigned char) *ent * 0x24d] == 0x13) {
+		if (((Building4d6170*) lpGebaeudePROT)[(unsigned char) *ent].kind == 0x13) {
 			sum = 0;
 			for (id = (int*) (self + 0x80), i = 0; i < 16; i++, id++) {
 				if (*id == -1) {
@@ -442,7 +443,7 @@ reduce:
 							if (n < 1) {
 								n = 1;
 							}
-							sprintf(s.small, "%i %s$A", n, *(char**) ((char*) g_14a79c0 + *(unsigned short*) p * 8));
+							sprintf(s.small, "%i %s$A", n, g_14a79c0[*(unsigned short*) p * 2]);
 							strcat(s.buf, s.small);
 							if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
 								fcn_004c51f0(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) p, n, g_773d75, 0);

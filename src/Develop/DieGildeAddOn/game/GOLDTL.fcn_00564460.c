@@ -77,9 +77,9 @@ void __cdecl fcn_00564460(char* e)
 				do {
 					k++;
 				} while (gm_FindNextFilteredEntity());
-				if (k > 1) {
-					f = 1.6f;
-				}
+			}
+			if (k > 1) {
+				f = 1.6f;
 			} else {
 				type = *(unsigned char*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca2);
 				if (type != 6 && type != 7 && type != 5) {

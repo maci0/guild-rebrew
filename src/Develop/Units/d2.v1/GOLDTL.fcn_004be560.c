@@ -4,6 +4,8 @@ extern char* g_entity_type_table;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
+extern int g_67d370;
+extern unsigned short g_7f3ee4;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -90,22 +92,23 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 	} else {
 		fcn_005039e0((int) a0);
 		q = (char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 0, 0xff, 6);
-		for (i = 0; i < *(unsigned short*) 0x7f3ee4; i++) {
-			e = (char*) fcn_00502cd0(*(int*) (q + 0x14), 1, 0, *(int*) (0x90d520 + i * 4));
+		for (i = 0; i < g_7f3ee4; i++) {
+			e = (char*) fcn_00502cd0(*(int*) (q + 0x14), 1, 0, *(int*) (0x90d520 + n * 4));
 			if (e && *(int*) (e + 0xe) >= 2) {
-				items[i] = fcn_0046f740((i % 4) * 0x40, (i / 4) * 0x40, *(int*) (0x90d520 + i * 4) + 0xdf, g_772514);
-				v = (char*) (items[i] * 0x2f4 + (int) g_1015ea0);
+				items[n] = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40, *(int*) (0x90d520 + n * 4) + 0xdf, g_772514);
+				v = (char*) (items[n] * 0x2f4 + (int) g_1015ea0);
 				*(unsigned int*) (v + 0x5c) = 1;
 				*(unsigned int*) (v + 0x1d0) = 0x23;
 				*(unsigned int*) (v + 0x1e4) = 0x525;
 				*(unsigned int*) (v + 0x1dc) = 4;
 				*(unsigned int*) (v + 0x1e0) = 0xf;
-				sprintf((char*) (v + 0xcc), (char*) 0x679060, *(int*) (*(int*) (0x90d520 + i * 4) * 8 + 0x14a79c0));
+				sprintf((char*) (v + 0xcc), (char*) 0x679060, *(int*) (*(int*) (0x90d520 + n * 4) * 8 + 0x14a79c0));
+				n++;
 			}
 		}
 	}
 tail:
-	*(unsigned short*) 0x7f3ee4 = (unsigned short) n;
+	g_7f3ee4 = (unsigned short) n;
 	*(int*) (0x90d520 + n * 4) = 0;
 	t = fcn_0046f740((n % 4) * 0x40 + 7, (n / 4) * 0x40 + 7, 0x527, g_772514);
 	items[n] = t;
@@ -124,15 +127,15 @@ tail:
 		}
 		if (g_100f1dc != -1) {
 			t = 0;
-			if (*(unsigned short*) 0x7f3ee4 != 0xffff) {
+			if (g_7f3ee4 != 0xffff) {
 				do {
-					if (*(int*) 0x67d370 == items[t]) {
+					if (g_67d370 == items[t]) {
 						ret = *(int*) (0x90d520 + t * 4);
 						g_774654 = 1;
 						break;
 					}
 					t++;
-				} while (t < (int) (*(unsigned short*) 0x7f3ee4 + 1));
+				} while (t < (int) (g_7f3ee4 + 1));
 			}
 		}
 		t = fcn_005373e0(0x4be560, 0x657c7);

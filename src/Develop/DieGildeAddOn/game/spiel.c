@@ -6534,11 +6534,11 @@ unsigned short __cdecl gm_ResolveEntitySlot(short* entity)
 	if (dynamic_ent != (void*) 0) {
 		return *(unsigned short*) ((char*) dynamic_ent + 0x25);
 	}
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+#ifdef REBREW_SERVER
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ResolveEntitySlot(): entity not found", 1);
+#endif
 	return 0xffff;
 }
-
 /* Returns the resolved static record's first word or dynamic+0x27.
  * Returns 0xffff when both resolver outputs are null. */
 

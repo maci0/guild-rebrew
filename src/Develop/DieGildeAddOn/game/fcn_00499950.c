@@ -29,8 +29,8 @@ int __cdecl fcn_00499950(int a, char* b)
     *(char*) (buf + 0x36) = 1;
     *(int*) (buf + 0x84) = v;
     *(int*) (buf + 0x60) = *(int*) (e + 4);
-    *(int*) (buf + 0x58) = fcn_004faaf0(e);
-    scale = *(float*) 0x1009354;
+    v = fcn_004faaf0(e);
+    scale = *(float*) 0x1009354; *(int*) (buf + 0x58) = v;
     *(float*) 0x1009374 = scale * *(float*) (b + 0x14);
     scale = *(float*) 0x100935c;
     *(float*) 0x100937c = scale * *(float*) (b + 0x14);

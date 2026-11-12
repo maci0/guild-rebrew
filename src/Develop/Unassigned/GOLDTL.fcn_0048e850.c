@@ -7,6 +7,8 @@ int __cdecl fcn_004a4bb0(int action, char* e, int a, char* b, char* c, int d);
 int __cdecl ai_StartKreditNehmen(int a, char* e, int b, char* out1, char* out2);
 int __cdecl _ftol(void);
 
+extern unsigned char* lpGebaeudePROT;
+typedef struct { unsigned char unknown00[0x247]; unsigned char level; unsigned char unknown248[5]; } BUILDING_ROW;
 typedef struct Rec6 {
 	int v[6];
 } Rec6;
@@ -28,7 +30,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 			if (fcn_005463a0(2, 0, 0xd, 2, *(unsigned short*) e) == 0) {
 				if (ent != 0) {
 					c = (int) *(unsigned char*) ent;
-					if ((*(unsigned char*) ((*(char**) 0x868050) + c * 0x24c + c + 0x247)) < 3
+					if (((BUILDING_ROW*)lpGebaeudePROT)[c].level < 3
 						&& (*(unsigned char*) (ent + 0x5a) & 0x41) == 0) {
 						*(int*) (rec2.v + 1) = c + 1;
 						*(int*) (rec2.v + 2) = 1;
@@ -36,7 +38,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 						*(int*) (rec1.v + 1) = *(int*) (ent + 1);
 						*(int*) (rec1.v + 2) = 1;
 						need = (int) ((float) fcn_0050d170(c + 1) * *(float*) 0x66414c);
-						if (fcn_004a4bb0(action, e, 0, (char*) (rec2.v + 1), (char*) rec1.v, 0) != 0) {
+						if (fcn_004a4bb0(action, e, 0, (char*) rec2.v, (char*) rec1.v, 0) != 0) {
 							have = (int) ((float) fcn_0050b810(*(int*) (e + 0x178), *(char*) 0x773d75) * *(float*) 0x6628cc);
 							if (have < need) {
 								d = need - have;

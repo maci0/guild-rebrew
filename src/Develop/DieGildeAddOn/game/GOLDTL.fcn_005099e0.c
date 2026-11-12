@@ -60,10 +60,10 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 	while (ent != 0) {
 		type = gm_GetBuildingTypeCategory(*(unsigned char *) ent);
 		if (type == 2) {
-			fcn_004c5f60(*(int *) ((char *) g_773da8 + 4), *(int *) ((char *) ent + 1),
+			fcn_004c5f60(*(int *) ((char *) ent + 1), *(int *) ((char *) g_773da8 + 4),
 						 *(int *) ((char *) g_773da8 + 4));
 		} else {
-			fcn_004c5f60(*(int *) ((char *) arg2 + 4), *(int *) ((char *) ent + 1),
+			fcn_004c5f60(*(int *) ((char *) ent + 1), *(int *) ((char *) arg2 + 4),
 						 *(int *) ((char *) arg2 + 4));
 			flag = 1;
 		}
@@ -88,7 +88,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 						*(int *) (pkt + 0x30) = g_7f4c08;
 						*(unsigned short *) (pkt + 0x34) = g_7f4c0c;
 						pkt[0x36] = 1;
-						*(int *) (pkt + 0x58) = (int) arg2;
+						*(int *) (pkt + 0x58) = *(int *) it;
 						fcn_004c5530(pkt);
 					}
 				}
@@ -123,7 +123,6 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 					&& *(int *) it != *(int *) ((char *) arg1 + 4)) {
 					io_FormatTextBuffer(buf, 0x1c4d, *(unsigned short *) arg1);
 					fcn_00545d40(*(int *) it, -1, (int) buf, 0, 0x5fe, "_NACHRICHTEN_HS_70");
-					break;
 				}
 				it = (void *) ((char *) it + 0x21c);
 			} while ((int) it < (int) 0x85a0a4);
@@ -159,7 +158,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 				}
 				break;
 			}
-			if ((((unsigned char **) list)[i])[0x5a] == 0) {
+			if (((((unsigned char **) list)[i])[0x5a] & 1) == 0) {
 				io_FormatTextBuffer(buf, (int) "%1G$A", list[i]);
 			}
 			strcat(out, buf);

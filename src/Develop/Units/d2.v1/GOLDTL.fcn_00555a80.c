@@ -2,12 +2,12 @@
 typedef struct {
 	char p0[8];
 	unsigned short id;
-	char p10[0x42];
-	char name[0x52];
+	char pa[0x48];
+	char name[0x1a];
 	char p6c[4];
 	int state;
 	char* handle;
-	char p7c[0x30];
+	char p78[0x34];
 	unsigned char kind;
 	char paf[1];
 	int sub;
@@ -40,7 +40,7 @@ void __cdecl fcn_00555a80(Panel* p)
 
 	id = (int) p->id;
 	rec = (char*) g_7f4ca0 + id * 540;
-	if (p->id != g_774970) {
+	if (g_774970 != p->id) {
 		return;
 	}
 	if (g_774964 == 0) {
@@ -55,10 +55,12 @@ void __cdecl fcn_00555a80(Panel* p)
 	if (*(unsigned short*) rec == 0xffff) {
 		goto update;
 	}
-	if (p->state == 0) {
+	switch (p->state) {
+	case 0:
 		goto open;
-	}
-	if (p->state != 1) {
+	case 1:
+		break;
+	default:
 		return;
 	}
 	if (p->handle == 0) {
@@ -88,6 +90,7 @@ open:
 		fcn_00545670(p, 0, 0, (char*) 0x6a5ec4, 0x5ec);
 	}
 	if (p->handle == 0) {
+		fcn_00546190(p);
 		return;
 	}
 	fcn_00471b60(*(int*) (p->handle + 8));
@@ -104,7 +107,7 @@ open:
 		io_AppendText((int) p->kind + 0x16ec);
 		fcn_004c30a0(-8, 0, (char*) 0x6a5e98, (int) p->kind, 0x64);
 	}
-	fcn_004c30a0(-7, 0, (char*) 0x67d908, 0, -1);
+	fcn_004c30a0(-7, 0, (char*) 0x67d908, -1, 0);
 	d2_SetForm(*(int*) (p->handle + 8), 2);
 	io_AppendText(0x16f1);
 	p->state = 1;

@@ -19,15 +19,25 @@ extern int __cdecl fcn_004fdec0(const char *name);
 extern int __cdecl fcn_0053d490(int a, int b);
 extern int __cdecl fcn_0053e8a0(int a);
 extern int __cdecl fcn_0053cd40(int a);
-extern unsigned int *__cdecl fcn_00506d50(char *buf, int a);
+extern unsigned int *__cdecl fcn_00506d50(char *buf, unsigned char a);
 extern void __cdecl fcn_004432d0(int a, int b);
 extern int __cdecl fcn_005268c0(int a, int b);
 extern int __cdecl fcn_0053c560(int a);
+extern char g_14cf950;
+extern int g_100f1dc;
+extern int g_14ce8e0;
+extern int g_67d370;
+extern int g_7725c8;
+extern int g_774654;
+extern int g_7e242c;
+extern int g_7e2468;
+extern int g_7e46ac;
 
 /* ADDRESS: GOLDTL 0x0053dc20 */
 int __cdecl fcn_0053dc20(void)
 {
 	char buf[8];
+	int retry;
 	int again;
 	int v10;
 	int v11;
@@ -41,10 +51,11 @@ int __cdecl fcn_0053dc20(void)
 	int dlg;
 	unsigned int *p;
 
+	retry = 0;
 	again = 0;
-	v2 = 0;
 	v12 = -1;
 	v13 = 0xff;
+	v2 = 0;
 	obj = fcn_00470820(0, 0, (const char *) 0x68116c);
 	fcn_00471b60(obj);
 	d2_SetForm(obj, 0);
@@ -85,19 +96,19 @@ label_53dd68:
 			return again;
 		}
 		d2_UpdateRadioGroup(dlg);
-		if (*(int *) 0x14ce8e0 || *(char *) 0x14cf950 == 1) {
-			*(int *) 0x774654 = 1;
+		if (g_14ce8e0 || g_14cf950 == 1) {
+			g_774654 = 1;
 		}
-		if (*(int *) 0x100f1dc == 2 || *(char *) 0x14cf950 == 0x1c || again) {
+		if (g_100f1dc == 2 || g_14cf950 == 0x1c || retry) {
 			if (v2) {
 				goto label_53de5c;
 			}
-			if (*(int *) 0x67d370 != v10) {
-				if (*(int *) 0x67d370 == v12) {
+			if (g_67d370 != v10) {
+				if (g_67d370 == v12) {
 					mode = 2;
 					goto label_53de0b;
 				}
-				if (*(int *) 0x67d370 == v11 || *(char *) 0x14cf950 == 0x1c) {
+				if (g_67d370 == v11 || g_14cf950 == 0x1c) {
 					mode = 0;
 					fcn_004b20d0(mode);
 				}
@@ -123,11 +134,11 @@ label_53de37:
 			fcn_00471af0(obj, 1);
 label_53de5c:
 			fcn_00471af0(obj, 0);
-			again = 0;
+			retry = 0;
 			if (v13 != 0xff || v2) {
-				*(int *) 0x7e242c = v13;
+				g_7e242c = v13;
 				if (!v2) {
-					*(int *) 0x7e46ac = 0x12d6;
+					g_7e46ac = 0x12d6;
 					fcn_004e44f0(fcn_004e4470((const char *) 0x6a4040));
 				}
 				v2 = 0;
@@ -142,33 +153,33 @@ label_53de5c:
 							}
 						} else {
 							if (fcn_0053cd40(0xc6)) {
-								p = fcn_00506d50(buf, *(int *) 0x7e23e3);
+								p = fcn_00506d50(buf, *(unsigned char *) 0x7e23e3);
 								*(int *) 0x7e2430 = *p;
 								*(char *) 0x7e2434 = (char) *(unsigned short *) &p[1];
-								*(int *) 0x7e2468 =
+								g_7e2468 =
 								    fcn_004fdec0((const char *) 0x6a3db4) + 0x639;
 								goto label_53df85;
 							}
 							fcn_004432d0(0, 0);
 							again = 0;
-							v2 = 0;
+							retry = 1;
 						}
 					} else {
-						*(int *) 0x7725c8 = v4;
+						g_7725c8 = v4;
 						*(int *) 0x6a37f8 = fcn_005268c0(*(int *) 0x14abf04, 0);
 						if (fcn_0053c560(0)) {
 label_53df85:
 							again = 1;
-							*(int *) 0x774654 = 1;
+							g_774654 = 1;
 						} else {
 							fcn_004432d0(0, 0);
 							v2 = 1;
 						}
 					}
 				} else {
-					*(int *) 0x7e46ac = 0x12d6;
+					g_7e46ac = 0x12d6;
 					fcn_004e44f0(fcn_004e4470((const char *) 0x6a4024));
-					v2 = 0;
+					retry = 1;
 				}
 			}
 			fcn_00471af0(obj, 1);
@@ -176,9 +187,9 @@ label_53df85:
 			if (v2) {
 				goto label_53de5c;
 			}
-			v2 = 0;
-			if (*(int *) 0x100f1dc == 1) {
-				*(int *) 0x774654 = 1;
+			retry = 0;
+			if (g_100f1dc == 1) {
+				g_774654 = 1;
 			}
 		}
 		r = fcn_005373e0(0x53dc20, 0xc6);

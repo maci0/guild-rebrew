@@ -1,3 +1,11 @@
+#pragma pack(push, 1)
+typedef struct { unsigned char unknown00[0x243]; unsigned int period; unsigned char unknown247[6]; } Building5744c0;
+#pragma pack(pop)
+extern unsigned char* lpGebaeudePROT;
+extern char* lpGebaeudeINST;
+extern int g_6b8010;
+extern char* g_773da8;
+extern unsigned char g_773d75;
 char __cdecl fcn_00413680(int, int, void*, void*);
 int __cdecl fcn_00415300(int);
 int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
@@ -48,7 +56,7 @@ int __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl fcn_0064d228();
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
-double __cdecl sqrt();
+double __cdecl sqrt(double);
 
 /* ADDRESS: GOLDTL 0x005744c0 */
 void __cdecl fcn_005744c0(int a0)
@@ -75,7 +83,7 @@ void __cdecl fcn_005744c0(int a0)
 	char v22[0x200];
 
 	v5 = a0;
-	v30 = *(int*) 0x6b8010;
+	v30 = g_6b8010;
 	v15 = 0;
 	if (*(int*) (v5 + 0x84) != -1 && !fcn_004c4450(*(int*) (v5 + 0x84))) {
 		return;
@@ -88,11 +96,11 @@ void __cdecl fcn_005744c0(int a0)
 			|| !(*(unsigned char*) (v5 + 0x78) & 2)) {
 			break;
 		}
-		if (*(int*) (v5 + 0xac) != *(int*) (*(int*) 0x773da8 + 4)) {
+		if (*(int*) (v5 + 0xac) != *(int*) ((int) g_773da8 + 4)) {
 			v8 = fcn_00508e40(*(int*) (v5 + 0xac));
 			if (v8) {
 				*(int*) (v5 + 0xcc) = fcn_004c5150(-1, *(int*) (v5 + 0xac),
-					(v8 & 0xffffff00) | *(unsigned char*) 0x773d75, *(int*) (v5 + 0xb4));
+					(v8 & 0xffffff00) | g_773d75, *(int*) (v5 + 0xb4));
 				v8 = fcn_00509570(v8);
 				if (v8) {
 					*(int*) (v8 + 0x54) = *(int*) (v8 + 0x54) + *(int*) (v5 + 0xb4);
@@ -174,7 +182,7 @@ LfailB:
 		}
 		fcn_00510820(*(int*) (v15 + 0x61), v15, 2);
 		v8 = *(unsigned char*) v15;
-		v27 = *(int*) 0x868050 + v8 * 0x24d;
+		v27 = (int) &((Building5744c0*) lpGebaeudePROT)[v8];
 		if (*(int*) 0x774800) {
 			*(int*) (v5 + 0xc4) = fcn_00574150(v5);
 			*(int*) (v5 + 0xc0) = 10;
@@ -182,7 +190,7 @@ LfailB:
 		else {
 			v11 = fcn_00574150(v5);
 			*(int*) (v5 + 0xc4) = v11;
-			*(int*) (v5 + 0xc0) = *(unsigned int*) (v27 + 0x243) * 0x3fc / v11;
+			*(int*) (v5 + 0xc0) = ((Building5744c0*) v27)->period * 0x3fc / v11;
 		}
 		*(int*) (v5 + 0xc8) = 0;
 		fcn_00500bb0((void*) (v5 + 0x52), 0, 1, 0);
@@ -203,18 +211,18 @@ LfailB:
 		v29 = 0.0f;
 		v11 = 0;
 		do {
-			v14 = (unsigned char*) (v11 + *(int*) 0x90e094);
+			v14 = (unsigned char*) (v11 + (int) lpGebaeudeINST);
 			if (v14 != v15 && *v14 && (v24 = *(int*) (v14 + 0x61)) != 0) {
 				fcn_00455350((char*) v24, (char*) (v24 + 0x4c), v17);
 				v17[0] = v17[0] - *(float*) (v16 + 0x40);
 				v17[1] = v17[1] - *(float*) (v16 + 0x44);
 				v17[2] = v17[2] - *(float*) (v16 + 0x48);
-				v29 = (float) sqrt(v17[0] * v17[0] + v17[1] * v17[1] + v17[2] * v17[2]);
+				v29 = (float) sqrt(v17[2] * v17[2] + v17[1] * v17[1] + v17[0] * v17[0]);
 				if (v29 < v21
-					&& fcn_00445600(*(int*) (v11 + *(int*) 0x90e094 + 0x61),
+					&& fcn_00445600(*(int*) (v11 + (int) lpGebaeudeINST + 0x61),
 						0x100, 0, 0x68149c)) {
 					v21 = v29;
-					v13 = v11 + *(int*) 0x90e094;
+					v13 = v11 + (int) lpGebaeudeINST;
 				}
 			}
 			v11 += 0xa9;
@@ -317,15 +325,15 @@ LfailB:
 			v13 = 0;
 			v11 = 0;
 			do {
-				v14 = (unsigned char*) (v11 + *(int*) 0x90e094);
+				v14 = (unsigned char*) (v11 + (int) lpGebaeudeINST);
 				if (v14 != v15 && *v14 && (v24 = *(int*) (v14 + 0x61)) != 0) {
 					fcn_00455350((char*) v24, (char*) (v24 + 0x4c), v17);
 					v17[0] = v17[0] - *(float*) (v20 + 0);
 					v17[1] = v17[1] - *(float*) (v20 + 4);
 					v17[2] = v17[2] - *(float*) (v20 + 8);
-					v29 = (float) sqrt(v17[0] * v17[0] + v17[1] * v17[1] + v17[2] * v17[2]);
+					v29 = (float) sqrt(v17[2] * v17[2] + v17[1] * v17[1] + v17[0] * v17[0]);
 					if (v29 < v21
-						&& (v24 = fcn_00445600(*(int*) (v11 + *(int*) 0x90e094 + 0x61),
+						&& (v24 = fcn_00445600(*(int*) (v11 + (int) lpGebaeudeINST + 0x61),
 							0x100, 0, 0x68149c)) != 0) {
 						v21 = v29;
 						v13 = v24;
@@ -346,7 +354,7 @@ LfailB:
 		*(int*) (v5 + 0xc8) = *(int*) (v5 + 0xc8) + v36 / v11;
 		*(int*) (v5 + 0xb4) = v36 % v11;
 		fcn_00500bb0((void*) (v5 + 0x52), 0, v11, 0);
-		if (*(int*) 0x6b8010 == 0) {
+		if (g_6b8010 == 0) {
 			if (*(int*) (v5 + 0xc8) <= *(int*) (v5 + 0xc4)) {
 				fcn_00573e10(v5);
 			}

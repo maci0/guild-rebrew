@@ -72,11 +72,13 @@ void __cdecl fcn_0044a9f0(MeshObj* m)
 	max = max + 1;
 	m_FreeTracked(counts);
 	repeat = (int*) m_alloc(m->nverts * max * 4, (char*) 0x67ae90);
+	corner = 0;
 	for (f = 0; f < m->nfaces; f++) {
 		for (k = 0; k < 3; k++) {
 			v = m->faces[f].idx[k];
-			repeat[v * max + 1 + repeat[v * max]] = k | 0x40000000;
+			repeat[v * max + 1 + repeat[v * max]] = corner | 0x40000000;
 			repeat[v * max]++;
+			corner++;
 		}
 	}
 	total = 0;

@@ -11,8 +11,10 @@
  * returns 1.
  */
 
-#define MIN(a, b) ((a) > (b) ? (b) : (a))
-#define MAX(a, b) ((a) < (b) ? (b) : (a))
+#include "client_lighting.h"
+
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 typedef struct S143b0Box {
 	char* obj;
@@ -64,8 +66,8 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 	if (fcn_00413480(self, box.level, box.pt[0], box.pt[1], box.pt[2], box.pt[3]) != 0) {
 		goto fail;
 	}
-	if (*(int*) 0x6b8300 != 0) {
-		if (fcn_00413c40((char*) *(int*) 0x6b8300, &box.loAligned, &box.hiAligned, box.pt[0], box.pt[1], box.pt[2], box.pt[3]) != 0) {
+	if (g_6b8300 != 0) {
+		if (fcn_00413c40((char*) g_6b8300, &box.loAligned, &box.hiAligned, box.pt[0], box.pt[1], box.pt[2], box.pt[3]) != 0) {
 			goto fail;
 		}
 		if (arg1 != 0) {
@@ -80,10 +82,10 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 	}
 	box.minX = MIN(MIN(MIN(box.pt[0][0], box.pt[1][0]), box.pt[2][0]), box.pt[3][0]);
 	box.loX = box.lo;
-	box.minY = MIN(MIN(MIN(box.pt[0][1], box.pt[1][1]), box.pt[2][1]), box.pt[3][1]);
+	box.minY = MIN(MIN(MIN(box.pt[0][2], box.pt[1][2]), box.pt[2][2]), box.pt[3][2]);
 	box.maxX = MAX(MAX(MAX(box.pt[0][0], box.pt[1][0]), box.pt[2][0]), box.pt[3][0]);
 	box.hiX = box.hi;
-	box.maxY = MAX(MAX(MAX(box.pt[0][1], box.pt[1][1]), box.pt[2][1]), box.pt[3][1]);
+	box.maxY = MAX(MAX(MAX(box.pt[0][2], box.pt[1][2]), box.pt[2][2]), box.pt[3][2]);
 	node = self;
 	next = *(char**) (node + 0x1f8);
 	while (next != 0) {
@@ -97,7 +99,7 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 		}
 		node = *(char**) (node + 0x1f4);
 	} while (node != 0);
-	if (ok != 0 && *(int*) 0x6b8300 == 0) {
+	if (ok != 0 && g_6b8300 == 0) {
 		goto fail;
 	}
 pick:
@@ -106,8 +108,8 @@ pick:
 	} else {
 		value = box.hiAligned;
 	}
-	*(float*) (self + 0x50) = value - box.lo + *(float*) (self + 0x50);
 	*(unsigned char*) (self + 0x214) |= 4;
+	*(float*) (self + 0x50) = value - box.lo + *(float*) (self + 0x50);
 	if (link != 0) {
 		fcn_004458e0(self, link);
 	}

@@ -148,18 +148,18 @@ void __cdecl fcn_005cd810(int a0)
 				}
 				if (!rec[i].text4) {
 					f = fcn_004fef80(ent);
-					if (f >= g_662cf8) {
-						if (f >= g_664e88) {
-							if (f >= g_6660d4)
-								rec[i].text4 = 0x6cf;
-							else
-								rec[i].text4 = 0x6d0;
-						} else {
-							rec[i].text4 = 0x6d1;
-						}
-					} else {
+					if (f < g_662cf8)
 						rec[i].text4 = 0x6d2;
-					}
+					else if (f < g_664e88)
+						rec[i].text4 = 0x6d1;
+					else if (f < g_6660d4)
+						rec[i].text4 = 0x6d0;
+					else
+						rec[i].text4 = 0x6cf;
+
+
+
+
 				}
 			}
 			p = (char*) sel2;

@@ -123,10 +123,10 @@ void __cdecl fcn_004ad6a0(void)
 			msg.unk_68 = v;
 			msg.unk_6c = id;
 			fcn_004c5530((char*) &msg);
-			for (rec = g_7f4ca0; (int) rec < 0x85a0a0; rec += 0x21c) {
-				if (*(unsigned short*) rec != 0xffff && rec != best &&
-				    (rec[2] == 6 || rec[2] == 7)) {
-					msg.id = *(int*) (rec + 4);
+			for (rec = g_7f4ca0 + 2; (int) rec < (int) g_7f4ca0 + 0x65402; rec += 0x21c) {
+				if (*(unsigned short*) (rec - 2) != 0xffff && rec - 2 != best &&
+				    (*rec == 6 || *rec == 7)) {
+					msg.id = *(int*) (rec + 2);
 					fcn_004c5530((char*) &msg);
 				}
 			}

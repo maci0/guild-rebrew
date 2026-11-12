@@ -1,3 +1,4 @@
+#include <string.h>
 /* SIZE 0x21c */
 typedef struct {
 	char f0[4];
@@ -46,6 +47,7 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 	char text[0x400];
 	char ev[0xf8];
 	float f;
+	Slot5c06* me;
 
 	result = 0;
 	if (!a0)
@@ -61,6 +63,7 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 		fcn_00526120(text, 0);
 		return 0;
 	}
+	me = &g_7f4ca0[g_774970];
 	r = CountMatchingStraftatEntries(*(int*) (a0 + 2), g_774970);
 	if (r <= 0) {
 		io_FormatTextBuffer(text, 0x1756, *a0);
@@ -76,6 +79,7 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 	t = io_AppendText(0x1759, r, (r != 1) + 0x1752, *a0, *a0);
 	h1 = fcn_00472250(dlg, 1, t);
 	h2 = fcn_00472250(dlg, 1, t + 1);
+	memset(ids, 0xff, sizeof(ids));
 	ids[0] = dlg;
 	ids[1] = 2;
 	ids[2] = 3;
@@ -89,19 +93,19 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (g_67d370 == h1) {
-				fcn_004c6ae0(g_7f4ca0[g_774970].f4, -2);
-				f = fcn_00507e70(&g_7f4ca0[g_774970], a0, 4);
-				if (gm_RandomFloat01() + f < g_6628a0) {
-					io_FormatTextBuffer(text, 0x175c, *a0, *a0);
-				} else {
+				fcn_004c6ae0(me->f4, -2);
+				f = fcn_00507e70(me, a0, 4);
+				if (gm_RandomFloat01() + f >= g_6628a0) {
 					ev[4] = 0x2e;
 					*(int*) (ev + 8) = *(int*) (a0 + 2);
 					*(int*) (ev + 0xc) = -1;
 					ev[0x36] = 2;
-					*(int*) (ev + 0x5c) = g_7f4ca0[g_774970].f4;
+					*(int*) (ev + 0x5c) = me->f4;
 					*(int*) (ev + 0x58) = *(int*) (a0 + 2);
 					fcn_004c5530(ev);
 					io_FormatTextBuffer(text, 0x175b, *a0);
+				} else {
+					io_FormatTextBuffer(text, 0x175c, *a0, *a0);
 				}
 				fcn_00526120(text, 0);
 				g_774654 = 1;

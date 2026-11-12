@@ -137,7 +137,7 @@ int __cdecl fcn_005aacd0(unsigned char* a1, int a2, int a3)
 	if (r != 0) {
 		fcn_00514400(*(unsigned short*) r, 1, 1, f.txt204);
 	} else {
-		src = *(char**) 0x14abc28;
+		src = *(char**) 0x1440ac8;
 		dst = f.txt204;
 		do {
 			c = *src++;
@@ -157,6 +157,6 @@ int __cdecl fcn_005aacd0(unsigned char* a1, int a2, int a3)
 	fcn_00475f60(*(int*) (book + 0x228), 3);
 	fcn_00515990(0x62cbe0);
 	fcn_00515990(0x62cbe0);
-	f.msg.f0c = fcn_00515990(0x1a20);
+	f.msg.f0c = fcn_00475b70(*(int*) (book + 0x228), 3, fcn_00515990(0x1a20));
 	return 0;
 }

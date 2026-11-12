@@ -23,16 +23,18 @@ int __cdecl fcn_00445600(int, int, int, char *);
 void __cdecl fcn_00442c00(int, int);
 void __cdecl fcn_00508c30(int, void *);
 void __cdecl fcn_00442d50(int, int);
-int __cdecl fcn_00502cd0(int, int, int, int);
+int __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl gm_FindRecordById(int);
 int __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_00455350(int, int, void *);
 int __cdecl fcn_004488e0(char *, int, int);
 void __cdecl fcn_00438b40(int, void *);
 void __cdecl fcn_0045b290(int, int);
-int __cdecl fcn_0050c710(int, int, int, int);
-int __cdecl gm_CheckEntityType(void *, int, int, int);
+int __cdecl fcn_0050c710(int, int, int);
+int __cdecl gm_CheckEntityType(void *);
 #include "Develop/DieGildeAddOn/game/game_data.h"
+extern char g_7e1ae0[];
+typedef struct BuildingRow4d1ff0 { unsigned char kind; char fields[0x24c]; } BuildingRow4d1ff0;
 /* ADDRESS: GOLDTL 0x004d1ff0 */
 void __cdecl fcn_004d1ff0(void *arg)
 {
@@ -70,10 +72,10 @@ void __cdecl fcn_004d1ff0(void *arg)
 			fcn_004e4730("Kampfszenario_BERGPASS.ed3");
 		} else {
 			ent = (int) gm_StartFilteredEntitySearch(1, 1, *(int *) (o + 0x14));
-			r = gm_CheckEntityType((void *) ent, 1, 1, *(int *) (o + 0x14));
+			r = gm_CheckEntityType((void *) ent);
 			ty = *(unsigned char *) ent;
 			if (r == 0) {
-				base = *(int *) &lpGebaeudePROT + ty + ty * 0x24c;
+				base = (int) &((BuildingRow4d1ff0*) lpGebaeudePROT)[ty];
 				c = *(unsigned char *) base;
 				if (c == 4) {
 					c = *(unsigned char *) (base + 0x247);
@@ -93,7 +95,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 						fcn_004e4730("Kampfszenario_STADTWACHE_GROSS.ed3");
 				}
 			} else {
-				c = *(unsigned char *) (*(int *) &lpGebaeudePROT + ty * 0x24d);
+				c = ((BuildingRow4d1ff0*) lpGebaeudePROT)[ty].kind;
 				if (c == 0x10) {
 					fcn_004e4730("Kampfszenario_RAEUBERLAGER.ed3");
 					mode = 0xf;
@@ -276,7 +278,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 			if (*p == -1) {
 				fcn_00442d50(h, 0);
 			} else {
-				ent = (int) fcn_00502cd0(0, 2, 7, 1);
+				ent = (int) fcn_00502cd0(0, 2, 7, 1, *p);
 				if (ent == 0) {
 					gm_FindRecordById(*p);
 					*p = -1;
@@ -295,13 +297,13 @@ void __cdecl fcn_004d1ff0(void *arg)
 					fcn_00455350(h, (int) h + 0x4c, pathbuf);
 					switch (*(short *) ent) {
 					case 0x134:
-						fcn_0064d41a(buf, "%s*ob_KARREN_KLEIN_KAMPF.ogr", "");
+						fcn_0064d41a(buf, "%s*ob_KARREN_KLEIN_KAMPF.ogr", g_7e1ae0);
 						break;
 					case 0x135:
-						fcn_0064d41a(buf, "%s*ob_KARREN_MITTEL_KAMPF.ogr", "");
+						fcn_0064d41a(buf, "%s*ob_KARREN_MITTEL_KAMPF.ogr", g_7e1ae0);
 						break;
 					case 0x136:
-						fcn_0064d41a(buf, "%s*ob_KARREN_GROSS_KAMPF.ogr", "");
+						fcn_0064d41a(buf, "%s*ob_KARREN_GROSS_KAMPF.ogr", g_7e1ae0);
 						break;
 					default:
 						break;
@@ -310,7 +312,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 					fcn_00438b40(e, pathbuf);
 					*(int *) (e + 0x204) = ent;
 					for (j = 0; j < 3; j++) {
-						fcn_0064d41a(buf, "WARE_0%i", (unsigned char) ids[j] + 1);
+						fcn_0064d41a(buf, "WARE_0%i", ids[j] + 1);
 						h = fcn_00445600(0, 0xc0, 0, buf);
 						if (h != 0) {
 							if (n - 1 < j)
@@ -344,7 +346,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 				}
 			}
 			if (first != 0) {
-				cur = fcn_0050c710(first, 6, 1, mode);
+				cur = fcn_0050c710(first, 6, 1);
 				*(float *) 0x68b798 = (float) cur + 1.4f;
 				return;
 			}

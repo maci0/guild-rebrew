@@ -163,7 +163,7 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 						material = info.pol[k].idx[n];
 						if (material == j) {
 							material = i;
-						} else if (material > 0) {
+						} else if (material > j) {
 							material--;
 						}
 						info.pol[k].idx[n] = material;
@@ -171,6 +171,7 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 				}
 				info.anzahl_poi--;
 				memmove(&info.poi[j], &info.poi[j + 1], (info.anzahl_poi - j) * sizeof(FL_POI));
+				j--;
 			}
 		}
 	}

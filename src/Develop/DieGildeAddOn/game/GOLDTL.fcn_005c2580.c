@@ -96,8 +96,8 @@ void __cdecl fcn_005c2580(char* e)
 				*(unsigned char*) (msg + 4) = 0x1c;
 				*(int*) (msg + 0xc) = -1;
 				*(unsigned char*) (msg + 0x36) = 1;
-				*(int*) (msg + 8) = *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c + 4);
-				*(int*) (msg + 0x58) = id;
+				*(int*) (msg + 8) = *(int*) (g_7f4ca0 + (unsigned int) g_774970 * 0x21c + 4);
+				*(int*) (msg + 0x58) = *(int*) (e + 1);
 				if (g_67d370 == h0) {
 					dur = (int) (n * 0.25);
 					val = c;
@@ -120,16 +120,16 @@ void __cdecl fcn_005c2580(char* e)
 						fcn_004c4ef0("renovieren");
 						g_774654 = 1;
 					}
-				} else if (fcn_00526010(g_7f4ca0 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c, val, (char) g_773d75) != 0) {
+				} else if (fcn_00526010(g_7f4ca0 + (unsigned int) g_774970 * 0x21c, val, (char) g_773d75) != 0) {
 					char* q;
 
-					q = gm_GetEntityTableEntry(g_7f4ca0 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c);
+					q = gm_GetEntityTableEntry(g_7f4ca0 + (unsigned int) g_774970 * 0x21c);
 					if (q != 0) {
 						*(int*) (q + 0x44) += val;
 					}
 					*(int*) (msg + 0x5c) = dur;
 					fcn_004c4eb0("renovieren");
-					fcn_004c5150(-1, *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c + 4), (char) g_773d75, val);
+					fcn_004c5150(-1, *(int*) (g_7f4ca0 + (unsigned int) g_774970 * 0x21c + 4), (char) g_773d75, val);
 					fcn_004c5530(msg);
 					fcn_004c4ef0("renovieren");
 					g_774654 = 1;

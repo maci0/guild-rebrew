@@ -5,7 +5,7 @@ typedef struct {
 } blk19;
 // SIZE 0x19
 
-blk19 g_68cb58 = { { 0x62, 0x65, 0x77, 0x65 } };
+blk19 g_68cb58 = { "bewegung/zu_boden_sinken" };
 extern int g_772f44;
 
 double __cdecl fcn_004ff040(char*);

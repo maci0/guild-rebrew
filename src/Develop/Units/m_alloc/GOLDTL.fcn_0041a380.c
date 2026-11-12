@@ -1,5 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
+#include "g_6b5dd0.h"
+extern Adapter* g_6b5dd0;
+extern void* g_6b5ddc;
+extern unsigned int g_6b5de8;
 
 /* Display mode record enumerated for one adapter. */
 typedef struct {
@@ -27,9 +31,9 @@ extern void __cdecl fcn_0041a2c0(int index);
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern int __cdecl fcn_0041a8d0(const void* a, const void* b);
 
-#define D3D (*(int*) 0x6b5ddc)
-#define ADAPTERS (*(int*) 0x6b5dd0)
-#define ADAPTERCOUNT (*(unsigned int*) 0x6b5de8)
+#define D3D g_6b5ddc
+#define ADAPTERS ((char*)g_6b5dd0)
+#define ADAPTERCOUNT g_6b5de8
 #define VTBL(off) (*(int*) (*(int*) D3D + (off)))
 #define MODES ((int*) (*(int*) (ADAPTERS + offset + 0x504)))
 #define MODECOUNT (*(unsigned int*) (ADAPTERS + offset + 0x500))
@@ -50,14 +54,14 @@ int __cdecl fcn_0041a380(unsigned int minWidth, unsigned int minHeight, unsigned
 
 	if (D3D == 0) {
 		r = (int) Direct3DCreate8(0xdc);
-		D3D = r;
+		D3D = (void*)r;
 		if (r == 0)
 			goto done;
 	}
 	while (ADAPTERCOUNT > 0)
 		fcn_0041a2c0(0);
 	ADAPTERCOUNT = (unsigned int) ((ADAPTERCOUNTFN) VTBL(0x10))((void*) D3D);
-	ADAPTERS = (int) m_alloc(ADAPTERCOUNT * 0x508, "dd:AdapterInfo");
+	g_6b5dd0 = (Adapter*)m_alloc(ADAPTERCOUNT * 0x508, "dd:AdapterInfo");
 	offset = 0;
 	for (i = 0; i < ADAPTERCOUNT; i++) {
 		((ADAPTERIDENTFN) VTBL(0x14))((void*) D3D, i, 2,
@@ -89,7 +93,7 @@ int __cdecl fcn_0041a380(unsigned int minWidth, unsigned int minHeight, unsigned
 			if (MODEAT(i2)[0] < minWidth || MODEAT(i2)[1] < minHeight
 			    || ((CHECKTYPEFN) VTBL(0x24))((void*) D3D, i, 1, fmt, fmt,
 				windowed) < 0
-			    || (windowed && fmt != cur.format)) {
+			    || (windowed && MODEAT(i2)[3] != cur.format)) {
 				--MODECOUNT;
 				memmove((void*) MODEAT(i2), (void*) (MODEAT(i2) + 4),
 					(MODECOUNT - i2) * 0x10);
@@ -98,20 +102,20 @@ int __cdecl fcn_0041a380(unsigned int minWidth, unsigned int minHeight, unsigned
 			}
 			MODEAT(i2)[2] = 0;
 			if (reliable) {
-				if (((CHECKFORMATFN) VTBL(0x28))((void*) D3D, i, 1, fmt,
+				if (((CHECKFORMATFN) VTBL(0x28))((void*) D3D, i, 1, MODEAT(i2)[3],
 					2, 1, 0x47) >= 0
 				    && ((CHECKDSMATCHFN) VTBL(0x30))((void*) D3D, i, 1,
-					fmt, fmt, 0x47) >= 0) {
+					MODEAT(i2)[3], MODEAT(i2)[3], 0x47) >= 0) {
 					MODEAT(i2)[2] = 0x47;
 				} else if (((CHECKFORMATFN) VTBL(0x28))((void*) D3D, i, 1,
-					fmt, 2, 1, 0x4d) >= 0
+					MODEAT(i2)[3], 2, 1, 0x4d) >= 0
 				    && ((CHECKDSMATCHFN) VTBL(0x30))((void*) D3D, i, 1,
-					fmt, fmt, 0x4d) >= 0) {
+					MODEAT(i2)[3], MODEAT(i2)[3], 0x4d) >= 0) {
 					MODEAT(i2)[2] = 0x4d;
 				} else if (((CHECKFORMATFN) VTBL(0x28))((void*) D3D, i, 1,
-					fmt, 2, 1, 0x50) >= 0
+					MODEAT(i2)[3], 2, 1, 0x50) >= 0
 				    || ((CHECKDSMATCHFN) VTBL(0x30))((void*) D3D, i, 1,
-					fmt, fmt, 0x50) < 0) {
+					MODEAT(i2)[3], MODEAT(i2)[3], 0x50) < 0) {
 					MODEAT(i2)[2] = 0x50;
 				} else {
 					--MODECOUNT;

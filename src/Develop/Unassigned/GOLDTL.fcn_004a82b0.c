@@ -25,6 +25,7 @@ int __cdecl fcn_004a82b0(void)
 		} else {
 			res[i] = fcn_004a8070(i, &a[i], &c[i], &b[i], &d[i]);
 			*(int*) (tbl + i * 0x34 + 0x34) = res[i];
+			tbl = g_1007cd4;
 		}
 	}
 	sel = 0;
@@ -155,7 +156,7 @@ int __cdecl fcn_004a82b0(void)
 	case 4:
 		x = fcn_004a77f0((int*) (tbl + sel * 0x34 + 0xc), 0);
 		y = fcn_004a77f0((int*) (tbl + 0x74), 0);
-		if (x > y) {
+		if (x <= y) {
 			sel = 2;
 		}
 		*(int*) (tbl + 0xbc) = res[sel];

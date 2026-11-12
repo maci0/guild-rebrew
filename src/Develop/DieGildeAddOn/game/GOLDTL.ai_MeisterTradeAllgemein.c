@@ -104,7 +104,7 @@ extern int g_772620;
 extern float g_6628a0;
 extern float g_664144;
 
-int __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_0047d1b0(void);
 int __cdecl fcn_0047d1e0(void);
 int __cdecl fcn_004c51f0(int, int, int, int, int, int);
@@ -120,7 +120,7 @@ int __cdecl fcn_0050cce0(char*, void*, int);
 int __cdecl gm_AccumulateTyped2(void*);
 int __cdecl fcn_0050de80(char*, Stats*);
 int __cdecl fcn_0050dfd0(void*, int);
-int __cdecl he_fn_Handlung(void);
+char* __cdecl he_fn_Handlung(void);
 char* __cdecl fcn_005463a0(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0048b220 */
@@ -185,14 +185,14 @@ int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld)
 				}
 				fr = eval_ObjektPreis2Credits(t->id, 100);
 				fr = fr / fcn_0050bb50(t->id, g_773d75);
-				if (fr >= g_6628a0) {
+				if (!(fr < g_6628a0)) {
 					continue;
 				}
-				if (gm_RandomFloat01() * g_664144 < fr) {
+				if (!(gm_RandomFloat01() * g_664144 >= fr)) {
 					continue;
 				}
 				t->qty44 = t->qty3c;
-				if (o != (char*) 0x100e748) {
+				if (o != *(char**) 0x100e748) {
 					continue;
 				}
 				sprintf(v.line, (char*) 0x67e6cc, t->qty44,
@@ -236,7 +236,7 @@ int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld)
 					t->qty44 = tmp < t->qty3c ?
 					    tmp : t->qty3c;
 					acc += tmp * price;
-					if (o == (char*) 0x100e748) {
+					if (o == *(char**) 0x100e748) {
 						sprintf(v.line,
 						    (char*) 0x67e6ac,
 						    t->qty44,
@@ -267,7 +267,7 @@ clear_stack:
 					tmp = t->qty3c;
 				}
 				t->qty44 = tmp;
-				if (o == (char*) 0x100e748) {
+				if (o == *(char**) 0x100e748) {
 					sprintf(v.line, (char*) 0x67e674,
 					    tmp, *(char**) 0x99ec10 +
 					    t->id * 0x40 + t->id + 1);
@@ -325,17 +325,11 @@ next_request:
 			    *(int*) (*(char**) (o + 0x16c) + 1),
 			    2, 0, 0xb, 3);
 
+			while (x != 0 && *(int*) (x + 0xac) != *(int*) (r + 2)) {
+				x = he_fn_Handlung();
+			}
 			if (x != 0) {
-				while (*(int*) (x + 0xac) !=
-				    *(int*) (r + 2)) {
-					if (!he_fn_Handlung()) {
-						break;
-					}
-				}
-				if (*(int*) (x + 0xac) ==
-				    *(int*) (r + 2)) {
-					goto Tail;
-				}
+				goto Tail;
 			}
 		}
 		/* 0x572-0x975: collect the cart's stock */
@@ -607,7 +601,7 @@ next_collect:
 		if (cnt < 3) {
 			for (i = 0;
 			    i < *(int*) 0x100b0ac && cnt < 3; i++) {
-				Town* w = (Town*) 0x100d104 + i;
+				Town* w = (Town*) 0x100d0c0 + i;
 
 				if (w->qty44 == 0) {
 					continue;
@@ -739,7 +733,7 @@ next_collect:
 		}
 		/* 0x14ff-0x1550: log and send */
 		if (sent) {
-			if (o == (char*) 0x100e748) {
+			if (o == *(char**) 0x100e748) {
 				for (i = 0; i < 3; i++) {
 					if (v.m.ids[i] != 0) {
 						sprintf(v.line,

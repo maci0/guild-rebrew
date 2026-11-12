@@ -18,6 +18,7 @@ int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
 	unsigned int i;
 	unsigned int idx;
 	unsigned int bit;
+	unsigned int byte_offset;
 	OctNode** pp;
 
 	g_6b6f40 = malloc(0x20004);
@@ -44,8 +45,9 @@ int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
 			for (pp = g_6b6f20 + 4; (int) pp >= (int) g_6b6f20; pp--) {
 				bit = idx & 7;
 				idx >>= 3;
-				(*pp)[idx].key += c;
-				(*pp)[idx].mask |= (unsigned char) (1 << bit);
+				byte_offset = idx * sizeof(OctNode);
+				((OctNode*) ((char*) *pp + byte_offset))->key += c;
+				((OctNode*) ((char*) *pp + byte_offset))->mask |= (unsigned char) (1 << bit);
 			}
 		}
 	}

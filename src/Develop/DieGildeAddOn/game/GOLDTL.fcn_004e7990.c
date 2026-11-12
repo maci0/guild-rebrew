@@ -1,15 +1,16 @@
 #include <stdlib.h>
+#include "client_types.h"
 
-int __cdecl fcn_004e6f10(unsigned char);
-void __cdecl fcn_004e8b40(unsigned char, char*);
+int __cdecl fcn_004e6f10(int);
+int __cdecl fcn_004e8b40(int, Rec18_68da68*);
 void __cdecl fcn_004f4830(int, int*);
-int __cdecl gm_MapEntityStatRange(unsigned char);
+int __cdecl gm_MapEntityStatRange(int);
 
 /* ADDRESS: GOLDTL 0x004e7990 */
-float __cdecl fcn_004e7990(int a0, int a1, int a2, int a3)
+float __cdecl fcn_004e7990(int a0, int a1, unsigned int a2, int a3)
 {
 	float v;
-	char v9[0x18];
+	Rec18_68da68 v9;
 	int v10[9];
 	float v14;
 	int i;
@@ -18,9 +19,9 @@ float __cdecl fcn_004e7990(int a0, int a1, int a2, int a3)
 	int v7;
 	int* tbl;
 
-	v = 0.0f;
 	i = fcn_004e6f10(*(unsigned char*) (a1 + 0x166));
-	if (i >= 1 && i <= 6) {
+	v = 0.0f;
+	if (i > 0 && i < 7) {
 		j = 0;
 		tbl = (int*) 0x664f38;
 		do {
@@ -69,9 +70,9 @@ float __cdecl fcn_004e7990(int a0, int a1, int a2, int a3)
 		}
 	}
 	if (a3 != 0) {
-		fcn_004e8b40(*(unsigned char*) (a1 + 0x166), v9);
+		fcn_004e8b40(*(unsigned char*) (a1 + 0x166), &v9);
 		fcn_004f4830(2, v10);
-		v14 = *(float*) (v9 + 4);
+		v14 = *(float*) ((char*) &v9 + 0x14);
 		if (v10[6] == 2) {
 			v14 = v14 * *(float*) 0x662a6c;
 		}

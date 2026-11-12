@@ -38,6 +38,7 @@ char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS optio
 				if (slot < 3) {
 					g_6b86d4++;
 					table = *(int*) (context + 0x320);
+					base = (char*) table;
 					entry = context + 0x328 + slot * 0x7c;
 					*(int*) (table + 0x40) = g_6b7fac;
 					*(char*) (context + 0x4a0) = 1;
@@ -94,7 +95,7 @@ char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS optio
 							}
 						}
 					}
-					base = (char*) *(int*) (context + 0x320);
+
 					fcn_004315c0(base);
 					fcn_004316c0((int) base);
 					g_6b86d4--;

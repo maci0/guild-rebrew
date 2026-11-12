@@ -88,29 +88,33 @@ void __cdecl fcn_00469c40(int a1, int a2, int a3)
 	}
 	if (e->x40 != 0) {
 		r = (Rect469 *) e->x40;
-		t = r->y1;
-		if (t <= e->x30) {
-			t = e->x30;
-		}
+		t = (r->y1 > e->x30) ? r->y1 : e->x30;
+
+
+
+
 		e->x30 = t;
-		t = r->y2 + r->y1;
-		if (t >= e->x34) {
-			t = e->x34;
-		}
+		t = (r->y2 + r->y1 < e->x34) ? r->y2 + r->y1 : e->x34;
+
+
+
+
 		e->x34 = t;
 		if (t >= g_1040490) {
 			t = g_1040490;
 		}
 		e->x34 = t;
-		t = r->x1;
-		if (t <= e->x28) {
-			t = e->x28;
-		}
+		t = (r->x1 > e->x28) ? r->x1 : e->x28;
+
+
+
+
 		e->x28 = t;
-		t = r->x1 + r->x2;
-		if (t >= e->x2c) {
-			t = e->x2c;
-		}
+		t = (r->x1 + r->x2 < e->x2c) ? r->x1 + r->x2 : e->x2c;
+
+
+
+
 		e->x2c = t;
 		if (t >= g_1040494) {
 			t = g_1040494;

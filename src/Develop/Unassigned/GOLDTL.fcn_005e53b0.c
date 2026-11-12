@@ -68,7 +68,9 @@ void __cdecl fcn_005e53b0(void *arg)
     char *selected[4];
     char text[0x800];
     char *house, *p, *ui;
-    int window, refresh, cost, count, i, n, j, width;
+    int window, cost, count, i, n, j, width;
+    char refresh;
+    ITEM *item;
     unsigned int last;
 
     memset(items, 0, sizeof(items));
@@ -104,22 +106,22 @@ void __cdecl fcn_005e53b0(void *arg)
             io_AppendText((int)g_6811b0);
             io_AppendText(0x41b2);
             cost = 0;
-            for (i = 0; i < 5; ++i) {
-                if (i >= count) { items[i].entity = 0; cache[i] = -1; }
-                fcn_005ca560(&items[i]);
-                fcn_005ca740(items[i].x, items[i].y, g_772514, 0x54, &items[i], 1);
+            for (i = 0, item = items; i < 5; ++i, ++item) {
+                if (i >= count) { item->entity = 0; cache[i] = -1; }
+                fcn_005ca560(item);
+                fcn_005ca740(item->x, item->y, g_772514, 0x54, item, 1);
                 if (i < count) {
-                    fcn_00472640(items[i].control, 1);
-                    ui = g_1015ea0 + items[i].control * 756;
+                    fcn_00472640(item->control, 1);
+                    ui = g_1015ea0 + item->control * 756;
                     *(int *)(ui + 0x5c) = 1;
                     *(int *)(ui + 0x1d0) = 3;
-                    *(char **)(ui + 0x2f0) = items[i].entity;
+                    *(char **)(ui + 0x2f0) = item->entity;
                     *(int *)(ui + 0x60) = 0;
                 } else {
-                    ui = g_1015ea0 + items[i].control * 756;
+                    ui = g_1015ea0 + item->control * 756;
                     *(int *)(ui + 0x60) = 1;
                 }
-                p = items[i].entity;
+                p = item->entity;
                 if (p && i) cost += fcn_004e99c0((unsigned char)p[0x166]) / 3 + 2;
             }
             d2_SetForm(window, 2);

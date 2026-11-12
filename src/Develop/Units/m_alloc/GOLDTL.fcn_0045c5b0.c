@@ -69,6 +69,7 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 	int fmt;
 	unsigned int index;
 	int avail;
+	int fn;
 	Tex* p;
 	Tex* t;
 	char buf1[0x40];
@@ -108,8 +109,24 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 			} while (index < g_10404a0);
 			if (found != p) {
 				t = (Tex*) fcn_0045c290(*(unsigned int*) &c, 0);
-				avail = 0x70;
-				memset(t, 0, 0x70);
+				fn = 0x70;
+				__asm {
+					mov edi, t
+					mov ebx, fn
+					xor eax, eax
+					lea ecx, [edi+edi*2]
+					and ecx, 3
+					sub ebx, ecx
+					jle short L113
+					rep stosb
+					mov ecx, ebx
+					and ebx, 3
+					shr ecx, 2
+					rep stosd
+				L113:
+					add ecx, ebx
+					rep stosb
+				}
 				strncpy(t->name, name, 0x3f);
 				t->field64 = found->field64;
 				t->field68 = found->field68;
@@ -130,7 +147,7 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 				t->dxt = found->dxt;
 				t->b5 = found->b5;
 				t->format60 = found->format60;
-				t->field5c = 0;
+				*(unsigned int*) &t->field5c = 0;
 				t->field5e = c21;
 				t->refs = 1;
 				t->color48 = -1;
@@ -158,7 +175,24 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 	if (avail == 0 || t == 0 || width != (unsigned int) height) {
 		return 0;
 	}
-	memset(t, 0, 0x70);
+	fn = 0x70;
+	__asm {
+		mov edi, t
+		mov ebx, fn
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L163
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L163:
+		add ecx, ebx
+		rep stosb
+	}
 	strncpy(t->name, name, 0x3f);
 	t->field64 = (int) width;
 	t->field68 = (int) width;
@@ -178,7 +212,7 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 	} else {
 		t->b5 = (strstr(buf1, "_NS") != 0);
 	}
-	t->field5c = 0;
+	*(unsigned int*) &t->field5c = 0;
 	t->field5e = c21;
 	t->refs = 1;
 	t->color48 = -1;

@@ -8,7 +8,7 @@ extern char* lpGebaeudeINST;
 #include "GOLDTL.fcn_005522d0_gconf.h"
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
-int __cdecl gm_RandomMod(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01Squared(void);
 int __cdecl fcn_004c4450(unsigned int id);
 void* __cdecl fcn_004c4480(unsigned int id);
@@ -26,7 +26,7 @@ void __cdecl fcn_00546190(void* ev);
 void __cdecl fcn_005498b0(char* a1, char* a2, char* a3, char* a4, int a5, float a6);
 void __cdecl fcn_00551f90(void* ev);
 void __cdecl fcn_005b2810(char* a1, char* a2);
-
+typedef struct { unsigned char kind; char unknown[0x24c]; } BUILDING_PROT_5522;
 /* ADDRESS: GOLDTL 0x005522d0 */
 void __cdecl fcn_005522d0(char* ev)
 {
@@ -43,7 +43,7 @@ void __cdecl fcn_005522d0(char* ev)
 	int slot_no;
 	int bit_lo;
 	int bit_hi;
-	int sel;
+	unsigned char sel;
 	int left;
 	int i;
 	int n;
@@ -99,7 +99,7 @@ void __cdecl fcn_005522d0(char* ev)
 			bit_lo = 0;
 			bit_hi = 0;
 			listp = lpGebaeudeINST + slot_no * 0xa9;
-			sel = *(unsigned char*) (lpGebaeudePROT + *(unsigned char*) listp * 0x24d);
+			sel = ((BUILDING_PROT_5522*) lpGebaeudePROT)[*(unsigned char*) listp].kind;
 			if (sel > 0x1f) {
 				bit_hi = 1 << ((sel - 0x20) & 0x1f);
 			}
@@ -117,25 +117,25 @@ void __cdecl fcn_005522d0(char* ev)
 		} while (n);
 		slot_no = (slot_no + *(int*) (ev + 0xb4)) % 256;
 		*(unsigned int*) (ev + 0xb0) = slot_no;
-		if (rec) {
-			io_FormatTextBuffer(buf, s_6a5b8c, rec);
-			count = 0;
-			for (i = 0; i < 4; i++) {
-				p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
-				if (p) {
-					fcn_004c5c80(*(unsigned int*) ((char*) p + 4));
-					fcn_004c5da0(*(unsigned int*) ((char*) p + 4),
-						*(unsigned int*) ((char*) rec + 1), -1, 0, 1, s_6a5b84);
-					count++;
-				}
-			}
-			fcn_00500bb0(ev + 0x52, 0, count > 0 ? 5 : 0x14, 0);
-			*(unsigned int*) (ev + 0xcc) = *(unsigned int*) ((char*) rec + 1);
-			*(unsigned int*) (ev + 0x84) = fcn_004c5620(2, ev);
+		if (!rec) {
+			fcn_00500bb0(ev + 0x52, 0, 1, 0);
+			*(unsigned int*) (ev + 0x84) = fcn_004c5620(-1, ev);
 			return;
 		}
-		fcn_00500bb0(ev + 0x52, 0, 1, 0);
-		*(unsigned int*) (ev + 0x84) = fcn_004c5620(-1, ev);
+		io_FormatTextBuffer(buf, s_6a5b8c, rec);
+		count = 0;
+		for (i = 0; i < 4; i++) {
+			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
+			if (p) {
+				fcn_004c5c80(*(unsigned int*) ((char*) p + 4));
+				fcn_004c5da0(*(unsigned int*) ((char*) p + 4),
+					*(unsigned int*) ((char*) rec + 1), -1, 0, 1, s_6a5b84);
+				count++;
+			}
+		}
+		fcn_00500bb0(ev + 0x52, 0, count > 0 ? 5 : 0x14, 0);
+		*(unsigned int*) (ev + 0xcc) = *(unsigned int*) ((char*) rec + 1);
+		*(unsigned int*) (ev + 0x84) = fcn_004c5620(2, ev);
 		return;
 	case 2:
 		rec = 0;
@@ -191,7 +191,7 @@ void __cdecl fcn_005522d0(char* ev)
 				f = g_6628a0;
 			}
 			f = f * nent;
-			if (f <= g_6628a0) {
+			if (!(f > g_6628a0)) {
 				f = g_6628a0;
 			}
 			count = (int) f;

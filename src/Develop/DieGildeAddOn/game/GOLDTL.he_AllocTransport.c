@@ -1,7 +1,18 @@
 #include <stdio.h>
 #include <math.h>
 
-extern char* g_entity_type_table;
+extern char* lpGebaeudePROT;
+
+typedef struct TransportBuildingRow {
+	unsigned char kind;
+	char fields[0x24c];
+} TransportBuildingRow;
+
+typedef struct TransportStats {
+	char fields[0xb0];
+	int total;
+	char* list;
+} TransportStats;
 
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_FindNextFilteredEntity(void);
@@ -38,11 +49,12 @@ void __cdecl he_AllocTransport(char* a0)
 	char* p;
 	char* rec;
 	char* node;
-	char buf[176];
-	int len;
-	char nbuf[240];
+	TransportStats stats;
+	char nbuf[256];
 	float f;
+	double base_speed;
 	float fbest;
+	double distance, dx, dy, dz;
 	float pnew[4];
 	float pold[4];
 	int found_first;
@@ -75,7 +87,7 @@ void __cdecl he_AllocTransport(char* a0)
 	}
 
 	idx = *(unsigned char*) second;
-	if (g_entity_type_table[idx * 0x24d] == '\n' && query != 0 &&
+	if (((TransportBuildingRow*) lpGebaeudePROT)[idx].kind == 10 && query != 0 &&
 	    (*(unsigned char*) (query + 0x20) & 1) != 0) {
 		fbest = 1e8f;
 		fcn_00455350((char*) *(int*) (first + 0x61),
@@ -86,13 +98,13 @@ void __cdecl he_AllocTransport(char* a0)
 			do {
 				fcn_00455350((char*) *(int*) (p + 0x61),
 				             (char*) (*(int*) (p + 0x61) + 0x4c), pnew);
-				f = (float) ((pnew[0] - pold[0]) * (pnew[0] - pold[0]) +
-				             (pnew[1] - pold[1]) * (pnew[1] - pold[1]) +
-				             (pnew[2] - pold[2]) * (pnew[2] - pold[2]));
-				f = (float) sqrt(f);
-				if (f < fbest) {
+				dx = (double) pnew[0] - pold[0];
+				dy = (double) pnew[1] - pold[1];
+				dz = (double) pnew[2] - pold[2];
+				distance = sqrt(dz * dz + dy * dy + dx * dx);
+				if (distance < fbest) {
 					best = p;
-					fbest = f;
+					fbest = (float) distance;
 				}
 				p = gm_FindNextFilteredEntity();
 			} while (p != 0);
@@ -156,18 +168,19 @@ void __cdecl he_AllocTransport(char* a0)
 	rec = gm_SearchTable67(*(int*) (query + 0x1c));
 	idx = *(unsigned char*) (query + 0x12);
 	node = *(char**) (query + 0x3b);
-	f = (float) ((float) idx * *(float*) 0x662910 * *(double*) 0x662908 +
-	             *(double*) 0x664128);
+	base_speed = (double) idx * *(float*) 0x662910 * *(double*) 0x662908 +
+	             *(double*) 0x664128;
+	f = (float) base_speed;
 	*(float*) (node + 0x1a0) = f;
 	if (*(short*) query == 0x136) {
-		*(float*) (node + 0x1a0) = (float) (f - *(double*) 0x662b20);
+		*(float*) (node + 0x1a0) = (float) (base_speed - *(double*) 0x662b20);
 	} else if (*(short*) query == 0x135) {
-		*(float*) (node + 0x1a0) = (float) (f + *(double*) 0x664e60);
+		*(float*) (node + 0x1a0) = (float) (base_speed + *(double*) 0x664e60);
 	}
 	if (rec != 0) {
 		v = fcn_0050c710((unsigned char*) rec, 0x11, 1);
-		f = (float) ((double) v * *(double*) 0x6640e8 + *(double*) 0x6629c8) *
-		    *(float*) (node + 0x1a0);
+		f = (float) (((double) v * *(double*) 0x6640e8 + *(double*) 0x6629c8) *
+		    *(float*) (node + 0x1a0));
 		*(float*) (node + 0x1a0) = f;
 		*(float*) (a0 + 0xc0) = f;
 	}
@@ -179,9 +192,9 @@ void __cdecl he_AllocTransport(char* a0)
 	*(int*) (a0 + 0x10) = *(int*) (query + 2);
 
 	if ((*(unsigned char*) (query + 0x20) & 1) != 0) {
-		fcn_0050de80(query, buf);
-		if (len > 0) {
-			*(int*) (a0 + 0xcc) = len / 16000 + (unsigned short) gm_RandomMod(2);
+		fcn_0050de80(query, &stats);
+		if (stats.total > 0) {
+			*(int*) (a0 + 0xcc) = stats.total / 16000 + (unsigned short) gm_RandomMod(2);
 		} else {
 			*(int*) (a0 + 0xcc) = 0;
 		}
@@ -191,10 +204,10 @@ void __cdecl he_AllocTransport(char* a0)
 		if (*(int*) (a0 + 0xcc) != 0) {
 			sprintf(nbuf, (char*) 0x6a62a8, *(int*) (a0 + 0xcc));
 			*(char*) (query + 0x28) = *(char*) (a0 + 0xcc);
-			v = fcn_0050ddf0(len, (int) *(char*) (query + 0x28));
+			v = fcn_0050ddf0(stats.total, (int) *(char*) (query + 0x28));
 			if ((*(unsigned char*) (a0 + 0x78) & 2) != 0) {
 				fcn_004c51a0(-1, *(int*) ((char*) 0x7f4ca4 +
-				              *(unsigned short*) (a0 + 8) * 135),
+				              *(unsigned short*) (a0 + 8) * 0x21c),
 				             *(char*) 0x773d75, v);
 				*(int*) (a0 + 0x84) = -1;
 				*(int*) (a0 + 0xec) = -1;

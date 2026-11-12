@@ -26,6 +26,7 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 	unsigned char* bytes;
 	unsigned char* p;
 	int n;
+	int fn;
 	int i;
 	int j;
 	int minb;
@@ -58,7 +59,25 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 	n = m[8];
 	cells = (int*) m[9];
 	if (cells) {
-		memset(cells, 0, n * n * 0x1c);
+		fn = n * n * 0x1c;
+		/* Reviewed original operand-homed fill (inline fill/copy block). */
+		__asm {
+			mov edi, cells
+			mov ebx, fn
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L1
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		L1:
+			add ecx, ebx
+			rep stosb
+		}
 		for (i = 0; i < n * n; i++)
 			cells[i * 7] = 1;
 	}
@@ -137,7 +156,25 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 		fcn_0045a3a0((int*) t, m);
 	} else {
 		bytes = (unsigned char*) m[10];
-		memset(bytes, 0, n * n);
+		fn = n * n;
+		/* Reviewed original operand-homed fill (inline fill/copy block). */
+		__asm {
+			mov edi, bytes
+			mov ebx, fn
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L2
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		L2:
+			add ecx, ebx
+			rep stosb
+		}
 	}
 	fcn_004379a0(g_67a370, 0, 0x40, fcn_0045a9d0, m);
 	if (m[9]) {

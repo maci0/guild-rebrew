@@ -1,3 +1,4 @@
+#include "client_types.h"
 /* Location record: 0x21c-byte entries in the g_7f4ca0 table. */
 typedef struct Rec {
 	unsigned short id;       /* 0x000 */
@@ -12,9 +13,6 @@ typedef struct Rec {
 
 extern char g_7f4ca0[];
 extern int g_7f4c00;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
 extern float g_662cf8;
 extern float g_662910;
 extern float g_665bf0;
@@ -65,18 +63,12 @@ void __cdecl fcn_00553cd0(char* v3)
 		fcn_00529160(e, 0, *v5, v3);
 		fcn_004c5c80(*(int*) (v5 + 2));
 		fcn_004c5da0(*(int*) (v5 + 2), *(int*) (e + 1), -1, 0, 1, "BetriebsPr");
-		*(int*) (v3 + 0x52) = g_7f4c00;
-		*(int*) (v3 + 0x56) = g_7f4c04;
-		*(int*) (v3 + 0x5a) = g_7f4c08;
-		*(short*) (v3 + 0x5e) = g_7f4c0c;
+		*(pos14_7f4c00*) (v3 + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
 		fcn_00500bb0((int*) (v3 + 0x52), 0, 10, 0);
 		*(int*) (v3 + 0x70) = 1;
 		return;
 	case 1:
-		*(int*) (v3 + 0x52) = g_7f4c00;
-		*(int*) (v3 + 0x56) = g_7f4c04;
-		*(int*) (v3 + 0x5a) = g_7f4c08;
-		*(short*) (v3 + 0x5e) = g_7f4c0c;
+		*(pos14_7f4c00*) (v3 + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
 		fcn_00500bb0((int*) (v3 + 0x52), 0, 4, 0);
 		p = *(char**) ((char*) v5 + 0x184);
 		if (*(int*) (p + 0x128)) {
@@ -92,7 +84,7 @@ void __cdecl fcn_00553cd0(char* v3)
 				break;
 			}
 		}
-		if (f <= g_6628f0 && found == 0) {
+		if (!(f > g_6628f0) && found == 0) {
 			io_FormatTextBuffer(buf, 0x1a76, *(unsigned short*) (e + 0x27), e);
 			a = ((Rec*) g_7f4ca0)[*(unsigned short*) (v3 + 8)].owner;
 			fcn_00545d40(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_88");
@@ -103,7 +95,7 @@ void __cdecl fcn_00553cd0(char* v3)
 			*(int*) (v3 + 0x70) = 2;
 			return;
 		}
-		x = (int) ((float) fcn_0050cf50(e, 100) * f * g_665bf0);
+		x = (int) (fcn_0050cf50(e, 100) * f * 0.07f);
 		fcn_004c51a0(((Rec*) g_7f4ca0)[*(unsigned short*) (v3 + 8)].owner,
 			((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner, 0, x);
 		type = ((Rec*) g_7f4ca0)[*(unsigned short*) (v3 + 8)].type;

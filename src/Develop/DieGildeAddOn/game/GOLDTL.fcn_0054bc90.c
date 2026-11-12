@@ -71,17 +71,12 @@ void __cdecl fcn_0054bc90(char* a0)
 	if (v4 != 6 && v4 != 7)
 		*(int*) (a0 + 0x70) = 2;
 	state = *(int*) (a0 + 0x70);
-	if (state == 0)
-		goto dialog;
-	if (state == 1)
-		goto state1;
-	if (state != 2)
-		return;
-close:
-		if (*(int*) (a0 + 0x74))
-			fcn_00545780(a0);
-		fcn_00546190(a0);
-		return;
+	switch (state) {
+	case 0: goto dialog;
+	case 1: goto state1;
+	case 2: break;
+	default: return;
+	}
 	if (fcn_004943e0(v7, v3) != 1)
 		goto state2_unequal;
 	v16 = *(int*) (v3 + 2);
@@ -253,4 +248,11 @@ dialog:
 	fcn_00500bb0(a0 + 0x52, 0x18, 0, 0);
 	fcn_004c3030(-7, 0, (char*) 0x6a5a34, 0);
 	*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
+	return;
+close:
+		if (*(int*) (a0 + 0x74))
+			fcn_00545780(a0);
+		fcn_00546190(a0);
+		return;
+
 }

@@ -35,10 +35,42 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 	int c;
 	int n;
 
-	memset(buf, 0, sizeof(buf));
 	in_label = 0;
 	dashes = 0;
-	strcpy(buf, out);
+	n = sizeof(buf); p = buf; __asm {
+		mov edi, p
+		mov ebx, n
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short fill_end1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	fill_end1:
+		add ecx, ebx
+		rep stosb
+	}
+	n = strlen(out); p = buf; __asm {
+		mov edi, p
+		mov esi, out
+		mov ebx, n
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short fill_end2
+		rep movsb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep movsd
+	fill_end2:
+		add ecx, ebx
+		rep movsb
+	}
 	slot = hst_ParseCommandline_1st_Pass(id);
 	s = buf;
 	if (*s != 0) {
@@ -48,7 +80,23 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 				if (c != '_') {
 					*out++ = (char) c;
 				} else {
-					memset(label, 0, sizeof(label));
+					n = sizeof(label); p = label; __asm {
+						mov edi, p
+						mov ebx, n
+						xor eax, eax
+						lea ecx, [edi+edi*2]
+						and ecx, 3
+						sub ebx, ecx
+						jle short fill_end3
+						rep stosb
+						mov ecx, ebx
+						and ebx, 3
+						shr ecx, 2
+						rep stosd
+					fill_end3:
+						add ecx, ebx
+						rep stosb
+					}
 					label[0] = (char) c;
 					p = label + 1;
 					in_label = 1;
@@ -89,7 +137,23 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 			    && *s != 0) {
 				*p++ = *s++;
 			}
-			memset(slotname, 0, sizeof(slotname));
+			n = sizeof(slotname); q = slotname; __asm {
+				mov edi, q
+				mov ebx, n
+				xor eax, eax
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short fill_end4
+				rep stosb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep stosd
+			fill_end4:
+				add ecx, ebx
+				rep stosb
+			}
 			*p = 0;
 			if (hst_ParseContext(label, slotname, slot) == 0) {
 				goto parse_fail;
@@ -110,7 +174,23 @@ syntax_error:
 		return 0;
 	}
 	if (in_label == 1 && dashes == 2) {
-		memset(slotname, 0, sizeof(slotname));
+		n = sizeof(slotname); q = slotname; __asm {
+			mov edi, q
+			mov ebx, n
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short fill_end5
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		fill_end5:
+			add ecx, ebx
+			rep stosb
+		}
 		*p = 0;
 		if (hst_ParseContext(label, slotname, slot) == 0) {
 			goto parse_fail;

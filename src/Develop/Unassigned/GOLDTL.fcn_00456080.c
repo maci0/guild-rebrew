@@ -40,11 +40,11 @@ void __cdecl fcn_00456080(float* v, unsigned char* colors, int base, int size,
 	float dy2;
 
 	det = v[3] * v[4] - v[2] * v[5] + v[2] * v[1] - v[0] * v[3] + v[0] * v[5] - v[4] * v[1];
-	if (det <= 0.0) {
+	if (det > 0.0) {
 		do {
-			g_1043030[i] = (int) (v[2 * i] * 65536.0f);
-			g_1043040[i] = (int) (v[2 * i + 1] * 65536.0f);
-			g_10425f0[i] = colors[i] << 16;
+			g_1043030[i] = (int) (v[4 - 2 * i] * 65536.0f);
+			g_1043040[i] = (int) (v[5 - 2 * i] * 65536.0f);
+			g_10425f0[i] = colors[2 - i] << 16;
 			if (g_1043040[i] <= ymin) {
 				ymin = g_1043040[i];
 				top = i;
@@ -54,9 +54,9 @@ void __cdecl fcn_00456080(float* v, unsigned char* colors, int base, int size,
 	}
 	else {
 		do {
-			g_1043030[i] = (int) (v[4 - 2 * i] * 65536.0f);
-			g_1043040[i] = (int) (v[5 - 2 * i] * 65536.0f);
-			g_10425f0[i] = colors[2 - i] << 16;
+			g_1043030[i] = (int) (v[2 * i] * 65536.0f);
+			g_1043040[i] = (int) (v[2 * i + 1] * 65536.0f);
+			g_10425f0[i] = colors[i] << 16;
 			if (g_1043040[i] <= ymin) {
 				ymin = g_1043040[i];
 				top = i;

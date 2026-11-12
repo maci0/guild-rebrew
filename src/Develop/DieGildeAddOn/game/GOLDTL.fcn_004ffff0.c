@@ -1,9 +1,9 @@
 #include <math.h>
 #include <string.h>
-
+typedef struct { int word[2]; } QUERY_LIMIT;
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
-void __cdecl fcn_004fac80(int, int*);
+int __cdecl fcn_004fac80(int, int*);
 void __cdecl fcn_00455350(int, int, float*);
 int __cdecl gm_RandomMod(int);
 
@@ -18,22 +18,22 @@ char* __cdecl fcn_004ffff0(int a0, int a1)
 	float bestd;
 	float d;
 	int n;
-	int v6;
-	int v7;
-	int v8;
-	int v17;
-	int v18;
+	QUERY_LIMIT selected, current;
+
+
+
+
 
 	best = 0;
 	bestd = 1e8f;
-	fcn_004fac80(1, &v7);
+	fcn_004fac80(1, selected.word);
 	e = gm_StartFilteredEntitySearch(1, 5, 1);
 	if (e != 0) {
-		v6 = v7;
+
 		do {
-			fcn_004fac80(*(unsigned char*) e, &v8);
-			n = v8;
-			if ((unsigned short) *(unsigned char*) (e + 0x65) < (unsigned short) v8
+			fcn_004fac80(*(unsigned char*) e, current.word);
+			n = current.word[0];
+			if ((unsigned short) *(unsigned char*) (e + 0x65) < (unsigned short) current.word[0]
 			    && (*(unsigned char*) (e + 0x5a) & 1) == 0) {
 				if (a1 != 0 && *(int*) (a1 + 0x61) != 0 && *(int*) (e + 0x61) != 0) {
 					fcn_00455350(*(int*) (e + 0x61), *(int*) (e + 0x61) + 0x4c, p1);
@@ -43,19 +43,19 @@ char* __cdecl fcn_004ffff0(int a0, int a1)
 					p1[2] = p1[2] - p2[2];
 					d = sqrt(p1[0] * p1[0] + p1[1] * p1[1] + p1[2] * p1[2]);
 					if (d < bestd) {
-						v17 = v18;
-						v6 = n;
+						selected = current;
+
 						best = e;
 						bestd = d;
 					}
 				} else if (best != 0) {
 					if ((float) *(unsigned char*) (e + 0x65) / (float) (n & 0xffff)
-					    < (float) *(unsigned char*) (best + 0x65) / (float) (v6 & 0xffff)) {
+					    < (float) *(unsigned char*) (best + 0x65) / (float) (selected.word[0] & 0xffff)) {
 						best = e;
 					}
 				} else {
-					v17 = v18;
-					v6 = n;
+					selected = current;
+
 					best = e;
 				}
 			}

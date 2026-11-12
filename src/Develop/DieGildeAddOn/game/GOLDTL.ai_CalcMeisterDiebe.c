@@ -1,6 +1,7 @@
 /* AI: a master decides to recruit thieves (Gesetze/slavery economy screen logic). */
 
 #include <string.h>
+#include <stdio.h>
 
 typedef struct GOLDTL_Msg481 {
 	int f0;                         /* 0x00 */
@@ -43,7 +44,7 @@ extern int g_100b0ac;
 extern unsigned short* g_773da8;
 extern int g_7747b4;
 
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_ResolveEntityById(int, int*, int, int);
 void __cdecl fcn_00485650(int, int);
@@ -71,7 +72,7 @@ int __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl wsprintfA(char*, const char*, ...);
+
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
@@ -185,7 +186,7 @@ common:
 	}
 	if (match < j) {
 		owner = (char*) (rec + 0x30);
-		wsprintfA(text, "ai_CalcMeisterDiebe(): Meister %s hat gerade keine Leute...", owner);
+		sprintf(text, "ai_CalcMeisterDiebe(): Meister %s hat gerade keine Leute...", owner);
 		return;
 	}
 	{
@@ -203,11 +204,11 @@ common:
 		}
 	}
 	if (sel == 1) {
-		if (!(gm_RandomFloat01() < 0.95)) {
+		if (gm_RandomFloat01() < 0.95) {
 			goto L2267;
 		}
 		owner = (char*) (rec + 0x30);
-		wsprintfA(text, "ai_CalcMeisterDiebe(): Meister %s m\366chte entf\374hren", owner);
+		sprintf(text, "ai_CalcMeisterDiebe(): Meister %s m\366chte entf\374hren", owner);
 		maxfactor = 0;
 		cx = 8;
 		cy = 8;
@@ -274,7 +275,7 @@ L1a0c:
 				break;
 			}
 		}
-		if (fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 1, 0, 0x65, 0) == 0
+		if (fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 1, 0, 0x65) == 0
 		    || best == 0
 		    || *(int*) (*(int*) (rec + 0x16c) + 0x65) != -1) {
 			goto L2267;
@@ -283,7 +284,7 @@ L1a0c:
 			return;
 		}
 		owner = (char*) (rec + 0x30);
-		wsprintfA(text, "ai_CalcMeisterDiebe(): Meister %s entf\374hrt %s aus '%s'", owner,
+		sprintf(text, "ai_CalcMeisterDiebe(): Meister %s entf\374hrt %s aus '%s'", owner,
 		          (char*) (best + 5), (char*) ((unsigned int) (unsigned short) *(unsigned short*) (best + 0x27) * 0x21c + 0x7f4cd0));
 		memset(&msg, 0, sizeof msg);
 		{
@@ -292,7 +293,7 @@ L1a0c:
 			msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
 			msg.fc = *(int*) (h + 1);
 			msg.f28 = g_7f4c00;
-			msg.f2c = g_7f4c04;
+			msg.f2c = *(int*) &g_7f4c04;
 			msg.f30 = g_7f4c08;
 			msg.f34 = *(unsigned short*) 0x7f4c0c;
 			msg.f36 = 1;
@@ -347,9 +348,9 @@ L1a0c:
 
 L176c:
 	owner = (char*) (rec + 0x30);
-	wsprintfA(text, "ai_CalcMeisterDiebe(): Meister %s m\366chte einbrechen", owner);
+	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s m\366chte einbrechen", owner);
 	if (*(int*) (rec + 0x1c0) != -1) {
-		e = (unsigned char*) gm_SearchTable67(*(int*) (rec + 0x1c0));
+		best = e = (unsigned char*) gm_SearchTable67(*(int*) (rec + 0x1c0));
 		if (e == 0) {
 			*(int*) (rec + 0x1c0) = -1;
 		} else if (*(unsigned short*) (e + 0x27) == *(unsigned short*) (*(int*) (rec + 0x16c) + 0x27)) {
@@ -433,7 +434,7 @@ L1a0c2:
 	if (best == 0) {
 		goto L2267;
 	}
-	found = fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 1, 0, 0xca, 0);
+	found = fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 1, 0, 0xca);
 	for (;;) {
 		if (found == 0) {
 			goto Lcae;
@@ -495,7 +496,7 @@ Lcae:
 		found = he_fn_Handlung();
 	}
 	owner = (char*) (rec + 0x30);
-	wsprintfA(text, "ai_CalcMeisterDiebe(): Meister %s spioniert bei '%s'", owner, (char*) (best + 5));
+	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s spioniert bei '%s'", owner, (char*) (best + 5));
 	memset(&msg, 0, sizeof msg);
 	{
 		int h = *(int*) (rec + 0x16c);
@@ -503,7 +504,7 @@ Lcae:
 		msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
 		msg.fc = *(int*) (h + 1);
 		msg.f28 = g_7f4c00;
-		msg.f2c = g_7f4c04;
+		msg.f2c = *(int*) &g_7f4c04;
 		msg.f30 = g_7f4c08;
 		msg.f34 = *(unsigned short*) 0x7f4c0c;
 		msg.f36 = 1;
@@ -546,7 +547,7 @@ Lcae:
 
 Lb45:
 	owner = (char*) (rec + 0x30);
-	wsprintfA(text, "ai_CalcMeisterDiebe(): Meister %s bricht bei '%s' ein", owner, (char*) (best + 5));
+	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s bricht bei '%s' ein", owner, (char*) (best + 5));
 	memset(&msg, 0, sizeof msg);
 	{
 		int h = *(int*) (rec + 0x16c);
@@ -554,7 +555,7 @@ Lb45:
 		msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
 		msg.fc = *(int*) (h + 1);
 		msg.f28 = g_7f4c00;
-		msg.f2c = g_7f4c04;
+		msg.f2c = *(int*) &g_7f4c04;
 		msg.f30 = g_7f4c08;
 		msg.f34 = *(unsigned short*) 0x7f4c0c;
 		msg.f36 = 1;
@@ -600,12 +601,12 @@ Lb45:
 
 Lc7e:
 	owner = (char*) (rec + 0x30);
-	wsprintfA(text, "ai_CalcMeisterDiebe(): Meister %s hat aber noch eine Spionage bei '%s' nicht beendet", owner, (char*) (best + 5));
+	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s hat aber noch eine Spionage bei '%s' nicht beendet", owner, (char*) (best + 5));
 	return;
 
 Le3e:
 	owner = (char*) (rec + 0x30);
-	wsprintfA(text, "ai_CalcMeisterDiebe(): Meister %s hat schon eine Spionage bei '%s' laufen", owner, (char*) (best + 5));
+	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s hat schon eine Spionage bei '%s' laufen", owner, (char*) (best + 5));
 	return;
 
 L1e70:
@@ -614,7 +615,7 @@ L1e70:
 
 L2267:
 	owner = (char*) (rec + 0x30);
-	wsprintfA(text, "ai_CalcMeisterDiebe(): Meister %s m\366chte Taschen dieben", owner);
+	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s m\366chte Taschen dieben", owner);
 	memset(&msg, 0, sizeof msg);
 	{
 		int h = *(int*) (rec + 0x16c);
@@ -623,7 +624,7 @@ L2267:
 		msg.f8 = *(int*) (id * 0x21c + 0x7f4ca4);
 		msg.fc = *(int*) (h + 1);
 		msg.f28 = g_7f4c00;
-		msg.f2c = g_7f4c04;
+		msg.f2c = *(int*) &g_7f4c04;
 		msg.f30 = g_7f4c08;
 		msg.f34 = *(unsigned short*) 0x7f4c0c;
 		msg.f36 = 1;

@@ -52,6 +52,7 @@ void __cdecl fcn_0058dbe0(int a0)
 	int v20;
 	int v21;
 	int* v27;
+	int rec;
 	int* v30;
 
 	io_FormatTextBuffer(text, 0x40c8, 0x40b6);
@@ -69,8 +70,8 @@ void __cdecl fcn_0058dbe0(int a0)
 	query[3] = 1;
 	query[4] = 6;
 	query[0x13] = 0x727;
-	v6 = fcn_005bdc30(1, query, *(int*) 0x14b55f8, 0, 0);
-	if (!v6) {
+	rec = fcn_005bdc30(1, query, *(int*) 0x14b55f8, 0, 0);
+	if (!rec) {
 		fcn_00532ef0();
 		return;
 	}
@@ -80,7 +81,7 @@ void __cdecl fcn_0058dbe0(int a0)
 	d2_SetForm(v2, 0);
 	fcn_005340f0(*(int*) &g_772514);
 	d2_SetForm(v2, 1);
-	io_AppendText(0x40b7, 0x40b6, *(unsigned short*) (v6 + 0x27), v6);
+	io_AppendText(0x40b7, 0x40b6, *(unsigned short*) (rec + 0x27), rec);
 	v3 = fcn_004677e0(100, 0xa0, 200, 0, 2, 0x7b, 0x82,
 	                  *(int*) &g_772514);
 	fcn_00472380(v3, 0, 2, 0);
@@ -116,14 +117,14 @@ void __cdecl fcn_0058dbe0(int a0)
 					goto label_58df76;
 				}
 			} else {
-				v5 = *(int*) &g_774970;
+				v5 = g_774970;
 				if (fcn_00525f60(v5 * 0x21c + 0x7f4ca0, v6) == 1) {
 					for (v9 = 0; v9 < 0x3e; v9++) {
 						req[v9] = 0;
 					}
 					v11 = 0x90;
 					v18 = 2;
-					v12 = *(int*) (*(int*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
+					v12 = *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
 					v13 = *(int*) (a0 + 1);
 					v14 = *(int*) &g_7f4c00;
 					v15 = *(int*) &g_7f4c04;
@@ -131,18 +132,18 @@ void __cdecl fcn_0058dbe0(int a0)
 					v17 = *(unsigned short*) 0x7f4c0c;
 					v20 = fcn_00471f80(v3);
 					v21 = fcn_00471f80(v4);
-					v19 = *(int*) (v6 + 1);
-					((int*) req)[0] = v11;
-					((int*) req)[1] = v12;
-					((int*) req)[2] = v13;
-					((int*) req)[4] = v14;
-					((int*) req)[5] = v15;
-					((int*) req)[6] = v16;
-					((unsigned short*) req)[0xe] = v17;
-					((char*) req)[0x10] = v18;
-					((int*) req)[0x1c] = v19;
-					((int*) req)[0x20] = v20;
-					((int*) req)[0x21] = v21;
+					v19 = *(int*) (rec + 1);
+					((char*) req)[4] = (char) v11;
+					*(int*) ((char*) req + 8) = v12;
+					*(int*) ((char*) req + 0xc) = v13;
+					*(int*) ((char*) req + 0x28) = v14;
+					*(int*) ((char*) req + 0x2c) = v15;
+					*(int*) ((char*) req + 0x30) = v16;
+					*(unsigned short*) ((char*) req + 0x34) = (unsigned short) v17;
+					((char*) req)[0x36] = (char) v18;
+					*(int*) ((char*) req + 0x58) = v19;
+					*(int*) ((char*) req + 0x5c) = v20;
+					*(int*) ((char*) req + 0x60) = v21;
 					fcn_004c5530(req);
 				label_58df76:
 					*(int*) 0x774654 = 1;

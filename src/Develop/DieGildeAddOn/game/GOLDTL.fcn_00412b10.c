@@ -1,5 +1,13 @@
 #include <string.h>
 
+typedef struct FRAME_412B10 {
+	unsigned int parameter;
+	float position[3];
+	char unknown_010[4];
+	float rotation[3];
+	char unknown_020[0x58 - 0x20];
+} FRAME_412B10;
+
 int* __cdecl fcn_004339e0(char* a0, int a1, int a2, void* a3, int a4, void* a5);
 void __cdecl fcn_00451720(void* a0, void* a1, void* a2, void* a3);
 void __cdecl fcn_00438cb0(void* a0, void* a1);
@@ -10,40 +18,69 @@ void __cdecl fcn_00438cb0(void* a0, void* a1);
 unsigned int __cdecl fcn_00412b10(char* a0, float a1, float a2, float a3, float a4, float a5, float a6, unsigned int a7, unsigned char a8)
 {
 	unsigned int z[3];
-	float v5;
-	float v25;
-	float v26;
+	float rotation[3];
 	char v6[12];
-	unsigned int v7;
+	FRAME_412B10 frames[2];
 	int* v3;
+	void* fill_dst;
+	int fill_size;
 
-	v7 = a7;
 	if (*(int*) 0x6b5cbc != 0 && *(char**) 0x6b8014 == a0) {
 		return 0;
 	}
-	memset(z, 0, sizeof(z));
-	memset(v6, 0, sizeof(v6));
+	fill_dst = z;
+	fill_size = sizeof(z);
+	__asm {
+		mov edi, fill_dst
+		mov ebx, fill_size
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L412b10fill
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L412b10fill:
+		add ecx, ebx
+		rep stosb
+	}
 	z[0] = (z[0] | 0x1400) & 0xfffff7ff;
 	z[2] |= 2;
-	v26 = a6;
-	v5 = a4;
-	v25 = a5;
+	rotation[2] = a6;
+	frames[0].rotation[0] = 0.0f;
+	frames[0].rotation[1] = 0.0f;
+	frames[0].rotation[2] = 0.0f;
+	frames[0].position[0] = 0.0f;
+	frames[0].position[1] = 0.0f;
+	frames[0].position[2] = 0.0f;
+	rotation[0] = a4;
+	rotation[1] = a5;
 	if ((a8 & 8) != 0) {
-		fcn_00451720(a0 + 0x84, &v5, v6, &v5);
+		fcn_00451720(a0 + 0x84, rotation, v6, rotation);
 		fcn_00438cb0(a0, v6);
 	}
 	if (a0 == *(char**) 0x6b8014) {
-		*(float*) 0x14ce890 = v5;
-		*(float*) 0x14ce894 = v25;
-		*(float*) 0x14ce898 = v26;
+		*(float*) 0x14ce890 = rotation[0];
+		*(float*) 0x14ce894 = rotation[1];
+		*(float*) 0x14ce898 = rotation[2];
 		*(float*) 0x14ce880 = a1;
 		*(float*) 0x14ce884 = a2;
 		*(float*) 0x14ce888 = a3;
 	}
-	v5 = v5 - *(float*) (a0 + 0x84);
-	v25 = v25 - *(float*) (a0 + 0x88);
-	v26 = v26 - *(float*) (a0 + 0x8c);
-	v3 = fcn_004339e0(a0, (int) z[0], (int) z[1], (void*) z[2], 2, &v7);
+	frames[1].position[0] = a1 - *(float*) (a0 + 0x4c);
+	frames[1].position[1] = a2 - *(float*) (a0 + 0x50);
+	frames[1].position[2] = a3 - *(float*) (a0 + 0x54);
+	frames[0].parameter = a7;
+	rotation[0] -= *(float*) (a0 + 0x84);
+	rotation[1] -= *(float*) (a0 + 0x88);
+	rotation[2] -= *(float*) (a0 + 0x8c);
+	frames[1].rotation[0] = rotation[0];
+	frames[1].rotation[1] = rotation[1];
+	frames[1].rotation[2] = rotation[2];
+	v3 = fcn_004339e0(a0, (int) z[0], (int) z[1], (void*) z[2], 2, frames);
 	if (a0 != *(char**) 0x6b8014) {
 		return 1;
 	}

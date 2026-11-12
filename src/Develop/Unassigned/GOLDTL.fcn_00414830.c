@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_camera.h"
 typedef struct {
 	float x;
 	float y;
@@ -27,18 +28,18 @@ void __cdecl fcn_00414830(float* lo, float* hi, char* entity)
 		return;
 	}
 	if ((*(unsigned char*) (entity + 0x216) & 0x20) == 0) {
-		fcn_00438100(entity, *(char**) 0x6b8014, 0);
+		fcn_00438100(entity, g_6b8014, 0);
 	}
 	vt = (Vtbl414830*) (*(char**) (*(char**) (entity + 0x1cc) + 0x318));
 	p = vt->get(entity, *(char**) (entity + 0x1cc), *(char**) (entity + 0x1ec) + 8);
 	if (p != 0) {
-		for (i = 0; i < 8; i++) {
-			*lo = (*lo < p[i].x) ? *lo : p[i].x;
-			lo[1] = (lo[1] < p[i].y) ? lo[1] : p[i].y;
-			lo[2] = (lo[2] < p[i].z) ? lo[2] : p[i].z;
-			*hi = (*hi > p[i].x) ? *hi : p[i].x;
-			hi[1] = (hi[1] > p[i].y) ? hi[1] : p[i].y;
-			hi[2] = (hi[2] > p[i].z) ? hi[2] : p[i].z;
+		for (i = 8; i != 0; p++, i--) {
+			*lo = (*lo < p->x) ? *lo : p->x;
+			lo[1] = (p->y > lo[1]) ? lo[1] : p->y;
+			lo[2] = (p->z > lo[2]) ? lo[2] : p->z;
+			*hi = (*hi > p->x) ? *hi : p->x;
+			hi[1] = (p->y < hi[1]) ? hi[1] : p->y;
+			hi[2] = (p->z < hi[2]) ? hi[2] : p->z;
 		}
 	}
 	for (child = *(char**) (entity + 0x200); child != 0; child = *(char**) (child + 0x1f4)) {

@@ -61,21 +61,21 @@ int __cdecl fcn_00558680(char* a0)
 						len = (float) sqrt((double) (dir[0] * dir[0] + dir[2] * dir[2]));
 						fcn_0045b990(g_1043370, pos1, keys, (int*) flag, &scale);
 						level = g_1043370;
-						pos1[1] = scale + g_665ea0;
+						pos1[1] = scale + 80.0f;
 						dir[0] = pos1[0] - pos2[0];
 						dir[1] = pos1[1] - pos2[1];
 						dir[2] = pos1[2] - pos2[2];
-						if (len < g_662920) {
+						if (len < 45.0f) {
 							*(int*) (a0 + 0xc4) = 0;
 							fcn_004432d0(saved, 1);
 							return 2;
 						}
 						keys[0] = *(int*) (a0 + 0xec);
 						keys[1] = 0;
-						scale = (float) g_6b7fac - (float) keys[0];
+						scale = (float) (unsigned int) g_6b7fac - (float) keys[0];
 						keys[2] = fcn_004c48f0();
 						*(int*) (a0 + 0xec) = g_6b7fac;
-						scale = ((float) keys[2] * g_6628bc + g_6628cc) * scale;
+						scale = ((float) (unsigned int) keys[2] * 0.25f + 0.5f) * scale;
 						fcn_004518a0(dir);
 						dir[0] = scale * dir[0];
 						dir[1] = scale * dir[1];
@@ -83,11 +83,11 @@ int __cdecl fcn_00558680(char* a0)
 						pos1[0] = dir[0] + pos2[0];
 						pos1[1] = dir[1] + pos2[1];
 						pos1[2] = dir[2] + pos2[2];
-						fcn_0045b990(level, pos1, keys, (int*) flag, &len);
-						if (pos1[1] < len + g_665ea0) {
-							pos1[1] = scale * (float) g_665ea8 + pos1[1];
-							pos1[0] = scale * dir[0] * g_662a3c + pos2[0];
-							pos1[2] = scale * dir[2] * g_662a3c + pos2[2];
+						fcn_0045b990(level, pos1, (int*) flag, keys, &len);
+						if (pos1[1] < len + 80.0f) {
+							pos1[1] = scale * 0.978 + pos1[1];
+							pos1[0] = scale * dir[0] * 0.1f + pos2[0];
+							pos1[2] = scale * dir[2] * 0.1f + pos2[2];
 						}
 						rec = *(int*) (a0 + 0xc8);
 						*(int*) (a0 + 0xe0) = *(int*) (rec + 0x84);

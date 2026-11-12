@@ -47,7 +47,7 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 	char* p;
 	float d;
 
-	gm_MapEntityStatRange(a0);
+	idx = gm_MapEntityStatRange(a0);
 
 	dev = fcn_00445600(0, 0x100, 0, "dummy_SPIELER");
 	if (dev != 0) {
@@ -90,7 +90,7 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 	}
 
 	obj = 0;
-	idx = 0;
+
 	prev = -1;
 	selected = 0;
 	while (fcn_005373e0(0x53b6b0, 0x12d6)) {

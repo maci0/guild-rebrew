@@ -60,7 +60,7 @@ void __cdecl fcn_00563cc0(char* a0)
 				}
 				e += 0x21c;
 				i++;
-			} while (e < (char*) 0x85a0a2);
+			} while ((int) e < 0x85a0a2);
 		}
 		fcn_004c5fa0(*(int*) (ent + 1));
 		fcn_004c5420(*(int*) (ent + 1), 0x5a, 2, 0, 0x40);

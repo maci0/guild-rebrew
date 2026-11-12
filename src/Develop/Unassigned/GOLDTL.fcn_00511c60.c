@@ -19,7 +19,7 @@ int __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004c4450(int h);
-int __cdecl fcn_004e8af0(int c, void *out);
+int __cdecl fcn_004e8af0(unsigned char c, void *out);
 int __cdecl fcn_004e8b40(int i, void *out);
 int __cdecl fcn_004e8a80(int i, void *out);
 int __cdecl fcn_004e8210(int a, void *p, int b);
@@ -94,7 +94,7 @@ int __cdecl fcn_00511c60(void)
 		v26[i] = 0;
 	}
 	for (i = 0; i < 0x1e; i++) {
-		v25[i] = v25[i + 1] + gm_RandomMod(3);
+		v25[i] = v25[i] + gm_RandomMod(3);
 	}
 	n = 0;
 	p = (char *) 0x7f4ca0;
@@ -173,13 +173,13 @@ int __cdecl fcn_00511c60(void)
 		fcn_004e8b40(v34[2] & 0xff, v35);
 		v37 = (char) (int) ((float) gm_RandomMod(0x2a) +
 				    (float) ((v35[2] & 0xff) / 3 + 1) *
-				    *(float *) 0x66536c);
-		v42 = (gm_RandomMod(2) & 0xffff) + v25[(v35[2] & 0xff) + 30];
+				    21.0f);
+		v36 = (gm_RandomMod(2) & 0xffff) + v25[(v35[2] & 0xff) + 30];
 		v38 = v25[(v35[2] & 0xff) + 40];
-		v42 = v38;
+
 		v49 = fcn_0050b750(v38 - (int) ((float) v38 *
 						 gm_RandomFloat01() *
-						 *(float *) 0x664158),
+						 -0.5f),
 				   *(unsigned char *) 0x773d75);
 		p = (char *) v26[i];
 		fcn_004c5150(*(int *) (p + 4), -1, *(unsigned char *) 0x773d75,
@@ -189,17 +189,17 @@ int __cdecl fcn_00511c60(void)
 		if (*(unsigned char *) (p + 2) == 3) {
 			fcn_004c4570(1, 1, 0x84, &v37);
 			if ((gm_RandomMod(2) & 0xffff) != 0) {
-				v50 = gm_RandomFloat01() + *(float *) 0x6628a0;
+				v50 = gm_RandomFloat01() + 1.0f;
 				v42 = (gm_RandomMod(8) & 0xffff) + 1;
 				v38 = (int) ((float) v42 * v50 *
 					     (float) v49 *
-					     *(float *) 0x662910);
+					     0.01f);
 				fcn_004c4570(4, 1, 0x1ac, &v38);
 			}
 		}
 		fcn_004c5360();
 		fcn_004fee50(p, v25[i] & 0xffff);
-		k = fcn_004e8210((unsigned char) v33[i], p, 0xff);
+		k = fcn_004e8210((unsigned char) v27[i], p, 0xff);
 		if (k != -1) {
 			while (fcn_004c4450(k) == 0) {
 				fcn_00535960();

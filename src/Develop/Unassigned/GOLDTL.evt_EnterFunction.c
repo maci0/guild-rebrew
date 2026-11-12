@@ -36,8 +36,9 @@ typedef struct EvtContext {
 } EvtContext;
 
 typedef struct EvtSymbol {
-	unsigned char kind;         /* 0x00, low nibble is the value type code */
-	char pad_01[0x2b];
+	signed int kind : 4;         /* 0x00, signed low nibble */
+	unsigned int unknown_bits : 28;
+	char pad_04[0x28];
 	char* data;                 /* 0x2c */
 } EvtSymbol;
 
@@ -55,6 +56,7 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 	int pos;
 	int n;
 	int k;
+	int* incoming;
 
 	pos = 0;
 	if (fn == 0) {
@@ -71,10 +73,9 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 		fcn_00425bf0(ip, ip->depth, (char*) 0x6794ec);
 		return;
 	}
-	n = fn->argc;
 	if (pos > 0) {
 		ip->depth++;
-		for (k = 0; k < n; k++) {
+		for (k = 0; k < fn->argc; k++) {
 			sym = (EvtSymbol*) fcn_00428800(0);
 			if (fn->types[k] == 6) {
 				strcpy(&storage[k * 0x60], (char*) sym);
@@ -82,15 +83,18 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 				args[k] = (int) sym;
 			}
 		}
-		if (n == 0) {
+		if (fn->argc == 0) {
 			ip->depth++;
 		}
+		ip->frame->depth = ip->depth;
 	} else {
+		n = fn->argc;
+		incoming = (int*) g_6b7ea0;
 		for (k = 0; k < n; k++) {
 			if (fn->types[k] == 6) {
 				strcpy(&storage[k * 0x60], (char*) 0x14cb540 + k * 0x60);
 			} else {
-				args[k] = ((int*) g_6b7ea0)[k];
+				args[k] = incoming[k];
 			}
 		}
 	}
@@ -99,25 +103,25 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 	ip->frame = slot;
 	slot->splice = ip->splice;
 	slot->code = (char*) fn;
-	for (k = 0; k < n; k++) {
+	for (k = 0; k < fn->argc; k++) {
 		sym = (EvtSymbol*) fcn_00425ec0(ip, fn->types[k], 1, fn->params[k]);
 		if (sym == 0) {
 			fcn_00425bf0(ip, ip->depth, (char*) 0x6794c0);
 			fcn_00428720((char*) ip);
 			return;
 		}
-		switch (sym->kind & 0x0f) {
-		case 1:
-			*(int*) sym->data = args[k];
-			break;
+		switch (sym->kind) {
 		case 2:
 			*sym->data = (char) args[k];
 			break;
-		case 6:
-			strcpy(sym->data, &storage[k * 0x60]);
+		case 1:
+			*(int*) sym->data = args[k];
 			break;
 		case 7:
 			*(float*) sym->data = (float) args[k];
+			break;
+		case 6:
+			strcpy(sym->data, &storage[k * 0x60]);
 			break;
 		default:
 			break;

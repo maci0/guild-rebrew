@@ -72,7 +72,7 @@ void __cdecl ch_Move2Universe(char* a0)
 			if (*(char*) (v4 + 0xf0)) {
 				strcpy(name, v4 + 0xf0);
 			} else {
-				strcpy(name, (char*) 0x675908);
+				memcpy(name, (void*) 0x675908, 14);
 			}
 			p = fcn_00445600(0, 0x100, 0, name);
 			if (p != 0 || (p = fcn_00445600(0, 0x100, 0, (char*) 0x675908)) != 0

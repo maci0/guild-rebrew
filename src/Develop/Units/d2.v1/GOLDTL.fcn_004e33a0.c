@@ -7,7 +7,9 @@
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_772f3c;
-extern int g_773da8;
+extern char* g_773da8;
+extern unsigned char* lpGebaeudePROT;
+typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } Building4e33a0;
 extern unsigned short g_774970;
 
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
@@ -22,7 +24,7 @@ void __cdecl SelectTextureSet(int a, int b, int c, int d);
 void __cdecl fcn_00455350(int a, int b, int* c);
 void* __cdecl fcn_004e4a80(char* name, int* b);
 void __cdecl fcn_00402b00(int a, int b);
-int __cdecl fcn_004fda30(short a);
+int __cdecl fcn_004fda30(unsigned short a);
 void* __cdecl fcn_004e44b0(char* name, int a);
 void __cdecl fcn_004e4b40(int id, int bank, char* label, int a, int b);
 void __cdecl fcn_00471af0(int dlg, int a);
@@ -31,7 +33,7 @@ void __cdecl fcn_004e44f0(int a);
 void __cdecl fcn_004e51d0(int arg, int* ids);
 void __cdecl fcn_004e4c90(int a);
 int __cdecl fcn_0050e4a0(int a);
-int __cdecl fcn_00502cd0(int a, int b, int c, int d);
+int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl fcn_004c5f60(int a, int b, int c);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4610(int a);
@@ -63,6 +65,7 @@ void __cdecl fcn_004e33a0(int* arg)
 	int bank_intro;
 	int dlg;
 	int npc;
+	int building;
 	int done;
 	int start;
 	int besti;
@@ -84,13 +87,13 @@ void __cdecl fcn_004e33a0(int* arg)
 	void* npc2;
 
 	npc = (int) gm_StartFilteredEntitySearch(1, 1, arg[0x7c / 4]);
+	building = npc;
 	besti = -1;
 	result = cut_RandMod(3);
 	fcn_004e4e90(0);
 	if (npc == 0)
 		return;
-	kind = *(char*) ((*(int*) 0x868050 + *(unsigned char*) npc)
-	    + *(unsigned char*) npc * 0x24c);
+	kind = ((Building4e33a0*) lpGebaeudePROT)[*(unsigned char*) npc].kind;
 	if (kind == 0x0b) {
 		fcn_0064d41a(name, (char*) 0x679060, "WALDSTUECK");
 	} else if (kind == 0x0d) {
@@ -157,7 +160,7 @@ void __cdecl fcn_004e33a0(int* arg)
 		npc2 = fcn_00445600(0, 0x100, 0, temp);
 		if (npc2 != 0)
 			fcn_00455350((int) npc2, (int) npc2 + 0x4c, bid);
-		foundName = fcn_004fda30(*(short*) (char*) bidders[i]);
+		foundName = bidders[i] != 0 ? fcn_004fda30(*(unsigned short*) (char*) bidders[i]) : 0;
 		if (bidders[i] != 0 && foundName != 0) {
 			fcn_0064d41a(temp, (char*) 0x679060,
 			    (char*) (foundName + 4));
@@ -194,7 +197,7 @@ void __cdecl fcn_004e33a0(int* arg)
 		fcn_00471af0(dlg, 0);
 	fcn_00471d80(dlg, 3);
 	d2_SetForm(dlg, 0);
-	io_AppendText((void*) 0x1aa2, (void*) npc, (void*) price);
+	io_AppendText((void*) 0x1aa2, (void*) building, (void*) price);
 	fcn_004e44f0(cand);
 	round = 0;
 	done = 0;
@@ -241,7 +244,7 @@ void __cdecl fcn_004e33a0(int* arg)
 			}
 			price += 0x20;
 			d2_SetForm(dlg, 0);
-			io_AppendText((void*) 0x1aa3, (void*) npc,
+			io_AppendText((void*) 0x1aa3, (void*) building,
 			    (void*) (round + 2), (void*) 5,
 			    (void*) bidCount, (void*) states[besti]);
 		}
@@ -253,12 +256,12 @@ void __cdecl fcn_004e33a0(int* arg)
 		fcn_004e4b40(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 7,
 		    200);
 		d2_SetForm(dlg, 0);
-		io_AppendText((void*) 0x1aa5, (void*) npc);
+		io_AppendText((void*) 0x1aa5, (void*) building);
 		if (arg[3] == *(int*) ((unsigned short) g_774970 * 0x21c
 		    + 0x7f4ca4)) {
-			fcn_004c5f60(*(int*) ((char*) npc + 1),
-			    *(int*) (*(int*) 0x773da8 + 4),
-			    *(int*) (*(int*) 0x773da8 + 4));
+			fcn_004c5f60(*(int*) ((char*) building + 1),
+			    *(int*) (g_773da8 + 4),
+			    *(int*) (g_773da8 + 4));
 		}
 	} else {
 		fcn_004e4b40(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 6,
@@ -269,10 +272,7 @@ void __cdecl fcn_004e33a0(int* arg)
 		    (void*) price);
 		if (arg[3] == *(int*) ((unsigned short) g_774970 * 0x21c
 		    + 0x7f4ca4)) {
-			other = (int) fcn_0050e4a0(1);
-			other = fcn_00502cd0(*(int*) ((char*) other + 0x5d), 2,
-			    6, 0x115);
-			found = 0;
+						found = 0;
 			for (j = 0; j < 0x300; j++) {
 				if (g_7f4ca0[j * 0x21c + 0x166] == 0x0b) {
 					found = (int) (g_7f4ca0 + j * 0x21c);
@@ -280,13 +280,15 @@ void __cdecl fcn_004e33a0(int* arg)
 				}
 			}
 			cur = *(int*) 0x7f4c00;
-			fcn_004c4510((char*) npc, *(int*) ((char*) npc + 1));
+			fcn_004c4510((char*) building, *(int*) ((char*) building + 1));
 			fcn_004c4570(4, 1, 0x69, &done);
 			fcn_004c4570(4, 1, 0x6d, &cur);
 			fcn_004c5360();
-			fcn_004c5f60(*(int*) ((char*) npc + 1),
-			    *(int*) (*(int*) 0x773da8 + 4),
+			fcn_004c5f60(*(int*) ((char*) building + 1),
+			    *(int*) (g_773da8 + 4),
 			    *(int*) ((char*) bidders[besti] + 4));
+			other = (int) fcn_0050e4a0(1);
+			other = fcn_00502cd0(*(int*) ((char*) other + 0x5d), 2, 6, 0, 0x115);
 			if (found == bidders[besti]) {
 				fcn_004c51a0(*(int*) ((char*) other + 2),
 				    *(int*) ((char*) bidders[besti] + 4), 0,
@@ -316,7 +318,7 @@ void __cdecl fcn_004e33a0(int* arg)
 	fcn_004e48b0();
 	fcn_004e4610(escBehavior);
 	fcn_004e44f0(escBehavior);
-	for (i = 0; i < n; i++) {
+	for (i = 0; i < *(unsigned char*) ((char*) arg + 0x30); i++) {
 		if (objs[i] != 0)
 			fcn_004e4aa0(objs[i]);
 	}

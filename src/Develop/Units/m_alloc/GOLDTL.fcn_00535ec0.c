@@ -41,7 +41,7 @@ void __cdecl fcn_00535ec0(void)
 	   written through byte offsets; the slot table stride is 0x21c. */
 	char slot_buf[0x114];
 	char seat_buf[0xf8];
-	char act_buf[0x70];
+	char act_buf[0xf8];
 
 	switch (g_14cf950) {
 	case 0x20: {
@@ -119,8 +119,8 @@ void __cdecl fcn_00535ec0(void)
 		*(pos14_7f4c00*) (act_buf + 0x28) = g_7f4c00;
 		*(int*) (act_buf + 0x5c) = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
 		*(unsigned short*) (act_buf + 0x62) = 0x1d76;
-		*(unsigned short*) (act_buf + 0x64) = 0x1d6d;
-		*(int*) (act_buf + 0x5c) = *(int*)
+		*(unsigned short*) (act_buf + 0x60) = 0x1d6d;
+		*(int*) (act_buf + 0x58) = *(int*)
 		    (*(unsigned short*) (g_7e2aa0 + 0x27) * 0x21c + 0x7f4ca4);
 		fcn_004c5530(act_buf);
 		return;

@@ -165,7 +165,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 		} while (n);
 		for (i = v; i < j; i++) {
 			for (h = i; h < j; h++) {
-				if (g_7f3f00[h].x10 != g_7f3f00[h].x10) {
+				if (g_7f3f00[h].x10 != g_7f3f00[i].x10) {
 					break;
 				}
 			}

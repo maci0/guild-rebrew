@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-#include "Develop/DieGildeAddOn/game/entity.h"
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 #pragma pack(1)
 /* message record handed to fcn_004c6be0 */
@@ -59,35 +59,13 @@ void __cdecl fcn_0056aef0(char* a1)
 	int k;
 	int i;
 	double d;
+	float amount;
 	Msg56 m;
 	char buf[0x400];
 
 	v = 0;
 	u = 0;
 	switch (*(int*)(a1 + 0x70)) {
-	case -2:
-	case -1:
-		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xb0));
-		if (h != 0) {
-			q = (char*)gm_SetupEntityQuery((unsigned char*)h);
-		}
-		p = (int*)(a1 + 0x8c);
-		n = 8;
-		do {
-			e = (char*)gm_LookupEntityRecordById(*p);
-			if (e != 0) {
-				fcn_004c5c80(*p);
-				if (h != 0) {
-					fcn_004c5da0(*p, *(int*)(h + 1), *(int*)(q + 2), 0, 0, "GebSpionage");
-				}
-				fcn_00529160(0, 0, *(unsigned short*)e, 0);
-			}
-			p++;
-			n--;
-		} while (n != 0);
-		fcn_00546190(a1);
-		return;
-
 	case 0:
 		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xac));
 		if (h == 0) {
@@ -156,7 +134,7 @@ void __cdecl fcn_0056aef0(char* a1)
 			return;
 		}
 		t = t / k;
-		d = ((double)t > 1.0) ? 1.0 : (double)t;
+		d = (1.0 > (double)t) ? 1.0 : (double)t;
 		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xac));
 		if (h == 0) {
 			*(int*)(a1 + 0x70) = -1;
@@ -165,8 +143,8 @@ void __cdecl fcn_0056aef0(char* a1)
 		v = fcn_0050c4e0((unsigned char*)h);
 		i = (int)d;
 		d = (double)v * 120.0 * (252.0 / (double)i) / (double)k;
-		if (d > 2880.0) {
-			d = 2880.0;
+		if (d > 2880.0f) {
+			d = 2880.0f;
 		}
 		i = (int)d;
 		*(pos14_7f4c00*)(a1 + 0x44) = g_7f4c00;
@@ -182,7 +160,7 @@ void __cdecl fcn_0056aef0(char* a1)
 			return;
 		}
 		i = *(unsigned short*)(h + 0x27);
-		ent = (char*)gm_LookupEntityRecordById(*(int*)((char*)g_slot_table + i * 0x21c + 4));
+		ent = (char*)gm_LookupEntityRecordById(*(int*)(g_7f4ca0 + i * 0x21c + 4));
 		q = (char*)gm_SetupEntityQuery((unsigned char*)h);
 		t = 0;
 		k = 0;
@@ -206,31 +184,31 @@ void __cdecl fcn_0056aef0(char* a1)
 			return;
 		}
 		t = t / k;
-		if (t > 42) {
-			t = 42;
-		}
+		t = (int)((42.0f > (double)t) ? 42.0f : (double)t);
 		h2 = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xac));
 		if (h2 == 0) {
 			*(int*)(a1 + 0x70) = -1;
 			return;
 		}
 		i = *(unsigned short*)(h2 + 0x27);
-		r = (char*)g_slot_table + i * 0x21c;
+		r = g_7f4ca0 + i * 0x21c;
 		q = (char*)fcn_00502cd0(*(int*)(h2 + 0x5d), 2, 6, 0, 0x2a);
 		i = gm_WalkEntityChain(*(unsigned short*)r);
-		if (i >= 100000) {
-			i = 100000;
+		if (i >= 1600000) {
+			i = 1600000;
 		}
 		m.f12 = (int)((double)i * 0.1);
 		v = 0;
 		if (q != 0) {
 			e = (char*)fcn_00502cd0(*(int*)(q + 0x14), 1, 5);
 			while (e != 0) {
-				v = (int)(fcn_0050bb50(*(unsigned short*)e, g_773d75) * (float)gm_GetMsgField(q, e) + (float)v);
+				amount = (float)gm_GetMsgField(q, e);
+				v = (int)(fcn_0050bb50(*(unsigned short*)e, g_773d75) * amount + (double)v);
 				e = (char*)gm_NextEntityQueryMatch();
 			}
 		}
-		i = (int)((double)k * (double)t * 0.25 / (double)fcn_0050c4e0((unsigned char*)h2));
+		amount = (float)((double)k * (double)t * 0.25f);
+		i = (int)(amount / (double)fcn_0050c4e0((unsigned char*)h2));
 		k = i + (gm_RandomMod(4) & 0xffff) - 2;
 		if (k > 100) {
 			k = 100;
@@ -243,8 +221,8 @@ void __cdecl fcn_0056aef0(char* a1)
 		m.f1a = (char)fcn_0050c710((unsigned char*)h2, 7, 1);
 		m.f1b = (char)k;
 		fcn_004c6be0(h, (char*)&m);
-		e = (char*)fcn_0050dc90(h);
 		if (*(char*)(ent + 2) == 6 || *(char*)(ent + 2) == 7) {
+			e = (char*)fcn_0050dc90(h);
 			if (u != 0) {
 				if (e == 0 || (e[0x1b4] & 1) == 0) {
 					io_FormatTextBuffer(buf, 0x19f8, *(unsigned short*)u, *(unsigned short*)r, h2);
@@ -254,6 +232,29 @@ void __cdecl fcn_0056aef0(char* a1)
 				}
 			}
 		}
+		fcn_00546190(a1);
+		return;
+
+	case -2:
+	case -1:
+		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xb0));
+		if (h != 0) {
+			q = (char*)gm_SetupEntityQuery((unsigned char*)h);
+		}
+		p = (int*)(a1 + 0x8c);
+		n = 8;
+		do {
+			e = (char*)gm_LookupEntityRecordById(*p);
+			if (e != 0) {
+				fcn_004c5c80(*p);
+				if (h != 0) {
+					fcn_004c5da0(*p, *(int*)(h + 1), *(int*)(q + 2), 0, 0, "GebSpionage");
+				}
+				fcn_00529160(0, 0, *(unsigned short*)e, 0);
+			}
+			p++;
+			n--;
+		} while (n != 0);
 		fcn_00546190(a1);
 		return;
 

@@ -9,6 +9,7 @@ char* __cdecl strstr(char*, char*);
 char* __cdecl strncpy(char*, char*, unsigned int);
 int __cdecl strcmp(char*, char*);
 char* __cdecl strcpy(char*, char*);
+char* __cdecl strcat(char*, char*);
 unsigned int __cdecl strlen(char*);
 void* __cdecl memset(void*, int, unsigned int);
 void* __cdecl m_alloc(unsigned int, char*);
@@ -27,6 +28,7 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 	char* p;
 	char* s;
 	char* d;
+	int fn;
 
 	tail = 0;
 	result = 0;
@@ -43,7 +45,24 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 		result = -1;
 		goto done;
 	}
-	memset(hdr, 0, 0x40);
+	fn = 0x40;
+	__asm {
+		mov edi, g_6b7d68
+		mov ebx, fn
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L49
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L49:
+		add ecx, ebx
+		rep stosb
+	}
 	if (fscanf(fp, "%s", hdr) == -1) {
 		result = -1;
 		goto after_banks;
@@ -70,7 +89,24 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 			result = -1;
 			goto done;
 		}
-		memset(node, 0, 0x108);
+		fn = 0x108;
+		__asm {
+			mov edi, node
+			mov ebx, fn
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L77
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		L77:
+			add ecx, ebx
+			rep stosb
+		}
 		for (p = strstr(buf, "~"); p != 0; p = strstr(p + 1, "~")) {
 			*p = 0x20;
 		}
@@ -78,8 +114,8 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 		p = strstr(buf, "%lang");
 		if (p != 0) {
 			*p = 0;
-			strcpy(buf + strlen(buf), a1);
-			strcpy((char*) node + (p - buf) + 5, buf);
+			strcat(buf, a1);
+			strcat(buf, (char*) node + (p - buf) + 5);
 		}
 		*(int*) ((char*) node + 0x100) = fcn_00423920(buf);
 	}
@@ -108,7 +144,24 @@ after_banks:
 			result = -1;
 			goto done;
 		}
-		memset(hdr, 0, 0x40);
+		fn = 0x40;
+		__asm {
+			mov edi, hdr
+			mov ebx, fn
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L116
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		L116:
+			add ecx, ebx
+			rep stosb
+		}
 		for (p = strstr(buf, "~"); p != 0; p = strstr(p + 1, "~")) {
 			*p = 0x20;
 		}
@@ -132,7 +185,24 @@ after_banks:
 				result = -1;
 				goto done;
 			}
-			memset(node, 0, 0x108);
+			fn = 0x108;
+			__asm {
+				mov edi, node
+				mov ebx, fn
+				xor eax, eax
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short L141
+				rep stosb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep stosd
+			L141:
+				add ecx, ebx
+				rep stosb
+			}
 			for (p = strstr(buf, "~"); p != 0; p = strstr(p + 1, "~")) {
 				*p = 0x20;
 			}
@@ -140,8 +210,8 @@ after_banks:
 			p = strstr(buf, "%lang");
 			if (p != 0) {
 				*p = 0;
-				strcpy(buf + strlen(buf), a1);
-				strcpy((char*) node + (p - buf) + 5, buf);
+				strcat(buf, a1);
+				strcat(buf, (char*) node + (p - buf) + 5);
 			}
 			*(int*) ((char*) node + 0x100) = fcn_00423920(buf);
 			if (*(int*) ((char*) node + 0x100) != 0) {

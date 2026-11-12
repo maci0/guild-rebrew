@@ -94,7 +94,24 @@ void __cdecl fcn_004e5a00(int* event)
     *(int*) 0x9b0e00 = *(int*) 0x6791c8;
     *(int*) 0x772f2c = 0;
     fcn_004cfe00();
-    memset((void*) 0x9b0940, 0, 0x480);
+    a = 0x480;
+    __asm {
+        mov edi, 0x9b0940
+        mov ebx, a
+        xor eax, eax
+        lea ecx, [edi+edi*2]
+        and ecx, 3
+        sub ebx, ecx
+        jle short fill_tail
+        rep stosb
+        mov ecx, ebx
+        and ebx, 3
+        shr ecx, 2
+        rep stosd
+fill_tail:
+        add ecx, ebx
+        rep stosb
+    }
     *(int*) 0x772f3c = 0;
     e[0x26] = (unsigned char) (e[0x26] | 4);
     if (*(int*) 0x7e46ac & 0x200000)
@@ -186,10 +203,11 @@ void __cdecl fcn_004e5a00(int* event)
         fcn_00438da0((float) w,
             (float) q - *(float*) 0x67d368 * *(float*) 0x662d98, 0.0f, t,
             *(int*) 0x10529c8, *(int*) 0x10421a0, *(int*) 0x10432a4, w, q);
+        t = *(float*) 0x67d368 * *(float*) 0x66291c;
         *(int*) 0x1040488 = 0;
-        *(int*) 0x1040480 = w;
+        *(int*) 0x1040480 = *(int*) 0x1040494;
         *(int*) 0x1040484 = (int) t;
-        *(int*) 0x104048c = (int) ((float) q - t);
+        *(int*) 0x104048c = (int) ((float) *(int*) 0x1040490 - t);
         if (*(int*) 0x6a2be0 != 0) {
             fcn_005270c0(0);
             ready = 1;
@@ -197,13 +215,14 @@ void __cdecl fcn_004e5a00(int* event)
             ready = 0;
         }
     }
-    goto resume;
+    goto display;
 
 mark:
     *(int*) 0x772f3c = 1;
 resume:
     if (*(int*) 0x772f40 == 0)
         fcn_004e4f10(event);
+display:
     saved_68bfc0 = *(int*) 0x68bfc0;
     if (e[8] == 2)
         fmt = (char*) 0x68d5ec;
@@ -224,7 +243,7 @@ resume:
     fcn_00471e30(*(int*) (e + 0x2c));
     *(int*) 0x68bfc0 = saved_68bfc0;
     if (*(int*) 0x772f3c != 0)
-        goto tail;
+        goto post_cleanup;
     fcn_004da280();
     *(int*) 0x6b5c34 = saved_6b5c34;
     if (*(unsigned char*) 0x7747b0 & 8)
@@ -277,6 +296,7 @@ tail:
         *(int*) 0x772f50 = 0;
         fcn_004730c0(0, 0, w, q, (char*) 0x67d67c, 0x5a, 0xa);
     }
+post_cleanup:
     fcn_004e4f10(event);
     n = *(unsigned short*) 0x774970;
     if (*(int*) (e + 0xc) == ((int*) 0x7f4ca0)[n * 135 + 1]) {

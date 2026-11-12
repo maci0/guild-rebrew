@@ -3,6 +3,7 @@
 
 void __cdecl fcn_00456530(int, int);
 void __cdecl fcn_00456c80(void);
+extern unsigned int g_14ce798, g_10405fc, g_104061c;
 
 #define SET_MODE(f) \
 	(*(int (__stdcall **)(int, int, int, int, int, int, int)) \
@@ -18,20 +19,21 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 	unsigned int h;
 
 	h = a1;
-	if (h >= *(unsigned int*) 0x14ce798) {
-		a1 = *(unsigned int*) 0x14ce798;
+	if (h >= g_14ce798) {
+		a1 = g_14ce798;
 	}
-	*(unsigned int*) 0x10405fc = a1;
-	*(unsigned int*) 0x104061c = a0;
+	g_10405fc = a1;
+	g_104061c = a0;
 	if (a0 >= a1) {
-		*(unsigned int*) 0x104061c = a1;
+		g_104061c = a1;
 	}
 	*(int*) 0x6b89b0 = a6;
 	*(char*) 0x1040600 = 1;
 	*(char*) 0x1040601 = a4;
 	*(char*) 0x10405f8 = 1;
 	fcn_00456530(a2, a3);
-	*(int*) 0x6b89b8 = 0;
+	r = 0;
+	*(int*) 0x6b89b8 = r;
 	if (a5) {
 		r = SET_MODE(0x1c);
 		if (r >= 0) {
@@ -41,7 +43,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		}
 		r = *(int*) 0x6b89b8;
 		if (r != 0) {
-			goto second;
+			goto chosen;
 		}
 		r = SET_MODE(0x19);
 		if (r >= 0) {
@@ -51,7 +53,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		}
 		r = *(int*) 0x6b89b8;
 		if (r != 0) {
-			goto second;
+			goto chosen;
 		}
 		r = SET_MODE(0x1a);
 		if (r >= 0) {
@@ -61,7 +63,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		}
 		r = *(int*) 0x6b89b8;
 		if (r != 0) {
-			goto second;
+			goto chosen;
 		}
 		r = SET_MODE(0x1d);
 		if (r >= 0) {
@@ -71,7 +73,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		}
 		r = *(int*) 0x6b89b8;
 		if (r != 0) {
-			goto second;
+			goto chosen;
 		}
 		r = SET_MODE(0x15);
 		if (r >= 0) {
@@ -81,7 +83,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		}
 		r = *(int*) 0x6b89b8;
 		if (r != 0) {
-			goto second;
+			goto chosen;
 		}
 		r = SET_MODE(0x1f);
 		if (r >= 0) {
@@ -90,8 +92,6 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 			goto chosen;
 		}
 		r = *(int*) 0x6b89b8;
-	} else {
-		r = 0;
 	}
 chosen:
 	*(char*) 0x6b89bc = r != 0;

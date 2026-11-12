@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 extern char* g_773da8;
+extern char g_7f4ca0[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
@@ -27,8 +28,9 @@ void __cdecl fcn_004ea620(void)
 	int count;
 	int found;
 	int kind;
-	int t;
-
+	unsigned short owner_id;
+	unsigned char t;
+	int best_i;
 	memset(a, 0, sizeof(a));
 	memset(b, 0, sizeof(b));
 	memset(cand, 0, sizeof(cand));
@@ -37,17 +39,18 @@ void __cdecl fcn_004ea620(void)
 	count = 0;
 	value = 0;
 	found = 0;
+	best_i = 0;
 	ent = gm_StartFilteredEntitySearch(1, 5, 4);
 	if (ent != 0) {
 		do {
 			if (count >= 0x10) {
 				break;
 			}
-			kind = *(unsigned short*) (ent + 0x27);
-			if (kind != 0xffff && kind != *(unsigned short*) g_773da8 && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
+			owner_id = *(unsigned short*) (ent + 0x27);
+			if (owner_id != 0xffff && owner_id != *(unsigned short*) g_773da8 && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
 				found++;
-				rec = (char*) (kind * 0x21c + 0x7f4ca0);
-				t = *(unsigned char*) (kind * 0x21c + 0x7f4e04);
+				rec = (char*) (g_7f4ca0 + owner_id * 0x21c);
+				t = *(unsigned char*) (rec + 0x164);
 				if (t >= 1 && t <= 6) {
 					for (i = 0; i < 0x10; i++) {
 						if (cand[i] == (unsigned int) rec) {
@@ -69,11 +72,11 @@ void __cdecl fcn_004ea620(void)
 			if (count >= 0x10) {
 				break;
 			}
-			kind = *(unsigned short*) (ent + 0x27);
-			if (kind != 0xffff && kind != *(unsigned short*) g_773da8 && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
+			owner_id = *(unsigned short*) (ent + 0x27);
+			if (owner_id != 0xffff && owner_id != *(unsigned short*) g_773da8 && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
 				found++;
-				rec = (char*) (kind * 0x21c + 0x7f4ca0);
-				t = *(unsigned char*) (kind * 0x21c + 0x7f4e04);
+				rec = (char*) (g_7f4ca0 + owner_id * 0x21c);
+				t = *(unsigned char*) (rec + 0x164);
 				if (t >= 0x28 && t <= 0x2d) {
 					for (i = 0; i < 0x10; i++) {
 						if (cand[i] == (unsigned int) rec) {
@@ -120,11 +123,11 @@ void __cdecl fcn_004ea620(void)
 			value = gm_WalkEntityChain(*(unsigned short*) existing);
 		}
 	}
-	for (i = 0; i < count; i++) {
-		n = gm_WalkEntityChain(*(unsigned short*) cand[i]);
+	for (; best_i < count; best_i++) {
+		n = gm_WalkEntityChain(*(unsigned short*) cand[best_i]);
 		if (value < n) {
 			value = n;
-			best = (char*) cand[i];
+			best = (char*) cand[best_i];
 		}
 	}
 	if (best == 0 || best == existing) {
@@ -136,6 +139,7 @@ void __cdecl fcn_004ea620(void)
 		if (abs(kind - t) < 6) {
 			fcn_004ea560(existing, *(unsigned char*) (existing + 0x169));
 			fcn_004ea4b0(best, *(unsigned char*) (existing + 0x169));
+			t = *(unsigned char*) (best + 0x164);
 			if (t >= 1 && t <= 6) {
 				fcn_004e8240((unsigned char) b[0], best, 0, 1, 0xff);
 			} else {

@@ -13,7 +13,7 @@ extern short* g_7746cc;
 extern int g_7746ac;
 extern int g_14ce8cc;
 extern int g_67fcb4;
-extern char** g_14a5310;
+extern char* g_14a5310[];
 extern char g_6b5c60[];
 extern double g_664e78;
 extern double g_662930;
@@ -30,6 +30,7 @@ int __cdecl fcn_00531c40(int a, int b, void* c);
 float __cdecl fcn_004fc460(char* p);
 float __cdecl fcn_004fbd40(void);
 
+struct Building_531d20 { unsigned char class_id; char pad1[0x24c]; };
 /* ADDRESS: GOLDTL 0x00531d20 */
 void __cdecl fcn_00531d20(void)
 {
@@ -38,7 +39,7 @@ void __cdecl fcn_00531d20(void)
 	float f[10];
 	char text[0x200];
 	unsigned char* sel;
-	unsigned char* kind;
+	struct Building_531d20* kind;
 	unsigned char* ent;
 	unsigned short* idp;
 	char** names;
@@ -66,7 +67,7 @@ void __cdecl fcn_00531d20(void)
 		i = g_7746c8;
 	sel = (unsigned char*) i;
 	if (sel != 0)
-		kind = lpGebaeudePROT + (unsigned) *sel * 0x24d;
+		kind = &((struct Building_531d20*) lpGebaeudePROT)[*sel];
 	if (g_7746b4 == 0
 	    || (fcn_00506380(g_774970, 0, 0, g_7746b4), g_7746b4 == 0))
 		rec = g_7746a4 != 0 ? fcn_00403300(g_7746a4) : 0;
@@ -75,13 +76,13 @@ void __cdecl fcn_00531d20(void)
 	if (rec != 0 && (*(unsigned char*) (rec + 4) & 1) == 0)
 		return;
 	if (sel != 0) {
-		if (*kind == 0x16) {
+		if (kind->class_id == 0x16) {
 			if (*g_7746cc != 0x120) {
-				if (*kind != 0x0f)
+				if (kind->class_id != 0x0f)
 					return;
 			}
 		} else {
-			if (*kind != 0x0f)
+			if (kind->class_id != 0x0f)
 				return;
 		}
 	}
@@ -139,7 +140,7 @@ void __cdecl fcn_00531d20(void)
 			case 0x14:
 				if (*(int*) (g_7746b4 + 0x16c) != 0) {
 					ent = *(unsigned char**) (g_7746b4 + 0x16c);
-					if (lpGebaeudePROT[(unsigned) *ent * 0x24d] == 0x20)
+					if (((struct Building_531d20*) lpGebaeudePROT)[*ent].class_id == 0x20)
 						io_FormatTextBuffer((char*) text,
 						    0x1286 + (fcn_0042e410(3) & 0xffff));
 					else
@@ -228,10 +229,10 @@ void __cdecl fcn_00531d20(void)
 			case 0x8c:
 				if (*(int*) (g_7746b4 + 0x16c) != 0) {
 					ent = *(unsigned char**) (g_7746b4 + 0x16c);
-					if (lpGebaeudePROT[(unsigned) *ent * 0x24d] == 0x1d)
+					if (((struct Building_531d20*) lpGebaeudePROT)[*ent].class_id == 0x1d)
 						io_FormatTextBuffer((char*) text,
 						    0x1283 + (fcn_0042e410(3) & 0xffff));
-					else if (lpGebaeudePROT[(unsigned) *ent * 0x24d] == 0x1f)
+					else if (((struct Building_531d20*) lpGebaeudePROT)[*ent].class_id == 0x1f)
 						io_FormatTextBuffer((char*) text,
 						    0x1289 + (fcn_0042e410(3) & 0xffff));
 				}

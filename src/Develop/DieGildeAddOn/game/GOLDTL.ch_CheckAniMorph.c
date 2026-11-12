@@ -52,6 +52,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 		if (frames[0x169] == 0 && (src[0x70] & 3) != 0) {
 			fcn_004311a0(entity, src, 0, *(int*) src, 3);
 		}
+		frames = *(char**) (src + 0x68);
 		fcn_00435500(*(char**) (entity + 0x1ec) + 0xf4, frames);
 		*(char**) (obj + 0x70) = 0;
 	}
@@ -74,15 +75,17 @@ void __cdecl ch_CheckAniMorph(char* obj)
 			frame = *(int*) (anim + 0x150);
 			step = frame != -1 ? frame : 0;
 			sprintf(buf, g_67553c, obj);
+			src = *(char**) (obj + 0x70);
+			anim = *(char**) (obj + 0x80);
 			frames = *(char**) (src + 0x68);
 			d = *(int*) (*(char**) (anim + 0x15c) + step * 0xc0) -
 			    *(int*) (*(char**) (frames + 0x15c) + *(int*) src * 0xc0);
 			prev = *(int*) (*(char**) (frames + 0x15c) +
 			                (*(int*) (frames + 0x148) - 1) * 0xc0);
 			interp = (int) ((float) ((prev + d) / 2) + g_6628cc);
-			entity = *(char**) (*(char**) (obj + 0x34) + 0x1cc);
-			if (entity != 0) {
-				if (fcn_00433be0(*(char**) (entity + 0x318), frames,
+			name = *(char**) (entity + 0x1cc);
+			if (name != 0) {
+				if (fcn_00433be0(*(char**) (name + 0x318), frames,
 				                 *(int*) src * 0xc0 + *(int*) (frames + 0x15c),
 				                 anim,
 				                 *(int*) (anim + 0x15c) + step * 0xc0, 0,
@@ -92,14 +95,14 @@ void __cdecl ch_CheckAniMorph(char* obj)
 					opt.loop = 0;
 					opt.reverse = 0;
 					opt.queue = 1;
-					anim = fcn_00434970(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4,
+					anim = fcn_00434970(*(char**) (entity + 0x1ec) + 0xf4,
 					                    buf, opt);
 					*(char**) (obj + 0x7c) = anim;
 					if (anim != 0) {
 						if (fcn_00413190(*(char**) (obj + 0x88)) != 0) {
-							*(int*) (anim + 0x3c) = g_675314;
+							*(int*) (*(char**) (obj + 0x7c) + 0x3c) = g_675314;
 						} else {
-							*(int*) (anim + 0x3c) = -1;
+							*(int*) (*(char**) (obj + 0x7c) + 0x3c) = -1;
 						}
 					}
 				} else {
@@ -108,12 +111,13 @@ void __cdecl ch_CheckAniMorph(char* obj)
 			}
 			frames = *(char**) (src + 0x68);
 			if (frames[0x169] == 0 && (src[0x70] & 3) != 0) {
-				fcn_004311a0(*(char**) (obj + 0x34), src, 0, *(int*) src, 3);
+				fcn_004311a0(entity, src, 0, *(int*) src, 3);
 			}
-			fcn_00435500(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, frames);
-			entity = *(char**) (*(char**) (obj + 0x34) + 0x1cc);
-			if (entity != 0 && *(int*) (entity + 0x390) != 0 &&
-			    *(int*) (entity + 0x40c) != 0) {
+			frames = *(char**) (src + 0x68);
+			fcn_00435500(*(char**) (entity + 0x1ec) + 0xf4, frames);
+			name = *(char**) (entity + 0x1cc);
+			if (name != 0 && *(int*) (name + 0x390) != 0 &&
+			    *(int*) (name + 0x40c) != 0) {
 				ReportClientMessage(g_675598);
 			}
 			*(char**) (obj + 0x70) = 0;
@@ -121,34 +125,33 @@ void __cdecl ch_CheckAniMorph(char* obj)
 		}
 		if (*(char**) (obj + 0x7c) == 0 && *(char**) (obj + 0x70) == 0) {
 			/* attach the pending animation stream by name */
-			name = *(char**) (obj + 0x80);
-			*(int*) (anim + 0x14c) = *(int*) (anim + 0x14c) - 1;
-			sprintf(path, g_675584, obj + 0x130, name);
-			if (d3_FindAnimByName(name) == 0) {
-				d3_LoadAnimStream(path, name, 0);
-			}
-			opt.mode = (unsigned char) obj[0x84] >= 1 ? (unsigned char) obj[0x84] : 1;
+			opt.mode = (signed char) obj[0x84] >= 1 ? (unsigned char) obj[0x84] : 1;
 			opt.layer = (unsigned char) obj[0x84] == 1 ? 0x18 : 0x08;
 			opt.loop = 0;
 			opt.reverse = 0;
 			opt.queue = 1;
-			anim = fcn_00434970(*(char**) (entity + 0x1ec) + 0xf4, name, opt);
+			*(int*) (anim + 0x14c) = *(int*) (anim + 0x14c) - 1;
+			if (d3_FindAnimByName(*(char**) (obj + 0x80)) == 0) {
+				sprintf(path, g_675584, obj + 0x130, *(char**) (obj + 0x80), obj + 0x130);
+				d3_LoadAnimStream(path, *(char**) (obj + 0x80), 0);
+			}
+			anim = fcn_00434970(*(char**) (entity + 0x1ec) + 0xf4, *(char**) (obj + 0x80), opt);
 			*(char**) (obj + 0x70) = anim;
 			*(char*) (obj + 0x85) = -1;
 			if (anim != 0) {
 				if (fcn_00413190(*(char**) (obj + 0x88)) != 0) {
-					*(int*) (anim + 0x3c) = g_675318;
+					*(int*) (*(char**) (obj + 0x70) + 0x3c) = g_675318;
 				} else {
-					*(int*) (anim + 0x3c) = -1;
+					*(int*) (*(char**) (obj + 0x70) + 0x3c) = -1;
 				}
-				frame = *(int*) (name + 0x150);
+				frame = *(int*) (*(char**) (obj + 0x80) + 0x150);
 				if (frame != -1 && cleared != 0) {
-					*(int*) anim = frame;
-					*(int*) (anim + 4) = frame + 1;
-					fcn_004316c0(entity);
+					*(int*) *(char**) (obj + 0x70) = frame;
+					*(int*) (*(char**) (obj + 0x70) + 4) = frame + 1;
+					fcn_004316c0(*(char**) (obj + 0x34));
 				}
 			} else {
-				sprintf(path, g_675548, name);
+				sprintf(path, g_675548, *(char**) (obj + 0x80));
 			}
 			*(char**) (obj + 0x80) = 0;
 		}

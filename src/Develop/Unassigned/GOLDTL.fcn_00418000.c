@@ -14,6 +14,8 @@ int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, int b, void 
 void __cdecl fcn_004526d0(int* s, float* pos);
 void __cdecl fcn_00417f00(void);
 extern int g_6b7fac;
+extern float g_6628a0;
+extern float g_662a18;
 
 /* ADDRESS: GOLDTL 0x00418000 */
 int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, float f6,
@@ -27,6 +29,7 @@ int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, flo
     unsigned char* rec;
     int sum;
     int i;
+    int mask;
 
     memset(&f, 0, sizeof(f));
     f.c |= 2;
@@ -34,6 +37,7 @@ int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, flo
     s = fcn_004524e0(n, "Rauch", f, a4, a1, fcn_00417f00);
     if (s != 0) {
         k = g_6b7fac;
+        mask = color.d;
         fcn_004526d0(s, pos);
         s[0] = v2;
         s[1] = v0;
@@ -41,32 +45,38 @@ int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, flo
         s[5] = *(int*) &p[1];
         s[6] = *(int*) &p[2];
         s[8] = v3;
-        sum = 0;
+        i = 0;
         rec = (unsigned char*) s[10];
-        spread = f8 * *(float*) 0x6628cc;
-        for (i = 0; i < s[0x36]; i++) {
+        if (s[0x36] > 0) { sum = 0; spread = f8 * *(float*) 0x6628cc;
+        do {
             *(float*) (rec + 0x10) = p[0];
             *(float*) (rec + 0x14) = p[1];
             *(float*) (rec + 0x14) = f6;
             *(float*) (rec + 0x18) = p[2];
-            v[0] = (float) fcn_0064d3f8() * *(float*) 0x662a18;
-            v[1] = (float) fcn_0064d3f8() * *(float*) 0x662a18;
-            v[2] = (float) fcn_0064d3f8() * *(float*) 0x662a18;
-            *(float*) (rec + 0x10) = v[0] * f8 - spread + *(float*) (rec + 0x10);
-            *(float*) (rec + 0x14) = v[1] * f8 - spread + *(float*) (rec + 0x14);
-            *(float*) (rec + 0x18) = v[2] * f8 - spread + *(float*) (rec + 0x18);
+            v[0] = (float) fcn_0064d3f8() * g_662a18;
+            v[1] = (float) fcn_0064d3f8() * g_662a18;
+            v[2] = (float) fcn_0064d3f8() * g_662a18;
+            v[0] *= f8;
+            v[1] *= f8;
+            v[2] *= f8;
+            v[0] -= spread;
+            v[1] -= spread;
+            v[2] -= spread;
+            *(float*) (rec + 0x10) += v[0];
+            *(float*) (rec + 0x14) += v[1];
+            *(float*) (rec + 0x18) += v[2];
             *(unsigned char*) (rec + 0x4f) = 0;
             v[3] = (*(float*) (rec + 0x14) - *(float*) (s + 1)) / *(float*) (rec + 0x14);
             *(float*) (rec + 0x1c) = v[3];
-            *(float*) rec = *(float*) 0x6628a0 / v[3];
-            *(float*) (rec + 4) = *(float*) 0x6628a0 / (*(float*) 0x6628a0 - v[3]);
-            *(unsigned char*) (rec + 0x4e) = (unsigned char) ((fcn_0064d3f8() & color.d) + color.c);
-            *(unsigned char*) (rec + 0x4d) = (unsigned char) ((fcn_0064d3f8() & color.d) + color.b);
-            *(unsigned char*) (rec + 0x4c) = (unsigned char) ((fcn_0064d3f8() & color.d) + color.a);
+            *(float*) rec = g_6628a0 / v[3];
+            *(float*) (rec + 4) = g_6628a0 / (g_6628a0 - *(float*) (rec + 0x1c));
+            *(unsigned char*) (rec + 0x4e) = (unsigned char) ((fcn_0064d3f8() & mask) + color.c);
+            *(unsigned char*) (rec + 0x4d) = (unsigned char) ((fcn_0064d3f8() & mask) + color.b);
+            *(unsigned char*) (rec + 0x4c) = (unsigned char) ((fcn_0064d3f8() & mask) + color.a);
             *(int*) (rec + 0x30) = (fcn_0064d3f8() & 7) + sum + k;
             sum += v4;
             rec += 0x54;
-        }
+        } while (++i < s[0x36]); }
     }
     return s;
 }

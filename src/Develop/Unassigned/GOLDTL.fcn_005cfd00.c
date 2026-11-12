@@ -37,26 +37,26 @@ int __cdecl fcn_005cfd00(unsigned short* self, int* action, unsigned char* entit
 	lo = 0;
 	hi = 0;
 	type = g_entity_type_table[entity[0] + entity[0] * 0x24c];
-	if (type < 0x20) {
-		lo = 1 << type;
-	} else {
+	if (type > 0x1f) {
 		hi = 1 << (type - 0x20);
+	} else {
+		lo = 1 << type;
 	}
 	if ((g_action_class_lo & lo) || (g_action_class_hi & hi)) {
 		if (action[3] & 0x40000000) {
 			return 0;
 		}
 	}
+	match = 0;
+	allow = 0;
+	unlisted = 1;
 	other = (unsigned int) action[3];
-	if ((int) other < 0 && (entity[0x5a] & 1)) {
+	if ((other & 0x80000000) && (entity[0x5a] & 1)) {
 		return 0;
 	}
-	match = 0;
 	if ((masks == 0 && other == 0) || (lo & masks) || (hi & other)) {
 		match = 1;
 	}
-	allow = 0;
-	unlisted = 1;
 	if (action[4] == 0) {
 		allow = 1;
 	} else {

@@ -12,9 +12,29 @@ char __cdecl fcn_00448b10(void)
 	unsigned char flags[8];
 	char *node;
 	unsigned char value;
+	void* dst;
+	int count;
 
 	if ((*(char *) 0x14cf950) != *(char *) 0x6b85a5) {
-		memcpy(flags, (void *) 0x1052bd0, 8);
+		dst = flags;
+		count = 8;
+		__asm {
+			mov edi, dst
+			mov esi, 0x1052bd0
+			mov ebx, count
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L_copy_tail
+			rep movsb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep movsd
+		L_copy_tail:
+			add ecx, ebx
+			rep movsb
+		}
 		*(char *) 0x6b85a5 = (*(char *) 0x14cf950);
 		switch ((unsigned char) (*(char *) 0x14cf950)) {
 		case 0x30:

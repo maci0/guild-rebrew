@@ -78,7 +78,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
     v12 = 0;
     v7 = 0;
     v13 = (float) (*(char*) (v4 * 0x300 + 0x869480 + v2) + 0x7f) *
-          *(float*) 0x662c30 * *(float*) 0x662cf8;
+          *(float*) 0x662c30 * *(float*) 0x662cf8; v15 = v13 + v15;
     v10 = (unsigned char*) *(unsigned int*) 0x90e094;
     do {
         if (*v10 && *(short*) (v10 + 0x27) == *(short*) (v9 + 0x7f4ca0)) {
@@ -100,7 +100,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
     v3 = v9 + 0x7f4ca0;
     v11 = a1 * 0x21c;
     v14 = fcn_004e7990((void*) v3, (void*) (v11 + 0x7f4ca0), v7, a2);
-    v15 = v14 + (v13 + v15);
+    v15 = v14 + v15;
     if (*(char*) (v11 + 0x7f4e06)) {
         fcn_004e8b40(*(unsigned char*) (v11 + 0x7f4e06), q);
         v17 = *(unsigned char*) (q + 8);
@@ -108,21 +108,21 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
             a1 = fcn_005c6270((void*) v3, 0x155);
             v15 = (float) (int) a1 * *(float*) 0x6640cc + v15;
             a1 = fcn_005c6270((void*) v3, 0x15d);
-            v13 = (float) (int) a1 * *(float*) 0x6640cc;
+            v15 = (float) (int) a1 * *(float*) 0x6640cc + v15;
         } else if (4 <= v17 && v17 <= 7) {
             a1 = fcn_005c6270((void*) v3, 0x157);
             v15 = (float) (int) a1 * *(float*) 0x6640cc + v15;
             a1 = fcn_005c6270((void*) v3, 0x15f);
-            v13 = (float) (int) a1 * *(float*) 0x662924;
+            v15 = (float) (int) a1 * *(float*) 0x662924 + v15;
         } else if (v17 > 7 && v17 < 10) {
             a1 = fcn_005c6270((void*) v3, 0x159);
-            v13 = (float) (int) a1 * *(float*) 0x664170;
+            v15 = (float) (int) a1 * *(float*) 0x664170 + v15;
             a1 = fcn_005c6270((void*) v3, 0x165);
-            v15 = (float) (int) a1 * *(float*) 0x664170 + v13 + v15;
+            v15 = (float) (int) a1 * *(float*) 0x664170 + v15;
             a1 = fcn_005c6270((void*) v3, 0x166);
-            v13 = (float) (int) a1 * *(float*) 0x662938;
+            v15 = (float) (int) a1 * *(float*) 0x662938 + v15;
         }
-        v15 = v13 + v15;
+
     }
     v14 = v15;
     if (fcn_005c6270((void*) v3, 0x2b6)) {

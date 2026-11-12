@@ -20,6 +20,14 @@ typedef unsigned short u2;
 typedef unsigned char u8;
 typedef unsigned int u4;
 
+typedef struct { u8 kind; u8 unknown01[0x246]; u8 level; u8 unknown248[5]; } Building547770;
+extern u8* lpGebaeudePROT;
+extern char* lpGebaeudeINST;
+extern char* g_773da8;
+extern int g_7747b4;
+extern int g_7f4c00;
+extern unsigned char g_773d75;
+
 extern void *__cdecl memset(void *p, int v, u32 n);
 int __cdecl rand(void);
 
@@ -41,12 +49,12 @@ int __cdecl fcn_00547670();
 #define REC_SIZE 0xa9
 
 #define FIND_REC(T)                                                          \
-    rp = *(u8 **)0x90e094;                                                   \
-    tb = *(u8 **)0x868050;                                                   \
-    wp = *(u2 **)0x773da8;                                                   \
+    rp = (u8*) lpGebaeudeINST;                                                   \
+    tb = lpGebaeudePROT;                                                   \
+    wp = (u2*) g_773da8;                                                   \
     for (m = 0; m < 0x100; m++, rp += REC_SIZE) {                            \
         if (*rp != 0) {                                                      \
-            q = tb + *rp + (u32)*rp * 0x24c;                                 \
+            q = (u8*) &((Building547770*) tb)[*rp];                                 \
             if (*q == (T)) {                                                 \
                 w = *(u2 *)(rp + 0x27);                                      \
                 if ((w == 0xffff) || (w == *wp)) {                           \
@@ -89,23 +97,23 @@ void __cdecl fcn_00547770(void)
     u2 w;
     u2 *wp;
 
-    wi = *(i32 *)0x7747b4;
+    wi = g_7747b4;
     wi = (wi > 4) ? 4 : wi;
     wi = (wi <= 0) ? 0 : wi;
-    a = *(i32 *)0x7f4c00 / 4 + 1;
+    a = g_7f4c00 / 4 + 1;
     thr = (float)a / ((float)a + *(float *)(wi * 4 + 0x665e68));
     fcn_00547670();
     memset(cnt, 0, 0x84);
     memset(cnt2, 0, 0x84);
-    rp = *(u8 **)0x90e094;
+    rp = (u8*) lpGebaeudeINST;
     for (j = 0; j < 0x100; j++, rp += REC_SIZE) {
         if (*rp != 0) {
-            q = *(u8 **)0x868050 + *rp + (u32)*rp * 0x24c;
+            q = (u8*) &((Building547770*) lpGebaeudePROT)[*rp];
             t = *q;
             if (t < 0x21) {
                 cnt[t]++;
                 w = *(u2 *)(rp + 0x27);
-                if ((w == 0xffff) || (w == **(u2 **)0x773da8)) {
+                if ((w == 0xffff) || (w == *(u2*) g_773da8)) {
                     cnt2[t]++;
                 } else if (t == 7) {
                     if (*(u8 *)((u32)w * 0x21c + 0x7f4cac) == 0) {
@@ -117,7 +125,7 @@ void __cdecl fcn_00547770(void)
             }
         }
     }
-    sw = *(i32 *)0x7f4c00 % 5;
+    sw = g_7f4c00 % 5;
     if (sw == 1) {
         int msk = 0;
         int zer = 0;
@@ -179,7 +187,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(0xb, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(0xb, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else if (sel == 2) {
                 if (cnt[19] < 3) {
@@ -191,7 +199,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(0xa, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(0xa, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else {
                 e2 = fcn_0050d170(0x27) * 2;
@@ -206,7 +214,7 @@ void __cdecl fcn_00547770(void)
             if (fcn_004c4450(u) == 1) {
                 int two = 2;
                 p = (int *)fcn_004c4480(u);
-                fcn_004c5150(p[1], -1, *(u8 *)0x773d75, e2);
+                fcn_004c5150(p[1], -1, g_773d75, e2);
                 fcn_004c4510(p, p[1]);
                 fcn_004c4570(1, 1, 0xd, &two);
                 fcn_004c5360();
@@ -291,7 +299,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(1, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(1, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else if (j == 1) {
                 if (cnt[21] < 3) {
@@ -303,7 +311,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(3, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(3, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else if (j == 2) {
                 if (cnt[20] < 3) {
@@ -315,7 +323,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(2, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(2, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else {
                 if (cnt[14] < 3) {
@@ -327,7 +335,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(5, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(5, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }
             u = fcn_004c4fc0(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
@@ -340,7 +348,7 @@ void __cdecl fcn_00547770(void)
             if (fcn_004c4450(u) == 1) {
                 int two = 2;
                 p = (int *)fcn_004c4480(u);
-                fcn_004c5150(p[1], -1, *(u8 *)0x773d75, e2);
+                fcn_004c5150(p[1], -1, g_773d75, e2);
                 fcn_004c4510(p, p[1]);
                 fcn_004c4570(1, 1, 0xd, &two);
                 fcn_004c5360();
@@ -401,7 +409,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(6, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(6, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else {
                 if (cnt[22] < 3) {
@@ -413,7 +421,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(4, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(4, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }
             u = fcn_004c4fc0(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
@@ -426,7 +434,7 @@ void __cdecl fcn_00547770(void)
             if (fcn_004c4450(u) == 1) {
                 int two = 2;
                 p = (int *)fcn_004c4480(u);
-                fcn_004c5150(p[1], -1, *(u8 *)0x773d75, e2);
+                fcn_004c5150(p[1], -1, g_773d75, e2);
                 fcn_004c4510(p, p[1]);
                 fcn_004c4570(1, 1, 0xd, &two);
                 fcn_004c5360();
@@ -494,7 +502,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(8, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(8, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else if (j == 1) {
                 if (n7a < n7b) {
@@ -505,7 +513,7 @@ void __cdecl fcn_00547770(void)
                 FIND_REC(7);
                 if (m < 0x100) {
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(7, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(7, (u32)((Building547770*) q)->level * 2 - 1);
                 } else if (cnt[7] < 2) {
                     e2 = fcn_0050d170(0x14) * 2;
                     lvl = fcn_00507400(7, 1);
@@ -523,7 +531,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(9, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(9, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }
             u = fcn_004c4fc0(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
@@ -536,7 +544,7 @@ void __cdecl fcn_00547770(void)
             if (fcn_004c4450(u) == 1) {
                 int two = 2;
                 p = (int *)fcn_004c4480(u);
-                fcn_004c5150(p[1], -1, *(u8 *)0x773d75, e2);
+                fcn_004c5150(p[1], -1, g_773d75, e2);
                 fcn_004c4510(p, p[1]);
                 fcn_004c4570(1, 1, 0xd, &two);
                 fcn_004c4570(1, 1, 0xc, &v);
@@ -610,7 +618,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(0xf, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(0xf, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else if (j == 1) {
                 if (cnt[31] < 3) {
@@ -622,7 +630,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(0xe, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(0xe, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else {
                 if (cnt[29] < 3) {
@@ -634,7 +642,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = fcn_0050cf50(rp, 0x64) * 2;
-                    lvl = fcn_00507400(0xd, (u32)q[0x247] * 2 - 1);
+                    lvl = fcn_00507400(0xd, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }
             u = fcn_004c4fc0(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0, v);
@@ -646,7 +654,7 @@ void __cdecl fcn_00547770(void)
             if (fcn_004c4450(u) == 1) {
                 int two = 2;
                 p = (int *)fcn_004c4480(u);
-                fcn_004c5150(p[1], -1, *(u8 *)0x773d75, e2);
+                fcn_004c5150(p[1], -1, g_773d75, e2);
                 fcn_004c4510(p, p[1]);
                 fcn_004c4570(1, 1, 0xd, &two);
                 fcn_004c5360();

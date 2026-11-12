@@ -13,13 +13,21 @@ typedef struct Calc {
 	int worst;
 } Calc;
 
-extern char* g_entity_type_table;
-extern unsigned char lpGebaeudeINST[];
+/* lpGebaeudePROT row (0x24d bytes). */
+typedef struct {
+	unsigned char type;
+	char pad1[0x246];
+	unsigned char level;
+	char pad248[5];
+} GebProt_49f6d0;
+
+extern unsigned char* lpGebaeudePROT;
+extern unsigned char* lpGebaeudeINST;
 
 int __cdecl fcn_004eb220(char*);
 int __cdecl fcn_00507910(int);
 int __cdecl fcn_004a40c0(Calc*);
-int __cdecl gm_RandomMod(int);
+unsigned short __cdecl gm_RandomMod(int);
 
 #pragma optimize("y", off)
 
@@ -32,24 +40,81 @@ unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* a1, 
 	int ids[7];
 	float scores[7];
 	unsigned char* ent;
-	unsigned char* rec;
+	GebProt_49f6d0* rec;
 	int off;
 	int i;
 	int kind;
 	int idx;
-	int bit;
+	int bit_lo;
+	int bit_hi;
 	int k;
 	int best;
 	int tie;
 	float score;
+	int fn;
+	int* fp;
 
 	if (a0 != 0 || a2 != 0)
 		return 0;
 	if (fcn_004eb220((char*) a1) != 1)
 		return 0;
-	memset(matched, 0, sizeof(matched));
-	memset(total, 0, sizeof(total));
-	memset(ids, 0, sizeof(ids));
+	fn = sizeof(matched);
+	fp = matched;
+	__asm {
+		mov edi, fp
+		mov ebx, fn
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L63
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L63:
+		add ecx, ebx
+		rep stosb
+	}
+	fn = sizeof(total);
+	fp = total;
+	__asm {
+		mov edi, fp
+		mov ebx, fn
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L66
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L66:
+		add ecx, ebx
+		rep stosb
+	}
+	fn = sizeof(ids);
+	fp = ids;
+	__asm {
+		mov edi, fp
+		mov ebx, fn
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L69
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L69:
+		add ecx, ebx
+		rep stosb
+	}
 	for (off = 0; off < 0xa900; off += 0xa9) {
 		ent = lpGebaeudeINST + off;
 		if (ent[0] == 0)
@@ -57,23 +122,25 @@ unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* a1, 
 		if (*(unsigned short*) (ent + 0x27) == 0xffff)
 			continue;
 		idx = ent[0];
-		rec = (unsigned char*) (g_entity_type_table + idx * 0x24d);
-		if (rec[0] < 0x20)
-			bit = 1 << (rec[0] & 0x1f);
+		rec = &((GebProt_49f6d0*) lpGebaeudePROT)[idx];
+		bit_lo = 0;
+		bit_hi = 0;
+		if (rec->type > 0x1f)
+			bit_hi = 1 << (rec->type - 0x20);
 		else
-			bit = 1 << ((rec[0] - 0x20) & 0x1f);
-		if ((bit & 0x744180) == 0)
+			bit_lo = 1 << rec->type;
+		if ((bit_lo & 0x744180) == 0 && (bit_hi & 0) == 0)
 			continue;
-		kind = fcn_00507910(rec[0]);
+		kind = fcn_00507910(rec->type);
 		if (kind == 0 || kind > 7)
 			continue;
 		kind--;
 		if (*(unsigned short*) (ent + 0x27) == a1[0])
-			matched[kind] += rec[0x247];
-		total[kind] += rec[0x247];
+			matched[kind] += rec->level;
+		total[kind] += rec->level;
 		if (ids[kind] == 0) {
 			ids[kind] = idx;
-		} else if (g_entity_type_table[ids[kind] * 0x24d + 0x247] < rec[0x247]) {
+		} else if (((GebProt_49f6d0*) lpGebaeudePROT)[ids[kind]].level < rec->level) {
 			ids[kind] = idx;
 		}
 	}
@@ -96,8 +163,8 @@ unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* a1, 
 		total[i] = count;
 		matched[i] = have;
 		if (count >= 1 && fcn_004a40c0(&calc[i])) {
-			score = (16.0f - (float) matched[i]) * 0.06666667f *
-				(((float) total[i] + 1.0f) - (float) matched[i]) / (float) total[i] *
+			score = ((float) total[i] + 1.0f - (float) matched[i]) / (float) total[i] *
+				((16.0f - (float) matched[i]) * 0.06666667f) *
 				calc[i].avg;
 			scores[i] = score;
 			if (k != -1) {

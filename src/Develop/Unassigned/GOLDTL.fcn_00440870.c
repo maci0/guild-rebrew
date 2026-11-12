@@ -100,7 +100,7 @@ void __cdecl fcn_00440870(char* o, char* c)
 				for (j = t[-1]; j <= *t; j++) {
 					idx = (j & mask) + rowbase;
 					hh = (float) *((unsigned char*) bmp + idx);
-					q = r + 0x38 + ((a & 3) + bd * 4) * 0x10;
+					q = r + 0x38 + ((j & 3) + (a & 3) * 4) * 0x10;
 					*(float*) o = px + *(float*) q;
 					*(float*) (o + 4) = hh * *(float*) (m + 0x84) + *(float*) (q + 4) + py;
 					*(float*) (o + 8) = pz + *(float*) (q + 8);
@@ -121,7 +121,7 @@ void __cdecl fcn_00440870(char* o, char* c)
 				for (j = t[-1]; j <= *t; j++) {
 					idx = (j & mask) + rowbase;
 					hh = (float) *((unsigned char*) bmp + idx);
-					q = r + 0x38 + ((a & 3) + bd * 4) * 0x10;
+					q = r + 0x38 + ((j & 3) + (a & 3) * 4) * 0x10;
 					*(float*) o = px + *(float*) q;
 					*(float*) (o + 4) = hh * *(float*) (m + 0x84) + *(float*) (q + 4) + py;
 					*(float*) (o + 8) = pz + *(float*) (q + 8);

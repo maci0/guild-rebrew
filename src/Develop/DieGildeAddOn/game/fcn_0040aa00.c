@@ -230,7 +230,7 @@ void __cdecl fcn_0040aa00(char* obj)
 		    i < *(int*) (obj + 0xf0)) {
 			j = i;
 			for (;;) {
-				r = j + 0x20;
+				r = i + 0x20;
 				if (r > 0x100) {
 					r = 0x100;
 				}
@@ -317,7 +317,7 @@ next:
 		*(float*) (obj + 0x108) = d;
 		if (d > 0.04 || d < -0.04) {
 			t = g_6b5c24 - g_67529c;
-			f = t * 0.9090909f;
+			f = t * 0.9090908765792847f;
 			if (*(int*) (inst + 4) & 8) {
 				f *= 0.4f;
 			} else if (*(int*) (inst + 4) & 0x10) {
@@ -326,7 +326,7 @@ next:
 			if (fabs(d) > 2.094395160675049 && !(*(int*) (inst + 4) & 8)) {
 				f *= 0.32f;
 			} else if (fabs(d) > 1.5707963705062866) {
-				f *= 0.2f;
+				f *= 0.19999998807907104f;
 			} else if (fabs(d) > 1.0471975803375244) {
 				f *= 0.14f;
 			} else if (fabs(d) > 0.5235987901687622) {
@@ -334,7 +334,7 @@ next:
 			} else {
 				f *= 0.04f;
 			}
-			a = f - *(float*) (o + 0x88);
+			a = *(float*) (o + 0x88) - f;
 			a = (float) fmod(a, 6.2831855f);
 			if (a < 0.0) {
 				a += 6.2831855f;
@@ -353,16 +353,16 @@ next:
 		*(float*) (obj + 0x108) = d;
 		if (d > 0.04 || d < -0.04) {
 			t = g_6b5c24 - g_67529c;
-			f = t * 0.9090909f;
+			f = t * 0.9090908765792847f;
 			if (*(int*) (inst + 4) & 8) {
 				f *= 0.4f;
 			} else if (*(int*) (inst + 4) & 0x10) {
 				f *= 1.4f;
 			}
 			if (fabs(d) > 2.094395160675049 && !(*(int*) (inst + 4) & 8)) {
-				a = f * 0.32f;
+				a = *(float*) (o + 0x88) - f * 0.32f;
 			} else if (fabs(d) > 1.5707963705062866) {
-				a = f * 0.2f + *(float*) (o + 0x88);
+				a = f * 0.19999998807907104f + *(float*) (o + 0x88);
 			} else if (fabs(d) > 1.0471975803375244) {
 				a = f * 0.14f + *(float*) (o + 0x88);
 			} else if (fabs(d) > 0.5235987901687622) {

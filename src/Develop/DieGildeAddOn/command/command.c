@@ -2290,7 +2290,7 @@ LAB_1000e0e7:
 	int amount;
 	char obj_category;
 	char log_buffer[512];
-
+	resolve_result = *(int*)0x14cbca0;
 	source_object = (ushort*)0;
 	dest_owner_entity = (short*)0;
 	source_owner_entity = (short*)0;
@@ -2302,7 +2302,7 @@ LAB_1000e0e7:
 	source_existing_entity = (void*)0;
 	dest_existing_entity = (char*)0;
 	source_static_entity = (short*)0;
-	if (*(int*)0x14cbca0 != -1) {
+	if (resolve_result != -1) {
 		*(int*)0x699364 = *(int*)(cmd + 0x1a);
 	}
 	if (*(int*)(cmd + 0x14) != -1) {

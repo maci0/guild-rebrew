@@ -63,17 +63,8 @@ void __cdecl fcn_0054a6a0(int a0)
 		return;
 	}
 	v3 = fcn_00502cd0(*(int*) (v7 + 0x5d), 1, 0, 0, 0x1b5);
-	v4 = *(int*) (v2 + 0x70);
-	if (v4) {
-		if (v4 == 1) {
-			fcn_00500bb0(v2 + 0x52,
-			              (int) ((gm_RandomMod(2) & 0xffff) + 1), 0, 0);
-			*(int*) (v2 + 0x84) = fcn_004c5620(2, v2);
-			return;
-		}
-		if (v4 != 2) {
-			return;
-		}
+	switch (*(int*) (v2 + 0x70)) {
+	case 2:
 		if (v3 && *(char*) (v3 + 0x22)) {
 			v8 = 0;
 			v9 = (char) 0xff;
@@ -113,7 +104,7 @@ void __cdecl fcn_0054a6a0(int a0)
 				                      0x7f4ca4),
 				             0xffffffff, g_773d75, pair[1]);
 				fcn_004c4510(v7, *(int*) (v7 + 1));
-				fcn_004c4570(4, 1, 0x69, (int*) (v12 + 4));
+				fcn_004c4570(4, 1, 0x69, &pair[1]);
 				fcn_004c5360();
 			}
 		}
@@ -121,24 +112,31 @@ void __cdecl fcn_0054a6a0(int a0)
 		*(unsigned short*) (v2 + 0x56) = 7;
 		*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
 		return;
-	}
-	v4 = (unsigned int) *(unsigned short*) (v7 + 0x27) * 0x21c;
-	v1 = *(char*) (v4 + 0x7f4ca2);
-	if (v1 != 6 && v1 != 7) {
-		if (!v3 || !fcn_00493200(v4 + 0x7f4ca0, v3)) {
+	case 1:
+		fcn_00500bb0(v2 + 0x52,
+		              (int) ((gm_RandomMod(2) & 0xffff) + 1), 0, 0);
+		*(int*) (v2 + 0x84) = fcn_004c5620(2, v2);
+		return;
+	case 0:
+		v4 = (unsigned int) *(unsigned short*) (v7 + 0x27) * 0x21c;
+		v1 = *(char*) (v4 + 0x7f4ca2);
+		if (v1 != 6 && v1 != 7) {
+			if (!v3 || !fcn_00493200(v4 + 0x7f4ca0, v3)) {
+				fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
+				*(unsigned short*) (v2 + 0x56) = 7;
+				*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
+				return;
+			}
+		} else if (!v3 || !*(char*) (v3 + 0x22)) {
 			fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
 			*(unsigned short*) (v2 + 0x56) = 7;
-			*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
+			v14 = 0;
+			*(int*) (v2 + 0x84) = fcn_004c5620(v14, v2);
 			return;
 		}
-	} else if (!v3 || !*(char*) (v3 + 0x22)) {
-		fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
-		*(unsigned short*) (v2 + 0x56) = 7;
-		v14 = 0;
+		fcn_00500bb0(v2 + 0x52, 1, 0, 0);
+		v14 = 1;
 		*(int*) (v2 + 0x84) = fcn_004c5620(v14, v2);
 		return;
 	}
-	fcn_00500bb0(v2 + 0x52, 1, 0, 0);
-	v14 = 1;
-	*(int*) (v2 + 0x84) = fcn_004c5620(v14, v2);
 }

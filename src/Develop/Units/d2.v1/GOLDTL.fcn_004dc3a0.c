@@ -64,10 +64,10 @@ int __cdecl fcn_004dc3a0(char* a0, int a1, int* a2, int* a3)
 	fcn_00471d80(gui, 1);
 	d2_SetForm(gui, 0);
 	if (n < 2) {
-		io_AppendText(0x12dc, *(unsigned short*) a2, *(unsigned short*) a2,
+		io_AppendText(0x12dc, *(unsigned short*) a1, *(unsigned short*) a1,
 		    (*(int*) (info + 8) & 0xff) + 0x253);
 	} else {
-		io_AppendText(0x12dd, *(unsigned short*) a2, *(unsigned short*) a2,
+		io_AppendText(0x12dd, *(unsigned short*) a1, *(unsigned short*) a1,
 		    (*(int*) (info + 8) & 0xff) + 0x253);
 	}
 	for (i = 0; i < found; i++) {

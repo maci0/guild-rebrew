@@ -128,7 +128,7 @@ void __cdecl fcn_004d8d00(char* a0)
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
 			fcn_004c6940(obj, 7, msg.f);
-			p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
+			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 			break;
 		case 1:
 			if (p->timer != 1 && !fcn_004c4450(p->timer))
@@ -149,9 +149,9 @@ void __cdecl fcn_004d8d00(char* a0)
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
 				fcn_004c6940(obj, 6, msg.f);
-				msg.f[3] = *(int*)(obj + 4);
-				msg.f[4] = 0;
-				p->timer = fcn_004c67c0((int)&msg.f[3], (void*)*(int*)(a0 + 0x10));
+
+
+				p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 			}
 			break;
 		case 2:
@@ -166,7 +166,7 @@ void __cdecl fcn_004d8d00(char* a0)
 					msg.f[0] = *(int*)(obj + 4);
 					msg.f[1] = 0;
 					fcn_004c6940(obj, 6, msg.f);
-					p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
+					p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 					break;
 				}
 			}
@@ -176,7 +176,7 @@ void __cdecl fcn_004d8d00(char* a0)
 					msg.f[0] = *(int*)(obj + 4);
 					msg.f[1] = 0;
 					fcn_004c6940(obj, 6, msg.f);
-					p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
+					p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 					break;
 				}
 			}
@@ -194,7 +194,7 @@ void __cdecl fcn_004d8d00(char* a0)
 				    && p->c0c) {
 					fcn_0045b920((int)base, p->f14, p->f18, vec);
 					v24 = CompareVector3WithinTolerance(vec,
-					    (float*)((*(int*)(*(int*)(obj) + 0x34)) + 0x4c), 120.0f) != 0;
+					    (float*)((*(int*)(*(int*)(obj + 0x184) + 0x34)) + 0x4c), 120.0f) != 0;
 				}
 			} else if (*(int*)ent == 0x176) {
 				if (tgt) {
@@ -222,7 +222,7 @@ void __cdecl fcn_004d8d00(char* a0)
 				}
 			}
 			if (*((unsigned char*)p + 0x1d) != v24
-			    || *(int*)(ent + 0x128) == 0) {
+			    || *(int*)(*(int*)(obj + 0x184) + 0x128) == 0) {
 				*((unsigned char*)p + 0x1d) = (unsigned char)v24;
 				if (v24) {
 					if (*(int*)(ent + 0x58) != 2) {
@@ -307,7 +307,7 @@ void __cdecl fcn_004d8d00(char* a0)
 					goto tail1;
 				if (p->c1c)
 					goto tail1;
-				if (!fcn_0045b990(base, (float*)((*(int*)(*(int*)(obj) + 0x34)) + 0x4c),
+				if (!fcn_0045b990(base, (float*)((*(int*)(*(int*)(obj + 0x184) + 0x34)) + 0x4c),
 					&v84, &v80, &v28))
 					break;
 				if (tgt) {
@@ -341,7 +341,7 @@ lvl3:
 			if (fcn_004d31d0(obj, *(int*)0x102d020, *(int*)0x102d024, 0xc,
 				(unsigned int*)&v10, (unsigned int*)&v14))
 				p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
-			p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
+			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 			goto after2;
 tail2:
 			fcn_004c5420(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
@@ -359,7 +359,7 @@ tail1_body:
 				p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
+			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 			goto after2;
 		case 3:
 			if (p->timer != 1 && !fcn_004c4450(p->timer))
@@ -383,7 +383,7 @@ tail1_body:
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
 			fcn_004c6940(obj, 1, msg.f);
-			p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
+			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 			break;
 		case 6:
 			if (p->timer != 1 && !fcn_004c4450(p->timer))
@@ -393,7 +393,7 @@ tail1_body:
 				fcn_004c6940(obj, 6, msg.f);
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
-				p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
+				p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 			}
 			if (!*((unsigned char*)p + 0x22)) {
 				if (*(int*)(*(int*)(obj + 0x184) + 0x128) == 0) {
@@ -427,8 +427,8 @@ tail1_body:
 					break;
 				*((unsigned char*)msg.f + 0x20) = (unsigned char)v10;
 				*((unsigned char*)msg.f + 0x21) = (unsigned char)v14;
-				fcn_004c6820(*(int*)(a0 + 0x10), msg.f);
 				*((unsigned char*)msg.f + 0x22) = 2;
+				fcn_004c6820(*(int*)(a0 + 0x10), msg.f);
 				n = (*(int*)(*(int*)(obj + 0x184) + 0x34));
 				p->timer = fcn_004c6680((char*)n, v10, v14, 0);
 			} else if (*((unsigned char*)p + 0x22) == 2) {
@@ -440,7 +440,7 @@ tail1_body:
 				fcn_004c6940(obj, 5, msg.f);
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
-				p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
+				p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 			}
 			break;
 		case 4:
@@ -486,7 +486,7 @@ tail1_body:
 			fcn_004c6940(obj, 3, msg.f);
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
+			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 			break;
 case4b:
 			fcn_00455350(e, (float*)(e + 0x4c), vec);
@@ -503,7 +503,7 @@ case4b:
 				break;
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
+			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 			break;
 		case 7:
 			if (p->timer != 1 && !fcn_004c4450(p->timer))
@@ -524,7 +524,7 @@ case4b:
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
 				fcn_004c6940(obj, 6, msg.f);
-				p->timer = fcn_004c67c0((int)msg.f, (void*)*(int*)(a0 + 0x10));
+				p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 			}
 			break;
 		case 8:

@@ -1,16 +1,12 @@
 #include <string.h>
-
 #include "client_types.h"
 #include "client_actions.h"
-
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_14ac864;
 extern int g_67d370;
 extern int g_772514;
 #include "client_dialog_state.h"
 extern pos14_7f4c00 g_7f4c00;
-
 // SIZE 0xf8
 typedef struct {
 	int f0;
@@ -56,7 +52,7 @@ void __cdecl fcn_005ca560(Rec_5d5930*);
 void __cdecl fcn_005ca740(int, int, int, int, Rec_5d5930*, int);
 void __cdecl fcn_005c9160(char*, int, int, int, int);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_00525f60(int*, int);
+int __cdecl fcn_00525f60(void*, int);
 int __cdecl fcn_005d5670(unsigned char*, unsigned char*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -95,12 +91,15 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 			pos = g_7f4c00;
 			fcn_00500bb0(&pos, 0x60, 0, 0);
 			memset(&m, 0, sizeof(m));
+			m.pos.a = g_7f4c00.a;
+			m.pos.c = g_7f4c00.c;
+			m.f8 = *(int*) (p + 4);
 			m.fc = *(int*) (p + 4);
+			m.pos.b = g_7f4c00.b;
+			m.f58 = *(int*) (p + 4);
 			m.b4 = 0x45;
 			m.b36 = 2;
-			m.f8 = *(int*) (p + 4);
-			m.pos = g_7f4c00;
-			m.f58 = *(int*) (p + 4);
+			m.pos.d = g_7f4c00.d;
 			m.f5c = *(int*) (e + 4);
 			fcn_004c5530(&m);
 			return 0x10;
@@ -112,13 +111,13 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 	dlg = fcn_00470820(0, 0, "privillegien\\erpressung");
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	io_AppendText(0x1d55);
-	d2_SetForm(dlg, 2);
+	io_AppendText(0x1d55);	d2_SetForm(dlg, 2);
+	k = g_772514;
 	d2_SetForm(dlg, 3);
-	fcn_0046e830(-1, -1, g_772514, g_772514, 0x767);
+	fcn_0046e830(-1, -1, g_772514, k, 0x767);
 	n = fcn_004f61c0(ids, b, c, *(unsigned short*) p);
-	cnt = 0;
-	for (i = 0; i < n; i++) {
+	cnt = i = 0;
+	for (; i < n; i++) {
 		obj = gm_LookupEntityRecordById(ids[i]);
 		if (obj != 0) {
 			recs[cnt].p0 = (int) obj;
@@ -154,7 +153,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 		if (g_100f1dc != -1) {
 			for (i = 0, rp = (int*) recs; i < cnt; i++, rp += 0xe) {
 				if (g_67d370 == rp[1]) {
-					if (fcn_00525f60(q, 2) != 0) {
+					if (fcn_00525f60(p, 2) != 0) {
 						if ((*(unsigned int*) (recs[i].p0 + 0x1c8) & 0x200) != 0) {
 							io_FormatTextBuffer(buf, 0x1d52, *(unsigned short*) recs[i].p0);
 							fcn_00526120(buf, 0);
@@ -162,7 +161,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 							fcn_00526120(*(char**) 0x14ac864, 0);
 						} else {
 							obj = gm_LookupEntityRecordById(ids[i]);
-							if (fcn_005d5670((unsigned char*) q, (unsigned char*) obj) != 0) {
+							if (fcn_005d5670(p, (unsigned char*) obj) != 0) {
 								g_774654 = 1;
 							}
 							result = 0x92;

@@ -24,8 +24,9 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, int a2, int a3)
 	signed char found;
 	char ok;
 	unsigned char *rec;
-	unsigned char *dst;
 	int *entry;
+	char *csrc;
+	int ccnt;
 
 	*(int *) 0x14ce730 = a0;
 	if (*(int *) 0x6b5ddc == 0 || *(unsigned int *) 0x6b5de8 <= 0)
@@ -130,12 +131,48 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, int a2, int a3)
 	}
 	return *(int *) &g_6b5de0 != 0;
 success:
-	dst = (unsigned char *) 0x14ce740;
-	memcpy(dst, (void *) (*(int *) 0x6b5dd0 + slot * 0x508 + 0x42c), 0xd4);
+	ccnt = 0xd4;
+	csrc = (char *) (*(int *) 0x6b5dd0 + slot * 0x508 + 0x42c);
+	/* Reviewed original operand-homed copy (inline fill/copy block). */
+	__asm {
+		mov edi, 0x14ce740
+		mov esi, csrc
+		mov ebx, ccnt
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep movsb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep movsd
+	L1:
+		add ecx, ebx
+		rep movsb
+	}
 	if (*(unsigned int *) 0x14ce7e0 < 8)
 		*(int *) 0x14ce7e0 = 8;
-	dst = (unsigned char *) 0x14ce860;
-	memcpy(dst, pos, 0x10);
+	ccnt = 0x10;
+	csrc = (char *) pos;
+	/* Reviewed original operand-homed copy (inline fill/copy block). */
+	__asm {
+		mov edi, 0x14ce860
+		mov esi, csrc
+		mov ebx, ccnt
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L2
+		rep movsb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep movsd
+	L2:
+		add ecx, ebx
+		rep movsb
+	}
 	*(int *) 0x14ce72c = 1;
 	fcn_0041ba40();
 	return *(int *) &g_6b5de0 != 0;

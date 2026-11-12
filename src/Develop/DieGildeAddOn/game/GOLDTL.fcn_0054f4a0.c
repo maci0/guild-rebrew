@@ -42,7 +42,7 @@ void __cdecl fcn_0054f4a0(char* a0, char* a1, unsigned char* a2)
 			ret = (unsigned short) gm_RandomMod(3) + 1;
 		}
 	}
-	d = gm_GetEntitySkill(a1, 4) * g_662924;
+	d = gm_GetEntitySkill(a1, 4) * 8.0f;
 	delay = -9 - (int) d;
 	delay -= gm_RandomMod(8) & 0xffff;
 	fcn_004ec2d0(a2, ret, delay);

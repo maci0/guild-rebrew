@@ -1,4 +1,5 @@
 #include <string.h>
+extern int g_6b7fb8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* Watch the cursor and the two button click latches, then publish the new
  * /selection state into the shared UI state block. */
@@ -13,7 +14,7 @@ void __cdecl fcn_00411b80(void)
 	int timedout;
 	int* probe;
 
-	t = *(int*) 0x6b7fb8;
+	t = g_6b7fb8;
 	if (*(int*) 0x6b5c90) {
 		return;
 	}
@@ -21,11 +22,12 @@ void __cdecl fcn_00411b80(void)
 	other = *(int*) 0x6b5ca4;
 	if (pressed != 0) {
 		if (t - pressed > 0xf || (int) *(short*) &g_14ce920 < other - 3 ||
-		    other + 3 < (int) *(short*) &g_14ce920 ||
-		    *(int*) 0x6b5ca8 + 3 < (int) *(short*) &g_14ce922 ||
+		    (int) *(short*) &g_14ce920 > other + 3 ||
+		    (int) *(short*) &g_14ce922 > *(int*) 0x6b5ca8 + 3 ||
 		    (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {
-			*(int*) 0x14ce934 = 1;
+			g_14ce920[5] = 1;
 			*(int*) 0x6b5c98 = 0;
+			pressed = 0;
 			*(int*) 0x6b5cac = -1;
 			armed = -1;
 			goto after_check;
@@ -33,47 +35,47 @@ void __cdecl fcn_00411b80(void)
 	}
 	armed = *(int*) 0x6b5cac;
 after_check:
-	if (*(int*) 0x14ce92c && *(int*) 0x6b5c8c) {
+	if (g_14ce920[3] && *(int*) 0x6b5c8c) {
 		*(int*) 0x6b5c98 = 0;
 		*(int*) 0x6b5c8c = 0;
-		*(int*) 0x14ce930 = 0;
+		g_14ce920[4] = 0;
 		goto label_411cbe;
 	}
-	if (*(int*) 0x14ce930 && !pressed) {
+	if (g_14ce920[4] && !pressed) {
 		other = (int) *(short*) &g_14ce920;
 		*(int*) 0x6b5ca8 = (int) *(short*) &g_14ce922;
 		*(int*) 0x6b5c98 = t;
 		*(int*) 0x6b5ca4 = other;
 	}
-	if (armed != -1 && 0x29 <= t - armed) {
+	if (armed != -1 && t - armed > 0x28) {
 		armed = -1;
 		*(int*) 0x6b5c98 = 0;
 		*(int*) 0x6b5cac = -1;
 	}
-	if (*(int*) 0x14ce92c) {
+	if (g_14ce920[3]) {
 		if (armed == -1 || 0x28 <= t - armed) {
 			*(int*) 0x6b5c98 = 0;
 			*(int*) 0x6b5cac = t;
-			if (*(int*) 0x14ce934) {
+			if (g_14ce920[5]) {
 label_411cbe:
-				*(int*) 0x14ce92c = 0;
+				g_14ce920[3] = 0;
 				*(int*) 0x6b5cac = -1;
 label_411cca:
 				*(int*) 0x6b5c98 = 0;
-				*(int*) 0x14ce934 = 0;
+				g_14ce920[5] = 0;
 			} else {
 				goto label_411cca;
 			}
 		} else {
-			*(int*) 0x14ce93c = 1;
-			*(int*) 0x14ce92c = 0;
+			g_14ce920[7] = 1;
+			g_14ce920[3] = 0;
 			*(int*) 0x6b5cac = -1;
 			*(int*) 0x6b5c98 = 0;
 		}
 	}
 	armed = *(int*) 0x6b5c9c;
-	pressed = *(int*) 0x14ce948;
-	if (*(int*) 0x14ce944) {
+	pressed = g_14ce920[10];
+	if (g_14ce920[9]) {
 		if (!*(int*) 0x6b5c9c) {
 			other = (int) *(short*) &g_14ce920;
 			*(int*) 0x6b5ca8 = (int) *(short*) &g_14ce922;
@@ -83,15 +85,15 @@ label_411cca:
 			goto label_411d04;
 		}
 label_411d08:
-		if (!*(int*) 0x14ce948 && *(int*) 0x14ce944) {
-			if (0x10 <= t - armed) {
+		if (!g_14ce920[10] && g_14ce920[9]) {
+			if (t - armed > 0xf) {
 				pressed = 1;
 				*(int*) 0x6b5c9c = 0;
-				*(int*) 0x14ce948 = 1;
+				g_14ce920[10] = 1;
 			}
-			if ((int) *(short*) &g_14ce920 < other - 3 || other + 3 < (int) *(short*) &g_14ce920 || *(int*) 0x6b5ca8 + 3 < (int) *(short*) &g_14ce922 || (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {
+			if ((int) *(short*) &g_14ce920 < other - 3 || (int) *(short*) &g_14ce920 > other + 3 || (int) *(short*) &g_14ce922 > *(int*) 0x6b5ca8 + 3 || (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {
 				*(int*) 0x6b5c9c = 0;
-				*(int*) 0x14ce948 = 1;
+				g_14ce920[10] = 1;
 				pressed = 1;
 			}
 		}
@@ -101,21 +103,21 @@ label_411d04:
 			goto label_411d08;
 		}
 	}
-	armed = *(int*) 0x14ce940;
-	if (*(int*) 0x14ce940) {
+	armed = g_14ce920[8];
+	if (g_14ce920[8]) {
 		if (pressed) {
 			armed = 0;
 			pressed = 0;
-			*(int*) 0x14ce940 = 0;
-			*(int*) 0x14ce948 = 0;
-			*(int*) 0x14ce930 = 0;
-			*(int*) 0x14ce934 = 0;
+			g_14ce920[8] = 0;
+			g_14ce920[10] = 0;
+			g_14ce920[4] = 0;
+			g_14ce920[5] = 0;
 		}
 		*(int*) 0x6b5c9c = 0;
 	}
 	state = *(int*) 0x6b5ca0;
-	timedout = *(int*) 0x14ce958;
-	if (*(int*) 0x14ce954) {
+	timedout = g_14ce920[14];
+	if (g_14ce920[13]) {
 		if (!*(int*) 0x6b5ca0) {
 			other = (int) *(short*) &g_14ce920;
 			*(int*) 0x6b5ca8 = (int) *(short*) &g_14ce922;
@@ -130,36 +132,36 @@ label_411ddd:
 			goto label_411e58;
 		}
 	}
-	if (!*(int*) 0x14ce958 && *(int*) 0x14ce954) {
-		if (0x10 <= t - state) {
+	if (!g_14ce920[14] && g_14ce920[13]) {
+		if (t - state > 0xf) {
 			timedout = 1;
 			*(int*) 0x6b5ca0 = 0;
-			*(int*) 0x14ce958 = 1;
+			g_14ce920[14] = 1;
 		}
-		if ((int) *(short*) &g_14ce920 < other - 3 || other + 3 < (int) *(short*) &g_14ce920 || *(int*) 0x6b5ca8 + 3 < (int) *(short*) &g_14ce922 || (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {
+		if ((int) *(short*) &g_14ce920 < other - 3 || (int) *(short*) &g_14ce920 > other + 3 || (int) *(short*) &g_14ce922 > *(int*) 0x6b5ca8 + 3 || (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {
 			*(int*) 0x6b5ca0 = 0;
-			*(int*) 0x14ce958 = 1;
+			g_14ce920[14] = 1;
 			timedout = 1;
 		}
 	}
 label_411e58:
-	if (*(int*) 0x14ce950) {
-		*(int*) 0x14ce950 = 0;
+	if (g_14ce920[12]) {
+		g_14ce920[12] = 0;
 		if (timedout) {
 			timedout = 0;
-			*(int*) 0x14ce958 = 0;
+			g_14ce920[14] = 0;
 		}
 		*(int*) 0x6b5ca0 = 0;
 	}
-	if ((*(int*) 0x14ce92c != *(int*) 0x14cf90c || *(int*) 0x14ce930 != *(int*) 0x14cf910 || *(int*) 0x14ce934 != *(int*) 0x14cf914 || *(int*) 0x14ce93c != *(int*) 0x14cf91c ||
-	    armed != *(int*) 0x14cf920 || *(int*) 0x14ce944 != *(int*) 0x14cf924 || pressed != *(int*) 0x14cf928 || *(int*) 0x14cf930 || *(int*) 0x14ce954 != *(int*) 0x14cf934 ||
-	    timedout != *(int*) 0x14cf938 || *(int*) 0x14ce964 != *(int*) 0x14cf944 || *(int*) 0x14ce960 != *(int*) 0x14cf940) && !*(int*) 0x14cf2fc) {
+	if ((g_14ce920[3] != g_14cf900[3] || g_14ce920[4] != g_14cf900[4] || g_14ce920[5] != g_14cf900[5] || g_14ce920[7] != g_14cf900[7] ||
+	    armed != g_14cf900[8] || g_14ce920[9] != g_14cf900[9] || pressed != g_14cf900[10] || g_14cf900[12] || g_14ce920[13] != g_14cf900[13] ||
+	    timedout != g_14cf900[14] || g_14ce920[17] != g_14cf900[17] || g_14ce920[16] != g_14cf900[16]) && !*(int*) 0x14cf2fc) {
 		probe = (int*) 0x14cf2fc;
 		armed = 0x1f;
 		do {
 			probe = &probe[-0x13];
 			armed -= 1;
-			if (probe < (int*) 0x14ce9c8) {
+			if ((int) probe < 0x14ce9c8) {
 				armed = 0;
 				goto label_411f42;
 			}

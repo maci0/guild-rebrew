@@ -1,5 +1,5 @@
-#define MIN(a, b) ((a) > (b) ? (b) : (a))
-#define MAX(a, b) ((a) < (b) ? (b) : (a))
+#define MIN(a, b) ((b) > (a) ? (a) : (b))
+#define MAX(a, b) ((b) < (a) ? (a) : (b))
 
 extern char* g_6b8014;
 
@@ -51,9 +51,9 @@ int __cdecl fcn_00413480(char* a0, float a1, float* a2, float* a3, float* a4, fl
 		n -= i;
 		do {
 			if (p[1] * *(float*) (e + 0x1c) + p[2] * *(float*) (e + 0x2c) + p[0] * *(float*) (e + 0xc) + *(float*) (e + 0x3c) <= a1) {
-				for (j = 0; j < 3; j++) {
-					lo[j] = MIN(lo[j], p[j]);
-					hi[j] = MAX(hi[j], p[j]);
+				for (j = 0, q = p; j < 3; j++, q++) {
+					lo[j] = MIN(lo[j], *q);
+					hi[j] = MAX(hi[j], *q);
 				}
 			}
 			p += 3;

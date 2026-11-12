@@ -162,12 +162,12 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 				seg = &g_100b0c0[i];
 				if (g_100e760[k] == seg->id && seg->x14 != 0) {
 					while (seg->x14 > 0) {
-						if ((float) seg->x14 * seg->price + (float) sum <= (float) a2) {
+						if (!((double) seg->x14 * seg->price + (float) sum > (float) a2)) {
 							break;
 						}
 						seg->x14--;
 					}
-					sum = (int) ((float) seg->x14 * seg->price + (float) sum);
+					sum = (int) ((double) seg->x14 * seg->price + sum);
 				}
 			}
 		}
@@ -180,12 +180,12 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 			seg = &g_100b0c0[i];
 			if (g_100e720[k] == seg->id && seg->x14 != 0) {
 				while (seg->x14 > 0) {
-					if ((float) seg->x14 * seg->price + (float) sum <= (float) a2) {
+					if (!((double) seg->x14 * seg->price + (float) sum > (float) a2)) {
 						break;
 					}
 					seg->x14--;
 				}
-				sum = (int) ((float) seg->x14 * seg->price + (float) sum);
+				sum = (int) ((double) seg->x14 * seg->price + sum);
 			}
 		}
 	}

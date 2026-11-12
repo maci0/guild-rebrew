@@ -1,6 +1,6 @@
 #include "client_town.h"
 
-extern char* g_item_def_table;
+extern char* lpObjektePROT;
 extern int __cdecl fcn_00502450(int a, int b);
 extern int __cdecl fcn_005024e0(int a, int b);
 extern float __cdecl eval_ObjektPreis2Credits(int a, int b);
@@ -8,7 +8,7 @@ extern float __cdecl eval_ObjektPreis2Credits(int a, int b);
 /* ADDRESS: GOLDTL 0x005016f0 */
 void __cdecl fcn_005016f0(int which)
 {
-	char* src;
+	char* src; char* def;
 	char* dst;
 	unsigned char kind;
 	int i;
@@ -17,9 +17,9 @@ void __cdecl fcn_005016f0(int which)
 	src = (char*) 0x696608;
 	dst = (char*) 0x85abc0 + which * 0x2a90;
 	do {
-		*(int*) (dst - 0x24) = *(int*) (src - 0x24);
+		def = lpObjektePROT + *(unsigned short*) (dst - 0x30) * 0x41; *(int*) (dst - 0x24) = *(int*) (src - 0x24);
 		*(int*) dst = *(int*) src;
-		kind = g_item_def_table[*(unsigned short*) (dst - 0x30) * 0x41];
+		kind = *def;
 		if (kind != 0x17 && kind != 0x25) {
 			*(float*) (dst - 0x10) = (float) fcn_00502450(which, i);
 		} else {
@@ -30,5 +30,5 @@ void __cdecl fcn_005016f0(int which)
 		src += 0x80;
 		i++;
 		dst += 0x80;
-	} while (src < (char*) 0x699088);
+	} while ((int) src < 0x699088);
 }

@@ -2,11 +2,11 @@
 
 extern int* g_772f40;
 
-void __cdecl fcn_004c4330(void* p);
+int __cdecl fcn_004c4330(void* p);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int id);
 
 /* ADDRESS: GOLDTL 0x004c6940 */
-void __cdecl fcn_004c6940(void* a0, int a1, void* a2)
+int __cdecl fcn_004c6940(void* a0, int a1, void* a2)
 {
 	char buf[0x9c];
 	char* p;
@@ -36,5 +36,5 @@ void __cdecl fcn_004c6940(void* a0, int a1, void* a2)
 			}
 		}
 	}
-	fcn_004c4330(buf);
+	return fcn_004c4330(buf);
 }

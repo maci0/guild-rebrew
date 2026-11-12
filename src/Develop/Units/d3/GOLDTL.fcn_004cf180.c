@@ -40,9 +40,9 @@ int __cdecl fcn_004cf180(void)
     int flag;
     float v[8];
     float dist;
-    float dx;
-    float dy;
-    float dz;
+
+
+
     unsigned char color[4];
 
     count = 0;
@@ -71,7 +71,7 @@ int __cdecl fcn_004cf180(void)
                 color[0] = 0xc0;
                 color[3] = 0x3f;
                 fcn_00418000(0, v, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f,
-                             140.0f, 35.0f, &v[3], 0x190, 6,
+                             140.0f, 35.0f, &v[4], 0x190, 6,
                              *(int*) color);
                 fcn_004185a0(0, v, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f,
                              4.0f, 7.0f, 8.0f, *(int*) color);
@@ -82,19 +82,19 @@ int __cdecl fcn_004cf180(void)
                         m = *(int*) (e + 0x184);
                         if (*(char*) (e + 8) != 0) {
                             obj = *p;
-                            dx = *(float*) (obj + 0x4c) -
+                            v[0] = *(float*) (obj + 0x4c) -
                                  *(float*) (*(int*) (m + 0x34) + 0x4c);
-                            dy = *(float*) (obj + 0x50) -
+                            v[1] = *(float*) (obj + 0x50) -
                                  *(float*) (*(int*) (m + 0x34) + 0x50);
-                            dz = *(float*) (obj + 0x54) -
+                            v[2] = *(float*) (obj + 0x54) -
                                  *(float*) (*(int*) (m + 0x34) + 0x54);
-                            dist = (float) sqrt(dx * dx + dy * dy +
-                                                dz * dz);
+                            dist = (float) sqrt(v[2] * v[2] + v[1] * v[1] +
+                                                v[0] * v[0]);
                             if (dist < g_664ed4) {
                                 t = (int) cut_RandMod((unsigned char) r[6] -
                                                        (unsigned char) r[5]);
                                 t += (unsigned char) r[5];
-                                d = (int) ((double) t *
+                                d = (int) ((double) (unsigned int) t *
                                            (*(float*) (e + 0x1c) *
                                             g_6640e8));
                                 t = (int) ((double) d *

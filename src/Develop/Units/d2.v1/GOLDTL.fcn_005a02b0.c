@@ -3,7 +3,7 @@
 #include "client_types.h"
 
 extern pos14_7f4c00 g_7f4c00;
-extern float g_662cf8;
+
 extern int g_772514;
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -85,7 +85,7 @@ int __cdecl fcn_005a02b0(void)
 			    *(int*) (*(char**) 0x77255c + 0x10) - 0x3c,
 			    *(int*) (*(char**) 0x77255c + 0xc) - 0x40, 0, 0x64, 0x83,
 			    0x42, g_772514);
-			d2_SetElementValue(d, 0, 0x64, (int) (grade * g_662cf8));
+			d2_SetElementValue(d, 0, 0x64, (int) (grade * 100.0f));
 		}
 	}
 	while (fcn_005373e0((void*) fcn_005a02b0, 0x677c7) != 0) {

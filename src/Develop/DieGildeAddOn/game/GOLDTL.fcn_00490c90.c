@@ -1,7 +1,7 @@
 extern int g_7f4c00;
 extern char g_773d75;
 
-int __cdecl fcn_004507b00(int);
+int __cdecl gm_MapEntityStatRange(int);
 void __cdecl fcn_004f4830(int, int*);
 float __cdecl fcn_004fbd40(void);
 int __cdecl fcn_0050e4a0(int);
@@ -23,7 +23,7 @@ int __cdecl fcn_00490c90(char* a0, int a1, int* a2)
 	float k;
 	int d;
 
-	mode = fcn_004507b00(*(unsigned char*) (a0 + 0x164));
+	mode = gm_MapEntityStatRange(*(unsigned char*) (a0 + 0x164));
 	if (g_7f4c00 >= 4) {
 		fcn_004f4830(9, v5);
 		f = fcn_004fbd40();

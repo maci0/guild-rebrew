@@ -100,7 +100,7 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 	int i;
 	int send;
 	int r;
-	int h;
+	float h;
 	char* sp;
 	char* q;
 
@@ -229,6 +229,7 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 		}
 		r = fcn_004c53a0();
 	}
+	io_FormatTextBuffer(a1, 0x1c4f, *a0, fcn_0050b750(0x5dc, g_773d75));
 	if (prev != 0) {
 		io_FormatTextBuffer(buf, s_6999a8, prev);
 		strcat(a1, buf);

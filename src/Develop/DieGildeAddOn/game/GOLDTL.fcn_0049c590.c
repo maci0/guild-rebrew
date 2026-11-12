@@ -3,7 +3,9 @@
 
 #include <math.h>
 
-extern char* g_7f4ca0;
+#pragma intrinsic(log10)
+
+extern char g_7f4ca0[];
 extern char g_773d75;
 extern float g_1009b6c;
 extern float g_1009b74;
@@ -24,10 +26,11 @@ void __cdecl fcn_005100f0(int a0, int a1);
 void __cdecl fcn_005b21d0(int a0, char* a1, int a2);
 
 /* ADDRESS: GOLDTL 0x0049c590 */
-int __cdecl ai_RunAblassKaufen(int a0, char* a1, char* a2, int a3)
+int __cdecl ai_RunAblassKaufen(int a0, char* a1, char* a2)
 {
 	int rec;
 	int v5;
+	int a3;
 	unsigned char cmd;
 
 	if (*(unsigned char*) a1 != 4) {
@@ -43,6 +46,7 @@ int __cdecl ai_RunAblassKaufen(int a0, char* a1, char* a2, int a3)
 	v5 = fcn_00502cd0(*(int*) (rec + 0x5d), 2, 6, 0, 0xf2);
 	cmd = *(unsigned char*) a2;
 	if (cmd == 0x12) {
+		a3 = (int) (*(int*) (a1 + 0x10) / log10((double) *(int*) (a1 + 0x10)));
 		fcn_004c4510(a0, *(int*) (a0 + 4));
 		fcn_004c4670(4, 1, 0x1ac, a1 + 0x10);
 		fcn_004c5360();

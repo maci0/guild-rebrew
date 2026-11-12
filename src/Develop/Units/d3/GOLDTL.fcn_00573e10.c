@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/game_data.h"
+extern int g_773dd8;
 
 void __cdecl fcn_004379a0(int, int, int, int, void*);
 void __cdecl fcn_00442d50(int, int);
@@ -42,7 +44,7 @@ void __cdecl fcn_00573e10(int a0)
 	int flag;
 	char* p;
 
-	saved = *(int*) 0x6b8010;
+	saved = g_6b8010;
 	fcn_004432d0(0, 1);
 	fcn_0064d41a(name, "he_%i", *(int*) (a0 + 4));
 	obj = fcn_00445600(0, 0x1c0, 0, name);
@@ -50,7 +52,7 @@ void __cdecl fcn_00573e10(int a0)
 	if (cur == -1 && obj != 0) {
 		list.handle = obj;
 		list.count = 0;
-		fcn_004379a0(*(int*) 0x67a370, obj, 0x2c0, (int) fcn_00573de0,
+		fcn_004379a0(g_67a370, obj, 0x2c0, (int) fcn_00573de0,
 		             &list);
 		idx = 0;
 		while (idx < list.count) {
@@ -58,10 +60,12 @@ void __cdecl fcn_00573e10(int a0)
 			if (*(int*) (slot + 0x220) == 5
 			    && !(*(unsigned char*) (slot + 0x217) & 1))
 				goto next_mark;
-			if ((*(unsigned char*) (slot + 0x217) & 1)
-			    && *(int*) 0x773dd8 != 0)
-				fcn_004550b0(slot, *(int*) 0x773dd8);
 			*(int*) (slot + 0x220) = 5;
+			slot = (int) list.items[idx];
+			if ((*(unsigned char*) (slot + 0x217) & 1)
+			    && g_773dd8 != 0)
+				fcn_004550b0(slot, g_773dd8);
+			slot = (int) list.items[idx];
 			*(unsigned char*) (slot + 0x217) &= 0xfe;
 next_mark:
 			idx++;
@@ -76,7 +80,7 @@ next_mark:
 	}
 	list.handle = obj;
 	list.count = 0;
-	fcn_004379a0(*(int*) 0x67a370, obj, 0x2c0, (int) fcn_00573de0, &list);
+	fcn_004379a0(g_67a370, obj, 0x2c0, (int) fcn_00573de0, &list);
 	idx = 0;
 	while (idx < list.count) {
 		int item;
@@ -85,13 +89,17 @@ next_mark:
 		if (*(int*) (item + 0x220) != 5
 		    || (*(unsigned char*) (item + 0x217) & 1)) {
 			if ((*(unsigned char*) (item + 0x217) & 1)
-			    && *(int*) 0x773dd8 != 0)
-				fcn_004550b0(item, *(int*) 0x773dd8);
+			    && g_773dd8 != 0)
+				fcn_004550b0(item, g_773dd8);
+			item = (int) list.items[idx];
 			*(int*) (item + 0x220) = 5;
+			item = (int) list.items[idx];
 			*(unsigned char*) (item + 0x217) &= 0xfe;
 		}
 		item = (int) list.items[idx];
+		num = 0;
 		*(int*) (item + 0x224) = 0;
+		item = (int) list.items[idx];
 		{
 			char* src;
 			char* dst;
@@ -103,7 +111,7 @@ next_mark:
 		}
 		p = fcn_0064d1a0(buf, '_');
 		if (p != 0) {
-			num = 0;
+
 			do {
 				if (num >= 2)
 					break;
@@ -139,8 +147,8 @@ release:
 	if (slot != 0 && *(int*) (slot + 0x61) != 0)
 		fcn_00442d50(*(int*) (slot + 0x61), 1);
 	if (obj != 0) {
-		if (*(int*) 0x773dd8 != 0)
-			fcn_004550b0(obj, *(int*) 0x773dd8);
+		if (g_773dd8 != 0)
+			fcn_004550b0(obj, g_773dd8);
 		d3_DestroyObject(obj);
 	}
 done:

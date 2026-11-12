@@ -25,11 +25,12 @@ typedef struct {
 	int f34;
 } DlgRow_596d70;
 
-// SIZE 0xc
+/* Native window stride 0x3cc. */
 typedef struct {
 	char pad0[4];
 	int x;
 	int y;
+	unsigned char remaining[0x3cc - 0xc];
 } DlgWin_596d70;
 
 /* g_1038144 is the page index table; g_1015f40 the window pool. */
@@ -61,12 +62,12 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 	DlgWin_596d70* w;
 	char text[0x20];
 	char* obj;
-	float f;
+	double f;
 	int v;
 	int n;
 
 	d2_SetForm(a0, a1);
-	w = (DlgWin_596d70*) (g_1015f40 + g_1038144[a0 * 175 + a1] * 0x3cc);
+	w = &((DlgWin_596d70*) g_1015f40)[g_1038144[a0 * 175 + a1]];
 	if (r->id != 0) {
 		if (r->title == -1) {
 			r->title = fcn_004677e0(r->x + 6, r->y, 0x30, 0, 100, 0x6a, 0x3d, g_772514);
@@ -187,7 +188,7 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 		*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x1dc) = 4;
 		*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x1e0) = 0;
 		sprintf(g_1015ea0 + r->icon * 0x2f4 + 0xcc, "%s~ %li %s",
-				*(unsigned int*) (0x14a79c0 + r->id * 8), r->f30, (char*) 0x14b52c0);
+				*(unsigned int*) (0x14a79c0 + r->id * 8), r->f30, *(char**) 0x14b52c0);
 		if (r->icon >= 0) {
 			fcn_00469c40(w->x + r->x + 0xf, w->y + r->y + 6, r->icon);
 		}

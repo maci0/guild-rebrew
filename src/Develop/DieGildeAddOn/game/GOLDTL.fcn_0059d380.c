@@ -21,15 +21,11 @@ typedef struct {
 	char pad70[0x88];
 } Msg_59d380;
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern pos14_7f4c00 g_7f4c00;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char* g_7746c4;
-extern char* g_7746c8;
-extern char* g_7746cc;
 extern char* g_7746a4;
 extern int g_14abd04;
-extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -56,14 +52,14 @@ extern void __cdecl fcn_00471e30(int);
 /* Oeffnet den Jahrmarkt-Dialog eines Objekts, bietet seine zwei Eintraege an
  * und schickt beim Anklicken das Nachrichtenpaket 0x62. */
 /* ADDRESS: GOLDTL 0x0059d380 */
-int __cdecl fcn_0059d380(char* a1)
+int __cdecl fcn_0059d380(int a0, char* a1)
 {
 	Msg_59d380 m;
 	char buf[512];
 	char* e;
-	char** obj;
 	int i;
 	int dlg;
+	int text;
 	int item1;
 	int item2;
 	int slot;
@@ -98,57 +94,53 @@ int __cdecl fcn_0059d380(char* a1)
 	fcn_00471b60(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	item1 = io_AppendText(0x1a8b, a1);
-	item2 = fcn_00472250(dlg, 1, item1);
-	fcn_00472250(dlg, 1, item1 + 1);
+	text = io_AppendText(0x1a8b, a1);
+	item1 = fcn_00472250(dlg, 1, text);
+	item2 = fcn_00472250(dlg, 1, text + 1);
 	g_100f1dc = -1;
-	while (fcn_005373e0((void*) fcn_0059d380, 0x677c7) != 0) {
+	do {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
 		if (g_100f1dc == -1) {
 			continue;
 		}
-		if (g_67d370 != item1) {
-			if (g_67d370 == item2) {
-				g_774654 = 1;
+		if (g_67d370 == item1) {
+			fcn_004c35f0();
+			m.b4 = 0x62;
+			slot = g_774970 * 0x21c;
+			m.f8 = *(int*) (g_7f4ca0 + slot + 4);
+			if (g_7746c4 != 0) {
+				m.fc = *(int*) (g_7746c4 + 1);
+			} else {
+				m.fc = *(int*) (g_7746c8 + 1);
 			}
-			continue;
-		}
-		fcn_004c35f0();
-		m.b4 = 0x62;
-		slot = g_774970 * 0x21c;
-		m.f8 = *(int*) (g_7f4ca0 + slot + 4);
-		if (g_7746c4 != 0) {
-			m.fc = *(int*) (g_7746c4 + 1);
-		} else {
-			m.fc = *(int*) (g_7746c8 + 1);
-		}
-		m.pos28 = g_7f4c00;
-		m.b36 = 2;
-		m.f5c = *(int*) (a1 + 1);
-		if (g_7746c4 != 0) {
-			m.f68 = *(int*) (g_7746c4 + 1);
-		} else {
-			m.f68 = *(int*) (g_7746c8 + 1);
-		}
-		if (g_7746cc != 0) {
-			m.f6c = *(int*) (g_7746cc + 2);
-		} else {
-			m.f6c = -1;
-		}
-		obj = (char**) 0x7e4260;
-		for (i = 0; i < 0x20; i++) {
-			e = obj[i];
-			if (e != 0 && *(char*) (e + 0x188) != 0) {
-				m.f58 = *(int*) (e + 4);
-				break;
+			m.pos28 = g_7f4c00;
+			m.b36 = 2;
+			m.f5c = *(int*) (a1 + 1);
+			if (g_7746c4 != 0) {
+				m.f68 = *(int*) (g_7746c4 + 1);
+			} else {
+				m.f68 = *(int*) (g_7746c8 + 1);
 			}
+			if (g_7746cc != 0) {
+				m.f6c = *(int*) (g_7746cc + 2);
+			} else {
+				m.f6c = -1;
+			}
+			for (i = 0; i < 0x20; i++) {
+				if (g_7e4260[i] != 0 && g_7e4260[i][0x188] != 0) {
+					m.f58 = *(int*) (g_7e4260[i] + 4);
+					break;
+				}
+			}
+			fcn_004c5530(&m);
+			g_774654 = 1;
+			sv_ClearObjectSelection();
+		} else if (g_67d370 == item2) {
+			g_774654 = 1;
 		}
-		fcn_004c5530(&m);
-		g_774654 = 1;
-		sv_ClearObjectSelection();
-	}
+	} while (fcn_005373e0((void*) fcn_0059d380, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return 0;
 }

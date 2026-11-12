@@ -1,3 +1,4 @@
+#include <string.h>
 extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 extern char* g_1015ea0;
@@ -5,6 +6,10 @@ extern int g_772514;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
+extern int g_100f1dc;
+extern int g_14b556c;
+extern int g_774654;
+extern int g_7e46ac;
 
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_00525fb0(int);
@@ -33,24 +38,24 @@ void __cdecl fcn_0052a2d0(void);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
+/* SIZE 0xf8 */
 typedef struct {
-	int kind;
-	int f4;
-	int f8;
-	char pad0c[0x18];
-	int v23;
-	int v24;
-	int v25;
-	unsigned short v26;
-	char v27;
-	char pad33[0x21];
-	char v28;
-	char pad55;
-	unsigned short v29;
-	char pad58[4];
-	int v30;
-	unsigned int handles[6];
-	char pad78[0x80];
+	char pad0[4];
+	unsigned char kind;	/* +0x04 */
+	char pad5[3];
+	unsigned int owner;	/* +0x08 */
+	unsigned int self;	/* +0x0c */
+	char pad10[0x18];
+	int date0;		/* +0x28 */
+	int date1;		/* +0x2c */
+	int date2;		/* +0x30 */
+	unsigned short date3;	/* +0x34 */
+	unsigned char flag;	/* +0x36 */
+	char pad37;
+	unsigned int list[4];	/* +0x38 */
+	char pad48[0x10];
+	unsigned short good;	/* +0x58 */
+	char pad5a[0x9e];
 } Req_58d5f0;
 
 /* ADDRESS: GOLDTL 0x0058d5f0 */
@@ -61,7 +66,6 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 	int counts[4];
 	int handles[4];
 	char text[224];
-	unsigned int list[8];
 	unsigned char* p;
 	unsigned char* vp;
 	char* ents;
@@ -194,21 +198,22 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 				fcn_0046f9b0(handles[i], text);
 			}
 		}
-		if (*(int*) 0x100f1dc != -1) {
+		if (g_100f1dc != -1) {
 			for (sel = 0; sel < n; sel++) {
 				if (handles[sel] == *(int*) 0x67d370)
 					break;
 			}
 			if (sel < n) {
+				memset(&req, 0, sizeof(req));
 				req.kind = 0x8c;
-				req.v27 = 1;
-				req.f4 = *(unsigned int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + 0x7f4ca4);
-				req.f8 = *(unsigned int*) (a0 + 1);
-				req.v23 = (int) 0x7f4c00;
-				req.v24 = g_7f4c04;
-				req.v25 = g_7f4c08;
-				req.v29 = g_7f4c0c;
-				req.v26 = (unsigned short) ids[sel];
+				req.flag = 1;
+				req.owner = *(unsigned int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + 0x7f4ca4);
+				req.self = *(unsigned int*) (a0 + 1);
+				req.date0 = *(int*) 0x7f4c00;
+				req.date1 = g_7f4c04;
+				req.date2 = g_7f4c08;
+				req.date3 = g_7f4c0c;
+				req.good = (unsigned short) ids[sel];
 				j = 0;
 				p = (unsigned char*) 0x7f4ca4;
 				do {
@@ -216,17 +221,16 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 					if (j >= 4)
 						break;
 					if (p[0x184]) {
-						list[j] = *(unsigned int*) p;
+						req.list[j] = *(unsigned int*) p;
 						j++;
 					}
 					p += 0x21c;
 					i = j;
 				} while ((int) p < 0x85a0a4);
 				while (j <= 3) {
-					list[j] = 0xffffffff;
+					req.list[j] = 0xffffffff;
 					j += 2;
 				}
-				req.v30 = 0;
 				if (i) {
 					h = fcn_004c5530(&req);
 					if (h != -1) {
@@ -234,16 +238,16 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 							fcn_005373e0(0, 0x20007);
 						}
 					}
-					*(int*) 0x7e46ac = 0x677c7;
+					g_7e46ac = 0x677c7;
 					sv_ClearObjectSelection();
 				} else {
-					fcn_00526120(*(int*) 0x14b556c, 4);
+					fcn_00526120(g_14b556c, 4);
 					sv_ClearObjectSelection();
 				}
 				goto next;
 			}
 		} else if (*(int*) 0x14ce8e0) {
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 		}
 next:
 		sel = fcn_005373e0(0x58d5f0, 0x677c7);

@@ -69,7 +69,7 @@ void __cdecl fcn_00585030(int a0)
 {
 	char* e;
 	char* data;
-	int* src;
+	int* src; int* records;
 	int* ids;
 	int items[6];
 	int two[2];
@@ -93,7 +93,7 @@ void __cdecl fcn_00585030(int a0)
 
 	e = (char*) a0;
 	data = fcn_004ec7d0((unsigned char*) a0);
-	src = *(int**) (e + 0x65);
+	records = *(int**) (e + 0x65);
 	sel = fcn_004ecf00(e, &owner, &frac, 0);
 	stamp = g_6b7fac;
 	g_100f1dc = -1;
@@ -125,14 +125,14 @@ void __cdecl fcn_00585030(int a0)
 	list = d2_CreateRadioGroup(0);
 	count = 0;
 	ids = items;
-	src = (int*) ((int) *(int**) (e + 0x65) + 0xc);
-	for (i = 0; i < 6; i++, src += 2) {
+	src = records + 3;
+	for (i = 6; i != 0; i--, src += 2) {
 		if (src[0] == 0) {
 			continue;
 		}
-		x = (count & 1) * 0xf0;
-		y = (count / 2) * 0x50;
-		item = fcn_0046f740(x + 10, y + 10, src[0] + 0xdf, wnd);
+		x = (count & 1) * 0xf0 + 10;
+		y = (count / 2) * 0x50 + 10;
+		item = fcn_0046f740(x, y, src[0] + 0xdf, wnd);
 		*ids++ = item;
 		((Ctl*) g_1015ea0)[item].x5c = 1;
 		((Ctl*) g_1015ea0)[item].x2f0 = (int) (lpObjektePROT + src[0] * 0x41);
@@ -179,14 +179,14 @@ void __cdecl fcn_00585030(int a0)
 			list = d2_CreateRadioGroup(0);
 			count = 0;
 			ids = items;
-			src = (int*) ((int) *(int**) (e + 0x65) + 0xc);
-			for (i = 0; i < 6; i++, src += 2) {
+			src = records + 3;
+			for (i = 6; i != 0; i--, src += 2) {
 				if (src[0] == 0) {
 					continue;
 				}
-				x = (count & 1) * 0xf0;
-				y = (count / 2) * 0x50;
-				item = fcn_0046f740(x + 10, y + 10, src[0] + 0xdf, wnd);
+				x = (count & 1) * 0xf0 + 10;
+				y = (count / 2) * 0x50 + 10;
+				item = fcn_0046f740(x, y, src[0] + 0xdf, wnd);
 				*ids++ = item;
 				((Ctl*) g_1015ea0)[item].x5c = 1;
 				((Ctl*) g_1015ea0)[item].x2f0 = (int) (lpObjektePROT + src[0] * 0x41);
@@ -210,13 +210,13 @@ void __cdecl fcn_00585030(int a0)
 						continue;
 					}
 					if (fcn_004ecc20((int) data) != 0) {
-						fcn_00585760(e, *(int**) (e + 0x65), i);
+						fcn_00585760(e, records, i);
 					} else {
 						fcn_00526120(g_14b59e0, 0);
 					}
 				}
 			} else if (g_67d370 == two[0]) {
-				fcn_00585850(e, *(int**) (e + 0x65));
+				fcn_00585850(e, records);
 			}
 		}
 	} while (fcn_005373e0((void*) fcn_00585030, 0x677c7) != 0);

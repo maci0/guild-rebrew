@@ -200,12 +200,12 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				idx = posY[0] - 0x58;
 				if (tabA[0].id != -1) {
 					id = tabA[0].id & 0xffff;
-					t0 = fcn_0046f740(idx, 0xc,
+					fcn_0046f740(idx, 0xc,
 					    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
 					    g_772514);
-					tabA[0].text = t0;
-					*(int*) (g_1015ea0 + t0 * 756 + 0x1d0) = 3;
-					*(int*) (g_1015ea0 + t0 * 756 + 0x2f0) =
+					
+					*(int*) (g_1015ea0 + tabA[0].text * 756 + 0x1d0) = 3;
+					*(int*) (g_1015ea0 + tabA[0].text * 756 + 0x2f0) =
 					    (int) (g_7f4ca0 + id * 0x21c);
 				} else {
 					fcn_0046f740(idx, 0xc, 0x4fb, g_772514);
@@ -218,12 +218,12 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				idx = rows2 + 0x5c;
 				if (tabA[1].id != -1) {
 					id = tabA[1].id & 0xffff;
-					t0 = fcn_0046f740(idx, 0xc,
+					fcn_0046f740(idx, 0xc,
 					    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
 					    g_772514);
-					tabA[1].text = t0;
-					*(int*) (g_1015ea0 + t0 * 756 + 0x1d0) = 3;
-					*(int*) (g_1015ea0 + t0 * 756 + 0x2f0) =
+					
+					*(int*) (g_1015ea0 + tabA[1].text * 756 + 0x1d0) = 3;
+					*(int*) (g_1015ea0 + tabA[1].text * 756 + 0x2f0) =
 					    (int) (g_7f4ca0 + id * 0x21c);
 				} else {
 					fcn_0046f740(idx, 0xc, 0x4fb, g_772514);
@@ -306,7 +306,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 							    posX[k], 0x96, 0x5db, g_772514);
 							*(short*) (p + 0xa) = 0x96;
 							*(short*) (p + 8) =
-							    (short) (posX[k] + nc);
+							    (short) (posX[k] + n3);
 							id = *(short*) p & 0xffff;
 							fcn_0046f740(posX[k] + 2, 0x98,
 							    *(int*) (g_7f4ca0 +
@@ -330,7 +330,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 							    *px, 0x96, 0x5db, g_772514);
 							*(short*) (p + 0xa) = 0x96;
 							*(short*) (p + 8) =
-							    (short) (*px + nc);
+							    (short) (*px + n3);
 							id = *(short*) p & 0xffff;
 							fcn_0046f740(*px + 2, 0x98,
 							    *(int*) (g_7f4ca0 +
@@ -407,7 +407,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 							    posC[k], 0x122, 0x5db, g_772514);
 							*(short*) (p + 0xa) = 0x122;
 							*(short*) (p + 8) =
-							    (short) (posC[k] + nc);
+							    (short) (posC[k] + n3);
 							id = *(short*) p & 0xffff;
 							fcn_0046f740(posC[k] + 2, 0x124,
 							    *(int*) (g_7f4ca0 +
@@ -433,7 +433,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 							    posB[k], 0x122, 0x5db, g_772514);
 							*(short*) (p + 0xa) = 0x122;
 							*(short*) (p + 8) =
-							    (short) (posB[k] + nc);
+							    (short) (posB[k] + n3);
 							id = *(short*) p & 0xffff;
 							fcn_0046f740(posB[k] + 2, 0x124,
 							    *(int*) (g_7f4ca0 +

@@ -27,8 +27,8 @@ extern Player g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 extern char g_6b5c60[];
 
-unsigned short __cdecl gm_RandomMod(int);
-float __cdecl gm_RandomFloat01(void);
+int __cdecl gm_RandomMod(unsigned short);
+double __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_0050c710(char*, int, int);
 int __cdecl fcn_00508280(char*, int*, float*);
@@ -83,8 +83,8 @@ void __cdecl fcn_00556ed0(char* s)
 		steps[13] = 0x2fb;
 		steps[14] = 0x2fd;
 		steps[15] = 0x2ff;
-		*(int*) (s + 0xb0) = steps[gm_RandomMod(16)];
-		*(int*) (s + 0xac) = gm_RandomMod(0x300);
+		*(int*) (s + 0xb0) = steps[gm_RandomMod(16) & 0xffff];
+		*(int*) (s + 0xac) = gm_RandomMod(0x300) & 0xffff;
 	}
 	if (*(int*) (s + 0x70) != 0) {
 		return;

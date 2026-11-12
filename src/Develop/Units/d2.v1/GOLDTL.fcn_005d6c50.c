@@ -1,7 +1,8 @@
+#include <string.h>
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern int g_100f1dc;
+extern int g_100f1dc; extern float g_664138;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
@@ -35,16 +36,17 @@ int __cdecl fcn_005d6c50(int a0, int a1)
     int h2;
     char* text;
 
-    frame[8] = 0;
-    *(int*) (frame + 4) = 0;
-    *(int*) (frame + 9) = 0;
-    *(int*) (frame + 0xd) = 0;
-    *(int*) (frame + 0x11) = 0;
-    *(u16*) (frame + 0x15) = 0;
-    frame[0x17] = 0;
+    memset(frame + 9, 0, 15);
 
-    p = (u16*) a0;
-    if (*(int*) a1 != 3) {
+
+
+
+    *(int*) (frame + 4) = 0;
+    frame[8] = 0;
+
+    if (*(int*) a1 == 3) {
+        p = (u16*) a0;
+    } else {
         if (*(int*) a1 != 4)
             return 0x60;
         p = *(u16**) (a1 + 0x21c);
@@ -54,7 +56,7 @@ int __cdecl fcn_005d6c50(int a0, int a1)
     fcn_004fcda0(*p, 0, frame + 8);
     v = gm_RandomMod(0xb0) & 0xffff;
     *(int*) frame = v + 0x19;
-    h2 = _ftol();
+    h2 = (int) (*(int*) frame * g_664138 * *(int*) (frame + 0xc));
     if (((u8*) a0)[2] != 6) {
         if (*(int*) (a0 + 0x194) < 4)
             return 0x20;
@@ -67,7 +69,7 @@ int __cdecl fcn_005d6c50(int a0, int a1)
     d2_SetOverlayAnimation(0, 0);
     fcn_00471b60(dlg);
     d2_SetForm(dlg, 1);
-    io_AppendText(0x1dc2, *p);
+    io_AppendText(0x1dc2, *(u16*) a0);
     *(int*) frame = dlg;
     g_100f1dc = -1;
     for (;;) {
@@ -91,7 +93,7 @@ int __cdecl fcn_005d6c50(int a0, int a1)
         }
         if (g_14ce8e0 != 0)
             g_774654 = 1;
-        if (fcn_005373e0((void*) 0x5d6c50, 0x657c7) == 0) {
+        if (fcn_005373e0((void*) fcn_005d6c50, 0x657c7) == 0) {
             fcn_00471e30(dlg);
             return *(int*) (frame + 4);
         }

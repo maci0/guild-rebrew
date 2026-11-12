@@ -33,11 +33,11 @@ int __cdecl fcn_00442e30(void);
 int __cdecl fcn_00448360(char *name, int a1, int a2);
 int __cdecl fcn_00471af0(int a0, int a1);
 int __cdecl fcn_00476970(int a0);
-short __cdecl gm_RandomMod(int a0);
+int __cdecl gm_RandomMod(unsigned short a0);
 int __cdecl fcn_00469e30(int a0);
 int __cdecl fcn_0046ac30(void);
-int __cdecl fcn_004c5790(int id, int *args);
-int __cdecl fcn_004c5040(short a0, short a1, char a2, char a3, int a4,
+void __cdecl fcn_004c5790(char id, char *args);
+int __cdecl fcn_004c5040(int a0, int a1, short a2, char a3, int a4,
                          char a5, char a6, char *a7, char *a8);
 int __cdecl fcn_004c4450(int i);
 int __cdecl fcn_004c4480(int i);
@@ -51,12 +51,13 @@ int __cdecl fcn_005145a0(char *path)
 {
     char text[512];
     char file[260];
-    int msg[32];    /* 0x7c-byte message block for fcn_004c5790; only [0]/[1] set */
+    int msg[31];    /* 0x7c-byte message block for fcn_004c5790; only [0]/[1] set */
     int flag;
     int session;
     int handle;
     int stamp;
     int result;
+    int engine;
     int i;
     char *p;
 
@@ -81,24 +82,25 @@ int __cdecl fcn_005145a0(char *path)
     GetModuleFileNameA(*(void **) 0x7e1f80, file, 0x104);
     p = strrchr(file, '\\');
     strcpy(p, "\\game.INI");
+    engine = g_6b8010;
     *(int *) 0x7725c8 = 0;
     fcn_004432d0(fcn_00413160(), 0);
     fcn_00448360("scenes/*network.ed3", 0, 0);
     fcn_00471af0(*(int *) 0x7e1d40, 0);
     *(int *) 0x7725c8 = 1;
     fcn_00442e30();
-    fcn_004432d0(*(int *) &g_6b8010, 0);
+    fcn_004432d0(engine, 0);
     fcn_00471af0(*(int *) 0x7e1d40, 1);
     WritePrivateProfileStringA("Network", "Name", (char *) 0x7e23ea, file);
     WritePrivateProfileStringA("Network", "Familienname", (char *) 0x7e240a, file);
     fcn_00476970(*(int *) &g_77250c);
-    fcn_00469e30(((short) gm_RandomMod(2) != 1) ? 0x791 : 0x78e);
+    fcn_00469e30(((unsigned short) gm_RandomMod(2) != 1) ? 0x791 : 0x78e);
     fcn_0046ac30();
     if (*(int *) &g_77494c & 1) {
         msg[0] = *(unsigned char *) &g_6a375c;
-        fcn_004c5790(6, msg);
+        fcn_004c5790(6, (char *) msg);
     }
-    session = fcn_004c5040(-1, -1, *(unsigned char *) 0x7e23e2,
+    session = fcn_004c5040(0xffff, 0xffff, *(unsigned char *) 0x7e23e2,
                            *(unsigned char *) 0x7e23e3,
                            *(int *) 0x7e23e4 + 0x59a,
                            *(unsigned char *) 0x7e23e8,
@@ -107,7 +109,7 @@ int __cdecl fcn_005145a0(char *path)
     while (session == -1) {
         fcn_005356e0();
         fcn_00535960();
-        session = fcn_004c5040(-1, -1, *(unsigned char *) 0x7e23e2,
+        session = fcn_004c5040(0xffff, 0xffff, *(unsigned char *) 0x7e23e2,
                                *(unsigned char *) 0x7e23e3,
                                *(int *) 0x7e23e4 + 0x59a,
                                *(unsigned char *) 0x7e23e8,
@@ -125,7 +127,7 @@ int __cdecl fcn_005145a0(char *path)
         stamp = (int) timeGetTime();
         *(int *) 0x7e1f60 = stamp;
         msg[1] = stamp;
-        fcn_004c5790(9, msg);
+        fcn_004c5790(9, (char *) msg);
     }
     while (*(unsigned char *) &g_6a3440 == 0xfe) {
         fcn_005356e0();
@@ -168,11 +170,12 @@ int __cdecl fcn_005145a0(char *path)
     }
     *(int *) 0x7725c8 = 0;
     if (*(signed char *) &g_6a3440 > -1 && *(signed char *) &g_6a3440 < 6) {
+        engine = g_6b8010;
         fcn_004432d0(fcn_00413160(), 0);
         fcn_00448360("scenes/*network.ed3", 0, 0);
         fcn_004b54e0(*(int *) (handle + 4));
         fcn_00442e30();
-        fcn_004432d0(*(int *) &g_6b8010, 0);
+        fcn_004432d0(engine, 0);
     }
     return 0;
 }

@@ -4,7 +4,9 @@
  */
 #include <string.h>
 #include <stdio.h>
-
+extern float g_100b0e0;
+extern int g_100b0f4, g_100e74c, g_100b0a8, g_100b0ac;
+extern char* g_100dbc0[];
 typedef struct {
 	int x0;
 	int n;
@@ -16,7 +18,6 @@ typedef struct {
 	int xb0;
 	char* xb4;
 } Stats; /* 0xb8 */
-
 typedef struct {
 	int f00;              /* +0x00 */
 	unsigned char type;   /* +0x04 */
@@ -45,7 +46,6 @@ typedef struct {
 	unsigned char skip;   /* +0x9d */
 	char pad9e[0xf8 - 0x9e];
 } Msg; /* 0xf8 */
-
 extern int lpObjektePROT;
 extern unsigned char g_773d75;
 extern int g_7f4c00;
@@ -74,6 +74,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 {
 	int i;
 	int n;
+	int currency;
 	int k;
 	char* q;
 	int tmp;
@@ -87,15 +88,15 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 
 	n = 0;
 	k = 0;
-	if (*(float*) 0x100b0e0 <= 0.0f || *(int*) 0x100b0f4 == 0) {
+	if (g_100b0e0 <= 0.0f || g_100b0f4 == 0) {
 		return 0;
 	}
 	fcn_0050cce0(*(char**) (o + 0x16c), &st2, 0);
-	for (i2 = 0; i2 < *(int*) 0x100e74c; i2++) {
+	for (i2 = 0; i2 < g_100e74c; i2++) {
 		if (k > 3) {
 			__asm { int 3 }
 		}
-		ent = (char*) *(int*) (0x100dbc0 + i2 * 4);
+		ent = g_100dbc0[i2];
 		memset(&m, 0, 0xf8);
 		if (*(unsigned char*) (ent + 0x12) < 0x21) {
 			m.type = 0x10;
@@ -168,15 +169,15 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			tmp = fcn_0050dfd0(q, *(unsigned short*) 0x100b0c0);
 			m.ids[3] = *(unsigned short*) 0x100b0c0;
 			m.slots[3] = *(int*) (*(int*) 0x100b0c8 + 1);
-			if (tmp > *(int*) 0x100b0f4) {
-				tmp = *(int*) 0x100b0f4;
+			if (tmp > g_100b0f4) {
+				tmp = g_100b0f4;
 			}
 			m.f88[0] = tmp;
 			n = 1;
 			i = 1;
 		}
-		for (; i < *(int*) 0x100b0a8; i++) {
-			if (*(float*) (0x100b0c0 + i * 0x40 + 0x20) > 0.0f) {
+		for (; i < g_100b0a8; i++) {
+			if (!(*(float*) (0x100b0c0 + i * 0x40 + 0x20) <= 0.0f)) {
 				break;
 			}
 			if (*(int*) (*(int*) (0x100b0c0 + i * 0x40 + 8) + 1) != m.slots[3]) {
@@ -206,36 +207,37 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			}
 		}
 		{
-			for (n = 1; n < 4; n++) {
+			for (currency = 1; currency < 4; currency++) {
 				tmp = gm_QueryEntitySum(*(int*) (0x7f4e18
-				    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), n);
-				if (sums[n] > tmp) {
-					i = sums[n] * 9 / 8;
+				    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), currency);
+				if (sums[currency] > tmp) {
+					i = sums[currency] * 9 / 8;
 					fcn_004c4eb0((char*) 0x67e8b0);
 					fcn_004c5150(*(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
-					    -1, (char) n, i);
+					    -1, (char) currency, i);
 					fcn_004c5150(-1, *(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
 					    (char) g_773d75, (int) ((double) i * 1.03));
 					fcn_004c4ef0((char*) 0x67e8b0);
-				} else if (sums[n] * 2 < tmp) {
-					i = tmp - sums[n] * 9 / 8;
+				} else if (sums[currency] * 2 < tmp) {
+					i = tmp - sums[currency] * 9 / 8;
 					fcn_004c4eb0((char*) 0x67e8b0);
 					fcn_004c5150(*(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
 					    -1, (char) g_773d75, i);
 					fcn_004c5150(-1, *(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
-					    (char) n, (int) ((double) i * 1.03));
+					    (char) currency, (int) ((double) i * 1.03));
 					fcn_004c4ef0((char*) 0x67e8b0);
 				}
 			}
 		}
 		i = 0;
 		if (k < 3) {
-			for (; i < *(int*) 0x100b0ac; i++) {
-				if (*(float*) (0x100d0c0 + i * 0x58 + 0x34) > 0.0f) {
+			n = k;
+			for (; i < g_100b0ac; i++) {
+				if (!(*(float*) (0x100d0c0 + i * 0x58 + 0x34) <= 0.0f)) {
 					break;
 				}
 				if (*(int*) (*(int*) (0x100d0c0 + i * 0x58 + 0x14) + 1) != m.slots[3]) {

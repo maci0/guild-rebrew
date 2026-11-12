@@ -147,6 +147,8 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 	int i = 0;
 	int n;
 	int y;
+	int perRow;
+	int entityId;
 	double percent;
 
 	f.nSlots = 0;
@@ -181,7 +183,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 		} else {
 			d2_SetForm(*(int*) (f.win + 0x228 + i * 4), 4);
 		}
-		io_AppendText((char*) 0x6a2310, (char*) 0x1a37, i);
+		io_AppendText((char*) 0x6a2310, (char*) 0x1a37, i + 1);
 	}
 	d2_SetForm(*(int*) (f.win + 0x230), 3);
 
@@ -195,6 +197,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 	f.pIt = (int*) (f.win + 0x22c);
 	f.cnt = 0;
 	f.pg = 1;
+	i = 0;
 	for (;;) {
 		if ((int) (f.ent[0x232] + f.ent[0x231]) <= i) {
 			break;
@@ -208,6 +211,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 			}
 		}
 		d2_SetForm(*f.pIt, 3);
+		f.rows[i].win = *f.pIt;
 		f.tv = f.cnt % 2 * f.tv3 + 0x10;
 		f.rows[i].x = f.tv;
 		f.rows[i].y = f.cnt / 2 * f.tv2 + 0x11;
@@ -259,7 +263,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 			fcn_00535560(f.win);
 		}
 		if (*(char*) (f.win + 0x270)) {
-			goto L870d;
+			goto L7e3d;
 		}
 		if (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == f.hE
 		    && f.nSlots != 0) {
@@ -267,16 +271,16 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 			if (n == 0) {
 				goto L7e3d;
 			}
-			f.tv2 = n / f.nSlots;
-			y = f.tv2 / 3;
+			perRow = n / f.nSlots;
+			y = perRow / 3;
 			if (fcn_00526010(
 			        (void*) (0x7f4ca0
 			                 + *(unsigned short*) 0x774970 * 0x21c),
-			        fcn_0050b750(f.tv2, *(unsigned char*) 0x773d75),
+			        fcn_0050b750(n, *(unsigned char*) 0x773d75),
 			        *(unsigned char*) 0x773d75)) {
 				f.pIt = (int*) &f.rows[0].obj;
 				f.pg = f.cnt;
-				while (f.pg != 0) {
+				while (f.pg > 0) {
 					p = (char*) *f.pIt;
 					if (p != 0) {
 						fcn_004c4eb0(0x6ac2bc);
@@ -284,15 +288,15 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 						    *(int*) (p + 4), -1,
 						    *(unsigned char*) 0x773d75,
 						    fcn_0050b750(
-						        f.tv2,
+						        perRow,
 						        *(unsigned char*)
 						            0x773d75));
 						fcn_004c54c0(
-						    *(int*) (p + 4), y, 0,
 						    *(int*) (0x7f4ca4
 						             + *(unsigned short*)
 						                   0x774970
-						                   * 0x21c));
+						                   * 0x21c),
+						    *(int*) (p + 4), y, 0);
 						fcn_004c4ef0(0x6ac2bc);
 					}
 					f.pIt = (int*) ((char*) f.pIt + 0x5c);
@@ -304,7 +308,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 			    *(int*) (0x7f4ca4
 			             + *(unsigned short*) 0x774970 * 0x21c),
 			    *(unsigned char*) 0x773d75,
-			    fcn_0050b750(f.tv2, *(unsigned char*) 0x773d75));
+			    fcn_0050b750(n, *(unsigned char*) 0x773d75));
 		}
 	L7e3d:
 		n = f.cnt;
@@ -318,23 +322,23 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 		}
 		f.nSlots = fcn_00505d00((unsigned char*) a0, f.slots);
 		for (i = 0; i < 12; i++) {
-			n = f.slots[0x19 + i];
-			if (n == 0xffff) {
+			entityId = f.slots[0x19 + i];
+			if (entityId == 0xffff) {
 				continue;
 			}
-			p = (char*) (0x7f4ca0 + n * 0x21c);
-			if (*(char*) (0x7f4e04 + n * 0x21c) != 0) {
+			p = (char*) (0x7f4ca0 + entityId * 0x21c);
+			if (*(char*) (0x7f4e04 + entityId * 0x21c) != 0) {
 				continue;
 			}
-			for (y = 0; y < f.cnt; y++) {
+			for (y = 0; y < n; y++) {
 				if (f.rows[y].obj == (unsigned char*) p) {
 					break;
 				}
 			}
-			if (y < f.cnt) {
+			if (y < n) {
 				continue;
 			}
-			for (y = 0; y < f.cnt; y++) {
+			for (y = 0; y < n; y++) {
 				if (f.rows[y].obj == 0) {
 					f.rows[y].obj = (unsigned char*) p;
 					break;
@@ -344,7 +348,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 		if (f.cnt > 0) {
 			f.pg = f.cnt;
 			i = 0;
-			while (f.pg != 0) {
+			while (f.pg > 0) {
 				if (f.rows[i].obj != f.old[i].obj) {
 					if (f.rows[i].x1c != -1) {
 						fcn_0046b2b0(f.rows[i].x1c);
@@ -396,8 +400,8 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 					}
 					if (r->bar != -1) {
 						f.tv = fcn_0050f950(
-						    *(unsigned short*) r->obj,
-						    *(unsigned short*) 0x774970);
+						    *(unsigned short*) 0x774970,
+						    *(unsigned short*) r->obj);
 						percent = (f.tv + 128.0) * 100.0;
 						fcn_00472380(
 						    r->bar, 0, 0x64,

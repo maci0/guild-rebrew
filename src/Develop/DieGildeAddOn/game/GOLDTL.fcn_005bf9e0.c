@@ -22,6 +22,9 @@ void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5530(void*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
+extern int g_14ce8e0;
+extern int g_67d370;
+extern int g_774654;
 /* ADDRESS: GOLDTL 0x005bf9e0 */
 int __cdecl fcn_005bf9e0(unsigned short* a0)
 {
@@ -96,13 +99,13 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 	t[5] = 0x15;
 	fcn_005c9220(t);
 	while (fcn_005373e0(0x5bf9e0, 0x677c7)) {
-		if (*(int*) 0x14ce8e0 || *(int*) &g_100f1dc == 1) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 || *(int*) &g_100f1dc == 1) {
+			g_774654 = 1;
 		}
-		if (*(int*) &g_100f1dc == 2 && idx != -1 && *(int*) 0x67d370 == idx) {
+		if (*(int*) &g_100f1dc == 2 && idx != -1 && g_67d370 == idx) {
 			*(unsigned char*) (evt + 0) = 0x1a;
 			*(unsigned int*) (evt + 4) = *(unsigned int*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
-			*(unsigned int*) (evt + 8) = *(unsigned int*) &g_7746c8;
+			*(unsigned int*) (evt + 8) = *(unsigned int*) (g_7746c4 + 1);
 			*(unsigned char*) (evt + 0x32) = 1;
 			*(unsigned int*) (evt + 0x80) = timeout;
 			*(unsigned int*) (evt + 0x5c) = *(unsigned int*) (a0 + 2);
@@ -112,7 +115,7 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 			fcn_004c4ef0((char*) 0x6ac4c0);
 			io_FormatTextBuffer(text, 0x1709, *a0);
 			fcn_00526120(text, 0);
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 			res = 1;
 		}
 	}

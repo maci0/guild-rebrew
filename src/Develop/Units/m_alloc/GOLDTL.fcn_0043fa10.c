@@ -1,6 +1,8 @@
 #include <string.h>
 
-extern char* g_6b5c60;
+extern char g_6b5c60[];
+extern int g_1041d08;
+extern float g_6628cc;
 extern int g_6b7fdc;
 
 char* __cdecl m_alloc(int, char*);
@@ -15,6 +17,33 @@ int __cdecl sprintf(char*, const char*, ...);
 /* Load one terrain patch: derive the two file names under boden/, read the
  * height and texture maps, clone or load the water maps and build the patch
  * object the renderer indexes. */
+static __inline void copy_43fa10(void* dst, const void* src, int size)
+{
+	void* d;
+	const void* s;
+	int n;
+	n = size;
+	s = src;
+	d = dst;
+	__asm {
+		mov edi, d
+		mov esi, s
+		mov ebx, n
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L_copy
+		rep movsb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep movsd
+	L_copy:
+		add ecx, ebx
+		rep movsb
+	}
+}
+
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0043fa10 */
 int* __cdecl fcn_0043fa10(char* a0)
@@ -40,19 +69,19 @@ int* __cdecl fcn_0043fa10(char* a0)
 
 	v6 = (int*) m_alloc(0x8038, (char*) 0x67a950);
 	raw = (char*) v6;
-	strcpy(raw + 0x7da4, a0);
-	strcpy(raw + 0x7de4, a0 + 0x48);
+	{ char* s = a0; int offset = raw + 0x7da4 - s; char c; do { c = *s; s[offset] = c; ++s; } while (c); }
+	{ char* s = a0 + 0x48; int offset = raw + 0x7de4 - s; char c; do { c = *s; s[offset] = c; ++s; } while (c); }
 	*(unsigned char*) (raw + 0x8037) = (*(unsigned char*) (raw + 0x8037) ^ *(unsigned char*) 0x6b8305) & 0xf ^ *(unsigned char*) (raw + 0x8037);
-	if (*(int*) (a0 + 0x40) && *(int*) (a0 + 0x9c) >= 1) {
+	if (*(int*) (a0 + 0x40) && *(int*) (a0 + 0x9c) > 0) {
 		n = *(int*) (a0 + 0x9c);
 		*v6 = n;
 		dst = m_alloc(n * n, (char*) 0x67a940);
 		v6[4] = (int) dst;
-		memcpy(dst, *(void**) (a0 + 0x40), n * n);
+		copy_43fa10(dst, *(void**) (a0 + 0x40), *v6 * *v6);
 	} else {
-		fcn_0042f420(*(int*) 0x1041d08, g_6b7fdc, path);
+		fcn_0042f420(g_1041d08, g_6b7fdc, path);
 		strcat(path, "boden/");
-		strcpy(prefix, path);
+		{ int j = 0; do { prefix[j] = path[j]; } while (path[j++]); }
 		strcat(path, a0);
 		strcat(path, ".bmp");
 		if (fcn_00401590(path, &width, &height, 0) && width == height) {
@@ -67,17 +96,17 @@ int* __cdecl fcn_0043fa10(char* a0)
 	n = *v6;
 	v6[2] = (n * n - 1) | (n - 1);
 	v6[3] = n - 1;
-	if (*(int*) (a0 + 0x98) >= 1 && *(int*) (a0 + 0xa0)) {
-		if (*(int*) (a0 + 0x44) && *(int*) (a0 + 0x9c) >= 1) {
-			dst = m_alloc(n * n, (char*) 0x67a764);
+	if (*(int*) (a0 + 0x98) > 0 && *(int*) (a0 + 0xa0)) {
+		if (*(int*) (a0 + 0x44) && *(int*) (a0 + 0x9c) > 0) {
+			dst = m_alloc(*v6 * *v6, (char*) 0x67a764);
 			v6[6] = (int) dst;
-			memcpy(dst, *(void**) (a0 + 0x44), n * n);
+			copy_43fa10(dst, *(void**) (a0 + 0x44), *v6 * *v6);
 		} else {
-			strcpy(path, prefix);
+			{ int j = 0; do { path[j] = prefix[j]; } while (prefix[j++]); }
 			strcat(path, a0);
 			strcat(path, "_w.bmp");
 			if (fcn_00401590(path, &width, &height, 0) && width == height && width == *v6) {
-				dst = m_alloc(n * n, (char*) 0x67a764);
+				dst = m_alloc(*v6 * *v6, (char*) 0x67a764);
 				v6[6] = (int) dst;
 				fcn_00401650(path, (unsigned char*) dst, 0, 5);
 			} else {
@@ -87,14 +116,14 @@ int* __cdecl fcn_0043fa10(char* a0)
 		*(unsigned char*) (raw + 0x8035) = *(unsigned char*) (a0 + 0x98);
 		dst = m_alloc((unsigned int) *(unsigned char*) (raw + 0x8035) * 0x158, (char*) 0x67a88c);
 		v6[0x1f68] = (int) dst;
-		memcpy(dst, *(void**) (a0 + 0xa0), (unsigned int) *(unsigned char*) (raw + 0x8035) * 0x158);
+		copy_43fa10(dst, *(void**) (a0 + 0xa0), (unsigned int) *(unsigned char*) (raw + 0x8035) * 0x158);
 	}
-	if (*(int*) (a0 + 0x88) && *(int*) (a0 + 0x9c) >= 1) {
+	if (*(int*) (a0 + 0x88) && *(int*) (a0 + 0x9c) > 0) {
 		dst = m_alloc(*v6 * *v6, (char*) 0x67a87c);
 		v6[5] = (int) dst;
-		memcpy(dst, *(void**) (a0 + 0x88), *v6 * *v6);
+		copy_43fa10(dst, *(void**) (a0 + 0x88), *v6 * *v6);
 	} else {
-		strcpy(path, prefix);
+		{ int j = 0; do { path[j] = prefix[j]; } while (prefix[j++]); }
 		strcat(path, a0 + 0x48);
 		strcat(path, ".bmp");
 		if (fcn_00401590(path, &width, &height, 0) && width == height && width == *v6) {
@@ -109,9 +138,9 @@ int* __cdecl fcn_0043fa10(char* a0)
 		fcn_0043bcf0(v6);
 		return 0;
 	}
-	*(float*) (raw + 0x50) = (float) (-*v6) * *(float*) (a0 + 0x90) * *(float*) 0x6628cc;
+	*(float*) (raw + 0x50) = (float) (-*v6) * *(float*) (a0 + 0x90) * g_6628cc;
 	*(float*) (raw + 0x54) = *(float*) (a0 + 0x94) * *(float*) 0x662cac;
-	*(float*) (raw + 0x58) = (float) *v6 * *(float*) (a0 + 0x90) * *(float*) 0x6628cc;
+	*(float*) (raw + 0x58) = (float) *v6 * *(float*) (a0 + 0x90) * g_6628cc;
 	*(float*) (raw + 0x60) = *(float*) (a0 + 0x90);
 	*(int*) (raw + 0x64) = 0;
 	*(int*) (raw + 0x68) = 0;
@@ -129,7 +158,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 	name = a0 + 0xa4;
 	i = 8;
 	do {
-		*slot = *(char*) 0x6b5c60;
+		*slot = g_6b5c60[0];
 		if (name && *name) {
 			fcn_0043f7e0(v6, name, -1);
 		}
@@ -141,7 +170,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 	maxv = 0;
 	minv = 0xff;
 	i = 0;
-	if (count >= 1) {
+	if (count > 0) {
 		do {
 			value = *(unsigned char*) (v6[5] + i);
 			if (maxv <= value) {
@@ -154,7 +183,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 		} while (i < count);
 	}
 	i = 0;
-	if (count >= 1) {
+	if (count > 0) {
 		do {
 			cell = (int*) (v6[5] + i);
 			*(char*) cell = *(char*) cell - (char) minv;

@@ -5,7 +5,7 @@
 extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 
-int __cdecl _ftol(void);
+
 int __cdecl gm_RandomMod(int);
 void __cdecl fcn_00546190(char*);
 void __cdecl fcn_004c4510(char*, int);
@@ -40,12 +40,12 @@ void __cdecl fcn_0055a920(char* rec)
 	n = *(int*) (rec + 0xb0);
 	r = *(int*) (rec + 0xac);
 	d = (double) r;
-	if (ceil((double) (r + n)) == d) {
-		d = ceil((double) (r + n));
+	if (!(ceil((double) (r + n)) > d)) {
+		d = ceil((double) (*(int*) (rec + 0xb0) + *(int*) (rec + 0xac)));
 	} else {
-		d = (double) r;
+		d = (double) *(int*) (rec + 0xac);
 	}
-	want = _ftol();
+	want = (int) d;
 	si = (unsigned short) gm_RandomMod(0x300);
 	left = 0x300;
 	do {

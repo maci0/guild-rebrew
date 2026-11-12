@@ -20,6 +20,7 @@ int __cdecl nt_Recv(void)
 	char buf[256];
 	int n;
 	int err;
+	int (__stdcall* receive)(unsigned int, char*, int, int);
 
 	if (g_14cbca0 == -1) {
 		return 1;
@@ -27,8 +28,9 @@ int __cdecl nt_Recv(void)
 	if (g_14cbca4 == 0) {
 		return 0;
 	}
+	receive = g_662384;
 	if (g_14cbcac < 3) {
-		n = g_662384(g_14cbca0, g_14cbca4 + (g_14cbcac & 0xffff),
+		n = receive(g_14cbca0, g_14cbca4 + (g_14cbcac & 0xffff),
 		             3 - (g_14cbcac & 0xffff), 0);
 		if (n == 0) {
 			fcn_00421050();
@@ -43,7 +45,7 @@ int __cdecl nt_Recv(void)
 			return 0;
 		}
 	}
-	n = g_662384(g_14cbca0, g_14cbca4 + (g_14cbcac & 0xffff),
+	n = receive(g_14cbca0, g_14cbca4 + (g_14cbcac & 0xffff),
 	             *(unsigned short*) (g_14cbca4 + 1) - (g_14cbcac & 0xffff), 0);
 	if (n == 0) {
 		fcn_00421050();

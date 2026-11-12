@@ -7,7 +7,7 @@ typedef struct Rec {
 
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
-extern double dbl_662908;
+extern double g_662908;
 
 int __cdecl gm_AccumulateTyped2(void*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -37,10 +37,11 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 	int found;
 	int div;
 
-	remaining = a2;
+	found = 0;
 	written = 0;
 	total = 0;
 	amount = gm_AccumulateTyped2(a1);
+	remaining = a2;
 	if (amount >= remaining) {
 		amount = remaining;
 	}
@@ -49,7 +50,6 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 		remaining -= amount;
 		written = amount;
 	}
-	found = 0;
 	while (remaining > 0) {
 		if (found) {
 			break;
@@ -71,7 +71,7 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 					while (sub != 0 && remaining > 0) {
 						if (((Rec*) lpObjektePROT)[*sub].type != 0x17
 							&& ((Rec*) lpObjektePROT)[*sub].type != 0x25) {
-							div = (int) (fcn_0050bb50(*sub, g_773d75) * dbl_662908);
+							div = (int) (fcn_0050bb50(*sub, g_773d75) * g_662908);
 							if (div != 0) {
 								amount = remaining / div;
 								if (amount <= 1) {
@@ -119,7 +119,7 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 					while (sub != 0 && remaining > 0) {
 						if (((Rec*) lpObjektePROT)[*sub].type == 0x17
 							|| ((Rec*) lpObjektePROT)[*sub].type == 0x25) {
-							div = (int) (fcn_0050bb50(*sub, g_773d75) * dbl_662908);
+							div = (int) (fcn_0050bb50(*sub, g_773d75) * g_662908);
 							if (div != 0) {
 								amount = remaining / div;
 								if (amount <= 1) {

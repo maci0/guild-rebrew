@@ -22,9 +22,24 @@ typedef struct S447e30Rec {
 	float f14;
 	float block[4];
 	int extra[4];
-	int pad[0x11c];
+	char pad[0x11c];
 	int tail;
 } S447e30Rec;
+
+typedef struct S447e30Desc {
+	char name[0x40];
+	int listB;
+	int listD;
+	char texture[0x40];
+	int listE;
+	int listC;
+	float scale;
+	float height;
+	int count;
+	int listA;
+	S447e30Rec* recs;
+	char strings[8][0x40];
+} S447e30Desc;
 
 int __cdecl ReportClientMessage(char*);
 char* __cdecl fcn_004011a0(char*, char*);
@@ -43,24 +58,16 @@ char* __cdecl fcn_0043fa10(char*);
 /* ADDRESS: GOLDTL 0x00447e30 */
 int __cdecl fcn_00447e30(char* stream, unsigned int version)
 {
-	char name[0x2a4];
+	S447e30Desc desc;
 	char recName[0x40];
 	char skip[0x100];
-	char strings[8][0x40];
 	char flag;
-	int listB;
-	int listA;
-	int listC;
-	int listD;
-	int listE;
-	int count;
 	int i;
 	int saved;
 	int last;
 	int tri[3];
 	int handle;
 	int mask;
-	S447e30Rec* recs;
 	S447e30Rec* rec;
 	char* obj;
 	char kind;
@@ -68,42 +75,56 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 	char b1;
 	char b2;
 	int bits;
+	void* fill_dst;
+	int fill_size;
 
 	handle = 0;
 	last = 0;
-	listA = 0;
-	listB = 0;
-	listC = 0;
-	listD = 0;
-	listE = 0;
 	mask = 0;
-	recs = 0;
 	obj = 0;
 	if (version < 0x3a6c0009) {
 		ReportClientMessage((char*) 0x67abe0);
 		return 0;
 	}
-	memset(name, 0, 0x2a4);
-	fcn_004011a0(stream, name);
-	if (name[0] != 0 && version >= 0x3a6c00ad) {
-		fcn_004011f0(stream, &listA);
-		bio_rd_array_quick(stream, listA, &listB);
+	fill_dst = &desc;
+	fill_size = sizeof(desc);
+	__asm {
+		mov edi, fill_dst
+		mov ebx, fill_size
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L447e30fill
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L447e30fill:
+		add ecx, ebx
+		rep stosb
+	}
+	fcn_004011a0(stream, desc.name);
+	if (desc.name[0] != 0 && version >= 0x3a6c00ad) {
+		fcn_004011f0(stream, &desc.listA);
+		bio_rd_array_quick(stream, desc.listA, &desc.listB);
 		if (version >= 0x3a6c00bb) {
-			bio_rd_array_quick(stream, listA * 4, &listC);
+			bio_rd_array_quick(stream, desc.listA * 4, &desc.listC);
 		}
 	}
 	if (version >= 0x3a6c00aa) {
 		fcn_00401180(stream, &flag);
 		if (flag != 0) {
-			fcn_004011f0(stream, &count);
-			if (count > 0) {
+			fcn_004011f0(stream, &desc.count);
+			if (desc.count > 0) {
 				if (version >= 0x3a6c00ad) {
-					bio_rd_array_quick(stream, listA, &listD);
+					bio_rd_array_quick(stream, desc.listA, &desc.listD);
 				}
-				recs = (S447e30Rec*) m_alloc(count * 0x158, (char*) 0x67ac08);
+				desc.recs = (S447e30Rec*) m_alloc(desc.count * 0x158, (char*) 0x67ac08);
 				saved = 0;
-				rec = recs;
-				while (saved < count) {
+				rec = desc.recs;
+				while (saved < desc.count) {
 					last = 0;
 					handle = 0;
 					fcn_004011a0(stream, recName);
@@ -155,9 +176,9 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 			}
 		}
 	}
-	fcn_004011a0(stream, name);
-	if (version >= 0x3a6c00ad && name[0] != 0) {
-		bio_rd_array_quick(stream, listA, &listE);
+	fcn_004011a0(stream, desc.texture);
+	if (version >= 0x3a6c00ad && desc.texture[0] != 0) {
+		bio_rd_array_quick(stream, desc.listA, &desc.listE);
 	}
 	if (version <= 0x3a6c000f) {
 		for (i = 0; i < 5; i++) {
@@ -170,16 +191,16 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 		i = 6;
 	}
 	for (saved = 0; saved < i; saved++) {
-		fcn_004011a0(stream, strings[saved]);
+		fcn_004011a0(stream, desc.strings[saved]);
 	}
-	fcn_004011d0(stream, (float*) &last);
-	fcn_004011d0(stream, (float*) &count);
+	fcn_004011d0(stream, &desc.scale);
+	fcn_004011d0(stream, &desc.height);
 	if (version <= 0x3a6c000f) {
 		for (i = 0; i < 0x100; i++) {
 			fcn_004011a0(stream, skip);
 		}
 	}
-	obj = fcn_0043fa10(name);
+	obj = fcn_0043fa10((char*) &desc);
 	if (version >= 0x3a6c000e) {
 		fcn_00401280(stream, tri);
 		if (obj != 0) {
@@ -188,25 +209,25 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 			*(int*) (obj + 0x58) = tri[2];
 		}
 	}
-	if (recs != 0) {
-		m_FreeTracked(recs);
-		recs = 0;
+	if (desc.recs != 0) {
+		m_FreeTracked(desc.recs);
+		desc.recs = 0;
 	}
-	if (listE != 0) {
-		m_FreeTracked((void*) listE);
-		listE = 0;
+	if (desc.listE != 0) {
+		m_FreeTracked((void*) desc.listE);
+		desc.listE = 0;
 	}
-	if (listD != 0) {
-		m_FreeTracked((void*) listD);
-		listD = 0;
+	if (desc.listD != 0) {
+		m_FreeTracked((void*) desc.listD);
+		desc.listD = 0;
 	}
-	if (listB != 0) {
-		m_FreeTracked((void*) listB);
-		listB = 0;
+	if (desc.listB != 0) {
+		m_FreeTracked((void*) desc.listB);
+		desc.listB = 0;
 	}
-	if (listC != 0) {
-		m_FreeTracked((void*) listC);
-		listC = 0;
+	if (desc.listC != 0) {
+		m_FreeTracked((void*) desc.listC);
+		desc.listC = 0;
 	}
 	return (int) obj;
 }

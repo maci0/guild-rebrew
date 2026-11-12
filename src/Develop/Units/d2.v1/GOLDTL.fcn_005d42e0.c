@@ -133,7 +133,7 @@ void __cdecl fcn_005d42e0(void)
 		row++;
 		cp += 3;
 	}
-	for (;;) {
+	g_100f1dc = -1; for (;;) {
 		if (g_100f1dc != -1) {
 			g_775340 = 0;
 			for (i = 0; i < 5; i++) {

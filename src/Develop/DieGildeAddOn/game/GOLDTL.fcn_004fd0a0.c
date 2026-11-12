@@ -9,7 +9,7 @@ extern double g_6640f0;
 extern float g_6628a0;
 
 void __cdecl fcn_004fd400(short*, int*);
-int __cdecl gm_WalkEntityChain(int);
+int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
@@ -33,12 +33,12 @@ void __cdecl fcn_004fd0a0(void)
 	 * [esp+0x24] without a /Oy frame, so it cannot be a plain `double` local. */
 	float dmem[2];
 	float inv;
-	float x;
+
 	char* e;
 
 	fcn_004fd400(&flag, &n);
 	g_773d48 = 0;
-	for (e = (char*) 0x7f4ca0; e < (char*) 0x85a0a0; e += 0x21c) {
+	for (e = (char*) 0x7f4ca0; (int) e < 0x85a0a0; e += 0x21c) {
 		if (g_773d48 > 0x40) {
 			fcn_00535960();
 			g_773d48 = 0;
@@ -52,7 +52,7 @@ void __cdecl fcn_004fd0a0(void)
 		if (*(unsigned char*) (e + 8) == 0) {
 			continue;
 		}
-		r = gm_WalkEntityChain(*(short*) e);
+		r = gm_WalkEntityChain(*(unsigned short*) e);
 		total = 0;
 		count = 0;
 		fcn_004c4510(e, *(int*) (e + 4));
@@ -67,16 +67,16 @@ void __cdecl fcn_004fd0a0(void)
 		count = (r + total) / (count + 1);
 		fcn_004c4570(4, 1, (int) e + 0x1e0 - g_aed32c, &r);
 		*(double*) dmem = (double) count / (double) r;
-		if (g_6629c8 <= *(double*) dmem) {
+		if (!(*(double*) dmem < g_6629c8)) {
 			*(double*) dmem = 1.0;
 		}
-		inv = 1.0f - (float) r / (float) n;
+		inv = g_6628a0 - (float) r / (float) n;
 		fcn_004c5360();
-		x = (float) ((*(double*) dmem + inv) * g_662908);
 		g_773d48++;
-		fcn_004c5480(*(int*) (e + 4), 0x1e4, x - *(float*) (e + 0x1e4));
+		fcn_004c5480(*(int*) (e + 4), 0x1e4, -(*(float*) (e + 0x1e4) - (*(double*) dmem + inv) * g_662908));
+		inv = (float) (-(*(float*) (e + 0xb4) - g_6640f0 * *(float*) (e + 0xb4)));
 		fcn_004c47e0((int*) e);
-		fcn_004c4820(3, -(*(float*) (e + 0xb4) - (float) g_6640f0 * *(float*) (e + 0xb4)));
+		fcn_004c4820(3, inv);
 		fcn_004c53e0();
 		g_773d48++;
 	}

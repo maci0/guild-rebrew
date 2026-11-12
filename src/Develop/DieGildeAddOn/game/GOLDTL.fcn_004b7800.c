@@ -8,7 +8,7 @@ int __cdecl fcn_005c6270(char* h, int n);
 int __cdecl fcn_004a5e60(char* p, int kind, int mask, int b, int c, float r, int* out);
 int __cdecl gm_ResolveEntityById(void** out, int a, int b, int id);
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl gm_WalkEntityChain(int id);
+int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl io_FormatTextBuffer(char* buf, int id, int a, int b);
 int __cdecl fcn_004c51a0(int a, int b, unsigned char c, int d);
 int __cdecl fcn_00545d40(int a, int b, char* s, int flag, int c, int d);

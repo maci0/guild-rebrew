@@ -15,7 +15,7 @@ extern int g_67d370;
 #include "game_player.h"
 extern char g_773d75;
 extern char g_14cf950;
-extern float g_664ee0;
+extern double g_662908;
 
 unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -24,18 +24,18 @@ void __cdecl fcn_00471af0(int a, int b);
 void __cdecl d2_SetForm(int a, int b);
 int __cdecl fcn_0046f740(int a, int b, int c, int d);
 void __cdecl fcn_00469470(int a, int b);
-int __cdecl d2_CreateRadioGroup(int a);
-int __cdecl fcn_00441ab0(char* a, int b, int c, int d, float* out);
-int __cdecl fcn_005ebbb9(float* a, float* b);
+int __cdecl d2_CreateRadioGroup(int a, ...);
+int __cdecl fcn_00441ab0(char* a, int b, int c, float d, float* out);
+float* __stdcall fcn_005ebbb9(float* a, const float* b);
 void __cdecl fcn_00438b40(int h, float* p);
-int __cdecl plt_CheckZoneAvailability(int a, int b, int c, char d);
+int __cdecl plt_CheckZoneAvailability(int a, int b, int c, unsigned int d);
 void __cdecl fcn_00414c90(int a, int b, int c, int d);
 int __cdecl fcn_004c5aa0(int a, int b, int c, int d, int e, int f);
 int __cdecl fcn_004c4450(int a);
 int __cdecl fcn_005373e0(void* fn, int msg);
 int __cdecl fcn_004c4480(int a);
 float __cdecl eval_ObjektPreis2Credits(int, int);
-int __cdecl _ftol(void);
+
 void __cdecl fcn_004c5150(int a, int b, unsigned char c, int d);
 int __cdecl init_SetPflanzenMap(int a, int b);
 void __cdecl fcn_00412cf0(int a, float* p, int b, int c, int d);
@@ -44,7 +44,7 @@ int __cdecl plt_FindPlantInfo(int a);
 void __cdecl d3_DestroyObject(int a);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 int __cdecl fcn_004488e0(char* a, int b, int c);
-void __cdecl fcn_0043a5a0(int a, float* p);
+void __cdecl fcn_0043a5a0(int a, int p);
 void __cdecl ReportClientMessage(char* a);
 void __cdecl fcn_00469510(int a);
 void __cdecl fcn_00471e30(int a);
@@ -53,7 +53,7 @@ void __cdecl fcn_00471e30(int a);
 void __cdecl ob_HandleBepflanzung(int a0)
 {
 	int v1;
-	unsigned int v5;
+
 	int v6;
 	int v16;
 	int v17;
@@ -67,9 +67,9 @@ void __cdecl ob_HandleBepflanzung(int a0)
 	int v25;
 	unsigned short* v26;
 	int v3;
-	unsigned int v30;
-	unsigned int v31;
-	unsigned int v32;
+
+
+
 	int v33;
 	unsigned int v34;
 	int v35;
@@ -79,43 +79,43 @@ void __cdecl ob_HandleBepflanzung(int a0)
 	unsigned int v39;
 	unsigned short* v4;
 	unsigned int v40;
-	int v43;
+
 	unsigned int v7[9];
 	int v8[8];
-	float v9;
-	float v10[2];
-	float v11;
-	float v12;
-	float v13;
-	float v27;
-	float v28;
-	float v29;
-	float v41;
-	float v42;
-	float v43f;
-	float v44;
-	float v45;
-	float v46;
-	float v47;
-	float v48;
-	float v49;
+	float pick[3];
+	float matrix[16];
+	float world[3];
+	float place[3];
+	unsigned int color;
+
+
+
+
+
+
+
+
+
+
+
+
 	char v14[256];
 	char v15[256];
 
-	memset(v7, 0, sizeof(v7));
+
 	v40 = *(unsigned int*) ((char*) a0 + 0x71);
 	v33 = -1;
 	v24 = -1;
 	v17 = 0;
 	v6 = 0;
 	v16 = 0;
-	v9 = 0.0f;
-	v30 = 0;
-	v31 = 0;
-	v32 = 0;
+	pick[0] = 0.0f;
+	pick[1] = 0.0f;
+	pick[2] = 0.0f;
+	v1 = 1;
 	v34 = 0;
 	v37 = 0;
-	v18 = 0;
+	v36 = 0;
 	v16 = 0;
 	v23 = 0;
 	v26 = 0;
@@ -140,7 +140,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 	if (v4) {
 		do {
 			v16 += 1;
-			v7[v16] = *(unsigned int*) v4;
+			v7[v16] = *v4;
 			v4 = gm_NextEntityQueryMatch();
 		} while (v4);
 		v25 = v16;
@@ -160,13 +160,12 @@ void __cdecl ob_HandleBepflanzung(int a0)
 			v16 = fcn_0046f740(0x1a, v17 * 0x32, v7[v17 + 1] + 0xdf,
 				g_772514);
 			v8[v17] = v16;
-			if (v24 != -1) {
-				fcn_00469470(v24, v16);
-			}
-			else {
-				v24 = d2_CreateRadioGroup(1);
+			if (v24 == -1) {
+				v24 = d2_CreateRadioGroup(1, v16);
 				*(unsigned int*) (v16 * 0x2f4 + 0x38 + g_1015ea0) = 1;
 				*(unsigned int*) (v16 * 0x2f4 + 0x3c + g_1015ea0) = 1;
+			} else {
+				fcn_00469470(v24, v16);
 			}
 			v17 += 1;
 		} while (v17 < v25);
@@ -175,24 +174,24 @@ void __cdecl ob_HandleBepflanzung(int a0)
 	v35 = v24 * 0x23;
 	for (;;) {
 		v18 = fcn_00441ab0(g_6b8300, (int) g_14ce8c0,
-			(int) g_14ce8c2, 0x41f00000, &v9);
+			(int) g_14ce8c2, 30.0f, pick);
 		if (v18 != 0xffffffff && v6) {
 			v19 = v18 & 0xffff;
 			v16 = (int) v18 >> 0x10;
 			v34 = v19;
 			v37 = v16;
-			fcn_005ebbb9(v10, (float*) ((char*) g_6b8014 + 0x18c));
-			v11 = v42 * v28 + v44 * v29 + v47 * v9
-				+ *(float*) ((char*) g_6b8014 + 0x4c);
-			v26 = (unsigned short*) (int) (v43f * v28 + v45 * v29 + v48 * v9
-				+ *(float*) ((char*) g_6b8014 + 0x50));
-			v13 = v10[0] * v28 + v46 * v29 + v49 * v9
-				+ *(float*) ((char*) g_6b8014 + 0x54);
-			fcn_00438b40(v6, &v11);
-			if (*(unsigned char*) (*g_6b8300 * v16
-					+ (int) g_6b8300[5] + v19) != v36
+			fcn_005ebbb9(matrix, (float*) (g_6b8014 + 0x18c));
+			world[0] = matrix[8] * pick[2] + matrix[4] * pick[1] + matrix[0] * pick[0];
+			world[1] = matrix[9] * pick[2] + matrix[5] * pick[1] + matrix[1] * pick[0];
+			world[2] = matrix[10] * pick[2] + matrix[6] * pick[1] + matrix[2] * pick[0];
+			world[0] += *(float*) (g_6b8014 + 0x4c);
+			world[1] += *(float*) (g_6b8014 + 0x50);
+			world[2] += *(float*) (g_6b8014 + 0x54);
+			fcn_00438b40(v6, world);
+			if (*(unsigned char*) (*(int*) g_6b8300 * v16
+					+ *(int*) (g_6b8300 + 0x14) + v19) != v36
 				|| (v16 = plt_CheckZoneAvailability(v40, v19, v16,
-						*(char*) &v26[0x21])) == 0) {
+						(unsigned char) ((char*) v26)[0x42])) == 0) {
 				v1 = 0;
 				v16 = v25;
 				v22 = 0x40;
@@ -231,9 +230,8 @@ void __cdecl ob_HandleBepflanzung(int a0)
 			}
 			v17 = fcn_004c4480(v20);
 			if (v17) {
-				eval_ObjektPreis2Credits(*v4, 100);
-				v39 = _ftol();
-				v3 = _ftol();
+				v39 = (int) eval_ObjektPreis2Credits(*v4, 100);
+				v3 = (int) ((int) v39 * g_662908);
 				if (v3 <= 0x400) {
 					v3 = 0x400;
 				}
@@ -243,12 +241,11 @@ void __cdecl ob_HandleBepflanzung(int a0)
 				init_SetPflanzenMap(v17, 0);
 				v17 = *(int*) ((char*) v17 + 0x14);
 				if (v17) {
-					v41 = v27 - g_664ee0;
-					v12 = v13;
-					v42 = v28;
-					fcn_00438b40(v17, &v12);
-					fcn_00412cf0(v17, &v13, v17 + 0x84, 0x32,
-						0x20);
+					place[0] = world[0];
+					place[1] = world[1] - 60.0;
+					place[2] = world[2];
+					fcn_00438b40(v17, place);
+					fcn_00412cf0(v17, world, v17 + 0x84, 0x32, 0x20);
 				}
 			}
 		}
@@ -294,10 +291,10 @@ void __cdecl ob_HandleBepflanzung(int a0)
 				&v4[1]);
 			v6 = fcn_004488e0(v14, 0, 0);
 			if (v6) {
-				v11 = 9.21438e-41f;
+				color = 0x100dc;
 				*(unsigned char*) ((char*) v6 + 0x215) =
 					*(unsigned char*) ((char*) v6 + 0x215) & 0x7f;
-				fcn_0043a5a0(v6, &v11);
+				fcn_0043a5a0(v6, (int) &color);
 				*(unsigned char*) ((char*) v6 + 0x215) =
 					*(unsigned char*) ((char*) v6 + 0x215) | 0x80;
 			}

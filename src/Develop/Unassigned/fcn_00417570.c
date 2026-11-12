@@ -10,33 +10,33 @@ extern double g_662ae8;
 int __cdecl rand(void);
 
 /* ADDRESS: GOLDTL 0x00417570 */
-int __cdecl fcn_00417570(char* obj, int now)
+unsigned char __cdecl fcn_00417570(char* obj, int now)
 {
 	char* rec;
 	int i;
 	unsigned int dt;
 	double f1;
 	double v;
-	float fv;
+	float fv; unsigned char flags;
 
 	i = 0;
 	rec = *(char**) (obj + 0x28);
 	if (*(int*) (obj + 0xd8) <= 0) {
 		return 1;
 	}
-	do {
-		if (*(unsigned char*) (rec + 0x51) & 1) {
-			dt = (unsigned int) (now - *(int*) (rec + 0x30));
-			f1 = (double) dt * g_662a68;
+	do { flags = *(unsigned char*) (rec + 0x51);
+		if (flags & 1) {
+			dt = (unsigned int) now - *(unsigned int*) (rec + 0x30);
 			*(int*) (rec + 0x30) = now;
-			*(float*) (rec + 0x38) = (float) (f1 * *(float*) rec + *(float*) (rec + 0x38));
-			*(float*) (rec + 0x3c) = (float) (f1 * *(float*) (rec + 4) + *(float*) (rec + 0x3c));
-			*(float*) (rec + 0x40) = (float) (f1 * *(float*) (rec + 8) + *(float*) (rec + 0x40));
-			*(float*) (rec + 0x10) = fv = (float) (*(float*) (rec + 0x10) - f1 * *(float*) (obj + 4));
-			if (fv <= g_662950) {
-				*(unsigned char*) (rec + 0x51) = *(unsigned char*) (rec + 0x51) & 0xfe;
-			} else {
+			f1 = (double) dt * g_662a68;
+			*(float*) (rec + 0x38) = (float) (*(float*) rec * f1 + *(float*) (rec + 0x38));
+			*(float*) (rec + 0x3c) = (float) (*(float*) (rec + 4) * f1 + *(float*) (rec + 0x3c));
+			*(float*) (rec + 0x40) = (float) (*(float*) (rec + 8) * f1 + *(float*) (rec + 0x40));
+			*(float*) (rec + 0x10) = fv = (float) (*(float*) (rec + 0x10) - *(float*) (obj + 4) * f1);
+			if (fv > g_662950) {
 				*(unsigned char*) (rec + 0x4f) = (unsigned char) (int) fv;
+			} else {
+				*(unsigned char*) (rec + 0x51) = flags & 0xfe;
 			}
 		} else {
 			v = (double) rand() * g_662a18

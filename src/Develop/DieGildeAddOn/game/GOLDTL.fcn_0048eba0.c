@@ -43,15 +43,15 @@ int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* Slot chooser for the execution scene. A fifteen-entry slot table is matched
- * against the entity's inventory; the blocked counter and the first slot's
- * availability select either a pickup or a drop message, and one slot is
+ * against the entity's inventory; its total, blocked and free counts
+ * select either a pickup or a drop message, and one slot is
  * picked at random. */
 /* ADDRESS: GOLDTL 0x0048eba0 */
 int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b)
 {
 	Slot slot[0xf];
 	Counts cnt;
-	int picked;
+
 	int idx;
 
 	if (busy != 0) {
@@ -77,9 +77,9 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 	slot[13].id = 0x2be;
 	slot[14].id = 0x2b9;
 	fcn_004a51d0(e, 0xf, slot, &cnt);
-	if ((slot[0].a != 6 || slot[0].item != 0) && cnt.blocked != 0xf) {
-		if (slot[0].a < 6) {
-			if (slot[0].item == 0) {
+	if ((cnt.total != 6 || cnt.free != 0) && cnt.blocked != 0xf) {
+		if (cnt.total < 6) {
+			if (cnt.free == 0) {
 				if (*(int*) &g_7f4c00 < 0x14) {
 					return 0;
 				}
@@ -104,7 +104,7 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 				b->type = 0;
 				return 0x48;
 			}
-		} else if (slot[0].item == 0) {
+		} else if (cnt.free == 0) {
 			return 0;
 		}
 		idx = gm_RandomMod(0xf);
@@ -120,12 +120,12 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 		b->a = -1;
 		b->b = -1;
 		if (idx < 6) {
-			int mask;
+			int picked; int mask;
 			mask = 0xf00500;
 			if (fcn_004a5340(e, 1, &mask, 0, (float) gm_RandomMod(0x20) + 10.0f, &picked)) {
 				b->type = 7;
-				b->b = -1;
 				b->a = *(int*) (g_7f4ca4 + (picked & 0xffff) * 0x21c);
+				b->b = -1;
 				b->d = 0x48;
 				return 0x48;
 			}
@@ -133,9 +133,9 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 			if (idx == 6) {
 				int out;
 				F8 f;
-				out = -1;
 				f.mask = 0xa0744380;
 				f.b = 1;
+				out = -1;
 				if (g_77261c != 0) {
 					fcn_004a5e60(g_77261c, 4, f, 0, 100.0f, &out);
 				}
@@ -146,6 +146,7 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 					b->d = 0x48;
 					return 0x48;
 				}
+				return 0;
 			}
 			if (idx == 7 && *(int*) (e + 0x194) < 3) {
 				return 0;

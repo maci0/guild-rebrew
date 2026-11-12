@@ -35,6 +35,7 @@ typedef struct WinRec {
 	int used;            /* 0x290 */
 	char pad294[0x104];  /* 0x294..0x397 */
 	int x398;            /* 0x398 */
+	char pad39c[4];
 	int x3a0;            /* 0x3a0 */
 	float x3a4;          /* 0x3a4 */
 	int x3a8;            /* 0x3a8 */
@@ -101,17 +102,15 @@ int __cdecl fcn_0046e940(unsigned int a0, unsigned int a1, unsigned int a2, int 
 	if (g_77259c > 0x60) {
 		g_77259c = 1;
 	}
-	i = 0;
-	p = (unsigned int*) 0x10161d0;
-	while (*p != 0) {
-		p += 0xf3;
-		i++;
-		if ((int) p >= 0x102ce50) {
-			return -1;
+	for (i = 0, p = (unsigned int*) 0x10161d0; (int) p < 0x102ce50; p += 0xf3, i++) {
+		if (*p == 0) {
+			goto found;
 		}
 	}
+	return -1;
+found:
 	if (i == -1) {
-		return 0;
+		return i;
 	}
 	rec = (WinRec*) (i * 0x3cc + 0x1015f40);
 	rec->x4 = a0;

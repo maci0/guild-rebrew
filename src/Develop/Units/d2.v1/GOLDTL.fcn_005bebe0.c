@@ -5,14 +5,9 @@
 
 #include <string.h>
 
-typedef struct
-{
-	int day;
-	int hour;
-	int min;
-	unsigned short sec;
-} Tbebe;
-/* SIZE 0x10 */
+#include "client_types.h"
+typedef pos14_7f4c00 Tbebe;
+
 
 /* Message packet handed to fcn_004c5530. Field names unknown, so the layout
  * keeps raw offsets. */
@@ -93,7 +88,7 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 	MsgBebe msg;
 	int big[0x88];
 	int level;
-	int dur;
+	float dur;
 	int h;
 
 	slot = fcn_005463a0(2, 2, g_774970, 0, 0x60);
@@ -128,13 +123,13 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 	io_AppendText(0x16af, a2 + 0x16b7);
 	io_AppendText(a2 + 0x16c3);
 	d2_SetForm(h, 2);
-	f = (float) color * g_664168;
-	if (f >= g_662a98) {
+	f = (float) *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2) * g_664168;
+	if (!(f < g_662a98)) {
 		f = g_662a98;
 	}
 	found = fcn_0046f740(((struct s_1015f4c*) g_1015f4c)[g_772514].x / 2 - 0x18, 4,
 			     (int) ((float) yoff[a2] + f), g_772514);
-	fcn_00534160(((struct s_1015f4c*) g_1015f4c)[g_772514].x / 2 - 0x23, 0x3c, color, 0x4df);
+	fcn_00534160(((struct s_1015f4c*) g_1015f4c)[g_772514].x / 2 - 0x23, 0x3c, *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2), 0x4df);
 	d2_SetForm(h, 3);
 	if (slot != 0) {
 		io_AppendText(0x16b3, *(unsigned char*) (slot + 0xae) + 0x16b7, a2 + 0x16b7);
@@ -142,7 +137,8 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 		io_AppendText(0x16b2);
 	} else if (*(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x194) < (int) color) {
 		io_AppendText(0x16b4, color, a2 + 0x16b7);
-	} else if (miss != 0) {
+	} else {
+	if (miss != 0) {
 		switch (fcn_0051e070()) {
 		case 0:
 			io_AppendText(0x16b0,
@@ -168,15 +164,16 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 		}
 	}
 	flag = 1;
+	}
 	do {
 		if (slot != 0 && found != -1) {
 			Tbebe t;
 
 			t = *(Tbebe*) (slot + 0x44);
 			fcn_00500bb0(&t, 5, 0, 0);
-			dur = fcn_00500d20(slot + 0x44, slot + 0x52);
+			dur = (float) fcn_00500d20(slot + 0x44, slot + 0x52);
 			*(float*) (g_1015ea0 + found * 0x2f4 + 500) =
-				(float) fcn_00500d20(slot + 0x44, (void*) &g_7f4c00) / (float) dur;
+				(float) fcn_00500d20(slot + 0x44, (void*) &g_7f4c00) / dur;
 		}
 		if (g_14ce8e0 != 0 && g_7725d0 == 0) {
 			g_774654 = 1;

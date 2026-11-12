@@ -258,7 +258,7 @@ located:
 		fcn_00595330(h, 2, count, r, 1);
 		fcn_00595e20(a0, r);
 		fcn_005963f0(h, 1, 0, a0);
-	} while (fcn_005373e0(0x59ba40, 0x677c7));
+	} while (fcn_005373e0((int) fcn_0059ba40, 0x677c7));
 	fcn_00471e30(h);
 	fcn_0052a2d0();
 	return 0;

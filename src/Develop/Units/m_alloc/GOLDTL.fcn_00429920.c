@@ -1,3 +1,6 @@
+#include <string.h>
+extern char g_14cb3b0[];
+extern char g_14cb3c0[];
 extern void *__cdecl m_alloc(unsigned int size, const char *tag);
 
 /* ADDRESS: GOLDTL 0x00429920 */
@@ -57,14 +60,14 @@ int __cdecl fcn_00429920(void)
     *(unsigned char *)0x14cb89c = *(unsigned char *)0x679742;
     *(unsigned short *)0x14cb8a4 = *(unsigned short *)0x67973c;
     *(unsigned short *)0x14cb8a9 = *(unsigned short *)0x679738;
-    *(unsigned long *)0x14cb3b0 = *(unsigned long *)0x679730;
+    strcpy(g_14cb3b0, "while");
     *(unsigned char *)0x14cb3a2 = *(unsigned char *)0x67972e;
     *(unsigned long *)0x14cb3d0 = *(unsigned long *)0x679724;
-    *(unsigned short *)0x14cb3b4 = *(unsigned short *)0x679734;
+
     *(unsigned short *)0x14cb3a0 = *(unsigned short *)0x67972c;
     *(unsigned long *)0x14cb3e0 = *(unsigned long *)0x67971c;
-    *(unsigned short *)0x14cb3c0 = *(unsigned short *)0x679718;
-    *(unsigned char *)0x14cb3c2 = *(unsigned char *)0x67971a;
+    strcpy(g_14cb3c0, "if");
+
     *(unsigned long *)0x14cb3f4 = *(unsigned long *)0x679710;
     *(unsigned short *)0x14cb3d4 = *(unsigned short *)0x679728;
     *(unsigned char *)0x14cb3d6 = *(unsigned char *)0x67972a;

@@ -1,4 +1,5 @@
 #include <string.h>
+#include "client_data.h"
 
 struct msg58 {
 	char pad0[4];
@@ -7,10 +8,7 @@ struct msg58 {
 	int f8;
 	int fc;
 	char pad10[0x18];
-	int f28;
-	int f2c;
-	int f30;
-	unsigned short w34;
+	pos14_7f4c00 stamp;
 	unsigned char b36;
 	char pad37;
 	int f38;
@@ -87,10 +85,7 @@ found:
 					m.b36 = 1;
 					m.f8 = *(int*) (*(unsigned short*) (a1 + 0x27) * 0x21c + 0x7f4ca4);
 					m.fc = *(int*) (a1 + 1);
-					m.f28 = *(int*) 0x7f4c00;
-					m.f2c = *(int*) 0x7f4c04;
-					m.f30 = *(int*) 0x7f4c08;
-					m.w34 = *(unsigned short*) 0x7f4c0c;
+					m.stamp = g_7f4c00;
 					m.f38 = *(int*) (h + 4);
 					m.f58 = *(int*) (h + 4);
 					fcn_004c5530(&m);

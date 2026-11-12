@@ -127,14 +127,14 @@ void __cdecl fcn_005156a0(char* record)
 							item = (char*) gm_NextEntityQueryMatch();
 						}
 					}
-					(void) other;
-					table = lpObjektePROT + *(unsigned int*) other * 0x41;
-					slot = (char*) other;
+
+					table = lpObjektePROT + *(unsigned short*) other * 0x41;
+
 					if (fcn_005014d0(*(unsigned short*) slot) != 0) {
 						int* q;
 						q = (int*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) table);
 						while (q != 0) {
-							if (*(unsigned short*) slot < *(unsigned short*) q)
+							if (*(unsigned short*) other < *(unsigned short*) q)
 								fcn_00442d50(record, 0);
 							q = (int*) gm_NextEntityQueryMatch();
 						}

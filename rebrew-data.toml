@@ -11679,7 +11679,7 @@ size = 1288
 section = ".rdata"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-24T19:00:13+00:00"
+updated_at = "2026-11-12T14:53:08+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10025fc0".verification]
@@ -11689,7 +11689,7 @@ input_hash = "a6c85c29d40ef674752f90b8cc83c08fccfcb4a1af2287c948e167031e3611a9"
 definition_hash = "d0628f5f89cb4d06dc2e1dafcd3a8757ff5335ec3026b61e7675f226fff79df9"
 built_va = "0x10025fc0"
 placement_method = "section-relative-span"
-measured_at = "2026-10-24T19:00:13+00:00"
+measured_at = "2026-11-12T14:53:08+00:00"
 
 ["SERVER.0x100264c8"]
 file = "src/Develop/crt_globals.h"
@@ -11722,7 +11722,7 @@ size = 312
 section = ".rdata"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-24T19:00:13+00:00"
+updated_at = "2026-11-12T14:53:08+00:00"
 storage_kind = "span"
 
 ["SERVER.0x100264d0".verification]
@@ -11732,7 +11732,7 @@ input_hash = "1e524f7c4cc96c4f98d9a124b8a181fc5460297a504f8f8c50c4810f462c5e6f"
 definition_hash = "7ca2e6398f9a2323210cba190c289f6ac4bd1c24a8c5024a47091a9ebcee971b"
 built_va = "0x100264d0"
 placement_method = "section-relative-span"
-measured_at = "2026-10-24T19:00:13+00:00"
+measured_at = "2026-11-12T14:53:08+00:00"
 
 ["SERVER.0x10026608"]
 file = "src/crt_region/section_spans.c"
@@ -11765,7 +11765,7 @@ section = ".data"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-24T19:00:13+00:00"
+updated_at = "2026-11-12T14:53:08+00:00"
 
 ["SERVER.0x10027000".verification]
 status = "EXACT"
@@ -11774,7 +11774,7 @@ input_hash = "e3a53e54880323b309c9a57e50bcfe3a1a04df57456262bb689a3e4ece37378f"
 definition_hash = "b7944d519e9866332fad685d507c4132a71040d6c212417c08390e0a42f47788"
 built_va = "0x10027000"
 placement_method = "section-relative-span"
-measured_at = "2026-10-24T19:00:13+00:00"
+measured_at = "2026-11-12T14:53:08+00:00"
 
 ["SERVER.0x10027030"]
 file = "src/Develop/Units/net/broadcast.c"
@@ -17050,7 +17050,7 @@ size = 848
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-12T14:53:08+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10033ba0".verification]
@@ -17060,7 +17060,7 @@ input_hash = "0a3a8fb44e83e9df296be7f7bc7f52e964d502c5cc867cbab9dfb8129bc02b93"
 definition_hash = "512ce2bc88df350d5abeb7b27d675b061e5376e41ef6a705a79f0f7f7276c960"
 built_va = "0x10033ba0"
 placement_method = "section-relative-span"
-measured_at = "2026-10-31T05:00:26+00:00"
+measured_at = "2026-11-12T14:53:08+00:00"
 
 ["SERVER.0x10033ef0"]
 file = "src/crt_region/data_globals.c"
@@ -27090,3 +27090,14 @@ kind = "GLOBAL"
 name = "g_6abb00"
 type = "int"
 section = ".data"
+
+["GOLDTL.0x014b55a4"]
+storage_kind = "object"
+type = "int"
+name = "g_14b55a4"
+size = 4
+section = ".bss"
+kind = "GLOBAL"
+note = "dword read by 0x58f6a0 at 0x58f6c7 (mov eax,[0x14b55a4]); zero-filled .bss"
+updated_by = "data"
+updated_at = "2026-11-12T14:26:23+00:00"

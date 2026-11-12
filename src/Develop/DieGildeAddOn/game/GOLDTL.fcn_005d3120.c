@@ -23,6 +23,9 @@ int __cdecl fcn_00526010(char*, int, char);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005d2ec0(char*, int*);
 
+extern float g_6628a8;
+extern float g_6628b0;
+extern float g_6628cc;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
@@ -118,8 +121,8 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 		lv[2] = *(int*) (e + 0xc8);
 		base = *(unsigned char*) (p + 0xd);
 		s = e + 0xbc;
-		for (i = 4; i < 0xc; i += 4) {
-			*(int*) ((char*) &lv[2] + i) = *(unsigned char*) s;
+		for (i = 0; i < 0xc; i += 4) {
+			*(int*) ((char*) &lv[3] + i) = *(unsigned char*) s;
 			s++;
 		}
 		d = (char) *(e + 0xb9);
@@ -154,10 +157,10 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 						float f;
 
 						f = (float) d * *(float*) 0x665bc0;
-						if (f <= *(float*) 0x6628a8) {
-							f = *(float*) 0x6628a8;
+						if (!(f > g_6628a8)) {
+							f = g_6628a8;
 						}
-						v = (int) (f * *(float*) 0x6628b0 + *(float*) 0x6628cc);
+						v = (int) (f * g_6628b0 + g_6628cc);
 					}
 					if (v > 0) {
 						if (v >= 3) {
@@ -181,6 +184,7 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 						*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
 						fcn_00500bb0(e + 0x52, 0, 1, 0);
 					}
+					*(char*) (e + 0xba) = 0;
 					*(int*) (e + 0x84) = fcn_004c5620(0, (unsigned char*) e);
 					fcn_004c5150(-1, *(int*) (a0 + 4), g_773d75, q);
 					fcn_00526120(buf2, 0);

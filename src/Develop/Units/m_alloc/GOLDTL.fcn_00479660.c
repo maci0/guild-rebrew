@@ -14,8 +14,8 @@ extern void __cdecl fcn_004798c0(void*, void*);
 /* ADDRESS: GOLDTL 0x00479660 */
 void* __cdecl fcn_00479660(char* a0, int a1, int a2)
 {
-	int size = *(int*) (a0 + 0x30);
 	int sum = 0;
+	int size = *(int*) (a0 + 0x30);
 	char* n;
 	char* p;
 	int* tbl;
@@ -65,8 +65,8 @@ void* __cdecl fcn_00479660(char* a0, int a1, int a2)
 	*(int*) (n + 0x30) = 0;
 	*(unsigned char*) (n + 0x34) = 1;
 	*(unsigned short*) (n + 0x2a) = 0;
+	total = 0;
 	if (*(unsigned short*) (a0 + 0x2a) > 0) {
-		total = 0;
 		tbl = (int*) (a0 + 0x45);
 		do {
 			p = (char*) fcn_00479620(a0 + *tbl, 1);

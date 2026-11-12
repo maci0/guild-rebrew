@@ -10,8 +10,8 @@ void __cdecl fcn_004526f0(void*, void*, int);
 int __cdecl fcn_00454460(int a0, int a1, int a2, int a3, int* a4, int a5, int* a6)
 {
 	int* s;
-	int* p;
-	int len;
+
+
 	int v;
 
 	v = *a6;
@@ -26,9 +26,25 @@ int __cdecl fcn_00454460(int a0, int a1, int a2, int a3, int* a4, int a5, int* a
 	}
 	if (s != 0) {
 		fcn_004526d0(s, a1);
-		p = (int*) ((char*) s + 0x34);
-		len = 0xa4;
-		memcpy(p, a6, len);
+		a4 = (int*) ((char*) s + 0x34);
+		a5 = 0xa4;
+		__asm {
+			mov edi, a4
+			mov esi, a6
+			mov ebx, a5
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short copy_tail
+			rep movsb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep movsd
+copy_tail:
+			add ecx, ebx
+			rep movsb
+		}
 		fcn_004526f0(s, (char*) s + 0x74, 0);
 		if (*(unsigned char*) ((char*) s + 0xd5) & 1) {
 			s[8] = 0;

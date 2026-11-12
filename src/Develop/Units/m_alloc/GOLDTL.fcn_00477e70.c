@@ -29,12 +29,14 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char
 	int count;
 	int i;
 	int j;
+	int runs;
 
-	b = (char*) m_alloc((a2 * 8 + 4) * a4 + 0x32, (char*) 0x67d9c0);
-	minx = a2;
+	b = (char*) m_alloc((a3 * 8 + 4) * a4 + 0x32, (char*) 0x67d9c0);
+	minx = a3;
 	miny = a4;
 	maxx = 0;
 	maxy = 0;
+	runs = 0;
 	if (a4 > 0) {
 		g = (char*) a5;
 		p = (char*) (a5 + (a1 + a2 * a7) * 2);
@@ -100,29 +102,29 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char
 			if (*(unsigned short*) (b + 6) != 0) {
 				rb = rowstride + a1;
 				for (j = 0; j < *(unsigned short*) (b + 6); j++) {
+					q = b + *(int*) b;
 					*(int*) q = 0;
 					*(int*) (q + 4) = 0;
-					count = 0;
 					while (j < *(unsigned short*) (b + 6)
 					       && *(unsigned short*) (g + (rb + j) * 2) == (unsigned short) color) {
-						count++;
+						(*(int*) q)++;
 						j++;
 					}
-					*(int*) q = count * 2;
-					count = 0;
-					while (j + count < *(unsigned short*) (b + 6)
-					       && *(unsigned short*) (g + (rb + j + count) * 2) != (unsigned short) color) {
-						count++;
+					*(int*) q = *(int*) q * 2;
+					while (j + *(int*) (q + 4) < *(unsigned short*) (b + 6)
+					       && *(unsigned short*) (g + (rb + j + *(int*) (q + 4)) * 2) != (unsigned short) color) {
+						(*(int*) (q + 4))++;
 					}
-					*(int*) (q + 4) = count;
-					memcpy(q + 8, g + (rb + j) * 2, count * 2);
-					if (count > 0) {
-						j = j + count - 1;
+					memcpy(q + 8, g + (rb + j) * 2, *(int*) (q + 4) * 2);
+					count = *(int*) (q + 4);
+					if (count != 0) {
+						j--;
 					}
 					*(int*) (b + 0x2e) = *(int*) (b + 0x2e) + count;
+					*(int*) b = *(int*) b + *(int*) (q + 4) * 2 + 8;
+					runs++;
 					total++;
-					*(int*) b = *(int*) b + count * 2 + 8;
-					q = b + *(int*) b;
+					j = j + count;
 				}
 			}
 			*(int*) block = total;
@@ -133,7 +135,7 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char
 	*(int*) (b + 0x2a) = bytes;
 	*(int*) b = bytes + *(unsigned short*) (b + 0xa) * 4;
 	fcn_00477560(&offs[0], b);
-	*(int*) (b + 0x26) = color;
+	*(int*) (b + 0x26) = runs;
 	b[0xd] = a8;
 	out = (char*) m_alloc(*(int*) b, (char*) 0x67d970);
 	q = out;

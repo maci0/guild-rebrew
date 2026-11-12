@@ -40,6 +40,8 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 	int type;
 	int v;
 	int t;
+	int fn;
+	Cmd* fp;
 
 	sum = 0;
 	count = 0;
@@ -97,12 +99,44 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 			diff = -1;
 		}
 		if (diff >= 0 && (float) diff / (float) sum < 0.33f) {
-			o1.kind = 0;
-			o1.f1 = 0;
-			o1.f2 = 0;
-			o2.kind = 0;
-			o2.f1 = 0;
-			o2.f2 = 0;
+			fn = 0x18;
+			fp = &o1;
+			__asm {
+				mov edi, fp
+				mov ebx, fn
+				xor eax, eax
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short L104
+				rep stosb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep stosd
+			L104:
+				add ecx, ebx
+				rep stosb
+			}
+			fn = 0x18;
+			fp = &o1; /* native clears o1 twice and leaves o2 as is */
+			__asm {
+				mov edi, fp
+				mov ebx, fn
+				xor eax, eax
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short L107
+				rep stosb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep stosd
+			L107:
+				add ecx, ebx
+				rep stosb
+			}
 			if (fcn_00497ec0(0x13, ent, 0, &o1, &o2) != 0) {
 				*out1 = o1;
 				*out2 = o2;
@@ -221,8 +255,8 @@ use_slot:
 						if (ratio < type) {
 							v = fcn_0050cf50(p, (char) p[0x5c]);
 							ratio = type - ratio;
-							if (((float) (type - v) / (float) v) * -0.5f + 0.25f <=
-							    (float) ratio / (float) cap) {
+							if (!((((float) (type - v) / (float) v) * -0.5f + 0.25f) >
+							    (float) ratio / (float) cap)) {
 								return 0;
 							}
 							out1->f2 = ratio;

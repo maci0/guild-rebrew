@@ -6,13 +6,15 @@
 extern unsigned char g_773d75;
 extern char* g_773da8;
 extern char* g_item_def_table;
-extern char* g_entity_type_table;
+#include "game_data.h"
+typedef struct StateProto { unsigned char kind; unsigned char rest[0x24c]; } StateProto;
 extern char g_7f4ca0[];
 extern pos14_7f4c00 g_7f4c00;
 
 typedef struct Msg55c270 {
 	char pad0[4];
-	int kind;
+	unsigned char kind;
+	char pad05[3];
 	int x8;
 	int xc;
 	char pad10[0x36 - 0x10];
@@ -57,6 +59,8 @@ void __cdecl fcn_0055c270(char* o)
 	int kind;
 	char tmp[0x80];
 	Msg55c270 msg;
+	void* fill_dst;
+	int fill_count;
 	char buf[0x400];
 
 	switch (*(int*) (o + 0x70)) {
@@ -95,7 +99,25 @@ void __cdecl fcn_0055c270(char* o)
 			fcn_004f2ba0((char*) 0x7f4ca0 + *(unsigned short*) (e + 0x27) * 0x21c,
 				(char*) e, 3);
 		} else if (*(unsigned short*) rec == 0x12d) {
-			memset(&msg, 0, sizeof(msg));
+			fill_dst = &msg;
+            fill_count = sizeof(msg);
+            __asm {
+                mov edi, fill_dst
+                mov ebx, fill_count
+                xor eax, eax
+                lea ecx, [edi+edi*2]
+                and ecx, 3
+                sub ebx, ecx
+                jle short L_fill_tail
+                rep stosb
+                mov ecx, ebx
+                and ebx, 3
+                shr ecx, 2
+                rep stosd
+            L_fill_tail:
+                add ecx, ebx
+                rep stosb
+            }
 			msg.kind = 0x2a;
 			msg.x8 = *(int*) (g_773da8 + 4);
 			msg.xc = *(int*) (e + 1);
@@ -111,7 +133,7 @@ void __cdecl fcn_0055c270(char* o)
 				*(unsigned short*) (o + 0xac) * 0x41);
 			if (h != 0 && *(unsigned short*) h != 0xfd) {
 				kind = 0x606;
-				if (g_entity_type_table[(unsigned char) *e * 0x24d] != 6) {
+				if (((StateProto*)lpGebaeudePROT)[*e].kind != 6) {
 					p = (unsigned char*) fcn_0050dc90((char*) e);
 					if (p != 0 && p[2] == 1 && (p[0x1b4] & 1) != 0 &&
 					    *(int*) (o + 0xb8) != 0)
@@ -127,7 +149,7 @@ void __cdecl fcn_0055c270(char* o)
 					*(int*) (o + 0xb0), name, (char*) 0x6a6248);
 			} else {
 				kind = 0x606;
-				if (g_entity_type_table[(unsigned char) *e * 0x24d] != 6) {
+				if (((StateProto*)lpGebaeudePROT)[*e].kind != 6) {
 					p = (unsigned char*) fcn_0050dc90((char*) e);
 					if (p != 0 && p[2] == 1 && (p[0x1b4] & 1) != 0 &&
 					    *(int*) (o + 0xb8) != 0)

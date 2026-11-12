@@ -20,7 +20,7 @@ unsigned char __cdecl fcn_004385e0(int a0)
 	int* p;
 	unsigned char flag;
 
-	v1 = *(int*) (a0 + 0x1cc);
+	v13 = 0; v1 = *(int*) (a0 + 0x1cc);
 	if (*(int*) (v1 + 0x318) == 0
 	    || *(int*) (*(int*) (v1 + 0x318) + 0x264) == 0
 	    || *(int*) (a0 + 0x1ec) == 0) {
@@ -37,7 +37,7 @@ unsigned char __cdecl fcn_004385e0(int a0)
 	if (*(int*) (a0 + 0x220) == 1) {
 		v15 = -v15;
 	}
-	for (v13 = 0; v13 < *(int*) (*(int*) (v1 + 0x318) + 0x1e4); v13++) {
+	for (; v13 < *(int*) (*(int*) (v1 + 0x318) + 0x1e4); v13++) {
 		rec = (int*) *(int*) (*(int*) (v1 + 0x31c)
 		    + (*(int*) (*(int*) (v1 + 0x318) + 0x1e4) + v13) * 4);
 		if (v16 != *(int*) (*(int*) (v1 + 0x318) + 0x268)
@@ -78,8 +78,8 @@ unsigned char __cdecl fcn_004385e0(int a0)
 			    (*(unsigned char*) ((char*) rec + 0x54) & 1) * 2
 				| (*(unsigned char*) ((char*) rec + 0x5a) & 1),
 			    *(int*) ((char*) rec + 0x6c) | *(int*) (v1 + 0x324),
-			    (*(unsigned char*) ((char*) rec + 0x54) >> 3) & 1,
-			    (*(unsigned char*) ((char*) rec + 0x5a) >> 1) & 1);
+			    (*(unsigned char*) ((char*) rec + 0x5a) >> 1) & 1,
+			    (*(unsigned char*) ((char*) rec + 0x54) >> 3) & 1);
 			(*(void (__stdcall**)(int, int)) (*(int*) v16 + 0xc))(v16, v13);
 		}
 	}

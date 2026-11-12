@@ -60,58 +60,27 @@ int __cdecl fcn_004e8360(char* a0)
 	x = gm_LookupEntityRecordById(((Rec18*) ((unsigned long)&g_9a9220 + i * 0x18))->f04);
 	if (x != 0 && *(int*) (x + 4) != *(int*) (a0 + 1)) {
 		bit = ((Rec18*) ((unsigned long)&g_9a9220 + i * 0x18))->f08;
-		if (*(unsigned char*) (x + 0x166) != (unsigned char) bit) {
-			if (*(unsigned char*) (x + 0x169) != (unsigned char) bit) {
-				if (bit == '#') {
-					*(int*) (x + 0x1cc) &= 0xfffffdff;
-				} else if (bit == '$') {
-					*(int*) (x + 0x1cc) &= 0xfffffbff;
-				} else if (bit == '%') {
-					*(int*) (x + 0x1cc) &= 0xfffff7ff;
-				}
-			} else {
-				*(unsigned char*) (x + 0x169) = 0;
-			}
-		} else {
+		if (*(unsigned char*) (x + 0x166) == (unsigned char) bit) {
 			*(unsigned char*) (x + 0x166) = 0;
+		} else if (*(unsigned char*) (x + 0x169) == (unsigned char) bit) {
+			*(unsigned char*) (x + 0x169) = 0;
+		} else if (bit == '#') {
+			*(int*) (x + 0x1cc) &= 0xfffffdff;
+		} else if (bit == '$') {
+			*(int*) (x + 0x1cc) &= 0xfffffbff;
+		} else if (bit == '%') {
+			*(int*) (x + 0x1cc) &= 0xfffff7ff;
 		}
 	}
+
+
+
+
 	if (ent == 0)
 		goto tail;
 	v = ((Rec18*) ((unsigned long)&g_9a9220 + i * 0x18))->f08;
-	if ((int) v > 0x1b) {
-		if (v >= 0x1c && v <= 0x22) {
-			if (*(unsigned char*) (ent + 0x169) != 0) {
-				p = (unsigned char*) 0x9a94f4;
-				do {
-					if (*(unsigned char*) (p + 4) == *(unsigned char*) (ent + 0x169) &&
-					    *(int*) p == *(int*) (ent + 4))
-						*(int*) p = -1;
-					p += 0x18;
-				} while ((int) p < (int) 0x9a959c);
-			}
-			*(unsigned char*) (ent + 0x169) = (unsigned char) v;
-			goto tail;
-		}
-		bit = *(int*) (ent + 0x1cc) & 0xfffff1ff;
-		*(int*) (ent + 0x1cc) = bit;
-		k = 0;
-		if (v == '#') {
-			bit |= 0x200;
-			k = 0x4000;
-		} else if (v == '$') {
-			bit |= 0x400;
-			k = 0x8000;
-		} else if (v == '%') {
-			bit |= 0x800;
-			k = 0x10000;
-		}
-		if (k != 0)
-			*(int*) (ent + 0x1cc) = bit;
-		for (ip = (int*) 0x7f4e6c; (int) ip < (int) 0x85a26c; ip = (int*) ((char*) ip + 0x21c))
-			*ip &= ~k;
-		goto tail;
-	}
+	if ((int) v > 0x1b)
+		goto special;
 	if (*(unsigned char*) (ent + 0x166) != 0) {
 		k = 0;
 		ip = (int*) 0x9a9224;
@@ -169,4 +138,37 @@ tail:
 	    *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c) == *(int*) (ent + 4))
 		fcn_005b2280(setter, ent);
 	return 1;
+special:
+	if (v >= 0x1c && v <= 0x22) {
+		if (*(unsigned char*) (ent + 0x169) != 0) {
+			p = (unsigned char*) 0x9a94f4;
+			do {
+				if (*(unsigned char*) (p + 4) == *(unsigned char*) (ent + 0x169) &&
+				    *(int*) p == *(int*) (ent + 4))
+					*(int*) p = -1;
+				p += 0x18;
+			} while ((int) p < (int) 0x9a959c);
+		}
+		*(unsigned char*) (ent + 0x169) = (unsigned char) v;
+		goto tail;
+	}
+	bit = *(int*) (ent + 0x1cc) & 0xfffff1ff;
+	*(int*) (ent + 0x1cc) = bit;
+	k = 0;
+	if (v == '#') {
+		bit |= 0x200;
+		k = 0x4000;
+	} else if (v == '$') {
+		bit |= 0x400;
+		k = 0x8000;
+	} else if (v == '%') {
+		bit |= 0x800;
+		k = 0x10000;
+	}
+	if (k != 0)
+		*(int*) (ent + 0x1cc) = bit;
+	for (ip = (int*) 0x7f4e6c; (int) ip < (int) 0x85a26c; ip = (int*) ((char*) ip + 0x21c))
+		*ip &= ~k;
+	goto tail;
+
 }

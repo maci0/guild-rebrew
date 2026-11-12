@@ -70,10 +70,10 @@ int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* a3, char* a4)
 		fcn_004eea70(e);
 		return 0;
 	}
-	a0 = (gm_RandomMod(0x20) & 0xffff) + 0x20;
+
 	f.mask = 0xe07c43b4;
 	f.b = 1;
-	if (fcn_004a5e60(p, 6, f, 0, (float) a0, &out) == 0) {
+	if (fcn_004a5e60(p, 6, f, 0, (float) ((gm_RandomMod(0x20) & 0xffff) + 0x20), &out) == 0) {
 		return 0;
 	}
 	gm_ResolveEntityById((void**) &a1, 0, 0, out);

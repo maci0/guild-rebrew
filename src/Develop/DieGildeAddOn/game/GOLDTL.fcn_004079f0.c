@@ -3,12 +3,12 @@
  * animation. The 12 byte option block and the 2 x 0x58 frame pair are the same
  * aggregates StartObjectTransformAnimation hands to fcn_004339e0.
  *
- * Reconstructed from the native body at 0x004079f0 (915 bytes). Three codegen
- * deltas remain and are reported, not hidden: the native puts the links branch
- * out of line (`and eax,0x100; je`), it keeps the option byte at +1 as a
- * read-modify-write instead of a folded byte store, and it emits a second full
- * frame/option copy on the default-frame path instead of reusing the
- * animation path tail. */
+ * Reconstructed from the native body at 0x004079f0 (915 bytes).
+ * The heading tests preserve x87 unordered handling: a NaN skips both
+ * animation attachments. Native updates to option byte +1 use a
+ * read-modify-write. Both native paths contain complete frame/option
+ * copies, including a separate default-frame copy. Keep these
+ * operations explicit while comparing their generated code. */
 
 typedef struct {
 	unsigned char unbekannt_000;
@@ -84,14 +84,14 @@ void __cdecl fcn_004079f0(char* task)
 			*(float*) (task + 0x1c) = angle + *(float*) (*(char**) (owner + 0x34) + 0x88);
 			*(float*) (task + 0x20) = *(float*) (*(char**) (owner + 0x34) + 0x8c);
 		}
-		if (angle >= *(double*) 0x6628f0) {
-			*(char**) (owner + 0x70) = ch_AttachAni(*(char**) (task + 0x14),
-								 "bewegung/dreh_90_links", 1);
-		} else {
+		if (!(angle >= *(double*) 0x6628f0)) {
 			if (angle < *(double*) 0x6628e8) {
 				*(char**) (owner + 0x70) = ch_AttachAni(*(char**) (task + 0x14),
 									 "bewegung/dreh_90_rechts", 1);
 			}
+		} else {
+			*(char**) (owner + 0x70) = ch_AttachAni(*(char**) (task + 0x14),
+								 "bewegung/dreh_90_links", 1);
 		}
 		*(unsigned char*) (task + 0xf0) = 1;
 		if (*(char**) (owner + 0x70) != 0) {

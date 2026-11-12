@@ -79,7 +79,7 @@ int __stdcall fcn_0041adc0(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 			    *(unsigned short*) (row + 0x406), *(unsigned short*) (row + 0x404),
 			    *(unsigned short*) (row + 0x402), *(unsigned short*) (row + 0x400));
 			v = (int) SendMessageA(*(HWND*) 0x6b5dd8, 0x143, 0, (LPARAM) text);
-			SendMessageA(*(HWND*) 0x6b5dd8, 0x151, v, (LPARAM) (row + 0x418));
+			SendMessageA(*(HWND*) 0x6b5dd8, 0x151, v, (LPARAM) (*(char**) 0x6b5dd0 + i * 0x508 + 0x418));
 		}
 		SendMessageA(*(HWND*) 0x6b5dd8, 0x14e, 0, 0);
 		if (*(unsigned char*) 0x6b5dec != 0) {

@@ -22,7 +22,7 @@ extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char g_7f4ca4[];
-extern char* g_entity_type_table;
+extern unsigned char* lpGebaeudePROT;
 
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_CheckEntityType(unsigned char*);
@@ -61,7 +61,7 @@ void __cdecl fcn_00487000(char* e)
 	    && !(*(unsigned int*) (e + 0x1b4) & 2)) {
 		return;
 	}
-	ent = g_entity_type_table + *(unsigned char*) (*(char**) (e + 0x16c)) * 0x24d;
+	ent = lpGebaeudePROT + *(unsigned char*) (*(char**) (e + 0x16c)) * 0x24d;
 	for (p = 0x7f4e05; p < 0x85a205; p += 0x21c) {
 		rec = (char*) (p - 0x165);
 		if (*(short*) rec == -1) {
@@ -85,10 +85,10 @@ void __cdecl fcn_00487000(char* e)
 		                           + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c);
 		*(int*) (m + 0xc) = *(int*) (*(char**) (e + 0x16c) + 1);
 		*(int*) (m + 0x28) = g_7f4c00.a;
-		*(int*) (m + 0x2c) = g_7f4c04;
 		*(int*) (m + 0x30) = g_7f4c08;
-		*(short*) (m + 0x34) = g_7f4c0c;
+		*(int*) (m + 0x2c) = g_7f4c04;
 		m[0x36] = 2;
+		*(short*) (m + 0x34) = g_7f4c0c;
 		*(int*) (m + 0x58) = *(int*) (rec + 4);
 		fcn_004c5530(m);
 	}
@@ -114,9 +114,9 @@ void __cdecl fcn_00487000(char* e)
 			}
 		}
 	}
-	if (n >= (int) (*(unsigned char*) (g_entity_type_table
+	if (n >= (int) (*(unsigned char*) (lpGebaeudePROT
 	                                    + *(unsigned char*) (*(char**) (e + 0x16c)) * 0x24d + 0x231)
-	                + *(unsigned char*) (g_entity_type_table
+	                + *(unsigned char*) (lpGebaeudePROT
 	                                     + *(unsigned char*) (*(char**) (e + 0x16c)) * 0x24d + 0x232))) {
 		return;
 	}
@@ -151,7 +151,7 @@ void __cdecl fcn_00487000(char* e)
 	gm_CheckEntityType((unsigned char*) *(char**) (e + 0x16c));
 	*(int*) (m + 0x8c) = -1;
 	m[0x59] = 1;
-	m[0x58] = *(unsigned char*) (g_entity_type_table
+	m[0x58] = *(unsigned char*) (lpGebaeudePROT
 	                             + *(unsigned char*) (*(char**) (e + 0x16c)) * 0x24d + 0x230);
 	fcn_004c5530(m);
 	*(int*) (e + 0x1b8) -= tick;

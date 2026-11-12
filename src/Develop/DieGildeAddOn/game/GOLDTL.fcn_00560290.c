@@ -2,6 +2,11 @@
 #include <string.h>
 
 extern char* g_entity_type_table;
+typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } Building560290;
+extern float g_696540[];
+extern float g_696550[];
+extern double g_6629c8;
+extern double g_662908;
 extern int g_7f4c00;
 extern int g_7f4c04;
 extern unsigned char g_773d75;
@@ -18,7 +23,7 @@ int __cdecl fcn_00529670(int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_0050c710(unsigned char*, int, int);
-int __cdecl gm_RandomMod(int);
+int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 char* __cdecl fcn_0050dc90(unsigned char*);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
@@ -37,7 +42,7 @@ void __cdecl fcn_00560290(char* a0)
 	float here[3];
 	float nextp[3];
 	float best;
-	float dist;
+	double dist;
 	double scale;
 	int win;
 	int value;
@@ -56,7 +61,7 @@ void __cdecl fcn_00560290(char* a0)
 	win = fcn_00500e20(&g_7f4c00);
 	value = g_7f4c04 & 0xffff;
 	sel = 0;
-	if (((*(float*) (win * 4 + 0x696550) <= (float) value) || ((float) value < *(float*) (win * 4 + 0x696540))) && (*(int*) (a0 + 0x70) != -1) && (*(int*) (a0 + 0x70) != -2)) {
+	if (((g_696550[win] <= (float) value) || ((float) value < g_696540[win])) && (*(int*) (a0 + 0x70) != -1) && (*(int*) (a0 + 0x70) != -2)) {
 		fcn_00500bb0((int) (a0 + 0x52), 0, 5, 0);
 		return;
 	}
@@ -66,17 +71,18 @@ void __cdecl fcn_00560290(char* a0)
 		case 1:
 			e = (char*) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x10));
 			if (!e) {
-				break;
+				goto nearest_failed;
 			}
 			best = 1.0e8f;
 			fcn_00455350(*(int*) (e + 0x61), *(int*) (e + 0x61) + 0x4c, here);
 			e = (char*) gm_StartFilteredEntitySearch(1, 5, 0xb);
 			if (!e) {
-				break;
+				goto nearest_failed;
 			}
 			do {
 				fcn_00455350(*(int*) (e + 0x61), *(int*) (e + 0x61) + 0x4c, nextp);
-				dist = (float) sqrt((nextp[0] - here[0]) * (nextp[0] - here[0]) + (nextp[1] - here[1]) * (nextp[1] - here[1]) + (nextp[2] - here[2]) * (nextp[2] - here[2]));
+				dist = sqrt(((double) nextp[0] - here[0]) * ((double) nextp[0] - here[0])
+					+ (((double) nextp[1] - here[1]) * ((double) nextp[1] - here[1]) + ((double) nextp[2] - here[2]) * ((double) nextp[2] - here[2])));
 				if (dist < best) {
 					sel = (int) e;
 					best = dist;
@@ -102,6 +108,7 @@ void __cdecl fcn_00560290(char* a0)
 				*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
 				return;
 			}
+		nearest_failed:
 			*(unsigned int*) (a0 + 0x70) = 0xffffffff;
 			return;
 		case 2:
@@ -190,15 +197,15 @@ void __cdecl fcn_00560290(char* a0)
 				break;
 			}
 			win = fcn_00500e20(&g_7f4c00);
-			if (*(char*) (g_entity_type_table + (unsigned int) *v9 * 0x24d) != 0x20) {
-				scale = (double) fcn_0050c710(v9, 0xb, 1) * *(double*) 0x665eb0 + *(double*) 0x6629c8;
+			if (((Building560290*) g_entity_type_table)[*v9].kind != 0x20) {
+				scale = (double) fcn_0050c710(v9, 0xb, 1) * *(double*) 0x665eb0 + g_6629c8;
 			} else {
-				scale = (double) fcn_0050c710(v9, 0x1e, 1) * *(double*) 0x665eb0 + *(double*) 0x6629c8;
+				scale = (double) fcn_0050c710(v9, 0x1e, 1) * *(double*) 0x665eb0 + g_6629c8;
 			}
 			t = gm_RandomMod(6) & 0xffff;
-			t = (int) ((double) (t + 9) * (double) (unsigned char) *(a0 + 0xac) * scale);
+			t = (int) ((double) ((t + 9) * (unsigned char) *(a0 + 0xac)) * scale);
 			if (win == 3 && !(*(v9 + 0x5b) & 0x20)) {
-				t = (int) ((double) t * *(double*) 0x662908);
+				t = (int) ((double) t * g_662908);
 			}
 			rec = gm_eval_SlotVoll(q, *(unsigned short*) (a0 + 0xae), t);
 			if (!*(unsigned short*) (a0 + 0xae)) {

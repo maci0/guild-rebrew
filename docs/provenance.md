@@ -1,3 +1,12 @@
+# Provenance ledger
+
+Append-only record of changes to the reconstruction deliverables. An entry
+names the date, the change, the reason, the evidence, who decided, and how the
+result was verified. A reversal is a new entry, never an edit of the old one.
+
+Historical entries use mixed ordering. New entries are appended at the end.
+Use dated headings or `rebrew source findings` with a target VA to locate records.
+
 ## 2026-11-05 worker-14 replacement slot14
 
 0x0054e390: worker-72 fix REJECTED after branch verification. Native case0/2 at 0x54e409/0x54e656 are sete pattern exactly codegen of production !e[0x78]&2 precedence form. Proposed !(e[0x78]&2) diverges. No production change.
@@ -41,11 +50,6 @@ table at 0x448c84 with byte index at 0x448c9c mapping 0x14/0x15/0x1f/0x2e/
 0x30, all callee push contracts): production already covers the behavior
 semantically; the remaining gap is codegen (frame, callee-saves, intrinsic),
 not missing semantics. Decision: worker-16 replacement slot.
-# Provenance ledger
-
-Append-only record of changes to the reconstruction deliverables. Each entry
-names the date, the change, the reason, the evidence, who asked or decided, and
-how the result was verified. Reversals are new entries.
 
 ## 2026-10-24 session round 6: fifteen uncovered game functions added to inventory
 
@@ -26316,3 +26320,257 @@ Draft scope: completed kept rows present at the final read. The source lanes are
 - 2026-11-12: Updated snapshot after the 2026-11-11 40-row Gold adoption entry (`docs/provenance.md:26294`). Its Gold totals, RELOC 1,906 and STUB 138, describe that earlier checkpoint. At 2026-11-12T05:49:38Z, source-bound Gold FUNCTION rows count RELOC 1,908, EXACT 70, SIZE_MISMATCH 55, STUB 138 and NEAR_MATCHING 9. All 40 applied rows in `.scratch/xbin/twins_results.jsonl` still have RELOC verdicts, the stated shared sources and native sizes; their old files remain deleted. Later binding histories include Gold 0x00401e50 moving from an EXACT loose copy to `GOLDTL.fcn_00402320.c` at 2026-11-11T13:39:39Z, verified RELOC at 14:01:51Z, and Gold 0x005775e0 moving from an EXACT loose copy to `GOLDTL.fcn_0057fbb0.c` at 13:48:44Z, verified RELOC at 14:03:38Z. These show why an older aggregate cannot describe the later tree; they do not reconstruct every intervening count change. Evidence: `.venv/bin/python .scratch/review/docs-todo/audit-ledger.py` records the single-read snapshot in `ledger-row-audit.json` and prints `TWIN COUNT 40`; `.venv/bin/python -c 'import json; d=json.load(open(".scratch/review/docs-todo/ledger-row-audit.json")); print(d["measured_at"], d["gold_statuses"])'` returns `2026-11-12T05:49:38.928505+00:00` and the counts above. No new compile or verdict promotion; the original checkpoint remains historical. Decision owner: user.
 
 - 2026-11-12: Clarification linking the two 2026-11-11 particle entries for GoldTL 0x00418210 (`docs/provenance.md:26256` and `:26258`). The first describes all 17 remaining structural differences as stack slots. The immediately following correction supersedes that wording: two differences are the swapped `obj+0xdc` and `[esp+0x1f]` loads, and 15 are stack slots. This is already corrected in `docs/TODO.md`; no source rollback or further byte-match claim follows from this clarification. Evidence: `rg -n '17 remaining structural differences are stack|2 of the 17 remaining structural differences' docs/provenance.md` returns the original statement at line 26256 and its correction at line 26258. `.venv/bin/python .scratch/review/docs-todo/audit-ledger.py` records `GOLDTL.0x00418210 NEAR_MATCHING => NEAR_MATCHING size 904 => 904`. The historical 880-of-904 score was not remeasured and its numerator is absent from the function store. Decision owner: user.
+
+
+## 2026-11-12: recover GOLDTL 0x005e6360 dialog callback in C89
+
+Change: Added `src/Develop/Units/d2.v1/GOLDTL.fcn_005e6360.c`, a complete C89 body for the retired-placeholder identity. Restored selection-query initialization, quantity dialog, funds check, player-flag update, debit/transfer, conditional notification and event-loop cleanup. No existing source/header changed. D2 placement is inferred from related callbacks, not an original-TU claim.
+
+Reason/evidence: Native body `0x005e6360..0x005e6649`, 752-byte inventory extent including seven trailing NOPs, callers `0x005359c0`/`0x005e6840`, sibling `0x005e6650`, existing callee definitions and LIEF-read string contents. The 0x458-byte frame holds two button IDs, an 80-byte query and a 1024-byte buffer. Findings and full receipts: `.scratch/sol/nosrc-5e6360/REPORT.md`, `native.json`, `test-02.json`, `test-03.json`, `test-04.json`, `test-final.json` and guarded `rebind-locked-{preview,apply}.json`. Prior retirement history preserved by the reviewed rebind CLI.
+
+Verification: Canonical target flags, compiler-slot wrapper, one test at a time. Best/final measured SIZE_MISMATCH 706/752, compiled body 745 bytes; alternatives 706 and 705. Remaining instruction differences are query initialization scheduling (39 bytes); seven native trailing NOPs remain outside the compiled body. Final operand report: 46 validated, five unresolved, zero conflicts. No assembly, fabricated locals/storage, padding or flag overrides. No link/runtime check within the delegated scope. Decision owner: delegated nosrc-5e6360 reconstruction task.
+
+Stored verdict receipt: `.scratch/sol/nosrc-5e6360/test-recorded.json`; CLI `test --force-status` recorded SIZE_MISMATCH 706/752 (745-byte object), confirmed in the managed row.
+
+## 2026-11-12: reconstruct GoldTL payment dialog callback 0x005c02a0
+
+- Change: added `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005c02a0.c`, generated its identity with `rebrew skeleton`, then reconstructed the full modal callback in C89. Reason: the reviewed 969-byte function lacked source after the native extent split.
+- Evidence: complete native disassembly and neighbour 0x005c0670 callback registration; native amount/range/currency calls, payment and duration commands, queue wait, notification, action dispatch and dialog cleanup. Native constants and strings were checked from the reference image with LIEF. FLIRT found no signature match.
+- Decision owner: delegated user instruction for 0x005c02a0; no shared header/source edits, links or compiler flag changes authorized in this task.
+- Verification: sequential isolated `rebrew test` comparisons reached SIZE_MISMATCH 636/976 (native 969, object 976; 52 relocation operands). Last expression revision repeated that measurement. Full report and replay evidence: `.scratch/sol/nosrc-5c02a0/REPORT.md`, `test6.json`, `diff4.json`, `native.json`. Not byte-matched or runtime-proven. Two unshare-runner timeouts were followed by successful retries. Shared signature corrections and linked-provider verification remain coordinator follow-up.
+
+## 2026-11-12: canonical TU flags audit: GOLDTL.0x005b00f0
+
+- Change: removed saved `/O2 /Gd /Oy-` from `GOLDTL.0x005b00f0` through `rebrew source clear-cflags`; source file `src/Develop/Unassigned/GOLDTL.fcn_005b00f0.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/002.current.json`, `002.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test --source-targets --json` saved to `.scratch/sol/flags/002.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: GOLD.0x00468850
+
+- Change: removed saved `/O2 /Gd /I/home/maci/Desktop/Projects/guild-rebrew/src` from `GOLD.0x00468850` through `rebrew source clear-cflags`; source file `src/Develop/Unassigned/GOLD.fcn_00468850.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/011.current.json`, `011.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test --source-targets --json` saved to `.scratch/sol/flags/011.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: GOLD.0x004feb30
+
+- Change: removed saved `/O2 /Gd /I/home/maci/Desktop/Projects/guild-rebrew/src` from `GOLD.0x004feb30` through `rebrew source clear-cflags`; source file `src/Develop/Unassigned/GOLD.fcn_004feb30.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/012.current.json`, `012.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test --source-targets --json` saved to `.scratch/sol/flags/012.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+
+## 2026-11-12: documentation pass: drop the address indexes, fix the ledger head
+
+- Change: removed the "Archived techniques" and "Archived findings" address
+  lists from 22 pages in `docs/` (1,064 titles with their addresses, about
+  1,100 lines) and replaced each with one line pointing at
+  `docs/archive/` through `docs/goal-history.md`. Rewrote `docs/README.md` so
+  it no longer claims those lists exist, and shortened `docs/project-principles.md`,
+  `docs/remaining-work.md`, `docs/FLEET-HANDOFF.md` and `docs/tooling-gaps.md`.
+  Moved the `# Provenance ledger` heading from line 44 to line 1 and noted the
+  file's two orderings. Tightened the project-rules section of `AGENTS.md`
+  (below the refresh marker) and three paragraphs of `README.md`.
+- Reason: the lists duplicated the archived notebooks, nothing in the tree
+  linked to their anchors, and the ledger heading sat below four prepended
+  entries so the file opened mid-record.
+- Evidence: `rg` found no reference to those anchors outside the pages
+  themselves. A link check over 175 internal Markdown links in the working
+  tree reports zero missing files and zero missing anchors. Two links broke
+  during the edit (`codegen-walls.md#archived-techniques`,
+  `AGENTS.md#upstream-rebrew-feature-gaps-and-bugs`) and were retargeted.
+- Decision owner: user, asking for a documentation review.
+- Verification: link check only. No build, no `rebrew` command, no count
+  remeasured. `docs/*.md` is 27,609 lines after the edit, from 29,774 before.
+
+## 2026-11-12: canonical TU flags audit: GOLD.0x004c3b10
+
+- Change: removed saved `/O2 /Gd /I/home/maci/Desktop/Projects/guild-rebrew/src` from `GOLD.0x004c3b10` through `rebrew source clear-cflags`; source file `src/Develop/Unassigned/GOLDTL.fcn_004c4480.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/013.current.json`, `013.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test --source-targets --json` saved to `.scratch/sol/flags/013.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: GOLD.0x00468420
+
+- Change: removed saved `/O2 /Gd /DREBREW_ALLOW_NAKED` from `GOLD.0x00468420` through `rebrew source clear-cflags`; source file `references/minizip/unzip.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/014.current.json`, `014.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test --source-targets --json` saved to `.scratch/sol/flags/014.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: SERVER.0x10008a90
+
+- Change: removed saved `/O2 /Gd /DREBREW_ALLOW_NAKED` from `SERVER.0x10008a90` through `rebrew source clear-cflags`; source file `references/minizip/unzip.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/014.current.json`, `014.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test --source-targets --json` saved to `.scratch/sol/flags/014.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: SERVER.0x10008c80
+
+- Change: removed saved `/O2 /Gd /DREBREW_ALLOW_NAKED` from `SERVER.0x10008c80` through `rebrew source clear-cflags`; source file `references/minizip/unzip.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/014.current.json`, `014.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test --source-targets --json` saved to `.scratch/sol/flags/014.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: documentation clarity and consistency review
+
+- Change: clarified the documentation index, dated work snapshot, archive receipts,
+  command examples and verification scopes. Corrected DirectInput ABI wording
+  against `src/client_input.h`. Consolidated repeated behavioral and sharing
+  guidance into links while retaining compatibility pages. Removed duplicate
+  setup steps and SDK hash tables. Added tracked `docs/directx-inputs.md` from
+  the ignored SDK provenance note, updated its links and the CMake comment, and
+  named the client placeholders and archive-retention inputs.
+- Reason: keep setup and research guidance usable from a fresh checkout, separate
+  historical measurements from current instructions, and give each topic one
+  maintained explanation.
+- Evidence: current `rebrew-project.toml`, `CMakeLists.txt`, source/header witnesses,
+  installed Rebrew 6.33.0 help, and the November 5 documentation archive.
+  All 12 checked reference/archive/member SHA-256 values agree with local inputs.
+- Ledger clarification: the navigation preamble now describes the mixed ordering
+  and appended records. Historical entries are unchanged. The earlier paragraph
+  beginning "Draft scope: completed kept rows" is a captured drafting aside;
+  "The provenance ledger was not edited" describes that draft stage, not the
+  current ledger. It is not an instruction to revise earlier entries.
+- Decision owner: user, requesting a documentation review and repeated independent
+  checks.
+- Verification: internal paths and anchors pass across 40 first-party Markdown
+  files; no linked files depend on ignored local inputs. Receipt:
+  `.scratch/docs-review-20261112/links.json`. Documentation whitespace checks
+  pass. No game source, managed metadata, compiler flags or executable build
+  logic changed in this pass; no build, gate or runtime check ran, and historical
+  verdict counts were not remeasured.
+
+## 2026-11-12: canonical TU flags audit: SERVER.0x100036d0
+
+- Change: removed saved `/O2 /Gd /DREBREW_ALLOW_NAKED` from `SERVER.0x100036d0` through `rebrew source clear-cflags`; source file `references/zlib/gzio.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/015.current.json`, `015.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test --source-targets --json` saved to `.scratch/sol/flags/015.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: SERVER.0x10003960
+
+- Change: removed saved `/O2 /Gd /DREBREW_ALLOW_NAKED` from `SERVER.0x10003960` through `rebrew source clear-cflags`; source file `references/zlib/gzio.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/015.current.json`, `015.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test --source-targets --json` saved to `.scratch/sol/flags/015.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: GOLDTL.0x0054da10
+
+- Change: removed saved `/O2 /Gd /Ob0` from `GOLDTL.0x0054da10` through `rebrew source clear-cflags`; source file `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0054da10.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/016.current.json`, `016.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test` for the affected target(s), with results saved to `.scratch/sol/flags/016.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: GOLDTL.0x004909f0
+
+- Change: removed saved `/O2 /Gd /G6` from `GOLDTL.0x004909f0` through `rebrew source clear-cflags`; source file `src/Develop/DieGildeAddOn/game/fcn_004909f0.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/038.current.json`, `038.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test` for the affected target(s), with results saved to `.scratch/sol/flags/038.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: GOLDTL.0x004042b0
+
+- Change: removed saved `/O2 /Gd /G6` from `GOLDTL.0x004042b0` through `rebrew source clear-cflags`; source file `src/Develop/Unassigned/GOLDTL.fcn_004042b0.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/039.current.json`, `039.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test` for the affected target(s), with results saved to `.scratch/sol/flags/039.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: GOLDTL.0x00605233
+
+- Change: removed saved `/O2 /Gd /G6` from `GOLDTL.0x00605233` through `rebrew source clear-cflags`; source file `src/Develop/Unassigned/GOLDTL.fcn_00605233.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/060.current.json`, `060.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test` for the affected target(s), with results saved to `.scratch/sol/flags/060.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: GOLDTL.0x0058d020
+
+- Change: removed saved `/O2 /Gd /G6` from `GOLDTL.0x0058d020` through `rebrew source clear-cflags`; source file `src/Develop/Units/d2.v1/GOLDTL.fcn_0058d020.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/072.current.json`, `072.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test` for the affected target(s), with results saved to `.scratch/sol/flags/072.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: GOLDTL.0x0044c6f0
+
+- Change: removed saved `/O2 /Gd /G6` from `GOLDTL.0x0044c6f0` through `rebrew source clear-cflags`; source file `src/Develop/Units/d3/fcn_0044c6f0.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/074.current.json`, `074.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test` for the affected target(s), with results saved to `.scratch/sol/flags/074.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: canonical TU flags audit: GOLD.0x005e7f27
+
+- Change: removed saved `/O2` from `GOLD.0x005e7f27` through `rebrew source clear-cflags`; source file `src/Develop/Unassigned/GOLD.fcn_005e7f27.c` now resolves its canonical target flags.
+- Reason: canonical `/O2 /Gd` has no lower match_count, aligned_pairs or similarity for any measured function or bound target in this TU.
+- Evidence: `.scratch/sol/flags/081.current.json`, `081.canonical.json`, clear preview/result and `.scratch/sol/flags/REPORT.md`.
+- Decision owner: delegated compiler-flag audit instruction.
+- Verification: normal sequential wrapped `rebrew test` for the affected target(s), with results saved to `.scratch/sol/flags/081.recorded.json`; no builds or links, so linked placement/providers remain unverified.
+
+## 2026-11-12: compiler flag audit report and verification recovery
+
+- Change: completed `.scratch/sol/flags/REPORT.md`, raw diagnostic/test evidence, sampling plan and final checks; mapped 114 override rows across 82 bound file paths plus 13 unbound identities. Measured 27 selected paths (25 C source files and two non-compilable header provider groups), including nine representative G6 TUs and required GoldTL 0x005b6130. Sixteen saved overrides were removed with CLI previews/writes; individual ledger entries identify each row.
+- Reason: replace stale overrides only when canonical target flags do not reduce any function's positional matches, instruction alignment or similarity in any bound target. Mixed results and unresolved source/provider contexts remain unchanged. No /Ox override existed in the snapshot.
+- Evidence: `.scratch/sol/flags/summary.json`, `QA.json`, `transitions.json`, per-file current/canonical JSON, clear previews/results and recorded normal tests. Source hashes were unchanged; all 16 cleared rows have canonical flags in their stored verification.
+- Verification recovery: the interrupted minizip whole-file promoting test had already recorded 23 of 31 functions. Those stored verifications were recovered with source/cflags/status checks, and eight remaining normal per-VA tests completed the file. `014.recorded.json` is explicitly assembled evidence, with recovery markers and raw per-VA outputs in `014.recovery.json` / `014.resume.*`. The interrupted zlib promotion was completed for its eight affected SERVER functions; other targets were covered by both diagnostic comparisons and had no flag changes. `015.recovery.json` records that scope. These details clarify the earlier per-row ledger references to aggregated recorded JSON.
+- Outcome: zero new EXACT/RELOC functions and no losses of matched-function count. Eleven SERVER minizip/zlib functions changed from prior linked EXACT to object RELOC after refreshed compiler/input fingerprints; no raw-link proof was rerun. GoldTL 0x0058d020 improved from SIZE_MISMATCH to NEAR_MATCHING. GoldTL 0x005b6130 retained G6: canonical alignment improves 81 to 93 pairs (66.4% to 75.0%) while positional matches decline 58 to 48.
+- Upstream capability gap: appended multi-function test promotion batching request to `/home/maci/Desktop/Projects/relumea/repos/rebrew/docs/IDEAS-GUILD.md`, with public batch-writer direction, source evidence and replay commands. No tooling source repair or project-local verifier was added.
+- Decision owner: delegated compiler-flag audit instruction. No C/header edits, git actions, builds or links were performed. Reestablishing linked EXACT remains a later raw-link verification task.
+
+- 2026-11-13, Steering removal in `src/Develop/Units/d3/GOLDTL.fcn_004132a0.c`: shrink reviewed v[4] to v[3]. Reason: remove reviewed source-only compiler steering, retaining measured losses under the explicit lead exception. Evidence: `.scratch/sol/10/steering-inventory.md` and `.scratch/sol/10/steering-removal/000.scores.json` (before/after positional and aligned scores for every bound target). Decision owner: lead steering-removal instruction. Verification: sequential wrapped `rebrew test --source-targets --no-promote` before/after; line count and protected server blocks checked; no link or runtime check.
+
+- 2026-11-13: Restored Gold providers for the explicitly selected lane-blocking subset after native Gold byte/CFG/caller proof. The first two rows474d00/474d80 were rebound separately (digests bc05bab6d2f5937a68fd9a84df137cb256ee1d679343993775d787217821cf34 and f0182269c049c62427e232f830a6ab218dc28bcf35bb550506dccdb81f0abccf);136 further rows were rebound atomically with the locked public change_source_bindings_batch API, guarded by fresh digest c8f976ddc44cd9fc591e0bfe13453d76ab8c173b01d3468769f93d2f838c18ec. Native inventory repairs through rebrew binary repair-extents --add-missing --sync-rows used digest b1ec32394b8f6ae1b982afa414c2771d8916102746431629ff61462900c13359 (32 inventory changes,12 metadata SIZE changes; earlier3-boundary repair digest eb0384350badb4581c1050abcaa13e40e5f92ceb622d728043cda6708c6a6bd4). Minimal C89 stubs provide symbols, not recovered behavior; the existing shared comparator4ce270 was reused unchanged. Removed exactly five duplicate generated scaffold providers446e10/449690/4690a0/46c9e0/46cd90 through empty stubs/gold/specials.toml entries and symbol-stubs --update-symbol, digest 8fda73702c69940691d0363632c5128bac48242f13c42d7b49978300fd04279d. Native Gold SHA2567d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8. Full audit of2431 historical retired Gold rows, selected143 outcomes, per-row native evidence, previews and receipts: .scratch/sol/19/gold-retired-audit.md and .scratch/sol/19/RESULTS.md (Gold providers).15 sampled files compiled:14 STUB and reused4ce270 EXACT30/30, all no-promote; no stored verdict earned. _CIfmod5de88a excluded. Other audit candidates remain read-only. No build/link/header/git action; project lead owns relink. Decision owner: user/project lead, explicit restoration and HOLD2 approval.
+
+- 2026-11-13, Reversed the steering shrink in `src/Develop/Units/d3/GOLDTL.fcn_004132a0.c`: restored the exact saved original with `float v[4]`. Reason and decision owner: lead revised the ruling; an unused fourth component does not establish steering when the array matches the native stack layout. Evidence: `.scratch/sol/10/steering-removal/orig/src/Develop/Units/d3/GOLDTL.fcn_004132a0.c`, before/shrink measurements and `000.restored.json`. Verification: source bytes equal the saved original; sequential wrapped restoration comparison; no link/runtime check.
+
+- 2026-11-13, Landed native-reviewed Gold reconstruction 0x404c20 in `src/Develop/Unassigned/GOLD.fcn_00404c20.c` after lane 19 restored its previously missing provider definitions. Reason: complete native body in place of return-zero stub. Decision owner: lead candidate-landing instruction after HOLD 2 lifted. Evidence: `.scratch/sol/10/gold/00404c20.asm`, `00404c20.provider-candidate.c`, restored-provider list in `landed-state.json`. Verification: sequential wrapped source-target comparison `.scratch/sol/10/gold/00404c20.landed.json`; not byte-matched, no promotion. Callee bodies still include restored stubs; no whole-program runtime or relink check.
+
+- 2026-11-13, Landed native-reviewed Gold reconstruction 0x45fa70 in `src/Develop/Unassigned/GOLD.fcn_0045fa70.c` after lane 19 restored its previously missing provider definitions. Reason: complete native body in place of return-zero stub. Decision owner: lead candidate-landing instruction after HOLD 2 lifted. Evidence: `.scratch/sol/10/gold/0045fa70.asm`, `0045fa70.provider-candidate.c`, restored-provider list in `landed-state.json`. Verification: sequential wrapped source-target comparison `.scratch/sol/10/gold/0045fa70.landed.json`; not byte-matched, no promotion. Callee bodies still include restored stubs; no whole-program runtime or relink check.
+
+- 2026-11-13, Landed native-reviewed Gold reconstruction 0x52cf20 in `src/Develop/Unassigned/GOLD.fcn_0052cf20.c` after lane 19 restored its previously missing provider definitions. Reason: complete native body in place of return-zero stub. Decision owner: lead candidate-landing instruction after HOLD 2 lifted. Evidence: `.scratch/sol/10/gold/0052cf20.asm`, `0052cf20.provider-candidate.c`, restored-provider list in `landed-state.json`. Verification: sequential wrapped source-target comparison `.scratch/sol/10/gold/0052cf20.landed.json`; not byte-matched, no promotion. Callee bodies still include restored stubs; no whole-program runtime or relink check.
+
+- 2026-11-13, Landed native-reviewed Gold reconstruction 0x4f9020 in `src/Develop/Unassigned/GOLD.fcn_004f9020.c` after lane 19 restored its previously missing provider definitions. Reason: complete native body in place of return-zero stub. Decision owner: lead candidate-landing instruction after HOLD 2 lifted. Evidence: `.scratch/sol/10/gold/004f9020.asm`, `004f9020.provider-candidate.c`, restored-provider list in `landed-state.json`. Verification: sequential wrapped source-target comparison `.scratch/sol/10/gold/004f9020.landed.json`; not byte-matched, no promotion. Callee bodies still include restored stubs; no whole-program runtime or relink check. Native extent 357 includes a separate trailing function; no neighbor bytes fabricated, no size override.
+
+- 2026-11-13, Landed native-reviewed Gold reconstruction 0x4764e0 in `src/Develop/Unassigned/GOLD.fcn_004764e0.c` after lane 19 restored its previously missing provider definitions. Reason: complete native body in place of return-zero stub. Decision owner: lead candidate-landing instruction after HOLD 2 lifted. Evidence: `.scratch/sol/10/gold/004764e0.asm`, `004764e0.provider-candidate.c`, restored-provider list in `landed-state.json`. Verification: sequential wrapped source-target comparison `.scratch/sol/10/gold/004764e0.landed.json`; not byte-matched, no promotion. Callee bodies still include restored stubs; no whole-program runtime or relink check.
+
+- 2026-11-13, Landed native-reviewed Gold reconstruction 0x4fe570 in `src/Develop/Unassigned/GOLD.fcn_004fe570.c` after lane 19 restored its previously missing provider definitions. Reason: complete native body in place of return-zero stub. Decision owner: lead candidate-landing instruction after HOLD 2 lifted. Evidence: `.scratch/sol/10/gold/004fe570.asm`, `004fe570.provider-candidate.c`, restored-provider list in `landed-state.json`. Verification: sequential wrapped source-target comparison `.scratch/sol/10/gold/004fe570.landed.json`; not byte-matched, no promotion. Callee bodies still include restored stubs; no whole-program runtime or relink check.
+
+- 2026-11-13, Landed native-reviewed Gold reconstruction 0x43e200 in `src/Develop/Unassigned/GOLD.fcn_0043e200.c` after lane 19 restored its previously missing provider definitions. Reason: complete native body in place of return-zero stub. Decision owner: lead candidate-landing instruction after HOLD 2 lifted. Evidence: `.scratch/sol/10/gold/0043e200.asm`, `0043e200.provider-candidate.c`, restored-provider list in `landed-state.json`. Verification: sequential wrapped source-target comparison `.scratch/sol/10/gold/0043e200.landed.json`; not byte-matched, no promotion. Callee bodies still include restored stubs; no whole-program runtime or relink check.
+
+- 2026-11-13, Landed native-reviewed Gold reconstruction 0x506e70 in `src/Develop/Unassigned/GOLD.fcn_00506e70.c` after lane 19 restored its previously missing provider definitions. Reason: complete native body in place of return-zero stub. Decision owner: lead candidate-landing instruction after HOLD 2 lifted. Evidence: `.scratch/sol/10/gold/00506e70.asm`, `00506e70.provider-candidate.c`, restored-provider list in `landed-state.json`. Verification: sequential wrapped source-target comparison `.scratch/sol/10/gold/00506e70.landed.json`; not byte-matched, no promotion. Callee bodies still include restored stubs; no whole-program runtime or relink check.
+
+- 2026-11-13: Added the two explicitly requested Gold follow-up providers4556d0 (119B, one caller-cleaned pointer argument) and4f3c50 (373B, three caller-cleaned arguments) as minimal C89 stubs through locked change_source_bindings_batch; fresh preview/apply digest 92ef0e16eb53b3076cab4cea8f98e648f588cd370bea30f1b7c6ffbe73224043. Native entry/RET/caller proof and input pins: .scratch/sol/19/gold-providers/followup-evidence/ and followup-binding-inputs.json. The existing TL4523a0 source was preserved because four sentinel/output names lack established Gold bindings. Both new sources compile and measure STUB with no-promote; full receipts in followup-test-results.json. Read-only CMake source preview selects all138 primary/follow-up destination paths. No extra inventory repair, build/link/header/git action. Decision owner: user/project lead, explicit two-row no-hold authorization.
+
+## 2026-11-13 rebrew pinned to 6.33.0
+
+- Change: `pyproject.toml` and `uv.lock` pin `rebrew[prove]`/`rebrew[binsync]` 6.33.0 (was 6.32.1); the project venv was synced to it.
+- Reason: 6.33.0 adds aligned instruction similarity to `rebrew test` and stores it as the protected `similarity` metadata field; the matching lanes measure keeps with it, and the 6.32.1 reader rejected the new field ("unknown metadata field similarity").
+- Evidence: upstream release v6.33.0 (CI green, wheel sha256 4af512b0...), `.venv/bin/rebrew --version` = 6.33.0.
+- Decision owner: user ("update it then").
+- Verification: the frozen 2026-11-13 relink, gate and lint below ran with 6.33.0.
+
+## 2026-11-13 matching fleet batch (GoldTL and Gold)
+
+- Change: source edits from 20 matching lanes (`.scratch/sol/lane-NN.txt`, `.scratch/sol/gold-NN.txt`), each measured one file at a time with `rebrew test --source-targets --no-promote --json` and kept only under the lane keep rule (aligned pairs rise, or a native-proven behavior fix within 5 pairs of the original source, or a lead-granted correctness exception). RELOC/EXACT verdicts were recorded by promoting `rebrew test` runs.
+- Reason: move GoldTL and Gold functions toward RELOC/EXACT with faithful C, and correct behavior the native code proves wrong.
+- Evidence: per-row native instruction addresses and before/after receipts in each lane's `RESULTS.md`; the lead ledger of every keep, exception, contract finding and data TODO is preserved at `.scratch/link/KEPT-at-freeze.md` (919 lines, 54 correctness exceptions, 27 inline fill/copy definitions).
+- Notable classes: wrong call arguments/order/arity; missing or invented calls; buffer overruns (message buffers 0x70/0xf4/int[16] where native uses 0xf8, v15[4]/v26[4] in 0x5c18e0); wrong strides (0x12fc->0x21c, 588->0x24d); pointer-vs-address loads (lpGebaeudePROT, 0x868054/0x99ec10, 0x100e748); x87 precision and NaN predicates (checked against the corrected flag table: `test ah,5 ; jp` is taken for >= or unordered); wrong data initializers (g_68149c "dummy_TUER", g_68bef4, g_68cb58 "bewegung/zu_boden_sinken").
+- Inline assembly: the fixed-EBX fill/copy core is recorded per definition with `rebrew source document-assembly` (positive evidence: one shape across 725 native sites); no other assembly was added.
+- Gold providers: lane 19 restored callees wrongly retired by the 2026-10-24 extent-merge pass: repair-extents digest b1ec3239..., 136 bindings (digest c8f976dd...), placeholder removals via `stubs/gold/specials.toml` + `rebrew build symbol-stubs` (digest 8fda7370...), follow-up 2 rows (digest 92ef0e16...). Restored providers are stubs: they make symbols link, not run correctly.
+- Reversals in this batch: the first x87 flag table (equality case) was wrong and lane edits based on it were restored; the float[4] shrink rule was withdrawn after it demoted 0x4132a0 from RELOC and the affected vec4 forms were restored; the invented 0x11111111 branch in 0x4da690 was removed.
+- Corrections to earlier ledger claims: 0x4ac560's first HistPair slot is the parsed pcnt stored at 0x4ac660, not a constant 0 at 0x4ac56e; the 2026-11-05 review's 0x52fafb query pointer is LEA [ESP+0x2c] = B, not B-12; 0x51f480 already writes slots 0x18..0x24.
+- Decision owner: lead, under the user's instruction to run 20 matching lanes on the NEAR/STUB/SIZE_MISMATCH rows.
+- Verification: frozen tree; `cmake --build` of europa1400gold and europa1400gold_tl exit 0 (no LNK2001/LNK2019/LNK2005); `scripts/gate.sh` pass with the server raw link byte-identical; `rebrew lint --all-targets` 5538 files, 0 errors, 0 warnings on all three targets.

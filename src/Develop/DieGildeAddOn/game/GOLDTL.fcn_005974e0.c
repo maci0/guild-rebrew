@@ -129,12 +129,12 @@ int __cdecl fcn_005974e0(int a0, char* a1)
         do {
             if (!*v7) {
                 if (v10 <= 0xf) {
-                    if (*v3 != 0x1db && *v3 != 0x1dc) {
+                    if (*(unsigned short*) v3 != 0x1db && *(unsigned short*) v3 != 0x1dc) {
                         goto store_slot;
                     }
                     v8 = (int) gm_FindSlotById(*(unsigned int*) ((char*) a0 + 0x65),
                                                (unsigned int) *v5);
-                    if (!v8 || !*(int*) (v8 + 4)) {
+                    if (!v8 || *(int*) (v8 + 4)) {
                         goto store_slot;
                     }
                 }
@@ -159,7 +159,7 @@ int __cdecl fcn_005974e0(int a0, char* a1)
     do {
         v9 = fcn_00502cd0(*(unsigned int*) (v3 + 0x14), 1, 0, v13[-0xc]);
         if (v9) {
-            if (*v3 != 0x1db && *v3 != 0x1dc) {
+            if (*(unsigned short*) v3 != 0x1db && *(unsigned short*) v3 != 0x1dc) {
                 v10 = fcn_0050dfd0(v3, *v9);
                 v13[-1] = (unsigned int) (v10 * *(int*) (v9 + 0xe)) >> 2;
                 *v13 = gm_GetMsgField(v3, (char*) v9);

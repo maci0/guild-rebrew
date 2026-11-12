@@ -59,7 +59,7 @@ void __cdecl fcn_004ff8f0(void)
 		e = s - 2;
 		if (*(short*) e == -1 || s[6] < 2)
 			continue;
-		if (!(652.8f <= (float) active)) {
+		if ((float) active > 652.8f) {
 			if (s[0] == 8) {
 				p = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0x60));
 				q = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0x64));
@@ -96,7 +96,7 @@ void __cdecl fcn_004ff8f0(void)
 				top++;
 		}
 	}
-	if (top <= 5 && !gm_RandomMod(4)) {
+	if (top <= 5 && !(unsigned short) gm_RandomMod(4)) {
 		handle = fcn_004c4fc0(0x10, -1, -1, gm_RandomMod(4) + 0x10, -1, 0, 0, 0);
 		if (handle != -1) {
 			while (!fcn_004c4450(handle)) {
@@ -110,7 +110,7 @@ void __cdecl fcn_004ff8f0(void)
 			fcn_004c51a0(*(int*) (handle + 4), -1, g_773d75, v10);
 		}
 	}
-	if (652.8f <= (float) active) {
+	if ((float) active <= 652.8f) {
 		if (count < 0x1e)
 			v10 = (0x28 - count) / 2;
 		else if (count < 0x28)

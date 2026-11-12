@@ -29,7 +29,7 @@ int __cdecl fcn_00476060(BlitSurf* s);
 int __cdecl fcn_00476120(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst);
 int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused);
 
-int __cdecl fcn_00476120(int left, int top, int width, int height, char* src, char* dest, int mode);
+
 /* ADDRESS: GOLDTL 0x004763e0 */
 int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused)
 {

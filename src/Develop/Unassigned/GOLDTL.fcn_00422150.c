@@ -123,10 +123,10 @@ void __cdecl fcn_00422150(void)
                 {
                     value = 0;
                     now = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
-                    value = (unsigned int)(now - p->start10);
-                    if (value < (unsigned int)g_678dec)
+                    dt = now - p->start10;
+                    if ((unsigned int)dt < (unsigned int)g_678dec)
                         fcn_0042a920(p->obj,
-                            (int)((float)value / g_678dec * p->speed24));
+                            (int)((float)(unsigned int)dt / g_678dec * p->speed24));
                     else
                         fcn_004237f0(p, 0);
                 }

@@ -139,7 +139,11 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 	float fv;
 	float fw;
 	float ft;
-	float fk;
+	double fk;
+	double uv_v;
+	void* copy_dst;
+	const void* copy_src;
+	int copy_size;
 
 	res = 0;
 	strcpy(buf, name);
@@ -159,7 +163,25 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 		fcn_0044a770(obj, 0);
 		return obj;
 	}
-	memset(&hdr, 0, sizeof(hdr));
+	copy_dst = &hdr;
+	copy_size = sizeof(hdr);
+	__asm {
+	    mov edi, copy_dst
+	    mov ebx, copy_size
+	    xor eax, eax
+	    lea ecx, [edi+edi*2]
+	    and ecx, 3
+	    sub ebx, ecx
+	    jle short L44b480fill
+	    rep stosb
+	    mov ecx, ebx
+	    and ebx, 3
+	    shr ecx, 2
+	    rep stosd
+	L44b480fill:
+	    add ecx, ebx
+	    rep stosb
+	}
 	stream = vfs_Tfopen(buf, (char*) 0x6750e8, *(void**) 0x6b7fdc);
 	if (stream == 0) {
 		return (BGF_OBJ*) res;
@@ -197,9 +219,9 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 						}
 					}
 					hdr.anzahl_poi--;
-					fcn_0064d740((char*) hdr.poi + off,
-						(char*) hdr.poi + off + 0x18,
-						(hdr.anzahl_poi - i) * 0x18);
+					fcn_0064d740((char*) hdr.poi + off2,
+						(char*) hdr.poi + off2 + 0x18,
+						(hdr.anzahl_poi - j) * 0x18);
 				}
 				else {
 					j++;
@@ -297,12 +319,50 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 
 	obj->anzahl_polys = hdr.anzahl_pol;
 	obj->polys = m_alloc(hdr.anzahl_pol * 0x38, (char*) 0x67af80);
-	memcpy(obj->polys, hdr.pol, hdr.anzahl_pol * 0x38);
+	copy_dst = obj->polys;
+	copy_src = hdr.pol;
+	copy_size = hdr.anzahl_pol * 0x38;
+	__asm {
+	    mov edi, copy_dst
+	    mov esi, copy_src
+	    mov ebx, copy_size
+	    lea ecx, [edi+edi*2]
+	    and ecx, 3
+	    sub ebx, ecx
+	    jle short L44b480pol
+	    rep movsb
+	    mov ecx, ebx
+	    and ebx, 3
+	    shr ecx, 2
+	    rep movsd
+	L44b480pol:
+	    add ecx, ebx
+	    rep movsb
+	}
 
 	/* Compact the used texture records to the front of the header block. */
 	seen = m_alloc(hdr.anzahl_tex, (char*) 0x67af68);
 	snapshot = m_alloc(hdr.anzahl_tex * 0xe0, (char*) 0x67af50);
-	memcpy(snapshot, hdr.tex, hdr.anzahl_tex * 0xe0);
+	copy_dst = snapshot;
+	copy_src = hdr.tex;
+	copy_size = hdr.anzahl_tex * 0xe0;
+	__asm {
+	    mov edi, copy_dst
+	    mov esi, copy_src
+	    mov ebx, copy_size
+	    lea ecx, [edi+edi*2]
+	    and ecx, 3
+	    sub ebx, ecx
+	    jle short L44b480snap
+	    rep movsb
+	    mov ecx, ebx
+	    and ebx, 3
+	    shr ecx, 2
+	    rep movsd
+	L44b480snap:
+	    add ecx, ebx
+	    rep movsb
+	}
 	newn = 0;
 	copyoff = 0;
 	for (k = 0; k < obj->anzahl_polys; k++) {
@@ -314,7 +374,26 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 					obj->polys[m].material = newn;
 				}
 			}
-			memcpy((char*) hdr.tex + copyoff, snapshot + idx * 0xe0, 0xe0);
+			copy_dst = (char*) hdr.tex + copyoff;
+			copy_src = snapshot + idx * 0xe0;
+			copy_size = 0xe0;
+			__asm {
+			    mov edi, copy_dst
+			    mov esi, copy_src
+			    mov ebx, copy_size
+			    lea ecx, [edi+edi*2]
+			    and ecx, 3
+			    sub ebx, ecx
+			    jle short L44b480tex
+			    rep movsb
+			    mov ecx, ebx
+			    and ebx, 3
+			    shr ecx, 2
+			    rep movsd
+			L44b480tex:
+			    add ecx, ebx
+			    rep movsb
+			}
 			newn++;
 			copyoff += 0xe0;
 		}
@@ -334,14 +413,14 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 			ay = obj->polys[i].uv[m * 2 + 1];
 			fu = ax * tex->f_0cc + *(float*) 0x6628cc
 				- tex->f_0cc * *(float*) 0x6628cc;
-			fv = ay * tex->f_0d0 + *(float*) 0x6628cc
+			uv_v = (double) ay * tex->f_0d0 + *(float*) 0x6628cc
 				- tex->f_0d0 * *(float*) 0x6628cc;
 			fw = tex->f_0dc;
-			obj->polys[i].uv[m * 2] = (float) cos(fw) * fu
-				- (float) sin(fw) * fv + tex->f_0d4;
-			fk = tex->f_0dc + *(float*) 0x6628fc;
-			obj->polys[i].uv[m * 2 + 1] = (float) cos(fk) * fv
-				+ (float) sin(fk) * fu + tex->f_0d8;
+			obj->polys[i].uv[m * 2] = cos(fw) * fu
+				- sin(fw) * uv_v + tex->f_0d4;
+			fk = (double) tex->f_0dc + *(float*) 0x6628fc;
+			obj->polys[i].uv[m * 2 + 1] = cos(fk) * uv_v
+				+ sin(fk) * fu + tex->f_0d8;
 		}
 	}
 
@@ -372,9 +451,9 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 	}
 
 	list = m_alloc(obj->anzahl_polys, (char*) 0x67af20);
-	info = 0;
-	((unsigned char*) &info)[0] = 0xff;
 	for (i = 0; i < obj->anzahl_texnamen; i++) {
+		info = 0;
+		((unsigned char*) &info)[0] = 0xff;
 		tex = hdr.tex + i;
 		if (tex->typ_0c0 != 0) {
 			((unsigned char*) &info)[0] = tex->idx_0c1;

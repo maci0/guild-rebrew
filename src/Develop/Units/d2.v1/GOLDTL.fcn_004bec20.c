@@ -1,6 +1,9 @@
 extern int g_67d370;
 extern int g_772514;
 extern char* g_1015ea0;
+extern int g_100f1dc;
+extern int g_14ce8e0;
+extern int g_774654;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -19,6 +22,7 @@ int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
+void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_005373e0(void* fn, int arg);
 
 /* ADDRESS: GOLDTL 0x004bec20 */
@@ -69,9 +73,9 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 	d2_SelectRadioGroup(k, 0);
 	fcn_00476b60();
 	for (;;) {
-		n = g * 0x8c;
-		if (*(int*) 0x14ce8e0 != 0 || v17 != 0 || (*(int*) 0x100f1dc != -1 && g_67d370 == v4)) {
-			*(int*) 0x774654 = 1;
+		n = k * 0x8c;
+		if (g_14ce8e0 != 0 || v17 != 0 || (g_100f1dc != -1 && g_67d370 == v4)) {
+			g_774654 = 1;
 		}
 		if (*(int*) (0x102cbc8 + n) != v18 || v2) {
 			d2_SetForm(g, 2);
@@ -90,25 +94,25 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 			if (p != 0) {
 				p2 = fcn_00502cd0(*(unsigned int*) (p + 0x14), 1, 5, 0);
 				while (p2 != 0) {
-					items[i] = *(unsigned short*) p2;
-					v6 = fcn_0046f740((i & 3) * 0x40, (i >> 2) * 0x40, *(unsigned short*) p2 + 0xdf, g_772514);
+					v6 = fcn_0046f740((i % 4) * 0x40, (i / 4) * 0x40, *(unsigned short*) p2 + 0xdf, g_772514);
 					list[i] = v6;
 					*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x5c) = 1;
 					*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x1d0) = 3;
 					*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x1e4) = 0x525;
-					p2 = fcn_00502cd0(p2, 1, 5, 0);
+					items[i] = *(unsigned short*) p2;
+					p2 = (char*) gm_NextEntityQueryMatch();
 					i++;
 				}
 			}
 			items[i] = 0;
-			v6 = fcn_0046f740((i & 3) * 0x40 + 7, (i >> 2) * 0x40 + 7, 0x527, g_772514);
+			v6 = fcn_0046f740((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527, g_772514);
 			list[i] = v6;
 			v2 = 0;
 			*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x5c) = 1;
 			*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x1d0) = 3;
 			v18 = *(int*) (0x102cbc8 + n);
 		}
-		if (*(int*) 0x100f1dc != -1) {
+		if (g_100f1dc != -1) {
 			for (i = 0; i < 0x30; i++) {
 				if (g_67d370 == list[i]) {
 					v17 = items[i];

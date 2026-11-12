@@ -121,7 +121,7 @@ void __cdecl fcn_005a4e00(char* a0)
 				for (j = 0; j < v; j++) {
 					sum += *(int*) (out[j] + 0xb4);
 				}
-				items[i][0] = fcn_00472250(h, 2,
+				items[i][1] = fcn_00472250(h, 2,
 				    io_AppendText(0x18df, ids[i], v, sum));
 			}
 		}
@@ -132,7 +132,7 @@ void __cdecl fcn_005a4e00(char* a0)
 			}
 			else {
 				for (i = 0; i < count - 1; i++) {
-					if (g_67d370 == items[i][0]) {
+					if (g_67d370 == items[i][1]) {
 						fcn_005a4960(a0, ids[i]);
 						first = 1;
 					}

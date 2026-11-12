@@ -37,14 +37,13 @@ int __cdecl unzGoToNextFile(void* file);
 void* __cdecl m_PoolAlloc(void*, int, int);
 void* __cdecl gzopen(char*, char*);
 void* __cdecl fopen(char*, char*);
-extern char g_file_extension_names[];
+extern char g_file_extension_names[]; extern int g_6b7fec;
 char* __cdecl strupr(char*);
 int __cdecl vfs_MakeDirs(char*, struct VFS_DIR*);
 void __cdecl fcn_0042ed00(char*, struct VFS_DIR*, int, int, int, int, int);
 void __cdecl ReportClientMessage(char*);
 int __cdecl sprintf(char*, const char*, ...);
 
-/* CAND42 */
 void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* root)
 {
 	char* path;
@@ -53,27 +52,6 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 	unsigned char packed;
 	unsigned char binary;
 	unsigned char read;
-	char pad123;
-	char pad124;
-	char pad125;
-	char pad126;
-	char pad127;
-	char pad128;
-	char pad129;
-	char pad130;
-	char pad131;
-	char pad132;
-	char pad133;
-	char pad134;
-	char pad135;
-	char pad136;
-	char pad137;
-	char pad138;
-	char pad139;
-	char pad140;
-	char pad141;
-	char pad142;
-	char pad143;
 	struct VFS_DIR* dir;
 	char* modes[2];
 	char* p;
@@ -84,7 +62,7 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 	char name[0x100];
 	char entry[0x100];
 	char arch[0x100];
-	unsigned long info[0x15];
+	unsigned long info[0x14];
 
 	path = (char*) cpath;
 	mode = (char*) cmode;
@@ -133,14 +111,18 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 				fcn_0042f240(file, dir, file->source, entry);
 				strupr(entry);
 				if ((unsigned long) file->stamp > 0) {
-					unzGoToFilePos(zip, file->stamp, file->packed);
+					err = unzGoToFilePos(zip, file->stamp, file->packed);
 					if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
 						strupr(name);
 						vfs_ToSlashes(name);
 						if (info[8] > 0 && strcmp(entry, name) == 0)
 							goto open_member;
+					} else {
+						goto close_zip;
 					}
-					goto close_zip;
+					if (err != 0)
+						goto close_zip;
+					goto allocate_member;
 				}
 				do {
 					if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
@@ -157,6 +139,7 @@ open_member:
 				err = unzOpenCurrentFile(zip);
 				if (err != 0)
 					goto close_zip;
+allocate_member:
 				stream = (char*) m_PoolAlloc((void*) 0x6b7fe4, 0x140, 0x10);
 				((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b2 = 1;
 				((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b4 = 1;
@@ -189,7 +172,7 @@ opened:
 set_mode:
 	((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b1 = binary;
 	((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->compressed = packed;
-	*(int*) 0x6b7fec = *(int*) 0x6b7fec + 1;
+	g_6b7fec = g_6b7fec + 1;
 	return stream;
 
 write_path:

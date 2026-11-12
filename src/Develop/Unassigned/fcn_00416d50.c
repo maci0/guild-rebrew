@@ -8,7 +8,7 @@ void __cdecl fcn_004518a0(float *v);
 
 /* Particle-system update: advances, reflects, recolors or respawns each of
  * P->count particles (stride 0x54) from E = P->particles. Returns 1 when the
- * update ran; P+0x20 bit 1 stays set when no particle died this pass. */
+ * update ran; P+0x20 bit 1 is set when no active particle was updated. */
 /* ADDRESS: GOLDTL 0x00416d50 */
 char __cdecl fcn_00416d50(unsigned char *P, int pos)
 {
@@ -28,14 +28,14 @@ char __cdecl fcn_00416d50(unsigned char *P, int pos)
             (2.0f * *(float *)(P + 0xc) + *(float *)(P + 4));
     E = *(unsigned char **)(P + 0x28);
 
-    for (i = 0; i < *(int *)(P + 0xd8); i++) {
+    for (i = 0; i < *(int *)(P + 0xd8); i++, E += 0x54) {
         if ((*(unsigned *)(P + 0x20) & 1u) == 0 &&
             ((*(unsigned char *)(E + 0x51) & 1u) != 0 ||
              (unsigned)spawned >= *(unsigned *)(P + 0x24))) {
             if ((*(unsigned char *)(E + 0x51) & 1u) == 0)
                 continue;
 
-            d = pos - *(int *)(E + 0x30);
+            d = (unsigned int)pos - *(unsigned int *)(E + 0x30);
             *(int *)(E + 0x30) = pos;
             f = (float)d * 0.33333334f;
             vx = f * *(float *)E + *(float *)(E + 0x38);
@@ -47,7 +47,7 @@ char __cdecl fcn_00416d50(unsigned char *P, int pos)
             nlen = (float)sqrt(*(float *)E * *(float *)E +
                                *(float *)(E + 4) * *(float *)(E + 4) +
                                *(float *)(E + 8) * *(float *)(E + 8));
-            if (!((float)sqrt(vx * vx + vy * vy + vz * vz) <=
+            if (!((float)sqrt(vz * vz + vy * vy + vx * vx) <=
                   *(float *)(P + 0xc)) ||
                 !(nlen > *(float *)(P + 0x14))) {
                 *(float *)(E + 4) =
@@ -63,8 +63,8 @@ char __cdecl fcn_00416d50(unsigned char *P, int pos)
                     *(float *)(E + 0x38) = *(float *)(P + 0xc) * v3[0];
                     *(float *)(E + 0x3c) = *(float *)(P + 0xc) * v3[1];
                     *(float *)(E + 0x40) = *(float *)(P + 0xc) * v3[2];
-                    f = (v3[0] * *(float *)E + v3[1] * *(float *)(E + 4) +
-                         v3[2] * *(float *)(E + 8)) *
+                    f = (v3[2] * *(float *)(E + 8) + (v3[1] * *(float *)(E + 4) +
+                         v3[0] * *(float *)E)) *
                         -2.0f;
                     vx = v3[0] * f + *(float *)E;
                     *(float *)E = vx;
@@ -99,7 +99,7 @@ char __cdecl fcn_00416d50(unsigned char *P, int pos)
         *(float *)(E + 0x40) =
             (float)(rand() * 3.0518509e-05f * 10.0) - 5.0f;
         *(float *)(E + 0x38) += *(float *)(P + 0);
-        *(float *)(E + 0x3c) += *(float *)(P + 4);
+        *(float *)(E + 0x3c) = *(float *)(P + 4) + *(float *)(E + 0x3c);
         *(float *)(E + 0x40) += *(float *)(P + 8);
         *(float *)(E + 4) = -(*(float *)(P + 4) - *(float *)(P + 0xc));
         *(float *)E = (float)(rand() * 3.0518509e-05f) *

@@ -12,7 +12,7 @@ int __cdecl fcn_004fa5b0(int, char*, int*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00495400(int, unsigned short, int, void*, void*);
 int __cdecl fcn_004f4830(int, void*);
-int __cdecl gm_RandomMod(int);
+unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004a5340(char*, int, int*, int, float, unsigned short*);
 float __cdecl fcn_00507e70(char*, char*, int);

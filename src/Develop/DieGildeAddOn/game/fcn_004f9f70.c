@@ -27,7 +27,7 @@ int __cdecl fcn_004f9f70(int a, int b)
 		if (*(int*) (a + 0x1cc) & 0x40000) {
 			return 1;
 		}
-		if (v == 3) {
+		if (*(int*) b == 3) {
 			r = fcn_005dafd0(a, b);
 		}
 		return r | 2;

@@ -3,6 +3,9 @@ extern char g_7f4ca0[];
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14ce8e0;
+extern int g_67d370;
+extern int g_100f1dc;
+extern int g_774654;
 
 
 
@@ -54,19 +57,19 @@ void __cdecl fcn_005c3cc0(char* e)
 	do {
 		cur = gm_SearchTable67(id);
 		if ((*(unsigned char*) (e + 0x5b) & 4) != 0 || cur == 0) {
-			(*(int*) 0x774654) = 1;
+			g_774654 = 1;
 		}
 		n = 1;
 		if (g_14ce8e0 != 0) {
-			(*(int*) 0x774654) = 1;
+			g_774654 = 1;
 		}
-		if ((*(int*) 0x100f1dc) == 2) {
-			if ((*(int*) 0x67d370) == h1) {
+		if (g_100f1dc == 2) {
+			if (g_67d370 == h1) {
 				p = 0.2f;
-			} else if ((*(int*) 0x67d370) == h2) {
+			} else if (g_67d370 == h2) {
 				p = 0.5f;
 				n = 2;
-			} else if ((*(int*) 0x67d370) == h3) {
+			} else if (g_67d370 == h3) {
 				p = 0.8f;
 				n = 4;
 			} else {
@@ -75,10 +78,7 @@ void __cdecl fcn_005c3cc0(char* e)
 			if (fcn_00525f60(g_7f4ca0 + g_774970 * 0x21c, n)) {
 				fcn_005100f0(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 4), -n);
 				fcn_00471af0(win, 0);
-				if (p <= (float) gm_RandomFloat01()) {
-					fcn_00526120((*(int*) 0x14ab300), 4);
-					fcn_00471af0(win, 1);
-				} else {
+				if (gm_RandomFloat01() < p) {
 					ent = fcn_005463a0(1, 0, 0x4f);
 					if (ent != 0) {
 						do {
@@ -91,12 +91,15 @@ void __cdecl fcn_005c3cc0(char* e)
 						} while (ent != 0);
 					}
 done:
-					(*(int*) 0x774654) = 1;
+					g_774654 = 1;
+					fcn_00471af0(win, 1);
+				} else {
+					fcn_00526120((*(int*) 0x14ab300), 4);
 					fcn_00471af0(win, 1);
 				}
 			}
-		} else if ((*(int*) 0x100f1dc) == n) {
-			(*(int*) 0x774654) = n;
+		} else if (g_100f1dc == n) {
+			g_774654 = n;
 		}
 next:
 		if (fcn_005373e0((void*) fcn_005c3cc0, 0x677c7) == 0) {

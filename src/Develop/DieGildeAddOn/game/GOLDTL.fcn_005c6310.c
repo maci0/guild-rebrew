@@ -1,3 +1,4 @@
+#include "client_data.h"
 int __cdecl fcn_00500d20(void*, void*);
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
 int __cdecl fcn_005c61e0(int);
@@ -12,12 +13,8 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 extern int g_775320;
 extern int g_775324;
 extern int g_775328;
-extern int g_77532c;
+extern unsigned short g_77532c;
 extern int g_775330;
-extern int g_7f4c00;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern int g_7f4c0c;
 extern unsigned char g_773d75;
 
 /* Ages the transient scene objects of one 32-slot block of the object table:
@@ -30,7 +27,6 @@ void __cdecl fcn_005c6310(void)
 	char text[0x400];
 	unsigned short* item;
 	char* rec;
-	int base;
 	int off;
 	int n;
 	int stamp;
@@ -40,30 +36,26 @@ void __cdecl fcn_005c6310(void)
 	if (*(unsigned short*) 0x774970 >= 0x300) {
 		return;
 	}
-	fcn_00500d20((void*) 0x775320, (void*) 0x7f4c00);
-	base = g_775330;
-	off = base * 0x21c;
-	for (n = base; n < base + 0x20; n++) {
+	fcn_00500d20((void*) 0x775320, &g_7f4c00);
+	n = g_775330;
+	off = n * 0x21c;
+	for (; n < g_775330 + 0x20; n++) {
 		if (off >= 0x65400) {
 			break;
 		}
 		if (*(short*) ((char*) 0x7f4ca0 + off) != -1) {
-			g_775330 = base;
 			item = fcn_00502cd0(*(int*) ((char*) 0x7f4e18 + off), 1, 5);
 			while (item != 0) {
 				obj = fcn_005c61e0(*item);
 				if (obj != 0) {
-					if (*(int*) (obj + 4) >= 1) {
+					if (*(int*) (obj + 4) > 0) {
 						rec = (char*) item;
 						if (*(int*) (rec + 0x21) != 0) {
-							stamp = fcn_00500d20(rec + 0x2d, (void*) 0x7f4c00);
-							left = *(int*) (rec + 0x1c);
-							*(int*) (rec + 0x1c) = left - stamp;
-							*(int*) (rec + 0x2d) = g_7f4c00;
-							*(int*) (rec + 0x31) = g_7f4c04;
-							*(int*) (rec + 0x35) = g_7f4c08;
-							*(unsigned short*) (rec + 0x39) = (unsigned short) g_7f4c0c;
-							if (left - stamp <= -1) {
+							stamp = fcn_00500d20(rec + 0x2d, &g_7f4c00);
+							left = *(int*) (rec + 0x1c) - stamp;
+							*(int*) (rec + 0x1c) = left;
+							*(pos14_7f4c00*) (rec + 0x2d) = g_7f4c00;
+							if (left < 0) {
 								*(int*) (rec + 0x21) = 0;
 								if (*(char*) ((char*) 0x7f4ca2 + off) == 6) {
 									io_FormatTextBuffer(text, 0x1bc9, *item * 2 + 0x9a8);
@@ -89,13 +81,12 @@ void __cdecl fcn_005c6310(void)
 				}
 				item = gm_NextEntityQueryMatch();
 			}
-			base = g_775330;
 		}
 		off += 0x21c;
 	}
-	g_775320 = g_7f4c00;
-	g_775324 = g_7f4c04;
-	g_775328 = g_7f4c08;
-	g_77532c = g_7f4c0c;
+	g_775320 = g_7f4c00.a;
+	g_775324 = g_7f4c00.b;
+	g_775328 = g_7f4c00.c;
+	g_77532c = g_7f4c00.d;
 	g_775330 = (n + 1) % 0x300;
 }

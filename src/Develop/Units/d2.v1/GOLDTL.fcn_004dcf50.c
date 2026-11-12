@@ -28,7 +28,7 @@ unsigned int* __cdecl fcn_004fda30(unsigned int a0);
 int __cdecl io_AppendText(int fmt, ...);
 int __cdecl sprintf(char*, const char*, ...);
 unsigned int __cdecl strlen(const char*);
-int __cdecl fcn_0050f980(int a, int b, int c);
+float __cdecl fcn_0050f980(unsigned int a, unsigned int b, unsigned int c);
 int __cdecl fcn_004e4b40(int a1, int a2, char* s, int a4, int a5);
 
 int __cdecl fcn_00493e50(int a, int b);
@@ -860,7 +860,7 @@ int __cdecl fcn_004dcf50(int a0)
 		fcn_004e4b00(msg.hnd[5]);
 	}
 	if (msg.hnd[0] != 0) {
-		fcn_004e4b00(msg.hnd[0]);
+		fcn_004e4b00(msg.hnd[5]); /* Native tests slot 0, then passes slot 5. */
 	}
 
 	return;

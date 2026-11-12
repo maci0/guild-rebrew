@@ -16,7 +16,7 @@ extern char* g_773da8;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 
-unsigned short __cdecl gm_RandomMod(int);
+int __cdecl gm_RandomMod(unsigned short);
 char* __cdecl gm_SearchTable67(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -111,7 +111,7 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 				w = 0.0f;
 			}
 			w = (*(float*) 0x662924 - (float) fcn_0050c4e0((unsigned char*) p)) * w * *(double*) 0x662908;
-			r = gm_RandomMod(0x64);
+			r = gm_RandomMod(0x64) & 0xffff;
 			w = (float) r * w * 0.01;
 			if (cand == 0) {
 				best = w;
@@ -134,7 +134,7 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 		if (*(int*) (q + 0x2a) != *(int*) (cand + 1)) {
 			continue;
 		}
-		if (*(unsigned char*) (q + 0x37) < gm_RandomMod(0x32) + 0x32) {
+		if (*(unsigned char*) (q + 0x37) < (gm_RandomMod(0x32) & 0xffff) + 0x32) {
 			break;
 		}
 		if (a2 < 3) {
@@ -253,11 +253,11 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 	return 1;
 		}
 	}
+	return 0;
 log2:
 	sprintf(buf, "ai_CalcAngriff(): Meister %s hat aber noch eine Spionage bei '%s' nicht beendet", nm, cand + 5);
 	return 1;
 log1:
 	sprintf(buf, "ai_CalcAngriff(): Meister %s hat schon eine Spionage bei '%s' laufen", nm, cand + 5);
 	return 1;
-	return 0;
 }

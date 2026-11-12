@@ -30,21 +30,22 @@ int __cdecl fcn_004909f0(char* p, int unused, int* out)
 	(void) unused;
 	fcn_00507b00((int) (unsigned char) p[0x164]);
 	v = ((float) gm_GetEntitySkill(p, 3)
-		- ((float) (fcn_004fbd20(3) & 0xff) + flt_lit1) * flt_lit1_252)
-		* flt_lit1_42 * flt_lit1_1;
-	a = (float) ((*(float*) (p + 0xf4) - dbl_lit2) * *(float*) (p + 0xfc));
-	c = (float) ((*(float*) (p + 0x100) - dbl_lit2) * *(float*) (p + 0x108));
-	b = (float) ((*(float*) (p + 0x10c) - dbl_lit2) * *(float*) (p + 0x114));
+		- ((float) (fcn_004fbd20(3) & 0xff) + 1.0f) * 0.00396825420f)
+		* 0.0238095243f;
+	a = (float) ((*(float*) (p + 0xf4) - 2.0) * *(float*) (p + 0xfc));
+	c = (float) ((*(float*) (p + 0x100) - 2.0) * *(float*) (p + 0x108));
+	b = (float) ((*(float*) (p + 0x10c) - 2.0) * *(float*) (p + 0x114));
+	v = v * 1.1f;
 	fcn_004f4830(4, tmp);
 	m = *(int*) (tmp + 0x18);
-	if (v < flt_lit1 && m == 0) {
+	if (v < 1.0f && m == 0) {
 		if (b > a) {
 			*out = 1;
 			return 1;
 		}
 		return 0;
 	}
-	if (v > dbl_lit1 && m == 1) {
+	if (v > 1.0 && m == 1) {
 		if (c > a) {
 			*out = 0;
 			return m;

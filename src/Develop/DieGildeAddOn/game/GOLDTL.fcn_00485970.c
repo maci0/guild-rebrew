@@ -48,9 +48,9 @@ typedef struct
 
 extern int g_100b0a8;
 extern int g_100b0ac;
-extern int g_662910;
+extern unsigned char* lpGebaeudeINST;
 extern int g_773d78;
-extern signed char g_773d75;
+extern unsigned char g_773d75;
 
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl gm_FindNextFilteredEntity(void);
@@ -69,7 +69,7 @@ char* __cdecl gm_FindRecordById(int id);
 void __cdecl fcn_0050de80(int a, int* out);
 
 /* ADDRESS: GOLDTL 0x00485970 */
-int __cdecl fcn_00485970(char* a0, int a1, int a2)
+void __cdecl fcn_00485970(char* a0, int a1, int a2)
 {
 	fcn_00485970_EntA* pa;
 	fcn_00485970_EntB* pb;
@@ -177,10 +177,7 @@ label_485b77:
 								pb[idx].ent = ent;
 								pb[idx].obj = cont;
 								pb[idx].f34 = f1;
-								pb[idx].f1c = 0;
 								pb[idx].f24 = 0;
-								pb[idx].f28 = 0;
-								pb[idx].f2c = 0;
 								pb[idx].f38 = 0;
 								pb[idx].f3c = fcn_0050dfa0(a1, id);
 								pb[idx].f40 = gm_eval_SlotVoll(a1, id, 1000000);
@@ -205,8 +202,8 @@ label_485d61:
 		}
 	}
 	for (i = 0; i < 0xa900; i += 0xa9) {
-		rec = (char*) 0x90e094 + i;
-		t = *(char*) rec;
+		rec = (char*) lpGebaeudeINST + i;
+		t = *(unsigned char*) rec;
 		if (gm_GetBuildingTypeCategory(t) != 2)
 			continue;
 		cont = fcn_00502cd0(*(int*) (rec + 0x5d), 2, 0, 0x2a, 6);
@@ -218,7 +215,7 @@ label_485d61:
 			obj = gm_FindSlotById(g_773d75, id);
 			if (obj && *(int*) (obj + 4)) {
 				f1 = fcn_0050bb50(id, (unsigned char) g_773d75) * (float) *(int*) (rec + 0x45)
-				    * (float) g_662910;
+				    * 0.01f;
 				f0 = eval_ObjektPreis2Credits(id, 100) - f1;
 				idx = 0;
 				if (1 <= g_100b0a8) {
@@ -348,9 +345,10 @@ label_485f7e:
 			t = pa[i].f2c;
 			if (pb[j].f50 < t)
 				t = pb[j].f50;
+			pa[i].f34 = t;
 			fa = (float) t;
 			fb = (float) (*(int*) (a0 + 0x1b8) / 4) / pa[i].f1c;
-			if (fa > fb)
+			if (!(fa < fb))
 				fa = fb;
 			pa[i].f34 = (int) fa;
 		}
@@ -362,7 +360,7 @@ label_485f7e:
 		pb[i].f4c = t;
 	}
 	for (i = 0; i < g_100b0a8; i++) {
-		for (j = i + 1; j < g_100b0a8; j++) {
+		for (j = i; j < g_100b0a8; j++) {
 			if ((float) pa[i].f34 * pa[i].f20 < (float) pa[j].f34 * pa[j].f20) {
 				ta = pa[i];
 				pa[i] = pa[j];
@@ -371,7 +369,7 @@ label_485f7e:
 		}
 	}
 	for (i = 0; i < g_100b0ac; i++) {
-		for (j = i + 1; j < g_100b0ac; j++) {
+		for (j = i; j < g_100b0ac; j++) {
 			if ((float) pb[i].f4c * pb[i].f34 < (float) pb[j].f4c * pb[j].f34) {
 				tb = pb[i];
 				pb[i] = pb[j];
@@ -383,5 +381,5 @@ label_485f7e:
 		pb[i].f48 = i;
 	for (i = 0; i < g_100b0a8; i++)
 		pa[i].f30 = i;
-	return 0;
+	return;
 }

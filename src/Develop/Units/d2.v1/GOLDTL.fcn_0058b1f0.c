@@ -53,7 +53,7 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 	int mark;
 	int id1;
 	int id2;
-	int selected;
+	int form;
 
 	saved = 0;
 	if (type == (unsigned int) st->type) {
@@ -63,8 +63,7 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 	io_AppendText(0x6811b0);
 	d2_SetForm(st->handle, 4);
 	io_AppendText(0x6811b0);
-	selected = type;
-	fcn_00533f40(0, 0, st->owner, st->slot, 0x35, &id2, &id1, &selected);
+	fcn_00533f40(0, 0, st->owner, st->slot, 0x35, &id2, &id1, (int*) &type);
 
 	item = (SlotItem*) FindSlotEntryFiltered(0, a0, 0, 0, st->type);
 	count = 0;
@@ -75,11 +74,12 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 		de->id = item->id;
 		de->kind = fcn_004f1790(*(int*) (a0 + 0x65), (int*) item);
 		if (item->flag != -1) {
-			de->btn = fcn_0046f740(1, y, g_665f68[st->type], st->slot);
+			form = g_665f68[st->type];
 		} else {
-			de->btn = fcn_0046f740(1, y, g_665f58[st->type], st->slot);
+			form = g_665f58[st->type];
 		}
-		mark = fcn_0057b9d0(a0, item->id, de->kind);
+		de->btn = fcn_0046f740(1, y, form, st->slot);
+		mark = fcn_0057b9d0(a0, item->id, (unsigned char) de->kind);
 		if (mark != 0) {
 			fcn_0046f740(0xf, y + 7, 0x7de, st->slot);
 		}
@@ -95,11 +95,12 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 	}
 	*(int*) ((char*) g_1015ea0 + 0x3c + st->selected * 0x2f4) = 1;
 	*(int*) ((char*) g_1015ea0 + 0x38 + st->entries[st->selected].btn * 0x2f4) = 1;
-	for (i = count; i < 0x10; i++) {
-		st->entries[i].btn = -1;
-		st->entries[i].item = 0;
-		st->entries[i].id = 0;
-		st->entries[i].kind = -1;
+	de = st->entries + count;
+	for (i = 0x10 - count; i > 0; i--, de++) {
+		de->item = 0;
+		de->id = 0xff;
+		de->kind = -1;
+		de->btn = -1;
 	}
 	*(int*) (g_1016198 + st->slot * 0x3cc) = saved;
 	*(int*) (g_1016198 + st->slot * 0x3cc + 0x1c) = 0x35;

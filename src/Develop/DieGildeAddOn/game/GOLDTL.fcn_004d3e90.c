@@ -43,9 +43,9 @@ float __cdecl fcn_004d3e90(void* a0, unsigned int a1)
 		if (*(char*) ((char*) a0 + 0x1c4) != 2) {
 			return flt_6628cc;
 		}
-		return flt_1;
+		r = flt_1; break;
 	case 3:
-		return flt_1;
+		r = flt_1; break;
 	case 4:
 	case 5:
 		if (*(char*) ((char*) a0 + 0x1c4) != 2) {

@@ -51,7 +51,7 @@ void __cdecl fcn_0057c9f0(char* a0)
 		}
 		bonus += 0x19;
 		radius = (float) base + g_662c98;
-		count = (gm_RandomMod(0x18) & 0xffff) + 0xf;
+		count = (unsigned short) gm_RandomMod(0x18) + 0xf;
 	}
 	else if (kind == 2) {
 		level = *(int*) (a0 + 0xac);
@@ -63,15 +63,15 @@ void __cdecl fcn_0057c9f0(char* a0)
 		}
 		bonus += 0xf;
 		radius = (float) base + g_662914;
-		count = (gm_RandomMod(0x10) & 0xffff) + 0xc;
+		count = (unsigned short) gm_RandomMod(0x10) + 0xc;
 	}
 	else {
 		radius = 70.0f;
 		bonus = 0xa;
-		count = (gm_RandomMod(8) & 0xffff) + 0xa;
+		count = (unsigned short) gm_RandomMod(8) + 0xa;
 	}
 	count <<= 5;
-	for (p = g_7f4ca0; p < g_7f4ca0 + 0x65400; p += 0x21c) {
+	for (p = g_7f4ca0; (int) p < (int) (g_7f4ca0 + 0x65400); p += 0x21c) {
 		if (*(unsigned short*) p != 0xffff && p != (char*) ent
 			&& *(unsigned char*) (p + 2) < 0xa) {
 			if (radius < fcn_0050f980(*ent, *(unsigned short*) p, 1)) {
@@ -79,9 +79,9 @@ void __cdecl fcn_0057c9f0(char* a0)
 			}
 		}
 	}
-	bonus += found;
-	found = bonus * count;
-	io_FormatTextBuffer(buf, 0x41fa, handle, bonus, found);
+	found += bonus;
+	bonus = found * count;
+	io_FormatTextBuffer(buf, 0x41fa, handle, found, bonus);
 	fcn_00545d40(*(int*) (ent + 2), -1, buf, 1, 0x5fa, 0);
-	fcn_004c51a0(*(int*) (ent + 2), -1, g_773d75, found);
+	fcn_004c51a0(*(int*) (ent + 2), -1, g_773d75, bonus);
 }

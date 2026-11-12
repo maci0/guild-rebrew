@@ -1,3 +1,5 @@
+#include "g_680bd0.h"
+extern Entry680bd0 g_680bd0[48];
 /* ADDRESS: GOLDTL 0x004b3ce0 */
 int* __cdecl fcn_004b3ce0(int a0, int* a1)
 {
@@ -18,7 +20,7 @@ int* __cdecl fcn_004b3ce0(int a0, int* a1)
 		}
 		return 0;
 	}
-	end = (char*) 0x6810f4;
+	end = (char*) &g_680bd0[47];
 	if ((char*) a1 >= end) {
 		return 0;
 	}

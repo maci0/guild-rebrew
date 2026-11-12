@@ -119,14 +119,14 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 			if (i < g_85ab60) {
 				sel = g_100f1dc - 0xdf;
 				memset(msg, 0, sizeof msg);
-				if (fcn_0057eba0(0x2b, (int) a0, 0, sel)) {
+				if (!fcn_0057eba0(0x2b, (int) a0, 0, sel)) continue; {
 					node = lpObjektePROT + sel * 0x41;
 					if (q)
 						v7 = (int) fcn_00502cd0(*(int*) ((char*) q + 0x14), 1, 0, sel);
 					else
 						v7 = (int) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, sel);
 					if (v7) {
-						if (house && (((*(unsigned short*) house == 0) == 0xfd) || g_7746c8)) {
+						if (q && (((*(unsigned short*) q == 0) == 0xfd) || g_7746c8)) {
 							p = node + 1;
 							{
 								char* d = name;
@@ -148,7 +148,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 							*(int*) (msg + 0x2c) = g_7f4c00.b;
 							*(short*) (msg + 0x34) = g_7f4c00.d;
 							*(short*) (msg + 0x58) = (short) sel;
-							*(int*) (msg + 0x5c) = *(int*) (house + 2);
+							*(int*) (msg + 0x5c) = *(int*) ((char*) q + 2);
 						} else {
 							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);
 							*(unsigned char*) (msg + 4) = 0x0c;

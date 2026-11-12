@@ -141,13 +141,13 @@ void __cdecl fcn_00466550(int idx, int surf)
 			font = (char*) d2_GetResourceData(f->def);
 			e->i[0x1d4 / 4] = *(unsigned short*) (font + 6);
 			e->i[0x1d8 / 4] = *(unsigned short*) (font + 8);
-			if (e->i[0x60 / 4] != 0 && *(float*) (e + 0x1f4) == g_6628a8) {
+			if (e->i[0x60 / 4] != 0 && *(float*) ((char*) e + 0x1f4) == g_6628a8) {
 				fcn_0047cbf0(f->x, f->y, surf, font, g_772568);
 			} else {
 				fcn_0047cba0(f->x, f->y, surf, font, g_772568);
 			}
-			if (*(float*) (e + 0x1f4) != g_6628a8) {
-				y = (int) ((*(double*) 0x6629c8 - *(float*) (e + 0x1f4))
+			if (*(float*) ((char*) e + 0x1f4) != g_6628a8) {
+				y = (int) ((*(double*) 0x6629c8 - *(float*) ((char*) e + 0x1f4))
 				    * e->i[0x1c / 4] + f->y);
 				if (y > g_67d968) {
 					y = g_67d968;
@@ -156,8 +156,8 @@ void __cdecl fcn_00466550(int idx, int surf)
 				fcn_0047cbf0(f->x, f->y, g_77250c, font, g_772568);
 				fcn_0047a040(g_7725f8, g_7725fc, g_67d964, g_67d968);
 				if (g_67d370 != e->i[0]) {
-					width = (int) ((*(float*) (e + 0x1f4) <= *(double*) 0x6629c8
-					    ? *(float*) (e + 0x1f4)
+					width = (int) ((!(*(float*) (g_1015ea0 + f->ent * 0x2f4 + 0x1f4) > *(double*) 0x6629c8)
+					    ? *(float*) (g_1015ea0 + f->ent * 0x2f4 + 0x1f4)
 					    : *(double*) 0x6629c8) * *(double*) 0x662c38);
 					sprintf(buf3, (char*) 0x67d43c, width);
 					fcn_00472880(g_67d398 + 1);

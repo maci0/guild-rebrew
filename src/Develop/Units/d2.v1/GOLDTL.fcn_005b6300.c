@@ -1,4 +1,5 @@
 #include <string.h>
+extern int g_772514;
 
 /* Personnel/mercenary book controller. Native extent 0x005b6300..0x005b787b
  * (5499 bytes, chkstk frame 0x1a4c, no frame pointer).
@@ -241,7 +242,7 @@ int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
 		d2_SetForm(*(int*) (book + 0x228), 3);
 		d2_CreateGauge(&f.sel.a08, 0x20, *(int*) (0x77255c + 0xc) / 2 - 0x18);
 		el = d2_ShowTxt((short) (f.sel.a10 - 0x38), (short) (f.sel.a0c - 0x20),
-			(char*) *(int*) 0x14abbd4, *(int*) 0x772514);
+			(char*) *(int*) 0x14abbd4, g_772514);
 		G(G(0x1015ea0) + el * 756 + 0x6c) = 1;
 		G(G(0x1015ea0) + el * 756 + 0x18) = 0xa0;
 	}
@@ -263,7 +264,7 @@ int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
 		f.v44 = -1;
 	}
 	d2_SetForm(G(book + 0x230), 3);
-	rec = (char*) (*(int*) 0x772514 * 0x3cc + 0x1015f40);
+	rec = (char*) (g_772514 * 0x3cc + 0x1015f40);
 	f.v54 = G(rec + 0xc) / 2;
 	f.v2c = G(rec + 0x10) / 2;
 	for (i = 0; i < 0xc; i++) {

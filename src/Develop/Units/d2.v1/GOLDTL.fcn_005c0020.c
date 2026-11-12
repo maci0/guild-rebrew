@@ -63,8 +63,9 @@ void __cdecl fcn_005c0020(void)
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x173f);
 	d2_SetForm(dlg, 2);
+	h2 = g_772514;
 	d2_SetForm(dlg, 3);
-	fcn_0046e830(-1, -1, g_772514, g_772514, 0x767);
+	fcn_0046e830(-1, -1, g_772514, h2, 0x767);
 	n = fcn_004f61c0(v12, v11, v10, *(unsigned short*) ent);
 	count = 0;
 	for (i = 0; i < n; i++) {
@@ -107,13 +108,13 @@ void __cdecl fcn_005c0020(void)
 			g_774654 = 1;
 		}
 		else if (g_100f1dc != -1) {
+			v = -1;
 			for (i = 0; i < count; i++) {
-				if (g_67d370 == recs[i].x4) {
-					fcn_005bfdf0((char*) 0x7f4ca0 + g_774970 * 0x21c,
-					    recs[i].x0);
-					break;
-				}
+				if (g_67d370 == recs[i].x4) { v = i; break; }
 			}
+			if (v > -1)
+				fcn_005bfdf0((char*) 0x7f4ca0 + g_774970 * 0x21c,
+				    recs[v].x0);
 		}
 	} while (fcn_005373e0((void*) fcn_005c0020, 0x657c7) != 0);
 	fcn_00471e30(dlg);

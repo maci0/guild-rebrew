@@ -70,12 +70,14 @@ void __cdecl he_RunLagerErweitern(char* a0)
 				msg = 0x60b;
 			cat = fcn_005049a0((void*) ent);
 			io_FormatTextBuffer(buf, 0x1bbb, ent);
-			px = *(int*) (g_7f4ca4 + (*(unsigned short*) (a0 + 8)) * 0x21c);
-			v9 = *(int*) ((char*) ent + 1);
+
+
 			if (cat) {
-				v10 = *(int*) ((char*) cat + 2);
+				v10 = *(int*) ((char*) cat + 2); v9 = *(int*) ((char*) ent + 1);
+				px = *(int*) (g_7f4ca4 + (*(unsigned short*) (a0 + 8)) * 0x21c);
 				he_MessageBoxQuickjump(px, -1, buf, 0, msg, v9, v10, 0, 0);
-			} else {
+			} else { v9 = *(int*) ((char*) ent + 1);
+				px = *(int*) (g_7f4ca4 + (*(unsigned short*) (a0 + 8)) * 0x21c);
 				he_MessageBoxQuickjump(px, -1, buf, 0, msg, v9, -1, 0, 0);
 			}
 		}

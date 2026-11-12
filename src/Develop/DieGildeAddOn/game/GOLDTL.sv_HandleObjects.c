@@ -204,6 +204,7 @@ L744:
 		}
 		g_6b5c48 = *(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) p * 0x21c + 0x184);
 		v5 = g_7746a4;
+		list = g_7746ac;
 	}
 	if (g_7746f0 == 0 && g_7746f4 == 0 && g_7746b0 != 0 && g_7e2a9c == 0) {
 		g_7746c0 = v5;

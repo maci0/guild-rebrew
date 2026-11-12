@@ -1,4 +1,6 @@
 #include <string.h>
+#include "client_actions.h"
+#include "client_data.h"
 
 int __cdecl fcn_0064eeec(const char*);
 void __cdecl fcn_004c5530(void*);
@@ -21,16 +23,16 @@ int __cdecl fcn_004b1d10(int a1, int a2, char* s)
 		v = 1;
 	}
 	memset(buf, 0, 0xf8);
-	w = *(int*) (*(int*) 0x773da8 + 4);
+	w = *(int*) (g_773da8 + 4);
 	*(char*) (buf + 4) = 0x59;
 	*(int*) (buf + 0x58) = v;
-	*(int*) (buf + 0x2c) = *(int*) 0x7f4c04;
+	*(int*) (buf + 0x2c) = g_7f4c04;
 	*(int*) (buf + 8) = w;
-	*(int*) (buf + 0x28) = *(int*) 0x7f4c00;
+	*(int*) (buf + 0x28) = g_7f4c00.a;
 	*(int*) (buf + 0x0c) = -1;
-	*(unsigned short*) (buf + 0x36) = 2;
-	*(int*) (buf + 0x30) = *(int*) 0x7f4c08;
-	*(unsigned short*) (buf + 0x34) = *(unsigned short*) 0x7f4c0c;
+	*(unsigned char*) (buf + 0x36) = 2;
+	*(int*) (buf + 0x30) = g_7f4c08;
+	*(unsigned short*) (buf + 0x34) = (unsigned short) g_7f4c0c;
 	*(unsigned short*) (buf + 0x2c) = 0xb;
 	fcn_004c5530(buf);
 	return 1;

@@ -1,4 +1,6 @@
 #include <string.h>
+extern int g_773d40;
+extern char* g_773d44;
 
 // SIZE 0x44
 typedef struct HeadSet {
@@ -34,21 +36,23 @@ void __cdecl fcn_004fdd70(HeadSet* hs)
 	for (slot = hs->head, i = 0; i < 4; i++, slot++) {
 		fcn_0064d41a(icon, (char*) 0x69649c, base, i, kind);
 		*slot = 0xff;
-		for (j = 0; j < (*(int*) 0x773d40); j++) {
-			if ((*(char**) 0x773d44)[j * 0x30] == 0) {
+		for (j = 0; j < g_773d40; j++) {
+			p = g_773d44 + j * 0x30;
+			if (*p == 0) {
 				break;
 			}
-			if (fcn_0065f220(icon, (*(char**) 0x773d44) + j * 0x30) == 0) {
+			if (fcn_0065f220(icon, p) == 0) {
 				goto found;
 			}
 		}
 		fcn_0064d41a(icon, (char*) 0x696488, base, i);
 		*slot = 0xff;
-		for (j = 0; j < (*(int*) 0x773d40); j++) {
-			if ((*(char**) 0x773d44)[j * 0x30] == 0) {
+		for (j = 0; j < g_773d40; j++) {
+			p = g_773d44 + j * 0x30;
+			if (*p == 0) {
 				break;
 			}
-			if (fcn_0065f220(icon, (*(char**) 0x773d44) + j * 0x30) == 0) {
+			if (fcn_0065f220(icon, p) == 0) {
 				goto found;
 			}
 		}

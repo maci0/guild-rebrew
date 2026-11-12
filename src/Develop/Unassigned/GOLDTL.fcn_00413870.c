@@ -110,10 +110,31 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
 	if (ax >= map->stride && bx >= map->stride && cx >= map->stride) {
 		return 1;
 	}
-
 	lo = 0xff;
 	hi = 0;
-	if (ay != by) {
+	if (ay == by) {
+		if (ay == cy) {
+			/* one row: a single span from the leftmost to the rightmost x */
+			t = ax < bx ? ax : bx;
+			x = t < cx ? t : cx;
+			t = ax > bx ? ax : bx;
+			t = t > cx ? t : cx;
+			hit = fcn_004137e0(map, &lo, &hi, x, t, ay);
+		} else {
+			/* flat top: advance each edge toward the bottom vertex */
+			hit = fcn_004137e0(map, &lo, &hi, ax, bx, ay);
+			dx = (float) (cx - ax);
+			slope_a = dx / (float) (cy - ay);
+			slope_b = (float) (cx - bx) / (float) (cy - by);
+			left = (float) ax + slope_a;
+			right = (float) bx + slope_b;
+			for (y = ay + 1; y <= cy; y++) {
+				hit &= fcn_004137e0(map, &lo, &hi, (int) left, (int) right, y);
+				left += slope_a;
+				right += slope_b;
+			}
+		}
+	} else {
 		/* general triangle: the top row collapses to the apex */
 		slope_a = (float) (cx - ax) / (float) (cy - ay);
 		slope_b = (float) (bx - ax) / (float) (by - ay);
@@ -132,28 +153,7 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
 			left += slope_a;
 			right += slope_c;
 		}
-	} else if (ay != cy) {
-		/* flat top: both sides fall at the same rate */
-		hit = fcn_004137e0(map, &lo, &hi, ax, bx, ay);
-		dx = (float) (cx - ax);
-		slope_a = dx / (float) (cy - ay);
-		slope_b = dx / (float) (cy - by);
-		left = (float) ax + slope_a;
-		right = (float) bx + slope_b;
-		for (y = ay + 1; y <= cy; y++) {
-			hit &= fcn_004137e0(map, &lo, &hi, (int) left, (int) right, y);
-			left += slope_a;
-			right += slope_b;
-		}
-	} else {
-		/* one row: a single span from the leftmost to the rightmost x */
-		t = ax < bx ? ax : bx;
-		x = t < cx ? t : cx;
-		t = ax > bx ? ax : bx;
-		t = t > cx ? t : cx;
-		hit = fcn_004137e0(map, &lo, &hi, x, t, ay);
 	}
-
 	if (hit != 0) {
 		return hit;
 	}

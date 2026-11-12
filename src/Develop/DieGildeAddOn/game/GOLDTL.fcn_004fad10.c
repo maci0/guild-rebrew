@@ -1,5 +1,5 @@
 #include <string.h>
-
+extern char* g_entity_type_table;
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 int __cdecl fcn_004fa6f0(char* a1, int* a2, int* a3);
 void __cdecl fcn_004f4830(unsigned char a1, char* a2);
@@ -10,11 +10,11 @@ void __cdecl fcn_004fad10(void)
 	int* v4;
 	int* v12;
 	int* v22;
-	int* v17;
-	int* v18;
-	int* v2;
-	int* v1;
-	int v13[6];
+
+
+
+
+	unsigned char record[0x2d];
 	int v14;
 	int v15;
 	int v8;
@@ -22,12 +22,12 @@ void __cdecl fcn_004fad10(void)
 	int v9;
 	int v10;
 	int v11;
-	int v23;
-	int v24;
-	int v25;
-	int v26;
-	int v27;
-	char v16[12];
+
+
+
+
+
+	int stats[9];
 	unsigned char v3;
 	unsigned int* v5;
 	float v20;
@@ -50,17 +50,17 @@ void __cdecl fcn_004fad10(void)
 	v22 = (int*) 0x9a3800;
 	do {
 		if (*(int*) ((char*) v12 + 0x25) != 0 && *v12 != -1) {
-			memcpy(v13, v12, 0x2d);
-			v5 = (unsigned int*) gm_StartFilteredEntitySearch(1, 1, v27);
+			memcpy(record, v12, 0x2d);
+			v5 = (unsigned int*) gm_StartFilteredEntitySearch(1, 1, *(int*) (record + 0x21));
 			if (v5 != 0 && *(unsigned char*) v5 != 0) {
 				v8 = *(int*) ((char*) v5 + 0x61);
 				if (v8 != 0) {
-					v3 = *(unsigned char*) (0x868050 + *(unsigned char*) v5 * 0x24d);
+					v3 = *(unsigned char*) (g_entity_type_table + *(unsigned char*) v5 * 0x24d);
 					if ((v3 < 0xb || v3 >= 0xe) && v3 != 0x10) {
 						if (fcn_004fa6f0((char*) v8 + 0x4c, &v15, &v14) != 0) {
-							fcn_004f4830((unsigned char) v26, v16);
+							fcn_004f4830(record[0x1c], (char*) stats);
 							v8 = v14 + v15 * 8;
-							v20 = (float) v25 / (float) v24 * (float) v23;
+							v20 = (float) *(short*) (record + 0x1a) / (float) stats[4] * (float) stats[3];
 							v21 = v20 * *(float*) 0x6628cc;
 							*(float*) (v8 * 0x18 + 0x99ef8c) = v21 + *(float*) (v8 * 0x18 + 0x99ef8c);
 							v8 = v15 + 1 <= 8 ? v15 + 1 : 8;

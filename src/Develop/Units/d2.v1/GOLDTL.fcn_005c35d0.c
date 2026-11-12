@@ -1,3 +1,6 @@
+#include "Develop/DieGildeAddOn/game/game_data.h"
+#include "client_dialog_state.h"
+extern int g_14ce8e0;
 /* Dialog message loop for 0x6ac5d8: validates the click id through
    fcn_00504f30, shows the dialog, then forwards the 0x39 packet to
    fcn_004c5530 while fcn_005373e0 keeps the loop alive. */
@@ -7,7 +10,7 @@ int __cdecl fcn_00526120(int, int);
 void* __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(void*);
 void __cdecl fcn_00471e30(void*);
-int __cdecl fcn_0050cf50(char*, signed char);
+int __cdecl fcn_0050cf50(char*, int);
 int __cdecl fcn_0050b710(int, char);
 int __cdecl d2_SetForm(void*, int);
 int __cdecl io_AppendText(int, ...);
@@ -17,71 +20,71 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_0050b750(int, char);
-int __cdecl fcn_00471f80(int, char);
-int __cdecl fcn_00526010(char*, int);
+int __cdecl fcn_00471f80(int);
+int __cdecl fcn_00526010(char*, int, char);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x005c35d0 */
 void __cdecl fcn_005c35d0(char* e)
 {
-	char pkt[0xf4];
+	char pkt[0xf8];
 	int w;
 	int ctl;
 	int x;
 	int y;
-	void* dlg;
+	void* dlg; int id;
 
-	if (fcn_00504f30(*(unsigned char*) e, *(unsigned short*) 0x774970) != 1) {
+	id = *(int*) (e + 1); if (fcn_00504f30(*(unsigned char*) e, g_774970) != 1) {
 		fcn_00526120(*(int*) 0x14ab29c, 0);
 		return;
 	}
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac5d8);
 	fcn_00471b60(dlg);
 	x = fcn_0050cf50(e, *(signed char*) (e + 0x5c));
-	w = fcn_0050b710(x, *(unsigned char*) 0x773d75);
+	w = fcn_0050b710(x, g_773d75);
 	d2_SetForm(dlg, 2);
 	ctl = fcn_00472250(dlg, 2,
 	                   io_AppendText(0x17de, *(unsigned short*) (e + 0x25), e,
-	                                *(unsigned char*) 0x773d75));
-	x = (int) ((double) w * *(double*) 0x662aa0);
-	y = (int) ((double) x * *(double*) 0x662908);
+	                                g_773d75));
+	x = (int) ((double) w * 10.0);
+	y = (int) ((double) w * 0.5);
 	fcn_00472380(ctl, y, x, w);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005373e0(0, 0x677c7);
 	do {
-		x = gm_SearchTable67(w);
+		x = gm_SearchTable67(id);
 		if ((*(unsigned char*) (e + 0x5b) & 4) != 0 || x == 0) {
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 		}
-		if (*(int*) 0x14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 != 0) {
+			g_774654 = 1;
 		}
-		if (*(int*) 0x100f1dc == 2) {
-			x = fcn_0050b750(
-			    fcn_00471f80(ctl, *(unsigned char*) 0x773d75),
-			    *(unsigned char*) 0x773d75);
+		if (g_100f1dc == 2) {
+
+
+
 			if (fcn_00526010((char*) (0x7f4ca0 +
-			                          *(unsigned short*) 0x774970 * 0x21c),
-			                 x)) {
+			                          g_774970 * 0x21c),
+			                 fcn_0050b750(fcn_00471f80(ctl), g_773d75), g_773d75)) {
 				*(char*) (pkt + 4) = 0x21;
 				*(int*) (pkt + 8) = *(int*) (0x7f4ca4 +
-				                             *(unsigned short*) 0x774970 * 0x21c);
+				                             *(unsigned short*) (e + 0x25) * 0x21c);
 				*(int*) (pkt + 0xc) = -1;
 				*(char*) (pkt + 0x36) = 9;
 				*(int*) (pkt + 0x58) = *(int*) (e + 1);
 				*(int*) (pkt + 0x5c) = fcn_0050b750(
-				    fcn_00471f80(ctl, *(unsigned char*) 0x773d75),
-				    *(unsigned char*) 0x773d75);
+				    fcn_00471f80(ctl),
+				    g_773d75);
 				*(int*) (pkt + 0x60) = *(int*) (0x7f4ca4 +
-				                                *(unsigned short*) 0x774970 * 0x21c);
+				                                g_774970 * 0x21c);
 				fcn_004c5530(pkt);
 				fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 0x200, 0);
 			}
-			*(int*) 0x774654 = 1;
-		} else if (*(int*) 0x100f1dc == 1) {
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
+		} else if (g_100f1dc == 1) {
+			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) 0x5c35d0, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) fcn_005c35d0, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 }

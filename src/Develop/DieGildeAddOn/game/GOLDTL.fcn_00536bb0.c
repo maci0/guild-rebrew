@@ -21,7 +21,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00416300(int, ...);
 void __cdecl fcn_00415510(int, ...);
 void __cdecl fcn_004599d0(void*, void*);
-void __cdecl fcn_00459980(void*, void*, int, float);
+void __cdecl fcn_00459980(void*, void*, char, float);
 void __cdecl fcn_00459940(void*, void*, float);
 
 /* ADDRESS: GOLDTL 0x00536bb0 */
@@ -33,15 +33,15 @@ void __cdecl fcn_00536bb0(void)
 	int lim;
 	int idx;
 	int i;
-	int v1;
+	char v1;
 	float v2;
 	char* name;
-	unsigned char* p;
+
 
 	g_7e4534 = g_7f4c04 & 0xffff;
 	idx = g_7e4534;
 	if (g_7e453c != 0) {
-		fcn_00416300(g_7e453c, 1, 1, g_7e43a8[idx], 1000);
+		fcn_00416300(g_7e453c, 1, 1, g_7e43a8[idx], 1000); idx = g_7e4534;
 	}
 	if (g_7e4538 != 0) {
 		i = g_7e43a8[idx];
@@ -52,7 +52,7 @@ void __cdecl fcn_00536bb0(void)
 				i = 0;
 			}
 		}
-		fcn_00415510(g_7e4538, 1, 1, i, 1000);
+		fcn_00415510(g_7e4538, 1, 1, i, 1000); idx = g_7e4534;
 	}
 	f1 = g_7e4470[idx];
 	f2 = g_7e44d0[idx];
@@ -76,59 +76,59 @@ void __cdecl fcn_00536bb0(void)
 	if (g_6b89c0 == 0) {
 		return;
 	}
-	f = (float) (lim + 0x96) * (float) sqrt(f1 * f1 + f2 * f2) * 0.125f;
-	p = g_7e4544;
-	if (p[0x2a] == 0) {
+	f = (float) ((double) (lim + 0x96) * sqrt((double) f1 * f1 + (double) f2 * f2) * 0.125f);
+
+	if (g_7e4544[0x2a] == 0) {
 		if (lim < 0x32) {
 			i = (int) (unsigned int) gm_RandomMod(4);
-			if (fcn_0065f220(*(char**) (p + 0x1c), (char*) (0x6a2600 + i * 0x4c)) == 0) {
+			if (fcn_0065f220(*(char**) (g_7e4544 + 0x1c), (char*) (0x6a2600 + i * 0x4c)) == 0) {
 				i++;
 			}
 			name = (char*) (0x6a2600 + i * 0x4c);
 		} else if (lim < 0x96) {
 			i = (int) (unsigned int) gm_RandomMod(3);
-			if (fcn_0065f220(*(char**) (p + 0x1c), (char*) (0x6a2730 + i * 0x4c)) == 0) {
+			if (fcn_0065f220(*(char**) (g_7e4544 + 0x1c), (char*) (0x6a2730 + i * 0x4c)) == 0) {
 				i++;
 			}
 			name = (char*) (0x6a2730 + i * 0x4c);
 		} else {
 			i = (int) (unsigned int) gm_RandomMod(2);
-			if (fcn_0065f220(*(char**) (p + 0x1c), (char*) (0x6a2818 + i * 0x4c)) == 0) {
+			if (fcn_0065f220(*(char**) (g_7e4544 + 0x1c), (char*) (0x6a2818 + i * 0x4c)) == 0) {
 				i++;
 			}
 			name = (char*) (0x6a2818 + i * 0x4c);
 		}
-		fcn_004599d0(p, name);
-		*(int*) p = *(int*) (name + 0x40);
-		((int*) p)[6] = *(int*) (name + 0x44);
-		((int*) p)[5] = *(int*) (name + 0x48);
-		fcn_00459980((void*) g_6b89c0, p, 0xff, 1500.0f);
+		fcn_004599d0(g_7e4544, name);
+		*(int*) g_7e4544 = *(int*) (name + 0x40);
+		((int*) g_7e4544)[6] = *(int*) (name + 0x44);
+		((int*) g_7e4544)[5] = *(int*) (name + 0x48);
+		fcn_00459980((void*) g_6b89c0, g_7e4544, 0xff, 1500.0f);
 	}
-	if (p[0x2a] == 0xff) {
-		p = g_7e4540;
+	if (g_7e4544[0x2a] == 0xff) {
+
 		if (lim < 0x32) {
 			i = (int) (unsigned int) gm_RandomMod(4);
-			if (fcn_0065f220(*(char**) (p + 0x1c), (char*) (0x6a2600 + i * 0x4c)) == 0) {
+			if (fcn_0065f220(*(char**) (g_7e4540 + 0x1c), (char*) (0x6a2600 + i * 0x4c)) == 0) {
 				i++;
 			}
 			name = (char*) (0x6a2600 + i * 0x4c);
 		} else if (lim < 0x96) {
 			i = (int) (unsigned int) gm_RandomMod(3);
-			if (fcn_0065f220(*(char**) (p + 0x1c), (char*) (0x6a2730 + i * 0x4c)) == 0) {
+			if (fcn_0065f220(*(char**) (g_7e4540 + 0x1c), (char*) (0x6a2730 + i * 0x4c)) == 0) {
 				i++;
 			}
 			name = (char*) (0x6a2730 + i * 0x4c);
 		} else {
 			i = (int) (unsigned int) gm_RandomMod(2);
-			if (fcn_0065f220(*(char**) (p + 0x1c), (char*) (0x6a2818 + i * 0x4c)) == 0) {
+			if (fcn_0065f220(*(char**) (g_7e4540 + 0x1c), (char*) (0x6a2818 + i * 0x4c)) == 0) {
 				i++;
 			}
 			name = (char*) (0x6a2818 + i * 0x4c);
 		}
-		fcn_004599d0(p, name);
-		*(int*) p = *(int*) (name + 0x40);
-		((int*) p)[6] = *(int*) (name + 0x44);
-		((int*) p)[5] = *(int*) (name + 0x48);
+		fcn_004599d0(g_7e4540, name);
+		*(int*) g_7e4540 = *(int*) (name + 0x40);
+		((int*) g_7e4540)[6] = *(int*) (name + 0x44);
+		((int*) g_7e4540)[5] = *(int*) (name + 0x48);
 		fcn_00459980((void*) g_6b89c0, g_7e4544, 0, 1500.0f);
 	}
 	fcn_00459940((void*) g_6b89c0, g_7e4540, f * 0.75f);

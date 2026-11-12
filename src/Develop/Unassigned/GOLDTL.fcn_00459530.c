@@ -52,7 +52,7 @@ extern char* g_6b5de0;
 extern int g_6b86d4;
 extern unsigned char g_67a2ac;
 extern unsigned char g_6b7ff9;
-
+extern int g_6b7fac;
 int __cdecl fcn_00459050(Ent459*);
 void __cdecl fcn_00458e00(Ent459*, Node459*);
 
@@ -71,8 +71,8 @@ char __cdecl fcn_00459530(Ent459* e)
 	if (e->f_c == -1) {
 		fcn_00459050(e);
 	}
-	e->dt = (float) (*(unsigned long*) 0x6b7fac - e->last);
-	e->last = *(unsigned long*) 0x6b7fac;
+	e->dt = (float) ((unsigned long) g_6b7fac - e->last);
+	e->last = (unsigned long) g_6b7fac;
 	n = e->node;
 	if (!n) {
 		return 1;
@@ -86,7 +86,7 @@ char __cdecl fcn_00459530(Ent459* e)
 		}
 		from = n->from28;
 		to = n->to29;
-		c = (int) (from + (to - from) * v);
+		c = (int) ((double) from + ((double) to - (double) from) * n->fc);
 		if (c > 0xff) {
 			c = 0xff;
 		}

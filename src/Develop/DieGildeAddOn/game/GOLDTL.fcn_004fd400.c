@@ -33,6 +33,7 @@ int __cdecl fcn_004fd400(short* out, int* value)
 		if (limit == 0xffff) {
 			*(int**) 0x773d5c = 0;
 			*(int*) 0x696440 = 0xc80;
+			goto no_record;
 		} else {
 			rec = (int*) (0x7f4ca0 + limit * 0x21c);
 			*(int*) 0x696440 = best;
@@ -44,6 +45,7 @@ int __cdecl fcn_004fd400(short* out, int* value)
 		*value = *(int*) 0x696440;
 		return 1;
 	}
+no_record:
 	*out = -1;
 	*value = *(int*) 0x696440;
 	return 0;

@@ -13,37 +13,37 @@ void __cdecl fcn_00451500(float* a, float angle, float* m)
 {
 	float s;
 	float c;
-	float v5;
-	float v6;
-	float v7;
+	float v[3];
+
+
 	float v4;
 
-	v7 = g_662d68;
+	v[2] = g_662d68;
 	s = (float) sin(angle);
 	c = (float) cos(angle);
-	v5 = g_662d60 * c - g_662d64 * s;
-	v6 = g_662d60 * s + g_662d64 * c;
+	v[0] = g_662d60 * c - g_662d64 * s;
+	v[1] = g_662d60 * s + g_662d64 * c;
 	m[8] = a[0];
 	m[9] = a[1];
 	m[10] = a[2];
 	fcn_004518a0(m + 8);
-	v4 = -(v5 * m[8] + v7 * m[10] + v6 * m[9]);
-	m[4] = v4 * m[8] + v5;
-	m[5] = v4 * m[9] + v6;
-	m[6] = v4 * m[10] + v7;
-	if ((float) sqrt(m[4] * m[4] + m[5] * m[5] + m[6] * m[6]) < g_662ce8) {
-		v5 = -m[9];
-		m[4] = v5 * m[8] + g_662d60;
-		m[5] = v5 * m[9] + g_662d64;
-		v5 = v5 * m[10] + g_662d68;
-		m[6] = v5;
-		if ((float) sqrt(m[5] * m[5] + m[4] * m[4] + v5 * v5) < g_662ce8) {
-			v5 = -m[10];
-			m[4] = v5 * m[8] + g_662d40[0];
-			m[5] = v5 * m[9] + g_662d40[1];
-			v5 = v5 * m[10] + g_662d40[2];
-			m[6] = v5;
-			if ((float) sqrt(m[5] * m[5] + m[4] * m[4] + v5 * v5) < g_662ce8) {
+	v4 = -(v[0] * m[8] + v[2] * m[10] + v[1] * m[9]);
+	m[4] = v[0] = v4 * m[8] + v[0];
+	m[5] = v[1] = v4 * m[9] + v[1];
+	m[6] = v[2] = v4 * m[10] + v[2];
+	if ((float) sqrt(v[0] * v[0] + (v[1] * v[1] + v[2] * v[2])) < g_662ce8) {
+		v[0] = -m[9];
+		m[4] = v[0] * m[8] + g_662d60;
+		m[5] = v[0] * m[9] + g_662d64;
+		v[0] = v[0] * m[10] + g_662d68;
+		m[6] = v[0];
+		if ((float) sqrt(m[5] * m[5] + (m[4] * m[4] + v[0] * v[0])) < g_662ce8) {
+			v[0] = -m[10];
+			m[4] = v[0] * m[8] + g_662d40[0];
+			m[5] = v[0] * m[9] + g_662d40[1];
+			v[0] = v[0] * m[10] + g_662d40[2];
+			m[6] = v[0];
+			if ((float) sqrt(m[5] * m[5] + (m[4] * m[4] + v[0] * v[0])) < g_662ce8) {
 				m[0xe] = 0.0f;
 				m[0xd] = 0.0f;
 				m[0xc] = 0.0f;

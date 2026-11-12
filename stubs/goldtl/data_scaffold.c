@@ -69,3 +69,5 @@ int g_6b85b4 = 0;
 int g_6b85b8 = 0;
 int g_6b85bc = 0;
 int g_1041d68 = 0;
+/* 0x14b55a4: zero-filled .bss dword read by 0x58f6a0 (mov eax,[0x14b55a4] at 0x58f6c7); owner TU unknown. */
+int g_14b55a4 = 0;

@@ -34,5 +34,5 @@ int __cdecl fcn_004ee160(char* a0)
 			sum += *(float*) (q + 4) + *(float*) p2;
 		}
 	}
-	return (int) (sum * *(float*) 0x664330 + total * *(float*) 0x664330) << 5;
+	return (int) (sum * 500.0f + total * 500.0f) << 5;
 }

@@ -56,6 +56,7 @@ extern char* g_7746cc;
 extern int g_7746f0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_7ea360;
+extern double g_662b20;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 extern char s_6aa194[];
@@ -98,9 +99,9 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 {
 	char buf[0x800];
 	Packet pkt;
-	int out1[3];
-	int out2[3];
-	int out3[3];
+	int out[9];
+
+
 	int btnA;
 	int btnB;
 	int btnC;
@@ -110,7 +111,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	int cnt3;
 	int cnt6c;
 	int sum;
-	int i;
+	int i; double alpha;
 	int hwnd;
 	Shop* t;
 	Player* pl;
@@ -129,10 +130,10 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	fcn_0052a0c0(obj, 1);
 	d2_SetForm(dlg, 2);
 	hwnd = g_772514;
-	fcn_005c78f0(0, 0x762, out1, hwnd);
-	fcn_005c78f0(1, 0x763, out2, hwnd);
-	fcn_005c78f0(2, 0x764, out3, hwnd);
-	d2_SetForm(out1[0], 1);
+	fcn_005c78f0(0, 0x762, out, hwnd);
+	fcn_005c78f0(1, 0x763, out + 3, hwnd);
+	fcn_005c78f0(2, 0x764, out + 6, hwnd);
+	d2_SetForm(dlg, 1);
 	if (t->x0 != 4 && t->x0 != 0x10) {
 		d2_SetBackgroundTexture(s_6ac7fc, *(int*) g_77255c);
 	}
@@ -148,17 +149,18 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	}
 	else if (t->x0 == 0x10) {
 		btnC = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5e) != 0;
-	}
-	fcn_00472640(out1[0], btnA != 0);
-	fcn_00472640(out2[0], btnB != 0);
-	fcn_00472640(out3[0], btnC);
+	} else { btnC = 1; }
+	fcn_00472640(out[0], btnA != 0);
+	fcn_00472640(out[3], btnB != 0);
+	fcn_00472640(out[6], btnC);
 	for (;;) {
 		d2_SetForm(dlg, 1);
 		i = g_6b7fac - start;
-		*(float*) (g_77255c + 0x3a4) = (float) ((double) i * 0.0013333333333333333);
-		if (*(float*) (g_77255c + 0x3a4) > 0.4f) {
-			*(float*) (g_77255c + 0x3a4) = 0.4f;
-		}
+		alpha = (double) (unsigned int) i * 0.0013333333333333333;
+		if (!(alpha < g_662b20)) { alpha = g_662b20; }
+		*(float*) (g_77255c + 0x3a4) = (float) alpha;
+
+
 		if (g_14ce8e0 != 0) {
 			if (CountDisplayCounters() != 0) {
 				sv_ClearObjectSelection();
@@ -191,24 +193,24 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 			p = he_fn_Handlung();
 		}
 		hwnd = g_772514;
-		g_772514 = hwnd;
+		g_772514 = out[2];
 		io_AppendText(s_6aa194, cnt2, 0x51e, 0x1a47, 0x16b9);
-		g_772514 = hwnd;
+		g_772514 = out[5];
 		io_AppendText(s_6aa194, cnt3, 0x51e, 0x1a47, 0x16ba);
-		g_772514 = hwnd;
+		g_772514 = out[8];
 		io_AppendText(s_6ac7dc, cnt6c, 0x51e, 0x1a48);
 		if (g_100f1dc != -1) {
 			if (CountDisplayCounters() != 0) {
 				i = 0;
 				do {
-					if (out1[i * 3] != -1 && g_67d370 == out1[i * 3]) {
+					if (out[i * 3] != -1 && g_67d370 == out[i * 3]) {
 						sum = cnt3 + cnt2;
 						if (i == 0 || i == 1) {
-							q = (unsigned int*) 0x7f4e1c;
+							q = (unsigned int*) (g_7f4ca0 + 0x17c);
 							do {
 								if (*(char*) ((char*) q + 0xc) != 0) {
 									memset(&pkt, 0, sizeof(pkt));
-									if (*(char*) *q != 0 && *(char*) *q == 0x16) {
+									if (*q != 0 && *(char*) *q == 0x16) {
 										sum--;
 									}
 									if (sum >= 3) {
@@ -216,7 +218,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 										goto send;
 									}
 									pkt.type = 0x16;
-									pkt.x8 = *(int*) g_7f4ca4;
+									pkt.x8 = *(int*) (g_7f4ca0 + g_774970 * 0x21c + 4);
 									pkt.xc = *(int*) (obj + 1);
 									pkt.name = *(Name14*) &g_7f4c00;
 									pkt.x36 = 1;
@@ -227,13 +229,13 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 										pkt.x60 = -1;
 									}
 									*(char*) &pkt.x58 = (char) (i + 2);
-									pkt.x5c = *(int*) g_7f4ca4;
-									fcn_00529160(obj, 0, *(unsigned short*) g_7f4ca0, 0);
+									pkt.x5c = *(int*) ((char*) q - 0x178);
+									fcn_00529160(obj, 0, *(unsigned short*) ((char*) q - 0x17c), 0);
 									fcn_004c5530(&pkt);
 									sum++;
 								}
 								q += 0x87;
-							} while ((int) q < 0x85a21c);
+							} while ((int) q < (int) (g_7f4ca0 + 0x6557c));
 						}
 						else {
 							pl = (Player*) g_7f4ca4;
@@ -260,7 +262,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 									sum++;
 								}
 								pl++;
-							} while ((int) pl < 0x85a0a4);
+							} while ((int) pl < (int) (g_7f4ca0 + 0x65404));
 						}
 						if (sum != 0) {
 send:
@@ -280,7 +282,7 @@ send:
 			else {
 				i = 0;
 				do {
-					if (out1[i * 3] != -1 && g_67d370 == out1[i * 3]) {
+					if (out[i * 3] != -1 && g_67d370 == out[i * 3]) {
 						if (i != 2) {
 							for (p = fcn_005463a0(2, 0, 0x16, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
 								if (*(char*) (p + 0xac) == (char) (i + 2)) {

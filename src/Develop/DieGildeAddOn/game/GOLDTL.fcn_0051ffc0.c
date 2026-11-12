@@ -10,7 +10,7 @@ int __cdecl fcn_0051fd50(int a, int b, unsigned int handle);
 int __cdecl fcn_0051fd00(int a);
 int __cdecl fcn_0051ad90(int a);
 int __cdecl m_is_tracked(void* object);
-int __cdecl vfs_fwrite(void* buf, int size, int count, unsigned int handle);
+unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, unsigned int handle);
 
 /* ADDRESS: GOLDTL 0x0051ffc0 */
 int __cdecl fcn_0051ffc0(unsigned int handle)
@@ -30,7 +30,7 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 			count += 1;
 		}
 	}
-	if (vfs_fwrite(&count, 4, 1, handle) < 1) {
+	if (vfs_fwrite(&count, 4, 1, handle) <= 0) {
 		return 0;
 	}
 	for (i = 0x7f4e24; i < 0x85a224; i += 0x21c) {
@@ -46,7 +46,7 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 			count += 1;
 		}
 	}
-	if (vfs_fwrite(&count, 4, 1, handle) < 1) {
+	if (vfs_fwrite(&count, 4, 1, handle) <= 0) {
 		return 0;
 	}
 	i = 0;
@@ -74,8 +74,8 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 	} while (i < 0xc5440);
 	i = 0;
 	for (;;) {
-		memset(&rec, 0, 0x194);
 		flag = 0;
+		memset(&rec, 0, 0x194);
 		src = g_6b5c20 + i;
 		idx = *(int*) (src + 0x14);
 		if (idx >= 0 && idx < 0x300) {
@@ -87,31 +87,31 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 				flag = *(char*) (src + 9);
 				memcpy(&rec, src, 0x194);
 			}
-			if (vfs_fwrite(&flag, 1, 1, handle) < 1) {
+			if (vfs_fwrite(&flag, 1, 1, handle) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite((char*) &rec + 0xc, 4, 1, handle) < 1) {
+			if (vfs_fwrite((char*) &rec + 0xc, 4, 1, handle) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite((char*) &rec + 0x14, 4, 1, handle) < 1) {
+			if (vfs_fwrite((char*) &rec + 0x14, 4, 1, handle) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite((char*) &rec + 0x30, 0x20, 1, handle) < 1) {
+			if (vfs_fwrite((char*) &rec + 0x30, 0x20, 1, handle) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite((char*) &rec + 0x50, 0x20, 1, handle) < 1) {
+			if (vfs_fwrite((char*) &rec + 0x50, 0x20, 1, handle) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite((char*) &rec + 0xf0, 0xa0, 1, handle) < 1) {
+			if (vfs_fwrite((char*) &rec + 0xf0, 0xa0, 1, handle) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite((char*) &rec + 0x190, 1, 1, handle) < 1) {
+			if (vfs_fwrite((char*) &rec + 0x190, 1, 1, handle) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite((char*) &rec + 0x24, 4, 1, handle) < 1) {
+			if (vfs_fwrite((char*) &rec + 0x24, 4, 1, handle) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite((char*) &rec + 0x28, 4, 1, handle) < 1) {
+			if (vfs_fwrite((char*) &rec + 0x28, 4, 1, handle) <= 0) {
 				return 0;
 			}
 		}

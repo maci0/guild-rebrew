@@ -1,4 +1,5 @@
 #include <string.h>
+#include <math.h>
 
 extern int* g_104336c;
 extern int* g_1005900;
@@ -35,8 +36,8 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 {
 	char name[0x40];
 	char ctx[0x54];
-	char buf[0x40];
-	char res[0x10];
+
+
 	float pos[3];
 	float ox1;
 	float oy1;
@@ -44,8 +45,8 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 	float oy2;
 	float dx;
 	float dy;
-	float adx;
-	float ady;
+	double adx;
+	double ady;
 	float rate;
 	float step;
 	int cellx;
@@ -99,7 +100,7 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 		g_1005908 = 2;
 	}
 	fcn_004bdd40((int) &g_1005900);
-	i = fcn_00597ff0(a1, buf);
+	i = fcn_00597ff0(a1, ctx);
 	if (i == 0) {
 		gv_Free3Fields(g_1005904);
 		return 0;
@@ -107,7 +108,7 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 	pos[0] = 0.0f;
 	pos[1] = 0.0f;
 	pos[2] = 0.0f;
-	fcn_00455540((char*) a0, pos, (float*) res);
+	fcn_00455540((char*) a0, pos, (float*)(ctx + 0x40));
 	*(int*) (ctx + 0x50) = 0;
 	fcn_004379a0((char*) g_67a370, 0, 0x180, fcn_004bdeb0, ctx);
 	if (*(int*) (ctx + 0x50) == 0) {
@@ -122,20 +123,24 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 	pos[0] = *(float*) (g_1005900 + 0x18) + *(float*) (box + 0x40);
 	pos[1] = *(float*) (box + 0x44);
 	pos[2] = *(float*) (g_1005900 + 0x1e) + *(float*) (box + 0x48);
-	fcn_004bdfb0(&oy1, &ox1, pos, box, (char**) &g_1005900);
+	fcn_004bdfb0(&oy1, &ox1, pos, *(char**)(ctx + 0x50), (char**) &g_1005900);
 	pos[0] = *(float*) (box + 0x50) - *(float*) (g_1005900 + 0x18);
 	pos[1] = *(float*) (box + 0x44);
 	pos[2] = *(float*) (g_1005900 + 0x1e) + *(float*) (box + 0x48);
-	fcn_004bdfb0(&oy2, &ox2, pos, box, (char**) &g_1005900);
-	count = 0x200;
-	dst = (char*) g_1006114;
-	map = (char*) g_1005910;
-	while (count) {
-		*(int*) dst = *(int*) map;
-		dst += 4;
-		map += 4;
-		count--;
-	}
+	fcn_004bdfb0(&oy2, &ox2, pos, *(char**)(ctx + 0x50), (char**) &g_1005900);
+	if (fcn_004bdbe0((int)&g_1005900, (int)oy1, (int)ox1, -1, -1) == 0) {
+        gv_Free3Fields(g_1005904);
+        return 0;
+    }
+	memcpy((char*) g_1006114, (char*) g_1005910, 0x800);
+
+
+
+
+
+
+
+
 	g_1006110 = g_1006914;
 	if (fcn_004bdbe0((int) &g_1005900, (int) oy2, (int) ox2, -1, -1) == 0) {
 		gv_Free3Fields(g_1005904);
@@ -143,15 +148,15 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 	}
 	if (g_1006110 > g_1006914) {
 		if (g_1006110 >= 5) {
-			count = 0x200;
-			dst = (char*) g_1006114;
-			map = (char*) g_1005910;
-			while (count) {
-				*(int*) dst = *(int*) map;
-				dst += 4;
-				map += 4;
-				count--;
-			}
+			memcpy((char*) g_1006114, (char*) g_1005910, 0x800);
+
+
+
+
+
+
+
+
 			g_1006110 = g_1006914;
 		} else {
 			goto copy_offset;
@@ -161,30 +166,24 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 	}
 	goto line;
 copy_offset:
-	count = 0x200;
-	dst = (char*) g_1006114 + g_1006110 * 2;
-	map = (char*) g_1005910;
-	while (count) {
-		*(int*) dst = *(int*) map;
-		dst += 4;
-		map += 4;
-		count--;
-	}
+	memcpy((char*) g_1006114 + g_1006110 * 2, (char*) g_1005910, 0x800);
+
+
+
+
+
+
+
+
 	g_1006110 += g_1006914;
 line:
 	dy = oy2 - oy1;
 	dx = ox2 - ox1;
-	adx = dx;
-	if (adx < 0.0f) {
-		adx = -adx;
-	}
-	ady = dy;
-	if (ady < 0.0f) {
-		ady = -ady;
-	}
-	if (adx <= ady) {
+	adx = fabs(dx);
+	ady = fabs(dy);
+	if (ady > adx) {
 		rate = dx / ady;
-		step = (rate != 0.0f) ? -1.0f : 1.0f;
+		step = (dy > 0.0f) ? 1.0f : -1.0f;
 		cellx = (int) oy1;
 		celly = (int) oy2;
 		if (cellx != celly) {
@@ -205,7 +204,7 @@ line:
 		}
 	} else {
 		rate = dy / adx;
-		step = (rate != 0.0f) ? -1.0f : 1.0f;
+		step = (dx > 0.0f) ? 1.0f : -1.0f;
 		cellx = (int) ox1;
 		celly = (int) ox2;
 		if (cellx != celly) {
@@ -214,7 +213,7 @@ line:
 				g_1006114[g_1006110 * 2 + 1] = (unsigned char) (int) ox1;
 				g_1006110++;
 				map = *(char**) (g_1005904 + 0x24);
-				*(int*) (map + ((int) oy1 * *g_1005900 + (int) ox1) * 0x1c) = 6;
+				*(int*) (map + ((int) ox1 * *g_1005900 + (int) oy1) * 0x1c) = 6;
 				ox1 += step;
 				oy1 += rate;
 				cellx = (int) ox1;

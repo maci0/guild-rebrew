@@ -369,7 +369,7 @@ compare:
     fcn_004230e0((char*) bank);
     fcn_004230e0((char*) snd);
     fcn_004cfe20();
-    fcn_004e3640();
+    fcn_004e3640(); return;
 
 err:
     ReportClientMessage((char*) 0x68cc70);

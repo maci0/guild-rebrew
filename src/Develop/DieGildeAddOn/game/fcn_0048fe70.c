@@ -6,7 +6,8 @@ int __cdecl fcn_0050d320(int a, char b);
 int __cdecl fcn_004f4440(char* a1, int a2, int a3, int a4, int* out);
 int __cdecl fcn_004f1790(int a, int* b);
 int __cdecl fcn_0042e410(int a);
-
+extern unsigned char* lpGebaeudePROT;
+extern unsigned char* lpGebaeudeINST; extern unsigned char g_773d75; extern float g_664160;
 /* ADDRESS: GOLDTL 0x0048fe70 */
 int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
 {
@@ -19,7 +20,7 @@ int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
 	int v;
 	int out;
 	int m;
-	int t;
+	int t, r;
 
 	v9 = 0;
 	if (a2 != 0) {
@@ -48,7 +49,7 @@ int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
 			}
 		}
 	}
-	rec = *(char**) 0x90e094;
+	rec = (char*) lpGebaeudeINST;
 	for (i = 0; i < 8; i++) {
 		cand[i] = 0;
 	}
@@ -56,7 +57,7 @@ int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
 	a2 = 0;
 	do {
 		if (*rec != 0 && (rec[0x5a] & 1) == 0
-		    && *(char*) (*(int*) 0x868050 + (unsigned char) *rec * 0x24d) == 0x1d) {
+		    && lpGebaeudePROT[(unsigned char) *rec * 0x24d] == 0x1d) {
 			if (n < 8) {
 				cand[n] = (int) rec;
 				n++;
@@ -87,8 +88,8 @@ int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
 		} while (v > *v9);
 		if (v4 != 0) {
 			out = fcn_004f4550((int) a1, *v9, *v4, &a2);
-			m = fcn_0050d320((int) a1, *(char*) 0x773d75);
-			if ((int) ((float) m * *(float*) 0x664160) <= out) {
+			m = fcn_0050d320((int) a1, g_773d75);
+			if ((int) ((float) m * g_664160) <= out) {
 				return 0;
 			}
 			a3[4] = 5;
@@ -104,15 +105,15 @@ int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
 		v9 = (int*) cand[fcn_0042e410(n) & 0xffff];
 		v4 = (int*) fcn_004f18d0(0, (char*) v9, 0, 0x4f1840, 0xff);
 		if (v4 != 0) {
-			t = fcn_004f4440((int) a1, 0xff, *v4, 1, &out);
-			m = fcn_0050d320((int) a1, *(char*) 0x773d75);
-			if ((int) ((float) m * *(float*) 0x664160) < t) {
+			t = fcn_004f4440((int) a1, 0xff, *v4, 1, &r);
+			m = fcn_0050d320((int) a1, g_773d75);
+			if ((int) ((float) m * g_664160) < t) {
 				return 0;
 			}
 			a3[4] = 4;
 			*(int*) ((char*) a3 + 0xc) = *(int*) ((char*) v9 + 1);
-			a3[2] = t;
 			a3[1] = *v4;
+			a3[2] = t;
 			return 0x3e;
 		}
 	}

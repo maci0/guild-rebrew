@@ -35,6 +35,7 @@ char __cdecl fcn_00407e30(char* map, float* from, float* to, int x, int y, int* 
 	int dy;
 	int span;
 	int type;
+	int world;
 	float d;
 	float dx;
 	float ey;
@@ -45,7 +46,8 @@ char __cdecl fcn_00407e30(char* map, float* from, float* to, int x, int y, int* 
 		return 0;
 	}
 
-	if (flags & 0x10) {
+	world = flags & 0x10;
+	if (world) {
 		type = ((int*) *(int**) (map + 0x24))[(*(int*) (map + 0x20) * y + x) * 7];
 		if (type != 0 && type != 0x0d) {
 			*outX = x;
@@ -64,7 +66,7 @@ char __cdecl fcn_00407e30(char* map, float* from, float* to, int x, int y, int* 
 	*outX = -1;
 	*outY = -1;
 
-	if ((flags & 1) || (flags & 0x10)) {
+	if ((flags & 1) || world) {
 		for (; i < *(int*) (map + 0x20) && i < maxRows; i++) {
 			rowEnd = *(int*) (map + 0x20) - 1;
 			if (rowEnd > i + y) {

@@ -10,7 +10,7 @@ extern char g_14cf7cd;
 extern char g_14cf7d0;
 extern int g_1040490;
 extern int g_1040494;
-extern float flt_1;
+extern float g_6628a0;
 extern float g_6628a8;
 extern float g_6628bc;
 extern float g_662948;
@@ -23,8 +23,8 @@ extern float g_665f4c;
 extern float g_665f50;
 extern double g_662958;
 
-#define MAX(a, b) ((a) >= (b) ? (a) : (b))
-#define MIN(a, b) ((a) >= (b) ? (b) : (a))
+#define MAX(a, b) ((a) < (b) ? (b) : (a))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 /* ADDRESS: GOLDTL 0x005875c0 */
 void __cdecl fcn_005875c0(char* o, float dt)
@@ -42,8 +42,8 @@ void __cdecl fcn_005875c0(char* o, float dt)
 		*(float*) (o + 0x20) += dt * g_662948;
 	else
 		*(float*) (o + 0x20) -= dt * g_665f50;
-	if (*(float*) (o + 0x20) > flt_1 || *(float*) (o + 0x20) > g_6628a8)
-		*(float*) (o + 0x20) = (*(float*) (o + 0x20) > flt_1) ? flt_1 : *(float*) (o + 0x20);
+	if (*(float*) (o + 0x20) > g_6628a0 || *(float*) (o + 0x20) > g_6628a8)
+		*(float*) (o + 0x20) = (*(float*) (o + 0x20) > g_6628a0) ? g_6628a0 : *(float*) (o + 0x20);
 	else
 		*(float*) (o + 0x20) = g_6628a8;
 	if (g_14ce8d0 != 0) {
@@ -103,16 +103,14 @@ no_track:
 				*(float*) (o + 0x54) += dt * g_662948;
 			else
 				*(float*) (o + 0x54) += dt * g_6628bc;
-			if (*(float*) (o + 0x54) >= flt_1)
-				*(float*) (o + 0x54) = flt_1;
+			*(float*) (o + 0x54) = MIN(*(float*) (o + 0x54), g_6628a0);
 		}
 		else {
 			if (*(float*) (o + 0x54) > g_6628a8)
 				*(float*) (o + 0x54) -= dt * g_662948;
 			else
 				*(float*) (o + 0x54) -= dt * g_6628bc;
-			if (*(float*) (o + 0x54) <= g_662a94)
-				*(float*) (o + 0x54) = g_662a94;
+			*(float*) (o + 0x54) = *(float*) (o + 0x54) > g_662a94 ? *(float*) (o + 0x54) : g_662a94;
 		}
 		*(float*) (o + 0x5c) = dt * *(float*) (o + 0x54) * g_662acc;
 	}
@@ -134,16 +132,14 @@ no_track:
 				*(float*) (o + 0x58) += dt * g_662948;
 			else
 				*(float*) (o + 0x58) += dt * g_6628bc;
-			if (*(float*) (o + 0x58) >= flt_1)
-				*(float*) (o + 0x58) = flt_1;
+			*(float*) (o + 0x58) = MIN(*(float*) (o + 0x58), g_6628a0);
 		}
 		else {
 			if (*(float*) (o + 0x58) > g_6628a8)
 				*(float*) (o + 0x58) -= dt * g_662948;
 			else
 				*(float*) (o + 0x58) -= dt * g_6628bc;
-			if (*(float*) (o + 0x58) <= g_662a94)
-				*(float*) (o + 0x58) = g_662a94;
+			*(float*) (o + 0x58) = *(float*) (o + 0x58) > g_662a94 ? *(float*) (o + 0x58) : g_662a94;
 		}
 		*(float*) (o + 0x60) = dt * *(float*) (o + 0x58) * g_662948;
 	}

@@ -18,9 +18,7 @@ unsigned int* __cdecl fcn_00477ae0(int a0, int a1, unsigned int a2,
 	unsigned int row;
 	char* v7;
 	char* v20;
-	char v18;
-	char v32;
-	char v33;
+	char black[3];
 	unsigned short xmin;
 	unsigned short ymin;
 	unsigned short xmax;
@@ -30,9 +28,9 @@ unsigned int* __cdecl fcn_00477ae0(int a0, int a1, unsigned int a2,
 	int len;
 	unsigned int i;
 
-	v18 = 0;
-	v32 = 0;
-	v33 = 0;
+	black[0] = 0;
+	black[1] = 0;
+	black[2] = 0;
 	xmax = 0;
 	xmin = (unsigned short) a2;
 	ymax = 0;
@@ -80,7 +78,7 @@ unsigned int* __cdecl fcn_00477ae0(int a0, int a1, unsigned int a2,
 	*(unsigned short*) ((char*) v6 + 0x10) = ymin;
 	*(unsigned short*) ((char*) v6 + 0x12) = (unsigned short) (xmax + 1);
 	*(unsigned short*) ((char*) v6 + 0x14) = (unsigned short) (ymax + 1);
-	if (fcn_00475780((char*) 0x67d95c, &v18) && 1 <= (int) a3) {
+	if (fcn_00475780((char*) 0x67d95c, black) && 1 <= (int) a3) {
 		step = a6 * 3;
 		v7 = a4 + (a1 * a6 + a0) * 3;
 		for (row = 0; (int) row < (int) a3; row++) {

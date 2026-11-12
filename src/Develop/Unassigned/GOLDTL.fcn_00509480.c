@@ -4,7 +4,7 @@ char* __cdecl gm_LookupEntityRecordById(int a1);
 /* ADDRESS: GOLDTL 0x00509480 */
 int __cdecl fcn_00509480(char* a, char* b)
 {
-	char* other;
+	char* other; int* refs; int* p;
 	int age_diff;
 	int i;
 	int first;
@@ -13,8 +13,8 @@ int __cdecl fcn_00509480(char* a, char* b)
 	if (b[8] == 0) {
 		return 0;
 	}
-	for (i = 0; i < 8; i++) {
-		if (*(int*) (a + 0x5c + i * 4) == *(int*) (b + 4)) {
+	refs = (int*) (a + 0x5c); for (i = 0, p = refs; i < 8; i++, p++) {
+		if (*p == *(int*) (b + 4)) {
 			break;
 		}
 	}
@@ -33,17 +33,17 @@ int __cdecl fcn_00509480(char* a, char* b)
 		}
 		first = 3;
 	}
-	for (i = 3; i < 8; i++) {
-		if (*(int*) (a + 0x5c + i * 4) == -1) {
+	for (i = 3, p = refs + 3; i < 8; i++, p++) {
+		if (*p == -1) {
 			continue;
 		}
-		other = (char*) gm_LookupEntityRecordById(*(int*) (a + 0x5c + i * 4));
+		other = (char*) gm_LookupEntityRecordById(*p);
 		if (other != 0 && fcn_004fffb0(*(unsigned short*) other) == 0 && other[8] != 0) {
-			return 0;
+			break;
 		}
 	}
-	if (first > 2) {
-		other = (char*) gm_LookupEntityRecordById(*(int*) (a + 0x5c));
+	if (i < 8) return 0; if (first > 2) {
+		other = (char*) gm_LookupEntityRecordById(*refs);
 		if (other != 0 && other[8] != 0) {
 			return 0;
 		}

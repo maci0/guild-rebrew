@@ -26,52 +26,72 @@ void __cdecl fcn_00551d50(char* a0)
 {
 	char buf[0x800];
 	char packet[0xf8];
-	char msg[0x30];
-	char* table;
+	char msg[0x20];
 	char* row;
 	int index;
 	int delay;
 	int byte;
 	int id;
+	int value;
+	int fn;
+	char* fp;
 
-	if (*(int*) (a0 + 0x70) == -2) {
-		fcn_00546190(a0);
-		return;
-	}
-	if (*(int*) (a0 + 0x70) != 0) {
-		return;
-	}
-	index = *(unsigned short*) (a0 + 8);
-	byte = *(unsigned char*) (a0 + 0xae);
-	delay = *(unsigned char*) (a0 + 0xac) - (gm_RandomMod(*(unsigned char*) (a0 + 0xad)) & 0xffff);
-	row = (char*) (0x7f4ca0 + index * 0x21c);
-	id = *(unsigned char*) (row + 0x80 + byte);
-	if ((float) (id + delay) > g_66413c) {
-		delay = (int) (g_66413c - (float) id);
-	}
-	fcn_004c6ba0(*(int*) (row + 4), byte, delay);
-	if (*(unsigned char*) (row + 2) == 6) {
-		byte = *(unsigned char*) (a0 + 0xae);
-		id = *(unsigned char*) (row + 0x80 + byte);
-		if ((int) ((float) (id + delay) * g_664168) <= (int) ((float) byte * g_664168)) {
-			sprintf(msg, s_6a5b74, byte);
-			io_FormatTextBuffer(buf, 0x67728c, 0x16f2, byte + 0x16f3);
-			fcn_00545d40(*(int*) (row + 4), *(int*) (row + 4), buf, 0, 0x5fd, msg);
-		} else {
-			memset(packet, 0, 0xf8);
-			*(int*) (packet + 8) = *(int*) (row + 4);
-			*(int*) (packet + 0xc) = -1;
-			*(int*) (packet + 0x28) = g_7f4c00;
-			*(int*) (packet + 0x2c) = g_7f4c04;
-			*(int*) (packet + 0x30) = g_7f4c08;
-			*(short*) (packet + 0x34) = g_7f4c0c;
-			*(char*) (packet + 4) = 0x6a;
-			*(char*) (packet + 0x36) = 9;
-			*(char*) (packet + 0x58) = *(unsigned char*) (a0 + 0xae);
-			*(int*) (packet + 0x5c) = (int) ((float) (id + delay) * g_664168);
-			fcn_004c5530(packet);
+	if (*(int*) (a0 + 0x70) != -2) {
+		if (*(int*) (a0 + 0x70) != 0) {
+			return;
 		}
+		delay = *(unsigned char*) (a0 + 0xac) - (gm_RandomMod(*(unsigned char*) (a0 + 0xad)) & 0xffff);
+		index = *(unsigned short*) (a0 + 8);
+		byte = *(unsigned char*) (a0 + 0xae);
+		row = (char*) (0x7f4ca0 + index * 0x21c);
+		id = *(unsigned char*) (row + 0x80 + byte);
+		if ((float) (id + delay) > g_66413c) {
+			delay = (int) (g_66413c - (float) id);
+		}
+		fcn_004c6ba0(*(int*) (row + 4), byte, delay);
+		if (*(unsigned char*) (row + 2) == 6) {
+			byte = *(unsigned char*) (a0 + 0xae);
+			id = *(unsigned char*) (row + 0x80 + byte);
+			value = (int) ((float) (id + delay) * g_664168);
+			if (value > (int) ((float) id * g_664168)) {
+				fn = 0xf8;
+				fp = packet;
+				__asm {
+					mov edi, fp
+					mov ebx, fn
+					xor eax, eax
+					lea ecx, [edi+edi*2]
+					and ecx, 3
+					sub ebx, ecx
+					jle short L1
+					rep stosb
+					mov ecx, ebx
+					and ebx, 3
+					shr ecx, 2
+					rep stosd
+				L1:
+					add ecx, ebx
+					rep stosb
+				}
+				*(int*) (packet + 8) = *(int*) (row + 4);
+				*(int*) (packet + 0xc) = -1;
+				*(int*) (packet + 0x28) = g_7f4c00;
+				*(int*) (packet + 0x2c) = g_7f4c04;
+				*(int*) (packet + 0x30) = g_7f4c08;
+				*(short*) (packet + 0x34) = g_7f4c0c;
+				*(char*) (packet + 4) = 0x6a;
+				*(char*) (packet + 0x36) = 9;
+				*(char*) (packet + 0x58) = *(unsigned char*) (a0 + 0xae);
+				*(int*) (packet + 0x5c) = value;
+				fcn_004c5530(packet);
+			} else {
+				sprintf(msg, s_6a5b74, byte);
+				io_FormatTextBuffer(buf, 0x67728c, 0x16f2, *(unsigned char*) (a0 + 0xae) + 0x16f3);
+				id = *(int*) (0x7f4ca4 + *(unsigned short*) (a0 + 8) * 0x21c);
+				fcn_00545d40(id, id, buf, 0, 0x5fd, msg);
+			}
+		}
+		fcn_004c6330(*(int*) (row + 4));
 	}
-	fcn_004c6330(*(int*) (row + 4));
 	fcn_00546190(a0);
 }

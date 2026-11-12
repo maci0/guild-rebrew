@@ -28,7 +28,7 @@ extern void __cdecl fcn_00471e30(int);
 /* ADDRESS: GOLDTL 0x005d81f0 */
 unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 {
-	unsigned int found[4];
+	unsigned int found[20];
 	char text[512];
 	char name[256];
 	char* ent;
@@ -43,7 +43,7 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 	int kid;
 	int ret;
 	int thr;
-	unsigned int r;
+	int r;
 
 	ret = 0;
 	saved = -1;
@@ -62,6 +62,8 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 			other = a0;
 		}
 		ent = gm_LookupEntityRecordById(a1[0x85]);
+		if (ent == 0)
+			return 0x60;
 		rec = gm_StartFilteredEntitySearch(1, 1, a1[0x86]);
 		if (ent != 0 && rec != 0) {
 			fcn_004c6ae0(*(int*) (a0 + 4), -5);
@@ -78,8 +80,7 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 		}
 		return 0x60;
 	}
-	for (i = 0; i < 4; i++)
-		found[i] = 0;
+	memset(found, 0, sizeof(found));
 	if (*a1 != 3) {
 		if (*a1 != 4)
 			return 0x60;
@@ -94,6 +95,7 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 		fcn_00526120(name, 0);
 		return 0x81;
 	}
+	found[4] = 6;
 	found[1] = 0x410;
 	found[2] = *(unsigned int*) 0x666018;
 	found[3] = *(unsigned int*) 0x66601c;
@@ -137,16 +139,15 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 						if (*(short*) ent != -1 &&
 						    *(int*) (ent + 0x16c) == rec &&
 						    *(unsigned char*) (ent + 2) == 0) {
-							other = ent;
 							if (*(unsigned char*) ((state + 0x7f4ca2)) == 6 ||
 							    *(unsigned char*) ((state + 0x7f4ca2)) == 7) {
 								io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) a0, rec,
-									*(unsigned short*) other);
+									*(unsigned short*) ent);
 								fcn_00545d40(*(unsigned int*) (state + 0x7f4ca4),
 									*(unsigned int*) (state + 0x7f4ca4), text, 0, 0x5fb,
 									(char*) 0x6a59fc);
 							}
-							fcn_005099e0(other, *(int*) 0x773da8);
+							fcn_005099e0(ent, *(int*) 0x773da8);
 							fcn_004c57e0(*(int*) (ent + 4), 1);
 							ret = 0x81;
 							*(int*) 0x774654 = 1;

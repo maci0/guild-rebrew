@@ -10,7 +10,7 @@ void __cdecl fcn_00471b60(int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "d2_gui.h"
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_004c4450(int);
@@ -80,7 +80,8 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 			return 0;
 		}
 	}
-	memset(rec, 0, 36);
+	*(unsigned char*)rec = 0;
+	memset((char*)rec + 1, 0, 35);
 	keep = 1;
 	add = 0;
 	box = -1;
@@ -98,7 +99,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 		id = io_AppendText(0x13d0, id, 0x13d3);
 		ctl = fcn_00472250(dlg, 1, id);
 		box = fcn_00472250(dlg, 1, id + 1);
-		fcn_00472380(ctl, rec[1], rec[2], rec[6]);
+		d2_SetElementValue(ctl, rec[1], rec[2], rec[6]);
 		break;
 	case 1:
 		id = io_AppendText(0x13da, id, 0x13dd, rec[6] + 0x13dd);

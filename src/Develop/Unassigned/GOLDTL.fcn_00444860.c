@@ -30,15 +30,11 @@ typedef struct {
 	float e1x;
 	float e1y;
 	float e1z;
-	float e1w;
 	float e2x;
 	float e2y;
 	float e2z;
-	float e2w;
 	float qx;
 	float qy;
-	float qz;
-	float qw;
 	float min[2];
 	int ic;
 	int ib;
@@ -46,15 +42,7 @@ typedef struct {
 	float dx;
 	float dy;
 	float dz;
-	float dw0;
-	float dw1;
 	float ay;
-	float dw2;
-	float dw3;
-	float tdx;
-	float dw4;
-	float tdz;
-	float dw5;
 	pick_ctx ctx;
 } pick_frame;
 
@@ -96,9 +84,9 @@ unsigned char __cdecl fcn_00444860(float x, float y, int obj, int index,
 	fr.min[0] = 1.0e10f;
 	fr.min[1] = 1.0e10f;
 	for (i = 0; i < 4; i++) {
-		if (fr.ctx.uv[i][0] <= fr.min[0])
+		if (!(fr.ctx.uv[i][0] > fr.min[0]))
 			fr.min[0] = fr.ctx.uv[i][0];
-		if (fr.ctx.uv[i][1] <= fr.min[1])
+		if (!(fr.ctx.uv[i][1] > fr.min[1]))
 			fr.min[1] = fr.ctx.uv[i][1];
 	}
 	for (i = 0; i < 4; i++) {
@@ -155,7 +143,7 @@ unsigned char __cdecl fcn_00444860(float x, float y, int obj, int index,
 	fr.dy = -(y - g_1052bc8);
 	fr.dz = g_10432a4;
 	den = fr.dz * n3 + fr.dy * n2 + fr.dx * n1;
-	if ((float) fabs(den) <= 1e-7)
+	if (!((float) fabs(den) > 1e-7))
 		return 0;
 	t = (n3 * az + n2 * fr.ay + n1 * ax + (n3 + n2 + n1) * 0.0f) / den;
 	fr.qx = ax - t * fr.dx;
@@ -186,7 +174,7 @@ unsigned char __cdecl fcn_00444860(float x, float y, int obj, int index,
 		fr.w1 = fr.e2x * fr.e1y;
 		n3 = fr.t1 - fr.w1;
 		den = fr.dz * n3 + fr.dy * n2 + fr.dx * n1;
-		if ((float) fabs(den) <= 1e-7)
+		if (!((float) fabs(den) > 1e-7))
 			return 0;
 		t = (n3 * az + n2 * fr.ay + n1 * ax
 			+ (n3 + n2 + n1) * 0.0f) / den;
@@ -202,13 +190,13 @@ unsigned char __cdecl fcn_00444860(float x, float y, int obj, int index,
 			* (1.0f / 3.0f);
 		fr.w1 = r;
 		fr.w2 = r2;
-		if (r2 < 0.0f)
+		if (!(r2 >= 0.0f))
 			return 0;
-		if (r2 > 1.0f)
+		if (!(r2 <= 1.0f))
 			return 0;
-		if (r < 0.0f)
+		if (!(r >= 0.0f))
 			return 0;
-		if (r > 1.0f)
+		if (!(r <= 1.0f))
 			return 0;
 		*outx = ((float) fabs(fr.ctx.uv[fr.ib][0])
 			- (float) fabs(fr.ctx.uv[fr.ia][0])) * (1.0f - r2)
@@ -218,13 +206,13 @@ unsigned char __cdecl fcn_00444860(float x, float y, int obj, int index,
 			+ (float) fabs(fr.ctx.uv[fr.ia][1]));
 		return 1;
 	} else {
-		if (r2 < 0.0f)
+		if (!(r2 >= 0.0f))
 			return 0;
-		if (r2 > 1.0f)
+		if (!(r2 <= 1.0f))
 			return 0;
-		if (r < 0.0f)
+		if (!(r >= 0.0f))
 			return 0;
-		if (r > 1.0f)
+		if (!(r <= 1.0f))
 			return 0;
 		*outx = ((float) fabs(fr.ctx.uv[fr.ib][0])
 			- (float) fabs(fr.ctx.uv[fr.ia][0])) * r2

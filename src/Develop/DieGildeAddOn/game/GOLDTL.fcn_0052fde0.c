@@ -11,7 +11,11 @@ extern int g_6a3770;
 extern int g_100f894;
 extern int g_67d8d4;
 extern int g_67d370;
-extern char g_1015ea0[];
+extern char* g_1015ea0;
+extern short g_14ce8c0;
+extern short g_14ce8c2;
+extern int g_14a79c0[];
+extern char g_14a6558[];
 extern char g_100f8c0[];
 extern int g_67d8cc;
 extern char* g_773dfc;
@@ -64,7 +68,6 @@ void __cdecl fcn_0052fde0(void)
 	int i;
 	int n;
 	char c;
-	int done_copy;
 	int limit;
 
 	g_7746a4 = 0;
@@ -72,10 +75,10 @@ void __cdecl fcn_0052fde0(void)
 		g_7746a4 = 0;
 		return;
 	}
-	g_6a2bf0 = *(short*) 0x14ce8c0;
-	g_6a2bf4 = *(short*) 0x14ce8c2;
+	g_6a2bf0 = g_14ce8c0;
+	g_6a2bf4 = g_14ce8c2;
 	if (g_6a2bf0 <= g_6a3764 || g_6a376c <= g_6a2bf0 || g_6a2bf4 <= g_6a3768 || (g_6a3770 <= g_6a2bf4 || g_100f894 != -1) || g_67d8d4 != -1 || ((g_7746a4 = fcn_00443bf0((float) g_6a2bf0,
-	    (float) g_6a2bf4, 0x20, 1)) == 0 && (g_7746a4 = fcn_00443bf0((float) g_6a2bf0, (float) g_6a2bf4, 0x40, 1)) == 0)) {
+	    (float) g_6a2bf4, 0x20, 1)) == 0 && (g_7746a4 = fcn_00443bf0((float) g_14ce8c0, (float) g_14ce8c2, 0x40, 1)) == 0)) {
 		if (g_67d370 == -1 || !(*(unsigned char*) (g_1015ea0 + g_67d370 * 0x2f4 + 0x1d0) & 0x40)) {
 			g_100f8c0[0] = 0;
 		}
@@ -130,10 +133,10 @@ void __cdecl fcn_0052fde0(void)
 			v = (unsigned int) *(unsigned short*) g_7746ac;
 			c = g_item_def_table[v * 0x41];
 			if ((c != 6 && c != 2) || !(g_7746dc & 0x4000)) {
-				fcn_0064d41a(g_100f8c0, (char*) 0x679060, *(unsigned int*) (v * 8 + 0x14a79c0));
+				fcn_0064d41a(g_100f8c0, (char*) 0x679060, g_14a79c0[v * 2]);
 				g_7725c4 = 0x16;
 			} else {
-				fcn_0064d41a(g_100f8c0, s_68b3f8, *(unsigned int*) (v * 8 + 0x14a79c0), (char*) 0x14a552c);
+				fcn_0064d41a(g_100f8c0, s_68b3f8, g_14a79c0[v * 2], *(char**) 0x14a552c);
 				g_7725c4 = 0xb;
 			}
 		}
@@ -144,11 +147,11 @@ void __cdecl fcn_0052fde0(void)
 		g_7746dc = fcn_00506380((int) g_774970, g_7746b0, 0, 0);
 		if (g_7746b0 && !(g_7746b0[0x5a] & 1)) {
 			if (g_7746b0[5]) {
-				fcn_0064d41a(g_100f8c0, s_6a2308, *(unsigned int*) ((unsigned int) *(unsigned short*) g_7746b0 * 0x38 + 0x14a6558), g_7746b0 + 5);
+				fcn_0064d41a(g_100f8c0, s_6a2308, *(unsigned int*) ((unsigned int) *(unsigned char*) g_7746b0 * 0x38 + (int) g_14a6558), g_7746b0 + 5);
 				g_7746e0 = g_7746dc;
 				target = g_7746b0;
 			} else {
-				field = *(char**) ((unsigned int) *(unsigned short*) g_7746b0 * 0x38 + 0x14a6558);
+				field = *(char**) ((unsigned int) *(unsigned char*) g_7746b0 * 0x38 + (int) g_14a6558);
 				i = 0;
 				do {
 					c = *field;
@@ -165,7 +168,7 @@ void __cdecl fcn_0052fde0(void)
 		}
 	} else if (c == 3) {
 		g_7746b4 = *(char**) (cur + 0x204);
-		g_7746dc = fcn_00506380((int) g_774970, 0, (unsigned short*) g_7746b4, 0);
+		g_7746dc = fcn_00506380((int) g_774970, 0, 0, (int) g_7746b4);
 		if (g_7746b4 && (fcn_00517c00(*(unsigned short*) g_7746b4, 1, 4, g_100f8c0), *(char*) ((int) g_7746b4 + 0x165) == 0x1c) && ((*(unsigned char*) (g_7746b4 + 0x1b4) & 1) && ((g_7746dc & 0x800) &&
 		    g_6b8010))) {
 			io_FormatTextBuffer(g_100f8c0, 0x414c, *(unsigned short*) g_7746b4);
@@ -220,14 +223,14 @@ void __cdecl fcn_0052fde0(void)
 				if (g_7746dc & 1) {
 					g_7725c4 = 0xb;
 					if (*g_7746bc != 0xfd) {
-						v = *(unsigned int*) ((unsigned int) *g_7746bc * 8 + 0x14a79c0);
-						text = (char*) 0x14a552c;
+						v = g_14a79c0[*g_7746bc * 2];
+						text = *(char**) 0x14a552c;
 					} else {
-						text = (char*) 0x14a5530;
+						text = *(char**) 0x14a5530;
 						if (g_7746cc) {
-							v = *(unsigned int*) ((unsigned int) *(unsigned short*) g_7746cc * 8 + 0x14a79c0);
+							v = g_14a79c0[*(unsigned short*) g_7746cc * 2];
 						} else {
-							v = *(unsigned int*) ((unsigned int) *(unsigned short*) target * 0x38 + 0x14a6558);
+							v = *(unsigned int*) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558);
 						}
 					}
 					fcn_0064d41a(g_100f8c0, s_68b3f8, v, text);
@@ -238,34 +241,21 @@ void __cdecl fcn_0052fde0(void)
 		}
 		cur = g_7746a4;
 	}
-	n = 8;
-	done_copy = 1;
-	field = cur;
-	name = s_6a3004;
-	do {
-		if (n == 0) {
-			break;
-		}
-		n--;
-		done_copy = (*field == *name);
-		field++;
-		name++;
-	} while (done_copy);
-	if (done_copy && (target = *(char**) (cur + 0x204)) != 0) {
+	if (memcmp(cur, s_6a3004, 8) == 0 && (target = *(char**) (cur + 0x204)) != 0) {
 		if (g_7746dc & 1) {
 			g_7725c4 = 0xb;
 			if (target[5]) {
-				fcn_0064d41a(g_100f8c0, s_6a2ff8, *(unsigned int*) ((unsigned int) *(unsigned short*) target * 0x38 + 0x14a6558), target + 5, (char*) 0x14a552c);
+				fcn_0064d41a(g_100f8c0, s_6a2ff8, *(unsigned int*) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558), target + 5, *(char**) 0x14a552c);
 				cur = g_7746a4;
 				goto done;
 			}
-			v = *(unsigned int*) ((unsigned int) *(unsigned short*) target * 0x38 + 0x14a6558);
+			v = *(unsigned int*) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558);
 			name = s_68b3f8;
-			text = (char*) 0x14a552c;
+			text = *(char**) 0x14a552c;
 		} else {
 			text = target + 5;
 			if (!target[5]) {
-				field = *(char**) ((unsigned int) *(unsigned short*) target * 0x38 + 0x14a6558);
+				field = *(char**) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558);
 				name = g_100f8c0;
 				do {
 					c = *field;
@@ -276,7 +266,7 @@ void __cdecl fcn_0052fde0(void)
 				cur = g_7746a4;
 				goto done;
 			}
-			v = *(unsigned int*) ((unsigned int) *(unsigned short*) target * 0x38 + 0x14a6558);
+			v = *(unsigned int*) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558);
 			name = s_6a2308;
 		}
 		fcn_0064d41a(g_100f8c0, name, v, text);

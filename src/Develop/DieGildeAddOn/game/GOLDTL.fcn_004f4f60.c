@@ -7,7 +7,7 @@ int __cdecl fcn_004f4830(int idx, void* dst);
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int a4);
 float __cdecl fcn_004f4ed0(unsigned short* key);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_005c6270(char* a1, int a2);
 int __cdecl fcn_004c5820(void* a1);
 

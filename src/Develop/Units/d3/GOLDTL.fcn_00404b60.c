@@ -17,7 +17,7 @@ void __cdecl fcn_00404b60(char* obj, int n, ...)
 
 	va_start(ap, n);
 	for (i = n; i > 0; i--) {
-		char* name;
+		char* name; char* animation;
 		name = va_arg(ap, char*);
 		if (*name == 0) {
 			continue;
@@ -25,9 +25,7 @@ void __cdecl fcn_00404b60(char* obj, int n, ...)
 		sprintf(path, "lowpolycharacter/%s/%s_%s_LOW.baf", obj + 0x230, name, obj + 0x230);
 		sprintf(low, "%s_%s_LOW.baf", name, obj + 0x230);
 		vfs_ToSlashes(low);
-		if (d3_FindAnimByName(low) == 0 && d3_LoadAnimStream(path, low, 1) == 0) {
-			continue;
-		}
+		animation = d3_FindAnimByName(low);
 		memset(&opt, 0, sizeof(opt));
 		opt.queue = 1;
 		opt.reverse = 0;
@@ -35,6 +33,7 @@ void __cdecl fcn_00404b60(char* obj, int n, ...)
 		*(int*) &opt = 0;
 		opt.layer = 8;
 		opt.mode = 0;
+		if (animation == 0 && d3_LoadAnimStream(path, low, 1) == 0) { continue; }
 		fcn_00434970(*(char**) (*(char**) (obj + 0x22c) + 0x1ec) + 0xf4, low, opt);
 		fcn_00435500(*(char**) (*(char**) (obj + 0x22c) + 0x1ec) + 0xf4, low);
 	}

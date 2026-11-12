@@ -42,7 +42,7 @@ int __cdecl fcn_004f61c0(int* a0, int* a1, int* a2, unsigned int a3)
 			continue;
 		}
 		rec = (unsigned char*) (0x9a3800 + pos * 0x2d);
-		if (*(int*) (rec + 0x25) <= 0) {
+		if (*(int*) (rec + 0x25) == 0) {
 			continue;
 		}
 		found[n] = (int) rec;

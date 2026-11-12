@@ -1,9 +1,12 @@
-unsigned short __cdecl gm_RandomMod(int n);
+extern char g_7f4ca0[];
+extern float g_662c98;
+int __cdecl gm_RandomMod(unsigned short n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004e8b40(int kind, int* out);
 int __cdecl fcn_004e8b80(int kind, int max, void* out);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
-int __cdecl fcn_004a55c0(char* obj, int flag, float* value, int extra);
+unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned int* a2,
+				  float a3, float a4, unsigned short* a5);
 void __cdecl fcn_004c4510(char* obj, int id);
 void __cdecl fcn_004c4570(int a, int b, int offset, void* value);
 void __cdecl fcn_004c5360(void);
@@ -18,9 +21,13 @@ int __cdecl fcn_00493200(char* a1, char* a2)
 	int left;
 	int index;
 	int roll;
+	int r;
+	int m;
+	unsigned int code;
+	unsigned int pos;
+	float f;
 	unsigned char kind;
-	unsigned char flag;
-	unsigned char value;
+	unsigned char b;
 
 	pick = 0;
 	roll = gm_RandomMod(3) & 0xffff;
@@ -45,32 +52,40 @@ int __cdecl fcn_00493200(char* a1, char* a2)
 		}
 		index = gm_RandomMod(count) & 0xffff;
 		for (left = count; left != 0; left--) {
-			roll = *(int*) (slots + index * 24);
-			if (*(int*) (a1 + 4) != roll) {
-				pick = gm_LookupEntityRecordById(roll);
+			r = *(int*) (slots + index * 24 + 4);
+			if (*(int*) (a1 + 4) != r) {
+				pick = gm_LookupEntityRecordById(r);
 				if (pick != 0) {
-					value = (unsigned char) fcn_0050f980(*(unsigned short*) a1,
-														 *(unsigned short*) pick, 1);
-					roll = gm_RandomMod(0x1e) & 0xffff;
-					if ((float) roll + *(float*) 0x662c98 != *(float*) &value) {
-						pick = 0;
-					} else {
-						goto found;
+					f = fcn_0050f980(*(unsigned short*) a1, *(unsigned short*) pick, 1);
+					r = gm_RandomMod(0x1e) & 0xffff;
+					if ((float) r + g_662c98 > f) {
+						break;
 					}
+					pick = 0;
 				}
 			}
 			index = (index + 1) % count;
 		}
 	} else if (kind == 0xa) {
-		rec[0] = 0xc00;
-		roll = gm_RandomMod(0x1e) & 0xffff;
-		rec[1] = roll;
-		value = 0;
-		if (fcn_004a55c0(a1, 1, (float*) &value, 0) == 0) {
+		code = 0xc00;
+		pos = gm_RandomMod(0x1e) & 0xffff;
+		if (fcn_004a55c0((unsigned short*) a1, 1, &code, 0.0f,
+				 (float) (int) pos + g_662c98, (unsigned short*) &pos) == 0) {
 			goto other;
 		}
-		pick = (char*) (0x7f4ca0 + (rec[1] & 0xffff) * 0x21c);
-		goto found;
+		pick = g_7f4ca0 + (pos & 0xffff) * 0x21c;
+	}
+	if (pick != 0) {
+		b = 1;
+		fcn_004c4510(a2, *(int*) (a2 + 2));
+		fcn_004c4570(4, 1, 0x1e, pick + 4);
+		fcn_004c4570(1, 1, 0x22, &b);
+		b = (unsigned char) gm_RandomMod(8);
+		fcn_004c4570(1, 1, 0x1c, &b);
+		b = (unsigned char) gm_RandomMod(8);
+		fcn_004c4570(1, 1, 0x1d, &b);
+		fcn_004c5360();
+		return 1;
 	}
 
 other:
@@ -78,29 +93,14 @@ other:
 	if (kind != 3 && kind != 4 && roll == 0) {
 		return 0;
 	}
-	flag = 1;
-	value = 0xff;
+	b = 1;
+	m = -1;
 	fcn_004c4510(a2, *(int*) (a2 + 2));
-	fcn_004c4570(4, 1, 0x1e, &value);
-	fcn_004c4570(1, 1, 0x22, &flag);
-	fcn_004c4570(1, 1, 0x1c, &value);
-	fcn_004c4570(1, 1, 0x1d, &value);
-	fcn_004c5360();
-	return 1;
-
-found:
-	if (pick == 0) {
-		goto other;
-	}
-	flag = 1;
-	fcn_004c4510(a2, *(int*) (a2 + 2));
-	pick += 4;
-	fcn_004c4570(4, 1, 0x1e, pick);
-	fcn_004c4570(1, 1, 0x22, &flag);
-	value = (unsigned char) gm_RandomMod(8);
-	fcn_004c4570(1, 1, 0x1c, &value);
-	value = (unsigned char) gm_RandomMod(8);
-	fcn_004c4570(1, 1, 0x1d, &value);
+	fcn_004c4570(4, 1, 0x1e, &m);
+	fcn_004c4570(1, 1, 0x22, &b);
+	b = 0xff;
+	fcn_004c4570(1, 1, 0x1c, &b);
+	fcn_004c4570(1, 1, 0x1d, &b);
 	fcn_004c5360();
 	return 1;
 }

@@ -1,54 +1,88 @@
-/* Partial reconstruction of the native body: device lock, vertex/index buffer
- * upload and the first lock/unlock vtable sequence are recovered; the remaining
- * draw/teardown paths are listed in the row blocker. */
+/* Builds the stock-object D3DX mesh: copies positions, attributes and indices
+ * into the locked buffers, welds and optimizes it, then clones it to FVF 0x112. */
+
+#include <string.h>
 
 typedef unsigned short u16;
 typedef unsigned char u8;
 
-int __cdecl fcn_00601a9b(int a, int b, int c, int d, int e, int* f);
+long __stdcall D3DXCreateMeshFVF(int a, int b, int c, int d, int e, int* f);
+long __stdcall D3DXWeldVertices(void* mesh, void* eps, int* adj_in, int* adj_out,
+                            int* face_remap, void** vert_remap);
 void* __cdecl fcn_0041db70(int size, char* tag);
+void __cdecl fcn_0041ddd0(void* p);
+extern int g_6b5de0;
+extern int g_14ce728;
+
+typedef long(__stdcall* LockFn)(void*, int, void*);
+typedef long(__stdcall* UnlockFn)(void*);
 
 /* ADDRESS: GOLDTL 0x0044aec0 */
 int __cdecl fcn_0044aec0(char* o)
 {
-    int* vt;
-    int count;
-    int icount;
+    int** mesh;
     int i;
     int j;
-    int idx_ptr;
-    float* src;
-    float* dst;
-    u16* ind;
-    char* isrc;
+    int k;
+    int* buf;
+    int* vb;
+    u16* ib;
+    int eps[11];
     int r;
 
     r = 0;
-    icount = *(int*) (o + 0x4c);
-    if (fcn_00601a9b(icount, icount * 3, 0x110, 0x112, *(int*) 0x6b5de0,
-                     (int*) &o) < 0)
-        return -1;
-    count = *(int*) (o + 0x44);
-    *(int*) (o + 0x27c) = (int) fcn_0041db70(count * 0xc,
+    if (D3DXCreateMeshFVF(*(int*) (o + 0x4c), *(int*) (o + 0x4c) * 3, 0x110, 0x112,
+                     g_6b5de0, (int*) &mesh) < 0)
+        return r;
+    *(int*) (o + 0x27c) = (int) fcn_0041db70(*(int*) (o + 0x44) * 0xc,
                                              "d3io:StockObjectVertices");
-    for (i = 0; i < count; i++) {
-        src = (float*) (*(int*) (o + 0x40) + i * 0x18);
-        dst = (float*) (*(int*) (o + 0x27c) + i * 0xc);
-        dst[0] = src[0];
-        dst[1] = src[1];
-        dst[2] = src[2];
+    for (i = 0; i < *(int*) (o + 0x44); i++) {
+        ((int*) *(int*) (o + 0x27c))[i * 3 + 0] = ((int*) (*(int*) (o + 0x40) + i * 0x18))[0];
+        ((int*) *(int*) (o + 0x27c))[i * 3 + 1] = ((int*) (*(int*) (o + 0x40) + i * 0x18))[1];
+        ((int*) *(int*) (o + 0x27c))[i * 3 + 2] = ((int*) (*(int*) (o + 0x40) + i * 0x18))[2];
     }
-    *(int*) (o + 0x280) = (int) fcn_0041db70(icount * 6, "d3io:Indices");
-    vt = *(int**) o;
-    ((int(__cdecl*) (char*, int, int*)) vt[0x58 / 4])(o, 0, &idx_ptr);
-    for (i = 0; i < icount; i++) {
-        isrc = (char*) (*(int*) (o + 0x48) + i * 0x38);
-        ((int*) idx_ptr)[i] = *(int*) (isrc + 0x28);
-        ind = (u16*) (*(int*) (o + 0x280) + i * 6);
-        for (j = 0; j < 3; j++)
-            ind[j] = *(u16*) (isrc + 0x18 + j * 4);
+    *(int*) (o + 0x280) = (int) fcn_0041db70(*(int*) (o + 0x4c) * 6, "d3io:Indices");
+    if (((LockFn) (*mesh)[0x58 / 4])(mesh, 0, &buf) >= 0) {
+        for (i = 0; i < *(int*) (o + 0x4c); i++) {
+            buf[i] = *(int*) (*(int*) (o + 0x48) + i * 0x38 + 0x28);
+            for (j = 0; j < 3; j++)
+                ((u16*) *(int*) (o + 0x280))[i * 3 + j] =
+                    *(u16*) (*(int*) (o + 0x48) + i * 0x38 + 0x18 + j * 4);
+        }
+        ((UnlockFn) (*mesh)[0x5c / 4])(mesh);
     }
-    ((int(__cdecl*) (char*)) vt[0x5c / 4])(o);
-    ((int(__cdecl*) (char*, int, int*)) vt[0x38 / 4])(o, 0, &r);
+    if (((LockFn) (*mesh)[0x38 / 4])(mesh, 0, &vb) >= 0) {
+        for (i = 0; i < *(int*) (o + 0x4c); i++) {
+            for (j = 0; j < 3; j++) {
+                k = *(int*) (*(int*) (o + 0x48) + i * 0x38 + 0x18 + j * 4) * 0x18;
+                vb[(i * 3 + j) * 8 + 0] = *(int*) (*(int*) (o + 0x40) + k + 0x00);
+                vb[(i * 3 + j) * 8 + 1] = *(int*) (*(int*) (o + 0x40) + k + 0x04);
+                vb[(i * 3 + j) * 8 + 2] = *(int*) (*(int*) (o + 0x40) + k + 0x08);
+                vb[(i * 3 + j) * 8 + 3] = *(int*) (*(int*) (o + 0x40) + k + 0x0c);
+                vb[(i * 3 + j) * 8 + 4] = *(int*) (*(int*) (o + 0x40) + k + 0x10);
+                vb[(i * 3 + j) * 8 + 5] = *(int*) (*(int*) (o + 0x40) + k + 0x14);
+                vb[(i * 3 + j) * 8 + 6] = *(int*) (*(int*) (o + 0x48) + i * 0x38 + j * 8);
+                vb[(i * 3 + j) * 8 + 7] = *(int*) (*(int*) (o + 0x48) + i * 0x38 + j * 8 + 4);
+            }
+        }
+        ((UnlockFn) (*mesh)[0x3c / 4])(mesh);
+    }
+    if (((LockFn) (*mesh)[0x40 / 4])(mesh, 0, &ib) >= 0) {
+        for (i = 0; i < *(int*) (o + 0x4c); i++) {
+            for (j = 0; j < 3; j++)
+                ib[i * 3 + j] = (u16) (i * 3 + j);
+        }
+        ((UnlockFn) (*mesh)[0x44 / 4])(mesh);
+    }
+    buf = (int*) fcn_0041db70(*(int*) (o + 0x4c) * 0xc, "d3io:Adjacency");
+    memset(eps, 0, sizeof(eps));
+    D3DXWeldVertices(mesh, eps, 0, buf, 0, 0);
+    ((long(__stdcall*) (void*, int, int*, int*, int*, void**)) (*mesh)[0x64 / 4])(
+        mesh, 0x6000000, buf, 0, 0, 0);
+    fcn_0041ddd0(buf);
+    buf = 0;
+    ((long(__stdcall*) (void*, int, int, int, int*)) (*mesh)[0x28 / 4])(
+        mesh, 0x660, 0x112, g_6b5de0, &r);
+    g_14ce728 = ((UnlockFn) (*mesh)[8 / 4])(mesh);
     return r;
 }

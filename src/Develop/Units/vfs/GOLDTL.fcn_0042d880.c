@@ -29,9 +29,9 @@ unsigned int __cdecl txt_loadTextFile(char* name)
 	char* rec;
 	void* stream;
 	int count;
-	int i;
+	int i; char* q; char ch; int* dst; int base;
 
-	a = 0;
+	i = 0; a = 0;
 	b = 0;
 	count = 0;
 	rec = (char*) 0x149d120;
@@ -53,7 +53,7 @@ unsigned int __cdecl txt_loadTextFile(char* name)
 	vfs_fseek(stream, 0, 0);
 	rec = (char*) (0x149d120 + count * 0x74);
 	pc = (int*) (rec + 0x60);
-	strcpy(rec, name);
+	q = name; do { ch = *q; rec[q - name] = ch; q++; } while (ch);
 	vfs_ReadData((char*) &a, 4, 1, stream);
 	vfs_ReadData((char*) pc, 4, 1, stream);
 	pcount = (int*) (rec + 0x64);
@@ -69,9 +69,9 @@ unsigned int __cdecl txt_loadTextFile(char* name)
 	vfs_ReadData((char*) &b, 4, 1, stream);
 	*(int*) (rec + 0x68) = (int) m_alloc(b, "txt_txt:txt_loadTextFile:Pointer");
 	vfs_ReadData((char*) *(int*) (rec + 0x68), b, 1, stream);
-	for (i = 0; i < a; i++)
-		*(int*) ((*pc) * 4 + 0x14a5320 + i * 4) =
-		    *(int*) ((char*) table + i * 4) + *(int*) (rec + 0x68);
+	if (a > 0) { dst = (int*) ((*pc) * 4 + 0x14a5320); base = *(int*) (rec + 0x68); for (i = 0; i < a; i++, dst++)
+		*dst =
+		    ((int*) table)[i] + base; }
 	if (g_6b7f98 + 1 < *pcount)
 		g_6b7f98 = *pcount + 1;
 	CloseVfsStream(stream);

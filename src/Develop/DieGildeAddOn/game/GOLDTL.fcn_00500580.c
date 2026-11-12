@@ -2,7 +2,7 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_004ffd90(int);
 int __cdecl fcn_0050a7e0(int, int, int, int, int, int, int, int);
-char* __cdecl fcn_00503e0(char*);
+char* __cdecl sim_StartEntityQueryByType(char*);
 int __cdecl fcn_004fe470(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00500580 */
@@ -32,7 +32,7 @@ char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
 	rec = g_7f4ca0 + i * 0x21c;
 	if (flags & 4) {
 		if (a6 != 0) {
-			s = fcn_00503e0(a6);
+			s = sim_StartEntityQueryByType(a6);
 			if (s != 0) {
 				fcn_004fe470(*(int*) (rec + 4), *(int*) (a6 + 1),
 					*(int*) (s + 2), 0, 0);

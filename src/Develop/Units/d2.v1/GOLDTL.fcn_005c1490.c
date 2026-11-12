@@ -20,7 +20,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_004ac1e0(unsigned short);
 unsigned short __cdecl fcn_004ac2c0(unsigned short, unsigned short);
 int __cdecl fcn_004ac320(unsigned short*);
-void __cdecl fcn_004ac410(unsigned char*, int, int);
+void __cdecl fcn_004ac410(unsigned char*, int, unsigned short);
 int __cdecl io_AppendText();
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_005340f0(int);
@@ -36,6 +36,7 @@ void __cdecl fcn_005c1490(void)
 	char* e2;
 	char* rec;
 	int r;
+	int idx;
 
 	elem = (char*) fcn_005463a0(1, 0, 0x6b);
 	h = fcn_00470820(0, 0, "special\\barde");
@@ -89,7 +90,7 @@ void __cdecl fcn_005c1490(void)
 				if (g_100f1dc == 2) {
 					fcn_004ac410((unsigned char*)
 					    (g_7f4ca0 + (int) g_774970 * 0x21c), (int) e2,
-					    (int) *(unsigned short*) (elem + 0xac));
+					    *(unsigned short*) (elem + 0xac));
 					r = 1;
 					g_774654 = 1;
 				} else if (g_100f1dc == 1) {
@@ -112,13 +113,14 @@ void __cdecl fcn_005c1490(void)
 		d2_SetForm(h, 1);
 		io_AppendText((int) *(unsigned short*) (rec + 0xc));
 		d2_SetForm(h, 2);
+		idx = g_772514;
 		d2_SetForm(h, 3);
-		fcn_0046e830(-1, -1, g_772514, g_772514, 0x767);
-		*(int*) (g_10161b4 + g_772514 * 0x3cc) = 0x30;
+		fcn_0046e830(-1, -1, g_772514, idx, 0x767);
+		*(int*) (g_10161b4 + idx * 0x3cc) = 0x30;
 		d2_SetForm(h, 2);
 		io_AppendText((int) *(unsigned short*) (rec + 0xc) + 2);
-		sprintf(buf, "gedichte\\%s.mp3", rec + 0xe);
 		g_100f1dc = -1;
+		sprintf(buf, "gedichte\\%s.mp3", rec + 0xe);
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;

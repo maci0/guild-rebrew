@@ -27,6 +27,7 @@ void __cdecl fcn_00532650(void)
 	char* m;
 	char* name;
 	int r[4];
+	int x, y;
 
 	for (q = &g_7e6060[0].o; (int) q < (int) &g_7e6060[64].o;
 		q = (char**) ((char*) q + sizeof(struct s_7e6060))) {
@@ -46,7 +47,9 @@ void __cdecl fcn_00532650(void)
 		if (*(int*) (m + 0x20c) != g_67a370) {
 			continue;
 		}
-		if (*(int*) (m + 0x218) == 1) {
+		if (*(int*) (m + 0x218) != 1) {
+			if (!fcn_00443e10(m, r)) { continue; }
+		} else {
 			m = *(char**) (e + 0x22c);
 			if (m == 0) {
 				continue;
@@ -54,16 +57,16 @@ void __cdecl fcn_00532650(void)
 			if (*(int*) (m + 0x218) == 1) {
 				continue;
 			}
+			if (!fcn_00443e10(m, r)) { continue; }
 		}
-		if (!fcn_00443e10(m, r)) {
-			continue;
-		}
+		y = r[1] - 0x40;
+		x = (r[2] - r[0]) / 2 + r[0] - 0x50;
 		if (((char*) s)[4] != 0) {
 			name = (char*) s + 4;
 		} else {
 			name = g_14a5320[((int*) s)[-2]];
 		}
-		fcn_0046bd20((r[2] - r[0]) / 2 + r[0] - 0x50, r[1] - 0x40, 0xa0, 0x60,
+		fcn_0046bd20(x, y, 0xa0, 0x60,
 			g_77250c, name, 0x28);
 	}
 }

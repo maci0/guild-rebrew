@@ -105,12 +105,7 @@ char __cdecl fcn_00457630(void* obj, void* map)
 	}
 
 	entity = *(unsigned char**) (s + 0x08);
-	if (g_6b89bc != 0) {
-		cr = (unsigned char) (int) *(float*) (entity + 0x5c);
-		cg = (unsigned char) (int) *(float*) (entity + 0x60);
-		cb = (unsigned char) (int) *(float*) (entity + 0x64);
-		ca = (unsigned char) (int) (*(float*) (entity + 0x94) * g_6628cc);
-	} else {
+	if (g_6b89bc == 0) {
 		scale = *(float*) (entity + 0x94) * g_6628cc * g_662c30;
 		cr = (unsigned char) (int) ((g_6628a4
 			- *(float*) (entity + 0x5c)) * scale);
@@ -119,6 +114,11 @@ char __cdecl fcn_00457630(void* obj, void* map)
 		cb = (unsigned char) (int) ((g_6628a4
 			- *(float*) (entity + 0x64)) * scale);
 		ca = 0xff;
+	} else {
+		cr = (unsigned char) (int) *(float*) (entity + 0x5c);
+		cg = (unsigned char) (int) *(float*) (entity + 0x60);
+		cb = (unsigned char) (int) *(float*) (entity + 0x64);
+		ca = (unsigned char) (int) (*(float*) (entity + 0x94) * g_6628cc);
 	}
 	color = ((unsigned long) ca << 24) | ((unsigned long) cr << 16)
 		| ((unsigned long) cg << 8) | (unsigned long) cb;
@@ -183,11 +183,12 @@ char __cdecl fcn_00457630(void* obj, void* map)
 		ib = *(void**) (s + 0x84);
 		if (ib != 0 && (*(int*) (s + 0x88) < (h + 1) * (w + 1)
 			|| *(int*) (s + 0x8c) < h * w * 2)) {
-			ops = *(GOLDTL_BufferVtbl**) (s + 0x84);
+			ops = *(GOLDTL_BufferVtbl**) ib;
 			g_14ce728 = ops->Release(ib);
 			*(void**) (s + 0x84) = 0;
-			ops = *(GOLDTL_BufferVtbl**) (s + 0x80);
-			g_14ce728 = ops->Release(*(void**) (s + 0x80));
+			vb = *(void**) (s + 0x80);
+			ops = *(GOLDTL_BufferVtbl**) vb;
+			g_14ce728 = ops->Release(vb);
 			*(void**) (s + 0x80) = 0;
 		}
 		if (*(void**) (s + 0x84) == 0) {
@@ -232,11 +233,12 @@ char __cdecl fcn_00457630(void* obj, void* map)
 	/* fallback: one quad covering the patch corners */
 	ib = *(void**) (s + 0x84);
 	if (ib != 0 && (*(int*) (s + 0x88) < 4 || *(int*) (s + 0x8c) < 2)) {
-		ops = *(GOLDTL_BufferVtbl**) (s + 0x84);
+		ops = *(GOLDTL_BufferVtbl**) ib;
 		g_14ce728 = ops->Release(ib);
 		*(void**) (s + 0x84) = 0;
-		ops = *(GOLDTL_BufferVtbl**) (s + 0x80);
-		g_14ce728 = ops->Release(*(void**) (s + 0x80));
+		vb = *(void**) (s + 0x80);
+		ops = *(GOLDTL_BufferVtbl**) vb;
+		g_14ce728 = ops->Release(vb);
 		*(void**) (s + 0x80) = 0;
 	}
 	if (*(void**) (s + 0x84) == 0) {

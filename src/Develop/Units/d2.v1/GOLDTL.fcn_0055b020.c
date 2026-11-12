@@ -1,12 +1,15 @@
 #include <string.h>
-#pragma intrinsic(memcpy)
+#pragma intrinsic(strcpy)
 
 extern char g_7f4ca0[];
 extern char g_774964;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
+extern int g_100f884;
+extern char g_7749e8;
+extern int g_7749e4;
 
-int __cdecl fcn_00545670(char*, short, short, int, int);
+int __cdecl fcn_00545670(char*, short, short, char*, int);
 void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -22,15 +25,12 @@ void __cdecl fcn_0055b020(char* o)
 	short* slot;
 	char* g;
 	char buf[0x1fc];
-	char* src;
-	int n;
 	int state;
 	int st;
 	int code;
 	int kind;
 	int end;
 	int id;
-	char flag;
 
 	slot = (short*) (g_7f4ca0 + *(unsigned short*) (o + 8) * 0x21c);
 	if (g_774970 != *(unsigned short*) (o + 8))
@@ -55,27 +55,27 @@ void __cdecl fcn_0055b020(char* o)
 			*(int*) (o + 0x70) = 0;
 			return;
 		}
-		if (*(int*) 0x100f884 != *(int*) (id + 8) && *(char*) 0x7749e8 == 0)
+		if (g_100f884 != *(int*) (id + 8) && g_7749e8 == 0)
 			return;
 		if (g_100f1dc == 2) {
 			fcn_00545780(o);
 			fcn_00546190(o);
 			return;
 		}
-		if (*(char*) 0x7749e8 == 0)
+		if (g_7749e8 == 0)
 			return;
-		if (*(int*) 0x7749e4 != id)
+		if (g_7749e4 != id)
 			return;
-		*(char*) 0x7749e8 = 0;
+		g_7749e8 = 0;
 		fcn_00545780(o);
 		fcn_00546190(o);
 		return;
 	}
 	if (*(int*) (o + 0x74) == 0) {
-		if (g != (char*) slot)
-			fcn_00545670(o, 0, 0, (int) 0x6a5e60, 0x5fe);
+		if (g == (char*) slot)
+			fcn_00545670(o, 0, 0, "SPECIAL\\TITEL", 0x5fd);
 		else
-			fcn_00545670(o, 0, 0, (int) 0x6a5e78, 0x5fd);
+			fcn_00545670(o, 0, 0, "SPECIAL\\TITEL_ANDERE", 0x5fe);
 	}
 	if (*(int*) (o + 0x74) == 0) {
 		fcn_00546190(o);
@@ -83,7 +83,58 @@ void __cdecl fcn_0055b020(char* o)
 	}
 	fcn_00471b60(*(int*) (*(int*) (o + 0x74) + 8));
 	d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 1);
-	if (g != (char*) slot) {
+	if (g == (char*) slot) {
+		kind = 0;
+		if (*(char*) (g + 0xd) == 9) {
+			code = 0x42a9;
+			if (*(char*) (g + 9) == 1)
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_ANREDE_HS_W_02");
+			else
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_ANREDE_HS_M_02");
+		} else if (*(char*) (g + 0xd) == 8) {
+			code = 0x42a7;
+			if (*(char*) (g + 9) == 1)
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_ANREDE_HS_W_01");
+			else
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_ANREDE_HS_M_01");
+		} else {
+			code = 0x42a5;
+			if (*(char*) (g + 9) == 1)
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_ANREDE_HS_W_00");
+			else
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_ANREDE_HS_M_00");
+		}
+		if (*(char*) (g + 9) == 1)
+			code += 1;
+		fcn_004c30a0(-7, 0, "FanfarePositivHeldenhaftLang", 0, 100);
+		fcn_004c30a0(-7, 0, buf, 0, 100);
+		if (*(int*) (o + 0xc0) == 0x25) {
+			kind = 0x42ab;
+			if (*(char*) (g + 9) == 1)
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_WEIBLICH_HS_00");
+			else
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_MAENNLICH_HS_00");
+		} else if (*(int*) (o + 0xc0) == 0x24) {
+			kind = 0x42af;
+			if (*(char*) (g + 9) == 1)
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_WEIBLICH_HS_02");
+			else
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_MAENNLICH_HS_02");
+		} else if (*(int*) (o + 0xc0) == 0x23) {
+			kind = 0x42ad;
+			if (*(char*) (g + 9) == 1)
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_WEIBLICH_HS_01");
+			else
+				strcpy(buf, "_VERLEIHUNG_REICHSAMT_MAENNLICH_HS_01");
+		}
+		fcn_004c30a0(-7, 0, buf, 0, 100);
+		fcn_004c30a0(-7, 0, "MausclickLinks_s_01", -1, 0);
+		if (*(char*) (g + 9))
+			end = *(int*) (o + 0xc0) + 0x27b;
+		else
+			end = 0x253;
+		io_AppendText(kind, code, (int) (o + 0xac), end);
+	} else {
 		st = *(int*) (o + 0xc0);
 		kind = 0;
 		if (st == 0x25)
@@ -97,74 +148,7 @@ void __cdecl fcn_0055b020(char* o)
 		else
 			end = 0x253;
 		io_AppendText(kind, *(unsigned short*) g, end);
-		goto done;
 	}
-	flag = *(char*) (g + 9);
-	code = 0;
-	if (*(char*) (g + 0xd) != 9) {
-		if (*(char*) (g + 0xd) != 8) {
-			code = 0x42a5;
-			if (flag == 1)
-				src = (char*) 0x6a6160;
-			else
-				src = (char*) 0x6a6138;
-		} else {
-			code = 0x42a7;
-			if (flag == 1)
-				src = (char*) 0x6a61b0;
-			else
-				src = (char*) 0x6a6188;
-		}
-	} else {
-		code = 0x42a9;
-		if (flag == 1)
-			src = (char*) 0x6a6200;
-		else
-			src = (char*) 0x6a61d8;
-	}
-	memcpy(buf, src, 0x25);
-	if (flag == 1)
-		code += 1;
-	fcn_004c30a0(-7, 0, (char*) 0x6a438c, 0, 100);
-	fcn_004c30a0(-7, 0, buf, 0, 100);
-	st = *(int*) (o + 0xc0);
-	kind = 0;
-	n = 0x25;
-	if (st == 0x25) {
-		kind = 0x42ab;
-		if (flag == 1) {
-			src = (char*) 0x6a6110;
-		} else {
-			src = (char*) 0x6a60e8;
-			n = 0x26;
-		}
-	} else if (st == 0x24) {
-		kind = 0x42af;
-		if (flag == 1) {
-			src = (char*) 0x6a60c0;
-		} else {
-			src = (char*) 0x6a6098;
-			n = 0x26;
-		}
-	} else if (st == 0x23) {
-		kind = 0x42ad;
-		if (flag == 1) {
-			src = (char*) 0x6a6070;
-		} else {
-			src = (char*) 0x6a6048;
-			n = 0x26;
-		}
-	}
-	if (kind != 0)
-		memcpy(buf, src, n);
-	fcn_004c30a0(-7, 0, buf, 0, 100);
-	fcn_004c30a0(-7, 0, (char*) 0x67d908, -1, 0);
-	if (flag)
-		end = st + 0x27b;
-	else
-		end = 0x253;
-	io_AppendText(kind, code, (int) (o + 0xac), end);
-done:
 	d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 2);
 	io_AppendText(0x161c);
 	*(int*) (o + 0x70) = 1;

@@ -13,7 +13,7 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl fcn_004bcc50(char*, int);
 char* __cdecl fcn_005049a0(unsigned char*);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
-void __cdecl fcn_00529160(int, int, int, int);
+void __cdecl fcn_00529160(int, int, unsigned int, int);
 void __cdecl fcn_004c5530(char*);
 
 /* Message layout (0xf8 bytes).  The type byte at +4 selects the payload:
@@ -323,7 +323,7 @@ void __cdecl fcn_00487f90(int* a0)
 			    *(int*) (e + 7) == *(int*) (a0[1] + 0x16c) &&
 			    *e != 0 && *(int*) (e + 0x17) == 0) {
 				fcn_00529160(*(int*) (a0[1] + 0x16c), v,
-				             *(short*) (e - 0x165), (int) rec);
+				             *(unsigned short*) (e - 0x165), (int) rec);
 				a0[8] = a0[8] + 1;
 			}
 			if (a0[8] >= n) {

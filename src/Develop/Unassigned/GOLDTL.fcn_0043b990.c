@@ -7,7 +7,7 @@ extern char* g_6b5de0;
 extern int g_14ce728;
 
 void __cdecl fcn_0043ef20(char* a0);
-void __cdecl fcn_00601a9b(int a0, int a1, int a2, int a3, char* a4, char* a5);
+long __stdcall D3DXCreateMeshFVF(int a0, int a1, int a2, int a3, char* a4, char* a5);
 
 #pragma optimize("y", off)
 
@@ -25,6 +25,8 @@ void __cdecl fcn_0043b990(char* a0)
 	int k;
 	int n;
 	int m;
+	void* copy_src;
+	int copy_count;
 
 	rec = a0 + 0x244;
 	i = 8;
@@ -39,7 +41,7 @@ void __cdecl fcn_0043b990(char* a0)
 				    (g_6b5de0, *(int*) (rec + 8) * 6 * 4,
 				    0x208, 0x142, 0, rec);
 			}
-			q = rec - 0x170;
+			q = rec - 0x190;
 			k = 8;
 			do {
 				n = *(int*) q;
@@ -52,14 +54,31 @@ void __cdecl fcn_0043b990(char* a0)
 				if (n != 0) {
 					m = *(int*) (q + 0xc);
 					if (m != 0) {
-						fcn_00601a9b(n, m, 0x6c0, 0x142,
+						D3DXCreateMeshFVF(n, m, 0x6c0, 0x142,
 						    g_6b5de0, q);
-						buf = 0;
+
 						(*(void (__stdcall**)(void*, int, void**))
 						    (*(int*) *(int*) q + 0x40))
 						    (*(void**) q, 0, &buf);
-						memcpy(buf, *(void**) (q - 8),
-						    n * 6);
+						copy_src = *(void**) (q - 8);
+                        copy_count = *(int*) (q + 0x18) * 6;
+                        __asm {
+                            mov edi, buf
+                            mov esi, copy_src
+                            mov ebx, copy_count
+                            lea ecx, [edi+edi*2]
+                            and ecx, 3
+                            sub ebx, ecx
+                            jle short L_copy_0x18_6
+                            rep movsb
+                            mov ecx, ebx
+                            and ebx, 3
+                            shr ecx, 2
+                            rep movsd
+                        L_copy_0x18_6:
+                            add ecx, ebx
+                            rep movsb
+                        }
 						(*(void (__stdcall**)(void*))
 						    (*(int*) *(int*) q + 0x44))
 						    (*(void**) q);
@@ -76,28 +95,62 @@ void __cdecl fcn_0043b990(char* a0)
 				if (n != 0) {
 					m = *(int*) (q + 0x10);
 					if (m != 0) {
-						fcn_00601a9b(n, m, 0x6c0, 0x142,
+						D3DXCreateMeshFVF(n, m, 0x6c0, 0x142,
 						    g_6b5de0, srf2);
-						buf = 0;
+
 						(*(void (__stdcall**)(void*, int, void**))
 						    (*(int*) *(int*) srf2 + 0x40))
 						    (*(void**) srf2, 0, &buf);
-						memcpy(buf, *(void**) (q - 4),
-						    n * 6);
+						copy_src = *(void**) (q - 4);
+                        copy_count = *(int*) (q + 0x1c) * 6;
+                        __asm {
+                            mov edi, buf
+                            mov esi, copy_src
+                            mov ebx, copy_count
+                            lea ecx, [edi+edi*2]
+                            and ecx, 3
+                            sub ebx, ecx
+                            jle short L_copy_0x1c_6
+                            rep movsb
+                            mov ecx, ebx
+                            and ebx, 3
+                            shr ecx, 2
+                            rep movsd
+                        L_copy_0x1c_6:
+                            add ecx, ebx
+                            rep movsb
+                        }
 						(*(void (__stdcall**)(void*))
 						    (*(int*) *(int*) srf2 + 0x44))
 						    (*(void**) srf2);
-					}
-					if (*(int*) (q - 0x14) != 0) {
-						buf2 = 0;
-						(*(void (__stdcall**)(void*, int, void**))
-						    (*(int*) *(int*) srf2 + 0x58))
-						    (*(void**) srf2, 0x2000, &buf2);
-						memcpy(buf2, *(void**) (q - 0x14),
-						    n * 4);
-						(*(void (__stdcall**)(void*))
-						    (*(int*) *(int*) srf2 + 0x5c))
-						    (*(void**) srf2);
+						if (*(int*) (q - 0x14) != 0) {
+
+							(*(void (__stdcall**)(void*, int, void**))
+							    (*(int*) *(int*) srf2 + 0x58))
+							    (*(void**) srf2, 0x2000, &buf2);
+							copy_src = *(void**) (q - 0x14);
+                        copy_count = *(int*) (q + 0x1c) * 4;
+                        __asm {
+                            mov edi, buf2
+                            mov esi, copy_src
+                            mov ebx, copy_count
+                            lea ecx, [edi+edi*2]
+                            and ecx, 3
+                            sub ebx, ecx
+                            jle short L_copy_0x1c_4
+                            rep movsb
+                            mov ecx, ebx
+                            and ebx, 3
+                            shr ecx, 2
+                            rep movsd
+                        L_copy_0x1c_4:
+                            add ecx, ebx
+                            rep movsb
+                        }
+							(*(void (__stdcall**)(void*))
+							    (*(int*) *(int*) srf2 + 0x5c))
+							    (*(void**) srf2);
+						}
 					}
 				}
 				q += 0x34;

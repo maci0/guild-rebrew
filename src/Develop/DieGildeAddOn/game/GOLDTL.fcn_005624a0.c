@@ -6,8 +6,8 @@
 #include "client_types.h"
 
 extern char g_7f4ca0[];
-extern char* lpGebaeudePROT;
-extern char lpGebaeudeINST[];
+#include "game_data.h"
+typedef struct SpyProto { unsigned char kind; unsigned char rest[0x24c]; } SpyProto;
 extern unsigned char g_773d75;
 extern pos14_7f4c00 g_7f4c00;
 extern char s_6a6578[];
@@ -91,18 +91,12 @@ void __cdecl fcn_005624a0(char* ctx)
 			fcn_004c51a0(-1, *(int*) (g_7f4ca0
 			    + *(unsigned short*) (ctx + 8) * 0x21c + 4), g_773d75, item);
 			fcn_00529160(0, 0, *(unsigned short*) ent, ctx);
-			*(int*) (ctx + 0x52) = g_7f4c00.a;
-			*(int*) (ctx + 0x56) = g_7f4c00.b;
-			*(int*) (ctx + 0x5a) = g_7f4c00.c;
-			*(unsigned short*) (ctx + 0x5e) = g_7f4c00.d;
+			*(pos14_7f4c00*)(ctx + 0x52) = g_7f4c00;
 			*(int*) (ctx + 0x84) = fcn_004c5620(1, ctx);
 			return;
 		}
 		*(int*) (ctx + 0xd8) = -1;
-		*(int*) (ctx + 0x52) = *(int*) (ctx + 0xc8);
-		*(int*) (ctx + 0x56) = *(int*) (ctx + 0xcc);
-		*(int*) (ctx + 0x5a) = *(int*) (ctx + 0xd0);
-		*(unsigned short*) (ctx + 0x5e) = *(unsigned short*) (ctx + 0xd4);
+		*(pos14_7f4c00*)(ctx + 0x52) = *(pos14_7f4c00*)(ctx + 0xc8);
 		*(int*) (ctx + 0x84) = fcn_004c5620(4, ctx);
 		return;
 	case 1:
@@ -112,8 +106,7 @@ void __cdecl fcn_005624a0(char* ctx)
 			rec = (unsigned char*) (lpGebaeudeINST + idx * 0xa9);
 			mask = 0;
 			mask2 = 0;
-			type = *(unsigned char*) (lpGebaeudePROT
-			    + (unsigned int) *rec * 0x24d);
+			type = ((SpyProto*)lpGebaeudePROT)[*rec].kind;
 			if (type >= 0x20) {
 				mask2 = 1 << ((type - 0x20) & 0x1f);
 			} else {
@@ -126,10 +119,10 @@ void __cdecl fcn_005624a0(char* ctx)
 			}
 			rec = 0;
 			tries--;
-			idx = (idx + *(int*) (ctx + 0xc0)) & 0xff;
+			idx = (idx + *(int*) (ctx + 0xc0)) % 256;
 			hit = 0;
 		} while (tries != 0);
-		idx = (*(int*) (ctx + 0xc0) + idx) & 0xff;
+		idx = (*(int*) (ctx + 0xc0) + idx) % 256;
 		*(int*) (ctx + 0xbc) = idx;
 		if (hit == 0) {
 			break;

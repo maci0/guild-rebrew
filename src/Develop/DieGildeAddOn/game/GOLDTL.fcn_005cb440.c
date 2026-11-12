@@ -39,7 +39,7 @@ typedef struct Node {
 
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005ca560(Row*);
-int __cdecl fcn_005cf720(int, int, int, int);
+int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 Node* __cdecl he_fn_Handlung(void);
 Node* __cdecl fcn_005463a0(int, int, int);
 
@@ -93,7 +93,7 @@ matched1:
 	memset(a2, 0, a1 * 0x38);
 	o = a2;
 	e = (Ent*) g_slot_table;
-	while (n < a1 && (int) e < 0x85a0a0) {
+	while ((unsigned int) n < (unsigned int) a1 && (int) e < 0x85a0a0) {
 		if (e == a0) {
 			goto next;
 		}
@@ -139,7 +139,7 @@ accept2:
 next:
 		e = (Ent*) ((char*) e + 0x21c);
 	}
-	if (n < a1) {
+	if ((unsigned int) n < (unsigned int) a1) {
 		p = fcn_005463a0(1, 0, 0x41);
 		while (p != 0) {
 			if (p->keyac == a0->key) {

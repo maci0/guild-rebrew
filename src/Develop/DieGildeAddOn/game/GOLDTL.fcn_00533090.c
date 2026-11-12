@@ -65,9 +65,7 @@ void __cdecl fcn_00533090(unsigned int a0)
 	char* p;
 	char* q;
 	char* e;
-	/* codegen device: the reference keeps this zero in a frame slot and reloads it,
-	   so the pointer is volatile to force a memory home; semantics are unchanged. */
-	char* volatile d;
+	char* d;
 	char* v4;
 	char* v5;
 	int* ip;
@@ -188,13 +186,13 @@ void __cdecl fcn_00533090(unsigned int a0)
 						i = fcn_0057eba0(0x1a, (int) g_7746c4, 0,
 						    *(unsigned short*) g_7746cc);
 						if (i == 1 && g_7f4e51[g_774970 * 0x21c] == 0
-						    && *(unsigned short*) g_7746cc == 0xf2) {
+						    && g_7746c4 != 0 && *(unsigned short*) g_7746cc == 0xf2) {
 							v5 = (char*) gm_SetupEntityQuery(g_7746c4);
 						}
 					} else if (g_7746c8 != 0) {
 						i = fcn_0057eba0(0x1c, (int) g_7746c8, 0, 0);
 						if (i == 1 && g_7f4e51[g_774970 * 0x21c] == 0
-						    && *(unsigned short*) g_7746cc == 0xf2) {
+						    && g_7746c8 != 0 && *(unsigned short*) g_7746cc == 0xf2) {
 							v5 = (char*) gm_SetupEntityQuery(g_7746c8);
 						}
 					}
@@ -269,8 +267,8 @@ done:
 	}
 	g_7746d8 = fcn_00506380(g_774970, v4, g_7746cc, 0);
 	fcn_005338a0();
-	g_7746d4 = 0;
 	g_7747a0 = v4;
 	g_7747a4 = g_7746cc;
+	g_7746d4 = 0;
 }
 unsigned char _dpad_7e35c0[1152];

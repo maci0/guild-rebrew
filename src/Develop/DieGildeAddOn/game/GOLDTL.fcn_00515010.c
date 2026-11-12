@@ -28,8 +28,8 @@ void __cdecl fcn_00515010(void)
 
 	e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 	while (e != 0) {
-		if (lpGebaeudePROT[*e] != 0x1c) {
-			e[5] = *(unsigned char*) 0x6b5c60;
+		if (lpGebaeudePROT[*e * 0x24d] != 0x1c) {
+			e[5] = (unsigned char) g_6b5c60[0];
 		}
 		e = (unsigned char*) gm_FindNextFilteredEntity();
 	}
@@ -38,9 +38,9 @@ void __cdecl fcn_00515010(void)
 		return;
 	}
 	do {
-		if (lpGebaeudePROT[*e] != 0x1c) {
+		if (lpGebaeudePROT[*e * 0x24d] != 0x1c) {
 			cnt = 0;
-			e[5] = *(unsigned char*) 0x6b5c60;
+			e[5] = (unsigned char) g_6b5c60[0];
 			p = tbl;
 			for (i = 0; i < 0xc; i++) {
 				src = (char*) *(int*) ((i + (int) *e * 0xe) * 4 + 0x14a6560);

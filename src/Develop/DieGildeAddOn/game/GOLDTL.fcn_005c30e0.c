@@ -136,13 +136,13 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 		memset(&msg, 0, sizeof msg);
 		msg.f4 = 0x1e;
 		msg.f8 = ((GOLDTL_House5c30*) g_7f4ca0)[g_774970].f4;
-		msg.fc = id;
+		msg.fc = *(int*) (a1 + 1);
 		msg.f36 = 1;
 		msg.f28 = g_7f4c00.a;
 		msg.f2c = g_7f4c00.b;
 		msg.f30 = g_7f4c00.c;
 		msg.f34 = g_7f4c00.d;
-		msg.f58 = id;
+		msg.f58 = msg.fc;
 		fcn_004c4eb0(g_67e968);
 		fcn_004c5150(-1, ((GOLDTL_House5c30*) g_7f4ca0)[g_774970].f4,
 		             (char) g_773d75, v);

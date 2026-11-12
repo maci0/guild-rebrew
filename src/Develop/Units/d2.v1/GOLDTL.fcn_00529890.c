@@ -4,7 +4,7 @@ extern char* g_1015ea0;
 #include "GOLDTL.fcn_00529890_gconf.h"
 extern int g_67d370;
 extern int g_772514;
-extern char g_6b5c60[];
+extern char g_6b5c60[]; extern int g_6a25b4; extern char g_774724;
 
 void fcn_0046b2b0(int id);
 int fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
@@ -47,13 +47,13 @@ void __cdecl fcn_00529890(char* a0)
 	char v8[256];
 	char v9[128];
 
-	if (*(int*) 0x6a25b4 != -1) {
+	if (g_6a25b4 != -1) {
 		v12 = (char*) (g_entity_type_table + (unsigned int) (unsigned char) *a0 * 0x24d);
-		d2_SetForm(*(int*) 0x6a25b4, 1);
+		d2_SetForm(g_6a25b4, 1);
 		ResetDisplayCounters();
 		v13 = (int*) 0x7e30cc;
 		do {
-			if (v13[1] != -1) {
+			if (v13[1] != 0xffff) {
 				v3 = v13[1] * 0x21c;
 				if (!*(int*) (v3 + 0x7f4e24) || !*(char*) (v3 + 0x7f4ca8)) {
 					if (v13[-1] != -1) {
@@ -83,8 +83,8 @@ void __cdecl fcn_00529890(char* a0)
 		v11 = (char*) 0x7f4e05;
 		do {
 			if (*(char**) (v11 + 7) == a0 && *(int*) (v11 + 0x1f) && v11[-0x15d]) {
-				if (*(unsigned char*) 0x774724) {
-					if (*(unsigned char*) 0x774724 != 1
+				if ((unsigned char) g_774724) {
+					if ((unsigned char) g_774724 != 1
 						|| (v6 = fcn_00507c30((unsigned char) *v11), !v11[-1]
 							&& (v6 == 10 || v6 == 0xb || v6 == 0xc))) {
 label_529a17:
@@ -113,7 +113,7 @@ label_529a17:
 							break;
 						}
 						fcn_00517c00(v3, 1, 1, v8);
-						d2_SetForm(*(int*) 0x6a25b4, 1);
+						d2_SetForm(g_6a25b4, 1);
 						v5 = v6 * 0x4e;
 						v6 *= 0x28;
 						v4 = fcn_0046f740(6, v5, 0x5dc, g_772514);
@@ -138,7 +138,7 @@ label_529a17:
 						*(unsigned int*) (v6 + 0x7e30dc) = 0;
 						v1 = *v12;
 						if (v1 == 0x10 || v1 == 0x13 || v1 == 0x04) {
-							d2_SetForm(*(int*) 0x6a25b4, 1);
+							d2_SetForm(g_6a25b4, 1);
 							v16 = fcn_0046f100(6, v5 + 0x3f, 0x50, 0xf, 0,
 								g_772514);
 							*(unsigned int*) (v6 + 0x7e30d8) = v16;
@@ -223,7 +223,7 @@ label_529cf0:
 					fcn_0046b2b0(v13[1]);
 					v13[1] = -1;
 				}
-				d2_SetForm(*(int*) 0x6a25b4, 1);
+				d2_SetForm(g_6a25b4, 1);
 				if (v13[3] != -1) {
 					v16 = (unsigned int) (fcn_004ff040(
 						(char*) (v13[2] * 0x21c + 0x7f4ca0))

@@ -76,28 +76,28 @@ void __cdecl fcn_0054a210(char* a0)
                     return;
                 }
                 fcn_00549c50(0x65786563, a0, sel, -1);
-                *(unsigned int*) (o + 0x52) = *(unsigned int*) &g_7f4c00;
-                *(unsigned int*) (o + 0x56) = *(unsigned int*) ((char*) &g_7f4c00 + 4);
-                *(unsigned int*) (o + 0x5a) = *(unsigned int*) ((char*) &g_7f4c00 + 8);
-                *(unsigned short*) (o + 0x5e) = g_7f4c0c;
+                *(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+
+
+
                 fcn_00500bb0((Stamp_54a210*) (o + 0x52), 1, 0, 0);
-                *(unsigned int*) (o + 0xb0) = *(unsigned int*) &g_7f4c00;
-                *(unsigned int*) (o + 0xb4) = *(unsigned int*) ((char*) &g_7f4c00 + 4);
-                *(unsigned int*) (o + 0xb8) = *(unsigned int*) ((char*) &g_7f4c00 + 8);
-                *(unsigned short*) (o + 0xbc) = g_7f4c0c;
+                *(pos14_7f4c00*) (o + 0xb0) = g_7f4c00;
+
+
+
             }
             else {
                 fcn_00549c50(0x6e657720, a0, sel, -1);
                 *(int*) (o + 0xc0) = *(int*) (o + 0xc0) - 1;
-                *(unsigned int*) (o + 0x52) = *(unsigned int*) &g_7f4c00;
-                *(unsigned int*) (o + 0x56) = *(unsigned int*) ((char*) &g_7f4c00 + 4);
-                *(unsigned int*) (o + 0x5a) = *(unsigned int*) ((char*) &g_7f4c00 + 8);
-                *(unsigned short*) (o + 0x5e) = g_7f4c0c;
+                *(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+
+
+
                 fcn_00500bb0((Stamp_54a210*) (o + 0x52), 1, 0, 0);
-                *(unsigned int*) (o + 0xb0) = *(unsigned int*) &g_7f4c00;
-                *(unsigned int*) (o + 0xb4) = *(unsigned int*) ((char*) &g_7f4c00 + 4);
-                *(unsigned int*) (o + 0xb8) = *(unsigned int*) ((char*) &g_7f4c00 + 8);
-                *(unsigned short*) (o + 0xbc) = g_7f4c0c;
+                *(pos14_7f4c00*) (o + 0xb0) = g_7f4c00;
+
+
+
             }
             fcn_00500bb0((Stamp_54a210*) (o + 0xb0), 0x18, 0, 0);
             *(int*) (o + 0xb6) = 0;
@@ -115,15 +115,15 @@ void __cdecl fcn_0054a210(char* a0)
         fcn_004c4ef0(g_6a5998);
         *(int*) (o + 0xc0) = *(int*) (o + 0xc0) + 1;
     }
-    *(unsigned int*) (o + 0x52) = *(unsigned int*) &g_7f4c00;
-    *(unsigned int*) (o + 0x56) = *(unsigned int*) ((char*) &g_7f4c00 + 4);
-    *(unsigned int*) (o + 0x5a) = *(unsigned int*) ((char*) &g_7f4c00 + 8);
-    *(unsigned short*) (o + 0x5e) = g_7f4c0c;
+    *(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+
+
+
     fcn_00500bb0((Stamp_54a210*) (o + 0x52), 1, 0, 0);
-    *(unsigned int*) (o + 0xb0) = *(unsigned int*) &g_7f4c00;
-    *(unsigned int*) (o + 0xb4) = *(unsigned int*) ((char*) &g_7f4c00 + 4);
-    *(unsigned int*) (o + 0xb8) = *(unsigned int*) ((char*) &g_7f4c00 + 8);
-    *(unsigned short*) (o + 0xbc) = g_7f4c0c;
+    *(pos14_7f4c00*) (o + 0xb0) = g_7f4c00;
+
+
+
     fcn_00500bb0((Stamp_54a210*) (o + 0xb0), 0x18, 0, 0);
     *(int*) (o + 0xb6) = 0;
     *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;

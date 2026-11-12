@@ -1,4 +1,5 @@
 #include "client_dialog_helpers.h"
+#include "client_types.h"
 
 /* Dark corner dialog ("Dunkle Ecke"). Resolves the current target, offers
  * the neighbouring entities as the next target and books the skill checks
@@ -6,7 +7,8 @@
 
 extern char g_9a3800[];
 extern int g_664398[];
-extern int g_aed32c;
+extern char* g_aed32c;
+typedef struct BuildingRow557460 { unsigned char kind; char fields[0x24c]; } BuildingRow557460;
 
 int __cdecl fcn_004c4450(int h);
 int* __cdecl fcn_004c4480(int h);
@@ -80,7 +82,7 @@ void __cdecl fcn_00557460(char* dlg)
 		tries = 0x100;
 		do {
 			hit = (char*) (lpGebaeudeINST + scan * 0xa9);
-			kind = lpGebaeudePROT[(unsigned int) *(unsigned char*) hit * 0x24d];
+			kind = ((BuildingRow557460*) lpGebaeudePROT)[*(unsigned char*) hit].kind;
 			mask = 0;
 			mask2 = 0;
 			if (kind > 0x1f) {
@@ -242,11 +244,10 @@ void __cdecl fcn_00557460(char* dlg)
 			}
 			rec = fcn_00502cd0(*(int*) (hit + 0x5d), 2, 6, 0, 0x12c);
 			if (rec != 0) {
-				fcn_004c4510(*(int*) (rec + 2), (int) rec);
+				fcn_004c4510(rec, *(int*) (rec + 2));
 				j = 0;
 				while (j < 3) {
-					off = (unsigned int) ((char*) found - (char*) g_aed32c
-					    + j * 4 + (int) rec);
+					off = (unsigned int) (rec + 0x1c + j * 4 - g_aed32c);
 					fcn_004c4570(4, 1, (int) off, &found[j]);
 					j++;
 				}
@@ -324,11 +325,10 @@ void __cdecl fcn_00557460(char* dlg)
 			}
 			rec = fcn_00502cd0(*(int*) (hit + 0x5d), 2, 6, 0, 0x12c);
 			if (rec != 0) {
-				fcn_004c4510(*(int*) (rec + 2), (int) rec);
+				fcn_004c4510(rec, *(int*) (rec + 2));
 				j = 0;
 				while (j < 3) {
-					fcn_004c4570(4, 1, (int) ((char*) found
-					    - (char*) g_aed32c + j * 4 + (int) rec),
+					fcn_004c4570(4, 1, (int) (rec + 0x1c + j * 4 - g_aed32c),
 					    &found[j]);
 					j++;
 				}
@@ -342,10 +342,7 @@ void __cdecl fcn_00557460(char* dlg)
 		    + *(unsigned short*) (hit + 0x27) * 0x21c + 4), -1, text, 0,
 		    0x5ec, *(int*) (hit + 1), *(int*) (dlg + 0xb4), 0,
 		    (char*) 0x6b5c60);
-		*(int*) (dlg + 0x52) = g_7f4c00;
-		*(int*) (dlg + 0x56) = g_7f4c04;
-		*(int*) (dlg + 0x5a) = g_7f4c08;
-		*(unsigned short*) (dlg + 0x5e) = *(unsigned short*) 0x7f4c0c;
+		*(pos14_7f4c00*) (dlg + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
 		*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
 		return;
 	}

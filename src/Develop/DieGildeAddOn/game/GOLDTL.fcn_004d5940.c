@@ -11,6 +11,7 @@ extern double g_6640e8;
 extern double g_6640f8;
 extern double g_664108;
 extern float g_664168;
+extern int g_67d370;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
@@ -251,7 +252,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 					answer = 0;
 				}
 				if (g_100f1dc != -1) {
-					clicked = *(int*) 0x67d370;
+					clicked = g_67d370;
 					if (clicked == t4) {
 						g_774654 = 1;
 						answer = 1;

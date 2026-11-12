@@ -33,8 +33,9 @@ void __cdecl fcn_00532ef0(void);
 /* ADDRESS: GOLDTL 0x005aaf60 */
 void __cdecl fcn_005aaf60(char* a0)
 {
-	char buf[480];
+	char buf[512];
 	int dlg;
+	int ok;
 	int h;
 	int c;
 	int a;
@@ -50,6 +51,7 @@ void __cdecl fcn_005aaf60(char* a0)
 	int off;
 	float scale;
 
+	ok = 0;
 	a = -1;
 	b = -1;
 	c = -1;
@@ -66,14 +68,9 @@ void __cdecl fcn_005aaf60(char* a0)
 	if (h == 0) {
 		return;
 	}
-	m = gm_WalkEntityChain(g_774970);
-	if (m <= 1) {
-		m = 1;
-	}
-	n = gm_WalkEntityChain(*(unsigned short*) (a0 + 0x27));
-	if (n <= 1) {
-		n = 1;
-	}
+	m = gm_WalkEntityChain(g_774970) > 1 ? gm_WalkEntityChain(g_774970) : 1;
+	n = gm_WalkEntityChain(*(unsigned short*) (a0 + 0x27)) > 1
+		? gm_WalkEntityChain(*(unsigned short*) (a0 + 0x27)) : 1;
 	total = (float) (m + n);
 	cnt = (int) (total * g_662910);
 	v = gm_AccumulateTyped2((char*) (g_774970 * 0x21c + (int) g_7f4ca0));
@@ -84,7 +81,10 @@ void __cdecl fcn_005aaf60(char* a0)
 	fcn_005340f0(g_772514);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1986);
-	if (v < cnt) {
+	if (v >= cnt) {
+		ok = 1;
+	}
+	if (!ok) {
 		io_AppendText(0x1987, g_774970,
 			*(unsigned short*) ((unsigned char) g_773d75 * 0x2f4 + 0x8680b4) * 2 + 0x9a8);
 	} else {
@@ -112,8 +112,8 @@ void __cdecl fcn_005aaf60(char* a0)
 					fcn_004c5150(*(int*) (h + 2), *(int*) (g_774970 * 0x21c + (int) g_7f4ca4),
 						g_773d75, d);
 					frac = (float) (d * 255) / total;
-					fcn_004c54c0(*(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + (int) g_7f4ca4),
-						*(int*) (g_774970 * 0x21c + (int) g_7f4ca4), (int) frac, 1);
+					fcn_004c54c0(*(int*) (g_774970 * 0x21c + (int) g_7f4ca4),
+						*(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + (int) g_7f4ca4), (int) frac, 1);
 					scale = frac * *(float*) 0x6629d0;
 					for (i = 0; i < 0x300; i++) {
 						off = *(unsigned short*) (a0 + 0x27) * 0x21c;

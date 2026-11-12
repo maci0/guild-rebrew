@@ -90,7 +90,7 @@ typedef struct Msg {
 extern Ord g_100d0c0[];
 extern Bld g_100b0c0[];
 extern Ent g_7f4ca0[];
-extern char lpGebaeudePROT[];
+extern unsigned char* lpGebaeudePROT;
 extern char* g_item_def_table;
 extern char g_7f4ca4[];
 extern char g_7f4c00[];
@@ -387,10 +387,10 @@ after:
 	for (j = 0; j < 0x300; j++) {
 		if (g_7f4ca0[j].f8 > 0 && g_7f4ca0[j].id != 0xffff
 		    && g_7f4ca0[j].f2 != 0xa
-		    && g_7f4ca0[j].f16c == *(int*) h
+		    && g_7f4ca0[j].f16c == (int) h
 		    && g_7f4ca0[j].f165 != 0
 		    && g_7f4ca0[j].f184 != 0
-		    && *(int*) (*(char**) (g_7f4ca0[j].f184) + 0x2c) == *(int*) (h + 1)
+		    && *(int*) (g_7f4ca0[j].f184 + 0x2c) == *(int*) (h + 1)
 		    && (g_7f4ca0[j].host == 0 || *(unsigned char*) g_7f4ca0[j].host != 0x28)
 		    && !(flag != 0 && (char*) a == (char*) &g_7f4ca0[j])) {
 			fcn_00529160(h, 0, g_7f4ca0[j].id, 0);
@@ -454,7 +454,7 @@ after:
 
 		ch = -1;
 		for (i = 0; i < 8; i++) {
-			if (strstr(p2 + 0x7e24 + i * 0x40, (char*) 0x67dd10) != 0) {
+			if (strstr((char*) p2 + 0x7e24 + i * 0x40, (char*) 0x67dd10) != 0) {
 				ch = i;
 			}
 		}
@@ -471,7 +471,7 @@ after:
 		v = 0;
 		for (i = 0; i < *(int*) p2 && v < 4; i++) {
 			for (j = 0; j < *(int*) p2 && v < 4; j++) {
-				if ((int) *(unsigned char*) (*(int*) (p2 + 0x14)
+				if ((int) *(unsigned char*) (*(int*) ((char*) p2 + 0x14)
 				                             + i * *(int*) p2 + j) != ch) {
 					continue;
 				}
@@ -498,7 +498,8 @@ ltail:
 					st.rec = rec;
 					fcn_00487f90((int*) &st);
 				}
-				if (((Ord*) rec)->flags & 8) {
+			}
+			if (((Ord*) rec)->flags & 8) {
 					if (((ItemDef*) g_item_def_table)[((Ord*) rec)->f0].kind == 0x17) {
 						st.rec = rec;
 						if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].kind == 0xb) {
@@ -519,7 +520,6 @@ ltail:
 						*(int*) 0x100dc3c = *(int*) 0x100dc3c + 1;
 					}
 				}
-			}
 			rec += 0x58;
 		}
 	}

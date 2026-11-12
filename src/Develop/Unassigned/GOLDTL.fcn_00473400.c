@@ -63,9 +63,10 @@ int __cdecl fcn_00473400(char* path, char* name)
 	strcpy(((VfsEntry*) g_772500)[index].name, name);
 	((VfsEntry*) g_772500)[index].flags |= 1;
 	((VfsEntry*) g_772500)[index].flags &= 0xfd;
+	kind = ((VfsEntry*) g_772500)[index].kind;
 	save = index;
 	if (kind == 5 || kind == 8) {
-		for (i = 1; i < *(unsigned short*) (buf + 4) - 1; i++) {
+		for (i = 1; i < *(unsigned short*) (buf + 4); i++) {
 			index++;
 			((VfsEntry*) g_772500)[index].offset = 0;
 			*(int*) ((VfsEntry*) g_772500)[index].name = g_67d8c8;

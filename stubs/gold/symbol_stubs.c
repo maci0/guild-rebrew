@@ -3125,10 +3125,7 @@ int __cdecl fcn_00468cd0(int a, int b)
 	return 0;
 }
 
-int __cdecl fcn_004690a0(int a)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_004693b0(int a, int b, int c, int d)
 {
@@ -3174,15 +3171,9 @@ int __cdecl fcn_0046c620(int g, int sel)
 	return 0;
 }
 
-int __cdecl fcn_0046c9e0(void)
-{
-	return 0;
-}
 
-int __cdecl fcn_0046cd90(int x, int y, int element)
-{
-	return 0;
-}
+
+
 
 int __cdecl fcn_0046e830(int a, int b, int c, int d, int e)
 {
@@ -6494,11 +6485,11 @@ int __cdecl sub_00576750(char* a, char* b, char* c, int d)
 /* Comparison-only conditional alias stubs; no native implementation claim. */
 void __cdecl fcn_00402540(char *a) {}
 
-char *__cdecl fcn_00446e10(char *a, float *b, float *c, char *d) { return 0; }
+
 
 char __cdecl fcn_00447fd0(void *a, void *b, void *c) { return 0; }
 
-char *__cdecl fcn_00449690(char *a, int b, char *c, char *d) { return 0; }
+
 
 void __cdecl fcn_0057c950(char *a) {}
 

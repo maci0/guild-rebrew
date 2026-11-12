@@ -4,16 +4,16 @@
 #include "client_types.h"
 
 extern char* g_7746cc;
-extern char* g_item_def_table;
-extern char* g_entity_type_table;
+#include "game_data.h"
+typedef struct JobProto { unsigned char kind; unsigned char rest[0x24c]; } JobProto;
 extern char g_7f4ca4[];
 extern unsigned int g_6a2520;
-extern unsigned int g_6b7fac;
+
 extern int g_67a370;
 extern float g_696540[];
 extern float g_696550[];
 extern int g_6b7fdc;
-extern int g_7f4c04;
+
 extern pos14_7f4c00 g_7f4c00;
 
 int __cdecl fcn_00500e20(int*);
@@ -30,7 +30,7 @@ void __cdecl fcn_00511040(int, char*);
 void __cdecl fcn_00530c60(unsigned char* a0)
 {
 	char* itemdef;
-	char* type_row;
+	JobProto* type_row;
 	char* ent;
 	char* info;
 	char* info2;
@@ -50,16 +50,16 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 	int k;
 	int n;
 	int r;
-	int c;
+	int c; unsigned char category;
 	int mode;
 	int id;
 
 	itemdef = 0;
 	if (g_7746cc != 0 && *(unsigned short*) g_7746cc != 0xfd) {
-		itemdef = g_item_def_table + *(unsigned short*) g_7746cc * 0x41;
+		itemdef = lpObjektePROT + *(unsigned short*) g_7746cc * 0x41;
 	}
-	type_row = g_entity_type_table + (unsigned char) *a0 * 0x24d;
-	if (g_6b7fac > g_6a2520 + 500) {
+	type_row = &((JobProto*)lpGebaeudePROT)[*a0];
+	if ((unsigned int)g_6b7fac > g_6a2520 + 500) {
 		if (g_67a370 != 0) {
 			info = *(char**) (g_67a370 + 0x3c8);
 			if (info != 0 && *(int*) (info + 0x318) != 0) {
@@ -71,7 +71,7 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 	hour = fcn_00500e20((int*) &g_7f4c00);
 	i = 0;
 	do {
-		ent = *(char**) (0x7e4260 + i * 4);
+		ent = g_7e4260[i];
 		if (ent != 0 && (info = *(char**) (ent + 0x184)) != 0
 		    && *(int*) (info + 0x2c) == *(int*) (a0 + 1)
 		    && *(unsigned char*) (ent + 8) != 0
@@ -79,9 +79,10 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 			mode = 0;
 			job[0] = 0;
 			r = fcn_00530b20(ent, (int) a0, job);
+			info = *(char**)(ent + 0x184);
 			if (r != 0) {
-				c = *(unsigned char*) type_row;
-				if (c == 0x0d) {
+				category = type_row->kind;
+				if (category == 0x0d) {
 					if (g_7746cc != 0) {
 						if (*(unsigned short*) g_7746cc == 0x37
 						    && *(int*) (info + 0x30) == *(int*) (g_7746cc + 2)) {
@@ -99,7 +100,7 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 					}
 				}
 				else {
-					if (c == 8 && *(unsigned short*) g_7746cc == 0xdd
+					if (category == 8 && *(unsigned short*) g_7746cc == 0xdd
 					    && *(char*) (ent + 0x180) == 0x15) {
 						goto flag_on;
 					}
@@ -111,14 +112,14 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 				}
 			}
 			else {
-				c = *(unsigned char*) type_row;
-				if (c == 0x16 && g_7746cc != 0 && *(unsigned short*) g_7746cc == 0x120
+				category = type_row->kind;
+				if (category == 0x16 && g_7746cc != 0 && *(unsigned short*) g_7746cc == 0x120
 				    && *(int*) (info + 0x30) == *(int*) (g_7746cc + 2)
 				    && (*(unsigned int*) (ent + 0x1c8) & 0x1000) == 0) {
 					strcpy(job, "besucher");
 					goto flag_on;
 				}
-				if (c == 1 && *(char**) (ent + 0x170) == (char*) a0
+				if (category == 1 && *(char**) (ent + 0x170) == (char*) a0
 				    && (*(unsigned int*) (ent + 0x1c8) & 0x1000) == 0) {
 					strcpy(job, "bewohner");
 					goto flag_on;
@@ -162,7 +163,7 @@ after:
 						flags[k] = 1;
 						k += 1;
 					}
-					for (q = (char*) 0x7e4260; q < (char*) 0x7e42e0; q += 4) {
+					for (q = (char*)g_7e4260; q < (char*)(g_7e4260 + 32); q += 4) {
 						info2 = *(char**) q;
 						if (info2 != 0 && (info2 = *(char**) (info2 + 0x184)) != 0
 						    && (id = *(int*) (info2 + 0x28)) != -1

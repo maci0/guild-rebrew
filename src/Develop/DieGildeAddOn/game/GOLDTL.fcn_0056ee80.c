@@ -2,7 +2,8 @@
 
 #pragma intrinsic(memcpy, memset, strcpy, strlen, strcat)
 
-extern char g_7f4c00[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 extern char g_6a58ec[];
@@ -13,7 +14,7 @@ extern char g_6b5c60[];
 extern char s_6a6dc4[];
 extern char s_6a6a60[];
 extern char s_6a6a40[];
-extern char s_6a6a4c[];
+
 extern char s_68be9c[];
 extern char s_68bea4[];
 extern double g_6629f8;
@@ -29,7 +30,7 @@ void __cdecl fcn_00500bb0(void*, int, int, int);
 int __cdecl fcn_0055be70(int*);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
 void __cdecl fcn_004c5ed0(int, char*, int);
-unsigned short __cdecl gm_RandomMod(int);
+int __cdecl gm_RandomMod(unsigned short);
 char* __cdecl fcn_005463a0(int, int, int);
 int __cdecl fcn_004c4450(int);
 int* __cdecl fcn_004c4480(int);
@@ -102,7 +103,7 @@ void __cdecl fcn_0056ee80(char* a0)
 				}
 			}
 		}
-		memcpy(a0 + 0x52, g_7f4c00, 14);
+		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 		fcn_00500bb0(a0 + 0x52, 0, 4, 0);
 		*(int*) (a0 + 0x70) = 1;
 		return;
@@ -119,13 +120,13 @@ void __cdecl fcn_0056ee80(char* a0)
 			}
 			i++;
 			if (i >= 8) {
-				memcpy(a0 + 0x52, g_7f4c00, 14);
+				*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 				fcn_00500bb0(a0 + 0x52, 0, 0, 1);
 				*(int*) (a0 + 0x70) = 2;
 				return;
 			}
 		}
-		memcpy(a0 + 0x52, g_7f4c00, 14);
+		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 		fcn_00500bb0(a0 + 0x52, 0, 4, 0);
 		return;
 	case 2:
@@ -146,7 +147,7 @@ void __cdecl fcn_0056ee80(char* a0)
 			*(int*) (a0 + 0xb8) = *(int*) (h + 4);
 			*(int*) (a0 + 0xbc) = *(int*) (h + 0xb0);
 			*(int*) (a0 + 0x70) = 3;
-			memcpy(a0 + 0x52, g_7f4c00, 14);
+			*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 			return;
 		}
 label_1bc:
@@ -162,7 +163,7 @@ label_1bc:
 			}
 		}
 		*(int*) (a0 + 0x70) = 5;
-		memcpy(a0 + 0x52, g_7f4c00, 14);
+		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 		fcn_00500bb0(a0 + 0x52, 0, 0xf, 0);
 		return;
 	case 3:
@@ -202,6 +203,7 @@ label_1bc:
 				io_FormatTextBuffer(buf, 0x19ea, rec1, ent, *(unsigned short*) row);
 				fcn_00545d40(*(int*) (val + 4), *(int*) (val + 4), buf, 1, 0x5f0, s_6a6a60);
 				io_FormatTextBuffer(buf, 0x19eb, rec1, ent);
+				fcn_00545d40(*(int*) (row + 4), *(int*) (row + 4), buf, 1, 0x5f0, (char*) 0x6a6a4c);
 				fcn_004c51a0(*(int*) (row + 4), *(int*) (val + 4), g_773d75, ent);
 			}
 			q = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xbc));
@@ -286,14 +288,14 @@ label_1bc:
 				while (q != 0) {
 					if ((gm_RandomMod(100) & 0xffff) >= 0x33) {
 						cnt = gm_GetMsgField(h, (int*) q);
-						cnt = (int) (cnt * count * g_6629f8);
+						cnt = (int) ((double) cnt * ((double) count * g_6629f8));
 						if (cnt <= 0) {
 							cnt = 1;
 						}
-						fcn_0064d41a(str, s_68be9c, cnt, *(int*) (*(int*) q * 8 + 0x14a79c0));
+						fcn_0064d41a(str, s_68be9c, cnt, *(int*) (*(unsigned short*) q * 8 + 0x14a79c0));
 						strcat(msg, str);
-						fcn_004c51f0(*(int*) (i + 2), *(int*) (h + 2), *(int*) q, cnt, g_773d75, strlen(msg));
-						val = (int) (fcn_0050bb50(*(int*) q, g_773d75) * cnt + val);
+						fcn_004c51f0(*(int*) (i + 2), *(int*) (h + 2), *(unsigned short*) q, cnt, g_773d75, 0);
+						val = (int) ((double) fcn_0050bb50(*(unsigned short*) q, g_773d75) * cnt + val);
 					}
 					q = (int) gm_NextEntityQueryMatch();
 				}
@@ -316,6 +318,7 @@ label_1bc:
 			fcn_00546190(a0);
 			return;
 		}
+		goto tail;
 label_fa92:
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
 		if (rec1 == 0) {

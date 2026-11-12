@@ -45,12 +45,18 @@ struct SaveHeaderTail {
 };
 #pragma pack()
 extern char g_save_header_tail[]; /* 0x1002d4f0 */
+extern unsigned short g_7ea3c0[];
+int __cdecl fcn_0041bac0(char a, char b, char c);
 
 int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 {
-	void* buf;
+	unsigned char* buf;
 	int i;
+	int n;
+	int x;
+	int y;
 
+	n = 0;
 	buf = m_alloc(0xe100, &s_ls_tmp_1002d4fc);
 	if (!ls_ReadVfsDataChecked(dest, 4, 1, stream)) {
 		return 0;
@@ -130,6 +136,12 @@ int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 		}
 		if (!ls_ReadVfsDataChecked(buf, 0xe100, 1, stream)) {
 			return 0;
+		}
+		for (y = 0; y < 120; y++) {
+			for (x = 0; x < 160; x++) {
+				g_7ea3c0[n] = (unsigned short) fcn_0041bac0(buf[n * 3], buf[n * 3 + 1], buf[n * 3 + 2]);
+				n++;
+			}
 		}
 	}
 	if (buf != 0) {

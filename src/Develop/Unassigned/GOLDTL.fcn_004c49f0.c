@@ -21,7 +21,7 @@ int __cdecl fcn_004c49f0(char* src)
 		}
 		return 1;
 	}
-	pn = (char**) (p + 0x95);
+	pn = (char**) (g_aed200 + 0x95);
 	g_aed200 = *pn;
 	memcpy(p, src, 0x99);
 	*(unsigned short*) (p + 1) = fcn_004c3a50(p);

@@ -46,14 +46,14 @@ int __cdecl fcn_005b0f00(char* w)
 			g_774a6c = x;
 			g_774a70 = y;
 			bx = *(int*) (w + 0x268);
-			bp = *(int*) (w + 0x258);
 			g_774a5c = bx;
-			g_774a60 = bp;
+			bp = *(int*) (w + 0x258);
 			g_774a50 = g_6772bc;
 			g_774a44 = g_6772c0;
 			g_774a54 = g_6b5c80;
 			g_774a48 = g_6b5c84;
 			g_6b5c80 = x - bx;
+			g_774a60 = bp;
 			g_6772bc = g_778d24 - bx - 0x200 + x;
 			g_6b5c84 = y - bp;
 			g_6772c0 = g_778d20 - bp - 0x168 + y;

@@ -1,3 +1,5 @@
+#include "client_data.h"
+extern char g_779160[];
 extern char* g_1015ea0;
 extern char* g_item_def_table;
 extern int g_772514;
@@ -8,11 +10,12 @@ extern int g_67d370;
 extern int g_14ce8e0;
 #include "game_player.h"
 extern char* g_7746cc;
-extern int g_7f4c00;
+
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char g_7f4ca4[];
+extern char g_7f4ca0[];
 extern int g_774654;
 
 void* __cdecl memset(void*, int, unsigned int);
@@ -105,14 +108,14 @@ int __cdecl fcn_0059b260(char* a0)
 	d2_SetForm(h, 3);
 	io_AppendText(0xc7);
 	fcn_00594340();
-	*(int*) 0x779160 = 0;
+	*(int*) g_779160 = 0;
 	count = 1;
 	d2_SetForm(h, 0);
 	k = g_772514 * 0x3cc;
-	*(int*) (k + 0x10162e8) = 0xe;
-	*(int*) (k + 0x10162ec) = 0xe;
-	*(int*) (k + 0x10162f0) = 0xe;
-	*(int*) (k + 0x10162f4) = 0xe;
+	*(int*) (k + (int) g_1015f40 + 0x3a8) = 0xe;
+	*(int*) (k + (int) g_1015f40 + 0x3ac) = 0xe;
+	*(int*) (k + (int) g_1015f40 + 0x3b0) = 0xe;
+	*(int*) (k + (int) g_1015f40 + 0x3b4) = 0xe;
 	fcn_00533dc0(g_772514, 0x70b, 0x742);
 	fcn_00533f40(0x270, 0x15e, g_772514, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
 	*(int*) (g_1015ea0 + item * 0x2f4 + 0x84) = 0x54;
@@ -149,7 +152,7 @@ int __cdecl fcn_0059b260(char* a0)
 			i = 0;
 			if (count > 0) {
 				do {
-					e = (char*) (0x779160 + i * 0x58);
+					e = (char*) ((int) g_779160 + i * 0x58);
 					if (g_67d370 == *(int*) (e + 0x34)) {
 						if (hasAny != 0) {
 							if (i == 0) {
@@ -157,7 +160,7 @@ int __cdecl fcn_0059b260(char* a0)
 								p = fcn_005463a0(2, 0, 9, 3, *(int*) (a0 + 1));
 								if (p == 0) {
 									memset(&msg, 0, 0xf8);
-									msg.f28 = g_7f4c00;
+									msg.f28 = g_7f4c00.a;
 									msg.f30 = g_7f4c08;
 									msg.type = 9;
 									msg.f08 = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
@@ -190,19 +193,19 @@ int __cdecl fcn_0059b260(char* a0)
 								}
 								if (p == 0) {
 									memset(&msg, 0, 0xf8);
-									msg.f28 = g_7f4c00;
+									msg.f28 = g_7f4c00.a;
 									msg.type = 8;
 									msg.f30 = g_7f4c08;
 									msg.f36 = 1;
 									*(unsigned short*) &msg.f58 = (unsigned short) *(int*) e;
-									msg.f0c = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
+									msg.f08 = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
+									msg.f10 = 0;
 									msg.f14 = 0;
-									msg.f18 = 0;
-									msg.f10 = *(int*) (a0 + 1);
-									msg.f30 = g_7f4c04;
-									msg.f38 = (unsigned short) g_7f4c0c;
-									msg.f60 = *(int*) (a0 + 1);
-									msg.f64 = *(int*) (p2 + 2);
+									msg.f0c = *(int*) (a0 + 1);
+									msg.f2c = g_7f4c04;
+									msg.f34 = (unsigned short) g_7f4c0c;
+									msg.f5c = *(int*) (a0 + 1);
+									msg.f60 = *(int*) (p3 + 2);
 									k = fcn_004c5530((char*) &msg);
 									e = (char*) fcn_004c4450(k);
 									while (e == 0) {
@@ -221,7 +224,7 @@ int __cdecl fcn_0059b260(char* a0)
 									}
 									if (*(int*) (q + 0x10) != 0) {
 										fcn_00529160(a0, g_7746cc, n, p);
-										*(unsigned char*) (0x7f4e28 + n * 0x21c) = 0;
+										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 0;
 									}
 									q += 0x28;
 								} while (q < (char*) 0x7e35d0);
@@ -237,16 +240,16 @@ int __cdecl fcn_0059b260(char* a0)
 								if (n == 0xffff) {
 									break;
 								}
-								p = *(char**) (0x7f4e1c + n * 0x21c);
+								p = *(char**) (((int) g_7f4ca0 + 0x17c) + n * 0x21c);
 								if (i == 0) {
 									if (p != 0 && *(char*) p == 9 && *(int*) (p + 0x10) == *(int*) (a0 + 1)) {
-										*(unsigned char*) (0x7f4e28 + n * 0x21c) = 0;
+										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 0;
 									}
 								}
 								else {
 									if (p != 0 && *(char*) p == 8 && *(int*) (p + 0x10) == *(int*) (a0 + 1)
 										&& *(unsigned short*) (p + 0xac) == *(int*) e) {
-										*(unsigned char*) (0x7f4e28 + n * 0x21c) = 1;
+										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 1;
 									}
 								}
 								q += 0x28;
@@ -279,7 +282,7 @@ int __cdecl fcn_0059b260(char* a0)
 					if (n == 0xffff) {
 						break;
 					}
-					*(unsigned char*) (0x7f4e28 + n * 0x21c) = 0;
+					*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 0;
 					q += 0x28;
 				} while (q < (char*) 0x7e35d0);
 			}
@@ -291,17 +294,17 @@ int __cdecl fcn_0059b260(char* a0)
 		e = fcn_00502cd0(*(int*) (p1 + 0x14), 1, 4, 0x17);
 		if (e != 0) {
 			k = count;
-			p = (char*) (0x779160 + count * 0x58);
+			p = (char*) ((int) g_779160 + count * 0x58);
 			do {
 				if (*(int*) (e + 0xe) > 1) {
 					v = 0;
 					for (n = 1; n < k; n++) {
-						if (*(int*) (0x779160 + n * 0x58) == *(unsigned short*) e) {
+						if (*(int*) ((int) g_779160 + n * 0x58) == *(unsigned short*) e) {
 							v = 1;
 							break;
 						}
 					}
-					if (v == 0 && p < (char*) 0x7796e0) {
+					if (v == 0 && p < (g_779160 + 0x580)) {
 						*(int*) p = *(unsigned short*) e;
 						p += 0x58;
 						k++;
@@ -313,7 +316,7 @@ int __cdecl fcn_0059b260(char* a0)
 		}
 		if (count > 1) {
 			n = count - 1;
-			p = (char*) 0x779208;
+			p = (g_779160 + 0xa8);
 			do {
 				q = p - 0x4c;
 				*(int*) p = 0x7fffffff;

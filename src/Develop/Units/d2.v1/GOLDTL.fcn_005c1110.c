@@ -36,7 +36,7 @@ int __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_005c1110(void)
 {
 	int n;
-	int t;
+	unsigned int t;
 	unsigned short* p;
 	int a[4];
 	int b[4];
@@ -49,7 +49,6 @@ int __cdecl fcn_005c1110(void)
 	int r;
 	int* q;
 
-	t = *(int*) &g_6b7fac;
 	a[0] = -1;
 	a[1] = -1;
 	a[2] = -1;
@@ -58,6 +57,7 @@ int __cdecl fcn_005c1110(void)
 	b[1] = -1;
 	b[2] = -1;
 	b[3] = -1;
+	t = *(int*) &g_6b7fac;
 	h = fcn_00470820(0, 0, (char*) 0x6ac514);
 	fcn_00471b60(h);
 	d2_SetOverlayAnimation(0, 0);
@@ -67,7 +67,7 @@ int __cdecl fcn_005c1110(void)
 	do {
 		if ((unsigned int) t <= (unsigned int) *(int*) &g_6b7fac) {
 			n = 1;
-			t = *(int*) &g_6b7fac + 0x1f4;
+			t = (unsigned int) *(int*) &g_6b7fac + 0x1f4U;
 			a[0] = -1;
 			b[0] = -1;
 			a[1] = -1;
@@ -79,7 +79,7 @@ int __cdecl fcn_005c1110(void)
 			ent = (Ent5c1110*) fcn_005463a0(n, 0, 0x35);
 			if (ent != 0) {
 				i = 2;
-				for (k = 0; ; k += 4) {
+				for (k = 0; ; ) {
 					if (k >= 0x10) {
 						goto done;
 					}
@@ -99,7 +99,7 @@ int __cdecl fcn_005c1110(void)
 							    + 0x3cc * *(int*) ((char*) &g_1038140
 							    + h * 0x2bc + n * 8)), 1);
 							n++;
-							i += 2;
+							i += 2; k += 4;
 						}
 					}
 					ent = (Ent5c1110*) he_fn_Handlung();
@@ -110,20 +110,21 @@ int __cdecl fcn_005c1110(void)
 			}
 			if (n < 5) {
 				q = (int*) ((char*) &g_1038140 + h * 0x2bc + n * 8);
-				for (j = n * 2 - 1; j < 9; j += 2) {
+				j = n * 2 - 1;
+				do {
 					d2_SetForm(h, j);
 					io_AppendText(0x6811b0);
 					fcn_00472170(*(int*) ((char*) &g_10161bc
 					    + 0x3cc * *q), 0);
-					q += 2;
-				}
+					j += 2; q += 2;
+				} while (j < 9);
 			}
-done:
-			n = -1;
+done:;
+
 		}
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;
-		} else if (*(int*) &g_100f1dc != n && *(int*) 0x67d370 != n) {
+		} else if (*(int*) &g_100f1dc != -1 && *(int*) 0x67d370 != -1) {
 			for (k = 0; k < 4; k++) {
 				if (a[k] == *(int*) 0x67d370) {
 					break;
@@ -136,9 +137,10 @@ done:
 					    * (unsigned int) *(unsigned short*) &g_774970, 2) != 0) {
 						*(pos14_7f4c00*) ((char*) o + 0x52) =
 						    *(pos14_7f4c00*) &g_7f4c00;
-						r = fcn_004c5620(n, (char*) o);
-						if (r != n) {
-							while (fcn_004c4450(r) == 0) {
+						r = fcn_004c5620(-1, (char*) o);
+						if (r != -1) {
+							for (;;) {
+								if (fcn_004c4450(r) != 0) break;
 								fcn_005373e0(0, 0x677c7);
 							}
 						}

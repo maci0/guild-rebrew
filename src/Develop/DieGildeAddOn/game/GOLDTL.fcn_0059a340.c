@@ -12,6 +12,9 @@ extern char g_774964;
 extern int g_774950;
 extern int g_7f4c04;
 extern int g_7f4e10;
+extern char g_7f4ca0[];
+extern char g_6b5c60[];
+extern int g_7f4c00;
 extern int g_774650;
 extern int g_774658;
 extern int g_14ce8d4;
@@ -79,12 +82,12 @@ void __cdecl fcn_0059a340(void)
 	int v8;
 	int v9;
 	int state;
-	short v13;
+	unsigned short v13;
 	char* p;
 	char* v12;
 	char c;
 
-	v7 = fcn_00500e20((char*) 0x7f4c00);
+	v7 = fcn_00500e20((char*) &g_7f4c00);
 	g_677508 = -1;
 	fcn_00516f60();
 	if (g_773ddc) {
@@ -99,24 +102,24 @@ void __cdecl fcn_0059a340(void)
 	g_774964 = 1;
 	v13 = g_774970;
 	if (g_7747b0 & 4) {
-		v12 = (char*) 0x7f4ca2;
+		v12 = g_7f4ca0 + 2;
 		do {
-			if (*(short*) (v12 - 2) != -1
-				&& *(int*) (v12 + 0x52) == *(int*) (g_774970 * 0x21c + 0x7f4cf4)
-				&& *(short*) (v12 - 2) != g_774970
+			if (*(unsigned short*) (v12 - 2) != 0xffff
+				&& *(int*) (v12 + 0x52) == *(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x54)
+				&& *(unsigned short*) (v12 - 2) != g_774970
 				&& (c = *v12, c == 6 || c == 7 || c == 5)
-				&& *(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4) < *(unsigned int*) (v12 + 2)) {
+				&& *(unsigned int*) (g_7f4ca0 + g_774970 * 0x21c + 0x4) < *(unsigned int*) (v12 + 2)) {
 				fcn_005c80f0();
 				v13 = g_774970;
 				break;
 			}
 			v12 += 0x21c;
-		} while ((int) v12 < (int) 0x85a0a2);
+		} while ((int) v12 < (int) (g_7f4ca0 + 0x65402));
 	}
 	if ((g_7747b0 & 1) && g_774950 == 1) {
 		v8 = (int) gm_StartFilteredEntitySearch(1, 4, v13);
 		while (v8) {
-			if (v8 != *(int*) (g_774970 * 0x21c + 0x7f4e10)) {
+			if (v8 != *(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x170)) {
 				fcn_0052cf20(v8);
 				break;
 			}
@@ -124,7 +127,7 @@ void __cdecl fcn_0059a340(void)
 		}
 	}
 	fcn_004c39b0();
-	v8 = 0;
+	state = 0;
 	fcn_0042df30(0x538060, 0);
 	v9 = fcn_005373e0(0x59a340, 0x67fff);
 	do {
@@ -132,8 +135,8 @@ void __cdecl fcn_0059a340(void)
 			g_772d10 = 0;
 			g_774964 = 0;
 			fcn_004c3a10();
-			fcn_00475220((char*) 0x6b5c60);
-			fcn_00533a40((char*) 0x6b5c60);
+			fcn_00475220(g_6b5c60);
+			fcn_00533a40(g_6b5c60);
 			fcn_00530510();
 			g_7725c4 = 0;
 			g_7725c8 = 0;
@@ -147,11 +150,12 @@ void __cdecl fcn_0059a340(void)
 			return;
 		}
 		g_774658 = g_774650;
-		if (*(unsigned char*) (g_774970 * 0x21c + 0x7f4e51) > 0)
+		if (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x1b1) > 0)
 			lc_PlayerInJail();
 		fcn_0052c9b0();
-		fx = g_7f4c04 & 0xffff;
-		if (v8 == 0) {
+
+		if (state == 0) {
+			fx = g_7f4c04 & 0xffff;
 			if ((float) fx < *(float*) (v7 * 4 + 0x696540)
 				|| *(float*) (v7 * 4 + 0x696550) <= (float) fx) {
 				v8 = (int) gm_StartFilteredEntitySearch(1, 6);
@@ -164,9 +168,10 @@ void __cdecl fcn_0059a340(void)
 					}
 					v8 = (int) gm_FindNextFilteredEntity();
 				}
-				v8 = 1;
+				state = 1;
 			}
-		} else if (v8 == 1) {
+		} else if (state == 1) {
+			fx = g_7f4c04 & 0xffff;
 			if (*(float*) (v7 * 4 + 0x696540) <= (float) fx
 				&& (float) fx < *(float*) (v7 * 4 + 0x696550)) {
 				v8 = (int) gm_StartFilteredEntitySearch(1, 6);
@@ -175,9 +180,10 @@ void __cdecl fcn_0059a340(void)
 						fcn_0052db70(v8);
 					v8 = (int) gm_FindNextFilteredEntity();
 				}
-				v8 = 2;
+				state = 2;
 			}
-		} else if (v8 == 2) {
+		} else if (state == 2) {
+			fx = g_7f4c04 & 0xffff;
 			if ((float) fx < *(float*) (v7 * 4 + 0x696540)
 				|| *(float*) (v7 * 4 + 0x696550) <= (float) fx) {
 				v8 = (int) gm_StartFilteredEntitySearch(1, 6);
@@ -190,7 +196,7 @@ void __cdecl fcn_0059a340(void)
 					}
 					v8 = (int) gm_FindNextFilteredEntity();
 				}
-				v8 = 3;
+				state = 3;
 			}
 		}
 		fcn_0059a2a0();

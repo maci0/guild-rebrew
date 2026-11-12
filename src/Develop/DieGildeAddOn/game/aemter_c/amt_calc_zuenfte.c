@@ -49,13 +49,16 @@ char* __cdecl strupr(char*);
 /* ADDRESS: GOLDTL 0x004eab40 */
 void __cdecl amt_calc_zuenfte(unsigned int kind)
 {
-	int types[6];
+	union {
+		int office[6];
+		float position[3];
+	} info;
 	unsigned int cand[16];
 	char names[128];
 	int ids[64];
 	char path[128];
 	char buf[128];
-	unsigned char req[0x100];
+	unsigned char req[0xf8];
 	char* t;
 	char* rec;
 	char* rowbase;
@@ -72,9 +75,10 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 	int i;
 	int n;
 	int value;
+	float rotation[3];
 
-	memset(types, 0, sizeof(types));
-	types[1] = -1;
+	memset(info.office, 0, sizeof(info.office));
+	info.office[1] = -1;
 	if (kind == 0x1e) {
 		pass = 0xe;
 		sel = 0x17;
@@ -155,13 +159,13 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 					}
 					i++;
 				}
-				fcn_00455350(rec, rec + 0x4c, types);
-				fcn_00598740((int*) &value, rec);
+				fcn_00455350(rec, (float*) (rec + 0x4c), info.position);
+				fcn_00598740(rotation, (int) rec);
 				fcn_004432d0((int) found, 1);
-				*(int*) &cand[5] = g_6798d4;
-				strcat((char*) &cand[5], rowbase + 1);
-				strupr((char*) &cand[5] + 2);
-				sprintf(buf, g_67f0ac, g_7e1ae0, (char*) &cand[5]);
+				cand[0] = (unsigned int) g_6798d4;
+				strcat((char*) cand, rowbase + 1);
+				strupr((char*) cand + 2);
+				sprintf(buf, g_67f0ac, g_7e1ae0, (char*) cand);
 				req[4] = 0xd;
 				*(int*) (req + 0x08) = *(int*) (g_773da8 + 4);
 				*(int*) (req + 0x0c) = -1;
@@ -171,14 +175,14 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 				*(unsigned short*) (req + 0x34) = g_7f4c0c;
 				req[0x36] = 2;
 				*(int*) (req + 0x58) = *(int*) (g_773da8 + 4);
-				*(int*) (req + 0x5c) = count;
+				*(int*) (req + 0x5c) = row;
 				*(int*) (req + 0x60) = 0;
-				*(int*) (req + 0x80) = types[5];
-				*(int*) (req + 0x84) = (int) cand[0];
-				*(int*) (req + 0x88) = (int) cand[1];
-				*(int*) (req + 0x90) = (int) cand[2];
-				*(int*) (req + 0x94) = (int) cand[3];
-				*(int*) (req + 0x98) = (int) cand[4];
+				memcpy(req + 0x80, info.position, sizeof(info.position));
+				memcpy(req + 0x90, rotation, sizeof(rotation));
+
+
+
+
 				strcpy((char*) (req + 0x9c), buf);
 				fcn_004c5530(req);
 				return;
@@ -193,32 +197,32 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 					}
 					if ((unsigned char) rec[8] == kind) {
 						n--;
-						memcpy(types, rec, 0x18);
+						memcpy(info.office, rec, 0x18);
 					}
 					rec -= 0x18;
 				} while ((int) rec >= 0x9a9220);
 				existing = 0;
 				value = 0;
-				if (types[1] != -1 &&
-				    (existing = gm_LookupEntityRecordById(types[1])) != 0) {
+				if (info.office[1] != -1 &&
+				    (existing = gm_LookupEntityRecordById(info.office[1])) != 0) {
 					value = gm_WalkEntityChain(*(unsigned short*) existing);
 				}
 				best = 0;
 				for (i = 0; i < count; i++) {
-					n = gm_WalkEntityChain(*(unsigned short*) &cand[i]);
+					n = gm_WalkEntityChain(*(unsigned short*) cand[i]);
 					if (value < n) {
 						value = n;
-						best = (char*) &cand[i];
+						best = (char*) cand[i];
 					}
 				}
 				if (best != 0 && best != existing) {
 					if (existing != 0) {
-						fcn_004e8240((unsigned char) types[0], best, 0, 1, 0xff);
+						fcn_004e8240((unsigned char) info.office[0], best, 0, 1, 0xff);
 						fcn_004ea560(existing, kind);
 						fcn_004ea4b0(best, kind);
 						return;
 					}
-					fcn_004e8240((unsigned char) types[0], best, 0, 1, 0xff);
+					fcn_004e8240((unsigned char) info.office[0], best, 0, 1, 0xff);
 					fcn_004ea4b0(best, kind);
 				}
 			}

@@ -1,6 +1,18 @@
 /* Reconstructed from native disassembly; frame slots follow the decompiler map. */
 
 #include <math.h>
+#include <string.h>
+#include "client_types.h"
+
+typedef struct {
+  unsigned int ent;
+  struct { unsigned int ent; int value; } members[4];
+  unsigned int a;
+  unsigned int b;
+  int text;
+  unsigned char count;
+} Party5c18e0;
+extern pos14_7f4c00 g_7f4c00;
 
 int __cdecl fcn_00433780();
 int __cdecl fcn_00438b40();
@@ -44,51 +56,33 @@ void __cdecl fcn_005c18e0(int a0,int a1)
   int v12;
   unsigned int v13;
   unsigned int *v14;
-  unsigned int v15 [4]; 
-  unsigned int v16; 
+  unsigned int v15 [20]; 
+  pos14_7f4c00 timer;
+  Party5c18e0 party;
+  int buttons[2]; 
   int v17 [6];
   unsigned int v18; 
   char v19; 
   unsigned short *v2;
-  int v20 [6]; 
-  unsigned int v21 [8];
-  char v22 [224];
+  int v20 [4];
+  int commit; 
+  char v22 [256];
   char v23 [256];
-  int v24; 
-  unsigned int v25 [13];
-  char v26 [4];
+  char v26 [0xf8];
   int v27; 
   unsigned int v28; 
   unsigned int v29; 
   int v3;
   unsigned int v30; 
-  unsigned short v31; 
-  unsigned short v32; 
-  unsigned short v33; 
-  unsigned short v34; 
-  unsigned short v35; 
   int v36; 
   unsigned int v37; 
   int v38; 
-  unsigned int v39; 
+ 
   int v4;
-  unsigned int v40; 
-  unsigned int v41; 
-  unsigned int v42; 
-  int v43; 
-  unsigned int v44; 
-  unsigned int v45; 
-  char v46; 
-  unsigned int v47; 
-  unsigned int v48; 
-  char v49; 
+ 
+ 
+ 
   unsigned int v5;
-  unsigned int v50; 
-  unsigned int v51; 
-  unsigned int v52; 
-  unsigned short v53; 
-  unsigned int v54; 
-  unsigned int v55; 
   unsigned int v56; 
   int v57; 
   int v58; 
@@ -100,22 +94,10 @@ void __cdecl fcn_005c18e0(int a0,int a1)
   unsigned short *v7; 
   int v8; 
   unsigned int v9;
-  v16 = (*(int *)0x7f4c00);
-  v32 = (unsigned short)((unsigned int)(*(int *)0x7f4c04) >> 0x10);
-  v31 = (unsigned short)(*(int *)0x7f4c04);
-  v35 = (*(int *)0x7f4c0c);
-  v34 = (unsigned short)((unsigned int)(*(int *)0x7f4c08) >> 0x10);
-  v33 = (unsigned short)(*(int *)0x7f4c08);
-  v12 = 0x14;
-  v14 = v15;
-  while (v12) {
-    v1 = &v14[1];
-    *v14 = 0;
-    v12 -= 1;
-    v14 = v1;
-  }
+  timer = g_7f4c00;
+  memset(v15, 0, sizeof(v15));
   v29 = 6;
-  v44 = 6;
+  v15[4] = 6;
   v27 = 0;
   v20[0] = 0;
   v20[1] = 0;
@@ -125,10 +107,9 @@ void __cdecl fcn_005c18e0(int a0,int a1)
   v15[1] = 0x400;
   v15[2] = (*(int *)0x666018);
   v15[3] = (*(int *)0x66601c);
-  fcn_00500bb0(&v16,0x18,0,0);
-  v31 = 0x14;
-  v33 = 0;
-  v32 = 0;
+  fcn_00500bb0(&timer,0x18,0,0);
+  timer.b = 0x14;
+  *(unsigned short*) &timer.c = 0;
   v12 = fcn_005463a0(1,0,0x37);
   v10 = a0;
   while ((v12 && (*(int *)(v12 + 0x10) != *(int *)(v10 + 1)))) {
@@ -138,13 +119,8 @@ void __cdecl fcn_005c18e0(int a0,int a1)
   v10 = a1;
   v37 = (unsigned int)(v8 != 0);
   if (v12) { 
-    v16 = *(unsigned int *)(v12 + 0x52);
-    v14 = (unsigned int *)(a1 + 0x1c);
-    v32 = (unsigned short)((unsigned int)*(unsigned int *)(v12 + 0x56) >> 0x10);
-    v31 = (unsigned short)*(unsigned int *)(v12 + 0x56);
-    v34 = (unsigned short)((unsigned int)*(unsigned int *)(v12 + 0x5a) >> 0x10);
-    v33 = (unsigned short)*(unsigned int *)(v12 + 0x5a);
-    v35 = *(unsigned short *)(v12 + 0x5e);
+    timer = *(pos14_7f4c00*) (v12 + 0x52);
+    v14 = (unsigned int*) (a1 + 0x1c);
     v12 = 0;
     do {
       v9 = *v14;
@@ -157,10 +133,10 @@ void __cdecl fcn_005c18e0(int a0,int a1)
 label_5c221e:
     v5 = v30;
     v13 = v29;
-    v40 = v30;
-    v39 = v29;
-    v41 = 0;
-    v20[5] = (unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca0;
+    party.b = v30;
+    party.a = v29;
+    party.text = 0;
+    party.ent = (unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0;
     v9 = fcn_00470820(0,0,(char *)0x6ac5bc);
     v28 = v9;
     d2_SetForm(v9,0);
@@ -169,14 +145,14 @@ label_5c221e:
     d2_SetOverlayAnimation(0,0);
     d2_SetForm(v9,1);
     io_AppendText(0x6811b0);
-    io_AppendText(0x1780,&v16);
-    v42 &= 0xffffff00;
+    io_AppendText(0x1780,&timer);
+    party.count = 0;
     v12 = 0;
     do {
       v2 = (unsigned short *)v20[v12];
       if (v2) {
-        v21[(v42 & 0xff) * 2] = v2;
-        v42 = ((v42 & 0xffffff00) | (((char)v42 + '\x01') & 0xff));
+        party.members[party.count].ent = v2;
+        party.count++;
         io_AppendText(0x1781,*v2);
       }
       v12 += 1;
@@ -184,8 +160,8 @@ label_5c221e:
     io_AppendText(0x1782,v13 + 0x1773);
     if (v37)
       io_AppendText(0x1783,v5 + 0x177a);
-    fcn_00494470(&v20[5],0);
-    io_AppendText(0x1784,v41);
+    fcn_00494470(&party,0);
+    io_AppendText(0x1784,party.text);
     (*(int *)0x100f1dc) = -1;
     do {
       if ((*(int *)0x14ce8e0))
@@ -203,7 +179,7 @@ label_5c221e:
     d2_SetForm(v9,1);
     io_AppendText(0x6811b0);
     io_AppendText(0x1772);
-    v18 &= 0xffffff00;
+    v18 = 0;
     do {
       v13 = v18 & 0xff;
       v12 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5b0,v13 + 0x1773));
@@ -223,7 +199,7 @@ label_5c221e:
       }
       if ((*(int *)0x100f1dc) != -1) {
         v6 = 0;
-        v18 &= 0xffffff00;
+        v18 = 0;
         do {
           if ((*(int *)0x67d370) == v17[v18 & 0xff]) {
             fcn_004c4510(v12,*(unsigned int *)(v12 + 2));
@@ -247,7 +223,7 @@ label_5c221e:
         d2_SetForm(v28,1);
         io_AppendText(0x6811b0);
         io_AppendText(0x1779);
-        v18 &= 0xffffff00;
+        v18 = 0;
         do {
           v13 = v18 & 0xff;
           v12 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5b0,v13 + 0x177a));
@@ -267,7 +243,7 @@ label_5c221e:
           }
           if ((*(int *)0x100f1dc) != -1) {
             v6 = 0;
-            v18 &= 0xffffff00;
+            v18 = 0;
             do {
               if ((*(int *)0x67d370) == v17[v18 & 0xff]) {
                 fcn_004c4510(v10,*(unsigned int *)(v10 + 2));
@@ -296,7 +272,7 @@ label_5c221e:
         fcn_00471e30(v28);
         v36 = -1;
         v18 = 1;
-        v20[4] = -1;
+        commit = -1;
         v38 = -1;
         v9 = fcn_00470820(0,0,(char *)0x6ac58c);
         v28 = v9;
@@ -312,31 +288,31 @@ label_5c221e:
             v18 = 0;
             d2_SetForm(v9,1);
             io_AppendText(0x6811b0);
-            io_AppendText(0x1769,&v16);
-            v41 = 0;
+            io_AppendText(0x1769,&timer);
+            party.text = 0;
             v10 = 0;
-            v42 &= 0xffffff00;
-            v40 = v30;
-            v20[5] = (unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca0;
-            v39 = v29;
+            party.count = 0;
+            party.b = v30;
+            party.ent = (unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0;
+            party.a = v29;
             do {
               v2 = *(unsigned short **)((int)v20 + v12);
               if (v2) { 
                 v11 = io_AppendText(0x176a,*v2);
                 *(unsigned int *)((int)v17 + v12) = fcn_00472250(v9,1,v11);
-                v21[(v42 & 0xff) * 2] = v2;
+                party.members[party.count].ent = v2;
                 v10 += 1;
-                v42 = ((v42 & 0xffffff00) | (((char)v42 + '\x01') & 0xff));
+                party.count++;
               }
               else {
                 *(unsigned int *)((int)v17 + v12) = 0xffffffff;
               }
               v12 += 4;
             } while (v12 < 0x10);
-            fcn_00494470(&v20[5],0);
+            fcn_00494470(&party,0);
             d2_SetForm(v9,2);
             io_AppendText(0x6811b0);
-            v11 = io_AppendText(0x176b,v41);
+            v11 = io_AppendText(0x176b,party.text);
             v12 = fcn_00472250(v9,2,v11);
             v36 = v12;
             if (v10 == 4)
@@ -345,19 +321,19 @@ label_5c221e:
             io_AppendText(0x6811b0);
             io_FormatTextBuffer(v22,0x176c);
             io_FormatTextBuffer(v23,0x176d);
-            fcn_00533a60((*(int *)0x772514),0,&v24,2,v22,v23);
-            v20[4] = v24;
-            v38 = v43;
+            fcn_00533a60((*(int *)0x772514),0,buttons,2,v22,v23);
+            commit = buttons[0];
+            v38 = buttons[1];
             if (!v10)
-              fcn_00472640(v24,0);
+              fcn_00472640(buttons[0],0);
           }
           if ((*(int *)0x100f1dc) != -1) {
             if ((*(int *)0x14ce8e0)) {
               v27 = 0;
               (*(int *)0x774654) = 1;
             }
-            if ((*(int *)0x67d370) != v12) { 
-              if ((*(int *)0x67d370) != v20[4]) { 
+            if ((*(int *)0x67d370) != v36) { 
+              if ((*(int *)0x67d370) != commit) { 
                 if ((*(int *)0x67d370) != v38) { 
                   v10 = 0;
                   do {
@@ -376,11 +352,11 @@ label_5c221e:
               else {
                 v8 = 0;
                 v27 = -1;
-                v46 = 0x37;
-                v55 = 0;
-                v49 = 2;
-                v47 = *(unsigned int *)((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca4);
-                v48 = *(unsigned int *)(a0 + 1);
+                *(unsigned char*) (v26 + 4) = 0x37;
+                *(unsigned int*) (v26 + 0x6c) = 0;
+                *(unsigned char*) (v26 + 0x36) = 2;
+                *(unsigned int*) (v26 + 8) = *(unsigned int *)((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca4);
+                *(unsigned int*) (v26 + 0xc) = *(unsigned int *)(a0 + 1);
                 fcn_004c5530(v26);
                 v10 = 0;
                 do {
@@ -389,16 +365,16 @@ label_5c221e:
                     fcn_004c4510(a1,*(unsigned int *)(a1 + 2));
                     fcn_004c4570(4,1,v10 * 4 + 0x1c,(unsigned int *)(v12 + 4));
                     fcn_004c5360();
-                    v46 = 0x36;
-                    v47 = *(unsigned int *)(v12 + 4);
-                    v54 = 0;
-                    v48 = *(unsigned int *)(a0 + 1);
-                    v51 = CONCAT22(v32,v31);
-                    v52 = CONCAT22(v34,v33);
-                    v50 = v16;
-                    v53 = v35;
-                    if ((*(char *)(v12 + 2) == '\x06') || (v49 = 1, *(char *)(v12 + 2) == '\a'))
-                      v49 = 9;
+                    *(unsigned char*) (v26 + 4) = 0x36;
+                    *(unsigned int*) (v26 + 8) = *(unsigned int *)(v12 + 4);
+                    *(unsigned int*) (v26 + 0x68) = 0;
+                    *(unsigned int*) (v26 + 0xc) = *(unsigned int *)(a0 + 1);
+                    *(int*) (v26 + 0x5c) = timer.b;
+                    *(int*) (v26 + 0x60) = timer.c;
+                    *(int*) (v26 + 0x58) = timer.a;
+                    *(unsigned short*) (v26 + 0x64) = timer.d;
+                    if ((*(char *)(v12 + 2) == '\x06') || (*(unsigned char*) (v26 + 0x36) = 1, *(char *)(v12 + 2) == '\a'))
+                      *(unsigned char*) (v26 + 0x36) = 9;
                     fcn_004c5530(v26);
                     v10 += 1;
                   }
@@ -420,16 +396,9 @@ label_5c221e:
               }
             }
             else {
-              v10 = 8;
-              v14 = v25;
-              while (v10) {
-                v1 = &v14[1];
-                *v14 = 0xffffffff;
-                v10 -= 1;
-                v14 = v1;
-              }
-              v14 = v25;
-              v45 |= 2;
+              memset(v15 + 7, 0xff, 8 * sizeof(int));
+              v14 = v15 + 7;
+              v15[5] |= 2;
               v10 = 0;
               do {
                 if ((unsigned short *)v20[v10]) {

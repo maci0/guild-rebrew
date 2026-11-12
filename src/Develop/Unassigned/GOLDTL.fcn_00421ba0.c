@@ -1,4 +1,7 @@
 #include <stdlib.h>
+extern unsigned char g_14cbc60, g_14cbc68; extern float* g_14cbc64;
+extern short g_14cbc72, g_678c20[8]; extern unsigned short g_14cbc7c, g_14cbc7e;
+extern float g_14cbc80; extern int g_678c08, g_678c0c;
 
 /* SIZE 0x1c */
 typedef struct PathNode {
@@ -20,7 +23,6 @@ typedef struct PathGrid {
 	int width;
 	PathNode* nodes;
 } PathGrid;
-
 /* ADDRESS: GOLDTL 0x00421ba0 */
 unsigned short __cdecl fcn_00421ba0(PathGrid* grid, unsigned short node)
 {
@@ -34,34 +36,34 @@ unsigned short __cdecl fcn_00421ba0(PathGrid* grid, unsigned short node)
 	int i;
 	unsigned short t;
 	unsigned short h;
+	unsigned short cursor;
+	float score;
 	int idx;
-
 	p = &grid->nodes[node];
 	h = p->f16;
 	p->flags = (unsigned char) ((p->flags & 0xfe) | 2);
 	if (h != 0xffff) {
 		grid->nodes[h].f18 = p->f18;
 	}
-
 	for (i = 0; i < 8; i++) {
-		t = ((short*) 0x678c20)[i & 7];
+		t = g_678c20[i & 7];
 		t += ((short*) 0x678c10)[i & 7];
 		idx = (node + t) & 0xffff;
 		q = &grid->nodes[idx];
-		if (q->mark == *(short*) 0x14cbc72 && (q->flags & *(unsigned char*) 0x14cbc68) != 0) {
-			q->flags = (unsigned char) (q->flags | *(unsigned char*) 0x14cbc60);
-			p->flags = (unsigned char) (p->flags | *(unsigned char*) 0x14cbc68);
-			*(unsigned short*) 0x14cbc7e = (unsigned short) idx;
+		if (q->mark == g_14cbc72 && (q->flags & g_14cbc68) != 0) {
+			q->flags = (unsigned char) (q->flags | g_14cbc60);
+			p->flags = (unsigned char) (p->flags | g_14cbc68);
+			g_14cbc7e = (unsigned short) idx;
 			return node;
 		}
-		costs = *(float**) 0x14cbc64;
+		costs = g_14cbc64;
 		ng = *(float*) (0x678c30 + i * 4) * costs[q->type] + p->g;
 		if (costs[q->type] >= *(double*) 0x662950) {
-			if (q->mark == *(short*) 0x14cbc72) {
+			if (q->mark == g_14cbc72) {
 				if (!(ng < q->g)) {
 					continue;
 				}
-				if (q->mark == *(short*) 0x14cbc72 && (q->flags & 1) != 0) {
+				if (q->mark == g_14cbc72 && (q->flags & 1) != 0) {
 					x = q->h;
 					if (q->f18 != 0xffff) {
 						grid->nodes[q->f18].f16 = q->f16;
@@ -76,48 +78,49 @@ unsigned short __cdecl fcn_00421ba0(PathGrid* grid, unsigned short node)
 				}
 			} else {
 calc:
-				dist = abs((int) (*(unsigned short*) 0x14cbc7c >> (*(int*) 0x678c0c & 0xffff)) - (idx >> (*(int*) 0x678c0c & 0xffff)));
-				dist += abs((int) (*(unsigned short*) 0x14cbc7c & *(int*) 0x678c08) - (idx & *(int*) 0x678c08));
-				x = (float) dist * *(float*) 0x14cbc80;
+				dist = abs((int) ((unsigned int)g_14cbc7c >> (g_678c0c & 0xffff)) - ((unsigned int)idx >> (g_678c0c & 0xffff)));
+				dist += abs((int) (g_14cbc7c & g_678c08) - (idx & g_678c08));
+				x = (float) dist * g_14cbc80;
 			}
 			q->parent = node;
-			q->f = x + ng;
+			score = x + ng;
+			q->f = score;
 			q->g = ng;
 			q->h = x;
-			if (q->mark != *(short*) 0x14cbc72 || (q->flags & 2) == 0) {
-				q->mark = *(short*) 0x14cbc72;
+			if (q->mark != g_14cbc72 || (q->flags & 2) == 0) {
+				q->mark = g_14cbc72;
 				q->flags = (unsigned char) (q->flags & 0xfd);
-				q->flags = (unsigned char) ((q->flags & ~*(unsigned char*) 0x14cbc68) | 1);
-				q->flags = (unsigned char) (q->flags | *(unsigned char*) 0x14cbc60);
+				q->flags = (unsigned char) ((q->flags & ~g_14cbc68) | 1);
+				q->flags = (unsigned char) (q->flags | g_14cbc60);
 				if (h == 0xffff) {
 					q->f18 = 0xffff;
 					q->f16 = 0xffff;
 					h = (unsigned short) idx;
 				} else {
-					r = &grid->nodes[h];
+					cursor = h;
+					r = &grid->nodes[cursor];
 					while (r->f16 != 0xffff) {
-						if (x < r->f) {
+						if (score < r->f) {
+							q->f16 = cursor;
+							q->f18 = r->f18;
+							if (r->f18 != 0xffff)
+								grid->nodes[r->f18].f16 = (unsigned short) idx;
+							else
+								h = (unsigned short) idx;
+							r->f18 = (unsigned short) idx;
 							break;
 						}
-						h = r->f16;
-						r = &grid->nodes[h];
+						cursor = r->f16;
+						r = &grid->nodes[cursor];
 					}
-					q->f16 = h;
-					q->f18 = r->f18;
-					if (r->f18 != 0xffff) {
-						grid->nodes[r->f18].f16 = (unsigned short) idx;
-					} else {
-						h = (unsigned short) idx;
-					}
-					r->f18 = (unsigned short) idx;
 					if (r->f16 == 0xffff) {
-						q->f18 = h;
+						q->f18 = cursor;
 						q->f16 = 0xffff;
-						grid->nodes[h].f16 = (unsigned short) idx;
+						grid->nodes[cursor].f16 = (unsigned short) idx;
 					}
 				}
 			}
-			if (idx == *(unsigned short*) 0x14cbc7c) {
+			if (idx == g_14cbc7c) {
 				return h;
 			}
 		}

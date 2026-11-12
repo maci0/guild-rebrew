@@ -1,3 +1,7 @@
+extern float g_662cf8;
+extern float g_66293c;
+extern float g_6628fc;
+extern float g_6628b0;
 #include <math.h>
 
 extern int g_1041d0c;
@@ -35,7 +39,7 @@ char __cdecl fcn_00448cc0(int obj, float* a1, float* a2, int g, char* a5,
 void __cdecl fcn_00438b40(int h, char* p);
 void __cdecl fcn_00438cb0(int h, char* p);
 void __cdecl UpdateSceneLighting(int a);
-int __cdecl fcn_00448b10(void);
+char __cdecl fcn_00448b10(void);
 
 /* ADDRESS: GOLDTL 0x00449130 */
 int __cdecl fcn_00449130(void)
@@ -61,10 +65,10 @@ int __cdecl fcn_00449130(void)
 
 	v14 = 0;
 	v15 = 0;
-	if (*(int*) 0x1041d0c == 0)
+	if (g_1041d0c == 0)
 		return 0;
-	v2 = *(char*) 0x14cf72a;
-	v1 = *(char*) 0x14cf71d;
+	v2 = g_14cf72a;
+	v1 = g_14cf71d;
 	v9 = 0.0f;
 	v22 = 0.0f;
 	v23 = 0.0f;
@@ -105,8 +109,8 @@ int __cdecl fcn_00449130(void)
 		}
 		g_6b85a8 = (int) g_14cf900;
 		g_6b85ac = (int) g_14cf902;
-		v18 = (float) v16 / g_14ce860 * *(float*) 0x6628fc;
-		v20 = (float) v17 / g_14ce864 * *(float*) 0x6628fc;
+		v18 = (float) v16 / g_14ce860 * g_6628fc;
+		v20 = (float) v17 / g_14ce864 * g_6628fc;
 	}
 	if (g_14ce8ec != 0) {
 		g_6b85ac = (int) g_14cf902;
@@ -136,14 +140,14 @@ int __cdecl fcn_00449130(void)
 		d = (double) (unsigned int) g_14ce860;
 		v10[0] = (float) d
 			/ (((float) fabs((float) v16) + *(double*) 0x6629c8)
-			* *(float*) 0x66293c);
-		if (v10[0] > *(float*) 0x6628b0)
-			v10[0] = *(float*) 0x6628b0;
+			* g_66293c);
+		if (v10[0] > g_6628b0)
+			v10[0] = g_6628b0;
 		v10[1] = ((float) fabs((float) v17) + *(double*) 0x6629c8)
-			* *(float*) 0x66293c
+			* g_66293c
 			/ (float) (unsigned int) g_14ce864;
-		if (v10[1] > *(float*) 0x6628b0)
-			v10[1] = *(float*) 0x6628b0;
+		if (v10[1] > g_6628b0)
+			v10[1] = g_6628b0;
 		v21 = v21 * v10[0] * *(float*) 0x662d00;
 		v19 = v19 * v10[1] * *(float*) 0x662cfc;
 		g_6b85ac = (int) g_14cf902;
@@ -155,11 +159,11 @@ int __cdecl fcn_00449130(void)
 		fcn_004125c0((int) g_14ce8c0, (int) g_14ce8c2);
 	}
 	if (g_14ce904 != 0) {
-		v23 = v23 + *(float*) 0x662cf8;
+		v23 = v23 + g_662cf8;
 		v14 = 1;
 	}
 	else if (g_14ce900 != 0) {
-		v23 = v23 - *(float*) 0x662cf8;
+		v23 = v23 - g_662cf8;
 		v14 = 1;
 	}
 	if (g_14cf70f != 0) {
@@ -176,7 +180,7 @@ int __cdecl fcn_00449130(void)
 		v9 = v20;
 		v22 = v18;
 		v10[2] = v21;
-		v10[3] = (float) ((unsigned int) g_14cf70f * 0x28) + v19;
+		v10[3] = (float) ((unsigned char) g_14cf70f * 0x28) + v19;
 	}
 	if (v14 != 0 || v15 != 0) {
 		v3 = fcn_00448cc0(g_1041d0c, &v10[0], &v9, g_6b8014, v8, v7);
@@ -196,7 +200,7 @@ label_4495a3:
 		UpdateSceneLighting(0);
 		v14 = 1;
 	}
-	if (fcn_00448b10() == 0 && v14 == 0 && v15 == 0)
+	if ((fcn_00448b10() | v14) == 0 && v15 == 0)
 		return 0;
 	return 1;
 }

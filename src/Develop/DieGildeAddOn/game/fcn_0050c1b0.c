@@ -102,13 +102,13 @@ finalize:
 		if (p != 0) {
 			v = fcn_0050b810(*(int*) (p + 0x14), g_773d75);
 			*(int*) (out + 0x30) += v;
-			var += v;
+			var += *(int*) (out + 0x30);
 		}
 		p = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0xf0);
 		if (p != 0) {
 			v = fcn_0050b810(*(int*) (p + 0x14), g_773d75);
 			*(int*) (out + 0x3c) += v;
-			var += v;
+			var += *(int*) (out + 0x3c);
 		}
 		*(int*) (out + 0x34) += *(int*) (e + 0x65);
 		*(int*) (out + 0x38) += *(int*) (e + 0x69);

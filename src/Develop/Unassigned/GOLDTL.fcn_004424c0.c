@@ -8,6 +8,8 @@
  * literals. */
 
 #include <math.h>
+extern float g_6628a0;
+extern float g_10425a0[];
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
@@ -43,17 +45,17 @@ float __cdecl fcn_004424c0(float* a0, float* a1, float* a2)
 	t1 = u0*a2[1] + u2*a2[9] + u1*a2[5];
 	t2 = u2*a2[10] + u1*a2[6] + u0*a2[2];
 	c0 = a2[4]*0.0f;
-	plane[0][0] = (a2[0]*0.0f - a2[8]**(float*) 0x6628a0) + c0;
+	plane[0][0] = (a2[0]*0.0f - a2[8]*g_6628a0) + c0;
 	c1 = a2[5]*0.0f;
-	plane[0][1] = (a2[1]*0.0f - a2[9]**(float*) 0x6628a0) + c1;
+	plane[0][1] = (a2[1]*0.0f - a2[9]*g_6628a0) + c1;
 	c2 = a2[6]*0.0f;
-	plane[0][2] = (a2[2]*0.0f - a2[10]**(float*) 0x6628a0) + c2;
+	plane[0][2] = (a2[2]*0.0f - a2[10]*g_6628a0) + c2;
 	plane[0][3] = plane[0][2]*t2 + plane[0][1]*t1 + plane[0][0]*t0;
-	v0 = a2[8]**(float*) 0x6628a0 + c0;
+	v0 = a2[8]*0.0f + c0;
 	plane[1][0] = v0 + a2[0];
-	v1 = a2[9]**(float*) 0x6628a0 + c1;
+	v1 = a2[9]*0.0f + c1;
 	plane[1][1] = v1 + a2[1];
-	v2 = a2[10]**(float*) 0x6628a0 + c2;
+	v2 = a2[10]*0.0f + c2;
 	plane[1][2] = v2 + a2[2];
 	plane[1][3] = plane[1][2]*t2 + plane[1][1]*t1 + plane[1][0]*t0;
 	k = (float) (*(int*) a0 - 4);
@@ -63,9 +65,9 @@ float __cdecl fcn_004424c0(float* a0, float* a1, float* a2)
 	t0 = u0*a2[0] + u2*a2[8] + u1*a2[4];
 	t1 = u0*a2[1] + u2*a2[9] + u1*a2[5];
 	t2 = u2*a2[10] + u1*a2[6] + u0*a2[2];
-	plane[2][0] = v0 - a2[0]**(float*) 0x6628a0;
-	plane[2][1] = v1 - a2[1]**(float*) 0x6628a0;
-	plane[2][2] = v2 - a2[2]**(float*) 0x6628a0;
+	plane[2][0] = v0 - a2[0]*g_6628a0;
+	plane[2][1] = v1 - a2[1]*g_6628a0;
+	plane[2][2] = v2 - a2[2]*g_6628a0;
 	plane[2][3] = plane[2][2]*t2 + plane[2][1]*t1 + plane[2][0]*t0;
 	plane[3][0] = a2[0]*0.0f + c0 + a2[8];
 	plane[3][1] = a2[1]*0.0f + c1 + a2[9];
@@ -73,14 +75,14 @@ float __cdecl fcn_004424c0(float* a0, float* a1, float* a2)
 	plane[3][3] = plane[3][2]*t2 + plane[3][1]*t1 + plane[3][0]*t0;
 	mn = MIN(plane[0][3], MIN(plane[1][3], MIN(plane[2][3], plane[3][3])));
 	best = 1e10;
-	tp = (float*) 0x10425a0;
+	tp = g_10425a0;
 	for (j = 0; j < 5; j++) {
 		for (i = 0; i < 4; i++) {
 			d = plane[i][0]*tp[0] + plane[i][2]*tp[2] + tp[1]*plane[i][1];
 			if (d < -1e-7f || d > 1e-7f) {
 				t = plane[i][3] / d;
 				if (t > 0.0f) {
-					if (t < mn) {
+					if (t > mn) {
 						if (t < best) {
 							best = t;
 						}

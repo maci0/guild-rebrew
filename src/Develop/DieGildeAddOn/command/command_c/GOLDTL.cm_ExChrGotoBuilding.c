@@ -47,7 +47,7 @@ extern char g_68b108[];
 extern char g_68b13c[];
 extern char g_68b174[];
 extern char g_68b1ac[];
-TLBLK11 g_68149c = { 0x6d6d7564, 0, 0, 0 };
+TLBLK11 g_68149c = { 0x6d6d7564, 0x55545f79, 0x5245, 0 };
 extern TLBLK18 g_68b0f4;
 extern char* lpObjektePROT;
 extern int g_6b8010;

@@ -16,6 +16,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
 	unsigned int i;
 	unsigned int kind;
 	int tmp;
+	double previous;
 
 	found = 0;
 	if (!a1) {
@@ -27,7 +28,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
 			kind = c[2];
 			if (kind < 2 || kind > 7)
 				continue;
-			d = fcn_0050f980(*a0, *(short*) c, 1);
+			d = fcn_0050f980((unsigned short) *a0, *(unsigned short*) c, 1);
 			if (d <= *(float*) 0x664394 || *(int*) (c + 0x210) == *(int*) ((char*) a0 + 4))
 				found++;
 		}
@@ -45,7 +46,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
 		if (kind < 2 || kind > 7)
 			continue;
 		if (*(int*) (c + 0x210) != *(int*) ((char*) a0 + 4)) {
-			d = fcn_0050f980(*a0, *(short*) c, 1);
+			d = fcn_0050f980((unsigned short) *a0, *(unsigned short*) c, 1);
 			if (d > *(float*) 0x664394)
 				continue;
 		} else {
@@ -59,14 +60,15 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
 		found++;
 		i = a1 - 1;
 		if (i) {
-			p = &e[11];
+			p = &e[-3];
 			do {
-				tmp = p[-11];
 				if (p[14] < *p) {
+					previous = (double) *p;
+					tmp = p[-11];
 					p[-11] = p[3];
 					*p = p[14];
 					p[3] = tmp;
-					p[14] = (int) (float) *p;
+					p[14] = (int) previous;
 				}
 				p -= 14;
 				i--;

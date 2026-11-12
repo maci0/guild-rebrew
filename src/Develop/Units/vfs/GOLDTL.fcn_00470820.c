@@ -1,3 +1,5 @@
+#include <string.h>
+#pragma intrinsic(memset)
 extern char g_6b5c60;
 extern int g_772560;
 extern int g_1038580;
@@ -91,8 +93,8 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 	char ch;
 
 	v21[0] = g_6b5c60;
-	for (i = 1; i < 256; i++)
-		v21[i] = 0;
+	memset(v21 + 1, 0, 255);
+
 	strcpy(v21, a2);
 	if (!g_772560) {
 		strcpy(v21, s_67d268);
@@ -151,10 +153,10 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 						v11 = v45 * 0x3cc;
 						v42 = v11 + 0x1015f40;
 						v11 = fcn_0046f100(
-							(short) *v26
-							- *(short*) (v11 + 0x1015f44),
-							(short) *((short*) v36 - 0x767)
-							- *(short*) (v11 + 0x1015f48),
+							(short) ((short) *v26
+							- *(short*) (v11 + 0x1015f44)),
+							(short) (*((short*) v36 - 0x767)
+							- *(short*) (v11 + 0x1015f48)),
 							(short) v36[-0x3b3],
 							(short) *((short*) v36 - 0x765),
 							v36[-0x3b2], v45);
@@ -190,10 +192,10 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 					v11 = v45 * 0x3cc;
 					v42 = v11 + 0x1015f40;
 					v11 = fcn_0046f100(
-						(short) *v39
-						- *(short*) (v11 + 0x1015f44),
-						(short) *((short*) v39 + 1)
-						- *(short*) (v11 + 0x1015f48),
+						(short) ((short) *v39
+						- *(short*) (v11 + 0x1015f44)),
+						(short) (*((short*) v39 + 1)
+						- *(short*) (v11 + 0x1015f48)),
 						(short) v39[1],
 						(short) *((short*) v39 + 3),
 						v39[2], v45);
@@ -284,7 +286,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 								v13 = fcn_004677e0(
 									(short) *q,
 									(short) q[0x18],
-									*(char*) ((char*) v33
+									*(unsigned char*) ((char*) v33
 										+ v38 + 0xf1c),
 									0, 100, v12,
 									v37, v34);
@@ -298,8 +300,8 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 							v13 = fcn_00467480(
 								(short) *q,
 								(short) q[0x18],
-								*(char*) ((char*) t + 1),
-								*(char*) ((char*) t + 2),
+								*(unsigned char*) ((char*) t + 1),
+								*(unsigned char*) ((char*) t + 2),
 								v37, v34);
 							*(int*) (g_1015ea0 + 0x50
 								+ v13 * 0x2f4) =

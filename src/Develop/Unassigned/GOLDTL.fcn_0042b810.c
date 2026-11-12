@@ -1,4 +1,6 @@
 #include <stdio.h>
+extern void* g_6b7fa0;
+extern int g_6b7fa4, g_6b7f98;
 #include <string.h>
 
 #pragma intrinsic(memset, strlen, strcpy, strcat)
@@ -26,12 +28,12 @@ int __cdecl fcn_0042b810(char* text, int index)
 	char* t;
 	int i;
 
-	kind = 0;
-	count = 0;
 	memset(v20, 0, sizeof(v20));
 	memset(v21, 0, sizeof(v21));
 	memset(v15, 0, sizeof(v15));
 	memset(v16, 0, sizeof(v16));
+	kind = 0;
+	count = 0;
 	v19[0] = 0;
 	v18[0] = 0;
 	p = strtok(text, ",\";\n");
@@ -104,19 +106,19 @@ int __cdecl fcn_0042b810(char* text, int index)
 	}
 	for (i = 0; i < 4; i++) {
 		strcat(v20[i], "|");
-		strcat((char*) (*(int*) 0x6b7fa0 + (*(int*) 0x6b7f98 << 12)), v20[i]);
-		*(int*) 0x6b7fa4 = *(int*) 0x6b7fa4 + strlen(v20[i]);
+		strcat((char*) ((int) g_6b7fa0 + (g_6b7f98 << 12)), v20[i]);
+		g_6b7fa4 = g_6b7fa4 + strlen(v20[i]);
 	}
 	for (i = 0; i < 4; i++) {
 		strcat(v21[i], "|");
-		strcat((char*) (*(int*) 0x6b7fa0 + (*(int*) 0x6b7f98 << 12)), v21[i]);
-		*(int*) 0x6b7fa4 = *(int*) 0x6b7fa4 + strlen(v21[i]);
+		strcat((char*) ((int) g_6b7fa0 + (g_6b7f98 << 12)), v21[i]);
+		g_6b7fa4 = g_6b7fa4 + strlen(v21[i]);
 	}
-	*(int*) (*(int*) 0x6b7f98 * 4 + 0x11bb000) = kind;
-	sprintf((char*) (*(int*) 0x6b7f98 * 0x50 + 0x1053000), "%s+%i",
+	*(int*) (g_6b7f98 * 4 + 0x11bb000) = kind;
+	sprintf((char*) (g_6b7f98 * 0x50 + 0x1053000), "%s+%i",
 	    (char*) (index * 0x50 + 0x13350d0),
-	    *(int*) 0x6b7f98 - *(int*) (index * 4 + 0x14b731c));
-	*(int*) 0x6b7fa4 = *(int*) 0x6b7fa4 + 1;
-	*(int*) 0x6b7f98 = *(int*) 0x6b7f98 + 1;
+	    g_6b7f98 - *(int*) (index * 4 + 0x14b731c));
+	g_6b7fa4 = g_6b7fa4 + 1;
+	g_6b7f98 = g_6b7f98 + 1;
 	return 1;
 }

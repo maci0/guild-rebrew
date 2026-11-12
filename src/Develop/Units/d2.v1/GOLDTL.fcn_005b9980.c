@@ -17,11 +17,11 @@ extern int __cdecl fcn_00472250(int a0, int a1, int a2);
 extern void __cdecl fcn_00533dc0(int a0, int a1, int a2);
 extern int __cdecl d2_CreateRadioGroup(int a0, int a1, int a2, int a3);
 extern int __cdecl d2_SelectRadioGroup(int a0, int a1);
-extern int __cdecl _ftol(void);
+
 extern int __cdecl fcn_005373e0(void *a0, int a1);
 extern void __cdecl fcn_00471e30(int a0);
 extern int __cdecl fcn_00469510(int a0);
-extern void __cdecl eval_ObjektPreis2Credits(int a0, int a1);
+extern float __cdecl eval_ObjektPreis2Credits(int a0, int a1);
 extern int __cdecl fcn_00526010(char *a0, int a1, unsigned char a2);
 extern int __cdecl fcn_0051e070(void);
 extern int __cdecl fcn_00526120(char *a0, int a1);
@@ -81,8 +81,7 @@ void __cdecl fcn_005b9980(int a0)
         {
             if (g_67d370 == v5)
             {
-                eval_ObjektPreis2Credits(v17 + 0x134, 100);
-                v7 = _ftol();
+                v7 = (int) eval_ObjektPreis2Credits(v17 + 0x134, 100);
                 if (fcn_00526010((char *)(g_774970 * 0x21c + 0x7f4ca0), v7,
                         (v7 & 0xffffff00) | g_773d75))
                 {
@@ -111,8 +110,8 @@ void __cdecl fcn_005b9980(int a0)
         }
         if (*(int *)(0x102cbc8 + v16 * 4) != -1)
         {
-            eval_ObjektPreis2Credits(v17 + 0x134, 100);
-            io_FormatTextBuffer(v13, (char *)0xda, v17 * 2 + 0xc10, _ftol());
+            io_FormatTextBuffer(v13, (char *)0xda, v17 * 2 + 0xc10,
+                (int) eval_ObjektPreis2Credits(v17 + 0x134, 100));
             fcn_0046f9b0(v5, v13);
             fcn_00469090(v5);
         }

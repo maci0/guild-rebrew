@@ -1,4 +1,4 @@
-extern char g_7f4c00[];
+#include "client_data.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00500bb0(char*, int, int, int);
@@ -21,10 +21,10 @@ void __cdecl fcn_00556a20(char* p)
 		return;
 	}
 	q = (int*) (p + 0x52);
-	q[0] = *(int*) ((char*) g_7f4c00);
-	q[1] = *(int*) ((char*) g_7f4c00 + 4);
-	q[2] = *(int*) ((char*) g_7f4c00 + 8);
-	*(short*) (q + 3) = *(short*) ((char*) g_7f4c00 + 0xc);
+	*(pos14_7f4c00*) q = g_7f4c00;
+
+
+
 	fcn_00500bb0((char*) q, 0, 1, 0);
 	if (a == 0) {
 		*(int*) (p + 0x84) = fcn_004c5620(-1, p);

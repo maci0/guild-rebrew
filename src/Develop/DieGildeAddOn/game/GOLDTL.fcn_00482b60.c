@@ -82,7 +82,6 @@ void __cdecl fcn_00482b60(char* e)
 			t = st.v[6] + 3;
 		}
 	}
-	o = *(char**) (e + 0x16c);
 	fcn_004c4510(o, *(int*) (o + 1));
 	fcn_004c4570(4, 1,
 	             (unsigned short) (*(unsigned short*) (e + 0x16c) -
@@ -99,8 +98,10 @@ stock_done:
 			d = total * 5 / 0x14 - r;
 			sum += d;
 			fcn_004c4eb0("Bankmeister");
+			o = *(char**) (e + 0x16c);
 			fcn_004c5150(*(int*) (o + 1), -1, (char) i, d);
 			t = (int) (d * 1.03);
+			o = *(char**) (e + 0x16c);
 			fcn_004c5150(
 				-1,
 				*(int*) (g_7f4ca4 +
@@ -111,11 +112,13 @@ stock_done:
 			d = r - total * 4 / 0x14;
 			sum -= d;
 			fcn_004c4eb0("Bankmeister");
+			o = *(char**) (e + 0x16c);
 			fcn_004c5150(
 				*(int*) (g_7f4ca4 +
 				         *(unsigned short*) (o + 0x27) * 0x21c),
 				-1, (char) g_773d75, d);
 			t = (int) (d * 1.03);
+			o = *(char**) (e + 0x16c);
 			fcn_004c5150(-1, *(int*) (o + 1), (char) i, t);
 			fcn_004c4ef0("Bankmeister");
 		}
@@ -123,7 +126,7 @@ stock_done:
 	o = *(char**) (e + 0x16c);
 	t = gm_QueryEntitySum(*(int*) (o + 0x5d), (char) g_773d75);
 	total = *(int*) (e + 0x1b8);
-	if ((double) t > 1.5 * (double) total && total - sum > 0) {
+	if ((double) t < 1.5 * (double) total && total - sum > 0) {
 		o = *(char**) (e + 0x16c);
 		fcn_004c5150(
 			*(int*) (o + 1),

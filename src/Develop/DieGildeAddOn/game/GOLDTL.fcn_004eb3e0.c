@@ -25,7 +25,7 @@ void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 void* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl fcn_00508cf0(int a1, int* a2);
 float __cdecl gm_GetEntitySkill(char* entity, int index);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 slot80* __cdecl gm_FindSlotById(int a1, int a2);
 float __cdecl fcn_00502780(int a1, int a2);
 int __cdecl fcn_004c61d0(slot80* e, unsigned char kind);
@@ -36,6 +36,13 @@ void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int a1, int a2, void* p, int a4, int a5, void* p6);
 int __cdecl fcn_00526120(void* a1, int a2);
 extern unsigned char* lpGebaeudePROT;
+extern unsigned char g_773d75;
+
+typedef struct Bld24d {
+	char pad0[0x247];
+	unsigned char x247;
+	char pad248[5];
+} Bld24d;
 
 /* ADDRESS: GOLDTL 0x004eb3e0 */
 unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
@@ -44,7 +51,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 	char buf1[512];
 	char buf2[2048];
 	int ids[10];
-	int pick[2];
+	int pick[10];
 	slot80* e;
 	unsigned char* q;
 	float t;
@@ -56,7 +63,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 	int k;
 	int n;
 	int i;
-	int id;
+
 
 	v20 = 0;
 	v25 = 0;
@@ -66,7 +73,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 		return 0;
 	if (packet[2] != 1 && packet[2] != -1)
 		return 0;
-	if (packet[1] < 1 || packet[1] > 7)
+	if ((unsigned int) packet[1] < 1 || (unsigned int) packet[1] > 7)
 		return 0;
 	found = fcn_00507080(packet[1]);
 	if (found == 0)
@@ -76,10 +83,10 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 		return 0;
 	best = 0;
 	do {
-		q = lpGebaeudePROT + *(unsigned char*) e * 0x24d + 0x247;
-		if (best < (int) *q) {
-			v20 = *(unsigned char*) e;
+		q = &((Bld24d*) lpGebaeudePROT)[*(unsigned char*) e].x247;
+		if ((int) *q > best) {
 			best = (int) *q;
+			v20 = *(unsigned char*) e;
 		}
 		e = (slot80*) gm_FindNextFilteredEntity();
 	} while (e != 0);
@@ -120,20 +127,20 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 		scale = *(double*) 0x6629c8 -
 			((gm_RandomFloat01() + 1.0f) * t * *(float*) 0x66414c + *(double*) 0x6628f0);
 	}
-	id = *(unsigned char*) 0x773d75;
-	e = gm_FindSlotById(id, v20);
+
+	e = gm_FindSlotById(g_773d75, v20);
 	if (e != 0) {
 		ent = *e;
 		ent.f24 = ent.f20 * scale;
-		ent.f38 = fcn_00502780(id, v20);
-		fcn_004c61d0(&ent, (unsigned char) id);
+		ent.f38 = fcn_00502780(g_773d75, v20);
+		fcn_004c61d0(&ent, g_773d75);
 		packet[3] = v20;
-		e = gm_FindSlotById(id, v25);
+		e = gm_FindSlotById(g_773d75, v25);
 		if (e != 0) {
 			ent = *e;
 			ent.f24 = ent.f20 * scale;
-			ent.f38 = fcn_00502780(id, v25);
-			fcn_004c61d0(&ent, (unsigned char) id);
+			ent.f38 = fcn_00502780(g_773d75, v25);
+			fcn_004c61d0(&ent, g_773d75);
 			packet[4] = v25;
 		}
 		fcn_004c5420(*(int*) (self + 4), 0x1c8, 4, 0x4000000, 0);

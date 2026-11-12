@@ -14,6 +14,7 @@ int __cdecl fcn_004aa550(unsigned short* a0, char* a1, char* a2)
 	char text2[0x100];
 	char* e;
 	int r;
+	char* format;
 
 	if (*a1 != 0x10) {
 		return 0;
@@ -36,23 +37,24 @@ int __cdecl fcn_004aa550(unsigned short* a0, char* a1, char* a2)
 	*(int*) msg = *(int*) (a1 + 8);
 	switch (*(int*) (a1 + 4)) {
 	case 0:
-		sprintf(text, (char*) 0x67fb1c);
+		format = (char*) 0x67fb1c;
 		break;
 	case 3:
-		sprintf(text, (char*) 0x67fb04);
+		format = (char*) 0x67fb04;
 		break;
 	case 4:
-		sprintf(text, (char*) 0x67faf4);
+		format = (char*) 0x67faf4;
 		break;
 	case 7:
-		sprintf(text, (char*) 0x67fadc);
+		format = (char*) 0x67fadc;
 		break;
 	case 8:
-		sprintf(text, (char*) 0x67fac8);
+		format = (char*) 0x67fac8;
 		break;
 	default:
 		return 0;
 	}
+	sprintf(text, format);
 	*(int*) (msg + 0x214) = *(int*) (a2 + 4);
 	sprintf(text2, (char*) 0x67fab0, a0 + 0x18, (int) *a0, text);
 	r = fcn_004fa5b0(*(int*) (a1 + 4), a0, msg);

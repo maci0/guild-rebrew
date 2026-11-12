@@ -1,4 +1,9 @@
 typedef struct {
+	unsigned char kind;
+	unsigned char remaining[0x24c];
+} BuildingProto599350;
+
+typedef struct {
 	char pad0[4];
 	unsigned char type;
 	char pad5[3];
@@ -88,7 +93,7 @@ void __cdecl fcn_00599350(void)
 	int hwnd;
 	int prevIdx;
 	int off;
-	char* p;
+	BuildingProto599350* p;
 	char* mode;
 	int prev;
 	int id;
@@ -178,10 +183,10 @@ void __cdecl fcn_00599350(void)
 			rec = (char*) 0x14a6558;
 			do {
 				if (gm_GetBuildingTypeCategory(idx) == g_6aa0a8) {
-					p = (char*) lpGebaeudePROT + off;
+					p = &((BuildingProto599350*) lpGebaeudePROT)[idx];
 					avail = fcn_00504f30(idx, g_774970);
 					if (avail == 1) {
-						if (*p != 0x0f && *p != 6) {
+						if (p->kind != 0x0f && p->kind != 6) {
 							id = fcn_0046f740((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, idx + 0x427, g_772514);
 							*(int*) (g_1015ea0 + id * 0x2f4 + 0x58) = 1;
 							strcpy((char*) (g_1015ea0 + id * 0x2f4 + 0xcc), *(char**) rec);

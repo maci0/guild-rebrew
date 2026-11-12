@@ -28,9 +28,9 @@ void __cdecl fcn_00533bb0(int a0, int a1, int* a2, int a3, ...)
 	winp = (char*) g_1015f40 + a0 * 0x3cc;
 	maxw = 0;
 	if (a3 > 0) {
-		va_start(ap, a3);
+		int remaining; va_start(ap, a3);
 		slot = buf;
-		for (i = a3; i != 0; i--) {
+		for (remaining = a3; remaining != 0; remaining--) {
 			src = va_arg(ap, char*);
 			strcpy(slot, src);
 			w = fcn_0046b520(src, 0x54) + 0x20;
@@ -41,10 +41,7 @@ void __cdecl fcn_00533bb0(int a0, int a1, int* a2, int a3, ...)
 		}
 	}
 	q = *(int*) (winp + 0xc) / (a3 + 1);
-	if (maxw <= q) {
-		step = q;
-		start = q;
-	} else {
+	if (maxw > q) {
 		step = maxw + 8;
 		span = step * a3;
 		if (span > *(int*) (winp + 0xc)) {
@@ -53,15 +50,18 @@ void __cdecl fcn_00533bb0(int a0, int a1, int* a2, int a3, ...)
 			span = *(int*) (winp + 0xc) - span;
 		}
 		start = span / 2 + step / 2;
+	} else {
+		step = q;
+		start = q;
 	}
 	start -= maxw / 2;
 	slot = buf;
-	for (i = 0; i < a3; i++) {
+	for (i = 0; i < a3; i++, slot += 0x40, start += step) {
 		w = fcn_00468df0(start, a1, 0xc5, slot, a0);
 		a2[i] = w;
 		*(int*) (g_1015ea0 + w * 0x2f4 + 0x84) = 0x54;
 		fcn_00469110(w, maxw);
-		start += step;
-		slot += 0x40;
+
+
 	}
 }

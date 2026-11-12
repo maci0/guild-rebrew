@@ -34,8 +34,8 @@ void __cdecl fcn_00471e30(int dlg);
 int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 {
 	unsigned int count;
-	unsigned int ids[7];
-	char ev[0xfc];
+	unsigned int ids[6];
+	char ev[0x100];
 	char text2[0x80];
 	char text[0x400];
 	unsigned int slots[0x88];
@@ -81,8 +81,8 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 		return 0;
 	}
 	if (fcn_0055c050(a1) == 0) {
-		io_FormatTextBuffer((char*) &ids[6], 0x1705, a1);
-		fcn_00526120((char*) &ids[6], 0);
+		io_FormatTextBuffer(ev, 0x1705, a1);
+		fcn_00526120(ev, 0);
 		return 0;
 	}
 	if (fcn_00579640(a0, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
@@ -98,7 +98,7 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 	evid = fcn_00472250(dlg, 1,
 		io_AppendText(0x1700, 0x1711, value, *(unsigned short*) (a1 + 0x27),
 			*(unsigned char*) a1 * 0xe + 0x48e));
-	/* entries 0..5 are cleared; entry 6 is the 0x1705 message area */
+	/* The native 0x1705 text and later packet share ev. */
 	memset(ids, 0xff, 6 * sizeof(unsigned int));
 	ids[0] = dlg;
 	ids[1] = 2;
@@ -113,8 +113,8 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 			*(int*) 0x774654 = 1;
 		}
 		if (flag == 2 && evid != -1 && g_67d370 == evid) {
+			ev[4] = 0x19;
 			*(int*) (ev + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) 0x774970 * 0x21c);
-			ev[0] = 0x19;
 			*(int*) (ev + 0xc) = *(int*) (*(int*) 0x7746c4 + 1);
 			ev[0x36] = 1;
 			*(int*) (ev + 0x7c) = value;

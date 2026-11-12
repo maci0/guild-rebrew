@@ -1,12 +1,12 @@
 #include <math.h>
-
+#pragma pack(push, 2)
 typedef struct {
 	int day;
 	unsigned short hour;
 	int min;
-	unsigned short sec;
+	int sec;
 } Time;
-
+#pragma pack(pop)
 typedef struct {
 	char pad0[0x164];
 	unsigned char stat;

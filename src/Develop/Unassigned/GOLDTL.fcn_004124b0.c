@@ -16,7 +16,7 @@ typedef int (__stdcall* GetDevData)(void* self, unsigned int cb, DevData* data, 
 
 /* Drain the keyboard device. The loop is a do/while on the HRESULT so
  * the failure path is a jl to the tail and GetDeviceData is emitted
- * once. The volatile byte load is what puts that byte in al. */
+ * once. */
 void __cdecl fcn_004124b0(void)
 {
 	DevData ev;
@@ -53,7 +53,7 @@ void __cdecl fcn_004124b0(void)
 			((unsigned char*) 0x14cf960)[ofs] = (unsigned char) one;
 		}
 	} while (hr >= 0);
-	cur = *(volatile unsigned char*) 0x14cf950;
+	cur = *(unsigned char*) 0x14cf950;
 	if (cur != 0) {
 		key = cur;
 		stamp = *(int*) 0x6b7fb8;

@@ -1,5 +1,5 @@
 void __cdecl fcn_004fbdd0(void);
-
+extern float g_773d4c, g_773d50;
 /* ADDRESS: GOLDTL 0x004fb4e0 */
 void __cdecl fcn_004fb4e0(char* a)
 {
@@ -29,8 +29,8 @@ void __cdecl fcn_004fb4e0(char* a)
 	*(int*) 0x99f594 = *(int*) (a + 0x30);
 	*(int*) 0x99f598 = *(int*) (a + 0x34);
 	*(unsigned short*) 0x99f59c = *(unsigned short*) (a + 0x38);
-	*(float*) 0x773d4c = f14;
-	*(float*) 0x773d50 = f18;
+	g_773d4c = f18;
+	g_773d50 = f14;
 
 	count = 0;
 	sum = 0;
@@ -51,7 +51,8 @@ void __cdecl fcn_004fb4e0(char* a)
 		}
 		count++;
 		w = *(unsigned char*) (rec + 0xb);
-		sum += w + w * 4;
+		sum += w;
+		sum += w * 4;
 		for (j = 0; j < 5; j++) {
 			acc[j] += *(unsigned char*) (rec + 0x7e + j);
 		}

@@ -13,8 +13,8 @@ extern double g_662908;
 typedef struct Glyph {
 	unsigned short id;
 	unsigned short w;
+	unsigned short pad4;
 	unsigned short h;
-	unsigned short pad6;
 } Glyph;
 
 void __cdecl fcn_00472880(int font);
@@ -37,10 +37,8 @@ void __cdecl fcn_00468e40(int a0, int a1)
 	unsigned char v9;
 	int i;
 
-	v1 = g_1015ea0 + a0 * 0x2f4;
+	v8 = 0; v9 = 8; v1 = g_1015ea0 + a0 * 0x2f4;
 	v7 = *(int*) (v1 + 0x1d0);
-	v8 = 0;
-	v9 = 8;
 	if ((v7 & 2) && g_7725d0 == 0) {
 		if (!((g_1015ea0 + g_67d370 * 0x2f4 != v1) && *(int*) (v1 + 0x38) == 0)
 		    && *(int*) (v1 + 0x4c) == 0) {

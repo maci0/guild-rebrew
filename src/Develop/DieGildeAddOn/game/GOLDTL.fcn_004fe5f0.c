@@ -3,6 +3,9 @@
 #include "client_types.h"
 
 extern pos14_7f4c00 g_7f4c00;
+extern float g_662a94;
+extern float g_6628a8;
+extern float g_66444c;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -25,7 +28,7 @@ void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-int __cdecl gm_RandomMod(int);
+int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_0050c710(int, int, int);
 void __cdecl fcn_004ff490(char*);
 
@@ -47,7 +50,7 @@ double __cdecl fcn_004fe5f0(char* a0)
 	int w = 0;
 
 	if (*(unsigned short*) a0 == 0xffff) {
-		return *(float*) 0x662a94;
+		return g_662a94;
 	}
 	if (*(char*) (a0 + 2) == 0x0f) {
 		v4 = fcn_0050a710(a0);
@@ -55,7 +58,7 @@ double __cdecl fcn_004fe5f0(char* a0)
 			fcn_004c57e0(*(int*) (a0 + 4), 1);
 			g_773d48 += 1;
 		}
-		return *(float*) 0x662a94;
+		return g_662a94;
 	}
 	if (*(char*) (a0 + 2) == 0x14) {
 		v4 = fcn_004f3770(a0);
@@ -69,11 +72,11 @@ double __cdecl fcn_004fe5f0(char* a0)
 			msg[4] = 0x72;
 			*(int*) (msg + 8) = *(int*) (a0 + 4);
 			*(int*) (msg + 0xc) = -1;
-			*(int*) (msg + 0x28) = *(int*) &g_7f4c00;
-			*(int*) (msg + 0x2c) = g_7f4c04;
+			*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
+
 			msg[0x36] = 2;
-			*(int*) (msg + 0x30) = g_7f4c08;
-			*(short*) (msg + 0x34) = g_7f4c0c;
+
+
 			*(int*) (msg + 0x58) = *(int*) (a0 + 4);
 			fcn_004c5530(msg);
 			e = *(int*) (a0 + 0x16c);
@@ -89,7 +92,7 @@ double __cdecl fcn_004fe5f0(char* a0)
 				}
 			}
 		}
-		return *(float*) 0x6628a8;
+		return g_6628a8;
 	}
 	v5 = *(int*) (a0 + 0x2c);
 	if (v5 != 0) {
@@ -185,11 +188,11 @@ double __cdecl fcn_004fe5f0(char* a0)
 			msg[4] = 0x72;
 			*(int*) (msg + 8) = *(int*) (a0 + 4);
 			*(int*) (msg + 0xc) = -1;
-			*(int*) (msg + 0x28) = *(int*) &g_7f4c00;
-			*(int*) (msg + 0x2c) = g_7f4c04;
-			*(int*) (msg + 0x30) = g_7f4c08;
+			*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
+
+
 			msg[0x36] = 2;
-			*(short*) (msg + 0x34) = g_7f4c0c;
+
 			*(int*) (msg + 0x58) = *(int*) (a0 + 4);
 			fcn_004c5530(msg);
 			g_773d48 += 1;
@@ -216,19 +219,21 @@ double __cdecl fcn_004fe5f0(char* a0)
 		          v15 +
 		      *(float*) (a0 + 0x10);
 	} else {
-		v14 = *(float*) (a0 + 0x14);
+		double adjusted;
+		adjusted = *(float*) (a0 + 0x14);
 		if (*(int*) (a0 + 0x170) != 0) {
 			v4 = fcn_0050c710(*(int*) (a0 + 0x170), 8, 1);
-			v14 = (float) v4 * 0.0125f * -3.0f + v14;
+			adjusted = (double) v4 * 0.0125f * g_66444c + adjusted;
 		}
-		v10 = (*(float*) (a0 + 0x1c) - v14) + v14 / *(float*) (a0 + 0x1c);
+		v10 = (*(float*) (a0 + 0x1c) - adjusted) + adjusted / *(float*) (a0 + 0x1c);
 		fcn_004c4510(a0, *(int*) (a0 + 4));
 		fcn_004c4570(4, 1, 0x1c, &v10);
 		fcn_004c5360();
 		g_773d48 += 1;
 	}
-	v15 = (float) *(int*) (a0 + 0x24) + v10;
-	if (v15 <= 0.0) {
+	v11 = (double) *(int*) (a0 + 0x24) + v10;
+	v15 = (float) v11;
+	if (v11 <= 0.0) {
 		c = 0;
 		if ((*(unsigned char*) (a0 + 0x1cc) & 1) != 0 &&
 		    *(char*) (a0 + 2) != 6 && *(char*) (a0 + 2) != 7) {
@@ -251,11 +256,11 @@ double __cdecl fcn_004fe5f0(char* a0)
 		msg[4] = 0x72;
 		*(int*) (msg + 8) = *(int*) (a0 + 4);
 		*(int*) (msg + 0xc) = -1;
-		*(int*) (msg + 0x28) = *(int*) &g_7f4c00;
-		*(int*) (msg + 0x2c) = g_7f4c04;
+		*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
+
 		msg[0x36] = 2;
-		*(int*) (msg + 0x30) = g_7f4c08;
-		*(short*) (msg + 0x34) = g_7f4c0c;
+
+
 		*(int*) (msg + 0x58) = *(int*) (a0 + 4);
 		fcn_004c5530(msg);
 		g_773d48 += 1;
@@ -281,7 +286,7 @@ double __cdecl fcn_004fe5f0(char* a0)
 				g_773d48 += 1;
 			}
 		}
-		return *(float*) 0x6628a8;
+		return g_6628a8;
 	}
 	fcn_004ff490(a0);
 	if (v15 > 0.0) {

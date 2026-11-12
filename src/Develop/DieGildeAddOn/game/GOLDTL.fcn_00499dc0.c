@@ -2,7 +2,8 @@
 typedef struct {
 	unsigned char valid;
 	char pad1[3];
-	int v[5];
+	int v[4];
+	float f14;
 } Pos;
 
 // SIZE 0x10
@@ -99,7 +100,7 @@ int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)
 		a.valid = 2;
 		a.v[0] = slot.id;
 		a.v[1] = 1;
-		a.v[4] = 0.05f;
+		a.f14 = 0.05f;
 		b.valid = 7;
 		b.v[0] = *(int*) (e + 4);
 		b.v[1] = 1;
@@ -117,7 +118,7 @@ int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)
 	a.v[0] = slot.b;
 	a.v[1] = 1;
 	b.valid = 4;
-	b.v[0] = *(int*) (e + 1);
+	b.v[0] = *(int*) (p + 1);
 	b.v[1] = -1;
 	b.v[3] = 0x1b;
 	*out1 = a;

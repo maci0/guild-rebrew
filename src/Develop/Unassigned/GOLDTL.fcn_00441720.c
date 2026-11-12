@@ -11,7 +11,7 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 	unsigned int width;
 	unsigned int stride;
 	int b;
-	int s;
+	unsigned int s;
 	int v4;
 	int v3;
 	int v7;
@@ -35,7 +35,7 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 	*a3 = v4;
 	v3 = (int) (fz + *(float*) 0x6628cc);
 	*a4 = v3;
-	if (v4 < 0 || a0[0] <= v4 || v3 < 0 || a0[0] <= v3) {
+	if ((int) *a3 < 0 || a0[0] <= (int) *a3 || v3 < 0 || a0[0] <= v3) {
 		return 0;
 	}
 	if (a5 == 0) {
@@ -59,30 +59,30 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 	fz = (fz - (float) v3) / (float) s;
 	if (data != 0 && (*(unsigned char*) (data + (unsigned int) v4 / s + ((unsigned int) v3 / s * (int) width) / s) & 0x80) != 0) {
 		if (!(fz + fx > *(float*) 0x6628a0)) {
-			v13 = (float) data[width * v3 + v4];
-			v11 = (float) data[((v4 + s) & mask) + width * v3] - v13;
-			v12 = -v13;
+			v13 = (float) ((unsigned char*) a0[4])[width * v3 + v4];
+			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + width * v3] - v13;
+			v12 = (float) ((unsigned char*) a0[4])[((v3 + s) & mask) * width + v4] - v13;
 		} else {
 			v9 = (v4 + s) & mask;
 			v6 = ((v3 + s) & mask) * width;
-			v13 = (float) data[v9 + v6];
-			v11 = (float) data[v6 + v4] - v13;
-			v12 = (float) data[v3 * width + v9] - v13;
+			v13 = (float) ((unsigned char*) a0[4])[v9 + v6];
+			v11 = (float) ((unsigned char*) a0[4])[v6 + v4] - v13;
+			v12 = (float) ((unsigned char*) a0[4])[v3 * width + v9] - v13;
 			fx = *(float*) 0x6628a0 - fx;
 			fz = *(float*) 0x6628a0 - fz;
 		}
 	} else {
 		if (!(*(float*) 0x6628a0 - fz + fx > *(float*) 0x6628a0)) {
 			v7 = ((v3 + s) & mask) * width;
-			v13 = (float) data[v7 + v4];
-			v11 = (float) data[((v4 + s) & mask) + v7] - v13;
+			v13 = (float) ((unsigned char*) a0[4])[v7 + v4];
+			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + v7] - v13;
 			fz = *(float*) 0x6628a0 - fz;
-			v12 = -v13;
+			v12 = (float) ((unsigned char*) a0[4])[width * v3 + v4] - v13;
 		} else {
 			v9 = (v4 + s) & mask;
-			v13 = (float) data[width * v3 + v9];
-			v11 = (float) data[width * v3 + v4] - v13;
-			v12 = (float) data[((v3 + s) & mask) * width + v9] - v13;
+			v13 = (float) ((unsigned char*) a0[4])[width * v3 + v9];
+			v11 = (float) ((unsigned char*) a0[4])[width * v3 + v4] - v13;
+			v12 = (float) ((unsigned char*) a0[4])[((v3 + s) & mask) * width + v9] - v13;
 			fx = *(float*) 0x6628a0 - fx;
 		}
 	}

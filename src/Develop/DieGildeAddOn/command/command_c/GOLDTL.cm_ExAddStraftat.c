@@ -94,7 +94,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 			v16.c = *(unsigned int*) (*(char**) (p + 0x61) + 0x54);
 		}
 	} else {
-		fcn_004faa90(v14, v13, &v16);
+		fcn_004faa90(v13, v14, &v16);
 	}
 	for (ent = (Straftat*) fcn_005463a0(1, 0, 0x18); ent != 0;
 		ent = (Straftat*) he_fn_Handlung()) {

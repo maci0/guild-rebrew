@@ -18,6 +18,51 @@ unsigned int __cdecl fcn_00419640(int a0, int* a1)
 	r = 0;
 	which = *a1;
 	switch (which) {
+	case 1:
+		if (!fcn_004193d0((char*) 0x6b5d20)) {
+			if (g_6b5d54 != 0) {
+				fcn_004225e0(g_6b5d54, 0);
+			}
+			g_6b5d54 = fcn_00422460(0, (str_6776b8 + a0 * 0x19));
+			if (g_6b5d54 == 0 || *(int*) (g_6b5d54 + 4) == 0) {
+				*a1 = 0;
+				goto done;
+			}
+			fcn_004225e0(g_6b5d54, 1);
+			fcn_0064d530((char*) 0x6b5d20,
+				(char*) (*(int*) (g_6b5d54 + 4) + 4), 0x32);
+			*a1 = 0;
+			r = 0x6b5d20;
+			goto done;
+		}
+		if (strcmp((char*) 0x6b5d20, (str_6776b8 + a0 * 0x19)) != 0) {
+			goto done;
+		}
+		r = 0x6b5d20;
+		goto done;
+		break;	case 0:
+		if (fcn_004193d0((char*) 0x6b5d74)) {
+			if (strcmp((char*) 0x6b5d74, (str_6776b8 + a0 * 0x19)) != 0) {
+				goto done;
+			}
+			*a1 = 1;
+			r = 0x6b5d74;
+			goto done;
+		}
+		if (g_6b5da8 != 0) {
+			fcn_004225e0(g_6b5da8, 0);
+		}
+		g_6b5da8 = fcn_00422460(0, (str_6776b8 + a0 * 0x19));
+		if (g_6b5da8 == 0 || *(int*) (g_6b5da8 + 4) == 0) {
+			goto done;
+		}
+		fcn_004225e0(g_6b5da8, 1);
+		fcn_0064d530((char*) 0x6b5d74,
+			(char*) (*(int*) (g_6b5da8 + 4) + 4), 0x32);
+		*a1 = 1;
+		r = 0x6b5d74;
+		goto done;
+		break;
 	case -1:
 		if (fcn_004193d0((char*) 0x6b5d20)) {
 			if (strcmp((char*) 0x6b5d20, (str_6776b8 + a0 * 0x19)) == 0) {
@@ -61,52 +106,7 @@ unsigned int __cdecl fcn_00419640(int a0, int* a1)
 		r = 0x6b5d20;
 		goto done;
 		break;
-	case 0:
-		if (fcn_004193d0((char*) 0x6b5d74)) {
-			if (strcmp((char*) 0x6b5d74, (str_6776b8 + a0 * 0x19)) != 0) {
-				goto done;
-			}
-			*a1 = 1;
-			r = 0x6b5d74;
-			goto done;
-		}
-		if (g_6b5da8 != 0) {
-			fcn_004225e0(g_6b5da8, 0);
-		}
-		g_6b5da8 = fcn_00422460(0, (str_6776b8 + a0 * 0x19));
-		if (g_6b5da8 == 0 || *(int*) (g_6b5da8 + 4) == 0) {
-			goto done;
-		}
-		fcn_004225e0(g_6b5da8, 1);
-		fcn_0064d530((char*) 0x6b5d74,
-			(char*) (*(int*) (g_6b5da8 + 4) + 4), 0x32);
-		*a1 = 1;
-		r = 0x6b5d74;
-		goto done;
-		break;
-	case 1:
-		if (!fcn_004193d0((char*) 0x6b5d20)) {
-			if (g_6b5d54 != 0) {
-				fcn_004225e0(g_6b5d54, 0);
-			}
-			g_6b5d54 = fcn_00422460(0, (str_6776b8 + a0 * 0x19));
-			if (g_6b5d54 == 0 || *(int*) (g_6b5d54 + 4) == 0) {
-				*a1 = 0;
-				goto done;
-			}
-			fcn_004225e0(g_6b5d54, 1);
-			fcn_0064d530((char*) 0x6b5d20,
-				(char*) (*(int*) (g_6b5d54 + 4) + 4), 0x32);
-			*a1 = 0;
-			r = 0x6b5d20;
-			goto done;
-		}
-		if (strcmp((char*) 0x6b5d20, (str_6776b8 + a0 * 0x19)) != 0) {
-			goto done;
-		}
-		r = 0x6b5d20;
-		goto done;
-		break;
+
 	}
 done:
 	return r;

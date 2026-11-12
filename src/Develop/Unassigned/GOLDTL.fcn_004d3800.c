@@ -11,6 +11,7 @@ void __cdecl fcn_004d3800(void)
 	int j;
 	int k;
 	int n;
+	float (*g)[6] = (float (*)[6]) 0x9b43e0;
 
 	memset((void*) 0x9b43e0, 0, 0x2d0);
 	*(float*) 0x9b43e0 = 10.0f;
@@ -147,15 +148,13 @@ void __cdecl fcn_004d3800(void)
 			}
 		}
 	} while (p < (float*) 0x9b46b0);
-	for (i = 0; i < 6; i++) {
+	for (i = 0; i < 30; i += 5) {
 		for (j = 0; j < 5; j++) {
-			for (k = 1; k < 6; k++) {
-				p = (float*) 0x9b43e0 + (i * 5 + j) * 6 + k;
-				for (n = 6 - k; n != 0; n--) {
-					if (*p == *(p - 1)) {
-						*p = 0.0f;
+			for (k = 0; k < 6; k++) {
+				for (n = k + 1; n < 6; n++) {
+					if (g[i + j][n] == g[i + j][k]) {
+						g[i + j][n] = 0.0f;
 					}
-					p++;
 				}
 			}
 		}

@@ -12,7 +12,7 @@ extern int g_6772c4;
 
 int __stdcall ClientToScreen(int hwnd, int* pt);
 int __stdcall SetCursorPos(int x, int y);
-void __cdecl fcn_00411780(int err, char* text, int a3);
+void __cdecl fcn_00411780(int a1, int err, char* text, ...);
 
 /* ADDRESS: GOLDTL 0x004123a0 */
 void __cdecl fcn_004123a0(void)
@@ -53,7 +53,7 @@ void __cdecl fcn_004123a0(void)
 			break;
 		}
 		if (msg)
-			fcn_00411780(err, msg, 0);
+			fcn_00411780(0, err, msg);
 	}
 	if (((unsigned char*) state)[12] & 0x80)
 		g_14ce8d0 = 1;
@@ -61,9 +61,9 @@ void __cdecl fcn_004123a0(void)
 		g_14ce8d8 = 0;
 		g_14ce8d0 = 0;
 	}
-	g_6772c4 = 1;
 	dx = (short) (g_14ce920 + state[0]);
 	dy = (short) (*(short*) (state + 1) + *(short*) &g_14ce922);
+	g_6772c4 = 1;
 	*(short*) &g_14ce8c0 = (short) dx;
 	*(short*) &g_14cf900 = (short) dx;
 	*(short*) &g_14ce8c2 = (short) dy;

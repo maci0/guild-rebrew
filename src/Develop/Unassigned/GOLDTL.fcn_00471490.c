@@ -155,7 +155,6 @@ void __cdecl fcn_00471490(int k)
 						}
 						fcn_0046bd20(sx, sy, top, *(int*) (obj + 0x1c), surf,
 						             obj + 0x8c, flags);
-						fcn_00472880(flags);
 						break;
 					case 0x41:
 						fcn_00466550(*(int*) (obj + 0x88), (int) surf);

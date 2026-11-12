@@ -21,10 +21,10 @@ void __cdecl fcn_005109f0(int a0)
 	if (fcn_005105a0(a0) == 0) {
 		return;
 	}
-	if (*(int*) (a0 + 0x48) != -1 &&
-	    *(char*) (a0 + 0x4b) == 2 &&
+	id = *(int*) (a0 + 0x48);
+	if (id != -1 && (id &= 0xffffff, *(char*) (a0 + 0x4b) == 2) &&
 	    *(int*) (a0 + 0x218) != 0) {
-		id = *(int*) (a0 + 0x48) & 0xffffff;
+
 		if (id == 0x47) {
 			v = gm_AllocGebaeude(0x47, 0xffff);
 			strcpy(name, (char*) fcn_0064d1a0(a0, 0x5f) + 1);

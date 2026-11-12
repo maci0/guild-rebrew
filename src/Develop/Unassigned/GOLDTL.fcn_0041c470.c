@@ -49,10 +49,10 @@ unsigned int __cdecl fcn_0041c470(unsigned char* input, char* output, int width,
 		}
 		for (; i < 32768; i++) {
 			if (g_6b6f20[5][i].count) {
-				r = ((i >> 7) & 128) | ((i & 4) * 2) | ((i >> 1) & 16) | ((i >> 3) & 32) | ((i >> 5) & 64);
-				g = ((i >> 6) & 128) | ((i >> 4) & 64) | ((i >> 2) & 32) | ((i & 2) << 2) | (i & 16);
-				bl = (((i & 1) << 2 | (i & 8)) * 2) | ((i >> 1) & 32) | ((i >> 3) & 64) | ((i >> 5) & 128);
-				map[i] = (unsigned char)fcn_0041ca10(r, g, bl);
+				map[i] = (unsigned char)fcn_0041ca10(
+				    ((i >> 7) & 128) | (unsigned char)((unsigned char)(i & 4) * 2) | ((unsigned char)(i >> 1) & 16) | ((unsigned char)(i >> 3) & 32) | ((unsigned char)(i >> 5) & 64),
+				    ((i >> 6) & 128) | ((i >> 4) & 64) | ((i >> 2) & 32) | (unsigned char)((unsigned char)(i & 2) << 2) | ((unsigned char)i & 16),
+				    (unsigned char)(((unsigned char)(i & 1) << 2 | (unsigned char)(i & 8)) * 2) | ((unsigned char)(i >> 1) & 32) | ((unsigned char)(i >> 3) & 64) | ((unsigned char)(i >> 5) & 128));
 			}
 		}
 		for (i = 0; i < count; i++, input += 3) {
@@ -99,7 +99,7 @@ unsigned int __cdecl fcn_0041c470(unsigned char* input, char* output, int width,
 			down[1] = 0;
 			down[2] = 0;
 			up = current + 3;
-			for (x = width; x != 0; x--) {
+			for (x = width; x > 0; x--) {
 				r = clamp[256 + (unsigned int)input[0] + ((up[0] + 8) >> 4)];
 				g = clamp[256 + (unsigned int)input[1] + ((up[1] + 8) >> 4)];
 				bl = clamp[256 + (unsigned int)input[2] + ((up[2] + 8) >> 4)];

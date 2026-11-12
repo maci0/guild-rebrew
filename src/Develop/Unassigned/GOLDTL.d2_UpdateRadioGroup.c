@@ -1,4 +1,5 @@
 #include "client_data.h"
+extern int g_14ce904, g_14ce900, g_67d370, g_67d38c, g_14ce8d8, g_14ce8cc;
 void __cdecl d2_SelectRadioGroup(int, int); int __cdecl fcn_004125c0(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00469630 */
@@ -25,9 +26,9 @@ void __cdecl d2_UpdateRadioGroup(int a0)
 scan:
 		if (!*(int*) &g_7725d0) {
 			for (i = 0; i < count; i++) {
-				if (*(int*) (a0 * 0x8c + 0x102cbcc + i * 4) == *(int*) 0x67d370
+				if (*(int*) (a0 * 0x8c + 0x102cbcc + i * 4) == g_67d370
 					&& (!(*(unsigned char*) (a0 * 0x8c + (unsigned long)&g_102cbc0) & 1)
-						|| *(int*) 0x14ce8cc)) {
+						|| g_14ce8cc)) {
 					sel = i;
 				}
 			}
@@ -37,14 +38,14 @@ scan:
 		}
 	}
 	key = *(char*) &g_14cf950;
-	id = *(int*) 0x67d38c;
-	if (key == (char) 0xc8 || (*(int*) 0x14ce904 && id == -1)) {
+	id = g_67d38c;
+	if (key == (char) 0xc8 || (g_14ce904 && id == -1)) {
 		sel--;
-		alt = *(int*) 0x14ce904;
+		alt = g_14ce904;
 	}
-	else if (key == (char) 0xd0 || (*(int*) 0x14ce900 && id == -1)) {
+	else if (key == (char) 0xd0 || (g_14ce900 && id == -1)) {
 		sel++;
-		alt = *(int*) 0x14ce900;
+		alt = g_14ce900;
 	}
 	else {
 		goto skip;
@@ -82,10 +83,10 @@ skip:
 	if (*(char*) &g_14cf950 != 0x1c) {
 		return;
 	}
-	*(int*) 0x14ce8d8 = 1;
+	g_14ce8d8 = 1;
 	*(char*) &g_14cf950 = 0;
 	id = *(int*) (a0 * 0x8c + 0x102cbcc + sel * 4);
-	*(int*) 0x67d370 = id;
+	g_67d370 = id;
 	alt = *(int*) &g_1015ea0 + id * 0x2f4;
 	if (*(int*) (alt + 0x20) != 9) {
 		*(int*) &g_100f1dc = *(int*) (alt + 8);

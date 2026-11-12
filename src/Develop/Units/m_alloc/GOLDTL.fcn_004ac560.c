@@ -30,8 +30,8 @@ unsigned int __cdecl fcn_004ac560(void)
 {
 	char path[0x104];
 	char buf[0x100];
-	char key[0x100];
-	char val[0x100];
+	char key[0x20];
+
 	HistRec* krec;
 	HistRec* prec;
 	int kcnt;
@@ -71,29 +71,29 @@ unsigned int __cdecl fcn_004ac560(void)
 		krec[i].id = id;
 		id++;
 		sprintf(key, "k_%i", i);
-		GetPrivateProfileStringA(key, "begin", "-1", val, 0x100, path);
-		krec[i].begin = atoi(val);
-		GetPrivateProfileStringA(key, "nname", g_6b5c60, val, 0x100, path);
-		strncpy(krec[i].nname, val, 0xf);
-		GetPrivateProfileStringA(key, "end", "-1", val, 0x100, path);
-		krec[i].end = atoi(val);
-		GetPrivateProfileStringA(key, "vname", g_6b5c60, val, 0x100, path);
-		strncpy(krec[i].vname, val, 0xf);
+		GetPrivateProfileStringA(key, "begin", "-1", buf, 0x100, path);
+		krec[i].begin = atoi(buf);
+		GetPrivateProfileStringA(key, "nname", g_6b5c60, buf, 0x100, path);
+		strncpy(krec[i].nname, buf, 0xf);
+		GetPrivateProfileStringA(key, "vname", g_6b5c60, buf, 0x100, path);
+		strncpy(krec[i].vname, buf, 0xf);
+		GetPrivateProfileStringA(key, "end", "-1", buf, 0x100, path);
+		krec[i].end = atoi(buf);
 	}
 	for (i = 0; i < pcnt; i++) {
 		prec[i].id = id;
 		id++;
 		sprintf(key, "p_%i", i);
-		GetPrivateProfileStringA(key, "begin", "-1", val, 0x100, path);
-		prec[i].begin = atoi(val);
-		GetPrivateProfileStringA(key, "nname", g_6b5c60, val, 0x100, path);
-		strncpy(prec[i].nname, val, 0xf);
-		GetPrivateProfileStringA(key, "end", "-1", val, 0x100, path);
-		prec[i].end = atoi(val);
-		GetPrivateProfileStringA(key, "vname", g_6b5c60, val, 0x100, path);
-		strncpy(prec[i].vname, val, 0xf);
+		GetPrivateProfileStringA(key, "begin", "-1", buf, 0x100, path);
+		prec[i].begin = atoi(buf);
+		GetPrivateProfileStringA(key, "nname", g_6b5c60, buf, 0x100, path);
+		strncpy(prec[i].nname, buf, 0xf);
+		GetPrivateProfileStringA(key, "vname", g_6b5c60, buf, 0x100, path);
+		strncpy(prec[i].vname, buf, 0xf);
+		GetPrivateProfileStringA(key, "end", "-1", buf, 0x100, path);
+		prec[i].end = atoi(buf);
 	}
-	hist.n0 = 0;
+	hist.n0 = pcnt;
 	hist.n1 = kcnt;
 	hist.r0 = prec;
 	hist.r1 = krec;

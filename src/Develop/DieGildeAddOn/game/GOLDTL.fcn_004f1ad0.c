@@ -29,9 +29,9 @@ int __cdecl fcn_004f1ad0(void* a0, int count)
 		return 0;
 	}
 	i = 0;
-	if (count <= 0) {
-		return i;
-	}
+
+
+
 	for (; i < count; i++) {
 		hit = FindSlotEntryFiltered(0, a0, 0, (void*) 0x4f1840, 0);
 		if (hit == 0) {
@@ -42,9 +42,9 @@ int __cdecl fcn_004f1ad0(void* a0, int count)
 		*(int*) (hit + 4) = *(int*) *(char**) (hit + 0x10);
 		*(unsigned short*) (hit + 8) = 0x7fff;
 		*(unsigned short*) (hit + 0xa) = (unsigned short) (g_7f4c00 + 5);
-		*(char*) (hit + 0xc) = 0xff;
+		*(unsigned char*) (hit + 0xc) = 0xff;
 		for (j = 0; j < 5; j++) {
-			((char*) *(char**) (hit + 0x10))[j + 0x24] =
+			*((char*) *(char**) (hit + 0x10) + j + 0x24) =
 			    (char) ((float) (gm_RandomMod(8) & 0xffff) * 21.0f
 				+ 42.0f);
 		}

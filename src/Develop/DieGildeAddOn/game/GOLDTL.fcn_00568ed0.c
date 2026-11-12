@@ -11,9 +11,9 @@ extern double g_6629c8;
 extern double g_6653f8;
 extern char* g_aed32c;
 
-int __cdecl gm_RandomMod(int);
+int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl fcn_0042e410(unsigned short);
 int __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
@@ -75,6 +75,7 @@ void __cdecl fcn_00568ed0(char* a1)
 	int upto;
 	int t;
 	float total;
+	float countf;
 
 	switch (*(int*) (a1 + 0x70)) {
 	case 0:
@@ -110,11 +111,11 @@ void __cdecl fcn_00568ed0(char* a1)
 			*(int*) (a1 + 0x70) = -1;
 			return;
 		}
-		for (i = 0; i < 8; i++) {
-			if (*(int*) (a1 + 0x8c + i * 4) == -1) {
+		for (i = 8, p = a1 + 0x8c; i != 0; i--, p += 4) {
+			if (*(int*) p == -1) {
 				continue;
 			}
-			hs = (char*) gm_LookupEntityRecordById(*(int*) (a1 + 0x8c + i * 4));
+			hs = (char*) gm_LookupEntityRecordById(*(int*) p);
 			if (*(int*) (hs + 0x184) == 0) {
 				continue;
 			}
@@ -154,11 +155,12 @@ void __cdecl fcn_00568ed0(char* a1)
 			}
 			p += 4;
 		} while (--n != 0);
+		countf = (float) cnt;
 		t = fcn_0050c710((unsigned char*) ent, 0xf, 1);
-		if ((float) ((float) *(unsigned char*) (obj + 0x83) /
-		             (((float) t * g_662910 + g_6629c8) *
-		              ((float) cnt * g_662a3c + g_6628a0) *
-		              (total / (float) cnt))) >
+		if ((float) ((((float) t * g_662910 + g_6629c8) *
+		              (countf * g_662a3c + g_6628a0) *
+		              (total / countf)) /
+		             (float) *(unsigned char*) (obj + 0x83)) >
 		    (gm_RandomFloat01() + g_6628cc)) {
 			sel = 1;
 		}

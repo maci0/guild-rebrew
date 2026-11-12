@@ -1,3 +1,8 @@
+extern unsigned char* lpGebaeudePROT;
+extern char* lpObjektePROT;
+extern char g_7f4ca0[];
+
+extern int g_774800;
 int __cdecl fcn_00507910(unsigned char typ);
 int __cdecl gm_CheckStatLevel(int a0, int typ);
 int __cdecl fcn_005903d0(void* geb, void* a1, void* a2);
@@ -19,14 +24,14 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 	result = 0;
 	rec = 0;
 	if (a1 != 0) {
-		rec = (unsigned char*) (*(int*) 0x868050 +
+		rec = (unsigned char*) (lpGebaeudePROT +
 		                       (unsigned int) *a1 * 0x24d);
 		found = gm_CheckStatLevel(a0, fcn_00507910(*rec));
 		typ = *rec;
 		if (typ == 0x1d)
-			return fcn_005903d0((void*) (0x7f4ca0 + a0 * 0x21c), a1, a2);
+			return fcn_005903d0((void*) (g_7f4ca0 + a0 * 0x21c), a1, a2);
 		if ((unsigned int) (typ - 1) <= 0x20) {
-			geb = (unsigned char*) (0x7f4ca0 + a0 * 0x21c);
+			geb = (unsigned char*) (g_7f4ca0 + a0 * 0x21c);
 			switch (typ) {
 			case 1:
 			case 3:
@@ -238,7 +243,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 		if (a2 == 0)
 			goto finish;
 		id = *a2;
-		if (*(char*) (0x99ec10 + (unsigned int) id * 0x41) != 6) {
+		if (*(char*) (lpObjektePROT + (unsigned int) id * 0x41) != 6) {
 			if (id >= 0x91 && id <= 0x97)
 				result = 1;
 			else
@@ -259,7 +264,7 @@ common:
 			result |= 0x4000;
 	}
 finish:
-	if (*(int*) 0x774800 != 0) {
+	if (g_774800 != 0) {
 		result = 0xffffffff;
 		if (a1 == 0)
 			return 0xffffffff;

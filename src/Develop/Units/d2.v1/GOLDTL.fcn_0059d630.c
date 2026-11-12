@@ -23,7 +23,7 @@ void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl fcn_005bdc30(int, Req*, int, void*, int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
-void __cdecl fcn_0059d380(void);
+int __cdecl fcn_0059d380(int a0, char* a1);
 
 void __cdecl fcn_0059d630(char* a)
 {

@@ -55,7 +55,7 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 	int id;
 	long res;
 	unsigned short wname[0x104];
-	char msg[0x108];
+	char msg[0x100];
 
 	fp = fopen(name, (char*) g_6750e8);
 	if (fp == 0) {
@@ -64,19 +64,19 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 	fclose(fp);
 	if (hwnd == 0) {
 		if (g_14cc5b8 == 0) {
-			memset(&wc, 0, 0x2c);
+			memset((char*) &wc + 4, 0, 0x2c);
 			wc.cbSize = 0x30;
-			wc.style = 0;
+
 			wc.lpfnWndProc = fcn_0041e530;
-			wc.cbClsExtra = 0;
-			wc.cbWndExtra = 0;
+
+
 			wc.hInstance = (HINSTANCE) inst;
-			wc.hIcon = 0;
+
 			wc.hCursor = LoadCursorA(0, (const char*) 0x7f00);
-			wc.hbrBackground = 0;
-			wc.lpszMenuName = 0;
+
+
 			wc.lpszClassName = "MOVIEWNDCLASS";
-			wc.hIconSm = 0;
+
 			g_14cc5b8 = RegisterClassExA(&wc);
 		}
 		if ((char) flags < 0) {
@@ -97,7 +97,7 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 	if (v == 0) {
 		return 0;
 	}
-	strcpy(v + 0x10, name);
+	{ char* src = name; int offset = (v + 0x10) - src; char c; do { c = *src; src[offset] = c; src++; } while (c); }
 	*(void**) (v + 0x114) = hwnd;
 	*(int*) (v + 0xc) = flags;
 	res = CoCreateInstance((void*) 0x6707a0, 0, 1, (void*) 0x66f230, (void**) (v + 0x11c));
@@ -144,8 +144,8 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 			if ((*(long (__stdcall**) (Com*, int*, int*)) (filter->vt + 0x88 / 4))(filter, &client.left, &client.top) < 0) {
 				goto fail;
 			}
-			scaled = (int) ((float) ((rc.right - rc.left) * client.top) / (float) client.left);
-			rc.top = (rc.bottom - rc.top) / 2 - scaled / 2;
+			scaled = (int) ((double) ((rc.right - rc.left) * client.top) / (double) client.left);
+			rc.top = (rc.bottom - rc.top >> 1) - (scaled >> 1);
 			rc.bottom = scaled + rc.top;
 		}
 	} else if (w != 0 && h != 0) {
@@ -154,11 +154,11 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 			if ((*(long (__stdcall**) (Com*, int*, int*)) (filter->vt + 0x88 / 4))(filter, &client.left, &client.top) < 0) {
 				goto fail;
 			}
-			scaled = (int) ((float) (w * client.top) / (float) client.left);
+			scaled = (int) ((double) (w * client.top) / (double) client.left);
 			if (flags & 1) {
 				GetClientRect(hwnd, &client);
-				rc.left = (client.right - client.left) / 2 - w / 2;
-				rc.top = (client.bottom - client.top) / 2 - scaled / 2;
+				rc.left = (client.right - client.left >> 1) - (w >> 1);
+				rc.top = (client.bottom - client.top >> 1) - (scaled >> 1);
 				rc.right = w + rc.left;
 				rc.bottom = scaled + rc.top;
 			} else {
@@ -174,8 +174,8 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 			rc.bottom = y + h;
 			if (flags & 1) {
 				GetClientRect(hwnd, &client);
-				rc.left = (client.right - client.left) / 2 - (rc.right - rc.left) / 2;
-				rc.top = (client.bottom - client.top) / 2 - (rc.bottom - rc.top) / 2;
+				rc.left = (client.right - client.left >> 1) - (rc.right - rc.left >> 1);
+				rc.top = (client.bottom - client.top >> 1) - (rc.bottom - rc.top >> 1);
 			}
 		}
 	} else {
@@ -184,8 +184,8 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 		if ((*(long (__stdcall**) (Com*, int*, int*)) (filter->vt + 0x88 / 4))(filter, &client.left, &client.top) < 0) {
 			goto fail;
 		}
-		rc.left = (rc.right - rc.left) / 2 - client.left / 2;
-		rc.top = (rc.bottom - rc.top) / 2 - client.top / 2;
+		rc.left = (rc.right - rc.left >> 1) - (client.left >> 1);
+		rc.top = (rc.bottom - rc.top >> 1) - (client.top >> 1);
 		rc.right = rc.left + client.left;
 		rc.bottom = rc.top + client.top;
 	}
@@ -193,9 +193,9 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 	if ((*(long (__stdcall**) (Com*, int, int, int, int)) (window->vt + 0x9c / 4))(window, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top) < 0) {
 		goto fail;
 	}
-	*(int*) (v + 8) = *(int*) 0x14cc5bc;
-	id = *(int*) 0x14cc5bc;
-	*(int*) 0x14cc5bc = id + 1;
+	*(int*) (v + 8) = g_14cc5bc;
+	id = g_14cc5bc;
+	g_14cc5bc = id + 1;
 	if (flags & 8) {
 		event = *(Com**) (v + 0x124);
 		(*(long (__stdcall**) (Com*, void*, int, int)) (event->vt + 0x34 / 4))(event, hwnd, 0x9021, id);

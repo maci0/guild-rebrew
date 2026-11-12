@@ -1,3 +1,7 @@
+#include "Develop/DieGildeAddOn/game/game_data.h"
+extern int g_778d24;
+extern char g_77666a;
+extern char g_699b08;
 void __cdecl fcn_004428d0(char*, unsigned char, char);
 
 /* ADDRESS: GOLDTL 0x00516de0 */
@@ -12,30 +16,30 @@ void __cdecl fcn_00516de0(char* a1, unsigned char a2)
 		return;
 	al = *(unsigned char*) (a1 + 0x8036);
 	oldmode = (al >> 2) & 7;
-	if (*(int*) 0x6b8010 == 0) {
-		if (*(int*) a1 == 0x40 || *(int*) 0x778d24 >= 0x780) {
+	if (g_6b8010 == 0) {
+		if (*(int*) a1 == 0x40 || g_778d24 >= 0x780) {
 			al = (unsigned char) ((al & 0xe7) | 4);
 			*(unsigned char*) (a1 + 0x8036) = al;
-			*(unsigned char*) 0x699b08 = 1;
+			g_699b08 = 1;
 			unit = 1;
-		} else if (*(unsigned char*) 0x77666a == 0) {
+		} else if (g_77666a == 0) {
 			al = (unsigned char) ((al & 0xf3) | 0x10);
 			*(unsigned char*) (a1 + 0x8036) = al;
-			*(unsigned char*) 0x699b08 = 4;
+			g_699b08 = 4;
 			unit = 4;
-		} else if (*(unsigned char*) 0x77666a == 1) {
+		} else if (g_77666a == 1) {
 			al = (unsigned char) ((al & 0xeb) | 8);
 			*(unsigned char*) (a1 + 0x8036) = al;
-			*(unsigned char*) 0x699b08 = 2;
+			g_699b08 = 2;
 			unit = 2;
-		} else if (*(unsigned char*) 0x77666a == 2) {
+		} else if (g_77666a == 2) {
 			al = (unsigned char) ((al & 0xe7) | 4);
 			*(unsigned char*) (a1 + 0x8036) = al;
-			*(unsigned char*) 0x699b08 = 1;
+			g_699b08 = 1;
 			unit = 1;
 		}
 	} else {
-		if (*(unsigned char*) 0x77666a == 2) {
+		if (g_77666a == 2) {
 			al = (unsigned char) ((al & 0xe7) | 4);
 			*(unsigned char*) (a1 + 0x8036) = al;
 			unit = 1;

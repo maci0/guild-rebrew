@@ -1,3 +1,4 @@
+extern int g_7749f4;
 /* ADDRESS: GOLDTL 0x0057de80 */
 int __cdecl fcn_0057de80(unsigned int a0)
 {
@@ -5,37 +6,37 @@ int __cdecl fcn_0057de80(unsigned int a0)
 
 	switch (a0) {
 	case 0x605:
-		if (*(unsigned char*) 0x7749f4 & 1)
+		if (*(unsigned char*) &g_7749f4 & 1)
 			return 1;
 		break;
 	case 0x606:
-		if (*(unsigned char*) 0x7749f4 & 2)
+		if (*(unsigned char*) &g_7749f4 & 2)
 			return 1;
 		break;
 	case 0x607:
-		if (*(unsigned char*) 0x7749f4 & 4)
+		if (*(unsigned char*) &g_7749f4 & 4)
 			return 1;
 		break;
 	case 0x608:
-		if (*(unsigned char*) 0x7749f4 & 8)
+		if (*(unsigned char*) &g_7749f4 & 8)
 			return 1;
 		break;
 	case 0x609:
-		if (*(unsigned char*) 0x7749f4 & 0x10)
+		if (*(unsigned char*) &g_7749f4 & 0x10)
 			return 1;
 		break;
 	case 0x60a:
-		if (*(unsigned char*) 0x7749f4 & 0x20)
+		if (*(unsigned char*) &g_7749f4 & 0x20)
 			return 1;
 		break;
 	case 0x60b:
-		return (*(signed char*) 0x7749f4 & 0x40) != 0;
+		return (*(signed char*) &g_7749f4 & 0x40) != 0;
 	case 0x60c:
-		if (*(signed char*) 0x7749f4 >= 0)
+		if ((*(unsigned char*) &g_7749f4 & 0x80) == 0)
 			break;
 		return 1;
 	case 0x60d:
-		if (*(unsigned int*) 0x7749f4 & 0x100)
+		if (*(unsigned int*) &g_7749f4 & 0x100)
 			return 1;
 		break;
 	}

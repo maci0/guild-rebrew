@@ -43,7 +43,7 @@ extern int __cdecl fcn_0050de80(char*, Stats*);
 extern char* __cdecl fcn_00502cd0(int, ...);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl fcn_004e69e0(int, int);
-extern int __cdecl gm_RandomMod(int);
+extern int __cdecl gm_RandomMod(unsigned short);
 extern void __cdecl fcn_004d1d40(char*, unsigned char);
 extern int __cdecl fcn_004c5980(void*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -101,10 +101,7 @@ void __cdecl fcn_0056b700(char* obj)
 				return;
 			}
 		}
-		*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
-		*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
-		*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
-		*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
+		*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
 		fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 0x1e, 0);
 		*(int*) (obj + 0x70) = *(int*) (obj + 0x70) + 1;
 		return;
@@ -116,10 +113,7 @@ void __cdecl fcn_0056b700(char* obj)
 		cur = fcn_004c4480(*(int*) (obj + 0xdc));
 		if (cur != 0) {
 			*(int*) (obj + 0xe0) = *(int*) cur;
-			*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
-			*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
-			*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
-			*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
+			*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
 			fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 1, 0);
 			*(int*) (obj + 0x70) = 3;
 			return;
@@ -128,18 +122,12 @@ void __cdecl fcn_0056b700(char* obj)
 		return;
 	case 3:
 		if (!cut_FindCutsceneById(*(int*) (obj + 0xe0))) {
-			*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
-			*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
-			*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
-			*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
+			*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
 			fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 0, 1);
 			*(int*) (obj + 0x70) = -1;
 			return;
 		}
-		*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
-		*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
-		*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
-		*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
+		*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
 		fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 5, 0);
 		return;
 	case -2:
@@ -300,16 +288,10 @@ label_56b858:
 				*(int*) (buf.msg + 0x10c) = *(int*) (slot + 1);
 				for (i = 0; i < 8; i++)
 					*(int*) (buf.msg + 0xc0 + i * 4) = *(int*) (obj + 0x8c + i * 4);
-				*(int*) (buf.msg + 0x18) = *(int*) &g_7f4c00;
-				*(int*) (buf.msg + 0x18 + 0x4) = *(int*) &g_7f4c04;
-				*(int*) (buf.msg + 0x18 + 0x8) = *(int*) 0x7f4c08;
-				*(short*) (buf.msg + 0x18 + 0xc) = *(short*) 0x7f4c0c;
+				*(pos14_7f4c00*) (buf.msg + 0x18) = g_7f4c00;
 				fcn_00500bb0((pos14_7f4c00*) (buf.msg + 0x18), 0xf, 0, 0);
 				*(int*) (obj + 0xdc) = fcn_004c5980(buf.msg);
-				*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
-				*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
-				*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
-				*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
+				*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
 				*(int*) (obj + 0x70) = 2;
 				return;
 			}
@@ -321,10 +303,7 @@ label_56b858:
 		*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
 		return;
 	}
-	*(int*) (obj + 0x52) = *(int*) &g_7f4c00;
-	*(int*) (obj + 0x52 + 0x4) = *(int*) &g_7f4c04;
-	*(int*) (obj + 0x52 + 0x8) = *(int*) 0x7f4c08;
-	*(short*) (obj + 0x52 + 0xc) = *(short*) 0x7f4c0c;
+	*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
 	limit = (gm_RandomMod(5) & 0xffff) + 10;
 	fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, limit, 0);
 }

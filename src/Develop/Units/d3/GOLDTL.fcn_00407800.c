@@ -10,7 +10,7 @@ void __cdecl fcn_0043a720(int*, char*);
 void __cdecl fcn_00407800(char* e, int mode, char* name)
 {
 	int* slot;
-	int* scene;
+
 	float rotation[3];
 	float position[4];
 	int saved_mode;
@@ -30,35 +30,35 @@ void __cdecl fcn_00407800(char* e, int mode, char* name)
 	} else if (mode == 3) {
 		slot = (int*) (e + 0x6c);
 	}
+	saved_mode = g_6b8010;
 	if (name != 0) {
-		saved_mode = g_6b8010;
 		fcn_004432d0(fcn_00413190(*(int*) (e + 0x88)), 1);
 		if (*slot != 0) {
 			d3_DestroyObject(*slot);
 			*slot = 0;
 		}
-		scene = fcn_00442910(*(int*) (e + 0x34), position, rotation, name);
-		*slot = (int) scene;
-		if (scene == 0) {
+		*slot = (int) fcn_00442910(*(int*) (e + 0x34), position, rotation, name);
+
+		if (*slot == 0) {
 			fcn_004432d0(saved_mode, 1);
 			return;
 		}
-		*(unsigned char*) ((char*) scene + 0x216) |= 3;
-		*(unsigned char*) ((char*) scene + 0x214) &= 0x7f;
-		*(unsigned char*) ((char*) scene + 0x217) &= 0xfe;
-		*(int*) ((char*) scene + 0x220) = 5;
+		*(unsigned char*) ((char*) *slot + 0x216) |= 3;
+		*(unsigned char*) ((char*) *slot + 0x214) &= 0x7f;
+		*(unsigned char*) ((char*) *slot + 0x217) &= 0xfe;
+		*(int*) ((char*) *slot + 0x220) = 5;
 		if (mode == 1) {
-			fcn_0043a720(scene, "d3_LeftHand");
+			fcn_0043a720((int*) *slot, "d3_LeftHand");
 			fcn_004432d0(saved_mode, 1);
 			return;
 		}
 		if (mode == 2) {
-			fcn_0043a720(scene, "d3_RightHand");
+			fcn_0043a720((int*) *slot, "d3_RightHand");
 			fcn_004432d0(saved_mode, 1);
 			return;
 		}
 		if (mode == 3) {
-			fcn_0043a720(scene, "d3_Head");
+			fcn_0043a720((int*) *slot, "d3_Head");
 		}
 		fcn_004432d0(saved_mode, 1);
 	} else {
@@ -67,6 +67,6 @@ void __cdecl fcn_00407800(char* e, int mode, char* name)
 			d3_DestroyObject(*slot);
 			*slot = 0;
 		}
-		fcn_004432d0(g_6b8010, 1);
+		fcn_004432d0(saved_mode, 1);
 	}
 }

@@ -68,7 +68,7 @@ int __cdecl fcn_005d2a40(int a0, int a1)
 		f8 = (fc - f8) / fc * 5.0f + 1.0f;
 	}
 	f10 = (100.0f - fcn_0050f980(*(unsigned short*) p, *(unsigned short*) q, 1)) * 0.05f + 1.0f;
-	f8 = (1.0f - MIN(MAX(fcn_00505e30(*(unsigned short*) q), 15.0f), 30.0f) * (1.0f / 15.0f)) * 4.0f
+	f8 = (1.0f - MIN(30.0f, MAX(fcn_00505e30(*(unsigned short*) q), 15.0f)) * (1.0f / 15.0f)) * 4.0f
 		+ 1.0f + f10 + f8;
 	for (i = 0; i < 5; i++) {
 		f8 = f8 + (float) (unsigned char) q[0x80 + i] * (1.0f / 252.0f);
@@ -76,7 +76,7 @@ int __cdecl fcn_005d2a40(int a0, int a1)
 	if (fcn_004fa5b0(0x10, p, (int) buf) & 2) {
 		f8 = f8 * 0.5f;
 	}
-	return (int) MIN(MAX(f8, 2.0f), 15.0f);
+	return (int) MIN(15.0f, MAX(f8, 2.0f));
 }
 
 #endif

@@ -2,180 +2,144 @@ extern int g_7e4318;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca4[];
 
+/* SIZE 0xf8: stack message sent through fcn_004c5530 */
+typedef struct {
+	int h0;
+	unsigned char kind;
+	char p5[3];
+	int owner;
+	char pc[0x2a];
+	unsigned char flag36;
+	char p37[0x21];
+	int v58;
+	int v5c;
+	char p60[0x10];
+	int ids[4];
+	char p80[0x78];
+} Msg_531320;
+
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
-void __cdecl fcn_004c5530(char*);
+void __cdecl fcn_004c5530(Msg_531320*);
 
 /* ADDRESS: GOLDTL 0x00531320 */
 void __cdecl fcn_00531320(void)
 {
-	char* v1;
-	int v10[34];
-	char msg[4];
-	char* v12;
-	int* v13;
-	int* v9;
-	int* v17;
-	int v16;
-	int v6;
-	int v18;
-	int v19;
-	int v5;
-	int v7;
-	int v8;
-	int v14;
-	int v15;
-	char v20;
-	unsigned int v21;
-	char v22;
-	unsigned int v23;
-	unsigned int v24;
+	Msg_531320 msg;
+	int* cursor;
+	char* row;
+	char* hit;
+	char* p;
+	char* r;
+	int count;
+	int first;
+	int state;
+	int done;
+	int g;
+	int i;
 
-	v5 = 0;
-	v9 = v10;
-	v16 = 0;
-	v18 = 0;
-	v12 = 0;
-	v19 = 0;
-	v20 = 0;
-	v13 = (int*) 0x7f4e0c;
-	v6 = g_7e4318;
-	v17 = v9;
-	do {
-		if (v20 != 0) {
+	g = g_7e4318;
+	cursor = msg.ids;
+	count = 0;
+	done = 0;
+	state = 0;
+	hit = 0;
+	first = 0;
+	msg.kind = 0;
+	for (row = (char*) 0x7f4e0c; (int) row < 0x85a20c; row += 0x21c) {
+		if (done != 0) {
 			break;
 		}
-		if (*(char*) &v13[7] != 0) {
-			if (v5 != 0) {
-				if (v5 == 0x43 && *v13 == v18 && (char*) v13[4] == v12) {
-					if (*v13 == v6) {
-						v9 = (int*) (v12 + 0xc4);
-						v6 = 0;
-						do {
-							if (*v9 == v13[-0x5a]) {
-								v1 = &v12[v6 * 4 + 0xc4];
-								v1[0] = '\xff';
-								v1[1] = '\xff';
-								v1[2] = '\xff';
-								v1[3] = '\xff';
-								break;
-							}
-							v6 += 1;
-							v9 = &v9[1];
-						} while (v6 < 4);
-						fcn_00529160((char*) g_7e4318, 0, v13[-0x5b], 0);
-						fcn_004c5c80(v13[-0x5a]);
-						v15 = *(unsigned int*) (v5 + 2);
-						v14 = *(unsigned int*) (g_7e4318 + 1);
-						v5 = v13[-0x5a];
-						goto stored;
-					}
-					v5 = v13[-0x5a];
-					*v9 = v5;
-					v16 += 1;
-					v17 = &v9[1];
-					v7 = 0;
-					v9 = (int*) (v12 + 0xc4);
-					do {
-						if (*v9 == v5) {
-							v1 = &v12[v7 * 4 + 0xc4];
-							v1[0] = '\xff';
-							v1[1] = '\xff';
-							v1[2] = '\xff';
-							v1[3] = '\xff';
-							v6 = g_7e4318;
-							break;
-						}
-						v7 += 1;
-						v9 = &v9[1];
-					} while (v7 < 4);
-					if (v16 >= 4) {
-						v20 = 1;
+		if (*(char*) (row + 0x1c) == 0) {
+			continue;
+		}
+		if (state == 0) {
+			p = *(char**) (row + 0x10);
+			if (p == 0 || *(int*) row == 0) {
+				goto next;
+			}
+			state = 0x43;
+			hit = p;
+			if (*p != 'C') {
+				goto next;
+			}
+			if (*(int*) row != g) {
+				msg.kind = 'C';
+				msg.flag36 = 2;
+				first = *(int*) row;
+				cursor++;
+				msg.owner = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+				msg.v58 = *(int*) (g + 1);
+				msg.v5c = *(int*) (*(int*) row + 1);
+				cursor[-1] = *(int*) (row - 0x168);
+				count++;
+				if (count < 4) {
+					for (i = 0; i < 4 - count; i++) {
+						cursor[i] = -1;
 					}
 				}
-			} else {
-				v1 = (char*) v13[4];
-				if (v1 != 0 && (v5 = *v13) != 0 && *v1 == 'C') {
-					v19 = 0x43;
-					v12 = v1;
-					if (v5 != v6) {
-						v20 = 'C';
-						v22 = 2;
-						v17 = &v9[1];
-						v21 = *(unsigned int*) (g_7f4ca4 + g_774970 * 0x21c);
-						v23 = *(unsigned int*) (v6 + 1);
-						v7 = v13[-0x5a];
-						v24 = *(unsigned int*) (v5 + 1);
-						*v9 = v7;
-						v16 += 1;
-						if (v16 <= 3) {
-							v8 = 4 - v16;
-							v9 = v17;
-							while (v8 != 0) {
-								int* v2;
-
-								v2 = &v9[1];
-								*v9 = -1;
-								v8 -= 1;
-								v9 = v2;
-							}
-						}
-						v8 = 0;
-						v9 = (int*) (v1 + 0xc4);
-						do {
-							v18 = v5;
-							if (*v9 == v7) {
-								v1 = &v1[v8 * 4 + 0xc4];
-								v1[0] = '\xff';
-								v1[1] = '\xff';
-								v1[2] = '\xff';
-								v1[3] = '\xff';
-								goto final;
-							}
-							v8 += 1;
-							v9 = &v9[1];
-						} while (v8 < 4);
-					} else {
-						v9 = (int*) (v1 + 0xc4);
-						v6 = 0;
-						do {
-							if (*v9 == v13[-0x5a]) {
-								v1 = &v1[v6 * 4 + 0xc4];
-								v1[0] = '\xff';
-								v1[1] = '\xff';
-								v1[2] = '\xff';
-								v1[3] = '\xff';
-								break;
-							}
-							v6 += 1;
-							v9 = &v9[1];
-						} while (v6 < 4);
-						fcn_00529160((char*) g_7e4318, 0, v13[-0x5b], 0);
-						fcn_004c5c80(v13[-0x5a]);
-						v15 = *(unsigned int*) (v5 + 2);
-						v14 = *(unsigned int*) (g_7e4318 + 1);
-						v5 = v13[-0x5a];
-stored:
-						fcn_004c5da0(v5, v14, v15, 0, 0, 0);
-final:
-						v6 = g_7e4318;
+				for (i = 0; i < 4; i++) {
+					if (*(int*) (hit + 0xc4 + i * 4) == *(int*) (row - 0x168)) {
+						*(int*) (hit + 0xc4 + i * 4) = -1;
+						g = g_7e4318;
+						break;
 					}
+				}
+				goto next;
+			}
+			r = fcn_00502cd0(*(int*) (g + 0x5d), 1, 0, 0x146);
+			for (i = 0; i < 4; i++) {
+				if (*(int*) (hit + 0xc4 + i * 4) == *(int*) (row - 0x168)) {
+					*(int*) (hit + 0xc4 + i * 4) = -1;
+					break;
 				}
 			}
-			*(char*) &v13[7] = 0;
-			v5 = v19;
-			v9 = v17;
+			fcn_00529160((char*) g_7e4318, 0, *(unsigned short*) (row - 0x16c), 0);
+			fcn_004c5c80(*(int*) (row - 0x168));
+			fcn_004c5da0(*(int*) (row - 0x168), *(int*) (g_7e4318 + 1), *(int*) (r + 2), 0, 0, 0);
+			g = g_7e4318;
+		} else {
+			if (state != 0x43 || *(int*) row != first || *(char**) (row + 0x10) != hit) {
+				goto next;
+			}
+			if (*(int*) row != g) {
+				*cursor = *(int*) (row - 0x168);
+				count++;
+				cursor++;
+				for (i = 0; i < 4; i++) {
+					if (*(int*) (hit + 0xc4 + i * 4) == *(int*) (row - 0x168)) {
+						*(int*) (hit + 0xc4 + i * 4) = -1;
+						g = g_7e4318;
+						break;
+					}
+				}
+				if (count > 3) {
+					done = 1;
+				}
+				goto next;
+			}
+			r = fcn_00502cd0(*(int*) (g + 0x5d), 1, 0, 0x146);
+			for (i = 0; i < 4; i++) {
+				if (*(int*) (hit + 0xc4 + i * 4) == *(int*) (row - 0x168)) {
+					*(int*) (hit + 0xc4 + i * 4) = -1;
+					break;
+				}
+			}
+			fcn_00529160((char*) g_7e4318, 0, *(unsigned short*) (row - 0x16c), 0);
+			fcn_004c5c80(*(int*) (row - 0x168));
+			fcn_004c5da0(*(int*) (row - 0x168), *(int*) (g_7e4318 + 1), *(int*) (r + 2), 0, 0, 0);
+			g = g_7e4318;
 		}
-		v13 = &v13[0x87];
-	} while ((int) v13 < 0x85a20c);
-	if (v12 != 0) {
-		fcn_004c5620(*(unsigned int*) &v12[0x70], v12);
+	next:
+		*(char*) (row + 0x1c) = 0;
 	}
-	if (v20 == 0) {
-		return;
+	if (hit != 0) {
+		fcn_004c5620(*(int*) (hit + 0x70), hit);
 	}
-	fcn_004c5530(msg);
+	if (msg.kind != 0) {
+		fcn_004c5530(&msg);
+	}
 }

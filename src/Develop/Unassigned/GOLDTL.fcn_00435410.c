@@ -15,7 +15,7 @@ typedef long(__stdcall* Lock435410)(Mesh435410* m, int flags, void** out);
 typedef long(__stdcall* Unlock435410)(Mesh435410* m);
 
 extern void* g_6b5de0;
-long __stdcall fcn_00601a9b(int nfaces, int nverts, int opts, int fvf, void* dev, Mesh435410** out);
+long __stdcall D3DXCreateMeshFVF(int nfaces, int nverts, int opts, int fvf, void* dev, Mesh435410** out);
 
 Mesh435410* __cdecl fcn_00435410(char* e)
 {
@@ -27,7 +27,7 @@ Mesh435410* __cdecl fcn_00435410(char* e)
 	int n2;
 	void* src2;
 
-	fcn_00601a9b(*(int*) (e + 0x4c), *(int*) (e + 0x290), 0x6c0, 0x112, g_6b5de0, &m);
+	D3DXCreateMeshFVF(*(int*) (e + 0x4c), *(int*) (e + 0x290), 0x6c0, 0x112, g_6b5de0, &m);
 	if (((Lock435410) m->vt->fn[22])(m, 0, &ib) >= 0) {
 		n = *(int*) (e + 0x4c) * 4;
 		src = *(void**) (e + 0x288);

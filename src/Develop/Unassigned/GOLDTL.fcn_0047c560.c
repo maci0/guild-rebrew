@@ -11,7 +11,7 @@ typedef struct {
 	char p0[0x2c];
 	int (__stdcall* Lock)(Device*, int, int, void*, int);
 	int (__stdcall* Unlock)(Device*);
-	char p34[0x94];
+	char p34[0x88 - 0x34];
 	int (__stdcall* Begin)(Device*);
 	int (__stdcall* End)(Device*);
 	char p90[0x38];
@@ -81,26 +81,24 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 	rec = g_1552020 + start;
 	if (start < g_772604) {
 		p = data;
+		i = start;
 		do {
 			*(BankData*) p = *(BankData*) rec;
 			p += 0xa8;
 			rec++;
-			start++;
-		} while (start < g_772604);
+			i++;
+		} while (i < g_772604);
 	}
 	((Device*) g_772614)->vtbl->Unlock((Device*) g_772614);
 	fcn_0047c4e0();
-	s.f0 = 0;
-	s.f4 = 0;
-	s.f8 = *(int*) (src + 0x54);
-	s.fc = *(int*) (src + 0x58);
-	s.f10 = 0;
-	s.f14 = 0x3f800000;
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 0);
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x88, 0);
 	fcn_004372d0(0xff, 0, 0, 1, 1);
 	if (g_772604 != 0) {
 		if (snd != 0) {
+			s.f0 = 0;
+			s.f4 = 0;
+			s.f14 = 0x3f800000;
 			s.f8 = *(int*) (src + 0x54);
 			s.fc = *(int*) (src + 0x58);
 			s.f10 = 0;
@@ -133,12 +131,12 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 			i += count;
 			rec += count;
 		}
-	}
-	if (snd != 0) {
-		snd->vtbl->Release(snd);
-		g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 1);
-	} else {
-		g_6b5de0->vtbl->End(g_6b5de0);
+		if (snd != 0) {
+			snd->vtbl->Release(snd);
+			g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 1);
+		} else {
+			g_6b5de0->vtbl->End(g_6b5de0);
+		}
 	}
 done:
 	g_772604 = start;

@@ -1,3 +1,4 @@
+extern float g_6629d0;
 #include <math.h>
 
 extern char* g_6b8014;
@@ -62,7 +63,7 @@ void __cdecl fcn_00459050(int self)
 	vp = (float*) (p + 0x94);
 	i = 0;
 	for (r = 0; r < 6; r++) {
-		u = (float) r * *(float*) 0x6629d0;
+		u = (float) r * g_6629d0;
 		fcn_00451340(dr, br, u, o1);
 		fcn_00451340(cr, ar, u, o2);
 		for (c = 0; c < 8; c++) {
@@ -107,6 +108,8 @@ void __cdecl fcn_00459050(int self)
 			}
 		}
 	}
+	obj = *(void**) (p + 4);
+	vt = *(void***) obj;
 	((void (__stdcall*) (void*)) vt[12])(obj);
 	*(int*) (p + 0x10) = count;
 }

@@ -35,7 +35,7 @@ int __cdecl fcn_004758b0(char* name, unsigned char* pix)
 	*(int*) (hdr + 8) = abs(n);
 	align = (*(int*) (hdr + 4) * 3) & 3;
 	for (i = 0; i < *(int*) (hdr + 8); i++) {
-		row = rev ? i : *(int*) (hdr + 8) - i - 1;
+		row = rev ? *(int*) (hdr + 8) - i - 1 : i;
 		fcn_0064ebe4(pix + row * *(int*) (hdr + 4) * 3, 1,
 			*(int*) (hdr + 4) * 3, f);
 		if (align != 0) {
@@ -44,7 +44,7 @@ int __cdecl fcn_004758b0(char* name, unsigned char* pix)
 	}
 	fcn_0064e1fd(f);
 	p = pix + 2;
-	for (i = *(int*) (hdr + 4) * *(int*) (hdr + 4); i > 0; i--) {
+	for (i = *(int*) (hdr + 4) * *(int*) (hdr + 8); i > 0; i--) {
 		t = p[-2];
 		p[-2] = p[0];
 		p[0] = t;

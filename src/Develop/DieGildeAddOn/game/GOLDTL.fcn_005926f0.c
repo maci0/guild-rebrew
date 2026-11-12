@@ -66,8 +66,8 @@ int __cdecl fcn_005926f0(void)
 
 	fcn_004ce080();
 	n = 0x57;
-	/* Zero-fill prelude kept as inline assembly: no msvc6 C memset spelling
-	 * emits the align-up form (docs/codegen-walls.md section 6b). */
+	/* Reviewed original fixed-EBX fill core, native 00592719..00592731;
+	 * the destination immediate and homed count also match native. */
 	__asm {
 		mov edi, 0x779c60
 		mov ebx, n
@@ -313,7 +313,7 @@ int __cdecl fcn_005926f0(void)
 	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a3ffc, v13, (char*)0x7e22c0);
 	fcn_0064d41a(v13, (char*)0x6a81d8, *(int*)0x7e23e8 >> 8 & 0xff);
 	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a3ff4, v13, (char*)0x7e22c0);
-	fcn_0064d41a(v13, (char*)0x6a81d8, (unsigned char)*(int*)0x7e23e9);
+	fcn_0064d41a(v13, (char*)0x6a81d8, *(unsigned char*)0x7e23e3);
 	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a9bb0, v13, (char*)0x7e22c0);
 	fcn_00469e70();
 	return ret;

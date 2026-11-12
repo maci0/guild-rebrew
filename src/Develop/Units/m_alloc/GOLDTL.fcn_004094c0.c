@@ -79,7 +79,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	}
 	else {
 		n = *(int*) (a1 + 0x20) - 2;
-		if (n < v15)
+		if (v15 > n)
 			v15 = n;
 	}
 	if (v14 < 1) {
@@ -87,7 +87,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	}
 	else {
 		n = *(int*) (a1 + 0x20) - 2;
-		if (n < v14)
+		if (v14 > n)
 			v14 = n;
 	}
 	if (*(unsigned char*) (obj + 4) & 4)

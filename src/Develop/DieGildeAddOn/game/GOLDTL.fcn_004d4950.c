@@ -1,4 +1,7 @@
 #include <string.h>
+#include "game_data.h"
+#include "client_packet_builder.h"
+extern int g_68b79c;
 
 char* __cdecl fcn_004ce610(char*);
 int __cdecl fcn_00402610(char*);
@@ -7,7 +10,7 @@ unsigned short* __cdecl fcn_004ce680(char*);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
-unsigned int __cdecl cut_RandMod(unsigned int, ...);
+unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl fcn_004cfc40(char*, int, int);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
 void* __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
@@ -34,7 +37,9 @@ void __cdecl fcn_004d4950(int a0)
     char v12[0x40];
     char v13[0x100];
     int v8;
-    unsigned int r;
+    int r;
+    char* reply;
+    char* speaker;
 
     *(int*) (v12 + 8) = *(int*) 0x68b7e8;
     *(int*) (v12 + 0x12) = 0;
@@ -63,27 +68,27 @@ void __cdecl fcn_004d4950(int a0)
         v22 = 0;
         v5 = 0;
     }
-    if (*(int*) (*(int*) 0x772f24 + 4) == *(int*) 0x68b79c &&
+    if (*(int*)((char*)g_772f24 + 4) == g_68b79c &&
         (v7[0x16] == 1 || v7[0x16] == 2)) {
         v8 = (int) fcn_004ce680(v3);
         if (v8) {
             v11 = -1;
             fcn_004c4510((char*) v8, *(int*) (v8 + 2));
-            fcn_004c4670(4, 1, (v8 - *(int*) 0xaed32c) + 0x20, &v11);
+            fcn_004c4670(4, 1, (v8 - (int)g_aed32c) + 0x20, &v11);
             fcn_004c5360();
         }
     }
     if (v22) {
         r = cut_RandMod(10);
         fcn_004cfc40((char*) v4, v22,
-                     (*(int*) ((char*) v4 + 0x16c) != *(int*) 0x772e9c) ? 2 : 1);
-        if (r > 8) {
-            if (*(int*) (a0 + 0x188) != *(int*) (*(int*) 0x772e9c + 4)) {
+                     (*(int*) ((char*) v4 + 0x16c) != (int)g_772e9c) ? 2 : 1);
+        if (r >= 9) {
+            if (*(int*) (a0 + 0x188) != *(int*) ((int)g_772e9c + 4)) {
                 fcn_004c30a0(*v4, *(int*) 0x772ef4, (char*) 0x68be54, -1, 500);
             } else {
                 fcn_004c30a0(*v4, *(int*) 0x772ef8, (char*) 0x68be54, -1, 500);
             }
-        } else if (r > 5) {
+        } else if (r >= 6) {
             fcn_004234e0((char*) 0, (char*) 0x68bde4, 1, 0x3f, 0x7f, 0, 0);
         }
     }
@@ -100,29 +105,29 @@ void __cdecl fcn_004d4950(int a0)
         if (*v7 != 0x154 && *v7 != 0x16e && *v7 != 0x172) {
             if (*v7 != 0x15e) {
                 if (*v7 != 0x160) {
-                    if (*v7) {
-                        goto draw;
-                    }
-                } else if (!v22) {
-                    goto draw;
-                }
-                fcn_004234e0((char*) 0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
+                    if (*v7) goto draw;
+                } else if (!v22) goto draw;
+                reply = (char*)0x68be40;
+                speaker = 0;
             } else {
-                fcn_004234e0((char*) *(unsigned int*) 0x772ecc, (char*) 0x68be48,
-                             1, 0x3f, 0x7f, 0, 0);
+                reply = (char*)0x68be48;
+                speaker = *(char**)0x772ecc;
             }
         } else if (v22) {
-            fcn_004234e0((char*) 0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
+            reply = (char*)0x68be40;
+            speaker = 0;
         } else {
-            fcn_004234e0((char*) *(unsigned int*) 0x772ec8, (char*) 0x68be34,
-                         1, 0x3f, 0x7f, 0, 0);
+            reply = (char*)0x68be34;
+            speaker = *(char**)0x772ec8;
         }
     } else if (v22) {
-        fcn_004234e0((char*) 0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
+        reply = (char*)0x68be40;
+        speaker = 0;
     } else {
-        fcn_004234e0((char*) *(unsigned int*) 0x772ed0, (char*) 0x68be34,
-                     1, 0x3f, 0x7f, 0, 0);
+        reply = (char*)0x68be34;
+        speaker = *(char**)0x772ed0;
     }
+    fcn_004234e0(speaker, reply, 1, 0x3f, 0x7f, 0, 0);
 draw:
     if (fcn_004d4790((char*) v4)) {
         return;
@@ -130,11 +135,11 @@ draw:
     if (v22) {
         fcn_00417b50(*(unsigned int*) (*(int*) ((char*) v4 + 0x184) + 0x34),
                      0x40, 0x3e800000, 0x3dcccccd, 0x3e0f5c29, 0x425c0000);
-        v8 = *(int*) ((char*) v4 + 0x128);
+        v8 = *(int*) (*(int*)((char*)v4 + 0x184) + 0x128);
         if (!v8 || *(char*) (v8 + 9) == ';') {
             ch_CancelActionQueue((char*) *(int*) ((char*) v4 + 0x184));
             fcn_004063b0(*(unsigned int*) ((char*) v4 + 0x184),
-                         v12 + cut_RandMod(2, 1, 0x3fb33333) * 0x20, 1, 1.4f);
+                         v12 + cut_RandMod(2) * 0x20, 1, 1.4f);
         }
         if (*v7 == 0x16e) {
             *(char*) ((char*) v4 + 8) = 4;
@@ -143,7 +148,7 @@ draw:
             return;
         }
     } else {
-        v8 = *(int*) ((char*) v4 + 0x128);
+        v8 = *(int*) (*(int*)((char*)v4 + 0x184) + 0x128);
         if (!v8 || *(char*) (v8 + 9) == ';') {
             ch_CancelActionQueue((char*) *(int*) ((char*) v4 + 0x184));
             if (*v7 != 0x15e && *v7 != 0x160) {

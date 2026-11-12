@@ -58,6 +58,8 @@ int __cdecl fcn_004fd4f0(char* a1, fcn_004fd4f0_Out* out)
 	fcn_004fd4f0_Ent* ent;
 	float v;
 	float fb;
+	float r;
+	int i;
 	int amt;
 
 	total = 0;
@@ -69,21 +71,23 @@ int __cdecl fcn_004fd4f0(char* a1, fcn_004fd4f0_Out* out)
 	gm_GetEntitySkill(me, 4);
 	fcn_004f4830(2, &st);
 	mult = fcn_0050c710(a1, 9, 1) * 0.0125f + 1.0f;
-	for (ent = g_7f4ca0; ent < g_7f4ca0 + 768; ent++) {
+	for (i = 0; i < 768; i++) {
+		ent = &g_7f4ca0[i];
 		if (ent->id == 0xffff || ent->kind == 6 || ent->kind == 7 || ent->kind == 8 || ent->kind >= 10)
 			continue;
 		if (ent->h == me->h)
 			continue;
+		r = ent->rank * 0.25f;
 		if (ent->side == me->side) {
-			v = ent->rank * 0.25f * mult;
+			v = r * mult;
 			sign = 0.05f;
 		} else {
 			if (st.side == 2)
-				v = ent->rank * 0.25f * mult * 0.8;
+				v = r * mult * 0.8;
 			else if (me->side == st.side)
-				v = ent->rank * 0.25f * mult * 0.7;
+				v = r * mult * 0.7;
 			else
-				v = ent->rank * 0.25f * mult * 0.6;
+				v = r * mult * 0.6;
 			sign = -0.05f;
 		}
 		if (gm_RandomFloat01() * 2.0 > v)

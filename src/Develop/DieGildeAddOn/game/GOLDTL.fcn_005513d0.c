@@ -2,9 +2,9 @@
 
 extern char g_7f4ca0[];
 extern int g_7f4c00;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+#include "client_actions.h"
+
+
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
@@ -25,9 +25,9 @@ void __cdecl fcn_005513d0(char* a0)
 	int count;
 	int i;
 	int state;
-	float f;
-	float r;
-	float t;
+	float f; double factor;
+	double r;
+	double t; float threshold; int rec_id;
 
 	v20 = -1;
 	entry = g_7f4ca0 + *(unsigned short*) (a0 + 8) * 0x21c;
@@ -46,18 +46,18 @@ void __cdecl fcn_005513d0(char* a0)
 			return;
 		}
 		if (entry[2] == 6) {
-			memset(msg, 0, sizeof(msg));
+			rec_id = *(int*) (rec + 4); memset(msg, 0, sizeof(msg));
 			*(int*) (msg + 0xc) = *(int*) (entry + 4);
-			*(unsigned short*) (msg + 0x1c) = g_7f4c04;
+			*(int*) (msg + 0x1c) = g_7f4c04;
 			*(int*) (msg + 0x18) = g_7f4c00;
 			*(int*) (msg + 0x20) = g_7f4c08;
 			*(short*) (msg + 0x24) = g_7f4c0c;
 			msg[8] = 7;
 			*(int*) (msg + 0x14) = -1;
 			*(int*) (msg + 0x34) = *(int*) (entry + 4);
-			*(int*) (msg + 0x38) = *(int*) (rec + 4);
+			*(int*) (msg + 0x38) = rec_id;
 			msg[0x26] = 0x20;
-			*(int*) (msg + 0x30) = 2;
+			msg[0x30] = 2;
 			fcn_00500bb0(msg + 0x18, 0, 0x1e, 0);
 			fcn_004c5980(msg);
 		}
@@ -75,22 +75,22 @@ void __cdecl fcn_005513d0(char* a0)
 	}
 	count = 0;
 	ids = (int*) (entry + 0x68);
-	for (i = 0; i < 5; i++) {
-		if (ids[i] != -1 && gm_LookupEntityRecordById(ids[i]) != 0)
+	for (i = 5; i > 0; i--, ids++) {
+		if (*ids != -1 && gm_LookupEntityRecordById(*ids) != 0)
 			count++;
 	}
 	if (count != 5) {
-		f = (5.0f - (float) count) * 0.2f;
-		f = f * f;
-		r = gm_RandomFloat01();
+		factor = (5.0f - (double) count) * 0.2f;
+		f = (float) (factor * factor);
+		threshold = (float) (f * *(float*) (a0 + 0xac)); r = gm_RandomFloat01();
 		t = (1.0f - f) + r;
-		if (t <= f * *(float*) (a0 + 0xac)) {
+		if (t < threshold) {
 			*(int*) (a0 + 0x70) = 1;
 			*(int*) (a0 + 0x52) += 1;
 			*(float*) (a0 + 0xac) = 0;
 			return;
 		}
-		*(float*) (a0 + 0xac) = f * 0.1f + *(float*) (a0 + 0xac);
+		*(float*) (a0 + 0xac) = f * 0.1 + *(float*) (a0 + 0xac);
 		return;
 	}
 tail:

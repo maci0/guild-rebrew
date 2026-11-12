@@ -9,13 +9,15 @@ typedef struct Req_59ecc0 {
 	unsigned char pad05[3];
 	int f08;                    /* 0x08 */
 	int f0c;                    /* 0x0c */
-	unsigned int list[6];       /* 0x10 */
+	unsigned char pad10[0x18];   /* 0x10 */
 	int f28;                    /* 0x28 */
 	int f2c;                    /* 0x2c */
 	int f30;                    /* 0x30 */
 	unsigned short f34;         /* 0x34 */
 	unsigned char f36;          /* 0x36 */
-	unsigned char pad37[0x21];
+	unsigned char pad37;
+	unsigned int list[6];
+	unsigned char pad50[8];
 	unsigned char f58;          /* 0x58 */
 	unsigned char pad59;
 	unsigned short f5a;         /* 0x5a */
@@ -140,10 +142,10 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 		for (i = 0; i < 3; i++) {
 			fcn_00472640(handles[i], 1);
 			if (ids[i + 3] == 1) {
-				io_FormatTextBuffer(text, 0x1807, 1);
+				io_FormatTextBuffer(text, 0x1807, 1, (int)ids[i] * 2 + 0x9a8);
 			}
-			else if (ids[i + 3] > 1) {
-				io_FormatTextBuffer(text, 0x1808, ids[i + 3]);
+			else if ((int)ids[i + 3] > 1) {
+				io_FormatTextBuffer(text, 0x1808, ids[i + 3], (int)ids[i] * 2 + 0x9a8);
 			}
 			else {
 				io_FormatTextBuffer(text, 0x679060,
@@ -156,7 +158,7 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 				if (handles[sel] == *(int*) 0x67d370)
 					break;
 			}
-			if (sel != -1) {
+			if (sel < 3) {
 				memset(&req, 0, 0xf8);
 				req.kind = 0x15;
 				req.f36 = 1;
@@ -194,10 +196,10 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 					}
 					fcn_004c4480(sel);
 				}
-				continue;
+
 			}
 		}
-		if (*(int*) 0x14ce8e0 != 0)
+		else if (*(int*) 0x14ce8e0 != 0)
 			*(int*) 0x774654 = 1;
 		sel = fcn_005373e0(0x59ecc0, 0x677c7);
 	}

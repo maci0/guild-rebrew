@@ -22,13 +22,15 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
 {
     FILE *f;
     unsigned char hdr[12];
+    unsigned char hdr2[12];
     void *blk;
-    unsigned char *data;
+    int rc;
     int size;
     int count;
     int i;
     int sum;
 
+    rc = 0;
     if (g_6b7d7c == 0)
         return 0;
     if (a1->block != 0 || a0 == 0)
@@ -81,14 +83,14 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
         fclose(f);
         return -1;
     }
-    if (fread(hdr, 0xc, 1, f) != 1)
+    if (fread(hdr2, 0xc, 1, f) != 1)
     {
         fclose(f);
         return -1;
     }
-    size = *(int *)(hdr + 8);
+    size = *(int *)(hdr2 + 8);
     if (g_6b7d70 - g_6b7d74 < size + 0xc)
-        fcn_00422910(size + 0xc);
+        rc = fcn_00422910(size + 0xc);
     blk = m_alloc(size + 0xc, (char *)0x678e94);
     if (blk == 0)
     {
@@ -96,9 +98,9 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
         a1->block = 0;
         return -1;
     }
-    *(int *)blk = *(int *)hdr;
-    *(void **)((char *)blk + 4) = (char *)blk + 0xc;
+    *(int *)blk = *(int *)hdr2;
     *(int *)((char *)blk + 8) = size;
+    *(void **)((char *)blk + 4) = (char *)blk + 0xc;
     if (fread((char *)blk + 0xc, size, 1, f) != 1)
     {
         m_FreeTracked(blk);
@@ -106,18 +108,17 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
         fclose(f);
         return -1;
     }
-    data = *(unsigned char **)((char *)blk + 4);
-    count = *(int *)blk;
     sum = 0;
-    for (i = 0; i < count; i++)
+    for (i = 0; i < *(int *)blk; i++)
     {
-        *(int *)(data + i * 0xc + 8) = (int)data + count * 0xc + sum;
-        sum += *(int *)(data + i * 0xc + 4);
+        *(int *)(*(char **)((char *)blk + 4) + i * 0xc + 8) =
+            *(int *)((char *)blk + 4) + *(int *)blk * 0xc + sum;
+        sum += *(int *)(*(char **)((char *)blk + 4) + i * 0xc + 4);
     }
     g_6b7d74 += size + 0xc;
     a1->mem = g_6b7fac * 13;
     sprintf((char *)0x14cbae0, (char *)0x678e38, a1->name, g_6b7d74);
     a1->block = blk;
     fclose(f);
-    return 0;
+    return rc;
 }

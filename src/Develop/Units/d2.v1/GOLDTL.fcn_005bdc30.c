@@ -33,7 +33,7 @@ extern int g_67d370;
 extern char g_6b5c60[];
 extern char* g_1015ea0;
 extern char* g_774a68;
-extern char* g_10161bc;
+extern char g_10161bc[];
 
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_005b0dd0(MsgCtx*);
@@ -52,7 +52,7 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 	int id;
 	int i;
 	int v;
-
+	int mode4;
 	v = 0;
 	memset(ctx.pad0c, 0, 0x50);
 	if (state != 0) {
@@ -68,14 +68,14 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 	fcn_005b0dd0(&ctx);
 	fcn_005b0230(&ctx);
 	if (fcn_005373e0((void*) fcn_005bdc30, 0x677c7) != 0) {
-		do {
+		mode4 = flags & 4; do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
 			g_6ab3dc = (g_7725d0 == 0);
 			fcn_005b11f0(&ctx);
 			id = g_67d370;
-			if (ctx.dlg != 0) {
+			if (mode4) {
 				if (g_14ce8d8 != 0 && id != -1) {
 					for (i = 0; i < 0x10; i++) {
 						if (ctx.ids10[i] != -1 && ctx.ids10[i] == id) {
@@ -96,7 +96,7 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 					}
 				}
 			}
-			else if (ctx.dlg == 0 && (flags & 8) && g_14ce8d8 != 0 && id != -1) {
+			else if ((flags & 8) && g_14ce8d8 != 0 && id != -1) {
 				for (i = 0; i < 0x100; i++) {
 					if (ctx.ids[i] != -1 && ctx.ids[i] == id) {
 						v = *(int*) (g_774a68 + i * 4);

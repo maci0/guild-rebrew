@@ -1,3 +1,5 @@
+extern int g_7746d8;
+extern int g_14ce8d8;
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 extern char* lpObjektePROT;
@@ -189,7 +191,7 @@ int __cdecl fcn_00595e20(char* a0, char* a1)
 		}
 	}
 
-	if ((*(int*) 0x7746d8 & 0x200) != 0 && *(int*) 0x14ce8d8 != 0 && !CountDisplayCounters()) {
+	if ((g_7746d8 & 0x200) != 0 && g_14ce8d8 != 0 && !CountDisplayCounters()) {
 		for (p = (unsigned int*) 0x778dc0; (int) p < 0x779140; p += 0xe) {
 			if (*p == (unsigned int) -1 || *p != *(unsigned int*) 0x67d370)
 				continue;

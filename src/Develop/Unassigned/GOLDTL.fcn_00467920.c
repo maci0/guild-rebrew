@@ -24,33 +24,6 @@
  *   0x46882f  trailing element text
  *   0x4688d7  flag 0x01: gauge ends and their fill loops
  *
- * Status: object 4699 (native size), match 540/4699, first mismatch still
- * offset 2 (STUB: the frame family below dominates). The frame is one
- * compiler temporary slot from native: `sub esp,0x260` with the struct at +4
- * because the icon hit test spills e[4] (native keeps it in a register). The
- * native prefix is 34 bytes and diverges on the shared zero register (native
- * ebp, compiler edi). h3/h6 live in f.v1c/f.v28 as in native, so only h1/h0
- * stay in registers. The end marks are four separate calls in native; the
- * 0x46843c block writes each pair's two arms as two guarded statements
- * (`if (v28)` then `if (!v28)`) so the compiler keeps three of the four call
- * sites instead of tail-merging both pairs into one. The v34 pair and the
- * v2c `v28` arm survive; the v2c `!v28` arm still merges with the v34 `!v28`
- * arm. The 0x47ccd0 end-mark calls and the 0x468251 tick calls that the
- * compiler currently reloads e[3] for pass the cached `f.v14` surface pointer
- * instead, the value native keeps in ebx; that shape closes the last 24
- * bytes. The 0x468554,
- * 0x468700 and 0x467bc2..0x4681cc blocks are
- * transcribed from the listing; the 0x467bc2 split is `if (!(v20 & 0x400))`
- * with the marks in the taken branch and the colour/bitmap path in the else.
- *
- * The 0x4688d7 gauge ends are three independent blocks, as native has them: a
- * fill loop of (int)(w8.f/GH) marks at e[5]+GH(h0)+GH*(idx-1), then an end-cap
- * rect plus a float-y fill loop under flag 0x10, then a second rect and
- * float-y fill loop under v18 > 0. The glyph height/width come from `hs`
- * (e[3]): that is the pointer the native edi carries on this path, and writing
- * `h1` or H6 keeps that pointer live to the end of the function, rotating the
- * whole register plan and costing more matches than the region gains. The
- * 0x2ec/0x2ed hit flags are byte stores (native `mov byte ptr [esi+0x2ec]`).
  */
 
 extern char* g_1015ea0;			/* 0x01015ea0 element table */
@@ -186,7 +159,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 		f.w8.f = (float) f.v24;
 		if (f.w8.f - f.v18 > 0.0f && !(f.v20 & 8)) {
 			f.w0.idx = GLYPH_W(h1);
-			n = (int) (f.v18 / (float) f.w0.idx + g_6628a0);
+			n = (int) (f.w8.f / (float) f.w0.idx + g_6628a0);
 			g_102d020 = n;
 			if (f.v10 == f.v38) {
 				g_102d020 = 1;
@@ -357,7 +330,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 
 			/* 0x46802e: label bitmap clipped into the bar rect */
 			n = fcn_0047bf80(e[4],
-					 e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+					 e[5] + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
 					 e[6], e[7], g_77256c->x20, 0);
 			if (n) {
 				fcn_0047b9a0((int*) n, 1, 1, 1);
@@ -369,7 +342,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 
 			/* 0x4680b3: clamped label bitmap */
 			n = fcn_0047bf80(e[4] + GLYPH_W(h0),
-					 e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+					 e[5] + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
 					 (int) f.v18, e[7], g_77256c->x20, 0);
 			if (n) {
 				fcn_0047b9a0((int*) n, f.w0.b.v00, f.w0.b.v01,
@@ -381,15 +354,15 @@ void __cdecl fcn_00467920(int a0, int a1)
 				     e[4] + GLYPH_W(h0) + f.v24,
 				     ((int*) a1)[0xe]);
 			if (!(f.v20 & 8)) {
-				f.wc.i = GLYPH_W(h0);
+				f.wc.i = GLYPH_W(h1);
 				f.w8.i = (int) (f.w8.f / (float) f.wc.i
 					       + g_6628a0);
 				for (f.w0.idx = 0; f.w0.idx < f.w8.i;
 				     f.w0.idx++) {
 					x = e[4] + GLYPH_W(h0)
-					    + GLYPH_W(h0) * f.w0.idx;
+					    + GLYPH_W(h1) * f.w0.idx;
 					y = e[5] + (GLYPH_H(H3)
-						    - GLYPH_H(h0)) / 2;
+						    - GLYPH_H(h1)) / 2;
 					fcn_0047cba0(x, y, a1,
 						     (char*) f.v14, 1);
 				}
@@ -433,27 +406,27 @@ void __cdecl fcn_00467920(int a0, int a1)
 		*((char*) e + 0x2ed) = (char) f.v2c;
 		if (!e[0x18]) {
 			fcn_0047cba0(e[4], e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-				     (int) e[3], (char*) f.v14, 0);
+				     a1, (char*) f.v14, 0);
 			if (fcn_0047cba0(e[4] + GLYPH_W(h0) + f.v24,
 					 e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-					 (int) e[3], (char*) f.v14, 5)) {
+					 a1, (char*) f.v14, 5)) {
 				goto ticks;
 			}
 			fcn_0047cba0(e[4] + GLYPH_W(h0) + f.v24,
 				     e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-				     f.v14, (char*) f.v14, 0);
+				     a1, (char*) f.v14, 0);
 		}
 		else {
 			fcn_0047cbf0(e[4], e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-				     f.v14, (char*) f.v14, 0);
+				     a1, (char*) f.v14, 0);
 			if (fcn_0047cbf0(e[4] + GLYPH_W(h0) + f.v24,
 					 e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-					 f.v14, (char*) f.v14, 5)) {
+					 a1, (char*) f.v14, 5)) {
 				goto ticks;
 			}
 			fcn_0047cbf0(e[4] + GLYPH_W(h0) + f.v24,
 				     e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-				     f.v14, (char*) f.v14, 0);
+				     a1, (char*) f.v14, 0);
 		}
 
 	ticks:
@@ -461,22 +434,22 @@ void __cdecl fcn_00467920(int a0, int a1)
 		if (f.v34) {
 			if (f.v28) {
 				fcn_0047ccd0(e[4], e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-					     f.v14, (char*) f.v14, 6);
+					     a1, (char*) f.v14, 6);
 			}
 			if (!f.v28) {
 				fcn_0047ccd0(e[4], e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-					     f.v14, (char*) f.v14, 3);
+					     a1, (char*) f.v14, 3);
 			}
 		}
 		else if (f.v2c) {
 			fcn_0047a040(e[0x0a], e[0x0c], e[0x0b], e[0x0d]);
 			if (f.v28) {
 				fcn_0047ccd0(e[4] + e[6] - GLYPH_W(H6), e[5] + (GLYPH_H(H6) - GLYPH_H(h0)) / 2,
-					     f.v14, (char*) f.v14, 7);
+					     a1, (char*) f.v14, 7);
 			}
 			if (!f.v28) {
 				fcn_0047ccd0(e[4] + e[6] - GLYPH_W(H3), e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-					     f.v14, (char*) f.v14, 3);
+					     a1, (char*) f.v14, 3);
 			}
 		}
 
@@ -484,26 +457,26 @@ void __cdecl fcn_00467920(int a0, int a1)
 		/* 0x468554: label text */
 		if (!(f.v20 & 0x48)) {
 			f.v28 = (int) f.v18;
-			fcn_0047cba0(e[4] + GLYPH_W(h0) - GLYPH_W(h1) / 2
+			fcn_0047cba0(e[4] + GLYPH_W(h0) - GLYPH_W(H3) / 2
 				     + f.v28, e[5], (int) b, (char*) f.v14, 3);
 			if (*(char*) ((char*) e + 0xe8)) {
 				fcn_00468c30(a0, f.v30, f.buf);
 				fcn_00472880(e[0x21] ? e[0x21]
 						     : g_67d398 + 1);
-				f.v2c = GLYPH_W(h1);
+				f.v2c = GLYPH_W(H3);
 				fcn_0046bd20(e[4] + GLYPH_W(h0) - f.v2c / 2
 					     + f.v28,
-					     e[5] + GLYPH_H(h1) / 2
+					     e[5] + GLYPH_H(H3) / 2
 					     - g_1015ea4 / 2 + 1,
-					     GLYPH_W(h1), GLYPH_H(h1), (int) b,
+					     GLYPH_W(H3), GLYPH_H(H3), (int) b,
 					     (int) f.buf, 8);
 			}
 			else {
 				fcn_00472880(e[0x21] ? e[0x21]
 						     : g_67d398 + 1);
 				f.v2c = e[4] + GLYPH_W(h0)
-					- GLYPH_W(h1) / 2 + f.v28;
-				f.v28 = e[5] + GLYPH_H(h1) / 2
+					- GLYPH_W(H3) / 2 + f.v28;
+				f.v28 = e[5] + GLYPH_H(H3) / 2
 					- g_1015ea4 / 2 + 2;
 				if (f.v20 & 0x1000) {
 					sprintf(f.buf, str_67d43c, f.v30);
@@ -517,8 +490,8 @@ void __cdecl fcn_00467920(int a0, int a1)
 				else {
 					sprintf(f.buf, str_67d444, f.v30);
 				}
-				fcn_0046bd20(f.v2c, f.v28, GLYPH_W(h1),
-					     GLYPH_H(h1), (int) b, (int) f.buf, 8);
+				fcn_0046bd20(f.v2c, f.v28, GLYPH_W(H3),
+					     GLYPH_H(H3), (int) b, (int) f.buf, 8);
 			}
 		}
 
@@ -539,7 +512,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 			x = fcn_0046b520(f.v3c, g_67d378);
 			fcn_0046bbc0(e[4] - x - 4, e[5] - n,
 				     (int) b, f.v3c, 0);
-			sprintf(f.v3c, str_67d444, f.v24);
+			sprintf(f.v3c, str_67d444, f.v10);
 			fcn_0046bbc0(e[4] + e[6] + 4, e[5] - n,
 				     (int) b, f.v3c, 0);
 		}
@@ -547,14 +520,17 @@ void __cdecl fcn_00467920(int a0, int a1)
 		/* 0x46882f: trailing text of the element */
 		if (*(char*) ((char*) e + 0xa8)) {
 			fcn_0047a040(0, 0, FLD(b, 4), FLD(b, 8));
-			/* Native 0x46884f mov byte [esp+0x30],8 clobbers the
-			 * flags low byte, so the test at 0x468885 (flags&0x80)
-			 * is always false natively and the 46b520 width arm
-			 * is dead. No record store exists natively. */
+			/* Four pending pushes make 0x46884f the v10 scratch, not flags. */
 			fcn_00472880(e[0x21] ? e[0x21] : g_67d398 + 1);
-			x = e[4] - 0xd;
-			fcn_0046bd20(x, e[5] - 0x18, FLD(b, 8), (char*) e + 0xa8,
-				     0x20, 0x10, (int) b);
+			x = e[4];
+			y = e[5] - 0xd;
+			n = 8;
+			if (f.v20 & 0x80) {
+				x = e[4] - fcn_0046b520((char*) e + 0xa8, g_67d398) - 0x18;
+				y = e[5];
+				n = 0x10;
+			}
+			fcn_0046bd20(x, y, e[6], 0x20, (int) b, (int) ((char*) e + 0xa8), n);
 		}
 
 		e[0x1d] = 0;
@@ -573,7 +549,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
 			y = e[5] + GLYPH_H(h0)
 			    + GLYPH_H(h1) * (f.w0.idx - 1);
-			x = e[4] + (GLYPH_W(H3) - GLYPH_W(hs)) / 2;
+			x = e[4] + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
 			fcn_0047cba0(x, y, a1, (char*) f.v14, 1);
 		}
 	}
@@ -586,7 +562,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 			y = (int) ((float) e[7] - f.wc.f - (float) GLYPH_H(h0)
 				   + (float) (e[5]
 					      + GLYPH_H(h1) * f.w0.idx));
-			x = e[4] + (GLYPH_W(H3) - GLYPH_W(hs)) / 2;
+			x = e[4] + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
 			fcn_0047cba0(x, y, a1, (char*) f.v14, 4);
 		}
 	}
@@ -600,7 +576,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 			y = (int) ((float) e[7] - f.v18 - (float) GLYPH_H(h0)
 				   + (float) (e[5]
 					      + GLYPH_H(h1) * f.w0.idx));
-			x = e[4] + (GLYPH_W(H3) - GLYPH_W(hs)) / 2;
+			x = e[4] + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
 			fcn_0047cba0(x, y, a1, (char*) f.v14, 1);
 		}
 		e[0x1d] = 0;

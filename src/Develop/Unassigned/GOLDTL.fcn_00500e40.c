@@ -44,6 +44,10 @@ void __cdecl fcn_00500e40(void)
 	for (n = 0; n < 0x2dc; n++) {
 		((int*) 0x99e0a0)[n] = 0x58;
 	}
+	run = 0;
+	count = 0;
+	i = 0;
+	bld = (unsigned char*) lpGebaeudePROT;
 	((int*) 0x8f9480)[8] = 0x2f;
 	((int*) 0x8f9480)[7] = 0x32;
 	((int*) 0x8f9480)[6] = 0x29;
@@ -54,17 +58,10 @@ void __cdecl fcn_00500e40(void)
 	((int*) 0x8f9480)[11] = 0x17;
 	((int*) 0x8f9480)[12] = 0x35;
 	((int*) 0x8f9480)[9] = 0x14;
-	run = 0;
-	count = 0;
 	prev = 0x58;
-	i = 0;
-	bld = (unsigned char*) lpGebaeudePROT;
 	do {
 		type = bld[0];
-		if (type == prev) {
-			run++;
-		}
-		else {
+		if (type != prev) {
 			run = 0;
 			count = 0;
 			prev = type;
@@ -81,8 +78,11 @@ void __cdecl fcn_00500e40(void)
 				} while (j < 0x58);
 			}
 		}
+		else {
+			run++;
+		}
 		k = 0;
-		if (bld[0x22] != 0) {
+		if (bld[0x22] > 0) {
 			r = bld + 0x23;
 			do {
 				if (*(unsigned short*) r != 0xffff) {

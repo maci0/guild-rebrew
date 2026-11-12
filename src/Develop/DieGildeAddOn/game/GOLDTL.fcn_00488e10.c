@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "client_data.h"
 #pragma intrinsic(memcpy, memset)
 
 extern unsigned char* lpGebaeudePROT;
@@ -14,22 +14,22 @@ void __cdecl fcn_00488e10(char* e)
 	char* p;
 	char* q;
 	char* r;
-	char* o;
-	unsigned char f;
+	char* o; int* owner;
+	unsigned int f;
 	int cnt;
 
 	cnt = 1;
-	p = (char*) 0x7f4ca0;
+	owner = (int*) ((char*) g_7f4ca2 + 0x16a);
 	do {
-		if (*(unsigned short*) p != 0xffff
-		    && *(int*) (p + 0x16c) == *(int*) (e + 0x16c)
-		    && *(char*) (p + 0x165) != 0
-		    && (q = *(char**) (p + 0x17c)) != 0
-		    && *q == 0x8f) {
+		if (*(unsigned short*) ((char*) owner - 0x16c) != 0xffff
+		    && *owner == *(int*) (e + 0x16c)
+		    && *((char*) owner - 7) != 0
+		    && (q = (char*) owner[4]) != 0
+		    && *(unsigned char*) q == 0x8f) {
 			cnt--;
 		}
-		p += 0x21c;
-	} while ((int) p < 0x85a0a0);
+		owner += 0x87;
+	} while ((int) owner < 0x85a20c);
 	if (cnt <= 0) {
 		return;
 	}
@@ -42,18 +42,18 @@ void __cdecl fcn_00488e10(char* e)
 		return;
 	}
 	memset(s, 0, 0xf8);
-	*(char*) (s + 4) = 0x8f;
+	q = *(char**) (e + 0x16c); *(char*) (s + 4) = 0x8f;
 	*(int*) (s + 8) = *(int*) (*(unsigned short*) (q + 0x27) * 0x21c + 0x7f4ca4);
 	*(int*) (s + 0xc) = *(int*) (q + 1);
-	*(int*) (s + 0x28) = *(int*) 0x7f4c00;
-	*(int*) (s + 0x2c) = *(int*) 0x7f4c04;
-	*(int*) (s + 0x30) = *(int*) 0x7f4c08;
-	*(unsigned short*) (s + 0x34) = *(unsigned short*) 0x7f4c0c;
+	*(pos14_7f4c00*) (s + 0x28) = g_7f4c00;
+
+
+
 	*(char*) (s + 0x36) = 1;
 	*(int*) (s + 0x60) = *(int*) (r + 2);
 	p = (char*) 0x7f4ca0;
 	do {
-		if ((int) p >= 0x85a0a0) {
+		if ((int) (p + 0x17c) >= 0x85a21c) {
 			break;
 		}
 		if (*(unsigned short*) p == 0xffff) {
@@ -65,16 +65,16 @@ void __cdecl fcn_00488e10(char* e)
 		if (*(char*) (p + 0x165) == 0) {
 			goto next;
 		}
-		f = *(unsigned char*) (p + 0x1b4);
+		f = *(unsigned int*) (p + 0x1b4);
 		if ((f & 0x10) == 0) {
 			goto next;
 		}
 		o = *(char**) (p + 0x17c);
 		if (o != 0) {
-			if (*o != 0x8f) {
+			if (*(unsigned char*) o != 0x8f) {
 				goto next;
 			}
-			*(unsigned char*) (p + 0x1b4) = f & 0xef;
+			*(unsigned int*) (p + 0x1b4) = f & ~0x10;
 			goto next;
 		}
 		o = *(char**) (p + 0x184);
@@ -84,7 +84,7 @@ void __cdecl fcn_00488e10(char* e)
 		if (*(int*) (o + 0x2c) != *(int*) (*(char**) (p + 0x16c) + 1)) {
 			goto next;
 		}
-		*(unsigned char*) (p + 0x1b4) = f & 0xef;
+		*(unsigned int*) (p + 0x1b4) = f & ~0x10;
 		if (*(unsigned char*) (p + 0x81) < *(unsigned char*) (p + 0x82)) {
 			*(int*) (s + 0x58) = *(int*) (p + 4);
 			*(int*) (s + 0x5c) = 1;
@@ -92,7 +92,7 @@ void __cdecl fcn_00488e10(char* e)
 			*(int*) (s + 0x58) = *(int*) (p + 4);
 			*(int*) (s + 0x5c) = 2;
 			if (*(unsigned char*) (p + 0x82) >= *(unsigned char*) (p + 0x84)) {
-				*(int*) (s + 0x60) = 4;
+				*(int*) (s + 0x5c) = 4;
 			}
 		}
 		fcn_004c5530((int) s);

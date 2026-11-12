@@ -1,4 +1,5 @@
 extern char* lpGebaeudePROT;
+typedef struct { unsigned char kind; unsigned char unknown01[0x246]; unsigned char level; unsigned char unknown248[5]; } BUILDING_ROW;
 extern char* lpGebaeudeINST;
 extern char g_773d75;
 extern int g_666028;
@@ -25,7 +26,7 @@ int __cdecl fcn_00497990(int a1, char* a2, int a3, char* a4, int a5)
 	unsigned char* p;
 	int i;
 	int n;
-	int b;
+	unsigned char b;
 	int bits_lo;
 	int bits_hi;
 	int q[4];
@@ -58,7 +59,7 @@ int __cdecl fcn_00497990(int a1, char* a2, int a3, char* a4, int a5)
 	e = (unsigned char*) lpGebaeudeINST;
 	for (i = 0; i < 0x100; i++) {
 		if (*e != 0) {
-			b = *(unsigned char*) (lpGebaeudePROT + (unsigned int) *e * 0x24d);
+			b = ((BUILDING_ROW*)lpGebaeudePROT)[*e].kind;
 			bits_lo = 0;
 			bits_hi = 0;
 			if (b > 0x1f) {
@@ -87,7 +88,7 @@ found:
 	q[3] = (r == 2 || r == 4);
 	t = (unsigned char*) *(int*) (a2 + 0x170);
 	if (t != 0) {
-		b = *(unsigned char*) (lpGebaeudePROT + (unsigned int) *t * 0x24d + 0x247);
+		b = ((BUILDING_ROW*)lpGebaeudePROT)[*t].level;
 		n = b - 1;
 		if (n >= 0) {
 			/* uncertain: native clears b dwords from &q[0], past q[3] when b > 4 */
@@ -112,7 +113,7 @@ loop_ent:
 		return 0;
 	}
 	b = *(unsigned char*) e;
-	if (*(unsigned char*) (lpGebaeudePROT + (unsigned int) b * 0x24d) == 2 && (*(unsigned char*) (e + 0x5a) & 2) != 0) {
+	if (((BUILDING_ROW*)lpGebaeudePROT)[b].kind == 2 && (*(unsigned char*) (e + 0x5a) & 2) != 0) {
 		if ((b == 4 && q[0] != 0) || (b == 5 && q[1] != 0) || (b == 6 && q[2] != 0) || (b == 7 && q[3] != 0)) {
 			t = (unsigned char*) fcn_005463a0(1, 0, 0x1b);
 			if (t != 0) {
@@ -166,7 +167,7 @@ loop_ent2:
 		}
 		return 0x10;
 	}
-	b = *(unsigned char*) (lpGebaeudePROT + (unsigned int) *e * 0x24d);
+	b = ((BUILDING_ROW*)lpGebaeudePROT)[*e].kind;
 	if (b == id) {
 		t = (unsigned char*) fcn_005463a0(1, 0, 0x1b);
 		if (t != 0) {

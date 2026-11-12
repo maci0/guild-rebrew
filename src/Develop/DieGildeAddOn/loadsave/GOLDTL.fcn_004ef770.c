@@ -41,7 +41,7 @@ unsigned int __cdecl fcn_004ef770(void* file, int version)
         v3 = 0x7731f0;
         while (ls_ReadVfsDataChecked((void*) (v3 - 0x38), 4, 1, file) &&
                ls_ReadVfsDataChecked((void*) (v3 - 0x30), 4, 1, file)) {
-            if (0x10055 <= (unsigned int) version) {
+            if (0x10055 <= version) {
                 if (!ls_ReadVfsDataChecked((void*) (v3 - 0x2c), 4, 1, file)) {
                     return 0;
                 }

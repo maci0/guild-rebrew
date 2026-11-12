@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdlib.h>
 
 extern int g_67a370;
 
@@ -14,9 +15,6 @@ unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 	float start[3];
 	float hit[3];
 	float d;
-	float dx;
-	float dy;
-	float dz;
 	float best1;
 	float best2;
 	int col;
@@ -34,11 +32,9 @@ unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 	int maxy;
 	int minx;
 	int miny;
-	int size;
 	int span;
 
 	m = *(char**) ((char*) g_67a370 + 0xb0);
-	size = *(int*) (m + 0x20);
 	best1 = 1e8f;
 	best2 = 0.0f;
 	x1 = 0;
@@ -51,14 +47,14 @@ unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 		return 0;
 	}
 	for (i = 0; i < 0x40; i++) {
-		maxy = size - 1;
+		maxy = *(int*) (m + 0x20) - 1;
 		if (row + i <= maxy) {
 			maxy = row + i;
 		}
 		miny = (row - i < 0) ? 0 : row - i;
 		for (y = miny; y <= maxy; y++) {
-			span = i - ((row - y < 0) ? y - row : row - y);
-			maxx = size - 1;
+			span = i - abs(row - y);
+			maxx = *(int*) (m + 0x20) - 1;
 			if (span + col <= maxx) {
 				maxx = span + col;
 			}
@@ -68,10 +64,10 @@ unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 					continue;
 				}
 				fcn_0045b920(m, x, y, hit);
-				dx = hit[0] - start[0];
-				dy = hit[1] - start[1];
-				dz = hit[2] - start[2];
-				d = (float) sqrt(dx * dx + dy * dy + dz * dz);
+				hit[0] = start[0] - hit[0];
+				hit[1] = start[1] - hit[1];
+				hit[2] = start[2] - hit[2];
+				d = sqrt(hit[2] * hit[2] + hit[1] * hit[1] + hit[0] * hit[0]);
 				if (d < best1 && d > 30.0) {
 					found = 1;
 					best1 = d;

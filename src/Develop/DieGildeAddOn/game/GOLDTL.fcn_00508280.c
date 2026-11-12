@@ -7,7 +7,7 @@ typedef struct
 } S0c;
 // SIZE 0xc
 
-unsigned short __cdecl gm_RandomMod(unsigned short n);
+int __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_00508220(int, S0c*);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(int, int, int, int*);
@@ -25,6 +25,7 @@ int __cdecl fcn_00508280(char* p, unsigned int* a1, float* a2)
 	int i;
 	int mask;
 	int r;
+	int cost;
 	float f;
 
 	flags = *(int*) (p + 0x2c);
@@ -60,7 +61,7 @@ int __cdecl fcn_00508280(char* p, unsigned int* a1, float* a2)
 	if ((flags & 0x1e000000) == 0) {
 		avail[7] = 1;
 	}
-	i = gm_RandomMod(8);
+	i = gm_RandomMod(8) & 0xffff;
 	n = 8;
 	while (avail[i] != 1) {
 		n--;
@@ -80,7 +81,8 @@ int __cdecl fcn_00508280(char* p, unsigned int* a1, float* a2)
 	if (fcn_00508220(i, &s) == 0) {
 		return 0;
 	}
-	r = gm_RandomMod(s.c);
+	r = (unsigned short) gm_RandomMod(s.c);
+	cost = (int) (r * s.b);
 	if (a1 != 0) {
 		*a1 = r != 0 ? i : 0;
 	}
@@ -110,7 +112,7 @@ int __cdecl fcn_00508280(char* p, unsigned int* a1, float* a2)
 	fcn_004c4510(p, *(int*) (p + 4));
 	fcn_004c4570(4, 1, 0x2c, &v);
 	fcn_004c5360();
-	f = fcn_004ff210(*(unsigned short*) p, -(int) (r * s.b));
+	f = fcn_004ff210(*(unsigned short*) p, -cost);
 	if (a2 == 0) {
 		return 1;
 	}

@@ -29,12 +29,13 @@ typedef struct {
 	int handle;                     /* 0x000 */
 	int filter;                     /* 0x004 */
 	int slot;                       /* 0x008 */
-	char pad0c[0x08];
+	int trade_form; int font;
 	int owner;                      /* 0x014 */
-	char pad18[0x18];               /* 0x018, overlays SelDlg::ids */
+	int form5; int form7; int ids[4];               /* 0x018, overlays SelDlg::ids */
 	int type;                       /* 0x030 */
 	DialogEntry entries[16];        /* 0x034 */
 	int selected;                   /* 0x134 */
+	int button; int rows[8][3];
 } DialogState;                          /* SIZE 0x138 */
 
 typedef struct {
@@ -65,7 +66,7 @@ extern char g_6a9694[];
 extern char g_6a969c[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl d2_SetOverlayAnimation(void);
+void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
@@ -82,59 +83,70 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 			  void (__cdecl* a4)(char*, PickResult*))
 {
-	SelDlg sel;
+
 	DialogState st;
-	int rows[8][3];
-	PickResult rec;
-	int ctx;
+
+	PickResult rec; PickResult rec1;
+
 	int saved;
-	int deadline;
+	unsigned int deadline;
 	int cur;
 	int selft;
 	int i;
 	int flags;
 	int found;
 
+	deadline = (unsigned int)g_6b7fac;
 	if (a0 != 0) {
 		a0->item = 0;
 		a0->item2 = 0;
 	}
-	ctx = fcn_00470820(0, 0, g_6a969c);
-	d2_SetOverlayAnimation();
-	fcn_00471b60(ctx);
-	d2_SetForm(ctx, 0);
-	fcn_005340f0(g_772514);
-	d2_SetForm(ctx, 1);
-	saved = g_772514;
-	io_AppendText((int) g_6a9694, a2);
-	d2_SetForm(ctx, 2);
-	d2_SetForm(ctx, 3);
-	d2_SetForm(ctx, 6);
-	d2_SetForm(ctx, 4);
-	d2_SetForm(ctx, 5);
-	d2_SetForm(ctx, 7);
+	st.handle = fcn_00470820(0, 0, g_6a969c);
 
-	fcn_0058b030(a1, &sel);
+	d2_SetOverlayAnimation(0, 0);
+	fcn_00471b60(st.handle);
+	d2_SetForm(st.handle, 0);
+	fcn_005340f0(g_772514);
+	d2_SetForm(st.handle, 1);
+	st.filter = g_772514;
+
+	io_AppendText((int) g_6a9694, a2);
+	d2_SetForm(st.handle, 2);
+	st.slot = g_772514;
+	d2_SetForm(st.handle, 3);
+	st.trade_form = g_772514;
+	d2_SetForm(st.handle, 6);
+	st.font = g_772514;
+	d2_SetForm(st.handle, 4);
+	st.owner = g_772514;
+	d2_SetForm(st.handle, 5);
+	st.form5 = g_772514;
+	d2_SetForm(st.handle, 7);
+	st.form7 = g_772514;
+
+	st.type = 0; st.selected = 0;
+	fcn_0058b030(a1, (SelDlg*)&st);
 	fcn_0058b1f0(a1, &st, 0xffffffff);
 	fcn_0058b440((unsigned int) a1, (unsigned int*) &st, -1, a3);
 	g_100f1dc = -1;
-	deadline = g_6b7fac + 0x96;
+	deadline += 0x96;
+	selft = st.selected;
 
 	for (;;) {
 		flags = 0;
-		cur = st.selected;
-		selft = 0;
+		cur = selft;
+		saved = st.type;
 		found = 0;
-		if (g_6b7fac > deadline) {
+		if ((unsigned int)g_6b7fac > deadline) {
 			flags = 7;
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			for (i = 0; i < 4; i++) {
-				if (sel.ids[i] == g_67d370 && i != cur) {
-					selft = i;
-					cur = i;
+				if (st.ids[i] == g_67d370 && i != st.type) {
+					selft = 0;
+					st.type = i; cur = -1;
 					st.selected = 0;
 					flags |= 7;
 					found = 1;
@@ -144,7 +156,7 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 			if (found == 0) {
 				for (i = 0; i < 16; i++) {
 					if (st.entries[i].btn == g_67d370 && i != cur) {
-						cur = i;
+						selft = i;
 						st.selected = i;
 						flags |= 3;
 						found = 1;
@@ -155,7 +167,7 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 			if (a3 == 0) {
 				if (found == 0) {
 					for (i = 0; i < 8; i++) {
-						if (rows[i][0] != g_67d370) {
+						if (st.rows[i][0] != g_67d370) {
 							continue;
 						}
 						found = 1;
@@ -163,7 +175,7 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 							a0->item = st.entries[selft].item;
 							a0->value = *(int*) a0->item;
 							a0->kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), a0->item);
-							a0->item2 = (char*) rows[i][2];
+							a0->item2 = (char*) st.rows[i][1];
 							a0->value2 = *(int*) a0->item2;
 						}
 						if (a4 == 0) {
@@ -175,15 +187,15 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 						rec.item = st.entries[selft].item;
 						rec.value = *(int*) rec.item;
 						rec.kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), rec.item);
-						rec.item2 = (char*) rows[i][2];
+						rec.item2 = (char*) st.rows[i][1];
 						rec.value2 = *(int*) rec.item2;
-						fcn_00471af0(ctx, 0);
+						fcn_00471af0(st.handle, 0);
 						a4(a1, &rec);
-						fcn_00471af0(ctx, 1);
+						fcn_00471af0(st.handle, 1);
 						break;
 					}
 				}
-			} else if (a3 == 1 && st.entries[cur].btn == g_67d370) {
+			} else if (a3 == 1 && st.button == g_67d370) {
 				if (a0 != 0) {
 					a0->item = st.entries[selft].item;
 					a0->value = *(int*) a0->item;
@@ -196,31 +208,31 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 						g_774654 = 1;
 					}
 				} else {
-					rec.item = st.entries[selft].item;
-					rec.value = *(int*) rec.item;
-					rec.kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), rec.item);
-					rec.item2 = 0;
-					rec.value2 = -1;
-					fcn_00471af0(ctx, 0);
-					a4(a1, &rec);
-					fcn_00471af0(ctx, 1);
+					rec1.item = st.entries[selft].item;
+					rec1.value = *(int*) rec1.item;
+					rec1.kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), rec1.item);
+					rec1.item2 = 0;
+					rec1.value2 = -1;
+					fcn_00471af0(st.handle, 0);
+					a4(a1, &rec1);
+					fcn_00471af0(st.handle, 1);
 				}
 			}
 		}
 		if (flags & 4) {
-			fcn_0058b030(a1, &sel);
-			cur = selft;
+			fcn_0058b030(a1, (SelDlg*)&st);
+			selft = st.selected;
 		}
 		if (flags & 2) {
 			fcn_0058b1f0(a1, &st, saved);
-			cur = selft;
+			selft = st.selected;
 		}
 		if (flags & 1) {
 			fcn_0058b440((unsigned int) a1, (unsigned int*) &st, cur, a3);
-			cur = selft;
+			selft = st.selected;
 		}
 		if (fcn_005373e0((void*) 0x58bb10, 0x677c7) == 0) {
-			fcn_00471e30(ctx);
+			fcn_00471e30(st.handle);
 			return;
 		}
 	}

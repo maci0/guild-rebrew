@@ -30,7 +30,7 @@ int __cdecl fcn_0041bcd0(void* dst, void* src, int w, int h, int mode, int pitch
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x00401650 */
-int __cdecl fcn_00401650(const char* name, char* buf, char* palbuf, int flags)
+char __cdecl fcn_00401650(const char* name, char* buf, char* palbuf, int flags)
 {
 	BmpInfoHeader bih;
 	char pal[0x300];
@@ -42,15 +42,16 @@ int __cdecl fcn_00401650(const char* name, char* buf, char* palbuf, int flags)
 	char* rowA;
 	char* rowB;
 	int bpr;
-	int bpp24;
-	int noflip;
-	int flip;
-	int needpal;
+	unsigned char bpp24;
+	unsigned char noflip;
+	unsigned char flip;
+	unsigned char needpal;
 	int f1;
 	int i;
 	int row;
 	int col;
 	int n;
+	unsigned char c0; unsigned char c1; unsigned char c2;
 
 	flip = 0;
 	noflip = 0;
@@ -114,7 +115,7 @@ alloc_pixels:
 		pixels = buf;
 		goto have_pixels;
 	}
-	pixels = (char*) m_alloc(abs(bih.biWidth) * bpr, "!bmp:LoadBMPBuffer");
+	pixels = (char*) m_alloc(abs(bih.biHeight) * bpr, "!bmp:LoadBMPBuffer");
 	if (bpp24) {
 		goto have_pixels;
 	}
@@ -126,7 +127,7 @@ have_pixels:
 	    ? (char*) m_alloc(0x300, "!bmp:tLoadBMP4bPal")
 	    : palbuf;
 	tmp = (char*) m_alloc(0x400, "!bmp:tLoadBMPPal");
-	vfs_fseek(f, bih.biClrUsed * 4 + 0x36, 0);
+	vfs_fseek(f, 0x36, 0);
 	vfs_ReadData(tmp, 4, bih.biClrUsed, f);
 	for (i = 0; i < bih.biClrUsed; i++) {
 		pal2[i * 3 + 0] = tmp[i * 4 + 2];
@@ -138,7 +139,7 @@ read_pixels:
 	if (!flip) {
 		goto close_stream;
 	}
-	vfs_fseek(f, bih.biClrUsed * 4 + 0x36, 0);
+	vfs_fseek(f, bpp24 ? 0x36 : bih.biClrUsed * 4 + 0x36, 0);
 	if (bih.biCompression != 1) {
 		vfs_ReadData(pixels, bpr, abs(bih.biHeight), f);
 	} else {
@@ -167,15 +168,70 @@ read_pixels:
 			}
 		}
 	}
+	if (bpp24) {
+        for (i = 0; i < abs(bih.biHeight) * bih.biWidth; i++) {
+            c0 = pixels[i * 3];
+            pixels[i * 3] = pixels[i * 3 + 2];
+            pixels[i * 3 + 2] = c0;
+        }
+    }
 	if (bih.biHeight > 0) {
 		tmp = (char*) m_alloc(bpr, "!bmp:tGetBMPFlip");
 		n = abs(bih.biHeight) / 2;
 		rowA = pixels;
 		rowB = pixels + (abs(bih.biHeight) - 1) * bpr;
 		while (n > 0) {
-			memcpy(tmp, rowA, bpr);
-			memcpy(rowA, rowB, bpr);
-			memcpy(rowB, tmp, bpr);
+            __asm {
+                mov edi, tmp
+                mov esi, rowA
+                mov ebx, bpr
+                lea ecx, [edi+edi*2]
+                and ecx, 3
+                sub ebx, ecx
+                jle short CopyRow1
+                rep movsb
+                mov ecx, ebx
+                and ebx, 3
+                shr ecx, 2
+                rep movsd
+            CopyRow1:
+                add ecx, ebx
+                rep movsb
+            }
+            __asm {
+                mov edi, rowA
+                mov esi, rowB
+                mov ebx, bpr
+                lea ecx, [edi+edi*2]
+                and ecx, 3
+                sub ebx, ecx
+                jle short CopyRow2
+                rep movsb
+                mov ecx, ebx
+                and ebx, 3
+                shr ecx, 2
+                rep movsd
+            CopyRow2:
+                add ecx, ebx
+                rep movsb
+            }
+            __asm {
+                mov edi, rowB
+                mov esi, tmp
+                mov ebx, bpr
+                lea ecx, [edi+edi*2]
+                and ecx, 3
+                sub ebx, ecx
+                jle short CopyRow3
+                rep movsb
+                mov ecx, ebx
+                and ebx, 3
+                shr ecx, 2
+                rep movsd
+            CopyRow3:
+                add ecx, ebx
+                rep movsb
+            }
 			rowA += bpr;
 			rowB -= bpr;
 			n--;
@@ -193,9 +249,9 @@ close_stream:
 	if (noflip) {
 		n = abs(bih.biHeight) * bpr;
 		for (i = 0; i < n; i++) {
-			buf[i * 3 + 0] = pal2[pixels[i] * 3 + 0];
-			buf[i * 3 + 1] = pal2[pixels[i] * 3 + 1];
-			buf[i * 3 + 2] = pal2[pixels[i] * 3 + 2];
+			buf[i * 3 + 0] = pal2[(unsigned char)pixels[i] * 3 + 0];
+			buf[i * 3 + 1] = pal2[(unsigned char)pixels[i] * 3 + 1];
+			buf[i * 3 + 2] = pal2[(unsigned char)pixels[i] * 3 + 2];
 		}
 	} else {
 		if (pal2 == 0) {
@@ -215,18 +271,19 @@ release:
 	if (pixels != buf) {
 		m_FreeTracked(pixels);
 	}
-	if (pal2 != 0 && (noflip == 0 || palbuf == 0)) {
+	if (pal2 != 0 && (noflip != 0 || palbuf == 0)) {
 		m_FreeTracked(pal2);
 	}
 	if ((flags & 0x10) == 0x10 && buf != 0) {
 		n = abs(bih.biHeight) * bih.biWidth;
 		rowB = buf + n * 3 - 3;
 		rowA = buf + n * 4 - 4;
-		if ((flags & 0x20) != 0x20) {
+		if ((flags & 0x20) == 0x20) {
 			while (n > 0) {
-				rowA[0] = rowB[2];
-				rowA[1] = rowB[1];
-				rowA[2] = rowB[0];
+				c0 = rowB[0]; c1 = rowB[1]; c2 = rowB[2];
+				rowA[0] = c2;
+				rowA[1] = c1;
+				rowA[2] = c0;
 				rowA[3] = 0;
 				rowB -= 3;
 				rowA -= 4;
@@ -234,9 +291,10 @@ release:
 			}
 		} else {
 			while (n > 0) {
-				rowA[0] = rowB[0];
-				rowA[1] = rowB[1];
-				rowA[2] = rowB[2];
+				c0 = rowB[0]; c1 = rowB[1]; c2 = rowB[2];
+				rowA[0] = c0;
+				rowA[1] = c1;
+				rowA[2] = c2;
 				rowA[3] = 0;
 				rowB -= 3;
 				rowA -= 4;

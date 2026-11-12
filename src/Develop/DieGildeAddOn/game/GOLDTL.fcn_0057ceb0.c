@@ -72,9 +72,8 @@ void __cdecl fcn_0057ceb0(char* entity)
 				item = slots[i].item;
 				if (item != 0) {
 					if (*(int*) (item + 0xe) < 3) {
-						handles[queued] = id;
+						handles[queued++] = id;
 						fcn_004c51f0(*(int*) (v3 + 4), -1, (short) id, 1, g_773d75, 0);
-						queued++;
 						goto next;
 					}
 					*(int*) (entity + 0xac) += (int) fcn_0050bb50(id, g_773d75);
@@ -82,9 +81,8 @@ void __cdecl fcn_0057ceb0(char* entity)
 				}
 				if (counts.total < 6) {
 					counts.total++;
-					handles[queued] = id;
+					handles[queued++] = id;
 					fcn_004c51f0(*(int*) (v3 + 4), -1, (short) id, 1, g_773d75, 0);
-					queued++;
 					goto next;
 				}
 				*(int*) (entity + 0xac) += (int) fcn_0050bb50(id, g_773d75);

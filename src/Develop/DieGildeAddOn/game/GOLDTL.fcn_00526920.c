@@ -6,6 +6,12 @@ extern char* g_7e2704;
 extern char* g_7e2708;
 extern char g_7e2714[];
 extern char* lpGebaeudePROT;
+
+/* SIZE 0x24d: building prototype row of lpGebaeudePROT */
+typedef struct {
+	unsigned char type;
+	char rest[0x24c];
+} BldProt_526920;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_7746c4;
 extern char* g_7746c8;
@@ -34,7 +40,7 @@ void __cdecl fcn_00526920(char* a0, int a1, char* a2)
 	char* saved_ptr;
 	int saved;
 	int id;
-	int type;
+	unsigned char type;
 	int n;
 
 	if (g_7e2700 != 0) {
@@ -46,7 +52,7 @@ void __cdecl fcn_00526920(char* a0, int a1, char* a2)
 	hit = 0;
 	id = (int) g_774970;
 	if (g_774970 != 0xffff && g_7f4e51[id * 540] != 0) {
-		type = (int) *(lpGebaeudePROT + ((unsigned char) *a0) * 589);
+		type = ((BldProt_526920*) lpGebaeudePROT)[(unsigned char) *a0].type;
 		if (type == 6) {
 			goto ready;
 		}

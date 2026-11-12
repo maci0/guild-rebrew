@@ -46,8 +46,8 @@ void __cdecl fcn_00440670(unsigned int time, unsigned int count, char* p)
 				*(float*) (p + 0x138 + i * 4) = (float) fmod(dt * *(float*) (p + 0x18 + i * 4) + *(float*) (p + 0x138 + i * 4), g_662958);
 			}
 			for (i = 0; i < 0x10; i++) {
-				t[0] = (float) sin((double) i + *(float*) (p + 0x138) + cos(g_662cd8 * i) * g_662958);
-				t[1] = (float) cos((double) i + *(float*) (p + 0x13c) + sin(g_662cc8 - g_662cd0 * i) * g_662958);
+				t[0] = (float) sin((cos(g_662cd8 * i) * g_662958 + *(float*) (p + 0x138)) + (double) i);
+				t[1] = (float) cos((sin(g_662cc8 - g_662cd0 * i) * g_662958 + *(float*) (p + 0x13c)) + (double) i);
 				t[2] = (float) sin((double) i - cos(g_662cc0 * i) * g_662958 + *(float*) (p + 0x140) + g_662cb8);
 				t[3] = (float) cos((double) i - sin(g_662cb0 * i + g_662cc8) * g_662958 + *(float*) (p + 0x144) + g_662ad0);
 				*(float*) (p + 0x38 + (i >> 2) * 0x40 + (i & 3) * 0x10) = t[0] * *(float*) (p + 0x28);

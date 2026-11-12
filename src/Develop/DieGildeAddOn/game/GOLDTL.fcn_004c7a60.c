@@ -30,10 +30,10 @@ void __cdecl gm_KillSpieler(int entity_id, int flag);
 int __cdecl fcn_004c7a60(void* e, char* flag)
 {
 	void* existing;
-	void* stat;
+	void* stat; unsigned short id;
 
-	*(unsigned short*) ((char*) e + 0x10) = (unsigned short) fcn_004c4dc0((int) e, (int) *(unsigned short*) ((char*) e + 0x10));
-	if (!gm_ResolveEntityById(&e, &existing, &stat, (int) *(unsigned short*) ((char*) e + 0x10)))
+	id = (unsigned short) fcn_004c4dc0((int) e, (int) *(unsigned short*) ((char*) e + 0x10)); *(unsigned short*) ((char*) e + 0x10) = id;
+	if (!gm_ResolveEntityById(&e, &existing, &stat, (int) id))
 		return 1;
 	if (e != 0) {
 		if (fcn_00504130(e))

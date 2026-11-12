@@ -1,3 +1,4 @@
+extern char* g_772eb4;
 char* __cdecl fcn_004cef30(int id);
 int __cdecl fcn_0042e410(int code);
 char* __cdecl fcn_004ceac0(int a, char* s);
@@ -22,8 +23,10 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	char* e;
 	char* e2;
 	char* found;
-	int tmp[12];
-	int t2[8];
+	int tmp[11];
+	float point[4];
+	int map_x = a;
+	float height;
 	int v;
 	int r;
 	double ratio;
@@ -34,13 +37,13 @@ int __cdecl fcn_004d7fa0(int a, int b)
 		return level;
 	}
 	if (b == *(int*) 0x772e9c) {
-		base = (char*) 0x772f74;
+		base = g_772eb4 + 0xc0;
 	} else {
-		base = (char*) 0x772f34;
+		base = g_772eb4 + 0x80;
 	}
 	count80 = 0;
 	for (i = 0; i < 0x10; i++) {
-		v = *(int*) (0x772f34 + i * 4);
+		v = *(int*) (g_772eb4 + 0x80 + i * 4);
 		if (v != -1) {
 			s = fcn_004cef30(v);
 			if (s[8] != 0 && s[8] != 4) {
@@ -50,7 +53,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	}
 	countC0 = 0;
 	for (i = 0; i < 0x10; i++) {
-		v = *(int*) (0x772f74 + i * 4);
+		v = *(int*) (g_772eb4 + 0xc0 + i * 4);
 		if (v != -1) {
 			s = fcn_004cef30(v);
 			if (s[8] != 0 && s[8] != 4) {
@@ -63,7 +66,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	} else {
 		ratio = (double) count80 / (double) countC0;
 	}
-	if (ratio < 0.5 || (fcn_0042e410(0x64) & 0xffff) <= 0x14) {
+	if (ratio <= 0.5 && (fcn_0042e410(0x64) & 0xffff) > 0x14) {
 		found = 0;
 		i = 0;
 		while (i < 0x10 && found == 0) {
@@ -91,7 +94,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 		memcpy(tmp, e, 0x2c);
 		val = fcn_004ff040(s) * 100.0;
 		r = (int) val;
-		if (r < 0x14 || (fcn_0042e410(0x64) & 0xffff) > 0x1e) {
+		if (r >= 0x14 || (fcn_0042e410(0x64) & 0xffff) <= 0x1e) {
 			r = fcn_004d2f70(s);
 			if (r == 0) {
 				continue;
@@ -100,20 +103,20 @@ int __cdecl fcn_004d7fa0(int a, int b)
 			*(int*) (tmp + 0) = *(int*) (s + 4);
 			*(int*) (tmp + 1) = 2;
 			*(int*) (tmp + 5) = *(int*) (e2 + 4);
-			fcn_004c67c0(a, tmp);
+			fcn_004c67c0(*(int*) (a + 0x10), tmp);
 		} else {
 			e2 = (char*) fcn_004d34f0(s);
-			fcn_00455350(e2, e2 + 0x4c, t2);
+			fcn_00455350(e2, e2 + 0x4c, point);
 			r = fcn_0045b990(*(int*) (*(int*) 0x67a370 + 0xb0),
-			    t2, &t2[1], &t2[2], &t2[3]);
+			    point, &map_x, &countC0, &height);
 			if (r != 0) {
 				continue;
 			}
 			*(int*) (tmp + 0) = *(int*) (s + 4);
 			*(int*) (tmp + 1) = 3;
-			*(int*) (tmp + 3) = a;
+			*(int*) (tmp + 4) = map_x;
 			*(int*) (tmp + 5) = countC0;
-			fcn_004c67c0(a, tmp);
+			fcn_004c67c0(*(int*) (a + 0x10), tmp);
 		}
 	}
 	(void) found;

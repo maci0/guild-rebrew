@@ -45,15 +45,13 @@ void __cdecl fcn_00471e30(int a);
 /* ADDRESS: GOLDTL 0x005ceef0 */
 void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 {
-	unsigned int v10;
-	unsigned int v11;
 	int v12[7];
 	int v13;
 	int v14[4];
 	int v15;
 	unsigned int v16;
 	int v17[7];
-	int v18;
+	int v18[2];
 	unsigned int v19;
 	char v2;
 	char v20;
@@ -67,14 +65,13 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 	int v29;
 	int v3;
 	int v30;
-	int v31;
+	
 	unsigned int v32;
 	unsigned int v33;
 	unsigned int v34;
 	unsigned short* v4;
 	unsigned int v5;
 	int v6;
-	int v7;
 	int v8;
 	unsigned int v9;
 
@@ -123,9 +120,9 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 	}
 	if (v20) {
 		d2_SetForm(v28, 3);
-		fcn_00533a60(g_772514, 0, &v18, 2, g_14a90a0, g_14b5874);
-		v29 = v18;
-		v30 = v31;
+		fcn_00533a60(g_772514, 0, &v18[0], 2, g_14a90a0, g_14b5874);
+		v29 = v18[0];
+		v30 = v18[1];
 	}
 	g_100f1dc = -1;
 	for (;;) {
@@ -135,8 +132,8 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 		else if (g_14ce8d0) {
 			if (g_775348 != 1) {
 				if (!g_775348 && v13 != -1 && g_67d370 == v13) {
-					v18 = fcn_00471f80(v13);
-					fcn_005b1ed0(v3, (float) v18 * g_662910);
+					v18[0] = fcn_00471f80(v13);
+					fcn_005b1ed0(v3, (float) v18[0] * g_662910);
 				}
 			}
 			else {
@@ -299,21 +296,18 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 		}
 		v6 = fcn_005373e0((void*) fcn_005ceef0, 0x677c7);
 		if (!v6) {
-			v5 = v10;
 			if (!g_775348) {
-				fcn_00471f80(v16);
-				v5 = v11;
-				v15 = v7;
+				v15 = fcn_00471f80(v16);
 			}
 			v15 = fcn_0050b750(v15, g_773d75);
 			fcn_004c4510(v3, *(unsigned int*) ((char*) v3 + 1));
 			fcn_004c4570(4, 1,
 				(int) ((char*) v3 + 0x39 - g_aed32c), &v15);
 			fcn_004c5360();
-			v18 = v15 - *(int*) ((char*) v3 + 0x39);
+			v18[0] = v15 - *(int*) ((char*) v3 + 0x39);
 			fcn_004c4510(v4, *(unsigned int*) ((char*) v4 + 4));
 			fcn_004c4670(4, 1,
-				(int) ((char*) v4 + 0x1b8 - g_aed32c), &v18);
+				(int) ((char*) v4 + 0x1b8 - g_aed32c), &v18[0]);
 			fcn_004c5360();
 			fcn_00471e30(v28);
 			return;

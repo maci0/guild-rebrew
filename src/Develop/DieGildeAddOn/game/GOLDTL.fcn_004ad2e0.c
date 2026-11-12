@@ -1,3 +1,5 @@
+#include <string.h>
+
 typedef struct Hit4ad2e0 {
 	char* p;
 	float f;
@@ -44,21 +46,20 @@ void __cdecl fcn_004ad2e0(void)
 		return;
 	}
 	count = 0;
-	for (i = 0; i < 4; i++) {
-		hits[i].p = 0;
-		hits[i].f = 0.0f;
-	}
+	memset(hits, 0, sizeof(hits));
 	rec = (char*) 0x7f4ca0;
 	do {
-		if (!(v5 & *(int*) (rec + 0x1cc)) && (v3 & *(int*) (rec + 0x1cc)) && *(unsigned char*) (rec + 0xd) >= 7 && (*(unsigned char*) (rec + 2) == 2 || *(unsigned char*) (rec + 2) == 3 ||
-		    *(unsigned char*) (rec + 2) == 4 || *(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 6 || *(unsigned char*) (rec + 2) == 7)) {
+		if (!(v5 & *(int*) (rec + 0x1cc)) && (v3 & *(int*) (rec + 0x1cc)) && *(unsigned char*) (rec + 0xd) >= 7 &&
+		    (*(unsigned char*) (rec + 2) == 6 || *(unsigned char*) (rec + 2) == 7 ||
+		     *(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 4 ||
+		     *(unsigned char*) (rec + 2) == 3 || *(unsigned char*) (rec + 2) == 2)) {
 			f = fcn_004ad500((unsigned char*) rec, (unsigned short*) obj, v4, 0);
-			for (i = 3; i >= 0; i--) {
-				if (f <= hits[i].f) {
+			for (i = 4; i > 0; i--) {
+				if (!(f > hits[i - 1].f)) {
 					break;
 				}
 			}
-			pos = i + 1;
+			pos = i;
 			if (pos < 4) {
 				for (i = 3; i > pos; i--) {
 					hits[i] = hits[i - 1];

@@ -15,8 +15,8 @@ void __cdecl fcn_0044b340(char* name, char** tex, int* width, int* height)
 	void* f;
 	int w;
 	int h;
-	int y;
-	int x;
+
+
 
 	if (name != 0) {
 		f = fcn_00449ac0(name, ".TXS");
@@ -35,9 +35,9 @@ void __cdecl fcn_0044b340(char* name, char** tex, int* width, int* height)
 						*tex = (char*) m_alloc(w * h * 0x40, "d3_io:LoadtextureSet");
 						*width = w;
 						*height = h;
-						for (y = 0; y < *width; y++) {
-							for (x = 0; x < *height; x++) {
-								fcn_004011a0(f, *tex + (y * *height + x) * 0x40);
+						for (w = 0; w < *width; w++) {
+							for (h = 0; h < *height; h++) {
+								fcn_004011a0(f, *tex + (w * *height + h) * 0x40);
 							}
 						}
 					}

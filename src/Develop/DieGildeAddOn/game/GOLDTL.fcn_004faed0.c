@@ -4,8 +4,8 @@
    the cell table at 0x99ef90. */
 
 extern char g_7f4ca0[];          /* record array, stride 0x21c */
-extern char lpGebaeudePROT[];          /* per-kind descriptor table */
-extern char lpGebaeudeINST[];          /* kind descriptor array, stride 0xa9 */
+#include "game_data.h"
+typedef struct StatsProto { unsigned char kind; char pad1[0x246]; unsigned char field247, field248; char tail[4]; } StatsProto;
 extern unsigned short g_696178[]; /* per-kind counters, 4 words each */
 extern unsigned short g_696180;
 extern float g_99ef90[];         /* cell table, 6 floats per entry */
@@ -47,15 +47,15 @@ void __cdecl fcn_004faed0(float* out)
 	int idx;
 	int limit;
 	int* oi;
-	float weight_a;
-	float weight_b;
+	int weight_a;
+	int weight_b;
+	float normalized;
 	float accum;
 	float scale;
 	float cell;
 	float lit;
 	float f;
 	int buf_a[12];
-	int buf_b[8];
 	double w;
 
 	oi = (int*) out;
@@ -68,8 +68,8 @@ void __cdecl fcn_004faed0(float* out)
 	sum_d = 0;
 	slot0_e = 0;
 	slot1_e = 0;
-	weight_a = 0.0f;
-	weight_b = 0.0f;
+	weight_a = 0;
+	weight_b = 0;
 	accum = 0.0f;
 	fcn_004fad10();
 	for (rec = g_7f4ca0; rec < (char*) 0x85a0a0; rec += 0x21c) {
@@ -86,12 +86,11 @@ void __cdecl fcn_004faed0(float* out)
 			pos = *(char**) (ent + 0x61);
 			slot0_count++;
 			if (pos != 0) {
-				type = *(unsigned char*) ent;
-				cell = *(unsigned char*) (lpGebaeudePROT + type * 0x24d);
-				if (!(cell >= 0x0b && cell <= 0x0d) && cell != 0x10) {
+				type = ((StatsProto*)lpGebaeudePROT)[*(unsigned char*)ent].kind;
+				if (!(type >= 0x0b && type <= 0x0d) && type != 0x10) {
 					if (fcn_004fa6f0(pos + 0x4c, &x, &y) != 0) {
 						idx = y + x * 8;
-						g_99ef94[idx * 6 + 1] = g_99ef94[idx * 6 + 1] + g_6628a0;
+						g_99ef94[idx * 6] = g_99ef94[idx * 6] + g_6628a0;
 					}
 				}
 			}
@@ -101,18 +100,17 @@ void __cdecl fcn_004faed0(float* out)
 			pos = *(char**) (ent + 0x61);
 			slot1_count++;
 			if (pos != 0) {
-				type = *(unsigned char*) ent;
-				cell = *(unsigned char*) (lpGebaeudePROT + type * 0x24d);
-				if (!(cell >= 0x0b && cell <= 0x0d) && cell != 0x10) {
+				type = ((StatsProto*)lpGebaeudePROT)[*(unsigned char*)ent].kind;
+				if (!(type >= 0x0b && type <= 0x0d) && type != 0x10) {
 					if (fcn_004fa6f0(pos + 0x4c, &x, &y) != 0) {
 						idx = y + x * 8;
-						g_99ef94[idx * 6 + 1] = g_99ef94[idx * 6 + 1] + g_6628a0;
+						g_99ef94[idx * 6] = g_99ef94[idx * 6] + g_6628a0;
 					}
 				}
 			}
 		}
 	}
-	rec = lpGebaeudeINST;
+	rec = (char*)lpGebaeudeINST;
 	for (n = 0x100; n != 0; n--) {
 		type = *(unsigned char*) rec;
 		if (type != 0 && type <= 0x43 && *(short*) (rec + 0x27) != -1) {
@@ -121,48 +119,49 @@ void __cdecl fcn_004faed0(float* out)
 			sum_c = sum_c + *(unsigned short*) (g_696178 + type * 4 + 1);
 			if (*(unsigned short*) (g_696178 + type * 4 + 1) != 0) {
 				sum_a = sum_a
-				    + *(unsigned char*) (lpGebaeudePROT + type * 0x24d + 0x247);
+				    + ((StatsProto*)lpGebaeudePROT)[type].field247;
 				sum_b = sum_b
-				    + *(unsigned char*) (lpGebaeudePROT + type * 0x24d + 0x248);
+				    + ((StatsProto*)lpGebaeudePROT)[type].field248;
 			}
 			if (*(unsigned short*) (g_696178 + type * 4 + 3) != 0) {
 				sum_d = sum_d
-				    + *(unsigned char*) (lpGebaeudePROT + type * 0x24d + 0x247);
+				    + ((StatsProto*)lpGebaeudePROT)[type].field247;
 				slot0_e = slot0_e
-				    + *(unsigned char*) (lpGebaeudePROT + type * 0x24d + 0x248);
+				    + ((StatsProto*)lpGebaeudePROT)[type].field248;
 			}
 		}
 		rec += 0xa9;
 	}
 	limit = (int) g_696180 * 2;
-	if (weight_a <= (float) limit) {
-		weight_a = (float) limit;
+	if (weight_a <= limit) {
+		weight_a = limit;
 	}
-	oi[7] = sum_b;
+	f = (float)total;
+	oi[7] = weight_b;
 	oi[4] = total;
-	oi[8] = limit;
+	oi[8] = weight_a;
 	out[5] = (float) ((((double) sum_a / (double) sum_b)
 	    * ((double) sum_d / (double) slot0_e) + g_662908)
-	    * ((double) total / (double) weight_a) * (double) sum_c);
+	    * ((double) f / (double) weight_a) * (double) sum_c);
 	out[0] = fcn_004fc520();
-	out[3] = g_6628a0 - (float) slot1_count / (double) total;
-	out[1] = g_6628a0 - (float) slot0_count / (double) total;
-	scale = g_6628a0 / ((float) total + (float) total);
-	for (rec = (char*) g_99ef90; rec < (char*) 0x99f590; rec += 0x18) {
+	out[3] = g_6628a0 - (double) slot1_count / f;
+	out[1] = g_6628a0 - (double) slot0_count / f;
+	scale = g_6628a0 / (f + f);
+	for (rec = (char*) g_99ef90; rec < (char*) 0x99f590;) {
 		for (n = 8; n != 0; n--) {
 			f = *(float*) rec;
-			if (f < g_6628a0) {
+			if (!(f > g_6628a0)) {
 				f = g_6628a0;
 			}
 			*(float*) rec = f;
-			weight_b = scale * *(float*) (rec + 4);
-			*(float*) (rec + 4) = weight_b;
-			accum = (*(float*) (rec - 4) / f) * weight_b + accum;
+			normalized = scale * *(float*) (rec + 4);
+			*(float*) (rec + 4) = normalized;
+			accum = (*(float*) (rec - 4) / f) * normalized + accum;
 			rec += 0x18;
 		}
 	}
 	lit = fcn_004fc3a0(buf_a);
-	w = fcn_004fc340(buf_b);
+	w = fcn_004fc340(buf_a);
 	out[2] = (float) ((g_6629c8 - ((double) lit * (double) g_6629c0
 	    + w * g_664e60)) * (double) accum);
 	f = g_6628a0 - out[2];

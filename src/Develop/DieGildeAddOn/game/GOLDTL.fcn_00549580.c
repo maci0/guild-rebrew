@@ -54,9 +54,6 @@ void __cdecl fcn_00549580(int a0, char* a1, char* a2, char* a3,
 	GOLDTL_Msg549 msg;
 	char buf[0x800];
 	int t;
-	char* text;
-	int p1;
-	int p2;
 
 	p = a1;
 	if (a4 <= g_6628a8) {
@@ -81,7 +78,7 @@ void __cdecl fcn_00549580(int a0, char* a1, char* a2, char* a3,
 		msg.fc = -1;
 		msg.f34 = (unsigned short) g_7f4c0c;
 		msg.f36 = 2;
-		msg.f58 = *(int*) (p + 2);
+		msg.f58 = *(int*) (p + 4);
 		fcn_004c5530(&msg);
 		if (a2[2] != 6 && a2[2] != 7) {
 			return;
@@ -91,14 +88,13 @@ void __cdecl fcn_00549580(int a0, char* a1, char* a2, char* a3,
 		}
 		if (p[2] == 0x14) {
 			io_FormatTextBuffer(buf, 0x414a, *(unsigned short*) p, a3);
-			text = s_6a597c;
+			he_MessageBoxQuickjump(*(int*) (a2 + 4), *(int*) (a3 + 1), buf, 0, 0x60a,
+				*(int*) (a3 + 1), -1, 0, s_6a597c);
 		} else {
 			io_FormatTextBuffer(buf, 0x1bb0, *(unsigned short*) p, a3);
-			text = s_6a5968;
+			he_MessageBoxQuickjump(*(int*) (a2 + 4), *(int*) (a3 + 1), buf, 0, 0x60a,
+				*(int*) (a3 + 1), -1, 0, s_6a5968);
 		}
-		p1 = *(int*) (a2 + 4);
-		p2 = *(int*) (a3 + 1);
-		he_MessageBoxQuickjump(p1, p2, buf, 0, 0x60a, p2, -1, 0, text);
 		return;
 	}
 	if (fcn_004feff0((unsigned short*) p) * g_6628cc > a4) {
@@ -111,21 +107,18 @@ void __cdecl fcn_00549580(int a0, char* a1, char* a2, char* a3,
 				}
 				fcn_004c5420(*(int*) (p + 4), 0x1c8, 4, 0x800, 0);
 				if (v8 == -1) {
-					p1 = fcn_004c5da0(*(int*) (p + 4), v9, v8, 0, 1,
+					fcn_004c5da0(*(int*) (p + 4), v9, v8, 0, 1,
 									  s_6a5960);
 				} else {
-					p1 = fcn_004c5da0(*(int*) (p + 4), v9, v8, 0, 0,
+					fcn_004c5da0(*(int*) (p + 4), v9, v8, 0, 0,
 									  s_6a5960);
 				}
 				if (a2[2] != 6 && a2[2] != 7) {
 					return;
 				}
 				io_FormatTextBuffer(buf, 0x1baf, *(unsigned short*) p, a3);
-				p1 = *(int*) (a2 + 4);
-				p2 = *(int*) (a3 + 1);
-				text = s_6a594c;
-				he_MessageBoxQuickjump(p1, p2, buf, 0, 0x60a, p2, -1, 0,
-									   text);
+				he_MessageBoxQuickjump(*(int*) (a2 + 4), *(int*) (a3 + 1), buf, 0, 0x60a,
+					*(int*) (a3 + 1), -1, 0, s_6a594c);
 				return;
 			}
 		}
@@ -135,12 +128,11 @@ void __cdecl fcn_00549580(int a0, char* a1, char* a2, char* a3,
 	}
 	if (p[2] == 0x14) {
 		io_FormatTextBuffer(buf, 0x4149, *(unsigned short*) p, a3);
-		text = s_6a5930;
+		he_MessageBoxQuickjump(*(int*) (a2 + 4), *(int*) (a3 + 1), buf, 0, 0x60a,
+			*(int*) (a3 + 1), -1, 0, s_6a5930);
 	} else {
 		io_FormatTextBuffer(buf, 0x1bae, *(unsigned short*) p, a3);
-		text = s_6a594c;
+		he_MessageBoxQuickjump(*(int*) (a2 + 4), *(int*) (a3 + 1), buf, 0, 0x60a,
+			*(int*) (a3 + 1), -1, 0, s_6a594c);
 	}
-	p1 = *(int*) (a2 + 4);
-	p2 = *(int*) (a3 + 1);
-	he_MessageBoxQuickjump(p1, p2, buf, 0, 0x60a, p2, -1, 0, text);
 }

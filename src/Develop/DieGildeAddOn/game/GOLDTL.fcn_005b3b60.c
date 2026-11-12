@@ -16,6 +16,11 @@ extern unsigned short g_7f4c0c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/entity.h"
 extern char* g_773da8;
+extern int g_14ce8e0;
+extern int g_774654;
+extern int g_100f1dc;
+extern int g_67d370;
+extern int g_774954;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -30,7 +35,7 @@ void __cdecl fcn_00500bb0(void*, int, int, int);
 int __cdecl io_AppendText(char*);
 int __cdecl fcn_005373e0(int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl gm_RandomMod(int);
+int __cdecl gm_RandomMod(unsigned short);
 
 void __cdecl fcn_005b3b60(void)
 {
@@ -59,18 +64,18 @@ void __cdecl fcn_005b3b60(void)
 	item[5] = fcn_00472250(item[7], 0, io_AppendText("%ia[Duell]$N"));
 	if (fcn_005373e0(0x5b3b60, 0x657c7)) {
 		do {
-		if (*(int*) 0x14ce8e0) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0) {
+			g_774654 = 1;
 		}
-		if (*(int*) 0x100f1dc != -1) {
+		if (g_100f1dc != -1) {
 			memset(m, 0, sizeof(m));
-			k = *(int*) 0x67d370;
+			k = g_67d370;
 			if (k == item[9]) {
 				*(char*) (m + 8) = 5;
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
 				*(char*) (m + 0x30) = 2;
-				*(int*) (m + 0x34) = *(int*) 0x7f5730;
+				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[5].entity_id;
 				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(int*) (m + 0x38) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(char*) (m + 0x7c) = (char) gm_RandomMod(5);
@@ -115,7 +120,7 @@ void __cdecl fcn_005b3b60(void)
 				*(char*) (m + 0x30) = 2;
 				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				*(int*) (m + 0x38) = *(int*) ((char*) g_7f4ca0 + g_774970 * 0x21c + 0x858);
+				*(int*) (m + 0x38) = *(int*) ((char*) g_7f4ca0 + g_774970 * 0x21c + 0x658);
 				fcn_004e5a00(m);
 			} else if (k == item[8]) {
 				*(char*) (m + 8) = 9;
@@ -133,7 +138,7 @@ void __cdecl fcn_005b3b60(void)
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
 				fcn_004e5a00(m);
-				*(int*) 0x774954 = 0;
+				g_774954 = 0;
 			} else if (k == item[10]) {
 				memset(m, 0, sizeof(m));
 				*(char*) (m + 8) = 7;
@@ -145,7 +150,7 @@ void __cdecl fcn_005b3b60(void)
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
 				fcn_004e5a00(m);
-				*(int*) 0x774954 = 0;
+				g_774954 = 0;
 			} else if (k == item[6]) {
 				types[0] = 0xb;
 				types[1] = 0xd;
@@ -172,7 +177,7 @@ void __cdecl fcn_005b3b60(void)
 					fcn_00500bb0(m + 0x18, 0, 0x1e, 0);
 					fcn_004c5980(m);
 				}
-				*(int*) 0x774954 = 0;
+				g_774954 = 0;
 			} else if (k == item[0]) {
 				*(char*) (msg + 4) = 0x59;
 				*(int*) (msg + 8) = *(int*) (g_773da8 + 4);
@@ -256,7 +261,7 @@ void __cdecl fcn_005b3b60(void)
 				*(char*) (m + 0x7c) = 0;
 				fcn_00500bb0(m + 0x18, 0, 0x1e, 0);
 				fcn_004c5980(m);
-				*(int*) 0x774654 = 2;
+				g_774654 = 2;
 			}
 		}
 		} while (fcn_005373e0(0x5b3b60, 0x657c7));

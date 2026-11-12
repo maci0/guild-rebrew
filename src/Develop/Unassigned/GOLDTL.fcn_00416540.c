@@ -28,6 +28,7 @@ typedef struct {
 	float x;		/* +0x70 */
 	float y;		/* +0x74 */
 	float z;		/* +0x78 */
+	char pad7c[4];		/* +0x7c */
 	float px;		/* +0x80 */
 	float py;		/* +0x84 */
 	float pz;		/* +0x88 */
@@ -40,8 +41,8 @@ typedef struct {
 /* ADDRESS: GOLDTL 0x00416540 */
 void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 {
-	float in[3];
-	float out[12];
+	float in[3]; float dx; float dy; float dz;
+	float out[16];
 	float* m;
 	float* r;
 	float a0;
@@ -65,80 +66,81 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	float w;
 	int i;
 
-	m = (float*) (g_6b8014 + 0x18c);
 	in[0] = self->x - *(float*) (g_6b8014 + 0x84);
 	in[1] = self->y - *(float*) (g_6b8014 + 0x88);
 	in[2] = self->z - *(float*) (g_6b8014 + 0x8c);
 	fcn_00451900(in, out);
-	b0 = (out[6] + out[2]) * g_6628a8 + out[8] * g_6629b8;
+	b0 = (out[6] + out[2]) * g_6628a8 + out[8] * 1.9f;
 	self->x = *(float*) (g_6b8014 + 0x84);
 	self->y = *(float*) (g_6b8014 + 0x88);
 	self->z = *(float*) (g_6b8014 + 0x8c);
-	in[0] = self->px - *(float*) (g_6b8014 + 0x4c);
-	in[1] = self->py - *(float*) (g_6b8014 + 0x50);
-	in[2] = self->pz - *(float*) (g_6b8014 + 0x54);
-	a0 = (in[0] * m[0] + in[1] * m[4] + in[2] * m[8]) * g_662a70;
-	a1 = (in[0] * m[1] + in[1] * m[5] + in[2] * m[9]) * g_662a70;
-	a2 = (in[0] * m[2] + in[1] * m[6] + in[2] * m[10]) * g_662a70;
-	b1 = (out[5] + out[1]) * g_6628a8 + out[9] * g_6629b8;
+	b1 = (out[5] + out[1]) * g_6628a8 + out[9] * 1.9f;
+	dx = self->px - *(float*) (g_6b8014 + 0x4c);
+	dy = self->py - *(float*) (g_6b8014 + 0x50);
+	dz = self->pz - *(float*) (g_6b8014 + 0x54);
+	m = (float*) (g_6b8014 + 0x18c);
+	a0 = dz * m[8] + dy * m[4] + dx * m[0];
+	a1 = dz * m[9] + dy * m[5] + dx * m[1];
+	a2 = dz * m[10] + dy * m[6] + dx * m[2];
+	a0 *= 0.0025f; a1 *= 0.0025f; a2 *= 0.0025f;
 	self->px = *(float*) (g_6b8014 + 0x4c);
 	self->py = *(float*) (g_6b8014 + 0x50);
 	self->pz = *(float*) (g_6b8014 + 0x54);
 	t0 = self->u * m[0] + self->v * m[8] + m[4] * g_6628a8;
 	t1 = self->u * m[1] + self->v * m[9] + m[5] * g_6628a8;
 	t2 = self->u * m[2] + self->v * m[10] + m[6] * g_6628a8;
-	u0 = (m[0] + m[8]) * g_6628a8 - m[4] * g_6628a0;
-	u1 = (m[1] + m[9]) * g_6628a8 - m[5] * g_6628a0;
-	u2 = (m[2] + m[10]) * g_6628a8 - m[6] * g_6628a0;
+	u0 = (m[0] + m[8]) * g_6628a8 - m[4] * 1.0f;
+	u1 = (m[1] + m[9]) * g_6628a8 - m[5] * 1.0f;
+	u2 = (m[2] + m[10]) * g_6628a8 - m[6] * 1.0f;
 	hw = (float) ((g_1042578 - g_1042570) >> 1);
 	hh = (float) ((g_104257c - g_1042574) >> 1);
 	half = (hw > hh) ? hw : hh;
 	cx = (float) g_1042570 + hw;
 	cy = (float) g_1042574 + hh;
-	k = half * g_6628b0;
+	k = half * 3.0f;
 	i = 0;
 	r = self->list;
 	while (i < self->count) {
-		r[0] = (u0 * r[4] + t0 * r[3]) * dt + r[0] + a0 + b0;
-		if (r[0] < g_662a50) {
+		r[0] = (u0 * r[5] + t0 * r[4]) * dt + r[0] + a0 + b0;
+		if (r[0] < (-1.0)) {
 			do {
-				r[0] += g_662a48;
-			} while (r[0] < g_662a50);
+				r[0] += 2.0;
+			} while (r[0] < (-1.0));
 		}
-		if (g_6629c8 <= r[0]) {
+		if (1.0 <= r[0]) {
 			do {
-				r[0] -= g_662a48;
-			} while (g_6629c8 <= r[0]);
+				r[0] -= 2.0;
+			} while (1.0 <= r[0]);
 		}
-		r[1] = (u1 * r[4] + t1 * r[3]) * dt + r[1] + a1 + b1;
-		if (r[1] < g_662a50) {
+		r[1] = (u1 * r[5] + t1 * r[4]) * dt + r[1] + a1 + b1;
+		if (r[1] < (-1.0)) {
 			do {
-				r[1] += g_662a48;
-			} while (r[1] < g_662a50);
+				r[1] += 2.0;
+			} while (r[1] < (-1.0));
 		}
-		if (g_6629c8 <= r[1]) {
+		if (1.0 <= r[1]) {
 			do {
-				r[1] -= g_662a48;
-			} while (g_6629c8 <= r[1]);
+				r[1] -= 2.0;
+			} while (1.0 <= r[1]);
 		}
-		r[2] = (u2 * r[4] + t2 * r[3]) * dt + r[2] + a2 + a2;
-		if (r[2] < g_662a94) {
+		r[2] = (u2 * r[5] + t2 * r[4]) * dt + (a2 + a2) + r[2];
+		if (r[2] < (-1.0f)) {
 			do {
-				r[2] += g_662918;
-			} while (r[2] < g_662a94);
+				r[2] += 2.0f;
+			} while (r[2] < (-1.0f));
 		}
-		if (g_6628a0 <= r[2]) {
+		if (1.0f <= r[2]) {
 			do {
-				r[2] -= g_662918;
-			} while (g_6628a0 <= r[2]);
+				r[2] -= 2.0f;
+			} while (1.0f <= r[2]);
 		}
-		s = k / (r[2] + r[2] + g_6628b0);
-		r[5] = s * r[0] + cx;
-		r[6] = cy - s * r[1];
-		w = (g_6628a0 - r[1]) * g_662a90 + g_6628a0;
-		w *= r[2];
-		r[7] = r[5] + w;
-		r[8] = w + r[6];
+		s = k / (r[2] + r[2] + 3.0f);
+		r[6] = s * r[0] + cx;
+		r[7] = cy - s * r[1];
+		w = (1.0f - r[2]) * 13.5f + 1.0f;
+		w *= r[3];
+		r[8] = r[6] + w;
+		r[9] = w + r[7];
 		i++;
 		r += 10;
 	}

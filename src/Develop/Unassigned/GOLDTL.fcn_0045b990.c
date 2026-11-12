@@ -3,7 +3,7 @@
  * through *out.  tex[8] is the edge length, tex[10] the byte plane. */
 
 /* ADDRESS: GOLDTL 0x0045b990 */
-int __cdecl fcn_0045b990(float* tex, float* pt, int* outx, int* outy, float* out)
+char __cdecl fcn_0045b990(float* tex, float* pt, int* outx, int* outy, float* out)
 {
 	unsigned char* data;
 	int width;
@@ -26,16 +26,15 @@ int __cdecl fcn_0045b990(float* tex, float* pt, int* outx, int* outy, float* out
 	}
 	*outx = x;
 	*outy = y;
-	if (out == 0) {
-		return 1;
+	if (out != 0) {
+		data = *(unsigned char**) (tex + 10);
+		width = *(int*) (tex + 8);
+		s = ((float) data[width * y + x] + 0.5f) * tex[5] + tex[1];
+		fy = (pt[2] - (y * tex[6] + tex[2])) / tex[6];
+		t10 = ((float) data[width * ((y + 1) & (width - 1)) + x] + 0.5f) * tex[5] + tex[1];
+		fx = (pt[0] - (x * tex[4] + tex[0])) / tex[4];
+		t01 = ((float) data[width * y + ((x + 1) & (width - 1))] + 0.5f) * tex[5] + tex[1];
+		*out = (t01 - s) * fx + (t10 - s) * fy + s;
 	}
-	data = *(unsigned char**) (tex + 10);
-	width = *(int*) (tex + 8);
-	s = ((float) data[width * y + x] + *(float*) 0x6628cc) * tex[5] + tex[1];
-	fy = (pt[2] - (y * tex[6] + tex[2])) / tex[6];
-	t10 = ((float) data[width * ((y + 1) & (width - 1)) + x] + *(float*) 0x6628cc) * tex[5] + tex[1];
-	fx = (pt[0] - (x * tex[4] + tex[0])) / tex[4];
-	t01 = ((float) data[width * y + ((x + 1) & (width - 1))] + *(float*) 0x6628cc) * tex[5] + tex[1];
-	*out = (t01 - s) * fx + (t10 - s) * fy + s;
 	return 1;
 }

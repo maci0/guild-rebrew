@@ -1,6 +1,6 @@
-extern float g_6628a0;
+
 extern float g_6628a8;
-extern float g_6628cc;
+
 
 float __cdecl fcn_004ec8a0(char*, int);
 int* __cdecl fcn_004ec950(char*, unsigned int);
@@ -21,7 +21,7 @@ float __cdecl fcn_004ecd50(char* a0, unsigned int* a1, int* a2)
 	if (obj == 0) {
 		return g_6628a8;
 	}
-	if (*((float*) obj + 1) >= g_6628a0) {
+	if (*((float*) obj + 1) >= 1.0f) {
 		return g_6628a8;
 	}
 	v1 = *a2;
@@ -29,7 +29,7 @@ float __cdecl fcn_004ecd50(char* a0, unsigned int* a1, int* a2)
 		return g_6628a8;
 	}
 	v4 = fcn_004eccd0(a0, (char*) a1);
-	v5 = (int) ((float) v4 * (g_6628a0 - x * g_6628cc) * (g_6628a0 - *((float*) obj + 1)));
+	v5 = (int) ((float) v4 * (1.0f - x * 0.5f) * (1.0f - *((float*) obj + 1)));
 	if (v5 <= 0) {
 		return g_6628a8;
 	}
@@ -38,5 +38,5 @@ float __cdecl fcn_004ecd50(char* a0, unsigned int* a1, int* a2)
 		v6 = v1;
 	}
 	*a2 = v6;
-	return ((float) v6 / (float) v5) * (g_6628a0 - *((float*) obj + 1));
+	return ((float) v6 / (float) v5) * (1.0f - *((float*) obj + 1));
 }

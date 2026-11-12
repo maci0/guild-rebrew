@@ -18,7 +18,7 @@ int __cdecl fcn_004230e0(char* a0)
 	char* prev;
 	char* name;
 	char* s;
-	int n;
+
 	int i;
 	int left;
 
@@ -27,7 +27,7 @@ int __cdecl fcn_004230e0(char* a0)
 		return 1;
 	}
 	if (g_6b7d74 == 0 || a0 == 0) {
-		return -1;
+		r = -1; goto done;
 	}
 	prev = 0;
 	bank = g_6b7d78;
@@ -36,12 +36,12 @@ int __cdecl fcn_004230e0(char* a0)
 		bank = *(char**) (bank + 0x13c);
 	}
 	if (bank == 0) {
-		return r;
+		goto done;
 	}
 	left = *(int*) (bank + 0x140) - 1;
 	*(int*) (bank + 0x140) = left;
 	if (left > 0) {
-		return r;
+		goto done;
 	}
 	if (prev != 0) {
 		*(char**) (prev + 0x13c) = *(char**) (bank + 0x13c);
@@ -54,13 +54,13 @@ int __cdecl fcn_004230e0(char* a0)
 	if (*(int*) (bank + 0x134) > 0) {
 		do {
 			if (*(int*) (*(char**) (bank + 0x138) + i * 0x40 + 0x38) != 0) {
-				n = 0;
-				s = fcn_00422760(*(char**) (bank + 0x138) + i * 0x40, &n);
+				*(int*) &a0 = 0;
+				s = fcn_00422760(*(char**) (bank + 0x138) + i * 0x40, (int*) &a0);
 				while (s != 0) {
 					fcn_004237f0(s, 0);
 					*(int*) (s + 4) = 0;
-					n++;
-					s = fcn_00422760(*(char**) (bank + 0x138) + i * 0x40, &n);
+					(*(int*) &a0)++;
+					s = fcn_00422760(*(char**) (bank + 0x138) + i * 0x40, (int*) &a0);
 				}
 				if (*(char*) (*(char**) (bank + 0x138) + i * 0x40 + 0x36) == 1) {
 					g_6b7d74 += -12 - *(int*) (*(char**) (*(char**) (bank + 0x138) + i * 0x40 + 0x38) + 4);
@@ -77,5 +77,5 @@ int __cdecl fcn_004230e0(char* a0)
 	g_6b7d74 += -0x144 - *(int*) (bank + 0x134) * 0x40;
 	fcn_0064d41a(g_14cbae0, g_678f28, name, g_6b7d74);
 	m_FreeTracked(bank);
-	return r;
+done: return r;
 }

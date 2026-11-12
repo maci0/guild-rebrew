@@ -36,6 +36,9 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 	float invx;
 	float invy;
 	float invz;
+	int copy_len;
+	char* copy_src;
+	char* copy_dst;
 
 	if (a2 == 0) {
 		return 0;
@@ -76,16 +79,52 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 	if (*(int*) (a2 + 0xbc) != 0) {
 		*(char**) (*(int*) (p + 0x15c) + 0xbc) =
 		    m_alloc(*(int*) (p + 0x140) * 0xc, (char*) 0x67a194);
-		memcpy(*(char**) (*(int*) (p + 0x15c) + 0xbc), *(char**) (a2 + 0xbc),
-		    *(int*) (p + 0x140) * 0xc);
+		copy_len = *(int*) (p + 0x140) * 0xc;
+		copy_src = *(char**) (a2 + 0xbc);
+		copy_dst = *(char**) (*(int*) (p + 0x15c) + 0xbc);
+		__asm {
+			mov edi, copy_dst
+			mov esi, copy_src
+			mov ebx, copy_len
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short copy_done_1
+			rep movsb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep movsd
+		copy_done_1:
+			add ecx, ebx
+			rep movsb
+		}
 		*(char**) (*(int*) (p + 0x15c) + 0x17c) =
 		    m_alloc(*(int*) (p + 0x140) * 0xc, (char*) 0x67a174);
 	}
 	if (*(int*) (a2 + 0xb4) != 0) {
 		*(char**) (*(int*) (p + 0x15c) + 0xb4) =
 		    m_alloc(*(int*) (p + 0x140) * 3, (char*) 0x67a154);
-		memcpy(*(char**) (*(int*) (p + 0x15c) + 0xb4), *(char**) (a2 + 0xb4),
-		    *(int*) (p + 0x140) * 3);
+		copy_len = *(int*) (p + 0x140) * 3;
+		copy_src = *(char**) (a2 + 0xb4);
+		copy_dst = *(char**) (*(int*) (p + 0x15c) + 0xb4);
+		__asm {
+			mov edi, copy_dst
+			mov esi, copy_src
+			mov ebx, copy_len
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short copy_done_2
+			rep movsb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep movsd
+		copy_done_2:
+			add ecx, ebx
+			rep movsb
+		}
 		*(int*) (*(int*) (p + 0x15c) + 8) = *(int*) (a2 + 8);
 		*(int*) (*(int*) (p + 0x15c) + 0xc) = *(int*) (a2 + 0xc);
 		*(int*) (*(int*) (p + 0x15c) + 0x10) = *(int*) (a2 + 0x10);
@@ -247,12 +286,48 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 		*(int*) (*(int*) (p + 0x15c) + 0xf0) = *(int*) (a4 + 0x30);
 		*(int*) (*(int*) (p + 0x15c) + 0xf4) = *(int*) (a4 + 0x34);
 		if (*(int*) (a2 + 0xbc) != 0) {
-			memcpy(*(char**) (*(int*) (p + 0x15c) + 0x17c), *(char**) (a4 + 0xbc),
-			    *(int*) (p + 0x140) * 0xc);
+			copy_len = *(int*) (p + 0x140) * 0xc;
+			copy_src = *(char**) (a4 + 0xbc);
+			copy_dst = *(char**) (*(int*) (p + 0x15c) + 0x17c);
+			__asm {
+				mov edi, copy_dst
+				mov esi, copy_src
+				mov ebx, copy_len
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short copy_done_3
+				rep movsb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep movsd
+			copy_done_3:
+				add ecx, ebx
+				rep movsb
+			}
 		}
 		if (*(int*) (a2 + 0xb4) != 0) {
-			memcpy(*(char**) (*(int*) (p + 0x15c) + 0x174), *(char**) (a4 + 0xb4),
-			    *(int*) (p + 0x140) * 3);
+			copy_len = *(int*) (p + 0x140) * 3;
+			copy_src = *(char**) (a4 + 0xb4);
+			copy_dst = *(char**) (*(int*) (p + 0x15c) + 0x174);
+			__asm {
+				mov edi, copy_dst
+				mov esi, copy_src
+				mov ebx, copy_len
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short copy_done_4
+				rep movsb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep movsd
+			copy_done_4:
+				add ecx, ebx
+				rep movsb
+			}
 			*(int*) (*(int*) (p + 0x15c) + 0xc8) = *(int*) (a4 + 8);
 			*(int*) (*(int*) (p + 0x15c) + 0xcc) = *(int*) (a4 + 0xc);
 			*(int*) (*(int*) (p + 0x15c) + 0xd0) = *(int*) (a4 + 0x10);

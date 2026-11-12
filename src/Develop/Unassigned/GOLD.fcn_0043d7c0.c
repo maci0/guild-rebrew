@@ -16,7 +16,7 @@ void __cdecl fcn_0043d7c0(void *obj)
 		              (*(unsigned char *)((char*)obj + 0x210) & 0x80) ? 0 : g_6b8014,
 		              0, buf1);
 		((method_t)(*(void **)(*(char **)((char*)r + 0x10) + 0x1f0)))(
-			obj, r, buf1 + 0x10);
+			obj, r, buf1);
 		*(unsigned char *)((char*)obj + 0x210) |= 4;
 	}
 }

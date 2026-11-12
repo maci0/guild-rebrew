@@ -1,3 +1,9 @@
+extern int g_14cbca0;
+extern int g_6b8010;
+extern int g_6b8300;
+extern int g_6b89c0;
+extern int g_772f08;
+extern unsigned short g_774970;
 /* Release the client path/mode tables and reset the scene clock state. */
 
 void __cdecl fcn_004e48b0(void);
@@ -20,8 +26,9 @@ void __cdecl fcn_004d2a60(int a0)
 	int* q;
 
 	fcn_004e48b0();
-	if (*(int*) 0x772ea0) {
-		d3_DestroyObject(*(int*) 0x772ea0);
+	v = *(int*) 0x772ea0;
+	if (v) {
+		d3_DestroyObject(v);
 		*(int*) 0x772ea0 = 0;
 	}
 	fcn_004230e0(*(int*) 0x772ebc);
@@ -42,7 +49,7 @@ void __cdecl fcn_004d2a60(int a0)
 		fcn_004230e0(*(int*) 0x772ef0);
 		fcn_004230e0(*(int*) 0x772ef8);
 	}
-	for (i = 0; i < *(int*) 0x772f08; i++) {
+	for (i = 0; i < g_772f08; i++) {
 		d3_DestroyObject(*(int*) (0x9b9e40 + i * 4));
 	}
 	v = *(int*) 0x772f0c;
@@ -55,10 +62,10 @@ void __cdecl fcn_004d2a60(int a0)
 		if (*(unsigned short*) ((char*) q - 0x184) != 0xffff && *q) {
 			v = *(int*) (a0 + 0xc);
 			if (v ==
-			        *(int*) ((unsigned short) *(unsigned short*) 0x774970 *
+			        *(int*) ((unsigned short) g_774970 *
 			                     0x21c +
 			                 0x7f4ca4) ||
-			    *(int*) 0x14cbca0 == -1) {
+			    g_14cbca0 == -1) {
 				p = gm_LookupEntityRecordById(*(int*) ((char*) q - 0x180));
 				if (p[2] != 11) {
 					fcn_004ff210(*(unsigned short*) p,
@@ -71,10 +78,12 @@ void __cdecl fcn_004d2a60(int a0)
 		}
 		q = (int*) ((char*) q + 0x21c);
 	} while ((int) q < 0x9b8f44);
+	v = g_6b8300;
 	*(float*) 0x6a2570 = 1.0f;
-	if (*(int*) 0x6b8300) {
-		*(int*) 0x6b89c0 = 0;
-		*(int*) (0x1043378 + *(int*) 0x6b8010 * 0x3dc) = 0;
+	if (v) {
+		i = g_6b8010;
+		g_6b89c0 = 0;
+		*(int*) (0x1043378 + i * 0x3dc) = 0;
 	}
 	fcn_004e4910();
 	fcn_004c2d50();

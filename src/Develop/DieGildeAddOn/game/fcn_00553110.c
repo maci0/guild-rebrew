@@ -9,10 +9,10 @@ extern int g_100f884;
 extern int g_100f1dc;
 extern int g_14cbca0;
 
-int __cdecl fcn_005463a0(int a);
-int __cdecl gm_StartFilteredEntitySearch(int a);
+int __cdecl fcn_005463a0(int, ...);
+int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_00545780(int a);
-void __cdecl fcn_00546190(int a, int b, int c);
+void __cdecl fcn_00546190(int a);
 int __cdecl fcn_00500cb0(void* sel, int* out);
 void __cdecl fcn_00545670(int a, int b, int c, char* caption, int d);
 int __cdecl fcn_0051e070(void);
@@ -33,32 +33,40 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 	int col;
 
 	msg = 0;
-	actor = fcn_005463a0(1);
+	actor = fcn_005463a0(1, 1, *(int*) (dlg + 0xac));
 	if (actor != 0)
-		msg = gm_StartFilteredEntitySearch(1);
+		msg = gm_StartFilteredEntitySearch(1, 1, *(int*) (actor + 0xb0));
 	if (*(int*) (dlg + 0x70) == -2 || *(int*) (dlg + 0x70) == -1
 	    || actor == 0 || msg == 0) {
 		if (*(int*) (dlg + 0x74) != 0)
 			fcn_00545780(dlg);
-		fcn_00546190(dlg, 0, 0);
+		fcn_00546190(dlg);
 	}
-	if (*(int*) (dlg + 0x70) != 0) {
-		if (*(int*) (dlg + 0x70) != 1)
-			return;
+	switch (*(int*) (dlg + 0x70)) {
+	case 0:
+		goto open;
+	case 1:
+		break;
+	default:
+		return;
+	}
+	{
 		n = fcn_00500cb0((void*) 0x7f4c00, (int*) (dlg + 0x52));
-		id = g_7f4c0c;
-		v0 = g_7f4c00;
+		
+		
 		if (n > 0) {
 			fcn_00545780(dlg);
-			fcn_00546190(dlg, 0, 0);
+			fcn_00546190(dlg);
 			return;
 		}
 		if (g_100f884 != *(int*) (*(int*) (dlg + 0x74) + 8))
 			return;
 		if (g_100f1dc == -1)
 			return;
-		col = g_7f4c08;
 		v1 = g_7f4c04;
+		col = g_7f4c08;
+		v0 = g_7f4c00;
+		id = g_7f4c0c;
 		if (g_14cbca0 == -1) {
 			col = g_7f4c08 & 0xffff0000;
 			v1 = 6;
@@ -73,13 +81,13 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 			fcn_004c5620(3, actor);
 			fcn_004c5420(*(int*) (msg + 1), 0x5a, 2, 0x100, 0);
 			fcn_004c51a0(
-			    *(int*) ((unsigned short) (actor + 8) * 0x21c
+			    *(int*) (*(unsigned short*) (actor + 8) * 0x21c
 			    + 0x7f4ca4),
-			    *(int*) ((unsigned short) (msg + 0x27) * 0x21c
+			    *(int*) (*(unsigned short*) (msg + 0x27) * 0x21c
 			    + 0x7f4ca4), 0, *(int*) (actor + 0xb4));
 			if (*(int*) (actor + 0xbc) != -1) {
-				n = gm_StartFilteredEntitySearch(1);
-				*(int*) (n + 0x4d) = *(int*) (n + 0x4d)
+				msg = gm_StartFilteredEntitySearch(1, 1, *(int*) (actor + 0xbc));
+				*(int*) (msg + 0x4d) = *(int*) (msg + 0x4d)
 				    + *(int*) (actor + 0xb4);
 			}
 		} else if (g_100f1dc == 1) {
@@ -92,12 +100,13 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 			fcn_004c5620(3, actor);
 		}
 		fcn_00545780(dlg);
-		fcn_00546190(dlg, 0, 0);
+		fcn_00546190(dlg);
 		return;
 	}
+open:
 	fcn_00545670(dlg, 0, 0, "Berufe\\Messagebox_SCHUTZGELD", 0x5f3);
 	if (*(int*) (dlg + 0x74) == 0) {
-		fcn_00546190(dlg, 0, 0);
+		fcn_00546190(dlg);
 		return;
 	}
 	d2_SetForm(*(int*) (*(int*) (dlg + 0x74) + 8), 0);

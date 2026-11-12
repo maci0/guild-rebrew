@@ -27,11 +27,11 @@ typedef struct Ent {
 	unsigned short id;
 	char pad2[2];
 	int x4;
-	char pad8[0x15e];
-	unsigned char x166;
-	char pad167[0x163];
+	char pad8;
 	unsigned char x9;
-	char pad_after[0x21c - 0x167];
+	char padA[0x15c];
+	unsigned char x166;
+	char pad167[0xb5];
 } Ent;
 
 typedef struct Rec18 {
@@ -42,11 +42,11 @@ typedef struct Rec18 {
 
 extern char g_7f4ca0[];
 
-unsigned short __cdecl gm_RandomMod(int n);
+int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl fcn_00495400(int who, int idx, int arg, Msg* out1, Msg* out2);
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
-int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
+int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, unsigned short* out);
 
 /* ADDRESS: GOLDTL 0x0049a0c0 */
 int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
@@ -58,7 +58,7 @@ int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
 	Rec18 q;
 	int mask;
 	int idx1;
-	int idx2;
+	int idx2; unsigned short picked;
 	int r;
 	int i;
 	int k;
@@ -149,28 +149,28 @@ pick_used:
 	if (i == 9) {
 		mask = (2 - (((Ent*) e)->x9 != 0)) | 0xf00500;
 		idx1 = gm_RandomMod(0x20) & 0xffff;
-		if (fcn_004a5340(e, 1, &mask, 0x41200000, idx1 + *(float*) 0x662c98, &idx1) == 0) {
+		if (fcn_004a5340(e, 1, &mask, 10.0f, idx1 + *(float*) 0x662c98, &picked) == 0) {
 			return 0;
 		}
 		b.type = 7;
-		b.a = ((Ent*) g_7f4ca0)[idx1 & 0xffff].x4;
+		b.a = ((Ent*) g_7f4ca0)[picked].x4;
 		b.b = -1;
 	} else if (i == 10) {
 		mask = (2 - (((Ent*) e)->x9 != 1)) | 0xf00500;
 		idx2 = gm_RandomMod(0x20) & 0xffff;
-		if (fcn_004a5340(e, 1, &mask, 0x41200000, idx2 + *(float*) 0x662c98, &idx2) == 0) {
+		if (fcn_004a5340(e, 1, &mask, 10.0f, idx2 + *(float*) 0x662c98, &picked) == 0) {
 			return 0;
 		}
 		b.type = 7;
-		b.a = ((Ent*) g_7f4ca0)[idx2 & 0xffff].x4;
+		b.a = ((Ent*) g_7f4ca0)[picked].x4;
 		b.b = -1;
 	} else if (i == 8) {
-		r = fcn_00495400(k, ((Ent*) e)->id, 3, &b, &a);
+		r = fcn_00495400(k, ((Ent*) e)->id, 3, &a, &b);
 		if (r == 0) {
 			return 0;
 		}
-		*out1 = b;
-		*out2 = a;
+		*out1 = a;
+		*out2 = b;
 		return r;
 	}
 	*out1 = a;

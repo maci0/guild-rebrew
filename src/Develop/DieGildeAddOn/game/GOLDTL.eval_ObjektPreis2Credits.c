@@ -14,15 +14,21 @@ typedef struct fcn_0050b980_Rec {
 } fcn_0050b980_Rec;             /* SIZE 0x41 */
 #pragma pack(pop)
 
+typedef struct BUILDING_PRICE_ROW {
+    unsigned char unknown000[0x233];
+    unsigned char unknown233[2];
+    unsigned char unknown235[0x18];
+} BUILDING_PRICE_ROW;
+
 extern float g_6628a8;
 extern double g_662908;
-extern float g_662910;
-extern float g_6629b4;
+
+
 extern float g_662ac8;
 extern float g_662acc;
 extern double g_665bd8;
 extern float g_665be0;
-extern float g_665be4;
+
 #include "GOLDTL.fcn_0050b980_gconf.h"
 extern int g_99e0a0[];
 extern char* lpObjektePROT;
@@ -41,23 +47,26 @@ float __cdecl eval_ObjektPreis2Credits(int id, int a1)
     int v6;
     int i;
     unsigned short child;
+    char* childp;
+    BUILDING_PRICE_ROW* building;
 
     r = &((fcn_0050b980_Rec*) lpObjektePROT)[id];
     if (r->cache != 0) {
-        price = (float) (r->cache << 5) * (a1 & 0xff) * g_662910;
+        price = (float) (r->cache << 5) * (a1 & 0xff) * 0.01f;
         if (r->sub == 3) {
             return price * g_662acc;
         }
         return price;
     }
 
-    divisor = r->div ? (int) r->div : 1;
+    divisor = (int) r->div + (r->div == 0);
     q = (float) r->cap / divisor;
     v6 = g_99e0a0[id];
+    building = (BUILDING_PRICE_ROW*) g_entity_type_table + v6;
     if (v6) {
         acc = g_6628a8;
         for (i = 0; i < 2; i++) {
-            acc += g_entity_type_table[v6 * 0x24d + 0x233 + i] *
+            acc += building->unknown233[i] *
                    g_665be0 * g_665bd8;
         }
     } else {
@@ -66,16 +75,16 @@ float __cdecl eval_ObjektPreis2Credits(int id, int a1)
     price = q * (acc * g_662908);
 
     if (r->type == 0x17) {
-        return price * g_6629b4;
+        return price * 2.2f;
     }
 
-    for (i = 0; i < 4; i++) {
-        child = r->child[i];
+    for (i = 0, childp = (char*) r + 0x2e; i < 4; i++, childp += 2) {
+        child = *(unsigned short*) childp;
         if (child == 0) {
             break;
         }
         if (child != 0xffff) {
-            price = eval_ObjektPreis2Credits(child, a1) * r->weight[i] / r->div
+            price = eval_ObjektPreis2Credits(child, a1) * *(unsigned short*) (childp - 8) / r->div
                     + price;
         } else {
             sprintf(buf,
@@ -84,7 +93,9 @@ float __cdecl eval_ObjektPreis2Credits(int id, int a1)
                     g_14a79c0[id * 2]);
         }
     }
-    r->cache = (int) (price * g_665be4);
-    return (float) (a1 & 0xff) * price * g_662910 * g_6629b4;
+    r->cache = (int) (price * 0.06875f);
+    price = (float) (a1 & 0xff) * price;
+    price *= 0.01f;
+    return price * 2.2f;
 }
 #pragma optimize("", on)

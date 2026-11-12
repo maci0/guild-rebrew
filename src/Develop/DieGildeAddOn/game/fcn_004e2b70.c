@@ -106,10 +106,10 @@ void __cdecl fcn_004e2b70(void* arg)
 				f.ahi = 0;
 				f.alo = *(volatile int*) 0x6b7fac - start;
 				q = *(__int64*) &f.alo;
-				if ((float) q * *(float*) 0x664f28 < *(float*) 0x6628a0) {
+				if ((double) q * *(float*) 0x664f28 < *(float*) 0x6628a0) {
 					f.bhi = 0;
 					f.blo = *(volatile int*) 0x6b7fac - start;
-					f.f10 = (float) *(__int64*) &f.blo * *(float*) 0x664f28;
+					f.f10 = (double) *(__int64*) &f.blo * *(float*) 0x664f28;
 				} else {
 					f.f10 = 1.0f;
 				}

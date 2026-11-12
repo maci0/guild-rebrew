@@ -16,8 +16,8 @@ extern void __cdecl fcn_004c4510(char*, int);
 extern void __cdecl fcn_004c4570(unsigned char, unsigned char, short, void*);
 extern void __cdecl fcn_004c5360(void);
 extern void __cdecl fcn_004c5530(void*);
-extern int __cdecl gm_RandomMod(int, int);
-extern void __cdecl fcn_00500bb0(void*, int);
+extern unsigned short __cdecl gm_RandomMod(int);
+extern void __cdecl fcn_00500bb0(void*, int, int, int);
 extern char s_6903e8[];
 
 #pragma optimize("y", off)
@@ -37,6 +37,8 @@ void __cdecl fcn_004f6d60(unsigned int a0)
 	unsigned char count;
 	int v;
 	int limit;
+	char* fill_dst;
+	int fill_count;
 
 	slot = g_7f4ca0 + (a0 & 0xffff) * 0x21c;
 	if (*(short*) slot == -1) {
@@ -82,13 +84,31 @@ void __cdecl fcn_004f6d60(unsigned int a0)
 	if (count >= 9) {
 		return;
 	}
-	count = count + 1;
+	*((unsigned char*)&a0 + 3) = count + 1;
 	if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
 		fcn_004c4510(slot, *(int*) (slot + 4));
-		fcn_004c4570(1, 1, 0xd, &count);
+		fcn_004c4570(1, 1, 0xd, ((unsigned char*)&a0 + 3));
 		fcn_004c5360();
 	} else {
-		memset(msg, 0, 0xf8);
+		fill_dst = msg;
+		fill_count = 0xf8;
+		__asm {
+            mov edi, fill_dst
+            xor eax, eax
+            mov ebx, fill_count
+            lea ecx, [edi+edi*2]
+            and ecx, 3
+            sub ebx, ecx
+            jle short L_fill_tail0
+            rep stosb
+            mov ecx, ebx
+            and ebx, 3
+            shr ecx, 2
+            rep stosd
+        L_fill_tail0:
+            add ecx, ebx
+            rep stosb
+        }
 		*(int*) (msg + 0x2c) = g_7f4c00.b;
 		*(int*) (msg + 0x28) = g_7f4c00.a;
 		*(short*) (msg + 0x34) = g_7f4c00.d;
@@ -99,7 +119,7 @@ void __cdecl fcn_004f6d60(unsigned int a0)
 		*(unsigned char*) (msg + 0x36) = 9;
 		*(short*) (msg + 0x2c) = 7;
 		*(int*) (msg + 0x2e) = 0;
-		*(char*) (msg + 0x58) = (char) count;
+		*(char*) (msg + 0x58) = *((unsigned char*)&a0 + 3);
 		*(int*) (msg + 0x5c) = *(int*) (slot + 4);
 		fcn_004c5530(msg);
 	}
@@ -114,7 +134,25 @@ void __cdecl fcn_004f6d60(unsigned int a0)
 			return;
 		}
 		if ((*other == 6 || *other == 7) && other - 2 != slot) {
-			memset(msg, 0, 0xf8);
+			fill_dst = msg;
+			fill_count = 0xf8;
+			__asm {
+            mov edi, fill_dst
+            xor eax, eax
+            mov ebx, fill_count
+            lea ecx, [edi+edi*2]
+            and ecx, 3
+            sub ebx, ecx
+            jle short L_fill_tail1
+            rep stosb
+            mov ecx, ebx
+            and ebx, 3
+            shr ecx, 2
+            rep stosd
+        L_fill_tail1:
+            add ecx, ebx
+            rep stosb
+        }
 			*(int*) (msg + 0x2c) = g_7f4c00.b;
 			*(int*) (msg + 0x28) = g_7f4c00.a;
 			*(short*) (msg + 0x34) = g_7f4c00.d;
@@ -126,10 +164,10 @@ void __cdecl fcn_004f6d60(unsigned int a0)
 			*(short*) (msg + 0x2c) = 7;
 			*(int*) (msg + 0x2e) = 0;
 			if (*(char*) (slot + 2) == 5) {
-				limit = gm_RandomMod(8, 0);
-				fcn_00500bb0(msg + 0x28, gm_RandomMod(4, (limit & 0xffff) * 7) & 0xffff);
+				limit = gm_RandomMod(8);
+				fcn_00500bb0(msg + 0x28, gm_RandomMod(4), limit * 7, 0);
 			}
-			*(char*) (msg + 0x58) = (char) count;
+			*(char*) (msg + 0x58) = *((unsigned char*)&a0 + 3);
 			*(int*) (msg + 0x5c) = *(int*) (slot + 4);
 			fcn_004c5530(msg);
 			v++;

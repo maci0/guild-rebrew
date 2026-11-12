@@ -1,5 +1,5 @@
 int __cdecl fcn_004f4830(int, void*);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c5480(int, int, float);
 void __cdecl fcn_004c4510(void*, int);
 void __cdecl fcn_004c4570(int, int, int, void*);
@@ -20,7 +20,7 @@ void __cdecl fcn_004fd780(void)
 	char info[0x1c];
 	char* p;
 	int mode;
-	int kind;
+	unsigned char kind;
 	int count;
 	int arg;
 	float now;
@@ -35,11 +35,11 @@ void __cdecl fcn_004fd780(void)
 		g_773d48 = 0;
 		do {
 			if (*(short*) (p - 2) != -1) {
-				kind = p[0];
+				kind = *(unsigned char*) p;
 				if (kind <= 9 && kind != 0 && kind != 6 && kind != 7
 					&& kind != 8 && *(unsigned short*) (p + 8) >= 0xc) {
 					now = gm_RandomFloat01();
-					if (*(float*) (p + 0x1ce) < now * *(float*) 0x6629d0) {
+					if (now * *(float*) 0x6629d0 > *(float*) (p + 0x1ce)) {
 						count = (p[0xa] == 0);
 						now = gm_RandomFloat01();
 						fcn_004c5480(*(int*) (p + 2), 0x1d0,
@@ -49,7 +49,7 @@ void __cdecl fcn_004fd780(void)
 						fcn_004c4570(1, 1, 0xc, &count);
 						fcn_004c5360();
 						g_773d48++;
-						if (g_773d48 >= 0x41) {
+						if (g_773d48 > 0x40) {
 							fcn_00535960();
 							g_773d48 = 0;
 						}
@@ -61,13 +61,14 @@ void __cdecl fcn_004fd780(void)
 		g_773d48 = 0;
 		return;
 	}
+	g_773d48 = 0;
 	p = (char*) 0x7f4ca2;
 	do {
 		if (*(short*) (p - 2) != -1) {
-			kind = p[0];
+			kind = *(unsigned char*) p;
 			if (kind <= 9 && kind != 0 && kind != 6 && kind != 7 && kind != 8
 				&& *(unsigned short*) (p + 8) >= 0xc
-				&& (p[0xa] != 0) != (mode != 0)) {
+				&& *(unsigned char*) (p + 0xa) != (mode != 0)) {
 				arg = -1;
 				if (*(int*) (p + 0x16e) != 0) {
 					arg = *(int*) (*(int*) (p + 0x16e) + 1);
@@ -75,11 +76,11 @@ void __cdecl fcn_004fd780(void)
 				if (fcn_004f4f60(2, mode == 0, *(int*) (p + 2), -1, arg) != -1) {
 					g_773d48++;
 				}
-				if (*(float*) 0x662a3c < *(float*) (p + 0x1ce)) {
+				if (*(float*) (p + 0x1ce) > *(float*) 0x662a3c) {
 					fcn_004c5480(*(int*) (p + 2), 0x1d0, -0.1f);
 				}
 				g_773d48++;
-				if (g_773d48 >= 0x41) {
+				if (g_773d48 > 0x40) {
 					fcn_00535960();
 					g_773d48 = 0;
 				}

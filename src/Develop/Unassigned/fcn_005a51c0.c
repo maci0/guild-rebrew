@@ -32,9 +32,6 @@ int __cdecl fcn_005a51c0(unsigned char* entity)
 	int off;
 	int count;
 	char* str;
-	unsigned char* dst;
-	unsigned char* src;
-	int c;
 	int cmp;
 
 	slot = 0;
@@ -69,14 +66,7 @@ int __cdecl fcn_005a51c0(unsigned char* entity)
 				*(unsigned short*) (name_a + 8) = *(unsigned short*) 0x6aac60;
 			} else {
 				str = *(char**) (0x14a79c0 + slot_val * 8);
-				dst = (unsigned char*) name_a;
-				src = (unsigned char*) str;
-				do {
-					c = *src;
-					*dst = (unsigned char) c;
-					dst++;
-					src++;
-				} while (c != 0);
+				strcpy(name_a, str);
 			}
 			slot_val = *(int*) next_field;
 			if (slot_val == (int) sort_key) {
@@ -89,38 +79,9 @@ int __cdecl fcn_005a51c0(unsigned char* entity)
 				*(unsigned short*) (name_b + 8) = *(unsigned short*) 0x6aac60;
 			} else {
 				str = *(char**) (0x14a79c0 + slot_val * 8);
-				dst = (unsigned char*) name_b;
-				src = (unsigned char*) str;
-				do {
-					c = *src;
-					*dst = (unsigned char) c;
-					dst++;
-					src++;
-				} while (c != 0);
+				strcpy(name_b, str);
 			}
-			cmp = 0;
-			{
-				unsigned char* pa;
-				unsigned char* pb;
-				pa = (unsigned char*) name_a;
-				pb = (unsigned char*) name_b;
-				for (;;) {
-					unsigned char da;
-					unsigned char db;
-					da = *pa;
-					db = *pb;
-					if (da != db) {
-						cmp = (da > db) ? 1 : -1;
-						break;
-					}
-					if (da == 0) {
-						cmp = 0;
-						break;
-					}
-					pa++;
-					pb++;
-				}
-			}
+			cmp = strcmp(name_a, name_b);
 			if (cmp == 1) {
 				next_record = next_field - 0xc;
 				memcpy(tmp, prev_ptr, 0x1c);
@@ -144,6 +105,7 @@ int __cdecl fcn_005a51c0(unsigned char* entity)
 			gbase = *(int**) 0x77255c;
 			obj_tbl = *(int**) 0x1015ea0;
 			fcn_00469c40(*(int*) ((char*) obj_tbl + owner * 0x2f4 + 0x10), *(int*) ((char*) gbase + 8) + off, owner);
+			gbase = *(int**) 0x77255c; obj_tbl = *(int**) 0x1015ea0; rec1 = p[1];
 			fcn_00469c40(*(int*) ((char*) obj_tbl + rec1 * 0x2f4 + 0x10), *(int*) ((char*) gbase + 8) + off + 0x30, rec1);
 			off += 0x4c;
 		}

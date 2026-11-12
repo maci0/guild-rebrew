@@ -38,6 +38,7 @@ unsigned int* __cdecl fcn_00459870(char* a0, unsigned int a1, int a2, unsigned i
 				while (*(int*) ((char*) v1 + 0x20) != 0)
 					v1 = (int*) *(int*) ((char*) v1 + 0x20);
 				*(int**) ((char*) v1 + 0x20) = (int*) v2;
+				return v2;
 			}
 		}
 		*(int**) (a0 + 0x24) = (int*) v2;

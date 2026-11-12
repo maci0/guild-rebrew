@@ -38,6 +38,7 @@ void __cdecl fcn_004442be0(char* o);
 void __cdecl fcn_00513d40(char* name)
 {
 	char* c;
+	char* next;
 	char* e;
 	char* oo;
 	char* o;
@@ -84,16 +85,17 @@ void __cdecl fcn_00513d40(char* name)
 		}
 	}
 	for (j = 0; j < q.count; j++) {
-		e = fcn_00439750(2, name);
 		oo = q.list[j];
+		e = fcn_00439750(2, name);
 		fcn_00439aa0(e);
 		fcn_004458e0(e, *(char**) (oo + 0x1fc));
 		fcn_00438b40(e, (float*) (oo + 0x4c));
 		fcn_00438cb0(e, (float*) (oo + 0x84));
 		c = *(char**) (oo + 0x200);
 		while (c != 0) {
+			next = *(char**) (c + 0x1f4);
 			fcn_004458e0(c, e);
-			c = *(char**) (c + 0x1f4);
+			c = next;
 		}
 		fcn_004442be0(oo);
 	}

@@ -21,7 +21,7 @@ extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_67d370;
-extern float g_662cf8;
+
 extern char* g_14b58e8;
 extern char* g_14b58ec;
 extern char* g_14b58f0;
@@ -110,7 +110,7 @@ void __cdecl fcn_00585910(char* e)
 	fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
 	fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
 	ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, g_772514);
-	d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * g_662cf8));
+	d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 	io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
 	item = d2_ShowTxt(0, 0, buf, ids[1]);
 	((Ctl*) g_1015ea0)[item].x18 = g_1015f40[ids[1]].xc;
@@ -169,7 +169,7 @@ void __cdecl fcn_00585910(char* e)
 			((Ctl*) g_1015ea0)[item].x18 = ((Screen*) g_77255c)->xc;
 			((Ctl*) g_1015ea0)[item].x6c = 1;
 			fcn_00472900(item, 0x54);
-			d2_SetElementValue(ids[2], 0, 0x64, (int) (frac * g_662cf8));
+			d2_SetElementValue(ids[2], 0, 0x64, (int) (frac * 100.0f));
 		}
 		if (sel != prev || g_6b7fac > (unsigned int) (stamp + 0x32)) {
 			data = fcn_004ec7d0((unsigned char*) e);
@@ -184,7 +184,7 @@ void __cdecl fcn_00585910(char* e)
 			fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
 			fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
 			ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, g_772514);
-			d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * g_662cf8));
+			d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 			io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
 			item = d2_ShowTxt(0, 0, buf, ids[1]);
 			((Ctl*) g_1015ea0)[item].x18 = g_1015f40[ids[1]].xc;

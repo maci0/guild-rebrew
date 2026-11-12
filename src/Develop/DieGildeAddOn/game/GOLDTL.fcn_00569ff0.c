@@ -1,4 +1,10 @@
 #include <string.h>
+extern char g_6b5c60;
+extern double g_6640e8;
+extern double g_665ed0;
+extern float g_662910;
+extern float g_662a2c;
+extern int g_7f4c08;
 
 /* Out-parameter block of the entity search helper at 0x55be70. */
 typedef struct {
@@ -58,7 +64,7 @@ void* __cdecl fcn_00509570(char*);
 		char* _msg = (dst); \
 		*(int*) _msg = *(int*) 0x7f4c00; \
 		*(int*) (_msg + 4) = *(int*) 0x7f4c04; \
-		*(int*) (_msg + 8) = *(int*) 0x7f4c08; \
+		*(int*) (_msg + 8) = g_7f4c08; \
 		*(unsigned short*) (_msg + 12) = *(unsigned short*) 0x7f4c0c; \
 	} while (0)
 
@@ -312,14 +318,14 @@ void __cdecl fcn_00569ff0(char* e)
 				fv = 0.001f;
 			} else {
 				num = *(unsigned char*) (cnt2 + 0x37);
-				fv = (float) num * *(double*) 0x6640e8;
-				if (*(float*) 0x662a2c > fv) {
+				fv = (float) num * g_6640e8;
+				if (g_662a2c > fv) {
 					fv = 0.001f;
 				}
 			}
 			num = fcn_0050c710(pa, 7, 1);
-			*(float*) &num = (float) num * *(float*) 0x662910;
-			fv = fv - *(float*) &num * *(double*) 0x665ed0;
+			*(float*) &num = (float) num * g_662910;
+			fv = fv - *(float*) &num * g_665ed0;
 			if (fv > gm_RandomFloat01()) {
 				flag = 1;
 			} else {
@@ -334,7 +340,7 @@ void __cdecl fcn_00569ff0(char* e)
 		        *(int*) (px + 4), *(int*) (pa + 1));
 		if (flag != 0) {
 			memset(b400, 0, 0x400);
-			b400[0] = *(char*) 0x6b5c60;
+			b400[0] = g_6b5c60;
 		}
 		pa = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 		if (pa == 0) {

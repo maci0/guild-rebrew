@@ -7,7 +7,7 @@ extern float g_6628b0;
 
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl fcn_004518a0(float* v);
-int __cdecl fcn_0045b990(float* tex, float* pt, int* outx, int* outy, float* out);
+char __cdecl fcn_0045b990(float* tex, float* pt, int* col, int* row, float* out);
 
 /* ADDRESS: GOLDTL 0x00402d00 */
 void __cdecl fcn_00402d00(char* a0)
@@ -15,15 +15,15 @@ void __cdecl fcn_00402d00(char* a0)
 	float limit = 50.0f;
 	float t;
 	float dist;
-	int outx;
-	int outy;
+	int col;
+	int row;
 	float out;
-	float dx;
-	float dy;
-	float dz;
+	float direction[3];
+
+
 	float pt[3];
 	int list[16];
-	int i;
+	int i = 0;
 	void** p;
 	char* e;
 	char* s;
@@ -41,7 +41,6 @@ void __cdecl fcn_00402d00(char* a0)
 	if (*(char**) (a0 + 0x128) != 0 && *(char*) (*(char**) (a0 + 0x128) + 9) == '-') {
 		limit = 100.0f;
 	}
-	i = 0;
 	p = g_14d0020;
 	do {
 		if (i >= 0xf) {
@@ -64,7 +63,7 @@ void __cdecl fcn_00402d00(char* a0)
 			}
 			if (CompareVector3WithinTolerance((float*) (*(char**) (a0 + 0x34) + 0x4c),
 			                 (float*) (s + 0x4c), limit) != 0) {
-				list[i] = (int) e;
+				list[i] = (int) *p;
 				i++;
 			}
 		}
@@ -78,39 +77,37 @@ next:
 		}
 		e = (char*) list[i];
 		s = *(char**) (a0 + 0x34);
-		dx = *(float*) (*(char**) (e + 0x34) + 0x4c) - *(float*) (s + 0x4c);
-		dy = *(float*) (*(char**) (e + 0x34) + 0x50) - *(float*) (s + 0x50);
-		dz = *(float*) (*(char**) (e + 0x34) + 0x54) - *(float*) (s + 0x54);
-		dist = (float) sqrt(dx * dx + dy * dy + dz * dz);
+		direction[0] = *(float*) (*(char**) (e + 0x34) + 0x4c) - *(float*) (s + 0x4c);
+		direction[1] = *(float*) (*(char**) (e + 0x34) + 0x50) - *(float*) (s + 0x50);
+		direction[2] = *(float*) (*(char**) (e + 0x34) + 0x54) - *(float*) (s + 0x54);
+		dist = (float) sqrt(direction[0] * direction[0] + direction[1] * direction[1] + direction[2] * direction[2]);
 		if (dist == g_6628a8) {
-			dx = (float) (rand() % 2 - 1);
-			dy = (float) (rand() % 2 - 1);
-			dz = (float) (rand() % 2 - 1);
-			dist = (float) sqrt(dx * dx + dy * dy + dz * dz);
+			direction[0] = (float) (rand() % 2 - 1);
+			direction[1] = (float) (rand() % 2 - 1);
+			direction[2] = (float) (rand() % 2 - 1);
+			dist = (float) sqrt(direction[0] * direction[0] + direction[1] * direction[1] + direction[2] * direction[2]);
 		}
-		t = (limit - dist - dist) / limit;
-		if (t > g_6628a8) {
-			t = t;
-		} else {
+		t = (limit - (dist + dist)) / limit;
+		if (g_6628a8 > t) {
 			t = 0.0f;
 		}
-		dx = -dx;
-		dy = -dy;
-		dz = -dz;
-		fcn_004518a0(&dx);
+		direction[0] = -direction[0];
+		direction[1] = -direction[1];
+		direction[2] = -direction[2];
+		fcn_004518a0(direction);
 		t = t * g_6628b0;
 		s = *(char**) (a0 + 0x34);
-		pt[0] = *(float*) (s + 0x4c) + t * dx;
+		pt[0] = *(float*) (s + 0x4c) + t * direction[0];
 		pt[1] = *(float*) (s + 0x50);
-		pt[2] = *(float*) (s + 0x54) + t * dz;
+		pt[2] = *(float*) (s + 0x54) + t * direction[2];
 		*(unsigned short*) (a0 + 0x8c) |= 1;
 		*(int*) (a0 + 0x58) = 0;
-		*(float*) (a0 + 0x54) = t * dx;
-		*(float*) (a0 + 0x5c) = t * dz;
+		*(float*) (a0 + 0x54) = t * direction[0];
+		*(float*) (a0 + 0x5c) = t * direction[2];
 		s = *(char**) (a0 + 0x88);
 		e = *(char**) (s + 0xb0);
-		if (e != 0 && fcn_0045b990((float*) e, pt, &outx, &outy, &out) != 0) {
-			type = *(int*) (*(char**) (e + 0x24) + (*(int*) (e + 0x20) * outx + outy) * 0x1c);
+		if (e != 0 && fcn_0045b990((float*) e, pt, &col, &row, &out) != 0) {
+			type = *(int*) (*(char**) (e + 0x24) + (*(int*) (e + 0x20) * row + col) * 0x1c);
 			if (type == 0 || type == 0xd) {
 				*(unsigned short*) (a0 + 0x8c) &= 0xfe;
 			}

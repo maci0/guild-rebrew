@@ -19,6 +19,8 @@ extern int g_100f1dc;
 extern int g_67d370;
 extern int g_772514;
 extern char g_6b5c60[];
+extern double g_662c38;
+extern char g_67d444[];
 
 void __cdecl ResetDisplayCounters(void);
 void __cdecl fcn_00473690(int, int);
@@ -60,7 +62,10 @@ void __cdecl fcn_004d0a20(void)
 	do {
 		if (q->win != -1) {
 			v = q->unit;
-			if (*(int*) (*(int*) (*(int*) (v + 0x184) + 0x34) + 0x218) != 1) {
+			if (*(int*) (*(int*) (*(int*) (v + 0x184) + 0x34) + 0x218) == 1) {
+				fcn_00472170(*(int*) (g_10161bc + q->win * 0x3cc), 0);
+				fcn_00472170(*(int*) (g_10161bc + q->frame * 0x3cc), 0);
+			} else {
 				if (*(char*) (v + 0x188) != 0) {
 					fcn_00473690(*(int*) (v + 0x18c), 1);
 					d2_SetElementValue(q->icon, 1);
@@ -69,7 +74,7 @@ void __cdecl fcn_004d0a20(void)
 					d2_SetElementValue(q->icon, 0);
 				}
 				io_FormatTextBuffer(buf, (char*) 0x68b838, *(unsigned short*) q->unit,
-					(int) (fcn_004ff040(q->unit) * *(double*) 0x662c38));
+					(int) (fcn_004ff040(q->unit) * g_662c38));
 				fcn_0046f940(q->text, buf);
 				r = (int*) fcn_004ce5c0(q->unit);
 				if (r != 0 && *r != 0) {
@@ -90,7 +95,7 @@ relabel:
 						if (*(int*) (r + 0x16) == 1 || *(int*) (r + 0x16) == 2) {
 							v = fcn_004ce680(q->unit);
 							if (v != 0) {
-								sprintf(buf, (char*) 0x67d444, *(int*) (v + 0x20));
+								sprintf(buf, g_67d444, *(int*) (v + 0x20));
 								fcn_0046f940(q->label, buf);
 								goto next;
 							}
@@ -100,9 +105,6 @@ relabel:
 						}
 					}
 				}
-			} else {
-				fcn_00472170(*(int*) (g_10161bc + q->win * 0x3cc), 0);
-				fcn_00472170(*(int*) (g_10161bc + q->frame * 0x3cc), 0);
 			}
 		}
 next:

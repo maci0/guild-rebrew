@@ -63,7 +63,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 	int j;
 	int i;
 	int found;
-	int id;
+	int* q;
 	char* p;
 
 	seen[0] = -1;
@@ -82,12 +82,12 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 	changed = 1;
 	do {
 		for (j = 0; j < 3; j++) {
-			id = *(int*) (a1 + 0x1c + j * 4);
-			if (fcn_004f7120(id, (char*) ((*(unsigned short*) (a0 + 0x27)) * 0x21c + 0x7f4ca0),
+			q = (int*) (a1 + 0x1c + j * 4);
+			if (fcn_004f7120(*q, (char*) ((*(unsigned short*) (a0 + 0x27)) * 0x21c + 0x7f4ca0),
 				&out1, out2, &idx[j])) {
-				if (seen[j] != id)
+				if (seen[j] != *q)
 					changed = 1;
-				seen[j] = id;
+				seen[j] = *q;
 				vals[j] = out1;
 				sel[j].who = (char*) ((out2[0] & 0xffff) * 0x21c + 0x7f4ca0);
 			} else if (seen[j] != -1) {
@@ -121,7 +121,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 		}
 		if (g_100f1dc != -1) {
 			for (j = 0; j < 3; j++) {
-				if (g_67d370 == *(int*) &sel[j])
+				if (g_67d370 == *(int*) sel[j].pad4)
 					break;
 			}
 			if (j < 3) {

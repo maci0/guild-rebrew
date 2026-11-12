@@ -1,20 +1,20 @@
 extern float g_6628a0;
 extern float g_6628cc;
 extern float g_662918;
-extern float g_662930;
-extern float g_662950;
+extern double g_662930;
+extern double g_662950;
 extern float g_662a18;
 extern float g_662a68;
 extern float g_662a98;
-extern float g_662aa0;
+extern double g_662aa0;
 extern float g_662aac;
 extern float g_662ab0;
 extern float g_662ab4;
 extern float g_662ab8;
-extern float g_662ac0;
+extern double g_662ac0;
 extern float g_662ac8;
 extern float g_662acc;
-extern float g_662ad0;
+extern double g_662ad0;
 
 int __cdecl rand(void);
 
@@ -31,7 +31,7 @@ typedef struct fcn_004172e0_Particle {
     float f24;
     float f28;
     float f2c;
-    float f30;
+    unsigned int f30;
     float f34;
     float f38;
     float f3c;
@@ -58,17 +58,17 @@ typedef struct fcn_004172e0_Emitter {
 } fcn_004172e0_Emitter; /* SIZE 0xdc */
 
 /* ADDRESS: GOLDTL 0x004172e0 */
-int __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, float t)
+unsigned char __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, unsigned int t)
 {
     fcn_004172e0_Particle* p;
     int i;
-    float cur;
-    float dt;
+    unsigned int cur;
+    double dt;
 
-    if (e->f20 != 0) {
+    i = 0; if (e->f20 != 0) {
         p = e->particles;
         e->f20 = 0;
-        for (i = 0; i < e->count; i++, p++) {
+        for (; i < e->count; i++, p++) {
             if (!(p->flags & 1)) {
                 p->f38 = (float) rand() * g_662a18 * g_662ad0 - g_662918;
                 p->f3c = (float) rand() * g_662a18 * g_662930 - g_662acc;
@@ -88,20 +88,18 @@ int __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, float t)
         if (p->flags & 1) {
             cur = p->f30;
             p->f30 = t;
-            dt = (float) (unsigned int) ((int) t - (int) cur) * g_662a68;
+            dt = (double) (t - cur) * g_662a68;
             p->f38 = dt * p->f00 + p->f38;
             p->f3c = dt * p->f04 + p->f3c;
             p->f40 = dt * p->f08 + p->f40;
-            if (e->f08 <= p->f3c) {
-                p->f04 = p->f04 - dt * e->f04;
-            } else {
+            if (p->f3c < e->f08) {
                 p->f3c = e->f08;
                 p->f04 = p->f04 * g_662ab4;
                 p->f00 = p->f00 - p->f00 * g_662ab0;
                 p->f08 = p->f08 - p->f08 * g_662aac;
-            }
+            } else { p->f04 = p->f04 - dt * e->f00; }
             p->f10 = p->f10 - dt * e->f04;
-            if (p->f10 <= g_662950) {
+            if (!(p->f10 > g_662950)) {
                 p->flags = p->flags & 0xfe;
             } else {
                 p->f4f = (char) (int) p->f10;

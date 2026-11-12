@@ -19,7 +19,7 @@ typedef struct {
 	float y;
 	float z;
 	char pad0c[0x14];
-	float q;
+	unsigned int q;
 	char pad24[4];
 	char* particles;
 	char pad2c[0xac];
@@ -36,12 +36,12 @@ extern float g_662b08;
 extern float g_662b0c;
 extern float g_662b10;
 
-int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, char* e, void (__cdecl* cb)(void));
+int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, float a, char* e, void (__cdecl* cb)(void));
 void __cdecl fcn_004526d0(int* s, float* pos);
 void __cdecl fcn_00417bf0(void);
 
 /* ADDRESS: GOLDTL 0x00417d00 */
-int* __cdecl fcn_00417d00(char* a0, float* pos, int n, float a3, float a4, float a5, int a6, float a7)
+int* __cdecl fcn_00417d00(char* a0, float* pos, int n, float a3, float a4, float a5, float a6, int a7)
 {
 	Bytes4 f;
 	Explosion417d00* s;
@@ -68,10 +68,9 @@ int* __cdecl fcn_00417d00(char* a0, float* pos, int n, float a3, float a4, float
 	fcn_004526d0((int*) s, pos);
 	s->x = a3;
 	s->y = a4;
-	s->z = a5;
 	s->q = a7;
-	for (i = 0; i < s->count; i++) {
-		v4 = (float*) (s->particles + 0x14 + i * 0x54);
+	s->z = a5;
+	for (i = 0, v4 = (float*) (s->particles + 0x14); i < s->count; i++, v4 += 0x15) {
 		*(unsigned char*) ((char*) v4 + 0x3d) |= 1;
 		v[1] = rand() * g_662a18;
 		v[2] = rand() * g_662a18;

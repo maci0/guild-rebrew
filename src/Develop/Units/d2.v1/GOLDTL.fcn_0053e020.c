@@ -1,3 +1,11 @@
+extern int g_7e2468;
+extern int g_774654;
+extern int g_7725c8;
+extern int g_68bfb8;
+extern int g_67d370;
+extern int g_14ce8e0;
+extern int g_1040494;
+extern int g_1040490;
 int __cdecl fcn_004432d0();
 int __cdecl d2_CreateRadioGroup();
 int __cdecl fcn_00469470();
@@ -74,20 +82,20 @@ int __cdecl fcn_0053e020(void)
 		}
 		d2_UpdateRadioGroup(v7);
 		r = *(int*) &g_100f1dc;
-		if (*(int*) 0x14ce8e0 || *(unsigned char*) &g_14cf950 == 1 || r == 1) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 || *(unsigned char*) &g_14cf950 == 1 || r == 1) {
+			g_774654 = 1;
 		}
 		if (r == 2 || v1) {
 			v1 = 0;
-			if (*(int*) 0x67d370 == v4) {
+			if (g_67d370 == v4) {
 				*(unsigned char*) &g_6a3440 = 0xff;
-			} else if (*(int*) 0x67d370 == v5) {
+			} else if (g_67d370 == v5) {
 				*(unsigned char*) &g_6a3440 = 1;
-			} else if (*(int*) 0x67d370 == v6) {
+			} else if (g_67d370 == v6) {
 				*(unsigned char*) &g_6a3440 = 2;
-			} else if (*(int*) 0x67d370 == v3) {
+			} else if (g_67d370 == v3) {
 				*(unsigned char*) &g_6a3440 = 3;
-			} else if (*(int*) 0x67d370 == v13) {
+			} else if (g_67d370 == v13) {
 				*(unsigned char*) &g_6a3440 = 5;
 			}
 			r = *(signed char*) &g_6a3440;
@@ -100,13 +108,13 @@ int __cdecl fcn_0053e020(void)
 			d2_SelectRadioGroup(v7, v8);
 			fcn_00471af0(v2, 0);
 			*(int*) &g_7e46ac = 0x12d6;
-			*(int*) 0x68bfb8 = 0x12d6;
+			g_68bfb8 = 0x12d6;
 			fcn_004e44f0(fcn_004e4470(0x6a4040));
 			v12 = fcn_0053d490(0xc6, 0);
 			if (v12 != 0) {
 				r = fcn_0053e8a0(0);
 				if (r == 1) {
-					*(int*) 0x7725c8 = r;
+					g_7725c8 = r;
 					*(int*) 0x6a37f8 = fcn_005268c0(*(int*) 0x14abf04, 0);
 					if (fcn_0053c560(0) == 0) {
 						fcn_004432d0(0, 0);
@@ -117,7 +125,7 @@ int __cdecl fcn_0053e020(void)
 						v10 = (unsigned int*) fcn_00506d50(v11, *(unsigned char*) 0x7e23e3);
 						*(int*) 0x7e2430 = (int) *v10;
 						*(unsigned char*) 0x7e2434 = (unsigned char) (*(unsigned short*) &v10[1]);
-						*(int*) 0x7e2468 = fcn_004fdec0(0x6a3db4) + 0x639;
+						g_7e2468 = fcn_004fdec0(0x6a3db4) + 0x639;
 					} else {
 						fcn_004432d0(0, 0);
 						v12 = 0;
@@ -129,7 +137,7 @@ int __cdecl fcn_0053e020(void)
 				}
 			} else {
 				*(int*) &g_7e46ac = 0x12d6;
-				*(int*) 0x68bfb8 = 0x12d6;
+				g_68bfb8 = 0x12d6;
 				fcn_004e44f0(fcn_004e4470(0x6a4024));
 			}
 			fcn_00471af0(v2, 1);
@@ -137,22 +145,22 @@ int __cdecl fcn_0053e020(void)
 				if (*(unsigned char*) &g_6a375c >= 1) {
 					*(int*) &g_7747b0 |= 8;
 				}
-				*(int*) 0x774654 = 1;
+				g_774654 = 1;
 				v12 = 1;
 			}
 		} else {
 			v1 = 0;
 			if (r == 1) {
-				*(int*) 0x774654 = r;
+				g_774654 = r;
 			}
 		}
 	}
 	fcn_00469510(v7);
 	fcn_00471e30(v2);
 	if (v12 != 0) {
-		v3 = fcn_004730c0(0, 0, *(int*) 0x1040494, *(int*) 0x1040490, 0x67d67c, 100, 1);
+		v3 = fcn_004730c0(0, 0, g_1040494, g_1040490, 0x67d67c, 100, 1);
 		*(int*) &g_7e46ac = 0x12d6;
-		*(int*) 0x68bfb8 = 0x12d6;
+		g_68bfb8 = 0x12d6;
 		fcn_004e44f0(fcn_004e4470(0x6a4060));
 		if (v3 != 0) {
 			fcn_00473150(v3);
@@ -160,7 +168,7 @@ int __cdecl fcn_0053e020(void)
 		}
 	} else {
 		*(int*) &g_7e46ac = 0x12d6;
-		*(int*) 0x68bfb8 = 0x12d6;
+		g_68bfb8 = 0x12d6;
 		fcn_004e44f0(fcn_004e4470(0x6a4024));
 	}
 	return v12;

@@ -10,6 +10,11 @@ extern int g_6b8010;
 extern int g_774650;
 extern unsigned char* g_7746c8;
 extern int g_7e35c0[];
+/* building prototype row (0x24d bytes); only the leading type byte is read here. */
+typedef struct {
+	unsigned char type;
+	char pad1[0x24c];
+} GebProt_55e4a0;
 extern char* g_entity_type_table;
 #include "GOLDTL.fcn_0055e4a0_gconf.h"
 
@@ -38,7 +43,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 {
 	char buf[1024];
 	char key[19];
-	char v13[16];
+	float v13[3];
 	char v10[4];
 	unsigned int v11;
 	unsigned int v12;
@@ -86,12 +91,11 @@ void __cdecl fcn_0055e4a0(char* ev)
 	*(unsigned int*) (ev + 0xec) = fcn_004c5290(*(int*) (v8 + 1),
 		*(int*) (v6 + 1), *(int*) (e + 2));
 	cm_RequestChrMoveToUniverse(*(int*) (e + 2), *(int*) (v8 + 1), 0xffffffff, s_68b1e0);
-	v7 = (char*) fcn_005155e0(v8);
-	n7 = (int) v7;
+	n7 = fcn_005155e0(v8);
 	fcn_004432d0(n7, 1);
 	idx = *(int*) ((char*) (n7 * 0x3dc + 0x1043370));
 	if (fcn_0055d630(0) && idx != 0
-		&& fcn_0045b990((char*) idx, (float*) v13, (int*) &v12, (int*) &v11, (float*) v10)) {
+		&& fcn_0045b990((char*) idx, v13, (int*) &v12, (int*) &v11, (float*) v10)) {
 		fcn_004c5b50(*(int*) (e + 2), v12, v11, n7);
 	}
 	fcn_004c5420(*(int*) (e + 2), 0x13, 1, 0, 0x40);

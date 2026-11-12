@@ -8,10 +8,10 @@ void __cdecl fcn_004e4b60(char*);
 void __cdecl fcn_004e4e90(char*);
 void __cdecl fcn_004e4c40(int);
 int __cdecl fcn_004fda30(int);
-int __cdecl fcn_004fd9d0(int);
+int __cdecl fcn_004fd9d0(int, int);
 int __cdecl fcn_004e44b0(char*, char*);
 void __cdecl fcn_004e44f0(int);
-int __cdecl gm_RandomMod(int, ...);
+int __cdecl gm_RandomMod(unsigned short);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_004e4de0(int);
 void __cdecl fcn_004e48b0(void);
@@ -25,7 +25,7 @@ void __cdecl fcn_004463f0(int, int, float);
 /* ADDRESS: GOLDTL 0x004e1b00 */
 void __cdecl fcn_004e1b00(int a0)
 {
-	volatile int mode;
+	int mode;
 	unsigned short* p;
 	int ranges[5];
 	char buf[256];
@@ -69,26 +69,26 @@ void __cdecl fcn_004e1b00(int a0)
 	if (q != 0) {
 		id = fcn_004fda30(*q);
 	} else {
-		id = fcn_004fd9d0(gm_RandomMod(2, (gm_RandomMod(0x5e) & 0xffff) + 1) & 0xffff);
+		id = fcn_004fd9d0(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}
-	sprintf(buf + 1, (char*) 0x68cad8, id + 4);
-	len = strlen(buf + 1);
-	sprintf(buf + 1 + len, (char*) 0x68cad8, fcn_004fda30(*p) + 4);
-	len = strlen(buf + 1);
+	sprintf(buf, (char*) 0x68cad8, id + 4);
+	len = strlen(buf);
+	sprintf(buf + len, (char*) 0x68cad8, fcn_004fda30(*p) + 4);
+	len = strlen(buf);
 	if (r != 0) {
 		id = fcn_004fda30(*r);
 	} else {
-		id = fcn_004fd9d0(gm_RandomMod(2, (gm_RandomMod(0x5e) & 0xffff) + 1) & 0xffff);
+		id = fcn_004fd9d0(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}
-	sprintf(buf + 1 + len, (char*) 0x68cad8, id + 4);
-	len = strlen(buf + 1);
+	sprintf(buf + len, (char*) 0x68cad8, id + 4);
+	len = strlen(buf);
 	if (s != 0) {
 		id = fcn_004fda30(*s);
 	} else {
-		id = fcn_004fd9d0(gm_RandomMod(2, (gm_RandomMod(0x5e) & 0xffff) + 1) & 0xffff);
+		id = fcn_004fd9d0(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}
-	sprintf(buf + 1 + len, (char*) 0x679060, id + 4);
-	fcn_004e44b0((char*) 0x68cf80, buf + 1);
+	sprintf(buf + len, (char*) 0x679060, id + 4);
+	fcn_004e44b0((char*) 0x68cf80, buf);
 	fcn_004e44f0(fcn_004e44b0((char*) 0x68cf54, (char*) 0x6b5c60));
 	if (*(int*) (a0 + 0xc) == *(int*) (*(unsigned short*) 0x774970 * 0x21c + 0x7f4ca4)) {
 		fcn_004ff210(*p, (int) -(*(float*) ((char*) p + 0x1c) + *(float*) 0x662a98));

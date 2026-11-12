@@ -143,7 +143,7 @@ L6d3:
 	if (v16 == 0 || ent == 0 || g_14ce8cc == 0 || *(int*) 0x100f894 != -1) {
 		goto La5d;
 	}
-	for (p = g_7f4ca0; p < (char*) 0x85a0a0; p += 0x21c) {
+	k = 0; for (p = g_7f4ca0; p < (char*) 0x85a0a0; p += 0x21c) {
 		if (p[0x188] == 0) {
 			continue;
 		}
@@ -178,7 +178,7 @@ L6d3:
 			continue;
 		}
 		cell = 0;
-		for (k = 0;; ) {
+		for (;;) {
 			ix = (int) (u.offs[k][0] * (50.0 / map->sx) + b);
 			iy = (int) (u.offs[k][1] * (50.0 / map->sz) + a);
 			if (ix < map->n && iy < map->n) {
@@ -223,7 +223,7 @@ L192f:
 	}
 	ei = -1;
 	for (idx = 0, q = (char*) 0x7e4260; q < (char*) 0x7e42e0; q += 4, idx++) {
-		e = *(char**) q;
+		e = *(char**) q; p = 0;
 		if (e == 0) {
 			continue;
 		}
@@ -280,20 +280,20 @@ La5d:
 					fcn_00414c30(*(int*) (e + 0x34), 1);
 				}
 			}
-			if (c != 0) {
+			c = q[4]; if (c != 0) {
 				if (g_7746f0 == 0) {
 					g_7ea360 = (int) (q - 0x184);
 				}
 				g_7746f0 = g_7746f0 + 1;
 				f = *(char**) (q - 0x18);
-				if (f != 0 && *(int*) (f + 1) == *(int*) (e + 0x2c)
+				if (f != 0 && *(int*) (f + 1) == *(int*) (*(char**) q + 0x2c)
 				    && !(g_7746c8 == 0
 				         && (g_7746cc == 0 || *(unsigned short*) g_7746cc == 0x120))) {
 					fcn_00473690(*(int*) (q + 8), 1);
 				}
 			}
 		}
-		g_7e2760[idx] = c;
+		g_7e2760[idx] = q[4];
 	}
 	if (g_14ce8e0 != 0 && g_7746f0 != 0) {
 		sv_ClearObjectSelection();

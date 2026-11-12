@@ -949,7 +949,7 @@
   },
   {
     "va": 4207584,
-    "size": 1171,
+    "size": 1156,
     "name": "fcn.004033e0",
     "extent_history": [
       {
@@ -972,6 +972,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:03:07.172262+00:00"
+      },
+      {
+        "old_size": 1171,
+        "new_size": 1156,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4208752,
+    "size": 3,
+    "name": "fcn.00403870",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 3,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -2399,7 +2420,7 @@
   },
   {
     "va": 4231376,
-    "size": 997,
+    "size": 511,
     "name": "fcn.004090d0",
     "extent_history": [
       {
@@ -2422,6 +2443,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:03:08.337073+00:00"
+      },
+      {
+        "old_size": 997,
+        "new_size": 511,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4231888,
+    "size": 485,
+    "name": "fcn.004092d0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 485,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -19726,7 +19768,7 @@
   },
   {
     "va": 4492480,
-    "size": 1123,
+    "size": 1111,
     "name": "fcn.00448cc0",
     "extent_history": [
       {
@@ -19742,6 +19784,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:03:19.695808+00:00"
+      },
+      {
+        "old_size": 1123,
+        "new_size": 1111,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4493600,
+    "size": 3,
+    "name": "fcn.00449120",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 3,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -31347,7 +31410,7 @@
   },
   {
     "va": 4688352,
-    "size": 726,
+    "size": 707,
     "name": "fcn.004789e0",
     "extent_history": [
       {
@@ -31370,6 +31433,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:03:26.180901+00:00"
+      },
+      {
+        "old_size": 726,
+        "new_size": 707,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4689072,
+    "size": 6,
+    "name": "fcn.00478cb0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 6,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -37081,7 +37165,7 @@
   },
   {
     "va": 4826512,
-    "size": 745,
+    "size": 542,
     "name": "fcn.0049a590",
     "extent_history": [
       {
@@ -37090,6 +37174,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:03:29.320981+00:00"
+      },
+      {
+        "old_size": 745,
+        "new_size": 542,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4827056,
+    "size": 201,
+    "name": "fcn.0049a7b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 201,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -38283,7 +38388,7 @@
   },
   {
     "va": 4847312,
-    "size": 1011,
+    "size": 944,
     "name": "fcn.0049f6d0",
     "extent_history": [
       {
@@ -38306,6 +38411,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:03:30.463125+00:00"
+      },
+      {
+        "old_size": 1011,
+        "new_size": 944,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4848256,
+    "size": 67,
+    "name": "fcn.0049fa80",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 67,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -53346,7 +53472,7 @@
   },
   {
     "va": 5063248,
-    "size": 871,
+    "size": 480,
     "name": "fcn.004d4250",
     "extent_history": [
       {
@@ -53369,6 +53495,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:03:47.700798+00:00"
+      },
+      {
+        "old_size": 871,
+        "new_size": 480,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5063728,
+    "size": 391,
+    "name": "fcn.004d4430",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 391,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -53465,7 +53612,7 @@
   },
   {
     "va": 5065040,
-    "size": 1242,
+    "size": 1070,
     "name": "fcn.004d4950",
     "extent_history": [
       {
@@ -53488,6 +53635,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:03:47.700817+00:00"
+      },
+      {
+        "old_size": 1242,
+        "new_size": 1070,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5066112,
+    "size": 170,
+    "name": "fcn.004d4d80",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 170,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -66752,7 +66920,7 @@
   },
   {
     "va": 5294800,
-    "size": 518,
+    "size": 497,
     "name": "fcn.0050cad0",
     "extent_history": [
       {
@@ -66775,6 +66943,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:21.475542+00:00"
+      },
+      {
+        "old_size": 518,
+        "new_size": 497,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5295312,
+    "size": 6,
+    "name": "fcn.0050ccd0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 6,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -68029,7 +68218,7 @@
   },
   {
     "va": 5312720,
-    "size": 1185,
+    "size": 1180,
     "name": "fcn.005110d0",
     "extent_history": [
       {
@@ -68045,6 +68234,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:21.475782+00:00"
+      },
+      {
+        "old_size": 1185,
+        "new_size": 1180,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5313904,
+    "size": 1,
+    "name": "fcn.00511570",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -72409,7 +72619,7 @@
   },
   {
     "va": 5446944,
-    "size": 2352,
+    "size": 2348,
     "name": "fcn.00531d20",
     "extent_history": [
       {
@@ -72432,6 +72642,13 @@
         "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:08.725814+00:00"
+      },
+      {
+        "old_size": 2352,
+        "new_size": 2348,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -81309,7 +81526,7 @@
   },
   {
     "va": 5661536,
-    "size": 921,
+    "size": 848,
     "name": "fcn.00566360",
     "extent_history": [
       {
@@ -81332,6 +81549,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:31.390317+00:00"
+      },
+      {
+        "old_size": 921,
+        "new_size": 848,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5662384,
+    "size": 73,
+    "name": "fcn.005666b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 73,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -81456,7 +81694,7 @@
   },
   {
     "va": 5664000,
-    "size": 806,
+    "size": 672,
     "name": "fcn.00566d00",
     "extent_history": [
       {
@@ -81479,6 +81717,27 @@
         "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x41d8b0 0x90x5 0x41d94b..0x41d94f, 0x544a90 0xCCx5 0x544c2b..0x544c2f, 0x566d00 0x90x10 0x567026..0x56702f, 0x5cfd00 0x90x13 0x5cff13..0x5cff1f, 0x62a1ee 0xCCx13 0x62a1f3..0x62a1ff, 0x640959 0xCCx14 0x640a62..0x640a6f, 0x64c112 0xCCx8 0x64c118..0x64c11f, 0x64d41a 0xCCx4 0x64d46c..0x64d46f",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-11-02T21:37:54.724627+00:00"
+      },
+      {
+        "old_size": 806,
+        "new_size": 672,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5664672,
+    "size": 134,
+    "name": "fcn.00566fa0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 134,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -82261,7 +82520,7 @@
   },
   {
     "va": 5694400,
-    "size": 1458,
+    "size": 1312,
     "name": "fcn.0056e3c0",
     "extent_history": [
       {
@@ -82284,6 +82543,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:31.390387+00:00"
+      },
+      {
+        "old_size": 1458,
+        "new_size": 1312,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5695712,
+    "size": 146,
+    "name": "fcn.0056e8e0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 146,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -82555,7 +82835,7 @@
   },
   {
     "va": 5703072,
-    "size": 955,
+    "size": 718,
     "name": "fcn.005705a0",
     "extent_history": [
       {
@@ -82578,6 +82858,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:32.737412+00:00"
+      },
+      {
+        "old_size": 955,
+        "new_size": 718,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5703792,
+    "size": 235,
+    "name": "fcn.00570870",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 235,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -84067,7 +84368,7 @@
   },
   {
     "va": 5738192,
-    "size": 1208,
+    "size": 1104,
     "name": "fcn.00578ed0",
     "extent_history": [
       {
@@ -84090,6 +84391,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:32.737550+00:00"
+      },
+      {
+        "old_size": 1208,
+        "new_size": 1104,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5739296,
+    "size": 104,
+    "name": "fcn.00579320",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 104,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -95950,7 +96272,7 @@
   },
   {
     "va": 6056464,
-    "size": 1153,
+    "size": 1137,
     "name": "fcn.005c6a10",
     "extent_history": [
       {
@@ -95966,6 +96288,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:40.611733+00:00"
+      },
+      {
+        "old_size": 1153,
+        "new_size": 1137,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6057616,
+    "size": 1,
+    "name": "fcn.005c6e90",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -97325,7 +97668,7 @@
   },
   {
     "va": 6094080,
-    "size": 531,
+    "size": 528,
     "name": "fcn.005cfd00",
     "extent_history": [
       {
@@ -97334,6 +97677,27 @@
         "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x41d8b0 0x90x5 0x41d94b..0x41d94f, 0x544a90 0xCCx5 0x544c2b..0x544c2f, 0x566d00 0x90x10 0x567026..0x56702f, 0x5cfd00 0x90x13 0x5cff13..0x5cff1f, 0x62a1ee 0xCCx13 0x62a1f3..0x62a1ff, 0x640959 0xCCx14 0x640a62..0x640a6f, 0x64c112 0xCCx8 0x64c118..0x64c11f, 0x64d41a 0xCCx4 0x64d46c..0x64d46f",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-11-02T21:37:54.724631+00:00"
+      },
+      {
+        "old_size": 531,
+        "new_size": 528,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6094608,
+    "size": 3,
+    "name": "fcn.005cff10",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 3,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -97367,7 +97731,7 @@
   },
   {
     "va": 6095968,
-    "size": 81,
+    "size": 75,
     "name": "fcn.005d0460",
     "extent_history": [
       {
@@ -97390,6 +97754,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:42.422102+00:00"
+      },
+      {
+        "old_size": 81,
+        "new_size": 75,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6096048,
+    "size": 1,
+    "name": "fcn.005d04b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -99612,7 +99997,7 @@
   },
   {
     "va": 6170192,
-    "size": 1248,
+    "size": 15,
     "name": "fcn.005e2650",
     "extent_history": [
       {
@@ -99621,6 +100006,13 @@
         "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-24T13:52:00.333014+00:00"
+      },
+      {
+        "old_size": 1248,
+        "new_size": 15,
+        "reason": "GoldTL 0x5e2650 is a 15-byte wrapper: call 0x5e22a0 at 0x5e2650, call 0x5e2590 at 0x5e2655, jmp 0x5e2510 at 0x5e265a; nop at 0x5e265f; an independent function starts at 0x5e2660 (sub esp,0x78). Evidence .scratch/sol/01/5e2650-asm.json and 5e2650-neighbor2660.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T15:16:54.929398+00:00"
       }
     ]
   },
@@ -100119,7 +100511,7 @@
   },
   {
     "va": 6185824,
-    "size": 752,
+    "size": 745,
     "name": "fcn.005e6360",
     "extent_history": [
       {
@@ -100128,6 +100520,13 @@
         "reason": "row 0x5e5ea0 spans two functions: its body ends at 0x5e635f after add esp,0x128; jmp 0x532ef0 and a nop pad, and 0x5e6360 begins a separate callback with its own prologue mov eax,[esp+4]; sub esp,0x458 and its own ret. splitting at the boundary, 1215 bytes and 752 bytes to the next inventory entry at 0x5e6650",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-11-04T01:02:04.929756+00:00"
+      },
+      {
+        "old_size": 752,
+        "new_size": 745,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -102535,7 +102934,7 @@
   },
   {
     "va": 6225286,
-    "size": 4,
+    "size": 3,
     "name": "fcn.005efd86",
     "extent_history": [
       {
@@ -102558,6 +102957,27 @@
         "reason": "revert my earlier shrink: the previous reviewed boundary kept the fourth byte in this entry so no text byte stays unowned, and this project treats an unowned byte as worse than an over-long extent. The byte is the next code's first byte and it belongs to the external range with no inventory row, so it stays folded in",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-11-03T06:57:24.422970+00:00"
+      },
+      {
+        "old_size": 4,
+        "new_size": 3,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6225289,
+    "size": 1,
+    "name": "fcn.005efd89",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -104425,7 +104845,7 @@
   },
   {
     "va": 6275272,
-    "size": 68,
+    "size": 44,
     "name": "fcn.005fc0c8",
     "extent_history": [
       {
@@ -104441,6 +104861,27 @@
         "reason": "revert my earlier shrink: the previous reviewed boundary kept the following bytes in this entry so no text byte stays unowned. They are continuation code at 0x5fc0f4 with no inventory row, and an over-long extent is the lesser defect against an unowned byte",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-11-03T06:58:24.015343+00:00"
+      },
+      {
+        "old_size": 68,
+        "new_size": 44,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6275316,
+    "size": 24,
+    "name": "fcn.005fc0f4",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 24,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },
@@ -111835,7 +112276,7 @@
   },
   {
     "va": 6607327,
-    "size": 73,
+    "size": 56,
     "name": "fcn.0064d1df",
     "extent_history": [
       {
@@ -111865,6 +112306,27 @@
         "reason": "revert my earlier shrink: the previous reviewed boundary extended this entry over the following gap because capstone decodes it continuously with no new prologue, so it is the same code. Splitting it off would leave those bytes unowned, which is worse than an over-long extent",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-11-03T06:58:00.757939+00:00"
+      },
+      {
+        "old_size": 73,
+        "new_size": 56,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6607383,
+    "size": 16,
+    "name": "fcn.0064d217",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 16,
+        "reason": "GoldTL reviewed CFG boundary audit; evidence and per-row code/table/padding/next-entry ranges in .scratch/sol/extents/REPORT.md and reviewed.json. Shrink overmerged native extents and admit independently decoded next bodies; source SIZE synchronization is explicit and fresh verification will be required.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-12T14:12:39.791707+00:00"
       }
     ]
   },

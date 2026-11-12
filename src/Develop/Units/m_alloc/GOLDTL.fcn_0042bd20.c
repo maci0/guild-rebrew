@@ -55,17 +55,17 @@ int __cdecl fcn_0042bd20(char* path)
 			if (inc) {
 				p = fcn_0064e790(inc, '"');
 				if (!p)
-					goto fail;
-				q = fcn_0064e790(p + 1, '"');
+					{ m_FreeTracked(g_6b7fa0); g_6b7fa0 = 0; return 0; }
+				p++; q = fcn_0064e790(p, '"');
 				if (!q)
-					goto fail;
+					{ m_FreeTracked(g_6b7fa0); g_6b7fa0 = 0; return 0; }
 				*q = 0;
-				r = fcn_0064d1a0(p + 1, '.');
+				r = fcn_0064d1a0(p, '.');
 				*r = 0;
-				strcpy(names[n], p + 1);
+				strcpy(names[n], p);
 				n++;
 				if (n > 0x80)
-					goto fail;
+					{ m_FreeTracked(g_6b7fa0); g_6b7fa0 = 0; return 0; }
 			}
 		}
 	} while (!(f[0xc] & 0x10));
@@ -76,8 +76,8 @@ int __cdecl fcn_0042bd20(char* path)
 	}
 	g_1052de0 = 1;
 	return 1;
-fail:
-	m_FreeTracked(g_6b7fa0);
-	g_6b7fa0 = 0;
-	return 0;
+
+
+
+
 }

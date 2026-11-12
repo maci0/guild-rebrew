@@ -33,7 +33,8 @@ void __cdecl fcn_00438cb0(char*, int*);
 void __cdecl fcn_00445f50(int, int, float, int);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strcpy(char*, const char*);
-int __cdecl fcn_005dfa40(char*, char*, char*);
+typedef struct { char unknown00[9]; char name[0x100]; char path[0x107]; } FileSlot53ed60;
+int __cdecl fcn_005dfa40(char*, char*, FileSlot53ed60*);
 int __cdecl vfs_Tfopen(char*, char*, int);
 int __cdecl fcn_00521eb0(int, char*);
 void __cdecl CloseVfsStream(int);
@@ -69,14 +70,15 @@ void __cdecl fcn_00412cf0(char*, float*, float*, int, int);
 /* ADDRESS: GOLDTL 0x0053ed60 */
 int __cdecl fcn_0053ed60(int unused, int network)
 {
-	char path[0x105];
-	char names[0x40][0x210];
-	char* cities[0x40];
-	int values[0x40];
-	char hdr[0x38];
-	char langName[0x100];
-	char keybuf[0x100];
-	char namebuf[0x100];
+	struct {
+		char langName[0x40];
+		char hdr[0xfc];
+		char keybuf[0x100];
+		char* cities[0x40];
+		char namebuf[0x100];
+		int values[0x40];
+		FileSlot53ed60 names[0x40];
+	} data;
 	float pos[4];
 	float dir[3];
 	char* obj;
@@ -107,34 +109,34 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	fcn_00438b40(g_6b8014, (int*) (g_6b8014 + 0x5c));
 	fcn_00438cb0(g_6b8014, (int*) (g_6b8014 + 0x90));
 	fcn_00445f50(0, 0, 1.0f, 0);
-	count = fcn_005dfa40((char*) 0x6a3778, network == 0 ? (char*) 0x6a41b8 : (char*) 0x6a41b0, path);
+	count = fcn_005dfa40((char*) 0x6a3778, network == 0 ? (char*) 0x6a41b8 : (char*) 0x6a41b0, data.names);
 	for (i = 0; i < count; i++) {
-		h = vfs_Tfopen(names[i], (char*) 0x6750e8, g_6b7fdc);
+		h = vfs_Tfopen(data.names[i].path, (char*) 0x6750e8, g_6b7fdc);
 		if (h == 0) {
 			return 0;
 		}
-		if (fcn_00521eb0(h, hdr) == 0) {
+		if (fcn_00521eb0(h, data.hdr) == 0) {
 			CloseVfsStream(h);
 			return 0;
 		}
 		CloseVfsStream(h);
-		values[i] = (signed char) hdr[0x30] - (g_6a375c & 0xff);
-		cities[i] = fcn_0053e7a0(hdr + 5);
-		if (cities[i] != 0) {
-			sprintf(keybuf, (char*) 0x6a22a8, hdr + 5);
-			_strupr(keybuf);
-			idx = fcn_0042dc90(keybuf);
+		data.values[i] = (signed char) data.hdr[0x30] - (g_6a375c & 0xff);
+		data.cities[i] = fcn_0053e7a0(data.hdr + 5);
+		if (data.cities[i] != 0) {
+			sprintf(data.keybuf, (char*) 0x6a22a8, data.hdr + 5);
+			_strupr(data.keybuf);
+			idx = fcn_0042dc90(data.keybuf);
 			if (idx != -1) {
-				strcpy(langName, g_14a5320[idx]);
+				strcpy(data.langName, g_14a5320[idx]);
 			} else {
-				strcpy(langName, hdr + 5);
+				strcpy(data.langName, data.hdr + 5);
 			}
-			sprintf(keybuf, (char*) 0x6a41a4, hdr + 5);
-			strcpy(cities[i], keybuf);
-			fcn_005338d0(keybuf, langName, 0);
+			sprintf(data.namebuf, (char*) 0x6a41a4, data.hdr + 5);
+			strcpy(data.cities[i], data.namebuf);
+			fcn_005338d0(data.namebuf, data.langName, 0);
 		}
 	}
-	city = (char*) cities[4];
+	city = (char*) data.cities[4];
 	sel = city;
 	if (city != 0) {
 		pos[0] = *(float*) (city + 0x4c);
@@ -192,17 +194,17 @@ int __cdecl fcn_0053ed60(int unused, int network)
 			pos[2] = pos[2] + *(float*) (sel + 0x54);
 			fcn_00412cf0(obj, pos, dir, 0x28, 0x20);
 			for (i = 0; i < count; i++) {
-				if (sel != cities[i]) {
-					if (cities[i] != 0) {
-						fcn_00442c00(cities[i], 1);
+				if (sel != data.cities[i]) {
+					if (data.cities[i] != 0) {
+						fcn_00442c00(data.cities[i], 1);
 					}
 					continue;
 				}
-				if (cities[i] != 0) {
-					strcpy(g_7e1d00, cities[i] + 6);
-					sprintf(keybuf, (char*) 0x6a4170, g_7e1d00);
-					_strupr(keybuf);
-					idx = fcn_0042dc90(keybuf);
+				if (data.cities[i] != 0) {
+					strcpy(g_7e1d00, data.cities[i] + 6);
+					sprintf(data.keybuf, (char*) 0x6a4170, g_7e1d00);
+					_strupr(data.keybuf);
+					idx = fcn_0042dc90(data.keybuf);
 					if (idx != -1) {
 						d2_SetForm(win2, 1);
 						io_AppendText(idx);
@@ -210,8 +212,8 @@ int __cdecl fcn_0053ed60(int unused, int network)
 						io_AppendText(idx + 1);
 					}
 				}
-				fcn_00442c00(cities[i], 0);
-				highlight = values[i];
+				fcn_00442c00(data.cities[i], 0);
+				highlight = data.values[i];
 			}
 			prev = sel;
 		}
@@ -261,8 +263,8 @@ accepted:
 		d3_DestroyObject(obj);
 	}
 	for (i = 0; i < count; i++) {
-		if (cities[i] != 0) {
-			d3_DestroyObject(cities[i]);
+		if (data.cities[i] != 0) {
+			d3_DestroyObject(data.cities[i]);
 		}
 	}
 	return result;

@@ -55,7 +55,7 @@ int __cdecl fcn_00508620(int, int);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4eb0(char*);
 int __cdecl fcn_004c4ef0(char*);
-int __cdecl fcn_004c51f0(int, int, int, int, int, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_004c4510(int, int);
 void __cdecl fcn_004c4570(int, int, int, int);
 int __cdecl fcn_004c5360(int);
@@ -75,6 +75,7 @@ int __cdecl fcn_005a59d0(char* a0)
 	Lrow ownRows[16];
 	Lrow globRows[16];
 	char buf[256];
+	float value, fee, factor;
 
 	v7 = 0;
 	v31 = 0;
@@ -174,17 +175,17 @@ int __cdecl fcn_005a59d0(char* a0)
 		} else {
 			fcn_00472170(e1, 0);
 			fcn_00472170(e0, 0);
-			fcn_00472170(e3, 0);
+			fcn_00472170(h1, 0);
 		}
 		if (v16 > 4) {
 			fcn_00472170(e2, 1);
-			fcn_00472170(h1, 1);
+			fcn_00472170(e3, 1);
 			fcn_00472170(h2, 1);
 			itoa(v16, buf, 10);
 			fcn_0046f940(h2, buf);
 		} else {
 			fcn_00472170(e2, 0);
-			fcn_00472170(h1, 0);
+			fcn_00472170(e3, 0);
 			fcn_00472170(h2, 0);
 		}
 		if (g_100f1dc == 3 || g_100f1dc == 4) {
@@ -206,109 +207,80 @@ int __cdecl fcn_005a59d0(char* a0)
 			v16 = fcn_005a5980(globRows);
 			if (v16 != -1) {
 				v2 = globRows[v16].val;
-				v3 = ownRows[v29].val;
+				v3 = ownRows[v30].val;
 				if (v2 != v3) {
-					v4 = ownRows[v29].x14;
-					v30 = globRows[v16].x18;
-					if (v4 <= v30)
-						v30 = v4;
-					if ((g_774970 != *(unsigned short*)(a0 + 0x27))
-						&& (*(int*)(a0 + 0x6d) * 0.1 * (float)fcn_00508620(v4, v3)
-							<= (float)fcn_00508620(1, v3)))
-						fcn_00508620(1, v3);
-					if ((float)fcn_00508620(v30, v2) <= (float)fcn_00508620(v4, v3)) {
+					v4 = ownRows[v30].x14;
+					factor = (float) (*(int*)(a0 + 0x6d) * g_6640e8);
+					value = (float) fcn_00508620(v4, v3);
+					if (g_774970 != *(unsigned short*)(a0 + 0x27)) {
+						fee = value * factor;
+						v17 = fcn_00508620(1, v3);
+						if (!((float) v17 < fee)) fee = (float) fcn_00508620(1, v3);
+					} else fee = 0.0f;
+					v17 = fcn_00508620(globRows[v16].x18, v2);
+					if (!((float) v17 < value)) {
+						v28 = (int) value;
+						v17 = fcn_00508620(v4, v3);
 						fcn_004c4eb0(g_6aac7c);
-						v28 = fcn_00508620(0, v3);
-						fcn_004c51f0(-1,
-							*(int*)(g_774970 * 0x21c + 0x7f4ca4), v2, v28,
-							g_773d75,
-							0);
-						v17 = fcn_00508620(0, v3);
-						fcn_004c51f0(*(int*)(g_774970 * 0x21c + 0x7f4ca4), -1,
-							v3, v17,
-							g_773d75,
-							0);
-						v18 = fcn_00508620(0, v3);
-						fcn_004c51f0(-1, *(int*)(a0 + 1), v3, v18,
-							g_773d75,
-							0);
-						v19 = fcn_00508620(0, v3);
-						fcn_004c51f0(*(int*)(a0 + 1), -1, v2, v19,
-							g_773d75,
-							0);
+						fcn_004c51f0(-1, *(int*)(g_774970 * 0x21c + 0x7f4ca4), v2, v28, g_773d75, 0);
+						fcn_004c51f0(*(int*)(g_774970 * 0x21c + 0x7f4ca4), -1, v3, (int) (v17 - fee), g_773d75, 0);
+						fcn_004c51f0(-1, *(int*)(a0 + 1), v3, v17, g_773d75, 0);
+						fcn_004c51f0(*(int*)(a0 + 1), -1, v2, (int) (v17 + fee), g_773d75, 0);
 						v5 = fcn_004c4ef0(g_6aac7c);
-						while (!fcn_004c4450(v5))
-							fcn_005373e0(0, 0x677c7);
+						while (!fcn_004c4450(v5)) fcn_005373e0(0, 0x677c7);
 						fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, v8, 4, 1);
 						fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, v8, 5, 1);
 						fcn_00533a40(g_14ab718);
 						fcn_00473fe0();
 						for (v15 = 0; v15 < 0x1c0; v15 += 0x1c) {
-							if (*(int*)((char*)ownRows + v15) != -1)
-								d2_SetElementValue(*(int*)((char*)ownRows + v15), 0, 0, 0);
-							if (*(int*)((char*)globRows + v15) != -1)
-								d2_SetElementValue(*(int*)((char*)globRows + v15), 0, 0, 0);
+							if (*(int*)((char*)ownRows + v15) != -1) d2_SetElementValue(*(int*)((char*)ownRows + v15), 0, 0, 0);
+							if (*(int*)((char*)globRows + v15) != -1) d2_SetElementValue(*(int*)((char*)globRows + v15), 0, 0, 0);
 						}
 					} else {
 						io_FormatTextBuffer(buf, 0x18fd, v2 * 2 + 0x9a8);
 						fcn_00475220(buf);
 					}
-				} else {
-					fcn_00475220(g_14ab710);
-				}
+				} else fcn_00475220(g_14ab710);
 			}
 		} else if (v31 == 2) {
 			v16 = fcn_005a5980(ownRows);
 			if (v16 != -1) {
 				v2 = ownRows[v16].val;
-				v3 = globRows[v29].val;
+				v3 = globRows[v30].val;
 				if (v2 != v3) {
-					v4 = globRows[v29].x14;
-					v30 = ownRows[v16].x18;
-					if (v30 >= v4)
-						v30 = v4;
-					if ((g_774970 != *(unsigned short*)(a0 + 0x27))
-						&& (*(int*)(a0 + 0x6d) * 0.1 * (float)fcn_00508620(v30, v2)
-							<= (float)fcn_00508620(1, v3)))
-						fcn_00508620(1, v3);
-					if ((float)fcn_00508620(globRows[v29].x18, v3)
-						<= (float)fcn_00508620(v30, v2)) {
+					v4 = globRows[v30].x14;
+					v1 = ownRows[v16].x18 < v4 ? ownRows[v16].x18 : v4;
+					value = (float) fcn_00508620(v1, v2);
+					if (g_774970 != *(unsigned short*)(a0 + 0x27)) {
+						fee = (float) (*(int*)(a0 + 0x6d) * g_6640e8 * value);
+						v17 = fcn_00508620(1, v3);
+						if (!((float) v17 < fee)) fee = (float) fcn_00508620(1, v3);
+					} else fee = 0.0f;
+					v17 = fcn_00508620(globRows[v30].x18, v3);
+					if (!((float) v17 < value)) {
+						fcn_00508620(v1, v3);
 						fcn_004c4eb0(g_6aac7c);
-						fcn_004c51f0(-1,
-							*(int*)(g_774970 * 0x21c + 0x7f4ca4), v2,
-							fcn_00508620(0, v2),
-							g_773d75,
-							0);
-						fcn_004c51f0(*(int*)(g_774970 * 0x21c + 0x7f4ca4), -1,
-							v2, fcn_00508620(0, v2),
-							g_773d75,
-							0);
-						fcn_004c51f0(-1, *(int*)(a0 + 1), v3, fcn_00508620(v4, v3),
-							g_773d75,
-							0);
-						fcn_004c51f0(*(int*)(a0 + 1), -1, v2, fcn_00508620(0, v2),
-							g_773d75,
-							0);
+						v28 = (int) value;
+						fcn_004c51f0(-1, *(int*)(g_774970 * 0x21c + 0x7f4ca4), v3, v28, g_773d75, 0);
+						v17 = (int) (value - fee);
+						fcn_004c51f0(*(int*)(g_774970 * 0x21c + 0x7f4ca4), -1, v2, v17, g_773d75, 0);
+						fcn_004c51f0(-1, *(int*)(a0 + 1), v2, v17, g_773d75, 0);
+						fcn_004c51f0(*(int*)(a0 + 1), -1, v3, v28, g_773d75, 0);
 						v5 = fcn_004c4ef0(g_6aac7c);
-						while (!fcn_004c4450(v5))
-							fcn_005373e0(0, 0x677c7);
+						while (!fcn_004c4450(v5)) fcn_005373e0(0, 0x677c7);
 						fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, v8, 4, 1);
 						fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, v8, 5, 1);
 						fcn_00533a40(g_14ab718);
 						fcn_00473fe0();
 						for (v15 = 0; v15 < 0x1c0; v15 += 0x1c) {
-							if (*(int*)((char*)ownRows + v15) != -1)
-								d2_SetElementValue(*(int*)((char*)ownRows + v15), 0, 0, 0);
-							if (*(int*)((char*)globRows + v15) != -1)
-								d2_SetElementValue(*(int*)((char*)globRows + v15), 0, 0, 0);
+							if (*(int*)((char*)ownRows + v15) != -1) d2_SetElementValue(*(int*)((char*)ownRows + v15), 0, 0, 0);
+							if (*(int*)((char*)globRows + v15) != -1) d2_SetElementValue(*(int*)((char*)globRows + v15), 0, 0, 0);
 						}
 					} else {
 						io_FormatTextBuffer(buf, 0x18fd, v2 * 2 + 0x9a8);
 						fcn_00533a40(buf);
 					}
-				} else {
-					fcn_00533a40(g_14ab710);
-				}
+				} else fcn_00533a40(g_14ab710);
 			}
 		}
 	} while (fcn_005373e0(fcn_005a59d0, 0x677c7));

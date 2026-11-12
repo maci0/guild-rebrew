@@ -28,166 +28,84 @@ int __cdecl gm_LookupEntityRecordById();
 int __cdecl fcn_00591990();
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005a1130 */
-unsigned int __cdecl fcn_005a1130(char* a0, int a1)
+int __cdecl fcn_005a1130(char* a0, int a1)
 {
 	char* self;
-	char* entity;
-	char* other;
-	char* p;
-	char* q;
-	char* dst;
-	char* src;
-	char work[0x18];
 	int i;
-	int count;
-	int room;
-	unsigned int mode;
-	unsigned int value;
+	int x;
+	int y;
 
+	d2_SetForm(a1, 2);
+	fcn_0046f2c0(*(int*) &g_772514, 1);
+	d2_SetForm(a1, 3);
+	fcn_0046f2c0(*(int*) &g_772514, 1);
 	self = a0;
-	d2_SetForm(self, 2);
-	fcn_0046f2c0(*(int*) &g_772514, 1);
-	d2_SetForm(self, 3);
-	fcn_0046f2c0(*(int*) &g_772514, 1);
 
-	if (*(char*) (*(int*) (self + 0xc) + 2) != 6) {
-		d2_SetForm(self, 3);
-		io_AppendText((char*) (*(int*) (self + 0xc) + 0x30), (char*) 0x6a9694);
-		count = *(unsigned char*) (self + 0x10);
-		for (i = 0; i < count; i++) {
-			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),
-				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
-		}
-	}
-	else {
-		d2_SetForm(self, 2);
-		io_AppendText((char*) (*(int*) (self + 0xc) + 0x30), (char*) 0x6a9694);
-		count = *(unsigned char*) (self + 0x10);
-		for (i = 0; i < count; i++) {
-			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),
-				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
-		}
-	}
-
-	if (*(char*) (*(int*) (self + 0x30) + 2) != 6) {
-		d2_SetForm(self, 2);
-		io_AppendText((char*) (*(int*) (self + 0x30) + 0x30), (char*) 0x6a9694);
-		count = *(unsigned char*) (self + 0x34);
-		for (i = 0; i < count; i++) {
-			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),
-				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
-		}
-	}
-	else {
-		d2_SetForm(self, 2);
-		io_AppendText((char*) (*(int*) (self + 0x30) + 0x30), (char*) 0x6a9694);
-		count = *(unsigned char*) (self + 0x34);
-		for (i = 0; i < count; i++) {
-			fcn_0046f740(0x1c + (i & 7) * 0x3a, 0x1d + ((i < 8) ? 0x29 : 0x00),
-				*(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
-		}
-	}
-
-	d2_SetForm(self, 2);
-	fcn_0046f2c0(*(int*) &g_772514, 1);
-
-	if (((*(int*) (self + 8) != 5) || (*(char*) (*(int*) (self + 0xc) + 2) != 6))
-		&& ((*(int*) (self + 8) != 6) || (*(char*) (*(int*) (self + 0x30) + 2) != 6))) {
-		a1 = *(int*) (self + 0x54) / 2;
-		room = 0x1888;
-	}
-	else {
-		a1 = *(int*) (self + 0x54);
-		room = 0x1887;
-	}
-	fcn_005ca740();
-
-	if (*(int*) 0x1052de0 == 0) {
-		return 0xffffffff;
-	}
-	entity = (char*) (*(int*) &g_772514 * 0x3cc);
-	if (*(int*) (entity + (unsigned long)&g_10161d0) == 0) {
-		return 0xffffffff;
-	}
-
-	for (i = 0; i < 0x17d; i++) {
-		work[i] = 0;
-	}
-
-	if (0x4800 <= room) {
-		p = (char*) room;
-		dst = work;
-		do {
-			*dst++ = *p;
-		} while (*p++ != 0);
-	}
-	else {
-		p = *(char**) (room * 4 + (unsigned long)&g_14a5320);
-		if (p == 0) {
-			return 0xffffffff;
-		}
+	if (*(unsigned char*) (*(char**) (self + 0xc) + 2) == 6) {
+		d2_SetForm(a1, 3);
+		io_AppendText(0x6a9694, *(char**) (self + 0xc) + 0x30);
 		i = 0;
-		while (p[i] != 0) {
+		x = 0x1c;
+		y = 0x1d;
+		while (i < *(unsigned char*) (self + 0x10)) {
+			fcn_0046f740(x, y, *(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
 			i++;
+			if (i % 8 == 0) x = 0; else x += 0x3a;
+			y = 0x1d + (i > 7 ? 0x29 : 0);
 		}
-		if (0x17c1 <= i) {
-			return 0xffffffff;
-		}
-		fcn_005ca560(work, p, i + 1);
-	}
-
-	mode = *(int*) 0x772554;
-	value = 0;
-	dst = work;
-	while (*dst != 0) {
-		dst++;
-	}
-	if (dst != work) {
-		for (i = 0; i <= 0x17d0; i++) {
-			if (work[i] == '%' || work[i] == '$' || work[i] == '{') {
-				int next = i + 1;
-				if (work[i + 1] >= '0' && work[i + 1] <= '9') {
-					next = i + 2;
-				}
-				src = (char*) work[next];
-				i = next;
-				if ((unsigned int) ((int) src - 0x25) <= 0x52) {
-					return fcn_00591990();
-				}
+	} else {
+		d2_SetForm(a1, 2);
+		io_AppendText(0x6a9694, *(char**) (self + 0xc) + 0x30);
+		i = 0;
+		x = 0x1c;
+		y = 0x1d;
+		while (i < *(unsigned char*) (self + 0x10)) {
+			if (*(int*) (self + 0x28) == 4) {
+				fcn_0046f740(x, y, 0x761, *(int*) &g_772514);
+			} else {
+				fcn_0046f740(x, y, *(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
 			}
 			i++;
-			if (work[i] == 0) {
-				break;
-			}
+			if (i % 8 == 0) x = 0; else x += 0x3a;
+			y = 0x1d + (i > 7 ? 0x29 : 0);
 		}
 	}
 
-	i = 0;
-	while (*(char*) (*(int*) (*(int*) &g_772514 * 0x3cc + 0x1015f7c) + i) != 0) {
-		i++;
-	}
-	if (0x17d0 <= i - 2) {
-		return 0xffffffff;
+	if (*(unsigned char*) (*(char**) (self + 0x30) + 2) == 6) {
+		d2_SetForm(a1, 3);
+		io_AppendText(0x6a9694, *(char**) (self + 0x30) + 0x30);
+		i = 0;
+		x = 0x1c;
+		y = 0x1d;
+		while (i < *(unsigned char*) (self + 0x34)) {
+			fcn_0046f740(x, y, *(unsigned char*) (self + 0x3c + i) + 0x75a, *(int*) &g_772514);
+			i++;
+			if (i % 8 == 0) x = 0; else x += 0x3a;
+			y = 0x1d + (i > 7 ? 0x29 : 0);
+		}
+	} else {
+		d2_SetForm(a1, 2);
+		io_AppendText(0x6a9694, *(char**) (self + 0x30) + 0x30);
+		i = 0;
+		x = 0x1c;
+		y = 0x1d;
+		while (i < *(unsigned char*) (self + 0x34)) {
+			if (*(int*) (self + 0x28) == 4) {
+				fcn_0046f740(x, y, 0x761, *(int*) &g_772514);
+			} else {
+				fcn_0046f740(x, y, *(unsigned char*) (self + 0x3c + i) + 0x75a, *(int*) &g_772514);
+			}
+			i++;
+			if (i % 8 == 0) x = 0; else x += 0x3a;
+			y = 0x1d + (i > 7 ? 0x29 : 0);
+		}
 	}
 
-	fcn_005ca560((char*) (*(int*) &g_772514 * 0x3cc + 0x1015f7c),
-		work, i + 1);
-	*(int*) (*(int*) &g_772514 * 0x3cc + 0x10161b8) = 2;
-	value = *(unsigned int*) (*(int*) &g_772514 * 0x3cc + 0x1015f6c);
-	if (a1 == 0) {
-		return value;
+	d2_SetForm(a1, 4);
+	fcn_0046f2c0(*(int*) &g_772514, 1);
+	if ((*(int*) (self + 8) == 5 && *(unsigned char*) (*(char**) (self + 0xc) + 2) == 6)
+		|| (*(int*) (self + 8) == 6 && *(unsigned char*) (*(char**) (self + 0x30) + 2) == 6)) {
+		return io_AppendText(0x1887, *(int*) (self + 0x54));
 	}
-	*(int*) 0x772554 = 1;
-	other = (char*) *(int*) ((unsigned long)&g_1015ea0 + 0x50 + *(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_10161bc) * 0x2f4);
-	if (other == 0) {
-		*(int*) 0x772554 = mode;
-		return value;
-	}
-	if (*(int*) (other + 0x198) == 0) {
-		*(int*) 0x772554 = mode;
-		return value;
-	}
-	fcn_00471af0(other);
-	*(int*) 0x772554 = mode;
-	return value;
+	return io_AppendText(0x1888, *(int*) (self + 0x54) / 2);
 }

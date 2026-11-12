@@ -34,7 +34,7 @@ void __cdecl fcn_00517b10(char*, char*);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00533a60(int, int, void*, int, int, int);
+void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl d2_CreateRadioGroup(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00469470(int, int);
@@ -64,7 +64,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 {
 	char text[0x104];
 	char digit[0x14];
-	char* out[2];
+	int out[2];
 	int ids[8];
 	int first;
 	int second;
@@ -81,8 +81,10 @@ int __cdecl fcn_005936f0(int msg, int param)
 	int p;
 	char redraw;
 	char* s;
-	char* ep;
-	char* np;
+	int sex0;
+	int sex1;
+	int faith0;
+	int faith1;
 	int* ent;
 
 	result = 0;
@@ -104,13 +106,13 @@ int __cdecl fcn_005936f0(int msg, int param)
 	d2_SetForm(h, 3);
 	io_AppendText(0x1ad4);
 	fcn_00533a60(g_772514, 0x1c, out, 2, g_14abe74, g_14abe78);
-	np = out[0];
-	s = out[1];
+	sex0 = out[0];
+	sex1 = out[1];
 	d2_SetForm(h, 4);
 	io_AppendText(0x1ad7);
 	fcn_00533a60(g_772514, 0x1c, out, 2, g_14abe80, g_14abe84);
-	ep = out[1];
-	n = (int) out[0];
+	faith1 = out[1];
+	faith0 = out[0];
 	d2_SetForm(h, 5);
 	io_AppendText(0x1adb);
 	cols = (*(int*) (g_772514 * 0x3cc + (int) g_1015f4c) - 0x20) / 0x30;
@@ -136,9 +138,9 @@ int __cdecl fcn_005936f0(int msg, int param)
 	}
 	d2_SetBildArgument(first, 0xc);
 	d2_SetBildArgument(second, 0xc);
-	w8 = d2_CreateRadioGroup(2, np, s);
+	w8 = d2_CreateRadioGroup(2, sex0, sex1);
 	d2_SelectRadioGroup(w8, g_7e23e8 & 0xff);
-	w24 = d2_CreateRadioGroup(2, n, ep);
+	w24 = d2_CreateRadioGroup(2, faith0, faith1);
 	d2_SelectRadioGroup(w24, g_7e23e9 & 0xff);
 	fcn_00476b60();
 	g_14cf950 = 0;
@@ -225,14 +227,14 @@ dispatch:
 			}
 		}
 		else if (sel == 2) {
-			d2_UpdateRadioGroup(second);
+			d2_UpdateRadioGroup(w8);
 			if (g_100f1dc != -1) {
-				if (g_67d370 == np) {
+				if (g_67d370 == sex0) {
 					g_7e23e8 = 0;
 					sel = 3;
 					redraw = 1;
 				}
-				else if (g_67d370 == s) {
+				else if (g_67d370 == sex1) {
 					g_7e23e8 = 1;
 					sel = 3;
 					redraw = 1;
@@ -240,14 +242,14 @@ dispatch:
 			}
 		}
 		else if (sel == 3) {
-			d2_UpdateRadioGroup(w8);
+			d2_UpdateRadioGroup(w24);
 			if (g_100f1dc != -1) {
-				if (g_67d370 == n) {
+				if (g_67d370 == faith0) {
 					g_7e23e9 = 1;
 					sel = 4;
 					redraw = 1;
 				}
-				else if (g_67d370 == ep) {
+				else if (g_67d370 == faith1) {
 					g_7e23e9 = 0;
 					sel = 4;
 					redraw = 1;

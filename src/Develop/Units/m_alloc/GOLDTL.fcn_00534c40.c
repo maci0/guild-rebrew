@@ -20,7 +20,6 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
 {
     int *blk;
     int *v3;
-    unsigned int *v2;
     int v4;
     int v5;
     int v7;
@@ -31,10 +30,6 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
     char *v6;
     unsigned int *v10;
     unsigned int *v1;
-    int i;
-    int n;
-    int arr;
-    unsigned int ent;
 
     v3 = (int *)m_alloc(0x274, (char *)0x6a3180);
     if (v3 == 0)
@@ -51,8 +46,7 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
         fcn_00442c00(v4, 0);
         v4 = *v3;
         v3[1] = v4;
-        v2 = *(unsigned int **)(v4 + 0x1fc);
-        *v3 = fcn_00442910((int)v2, v4 + 0x4c, v4 + 0x84, a1);
+        *v3 = fcn_00442910(*(int *)(v4 + 0x1fc), v4 + 0x4c, v4 + 0x84, a1);
     }
     else
         v3[1] = 0;
@@ -71,46 +65,34 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
     {
         v1 = (unsigned int *)(v6 + 4);
         v6 = v6 + 4;
-        v4 = fcn_00471170(0, 0, *v1);
-        *v10 = v4;
-        if (v4 == 0)
+        *v10 = fcn_00471170(0, 0, *v1);
+        if (*v10 == 0)
             break;
         v4 = v12 + 1;
         sprintf(v8, (char *)0x6a3168, v4);
         sprintf(v9, (char *)0x6a314c, v4);
         fcn_004713b0(*v10, v8, v9);
-        v11 = 0;
-        v7 = *(int *)(*v3 + 0x1cc);
-        n = *(int *)(*(int *)(v7 + 0x318) + 0x1e4);
-        if (n >= 1)
+        for (v11 = 0; v11 < *(int *)(*(int *)(*(int *)(*v3 + 0x1cc) + 0x318) + 0x1e4); v11++)
         {
-            arr = *(int *)(v7 + 0x31c);
-            for (v11 = 0; v11 < n; v11++)
+            if (strcmpi(*(char **)(*(int *)(*(int *)(*v3 + 0x1cc) + 0x31c) + v11 * 4), v8) == 0)
             {
-                ent = *(unsigned int *)(arr + v11 * 4);
-                if (strcmpi((char *)ent, v8) != 0)
-                {
-                    if (strcmpi((char *)ent, v9) == 0)
-                        continue;
-                    *(unsigned int *)(*v10 * 700 + 0x10383f8) =
-                        *(unsigned int *)(ent + 0x50);
-                    v7 = *(int *)(*v10 * 700 + 0x10382e8);
-                }
-                else
-                {
-                    *(unsigned int *)(*v10 * 700 + 0x10383f4) =
-                        *(unsigned int *)(ent + 0x50);
-                    v7 = *(int *)(*v10 * 700 + 0x10382e4);
-                }
-                ent = *(unsigned int *)(*(int *)(*(int *)(*v3 + 0x1cc) + 0x31c) + v11 * 4);
-                *(unsigned int *)(ent + 0x50) = *(unsigned int *)(v7 + 0x20);
-                v7 = *(int *)(*v3 + 0x1cc);
-                arr = *(int *)(v7 + 0x31c);
-                n = *(int *)(*(int *)(v7 + 0x318) + 0x1e4);
+                *(unsigned int *)(*v10 * 700 + 0x10383f4) =
+                    *(unsigned int *)(*(int *)(*(int *)(*(int *)(*v3 + 0x1cc) + 0x31c) + v11 * 4) + 0x50);
+                v7 = *(int *)(*v10 * 700 + 0x10382e4);
             }
+            else
+            {
+                if (strcmpi(*(char **)(*(int *)(*(int *)(*v3 + 0x1cc) + 0x31c) + v11 * 4), v9) != 0)
+                    continue;
+                *(unsigned int *)(*v10 * 700 + 0x10383f8) =
+                    *(unsigned int *)(*(int *)(*(int *)(*(int *)(*v3 + 0x1cc) + 0x31c) + v11 * 4) + 0x50);
+                v7 = *(int *)(*v10 * 700 + 0x10382e8);
+            }
+            *(unsigned int *)(*(int *)(*(int *)(*(int *)(*v3 + 0x1cc) + 0x31c) + v11 * 4) + 0x50) =
+                *(unsigned int *)(v7 + 0x20);
         }
         fcn_00471490(*v10);
-        if (v12 > 2)
+        if (v5 > 2)
             fcn_00471a30(*v10, 0);
         v10 = v10 + 1;
         if (v5 <= v4)

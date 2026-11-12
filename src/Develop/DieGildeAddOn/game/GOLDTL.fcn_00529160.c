@@ -69,6 +69,7 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 	unsigned int tick;
 	unsigned char type;
 
+	type = 0;
 	if ((int) index >= 0x300) {
 		return;
 	}
@@ -182,10 +183,8 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 			break;
 		}
 		type = *a4;
-	} else {
-		type = 0;
 	}
-	if ((slot->shown != 0 || a4 != 0) && type == 0) {
+	if ((slot->shown == 0 || a4 != 0) && type == 0) {
 		return;
 	}
 	fcn_004c4510((char*) slot, slot->handle);

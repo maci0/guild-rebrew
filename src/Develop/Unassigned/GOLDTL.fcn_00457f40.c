@@ -40,7 +40,7 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 	float* offset, float* scale, GOLDTL_TileUv* uv, unsigned long diffuse)
 {
 	GOLDTL_BufferVtbl* ops;
-	GOLDTL_TerrainVertex* v;
+
 	unsigned short* idx;
 	unsigned char* tile;
 	void* verts;
@@ -84,25 +84,25 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 	}
 
 	fx = (float) rect[0] * scale[0] + offset[0];
-	fy = offset[1] + (g_6b7ff9 ? g_6629b0 : g_662acc);
+	fy = (g_6b7ff9 ? g_6629b0 : g_662acc) + offset[1];
 	y = rect[2];
 	fz = (float) y * scale[2] + offset[2];
 	u2 = uv->v;
-	v = (GOLDTL_TerrainVertex*) verts;
+
+	tile = (unsigned char*) (base + y * stride);
 	while (y <= rect[3]) {
-		tile = (unsigned char*) (base + y * stride);
 		x = rect[0];
 		sx = fx;
 		su = uv->u;
 		while (x <= rect[1]) {
 			height = tile[x];
-			v->x = sx;
-			v->y = (float) height * scale[1] + fy;
-			v->z = fz;
-			v->diffuse = diffuse;
-			v->u = su;
-			v->v = u2;
-			v++;
+			((GOLDTL_TerrainVertex*) verts)->x = sx;
+			((GOLDTL_TerrainVertex*) verts)->y = (float) height * scale[1] + fy;
+			((GOLDTL_TerrainVertex*) verts)->z = fz;
+			((GOLDTL_TerrainVertex*) verts)->diffuse = diffuse;
+			((GOLDTL_TerrainVertex*) verts)->u = su;
+			((GOLDTL_TerrainVertex*) verts)->v = u2;
+			verts = (GOLDTL_TerrainVertex*) verts + 1;
 			sx += scale[0];
 			su += uv->du;
 			x++;
@@ -137,7 +137,7 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 					idxs = (char*) idxs + 6;
 					count++;
 				}
-				h3 = tile[stride + 1];
+				h3 = *(unsigned char*)(base + (rect[2] + i + 1) * stride + rect[0] + j + 1);
 				if (abs(h3 - h1) <= th && abs(h3 - h2) <= th
 					&& abs(h1 - h2) <= th) {
 					idx = (unsigned short*) idxs;

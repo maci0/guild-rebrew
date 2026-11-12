@@ -29,6 +29,7 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 	int j;
 	int k;
 	int found;
+	int w;
 
 	n = fcn_004e8b80(a0, 6, rec);
 	if (n <= 0) {
@@ -37,11 +38,13 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 	v8 = fcn_00470820(0, 0, "special\\tagesordnung");
 	fcn_00471b60(v8);
 	d2_SetForm(v8, 2);
+	w = g_772514;
 	d2_SetForm(v8, 4);
-	fcn_0046e830(0xffffffff, 0xffffffff, g_772514, g_772514, 0x767);
+	fcn_0046e830(0xffffffff, 0xffffffff, g_772514, w, 0x767);
 	d2_SetForm(v8, 3);
+	w = g_772514;
 	d2_SetForm(v8, 5);
-	fcn_0046e830(0xffffffff, 0xffffffff, g_772514, g_772514, 0x767);
+	fcn_0046e830(0xffffffff, 0xffffffff, g_772514, w, 0x767);
 	d2_SetForm(v8, 1);
 	io_AppendText(a0 + 0x13a3);
 	d2_SetForm(v8, 2);
@@ -52,11 +55,11 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 			s = (char*) gm_LookupEntityRecordById(*(int*) (rec + i * 0x18));
 			v6 = (char*) gm_LookupEntityRecordById(*(int*) (rec + i * 0x18 + 0x10));
 			if (s != 0 && v6 != 0) {
-				found = 1;
-				if (*(char*) (s + 9) != 0) {
-					v9 = *(unsigned char*) (rec + i * 0x18 + 4) + 0x27b;
-				} else {
+				found |= 1;
+				if (*(char*) (s + 9) == 0) {
 					v9 = *(unsigned char*) (rec + i * 0x18 + 4) + 0x253;
+				} else {
+					v9 = *(unsigned char*) (rec + i * 0x18 + 4) + 0x27b;
 				}
 				io_AppendText(0x139f, *(unsigned short*) v6, *(unsigned short*) s, v9);
 			}
@@ -66,7 +69,36 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 		io_AppendText(0x139d);
 	}
 	d2_SetForm(v8, 3);
-	if (a0 >= 8) {
+	if (a0 < 8) {
+		io_AppendText(0x13a0);
+		i = 0;
+		for (j = 0; j < n; j++) {
+			if (rec[j * 0x18 + 8] == 3) {
+				i |= 1;
+				found = 0;
+				io_AppendText(0x13a1, *(unsigned char*) (rec + j * 0x18) + 0x253);
+				k = 0;
+				h = (unsigned short*) g_7f4ca0;
+				do {
+					if (k >= 4) {
+						break;
+					}
+					if (*(unsigned char*) ((char*) h + 0x168) == *(unsigned char*) (rec + j * 0x18)) {
+						found |= 1;
+						io_AppendText((int) "$A$Z%1N2", *h);
+						k += 1;
+					}
+					h = (unsigned short*) ((char*) h + 0x21c);
+				} while ((int) h < 0x85a0a0);
+				if (found == 0) {
+					io_AppendText(0x139d);
+				}
+			}
+		}
+		if (i != 0) {
+			goto have_pick;
+		}
+	} else {
 		k = fcn_004ad190();
 		v9 = 0;
 		pick[0] = 0;
@@ -74,14 +106,12 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 		pick[2] = 0;
 		pick[3] = 0;
 		if (k != 0) {
-			if (k != 0x24) {
-				if (k != 0x25) {
-					v9 = 0x4000;
-				} else {
-					v9 = 0x10000;
-				}
-			} else {
+			if (k == 0x24) {
 				v9 = 0x8000;
+			} else if (k != 0x25) {
+				v9 = 0x4000;
+			} else {
+				v9 = 0x10000;
 			}
 		}
 		i = 0;
@@ -107,41 +137,11 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 				}
 			}
 		}
-		if (i == 0) {
-			goto no_pick;
-		}
-	} else {
-		io_AppendText(0x13a0);
-		i = 0;
-		for (j = 0; j < n; j++) {
-			if (rec[j * 0x18 + 8] == 3) {
-				i = 1;
-				found = 0;
-				io_AppendText(0x13a1, *(unsigned char*) (rec + j * 0x18) + 0x253);
-				k = 0;
-				h = (unsigned short*) g_7f4ca0;
-				do {
-					if (k >= 4) {
-						break;
-					}
-					if (*(unsigned char*) ((char*) h + 0x168) == *(unsigned char*) (rec + j * 0x18)) {
-						found = 1;
-						io_AppendText((int) "$A$Z%1N2", *h);
-						k += 1;
-					}
-					h = (unsigned short*) ((char*) h + 0x21c);
-				} while ((int) h < 0x85a0a0);
-				if (found == 0) {
-					io_AppendText(0x139d);
-				}
-			}
-		}
 		if (i != 0) {
 			goto have_pick;
 		}
-no_pick:
-		io_AppendText(0x139d);
 	}
+	io_AppendText(0x139d);
 have_pick:
 	do {
 		if (*(int*) 0x14ce8e0 != 0) {

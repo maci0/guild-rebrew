@@ -3,7 +3,7 @@ typedef struct Loc {
 	unsigned char kind;      /* 0x000 */
 	char pad1[0x0c];
 	unsigned char xd;        /* 0x00d */
-	char pad_e[0x159];       /* 0x00e..0x166 */
+	char pad_e[0x158];       /* 0x00e..0x165 */
 	unsigned char x166;      /* 0x166 */
 	char pad167[0xbc];       /* 0x167..0x222 */
 	unsigned char list[6];   /* 0x223 */
@@ -15,9 +15,9 @@ extern char* lpGebaeudePROT;
 extern int g_774800;
 
 int __cdecl gm_GetBuildingTypeCategory(int id);
-int __cdecl fcn_00507910(unsigned char kind);
+int __cdecl fcn_00507910(int kind);
 int __cdecl gm_CheckStatLevel(int id, int kind);
-int __cdecl fcn_00504ef0(unsigned char kind, int* out);
+int __cdecl fcn_00504ef0(int kind, int* out);
 
 /* ADDRESS: GOLDTL 0x00504f30 */
 unsigned int __cdecl fcn_00504f30(int a0, int a1)
@@ -33,7 +33,7 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 	unsigned char c;
 
 	type = gm_GetBuildingTypeCategory(a0);
-	rec = (Loc*) (lpGebaeudePROT + a0 * 0x24d);
+	rec = &((Loc*) lpGebaeudePROT)[a0];
 	loc = gm_CheckStatLevel(a1, fcn_00507910(rec->kind));
 	if (a1 == 0xffff) {
 		return 0;
@@ -48,19 +48,19 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 			if (c == 0) {
 				break;
 			}
-			if ((unsigned char) loc == c) {
+			if (loc == c) {
 				return 1;
 			}
 		}
 		n = fcn_00504ef0(rec->kind, arr);
 		for (j = 0; j < n; j++) {
-			rb = (unsigned char*) (lpGebaeudePROT + arr[j] * 0x24d);
+			rb = (unsigned char*) &((Loc*) lpGebaeudePROT)[arr[j]];
 			for (i = 0; i < 6; i++) {
 				c = rb[0x223 + i];
 				if (c == 0) {
 					break;
 				}
-				if ((unsigned char) loc == c) {
+				if (loc == c) {
 					return 2;
 				}
 			}
@@ -90,19 +90,19 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 			if (c == 0) {
 				break;
 			}
-			if ((unsigned char) loc == c) {
+			if (loc == c) {
 				return 1;
 			}
 		}
 		n = fcn_00504ef0(0x13, arr);
 		for (j = 0; j < n; j++) {
-			rb = (unsigned char*) (lpGebaeudePROT + arr[j] * 0x24d);
+			rb = (unsigned char*) &((Loc*) lpGebaeudePROT)[arr[j]];
 			for (i = 0; i < 6; i++) {
 				c = rb[0x223 + i];
 				if (c == 0) {
 					break;
 				}
-				if ((unsigned char) loc == c) {
+				if (loc == c) {
 					return 2;
 				}
 			}
@@ -115,7 +115,7 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 			if (c == 0) {
 				break;
 			}
-			if ((unsigned char) loc == c) {
+			if (loc == c) {
 				return 1;
 			}
 		}
@@ -145,19 +145,19 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 			if (c == 0) {
 				break;
 			}
-			if ((unsigned char) loc == c) {
+			if (loc == c) {
 				return 1;
 			}
 		}
 		n = fcn_00504ef0(rec->kind, arr);
 		for (j = 0; j < n; j++) {
-			rb = (unsigned char*) (lpGebaeudePROT + arr[j] * 0x24d);
+			rb = (unsigned char*) &((Loc*) lpGebaeudePROT)[arr[j]];
 			for (i = 0; i < 6; i++) {
 				c = rb[0x223 + i];
 				if (c == 0) {
 					break;
 				}
-				if ((unsigned char) loc == c) {
+				if (loc == c) {
 					return 2;
 				}
 			}

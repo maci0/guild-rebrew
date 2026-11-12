@@ -1,4 +1,5 @@
 #include "client_data.h"
+extern int g_100f888, g_6a99e8, g_14ce8e8, g_6772c4, g_100f1e8, g_100f1ec, g_67d370, g_7725c8;
 void __cdecl fcn_00471e30(int); void __cdecl fcn_004125c0(int, int);
 int __cdecl fcn_00591190(int);
 int __cdecl fcn_00590b80(int);
@@ -11,6 +12,7 @@ void __cdecl fcn_004707d0(int);
 void __cdecl fcn_00590670(void)
 {
 	unsigned short* p;
+	unsigned short* q;
 	int v3;
 	int v4;
 	int v5;
@@ -20,30 +22,30 @@ void __cdecl fcn_00590670(void)
 
 	v4 = 0;
 	v6 = 0;
-	v7 = 0;
 	p = 0;
-	v3 = *(int*) 0x100f888;
-	v5 = *(int*) 0x6a99e8;
+	v3 = g_100f888;
+	v5 = g_6a99e8;
 	if ((v3 == -1 && *(int*) 0x6a99ec != -1)
-		|| (*(int*) 0x774a24 != 0 && *(int*) 0x14ce8e8 == 0 && v5 != -1)) {
-		fcn_00471e30(*(int*) 0x6a99e8);
-		*(int*) 0x6a99e8 = -1;
+		|| (*(int*) 0x774a24 != 0 && g_14ce8e8 == 0 && v5 != -1)) {
+		fcn_00471e30(g_6a99e8);
+		g_6a99e8 = -1;
 		*(int*) 0x6a99f0 = -1;
 		*(int*) 0x6a99ec = -1;
 		*(int*) 0x774a24 = 0;
-		*(int*) 0x6772c4 = 1;
-		fcn_004125c0(*(int*) 0x100f1e8, *(int*) 0x100f1ec);
-		v3 = *(int*) 0x100f888;
-		v5 = *(int*) 0x6a99e8;
+		g_6772c4 = 1;
+		fcn_004125c0(g_100f1e8, g_100f1ec);
+		v3 = g_100f888;
+		v5 = g_6a99e8;
 	}
+	v7 = 0;
 	if (*(int*) &g_7746a4 != 0 && *(int*) 0x774a24 != *(int*) &g_7746a4
-		&& *(int*) 0x14ce8e8 != 0) {
+		&& g_14ce8e8 != 0) {
 		v4 = 0;
 		if (*(int*) &g_7746ac == 0) {
 			v7 = *(int*) &g_7746a4;
 		}
 		else {
-			v4 = *(unsigned short*) &g_7746ac;
+			v4 = *(unsigned short*) g_7746ac;
 			if (v4 == 0) {
 				v7 = *(int*) &g_7746a4;
 			}
@@ -52,34 +54,32 @@ void __cdecl fcn_00590670(void)
 		*(int*) 0x6a99ec = -1;
 	}
 	if (v3 != -1 && v3 != *(int*) 0x6a99ec) {
-		p = *(unsigned short**) (*(int*) &g_1015ea0 + 0x2f0
-			+ *(int*) 0x67d370 * 0x2f4);
-		if (p != 0) {
-			if ((unsigned int) p >= 0x7f4ca0 && (unsigned int) p <= 0x85a09f) {
-				if (*p == 0xffff) {
+		q = *(unsigned short**) (*(int*) &g_1015ea0 + 0x2f0
+			+ g_67d370 * 0x2f4);
+		if (q != 0) {
+			if ((unsigned int) q >= 0x7f4ca0 && (unsigned int) q <= 0x85a09f) {
+				p = q;
+				if (*q == 0xffff) {
 					p = 0;
 				}
 			}
-			else if ((unsigned int) p >= (unsigned int) *(int*) &lpGebaeudeINST && (unsigned int) p < (unsigned int) (*(int*) &lpGebaeudeINST + 0xa900)) {
-				v6 = *(unsigned char*) p;
+			else if ((unsigned int) q >= (unsigned int) *(int*) &lpGebaeudeINST && (unsigned int) q < (unsigned int) (*(int*) &lpGebaeudeINST + 0xa900)) {
+				v6 = *(unsigned char*) q;
 				if (v6 >= 0x58) {
 					v6 = 0;
 				}
 			}
-			else if ((unsigned int) p >= (unsigned int) *(int*) &lpGebaeudePROT && (unsigned int) p < (unsigned int) (*(int*) &lpGebaeudePROT + 0xca78)) {
-				v6 = ((int) p - *(int*) &lpGebaeudePROT) / 0x24d;
+			else if ((unsigned int) q >= (unsigned int) *(int*) &lpGebaeudePROT && (unsigned int) q < (unsigned int) (*(int*) &lpGebaeudePROT + 0xca78)) {
+				v6 = ((int) q - *(int*) &lpGebaeudePROT) / 0x24d;
 			}
-			else if ((unsigned int) p >= (unsigned int) *(int*) &lpObjekteINST && (unsigned int) p < (unsigned int) (*(int*) &lpObjekteINST + 0x14f218)) {
-				v4 = *p;
+			else if ((unsigned int) q >= (unsigned int) *(int*) &lpObjekteINST && (unsigned int) q < (unsigned int) (*(int*) &lpObjekteINST + 0x14f218)) {
+				v4 = *q;
 				if (v4 >= 0x2dc) {
 					v4 = 0;
 				}
 			}
-			else if ((unsigned int) p >= (unsigned int) *(int*) &lpObjektePROT && (unsigned int) p < (unsigned int) (*(int*) &lpObjektePROT + 0xb9dc)) {
-				v4 = ((int) p - *(int*) &lpObjektePROT) / 0x41;
-			}
-			else {
-				p = 0;
+			else if ((unsigned int) q >= (unsigned int) *(int*) &lpObjektePROT && (unsigned int) q < (unsigned int) (*(int*) &lpObjektePROT + 0xb9dc)) {
+				v4 = ((int) q - *(int*) &lpObjektePROT) / 0x41;
 			}
 		}
 		else if (0xdf <= v3) {
@@ -103,9 +103,9 @@ void __cdecl fcn_00590670(void)
 		if (v5 != -1) {
 			fcn_00471e30(v5);
 			v5 = -1;
-			*(int*) 0x6a99e8 = -1;
+			g_6a99e8 = -1;
 			*(int*) 0x6a99f0 = -1;
-			v3 = *(int*) 0x100f888;
+			v3 = g_100f888;
 		}
 		if (v4 != 0) {
 			b = *(unsigned char*) (*(int*) &lpObjektePROT + v4 * 0x41);
@@ -115,38 +115,38 @@ void __cdecl fcn_00590670(void)
 			else {
 				v5 = fcn_00590b80(v4);
 			}
-			v3 = *(int*) 0x100f888;
-			*(int*) 0x6a99e8 = v5;
+			v3 = g_100f888;
+			g_6a99e8 = v5;
 		}
 		else if (v6 != 0) {
 			v5 = fcn_005909d0(v6);
-			v3 = *(int*) 0x100f888;
-			*(int*) 0x6a99e8 = v5;
+			v3 = g_100f888;
+			g_6a99e8 = v5;
 		}
 		else if (v7 != 0) {
 			v5 = fcn_005913e0(v7);
-			v3 = *(int*) 0x100f888;
-			*(int*) 0x6a99e8 = v5;
+			v3 = g_100f888;
+			g_6a99e8 = v5;
 		}
 		else if (p != 0) {
 			v5 = fcn_00591490((int*) p);
-			v3 = *(int*) 0x100f888;
-			*(int*) 0x6a99e8 = v5;
+			v3 = g_100f888;
+			g_6a99e8 = v5;
 		}
 		if (v5 == -1) {
 			*(int*) 0x6a99ec = -1;
 			*(int*) 0x774a24 = 0;
 		}
 		else {
-			*(int*) 0x6a99f0 = *(int*) (v5 * 700 + (unsigned long)&g_1038144);
 			*(int*) 0x6a99ec = v3;
-			if (*(int*) 0x14ce8e8 != 0) {
-				*(int*) 0x6772c4 = 0;
+			*(int*) 0x6a99f0 = *(int*) (v5 * 700 + (unsigned long)&g_1038144);
+			if (g_14ce8e8 != 0) {
+				g_6772c4 = 0;
 			}
 		}
 	}
 	if (v5 != -1) {
-		*(int*) 0x7725c8 = 1;
+		g_7725c8 = 1;
 		*(int*) 0x774a28 = 1;
 		fcn_004707d0(v5);
 		return;
@@ -154,6 +154,6 @@ void __cdecl fcn_00590670(void)
 	if (*(int*) 0x774a28 == 0) {
 		return;
 	}
-	*(int*) 0x7725c8 = 0;
+	g_7725c8 = 0;
 	*(int*) 0x774a28 = 0;
 }

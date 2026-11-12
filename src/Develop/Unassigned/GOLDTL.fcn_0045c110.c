@@ -15,6 +15,7 @@ void __cdecl fcn_0045bfb0(char* p);
 void __cdecl fcn_0045c110(void)
 {
 	unsigned int i;
+	unsigned int fill_size;
 	char* p;
 
 	p = g_104049c;
@@ -23,7 +24,24 @@ void __cdecl fcn_0045c110(void)
 			fcn_0045bfb0(p);
 		}
 	}
-	memset(g_104049c, 0, g_10404a0 * 0x70);
+	fill_size = g_10404a0 * 0x70;
+	__asm {
+		mov edi, g_104049c
+		mov ebx, fill_size
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short Lfill
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	Lfill:
+		add ecx, ebx
+		rep stosb
+	}
 	g_10405c4 = 0;
 	g_10404c0[3] = 0;
 	g_10404c0[2] = 0;

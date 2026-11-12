@@ -8,7 +8,11 @@ extern int g_7f4c00;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
-extern unsigned char lpGebaeudePROT;
+extern char* lpGebaeudePROT;
+typedef struct BuildingRow5797 {
+	unsigned char kind;
+	char fields[0x24c];
+} BuildingRow5797;
 extern unsigned char g_773d75;
 
 extern int __cdecl fcn_00500e20(int* p);
@@ -47,6 +51,7 @@ void __cdecl fcn_005797a0(char* a0)
 	int i;
 	int len;
 	float fvalue;
+	float increment;
 	float v23;
 
 	handle = fcn_00500e20(&g_7f4c00);
@@ -56,7 +61,7 @@ void __cdecl fcn_005797a0(char* a0)
 	param = 0;
 	mode = 0;
 	value = (int) (g_7f4c04 & 0xffff);
-	if ((*(float*) (handle * 4 + 0x696550) < (float) value
+	if ((*(float*) (handle * 4 + 0x696550) <= (float) value
 			|| (float) value < *(float*) (handle * 4 + 0x696540))
 		&& *(int*) (a0 + 0x70) != -1 && *(int*) (a0 + 0x70) != -2) {
 		fcn_00500bb0(a0 + 0x52, 0, 5, 0);
@@ -83,7 +88,7 @@ void __cdecl fcn_005797a0(char* a0)
 		*(unsigned int*) (a0 + 0x70) = 0xffffffff;
 	search = (unsigned char*) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x10));
 	if (search != 0) {
-		row = (char*) lpGebaeudePROT + *search * 0x24d;
+		row = (char*) &((BuildingRow5797*) lpGebaeudePROT)[*search];
 		param = (char*) fcn_00502cd0(*(unsigned int*) (&search[0x5d]), 2, 6, 0, 0x2a);
 		if (param == 0)
 			*(unsigned int*) (a0 + 0x70) = 0xffffffff;
@@ -99,10 +104,11 @@ void __cdecl fcn_005797a0(char* a0)
 		} else {
 			fvalue = (float) fcn_0050c710(search, 0x12, 1) * g_662910;
 		}
+		increment = (fvalue + g_6628a0) * (float) value * g_665ef8;
 		if (valid >= 1) {
 			v23 = *(float*) (a0 + 0xb0);
 			for (i = 0; i < valid; i++) {
-				v23 = v23 + (fvalue + g_6628a0) * (float) value * g_665ef8;
+				v23 = v23 + increment;
 			}
 			*(float*) (a0 + 0xb0) = v23;
 		}
@@ -148,7 +154,7 @@ void __cdecl fcn_005797a0(char* a0)
 				if (valid != 1)
 					io_FormatTextBuffer(line, 0x4224, valid, len);
 				else
-					io_FormatTextBuffer(line, 0x4223);
+					io_FormatTextBuffer(line, 0x4223, len);
 			}
 			strcat(text, line);
 		} else {

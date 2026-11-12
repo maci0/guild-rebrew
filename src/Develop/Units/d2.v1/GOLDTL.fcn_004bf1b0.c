@@ -1,5 +1,6 @@
 extern char* g_1015ea0;
-extern char* g_entity_type_table;
+#include "Develop/DieGildeAddOn/game/game_data.h"
+typedef struct TradeProto { unsigned char kind; unsigned char rest[0x24c]; } TradeProto;
 extern int g_772514;
 extern int g_100f1dc;
 extern int g_67d370;
@@ -81,6 +82,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 	if (rec == 0 || tbl == 0) {
 		return;
 	}
+	types = (char*)&((TradeProto*)lpGebaeudePROT)[*(unsigned char*)tbl];
 	fcn_00471a30(a1[0], 0);
 	h = fcn_00470820(0, 0, s_681718);
 	fcn_00471b60(h);
@@ -92,7 +94,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 	fcn_00533a60(g_772514, 0, ids, 2, g_14b5e9c, g_14b5ea4);
 	selA = ids[0];
 	selB = ids[1];
-	types = g_entity_type_table + *(unsigned char*) tbl * 0x24d;
+	
 	n = counts[*(unsigned short*) rec - 0x134];
 	item = fcn_00502cd0(*(int*) (rec + 0x14), 1, 0, 0x1dd);
 	value = fcn_0050dfd0((int) item, 0);
@@ -106,12 +108,12 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 		fcn_004bf1a0((char*) &nodeA[k][0]);
 		fcn_004bf1a0((char*) &nodeB[k][0]);
 	}
-	fcn_0046f740(0x6e, 0x1a, *(unsigned short*) rec + 0x4ae, h);
-	i = d2_ShowTxt(0x6e, 2, g_14b5e88, h);
+	fcn_0046f740(0x6e, 0x1a, *(unsigned short*) rec + 0x4ae, first);
+	i = d2_ShowTxt(0x6e, 2, g_14b5e88, first);
 	*(int*) (g_1015ea0 + i * 0x2f4 + 0x6c) = 1;
 	*(int*) (g_1015ea0 + i * 0x2f4 + 0x18) = 0xcd;
-	fcn_0046f740(0x6e, 0x88, *(unsigned short*) rec + 0x4ae, h);
-	i = d2_ShowTxt(0x6e, 0x70, g_14b5e8c, h);
+	fcn_0046f740(0x6e, 0x88, *(unsigned short*) rec + 0x4ae, first);
+	i = d2_ShowTxt(0x6e, 0x70, g_14b5e8c, first);
 	*(int*) (g_1015ea0 + i * 0x2f4 + 0x6c) = 1;
 	*(int*) (g_1015ea0 + i * 0x2f4 + 0x18) = 0xcd;
 	if (n >= 1) {
@@ -126,10 +128,10 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 		icons[11] = 0x93;
 		for (i = 0; i < n; i++) {
 			k = icons[3 + i + (*(unsigned short*) rec - 0x134) * 3] + 0x6e;
-			icons[i] = fcn_0046f740(k, 0x22, 0x525, h);
+			icons[i] = fcn_0046f740(k, 0x22, 0x525, first);
 			*(int*) (g_1015ea0 + icons[i] * 0x2f4 + 0x5c) = 1;
 			*(int*) (g_1015ea0 + icons[i] * 0x2f4 + 0x1d0) = 3;
-			labels[i] = fcn_0046f740(k, 0x90, 0x525, h);
+			labels[i] = fcn_0046f740(k, 0x90, 0x525, first);
 			*(int*) (g_1015ea0 + labels[i] * 0x2f4 + 0x5c) = 1;
 			*(int*) (g_1015ea0 + labels[i] * 0x2f4 + 0x1d0) = 3;
 		}

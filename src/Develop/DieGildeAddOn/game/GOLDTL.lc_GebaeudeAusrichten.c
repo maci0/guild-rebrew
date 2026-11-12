@@ -273,13 +273,13 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 					f.iRot = 2;
 				}
 			}
-			fcn_00414960(f.fMin, f.fMax, pAktuell);
 			*(int*) (pAktuell + 0x84) = 0;
 			*(int*) (pAktuell + 0x88) = 0;
 			*(int*) (pAktuell + 0x8c) = 0;
 			*(int*) (pAktuell + 0x4c) = 0;
 			*(int*) (pAktuell + 0x50) = 0;
 			*(int*) (pAktuell + 0x54) = 0;
+			fcn_00414960(f.fMin, f.fMax, pAktuell);
 			*(float*) (pAktuell + 0x4c) = f.fPos[0];
 			*(float*) (pAktuell + 0x50) = f.fPos[1];
 			*(float*) (pAktuell + 0x54) = f.fPos[2];

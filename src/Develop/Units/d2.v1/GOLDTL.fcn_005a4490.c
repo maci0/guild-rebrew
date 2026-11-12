@@ -63,6 +63,8 @@ void __cdecl fcn_005a4490(char* p)
 	char* line;
 
 	prev = -1;
+	slot = -1;
+	count = 0;
 	first = -1;
 	second = -1;
 	refresh = 1;

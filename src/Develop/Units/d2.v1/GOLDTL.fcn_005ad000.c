@@ -74,16 +74,16 @@ void __cdecl fcn_005ad000(void)
 			*(int*) 0x774654 = 1;
 		}
 		if (*(int*) &g_100f1dc != -1 && *(int*) 0x67d370 == msg.ctl) {
-			*(char*) (msg.pkt + 0x1c) = 0x39;
 			*(int*) (msg.pkt + 0x20) = *(int*) (obj + 4);
+			*(char*) (msg.pkt + 0x1c) = 0x39;
 			*(int*) (msg.pkt + 0x24) = -1;
 			*(char*) (msg.pkt + 0x4e) = 9;
 			*(int*) (msg.pkt + 0x74) = *(int*) (obj + 4);
 			*(int*) (msg.pkt + 0x70) = *(int*) ((unsigned long)&g_7f4ca4 +
 			                                    *(unsigned short*) &g_774970 * 0x21c);
+			h = *(unsigned char*) &g_773d75;
 			*(int*) (msg.pkt + 0x78) = fcn_0050b750(
-			    fcn_00471f80(ctl1, *(unsigned char*) &g_773d75),
-			    *(unsigned char*) &g_773d75);
+			    fcn_00471f80(ctl1, h), h);
 			fcn_004c4eb0((void*) 0x6ab168);
 			fcn_004c5150(*(int*) (obj + 4),
 			             *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c),

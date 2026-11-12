@@ -65,6 +65,9 @@ int __cdecl fcn_004b6830(int* a0)
 			hit = (unsigned short*) (0x7f4ca0 + j * 0x21c);
 			break;
 		}
+		if (hit != 0) {
+			break;
+		}
 	}
 	if (hit == 0) {
 		goto fail;

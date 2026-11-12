@@ -103,7 +103,7 @@ int __cdecl fcn_00486640(char* a0, int* a1, int a2)
 									w = *(unsigned short*) (g_item_def_table + a1[0] * 0x41 + i);
 									t = w * sc - seg->stock - seg->used;
 									n = (seg->capacity >> 1) - seg->used;
-									if (t < n) {
+									if (t <= n) {
 										t = n;
 									}
 									n = seg->capacity - seg->used - 1;

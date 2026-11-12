@@ -17,8 +17,8 @@ void __cdecl fcn_00566d00(int a0)
 	char buf[256];
 	unsigned short* a;
 	unsigned short* b;
-	int v2;
-	int v3;
+	unsigned short v2;
+	unsigned short v3;
 	int v4;
 	int state;
 	int v;

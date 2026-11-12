@@ -41,7 +41,7 @@ int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
 	float f;
 	float g;
 	float v;
-	float d;
+	double d;
 	Time t;
 	int idx;
 	int i;
@@ -71,11 +71,11 @@ int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
 	if (i < n) {
 		v = (float) (t.min + a0->hour * 60);
 		f = f1 * flt_6629e8;
-		if (f < v) {
+		if (!(f > v)) {
 			f = v;
 		}
 		g = f2 * flt_6629e8;
-		if (f < g) {
+		if (!(f < g)) {
 			f = g;
 		}
 		acc = (int) (g - (float) (int) f);
@@ -86,28 +86,28 @@ int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
 		acc = 0;
 	}
 	if (i < n) {
-		d = f2 * flt_6629e8 - f1 * flt_6629e8;
+		d = (double) f2 * flt_6629e8 - (double) f1 * flt_6629e8;
 		for (k = n - i; k != 0; k--) {
-			acc = (int) ((float) acc + d);
+			acc = (int) ((double) acc + d);
 		}
 	}
 	v = (float) (a1->min + a1->hour * 60);
 	f = f1 * flt_6629e8;
-	if (f < v) {
+	if (!(f > v)) {
 		f = v;
 	}
 	g = f2 * flt_6629e8;
-	if (f < g) {
+	if (!(f < g)) {
 		f = g;
 	}
 	res1 = (int) f;
 	v = (float) (t.min + t.hour * 60);
 	f = f1 * flt_6629e8;
-	if (f < v) {
+	if (!(f > v)) {
 		f = v;
 	}
 	g = f2 * flt_6629e8;
-	if (f < g) {
+	if (!(f < g)) {
 		f = g;
 	}
 	res2 = (int) f;

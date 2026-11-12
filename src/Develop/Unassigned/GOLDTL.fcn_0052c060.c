@@ -215,7 +215,7 @@ main:
 	rot.z = cam->rot.z;
 	rot.x = (g_6a2564 - g_6a255c) * g_774694 + g_6a255c;
 	rot.y = g_77476c - ((int) g_14cf900 - g_774644) * g_665e00;
-	if (CompareVector3WithinTolerance((float*) &cam->pos, (float*) &pos, g_662a3c) == 0
+	if (CompareVector3WithinTolerance((float*) &cam->pos, (float*) &pos, 0.1f) == 0
 	    || CompareVector3WithinTolerance((float*) &cam->rot, (float*) &rot, 0.001f) == 0) {
 		fcn_00438b40((void*) g_6b8014, &pos);
 		fcn_00438cb0((void*) g_6b8014, &rot);
@@ -242,7 +242,7 @@ afterFirst:
 	if (dt == 0) {
 		goto predict;
 	}
-	g_774690 = g_774690 + (float) dt * g_662a3c;
+	g_774690 = g_774690 + (float) dt * 0.1f;
 	if (g_774690 > 1.0) {
 		g_774690 = (float) 1.0;
 	}
@@ -278,11 +278,11 @@ predict:
 	d.y = -((float) ((int) g_14cf902 - g_773df8)) * t;
 	q.x = mat[8] * g_662d40[2] + mat[4] * g_662d40[1] + mat[0] * g_662d40[0];
 	q.z = mat[10] * g_662d40[2] + mat[6] * g_662d40[1] + mat[2] * g_662d40[0];
-	if ((float) sqrt((double) (q.x * q.x + q.z * q.z)) < g_662a3c) {
+	if ((float) sqrt((double) (q.x * q.x + q.z * q.z)) < 0.1f) {
 		v.y = d.y;
 		v.z = 0.0f;
-		q.x = mat[0] * d.x + mat[4] * d.y + mat[8] * g_6628a8;
-		q.z = mat[2] * d.x + mat[6] * d.y + mat[10] * g_6628a8;
+		q.x = mat[0] * d.x + mat[4] * d.y + mat[8] * 0.0f;
+		q.z = mat[2] * d.x + mat[6] * d.y + mat[10] * 0.0f;
 	} else {
 		ang = -fcn_004514d0(g_662d40, &q.x);
 		v.y = 0.0f;
@@ -294,7 +294,7 @@ predict:
 	v.x = cam->pos.x + q.x;
 	v.y = cam->pos.y;
 	v.z = cam->pos.z + d.y;
-	if (CompareVector3WithinTolerance(&g_773e14, (float*) &v, g_662a3c) == 0) {
+	if (CompareVector3WithinTolerance(&g_773e14, (float*) &v, 0.1f) == 0) {
 		if (*(int*) (g_67a370 + 0xb0) != 0) {
 			ent = *(char**) (g_67a370 + 0xb0);
 			t = *(float*) ent + *(float*) (ent + 0x10) * g_66430c;

@@ -1,3 +1,12 @@
+typedef struct {
+	unsigned char a;
+	unsigned char b;
+	unsigned char c0 : 1;
+	unsigned char c1 : 1;
+	unsigned char c2 : 6;
+	unsigned char d;
+} Col44f250;
+
 void* __cdecl m_alloc(int size, char* tag);
 void* __cdecl fcn_0044f190(unsigned int a0);
 char* __cdecl fcn_0064d530(char* dest, char* src, int count);
@@ -6,7 +15,7 @@ void __cdecl fcn_004011a0(void* a0, char* a1);
 void __cdecl fcn_00401180(void* a0, void* a1);
 void __cdecl fcn_004011d0(void* a0, void* a1);
 void __cdecl fcn_00401280(void* a0, void* a1);
-void* __cdecl fcn_0045c5b0(void* a0, unsigned int a1, unsigned int a2, unsigned int a3);
+void* __cdecl fcn_0045c5b0(void* a0, Col44f250 a1, unsigned int a2, unsigned int a3);
 void __cdecl CloseVfsStream(void* a0);
 
 extern char* g_104049c;
@@ -30,8 +39,8 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 	unsigned char v21;
 	unsigned int v22;
 	unsigned char v23;
-	char v24[23];
-	unsigned int v27;
+	unsigned char v24[23];
+	Col44f250 v27;
 	unsigned char v31;
 	unsigned char v32;
 	unsigned char v33;
@@ -117,14 +126,14 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 				fcn_00401180(v4, &v22);
 				fcn_00401180(v4, &v23);
 				fcn_00401180(v4, v24);
-				v27 = 0xff;
+				*(unsigned int*) &v27 = 0; v27.a = 0xff;
 				if (v19 != 0) {
-					v27 = (v27 & 0xffffff00u) | ((unsigned int)v20 & 0xff);
+					v27.a = v20;
 					if (v19 == 2) {
-						v27 |= 0x00010000u;
+						v27.c0 = 1;
 					}
 				}
-				v27 = (v27 & 0xfffdffffu) | (((unsigned int)v21 & 1u) << 17);
+				v27.c1 = v21 & 1;
 				v31 = (unsigned char)(((unsigned int)v21 >> 6) & 1);
 				v32 = (unsigned char)(((unsigned int)v21 >> 1) & 1);
 				v33 = (unsigned char)(((unsigned int)v21 >> 2) & 0xf);

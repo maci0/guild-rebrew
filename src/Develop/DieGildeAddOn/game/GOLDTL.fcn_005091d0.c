@@ -30,7 +30,6 @@ void __cdecl fcn_005091d0(int* pn, StatRow* rows)
 	int max = 0;
 	int v;
 	float fsum;
-	float fmax;
 	float fpts;
 	float v1;
 	unsigned char* p;
@@ -95,12 +94,11 @@ void __cdecl fcn_005091d0(int* pn, StatRow* rows)
 			max = v;
 		}
 	}
-	fmax = (float) max;
-	fpts = fmax * 0.0001f;
+	fpts = (float) max * 0.0001f;
 	for (i = 0; i < *pn; i++) {
 		r = rows + i;
-		r->ratio = (float) r->count / fmax;
-		r->comb = 0.15f * (r->vc + r->v10 + r->v14) + 0.3f * r->ratio + 0.25f * r->v18;
+		r->ratio = (float) r->count / (float) max;
+		r->comb = (r->vc + r->v10 + r->v14) * 0.15f + r->ratio * 0.3f + r->v18 * 0.25f;
 		r->points = (int) (fpts * r->comb);
 		sprintf(buf, "player %i: sum:%f points:%i verm\xf6gen:%i vermoegen_trend:%f ansehen:%f talente:%f amt:%f",
 		        i, (double) r->comb, r->points, r->count, (double) r->ratio,

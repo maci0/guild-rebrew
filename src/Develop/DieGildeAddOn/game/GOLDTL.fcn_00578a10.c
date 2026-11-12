@@ -1,5 +1,5 @@
 extern char g_7f4c00[];
-
+extern double g_6629c8;
 #pragma pack(push, 2)
 typedef struct {
 	int a;
@@ -9,8 +9,8 @@ typedef struct {
 } NAME14;
 #pragma pack(pop)
 extern char g_7f4ca0[];
-extern char lpGebaeudePROT[];
-
+#include "game_data.h"
+typedef struct CrimeProto { char pad0[0x247]; unsigned char field247; char tail[5]; } CrimeProto;
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, unsigned int, int);
 int __cdecl fcn_00546190(char*);
@@ -19,7 +19,7 @@ void __cdecl fcn_004c5da0(int, unsigned int, int, int, int, int);
 int __cdecl fcn_00500bb0(int*, int, int, int);
 float __cdecl fcn_00507e70(char*, char*, int);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl gm_RandomMod(void);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_005782f0(char*, int, int);
 void __cdecl fcn_005b2f60(char*);
 void __cdecl fcn_005b2fb0(char*);
@@ -80,11 +80,11 @@ int __cdecl fcn_00578a10(char* a1)
 		m = gm_LookupEntityRecordById(*(int*) (a1 + 0xb4));
 		t = fcn_00507e70(m, n, 2);
 		if (n != 0) {
-			if (t + gm_RandomFloat01() > 0.0) {
+			if (t + gm_RandomFloat01() > g_6629c8) {
 				o = *(char**) (m + 0x16c);
 				c = *(unsigned char*) o;
 				*(int*) (a1 + 0xbc) = 1;
-				fcn_005782f0(n, *(unsigned char*) (lpGebaeudePROT + c * 0x24d + 0x247) * 2 + (unsigned short) gm_RandomMod() + *(signed char*) (o + 0x5c) / 50, 3);
+				fcn_005782f0(n, ((CrimeProto*)lpGebaeudePROT)[c].field247 * 2 + (unsigned short) gm_RandomMod(3) + *(signed char*) (o + 0x5c) / 50, 3);
 				fcn_005b2f60(n);
 				return *(int*) (a1 + 0x70) = *(int*) (a1 + 0x70) + 1;
 			}
@@ -131,7 +131,7 @@ int __cdecl fcn_00578a10(char* a1)
 		}
 		if (*(int*) (a1 + 0xbc) != 0) {
 			t = *(float*) 0x6628a0 - gm_GetEntitySkill(m, 1);
-			fcn_005b3000(tbl, m, n, t + gm_RandomFloat01() > 0.0 ? 0 : 1);
+			fcn_005b3000(tbl, m, n, t + gm_RandomFloat01() > g_6629c8 ? 0 : 1);
 			*(int*) (a1 + 0x70) = -1;
 			return;
 		}

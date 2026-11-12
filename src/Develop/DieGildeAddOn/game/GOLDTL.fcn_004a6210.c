@@ -1,3 +1,5 @@
+#include <string.h>
+#pragma intrinsic(memcpy)
 extern int g_772848;
 extern int g_77284c;
 extern int g_772890;
@@ -26,8 +28,8 @@ int __cdecl fcn_004a6160(char*, void*, int, void*);
 void __cdecl fcn_004f10d0(char*, int*, int*);
 void __cdecl fcn_004f0f60(int, void*);
 float __cdecl fcn_004f1290(char*);
-int __cdecl fcn_005e8de0(int, int, void*);
-int __cdecl fcn_005e8e50(int, float, void*, void*);
+int __cdecl fcn_005e8de0(float, float, float*);
+void __cdecl fcn_005e8e50(float, float, char*, float*);
 int __cdecl fcn_005ea4d0(void*, void*, void*, void*, void*, void*, void*, void*, void*);
 int __cdecl _ftol(void);
 float __cdecl fcn_004f0eb0(int, int, int);
@@ -35,85 +37,82 @@ int __cdecl fcn_004f0ff0(int, int, int, int, void*, void*);
 int __cdecl fcn_0050b810(int, int);
 int __cdecl gm_RandomMod(int);
 
+extern float g_662cf8;
+extern float g_6628bc;
+
 /* ADDRESS: GOLDTL 0x004a6210 */
 int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 {
-	char buf0[0x40];
-	char buf1[16];
-	int entry[8];
-	float pos[16];
-	float spread;
-	float level;
-	int row;
 	int col;
+	int row;
+	union { float level; int cash; } value;
+	float trajectory;
+	int cost;
+	int amount;
+	float bounds[4];
+	float range[2];
+	float origin[3];
+	float direction[3];
+	float normal[3];
+	float angle;
+	float velocity[3];
+	float other;
+	float entry[5];
+	float target[3];
+	int profile[8];
+	float spread;
 	int state;
-	int i;
+
 	int* p;
-	int* dst;
+
 
 	g_772848 = -1;
 	g_77284c = -1;
 	p = (int*) fcn_004efd30(*(int*) (a1 + 1));
-	if (p == 0) {
-		return 0;
-	}
-	if (fcn_004a6160(a1, buf0, a2, buf1) != 0) {
-		return 0;
-	}
+	if (p == 0) return 0;
+	if (fcn_004a6160(a1, origin, a2, target) != 0) return 0;
 	fcn_004f10d0(a1, &row, &col);
 	col = gm_RandomMod(col + 1) & 0xffff;
-	fcn_004f0f60(col, buf1);
-	if (*(int*) (a0 + 0x194) < *(int*) (buf1 + 4)) {
-		return 0;
-	}
-	level = fcn_004f1290(a1);
+	fcn_004f0f60(col, profile);
+	if (*(int*) (a0 + 0x194) < profile[1]) return 0;
+	value.level = fcn_004f1290(a1);
 	row = gm_RandomMod(row + 1) & 0xffff;
-	fcn_005e8de0(g_6660f4, *(int*) (col * 0xc + 0x665290), entry);
-	fcn_005e8e50(*(int*) (col * 0xc + 0x665288),
-		level * *(float*) (col * 0xc + 0x66528c), entry, &pos[0]);
-	pos[4] = pos[0];
-	pos[1] = pos[6];
-	pos[2] = -0.2617994f;
-	pos[3] = 0.7853982f;
-	if (fcn_005ea4d0(buf0, buf1, &pos[4], &pos[7], &pos[8], &pos[9],
-			&pos[10], &pos[11], &pos[12]) != 0) {
-		return 0;
-	}
-	state = _ftol();
+	fcn_005e8de0(g_6660f4, *(float*) (col * 0xc + 0x665290), entry);
+	fcn_005e8e50(*(float*) (col * 0xc + 0x665288),
+		value.level * *(float*) (col * 0xc + 0x66528c), (char*) entry, range);
+	bounds[0] = range[0];
+	bounds[1] = range[1];
+	bounds[2] = -0.2617994f;
+	bounds[3] = 0.7853982f;
+	if (fcn_005ea4d0(origin, target, bounds, &angle, &other, &trajectory,
+		velocity, direction, normal) != 0) return 0;
+	state = (int) ((trajectory - bounds[0]) * g_662cf8 / (bounds[1] - bounds[0]));
 	spread = fcn_004f0eb0(col, state, row + 1);
-	if (*(float*) (p + 2 + row) < spread) {
-		return 0;
-	}
-	if (fcn_004f0ff0((int) a0, col, state, row + 1, &pos[13], &pos[14]) == 0) {
-		return 0;
-	}
-	pos[15] = (float) fcn_0050b810(*(int*) (a0 + 0x178), g_773d75);
-	if ((int) _ftol() < (int) pos[14]) {
-		return 0;
-	}
-	g_772850 = pos[0];
-	g_772854 = pos[5];
-	g_772858 = pos[6];
-	g_772860 = pos[11];
-	g_772864 = pos[12];
-	g_772868 = pos[13];
-	g_772880 = pos[10];
-	g_772884 = pos[7];
-	g_772888 = pos[8];
-	g_772870 = pos[9];
-	g_772874 = pos[10];
-	g_772878 = pos[11];
+	if (spread > *(float*) (p + 2 + row)) return 0;
+	if (fcn_004f0ff0((int) a0, col, state, row + 1, &amount, &cost) == 0) return 0;
+	value.cash = fcn_0050b810(*(int*) (a0 + 0x178), g_773d75);
+	if ((int) (value.cash * g_6628bc) < cost) return 0;
+	g_772850 = origin[0];
+	g_772854 = origin[1];
+	g_772858 = origin[2];
+	g_772860 = velocity[0];
+	g_772864 = velocity[1];
+	g_772868 = velocity[2];
+	g_772880 = direction[0];
+	g_772884 = direction[1];
+	g_772888 = direction[2];
+	g_772870 = normal[0];
+	g_772874 = normal[1];
+	g_772878 = normal[2];
 	g_772848 = *(int*) (a0 + 4);
-	g_7728b4 = (int) pos[14];
+	g_7728b4 = cost;
 	g_77284c = *(int*) (a1 + 1);
-	g_7728b8 = (int) pos[13];
+	g_7728b8 = amount;
 	g_772898 = state;
 	g_772894 = row + 1;
-	g_772890 = (int) pos[9];
+	g_772890 = *(int*) &trajectory;
 	g_77289c = col;
-	dst = (int*) 0x7728a0;
-	for (i = 0; i < 5; i++) {
-		dst[i] = entry[i];
-	}
+	memcpy((void*) 0x7728a0, entry, sizeof(entry));
+
 	return 1;
 }

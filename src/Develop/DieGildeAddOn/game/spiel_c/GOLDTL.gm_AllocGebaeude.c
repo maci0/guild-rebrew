@@ -7,7 +7,7 @@
 
 extern char* lpGebaeudePROT;
 extern int g_699364;
-extern char* g_14a6558;
+extern char g_14a6558[];
 extern char* lpGebaeudeINST;
 extern int lpObjektePROT;
 extern char g_6b5c60;
@@ -30,8 +30,17 @@ void __cdecl fcn_004f1ad0(char*, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_005b1b30(char*);
 char* __cdecl m_alloc(int, char*);
-unsigned short __cdecl gm_RandomMod(int);
+int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_0064d41a(char*, char*, ...);
+
+
+#pragma pack(push, 1)
+typedef struct {
+	unsigned char unknown00[0x23];
+	unsigned short components[0x40];
+	unsigned char unknowna3[0x1aa];
+} BuildingProto5043d0;
+#pragma pack(pop)
 
 
 /* Allocates a building entity for a prototype type and owner slot and fills in
@@ -40,33 +49,34 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 /* ADDRESS: GOLDTL 0x005043d0 */
 char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 {
-	char buf[0x200];
+	char buf[0x100];
 	char tmp[0x100];
 	char names[12][0x40];
-	char msg[0x100];
+	char msg[0x200];
 	unsigned int type;
 	char* list_end;
-	char* rec;
+	BuildingProto5043d0* rec; BuildingProto5043d0* prototypes;
 	char* geb;
-	unsigned int comp;
+	unsigned short comp;
 	char* comp_rec;
 	unsigned char comp_type;
 	char* q;
 	int count;
 	int i;
-	int n;
+	int n; int room_mode;
 
-	if (lpGebaeudePROT == 0) {
+	prototypes = (BuildingProto5043d0*) lpGebaeudePROT;
+	if (prototypes == 0) {
 		return 0;
 	}
-	n = 0;
+	room_mode = 0;
 	geb = gm_SearchStruct();
 	if (geb == 0) {
 		return 0;
 	}
 	type = (unsigned char) geb_type;
 	*geb = (char) geb_type;
-	rec = (char*) lpGebaeudePROT + (int) type * 0x24d;
+	rec = &prototypes[type];
 	fcn_0064d41a(buf, s_699858, g_699364, (int) type);
 	*(int*) (geb + 1) = g_699364;
 	g_699364 = g_699364 + 1;
@@ -93,7 +103,24 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	memset(geb + 0x99, 0, 0x10);
 	*(int*) (geb + 0xa5) = -1;
 	*(int*) (geb + 0x99) |= 1;
-	memset(geb + 0x65, 0, 0x30);
+	n = 0x30; q = geb + 0x65;
+	__asm {
+		mov edi, q
+		mov ebx, n
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short fill_end
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	fill_end:
+		add ecx, ebx
+		rep stosb
+	}
 	if (*(char*) *(char**) (g_14a6558 + 8 + (int) type * 0x38) == 0) {
 		geb[5] = g_6b5c60;
 	} else {
@@ -106,11 +133,11 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		int j;
 
 		if (*p == 0) {
-			break;
+			continue;
 		}
 		strcpy(tmp, p);
 		for (j = 0; j < 0x100; j++) {
-			if (strcmp((char*) (lpGebaeudeINST + j * 0xa9), tmp) == 0) {
+			if (lpGebaeudeINST[j * 0xa9] != 0 && strcmp(lpGebaeudeINST + j * 0xa9 + 5, tmp) == 0) {
 				break;
 			}
 		}
@@ -129,7 +156,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		strcpy(geb + 5, names[gm_RandomMod(n) & 0xffff]);
 	}
 	i = 0;
-	comp_rec = rec + 0x23;
+	comp_rec = (char*) rec->components;
 	do {
 		comp = *(unsigned short*) comp_rec;
 		if (comp == 0) {
@@ -138,13 +165,13 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		if (comp != 0xffff) {
 			comp_type = *(unsigned char*) (lpObjektePROT + (int) (comp & 0x7fff) * 0x41);
 			if (comp_type == 2 || comp_type == 6) {
-				n = 1;
+				room_mode = 1;
 			}
 			if ((comp & 0x8000) != 0) {
 				if (comp_type == 2 || comp_type == 6) {
-					n = 1;
+					room_mode = 1;
 					gm_AllocRaum(geb, comp & 0x7fff);
-				} else if (n == 0) {
+				} else if (room_mode == 0) {
 					gm_AllocObjekt(*(int*) (geb + 1), comp & 0x7fff, 1);
 				}
 			}

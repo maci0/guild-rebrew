@@ -1,7 +1,10 @@
 #include <string.h>
 #include <stdlib.h>
-
-#define LEX_426680 (*(char**) (*(char**) 0x6b7e98 + 0x118))
+extern char g_14cb3b0[]; extern int g_6b25b0, g_6b23a4;
+extern char* g_6b7e98;
+extern int g_6b7eb4;
+extern int g_6b7ec4;
+#define LEX_426680 (*(char**) (g_6b7e98 + 0x118))
 
 /* SIZE 0x64 */
 struct tok_426680 {
@@ -42,12 +45,12 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 	q = LEX_426680;
 	found = 0;
 	if (q[0] == 0 || q[1] == 0) {
-		tok->type = 0xc;
+		t->type = 0xc;
 		return;
 	}
-	tok->type = 0;
+	tok = t; tok->type = 0;
 	start = 0;
-	while (s[start] == ' ' && start < (int) strlen(s)) {
+	while (s[start] == ' ' && start < strlen(s)) {
 		start++;
 	}
 	i = start;
@@ -61,10 +64,10 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 				if (j != 0x1d) {
 					break;
 				}
-				if (*(int*) 0x6b25b0 > 1) {
+				if (g_6b25b0 > 1) {
 					r = _isctype(s[i - 1], 4);
 				} else {
-					r = *(unsigned char*) (*(unsigned char**) 0x6b23a4 + s[i - 1] * 2) & 4;
+					r = *(unsigned char*) ((unsigned char*) g_6b23a4 + s[i - 1] * 2) & 4;
 				}
 				if (r == 0) {
 					break;
@@ -88,10 +91,9 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 		i++;
 	} while (found == 0);
 
-	tok = t;
 	c = buf[0];
 	for (j = 1; j < 9; j++) {
-		if (c == *(char*) (0x14cb3b0 + (j - 1) * 0x10) && fcn_004265f0(buf, (char*) (0x14cb3b0 + (j - 1) * 0x10)) != 0) {
+		if (c == *(char*) (g_14cb3b0 + (j - 1) * 0x10) && fcn_004265f0(buf, (char*) (g_14cb3b0 + (j - 1) * 0x10)) != 0) {
 			tok->type = 0xa;
 			tok->u.num = j;
 			return;
@@ -110,22 +112,22 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 				tok->type = 7;
 				LEX_426680 = q + 1;
 			}
-			*(int*) 0x6b7eb4 = j;
+			g_6b7eb4 = j;
 			if (j == 0xc) {
-				*(int*) 0x6b7ec4 += 1;
+				g_6b7ec4 += 1;
 				return;
 			}
 			if (j == 0xd) {
-				*(int*) 0x6b7ec4 -= 1;
+				g_6b7ec4 -= 1;
 				return;
 			}
 			return;
 		}
 	}
-	if (*(int*) 0x6b25b0 > 1) {
+	if (g_6b25b0 > 1) {
 		r = _isctype(c, 4);
 	} else {
-		r = *(unsigned char*) (*(unsigned char**) 0x6b23a4 + c * 2) & 4;
+		r = *(unsigned char*) ((unsigned char*) g_6b23a4 + c * 2) & 4;
 	}
 	if (r != 0) {
 		if (strchr(buf, '.')) {
@@ -136,7 +138,7 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 			tok->u.num = atoi(buf);
 		}
 	} else {
-		if ((p = fcn_004260f0(*(char**) 0x6b7e98, buf)) != 0) {
+		if ((p = fcn_004260f0(g_6b7e98, buf)) != 0) {
 			tok->type = 2;
 			tok->u.sym = p;
 			return;
@@ -146,7 +148,7 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 			tok->u.num = r;
 			return;
 		}
-		if ((p = fcn_004262b0(*(char**) 0x6b7e98, buf)) != 0) {
+		if ((p = fcn_004262b0(g_6b7e98, buf)) != 0) {
 			tok->type = 3;
 			tok->u.sym = p;
 			return;
@@ -156,7 +158,7 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 			tok->u.sym = p;
 			return;
 		}
-		if ((p = fcn_00426240(*(char**) 0x6b7e98, buf)) != 0) {
+		if ((p = fcn_00426240(g_6b7e98, buf)) != 0) {
 			tok->type = 0xb;
 			tok->u.sym = p;
 			return;

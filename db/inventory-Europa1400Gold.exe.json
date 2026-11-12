@@ -1976,7 +1976,7 @@
   },
   {
     "va": 4265024,
-    "size": 368,
+    "size": 354,
     "name": "fcn.00411440",
     "extent_history": [
       {
@@ -1985,12 +1985,19 @@
         "reason": "Rizin full analysis finds a function entry on a code boundary inside this row; split the wrapped span into its owning routine and the hidden entries",
         "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
         "changed_at": "2026-10-23T18:41:27.244787+00:00"
+      },
+      {
+        "old_size": 368,
+        "new_size": 354,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
       }
     ]
   },
   {
     "va": 4265392,
-    "size": 208,
+    "size": 198,
     "name": "fcn.004115b0",
     "extent_history": [
       {
@@ -1999,6 +2006,13 @@
         "reason": "Rizin full analysis finds a function entry on a code boundary inside this row; split the wrapped span into its owning routine and the hidden entries",
         "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
         "changed_at": "2026-10-23T18:41:27.247807+00:00"
+      },
+      {
+        "old_size": 208,
+        "new_size": 198,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
       }
     ]
   },
@@ -4218,8 +4232,17 @@
   },
   {
     "va": 4371888,
-    "size": 272,
-    "name": "fcn.0042b5b0"
+    "size": 257,
+    "name": "fcn.0042b5b0",
+    "extent_history": [
+      {
+        "old_size": 272,
+        "new_size": 257,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4372160,
@@ -4493,8 +4516,31 @@
   },
   {
     "va": 4375456,
-    "size": 144,
-    "name": "fcn.0042c3a0"
+    "size": 6,
+    "name": "fcn.0042c3a0",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 6,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4375472,
+    "size": 125,
+    "name": "fcn.0042c3b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 125,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4375600,
@@ -4571,8 +4617,17 @@
   },
   {
     "va": 4384624,
-    "size": 64,
-    "name": "fcn.0042e770"
+    "size": 53,
+    "name": "fcn.0042e770",
+    "extent_history": [
+      {
+        "old_size": 64,
+        "new_size": 53,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4384688,
@@ -4853,8 +4908,17 @@
   },
   {
     "va": 4394912,
-    "size": 464,
-    "name": "fcn.00430fa0"
+    "size": 449,
+    "name": "fcn.00430fa0",
+    "extent_history": [
+      {
+        "old_size": 464,
+        "new_size": 449,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4395376,
@@ -4960,8 +5024,17 @@
   },
   {
     "va": 4407104,
-    "size": 64,
-    "name": "fcn.00433f40"
+    "size": 58,
+    "name": "fcn.00433f40",
+    "extent_history": [
+      {
+        "old_size": 64,
+        "new_size": 58,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4407168,
@@ -4980,8 +5053,17 @@
   },
   {
     "va": 4410224,
-    "size": 400,
-    "name": "fcn.00434b70"
+    "size": 390,
+    "name": "fcn.00434b70",
+    "extent_history": [
+      {
+        "old_size": 400,
+        "new_size": 390,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4410624,
@@ -6270,8 +6352,17 @@
   },
   {
     "va": 4494992,
-    "size": 224,
-    "name": "fcn.00449690"
+    "size": 127,
+    "name": "fcn.00449690",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 127,
+        "reason": "Reviewed Gold-only provider restoration: 474e70 native ret47544c followed by own8-entry dispatch table475450 and69-byte case map475470..4754b4, NOP tail4754b5..bf;4790d0 finalret479104 followed11NOPs;449690 finalret44970e thenNOP44970f and independent helper449710, old224-byte extent crosses helper. Evidence .scratch/sol/19/gold-providers/*.evidence.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T17:37:56.618674+00:00"
+      }
+    ]
   },
   {
     "va": 4495216,
@@ -6357,8 +6448,17 @@
   },
   {
     "va": 4499936,
-    "size": 48,
-    "name": "fcn.0044a9e0"
+    "size": 43,
+    "name": "fcn.0044a9e0",
+    "extent_history": [
+      {
+        "old_size": 48,
+        "new_size": 43,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4499984,
@@ -6424,8 +6524,17 @@
   },
   {
     "va": 4507088,
-    "size": 64,
-    "name": "fcn.0044c5d0"
+    "size": 60,
+    "name": "fcn.0044c5d0",
+    "extent_history": [
+      {
+        "old_size": 64,
+        "new_size": 60,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4507152,
@@ -7132,8 +7241,17 @@
   },
   {
     "va": 4545152,
-    "size": 4304,
-    "name": "fcn.00455a80"
+    "size": 2239,
+    "name": "fcn.00455a80",
+    "extent_history": [
+      {
+        "old_size": 4304,
+        "new_size": 2239,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4549456,
@@ -7699,8 +7817,17 @@
   },
   {
     "va": 4584960,
-    "size": 64,
-    "name": "fcn.0045f600"
+    "size": 60,
+    "name": "fcn.0045f600",
+    "extent_history": [
+      {
+        "old_size": 64,
+        "new_size": 60,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4585024,
@@ -7994,8 +8121,17 @@
   },
   {
     "va": 4592816,
-    "size": 48,
-    "name": "fcn.004614b0"
+    "size": 43,
+    "name": "fcn.004614b0",
+    "extent_history": [
+      {
+        "old_size": 48,
+        "new_size": 43,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4592864,
@@ -8628,8 +8764,17 @@
   },
   {
     "va": 4622464,
-    "size": 112,
-    "name": "fcn.00468880"
+    "size": 97,
+    "name": "fcn.00468880",
+    "extent_history": [
+      {
+        "old_size": 112,
+        "new_size": 97,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4622576,
@@ -8677,8 +8822,17 @@
   },
   {
     "va": 4624544,
-    "size": 208,
-    "name": "fcn.004690a0"
+    "size": 204,
+    "name": "fcn.004690a0",
+    "extent_history": [
+      {
+        "old_size": 208,
+        "new_size": 204,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4624752,
@@ -8749,8 +8903,17 @@
   },
   {
     "va": 4629328,
-    "size": 352,
-    "name": "fcn.0046a350"
+    "size": 350,
+    "name": "fcn.0046a350",
+    "extent_history": [
+      {
+        "old_size": 352,
+        "new_size": 350,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4629680,
@@ -8913,8 +9076,31 @@
   },
   {
     "va": 4639184,
-    "size": 128,
-    "name": "fcn.0046c9d0"
+    "size": 5,
+    "name": "fcn.0046c9d0",
+    "extent_history": [
+      {
+        "old_size": 128,
+        "new_size": 5,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4639200,
+    "size": 102,
+    "name": "fcn.0046c9e0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 102,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4639312,
@@ -8923,8 +9109,17 @@
   },
   {
     "va": 4639408,
-    "size": 96,
-    "name": "fcn.0046cab0"
+    "size": 90,
+    "name": "fcn.0046cab0",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 90,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4639504,
@@ -9247,8 +9442,17 @@
   },
   {
     "va": 4664432,
-    "size": 96,
-    "name": "fcn.00472c70"
+    "size": 91,
+    "name": "fcn.00472c70",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 91,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4664528,
@@ -9447,8 +9651,17 @@
   },
   {
     "va": 4673136,
-    "size": 1616,
-    "name": "fcn.00474e70"
+    "size": 1605,
+    "name": "fcn.00474e70",
+    "extent_history": [
+      {
+        "old_size": 1616,
+        "new_size": 1605,
+        "reason": "Reviewed Gold-only provider restoration: 474e70 native ret47544c followed by own8-entry dispatch table475450 and69-byte case map475470..4754b4, NOP tail4754b5..bf;4790d0 finalret479104 followed11NOPs;449690 finalret44970e thenNOP44970f and independent helper449710, old224-byte extent crosses helper. Evidence .scratch/sol/19/gold-providers/*.evidence.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T17:37:56.618674+00:00"
+      }
+    ]
   },
   {
     "va": 4674752,
@@ -9892,8 +10105,17 @@
   },
   {
     "va": 4689840,
-    "size": 96,
-    "name": "fcn.00478fb0"
+    "size": 91,
+    "name": "fcn.00478fb0",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 91,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4689936,
@@ -9911,8 +10133,17 @@
   },
   {
     "va": 4690128,
-    "size": 64,
-    "name": "fcn.004790d0"
+    "size": 53,
+    "name": "fcn.004790d0",
+    "extent_history": [
+      {
+        "old_size": 64,
+        "new_size": 53,
+        "reason": "Reviewed Gold-only provider restoration: 474e70 native ret47544c followed by own8-entry dispatch table475450 and69-byte case map475470..4754b4, NOP tail4754b5..bf;4790d0 finalret479104 followed11NOPs;449690 finalret44970e thenNOP44970f and independent helper449710, old224-byte extent crosses helper. Evidence .scratch/sol/19/gold-providers/*.evidence.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T17:37:56.618674+00:00"
+      }
+    ]
   },
   {
     "va": 4690192,
@@ -12812,8 +13043,31 @@
   },
   {
     "va": 4895712,
-    "size": 1040,
-    "name": "fcn.004ab3e0"
+    "size": 720,
+    "name": "fcn.004ab3e0",
+    "extent_history": [
+      {
+        "old_size": 1040,
+        "new_size": 720,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4896432,
+    "size": 312,
+    "name": "fcn.004ab6b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 312,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4896752,
@@ -12900,8 +13154,17 @@
   },
   {
     "va": 4901024,
-    "size": 496,
-    "name": "fcn.004ac8a0"
+    "size": 487,
+    "name": "fcn.004ac8a0",
+    "extent_history": [
+      {
+        "old_size": 496,
+        "new_size": 487,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 4901520,
@@ -16461,7 +16724,7 @@
   },
   {
     "va": 5042176,
-    "size": 880,
+    "size": 877,
     "name": "fcn.004cf000",
     "extent_history": [
       {
@@ -16470,6 +16733,13 @@
         "reason": "Rizin full analysis finds a function entry on a code boundary inside this row; split the wrapped span into its owning routine and the hidden entries",
         "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
         "changed_at": "2026-10-23T18:41:27.271778+00:00"
+      },
+      {
+        "old_size": 880,
+        "new_size": 877,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
       }
     ]
   },
@@ -18680,13 +18950,31 @@
   },
   {
     "va": 5174960,
-    "size": 96,
-    "name": "fcn.004ef6b0"
+    "size": 87,
+    "name": "fcn.004ef6b0",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 87,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 5175056,
-    "size": 48,
-    "name": "fcn.004ef710"
+    "size": 33,
+    "name": "fcn.004ef710",
+    "extent_history": [
+      {
+        "old_size": 48,
+        "new_size": 33,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 5175104,
@@ -18695,8 +18983,17 @@
   },
   {
     "va": 5175136,
-    "size": 96,
-    "name": "fcn.004ef760"
+    "size": 14,
+    "name": "fcn.004ef760",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 14,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 5175232,
@@ -21080,8 +21377,31 @@
   },
   {
     "va": 5277104,
-    "size": 107,
-    "name": "fcn.005085b0"
+    "size": 52,
+    "name": "fcn.005085b0",
+    "extent_history": [
+      {
+        "old_size": 107,
+        "new_size": 52,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5277168,
+    "size": 43,
+    "name": "fcn.005085f0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 43,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
+      }
+    ]
   },
   {
     "va": 5277216,
@@ -21263,7 +21583,7 @@
   },
   {
     "va": 5282624,
-    "size": 368,
+    "size": 360,
     "name": "fcn.00509b40",
     "extent_history": [
       {
@@ -21272,6 +21592,13 @@
         "reason": "Rizin full analysis finds a function entry on a code boundary inside this row; split the wrapped span into its owning routine and the hidden entries",
         "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
         "changed_at": "2026-10-23T18:41:27.290960+00:00"
+      },
+      {
+        "old_size": 368,
+        "new_size": 360,
+        "reason": "Gold provider restoration, explicitly selected lane blockers only. Native Gold evidence and per-row old/new boundary plan: .scratch/sol/19/gold-providers/repair-extents-plan.json and needed-evidence/*.json. Restore standalone starts after RET/tail JMP, preserve own switch tables, exclude alignment NOPs and independent following bodies. Prefixes 42c3a0 is JMP IAT6B;46c9d0 JMP46e7005B;5085b0 JMP5de66852B. Sync reviewed native extents to metadata and seed missing rows before guarded source binding.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-12T18:58:49.922310+00:00"
       }
     ]
   },

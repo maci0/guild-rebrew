@@ -1,7 +1,9 @@
 extern int g_7f4c00;
 extern char g_773d75;
+extern float g_664188, g_664160, g_66417c, g_664178;
+extern double g_664180;
 
-int __cdecl fcn_004507b00(unsigned char);
+int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_004f4830(int, int*);
 float __cdecl fcn_004fbd40(void);
@@ -24,11 +26,12 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* a2)
 	float f;
 	int d;
 
-	mode = fcn_004507b00(*(unsigned char*) (a0 + 0x164));
+	mode = gm_MapEntityStatRange(*(unsigned char*) (a0 + 0x164));
+	cnt = 0;
 	if (g_7f4c00 <= 9) {
 		return 0;
 	}
-	cnt = gm_StartFilteredEntitySearch(1, 5, 0x17) != 0;
+	if (gm_StartFilteredEntitySearch(1, 5, 0x17)) { cnt = 1; }
 	if (gm_StartFilteredEntitySearch(1, 5, 0x18)) {
 		cnt++;
 	}
@@ -44,12 +47,12 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* a2)
 	fcn_004f4830(10, v5);
 	f = fcn_004fbd40();
 	d = v5[2] - v5[1];
-	if (f <= *(float*) 0x664188) {
-		v = (int) ((float) d * *(float*) 0x664160 + v5[1]);
-	} else if (f >= *(double*) 0x664180) {
-		v = (int) ((float) d * *(float*) 0x66417c + v5[1]);
+	if (f < g_664188) {
+		v = (int) ((float) d * g_664160 + v5[1]);
+	} else if (f < g_664180) {
+		v = (int) ((float) d * g_66417c + v5[1]);
 	} else {
-		v = (int) ((float) d * *(float*) 0x664178 + v5[1]);
+		v = (int) ((float) d * g_664178 + v5[1]);
 	}
 	r = v;
 	if (mode == 1 || mode == 2 || mode == 3 || mode == 5) {

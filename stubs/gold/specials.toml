@@ -118,10 +118,10 @@ impl = "void __cdecl fcn_00402540(char *a) {}"
 impl = "char __cdecl fcn_00447fd0(void *a, void *b, void *c) { return 0; }"
 
 [specials.fcn_00446e10]
-impl = "char *__cdecl fcn_00446e10(char *a, float *b, float *c, char *d) { return 0; }"
+impl = ""
 
 [specials.fcn_00449690]
-impl = "char *__cdecl fcn_00449690(char *a, int b, char *c, char *d) { return 0; }"
+impl = ""
 
 [specials.fcn_0057c950]
 impl = "void __cdecl fcn_0057c950(char *a) {}"
@@ -461,3 +461,15 @@ impl = ""
 [specials.fcn_005ba900]
 impl = ""
 
+
+# Restored native Gold source owns this provider.
+[specials.fcn_004690a0]
+impl = ""
+
+# Restored native Gold source owns this provider.
+[specials.fcn_0046c9e0]
+impl = ""
+
+# Restored native Gold source owns this provider.
+[specials.fcn_0046cd90]
+impl = ""

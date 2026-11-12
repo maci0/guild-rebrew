@@ -30,6 +30,7 @@ int* __cdecl fcn_00412900(char* obj, float* pos, int id)
 	flags_00412900 flags;
 	frame_00412900 frames[5];
 
+	*(unsigned int*) &flags = 0;
 	flags.bits_1 = 4;
 	flags.bit_8_1 = 1;
 	flags.bit_8_0 = 1;

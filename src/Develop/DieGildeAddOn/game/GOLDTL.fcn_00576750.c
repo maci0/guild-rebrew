@@ -31,11 +31,11 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 	int i;
 	char byte;
 
+	selected = 0;
 	record = lpGebaeudePROT + *(unsigned char*) object * 0x24d;
 	if (*record != 0x1e) {
 		return;
 	}
-	selected = 0;
 	flags[0] = 0;
 	flags[1] = 0;
 	flags[2] = 0;
@@ -79,10 +79,10 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 		index = gm_RandomMod(3) & 0xffff;
 		for (i = 3; i != 0; i--) {
 			if (found[index] != 0 && *(int*) ((char*) found[index] + 0x1c) == 0) {
+				mode = 1;
 				value = (gm_RandomMod(4) & 0xffff) + 3;
 				fcn_004c4510((char*) found[index], *(int*) ((char*) found[index] + 2));
-				byte = 1;
-				fcn_004c4570(4, 1, 0x1c, &byte);
+				fcn_004c4570(4, 1, 0x1c, &mode);
 				fcn_004c4570(4, 1, 0x20, &value);
 				fcn_004c5360();
 				fcn_005b3330((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),

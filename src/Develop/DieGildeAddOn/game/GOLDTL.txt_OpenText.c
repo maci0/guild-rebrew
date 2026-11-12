@@ -145,7 +145,7 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 		if (p != 0) {
 			*p = 0;
 		}
-		fcn_0064d41a(path + 4, "%s\\resources\\textbin_%s\\", "german");
+		fcn_0064d41a(path, "%s\\resources\\textbin_%s\\", "german");
 		strcpy(g_1052e00, path);
 	}
 

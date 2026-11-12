@@ -5,10 +5,10 @@ int __cdecl fcn_00468df0(int x, int a2, int a3, char* buf, int a5);
 int __cdecl fcn_00469110(int id, int max);
 
 /* ADDRESS: GOLDTL 0x00533a60 */
-int __cdecl fcn_00533a60(int a1, int a2, int* out, int count, ...)
+void __cdecl fcn_00533a60(int a1, int a2, int* out, int count, ...)
 {
     char buf[32][0x40];
-    char* entity;
+    char* entity; char* text;
     char** p;
     int max;
     int i;
@@ -19,12 +19,12 @@ int __cdecl fcn_00533a60(int a1, int a2, int* out, int count, ...)
     int id;
 
     entity = (char*) 0x1015f40 + a1 * 0x3cc;
-    p = &count;
+    p = (char**) &count;
     max = 0;
     if (count > 0) {
         for (i = 0; i < count; i++) {
-            strcpy(buf[i], *++p);
-            id = fcn_0046b520(buf[i], *(int*) (entity + 0x28c));
+            text = *++p; strcpy(buf[i], text);
+            id = fcn_0046b520(text, *(int*) (entity + 0x28c));
             if (id + 0x20 > max) {
                 max = id + 0x20;
             }
@@ -53,5 +53,5 @@ int __cdecl fcn_00533a60(int a1, int a2, int* out, int count, ...)
             start += step;
         }
     }
-    return 0;
+    return;
 }

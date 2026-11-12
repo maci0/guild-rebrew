@@ -41,9 +41,9 @@ char* __cdecl fcn_004bcda0(void* tab, unsigned int a2, unsigned int a3, int id, 
 		if (slot->state == (char) 0xff) {
 			continue;
 		}
-		break;
+		goto selected;
 	}
-	if (i == 0x40) {
+	{
 		for (i = 0, slot = table; i < 0x40; i++, slot++) {
 			if (slot->state == (char) 0xff) {
 				slot->counter = g_7728f8;
@@ -55,6 +55,7 @@ char* __cdecl fcn_004bcda0(void* tab, unsigned int a2, unsigned int a3, int id, 
 			return 0;
 		}
 	}
+selected:
 	slot = &table[i];
 	slot->id = (unsigned short) id;
 	if (info == 0) {

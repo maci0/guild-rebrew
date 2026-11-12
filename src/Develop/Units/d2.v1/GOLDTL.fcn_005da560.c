@@ -94,8 +94,8 @@ int __cdecl fcn_005da560(unsigned short* a1, unsigned short* a2)
 		}
 	}
 	memset(q, 0, sizeof(q));
-	q[0] = 1;
-	d2_SetForm(v.dlg, 3);
+
+	d2_SetForm(v.dlg, 3); q[0] = 1;
 	sel = fcn_00472250(v.dlg, 3, io_AppendText(0x1745));
 	if ((fcn_004fa5b0(0x16, a2, q) & 2) != 0) {
 		fcn_00472640(sel, 0);

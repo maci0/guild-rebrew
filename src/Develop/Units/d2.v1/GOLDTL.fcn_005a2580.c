@@ -28,9 +28,9 @@ typedef struct Rec {
 	char pad37[0x25];
 	int x5c;             /* 0x5c */
 	int x60;             /* 0x60 */
-	char pad64[0x9c];
+	char pad64[0x94];
 } Rec;
-// SIZE 0x100
+/* SIZE 0xf8 */
 
 extern int g_772514;
 extern char* g_772500;
@@ -87,6 +87,8 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 	int j;
 	char* p;
 	char* e;
+	char* fillDst;
+	int fillCount;
 
 	y = -1;
 	seen[0] = -1;
@@ -121,7 +123,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 				seen[j] = -1;
 				vals[j] = 0;
 			}
-			p++;
+			p += 4;
 		}
 		if (changed) {
 			d2_SetForm(h, 1);
@@ -163,7 +165,25 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 			}
 		}
 		if (g_100f1dc != -1 && g_67d370 == y) {
-			memset(&rec, 0, sizeof(rec));
+			fillDst = (char*) &rec;
+			fillCount = sizeof(rec);
+			__asm {
+				mov edi, fillDst
+				mov ebx, fillCount
+				xor eax, eax
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short ItemFillTail
+				rep stosb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep stosd
+			ItemFillTail:
+				add ecx, ebx
+				rep stosb
+			}
 			rec.kind = 0x74;
 			rec.x36 = 2;
 			rec.x8 = *(int*) (g_7f4ca4 + (*(unsigned short*) &g_774970) * 540);

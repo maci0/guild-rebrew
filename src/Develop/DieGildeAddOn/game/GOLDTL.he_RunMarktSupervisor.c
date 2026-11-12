@@ -10,6 +10,7 @@
 #include <string.h>
 
 /* g_7f4c00: 14-byte market stamp, word view of the second field is compared. */
+#pragma pack(push, 2)
 typedef struct {
 	int a;
 	unsigned short b;
@@ -17,6 +18,7 @@ typedef struct {
 	int c;
 	short d;
 } pos14m;
+#pragma pack(pop)
 
 /* one market slot record, 0x80 bytes */
 typedef struct {
@@ -75,7 +77,7 @@ void __cdecl fcn_004c5150(int, int, unsigned char, int);
 char* __cdecl fcn_00503d10(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(void*, void*);
-int __cdecl gm_RandomMod(int);
+int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 int __cdecl fcn_004c61d0(MarktSlot*, unsigned char);
@@ -106,6 +108,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 	unsigned char kind;
 	char* bar;
 	char* pat;
+	char* hall;
 
 	if (g_773d78 == 0) {
 		fcn_00546190(a0);
@@ -304,7 +307,8 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		if (q == 0) {
 			goto next_lager;
 		}
-		ent = (char*) fcn_00502cd0(*(int*) (q + 0x5d), 2, 0x1db, 0, 6);
+		hall = q;
+		ent = (char*) fcn_00502cd0(*(int*) (hall + 0x5d), 2, 0, 0x1db, 6);
 		if (ent == 0) {
 			goto next_lager;
 		}
@@ -368,6 +372,10 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 				rec.f38 = fcn_005025a0(i, t);
 			}
 			fcn_004c61d0(&rec, i);
+		}
+		ent = (char*) fcn_00502cd0(*(int*) (hall + 0x5d), 2, 0, 0x1dc, 6);
+		if (ent == 0) {
+			goto next_lager;
 		}
 		pat = lager;
 		for (t = 0; t < 0x55; t++, pat += 0x80) {

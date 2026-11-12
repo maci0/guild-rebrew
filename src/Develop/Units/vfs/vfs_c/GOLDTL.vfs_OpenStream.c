@@ -1,5 +1,5 @@
 #include "../vfs.h"
-
+extern char g_6b7fe4[];
 #include "../../Error/error.h"
 #include "../../m_alloc/m_alloc.h"
 #include "zlib.h"
@@ -234,7 +234,7 @@ void* __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_f
 			break;
 		}
 	}
-	stream = (char*) m_PoolAlloc((void*) 0x10034670, 0x140, 0x10);
+	stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
 	*(unsigned char*) (stream + 0x13c) = (unsigned char) ((*(unsigned char*) (stream + 0x13c) & 0xeb) | 0x22);
 	if (*(unsigned char*) &mode14 != 0) {
 		if (mode13 == 0) {
@@ -250,10 +250,10 @@ void* __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_f
 		*(int*) (stream + 0x108) = 0;
 		goto finalize;
 	check_header:
-		if (buf[0] != *(int*) 0x10029450) {
+		if (buf[0] != *(int*) 0x679e60) {
 			goto plain_setup;
 		}
-		if (buf[1] != *(int*) 0x10029454) {
+		if (buf[1] != *(int*) 0x679e64) {
 			goto plain_setup;
 		}
 		mode18 = 1;
@@ -270,7 +270,7 @@ inflate_setup:
 			*(int*) (stream + 0x110) = 0;
 			*(int*) (stream + 0x120) = 0;
 			*(int*) (stream + 0x124) = 0;
-			if (inflateInit2_((void*) (stream + 0x100), -0xf, (char*) 0x1002706c, 0x38) == 0) {
+			if (inflateInit2_((void*) (stream + 0x100), -0xf, "1.1.3", 0x38) == 0) {
 				goto finalize;
 			}
 			goto cleanup;
@@ -280,8 +280,8 @@ inflate_setup:
 		if (size < 0x12) {
 			goto cleanup;
 		}
-		buf[0] = *(unsigned char*) 0x10029450;
-		buf[1] = *(unsigned char*) 0x10029454;
+		buf[0] = *(unsigned char*) 0x679e60;
+		buf[1] = *(unsigned char*) 0x679e64;
 		buf[2] = 8;
 		buf[8] = 0;
 		buf[7] = 0;
@@ -297,7 +297,7 @@ inflate_setup:
 		*(int*) (stream + 0x120) = 0;
 		*(int*) (stream + 0x124) = 0;
 		*(int*) (stream + 0x138) = crc32(0, 0, 0);
-		if (deflateInit2_((void*) (stream + 0x100), -1, 8, -0xf, 8, 0, (char*) 0x1002706c, 0x38) != 0) {
+		if (deflateInit2_((void*) (stream + 0x100), -1, 8, -0xf, 8, 0, "1.1.3", 0x38) != 0) {
 			goto cleanup;
 		}
 		*(int*) (stream + 0x114) = 0xa;
@@ -310,13 +310,13 @@ finalize:
 	if (stream != 0) {
 		g_stream_count++;
 		*(unsigned char*) (stream + 0x13c) = (unsigned char) (((*(unsigned char*) (stream + 0x13c) & 0xf6) ^ (*(unsigned char*) &mode14 & 1)) | ((mode18 & 1) << 3));
-		sprintf(stream, (char*) 0x100294a4, buf, size, mode18, mode18);
+		sprintf(stream, "0x%08X -> length: %u, read: %u compressed: %u", buf, size, mode18, mode18);
 	}
 	result = stream;
 done:
 	return result;
 cleanup:
-	m_pool_free((void*) 0x10034670, stream);
+	m_pool_free(g_6b7fe4, stream);
 	return 0;
 }
 

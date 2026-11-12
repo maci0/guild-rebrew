@@ -57,54 +57,47 @@ Bank* __cdecl sb_LoadSampleBank(char* name, int init)
 		return (Bank*) g_14cb980;
 	}
 	bank = fcn_00422730(name);
-	if (bank != 0) {
-		bank->loaded++;
-		return bank;
-	}
-	strcpy(path, g_6b7d88);
-	strcat(path, name);
-	fp = fopen(path, "rb");
-	if (fp == 0) {
-		sprintf(msg, "sb_LoadSampleBank: Samplebank %s konnte nicht geladen werden!", path);
-		return bank;
-	}
-	if (fread(&hdr, 0x144, 1, fp) != 1) {
-		fclose(fp);
-		return bank;
-	}
-	size = hdr.count * 0x40 + 0x144;
-	bank = m_alloc(size, "sb_LoadSampleBank");
 	if (bank == 0) {
-		fclose(fp);
-		return bank;
-	}
-	strncpy(bank->title, hdr.title, 0x32);
-	strncpy(bank->file, path, 0x100);
-	bank->count = hdr.count;
-	bank->next = 0;
-	bank->samples = (Sample*) (bank + 1);
-	if (fread(bank->samples, 0x40, bank->count, fp) != bank->count) {
-		m_FreeTracked(bank);
-		bank = 0;
-		fclose(fp);
-		return bank;
-	}
-	tail = (Bank*) fcn_00422aa0();
-	if (tail != 0) {
-		tail->next = bank;
+		strcpy(path, g_6b7d88);
+		strcat(path, name);
+		fp = fopen(path, "rb");
+		if (fp != 0) {
+			if (fread(&hdr, 0x144, 1, fp) == 1) {
+				size = hdr.count * 0x40 + 0x144;
+				bank = m_alloc(size, "sb_LoadSampleBank");
+				if (bank != 0) {
+					strncpy(bank->title, hdr.title, 0x32);
+					strncpy(bank->file, path, 0x100);
+					bank->count = hdr.count;
+					bank->next = 0;
+					bank->samples = (Sample*) (bank + 1);
+					if (fread(bank->samples, 0x40, bank->count, fp) == bank->count) {
+						tail = (Bank*) fcn_00422aa0();
+						if (tail != 0) {
+							tail->next = bank;
+						} else {
+							g_6b7d78 = bank;
+						}
+						g_6b7d74 = g_6b7d74 + hdr.count * 0x40 + 0x144;
+						sprintf(g_14cbae0, "Samplebank %s loaded. MemUsed is now %d bytes.", name, g_6b7d74);
+						bank->loaded = 1;
+						if (init != 0) {
+							for (i = 0; i < hdr.count; i++) {
+								sb_LoadEntry(bank, &bank->samples[i]);
+							}
+						}
+					} else {
+						m_FreeTracked(bank);
+						bank = 0;
+					}
+				}
+			}
+			fclose(fp);
+		} else {
+			sprintf(msg, "sb_LoadSampleBank: Samplebank %s konnte nicht geladen werden!", path);
+		}
 	} else {
-		g_6b7d78 = bank;
+		bank->loaded++;
 	}
-	g_6b7d74 = g_6b7d74 + hdr.count * 0x40 + 0x144;
-	sprintf(g_14cbae0, "Samplebank %s loaded. MemUsed is now %d bytes.", name, g_6b7d74);
-	bank->loaded = 1;
-	if (init == 0) {
-		fclose(fp);
-		return bank;
-	}
-	for (i = 0; i < hdr.count; i++) {
-		sb_LoadEntry(bank, &bank->samples[i]);
-	}
-	fclose(fp);
 	return bank;
 }

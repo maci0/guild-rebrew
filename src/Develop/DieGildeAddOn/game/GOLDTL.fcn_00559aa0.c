@@ -9,6 +9,12 @@ struct job {
 	char pada[6];
 };
 
+/* lpGebaeudePROT row (0x24d bytes); only the leading type byte is read here. */
+typedef struct {
+	unsigned char type;
+	char pad1[0x24c];
+} GebProt_559aa0;
+
 extern int g_7e4538;
 extern int g_7e453c;
 extern float g_6628cc;
@@ -75,7 +81,7 @@ void __cdecl fcn_00559aa0(struct job* job)
 			&& *(int*) (candidate + 0x30) != -1) {
 			found = 1;
 			job->flags |= 0x40;
-			if ((signed char) job->pada[2] == -1) {
+			if (job->pada[2] == 0xff) { /* never true (signed char vs 0xff), as in the original; do not "fix" */
 				job->pada[2] = (char) g_7f4c04;
 				fcn_004c5420(*(unsigned int*) (entity + 4), 0x1c8, 4, 0, 0x1000);
 				return;
@@ -104,15 +110,15 @@ void __cdecl fcn_00559aa0(struct job* job)
 	}
 	job->flags &= 0xef;
 	fcn_004c5c80(*(unsigned int*) (entity + 4));
-	if (gm_RandomFloat01() <= g_6628cc) {
+	if (!(gm_RandomFloat01() > g_6628cc)) {
 		state = (unsigned char) job->pada[0];
 		guard = 0x100;
-		value = (int) (signed char) ((unsigned char) job->pada[1] + state);
+		value = ((unsigned char) job->pada[1] + state) % 0x100;
 		do {
 			candidate = (char*) (lpGebaeudeINST + value * 0xa9);
 			record = candidate;
 			if (*candidate != 0) {
-				type = lpGebaeudePROT[(unsigned char) *candidate * 0x24d];
+				type = ((GebProt_559aa0*) lpGebaeudePROT)[(unsigned char) *candidate].type;
 				bit_lo = 0;
 				bit_hi = 0;
 				if (type > 0x1f) {
@@ -128,7 +134,7 @@ void __cdecl fcn_00559aa0(struct job* job)
 				record = 0;
 			}
 			guard--;
-			value = (int) (signed char) (state + value);
+			value = (state + value) % 0x100;
 		} while (guard != 0);
 	} else {
 		candidate = (char*) gm_StartFilteredEntitySearch(1, 5, 0x16);
@@ -156,7 +162,7 @@ void __cdecl fcn_00559aa0(struct job* job)
 	job->pada[1] = (char) value;
 	job->item = *(int*) (record + 1);
 	job->f8 = (unsigned char) (job->f8 + 1);
-	type = lpGebaeudePROT[(unsigned char) *record * 0x24d];
+	type = ((GebProt_559aa0*) lpGebaeudePROT)[(unsigned char) *record].type;
 	if (type != 0x16 && type != 7 && type != 0x0f)
 		fcn_004c5da0(job->house, job->item, -1, 0, 1, (char*) 0x6a6038);
 	else

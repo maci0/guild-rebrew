@@ -100,9 +100,11 @@ typedef struct {
 
 extern unsigned char g_773d75;
 extern unsigned char* lpGebaeudePROT;
+typedef struct BuildingRow489a70 { unsigned char kind; char fields[0x24c]; } BuildingRow489a70;
 extern char* g_773d78;
-extern float volatile g_6628a0;
+extern float g_6628a0;
 extern float g_664144;
+extern char* g_100e748;
 
 int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld);
 int __cdecl fcn_0050dfd0(char* pkt, int item_id);
@@ -129,36 +131,25 @@ void __cdecl fcn_004c5530(int a1);
 char* __cdecl fcn_00503d10(int who);
 double __cdecl gm_RandomFloat01(void);
 
-/*
- * The volatile qualifiers on o, id, price, pp and 0x6628a0 are scheduling
- * barriers, not semantics: the native body reloads those from their stack homes
- * per use and re-reads 0x6628a0 at each compare (0x006e, 0x0ce7, 0x0f7d,
- * 0x1c9/0x1ef), so caching them in registers changes the instruction stream.
- * The pp home is also what fixes the locals area at 0x2c bytes: v.m sits at
- * [esp+0x38] and the frame is 0x74c, with the line buffer at [esp+0x358].
- * sent, n and cnt are plain locals here; x and found are plain as well, and
- * the native body reloads found once, at the function tail (0x1751).
- */
-
 /* ADDRESS: GOLDTL 0x00489a70 */
-int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
+int __cdecl ai_MeisterTrade(char* o, char* bld)
 {
-	char* volatile q;
+	char* q;
 	char* r;
 	char* x;
 	char* tp;
 	Prod* pr;
-	Prod* volatile pp;
+	Prod* pp;
 	Town* t;
-	unsigned short volatile id;
+	unsigned short id;
 	int i;
 	int j;
 	int n;
 	int cnt;
-	int volatile sent;
+	int sent;
 	int found;
 	int tmp;
-	int volatile price;
+	int price;
 	short type;
 	int slot;
 	float fr;
@@ -185,7 +176,7 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 			continue;
 		}
 		if (pr->qty28 > fcn_0050dfd0(bld, pr->id) / 3) {
-			if (lpGebaeudePROT[(unsigned char) *(*(char**)(o + 0x16c)) * 0x24d] == 0x16) {
+			if (((BuildingRow489a70*) lpGebaeudePROT)[(unsigned char) *(*(char**)(o + 0x16c))].kind == 0x16) {
 				pr->qty18 = pr->qty28 / 2;
 			} else {
 				pr->qty18 = pr->qty28;
@@ -214,7 +205,7 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 					    g_773d75) /
 					    eval_ObjektPreis2Credits(t->id, 100)) {
 						t->qty44 = t->qty3c;
-						if (o == (char*) 0x100e748) {
+						if (o == g_100e748) {
 							sprintf(v.line,
 							    (char*) 0x67e708,
 							    t->qty44,
@@ -226,10 +217,10 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 					fr = eval_ObjektPreis2Credits(t->id, 100) /
 					    fcn_0050bb50(t->id, g_773d75);
 					if (fr < g_6628a0
-					    && fr < gm_RandomFloat01() *
+					    && fr <= gm_RandomFloat01() *
 					    g_664144 + 0.25) {
 						t->qty44 = t->qty3c;
-						if (o == (char*) 0x100e748) {
+						if (o == g_100e748) {
 							sprintf(v.line,
 							    (char*) 0x67e6cc,
 							    t->qty44,
@@ -277,7 +268,7 @@ int __cdecl ai_MeisterTrade(char* volatile o, char* bld)
 				}
 				t->qty44 = j < t->qty3c ? j : t->qty3c;
 				tmp += j * slot;
-				if (o == (char*) 0x100e748) {
+				if (o == g_100e748) {
 					sprintf(v.line, (char*) 0x67e6ac,
 					    t->qty44,
 					    *(char**) 0x99ec10 +
@@ -292,7 +283,7 @@ dump_stock:
 				if ((t->flags54 & 6) != 0) {
 					continue;
 				}
-				tmp = fcn_0050dfd0(*(char* volatile*) &bld, t->id) / 4;
+				tmp = fcn_0050dfd0(bld, t->id) / 4;
 				if (t->qty3c <= tmp) {
 					continue;
 				}
@@ -303,7 +294,7 @@ dump_stock:
 				if (t->qty44 > t->qty3c) {
 					t->qty44 = t->qty3c;
 				}
-				if (o == (char*) 0x100e748) {
+				if (o == g_100e748) {
 					sprintf(v.line, (char*) 0x67e674,
 					    t->qty44,
 					    *(char**) 0x99ec10 +
@@ -342,7 +333,7 @@ dump_stock:
 	}
 
 	tp = *(char**) (o + 0x16c);
-	type = lpGebaeudePROT[(unsigned char) *tp * 0x24d];
+	type = ((BuildingRow489a70*) lpGebaeudePROT)[(unsigned char) *tp].kind;
 	if (type == 0xd || type == 0xb || type == 0xc) {
 		/* 0x0420-0x04b7: drop town requests already being handled */
 		for (i = 0; i < *(int*) 0x100b0ac; i++) {
@@ -401,7 +392,7 @@ next_request:
 	}
 
 	/* 0x0572-0x05f0: is the cart already unloaded? */
-	x = fcn_005463a0(*(int*) (*(char**) (o + 0x16c) + 1), 2, 0, 0xb, 3);
+	x = fcn_005463a0(2, 0, 0xb, 3, *(int*) (*(char**) (o + 0x16c) + 1));
 	while (x != 0) {
 		if (*(int*) (x + 0xac) == *(int*) (r + 2)) {
 			goto tail;
@@ -456,11 +447,10 @@ next_request:
 			if (v.s1.ids[j] != id) {
 				continue;
 			}
-			/* tracking arrays start four ints in */
 			sprintf(v.line, (char*) 0x67e600,
 			    *(char**) (o + 0x16c) + 5,
 			    *(char**) 0x99ec10 + id * 0x41 + 1);
-			tmp = v.s1.caps[4 + j] - v.s1.vals[4 + j];
+			tmp = v.s1.caps[j] - v.s1.vals[j];
 			if (v.s2.vals[i] < tmp) {
 				tmp = v.s2.vals[i];
 			}
@@ -475,7 +465,7 @@ next_request:
 			if (v.s2.vals[i] == 0) {
 				v.s2.ids[i] = 0;
 			}
-			v.s1.vals[4 + j] += tmp;
+			v.s1.vals[j] += tmp;
 			found = 1;
 			break;
 		}
@@ -504,7 +494,7 @@ next_request:
 				v.s2.ids[i] = 0;
 			}
 			v.s1.ids[j] = id;
-			v.s1.vals[4 + j] += tmp;
+			v.s1.vals[j] += tmp;
 			found = 1;
 			break;
 		}
@@ -516,25 +506,25 @@ next_request:
 			if (v.s1.ids[j] != id) {
 				continue;
 			}
-			if (v.s2.vals[i] < v.s1.vals[4 + j]) {
+			if (v.s2.vals[i] < v.s1.vals[j]) {
 				continue;
 			}
 			sprintf(v.line, (char*) 0x67e588,
 			    *(char**) (o + 0x16c) + 5,
-			    v.s1.vals[4 + j],
+			    v.s1.vals[j],
 			    *(char**) 0x99ec10 + id * 0x41 + 1);
 			price = (int) fcn_0050bb50(id, g_773d75);
 			sprintf(v.line, (char*) 0x67e358, -1,
-			    *(int*) (bld + 2), id, v.s1.vals[4 + j],
+			    *(int*) (bld + 2), id, v.s1.vals[j],
 			    g_773d75, (double) price);
 			tmp = (int) fcn_0050bb50(id, g_773d75);
 			fcn_004c51f0(-1, *(int*) (bld + 2), id,
-			    v.s1.vals[4 + j], g_773d75, tmp);
+			    v.s1.vals[j], g_773d75, tmp);
 			price = (int) fcn_0050bb50(id, g_773d75) +
 			    *(int*) (o + 0x1b8);
 			*(int*) (o + 0x1b8) = price;
 			v.s1.ids[j] = 0;
-			v.s1.vals[4 + j] = 0;
+			v.s1.vals[j] = 0;
 			tmp = fcn_0050dfd0(bld, id);
 			if (v.s2.vals[i] < tmp) {
 				tmp = v.s2.vals[i];
@@ -549,7 +539,7 @@ next_request:
 				v.s2.ids[i] = 0;
 			}
 			v.s1.ids[j] = id;
-			v.s1.vals[4 + j] += tmp;
+			v.s1.vals[j] += tmp;
 			break;
 		}
 no_market:
@@ -817,7 +807,7 @@ next_auto:
 
 	/* 0x136f-0x1483: log and send the request */
 	if (sent) {
-		if (o == (char*) 0x100e748) {
+		if (o == g_100e748) {
 			for (i = 0; i < 3; i++) {
 				if (v.m.ids[i] != 0) {
 					sprintf(v.line, (char*) 0x67e4d8,

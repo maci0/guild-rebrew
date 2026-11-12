@@ -10,7 +10,8 @@ extern int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 extern int __cdecl fcn_004c5620(int, char*);
 extern char* __cdecl fcn_005463a0(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
-extern int __cdecl gm_RandomMod(int);
+extern unsigned short __cdecl gm_RandomMod(unsigned short);
+extern int g_6b8010;
 extern int __cdecl fcn_004c4450(int);
 extern char* __cdecl fcn_004c4480(int);
 extern int __cdecl cut_FindCutsceneById(int);
@@ -149,7 +150,7 @@ void __cdecl fcn_00554170(char* obj)
 		}
 	not_found:
 		fcn_00500bb0(time, 0, 0xa, 0);
-		if (*(int*) 0x6b8010 == 0) {
+		if (g_6b8010 == 0) {
 			rec = fcn_00445600(0, 0x140, 0, obj + 0xac);
 			if (rec != 0) {
 				float pos[4];

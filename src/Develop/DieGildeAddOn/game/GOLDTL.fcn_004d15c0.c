@@ -31,7 +31,7 @@ int __cdecl fcn_004c67c0(int, pkt2c*);
 void __cdecl fcn_00533a40(char*);
 
 /* ADDRESS: GOLDTL 0x004d15c0 */
-int __cdecl fcn_004d15c0(char* a0, char* a1)
+char __cdecl fcn_004d15c0(char* a0, char* a1)
 {
 	pkt2c l;
 	pkt2c* e;
@@ -43,7 +43,15 @@ int __cdecl fcn_004d15c0(char* a0, char* a1)
 	r = 0;
 	if (g_14ce8cc) {
 		if (g_7746a0) {
-			if (*(int*) ((char*) g_7746a0 + 0x220) != 2) {
+			if (*(int*) ((char*) g_7746a0 + 0x220) == 2) {
+				obj = *(int*) ((char*) g_7746a0 + 0x204);
+				if (fcn_004ce270(a1, obj) != 0 || g_14cf736 != 0) {
+					if (fcn_004d1020(a0, a1, (char*) obj, 0, 0) != -1) {
+						r = 1;
+						return r;
+					}
+				}
+			} else {
 				if (strncmp((char*) g_7746a0, "sp_ESCAPE", 10) == 0) {
 					fcn_004d1250(a0, a1, (char*) g_7746a0);
 					r = 1;
@@ -58,14 +66,6 @@ int __cdecl fcn_004d15c0(char* a0, char* a1)
 					fcn_004d13d0(a0, a1, (char*) g_7746a0);
 					r = 1;
 					return r;
-				}
-			} else {
-				obj = *(int*) ((char*) g_7746a0 + 0x204);
-				if (fcn_004ce270(a1, obj) != 0 || g_14cf736 != 0) {
-					if (fcn_004d1020(a0, a1, (char*) obj, 0, 0) != -1) {
-						r = 1;
-						return r;
-					}
 				}
 			}
 		} else {

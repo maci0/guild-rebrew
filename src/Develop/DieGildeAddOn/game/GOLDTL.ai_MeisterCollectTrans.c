@@ -12,6 +12,8 @@ extern char* lpGebaeudePROT;
 extern unsigned short* lpObjekteINST;
 extern char* lpObjektePROT;
 
+typedef struct BuildingRow489250 { unsigned char kind; char fields[0x246]; unsigned char capacity; char tail[5]; } BuildingRow489250;
+
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_ResolveEntityById(void**, void**, int, int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
@@ -36,7 +38,7 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 	unsigned char pkt[0xf8];
 	char buf[0x400];
 	char* rec;
-	char* row;
+	BuildingRow489250* row;
 	char* u;
 	int type;
 	int id;
@@ -52,7 +54,7 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 	}
 	*(int*) (e + 0x1b4) |= 0x80;
 	sprintf(buf, (char*) 0x67e488, *(unsigned short*) &g_7f4c04,
-	        *(int*) 0x7f4c06);
+	        g_7f4c06);
 	count = 0;
 	n136 = 0;
 	slot = (char*) lpObjekteINST;
@@ -123,8 +125,8 @@ next:
 	} while (iter != 0);
 	rec = *(char**) (e + 0x16c);
 	type = *(unsigned char*) rec;
-	row = lpGebaeudePROT + type * 0x24d;
-	if (*(unsigned char*) row == 9) {
+	row = &((BuildingRow489250*) lpGebaeudePROT)[type];
+	if (row->kind == 9) {
 		if (count == n136) {
 			t = (int) eval_ObjektPreis2Credits(0x134, 100);
 			fcn_004c5150(-1, *(int*) (g_7f4ca4 +
@@ -138,13 +140,13 @@ next:
 			if (*(int*) (e + 0x1c8) & 8) {
 				return;
 			}
-			if (count >= *(unsigned char*) (row + 0x247)) {
+			if (count >= row->capacity) {
 				return;
 			}
 			if ((unsigned short) gm_RandomMod(0x2ee) >= 2) {
 				return;
 			}
-			id = 0x136 - (gm_RandomMod(8) < 4);
+			id = 0x136 - ((unsigned short) gm_RandomMod(8) < 4);
 			t = (int) eval_ObjektPreis2Credits(id, 100);
 			if (*(int*) (e + 0x1b8) <= t * 2) {
 				return;
@@ -155,14 +157,14 @@ next:
 			             (char) g_773d75, t);
 			fcn_004c51f0(*(int*) (rec + 1), -1, id, 1, (char) g_773d75, 0);
 			sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &g_7f4c04,
-			        *(int*) 0x7f4c06, rec + 5);
+			        g_7f4c06, rec + 5);
 			*(int*) (e + 0x1c8) |= 8;
 			return;
 		}
 		if (*(int*) (e + 0x1c8) & 8) {
 			return;
 		}
-		if (count >= *(unsigned char*) (row + 0x247)) {
+		if (count >= row->capacity) {
 			return;
 		}
 		if ((unsigned short) gm_RandomMod(0x2ee) >= 2) {
@@ -178,7 +180,7 @@ next:
 		             (char) g_773d75, t);
 		fcn_004c51f0(*(int*) (rec + 1), -1, 0x136, 1, (char) g_773d75, 0);
 		sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &g_7f4c04,
-		        *(int*) 0x7f4c06, rec + 5);
+		        g_7f4c06, rec + 5);
 		*(int*) (e + 0x1c8) |= 8;
 		return;
 	}
@@ -206,7 +208,7 @@ next:
 	if (*(int*) (e + 0x1c8) & 8) {
 		return;
 	}
-	if (count >= *(unsigned char*) (row + 0x247)) {
+	if (count >= row->capacity) {
 		return;
 	}
 	if ((unsigned short) gm_RandomMod(0x2ee) >= 2) {
@@ -221,6 +223,6 @@ next:
 	             (char) g_773d75, t);
 	fcn_004c51f0(*(int*) (rec + 1), -1, 0x135, 1, (char) g_773d75, 0);
 	sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &g_7f4c04,
-	        *(int*) 0x7f4c06, rec + 5);
+	        g_7f4c06, rec + 5);
 	*(int*) (e + 0x1c8) |= 8;
 }

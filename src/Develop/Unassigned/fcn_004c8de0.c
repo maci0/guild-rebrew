@@ -1,6 +1,9 @@
+#include "Develop/DieGildeAddOn/game/game_data.h"
+#include "Develop/DieGildeAddOn/game/game_matrices.h"
+
 int __cdecl fcn_004c4dc0(int a, int b);
-#define SLOT_DWORD(off) (*(int*) ((char*) 0x7f4ca0 + (off) + 4))
-#define SLOT_WORD(off)  (*(unsigned short*) ((char*) 0x7f4ca0 + (off)))
+#define SLOT_DWORD(off) (*(int*) (g_7f4ca0 + (off) + 4))
+#define SLOT_WORD(off)  (*(unsigned short*) (g_7f4ca0 + (off)))
 
 /* Updates one slot's relation matrix for the given update kind and mode.
  * Native body: 889 bytes at 0x004c8de0. */
@@ -47,12 +50,12 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 			hi = 0x64; lo = -0x4b; hiadd = -5; loadd = 0xb;
 		}
 		for (i = 0; i < 0x300; i++) {
-			p = (char*) 0x869480 + i * 0x300;
+			p = (char*) g_869480 + i * 0x300;
 			for (j = 0; j < 0x300; j++) {
+				v = (signed char) p[j];
 				if (i != j && SLOT_WORD(i * 0x21c) != 0xffff &&
 				    SLOT_WORD(j * 0x21c) != 0xffff) {
-					v = (signed char) p[j];
-					if (v > hi) {
+						if (v > hi) {
 						v += hiadd;
 					} else if (v < lo) {
 						v += loadd;
@@ -84,8 +87,8 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 			return 1;
 		}
 		if (kind == 3) {
-			e = *(int*) ((char*) 0x7f4ca0 + idx4 * 0x21c + 0x210);
-			p = (char*) (0x90e0a0 + idx4);
+			e = *(int*) (g_7f4ca0 + idx4 * 0x21c + 0x210);
+			p = (char*) g_90e0a0 + idx4;
 			for (i = 0; i < 0x300; i++) {
 				if (SLOT_DWORD(i * 0x21c) != e) {
 					*p = (char) (int) ((float) *p * *(float*) (t + 8));
@@ -110,11 +113,11 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 			if (SLOT_WORD(idx4 * 0x21c) == 0xffff) {
 				return 1;
 			}
-			p = (char*) (0x869480 + idx4 * 0x300 + idx5idx);
+			p = (char*) g_869480 + idx4 * 0x300 + idx5idx;
 			if (kind == 2) {
-				*(unsigned char*) ((char*) 0x90e0a0 + idx4 * 0x300 + idx5idx) = 0;
+				*(unsigned char*) ((char*) g_90e0a0 + idx4 * 0x300 + idx5idx) = 0;
 				v = *(signed char*) p + t[6];
-				if (v <= -0x7f) {
+				if (v < -0x7f) {
 					v = -0x7f;
 				} else if (v >= 0x7f) {
 					v = 0x7f;
@@ -122,7 +125,7 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 				*p = (signed char) v;
 			} else if (kind == 1) {
 				v = *(signed char*) p + t[6];
-				if (v <= -0x7f) {
+				if (v < -0x7f) {
 					v = -0x7f;
 				} else if (v >= 0x7f) {
 					v = 0x7f;
@@ -131,17 +134,17 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 				if (t[6] >= 0) {
 					v = v / 2;
 				}
-				v += *(signed char*) ((char*) 0x90e0a0 + idx4 * 0x300 + idx5idx);
-				if (v <= -0x7f) {
-					*(unsigned char*) ((char*) 0x90e0a0 + idx4 * 0x300 + idx5idx) = 0x81;
+				v += *(signed char*) ((char*) g_90e0a0 + idx4 * 0x300 + idx5idx);
+				if (v < -0x7f) {
+					*(unsigned char*) ((char*) g_90e0a0 + idx4 * 0x300 + idx5idx) = 0x81;
 				} else if (v >= 0x7f) {
-					*(unsigned char*) ((char*) 0x90e0a0 + idx4 * 0x300 + idx5idx) = 0x7f;
+					*(unsigned char*) ((char*) g_90e0a0 + idx4 * 0x300 + idx5idx) = 0x7f;
 				} else {
-					*(signed char*) ((char*) 0x90e0a0 + idx4 * 0x300 + idx5idx) = (signed char) v;
+					*(signed char*) ((char*) g_90e0a0 + idx4 * 0x300 + idx5idx) = (signed char) v;
 				}
 			} else if (kind == 0) {
 				v = *(signed char*) p + t[6];
-				if (v <= -0x7f) {
+				if (v < -0x7f) {
 					v = -0x7f;
 				} else if (v >= 0x7f) {
 					v = 0x7f;

@@ -36,6 +36,9 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	int count;
 	int window;
 	int elem;
+	int label;
+	int gauge;
+	int found;
 	int id;
 	int step;
 	int height;
@@ -73,13 +76,13 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	if (entry != 0) {
 		for (i = 0; table[i] != 0; i++) {
 			if (fcn_0050c7d0(a0[0], table[i]) != 0) {
-				window = fcn_0046f740(0, height, 2, g_772514);
-				wins[i] = window;
-				*(int*) (g_1015ea0 + window * 0x2f4 + 0x1d0) = 3;
-				*(int*) (g_1015ea0 + window * 0x2f4 + 0x84) = 0x55;
+				label = fcn_0046f740(0, height, 2, g_772514);
+				wins[i] = label;
+				*(int*) (g_1015ea0 + label * 0x2f4 + 0x1d0) = 3;
+				*(int*) (g_1015ea0 + label * 0x2f4 + 0x84) = 0x55;
 				io_FormatTextBuffer(buf, "%s:", *(unsigned int*) (table[i] * 8 + 0x14a9180));
-				fcn_0046f9b0(window, buf);
-				*(int*) (g_1015ea0 + window * 0x2f4 + 0x5c) = 1;
+				fcn_0046f9b0(label, buf);
+				*(int*) (g_1015ea0 + label * 0x2f4 + 0x5c) = 1;
 				if (table[i] == 3) {
 					type = 6;
 				}
@@ -89,9 +92,9 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 				else {
 					type = fcn_0050c7d0(a0[0], table[i]);
 				}
-				elem = fcn_004677e0(0x140, height, 0x82, 0, type, 0x6f, 0x56, g_772514);
-				elems[i] = elem;
-				d2_SetElementValue(elem, 0, type, 0, 0);
+				gauge = fcn_004677e0(0x140, height, 0x82, 0, type, 0x6f, 0x56, g_772514);
+				elems[i] = gauge;
+				d2_SetElementValue(gauge, 0, type, 0, 0);
 				height += step;
 			}
 			else {
@@ -101,7 +104,8 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	}
 	g_100f1dc = -1;
 	for (;;) {
-		if ((a1[0x5b] & 4) != 0 || gm_SearchTable67(id) == 0) {
+		found = (int) gm_SearchTable67(id);
+		if ((a1[0x5b] & 4) != 0 || found == 0) {
 			g_774654 = 1;
 		}
 		if (g_14ce8e0 != 0) {

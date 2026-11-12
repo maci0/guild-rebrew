@@ -24,6 +24,7 @@ typedef struct {
 } Obj45a9d0;
 
 typedef struct {
+	char prefix[0x310];
 	int count;			/* +0x310: point count */
 	int ntris;			/* +0x314: triangle count */
 	void* arrays;			/* +0x318 */
@@ -184,7 +185,7 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 			area -= p0->u * p1->v;
 			area += p0->u * p2->v;
 			area -= p2->u * p0->v;
-			if (area > 0.0f) {
+			if (!(area < 0.0f)) {
 				continue;
 			}
 			ext = 0;

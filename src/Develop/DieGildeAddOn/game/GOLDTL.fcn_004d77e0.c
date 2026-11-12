@@ -46,7 +46,7 @@ unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_004d1ff0(ShiftDlg*);
 void __cdecl fcn_004d1a80(void);
-int __cdecl fcn_004d2c80(int*, int);
+void __cdecl fcn_004d2c80(int*, int);
 void __cdecl fcn_004d2e60(ShiftDlg*);
 void __cdecl fcn_0052a960(void*);
 void __cdecl fcn_00445f50(int, int, float, int);
@@ -144,21 +144,20 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 			}
 			fcn_004d6170(p);
 			fcn_004d2f10(p);
-			fcn_004d2a60(p);
-			return;
-		}
-		if (*(int*) &g_772eac != 0 && *(char*) (*(int*) &g_772e9c + 2) == 6) {
+		} else if (*(int*) &g_772eac != 0 && *(char*) (*(int*) &g_772e9c + 2) == 6) {
 			v = 0;
 			w = gm_StartFilteredEntitySearch(1, 1, *(int*) (*(int*) 0x772eb4 + 0x10c));
 			if (w != 0) {
 				v = fcn_00502cd0(*(int*) (w + 0x5d), 2, 6, 0, 0x116);
 			}
-			if (*(int*) &g_772eac <= 0) {
-				io_FormatTextBuffer(buf, 0x1146);
-			} else if (v == 0) {
-				io_FormatTextBuffer(buf, 0x1144, *(int*) &g_772eac);
+			if (*(int*) &g_772eac > 0) {
+				if (v == 0) {
+					io_FormatTextBuffer(buf, 0x1144, *(int*) &g_772eac);
+				} else {
+					io_FormatTextBuffer(buf, 0x1145, *(int*) &g_772eac);
+				}
 			} else {
-				io_FormatTextBuffer(buf, 0x1145, *(int*) &g_772eac);
+				io_FormatTextBuffer(buf, 0x1146);
 			}
 			fcn_004e6eb0(buf, 0x10);
 		}
@@ -187,7 +186,9 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 			}
 		}
 	}
-	if (gm_RandomMod(0x1e) + saved > gm_RandomMod(0x1e) + changed) {
+	v = gm_RandomMod(0x1e) + saved;
+	w = gm_RandomMod(0x1e) + changed;
+	if (v > w) {
 		changed = *(int*) &g_772e9c;
 	} else {
 		changed = *(int*) 0x772e98;

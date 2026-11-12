@@ -1,14 +1,9 @@
-extern char* lpGebaeudePROT;
-extern int g_7746c4;
-extern int g_7746c8;
+#include "game_data.h"
 #include "game_player.h"
-extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_67d370;
 extern int g_14abaac;
-extern char* g_6aa4d8;
-
 int __cdecl fcn_0055c050(char* obj);
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -32,19 +27,19 @@ void __cdecl fcn_00471e30(int dlg);
 void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 {
 	char msg[0x400];
-	char* list[16];
 	char msg2[0x100];
-	unsigned int slots[8];
-	char packet[4];
-	unsigned int count;
+	char* list[16];
+	char packet[0xf8];
+	unsigned char* profile;
+	int count;
+	int extra;
 	int entity;
 	int other;
 	int index;
 	int choice;
 	int option;
 	int i;
-
-	count = 0;
+	extra = 0;
 	if (obj == 0) {
 		return;
 	}
@@ -57,8 +52,9 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 		return;
 	}
 	count = 0;
-	entity = g_7746c4;
-	if (g_7746c4 != 0 || (entity = g_7746c8) != 0) {
+	profile = lpGebaeudePROT + *(unsigned char*) obj * 0x24d;
+	entity = (int) g_7746c4;
+	if (g_7746c4 != 0 || (entity = (int) g_7746c8) != 0) {
 		other = (int) fcn_00502cd0(*(int*) (entity + 0x5d), 1, 0, 0xca);
 		while (other != 0) {
 			if (*(int*) (other + 0x2a) != *(int*) (obj + 1)) {
@@ -75,18 +71,19 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 				break;
 			}
 		}
-		if (index == count) {
-			count++;
+		if (index >= count) {
+			extra++;
 		}
 		other = (int) he_fn_Handlung();
 	}
-	if ((*(unsigned char*) (lpGebaeudePROT + id * 0x24d + 0x247) * 2) <= count) {
+	count += extra;
+	if (count >= *(unsigned char*) (profile + 0x247) * 2) {
 		io_FormatTextBuffer(msg2, 0x19fa, count, g_7746c8);
 		fcn_00526120(msg2, 0);
 		return;
 	}
 	choice = *(unsigned short*) (obj + 0x27);
-	option = fcn_00470820(0, 0, g_6aa4d8);
+	option = fcn_00470820(0, 0, "misc\\Bestechung");
 	fcn_00471b60(option);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(option, 1);
@@ -106,19 +103,22 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 			}
 			else {
 				for (i = 0; i < 8; i++) {
-					slots[i] = 0xffffffff;
+					((unsigned int*) (packet + 0x38))[i] = 0xffffffff;
 				}
-				packet[0] = 0x40;
-				packet[2] = 1;
+				packet[4] = 0x40;
+				packet[0x36] = 1;
+				*(int*) (packet + 8) = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+				*(int*) (packet + 0x58) = *(int*) (obj + 1);
+				*(int*) (packet + 0x5c) = *(int*) (g_7746c8 + 1);
 				i = 0;
 				for (entity = 0x7f4ca4; entity < 0x85a0a4 && i < 8; entity += 0x21c) {
 					if (*(char*) (entity + 0x184) != 0) {
-						slots[i] = *(unsigned int*) entity;
+						((unsigned int*) (packet + 0x38))[i] = *(unsigned int*) entity;
 						i++;
 					}
 				}
 				if (i != 0) {
-					fcn_004c5530(*(int*) packet);
+					fcn_004c5530((int) packet);
 					fcn_004c35f0();
 					sv_ClearObjectSelection();
 					g_774654 = 1;

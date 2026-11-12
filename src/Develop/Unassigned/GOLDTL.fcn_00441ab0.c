@@ -45,6 +45,7 @@ int __cdecl fcn_00441ab0(char* o, int mx, int my, float radius, float* out)
 	float dx;
 	float dy;
 	float z;
+	unsigned char* height;
 
 	if (o == 0) {
 		return -1;
@@ -73,7 +74,7 @@ int __cdecl fcn_00441ab0(char* o, int mx, int my, float radius, float* out)
 	best = 1.0f;
 	packed = -1;
 	vp = (Viewport_441ab0*) g_1052be0;
-	cell = (Cell_441ab0*) (o + 0x28e);
+	cell = (Cell_441ab0*) (o + 0xa0);
 	for (b = 0; b < 8; b++) {
 		for (a = 0; a < 8; a++) {
 			if (cell->on != 0) {
@@ -84,27 +85,28 @@ int __cdecl fcn_00441ab0(char* o, int mx, int my, float radius, float* out)
 				pos[2] = (float) (*(int*) (o + 4) * a) * *(float*) (o + 0x68) +
 				         (float) (*(int*) (o + 4) * b) * *(float*) (o + 0x78);
 				for (row = 0; row < *(int*) (o + 4); row++) {
+					height = *(unsigned char**)(o + 0x10) + (*(int*)(o + 4) * b + row) * *(int*)o + *(int*)(o + 4) * a;
 					cur[0] = pos[0];
 					cur[1] = pos[1];
 					cur[2] = pos[2];
-					for (col = 0; col < *(int*) (o + 4); col++) {
+					for (col = 0; col < *(int*) (o + 4); col++, height++) {
 						v[0] = cur[0];
 						v[2] = cur[2];
-						v[1] = cur[1] + (float) *(unsigned char*) ((char*) *(int*) (o + 0x10) +
-						      (*(int*) (o + 4) * b + row) * *(int*) o + *(int*) (o + 4) * a + col) *
+						v[1] = cur[1] + (float) *height *
 						      *(float*) (o + 0x84);
 						fcn_005eb2e4(p, v, vp, g_1052c00, view, world);
-						if (p[0] >= (float) vp->x &&
+						if (p[0] > (float) vp->x &&
 						    p[0] <= (float) (vp->x + vp->width) &&
-						    p[1] >= (float) vp->y &&
+						    p[1] > (float) vp->y &&
 						    p[1] <= (float) (vp->y + vp->height) &&
-						    p[2] >= 0.0f && p[2] <= 1.0f) {
+						    p[2] >= 0.0f && p[2] < 1.0f) {
 							dx = (float) mx - p[0];
 							dy = (float) my - p[1];
-							if (dx * dx + dy * dy <= r2) {
+							if (dx * dx + dy * dy < r2) {
 								z = (float) sqrt(dx * dx + dy * dy) / radius *
 								    (p[2] / g_1043294);
-								if (z > best) {
+								if (z < best && (*(int*)(o + 4) * b + row) < *(int*)o &&
+								    (*(int*)(o + 4) * a + col) < *(int*)o) {
 									best = z;
 									packed = ((*(int*) (o + 4) * b + row) << 16) |
 									         (*(int*) (o + 4) * a + col);

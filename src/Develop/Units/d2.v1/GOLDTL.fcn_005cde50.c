@@ -75,7 +75,7 @@ void __cdecl fcn_005cde50(void (*a0)(int), int a1, int a2)
 					break;
 				}
 			}
-			if (a0 != 0 && sel >= 0 && sel <= 6) {
+			if (a0 != 0 && sel > -1 && sel < 7) {
 				fcn_00471af0(dlg, 0);
 				(*a0)(btn[sel + 7]);
 				fcn_00471af0(dlg, 1);

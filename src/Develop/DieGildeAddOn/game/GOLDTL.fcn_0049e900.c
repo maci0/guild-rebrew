@@ -1,146 +1,154 @@
-extern int __cdecl gm_RandomMod(int);
+/* AI step: take out a credit. Picks a target building of the right kind and a
+ * lender, rates the lender's credit offers and fills the two action packets
+ * with the best one; 0x33 on success. */
+
+/* SIZE 0x24d */
+typedef struct {
+	unsigned char kind;
+	char pad[0x246];
+	unsigned char level;
+	char pad248[0x24d - 0x248];
+} BuildingRow;
+
+extern int g_6643d8[];
+extern int g_7f4c04;
+extern unsigned char* lpGebaeudePROT;
+extern float g_662a3c;
+extern float g_662a94;
+extern float g_6628a8;
+
+extern unsigned short __cdecl gm_RandomMod(int);
 extern char* __cdecl fcn_005463a0(int, int, int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern int __cdecl fcn_0050d6d0(char*, short*, int, int*);
-extern int __cdecl fcn_004f4830(int, char*);
+extern int __cdecl fcn_004f4830(int, int*);
 
-/* Rates the records returned for an action and fills the action packets with
- * the best-scoring record; 0x33 on success. */
 /* ADDRESS: GOLDTL 0x0049e900 */
 int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1, char* out2)
 {
-	float score[4];
+	int v[4];
 	int rec[9];
 	int msg[9];
-	int v[4];
-	int step;
-	int cnt;
+	float score[4];
+	int n;
 	int i;
 	int j;
-	int type;
+	int t;
 	int best;
-	int found;
-	int count;
-	double d;
-	double dd;
+	char* e;
+	char* e2;
+	BuildingRow* row;
+	float d;
 
-	step = *(int*) ((gm_RandomMod(0x10) & 0xffff) * 4 + 0x6643d8);
-	v[0] = step;
-	if (*(char*) (ent + 2) == 3)
+	v[0] = g_6643d8[gm_RandomMod(0x10)];
+	if (ent[2] == 3)
 		return 0;
 	if (code != 0x33 && code != 0x13 && code != 0x10 && code != 0x11)
 		return 0;
-	cnt = 0;
+	n = 0;
 	if (fcn_005463a0(2, 0, 0x23, 2, *(unsigned short*) ent) != 0) {
-		cnt = 1;
-		while (he_fn_Handlung() != 0)
-			cnt += 1;
+		do {
+			n++;
+		} while (he_fn_Handlung() != 0);
 	}
-	if ((gm_RandomMod(10) & 0xffff) < cnt + 1)
+	if (gm_RandomMod(10) < n + 1)
 		return 0;
-	if (code != 0x33)
-		goto branch2;
-	j = (*(int*) 0x7f4c04 & 0xffff) - 8;
-	if (j < 0)
-		j = 0;
-	if (j >= 0xa)
-		j = 0xa;
-	d = (double) (10 - j) * *(float*) 0x662a3c;
-	dd = d * d;
-	v[1] = (int) (*(float*) 0x664378 * dd);
-	v[2] = (int) (*(float*) 0x664374 * dd);
-	v[3] = (int) (*(float*) 0x664370 * dd);
-	found = 0;
-	for (i = 0; i < 0x100; i++) {
-		j = gm_RandomMod(0x100) & 0xffff;
-		found = *(int*) 0x90e094 + j + j * 0xa8;
-		if (*(unsigned char*) found != 0 &&
-		    *(unsigned short*) (found + 0x27) == *target) {
-			type = *(unsigned char*) found;
-			if (((1 << (type & 0x1f)) & 0x7d4390) != 0 &&
-			    *(int*) (found + 0x39) < v[*(unsigned char*)
-				(*(int*) 0x868050 + type * 0x24d + 0x247)])
-				break;
+	if (code == 0x33) {
+		t = (g_7f4c04 & 0xffff) - 8;
+		if (t <= 0 || t < 10)
+			t = t > 0 ? t : 0;
+		else
+			t = 10;
+		d = (10 - t) * g_662a3c;
+		d = d * d;
+		v[1] = (int) (*(float*) 0x664378 * d);
+		v[2] = (int) (*(float*) 0x664374 * d);
+		v[3] = (int) (d * *(float*) 0x664370);
+		j = gm_RandomMod(0x100);
+		for (i = 0x100; ; ) {
+			e = *(char**) 0x90e094 + j * 0xa9;
+			if (e[0] != 0 && *(short*) (e + 0x27) == *target) {
+				row = &((BuildingRow*) lpGebaeudePROT)[*(unsigned char*) e];
+				if (((1 << row->kind) & 0x7d4390) != 0 && *(int*) (e + 0x39) < v[row->level])
+					break;
+			}
+			j = (j + v[0]) % 0x100;
+			if (--i == 0)
+				return 0;
 		}
-		j = (signed char) (j + v[0]);
+		j = gm_RandomMod(0x100);
+		for (i = 0x100; ; ) {
+			e2 = *(char**) 0x90e094 + j * 0xa9;
+			if (e2[0] != 0 && *(short*) (e2 + 0x27) != *target
+			    && ((BuildingRow*) lpGebaeudePROT)[*(unsigned char*) e2].kind == 5)
+				break;
+			j = (j + v[0]) % 0x100;
+			if (--i == 0)
+				return 0;
+		}
+		n = fcn_0050d6d0(e2, target, 3, rec);
+		if (n <= 0)
+			return 0;
+		fcn_004f4830(0xe, msg);
+		for (i = 0; i < n; i++)
+			score[i + 1] = (float) (msg[6] - 2) / rec[i * 3 + 2] * (rec[i * 3 + 1] * *(float*) 0x662dbc) * rec[i * 3];
+		d = g_6628a8;
+		best = -1;
+		for (i = 0; i < n; i++) {
+			if (d < score[i + 1]) {
+				d = score[i + 1];
+				best = i;
+			}
+		}
+		if (best < 0 && best > 2)
+			return 0;
+		out1[0] = 4;
+		*(int*) (out1 + 4) = *(int*) (e2 + 1);
+		*(int*) (out1 + 8) = *(int*) (e + 1);
+		out2[0] = 0x14;
+		*(int*) (out2 + 4) = rec[best * 3];
+		*(int*) (out2 + 8) = rec[best * 3 + 1];
+		*(int*) (out2 + 0x10) = rec[best * 3 + 2];
+		return 0x33;
 	}
-	if (found == 0)
-		return 0;
-	goto search2;
-branch2:
 	if (*(unsigned char*) out1 != 0x12)
 		return 0;
-	found = 0;
-	for (i = 0; i < 0x100; i++) {
-		j = gm_RandomMod(0x100) & 0xffff;
-		found = *(int*) 0x90e094 + j + j * 0xa8;
-		if (*(unsigned char*) found != 0 &&
-		    *(unsigned short*) (found + 0x27) != *target &&
-		    *(unsigned char*) (*(int*) 0x868050 + (*(unsigned char*) found) * 0x24d) == 5)
+	j = gm_RandomMod(0x100);
+	for (i = 0x100; ; ) {
+		e2 = *(char**) 0x90e094 + j * 0xa9;
+		if (e2[0] != 0 && *(short*) (e2 + 0x27) != *target
+		    && ((BuildingRow*) lpGebaeudePROT)[*(unsigned char*) e2].kind == 5)
 			break;
-		j = (signed char) (j + v[0]);
+		j = (j + v[0]) % 0x100;
+		if (--i == 0)
+			return 0;
 	}
-	if (found == 0)
+	n = fcn_0050d6d0(e2, target, 3, rec);
+	if (n <= 0)
 		return 0;
-search2:
-	for (i = 0; i < 0x100; i++) {
-		j = gm_RandomMod(0x100) & 0xffff;
-		found = *(int*) 0x90e094 + j + j * 0xa8;
-		if (*(unsigned char*) found != 0 &&
-		    *(unsigned short*) (found + 0x27) != *target &&
-		    *(unsigned char*) (*(int*) 0x868050 + (*(unsigned char*) found) * 0x24d) == 5)
-			break;
-		j = (signed char) (j + v[0]);
+	fcn_004f4830(0xe, msg);
+	for (i = 0; i < n; i++) {
+		if ((unsigned int) rec[i * 3] > *(unsigned int*) (out1 + 8))
+			score[i + 1] = (float) (msg[6] - 2) / rec[i * 3 + 2] * (rec[i * 3 + 1] * *(float*) 0x662dbc) * rec[i * 3];
+		else
+			score[i + 1] = g_662a94;
 	}
-	if (found == 0)
-		return 0;
-	count = fcn_0050d6d0((char*) found, target, 3, rec);
-	if (count <= 0)
-		return 0;
-	fcn_004f4830(0xe, (char*) msg);
-	if (code == 0x33) {
-		for (i = 0; i < count; i++) {
-			score[i + 1] = (float) rec[i * 3] *
-				((float) rec[i * 3 + 1] * *(float*) 0x662dbc) *
-				((float) (msg[6] - 2) / (float) rec[i * 3 + 2]);
-		}
-	} else {
-		for (i = 0; i < count; i++) {
-			if (rec[i * 3] <= *(int*) (out1 + 8))
-				score[i + 1] = *(float*) 0x662a94;
-			else
-				score[i + 1] = (float) rec[i * 3] *
-					((float) rec[i * 3 + 1] * *(float*) 0x662dbc) *
-					((float) (msg[6] - 2) / (float) rec[i * 3 + 2]);
-		}
-	}
+	d = g_6628a8;
 	best = -1;
-	d = *(float*) 0x6628a8;
-	for (i = 0; i < count; i++) {
+	for (i = 0; i < n; i++) {
 		if (d < score[i + 1]) {
 			d = score[i + 1];
 			best = i;
 		}
 	}
-	if (best < 0)
+	if (best < 0 || best > 2)
 		return 0;
-	if (best > 2)
-		return 0;
+	out1[0] = 4;
+	*(int*) (out1 + 4) = *(int*) (e2 + 1);
+	*(int*) (out1 + 8) = -1;
+	*(int*) (out2 + 4) = rec[best * 3];
+	*(int*) (out2 + 8) = rec[best * 3 + 1];
 	out2[0] = 0x14;
-	if (code == 0x33) {
-		out1[0] = 4;
-		*(int*) (out1 + 4) = *(int*) (found + 1);
-		*(int*) (out1 + 8) = *(int*) (found + 1);
-		*(int*) (out2 + 4) = rec[best * 3];
-		*(int*) (out2 + 8) = rec[best * 3 + 1];
-		*(int*) (out2 + 0x10) = rec[best * 3 + 2];
-	} else {
-		out1[0] = 4;
-		*(int*) (out1 + 4) = *(int*) (found + 1);
-		*(int*) (out1 + 8) = -1;
-		*(int*) (out2 + 4) = rec[best * 3 + 1];
-		*(int*) (out2 + 8) = rec[best * 3 + 1];
-		*(int*) (out2 + 0x10) = rec[best * 3 + 2];
-	}
+	*(int*) (out2 + 0x10) = rec[best * 3 + 2];
 	return 0x33;
 }

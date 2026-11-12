@@ -14,6 +14,8 @@ void __cdecl ClearUserRecords(GOLDUser *p, int who)
 			*(base - 4) = (lim > 11) ? 4 : 3;
 		} else if (*(int *)base == p->f04) {
 			*(base - 4) = 1;
+		} else {
+			continue;
 		}
 		*(int *)base = -1;
 	}

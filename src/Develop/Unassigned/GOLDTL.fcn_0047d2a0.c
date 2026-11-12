@@ -7,10 +7,10 @@
 extern int g_7747b4;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_0047d220(void*);
+int __cdecl fcn_0047dd60(void*);
 int __cdecl fcn_00508eb0(int, int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c4510(int, int);
 void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c4670(int, int, int, void*);
@@ -33,7 +33,7 @@ int __cdecl fcn_0047d2a0(char* e)
 	float f;
 	unsigned char b;
 	unsigned char v11;
-	signed char flag2;
+
 
 	if (*(int*) (e + 0x210) != -1) {
 		goto other_path;
@@ -46,8 +46,8 @@ int __cdecl fcn_0047d2a0(char* e)
 	b = 0;
 	i = 0;
 	for (h = g_7f4ca0 + 2; (int) h < 0x85a0a2; h += 0x21c) {
-		if (i != (int) *(unsigned short*) e && h[0] != 6 && h[0] != 7) {
-			if (fcn_0047d220(&flag2) == 0 || (h[0x164] == 0 && h[0x167] == 0)) {
+		if (!((i != (int) *(unsigned short*) e && h[0] == 6) || h[0] == 7)) {
+			if (fcn_0047dd60(h - 2) == 0 || (h[0x164] == 0 && h[0x167] == 0)) {
 				i++;
 				continue;
 			}
@@ -72,13 +72,15 @@ int __cdecl fcn_0047d2a0(char* e)
 	}
 	if (((signed char) g_869480[best][*(unsigned short*) e] / 2
 	     + (signed char) g_90e0a0[best][*(unsigned short*) e])
-	    >= -50 - ((int) fcn_0042e410(0x20) & 0xffff)) {
+	    >= -50 - ((int) gm_RandomMod(0x20) & 0xffff)) {
 		return 0;
 	}
 	b = 0;
 	fcn_004c4510((int) e, *(int*) (e + 4));
 	fcn_004c4570(1, 1, 0x215, &b);
-	b = (unsigned char) ((int) bestscore / 3 + 1);
+	d = (int) bestscore;
+	if (d < 0) d = -d;
+	b = (unsigned char) (d / 3 + 1);
 	if (b >= g_7747b4 + g_7747b4 + 0x23) {
 		b = (unsigned char) (g_7747b4 + g_7747b4 + 0x23);
 	}
@@ -116,9 +118,9 @@ other_path:
 		goto pulse2;
 	}
 	if ((unsigned char) e[0x215] > 3) {
-		return 0;
+		return (int)other;
 	}
-	b = (unsigned char) ((int) fcn_0042e410(2) + 1);
+	b = (unsigned char) ((int) gm_RandomMod(2) + 1);
 	fcn_004c4510((int) e, *(int*) (e + 4));
 	fcn_004c4670(1, 1, 0x215, &b);
 	if ((int) (unsigned char) e[0x215] + b > 3) {

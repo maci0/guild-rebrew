@@ -1,5 +1,9 @@
 extern unsigned char g_773d75;
 extern char g_6a3bb4[];
+/* SIZE 0x10: record copied from g_6a3bb4 */
+typedef struct {
+	int w[4];
+} Blk16_53abe0;
 
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, ...);
@@ -21,10 +25,7 @@ void __cdecl fcn_0053abe0(unsigned int a0)
 
 	e = gm_StartFilteredEntitySearch(1, 0, 6);
 	if (e != 0) {
-		*(int*) (e + 5) = *(int*) (g_6a3bb4);
-		*(int*) (e + 9) = *(int*) (g_6a3bb4 + 4);
-		*(int*) (e + 0xd) = *(int*) (g_6a3bb4 + 8);
-		*(int*) (e + 0x11) = *(int*) (g_6a3bb4 + 0xc);
+		*(Blk16_53abe0*) (e + 5) = *(Blk16_53abe0*) g_6a3bb4;
 		fcn_005059b0(e, a0, a0);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0x13);
 		if (q != 0) {

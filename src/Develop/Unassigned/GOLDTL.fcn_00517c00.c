@@ -53,7 +53,7 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 		if (a2 != 2) {
 			return 1;
 		}
-		if (ENDS_APOSTROPHE(a4)) {
+		if (a4[strlen(a4) - 1] == 's' || a4[strlen(a4) - 1] == 'z' || (unsigned char) a4[strlen(a4) - 1] == 0xdf || a4[strlen(a4) - 1] == 'x') {
 			strcat(a4, "'");
 		} else {
 			strcat(a4, "s");

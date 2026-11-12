@@ -97,10 +97,10 @@ void __cdecl fcn_005b11f0(int* a0)
 		e = *(char**) (obj + 0x34);
 		fcn_00455350(e, e + 0x4c, pos);
 		view = *(char**) g_1043370;
-		x = (float) (((double) pos[0] - *(int*) t) / *(float*) (t + 0x10)
+		x = (float) (((double) pos[0] - *(float*) t) / *(float*) (t + 0x10)
 		    - *(int*) (view + 0x20) * 0.5);
 		x = x * 5.33f;
-		y = (float) (((double) pos[2] - *(int*) (t + 8)) / *(float*) (t + 0x18)
+		y = (float) (((double) pos[2] - *(float*) (t + 8)) / *(float*) (t + 0x18)
 		    - *(int*) (view + 0x20) * 0.5);
 		y = y * 5.33f;
 		q = (float) ((double) fabs(x) / ((double) g_778d24 * 0.5));
@@ -136,12 +136,13 @@ void __cdecl fcn_005b11f0(int* a0)
 				}
 				kind = *(unsigned char*) (id * 0x21c + 0x7f4ca2);
 				if (kind == 5 || kind == 6 || kind == 7) {
-					n = fcn_00469c30(*(int*) (t + 4) + sx, *(int*) (t + 8) + sy,
+					n = fcn_00469c30(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
 					    *(int*) (id * 0x21c + 0x7f4cf4) - 0x53);
 					*slot = n;
 					if (n == -1) {
 						goto next;
 					}
+					*(char**) (g_1015ea0 + 0x50 + n * 0x2f4) = (char*) (a0[0] * 700 + 0x1038140);
 					goto store;
 				}
 				goto check;
@@ -154,19 +155,20 @@ void __cdecl fcn_005b11f0(int* a0)
 			if (kind != 5 && kind != 6 && kind != 7) {
 				goto check;
 			}
-			n = fcn_00469c30(*(int*) (t + 4) + sx, *(int*) (t + 8) + sy,
+			n = fcn_00469c30(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
 			    *(int*) (p + 0x54) - 0x53);
 			*slot = n;
 			if (n == -1) {
 				goto next;
 			}
+			*(char**) (g_1015ea0 + 0x50 + n * 0x2f4) = (char*) (a0[0] * 700 + 0x1038140);
 		} else {
 			e = *(char**) (obj + 0x34);
 			if (*(int*) (e + 0x218) == 1 && *(int*) (obj + 0x124) == 0) {
 				goto check;
 			}
 			fcn_00469c40(*(int*) (g_77255c + 4) - *(int*) (g_77255c + 0x268) + sx,
-			    *(int*) (g_77255c + 8) - *(int*) (g_77255c + 0x258) + sy, *slot);
+			    *(int*) (g_77255c + 8) - *(int*) (t + 0x258) + sy, *slot);
 		}
 store:
 		n = *slot * 0x2f4;
@@ -176,7 +178,7 @@ store:
 		*(int*) (g_1015ea0 + 0x30 + n) = *(int*) (g_77255c + 8);
 		*(int*) (g_1015ea0 + 0x34 + n) = *(int*) (g_77255c + 0x10)
 		    + *(int*) (g_77255c + 8);
-		*(char**) (g_1015ea0 + 0x50 + n) = (char*) (a0[0] * 700 + 0x1038140);
+
 check:
 		if (*slot != -1
 		    && (*(int*) (*(int*) (obj + 0x34) + 0x218) == 1

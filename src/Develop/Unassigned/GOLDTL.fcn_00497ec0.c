@@ -10,6 +10,17 @@ typedef struct Cmd {
 extern unsigned char* g_entity_ptr;
 #include "GOLDTL.fcn_00497ec0_gconf.h"
 extern unsigned char g_773d75;
+extern unsigned int g_666028;
+extern unsigned int g_66602c;
+extern float g_664178;
+extern float g_6628bc;
+extern float g_66414c;
+
+/* SIZE 0x24d: building prototype row of g_entity_type_table (0x868050) */
+typedef struct {
+	unsigned char type;
+	char rest[0x24c];
+} BldProt_497ec0;
 
 int __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl fcn_0050d320(short*, unsigned char);
@@ -52,7 +63,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 	do {
 		if (*(unsigned char*) p != 0) {
 			id = *(unsigned char*) p;
-			rec = g_entity_type_table + id * 0x24d;
+			rec = (unsigned char*) &((BldProt_497ec0*) g_entity_type_table)[id];
 			lo = 0;
 			hi = 0;
 			if (rec[0] > 0x1f) {
@@ -61,7 +72,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 				lo = 1 << rec[0];
 			}
 			if (*(unsigned short*) (p + 0x27) == *(unsigned short*) a1
-				&& ((*(unsigned int*) 0x666028 & lo) || (*(unsigned int*) 0x66602c & hi))) {
+				&& ((g_666028 & lo) || (g_66602c & hi))) {
 				int need;
 				int rem;
 				int v;
@@ -69,7 +80,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 				/* scan address and money value share one stack slot in the
 				 * native body; every hit path returns before the scan resumes */
 				p = fcn_0050d320(a1, g_773d75);
-				p = (int) ((float) p * *(float*) 0x664178);
+				p = (int) ((float) p * g_664178);
 				out.kind = 0;
 				out.f1 = 0;
 				out.f2 = 0;
@@ -77,7 +88,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					q = *(unsigned char**) ((char*) a1 + 0x170);
 					if (q != 0) {
 						id = *q;
-						rec = g_entity_type_table + id * 0x24d;
+						rec = (unsigned char*) &((BldProt_497ec0*) g_entity_type_table)[id];
 						if (rec[0] == 2 && !(q[0x5a] & 0x41)) {
 							t = rec[0x247];
 							if (t < 2 || t == 3) {
@@ -105,7 +116,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 									return 0x11;
 								}
 								rem = need - p;
-								if ((float) rem / (float) need < *(float*) 0x6628bc) {
+								if ((float) rem / (float) need < g_6628bc) {
 									a3->kind = 0x12;
 									a3->f2 = rem;
 									return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
@@ -127,7 +138,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 							return 0x11;
 						}
 						rem = need - p;
-						if ((float) rem / (float) need < *(float*) 0x6628bc) {
+						if ((float) rem / (float) need < g_6628bc) {
 							a3->kind = 0x12;
 							a3->f2 = rem;
 							return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
@@ -145,7 +156,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 						return 0x11;
 					}
 					rem = need - p;
-					if ((float) rem / (float) need < *(float*) 0x6628bc) {
+					if ((float) rem / (float) need < g_6628bc) {
 						a3->kind = 0x12;
 						a3->f2 = rem;
 						return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
@@ -158,7 +169,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 				q = *(unsigned char**) ((char*) a1 + 0x170);
 				if (q != 0) {
 					id = *q;
-					if (g_entity_type_table[id * 0x24d] != 2)
+					if (((BldProt_497ec0*) g_entity_type_table)[id].type != 2)
 						return 0;
 					v = *(int*) ((char*) a3 + 4);
 					if (v - id != 1)
@@ -170,7 +181,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					out.kind = 4;
 					out.f1 = *(int*) (q + 1);
 					out.f2 = 1;
-					need = (int) ((float) fcn_0050d170(cmd.f1) * *(float*) 0x66414c);
+					need = (int) ((float) fcn_0050d170(cmd.f1) * g_66414c);
 					if (!fcn_004a4bb0(a0, a1, a2, &cmd, &out, 0))
 						return 0;
 					if (p >= need) {
@@ -179,14 +190,14 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 						return 0x11;
 					}
 					rem = need - p;
-					if ((float) rem / (float) need < *(float*) 0x6628bc) {
+					if ((float) rem / (float) need < g_6628bc) {
 						a3->kind = 0x12;
 						a3->f2 = rem;
 						return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
 					}
 					return 0;
 				}
-				if (g_entity_type_table[a3->f1 * 0x24d] != 2)
+				if (((BldProt_497ec0*) g_entity_type_table)[a3->f1].type != 2)
 					return 0;
 				if (!fcn_004a4bb0(a0, a1, a2, &cmd, &out, 1))
 					return 0;
@@ -199,7 +210,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					return 0x11;
 				}
 				rem = need - p;
-				if ((float) rem / (float) need < *(float*) 0x6628bc) {
+				if ((float) rem / (float) need < g_6628bc) {
 					a3->kind = 0x12;
 					a3->f2 = rem;
 					return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);

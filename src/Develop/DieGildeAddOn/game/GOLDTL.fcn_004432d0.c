@@ -11,12 +11,16 @@ extern void __cdecl gv_Free3Fields(int);
 extern int __cdecl fcn_00438920(int, int, int);
 
 extern char g_10432c0[];
+extern char g_1041d80[];
+extern char g_1041d20[];
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x004432d0 */
 char __cdecl fcn_004432d0(int a0, char a1)
 {
 	int off;
+	char* cp;
+	int cn;
 
 	if (a0 >= 0x40)
 		return 0;
@@ -49,12 +53,48 @@ char __cdecl fcn_004432d0(int a0, char a1)
 	*(int*) (g_10432c0 + off + 0xc8) = *(int*) 0x6b86c4;
 	*(int*) (g_10432c0 + off + 0xcc) = *(int*) 0x6b86c8;
 	*(int*) (g_10432c0 + off + 0xd0) = *(int*) 0x6b86cc;
-	memcpy(g_10432c0 + off + 0x128, (void*) 0x1041d80, 0x2a0);
+	cn = 0x2a0;
+	cp = g_10432c0 + off + 0x128;
+	__asm {
+		mov edi, cp
+		mov esi, offset g_1041d80
+		mov ebx, cn
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L58
+		rep movsb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep movsd
+	L58:
+		add ecx, ebx
+		rep movsb
+	}
 	off = *(int*) 0x6b8010 * 0x3dc;
 	*(int*) (g_10432c0 + off + 0xd4) = *(int*) 0x6b805c;
 	*(int*) (g_10432c0 + off + 0xd8) = *(int*) 0x10425fc;
 	*(int*) (g_10432c0 + off + 0xdc) = *(int*) 0x104329c;
-	memcpy(g_10432c0 + off + 0xe0, (void*) 0x1041d20, 0x48);
+	cn = 0x48;
+	cp = g_10432c0 + off + 0xe0;
+	__asm {
+		mov edi, cp
+		mov esi, offset g_1041d20
+		mov ebx, cn
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L65
+		rep movsb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep movsd
+	L65:
+		add ecx, ebx
+		rep movsb
+	}
 	off = *(int*) 0x6b8010 * 0x3dc;
 	*(int*) (g_10432c0 + off + 0x3cc) = *(int*) 0x67a37c;
 	*(int*) (g_10432c0 + off + 0x3d0) = *(int*) 0x67a380;
@@ -92,8 +132,44 @@ char __cdecl fcn_004432d0(int a0, char a1)
 	*(int*) 0x6b86c8 = *(int*) (g_10432c0 + off + 0xcc);
 	*(int*) 0x6b86cc = *(int*) (g_10432c0 + off + 0xd0);
 	*(int*) 0x6b8014 = 0;
-	memcpy((void*) 0x1041d20, g_10432c0 + off + 0xe0, 0x48);
-	memcpy((void*) 0x1041d80, g_10432c0 + off + 0x128, 0x2a0);
+	cn = 0x48;
+	cp = g_10432c0 + off + 0xe0;
+	__asm {
+		mov edi, offset g_1041d20
+		mov esi, cp
+		mov ebx, cn
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L105
+		rep movsb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep movsd
+	L105:
+		add ecx, ebx
+		rep movsb
+	}
+	cn = 0x2a0;
+	cp = g_10432c0 + off + 0x128;
+	__asm {
+		mov edi, offset g_1041d80
+		mov esi, cp
+		mov ebx, cn
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L108
+		rep movsb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep movsd
+	L108:
+		add ecx, ebx
+		rep movsb
+	}
 	*(int*) 0x6b8010 = a0;
 	*(int*) 0x67a370 = (int) (g_10432c0 + off);
 	if (*(int*) 0x1041d0c == *(int*) 0x6b8484)

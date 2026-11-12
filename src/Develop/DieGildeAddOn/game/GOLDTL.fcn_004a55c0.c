@@ -1,5 +1,5 @@
 #include <string.h>
-
+extern int g_664398[];
 extern int g_77261c;
 
 int __cdecl gm_RandomMod(int);
@@ -11,8 +11,8 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 				  float a3, float a4, unsigned short* a5)
 {
 	unsigned int v12[20];
-	unsigned int step;
-	unsigned int pos;
+	int step;
+	int pos;
 	unsigned int idx;
 	int tries;
 	int hit;
@@ -20,12 +20,12 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 	float f;
 	int flag;
 
-	idx = 0;
-	flag = 0;
-	step = *(unsigned int*) ((gm_RandomMod(0x10) & 0xffff) * 4 + 0x664398);
+
+
+	step = g_664398[gm_RandomMod(0x10) & 0xffff]; idx = 0;
 	memset(v12, 0, 0x50);
 	memset((char*) v12 + 0x1c, 0xff, 0x20);
-	*(int*) ((char*) v12 + 0x14) = 2;
+	*(int*) ((char*) v12 + 0x14) = 2; flag = 0;
 	if (g_77261c != 0) {
 		v12[1] = *a2;
 		if (fcn_005cf720(*a0, *(unsigned short*) g_77261c, v12, 0) != 0) {
@@ -33,7 +33,7 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 			*a5 = *(unsigned short*) g_77261c;
 		}
 	}
-	if ((a3 > *(double*) 0x662950 || a4 < *(double*) 0x662c38) && a3 < a4) {
+	if ((a3 > 0.0 || a4 < 100.0) && a3 < a4) {
 		flag = 1;
 	}
 	if (a1 <= idx) {

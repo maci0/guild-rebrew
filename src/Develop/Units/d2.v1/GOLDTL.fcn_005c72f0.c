@@ -1,3 +1,8 @@
+#include "client_types.h"
+extern Loot_7774a0 g_7774a0[32];
+extern Slot_778da0 g_778da0[16];
+extern Slot_778da0 g_7796e0[16];
+#include "client_data.h"
 /*
  * Open the trade-goods dialogue for the object a0 and run its modal loop.
  * Creates (or reuses) the dialog slot, fills the four product rows and the
@@ -43,7 +48,7 @@ int __cdecl fcn_00471f80(int);
 int* __cdecl fcn_004ce590(int);
 int* __cdecl fcn_004ce610(int);
 int __cdecl fcn_005c7270(int, int);
-int __cdecl fcn_004c51f0(int, int, int, int, int, int);
+int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 int __cdecl fcn_00472380(int, int, int, int, int);
 void __cdecl fcn_004c44a0(void);
 void __cdecl fcn_004c44b0(void);
@@ -65,9 +70,9 @@ int __cdecl fcn_005c72f0(int a0)
 {
 	int v7;
 	int v8;
-	int v9buf[4];
-	int v10[4];
-	char v11[232];
+	int v9buf[1];
+	int v10[1];
+	char v11[256];
 	int v13;
 	int v14;
 	int v15;
@@ -80,7 +85,7 @@ int __cdecl fcn_005c72f0(int a0)
 	int v22;
 	int v23;
 	int v24;
-	int v25;
+	int v25; int selected;
 	unsigned short* p;
 	char* def;
 	char* list;
@@ -94,11 +99,11 @@ int __cdecl fcn_005c72f0(int a0)
 	if (fcn_00525fb0(a0) != 0) {
 		return 0;
 	}
-	if ((g_7e46ac & 0x10000) != 0) {
-		v18 = 0x7d6c6;
-	} else {
-		v18 = 0x677c7;
-	}
+	v18 = (g_7e46ac & 0x10000) != 0 ? 0x7d6c6 : 0x677c7;
+
+
+
+
 	p = (unsigned short*) fcn_00502cd0(*(int*) (v7 + 0x5d), 2, 0, 0x2a, 6);
 	if (p == 0) {
 		p = (unsigned short*) fcn_00502cd0(*(int*) (v7 + 0x5d), 2, 0, 0x116, 6);
@@ -134,14 +139,14 @@ label_5c7466:
 	}
 	if (g_100f1dc != -1 && v15 != 0) {
 		v7 = 0;
-		p4 = (int*) 0x7774a8;
+		p4 = (int*) ((int) g_7774a0 + 0x8);
 		for (;;) {
 			if (p4[-2] != 0 && *p4 == g_67d370) {
-				v7 = *(int*) (v7 * 0x40 + 0x7774a0);
-				if (v7 != 0) {
+				selected = g_7774a0[v7].x0;
+				if (selected != 0) {
 					fcn_004c44a0();
 					fcn_00473fe0();
-					rec = (int*) 0x778db0;
+					v7 = 0; rec = (int*) ((char*) g_778da0 + 0x10);
 					goto label_5c752a;
 				}
 				break;
@@ -161,19 +166,19 @@ label_5c752a:
 		if (v5 != -1 && fcn_00471f80(v5) != 0) {
 			v5 = rec[-4];
 			if (fcn_004ce590(v5) != 0) {
-				if (*(int*) fcn_004ce610(v7) != 0) {
+				if (*(int*) fcn_004ce610(selected) != 0) {
 					fcn_00526120(g_14aba9c, 4);
 					goto label_5c7572;
 				}
 				v7 *= 0x38;
-				v13 = *(int*) (v7 + 0x778da0);
-				v5 = fcn_005c7270(v7, v13);
+				v13 = *(int*) (v7 + ((int) g_778da0 + 0x0));
+				v5 = fcn_005c7270(selected, v13);
 				if (v5 != 0) {
-					fcn_004c51f0(*(int*) (v7 + 4), *(int*) &p[1], v13, 1,
-							(v5 & 0xffffff00) | ((int) g_773d75 << 24), 0);
-					v5 = fcn_00471f80(*(int*) (v7 + 0x778db0));
-					fcn_00472380(*(int*) (v7 + 0x778db0), 0,
-							*(int*) (v7 + 0x778dd0), v5 - 1, 0);
+					fcn_004c51f0(*(int*) (selected + 4), *(int*) &p[1], v13, 1,
+							g_773d75, 0);
+					v5 = fcn_00471f80(*(int*) (v7 + ((int) g_778da0 + 0x10)));
+					fcn_00472380(*(int*) (v7 + ((int) g_778da0 + 0x10)), 0,
+							*(int*) (v7 + ((int) g_778da0 + 0x30)), v5 - 1, 0);
 					break;
 				}
 				v14 = 4;
@@ -188,24 +193,24 @@ label_5c752a:
 label_5c7572:
 		rec += 0xe;
 		v7 += 1;
-	} while ((int) rec < 0x779130);
+	} while ((int) rec < ((int) g_778da0 + 0x390));
 	v7 = 0;
-	rec = (int*) 0x7796f0;
+	rec = (int*) ((int) g_7796e0 + 0x10);
 	do {
 		int v5;
 		v5 = *rec;
 		if (v5 != -1 && fcn_00471f80(v5) != 0) {
 			v7 *= 0x38;
-			v13 = *(int*) (v7 + 0x7796e0);
+			v13 = *(int*) (v7 + ((int) g_7796e0 + 0x0));
 			if (fcn_004ce590(v13) != 0) {
-				v13 = *(int*) (v7 + 0x7796e0);
-				v5 = fcn_005c7270(v7, v13);
+				v13 = *(int*) (v7 + ((int) g_7796e0 + 0x0));
+				v5 = fcn_005c7270(selected, v13);
 				if (v5 != 0) {
-					fcn_004c51f0(*(int*) (v7 + 4), *(int*) &p[1], v13, 1,
-							(v5 & 0xffffff00) | ((int) g_773d75 << 24), 0);
-					v5 = fcn_00471f80(*(int*) (v7 + 0x7796f0));
-					fcn_00472380(*(int*) (v7 + 0x7796f0), 0,
-							*(int*) (v7 + 0x779710), v5 - 1, 0);
+					fcn_004c51f0(*(int*) (selected + 4), *(int*) &p[1], v13, 1,
+							g_773d75, 0);
+					v5 = fcn_00471f80(*(int*) (v7 + ((int) g_7796e0 + 0x10)));
+					fcn_00472380(*(int*) (v7 + ((int) g_7796e0 + 0x10)), 0,
+							*(int*) (v7 + ((int) g_7796e0 + 0x30)), v5 - 1, 0);
 					break;
 				}
 				v13 = g_14abaa0;
@@ -217,19 +222,19 @@ label_5c7572:
 		}
 		rec += 0xe;
 		v7 += 1;
-	} while ((int) rec < 0x7798b0);
+	} while ((int) rec < ((int) g_7796e0 + 0x1d0));
 	fcn_004c44b0();
 	v7 = fcn_004c44c0();
 	while (v7 == 0) {
 		fcn_00535960();
 		v7 = fcn_004c44c0();
 	}
-	fcn_004ce9e0(v7);
+	fcn_004ce9e0(selected);
 label_5c76eb:
 	v7 = fcn_005c6a10(win, 2);
-	if (g_100f894 == *(int*) (v16 * 4 + 0x1038148) && v7 != 0 && g_14ce8cc != 0) {
+	if (g_100f894 == g_1038140[win].wins[1] && v7 != 0 && g_14ce8cc != 0) {
 		fcn_004c44a0();
-		p4 = (int*) 0x7774a0;
+		p4 = (int*) ((int) g_7774a0 + 0x0);
 		do {
 			if (*p4 != 0) {
 				int* q;
@@ -240,7 +245,7 @@ label_5c76eb:
 					if (*q != -1 && fcn_00471f80(*q) != 0) {
 						fcn_004c51f0(*(int*) &p[1], *(int*) (*p4 + 4),
 								q[1], 1,
-								(fcn_00471f80(*q) & 0xffffff00) | ((int) g_773d75 << 24),
+								g_773d75,
 								0);
 					}
 					q += 2;
@@ -248,20 +253,20 @@ label_5c76eb:
 				} while (n != 0);
 			}
 			p4 += 0x10;
-		} while ((int) p4 < 0x777ca0);
+		} while ((int) p4 < ((int) g_7774a0 + 0x800));
 		fcn_004c44b0();
 		v7 = fcn_004c44c0();
 		while (v7 == 0) {
 			fcn_00535960();
 			v7 = fcn_004c44c0();
 		}
-		p4 = (int*) 0x7774a0;
+		p4 = (int*) ((int) g_7774a0 + 0x0);
 		do {
 			if (*p4 != 0) {
 				fcn_004ce9e0(*p4);
 			}
 			p4 += 0x10;
-		} while ((int) p4 < 0x777ca0);
+		} while ((int) p4 < ((int) g_7774a0 + 0x800));
 	}
 	__itoa(g_775334, v11, 10);
 	fcn_0046f940(v8, v11);
@@ -271,23 +276,23 @@ label_5c76eb:
 		} else {
 			int* q;
 			ResetDisplayCounters();
-			q = (int*) 0x778db0;
+			q = (int*) ((int) g_778da0 + 0x10);
 			do {
 				v7 = *q;
 				if (v7 != -1 && fcn_00471f80(v7) != 0) {
 					fcn_00472380(*q, 0, q[8], 0, 0);
 				}
 				q += 0xe;
-			} while ((int) q < 0x779130);
-			q = (int*) 0x7796f0;
+			} while ((int) q < ((int) g_778da0 + 0x390));
+			q = (int*) ((int) g_7796e0 + 0x10);
 			do {
 				v7 = *q;
 				if (v7 != -1 && fcn_00471f80(v7) != 0) {
 					fcn_00472380(*q, 0, q[8], 0, 0);
 				}
 				q += 0xe;
-			} while ((int) q < 0x7798b0);
-			p4 = (int*) 0x7774b0;
+			} while ((int) q < ((int) g_7796e0 + 0x1d0));
+			p4 = (int*) ((int) g_7774a0 + 0x10);
 			do {
 				if (p4[-4] != 0) {
 					int* q2;

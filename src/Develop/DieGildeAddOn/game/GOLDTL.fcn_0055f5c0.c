@@ -221,7 +221,7 @@ body1:
                 *(int*) &g_6b7fc0 = 0;
         }
         if (g_14ce8d8 != 0) {
-            *(int*) 0x6b5c8c = 1;
+            g_6b5c8c = 1;
             fcn_004116d0();
         }
         fcn_00545780(e);
@@ -252,7 +252,7 @@ body2:
                 *(int*) &g_6b7fc0 = 0;
         }
         if (g_14ce8d8 != 0) {
-            *(int*) 0x6b5c8c = 1;
+            g_6b5c8c = 1;
             fcn_004116d0();
         }
         goto exit_b;

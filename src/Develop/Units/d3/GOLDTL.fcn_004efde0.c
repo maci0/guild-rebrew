@@ -13,7 +13,7 @@
  * pointer at +0x16c.
  */
 
-#define MIN(a, b) ((a) > (b) ? (b) : (a))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 typedef struct Sefde0Entry {
 	int f00[12];
@@ -31,8 +31,8 @@ typedef struct Sefde0Slot {
 	float z;
 	int mode;
 	Sefde0Entry entry[3];
-	int handle;
-	int f154[5];
+	int active[3];
+	char* objects[3];
 	int (*callback)(int);
 	int* data;
 } Sefde0Slot;
@@ -51,7 +51,7 @@ void __cdecl fcn_004f01c0(int, int, int, int*);
 void __cdecl fcn_004efde0(void)
 {
 	Sefde0Slot* slot;
-	Sefde0Entry* entry;
+	int* statep;
 	char* obj;
 	int save;
 	int idx;
@@ -65,7 +65,7 @@ void __cdecl fcn_004efde0(void)
 	float y;
 	float z;
 
-	save = *(int*) 0x6b8010;
+
 	idx = fcn_00500d20((char*) 0x772fe8, (char*) 0x7f4c00);
 	if (idx < 0) {
 		idx = 0;
@@ -75,8 +75,8 @@ void __cdecl fcn_004efde0(void)
 	*(int*) 0x772fec = *(int*) 0x7f4c04;
 	*(int*) 0x772ff0 = *(int*) 0x7f4c08;
 	*(short*) 0x772ff4 = *(short*) 0x7f4c0c;
-	fcn_004432d0(0, 1);
-	count = 0;
+	save = *(int*) 0x6b8010; fcn_004432d0(0, 1);
+	count = 0; idx = 0;
 	slot = (Sefde0Slot*) 0x7731b8;
 	for (;;) {
 		if (slot->id != -1) {
@@ -92,9 +92,9 @@ void __cdecl fcn_004efde0(void)
 			if (slot->flags & 2) {
 				i = 0;
 				count = 0;
-				entry = slot->entry;
+				statep = &slot->entry[0].state;
 				while (i < 3) {
-					state = entry->state;
+					state = *statep;
 					if (state == 0) {
 						count++;
 						if (count >= 3) {
@@ -105,26 +105,26 @@ void __cdecl fcn_004efde0(void)
 						}
 					} else if (state == 1) {
 						if (slot->mode != 0) {
-							runs = fcn_005e9da0(entry);
+							runs = fcn_005e9da0((Sefde0Entry*) (statep - 0x17));
 						} else {
-							runs = fcn_005e9870(entry);
+							runs = fcn_005e9870((Sefde0Entry*) (statep - 0x17));
 						}
 						if (runs != 0) {
-							obj = *(char**) (0x773314 + (idx + i) * 4);
+							obj = slot->objects[i];
 							if (obj == 0) {
 								obj = fcn_00442910(0, (float*) 0x662d70, (float*) 0x662d80, (char*) 0x68ff14);
-								*(char**) (0x773314 + (idx + i) * 4) = obj;
+								slot->objects[i] = obj;
 								*(unsigned char*) (obj + 0x215) |= 1;
-								*(unsigned char*) (obj + 0x216) |= 3;
-								*(unsigned char*) (obj + 0x215) &= ~2;
+								*(unsigned char*) (slot->objects[i] + 0x216) |= 3;
+								*(unsigned char*) (slot->objects[i] + 0x215) &= ~2;
 							}
-							fcn_00438b40(obj, (int*) (entry + 1));
+							fcn_00438b40(slot->objects[i], statep - 0xb);
 						}
-						if (entry->state == 3) {
-							obj = *(char**) (0x773314 + (idx + i) * 4);
+						if (*statep == 3) {
+							obj = slot->objects[i];
 							if (obj != 0) {
 								d3_DestroyObject(obj);
-								*(char**) (0x773314 + (idx + i) * 4) = 0;
+								slot->objects[i] = 0;
 							}
 							if (slot->data != 0) {
 								*slot->data = i;
@@ -133,29 +133,29 @@ void __cdecl fcn_004efde0(void)
 							if (slot->callback != 0) {
 								slot->callback((int) slot->data);
 							}
-							entry->state = 0;
-							*(int*) (0x773308 + (idx + i) * 4) = 0;
-						} else if (entry->state == 2) {
+							*statep = 0;
+							slot->active[i] = 0;
+						} else if (*statep == 2) {
 							count++;
-							obj = *(char**) (0x773314 + (idx + i) * 4);
+							obj = slot->objects[i];
 							if (obj != 0) {
 								d3_DestroyObject(obj);
-								*(char**) (0x773314 + (idx + i) * 4) = 0;
+								slot->objects[i] = 0;
 							}
-							fcn_004f01c0(slot->flags & 1, slot->id, (int) entry, slot->data);
+							fcn_004f01c0(slot->flags & 1, slot->id, (int) (statep - 0x17), slot->data);
 							if (slot->data != 0) {
 								*slot->data = i;
 							}
 							if (slot->callback != 0) {
 								slot->callback((int) slot->data);
 							}
-							entry->state = 0;
-							*(int*) (0x773308 + (idx + i) * 4) = 0;
+							*statep = 0;
+							slot->active[i] = 0;
 							*slot->data = -1;
 						}
 					}
 					i++;
-					entry++;
+					statep += 0x1a;
 				}
 				if (count >= 3) {
 					slot->flags &= ~3;

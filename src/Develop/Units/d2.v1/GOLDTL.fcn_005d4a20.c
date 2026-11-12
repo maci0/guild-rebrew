@@ -63,7 +63,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_005d4a20(void)
 {
 	char* ptr = 0;
-	int changed;
+	unsigned char changed;
 	int sel = -1;
 	unsigned now;
 	char fmt[8] = "%ia[%s]";
@@ -81,7 +81,7 @@ void __cdecl fcn_005d4a20(void)
 	int mode = 2;
 
 	if (((House*) g_7f4ca0)[g_774970].f1b1 != 0) {
-		fcn_004fa5f0((char*) 0x14ac69c, 0, 0x657c7);
+		fcn_004fa5f0(*(char**)0x14ac69c, 0, 0x657c7);
 		return;
 	}
 	if (!fcn_0057ec20(2)) {
@@ -102,10 +102,10 @@ void __cdecl fcn_005d4a20(void)
 	g_100f1dc = -1;
 	now = g_6b7fac;
 	do {
+		prev = ptr;
 		count = 0;
 		if (now <= (unsigned) g_6b7fac || changed) {
-			now = g_6b7fac + 500;
-			prev = ptr;
+			now = (unsigned)g_6b7fac + 500;
 			if (((((House*) g_7f4ca0)[g_774970].f1c8) & 0x100) != 0 || ptr != 0) {
 				e = fcn_005463a0(1, 0, 0x45);
 				while (e != 0) {
@@ -162,9 +162,9 @@ void __cdecl fcn_005d4a20(void)
 					}
 				}
 				d2_SetForm((int) dlg, 2);
+				q.kind = (mode != 2) + 1;
 				for (i = 0; i < 0x3a; i++) {
 					keys[i] = -1;
-					q.kind = (mode != 2) + 1;
 					r = fcn_004fa5b0(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
 					state[i] = r;
 					if (r == mode) {

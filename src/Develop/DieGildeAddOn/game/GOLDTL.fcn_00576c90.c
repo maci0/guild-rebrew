@@ -66,7 +66,7 @@ void __cdecl fcn_00576c90(char* e)
 		r = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 		if (r != 0) {
 			*(int*) (e + 0xcc) = fcn_004c5da0(*(int*) (p + 4), *(int*) (r + 1), -1, 0, 1, (char*) 0x6a7e18);
-			*(int*) (e + 0x84) = fcn_004c5620(1, e);
+			fcn_004c5620(1, e);
 			return;
 		}
 		*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;

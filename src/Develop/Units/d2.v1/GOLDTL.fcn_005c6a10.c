@@ -45,12 +45,17 @@ unsigned int __cdecl fcn_005c6a10(unsigned int a0, unsigned int a1)
 	int h;
 	int v;
 	int built;
+	int row_offset;
+	int row_y;
+	int button_base;
 
 	built = 0;
 	d2_SetForm(a0, a1);
 	g_775334 = 0;
-	for (i = 0; i < 32; i++) {
-		slot = g_7774a0 + i;
+	p = (int*) ((char*) g_7774a0 + 0x10);
+	for (button_base = 0, row_offset = 0, row_y = 0x28; row_y < 0xf28;
+	     row_y += 0x78, row_offset += 0x40, button_base += 8) {
+		slot = (Slot_5c6a10*) ((char*) g_7774a0 + row_offset);
 		if (!slot->ent)
 			continue;
 		g_775334++;
@@ -105,13 +110,13 @@ unsigned int __cdecl fcn_005c6a10(unsigned int a0, unsigned int a1)
 						break;
 				}
 				if (j < 6) {
-					slot->s[j].btn = fcn_00466ee0(j * 0x36 + 0x50, 0x28 + i * 0x78,
+					p[(button_base + j) * 2] = fcn_00466ee0(j * 0x36 + 0x50, row_y,
 						*item + 0xdf, 10, g_772514);
-					slot->s[j].item = *item;
+					p[(button_base + j) * 2 + 1] = *item;
 				}
 present:
-				v = fcn_00471f80(slot->s[j].btn);
-				fcn_00472380(slot->s[j].btn, 0, *(int*) ((char*) item + 0xe), v);
+				v = fcn_00471f80(p[(button_base + j) * 2]);
+				fcn_00472380(p[(button_base + j) * 2], 0, *(int*) ((char*) item + 0xe), v);
 			}
 			item = gm_NextEntityQueryMatch();
 		}

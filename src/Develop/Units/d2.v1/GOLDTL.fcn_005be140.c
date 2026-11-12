@@ -79,10 +79,8 @@ int __cdecl fcn_005bdfc0();
 #define v26 ((char *)(frame + 0x324))
 #define v2 a0
 
-/* Frame layout follows the native 0x724-byte allocation: record blocks at
-   frame+0x3c/0x134/0x22c, scratch buffer at frame+0x324. The array is declared
-   0x71c so the register-allocated locals v3/v5 occupy the two trailing slots,
-   keeping the native prologue frame size; this is a reconstruction device. */
+/* Record blocks begin at 0x3c/0x134/0x22c; the 0x400-byte text buffer
+   begins at 0x324. Keep the full 0x724-byte extent addressable. */
 
 /* ADDRESS: GOLDTL 0x005be140 */
 void __cdecl fcn_005be140(unsigned char *a0,int a1)
@@ -105,7 +103,7 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
 	short *  v4;
 	unsigned int v8;
 	int v9;
-	unsigned char frame[0x71c];
+	unsigned char frame[0x724];
   v2 = a0;
   v3 = fcn_00525fb0(a0);
   if (v3)
@@ -134,7 +132,7 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
   fcn_00533a60((*(int *)0x772514),0,&v23,2,(*(int *)0x14a570c),(*(int *)0x14a5710));
   v29 = v23;
   v28 = v30;
-  if ((*(int *)0x7747b0) <= '\xff')
+  if ((*(signed char *)0x7747b0) < 0)
     fcn_00472640(v30,0);
   fcn_00594340();
   d2_SetOverlayAnimation(0,0);
@@ -150,14 +148,14 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
     v7 = fcn_005463a0(2,0,0x13,3,*(unsigned int *)&v2[1]);
     d2_SetForm(v5,2);
     if (*v4 != 0x116) { // branch-flip
-      io_AppendText(0xfe,(char)v4[0xe],*(char *)(v18 + 0x240));
+      io_AppendText(0xfe,(unsigned char)v4[0xe],*(unsigned char *)(v18 + 0x240));
       io_AppendText(0xff,8000);
       if (v3) // branch-flip
         io_AppendText(0x100,*(unsigned int *)(v3 + 0xb0));
       else {
         io_AppendText(0x101);
       }
-      io_AppendText(0x102,*(char *)((int)v4 + 0x1d),*(char *)(v18 + 0x241));
+      io_AppendText(0x102,*(unsigned char *)((int)v4 + 0x1d),*(unsigned char *)(v18 + 0x241));
       io_AppendText(0xff,8000);
       if (v6) // branch-flip
         io_AppendText(0x100,*(unsigned int *)(v6 + 0xb4));
@@ -168,7 +166,7 @@ label_5be43c:
       }
     }
     else {
-      io_AppendText(0x104,(char)v4[0xe],*(char *)(v18 + 0x242));
+      io_AppendText(0x104,(unsigned char)v4[0xe],*(unsigned char *)(v18 + 0x242));
       io_AppendText(0x105,8000);
       if (!v3) {
         v11 = 0x107;
@@ -179,19 +177,19 @@ label_5be43c:
     io_AppendText(0x103,*(int *)&v4[7] + 0x107,0x3200);
     if ((*(int *)0x100f1dc) != -1) {
       if ((*(int *)0x67d370) != v29) { // branch-flip
-        if ((((*(int *)0x67d370) == v28) && ('\0' <= (*(int *)0x7747b0))) && (v11 = CONCAT31((unsigned int)((unsigned int)(*(int *)0x67d370) >> 8),(*(int *)0x773d75)),
-             v15 = (unsigned int)(*(int *)0x774970), fcn_00526010(v15 * 0x21c + 0x7f4ca0,0x3200,v11))) {
+        if ((((*(int *)0x67d370) == v28) && (0 <= (*(signed char *)0x7747b0))) && (v11 = (*(unsigned char *)0x773d75),
+             v15 = (unsigned int)(*(unsigned short *)0x774970), fcn_00526010(v15 * 0x21c + 0x7f4ca0,0x3200,v11))) {
           io_FormatTextBuffer(v26,0x113,0x3200);
-          fcn_00526120(v26,0x101);
+          v13 = fcn_00526120(v26,0x101);
           if (v13) {
-            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca4),CONCAT31((unsigned int)((unsigned int)v22 >> 8),(*(int *)0x773d75)),0x3200);
+            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca4),(*(unsigned char *)0x773d75),0x3200);
             v12 = fcn_004c4450(v11);
             while (!v12) {
               fcn_00535960();
               v12 = fcn_004c4450(v11);
             }
             if (fcn_004c4450(v11) == 1) {
-              v12 = fcn_00509570((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca0);
+              v12 = fcn_00509570((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 0x3200;
               if (!v7) {
@@ -228,18 +226,18 @@ label_5be43c:
         v8 = (unsigned int)*(unsigned char *)((int)v4 + 0x1d);
         if (v6)
           v8 += *(int *)(v6 + 0xb4);
-        fcn_005bdfc0(v4,v2,v15,v8);
-        fcn_0050b810(*(unsigned int *)((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4e18),CONCAT31((unsigned int)((unsigned int)v19 >> 8),(*(int *)0x773d75)));
+        v9 = fcn_005bdfc0(v4,v2,v15,v8);
+        fcn_0050b810(*(unsigned int *)((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4e18),(*(unsigned char *)0x773d75));
         if (v9 != 1) { // branch-flip
-          if ((v9 == 2) && (v11 = CONCAT31((unsigned int)((unsigned int)v16 >> 8),(*(int *)0x773d75)), v15 = (unsigned int)(*(int *)0x774970), fcn_00526010(v15 * 0x21c + 0x7f4ca0,8000,v11))) {
-            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca4),CONCAT31((unsigned int)((unsigned int)v17 >> 8),(*(int *)0x773d75)),8000);
+          if ((v9 == 2) && (v11 = (*(unsigned char *)0x773d75), v15 = (unsigned int)(*(unsigned short *)0x774970), fcn_00526010(v15 * 0x21c + 0x7f4ca0,8000,v11))) {
+            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca4),(*(unsigned char *)0x773d75),8000);
             v12 = fcn_004c4450(v11);
             while (!v12) {
               fcn_00535960();
               v12 = fcn_004c4450(v11);
             }
             if (fcn_004c4450(v11) == 1) {
-              v12 = fcn_00509570((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca0);
+              v12 = fcn_00509570((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 8000;
               if (!v6) {
@@ -271,16 +269,16 @@ label_5be43c:
           }
         }
         else {
-          fcn_00526010((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca0,8000,CONCAT31((unsigned int)((unsigned int)v20 >> 8),(*(int *)0x773d75)));
+          v10 = fcn_00526010((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0,8000,(*(unsigned char *)0x773d75));
           if (v10) {
-            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca4),CONCAT31((unsigned int)((unsigned int)v21 >> 8),(*(int *)0x773d75)),8000);
+            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca4),(*(unsigned char *)0x773d75),8000);
             v12 = fcn_004c4450(v11);
             while (!v12) {
               fcn_00535960();
               v12 = fcn_004c4450(v11);
             }
             if (fcn_004c4450(v11) == 1) {
-              v12 = fcn_00509570((unsigned int)(*(int *)0x774970) * 0x21c + 0x7f4ca0);
+              v12 = fcn_00509570((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 8000;
               if (v3) // branch-flip
@@ -366,7 +364,7 @@ label_5bea6c:
       fcn_005963f0(v5,1,0,v2);
     }
     else {
-      fcn_005974e0();
+      fcn_005974e0(v2,v4);
       fcn_00597940(v5,1,1,v2,v4);
     }
     if (((*(int *)0x14ce8e0)) && (fcn_0057ecc0() == 1))

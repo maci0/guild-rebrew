@@ -1,3 +1,5 @@
+#include "client_data.h"
+extern int g_773d48;
 #pragma pack(2)
 typedef struct {
 	unsigned char kind;
@@ -23,54 +25,54 @@ void __cdecl fcn_004c6150(int a1, char* a2);
 void __cdecl fcn_004ff8f0(void);
 
 /* ADDRESS: GOLDTL 0x004ff0f0 */
-void __cdecl fcn_004ff0f0(unsigned int unused)
+void __cdecl fcn_004ff0f0(void)
 {
 	Slot4ff0f0* p;
-	char* q;
+
 	int v;
 	int id;
 
-	(void) unused;
-	*(int*) 0x773d48 = 0;
-	p = (Slot4ff0f0*) 0x7f4ca2;
+
+	g_773d48 = 0;
+	p = (Slot4ff0f0*) g_7f4ca2;
 	do {
-		if (*(int*) 0x773d48 > 0x40) {
+		if (g_773d48 > 0x40) {
 			fcn_00535960();
-			*(int*) 0x773d48 = 0;
+			g_773d48 = 0;
 		}
 		if (p->kind == 0x12) {
-			v = 8;
 			id = p->id;
+			v = 8;
 			fcn_004c4510((char*) p - 2, id);
 			fcn_004c4570(1, 1, 2, (char*) &v);
 			fcn_004c5360();
-			++*(int*) 0x773d48;
+			++g_773d48;
 		}
 		p++;
-	} while ((int) p < 0x85a0a2);
-	q = (char*) 0x7f4ca2;
+	} while ((int) p < (int) &g_7f4ca2[768]);
+	p = (Slot4ff0f0*) g_7f4ca2;
 	do {
-		if (*(int*) 0x773d48 > 0x40) {
+		if (g_773d48 > 0x40) {
 			fcn_00535960();
-			*(int*) 0x773d48 = 0;
+			g_773d48 = 0;
 		}
-		if ((((Slot4ff0f0*) q)->kind < 10 || ((Slot4ff0f0*) q)->kind == 0x14)
-		    && ((Slot4ff0f0*) q)->active != 0) {
-			fcn_004fe5f0(q - 2);
-			v = ((Slot4ff0f0*) q)->value;
-			if ((float) v == ((Slot4ff0f0*) q)->pos - *(float*) 0x6628a0
-			    && ((Slot4ff0f0*) q)->flag != 0) {
-				if (((Slot4ff0f0*) q)->b7 != 0) {
-					fcn_004c6150(((Slot4ff0f0*) q)->id, (char*) 0x696508);
+		if ((p->kind < 10 || p->kind == 0x14)
+		    && p->active != 0) {
+			fcn_004fe5f0((char*) p - 2);
+			v = p->value;
+			if ((float) v == p->pos - 1.0f
+			    && p->flag != 0) {
+				if (p->b7 == 0) {
+					fcn_004c6150(p->id, (char*) 0x696514);
 				}
 				else {
-					fcn_004c6150(((Slot4ff0f0*) q)->id, (char*) 0x696514);
+					fcn_004c6150(p->id, (char*) 0x696508);
 				}
-				++*(int*) 0x773d48;
+				++g_773d48;
 			}
 		}
-		q += 0x21c;
-	} while ((int) q < 0x85a0a2);
+		p++;
+	} while ((int) p < (int) &g_7f4ca2[768]);
 	fcn_004ff8f0();
-	*(int*) 0x773d48 = 0;
+	g_773d48 = 0;
 }

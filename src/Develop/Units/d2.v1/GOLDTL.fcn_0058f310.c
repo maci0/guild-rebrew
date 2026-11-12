@@ -49,9 +49,9 @@ int __cdecl fcn_0058f310(char* a0)
 	int b2;
 	int b3;
 	int n;
-	int sel;
+
 	int i;
-	int idx;
+
 	int id;
 	int h;
 	char* v;
@@ -92,8 +92,8 @@ int __cdecl fcn_0058f310(char* a0)
 			if (g_67d370 == b2) {
 				flag = 0;
 				n = fcn_00471f80(b1);
-				idx = g_774970;
-				if (fcn_00525f60(g_7f4ca0 + idx * 0x21c, n) == 0) {
+
+				if (fcn_00525f60(g_7f4ca0 + g_774970 * 0x21c, n) == 0) {
 					flag = 1;
 				}
 				hh = 0;
@@ -122,15 +122,15 @@ int __cdecl fcn_0058f310(char* a0)
 					*(int*) (req + 0x60) = *(int*) (hh + 4);
 					*(int*) (req + 0x38) = *(int*) (hh + 4);
 					if (*(int*) (v + 0x170) != 0) {
-						sel = *(int*) (*(int*) (v + 0x170) + 1);
+						flag = *(int*) (*(int*) (v + 0x170) + 1);
 					} else if (*(int*) (v + 0x16c) != 0) {
-						sel = *(int*) (*(int*) (v + 0x16c) + 1);
+						flag = *(int*) (*(int*) (v + 0x16c) + 1);
 					} else {
-						sel = -1;
-						fcn_004a5e60((unsigned short*) (g_7f4ca0 + idx * 0x21c), 0, 0x7b4c4a0, 0, 0.0f,
-						    100.0f, &sel);
+						flag = -1;
+						fcn_004a5e60((unsigned short*) (g_7f4ca0 + g_774970 * 0x21c), 0, 0x7b4c4a0, 0, 0.0f,
+						    100.0f, &flag);
 					}
-					*(int*) (req + 0x58) = sel;
+					*(int*) (req + 0x58) = flag;
 					id = fcn_004c5530(req);
 					if (id != -1) {
 						while (fcn_004c4450(id) == 0) {

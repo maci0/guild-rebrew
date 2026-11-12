@@ -63,12 +63,14 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 	int threshold;
 	int value;
 	unsigned char previous;
+	float price;
 
 	if (*(int*) (rec + 0x24) != 0)
 		return;
 	entity = gm_ResolveParentEntity(rec);
+	threshold = (gm_RandomMod(0x20) & 0xffff) + 0x28;
 	age = (unsigned char) rec[0x12];
-	if ((unsigned int) age < (gm_RandomMod(0x20) & 0xffff) + 0x28) {
+	if (age < threshold) {
 		memset(&job, 0, sizeof(job));
 		job.f08 = *(unsigned int*) (entity + 4);
 		job.f0c = *(unsigned int*) (entity + 4);
@@ -80,11 +82,12 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 		job.e36 = 1;
 		fcn_00500bb0(&job.a28, 0, 0, 10);
 		job.f58 = *(unsigned int*) (rec + 2);
-		job.f5c = 100 - age;
+		job.f5c = 100 - (unsigned char) rec[0x12];
 		job.f64 = 5;
 		job.f84 = 0;
-		value = (int) (eval_ObjektPreis2Credits(*(unsigned short*) rec, 100) * g_665ee8
-			* (float) (100 - age));
+		price = eval_ObjektPreis2Credits(*(unsigned short*) rec, 100);
+		value = (int) (price * g_665ee8
+			* (float) (100 - (unsigned char) rec[0x12]));
 		fcn_004c5150(-1, *(unsigned int*) (entity + 4), (char) g_773d75, value);
 		fcn_004c5530((int) &job);
 		return;
@@ -103,7 +106,7 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 			steps[5] = 0;
 			next = steps[(unsigned char) rec[0x31] + 1];
 			rec[0x32] = (char) (previous + 1);
-			if ((unsigned int) (unsigned char) (previous + 1) < (unsigned int) next)
+			if ((int) (unsigned char) (previous + 1) < next)
 				return;
 			rec[0x32] = 0;
 		}

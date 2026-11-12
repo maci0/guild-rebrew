@@ -17,7 +17,7 @@ extern void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_004b7f70(unsigned int* a0)
 {
 	unsigned short* ent;
-	unsigned short r;
+	int r; unsigned short owner;
 	int ids[16];
 	char buf[0x400];
 	int cnt;
@@ -66,9 +66,9 @@ int __cdecl fcn_004b7f70(unsigned int* a0)
 			fcn_004c54c0(*(int*) ((char*) ent + 4), id, r * 2 + 6, 1);
 		}
 	}
-	v = gm_RandomMod(4);
+	v = gm_RandomMod(4); owner = *ent;
 	d = (double) v + *(double*) 0x662a48;
-	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) ent) * d) *
+	n = (int) (((double) gm_WalkEntityChain(owner) * d) *
 	    *(double*) 0x6640e8);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a0 + 4) + 0x12e7, n);
 	fcn_00545d40(*(int*) ((char*) ent + 4), *(int*) ((char*) ent + 4), buf,

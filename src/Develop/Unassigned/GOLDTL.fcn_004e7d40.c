@@ -21,13 +21,13 @@ typedef struct
 
 typedef struct
 {
-	unsigned char sel;
+	int owner; unsigned char sel;
 	unsigned char alt;
 	unsigned char id;
 	char pad3;
 	int data[6];
 } Info4e7d40;
-// SIZE 0x1c
+/* SIZE 0x20 */
 
 extern char g_9a9220[];
 extern char g_68da68[];
@@ -41,25 +41,25 @@ int __cdecl fcn_004e7d40(char* a0, int a1)
 	int i;
 	int first;
 	int flag;
-	int v10;
+
 	int res;
 
 	if (*(unsigned char*) (a0 + 0x168) != 0) {
 		return -1;
 	}
 	i = 0;
-	r = (Rec18*) g_9a9220;
-	while ((int) r->f08 != a1) {
-		r = (Rec18*) ((char*) r + 0x18);
+	src = g_9a9220 + 8;
+	while ((int) *(unsigned char*) src != a1) {
+		src += 0x18;
 		i++;
-		if ((int) r >= (int) 0x9a94f8) {
+		if ((int) src >= (int) 0x9a94f8) {
 			return -1;
 		}
 	}
 	if (i >= 0x1e) {
 		return -1;
 	}
-	src = g_68da68 + (int) r->f00 * 0x18;
+	r = (Rec18*) (g_9a9220 + i * 0x18); src = g_68da68 + (int) r->f08 * 0x18;
 	info.id = (unsigned char) a1;
 	*(Blk4e7d40*) info.data = *(Blk4e7d40*) src;
 	info.sel = 0xff;
@@ -70,18 +70,18 @@ int __cdecl fcn_004e7d40(char* a0, int a1)
 		if (r->f04 == -1 && r->f10 == 3 && r->f0c < 4) {
 			info.sel = r->f00;
 			first = 1;
-			v10 = *(int*) (a0 + 4);
+			info.owner = *(int*) (a0 + 4);
 			flag = 1;
 		}
 		i++;
 		if (i <= 0x1d) {
-			r = (Rec18*) (g_9a9220 + i * 0x18);
+			src = g_9a9220 + 8 + i * 0x18;
 			do {
-				if ((int) r->f08 == a1) {
+				if ((int) *(unsigned char*) src == a1) { r = (Rec18*) (g_9a9220 + i * 0x18);
 					if (i <= 0x1d && r->f04 == -1 && r->f10 == 3 && r->f0c < 4) {
 						if (!first) {
 							info.sel = r->f00;
-							v10 = *(int*) (a0 + 4);
+							info.owner = *(int*) (a0 + 4);
 							fcn_004c4eb0((char*) 0x67eef4);
 							res = fcn_004c6360(&info);
 							fcn_004c4ef0((char*) 0x67eef4);
@@ -91,9 +91,9 @@ int __cdecl fcn_004e7d40(char* a0, int a1)
 					}
 					break;
 				}
-				r = (Rec18*) ((char*) r + 0x18);
+				src += 0x18;
 				i++;
-			} while ((int) r < (int) 0x9a94f8);
+			} while ((int) src < (int) 0x9a94f8);
 		}
 		if (flag) {
 			fcn_004c4eb0((char*) 0x67eef4);
@@ -112,7 +112,7 @@ int __cdecl fcn_004e7d40(char* a0, int a1)
 	if (r->f0c >= 4) {
 		return -1;
 	}
-	v10 = *(int*) (a0 + 4);
+	info.owner = *(int*) (a0 + 4);
 	info.sel = r->f00;
 	fcn_004c4eb0((char*) 0x67eef4);
 	res = fcn_004c6360(&info);

@@ -29,11 +29,11 @@ int __cdecl fcn_004ba9f0(int* a1)
 	int stride;
 	int cat;
 
-	found = 0;
+	found = 0; n = 0; k = 0;
 	e = gm_LookupEntityRecordById(a1[0]);
 	if (e == 0)
 		return 1;
-	n = 0;
+
 	for (it = gm_StartFilteredEntitySearch(1, 3, *e); it != 0;
 	    it = gm_FindNextFilteredEntity()) {
 		if (n >= 8)
@@ -58,7 +58,7 @@ int __cdecl fcn_004ba9f0(int* a1)
 		i = 0x180;
 		step = -1;
 	}
-	k = 0;
+
 	stride = step * 0x21c;
 	for (rp = (unsigned char*) g_7f4ca0 + 2 + i * 0x21c; i < end;
 	    i += step, rp += stride) {

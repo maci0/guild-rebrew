@@ -69,10 +69,10 @@ int __cdecl fcn_00499090(int who, char* e, int arg, Msg* o1, Msg* o2)
 		b1.kind = 0;
 		b1.a = 0;
 		b1.b = 0;
-		b2.kind = 0;
-		b2.a = 0;
-		b2.b = 0;
-		r = fcn_00495400(0x17, *(unsigned short*)e, 1, &b1, &b2);
+		arg = 1; goto zero_b2;
+
+
+
 		goto check_call;
 	}
 	if (e[2] == 3) {
@@ -150,11 +150,11 @@ have_id:
 		b1.kind = 0xe;
 		b1.a = 2;
 		b1.b = 1;
-		b1.f = 0;
-		b2.kind = 0;
+		b1.f = 0; arg = 0;
+	zero_b2: b2.kind = 0;
 		b2.a = 0;
 		b2.b = 0;
-		r = fcn_00495400(0x17, *(unsigned short*)e, 0, &b1, &b2);
+		r = fcn_00495400(0x17, *(unsigned short*)e, arg, &b1, &b2);
 		if (r == 0) {
 			return 0;
 		}

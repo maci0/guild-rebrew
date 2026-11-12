@@ -16,7 +16,7 @@ int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int);
-int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
+int __cdecl fcn_00472830(int, int);
 int __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 void __cdecl fcn_00476b60(void);
@@ -63,7 +63,6 @@ void __cdecl fcn_00591ea0(void)
 	sel = -1;
 	old_sel = -1;
 	last_win = -1;
-	redraw = 1;
 	fcn_00591c80();
 	win = fcn_00470820(0, 0, (char*) 0x6a9b54);
 	item = win;
@@ -75,12 +74,13 @@ void __cdecl fcn_00591ea0(void)
 	io_AppendText(0x205b);
 	d2_SetForm(win, 0);
 	fcn_00533f40(0x214, 0x168, *(int*) &g_772514,
-		fcn_00472830(win, 1, 0x38, &b1, &b2, &b3),
+		fcn_00472830(win, 1),
 		0x38, &b1, &b2, &b3);
 	d2_SetForm(win, 3);
 	fcn_00533a60(*(int*) &g_772514, 0, clicks, 2,
 		*(int*) 0x14ad4cc, *(int*) 0x14ad4c8);
 	fcn_00476b60();
+	redraw = 1;
 	y = -0x8c;
 	do {
 		if (redraw) {
@@ -96,7 +96,7 @@ void __cdecl fcn_00591ea0(void)
 			row = (int*) 0x779d08;
 			slot = last_win * 0x8c;
 			*(int*) (slot + (unsigned long)&g_102cbc0) = 1;
-			for (i = 0; i < 11; i++) {
+			do {
 				ent = 0;
 				res = 0;
 				item = fcn_0046f740(0x10, y - 5, i + 0x769, *(int*) &g_772514);
@@ -125,8 +125,9 @@ void __cdecl fcn_00591ea0(void)
 					*(int*) (v3 + 0x84 + *(int*) &g_1015ea0) = 0x54;
 				}
 				row += 3;
+				i++;
 				y += 0x38;
-			}
+			} while ((int) row < 0x779d8c);
 			d2_SelectRadioGroup(last_win, old_sel);
 			redraw = 0;
 			item = old_sel;

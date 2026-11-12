@@ -88,14 +88,14 @@ int __cdecl fcn_0053b1b0(void)
 						j = 0;
 					else
 						j = 1;
-					id = *(int*) ((char*) ids + i);
+					id = ids[i / 2];
 					*(int*) (g_1015ea0 + id * 0x2f4 + 0x4c) = j;
 					*(int*) (g_1015ea0 + id * 0x2f4 + 0x60) = j;
 					if (v_len > 0 && *(int*) ((char*) st + 0x18 + i) < 126.0f)
 						j = 0;
 					else
 						j = 1;
-					id = *(int*) ((char*) ids + i + 4);
+					id = ids[i / 2 + 1];
 					*(int*) (g_1015ea0 + id * 0x2f4 + 0x4c) = j;
 					*(int*) (g_1015ea0 + id * 0x2f4 + 0x60) = j;
 				}

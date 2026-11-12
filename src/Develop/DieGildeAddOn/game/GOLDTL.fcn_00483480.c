@@ -95,7 +95,7 @@ void __cdecl fcn_00483480(int a0)
 						goto type6;
 					}
 				}
-				goto shuffle;
+				goto type6;
 			}
 		}
 	} else {

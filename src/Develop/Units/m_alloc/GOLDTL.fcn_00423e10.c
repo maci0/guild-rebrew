@@ -13,6 +13,8 @@ int __cdecl fcn_00423e10(char* s)
 {
 	char* list;
 	char* buf;
+	char* fp;
+	int fn;
 
 	if (g_6b7d68 == 0) {
 		return -1;
@@ -27,7 +29,25 @@ int __cdecl fcn_00423e10(char* s)
 		if (buf == 0) {
 			return -1;
 		}
-		memset(buf, 0, 0x40);
+		fn = 0x40;
+		fp = buf;
+		__asm {
+			mov edi, fp
+			mov ebx, fn
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L34
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		L34:
+			add ecx, ebx
+			rep stosb
+		}
 		strncpy(buf, s, 0x32);
 		g_6b7d6c++;
 		return 0;
@@ -35,7 +55,25 @@ int __cdecl fcn_00423e10(char* s)
 	if (buf == 0) {
 		return -1;
 	}
-	memset(buf, 0, 0x40);
+	fn = 0x40;
+	fp = buf;
+	__asm {
+		mov edi, fp
+		mov ebx, fn
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L44
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L44:
+		add ecx, ebx
+		rep stosb
+	}
 	strncpy(buf, s, 0x32);
 	*(char**) (g_6b7d68 + 0x3c) = buf;
 	g_6b7d6c++;

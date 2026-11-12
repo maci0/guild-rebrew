@@ -15,7 +15,7 @@ void __cdecl fcn_005b1ce0(char* a0, int a1, unsigned int a2)
 
 	p = fcn_005b1a80(*(int*) (a0 + 1));
 	avail = 100;
-	if (a2 == 0) {
+	if (a1 == 0) {
 		return;
 	}
 	used = 0;

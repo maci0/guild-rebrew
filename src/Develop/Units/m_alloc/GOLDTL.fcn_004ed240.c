@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char s_68dfd8[];
 extern char s_68dfa8[];
 extern char s_68dfbc[];
 extern char s_68df8c[];
@@ -54,11 +53,7 @@ unsigned int __cdecl fcn_004ed240(void)
 	GetModuleFileNameA((HMODULE) g_7e1f80, path, 0x104);
 	p = strrchr(path, 0x5c);
 	p[1] = 0;
-	*(unsigned int*) (p + 1) = *(unsigned int*) s_68dfd8;
-	*(unsigned int*) (p + 5) = *(unsigned int*) (s_68dfd8 + 4);
-	*(unsigned int*) (p + 9) = *(unsigned int*) (s_68dfd8 + 8);
-	*(unsigned int*) (p + 0xd) = *(unsigned int*) (s_68dfd8 + 0xc);
-	p[0x11] = s_68dfd8[0x10];
+	strcat(path, "alchemy_data.ini");
 	GetPrivateProfileStringA(s_68dfa8, s_68dfbc, s_6b5c60, out, 0x100, path);
 	g_772fd8 = atoi(out);
 	if (g_772fd8 <= 0) {

@@ -111,7 +111,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 	int sel;
 	int tv;
 	int tv2;
-	int tv3;
+	int tv3; int thirds;
 	int hB;
 	int hC;
 	unsigned char* ent;
@@ -255,10 +255,10 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 		fcn_005350d0(win);
 		fcn_00534c20(win);
 		fcn_005b6130((int) win, a0);
-		if (*(char*) 0x14cf950 == 0xcd) {
+		if (*(unsigned char*) 0x14cf950 == 0xcd) {
 			fcn_00535550(win);
 		}
-		if (*(char*) 0x14cf950 == 0xcb) {
+		if (*(unsigned char*) 0x14cf950 == 0xcb) {
 			fcn_00535560(win);
 		}
 		if (*(char*) (win + 0x270)) {
@@ -267,31 +267,31 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 		if (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == hE && nSlots != 0
 		    && (ret = fcn_005b8760()) != 0) {
 			tv = ret / nSlots;
-			tv2 = tv % 3;
+			thirds = tv / 3;
 			tv3 = fcn_0050b750(ret, *(unsigned char*) 0x773d75);
 			if (fcn_00526010((void*) (0x7f4ca0
 			                          + *(unsigned short*) 0x774970 * 0x21c),
 			                 tv3, *(unsigned char*) 0x773d75)) {
-				for (i = 0; i < nSlots; i++) {
+				for (i = 0; i < tv2; i++) {
 					if (rows[i].obj == 0) {
 						continue;
 					}
 					fcn_004c4eb0(0x6ac2bc);
-					fcn_0050b750(tv, *(unsigned char*) 0x773d75);
+					tv3 = fcn_0050b750(tv, *(unsigned char*) 0x773d75);
 					fcn_004c5150(*(int*) (rows[i].obj + 4), -1,
 					             *(unsigned char*) 0x773d75, tv3);
-					fcn_004c54c0(*(int*) (rows[i].obj + 4), tv2, 0,
-					             *(int*) (0x7f4ca4
+					fcn_004c54c0(*(int*) (0x7f4ca4
 					                      + *(unsigned short*) 0x774970
-					                            * 0x21c));
+					                            * 0x21c),
+					             *(int*) (rows[i].obj + 4), thirds, 0);
 					fcn_004c4ef0(0x6ac2bc);
 				}
-			}
 			fcn_004c5150(-1,
 			             *(int*) (0x7f4ca4
 			                      + *(unsigned short*) 0x774970 * 0x21c),
 			             *(unsigned char*) 0x773d75,
 			             fcn_0050b750(ret, *(unsigned char*) 0x773d75));
+			}
 		}
 		p = fcn_0050dc90((int) a0);
 		if (p != 0) {
@@ -313,7 +313,7 @@ keep_gage:
 		}
 clear_gage:
 		if (gage.x1c != -1) {
-			gage.y = 0;
+			gage.obj = 0;
 			fcn_005b5c70(&gage);
 			hA = -1;
 		}

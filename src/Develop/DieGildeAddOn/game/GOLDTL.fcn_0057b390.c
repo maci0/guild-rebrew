@@ -35,8 +35,8 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_0050c710(char* e, int a, int b);
 char* __cdecl fcn_0050dc90(char* e);
-float __cdecl gm_RandomFloat01(void);
-int __cdecl gm_RandomMod(int n);
+double __cdecl gm_RandomFloat01(void);
+int __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_0050f950(int a, int b);
 void __cdecl fcn_005904a0(char* s, int v);
 void __cdecl fcn_004c5530(Msg5* m);
@@ -57,7 +57,7 @@ void __cdecl fcn_0057b390(char* e)
 	int k;
 	int n;
 	int d;
-	float r;
+	double r;
 
 	switch (*(int*) (e + 0x70)) {
 	case 0:
@@ -65,18 +65,17 @@ void __cdecl fcn_0057b390(char* e)
 		while (u != 0) {
 			if (*(unsigned short*) (u + 0x27) != 0xffff) {
 				n = fcn_0050c710(u, 0x15, 1);
-				lim = (float) n * g_662a70;
+				lim = (float) n * g_662a70 + g_662a6c;
 				count = 0;
 				for (p = 0x7f4ca0; p < 0x85a0a0; p += 0x21c) {
 					if (*(unsigned short*) p != 0xffff && *(int*) (p + 0x16c) == (int) u) {
 						list[count++] = (char*) p;
 					}
 				}
-				lim += g_662a6c;
 				for (k = 0; k < count; k++) {
 					r = gm_RandomFloat01();
 					s = list[k];
-					if (r <= lim) {
+					if (r > lim) {
 						if (!(*(unsigned char*) (s + 0x1b4) & 1) &&
 						    (*(unsigned char*) (s + 0x180) == 4 ||
 						     *(unsigned char*) (s + 0x180) == 0x8c ||
@@ -92,7 +91,7 @@ void __cdecl fcn_0057b390(char* e)
 							m.kind = 0x94;
 							m.at = *(Time5*) g_7f4c00;
 							m.code = 1;
-							*(int*) (m.pad59) = *(int*) (s + 4);
+							*(int*) &m.who = *(int*) (s + 4);
 							fcn_004c5530(&m);
 						}
 					}

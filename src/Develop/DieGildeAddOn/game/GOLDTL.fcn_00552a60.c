@@ -1,4 +1,10 @@
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/game_data.h"
+
+typedef struct BuildingRow552 {
+	unsigned char kind;
+	char fields[0x24c];
+} BuildingRow552;
 
 int __cdecl fcn_00500d20(void*, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -82,6 +88,7 @@ void __cdecl fcn_00552a60(int a0)
 		if (*(int*) (a0 + 0x70) == 1) {
 			v4 = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0x10));
 			v14 = 0;
+			v15 = 0;
 			if (v4 != 0 && v5 != 0) {
 				v5 = gm_SetupEntityQuery(v4);
 				v16 = (int*) (a0 + 0x8c);
@@ -111,7 +118,7 @@ void __cdecl fcn_00552a60(int a0)
 					v17 -= 1;
 				} while (v17);
 				v5 = fcn_0050b750(v15, *(unsigned char*) 0x773d75);
-				fcn_0050c710(v4, 1, 1);
+				v6 = fcn_0050c710(v4, 1, 1);
 				v5 = (int) (((float) v6 * 0.01f + 1.0f) * v5);
 				fcn_004c51a0(*(int*) (v18 + 4), -1,
 				    *(unsigned char*) 0x773d75, v5);
@@ -195,8 +202,7 @@ void __cdecl fcn_00552a60(int a0)
 					}
 				}
 			}
-			v8 = (unsigned char*) (*(int*) 0x868050
-			    + (unsigned int) *v8 * 0x24d);
+			v8 = (unsigned char*) &((BuildingRow552*) lpGebaeudePROT)[*v8];
 			do {
 				v9 = v13[gm_RandomMod(5) & 0xffff];
 			} while (*v8 == v9);

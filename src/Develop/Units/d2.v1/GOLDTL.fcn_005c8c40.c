@@ -10,6 +10,12 @@
  */
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_data.h"
+extern int g_777ca0;
+extern int g_776c90;
+extern int g_775338;
+extern int g_774654;
+extern int g_67d370;
+extern int g_14ce8e0;
 int __cdecl fcn_0057ec20(int); void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -81,8 +87,8 @@ void __cdecl fcn_005c8c40(void)
 		fcn_00472640(out[2], 0);
 	}
 	for (;;) {
-		if (*(int*) 0x14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 != 0) {
+			g_774654 = 1;
 		}
 		state = *(int*) (ofs + (unsigned long)&g_102cbc8);
 		if (state == 0) {
@@ -102,11 +108,11 @@ void __cdecl fcn_005c8c40(void)
 			d2_SetForm(v2, 1);
 			fcn_005a5440(*(int*) (0x7f4e18 + (*(unsigned short*) &g_774970) * 0x21c), (char*) 0x776aa0, v2, 1, 0);
 		}
-		if (v3 != -1 && *(int*) &g_100f1dc != -1 && *(int*) 0x775338 > 0) {
-			for (i = 0; i < *(int*) 0x775338; i++) {
-				if (*(int*) 0x67d370 == *(int*) (0x778900 + i * 4)) {
+		if (v3 != -1 && *(int*) &g_100f1dc != -1) {
+			for (i = 0; i < g_775338; i++) {
+				if (g_67d370 == *(int*) (0x778900 + i * 4)) {
 					fcn_00471a30(save, 0);
-					fcn_005c8770(*(int*) (*(int*) &g_1015ea0 + 0x2f0 + (*(int*) 0x67d370) * 0x2f4));
+					fcn_005c8770(*(int*) (*(int*) &g_1015ea0 + 0x2f0 + g_67d370 * 0x2f4));
 					fcn_00471a30(save, 1);
 					break;
 				}
@@ -117,10 +123,10 @@ void __cdecl fcn_005c8c40(void)
 			if (*(int*) &g_100f1dc != -1) {
 				t1 = fcn_00472830(v4, 3);
 				t2 = fcn_00472830(v4, 2);
-				if (*(int*) 0x67d370 == *(int*) 0x776c90) {
+				if (g_67d370 == g_776c90) {
 					fcn_0046ed00(0, 0x3e, t1);
 					fcn_0046ed00(0, 0x3e, t2);
-				} else if (*(int*) 0x67d370 == *(int*) 0x777ca0) {
+				} else if (g_67d370 == g_777ca0) {
 					fcn_0046ed00(0, -0x3e, t1);
 					fcn_0046ed00(0, -0x3e, t2);
 				}
