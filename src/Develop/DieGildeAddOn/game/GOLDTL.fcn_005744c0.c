@@ -1,11 +1,12 @@
+#include "client_data.h"
+#include "game_data.h"
+extern unsigned char g_773dd4;
+extern int g_773dd8;
+extern char* g_7747b8;
 #pragma pack(push, 1)
 typedef struct { unsigned char unknown00[0x243]; unsigned int period; unsigned char unknown247[6]; } Building5744c0;
 #pragma pack(pop)
-extern unsigned char* lpGebaeudePROT;
-extern char* lpGebaeudeINST;
-extern int g_6b8010;
 extern char* g_773da8;
-extern unsigned char g_773d75;
 char __cdecl fcn_00413680(int, int, void*, void*);
 int __cdecl fcn_00415300(int);
 int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
@@ -92,7 +93,7 @@ void __cdecl fcn_005744c0(int a0)
 	v8 = *(int*) (v5 + 0x70) + 2;
 	switch (v8) {
 	case 2:
-		if (fcn_00500cb0((void*) (v5 + 0x52), (void*) 0x7f4c00) > 0
+		if (fcn_00500cb0((void*) (v5 + 0x52), (void*) &g_7f4c00) > 0
 			|| !(*(unsigned char*) (v5 + 0x78) & 2)) {
 			break;
 		}
@@ -183,7 +184,7 @@ LfailB:
 		fcn_00510820(*(int*) (v15 + 0x61), v15, 2);
 		v8 = *(unsigned char*) v15;
 		v27 = (int) &((Building5744c0*) lpGebaeudePROT)[v8];
-		if (*(int*) 0x774800) {
+		if (g_774800) {
 			*(int*) (v5 + 0xc4) = fcn_00574150(v5);
 			*(int*) (v5 + 0xc0) = 10;
 		}
@@ -235,7 +236,7 @@ LfailB:
 		for (v11 = 0; v11 < 33; v11++) {
 			v18[v11] = 0;
 		}
-		fcn_004379a0(*(int*) 0x67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
+		fcn_004379a0(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
 		*(unsigned char*) (v5 + 0xd0) = 0;
 		v21 = 0.0f;
 		if (v18[32] > 0) {
@@ -256,10 +257,10 @@ LfailB:
 				v11 += 1;
 			} while (v11 < v18[32]);
 		}
-		*(int*) (v5 + 0x52) = *(int*) 0x7f4c00;
-		*(int*) (v5 + 0x56) = *(int*) 0x7f4c04;
-		*(int*) (v5 + 0x5a) = *(int*) 0x7f4c08;
-		*(unsigned short*) (v5 + 0x5e) = *(unsigned short*) 0x7f4c0c;
+		*(int*) (v5 + 0x52) = g_7f4c00.a;
+		*(int*) (v5 + 0x56) = g_7f4c00.b;
+		*(int*) (v5 + 0x5a) = g_7f4c00.c;
+		*(unsigned short*) (v5 + 0x5e) = (unsigned short) g_7f4c00.d;
 		fcn_00500bb0((void*) (v5 + 0x52), 0, 10, 0);
 		*(int*) (v5 + 0x70) = *(int*) (v5 + 0x70) + 1;
 		fcn_004432d0(v30, 1);
@@ -281,21 +282,21 @@ LfailB:
 		for (v11 = 0; v11 < 33; v11++) {
 			v18[v11] = 0;
 		}
-		fcn_004379a0(*(int*) 0x67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
+		fcn_004379a0(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
 		for (v11 = 0; v11 < v18[32]; v11++) {
-			if (*(int*) 0x773dd8) {
-				fcn_004550b0(v18[v11], *(int*) 0x773dd8);
+			if (g_773dd8) {
+				fcn_004550b0(v18[v11], g_773dd8);
 			}
 			d3_DestroyObject(v18[v11]);
 		}
-		*(int*) (v5 + 0x60) = *(int*) 0x7f4c00;
-		*(int*) (v5 + 0x64) = *(int*) 0x7f4c04;
-		*(int*) (v5 + 0x68) = *(int*) 0x7f4c08;
-		*(unsigned short*) (v5 + 0x6c) = *(unsigned short*) 0x7f4c0c;
-		*(int*) (v5 + 0x52) = *(int*) 0x7f4c00;
-		*(int*) (v5 + 0x56) = *(int*) 0x7f4c04;
-		*(int*) (v5 + 0x5a) = *(int*) 0x7f4c08;
-		*(unsigned short*) (v5 + 0x5e) = *(unsigned short*) 0x7f4c0c;
+		*(int*) (v5 + 0x60) = g_7f4c00.a;
+		*(int*) (v5 + 0x64) = g_7f4c00.b;
+		*(int*) (v5 + 0x68) = g_7f4c00.c;
+		*(unsigned short*) (v5 + 0x6c) = (unsigned short) g_7f4c00.d;
+		*(int*) (v5 + 0x52) = g_7f4c00.a;
+		*(int*) (v5 + 0x56) = g_7f4c00.b;
+		*(int*) (v5 + 0x5a) = g_7f4c00.c;
+		*(unsigned short*) (v5 + 0x5e) = (unsigned short) g_7f4c00.d;
 		fcn_00500bb0((void*) (v5 + 0x52), 0, 10, 0);
 		*(int*) (v5 + 0x70) = *(int*) (v5 + 0x70) + 1;
 		*(int*) (v5 + 0xb4) = 0;
@@ -303,7 +304,7 @@ LfailB:
 		return;
 
 	case 9:
-		v8 = fcn_0050cad0((void*) (v5 + 0x60), (void*) 0x7f4c00);
+		v8 = fcn_0050cad0((void*) (v5 + 0x60), (void*) &g_7f4c00);
 		v36 = v8 + *(int*) (v5 + 0xb4);
 		if (v36 < *(int*) (v5 + 0xc0)) {
 			fcn_00500bb0((void*) (v5 + 0x52), 0, 0x1e, 0);
@@ -380,35 +381,35 @@ LfailB:
 			}
 			fcn_00573e10(v5);
 			if (*(int*) (v15 + 0x61)) {
-				v8 = fcn_00500e20(0x7f4c00);
+				v8 = fcn_00500e20((int) &g_7f4c00);
 				if (v8 == 1) {
-					*(char*) 0x773dd4 = (char) v8;
+					g_773dd4 = (char) v8;
 				}
 				else if (v8 == 0) {
-					*(char*) 0x773dd4 = 0;
+					g_773dd4 = 0;
 				}
 				else if (v8 == 2) {
-					*(char*) 0x773dd4 = (char) v8;
+					g_773dd4 = (char) v8;
 				}
 				else if (v8 == 3) {
-					*(char*) 0x773dd4 = (char) v8;
+					g_773dd4 = (char) v8;
 				}
 				fcn_005165b0(*(int*) (v15 + 0x61));
 			}
-			if (*(int*) 0x773dd8) {
-				fcn_004550e0(*(int*) (v15 + 0x61), *(int*) 0x773dd8);
+			if (g_773dd8) {
+				fcn_004550e0(*(int*) (v15 + 0x61), g_773dd8);
 			}
 			v8 = *(int*) (v15 + 0x61);
 			if (v8 && *(int*) (v8 + 0x218) == 1) {
 				fcn_00442d50(v8, 1);
 			}
-			v9 = *(char*) (*(unsigned short*) (v15 + 0x27) * 0x21c + 0x7f4ca2);
+			v9 = g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind;
 			if (v9 == 6 || v9 == 5 || v9 == 7) {
 				fcn_0052d9d0((void*) v15);
 			}
 			fcn_00598510();
 			if (*(int*) (*(int*) (v15 + 0x61) + 0x1ec)) {
-				if (fcn_00413680(*(int*) (v15 + 0x61), *(int*) 0x6b8014, v17, &v21)) {
+				if (fcn_00413680(*(int*) (v15 + 0x61), (int) g_6b8014, v17, &v21)) {
 					v31 = (int) (v21 * 1.8);
 					v8 = evt_LoadGfxScript((char*) 0x6a7da0);
 					if (v8) {
@@ -422,42 +423,42 @@ LfailB:
 			if (*(unsigned char*) (v5 + 0x78) & 2) {
 				fcn_004c5420(*(int*) (v15 + 1), 0x5a, 2, 0, 1);
 				if (*(unsigned char*) v15 >= 4 && *(unsigned char*) v15 <= 7) {
-					*(int*) v20 = *(int*) 0x7f4c00;
-					*(int*) (v20 + 4) = *(int*) 0x7f4c04;
-					*(int*) (v20 + 8) = *(int*) 0x7f4c08;
-					*(unsigned short*) (v20 + 12) = *(unsigned short*) 0x7f4c0c;
+					*(int*) v20 = g_7f4c00.a;
+					*(int*) (v20 + 4) = g_7f4c00.b;
+					*(int*) (v20 + 8) = g_7f4c00.c;
+					*(unsigned short*) (v20 + 12) = (unsigned short) g_7f4c00.d;
 					fcn_004c4510(v15, *(int*) (v15 + 1));
 					fcn_004c4570(1, 0xe, 0x69, v20);
 					fcn_004c5360();
 				}
-				if (*(char*) (*(unsigned short*) (v15 + 0x27) * 0x21c + 0x7f4ca2) == 6) {
+				if (g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind == 6) {
 					if (*(unsigned char*) v15 >= 4 && *(unsigned char*) v15 <= 7) {
 						fcn_0051af00(v22, 0x1c2f, v15);
-						fcn_00545e80(*(int*) (*(unsigned short*) (v15 + 0x27) * 0x21c + 0x7f4ca4),
+						fcn_00545e80(*(int*) (g_7f4ca0 + *(unsigned short*) (v15 + 0x27) * 0x21c + 4),
 							*(int*) (v5 + 0x10), v22, 1, 0x5f6, *(int*) (v15 + 1), -1, 0,
 							(char*) 0x6a7d8c);
 					}
 					else {
 						fcn_0051af00(v22, 0x1c27, v15);
-						fcn_00545e80(*(int*) (*(unsigned short*) (v15 + 0x27) * 0x21c + 0x7f4ca4),
+						fcn_00545e80(*(int*) (g_7f4ca0 + *(unsigned short*) (v15 + 0x27) * 0x21c + 4),
 							*(int*) (v5 + 0x10), v22, 0, 0x5f6, *(int*) (v15 + 1), -1, 0,
 							(char*) 0x6a7d8c);
 					}
-					fcn_004234e0(*(int*) 0x7747b8, 0x6a7d7c, 1, 0x3f, 0x7f, 0, 0);
+					fcn_004234e0((int) g_7747b8, 0x6a7d7c, 1, 0x3f, 0x7f, 0, 0);
 				}
-				v9 = *(char*) (*(unsigned short*) (v15 + 0x27) * 0x21c + 0x7f4ca2);
+				v9 = g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind;
 				if (v9 == 6 || v9 == 5) {
-					v27 = 0x7f4ca4;
+					v27 = (int) (g_7f4ca0 + 4);
 					do {
 						if ((*(char*) (v27 - 2) == 6 || *(char*) (v27 - 2) == 7)
-							&& *(int*) v27 != *(int*) (*(unsigned short*) (v15 + 0x27) * 0x21c + 0x7f4ca4)) {
+							&& *(int*) v27 != *(int*) (g_7f4ca0 + *(unsigned short*) (v15 + 0x27) * 0x21c + 4)) {
 							fcn_0051af00(v22, 0x1c30, *(unsigned short*) (v15 + 0x27),
 								(void*) (*(unsigned char*) v15 * 0xe + 0x48e));
 							fcn_00545e80(*(int*) v27, -1, v22, 0, 0x607, *(int*) (v15 + 1), -1, 0,
 								(char*) 0x6a7d68);
 						}
 						v27 += 0x21c;
-					} while (v27 < 0x85a0a4);
+					} while (v27 < (int) (g_7f4ca0 + 0x65404));
 				}
 				for (v11 = 0; v11 < 31; v11++) {
 					((int*) v19)[v11] = 0;
@@ -466,13 +467,13 @@ LfailB:
 			}
 			v9 = *(unsigned char*) v15;
 			if (v9 >= 4 && v9 <= 7) {
-				v27 = *(unsigned short*) (v15 + 0x27) * 0x21c + 0x7f4e10;
+				v27 = *(unsigned short*) (v15 + 0x27) * 0x21c + (int) (g_7f4ca0 + 0x170);
 				v8 = *(int*) v27;
 				if (!v8 || *(unsigned char*) v8 > (unsigned char) v9) {
 					*(int*) v27 = (int) v15;
 				}
 			}
-			fcn_005001e0((void*) (*(unsigned short*) (v15 + 0x27) * 0x21c + 0x7f4ca0),
+			fcn_005001e0((void*) (*(unsigned short*) (v15 + 0x27) * 0x21c + (int) g_7f4ca0),
 				(int) v15);
 			fcn_004432d0(v30, 1);
 			*(int*) (v5 + 0x7c) = 0;

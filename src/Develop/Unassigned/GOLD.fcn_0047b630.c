@@ -13,7 +13,6 @@ int __cdecl fcn_0047b630(int x, int y, int* surface, char* sprite, int factor)
 	int divisor;
 	int row;
 	int emit;
-	int clipped;
 	int screen_y;
 	line_count = (unsigned int*) (sprite + 0x32);
 	run = (unsigned int*) (sprite + 0x36);
@@ -27,32 +26,57 @@ int __cdecl fcn_0047b630(int x, int y, int* surface, char* sprite, int factor)
 		height = (*(int*) 0x5fed60 - y) * divisor;
 	}
 	carry = 0;
-	clipped = y < *(int*) 0x6f045c;
-	for (row = 0; row < height; row++) {
-		emit = row % divisor == 0;
-		screen_y = row / divisor + y;
-		output = row_output;
-		for (i = 0; i < *line_count; i++) {
-			output += ((run[0] >> 1) + carry) / (unsigned int) divisor;
-			carry = (run[0] >> ((carry + 1) & 0x1f)) % (unsigned int) divisor;
-			if (emit) {
-				pixels = (unsigned short*) (run + 2);
-				for (n = 0; n < (run[1] + carry) / (unsigned int) divisor; n++) {
-					if (!clipped || screen_y >= *(int*) 0x6f045c) {
+	if (y >= *(int*)0x6f045c) {
+		for (row = 0; row < height; row++) {
+			emit = row % divisor == 0;
+			output = row_output;
+			for (i = 0; i < *line_count; i++) {
+				output += ((run[0] >> 1) + carry) / (unsigned int) divisor;
+				carry = (run[0] >> ((carry + 1) & 0x1f)) % (unsigned int) divisor;
+				if (emit) {
+					pixels = (unsigned short*) (run + 2);
+					for (n = 0; n < (run[1] + carry) / (unsigned int) divisor; n++) {
 						*output = (*(unsigned short**)0x6f0460)[*pixels];
+						pixels += divisor;
+						output++;
 					}
-					pixels += divisor;
-					output++;
+					carry = (run[1] + carry) % (unsigned int) divisor;
 				}
-				carry = (run[1] + carry) % (unsigned int) divisor;
+				run = (unsigned int*) ((char*) run + run[1] * 2 + 8);
 			}
-			run = (unsigned int*) ((char*) run + run[1] * 2 + 8);
+			if (emit) {
+				row_output += surface[4];
+			}
+			line_count = run;
+			run++;
 		}
-		if (emit) {
-			row_output += surface[4];
+	} else {
+		for (row = 0; row < height; row++) {
+			emit = row % divisor == 0;
+			screen_y = row / divisor + y;
+			output = row_output;
+			for (i = 0; i < *line_count; i++) {
+				output += ((run[0] >> 1) + carry) / (unsigned int) divisor;
+				carry = (run[0] >> ((carry + 1) & 0x1f)) % (unsigned int) divisor;
+				if (emit) {
+					pixels = (unsigned short*) (run + 2);
+					for (n = 0; n < (run[1] + carry) / (unsigned int) divisor; n++) {
+						if (screen_y >= *(int*) 0x6f045c) {
+							*output = (*(unsigned short**)0x6f0460)[*pixels];
+						}
+						pixels += divisor;
+						output++;
+					}
+					carry = (run[1] + carry) % (unsigned int) divisor;
+				}
+				run = (unsigned int*) ((char*) run + run[1] * 2 + 8);
+			}
+			if (emit) {
+				row_output += surface[4];
+			}
+			line_count = run;
+			run++;
 		}
-		line_count = run;
-		run++;
 	}
 	return 1;
 }

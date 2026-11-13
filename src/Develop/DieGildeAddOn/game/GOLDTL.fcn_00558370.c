@@ -69,11 +69,11 @@ int __cdecl fcn_00558370(int a0)
                 + 0x1cc) + 0x318) + 0x1d4) + g_665ea0;
             fcn_00455350(*(int *)(v5 + 0x61), *(int *)(v5 + 0x61) + 0x4c,
                 &pos.x);
+            pos.y = pos.y + *(float *)(*(int *)(*(int *)(*(int *)(v5 + 0x61)
+                + 0x1cc) + 0x318) + 0x1d4) + g_665ea0;
             rot.x = 0;
             rot.y = 0;
             rot.z = 0;
-            pos.y = pos.y + *(float *)(*(int *)(*(int *)(*(int *)(v5 + 0x61)
-                + 0x1cc) + 0x318) + 0x1d4) + g_665ea0;
             dir.x = pos.x - cur.x;
             dir.y = pos.y - cur.y;
             dir.z = pos.z - cur.z;

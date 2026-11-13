@@ -20,7 +20,7 @@ unsigned int* __cdecl fcn_00478400(int a0, int a1, unsigned int a2,
     int v12;
     int v13;
     int* v14;
-    unsigned short v15;
+    unsigned short v15; unsigned short key_gb;
     unsigned int v16;
     int v17[864];
     unsigned int v18;
@@ -129,24 +129,24 @@ bounds_done:
                 do {
                     v9 = (unsigned int) *(unsigned char*) (v13 + v18) * 4;
                     if ((unsigned char) g_100eb80[v9 + 0] ==
-                            *(unsigned char*) 0x67d960 &&
-                        (unsigned char) g_100eb80[v9 + 1] ==
-                            *(unsigned char*) 0x67d961 &&
-                        (unsigned char) g_100eb80[v9 + 2] ==
-                            *(unsigned char*) 0x67d962) {
-                        *(char*) (v13 + v18) = 0;
-                        v16 = v18;
-                        v26 = v19;
+                            *(unsigned char*) 0x67d960) {
+                        key_gb = *(unsigned short*)0x67d961;
+                        if ((unsigned char)g_100eb80[v9 + 1] == (unsigned char)key_gb &&
+                            (unsigned char)g_100eb80[v9 + 2] == (unsigned char)(key_gb >> 8)) {
+                            *(char*) (v13 + v18) = 0;
+                            v16 = v18;
+                            v26 = v19;
+                        }
                     }
                     if ((unsigned char) g_100eb80[v9 + 0] ==
-                            *(unsigned char*) 0x67d95c &&
-                        (unsigned char) g_100eb80[v9 + 1] ==
-                            *(unsigned char*) 0x67d95d &&
-                        (unsigned char) g_100eb80[v9 + 2] ==
-                            *(unsigned char*) 0x67d95e) {
-                        *(char*) (v13 + v18) = 0;
-                        v24 = v19;
-                        v25 = v18;
+                            *(unsigned char*) 0x67d95c) {
+                        key_gb = *(unsigned short*)0x67d95d;
+                        if ((unsigned char)g_100eb80[v9 + 1] == (unsigned char)key_gb &&
+                            (unsigned char)g_100eb80[v9 + 2] == (unsigned char)(key_gb >> 8)) {
+                            *(char*) (v13 + v18) = 0;
+                            v24 = v19;
+                            v25 = v18;
+                        }
                     }
                     v18 += 1;
                 } while ((int) v18 < (int) a2);

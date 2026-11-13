@@ -10,25 +10,42 @@ extern char g_6808f0[]; /* hst_ParseText_Fake_1st_Pass() failed: Label %i is too
 int __cdecl sprintf(char*, const char*, ...);
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 
-#pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x004b20e0 */
 int __cdecl hst_ParseText_Fake_1st_Pass(char* out, int id)
 {
 	char buf[0x17d0];
-	/* native frame is 0x18dc; the extra 8 bytes below msg stand in for the
-	   dst/len spill slots the native generic memset keeps at ebp-8/ebp-0xc */
-	char msg[0x108];
+	char msg[0x100];
 	char* open;
 	char* hash;
 	char* p;
+	int fill_len;
+	void* fill_dst;
 
 	open = 0;
 	hash = 0;
 	if (g_1052de0 == 0) {
 		return 0;
 	}
-	memset(buf, 0, sizeof(buf));
+	fill_len = sizeof(buf);
+	fill_dst = buf;
+	__asm {
+		mov edi, fill_dst
+		mov ebx, fill_len
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short text_fill_done
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	text_fill_done:
+		add ecx, ebx
+		rep stosb
+	}
 	if (id < 0x4800) {
 		p = g_14a5320[id];
 		if (p == 0) {
@@ -80,7 +97,6 @@ int __cdecl hst_ParseText_Fake_1st_Pass(char* out, int id)
 	return 1;
 }
 
-#pragma optimize("y", on)
 unsigned char _dpad_67eaf8[4520] = {
     0x75, 0x70, 0x67, 0x72, 0x5f, 0x61, 0x72, 0x62, 0x65, 0x69, 0x74, 0x65, 0x72, 0x5f, 0x75, 0x6e,
     0x74, 0x65, 0x72, 0x6b, 0x00, 0x00, 0x00, 0x00, 0x75, 0x70, 0x67, 0x72, 0x5f, 0x72, 0x61, 0x74,

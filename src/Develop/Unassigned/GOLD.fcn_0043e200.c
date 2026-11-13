@@ -11,7 +11,8 @@ void __cdecl fcn_00455a80(char*);
 void __cdecl fcn_0045d4f0(void*);
 void __cdecl fcn_00452e00(void);
 void __cdecl fcn_0043b600(void);
-
+#include "client_lighting.h"
+#include "Develop/Units/d3/d3_camera.h"
 /* ADDRESS: GOLD 0x0043e200 */
 void __cdecl fcn_0043e200(unsigned int pass, int overlay)
 {
@@ -20,12 +21,11 @@ void __cdecl fcn_0043e200(unsigned int pass, int overlay)
     char* object;
     float distance;
     float density;
-
-    if (*(int*) 0x633b04 < 0)
-        *(int*) 0x633b04 = 0;
-    if (!*(unsigned char*) 0x633451 || *(int*) 0x633b04 || !*(void**) 0xfc2dec)
+    if (g_6b86d4 < 0)
+        g_6b86d4 = 0;
+    if (!*(unsigned char*) 0x633451 || g_6b86d4 || !g_6b8014)
         return;
-    *(int*) 0x633b04 = 1;
+    g_6b86d4 = 1;
     if (*(unsigned char*) 0x633450)
         fcn_00435fb0((void*) 0xfc2930);
     else
@@ -39,10 +39,10 @@ void __cdecl fcn_0043e200(unsigned int pass, int overlay)
     *(int*) (*(char**) (object + 0x1ec) + 0x100) = 0;
     object = *(char**) 0x633448;
     *(int*) (*(char**) (object + 0x1ec) + 0xfc) = 0;
-    if (*(void**) 0x633738) {
+    if ((void*) g_6b8300) {
         if (*(unsigned char*) 0x6334a4 && *(unsigned char*) 0x6334a5) {
-            object = *(char**) 0xfc2dec;
-            distance = fcn_00446990(*(void**) 0x633738, object + 0x4c, object + 0x18c);
+            object = g_6b8014;
+            distance = fcn_00446990((void*) g_6b8300, object + 0x4c, object + 0x18c);
             if (distance < *(float*) 0xfc5340) {
                 density = (1.0f - (*(float*) 0xfc5340 - distance) / *(float*) 0xfc5340)
                     * *(float*) 0xfc29bc;
@@ -50,7 +50,7 @@ void __cdecl fcn_0043e200(unsigned int pass, int overlay)
             } else
                 fcn_00438840(*(float*) 0xfc29bc, *(float*) 0xfc5340);
         }
-        fcn_004439e0(*(void**) 0x633738, overlay);
+        fcn_004439e0((void*) g_6b8300, overlay);
     }
     *(int*) 0x63344c = 0;
     fcn_0045c9e0();
@@ -85,5 +85,5 @@ void __cdecl fcn_0043e200(unsigned int pass, int overlay)
     fcn_0043b600();
     *(int*) 0x63347c = *(int*) 0xfe75b4;
     *(int*) 0x633480 = *(int*) 0xfc2dc0;
-    --*(int*) 0x633b04;
+    --g_6b86d4;
 }

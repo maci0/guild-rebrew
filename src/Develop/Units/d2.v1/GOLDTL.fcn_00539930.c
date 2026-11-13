@@ -268,21 +268,21 @@ label_539d27:
 						WritePrivateProfileStringA(s_6a1e4c, s_6a3a4c, (char*) 0x7e2000, g_7e22c0);
 						g_774654 = 1;
 						v38 = 1;
-						{
-							int v11b;
-							unsigned int* v33b;
-							v11b = 0x20;
-							v33b = (unsigned int*) 0x9baa60;
-							while (v11b != 0) {
-								unsigned int* v1;
-								v1 = &v33b[1];
-								v7 = &v8[4];
-								*v33b = *(unsigned int*) v8;
-								v11b -= 1;
-								v8 = v7;
-								v33b = v1;
-							}
-						}
+						memcpy((void*) 0x9baa60, v8, 0x80);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 						if (a0 != 0 && ((int*) ((char*) hosts + 0x7c))[v32 * 0x20] == 0x7f) {
 							unsigned char* v10;
 							v8 = &((char*) hosts + 0x16)[v12];
@@ -307,28 +307,28 @@ label_539d27:
 							} while (v3 != 0);
 							g_7747b0 |= 0x40;
 							sprintf(v27, s_6a3a54, g_7e21a0);
-							v32 = 0x3f;
-							v31 = ((int*) header2);
-							while (v32 != 0) {
-								v13 = &v31[1];
-								*v31 = 0;
-								v32 -= 1;
-								v31 = v13;
-							}
+							memset(header2, 0, sizeof(header2));
+
+
+
+
+
+
+
 							v32 = vfs_Tfopen(v27, 0x6750e8, g_6b7fdc);
 							if (v32 != 0) {
 								fcn_00521eb0(v32, (char*) ((int*) header2));
 								CloseVfsStream(v32);
 							}
-							v32 = 0xc;
-							v33 = (int*) 0x9bada0;
-							while (v32 != 0) {
-								int* v1;
-								v1 = &v33[1];
-								*v33 = 0;
-								v32 -= 1;
-								v33 = v1;
-							}
+							memset((void*) 0x9bada0, 0, 0x30);
+
+
+
+
+
+
+
+
 							g_9badc0 = (*(unsigned int*) (header2 + 0x60)) & 0xff;
 							g_9badc4 = (*(unsigned int*) (header2 + 0x6c)) & 0xff;
 							v32 = 0;

@@ -36,12 +36,12 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 					? *((float*) (a0 + 5)) : *((float*) (v + 0x94));
 				*((float*) (a0 + 6)) = (*((float*) (a0 + 6)) < *((float*) (v + 0x98)))
 					? *((float*) (a0 + 6)) : *((float*) (v + 0x98));
-				*((float*) (a0 + 8)) = (*((float*) (a0 + 8)) <= *((float*) (v + 0xa0)))
-					? *((float*) (v + 0xa0)) : *((float*) (a0 + 8));
-				*((float*) (a0 + 9)) = (*((float*) (a0 + 9)) <= *((float*) (v + 0xa4)))
-					? *((float*) (v + 0xa4)) : *((float*) (a0 + 9));
-				*((float*) (a0 + 10)) = (*((float*) (a0 + 10)) <= *((float*) (v + 0xa8)))
-					? *((float*) (v + 0xa8)) : *((float*) (a0 + 10));
+				*((float*) (a0 + 8)) = (*((float*) (a0 + 8)) > *((float*) (v + 0xa0)))
+					? *((float*) (a0 + 8)) : *((float*) (v + 0xa0));
+				*((float*) (a0 + 9)) = (*((float*) (a0 + 9)) > *((float*) (v + 0xa4)))
+					? *((float*) (a0 + 9)) : *((float*) (v + 0xa4));
+				*((float*) (a0 + 10)) = (*((float*) (a0 + 10)) > *((float*) (v + 0xa8)))
+					? *((float*) (a0 + 10)) : *((float*) (v + 0xa8));
 			}
 		} else {
 			for (p = (unsigned int*) a0[0xf]; p != 0; p = (unsigned int*) p[1]) {
@@ -52,12 +52,12 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 						? *((float*) (a0 + 5)) : lo[1];
 					*((float*) (a0 + 6)) = (*((float*) (a0 + 6)) < lo[2])
 						? *((float*) (a0 + 6)) : lo[2];
-					*((float*) (a0 + 8)) = (*((float*) (a0 + 8)) <= hi[0])
-						? hi[0] : *((float*) (a0 + 8));
-					*((float*) (a0 + 9)) = (*((float*) (a0 + 9)) <= hi[1])
-						? hi[1] : *((float*) (a0 + 9));
-					*((float*) (a0 + 10)) = (*((float*) (a0 + 10)) <= hi[2])
-						? hi[2] : *((float*) (a0 + 10));
+					*((float*) (a0 + 8)) = (*((float*) (a0 + 8)) > hi[0])
+						? *((float*) (a0 + 8)) : hi[0];
+					*((float*) (a0 + 9)) = (*((float*) (a0 + 9)) > hi[1])
+						? *((float*) (a0 + 9)) : hi[1];
+					*((float*) (a0 + 10)) = (*((float*) (a0 + 10)) > hi[2])
+						? *((float*) (a0 + 10)) : hi[2];
 				}
 			}
 		}
@@ -81,7 +81,7 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 		hi[2] = *((float*) (a0 + 10));
 		a0[2] = (unsigned int) fcn_00454630((char*) a0, lo, hi);
 		lo[0] = *((float*) (a0 + 4));
-		lo[2] = dz + *((float*) (a0 + 6));
+		lo[2] = dx + *((float*) (a0 + 6));
 		hi[0] = dx + *((float*) (a0 + 4));
 		hi[2] = *((float*) (a0 + 10));
 		a0[3] = (unsigned int) fcn_00454630((char*) a0, lo, hi);

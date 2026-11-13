@@ -20,7 +20,7 @@ int __cdecl fcn_004b9320(char* a0)
 	char* obj;
 	char* o1;
 	char* o2;
-	char* p;
+
 	char buf[0x800];
 	int ids[8];
 	char* cand[8];
@@ -74,13 +74,13 @@ int __cdecl fcn_004b9320(char* a0)
 	o2 = (char*) v848;
 	if (*(char*) o1 == 0x47) {
 		k = *(int*) (o1 + 0x65);
-		p = g_868060 + ((k << 6) - k) * 3 * 4;
-		io_FormatTextBuffer(buf, *(unsigned short*) (a0 + 4) + 0x12e7, p,
-		             g_868060, g_868060);
+		io_FormatTextBuffer(buf, *(unsigned short*) (a0 + 4) + 0x12e7,
+		             g_868060 + ((k << 6) - k) * 3 * 4, g_868060, g_868060);
+
 	} else {
 		k = *(int*) (o2 + 0x65);
-		p = g_868060 + ((k << 6) - k) * 3 * 4;
-		io_FormatTextBuffer(buf, *(unsigned short*) (a0 + 4) + 0x12e7, g_868060, p, p);
+		io_FormatTextBuffer(buf, *(unsigned short*) (a0 + 4) + 0x12e7, g_868060,
+		             g_868060 + ((k << 6) - k) * 3 * 4, g_868060 + ((k << 6) - k) * 3 * 4);
 	}
 	len = (int) strlen(buf);
 	fcn_00545d40(*(int*) (e + 4), *(int*) (e + 4), buf, (unsigned int) len > 0x100 ? 1 : 0, 0x5ef, 0);

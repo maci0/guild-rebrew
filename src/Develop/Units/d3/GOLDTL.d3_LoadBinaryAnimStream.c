@@ -399,22 +399,22 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 						if (v22 > 0) {
 							v9 = v22;
 							do {
-								if (*(float*) v4 <= v34) {
+								if (!(*(float*) v4 > v34)) {
 									v34 = *(float*) v4;
 								}
-								if (*(float*) (v4 + 4) <= v35) {
+								if (!(*(float*) (v4 + 4) > v35)) {
 									v35 = *(float*) (v4 + 4);
 								}
-								if (*(float*) (v4 + 8) <= v36) {
+								if (!(*(float*) (v4 + 8) > v36)) {
 									v36 = *(float*) (v4 + 8);
 								}
-								if (v39 <= *(float*) v4) {
+								if (!(*(float*) v4 < v39)) {
 									v39 = *(float*) v4;
 								}
-								if (v40 <= *(float*) (v4 + 4)) {
+								if (!(*(float*) (v4 + 4) < v40)) {
 									v40 = *(float*) (v4 + 4);
 								}
-								if (v28 <= *(float*) (v4 + 8)) {
+								if (!(v28 > *(float*) (v4 + 8))) {
 									v28 = *(float*) (v4 + 8);
 								}
 								v4 += 0xc;

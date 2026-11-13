@@ -24,28 +24,28 @@ typedef struct
 } Packet;
 /* SIZE 0xf8 */
 
-typedef struct
-{
-	unsigned char pos;
-	char pad1[7];
-	int f08;
-	unsigned char b0a;
-	unsigned char b0b;
-	int f0c;
-	int pad10;
-	int f14;
-	int f18;
-	int f1c;
-	int f20;
-	int f24;
-	int f28;
-	int f2c;
-	int f30;
-	unsigned char b34;
-} Ui;
-/* SIZE 0x35 */
 
-extern unsigned char* lpGebaeudePROT;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+extern char* g_entity_type_table;
 extern char g_770b80[];
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -74,7 +74,7 @@ void __cdecl fcn_00506e70(unsigned short* a0, char* a1, int a2)
 {
 	char buf[0x800];
 	Packet pkt;
-	Ui ui;
+	unsigned char ui_pos, ui_b0a, ui_b0b, ui_b34; int ui_f08, ui_f0c, ui_f14, ui_f18, ui_f1c, ui_f20, ui_f24, ui_f28, ui_f2c, ui_f30;
 	unsigned char* list[128];
 	unsigned char* stop;
 	unsigned char* p;
@@ -84,7 +84,7 @@ void __cdecl fcn_00506e70(unsigned short* a0, char* a1, int a2)
 	int count;
 	int best;
 	int score;
-	int mask;
+	int mask; unsigned char building_type;
 	int bit;
 	int i;
 	int send;
@@ -103,12 +103,12 @@ void __cdecl fcn_00506e70(unsigned short* a0, char* a1, int a2)
 	while (p != 0) {
 		mask = 0;
 		bit = 0;
-		i = *(unsigned char*) (lpGebaeudePROT + *p * 0x24d);
-		if (i >= 0x20) {
-			bit = 1u << ((i - 0x20) & 31);
+		building_type = *(unsigned char*) (g_entity_type_table + *p * 0x24d);
+		if (building_type > 0x1f) {
+			bit = 1u << ((building_type - 0x20) & 31);
 		}
 		else {
-			mask = 1u << (i & 31);
+			mask = 1u << (building_type & 31);
 		}
 		send = 0;
 		cur = 0;
@@ -175,40 +175,40 @@ void __cdecl fcn_00506e70(unsigned short* a0, char* a1, int a2)
 	fcn_004c5150(*(int*) (a0 + 2), -1, (*(unsigned char*) 0x6f1bc5), fcn_005085f0(0x5dc, (*(unsigned char*) 0x6f1bc5)));
 	if (a2 != 0) {
 		i = 100;
-		ui.f08 = 0x10;
-		ui.f14 = 3;
-		ui.f30 = 0;
-		ui.f20 = 0;
-		ui.f2c = 0;
-		ui.f28 = 0;
-		ui.f18 = 0;
-		ui.b0b = 0;
-		ui.b0a = 0;
-		ui.f0c = -1;
-		ui.f1c = 0;
-		ui.f24 = 0;
-		ui.pos = (unsigned char) i;
+		ui_f08 = 0x10;
+		ui_f14 = 3;
+		ui_f30 = 0;
+		ui_f20 = 0;
+		ui_f2c = 0;
+		ui_f28 = 0;
+		ui_f18 = 0;
+		ui_b0b = 0;
+		ui_b0a = 0;
+		ui_f0c = -1;
+		ui_f1c = 0;
+		ui_f24 = 0;
+		ui_pos = (unsigned char) i;
 		fcn_004c4510((char*) a0, *(int*) (a0 + 2));
-		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (8 - (*(int*) 0xa68d2c))), (char*) &ui.pos);
-		fcn_004c4570(2, 1, (unsigned short) ((int) a0 + (10 - (*(int*) 0xa68d2c))), (char*) &ui.f08);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x194 - (*(int*) 0xa68d2c))), (char*) &ui.f14);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x198 - (*(int*) 0xa68d2c))), (char*) &ui.f30);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x19c - (*(int*) 0xa68d2c))), (char*) &ui.f20);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a0 - (*(int*) 0xa68d2c))), (char*) &ui.f2c);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a4 - (*(int*) 0xa68d2c))), (char*) &ui.f28);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a8 - (*(int*) 0xa68d2c))), (char*) &ui.f18);
-		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (0x1b0 - (*(int*) 0xa68d2c))), (char*) &ui.b0b);
-		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (0x1b1 - (*(int*) 0xa68d2c))), (char*) &ui.b0a);
+		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (8 - (*(int*) 0xa68d2c))), (char*) &ui_pos);
+		fcn_004c4570(2, 1, (unsigned short) ((int) a0 + (10 - (*(int*) 0xa68d2c))), (char*) &ui_f08);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x194 - (*(int*) 0xa68d2c))), (char*) &ui_f14);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x198 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x19c - (*(int*) 0xa68d2c))), (char*) &ui_f20);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a0 - (*(int*) 0xa68d2c))), (char*) &ui_f2c);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a4 - (*(int*) 0xa68d2c))), (char*) &ui_f28);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a8 - (*(int*) 0xa68d2c))), (char*) &ui_f18);
+		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (0x1b0 - (*(int*) 0xa68d2c))), (char*) &ui_b0b);
+		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (0x1b1 - (*(int*) 0xa68d2c))), (char*) &ui_b0a);
 		fcn_004c5420(*(int*) (a0 + 2), 0x1c8, 4, 0x800000, 0);
 		fcn_004c5360();
 		fcn_004c4510((char*) a0, *(int*) (a0 + 2));
 		for (i = 0; i < 8; i++) {
-			fcn_004c4570(4, 1, (unsigned short) ((i * 4 + 0x5c - (*(int*) 0xa68d2c)) + (int) a0), (char*) &ui.f0c);
+			fcn_004c4570(4, 1, (unsigned short) ((i * 4 + 0x5c - (*(int*) 0xa68d2c)) + (int) a0), (char*) &ui_f0c);
 		}
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x24 - (*(int*) 0xa68d2c))), (char*) &ui.f1c);
-		ui.f0c = 0;
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x2c - (*(int*) 0xa68d2c))), (char*) &ui.f0c);
-		fcn_004c4570(2, 1, (unsigned short) ((int) a0 + (0x28 - (*(int*) 0xa68d2c))), (char*) &ui.f24);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x24 - (*(int*) 0xa68d2c))), (char*) &ui_f1c);
+		ui_f0c = 0;
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x2c - (*(int*) 0xa68d2c))), (char*) &ui_f0c);
+		fcn_004c4570(2, 1, (unsigned short) ((int) a0 + (0x28 - (*(int*) 0xa68d2c))), (char*) &ui_f24);
 		fcn_004c5360();
 		fcn_004c5480(*(int*) (a0 + 2), 0x7c, -*(float*) (a0 + 0x3e));
 		h = gm_RandomQuadratic();
@@ -218,8 +218,8 @@ void __cdecl fcn_00506e70(unsigned short* a0, char* a1, int a2)
 		fcn_004c5480(*(int*) (a0 + 2), 0x20, 12.0f - *(float*) (a0 + 0x10));
 		fcn_004c4510((char*) a0, *(int*) (a0 + 2));
 		for (i = 0; i < 5; i++) {
-			ui.b34 = 0;
-			fcn_004c4700(1, 1, (i - (*(int*) 0xa68d2c)) + 0x80 + (int) a0, (char*) &ui.b34);
+			ui_b34 = 0;
+			fcn_004c4700(1, 1, (i - (*(int*) 0xa68d2c)) + 0x80 + (int) a0, (char*) &ui_b34);
 		}
 		r = fcn_004c53a0();
 	}

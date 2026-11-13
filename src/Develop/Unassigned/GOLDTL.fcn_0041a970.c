@@ -50,6 +50,7 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, int a2, int a3)
 	rec = (unsigned char *) (*(int *) 0x6b5dd0 + slot * 0x508);
 	if (a1) {
 		index = a1(*(int *) (rec + 0x500), *(int *) (rec + 0x504));
+		rec = (unsigned char *) (*(int *) 0x6b5dd0 + slot * 0x508);
 		if (index < 0 || index >= *(int *) (rec + 0x500))
 			return 0;
 	} else {

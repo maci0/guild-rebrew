@@ -201,7 +201,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							*(int*) (msg + 0xc) = *(int*) (rec + 1);
 							*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
 							msg[0x36] = 1;
-							*(int*) (msg + 0x5c) = *(int*) (slot + 4);
+							*(int*) (msg + 0x58) = *(int*) (slot + 4);
 							fcn_004c5530(msg);
 							count++;
 						}

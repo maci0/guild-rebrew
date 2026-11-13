@@ -144,7 +144,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
                         acc = acc - F(slot, 0x14) + F(slot, 0x14) / acc;
                     }
                 }
-                if (acc <= 1.0f) {
+                if (!(acc > 1.0f)) {
                     acc = 1.0f;
                 }
                 F(slot, 0x1c) = acc;
@@ -458,7 +458,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         for (n = (int) ((float) W(slot, 0xa) - F(slot, 0x20)); n > 0; n--) {
             decay = decay - acc + acc / decay;
         }
-        if (decay <= 1.0f) {
+        if (!(decay > 1.0f)) {
             decay = 1.0f;
         }
         F(slot, 0x1c) = decay;

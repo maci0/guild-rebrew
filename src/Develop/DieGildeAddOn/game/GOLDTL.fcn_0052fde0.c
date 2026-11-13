@@ -65,7 +65,6 @@ void __cdecl fcn_0052fde0(void)
 	char* text;
 	unsigned short* rec;
 	unsigned int v;
-	int i;
 	int n;
 	char c;
 	int limit;
@@ -152,13 +151,7 @@ void __cdecl fcn_0052fde0(void)
 				target = g_7746b0;
 			} else {
 				field = *(char**) ((unsigned int) *(unsigned char*) g_7746b0 * 0x38 + (int) g_14a6558);
-				i = 0;
-				do {
-					c = *field;
-					field++;
-					g_100f8c0[i] = c;
-					i++;
-				} while (c);
+				strcpy(g_100f8c0, field);
 				target = g_7746b0;
 				g_7746e0 = g_7746dc;
 			}
@@ -186,14 +179,8 @@ void __cdecl fcn_0052fde0(void)
 	target = g_7746c8;
 	if ((g_7746c8 || (target = g_7746c4, g_7746c4)) && cur) {
 		if (!fcn_0064f170(cur, s_6a300c, 0xd)) {
-			field = cur + 0x10;
-			i = 0;
-			do {
-				c = *field;
-				field++;
-				key[i] = c;
-				i++;
-			} while (c);
+			field = g_7746a4 + 0x10;
+			strcpy(key, field);
 			if (g_7746c8) {
 				v = *(unsigned int*) (target + 0x5d);
 				n = 6;

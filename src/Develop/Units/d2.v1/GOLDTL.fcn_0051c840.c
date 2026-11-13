@@ -9,10 +9,10 @@
  *   and write cursor), 0x1c call result, 0x20 flag, 0x24 num[0x14],
  *   0x38 tmpl[0xa], 0x42 z42[6], 0x48 date/time record (0x10),
  *   0x58 rec58[0xc], 0x64 numbuf[0xc], 0x70 s70[8], 0x78 tab78[8],
- *   0x98 lc (0x1ac: s98[0x100] then rec[0xac]), 0x244 b1[0x40],
+ *   0x98 s98[0x100], 0x198 rec[0xac], 0x244 b1[0x40],
  *   0x284 b2[0x40], 0x2c4 b3[0x40], 0x304 buf[0x17d0], 0x1ad4 tmp[0x17c0].
- * The 0x1ac byte span is one object: the allocator orders locals itself, and
- * two separate arrays always land rec first, never the native s98-first order.
+ * Separate source buffers retain the native independent string/record uses.
+ *
  */
 extern int g_1052de0;
 extern char* g_14a5320[];
@@ -77,9 +77,9 @@ int __cdecl fcn_0051c840(int id)
 	} st;
 	char rec58[0xc];
 	char numbuf[0x14];
-	char s70[8];
+
 	int tab78[8];
-	struct { char s98[0x100]; char rec[0xac]; } lc;
+	char s98[0x100]; char rec[0xac];
 	char b1[0x40];
 	char b2[0x40];
 	char b3[0x40];
@@ -101,9 +101,9 @@ int __cdecl fcn_0051c840(int id)
 	i = 0;
 	*(int*) (num + 0xc) = 0;
 	st.dt[0] = 4;
-	memset(lc.rec, 0, 0xa9);
-	lc.rec[0] = 0x0b;
-	*(short*) (lc.rec + 0x27) = -1;
+	memset(rec, 0, 0xa9);
+	rec[0] = 0x0b;
+	*(short*) (rec + 0x27) = -1;
 	if (g_1052de0 == 0) {
 		return -1;
 	}
@@ -153,14 +153,14 @@ body:
 			break;
 		case 'S':
 		case 's':
-			p = buf - 1;
-			if (p[i] == '$') {
+
+			if (buf[i - 1] == '$') {
 				memmove(buf + i + 9, buf + i + 1, strlen(buf) - i);
-				memset(p + i, 0x20, 10);
+				memset(buf + i - 1, 0x20, 10);
 				break;
 			}
 			*(int*) (num + 0xc) = 0xff;
-			if (p[i] == '{') {
+			if (buf[i - 1] == '{') {
 				i++;
 				break;
 			}
@@ -195,7 +195,7 @@ body:
 				e--;
 			}
 			if (state == 1 || state == 2) {
-				if (p[i] == 's' && flag == 0) {
+				if (buf[i - 1] == 's' && flag == 0) {
 					res = fcn_0042b2f0(g_14a540c[0], r, 4);
 				} else {
 					res = fcn_0042b2f0(g_14a540c[0], r, 8);
@@ -211,7 +211,7 @@ body:
 				}
 			}
 			if (state == 3 || state == 4) {
-				if (p[i] == 's' && flag == 0) {
+				if (buf[i - 1] == 's' && flag == 0) {
 					res = fcn_0042b2f0(g_14a5400[0], r, 4);
 				} else {
 					res = fcn_0042b2f0(g_14a5400[0], r, 8);
@@ -227,7 +227,7 @@ body:
 				}
 			}
 			if (state == 5 || state == 6) {
-				if (p[i] == 's' && flag == 0) {
+				if (buf[i - 1] == 's' && flag == 0) {
 					res = fcn_0042b2f0(g_14a5418[0], r, 4);
 				} else {
 					res = fcn_0042b2f0(g_14a5418[0], r, 8);
@@ -504,7 +504,7 @@ body:
 			memcpy(buf + i - 3, tmp, strlen(tmp));
 			break;
 		case 'a':
-			if (p[i] == '%') {
+			if (buf[i - 1] == '%') {
 				sprintf(tmp, g_699a68, 4, 0x14);
 				memmove(buf + i - 1 + strlen(tmp), buf + i + 1,
 					strlen(buf) - i + 1);
@@ -563,7 +563,7 @@ body:
 			memcpy(buf + i - 1, tmp, strlen(tmp));
 			break;
 		case 'G':
-			e = (*(unsigned char*) lc.rec & 0xff) * 7;
+			e = (*(unsigned char*) rec & 0xff) * 7;
 			i++;
 			e = e * 2 + 0x48e;
 			if (e > 0x4800) {
@@ -579,45 +579,45 @@ body:
 			if (p == 0) {
 				p = g_14a5320[e];
 			}
-			if (lc.rec[5] != 0) {
-				sprintf(lc.s98, g_6a2308, p, lc.rec + 5);
+			if (rec[5] != 0) {
+				sprintf(s98, g_6a2308, p, rec + 5);
 			} else {
-				strcpy(lc.s98, p);
+				strcpy(s98, p);
 			}
 			if (state == 0) {
-				if (strlen(lc.s98) + i > 0x17cb) {
+				if (strlen(s98) + i > 0x17cb) {
 					return -1;
 				}
 				if (r == -1) {
-					memmove(buf + i - 2 + strlen(lc.s98), buf + i,
+					memmove(buf + i - 2 + strlen(s98), buf + i,
 						strlen(buf) + 2 - i);
 				}
 				if (r != -1) {
-					memmove(buf + i - 3 + strlen(lc.s98), buf + i,
+					memmove(buf + i - 3 + strlen(s98), buf + i,
 						strlen(buf) + 2 - i);
 				}
-				memcpy(buf + i - 2, lc.s98, strlen(lc.s98));
+				memcpy(buf + i - 2, s98, strlen(s98));
 				i -= 2;
 				break;
 			}
 			if (state == 1 || state == 2) {
 				sprintf(tmp, g_68b3f8,
 					fcn_0042b2f0(g_14a540c[(*(int*) (num + 0xc))], r, 4),
-					lc.s98);
+					s98);
 				if (fcn_0051e070() == 0 && state == 2) {
 					tmp[0] = (char) toupper((unsigned char) tmp[0]);
 				}
 			} else if (state == 3 || state == 4) {
 				sprintf(tmp, g_68b3f8,
 					fcn_0042b2f0(g_14a5400[(*(int*) (num + 0xc))], r, 4),
-					lc.s98);
+					s98);
 				if (fcn_0051e070() == 0 && state == 4) {
 					tmp[0] = (char) toupper((unsigned char) tmp[0]);
 				}
 			} else {
 				sprintf(tmp, g_68b3f8,
 					fcn_0042b2f0(g_14a5418[(*(int*) (num + 0xc))], r, 4),
-					lc.s98);
+					s98);
 				if (fcn_0051e070() == 0 && state == 6) {
 					tmp[0] = (char) toupper((unsigned char) tmp[0]);
 				}

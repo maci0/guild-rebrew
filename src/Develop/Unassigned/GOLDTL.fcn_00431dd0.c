@@ -48,8 +48,8 @@ void __cdecl fcn_00431dd0(Cam* cam, PathState* ps, int a2, int a3, float* out)
     int v2;
     int i;
     float t;
-    float p[3];
-    float d[3];
+    float p[4];
+    float d[4];
 
     info = ps->info;
     out[0] = 0.0f;

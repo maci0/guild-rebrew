@@ -74,13 +74,10 @@ int __cdecl fcn_004d6170(char* ctx)
 	int qhi;
 	int flo;
 	int fhi;
-	struct {
-		char small[0x100];
-		char buf[0x400];
-		char cat[0x400];
-		char msg[0x400];
-		char spare[0x400];
-	} s;
+	char small[0x100];
+	char buf[0x400];
+	char cat[0x400];
+	char msg[0x400];
 	int* id;
 	int n;
 	int tally;
@@ -277,19 +274,19 @@ sync:
 		}
 	} else if ((flags & 2) && side == g_772e9c && *(unsigned short*) side == g_774970) {
 		ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x14));
-		io_FormatTextBuffer(s.msg, 0x119f, ent, *(unsigned short*) g_772e9c, ent);
+		io_FormatTextBuffer(msg, 0x119f, ent, *(unsigned short*) g_772e9c, ent);
 		kind = (unsigned char) *ent;
 		if (kind != 0x1e && kind != 0x20 && kind != 0x1f) {
-			io_FormatTextBuffer(s.cat, 0x11a0, (int) kind * 14 + 0x48e);
-			strcat(s.msg, s.cat);
+			io_FormatTextBuffer(cat, 0x11a0, (int) kind * 14 + 0x48e);
+			strcat(msg, cat);
 		}
-		io_FormatTextBuffer(s.cat, 0x11a1);
-		strcat(s.msg, s.cat);
-		io_FormatTextBuffer(s.cat, 0x11a2);
-		strcat(s.msg, s.cat);
-		io_FormatTextBuffer(s.cat, 0x11a3);
-		strcat(s.msg, s.cat);
-		choice = fcn_004e6eb0(s.msg, 0x11);
+		io_FormatTextBuffer(cat, 0x11a1);
+		strcat(msg, cat);
+		io_FormatTextBuffer(cat, 0x11a2);
+		strcat(msg, cat);
+		io_FormatTextBuffer(cat, 0x11a3);
+		strcat(msg, cat);
+		choice = fcn_004e6eb0(msg, 0x11);
 		if (kind == 0x1e || kind == 0x20 || kind == 0x1f) {
 			choice++;
 		}
@@ -299,13 +296,13 @@ sync:
 				fcn_004b4650(g_772e9c, 0x1c);
 			}
 			fcn_004c5f60(*(int*) (ent + 1), *(int*) (g_772e9c + 4), *(int*) (g_772e9c + 4));
-			io_FormatTextBuffer(s.msg, 0x11a4, *(unsigned short*) g_772e9c, ent);
-			fcn_004e6eb0(s.msg, 0);
+			io_FormatTextBuffer(msg, 0x11a4, *(unsigned short*) g_772e9c, ent);
+			fcn_004e6eb0(msg, 0);
 		} else if (choice == 2) {
-			s.buf[0] = g_6b5c60[0];
-			memset(s.buf + 1, 0, 0x3ff);
-			io_FormatTextBuffer(s.buf, 0x11a5, *(unsigned short*) g_772e9c, ent);
-			fcn_004e6eb0(s.buf, 0);
+			buf[0] = g_6b5c60[0];
+			memset(buf + 1, 0, 0x3ff);
+			io_FormatTextBuffer(buf, 0x11a5, *(unsigned short*) g_772e9c, ent);
+			fcn_004e6eb0(buf, 0);
 			cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 			if (cur == 0) {
 				cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
@@ -320,7 +317,7 @@ sync:
 				pay = 0;
 			}
 			sum = (int) (((double) qlo * 0.001 + 0.07) * pay);
-			io_FormatTextBuffer(s.buf, (int) "$Z%T$A", sum);
+			io_FormatTextBuffer(buf, (int) "$Z%T$A", sum);
 			*(int*) &mode = sum;
 			fcn_004c5150(*(int*) (g_772e9c + 4), *(int*) (g_772e98 + 4), g_773d75, sum);
 			if (cur != 0 && rec != 0) {
@@ -332,8 +329,8 @@ sync:
 					if (n < 1) {
 						n = 1;
 					}
-					sprintf(s.small, "%i %s$A", n, g_14a79c0[*(unsigned short*) ent * 2]);
-					strcat(s.buf, s.small);
+					sprintf(small, "%i %s$A", n, g_14a79c0[*(unsigned short*) ent * 2]);
+					strcat(buf, small);
 					if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
 						fcn_004c51f0(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) ent, n, g_773d75, 0);
 					}
@@ -344,16 +341,16 @@ sync:
 			goto settle;
 		} else if (choice == 3) {
 reduce:
-			s.buf[0] = g_6b5c60[0];
-			memset(s.buf + 1, 0, 0x3ff);
-			io_FormatTextBuffer(s.buf, 0x11a6, *(unsigned short*) g_772e9c, ent);
-			fcn_004e6eb0(s.buf, 0);
+			buf[0] = g_6b5c60[0];
+			memset(buf + 1, 0, 0x3ff);
+			io_FormatTextBuffer(buf, 0x11a6, *(unsigned short*) g_772e9c, ent);
+			fcn_004e6eb0(buf, 0);
 			if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
 				fcn_0050ff70(ent, 0x14 - cut_RandMod(0x14));
 			}
 		} else if (choice == 0) {
-			io_FormatTextBuffer(s.msg, 0x11a7, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e9c);
-			fcn_004e6eb0(s.msg, 0);
+			io_FormatTextBuffer(msg, 0x11a7, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e9c);
+			fcn_004e6eb0(msg, 0);
 			for (row = g_7f4ca0 + 0x164; row < g_7f4ca0 + 0x65564; row += 0x21c) {
 				if (*(unsigned short*) (row - 0x164) == 0xffff || *(unsigned char*) (row - 0x15c) == 0) {
 					continue;
@@ -390,9 +387,9 @@ reduce:
 					fcn_004c4700(4, 1, (int) cur - g_aed32c + 0x16c, &pay);
 					fcn_004c5360();
 				}
-				io_FormatTextBuffer(s.small, (int) "%T", bonus);
+				io_FormatTextBuffer(small, (int) "%T", bonus);
 				if (bonus != 0) {
-					d2_ShowTxt(col, line + 0x50, s.small, g_772514);
+					d2_ShowTxt(col, line + 0x50, small, g_772514);
 				}
 				sum += bonus;
 			}
@@ -414,10 +411,10 @@ reduce:
 			choice = (gm_RandomMod(3) & mask) + 1;
 			if (choice != 0) {
 				if (choice == 2) {
-					s.buf[0] = g_6b5c60[0];
-					memset(s.buf + 1, 0, 0x3ff);
-					io_FormatTextBuffer(s.buf, 0x11a5, *(unsigned short*) g_772e9c, ent);
-					fcn_004e6eb0(s.buf, 0);
+					buf[0] = g_6b5c60[0];
+					memset(buf + 1, 0, 0x3ff);
+					io_FormatTextBuffer(buf, 0x11a5, *(unsigned short*) g_772e9c, ent);
+					fcn_004e6eb0(buf, 0);
 					cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 					if (cur == 0) {
 						cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
@@ -432,7 +429,7 @@ reduce:
 						pay = 0;
 					}
 					sum = (int) (((double) flo * 0.001 + 0.07) * pay);
-					io_FormatTextBuffer(s.buf, (int) "$Z%T$A", sum);
+					io_FormatTextBuffer(buf, (int) "$Z%T$A", sum);
 					fcn_004c5150(*(int*) (g_772e9c + 4), *(int*) (g_772e98 + 4), g_773d75, sum);
 					if (cur != 0 && rec != 0) {
 						p = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
@@ -443,8 +440,8 @@ reduce:
 							if (n < 1) {
 								n = 1;
 							}
-							sprintf(s.small, "%i %s$A", n, g_14a79c0[*(unsigned short*) p * 2]);
-							strcat(s.buf, s.small);
+							sprintf(small, "%i %s$A", n, g_14a79c0[*(unsigned short*) p * 2]);
+							strcat(buf, small);
 							if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
 								fcn_004c51f0(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) p, n, g_773d75, 0);
 							}
@@ -456,8 +453,8 @@ reduce:
 				} else if (choice == 3) {
 					goto reduce;
 				} else if (choice == 1) {
-					io_FormatTextBuffer(s.cat, 0x11a7, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e9c);
-					fcn_004e6eb0(s.cat, 0);
+					io_FormatTextBuffer(cat, 0x11a7, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e9c);
+					fcn_004e6eb0(cat, 0);
 					for (row = g_7f4ca0 + 0x164; row < g_7f4ca0 + 0x65564; row += 0x21c) {
 						if (*(unsigned short*) (row - 0x164) == 0xffff || *(unsigned char*) (row - 0x15c) == 0) {
 							continue;
@@ -470,14 +467,14 @@ reduce:
 				}
 			}
 		} else {
-			io_FormatTextBuffer(s.cat, 0x11a4, *(unsigned short*) g_772e9c, ent);
-			fcn_004e6eb0(s.cat, 0);
+			io_FormatTextBuffer(cat, 0x11a4, *(unsigned short*) g_772e9c, ent);
+			fcn_004e6eb0(cat, 0);
 		}
 	}
 	goto done;
 settle:
 	d2_SetForm(screen, 1);
-	io_AppendText((int) s.buf);
+	io_AppendText((int) buf);
 	cur = gm_GetEntityTableEntry(g_772e9c);
 	if (cur != 0) {
 		*(int*) (cur + 0x1c) += sum;

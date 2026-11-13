@@ -146,7 +146,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 				}
 			}
 		}
-		if (fcn_005373e0((void*) 0x5c3820, 0x677c7) == 0) {
+		if (fcn_005373e0((void*) fcn_005c3820, 0x677c7) == 0) {
 			fcn_00471e30(window);
 			return;
 		}

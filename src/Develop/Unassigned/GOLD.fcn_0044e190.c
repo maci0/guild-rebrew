@@ -1,5 +1,5 @@
 /* Mode byte at Gold 0x5fbf78 has no canonical declaration. */
-int __cdecl fcn_0044c9d0(char*, char*, int, char*, char*);
+char __cdecl fcn_0044c9d0(char*, char*, int, char*, char*);
 char* __cdecl fcn_0044c5d0(char*);
 char* __cdecl fcn_0044df40(char*, char*);
 
@@ -27,7 +27,7 @@ char* __cdecl fcn_0044e190(char* name, char* path)
                     ++*(int*) (extra + 0x1dc);
                 }
             }
-            if ((*(unsigned char*) 0x5fbf78 & 0x7f) == 1) {
+            if ((*(unsigned int*) 0x5fbf78 & 0x7f) == 1) {
                 for (i = 1; i < 3; i++) {
                     if (fcn_0044c9d0(name, path, i, second, first) != 0) {
                         extra = fcn_0044df40(second, first);

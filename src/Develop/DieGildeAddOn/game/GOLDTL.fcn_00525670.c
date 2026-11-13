@@ -13,8 +13,8 @@ extern void __cdecl fcn_004432d0(int, int);
 extern void __cdecl fcn_005290d0(char*);
 extern void __cdecl fcn_00573e10(char*);
 extern void __cdecl fcn_00510100(void);
-
-
+extern char *g_773da8, *g_773d78;
+extern int g_6a23ac, g_773d8c;
 /* Reload the whole world state after a new game starts.  Every master record
  * of the type table is released and reallocated, the entity list is relinked
  * from the owner chains of the loaded objects, every live game object runs its
@@ -35,11 +35,11 @@ unsigned int __cdecl fcn_00525670(void)
 	int v9;
 	unsigned char kind;
 
-	*(int*) 0x773da8 = gm_LookupEntityRecordById(*(int*) 0x773da8);
-	if (!*(int*) 0x773da8)
+	g_773da8 = (char*) gm_LookupEntityRecordById((int) g_773da8);
+	if (!g_773da8)
 		return 0;
-	*(int*) 0x773d78 = gm_StartFilteredEntitySearch(1, 5, 10);
-	if (*(int*) 0x6a23ac >= 0x10017) {
+	g_773d78 = (char*) gm_StartFilteredEntitySearch(1, 5, 10);
+	if (g_6a23ac >= 0x10017) {
 		for (p = (char*) 0x773db4; (int) p < 0x773dd4; p += 4)
 			*(int*) p = gm_LookupEntityRecordById(*(int*) p);
 	}
@@ -62,7 +62,7 @@ unsigned int __cdecl fcn_00525670(void)
 		}
 	}
 	v9 = 0;
-		while (v9 < *(int*) 0x773d8c) {
+		while (v9 < g_773d8c) {
 		obj = (char*) (int) lpObjekteINST + v9 * 0x43;
 		if (*(char*) ((int) lpObjektePROT +
 		               (unsigned int) *(unsigned short*) obj * 0x41) == 0x1d)
@@ -99,7 +99,7 @@ unsigned int __cdecl fcn_00525670(void)
 		}
 		v9++;
 	}
-	v3 = *(int*) 0x6b8010;
+	v3 = g_6b8010;
 	fcn_004432d0(0, 0);
 	for (p = (char*) 0x77e980; (int) p <= 0x7d197f; p += 0x14c) {
 		kind = *(unsigned char*) p;
@@ -110,11 +110,11 @@ unsigned int __cdecl fcn_00525670(void)
 			v9 = *(int*) (p + 0x70);
 			if (v9) {
 				*(int*) (p + 0x70) = 0;
-				*(unsigned char*) 0x774964 = 2;
+				g_774964 = 2;
 				if (kind == 0x11)
 					*(unsigned char*) (p + 0xf0) &= 0xef;
 				(*(void(__cdecl**)(char*)) (kind * 4 + 0x7dc440))(p);
-				*(unsigned char*) 0x774964 = 0;
+				g_774964 = 0;
 				*(int*) (p + 0x70) = v9;
 			}
 		}

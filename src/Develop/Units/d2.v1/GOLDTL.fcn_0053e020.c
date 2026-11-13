@@ -77,7 +77,7 @@ int __cdecl fcn_0053e020(void)
 	d2_SelectRadioGroup(v7, v8);
 	fcn_00469470(v7, fcn_00472250(v2, 0, io_AppendText(0x7e)));
 	for (;;) {
-		if (fcn_005373e0(0x53e020, 0xc6) == 0) {
+		if (fcn_005373e0((int)fcn_0053e020, 0xc6) == 0) {
 			break;
 		}
 		d2_UpdateRadioGroup(v7);

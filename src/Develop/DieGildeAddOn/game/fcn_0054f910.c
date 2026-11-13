@@ -4,7 +4,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00500bb0(char* sel, int a, int b, int c);
 int __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
 float __cdecl fcn_00507e70(char* a, char* b, int c);
-float __cdecl fcn_0042e450(void);
+double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 int __cdecl fcn_004c5620(int a, char* e);
 int __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
@@ -71,7 +71,7 @@ int __cdecl fcn_0054f910(char* ent)
 		goto big;
 	}
 	f = fcn_00507e70(e2, e1, 3);
-	f = f + fcn_0042e450();
+	f = f + gm_RandomFloat01();
 	if (f >= 1.0f) {
 		fcn_004c5420(*(int*) (e1 + 4), 0x1c8, 4, 0x400, 0);
 		fcn_004c5420(*(int*) (e2 + 4), 0x1c8, 4, 0x400, 0);

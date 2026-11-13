@@ -11,6 +11,17 @@
 
 #include "Develop/Units/d3/d3_camera.h"
 
+extern int g_6791d0;
+extern int g_67a370;
+extern int g_6b5cbc;
+extern int g_6b5cc0;
+extern int g_1040490;
+extern int g_1040494;
+extern int g_14ce8e0;
+extern int g_7725c8;
+extern int g_774654;
+extern int g_7746a0;
+
 typedef struct {
 	float a;
 	float b;
@@ -95,7 +106,7 @@ int __cdecl fcn_0053c560(void)
 	fcn_00533880();
 	fcn_005338a0();
 	fcn_004432d0(1, 0);
-	base = *(int *) 0x67a370;
+	base = g_67a370;
 	if (base != 0) {
 		sub = *(int *) (base + 0x3c8);
 		if (sub != 0) {
@@ -104,7 +115,7 @@ int __cdecl fcn_0053c560(void)
 				fn(base, 4, sub + 0x214, 0);
 		}
 	}
-	oldSound = *(int *) 0x6791d0;
+	oldSound = g_6791d0;
 	if (*(int *) 0x6b8300 != 0) {
 		base = *(int *) 0x6b8300;
 		*(unsigned char *) (base + 0x8036) =
@@ -128,8 +139,8 @@ int __cdecl fcn_0053c560(void)
 		fcn_00471e30(*(int *) 0x6a37f8);
 		*(int *) 0x6a37f8 = -1;
 	}
-	*(int *) 0x7725c8 = 0;
-	if (fcn_005373e0(0x53c560, 0x12d6) != 0) {
+	g_7725c8 = 0;
+	if (fcn_005373e0((int) fcn_0053c560, 0x12d6) != 0) {
 		do {
 			if (flag) {
 				for (i = 4; i < 6; i++) {
@@ -148,16 +159,16 @@ int __cdecl fcn_0053c560(void)
 						parentB = *(Vec3 *) (g_6b8014 + 0xf0);
 					}
 					fcn_00433780(g_6b8014);
-					*(int *) 0x6b5cbc = 0;
-					*(int *) 0x6b5cc0 = 0;
+					g_6b5cbc = 0;
+					g_6b5cc0 = 0;
 					fcn_00412cf0(g_6b8014, &parentA, &parentB, 0x50, 8);
 				}
 				flag = 0;
 			}
-			if (*(int *) 0x14ce8e0 != 0)
-				*(int *) 0x774654 = 1;
-			if (*(int *) 0x7746a0 != 0) {
-				obj2 = (Figure *) *(int *) (*(int *) 0x7746a0 + 0x204);
+			if (g_14ce8e0 != 0)
+				g_774654 = 1;
+			if (g_7746a0 != 0) {
+				obj2 = (Figure *) *(int *) (g_7746a0 + 0x204);
 				if (obj2 != 0) {
 					if (obj2->slot == -1) {
 						mode = 0;
@@ -197,29 +208,29 @@ slot_found:
 				io_AppendText(0x6811b0);
 				fcn_00471af0(obj, 0);
 				fcn_00433780(g_6b8014);
-				*(int *) 0x6b5cbc = 0;
-				*(int *) 0x6b5cc0 = 0;
+				g_6b5cbc = 0;
+				g_6b5cc0 = 0;
 				fcn_00412cf0(g_6b8014,
 				    (Vec3 *) (g_6b8014 + 0x114),
 				    (Vec3 *) (g_6b8014 + 0x120), 0x50, 8);
 				if (fcn_0053b1b0()) {
 					if (fcn_0053cd40(0xc6) &&
 					    fcn_0053b6b0(*(unsigned char *) 0x7e23e3)) {
-						*(int *) 0x774654 = 1;
+						g_774654 = 1;
 						ret = 1;
 					} else if (!ret) {
 						fcn_00471af0(obj, 1);
 					}
 				} else {
-					*(int *) 0x774654 = 1;
+					g_774654 = 1;
 					ret = 0;
 					fcn_00471af0(obj, 1);
 				}
 			}
-		} while (fcn_005373e0(0x53c560, 0x12d6) != 0);
+		} while (fcn_005373e0((int) fcn_0053c560, 0x12d6) != 0);
 		if (ret == 1) {
-			spr = fcn_004730c0(0, 0, *(int *) 0x1040494,
-			    *(int *) 0x1040490, (char *) 0x67d67c, 0x5a, 1);
+			spr = fcn_004730c0(0, 0, g_1040494,
+			    g_1040490, (char *) 0x67d67c, 0x5a, 1);
 			while ((*(unsigned char *) spr & 4) == 0)
 				fcn_005373e0(0, 0xc6);
 		}
@@ -250,12 +261,12 @@ slot_found:
 			fcn_00428720(found);
 		fcn_005312d0(oldSound);
 	}
-	if (*(int *) (*(int *) 0x67a370 + 0xb0) != 0) {
-		gv_Free3Fields((void *) *(int *) (*(int *) 0x67a370 + 0xb0));
-		*(int *) (*(int *) 0x67a370 + 0xb0) = 0;
+	if (*(int *) (g_67a370 + 0xb0) != 0) {
+		gv_Free3Fields((void *) *(int *) (g_67a370 + 0xb0));
+		*(int *) (g_67a370 + 0xb0) = 0;
 	}
 	fcn_004e4c00();
-	base = *(int *) 0x67a370;
+	base = g_67a370;
 	if (base != 0) {
 		sub = *(int *) (base + 0x3c8);
 		if (sub != 0) {
@@ -265,8 +276,8 @@ slot_found:
 		}
 	}
 	fcn_00433780(g_6b8014);
-	*(int *) 0x6b5cbc = 0;
-	*(int *) 0x6b5cc0 = 0;
+	g_6b5cbc = 0;
+	g_6b5cc0 = 0;
 	if (spr != 0)
 		fcn_00473150(spr);
 	return ret;

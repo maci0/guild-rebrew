@@ -96,17 +96,17 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 		    && v7 >= 0 && owner != 0
 		    && v7 * 0x3dc + 0x10432c0 != ((Rec_529160*) owner)->field88) {
 			r = fcn_0040c120(owner, 0x33, v7, *(int*) (a1 + 1), *(int*) (a2 + 2));
-			*(int*) (r + 0x70) = *(int*) (s_6a2e78 + 0);
-			*(int*) (r + 0x74) = *(int*) (s_6a2e78 + 4);
-			*(int*) (r + 0x78) = *(int*) (s_6a2e78 + 8);
-			*(int*) (r + 0x7c) = *(int*) (s_6a2e78 + 0xc);
-			*(short*) (r + 0x80) = *(short*) (s_6a2e78 + 0x10);
+			strcpy(r + 0x70, "sv_ChangePlayerHE");
+
+
+
+
 			r = fcn_0040c120(owner, 0x39, v7);
-			*(int*) (r + 0x70) = *(int*) (s_6a2e78 + 0);
-			*(int*) (r + 0x74) = *(int*) (s_6a2e78 + 4);
-			*(int*) (r + 0x78) = *(int*) (s_6a2e78 + 8);
-			*(int*) (r + 0x7c) = *(int*) (s_6a2e78 + 0xc);
-			*(short*) (r + 0x80) = *(short*) (s_6a2e78 + 0x10);
+			strcpy(r + 0x70, "sv_ChangePlayerHE");
+
+
+
+
 			obj = ((Rec_529160*) owner)->object;
 			if (obj != -1) {
 				o = fcn_00426cc0(obj);

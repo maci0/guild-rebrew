@@ -215,22 +215,22 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 				*(float*) (r + i * 0x10) = dx;
 				*(float*) (r + i * 0x10 + 4) = dy;
 				*(float*) (r + i * 0x10 + 8) = dz;
-				if (dx <= minx) {
+				if (!(dx > minx)) {
 					minx = dx;
 				}
-				if (dy <= miny) {
+				if (!(dy > miny)) {
 					miny = dy;
 				}
-				if (dz <= minz) {
+				if (!(minz < dz)) {
 					minz = dz;
 				}
-				if (dx >= maxx) {
+				if (!(dx < maxx)) {
 					maxx = dx;
 				}
-				if (dy >= maxy) {
+				if (!(dy < maxy)) {
 					maxy = dy;
 				}
-				if (dz >= maxz) {
+				if (!(maxz > dz)) {
 					maxz = dz;
 				}
 			}

@@ -34,13 +34,7 @@ void __cdecl fcn_004d4250(char* rec, char* e)
 					break;
 				}
 			}
-			if (*(int*) (obj + 0x58) != 2) {
-				obj = (char*) fcn_004d2f70(e);
-				if (obj != 0) {
-					fcn_004d1020(rec, e, obj, 0, 0);
-					return;
-				}
-			} else {
+			if (*(int*) (obj + 0x58) == 2) {
 				map = *(char**) (g_67a370 + 0xb0);
 				ent = *(char**) (e + 0x184);
 				if (fcn_0045b990(map, (float*) (*(char**) (ent + 0x34) + 0x4c), (int*) &v5, (int*) &grid_z, &f4)) {
@@ -49,6 +43,12 @@ void __cdecl fcn_004d4250(char* rec, char* e)
 						fcn_004d1020(rec, e, 0, v5, (int) grid_z);
 						return;
 					}
+				}
+			} else {
+				obj = (char*) fcn_004d2f70(e);
+				if (obj != 0) {
+					fcn_004d1020(rec, e, obj, 0, 0);
+					return;
 				}
 			}
 			break;

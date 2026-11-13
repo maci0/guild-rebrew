@@ -63,7 +63,7 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 					a5[idx] = (unsigned short) pos;
 				} else {
 					f = fcn_0050f980((unsigned short) pos, *a0, 1);
-					if (a3 <= f && f <= a4) {
+					if (!(f < a3) && !(f > a4)) {
 						hit = 1;
 						a5[idx] = (unsigned short) pos;
 					}

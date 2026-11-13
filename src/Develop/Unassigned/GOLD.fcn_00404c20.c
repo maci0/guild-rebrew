@@ -6,7 +6,7 @@ void __cdecl fcn_00404c20(char* obj, int paused)
 {
     char* stream;
     char* frames;
-    char* context;
+
 
     if (*(int*) (obj + 0x128) == 0)
         return;
@@ -14,12 +14,12 @@ void __cdecl fcn_00404c20(char* obj, int paused)
     if (stream == 0)
         return;
     frames = *(char**) (stream + 0x68);
-    context = *(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4;
+
     if (paused) {
-        fcn_00435810(context, frames);
+        fcn_00435810(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, frames);
         obj[0x8c] |= 4;
     } else {
-        fcn_00435870(context, frames, 1);
+        fcn_00435870(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, frames, 1);
         obj[0x8c] &= 0xfb;
     }
 }

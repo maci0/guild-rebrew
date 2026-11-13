@@ -16,14 +16,14 @@ typedef struct PLANT_SLOT {
 	void* object;
 } PLANT_SLOT;
 
-void __cdecl init_SetPflanzenMap(PLANT_SLOT* slot, void* info);
+void __cdecl init_SetPflanzenMap(PLANT_SLOT* slot, int mode);
 
 /* ADDRESS: GOLDTL 0x004bcda0 */
-char* __cdecl fcn_004bcda0(void* tab, unsigned int a2, unsigned int a3, int id, unsigned int unused)
+char* __cdecl fcn_004bcda0(void* tab, unsigned int a2, unsigned int a3, int id, unsigned int mode)
 {
 	PLANT_SLOT* table;
 	PLANT_SLOT* slot;
-	char* info;
+	char* info; unsigned char* cursor;
 	int i;
 
 	info = plt_FindPlantInfo(id);
@@ -44,21 +44,21 @@ char* __cdecl fcn_004bcda0(void* tab, unsigned int a2, unsigned int a3, int id, 
 		goto selected;
 	}
 	{
-		for (i = 0, slot = table; i < 0x40; i++, slot++) {
-			if (slot->state == (char) 0xff) {
-				slot->counter = g_7728f8;
-				g_7728f8 += 1;
-				break;
+		for (i = 0, cursor = (unsigned char*) table + 13; i < 0x40; i++, cursor += sizeof(PLANT_SLOT)) {
+			if (*cursor == 0xff) {
+				goto available;
 			}
 		}
-		if (i == 0x40) {
-			return 0;
-		}
+		return 0;
+available:
+		table[i].counter = g_7728f8;
+		g_7728f8 += 1;
+
 	}
 selected:
 	slot = &table[i];
 	slot->id = (unsigned short) id;
-	if (info == 0) {
+	if (mode == 0) {
 		slot->owner = -1;
 		if (id != 0) {
 			slot->state = 1;
@@ -74,7 +74,7 @@ selected:
 			d3_DestroyObject((D3_OBJECT*) slot->object);
 			slot->object = 0;
 		}
-		init_SetPflanzenMap(slot, info);
+		init_SetPflanzenMap(slot, (int) mode);
 	}
 	slot->a = (unsigned char) a2;
 	slot->b = (unsigned char) a3;

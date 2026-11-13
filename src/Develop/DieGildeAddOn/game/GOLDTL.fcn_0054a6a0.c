@@ -8,7 +8,7 @@ int __cdecl fcn_004c4450(int);
 void __cdecl gm_ResolveEntityById(int*, int, int, int);
 int __cdecl fcn_004c5620(int, int);
 void __cdecl fcn_00500bb0(int, int, int, int);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005b23e0(int, int, int);
@@ -62,7 +62,7 @@ void __cdecl fcn_0054a6a0(int a0)
 		fcn_004c5620(0, v2);
 		return;
 	}
-	v3 = fcn_00502cd0(*(int*) (v7 + 0x5d), 1, 0, 0, 0x1b5);
+	v3 = fcn_00502cd0(*(int*) (v7 + 0x5d), 1, 0, 0x1b5);
 	switch (*(int*) (v2 + 0x70)) {
 	case 2:
 		if (v3 && *(char*) (v3 + 0x22)) {

@@ -19,7 +19,8 @@ void __cdecl fcn_00516040(void)
 	char* p;
 	char* q;
 	char* s;
-	char* d;
+	unsigned int offset;
+	char byte;
 
 	mode = fcn_00500e20(g_7f4c00);
 	if (g_6b8300 == 0) {
@@ -42,11 +43,12 @@ void __cdecl fcn_00516040(void)
 				continue;
 			}
 			s = p;
-			d = buf;
-			while ((*d = *s) != 0) {
+			offset = (unsigned int) buf - (unsigned int) s;
+			do {
+				byte = *s;
+				*(char*) ((unsigned int) s + offset) = byte;
 				s++;
-				d++;
-			}
+			} while (byte != 0);
 			q = strstr(buf, "_FRUEHLING");
 			if (q == 0) {
 				q = strstr(buf, "_HERBST");
@@ -83,11 +85,12 @@ void __cdecl fcn_00516040(void)
 				continue;
 			}
 			s = p;
-			d = buf;
-			while ((*d = *s) != 0) {
+			offset = (unsigned int) buf - (unsigned int) s;
+			do {
+				byte = *s;
+				*(char*) ((unsigned int) s + offset) = byte;
 				s++;
-				d++;
-			}
+			} while (byte != 0);
 			q = strstr(buf, "_FRUEHLING");
 			if (q == 0) {
 				q = strstr(buf, "_HERBST");
@@ -124,11 +127,12 @@ void __cdecl fcn_00516040(void)
 				continue;
 			}
 			s = p;
-			d = buf;
-			while ((*d = *s) != 0) {
+			offset = (unsigned int) buf - (unsigned int) s;
+			do {
+				byte = *s;
+				*(char*) ((unsigned int) s + offset) = byte;
 				s++;
-				d++;
-			}
+			} while (byte != 0);
 			q = strstr(buf, "_FRUEHLING");
 			if (q == 0) {
 				q = strstr(buf, "_HERBST");
@@ -168,11 +172,12 @@ void __cdecl fcn_00516040(void)
 				continue;
 			}
 			s = p;
-			d = buf;
-			while ((*d = *s) != 0) {
+			offset = (unsigned int) buf - (unsigned int) s;
+			do {
+				byte = *s;
+				*(char*) ((unsigned int) s + offset) = byte;
 				s++;
-				d++;
-			}
+			} while (byte != 0);
 			q = strstr(buf, "_FRUEHLING");
 			if (q == 0) {
 				q = strstr(buf, "_HERBST");

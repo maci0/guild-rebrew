@@ -55,8 +55,8 @@ void __cdecl fcn_0044a390(MeshBox* m)
 	m->center_x = 0.0f;
 	m->center_y = 0.0f;
 	m->center_z = 0.0f;
-	m->diagonal = (float) sqrt(r);
-	m->radius = (float) sqrt(r);
+	m->diagonal = (float) sqrt(d); /* Native reloads the last squared distance. */
+	m->radius = (float) sqrt(d);
 	if (n > 0) {
 		bb[0] = 1e10f;
 		bb[1] = 1e10f;
@@ -66,17 +66,17 @@ void __cdecl fcn_0044a390(MeshBox* m)
 		bb[5] = -1e10f;
 		v = m->verts;
 		for (i = n; i > 0; i--) {
-			if (v->px < bb[0])
+			if (!(bb[0] < v->px))
 				bb[0] = v->px;
-			if (v->py < bb[1])
+			if (!(v->py > bb[1]))
 				bb[1] = v->py;
-			if (v->pz < bb[2])
+			if (!(v->pz > bb[2]))
 				bb[2] = v->pz;
-			if (bb[4] < v->px)
+			if (!(bb[4] > v->px))
 				bb[4] = v->px;
-			if (bb[5] < v->py)
+			if (!(v->py < bb[5]))
 				bb[5] = v->py;
-			if (bb[3] < v->pz)
+			if (!(bb[3] > v->pz))
 				bb[3] = v->pz;
 			v++;
 		}

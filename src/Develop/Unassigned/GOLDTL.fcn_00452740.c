@@ -1,3 +1,14 @@
+#include "Develop/Units/d3/d3_camera.h"
+extern int g_10432a8;
+extern int g_1042a04;
+extern int g_67bc4c;
+extern int g_6b8718;
+extern int g_1052bac;
+extern int g_1042a08;
+extern unsigned int g_6b8710;
+extern unsigned int g_6b8714;
+extern void* g_6b5de0;
+extern void* g_104095c;
 extern unsigned int g_6b7fac; void __cdecl fcn_00452420(void*);
 int __cdecl fcn_0045cb10(int, char);
 void __cdecl fcn_004557c0(char*, char*, int, float*);
@@ -27,8 +38,8 @@ void __cdecl fcn_00452740(void *arg)
 		fcn_00452420(obj);
 		return;
 	}
-	*(int *) 0x10432a8 += *(int *) (obj + 0xd8) * 2;
-	*(int *) 0x1042a04 += *(int *) (obj + 0xd8) * 4;
+	g_10432a8 += *(int *) (obj + 0xd8) * 2;
+	g_1042a04 += *(int *) (obj + 0xd8) * 4;
 	n = *(int *) (obj + 0xd8);
 	cnt = 0;
 	if (n > 0) {
@@ -46,9 +57,9 @@ void __cdecl fcn_00452740(void *arg)
 		}
 	}
 	fcn_004557c0((char*) obj + 0xe8,
-				 (char*) (~-((*(unsigned char *) (obj + 0x2fc) & 0x20) != 0) & *(unsigned int *) 0x6b8014), 0, matrix);
-	first = **(int **) 0x6b5de0;
-	(*(int (__stdcall **) (int, int, float*)) (first + 0x94))(*(int *) 0x6b5de0, 0x100, matrix);
+				 (char*) (~-((*(unsigned char *) (obj + 0x2fc) & 0x20) != 0) & (unsigned int) g_6b8014), 0, matrix);
+	first = *(int *) g_6b5de0;
+	(*(int (__stdcall **) (int, int, float*)) (first + 0x94))((int) g_6b5de0, 0x100, matrix);
 	if (cnt > 0) {
 		for (k = 0; k < cnt; k++) {
 			item = *(int *) (*(int *) (obj + 0x2c) + k * 4);
@@ -58,22 +69,22 @@ void __cdecl fcn_00452740(void *arg)
 				int vobj;
 
 
-				vidx = **(int **) 0x6b5de0;
-				(*(int (__stdcall **) (int, int, int)) (vidx + 0xf4))(*(int *) 0x6b5de0, 0, *(int*) (item + 0x50));
+				vidx = *(int *) g_6b5de0;
+				(*(int (__stdcall **) (int, int, int)) (vidx + 0xf4))((int) g_6b5de0, 0, *(int*) (item + 0x50));
 				color = (*(unsigned char *) (item + 0x5a) >> 1) & 1;
 				fcn_004372d0(*(unsigned char*) (item + 0x58),
 							 *(unsigned char*) (item + 0x5a) & 1,
 							 *(int *) (item + 0x6c), color, 1);
-				if (*(int *) 0x67bc4c - *(int *) 0x6b8718 < cnt - k)
-					*(int *) 0x6b8718 = 0;
+				if (g_67bc4c - g_6b8718 < cnt - k)
+					g_6b8718 = 0;
 
 				emitted = 0;
-				if ((*(unsigned char *) 0x6b8710 & 0x20) == 0) { int vert; float sum; sum = 0.0f;
-					v = (-(*(int *) 0x6b8718 != 0) & 0xfffff000) + 0x2000;
+				if (((unsigned char) g_6b8710 & 0x20) == 0) { int vert; float sum; sum = 0.0f;
+					v = (-(g_6b8718 != 0) & 0xfffff000) + 0x2000;
 					(*(int (__stdcall **) (int, int, int, int *, int))
-					 (**(int **) 0x104095c + 0x2c))(*(int *) 0x104095c,
-												   *(int *) 0x6b8714 * *(int *) 0x6b8718,
-												   (cnt - k) * *(int *) 0x6b8714,
+					 (*(int *) g_104095c + 0x2c))((int) g_104095c,
+												   g_6b8714 * g_6b8718,
+												   (cnt - k) * g_6b8714,
 												   &vert, v);
 					for (i = k; i < cnt; i++) {
 						if (*(int *) (*(int *) (obj + 0x2c) + i * 4)
@@ -100,14 +111,14 @@ void __cdecl fcn_00452740(void *arg)
 						}
 					}
 					sum /= emitted;
-					(*(int (__stdcall **) (int, int, int)) (**(int **) 0x6b5de0 + 0xc8))(
-						*(int *) 0x6b5de0, 0x9a, *(int*) &sum);
+					(*(int (__stdcall **) (int, int, int)) (*(int *) g_6b5de0 + 0xc8))(
+						(int) g_6b5de0, 0x9a, *(int*) &sum);
 				} else { int vert;
-					v = (-(*(int *) 0x6b8718 != 0) & 0xfffff000) + 0x2000;
+					v = (-(g_6b8718 != 0) & 0xfffff000) + 0x2000;
 					(*(int (__stdcall **) (int, int, int, int *, int))
-					 (**(int **) 0x104095c + 0x2c))(*(int *) 0x104095c,
-												   *(int *) 0x6b8714 * *(int *) 0x6b8718,
-												   (cnt - k) * *(int *) 0x6b8714,
+					 (*(int *) g_104095c + 0x2c))((int) g_104095c,
+												   g_6b8714 * g_6b8718,
+												   (cnt - k) * g_6b8714,
 												   &vert, v);
 					for (i = k; i < cnt; i++) {
 						if (*(int *) (*(int *) (obj + 0x2c) + i * 4)
@@ -133,14 +144,14 @@ void __cdecl fcn_00452740(void *arg)
 						}
 					}
 				}
-				(*(int (__stdcall **) (int)) (**(int **) 0x104095c + 0x30))(*(int *) 0x104095c);
-				(*(int (__stdcall **) (int, int, int, int)) (**(int **) 0x6b5de0 + 0x118))(
-					*(int *) 0x6b5de0, 1, *(int *) 0x6b8718, emitted);
-				*(int *) 0x6b8718 += cnt;
+				(*(int (__stdcall **) (int)) (*(int *) g_104095c + 0x30))((int) g_104095c);
+				(*(int (__stdcall **) (int, int, int, int)) (*(int *) g_6b5de0 + 0x118))(
+					(int) g_6b5de0, 1, g_6b8718, emitted);
+				g_6b8718 += cnt;
 				*(int *) (*(int *) (obj + 0x2c) + k * 4) = 0;
 			}
 		}
 	}
-	*(int *) 0x1052bac += cnt;
-	*(int *) 0x1042a08 += cnt;
+	g_1052bac += cnt;
+	g_1042a08 += cnt;
 }

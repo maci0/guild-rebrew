@@ -3,25 +3,25 @@ void __cdecl fcn_00476210(int, int, int, int, int);
 /* ADDRESS: GOLD 0x004764e0 */
 void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int a4, int a5, int a6)
 {
-    int dx;
-    int dy;
-    int sx;
-    int sy;
-    int error;
-    int straight;
-    int diagonal;
-    int t;
+    int dx, dy;
+    int sx, sy;
+    int error, straight;
+    int diagonal, t;
 
     if (y == y1) {
-        if (x > x1) { t = x; x = x1; x1 = t; }
-        while (x < x1)
-            fcn_00476210(x++, y, a4, a5, a6);
+        if (x1 < x) { t = x - x1;
+            if (t > 0) do { fcn_00476210(x1++, y, a4, a5, a6); } while (--t);
+        } else { t = x1 - x;
+            if (t > 0) do { fcn_00476210(x++, y, a4, a5, a6); } while (--t);
+        }
         return;
     }
     if (x == x1) {
-        if (y > y1) { t = y; y = y1; y1 = t; }
-        while (y < y1)
-            fcn_00476210(x, y++, a4, a5, a6);
+        if (y1 < y) { t = y - y1;
+            if (t > 0) do { fcn_00476210(x, y1++, a4, a5, a6); } while (--t);
+        } else { t = y1 - y;
+            if (t > 0) do { fcn_00476210(x, y++, a4, a5, a6); } while (--t);
+        }
         return;
     }
     if (x < x1) { dx = x1 - x; sx = 1; }
@@ -30,9 +30,9 @@ void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int a4, int a5, int a6)
     else { dy = y - y1; sy = -1; }
     fcn_00476210(x, y, a4, a5, a6);
     if (dx > dy) {
-        error = 2 * dy - dx;
-        straight = 2 * dy;
-        diagonal = 2 * (dy - dx);
+        diagonal = dy - dx;
+        straight = dy + dy;
+        diagonal += diagonal; error = straight - dx;
         do {
             x += sx;
             if (error >= 0) { y += sy; error += diagonal; }
@@ -40,9 +40,9 @@ void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int a4, int a5, int a6)
             fcn_00476210(x, y, a4, a5, a6);
         } while (x != x1);
     } else {
-        error = 2 * dx - dy;
-        straight = 2 * dx;
-        diagonal = 2 * (dx - dy);
+        diagonal = dx - dy;
+        straight = dx + dx;
+        diagonal += diagonal; error = straight - dy;
         do {
             y += sy;
             if (error >= 0) { x += sx; error += diagonal; }

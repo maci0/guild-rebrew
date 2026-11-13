@@ -78,7 +78,7 @@ void __cdecl fcn_0041ec50(unsigned int* destination, unsigned int* source)
 				line += source[4];
 				y--;
 			}
-			*output++ = (unsigned short) ((blue / samples << bshift)
+			output[column] = (unsigned short) ((blue / samples << bshift)
 				| (green / samples << gshift) | (red / samples << rshift));
 			first_column = end_column;
 		}

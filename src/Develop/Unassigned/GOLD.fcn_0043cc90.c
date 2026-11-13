@@ -1,6 +1,8 @@
+#include <string.h>
 #include "client_scene_resources.h"
 #include "Develop/Units/m_alloc/m_alloc.h"
-void __cdecl fcn_0043d430(void*, void*, int);
+typedef struct GOLD_RESET_COLOR { unsigned char a, b, c, d; } GOLD_RESET_COLOR;
+void __cdecl fcn_0043d430(void*, void*, GOLD_RESET_COLOR);
 void __cdecl fcn_00434b70(void*, int);
 
 /* ADDRESS: GOLD 0x0043cc90 */
@@ -10,8 +12,11 @@ void __cdecl fcn_0043cc90(char* record)
     char** object;
     int i;
 
-    if ((unsigned char) record[0x190] != 0xff || (record[0x192] & 1)) {
-        fcn_0043d430(*(void**) (record + 0x18), record, 0xff);
+    if ((unsigned char) record[0x190] < 0xff || (record[0x192] & 1)) {
+        GOLD_RESET_COLOR color;
+        memset(&color, 0, sizeof(color));
+        color.c = 0; color.a = 0xff;
+        fcn_0043d430(*(void**) (record + 0x18), record, color);
     }
     if (*(int*) (record + 8) > 0 && *(void**) record != 0) {
         m_FreeTracked(*(void**) record);

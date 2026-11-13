@@ -89,12 +89,8 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     int x;
     int i;
     int t;
-    int s0;
-    int s1;
-    int s2;
-    int s3;
-    int s4;
-    int s5;
+    float saved_pos[4];
+    float saved_rot[4];
     char* msg;
     u8 c;
 
@@ -111,12 +107,12 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     x = *(int*) &g_6b8010;
     *(int*) 0x7746d0 = 0;
     *(u16*) (o + 0x29) = (u16) p2;
-    s0 = *(int*) &g_7e3a40;
-    s1 = *(int*) &g_7e3a44;
-    s2 = *(int*) &g_7e3a48;
-    s3 = *(int*) &g_7e3a50;
-    s4 = *(int*) &g_7e3a54;
-    s5 = *(int*) &g_7e3a58;
+    *(int*) &saved_pos[0] = *(int*) &g_7e3a40;
+    *(int*) &saved_pos[1] = *(int*) &g_7e3a44;
+    *(int*) &saved_pos[2] = *(int*) &g_7e3a48;
+    *(int*) &saved_rot[0] = *(int*) &g_7e3a50;
+    *(int*) &saved_rot[1] = *(int*) &g_7e3a54;
+    *(int*) &saved_rot[2] = *(int*) &g_7e3a58;
     if (p2 == 0)
         *(int*) &g_7746c4 = 0;
     if (*(u16*) (o + 0x27) == *(u16*) &g_774970)
@@ -372,11 +368,11 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     *(int*) &g_7746c4 = 0;
     *(int*) &g_7746cc = 0;
     fcn_00516f60();
-    *(int*) &g_7e3a40 = s0;
-    *(int*) &g_7e3a44 = s1;
-    *(int*) &g_7e3a48 = s2;
-    *(int*) &g_7e3a50 = s3;
-    *(int*) &g_7e3a54 = s4;
-    *(int*) &g_7e3a58 = s5;
+    *(int*) &g_7e3a40 = *(int*) &saved_pos[0];
+    *(int*) &g_7e3a44 = *(int*) &saved_pos[1];
+    *(int*) &g_7e3a48 = *(int*) &saved_pos[2];
+    *(int*) &g_7e3a50 = *(int*) &saved_rot[0];
+    *(int*) &g_7e3a54 = *(int*) &saved_rot[1];
+    *(int*) &g_7e3a58 = *(int*) &saved_rot[2];
     return fcn_004234e0(g_7747c8, (void*) 0x6aad8c, 1, 0x3f, 0x7f, 0, 0);
 }

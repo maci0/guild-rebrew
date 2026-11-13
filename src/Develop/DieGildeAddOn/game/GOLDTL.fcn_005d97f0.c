@@ -1,4 +1,11 @@
 #include <stdio.h>
+#include "Develop/DieGildeAddOn/game/game_data.h"
+#include "client_dialog_state.h"
+
+extern int g_14ce8e0;
+extern int g_14ce8d8;
+extern int g_67d370;
+extern char* g_14a5adc[15];
 
 void __cdecl fcn_0057e880(int, char*, int, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -55,50 +62,48 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
     v4 = fcn_00470820(0, 0, (char*) 0x6ace10);
     fcn_00471b60(v4);
     d2_SetForm(v4, 0);
-    v7 = *(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f50);
-    v15 = (*(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f4c) - 0x40) / 5;
-    v14 = (v15 - *(short*) (*(int*) 0x772500 + 0x1d978)) / 2;
+    v7 = (*(int*) (g_772514 * 0x3cc + 0x1015f50) - 0x84) / 3;
+    v15 = (*(int*) (g_772514 * 0x3cc + 0x1015f4c) - 0x40) / 5;
+    v14 = (v15 - *(short*) ((int) g_772500 + 0x1d978)) / 2;
     io_AppendText(0x1d36);
-    v18 = (unsigned int*) 0x14a5adc;
+    v18 = (unsigned int*) g_14a5adc;
     v10 = (-(unsigned int) (*(char*) ((char*) v11 + 9) != '\0') & 0x5f) + 0x130;
     v8 = 0;
     for (;;) {
         v1 = v8 + 1;
         v5 = gm_CheckStatLevel(*v11, v1);
         v6 = fcn_0046f740((v8 % 5) * v15 + 0x20 + v14,
-                          (v8 / 5) * ((v7 - 0x84) / 3) + 100 + v14, v8 + 0x5a2,
-                          *(int*) 0x772514);
+                          (v8 / 5) * v7 + 100 + v14, v8 + 0x5a2,
+                          g_772514);
         v16 = v6 * 0x2f4;
-        *(unsigned int*) (v16 + 0x5c + *(int*) 0x1015ea0) = 1;
-        *(unsigned int*) (v16 + 0x1d0 + *(int*) 0x1015ea0) = 3;
+        *(unsigned int*) (v16 + 0x5c + (int) g_1015ea0) = 1;
+        *(unsigned int*) (v16 + 0x1d0 + (int) g_1015ea0) = 3;
         fcn_00472900(v6, 0x56);
-        *(unsigned int*) (v16 + 0x6c + *(int*) 0x1015ea0) = 1;
-        *(unsigned int*) (v16 + 0x1dc + *(int*) 0x1015ea0) = 0xffffffce;
-        *(unsigned int*) (v16 + 0x1e0 + *(int*) 0x1015ea0) = 0x44;
+        *(unsigned int*) (v16 + 0x6c + (int) g_1015ea0) = 1;
+        *(unsigned int*) (v16 + 0x1dc + (int) g_1015ea0) = 0xffffffce;
+        *(unsigned int*) (v16 + 0x1e0 + (int) g_1015ea0) = 0x44;
         if (v5) {
-            v3 = *(unsigned int*) ((v5 + v10) * 4 + 0x14a5320);
+            v3 = (unsigned int) g_14a5320[v5 + v10];
             sprintf(v12, (char*) *(unsigned int*) 0x14ac804,
                     gm_GetOppositeStatIndex(v5, v3));
         } else {
             v12[0] = 0;
         }
         fcn_0046f9b0(v6, (int) v12);
-        *(unsigned int*) (v16 + 0x18 + *(int*) 0x1015ea0) = 0xa4;
-        if (v5 != *(unsigned char*) ((char*) a0 + 0x164)) {
-            if (!v5) {
-                *(unsigned int*) (v16 + 0x1cc + *(int*) 0x1015ea0) = 0x56;
-                *(unsigned int*) (v16 + 0x1d4 + *(int*) 0x1015ea0) = 0xa4;
-                v9 = (char*) *v18;
-                v17 = (char*) (v16 + 0xcc + *(int*) 0x1015ea0);
-                do {
-                    v2 = *v9;
-                    v9 = &v9[1];
-                    *v17 = v2;
-                    v17 = &v17[1];
-                } while (v2);
-            }
-        } else {
+        *(unsigned int*) (v16 + 0x18 + (int) g_1015ea0) = 0xa4;
+        if (v5 == *(unsigned char*) ((char*) a0 + 0x164)) {
             fcn_00472640(v6, 0);
+        } else if (!v5) {
+            *(unsigned int*) (v16 + 0x1cc + (int) g_1015ea0) = 0x56;
+            *(unsigned int*) (v16 + 0x1d4 + (int) g_1015ea0) = 0xa4;
+            v9 = (char*) *v18;
+            v17 = (char*) (v16 + 0xcc + (int) g_1015ea0);
+            do {
+                v2 = *v9;
+                v9 = &v9[1];
+                *v17 = v2;
+                v17 = &v17[1];
+            } while (v2);
         }
         v18 = &v18[1];
         if (0x10 <= v8 + 2) {
@@ -106,15 +111,15 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
         }
         v8 = v1;
     }
-    *(int*) 0x100f1dc = -1;
+    g_100f1dc = -1;
     while (fcn_005373e0((void*) 0x5d97f0, 0x657c7)) {
-        if (*(int*) 0x14ce8e0) {
-            *(int*) 0x774654 = 1;
+        if (g_14ce8e0) {
+            g_774654 = 1;
         }
-        if (*(int*) 0x14ce8d8 && *(int*) 0x67d370 != -1) {
-            if (fcn_005463a0(2, 2, *(unsigned short*) 0x774970, 0, 0x26)) {
-                v7 = (unsigned int) *(unsigned short*) 0x774970 * 0x21c;
-                io_FormatTextBuffer(v12, 0x15bd, *(unsigned short*) 0x774970,
+        if (g_14ce8d8 && g_67d370 != -1) {
+            if (fcn_005463a0(2, 2, g_774970, 0, 0x26)) {
+                v7 = (unsigned int) g_774970 * 0x21c;
+                io_FormatTextBuffer(v12, 0x15bd, g_774970,
                              *(unsigned char*) (v7 + 0x7f4e04) +
                                  (-(unsigned int) (*(char*) (v7 + 0x7f4ca9) != '\0') &
                                   0x5f) +
@@ -123,7 +128,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
             } else {
                 fcn_00471a30(v4, 0);
                 for (v8 = 0; v8 <= 0xf; v8++) {
-                    if (*(int*) 0x100f1dc == v8 + 0x5a2) {
+                    if (g_100f1dc == v8 + 0x5a2) {
                         break;
                     }
                 }
@@ -133,7 +138,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
                     if (v5 != *(unsigned char*) ((char*) a0 + 0x164)
                         && fcn_00525f60((char*) a0, -v7)) {
                         for (v8 = 0; v8 <= 0xf; v8++) {
-                            if (*(int*) 0x100f1dc == v8 + 0x5a2) {
+                            if (g_100f1dc == v8 + 0x5a2) {
                                 break;
                             }
                         }
@@ -146,7 +151,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
                             if (fcn_00526120((int) v13, 1)) {
                                 fcn_004c6470(*(int*) ((char*) a0 + 4), v14);
                                 fcn_004c6ae0(*(int*) ((char*) a0 + 4), v7);
-                                *(int*) 0x774654 = 1;
+                                g_774654 = 1;
                                 v19 = 0x10;
                             }
                         }

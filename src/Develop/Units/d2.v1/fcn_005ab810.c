@@ -117,7 +117,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 					g_774654 = 1;
 				}
 			}
-		} while (fcn_005373e0((void*) 0x5ab810, 0x677c7) != 0);
+		} while (fcn_005373e0((void*) fcn_005ab810, 0x677c7) != 0);
 		fcn_00471e30((int) dlg);
 	} else {
 		q = &((struct house*) g_7f4ca0)[*(unsigned short*) (e + 0x27)];
@@ -157,7 +157,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 							io_FormatTextBuffer(buf, 0x1974, p->id, t);
 							fcn_00545d40(q->handle, -1, buf, 0, 0x5ff, 0);
 						}
-						io_FormatTextBuffer(buf, 0x1973, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
+						io_FormatTextBuffer(buf, 0x1973, 2 * (0x75 <= g_7f4c00) + 0x197a + q->state);
 						fcn_00526120(buf, 0);
 						g_774654 = 1;
 					}
@@ -165,7 +165,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 					g_774654 = 1;
 				}
 			}
-		} while (fcn_005373e0((void*) 0x5ab810, 0x677c7) != 0);
+		} while (fcn_005373e0((void*) fcn_005ab810, 0x677c7) != 0);
 		fcn_00471e30((int) dlg);
 	}
 	fcn_00532ef0();

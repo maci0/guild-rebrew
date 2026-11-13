@@ -120,7 +120,7 @@ void __cdecl fcn_004d0070(void)
 						continue;
 					}
 					v = fcn_004cefb0(e, *(char**) (*(char**) (*q + 0x184) + 0x34));
-					if (v < g_662cf8) {
+					if (v < 100.0f) {
 						found = 1;
 						if (v < best) {
 							best = v;
@@ -130,7 +130,7 @@ void __cdecl fcn_004d0070(void)
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				fcn_00442d50((int) e34, (unsigned char) found);
 				if (found) {
-					t = (int) (g_6628a4 - best * g_662910 * g_6628a4);
+					t = (int) (255.0f - best * 0.01f * 255.0f);
 					c.r = (unsigned char) t;
 					c.g = 0;
 					c.f0 = 0;

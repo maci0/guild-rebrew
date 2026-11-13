@@ -64,15 +64,15 @@ void __cdecl fcn_005413d0(int);
 void __cdecl fcn_00541620(void)
 {
 	unsigned char panel[0x114];
-	int vals2[6];
-	int vals[6];
-	char names[6];
+	struct { unsigned char names[6]; int vals[6]; int vals2[6]; } revenue;
+
+	int dlg;
 	int info[0x15];
 	int v1d0[10];
 	int stamp[10];
 	unsigned char* win;
 	char* ent;
-	unsigned short id;
+
 	unsigned char b;
 	int a7;
 	int b200;
@@ -102,9 +102,9 @@ void __cdecl fcn_00541620(void)
 		}
 		g1f4 = (int) win;
 	}
-	id = (unsigned short) g_774970;
-	sel = (int) fcn_00509570((id & 0xffff) * 0x21c + (int) (char*) g_7f4ca0);
-	k = (id & 0xffff) * 0x21c;
+
+	sel = (int) fcn_00509570((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0);
+	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
 	*(int*) (sel + 0x3c) += *(int*) (k + 0x7f4e44) + *(int*) (k + 0x7f4e40);
 	fcn_00438b40((char*) g_6b8014, (int*) (sel + 0x8c));
 	fcn_00438cb0((char*) g_6b8014, (int*) (sel + 0x9c));
@@ -115,25 +115,25 @@ void __cdecl fcn_00541620(void)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005272e0();
 	fcn_00537320(0x24087);
-	i = d2_CreateScrollPerga();
-	fcn_00471b60(i);
+	dlg = d2_CreateScrollPerga();
+	fcn_00471b60(dlg);
 	if (g1f4 != 0) {
 		fcn_00473150((unsigned char*) g1f4);
 		g1f4 = 0;
 	}
 	fcn_004730c0(0, 0, g_1040494, g_1040490, "BLACK", 0x1e, 10);
-	d2_SetForm(i, 2);
+	d2_SetForm(dlg, 2);
 	io_AppendText(0x7d);
 	fcn_00500d60((void*) (char*) g_7f4c00, stamp);
-	d2_SetForm(i, 1);
+	d2_SetForm(dlg, 1);
 	io_AppendText(0x2007);
-	k = (id & 0xffff) * 0x21c;
+	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
 	a7 = *(int*) (k + 0x7f4e3c);
 	c1fc = a7 - *(int*) (k + 0x7f4e38);
 	if (a7 != 0) {
 		io_AppendText(0x2008, a7);
 	}
-	a7 = *(int*) ((id & 0xffff) * 0x21c + 0x7f4e38);
+	a7 = *(int*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + 0x7f4e38);
 	if (a7 != 0) {
 		io_AppendText(0x2009, a7);
 	}
@@ -198,29 +198,29 @@ void __cdecl fcn_00541620(void)
 	} else {
 		io_AppendText(0x204c, a7);
 	}
-	d2_SetForm(i, 3);
+	d2_SetForm(dlg, 3);
 	*(int*) ((char*) g_77255c + 0x28c) = 0x55;
 	io_AppendText(0x2005);
-	d2_SetForm(i, 1);
+	d2_SetForm(dlg, 1);
 	io_AppendText(0x68112c);
 	ent = (char*) fcn_00503fe0(1, 6);
 	while (ent != 0) {
-		if (*(short*) (ent + 0x27) == (short) (id & 0xffff) ||
-		    *(short*) (ent + 0x25) == (short) (id & 0xffff)) {
+		if (*(short*) (ent + 0x27) == (short) (((unsigned short)g_774970) & 0xffff) ||
+		    *(short*) (ent + 0x25) == (short) (((unsigned short)g_774970) & 0xffff)) {
 			b = *(unsigned char*) ent;
 			kind = fcn_00504bd0((int) b);
-			n = fcn_0050c1b0(ent, (int) (id & 0xffff), info);
+			n = fcn_0050c1b0(ent, (int) (((unsigned short)g_774970) & 0xffff), info);
 			if (n != 0 || (kind != 5 && kind != 6)) {
 				c1fc += *(int*) ((char*) info + 0x44);
 				e1ec += *(int*) ((char*) info + 0xc);
-				b200 += *(int*) ((char*) info + 0x48);
+				b200 += *(int*) ((char*) info + 0x40);
 				d1f8 += *(int*) ((char*) info + 0x50);
 			}
 		}
 		ent = (char*) fcn_00503e80();
 	}
-	n = fcn_0050d640(id & 0xffff, 0, 0xffff, v1d0);
-	i = 0;
+	n = fcn_0050d640(((unsigned short)g_774970) & 0xffff, 0, 0xffff, v1d0);
+	i = 0; k = 0;
 	if (n > 0) {
 		do {
 			dbl = (double) *(int*) ((char*) (int) v1d0[i] + 0xc0) * g_6640e8
@@ -234,43 +234,43 @@ void __cdecl fcn_00541620(void)
 			io_AppendText(0x2048, k);
 		}
 	}
-	k = (id & 0xffff) * 0x21c;
+	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
 	if (*(char*) (k + 0x7f4e06) != 0 || *(char*) (k + 0x7f4e09) != 0) {
-		fcn_004fcda0(id, 0, v1d0);
-		k = (id & 0xffff) * 0x21c;
+		fcn_004fcda0(((unsigned short)g_774970), 0, v1d0);
+		k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
 		b = *(unsigned char*) (k + 0x7f4e06);
 		h1f0 = (-(*(char*) (k + 0x7f4ca9) != 0) & 0x28) + 0x253;
 		if (b != 0) {
 			io_AppendText(0x2049, (int) b + h1f0, v1d0[1]);
 		}
-		b = *(unsigned char*) ((id & 0xffff) * 0x21c + 0x7f4e09);
+		b = *(unsigned char*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + 0x7f4e09);
 		if (b != 0) {
 			io_AppendText(0x2049, (int) b + h1f0, v1d0[2]);
 		}
 		d1f8 += v1d0[1] + v1d0[2];
 		c1fc += v1d0[1] + v1d0[2];
 	}
-	n = fcn_004fcb50(id, vals, 0);
+	n = fcn_004fcb50(((unsigned short)g_774970), (int*)&revenue, 0);
 	if (n != 0) {
 		i = 0;
 		do {
-			b200 = a7;
-			if (names[i] == 0) {
+
+			if (revenue.names[i] == 0) {
 				break;
 			}
-			io_AppendText(0x6a4340, (unsigned char) names[i] + 0x1f64,
-				vals2[i], vals[i]);
-			a7 += vals[i];
-			d1f8 -= vals[i];
-			f1e8 += vals[i];
+			io_AppendText(0x6a4340, (unsigned char) revenue.names[i] + 0x1f64,
+				revenue.vals2[i], revenue.vals[i]);
+			b200 += revenue.vals[i];
+			d1f8 -= revenue.vals[i];
+			f1e8 += revenue.vals[i];
 			i++;
-			b200 = a7;
+
 		} while (i < 6);
 	}
 	if (e1ec != 0) {
 		io_AppendText(0x204a, e1ec);
 	}
-	n = fcn_0050d5d0(id & 0xffff, 0, v1d0);
+	n = fcn_0050d5d0(((unsigned short)g_774970) & 0xffff, 0, v1d0);
 	a7 = 0;
 	i = 0;
 	if (n > 0) {
@@ -293,7 +293,7 @@ void __cdecl fcn_00541620(void)
 	} else if (c1fc < 0) {
 		io_AppendText(0x204e, c1fc);
 	}
-	n = fcn_0050d2a0((id & 0xffff) * 0x21c + (int) (char*) g_7f4ca0);
+	n = fcn_0050d2a0((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0);
 	io_AppendText(0x2029, ((n - f1e8) - e1ec) - a7);
 	fcn_005459a0(0xffff);
 	fcn_00476970(g_77250c);
@@ -303,9 +303,9 @@ void __cdecl fcn_00541620(void)
 	g_1040480 = g_1040494;
 	g_1040484 = 0;
 	g_104048c = g_1040490;
-	d2_SetForm(i, 1);
+	d2_SetForm(dlg, 1);
 	k = g_772514;
-	d2_SetForm(i, 2);
+	d2_SetForm(dlg, 2);
 	io_AppendText(0x7d);
 	fcn_0046e830(-1, -1, g_772514, k, 0x767);
 	*(int*) (k * 0x3cc + 0x10161b4) = 0x18;
@@ -340,7 +340,7 @@ fold:
 		fcn_00473150((unsigned char*) g1f4);
 		g1f4 = 0;
 	}
-	n = fcn_0050db40((char*) ((id & 0xffff) * 0x21c + (int) (char*) g_7f4ca0),
+	n = fcn_0050db40((char*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0),
 		-(f1e8 + e1ec + a7));
 	if (n != 0) {
 		memset(panel, 0, 0x114);
@@ -348,14 +348,14 @@ fold:
 		*(unsigned char*) (panel + 0x26) = 0x60;
 		*(int*) (panel + 0x14) = -1;
 		*(unsigned char*) (panel + 0x30) = 1;
-		*(int*) (panel + 0xc) = *(int*) ((id & 0xffff) * 0x21c + 0x7f4ca4);
+		*(int*) (panel + 0xc) = *(int*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + 0x7f4ca4);
 		*(int*) (panel + 0x34) = *(int*) (panel + 0xc);
 		if (g1f4 != 0) {
 			fcn_00473150((unsigned char*) g1f4);
 		}
 		fcn_004e5a00(panel);
 		if (g_774968 != 0) {
-			fcn_005413d0(id & 0xffff);
+			fcn_005413d0(((unsigned short)g_774970) & 0xffff);
 		}
 		g_774968 = 0;
 	}

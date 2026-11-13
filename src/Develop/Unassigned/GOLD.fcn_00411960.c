@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <string.h>
-
+typedef struct { unsigned int words[3]; } GOLD_ATTACH_OPTIONS; /* Inferred 12-byte argument record. */
 unsigned int __cdecl fcn_00401040(char*);
 int __cdecl fcn_00433f40(unsigned int);
 void __cdecl fcn_0044e4a0(char*, unsigned int, int);
-int __cdecl fcn_00435550(char*, unsigned int, unsigned int, unsigned int, unsigned int);
+int __cdecl fcn_00435550(char*, unsigned int, GOLD_ATTACH_OPTIONS);
 char* __cdecl fcn_0044e2e0(char*, char*, int);
 
 /* ADDRESS: GOLD 0x00411960 */
@@ -12,7 +12,7 @@ int __cdecl fcn_00411960(char* object, char* name, unsigned int flags)
 {
 	char key[256];
 	char path[512];
-	unsigned int options[3];
+	GOLD_ATTACH_OPTIONS options;
 	unsigned char* bytes;
 	char* fillDst;
 	int fillCount;
@@ -25,7 +25,7 @@ int __cdecl fcn_00411960(char* object, char* name, unsigned int flags)
 	id = fcn_00401040(key);
 	if (!fcn_00433f40(id))
 		fcn_0044e4a0(name, id, 0);
-	fillDst = (char*) options;
+	fillDst = (char*) &options;
 	fillCount = sizeof(options);
 	__asm {
 		mov edi, fillDst
@@ -44,7 +44,7 @@ int __cdecl fcn_00411960(char* object, char* name, unsigned int flags)
 		add ecx, ebx
 		rep stosb
 	}
-	bytes = (unsigned char*) options;
+	bytes = (unsigned char*) &options;
 	if (flags & 2) bytes[1] |= 0x10;
 	if (flags & 1) bytes[1] &= 0xef;
 	if (flags & 4) bytes[1] |= 2;
@@ -53,7 +53,7 @@ int __cdecl fcn_00411960(char* object, char* name, unsigned int flags)
 	bytes[8] |= 2;
 	if (*(char**) (object + 0x1ec) != 0 &&
 	    fcn_00435550(*(char**) (object + 0x1ec) + 0xf4, id,
-	        options[0], options[1], options[2]))
+	        options))
 		return 1;
 	sprintf(path, "%s%s.oam", *(char**) 0xfba940, name);
 	result = fcn_0044e2e0(path, object, 1);

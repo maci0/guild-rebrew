@@ -46,7 +46,7 @@ int __cdecl fcn_0050c5d0(char*, int*);
 int __cdecl fcn_0050c710(char*, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_RandomMod(int);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 int __cdecl _ftol(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00546190(char*);

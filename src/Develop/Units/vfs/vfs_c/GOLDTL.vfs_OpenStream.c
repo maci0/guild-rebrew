@@ -310,7 +310,7 @@ finalize:
 	if (stream != 0) {
 		g_stream_count++;
 		*(unsigned char*) (stream + 0x13c) = (unsigned char) (((*(unsigned char*) (stream + 0x13c) & 0xf6) ^ (*(unsigned char*) &mode14 & 1)) | ((mode18 & 1) << 3));
-		sprintf(stream, "0x%08X -> length: %u, read: %u compressed: %u", buf, size, mode18, mode18);
+		sprintf(stream, "0x%08X -> length: %u, read: %u compressed: %u", buf, size, *(unsigned char*) &mode14, mode18);
 	}
 	result = stream;
 done:

@@ -1,4 +1,7 @@
 #include <string.h>
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00; extern char g_7f4ca0[];
+extern int g_100f1dc, g_67d370, g_14ce8e0, g_774654;
 
 extern unsigned int* g_1015ea0;
 extern int g_772514;
@@ -95,17 +98,17 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 	total = fcn_00470820(0, 0, (char*) 0x6a9750);
 	fcn_00471b60(total);
 	d2_SetForm(total, 0);
-	fcn_00533dc0(*(int*) 0x772514, 0x70f, 0x741);
+	fcn_00533dc0(g_772514, 0x70f, 0x741);
 	d2_SetForm(total, 3);
 	io_AppendText(0x1806);
 	fcn_0052a0c0(a0, 0);
 	fcn_00594340();
 	fcn_00471b60(total);
 	d2_SetForm(total, 2);
-	y = *(int*) (0x1015f4c + *(int*) 0x772514 * 0x3cc) / 2 - 0x80;
+	y = *(int*) (0x1015f4c + g_772514 * 0x3cc) / 2 - 0x80;
 	cnt = 0;
 	for (x = 0x19; x < 0x109; x += 0x50) {
-		h = fcn_0046f740(y, x, (int) ids[cnt] + 0xdf, *(int*) 0x772514);
+		h = fcn_0046f740(y, x, (int) ids[cnt] + 0xdf, g_772514);
 		g_1015ea0[h * 0xbd + 0x17] = 1;
 		g_1015ea0[h * 0xbd + 0x74] = 3;
 		g_1015ea0[h * 0xbd + 0x77] = 100;
@@ -153,9 +156,9 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 			}
 			fcn_0046f9b0(handles[i], text);
 		}
-		if (*(int*) 0x100f1dc != -1) {
+		if (g_100f1dc != -1) {
 			for (sel = 0; sel < 3; sel++) {
-				if (handles[sel] == *(int*) 0x67d370)
+				if (handles[sel] == g_67d370)
 					break;
 			}
 			if (sel < 3) {
@@ -163,16 +166,14 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 				req.kind = 0x15;
 				req.f36 = 1;
 				req.f08 = *(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c
-					+ 0x7f4ca4);
+					+ (int)(g_7f4ca0 + 4));
 				req.f0c = *(int*) (a0 + 1);
-				req.f28 = *(int*) 0x7f4c00;
-				req.f2c = *(int*) 0x7f4c04;
-				req.f30 = *(int*) 0x7f4c08;
-				req.f34 = *(unsigned short*) 0x7f4c0c;
+				*(pos14_7f4c00*)&req.f28 = g_7f4c00;
+
 				req.f5a = (unsigned short) ids[sel];
 				req.f60 = *(int*) (a1 + 2);
 				cnt = 0;
-				p = (char*) 0x7f4ca4;
+				p = g_7f4ca0 + 4;
 				do {
 					if (cnt >= 6)
 						break;
@@ -196,11 +197,10 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 					}
 					fcn_004c4480(sel);
 				}
-
 			}
 		}
-		else if (*(int*) 0x14ce8e0 != 0)
-			*(int*) 0x774654 = 1;
+		else if (g_14ce8e0 != 0)
+			g_774654 = 1;
 		sel = fcn_005373e0(0x59ecc0, 0x677c7);
 	}
 	sv_ClearObjectSelection();

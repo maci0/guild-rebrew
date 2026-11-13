@@ -1,12 +1,12 @@
 /* Reconstructed from native disassembly; frame slots follow the decompiler map. */
-
 #include <math.h>
+extern void* g_6b5c5c; extern int g_67a370; extern char* g_6b8300;
 
 int __cdecl fcn_00402610();
 int __cdecl fcn_00405960();
 int __cdecl fcn_00405a50();
 int __cdecl fcn_00407760();
-int __cdecl fcn_00407e30();
+char __cdecl fcn_00407e30();
 int __cdecl fcn_00408250();
 int __cdecl fcn_00408270();
 int __cdecl fcn_004082d0();
@@ -16,7 +16,7 @@ int __cdecl fcn_0041db70();
 int __cdecl fcn_0041ddd0();
 int __cdecl fcn_00421350();
 int __cdecl fcn_0045b920();
-int __cdecl fcn_0045b990();
+char __cdecl fcn_0045b990();
 int __cdecl fcn_0064d228();
 
 /* ADDRESS: GOLDTL 0x00408540 */
@@ -67,19 +67,19 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
   if (*(char *)(v28 + 9) != '-')
     return -1;
   v35 = fcn_00402610(v27);
-  fcn_00408250((*(int *)0x6b5c5c),v35);
+  fcn_00408250(((int)g_6b5c5c),v35);
   v36 = (int)(*(double *)0x662908 + (*(float *)0x662914 / *(float *)(v35 + 0x10)));
   if (v36 > 10)
     v36 = 10;
   v10 = *(int *)(v28 + 0xf8);
-  if (*(int *)((*(int *)0x67a370) + 0xac + v6 * 0x3dc)) 
-    *(unsigned int *)((*(int *)0x6b5c5c) + 0x10) = 0x42700000;
+  if (*(int *)(g_67a370 + 0xac + v6 * 0x3dc)) 
+    *(unsigned int *)(((int)g_6b5c5c) + 0x10) = 0x42700000;
   else {
-    *(unsigned int *)((*(int *)0x6b5c5c) + 0x10) = 0x42700000;
+    *(unsigned int *)(((int)g_6b5c5c) + 0x10) = 0x42700000;
   }
   v9 = (unsigned char *)(*(int *)(v28 + 0xf4) + v10 * 2);
-  fcn_004082d0(v35,*v9,v9[1],(*(int *)0x6b5c5c),&v15,&v14);
-  v28 = (*(int *)0x6b5c5c);
+  fcn_004082d0(v35,*v9,v9[1],((int)g_6b5c5c),&v15,&v14);
+  v28 = ((int)g_6b5c5c);
   if (*(int **)(v27 + 0x124))
     fcn_00408270(v28,**(int **)(v27 + 0x124) + 0x4c,&v17,&v16);
   fcn_00408270(v28,*(int *)(v27 + 0x34) + 0x4c,&v19,&v18);
@@ -303,7 +303,7 @@ label_40892d:
       }
       v23 = (int *)(unsigned int)*(unsigned char *)(*(int *)(v28 + 0xf4) + v27 * 2);
       v22 = (unsigned int)*(unsigned char *)(*(int *)(v28 + 0xf4) + 1 + v27 * 2);
-      if ((*(int *)(a0 + 0x88) == 0x10432c0) || (v27 = 2, (*(int *)0x6b8300)))
+      if ((*(int *)(a0 + 0x88) == 0x10432c0) || (v27 = 2, g_6b8300))
         v27 = 5;
       v4 = fcn_00407e30(v35,*(int *)(a0 + 0x34) + 0x4c,v28 + 0x144,v23,v22,&v14,&v26,v36 * v27,*(unsigned int *)(v28 + 0x160) | 1);
       v13 = v35;
@@ -320,7 +320,7 @@ label_40892d:
         v14 = v24;
       }
       else {
-        if ((*(int *)(a0 + 0x88) == 0x10432c0) || (v27 = 2, (*(int *)0x6b8300)))
+        if ((*(int *)(a0 + 0x88) == 0x10432c0) || (v27 = 2, g_6b8300))
           v27 = 5;
         v4 = fcn_00407e30(v35,*(int *)(a0 + 0x34) + 0x4c,v28 + 0x144,v24,v15,&v14,&v26,v36 * v27,*(unsigned int *)(v28 + 0x160) | 1);
         if (v4) { 

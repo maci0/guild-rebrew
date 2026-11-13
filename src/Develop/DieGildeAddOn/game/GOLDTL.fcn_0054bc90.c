@@ -237,14 +237,8 @@ dialog:
 		io_AppendText(0x1771, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v6, *v3);
 	else
 		io_AppendText(0x1770, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v10, v6, *v3);
-	*(int*) (a0 + 0x44) = *(int*) &g_7f4c00;
-	*(int*) (a0 + 0x48) = *(int*) &g_7f4c04;
-	*(int*) (a0 + 0x4c) = *(int*) 0x7f4c08;
-	*(unsigned short*) (a0 + 0x50) = *(unsigned short*) 0x7f4c0c;
-	*(int*) (a0 + 0x52) = *(int*) &g_7f4c00;
-	*(int*) (a0 + 0x56) = *(int*) &g_7f4c04;
-	*(int*) (a0 + 0x5a) = *(int*) 0x7f4c08;
-	*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) 0x7f4c0c;
+	*(pos14_7f4c00*) (a0 + 0x44) = g_7f4c00;
+	*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 	fcn_00500bb0(a0 + 0x52, 0x18, 0, 0);
 	fcn_004c3030(-7, 0, (char*) 0x6a5a34, 0);
 	*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;

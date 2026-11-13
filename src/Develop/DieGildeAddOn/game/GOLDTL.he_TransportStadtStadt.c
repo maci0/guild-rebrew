@@ -54,9 +54,8 @@ void __cdecl he_TransportStadtStadt(char *v2)
 		if (!v6)
 			v6 = *(char **)(v5 + 0x61);
 		fcn_00455350(v6, v6 + 0x4c, l_pos);
-		v7 = *(int *)(v2 + 0xac);
 		if (fcn_00505340((unsigned char *)v4))
-			v6 = (char *)fcn_00502cd0(*(int *)(v3 + 0x5d), 1, 1, v7);
+			v6 = (char *)fcn_00502cd0(*(int *)(v3 + 0x5d), 1, 1, *(int *)(v2 + 0xac));
 		else
 			v6 = (char *)fcn_00502cd0(*(int *)(v4 + 0x5d), 1, 1,
 						  *(int *)(v2 + 0xac));

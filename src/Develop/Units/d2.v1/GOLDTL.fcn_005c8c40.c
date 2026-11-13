@@ -155,7 +155,7 @@ void __cdecl fcn_005c8c40(void)
 				i += 0x18;
 			}
 		}
-		if (fcn_005373e0(0x5c8c40, 0x657c7) != 0) {
+		if (fcn_005373e0((int) fcn_005c8c40, 0x657c7) != 0) {
 			continue;
 		}
 		*(int*) 0x77533c = *(int*) (ofs + (unsigned long)&g_102cbc8);

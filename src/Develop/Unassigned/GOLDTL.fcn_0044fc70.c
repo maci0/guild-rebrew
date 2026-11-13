@@ -136,9 +136,30 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 	float x1;
 	float z1;
 	float tmp[3];
+	void* block_dst;
+	void* block_src;
+	int block_count;
 
 	strcpy(pfad, name);
-	memset(&info, 0, sizeof(info));
+	block_dst = &info;
+	block_count = sizeof(info);
+	__asm {
+        mov edi, block_dst
+        mov ebx, block_count
+        xor eax, eax
+        lea ecx, [edi+edi*2]
+        and ecx, 3
+        sub ebx, ecx
+        jle short L_tail_info
+        rep stosb
+        mov ecx, ebx
+        and ebx, 3
+        shr ecx, 2
+        rep stosd
+    L_tail_info:
+        add ecx, ebx
+        rep stosb
+    }
 	stream = vfs_Tfopen(name, "rb", g_6b7fdc);
 	if (stream == 0) {
 		return;
@@ -203,14 +224,32 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 					continue;
 				}
 				for (n = 0; n < info.anzahl_pol; n++) {
-					if (info.pol[n].material == j) {
+					if (info.pol[n].material == i) {
 						info.pol[n].material = j - 1;
 					}
 				}
-				marker[j] = 1;
+				marker[i] = 1;
 			}
 		}
-		memset(marker, 0, info.anzahl_mat);
+	block_dst = marker;
+	block_count = info.anzahl_mat;
+	__asm {
+        mov edi, block_dst
+        mov ebx, block_count
+        xor eax, eax
+        lea ecx, [edi+edi*2]
+        and ecx, 3
+        sub ebx, ecx
+        jle short L_tail_marker
+        rep stosb
+        mov ecx, ebx
+        and ebx, 3
+        shr ecx, 2
+        rep stosd
+    L_tail_marker:
+        add ecx, ebx
+        rep stosb
+    }
 		for (i = 0; i < info.anzahl_pol; i++) {
 			material = info.pol[i].material;
 			if (material >= 0) {
@@ -236,10 +275,48 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 	}
 	obj->anzahl_pol = info.anzahl_pol;
 	obj->pol = (FL_POL*) m_alloc(info.anzahl_pol * 0x38, "d3_io_fs:AddFLChunk(pol)");
-	memcpy(obj->pol, info.pol, info.anzahl_pol * sizeof(FL_POL));
+	block_dst = obj->pol;
+	block_src = info.pol;
+	block_count = info.anzahl_pol * sizeof(FL_POL);
+	__asm {
+        mov edi, block_dst
+        mov esi, block_src
+        mov ebx, block_count
+        lea ecx, [edi+edi*2]
+        and ecx, 3
+        sub ebx, ecx
+        jle short L_tail_pol
+        rep movsb
+        mov ecx, ebx
+        and ebx, 3
+        shr ecx, 2
+        rep movsd
+    L_tail_pol:
+        add ecx, ebx
+        rep movsb
+    }
 	marker = (unsigned char*) m_alloc(info.anzahl_mat, "d3_io_fs:Materials(bool)");
 	tmpmat = (FL_MAT*) m_alloc(info.anzahl_mat * 0xe0, "d3_io_fs:TempMat[ReOrder]");
-	memcpy(tmpmat, info.mat, info.anzahl_mat * sizeof(FL_MAT));
+	block_dst = tmpmat;
+	block_src = info.mat;
+	block_count = info.anzahl_mat * sizeof(FL_MAT);
+	__asm {
+        mov edi, block_dst
+        mov esi, block_src
+        mov ebx, block_count
+        lea ecx, [edi+edi*2]
+        and ecx, 3
+        sub ebx, ecx
+        jle short L_tail_temp
+        rep movsb
+        mov ecx, ebx
+        and ebx, 3
+        shr ecx, 2
+        rep movsd
+    L_tail_temp:
+        add ecx, ebx
+        rep movsb
+    }
 	dstoff = 0;
 	newcount = 0;
 	for (i = 0; i < obj->anzahl_pol; i++) {
@@ -256,7 +333,26 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 				obj->pol[n].material = newcount;
 			}
 		}
-		memcpy((char*) info.mat + dstoff, &tmpmat[material], sizeof(FL_MAT));
+	block_dst = (char*) info.mat + dstoff;
+	block_src = &tmpmat[material];
+	block_count = sizeof(FL_MAT);
+	__asm {
+        mov edi, block_dst
+        mov esi, block_src
+        mov ebx, block_count
+        lea ecx, [edi+edi*2]
+        and ecx, 3
+        sub ebx, ecx
+        jle short L_tail_material
+        rep movsb
+        mov ecx, ebx
+        and ebx, 3
+        shr ecx, 2
+        rep movsd
+    L_tail_material:
+        add ecx, ebx
+        rep movsb
+    }
 		dstoff += sizeof(FL_MAT);
 		newcount++;
 	}

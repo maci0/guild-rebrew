@@ -105,7 +105,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 					start = buf + 8;
 				}
 				for (i = 0; i < 27; i++) {
-					if (strcmp(start, (char*) (0x67fcb8 + i * 0x40)) == 0) {
+					if (strncmp(start, (char*) (0x67fcb8 + i * 0x40), strlen((char*) (0x67fcb8 + i * 0x40))) == 0) {
 						break;
 					}
 				}
@@ -135,7 +135,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 		a0 = atoi(buf); start = buf + 8;
 	}
 	for (i = 0; i < 27; i++) {
-		if (strcmp(start, (char*) (0x67fcb8 + i * 0x40)) == 0) {
+		if (strncmp(start, (char*) (0x67fcb8 + i * 0x40), strlen((char*) (0x67fcb8 + i * 0x40))) == 0) {
 			break;
 		}
 	}

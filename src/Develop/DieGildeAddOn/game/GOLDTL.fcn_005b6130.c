@@ -1,6 +1,6 @@
 extern char* g_1015ea0; /* 0x1015ea0, GUI pool, stride 0x2f4 */
 extern char* g_773d78;   /* 0x773d78 */
-extern int g_67d370;     /* 0x67d370 */
+extern int g_772514; extern int g_67d370;     /* 0x67d370 */
 extern int g_100f1dc;    /* 0x100f1dc */
 extern int g_14abc14;    /* 0x14abc14 */
 
@@ -50,7 +50,7 @@ void __cdecl fcn_005b6130(int a0, char* a1)
                 fcn_0046f940(v3, v5);
                 if (a1 != v2 &&
                     *(int*) (v4 * 4 + 0x777cd0) == -1) {
-                    v3 = fcn_0046f740(0, v7, 5, *(int*) 0x772514);
+                    v3 = fcn_0046f740(0, v7, 5, g_772514);
                     *(int*) (v4 * 4 + 0x777cd0) = v3;
                     *(unsigned int*) (g_1015ea0 + 0x5c + v3 * 0x2f4) = 1;
                     *(char**) (g_1015ea0 + 0x2f0 +

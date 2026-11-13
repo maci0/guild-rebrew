@@ -76,10 +76,10 @@ void __cdecl fcn_00440870(char* o, char* c)
 	fcn_004518a0(v);
 	d = *(float*) 0x6628cc
 	    - (float) fabs(*(float*) 0x662d40 * v[0] + *(float*) 0x662d44 * v[1] + *(float*) 0x662d48 * v[2]);
-	((IDev*) *(void**) (c + 0x1a4))->v->Lock((IDev*) *(void**) (c + 0x1a4), 0, 0, (void**) &o, 0x2000);
 	mask = *(int*) (m + 0xc);
 	bmp = *(char**) (m + 0x18);
 	stride = *(int*) m;
+	((IDev*) *(void**) (c + 0x1a4))->v->Lock((IDev*) *(void**) (c + 0x1a4), 0, 0, (void**) &o, 0x2000);
 	map = *(char**) (c + 0x1b8);
 	t = (int*) (map + 0xc);
 	e = (int*) (map + 4);

@@ -31,7 +31,7 @@ void __cdecl fcn_004faed0(float* out)
 	char* rec;
 	char* ent;
 	char* pos;
-	unsigned char type;
+	unsigned char type; StatsProto* proto;
 	int total;
 	int slot0_count;
 	int slot1_count;
@@ -83,10 +83,10 @@ void __cdecl fcn_004faed0(float* out)
 		total++;
 		ent = *(char**) (rec + 0x16c);
 		if (ent != 0) {
-			pos = *(char**) (ent + 0x61);
-			slot0_count++;
+			proto = (StatsProto*)lpGebaeudePROT; type = *(unsigned char*)ent;
+			pos = *(char**) (ent + 0x61); proto += type; slot0_count++;
 			if (pos != 0) {
-				type = ((StatsProto*)lpGebaeudePROT)[*(unsigned char*)ent].kind;
+				type = proto->kind;
 				if (!(type >= 0x0b && type <= 0x0d) && type != 0x10) {
 					if (fcn_004fa6f0(pos + 0x4c, &x, &y) != 0) {
 						idx = y + x * 8;
@@ -97,10 +97,10 @@ void __cdecl fcn_004faed0(float* out)
 		}
 		ent = *(char**) (rec + 0x170);
 		if (ent != 0) {
-			pos = *(char**) (ent + 0x61);
-			slot1_count++;
+			proto = (StatsProto*)lpGebaeudePROT; type = *(unsigned char*)ent;
+			pos = *(char**) (ent + 0x61); proto += type; slot1_count++;
 			if (pos != 0) {
-				type = ((StatsProto*)lpGebaeudePROT)[*(unsigned char*)ent].kind;
+				type = proto->kind;
 				if (!(type >= 0x0b && type <= 0x0d) && type != 0x10) {
 					if (fcn_004fa6f0(pos + 0x4c, &x, &y) != 0) {
 						idx = y + x * 8;
@@ -114,20 +114,20 @@ void __cdecl fcn_004faed0(float* out)
 	for (n = 0x100; n != 0; n--) {
 		type = *(unsigned char*) rec;
 		if (type != 0 && type <= 0x43 && *(short*) (rec + 0x27) != -1) {
-			weight_a = weight_a + *(unsigned short*) (g_696178 + type * 4);
+			proto = &((StatsProto*)lpGebaeudePROT)[type]; weight_a = weight_a + *(unsigned short*) (g_696178 + type * 4);
 			weight_b = weight_b + *(unsigned short*) (g_696178 + type * 4 + 2);
 			sum_c = sum_c + *(unsigned short*) (g_696178 + type * 4 + 1);
 			if (*(unsigned short*) (g_696178 + type * 4 + 1) != 0) {
 				sum_a = sum_a
-				    + ((StatsProto*)lpGebaeudePROT)[type].field247;
+				    + proto->field247;
 				sum_b = sum_b
-				    + ((StatsProto*)lpGebaeudePROT)[type].field248;
+				    + proto->field248;
 			}
 			if (*(unsigned short*) (g_696178 + type * 4 + 3) != 0) {
 				sum_d = sum_d
-				    + ((StatsProto*)lpGebaeudePROT)[type].field247;
+				    + proto->field247;
 				slot0_e = slot0_e
-				    + ((StatsProto*)lpGebaeudePROT)[type].field248;
+				    + proto->field248;
 			}
 		}
 		rec += 0xa9;

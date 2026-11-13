@@ -46,23 +46,12 @@ void __cdecl fcn_0055cc80(char* self)
 	S55cc80Packet* packet;
 	unsigned short* answer;
 	char* q;
-	int state;
-	int slot;
-	int started;
-	int count;
+	int state, slot, started, count;
 	int t;
-	int src;
+	int src; S55cc80Proto* proto; unsigned char job;
 
 	state = *(int*) (self + 0x70);
 	switch (state) {
-	case -2:
-	case -1:
-		fcn_00546190(self);
-		return;
-	case 0:
-		state = *(int*) (self + 0x70) + 1;
-		*(int*) (self + 0x70) = state;
-		return;
 	case 1:
 		if (fcn_00500cb0(self + 0x52, (char*) &g_7f4c00) >= 0) {
 			return;
@@ -74,30 +63,33 @@ void __cdecl fcn_0055cc80(char* self)
 		}
 		slot = packet->slot;
 		t = (int)fcn_005101e0((char*) &g_7f4ca0 + slot * 0x21c, packet->idx0, *(unsigned char*)(self + 0xac), -1);
-		src = gm_AccumulateTyped2((char*) &g_7f4ca0 + slot * 0x21c);
+		proto = &((S55cc80Proto*)lpGebaeudePROT)[packet->idx0];
+		src = gm_AccumulateTyped2((char*) &g_7f4ca0 + packet->slot * 0x21c);
 		if (t > src) {
 			io_FormatTextBuffer(buf, 0x1a41, (char*) packet);
-			he_MessageBoxQuickjump(*(int*) ((unsigned long)&g_7f4ca4 + slot * 0x21c), *(int*) (self + 0x10), buf, 0, 0x5f2, packet->handle, *(int*) (self + 0xb4), 0, 0);
+			he_MessageBoxQuickjump(*(int*) ((unsigned long)&g_7f4ca4 + packet->slot * 0x21c), *(int*) (self + 0x10), buf, 0, 0x5f2, packet->handle, *(int*) (self + 0xb4), 0, 0);
 			fcn_00546190(self);
 			return;
 		}
 		started = 0;
 		{
 			int* p;
-
 			p = (int*) (self + 0xb0);
-			if (*p <= 0) {
-				started = 1;
-			} else {
-				q = (char*) fcn_004c6090((char*) packet, 1, 0, ((S55cc80Proto*)lpGebaeudePROT)[packet->idx0].bytes[0x223 + *(unsigned char*)(self + 0xac)]);
-				*(int*) (self + 0xb8) = (int) q;
+			for (; started < 1; started++, p++) {
+				if (*p > 0) {
+					q = (char*) fcn_004c6090((char*) packet, 1, 0, proto->bytes[0x223 + *(unsigned char*)(self + 0xac)]);
+					*(int*) (self + 0xb8) = (int) q;
+					break;
+				}
 			}
 		}
 		if (started >= 1) {
 			fcn_00546190(self);
 			return;
 		}
-		state = *(int*) (self + 0x70) + 1;
+		state = *(int*) (self + 0x70);
+	case 0:
+		state++;
 		*(int*) (self + 0x70) = state;
 		return;
 	case 2:
@@ -117,25 +109,26 @@ void __cdecl fcn_0055cc80(char* self)
 			fcn_00546190(self);
 			return;
 		}
+		proto = &((S55cc80Proto*)lpGebaeudePROT)[packet->idx0];
 		q = fcn_004c4480(*(int*) (self + 0xb8));
+		job = proto->bytes[0x223 + *(unsigned char*)(self + 0xac)];
 		*(unsigned char*) (q + 0x165) = 0;
-		*(unsigned char*) (q + 0x164) = ((S55cc80Proto*)lpGebaeudePROT)[packet->idx0].bytes[0x223 + *(unsigned char*)(self + 0xac)];
-		{
+		*(unsigned char*) (q + 0x164) = job;
+		for (count = 0; count < 1; count++) {
 			int* p;
-
-			p = (int*) (self + 0xb0);
+			p = (int*) (self + 0xb0) + count;
 			if (*p <= 0) {
-				goto move;
+				continue;
 			}
 			t = (int)fcn_005101e0((char*) &g_7f4ca0 + packet->slot * 0x21c, packet->idx0, *(unsigned char*)(self + 0xac), -1);
-			*(int*) (self + 0xb0) = *(int*) (self + 0xb0) - 1;
+			*p = *p - 1;
 			if (*(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 6 || *(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
 				io_FormatTextBuffer(buf, 0x1bb1, t, (unsigned int)answer[0], (char*) packet);
 				he_MessageBoxQuickjump(*(int*)((unsigned long)&g_7f4ca4+(*(unsigned short*)(self+8)) * 0x21c), packet->handle, buf, 0, 0x5f2, packet->handle, *(int*)(self+0xb4), 0, 0x6a6278);
 			}
 			fcn_004c51a0(*(int*) (answer + 2), *(int*) ((unsigned long)&g_7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(unsigned char*) &g_773d75, t);
+			break;
 		}
-	move:
 		t = *(int*) (self + 0xb4);
 		if (t == 0) {
 			packet = (S55cc80Packet*) fcn_00502cd0(packet->kind, 1, 0, packet->id);
@@ -151,13 +144,20 @@ void __cdecl fcn_0055cc80(char* self)
 		}
 	send:
 		cm_RequestChrMoveToUniverse(*(int*) (self + 0xbc), *(int*) (self + 0x10), t, (char*) 0x675908);
-		if (*(int*) (self + 0xb0) <= 0) {
+		for (count = 0; count < 1; count++) {
+			if (((int*) (self + 0xb0))[count] > 0) break;
+		}
+		if (count >= 1) {
 			fcn_00546190(self);
 			return;
 		}
 		t = gm_RandomMod(10) & 0xffff;
 		fcn_00500bb0(self + 0x52, 0, t + 10, 0);
 		*(int*) (self + 0x70) = 1;
+		return;
+	case -2:
+	case -1:
+		fcn_00546190(self);
 		return;
 	}
 }

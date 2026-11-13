@@ -39,9 +39,9 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 	if (fp == 0) {
 		goto fail;
 	}
-	hdr = m_alloc(0x40, "sbs_Load");
-	g_6b7d68 = hdr;
-	if (hdr == 0) {
+	g_6b7d68 = m_alloc(0x40, "sbs_Load");
+
+	if (g_6b7d68 == 0) {
 		result = -1;
 		goto done;
 	}
@@ -63,11 +63,11 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 		add ecx, ebx
 		rep stosb
 	}
-	if (fscanf(fp, "%s", hdr) == -1) {
+	if (fscanf(fp, "%s", g_6b7d68) == -1) {
 		result = -1;
 		goto after_banks;
 	}
-	for (p = strstr(hdr, "~"); p != 0; p = strstr(p + 1, "~")) {
+	for (p = strstr(g_6b7d68, "~"); p != 0; p = strstr(p + 1, "~")) {
 		*p = 0x20;
 	}
 	for (;;) {
@@ -82,7 +82,7 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 		if (tail != 0) {
 			*(void**) ((char*) tail + 0x104) = node;
 		} else {
-			*(void**) ((char*) hdr + 0x38) = node;
+			*(void**) (g_6b7d68 + 0x38) = node;
 		}
 		tail = node;
 		if (node == 0) {

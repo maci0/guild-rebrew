@@ -17,13 +17,13 @@ void __cdecl fcn_00459050(int self)
 	unsigned char* p;
 	float* src;
 	float m[16];
-	float v[3];
-	float dr[3];
-	float cr[3];
-	float br[3];
-	float ar[3];
-	float o1[3];
-	float o2[3];
+	float v[4];
+	float dr[4];
+	float cr[4];
+	float br[4];
+	float ar[4];
+	float o1[4];
+	float o2[4];
 	float u;
 	float* vp;
 	short* ind;
@@ -47,6 +47,7 @@ void __cdecl fcn_00459050(int self)
 	v[2] = *(float*) 0x662d48 * src[10] + *(float*) 0x662d44 * src[6] + *(float*) 0x662d40 * src[2];
 	*(float*) (p + 0x14) = (float) fmod(fcn_00451380((float*) 0x662d40, v), *(double*) 0x662958);
 	*(unsigned int*) (p + 0xc) = 0x30;
+	src = (float*) (g_6b8014 + 0x18c);
 	fcn_005ebbb9(m, src);
 	dr[0] = *(float*) 0x10425d8 * m[8] + *(float*) 0x10425d4 * m[4] + *(float*) 0x10425d0 * m[0];
 	dr[1] = *(float*) 0x10425d8 * m[9] + *(float*) 0x10425d4 * m[5] + *(float*) 0x10425d0 * m[1];

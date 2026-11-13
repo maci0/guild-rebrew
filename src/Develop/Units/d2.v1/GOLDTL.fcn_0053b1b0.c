@@ -83,19 +83,19 @@ int __cdecl fcn_0053b1b0(void)
 				fcn_00534160(0xd2, 0xec, v_len, 0x4d9);
 				v_id = fcn_00472250(dlg, 1, io_AppendText(0x1ae4));
 				j = 0;
-				for (i = 0; i < 0x14; i += 4) {
-					if (*(int*) ((char*) st + 0x18 + i) > *(int*) ((char*) 0x7e1fd8 + i))
+				for (i = 0; i < 5; i++) {
+					if (st[6 + i] > ((int*)0x7e1fd8)[i])
 						j = 0;
 					else
 						j = 1;
-					id = ids[i / 2];
+					id = ids[2 * i];
 					*(int*) (g_1015ea0 + id * 0x2f4 + 0x4c) = j;
 					*(int*) (g_1015ea0 + id * 0x2f4 + 0x60) = j;
-					if (v_len > 0 && *(int*) ((char*) st + 0x18 + i) < 126.0f)
+					if (v_len > 0 && st[6 + i] < 126.0f)
 						j = 0;
 					else
 						j = 1;
-					id = ids[i / 2 + 1];
+					id = ids[2 * i + 1];
 					*(int*) (g_1015ea0 + id * 0x2f4 + 0x4c) = j;
 					*(int*) (g_1015ea0 + id * 0x2f4 + 0x60) = j;
 				}

@@ -55,7 +55,11 @@ void __cdecl fcn_00584160(int a0)
 	if (handle != -1) {
 		fcn_0046f4c0(handle);
 		o = g_665f08;
-		fcn_00472170(*(int*) (o + 0x60), *(int*) (o + 0x64) == g_774650);
+		if (*(int*) (o + 0x64) != g_774650) {
+			fcn_00472170(*(int*) (o + 0x60), 0);
+		} else {
+			fcn_00472170(*(int*) (o + 0x60), 1);
+		}
 		o = g_665f08;
 	}
 

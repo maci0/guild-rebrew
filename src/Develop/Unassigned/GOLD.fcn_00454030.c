@@ -1,16 +1,12 @@
 /* ADDRESS: GOLD 0x00454030 */
 void __cdecl fcn_00454030(int* src, int* dst)
 {
-    int j;
     int i;
-    int* p;
+    int j;
 
-    for (i = 4; i != 0; i--) {
-        p = src;
-        for (j = 4; j != 0; j--) {
-            *dst++ = *p;
-            p += 4;
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            dst[i * 4 + j] = src[j * 4 + i];
         }
-        src++;
     }
 }

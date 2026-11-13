@@ -51,15 +51,15 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 	io_AppendText(0x139e);
 	found = 0;
 	for (i = 0; i < n; i++) {
-		if (rec[i * 0x18 + 0xc] == 2) {
-			s = (char*) gm_LookupEntityRecordById(*(int*) (rec + i * 0x18));
-			v6 = (char*) gm_LookupEntityRecordById(*(int*) (rec + i * 0x18 + 0x10));
+		if (rec[i * 0x18 + 0x10] == 2) {
+			s = (char*) gm_LookupEntityRecordById(*(int*) (rec + i * 0x18 + 4));
+			v6 = (char*) gm_LookupEntityRecordById(*(int*) (rec + i * 0x18 + 0x14));
 			if (s != 0 && v6 != 0) {
 				found |= 1;
 				if (*(char*) (s + 9) == 0) {
-					v9 = *(unsigned char*) (rec + i * 0x18 + 4) + 0x253;
+					v9 = *(unsigned char*) (rec + i * 0x18 + 8) + 0x253;
 				} else {
-					v9 = *(unsigned char*) (rec + i * 0x18 + 4) + 0x27b;
+					v9 = *(unsigned char*) (rec + i * 0x18 + 8) + 0x27b;
 				}
 				io_AppendText(0x139f, *(unsigned short*) v6, *(unsigned short*) s, v9);
 			}
@@ -73,17 +73,17 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 		io_AppendText(0x13a0);
 		i = 0;
 		for (j = 0; j < n; j++) {
-			if (rec[j * 0x18 + 8] == 3) {
+			if (rec[j * 0x18 + 0x10] == 3) {
 				i |= 1;
 				found = 0;
-				io_AppendText(0x13a1, *(unsigned char*) (rec + j * 0x18) + 0x253);
+				io_AppendText(0x13a1, *(unsigned char*) (rec + j * 0x18 + 8) + 0x253);
 				k = 0;
 				h = (unsigned short*) g_7f4ca0;
 				do {
 					if (k >= 4) {
 						break;
 					}
-					if (*(unsigned char*) ((char*) h + 0x168) == *(unsigned char*) (rec + j * 0x18)) {
+					if (*(unsigned char*) ((char*) h + 0x168) == *(unsigned char*) (rec + j * 0x18 + 8)) {
 						found |= 1;
 						io_AppendText((int) "$A$Z%1N2", *h);
 						k += 1;

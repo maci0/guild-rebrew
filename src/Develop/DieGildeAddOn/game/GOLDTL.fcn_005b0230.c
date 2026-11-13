@@ -1,9 +1,10 @@
+#include "client_data.h"
+#include "game_data.h"
+extern char* g_774a68;
+extern int g_778d20;
+extern int g_778d24;
 extern char* g_1043370;
-extern char* g_1015ea0;
-extern int g_772514;
 extern char* g_77255c;
-extern unsigned char g_773d75;
-extern unsigned short g_774970;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
@@ -31,8 +32,8 @@ typedef struct ScrollSlot {
 #define g_town_dir(t) (*(int*) ((t) + 8))
 #define g_town_count(t) (*(int*) ((t) + 0x27a4))
 #define g_cur_dir g_772514
-#define g_cur_building (*(int*) &g_77255c)
-#define g_entity_type(t) ((unsigned char*) (0x7f4ca0 + (t) * 0x21c))
+#define g_cur_building g_77255c
+#define g_entity_type(t) ((unsigned char*) (g_7f4ca0 + (t) * 0x21c))
 
 /* ADDRESS: GOLDTL 0x005b0230 */
 void __cdecl fcn_005b0230(char* town)
@@ -119,7 +120,7 @@ void __cdecl fcn_005b0230(char* town)
 				fcn_005b00f0((char*) slot, base_x, base_y);
 			} else {
 				g_cur_dir = dir;
-				g_cur_building = dir * 0x3cc + 0x1015f40;
+				g_cur_building = (char*) &g_1015f40[dir];
 				bld_x = (int) ((float) *(int*) (tex + 0x20)
 				               * (float) offs[2 * (unsigned char) obj[0x34]] * 5.33f
 				               * ((*obj == 'G') ? 0.48f : 0.435f)
@@ -150,10 +151,10 @@ void __cdecl fcn_005b0230(char* town)
 				}
 				kind = *(unsigned short*) (obj + 0x27);
 				if (kind != 0xffff) {
-					j = *(unsigned char*) (0x7f4ca2 + kind * 0x21c);
+					j = g_7f4ca2[kind].kind;
 					if (j == 5 || j == 6 || j == 7) {
 						fcn_0046f740(bld_x - 8, bld_y - 8,
-						             *(int*) (0x7f4cf4 + kind * 0x21c),
+						             *(int*) (g_7f4ca0 + kind * 0x21c + 0x54),
 						             g_cur_dir);
 					}
 				}
@@ -180,7 +181,7 @@ void __cdecl fcn_005b0230(char* town)
 
 	dir = g_town_dir(town);
 	g_cur_dir = dir;
-	g_cur_building = dir * 0x3cc + 0x1015f40;
+	g_cur_building = (char*) &g_1015f40[dir];
 	for (i = 0; i < 0x10; i++) {
 		*(int*) (town + 0x26dc + i * 4) = -1;
 	}
@@ -215,7 +216,7 @@ void __cdecl fcn_005b0230(char* town)
 				slot->y = bld_y - *(int*) (g_1015ea0 + 0x1c + handle * 0x2f4) / 2;
 				fcn_00469c40(*(int*) (g_cur_building + 4) + bld_x,
 				             *(int*) (g_cur_building + 8) + bld_y, handle);
-				if (!fcn_005cfd00((unsigned short*) (0x7f4ca0 + g_774970 * 0x21c),
+				if (!fcn_005cfd00((unsigned short*) (g_7f4ca0 + g_774970 * 0x21c),
 				                  (int*) (town + 0xc), (unsigned char*) slot->ent)) {
 					*(int*) (g_1015ea0 + 0x5c + handle * 0x2f4) = 0;
 					*(int*) (g_1015ea0 + 0x1d0 + handle * 0x2f4) = 0;
@@ -233,10 +234,10 @@ void __cdecl fcn_005b0230(char* town)
 			if (slot->handle != -1) {
 				kind = *(unsigned short*) (slot->ent + 0x27);
 				if (kind != 0xffff) {
-					j = *(unsigned char*) (0x7f4ca2 + kind * 0x21c);
+					j = g_7f4ca2[kind].kind;
 					if (j == 5 || j == 6 || j == 7) {
 						fcn_0046f740(slot->x - 8, slot->y - 8,
-						             *(int*) (0x7f4cf4 + kind * 0x21c),
+						             *(int*) (g_7f4ca0 + kind * 0x21c + 0x54),
 						             g_cur_dir);
 					}
 				}
@@ -247,10 +248,10 @@ void __cdecl fcn_005b0230(char* town)
 	}
 
 	if (g_town_flags(town) & 4) {
-		mode = *(int*) 0x6b8010;
+		mode = g_6b8010;
 		fcn_004432d0(0, 1);
 		g_cur_dir = g_town_dir(town);
-		g_cur_building = g_town_dir(town) * 0x3cc + 0x1015f40;
+		g_cur_building = (char*) &g_1015f40[g_town_dir(town)];
 		p = (char*) 0x6a4770;
 		while (p < (char*) 0x6a4870) {
 			obj = fcn_00445600(0, 0x100, 0, p);
@@ -278,7 +279,7 @@ void __cdecl fcn_005b0230(char* town)
 	if (g_town_flags(town) & 8) {
 		g_cur_dir = g_town_dir(town);
 		tab = (int*) (town + 0x24dc);
-		list = (unsigned char*) *(int*) 0x774a68;
+		list = (unsigned char*) g_774a68;
 		for (i = 0; i < 0x100; i++) {
 			obj = (char*) *(int*) (list + i * 4);
 			if (obj != 0) {
@@ -298,18 +299,18 @@ void __cdecl fcn_005b0230(char* town)
 		}
 	}
 
-	if (*(int*) 0x7746c4) {
-		handle = *(int*) (*(int*) 0x7746c4 + 0x61);
-	} else if (*(int*) 0x7746c8) {
-		handle = *(int*) (*(int*) 0x7746c8 + 0x61);
+	if ((int) g_7746c4) {
+		handle = *(int*) ((int) g_7746c4 + 0x61);
+	} else if ((int) g_7746c8) {
+		handle = *(int*) ((int) g_7746c8 + 0x61);
 	} else {
-		if (*(int*) 0x6b8014 == 0) {
+		if ((int) g_6b8014 == 0) {
 			return;
 		}
 		handle = 0;
 	}
 	if (handle == 0) {
-		handle = *(int*) 0x6b8014;
+		handle = (int) g_6b8014;
 	}
 
 	fcn_00455350((char*) handle, (float*) (handle + 0x4c), pos);
@@ -318,20 +319,20 @@ void __cdecl fcn_005b0230(char* town)
 	tmp.y = bld_y;
 	fcn_005b00f0((char*) &tmp, base_x, base_y);
 	g_cur_dir = g_town_dir(town);
-	g_cur_building = g_town_dir(town) * 0x3cc + 0x1015f40;
+	g_cur_building = (char*) &g_1015f40[g_town_dir(town)];
 	bld_x = (int) tmp.fx - *(int*) (g_cur_building + 0xc) / 2;
 	bld_y = (int) tmp.fy - *(int*) (g_cur_building + 0x10) / 2;
 	if (bld_x < 0) {
 		bld_x = 0;
 	}
-	if (*(int*) 0x778d24 - 0x200 < bld_x) {
-		bld_x = *(int*) 0x778d24 - 0x200;
+	if (g_778d24 - 0x200 < bld_x) {
+		bld_x = g_778d24 - 0x200;
 	}
 	if (bld_y < 0) {
 		bld_y = 0;
 	}
-	if (*(int*) 0x778d20 - 0x168 < bld_y) {
-		bld_y = *(int*) 0x778d20 - 0x168;
+	if (g_778d20 - 0x168 < bld_y) {
+		bld_y = g_778d20 - 0x168;
 	}
 	*(int*) (g_cur_building + 0x268) = bld_x;
 	*(int*) (g_cur_building + 0x258) = bld_y;

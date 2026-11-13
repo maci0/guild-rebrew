@@ -53,8 +53,10 @@ void __cdecl fcn_0046f940(int, int);
 void __cdecl fcn_005c2a40(unsigned char* a0)
 {
 	int slots[96];
-	int cbuf[16];
-	char msg[0xf8];
+	int coord_x;
+	int coord_y;
+	int child;
+	char msg[0x100];
 	char* base;
 	char* r;
 	char* cur;
@@ -77,16 +79,16 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	float lo;
 	float hi;
 
-	ep = slots;
-	for (i = 0x20; i != 0; i--) {
-		ep[0] = 0;
-		ep[1] = -1;
-		ep[2] = -1;
-		ep += 3;
-	}
 	total = 0;
 	others = 0;
 	removed = 0;
+	ep = slots;
+	for (i = 0x20; i != 0; i--) {
+		ep[1] = -1;
+		ep[2] = -1;
+		ep[0] = 0;
+		ep += 3;
+	}
 	if (fcn_005463a0(2, 0, 0x1f, 3, *(int*) (a0 + 1)) != 0) {
 		do {
 			total++;
@@ -124,11 +126,11 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	d2_SetForm(han, 0);
 	cur = 0;
 	if (nslots >= 5) {
-		cnt = fcn_00472830(han, 2, 0x3c, &cbuf[1], &cbuf[0], &cbuf[2]);
+		cnt = fcn_00472830(han, 2, 0x3c, &coord_y, &coord_x, &child);
 		r = *(char**) 0x77255c;
 		fcn_00533f40(*(int*) (r + 0x10) - 0x4c, *(int*) (r + 0xc) - 0x20,
 		             g_772514, cnt);
-		*(int*) (g_1015ea0 + 0x84 + cbuf[2] * 0x2f4) = 0x56;
+		*(int*) (g_1015ea0 + 0x84 + child * 0x2f4) = 0x56;
 	}
 	d2_SetForm(han, 2);
 	if (nslots >= 1) {
@@ -148,9 +150,9 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			*(int*) (r + 0x1e4) = 0x520;
 			*(int*) (r + 0x1e8) = -2;
 			*(int*) (r + 0x1ec) = -2;
-			io_FormatTextBuffer((char*) cbuf, 0x17d3,
+			io_FormatTextBuffer(msg, 0x17d3,
 			             *(int*) (id * 8 + 0x14a79c0), val);
-			ep[2] = fcn_0046fac0(0x60, cnt + 10, (char*) cbuf, g_772514);
+			ep[2] = fcn_0046fac0(0x60, cnt + 10, msg, g_772514);
 			cnt += 0x3c;
 			ep += 3;
 			k--;
@@ -180,7 +182,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 					} else if (fcn_00526010((void*) (g_7f4ca0 +
 					                                 (int) g_774970 * 0x21c),
 					                        val, g_773d75) != 0) {
-						memset(msg, 0, sizeof(msg));
+						memset(msg, 0, 0xf8);
 						msg[4] = 0x1f;
 						*(int*) (msg + 8) =
 						    *(int*) (g_7f4ca4 +

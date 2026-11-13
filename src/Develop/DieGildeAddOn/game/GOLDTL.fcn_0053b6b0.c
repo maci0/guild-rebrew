@@ -1,3 +1,9 @@
+#include "game_data.h"
+#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/d2_gui.h"
+extern float g_67d368;
+extern int g_14ce8e0, g_67d370, g_7e2468;
+extern char g_6b5c60[], g_7e23e8;
 void __cdecl ch_SetVisible(void* obj, int value);
 void __cdecl fcn_00402b00(void* obj, void* dev);
 void __cdecl fcn_004030e0(void* obj);
@@ -54,23 +60,23 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 		fcn_00455350(dev, (char*) dev + 0x4c, pos);
 	}
 
-	d = *(float*) 0x67d368;
-	id1 = fcn_00469c30((int) (d * *(float*) 0x662d98 + d * *(float*) 0x665e5c),
-		(int) (d * *(float*) 0x665e60), 0x1a);
-	*(int*) ((char*) *(void**) 0x1015ea0 + id1 * 0x2f4 + 0x5c) = 1;
-	*(int*) ((char*) *(void**) 0x1015ea0 + id1 * 0x2f4 + 0x1d0) = 3;
+	d = g_67d368;
+	id1 = fcn_00469c30((int) (d * 150.0f + d * 330.0f),
+		(int) (d * 370.0f), 0x1a);
+	*(int*) ((char*) g_1015ea0 + id1 * 0x2f4 + 0x5c) = 1;
+	*(int*) ((char*) g_1015ea0 + id1 * 0x2f4 + 0x1d0) = 3;
 
-	d = *(float*) 0x67d368;
-	id2 = fcn_00469c30((int) (d * *(float*) 0x665e5c),
-		(int) (d * *(float*) 0x665e60), 0x1b);
-	*(int*) ((char*) *(void**) 0x1015ea0 + id2 * 0x2f4 + 0x5c) = 1;
-	*(int*) ((char*) *(void**) 0x1015ea0 + id2 * 0x2f4 + 0x1d0) = 3;
+	d = g_67d368;
+	id2 = fcn_00469c30((int) (d * 330.0f),
+		(int) (d * 370.0f), 0x1b);
+	*(int*) ((char*) g_1015ea0 + id2 * 0x2f4 + 0x5c) = 1;
+	*(int*) ((char*) g_1015ea0 + id2 * 0x2f4 + 0x1d0) = 3;
 
-	d = *(float*) 0x67d368;
-	id3 = fcn_00469c30((int) (d * *(float*) 0x6628b8 + d * *(float*) 0x665e5c),
-		(int) (d * *(float*) 0x662920 + d * *(float*) 0x665e60), 0x51b);
-	*(int*) ((char*) *(void**) 0x1015ea0 + id3 * 0x2f4 + 0x5c) = 1;
-	*(int*) ((char*) *(void**) 0x1015ea0 + id3 * 0x2f4 + 0x1d0) = 3;
+	d = g_67d368;
+	id3 = fcn_00469c30((int) (d * 70.0f + d * 330.0f),
+		(int) (d * 45.0f + d * 370.0f), 0x51b);
+	*(int*) ((char*) g_1015ea0 + id3 * 0x2f4 + 0x5c) = 1;
+	*(int*) ((char*) g_1015ea0 + id3 * 0x2f4 + 0x1d0) = 3;
 
 	count = 0;
 	if (maenner[0][0] != 0) {
@@ -94,17 +100,17 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 	prev = -1;
 	selected = 0;
 	while (fcn_005373e0(0x53b6b0, 0x12d6)) {
-		if (*(int*) 0x14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 != 0) {
+			g_774654 = 1;
 			selected = 0;
 		}
-		if (*(char*) 0x14cf950 != 'N'
-			&& (*(int*) 0x100f1dc == -1 || *(int*) 0x67d370 != id1)) {
-			if (*(char*) 0x14cf950 != 'J'
-				&& (*(int*) 0x100f1dc == -1 || *(int*) 0x67d370 != id2)) {
-				if (*(char*) 0x14cf950 == 0x1c
-					|| (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == id3)) {
-					*(int*) 0x774654 = 1;
+		if (g_14cf950 != 'N'
+			&& (g_100f1dc == -1 || g_67d370 != id1)) {
+			if (g_14cf950 != 'J'
+				&& (g_100f1dc == -1 || g_67d370 != id2)) {
+				if (g_14cf950 == 0x1c
+					|| (g_100f1dc != -1 && g_67d370 == id3)) {
+					g_774654 = 1;
 					selected = 1;
 				}
 			} else {
@@ -119,12 +125,12 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 		if (prev != idx) {
 			view = evt_LoadGfxScript("Effekte/choose_character.esc");
 			if (view != 0) {
-				d = *(float*) 0x67d368;
+				d = g_67d368;
 				fcn_00428340(view, 6,
 					(int) pos[0],
 					(int) pos[1] + 0x14,
 					(int) pos[2],
-					0x28, 0x5a, (void*) 0x6b5c60);
+					0x28, 0x5a, g_6b5c60);
 			}
 			if (obj != 0) {
 				fcn_0040c120(obj, 0x38, 0);
@@ -135,7 +141,7 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 				} while (*(int*) ((char*) obj + 0x128) != 0);
 				fcn_004030e0(obj);
 			}
-			if (*(char*) 0x7e23e8 != 0) {
+			if (g_7e23e8 != 0) {
 				idx = idx % count2;
 				if (idx <= -1) {
 					idx = count2 - 1;
@@ -159,7 +165,7 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 				*(char*) (0x7e2435 + i) = name[i];
 				i += 1;
 			} while (name[i - 1] != 0);
-			*(int*) 0x7e2468 = fcn_004fdec0(name) + 0x639;
+			g_7e2468 = fcn_004fdec0(name) + 0x639;
 			obj = ch_CreateAtPosition(name, pos);
 			fcn_00402b00(obj, dev);
 			ch_SetVisible(obj, 0);

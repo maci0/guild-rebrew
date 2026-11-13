@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern double g_6628a0;
+
 
 typedef struct PathRec {
 	char name[0x40];
@@ -110,7 +110,7 @@ void __cdecl fcn_004316c0(int obj)
 					}
 				}
 				edge = (Edge*) sec;
-				node = (int*) *(int*) ((char*) plan + 0x15c);
+				node = (int*) *(int*) (nblock + 0x15c);
 				if (j < 0) {
 					if (count >= 4) {
 						continue;
@@ -147,9 +147,9 @@ void __cdecl fcn_004316c0(int obj)
 					t = (float) edge->weight / *(int*) ((char*) node + edge->from * 0xc0 + 4);
 					fcn_00451340((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x54),
 					    (float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x54), t, out);
-					out[0] -= rec[j].pos[0];
-					out[1] -= rec[j].pos[1];
-					out[2] -= rec[j].pos[2];
+					out[0] -= rec[j].target[0];
+					out[1] -= rec[j].target[1];
+					out[2] -= rec[j].target[2];
 					rec[j].target[0] = edge->k * out[0] + rec[j].target[0];
 					rec[j].target[1] = edge->k * out[1] + rec[j].target[1];
 					rec[j].target[2] = edge->k * out[2] + rec[j].target[2];
@@ -167,7 +167,7 @@ void __cdecl fcn_004316c0(int obj)
 		}
 		if (count != 0) {
 			for (i = 0; i < count; i++) {
-				w = (float) g_6628a0 / (float) rec[i].flag;
+				w = 1.0f / (float) rec[i].flag;
 				for (k = 0; k < 3; k++) {
 					rec[i].mat[k][0] = w * rec[i].mat[k][0];
 					rec[i].mat[k][1] = w * rec[i].mat[k][1];

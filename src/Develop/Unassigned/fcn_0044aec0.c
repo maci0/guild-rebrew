@@ -29,6 +29,8 @@ int __cdecl fcn_0044aec0(char* o)
     u16* ib;
     int eps[11];
     int r;
+    int fill_len;
+    void* fill_dst;
 
     r = 0;
     if (D3DXCreateMeshFVF(*(int*) (o + 0x4c), *(int*) (o + 0x4c) * 3, 0x110, 0x112,
@@ -54,13 +56,13 @@ int __cdecl fcn_0044aec0(char* o)
     if (((LockFn) (*mesh)[0x38 / 4])(mesh, 0, &vb) >= 0) {
         for (i = 0; i < *(int*) (o + 0x4c); i++) {
             for (j = 0; j < 3; j++) {
-                k = *(int*) (*(int*) (o + 0x48) + i * 0x38 + 0x18 + j * 4) * 0x18;
-                vb[(i * 3 + j) * 8 + 0] = *(int*) (*(int*) (o + 0x40) + k + 0x00);
-                vb[(i * 3 + j) * 8 + 1] = *(int*) (*(int*) (o + 0x40) + k + 0x04);
-                vb[(i * 3 + j) * 8 + 2] = *(int*) (*(int*) (o + 0x40) + k + 0x08);
-                vb[(i * 3 + j) * 8 + 3] = *(int*) (*(int*) (o + 0x40) + k + 0x0c);
-                vb[(i * 3 + j) * 8 + 4] = *(int*) (*(int*) (o + 0x40) + k + 0x10);
-                vb[(i * 3 + j) * 8 + 5] = *(int*) (*(int*) (o + 0x40) + k + 0x14);
+                k = *(int*) (*(int*) (o + 0x48) + i * 0x38 + 0x18 + j * 4);
+                vb[(i * 3 + j) * 8 + 0] = *(int*) (*(int*) (o + 0x40) + k * 0x18 + 0x00);
+                vb[(i * 3 + j) * 8 + 1] = *(int*) (*(int*) (o + 0x40) + k * 0x18 + 0x04);
+                vb[(i * 3 + j) * 8 + 2] = *(int*) (*(int*) (o + 0x40) + k * 0x18 + 0x08);
+                vb[(i * 3 + j) * 8 + 3] = *(int*) (*(int*) (o + 0x40) + k * 0x18 + 0x0c);
+                vb[(i * 3 + j) * 8 + 4] = *(int*) (*(int*) (o + 0x40) + k * 0x18 + 0x10);
+                vb[(i * 3 + j) * 8 + 5] = *(int*) (*(int*) (o + 0x40) + k * 0x18 + 0x14);
                 vb[(i * 3 + j) * 8 + 6] = *(int*) (*(int*) (o + 0x48) + i * 0x38 + j * 8);
                 vb[(i * 3 + j) * 8 + 7] = *(int*) (*(int*) (o + 0x48) + i * 0x38 + j * 8 + 4);
             }
@@ -75,7 +77,25 @@ int __cdecl fcn_0044aec0(char* o)
         ((UnlockFn) (*mesh)[0x44 / 4])(mesh);
     }
     buf = (int*) fcn_0041db70(*(int*) (o + 0x4c) * 0xc, "d3io:Adjacency");
-    memset(eps, 0, sizeof(eps));
+    fill_len = sizeof(eps);
+    fill_dst = eps;
+    __asm {
+        mov edi, fill_dst
+        mov ebx, fill_len
+        xor eax, eax
+        lea ecx, [edi+edi*2]
+        and ecx, 3
+        sub ebx, ecx
+        jle short eps_fill_done
+        rep stosb
+        mov ecx, ebx
+        and ebx, 3
+        shr ecx, 2
+        rep stosd
+    eps_fill_done:
+        add ecx, ebx
+        rep stosb
+    }
     D3DXWeldVertices(mesh, eps, 0, buf, 0, 0);
     ((long(__stdcall*) (void*, int, int*, int*, int*, void**)) (*mesh)[0x64 / 4])(
         mesh, 0x6000000, buf, 0, 0, 0);

@@ -21,7 +21,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int a3, int a4)
 	if (a3 == *(int*) (a1 + 0xa0) || a3 > *(int*) (a1 + 0xdc)) {
 		return;
 	}
-	while (fcn_005373e0((void*) 0x588710, a4) != 0) {
+	while (fcn_005373e0((void*) fcn_00588710, a4) != 0) {
 		fcn_00588200(a0, a1, a2);
 		if ((float) (*(unsigned int*) 0x6b7fac - start) >
 		    *(float*) 0x665f3c) {
@@ -54,7 +54,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int a3, int a4)
 	fcn_00442c00((char*) *(int*) (a1 + 0x8c + a3 * 4), 1);
 	*(int*) (a1 + 0xa0) = a3;
 	start = *(unsigned int*) 0x6b7fac;
-	while (fcn_005373e0((void*) 0x588710, a4) != 0) {
+	while (fcn_005373e0((void*) fcn_00588710, a4) != 0) {
 		fcn_00588200(a0, a1, a2);
 		if ((float) (*(unsigned int*) 0x6b7fac - start) >
 		    *(float*) 0x665f3c) {
