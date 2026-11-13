@@ -8457,8 +8457,17 @@
   },
   {
     "va": 4608352,
-    "size": 1072,
-    "name": "fcn.00465160"
+    "size": 1064,
+    "name": "fcn.00465160",
+    "extent_history": [
+      {
+        "old_size": 1072,
+        "new_size": 1064,
+        "reason": "zlib inflate body ends with its jump table at 0x465587 (GoldTL twin 0x4616e0 RELOC 1064/1064 from the same source); 8 NOP bytes 0x465588..0x46558f follow to the 16-byte alignment (sol-02 465160-padding.asm)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T12:35:46.514602+00:00"
+      }
+    ]
   },
   {
     "va": 4609424,

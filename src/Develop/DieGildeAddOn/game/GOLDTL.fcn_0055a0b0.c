@@ -6,7 +6,7 @@ struct EvRec {
 	unsigned char kind;
 	char pad1[15];
 };
-
+#include "client_actions.h"
 int __cdecl fcn_004e8b40(unsigned char, int*);
 int __cdecl fcn_004e8b80(int, int, EvRec*);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
@@ -35,9 +35,9 @@ void __cdecl fcn_0055a0b0(char* a0)
 	idx = *(int*) (a0 + 0x70);
 	if (idx == 0xc) {
 		if (*(int*) (a0 + 0xac) == 0) {
-			io_FormatTextBuffer(buf, 0x10bc, (unsigned char*) 0x868080 + *(unsigned char*) 0x773d75 * 0x2f4);
+			io_FormatTextBuffer(buf, 0x10bc, (unsigned char*) 0x868080 + g_773d75 * 0x2f4);
 		} else {
-			io_FormatTextBuffer(buf, 0x10be, (unsigned char*) 0x868080 + *(unsigned char*) 0x773d75 * 0x2f4);
+			io_FormatTextBuffer(buf, 0x10be, (unsigned char*) 0x868080 + g_773d75 * 0x2f4);
 		}
 		p = (unsigned char*) 0x7f4ca2;
 		do {

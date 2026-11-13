@@ -5,6 +5,9 @@ typedef struct { unsigned char kind; char rest[0x24c]; } SpawnBuilding;
 
 extern int rand(void);
 extern int gm_CurrentHumanFamilyCount;
+extern int g_773d70;
+extern int g_699364;
+extern int g_773d68;
 
 unsigned short __cdecl gm_RandomMod(int n);
 double __cdecl gm_RandomFloat01(void);
@@ -56,7 +59,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         }
     }
     if (B((char*) 0x7f4ca0 + idx * 0x21c, 2) == 0xf) {
-        (*(int*) 0x773d70)--;
+        (g_773d70)--;
     }
     if (idx == 0x300)
         return -1;
@@ -69,7 +72,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         D((char*) 0x7f4ca0 + idx * 0x21c, 0x5c + n * 4) = -1;
     }
     W((char*) 0x7f4ca0 + idx * 0x21c, 0) = (unsigned short) idx;
-    (*(int*) 0x773d70)++;
+    (g_773d70)++;
     D(slot, 0x1f0) = 0;
     B(slot, 0x215) = 0;
     D(slot, 0x170) = 0;
@@ -78,9 +81,9 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
     B(slot, 0x216) = 0;
     B(slot, 0x217) = 0;
     B(slot, 2) = (unsigned char) type;
-    sprintf(work, (char*) 0x6999fc, *(int*) 0x699364, type);
-    D(slot, 4) = *(int*) 0x699364;
-    (*(int*) 0x699364)++;
+    sprintf(work, (char*) 0x6999fc, g_699364, type);
+    D(slot, 4) = g_699364;
+    (g_699364)++;
     B(slot, 0x165) = (unsigned char) arg7;
     D(slot, 0x18c) = -1;
     D(slot, 0x20c) = -1;
@@ -118,9 +121,9 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
             F(slot, 0x1d0) = (float) gm_RandomFloat01() * 0.5f + 0.25f;
             D(slot, 0x18c) = fcn_004fdec0(ent + 0xd7) + 0x639;
             D(slot, 0x1c) = 0x447a0000;
-            W(slot, 0x50) = (unsigned short) *(int*) 0x773d68;
+            W(slot, 0x50) = (unsigned short) g_773d68;
             D(slot, 0x18) = D(slot, 0x1c);
-            (*(int*) 0x773d68)++;
+            (g_773d68)++;
             D(slot, 0x20) = 0x41400000;
             F(slot, 0x14) = gm_RandomQuadratic() * 7.0f + 30.0f;
             F(slot, 0x10) = (float) ((double) (F(slot, 0x1c) * 0.33f) +
@@ -192,7 +195,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
             }
         }
     }
-    if (*(int*) 0x774800) {
+    if (g_774800) {
         D(slot, 0x194) = 0xa;
         D(slot, 0x190) = 0xa;
     }
@@ -307,8 +310,8 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
             }
             gm_CurrentHumanFamilyCount++;
         } else if (type < 0xa) {
-            W(slot, 0x50) = (unsigned short) *(int*) 0x773d68;
-            (*(int*) 0x773d68)++;
+            W(slot, 0x50) = (unsigned short) g_773d68;
+            (g_773d68)++;
         } else {
             W(slot, 0x50) = 0x7fff;
         }
@@ -470,6 +473,6 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         rnd = gm_RandomMod(3) & 0xffff;
         B(slot, 0x82 + rnd) = (char) (B(slot, 0x82 + rnd) + 0x2a);
     }
-    sprintf(work, (char*) 0x6999d8, *(int*) 0x699364, slot + 0x30);
+    sprintf(work, (char*) 0x6999d8, g_699364, slot + 0x30);
     return (short) idx;
 }

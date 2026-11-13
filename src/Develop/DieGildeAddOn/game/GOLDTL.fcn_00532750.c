@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_77250c;
 
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -17,9 +17,9 @@ void __cdecl fcn_00532750(char* a)
 	unsigned short* e;
 	char* p;
 
-	p = (char*) *(int*) 0x7746c8;
+	p = (char*) g_7746c8;
 	if (p == 0) {
-		p = (char*) *(int*) 0x7746c4;
+		p = g_7746c4;
 		if (p == 0) {
 			return;
 		}
@@ -28,7 +28,7 @@ void __cdecl fcn_00532750(char* a)
 		return;
 	}
 	strcpy(key, a + 0x10);
-	if (*(int*) 0x7746c8 != 0) {
+	if ((int) g_7746c8 != 0) {
 		e = (unsigned short*) fcn_00502cd0(*(int*) (p + 0x5d), 1, 4, 6);
 	} else {
 		e = (unsigned short*) fcn_00502cd0(*(int*) (p + 0x5d), 1, 4, 2);
@@ -39,7 +39,7 @@ void __cdecl fcn_00532750(char* a)
 		}
 		e = gm_NextEntityQueryMatch();
 	}
-	if (*(int*) 0x7746c8 == 0) {
+	if ((int) g_7746c8 == 0) {
 		return;
 	}
 	e = (unsigned short*) fcn_00502cd0(*(int*) (p + 0x5d), 1, 0, 0xfd);
@@ -50,9 +50,9 @@ found:
 	if (*e != 0xfd) {
 		sprintf(value, (char*) 0x68b3f8,
 			*(char**) ((int) *e * 8 + 0x14a79c0), *(char**) 0x14a552c);
-	} else if (*(int*) 0x7746cc != 0) {
+	} else if ((int) g_7746cc != 0) {
 		sprintf(value, (char*) 0x68b3f8,
-			*(char**) ((int) *(unsigned short*) *(int*) 0x7746cc * 8 + 0x14a79c0),
+			*(char**) ((int) *(unsigned short*) (int) g_7746cc * 8 + 0x14a79c0),
 			*(char**) 0x14a5530);
 	} else {
 		sprintf(value, (char*) 0x68b3f8,

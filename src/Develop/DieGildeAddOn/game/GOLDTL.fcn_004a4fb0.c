@@ -1,5 +1,5 @@
-extern char* g_entity_type_table;
-extern char* g_item_def_table;
+#include "game_data.h"
+
 
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -20,7 +20,7 @@ unsigned int __cdecl fcn_004a4fb0(unsigned int* a0, unsigned int* a1, unsigned c
 	int idx;
 
 	container = *(int*) (a2 + 0x5d);
-	rec = (unsigned char*) (g_entity_type_table + *a2 * 0x24d);
+	rec = (unsigned char*) (lpGebaeudePROT + *a2 * 0x24d);
 	v11 = 0;
 	idx = 0;
 	if ((unsigned char) rec[0x22] <= 0) {
@@ -30,7 +30,7 @@ unsigned int __cdecl fcn_004a4fb0(unsigned int* a0, unsigned int* a1, unsigned c
 	v10 = (unsigned short*) (rec + 0x23);
 	v6 = a2;
 	do {
-		v1 = *(unsigned char*) (g_item_def_table + (*v10 & 0x7fff) * 0x41);
+		v1 = *(unsigned char*) (lpObjektePROT + (*v10 & 0x7fff) * 0x41);
 		if (v1 != '!') {
 			if (v1 != 2 && v1 != 6) {
 label:

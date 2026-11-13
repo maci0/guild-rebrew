@@ -19,7 +19,7 @@ extern int g_query_filter_owner;
 //   web and esi to the short one; every spelling that kept a named
 //   `int stack_depth` local got the reverse, for 439/464 with 19 RR and 5
 //   SIB-form differences and the size and block layout already exact.
-//   The fix is Finding 12 in docs/msvc6-allocator.md: delete the local and
+//   The fix is Finding 12 in archived docs/msvc6-allocator.md: delete the local and
 //   read g_query_match_count directly at all seven sites. The local was
 //   already kept in lockstep with the global on every path, so this is
 //   semantics-neutral; without it the value is an anonymous CSE'd load born

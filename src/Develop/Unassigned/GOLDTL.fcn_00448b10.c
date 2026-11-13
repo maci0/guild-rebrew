@@ -1,4 +1,5 @@
 #include <string.h>
+#include "Develop/Units/d3/d3_camera.h"
 
 int __cdecl fcn_00436aa0(void *flags);
 int __cdecl fcn_00436f70(int enable);
@@ -46,7 +47,7 @@ char __cdecl fcn_00448b10(void)
 			fcn_00436aa0(flags);
 			return 0;
 		case 0x2e:
-			node = *(char **) 0x6b8014;
+			node = g_6b8014;
 			if (*(char **) 0x1041d0c == node) {
 				node = *(char **) 0x1043254;
 				while (*(int *) (node + 0x218) != 4) {

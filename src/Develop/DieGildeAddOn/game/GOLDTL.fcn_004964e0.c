@@ -142,19 +142,19 @@ fallback:
 	return fcn_004a4680(a0, a1, idx, e, rec);
 calc:
 	for (i = 0; i < 4; i++) {
-		if (t->a[i].val > g_6628a8) {
+		if (t->a[i].val > 0.0f) {
 			if (t->a[i].kind == e->kind) {
-				*a0 += e->rate[t->a[i].kind].f * t->a[i].val * g_6628ac;
+				*a0 += e->rate[t->a[i].kind].f * t->a[i].val * 0.02f;
 			} else {
-				*a0 += e->rate[t->a[i].kind].f * t->a[i].val * g_662910;
+				*a0 += e->rate[t->a[i].kind].f * t->a[i].val * 0.01f;
 			}
 
 		}
-		if (t->b[i].val > g_6628a8) {
+		if (t->b[i].val > 0.0f) {
 			if (t->b[i].kind == e->kind) {
-				*a1 += e->rate[t->b[i].kind].f * t->b[i].val * g_6628ac;
+				*a1 += e->rate[t->b[i].kind].f * t->b[i].val * 0.02f;
 			} else {
-				*a1 += e->rate[t->b[i].kind].f * t->b[i].val * g_662910;
+				*a1 += e->rate[t->b[i].kind].f * t->b[i].val * 0.01f;
 			}
 
 		}

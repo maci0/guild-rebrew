@@ -9,6 +9,7 @@ typedef struct DialogItem {
 	int f1a4;
 } DialogItem;
 #include "client_data.h"
+#include "client_dialog_state.h"
 void __cdecl fcn_00591c80(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -134,7 +135,7 @@ void __cdecl fcn_00591ea0(void)
 			y = slot;
 		}
 		if (*(int*) 0x14ce8e0 != 0 || *(char*) &g_14cf950 == 'X' || *(char*) &g_14cf950 == 1)
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 		if (*(int*) &g_100f1dc != -1) {
 			sel = *(int*) 0x67d370;
 			if (*(int*) 0x67d370 == clicks[1] && *(int*) (y + (unsigned long)&g_102cbc8) != -1) {
@@ -152,7 +153,7 @@ void __cdecl fcn_00591ea0(void)
 		fcn_00472640(clicks[1], i);
 		fcn_00472640(clicks[0], *(int*) (y + (unsigned long)&g_102cbc8) != -1);
 		fcn_00591d00();
-	} while (fcn_005373e0(0x591ea0, 0x657c7));
+	} while (fcn_005373e0((int) fcn_00591ea0, 0x657c7));
 	fcn_00469510(last_win);
 	fcn_00471e30(win);
 }

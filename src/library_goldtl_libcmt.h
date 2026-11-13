@@ -1,11 +1,11 @@
-/* Managed _cinit/_initterm identities describe a complete71-byte component
+/* Managed _cinit/_initterm identities describe a complete 71-byte component
  * matching compatible stock crt0dat.obj. _initterm is a private static helper,
  * not a game-callable extern. The actual client raw-link provider remains
  * unverified. No copied CRT C body or storage is provided here. */
 
 // LIBRARY markers for GOLDTL functions the linker supplies from LIBCMT
 // (Processor Pack build, msvc-6.0-sp5-pp). Each one confirmed by
-// `rebrew lib-match --lib <sp5-pp LIBCMT.LIB> --target Europa1400Gold_TL.exe --va <va>`.
+// `rebrew library match --lib <sp5-pp LIBCMT.LIB> --target Europa1400Gold_TL.exe --va <va>`.
 
 
 // _strrchr

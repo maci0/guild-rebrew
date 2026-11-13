@@ -3,7 +3,7 @@
  * its functions, so /OPT:REF discards the code; what survives is the winsock error text below, which
  * server.c shares. The discarded code still loads the WS2_32 members only it calls (connect,
  * gethostbyname, gethostname, getsockopt, inet_addr, inet_ntoa, select) and its absolute operands count
- * into LINK's .reloc reservation (docs/msvc6-link-layout.md section 5d).
+ * into LINK's .reloc reservation (archived docs/msvc6-link-layout.md section 5d).
  *
  * The original links objects in file-name order and this run sits between m_alloc and trees, where net
  * sorts; no function here has a server address, so the TU is still placed by --first-va (CMakeLists.txt).

@@ -2,6 +2,7 @@
  * with the chosen node's keys. */
 
 extern unsigned char* lpGebaeudePROT;
+extern unsigned char* lpGebaeudeINST;
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00510400(char*);
@@ -39,7 +40,7 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* a1, int 
 	    *(int*) ((char*) a1 + 0x194) >= 5 && (a0 == 0x44 || a0 == 0) &&
 	    a2 == 0 && v5 != 0 && *(char*) ((char*) a1 + 2) != 3) {
 		a0 = 0x100;
-		v11 = (unsigned char*) *(unsigned int*) 0x90e094;
+		v11 = lpGebaeudeINST;
 		do {
 			if (*v11 != 0 && *(unsigned short*) (v11 + 0x27) == *a1 &&
 			    *(unsigned char*) (lpGebaeudePROT +

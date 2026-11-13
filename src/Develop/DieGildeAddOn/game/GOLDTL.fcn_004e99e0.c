@@ -25,7 +25,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 	int n;
 	int b;
 	int amount;
-	struct { int relation; int vote[4]; OFFICE_SLOT* recs[4]; int ids[4]; unsigned int score[6]; } work;
+	struct { int relation; unsigned int vote[4]; OFFICE_SLOT* recs[4]; int ids[4]; unsigned int score[6]; } work;
 
 	char* self;
 	char* other;
@@ -76,23 +76,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 				work.vote[held]++;
 			}
 		}
-		if (work.vote[0] <= work.vote[1]) {
-			for (k = 0; k < count; k++) {
-				id = list[k].mplayerid;
-				if (id != *(int*) (self + 4) && id != -1
-				    && work.score[k] <= 2) {
-					if (work.score[k] == 0) {
-						amount = -20;
-					} else if (work.score[k] == 1) {
-						amount = 0x14;
-					} else {
-						amount = 4;
-					}
-					fcn_004c54c0(id, *(int*) (self + 4), amount, 1);
-				}
-			}
-			version = fcn_004e8240(p->id, (unsigned char*) self, 0, 1, 0xff);
-		} else {
+		if (work.vote[0] > work.vote[1]) {
 			for (k = 0; k < count; k++) {
 				id = list[k].mplayerid;
 				if (id != *(int*) (self + 4) && id != -1
@@ -109,6 +93,22 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 				}
 			}
 			version = fcn_004e8240(p->id, 0, 0, 3, 0xff);
+		} else {
+			for (k = 0; k < count; k++) {
+				id = list[k].mplayerid;
+				if (id != *(int*) (self + 4) && id != -1
+				    && work.score[k] <= 2) {
+					if (work.score[k] == 0) {
+						amount = -20;
+					} else if (work.score[k] == 1) {
+						amount = 0x14;
+					} else {
+						amount = 4;
+					}
+					fcn_004c54c0(id, *(int*) (self + 4), amount, 1);
+				}
+			}
+			version = fcn_004e8240(p->id, (unsigned char*) self, 0, 1, 0xff);
 		}
 		if (version != -1) {
 			while (!fcn_004c4450(version)) {

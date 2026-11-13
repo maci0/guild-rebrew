@@ -17,14 +17,12 @@ int __cdecl fcn_0050cad0(int* a, int* b)
     int v6;
     int v7;
     float f;
-
     if (fcn_00500cb0(a, b) >= 1) {
         return 0;
     }
     cur = *(pos14_7f4c00*) a;
     v3 = cur.a;
     v7 = b[0];
-    v4 = 0;
     if (v7 > v3) {
         f = (float) (*(unsigned short*) ((char*) &cur + 4) * 60 + *(int*) ((char*) &cur + 6));
         f = (g_665c00 > f || f < g_665bfc) ? (g_665c00 > f ? g_665c00 : f) : g_665bfc;
@@ -33,6 +31,8 @@ int __cdecl fcn_0050cad0(int* a, int* b)
         cur.a = v3 + 1;
         sim_SetSyncParams((int*) &cur, 6, 0, 0);
         v3 = cur.a;
+    } else {
+        v4 = 0;
     }
     if (v3 < v7) {
         v7 -= v3;

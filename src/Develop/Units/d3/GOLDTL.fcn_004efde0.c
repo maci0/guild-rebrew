@@ -12,7 +12,7 @@
  * +0x18, an object handle at +0x150, a callback at +0x168 and the data
  * pointer at +0x16c.
  */
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 typedef struct Sefde0Entry {
@@ -75,7 +75,7 @@ void __cdecl fcn_004efde0(void)
 	*(int*) 0x772fec = *(int*) 0x7f4c04;
 	*(int*) 0x772ff0 = *(int*) 0x7f4c08;
 	*(short*) 0x772ff4 = *(short*) 0x7f4c0c;
-	save = *(int*) 0x6b8010; fcn_004432d0(0, 1);
+	save = g_6b8010; fcn_004432d0(0, 1);
 	count = 0; idx = 0;
 	slot = (Sefde0Slot*) 0x7731b8;
 	for (;;) {

@@ -1,5 +1,5 @@
-extern int g_7f4c08;
-extern short g_7f4c0c;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00500bb0(char* sel, int a, int b, int c);
 int __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
@@ -32,10 +32,10 @@ int __cdecl fcn_0054f910(char* ent)
 	int tmp[4];
 
 	*(int*) (ent + 0x84) = -1;
-	*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
-	*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
-	*(int*) (ent + 0x5a) = g_7f4c08;
-	*(short*) (ent + 0x5e) = g_7f4c0c;
+	*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+
+
+
 	fcn_00500bb0(ent + 0x52, 0x18, 0, 0);
 	flags = *(unsigned char*) (ent + 0x78);
 	*(short*) (ent + 0x56) = 6;
@@ -48,10 +48,10 @@ int __cdecl fcn_0054f910(char* ent)
 	if (e1 == 0 || e2 == 0) {
 		if ((*(int*) (e1 + 0x1c8) & 0x400) != 0
 		    || (*(int*) (e2 + 0x1c8) & 0x400) != 0) {
-			*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
-			*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
-			*(int*) (ent + 0x5a) = g_7f4c08;
-			*(short*) (ent + 0x5e) = g_7f4c0c;
+			*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+
+
+
 			fcn_00500bb0(ent + 0x52, 0, 2, 0);
 			*(int*) (ent + 0x84) = fcn_004c5620(-1, ent);
 			return 0;
@@ -75,10 +75,10 @@ int __cdecl fcn_0054f910(char* ent)
 	if (f >= 1.0f) {
 		fcn_004c5420(*(int*) (e1 + 4), 0x1c8, 4, 0x400, 0);
 		fcn_004c5420(*(int*) (e2 + 4), 0x1c8, 4, 0x400, 0);
-		*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
-		*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
-		*(int*) (ent + 0x5a) = g_7f4c08;
-		*(short*) (ent + 0x5e) = g_7f4c0c;
+		*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+
+
+
 		fcn_00500bb0(ent + 0x52, 0x18, 0, 0);
 		*(short*) (ent + 0x56) = 6;
 		*(int*) (ent + 0x58) = 0x1e;
@@ -115,10 +115,10 @@ int __cdecl fcn_0054f910(char* ent)
 	dmg = -9 - w - (fcn_0042e410(8) & 0xffff);
 	fcn_004ec2d0(e2, v, dmg);
 	fcn_004c54c0(*(int*) (e2 + 4), *(int*) (e1 + 4), -0x14, 1);
-	*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
-	*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
-	*(int*) (ent + 0x5a) = g_7f4c08;
-	*(short*) (ent + 0x5e) = g_7f4c0c;
+	*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+
+
+
 	fcn_00500bb0(ent + 0x52, 0, 2, 0);
 	*(int*) (ent + 0x84) = fcn_004c5620(-1, ent);
 	return 0;
@@ -133,10 +133,10 @@ big:
 	blk[0x16] = *(int*) (ent + 4);
 	fcn_00500de0((char*) &blk[10], *(unsigned short*) (e2), 6, 0, 0);
 	fcn_004c5530(blk);
-	*(int*) (ent + 0x52) = *(int*) 0x7f4c00;
-	*(int*) (ent + 0x56) = *(int*) 0x7f4c04;
-	*(int*) (ent + 0x5a) = g_7f4c08;
-	*(short*) (ent + 0x5e) = g_7f4c0c;
+	*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+
+
+
 	fcn_00500bb0(ent + 0x52, 0x18, 0, 0);
 	*(short*) (ent + 0x56) = 6;
 	*(int*) (ent + 0x58) = 0x1e;

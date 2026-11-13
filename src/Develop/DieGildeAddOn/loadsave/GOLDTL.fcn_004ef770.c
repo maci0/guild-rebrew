@@ -1,5 +1,5 @@
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-
+extern int g_6b7fac;
 /* Load the eight 0x170-byte render-object records from a save stream.  Older
    versions (before 0x10055) carry no rotation block, so the two rotation
    floats are forced to 1.0f. */
@@ -82,7 +82,7 @@ unsigned int __cdecl fcn_004ef770(void* file, int version)
             if (!ls_ReadVfsDataChecked((void*) (v3 + 0x44), 4, 1, file)) {
                 return 0;
             }
-            *(unsigned int*) (v3 + 0x40) = *(unsigned int*) 0x6b7fac;
+            *(unsigned int*) (v3 + 0x40) = (unsigned int) g_6b7fac;
             if (!ls_ReadVfsDataChecked((void*) (v3 + 0x48), 0x10, 1, file)) {
                 return 0;
             }
@@ -110,7 +110,7 @@ unsigned int __cdecl fcn_004ef770(void* file, int version)
             if (!ls_ReadVfsDataChecked((void*) (v3 + 0xac), 4, 1, file)) {
                 return 0;
             }
-            *(unsigned int*) (v3 + 0xa8) = *(unsigned int*) 0x6b7fac;
+            *(unsigned int*) (v3 + 0xa8) = (unsigned int) g_6b7fac;
             if (!ls_ReadVfsDataChecked((void*) (v3 + 0xb0), 0x10, 1, file)) {
                 return 0;
             }
@@ -138,7 +138,7 @@ unsigned int __cdecl fcn_004ef770(void* file, int version)
             if (!ls_ReadVfsDataChecked((void*) (v3 + 0x114), 4, 1, file)) {
                 return 0;
             }
-            *(unsigned int*) (v3 + 0x110) = *(unsigned int*) 0x6b7fac;
+            *(unsigned int*) (v3 + 0x110) = (unsigned int) g_6b7fac;
             if (!ls_ReadVfsDataChecked((void*) (v3 + 0x118), 0xc, 1, file)) {
                 return 0;
             }

@@ -102,7 +102,7 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
     m_FreeTracked(v3);
     return 0;
 finish:
-    if (g_6b7ff9 != 0)
+    if ((unsigned char)g_6b7ff9 != 0)
     {
         *(char *)((char *)v3 + 0x272) = g_6b7ff9;
         fcn_00436f70(0);

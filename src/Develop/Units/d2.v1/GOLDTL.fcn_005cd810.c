@@ -233,7 +233,7 @@ select:
 			again = 1;
 		}
 loopend:
-		if (!fcn_005373e0(0x5cd810, 0x657c7)) {
+		if (!fcn_005373e0((int) fcn_005cd810, 0x657c7)) {
 			fcn_00471e30(dlg);
 			return;
 		}

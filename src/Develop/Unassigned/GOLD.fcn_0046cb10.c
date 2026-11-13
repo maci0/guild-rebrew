@@ -45,14 +45,14 @@ int __cdecl fcn_0046cb10(int x, int y, int type)
 		resource = g_00f8f080[id].data;
 		s->w = *(short*) (resource + 0x2c);
 		s->f16 = *(short*) (resource + 0x2e);
-		break;
+		return id;
 	case 4:
 		handle = fcn_0047cd10(x, y, g_00f8f080[id].data, 0);
 		g_00f8f080[id].bild_offset = handle;
 		resource = g_00f8f080[id].data;
 		g_00f8f080[id].w = *(short*) (resource + 0x2c);
 		g_00f8f080[id].f16 = *(short*) (resource + 0x2e);
-		break;
+		return id;
 	case 5:
 	case 8:
 		s->bild_offset = *(int*) 0x6ed98c;
@@ -66,13 +66,13 @@ int __cdecl fcn_0046cb10(int x, int y, int type)
 		*(int*) ((char*) s + 0x1c8) = *(unsigned short*) (resource + 0x2e);
 		*((char*) &g_00f8f080[id] + 0x6c) = 8;
 		*((char*) &g_00f8f080[id] + 0x6d) = 8;
-		break;
+		return id;
 	case 17:
 		resource = g_00f8f080[id].data;
 		g_00f8f080[id].w = *(short*) (resource + 0xc);
 		g_00f8f080[id].f16 = *(short*) (resource + 0xe);
 		g_00f8f080[id].bild_offset = 2;
-		break;
+		return id;
 	}
 	return id;
 }

@@ -1,5 +1,5 @@
 char __cdecl fcn_0045b990(char* map, float* pos, int* col, int* row, float* height);
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00413d10 */
 float __cdecl fcn_00413d10(float* pos)
 {
@@ -15,7 +15,7 @@ float __cdecl fcn_00413d10(float* pos)
 	int off;
 
 	acc = 0.0f;
-	world = *(char**) 0x67a370;
+	world = (char*) g_67a370;
 	if (world != 0) {
 		map = *(char**) (world + 0xb0);
 		if (map != 0) {

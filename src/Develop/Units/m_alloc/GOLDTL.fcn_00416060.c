@@ -136,7 +136,7 @@ Snow* __cdecl fcn_00416060(int count)
 	}
 	n = 4;
 	fill = &flags;
-	/* Block-fill prelude no msvc6 C spelling emits (docs/codegen-walls.md 6b). */
+	/* Block-fill prelude recorded C probes did not emit (archived docs/codegen-walls.md 6b). */
 	__asm {
 		mov edi, fill
 		mov ebx, n

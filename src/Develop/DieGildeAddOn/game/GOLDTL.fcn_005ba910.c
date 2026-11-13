@@ -61,7 +61,7 @@ void __cdecl fcn_00473fe0(void);
 int __cdecl fcn_0057ecc0(void);
 void __cdecl fcn_00532ef0(void);
 float __cdecl fcn_0050bb50(int, int);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 int __cdecl ob_TransportFromLager(int, int, int, int, int, float, int, int);
 void __cdecl fcn_004116d0(void);
 int __cdecl fcn_00526120(int, int);

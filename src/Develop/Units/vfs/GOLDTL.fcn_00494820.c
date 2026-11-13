@@ -56,7 +56,7 @@ int __cdecl fcn_00494820(void)
 	sig = 0x6144466e;
 	if (g_77481c != 0) {
 		nmeth = 0x49;
-		GetModuleFileNameA((HMODULE) *(int*) 0x7e1f80, g_1008420, 0x104);
+		GetModuleFileNameA((HMODULE) g_7e1f80, g_1008420, 0x104);
 		strrchr(g_1008420, '\\')[1] = 0;
 		strcat(g_1008420, "ai_method_addon.ini");
 		if (fcn_004a1130(g_77481c) == 0) {

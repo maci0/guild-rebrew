@@ -43,8 +43,8 @@ struct Mesh_43ad20 {
 };
 
 extern void* g_6b5de0;
+#include "client_lighting.h"
 #define DEV_43ad20 ((Dev_43ad20*) g_6b5de0)
-
 /* ADDRESS: GOLDTL 0x0043ad20 */
 void __cdecl fcn_0043ad20(char a0, int a1)
 {
@@ -55,14 +55,14 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 	float v15;
 	int p6;
 
-	v3 = *(int*) 0x6b86d4;
-	if (*(int*) 0x6b86d4 < 0) {
+	v3 = g_6b86d4;
+	if (g_6b86d4 < 0) {
 		v3 = 0;
-		*(int*) 0x6b86d4 = 0;
+		g_6b86d4 = 0;
 	}
 	if (*(char*) 0x6b8018 && !v3 && *(int*) 0x6b8014) {
 		v10 = 3;
-		*(int*) 0x6b86d4 = 1;
+		g_6b86d4 = 1;
 		DEV_43ad20->vtbl->Clear(DEV_43ad20, 1, (void*) 0x1042570, 3, *(int*) 0x6b805c, 1.0f, 0);
 		*(int*) 0x1043294 = 0;
 		*(int*) 0x10432a0 = 0x501502f9;
@@ -146,7 +146,7 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 		*(int*) 0x6b802c = *(int*) 0x1042a08;
 		*(int*) 0x6b803c = *(int*) 0x1042a00;
 		*(int*) 0x6b8030 = *(int*) 0x10432a8;
-		*(int*) 0x6b86d4 -= 1;
+		g_6b86d4 -= 1;
 		*(int*) 0x6b8040 = *(int*) 0x1042a04;
 		*(int*) 0x6b8034 = 0;
 		*(int*) 0x6b8038 = *(int*) 0x1052bb0;

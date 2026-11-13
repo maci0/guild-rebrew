@@ -35,11 +35,11 @@ int __cdecl fcn_00424990(const char* host, unsigned short port)
     WSAStartup(2, &startup);
     g_6b7d40 = 1;
     sock = socket(2, 1, 6);
-    if (sock == INVALID_SOCKET) {
-        g_6b7d40 = 0;
-        WSACleanup();
-        return -1;
-    }
+    if (sock == INVALID_SOCKET)
+        goto cleanup;
+
+
+
     value = 1;
     if (setsockopt(sock, 0xffff, 4, (char*) &value, 4) == -1)
         goto fail;
@@ -72,8 +72,8 @@ int __cdecl fcn_00424990(const char* host, unsigned short port)
     timeout.tv_usec = 500000;
     i = 0;
     do {
-        writable.fd_count = 1;
         writable.fd_array[0] = sock;
+        writable.fd_count = 1;
         ready = select(1, 0, &writable, 0, &timeout);
         if (ready == -1)
             break;
@@ -93,6 +93,7 @@ int __cdecl fcn_00424990(const char* host, unsigned short port)
 fail:
     shutdown(sock, 2);
     closesocket(sock);
+cleanup:
     g_6b7d40 = 0;
     WSACleanup();
     return -1;

@@ -1,3 +1,4 @@
+extern int g_7e4530;
 /* ADDRESS: GOLDTL 0x0052a320 */
 char __cdecl fcn_0052a320(char* e)
 {
@@ -5,7 +6,7 @@ char __cdecl fcn_0052a320(char* e)
 	int* src;
 	int i;
 
-	if (*(int*) 0x7e4530 == 0) {
+	if (g_7e4530 == 0) {
 		if (e[0x215] & 4)
 			base = (char*) 0x6a29a8;
 		else

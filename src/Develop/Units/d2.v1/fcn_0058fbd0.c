@@ -1,6 +1,7 @@
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_data.h"
-
+#include "client_dialog_state.h"
 struct msg58 {
 	char pad0[4];
 	unsigned char b4;
@@ -16,7 +17,7 @@ struct msg58 {
 	int f58;
 	char pad5c[0x9c];
 };
-
+extern int g_14ce8e0, g_67d370;
 void __cdecl fcn_0052a0c0(void* a1, int a2);
 int __cdecl fcn_00470820(int a1, int a2, char* path);
 void __cdecl d2_SetOverlayAnimation(int a1, int a2);
@@ -32,7 +33,6 @@ void __cdecl fcn_0052a2d0(void);
 void __cdecl fcn_005305a0(void);
 int __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00526120(int a1, int a2);
-
 /* ADDRESS: GOLDTL 0x0058fbd0 */
 int __cdecl fcn_0058fbd0(char* a1)
 {
@@ -49,7 +49,7 @@ int __cdecl fcn_0058fbd0(char* a1)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(*(int*) 0x772514);
+	fcn_005340f0(g_772514);
 	one = 1;
 	d2_SetForm(dlg, one);
 	io_AppendText(0x40f6, 0x40f5, 0x228);
@@ -57,12 +57,12 @@ int __cdecl fcn_0058fbd0(char* a1)
 	i = io_AppendText(0x40f7);
 	id1 = fcn_00472250(dlg, 2, i);
 	id2 = fcn_00472250(dlg, 2, i + 1);
-	*(int*) 0x100f1dc = -1;
+	g_100f1dc = -1;
 	do {
-		if (*(int*) 0x14ce8e0 != 0) {
-			*(int*) 0x774654 = one;
-		} else if (*(int*) 0x100f1dc != -1) {
-			sel = *(int*) 0x67d370;
+		if (g_14ce8e0 != 0) {
+			g_774654 = one;
+		} else if (g_100f1dc != -1) {
+			sel = g_67d370;
 			if (sel == id1) {
 				char* p;
 				char* h;
@@ -89,13 +89,13 @@ found:
 					m.f38 = *(int*) (h + 4);
 					m.f58 = *(int*) (h + 4);
 					fcn_004c5530(&m);
-					*(int*) 0x774654 = 1;
+					g_774654 = 1;
 				} else {
 nofree:
 					fcn_00526120(*(int*) 0x14b556c, 0);
 				}
 			} else if (sel == id2) {
-				*(int*) 0x774654 = one;
+				g_774654 = one;
 			}
 		}
 	} while (fcn_005373e0((void*) fcn_0058fbd0, 0x677c7) != 0);

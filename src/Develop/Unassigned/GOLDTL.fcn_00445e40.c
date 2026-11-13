@@ -35,8 +35,8 @@ void __cdecl fcn_00445e40(int idx)
 	dst = ((Slot*)g_1041d80)[idx].data;
 	/*
 	 * TODO: replace this inline-asm copy with proper C once a spelling is
-	 * found; no msvc6 C memcpy form emits the prelude
-	 * (docs/codegen-walls.md section 6b).
+	 * found; recorded C copy probes did not emit the prelude
+	 * (archived docs/codegen-walls.md section 6b).
 	 */
 	__asm {
 		mov edi, dst

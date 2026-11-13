@@ -14,6 +14,8 @@ int* __cdecl fcn_004400b0(int a0, char* a1, char* a2, char** a3, float a4, float
 	int* obj;
 	char* p;
 	int i;
+	int n;
+	int v;
 
 	obj = (int*) m_alloc(0x8038, (char*) 0x67a950);
 	obj[0] = a0;
@@ -21,12 +23,35 @@ int* __cdecl fcn_004400b0(int a0, char* a1, char* a2, char** a3, float a4, float
 	obj[2] = (a0 * a0 - 1) | (a0 - 1);
 	p = (char*) m_alloc(a0 * a0, (char*) 0x67a940);
 	obj[4] = (int) p;
-	memset(p, 0x20, a0 * a0);
+	n = obj[0] * obj[0];
+	v = 0x20;
+	__asm {
+		mov edi, p
+		mov eax, v
+		mov ebx, n
+		mov ah, al
+		shl eax, 16
+		mov ecx, eax
+		shr ecx, 16
+		add eax, ecx
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L1:
+		add ecx, ebx
+		rep stosb
+	}
 	obj[5] = (int) m_alloc(a0 * a0, (char*) 0x67a87c);
-	obj[0x21] = (int) a5;
+	*(float*) (obj + 0x21) = a5;
 	obj[1] = a0 / 8;
 	*(float*) (obj + 0x14) = (float) (-a0) * a4 * *(float*) 0x6628cc;
-	obj[0x18] = (int) a4;
+	*(float*) (obj + 0x18) = a4;
 	obj[0x19] = 0;
 	obj[0x1a] = 0;
 	*(float*) (obj + 0x15) = a5 * *(float*) 0x662cac;

@@ -1,3 +1,4 @@
+extern int g_7749d4, g_7749d8, g_7dc424;
 void __cdecl fcn_00545510(void);
 int __cdecl ls_ReadVfsDataChecked(void *, int, int, void *);
 #include "Develop/Units/m_alloc/m_alloc.h"
@@ -14,9 +15,9 @@ int __cdecl fcn_00524b50(unsigned char *S)
         return 0;
     if (!ls_ReadVfsDataChecked(&c2, 4, 1, S))
         return 0;
-    *(int*)0x7749d4 = 0;
-    *(int*)0x7749d8 = 0;
-    *(int*)0x7dc424 = 0;
+    g_7749d4 = 0;
+    g_7749d8 = 0;
+    g_7dc424 = 0;
     i = 0;
     if (cnt > 0) {
         do {
@@ -74,14 +75,14 @@ int __cdecl fcn_00524b50(unsigned char *S)
                     return 0;
             }
             if (*(unsigned char *)(rec + 0x78) & 8) {
-                *(unsigned char **)(0x7d1980 + 4 * *(int *)0x7749d8) = rec;
-                *(int *)0x7749d8 += 1;
+                *(unsigned char **)(0x7d1980 + 4 * g_7749d8) = rec;
+                g_7749d8 += 1;
             }
-            i = *(int*)0x7dc424 + 1;
-            *(int*)0x7dc424 = i;
+            i = g_7dc424 + 1;
+            g_7dc424 = i;
         } while (i < cnt);
     }
-    *(int *)0x7749d4 = i;
+    g_7749d4 = i;
     if (!ls_ReadVfsDataChecked(&cnt, 4, 1, S))
         return 0;
     if (cnt > 0) {

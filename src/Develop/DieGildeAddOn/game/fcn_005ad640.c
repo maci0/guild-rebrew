@@ -3,7 +3,7 @@ typedef struct Ent {
 	unsigned short id;      /* +0x00 */
 	char pad2[2];           /* +0x02 */
 	int field4;             /* +0x04 */
-	char pad8[0x184];       /* +0x08 .. +0x187 */
+	char pad8[0x180];       /* +0x08 .. +0x187 */
 	unsigned char flag188;  /* +0x188 */
 	char pad189[0x21c - 0x189];
 } Ent;

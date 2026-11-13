@@ -9,8 +9,8 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 extern unsigned char g_773d75;
 extern char g_7f4ca4[];
-extern char* g_entity_type_table;
-extern char* g_item_def_table;
+extern unsigned char* lpGebaeudePROT;
+extern char* lpObjektePROT;
 extern void* g_6b7fdc;
 extern int g_6b8010;
 
@@ -64,7 +64,7 @@ void __cdecl fcn_00565ab0(char* ev)
 						}
 						if (g_6b8010 == fcn_005155e0((unsigned char*) v4)) {
 							void* found;
-							char* ent = g_entity_type_table + (unsigned char) *v4 * 0x24d;
+							char* ent = (char*) lpGebaeudePROT + (unsigned char) *v4 * 0x24d;
 
 							sprintf(erm, "Ernten_start_%s", v6 + 2);
 							sprintf(path, "%slocations/%s/%s_%s.esc", "x:\\engine\\gfx\\scripts\\",
@@ -93,7 +93,7 @@ void __cdecl fcn_00565ab0(char* ev)
 						*(int*) (ev + 0xc0) = -1;
 						{
 							unsigned short type = *(unsigned short*) (v5 + 0xa);
-							char* def = g_item_def_table + type * 0x41;
+							char* def = lpObjektePROT + type * 0x41;
 
 							*(pos14_7f4c00*) (ev + 0x52) = g_7f4c00;
 							fcn_00500bb0(ev + 0x52, 0,
@@ -107,7 +107,7 @@ void __cdecl fcn_00565ab0(char* ev)
 						}
 						if (g_6b8010 == fcn_005155e0((unsigned char*) v4)) {
 							void* found;
-							char* ent = g_entity_type_table + (unsigned char) *v4 * 0x24d;
+							char* ent = (char*) lpGebaeudePROT + (unsigned char) *v4 * 0x24d;
 
 							sprintf(erm, "Ernten_end_%s", v6 + 2);
 							sprintf(path, "%slocations/%s/%s_%s.esc", "x:\\engine\\gfx\\scripts\\",

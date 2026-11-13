@@ -88,10 +88,10 @@ void __cdecl fcn_00578ed0(char* a0)
 					return;
 				}
 				if (*(int*) (*(int*) (e + 0x184) + 0x128) != 0) {
-					*(int*) (a0 + 0x52) = *(int*) &g_7f4c00;
-					*(int*) (a0 + 0x56) = *(int*) &g_7f4c04;
-					*(int*) (a0 + 0x5a) = *(int*) 0x7f4c08;
-					*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) 0x7f4c0c;
+					*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+
+
+
 					fcn_00500bb0(a0 + 0x52, 0, 10, 0);
 					return;
 				}
@@ -111,10 +111,10 @@ void __cdecl fcn_00578ed0(char* a0)
 						msg.f0c = msg.f08;
 						msg.f60 = msg.f08;
 						msg.kind = 0x8b;
-						msg.f28 = *(int*) &g_7f4c00;
-						msg.f2c = *(int*) &g_7f4c04;
-						msg.f30 = *(int*) 0x7f4c08;
-						msg.f34 = *(unsigned short*) 0x7f4c0c;
+						*(pos14_7f4c00*) &msg.f28 = g_7f4c00;
+
+
+
 						msg.f36 = 9;
 						msg.f10 = 0;
 						msg.f14 = 0;
@@ -158,10 +158,10 @@ void __cdecl fcn_00578ed0(char* a0)
 					*(int*) (a0 + 0x70) = -1;
 					return;
 				}
-				*(int*) (a0 + 0x52) = *(int*) &g_7f4c00;
-				*(int*) (a0 + 0x56) = *(int*) &g_7f4c04;
-				*(int*) (a0 + 0x5a) = *(int*) 0x7f4c08;
-				*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) 0x7f4c0c;
+				*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+
+
+
 				fcn_00500bb0(a0 + 0x52, 0, 4, 0);
 				return;
 			default:

@@ -60,7 +60,8 @@ int __cdecl fcn_00520d90(void* stream)
 	int tmp;
 
 	count = 0;
-	for (i = 0; i < 1024; i++) {
+	tmp = 1024;
+	for (i = 0; i < tmp; i++) {
 		if (g_77e980[i].kind != 0)
 			count++;
 	}
@@ -114,7 +115,8 @@ int __cdecl fcn_00520d90(void* stream)
 			return 0;
 	}
 	count = 0;
-	for (i = 0; i < 256; i++) {
+	tmp = 256;
+	for (i = 0; i < tmp; i++) {
 		if (g_7d2020[i].id != 0)
 			count++;
 	}
@@ -139,7 +141,8 @@ int __cdecl fcn_00520d90(void* stream)
 			return 0;
 	}
 	count = 0;
-	for (i = 0; i < 256; i++) {
+	tmp = 256;
+	for (i = 0; i < tmp; i++) {
 		if (g_7dcae0[i].f8 != 0 || g_7dcae0[i].fc != 0 || g_7dcae0[i].name[0] != 0)
 			count++;
 	}

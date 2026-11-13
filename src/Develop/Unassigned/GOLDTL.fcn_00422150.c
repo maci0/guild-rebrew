@@ -76,12 +76,12 @@ void __cdecl fcn_00422150(void)
                             fcn_0042a880(p->obj);
                             p->flags14 = p->flags14 | 8;
                             p->start10 = 0;
-                            p->flags14 = p->flags14 & 0xfc;
+                            p->flags14 = p->flags14 & ~3;
                         }
                         else
                         {
                             fcn_0042a920(p->obj, p->speed24);
-                            p->flags14 = p->flags14 & 0xfc;
+                            p->flags14 = p->flags14 & ~3;
                             p->start10 = 0;
                         }
                     }

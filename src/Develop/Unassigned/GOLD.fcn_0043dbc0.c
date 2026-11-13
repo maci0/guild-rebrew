@@ -1,4 +1,6 @@
 #include <string.h>
+extern unsigned int g_fb9084;
+extern void* g_fb9074;
 void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_0045cdf0(char*);
@@ -87,8 +89,8 @@ void __cdecl fcn_0043dbc0(char* object)
                 bank->vertices[i].specular = (unsigned int)-1;
             }
         }
-        mapping = (int*)m_alloc(*(unsigned int*)0xfb9084 * 4, "d3:!InflateObject(mat)");
-        memset(mapping, 0xff, *(unsigned int*)0xfb9084 * 4);
+        mapping = (int*)m_alloc(g_fb9084 * 4, "d3:!InflateObject(mat)");
+        memset(mapping, 0xff, g_fb9084 * 4);
         next_material = 0;
         for (i = 0; i < bank->face_count; i++) {
             face = &bank->faces[i];
@@ -109,11 +111,11 @@ void __cdecl fcn_0043dbc0(char* object)
             }
             material_index = mapping[material_slot];
             if (material_index <= -1) {
-                material_index = (bank->materials[next_material] - *(char**)0xfb9074) >> 7;
+                material_index = (bank->materials[next_material] - ((char*)g_fb9074)) >> 7;
                 next_material++;
                 mapping[material_slot] = material_index;
             }
-            material = *(char**)0xfb9074 + material_index * 0x80;
+            material = ((char*)g_fb9074) + material_index * 0x80;
             face->material = material;
             alpha = *(unsigned char*)(material + 0x6c);
             if (alpha != 0xff || (material[0x6e] & 3)) {

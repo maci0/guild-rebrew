@@ -24,7 +24,7 @@ void __cdecl fcn_005aceb0(char* obj)
 	if (fcn_00502cd0(*(int*) (obj + 0x5d), 1, 0, 0xba) == 0) {
 		return;
 	}
-	h = fcn_00470820(0, 0, "locations\\kerker\\kerkerplan.ob");
+	h = fcn_00470820(0, 0, "locations\\kerker\\kerkerplan");
 	fcn_00471b60(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x19ad);

@@ -74,7 +74,7 @@ extern int g_7e4314;			/* 0x007e4314 */
 extern int g_1007cd0;			/* 0x01007cd0 */
 extern pos14_7f4c00 g_7f4c00;		/* 0x007f4c00 */
 extern char g_7f4ca0[];			/* slot table, stride 0x21c */
-extern unsigned char* g_868050;		/* entity type table */
+extern unsigned char* lpGebaeudePROT;		/* entity type table */
 extern float g_696540[];
 extern float g_696550[];
 extern float g_664138;
@@ -156,8 +156,8 @@ void __cdecl fcn_004c2d90(float, int);
 
 #define SLOTPTR(k) ((char*) g_7f4ca0 + (k) * 0x21c)
 #define SLOT4(k) (*(int *) (SLOTPTR(k) + 4))
-#define ENTTYPE(t) (*(unsigned char *) (g_868050 + (t) * 0x24d))
-#define ENTCLASS(t) (*(unsigned char *) (g_868050 + (t) * 0x24d + 0x247))
+#define ENTTYPE(t) (*(unsigned char *) (lpGebaeudePROT + (t) * 0x24d))
+#define ENTCLASS(t) (*(unsigned char *) (lpGebaeudePROT + (t) * 0x24d + 0x247))
 #define OBJBYTE (*(unsigned char *) obj)
 
 /* ADDRESS: GOLDTL 0x00540020 */

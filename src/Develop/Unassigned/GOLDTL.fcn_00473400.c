@@ -34,7 +34,6 @@ int __cdecl fcn_00473400(char* path, char* name)
 	int size;
 	FILE* f;
 	char* buf;
-	char* p;
 	int kind;
 	int index;
 	int save;
@@ -46,10 +45,11 @@ int __cdecl fcn_00473400(char* path, char* name)
 	buf = (char*) malloc(size);
 	fseek(f, 0, 0);
 	fread(buf, size, 1, f);
-	index = g_772504;
+	save = index = g_772504;
 	((VfsEntry*) g_772500)[index].kind = fcn_00473360(buf) & 0xff;
 	kind = ((VfsEntry*) g_772500)[index].kind;
 	if (kind == 1 || kind == 5 || kind == 4 || kind == 8) {
+		char* p;
 		p = (char*) fcn_0047b620(buf, 0);
 		((VfsEntry*) g_772500)[index].w50 = *(short*) (p + 2);
 		((VfsEntry*) g_772500)[index].w52 = *(short*) (p + 6);
@@ -64,9 +64,9 @@ int __cdecl fcn_00473400(char* path, char* name)
 	((VfsEntry*) g_772500)[index].flags |= 1;
 	((VfsEntry*) g_772500)[index].flags &= 0xfd;
 	kind = ((VfsEntry*) g_772500)[index].kind;
-	save = index;
 	if (kind == 5 || kind == 8) {
 		for (i = 1; i < *(unsigned short*) (buf + 4); i++) {
+			char* p;
 			index++;
 			((VfsEntry*) g_772500)[index].offset = 0;
 			*(int*) ((VfsEntry*) g_772500)[index].name = g_67d8c8;

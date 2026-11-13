@@ -91,7 +91,7 @@ int __cdecl gm_CheckEntityType(int);
 int __cdecl fcn_004c35f0(void);
 int __cdecl fcn_005ba0e0(int, int, int, int, int, float, int, int);
 void __cdecl fcn_0050de80(int, int*);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl fcn_005309d0(void*, int);
 
 /* One 0xf0-byte inventory entity slot. Only the eight bytes at +0x0c..+0x18
    and the two three-int arrays at +0xd8 are written by the native body so far;
@@ -1771,7 +1771,7 @@ l_5bd632:
 	} else {
 		*(int*) 0x774698 = 0;
 	}
-	if (fcn_005373e0(0x5af320, 0x657c7) != 0) {
+	if (fcn_005309d0((void*) fcn_005af320, 0x657c7) != 0) {
 		goto l_5bb193;
 	}
 	fcn_005c61c0();

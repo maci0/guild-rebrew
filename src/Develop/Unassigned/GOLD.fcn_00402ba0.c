@@ -97,7 +97,7 @@ void __cdecl fcn_00402ba0(char* character)
                     character[0x8c] |= 0x80;
                     return;
                 }
-                *(char**)(*(char**)(*(char**)(character + 0x22c) + 0x1cc) + 0x1c) = *(char**)(character + 0x70);
+                I32(*(char**)(*(char**)(character + 0x22c) + 0x1cc) + 0x1c) = I32(*(char**)(character + 0x70));
                 I32(attached + 0x3c) = -1;
                 return;
             }

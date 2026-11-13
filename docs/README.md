@@ -21,7 +21,7 @@ Start with a task below. Managed metadata holds current verdicts;
 | Client comparison builds | [Client guide](../stubs/README.md) |
 | Implementation and metadata rules | [AGENTS.md](../AGENTS.md) |
 | Tool design | [Principles](../PRINCIPLES.md) |
-| Releases | [1.11.0](releases/1.11.0.md), [1.10.0](releases/1.10.0.md) |
+| Releases | [1.12.0](releases/1.12.0.md), [1.11.0](releases/1.11.0.md), [1.10.0](releases/1.10.0.md) |
 
 ## Workflows
 

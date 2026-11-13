@@ -19,7 +19,7 @@ int __cdecl fcn_004d3330(char* self, int a1, int a2, int a3,
 	int d;
 	int lo;
 	int hi;
-	int w;
+	int w; int row_hi;
 
 	map = *(char**) (((char*) g_67a370) + 0xb0);
 	best = 0.0f;
@@ -27,17 +27,17 @@ int __cdecl fcn_004d3330(char* self, int a1, int a2, int a3,
 	if (a3 > 0) {
 		do {
 			w = *(int*) (map + 0x20);
-			hi = w - 1;
-			if (hi > i + a2) {
-				hi = i + a2;
+			row_hi = w - 1;
+			if (row_hi > i + a2) {
+				row_hi = i + a2;
 			}
 			lo = a2 - i;
 			if (lo < 0) {
 				lo = 0;
 			}
 			n = a2 - lo;
-			for (r = lo; r <= hi; r++, n--) {
-				d = i - (n < 0 ? -n : n);
+			for (r = lo; r <= row_hi; r++, n--) {
+				d = i - (n < 0 ? -n : n); w = *(int*) (map + 0x20);
 				lo = a1 - d;
 				if (lo < 0) {
 					lo = 0;
@@ -46,10 +46,10 @@ int __cdecl fcn_004d3330(char* self, int a1, int a2, int a3,
 				if (hi > w - 1) {
 					hi = w - 1;
 				}
-				cells = *(char**) (map + 0x24);
+
 				for (c = lo; c <= hi; c++) {
-					if (*(int*) (cells + (w * r + c) * 0x1c) != 0
-						&& *(int*) (cells + (w * r + c) * 0x1c) != 0xd) {
+					cells = *(char**) (map + 0x24); if (*(int*) (cells + (*(int*) (map + 0x20) * r + c) * 0x1c) != 0
+						&& *(int*) (cells + (*(int*) (map + 0x20) * r + c) * 0x1c) != 0xd) {
 						f = fcn_004d3070(self, c, r,
 							(float) a3 * *(float*) (map + 0x10) * 2.0f);
 						if (f > best) {

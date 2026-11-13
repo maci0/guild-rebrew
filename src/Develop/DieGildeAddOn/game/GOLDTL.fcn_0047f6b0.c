@@ -63,7 +63,7 @@ typedef struct Lvl {
 	char pad248[5];
 } Lvl;
 
-/* g_item_def_table: 0x41-byte item definitions. */
+/* lpObjektePROT: 0x41-byte item definitions. */
 typedef struct ItemDef {
 	unsigned char kind;   /* 0x00 */
 	char pad1[0x25];
@@ -91,7 +91,7 @@ extern Ord g_100d0c0[];
 extern Bld g_100b0c0[];
 extern Ent g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
-extern char* g_item_def_table;
+extern char* lpObjektePROT;
 extern char g_7f4ca4[];
 extern char g_7f4c00[];
 extern int g_7f4c04;
@@ -245,7 +245,7 @@ found:
 	if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].f20) {
 		goto scan;
 	}
-	if (g_100d0c0[i].f40 < (int) ((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].f36) {
+	if (g_100d0c0[i].f40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
 		goto scan;
 	}
 	v = (int) fcn_00503d10(g_100d0c0[i].f0);
@@ -253,15 +253,15 @@ found:
 		goto scan;
 	}
 	t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].f0, 0xf4240);
-	if (t < (int) ((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].f36 + g_100d0c0[i].f3c) {
+	if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36 + g_100d0c0[i].f3c) {
 		goto scan;
 	}
-	if (((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].kind == 0x17) {
+	if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].kind == 0x17) {
 		q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].f0);
 		if (q == 0) {
 			goto scan;
 		}
-		if (*(int*) (q + 0xe) < (int) ((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].f36) {
+		if (*(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
 			goto scan;
 		}
 		g_100d0c0[i].flags |= 8;
@@ -287,7 +287,7 @@ scan:
 		if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].f20) {
 			continue;
 		}
-		if (g_100d0c0[i].f40 < (int) ((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].f36) {
+		if (g_100d0c0[i].f40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
 			continue;
 		}
 		v = (int) fcn_00503d10(g_100d0c0[i].f0);
@@ -295,10 +295,10 @@ scan:
 			continue;
 		}
 		t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].f0, 0xf4240);
-		if (t < (int) ((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].f36 + g_100d0c0[i].f3c) {
+		if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36 + g_100d0c0[i].f3c) {
 			continue;
 		}
-		if (((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].kind != 0x17) {
+		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].kind != 0x17) {
 			if (fcn_00486640(a, (int*) &g_100d0c0[i], 1)) {
 				g_100d0c0[i].flags |= 8;
 				fcn_004868d0(a, (int*) &g_100d0c0[i]);
@@ -310,7 +310,7 @@ scan:
 		if (q == 0) {
 			continue;
 		}
-		if (*(int*) (q + 0xe) < (int) ((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].f36) {
+		if (*(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
 			continue;
 		}
 		g_100d0c0[i].flags |= 8;
@@ -332,7 +332,7 @@ after:
 		if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].f20) {
 			continue;
 		}
-		if (g_100d0c0[i].f40 < (int) ((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].f36) {
+		if (g_100d0c0[i].f40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
 			continue;
 		}
 		v = (int) fcn_00503d10(g_100d0c0[i].f0);
@@ -340,10 +340,10 @@ after:
 			continue;
 		}
 		t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].f0, 0xf4240);
-		if (t < (int) ((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].f36 + g_100d0c0[i].f3c) {
+		if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36 + g_100d0c0[i].f3c) {
 			continue;
 		}
-		if (((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].kind == 0x17) {
+		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].kind == 0x17) {
 			g_100d0c0[i].flags |= 0x10;
 			break;
 		}
@@ -357,13 +357,13 @@ after:
 		if ((g_100d0c0[i].flags & 8) == 0) {
 			continue;
 		}
-		if (((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].kind == 0x17) {
+		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].kind == 0x17) {
 			if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) h].kind == 0xb) {
 				g_100d0c0[i].flags |= 0x10;
 			} else {
 				q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].f0);
 				if (q == 0
-				    || *(int*) (q + 0xe) < (int) ((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].f36) {
+				    || *(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
 					g_100d0c0[i].flags =
 					    (g_100d0c0[i].flags & ~8) | 0x10;
 				}
@@ -371,7 +371,7 @@ after:
 		} else {
 			for (j = 0; j != 4; j++) {
 				if (g_100b0c0[g_100d0c0[i].bld[j]].busy
-				    < (int) ((ItemDef*) g_item_def_table)[g_100d0c0[i].f0].f26) {
+				    < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f26) {
 					g_100d0c0[i].flags &= ~8;
 				}
 			}
@@ -460,11 +460,11 @@ after:
 		}
 		for (i = 0; i < g_100b0ac * 4; i++) {
 			j = gm_RandomMod(g_100b0ac) & 0xffff;
-			if (((ItemDef*) g_item_def_table)[g_100d0c0[j].f0].kind == 0x17) {
+			if (((ItemDef*) lpObjektePROT)[g_100d0c0[j].f0].kind == 0x17) {
 				break;
 			}
 		}
-		if (((ItemDef*) g_item_def_table)[g_100d0c0[j].f0].kind != 0x17) {
+		if (((ItemDef*) lpObjektePROT)[g_100d0c0[j].f0].kind != 0x17) {
 			goto lflag;
 		}
 		g = plt_FindPlantInfo(g_100d0c0[j].f0);
@@ -500,7 +500,7 @@ ltail:
 				}
 			}
 			if (((Ord*) rec)->flags & 8) {
-					if (((ItemDef*) g_item_def_table)[((Ord*) rec)->f0].kind == 0x17) {
+					if (((ItemDef*) lpObjektePROT)[((Ord*) rec)->f0].kind == 0x17) {
 						st.rec = rec;
 						if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].kind == 0xb) {
 							st.kind = 0x28;

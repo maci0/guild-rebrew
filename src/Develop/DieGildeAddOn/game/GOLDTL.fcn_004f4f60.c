@@ -31,16 +31,16 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
 	char rec[36];
 	msg_4f4f60 msg;
 	char* h1;
-	char* h2;
+
 	float f;
-	char* hit;
+
 
 	if (!fcn_004f4830(idx, rec)) {
 		goto fail;
 	}
 	h1 = gm_LookupEntityRecordById(a3);
-	h2 = gm_LookupEntityRecordById(a4);
-	gm_ResolveEntityById(&hit, 0, 0, a5);
+	gm_LookupEntityRecordById(a4);
+	gm_ResolveEntityById((char**)&idx, 0, 0, a5);
 	switch ((unsigned char) *(int*) (rec + 0x14)) {
 	case 1:
 		if (*(int*) (rec + 0x18) != id) {

@@ -11,8 +11,6 @@ extern char g_6a438c[];
 extern char g_6a5de0[];
 extern char g_6a5dcc[];
 extern char g_6a5da8[];
-
-
 extern char g_6a5d3c[];
 extern char g_6a5d20[];
 extern char g_6a5d04[];
@@ -72,9 +70,9 @@ void __cdecl fcn_00554f00(char* a0)
 		fcn_00546190(a0);
 		return;
 	}
-	if (st != 0) {
-		if (st != 1)
-			return;
+	switch (st) {
+	case 0: goto state_zero;
+	case 1:
 		h = *(char**) (a0 + 0x74);
 		if (h == 0) {
 			*(int*) (a0 + 0x70) = 0;
@@ -98,7 +96,9 @@ void __cdecl fcn_00554f00(char* a0)
 		fcn_00545780(a0);
 		fcn_00546190(a0);
 		return;
+	default: return;
 	}
+state_zero:
 	h = *(char**) (a0 + 0x74);
 	if (h == 0) {
 		if (p == rec) {

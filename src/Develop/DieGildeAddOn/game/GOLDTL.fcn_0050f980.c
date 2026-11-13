@@ -1,3 +1,5 @@
+extern unsigned char* g_entity_ptr;
+extern unsigned char* lpGebaeudePROT;
 int __cdecl fcn_0050c710(void*, int, int);
 int __cdecl fcn_004e8b40(int, void*);
 int __cdecl fcn_0050e4a0(int);
@@ -79,11 +81,11 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
     v7 = 0;
     v13 = (float) (*(char*) (v4 * 0x300 + 0x869480 + v2) + 0x7f) *
           *(float*) 0x662c30 * *(float*) 0x662cf8; v15 = v13 + v15;
-    v10 = (unsigned char*) *(unsigned int*) 0x90e094;
+    v10 = (unsigned char*) (unsigned int) g_entity_ptr;
     do {
         if (*v10 && *(short*) (v10 + 0x27) == *(short*) (v9 + 0x7f4ca0)) {
             v6 = (char*) ((unsigned int) *v10 * 0x24d +
-                          *(unsigned int*) 0x868050);
+                          (unsigned int) lpGebaeudePROT);
             if (*v6 == '!') {
                 v1 = v6[0x247];
                 if (v7 < v1) {

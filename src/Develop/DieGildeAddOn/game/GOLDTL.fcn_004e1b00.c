@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <string.h>
+#include "game_data.h"
+extern int g_68bfb8;
+extern int g_7725c8;
+extern int g_772f54;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cut_RandMod(int);
@@ -49,8 +53,8 @@ void __cdecl fcn_004e1b00(int a0)
 	q = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
 	r = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x3c));
 	s = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x40));
-	*(int*) 0x68bfb8 = 0x702c6;
-	*(int*) 0x7725c8 = 1;
+	g_68bfb8 = 0x702c6;
+	g_7725c8 = 1;
 	fcn_004e4730((char*) 0x68cfb0);
 	fcn_00445f50(0, 0, 1.0f, 1);
 	fcn_004463f0(0, 0, 0);
@@ -90,7 +94,7 @@ void __cdecl fcn_004e1b00(int a0)
 	sprintf(buf + len, (char*) 0x679060, id + 4);
 	fcn_004e44b0((char*) 0x68cf80, buf);
 	fcn_004e44f0(fcn_004e44b0((char*) 0x68cf54, (char*) 0x6b5c60));
-	if (*(int*) (a0 + 0xc) == *(int*) (*(unsigned short*) 0x774970 * 0x21c + 0x7f4ca4)) {
+	if (*(int*) (a0 + 0xc) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
 		fcn_004ff210(*p, (int) -(*(float*) ((char*) p + 0x1c) + *(float*) 0x662a98));
 	}
 	switch (*(char*) (a0 + 0x7c)) {
@@ -119,8 +123,8 @@ done:
 		fcn_004e4c60();
 	}
 	fcn_004e4c00();
-	*(int*) 0x772f54 = 0;
+	g_772f54 = 0;
 	fcn_004e4910();
-	*(int*) 0x7725c8 = 0;
+	g_7725c8 = 0;
 	fcn_004e3640();
 }

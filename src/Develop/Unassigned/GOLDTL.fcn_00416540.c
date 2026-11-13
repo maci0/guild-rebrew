@@ -63,7 +63,7 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	float cy;
 	float k;
 	float s;
-	float w;
+	float w; float s7;
 	int i;
 
 	in[0] = self->x - *(float*) (g_6b8014 + 0x84);
@@ -136,11 +136,11 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 		}
 		s = k / (r[2] + r[2] + 3.0f);
 		r[6] = s * r[0] + cx;
-		r[7] = cy - s * r[1];
+		s7 = cy - s * r[1]; r[7] = s7;
 		w = (1.0f - r[2]) * 13.5f + 1.0f;
 		w *= r[3];
 		r[8] = r[6] + w;
-		r[9] = w + r[7];
+		r[9] = w + s7;
 		i++;
 		r += 10;
 	}

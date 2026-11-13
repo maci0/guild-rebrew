@@ -1,5 +1,7 @@
 #include <windows.h>
 #include <string.h>
+#include "client_dialog_state.h"
+extern int g_14ce8e0;
 
 /* Globals referenced by the lobby setup.  The 0x779c60 status block and the
  * 0x7e23e2 INI image have no managed data rows yet, so they are addressed
@@ -92,14 +94,14 @@ int __cdecl fcn_005926f0(void)
 		h = (void*)fcn_00470820(0, 0, (char*)0x68d714);
 		fcn_00471b60(h);
 		io_AppendText(0x87);
-		*(int*)0x100f1dc = -1;
-		while (*(int*)0x14ce8e0 == 0 && *(char*)0x14cf950 != 1) {
+		(*(int*)0x100f1dc) = -1;
+		while (g_14ce8e0 == 0 && *(char*)0x14cf950 != 1) {
 			if (fcn_005373e0((void*)fcn_005926f0, 0x24087) == 0) {
 				fcn_00471e30(h);
 				return 0;
 			}
 		}
-		*(int*)0x774654 = 1;
+		g_774654 = 1;
 		fcn_00471e30(h);
 		return 0;
 	}
@@ -151,14 +153,14 @@ int __cdecl fcn_005926f0(void)
 		h = (void*)fcn_00470820(0, 0, (char*)0x68d714);
 		fcn_00471b60(h);
 		io_AppendText(0x87);
-		*(int*)0x100f1dc = -1;
-		while (*(int*)0x14ce8e0 == 0 && *(char*)0x14cf950 != 1) {
+		(*(int*)0x100f1dc) = -1;
+		while (g_14ce8e0 == 0 && *(char*)0x14cf950 != 1) {
 			if (fcn_005373e0((void*)fcn_005926f0, 0x24087) == 0) {
 				fcn_00471e30(h);
 				return 0;
 			}
 		}
-		*(int*)0x774654 = 1;
+		g_774654 = 1;
 		fcn_00471e30(h);
 		return 0;
 	}
@@ -180,7 +182,7 @@ int __cdecl fcn_005926f0(void)
 	*(int*)((char*)0x102d168 + *(int*)((char*)g_1015ea0 + (int)h * 0x2f4 + 0x88) * 0x220) |= 0x200;
 	*(int*)((char*)0x102d150 + *(int*)((char*)g_1015ea0 + (int)h * 0x2f4 + 0x88) * 0x220) = 0x26c;
 	*(int*)((char*)0x102d29c + *(int*)((char*)g_1015ea0 + (int)h * 0x2f4 + 0x88) * 0x220) = 0x26c;
-	*(int*)0x100f1dc = -1;
+	(*(int*)0x100f1dc) = -1;
 
 	do {
 		if (flag == 0) {
@@ -206,20 +208,20 @@ int __cdecl fcn_005926f0(void)
 
 		if (*(int*)0x14cbca0 == -1) {
 			ret = -1;
-			*(int*)0x774654 = 1;
+			g_774654 = 1;
 			goto next;
 		}
 		if (fcn_004ce090()) {
-			*(int*)0x774654 = 1;
+			g_774654 = 1;
 			goto next;
 		}
-		if (*(int*)0x100f1dc != -1) {
+		if ((*(int*)0x100f1dc) != -1) {
 			int key = *(int*)0x67d370;
 			if (key == *(int*)0x6a9b98) {
 				d = fcn_004ce260();
 				while (fcn_004c4450(d) == 0)
 					fcn_00535960();
-				*(int*)0x774654 = 1;
+				g_774654 = 1;
 				ret = -1;
 				goto last;
 			}
@@ -229,7 +231,7 @@ int __cdecl fcn_005926f0(void)
 					fcn_00535960();
 				*(int*)((char*)g_1015ea0 + *(int*)0x6a9b90 * 0x2f4 + 0x38) = *(int*)(g_779cb8 + 4);
 				if (fcn_004ce090())
-					*(int*)0x774654 = 1;
+					g_774654 = 1;
 			} else if (key == *(int*)0x6a9b94) {
 				if (*(int*)(g_779cb8 + 4) != 0) {
 					d = fcn_004ce210(0);
@@ -278,10 +280,10 @@ int __cdecl fcn_005926f0(void)
 			}
 		}
 	next:
-		*(int*)0x100f1dc = -1;
+		(*(int*)0x100f1dc) = -1;
 		if (*(int*)((char*)*(int*)0x779ce4 + 4) != 0) {
 			if (fcn_004ce090()) {
-				*(int*)0x774654 = 1;
+				g_774654 = 1;
 			} else {
 				d = fcn_004ce1d0();
 				while (fcn_004c4450(d) == 0)

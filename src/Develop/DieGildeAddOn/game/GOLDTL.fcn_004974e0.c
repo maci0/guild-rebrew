@@ -1,5 +1,5 @@
 #include "game_data.h"
-extern char* g_item_def_table;
+
 #include "GOLDTL.fcn_004974e0_gconf.h"
 extern unsigned char g_773d75;
 typedef struct { char x00[0x21]; unsigned char x21; char x22[0x22b]; } BUILDING_LIMIT_VIEW;
@@ -27,7 +27,7 @@ int __cdecl fcn_004974e0(int unused, char* e, int unused2, char* out, char* out2
 		return 0;
 	if (out[0] != 2)
 		return 0;
-	if (g_item_def_table[*(int*) (out + 4) * 0x41] != 2)
+	if (lpObjektePROT[*(int*) (out + 4) * 0x41] != 2)
 		return 0;
 	if (out2[0] != 4)
 		return 0;

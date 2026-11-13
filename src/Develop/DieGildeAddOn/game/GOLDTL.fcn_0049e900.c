@@ -1,3 +1,4 @@
+extern unsigned char* g_entity_ptr;
 /* AI step: take out a credit. Picks a target building of the right kind and a
  * lender, rates the lender's credit offers and fills the two action packets
  * with the best one; 0x33 on success. */
@@ -66,7 +67,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 		v[3] = (int) (d * *(float*) 0x664370);
 		j = gm_RandomMod(0x100);
 		for (i = 0x100; ; ) {
-			e = *(char**) 0x90e094 + j * 0xa9;
+			e = (char*) g_entity_ptr + j * 0xa9;
 			if (e[0] != 0 && *(short*) (e + 0x27) == *target) {
 				row = &((BuildingRow*) lpGebaeudePROT)[*(unsigned char*) e];
 				if (((1 << row->kind) & 0x7d4390) != 0 && *(int*) (e + 0x39) < v[row->level])
@@ -78,7 +79,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 		}
 		j = gm_RandomMod(0x100);
 		for (i = 0x100; ; ) {
-			e2 = *(char**) 0x90e094 + j * 0xa9;
+			e2 = (char*) g_entity_ptr + j * 0xa9;
 			if (e2[0] != 0 && *(short*) (e2 + 0x27) != *target
 			    && ((BuildingRow*) lpGebaeudePROT)[*(unsigned char*) e2].kind == 5)
 				break;
@@ -115,7 +116,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 		return 0;
 	j = gm_RandomMod(0x100);
 	for (i = 0x100; ; ) {
-		e2 = *(char**) 0x90e094 + j * 0xa9;
+		e2 = (char*) g_entity_ptr + j * 0xa9;
 		if (e2[0] != 0 && *(short*) (e2 + 0x27) != *target
 		    && ((BuildingRow*) lpGebaeudePROT)[*(unsigned char*) e2].kind == 5)
 			break;

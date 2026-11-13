@@ -218,7 +218,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 							s = p + 3;
 							zn = 0x200;
 							zp = bufs.d;
-							/* block-fill prelude, see docs/codegen-walls.md section 6b */
+							/* block-fill prelude, see archived docs/codegen-walls.md section 6b */
 							__asm {
 								mov edi, zp
 								mov ebx, zn
@@ -318,7 +318,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 						s = p + 3;
 						zn = 0x80;
 						zp = bufs.b;
-						/* block-fill prelude, see docs/codegen-walls.md section 6b */
+						/* block-fill prelude, see archived docs/codegen-walls.md section 6b */
 						__asm {
 							mov edi, zp
 							mov ebx, zn

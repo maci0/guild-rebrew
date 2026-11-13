@@ -140,9 +140,9 @@ unsigned int __cdecl fcn_0053d020(int a0)
 					sel = items[i];
 					found = 1;
 				} else {
-					*(unsigned int*) (v2 + 0x38) = 0;
-					*(unsigned int*) (v2 + 0x3c) = 0;
-					*(unsigned int*) (v2 + 0x60) = 1;
+					*(unsigned int*) (g_1015ea0 + items[i] * 0x2f4 + 0x38) = 0;
+					*(unsigned int*) (g_1015ea0 + items[i] * 0x2f4 + 0x3c) = 0;
+					*(unsigned int*) (g_1015ea0 + items[i] * 0x2f4 + 0x60) = 1;
 				}
 				i++;
 			} while (i < 8);

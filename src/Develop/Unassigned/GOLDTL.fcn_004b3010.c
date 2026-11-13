@@ -23,7 +23,7 @@ typedef struct Parts {
  * unreachable from C without inventing dead members; it is left unreproduced.
  */
 
-/* block-fill prelude, see docs/codegen-walls.md section 6b */
+/* block-fill prelude, see archived docs/codegen-walls.md section 6b */
 static __inline void fill0(char* d, int n)
 {
 	char* dd;
@@ -50,7 +50,7 @@ static __inline void fill0(char* d, int n)
 	}
 }
 
-/* block-copy prelude, see docs/codegen-walls.md section 6b */
+/* block-copy prelude, see archived docs/codegen-walls.md section 6b */
 static __inline void copy0(char* d, char* s, int n)
 {
 	char* dd;

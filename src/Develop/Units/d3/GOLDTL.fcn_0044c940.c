@@ -45,8 +45,8 @@ char __cdecl fcn_0044c940(D3dRegCfg_44c940* cfg, const char* key, D3dRegCfg_44c9
 
 	if (cfg != def) {
 		n = sizeof(D3dRegCfg_44c940);
-		/* align-up block copy: no msvc6 C spelling emits it
-		 * (docs/codegen-walls.md 6b) */
+		/* align-up block copy: recorded C probes did not emit it
+		 * (archived docs/codegen-walls.md 6b) */
 		__asm {
 			mov edi, cfg
 			mov esi, def

@@ -28,7 +28,7 @@ unsigned int __cdecl fcn_004a57a0(unsigned short *e, int a1, int n, char *src, f
 	Query q;
 	int count;
 	int found;
-	unsigned int i;
+	int i;
 	unsigned int len;
 
 	step = g_664398[gm_RandomMod(0x10) & 0xffff];

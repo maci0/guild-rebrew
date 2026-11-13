@@ -8,7 +8,7 @@ typedef struct Cmd {
 } Cmd;
 
 extern unsigned char* g_entity_ptr;
-#include "GOLDTL.fcn_00497ec0_gconf.h"
+extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 extern unsigned int g_666028;
 extern unsigned int g_66602c;
@@ -16,7 +16,7 @@ extern float g_664178;
 extern float g_6628bc;
 extern float g_66414c;
 
-/* SIZE 0x24d: building prototype row of g_entity_type_table (0x868050) */
+/* SIZE 0x24d: building prototype row of lpGebaeudePROT (0x868050) */
 typedef struct {
 	unsigned char type;
 	char rest[0x24c];
@@ -63,7 +63,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 	do {
 		if (*(unsigned char*) p != 0) {
 			id = *(unsigned char*) p;
-			rec = (unsigned char*) &((BldProt_497ec0*) g_entity_type_table)[id];
+			rec = (unsigned char*) &((BldProt_497ec0*) lpGebaeudePROT)[id];
 			lo = 0;
 			hi = 0;
 			if (rec[0] > 0x1f) {
@@ -88,7 +88,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					q = *(unsigned char**) ((char*) a1 + 0x170);
 					if (q != 0) {
 						id = *q;
-						rec = (unsigned char*) &((BldProt_497ec0*) g_entity_type_table)[id];
+						rec = (unsigned char*) &((BldProt_497ec0*) lpGebaeudePROT)[id];
 						if (rec[0] == 2 && !(q[0x5a] & 0x41)) {
 							t = rec[0x247];
 							if (t < 2 || t == 3) {
@@ -169,7 +169,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 				q = *(unsigned char**) ((char*) a1 + 0x170);
 				if (q != 0) {
 					id = *q;
-					if (((BldProt_497ec0*) g_entity_type_table)[id].type != 2)
+					if (((BldProt_497ec0*) lpGebaeudePROT)[id].type != 2)
 						return 0;
 					v = *(int*) ((char*) a3 + 4);
 					if (v - id != 1)
@@ -197,7 +197,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					}
 					return 0;
 				}
-				if (((BldProt_497ec0*) g_entity_type_table)[a3->f1].type != 2)
+				if (((BldProt_497ec0*) lpGebaeudePROT)[a3->f1].type != 2)
 					return 0;
 				if (!fcn_004a4bb0(a0, a1, a2, &cmd, &out, 1))
 					return 0;

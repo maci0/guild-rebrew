@@ -1,4 +1,5 @@
-
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 extern float g_662910;
 extern float g_6628a0;
 extern float g_6628a8;
@@ -38,16 +39,15 @@ int __cdecl fcn_00493a30(unsigned short* key, char* e)
 		f1 = f1 + g_662a3c;
 		f2 = f2 - g_662a3c;
 	}
-	if (f1 < g_6628a8) {
-		f1 = g_6628a8;
-	} else if (f1 > g_6628a0) {
-		f1 = g_6628a0;
-	}
-	if (f2 < g_6628a8) {
-		f2 = g_6628a8;
-	} else if (f2 > g_6628a0) {
-		f2 = g_6628a0;
-	}
+	f1 = MIN(MAX(0.0f, f1), 1.0f);
+	f2 = MIN(MAX(0.0f, f2), 1.0f);
+
+
+
+
+
+
+
 	g1 = fcn_00507e70(p1, (char*) key, 4);
 	g2 = fcn_00507e70(p2, (char*) key, 4);
 	v = *(float*) (e + 4);

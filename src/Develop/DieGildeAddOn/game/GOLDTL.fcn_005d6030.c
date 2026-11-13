@@ -8,7 +8,7 @@ extern int g_666018;
 extern int g_66601c;
 
 int __cdecl gm_LookupEntityRecordById(unsigned int);
-unsigned short __cdecl gm_RandomMod(int);
+int __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl io_FormatTextBuffer(char*, int);
@@ -32,8 +32,8 @@ int __cdecl fcn_005d6030(char* a0, char* a1)
 		if (found == 0) {
 			return 0x60;
 		}
-		owner = gm_RandomMod(9) + 0x1d76;
-		id = gm_RandomMod(9) + 0x1d6d;
+		owner = (unsigned short) gm_RandomMod(9) + 0x1d76;
+		id = (unsigned short) gm_RandomMod(9) + 0x1d6d;
 		memset(rec, 0, sizeof(rec));
 		*(int*) (rec + 8) = *(int*) (a0 + 4);
 		*(int*) (rec + 0xc) = *(int*) (a0 + 4);

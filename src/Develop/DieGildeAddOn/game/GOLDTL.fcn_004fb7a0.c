@@ -1,4 +1,6 @@
 #include <string.h>
+extern int g_99f5a0;
+extern char* g_773da8;
 
 #pragma pack(push, 2)
 typedef struct Time14 {
@@ -31,7 +33,7 @@ void __cdecl fcn_004fb7a0(void)
 	int v7;
 	float f;
 
-	if (*(int*) 0x99f5a0 != 1) {
+	if (g_99f5a0 != 1) {
 		return;
 	}
 	memcpy(st, (void*) 0x99f5a0, sizeof(st));
@@ -115,7 +117,7 @@ void __cdecl fcn_004fb7a0(void)
 	st[7] = v7;
 	if (v7 == 1) {
 		ev[4] = 'Y';
-		*(int*) (ev + 8) = *(int*) (*(char**) 0x773da8 + 4);
+		*(int*) (ev + 8) = *(int*) (g_773da8 + 4);
 		*(int*) (ev + 0xc) = -1;
 		*(Time14*) (ev + 0x28) = CLOCK_4fb7a0;
 		ev[0x36] = 2;
@@ -129,7 +131,7 @@ void __cdecl fcn_004fb7a0(void)
 		}
 	} else if (v7 == 2) {
 		ev[4] = 'N';
-		*(int*) (ev + 8) = *(int*) (*(char**) 0x773da8 + 4);
+		*(int*) (ev + 8) = *(int*) (g_773da8 + 4);
 		*(int*) (ev + 0xc) = -1;
 		*(int*) (ev + 0x58) = -1;
 		*(Time14*) (ev + 0x28) = CLOCK_4fb7a0;
@@ -144,7 +146,7 @@ void __cdecl fcn_004fb7a0(void)
 	} else if (v7 == 3) {
 state3:
 		ev[4] = 'P';
-		*(int*) (ev + 8) = *(int*) (*(char**) 0x773da8 + 4);
+		*(int*) (ev + 8) = *(int*) (g_773da8 + 4);
 		*(Time14*) (ev + 0x28) = CLOCK_4fb7a0;
 		*(int*) (ev + 0xc) = -1;
 		ev[0x36] = 2;

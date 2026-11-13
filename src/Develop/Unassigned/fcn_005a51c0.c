@@ -1,4 +1,6 @@
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/game_data.h"
+extern char* g_77255c;
 
 void __cdecl fcn_00469c40(int, int, int);
 
@@ -102,10 +104,10 @@ int __cdecl fcn_005a51c0(unsigned char* entity)
 		owner = p[0];
 		rec1 = p[1];
 		if (owner != -1) {
-			gbase = *(int**) 0x77255c;
-			obj_tbl = *(int**) 0x1015ea0;
+			gbase = (int*) g_77255c;
+			obj_tbl = (int*) g_1015ea0;
 			fcn_00469c40(*(int*) ((char*) obj_tbl + owner * 0x2f4 + 0x10), *(int*) ((char*) gbase + 8) + off, owner);
-			gbase = *(int**) 0x77255c; obj_tbl = *(int**) 0x1015ea0; rec1 = p[1];
+			gbase = (int*) g_77255c; obj_tbl = (int*) g_1015ea0; rec1 = p[1];
 			fcn_00469c40(*(int*) ((char*) obj_tbl + rec1 * 0x2f4 + 0x10), *(int*) ((char*) gbase + 8) + off + 0x30, rec1);
 			off += 0x4c;
 		}

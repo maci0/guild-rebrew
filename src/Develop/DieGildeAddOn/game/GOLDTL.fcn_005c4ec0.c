@@ -148,14 +148,14 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 			break;
 		}
 	}
-	if (total == 0) {
-		if (remaining > 0) {
-			fcn_004c51a0(a0, *(int*) (a1 + 4), g_773d75, remaining);
-		}
+	if (total != 0) {
+		fcn_004c5150(a0, -1, g_773d75, total);
+		io_FormatTextBuffer(buf, 0x18eb, total);
+		strcat(a3, buf);
 		return written;
 	}
-	fcn_004c5150(a0, -1, g_773d75, total);
-	io_FormatTextBuffer(buf, 0x18eb, total);
-	strcat(a3, buf);
+	if (remaining > 0) {
+		fcn_004c51a0(a0, *(int*) (a1 + 4), g_773d75, remaining);
+	}
 	return written;
 }

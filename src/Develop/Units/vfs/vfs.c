@@ -1381,9 +1381,9 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 
 			fsrc = *(char**) zp;
 			/* The original's copy is the 24-byte hand-written alignment
-			 * prelude (docs/msvc6-allocator.md Finding 19): dest-align,
+			 * prelude (archived docs/msvc6-allocator.md Finding 19): dest-align,
 			 * then dwords, then the remainder, with a short-count fallback.
-			 * No msvc6 C memcpy spelling emits it. */
+			 * Recorded C probes did not emit it. */
 			__asm {
 				mov edi, buf
 				mov esi, fsrc

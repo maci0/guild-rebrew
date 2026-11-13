@@ -79,9 +79,9 @@ int __cdecl fcn_004b1320(int a1, int a2, char* a3)
 					p = fcn_004ce590(*(unsigned short*) row);
 					if (p == 0 || *(int*) p == 0)
 						continue;
-					f = factor + g_6628a0;
-					copy = *(Ent80*) row;
-					copy.price = copy.base * (factor + g_6628a0);
+					f = factor + 1.0f;
+					copy = *(Ent80*) (g_85ab90 + g_773d75 * 0x2a90 + i);
+					copy.price = copy.base * (factor + 1.0f);
 					copy.value = eval_ObjektPreis2Credits(*(unsigned short*) row, 0x64) * f;
 					fcn_004c6190((char*) &copy, g_773d75);
 				}
@@ -96,9 +96,9 @@ int __cdecl fcn_004b1320(int a1, int a2, char* a3)
 						continue;
 					if (*(char*) (lpObjektePROT + *(unsigned short*) row * 0x41) != 8)
 						continue;
-					f = factor + g_6628a0;
+					f = factor + 1.0f;
 					copy = *(Ent80*) row;
-					copy.price = copy.base * (factor + g_6628a0);
+					copy.price = copy.base * (factor + 1.0f);
 					copy.value = eval_ObjektPreis2Credits(*(unsigned short*) row, 0x64) * f;
 					fcn_004c6190((char*) &copy, g_773d75);
 				}
@@ -113,9 +113,9 @@ int __cdecl fcn_004b1320(int a1, int a2, char* a3)
 						continue;
 					if (*(char*) (lpObjektePROT + *(unsigned short*) row * 0x41) != 0x20)
 						continue;
-					f = factor + g_6628a0;
+					f = factor + 1.0f;
 					copy = *(Ent80*) row;
-					copy.price = copy.base * (factor + g_6628a0);
+					copy.price = copy.base * (factor + 1.0f);
 					copy.value = eval_ObjektPreis2Credits(*(unsigned short*) row, 0x64) * f;
 					fcn_004c6190((char*) &copy, g_773d75);
 				}

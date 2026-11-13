@@ -52,8 +52,8 @@ int __cdecl cm_ExCreateGeb(char* a0, char* out)
 	if (geb == 0)
 		return 1;
 	*(int*) 0x68a9d4 = *(int*) (geb + 1);
-	/* Game string table entry holding the building file prefix "gb_". */
-	memcpy(name, (char*) 0x6798d4, 4);
+	/* Prefix literal at native 0x6798d4. */
+	strcpy(name, "gb_");
 	strcat(name, ((BuildingProto*)lpGebaeudePROT)[*geb].name);
 	strupr(name + 2);
 	for (i = 0; i < 4; i++) {

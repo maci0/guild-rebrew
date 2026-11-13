@@ -56,7 +56,7 @@ int __cdecl fcn_00539600(void)
 
 	if (fcn_005e0930()) {
 		sprintf(path, g_6a1ea4, g_7e21a0);
-		f = vfs_Tfopen(path, (char*) 0x6750e8, *(struct VFS_DIR**) 0x6b7fdc);
+		f = vfs_Tfopen(path, (char*) 0x6750e8, (struct VFS_DIR*) g_6b7fdc);
 		if (f != 0) {
 			ls_LoadSavegameHeader(f, hdr);
 			c = hdr[0x31];

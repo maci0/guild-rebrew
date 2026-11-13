@@ -1,5 +1,5 @@
 unsigned short __cdecl gm_RandomMod(unsigned short n);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_00508d80(unsigned int n, int *arr);
 int __cdecl fcn_0047dd60(void *p);
 void __cdecl fcn_00511b70(int n, int *out, unsigned char *src);

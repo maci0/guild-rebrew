@@ -11,7 +11,7 @@ void __cdecl fcn_005b1ef0(void);
 char* __cdecl m_alloc(int, char*);
 
 /* The record zero-fill is the original's hand-written block-fill prelude;
- * no msvc6 C memset spelling emits it (docs/codegen-walls.md section 6b). */
+ * recorded C memset probes did not emit it (archived docs/codegen-walls.md section 6b). */
 int __cdecl fcn_005b1ff0(void* fh)
 {
 	int count;

@@ -64,8 +64,8 @@ int* __cdecl fcn_00412900(char* obj, float* pos, int id)
 	frames[4].drehung[0] = pos[0] - *(float*) (g_6b8014 + 0x84);
 	frames[4].drehung[1] = pos[1] - *(float*) (g_6b8014 + 0x88);
 	frames[4].drehung[2] = pos[2] - *(float*) (g_6b8014 + 0x8c);
+	g_6b5cc0 = (int) fcn_004339e0(g_6b8014, flags, 5, frames);
 	g_6b5cbc = 1;
-	g_6b5cc0 = (int) fcn_004339e0(obj, flags, 5, frames);
 	*((unsigned char*) g_6b5cc0 + 0x2d) |= 8;
 	return (int*) g_6b5cc0;
 }

@@ -1,5 +1,5 @@
 #include <windows.h>
-
+extern int g_6777a8;
 typedef struct {
 	int a;
 	int b;
@@ -41,10 +41,10 @@ int __stdcall fcn_0041adc0(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 		switch (wparam & 0xffff) {
 		case 0x66:
 			r = (int) SendMessageA(*(HWND*) 0x6b5dd8, 0x147, 0, 0);
-			if (r == *(int*) 0x6777a8) {
+			if (r == g_6777a8) {
 				return 1;
 			}
-			*(int*) 0x6777a8 = r;
+			g_6777a8 = r;
 			SendMessageA(*(HWND*) 0x6b5dd4, 0x14b, 0, 0);
 			for (i = 0; i < *(unsigned int*) (*(char**) 0x6b5dd0 + r * 0x508 + 0x500); i++) {
 				row = (char*) (*(int*) (*(char**) 0x6b5dd0 + r * 0x508 + 0x504) + i * 0x10);

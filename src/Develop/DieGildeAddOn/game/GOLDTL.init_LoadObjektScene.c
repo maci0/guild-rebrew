@@ -5,7 +5,7 @@
 #include "client_scene_loader.h"
 
 extern int g_6b8010;
-extern char* g_item_def_table;
+extern char* lpObjektePROT;
 extern char g_774964;
 extern int g_774670;
 extern int g_1040490;
@@ -63,7 +63,7 @@ void __cdecl init_LoadObjektScene(int a0)
 	void** p;
 
 	saved = g_6b8010;
-	name = g_item_def_table + a0 * 0x41;
+	name = lpObjektePROT + a0 * 0x41;
 	progress = 0;
 	paused = 0;
 	if (g_774964 && g_774670 <= 0) {

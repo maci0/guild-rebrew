@@ -63,8 +63,8 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 		}
 	}
 	if (a2 < a3 && a1 < a0[0xc]) {
-		dx = (*((float*) (a0 + 8)) - *((float*) (a0 + 4))) * *(float*) 0x6628cc;
-		dz = (*((float*) (a0 + 10)) - *((float*) (a0 + 6))) * *(float*) 0x6628cc;
+		dx = (*((float*) (a0 + 8)) - *((float*) (a0 + 4))) * 0.5f;
+		dz = (*((float*) (a0 + 10)) - *((float*) (a0 + 6))) * 0.5f;
 		lo[0] = *((float*) (a0 + 4));
 		lo[2] = *((float*) (a0 + 6));
 		hi[0] = dx + *((float*) (a0 + 4));

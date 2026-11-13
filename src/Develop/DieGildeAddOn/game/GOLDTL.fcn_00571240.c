@@ -70,14 +70,6 @@ void __cdecl fcn_00571240(char* self)
 			map = row;
 	}
 	switch (*(int*) (self + 0x70)) {
-	case -2:
-	case -1:
-		for (i = 0; i < 768; i++) {
-			if (*(char**) (g_7f4ca0 + i * 0x21c + 0x17c) == self)
-				fcn_00529160(0, 0, *(unsigned short*) (g_7f4ca0 + i * 0x21c), 0);
-		}
-		fcn_00546190(self);
-		return;
 	case 0:
 		*(int*) (self + 0x70) += 1;
 		return;
@@ -152,6 +144,14 @@ void __cdecl fcn_00571240(char* self)
 		for (i = 0; i < 768; i++) {
 			if (*(char**) (g_7f4ca0 + i * 0x21c + 0x17c) == self)
 				fcn_00529160(node, 0, *(unsigned short*) (g_7f4ca0 + i * 0x21c), 0);
+		}
+		fcn_00546190(self);
+		return;
+	case -2:
+	case -1:
+		for (i = 0; i < 768; i++) {
+			if (*(char**) (g_7f4ca0 + i * 0x21c + 0x17c) == self)
+				fcn_00529160(0, 0, *(unsigned short*) (g_7f4ca0 + i * 0x21c), 0);
 		}
 		fcn_00546190(self);
 		return;

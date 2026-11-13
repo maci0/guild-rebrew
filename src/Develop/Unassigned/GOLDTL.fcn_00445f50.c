@@ -35,13 +35,13 @@ char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 
 	if (a0 >= 7)
 		return 0;
-	if (!(t >= g_6628a8))
+	if (!(t >= 0.0f))
 		return 0;
-	if (!(t <= g_6628a0))
+	if (!(t <= 1.0f))
 		return 0;
 	pos = (float) a0 + t;
 	fcn_004379a0(g_67a370, 0, 0x1e, (void*) fcn_00445d20, &pos);
-	if (scale != g_6628a0)
+	if (scale != 1.0f)
 		fcn_004379a0(g_67a370, 0, 8, (void*) fcn_00445d00, &scale);
 	n = (a0 + 1) % 7;
 	cur = (float*) (g_1041d80 + a0 * 0x60);
@@ -61,7 +61,7 @@ char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 	g_6b86c4.x = c0 * t + cur[3];
 	g_6b86c4.y = c1 * t + cur[4];
 	g_6b86c4.z = c2 * t + cur[5];
-	inv = g_6628a0 - t;
+	inv = 1.0f - t;
 	pc = (Pal_1041d20*) (cur + 6);
 	pn = (Pal_1041d20*) (next + 6);
 	for (dst = g_1041d20; dst < g_1041d20 + 6; dst++) {

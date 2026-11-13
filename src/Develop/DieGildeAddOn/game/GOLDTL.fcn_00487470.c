@@ -37,7 +37,7 @@ void __cdecl fcn_004c5530(void*);
 /* ADDRESS: GOLDTL 0x00487470 */
 void __cdecl fcn_00487470(char* a0)
 {
-	unsigned short found;
+	unsigned int found;
 	int cand;
 	float amountf;
 	unsigned char pkt2[0xf8];
@@ -76,10 +76,10 @@ void __cdecl fcn_00487470(char* a0)
 	}	w = gm_RandomMod(0x14);
 	if (fcn_00508da0((unsigned char*) p) < (int) w + 0x4b) {
 		amountf = (float) fcn_0050cf50(*(int*)(a0 + 0x16c), 100) * g_664138 * g_664138;
-		if (amountf < g_662a7c) {
+		if (g_662a7c > amountf) {
 			amountf = 128.0f;
 		}
-		if (amountf < (float) *(int*) (a0 + 0x1b8) * g_662a6c) {
+		if ((float) *(int*) (a0 + 0x1b8) * g_662a6c > amountf) {
 			memset(pkt1, 0, 0xf8);
 			p = *(char**)(a0 + 0x16c);
 			pkt1[4] = 0x1c;

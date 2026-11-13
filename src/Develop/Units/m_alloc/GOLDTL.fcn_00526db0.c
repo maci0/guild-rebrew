@@ -87,7 +87,7 @@ void __cdecl fcn_00526db0(char* name)
 	p = &desc;
 	/*
 	 * The reference zero-fills with the hand-written block-fill prelude no
-	 * msvc6 C spelling emits (docs/codegen-walls.md 6b).
+	 * msvc6 C spelling emits (archived docs/codegen-walls.md 6b).
 	 */
 	__asm {
 		mov edi, p

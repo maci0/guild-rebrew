@@ -24,15 +24,17 @@ void __cdecl fcn_0057c7b0(Node* o)
 
 	n = o->f70;
 	if (n == -1 || n == -2) {
-		fcn_00546190(o);
-		return;
+		goto cleanup;
+
+
 	}
 	o->f70 = n + 1;
 	a = gm_LookupEntityRecordById(o->fb0);
 	b = gm_LookupEntityRecordById(o->fac);
 	if (a == 0) {
-		fcn_00546190(o);
-		return;
+		goto cleanup;
+
+
 	}
 	h = *(int*) ((char*) a + 0x194);
 	if (h != 0) {
@@ -49,5 +51,5 @@ void __cdecl fcn_0057c7b0(Node* o)
 		fcn_00500bb0(o->f52, 0x18, 0, 0);
 		return;
 	}
-	fcn_00546190(o);
+cleanup: fcn_00546190(o);
 }

@@ -4,7 +4,7 @@
 #include "d2_gui.h"
 
 extern char g_7f4ca0[];
-extern __int64 g_666018;
+extern int g_666018; extern int g_66601c;
 extern char g_6811b0[];
 extern int g_772514;
 extern int g_14ce8e0;
@@ -56,7 +56,7 @@ void __cdecl fcn_005e6360(char* entity)
     query[0] = 1;
     query[1] = 0x400;
     query[4] = 6;
-    *(__int64*) (query + 2) = g_666018;
+    query[2] = g_666018; query[3] = g_66601c;
     target = (char*) fcn_005cd440((char*) query, *(int*) 0x14b5b44, 0, 0);
     if (target == 0) {
         fcn_00532ef0();

@@ -11,8 +11,8 @@ typedef struct Loc {
 } Loc;
 // SIZE 0x24d
 
-extern char* lpGebaeudePROT;
-extern int g_774800;
+#include "Develop/DieGildeAddOn/game/game_data.h"
+
 
 int __cdecl gm_GetBuildingTypeCategory(int id);
 int __cdecl fcn_00507910(int kind);
@@ -38,7 +38,7 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 	if (a1 == 0xffff) {
 		return 0;
 	}
-	rb = (unsigned char*) (a1 * 0x21c + 0x7f4ca0);
+	rb = (unsigned char*) (g_7f4ca0 + a1 * 0x21c);
 	if (g_774800 != 0 && (rb[2] == 6 || rb[2] == 7)) {
 		return 1;
 	}

@@ -21,6 +21,7 @@ int __cdecl ai_StartSpionage(int code, short* target, int zero, char* out1, char
 	int thr;
 	char* p;
 	int v5;
+	float first;
 
 	mask = 0xf00500;
 	rnd = gm_RandomMod(3) & 0xffff;
@@ -32,7 +33,9 @@ int __cdecl ai_StartSpionage(int code, short* target, int zero, char* out1, char
 		return 0;
 	}
 	p = &g_7f4ca0[(unsigned short) idx * 0x21c];
-	v5 = (int) ((float) (int) ((float) gm_WalkEntityChain(*target) * g_664138 + (float) gm_WalkEntityChain(*(unsigned short*) p) * g_664138) * ((float) rnd * g_664188 + g_6628a0));
+	first = (float) gm_WalkEntityChain(*target) * g_664138;
+	v5 = (int) ((float) gm_WalkEntityChain(*(unsigned short*) p) * g_664138 + first);
+	v5 = (int) ((float) v5 * ((float) rnd * g_664188 + g_6628a0));
 	if ((float) v5 > (float) thr * g_664160) {
 		return 0;
 	}

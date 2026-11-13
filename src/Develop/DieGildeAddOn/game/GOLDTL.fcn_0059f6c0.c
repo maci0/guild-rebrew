@@ -41,7 +41,7 @@ void __cdecl fcn_005bf0d0(void);
 void __cdecl fcn_005bf9e0(void);
 
 /* The first request's zero-fill is the original's hand-written block-fill
- * prelude; no msvc6 C memset spelling emits it (docs/codegen-walls.md
+ * prelude; recorded C memset probes did not emit it (archived docs/codegen-walls.md
  * section 6b). */
 void __cdecl fcn_0059f6c0(int a0, int a1)
 {

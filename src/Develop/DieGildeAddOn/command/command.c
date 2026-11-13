@@ -1110,7 +1110,7 @@ extern int g_sequence_counter;
  * that it has enough funds for the requested transfer.  Returns 1 on
  * invalid entity or insufficient balance, 0 when the move is allowed.
  *
- * Byte-match note: same Finding 7-family allocator fixed-point (docs/
+ * Byte-match note: same Finding 7-family allocator fixed-point (archived docs/
  * msvc6-allocator.md Finding 33) — the reference hoists the arg3
  * address lea above the pre-resolve field store (esi-based, folded
  * `mov [esi+0x14],eax`); MSVC6 8168 emits the out-param leas after the
@@ -2899,7 +2899,7 @@ int __cdecl cm_ExMoveObjekt(int cmd, char* result)
  * other resolve-with-&cmd handlers — the reference keeps the short*
  * base in esi and folds `mov [esi+0x10],eax`, passing &cmd in the
  * middle of gm_ResolveEntityById(0, &cmd, 0, field); every C shape
- * either CSE-hoists `lea esi,[eax+0x10]` (extra edi push, docs/
+ * either CSE-hoists `lea esi,[eax+0x10]` (extra edi push, archived docs/
  * msvc6-allocator.md Finding 42) or reloads the param from its home
  * slot for the store.  The remainder (type checks, query call,
  * remove call, result-byte store) matches structurally with cascaded

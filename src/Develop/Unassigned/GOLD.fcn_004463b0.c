@@ -11,12 +11,12 @@ char __cdecl fcn_004463b0(char* terrain, float* position, char coarse, int* outX
     unsigned int step;
     unsigned int ix;
     unsigned int iz;
-    unsigned int nx;
-    unsigned int nz;
+
+
     int size;
     unsigned char* triangles;
-    unsigned char* heights;
-    unsigned char kind;
+
+    int kind;
     float base;
     float dx;
     float dz;
@@ -48,31 +48,31 @@ char __cdecl fcn_004463b0(char* terrain, float* position, char coarse, int* outX
     iz = ~(step - 1) & *outY;
     u = (x - (int)ix) / (float)step;
     v = (z - (int)iz) / (float)step;
-    nx = (ix + step) & U32(terrain + 0xc);
-    nz = (iz + step) & U32(terrain + 0xc);
-    heights = *(unsigned char**)(terrain + 0x10);
+
+
+
     if (triangles && (triangles[ix / step + ((iz / step) * size) / step] & 0x80)) {
         if (v + u > 1.0f) {
-            base = heights[nx + nz * size];
-            dx = heights[ix + nz * size] - base;
-            dz = heights[nx + iz * size] - base;
+            base = (*(unsigned char**)(terrain + 0x10))[((ix + step) & U32(terrain + 0xc)) + ((iz + step) & U32(terrain + 0xc)) * size];
+            dx = (*(unsigned char**)(terrain + 0x10))[ix + ((iz + step) & U32(terrain + 0xc)) * size] - base;
+            dz = (*(unsigned char**)(terrain + 0x10))[((ix + step) & U32(terrain + 0xc)) + iz * size] - base;
             u = 1.0f - u;
             v = 1.0f - v;
         } else {
-            base = heights[ix + iz * size];
-            dx = heights[nx + iz * size] - base;
-            dz = heights[ix + nz * size] - base;
+            base = (*(unsigned char**)(terrain + 0x10))[ix + iz * size];
+            dx = (*(unsigned char**)(terrain + 0x10))[((ix + step) & U32(terrain + 0xc)) + iz * size] - base;
+            dz = (*(unsigned char**)(terrain + 0x10))[ix + ((iz + step) & U32(terrain + 0xc)) * size] - base;
         }
     } else {
         if ((1.0f - v) + u > 1.0f) {
-            base = heights[nx + iz * size];
-            dx = heights[ix + iz * size] - base;
-            dz = heights[nx + nz * size] - base;
+            base = (*(unsigned char**)(terrain + 0x10))[((ix + step) & U32(terrain + 0xc)) + iz * size];
+            dx = (*(unsigned char**)(terrain + 0x10))[ix + iz * size] - base;
+            dz = (*(unsigned char**)(terrain + 0x10))[((ix + step) & U32(terrain + 0xc)) + ((iz + step) & U32(terrain + 0xc)) * size] - base;
             u = 1.0f - u;
         } else {
-            base = heights[ix + nz * size];
-            dx = heights[nx + nz * size] - base;
-            dz = heights[ix + iz * size] - base;
+            base = (*(unsigned char**)(terrain + 0x10))[ix + ((iz + step) & U32(terrain + 0xc)) * size];
+            dx = (*(unsigned char**)(terrain + 0x10))[((ix + step) & U32(terrain + 0xc)) + ((iz + step) & U32(terrain + 0xc)) * size] - base;
+            dz = (*(unsigned char**)(terrain + 0x10))[ix + iz * size] - base;
             v = 1.0f - v;
         }
     }

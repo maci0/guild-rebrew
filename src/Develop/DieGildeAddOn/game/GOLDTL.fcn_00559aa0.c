@@ -22,8 +22,8 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 
 extern void* __cdecl gm_LookupEntityRecordById(int id);
-extern int __cdecl gm_RandomMod(int range);
-extern float __cdecl gm_RandomFloat01(void);
+extern int __cdecl gm_RandomMod(unsigned short range);
+extern double __cdecl gm_RandomFloat01(void);
 extern void __cdecl gm_ResolveEntityById(void** out, int a, int b, int item);
 extern int __cdecl fcn_00529670(void* entity, void* record);
 extern int __cdecl fcn_004c5420(unsigned int handle, int a, int b, int c, int d);

@@ -1,4 +1,4 @@
-
+extern int g_6b7fb8;
 
 typedef struct DevData DevData;
 
@@ -56,7 +56,7 @@ void __cdecl fcn_004124b0(void)
 	cur = *(unsigned char*) 0x14cf950;
 	if (cur != 0) {
 		key = cur;
-		stamp = *(int*) 0x6b7fb8;
+		stamp = g_6b7fb8;
 		*(unsigned char*) 0x6b5cb0 = key;
 		stamp = stamp + 9;
 		*(int*) 0x6b5c68 = stamp;
@@ -65,9 +65,9 @@ void __cdecl fcn_004124b0(void)
 		key = *(unsigned char*) 0x6b5cb0;
 	}
 	if (key != 0) {
-		if (cur == 0 && ((unsigned char*) 0x14cf700)[*(int*) 0x6b5cb0 & 0xff] != 0 && *(unsigned int*) 0x6b7fb8 > (unsigned int) stamp + 5) {
+		if (cur == 0 && ((unsigned char*) 0x14cf700)[*(int*) 0x6b5cb0 & 0xff] != 0 && (unsigned int) g_6b7fb8 > (unsigned int) stamp + 5) {
 			*(unsigned char*) 0x14cf950 = key;
-			*(int*) 0x6b5c68 = *(int*) 0x6b7fb8;
+			*(int*) 0x6b5c68 = g_6b7fb8;
 		}
 		if (((unsigned char*) 0x14cf700)[*(int*) 0x6b5cb0 & 0xff] == 0) {
 			*(unsigned char*) 0x6b5cb0 = 0;

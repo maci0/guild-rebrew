@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/game_player.h"
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_GetEntitySkill(char* entity, int idx);
 int __cdecl srv_GetEntityOfficeSlot(unsigned char* entity, void* role_out, void* slot_out);
@@ -21,7 +22,7 @@ void __cdecl fcn_004e04f0(char* a0)
 			v3 = v2;
 		if (*(unsigned char*) (v3 + 0x166) != 0) {
 			if (srv_GetEntityOfficeSlot((unsigned char*) v3, v5, v4) != 0) {
-				if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + *(unsigned short*) 0x774970 * 0x21c)) {
+				if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + g_774970 * 0x21c)) {
 					fcn_004e8240(*(unsigned char*) v4, 0, 0, 4, 0xff);
 					p = (char*) 0x7f4ca2;
 					do {

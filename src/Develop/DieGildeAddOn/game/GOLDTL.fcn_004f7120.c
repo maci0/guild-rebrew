@@ -25,7 +25,7 @@ int __cdecl fcn_004f7120(int id, short* a1, int* a2, short* a3, int* a4)
 						*a3 = *(short*) o;
 						extra = fcn_00508eb0(*(unsigned short*) o, 1);
 						f = fcn_0050f980(*(unsigned short*) o, *(unsigned short*) a1, 1);
-						*a2 = (int) ((f * *(float*) 0x664138 + *(float*) 0x6628cc) * (extra + sum) * *(float*) 0x664334);
+						*a2 = (int) ((f * 0.005f + 0.5f) * (extra + sum) * 1600.0f);
 						*a4 = rec[0] & 0xff;
 						return 1;
 					}

@@ -1,5 +1,5 @@
 #include <string.h>
-extern char* g_entity_type_table;
+#include "game_data.h"
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 int __cdecl fcn_004fa6f0(char* a1, int* a2, int* a3);
 void __cdecl fcn_004f4830(unsigned char a1, char* a2);
@@ -55,7 +55,7 @@ void __cdecl fcn_004fad10(void)
 			if (v5 != 0 && *(unsigned char*) v5 != 0) {
 				v8 = *(int*) ((char*) v5 + 0x61);
 				if (v8 != 0) {
-					v3 = *(unsigned char*) (g_entity_type_table + *(unsigned char*) v5 * 0x24d);
+					v3 = *(unsigned char*) (lpGebaeudePROT + *(unsigned char*) v5 * 0x24d);
 					if ((v3 < 0xb || v3 >= 0xe) && v3 != 0x10) {
 						if (fcn_004fa6f0((char*) v8 + 0x4c, &v15, &v14) != 0) {
 							fcn_004f4830(record[0x1c], (char*) stats);

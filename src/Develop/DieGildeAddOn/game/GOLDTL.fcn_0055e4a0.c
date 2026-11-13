@@ -15,7 +15,7 @@ typedef struct {
 	unsigned char type;
 	char pad1[0x24c];
 } GebProt_55e4a0;
-extern char* g_entity_type_table;
+extern unsigned char* lpGebaeudePROT;
 #include "GOLDTL.fcn_0055e4a0_gconf.h"
 
 void* __cdecl gm_StartFilteredEntitySearch(int a, ...);
@@ -128,7 +128,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 		}
 	}
 	else {
-		t2 = *(char*) (g_entity_type_table + t * 0x24d);
+		t2 = *(char*) (lpGebaeudePROT + t * 0x24d);
 		if (t == 0x1e) {
 			*(unsigned int*) (key + 0) = *(unsigned int*) (s_6a6340 + 0);
 			*(unsigned int*) (key + 4) = *(unsigned int*) (s_6a6340 + 4);

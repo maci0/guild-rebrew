@@ -17,9 +17,9 @@ int __cdecl fcn_004f4440(int handle, int value, int mode, int flag, int* out)
 	int r;
 
 	v = (double) fcn_0050b710(gm_WalkEntityChain(*(unsigned short*) handle), g_773d75);
-	v = __min(1000000.0, v);
-	v = __max(v, 10000.0);
-	v = __min(1000000.0, v);
+	v = __max(__min(1000000.0, v), 10000.0);
+
+
 	f = log10(v);
 	v = 100.0 * f * f;
 	if (mode == 0) {

@@ -1,6 +1,6 @@
 #include <string.h>
 extern int g_772514;
-
+extern int g_100f1dc;
 /* Personnel/mercenary book controller. Native extent 0x005b6300..0x005b787b
  * (5499 bytes, chkstk frame 0x1a4c, no frame pointer).
  *
@@ -359,7 +359,7 @@ L6993:
 		fcn_005b5c70((int) &f.sel);
 		f.v1c = -1;
 L69b6:
-		if (G(0x100f1dc) == -1)
+		if (g_100f1dc == -1)
 			goto L6fa2;
 		if (G(0x67d370) == f.sel.a0c && f.sel.a0c != -1) {
 			for (i = 0; i < 3; i++) {
@@ -386,7 +386,7 @@ L69b6:
 					io_AppendText(0x1a21, *(unsigned short*) f.sel.a08));
 			}
 		}
-		if (G(0x100f1dc) == -1)
+		if (g_100f1dc == -1)
 			goto L6fa2;
 		if (G(0x67d370) == f.v58 && f.v38 != 0
 			&& *(signed char*) 0x7747b0 >= 0) {
@@ -427,7 +427,7 @@ L69b6:
 			fcn_004c5150(G(0x7f4ca4 + trec), -1, *(char*) 0x773d75, fcn_0050b750((int) e, *(char*) 0x773d75));
 		}
 L6cb7:
-		if (G(0x100f1dc) == -1)
+		if (g_100f1dc == -1)
 			goto L6fa2;
 		c = G(0x67d370);
 		if (c == f.v48 && f.v48 != -1
@@ -560,7 +560,7 @@ L6fa2:
 				io_AppendText(0x6811b0);
 			}
 		}
-		if (G(0x100f1dc) == -1)
+		if (g_100f1dc == -1)
 			goto L77c4;
 		for (k = 0; k < 0xc; k++) {
 			if (G(0x67d370) != f.rows[k].a0c)

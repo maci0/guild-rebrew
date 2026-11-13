@@ -64,7 +64,7 @@ void __cdecl fcn_004ff490(char* a0)
 
 	ent = gm_LookupEntityRecordById(*(unsigned int*) (a0 + 0x5c));
 	if (*(float*) (a0 + 0x7c) > 1.0f) {
-		fcn_004c5480(*(unsigned int*) (a0 + 4), 0x7c, gm_RandomFloat01() * g_664158 - *(float*) (a0 + 0x7c));
+		fcn_004c5480(*(unsigned int*) (a0 + 4), 0x7c, gm_RandomFloat01() * -0.5f - *(float*) (a0 + 0x7c));
 		g_773d48++;
 		if (ent == 0) {
 			return;

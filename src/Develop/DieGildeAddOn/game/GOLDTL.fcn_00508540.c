@@ -77,6 +77,8 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 		r <<= 0xe;
 		r ^= value;
 		r &= 0x1c000;
+	} else {
+		r = 0;
 	}
 	value ^= r;
 	fcn_004c4510(rec, rec[1]);

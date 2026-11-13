@@ -28,7 +28,7 @@ char* __cdecl fcn_005b1b10(int a1)
 }
 
 /* Both zero-fills are the original's hand-written block-fill prelude; no
- * msvc6 C memset spelling emits it (docs/codegen-walls.md section 6b). */
+ * msvc6 C memset spelling emits it (archived docs/codegen-walls.md section 6b). */
 /* ADDRESS: GOLDTL 0x005b1b30 */
 char* __cdecl fcn_005b1b30(char* a)
 {

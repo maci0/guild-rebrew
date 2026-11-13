@@ -29,8 +29,8 @@ char __cdecl fcn_00437710(D3dCfg_437710* cfg, const char* key, D3dCfg_437710* de
 		n = sizeof(D3dCfg_437710);
 		/*
 		 * TODO: replace this inline-asm copy with proper C once a spelling is
-		 * found; no msvc6 C memset/memcpy form emits the prelude
-		 * (docs/msvc6-allocator.md Finding 19).
+		 * found; recorded C fill/copy probes did not emit the prelude
+		 * (archived docs/msvc6-allocator.md Finding 19).
 		 */
 		__asm {
 			mov edi, cfg

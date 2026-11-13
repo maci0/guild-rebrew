@@ -22,6 +22,9 @@ extern char* g_1015ea0;
 extern int g_67d370;
 extern int g_67d374;
 extern int g_67d398;
+extern int g_67d39c;
+extern int g_7725a0;
+extern int g_7725a4;
 extern int g_67d964;
 extern int g_67d968;
 extern char* g_772500;
@@ -115,7 +118,7 @@ void __cdecl fcn_00466550(int idx, int surf)
 		}
 		e = &((fcn_00466550_Ent*) g_1015ea0)[f->ent];
 		if (f->def == -1) {
-			font = (char*) d2_GetResourceData(*(int*) 0x67d39c);
+			font = (char*) d2_GetResourceData(g_67d39c);
 			g0 = fcn_0047b620(font, 0);
 			g1 = fcn_0047b620(font, 1);
 			g2 = fcn_0047b620(font, 2);
@@ -187,7 +190,7 @@ void __cdecl fcn_00466550(int idx, int surf)
 	    && *(char*) (g_1015ea0 + f->ent * 0x2f4 + 0xcc) != 0
 	    && g_1015ea0 + g_67d374 * 0x2f4 == g_1015ea0 + f->ent * 0x2f4
 	    && g_7725d0 == 0) {
-		*(int*) 0x7725a4 = (int) (g_1015ea0 + f->ent * 0x2f4);
-		*(int*) 0x7725a0 = *(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x40);
+		g_7725a4 = (int) (g_1015ea0 + f->ent * 0x2f4);
+		g_7725a0 = *(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x40);
 	}
 }

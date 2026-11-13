@@ -1,7 +1,8 @@
 extern char *g_1015ea0;
 extern int g_1040490;
 extern int g_1040494;
-
+#include "client_types.h"
+extern Anim_100e7a0 g_100e7a0[0x30];
 /* SIZE 0x2f4, g_1015ea0 entries */
 typedef struct {
 	char p00[0x10];
@@ -45,13 +46,13 @@ typedef struct {
 	int y2;
 } Rect469;
 
-/* SIZE 0x160, g_102d140 entries */
-typedef struct {
-	int idx;
-	int x;
-	int y;
-	char pad[0x160 - 0xc];
-} Fld_102d140;
+
+
+
+
+
+
+
 
 extern Win2_469 g_1015f40[0x60];
 extern Fld_102d140 g_102d140[0x10];
@@ -92,7 +93,6 @@ void __cdecl fcn_00469c40(int a1, int a2, int a3)
 
 
 
-
 		e->x30 = t;
 		t = (r->y2 + r->y1 < e->x34) ? r->y2 + r->y1 : e->x34;
 
@@ -123,8 +123,8 @@ void __cdecl fcn_00469c40(int a1, int a2, int a3)
 	}
 	switch (kind) {
 	case 4:
-		*(unsigned short *) (0x100e7ae + e->x88 * 20) = (unsigned short) e->x10;
-		*(unsigned short *) (0x100e7b0 + e->x88 * 20) = (unsigned short) e->x14;
+		*(unsigned short *) ((char*) g_100e7a0 + 0xe + e->x88 * 20) = (unsigned short) e->x10;
+		*(unsigned short *) ((char*) g_100e7a0 + 0x10 + e->x88 * 20) = (unsigned short) e->x14;
 		break;
 	case 0x40:
 		w = (Win2_469 *) g_1015f40 + e->x88;

@@ -35,7 +35,7 @@ in the [build guide](docs/build.md#reference-inputs).
 
 <a id="reconstruction-status"></a><a id="data-verification"></a>
 
-The [1.11.0 source checkpoint](docs/releases/1.11.0.md) records a passing server
+The [1.12.0 source checkpoint](docs/releases/1.12.0.md) records a passing server
 gate. Both client comparison builds still use placeholders and differ from their
 references. See the dated charts below for stored measurements; they are not
 fresh builds or gate runs. See [current work](docs/TODO.md) for the checks, limits and next actions.

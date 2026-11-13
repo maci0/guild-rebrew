@@ -1,5 +1,5 @@
 #pragma intrinsic(strcpy)
-
+extern void* g_6b7ea0;
 extern int* g_14cb8f0;
 extern int g_6b7eb0;
 
@@ -16,7 +16,7 @@ int __cdecl fcn_00428340(char* a0, int a1, ...)
 {
 	int obj;
 	int i;
-	int kind;
+	int kind; int* kinds; char* text;
 	int* argp;
 
 	if (a0 == 0) {
@@ -36,16 +36,16 @@ int __cdecl fcn_00428340(char* a0, int a1, ...)
 		return 0;
 	}
 	argp = &a1;
-	for (i = 0; i < *(char*) (obj + 0x24); i++) {
-		kind = *(int*) (obj + 0x28 + i * 4);
+	for (i = 0, kinds = (int*) (obj + 0x28), text = (char*) 0x14cb540; i < *(char*) (obj + 0x24); i++, kinds++, text += 0x60) {
+		kind = *kinds;
 		if (kind == 6) {
-			strcpy((char*) (0x14cb540 + i * 0x60), (char*) *(argp + 1));
+			strcpy(text, (char*) *(argp + 1));
 			argp++;
 		} else if (kind == 1) {
-			*(int*) ((char*) *(int*) 0x6b7ea0 + i * 4) = *(argp + 1);
+			((int*) g_6b7ea0)[kinds - (int*) (obj + 0x28)] = *(argp + 1);
 			argp++;
 		} else if (kind == 2) {
-			*(int*) ((char*) *(int*) 0x6b7ea0 + i * 4) = *(char*) (argp + 1);
+			((int*) g_6b7ea0)[kinds - (int*) (obj + 0x28)] = *(char*) (argp + 1);
 			argp++;
 		}
 	}

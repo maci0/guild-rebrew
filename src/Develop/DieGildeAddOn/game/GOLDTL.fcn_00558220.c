@@ -3,7 +3,7 @@
 extern pos14_7f4c00 g_7f4c00;
 
 void* __cdecl gm_SearchTable67(int id);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 unsigned short* __cdecl sim_StartEntityQueryByType(unsigned char* arg1);
 void __cdecl fcn_004c6430(int a1, int a2, int a3);
 void __cdecl fcn_004c6650(int a1);

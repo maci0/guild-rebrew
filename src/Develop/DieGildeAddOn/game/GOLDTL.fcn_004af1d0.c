@@ -13,7 +13,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x204) and
  * addresses the 0x200 scratch buffer off ebp; section 13 of
- * docs/msvc6-c-shapes.md. */
+ * archived docs/msvc6-c-shapes.md. */
 #pragma optimize("y", off)
 int __cdecl fcn_004af1d0(int a1, int a2, int a3, char* a4, int a5)
 {
@@ -53,8 +53,8 @@ int __cdecl fcn_004af1d0(int a1, int a2, int a3, char* a4, int a5)
 	a2 = (int) buf;
 	a3 = 0x200;
 	/* The original's zero-fill is the 24-byte hand-written block-fill prelude
-	 * (docs/msvc6-c-shapes.md section 11, docs/codegen-walls.md section 6b);
-	 * no msvc6 C spelling emits it.  Reproduced as a block-fill with ordinary
+	 * (archived docs/msvc6-c-shapes.md section 11, archived docs/codegen-walls.md section 6b);
+	 * recorded C probes did not emit it.  Reproduced as a block-fill with ordinary
 	 * named operands. */
 	__asm {
 		mov edi, a2

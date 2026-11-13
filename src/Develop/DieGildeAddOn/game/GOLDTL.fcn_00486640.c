@@ -59,7 +59,7 @@ int __cdecl fcn_00486640(char* a0, int* a1, int a2)
 			goto next;
 		}
 		seg = &g_100b0c0[*p];
-		word = *(unsigned short*) (g_item_def_table + a1[0] * 0x41 + off);
+		word = *(unsigned short*) (lpObjektePROT + a1[0] * 0x41 + off);
 		if (seg->stock < word) {
 			if (a2 != 0) {
 				return 0;
@@ -91,7 +91,7 @@ int __cdecl fcn_00486640(char* a0, int* a1, int a2)
 						    && gm_GetBuildingTypeCategory((unsigned char) *rec->name) != 2
 						    && rec->field8 != 0) {
 							lim = rec->limit;
-							w = *(unsigned short*) (g_item_def_table + a1[0] * 0x41 + off);
+							w = *(unsigned short*) (lpObjektePROT + a1[0] * 0x41 + off);
 							if (lim >= w) {
 								if (*(short*) (rec->name + 0x27) == *(short*) (*(int*) (a0 + 0x16c) + 0x27)) {
 									found = 1;
@@ -100,7 +100,7 @@ int __cdecl fcn_00486640(char* a0, int* a1, int a2)
 									if (sc < 1) {
 										sc = 1;
 									}
-									w = *(unsigned short*) (g_item_def_table + a1[0] * 0x41 + i);
+									w = *(unsigned short*) (lpObjektePROT + a1[0] * 0x41 + i);
 									t = w * sc - seg->stock - seg->used;
 									n = (seg->capacity >> 1) - seg->used;
 									if (t <= n) {

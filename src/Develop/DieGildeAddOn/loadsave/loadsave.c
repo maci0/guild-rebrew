@@ -1485,7 +1485,7 @@ extern int g_aux_entity_buffer; /* 0x101de55c */
  *   add ecx,edx` first site, `lea esi,[edx+ecx]`, and `xor esi,esi` inside
  *   the aux guard.  Byte-offset loops (`i += 0x18`) put the load on the left
  *   of every address sum and lose 2 bytes at the first site.
- * - The state block is `memset` + `|= 1` (docs/msvc6-c-shapes.md section 71).
+ * - The state block is `memset` + `|= 1` (archived docs/msvc6-c-shapes.md section 71).
  *   Its extra candidates are what give the -1 sentinel `ebp` (`or ebp,-1` once,
  *   three `mov [..],ebp`), so the field reads need no `volatile` any more; with
  *   the plain loads the scheduler also hoists each load above the pushes, as

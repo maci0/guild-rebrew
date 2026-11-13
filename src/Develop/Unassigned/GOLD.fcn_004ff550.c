@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_00500d60(int*, char*);
 void __cdecl fcn_004fec10(int);
 void __cdecl fcn_00501fe0(int);
@@ -6,7 +7,7 @@ int __cdecl fcn_004ff950(int, int);
 float __cdecl fcn_004ffa10(int, int);
 /* DATA TODO: native .data virtual-tail city table0x7e3fa0 stride0x2f4,
  * city outputs0x7d6a60 stride0x2a90, item records through0x2a90;
- * 0x91aaf0 item-info pointer, 0x6f1bc5 current city byte, 0x1460ae0 state int. */
+ * 0x6f1bc5 current city byte, 0x1460ae0 state int. */
 /* ADDRESS: GOLD 0x004ff550 */
 void __cdecl fcn_004ff550(int city, int* date)
 {
@@ -91,7 +92,7 @@ void __cdecl fcn_004ff550(int city, int* date)
     *out = out[1] * *out / 1000;
     p = (int*) (outputOffset + 0x7d6aa0);
     for (i = 0; i < 0x55; ++i, p += 0x20) {
-        kind = (*(unsigned char**) 0x91aaf0)[*(unsigned short*) (p - 12) * 0x41];
+        kind = (((unsigned char*) g_item_def_table))[*(unsigned short*) (p - 12) * 0x41];
         if (kind != 0x17 && kind != 0x25) {
             value = fcn_004ff8c0(city, i);
             *(float*) (p - 4) = (float) (((double) value - *(float*) (p - 4)) * 0.5 + *(float*) (p - 4));

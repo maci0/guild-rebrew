@@ -2,7 +2,7 @@ extern int __cdecl fcn_00502cd0(int handle, ...);
 extern int __cdecl fcn_005013c0(void* link);
 extern void* __cdecl gm_NextEntityQueryMatch(void);
 extern float g_662cf8;
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* Scores an entity's slot chain: matching slot types 2 and 6, plus links of the
  * queried chain that repeat with the same type, scaled by g_662cf8. */
 /* ADDRESS: GOLDTL 0x0050bff0 */
@@ -27,7 +27,7 @@ int __cdecl fcn_0050bff0(unsigned char* a0)
 	match_count = 0;
 	seen = 0;
 	i = 0;
-	base = (unsigned char*) (*(int*) 0x868050 + *a0 * 0x24d);
+	base = (unsigned char*) (lpGebaeudePROT + *a0 * 0x24d);
 	slot = (unsigned short*) (base + 0x23);
 	while (i < 0x40) {
 		if (*slot == 0)
@@ -35,8 +35,8 @@ int __cdecl fcn_0050bff0(unsigned char* a0)
 		id = *slot & 0x7fff;
 		if (seen != 0)
 			chain_count += 1;
-		if (((unsigned char*) *(int*) 0x99ec10)[id * 0x41] == 2
-			|| ((unsigned char*) *(int*) 0x99ec10)[id * 0x41] == 6) {
+		if (((unsigned char*) g_item_def_table)[id * 0x41] == 2
+			|| ((unsigned char*) g_item_def_table)[id * 0x41] == 6) {
 			seen = 1;
 			handle = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, id);
 			if (handle != 0) {
@@ -50,14 +50,14 @@ int __cdecl fcn_0050bff0(unsigned char* a0)
 						if (*s == 0)
 							break;
 						id2 = *s & 0x7fff;
-						if (((unsigned char*) *(int*) 0x99ec10)[id2 * 0x41] == 2
-							|| ((unsigned char*) *(int*) 0x99ec10)[id2 * 0x41] == 6)
+						if (((unsigned char*) g_item_def_table)[id2 * 0x41] == 2
+							|| ((unsigned char*) g_item_def_table)[id2 * 0x41] == 6)
 							break;
 						if (id2 == *p) {
 							match_count += repeats;
 							break;
 						}
-						if (want != 0 && ((unsigned char*) *(int*) 0x99ec10)[id2 * 0x41] == want)
+						if (want != 0 && ((unsigned char*) g_item_def_table)[id2 * 0x41] == want)
 							repeats += 1;
 					}
 					p = (unsigned short*) gm_NextEntityQueryMatch();

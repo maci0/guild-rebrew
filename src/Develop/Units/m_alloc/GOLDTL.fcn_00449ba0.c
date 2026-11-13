@@ -59,8 +59,8 @@ void* __cdecl fcn_004382e0(Ent*);
 
 /*
  * TODO: replace this inline-asm copy with proper C once a spelling is
- * found; no msvc6 C memcpy form emits the prelude
- * (docs/codegen-walls.md section 6b).
+ * found; recorded C copy probes did not emit the prelude
+ * (archived docs/codegen-walls.md section 6b).
  */
 static __inline void copy0(void* dst, void* src, int size)
 {

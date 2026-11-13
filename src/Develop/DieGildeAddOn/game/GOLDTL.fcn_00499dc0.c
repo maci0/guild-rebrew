@@ -33,7 +33,7 @@ int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 void __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int a4);
 void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl fcn_00495400(int kind, int id, int a3, Pos* b, Pos* a);
-unsigned short __cdecl gm_RandomMod(int n);
+int __cdecl gm_RandomMod(unsigned short n);
 
 /* ADDRESS: GOLDTL 0x00499dc0 */
 int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)

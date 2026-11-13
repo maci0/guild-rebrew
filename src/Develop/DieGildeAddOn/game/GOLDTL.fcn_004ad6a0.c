@@ -111,17 +111,17 @@ void __cdecl fcn_004ad6a0(void)
 	if (best != 0) {
 		fcn_004e8240((unsigned char) info[0], best, 0, 1, 0xff);
 		if (best[2] == 6 || best[2] == 7 || best[2] == 5) {
+			msg.month = g_7f4c04;
+			msg.year = g_7f4c00;
 			v = *(int*) (best + 4);
+			msg.hour = g_7f4c0c;
+			msg.day = g_7f4c08;
 			msg.type = 0xa5;
 			msg.id = v;
 			msg.unk_c = -1;
-			msg.year = g_7f4c00;
-			msg.month = g_7f4c04;
-			msg.day = g_7f4c08;
-			msg.hour = g_7f4c0c;
 			msg.flag = 1;
-			msg.unk_68 = v;
 			msg.unk_6c = id;
+			msg.unk_68 = v;
 			fcn_004c5530((char*) &msg);
 			for (rec = g_7f4ca0 + 2; (int) rec < (int) g_7f4ca0 + 0x65402; rec += 0x21c) {
 				if (*(unsigned short*) (rec - 2) != 0xffff && rec - 2 != best &&

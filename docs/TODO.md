@@ -1,6 +1,6 @@
 # Current work
 
-## Read-only snapshot, 2026-11-12
+## Read-only snapshot, 2026-11-13
 
 These are stored verdicts and earlier image checks, not fresh builds of the
 working tree. Rerun the commands in [Choose work](#choose-work-from-canonical-inputs)
@@ -8,35 +8,33 @@ before selecting a task or reporting new progress.
 
 | Target | EXACT + RELOC / game functions | C matches | Accounted `.text` |
 | --- | ---: | ---: | ---: |
-| GoldTL | 4,148 / 5,167 | 4,148 | 55.2% |
-| Gold | 1,977 / 4,422 | 1,975 | 21.8% |
+| GoldTL | 4,199 / 5,188 | 4,199 | 56.3% |
+| Gold | 2,056 / 4,428 | 2,054 | 23.0% |
 | server.dll | 251 / 251 | 251 | 100.0% |
 
 Inventory totals include functions without source; the source-bound status
 counts below cover a subset. Gold's two naked matches are excluded from C
 recovery. The status read was
-`rebrew status --all-targets --json`; `.venv/bin/rebrew todo --json` confirmed
-GoldTL totals at that checkpoint.
+`rebrew status --all-targets --json`.
 
 | Target | NEAR_MATCHING | SIZE_MISMATCH | STUB | Without verdict |
 | --- | ---: | ---: | ---: | ---: |
-| GoldTL | 102 | 885 | 30 | 0 |
-| Gold | 9 | 55 | 138 | 1 |
+| GoldTL | 116 | 813 | 38 | 0 |
+| Gold | 12 | 40 | 72 | 140 |
 | server.dll | 0 | 0 | 0 | 0 |
 
-The second table counts source-bound FUNCTION rows, measured on 2026-11-12 by
+The second table counts source-bound FUNCTION rows, measured on 2026-11-13 by
 `.venv/bin/python .scratch/review/docs-todo/measure-counts-2.py`.
-The Gold row without a verdict is separate from STUB. That scratch script is a
+Gold rows without a verdict are separate from STUB; `rebrew status` counts them as STUB. That scratch script is a
 local receipt, not a required project tool.
 
-All-target lint passed on 2026-11-12: 5,397 files per target, zero errors and
+All-target lint passed on 2026-11-13: 5,538 files per target, zero errors and
 warnings (`.venv/bin/rebrew lint --all-targets`, exit 0).
-[Release 1.11.0](releases/1.11.0.md#validation) records the last full release
-validation on November 11: 316 server function checks (251 game, 65 library),
-652 data checks, Wine
-load and exports passed; the raw server matched all 286,720 reference bytes.
-Both clients differed in file bytes, sections and resources; their twin-adoption
-relink succeeded with placeholder stubs. These release checks were not rerun.
+[Release 1.12.0](releases/1.12.0.md#validation) records the last full release
+validation on November 13: 316 server function checks (251 game, 65 library),
+652 data checks, Wine load and exports passed; the raw server matched all
+286,720 reference bytes. Both clients relinked with placeholder stubs and still
+differ from their references in file bytes, sections and resources.
 
 Configured images under `build/` and `build/consolidation-baseline-pp/` may
 predate current sources. Rebuild before claiming a new image result; see the

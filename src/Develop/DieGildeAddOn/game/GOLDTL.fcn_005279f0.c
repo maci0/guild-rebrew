@@ -117,8 +117,9 @@ void __cdecl fcn_005279f0(unsigned int a0)
 		v6 = fcn_00465950(path);
 		if (v6 == -1)
 			v6 = fcn_00465950("_STADTWAPPEN_BERLIN");
+		v7 = (int) d2_GetResourceData(v6);
 		fcn_0047cba0(g_1040494 - 0x6e, 0x5b, g_77250c,
-			(fcn_0047cba0_set*) d2_GetResourceData(v6), g_772568 + 1);
+			(fcn_0047cba0_set*) v7, g_772568 + 1);
 		goto done;
 	}
 	if (g_774684) {

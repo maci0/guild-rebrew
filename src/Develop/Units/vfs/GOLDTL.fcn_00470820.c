@@ -41,9 +41,10 @@ int __cdecl strcmp(const char*, const char*);
 /* ADDRESS: GOLDTL 0x00470820 */
 int __cdecl fcn_00470820(int a0, int a1, char* a2)
 {
-	char v21[256];
 	char v22[256];
+	char v21[256];
 	char v23[8];
+	int v40;
 	int v24;
 	int v25;
 	int* v26;
@@ -60,7 +61,6 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 	int v37;
 	int v38;
 	int* v39;
-	int v40;
 	int v41;
 	int v42;
 	int v43;
@@ -99,7 +99,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 	if (!g_772560) {
 		strcpy(v21, s_67d268);
 		strcat(v21, a2);
-		strcat(v21, s_67d798);
+		strcat(v21, ".form");
 	}
 	v15 = (int) vfs_Tfopen(v21, (char*) 0x6750e8, g_6b7fdc);
 	if (!v15) {

@@ -1,4 +1,5 @@
 #include <string.h>
+extern int g_6b7fac;
 #include "../d3/d3_animation.h"
 void __cdecl fcn_00433780(char* a0);
 char* __cdecl m_alloc(unsigned int size, char* file);
@@ -77,6 +78,6 @@ int* __cdecl fcn_004339e0(char* a0, D3_ANIMATION_OPTIONS flags, int a4, void* a5
 		fcn_004337c0(v12);
 	}
 	*(int**) (a0 + 0x1d0) = v12;
-	*(int*) (a0 + 0x40) = *(int*) 0x6b7fac;
+	*(int*) (a0 + 0x40) = g_6b7fac;
 	return v12;
 }

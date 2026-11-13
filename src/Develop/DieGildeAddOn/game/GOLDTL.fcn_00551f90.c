@@ -82,8 +82,8 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 			o->value = g_6643d8[gm_RandomMod(0x10)];
 			n = sizeof(m);
 			fill = m;
-			/* align-up block fill: no msvc6 C spelling emits it
-			 * (docs/codegen-walls.md 6b) */
+			/* align-up block fill: recorded C probes did not emit it
+			 * (archived docs/codegen-walls.md 6b) */
 			__asm {
 				mov edi, fill
 				mov ebx, n

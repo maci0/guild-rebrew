@@ -40,7 +40,7 @@ void __cdecl fcn_004b3810(int arg)
 
 		len = sizeof(name);
 		p = name;
-		/* block-fill prelude, see docs/codegen-walls.md section 6b */
+		/* block-fill prelude, see archived docs/codegen-walls.md section 6b */
 		__asm {
 			mov edi, p
 			mov ebx, len
@@ -65,7 +65,7 @@ void __cdecl fcn_004b3810(int arg)
 
 		len = sizeof(text);
 		p = text;
-		/* block-fill prelude, see docs/codegen-walls.md section 6b */
+		/* block-fill prelude, see archived docs/codegen-walls.md section 6b */
 		__asm {
 			mov edi, p
 			mov ebx, len
@@ -109,7 +109,7 @@ void __cdecl fcn_004b3810(int arg)
 
 				len = sizeof(text);
 				p = text;
-				/* block-fill prelude, see docs/codegen-walls.md section 6b */
+				/* block-fill prelude, see archived docs/codegen-walls.md section 6b */
 				__asm {
 					mov edi, p
 					mov ebx, len
@@ -134,7 +134,7 @@ void __cdecl fcn_004b3810(int arg)
 
 				len = sizeof(name);
 				p = name;
-				/* block-fill prelude, see docs/codegen-walls.md section 6b */
+				/* block-fill prelude, see archived docs/codegen-walls.md section 6b */
 				__asm {
 					mov edi, p
 					mov ebx, len

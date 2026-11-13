@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include "Develop/DieGildeAddOn/game/game_data.h"
+extern int g_67d370;
+extern int g_6b7fac;
 
 extern void __cdecl fcn_004c09b0(void);
 extern void *__cdecl fcn_00470820(int a, int b, const char *name);
@@ -37,7 +40,7 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 			b = a1 | 0x80;
 			do {
 				fcn_005373e0(0, b);
-				if (*(int *) 0x100f1dc != -1 && *(int *) 0x67d370 == tab) {
+				if (g_100f1dc != -1 && g_67d370 == tab) {
 					if (fcn_00423460(node)) {
 						fcn_004237f0(node, 1);
 					}
@@ -46,15 +49,15 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 			} while (fcn_00423460(node));
 		}
 	} else {
-		i = *(int *) 0x6b7fac + 0xfa;
-		if (*(int *) 0x6b7fac < i) {
+		i = g_6b7fac + 0xfa;
+		if (g_6b7fac < i) {
 			b = a1 | 0x80;
 			do {
 				fcn_005373e0(0, b);
-				if (*(int *) 0x100f1dc != -1 && *(int *) 0x67d370 == tab) {
+				if (g_100f1dc != -1 && g_67d370 == tab) {
 					break;
 				}
-			} while (*(int *) 0x6b7fac < i);
+			} while (g_6b7fac < i);
 		}
 	}
 	d2_SetForm(obj, 1);
@@ -65,7 +68,7 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 			b = a1 | 0x80;
 			do {
 				fcn_005373e0(0, b);
-				if (*(int *) 0x100f1dc != -1 && *(int *) 0x67d370 == tab) {
+				if (g_100f1dc != -1 && g_67d370 == tab) {
 					if (fcn_00423460(node)) {
 						fcn_004237f0(node, 1);
 					}
@@ -74,15 +77,15 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 			} while (fcn_00423460(node));
 		}
 	} else {
-		i = *(int *) 0x6b7fac + 0xfa;
-		if (*(int *) 0x6b7fac < i) {
+		i = g_6b7fac + 0xfa;
+		if (g_6b7fac < i) {
 			b = a1 | 0x80;
 			do {
 				fcn_005373e0(0, b);
-				if (*(int *) 0x100f1dc != -1 && *(int *) 0x67d370 == tab) {
+				if (g_100f1dc != -1 && g_67d370 == tab) {
 					break;
 				}
-			} while (*(int *) 0x6b7fac < i);
+			} while (g_6b7fac < i);
 		}
 	}
 	d2_SetForm(obj, 1);
@@ -93,7 +96,7 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 			b = a1 | 0x80;
 			do {
 				fcn_005373e0(0, b);
-				if (*(int *) 0x100f1dc != -1 && *(int *) 0x67d370 == tab) {
+				if (g_100f1dc != -1 && g_67d370 == tab) {
 					if (fcn_00423460(node)) {
 						fcn_004237f0(node, 1);
 					}
@@ -102,15 +105,15 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 			} while (fcn_00423460(node));
 		}
 	} else {
-		i = *(int *) 0x6b7fac + 0xfa;
-		if (*(int *) 0x6b7fac < i) {
+		i = g_6b7fac + 0xfa;
+		if (g_6b7fac < i) {
 			b = a1 | 0x80;
 			do {
 				fcn_005373e0(0, b);
-				if (*(int *) 0x100f1dc != -1 && *(int *) 0x67d370 == tab) {
+				if (g_100f1dc != -1 && g_67d370 == tab) {
 					break;
 				}
-			} while (*(int *) 0x6b7fac < i);
+			} while (g_6b7fac < i);
 		}
 	}
 	d2_SetForm(obj, 1);
@@ -122,7 +125,7 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 		node = fcn_004c3030(-7, 0, buf, -1);
 		if (fcn_00423460(node)) {
 			b = a1 | 0x80;
-			while (fcn_005373e0(0, b), *(int *) 0x100f1dc == -1 || *(int *) 0x67d370 != tab) {
+			while (fcn_005373e0(0, b), g_100f1dc == -1 || g_67d370 != tab) {
 				if (!fcn_00423460(node)) {
 					fcn_00471e30(obj);
 					return;
@@ -133,15 +136,15 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 			}
 		}
 	} else {
-		i = *(int *) 0x6b7fac + 0xfa;
-		if (*(int *) 0x6b7fac < i) {
+		i = g_6b7fac + 0xfa;
+		if (g_6b7fac < i) {
 			b = a1 | 0x80;
 			do {
 				fcn_005373e0(0, b);
-				if (*(int *) 0x100f1dc != -1 && *(int *) 0x67d370 == tab) {
+				if (g_100f1dc != -1 && g_67d370 == tab) {
 					break;
 				}
-			} while (*(int *) 0x6b7fac < i);
+			} while (g_6b7fac < i);
 		}
 	}
 	fcn_00471e30(obj);
