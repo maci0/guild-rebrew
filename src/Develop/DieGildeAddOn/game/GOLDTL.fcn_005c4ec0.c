@@ -60,7 +60,8 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 			if (remaining <= 0) {
 				break;
 			}
-			cat = gm_GetBuildingTypeCategory(*(unsigned char*) ent);
+			cat = *(unsigned char*) ent;
+			cat = gm_GetBuildingTypeCategory(cat);
 			if (cat == 1 || cat == 2 || cat == 8) {
 				obj = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 				if (obj == 0) {
@@ -111,7 +112,8 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 			if (remaining <= 0) {
 				break;
 			}
-			cat = gm_GetBuildingTypeCategory(*(unsigned char*) ent);
+			cat = *(unsigned char*) ent;
+			cat = gm_GetBuildingTypeCategory(cat);
 			if (cat == 1 || cat == 2 || cat == 8) {
 				obj = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 				if (obj != 0) {

@@ -24,7 +24,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	char* e2;
 	char* found;
 	int tmp[11];
-	float point[4];
+	float point[3];
 	int map_x = a;
 	float height;
 	int v;
@@ -119,6 +119,5 @@ int __cdecl fcn_004d7fa0(int a, int b)
 			fcn_004c67c0(*(int*) (a + 0x10), tmp);
 		}
 	}
-	(void) found;
 	return 0;
 }

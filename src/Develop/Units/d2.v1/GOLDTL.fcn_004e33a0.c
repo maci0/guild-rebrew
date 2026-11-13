@@ -86,7 +86,8 @@ void __cdecl fcn_004e33a0(int* arg)
 	int j;
 	void* npc2;
 
-	npc = (int) gm_StartFilteredEntitySearch(1, 1, arg[0x7c / 4]);
+	auctioneer = arg[0x7c / 4];
+	npc = (int) gm_StartFilteredEntitySearch(1, 1, auctioneer);
 	building = npc;
 	besti = -1;
 	result = cut_RandMod(3);

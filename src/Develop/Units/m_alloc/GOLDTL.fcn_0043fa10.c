@@ -69,8 +69,8 @@ int* __cdecl fcn_0043fa10(char* a0)
 
 	v6 = (int*) m_alloc(0x8038, (char*) 0x67a950);
 	raw = (char*) v6;
-	{ char* s = a0; int offset = raw + 0x7da4 - s; char c; do { c = *s; s[offset] = c; ++s; } while (c); }
-	{ char* s = a0 + 0x48; int offset = raw + 0x7de4 - s; char c; do { c = *s; s[offset] = c; ++s; } while (c); }
+	strcpy(raw + 0x7da4, a0);
+	strcpy(raw + 0x7de4, a0 + 0x48);
 	*(unsigned char*) (raw + 0x8037) = (*(unsigned char*) (raw + 0x8037) ^ *(unsigned char*) 0x6b8305) & 0xf ^ *(unsigned char*) (raw + 0x8037);
 	if (*(int*) (a0 + 0x40) && *(int*) (a0 + 0x9c) > 0) {
 		n = *(int*) (a0 + 0x9c);

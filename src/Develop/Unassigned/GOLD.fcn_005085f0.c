@@ -1,6 +1,11 @@
 /* ADDRESS: GOLD 0x005085f0 */
-int __cdecl fcn_005085f0(int a0, unsigned char a1)
+int __cdecl fcn_005085f0(int amount, unsigned char kind)
 {
-	/* Stub: provider restored; native behavior and full C contract unrecovered. */
-	return 0;
+	unsigned int index;
+	unsigned short slot;
+
+	index = kind;
+	index = index * 0x2f4;
+	slot = *(unsigned short*) (0x7e3f94 + index);
+	return *(int*) (0x61a88c + slot * 4) * amount;
 }

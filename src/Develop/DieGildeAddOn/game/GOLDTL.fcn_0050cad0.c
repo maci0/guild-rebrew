@@ -17,13 +17,13 @@ int __cdecl fcn_0050cad0(int* a, int* b)
     int v6;
     int v7;
     float f;
-    if (fcn_00500cb0(a, b) >= 1) {
+    if (fcn_00500cb0(a, b) > 0) {
         return 0;
     }
     cur = *(pos14_7f4c00*) a;
     v3 = cur.a;
     v7 = b[0];
-    if (v7 > v3) {
+    if (v3 < v7) {
         f = (float) (*(unsigned short*) ((char*) &cur + 4) * 60 + *(int*) ((char*) &cur + 6));
         f = (g_665c00 > f || f < g_665bfc) ? (g_665c00 > f ? g_665c00 : f) : g_665bfc;
         v5 = (int) f;

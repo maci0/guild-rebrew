@@ -36,28 +36,28 @@ void __cdecl fcn_005505b0(int a)
 		return;
 	}
 	io_FormatTextBuffer(buf, 0x10c2, g_868080 + (unsigned char) g_773d75 * 0x2f4, (gm_RandomMod(3) & 0xffff) + 0x10c4);
-	p = (char*) 0x7f4ca2;
+	p = (char*) 0x7f4ca0;
 	do {
 		id = 0;
-		if (*(short*) (p - 2) != -1 && *(unsigned char*) (p + 6) >= 2
-		    && (*(char*) p == 6 || *(char*) p == 7 || *(char*) p == 5)) {
-			if (fcn_004a5e60((unsigned short*) (p - 2), 4, 0x400080, 0, 0.0f, 100.0f, &found)) {
+		if (*(short*) p != -1 && *(unsigned char*) (p + 8) >= 2
+		    && (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7 || *(char*) (p + 2) == 5)) {
+			if (fcn_004a5e60((unsigned short*) p, 4, 0x400080, 0, 0.0f, 100.0f, &found)) {
 				gm_ResolveEntityById((void**) &id, 0, 0, found);
 			}
-			if (*(char*) p == 6 || *(char*) p == 7) {
-				fcn_00545d40(*(int*) (p + 2), -1, buf, 0x20, 0x601, 0);
+			if (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7) {
+				fcn_00545d40(*(int*) (p + 4), -1, buf, 0x20, 0x601, 0);
 			}
 			if (id != 0) {
-				n = (int) ((double) gm_WalkEntityChain(*(unsigned short*) (p - 2)) * g_662910);
+				n = (int) ((double) gm_WalkEntityChain(*(unsigned short*) p) * g_662910);
 				n *= (gm_RandomMod(4) & 0xffff) + 2;
-				fcn_004c51a0(*(int*) (p + 2), -1, (unsigned char) g_773d75, n);
-				if (*(char*) p == 6 || *(char*) p == 7) {
+				fcn_004c51a0(*(int*) (p + 4), -1, (unsigned char) g_773d75, n);
+				if (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7) {
 					io_FormatTextBuffer(msg, 0x10c3, id, n);
-					fcn_00545d40(*(int*) (p + 2), -1, msg, 0, 0x5ff, 0);
+					fcn_00545d40(*(int*) (p + 4), -1, msg, 0, 0x5ff, 0);
 				}
 			}
 		}
 		p += 0x21c;
-	} while ((int) p < 0x85a0a2);
+	} while ((int) p < 0x85a0a0);
 	fcn_00546190((void*) a);
 }

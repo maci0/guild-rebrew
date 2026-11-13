@@ -33,8 +33,8 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
     int g;
     int *p;
 
-    s10 = 1;
     s14 = 1;
+    s10 = 1;
 
     if (a1 == 0)
         return 1;

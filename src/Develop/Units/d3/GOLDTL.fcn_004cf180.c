@@ -66,10 +66,7 @@ int __cdecl fcn_004cf180(void)
                 v[0] = *(float*) (obj + 0x4c);
                 v[1] = *(float*) (obj + 0x50);
                 v[2] = *(float*) (obj + 0x54);
-                color[2] = 0xc0;
-                color[1] = 0xc0;
-                color[0] = 0xc0;
-                color[3] = 0x3f;
+                *(int*) color = 0x3fc0c0c0;
                 fcn_00418000(0, v, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f,
                              140.0f, 35.0f, &v[4], 0x190, 6,
                              *(int*) color);

@@ -25,7 +25,7 @@ int __cdecl fcn_0042dac0(int a)
 
     p = g_149d120[a] + 0x60;
 
-    sub_64d41a(buf, 0x679de4, (unsigned long) g_1052f00, (unsigned long) g_679888, p - 0x60);
+    sub_64d41a(buf, 0x679de4, (unsigned long) g_1052f00, (unsigned long) g_679888, g_149d120[a]);
     f = sub_64e2f9(buf, (unsigned long) g_6790b0);
     if (f == 0) {
         MessageBoxA(0, "Could not write ResourceFile!", "txt_SaveTextFile", 0x30);

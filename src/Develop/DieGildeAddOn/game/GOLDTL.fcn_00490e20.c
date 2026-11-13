@@ -25,10 +25,11 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* a2)
 	int p;
 	float f;
 	int d;
+	int owner;
 
 	mode = gm_MapEntityStatRange(*(unsigned char*) (a0 + 0x164));
 	cnt = 0;
-	if (g_7f4c00 <= 9) {
+	if (g_7f4c00 < 10) {
 		return 0;
 	}
 	if (gm_StartFilteredEntitySearch(1, 5, 0x17)) { cnt = 1; }
@@ -58,7 +59,8 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* a2)
 	if (mode == 1 || mode == 2 || mode == 3 || mode == 5) {
 		r--;
 	}
-	p = fcn_00502cd0(*(int*) ((char*) fcn_0050e4a0(1) + 0x5d), 2, 6, 0, 0x115);
+	owner = fcn_0050e4a0(1);
+	p = fcn_00502cd0(*(int*) ((char*) owner + 0x5d), 2, 6, 0, 0x115);
 	cur = fcn_0050b810(*(int*) ((char*) p + 0x14), g_773d75);
 	if (cur < fcn_004ec710() * 3) {
 		r = r + 1 + (gm_RandomMod(3) & 0xffff);

@@ -1,6 +1,19 @@
+#include <string.h>
+
 /* ADDRESS: GOLD 0x00468880 */
-int __cdecl fcn_00468880(void)
+int __cdecl fcn_00468880(char* name)
 {
-	/* Stub: provider restored; native behavior and full C contract unrecovered. */
-	return 0;
+	char* row;
+	int i;
+
+	row = *(char**) 0x6ed918;
+	i = 0;
+	while (i < 0x800) {
+		if (row[0] != 0 && strcmp(name, row) == 0) {
+			return i;
+		}
+		i++;
+		row += 0x54;
+	}
+	return -1;
 }

@@ -39,7 +39,8 @@ void __cdecl fcn_0056e3c0(char* a0)
 	unsigned int idx;
 	char buf[0x514];
 
-	if (*(int*) (a0 + 0x70) == -1) {
+	if (*(int*) (a0 + 0x70) != -1) {
+	} else {
 		goto tail;
 	}
 	s = gm_LookupEntityRecordById(*(int*) (a0 + 0xac));

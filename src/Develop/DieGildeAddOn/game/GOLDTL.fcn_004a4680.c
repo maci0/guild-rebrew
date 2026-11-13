@@ -27,7 +27,8 @@ int __cdecl fcn_004a4680(float* o0, float* o1, int idx, char* s, int* p4)
 	}
 	{
 		int bonus = fcn_004f5dd0(*(int*) (s + 4));
-		v9 = (*(float*) (s + 0x10c) - g_662918) * ((float) bonus + base);
+		v9 = (float) bonus + base;
+		v9 = (*(float*) (s + 0x10c) - g_662918) * v9;
 	}
 	*o0 = 0.0f;
 	*o1 = 0.0f;

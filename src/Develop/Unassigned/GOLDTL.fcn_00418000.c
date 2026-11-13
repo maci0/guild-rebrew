@@ -32,8 +32,8 @@ int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, flo
     int mask;
 
     memset(&f, 0, sizeof(f));
-    f.c |= 2;
     f.a = 0x7f;
+    f.c |= 2;
     s = fcn_004524e0(n, "Rauch", f, a4, a1, fcn_00417f00);
     if (s != 0) {
         k = g_6b7fac;

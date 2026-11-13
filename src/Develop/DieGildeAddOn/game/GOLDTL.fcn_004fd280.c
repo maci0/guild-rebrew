@@ -62,16 +62,14 @@ void __cdecl fcn_004fd280(int flag)
 
 		ent = (char*) gm_StartFilteredEntitySearch(1, 5, 7);
 		if (ent != 0) {
-			i = 0;
-			for (n = 0; n < 8;) {
+			n = 0;
+			while (ent != 0 && n < 8) {
 				if (*(unsigned short*) (ent + 0x27) != 0xffff) {
 					ptrs[n] = ent;
-					vals[n] = lpGebaeudePROT[*(unsigned char*) ent * 0x24d + 0x247]; n++;
+					vals[n] = lpGebaeudePROT[*(unsigned char*) ent * 0x24d + 0x247];
+					n++;
 				}
 				ent = (char*) gm_FindNextFilteredEntity();
-				if (ent == 0) {
-					break;
-				}
 			}
 		}
 	}

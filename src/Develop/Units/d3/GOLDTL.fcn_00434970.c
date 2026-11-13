@@ -25,13 +25,11 @@ char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS optio
 
 	if (context != 0) {
 		object = d3_FindAnimByName(name);
-		slot = 0;
 		scan = context + 0x390;
-		for (slot = 0; slot < 3; slot++) {
+		for (slot = 0; slot < 3; slot++, scan += 0x7c) {
 			if (*(int*) scan == 0) {
 				break;
 			}
-			scan += 0x7c;
 		}
 		if (object != 0) {
 			if (*(int*) (object + 0x140) == *(int*) (context + 0x310)) {

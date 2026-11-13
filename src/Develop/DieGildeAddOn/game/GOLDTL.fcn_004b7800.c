@@ -36,7 +36,7 @@ int __cdecl fcn_004b7800(int* a0)
 	if (gm_ResolveEntityById((void**) &y, 0, 0, x) == 0)
 		return 0x400;
 	d = (double) (gm_RandomMod(3) & 0xffff) + 1.0;
-	r = (int) ((double) gm_WalkEntityChain(*(unsigned short*) h) * d * g_6640e8);
+	r = (int) ((double) gm_WalkEntityChain(*(unsigned short*) h) * d * 0.01);
 	w = *(unsigned short*) ((char*) a0 + 4);
 	io_FormatTextBuffer(buf, w + 0x12e7, y, r);
 	fcn_004c51a0(-1, *a0, g_773d75, r);

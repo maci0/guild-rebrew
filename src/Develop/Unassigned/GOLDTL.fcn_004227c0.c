@@ -38,7 +38,7 @@ char* __cdecl fcn_004227c0(void)
 			e = (char*) (*(int*) (o + 0x138) + i * 0x40);
 			n -= i;
 			do {
-				if (*(int*) (e + 0x3c) < *(int*) (found + 0x3c) && *(int*) (e + 0x38) != 0) {
+				if (*(int*) (found + 0x3c) > *(int*) (e + 0x3c) && *(int*) (e + 0x38) != 0) {
 					found = e;
 				}
 				e += 0x40;
@@ -51,15 +51,15 @@ char* __cdecl fcn_004227c0(void)
 		idx = 0;
 		p = fcn_00422760((int) found, &idx);
 		if (p != 0) {
-			while (fcn_0042aaa0(*(int*) p) != 4 && !(*(int*) (p + 0x14) | 0x10)) {
+			do {
+				if (fcn_0042aaa0(*(int*) p) == 4 || (*(int*) (p + 0x14) | 0x10) != 0) {
+					found = 0;
+					break;
+				}
 				idx++;
 				*(int*) (p + 4) = 0;
 				p = fcn_00422760((int) found, &idx);
-				if (p == 0) {
-					return found;
-				}
-			}
-			found = 0;
+			} while (p != 0);
 		}
 	}
 	return found;

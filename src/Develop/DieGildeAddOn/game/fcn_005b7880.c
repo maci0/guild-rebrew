@@ -187,8 +187,9 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 	}
 	d2_SetForm(*(int*) (f.win + 0x230), 3);
 
-	f.tv3 = *(int*) (0x1015f4c + *(int*) 0x772514 * 0x3cc) / 2;
-	f.tv2 = *(int*) (0x1015f50 + *(int*) 0x772514 * 0x3cc) / 2;
+	n = *(int*) 0x772514 * 0x3cc;
+	f.tv3 = *(int*) (0x1015f4c + n) / 2;
+	f.tv2 = *(int*) (0x1015f50 + n) / 2;
 	for (i = 0; i < 12; i++) {
 		f.rows[i].obj = 0;
 		f.rows[i].icon = -1;

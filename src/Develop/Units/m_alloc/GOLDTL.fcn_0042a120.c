@@ -46,8 +46,49 @@ int __cdecl fcn_0042a120(int* out, int channels, int bits, int rate)
 	}
 	*(int*) ((char*) 0x6b7f10 + index * 4) = (int) m_alloc(*(int*) 0x6b7f94 * 4, (char*) 0x679874);
 	*(int*) ((char*) 0x6b7f50 + index * 4) = (int) m_alloc(*(int*) 0x6b7f94 * 4, (char*) 0x679874);
-	memset((void*) *(int*) ((char*) 0x6b7f10 + index * 4), 0, *(int*) 0x6b7f94 * 4);
-	memset((void*) *(int*) ((char*) 0x6b7f50 + index * 4), 0, *(int*) 0x6b7f94 * 4);
+	/* Reviewed native fill cores at 0x0042a24a-0x0042a26a and 0x0042a284-0x0042a2a4. */
+	{
+		char* d;
+		int n;
+		d = (char*) *(int*) ((char*) 0x6b7f10 + index * 4);
+		n = *(int*) 0x6b7f94 * 4;
+		__asm {
+			mov edi, d
+			mov ebx, n
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L1
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		L1:
+			add ecx, ebx
+			rep stosb
+		}
+		d = (char*) *(int*) ((char*) 0x6b7f50 + index * 4);
+		n = *(int*) 0x6b7f94 * 4;
+		__asm {
+			mov edi, d
+			mov ebx, n
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L2
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		L2:
+			add ecx, ebx
+			rep stosb
+		}
+	}
 	*(int*) (rec + 0x18) = *(int*) 0x6b7f94;
 	*(int*) (rec + 0x14) = 0;
 	*out = (int) rec;

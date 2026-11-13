@@ -48,7 +48,7 @@ void __cdecl fcn_004f4970(unsigned int a0)
 	}
 	v = gm_WalkEntityChain((int) a0);
 	count = *(unsigned char*) (slot + 0xd);
-	limit = count + 1;
+	limit = (unsigned char) (count + 1);
 	if (limit > 0xa) {
 		limit = 0xa;
 	}

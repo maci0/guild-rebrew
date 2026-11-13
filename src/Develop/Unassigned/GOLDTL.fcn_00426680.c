@@ -34,7 +34,7 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 	char found;
 	char c;
 	register struct tok_426680* tok;
-	char* p;
+	register char* p;
 	char* q;
 	int i;
 	int j;
