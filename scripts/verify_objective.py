@@ -23,7 +23,8 @@ IMPORT_COUNT = 100
 def load(path):
     d = open(path, "rb").read()
     e = struct.unpack_from("<I", d, 0x3C)[0]
-    assert d[e:e + 4] == b"PE\0\0", "not a PE: " + path
+    if d[e:e + 4] != b"PE\0\0":
+        raise ValueError("not a PE: " + path)
     nsec = struct.unpack_from("<H", d, e + 6)[0]
     opt = e + 24
     base = struct.unpack_from("<I", d, opt + 28)[0]

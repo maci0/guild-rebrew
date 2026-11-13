@@ -12,7 +12,17 @@
 set(CMAKE_SYSTEM_NAME Windows)
 set(CMAKE_SYSTEM_PROCESSOR x86)
 
-find_program(_REBREW_EXECUTABLE NAMES rebrew)
+# Re-resolve on configure; a previous uv environment may no longer exist.
+unset(_REBREW_EXECUTABLE CACHE)
+unset(_REBREW_EXECUTABLE)
+if(DEFINED ENV{REBREW_EXECUTABLE} AND NOT "$ENV{REBREW_EXECUTABLE}" STREQUAL "")
+  set(_REBREW_EXECUTABLE "$ENV{REBREW_EXECUTABLE}")
+  if(NOT IS_ABSOLUTE "${_REBREW_EXECUTABLE}" OR NOT EXISTS "${_REBREW_EXECUTABLE}" OR IS_DIRECTORY "${_REBREW_EXECUTABLE}")
+    message(FATAL_ERROR "REBREW_EXECUTABLE must name an existing absolute executable path; activate the Rebrew environment and reconfigure")
+  endif()
+else()
+  find_program(_REBREW_EXECUTABLE NAMES rebrew)
+endif()
 if(NOT _REBREW_EXECUTABLE)
   message(FATAL_ERROR "rebrew not found on PATH; activate the Rebrew environment")
 endif()

@@ -27401,3 +27401,42 @@ Change: `GOLDTL.fcn_00558d10.c` uses a signed index and explicit low/high 32-bit
   source and metadata edits are excluded from this commit. Receipts, per-file
   changes and one-line rejected-finding reasons are in
   `.scratch/docs-review-20261113/`; no sixth review round was run.
+
+## 2026-11-13 — code and metadata follow-ups
+
+- Change: replace the independent server checker's PE-signature assertion with
+  an input error that remains active under optimized Python. Add regressions for
+  truncated files, invalid signatures and out-of-range PE offsets under normal
+  Python and `python -O`.
+- Change: regenerate the MSVC 6.0 SP5 CMake toolchain with pinned Rebrew 6.33.0.
+  Configuration now discards a stale cached driver path and resolves the current
+  executable. Correct the two historical CRT support-purpose descriptions through
+  `rebrew source register --support`, and close their metadata follow-up in the
+  tooling guide. No function identity, verdict or game body is changed here.
+- Reason/evidence: the original checker raised an uncaught assertion or skipped
+  signature validation under optimization; the old generated toolchain retained
+  a missing executable. CMake excludes both CRT experiment files from the server.
+  Regressions failed before the fixes. Receipts are under
+  `.scratch/docs-followup-20261113/`.
+- Upstream: isolated branch `fix/guild-docs-followups-20261113` corrects generated
+  quick-start source selection and batch-test wording, CMake backend/usage text,
+  and the incomplete TODO category help. Regression tests and the changelog are
+  updated. The project's released dependency pins and generated instructions
+  remain unchanged; these upstream corrections require a future release/refresh.
+- Verification: all 50 project tests and 9 subtests pass; 379 focused upstream
+  tests pass. The missing cached-path probe selects the current driver. A fresh
+  server configure/build succeeds and the independent checker confirms all
+  286,720 bytes match the reference, SHA-256
+  `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+  All 179 internal links/anchors across 40 Markdown files resolve. Upstream lint,
+  formatting and both diffs' whitespace checks pass.
+- Decision owner: user, explicitly authorizing code and managed-metadata fixes.
+  Only the two writer-produced support labels are staged from the managed store;
+  unrelated source, inventory and metadata work is preserved.
+- Full upstream suite: 15,344 passed, 67 skipped, two failures. The wheel-smoke
+  subprocess used the original editable checkout; it passes with the isolated
+  source path selected. The release-history check fails identically on the
+  unmodified `c6fdbc23` baseline because its released 6.35.0 notes differ from the
+  tag. That unrelated historical failure remains open; no full green suite is
+  claimed. Upstream fixes are committed locally, not published. No client rebuild,
+  full acceptance gate or gameplay checks were run for this follow-up.

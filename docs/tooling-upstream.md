@@ -48,9 +48,8 @@ replay evidence. Check installed help and preview the selected target's writes
 before using `data layout fill`. Review the proposed source paths and storage
 ownership before applying the plan.
 
-The managed support-purpose descriptions for `src/crt_region/amsg_exit.c` and
-`src/crt_region/data_restore.c` still describe retired link/postlink recipes.
-Those recipes are retired, and the current server build excludes both files.
-Correcting the labels through locked writers remains separate metadata work.
+The managed support-purpose descriptions mark `src/crt_region/amsg_exit.c` and
+`src/crt_region/data_restore.c` as historical experiments excluded from the
+current server build.
 
 Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.

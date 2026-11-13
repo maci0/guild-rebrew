@@ -635584,10 +635584,10 @@ evidence = "Reviewed fixed-EBX inline fill/copy core (LEA ECX,[EDI+EDI*2]; AND E
 source_hash = "9a98699cc6c37d3e547b1df1a03ab66ea6e9374b047351a8fd9618ff990ed623"
 evidence = "Reviewed original fixed-EBX inline copy core, one shape across725 native sites: LEA ECX,[EDI+EDI*2]; AND ECX,3; REP MOVSB/MOVSD/MOVSB with C-local operands. Four native cores447a3c..447a5f,447aa5..447ac8,447c6d..447c90,447ca5..447cc8; native dump .scratch/sol/13/g004478e0-asm.txt. Explicit project-lead RULES inline copy exception; rest of function recovered C."
 [source.files."src/crt_region/amsg_exit.c".SERVER]
-purpose = "reversed mirror of stock LIBCMT amsg/crt0msg code, compiled to keep crt0msg.obj out of the link (its runtime-error strings duplicate rdata_restore.c). the strcat mirror (0x1001f8e0) is asm in the CRT and cannot match in pure C; this file is scaffolding, not reversed game code"
+purpose = "Historical CRT replacement-link experiment, excluded from the current server build; native observations are retained, not game recovery."
 
 [source.files."src/crt_region/data_restore.c".SERVER]
-purpose = "raw .data gap blob so the link reaches the reference .data size; postlink overwrites these bytes"
+purpose = "Historical raw .data gap blob for the retired postlink experiment; excluded from the current server build."
 
 [source.files."src/GOLD.fcn_0040dd50.c".GOLD]
 purpose = "Retained Gold-only source candidate; canonical function identity is owned by another translation unit."

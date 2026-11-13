@@ -12,6 +12,25 @@ SCRIPT = Path(__file__).resolve().parents[1] / "scripts/verify_objective.py"
 
 
 class VerifyObjectiveInputTest(unittest.TestCase):
+    def test_rejects_malformed_pe_with_and_without_optimization(self):
+        outside = bytearray(64)
+        struct.pack_into("<I", outside, 0x3C, 0xFFFFFFFC)
+        with tempfile.TemporaryDirectory() as directory:
+            image = Path(directory) / "invalid.dll"
+            for payload in (b"", bytes(64), outside):
+                image.write_bytes(payload)
+                for flags in ([], ["-O"]):
+                    with self.subTest(size=len(payload), flags=flags):
+                        result = subprocess.run(
+                            [sys.executable, *flags, str(SCRIPT),
+                             "--ref", str(image), "--build", str(image)],
+                            capture_output=True,
+                            text=True,
+                        )
+                        self.assertEqual(result.returncode, 2, result.stderr)
+                        self.assertIn("invalid verification input", result.stderr)
+                        self.assertNotIn("Traceback", result.stderr)
+
     def test_accepts_identical_image_and_rejects_byte_or_length_drift(self):
         image = bytearray(0xA00)
         struct.pack_into("<I", image, 0x3C, 0x80)
