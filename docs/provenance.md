@@ -27440,3 +27440,11 @@ Change: `GOLDTL.fcn_00558d10.c` uses a signed index and explicit low/high 32-bit
   tag. That unrelated historical failure remains open; no full green suite is
   claimed. Upstream fixes are committed locally, not published. No client rebuild,
   full acceptance gate or gameplay checks were run for this follow-up.
+
+## 2026-11-13 matching round 3 batch 2
+
+- Change: kept source gains and native-proven behavior fixes from the 10 round-3 matching lanes after commit 2ffe7643 (per-row evidence in the lane entries above), and 33 reviewed Gold extent repairs where the stored size counted padding after the function: 31 rows found by a capstone sweep of the stored extents (`.scratch/sol/r3/pad_sweep.py`; native body ends at its final `ret` and only NOP/INT3 fill follows to the 16-byte function alignment) plus GOLD 0x4e78f0 (432->424) and 0x5c3350 (448->437), whose bodies end in switch tables that stay inside the extent. All applied with `rebrew binary repair-extents --sync-rows` under preview digests; the rows were then recorded, and most now read RELOC with unchanged C. Assembly evidence recorded for the reviewed fill/copy cores in GOLDTL 0x412f10, 0x424420, 0x496e60, 0x424270, 0x5a2db0, vfs_ReadData and hst_ParseContext. GOLDTL 0x5af140 got a BLOCKER (native size, positional gap only).
+- Lead corrections: held 36 comment-only doc-reference edits made during the freeze by another session out of this commit (copies in `.scratch/sol/r3/docref-hold/`); two of them were already in commit 9a644045 and now match it. A `rebrew test` recording of spiel.c ran 45 minutes on one thread without writing and was stopped; the Gold spiel.c rows 0x504ce0/0x50ad70 keep their repaired extents and still need re-recording.
+- Evidence: `.scratch/link/summary.txt`, `.scratch/link/gate7.log`, `.scratch/sol/r3/extents-3.json`, `.scratch/sol/r3/extents-4.json`, `.scratch/sol/r3/central2/`.
+- Decision owner: lead, under the user's instruction to merge the lane work.
+- Verification: both clients relinked with exit 0; `uv run bash scripts/gate.sh` passes with the server raw link byte-identical; `rebrew lint --all-targets` 0 errors and 0 warnings on 5538 files.

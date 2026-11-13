@@ -31,7 +31,30 @@ int __cdecl fcn_00412f10(char* obj, char* name, int flags)
 	if (d3_FindAnimByName(stream) == 0) {
 		d3_LoadAnimStream(name, stream, 0);
 	}
-	memset(&opt, 0, sizeof(opt));
+	{
+		void* dst;
+		int len;
+
+		dst = &opt;
+		len = sizeof(opt);
+		__asm {
+			mov edi, dst
+			mov ebx, len
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short FillDone
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		FillDone:
+			add ecx, ebx
+			rep stosb
+		}
+	}
 	if ((flags & 2) != 0) {
 		opt.layer |= 0x10;
 	}

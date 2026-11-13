@@ -1,9 +1,5 @@
-
-
-
 #include <stdio.h>
 #include <string.h>
-
 int __cdecl fcn_0051e070(void);
 
 void __cdecl fcn_00538500(char* out)
@@ -15,7 +11,11 @@ void __cdecl fcn_00538500(char* out)
 	char* p;
 	int i;
 
+#ifdef REBREW_GOLD
+	strcpy(date, "Jan  8 2004");
+#else
 	strcpy(date, "Jan  9 2004");
+#endif
 	i = 0;
 	p = strtok(date, sep);
 	while (p != 0) {

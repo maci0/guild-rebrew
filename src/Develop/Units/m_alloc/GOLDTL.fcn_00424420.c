@@ -26,7 +26,27 @@ unsigned int __cdecl fcn_00424420(unsigned int a0)
 	if (v2 != 0) {
 		*(char**) (v2 + 0x104) = v3;
 		if (v3 != 0) {
-			memset(v3, 0, 0x108);
+			int fn;
+			char* fp;
+			fn = 0x108;
+			fp = v3;
+			__asm {
+				mov edi, fp
+				mov ebx, fn
+				xor eax, eax
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short Fill0
+				rep stosb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep stosd
+			Fill0:
+				add ecx, ebx
+				rep stosb
+			}
 			strncpy(*(char**) (v2 + 0x104), (char*) a0, 0x100);
 			v4 = fcn_00423920(v4);
 			*(unsigned int*) (*(char**) (v2 + 0x104) + 0x100) = v4;
@@ -38,7 +58,27 @@ unsigned int __cdecl fcn_00424420(unsigned int a0)
 		*(char**) (*(char**) 0x6b7d68 + 0x38) = v3;
 		v3 = *(char**) (*(char**) 0x6b7d68 + 0x38);
 		if (v3 != 0) {
-			memset(v3, 0, 0x108);
+			int fn;
+			char* fp;
+			fn = 0x108;
+			fp = v3;
+			__asm {
+				mov edi, fp
+				mov ebx, fn
+				xor eax, eax
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short Fill1
+				rep stosb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep stosd
+			Fill1:
+				add ecx, ebx
+				rep stosb
+			}
 			strncpy(*(char**) (*(char**) 0x6b7d68 + 0x38), (char*) a0, 0x100);
 			v4 = fcn_00423920(v4);
 			*(unsigned int*) (*(char**) (*(char**) 0x6b7d68 + 0x38) + 0x100) = v4;

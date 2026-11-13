@@ -21,7 +21,7 @@ int __cdecl fcn_005cd440(void*, char*, int, char*);
 int __cdecl fcn_005d6030(char* a0, char* a1)
 {
 	unsigned char rec[0xf8];
-	unsigned int init[5];
+	unsigned int init[20];
 	char name[64];
 	int owner;
 	int found;
@@ -32,8 +32,8 @@ int __cdecl fcn_005d6030(char* a0, char* a1)
 		if (found == 0) {
 			return 0x60;
 		}
-		id = gm_RandomMod(9) + 0x1d6d;
 		owner = gm_RandomMod(9) + 0x1d76;
+		id = gm_RandomMod(9) + 0x1d6d;
 		memset(rec, 0, sizeof(rec));
 		*(int*) (rec + 8) = *(int*) (a0 + 4);
 		*(int*) (rec + 0xc) = *(int*) (a0 + 4);

@@ -1,4 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
+#include "Develop/Units/d2.v1/d2_gui.h"
+extern int g_67d370;
 int __cdecl fcn_00443bf0(float, float, int, int); int __cdecl fcn_00442c00(int, int);
 int __cdecl fcn_0045bad0(int, int, int, int*, int*);
 char __cdecl fcn_0045b920(int, int, int, float*);
@@ -29,9 +31,9 @@ void __cdecl fcn_004d06d0(void)
 	i = 0;
 	*(int*) &g_7746a4 = 0;
 	g_7725c4 = 0;
-	if (1 <= *(short*) &g_14ce8c0 && *(short*) &g_14ce8c0 < *(int*) 0x1040494
-		&& 1 <= *(short*) &g_14ce8c2 && *(short*) &g_14ce8c2 < *(int*) 0x1040490
-		&& *(int*) 0x67d370 == -1) {
+	if (1 <= *(short*) &g_14ce8c0 && *(short*) &g_14ce8c0 < g_1040494
+		&& 1 <= *(short*) &g_14ce8c2 && *(short*) &g_14ce8c2 < g_1040490
+		&& g_67d370 == -1) {
 		x = *(short*) &g_14ce8c0;
 		y = *(short*) &g_14ce8c2;
 		*(int*) &g_7746a4 = fcn_00443bf0((float) x, (float) y, 0x40, 1);
@@ -76,7 +78,7 @@ void __cdecl fcn_004d06d0(void)
 			if (2 <= count) {
 				code = 0x23;
 			}
-			if (*(int*) &g_7746a4 == 0 || *(int*) 0x67d370 != -1) {
+			if (*(int*) &g_7746a4 == 0 || g_67d370 != -1) {
 				g_7725c4 = 0;
 				return;
 			}

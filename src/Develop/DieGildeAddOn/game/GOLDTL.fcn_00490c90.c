@@ -46,7 +46,7 @@ int __cdecl fcn_00490c90(char* a0, int a1, int* a2)
 			r = r + 1 + (gm_RandomMod(3) & 0xffff);
 		}
 		if (v5[6] - 3 > r) {
-			v = (v5[6] - (gm_RandomMod(3) & 0xffff)) - 1;
+			v = gm_RandomMod(3) & 0xffff; v = v5[6] - v - 1;
 			*a2 = v;
 			if (v5[1] > v) {
 				*a2 = v5[1];

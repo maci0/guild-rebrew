@@ -26,8 +26,8 @@ int __cdecl fcn_00492e50(Cmd92e50* a, char* b)
 	int count;
 	int sum;
 	int sw;
-	int v1;
-	int v2;
+	unsigned char v1;
+	unsigned char v2;
 	int extra;
 	int i;
 	int n;
@@ -69,7 +69,7 @@ int __cdecl fcn_00492e50(Cmd92e50* a, char* b)
 			return 2;
 		}
 		if (n != 0) {
-			t = (float) n * 0.16666667f * ((1.0f - (float) count * 0.2f) * 0.25f + 1.0f);
+			t = ((1.0f - (float) count * 0.2f) * 0.25f + 1.0f) * ((float) n * 0.16666667f);
 			if (gm_RandomFloat01() < t) {
 				return 2;
 			}

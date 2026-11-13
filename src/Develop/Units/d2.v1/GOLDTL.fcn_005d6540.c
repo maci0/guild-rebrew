@@ -1,5 +1,5 @@
 #include <string.h>
-
+extern int g_14ce8e0;
 #pragma intrinsic(memset)
 
 extern int g_100f1dc;
@@ -125,7 +125,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 		if (keep) {
 			fcn_00472640(box, (fcn_00471f80(ctl) - add != rec[6]) && box != -1);
 		}
-		if (*(int*) 0x14ce8e0 != 0) {
+		if (g_14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;
 		}
 		if (g_100f1dc != -1) {

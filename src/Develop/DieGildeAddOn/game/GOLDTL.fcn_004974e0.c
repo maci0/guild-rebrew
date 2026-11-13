@@ -1,8 +1,8 @@
-extern char* g_entity_type_table;
+#include "game_data.h"
 extern char* g_item_def_table;
 #include "GOLDTL.fcn_004974e0_gconf.h"
 extern unsigned char g_773d75;
-
+typedef struct { char x00[0x21]; unsigned char x21; char x22[0x22b]; } BUILDING_LIMIT_VIEW;
 char* __cdecl gm_SearchTable67(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -19,7 +19,7 @@ int __cdecl fcn_004974e0(int unused, char* e, int unused2, char* out, char* out2
 	int amount;
 	unsigned short* ent;
 	int i;
-	int limit;
+	BUILDING_LIMIT_VIEW* limit;
 
 	if (e[2] == 3)
 		return 0;
@@ -42,19 +42,19 @@ int __cdecl fcn_004974e0(int unused, char* e, int unused2, char* out, char* out2
 	if (amount < (int) fcn_0050bb50(*(int*) (out + 4), g_773d75))
 		return 0;
 	i = 0;
-	limit = *(unsigned char*) (g_entity_type_table + *(unsigned char*) r * 0x24d + 0x21);
+	limit = &((BUILDING_LIMIT_VIEW*) lpGebaeudePROT)[*(unsigned char*) r];
 	ent = fcn_00502cd0(*(int*) (r + 0x5d), 1, 4, 2);
 	while (ent != 0) {
 		if (*ent != 0xfd)
 			i++;
 		ent = (unsigned short*) gm_NextEntityQueryMatch();
 	}
-	if (i >= limit)
+	if (i >= limit->x21)
 		return 0;
 	ent = (unsigned short*) fcn_005463a0(2, 0, 0x1f, 3, *(int*) (r + 1));
 	while (ent != 0) {
 		i++;
 		ent = (unsigned short*) he_fn_Handlung();
 	}
-	return i < limit ? 0xe : 0;
+	return i < limit->x21 ? 0xe : 0;
 }

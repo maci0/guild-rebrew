@@ -7,7 +7,7 @@ float* __cdecl fcn_004d3c60(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 float __cdecl fcn_004d3e90(void*, unsigned int);
 float __cdecl cut_RandFloat(void);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004d4250(char*, char*);
 
 /* ADDRESS: GOLDTL 0x004d3fe0 */

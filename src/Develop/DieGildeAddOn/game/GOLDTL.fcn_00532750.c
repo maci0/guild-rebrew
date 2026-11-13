@@ -60,7 +60,7 @@ found:
 			*(char**) 0x14a5530);
 	}
 	if (fcn_00443e10(a, rc)) {
-		fcn_0046bd20((rc[2] - rc[1]) / 2 + rc[1] - 0x50, rc[1], 0xa0, 0x60,
+		fcn_0046bd20((rc[2] - rc[0]) / 2 + rc[0] - 0x50, rc[1], 0xa0, 0x60,
 			g_77250c, value, 0x28);
 	}
 }

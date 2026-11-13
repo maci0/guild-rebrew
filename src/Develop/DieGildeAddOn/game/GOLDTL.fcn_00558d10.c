@@ -16,8 +16,10 @@ void __cdecl fcn_00558d10(char* e)
 	pos14_7f4c00* clock;
 	char* q;
 	char* p;
-	unsigned int idx;
-	unsigned int c;
+	int idx;
+	unsigned char c;
+	unsigned int bit_lo;
+	unsigned int bit_hi;
 	int n;
 
 	clock = (pos14_7f4c00*) (e + 0x52);
@@ -28,7 +30,15 @@ void __cdecl fcn_00558d10(char* e)
 	do {
 		q = lpGebaeudeINST + idx * 0xa9;
 		c = *(unsigned char*) (lpGebaeudePROT + (unsigned int) *(unsigned char*) q * 0x24d);
-		if (*(unsigned short*) (q + 0x27) != 0xffff && ((__int64) 1 << c) & 0x1807C4110) {
+		bit_lo = 0;
+		bit_hi = 0;
+		if (c > 31) {
+			bit_hi = 1U << ((c - 32) & 31);
+		} else {
+			bit_lo = 1U << c;
+		}
+		if (*(unsigned short*) (q + 0x27) != 0xffff
+		    && ((bit_lo & 0x807c4110U) != 0 || (bit_hi & 1) != 0)) {
 			p = q;
 			break;
 		}

@@ -3,13 +3,11 @@ int __cdecl fcn_0046b520(char*, int);
 void __cdecl fcn_0046b2b0(int);
 int __cdecl fcn_00469c30(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
-
 typedef struct List0474cf0 {
 	char pad0[0x28];
 	int* ids;
 	int count;
 } List0474cf0;
-
 typedef struct Slot0474cf0 {
 	char pad0[0xc];
 	struct Item0474cf0* item;
@@ -18,7 +16,6 @@ typedef struct Slot0474cf0 {
 	List0474cf0* list;
 	char pad44[0x2b0];
 } Slot0474cf0;
-
 typedef struct Item0474cf0 {
 	int pad0;
 	int x;
@@ -53,7 +50,7 @@ void __cdecl fcn_00474cf0(int slot)
 	List0474cf0* list;
 	int i;
 	int y;
-	int sel;
+	Item0474cf0* selected;
 
 	slots = *(Slot0474cf0**) &g_1015ea0;
 	it = slots[slot].item;
@@ -66,25 +63,28 @@ void __cdecl fcn_00474cf0(int slot)
 	}
 	*(Item0474cf0**) &g_7725d0 = it;
 	slots[it->slot].active = 1;
-	sel = it->slot;
-	list = slots[sel].list;
+	selected = *(Item0474cf0**) &g_7725d0;
+	list = (*(Slot0474cf0**) &g_1015ea0)[selected->slot].list;
 	i = 0;
 	while (list != 0 && i < list->count) {
-		if (list->ids[i] == sel) {
+		if (list->ids[i] == it->slot) {
 			g_100f1cc = i;
 		}
 		i++;
 	}
+	it = selected;
 	if ((it->flags & 0x40) &&
 	    it->x18 == 0 &&
 	    it->x1c == 0 &&
 	    CountDisplayCounters() == 0 &&
 	    it->x12c == 0) {
 		it->x12c = -1;
+		it = *(Item0474cf0**) &g_7725d0;
 	}
 	if ((it->flags & 2) &&
 	    it->x18 != 0) {
 		it->x12c = 1;
+		it = *(Item0474cf0**) &g_7725d0;
 	}
 	if ((it->flags & 1) != 0) {
 		g_100f898 =

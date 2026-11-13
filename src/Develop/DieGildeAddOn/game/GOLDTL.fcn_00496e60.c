@@ -31,12 +31,32 @@ int __cdecl fcn_00496e60(int a1, char* e, int y, Msg* out1, Msg* out2)
 		return 0;
 	}
 	if (*(unsigned char*) (e + 0xd) < 2) {
+		char* entity = e;
 		b.type = 0xd;
 		b.a = 2;
 		b.b = 1;
 		b.f = 0.44f;
-		memset(&a, 0, sizeof(a));
-		r = fcn_00495400(10, *(unsigned short*) e, 1, &b, &a);
+		e = (char*) &a;
+		y = sizeof(a);
+		/* Native fill core at 0x496ea7-0x496ec7. */
+		__asm {
+			mov edi, e
+			mov ebx, y
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L1
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		L1:
+			add ecx, ebx
+			rep stosb
+		}
+		r = fcn_00495400(10, *(unsigned short*) entity, 1, &b, &a);
 		if (r) {
 			*out1 = b;
 			*out2 = a;

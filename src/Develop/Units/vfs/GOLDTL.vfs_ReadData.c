@@ -55,7 +55,28 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 			result = total - *(int*) (stream + 0x110);
 			return result;
 		}
-		memcpy(buf, *(char**) zstrm, total);
+		{
+			char* src;
+
+			src = *(char**) zstrm;
+			__asm {
+				mov edi, buf
+				mov esi, src
+				mov ebx, total
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short CopyDone
+				rep movsb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep movsd
+			CopyDone:
+				add ecx, ebx
+				rep movsb
+			}
+		}
 		result = total;
 		*(char**) zstrm += total;
 		*(int*) (stream + 0x104) -= total;

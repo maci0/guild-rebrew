@@ -3,7 +3,7 @@
 void __cdecl fcn_00455540(char* o, float* v, float* out);
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
 void __cdecl fcn_004518a0(float* v);
-double __cdecl _CIasin(double);
+
 
 /* ADDRESS: GOLDTL 0x00444700 */
 float __cdecl fcn_00444700(char* obj, float* target)
@@ -29,7 +29,7 @@ float __cdecl fcn_00444700(char* obj, float* target)
 	fcn_004518a0(a);
 	y = td[1] * a[1];
 	dot = y + td[0] * a[0] + td[2] * a[2];
-	ang = (float) _CIasin(dot < -1.0f || 1.0f < dot ? (dot < -1.0f ? -1.0f : 1.0f) : dot);
+	ang = (float) acos(dot < -1.0f || !(dot < 1.0f) ? (dot < -1.0f ? -1.0f : 1.0f) : dot);
 	s = (float) sin(*(double*) 0x662988);
 	c = (float) cos(*(double*) 0x662988);
 	if (y + td[0] * (c * a[0] + s * a[2]) + td[2] * (c * a[2] - s * a[0]) > 0.0f) {

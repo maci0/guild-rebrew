@@ -54,7 +54,7 @@ int __cdecl fcn_0050bff0(unsigned char* a0)
 							|| ((unsigned char*) *(int*) 0x99ec10)[id2 * 0x41] == 6)
 							break;
 						if (id2 == *p) {
-							chain_count += repeats;
+							match_count += repeats;
 							break;
 						}
 						if (want != 0 && ((unsigned char*) *(int*) 0x99ec10)[id2 * 0x41] == want)

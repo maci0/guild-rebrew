@@ -38,10 +38,11 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 		avail[3] = 1;
 	}
 	r = gm_RandomMod(4) & 0xffff;
-	for (left = 4; ; left--) {
+	for (left = 4; ; ) {
 		if (avail[r] == 1) {
 			break;
 		}
+		left--;
 		r = (r + 1) % 4;
 		if (left == 0) {
 			return 0;
@@ -54,7 +55,7 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 	if (fcn_00508220(mode, avail) == 0) {
 		return 0;
 	}
-	r = gm_RandomMod((int) ((double) (unsigned int) avail[2] * *(double*) 0x662908));
+	r = gm_RandomMod((int) ((double) (unsigned int) avail[2] * *(double*) 0x662908)) & 0xffff;
 	if (r == 0) {
 		return 0;
 	}
@@ -79,7 +80,7 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 	}
 	value ^= r;
 	fcn_004c4510(rec, rec[1]);
-	fcn_004c4570(4, 1, 0x2c, out);
+	fcn_004c4570(4, 1, 0x2c, &value);
 	fcn_004c5360();
 	fcn_004ff210(*(short*) rec, -amount);
 	return mode;

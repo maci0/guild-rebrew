@@ -43,13 +43,13 @@ void __cdecl fcn_004fd280(int flag)
 		int out[0xe];
 
 		do {
-			fcn_004fcb50((unsigned short) i, out, flag);
+			fcn_004fcb50((unsigned short) i, out, flag); *(int*) (p + 4) = 0; *(int*) p = 0;
 			if (g_773d48 > 0x40) {
 				fcn_00535960();
 				g_773d48 = 0;
 			}
-			*(int*) (p + 4) = 0;
-			*(int*) p = 0;
+
+
 			p += 0x21c;
 			i++;
 		} while ((int) p < 0x85a238);
@@ -63,10 +63,10 @@ void __cdecl fcn_004fd280(int flag)
 		ent = (char*) gm_StartFilteredEntitySearch(1, 5, 7);
 		if (ent != 0) {
 			i = 0;
-			for (n = 0; n < 8; n++) {
+			for (n = 0; n < 8;) {
 				if (*(unsigned short*) (ent + 0x27) != 0xffff) {
 					ptrs[n] = ent;
-					vals[n] = lpGebaeudePROT[*(unsigned char*) ent * 0x24d + 0x247];
+					vals[n] = lpGebaeudePROT[*(unsigned char*) ent * 0x24d + 0x247]; n++;
 				}
 				ent = (char*) gm_FindNextFilteredEntity();
 				if (ent == 0) {

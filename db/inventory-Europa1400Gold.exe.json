@@ -3247,8 +3247,17 @@
   },
   {
     "va": 4332880,
-    "size": 384,
-    "name": "fcn.00421d50"
+    "size": 376,
+    "name": "fcn.00421d50",
+    "extent_history": [
+      {
+        "old_size": 384,
+        "new_size": 376,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 4333264,
@@ -8296,8 +8305,17 @@
   },
   {
     "va": 4597408,
-    "size": 1440,
-    "name": "fcn.004626a0"
+    "size": 1435,
+    "name": "fcn.004626a0",
+    "extent_history": [
+      {
+        "old_size": 1440,
+        "new_size": 1435,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 4598848,
@@ -8710,8 +8728,17 @@
   },
   {
     "va": 4621344,
-    "size": 496,
-    "name": "fcn.00468420"
+    "size": 492,
+    "name": "fcn.00468420",
+    "extent_history": [
+      {
+        "old_size": 496,
+        "new_size": 492,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 4621840,
@@ -13388,8 +13415,17 @@
   },
   {
     "va": 4911248,
-    "size": 288,
-    "name": "fcn.004af090"
+    "size": 278,
+    "name": "fcn.004af090",
+    "extent_history": [
+      {
+        "old_size": 288,
+        "new_size": 278,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 4911536,
@@ -13403,8 +13439,17 @@
   },
   {
     "va": 4912112,
-    "size": 720,
-    "name": "fcn.004af3f0"
+    "size": 710,
+    "name": "fcn.004af3f0",
+    "extent_history": [
+      {
+        "old_size": 720,
+        "new_size": 710,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 4912832,
@@ -13495,8 +13540,17 @@
   },
   {
     "va": 4916384,
-    "size": 320,
-    "name": "fcn.004b04a0"
+    "size": 308,
+    "name": "fcn.004b04a0",
+    "extent_history": [
+      {
+        "old_size": 320,
+        "new_size": 308,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 4916704,
@@ -15261,8 +15315,17 @@
   },
   {
     "va": 4998080,
-    "size": 144,
-    "name": "fcn.004c43c0"
+    "size": 130,
+    "name": "fcn.004c43c0",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 130,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 4998224,
@@ -18151,8 +18214,17 @@
   },
   {
     "va": 5142768,
-    "size": 432,
-    "name": "fcn.004e78f0"
+    "size": 424,
+    "name": "fcn.004e78f0",
+    "extent_history": [
+      {
+        "old_size": 432,
+        "new_size": 424,
+        "reason": "body including its switch tables ends at 0x4e7a97 (0x4e78f0) and 0x5c3504 (0x5c3350); only NOP padding follows to the 16-byte alignment (r3-03 03/4e78f0-native.txt, r3-07 r3/07/5c3350-asm.txt)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T06:31:14.889892+00:00"
+      }
+    ]
   },
   {
     "va": 5143200,
@@ -19304,8 +19376,17 @@
   },
   {
     "va": 5184160,
-    "size": 688,
-    "name": "fcn.004f1aa0"
+    "size": 682,
+    "name": "fcn.004f1aa0",
+    "extent_history": [
+      {
+        "old_size": 688,
+        "new_size": 682,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5184848,
@@ -20463,8 +20544,17 @@
   },
   {
     "va": 5232064,
-    "size": 544,
-    "name": "fcn.004fd5c0"
+    "size": 535,
+    "name": "fcn.004fd5c0",
+    "extent_history": [
+      {
+        "old_size": 544,
+        "new_size": 535,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5232608,
@@ -20744,8 +20834,17 @@
   },
   {
     "va": 5242048,
-    "size": 464,
-    "name": "fcn.004ffcc0"
+    "size": 451,
+    "name": "fcn.004ffcc0",
+    "extent_history": [
+      {
+        "old_size": 464,
+        "new_size": 451,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5242512,
@@ -20982,8 +21081,17 @@
   },
   {
     "va": 5253984,
-    "size": 720,
-    "name": "fcn.00502b60"
+    "size": 710,
+    "name": "fcn.00502b60",
+    "extent_history": [
+      {
+        "old_size": 720,
+        "new_size": 710,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5254704,
@@ -21159,8 +21267,17 @@
   },
   {
     "va": 5262560,
-    "size": 288,
-    "name": "fcn.00504ce0"
+    "size": 276,
+    "name": "fcn.00504ce0",
+    "extent_history": [
+      {
+        "old_size": 288,
+        "new_size": 276,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5262848,
@@ -21254,8 +21371,17 @@
   },
   {
     "va": 5265472,
-    "size": 400,
-    "name": "fcn.00505840"
+    "size": 387,
+    "name": "fcn.00505840",
+    "extent_history": [
+      {
+        "old_size": 400,
+        "new_size": 387,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5265872,
@@ -21819,8 +21945,17 @@
   },
   {
     "va": 5287280,
-    "size": 400,
-    "name": "fcn.0050ad70"
+    "size": 395,
+    "name": "fcn.0050ad70",
+    "extent_history": [
+      {
+        "old_size": 400,
+        "new_size": 395,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5287680,
@@ -22509,8 +22644,17 @@
   },
   {
     "va": 5349840,
-    "size": 784,
-    "name": "fcn.0051a1d0"
+    "size": 772,
+    "name": "fcn.0051a1d0",
+    "extent_history": [
+      {
+        "old_size": 784,
+        "new_size": 772,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5350624,
@@ -22538,8 +22682,17 @@
   },
   {
     "va": 5352880,
-    "size": 624,
-    "name": "fcn.0051adb0"
+    "size": 615,
+    "name": "fcn.0051adb0",
+    "extent_history": [
+      {
+        "old_size": 624,
+        "new_size": 615,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5353504,
@@ -22712,8 +22865,17 @@
   },
   {
     "va": 5362688,
-    "size": 288,
-    "name": "fcn.0051d400"
+    "size": 282,
+    "name": "fcn.0051d400",
+    "extent_history": [
+      {
+        "old_size": 288,
+        "new_size": 282,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5362976,
@@ -22736,8 +22898,17 @@
   },
   {
     "va": 5364528,
-    "size": 880,
-    "name": "fcn.0051db30"
+    "size": 870,
+    "name": "fcn.0051db30",
+    "extent_history": [
+      {
+        "old_size": 880,
+        "new_size": 870,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5365408,
@@ -23901,8 +24072,17 @@
   },
   {
     "va": 5446192,
-    "size": 384,
-    "name": "fcn.00531a30"
+    "size": 371,
+    "name": "fcn.00531a30",
+    "extent_history": [
+      {
+        "old_size": 384,
+        "new_size": 371,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5446576,
@@ -25215,8 +25395,17 @@
   },
   {
     "va": 5566912,
-    "size": 496,
-    "name": "fcn.0054f1c0"
+    "size": 484,
+    "name": "fcn.0054f1c0",
+    "extent_history": [
+      {
+        "old_size": 496,
+        "new_size": 484,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5567408,
@@ -25345,8 +25534,17 @@
   },
   {
     "va": 5576336,
-    "size": 608,
-    "name": "fcn.00551690"
+    "size": 593,
+    "name": "fcn.00551690",
+    "extent_history": [
+      {
+        "old_size": 608,
+        "new_size": 593,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5576944,
@@ -25870,8 +26068,17 @@
   },
   {
     "va": 5631312,
-    "size": 320,
-    "name": "fcn.0055ed50"
+    "size": 313,
+    "name": "fcn.0055ed50",
+    "extent_history": [
+      {
+        "old_size": 320,
+        "new_size": 313,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5631632,
@@ -26726,8 +26933,17 @@
   },
   {
     "va": 5720080,
-    "size": 352,
-    "name": "fcn.00574810"
+    "size": 345,
+    "name": "fcn.00574810",
+    "extent_history": [
+      {
+        "old_size": 352,
+        "new_size": 345,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5720432,
@@ -27623,8 +27839,17 @@
   },
   {
     "va": 5787184,
-    "size": 512,
-    "name": "fcn.00584e30"
+    "size": 501,
+    "name": "fcn.00584e30",
+    "extent_history": [
+      {
+        "old_size": 512,
+        "new_size": 501,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5787696,
@@ -28192,8 +28417,17 @@
   },
   {
     "va": 5837392,
-    "size": 336,
-    "name": "fcn.00591250"
+    "size": 323,
+    "name": "fcn.00591250",
+    "extent_history": [
+      {
+        "old_size": 336,
+        "new_size": 323,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5837728,
@@ -28760,8 +28994,17 @@
   },
   {
     "va": 5890912,
-    "size": 528,
-    "name": "fcn.0059e360"
+    "size": 517,
+    "name": "fcn.0059e360",
+    "extent_history": [
+      {
+        "old_size": 528,
+        "new_size": 517,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 5891440,
@@ -30516,8 +30759,17 @@
   },
   {
     "va": 6042448,
-    "size": 448,
-    "name": "fcn.005c3350"
+    "size": 437,
+    "name": "fcn.005c3350",
+    "extent_history": [
+      {
+        "old_size": 448,
+        "new_size": 437,
+        "reason": "body including its switch tables ends at 0x4e7a97 (0x4e78f0) and 0x5c3504 (0x5c3350); only NOP padding follows to the 16-byte alignment (r3-03 03/4e78f0-native.txt, r3-07 r3/07/5c3350-asm.txt)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T06:31:14.889892+00:00"
+      }
+    ]
   },
   {
     "va": 6042896,
@@ -30903,8 +31155,17 @@
   },
   {
     "va": 6081424,
-    "size": 464,
-    "name": "fcn.005ccb90"
+    "size": 455,
+    "name": "fcn.005ccb90",
+    "extent_history": [
+      {
+        "old_size": 464,
+        "new_size": 455,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 6081888,
@@ -30993,8 +31254,17 @@
   },
   {
     "va": 6088544,
-    "size": 480,
-    "name": "fcn.005ce760"
+    "size": 469,
+    "name": "fcn.005ce760",
+    "extent_history": [
+      {
+        "old_size": 480,
+        "new_size": 469,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 6089024,
@@ -31235,8 +31505,17 @@
   },
   {
     "va": 6104784,
-    "size": 416,
-    "name": "fcn.005d26d0"
+    "size": 402,
+    "name": "fcn.005d26d0",
+    "extent_history": [
+      {
+        "old_size": 416,
+        "new_size": 402,
+        "reason": "native body ends at its final ret; only NOP/INT3 padding to the 16-byte function alignment follows (capstone sweep .scratch/sol/r3/pad_sweep.py over the stored extents; lane reports r3-03, r3-08)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T05:33:38.830398+00:00"
+      }
+    ]
   },
   {
     "va": 6105200,

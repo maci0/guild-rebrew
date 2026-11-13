@@ -64,11 +64,11 @@ int __cdecl ai_StartPamphlete(int a1, char* e, int busy, Msg* out1, Msg* out2)
 					*out2 = b;
 				}
 				return r;
-			}
+			} goto fallback;
 		}
 	}
 	if (*(char*) (e + 0x1e8) & 4) {
-		memset(&c, 0, sizeof(c));
+fallback: memset(&c, 0, sizeof(c));
 		memset(&d, 0, sizeof(d));
 		if (fcn_004aa580(e, (char*) &c, (char*) &d) == 0) {
 			return 0;

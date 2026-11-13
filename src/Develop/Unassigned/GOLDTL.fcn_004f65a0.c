@@ -1,5 +1,6 @@
+#include "client_types.h"
+extern Rec2d_9a3800 g_9a3800[512]; extern Pair_99f800 g_99f800[0x800];
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
-
 /* ADDRESS: GOLDTL 0x004f65a0 */
 void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
 {
@@ -19,7 +20,6 @@ void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
 	unsigned char* ent;
 	unsigned char* rec;
 	int id;
-
 	*out_count = 0;
 	for (i = 0; i < 0x300; i++) {
 		groups[i] = 0;
@@ -34,22 +34,22 @@ void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
 	group_limit = 1;
 	id = *(int*) (a1 + 4);
 	for (off = 0; off < 0x5a00; off += 0x2d) {
-		if (*(int*) (0x9a3825 + off) == 0) {
+		if (*(int*) ((char*) g_9a3800 + 0x25 + off) == 0) {
 			continue;
 		}
-		if (*(int*) (0x9a3816 + off) == id) {
+		if (*(int*) ((char*) g_9a3800 + 0x16 + off) == id) {
 			continue;
 		}
-		ent = gm_LookupEntityRecordById(*(int*) (0x9a3816 + off));
+		ent = gm_LookupEntityRecordById(*(int*) ((char*) g_9a3800 + 0x16 + off));
 		if (ent == 0) {
 			continue;
 		}
-		for (rec = (unsigned char*) 0x99f804; rec < (unsigned char*) 0x9a3804; rec += 8) {
-			if (*(int*) (rec - 4) == id && *(int*) rec == *(int*) (0x9a3800 + off)) {
+		for (rec = (unsigned char*) g_99f800 + 4; rec < (unsigned char*) 0x9a3804; rec += 8) {
+			if (*(int*) (rec - 4) == id && *(int*) rec == *(int*) ((char*) g_9a3800 + off)) {
 				goto next;
 			}
 		}
-		list[n] = (unsigned char*) (0x9a3800 + off);
+		list[n] = (unsigned char*) ((char*) g_9a3800 + off);
 		n++;
 		for (k = 0; k < group_limit; k++) {
 			if (k >= 0x300) {

@@ -20,7 +20,7 @@ void __cdecl fcn_00572e40(char* c)
 	if (x != 0) {
 		do {
 			if (*(int*) (x + 0xac) == *(int*) (c + 0xac) &&
-			    *(int*) (x + 4) == *(int*) (c + 4)) {
+			    *(int*) (x + 4) != *(int*) (c + 4)) {
 				fcn_00546190(c);
 				return;
 			}

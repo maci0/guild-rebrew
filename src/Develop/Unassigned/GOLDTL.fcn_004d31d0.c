@@ -1,5 +1,5 @@
+#include <stdlib.h>
 extern int g_67a370;
-
 float __cdecl fcn_004d3070(char* self, int x, int z, float range);
 
 /* ADDRESS: GOLDTL 0x004d31d0 */
@@ -31,7 +31,7 @@ int __cdecl fcn_004d31d0(char* self, int a1, int a2, int a3,
 			lo = k < 0 ? 0 : k;
 			n = a2 - lo;
 			for (r = lo; r <= row_hi; r++, n--) {
-				d = i - (n < 0 ? -n : n);
+				d = i - abs(n);
 				lo = a1 - d;
 				lo = lo < 0 ? 0 : lo;
 				hi = a1 + d;

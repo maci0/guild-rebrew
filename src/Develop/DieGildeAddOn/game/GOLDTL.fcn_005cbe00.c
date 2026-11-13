@@ -2,7 +2,7 @@ int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl he_fn_Handlung(void);
 int __cdecl fcn_005463a0(int a, ...);
 void __cdecl fcn_005ca560(int *out);
-int __cdecl fcn_005cf720(int a, int b, int c, int d);
+int __cdecl fcn_005cf720(unsigned short a, unsigned short b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005cbe00 */
 int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
@@ -86,8 +86,8 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 			do {
 				fcn_005ca560(out);
 				out[0xc] = fcn_005cf720(
-				    *(unsigned short *) out[0],
-				    *(unsigned short *) src, arg3, 0);
+				    *(unsigned short *) src,
+				    *(unsigned short *) out[0], arg3, 0);
 				out = (int *) ((char *) out + 0x38);
 				n--;
 			} while (n);

@@ -38,7 +38,7 @@ void __cdecl fcn_004d1790(int a0)
 		}
 	} else {
 		if (g_14ce8cc != 0) {
-			for (q = g_7e4260; q < g_7e4260 + 32; q++) {
+			for (q = g_7e4260; (int) q < (int) (g_7e4260 + 32); q++) {
 				o = *q;
 				if (o == 0)
 					continue;
@@ -52,12 +52,15 @@ void __cdecl fcn_004d1790(int a0)
 					continue;
 				if (!fcn_004d15c0(a0, o))
 					continue;
-				fcn_004c3030(*(unsigned short*) o, g_772f24 == g_772e9c ? g_772ee4 : g_772ee8, (int) g_68b844, -1);
+				if (g_772f24 == g_772e9c)
+					fcn_004c3030(*(unsigned short*) o, g_772ee4, (int) g_68b844, -1);
+				else
+					fcn_004c3030(*(unsigned short*) o, g_772ee8, (int) g_68b844, -1);
 				*(char*) (o + 0x188) = 0;
 			}
 		}
 	}
-	for (q = g_7e4260; q < g_7e4260 + 32; q++) {
+	for (q = g_7e4260; (int) q < (int) (g_7e4260 + 32); q++) {
 		o = *q;
 		if (o == 0)
 			continue;

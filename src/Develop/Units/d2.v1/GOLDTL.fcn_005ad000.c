@@ -30,6 +30,9 @@ typedef struct Dlg005ad000 {
 	char pkt[0x910];
 } Dlg005ad000;
 #include "Develop/DieGildeAddOn/game/game_data.h"
+#include "client_dialog_state.h"
+extern int g_14ce8e0;
+extern int g_67d370;
 /* ADDRESS: GOLDTL 0x005ad000 */
 void __cdecl fcn_005ad000(void)
 {
@@ -70,10 +73,10 @@ void __cdecl fcn_005ad000(void)
 	             fcn_0050b710(h, *(unsigned char*) &g_773d75), 0xfa);
 	d2_SetOverlayAnimation(0, 0);
 	do {
-		if (*(int*) 0x14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 != 0) {
+			g_774654 = 1;
 		}
-		if (*(int*) &g_100f1dc != -1 && *(int*) 0x67d370 == msg.ctl) {
+		if (*(int*) &g_100f1dc != -1 && g_67d370 == msg.ctl) {
 			*(int*) (msg.pkt + 0x20) = *(int*) (obj + 4);
 			*(char*) (msg.pkt + 0x1c) = 0x39;
 			*(int*) (msg.pkt + 0x24) = -1;
@@ -90,7 +93,7 @@ void __cdecl fcn_005ad000(void)
 			             *(char*) &g_773d75, *(int*) (msg.pkt + 0x78));
 			fcn_004c5530(msg.pkt + 0x14);
 			fcn_004c4ef0((void*) 0x6ab168);
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 		}
 	} while (fcn_005373e0((void*) 0x5ad000, 0x677c7) != 0);
 	fcn_00471e30(dlg);

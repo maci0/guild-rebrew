@@ -53,7 +53,7 @@ void __cdecl fcn_0058ee70(char* e)
 {
 	Result_58ee70 result;
 	Dialog_58ee70 dlg;
-	unsigned char text[0xf8];
+	unsigned char text[0x100];
 	unsigned char* rec;
 	int r;
 	unsigned char v;
@@ -63,9 +63,9 @@ void __cdecl fcn_0058ee70(char* e)
 		fcn_00526120(g_14b5674, 0);
 		return;
 	}
-	v = (unsigned char) fcn_004f1790(*(int*) (e + 0x65), rec);
 	dlg.rec = (char*) rec;
 	dlg.rec_id = *(int*) rec;
+	v = (unsigned char) fcn_004f1790(*(int*) (e + 0x65), rec);
 	dlg.rec_state = v;
 	io_FormatTextBuffer(text, 0x4107, g_665f78[*(int*) rec]);
 	if (!fcn_0058c410((int*) &dlg, g_14b5650)) {
@@ -76,8 +76,8 @@ void __cdecl fcn_0058ee70(char* e)
 	fcn_00471e30(dlg.dlg);
 	if (r != 0) {
 		fcn_004c5420(*(int*) (g_slot_table + g_774970 * 0x21c + 4), 0x1cc, 4, 0x800000, 0);
-		if (result.rec.v[1] != 0) {
-			fcn_005100f0(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -result.rec.v[1]);
+		if (result.cost != 0) {
+			fcn_005100f0(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -result.cost);
 		}
 		switch (result.kind) {
 		case 1:

@@ -23,8 +23,8 @@ extern int g_6b5c50;
 int __cdecl fcn_00405a50(int a, int b, int id, int value, int radius)
 {
 	Grid* g;
-	int r;
-	int row = 0;
+	int r = 0;
+	int row;
 	int rowend;
 	int col;
 	int colend;
@@ -37,7 +37,7 @@ int __cdecl fcn_00405a50(int a, int b, int id, int value, int radius)
 	if (g == 0) {
 		return 0;
 	}
-	for (r = 0; r < g->n; r++) {
+	for (; r < g->n; r++) {
 		if (r >= radius) {
 			break;
 		}

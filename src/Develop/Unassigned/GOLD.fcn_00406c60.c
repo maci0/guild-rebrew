@@ -8,11 +8,11 @@ extern int g_633444;
 /* ADDRESS: GOLD 0x00406c60 */
 void __cdecl fcn_00406c60(char* owner, int selector, int id)
 {
+    char** slot = 0;
     float position[4] = {0,0,0,0};
     float rotation[3] = {0,0,0};
-    char** slot;
     int previous;
-    slot = 0;
+
     if (selector == 1) slot = (char**) (owner + 0x68);
     else if (selector == 2) slot = (char**) (owner + 0x64);
     else if (selector == 3) slot = (char**) (owner + 0x6c);

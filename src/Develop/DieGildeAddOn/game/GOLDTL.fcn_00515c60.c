@@ -1,3 +1,9 @@
+#include "game_data.h"
+extern int g_699b10;
+extern void* g_6b7fdc;
+extern char g_6790c8[];
+extern char g_68b0d8[];
+
 int __cdecl fcn_0050dc90(void*);
 int __cdecl gm_CheckEntityType(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -24,7 +30,7 @@ void __cdecl fcn_00515c60(unsigned char* a0, unsigned char* a1)
 	v9 = 0;
 	v8 = 0;
 	v3 = fcn_0050dc90(a0);
-	p = (int*) 0x7e4260;
+	p = (int*) g_7e4260;
 loop:
 	if (v9) {
 		goto found;
@@ -34,7 +40,7 @@ loop:
 		v9 = v8;
 	}
 	p++;
-	if ((int) p < 0x7e42e0) {
+	if ((int) p < (int) (g_7e4260 + 32)) {
 		goto loop;
 	}
 	if (!v9) {
@@ -48,24 +54,24 @@ found:
 		return;
 	}
 	if (gm_CheckEntityType(a0)) {
-		v3 = *(int*) 0x868050 + *a0 * 0x24d;
+		v3 = (int) lpGebaeudePROT + *a0 * 0x24d;
 	}
 	else {
-		v3 = *(int*) 0x99ec10 + *(unsigned short*) a1 * 0x41;
+		v3 = (int) lpObjektePROT + *(unsigned short*) a1 * 0x41;
 		if (!v3) {
 			v3 = z;
 		}
 	}
 	v3++;
-	fcn_0064d41a(v5, (char*) 0x6a1f54, (char*) 0x6790c8, v3, v3);
-	r = vfs_LookupPath(v5, *(int*) 0x6b7fdc, v6);
+	fcn_0064d41a(v5, (char*) 0x6a1f54, g_6790c8, v3, v3);
+	r = vfs_LookupPath(v5, (int) g_6b7fdc, v6);
 	if (!r) {
 		return;
 	}
-	fcn_0064d41a(v7, (char*) 0x68b0d8, *(int*) (v8 + 4));
+	fcn_0064d41a(v7, g_68b0d8, *(int*) (v8 + 4));
 	r = evt_LoadScript(v5);
 	if (!r) {
-		*(int*) 0x699b10 = -1;
+		g_699b10 = -1;
 		return;
 	}
 	v3 = *(int*) (*(int*) (v8 + 0x184) + 0x28);
@@ -78,5 +84,5 @@ found:
 	fcn_00428340(r, 2, *(int*) (v8 + 0x184), 0x4c3800);
 	*(int*) (r + 0xc94) = *(int*) (v8 + 0x184);
 	*(int*) (*(int*) (v8 + 0x184) + 0x28) = *(int*) (r + 0x100);
-	*(int*) 0x699b10 = *(int*) (r + 0x100);
+	g_699b10 = *(int*) (r + 0x100);
 }

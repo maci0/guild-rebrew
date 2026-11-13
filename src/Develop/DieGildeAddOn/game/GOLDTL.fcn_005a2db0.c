@@ -76,7 +76,29 @@ void __cdecl fcn_005a2db0(char* a0, char* a1)
 		}
 		if (g_774808) {
 			if (g_14cf950 == 0x12) {
-				memset(&m, 0, sizeof(m));
+				{
+					void* fill_dst;
+					int fill_len;
+					fill_dst = &m;
+					fill_len = sizeof(m);
+					__asm {
+						mov edi, fill_dst
+						mov ebx, fill_len
+						xor eax, eax
+						lea ecx, [edi+edi*2]
+						and ecx, 3
+						sub ebx, ecx
+						jle short fill_done
+						rep stosb
+						mov ecx, ebx
+						and ebx, 3
+						shr ecx, 2
+						rep stosd
+					fill_done:
+						add ecx, ebx
+						rep stosb
+					}
+				}
 				m.type = 0x74;
 				m.seed = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
 				m.id = -1;

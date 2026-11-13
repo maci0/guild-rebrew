@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* 14-byte packed time stamp used by the set-time message. */
 #pragma pack(2)
 typedef struct {
@@ -10,7 +10,7 @@ typedef struct {
 	unsigned short hour;
 } Stamp;
 #pragma pack()
-
+extern int g_1007cd0, g_6a3760, g_774954;
 void __cdecl fcn_00538060(void);
 int __cdecl srv_SeedRandom(int seed);
 int __cdecl fcn_0042df70(void* fn);
@@ -60,9 +60,9 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 	case 2:
 		*(int*) 0xfb5744 = 1;
 		if (*(int*) (buf + 0x11) != 0)
-			*(int*) 0x77494c = (*(int*) 0x77494c & 0xffffffef) | 8;
+			g_77494c = (g_77494c & 0xffffffef) | 8;
 		else
-			*(int*) 0x77494c = (*(int*) 0x77494c & 0xfffffff7) | 0x10;
+			g_77494c = (g_77494c & 0xfffffff7) | 0x10;
 		break;
 	case 3:
 		v = fcn_0042df70((void*) fcn_00538060);
@@ -89,7 +89,7 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 		break;
 	case 5:
 		srv_SeedRandom(*(int*) (buf + 0x11));
-		*(int*) 0x1007cd0 = 0;
+		g_1007cd0 = 0;
 		break;
 	case 7:
 		*(int*) 0x14cbcb4 = *(int*) (buf + 0x11);
@@ -98,24 +98,24 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 		*(char*) 0x6a375c = (char) (cmd >> 8);
 		break;
 	case 8:
-		if (*(int*) 0x6a3760 != -1)
+		if (g_6a3760 != -1)
 			goto bad;
 		v = *(int*) (buf + 0x11);
 		if (gm_LookupEntityRecordById(v) == 0)
 			goto bad;
-		*(int*) 0x6a3760 = v;
+		g_6a3760 = v;
 		break;
 	case 9:
 		*(char*) 0x6a3440 = (char) (cmd >> 8);
 		*(unsigned int*) 0x7e1f60 = *(unsigned int*) (buf + 0x15);
 		break;
 	case 10:
-		if (*(int*) 0x6a3760 != *(int*) (buf + 0x11))
+		if (g_6a3760 != *(int*) (buf + 0x11))
 			goto bad;
 		v = *(int*) (buf + 0x21);
-		*(int*) 0x6a3760 = -1;
+		g_6a3760 = -1;
 		if (v == 1)
-			*(int*) 0x774954 = 1;
+			g_774954 = 1;
 		if (*(char*) 0x6a3440 == 5)
 			fcn_004b3d40(
 			    *(int*) (0x7f4ca4 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c),

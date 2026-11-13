@@ -24,8 +24,8 @@ void __cdecl fcn_00493000(unsigned char* o)
 			b = o[0x3c] + o[0x3d] + o[0x3e];
 		}
 		if (a > b) {
-			*(int*) (o + 8) = 5;
-			return;
+			goto win;
+
 		}
 		if (b > 0) {
 			*(int*) (o + 8) = 6;
@@ -63,12 +63,12 @@ void __cdecl fcn_00493000(unsigned char* o)
 	}
 	if (state == 4) {
 		if (s2 > 0x11) {
-			*(int*) (o + 8) = 5;
-			return;
+			goto win;
+
 		}
 		if (*(int*) (o + 0x4c) == 4) {
-			*(int*) (o + 8) = 5;
-			return;
+			goto win;
+
 		}
 		if (*(int*) (o + 0x28) != 3 || *(int*) (o + 0x4c) != 3) {
 			*(int*) (o + 8) = 3;
@@ -77,5 +77,7 @@ void __cdecl fcn_00493000(unsigned char* o)
 		*(int*) (o + 8) = (s1 <= s2) ? 6 : 5;
 		return;
 	}
+	return;
+win:
 	*(int*) (o + 8) = 5;
 }

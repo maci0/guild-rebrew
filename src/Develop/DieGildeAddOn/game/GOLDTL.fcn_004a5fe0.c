@@ -15,7 +15,7 @@ int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, f
 	int count;
 	int ent;
 	int i;
-	unsigned short idx;
+	int idx;
 	float f;
 
 	flag = 0;
@@ -45,7 +45,7 @@ int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, f
 			}
 			if (flag != 0) {
 				f = fcn_0050f980(*(unsigned short*) (ent + 0x27), *a0, 1);
-				if (!(f >= *(float*) (buf + 0x11) && f <= *(float*) (buf + 0x11))) {
+				if (f < *(float*) (buf + 0x11) || f > *(float*) (buf + 0x11)) {
 					goto next;
 				}
 			}
@@ -53,7 +53,7 @@ int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, f
 			count++;
 next:
 			i--;
-			idx = (unsigned short) (idx + step);
+			idx = (idx + step) % 0x100;
 		} while (count < limit);
 	}
 	return count;

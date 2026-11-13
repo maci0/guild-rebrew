@@ -55,24 +55,24 @@ int __cdecl fcn_004f6040(int* ids, int* d, unsigned short k)
 		}
 	}
 	p = list;
-	for (i = 1; i <= 0x200; i++) {
+	for (i = 0; i < 0x200; i++) {
 		v = *(int*) p;
 		if (v != -1) {
 			*(int*) p = -1;
 			n++;
 			c = 1;
-			for (j = i; j < 0x200; j++) {
+			for (j = i + 1; j < 0x200; j++) {
 				if (list[j] == v) {
 					c++;
 					list[j] = -1;
 				}
 			}
-			if (d[0x1f] < c) {
+			if (c > d[0x1f]) {
 				d[0x1f] = c;
 				ids[0x1f] = v;
 			}
 			for (j = 0x1f; j > 0; j--) {
-				if (d[j - 1] < d[j]) {
+				if (d[j] > d[j - 1]) {
 					t = ids[j - 1];
 					ids[j - 1] = ids[j];
 					ids[j] = t;

@@ -5,8 +5,8 @@ void __cdecl fcn_00493a30(unsigned char* game)
     int left;
     int right;
     int i;
-    unsigned int triples_left;
-    unsigned int triples_right;
+    int triples_left;
+    int triples_right;
 
     state = *(int*) (game + 8);
     left = 0;
@@ -22,12 +22,19 @@ void __cdecl fcn_00493a30(unsigned char* game)
             triples_left = game[0x18] + game[0x19] + game[0x1a];
         if (game[0x3c] == game[0x3d] && game[0x3c] == game[0x3e])
             triples_right = game[0x3c] + game[0x3d] + game[0x3e];
-        if (triples_left > triples_right)
+        if (triples_left > triples_right) {
             *(int*) (game + 8) = 5;
-        else if (triples_right != 0 || *(int*) (game + 0x28) == 4)
+            return;
+        }
+        if (triples_right > 0) {
             *(int*) (game + 8) = 6;
-        else
-            *(int*) (game + 8) = 3 + (*(int*) (game + 0x4c) == 4) * 2;
+            return;
+        }
+        if (*(int*) (game + 0x28) == 4) {
+            *(int*) (game + 8) = 6;
+            return;
+        }
+        *(int*) (game + 8) = 3 + (*(int*) (game + 0x4c) == 4) * 2;
         return;
     }
     for (i = 0; i < game[0x10]; i++)
