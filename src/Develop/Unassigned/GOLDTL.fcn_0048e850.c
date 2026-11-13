@@ -37,12 +37,12 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 						*(unsigned char*) rec1.v = 4;
 						*(int*) (rec1.v + 1) = *(int*) (ent + 1);
 						*(int*) (rec1.v + 2) = 1;
-						need = (int) ((float) fcn_0050d170(c + 1) * *(float*) 0x66414c);
+						need = (int) ((float) fcn_0050d170(c + 1) * 0.3f);
 						if (fcn_004a4bb0(action, e, 0, (char*) rec2.v, (char*) rec1.v, 0) != 0) {
-							have = (int) ((float) fcn_0050b810(*(int*) (e + 0x178), *(char*) 0x773d75) * *(float*) 0x6628cc);
+							have = (int) ((float) fcn_0050b810(*(int*) (e + 0x178), *(char*) 0x773d75) * 0.5f);
 							if (have < need) {
 								d = need - have;
-								if ((float) d / (float) need < *(float*) 0x6628bc) {
+								if ((float) d / (float) need < 0.25f) {
 									*(unsigned char*) out1 = 0x12;
 									*(int*) (out1 + 8) = d;
 									return ai_StartKreditNehmen(0x43, e, 0, out1, out2);
@@ -60,10 +60,10 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 					*(int*) (rec1.v + 2) = 1;
 					if (fcn_004a4bb0(action, e, 0, (char*) rec1.v, (char*) rec2.v, 1) != 0) {
 						need = fcn_0050d200(e, *(int*) (rec1.v + 1));
-						have = (int) ((float) fcn_0050b810(*(int*) (e + 0x178), *(char*) 0x773d75) * *(float*) 0x6628cc);
+						have = (int) ((float) fcn_0050b810(*(int*) (e + 0x178), *(char*) 0x773d75) * 0.5f);
 						if (have < need) {
 							d = need - have;
-							if ((float) d / (float) need < *(float*) 0x6628bc) {
+							if ((float) d / (float) need < 0.25f) {
 								*(unsigned char*) out1 = 0x12;
 								*(int*) (out1 + 8) = d;
 								return ai_StartKreditNehmen(0x43, e, 0, out1, out2);

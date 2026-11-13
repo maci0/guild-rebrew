@@ -4,7 +4,7 @@ extern int g_772540, g_772528, g_1015ea0;
 int __cdecl fcn_00469890(void)
 {
 	int id;
-	int off;
+	int base;
 	int* tbl;
 	int* rec;
 	int i;
@@ -13,9 +13,9 @@ int __cdecl fcn_00469890(void)
 	if (id == -1) {
 		return -1;
 	}
-	off = id * 0x2f4;
+	base = (id << 6) - id;
 	tbl = (int*)g_772540;
-	rec = (int*) (g_1015ea0 + off);
+	rec = (int*) (g_1015ea0 + base * 12);
 	for (i = 0x3ff; i >= 0; i--) {
 		if (tbl[i] != 0) {
 			break;
@@ -29,6 +29,6 @@ int __cdecl fcn_00469890(void)
 	if (id > g_772528) {
 		g_772528 = id;
 	}
-	*(int*) (g_1015ea0 + off + 4) = 1;
+	*(int*) (g_1015ea0 + base * 12 + 4) = 1;
 	return id;
 }

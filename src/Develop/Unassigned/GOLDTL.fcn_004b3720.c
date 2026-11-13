@@ -24,13 +24,10 @@ int __cdecl fcn_004b3720(int a0, char* a1, int a2)
 		result = g_7f4c00.a - slot[0];
 		if (result == 1) {
 			pos = fcn_004b2dd0(a1, g_67fca8, a2);
-			if (pos) {
-
-				if (*a1 == 0) {
-					result = 6;
-				}
-			} else {
+			if (pos == 0) {
 				result = 5;
+			} else if (*a1 == 0) {
+				result = 6;
 			}
 		} else {
 			if (result <= 1) {

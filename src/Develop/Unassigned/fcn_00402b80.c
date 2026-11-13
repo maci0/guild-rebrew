@@ -1,21 +1,19 @@
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
+extern char* g_6b5c20;
+
 /* ADDRESS: GOLDTL 0x00402b80 */
 int __cdecl fcn_00402b80(void)
 {
-	char* base;
-	char* value;
+	CH_QUEUE_SLOT* base;
 	int count;
 	int i;
 
-	value = 0;
-	base = *(char**) 0x6b5c20;
+	base = (CH_QUEUE_SLOT*) g_6b5c20;
 	count = 0;
-	i = 0x7d0;
-	do {
-		value = *(char**) base;
-		base += 0x194;
-		if (value != 0) {
+	for (i = 0; i < 2000; i++) {
+		if ((base++)->belegt != 0) {
 			count++;
 		}
-	} while (--i != 0);
+	}
 	return count;
 }

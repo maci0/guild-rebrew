@@ -25,8 +25,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
 				continue;
 			if (*(short*) c == -1)
 				continue;
-			kind = c[2];
-			if (kind < 2 || kind > 7)
+			if ((unsigned char) (c[2] - 2) > 5)
 				continue;
 			d = fcn_0050f980((unsigned short) *a0, *(unsigned short*) c, 1);
 			if (d <= *(float*) 0x664394 || *(int*) (c + 0x210) == *(int*) ((char*) a0 + 4))
@@ -42,8 +41,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
 			continue;
 		if (*(short*) c == -1)
 			continue;
-		kind = c[2];
-		if (kind < 2 || kind > 7)
+		if ((unsigned char) (c[2] - 2) > 5)
 			continue;
 		if (*(int*) (c + 0x210) != *(int*) ((char*) a0 + 4)) {
 			d = fcn_0050f980((unsigned short) *a0, *(unsigned short*) c, 1);

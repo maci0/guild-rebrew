@@ -61,8 +61,7 @@ void __cdecl fcn_0055c740(char* ctx)
 		if (rec == 0) {
 			break;
 		}
-		bank = *(unsigned short*) (rec + 0x27);
-		ver = (int) fcn_005101e0((unsigned char*) (g_7f4ca0 + bank * 0x21c),
+		ver = (int) fcn_005101e0((unsigned char*) (g_7f4ca0 + *(unsigned short*) (rec + 0x27) * 0x21c),
 		    *(unsigned char*) rec, -1, 1);
 		if (gm_AccumulateTyped2(g_7f4ca0 + *(unsigned short*) (rec + 0x27) * 0x21c) < ver) {
 			io_FormatTextBuffer(text, 0x1a40, rec);

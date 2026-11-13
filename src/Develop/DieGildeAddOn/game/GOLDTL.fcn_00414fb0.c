@@ -31,10 +31,41 @@ int __cdecl fcn_00414fb0(int* obj, int a, int b, void** list)
 	int cnt;
 	void* e;
 
-	memset(frames, 0, sizeof(frames));
-	memset(&fl, 0, sizeof(fl));
-	fl.b[1] |= 0x14;
-	fl.b[1] |= 8;
+	__asm {
+		mov edi, frames
+		mov ebx, 0x1600
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+L1:
+		add ecx, ebx
+		rep stosb
+	}
+	__asm {
+		mov edi, fl
+		mov ebx, 0xc
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L2
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+L2:
+		add ecx, ebx
+		rep stosb
+	}
+	fl.b[1] |= 0x1c;
 	fl.b[8] |= 2;
 	q = a / b;
 	cnt = 1;

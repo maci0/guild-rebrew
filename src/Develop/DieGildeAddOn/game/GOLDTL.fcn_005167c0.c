@@ -68,8 +68,9 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 		g_7f3b24 = (char*) entity;
 		fcn_00516b70();
 	} else {
+		type = ((BuildingProto5167c0*) lpGebaeudePROT)[*a0].kind;
 		g_7f3b24 = 0;
-		type = ((signed char*) g_7f3b00)[((BuildingProto5167c0*)lpGebaeudePROT)[*a0].kind];
+		type = ((signed char*) g_7f3b00)[type];
 		fcn_00516be0();
 	}
 	if (g_6b8010 != type

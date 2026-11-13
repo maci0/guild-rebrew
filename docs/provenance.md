@@ -27780,3 +27780,112 @@ Change: reload g_1015ea0 for each of the three non-selected-widget field stores 
 - 2026-11-13: Release 1.12.0. Matching lanes were frozen and all 106 queued keeps recorded centrally (the GOLDTL 0x4b1d10 keep was withdrawn). Both clients relinked with `cmake --build build/consolidation-baseline-pp` (exit 0, no new LNK errors). The first gate run failed on two lint warnings: GOLDTL 0x4123a0 had been reclassified SIZE_MISMATCH to STUB by verify without a blocker (`rebrew blocker set`, 40 of 74 instructions aligned), and one lane line in `GOLDTL.fcn_0049bfa0.c` ran to 201 characters (split into three statements; remeasured and recorded at the same 116 aligned pairs). Rerun: lint 5,538 passed with 0 warnings, `GATE: pass`, raw server byte-identical at 286,720 bytes, SHA-256 `3cc2ce90...609d1`. Client images compared with `rebrew verify --data --whole-binary --raw-link --dry-run --json`; neither matches (numbers in `docs/releases/1.12.0.md`). Function gains counted against `git show v1.11.0:rebrew-functions.toml`: 52 GoldTL and 88 Gold rows newly EXACT or RELOC, none lost. Graphics regenerated from `rebrew status --all-targets --json`; README, `docs/README.md` and `docs/TODO.md` updated, TODO source-bound counts from `.scratch/review/docs-todo/measure-counts-2.py`. Em dashes in this round's appended lane entries replaced and missing spaces before addresses restored; wording otherwise unchanged. Version 1.11.0 to 1.12.0 in `pyproject.toml` and `uv.lock`. Decision owner: user.
 
 - 2026-11-13: Post-release cleanup for 1.12.0. `.scratch/` (13 GB) moved to `../guild-rebrew-archive/2026-11-13/scratch/` with a README; kept in place are `.scratch/microfleet/`, `.scratch/link/relink_gate.sh`, `.scratch/consolidation-2026-11-05/slot-5/` (named by `build/consolidation-baseline-pp/CMakeCache.txt` as the toolchain file) and `.scratch/LEAD-TODO.md`. Compile cache cleared (`rebrew cache clear --force`), stale `.rebrew/name_to_va_cache.json.*.tmp` files, `build/test_*.obj` and the untracked `stubs/gold/symbol_stubs.c.lock` removed. Only `main` exists locally and on origin; no worktrees. `docs/goal-history.md` points at the new archive. Decision owner: user.
+
+- 2026-11-14: GOLDTL 0x00402b80 (fcn_00402b80) matched RELOC 32/32 (aligned 8->13/13, obj 32/32). Replaced do-while and raw *(char**)0x6b5c20 with existing ch_queue.h CH_QUEUE_SLOT, extern char* g_6b5c20, and for (i = 0; i < 2000; i++) testing (base++)->belegt != 0, matching native load-then-advance-then-test at 0x402b8e..0x402b9c. Measured with --source-targets --no-promote. Decision owner: matching lane 01.
+
+- 2026-11-14: GOLDTL 0x004c6940 (fcn_004c6940) improved aligned pairs 37->50/52 (NEAR 141/186, obj_size 186/186). Moved the *(int*)(buf+0x31) = *(int*)((char*)a0+0x24) store after the six q field stores (0x15..0x2d), matching native esi allocation across 0x4c6997..0x4c69c2 and edx/ecx allocation at 0x4c69cc..0x4c69e8; only the single mov [esp+0x39],ecx position (0x4c6993 vs after 0x8c) differs. Measured with --source-targets --no-promote. Decision owner: matching lane 01.
+
+- 2026-11-14: GOLDTL 0x004f7310 (fcn_004f7310) improved aligned pairs 43->44/66 (SIZE_MISMATCH 62/201, obj 196->200 against native 201). The level test is now `*(unsigned char*)(a0+0xd) < 3` with `return 4` after that block, matching native `cmp cl, 3` at 0x4f7342 and `jae 0x4f739d` (the return-4 block) so the value-3 body falls through. Measured with --source-targets --no-promote. Decision owner: matching lane 08.
+
+- 2026-11-14: GOLDTL 0x004b3720 (fcn_004b3720) improved aligned pairs 55->56/86 (SIZE_MISMATCH 45/239, obj 236 against native 239). The fcn_004b2dd0 result is now tested `pos == 0` first, so result 5 is the fallthrough and the empty-string check is the taken arm, matching native `test eax, eax` at 0x4b3782, `jne 0x4b3793`, and `mov esi, 5` at 0x4b3786. Measured with --source-targets --no-promote. Decision owner: matching lane 08.
+
+- 2026-11-14: GOLDTL 0x0049c590 (ai_RunAblassKaufen) improved aligned pairs 110->150/156 (SIZE_MISMATCH 167/464, obj 458->464 against native 462). The log10 score now loads `*(int*)(a1+0x10)` into `n` and divides `n` by `log10((double) n)`, matching native `fild dword ptr [esp+0x18]` before `fldlg2`/`fyl2x`/`fdivp st(1)` at 0x49c5f4..0x49c603. The build still emits `fdivr st(1)`. Measured with --source-targets --no-promote. Decision owner: matching lane 08.
+
+- 2026-11-14: GOLDTL 0x0048e850 (ai_StartSculpture) improved matched bytes 340->348/624 (SIZE_MISMATCH, aligned pairs stay 157/181, obj 624). The three raw .rdata reads became the compiler literals 0.3f (g_66414c), 0.5f (g_6628cc) and 0.25f (g_6628bc), the values those addresses hold and the scales the native fmul instructions read. Aligned pairs did not rise and did not fall. Measured with --source-targets --no-promote. Decision owner: matching lane 08.
+
+- 2026-11-14: GOLDTL 0x00425550 (fcn_00425550) path buffer growth 0x104 to 0x108 withdrawn. Native takes the path at [esp+0x18] (0x4255c8, 0x4255da, 0x425606) and the next slot is the argument at [esp+0x118] (0x4255f2); nothing reads the added bytes. Restored and remeasured at aligned 156/231, obj 638. Decision owner: matching lane 08, lead buffer-extent review.
+
+- 2026-11-14: GOLDTL 0x0049f6d0 (ai_StartZunftPreismanipulation) improved aligned pairs 196->200/303 (SIZE_MISMATCH 240/944, obj 899->900 against native 944). The instance walk now starts at lpGebaeudeINST and advances by 0xa9, matching native `mov edx, [lpGebaeudeINST]` then `add esi, edx` and the later `add esi, 0xa9`. The stride and the tests are unchanged. Measured with --source-targets --no-promote. Decision owner: matching lane 08.
+
+- 2026-11-14: GOLDTL 0x0055c270 (fcn_0055c270) improved aligned pairs 332->337/366 (SIZE_MISMATCH 346/1171, obj stays 1171). The text buffer is 0x380 bytes, so the frame is `sub esp, 0x584`, matching native 0x55c273 (the old 0x400 buffer compiled to `sub esp, 0x604`). The two io_FormatTextBuffer uses of the buffer are unchanged. Measured with --source-targets --no-promote. Decision owner: matching lane 08.
+
+- 2026-11-14: GOLDTL 0x0055c740 (fcn_0055c740) improved aligned pairs 278->279/413 (SIZE_MISMATCH 335/1272, obj stays 1232 against native 1272). The first fcn_005101e0 slot argument now reads `*(unsigned short*)(rec+0x27)` inline instead of through a named unsigned short, matching native `mov eax, [edi+0x27]` at 0x55c7c9 (the named local compiled to `xor eax, eax; mov ax`). The second use of the named bank is unchanged. Measured with --source-targets --no-promote. Decision owner: matching lane 08.
+
+- 2026-11-14: GOLDTL 0x0041e680 (fcn_0041e680) wide-name growth 0x104 to 0x108 words withdrawn. Native takes the buffer at [esp+0x78] (0x41ec2a) and returns; no access past 0x104 words. Restored and remeasured at aligned 244/451, obj 1466. Decision owner: matching lane 08, lead buffer-extent review.
+
+- 2026-11-14: GOLDTL 0x00415710 (fcn_00415710) out[16] to out[24] growth withdrawn. Native bases the matrix at [esp+0x88] (0x41574e) and the highest read is [esp+0xac] (0x4157cf), out[9]; out[16] through out[23] are unread. Restored and remeasured at aligned 207/444, obj 1561. Decision owner: matching lane 08, lead buffer-extent review.
+
+- 2026-11-14: GOLDTL 0x005c79a0 (fcn_005c79a0) packet tail shrink 0x94 to 0x90 withdrawn. Native clears the packet from [esp+0x50] (0x5c7e22) with `mov ecx, 0x3e; rep stosd` (0x5c7e1b, 0x5c7e26), 0xf8 bytes, so the shorter tail cuts the clear. Restored and remeasured at aligned 305/517, obj 1701. Decision owner: matching lane 08, lead buffer-extent review.
+
+- 2026-11-14: GOLDTL 0x0059c000 (fcn_0059c000) request tail shrink 0x88 to 0x84 withdrawn. Native clears the request from [esp+0x3c] (0x59c271) with `mov ecx, 0x3e; rep stosd` (0x59c26a, 0x59c275), 0xf8 bytes. Restored and remeasured at aligned 340/571, obj 1871. Decision owner: matching lane 08, lead buffer-extent review.
+
+- 2026-11-14: GOLDTL 0x005c18e0 (fcn_005c18e0) packet shrink 0xf8 to 0xf0 withdrawn. Native clears 8 dwords from [esp+0xc8] (lea 0x5c1f62, `mov ecx, 8; rep stosd` 0x5c1f5d, 0x5c1f69), 0x20 bytes, and the field stores stop at +0x6c; the shorter buffer is not what native clears. Restored and remeasured at aligned 210/739, obj 2826. Decision owner: matching lane 08, lead buffer-extent review.
+
+- 2026-11-14: GOLDTL 0x0040aa00 (fcn_0040aa00) name growth 0x80 to 0x9c withdrawn. Native addresses the name at [esp+0x3c], [esp+0x44] and [esp+0x4c] (0x40aa6c, 0x40aa7e, 0x40aa95); no access past 0x80 bytes. Restored and remeasured at aligned 605/965, obj 3188. Decision owner: matching lane 08, lead buffer-extent review.
+
+- 2026-11-14: GOLD 0x004ce1b0 (fcn_004ce1b0) replaced the return-0 scaffold with the horizontal distance. Native loads a+0x4c and a+0x54 (0x4ce1b7, 0x4ce1ba), the point at [[b+0x184]+0x34] (0x4ce1c1, 0x4ce1c7), subtracts and takes fsqrt (0x4ce1cf, 0x4ce1de, 0x4ce1f0). The caller in GOLD.fcn_004cf000.c declares it float(char*, char*). Measured SIZE_MISMATCH 5/70, aligned 6/23, obj 46 against native 70; the x87 spill order remains. Decision owner: matching lane 08.
+
+- 2026-11-14: GOLD 0x0042c3b0 (fcn_0042c3b0) replaced the return-0 scaffold with the packed string walk. Native reads the count from [a1] when a2 is 8 (0x42c3bd, 0x42c3c5), scans to each NUL (0x42c3e5), keeps entry 4 and a nonempty entry 6 (0x42c3f7, 0x42c3fc), and returns the base for a2 4 or the saved entry for a2 8 (0x42c415, 0x42c421). Callers in GOLD.fcn_00514400.c pass (text, 1, 4). Measured SIZE_MISMATCH 2/125, aligned 11/58, obj 103 against native 125. Decision owner: matching lane 08.
+
+- 2026-11-14: GOLD 0x004ff950 (fcn_004ff950) replaced the return-0 scaffold with the city score. Native walks four groups at row+0x40, stride 8 (0x4ff97d, 0x4ff9c8), searches (1, 5, group byte) (0x4ff99f, 0x4ff9a1), scales the sum by the qword at 0x5eb7e8 (0x4ff9d2), and divides rate by base unless `test ah, 0x44` (0x4ff9ef). The row base 0x7d6a70 has no named global. Measured SIZE_MISMATCH 5/187, aligned 48/67, obj 183 against native 187. Decision owner: matching lane 08.
+
+- 2026-11-14: GOLD 0x004ab6b0 (fcn_004ab6b0) replaced the return-0 scaffold with the entity charge. Native resolves the ids at rec+4, rec+0xc, rec+8, rec+0xc and rec+8 (0x4ab6dd, 0x4ab6f3, 0x4ab711, 0x4ab72e, 0x4ab743), charges -amount (0x4ab758), and scales each cost by the float at 0x5ed1e4 before subtracting from 0x32 (0x4ab78e, 0x4ab7a0). That scale has no named global. Measured SIZE_MISMATCH 21/312, aligned 73/114, obj 291 against native 312. Decision owner: matching lane 08.
+
+- 2026-11-14: GOLDTL 0x004ce210 (fcn_004ce210) matched RELOC 74/74 (aligned 17->19/19, obj 74/74). The body now fills an info8 (g from g_9badd0, a from the argument) and assigns that struct into a msg9c after the global load, then stores kind 0x5f and f10 = 1. Native does mov eax,[g_9badd0] at 0x4ce224, the store at 0x4ce230, lea eax,[esp+4] at 0x4ce234, the 0x5f byte at 0x4ce239, the dword 1 at 0x4ce23e, and the argument store at 0x4ce246. Before: the lea of buf sat before the g_9badd0 store. Measured with --source-targets --no-promote. Decision owner: matching lane 02.
+
+- 2026-11-14: GOLDTL 0x00444700 (fcn_00444700) improved aligned pairs 72->75/98 (SIZE_MISMATCH, obj 311->304 against native 347). The dot clamp now tests existing g_662a94 and g_6628a0: if (dot > g_662a94) { if (!(dot < g_6628a0)) dot = 1.0f; } else dot = -1.0f. Native compares the stored dot with g_662a94 at 0x4447ac (and eax, 0x4100; je to the -1 store at 0x4447dd), then with g_6628a0 at 0x4447bd (test ah, 5; jp to the +1 store at 0x4447f1). Both names already have GoldTL definitions (const float g_6628a0, float g_662a94). Measured with --source-targets --no-promote. Decision owner: matching lane 02.
+
+- 2026-11-14: GOLDTL 0x0049bfa0 (ai_StartSpionage) improved aligned pairs 116->118/126 (SIZE_MISMATCH 249/389, obj stays 383 against native 389). The threshold guard is now `if ((float) thr * g_664160 >= (float) v5) return 0;` instead of `if ((float) v5 > (float) thr * g_664160)`, matching native `fcompp`, `fnstsw ax`, `and eax, 0x4100`, `jne 0x123` at 0x49c0e2..0x49c0ee, the swapped-operand >= compare shape; the old form compiled to `test ah, 5` / `jp` and lost two aligned pairs at the tail. Trials that did not keep: a float intermediate local for the rnd scale term (tied 116), an explicit `<=` guard (+1 pair but obj grew to 385, away from native 389), and hoisting the succeed block under a positive guard (fell to 90). Measured with --source-targets --no-promote. Decision owner: matching lane 11.
+
+- 2026-11-14: GOLDTL 0x00414fb0 (fcn_00414fb0) improved aligned pairs 32->57/133 (SIZE_MISMATCH 23/416, obj 262->300 against native 416). Both `memset` calls are now the reviewed fixed-EBX fill core (native inlines the 0x1600-byte frames fill with `lea ecx, [edi+edi*2]`, `and ecx, 3` and the `rep stos` sequence at 0x414fdd..0x415006, and the FLAGS fill with the same core), and `fl.b[1] |= 0x14; fl.b[1] |= 8;` is merged into `fl.b[1] |= 0x1c;` matching native `or byte ptr [ebp-0x13], 0x1c` at 0x415019. Measured with --source-targets --no-promote. Decision owner: matching lane 11.
+
+- 2026-11-14: GOLDTL 0x00497e60 (fcn_00497e60) improved aligned pairs 20->34/38 (SIZE_MISMATCH bytes 26->55/95, obj 100->91 against native 95). The body now runs the scan as a do-while with the loop condition at the bottom (`t = he_fn_Handlung();` then `while (t != 0)`), jumping to a `found` label on the id match and falling through the exhausted loop into the shared return-0, matching native loop-back `jne 0x497e80` after `test eax, eax` at 0x497e92..0x497e94 and the forward jump past the loop at 0x497e7e (`je 0x497e96`). The cached `id` local was removed so `[esi+4]` reloads twice (native 0x497e86, 0x497eae). Trials that did not keep: while-with-inner-return (25/38, obj 104), if-wrap forward shared ret (28/38, obj 108), goto-into-loop do-while (29/38, obj 104). fcn_00497990 in the same object stayed 74/1232 bytes, 173/409 pairs throughout. Measured with --source-targets --no-promote. Decision owner: matching lane 12.
+
+## 2026-11-13 - lane 13 GOLD 0x00469890 inline id*0x2f4
+
+Removed the off local from fcn_00469890; the id*0x2f4 product is now written inline
+at both uses (record base at g_1015ea0 and the +4 flag store). Native computes the
+product once into edx before the scan loop and reuses it in the final store
+(0x4698b5 shl edx,2; 0x4698ea mov dword ptr [edx+ecx+4],1), so a named int local
+only added spill traffic. Measured with --source-targets --no-promote: aligned
+pairs 23 -> 25 of 34, bytes 33/99, object 95 vs native 99 (unchanged). The
+imul-versus-shift-chain wall (native 0x46989d mov ecx,eax; 0x46989f shl ecx,6;
+0x4698a2 sub ecx,eax; 0x4698ac lea edx,[ecx+ecx*2]; 0x4698b5 shl edx,2 versus our
+imul edx,edx,0x2f4) is still open. Decision owner: matching lane 13. Central
+recording/relink pending.
+
+- 2026-11-14: GOLDTL 0x00412b10 (fcn_00412b10) improved aligned pairs 90->92/142 (SIZE_MISMATCH, obj 459/474 unchanged). After the reviewed fill, the body stores a4, then a6, sets the queue bit, zeros the first frame, then stores a5, and writes the layer mask as two assignments. Native does or al,0x14 at 0x412b6e, loads a4 into ecx at 0x412b70, and al,0xf7 at 0x412b73, or dl,2 at 0x412b75, stores a6 at 0x412b7e, and stores a4 at 0x412bca. Measured with --source-targets --no-promote. Decision owner: matching lane 02.
+
+- 2026-11-14: GOLDTL 0x00413480 (fcn_00413480) improved aligned pairs 71->96/168 (SIZE_MISMATCH, obj 479->470 against native 504). The first point inside the plane is copied from the scan pointer into both bounds, one component at a time, instead of recomputing the i*3 address. Native keeps that pointer and copies it at the hit (the copy block begins at 0x413508). Measured with --source-targets --no-promote. Decision owner: matching lane 02.
+
+## 2026-11-13 - lane 13 GOLD 0x00469890 split product into base
+
+Follow-up on fcn_00469890: the inline id*0x2f4 product is now computed as
+base=(id<<6)-id and then base*12 at both uses. Native lowers the multiplier as a
+shift-subtract chain (0x46989d mov ecx,eax; 0x46989f shl ecx,6; 0x4698a2 sub
+ecx,eax; 0x4698ac lea edx,[ecx+ecx*2]; 0x4698b5 shl edx,2). With base named the
+head now matches native exactly and the *12 step lowers to the same lea+shl2
+shape, but VC6 still strength-reduces (id<<6)-id into imul ecx,ecx,0x3f, so the
+object stays 3 bytes short (95 vs 99). Measured with --source-targets --no-promote:
+aligned pairs 25 -> 27 of 34, bytes 34/99, object 95 unchanged. Written variants
+((id<<6)-id)*12, (id*63)*12, all-inline and the named-base split all measured;
+plain id*0x2f4 spellings fold to imul edx,edx,0x2f4. Decision owner: matching
+lane 13. Central recording/relink pending.
+
+- 2026-11-14: GOLDTL 0x00492590 (fcn_00492590) improved aligned pairs 117->121/162 (SIZE_MISMATCH, obj 556->552 against native 560). The second column choice is one expression: the random result is narrowed to unsigned short, then cs is that value when the row is 0 and row minus that value otherwise. Native calls gm_RandomMod(2) at 0x492672, tests esi at 0x49267d, and subtracts at 0x49268a. Measured with --source-targets --no-promote. Decision owner: matching lane 02.
+
+- 2026-11-14: GOLDTL 0x00417570 (fcn_00417570) improved aligned pairs 135->138/161 (SIZE_MISMATCH, obj 591->589 against native 593). The elapsed tick count is converted to a named double before it is scaled by g_662a68. Native stores that count as a qword (the high half is zero at 0x4175a4, the low half follows at 0x4175ac) and loads it with fild at 0x4175b4. Measured with --source-targets --no-promote. Decision owner: matching lane 02.
+
+- 2026-11-14: GOLDTL 0x004789e0 (fcn_004789e0) improved aligned pairs 147->157/258 (SIZE_MISMATCH, obj 717/707 unchanged). The right-edge test is now x plus h/zoom compared with 0x67d964, and the left-edge test is x plus h compared with 0x7725f8. Native divides the width at 0x478a3d, adds x at 0x478a45, compares with 0x67d964 at 0x478a47, adds x to the full width at 0x478a59, and compares with 0x7725f8 at 0x478a60. Measured with --source-targets --no-promote. Decision owner: matching lane 02.
+
+- 2026-11-14: GOLDTL 0x00524fc0 (fcn_00524fc0) improved aligned pairs 167->168/171 (NEAR_MATCHING to RELOC, object 498/498). The pre-0x10059 block copy is a 16-int loop into p->field34. Native sets ecx to 0x10 at 0x5250b7, forms the source at 0x5250bc, forms the destination at 0x5250c0, and copies with rep movsd at 0x5250c3. The earlier struct assignment and memcpy both formed the destination first. Measured with --source-targets --no-promote. Decision owner: matching lane 03.
+
+- 2026-11-14: GOLDTL 0x005dd050 (fcn_005dd050) improved aligned pairs 32->34/34 (SIZE_MISMATCH to RELOC, object 107->108 against native 108). The success path is written in both arms, so pop esi follows the call. Native tests eax at 0x5dd096, jumps to the zero return at 0x5dd0b2, pushes 1 at 0x5dd09a, and pops esi at 0x5dd0aa. Measured with --source-targets --no-promote. Decision owner: matching lane 19.
+
+- 2026-11-14: GOLDTL 0x004f0ff0 (fcn_004f0ff0) improved aligned pairs 35->38/71 (SIZE_MISMATCH, object 208/223 unchanged). Each clamp tests the low bound inside the below-max arm. Native jumps on the high bound at 0x4f0ff9, tests the value at 0x4f0ffb, jumps when positive at 0x4f0ffd, and zeroes it at 0x4f0fff. The same shape covers a2 (0x64) and a3 (3 and 1). Measured with --source-targets --no-promote. Decision owner: matching lane 19.
+
+- 2026-11-14: GOLDTL 0x00423e10 (fcn_00423e10) improved aligned pairs 67->70/103 (SIZE_MISMATCH, object 254/265 unchanged). The first fill takes its count and pointer from block locals. Native stores 0x40 at [ebp-4] (0x423e5f) and the buffer pointer at [ebp-8] (0x423e66), then reloads both before the stos sequence. The second fill still uses the outer locals. Measured with --source-targets --no-promote. Decision owner: matching lane 19.
+
+## 2026-11-14 matching lane 17
+
+0x004e97f0 (src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004e97f0.c): the first random span caches info.min_cost in lo, then uses max_cost - lo + 1. Native loads that field into edi at 0x4e9844 and subtracts it at 0x4e9848 before the gm_RandomMod call. Aligned pairs 64/80 to 76/80, object 220/221 unchanged, status SIZE_MISMATCH. Measured with --source-targets --no-promote (.scratch/fleet/17/4e97f0-t3b.json). Decision owner: matching lane 17.
+
+- 2026-11-14: GOLDTL 0x00593200 (fcn_00593200) improved aligned pairs 67->86/110 (SIZE_MISMATCH, object 367->360 against native 345). The flag byte is its own int, and the copy loops use a separate char. Native zeroes ebx at 0x593296 and loads the byte at 0x9baa96 into bl at 0x593298, then pushes ebx into the later sprintf. Measured with --source-targets --no-promote. Decision owner: matching lane 19.
+
+- 2026-11-14: GOLDTL 0x005167c0 (fcn_005167c0) improved aligned pairs 227->229/293 (SIZE_MISMATCH, obj 923->925 against native 934). On the empty-object path the building kind is read before g_7f3b24 is cleared. Native loads lpGebaeudePROT at 0x516841, forms the 0x24d stride at 0x51684c through 0x516859, and stores zero at 0x51685c. Measured with --source-targets --no-promote. Decision owner: matching lane 02.
+
+- 2026-11-14: GOLDTL 0x0047bdd0 (fcn_0047bdd0) improved aligned pairs 115->116/168 (SIZE_MISMATCH, object 430->424 against native 423). The single-cell arm colours the quad when the call returns one, then returns that pointer. Native tests esi at 0x47be07, jumps to the shared return at 0x47bf67 when it is zero, calls the colour helper, and moves esi into eax at 0x47be2d. Measured with --source-targets --no-promote. Decision owner: matching lane 19.
+
+- 2026-11-14: GOLDTL 0x005cb860 (fcn_005cb860) improved aligned pairs 76->80/173 (SIZE_MISMATCH, object 475->486 against native 501). Both loops test the kind as (unsigned char)(c[2] - 2) > 5. Native compares cl with 2 at 0x5cb89a and jumps above at 0x5cb89d, then repeats that form in the second scan. Measured with --source-targets --no-promote. Decision owner: matching lane 19.
+
+- 2026-11-14: GOLDTL 0x0055c270 (fcn_0055c270) text buffer shrink 0x400 to 0x380 withdrawn by the lead: only the frame total (sub esp,0x584 at 0x55c273) supported it, which does not prove this buffer's extent, and a smaller text buffer risks overflow. Source restored. Decision owner: lead review.

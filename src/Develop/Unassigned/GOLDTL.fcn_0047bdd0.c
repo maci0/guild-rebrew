@@ -59,9 +59,8 @@ int __cdecl fcn_0047bdd0(int x, int y, Sprite47bdd0 *sprite, float scale,
 
 	count = sprite->count; if (count == 1 && sprite->count2 == 1) {
 		q = (Quad47bdd0 *) fcn_0047ba20(x, y, (char *) sprite, scale);
-		if (!q)
-			return (int) q;
-		fcn_0047b9a0(q, r, g, b);
+		if (q)
+			fcn_0047b9a0(q, r, g, b);
 		return (int) q;
 	}
 	whole = sprite->size;

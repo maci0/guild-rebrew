@@ -32,12 +32,12 @@ int __cdecl fcn_00413480(char* a0, float a1, float* a2, float* a3, float* a4, fl
 		e = *(char**) (a0 + 0x1ec);
 		do {
 			if (p[1] * *(float*) (e + 0x1c) + p[2] * *(float*) (e + 0x2c) + p[0] * *(float*) (e + 0xc) + *(float*) (e + 0x3c) <= a1) {
-				q = (float*) *(char**) (m + 0x27c) + i * 3;
+				q = p;
 				lo[0] = q[0];
-				lo[1] = q[1];
-				lo[2] = q[2];
 				hi[0] = q[0];
+				lo[1] = q[1];
 				hi[1] = q[1];
+				lo[2] = q[2];
 				hi[2] = q[2];
 				break;
 			}

@@ -25,10 +25,10 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 	if ((int) (v2 + y) < *(int*) 0x7725fc) {
 		return 0;
 	}
-	if (*(int*) 0x67d964 < (int) ((int) h / (int) zoom) + x) {
+	if ((int) x + (int) h / (int) zoom > *(int*) 0x67d964) {
 		return 0;
 	}
-	if ((int) (h + x) < *(int*) 0x7725f8) {
+	if ((int) x + (int) h < *(int*) 0x7725f8) {
 		return 0;
 	}
 	if (*(int*) 0x67d968 < (int) ((int) v2 / (int) zoom + (int) y)) {

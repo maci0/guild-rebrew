@@ -13,26 +13,32 @@ int __cdecl fcn_004f0ff0(char* obj, int a1, int a2, int a3, int* out1, int* out2
 
 
 
-	if (a1 >= 4) {
+	if (a1 < 4) {
+		if (a1 > 0) {
+			a1 = a1;
+		} else {
+			a1 = 0;
+		}
+	} else {
 		a1 = 4;
-	} else if (a1 <= 0) {
-		a1 = 0;
-	} else {
-		a1 = a1;
 	}
-	if (a2 >= 0x64) {
+	if (a2 < 0x64) {
+		if (a2 > 0) {
+			a2 = a2;
+		} else {
+			a2 = 0;
+		}
+	} else {
 		a2 = 0x64;
-	} else if (a2 <= 0) {
-		a2 = 0;
-	} else {
-		a2 = a2;
 	}
-	if (a3 >= 3) {
-		a3 = 3;
-	} else if (a3 <= 1) {
-		a3 = 1;
+	if (a3 < 3) {
+		if (a3 > 1) {
+			a3 = a3;
+		} else {
+			a3 = 1;
+		}
 	} else {
-		a3 = a3;
+		a3 = 3;
 	}
 	*out1 = a1 + 2;
 	*out2 = (int) (((float) a2 * 2.0f + 500.0f) * ((float) a1 * 0.25f + 1.0f)

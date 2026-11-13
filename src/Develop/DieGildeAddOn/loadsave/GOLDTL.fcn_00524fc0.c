@@ -32,6 +32,7 @@ int __cdecl fcn_00524fc0(void* fp)
 	slot_114* p;
 	int count;
 	int i;
+	int k;
 
 	if (!ls_ReadVfsDataChecked(&count, 4, 1, fp)) {
 		return 0;
@@ -65,7 +66,9 @@ int __cdecl fcn_00524fc0(void* fp)
 			if (!ls_ReadVfsDataChecked(buf, 0x40, 0x10, fp)) {
 				return 0;
 			}
-			{ typedef struct { int v[16]; } SlotFields; *(SlotFields*)p->field34 = *(SlotFields*)buf; }
+			for (k = 0; k < 16; k++) {
+				p->field34[k] = ((int*) buf)[k];
+			}
 		}
 		if (!ls_ReadVfsDataChecked(&p->field74, 1, 1, fp)) {
 			return 0;

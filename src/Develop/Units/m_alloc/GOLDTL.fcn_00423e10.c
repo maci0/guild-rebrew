@@ -29,24 +29,29 @@ int __cdecl fcn_00423e10(char* s)
 		if (buf == 0) {
 			return -1;
 		}
-		fn = 0x40;
-		fp = buf;
-		__asm {
-			mov edi, fp
-			mov ebx, fn
-			xor eax, eax
-			lea ecx, [edi+edi*2]
-			and ecx, 3
-			sub ebx, ecx
-			jle short L34
-			rep stosb
-			mov ecx, ebx
-			and ebx, 3
-			shr ecx, 2
-			rep stosd
-		L34:
-			add ecx, ebx
-			rep stosb
+		{
+			int n;
+			char* p;
+
+			n = 0x40;
+			p = buf;
+			__asm {
+				mov edi, p
+				mov ebx, n
+				xor eax, eax
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short L34
+				rep stosb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep stosd
+			L34:
+				add ecx, ebx
+				rep stosb
+			}
 		}
 		strncpy(buf, s, 0x32);
 		g_6b7d6c++;

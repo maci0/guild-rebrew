@@ -55,12 +55,8 @@ unsigned int __cdecl fcn_00492590(int a0)
 	if (row == 1) {
 		cs = (unsigned short) gm_RandomMod(3);
 	} else {
-		v = gm_RandomMod(2);
-		if (row != 0) {
-			cs = row - (v & 0xffff);
-		} else {
-			cs = (unsigned short) v;
-		}
+		v = (unsigned short) gm_RandomMod(2);
+		cs = row == 0 ? v : row - v;
 	}
 	r = gm_RandomFloat01();
 	v2 = a0;

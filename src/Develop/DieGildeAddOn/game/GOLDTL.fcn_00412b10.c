@@ -47,16 +47,17 @@ unsigned int __cdecl fcn_00412b10(char* a0, float a1, float a2, float a3, float 
 		add ecx, ebx
 		rep stosb
 	}
-	z.layer = (z.layer | 0x14) & 0xf7;
-	z.queue = 1;
+	z.layer = z.layer | 0x14;
+	z.layer = z.layer & 0xf7;
+	rotation[0] = a4;
 	rotation[2] = a6;
+	z.queue = 1;
 	frames[0].rotation[0] = 0.0f;
 	frames[0].rotation[1] = 0.0f;
 	frames[0].rotation[2] = 0.0f;
 	frames[0].position[0] = 0.0f;
 	frames[0].position[1] = 0.0f;
 	frames[0].position[2] = 0.0f;
-	rotation[0] = a4;
 	rotation[1] = a5;
 	if ((a8 & 8) != 0) {
 		fcn_00451720(a0 + 0x84, rotation, v6, rotation);

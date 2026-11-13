@@ -211,17 +211,19 @@ int __cdecl fcn_00497e60(int a1, char* a2)
 	if (*(unsigned char*) a2 != 4) {
 		return 0;
 	}
-	id = *(int*) (a2 + 4);
 	t = (unsigned char*) fcn_005463a0(1, 0, 0x1b);
-	if (t != 0) {
-		while (*(int*) (t + 0xac) != id) {
-			t = (unsigned char*) he_fn_Handlung();
-			if (t == 0) {
-				return 0;
-			}
-		}
-		fcn_00505e20(*(int*) (a2 + 4), *(int*) (a1 + 4), *(int*) (t + 0xb0), (char*) t, 1);
-		return 0x10;
+	if (t == 0) {
+		goto exhausted;
 	}
+	do {
+		if (*(int*) (t + 0xac) == *(int*) (a2 + 4)) {
+			goto found;
+		}
+		t = (unsigned char*) he_fn_Handlung();
+	} while (t != 0);
+exhausted:
 	return 0;
+found:
+	fcn_00505e20(*(int*) (a2 + 4), *(int*) (a1 + 4), *(int*) (t + 0xb0), (char*) t, 1);
+	return 0x10;
 }

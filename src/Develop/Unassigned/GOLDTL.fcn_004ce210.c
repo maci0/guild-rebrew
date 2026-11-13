@@ -2,17 +2,32 @@ extern int g_9badd0;
 
 #include <string.h>
 
-int __cdecl fcn_004c4330(void*);
+typedef struct {
+	int g;
+	int a;
+} info8;
+
+typedef struct {
+	char kind;
+	char pad1[0xf];
+	int f10;
+	info8 info;
+	char pad1c[0x80];
+} msg9c;
+
+int __cdecl fcn_004c4330(msg9c*);
 
 /* ADDRESS: GOLDTL 0x004ce210 */
 int __cdecl fcn_004ce210(int a1)
 {
-	char buf[0x9c];
+	info8 info;
+	msg9c m;
 
-	memset(buf + 0x10, 0, 0x80);
-	*(int*) (buf + 0x14) = g_9badd0;
-	buf[0] = 0x5f;
-	*(int*) (buf + 0x10) = 1;
-	*(int*) (buf + 0x18) = a1;
-	return fcn_004c4330(buf);
+	memset(&m.f10, 0, 0x80);
+	info.g = g_9badd0;
+	m.kind = 0x5f;
+	m.f10 = 1;
+	info.a = a1;
+	m.info = info;
+	return fcn_004c4330(&m);
 }

@@ -15,6 +15,7 @@ unsigned char __cdecl fcn_00417570(char* obj, int now)
 	char* rec;
 	int i;
 	unsigned int dt;
+	double span;
 	double f1;
 	double v;
 	float fv; unsigned char flags;
@@ -28,7 +29,8 @@ unsigned char __cdecl fcn_00417570(char* obj, int now)
 		if (flags & 1) {
 			dt = (unsigned int) now - *(unsigned int*) (rec + 0x30);
 			*(int*) (rec + 0x30) = now;
-			f1 = (double) dt * g_662a68;
+			span = (double) dt;
+			f1 = span * g_662a68;
 			*(float*) (rec + 0x38) = (float) (*(float*) rec * f1 + *(float*) (rec + 0x38));
 			*(float*) (rec + 0x3c) = (float) (*(float*) (rec + 4) * f1 + *(float*) (rec + 0x3c));
 			*(float*) (rec + 0x40) = (float) (*(float*) (rec + 8) * f1 + *(float*) (rec + 0x40));

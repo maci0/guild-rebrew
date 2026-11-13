@@ -32,6 +32,7 @@ int __cdecl ai_RunAblassKaufen(int a0, char* a1, char* a2)
 	int v5;
 	int a3;
 	unsigned char cmd;
+	int n;
 
 	if (*(unsigned char*) a1 != 4) {
 		return 0;
@@ -46,7 +47,8 @@ int __cdecl ai_RunAblassKaufen(int a0, char* a1, char* a2)
 	v5 = fcn_00502cd0(*(int*) (rec + 0x5d), 2, 6, 0, 0xf2);
 	cmd = *(unsigned char*) a2;
 	if (cmd == 0x12) {
-		a3 = (int) (*(int*) (a1 + 0x10) / log10((double) *(int*) (a1 + 0x10)));
+		n = *(int*) (a1 + 0x10);
+		a3 = (int) (n / log10((double) n));
 		fcn_004c4510(a0, *(int*) (a0 + 4));
 		fcn_004c4670(4, 1, 0x1ac, a1 + 0x10);
 		fcn_004c5360();

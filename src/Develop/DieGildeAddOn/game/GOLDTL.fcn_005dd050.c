@@ -12,9 +12,13 @@ int __cdecl fcn_005dd050(void *a1, void *a2)
     if (*(char *)((char *)a1 + 2) == 6) {
         io_FormatTextBuffer(buf, 0x9d);
         r = fcn_005cad70(a1, buf);
-    } else {
-        r = gm_LookupEntityRecordById(*(int *)((char *)a2 + 4));
+        if (r) {
+            fcn_005dcf40(r, 1);
+            return 1;
+        }
+        return 0;
     }
+    r = gm_LookupEntityRecordById(*(int *)((char *)a2 + 4));
     if (r) {
         fcn_005dcf40(r, 1);
         return 1;

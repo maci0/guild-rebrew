@@ -115,8 +115,8 @@ unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* a1, 
 		add ecx, ebx
 		rep stosb
 	}
-	for (off = 0; off < 0xa900; off += 0xa9) {
-		ent = lpGebaeudeINST + off;
+	ent = lpGebaeudeINST;
+	for (off = 0; off < 0xa900; off += 0xa9, ent += 0xa9) {
 		if (ent[0] == 0)
 			continue;
 		if (*(unsigned short*) (ent + 0x27) == 0xffff)
