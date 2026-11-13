@@ -11,9 +11,11 @@ void __cdecl fcn_00458d90(int source, char* view, int flags, float* out)
     fcn_00454500(identity);
     if (view != 0) {
         fcn_00458cd0(source, flags, identity, transform);
-        transform[12] = transform[12] - *(float*) (view + 0x4c) - *(float*) (view + 0x78);
-        transform[13] = transform[13] - *(float*) (view + 0x50) - *(float*) (view + 0x7c);
+        transform[12] -= *(float*) (view + 0x4c);
+        transform[13] -= *(float*) (view + 0x50);
         transform[14] -= *(float*) (view + 0x54);
+        transform[12] -= *(float*) (view + 0x78);
+        transform[13] -= *(float*) (view + 0x7c);
         transform[14] -= *(float*) (view + 0x80);
         fcn_00453ed0(transform, (float*) (view + 0x18c), out);
     } else {

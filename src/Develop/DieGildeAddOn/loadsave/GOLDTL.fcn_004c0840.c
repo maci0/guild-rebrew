@@ -44,7 +44,7 @@ int __cdecl fcn_004c0840(int handle)
 		if (ls_ReadVfsDataChecked(&rec->b, 0x18, 1, handle) == 0)
 			return 0;
 	}
-	for (i = 0; i < n; i++) {
+	for (i = 0; i < n;) {
 		rec = (Rec64*) (buf + i * 0x40);
 		x = (char*) gm_FindRecordById(rec->id);
 		*(int*) (x + 0x29) = 0;

@@ -14,8 +14,8 @@ void __cdecl fcn_005b00f0(char* obj, int a2, int a3)
 	float w;
 
 	t = (double) *(int*) (*(char**) g_1043370 + 0x20) * 0.5;
-	a = (float) (*(int*) (obj + 8) - t) * 5.33f;
-	b = (float) (*(int*) (obj + 0xc) - t) * 5.33f;
+	a = (float) ((*(int*) (obj + 8) - t) * 5.33f);
+	b = (float) ((*(int*) (obj + 0xc) - t) * 5.33f);
 	v = fabs(a) / ((float) g_778d24 * 0.5f);
 	w = (float) fabs(b) / ((float) g_778d20 * 0.5f);
 	if (a < 0.0f) {

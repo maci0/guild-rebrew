@@ -1,3 +1,5 @@
+#include "client_data.h"
+extern char g_68da68[];
 /* Slot pairing probe: matches the caller argument against two entries of the
  * 24-byte slot table at 0x9a9220 and a 24-byte type record at 0x68da68, then
  * bumps the per-entry counters. */
@@ -47,8 +49,8 @@ int __cdecl fcn_004e7ff0(unsigned char* arg)
 		return 0;
 	}
 	want = arg[4];
-	slot = (SlotRec*) 0x9a9220;
-	for (i = 0; (unsigned char*) slot < (unsigned char*) 0x9a94f0; slot++, i++) {
+	slot = (SlotRec*) g_9a9220;
+	for (i = 0; (unsigned char*) slot < (unsigned char*) g_9a9220 + 0x2d0; slot++, i++) {
 		if (slot->type == want) {
 			break;
 		}
@@ -75,8 +77,8 @@ int __cdecl fcn_004e7ff0(unsigned char* arg)
 		return 1;
 	}
 	want = arg[5];
-	other = (SlotRec*) 0x9a9220;
-	for (j = 0; (unsigned char*) other < (unsigned char*) 0x9a94f0; other++, j++) {
+	other = (SlotRec*) g_9a9220;
+	for (j = 0; (unsigned char*) other < (unsigned char*) g_9a9220 + 0x2d0; other++, j++) {
 		if (other->type == want) {
 			break;
 		}
@@ -87,7 +89,7 @@ int __cdecl fcn_004e7ff0(unsigned char* arg)
 	if (slot->tag != other->tag) {
 		return 0;
 	}
-	rec = ((TypeRec*) 0x68da68)[slot->tag];
+	rec = ((TypeRec*) g_68da68)[slot->tag];
 	if (rec.f0 != c) {
 		return 0;
 	}

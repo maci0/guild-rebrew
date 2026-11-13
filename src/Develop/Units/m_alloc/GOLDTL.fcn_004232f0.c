@@ -57,14 +57,14 @@ void __cdecl fcn_004232f0(void)
 						p = fcn_00422760((int) &bank->samples[i], &idx);
 					}
 					smp = &bank->samples[i];
-					if (smp->kind != 1) {
-						g_6b7d74 += -12 - *(int*) ((char*) smp->ptr + 8);
-					} else {
+					if (smp->kind == 1) {
 						g_6b7d74 += -12 - *(int*) ((char*) smp->ptr + 4);
+					} else {
+						g_6b7d74 += -12 - *(int*) ((char*) smp->ptr + 8);
 					}
-					m_FreeTracked((int) smp->ptr);
-					smp->ptr = 0;
-					smp->ptr = 0;
+					m_FreeTracked((int) bank->samples[i].ptr);
+					bank->samples[i].ptr = 0;
+					bank->samples[i].ptr = 0;
 				}
 				i++;
 			} while (i < bank->count);

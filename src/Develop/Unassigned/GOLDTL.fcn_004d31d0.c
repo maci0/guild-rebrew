@@ -16,7 +16,7 @@ int __cdecl fcn_004d31d0(char* self, int a1, int a2, int a3,
 	int n;
 	int d;
 	int lo;
-	int hi;
+	int hi; int row_hi;
 
 	map = *(char**) (((char*) g_67a370) + 0xb0);
 	best = 1e9f;
@@ -24,13 +24,13 @@ int __cdecl fcn_004d31d0(char* self, int a1, int a2, int a3,
 	if (a3 > 0) {
 		k = a2;
 		do {
-			hi = *(int*) (map + 0x20) - 1;
-			if (hi > i + a2) {
-				hi = i + a2;
+			row_hi = *(int*) (map + 0x20) - 1;
+			if (row_hi > i + a2) {
+				row_hi = i + a2;
 			}
 			lo = k < 0 ? 0 : k;
 			n = a2 - lo;
-			for (r = lo; r <= hi; r++, n--) {
+			for (r = lo; r <= row_hi; r++, n--) {
 				d = i - (n < 0 ? -n : n);
 				lo = a1 - d;
 				lo = lo < 0 ? 0 : lo;

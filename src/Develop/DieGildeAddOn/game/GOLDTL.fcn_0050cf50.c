@@ -49,7 +49,7 @@ int __cdecl fcn_0050cf50(unsigned char* a0, int a1)
 			if (k == 2 || k == 6) {
 				t = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, id);
 				if (t != 0) {
-					acc[0] = (int) (*(float*) &acc[0] + eval_ObjektPreis2Credits(*(unsigned short*) t, *(unsigned char*) (t + 0x12)));
+					acc[0] = (int) (acc[0] + eval_ObjektPreis2Credits(*(unsigned short*) t, *(unsigned char*) (t + 0x12)));
 					if (i < 0x3f) {
 						k = ((Kind50cf*) lpObjektePROT)[lvl->ids[i + 1] & 0x7fff].kind;
 						if (k != 2 && k != 6) {
@@ -62,7 +62,7 @@ int __cdecl fcn_0050cf50(unsigned char* a0, int a1)
 			if (t != 0) {
 				q = fcn_00502cd0(*(int*) (t + 0x14), 1, 0, id);
 				if (q != 0) {
-					acc[0] = (int) (*(float*) &acc[0] + eval_ObjektPreis2Credits(*(unsigned short*) q, *(unsigned char*) (q + 0x12)));
+					acc[0] = (int) (acc[0] + eval_ObjektPreis2Credits(*(unsigned short*) q, *(unsigned char*) (q + 0x12)));
 				}
 				if (i < 0x3f) {
 					k = ((Kind50cf*) lpObjektePROT)[lvl->ids[i + 1] & 0x7fff].kind;

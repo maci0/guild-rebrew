@@ -1,5 +1,4 @@
 #include <string.h>
-
 extern char g_68b0d8[];
 extern char g_68b1f8[];
 extern char g_68b214[];
@@ -24,9 +23,9 @@ int __cdecl fcn_004cb450(char* a0, char* a1)
 	char* s;
 	char* d;
 	char* v4;
+	char* name;
 	int id;
 	int k;
-
 	fcn_0064d41a(search, g_68b0d8, *(int*) (a0 + 0x10));
 	o = fcn_004032b0(search);
 	if (!o)
@@ -42,8 +41,9 @@ int __cdecl fcn_004cb450(char* a0, char* a1)
 		k = fcn_005155e0(s);
 		fcn_0064d41a(gate, g_68b1f8);
 	} else {
+		name = lpObjektePROT + *(unsigned short*) d * 0x41;
 		k = fcn_00515540(d);
-		fcn_0064d41a(gate, g_68b214, strupr(lpObjektePROT + *(unsigned short*) d * 0x41 + 1));
+		fcn_0064d41a(gate, g_68b214, strupr(name + 1));
 	}
 	fcn_0064d41a(gate2, g_68b214, strupr(lpObjektePROT + *(unsigned short*) v4 * 0x41 + 1));
 	if (k >= 0)

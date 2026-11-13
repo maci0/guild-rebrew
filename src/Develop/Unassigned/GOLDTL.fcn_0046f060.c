@@ -26,7 +26,7 @@ void __cdecl fcn_0046f060(int win)
 		e = g_1015ea0 + 0x14;
 		y = *(int*) (p + 8);
 		do {
-			if (y + v < *(int*) (e + 8) + *(int*) e) {
+			if (*(int*) (e + 8) + *(int*) e > y + v) {
 				v = (*(int*) (e + 8) - y) + *(int*) e + 8;
 			}
 			e += 0x2f4;

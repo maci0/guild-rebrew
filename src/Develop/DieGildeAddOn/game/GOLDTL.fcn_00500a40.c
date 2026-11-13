@@ -23,17 +23,17 @@ void __cdecl fcn_00500a40(void)
 	char* p;
 	int i;
 	int idx;
-	int k;
 
+
+	p = g_7f4ca0;
 	memset(g_99f620, 0, 0x68);
 	i = 0;
-	p = g_7f4ca0;
 	do {
 		if (*(short*) p != -1
 		    && *(unsigned char*) (p + 8) != 0
 		    && *(unsigned char*) (p + 2) < 0xa) {
 			*(int*) &g_99f620[0] += 1;
-			idx = (int) MAX(g_6628a8, MIN(fcn_00505e30(i) * 0.1f, 7.0f));
+			idx = (int) MAX(MIN(fcn_00505e30(i) * 0.1f, 7.0f), g_6628a8);
 			g_99f624[idx] += 1;
 			if (fcn_004fffb0(i) != 0)
 				g_99f644 += 1.0f;
@@ -42,10 +42,10 @@ void __cdecl fcn_00500a40(void)
 		}
 		i++;
 		p += 0x21c;
-	} while (p < (char*) 0x85a0a0);
-	for (k = 0; k < 8; k++) {
-		g_99f648[k] = (g_99f648[k] / g_99f668[k]) * g_662cf8;
-		g_99f668[k] = g_99f668[k] / (float) g_99f624[k];
+	} while ((int) p < 0x85a0a0);
+	for (p = g_99f620 + 0x48; (int) p < (int) (g_99f620 + 0x68); p += 4) {
+		*(float*) (p - 0x20) = (*(float*) (p - 0x20) / *(float*) p) * g_662cf8;
+		*(float*) p = *(float*) p / (float) *(int*) (p - 0x44);
 	}
 	g_99f644 = (g_99f644 / (float) *(int*) &g_99f620[0]) * g_662cf8;
 }

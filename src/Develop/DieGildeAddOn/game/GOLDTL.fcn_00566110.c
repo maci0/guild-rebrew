@@ -18,11 +18,11 @@ void __cdecl fcn_00566110(int a0)
 	char* ent;
 	int v6;
 	int v7;
-	int v5;
+	int v5; int original;
 	unsigned short v1;
 	unsigned short v2;
 
-	v6 = 0;
+	v6 = 0; original = a0;
 	if (*(int*) (a0 + 0x70) < -2) {
 		return;
 	}
@@ -59,7 +59,7 @@ void __cdecl fcn_00566110(int a0)
 		fcn_004c5da0(*(int*) (ent + 4), a0, v7 == -1 ? -1 : v7, 0, v7 == -1, (char*) 0x6a68b0);
 	}
 tail:
-	fcn_00546190(a0);
+	fcn_00546190(original);
 	return;
 fail:
 	*(int*) (a0 + 0x70) = -1;

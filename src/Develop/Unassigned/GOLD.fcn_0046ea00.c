@@ -1,7 +1,7 @@
 #include <string.h>
 
 int __cdecl fcn_004690a0(int font);
-int __cdecl fcn_0047cb60(int font_data, unsigned int character);
+int __cdecl fcn_0047cb60(int font_data, unsigned short character);
 
 /* ADDRESS: GOLD 0x0046ea00 */
 int __cdecl fcn_0046ea00(const char* text, int font)
@@ -23,10 +23,10 @@ int __cdecl fcn_0046ea00(const char* text, int font)
             if (i != 0 && text[i - 1] != ' ') {
                 width -= *(unsigned short*)(glyph + 0x16);
             }
-            if (character == ' ') {
-                width += *(unsigned short*)(glyph + 0x1a) + *(int*)0x5fe724 + *(int*)0x5fe728;
-            } else {
+            if (character != ' ') {
                 width += *(unsigned short*)(glyph + 0x1a) + *(int*)0x5fe728;
+            } else {
+                width += *(unsigned short*)(glyph + 0x1a) + *(int*)0x5fe724 + *(int*)0x5fe728;
             }
         }
     }

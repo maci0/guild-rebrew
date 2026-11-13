@@ -1,6 +1,6 @@
-
-
-
+#ifdef REBREW_GOLD
+#define fcn_004c3140 fcn_00423a50
+#endif
 #define RED(c) ((unsigned char) (c))
 #define GREEN(c) ((unsigned char) (((unsigned short) (c)) >> 8))
 #define BLUE(c) ((unsigned char) ((c) >> 16))

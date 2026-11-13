@@ -31,10 +31,10 @@ int __cdecl fcn_00409020(char* obj)
 	if (start >= limit) {
 		goto done;
 	}
-	stride = *(int*) (map + 0x20);
+	stride = *(int*) (map + 0x20); map = *(char**) (map + 0x24);
 	pairs = *(unsigned char**) (task + 0xf4) + start * 2;
 	while (1) {
-		cell = *(int*) (*(char**) (map + 0x24) + (pairs[1] * stride + pairs[0]) * 0x1c);
+		cell = *(int*) (map + (pairs[1] * stride + pairs[0]) * 0x1c);
 		if (cell == 0 || cell == 0xd) {
 			result = 0;
 			goto done;

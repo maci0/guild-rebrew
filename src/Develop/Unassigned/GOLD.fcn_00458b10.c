@@ -3,9 +3,9 @@ void __cdecl fcn_00458a10(char* object, float* position, float* out);
 /* ADDRESS: GOLD 0x00458b10 */
 void __cdecl fcn_00458b10(char* object, char* camera, float* position, float* out)
 {
-    float v[3];
+    float v[4];
 
-    if (*(signed char*)(object + 0x210) < 0 || camera == 0) {
+    if ((*(unsigned char*)(object + 0x210) & 0x80) != 0 || camera == 0) {
         fcn_00458a10(object, position, out);
         return;
     }

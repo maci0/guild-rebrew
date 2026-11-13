@@ -46,19 +46,19 @@ int __cdecl MoveCharacterCamera(char** character, char** view, int* mode)
         return 1;
     }
     name = *view;
-    if (strcmp(name, "CLOSEUP") == 0) {
+    if (strcmp("CLOSEUP", name) == 0) {
         fcn_004056f0(object, 0, *mode);
         return 0;
     }
-    if (strcmp(name, "LEFT_SHOULDER") == 0) {
+    if (strcmp("LEFT_SHOULDER", name) == 0) {
         fcn_004056f0(object, 1, *mode);
         return 0;
     }
-    if (strcmp(name, "RIGHT_SHOULDER") == 0) {
+    if (strcmp("RIGHT_SHOULDER", name) == 0) {
         fcn_004056f0(object, 2, *mode);
         return 0;
     }
-    if (strcmp(name, "EGO") == 0) {
+    if (strcmp("EGO", name) == 0) {
         fcn_004056f0(object, 3, *mode);
     }
     return 0;

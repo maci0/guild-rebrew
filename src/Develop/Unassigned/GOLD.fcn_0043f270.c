@@ -6,15 +6,15 @@ void __cdecl fcn_0043f270(void)
 {
     unsigned int i;
     unsigned int count;
-    int offset;
     char* table;
     char* record;
 
     count = *(unsigned int*) 0x633744;
     table = *(char**) 0x63374c;
     i = 0;
-    offset = 0;
-    while (i < count) {
+    if (i < count) {
+      int offset = 0;
+      do {
         record = *(char**) (table + offset);
         if (record != 0) {
             if (record[0] == 0x2a) {
@@ -24,7 +24,7 @@ void __cdecl fcn_0043f270(void)
                     record = *(char**) (table + offset);
                 }
             }
-            *(int*) (table + offset) = 0;
+            *(int*) (offset + table) = 0;
             table = *(char**) 0x63374c;
             table[offset + 0x40] = 0;
             table = *(char**) 0x63374c;
@@ -32,6 +32,7 @@ void __cdecl fcn_0043f270(void)
         i++;
         offset += 0x44;
         count = *(unsigned int*) 0x633744;
+      } while (i < count);
     }
     *(unsigned int*) 0x633744 = 0;
     m_FreeTracked(table);

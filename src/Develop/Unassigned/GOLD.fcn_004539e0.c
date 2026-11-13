@@ -6,9 +6,9 @@ int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 /* ADDRESS: GOLD 0x004539e0 */
 float __cdecl fcn_004539e0(const float* a, const float* b)
 {
-    float first[3];
-    float second[3];
-    float opposite[3];
+    float first[4];
+    float second[4];
+    float opposite[4];
     float orientation;
 
     second[1] = 0.0f;

@@ -12341,8 +12341,17 @@
   },
   {
     "va": 4849808,
-    "size": 352,
-    "name": "fcn.004a0090"
+    "size": 344,
+    "name": "fcn.004a0090",
+    "extent_history": [
+      {
+        "old_size": 352,
+        "new_size": 344,
+        "reason": "native final ret at 0x4a01e7 (0x4a0090), 0x4b6d20 (0x4b6bf0), 0x520336 (0x520230), last table byte 0x5013f3 (0x5012e0); only NOP padding follows to the old end; 0x500ec0 inventory already 305, row SIZE synced; round-3 lanes 01, 02, 08",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T04:33:15.434036+00:00"
+      }
+    ]
   },
   {
     "va": 4850160,
@@ -14093,8 +14102,17 @@
   },
   {
     "va": 4942832,
-    "size": 320,
-    "name": "fcn.004b6bf0"
+    "size": 305,
+    "name": "fcn.004b6bf0",
+    "extent_history": [
+      {
+        "old_size": 320,
+        "new_size": 305,
+        "reason": "native final ret at 0x4a01e7 (0x4a0090), 0x4b6d20 (0x4b6bf0), 0x520336 (0x520230), last table byte 0x5013f3 (0x5012e0); only NOP padding follows to the old end; 0x500ec0 inventory already 305, row SIZE synced; round-3 lanes 01, 02, 08",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T04:33:15.434036+00:00"
+      }
+    ]
   },
   {
     "va": 4943152,
@@ -14461,8 +14479,17 @@
   },
   {
     "va": 4965792,
-    "size": 80,
-    "name": "fcn.004bc5a0"
+    "size": 69,
+    "name": "fcn.004bc5a0",
+    "extent_history": [
+      {
+        "old_size": 80,
+        "new_size": 69,
+        "reason": "native ret at 0x4bc5e4 (0x4bc5a0), 0x4bc706 (0x4bc6a0), 0x53d7ec (0x53d710); only NOP padding follows to the old end; compiled bodies match the full prefix (round-3 lanes 03, 04)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T04:26:31.599773+00:00"
+      }
+    ]
   },
   {
     "va": 4965872,
@@ -14490,8 +14517,17 @@
   },
   {
     "va": 4966048,
-    "size": 112,
-    "name": "fcn.004bc6a0"
+    "size": 103,
+    "name": "fcn.004bc6a0",
+    "extent_history": [
+      {
+        "old_size": 112,
+        "new_size": 103,
+        "reason": "native ret at 0x4bc5e4 (0x4bc5a0), 0x4bc706 (0x4bc6a0), 0x53d7ec (0x53d710); only NOP padding follows to the old end; compiled bodies match the full prefix (round-3 lanes 03, 04)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T04:26:31.599773+00:00"
+      }
+    ]
   },
   {
     "va": 4966160,
@@ -20834,8 +20870,17 @@
   },
   {
     "va": 5247712,
-    "size": 288,
-    "name": "fcn.005012e0"
+    "size": 276,
+    "name": "fcn.005012e0",
+    "extent_history": [
+      {
+        "old_size": 288,
+        "new_size": 276,
+        "reason": "native final ret at 0x4a01e7 (0x4a0090), 0x4b6d20 (0x4b6bf0), 0x520336 (0x520230), last table byte 0x5013f3 (0x5012e0); only NOP padding follows to the old end; 0x500ec0 inventory already 305, row SIZE synced; round-3 lanes 01, 02, 08",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T04:33:15.434036+00:00"
+      }
+    ]
   },
   {
     "va": 5248000,
@@ -22804,8 +22849,17 @@
   },
   {
     "va": 5374512,
-    "size": 272,
-    "name": "fcn.00520230"
+    "size": 263,
+    "name": "fcn.00520230",
+    "extent_history": [
+      {
+        "old_size": 272,
+        "new_size": 263,
+        "reason": "native final ret at 0x4a01e7 (0x4a0090), 0x4b6d20 (0x4b6bf0), 0x520336 (0x520230), last table byte 0x5013f3 (0x5012e0); only NOP padding follows to the old end; 0x500ec0 inventory already 305, row SIZE synced; round-3 lanes 01, 02, 08",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T04:33:15.434036+00:00"
+      }
+    ]
   },
   {
     "va": 5374784,
@@ -24225,8 +24279,17 @@
   },
   {
     "va": 5494544,
-    "size": 224,
-    "name": "fcn.0053d710"
+    "size": 221,
+    "name": "fcn.0053d710",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 221,
+        "reason": "native ret at 0x4bc5e4 (0x4bc5a0), 0x4bc706 (0x4bc6a0), 0x53d7ec (0x53d710); only NOP padding follows to the old end; compiled bodies match the full prefix (round-3 lanes 03, 04)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-13T04:26:31.599773+00:00"
+      }
+    ]
   },
   {
     "va": 5494768,

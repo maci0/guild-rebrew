@@ -65,7 +65,7 @@ int __cdecl fcn_00407760(char* flags, PairRun* src, char* dst, char* scale)
 	int n;
 	int i;
 	unsigned char* bytes;
-	int step;
+	int step; int last;
 	n = 0;
 	i = 1;
 	if (flags != 0 && (flags[4] & 0x10) != 0) {
@@ -84,12 +84,13 @@ int __cdecl fcn_00407760(char* flags, PairRun* src, char* dst, char* scale)
 		dst[n * 2 - 1] = (char) hi;
 		i = i + step;
 	}
-	if (i != src->count - 1) {
+	last = src->count - 1;
+	if (i != last) {
 		bytes = src->bytes;
-		hi = bytes[src->count * 2 - 1];
+
 		n = n + 1;
-		dst[n * 2 - 2] = bytes[src->count * 2 - 2];
-		dst[n * 2 - 1] = (char) hi;
+		dst[n * 2 - 2] = bytes[last * 2];
+		dst[n * 2 - 1] = (char) src->bytes[src->count * 2 - 1];
 	}
 	return n;
 }
