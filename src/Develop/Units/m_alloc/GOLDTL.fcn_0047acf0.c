@@ -82,10 +82,7 @@ char* __cdecl fcn_0047acf0(char* list)
 	*(unsigned short*) (bank + 0x16) = *(unsigned short*) (list + 0x43);
 	count = (int) *(unsigned short*) (list + 0x2a);
 	*(int*) (bank + 0x18) = (int) m_alloc(count << 2, "plyshpshapes");
-	if (*(unsigned int*) bank != 2)
-		*(int*) (bank + 0x1c) = 1;
-	else
-		*(int*) (bank + 0x1c) = 0;
+	*(int*) (bank + 0x1c) = *(unsigned int*) bank != 2;
 	maxw = -1;
 	if ((int) *(unsigned short*) (list + 0x2a) >= 2 &&
 	    (*(unsigned short*) (list + 0x2c) >= 0x80 || *(unsigned short*) (list + 0x2e) >= 0x80)) {

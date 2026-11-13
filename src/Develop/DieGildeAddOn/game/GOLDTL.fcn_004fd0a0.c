@@ -59,9 +59,7 @@ void __cdecl fcn_004fd0a0(void)
 		for (i = 0; i < 3; i++) {
 			v = *(int*) (e + 0x1d8 + i * 4);
 			total += v;
-			if (v != 0) {
-				count++;
-			}
+			count += v != 0;
 			fcn_004c4570(4, 1, (int) e + 0x1d4 + i * 4 - g_aed32c, &v);
 		}
 		count = (r + total) / (count + 1);

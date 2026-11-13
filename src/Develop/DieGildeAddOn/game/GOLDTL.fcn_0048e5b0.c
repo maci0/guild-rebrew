@@ -65,7 +65,7 @@ int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* a3, char* a4)
 		}
 		return 0;
 	}
-	if (fcn_004efd30(*(int*) (e + 1)) == 0 && *(int*) (p + 0x1cc) >= 0) {
+	if (fcn_004efd30(*(int*) (e + 1)) == 0 && (*(int*) (p + 0x1cc) & 0x80000000) == 0) {
 		fcn_004c5420(*(int*) (p + 4), 0x1e8, 4, 0x80000000, 0);
 		fcn_004eea70(e);
 		return 0;

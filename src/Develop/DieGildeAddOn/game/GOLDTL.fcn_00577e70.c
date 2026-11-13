@@ -35,26 +35,30 @@ unsigned int __cdecl fcn_00577e70(char* a0, char* a1, char* a2)
 				dx = *(float*) (v3 + 0x4c) - *(float*) (ent + 0x4c);
 				dy = (double) *(float*) (v3 + 0x50) - *(float*) (ent + 0x50);
 				dz = (double) *(float*) (v3 + 0x54) - *(float*) (ent + 0x54);
-				if (!(sqrt(dz * dz + dy * dy + (double) dx * dx) < 1850.0f)) {
-					if (*(int*) (a2 + 0xb4) != *(int*) (a1 + 0xac)) {
-						*(int*) (a1 + 0xac) = *(int*) (a2 + 0xb4);
-						fcn_004c5c80(*(unsigned int*) (a0 + 4));
-						fcn_004c5da0(*(unsigned int*) (a0 + 4), *(unsigned int*) (a2 + 0xb4), -1, 0, 1, (char*) 0x6a7e3c);
-					}
-					return 0;
-				}
+				if (sqrt(dz * dz + dy * dy + (double) dx * dx) < 1850.0f) {
 				slot = *(unsigned short*) (a2 + 8);
-				v1 = (unsigned char*) (slot * 0x21c + 0x7f4ca0);
+				slot = slot + (slot << 1);
+				slot = slot + (slot << 2);
+				slot = slot + (slot << 3);
+				v1 = (unsigned char*) (0x7f4ca0 + slot * 4);
 				v8 = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (a2 + 0xc4));
 				t0 = (float) (*(int*) (a2 + 0xe8) + 1) * 0.5f;
 				t1 = (float) (*(int*) (a1 + 0xc0) + 1) * 0.5f;
 				if (gm_GetEntitySkill((char*) v1, 2) + t0 < gm_GetEntitySkill((char*) v8, 2) + t1) {
 					*(unsigned int*) (a2 + 0x84) = fcn_004c5620(-1, (unsigned char*) a2);
 					io_FormatTextBuffer(v9, (char*) 0x4028, *(unsigned short*) v8);
-					fcn_00545d40(*(unsigned int*) (slot * 0x21c + 0x7f4ca4), -1, v9, 1, 0x5fb, (char*) 0x6a7ea8);
+					fcn_00545d40(*(unsigned int*) (v1 + 4), -1, v9, 1, 0x5fb, (char*) 0x6a7ea8);
 					io_FormatTextBuffer(v9, (char*) 0x4029, *(unsigned short*) v1);
 					fcn_00545d40(*(unsigned int*) (v8 + 4), -1, v9, 1, 0x5fb, (char*) 0x6a7ea8);
 					return 1;
+				}
+				} else {
+					if (*(int*) (a2 + 0xb4) != *(int*) (a1 + 0xac)) {
+						*(int*) (a1 + 0xac) = *(int*) (a2 + 0xb4);
+						fcn_004c5c80(*(unsigned int*) (a0 + 4));
+						fcn_004c5da0(*(unsigned int*) (a0 + 4), *(unsigned int*) (a2 + 0xb4), -1, 0, 1, (char*) 0x6a7e3c);
+					}
+					return 0;
 				}
 			}
 		}

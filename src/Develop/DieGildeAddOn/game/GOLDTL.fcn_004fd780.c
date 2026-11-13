@@ -36,7 +36,7 @@ void __cdecl fcn_004fd780(void)
 		do {
 			if (*(short*) (p - 2) != -1) {
 				kind = *(unsigned char*) p;
-				if (kind <= 9 && kind != 0 && kind != 6 && kind != 7
+				if (kind < 10 && kind > 0 && kind != 6 && kind != 7
 					&& kind != 8 && *(unsigned short*) (p + 8) >= 0xc) {
 					now = gm_RandomFloat01();
 					if (now * *(float*) 0x6629d0 > *(float*) (p + 0x1ce)) {
@@ -66,7 +66,7 @@ void __cdecl fcn_004fd780(void)
 	do {
 		if (*(short*) (p - 2) != -1) {
 			kind = *(unsigned char*) p;
-			if (kind <= 9 && kind != 0 && kind != 6 && kind != 7 && kind != 8
+			if (kind < 10 && kind > 0 && kind != 6 && kind != 7 && kind != 8
 				&& *(unsigned short*) (p + 8) >= 0xc
 				&& *(unsigned char*) (p + 0xa) != (mode != 0)) {
 				arg = -1;

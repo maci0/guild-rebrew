@@ -7,6 +7,7 @@ typedef struct V456ef0 {
 	float x;
 	float y;
 	float z;
+	float w;
 } V456ef0;
 
 typedef struct Cam456ef0 {
@@ -91,10 +92,11 @@ void __cdecl fcn_00456ef0(char* o)
 				r.y = v2.y * t + q[1];
 				r.z = v2.z * t + q[2];
 			} else {
+				dx = v1.x - q[0];
 				dy = v1.y - q[1];
 				dz = v1.z - q[2];
 				t = -((v1.y - h) / dy);
-				r.x = (v1.x - q[0]) * t + v1.x;
+				r.x = dx * t + v1.x;
 				r.y = dy * t + v1.y;
 				r.z = dz * t + v1.z;
 			}

@@ -11,7 +11,7 @@ void __cdecl fcn_00438b40(char* p, float* v);
 /* ADDRESS: GOLDTL 0x00405760 */
 void __cdecl fcn_00405760(unsigned char* e)
 {
-	float v[3];
+	float v[4];
 	char* p;
 
 	if (e[0x110] == 0) {

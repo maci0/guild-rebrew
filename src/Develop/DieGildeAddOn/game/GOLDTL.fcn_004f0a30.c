@@ -41,8 +41,8 @@ int __cdecl fcn_004f0a30(char* a0, char* a1, unsigned int* a2,
 			fcn_005100f0(*(int*) (a1 + 4), -a6);
 			fcn_004c51a0(-1, *(int*) (a1 + 4), (char) g_773d75, a7);
 			pkt[0] = *(unsigned int*) (a0 + 1);
-			pkt[2] = need_start;
 			pkt[1] = prio;
+			pkt[2] = need_start;
 			ok = 0;
 			memcpy(&pkt[3], a2, 0x1a * 4);
 			prio = 0;

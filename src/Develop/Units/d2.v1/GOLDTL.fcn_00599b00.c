@@ -54,7 +54,7 @@ int __cdecl fcn_005373e0(int a, int b);
 /* ADDRESS: GOLDTL 0x00599b00 */
 void __cdecl fcn_00599b00(void)
 {
-	int cats[5] = {8, 9, 10, 1, 0};
+	int cats[5];
 	unsigned char* catp;
 	char name[260];
 	char key[128];
@@ -76,13 +76,18 @@ void __cdecl fcn_00599b00(void)
 
 	last = -1;
 	selected = -1;
+	cats[0] = 8;
+	cats[1] = 9;
+	cats[2] = 10;
+	cats[3] = 1;
+	cats[4] = 0;
 	raw = fcn_0050e4a0(1);
 	raw = *(int*) (raw + 0x5d);
 	query = fcn_00502cd0(raw, 2, 6, 0, 0x115);
 	dlg = fcn_00470820(0, 0, (char*) 0x6aa2a8);
 	fcn_00471b60(dlg);
-	d2_SetForm(dlg, 0);
 	g_7746f8 = 1;
+	d2_SetForm(dlg, 0);
 	i = g_772514 * 0x3cc;
 	*(int*) (i + 0x10162e8) = 0x18;
 	*(int*) (i + 0x10162ec) = 0x18;

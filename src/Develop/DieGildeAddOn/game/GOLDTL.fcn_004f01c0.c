@@ -125,9 +125,10 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 		}
 		fcn_00455350(*(char**) (rec + 0x61), *(char**) (rec + 0x61) + 0x4c,
 		             &pv.x);
-		dist = (float) sqrt((cx - pv.x) * (cx - pv.x) +
-		                    (cy - pv.y) * (cy - pv.y) +
-		                    (cz - pv.z) * (cz - pv.z));
+		s1 = cx - pv.x;
+		s2 = cy - pv.y;
+		tmp = cz - pv.z;
+		dist = (float) sqrt(s1 * s1 + s2 * s2 + tmp * tmp);
 		if (best == 0 || dist < bestdist) {
 			bestdist = dist;
 			best = rec;

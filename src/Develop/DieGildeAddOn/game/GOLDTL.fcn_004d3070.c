@@ -26,11 +26,11 @@ float __cdecl fcn_004d3070(char* self, int x, int z, float range)
 	g = *(void**) ((char*) g_67a370 + 0xb0);
 	best = 0.0f;
 	if (*(int*) (self + 0x16c) == (int) g_772e9c) {
-		listA = (int*) (g_772eb4 + 0x80);
 		listB = (int*) (g_772eb4 + 0xc0);
+		listA = (int*) (g_772eb4 + 0x80);
 	} else {
-		listA = (int*) (g_772eb4 + 0xc0);
 		listB = (int*) (g_772eb4 + 0x80);
+		listA = (int*) (g_772eb4 + 0xc0);
 	}
 	fcn_0045b920(g, x, z, pos);
 	for (i = 0; i < 16; i++) {
@@ -62,7 +62,7 @@ float __cdecl fcn_004d3070(char* self, int x, int z, float range)
 				dy = pos[1] - p[0x14];
 				dz = pos[2] - p[0x15];
 				d = (float) sqrt(dz * dz + dy * dy + dx * dx);
-				if (range >= d) {
+				if (d <= range) {
 					best -= 70.0f / d;
 				}
 			}

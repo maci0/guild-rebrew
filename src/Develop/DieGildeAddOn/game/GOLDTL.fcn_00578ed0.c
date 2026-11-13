@@ -96,10 +96,12 @@ void __cdecl fcn_00578ed0(char* a0)
 					return;
 				}
 				if (fcn_004a57a0((char*) ((*(unsigned short*) (a0 + 8)) * 0x21c + (unsigned long)&g_7f4ca0),
-						0x700408, 4, a0 + 0xc8, 0, 0x42c80000, &found) == 0) {
-					*(int*) (a0 + 0x70) = -1;
-					return;
+						0x700408, 4, a0 + 0xc8, 0, 0x42c80000, &found) != 0) {
+					goto found_one;
 				}
+				*(int*) (a0 + 0x70) = -1;
+				return;
+found_one:
 				ref = fcn_004f45b0((char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
 				k = fcn_0050b710(gm_WalkEntityChain(found), *(unsigned char*) &g_773d75);
 				*(unsigned short*) (a0 + 0xc8 + *(int*) (a0 + 0xb0) * 2) = (unsigned short) found;

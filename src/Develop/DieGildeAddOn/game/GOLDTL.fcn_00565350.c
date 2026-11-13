@@ -42,6 +42,7 @@ void __cdecl fcn_00565350(int a0)
 	int v8;
 	int v9;
 	int i;
+	int sex;
 
 	if (g_774970 != *(unsigned short*) (a0 + 8))
 		return;
@@ -66,7 +67,10 @@ void __cdecl fcn_00565350(int a0)
 		d2_SetForm(*(int*) (*(int*) (a0 + 0x74) + 8), 0);
 		fcn_00471b60(*(int*) (*(int*) (a0 + 0x74) + 8));
 		ent = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (a0 + 0xac));
-		y = (-(*(char*) (ent + 9) != 0) & 0x5f) + 0x130;
+		sex = *(unsigned char*) (ent + 9);
+		sex = -sex;
+		y = (sex >> 8) & 0x5f;
+		y += 0x130;
 		x = gm_MapEntityStatRange(*(unsigned char*) (a0 + 0xb0));
 		z = gm_GetOppositeStatIndex(*(unsigned char*) (a0 + 0xb0));
 		d2_SetForm(*(int*) (*(int*) (a0 + 0x74) + 8), 1);

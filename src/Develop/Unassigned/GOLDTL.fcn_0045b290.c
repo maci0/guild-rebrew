@@ -47,7 +47,7 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 	float minz;
 	float maxz;
 
-	if (!m || m[8] < 1)
+	if (!m || m[8] <= 0)
 		return;
 	if (m[10] == 0)
 		return;

@@ -140,7 +140,7 @@ void __cdecl fcn_00512ee0(void)
 	memset(counts, 0, sizeof(counts));
 	memset(found, 0, sizeof(found));
 	memset(handles, 0, sizeof(handles));
-	for (e = g_7f4ca0 + 2; (int)e < (int)(g_7f4ca0 + 0x65402); e += 0x21c) {
+	for (e = g_7f4ca0 + 2; (int)e < 0x85a0a2; e += 0x21c) {
 		if (total >= 8)
 			break;
 		if (*(unsigned short *)(e - 2) != 0xffff

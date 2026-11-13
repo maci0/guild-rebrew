@@ -37,9 +37,9 @@ void __cdecl fcn_0054bc90(char* a0)
 	unsigned short* v7;
 	char v4;
 
+	v10 = 0;
 	v13 = 0;
 	v15 = 0;
-	v10 = 0;
 	if (*(int*) (a0 + 0x70) == -1 || *(int*) (a0 + 0x70) == -2)
 		goto close;
 	if (*(int*) (a0 + 0xbc) == 0) {

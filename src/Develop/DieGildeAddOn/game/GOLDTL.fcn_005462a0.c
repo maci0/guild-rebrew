@@ -17,6 +17,10 @@ unit_77e980* __cdecl he_fn_Handlung(void)
 	unit_77e980* e;
 	unit_77e980* base;
 	char matched;
+	unsigned char kind;
+	int id;
+	unsigned short house;
+	int target;
 
 	matched = 0;
 	base = 0;
@@ -35,35 +39,38 @@ unit_77e980* __cdecl he_fn_Handlung(void)
 		e++;
 		g_7dc420 = e;
 	}
+	kind = g_6a4758[0];
+	id = g_6a475c;
+	house = g_6a4760;
+	target = g_6a4764;
 	for (;;) {
 		if (e->kind != 0) {
-			if (g_6a4758[0] != 0xff) {
-				if (e->kind != g_6a4758[0]) {
+			if (kind != 0xff) {
+				if (e->kind != kind) {
 					goto nomatch;
 				}
 				matched = 1;
 			}
-			if (g_6a475c != -1) {
-				if (*(int*) ((char*) e + 4) != g_6a475c) {
+			if (id != -1) {
+				if (*(int*) ((char*) e + 4) != id) {
 					goto nomatch;
 				}
 				matched = 1;
 			}
-			if (g_6a4760 != 0xffff) {
-				if (*(unsigned short*) ((char*) e + 8) != g_6a4760) {
+			if (house != 0xffff) {
+				if (*(unsigned short*) ((char*) e + 8) != house) {
 					goto nomatch;
 				}
 				matched = 1;
 			}
-			if (g_6a4764 != -1) {
-				if (*(int*) ((char*) e + 0x10) == g_6a4764) {
-					return e;
+			if (target != -1) {
+				if (*(int*) ((char*) e + 0x10) != target) {
+					goto nomatch;
 				}
-				goto nomatch;
 			}
 		}
 		if (matched) {
-			return e;
+			break;
 		}
 		goto next;
 nomatch:

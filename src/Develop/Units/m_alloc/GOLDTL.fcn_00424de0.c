@@ -67,8 +67,14 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 		result = -1;
 		goto after_banks;
 	}
-	for (p = strstr(g_6b7d68, "~"); p != 0; p = strstr(p + 1, "~")) {
+	p = g_6b7d68;
+	for (;;) {
+		p = strstr(p, "~");
+		if (p == 0) {
+			break;
+		}
 		*p = 0x20;
+		p++;
 	}
 	for (;;) {
 		if (fscanf(fp, "%s", buf) == -1) {

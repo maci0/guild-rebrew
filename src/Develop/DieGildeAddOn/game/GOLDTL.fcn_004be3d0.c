@@ -39,10 +39,12 @@ int __cdecl fcn_004be3d0(int* a0, char* a1, char* a2, char* a3)
 	char* map;
 
 	idx = g_773d75;
+	idx = (idx << 6) - idx;
 	map = g_1043370;
-	a = *(int*) (0x86834c + idx * 0x2f4);
-	b = *(int*) (0x868350 + idx * 0x2f4);
 	rec = a3;
+	idx = idx * 12;
+	a = *(int*) (0x86834c + idx);
+	b = *(int*) (0x868350 + idx);
 	obj = gm_SearchTable67(*(unsigned int*) (rec + 4));
 	if (obj == 0) {
 		return -1;

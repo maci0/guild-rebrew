@@ -9,8 +9,7 @@ int __cdecl fcn_00418210(char* obj, int now)
 	unsigned int n;
 	float half;
 	float f;
-	int v;
-	unsigned char* vb;
+	int color;
 	int mask;
 	int i;
 	int alive;
@@ -24,10 +23,9 @@ int __cdecl fcn_00418210(char* obj, int now)
 	if (flags & 1) {
 		*(int*) (obj + 0x20) = flags & ~1;
 		n = 1;
-		v = *(int*) (obj + 0x24);
-		vb = (unsigned char*) &v;
+		color = *(int*) (obj + 0x24);
 		e = *(unsigned char**) (obj + 0xdc);
-		mask = vb[3];
+		mask = ((unsigned char*) &color)[3];
 		if (e != 0 && e[0x5c] > 0) {
 			n = (unsigned char) e[0x5c];
 		}
@@ -36,13 +34,13 @@ int __cdecl fcn_00418210(char* obj, int now)
 			if ((*(unsigned char*) (p + 0x51) & 1) == 0) {
 				r = fcn_0064d3f8();
 				*(unsigned char*) (p + 0x4e) = (unsigned char)
-				    ((r & mask) + vb[2]);
+				    ((r & mask) + ((unsigned char*) &color)[2]);
 				r = fcn_0064d3f8();
 				*(unsigned char*) (p + 0x4d) = (unsigned char)
-				    ((r & mask) + vb[1]);
+				    ((r & mask) + ((unsigned char*) &color)[1]);
 				r = fcn_0064d3f8();
 				*(unsigned char*) (p + 0x4c) = (unsigned char)
-				    ((r & mask) + vb[0]);
+				    ((r & mask) + ((unsigned char*) &color)[0]);
 				*(unsigned char*) (p + 0x50) =
 				    (unsigned char) (i % n);
 				r = fcn_0064d3f8();

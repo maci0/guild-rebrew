@@ -33,8 +33,10 @@ char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 	float c2;
 	unsigned int n;
 
-	if (a0 >= 7)
+	if (a0 < 7) {
+	} else {
 		return 0;
+	}
 	if (!(t >= 0.0f))
 		return 0;
 	if (!(t <= 1.0f))

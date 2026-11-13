@@ -74,9 +74,7 @@ char __cdecl fcn_00459530(Ent459* e)
 	e->dt = (float) ((unsigned long) g_6b7fac - e->last);
 	e->last = (unsigned long) g_6b7fac;
 	n = e->node;
-	if (!n) {
-		return 1;
-	}
+	if (n) {
 	do {
 		v = n->fc + e->dt * n->f10;
 		n->fc = v;
@@ -118,6 +116,7 @@ char __cdecl fcn_00459530(Ent459* e)
 			arg = 0;
 		}
 		((Dev459*) g_6b5de0)->vtbl->SetRenderState((Dev459*) g_6b5de0, 7, arg);
+	}
 	}
 	return 1;
 	}

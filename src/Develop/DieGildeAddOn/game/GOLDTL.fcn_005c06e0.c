@@ -51,11 +51,11 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 
 	result = 0;
 	if (!a0)
-		return 0;
+		goto none;
 	if (*a0 == 0xffff)
-		return 0;
+		goto none;
 	if (*a0 == g_774970)
-		return 0;
+		goto none;
 	if (!fcn_00525f60(&g_7f4ca0[g_774970], 2))
 		return 0;
 	if (!fcn_00579640(a0, &g_7f4ca0[g_774970])) {
@@ -117,4 +117,6 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 	} while (fcn_005373e0((void*) fcn_005c06e0, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
+none:
+	return 0;
 }

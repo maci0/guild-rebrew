@@ -15,16 +15,14 @@ int __cdecl fcn_004c4250(char* obj)
 	if (*(int*) (obj + 0xc) == 0) {
 		return 0;
 	}
-	e = g_aed324;
+	for (e = g_aed324; e != 0; e = *(char**) (e + 0x95)) {
+		if (*(unsigned char*) (obj + 3) == *(unsigned char*) (e + 3) &&
+				*(int*) (obj + 0xc) == *(int*) (e + 8)) {
+			break;
+		}
+	}
 	if (e == 0) {
 		return 0;
-	}
-	while (!(*(unsigned char*) (obj + 3) == *(unsigned char*) (e + 3) &&
-			*(int*) (obj + 0xc) == *(int*) (e + 8))) {
-		e = *(char**) (e + 0x95);
-		if (e == 0) {
-			return 0;
-		}
 	}
 	*(int*) (obj + 0xc) = 0;
 	*(int*) 0x1005764 = *(unsigned short*) (e + 0x10);

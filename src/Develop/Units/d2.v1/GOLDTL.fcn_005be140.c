@@ -103,12 +103,18 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
 	short *  v4;
 	unsigned int v8;
 	int v9;
+	int kind;
 	unsigned char frame[0x724];
   v2 = a0;
   v3 = fcn_00525fb0(a0);
   if (v3)
     return;
-  v18 = (*(int *)0x868050) + (unsigned int)*v2 * 0x24d;
+  kind = (unsigned int)*v2;
+  v18 = (*(int *)0x868050) + kind;
+  kind = kind + kind * 2;
+  kind = (kind << 4) + (unsigned int)*v2;
+  kind = kind + kind * 2;
+  v18 = v18 + kind * 4;
   v3 = a1;
   if (!a1) {
     v3 = fcn_00502cd0(*(unsigned int *)&v2[0x5d],1,4,2);

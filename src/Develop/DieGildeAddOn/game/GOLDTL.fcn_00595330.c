@@ -67,10 +67,12 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 	int i;
 
 	ent = 0;
-	if (*(int*) 0x7746c4) {
+	if (*(int*) 0x7746c4 == 0) {
+		if (*(int*) 0x7746c8) {
+			ent = (char*) *(int*) 0x7746c8;
+		}
+	} else {
 		ent = (char*) *(int*) 0x7746c4;
-	} else if (*(int*) 0x7746c8) {
-		ent = (char*) *(int*) 0x7746c8;
 	}
 	gm_GetBuildingTypeCategory((unsigned char) *ent);
 	d2_SetForm(a0, 0);
