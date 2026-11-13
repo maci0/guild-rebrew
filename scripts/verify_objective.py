@@ -1,18 +1,13 @@
 #!/usr/bin/env python3
-"""Independently verify every stated done-criterion of the objective.
+"""Compare the raw server DLL with its reference, independently of Rebrew.
 
-Why (round 987): the objective's criteria are checked by `scripts/gate.sh`,
-`rebrew verify`, and `scripts/wine_load_check.sh` -- all project tooling.  This
-script shares no code with any of them: it parses the PE headers directly with
-`struct` and compares raw bytes.  Two independent implementations agreeing is a
-much stronger claim than one tool reporting green, and it is the check that
-catches a tool being wrong about its own project.
-
-Defaults to the raw linker output. Structural checks are diagnostic; success
-requires every file byte and the file length to equal the reference.
+Checks complete file bytes and length and enforces server-specific PE section,
+import and export requirements. It does not verify C recovery, storage ownership,
+client images or Wine loading; see goal.md for the full objective.
 
 Usage: python3 scripts/verify_objective.py [--ref PATH] [--build PATH]
-Exit status: 0 when every criterion below holds, 1 otherwise.
+Exit status: 0 for identical files meeting server checks, 1 for differences,
+2 for handled input errors. Server-specific geometry and import counts are fixed.
 """
 import argparse
 import struct
@@ -124,8 +119,8 @@ def main():
     n = min(len(rd), len(bd))
     diffs = [i for i in range(n) if rd[i] != bd[i]]
     tva, tvs, trp, trs = rs[".text"]
-    # raw-range test in RVA space
     t_rva = tva - rbase
+    # Classify differing file offsets against the raw .text range.
     in_text = sum(1 for i in diffs if trp <= i < trp + trs)
     chk("all differing bytes inside .text", in_text == len(diffs),
         "%d of %d" % (in_text, len(diffs)))

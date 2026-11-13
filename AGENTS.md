@@ -404,64 +404,71 @@ objects does not verify linked placement/data; these checks never earn STATUS.
 
 <!-- rebrew: project rules below, kept by --refresh-agents -->
 
+`rebrew init --refresh-agents` rewrites everything above this marker. The rules
+below are project-specific and survive that refresh.
+
+## Local setup
+
+The generated quick-start source path is a template placeholder; use the
+function VA or the source path printed by `rebrew skeleton` in this tree.
+`test --all` rechecks eligible files for the selected target and records results.
+The configured backend is `unshare`; the GoldTL resource step invokes Docker
+directly. Follow [the build guide](docs/build.md) for this checkout's setup.
+
 ## Provenance ledger
 
 Every change to a deliverable gets an append-only entry in
 [docs/provenance.md](docs/provenance.md): date, change, reason, evidence,
-decision owner, verification. Reversals are new entries.
-
+decision owner, verification. A reversal is a new entry.
 
 ## Game compiler policy
 
 Compile game functions with the canonical flags for their whole translation unit
-and target. Per-function flag searches are `--no-promote` diagnostics, not
-production overrides. Native evidence may establish a different original TU or
-library compilation context; apply its flags to the whole TU. Independently
-compiled libraries and runtime code have their own flag contexts.
+and target. A per-function flag search is a `--no-promote` diagnostic, and its
+flags do not become a production override. When native evidence shows a different
+original TU or library compilation context, apply those flags to the whole TU.
+Independently compiled libraries and runtime code keep their own flag contexts.
 
 ## Assembly and linker gaps
 
-Allow assembly only for evidenced padding or positive evidence that the original
-source very likely used assembly. A byte match, failed C matching search, blocker,
-or `REBREW_ALLOW_NAKED` switch does not establish that evidence. Record reviewed
-original assembly per definition and target with `source document-assembly`.
-Unsupported whole-function reconstructions remain `source = "naked"` work items;
-their byte verdicts do not mean C recovery. Do not disguise them as padding.
+Assembly is allowed for evidenced padding, and where there is positive evidence
+that the original source used assembly. A byte match, a failed C search, a
+blocker or `REBREW_ALLOW_NAKED` is not that evidence. Record reviewed original
+assembly per definition and target with `source document-assembly`. A
+whole-function reconstruction with `source = "naked"` stays a work item: its
+byte verdict is not C recovery, and it is not padding.
 
-Compilation and linker retention are separate facts. Check object contributions,
-selected link inputs, archive extraction and `/OPT:REF` before explaining a gap.
-A compiled TU can lose contributions in one target; a gap alone establishes
-neither a missing source function nor permission to insert bytes.
+A compiled TU and a retained contribution are separate facts. Check object
+contributions, the selected link inputs, archive extraction and `/OPT:REF`
+before explaining a gap. One target can drop a compiled TU's contributions, and
+a gap on its own shows neither a missing source function nor room to insert bytes.
 
-A RELOC or EXACT verdict masks call and data targets, so it cannot show that a
-call names the right function. Before committing a change to a shared source, a
-declaration, a function or global name, or a provider, relink every target that
-compiles the affected files and require zero new LNK2001/LNK2019/LNK2005.
+RELOC masks relocation operands, so a masked verdict cannot show that a call
+or data operand names the right symbol. EXACT establishes bytes for its comparison
+scope; it does not alone establish the selected linked provider. Before committing
+a change to a shared source, declaration, function or global name, or provider,
+relink every target that compiles the
+affected files and require zero new LNK2001, LNK2019 and LNK2005.
 
-## Upstream Rebrew feature gaps and bugs
+## Upstream Rebrew
 
-- Submit every upstream feature gap to `docs/IDEAS-GUILD.md` in the upstream
-  Rebrew checkout when encountered. Include the concrete problem, proposed
-  capability and evidence or replay command. This applies to all Rebrew tooling,
-  including multi-target workflows.
-- Fix upstream Rebrew bugs directly in the upstream checkout. Add a regression
-  test that reproduces the bug and verify the repaired upstream suite before
-  returning to reversing. A project-local workaround or backlog entry does not
-  satisfy a bug fix.
-- The current upstream checkout is
-  `/home/maci/Desktop/Projects/relumea/repos/rebrew`; use its
-  `docs/IDEAS-GUILD.md` for feature gaps. Keep project-specific native evidence
-  here and reusable tooling repairs upstream.
+The upstream checkout is `/home/maci/Desktop/Projects/relumea/repos/rebrew`.
 
-## Naming
+- A missing capability goes in that checkout's `docs/IDEAS-GUILD.md`: the
+  problem, the proposed capability, and the evidence or replay command.
+- A bug is fixed in that checkout, with a regression test, and the repaired
+  upstream suite passes before reversing resumes here. A local workaround or a
+  backlog entry does not close the bug.
 
-Follow [docs/naming_conventions.md](docs/naming_conventions.md) for functions,
-globals, locals, types, constants and files. Preserve attested spelling exactly;
-mark inferred names, use evidenced module prefixes, and keep compiler literals,
-layout spans and source-owned objects distinct.
+Native evidence stays in this repository. A tooling repair goes upstream.
 
-## Project type definitions
+## Naming and types
 
-Current D3 definitions: `src/Develop/Units/d3/d3_object.h`. Keep bindings on stable
-IDs in managed `rebrew-types.toml`; source/header edits require reviewing the
-native evidence and rebinding those IDs through `rebrew types bind`.
+[docs/naming_conventions.md](docs/naming_conventions.md) covers functions,
+globals, locals, types, constants and files: attested spelling kept as written,
+inferred names marked, evidenced module prefixes, and compiler literals, layout
+spans and source-owned objects kept distinct.
+
+D3 definitions are in `src/Develop/Units/d3/d3_object.h`. Bindings stay on stable
+IDs in `rebrew-types.toml`; after a source or header edit, review the native
+evidence and rebind the same IDs with `rebrew types bind`.

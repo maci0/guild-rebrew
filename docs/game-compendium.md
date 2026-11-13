@@ -17,8 +17,9 @@ server, accepts clients, processes commands, sends queues, handles timeouts and
 ticks simulation. Exit at 0x10009350 signals shutdown.
 
 The lobby dispatcher at 0x10014db0 reads message+0x10 values 0-6 for player/config
-and state exchange, then game-command routing. `cm_Chk*` generally validates and
-`cm_Ex*` executes; recover each function's actual result convention.
+and state exchange, then game-command routing. See
+[command naming](naming_conventions.md#function-naming) for the `cm_Chk*` and
+`cm_Ex*` conventions.
 
 ## Network and persistence
 
@@ -43,7 +44,7 @@ are native witnesses; game-guide behavior still needs separate confirmation.
 | Resource | Research use |
 | --- | --- |
 | [Edition database](https://github.com/europa1400-community/europa1400-database) | Build/version metadata |
-| [Community reconstruction](https://github.com/europa1400-community/europa1400-decompilation) | Independent analysis; see our [review](community-research.md) |
+| `europa1400-community/europa1400-decompilation` (HTTP 404 on 2026-11-13) | Historical analysis; see our [review](community-research.md) |
 | [.NET tools](https://github.com/europa1400-community/Europa1400.Tools) | Asset structures/decoders |
 | [Python tools](https://github.com/europa1400-community/europa1400-tools) | Asset conversion |
 | [ImHex patterns](https://github.com/europa1400-community/europa1400-imhex) | Binary formats |
@@ -51,25 +52,5 @@ are native witnesses; game-guide behavior still needs separate confirmation.
 | [Lua tools](https://github.com/maci0/europa1400-lua) | In-process analysis |
 | [OpenMiles](https://github.com/maci0/openmiles) | Separate audio implementation |
 
-These are research links, not claims about current service health or completeness.
-Detailed native paths, packet cases and older surveys remain in the archive.
-
-## Archived techniques
-
-Original notebook: `docs/game-compendium.md` in the [documentation archive](goal-history.md#full-notebooks).
-
-- Europa 1400: The Guild
-- 1. Game identity
-- 2. Gameplay (press-attested)
-- 3. Editions, versions, executables, patches
-- 4. Binaries in this repo (`0x10000000`, `0x10009320`, `0x10009350`)
-- 5. Original source tree (attested)
-- 6. Architecture (`0x00264264`, `0x100093a0`, `0x10014db0`)
-- 7. Network (`0x00264264`, `0x101deb00`, `0x114ffe20`, `0x8004667e`)
-- 8. Persistence (save/load) (`0x10012440`, `0x10012470`, `0x100127d0`, `0x100128f0`, `0x10012eb0`, `0x10013230`, `0x10013b10`, `0x10014070`, `0x10014260`)
-- 9. Diagnostics (error/logging)
-- 10. Memory (m_alloc)
-- 11. Files (vfs)
-- 12. Assets and engine
-- 13. Community ecosystem
-- 14. Repo doc map (this checkout)
+The [archived write-up](goal-history.md#full-notebooks) under this filename
+retains detailed native paths, packet cases and older surveys.

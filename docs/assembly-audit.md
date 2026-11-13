@@ -17,8 +17,8 @@ do not validate a receipt's reasoning or other inputs.
 ## Find outstanding work
 
 ```sh
-.venv/bin/rebrew todo --category naked-reconstruction --target Europa1400Gold.exe --json
-.venv/bin/rebrew lint --all-targets --json
+uv run rebrew todo --category naked-reconstruction --target Europa1400Gold.exe --json
+uv run rebrew lint --all-targets --json
 ```
 
 The todo category reports byte-matched definitions still marked `source = "naked"`.
@@ -36,11 +36,4 @@ selected contributions but does not establish original linker behavior.
 Acceptance requires complete native bodies, operands, literals and the relevant
 raw-image checks.
 
-## Archived techniques
-
-Original notebook: `docs/assembly-audit.md` in the [documentation archive](goal-history.md#full-notebooks).
-
-- Recovery checkpoint (`0x0042c200`, `0x0042c340`, `0x004364f0`, `0x0044f680`, `0x0044f860`, `0x0045dad0`, `0x00465c80`, `0x0046c250`, `0x004c0210`, `0x004c2480`, `0x004c24c0`, `0x004ce130`, `0x004fe1e0`, `0x005a89a0`)
-- What qualifies (`0x004023b2`)
-- Goal88 remaining-list snapshot
-- Replays and limits (`0x00575900`, `0x00575930`)
+Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.

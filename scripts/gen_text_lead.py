@@ -1,4 +1,9 @@
-"""Adjust one .text lead pad per object boundary to remove placement deficits.
+"""Historical .text filler experiment; disabled by default.
+
+This script fabricates placement bytes and is not a reconstruction procedure.
+See docs/tooling-upstream.md before considering its explicit override.
+
+Adjust one .text lead pad per object boundary to remove placement deficits.
 
 A body that compiles shorter or longer than its reference extent leaves every
 later object early or late; the link map measures that. This pass writes a
@@ -7,7 +12,7 @@ measured deficit, so the next object starts where its first metadata row says.
 An existing pad is resized, not duplicated: a second pass after a layout change
 must be able to shrink or grow the pad the first pass wrote.
 
-    uv run scripts/gen_text_lead.py 0x2000
+    uv run python scripts/gen_text_lead.py 0x2000  # expected to refuse by default
 """
 
 import json

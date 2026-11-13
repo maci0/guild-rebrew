@@ -1,6 +1,6 @@
-/* Span annotations for bytes the link already emits.
+/* Historical span declarations; excluded from the current server build.
  * Extern only: this file adds no initialized object, so raw .data
- * stays where the split link put it. Each array is the hole between
+ * stayed where the historical split link put it. Each array is the hole between
  * two named globals, named for the global that follows it.
  */
 
@@ -234,7 +234,7 @@ extern unsigned char g_before_g_c_locale_time_format[0x508];
 
 extern unsigned char g_rdata_before_imports[0x138];
 
-/* Import descriptors, name table, and export directory. postlink copies
+/* Historical import descriptors, name table, and exports. Retired postlink copied
  * this span from the reference; the raw link does not emit it. */
 extern unsigned char g_import_bookkeeping[0x879];
 

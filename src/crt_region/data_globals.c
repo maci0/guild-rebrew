@@ -1,13 +1,13 @@
 /* data_globals.c — GROUP C: CRT-startup + allocator-pool data globals.
  *
- * Plain C definitions for the game's global data objects that the
- * crt_region functions reference as externs.  Each // DATA: marker pins
- * the symbol to its original VA (rebrew DATA mechanism; NAME/SECTION live
- * in src/rebrew-data.toml).  rebrew postlink converges the linked layout
- * onto the reference (copies the reference's .data raw bytes, rewrites
- * .text data operands to reference values), so these definitions mainly
- * need to make the link resolve; leaving them uninitialized keeps them in
- * .bss (zero raw bytes, the PE stays at the reference's raw .data size).
+ * Historical CRT replacement definitions, excluded from the current server.
+ * Retired DATA markers and postlink copying described the old experiment.
+ * Current identities live in rebrew-data.toml; comments do not bind storage.
+ * See docs/data-ownership.md and docs/tooling-upstream.md for current practice.
+ *
+ *
+ *
+ *
  *
  * Types follow the byte-verified extern declarations in this directory
  * (crt_init.c, dllmain.c, malloc.c, free.c, realloc.c, lock_streams.c,

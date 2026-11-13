@@ -17,7 +17,7 @@ Generated outputs are tracked because managed function bindings compile them.
 CMake checks both manifests during configuration and refuses drift.
 
 ```sh
-.venv/bin/rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml
+uv run rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml
 ```
 
 Check is the default. After reviewing patch/manifest edits, add `--apply` to
@@ -50,13 +50,10 @@ Miles is a pinned import library, not a generated vendor tree. Its canonical
 [dependency note](../references/mss-6.1c/README.md) owns the download, hash and
 runtime witnesses. Client configuration and pre-link checks enforce that pin.
 
-## Archived techniques
+## DirectX inputs
 
-Original notebook: `docs/vendoring.md` in the [documentation archive](goal-history.md#full-notebooks).
+GoldTL links local SDK archives and supplementary objects. The
+[DirectX input guide](directx-inputs.md) records paths, hashes, extraction and
+verification limits. These inputs stay unpatched.
 
-- Layout
-- Mechanism
-- zlib 1.1.3 (`0x0045ee00`, `0x0045ee20`, `0x0045f060`, `0x0045f0a0`, `0x0045f110`, `0x0045f240`, `0x0045f2c0`, `0x0045f380`, `0x0045f630`, `0x0045f6d0`, `0x0045f890`, `0x0045f9e0`, `0x0045fa90`, `0x00462c40`, `0x00462c60`, `0x00462ea0`, `0x00462fd0`, `0x00463050`, `0x00463100`, `0x00463330`, `0x00463490`, `0x004635e0`, `0x00463670`, `0x0064e66a`, `0x01040498`, `0x1002706c`)
-- minizip (unzip.c) (`0x004649d2`, `0x00465750`, `0x00465790`)
-- Version and patch audit (2026-10-11)
-- Workaround removal probes (2026-10-11)
+Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.

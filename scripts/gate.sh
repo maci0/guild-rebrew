@@ -1,26 +1,15 @@
 #!/bin/bash
-# gate.sh - the checks a change must pass before it is committed.
-#
-#   rebrew lint           annotation and corpus consistency
-#   cmake --build         builds the raw server.dll with stock libraries
-#   rebrew verify --no-cache  byte comparison plus linked EXACT from the raw DLL
-#   rebrew verify --data  data bytes and symbol placement in the raw link
-#   file identity         the raw DLL equals the reference without postlink
-#
-#   toolchain alignment   each target's configured compiler profile matches the
-#                         code generator actually in its binary (Processor Pack
-#                         vs plain, read from game-code x87 compares)
-#
+# gate.sh - server acceptance checks. Each check is named by its == heading below.
+# Prerequisites and scope: docs/build.md. This script refreshes server verdicts.
 # Usage: scripts/gate.sh
-# Exit status: 0 when all pass, 1 otherwise.
+# Exit status: 0 when all enabled checks pass, 1 otherwise.
 
 set -uo pipefail
 cd "$(dirname "$0")/.." || exit 1
 mkdir -p .scratch
 
-# `rebrew verify` counts game EXACT + RELOC as passed (library-attributed rows are
-# reported separately); PROVEN is not a byte match
-# and fails like any other difference.
+# `summary.passed` includes EXACT and RELOC rows, including library rows;
+# `library_passed` is that library subset. PROVEN is not a byte match.
 BASELINE=${BASELINE:-316}
 rc=0
 
@@ -129,11 +118,8 @@ then
     rc=1
 fi
 
-# Round 934: the objective's last criterion -- "Wine load + exports (Init, Exit)
-# resolve" -- had no check anywhere.  lint/compile/verify/residue all pass on a
-# DLL that cannot be loaded, and "it linked" is not "it loads" when postlink
-# rewrites operands and blits sections.  The check is skipped (not failed) when
-# wine or the cross-compiler is absent, so the gate stays usable off this host.
+# Load the DLL and resolve Init/Exit. Missing Wine or the cross-compiler fails
+# this check; successful linking alone does not establish that the DLL loads.
 echo "== wine load + exports"
 if bash scripts/wine_load_check.sh build/server.dll > .scratch/gate-wine.log 2>&1; then
     tail -1 .scratch/gate-wine.log
@@ -147,9 +133,9 @@ fi
 # Its bodies sit in .text like game code; this check vetoes them so the
 # linker-supplied bytes are not reversed by mistake (the 0x63e931 case: D3DX8
 # _jpeg_calc_output_dimensions was reversed as m_AllocTracked before this).
-# The 907 known matches are LIBRARY-marked in library_d3dx8.h, so this finds
-# only NEW reversals that collide with d3dx8 bodies.  The lib is vendored under
-# references/ so a fresh clone reproduces the check.
+# Library-attributed rows are separate from game recovery. This screen is
+# skipped when the ignored SDK archive is absent; supply it as documented in
+# docs/directx-inputs.md to run the check.
 echo "== lib-match d3dx8 (GOLDTL)"
 if [ -f references/dxsdk8/lib/d3dx8.lib ]; then
     lm=$(rebrew library match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe --json 2>&1)
@@ -261,19 +247,9 @@ except Exception: print("")')
     done <<< "$pins"
 fi
 
-# Objective structural criteria (round 1392): the delivered binary is checked
-# against the reference with NO project tooling -- file size, every section
-# VirtualSize, imports, exports, entry point, and that every differing byte is
-# inside .text.  The residue count is a baseline, not a verdict: this check is
-# red only when the DELIVERABLE regresses structurally (round 1391 proved the
-# three header/layout defects that used to hold it red).
+# Require complete raw-file equality; any code, data, header or length difference
+# fails, even if the structural diagnostics pass.
 echo "== deliverable vs reference, byte for byte"
-# The strongest assertion available, and until round 166 the gate never made it.
-# Every other check here is sectional or structural -- `.data` size, `.reloc` size,
-# the import list, exports, the residue -- and round 119 found `.reloc` sitting
-# unexamined for dozens of rounds precisely because it was a region nobody printed.
-# A whole-file comparison cannot have that failure: it either matches or it does
-# not, and it subsumes every sectional check in this script.
 if cmp -s original/Server/server.dll build/server.dll; then
     echo "raw link is byte-identical to the reference ($(stat -c %s build/server.dll) bytes)"
     echo "residue 0, baseline 0 held"

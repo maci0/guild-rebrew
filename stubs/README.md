@@ -24,27 +24,21 @@ GoldTL also needs `llvm-ar` and these local DirectX inputs:
 - `references/dxsdk8/lib/d3dx8-xpsp1.lib`
 - The JPEG/PNG objects under `references/dxsdk8/supp/`
 
-See [SDK provenance](../references/dxsdk8/VENDOR.md). CMake extracts two
-objects from the XP SP1 archive and checks these hashes during configuration:
-
-| Input | SHA-256 |
-| --- | --- |
-| XP SP1 archive | `c02e4fedf3e2e0964a1eed98ca02b28d68a0a7ac184594b04212216253bfbd9d` |
-| `obj\i386\cd3dximage.obj` | `d0c91f1bf7550ae39709f738416a48710e75aba61749203d8c7b03d5a07fe592` |
-| `obj\i386\jerror.obj` | `e1203fbdc8cb43231d4952b24843030fdd4f332c51e858807bdaf6cbda0516ba` |
-
-The pristine archive stays local and unpatched. Matching a member alone does not
-establish original raw-link composition.
+The [DirectX input guide](../docs/directx-inputs.md) records archive and member
+hashes, provenance and the checks CMake enforces. Keep the archives unpatched.
 
 ## Placeholder stubs
 
 CMake selects `symbol_stubs.c` and `symbol_stubs_extra.c` for each client.
-Gold also selects `symbol_stubs_adopted.c` and `symbol_stubs_adopted2.c`.
+Gold also selects `symbol_stubs_adopted.c`, `symbol_stubs_adopted2.c` and
+`symbol_stubs_adopted3.c`.
 GoldTL adds `abi_stubs.c`, `data_scaffold.c`, `link_scaffold.c` and the C++
 `ctl_locale_stubs.cpp` object. These supply comparison definitions, including
 zero-filled globals and empty functions. Their declarations do not establish
 native types or allocation sizes. Review all selected scaffold files when a
-real provider becomes available.
+real provider becomes available. GoldTL also uses `readd-symbols.rsp` to force
+archive symbols; `readd-members.cmake` currently selects no extra members. Neither
+file establishes original provider selection.
 
 ## Build
 
@@ -65,10 +59,12 @@ objects stay in `build/clients/`. It can replace earlier client images there.
 Gold uses `/ML` with LIBC; GoldTL uses `/MT` with LIBCMT. The configured backend runs
 CL/LINK/LIB in the pinned images. The historical toolchain filename does not
 select Docker execution. GoldTL compiles its resources with a direct Docker
-invocation, so that step still needs Docker with the `unshare` backend.
+invocation, so it needs Docker even when the compiler backend is `unshare`.
 
-The scaffold's `/OPT:NOREF` retains selected contributions while WinMain is a stub.
-It does not establish original retention, providers or successful gameplay.
+The scaffold's `/OPT:NOREF` retains selected contributions. Gold's placeholder
+WinMain is in `src/Develop/DieGildeAddOn/game/GOLD.main.c`; GoldTL has a
+reconstructed body. Retention does not establish
+original providers or successful gameplay.
 
 ## Compare
 
@@ -117,7 +113,6 @@ signatures may need separate TUs.
 allocations. `omitted-sources.cmake` records collision choices, not native identity.
 Do not link server BSS-owner files into client scaffolds.
 
-[linked_manifest.py](linked_manifest.py) reads a successful link map, but counts
-only `symbol_stubs.c.obj` and `abi_stubs.c.obj` as scaffold objects. Its count
-omits the other scaffold files listed above. Keep any output under ignored
-`build/`; do not use that count as a complete scaffold inventory.
+[linked_manifest.py](linked_manifest.py) reads a successful link map but counts
+only `symbol_stubs.c.obj` and `abi_stubs.c.obj`, so its total is not a complete
+scaffold inventory. Keep its output under ignored `build/`.

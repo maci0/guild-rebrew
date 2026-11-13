@@ -3,16 +3,16 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-/* NOT a game override: this is stock LIBCMT __amsg_exit from dllcrt0.obj.
+/* Historical replacement-link experiment; current server excludes this file. NOT a game override: this is stock LIBCMT __amsg_exit from dllcrt0.obj.
  * The bytes at 0x1001ba71 are identical to the library body outside that
  * object's own relocation slots, so the original simply linked it. The same
  * holds for the other functions in this file (see
  * .scratch/libcmt_probe/SUMMARY.md).
  *
- * It stays in the build for a link-side reason only: compiling it keeps
+ * The historical replacement link kept this file: compiling it kept
  * LIBCMT crt0msg.obj out, and that object would add 0x2c2 bytes of
- * runtime-error message strings to .rdata which rdata_restore.c already
- * supplies. Linking both overshoots .rdata by 0x320 and postlink refuses the
+ * runtime-error message strings to .rdata which rdata_restore.c then
+ * supplied. Linking both overshot .rdata by 0x320 and postlink refused the
  * image. Do not treat this file as reversing work to finish.
  *
  * Behaviour: writes the runtime error message and calls the exit hook. The
@@ -301,7 +301,7 @@ fail:
     return 0;
 }
 
-/* LIBCMT dllcrt0 pulls these undecorated CRT names. Alias them to the game
+/* Historical aliases for LIBCMT dllcrt0 undecorated CRT names, using the game
  * copies above so crt0msg.obj / crtmbox.obj are not linked (their .rdata
  * strings inflate the IAT→IMPORT gap past the layout prefix). */
 void __cdecl _NMSG_WRITE(int rterrnum)

@@ -1,9 +1,8 @@
 #!/bin/bash
 # wine_load_check.sh - load the deliverable under Wine and resolve its exports.
 #
-# The 100% objective lists "Wine load + exports (Init, Exit) resolve" as a done
-# criterion, and round 934 found no script checked it: gate.sh covers lint,
-# compile, verify and residue, but nothing ever loaded the built DLL.
+# Called by scripts/gate.sh to check the server's load/export criterion.
+# It resolves Init and Exit without calling them; this is not a gameplay test.
 #
 # Why the copy: passing a deep path straight to Wine's Z: drive
 # fails with error 193 (BAD_EXE_FORMAT) on this host even for the *reference*

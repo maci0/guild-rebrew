@@ -18,20 +18,19 @@ This project's ignored `binsync/` repository is configured for the server. Prese
 it rather than initializing over it. Client states need their own binary bindings.
 Names and source similarity do not establish a compatible state repository.
 
-Install the optional dependencies with `uv sync --extra binsync`.
-Retain required extras on later syncs.
-
 ## Review an exchange
 
 ```sh
-.venv/bin/rebrew binsync summary binsync --target server.dll --json
-.venv/bin/rebrew binsync diff binsync --target server.dll --json
-.venv/bin/rebrew binsync pull binsync --target server.dll --user BRIDGE_USER --no-git --dry-run --json
-.venv/bin/rebrew binsync push binsync --target server.dll --user BRIDGE_USER --dry-run --json
+uv run --extra binsync rebrew binsync summary binsync --target server.dll --json
+uv run --extra binsync rebrew binsync diff binsync --target server.dll --json
+uv run --extra binsync rebrew binsync pull binsync --target server.dll --user REBREW_USER --no-git --dry-run --json
+uv run --extra binsync rebrew binsync push binsync --target server.dll --user REBREW_USER --dry-run --json
 ```
 
-Replace `BRIDGE_USER` with the bridge's BinSync username.
-Do not infer it from the state author in `binsync/metadata.toml`. Resolve binary,
+Replace `REBREW_USER` with Rebrew's own writer username. It must differ from
+the live bridge's username: pull excludes Rebrew's user branch, and push writes
+that branch. Keep the same writer identity for the exchange; do not infer it
+from the state author in `binsync/metadata.toml`. Resolve binary,
 state-health and field conflicts first. `diff` exits 1 for differences. `--no-git`
 uses already-fetched peer state. After reviewing a preview, omit `--dry-run` only
 for the intended apply/export. Re-test changed C contracts and inspect the Git diff.
@@ -49,11 +48,4 @@ Match binary hashes and compatible tool versions. Begin read-only, preserve
 attested names, and preview types before import. Partial layouts and conflicting
 private names must not become bulk canonical types.
 
-## Archived techniques
-
-Original notebook: `docs/collaboration.md` in the [documentation archive](goal-history.md#full-notebooks).
-
-- Collaborating with Git and BinSync
-- Live Ghidra analysis (`0x004b6f00`)
-- State repository and users
-- Review each exchange
+Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.

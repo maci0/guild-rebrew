@@ -1,3 +1,4 @@
 # Remaining work
 
-See [current work](TODO.md) and [completion criteria](../goal.md).
+[Current work](TODO.md) lists the open items and how they were measured.
+[The objective](../goal.md) states the acceptance criteria.

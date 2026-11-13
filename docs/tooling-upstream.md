@@ -1,6 +1,6 @@
 # Tooling
 
-Use `.venv/bin/rebrew <command>` and its public APIs before adding a helper.
+Use `uv run rebrew <command>` and its public APIs before adding a helper.
 `pyproject.toml` and `uv.lock` specify package pins. A sibling tooling checkout is not
 needed for normal reconstruction.
 
@@ -17,7 +17,7 @@ needed for normal reconstruction.
 | Compare function bytes | `test`, `diff`, `diagnose probe` |
 | Check linked operands/placement | `binary relocs`, `build check-text-placement`, `build check-data-placement` |
 | Organize source/link order | `source organize`, `build anchors`, `build link-order` |
-| Check library origin/providers | `library inspect`, `match`, `review-native`, `adopt` |
+| Check library origin/providers | `library inspect`, `library match`, `library review-native`, `library adopt` |
 | Reproduce vendor sources | `library vendor` |
 
 Read the command's help before composing flags. Preview guarded writes and use
@@ -36,10 +36,10 @@ the returned digest. [AGENTS.md](../AGENTS.md) owns metadata and upstream repair
 
 Layout generators do not establish original storage owners.
 `scripts/gen_text_lead.py` is disabled by default and is not a reconstruction
-procedure. The BSS and data-lead generators were retired on 2026-11-12: their
-outputs (`src/bss_layout/*.c`) are committed and verified, and rerunning them
-would reassign ADDRESS bindings and split complete objects. Retired split-link,
-copied-CRT and replacement-import emitters are not build alternatives.
+procedure. The BSS and data-lead generators were removed on 2026-11-12; their
+outputs (`src/bss_layout/*.c`) remain committed. Recreating those generators
+would risk reassigning ADDRESS bindings and splitting complete objects. Retired
+split-link, copied-CRT and replacement-import emitters are not build alternatives.
 
 ## Open gaps
 
@@ -48,12 +48,9 @@ replay evidence. Check installed help and preview the selected target's writes
 before using `data layout fill`. Review the proposed source paths and storage
 ownership before applying the plan.
 
-## Archived techniques
+The managed support-purpose descriptions for `src/crt_region/amsg_exit.c` and
+`src/crt_region/data_restore.c` still describe retired link/postlink recipes.
+Those recipes are retired, and the current server build excludes both files.
+Correcting the labels through locked writers remains separate metadata work.
 
-Original notebook: `docs/tooling-upstream.md` in the [documentation archive](goal-history.md#full-notebooks).
-
-- Project tooling and upstream Rebrew
-- Retained scripts
-- Replacements for retired helpers
-- Upstream receipts
-- Import-table API extraction (2026-10-20)
+Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.

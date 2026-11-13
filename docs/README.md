@@ -2,56 +2,52 @@
 
 # Knowledge base
 
-Use the topic owners below instead of copying their rules, status or findings.
-Historical measurements belong in archives; current verdicts belong in managed
-metadata.
+Start with a task below. Managed metadata holds current verdicts;
+[current work](TODO.md) records a dated snapshot and priorities.
+[Provenance](provenance.md) records decisions, and the
+[archive](goal-history.md#full-notebooks) preserves earlier research.
 
 <a id="reading-order"></a>
 
 ## Start and continue
 
-| Need | Canonical page |
+| Need | Page |
 | --- | --- |
-| Project overview | [Repository README](../README.md) |
+| Project overview | [README](../README.md) |
 | Completion criteria | [Objective](../goal.md) |
-| Project rule owners | [Project principles](project-principles.md) |
-| Current validation and priorities | [Current work](TODO.md) |
-| Work and completion pointers | [Remaining work](remaining-work.md) |
-| Unfinished source questions | [Handoff](HANDOFF.md) |
-| Server setup/build | [Build guide](build.md) |
+| Current status and next actions | [Current work](TODO.md) |
+| Open source questions | [Handoff](HANDOFF.md) |
+| Server build | [Build guide](build.md) |
 | Client comparison builds | [Client guide](../stubs/README.md) |
 | Implementation and metadata rules | [AGENTS.md](../AGENTS.md) |
+| Tool design | [Principles](../PRINCIPLES.md) |
 | Releases | [1.11.0](releases/1.11.0.md), [1.10.0](releases/1.10.0.md) |
 
 ## Workflows
 
-For an Obsidian vault, open the repository root and start with this page.
-Use relative Markdown links; keep `.obsidian/` settings local. Put new notes
-in `docs/` and attachments in `docs/assets/`.
-
-| Topic | Canonical page |
+| Topic | Page |
 | --- | --- |
 | Shared source and analysis | [Git and BinSync](collaboration.md) |
 | CLI selection and upstream tooling | [Tooling](tooling-upstream.md) |
 | Verification and caches | [Verification](verify-performance.md) |
 | Vendor inputs and patches | [Vendoring](vendoring.md) |
+| Client SDK dependencies | [DirectX](directx-inputs.md), [Miles 6.1c](../references/mss-6.1c/README.md) |
 | Process mistakes | [Workflow checks](workflow-traps.md) |
-| Tool design | [Principles](../PRINCIPLES.md) |
 
 <a id="reference-map"></a>
 
 ## Technical reference
 
-A translation unit, or TU, is a source file with its included headers. VA means
+A translation unit (TU) is a source file with its included headers. VA means
 virtual address.
 
-| Question | Canonical page |
+| Question | Page |
 | --- | --- |
 | Which names are attested or inferred? | [Naming](naming_conventions.md) |
-| Which function renames were made, with their evidence? | [Name ledger](name-ledger.tsv) |
+| Which renames were made, and on what evidence? | [Name ledger](name-ledger.tsv) |
 | Where does a definition belong? | [Source layout](source-layout.md) |
 | Who allocates these bytes? | [Data ownership](data-ownership.md) |
-| What compiler/runtime did each target use? | [Build facts](general-knowledge.md) |
+| What compiler and runtime did each target use? | [Build facts](general-knowledge.md) |
 | Which C expression changes the emitted code? | [C shapes](msvc6-c-shapes.md) |
 | Why these registers or stack slots? | [Register allocation](msvc6-allocator.md) |
 | What controls the linked image? | [Link layout](msvc6-link-layout.md) |
@@ -65,15 +61,21 @@ virtual address.
 
 ## Research and history
 
-[Goal history](goal-history.md) lists the notebooks and how to read them.
-The [client/server sharing survey](client-only-sweep.md) and
-[behavioral reviews](behavioral-verdicts.md) are historical research indexes.
-Technical pages retain searchable address indexes and old section anchors where
-needed. An index entry locates a historical claim; it does not validate that claim.
+[Research history](goal-history.md) lists the archived notebooks and the local
+receipts. Topic pages link to their archived write-ups where available. An archived
+claim is historical evidence; check current inputs before relying on it.
 
 ```sh
-uv run rebrew source findings 0x<VA> --json
+uv run rebrew source findings 0x00499950 --json
 ```
 
-[Provenance](provenance.md) is an append-only decision ledger, not a procedure.
-Generated instructions, managed stores and vendor documents stay with their owners.
+Replace the example VA with the address under review. Keep new notes in `docs/`
+and attachments in `docs/assets/`; link to an existing topic before adding a
+second explanation. To use Obsidian, open the repository root and keep
+`.obsidian/` settings local.
+
+`rebrew init --refresh-agents` rewrites [AGENTS.md](../AGENTS.md) above the
+`rebrew: project rules` marker and all of [PRINCIPLES.md](../PRINCIPLES.md).
+The refresh also rewrites and prunes generated `.agents/skills/` files. Keep
+project-specific rules below the marker; see [skill overrides](../AGENTS.md#agent-skills)
+for preserving skill customizations.

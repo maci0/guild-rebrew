@@ -1,8 +1,8 @@
 """Write the linked scaffold manifest from an MSVC map.
 
-The map is the link result. A symbol is scaffold storage when its object
-is ``symbol_stubs.c.obj`` or ``abi_stubs.c.obj``. ``WinMain`` and a renamed function that the map
-attributes to another object are real definitions, not scaffold.
+Counts symbols from ``symbol_stubs.c.obj`` and ``abi_stubs.c.obj`` only;
+other scaffold objects are omitted. ``checked_symbols`` records map origins,
+not proof of recovered implementations or storage ownership. See stubs/README.md.
 
     uv run python stubs/linked_manifest.py \
         build/Europa1400Gold.map build/gold-symbols.json

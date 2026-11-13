@@ -1,6 +1,4 @@
 # Project principles
 
-[The objective](../goal.md) owns acceptance criteria.
-[AGENTS.md](../AGENTS.md) owns implementation rules.
-[PRINCIPLES.md](../PRINCIPLES.md) covers tool design.
-[The knowledge-base index](README.md) assigns documentation ownership.
+See the [objective](../goal.md), [implementation rules](../AGENTS.md) and
+[tool design principles](../PRINCIPLES.md).

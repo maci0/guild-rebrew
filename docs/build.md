@@ -6,10 +6,10 @@ The [current checkpoint](TODO.md) records validation. This guide builds the serv
 ## Prerequisites
 
 These commands use Linux x86_64. Install Git, CMake 3.19+, Make, a C compiler,
-json-c headers, Docker and util-linux. On Debian/Ubuntu:
+Docker and util-linux. On Debian/Ubuntu:
 
 ```sh
-sudo apt-get install git cmake make build-essential pkg-config libjson-c-dev docker.io util-linux
+sudo apt-get install git cmake make build-essential docker.io util-linux
 ```
 
 Install [uv](https://docs.astral.sh/uv/), allow your user to run Docker, then check:
@@ -58,6 +58,10 @@ uv run rebrew toolchain build msvc-6.0-sp5-crt
 The server compiles with plain VC6 SP5, `/MT` and LIBCMT. Its link uses the
 `msvc-6.0-sp5-crt` image. Client compiler/runtime contexts are documented in [build facts](general-knowledge.md#configured-build).
 The `-docker.cmake` filename is historical; the driver uses the configured backend.
+Its generated header and older recovery hints retain Docker wording and the
+`--toolchain` shortcut. That shortcut requires CMake 3.21+; the
+[documented CMake option](https://cmake.org/cmake/help/latest/manual/cmake.1.html#cmdoption-cmake-toolchain)
+is equivalent to `-DCMAKE_TOOLCHAIN_FILE=...`, used below for CMake 3.19 compatibility.
 
 ## Build the server
 
@@ -92,12 +96,19 @@ uv run rebrew verify --target server.dll \
 existing image without a function compile pass or verdict writes; exit 1 reports
 differences. Name the target explicitly because the project defaults to GoldTL.
 
+For the full gate, install its host loader tools on Debian/Ubuntu. The loader
+check fails if Wine or `i686-w64-mingw32-gcc` is absent:
+
+```sh
+sudo apt-get install wine gcc-mingw-w64-i686
+```
+
 The broader [server gate](../scripts/gate.sh) expects the conventional `build/`
 tree and also checks functions, lint, toolchain alignment and Wine load/exports.
 It also screens GoldTL functions against D3DX8 when that archive is present.
 Configure that tree separately with the server options above, replacing
-`build/server-example` with `build`. The gate also requires host `wine` and
-`i686-w64-mingw32-gcc`; its loader check fails when either is absent:
+`build/server-example` with `build`. The gate records server verdicts in managed
+metadata; run it only while sources are stable:
 
 ```sh
 uv run bash scripts/gate.sh

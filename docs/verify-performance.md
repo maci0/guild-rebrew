@@ -7,6 +7,7 @@ explains verdict limits; [build instructions](build.md) cover raw images.
 | --- | --- | --- |
 | Existing image data | `rebrew verify --data` | None unless functions are requested |
 | Existing image structure | `rebrew verify --whole-binary` | None unless functions are requested |
+| Function placement and linked EXACT | `rebrew verify --text --raw-link` | Function checks and linked-image comparison |
 | Function bodies | `rebrew verify` | Cached or fresh compilation/comparison |
 | Functions and data | `rebrew verify --functions --data` | Both pipelines |
 | Recheck every selected function | `rebrew verify --no-cache` | Rechecks verdicts; may reuse objects |
@@ -39,13 +40,4 @@ confirm the process/lock state before retrying.
 Clear disposable compiled objects with `rebrew cache clear --force`. Preserve
 verification baselines and research receipts when cleaning local state.
 
-## Archived techniques
-
-Original notebook: `docs/verify-performance.md` in the [documentation archive](goal-history.md#full-notebooks).
-
-- Verification and runner performance
-- Choose the check
-- Causes and fixes
-- Runner and caches
-- Imported slots
-- Replays
+Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.

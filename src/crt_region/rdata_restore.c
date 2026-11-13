@@ -1,4 +1,4 @@
-/* rdata_restore.c — missing .rdata middle content.
+/* Historical .rdata restoration experiment; current server excludes this file.
 
 The game's .rdata between the zlib tables and the CRT strings (original
 offsets 0x252e8..0x26608 (ends at the import descriptors)) is referenced by
@@ -6,13 +6,13 @@ inline-asm dumps and string literals that the decompiled sources never
 define: the VFS ".BIN" extension
 strings, the compression float tables, the game balance tables, a table of
 CRT lock-function pointers, and the CRT error/locale strings.  The original
-binary was linked with these as unreferenced-but-kept .rdata contributions;
+experiment assumed the binary kept these as unreferenced .rdata contributions;
 this TU reproduces the exact bytes so the section lands at the original RVA.
 
-The data is emitted as one blob and placed in the link right after
-trees.c.obj (see order_sources.py), so its .rdata contribution starts at
-0x252e8 exactly like the original's.  Always compiled so byte-identity
-builds consume it.
+The experiment emitted one blob and placed it in the link right after
+trees.c.obj (historical order_sources.py), so its .rdata contribution starts at
+0x252e8 in that recipe. Historically compiled so byte-identity
+builds consumed it; current builds use the selected source/library owners.
 
 */
 const unsigned char g_rdata_restore[] = {

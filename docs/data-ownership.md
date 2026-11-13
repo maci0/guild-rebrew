@@ -41,9 +41,9 @@ C type, complete extent and allocation ownership as separate claims.
 
 ## Review and verify
 
-Use `.venv/bin/rebrew data list --all-targets --json`,
-`.venv/bin/rebrew data bss --target server.dll --json`, and
-`.venv/bin/rebrew lint --all-targets --json` to inspect the catalog. Change rows only through locked
+Use `uv run rebrew data list --all-targets --json`,
+`uv run rebrew data bss --target server.dll --json`, and
+`uv run rebrew lint --all-targets --json` to inspect the catalog. Change rows only through locked
 writers. Compare bytes and placement against the matching raw image/map; owner
 assignment itself does not promote a verdict.
 
@@ -51,12 +51,4 @@ The [ownership audit](data-ownership-evidence.json) retains CRT/overlap evidence
 [Link layout](msvc6-link-layout.md) covers physical placement; [AGENTS.md](../AGENTS.md)
 owns the full storage rules.
 
-## Archived techniques
-
-Original notebook: `docs/data-ownership.md` in the [documentation archive](goal-history.md#full-notebooks).
-
-- Extents and layout
-- Historical storage investigation, October 4 (`0x10034684`, `0x10035408`, `0x11766788`)
-- Check changes
-- VFS stream and directory entry are distinct (Goal81, 2026-10-17) (`0x006b7fe4`, `0x006b7fec`)
-- Stream contracts do not create storage owners (Goal82, 2026-10-17) (`0x006500c2`, `0x00699820`, `0x006a22a8`, `0x006a22c0`, `0x006a23ac`, `0x006a23d0`, `0x010058e0`, `0x010058e4`)
+Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.

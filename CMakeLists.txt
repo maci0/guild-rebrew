@@ -808,18 +808,9 @@ endforeach()
 # ---------------------------------------------------------------------------
 # Per-file CFLAGS come from rebrew-functions.toml, not from the sources
 # ---------------------------------------------------------------------------
-# The flags a translation unit compiles with are the metadata's business: that
-# is what `rebrew test`/`verify`/`match` resolve, and what the numbers in every
-# file's notes were measured with.  Reading the `// CFLAGS:` annotation out of
-# the .c instead means a file whose annotation disagreed with its metadata
-# compiles something no tool ever measured: gm_AllocSpieler ran that way
-# (annotation /O2 /Gd /Oa, metadata /Oa /Ow, every note measured on the
-# metadata) and was 363 linked bytes behind its own notes.
-#
-# `rebrew build cmake-flags` resolves every source through the same chain the tools
-# use and writes the table; this file only consumes it.  The metadata is a
-# configure dependency, so editing it reconfigures the build instead of
-# silently reusing baked COMPILE_FLAGS.
+# `rebrew build cmake-flags` resolves each TU's effective flags from managed
+# metadata and project defaults. Both TOML inputs are configure dependencies;
+# the next build reconfigures. Source comments do not select compiler flags.
 function(rebrew_apply_cflags target_name cmake_target source_list suffix)
   if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
     set(REBREW_BIN "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
