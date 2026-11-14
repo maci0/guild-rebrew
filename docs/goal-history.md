@@ -34,7 +34,8 @@ tar -xOf docs/archive/2026-11-05-documentation.tar.xz docs/msvc6-c-shapes.md | l
 ## Local receipts
 
 Research receipts are under `../guild-rebrew-archive/2026-11-05/` and, for the
-1.11.0 to 1.12.0 rounds, `../guild-rebrew-archive/2026-11-13/`, relative to
+1.11.0 to 1.12.0 rounds, `../guild-rebrew-archive/2026-11-13/`, and for the
+1.13.0 round, `../guild-rebrew-archive/2026-11-14/`, relative to
 the checkout root. Former `.scratch/` paths are under `scratch/` in each; the
 2026-11-05 archive also holds former `.rebrew/` state under `rebrew-state/`.
 The directories are local only.
