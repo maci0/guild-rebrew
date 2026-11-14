@@ -108,7 +108,6 @@ void __cdecl fcn_005e5ea0(char* participant)
 	Panel msg;
 	char* entity;
 	int dlg;
-	double f;
 
 	st = *(Stamp*) &g_7f4c00;
 	fcn_00500bb0(&st, 0x18, 0, 0);
@@ -139,12 +138,8 @@ void __cdecl fcn_005e5ea0(char* participant)
 				st.b += *(int*) (entity + 0x70) ? 0 : 2;
 				value = fcn_00500d20(entity + 0x44, (void*) 0x7f4c00);
 				n = fcn_00500d20(entity + 0x44, &st);
-				f = (double) value / n;
-				if (!(f < g_6628a0)) {
-					f = g_6628a0;
-				}
-				f = f * g_662cf8;
-				d2_SetElementValue(timer1, 0, 100, (int) f);
+				d2_SetElementValue(timer1, 0, 100,
+					(int) ((((float) value / n < 1.0f) ? ((float) value / n) : 1.0f) * 100.0f));
 			}
 			else {
 				st = *(Stamp*) &g_7f4c00;

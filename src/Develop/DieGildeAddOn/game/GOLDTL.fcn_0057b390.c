@@ -82,7 +82,7 @@ void __cdecl fcn_0057b390(char* e)
 						     *(unsigned char*) (s + 0x180) == 0x8d)) {
 							fcn_005904a0(s, 1);
 						}
-					} else if (0.5 < r && *(int*) (s + 0x17c) == 0) {
+					} else if (r > 0.5 && *(int*) (s + 0x17c) == 0) {
 						d = fcn_0050f950(*(unsigned short*) (u + 0x27), *(unsigned short*) s);
 						if (-(int) (gm_RandomMod(0x4a) & 0xffff) < d) {
 							memset(&m, 0, sizeof(m));
@@ -119,7 +119,7 @@ void __cdecl fcn_0057b390(char* e)
 				     *(unsigned char*) (s + 0x180) == 0x8d ||
 				     *(unsigned char*) (s + 0x180) == 0) &&
 				    (cur == 0 || cur != s)) {
-					if (0.75 < gm_RandomFloat01()) {
+					if (gm_RandomFloat01() > 0.75) {
 						fcn_005904a0(s, 0);
 					} else if (cur != 0 && (*(unsigned char*) (cur + 0x1b4) & 1) &&
 						   *(int*) (s + 0x184) != 0) {

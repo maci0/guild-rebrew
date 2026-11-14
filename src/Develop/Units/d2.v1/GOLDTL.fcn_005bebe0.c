@@ -77,24 +77,29 @@ void __cdecl fcn_004c5530(MsgBebe* msg);
 /* ADDRESS: GOLDTL 0x005bebe0 */
 void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 {
-	float f;
-	int miss;
-	char* slot;
-	unsigned char color;
-	int flag;
-	int ids[5] = {0x3a, 0x1a, 0x17, 0x18, 0x19};
-	int found;
-	int yoff[5] = {0x25e, 0x264, 0x26a, 0x270, 0x276};
-	MsgBebe msg;
 	int big[0x88];
-	int level;
-	float dur;
+	MsgBebe msg;
+	int yoff[5] = {0x25e, 0x264, 0x26a, 0x270, 0x276};
+	int found;
+	int ids[5];
+	int flag;
+	unsigned char color;
+	char* slot;
+	int miss;
+	unsigned char level;
+	float f;
 	int h;
+	int x;
 
 	slot = fcn_005463a0(2, 2, g_774970, 0, 0x60);
 	memset(big, 0, sizeof(big));
-	big[0] = 1;
 	flag = 0;
+	ids[0] = 0x3a;
+	ids[1] = 0x1a;
+	ids[2] = 0x17;
+	ids[3] = 0x18;
+	ids[4] = 0x19;
+	big[0] = 1;
 	if (a2 >= 5) {
 		return;
 	}
@@ -123,51 +128,53 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 	io_AppendText(0x16af, a2 + 0x16b7);
 	io_AppendText(a2 + 0x16c3);
 	d2_SetForm(h, 2);
+	x = ((struct s_1015f4c*) g_1015f4c)[g_772514].x;
 	f = (float) *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2) * g_664168;
 	if (!(f < g_662a98)) {
 		f = g_662a98;
 	}
-	found = fcn_0046f740(((struct s_1015f4c*) g_1015f4c)[g_772514].x / 2 - 0x18, 4,
-			     (int) ((float) yoff[a2] + f), g_772514);
-	fcn_00534160(((struct s_1015f4c*) g_1015f4c)[g_772514].x / 2 - 0x23, 0x3c, *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2), 0x4df);
+	found = fcn_0046f740(x / 2 - 0x18, 4, (int) ((float) yoff[a2] + f), g_772514);
+	fcn_00534160(x / 2 - 0x23, 0x3c, *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2), 0x4df);
 	d2_SetForm(h, 3);
 	if (slot != 0) {
 		io_AppendText(0x16b3, *(unsigned char*) (slot + 0xae) + 0x16b7, a2 + 0x16b7);
 	} else if (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2) >= 0xfc) {
 		io_AppendText(0x16b2);
-	} else if (*(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x194) < (int) color) {
+	} else if (*(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x194) >= (int) color) {
+		if (miss == 0) {
+			switch (fcn_0051e070()) {
+			case 0:
+				io_AppendText(0x16b1, color, a2 + 0x16b7);
+				break;
+			case 1:
+				io_AppendText(0x16b1, color, a2 + 0x16b7);
+				break;
+			}
+			flag = 1;
+		} else {
+			switch (fcn_0051e070()) {
+			case 0:
+				io_AppendText(0x16b0,
+					     (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 9) != 0 ? 0x28 : 0) + 0x253 +
+						     *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x169),
+					     color, a2 + 0x16b7);
+				break;
+			case 1:
+				io_AppendText(0x16b0,
+					     (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 9) != 0 ? 0x28 : 0) + 0x253 +
+						     *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x169),
+					     a2 + 0x16b7, color);
+				break;
+			}
+			flag = 1;
+		}
+	} else {
 		io_AppendText(0x16b4, color, a2 + 0x16b7);
-	} else {
-	if (miss != 0) {
-		switch (fcn_0051e070()) {
-		case 0:
-			io_AppendText(0x16b0,
-				     0x253 +
-					     (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 9) != 0 ? 0x28 : 0) +
-					     *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x169),
-				     color, a2 + 0x16b7);
-			break;
-		case 1:
-			io_AppendText(0x16b0,
-				     0x253 +
-					     (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 9) != 0 ? 0x28 : 0) +
-					     *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x169),
-				     a2 + 0x16b7, color);
-			break;
-		}
-	} else {
-		switch (fcn_0051e070()) {
-		case 0:
-		case 1:
-			io_AppendText(0x16b1, color, a2 + 0x16b7);
-			break;
-		}
-	}
-	flag = 1;
 	}
 	do {
 		if (slot != 0 && found != -1) {
 			Tbebe t;
+			float dur;
 
 			t = *(Tbebe*) (slot + 0x44);
 			fcn_00500bb0(&t, 5, 0, 0);
@@ -193,7 +200,7 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 		} else if (g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) 0x5bebe0, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) fcn_005bebe0, 0x677c7) != 0);
 	fcn_00532ef0();
 	fcn_00471e30(h);
 }

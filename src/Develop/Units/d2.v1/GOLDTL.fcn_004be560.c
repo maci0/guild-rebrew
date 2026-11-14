@@ -1,11 +1,14 @@
 extern int g_772514;
 extern char* g_1015ea0;
-extern char* g_entity_type_table;
+extern unsigned char* lpGebaeudePROT;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
 extern int g_67d370;
 extern unsigned short g_7f3ee4;
+extern int g_90d520[];
+extern int g_14a79c0[];
+extern char g_679060[];
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -16,7 +19,7 @@ void __cdecl fcn_005039e0(int);
 int __cdecl fcn_00502cd0(int, int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0046f740(int, int, int, int);
-int __cdecl sprintf(char*, const char*, ...);
+int __cdecl fcn_0064d41a(char*, const char*, ...);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
@@ -28,10 +31,9 @@ void __cdecl fcn_004116d0(void);
 unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 {
 	int items[10];
-	char* src;
+	unsigned char* src;
 	char* q;
 	char* e;
-	char* v;
 	int win;
 	int t;
 	int n;
@@ -39,16 +41,16 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 	unsigned int ret;
 
 	ret = a2;
-	src = g_entity_type_table + (unsigned char) *a0 * 0x24d;
+	src = lpGebaeudePROT + (unsigned char) *a0 * 0x24d;
 	a2 = fcn_00470820(0, 0, (char*) 0x6816e8);
 	fcn_00471b60(a2);
 	d2_SetForm(a2, 4);
 	fcn_00472250(a2, 4, io_AppendText(0x7d));
 	d2_SetForm(a2, 2);
 	win = a2;
-	n = 0;
 	if (*src == 0x1c) {
 		q = (char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 0, 0x1dc, 6);
+		n = 0;
 		if (!q) {
 			goto tail;
 		}
@@ -57,19 +59,21 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 			goto tail;
 		}
 		do {
-			if (*(int*) (e + 0xe) >= 2) {
-				items[n] = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40, *(unsigned short*) e + 0xdf, g_772514);
-				v = (char*) (items[n] * 0x2f4 + (int) g_1015ea0);
-				*(unsigned int*) (v + 0x5c) = 1;
-				*(unsigned int*) (v + 0x1d0) = 3;
-				*(unsigned int*) (v + 0x1e4) = 0x525;
-				*(int*) (0x90d520 + n * 4) = *(unsigned short*) e;
+			if (*(int*) (e + 0xe) > 1) {
+				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
+					*(unsigned short*) e + 0xdf, g_772514);
+				items[n] = t;
+				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
+				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 3;
+				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1e4) = 0x525;
+				g_90d520[n] = *(unsigned short*) e;
 				n++;
 			}
 			e = (char*) gm_NextEntityQueryMatch();
 		} while (e);
 	} else if (*src == 9) {
 		q = (char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 0, 0x116, 6);
+		n = 0;
 		if (!q) {
 			goto tail;
 		}
@@ -79,12 +83,13 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 		}
 		do {
 			if (*(int*) (e + 0xe) >= 1) {
-				items[n] = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40, *(unsigned short*) e + 0xdf, g_772514);
-				v = (char*) (items[n] * 0x2f4 + (int) g_1015ea0);
-				*(unsigned int*) (v + 0x5c) = 1;
-				*(unsigned int*) (v + 0x1d0) = 3;
-				*(unsigned int*) (v + 0x1e4) = 0x525;
-				*(int*) (0x90d520 + n * 4) = *(unsigned short*) e;
+				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
+					*(unsigned short*) e + 0xdf, g_772514);
+				items[n] = t;
+				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
+				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 3;
+				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1e4) = 0x525;
+				g_90d520[n] = *(unsigned short*) e;
 				n++;
 			}
 			e = (char*) gm_NextEntityQueryMatch();
@@ -92,52 +97,46 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 	} else {
 		fcn_005039e0((int) a0);
 		q = (char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 0, 0xff, 6);
+		n = 0;
 		for (i = 0; i < g_7f3ee4; i++) {
-			e = (char*) fcn_00502cd0(*(int*) (q + 0x14), 1, 0, *(int*) (0x90d520 + n * 4));
-			if (e && *(int*) (e + 0xe) >= 2) {
-				items[n] = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40, *(int*) (0x90d520 + n * 4) + 0xdf, g_772514);
-				v = (char*) (items[n] * 0x2f4 + (int) g_1015ea0);
-				*(unsigned int*) (v + 0x5c) = 1;
-				*(unsigned int*) (v + 0x1d0) = 0x23;
-				*(unsigned int*) (v + 0x1e4) = 0x525;
-				*(unsigned int*) (v + 0x1dc) = 4;
-				*(unsigned int*) (v + 0x1e0) = 0xf;
-				sprintf((char*) (v + 0xcc), (char*) 0x679060, *(int*) (*(int*) (0x90d520 + n * 4) * 8 + 0x14a79c0));
+			e = (char*) fcn_00502cd0(*(int*) (q + 0x14), 1, 0, g_90d520[n]);
+			if (e && *(int*) (e + 0xe) > 1) {
+				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
+					g_90d520[n] + 0xdf, g_772514);
+				items[n] = t;
+				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
+				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 0x23;
+				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1e4) = 0x525;
+				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1dc) = 4;
+				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1e0) = 0xf;
+				fcn_0064d41a((char*) (t * 0x2f4 + g_1015ea0 + 0xcc),
+					g_679060, g_14a79c0[g_90d520[n] * 2]);
 				n++;
 			}
 		}
 	}
 tail:
 	g_7f3ee4 = (unsigned short) n;
-	*(int*) (0x90d520 + n * 4) = 0;
+	g_90d520[n] = 0;
 	t = fcn_0046f740((n % 4) * 0x40 + 7, (n / 4) * 0x40 + 7, 0x527, g_772514);
 	items[n] = t;
-	v = (char*) (t * 0x2f4 + (int) g_1015ea0);
-	*(unsigned int*) (v + 0x5c) = 1;
-	*(unsigned int*) (v + 0x1d0) = 3;
-	t = fcn_005373e0(0x4be560, 0x657c7);
-	do {
-		if (!t) {
-			fcn_00471e30(win);
-			fcn_004116d0();
-			return ret;
-		}
+	*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
+	*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 3;
+	while (fcn_005373e0(0x4be560, 0x657c7)) {
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			t = 0;
-			if (g_7f3ee4 != 0xffff) {
-				do {
-					if (g_67d370 == items[t]) {
-						ret = *(int*) (0x90d520 + t * 4);
-						g_774654 = 1;
-						break;
-					}
-					t++;
-				} while (t < (int) (g_7f3ee4 + 1));
+			for (t = 0; t < g_7f3ee4 + 1; t++) {
+				if (g_67d370 == items[t]) {
+					ret = g_90d520[t];
+					g_774654 = 1;
+					break;
+				}
 			}
 		}
-		t = fcn_005373e0(0x4be560, 0x657c7);
-	} while (1);
+	}
+	fcn_00471e30(win);
+	fcn_004116d0();
+	return ret;
 }

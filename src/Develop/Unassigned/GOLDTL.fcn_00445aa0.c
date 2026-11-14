@@ -15,7 +15,7 @@ char __cdecl fcn_00445aa0(char* a0, unsigned int a1, float a2)
 	int flag;
 	int v4;
 	int v5;
-	int i;
+	unsigned int i;
 
 	if (a0 == 0 || a1 >= 7 || !(a2 >= 0.0f) || !(a2 <= 1.0f) || *(int*) (a0 + 0x218) < 5 || (v3 = *(char**) (a0 + 0x1e8)) == 0)
 		return 0;
@@ -50,10 +50,10 @@ char __cdecl fcn_00445aa0(char* a0, unsigned int a1, float a2)
 L:
 	*(float*) (a0 + 0x90) = (*(float*) (v2 + 0x28) - *(float*) (v1 + 0x28)) * t + *(float*) (v1 + 0x28);
 	*(float*) (a0 + 0x98) = (*(float*) (v2 + 0x2c) - *(float*) (v1 + 0x2c)) * t + *(float*) (v1 + 0x2c);
-	for (i = 0; i < 3; i++) {
-		v14[i] = (*(float*) (v2 + i * 4) - *(float*) (v1 + i * 4)) * t + *(float*) (v1 + i * 4);
-		*(float*) (a0 + 0x5c + i * 4) = (*(float*) (v2 + 0x18 + i * 4) - *(float*) (v1 + 0x18 + i * 4)) * t + *(float*) (v1 + 0x18 + i * 4);
-		v15[i] = (*(float*) (v2 + 0xc + i * 4) - *(float*) (v1 + 0xc + i * 4)) * t + *(float*) (v1 + 0xc + i * 4);
+	for (i = 0; i < 12; i += 4) {
+		*(float*) ((char*) v14 + i) = (*(float*) (v2 + i) - *(float*) (v1 + i)) * t + *(float*) (v1 + i);
+		*(float*) (a0 + 0x5c + i) = (*(float*) (v2 + 0x18 + i) - *(float*) (v1 + 0x18 + i)) * t + *(float*) (v1 + 0x18 + i);
+		*(float*) ((char*) v15 + i) = (*(float*) (v2 + 0xc + i) - *(float*) (v1 + 0xc + i)) * t + *(float*) (v1 + 0xc + i);
 	}
 	fcn_00438b40(a0, v14);
 	fcn_00438cb0(a0, v15);

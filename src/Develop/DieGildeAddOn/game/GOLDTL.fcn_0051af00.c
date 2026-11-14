@@ -160,8 +160,9 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			if (c != '%' && c != '$' && c != '{') {
 				break;
 			}
-		r = text.buf[i + 1] - '0';
+		c = text.buf[i + 1];
 		i++;
+		r = c - '0';
 		if (r >= 0 && r <= 9) {
 			i++;
 		} else {

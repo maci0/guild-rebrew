@@ -69,8 +69,8 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 	int sel;
 	int row;
 	int min;
-	int max;
 	int count;
+	int max;
 	int total;
 	int i;
 	int n;
@@ -141,23 +141,28 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 		} while (t != 0);
 		if (total >= 3 && count != 0) {
 			t = gm_StartFilteredEntitySearch(1, 5, sel);
-			found = (unsigned int) g_6b8010;
 			if (t == 0) {
+				found = (unsigned int) g_6b8010;
 				fcn_004432d0(0, 1);
 				rowbase = (char*) (lpGebaeudePROT + row * 0x24d);
 				fcn_00597ff0(row, names);
 				n = fcn_00598150(names, ids);
 				rec = (char*) ids[gm_RandomMod(n) & 0xffff];
 				i = 0;
-				while (rec == 0) {
-					if (n <= i) {
+				if (rec == 0) {
+					do {
+						if (i >= n) {
+							break;
+						}
+						if (ids[i] != 0) {
+							rec = (char*) ids[i];
+						}
+						i++;
+					} while (rec == 0);
+					if (rec == 0) {
 						ReportClientMessage(g_68de2c);
 						return;
 					}
-					if (ids[i] != 0) {
-						rec = (char*) ids[i];
-					}
-					i++;
 				}
 				fcn_00455350(rec, (float*) (rec + 0x4c), info.position);
 				fcn_00598740(rotation, (int) rec);
@@ -209,10 +214,11 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 				}
 				best = 0;
 				for (i = 0; i < count; i++) {
-					n = gm_WalkEntityChain(*(unsigned short*) cand[i]);
-					if (value < n) {
+					rec = (char*) cand[i];
+					n = gm_WalkEntityChain(*(unsigned short*) rec);
+					if (n > value) {
+						best = rec;
 						value = n;
-						best = (char*) cand[i];
 					}
 				}
 				if (best != 0 && best != existing) {

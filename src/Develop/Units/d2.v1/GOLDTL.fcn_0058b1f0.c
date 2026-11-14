@@ -49,58 +49,56 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 	int saved;
 	int count;
 	int i;
-	int y;
-	int mark;
 	int id1;
 	int id2;
-	int form;
 
 	saved = 0;
 	if (type == (unsigned int) st->type) {
 		saved = *(int*) (g_1016198 + st->slot * 0x3cc);
 	}
 	d2_SetForm(st->handle, 2);
-	io_AppendText(0x6811b0);
+	io_AppendText((int) g_6811b0);
 	d2_SetForm(st->handle, 4);
-	io_AppendText(0x6811b0);
+	io_AppendText((int) g_6811b0);
 	fcn_00533f40(0, 0, st->owner, st->slot, 0x35, &id2, &id1, (int*) &type);
 
 	item = (SlotItem*) FindSlotEntryFiltered(0, a0, 0, 0, st->type);
 	count = 0;
-	y = 2;
-	de = st->entries;
-	while (item != 0) {
-		de->item = item;
-		de->id = item->id;
-		de->kind = fcn_004f1790(*(int*) (a0 + 0x65), (int*) item);
-		if (item->flag != -1) {
-			form = g_665f68[st->type];
-		} else {
-			form = g_665f58[st->type];
-		}
-		de->btn = fcn_0046f740(1, y, form, st->slot);
-		mark = fcn_0057b9d0(a0, item->id, (unsigned char) de->kind);
-		if (mark != 0) {
-			fcn_0046f740(0xf, y + 7, 0x7de, st->slot);
-		}
-		*(int*) ((char*) g_1015ea0 + 0x5c + de->btn * 0x2f4) = 1;
-		*(int*) ((char*) g_1015ea0 + 0x1d0 + de->btn * 0x2f4) = 3;
-		item = (SlotItem*) FindSlotEntryFiltered(0, a0, item, 0, st->type);
-		count++;
-		y += 0x35;
-		de++;
+	if (item != 0) {
+		int y = 2;
+		de = st->entries;
+		do {
+			de->item = item;
+			de->id = item->id;
+			de->kind = fcn_004f1790(*(int*) (a0 + 0x65), (int*) item);
+			de->btn = fcn_0046f740(1, y, (item->flag == -1) ? g_665f58[st->type] : g_665f68[st->type], st->slot);
+			if (fcn_0057b9d0(a0, item->id, (unsigned char) de->kind)) {
+				fcn_0046f740(0xf, y + 7, 0x7de, st->slot);
+			}
+			*(int*) ((char*) g_1015ea0 + 0x5c + de->btn * 0x2f4) = 1;
+			*(int*) ((char*) g_1015ea0 + 0x1d0 + de->btn * 0x2f4) = 3;
+			item = (SlotItem*) FindSlotEntryFiltered(0, a0, item, 0, st->type);
+			count++;
+			y += 0x35;
+			de++;
+		} while (item != 0);
 	}
-	if (count <= st->selected) {
+	if (st->selected >= count) {
 		st->selected = 0;
 	}
 	*(int*) ((char*) g_1015ea0 + 0x3c + st->selected * 0x2f4) = 1;
 	*(int*) ((char*) g_1015ea0 + 0x38 + st->entries[st->selected].btn * 0x2f4) = 1;
-	de = st->entries + count;
-	for (i = 0x10 - count; i > 0; i--, de++) {
-		de->item = 0;
-		de->id = 0xff;
-		de->kind = -1;
-		de->btn = -1;
+	if (count < 0x10) {
+		de = st->entries + count;
+		i = 0x10 - count;
+		do {
+			de->item = 0;
+			de->id = 0xff;
+			de->kind = -1;
+			de->btn = -1;
+			de++;
+			i--;
+		} while (i != 0);
 	}
 	*(int*) (g_1016198 + st->slot * 0x3cc) = saved;
 	*(int*) (g_1016198 + st->slot * 0x3cc + 0x1c) = 0x35;

@@ -99,94 +99,90 @@ void __cdecl ch_Updatelowpoly(char* obj)
 			return;
 		}
 		if (*(char**) (obj + 0x88) == g_10432c0) {
-			if (g_6b5c34 == 1 && g_6b8014 != 0
-			    && (dx = *(float*) (g_6b8014 + 0x4c) - *(float*) (*(char**) (obj + 0x34) + 0x4c),
-			         dy = *(float*) (g_6b8014 + 0x50) - *(float*) (*(char**) (obj + 0x34) + 0x50),
-			         dz = *(float*) (g_6b8014 + 0x54) - *(float*) (*(char**) (obj + 0x34) + 0x54),
-			         dz = (float) sqrt(dz * dz + dy * dy + dx * dx),
-			         dz < 1500.0f)) {
-				goto detailed_model;
+			if (g_6b5c34 != 1) {
+				goto lowpoly_model;
 			}
-			if (*(int*) (*(char**) (obj + 0x34) + 0x218) != 1) {
-				fcn_00442c00(*(char**) (obj + 0x34), 0);
+			if (g_6b8014 == 0) {
+				goto lowpoly_model;
 			}
-			if ((*(int*) (obj + 0x2c) == g_67530c && *(int*) (obj + 0x30) == g_675310) || *(int*) (obj + 0x30) == 0) {
-				if (*(int*) (*(char**) (obj + 0x22c) + 0x218) == 1 && (obj[0x8c] & 0x20) == 0) {
-					fcn_00442c00(*(char**) (obj + 0x22c), 1);
+			dx = *(float*) (g_6b8014 + 0x4c) - *(float*) (*(char**) (obj + 0x34) + 0x4c);
+			dy = *(float*) (g_6b8014 + 0x50) - *(float*) (*(char**) (obj + 0x34) + 0x50);
+			dz = *(float*) (g_6b8014 + 0x54) - *(float*) (*(char**) (obj + 0x34) + 0x54);
+			dz = (float) sqrt(dz * dz + dy * dy + dx * dx);
+			if (!(dz < 1500.0f)) {
+			lowpoly_model:
+				if (*(int*) (*(char**) (obj + 0x34) + 0x218) != 1) {
+					fcn_00442c00(*(char**) (obj + 0x34), 0);
+				}
+				if ((*(int*) (obj + 0x2c) == g_67530c && *(int*) (obj + 0x30) == g_675310) || *(int*) (obj + 0x30) == 0) {
+					if (*(int*) (*(char**) (obj + 0x22c) + 0x218) == 1 && (obj[0x8c] & 0x20) == 0) {
+						fcn_00442c00(*(char**) (obj + 0x22c), 1);
+					}
+				} else {
+					if (*(int*) (*(char**) (obj + 0x22c) + 0x218) != 1) {
+						fcn_00442c00(*(char**) (obj + 0x22c), 0);
+					}
+				}
+				if (*(int*) (*(char**) (obj + 0x22c) + 0x218) != 1
+				    && *(char**) (*(char**) (obj + 0x22c) + 0x1cc) != 0
+				    && !CompareVector3WithinTolerance((float*) (*(char**) (obj + 0x22c) + 0x4c),
+				                       (float*) (*(char**) (obj + 0x34) + 0x4c), 2.0f)) {
+					fcn_00438b40(*(char**) (obj + 0x22c), (int*) (*(char**) (obj + 0x34) + 0x4c));
+				}
+				if (*(char**) (*(char**) (obj + 0x34) + 0x1cc) != 0
+				    && !CompareVector3WithinTolerance((float*) (*(char**) (obj + 0x22c) + 0x84),
+				                       (float*) (*(char**) (obj + 0x34) + 0x84), 0.05f)) {
+					fcn_00438cb0(*(char**) (obj + 0x22c), (float*) (*(char**) (obj + 0x34) + 0x84));
 				}
 			} else {
+				if (*(int*) (*(char**) (obj + 0x34) + 0x218) == 1 && (flags & 0x20) == 0) {
+					fcn_00442c00(*(char**) (obj + 0x34), 1);
+				}
 				if (*(int*) (*(char**) (obj + 0x22c) + 0x218) != 1) {
 					fcn_00442c00(*(char**) (obj + 0x22c), 0);
 				}
 			}
-			if (*(int*) (*(char**) (obj + 0x22c) + 0x218) != 1
-			    && *(char**) (*(char**) (obj + 0x22c) + 0x1cc) != 0
-			    && !CompareVector3WithinTolerance((float*) (*(char**) (obj + 0x22c) + 0x4c),
-			                       (float*) (*(char**) (obj + 0x34) + 0x4c), 2.0f)) {
-				fcn_00438b40(*(char**) (obj + 0x22c), (int*) (*(char**) (obj + 0x34) + 0x4c));
-			}
-			if (*(char**) (*(char**) (obj + 0x34) + 0x1cc) != 0
-			    && !CompareVector3WithinTolerance((float*) (*(char**) (obj + 0x22c) + 0x84),
-			                       (float*) (*(char**) (obj + 0x34) + 0x84), 0.05f)) {
-				fcn_00438cb0(*(char**) (obj + 0x22c), (float*) (*(char**) (obj + 0x34) + 0x84));
-			}
-			goto animation;
-		detailed_model:
-			if (*(int*) (*(char**) (obj + 0x34) + 0x218) == 1 && (flags & 0x20) == 0) {
-				fcn_00442c00(*(char**) (obj + 0x34), 1);
-			}
-			if (*(int*) (*(char**) (obj + 0x22c) + 0x218) != 1) {
-				fcn_00442c00(*(char**) (obj + 0x22c), 0);
-			}
-		animation:
 			if (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) == 0 || (obj[0x8c] & 0x80) != 0) {
 				return;
 			}
-			if (*(char**) (obj + 0x70) != 0) {
-				if (*(char**) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x390) == 0) {
-					if (!strstr(*(char**) (*(char**) (obj + 0x70) + 0x68), "gehen")
-					    && !strstr(*(char**) (*(char**) (obj + 0x70) + 0x68), "karren_ziehen")) {
-						return;
-					}
-					sprintf(path, "lowpolycharacter/%s/%s_%s_LOW.baf", obj + 0x230, "gehen", obj + 0x230);
-					sprintf(ani, "%s_%s_LOW.baf", "gehen", obj + 0x230);
-					vfs_ToSlashes(ani);
-					memset(&opt, 0, sizeof(opt));
-					opt.queue = 1;
-					opt.reverse = 0;
-					opt.loop = 0;
-					*(int*) &opt = 0;
-					opt.layer = 8;
-					opt.mode = 0;
-					if (d3_FindAnimByName(ani) == 0) {
-						d3_LoadAnimStream(path, ani, 1);
-					}
-					anim = fcn_00434970(*(char**) (*(char**) (obj + 0x22c) + 0x1ec) + 0xf4, ani, opt);
-					if (anim == 0) {
-						sprintf(msg, "ch_Updatelowpoly(): Could not attach ani: %s", path);
-						obj[0x8c] |= 0x80;
-						return;
-					}
-					*(int*) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x328) = **(int**) (obj + 0x70);
-					*(int*) (anim + 0x3c) = -1;
+			if (*(char**) (obj + 0x70) != 0
+			    && *(char**) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x390) == 0) {
+				if (!strstr(*(char**) (*(char**) (obj + 0x70) + 0x68), "gehen")
+				    && !strstr(*(char**) (*(char**) (obj + 0x70) + 0x68), "karren_ziehen")) {
 					return;
 				}
-				if (*(char**) (obj + 0x70) != 0) {
-					goto update_frame;
+				sprintf(path, "lowpolycharacter/%s/%s_%s_LOW.baf", obj + 0x230, "gehen", obj + 0x230);
+				sprintf(ani, "%s_%s_LOW.baf", "gehen", obj + 0x230);
+				vfs_ToSlashes(ani);
+				memset(&opt, 0, sizeof(opt));
+				opt.queue = 1;
+				*(int*) &opt = 0;
+				opt.layer = 8;
+				opt.mode = 0;
+				opt.reverse = 0;
+				opt.loop = 0;
+				if (d3_FindAnimByName(ani) == 0) {
+					d3_LoadAnimStream(path, ani, 1);
 				}
+				anim = fcn_00434970(*(char**) (*(char**) (obj + 0x22c) + 0x1ec) + 0xf4, ani, opt);
+				if (anim == 0) {
+					sprintf(msg, "ch_Updatelowpoly(): Could not attach ani: %s", path);
+					obj[0x8c] |= 0x80;
+					return;
+				}
+				*(int*) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x328) = **(int**) (obj + 0x70);
+				*(int*) (anim + 0x3c) = -1;
+				return;
 			}
-			if (*(char**) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x390) != 0) {
+			if (*(char**) (obj + 0x70) == 0
+			    && *(char**) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x390) != 0) {
 				d3_RemoveObjectAnim(*(char**) (obj + 0x22c));
 				return;
 			}
-			if (*(char**) (obj + 0x70) == 0) {
-				return;
+			if (*(char**) (obj + 0x70) != 0
+			    && *(char**) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x390) != 0) {
+				*(int*) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x388) = *(int*) (*(char**) (obj + 0x70) + 0x60);
 			}
-		update_frame:
-			if (*(char**) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x390) == 0) {
-				return;
-			}
-			*(int*) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x388) = *(int*) (*(char**) (obj + 0x70) + 0x60);
 			return;
 		}
 		if ((*(int*) (obj + 0x2c) == g_67530c && *(int*) (obj + 0x30) == g_675310) || *(int*) (obj + 0x30) == 0) {

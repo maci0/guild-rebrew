@@ -56,7 +56,6 @@ void __cdecl fcn_0055dab0(char* e)
 	int code;
 	char text[0x104];
 	char msg[0x400];
-	unsigned char k;
 
 	s44 = gm_StartFilteredEntitySearch(1, 0, 0x44);
 	gm_StartFilteredEntitySearch(1, 0, 0x45);
@@ -78,14 +77,9 @@ void __cdecl fcn_0055dab0(char* e)
 			*(int*) (e + 0xec) = fcn_004c5290(*(int*) (s44 + 1), *(int*) (b + 1), *(int*) (r + 2));
 		}
 		e[0xd0] = 1;
-	} else {
-		if (!fcn_00529710(r, c)) {
-			fcn_004432d0(saved, 1);
-			return;
-		}
+	} else if (fcn_00529710(r, c)) {
 		*(int*) (e + 0xec) = fcn_004c5290(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
-		k = *(unsigned char*) c;
-		if (k == 0x47) {
+		if (*(unsigned char*) c == 0x47) {
 			io_FormatTextBuffer(msg, 0x1c3b, 1, 0x1c39, g_868060 + *(int*) (c + 0x65) * 0x2f4);
 			if ((g_7e35c0[g_774650][0] != 0x5ba910 || g_7746c8 != c) &&
 			    !(r[0x20] & 1) && e[0xf2] == 0) {
@@ -101,13 +95,13 @@ void __cdecl fcn_0055dab0(char* e)
 				    0x609, *(int*) (c + 1), -1, 0, "_NACHRICHTEN_HS_59");
 			}
 		} else {
-			lv = (Level*) (lpGebaeudePROT + k * sizeof(Level));
+			lv = (Level*) (lpGebaeudePROT + *(unsigned char*) c * sizeof(Level));
 			code = 0x609;
-			if (k == 0x1e) {
+			if (*(unsigned char*) c == 0x1e) {
 				memcpy(text, "_NACHRICHTEN_HS_58", 0x13);
-			} else if (k == 0x1f) {
+			} else if (*(unsigned char*) c == 0x1f) {
 				memcpy(text, "_NACHRICHTEN_HS_57", 0x13);
-			} else if (k == 0x20) {
+			} else if (*(unsigned char*) c == 0x20) {
 				memcpy(text, "_NACHRICHTEN_HS_56", 0x13);
 			} else {
 				text[0] = 0;

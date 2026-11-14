@@ -8,46 +8,40 @@ unsigned int __cdecl fcn_0047a990(int a0, int a1, char* a2, char* a3)
 	u32* v1;
 	u16 v10;
 	u16* v11;
-	u32 v12;
-	u32* v13;
+	int v12;
+	int* v13;
 	u16 words[0x480];
 	u32* v15;
 	int v16;
 
 	u16* v18;
 
-	u8* v2;
-	u32 v20;
+	int v20;
 	int v21;
 
 
 	u8 v5;
 	u8 v6;
 	u8 v7;
-	u32 v8;
+	int v8;
 	u8* v9;
 
 	if (*(int*) (a2 + 0x26) != -1) {
 		v8 = 0;
-		v13 = (u32*) (a2 + 0x32);
+		v13 = (int*) (a2 + 0x32);
 		v15 = (u32*) (a2 + 0x36);
-		v20 = 0;
-		if (*(u16*) (a2 + 10)) {
+		if (*(u16*) (a2 + 10) > 0) {
 			do {
 				v21 = 0;
 				v11 = (u16*) (*(int*) (a3 + 0x1c) + ((v8 + a1) * *(int*) (a3 + 0x10) + a0) * 2);
-				if (1 <= (int) *v13) {
+				if (*v13 > 0) {
 					do {
-						v16 = 0;
-						if (*v15 / 3) {
-							do {
-								*v11 = 0;
-								v16 += 1;
-							} while (v16 < (int) (*v15 / 3));
+						for (v16 = 0; v16 < (int) (*v15 / 3); v16++) {
+							*v11 = 0;
 						}
 						v16 = 0;
 						v1 = (u32*) ((int) v11 + ((*v15 / 3) * 2));
-						if (1 <= (int) v15[1]) {
+						if ((int) v15[1] > 0) {
 							v9 = (u8*) ((int) v15 + 10);
 							do {
 								v5 = v9[-2];
@@ -61,40 +55,21 @@ unsigned int __cdecl fcn_0047a990(int a0, int a1, char* a2, char* a3)
 								if (!v10) {
 									words[v16] = 0x421;
 								}
-								v2 = (u8*) ((int) &words[0] + v16 * 2 + 1);
-								*v2 = *v2 | 0x80;
+								words[v16] |= 0x8000;
 								v16 += 1;
 								v9 = v9 + 3;
 							} while (v16 < (int) v15[1]);
 						}
 						memcpy(v1, words, v15[1] * 2);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 						v11 = (u16*) ((int) v1 + v15[1] * 2);
 						v15 = (u32*) ((int) v15 + v15[1] * 3 + 8);
 						v21 += 1;
-					} while (v21 < (int) *v13);
-					v8 = v20;
+					} while (v21 < *v13);
 				}
-				v13 = v15;
-				v15 = v13 + 1;
+				v13 = (int*) v15;
+				v15 = (u32*) (v13 + 1);
 				v8 += 1;
-				v20 = v8;
-			} while ((int) v8 < (int) *(u16*) (a2 + 10));
+			} while (v8 < (int) *(u16*) (a2 + 10));
 			return 1;
 		}
 		return 1;
@@ -103,9 +78,9 @@ unsigned int __cdecl fcn_0047a990(int a0, int a1, char* a2, char* a3)
 	v8 = *(u16*) (a2 + 6);
 	v18 = (u16*) (*(int*) (a3 + 0x1c) + (*(int*) (a3 + 0x10) * a1 + a0) * 2);
 	v9 = (u8*) (a2 + 0x32);
-	if (v20) {
+	if (v20 > 0) {
 		do {
-			if (v8) {
+			if (v8 > 0) {
 				v12 = v8;
 				do {
 					if ((*v9) || (v9[1])) {

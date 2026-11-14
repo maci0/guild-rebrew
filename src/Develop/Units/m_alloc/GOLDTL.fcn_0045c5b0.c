@@ -77,13 +77,13 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 
 	c24 = (unsigned char) flags2 & 0xf;
 	c25 = (unsigned char) flags2 >> 4;
-	if ((flags & 0x40) != 0 && (c.a < 0xff || c.c0)) {
+	if (((unsigned char) flags & 0x40) != 0 && (c.a < 0xff || c.c0)) {
 		c26 = 1;
 	} else {
 		c26 = 0;
 	}
-	c21 = (unsigned char) (flags >> 2) & 0xf;
-	c23 = (unsigned char) (flags >> 1) & 1;
+	c21 = ((unsigned char) flags >> 2) & 0xf;
+	c23 = ((unsigned char) flags >> 1) & 1;
 	c22 = (unsigned char) flags & 1;
 	found = (Tex*) fcn_0045bde0(name);
 	if (found != 0) {
@@ -100,15 +100,20 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 					    && p->field55 == c25
 					    && p->b3 == c23
 					    && p->field5e == c21) {
-						fcn_0045c310(p, 1);
-						return p;
+						found = p;
+						fcn_0045c310(found, 1);
+						return found;
 					}
 				}
 				index++;
 				p++;
 			} while (index < g_10404a0);
-			if (found != p) {
-				t = (Tex*) fcn_0045c290(*(unsigned int*) &c, 0);
+		}
+		if (found == p) {
+			fcn_0045c310(found, 1);
+			return found;
+		}
+		t = (Tex*) fcn_0045c290(*(unsigned int*) &c, 0);
 				fn = 0x70;
 				__asm {
 					mov edi, t
@@ -154,10 +159,6 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 				g_10405c4++;
 				fcn_0045c380(t, *(unsigned int*) &c, flags, flags2);
 				return t;
-			}
-		}
-		fcn_0045c310(found, 1);
-		return found;
 	}
 	avail = fcn_0045be40(name);
 	if (avail != 0) {
@@ -206,8 +207,8 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 	t->b3 = c23;
 	t->b1 = 0;
 	t->dxt = (strstr(buf1, "_NM") != 0);
-	t->format60 = ((unsigned int) (*(unsigned char*) ((char*) t + 0x54) >> 2 & 1)) << 0x19 | 0x31545844;
-	if (c.c1) {
+	t->format60 = (((unsigned int) t->dxt & 1) << 0x19) | 0x31545844;
+	if (((Col*) &t->id)->c1) {
 		t->b5 = 1;
 	} else {
 		t->b5 = (strstr(buf1, "_NS") != 0);

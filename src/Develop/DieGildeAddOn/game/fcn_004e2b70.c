@@ -2,19 +2,6 @@
  * with id 8 through fcn_004e7160 at 0x4e7299; frame is a 0x23EC-byte local
  * block (single `add esp,0x23EC; ret` exit at 0x4e3018/0x4e301e). */
 
-typedef struct {
-	float f10;          /* 0x00 */
-	int alo;            /* 0x04 */
-	int ahi;            /* 0x08 */
-	int xslot;          /* 0x0c: fcn_004e44b0 result; arg to fcn_004e4610/004e44f0 */
-	int yslot;          /* 0x10: fcn_005095d0 out-param */
-	int blo;            /* 0x14 */
-	int bhi;            /* 0x18 */
-	int w[6];           /* 0x1c */
-	char buf1[0x400];   /* 0x34 */
-	char buf2[0x1fb8];  /* 0x434 */
-} Frame4e2b70;
-
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004e4e90(char* s);
 int __cdecl fcn_004c3100(char* s, int a);
@@ -49,7 +36,12 @@ void __cdecl fcn_004e4eb0(void);
 /* ADDRESS: GOLDTL 0x004e2b70 */
 void __cdecl fcn_004e2b70(void* arg)
 {
-	Frame4e2b70 f;
+	float f10;
+	int yslot;
+	int xslot;
+	int w[6];
+	char buf1[0x400];
+	char buf2[0x1fb8];
 	void* obj;
 	int handle;
 	int i;
@@ -58,23 +50,22 @@ void __cdecl fcn_004e2b70(void* arg)
 	int r;
 	int idxval;
 	unsigned int mask;
-	__int64 q;
 
 	obj = (void*) gm_LookupEntityRecordById(*(int*) ((char*) arg + 0x34));
 	mask = *(unsigned int*) 0x7f4c04;
 	i = 0;
-	f.w[0] = 8;
-	f.w[1] = 0xa;
-	f.w[2] = 0xc;
-	f.w[3] = 0xf;
-	f.w[4] = 0x12;
-	f.w[5] = 0x14;
+	w[0] = 8;
+	w[1] = 0xa;
+	w[2] = 0xc;
+	w[3] = 0xf;
+	w[4] = 0x12;
+	w[5] = 0x14;
 	state = 6;
 	*(int*) 0x68bfb8 = 0x702c6;
 	*(int*) 0x7725c8 = 1;
 	mask &= 0xffff;
 	while (i < 6) {
-		if ((int) mask < f.w[i]) {
+		if ((int) mask < w[i]) {
 			state = i;
 			break;
 		}
@@ -86,7 +77,7 @@ void __cdecl fcn_004e2b70(void* arg)
 	fcn_004e4b60((char*) 0x68d2b8);
 	fcn_00445f50(state, 0, 1.0f, 1);
 	fcn_004463f0(0, 0, 0.0f);
-	f.xslot = fcn_004e44b0((char*) 0x68d29c, (void*) 0x6b5c60);
+	xslot = fcn_004e44b0((char*) 0x68d29c, (void*) 0x6b5c60);
 	r = fcn_004e4d00(3000, 0, 0);
 	if (r == 0) {
 		fcn_004e4b40(-8, handle, (char*) 0x68d294, 0, 0);
@@ -103,17 +94,12 @@ void __cdecl fcn_004e2b70(void* arg)
 				if (*(int*) 0x14ce8e0 != 0) {
 					state = 1;
 				}
-				f.ahi = 0;
-				f.alo = *(volatile int*) 0x6b7fac - start;
-				q = *(__int64*) &f.alo;
-				if ((double) q * *(float*) 0x664f28 < *(float*) 0x6628a0) {
-					f.bhi = 0;
-					f.blo = *(volatile int*) 0x6b7fac - start;
-					f.f10 = (double) *(__int64*) &f.blo * *(float*) 0x664f28;
+				if ((float) (unsigned int) (*(volatile int*) 0x6b7fac - start) * (1.0f / 825.0f) < 1.0f) {
+					f10 = (float) (unsigned int) (*(volatile int*) 0x6b7fac - start) * (1.0f / 825.0f);
 				} else {
-					f.f10 = 1.0f;
+					f10 = 1.0f;
 				}
-				fcn_004463f0(0, 1, f.f10);
+				fcn_004463f0(0, 1, f10);
 			}
 			fcn_004463f0(0, 1, 1.0f);
 			fcn_004e4d00(0x2cec, 0, 0);
@@ -121,60 +107,62 @@ void __cdecl fcn_004e2b70(void* arg)
 	}
 	fcn_004234e0(0, (char*) 0x68d288, 1, 0x3f, 0x7f, 0, 0);
 	*(int*) 0x7725c8 = 0;
-	r = fcn_005095d0(obj, &f.yslot);
+	r = fcn_005095d0(obj, &yslot);
 	if (r != 0) {
-		if ((*(int*) ((char*) obj + 0x1cc) & 1) != 0 && (*(int*) ((char*) obj + 0x1cc) & 2) == 0) {
-			idxval = *(unsigned short*) obj;
-			io_FormatTextBuffer(f.buf1, 0x40fb, 0x40f5, idxval);
-			if (fcn_004e6eb0(f.buf1, 0x10) == 0)
-				goto dialog_fallback;
+		if ((*(int*) ((char*) obj + 0x1cc) & 1) == 0)
+			goto dialog_fallback;
+		if ((*(int*) ((char*) obj + 0x1cc) & 2) != 0)
+			goto dialog_fallback;
+		idxval = *(unsigned short*) obj;
+		io_FormatTextBuffer(buf1, 0x40fb, 0x40f5, idxval);
+		if (fcn_004e6eb0(buf1, 0x10) == 0) {
+		dialog_fallback:
+			fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, *(int*) 0x68bfb8);
+		} else {
+			int alo;
 			r = *(int*) ((char*) obj + 4);
-			f.alo = 0;
-			f.f10 = 100.0f;
+			alo = 0;
+			f10 = 100.0f;
 			fcn_004c4510(obj, r);
-			fcn_004c4570(4, 1, 0x1c, &f.f10);
-			fcn_004c4570(4, 1, 0x24, &f.alo);
+			fcn_004c4570(4, 1, 0x1c, &f10);
+			fcn_004c4570(4, 1, 0x24, &alo);
 			*(char*) ((char*) obj + 8) = 100;
 			fcn_004c5360();
 			fcn_004c5420(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
-			goto dialog_done;
 		}
-	dialog_fallback:
-		fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, *(int*) 0x68bfb8);
-	dialog_done:
-		;
 	} else {
 		if ((*(int*) ((char*) obj + 0x1cc) & 1) != 0 && (*(int*) ((char*) obj + 0x1cc) & 2) == 0) {
+			float alo;
 			idxval = *(unsigned short*) obj;
-			f.f10 = 0.0f;
-			*(float*) &f.alo = 100.0f;
-			io_FormatTextBuffer(f.buf1, 0x40fc, 0x40f5, idxval);
-			fcn_004e6eb0(f.buf1, 0x10);
+			*(int*) &f10 = 0;
+			alo = 100.0f;
+			io_FormatTextBuffer(buf1, 0x40fc, 0x40f5, idxval);
+			fcn_004e6eb0(buf1, 0x10);
 			fcn_004c4510(obj, *(int*) ((char*) obj + 4));
-			fcn_004c4570(4, 1, 0x1c, &f.alo);
-			fcn_004c4570(4, 1, 0x24, &f.f10);
+			fcn_004c4570(4, 1, 0x1c, &alo);
+			fcn_004c4570(4, 1, 0x24, &f10);
 			fcn_004c5360();
 			fcn_004c5420(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
 			*(char*) ((char*) obj + 8) = 100;
 		} else if ((*(unsigned char*) 0x7747b0 & 8) != 0) {
 			*(char*) ((char*) obj + 8) = 0;
+			idxval = yslot;
 			*(int*) 0x774954 = 1;
-			if (f.yslot != 0) {
-				io_FormatTextBuffer(f.buf1, 0x1ab4);
+			if (idxval != 0) {
+				io_FormatTextBuffer(buf1, 0x1ab4);
 			} else {
-				io_FormatTextBuffer(f.buf1, 0x1ab3, *(unsigned short*) obj);
+				io_FormatTextBuffer(buf1, 0x1ab3, *(unsigned short*) obj);
 			}
-			fcn_004e6eb0(f.buf1, 0);
+			fcn_004e6eb0(buf1, 0);
 			fcn_005356b0(0x5438c0);
 		} else {
-			fcn_00509fc0(obj, f.buf2, 1);
-			fcn_004e6eb0(f.buf2, 0x10);
+			fcn_00509fc0(obj, buf2, 1);
+			fcn_004e6eb0(buf2, 0x10);
 		}
 	}
 	fcn_004e48b0();
-	idxval = f.xslot;
-	fcn_004e4610((void*) idxval);
-	fcn_004e44f0((void*) idxval);
+	fcn_004e4610((void*) xslot);
+	fcn_004e44f0((void*) xslot);
 	fcn_004e4c00();
 	fcn_004e4910();
 	fcn_004c09b0();

@@ -50,7 +50,6 @@ int __cdecl fcn_00526660(int parent, int flags)
 	int n;
 	int h;
 	unsigned int saved;
-	int big;
 	int dlg;
 	int list;
 	int i;
@@ -87,8 +86,7 @@ int __cdecl fcn_00526660(int parent, int flags)
 	}
 	d2_SelectRadioGroup(list, 0);
 	d2_SetForm(dlg, 0);
-	big = flags & 0x80;
-	if (big != 0) {
+	if (flags & 0x80) {
 		h = fcn_004677e0(0x1c, g_77255c->x10 - 0x20, g_77255c->xc - 0x40, 0, 0x1f4, 0x83, 0x42, g_772514);
 	}
 	while (fcn_005373e0((void*) fcn_00526660, style) != 0) {
@@ -96,17 +94,19 @@ int __cdecl fcn_00526660(int parent, int flags)
 		if (flags & 0x40) {
 			fcn_004707d0(dlg);
 		}
-		if (g_100f1dc == 2) {
+		if (g_100f1dc != 2) {
+			if (g_100f1dc == 1) {
+				g_774654 = 1;
+				n = 0;
+			}
+		} else {
 			g_774654 = 1;
 			n = 1;
-		} else if (g_100f1dc == 1) {
-			g_774654 = 1;
-			n = 0;
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		if (big != 0 && h != -1) {
+		if ((flags & 0x80) && h != -1) {
 			d2_SetElementValue(h, 0, 0x1f4, g_6b7fac - saved);
 		}
 		if (flags & 4) {

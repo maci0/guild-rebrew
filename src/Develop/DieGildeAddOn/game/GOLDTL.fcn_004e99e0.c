@@ -8,7 +8,7 @@
 #include "GOLDTL.fcn_004e99e0_gconf.h"
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004aacb0(unsigned short*, unsigned short*, unsigned short*, int*);
-int __cdecl fcn_004aae50(int, unsigned short*, int*, int*);
+int __cdecl fcn_004aae50(unsigned char, unsigned short*, int*, int*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_004e8240(unsigned char, unsigned char*, unsigned char*, int, int);
@@ -24,7 +24,6 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 	int k;
 	int n;
 	int b;
-	int amount;
 	struct { int relation; unsigned int vote[4]; OFFICE_SLOT* recs[4]; int ids[4]; unsigned int score[6]; } work;
 
 	char* self;
@@ -43,15 +42,12 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 	char* h;
 
 	remain = 0;
-	p = list;
-	for (i = count; i > 0; i--) {
+	for (i = count, p = list; i > 0; i--, p++) {
 		if (p->status == 2) {
 			remain++;
 		}
-		p++;
 	}
-	for (i = 0; i < count && remain != 0; i++) {
-		p = list + i;
+	for (i = 0, p = list; i < count && remain != 0; i++, p++) {
 		work.vote[0] = 0;
 		work.vote[1] = 0;
 		work.vote[2] = 0;
@@ -85,70 +81,76 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 						fcn_004c54c0(id, *(int*) (self + 4), -10, 1);
 					}
 					if (work.score[k] == 1) {
-						amount = 10;
+						fcn_004c54c0(id, *(int*) (self + 4), 10, 1);
 					} else {
-						amount = -4;
+						fcn_004c54c0(id, *(int*) (self + 4), -4, 1);
 					}
-					fcn_004c54c0(id, *(int*) (self + 4), amount, 1);
 				}
 			}
 			version = fcn_004e8240(p->id, 0, 0, 3, 0xff);
+			if (version != -1) {
+				do {
+					if (fcn_004c4450(version) != 0) {
+						break;
+					}
+					fcn_00535960();
+				} while (1);
+			}
 		} else {
 			for (k = 0; k < count; k++) {
 				id = list[k].mplayerid;
 				if (id != *(int*) (self + 4) && id != -1
 				    && work.score[k] <= 2) {
 					if (work.score[k] == 0) {
-						amount = -20;
+						fcn_004c54c0(id, *(int*) (self + 4), -20, 1);
 					} else if (work.score[k] == 1) {
-						amount = 0x14;
+						fcn_004c54c0(id, *(int*) (self + 4), 0x14, 1);
 					} else {
-						amount = 4;
+						fcn_004c54c0(id, *(int*) (self + 4), 4, 1);
 					}
-					fcn_004c54c0(id, *(int*) (self + 4), amount, 1);
 				}
 			}
 			version = fcn_004e8240(p->id, (unsigned char*) self, 0, 1, 0xff);
-		}
-		if (version != -1) {
-			while (!fcn_004c4450(version)) {
-				fcn_00535960();
+			if (version != -1) {
+				do {
+					if (fcn_004c4450(version) != 0) {
+						break;
+					}
+					fcn_00535960();
+				} while (1);
 			}
 		}
 	}
 	remain = 0;
-	if (1 <= count) {
-		p = list;
-		for (i = count; i != 0; i--) {
-			if (p->status == 3) {
-				remain++;
-			}
-			p++;
+	for (i = count, p = list; i > 0; i--, p++) {
+		if (p->status == 3) {
+			remain++;
 		}
 	}
-	for (i = 0; i < count && remain != 0; i++) {
-		p = list + i;
-		n = 0;
+	for (i = 0, p = list; i < count && remain != 0; i++, p++) {
 		work.vote[0] = 0;
 		work.vote[1] = 0;
 		work.vote[2] = 0;
 		work.vote[3] = 0;
-		work.ids[0] = -1;
-		work.ids[1] = -1;
-		work.ids[2] = -1;
-		work.ids[3] = -1;
+		work.score[0] = (unsigned int) -1;
+		work.score[1] = (unsigned int) -1;
+		work.score[2] = (unsigned int) -1;
+		work.score[3] = (unsigned int) -1;
+		work.score[4] = (unsigned int) -1;
+		work.score[5] = (unsigned int) -1;
 
 		if (p->status != 3 || p->pcount == 0) {
 			continue;
 		}
 		remain--;
+		n = 0;
 		{
 			for (h = g_slot_table; (int) h < (int) (g_slot_table + 0x65400);
 			    h += 0x21c) {
 				if (n >= p->pcount || 4 <= n) {
 					break;
 				}
-				if (*(char*) (h + 0x168) == p->mamt) {
+				if (*(unsigned char*) (h + 0x168) == p->mamt) {
 					work.recs[n] = (OFFICE_SLOT*) h;
 					work.ids[n] = *(int*) (h + 4);
 					n++;
@@ -158,16 +160,30 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 		if (n == 0) {
 			continue;
 		}
-		if (n != 1) {
-			for (k = n; k < 4; k++) {
-				work.ids[k] = -1;
-				work.recs[k] = 0;
+		if (n == 1) {
+			version = fcn_004e8240(p->id, (unsigned char*) work.recs[0], 0, 1, 0xff);
+			if (version != -1) {
+				do {
+					if (fcn_004c4450(version) != 0) {
+						break;
+					}
+					fcn_00535960();
+				} while (1);
+			}
+		} else {
+			if (n < 4) {
+				for (k = n; k < 4; k++) {
+					work.ids[k] = -1;
+				}
+				for (k = n; k < 4; k++) {
+					work.recs[k] = 0;
+				}
 			}
 			for (k = 0; k < count; k++) {
-				ent = gm_LookupEntityRecordById(list[k].mplayerid);
 				work.score[k] = -1;
+				ent = gm_LookupEntityRecordById(list[k].mplayerid);
 				if (ent != 0 && fcn_004e9180(ent, p->mamt) != 0
-				    && *(char*) (ent + 0x1b1) == 0) {
+				    && *(unsigned char*) (ent + 0x1b1) <= 0) {
 					work.score[k] = fcn_004aae50(p->id,
 					    (unsigned short*) ent, work.ids, &work.relation);
 				}
@@ -182,40 +198,48 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 					}
 				}
 			}
-			{
-				best = -1;
-				pick = -1;
-				tie = 1;
-				for (j = 0; j < n; j++) {
-					if ((int) work.vote[j] <= best) {
-						if ((int) work.vote[j] == best) {
-							tie = 1;
-						}
-					} else {
-						tie = 0;
-						pick = j;
-						best = work.vote[j];
-					}
+			best = -1;
+			pick = -1;
+			tie = 1;
+			for (j = 0; j < n; j++) {
+				if ((int) work.vote[j] > best) {
+					tie = 0;
+					best = work.vote[j];
+					pick = j;
+				} else if ((int) work.vote[j] == best) {
+					tie = 1;
 				}
-				if (tie) {
-					k = gm_RandomMod(n);
-					for (j = n; j != 0; j--) {
-						if (work.vote[k] == best) {
-							pick = k;
+			}
+			if (!tie) {
+				version = fcn_004e8240(p->id,
+				    (unsigned char*) work.recs[pick], 0, 1, 0xff);
+				if (version != -1) {
+					do {
+						if (fcn_004c4450(version) != 0) {
 							break;
 						}
-						k = (k + 1) % n;
+						fcn_00535960();
+					} while (1);
+				}
+			} else {
+				k = gm_RandomMod(n);
+				for (j = n; j != 0; j--) {
+					if (work.vote[k] == best) {
+						pick = k;
+						break;
 					}
+					k = (k + 1) % n;
 				}
 				version = fcn_004e8240(p->id,
 				    (unsigned char*) work.recs[pick], 0, 1, 0xff);
-			}
-		} else {
-			version = fcn_004e8240(p->id, (unsigned char*) work.recs[0], 0, 1, 0xff);
-		}
-		if (version != -1) {
-			while (!fcn_004c4450(version)) {
-				fcn_00535960();
+				if (version != -1) {
+					do {
+						if (fcn_004c4450(version) != 0) {
+							break;
+						}
+						fcn_00535960();
+					} while (1);
+				}
 			}
 		}
 	}

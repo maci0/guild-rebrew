@@ -34,10 +34,10 @@ void __cdecl fcn_00471a30(int, int);
 void __cdecl fcn_005c8770(int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_0046ed00(int, int, int);
-int __cdecl fcn_00471f80(int, ...);
-int __cdecl fcn_0050b750(int);
+int __cdecl fcn_00471f80(int);
+int __cdecl fcn_0050b750(int, int);
 void __cdecl fcn_004c4510(int, int);
-void __cdecl fcn_004c4570(int, int, int, int*);
+void __cdecl fcn_004c4570(int, int, unsigned short, int*);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_0050dc90(int);
@@ -137,12 +137,12 @@ void __cdecl fcn_005c8c40(void)
 				if (h != -1) {
 					cur = fcn_00471f80(h);
 					if (*(int*) (i - 4) != cur) {
-						cur = fcn_00471f80(*(int*) (i - 0x10), *(unsigned char*) &g_773d75);
-						n = fcn_0050b750(cur);
+						n = fcn_0050b750(fcn_00471f80(*(int*) (i - 0x10)),
+							g_773d75);
 						obj = *(int*) i;
 						fcn_004c4510(obj, *(int*) (obj + 1));
-						delta = (int) (*(unsigned short*) i) - (int) (*(unsigned short*) &g_aed32c) + 0x39;
-						fcn_004c4570(4, 1, delta, &n);
+						delta = *(unsigned short*) i - *(unsigned short*) &g_aed32c + 0x39;
+						fcn_004c4570(4, 1, (unsigned short) delta, &n);
 						fcn_004c5360();
 						q = fcn_0050dc90(*(int*) i);
 						n = n - *(int*) (*(int*) i + 0x39);

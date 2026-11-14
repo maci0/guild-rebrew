@@ -4,7 +4,6 @@ extern unsigned char g_7747b0;
 extern unsigned char* lpGebaeudePROT;
 extern float g_696540[4];
 extern float g_696550[4];
-extern float flt_6629e8;
 
 #pragma pack(push, 2)
 typedef struct
@@ -25,6 +24,10 @@ typedef struct
 } TimeKey;
 #pragma pack(pop)
 
+#define MAXF(a, b) ((a) > (b) ? (a) : (b))
+#define MINF(a, b) ((a) < (b) ? (a) : (b))
+#define CLAMPF(v, lo, hi) MINF(MAXF((lo), (v)), (hi))
+
 int __cdecl fcn_00500e20(int* p);
 int __cdecl fcn_00500d20(TimeKey* a, TimeKey* b);
 int __cdecl fcn_00500cb0(Time* a, Time* b);
@@ -38,9 +41,6 @@ int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
 {
 	float f1;
 	float f2;
-	float f;
-	float g;
-	float v;
 	double d;
 	Time t;
 	int idx;
@@ -49,7 +49,6 @@ int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
 	int k;
 	int acc;
 	int res1;
-	int res2;
 
 	idx = fcn_00500e20((int*) a0);
 	f1 = g_696540[idx];
@@ -69,16 +68,7 @@ int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
 	i = t.day;
 	n = a1->day;
 	if (i < n) {
-		v = (float) (t.min + a0->hour * 60);
-		f = f1 * flt_6629e8;
-		if (!(f > v)) {
-			f = v;
-		}
-		g = f2 * flt_6629e8;
-		if (!(f < g)) {
-			f = g;
-		}
-		acc = (int) (g - (float) (int) f);
+		acc = (int) (f2 * 60.0f - (float) (int) CLAMPF((float) (t.min + t.hour * 60), f1 * 60.0f, f2 * 60.0f));
 		i = i + 1;
 		t.day = i;
 		sim_SetSyncParams((int) &t, (unsigned char) (int) f1, 0, 0);
@@ -86,30 +76,11 @@ int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
 		acc = 0;
 	}
 	if (i < n) {
-		d = (double) f2 * flt_6629e8 - (double) f1 * flt_6629e8;
+		d = f2 * 60.0f - f1 * 60.0f;
 		for (k = n - i; k != 0; k--) {
 			acc = (int) ((double) acc + d);
 		}
 	}
-	v = (float) (a1->min + a1->hour * 60);
-	f = f1 * flt_6629e8;
-	if (!(f > v)) {
-		f = v;
-	}
-	g = f2 * flt_6629e8;
-	if (!(f < g)) {
-		f = g;
-	}
-	res1 = (int) f;
-	v = (float) (t.min + t.hour * 60);
-	f = f1 * flt_6629e8;
-	if (!(f > v)) {
-		f = v;
-	}
-	g = f2 * flt_6629e8;
-	if (!(f < g)) {
-		f = g;
-	}
-	res2 = (int) f;
-	return acc - res2 + res1;
+	res1 = (int) CLAMPF((float) (a1->min + a1->hour * 60), f1 * 60.0f, f2 * 60.0f);
+	return acc - (int) CLAMPF((float) (t.min + t.hour * 60), f1 * 60.0f, f2 * 60.0f) + res1;
 }

@@ -49,6 +49,7 @@ void __cdecl fcn_005a4e00(char* a0)
 	int first;
 	char* p;
 
+	first = 1;
 	for (i = 0; i < 16; i++) {
 		items[i][0] = -1;
 		items[i][1] = -1;
@@ -69,7 +70,6 @@ void __cdecl fcn_005a4e00(char* a0)
 	io_AppendText(0x18d9);
 	d2_SetForm(h, 3);
 	fcn_00533a60(g_772514, 0, tmp, 1, g_14ab694);
-	first = 1;
 	while (fcn_005373e0((void*) fcn_005a4e00, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

@@ -12,8 +12,8 @@ void __cdecl fcn_0045b920(char*, int, int, float*);
 unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 {
 	char* m;
-	float start[3];
-	float hit[3];
+	float start[4];
+	float hit[4];
 	float d;
 	float best1;
 	float best2;
@@ -42,20 +42,21 @@ unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 	x2 = 0;
 	y2 = 0;
 	found = 0;
+	i = 0;
 	fcn_00455350(a0, a0 + 0x4c, start);
 	if (!fcn_0045b990(m, start, &col, &row, &height)) {
 		return 0;
 	}
-	for (i = 0; i < 0x40; i++) {
+	do {
 		maxy = *(int*) (m + 0x20) - 1;
-		if (row + i <= maxy) {
+		if (maxy >= row + i) {
 			maxy = row + i;
 		}
 		miny = (row - i < 0) ? 0 : row - i;
 		for (y = miny; y <= maxy; y++) {
 			span = i - abs(row - y);
 			maxx = *(int*) (m + 0x20) - 1;
-			if (span + col <= maxx) {
+			if (maxx >= span + col) {
 				maxx = span + col;
 			}
 			minx = (col - span < 0) ? 0 : col - span;
@@ -69,20 +70,21 @@ unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 				hit[2] = start[2] - hit[2];
 				d = sqrt(hit[2] * hit[2] + hit[1] * hit[1] + hit[0] * hit[0]);
 				if (d < best1 && d > 30.0) {
-					found = 1;
 					best1 = d;
 					x1 = x;
 					y1 = y;
+					found = 1;
 				}
 				if (d > best2 && d > 30.0) {
-					found = 1;
 					best2 = d;
 					x2 = x;
 					y2 = y;
+					found = 1;
 				}
 			}
 		}
-	}
+		i++;
+	} while (i < 0x40);
 	if (!found) {
 		return 0;
 	}

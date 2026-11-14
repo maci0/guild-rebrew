@@ -35,6 +35,7 @@ int __stdcall fcn_0041adc0(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 	int h;
 	int v;
 	char* row;
+	char* rows;
 
 	switch (msg) {
 	case 0x111:
@@ -46,13 +47,14 @@ int __stdcall fcn_0041adc0(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 			}
 			g_6777a8 = r;
 			SendMessageA(*(HWND*) 0x6b5dd4, 0x14b, 0, 0);
-			for (i = 0; i < *(unsigned int*) (*(char**) 0x6b5dd0 + r * 0x508 + 0x500); i++) {
-				row = (char*) (*(int*) (*(char**) 0x6b5dd0 + r * 0x508 + 0x504) + i * 0x10);
+			rows = (char*) (*(char**) 0x6b5dd0 + r * 0x508);
+			for (i = 0; i < *(unsigned int*) (rows + 0x500); i++) {
+				row = (char*) (*(int*) (rows + 0x504) + i * 0x10);
 				v = fcn_0041a950(*(int*) (row + 0xc), (int) fcn_0041b1c0(*(int*) (row + 0xc)));
 				fcn_0064d41a(text, (char*) 0x677820, *(int*) row, *(int*) (row + 4), v);
 				v = (int) SendMessageA(*(HWND*) 0x6b5dd4, 0x143, 0, (LPARAM) text);
 				SendMessageA(*(HWND*) 0x6b5dd4, 0x151, v,
-				    *(int*) (*(char**) 0x6b5dd0 + r * 0x508 + 0x504) + i * 0x10);
+				    *(int*) (rows + 0x504) + i * 0x10);
 			}
 			SendMessageA(*(HWND*) 0x6b5dd4, 0x14e, 0, 0);
 			return 1;
