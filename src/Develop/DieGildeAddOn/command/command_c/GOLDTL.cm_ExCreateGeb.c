@@ -31,7 +31,7 @@ int __cdecl cm_ExCreateGeb(char* a0, char* out)
 	char path[260];
 	char msg[256];
 	char shortname[84];
-	int pos[3];
+	int pos[4];
 	struct {
 		int items[32];
 		int count;
@@ -63,10 +63,10 @@ int __cdecl cm_ExCreateGeb(char* a0, char* out)
 		else
 			sprintf(path, "%sgebaeude/*%s.ogr", (char*) 0x7e1ae0, name);
 		if (fcn_0042f690(path, (int) g_6b7fdc, (int) g_6b7fdc, found) != 0)
-			break;
+			goto load;
 	}
-	if (i == 4)
-		goto done;
+	goto done;
+load:
 	saved = g_6b8010;
 	fcn_004432d0(0, 1);
 	pos[0] = *(int*) (a0 + 0x19);

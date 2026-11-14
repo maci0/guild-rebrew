@@ -24,8 +24,8 @@ void __cdecl hst_ParseText_Real(int out, int src)
 	if (g_1052de0 == 0) {
 		return;
 	}
-	fill_dst = buf;
 	fill_size = sizeof(buf);
+	fill_dst = buf;
 	__asm {
 		mov edi, fill_dst
 		mov ebx, fill_size

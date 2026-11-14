@@ -125,31 +125,9 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 						v7 = (int) fcn_00502cd0(*(int*) ((char*) q + 0x14), 1, 0, sel);
 					else
 						v7 = (int) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, sel);
-					if (v7) {
-						if (q && (((*(unsigned short*) q == 0) == 0xfd) || g_7746c8)) {
-							p = node + 1;
-							{
-								char* d = name;
-								while ((*d++ = *p++) != 0)
-									;
-							}
-							_strupr(name);
-							fcn_0064d41a(text, s_68b7ac, name);
-							fcn_00526920(a0, *(int*) ((char*) q + 2), text);
-						}
-					} else {
+					if (!v7) {
 						*(unsigned char*) (msg + 0x36) = 1;
-						if (*(unsigned char*) node != 6) {
-							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);
-							*(int*) (msg + 0x30) = g_7f4c00.c;
-							*(unsigned char*) (msg + 4) = 2;
-							*(int*) (msg + 8) = *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (a0 + 0x25) * 0x21c + 4);
-							*(int*) (msg + 0x28) = g_7f4c00.a;
-							*(int*) (msg + 0x2c) = g_7f4c00.b;
-							*(short*) (msg + 0x34) = g_7f4c00.d;
-							*(short*) (msg + 0x58) = (short) sel;
-							*(int*) (msg + 0x5c) = *(int*) ((char*) q + 2);
-						} else {
+						if (*(unsigned char*) (lpObjektePROT + sel * 0x41) == 6) {
 							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);
 							*(unsigned char*) (msg + 4) = 0x0c;
 							*(int*) (msg + 0x58) = *(int*) (a0 + 1);
@@ -160,6 +138,16 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 							*(int*) (msg + 0x30) = g_7f4c00.c;
 							*(short*) (msg + 0x34) = g_7f4c00.d;
 							*(int*) (msg + 0x5c) = *(int*) (msg + 8);
+						} else {
+							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);
+							*(int*) (msg + 0x30) = g_7f4c00.c;
+							*(unsigned char*) (msg + 4) = 2;
+							*(int*) (msg + 8) = *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (a0 + 0x25) * 0x21c + 4);
+							*(int*) (msg + 0x28) = g_7f4c00.a;
+							*(int*) (msg + 0x2c) = g_7f4c00.b;
+							*(short*) (msg + 0x34) = g_7f4c00.d;
+							*(short*) (msg + 0x58) = (short) sel;
+							*(int*) (msg + 0x5c) = *(int*) ((char*) q + 2);
 						}
 						req = *(unsigned char*) (node + 0x40);
 						if (req == 0) {
@@ -168,16 +156,17 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 							amount = (int) (n * f);
 							ok = 0;
 							if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) g_773da8) {
-								v7 = fcn_00526010(house, amount, g_773d75);
-								req = 0x1a;
+								if (fcn_00526010(&g_7f4ca0[(unsigned int) g_774970 * 0x21c], amount, g_773d75))
+									ok = 1;
+								io_FormatTextBuffer(buf, 0x1a, amount, a0, sel * 2 + 0x9a8);
 							} else {
 								p = fcn_00507a10(a0);
-								v7 = fcn_00526070(p, *(int*) (p + 0x14), amount, g_773d75);
-								req = 0x1c;
+								if (fcn_00526070(p, *(int*) (p + 0x14), amount, g_773d75))
+									ok = 1;
+								io_FormatTextBuffer(buf, 0x1c, amount, a0, sel * 2 + 0x9a8);
 							}
-							if (v7)
-								ok = 1;
-							io_FormatTextBuffer(buf, req, amount, a0, sel * 2 + 0x9a8);
+
+
 							if (ok && fcn_00526120(buf, 1)) {
 								fcn_0057e880(0x2b, (int) a0, 0, sel);
 								fcn_004c4eb0(s_6aa328);
@@ -209,6 +198,18 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 									goto wait;
 								}
 							}
+						}
+					} else {
+						if (q && (((*(unsigned short*) q == 0) == 0xfd) || g_7746c8)) {
+							p = node + 1;
+							{
+								char* d = name;
+								while ((*d++ = *p++) != 0)
+									;
+							}
+							_strupr(name);
+							fcn_0064d41a(text, s_68b7ac, name);
+							fcn_00526920(a0, *(int*) ((char*) q + 2), text);
 						}
 					}
 				}

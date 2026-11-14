@@ -45,11 +45,11 @@ void __cdecl fcn_00452740(void *arg)
 	if (n > 0) {
 		for (i = 0; i < *(int*) (obj + 0xd8); i++) {
 			p = *(int *) (obj + 0x28) + i * 0x54;
-			if ((*(unsigned char *) (p + 0x51) & 1) != 0 && *(char *) (p + 0x4f) != 0) {
-				if (*(char *) (p + 0x50) == 0)
-					v = *(int *) (obj + 0xdc);
-				else
+			if ((*(unsigned char *) (p + 0x51) & 1) != 0 && *(unsigned char *) (p + 0x4f) > 0) {
+				if (*(unsigned char *) (p + 0x50) > 0)
 					v = fcn_0045cb10(*(int *) (obj + 0xe0), *(char*) (p + 0x50));
+				else
+					v = *(int *) (obj + 0xdc);
 				cnt++;
 				*(int *) (*(int *) (obj + 0x2c) - 4 + cnt * 4) = v;
 				*(int *) (*(int *) (obj + 0x30) - 4 + cnt * 4) = p;

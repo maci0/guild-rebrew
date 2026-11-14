@@ -83,8 +83,8 @@ void __cdecl fcn_0054da10(char* a)
 			goto ent0;
 		}
 		q = fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, 0x146);
-		damage = 0;
 		hits = 0;
+		damage = 0;
 		p = a + 0xc4;
 		for (i = 4; i != 0; i--) {
 			if (*(int*) p != -1) {

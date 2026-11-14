@@ -93,12 +93,12 @@ void __cdecl fcn_00564460(char* e)
 
 			v4 = *(unsigned char**) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4e10);
 			if (v4 != 0) {
-				if (v4 != p) {
+				if (v4 == p) {
+					f = 5.0f;
+				} else {
 					if (v4 != 0 && *v4 < *p) {
 						f = 1.2f;
 					}
-				} else {
-					f = 5.0f;
 				}
 			}
 		}

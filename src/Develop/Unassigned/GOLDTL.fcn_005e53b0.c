@@ -68,7 +68,7 @@ void __cdecl fcn_005e53b0(void *arg)
     char *selected[4];
     char text[0x800];
     char *house, *p, *ui;
-    int window, cost, count, i, n, j, width;
+    int window, cost, count, i, n, j;
     char refresh;
     ITEM *item;
     unsigned int last;
@@ -89,12 +89,16 @@ void __cdecl fcn_005e53b0(void *arg)
     d2_SetForm(window, 0);
     fcn_005340f0(g_772514);
     d2_SetForm(window, 1);
-    width = *(int *)(g_1015f4c + g_772514 * 972) - *(short *)(g_772500 + 0x1ebd8);
-    items[0].x = width / 2; items[0].y = 30;
-    items[1].x = width / 3 - 10; items[1].y = 125;
-    items[2].x = width * 2 / 3 + 10; items[2].y = 125;
-    items[3].x = width / 3 - 100; items[3].y = 220;
-    items[4].x = width * 2 / 3 + 100; items[4].y = 220;
+    items[0].y = 30;
+    items[0].x = (*(int *)(g_1015f4c + g_772514 * 972) - *(short *)(g_772500 + 0x1ebd8)) / 2;
+    items[1].y = 125;
+    items[1].x = (*(int *)(g_1015f4c + g_772514 * 972) - *(short *)(g_772500 + 0x1ebd8)) / 3 - 10;
+    items[2].y = 125;
+    items[2].x = (*(int *)(g_1015f4c + g_772514 * 972) - *(short *)(g_772500 + 0x1ebd8)) * 2 / 3 + 10;
+    items[3].y = 220;
+    items[3].x = (*(int *)(g_1015f4c + g_772514 * 972) - *(short *)(g_772500 + 0x1ebd8)) / 3 - 100;
+    items[4].y = 220;
+    items[4].x = (*(int *)(g_1015f4c + g_772514 * 972) - *(short *)(g_772500 + 0x1ebd8)) * 2 / 3 + 100;
     d2_SetForm(window, 3);
     fcn_00533a60(g_772514, 0, buttons, 2, g_14b59fc, g_14b5a00);
     do {

@@ -1,4 +1,6 @@
 typedef void (__cdecl* CALLBACK)(int, int, int, int, int, int, int, int, int, int);
+void __cdecl fcn_00455f80(int, int, int, int, unsigned char*, int, int, int, int, int);
+void __cdecl fcn_00455f60(int, int, int, int, unsigned char*);
 
 /* ADDRESS: GOLDTL 0x00455d30 */
 void __cdecl fcn_00455d30(int count, int arg1, unsigned char flags, int arg3, int arg4)
@@ -19,11 +21,11 @@ void __cdecl fcn_00455d30(int count, int arg1, unsigned char flags, int arg3, in
 			cb = (CALLBACK) 0x455e60;
 		}
 		else {
-			cb = (CALLBACK) 0x455f80;
+			cb = (CALLBACK) fcn_00455f80;
 		}
 	}
 	else {
-		cb = (CALLBACK) 0x455f60;
+		cb = (CALLBACK) fcn_00455f60;
 	}
 	if (count <= 0)
 		return;

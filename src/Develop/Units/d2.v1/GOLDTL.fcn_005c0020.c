@@ -26,7 +26,7 @@ void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl fcn_0046e830(int, int, int, int, int);
-int __cdecl fcn_004f61c0(int*, int*, int*, int);
+int __cdecl fcn_004f61c0(int*, int*, int*, unsigned short);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005ca560(Rec38*);
 int __cdecl fcn_005ca740(int, int, int, int, Rec38*, int);
@@ -71,32 +71,32 @@ void __cdecl fcn_005c0020(void)
 	for (i = 0; i < n; i++) {
 		p = gm_LookupEntityRecordById(v12[i]);
 		if (p != 0) {
-			rec = &recs[count];
-			rec->x0 = (int) p;
-			rec->x2c = v10[i];
-			rec->x34 = v11[i];
-			fcn_005ca560(rec);
-			rec->x30 = 1;
+
+			recs[count].x0 = (int) p;
+			recs[count].x2c = v10[i];
+			recs[count].x34 = v11[i];
+			fcn_005ca560(&recs[count]);
+			recs[count].x30 = 1;
 			count++;
 		}
 	}
 	d2_SetForm(dlg, 2);
 	if (count != 0) {
-		if (count > 0) {
-			y = 10;
-			for (i = 0; i < count; i++) {
-				rec = &recs[i];
-				sprintf(buf, (char*) 0x6ac4e8, rec->x2c, rec->x34,
-				    (rec->x2c != 1) + 0x1748);
-				rec->x10 = 0x32;
-				rec->x14 = y;
-				fcn_005ca740(0x32, y, g_772514, 0x56, rec, 1);
-				fcn_005c9160(buf,
-				    *(int*) (0x1015f4c + g_772514 * 0x3cc) - 0xf,
-				    y + 0x2d, 200, 0x55);
-				y += 0x69;
-			}
+
+
+		for (i = 0, y = 10; i < count; i++, y += 0x69) {
+			rec = &recs[i];
+			sprintf(buf, (char*) 0x6ac4e8, rec->x2c, rec->x34,
+			    (rec->x2c != 1) + 0x1748);
+			rec->x10 = 0x32;
+			rec->x14 = y;
+			fcn_005ca740(0x32, y, g_772514, 0x56, rec, 1);
+			fcn_005c9160(buf,
+			    *(int*) (0x1015f4c + g_772514 * 0x3cc) - 0xf,
+			    y + 0x2d, 200, 0x55);
+
 		}
+
 	}
 	else {
 		io_AppendText(0x1741, g_774970);

@@ -9,7 +9,6 @@ extern int g_6b7fac;
 extern int SonnenstrahlenStartZeit;
 extern float flt_1;
 extern float g_6628a8;
-extern float g_6628c8;
 extern float g_6628fc;
 extern float g_662a7c;
 extern float g_662b28;
@@ -73,7 +72,7 @@ void __cdecl fcn_00418860(char* obj)
 		camera = g_6b8014;
 		a = (float) fmod(*(float*) (obj + 0x88) - *(float*) (camera + 0x88), g_662958);
 		if (a < g_6628a8) {
-			a += g_6628c8;
+			a += 6.2831855f;
 		}
 		a = (float) fmod(a, g_662958);
 		if (a > g_6628fc) {

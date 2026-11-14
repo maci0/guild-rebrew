@@ -81,11 +81,11 @@ void __cdecl fcn_005522d0(char* ev)
 			if (fcn_004c4450(*(unsigned int*) (ev + 0xbc + i * 4)) == 1) {
 				p = fcn_004c4480(*(unsigned int*) (ev + 0xbc + i * 4));
 			}
-			if (p == 0) {
-				*(unsigned int*) (ev + 0xbc + i * 4) = 0xffffffff;
+			if (p != 0) {
+				*(unsigned int*) (ev + 0xbc + i * 4) = *(unsigned int*) ((char*) p + 4);
 			}
 			else {
-				*(unsigned int*) (ev + 0xbc + i * 4) = *(unsigned int*) ((char*) p + 4);
+				*(unsigned int*) (ev + 0xbc + i * 4) = 0xffffffff;
 			}
 		}
 		fcn_00500bb0(ev + 0x52, 0, 1, 0);

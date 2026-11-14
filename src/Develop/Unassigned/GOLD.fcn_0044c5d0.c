@@ -1,6 +1,14 @@
+#include <string.h>
+
 /* ADDRESS: GOLD 0x0044c5d0 */
-int __cdecl fcn_0044c5d0(void)
+char* __cdecl fcn_0044c5d0(char* name)
 {
-	/* Stub: provider restored; native behavior and full C contract unrecovered. */
+	char* e;
+
+	for (e = *(char**) 0xfc2ffc; e != (char*) 0xfc4a40; e = *(char**) (e + 0x1fc)) {
+		if (_strnicmp(name, e, 0x3f) == 0) {
+			return e;
+		}
+	}
 	return 0;
 }

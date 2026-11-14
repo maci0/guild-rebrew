@@ -36,7 +36,6 @@ int __cdecl fcn_00441ab0(char* o, int mx, int my, float radius, float* out)
 	int packed;
 	float pos[3];
 	float cur[3];
-	Cell_441ab0* cell;
 	Viewport_441ab0* vp;
 	int b;
 	int a;
@@ -74,16 +73,15 @@ int __cdecl fcn_00441ab0(char* o, int mx, int my, float radius, float* out)
 	best = 1.0f;
 	packed = -1;
 	vp = (Viewport_441ab0*) g_1052be0;
-	cell = (Cell_441ab0*) (o + 0xa0);
 	for (b = 0; b < 8; b++) {
 		for (a = 0; a < 8; a++) {
-			if (cell->on != 0) {
-				pos[0] = (float) (*(int*) (o + 4) * a) * *(float*) (o + 0x60) +
-				         (float) (*(int*) (o + 4) * b) * *(float*) (o + 0x70);
-				pos[1] = (float) (*(int*) (o + 4) * a) * *(float*) (o + 0x64) +
-				         (float) (*(int*) (o + 4) * b) * *(float*) (o + 0x74);
-				pos[2] = (float) (*(int*) (o + 4) * a) * *(float*) (o + 0x68) +
-				         (float) (*(int*) (o + 4) * b) * *(float*) (o + 0x78);
+			if (((Cell_441ab0*) (o + 0xa0))[b * 8 + a].on > 0) {
+				pos[0] = (float) (*(int*) (o + 4) * b) * *(float*) (o + 0x70);
+				pos[1] = (float) (*(int*) (o + 4) * b) * *(float*) (o + 0x74);
+				pos[2] = (float) (*(int*) (o + 4) * b) * *(float*) (o + 0x78);
+				pos[0] += (float) (*(int*) (o + 4) * a) * *(float*) (o + 0x60);
+				pos[1] += (float) (*(int*) (o + 4) * a) * *(float*) (o + 0x64);
+				pos[2] += (float) (*(int*) (o + 4) * a) * *(float*) (o + 0x68);
 				for (row = 0; row < *(int*) (o + 4); row++) {
 					height = *(unsigned char**)(o + 0x10) + (*(int*)(o + 4) * b + row) * *(int*)o + *(int*)(o + 4) * a;
 					cur[0] = pos[0];
@@ -125,7 +123,6 @@ int __cdecl fcn_00441ab0(char* o, int mx, int my, float radius, float* out)
 					pos[2] += *(float*) (o + 0x78);
 				}
 			}
-			cell++;
 		}
 	}
 	return packed;

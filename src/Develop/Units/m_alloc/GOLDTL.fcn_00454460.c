@@ -14,6 +14,7 @@ int __cdecl fcn_00454460(int a0, int a1, int a2, int a3, int* a4, int a5, int* a
 
 	int v;
 
+	s = 0;
 	v = *a6;
 	if (v == 0) {
 		s = (int*) fcn_004524e0(a2, a3, (int) a4, a5, a0, 0x452c60);
@@ -21,8 +22,6 @@ int __cdecl fcn_00454460(int a0, int a1, int a2, int a3, int* a4, int a5, int* a
 		s = (int*) fcn_004524e0(a2, a3, (int) a4, a5, a0, 0x453470);
 	} else if (v == 2) {
 		s = (int*) fcn_004524e0(a2, a3, (int) a4, a5, a0, 0x453d80);
-	} else {
-		return 0;
 	}
 	if (s != 0) {
 		fcn_004526d0(s, a1);

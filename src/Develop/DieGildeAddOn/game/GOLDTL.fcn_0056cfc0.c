@@ -112,11 +112,11 @@ void __cdecl fcn_0056cfc0(char *a0)
 					}
 					r = fcn_00445600((char *)*(int *)(e + 0x61), 0x100, 0,
 							 &names[(unsigned char)*(unsigned char *)(a0 + 0xb4)][0]);
-					if (r == 0) {
+					if (r != 0) {
+						fcn_00455350(r, r + 0x4c, pos);
+					} else {
 						r = fcn_00445600((char *)*(int *)(e + 0x61), 0x100, 0,
 								 g_6a2edc);
-					} else {
-						fcn_00455350(r, r + 0x4c, pos);
 					}
 					if (r != 0) {
 						fcn_00455350(r, r + 0x4c, pos);

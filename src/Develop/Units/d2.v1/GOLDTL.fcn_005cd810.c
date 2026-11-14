@@ -75,7 +75,7 @@ void __cdecl fcn_005cd810(int a0)
 			d2_SetForm(dlg, 2);
 			io_AppendText(0x6811b0);
 			if (sel)
-				io_AppendText(0xa0, *sel2);
+				io_AppendText(0xa0, (unsigned short) *sel2);
 			else
 				io_AppendText(0x6a9ac4, a0 + 0x12b2);
 			d2_SetForm(dlg, 3);
@@ -89,7 +89,7 @@ void __cdecl fcn_005cd810(int a0)
 			}
 			if (((1 <= a0) && (a0 <= 6)) || (a0 == 8)) {
 				count = fcn_004e8b80(a0, 6, src1);
-				if (count >= 1) {
+				if (count > 0) {
 					for (i = 0; i < count; i++) {
 						rec[i].ent = gm_LookupEntityRecordById(*(int*) (src1 + i * 0x18 + 4));
 						rec[i].text = *(unsigned char*) (src1 + i * 0x18 + 8);
@@ -99,7 +99,7 @@ void __cdecl fcn_005cd810(int a0)
 				if (a0 != 7)
 					return;
 				count = fcn_004e8cb0(0, 6, src2);
-				if (count >= 1) {
+				if (count > 0) {
 					for (i = 0; i < count; i++) {
 						rec[i].ent = gm_LookupEntityRecordById(*(int*) (src2 + i * 0x18 + 4));
 						rec[i].text = *(unsigned char*) (src2 + i * 0x18 + 8);

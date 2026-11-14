@@ -71,13 +71,10 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
 		v5 = *(unsigned char*) (a4[0] + 2);
 		if (v5 != 5 && v5 != 6 && v5 != 7)
 			return 0;
-		v7 = *(int*) (a4[0] + 0x54);
-		v6 = a0 - 0x20;
+		fcn_0046f740(a0 - 0x20, v8, *(int*) (a4[0] + 0x54), g_772514);
 	} else {
-		v8 = a1 + 0x1d;
-		v7 = 0x4fb;
-		v6 = v10 - ((D2_BILD_GROESSE*)g_772500)[0x4fb].breite / 2 - 3;
+		fcn_0046f740(v10 - ((D2_BILD_GROESSE*)g_772500)[0x4fb].breite / 2 - 3,
+		             a1 + 0x1d, 0x4fb, g_772514);
 	}
-	fcn_0046f740(v6, v8, v7, g_772514);
 	return 0;
 }

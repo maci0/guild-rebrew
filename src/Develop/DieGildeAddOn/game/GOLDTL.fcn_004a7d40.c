@@ -38,10 +38,10 @@ void __cdecl fcn_004a7d40(void)
 				switch (*(int*) (p + 0x2c)) {
 				case 0:
 					if (*(int*) (p + 0x20) != 0) {
-						if (rank_n >= 3) {
+						if (rank_n > 2) {
 							goto set_g;
 						}
-					} else if (rank_n >= 2 || (unsigned short) gm_RandomMod(4) == 1) {
+					} else if (rank_n > 1 || (unsigned short) gm_RandomMod(4) == 1) {
 						goto set_g;
 					}
 					break;
@@ -61,7 +61,7 @@ void __cdecl fcn_004a7d40(void)
 					break;
 				case 2:
 					if (*(int*) (p + 0x20) == 0
-					    && (n = fcn_004a7770((int*) (p + 8), 0, 7, &unused_rank), *(unsigned char*) (g_1007cd4 + 0xb5) <= 4)
+					    && (n = fcn_004a7770((int*) (p + 8), 0, 7, &unused_rank), *(unsigned char*) (g_1007cd4 + 0xb5) < 5)
 					    && n == 3
 					    && (unsigned short) gm_RandomMod(4) == 1) {
 						goto set_g;
@@ -69,7 +69,7 @@ void __cdecl fcn_004a7d40(void)
 					break;
 				case 3:
 					if (*(int*) (p + 0x20) == 0
-					    && (n = fcn_004a7770((int*) (p + 8), 0, 7, &unused_rank), *(unsigned char*) (g_1007cd4 + 0xb5) <= 4)
+					    && (n = fcn_004a7770((int*) (p + 8), 0, 7, &unused_rank), *(unsigned char*) (g_1007cd4 + 0xb5) < 5)
 					    && n == 3
 					    && (unsigned short) gm_RandomMod(5) == 1) {
 						goto set_g;

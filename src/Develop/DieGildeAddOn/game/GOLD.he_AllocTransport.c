@@ -3,6 +3,7 @@
 
 extern unsigned char* lpGebaeudePROT;
 extern char g_770b80[];
+extern unsigned char g_773d75;
 
 typedef struct TransportBuildingRow {
 	unsigned char kind;
@@ -207,7 +208,7 @@ void __cdecl he_AllocTransport(char* a0)
 			if ((*(unsigned char*) (a0 + 0x78) & 2) != 0) {
 				fcn_004c51a0(-1, *(int*) ((g_770b80 + 4) +
 				              *(unsigned short*) (a0 + 8) * 0x21c),
-				             *(char*) 0x6f1bc5, v);
+				             (char) g_773d75, v);
 				*(int*) (a0 + 0x84) = -1;
 				*(int*) (a0 + 0xec) = -1;
 				return;

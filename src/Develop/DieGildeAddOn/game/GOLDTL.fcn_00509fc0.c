@@ -114,12 +114,12 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 	while (p != 0) {
 		mask = 0;
 		bit = 0;
-		i = *(unsigned char*) (lpGebaeudePROT + *p * 0x24d);
-		if (i >= 0x20) {
-			bit = 1 << (i - 0x20);
+
+		if (lpGebaeudePROT[*p * 0x24d] > 0x1f) {
+			bit = 1 << (lpGebaeudePROT[*p * 0x24d] - 0x20);
 		}
 		else {
-			mask = 1 << i;
+			mask = 1 << lpGebaeudePROT[*p * 0x24d];
 		}
 		send = 0;
 		cur = 0;

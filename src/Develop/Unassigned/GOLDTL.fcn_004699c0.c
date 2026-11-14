@@ -59,6 +59,12 @@ int __cdecl fcn_004699c0(unsigned int a0, int a1, int a2)
 		*(int*) (off + *(int*) &g_1015ea0 + 0x18) = *(unsigned short*) (tp + 6);
 		*(int*) (off + *(int*) &g_1015ea0 + 0x1c) = *(unsigned short*) (tp + 8);
 		return idx;
+	case 17:
+		tp = (char*) *(int*) (off + *(int*) &g_1015ea0 + 0xc);
+		*(int*) (off + *(int*) &g_1015ea0 + 0x18) = *(short*) (tp + 0xc);
+		*(int*) (off + *(int*) &g_1015ea0 + 0x1c) = *(short*) (tp + 0xe);
+		*(int*) (off + *(int*) &g_1015ea0 + 0x88) = 2;
+		return idx;
 	case 5:
 	case 8:
 		*(int*) (v1 + 0x88) = g_772568;
@@ -72,12 +78,6 @@ int __cdecl fcn_004699c0(unsigned int a0, int a1, int a2)
 		*(int*) (v1 + 0x1d8) = *(unsigned short*) (tp + 8);
 		*(char*) (off + *(int*) &g_1015ea0 + 0x7c) = 8;
 		*(char*) (off + *(int*) &g_1015ea0 + 0x7d) = 8;
-		return idx;
-	case 17:
-		tp = (char*) *(int*) (off + *(int*) &g_1015ea0 + 0xc);
-		*(int*) (off + *(int*) &g_1015ea0 + 0x18) = *(short*) (tp + 0xc);
-		*(int*) (off + *(int*) &g_1015ea0 + 0x1c) = *(short*) (tp + 0xe);
-		*(int*) (off + *(int*) &g_1015ea0 + 0x88) = 2;
 		return idx;
 	}
 	return idx;

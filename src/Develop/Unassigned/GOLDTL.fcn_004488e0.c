@@ -27,26 +27,22 @@ int __cdecl fcn_004488e0(char* path, void* stream, char* parent)
 	}
 	if (s != 0) {
 		fcn_004011f0(s, &magic);
-		if ((magic & 0xffff0000) != 0x3a6c0000) {
-			if (stream == 0) {
-				CloseVfsStream(s);
-			}
-			return (int) result;
-		}
-		if (magic >= 0x3a6c00ae) {
-			g_6b85a4 = 0;
-			fcn_004011f0(s, &count);
-			for (i = 0; i < count; i++) {
-				object = rd_object(s, parent, magic, 1);
-				if (result != 0 && object != 0 && parent != 0) {
-					fcn_00439ba0(result, object);
+		if ((magic & 0xffff0000) == 0x3a6c0000) {
+			if (magic >= 0x3a6c00ae) {
+				g_6b85a4 = 0;
+				fcn_004011f0(s, &count);
+				for (i = 0; i < count; i++) {
+					object = rd_object(s, parent, magic, 1);
+					if (result != 0 && object != 0 && parent != 0) {
+						fcn_00439ba0(result, object);
+					}
+					if (object != 0 && result == 0) {
+						result = object;
+					}
 				}
-				if (object != 0 && result == 0) {
-					result = object;
-				}
+			} else {
+				result = rd_object(s, parent, magic, 1);
 			}
-		} else {
-			result = rd_object(s, parent, magic, 1);
 		}
 		if (stream == 0) {
 			CloseVfsStream(s);

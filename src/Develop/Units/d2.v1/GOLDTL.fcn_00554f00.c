@@ -99,24 +99,22 @@ void __cdecl fcn_00554f00(char* a0)
 	default: return;
 	}
 state_zero:
-	h = *(char**) (a0 + 0x74);
-	if (h == 0) {
+
+	if (*(char**) (a0 + 0x74) == 0) {
 		if (p == rec) {
 			fcn_00545670(a0, 0, 0, g_6a5e78, 0x5fd);
 		} else {
 			fcn_00545670(a0, 0, 0, g_6a5e60, 0x5fe);
 		}
 	}
-	h = *(char**) (a0 + 0x74);
-	if (h == 0) {
+
+	if (*(char**) (a0 + 0x74) == 0) {
 		fcn_00546190(a0);
 		return;
 	}
-	fcn_00471b60(*(int*) (h + 8));
-	d2_SetForm(*(int*) (h + 8), 1);
-	if (p != rec) {
-		goto other_record;
-	}
+	fcn_00471b60(*(int*) (*(char**) (a0 + 0x74) + 8));
+	d2_SetForm(*(int*) (*(char**) (a0 + 0x74) + 8), 1);
+	if (p == rec) {
 	if (*(int*) (a0 + 0xb4) == 0) {
 		fcn_004c4510(p, *(int*) (p + 4));
 		fcn_004c4570(1, 1, 0xd, a0 + 0xac);
@@ -164,7 +162,7 @@ state_zero:
 	fcn_004c30a0(-7, 0, g_67d908, -1, 0);
 	goto tail;
 
-other_record:
+	}
 	c = *(unsigned char*) (a0 + 0xac);
 	w = *(unsigned short*) p;
 	if (c == 9) {

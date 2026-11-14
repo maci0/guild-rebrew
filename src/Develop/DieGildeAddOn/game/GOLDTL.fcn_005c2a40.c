@@ -75,6 +75,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	int id;
 	int handle;
 	int val;
+	int owner;
 	float scale;
 	float lo;
 	float hi;
@@ -82,6 +83,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	total = 0;
 	others = 0;
 	removed = 0;
+	owner = *(int*) (a0 + 1);
 	ep = slots;
 	for (i = 0x20; i != 0; i--) {
 		ep[1] = -1;
@@ -89,7 +91,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 		ep[0] = 0;
 		ep += 3;
 	}
-	if (fcn_005463a0(2, 0, 0x1f, 3, *(int*) (a0 + 1)) != 0) {
+	if (fcn_005463a0(2, 0, 0x1f, 3, owner) != 0) {
 		do {
 			total++;
 		} while (he_fn_Handlung() != 0);
@@ -161,7 +163,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00476b60();
 	do {
-		r = gm_SearchTable67(*(int*) (a0 + 1));
+		r = gm_SearchTable67(owner);
 		if ((a0[0x5b] & 4) != 0 || r == 0) {
 			g_774654 = 1;
 		}

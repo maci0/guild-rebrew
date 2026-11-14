@@ -36,68 +36,68 @@ void __cdecl fcn_00472c30(int x0, int y0, int x1, int y1, int a4, int a5, int a6
 		}
 		return;
 	}
-	if (x0 != x1) {
-		if (x0 < x1) {
-			sx = 1;
-			dx = x1 - x0;
-		} else {
-			sx = -1;
-			dx = x0 - x1;
-		}
-		if (y0 < y1) {
-			sy = 1;
-			dy = y1 - y0;
-		} else {
-			sy = -1;
-			dy = y0 - y1;
-		}
-		d2_Plot(x0, y0, a4, a5, a6);
-		if (dx > dy) {
-			d2 = dy * 2;
-			e2 = (dy - dx) * 2;
-			e = d2 - dx;
-			do {
-				x0 += sx;
-				if (e < 0) {
-					e += d2;
-				} else {
-					y0 += sy;
-					e += e2;
-				}
-				d2_Plot(x0, y0, a4, a5, a6);
-			} while (x0 != x1);
+	if (x0 == x1) {
+		if (y1 < y0) {
+			n = y0 - y1;
+			if (n > 0) {
+				do {
+					d2_Plot(x1, y1++, a4, a5, a6);
+
+				} while (--n);
+			}
 			return;
 		}
-		d2 = dx * 2;
-		e2 = (dx - dy) * 2;
-		e = d2 - dy;
-		do {
-			y0 += sy;
-			if (e < 0) {
-				e += d2;
-			} else {
-				x0 += sx;
-				e += e2;
-			}
-			d2_Plot(x0, y0, a4, a5, a6);
-		} while (y0 != y1);
-		return;
-	}
-	if (y1 < y0) {
-		n = y0 - y1;
+		n = y1 - y0;
 		if (n > 0) {
 			do {
-				d2_Plot(x1, y1++, a4, a5, a6);
+				d2_Plot(x1, y0++, a4, a5, a6);
 
 			} while (--n);
 		}
 		return;
 	}
-	n = y1 - y0;
-	if (n > 0) {
-		do {
-			d2_Plot(x1, y0++, a4, a5, a6);
-
-		} while (--n);
+	if (x0 < x1) {
+		sx = 1;
+		dx = x1 - x0;
+	} else {
+		sx = -1;
+		dx = x0 - x1;
 	}
+	if (y0 < y1) {
+		sy = 1;
+		dy = y1 - y0;
+	} else {
+		sy = -1;
+		dy = y0 - y1;
+	}
+	d2_Plot(x0, y0, a4, a5, a6);
+	if (dx > dy) {
+		d2 = dy * 2;
+		e2 = (dy - dx) * 2;
+		e = d2 - dx;
+		do {
+			x0 += sx;
+			if (e < 0) {
+				e += d2;
+			} else {
+				y0 += sy;
+				e += e2;
+			}
+			d2_Plot(x0, y0, a4, a5, a6);
+		} while (x0 != x1);
+		return;
+	}
+	d2 = dx * 2;
+	e2 = (dx - dy) * 2;
+	e = d2 - dy;
+	do {
+		y0 += sy;
+		if (e < 0) {
+			e += d2;
+		} else {
+			x0 += sx;
+			e += e2;
+		}
+		d2_Plot(x0, y0, a4, a5, a6);
+	} while (y0 != y1);
 }

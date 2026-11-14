@@ -8,7 +8,7 @@ int __cdecl fcn_00441400();
 int __cdecl fcn_00441050();
 float __cdecl fcn_004424c0();
 int __cdecl fcn_00437160();
-int __cdecl fcn_00450cb0();
+void __cdecl fcn_00450cb0(int ctx, unsigned char mask);
 void __cdecl fcn_004509c0(void);
 int __cdecl fcn_00450e90();
 int __cdecl fcn_00451df0();

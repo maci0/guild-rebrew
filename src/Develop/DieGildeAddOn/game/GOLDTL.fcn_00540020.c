@@ -583,28 +583,23 @@ next2:
 	agebits = -1;
 	for (i = 0; i < 0x300; i++) {
 
-		if (*(char**) (SLOTPTR(i) + 0x184) == 0) {
-			continue;
-		}
-		if (fcn_00567170(SLOTPTR(i), &cand, &agebits, &left) == 0) {
-			continue;
-		}
-		if (cand == *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x2c)
-		    && agebits == *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x30)) {
-			continue;
-		}
-		if (*(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x28) != -1) {
-			fcn_00428720(fcn_00426cc0(*(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x28)));
-		}
-		fcn_00406120(*(char**) (SLOTPTR(i) + 0x184));
-		if (agebits != -1) {
-			char* r = fcn_0040c120(*(char**) (SLOTPTR(i) + 0x184), 0x33, left, cand, agebits);
+		if (*(char**) (SLOTPTR(i) + 0x184) != 0
+		    && fcn_00567170(SLOTPTR(i), &cand, &agebits, &left) != 0
+		    && (cand != *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x2c)
+			|| agebits != *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x30))) {
+			if (*(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x28) != -1) {
+				fcn_00428720(fcn_00426cc0(*(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x28)));
+			}
+			fcn_00406120(*(char**) (SLOTPTR(i) + 0x184));
+			if (agebits != -1) {
+				char* r = fcn_0040c120(*(char**) (SLOTPTR(i) + 0x184), 0x33, left, cand, agebits);
 
-			if (r != 0) {
-				r += 0x70;
-				*(int*) r = g_6a42f8;
-				*(int*) (r + 4) = g_6a42fc;
-				*(int*) (r + 8) = g_6a4300;
+				if (r != 0) {
+					r += 0x70;
+					*(int*) r = g_6a42f8;
+					*(int*) (r + 4) = g_6a42fc;
+					*(int*) (r + 8) = g_6a4300;
+				}
 			}
 		}
 		if ((g_7747b0 & 8) && *(char**) (SLOTPTR(i) + 0x184) != 0

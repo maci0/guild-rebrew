@@ -54,6 +54,8 @@ void __cdecl fcn_0058dbe0(int a0)
 	int* v27;
 	int rec;
 	int* v30;
+	int fill_n;
+	char* fill;
 
 	io_FormatTextBuffer(text, 0x40c8, 0x40b6);
 	if (fcn_005463a0(2, 0, 0x90, 3, *(int*) (a0 + 1))) {
@@ -61,8 +63,28 @@ void __cdecl fcn_0058dbe0(int a0)
 		fcn_00526120(text, 0);
 		return;
 	}
-	for (v6 = 0; v6 < 0x50; v6++) {
-		((char*) query)[v6] = 0;
+	fill_n = 0x50;
+	fill = (char*) query;
+	/*
+	 * The reference zero-fills with the hand-written block-fill prelude no
+	 * msvc6 C spelling emits (archived docs/codegen-walls.md 6b).
+	 */
+	__asm {
+		mov edi, fill
+		mov ebx, fill_n
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L1:
+		add ecx, ebx
+		rep stosb
 	}
 	query[0] = 1;
 	query[1] = -1;

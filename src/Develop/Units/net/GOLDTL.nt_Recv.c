@@ -75,7 +75,7 @@ got_error:
 	n = *(int*) (g_14cbca4 + 8);
 	if (n != g_14cbc84 + 1) {
 		if (n == *(int*) 0xaecde0) {
-			fcn_0064d41a(buf, (char*) 0x678ba0, n, g_14cbc84);
+			fcn_0064d41a(buf, (char*) 0x678ba0, n, *(int*) 0xaecde0);
 			goto purge;
 		}
 		if (*(unsigned char*) g_14cbca4 == ' ' &&

@@ -4,7 +4,6 @@ extern char g_85ab90[];
 extern char* g_item_def_table;
 extern unsigned char g_773d75;
 extern float flt_1;
-extern float g_6628a8;
 extern double g_664e78;
 extern double dbl_1_0;
 
@@ -46,28 +45,19 @@ float __cdecl fcn_005025a0(int season, int slot)
 	if (e != 0) {
 		stock = (float) *(int*) (e + 0xe);
 	}
-	ratio = *(float*) (g_85ab90 + off + 0x24) / *(float*) (g_85ab90 + off + 0x20);
 	last = *(float*) (g_85ab90 + off + 0x38);
-	if (stock > *(float*) (g_85ab90 + off + 0x20) && *def != 0x17) {
-		if (stock < 1.0) {
-			ratio *= *(float*) (g_85ab90 + off + 0x20) / 1.0;
-		} else {
-			ratio *= *(float*) (g_85ab90 + off + 0x20) / stock;
-		}
-	} else {
-		ratio *= flt_1;
-	}
-	if (ratio > 0.25) {
-		scale = ratio;
-	} else {
-		scale = 0.25;
-	}
+	ratio = *(float*) (g_85ab90 + off + 0x24) / *(float*) (g_85ab90 + off + 0x20)
+		* ((stock > *(float*) (g_85ab90 + off + 0x20) && *def != 0x17)
+			? (stock < 1.0 ? *(float*) (g_85ab90 + off + 0x20) / 1.0
+				: *(float*) (g_85ab90 + off + 0x20) / stock)
+			: flt_1);
+	scale = ratio > 0.25 ? ratio : 0.25;
 	if (scale >= 5.0) {
 		scale = 5.0;
 	}
 	stock = scale;
 	price = ((double) eval_ObjektPreis2Credits(id, 100) * scale - (double) last) * 0.4f + *(float*) (g_85ab90 + off + 0x38);
-	if (*(float*) (g_85ab90 + off + 0x38) <= g_6628a8) {
+	if (*(float*) (g_85ab90 + off + 0x38) <= 0.0f) {
 		if (eval_ObjektPreis2Credits(id, 100) < 512.0f) {
 			return 512.0f;
 		}

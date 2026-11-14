@@ -16,7 +16,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 	unsigned char* geb;
 	int result;
 	int found;
-	int typ;
+	unsigned char typ;
 	int i;
 	unsigned char ch;
 	unsigned short id;
@@ -220,9 +220,6 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 				         *(unsigned char*) (geb + 0x169) == 0x21)
 					result = 0x52f1;
 				break;
-			case 27:
-			case 29:
-				break;
 			case 28:
 				ch = *(unsigned char*) (geb + 0x164);
 				if (gm_MapEntityStatRange(ch) == 8)
@@ -243,16 +240,17 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 		if (a2 == 0)
 			goto finish;
 		id = *a2;
-		if (*(char*) (lpObjektePROT + (unsigned int) id * 0x41) != 6) {
+		if (*(char*) (lpObjektePROT + (unsigned int) id * 0x41) == 6) {
+			if (id >= 0x91 && id <= 0x97)
+				result = 1;
+			else
+				result = 0xffffffff;
+			result |= 0x4000;
+		} else {
 			if (id >= 0x91 && id <= 0x97)
 				result = 1;
 			else
 				result = id == 0xfd ? 0x4001 : 0xffffffff;
-		} else {
-			if (id >= 0x91 && id <= 0x97)
-				result = 0x4001;
-			else
-				result = 0xffffffff;
 		}
 	}
 common:
@@ -266,9 +264,7 @@ common:
 finish:
 	if (g_774800 != 0) {
 		result = 0xffffffff;
-		if (a1 == 0)
-			return 0xffffffff;
-		if (*rec == 3 || *rec == 0x21)
+		if (a1 != 0 && (*rec == 3 || *rec == 0x21))
 			result = 0xfffffffe;
 	}
 	if (a1 != 0 && *(unsigned short*) (a1 + 0x27) == 0xffff)

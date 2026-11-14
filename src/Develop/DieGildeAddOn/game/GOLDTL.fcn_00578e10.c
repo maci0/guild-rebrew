@@ -14,13 +14,15 @@ void __cdecl fcn_00578e10(char* a0)
 	int flag;
 	int zero;
 	int n;
+	char* rec;
 
 	flag = 4;
 	zero = 0;
 	if ((*(unsigned char*) (a0 + 0x78) & flag) != 0) {
 		return;
 	}
-	n = fcn_004a5fe0(g_7f4ca0 + *(unsigned short*) (a0 + 8) * 0x21c,
+	rec = g_7f4ca0 + *(unsigned short*) (a0 + 8) * 0x21c;
+	n = fcn_004a5fe0(rec,
 	    5, flag, zero, zero, zero, 5, (int*) (a0 + 0xb4));
 	if (n == 0) {
 		fcn_00546190(a0);

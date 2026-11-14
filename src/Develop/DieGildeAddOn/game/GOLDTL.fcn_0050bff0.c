@@ -22,6 +22,8 @@ int __cdecl fcn_0050bff0(unsigned char* a0)
 	int handle;
 	unsigned int id;
 	unsigned int id2;
+	unsigned char* def;
+	unsigned char* def2;
 
 	chain_count = 0;
 	match_count = 0;
@@ -33,10 +35,11 @@ int __cdecl fcn_0050bff0(unsigned char* a0)
 		if (*slot == 0)
 			break;
 		id = *slot & 0x7fff;
+		def = (unsigned char*) g_item_def_table + id * 0x41;
 		if (seen != 0)
 			chain_count += 1;
-		if (((unsigned char*) g_item_def_table)[id * 0x41] == 2
-			|| ((unsigned char*) g_item_def_table)[id * 0x41] == 6) {
+		if (*def == 2
+			|| *def == 6) {
 			seen = 1;
 			handle = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, id);
 			if (handle != 0) {
@@ -50,14 +53,15 @@ int __cdecl fcn_0050bff0(unsigned char* a0)
 						if (*s == 0)
 							break;
 						id2 = *s & 0x7fff;
-						if (((unsigned char*) g_item_def_table)[id2 * 0x41] == 2
-							|| ((unsigned char*) g_item_def_table)[id2 * 0x41] == 6)
+						def2 = (unsigned char*) g_item_def_table + id2 * 0x41;
+						if (*def2 == 2
+							|| *def2 == 6)
 							break;
 						if (id2 == *p) {
 							match_count += repeats;
 							break;
 						}
-						if (want != 0 && ((unsigned char*) g_item_def_table)[id2 * 0x41] == want)
+						if (want != 0 && *def2 == want)
 							repeats += 1;
 					}
 					p = (unsigned short*) gm_NextEntityQueryMatch();

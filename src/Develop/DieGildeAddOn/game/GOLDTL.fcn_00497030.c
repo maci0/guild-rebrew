@@ -1,7 +1,6 @@
 extern char* lpObjektePROT;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
-extern float g_6628a8;
 
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 char* __cdecl gm_FindRecordById(unsigned int);
@@ -12,12 +11,11 @@ int __cdecl fcn_0050d320(char*, char);
 float __cdecl fcn_0050bb50(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00497030 */
-unsigned char __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
+int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 {
 	char* rec;
 	unsigned char* ent;
 	unsigned char* tbl;
-	char* row;
 	unsigned int id;
 	unsigned char kind;
 	int i;
@@ -59,28 +57,20 @@ unsigned char __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 		tbl = (unsigned char*) lpGebaeudePROT + (unsigned int) *ent * 0x24d;
 		cnt = *(unsigned char*) (tbl + 0x22);
 		i = 0;
-		if (cnt > 0) {
-			do {
-				if ((*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) == *(unsigned short*) rec) {
-					break;
-				}
-				i++;
-			} while (i < cnt);
+		while (i < cnt && (*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) != *(unsigned short*) rec) {
+			i++;
 		}
-		if (cnt <= i) {
+		if (i >= cnt) {
 			goto fail;
 		}
 		i++;
-		if (cnt <= i) {
+		if (i >= cnt) {
 			goto fail;
 		}
-		do {
-			if ((*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) == *(unsigned int*) (a3 + 4)) {
-				break;
-			}
+		while (i < cnt && (*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) != *(unsigned int*) (a3 + 4)) {
 			i++;
-		} while (i < cnt);
-		if (cnt <= i) {
+		}
+		if (i >= cnt) {
 			goto fail;
 		}
 		if (*(unsigned short*) (tbl + i * 4 + 0xa3) != 0) {
@@ -104,15 +94,10 @@ unsigned char __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 		tbl = (unsigned char*) lpGebaeudePROT + (unsigned int) *ent * 0x24d;
 		cnt = *(unsigned char*) (tbl + 0x22);
 		i = 0;
-		if (cnt > 0) {
-			do {
-				if ((*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) == *(unsigned int*) (a3 + 4)) {
-					break;
-				}
-				i++;
-			} while (i < cnt);
+		while (i < cnt && (*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) != *(unsigned int*) (a3 + 4)) {
+			i++;
 		}
-		if (cnt <= i) {
+		if (i >= cnt) {
 			goto fail;
 		}
 		if (*(unsigned short*) (tbl + i * 4 + 0xa3) != 0) {
@@ -128,7 +113,7 @@ unsigned char __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 	} else if (*a4 == 7) {
 		v28 = (int) gm_LookupEntityRecordById(*(unsigned int*) (a4 + 4));
 		if (v28 == 0) {
-			goto fail;
+			return 0;
 		}
 	} else {
 		goto fail;
@@ -154,11 +139,10 @@ done:
 		i = fcn_0050d320((char*) v28, g_773d75);
 		*(int*) (a3 + 0x10) = 0;
 	}
-	if (g_6628a8 < *(float*) (a3 + 0x14) && *(float*) (a3 + 0x14) < 1.0f) {
+	if (*(float*) (a3 + 0x14) > 0.0f && *(float*) (a3 + 0x14) < 1.0f) {
 		i = (int) ((float) i * *(float*) (a3 + 0x14));
 	}
-	row = a3 + 4;
-	return (unsigned char) (((i < (int) fcn_0050bb50(*(int*) row, g_773d75)) - 1U) & 0xb);
+	return ((i < (int) fcn_0050bb50(*(int*) (a3 + 4), g_773d75)) - 1U) & 0xb;
 
 fail:
 	return 0;

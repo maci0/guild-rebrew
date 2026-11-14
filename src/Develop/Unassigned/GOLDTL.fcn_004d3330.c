@@ -1,5 +1,6 @@
+#include <stdlib.h>
+
 extern int g_67a370;
-extern float g_6628a8;
 extern float g_662a98;
 
 float __cdecl fcn_004d3070(char* self, int x, int z, float range);
@@ -9,61 +10,40 @@ int __cdecl fcn_004d3330(char* self, int a1, int a2, int a3,
 	unsigned int* a4, unsigned int* a5)
 {
 	char* map;
-	char* cells;
 	float best;
 	float f;
 	int i;
 	int r;
 	int c;
-	int n;
 	int d;
-	int lo;
 	int hi;
-	int w; int row_hi;
+	int row_hi;
+	int cell;
 
 	map = *(char**) (((char*) g_67a370) + 0xb0);
-	best = 0.0f;
 	i = 0;
-	if (a3 > 0) {
-		do {
-			w = *(int*) (map + 0x20);
-			row_hi = w - 1;
-			if (row_hi > i + a2) {
-				row_hi = i + a2;
-			}
-			lo = a2 - i;
-			if (lo < 0) {
-				lo = 0;
-			}
-			n = a2 - lo;
-			for (r = lo; r <= row_hi; r++, n--) {
-				d = i - (n < 0 ? -n : n); w = *(int*) (map + 0x20);
-				lo = a1 - d;
-				if (lo < 0) {
-					lo = 0;
-				}
-				hi = a1 + d;
-				if (hi > w - 1) {
-					hi = w - 1;
-				}
-
-				for (c = lo; c <= hi; c++) {
-					cells = *(char**) (map + 0x24); if (*(int*) (cells + (*(int*) (map + 0x20) * r + c) * 0x1c) != 0
-						&& *(int*) (cells + (*(int*) (map + 0x20) * r + c) * 0x1c) != 0xd) {
-						f = fcn_004d3070(self, c, r,
-							(float) a3 * *(float*) (map + 0x10) * 2.0f);
-						if (f > best) {
-							best = f;
-							*a4 = c;
-							*a5 = r;
-						}
+	best = 0.0f;
+	for (; i < a3; i++) {
+		row_hi = __min(*(int*) (map + 0x20) - 1, i + a2);
+		for (r = __max(0, a2 - i); r <= row_hi; r++) {
+			d = i - abs(a2 - r);
+			hi = __min(*(int*) (map + 0x20) - 1, a1 + d);
+			for (c = __max(0, a1 - d); c <= hi; c++) {
+				cell = *(int*) (*(char**) (map + 0x24)
+					+ (*(int*) (map + 0x20) * r + c) * 0x1c);
+				if (cell != 0 && cell != 0xd) {
+					f = fcn_004d3070(self, c, r,
+						(float) a3 * *(float*) (map + 0x10) * 2.0f);
+					if (f > best) {
+						best = f;
+						*a4 = c;
+						*a5 = r;
 					}
 				}
 			}
-			i++;
-		} while (i < a3);
+		}
 	}
-	if (best != g_6628a8 && best > g_662a98) {
+	if (best != 0.0f && best > g_662a98) {
 		return 1;
 	}
 	return 0;

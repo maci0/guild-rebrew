@@ -29,9 +29,8 @@ void __cdecl fcn_0047a090(void)
 		if (obj == 0 || *(signed char*) p < 0) {
 			continue;
 		}
-		c = (unsigned char) (p[1] + (char) delta);
-		p[1] = (char) c;
-		if (c <= 1) {
+		p[1] += (char) delta;
+		if ((unsigned char) p[1] <= 1) {
 			continue;
 		}
 		cl = p[8];

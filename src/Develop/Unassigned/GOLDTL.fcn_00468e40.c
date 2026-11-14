@@ -69,8 +69,8 @@ void __cdecl fcn_00468e40(int a0, int a1)
 	fcn_0047cba0(*(int*) (v1 + 0x10), *(int*) (v1 + 0x14), a1, v2, v8);
 	fcn_0047cba0((*(int*) (v1 + 0x18) - v4->w) + *(int*) (v1 + 0x10),
 	    *(int*) (v1 + 0x14), a1, v2, v8 + 1);
-	v7 = *(int*) (v1 + 0x10) + v3->w;
-	fcn_0047a040(v7 - 1, g_7725fc, v7 + v6, g_67d968);
+
+	fcn_0047a040(*(int*) (v1 + 0x10) + v3->w - 1, g_7725fc, *(int*) (v1 + 0x10) + v3->w + v6, g_67d968);
 	i = 0;
 	if (g_662950 < (double) (v6 / v5->w) + g_662908) {
 		do {

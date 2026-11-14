@@ -1,4 +1,7 @@
 #include <math.h>
+#include <string.h>
+
+typedef struct OBJECT_COLOR { unsigned char a, b, c, d; } OBJECT_COLOR;
 
 extern int g_6b7fac;
 extern char* g_7e4260[32];
@@ -11,7 +14,7 @@ void __cdecl fcn_004c6880(int, int, int);
 char* __cdecl fcn_004ce610(char*);
 int __cdecl fcn_004cef70(int, char*);
 unsigned char __cdecl fcn_00442d50(int, unsigned char);
-void __cdecl fcn_0043d430(char*, char*, unsigned int);
+void __cdecl fcn_0043d430(char*, char*, OBJECT_COLOR);
 int __cdecl fcn_004ce270(char*, char*);
 float __cdecl fcn_004ce1b0(char*, char*);
 char* __cdecl fcn_004ceb40(char*);
@@ -24,9 +27,9 @@ void __cdecl fcn_004cee20(void);
 /* ADDRESS: GOLD 0x004cf000 */
 void __cdecl fcn_004cf000(void)
 {
-	unsigned int color;
-	char** p;
-	char** q;
+	OBJECT_COLOR color;
+	int i;
+	int j;
 	char* e;
 	char* d;
 	char* o;
@@ -39,33 +42,35 @@ void __cdecl fcn_004cf000(void)
 	float best;
 	int found;
 	int t;
+	unsigned char c;
 
 	if (*(int*) ((*(char**) 0x6f0d74) + 4) == (*(int*) 0x60cb3c)) {
 		if ((unsigned int) g_6b7fac % 350 == 0) {
-			for (p = g_7e4260; p < &g_7e4260[32]; p++) {
-				e = *p;
+			for (i = 0; i < 32; i++) {
+				e = g_7e4260[i];
 				if (e == 0) {
 					continue;
 				}
-				t = *(unsigned char*) (e + 8);
-				if (t > 4 || t == 0) {
+				c = *(unsigned char*) (e + 8);
+				if (c > 4 || c == 0) {
 					continue;
 				}
-				t -= 1;
-				*(unsigned char*) (e + 8) = (unsigned char) t;
-				if (t == 1) {
+				c -= 1;
+				*(unsigned char*) (e + 8) = c;
+				if (c == 1) {
 					*(unsigned char*) (e + 8) = 100;
 					continue;
 				}
 				d = fcn_004ce590(0x16e);
 				num = cut_RandMod((unsigned int) ((unsigned char) d[6] - (unsigned char) d[5]));
 				num += (unsigned char) d[5];
-				fcn_004c6880(*(int*) (e + 4), (int) ((double) num * *(float*) (e + 0x1c) * g_6640e8), (int) *(unsigned char*) (e + 8));
+				t = (int) ((double) num * *(float*) (e + 0x1c) * g_6640e8);
+				fcn_004c6880(*(int*) (e + 4), t, (int) *(unsigned char*) (e + 8));
 			}
 		}
 	}
-	for (p = g_7e4260; p < &g_7e4260[32]; p++) {
-		e = *p;
+	for (i = 0; i < 32; i++) {
+		e = g_7e4260[i];
 		if (e == 0) {
 			continue;
 		}
@@ -77,9 +82,10 @@ void __cdecl fcn_004cf000(void)
 			}
 			o = *(char**) (e + 0x184);
 			if (t & 0x800) {
+				memset(&color, 0, sizeof(color));
+				color.c = 0; color.a = 0x80;
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				fcn_00442d50((int) e34, 1);
-				color = 0x80;
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				*(unsigned char*) (e34 + 0x212) &= 0xfd;
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
@@ -87,17 +93,17 @@ void __cdecl fcn_004cf000(void)
 			} else {
 				best = 999999.0f;
 				found = 0;
-				for (q = g_7e4260; q < &g_7e4260[32]; q++) {
-					if (*q == 0) {
+				for (j = 0; j < 32; j++) {
+					if (g_7e4260[j] == 0) {
 						continue;
 					}
-					if (fcn_004ce270(e, *q) == 0) {
+					if (fcn_004ce270(e, g_7e4260[j]) == 0) {
 						continue;
 					}
-					if (*(char*) (*q + 8) == 0) {
+					if (*(char*) (g_7e4260[j] + 8) == 0) {
 						continue;
 					}
-					v = fcn_004ce1b0(e, *(char**) (*(char**) (*q + 0x184) + 0x34));
+					v = fcn_004ce1b0(e, *(char**) (*(char**) (g_7e4260[j] + 0x184) + 0x34));
 					if (v < g_662cf8) {
 						found = 1;
 						if (v < best) {
@@ -109,7 +115,8 @@ void __cdecl fcn_004cf000(void)
 				fcn_00442d50((int) e34, (unsigned char) found);
 				if (found) {
 					t = (int) ((*(float*) 0x5eb784) - best * (*(float*) 0x5eb7f0) * (*(float*) 0x5eb784));
-					color = (unsigned char) t;
+					memset(&color, 0, sizeof(color));
+					color.c = 0; color.a = (unsigned char) t;
 					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 					*(unsigned char*) (e34 + 0x212) &= 0xfd;
 					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);

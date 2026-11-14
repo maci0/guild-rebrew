@@ -2,6 +2,7 @@
 
 void __cdecl fcn_004518a0(float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
+extern char g_6628f8[];
 
 /* ADDRESS: GOLD 0x004539e0 */
 float __cdecl fcn_004539e0(const float* a, const float* b)
@@ -25,7 +26,7 @@ float __cdecl fcn_004539e0(const float* a, const float* b)
     opposite[1] = -second[1];
     opposite[2] = -second[2];
     if (CompareVector3WithinTolerance(first, opposite, 1.0e-7f))
-        return -3.1415927410125732f;
+        return *(float*) g_6628f8;
     orientation = *(float*) 0x5ebb94 * (second[2] * first[1] - second[1] * first[2])
         + (*(float*) 0x5ebb98 * (second[0] * first[2] - second[2] * first[0])
         + *(float*) 0x5ebb9c * (second[1] * first[0] - second[0] * first[1]));

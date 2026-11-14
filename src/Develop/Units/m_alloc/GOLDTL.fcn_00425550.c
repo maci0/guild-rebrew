@@ -71,7 +71,8 @@ int __cdecl fcn_00425550(char* name, char* ext)
 		} else {
 			found = ".mp3";
 		}
-		if (fcn_0042a5d0((int) g_6b7d80, found, g_6b7d84, size) == 0) {
+		result = fcn_0042a5d0((int) g_6b7d80, found, g_6b7d84, size);
+		if (result == 0) {
 			fcn_0042a7f0((int) g_6b7d80);
 			fcn_0064e1fd(file);
 			return result;

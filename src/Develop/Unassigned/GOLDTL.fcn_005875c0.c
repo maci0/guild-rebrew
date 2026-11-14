@@ -39,9 +39,9 @@ void __cdecl fcn_005875c0(char* o, float dt)
 	if (*(int*) (o + 0x7c) != 0)
 		return;
 	if (g_14cf718 != 0)
-		*(float*) (o + 0x20) += dt * g_662948;
+		*(float*) (o + 0x20) += dt * 0.8f;
 	else
-		*(float*) (o + 0x20) -= dt * g_665f50;
+		*(float*) (o + 0x20) -= dt * 1.6f;
 	if (*(float*) (o + 0x20) > g_6628a0 || *(float*) (o + 0x20) > g_6628a8)
 		*(float*) (o + 0x20) = (*(float*) (o + 0x20) > g_6628a0) ? g_6628a0 : *(float*) (o + 0x20);
 	else

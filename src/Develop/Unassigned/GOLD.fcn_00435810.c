@@ -1,6 +1,20 @@
+#include <string.h>
+
 /* ADDRESS: GOLD 0x00435810 */
-int __cdecl fcn_00435810(void)
+void __cdecl fcn_00435810(char* base, char* name)
 {
-	/* Stub: provider restored; native behavior and full C contract unrecovered. */
-	return 0;
+	char* p;
+	char* s;
+	int k;
+
+	if (base == 0) {
+		return;
+	}
+	p = base + 0x90;
+	for (k = 3; k != 0; k--, p += 0x7c) {
+		s = *(char**) (p - 0xc);
+		if (s != 0 && strcmp(name, s) == 0) {
+			*p &= 0xfd;
+		}
+	}
 }

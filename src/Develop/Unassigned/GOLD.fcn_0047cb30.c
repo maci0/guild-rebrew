@@ -1,6 +1,8 @@
 /* ADDRESS: GOLD 0x0047cb30 */
-int __cdecl fcn_0047cb30(void)
+void __cdecl fcn_0047cb30(int x, int y, int w, int h)
 {
-	/* Stub: provider restored; native behavior and full C contract unrecovered. */
-	return 0;
+	*(int*) 0x6f0458 = x;
+	*(int*) 0x6f045c = y;
+	*(int*) 0x5fed5c = w;
+	*(int*) 0x5fed60 = h;
 }

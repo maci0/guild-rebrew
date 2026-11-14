@@ -28,11 +28,11 @@ int __cdecl fcn_004ab3e0_gold(int action, char* actor, int busy, char* first, ch
     int chosen;
     int i;
     level = gm_CheckStatLevel(*(unsigned short*) actor, 0xe);
-    ids[0] = ids[1] = ids[2] = ids[3] = 0xffff;
+    ids[0] = 0xffff; ids[1] = 0xffff; ids[2] = 0xffff; ids[3] = 0xffff;
     best = 0;
     best_score = 0;
     candidate = 0;
-    selected[0] = selected[1] = selected[2] = selected[3] = 0;
+    selected[0] = 0; selected[1] = 0; selected[2] = 0; selected[3] = 0;
     if ((actor[0x1cc] & 8) || *(int*) (actor + 0x194) < 5 ||
         (action != 0x44 && action != 0) || busy || !level || actor[2] == 3) return 0;
     entry = g_entity_ptr;
@@ -69,9 +69,9 @@ int __cdecl fcn_004ab3e0_gold(int action, char* actor, int busy, char* first, ch
     if (!chosen) return 0;
     *(int*) (first + 4) = *(int*) (target + 4);
     *(int*) (first + 0xc) = *(int*) (selected[0] + 4);
-    if (chosen >= 2) *(int*) (first + 8) = *(int*) (selected[1] + 4);
-    if (chosen >= 3) *(int*) (second + 0xc) = *(int*) (selected[2] + 4);
-    if (chosen >= 4) *(int*) (second + 8) = *(int*) (selected[3] + 4);
+    if (chosen > 1) *(int*) (first + 8) = *(int*) (selected[1] + 4);
+    if (chosen > 2) *(int*) (second + 0xc) = *(int*) (selected[2] + 4);
+    if (chosen > 3) *(int*) (second + 8) = *(int*) (selected[3] + 4);
     *(int*) (first + 0x10) = total;
     *first = 7;
     return 0x44;

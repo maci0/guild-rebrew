@@ -1,3 +1,10 @@
+extern char g_100d0c0[];
+extern int g_100b0ac;
+extern int g_100b0a8;
+extern int g_100dc20;
+extern int g_100dc34;
+extern int g_100dc38;
+extern int g_100dc3c;
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004849b0(int, int, int);
 void __cdecl fcn_00487360(int);
@@ -79,10 +86,10 @@ void __cdecl fcn_00483480(int a0)
 		} else if (*(unsigned short *) (a0 + 0x1bc) != 0) {
 			int n;
 
-			n = *(int *) 0x100b0ac;
+			n = g_100b0ac;
 			if (n > 0) {
 				for (i = 0; i < n; i++) {
-					sp = (void *) (i * 0x58 + 0x100d0c0);
+					sp = (void *) (i * 0x58 + (int) g_100d0c0);
 					if (*(int *) sp == (int) *(unsigned short *) (a0 + 0x1bc)) {
 						if (*(int *) ((char *) sp + 0x40) >=
 							    (int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) &&
@@ -101,9 +108,9 @@ void __cdecl fcn_00483480(int a0)
 	} else {
 		int n;
 
-		n = *(int *) 0x100b0ac;
+		n = g_100b0ac;
 		for (i = 0; i < n; i++) {
-			sp = (void *) (i * 0x58 + 0x100d0c0);
+			sp = (void *) (i * 0x58 + (int) g_100d0c0);
 			if (*(int *) sp == (int) *(unsigned short *) (a0 + 0x1bc)) {
 				if (*(int *) ((char *) sp + 0x40) >=
 					    (int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) &&
@@ -126,7 +133,7 @@ type6:
 		gate = fcn_005b1e40(*(int *) (a0 + 0x16c));
 		if (gate != 0) {
 			for (i = 0; i < 0x20; i++) {
-				sp = (void *) (i * 0x58 + 0x100d0c0);
+				sp = (void *) (i * 0x58 + (int) g_100d0c0);
 				if (*(int *) sp == gate) {
 					int have;
 					int res;
@@ -178,69 +185,69 @@ shuffle:
 		order[i - 1] = order[r];
 		order[r] = j;
 	} while (i < 0x20);
-	for (i = 0; i < *(int *) 0x100b0ac; i++) {
+	for (i = 0; i < g_100b0ac; i++) {
 		int off;
 		int typ;
 		int have;
 		int res;
 
 		off = order[i] * 0x58;
-		if ((*(unsigned int *) (off + 0x100d114) & 0x400) != 0) {
+		if ((*(unsigned int *) (off + ((int) g_100d0c0 + 0x54)) & 0x400) != 0) {
 			continue;
 		}
-		typ = *(int *) (off + 0x100d0c0);
+		typ = *(int *) (off + (int) g_100d0c0);
 		if ((*(char *) (typ * 0x41 + *(int *) 0x99ec10) == 0x17 ||
 		     *(char *) (typ * 0x41 + *(int *) 0x99ec10) == 0x25) &&
-		    *(int *) (off + 0x100d0fc) < 5) {
+		    *(int *) (off + ((int) g_100d0c0 + 0x3c)) < 5) {
 			continue;
 		}
-		if ((int) *(unsigned char *) ((int) rec1 + 0x1c) >= *(int *) (off + 0x100d0dc) &&
-		    (int) *(unsigned char *) ((int) rec1 + 0x1d) >= *(int *) (off + 0x100d0e0) &&
-		    *(int *) (off + 0x100d100) >=
+		if ((int) *(unsigned char *) ((int) rec1 + 0x1c) >= *(int *) (off + ((int) g_100d0c0 + 0x1c)) &&
+		    (int) *(unsigned char *) ((int) rec1 + 0x1d) >= *(int *) (off + ((int) g_100d0c0 + 0x20)) &&
+		    *(int *) (off + ((int) g_100d0c0 + 0x40)) >=
 			    (int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) &&
 		    (res = fcn_00503d10(typ)) != 0) {
 			have = gm_eval_SlotVoll(res, typ, 1000000);
 			if ((int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) +
-				    *(int *) (off + 0x100d0fc) <= have &&
-			    fcn_00486640(a0, (void *) (off + 0x100d0c0), 1) != 0) {
-				*(unsigned int *) (off + 0x100d114) |= 8;
-				fcn_004868d0(a0, (void *) (off + 0x100d0c0));
-				*(unsigned short *) (a0 + 0x1bc) = *(unsigned short *) (off + 0x100d0c0);
+				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
+			    fcn_00486640(a0, (void *) (off + (int) g_100d0c0), 1) != 0) {
+				*(unsigned int *) (off + ((int) g_100d0c0 + 0x54)) |= 8;
+				fcn_004868d0(a0, (void *) (off + (int) g_100d0c0));
+				*(unsigned short *) (a0 + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
 				fcn_0064d41a(msg, "Produktion von %s starten",
-					*(int *) (off + 0x100d0c0) * 0x41 + 1 + *(int *) 0x99ec10);
+					*(int *) (off + (int) g_100d0c0) * 0x41 + 1 + *(int *) 0x99ec10);
 				goto tail;
 			}
 		}
 	}
-	for (i = 0; i < *(int *) 0x100b0ac; i++) {
+	for (i = 0; i < g_100b0ac; i++) {
 		int off;
 		int typ;
 		int have;
 		int res;
 
 		off = order[i] * 0x58;
-		if ((*(unsigned int *) (off + 0x100d114) & 0x400) != 0) {
+		if ((*(unsigned int *) (off + ((int) g_100d0c0 + 0x54)) & 0x400) != 0) {
 			continue;
 		}
-		typ = *(int *) (off + 0x100d0c0);
+		typ = *(int *) (off + (int) g_100d0c0);
 		if ((*(char *) (typ * 0x41 + *(int *) 0x99ec10) == 0x17 ||
 		     *(char *) (typ * 0x41 + *(int *) 0x99ec10) == 0x25) &&
-		    *(int *) (off + 0x100d0fc) < 5) {
+		    *(int *) (off + ((int) g_100d0c0 + 0x3c)) < 5) {
 			continue;
 		}
-		if ((int) *(unsigned char *) ((int) rec1 + 0x1c) >= *(int *) (off + 0x100d0dc) &&
-		    (int) *(unsigned char *) ((int) rec1 + 0x1d) >= *(int *) (off + 0x100d0e0) &&
-		    *(int *) (off + 0x100d100) >=
+		if ((int) *(unsigned char *) ((int) rec1 + 0x1c) >= *(int *) (off + ((int) g_100d0c0 + 0x1c)) &&
+		    (int) *(unsigned char *) ((int) rec1 + 0x1d) >= *(int *) (off + ((int) g_100d0c0 + 0x20)) &&
+		    *(int *) (off + ((int) g_100d0c0 + 0x40)) >=
 			    (int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) &&
 		    (res = fcn_00503d10(typ)) != 0) {
 			have = gm_eval_SlotVoll(res, typ, 1000000);
 			if ((int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) +
-				    *(int *) (off + 0x100d0fc) <= have &&
-			    fcn_00486640(a0, (void *) (off + 0x100d0c0), 0) != 0) {
-				fcn_004868d0(a0, (void *) (off + 0x100d0c0));
-				*(unsigned short *) (a0 + 0x1bc) = *(unsigned short *) (off + 0x100d0c0);
+				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
+			    fcn_00486640(a0, (void *) (off + (int) g_100d0c0), 0) != 0) {
+				fcn_004868d0(a0, (void *) (off + (int) g_100d0c0));
+				*(unsigned short *) (a0 + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
 				fcn_0064d41a(msg, "Produktion von %s starten obwohl Rohstoffe fehlen",
-					*(int *) (off + 0x100d0c0) * 0x41 + 1 + *(int *) 0x99ec10);
+					*(int *) (off + (int) g_100d0c0) * 0x41 + 1 + *(int *) 0x99ec10);
 				goto tail;
 			}
 		}
@@ -253,8 +260,8 @@ tail:
 		unsigned int *fl;
 		int n;
 
-		fl = (unsigned int *) 0x100d114;
-		n = *(int *) 0x100b0ac;
+		fl = (unsigned int *) ((int) g_100d0c0 + 0x54);
+		n = g_100b0ac;
 		for (i = n; i > 0; i--) {
 			if ((*fl & 8) != 0) {
 				int *src;
@@ -273,10 +280,10 @@ tail:
 			}
 			fl += 0x16;
 		}
-		for (i = 0; i < *(int *) 0x100b0ac; i++) {
+		for (i = 0; i < g_100b0ac; i++) {
 			unsigned int *fl2;
 
-			fl2 = (unsigned int *) (i * 0x58 + 0x100d114);
+			fl2 = (unsigned int *) (i * 0x58 + ((int) g_100d0c0 + 0x54));
 			if ((*fl2 & 0x400) != 0) {
 				*fl2 &= 0xfffffff7u;
 			}
@@ -287,27 +294,27 @@ tail:
 		int n;
 
 		pp = (int *) 0x100b0c4;
-		for (n = *(int *) 0x100b0a8; n > 0; n--) {
+		for (n = g_100b0a8; n > 0; n--) {
 			if ((pp[0xe] & 0x400) != 0 && (pp[0xe] & 0x10) != 0 && *pp >= 0) {
 				unsigned int *fl;
 
-				fl = (unsigned int *) (*pp * 0x58 + 0x100d114);
+				fl = (unsigned int *) (*pp * 0x58 + ((int) g_100d0c0 + 0x54));
 				*fl |= 0x10;
 			}
 			pp += 0x10;
 		}
 	}
-	if (*(int *) 0x100dc20 == *(int *) (a0 + 0x16c)) {
+	if (g_100dc20 == *(int *) (a0 + 0x16c)) {
 		int *pp;
 
-		pp = (int *) 0x100d0c4;
-		for (i = 0; i < *(int *) 0x100b0ac && *(int *) 0x100dc38 < 4; i++) {
+		pp = (int *) ((int) g_100d0c0 + 4);
+		for (i = 0; i < g_100b0ac && g_100dc38 < 4; i++) {
 			int dst;
 			int *src;
 			int j;
 
 			src = pp - 1;
-			dst = *(int *) 0x100dc38 * 0x58 + 0x100dc60;
+			dst = g_100dc38 * 0x58 + 0x100dc60;
 			*(ENTRY *) dst = *(ENTRY *) src;
 			for (j = 0; j < 4; j++) {
 				int id;
@@ -318,13 +325,13 @@ tail:
 					int *d2;
 
 					s2 = (int *) (id * 0x40 + 0x100b0c0);
-					d2 = (int *) ((*(int *) (*(int *) 0x100dc38 * 4 + 0x100dc40) +
-						       *(int *) 0x100dc38 * 4) * 0x40 + 0x100df20);
+					d2 = (int *) ((*(int *) (g_100dc38 * 4 + 0x100dc40) +
+						       g_100dc38 * 4) * 0x40 + 0x100df20);
 					*(RECORD *) d2 = *(RECORD *) s2;
-					*(int *) (*(int *) 0x100dc38 * 4 + 0x100dc40) += 1;
+					*(int *) (g_100dc38 * 4 + 0x100dc40) += 1;
 				}
 			}
-			*(int *) 0x100dc38 += 1;
+			g_100dc38 += 1;
 			pp += 0x16;
 		}
 	}
@@ -347,8 +354,8 @@ tail:
 		}
 		sp = (void *) ((char *) sp + 0x21c);
 	}
-	if (*(int *) 0x100dc20 == *(int *) (a0 + 0x16c)) {
-		*(int *) 0x100dc34 = arg.cur;
+	if (g_100dc20 == *(int *) (a0 + 0x16c)) {
+		g_100dc34 = arg.cur;
 	}
 	fcn_004831f0(a0);
 	arg.k = 0;
@@ -356,8 +363,8 @@ tail:
 		unsigned int *fl;
 		int n;
 
-		fl = (unsigned int *) 0x100d114;
-		n = *(int *) 0x100b0ac;
+		fl = (unsigned int *) ((int) g_100d0c0 + 0x54);
+		n = g_100b0ac;
 		for (i = n; i > 0; i--) {
 			if ((*fl & 8) != 0) {
 				arg.k++;
@@ -381,35 +388,35 @@ tail:
 	arg.zero = 0;
 	arg.z2 = 0;
 	arg.z1 = 0;
-	for (i = 0; i < *(int *) 0x100b0ac; i++) {
+	for (i = 0; i < g_100b0ac; i++) {
 		unsigned int fv;
 		unsigned int *fl;
 
-		fl = (unsigned int *) (i * 0x58 + 0x100d114);
+		fl = (unsigned int *) (i * 0x58 + ((int) g_100d0c0 + 0x54));
 		fv = *fl;
 		if ((fv & 0x10) == 0) {
 			if ((fv & 8) != 0) {
 				arg.kind = 4;
 				arg.entry = (void *) ((char *) fl - 0x54);
 				fcn_00487f90(&arg);
-				if (*(int *) 0x100dc20 == *(int *) (a0 + 0x16c) && *(int *) 0x100dc3c < 4) {
+				if (g_100dc20 == *(int *) (a0 + 0x16c) && g_100dc3c < 4) {
 					int dst;
 
-					dst = *(int *) 0x100dc3c * 0x58 + 0x100ddc0;
+					dst = g_100dc3c * 0x58 + 0x100ddc0;
 					*(ENTRY *) dst = *(ENTRY *) arg.entry;
-					*(int *) 0x100dc3c += 1;
+					g_100dc3c += 1;
 				}
 			}
 		} else if ((fv & 0x400) != 0) {
 			arg.kind = 0x8c;
 			arg.entry = (void *) ((char *) fl - 0x54);
 			fcn_00487f90(&arg);
-			if (*(int *) 0x100dc20 == *(int *) (a0 + 0x16c) && *(int *) 0x100dc3c < 4) {
+			if (g_100dc20 == *(int *) (a0 + 0x16c) && g_100dc3c < 4) {
 				int dst;
 
-				dst = *(int *) 0x100dc3c * 0x58 + 0x100ddc0;
+				dst = g_100dc3c * 0x58 + 0x100ddc0;
 				*(ENTRY *) dst = *(ENTRY *) arg.entry;
-				*(int *) 0x100dc3c += 1;
+				g_100dc3c += 1;
 			}
 		}
 	}

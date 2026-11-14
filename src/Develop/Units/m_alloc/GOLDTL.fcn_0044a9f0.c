@@ -67,7 +67,7 @@ void __cdecl fcn_0044a9f0(MeshObj* m)
 	}
 	max = 0;
 	for (v = 0; v < m->nverts; v++) {
-		max = counts[v] > max ? counts[v] : max;
+		max = max > counts[v] ? max : counts[v];
 	}
 	max = max + 1;
 	m_FreeTracked(counts);

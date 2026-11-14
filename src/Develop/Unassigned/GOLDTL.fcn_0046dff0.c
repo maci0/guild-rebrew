@@ -50,7 +50,7 @@ void __cdecl fcn_0046dff0(int a0, int a1)
 	saved = g_772554;
 	g_772554 = 1;
 	n = *(int*) (b + 0x2c);
-	if (n >= 1) {
+	if (n > 0) {
 		i = 0;
 		do {
 			id = *(int*) (*(int*) (b + 0x28) + i * 4);
@@ -67,6 +67,7 @@ void __cdecl fcn_0046dff0(int a0, int a1)
 		fcn_0046c5a0(0, a0);
 	}
 	rec = *(int*) (b + 0x274);
+	g_772554 = saved;
 	if (rec) {
 		if (rec % 8 == 0) {
 			*(char*) (b + 0x270) = 8;
@@ -78,7 +79,7 @@ void __cdecl fcn_0046dff0(int a0, int a1)
 			*(char*) (b + 0x270) = 2;
 		}
 	}
-	g_772554 = saved;
+
 	if (*(int*) (b + 0x3b8) != -1 || *(int*) (b + 0x3bc) != -1) {
 		rec = *(int*) (b + 0x3bc);
 		x = *(int*) (g_1015ea0 + 0x1f0 + rec * 0x2f4) * 0x3cc;

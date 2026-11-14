@@ -1,6 +1,6 @@
 extern int g_772514;
 extern unsigned int g_7746d8;
-extern char g_773d75;
+extern unsigned char g_773d75;
 extern char* g_1015ea0;
 extern char* lpGebaeudePROT;
 
@@ -36,6 +36,7 @@ typedef struct {
 /* g_1038144 is the page index table; g_1015f40 the window pool. */
 extern int g_1038144[];
 extern char g_1015f40[];
+extern int g_14a79c0[];
 
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_00466ee0(int, int, int, int, int);
@@ -46,8 +47,8 @@ void __cdecl fcn_0046b2b0(int);
 void __cdecl fcn_0046f280(int);
 void __cdecl fcn_0046f940(int, char*);
 int __cdecl d2_ShowTxt(int, int, char*, int);
-float __cdecl fcn_0050bb50(int, int);
-void __cdecl fcn_0050bc10(int, int, char*);
+float __cdecl fcn_0050bb50(int, unsigned char);
+void __cdecl fcn_0050bc10(int, unsigned char, char*);
 void* __cdecl fcn_005463a0(int, int, int, int, int);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_00471f80(int);
@@ -188,7 +189,7 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 		*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x1dc) = 4;
 		*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x1e0) = 0;
 		sprintf(g_1015ea0 + r->icon * 0x2f4 + 0xcc, "%s~ %li %s",
-				*(unsigned int*) (0x14a79c0 + r->id * 8), r->f30, *(char**) 0x14b52c0);
+				((unsigned int*) g_14a79c0)[r->id * 2], r->f30, *(char**) 0x14b52c0);
 		if (r->icon >= 0) {
 			fcn_00469c40(w->x + r->x + 0xf, w->y + r->y + 6, r->icon);
 		}

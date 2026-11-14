@@ -32,7 +32,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 {
 	char* rec;
 	Rec34 tmp;
-	int count;
+
 	int i;
 	int j;
 	int k;
@@ -53,39 +53,40 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 	float scale;
 
 	rec = g_entity_type_table + (int) *a0 * 0x24d;
-	count = *(unsigned char*) (rec + 0x22);
+
 	i = 0;
-	for (; i < count; i++) {
+	for (; i < *(unsigned char*) (rec + 0x22); i++) {
 		if ((*(unsigned short*) (rec + 0x23 + i * 2) & 0x7fff) == *a1) {
 			break;
 		}
 	}
-	if (i >= count) {
+	if (i >= *(unsigned char*) (rec + 0x22)) {
 		return 1;
 	}
 	g_85ab60 = 0;
-	n = 0;
+
 	i++;
 	for (; i < *(unsigned char*) (rec + 0x22); i++) {
 		j = *(unsigned short*) (rec + 0x23 + i * 2) & 0x7fff;
 		if (g_item_def_table[j * 0x41] == 2 || g_item_def_table[j * 0x41] == 6) {
 			break;
 		}
-		g_7f3f00[n].x0 = j;
-		g_7f3f00[n].x4 = *(unsigned short*) (rec + 0xa3 + i * 4);
-		g_7f3f00[n].x8 = *(unsigned short*) (rec + 0xa5 + i * 4);
-		g_7f3f00[n].xc = 0xffff;
-		g_7f3f00[n].x10 = 0;
-		g_7f3f00[n].x14 = 0;
-		g_7f3f00[n].x1c = -1;
-		g_7f3f00[n].x20 = -1;
-		g_7f3f00[n].x24 = -1;
-		g_7f3f00[n].x28 = -1;
-		g_7f3f00[n].x2c = -1;
-		g_7f3f00[n].x30 = 0xff;
-		n++;
-		g_85ab60 = n;
+		g_7f3f00[g_85ab60].x0 = j;
+		g_7f3f00[g_85ab60].x4 = *(unsigned short*) (rec + 0xa3 + i * 4);
+		g_7f3f00[g_85ab60].x8 = *(unsigned short*) (rec + 0xa5 + i * 4);
+		g_7f3f00[g_85ab60].xc = 0xffff;
+		g_7f3f00[g_85ab60].x10 = 0;
+		g_7f3f00[g_85ab60].x14 = 0;
+		g_7f3f00[g_85ab60].x1c = -1;
+		g_7f3f00[g_85ab60].x20 = -1;
+		g_7f3f00[g_85ab60].x24 = -1;
+		g_7f3f00[g_85ab60].x28 = -1;
+		g_7f3f00[g_85ab60].x2c = -1;
+		g_7f3f00[g_85ab60].x30 = 0xff;
+		g_85ab60++;
+
 	}
+	n = g_85ab60;
 	if (n == 0) {
 		return 1;
 	}

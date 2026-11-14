@@ -1,3 +1,4 @@
+#include <string.h>
 #include "client_packet_builder.h"
 
 extern char* lpGebaeudePROT;
@@ -5,7 +6,7 @@ extern float g_6629d0;
 extern float g_662a3c;
 extern float g_662b10;
 
-int __cdecl gm_RandomMod(int range);
+unsigned short __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomFloat01(void);
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void __cdecl fcn_004c4570(int a, int b, int offset, void* value);
@@ -36,11 +37,8 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 	if (*record != 0x1e) {
 		return;
 	}
-	flags[0] = 0;
-	flags[1] = 0;
-	flags[2] = 0;
+	memset(flags, 0, sizeof flags);
 	flags[3] = 1;
-	flags[4] = 0;
 	if (*(signed char*) (object + 0x5c) > 0xa) {
 		flags[2] = 1;
 	}
@@ -79,11 +77,13 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 		index = gm_RandomMod(3) & 0xffff;
 		for (i = 3; i != 0; i--) {
 			if (found[index] != 0 && *(int*) ((char*) found[index] + 0x1c) == 0) {
+				int amount;
+
 				mode = 1;
-				value = (gm_RandomMod(4) & 0xffff) + 3;
+				amount = (gm_RandomMod(4) & 0xffff) + 3;
 				fcn_004c4510((char*) found[index], *(int*) ((char*) found[index] + 2));
 				fcn_004c4570(4, 1, 0x1c, &mode);
-				fcn_004c4570(4, 1, 0x20, &value);
+				fcn_004c4570(4, 1, 0x20, &amount);
 				fcn_004c5360();
 				fcn_005b3330((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
 				    city, object, found[index]);

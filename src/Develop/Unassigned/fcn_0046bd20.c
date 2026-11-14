@@ -77,7 +77,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
         bg_width = g_77254c;
         bg_height = g_772548;
         bg_y = g_772550;
-        if ((char)flags < 0) {
+        if (flags & 0x80) {
             if (bg_width + bg_x > g_1040494) {
                 bg_width = g_1040494 - bg_x;
                 x = g_1040494 - g_772544;

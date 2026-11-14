@@ -50,8 +50,8 @@ unsigned int __cdecl fcn_0041c470(unsigned char* input, char* output, int width,
 		for (; i < 32768; i++) {
 			if (g_6b6f20[5][i].count) {
 				map[i] = (unsigned char)fcn_0041ca10(
-				    ((i >> 7) & 128) | (unsigned char)((unsigned char)(i & 4) * 2) | ((unsigned char)(i >> 1) & 16) | ((unsigned char)(i >> 3) & 32) | ((unsigned char)(i >> 5) & 64),
-				    ((i >> 6) & 128) | ((i >> 4) & 64) | ((i >> 2) & 32) | (unsigned char)((unsigned char)(i & 2) << 2) | ((unsigned char)i & 16),
+				    (unsigned char)((i >> 7) & 128) | (unsigned char)((unsigned char)(i & 4) * 2) | ((unsigned char)(i >> 1) & 16) | ((unsigned char)(i >> 3) & 32) | ((unsigned char)(i >> 5) & 64),
+				    (unsigned char)((i >> 6) & 128) | (unsigned char)((i >> 4) & 64) | (unsigned char)((i >> 2) & 32) | (unsigned char)((unsigned char)(i & 2) << 2) | ((unsigned char)i & 16),
 				    (unsigned char)(((unsigned char)(i & 1) << 2 | (unsigned char)(i & 8)) * 2) | ((unsigned char)(i >> 1) & 32) | ((unsigned char)(i >> 3) & 64) | ((unsigned char)(i >> 5) & 128));
 			}
 		}

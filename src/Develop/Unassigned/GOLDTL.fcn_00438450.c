@@ -31,7 +31,7 @@ unsigned char __cdecl fcn_00438450(char* o)
 		p = *(int*) (o + 0x1ec);
 		*(int*) (o + 0x1cc) = v;
 		sel = (*(unsigned char*) (o + 0x214) >> 2) & 1;
-		flags = (unsigned char) ((sel << 3) ^ (*(unsigned char*) (o + 0x214) & 0xf3));
+		flags = (unsigned char) (((sel & 1) << 3) ^ (*(unsigned char*) (o + 0x214) & 0xf3));
 		*(unsigned char*) (o + 0x214) = flags;
 		if (*(int*) (p + 0xb0) == g_6b8008) {
 			anim = (unsigned char) (*(unsigned char*) (p + 0x163d) | 0x40);

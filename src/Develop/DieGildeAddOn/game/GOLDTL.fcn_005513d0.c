@@ -40,37 +40,37 @@ void __cdecl fcn_005513d0(char* a0)
 	if (state != 0) {
 		if (state != 1)
 			return;
-		if (*(float*) (a0 + 0xac) < 3.0) {
-			*(int*) (a0 + 0x52) += 1;
-			*(float*) (a0 + 0xac) = *(float*) (a0 + 0xac) + 1.0;
+		if (*(float*) (a0 + 0xac) >= 3.0) {
+			if (entry[2] == 6) {
+				rec_id = *(int*) (rec + 4); memset(msg, 0, sizeof(msg));
+				*(int*) (msg + 0xc) = *(int*) (entry + 4);
+				*(int*) (msg + 0x1c) = g_7f4c04;
+				*(int*) (msg + 0x18) = g_7f4c00;
+				*(int*) (msg + 0x20) = g_7f4c08;
+				*(short*) (msg + 0x24) = g_7f4c0c;
+				msg[8] = 7;
+				*(int*) (msg + 0x14) = -1;
+				*(int*) (msg + 0x34) = *(int*) (entry + 4);
+				*(int*) (msg + 0x38) = rec_id;
+				msg[0x26] = 0x20;
+				msg[0x30] = 2;
+				fcn_00500bb0(msg + 0x18, 0, 0x1e, 0);
+				fcn_004c5980(msg);
+			}
+			*(float*) (a0 + 0xac) = 0;
+			if (*(int*) (entry + 0x170) != 0)
+				v20 = *(int*) (*(int*) (entry + 0x170) + 1);
+			if (entry[9] != 0) {
+				fcn_004c4fc0(8, *(int*) (rec + 4), *(int*) (entry + 4), 0, v20, 0, 0, 2);
+			} else {
+				fcn_004c4fc0(8, *(int*) (entry + 4), *(int*) (rec + 4), 0, v20, 0, 0, 2);
+			}
+			*(int*) (a0 + 0x70) = 0;
+			*(int*) (a0 + 0x52) += (gm_RandomMod(8) & 0xffff) + 1;
 			return;
 		}
-		if (entry[2] == 6) {
-			rec_id = *(int*) (rec + 4); memset(msg, 0, sizeof(msg));
-			*(int*) (msg + 0xc) = *(int*) (entry + 4);
-			*(int*) (msg + 0x1c) = g_7f4c04;
-			*(int*) (msg + 0x18) = g_7f4c00;
-			*(int*) (msg + 0x20) = g_7f4c08;
-			*(short*) (msg + 0x24) = g_7f4c0c;
-			msg[8] = 7;
-			*(int*) (msg + 0x14) = -1;
-			*(int*) (msg + 0x34) = *(int*) (entry + 4);
-			*(int*) (msg + 0x38) = rec_id;
-			msg[0x26] = 0x20;
-			msg[0x30] = 2;
-			fcn_00500bb0(msg + 0x18, 0, 0x1e, 0);
-			fcn_004c5980(msg);
-		}
-		*(float*) (a0 + 0xac) = 0;
-		if (*(int*) (entry + 0x170) != 0)
-			v20 = *(int*) (*(int*) (entry + 0x170) + 1);
-		if (entry[9] != 0) {
-			fcn_004c4fc0(8, *(int*) (rec + 4), *(int*) (entry + 4), 0, v20, 0, 0, 2);
-		} else {
-			fcn_004c4fc0(8, *(int*) (entry + 4), *(int*) (rec + 4), 0, v20, 0, 0, 2);
-		}
-		*(int*) (a0 + 0x70) = 0;
-		*(int*) (a0 + 0x52) += (gm_RandomMod(8) & 0xffff) + 1;
+		*(int*) (a0 + 0x52) += 1;
+		*(float*) (a0 + 0xac) = *(float*) (a0 + 0xac) + 1.0;
 		return;
 	}
 	count = 0;

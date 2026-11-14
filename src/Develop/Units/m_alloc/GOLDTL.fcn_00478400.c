@@ -48,11 +48,11 @@ unsigned int* __cdecl fcn_00478400(int a0, int a1, unsigned int a2,
     v26 = a3;
     v28 = 0;
     v7 = (unsigned int*) m_alloc((a2 * 8 + 4) * a3 + 0x32, (char*) 0x67d9dc);
-    if (1 <= (int) v19) {
+    if ((int) v19 > 0) {
         v13 = a1 * a6 + a0 + a4;
         do {
             v8 = 0;
-            if (1 <= (int) a2) {
+            if ((int) a2 > 0) {
                 do {
                     v6 = *(char*) (v13 + v8);
                     if (v6) {
@@ -98,10 +98,10 @@ bounds_done:
     *(short*) ((char*) v7 + 0xe) = (short) v16;
     *(short*) ((char*) v7 + 0x10) = (unsigned short) v26;
     *(short*) ((char*) v7 + 0x12) = (short) v25 + 1;
-    if (1 <= (int) v19) {
+    if ((int) v19 > 0) {
         do {
             v19 = a2;
-            if (1 <= (int) a2) {
+            if ((int) a2 > 0) {
                 do {
                     v9 = (unsigned int) *(unsigned char*) (v13 + a4) * 4;
                     if ((unsigned char) g_100eb80[v9 + 0] ==
@@ -121,11 +121,11 @@ bounds_done:
     }
     v15 = (unsigned short) v16;
     v19 = 0;
-    if (1 <= (int) a3) {
+    if ((int) a3 > 0) {
         v13 = a1 * a6 + a0 + a4;
         do {
             v18 = 0;
-            if (1 <= (int) a2) {
+            if ((int) a2 > 0) {
                 do {
                     v9 = (unsigned int) *(unsigned char*) (v13 + v18) * 4;
                     if ((unsigned char) g_100eb80[v9 + 0] ==

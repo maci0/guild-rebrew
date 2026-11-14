@@ -9,6 +9,7 @@ extern char g_14cf7d0;
 extern int g_67d370;
 extern int g_6a99e8;
 extern int g_6ab3dc;
+extern float g_6ab3e0;
 extern int g_6b7fac;
 extern int g_772514;
 extern char* g_77255c;
@@ -38,6 +39,7 @@ void __cdecl fcn_005b11f0(int* a0)
 	float x;
 	float y;
 	float q;
+	float qy;
 	int i;
 	int n;
 	int ox;
@@ -72,10 +74,10 @@ void __cdecl fcn_005b11f0(int* a0)
 		i = g_67d370;
 		do {
 			if (i != -1 && i == *(int*) (p - 4)) {
-				id = *(unsigned short*) (*(int*) p + 0x27);
-				if (id != 0xffff
-				    && *(unsigned char*) (id * 0x21c + 0x7f4ca2) < 10) {
-					fcn_005918f0((char*) (id * 0x21c + 0x7f4ca0));
+				w = *(unsigned short*) (*(int*) p + 0x27);
+				if (w != 0xffff
+				    && *(unsigned char*) (w * 0x21c + 0x7f4ca2) < 10) {
+					fcn_005918f0((char*) (w * 0x21c + 0x7f4ca0));
 					i = g_67d370;
 				}
 			}
@@ -99,21 +101,21 @@ void __cdecl fcn_005b11f0(int* a0)
 		view = *(char**) g_1043370;
 		x = (float) (((double) pos[0] - *(float*) t) / *(float*) (t + 0x10)
 		    - *(int*) (view + 0x20) * 0.5);
-		x = x * 5.33f;
+		x = x * g_6ab3e0;
 		y = (float) (((double) pos[2] - *(float*) (t + 8)) / *(float*) (t + 0x18)
 		    - *(int*) (view + 0x20) * 0.5);
-		y = y * 5.33f;
-		q = (float) ((double) fabs(x) / ((double) g_778d24 * 0.5));
+		y = y * g_6ab3e0;
+		q = (float) ((double) fabs(x) / (g_778d24 * 0.5f));
+		qy = (float) ((double) fabs(y) / (g_778d20 * 0.5f));
 		if (x < 0) {
 			x = x - q * 51.0f;
 		} else {
 			x = q * 51.0f + x;
 		}
-		q = (float) ((double) fabs(y) / ((double) g_778d20 * 0.5));
 		if (y < 0) {
-			y = y - q * 51.0f;
+			y = y - qy * 51.0f;
 		} else {
-			y = q * 51.0f + y;
+			y = qy * 51.0f + y;
 		}
 		sx = (int) ((float) (g_778d24 / 2) + (float) ox + x);
 		sy = (int) ((float) (g_778d20 / 2) + (float) oy + y);
@@ -130,20 +132,24 @@ void __cdecl fcn_005b11f0(int* a0)
 				if (*(int*) (id + 0x16c) == 0) {
 					goto check;
 				}
-				id = *(unsigned short*) (*(int*) (id + 0x16c) + 0x27);
-				if (id == 0xffff) {
+				w = *(unsigned short*) (*(int*) (id + 0x16c) + 0x27);
+				if (w == 0xffff) {
 					goto check;
 				}
-				kind = *(unsigned char*) (id * 0x21c + 0x7f4ca2);
-				if (kind == 5 || kind == 6 || kind == 7) {
+				kind = *(unsigned char*) (w * 0x21c + 0x7f4ca2);
+				if (kind == 6 || kind == 7 || kind == 5) {
 					n = fcn_00469c30(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
-					    *(int*) (id * 0x21c + 0x7f4cf4) - 0x53);
+					    *(int*) (w * 0x21c + 0x7f4cf4) - 0x53);
 					*slot = n;
 					if (n == -1) {
 						goto next;
 					}
-					*(char**) (g_1015ea0 + 0x50 + n * 0x2f4) = (char*) (a0[0] * 700 + 0x1038140);
-					goto store;
+					*(int*) (g_1015ea0 + 0x28 + *slot * 0x2f4) = *(int*) (g_77255c + 4);
+					*(int*) (g_1015ea0 + 0x2c + *slot * 0x2f4) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
+					*(int*) (g_1015ea0 + 0x30 + *slot * 0x2f4) = *(int*) (g_77255c + 8);
+					*(int*) (g_1015ea0 + 0x34 + *slot * 0x2f4) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
+					*(char**) (g_1015ea0 + 0x50 + *slot * 0x2f4) = (char*) (a0[0] * 700 + 0x1038140);
+					goto check;
 				}
 				goto check;
 			}
@@ -152,7 +158,7 @@ void __cdecl fcn_005b11f0(int* a0)
 				goto check;
 			}
 			kind = p[2];
-			if (kind != 5 && kind != 6 && kind != 7) {
+			if (kind != 6 && kind != 7 && kind != 5) {
 				goto check;
 			}
 			n = fcn_00469c30(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
@@ -161,7 +167,11 @@ void __cdecl fcn_005b11f0(int* a0)
 			if (n == -1) {
 				goto next;
 			}
-			*(char**) (g_1015ea0 + 0x50 + n * 0x2f4) = (char*) (a0[0] * 700 + 0x1038140);
+			*(int*) (g_1015ea0 + 0x28 + *slot * 0x2f4) = *(int*) (g_77255c + 4);
+			*(int*) (g_1015ea0 + 0x2c + *slot * 0x2f4) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
+			*(int*) (g_1015ea0 + 0x30 + *slot * 0x2f4) = *(int*) (g_77255c + 8);
+			*(int*) (g_1015ea0 + 0x34 + *slot * 0x2f4) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
+			*(char**) (g_1015ea0 + 0x50 + *slot * 0x2f4) = (char*) (a0[0] * 700 + 0x1038140);
 		} else {
 			e = *(char**) (obj + 0x34);
 			if (*(int*) (e + 0x218) == 1 && *(int*) (obj + 0x124) == 0) {
@@ -169,15 +179,11 @@ void __cdecl fcn_005b11f0(int* a0)
 			}
 			fcn_00469c40(*(int*) (g_77255c + 4) - *(int*) (g_77255c + 0x268) + sx,
 			    *(int*) (g_77255c + 8) - *(int*) (t + 0x258) + sy, *slot);
+			*(int*) (g_1015ea0 + 0x28 + *slot * 0x2f4) = *(int*) (g_77255c + 4);
+			*(int*) (g_1015ea0 + 0x2c + *slot * 0x2f4) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
+			*(int*) (g_1015ea0 + 0x30 + *slot * 0x2f4) = *(int*) (g_77255c + 8);
+			*(int*) (g_1015ea0 + 0x34 + *slot * 0x2f4) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
 		}
-store:
-		n = *slot * 0x2f4;
-		*(int*) (g_1015ea0 + 0x28 + n) = *(int*) (g_77255c + 4);
-		*(int*) (g_1015ea0 + 0x2c + n) = *(int*) (g_77255c + 0xc)
-		    + *(int*) (g_77255c + 4);
-		*(int*) (g_1015ea0 + 0x30 + n) = *(int*) (g_77255c + 8);
-		*(int*) (g_1015ea0 + 0x34 + n) = *(int*) (g_77255c + 0x10)
-		    + *(int*) (g_77255c + 8);
 
 check:
 		if (*slot != -1

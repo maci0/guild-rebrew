@@ -54,6 +54,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 	int pick[10];
 	slot80* e;
 	unsigned char* q;
+	Bld24d* b;
 	float t;
 	float scale;
 	unsigned int v20;
@@ -83,9 +84,9 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 		return 0;
 	best = 0;
 	do {
-		q = &((Bld24d*) lpGebaeudePROT)[*(unsigned char*) e].x247;
-		if ((int) *q > best) {
-			best = (int) *q;
+		b = &((Bld24d*) lpGebaeudePROT)[*(unsigned char*) e];
+		if ((int) b->x247 > best) {
+			best = (int) b->x247;
 			v20 = *(unsigned char*) e;
 		}
 		e = (slot80*) gm_FindNextFilteredEntity();

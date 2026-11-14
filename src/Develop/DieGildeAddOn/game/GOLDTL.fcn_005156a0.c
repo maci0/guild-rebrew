@@ -14,6 +14,7 @@ extern int __cdecl fcn_00501490(char* key);
 extern int __cdecl fcn_00506380(int a, void* table, void* record, int mode);
 extern void __cdecl fcn_00442d50(char* record, int mode);
 extern int __cdecl fcn_00413680(char* record, char* scene, char* out, int* value);
+extern double g_662a08;
 extern void* __cdecl evt_LoadGfxScript(char* name);
 extern void __cdecl fcn_00428340(void* handle, int a, int b);
 extern void __cdecl SelectTextureSet(char* record, int target, char mode, int flag);
@@ -30,7 +31,7 @@ void __cdecl fcn_005156a0(char* record)
 	unsigned int id;
 	unsigned int v22;
 	int idx;
-	int kind;
+	unsigned char kind;
 	int i;
 	int n;
 	int count;
@@ -48,11 +49,12 @@ void __cdecl fcn_005156a0(char* record)
 	slot = 0;
 	list = 0;
 	id = *(unsigned int*) (record + 0x48) & 0xffffff;
+	kind = record[0x4b];
 	if (*(int*) 0x7f3b24 != 0)
 		list = (char*) *(int*) (*(int*) 0x7f3b24 + 0x14);
 	else
-		list = *(char**) (0x7f3ee0 + 0x5d);
-	if (record[0x4b] != 1)
+		list = (char*) *(int*) (*(int*) 0x7f3ee0 + 0x5d);
+	if (kind != 1)
 		goto tail;
 	idx = (int) (id * 0x41);
 	entry = lpObjektePROT + idx;
@@ -194,7 +196,7 @@ label_5aab:
 			if (rc != 0) {
 				handle = evt_LoadGfxScript((char*) 0x6a1f3c);
 				if (handle != 0)
-					fcn_00428340(handle, 6, value);
+					fcn_00428340(handle, 6, (int) (*(float*) &value * g_662a08));
 			}
 		}
 		*(unsigned char*) (slot + 0x13) = *(unsigned char*) (slot + 0x13) & 0x5f;

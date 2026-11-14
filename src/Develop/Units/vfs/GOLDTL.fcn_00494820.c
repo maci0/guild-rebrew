@@ -48,7 +48,7 @@ int __cdecl fcn_00494820(void)
 	int sig;
 	unsigned int count;
 	char* f;
-	unsigned int i;
+	int i;
 	unsigned int n;
 
 	count = 0x49;
@@ -76,65 +76,85 @@ int __cdecl fcn_00494820(void)
 			goto bad;
 		}
 		if (vfs_fwrite(&sig, 4, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_fwrite(&nmeth, 4, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		for (i = 0; i < 0x49; i++) {
 			if (vfs_fwrite(&g_1008540[i].type, 1, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(g_1008540[i].name, 0x20, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].effects.e[0].type, 1, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].effects.e[0].value, 4, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].effects.e[1].type, 1, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].effects.e[1].value, 4, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].effects.e[2].type, 1, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].effects.e[2].value, 4, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].effects.e[3].type, 1, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].effects.e[3].value, 4, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].other.e[0].type, 1, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].other.e[0].value, 4, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].other.e[1].type, 1, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].other.e[1].value, 4, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].other.e[2].type, 1, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].other.e[2].value, 4, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].other.e[3].type, 1, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 			if (vfs_fwrite(&g_1008540[i].other.e[3].value, 4, 1, f) <= 0) {
-				goto fail;
+				CloseVfsStream(f);
+				goto bad;
 			}
 		}
 		CloseVfsStream(f);
@@ -145,80 +165,104 @@ int __cdecl fcn_00494820(void)
 		goto bad;
 	}
 	if (fcn_004a1130(g_77481c) == 0) {
-		goto fail;
+		CloseVfsStream(f);
+		goto bad;
 	}
 	if (ai_RegisterGraveyardMethods(g_77481c) == 0) {
-		goto fail;
+		CloseVfsStream(f);
+		goto bad;
 	}
 	if (ai_RegisterDomizilMethods(g_77481c) == 0) {
-		goto fail;
+		CloseVfsStream(f);
+		goto bad;
 	}
 	if (fcn_004abff0(g_77481c) == 0) {
-		goto fail;
+		CloseVfsStream(f);
+		goto bad;
 	}
 	if (vfs_ReadData((char*) &sig, 4, 1, f) <= 0) {
-		goto fail;
+		CloseVfsStream(f);
+		goto bad;
 	}
 	if (sig != 0x6144466e) {
 		goto bad;
 	}
 	if (vfs_ReadData((char*) &count, 4, 1, f) <= 0) {
-		goto fail;
+		CloseVfsStream(f);
+		goto bad;
 	}
 	for (n = 0; n < count; n++) {
 		if (vfs_ReadData((char*) &tmp.type, 1, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData(tmp.name, 0x20, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.effects.e[0].type, 1, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.effects.e[0].value, 4, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.effects.e[1].type, 1, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.effects.e[1].value, 4, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.effects.e[2].type, 1, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.effects.e[2].value, 4, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.effects.e[3].type, 1, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.effects.e[3].value, 4, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.other.e[0].type, 1, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.other.e[0].value, 4, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.other.e[1].type, 1, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.other.e[1].value, 4, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.other.e[2].type, 1, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.other.e[2].value, 4, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.other.e[3].type, 1, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		if (vfs_ReadData((char*) &tmp.other.e[3].value, 4, 1, f) <= 0) {
-			goto fail;
+			CloseVfsStream(f);
+			goto bad;
 		}
 		memcpy(&tmp.saved, &tmp.effects, 0x20);
 		if (tmp.type < 0x49) {
@@ -231,8 +275,6 @@ int __cdecl fcn_00494820(void)
 	}
 	CloseVfsStream(f);
 	return 1;
-fail:
-	CloseVfsStream(f);
 bad:
 	return 0;
 }

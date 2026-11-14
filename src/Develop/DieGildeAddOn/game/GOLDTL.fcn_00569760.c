@@ -105,7 +105,7 @@ void __cdecl fcn_00569760(char* a0)
 		f = 0.02f;
 	}
 	n = gm_WalkEntityChain(*(unsigned short*) e);
-	v = (float) (int) p;
+	v = (float) n;
 	if (flt_665ecc < v) {
 		v = flt_665ecc;
 	}

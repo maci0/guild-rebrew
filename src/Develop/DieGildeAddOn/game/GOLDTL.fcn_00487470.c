@@ -73,8 +73,8 @@ void __cdecl fcn_00487470(char* a0)
 	}
 	if (!(*(int*) (a0 + 0x1b4) & 8)) {
 		return;
-	}	w = gm_RandomMod(0x14);
-	if (fcn_00508da0((unsigned char*) p) < (int) w + 0x4b) {
+	}
+	if (gm_RandomMod(0x14) + 0x4b > fcn_00508da0((unsigned char*) p)) {
 		amountf = (float) fcn_0050cf50(*(int*)(a0 + 0x16c), 100) * g_664138 * g_664138;
 		if (g_662a7c > amountf) {
 			amountf = 128.0f;
@@ -107,7 +107,7 @@ void __cdecl fcn_00487470(char* a0)
 	p = (char*) *(int*) (a0 + 0x16c);
 	id = *(unsigned char*) p;
 	row = &((BuildingProto487470*)lpGebaeudePROT)[id];
-	if (row->count != 0) {
+	if (row->count > 0) {
 		i = 0;
 		entry = row->entries;
 		do {
@@ -135,7 +135,7 @@ void __cdecl fcn_00487470(char* a0)
 	}
 	i = 0;
 	cand = 0;
-	if (row->count == 0) {
+	if (row->count <= 0) {
 		return;
 	}
 	entry = row->entries;

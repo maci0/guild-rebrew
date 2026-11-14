@@ -32,7 +32,6 @@ int __cdecl fcn_00597bb0(char* ep)
     int b;
     int id;
     int i, j, slot, idx;
-    Slot_778da0* rec;
 
     for (i = 0; i < 4; i++) {
         b = *(u8*)(ep + 0x1c);
@@ -42,50 +41,47 @@ int __cdecl fcn_00597bb0(char* ep)
     q = (u16*)fcn_00502cd0(*(int*)(ep + 0x14), 1, 5);
     if (q != 0) {
         do {
+            idx = 0;
             id = *q;
-            idx = -1;
-            for (j = 0; j < 16; j++) {
-                if (g_778da0[j].x0 == id) {
-                    idx = j;
+            for (; idx < 16; idx++) {
+                if (g_778da0[idx].x0 == id) {
                     break;
                 }
             }
-            if (idx >= 0) {
-                g_778da0[idx].x30 =
-                    gm_GetMsgField(ep, (char*)q);
-            } else {
-                slot = -1;
-                for (j = 0; j < 16; j++) {
-                    if (g_778da0[j].x0 == 0) {
-                        slot = j;
+            if (idx >= 16) {
+                for (slot = 0; slot < 16; slot++) {
+                    if (g_778da0[slot].x0 == 0) {
                         break;
                     }
                 }
-                if (slot >= 0 && slot < 16) {
+                if (slot < 16) {
                     g_778da0[slot].x0 = id;
                     g_778da0[slot].x2c = 0;
                     g_778da0[slot].x30 = 0;
                     g_778da0[slot].x34 = 0;
                 }
+            } else {
+                g_778da0[idx].x30 =
+                    gm_GetMsgField(ep, (char*)q);
             }
             q = gm_NextEntityQueryMatch();
         } while (q != 0);
     }
 
-    for (rec = g_778da0; rec < g_778da0 + 16; rec++) {
+    for (j = 0; j < 16; j++) {
         q = (u16*)fcn_00502cd0(*(int*)(ep + 0x14), 1, 0,
-                                rec->x0);
+                                g_778da0[j].x0);
         if (q != 0) {
-            rec->x30 =
+            g_778da0[j].x30 =
                 gm_GetMsgField(ep, (char*)q);
-            rec->x34 =
+            g_778da0[j].x34 =
                 fcn_0050dfd0((char*)ep, *(u16*)q);
         }
     }
 
     b = 0;
-    for (rec = g_778da0; rec < g_778da0 + 16 && b == 0; rec++) {
-        id = rec->x10;
+    for (j = 0; b == 0 && j < 16; j++) {
+        id = g_778da0[j].x10;
         if (id != -1) {
             if (*(int*)((int) g_1015ea0 + 756 * id + 0x20) == 0x41) {
                 if (fcn_00471f80(id))
