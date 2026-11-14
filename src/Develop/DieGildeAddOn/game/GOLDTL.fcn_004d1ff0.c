@@ -34,6 +34,8 @@ int __cdecl fcn_0050c710(int, int, int);
 int __cdecl gm_CheckEntityType(void *);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7e1ae0[];
+extern int g_68b79c;
+extern int g_6b89c0;
 typedef struct BuildingRow4d1ff0 { unsigned char kind; char fields[0x24c]; } BuildingRow4d1ff0;
 /* ADDRESS: GOLDTL 0x004d1ff0 */
 void __cdecl fcn_004d1ff0(void *arg)
@@ -67,14 +69,30 @@ void __cdecl fcn_004d1ff0(void *arg)
 
 	o = (unsigned char *) arg;
 	mode = 0xa;
-	if ((o[0x7c] & 1) == 0) {
+	if ((o[0x7c] & 1) != 0) {
+		if ((o[0x7c] & 8) != 0)
+			fcn_004e4730("Kampfszenario_STADT.ed3");
+		else
+			fcn_004e4730("Kampfszenario_BERGPASS.ed3");
+	} else {
 		if ((o[0x7c] & 4) != 0) {
 			fcn_004e4730("Kampfszenario_BERGPASS.ed3");
 		} else {
 			ent = (int) gm_StartFilteredEntitySearch(1, 1, *(int *) (o + 0x14));
 			r = gm_CheckEntityType((void *) ent);
 			ty = *(unsigned char *) ent;
-			if (r == 0) {
+			if (r != 0) {
+				c = ((BuildingRow4d1ff0*) lpGebaeudePROT)[ty].kind;
+				if (c == 0x10) {
+					fcn_004e4730("Kampfszenario_RAEUBERLAGER.ed3");
+					mode = 0xf;
+				} else if (c == 0xc)
+					fcn_004e4730("Kampfszenario_STEINBRUCH.ed3");
+				else if (c == 0xb)
+					fcn_004e4730("Kampfszenario_WALDSTUECK.ed3");
+				else if (c == 0xd)
+					fcn_004e4730("Kampfszenario_MINE.ed3");
+			} else {
 				base = (int) &((BuildingRow4d1ff0*) lpGebaeudePROT)[ty];
 				c = *(unsigned char *) base;
 				if (c == 4) {
@@ -94,32 +112,16 @@ void __cdecl fcn_004d1ff0(void *arg)
 					else if (c == 3)
 						fcn_004e4730("Kampfszenario_STADTWACHE_GROSS.ed3");
 				}
-			} else {
-				c = ((BuildingRow4d1ff0*) lpGebaeudePROT)[ty].kind;
-				if (c == 0x10) {
-					fcn_004e4730("Kampfszenario_RAEUBERLAGER.ed3");
-					mode = 0xf;
-				} else if (c == 0xc)
-					fcn_004e4730("Kampfszenario_STEINBRUCH.ed3");
-				else if (c == 0xb)
-					fcn_004e4730("Kampfszenario_WALDSTUECK.ed3");
-				else if (c == 0xd)
-					fcn_004e4730("Kampfszenario_MINE.ed3");
 			}
 		}
-	} else {
-		if ((o[0x7c] & 8) != 0)
-			fcn_004e4730("Kampfszenario_STADT.ed3");
-		else
-			fcn_004e4730("Kampfszenario_BERGPASS.ed3");
 	}
 	cur = *(int *) (*(int *) &g_67a370 + 0xb0);
 	fcn_004e4ec0();
 	if (*(int *) &g_6b8300 != 0) {
 		*(int *) (*(int *) &g_6b8010 * 0x3dc + 0x1043378) = *(int *) 0x1043378;
-		*(int *) 0x6b89c0 = *(int *) 0x1043378;
+		g_6b89c0 = *(int *) 0x1043378;
 		fcn_00536bb0();
-		fcn_00459710(*(int *) 0x6b89c0, 1);
+		fcn_00459710(g_6b89c0, 1);
 	}
 	for (p = (int *) 0x9ba2e0, i = 0x20; i != 0; i--)
 		*p++ = -1;
@@ -208,14 +210,14 @@ void __cdecl fcn_004d1ff0(void *arg)
 		*(int *) (*(int *) &g_67a370 + 0xb0) = cur;
 		cur = *(int *) (*(int *) &g_67a370 + 0xb0);
 	}
-	*(float *) 0x9ba2c0 = *(float *) (cur + 0x10) * 1.1f;
+	*(float *) 0x9ba2c0 = (float) (*(float *) (cur + 0x10) * 1.1);
 	*(int *) 0x6a2570 = 0x3e19999a;
 	*(char *) 0x6a2574 = 0;
 	*(void **) 0x772eb4 = (void *) o;
 	fcn_004d1cf0();
 	*(int *) &g_772e9c = gm_LookupEntityRecordById(*(int *) (o + 0x34));
 	*(int *) 0x772e98 = gm_LookupEntityRecordById(*(int *) (o + 0x38));
-	if (*(int *) (*(unsigned short *) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4) == -1 && (o[0x7c] & 1) != 0) {
+	if (*(int *) (*(unsigned short *) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4) == g_68b79c && (o[0x7c] & 1) != 0) {
 		fcn_004c44a0();
 		for (p = (int *) (o + 0x100), i = 3; i != 0; i--, p++) {
 			if (*p != -1)
@@ -240,7 +242,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 			e = fcn_004d1970(*p, "dummy_DEFENSE_ENTRY");
 			*(int *) (e + 0x16c) = *(int *) 0x772e98;
 			*(float *) (*(int *) (e + 0x184) + 0x1a0) =
-				*(float *) (*(int *) (e + 0x184) + 0x1a0) * 1.2f;
+				(float) (*(float *) (*(int *) (e + 0x184) + 0x1a0) * 1.2);
 			if (*(int *) (e + 0x184) != 0) {
 				t = *(int *) (*(int *) (e + 0x184) + 0x34);
 				SelectTextureSet(t, *(int *) (t + 0x1cc), 4, 1);
@@ -287,13 +289,11 @@ void __cdecl fcn_004d1ff0(void *arg)
 					v10 = fcn_00502cd0(v14, 1, 0, 0x1dd);
 					n = 0;
 					m = fcn_00502cd0(*(int *) (v10 + 0x14), 1, 5, v14);
-					do {
-						if (m == 0)
-							break;
+					while (n < 3 && m != 0) {
 						slots[n] = m;
 						n++;
 						m = gm_NextEntityQueryMatch();
-					} while (n < 3);
+					}
 					fcn_00455350(h, (int) h + 0x4c, pathbuf);
 					switch (*(short *) ent) {
 					case 0x134:
@@ -331,7 +331,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 		if (i > 2) {
 			fcn_0045b290(*(int *) (*(int *) &g_67a370 + 0xb0), *(int *) &g_6b8300);
 			i = 0;
-			if (mode != 0) {
+			if (mode > 0) {
 				n = *(int *) (cur + 0x20);
 				for (k = 0; k < mode; k++) {
 					m = k;
@@ -346,8 +346,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 				}
 			}
 			if (first != 0) {
-				cur = fcn_0050c710(first, 6, 1);
-				*(float *) 0x68b798 = (float) cur + 1.4f;
+				*(float *) 0x68b798 = (float) fcn_0050c710(first, 6, 1) + 1.4f;
 				return;
 			}
 			*(float *) 0x68b798 = 1.0f;

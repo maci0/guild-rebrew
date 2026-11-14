@@ -6,8 +6,7 @@ extern int g_6b7fac;
 /* ADDRESS: GOLDTL 0x004ef770 */
 unsigned int __cdecl fcn_004ef770(void* file, int version)
 {
-    unsigned int v2;
-    unsigned int v3;
+    int i;
 
     if (!ls_ReadVfsDataChecked((void*) 0x772fe8, 4, 1, file)) {
         return 0;
@@ -36,120 +35,122 @@ unsigned int __cdecl fcn_004ef770(void* file, int version)
     if (!ls_ReadVfsDataChecked((void*) 0x9a9218, 4, 1, file)) {
         return 0;
     }
-    if (ls_ReadVfsDataChecked((void*) 0x9a921c, 4, 1, file)) {
-        v2 = 0x772ff8;
-        v3 = 0x7731f0;
-        while (ls_ReadVfsDataChecked((void*) (v3 - 0x38), 4, 1, file) &&
-               ls_ReadVfsDataChecked((void*) (v3 - 0x30), 4, 1, file)) {
-            if (0x10055 <= version) {
-                if (!ls_ReadVfsDataChecked((void*) (v3 - 0x2c), 4, 1, file)) {
-                    return 0;
-                }
-                if (!ls_ReadVfsDataChecked((void*) (v3 - 0x28), 4, 1, file)) {
-                    return 0;
-                }
-            } else {
-                *(unsigned int*) (v3 - 0x2c) = 0x3f800000;
-                *(unsigned int*) (v3 - 0x28) = 0x3f800000;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 - 0x24), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 - 0x20), 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 - 0x10), 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) v3, 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x20), 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x30), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x34), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x38), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x3c), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x44), 4, 1, file)) {
-                return 0;
-            }
-            *(unsigned int*) (v3 + 0x40) = (unsigned int) g_6b7fac;
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x48), 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x58), 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x68), 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x88), 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x98), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x9c), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0xa0), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0xa4), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0xac), 4, 1, file)) {
-                return 0;
-            }
-            *(unsigned int*) (v3 + 0xa8) = (unsigned int) g_6b7fac;
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0xb0), 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0xc0), 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0xd0), 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0xf0), 0x10, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x100), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x104), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x108), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x10c), 4, 1, file)) {
-                return 0;
-            }
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x114), 4, 1, file)) {
-                return 0;
-            }
-            *(unsigned int*) (v3 + 0x110) = (unsigned int) g_6b7fac;
-            if (!ls_ReadVfsDataChecked((void*) (v3 + 0x118), 0xc, 1, file)) {
-                return 0;
-            }
-            *(int*) (v3 + 0x134) = (int) v2;
-            *(unsigned int*) (v3 + 0x130) = 0x4ef250;
-            v3 += 0x170;
-            v2 += 0x38;
-            if (0x773d70 <= v3) {
-                return 1;
-            }
-        }
+    if (!ls_ReadVfsDataChecked((void*) 0x9a921c, 4, 1, file)) {
+        return 0;
     }
-    return 0;
+    for (i = 0; i < 8; i++) {
+        char* p = (char*) 0x7731b8 + i * 0x170;
+        char* q = (char*) 0x772ff8 + i * 0x38;
+
+        if (!ls_ReadVfsDataChecked((void*) p, 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 8), 4, 1, file)) {
+            return 0;
+        }
+        if (version >= 0x10055) {
+            if (!ls_ReadVfsDataChecked((void*) (p + 0xc), 4, 1, file)) {
+                return 0;
+            }
+            if (!ls_ReadVfsDataChecked((void*) (p + 0x10), 4, 1, file)) {
+                return 0;
+            }
+        } else {
+            *(unsigned int*) (p + 0xc) = 0x3f800000;
+            *(unsigned int*) (p + 0x10) = 0x3f800000;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x14), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x18), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x28), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x38), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x58), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x68), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x6c), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x70), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x74), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x7c), 4, 1, file)) {
+            return 0;
+        }
+        *(unsigned int*) (p + 0x78) = (unsigned int) g_6b7fac;
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x80), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x90), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0xa0), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0xc0), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0xd0), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0xd4), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0xd8), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0xdc), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0xe4), 4, 1, file)) {
+            return 0;
+        }
+        *(unsigned int*) (p + 0xe0) = (unsigned int) g_6b7fac;
+        if (!ls_ReadVfsDataChecked((void*) (p + 0xe8), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0xf8), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x108), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x128), 0x10, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x138), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x13c), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x140), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x144), 4, 1, file)) {
+            return 0;
+        }
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x14c), 4, 1, file)) {
+            return 0;
+        }
+        *(unsigned int*) (p + 0x148) = (unsigned int) g_6b7fac;
+        if (!ls_ReadVfsDataChecked((void*) (p + 0x150), 0xc, 1, file)) {
+            return 0;
+        }
+        *(int*) (p + 0x16c) = (int) q;
+        *(unsigned int*) (p + 0x168) = 0x4ef250;
+    }
+    return 1;
 }

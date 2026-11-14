@@ -29,12 +29,11 @@ extern int g_774654;
 int __cdecl fcn_005bf9e0(unsigned short* a0)
 {
 	unsigned int data[136];
-	unsigned char tiny[4];
-	unsigned char evt[0xfc];
+	unsigned char evt[0x100];
 	char text[1024];
 	int t[6];
-	int res;
 	int idx;
+	int res;
 	int i;
 	int timeout;
 	int hwnd;
@@ -66,18 +65,18 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 		return 0;
 	}
 	if (!fcn_0055c0f0(a0, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
-		io_FormatTextBuffer(tiny, 0x170b, *a0);
-		fcn_00526120(tiny, 0);
+		io_FormatTextBuffer((char*) evt, 0x170b, *a0);
+		fcn_00526120((char*) evt, 0);
 		return 0;
 	}
 	if (!fcn_0055c0a0(a0, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
-		io_FormatTextBuffer(tiny, 0x170c, *a0);
-		fcn_00526120(tiny, 0);
+		io_FormatTextBuffer((char*) evt, 0x170c, *a0);
+		fcn_00526120((char*) evt, 0);
 		return 0;
 	}
 	if (!fcn_00579640(a0, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
-		io_FormatTextBuffer(tiny, 0x409f);
-		fcn_00526120(tiny, 0);
+		io_FormatTextBuffer((char*) evt, 0x409f);
+		fcn_00526120((char*) evt, 0);
 		return 0;
 	}
 	hwnd = fcn_00470820(0, 0, (char*) 0x6ac494);
@@ -103,12 +102,12 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 			g_774654 = 1;
 		}
 		if (*(int*) &g_100f1dc == 2 && idx != -1 && g_67d370 == idx) {
-			*(unsigned char*) (evt + 0) = 0x1a;
-			*(unsigned int*) (evt + 4) = *(unsigned int*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
-			*(unsigned int*) (evt + 8) = *(unsigned int*) (g_7746c4 + 1);
-			*(unsigned char*) (evt + 0x32) = 1;
-			*(unsigned int*) (evt + 0x80) = timeout;
-			*(unsigned int*) (evt + 0x5c) = *(unsigned int*) (a0 + 2);
+			*(unsigned char*) (evt + 4) = 0x1a;
+			*(unsigned int*) (evt + 8) = *(unsigned int*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
+			*(unsigned int*) (evt + 0x0c) = *(unsigned int*) (g_7746c4 + 1);
+			*(unsigned char*) (evt + 0x36) = 1;
+			*(unsigned int*) (evt + 0x84) = timeout;
+			*(unsigned int*) (evt + 0x60) = *(unsigned int*) (a0 + 2);
 			*(unsigned int*) (evt + 0x58) = fcn_004faaf0(a0);
 			fcn_004c4eb0((char*) 0x6ac4c0);
 			fcn_004c5530(evt);

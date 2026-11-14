@@ -21,6 +21,7 @@ typedef struct S55cc80Packet {
 } S55cc80Packet;
 #pragma pack(pop)
 #include "client_data.h"
+extern int g_7746d4;
 int __cdecl fcn_00500cb0(char*, char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 float __cdecl fcn_005101e0(char*, int, int, int);
@@ -46,7 +47,7 @@ void __cdecl fcn_0055cc80(char* self)
 	S55cc80Packet* packet;
 	unsigned short* answer;
 	char* q;
-	int state, slot, started, count;
+	int state, started, count;
 	int t;
 	int src; S55cc80Proto* proto; unsigned char job;
 
@@ -61,8 +62,7 @@ void __cdecl fcn_0055cc80(char* self)
 			fcn_00546190(self);
 			return;
 		}
-		slot = packet->slot;
-		t = (int)fcn_005101e0((char*) &g_7f4ca0 + slot * 0x21c, packet->idx0, *(unsigned char*)(self + 0xac), -1);
+		t = (int)fcn_005101e0((char*) &g_7f4ca0 + packet->slot * 0x21c, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 		proto = &((S55cc80Proto*)lpGebaeudePROT)[packet->idx0];
 		src = gm_AccumulateTyped2((char*) &g_7f4ca0 + packet->slot * 0x21c);
 		if (t > src) {
@@ -102,7 +102,7 @@ void __cdecl fcn_0055cc80(char* self)
 			fcn_00546190(self);
 			return;
 		}
-		*(int*) 0x7746d4 = 1;
+		g_7746d4 = 1;
 		*(int*) (self + 0xbc) = *(int*) (answer + 2);
 		packet = (S55cc80Packet*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10));
 		if (packet == 0) {
@@ -115,13 +115,11 @@ void __cdecl fcn_0055cc80(char* self)
 		*(unsigned char*) (q + 0x165) = 0;
 		*(unsigned char*) (q + 0x164) = job;
 		for (count = 0; count < 1; count++) {
-			int* p;
-			p = (int*) (self + 0xb0) + count;
-			if (*p <= 0) {
+			if (((int*) (self + 0xb0))[count] <= 0) {
 				continue;
 			}
 			t = (int)fcn_005101e0((char*) &g_7f4ca0 + packet->slot * 0x21c, packet->idx0, *(unsigned char*)(self + 0xac), -1);
-			*p = *p - 1;
+			((int*) (self + 0xb0))[count] = ((int*) (self + 0xb0))[count] - 1;
 			if (*(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 6 || *(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
 				io_FormatTextBuffer(buf, 0x1bb1, t, (unsigned int)answer[0], (char*) packet);
 				he_MessageBoxQuickjump(*(int*)((unsigned long)&g_7f4ca4+(*(unsigned short*)(self+8)) * 0x21c), packet->handle, buf, 0, 0x5f2, packet->handle, *(int*)(self+0xb4), 0, 0x6a6278);
@@ -130,12 +128,13 @@ void __cdecl fcn_0055cc80(char* self)
 			break;
 		}
 		t = *(int*) (self + 0xb4);
-		if (t == 0) {
-			packet = (S55cc80Packet*) fcn_00502cd0(packet->kind, 1, 0, packet->id);
-		} else if (t != -1) {
-			goto send;
-		} else {
+		if (t != 0) {
+			if (t != -1) {
+				goto send;
+			}
 			packet = (S55cc80Packet*) fcn_00502cd0(packet->kind, 1, 0, 0xfd);
+		} else {
+			packet = (S55cc80Packet*) fcn_00502cd0(packet->kind, 1, 0, packet->id);
 		}
 		if (packet != 0) {
 			t = *(int*) ((char*) packet + 2);
@@ -151,8 +150,7 @@ void __cdecl fcn_0055cc80(char* self)
 			fcn_00546190(self);
 			return;
 		}
-		t = gm_RandomMod(10) & 0xffff;
-		fcn_00500bb0(self + 0x52, 0, t + 10, 0);
+		fcn_00500bb0(self + 0x52, 0, (gm_RandomMod(10) & 0xffff) + 10, 0);
 		*(int*) (self + 0x70) = 1;
 		return;
 	case -2:

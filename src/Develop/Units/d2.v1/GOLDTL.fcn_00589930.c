@@ -39,6 +39,7 @@ struct act {
 extern pos14_7f4c00 g_7f4c00;
 extern float g_662910;
 extern float g_664150;
+extern int g_67d370;
 #include "client_data.h"
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_00470820(int, int, char*);
@@ -118,7 +119,7 @@ void __cdecl fcn_00589930(char* a0)
 		if (*(int*) 0x14ce8e0) {
 			*(int*) 0x774654 = 1;
 		} else if (*(int*) &g_100f1dc != -1) {
-			if (act.no == *(int*) 0x67d370) {
+			if (g_67d370 == act.no) {
 				if (fcn_00526010(
 				        (char*) ((unsigned long)&g_7f4ca0 +
 				                 (unsigned int) *(unsigned short*) &g_774970 *
@@ -148,8 +149,8 @@ void __cdecl fcn_00589930(char* a0)
 					m.f6c = j;
 					act.count = -1;
 					m.owner = ((struct house*) &g_7f4ca0)[*(unsigned short*) (a0 + 0x27)].owner;
-					m.target = *(int*) (a0 + 1);
 					m.when = g_7f4c00;
+					m.target = *(int*) (a0 + 1);
 					m.f5c = *(int*) (a0 + 1);
 					fcn_004a5e60(
 					    (unsigned short*) ((unsigned long)&g_7f4ca0 +
@@ -159,18 +160,14 @@ void __cdecl fcn_00589930(char* a0)
 					    0, 0x7b4c4a0, 0, 0.0f, 100.0f, &act.count);
 					m.f58 = act.count;
 					i = fcn_004c5530(&m);
-					if (i != -1) {
-						for (;;) {
-							if (fcn_004c4450(i))
-								break;
-							fcn_005373e0(0, 0x20007);
-						}
+					while (i != -1 && !fcn_004c4450(i)) {
+						fcn_005373e0(0, 0x20007);
 					}
 					fcn_004c3030(-7, 0, (char*) 0x6a9508, 0);
 					lst = act.item;
 					*(int*) 0x774654 = 1;
 				}
-			} else if (act.yes == *(int*) 0x67d370) {
+			} else if (g_67d370 == act.yes) {
 				*(int*) 0x774654 = 1;
 			}
 		}

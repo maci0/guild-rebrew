@@ -13,7 +13,7 @@ extern char __cdecl fcn_0041ad80(int a, int b);
 extern int __cdecl fcn_0041ba40(void);
 
 /* ADDRESS: GOLDTL 0x0041a970 */
-char __cdecl fcn_0041a970(int a0, INDEXFN a1, int a2, int a3)
+char __cdecl fcn_0041a970(int a0, INDEXFN a1, unsigned char a2, unsigned char a3)
 {
 	int slot;
 	int best;
@@ -30,7 +30,7 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, int a2, int a3)
 
 	*(int *) 0x14ce730 = a0;
 	if (*(int *) 0x6b5ddc == 0 || *(unsigned int *) 0x6b5de8 <= 0)
-		return *(int *) &g_6b5de0 != 0;
+		goto done;
 	slot = -1;
 	*(unsigned char *) 0x6b5dec = (a1 != 0);
 	found = fcn_0041b290((unsigned int *) &slot, pos);
@@ -47,16 +47,17 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, int a2, int a3)
 		pos[2] = entry[2];
 		pos[3] = entry[3];
 	}
-	rec = (unsigned char *) (*(int *) 0x6b5dd0 + slot * 0x508);
 	if (a1) {
-		index = a1(*(int *) (rec + 0x500), *(int *) (rec + 0x504));
-		rec = (unsigned char *) (*(int *) 0x6b5dd0 + slot * 0x508);
-		if (index < 0 || index >= *(int *) (rec + 0x500))
+		index = a1(*(int *) (*(int *) 0x6b5dd0 + slot * 0x508 + 0x500),
+			*(int *) (*(int *) 0x6b5dd0 + slot * 0x508 + 0x504));
+		if (index < 0 || (rec = (unsigned char *) (*(int *) 0x6b5dd0 + slot * 0x508),
+			index >= *(int *) (rec + 0x500)))
 			return 0;
 	} else {
+		rec = (unsigned char *) (*(int *) 0x6b5dd0 + slot * 0x508);
 		best = 0x40000000;
 		entry = *(int **) (rec + 0x504);
-		for (i = 0; i < *(unsigned int *) (rec + 0x500); i++) {
+		for (i = 0; i < *(unsigned int *) (rec + 0x500); i++, entry += 4) {
 			dist = abs(pos[3] - entry[3])
 				+ 4 * (abs(pos[1] - entry[1]) + abs(pos[0] - entry[0]));
 			if (dist < best) {
@@ -65,7 +66,6 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, int a2, int a3)
 				if (dist == 0)
 					break;
 			}
-			entry += 4;
 		}
 	}
 	entry = (int *) (*(int *) (rec + 0x504) + index * 0x10);
@@ -78,8 +78,8 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, int a2, int a3)
 	*(int *) 0x14ce824 = pos[1];
 	*(int *) 0x14ce844 = pos[2];
 	*(int *) 0x14ce840 = pos[2] != 0;
-	*(int *) 0x14ce82c = (a3 & 0xff) + 1;
-	*(int *) 0x14ce83c = a2 & 0xff;
+	*(int *) 0x14ce82c = a3 + 1;
+	*(int *) 0x14ce83c = a2;
 	*(int *) 0x14ce848 = 0;
 	*(int *) 0x14ce850 = 0;
 	*(int *) 0x14ce84c = 0;
@@ -96,20 +96,20 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, int a2, int a3)
 			(void *) &g_14ce820, (int *) &g_6b5de0);
 		if (*(int *) &g_6b5de0)
 			goto success;
-		if ((char) a3) {
+		if (a3) {
 			(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
 				(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x50,
 				(void *) &g_14ce820, (int *) &g_6b5de0);
 			if (*(int *) &g_6b5de0)
 				goto success;
 		}
-		*(int *) 0x14ce82c = (a3 & 0xff) + 1;
+		*(int *) 0x14ce82c = a3 + 1;
 		(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
 			(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x40,
 			(void *) &g_14ce820, (int *) &g_6b5de0);
 		if (*(int *) &g_6b5de0)
 			goto success;
-		if ((char) a3) {
+		if (a3) {
 			(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
 				(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x40,
 				(void *) &g_14ce820, (int *) &g_6b5de0);
@@ -117,20 +117,19 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, int a2, int a3)
 				goto success;
 		}
 	}
-	*(int *) 0x14ce82c = (a3 & 0xff) + 1;
+	*(int *) 0x14ce82c = a3 + 1;
 	(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
 		(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x20,
 		(void *) &g_14ce820, (int *) &g_6b5de0);
 	if (*(int *) &g_6b5de0)
 		goto success;
-	if ((char) a3) {
-		(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
-			(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x20,
-			(void *) &g_14ce820, (int *) &g_6b5de0);
-		if (*(int *) &g_6b5de0)
-			goto success;
-	}
-	return *(int *) &g_6b5de0 != 0;
+	if (!a3)
+		goto done;
+	(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
+		(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x20,
+		(void *) &g_14ce820, (int *) &g_6b5de0);
+	if (!*(int *) &g_6b5de0)
+		goto done;
 success:
 	ccnt = 0xd4;
 	csrc = (char *) (*(int *) 0x6b5dd0 + slot * 0x508 + 0x42c);
@@ -176,5 +175,6 @@ success:
 	}
 	*(int *) 0x14ce72c = 1;
 	fcn_0041ba40();
+done:
 	return *(int *) &g_6b5de0 != 0;
 }
