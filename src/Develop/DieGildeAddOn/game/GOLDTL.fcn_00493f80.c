@@ -86,23 +86,23 @@ void __cdecl fcn_00493f80(void)
 				v29 = (e0[2] == 6 || e0[2] == 7);
 				v25 = 0;
 				ap = (int*) (rec + 0x66);
-				for (i = 5; i != 0; i--) {
+				for (i = 5; i != 0; i--, ap++) {
 					e1 = (unsigned char*) gm_LookupEntityRecordById(*ap);
-					ap++;
+
 					if (!e1) {
 						continue;
 					}
 					if (v29) {
 						flags[*(unsigned short*) e1] = 1;
-					} else if (e1[8] == 0
-					 || (float) (*(unsigned short*) (e1 + 0xa) + 3) < *(float*) (e1 + 0x20)
-					 || e1[0x164]
-					 || fcn_005463a0(2, 2, *(unsigned short*) e1, 0, 0x5e)) {
-						v29 = 1;
-						flags[*(unsigned short*) e1] = 1;
-					} else {
+					} else if (e1[8] > 0
+					 && (float) (*(unsigned short*) (e1 + 0xa) + 3) >= *(float*) (e1 + 0x20)
+					 && !e1[0x164]
+					 && !fcn_005463a0(2, 2, *(unsigned short*) e1, 0, 0x5e)) {
 						cand[v25] = e1;
 						v25++;
+					} else {
+						v29 = 1;
+						flags[*(unsigned short*) e1] = 1;
 					}
 				}
 				if (!v29 && v25) {

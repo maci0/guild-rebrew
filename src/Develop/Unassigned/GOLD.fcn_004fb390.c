@@ -86,9 +86,9 @@ ENTRY_4fb390* __cdecl fcn_004fb390(unsigned int player)
             current++;
         } while (i < 0x23);
     }
-    if (!slot[9])
-        return (ENTRY_4fb390*) 0x611918;
-    if (slot[9] == 1)
-        return (ENTRY_4fb390*) 0x612268;
+    if (slot[9] == 0)
+        table = (ENTRY_4fb390*) 0x611918;
+    else if (slot[9] == 1)
+        table = (ENTRY_4fb390*) 0x612268;
     return table;
 }

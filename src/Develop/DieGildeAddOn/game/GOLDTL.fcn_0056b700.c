@@ -21,6 +21,7 @@ typedef union
 	unsigned char msg[0x114];
 } MsgBuf;
 #include "client_data.h"
+extern float g_664168;
 extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl fcn_00529160(int, int, int, char*);
 extern int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
@@ -195,7 +196,7 @@ label_56b858:
 					code = buf.stats.xb0;
 					if (code <= 0)
 						goto next;
-					v11 = (int) ((double) *(unsigned int*) (obj + 0xe4) * *(float*) 0x664168);
+					v11 = (int) ((double) *(unsigned int*) (obj + 0xe4) * g_664168);
 					if (v11 == 0) {
 						if (code <= 100 || code >= 500) {
 							if (!r)

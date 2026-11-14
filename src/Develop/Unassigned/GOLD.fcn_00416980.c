@@ -67,6 +67,7 @@ void __cdecl fcn_00416980(void)
 			rep stosb
 		}
 		descriptor[0] = 124;
+		surface = texture->com60;
 		d3d_LastResult = ((int (__stdcall*)(void*, void*, void*, int, void*)) (*(int**) surface)[25])
 			(surface, 0, descriptor, 0x11, 0);
 		if (d3d_LastResult != 0) {

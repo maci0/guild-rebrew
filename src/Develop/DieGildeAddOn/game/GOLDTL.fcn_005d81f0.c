@@ -5,7 +5,8 @@
 typedef struct {
 	int a;
 	int size;
-	__int64 cd;
+	int cd_lo;
+	int cd_hi;
 	int kind;
 	int pad14[15];
 } Req5d81f0;
@@ -20,7 +21,8 @@ typedef struct {
 	char pad170[0xac];
 } Slot5d81f0;
 
-extern __int64 g_666018;
+extern const int g_666018;
+extern int g_66601c;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
@@ -117,7 +119,8 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 	ret = 0;
 	found.size = 0x410;
 	found.kind = 6;
-	found.cd = g_666018;
+	found.cd_lo = g_666018;
+	found.cd_hi = g_66601c;
 	found.a = 0;
 	io_FormatTextBuffer(name, 0x9b);
 	rec = fcn_005bdc30(1, (int*) &found, name, 0, 0);

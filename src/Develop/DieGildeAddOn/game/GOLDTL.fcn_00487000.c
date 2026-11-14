@@ -94,7 +94,7 @@ void __cdecl fcn_00487000(char* e)
 	}
 	n = 0;
 	for (q = 0x7f4e0c; q < 0x85a20c; q += 0x21c) {
-		if (*(short*) (q - 0x16c) == -1) {
+		if (*(unsigned short*) (q - 0x16c) == 0xffff) {
 			continue;
 		}
 		if (*(char**) q != *(char**) (e + 0x16c)) {
@@ -108,10 +108,11 @@ void __cdecl fcn_00487000(char* e)
 	slot = fcn_005463a0(2, 0, 6, 3, *(int*) (*(char**) (e + 0x16c) + 1));
 	if (slot != 0) {
 		sp = slot + 0xb0;
-		for (i = 0; i < 0xc; i++) {
-			if (*(int*) (sp + i * 4) != 0) {
+		for (i = 0xc; i != 0; i--) {
+			if (*(int*) sp != 0) {
 				n++;
 			}
+			sp += 4;
 		}
 	}
 	if (n >= (int) (*(unsigned char*) (lpGebaeudePROT

@@ -209,15 +209,17 @@ void __cdecl fcn_005438c0(int a0)
 		fcn_004b20d0(0);
 		if (g_7747b0 & 0x10) {
 			if (fcn_005435d0() != 1) {
-				for (;;) {
+				int r;
+
+				do {
 					g_7e46ac = 0x24087;
 					io_FormatTextBuffer(buf, 0x79);
-					if (fcn_00526120(buf, 1) == 0) {
-						break;
+					r = fcn_00526120(buf, 1);
+					if (r != 0) {
+						fcn_0046ac30();
+						Sleep(1000);
 					}
-					fcn_0046ac30();
-					Sleep(1000);
-				}
+				} while (r != 0);
 				g_774958 = 0;
 				g_774954 = 1;
 				return;

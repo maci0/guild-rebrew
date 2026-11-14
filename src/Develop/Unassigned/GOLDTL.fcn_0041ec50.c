@@ -51,19 +51,17 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 	char msg[0x100];
 	unsigned short wname[0x104];
 
+	id = 0;
 	fp = fopen(name, (char*) 0x6750e8);
 	if (fp == 0) {
-		return 0;
+		return id;
 	}
 	fclose(fp);
-	if (!IsWindow(hwnd)) {
-		sprintf(msg, (char*) 0x6780b8, name, hwnd);
-		return 0;
-	}
-	v = AllocVideoListNode();
-	if (v == 0) {
-		return 0;
-	}
+	if (IsWindow(hwnd)) {
+		v = AllocVideoListNode();
+		if (v == 0) {
+			return id;
+		}
 	wflags = 0;
 	desc[0] = 0;
 	memset(&desc[1], 0, 0x78);
@@ -174,7 +172,17 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 			rc.bottom = scaled + rc.top;
 		}
 	} else if (w != 0 && h != 0) {
-		if (flags & 4) {
+		if (!(flags & 4)) {
+			rc.left = x;
+			rc.top = y;
+			rc.right = x + w;
+			rc.bottom = y + h;
+			if (flags & 1) {
+				GetClientRect(hwnd, &client);
+				rc.left = ((client.right - client.left) >> 1) - ((rc.right - rc.left) >> 1);
+				rc.top = ((client.bottom - client.top) >> 1) - ((rc.bottom - rc.top) >> 1);
+			}
+		} else {
 			filter = *(Com**) (v + 0x128);
 			if ((*(long (__stdcall**) (Com*, int*, int*)) (filter->vt + 0x88 / 4))(filter, &client.left, &client.top) < 0) {
 				goto fail;
@@ -193,16 +201,6 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 				rc.right = w + rc.left;
 				rc.bottom = y + scaled;
 			}
-		} else {
-			rc.left = x;
-			rc.top = y;
-			rc.right = x + w;
-			rc.bottom = y + h;
-			if (flags & 1) {
-				GetClientRect(hwnd, &client);
-				rc.left = ((client.right - client.left) >> 1) - ((rc.right - rc.left) >> 1);
-				rc.top = ((client.bottom - client.top) >> 1) - ((rc.bottom - rc.top) >> 1);
-			}
 		}
 	} else {
 		GetClientRect(hwnd, &rc);
@@ -220,8 +218,7 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 		goto fail;
 	}
 	*(int*) (v + 8) = g_14cc5bc;
-	id = g_14cc5bc;
-	g_14cc5bc = id + 1;
+	id = g_14cc5bc++;
 	if (flags & 8) {
 		window = *(Com**) (v + 0x124);
 		(*(long (__stdcall**) (Com*, void*, int, int)) (window->vt + 0x34 / 4))(window, hwnd, 0x9021, id);
@@ -232,4 +229,8 @@ fail:
 	ReleaseVideoInterfaces(v);
 	FreeVideoListNode(v);
 	return 0;
+	} else {
+		sprintf(msg, (char*) 0x6780b8, name, hwnd);
+	}
+	return id;
 }

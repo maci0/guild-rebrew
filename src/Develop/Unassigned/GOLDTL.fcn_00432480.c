@@ -444,7 +444,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 		fs->f14 = (float) SI(st + 0xc) / (float) QI(WR(cur), 0);
 		fs->f18 = 1.0f - fs->f14;
 	}
-	t = fs->f14;
+
 	if (SB(st + 0x2d) & 4) {
 		if (bit) {
 			prev = SI(st + 4);
@@ -456,11 +456,11 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 			fs->tan[1] = -SF(WR(cur) + 0x34);
 			fs->tan[2] = -SF(WR(cur) + 0x38);
 			fs->vec[0] = fcn_004517e0(SF(sfr + prev * 0x58 + 4),
-				SF(sfr + cur * 0x58 + 4), fs->tan[0], fs->neg[0], t);
+				SF(sfr + cur * 0x58 + 4), fs->tan[0], fs->neg[0], fs->f14);
 			fs->vec[1] = fcn_004517e0(SF(sfr + prev * 0x58 + 8),
-				SF(sfr + cur * 0x58 + 8), fs->tan[1], fs->neg[1], t);
+				SF(sfr + cur * 0x58 + 8), fs->tan[1], fs->neg[1], fs->f14);
 			fs->vec[2] = fcn_004517e0(SF(WR(prev) + 0xc),
-				SF(WR(cur) + 0xc), fs->tan[2], fs->neg[2], t);
+				SF(WR(cur) + 0xc), fs->tan[2], fs->neg[2], fs->f14);
 			fs->vec[0] += SF(st + 0x14);
 			fs->vec[1] += SF(st + 0x18);
 			fs->vec[2] += SF(st + 0x1c);
@@ -473,11 +473,11 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 				fs->tan[1] = -SF(WR(cur) + 0x50);
 				fs->tan[2] = -SF(WR(cur) + 0x54);
 				fs->vec[0] = fcn_004517e0(SF(WR(prev) + 0x14),
-					SF(WR(cur) + 0x14), fs->tan[0], fs->neg[0], t);
+					SF(WR(cur) + 0x14), fs->tan[0], fs->neg[0], fs->f14);
 				fs->vec[1] = fcn_004517e0(SF(WR(prev) + 0x18),
-					SF(WR(cur) + 0x18), fs->tan[1], fs->neg[1], t);
+					SF(WR(cur) + 0x18), fs->tan[1], fs->neg[1], fs->f14);
 				fs->vec[2] = fcn_004517e0(SF(WR(prev) + 0x1c),
-					SF(WR(cur) + 0x1c), fs->tan[2], fs->neg[2], t);
+					SF(WR(cur) + 0x1c), fs->tan[2], fs->neg[2], fs->f14);
 				fs->vec[0] += SF(st + 0x20);
 				fs->vec[1] += SF(st + 0x24);
 				fs->vec[2] += SF(st + 0x28);

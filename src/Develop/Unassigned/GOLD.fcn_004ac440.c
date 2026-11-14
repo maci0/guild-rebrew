@@ -31,10 +31,7 @@ int __cdecl fcn_004ac440(void)
     int i;
     int id;
 
-    options.second_count = 0;
-    options.first_count = 0;
-    options.second = 0;
-    options.first = 0;
+    memset(&options, 0, sizeof(options));
     GetModuleFileNameA(*(HMODULE*) 0x75e140, path, 260);
     strrchr(path, '\\')[1] = 0;
     strcat(path, "historical.ini");

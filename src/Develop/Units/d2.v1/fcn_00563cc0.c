@@ -5,7 +5,7 @@ void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004c5fa0(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_00546190(char*);
-
+extern char g_7f4ca0[];
 /* ADDRESS: GOLDTL 0x00563cc0 */
 void __cdecl fcn_00563cc0(char* a0)
 {
@@ -41,7 +41,7 @@ void __cdecl fcn_00563cc0(char* a0)
 		rec = (char*) (0x7f4ca0 + (unsigned short) (*(unsigned short*) (a0 + 8)) * 0x21c);
 		if (*(unsigned char*) (rec + 2) == 6) {
 			io_FormatTextBuffer(buf, 0x17e7, ent);
-			fcn_00545e80(*(int*) (rec + 4), *(int*) (rec + 4), buf, 0, mode,
+			fcn_00545e80(*(int*) (g_7f4ca0 + *(unsigned short*) (a0 + 8) * 0x21c + 4), *(int*) (g_7f4ca0 + *(unsigned short*) (a0 + 8) * 0x21c + 4), buf, 0, mode,
 				*(int*) (ent + 1), -1, 0, 0x6a65e0);
 		}
 		if (*(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 6) {
@@ -64,7 +64,7 @@ void __cdecl fcn_00563cc0(char* a0)
 		}
 		fcn_004c5fa0(*(int*) (ent + 1));
 		fcn_004c5420(*(int*) (ent + 1), 0x5a, 2, 0, 0x40);
-		fcn_00546190(a0);
+
 	} else {
 		char* ne;
 
@@ -72,6 +72,7 @@ void __cdecl fcn_00563cc0(char* a0)
 		if (ne != 0) {
 			fcn_004c5420(*(int*) (ne + 1), 0x5a, 2, 0, 0x40);
 		}
-		fcn_00546190(a0);
+
 	}
+	fcn_00546190(a0);
 }

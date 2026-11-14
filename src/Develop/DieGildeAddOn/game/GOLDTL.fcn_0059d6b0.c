@@ -36,7 +36,7 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 	int entity;
 	int other;
 	int index;
-	int choice;
+	char* choice;
 	int option;
 	int i;
 	extra = 0;
@@ -82,12 +82,12 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 		fcn_00526120(msg2, 0);
 		return;
 	}
-	choice = *(unsigned short*) (obj + 0x27);
+	choice = g_7f4ca0 + *(unsigned short*) (obj + 0x27) * 0x21c;
 	option = fcn_00470820(0, 0, "misc\\Bestechung");
 	fcn_00471b60(option);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(option, 1);
-	index = io_AppendText(0x19f7, *(unsigned short*) (choice * 0x21c + 0x7f4ca0), obj);
+	index = io_AppendText(0x19f7, *(unsigned short*) choice, obj);
 	other = fcn_00472250(option, 1, index);
 	index = fcn_00472250(option, 1, index + 1);
 	g_100f1dc = -1;
@@ -96,12 +96,7 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 != other) {
-				if (g_67d370 == index) {
-					g_774654 = 1;
-				}
-			}
-			else {
+			if (g_67d370 == other) {
 				for (i = 0; i < 8; i++) {
 					((unsigned int*) (packet + 0x38))[i] = 0xffffffff;
 				}
@@ -127,6 +122,9 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 					fcn_00526120((char*) g_14abaac, 0);
 					g_774654 = 1;
 				}
+			}
+			else if (g_67d370 == index) {
+				g_774654 = 1;
 			}
 		}
 	} while (fcn_005373e0(0x59d6b0, 0x677c7));

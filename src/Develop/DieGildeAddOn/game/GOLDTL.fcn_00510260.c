@@ -29,7 +29,7 @@ float __cdecl fcn_00510260(unsigned char* a0, int a1, int a2)
 	sum = 0.0f;
 	bonus = 0.0f;
 	v4 = lpGebaeudePROT + (int) *a0 * 0x24d;
-	a = (float) (fcn_0050c710(a0, 1, 1) * 0.01 + 1.0);
+	a = fcn_0050c710(a0, 1, 1) * 0.01 + 1.0;
 	e = fcn_0050dc90((int) a0);
 	if (e == 0) {
 		e = (char*) 0x7f4ca0 + (int) *(unsigned short*) (a0 + 0x27) * 0x21c;
@@ -39,8 +39,8 @@ float __cdecl fcn_00510260(unsigned char* a0, int a1, int a2)
 	} else {
 		f = 0.0f;
 	}
-	a = (float) (a + f);
-	if (a1 >= 1) {
+	a = a + f;
+	if (a1 > 0) {
 		do {
 			if (arr[i] != -1) {
 				ent = gm_LookupEntityRecordById(arr[i]);

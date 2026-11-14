@@ -72,7 +72,6 @@ void __cdecl fcn_0046a110(int a1)
 	char* child;
 	char* e2;
 	char* font;
-	fcn_0046a110_Rect* rects;
 	int i;
 	int n;
 	int dx;
@@ -101,8 +100,7 @@ void __cdecl fcn_0046a110(int a1)
 	loc.uv[1] = 1.0f;
 	(*(void (__stdcall **)(void*, void*)) (*(int*) g_6b5de0 + 0xa0))(g_6b5de0, &loc.screen);
 	if (a1) {
-		n = 0;
-		rects = 0;
+		(*(void (__stdcall **)(void*, int, void*, int, int, float, int)) (*(int*) g_6b5de0 + 0x90))(g_6b5de0, 0, 0, 1, 0, 1.0f, 0);
 	}
 	else {
 		n = 0;
@@ -120,12 +118,10 @@ void __cdecl fcn_0046a110(int a1)
 			u.clip[n].bottom = g_1040490;
 			n++;
 		}
-		if (!n)
-			goto label_46a1f2;
-		rects = u.clip;
+		if (n) {
+			(*(void (__stdcall **)(void*, int, void*, int, int, float, int)) (*(int*) g_6b5de0 + 0x90))(g_6b5de0, n, u.clip, 1, 0, 1.0f, 0);
+		}
 	}
-	(*(void (__stdcall **)(void*, int, void*, int, int, float, int)) (*(int*) g_6b5de0 + 0x90))(g_6b5de0, n, rects, 1, 0, 1.0f, 0);
-label_46a1f2:
 	if (g_7725a8) {
 		fcn_0047a040(0, 0, g_1040494, g_1040490);
 		fcn_0047cba0(0, 0, g_77250c, (char*) g_7725a8, 0);

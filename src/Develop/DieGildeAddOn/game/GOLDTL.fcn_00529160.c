@@ -38,6 +38,7 @@ typedef struct {
 	char* active;		/* +0x16c */
 	char pad170[0xc];
 	char* shown;		/* +0x17c */
+	char pad180[4];
 	char* owner;		/* +0x184 */
 } Slot_529160;
 
@@ -60,7 +61,6 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 	Slot_529160* slot;
 	Rec_529160* rec;
 	char* old;
-	char* owner;
 	char* r;
 	void* o;
 	int v7;
@@ -81,7 +81,6 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 	if (a1 == 0) {
 		a1 = (unsigned char*) slot->active;
 	}
-	owner = slot->owner;
 	if (a2 != 0) {
 		rec = (Rec_529160*) ((unsigned char*) g_entity_type_table + (unsigned int) *a1 * 0x24d);
 		if (*(short*) a2 != 0xfd) {
@@ -93,21 +92,21 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 		tick = g_7f4c04 & 0xffff;
 		if ((((float) (int) tick < g_696550[cls] && g_696540[cls] <= (float) (int) tick)
 		     || rec->type == 4 || rec->type == 0x13 || rec->type == 0x1d)
-		    && v7 >= 0 && owner != 0
-		    && v7 * 0x3dc + 0x10432c0 != ((Rec_529160*) owner)->field88) {
-			r = fcn_0040c120(owner, 0x33, v7, *(int*) (a1 + 1), *(int*) (a2 + 2));
+		    && v7 >= 0 && slot->owner != 0
+		    && v7 * 0x3dc + 0x10432c0 != ((Rec_529160*) slot->owner)->field88) {
+			r = fcn_0040c120(slot->owner, 0x33, v7, *(int*) (a1 + 1), *(int*) (a2 + 2));
 			strcpy(r + 0x70, "sv_ChangePlayerHE");
 
 
 
 
-			r = fcn_0040c120(owner, 0x39, v7);
+			r = fcn_0040c120(slot->owner, 0x39, v7);
 			strcpy(r + 0x70, "sv_ChangePlayerHE");
 
 
 
 
-			obj = ((Rec_529160*) owner)->object;
+			obj = ((Rec_529160*) slot->owner)->object;
 			if (obj != -1) {
 				o = fcn_00426cc0(obj);
 				if (o != 0) {
@@ -128,8 +127,8 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 		case 20:
 		case 21:
 		case 140:
-			if (owner != 0) {
-				obj = ((Rec_529160*) owner)->object;
+			if (slot->owner != 0) {
+				obj = ((Rec_529160*) slot->owner)->object;
 				if (obj != -1) {
 					fcn_00428720((char*) fcn_00426cc0(obj));
 				}
@@ -162,8 +161,8 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 			fcn_00546190(old);
 			break;
 		}
-	} else if (owner != 0 && ((Rec_529160*) owner)->object != -1) {
-		obj = ((Rec_529160*) owner)->object;
+	} else if (slot->owner != 0 && ((Rec_529160*) slot->owner)->object != -1) {
+		obj = ((Rec_529160*) slot->owner)->object;
 		o = fcn_00426cc0(obj);
 		if (o != 0 && (strstr((char*) o, s_6a2e70) != 0 || strstr((char*) o, s_6a2e68) != 0)) {
 			fcn_00428720((char*) o);

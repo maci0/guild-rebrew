@@ -56,8 +56,8 @@ void __cdecl fcn_00567590(char* a0)
 	int id;
 	float dist;
 	char* list[0x20];
-	float v10[3];
-	float v11[3];
+	float v10[4];
+	float v11[4];
 
 	v18 = 0;
 	found = 0;

@@ -1,4 +1,8 @@
 extern char* g_5fb5b0;
+extern char g_fc2700[];
+extern char* g_fc28f4;
+extern int g_6b8300;
+extern int g_6b8010;
 void __cdecl fcn_0043c7a0(void*);
 void __cdecl fcn_00455750(void*);
 void __cdecl fcn_0043ff90(void*);
@@ -15,13 +19,13 @@ void __cdecl fcn_004473f0(void)
 	int copyCount;
 	int offset;
 
-	while (*(void**) 0xfc52f0 != (void*) 0xfc2700)
+	while (*(void**) 0xfc52f0 != (void*) g_fc2700)
 		fcn_0043c7a0(*(void**) 0xfc52f0);
 	while (*(void**) 0xfb98f4 != (void*) 0xfb9280)
 		fcn_00455750(*(void**) 0xfb98f4);
-	if (*(void**) 0x633738 != 0) {
-		fcn_0043ff90(*(void**) 0x633738);
-		*(void**) 0x633738 = 0;
+	if (g_6b8300 != 0) {
+		fcn_0043ff90((void*) g_6b8300);
+		g_6b8300 = 0;
 	}
 	if (*(void**) 0x633dd4 != 0) {
 		fcn_0045da90(*(void**) 0x633dd4);
@@ -31,8 +35,8 @@ void __cdecl fcn_004473f0(void)
 		m_FreeTracked(*(void**) (g_5fb5b0 + 0x3c8));
 		*(void**) (g_5fb5b0 + 0x3c8) = 0;
 	}
-	*(void**) 0xfc52f0 = (void*) 0xfc2700;
-	*(void**) 0xfc28f4 = (void*) 0xfc5100;
+	*(void**) 0xfc52f0 = (void*) g_fc2700;
+	g_fc28f4 = (char*) 0xfc5100;
 	*(int*) 0x633b1c = 0;
 	*(int*) 0x633b20 = 0;
 	*(int*) 0x633b24 = 0;
@@ -79,7 +83,7 @@ void __cdecl fcn_004473f0(void)
 	*(int*) 0x6338b8 = 0;
 	fcn_00448910();
 	*(int*) 0x63349c = 0;
-	offset = *(int*) 0x633444 * 0x3e0;
+	offset = g_6b8010 * 0x3e0;
 	*(int*) 0x5fb5c0 = 4;
 	*(int*) 0x5fb5c4 = 0xf;
 	*(int*) (offset + 0xfd7c24) = 0;

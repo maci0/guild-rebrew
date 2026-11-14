@@ -38,7 +38,7 @@ int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00442e30(void);
 int __cdecl fcn_0051e070(void);
-int __cdecl fcn_00448360(char *, int, int);
+#include "client_scene_loader.h"
 void __cdecl ReportClientMessage(char *);
 void __cdecl fcn_00438da0(float, float, int, int, int, int, int, int, int);
 void __cdecl fcn_0046b4f0(void);
@@ -126,9 +126,9 @@ void __cdecl main_Menue(void)
 	fcn_004432d0(0, 0);
 	fcn_00442e30();
 	if (fcn_0051e070() != 0) {
-		v14 = (char *)0x6a39ac;
+		v14 = "scenes/*ChooseCity_Europa.ed3";
 	} else {
-		v14 = (char *)0x6a39cc;
+		v14 = "scenes/*ChooseCity.ed3";
 	}
 	fcn_00448360(v14, 0, 0);
 	fcn_005356e0();

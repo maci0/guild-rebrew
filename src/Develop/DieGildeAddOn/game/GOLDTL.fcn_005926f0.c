@@ -95,13 +95,13 @@ int __cdecl fcn_005926f0(void)
 		fcn_00471b60(h);
 		io_AppendText(0x87);
 		(*(int*)0x100f1dc) = -1;
-		while (g_14ce8e0 == 0 && *(char*)0x14cf950 != 1) {
-			if (fcn_005373e0((void*)fcn_005926f0, 0x24087) == 0) {
+		do {
+			if (g_14ce8e0 != 0 || *(char*)0x14cf950 == 1) {
+				g_774654 = 1;
 				fcn_00471e30(h);
 				return 0;
 			}
-		}
-		g_774654 = 1;
+		} while (fcn_005373e0((void*)fcn_005926f0, 0x24087) != 0);
 		fcn_00471e30(h);
 		return 0;
 	}
@@ -154,13 +154,13 @@ int __cdecl fcn_005926f0(void)
 		fcn_00471b60(h);
 		io_AppendText(0x87);
 		(*(int*)0x100f1dc) = -1;
-		while (g_14ce8e0 == 0 && *(char*)0x14cf950 != 1) {
-			if (fcn_005373e0((void*)fcn_005926f0, 0x24087) == 0) {
+		do {
+			if (g_14ce8e0 != 0 || *(char*)0x14cf950 == 1) {
+				g_774654 = 1;
 				fcn_00471e30(h);
 				return 0;
 			}
-		}
-		g_774654 = 1;
+		} while (fcn_005373e0((void*)fcn_005926f0, 0x24087) != 0);
 		fcn_00471e30(h);
 		return 0;
 	}

@@ -3,8 +3,8 @@
 extern char g_85ab90[];
 extern char* g_773d78;
 extern unsigned char g_773d75;
-extern char* g_entity_type_table;
-extern char* g_item_def_table;
+extern unsigned char* lpGebaeudePROT;
+extern char* lpObjektePROT;
 
 /* SIZE 0x80 */
 typedef struct {
@@ -69,7 +69,7 @@ void __cdecl fcn_005017a0(int a0)
 		}
 		e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 		while (e != 0) {
-			if (*(char*) (g_entity_type_table + *e + *e * 0x24c) != 0x0a) {
+			if (*(char*) (lpGebaeudePROT + *e + *e * 0x24c) != 0x0a) {
 				ent = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0xff);
 				i = 0;
 				if (ent != 0) {
@@ -77,7 +77,7 @@ void __cdecl fcn_005017a0(int a0)
 						if (p->id != 0 &&
 						    fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, p->id) != 0) {
 							p->active = 1;
-							item = (unsigned short*) (g_item_def_table + p->id * 0x41 + 0x2e);
+							item = (unsigned short*) (lpObjektePROT + p->id * 0x41 + 0x2e);
 							for (q = s, n = 0x55; n != 0; n--) {
 								for (v = 4, item2 = item; v != 0; v--) {
 									if (q->id == *item2) {
@@ -131,18 +131,18 @@ void __cdecl fcn_005017a0(int a0)
 		}
 		ip = codes;
 		for (v = *ip; v != 0; v = *++ip) {
+			count = 0;
 			ent = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, v);
 			if (ent != 0) {
 				ent2 = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0xff);
 				if (ent2 != 0) {
-					count = 0;
 					o = fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 5);
 					while (o != 0) {
 						count++;
 						o = (char*) gm_NextEntityQueryMatch();
 					}
 					o = fcn_00502cd0(*(int*) (ent + 0x14), 1, 4, 0x11);
-					if (o != 0 && count > (int) *(unsigned char*) (o + 0x1c)) {
+					if (o != 0 && (int) *(unsigned char*) (o + 0x1c) < count) {
 						count -= *(unsigned char*) (o + 0x1c);
 						fcn_004c4510(o, *(int*) (o + 2));
 						fcn_004c4670(1, 1, o - g_aed32c + 0x1c, &count);
@@ -169,17 +169,17 @@ void __cdecl fcn_005017a0(int a0)
 		for (n = 0x55; n != 0; n--) {
 			rec = *p;
 			if (rec.id != 0) {
-				if (fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, rec.id) == 0 &&
-				    fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, rec.id) == 0) {
-					rec.active = 0;
-				} else {
-					if (rec.value != 0) {
-						rec.value += (unsigned char) gm_RandomMod(8) + 0x18;
-						rec.active = rec.value <= 0x80;
-					} else {
+				if (fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, rec.id) != 0 ||
+				    fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, rec.id) != 0) {
+					if (rec.value == 0) {
 						rec.value = (unsigned char) gm_RandomMod(0xff);
 						rec.active = rec.value <= 0x80;
+					} else {
+						rec.value += (unsigned char) gm_RandomMod(8) + 0x18;
+						rec.active = rec.value <= 0x80;
 					}
+				} else {
+					rec.active = 0;
 				}
 				fcn_004c6190((char*) &rec, (char) a0);
 			}

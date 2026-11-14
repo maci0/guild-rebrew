@@ -18,10 +18,10 @@ void __cdecl fcn_00402d00(char* a0)
 	int col;
 	int row;
 	float out;
-	float direction[3];
+	float direction[4];
+	float k;
 
-
-	float pt[3];
+	float pt[4];
 	int list[16];
 	int i = 0;
 	void** p;
@@ -95,15 +95,15 @@ next:
 		direction[1] = -direction[1];
 		direction[2] = -direction[2];
 		fcn_004518a0(direction);
-		t = t * g_6628b0;
+		k = t * g_6628b0;
 		s = *(char**) (a0 + 0x34);
-		pt[0] = *(float*) (s + 0x4c) + t * direction[0];
+		pt[0] = *(float*) (s + 0x4c) + k * direction[0];
 		pt[1] = *(float*) (s + 0x50);
-		pt[2] = *(float*) (s + 0x54) + t * direction[2];
+		pt[2] = *(float*) (s + 0x54) + k * direction[2];
 		*(unsigned short*) (a0 + 0x8c) |= 1;
 		*(int*) (a0 + 0x58) = 0;
-		*(float*) (a0 + 0x54) = t * direction[0];
-		*(float*) (a0 + 0x5c) = t * direction[2];
+		*(float*) (a0 + 0x54) = k * direction[0];
+		*(float*) (a0 + 0x5c) = k * direction[2];
 		s = *(char**) (a0 + 0x88);
 		e = *(char**) (s + 0xb0);
 		if (e != 0 && fcn_0045b990((float*) e, pt, &col, &row, &out) != 0) {

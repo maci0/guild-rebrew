@@ -1,3 +1,4 @@
+#include "client_lighting.h"
 void __cdecl fcn_0045fbb0(void*);
 void __cdecl fcn_00440140(void*);
 
@@ -10,7 +11,6 @@ void __cdecl fcn_0043f990(void)
 	char* fillDst;
 	int fillCount;
 
-	fillCount = 0x19;
 	for (i = 0, offset = 0; i < *(unsigned int*) 0x633744; i++, offset += 0x44) {
 		resource = *(char**) (*(char**) 0x63374c + offset);
 		if (resource != 0) {
@@ -26,6 +26,7 @@ void __cdecl fcn_0043f990(void)
 		*(int*) (*(char**) 0x63374c + offset + 4) = 0;
 		*(int*) (*(char**) 0x63374c + offset + 8) = 0;
 		*(int*) (*(char**) 0x63374c + offset + 0xc) = 0;
+		fillCount = 0x19;
 		fillDst = *(char**) 0x63374c + offset + 0x24;
 		__asm {
 			mov edi, fillDst
@@ -45,11 +46,11 @@ void __cdecl fcn_0043f990(void)
 			rep stosb
 		}
 	}
-	if (*(void**) 0x633738 != 0)
-		fcn_00440140(*(void**) 0x633738);
+	if ((void*) g_6b8300 != 0)
+		fcn_00440140((void*) g_6b8300);
 	for (offset = 0; offset < 0xf800; offset += 0x3e0) {
 		resource = *(char**) (0xfd7c4c + offset);
-		if (resource != 0 && resource != *(char**) 0x633738)
+		if (resource != 0 && resource != (char*) g_6b8300)
 			fcn_00440140(resource);
 	}
 }

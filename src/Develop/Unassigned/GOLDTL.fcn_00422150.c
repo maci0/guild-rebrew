@@ -67,9 +67,9 @@ void __cdecl fcn_00422150(void)
                         if ((unsigned int)dt < (unsigned int)g_678de8)
                         {
                             if (p->flags14 & 1)
-                                fcn_0042a920(p->obj, (int)((float)(unsigned int)dt / g_678de8 * p->speed24));
+                                fcn_0042a920(p->obj, (int)((float)(unsigned int)dt / (unsigned int)g_678de8 * (unsigned int)p->speed24));
                             else
-                                fcn_0042a920(p->obj, (int)((float)(unsigned int)(p->start10 - now + g_678de8) / g_678de8 * p->speed24));
+                                fcn_0042a920(p->obj, (int)((float)(unsigned int)(p->start10 - now + g_678de8) / (unsigned int)g_678de8 * (unsigned int)p->speed24));
                         }
                         else if (p->flags14 & 2)
                         {
@@ -88,15 +88,18 @@ void __cdecl fcn_00422150(void)
                 }
                 else if (p->limit18 != 0 && p->count0c != 1 && (p->flags14 & 0xe) == 0)
                 {
-                    if (p->stamp1c == 0)
-                        p->stamp1c = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
-                    else if ((unsigned int)(p->stamp1c + p->limit18) <
-                             (unsigned int)(g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac))
+                    if (p->stamp1c != 0)
                     {
-                        if (p->count0c != 0)
-                            p->count0c--;
-                        fcn_00423670(p, 0, p->limit18);
+                        if ((unsigned int)(p->stamp1c + p->limit18) <
+                            (unsigned int)(g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac))
+                        {
+                            if (p->count0c != 0)
+                                p->count0c--;
+                            fcn_00423670(p, 0, p->limit18);
+                        }
                     }
+                    else
+                        p->stamp1c = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
                 }
                 else if (p->callback != 0)
                 {
@@ -126,7 +129,7 @@ void __cdecl fcn_00422150(void)
                     dt = now - p->start10;
                     if ((unsigned int)dt < (unsigned int)g_678dec)
                         fcn_0042a920(p->obj,
-                            (int)((float)(unsigned int)dt / g_678dec * p->speed24));
+                            (int)((float)(unsigned int)dt / (unsigned int)g_678dec * (unsigned int)p->speed24));
                     else
                         fcn_004237f0(p, 0);
                 }

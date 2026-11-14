@@ -21,11 +21,11 @@ int __cdecl fcn_004c48f0(void);
 /* ADDRESS: GOLDTL 0x00558680 */
 int __cdecl fcn_00558680(char* a0)
 {
-	float pos1[3];
-	float pos2[3];
-	float dir[3];
+	float pos1[4];
+	float pos2[4];
+	float dir[4];
 	char flag[4];
-	int keys[3];
+	int keys[4];
 	float len;
 	float scale;
 	int saved;
@@ -33,9 +33,9 @@ int __cdecl fcn_00558680(char* a0)
 	int handle;
 	int rec;
 	int block;
+	int ret;
 
 	saved = g_6b8010;
-	scale = 0.0f;
 	fcn_004432d0(0, 1);
 	block = *(int*) (a0 + 0xc8);
 	if (block != 0) {
@@ -60,19 +60,20 @@ int __cdecl fcn_00558680(char* a0)
 						dir[2] = pos1[2] - pos2[2];
 						len = (float) sqrt((double) (dir[0] * dir[0] + dir[2] * dir[2]));
 						fcn_0045b990(g_1043370, pos1, keys, (int*) flag, &scale);
-						level = g_1043370;
 						pos1[1] = scale + 80.0f;
 						dir[0] = pos1[0] - pos2[0];
 						dir[1] = pos1[1] - pos2[1];
 						dir[2] = pos1[2] - pos2[2];
 						if (len < 45.0f) {
+							ret = 2;
 							*(int*) (a0 + 0xc4) = 0;
-							fcn_004432d0(saved, 1);
-							return 2;
+							goto done;
 						}
 						keys[0] = *(int*) (a0 + 0xec);
 						keys[1] = 0;
 						scale = (float) (unsigned int) g_6b7fac - (float) keys[0];
+						level = g_1043370;
+						ret = 1;
 						keys[2] = fcn_004c48f0();
 						*(int*) (a0 + 0xec) = g_6b7fac;
 						scale = ((float) (unsigned int) keys[2] * 0.25f + 0.5f) * scale;
@@ -97,8 +98,9 @@ int __cdecl fcn_00558680(char* a0)
 						*(float*) (a0 + 0xd4) = pos1[1];
 						*(float*) (a0 + 0xd8) = pos1[2];
 						fcn_00438b40((char*) rec, pos1);
+done:
 						fcn_004432d0(saved, 1);
-						return 1;
+						return ret;
 					}
 				}
 			}

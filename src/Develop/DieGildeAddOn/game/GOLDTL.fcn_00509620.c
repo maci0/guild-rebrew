@@ -10,7 +10,7 @@ extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern void* __cdecl fcn_004b3c00(void* entity);
 extern int __cdecl gm_GetBuildingTypeCategory(int type);
 extern int __cdecl fcn_005059b0(void* record, int a, int b);
-extern int __cdecl gm_WalkEntityChain(unsigned int slot);
+extern int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
 extern void __cdecl fcn_00546ce0(void* entity);
 extern void __cdecl fcn_0055bc40(void* entity);
 extern void __cdecl fcn_004e8940(void* entity);
@@ -64,10 +64,10 @@ int __cdecl fcn_00509620(int a0, int a1)
 	q = (EntityStruct*) gm_LookupEntityRecordById(a1);
 	if (q == 0)
 		return -2;
-	q_slot = q->entity_index;
 	fcn_00546ce0(p);
 	fcn_0055bc40(p);
 	fcn_0055bc40(q);
+	q_slot = q->entity_index;
 	if (p->max_hp != q->max_hp)
 		q->max_hp = p->max_hp;
 	fcn_004e8940(p);

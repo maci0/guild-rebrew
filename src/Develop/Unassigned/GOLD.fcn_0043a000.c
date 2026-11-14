@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdlib.h>
 #include "client_types.h"
 #include "client_lighting.h"
 #include "Develop/Units/d3/d3_camera.h"
@@ -36,12 +37,7 @@ char* __cdecl fcn_0043a000(char* object)
             level = 0.0f;
         index = (int) level;
     } else {
-        index = count - 1;
-        selected--;
-        if (index >= selected)
-            index = selected;
-        if (index < 0)
-            index = 0;
+        index = __max(0, __min(count - 1, selected - 1));
     }
     page = model + 0xf4 + index * 0x198;
     if (*(int*) (page + 8) == 0 || *(int*) (page + 0xc) == 0)

@@ -1,4 +1,5 @@
 #include <string.h>
+#include <ctype.h>
 
 typedef struct Slot {
 	int x0;
@@ -10,7 +11,6 @@ extern int g_67fca0;
 extern char g_680ae0[]; /* hst_ParseText_Fake_2nd_Pass() failed: Syntax Error in Label %i < %s > */
 
 int __cdecl sprintf(char*, const char*, ...);
-int __cdecl _isctype(int c, int mask);
 Slot* __cdecl hst_ParseCommandline_1st_Pass(int id);
 int __cdecl hst_ParseContext(char* label, char* out, Slot* slot);
 
@@ -123,18 +123,12 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 				s++;
 				continue;
 			}
-			if (*(int*) 0x6b25b0 > 1) {
-				n = _isctype(c, 4);
-			} else {
-				n = *(unsigned char*) (*(unsigned char**) 0x6b23a4 + c * 2) & 4;
-			}
+			n = isdigit(c);
 			if (n == 0) {
 				sprintf(msg, g_680ae0, id - g_67fca0 - 1, label);
 				return 0;
 			}
-			while ((*(int*) 0x6b25b0 > 1 ? _isctype(*s, 4)
-			    : *(unsigned char*) (*(unsigned char**) 0x6b23a4 + *s * 2) & 4) != 0
-			    && *s != 0) {
+			while (isdigit(*s) && *s != 0) {
 				*p++ = *s++;
 			}
 			n = sizeof(slotname); q = slotname; __asm {

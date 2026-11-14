@@ -32,73 +32,65 @@ int __cdecl fcn_0047d2a0(char* e)
 	int d;
 	float f;
 	unsigned char b;
+	unsigned char b2;
 	unsigned char v11;
 
-
-	if (*(int*) (e + 0x210) != -1) {
-		goto other_path;
-	}
-	if (e[0x166] == 0 && e[0x169] == 0 && e[2] != 5) {
-		return 0;
-	}
-	best = -1;
-	bestscore = 128.0f;
-	b = 0;
-	i = 0;
-	for (h = g_7f4ca0 + 2; (int) h < 0x85a0a2; h += 0x21c) {
-		if (!((i != (int) *(unsigned short*) e && h[0] == 6) || h[0] == 7)) {
-			if (fcn_0047dd60(h - 2) == 0 || (h[0x164] == 0 && h[0x167] == 0)) {
-				i++;
-				continue;
+	if (*(int*) (e + 0x210) == -1) {
+		if (e[0x166] == 0 && e[0x169] == 0 && e[2] != 5) {
+			return 0;
+		}
+		best = -1;
+		bestscore = 128.0f;
+		i = 0;
+		for (h = g_7f4ca0 + 2; (int) h < 0x85a0a2; h += 0x21c, i++) {
+			if (!((i != (int) *(unsigned short*) e && h[0] == 6) || h[0] == 7)) {
+				if (fcn_0047dd60(h - 2) == 0 || (h[0x164] == 0 && h[0x167] == 0)) {
+					continue;
+				}
+			}
+			d = fcn_00508eb0(i, 0) - fcn_00508eb0(*(unsigned short*) e, 0);
+			if (d < 0) {
+				d = -d;
+			}
+			f = (10.0f - (float) d * 0.5f) * 0.1f;
+			if ((float) (signed char) g_90e0a0[i][*(unsigned short*) e] * f < bestscore) {
+				if (fcn_0050f980(i, (int) *(unsigned short*) e, 1) < 34.0f) {
+					best = i;
+					bestscore = (float) (signed char) g_90e0a0[i][*(unsigned short*) e] * f;
+				}
 			}
 		}
-		d = fcn_00508eb0(i, 0) - fcn_00508eb0(*(unsigned short*) e, 0);
+		if (best == -1) {
+			return 0;
+		}
+		if (((signed char) g_869480[best][*(unsigned short*) e] / 2
+		     + (signed char) g_90e0a0[best][*(unsigned short*) e])
+		    >= -50 - ((int) gm_RandomMod(0x20) & 0xffff)) {
+			return 0;
+		}
+		b = 0;
+		fcn_004c4510((int) e, *(int*) (e + 4));
+		fcn_004c4570(1, 1, 0x215, &b);
+		d = (int) bestscore;
 		if (d < 0) {
 			d = -d;
 		}
-		f = (10.0f - (float) d * 0.5f) * 0.1f;
-		if ((float) (signed char) g_90e0a0[i][*(unsigned short*) e] * f
-		    < bestscore) {
-			if (fcn_0050f980(i, (int) *(unsigned short*) e, 1) < 34.0f) {
-				best = i;
-				bestscore = (float) (signed char) g_90e0a0[i][*(unsigned short*) e]
-				            * f;
-			}
+		b = (unsigned char) (d / 3 + 1);
+		if ((((int) b < g_7747b4 + g_7747b4 + 0x23) ? (int) b : (g_7747b4 + g_7747b4 + 0x23))
+		    <= g_7747b4 + g_7747b4 + 0xf) {
+			b = (unsigned char) (g_7747b4 + g_7747b4 + 0xf);
+		} else if ((int) b >= g_7747b4 + g_7747b4 + 0x23) {
+			b = (unsigned char) (g_7747b4 + g_7747b4 + 0x23);
 		}
-		i++;
-	}
-	if (best == -1) {
+		fcn_004c4570(1, 1, 0x216, &b);
+		h = g_7f4ca0 + best * 0x21c;
+		fcn_004c4570(4, 1, 0x210, h + 4);
+		fcn_004c4570(1, 1, 0x214, &g_90e0a0[best][*(unsigned short*) e]);
+		fcn_004c5360();
+		fcn_004c54c0(*(int*) (h + 4), *(int*) (e + 4), 0, 2);
+		fcn_005b2560(e, h);
 		return 0;
 	}
-	if (((signed char) g_869480[best][*(unsigned short*) e] / 2
-	     + (signed char) g_90e0a0[best][*(unsigned short*) e])
-	    >= -50 - ((int) gm_RandomMod(0x20) & 0xffff)) {
-		return 0;
-	}
-	b = 0;
-	fcn_004c4510((int) e, *(int*) (e + 4));
-	fcn_004c4570(1, 1, 0x215, &b);
-	d = (int) bestscore;
-	if (d < 0) d = -d;
-	b = (unsigned char) (d / 3 + 1);
-	if (b >= g_7747b4 + g_7747b4 + 0x23) {
-		b = (unsigned char) (g_7747b4 + g_7747b4 + 0x23);
-	}
-	if (b <= g_7747b4 + g_7747b4 + 0xf) {
-		b = (unsigned char) (g_7747b4 + g_7747b4 + 0xf);
-	} else if (b >= g_7747b4 + g_7747b4 + 0x23) {
-		b = (unsigned char) (g_7747b4 + g_7747b4 + 0x23);
-	}
-	fcn_004c4570(1, 1, 0x216, &b);
-	h = g_7f4ca0 + best * 0x21c;
-	fcn_004c4570(4, 1, 0x210, h + 4);
-	fcn_004c4570(1, 1, 0x214, &g_90e0a0[best][*(unsigned short*) e]);
-	fcn_004c5360();
-	fcn_004c54c0(*(int*) (h + 4), *(int*) (e + 4), 0, 2);
-	fcn_005b2560(e, h);
-	return 0;
-
-other_path:
 	other = (char*) gm_LookupEntityRecordById(*(int*) (e + 0x210));
 	if ((e[0x166] == 0 && e[0x169] == 0 && e[2] != 5) || other == 0) {
 		goto reset;
@@ -110,7 +102,7 @@ other_path:
 	if ((int) (unsigned char) e[0x215] > (int) (unsigned char) e[0x216] + 5) {
 		goto reset;
 	}
-	if ((int) (unsigned char) e[0x215] >= (int) (unsigned char) e[0x216]) {
+	if ((unsigned char) e[0x215] >= (unsigned char) e[0x216]) {
 		goto pulse;
 	}
 	if ((signed char) g_90e0a0[*(unsigned short*) other][*(unsigned short*) e]
@@ -118,7 +110,7 @@ other_path:
 		goto pulse2;
 	}
 	if ((unsigned char) e[0x215] > 3) {
-		return (int)other;
+		return (int) other;
 	}
 	b = (unsigned char) ((int) gm_RandomMod(2) + 1);
 	fcn_004c4510((int) e, *(int*) (e + 4));
@@ -133,33 +125,17 @@ other_path:
 	fcn_005b2620(e, other);
 	return (int) other;
 
-pulse:
-	b = 1;
-	fcn_004c4510((int) e, *(int*) (e + 4));
-	fcn_004c4670(1, 1, 0x215, &b);
-	b = 1;
-	fcn_004c4570(1, 1, 0x218, &b);
-	fcn_004c5360();
-	return 0;
-
-pulse2:
-	b = (unsigned char) (e[0x216] + 1);
-	fcn_004c4510((int) e, *(int*) (e + 4));
-	fcn_004c4570(1, 1, 0x215, &b);
-	b = 1;
-	fcn_004c4570(1, 1, 0x218, &b);
-	fcn_004c5360();
-	return 0;
-
 reset:
 	b = 0;
+	b2 = 0;
+	best = -1;
 	v11 = 0;
 	fcn_004c4510((int) e, *(int*) (e + 4));
 	fcn_004c4570(1, 1, 0x215, &b);
-	fcn_004c4570(1, 1, 0x216, &b);
-	best = -1;
+	fcn_004c4570(1, 1, 0x216, &b2);
 	fcn_004c4570(4, 1, 0x210, &best);
 	fcn_004c4570(1, 1, 0x214, &v11);
+	fcn_004c5360();
 	b = 1;
 	fcn_004c4570(1, 1, 0x218, &b);
 	fcn_004c5360();
@@ -167,6 +143,24 @@ reset:
 		fcn_004c54c0(*(int*) (e + 0x210), *(int*) (e + 4), 0x3c, 2);
 		fcn_005b24b0(e, other);
 	}
+	return 0;
+
+pulse:
+	b = 1;
+	b2 = 1;
+	fcn_004c4510((int) e, *(int*) (e + 4));
+	fcn_004c4670(1, 1, 0x215, &b);
+	fcn_004c4570(1, 1, 0x218, &b2);
+	fcn_004c5360();
+	return 0;
+
+pulse2:
+	b = (unsigned char) (e[0x216] + 1);
+	b2 = 1;
+	fcn_004c4510((int) e, *(int*) (e + 4));
+	fcn_004c4570(1, 1, 0x215, &b);
+	fcn_004c4570(1, 1, 0x218, &b2);
+	fcn_004c5360();
 	return 0;
 }
 unsigned char _dpad_7747b4[76];

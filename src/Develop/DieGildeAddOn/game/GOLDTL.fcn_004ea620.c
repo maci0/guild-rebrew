@@ -115,14 +115,15 @@ void __cdecl fcn_004ea620(void)
 		rec -= 0x18;
 	} while ((int) rec >= 0x9a9220);
 	existing = 0;
-	best = 0;
-	value = 0;
 	if (b[1] != -1 || a[1] != -1) {
 		existing = gm_LookupEntityRecordById(b[1] != -1 ? b[1] : a[1]);
-		if (existing != 0) {
-			value = gm_WalkEntityChain(*(unsigned short*) existing);
-		}
 	}
+	if (existing != 0) {
+		value = gm_WalkEntityChain(*(unsigned short*) existing);
+	} else {
+		value = 0;
+	}
+	best = 0;
 	for (; best_i < count; best_i++) {
 		n = gm_WalkEntityChain(*(unsigned short*) cand[best_i]);
 		if (value < n) {

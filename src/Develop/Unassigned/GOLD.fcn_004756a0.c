@@ -9,14 +9,15 @@ void __cdecl fcn_004756a0(int index, unsigned char flags)
 {
     GuiWin* window;
     int x;
+    int y;
     window = &g_00f8f120[index];
     if (flags & 1)
         x = g_00f8f08c - window->width / 2;
     else
         x = window->x;
-    if (flags & 2) {
-        fcn_0046cd90(x, g_00f8f088 - window->height / 2, window->id);
-        return;
-    }
-    fcn_0046cd90(x, window->y, window->id);
+    if (flags & 2)
+        y = g_00f8f088 - window->height / 2;
+    else
+        y = window->y;
+    fcn_0046cd90(x, y, window->id);
 }

@@ -43,18 +43,15 @@ extern float g_662c6c;
 /* ADDRESS: GOLDTL 0x00437bc0 */
 void __cdecl fcn_00437bc0(void)
 {
-	float ax;
 	double angle_x;
 	double angle_y;
-	float ay;
-	float s;
-	float c;
+	double s;
+	double c;
 	float a[3];
 	float m[16];
 
 	angle_x = atan2(g_1052bbc, g_10432a4);
-	ax = angle_x;
-	g_1042ce8 = ax;
+	g_1042ce8 = angle_x;
 	s = sin(angle_x);
 	c = cos(angle_x);
 	g_1042fc8[0] = c;
@@ -66,8 +63,7 @@ void __cdecl fcn_00437bc0(void)
 	g_1042fc8[6] = s;
 	g_1042fc8[7] = 1e-7f;
 	angle_y = atan2(g_1052bb4, -g_1042584);
-	ay = angle_y;
-	g_1042fa4 = ay;
+	g_1042fa4 = angle_y;
 	g_1042fc8[8] = 0.0f;
 	s = sin(angle_y);
 	c = cos(angle_y);
@@ -85,22 +81,22 @@ void __cdecl fcn_00437bc0(void)
 	g_10425a0[0] = (m[0] + m[4]) * g_6628a8 + m[8];
 	g_10425a0[1] = (m[1] + m[5]) * g_6628a8 + m[9];
 	g_10425a0[2] = (m[2] + m[6]) * g_6628a8 + m[10];
-	a[0] = -ay;
-	a[1] = ax;
+	a[0] = -angle_y;
+	a[1] = angle_x;
 	a[2] = 0.0f;
 	fcn_00451900(a, m);
 	g_10425a0[4] = (m[0] + m[4]) * g_6628a8 + m[8];
 	g_10425a0[5] = (m[1] + m[5]) * g_6628a8 + m[9];
 	g_10425a0[6] = (m[2] + m[6]) * g_6628a8 + m[10];
-	a[0] = ay;
-	a[1] = -ax;
+	a[0] = angle_y;
+	a[1] = -angle_x;
 	a[2] = 0.0f;
 	fcn_00451900(a, m);
 	g_10425a0[8] = (m[0] + m[4]) * g_6628a8 + m[8];
 	g_10425a0[9] = (m[1] + m[5]) * g_6628a8 + m[9];
 	g_10425a0[10] = (m[2] + m[6]) * g_6628a8 + m[10];
-	a[0] = ay;
-	a[1] = ax;
+	a[0] = angle_y;
+	a[1] = angle_x;
 	a[2] = 0.0f;
 	fcn_00451900(a, m);
 	g_10425a0[12] = (m[0] + m[4]) * g_6628a8 + m[8];

@@ -98,11 +98,11 @@ int __cdecl fcn_0059ba40(char* a0)
 	fcn_00594340();
 	count = 0;
 	d2_SetForm(h, 0);
-	p = (int*) (0x10162e8 + g_772514 * 0x3cc);
-	p[0] = 0xe;
-	p[1] = 0xe;
-	p[2] = 0xe;
-	p[3] = 0xe;
+	m = g_772514 * 0x3cc;
+	*(int*) (m + 0x10162e8) = 0xe;
+	*(int*) (m + 0x10162ec) = 0xe;
+	*(int*) (m + 0x10162f0) = 0xe;
+	*(int*) (m + 0x10162f4) = 0xe;
 	fcn_00533dc0(g_772514, 0x70b, 0x742);
 	fcn_00533f40(0x270, 0x15e, g_772514, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
 	*(unsigned int*) (g_1015ea0 + 0x84 + item * 0x2f4) = 0x54;

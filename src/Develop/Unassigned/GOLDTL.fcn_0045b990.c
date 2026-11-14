@@ -20,15 +20,15 @@ char __cdecl fcn_0045b990(float* tex, float* pt, int* outx, int* outy, float* ou
 	}
 	x = (int) ((pt[0] - tex[0]) / tex[4]);
 	y = (int) ((pt[2] - tex[2]) / tex[6]);
-	width = *(int*) (tex + 8);
-	if (x < 0 || x >= width || y < 0 || y >= width || outx == 0 || outy == 0) {
+	if (x < 0 || x >= *(int*) (tex + 8) || y < 0 || y >= *(int*) (tex + 8) || outx == 0 || outy == 0) {
 		return 0;
 	}
 	*outx = x;
 	*outy = y;
 	if (out != 0) {
-		data = *(unsigned char**) (tex + 10);
 		width = *(int*) (tex + 8);
+		data = *(unsigned char**) (tex + 10);
+
 		s = ((float) data[width * y + x] + 0.5f) * tex[5] + tex[1];
 		fy = (pt[2] - (y * tex[6] + tex[2])) / tex[6];
 		t10 = ((float) data[width * ((y + 1) & (width - 1)) + x] + 0.5f) * tex[5] + tex[1];

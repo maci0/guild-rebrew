@@ -24,7 +24,7 @@ int __cdecl io_FormatTextBuffer(void*, ...);
 int __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00471a30(int, int);
 int __cdecl fcn_00525f60(char*, int);
-unsigned char __cdecl fcn_00507400(int, int);
+int __cdecl fcn_00507400(int, int);
 void __cdecl fcn_004c6470(int, int);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_00471e30(int);
@@ -62,14 +62,14 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
     v4 = fcn_00470820(0, 0, (char*) 0x6ace10);
     fcn_00471b60(v4);
     d2_SetForm(v4, 0);
-    v7 = (*(int*) (g_772514 * 0x3cc + 0x1015f50) - 0x84) / 3;
     v15 = (*(int*) (g_772514 * 0x3cc + 0x1015f4c) - 0x40) / 5;
+    v7 = (*(int*) (g_772514 * 0x3cc + 0x1015f50) - 0x84) / 3;
     v14 = (v15 - *(short*) ((int) g_772500 + 0x1d978)) / 2;
     io_AppendText(0x1d36);
     v18 = (unsigned int*) g_14a5adc;
-    v10 = (-(unsigned int) (*(char*) ((char*) v11 + 9) != '\0') & 0x5f) + 0x130;
+    v10 = *(char*) ((char*) v11 + 9) ? 0x18f : 0x130;
     v8 = 0;
-    for (;;) {
+    do {
         v1 = v8 + 1;
         v5 = gm_CheckStatLevel(*v11, v1);
         v6 = fcn_0046f740((v8 % 5) * v15 + 0x20 + v14,
@@ -106,11 +106,11 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
             } while (v2);
         }
         v18 = &v18[1];
-        if (0x10 <= v8 + 2) {
-            break;
-        }
+
+
+
         v8 = v1;
-    }
+    } while (v8 + 1 < 0x10);
     g_100f1dc = -1;
     while (fcn_005373e0((void*) 0x5d97f0, 0x657c7)) {
         if (g_14ce8e0) {
@@ -121,9 +121,8 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
                 v7 = (unsigned int) g_774970 * 0x21c;
                 io_FormatTextBuffer(v12, 0x15bd, g_774970,
                              *(unsigned char*) (v7 + 0x7f4e04) +
-                                 (-(unsigned int) (*(char*) (v7 + 0x7f4ca9) != '\0') &
-                                  0x5f) +
-                                 0x12f);
+                                 (*(char*) (v7 + 0x7f4ca9) ? 0x18f : 0x130)
+                                 - 1);
                 fcn_00526120((int) v12, 4);
             } else {
                 fcn_00471a30(v4, 0);

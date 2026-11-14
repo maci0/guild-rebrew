@@ -32,105 +32,169 @@ int __cdecl fcn_005e8fe0(float* p, float spread, float* dir, float lift, float* 
 float __cdecl fcn_004f0eb0(int level, int percent, int count);
 int __cdecl fcn_004f0a30(char* a0, char* a1, float* a2, float* a3, float* a4, float a5, int a6, unsigned int a7);
 
+typedef struct {
+	float x;
+	float y;
+	float z;
+} Vec3_4a6550;
+
+typedef struct {
+	float x;
+	float y;
+	float z;
+	float w;
+} Vec4_4a6550;
+
+typedef struct {
+	float f00;
+	float f04;
+	float f08;
+} FxRow_4a6550;
+
 /* ADDRESS: GOLDTL 0x004a6550 */
 int __cdecl fcn_004a6550(char* a0, char* a1)
 {
 	char buf1[104];
 	char buf2[104];
 	char buf3[104];
-	float pos[3];
-	float pos2[3];
-	float pos3[3];
-	double f;
-	float spread;
+	Vec4_4a6550 pos;
+	Vec4_4a6550 delta;
+	Vec4_4a6550 pos2;
+	Vec3_4a6550 pos3;
 	float scale;
+	float spread;
 	float speed;
-	double tx;
+	float bits;
+	float factor;
+	float tx;
 	float ty;
 	float tz;
-	float mx;
-	unsigned int bits;
-	float* entry;
-	int kind;
-	int p1;
+	FxRow_4a6550* entry;
 	int p2;
+	int p1;
+	int kind;
 
 	if (g_772848 != *(int*) (a0 + 4) || g_77284c != *(int*) (a1 + 1)) {
 		return 0;
 	}
 	fcn_004f11c0(a1, &spread, &scale);
-	f = fcn_004f1290(a1);
+	factor = fcn_004f1290(a1);
 	p2 = g_7728b8;
 	p1 = g_7728b4;
-	entry = (float*) (g_77289c * 0xc + 0x665288);
-	bits = *(unsigned int*) (g_77289c * 0xc + 0x665290);
-	speed = (double) g_772898 * g_662910
-		* (f * *(float*) (g_77289c * 0xc + 0x66528c) - *entry) + *entry;
+	entry = &((FxRow_4a6550*) 0x665288)[g_77289c];
+	bits = entry->f08;
+	speed = (factor * entry->f04 - entry->f00)
+		* ((float) g_772898 * g_662910) + entry->f00;
 	kind = g_772894;
 	if (kind == 1) {
-		pos[0] = g_772850 + g_772860 * g_662914;
-		pos[1] = g_772854 + g_772864 * g_662914;
-		pos[2] = g_772858 + g_772868 * g_662914;
-		fcn_005e8e80(buf1, pos, (float*) 0x772860, speed,
-			*(float*) &bits, g_6660f4);
+		pos.x = g_662914 * g_772860;
+		pos.y = g_662914 * g_772864;
+		pos.z = g_662914 * g_772868;
+		pos.x += g_772850;
+		pos.y += g_772854;
+		pos.z += g_772858;
+		fcn_005e8e80(buf1, &pos.x, (float*) 0x772860, speed,
+			bits, g_6660f4);
 		fcn_005e8fe0((float*) buf1, spread, (float*) 0x772870, spread,
 			(float*) 0x772880, scale);
-		f = fcn_004f0eb0(g_77289c, g_772898, 1);
-		fcn_004f0a30(a1, a0, (float*) buf1, 0, 0, f, p2, (unsigned int) p1);
+		fcn_004f0a30(a1, a0, (float*) buf1, 0, 0,
+			fcn_004f0eb0(g_77289c, g_772898, 1), p2, (unsigned int) p1);
 		return 1;
 	}
 	if (kind == 2) {
-		tx = g_772860 * g_662c98 + g_772850; pos2[0] = (float) tx;
-		pos2[1] = g_772854 + g_772864 * g_662c98;
-		pos2[2] = g_772868 * g_662c98 + g_772858;
-		pos3[0] = g_772874 * g_662a98;
-		pos[0] = g_772870 * g_662a98 + tx;
-		pos[1] = pos3[0] + pos2[1];
-		pos[2] = g_772878 * g_662a98 + pos2[2];
-		pos3[1] = g_772878 * g_664450;
-		pos2[0] = g_772870 * g_664450 + pos2[0];
-		pos2[1] = g_772874 * g_664450 + pos2[1];
-		pos2[2] = pos3[1] + pos2[2];
-		fcn_005e8e80(buf2, pos, (float*) 0x772860, speed,
-			*(float*) &bits, g_6660f4);
-		fcn_005e8e80(buf1, pos2, (float*) 0x772860, speed,
-			*(float*) &bits, g_6660f4);
+		tx = g_662c98 * g_772860;
+		ty = g_662c98 * g_772864;
+		tz = g_662c98 * g_772868;
+		tx += g_772850;
+		ty += g_772854;
+		tz += g_772858;
+		pos.x = tx;
+		pos.y = ty;
+		pos.z = tz;
+		pos2.x = tx;
+		pos2.y = ty;
+		pos2.z = tz;
+		delta.x = g_662a98 * g_772870;
+		delta.y = g_662a98 * g_772874;
+		delta.z = g_662a98 * g_772878;
+		pos.x += delta.x;
+		pos.y += delta.y;
+		pos.z += delta.z;
+		delta.x = g_664450 * g_772870;
+		delta.y = g_664450 * g_772874;
+		delta.z = g_664450 * g_772878;
+		pos2.x += delta.x;
+		pos2.y += delta.y;
+		pos2.z += delta.z;
+		fcn_005e8e80(buf2, &pos.x, (float*) 0x772860, speed,
+			bits, g_6660f4);
+		fcn_005e8e80(buf1, &pos2.x, (float*) 0x772860, speed,
+			bits, g_6660f4);
 		fcn_005e8fe0((float*) buf2, spread, (float*) 0x772870, spread,
 			(float*) 0x772880, scale);
 		fcn_005e8fe0((float*) buf1, spread, (float*) 0x772870, spread,
 			(float*) 0x772880, scale);
-		f = fcn_004f0eb0(g_77289c, g_772898, 2);
-		fcn_004f0a30(a1, a0, (float*) buf2, (float*) buf1, 0, f, p2, (unsigned int) p1);
+		fcn_004f0a30(a1, a0, (float*) buf2, (float*) buf1, 0,
+			fcn_004f0eb0(g_77289c, g_772898, 2), p2, (unsigned int) p1);
 		return 1;
 	}
 	if (kind == 3) {
-		tx = g_772860 * g_662c98 + g_772850;
-		ty = g_772864 * g_662c98 + g_772854;
-		tz = g_772868 * g_662c98 + g_772858;
-		pos[0] = g_772880 * g_662a98 + tx;
-		pos[1] = g_772884 * g_662a98 + ty;
-		pos[2] = g_772888 * g_662a98 + tz;
-		mx = g_772880 * g_66444c;
-		pos3[0] = g_772870 * g_662a98 + (tx + mx);
-		pos3[1] = g_772874 * g_662a98 + g_772884 * g_66444c + ty;
-		pos3[2] = g_772878 * g_662a98 + g_772888 * g_66444c + tz;
-		pos2[0] = g_772870 * g_664450 + (float) (mx + (float) tx);
-		pos2[1] = g_772874 * g_664450 + g_772884 * g_66444c + ty;
-		pos2[2] = g_772878 * g_664450 + g_772888 * g_66444c + tz;
-		fcn_005e8e80(buf3, pos3, (float*) 0x772860, speed,
-			*(float*) &bits, g_6660f4);
-		fcn_005e8e80(buf1, pos2, (float*) 0x772860, speed,
-			*(float*) &bits, g_6660f4);
-		fcn_005e8e80(buf2, pos, (float*) 0x772860, speed,
-			*(float*) &bits, g_6660f4);
+		tx = g_662c98 * g_772860;
+		ty = g_662c98 * g_772864;
+		tz = g_662c98 * g_772868;
+		tx += g_772850;
+		ty += g_772854;
+		tz += g_772858;
+		pos3.x = tx;
+		pos3.y = ty;
+		pos3.z = tz;
+		pos2.x = tx;
+		pos2.y = ty;
+		pos2.z = tz;
+		pos.x = tx;
+		pos.y = ty;
+		pos.z = tz;
+		delta.x = g_662a98 * g_772880;
+		delta.y = g_662a98 * g_772884;
+		delta.z = g_662a98 * g_772888;
+		pos.x += delta.x;
+		pos.y += delta.y;
+		pos.z += delta.z;
+		delta.x = g_66444c * g_772880;
+		delta.y = g_66444c * g_772884;
+		delta.z = g_66444c * g_772888;
+		pos3.x += delta.x;
+		pos3.y += delta.y;
+		pos3.z += delta.z;
+		pos2.x += delta.x;
+		pos2.y += delta.y;
+		pos2.z += delta.z;
+		delta.x = g_662a98 * g_772870;
+		delta.y = g_662a98 * g_772874;
+		delta.z = g_662a98 * g_772878;
+		pos3.x += delta.x;
+		pos3.y += delta.y;
+		pos3.z += delta.z;
+		delta.x = g_664450 * g_772870;
+		delta.y = g_664450 * g_772874;
+		delta.z = g_664450 * g_772878;
+		pos2.x += delta.x;
+		pos2.y += delta.y;
+		pos2.z += delta.z;
+		fcn_005e8e80(buf3, &pos3.x, (float*) 0x772860, speed,
+			bits, g_6660f4);
+		fcn_005e8e80(buf1, &pos2.x, (float*) 0x772860, speed,
+			bits, g_6660f4);
+		fcn_005e8e80(buf2, &pos.x, (float*) 0x772860, speed,
+			bits, g_6660f4);
 		fcn_005e8fe0((float*) buf3, spread, (float*) 0x772870, spread,
 			(float*) 0x772880, scale);
 		fcn_005e8fe0((float*) buf1, spread, (float*) 0x772870, spread,
 			(float*) 0x772880, scale);
 		fcn_005e8fe0((float*) buf2, spread, (float*) 0x772870, spread,
 			(float*) 0x772880, scale);
-		f = fcn_004f0eb0(g_77289c, g_772898, 3);
-		fcn_004f0a30(a1, a0, (float*) buf3, (float*) buf1, (float*) buf2, f, p2, (unsigned int) p1);
+		fcn_004f0a30(a1, a0, (float*) buf3, (float*) buf1, (float*) buf2,
+			fcn_004f0eb0(g_77289c, g_772898, 3), p2, (unsigned int) p1);
 		return 1;
 	}
 	return 0;

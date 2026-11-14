@@ -35,7 +35,6 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 	int ratio;
 	int cap;
 	int tmp;
-	int modev;
 	int act;
 	int type;
 	int v;
@@ -160,32 +159,26 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 					t = gm_GetOppositeStatIndex(t);
 					type = lpGebaeudePROT[(int) *p * 0x24d + 0x247];
 					t = t / 2 + t % 2;
-					if (type < t) {
-						if (v != 7) {
-							tmp = fcn_0050d170(*p + 1);
-							tmp = (int) ((float) tmp * g_66414c);
-							if (tmp <= ratio) {
-								out1->kind = 5;
-								out1->f1 = *p + 1;
-								out1->f2 = 1;
-								out2->kind = 4;
-								out2->f1 = *(int *) (p + 1);
-								out2->f2 = 1;
-								return 0x13;
-							}
-							ratio = tmp - ratio;
-							if ((float) ratio / (float) tmp < 0.25f) {
-								return 0;
-							}
+					if (type < t && v != 7) {
+						tmp = fcn_0050d170(*p + 1);
+						tmp = (int) ((float) tmp * g_66414c);
+						if (tmp <= ratio) {
+							out1->kind = 5;
+							out1->f1 = *p + 1;
+							out1->f2 = 1;
+							out2->kind = 4;
+							out2->f1 = *(int *) (p + 1);
+							out2->f2 = 1;
+							return 0x13;
+						}
+						ratio = tmp - ratio;
+						if ((float) ratio / (float) tmp < 0.25f) {
 							out1->f2 = ratio;
 							out1->kind = 0x12;
 							return ai_StartKreditNehmen(0x13, ent, mode, out1, out2);
 						}
-					} else if (v != 7) {
-						idx += 0xa9;
-						continue;
-					}
-					if (type < t) {
+						return 0;
+					} else if (v == 7 && type < t) {
 						slot = *p + 1;
 					}
 				}
@@ -222,15 +215,26 @@ use_slot:
 			return 0;
 		}
 	}
-	modev = slot;
 	c1.kind = 5;
-	c1.f1 = 1;
-	c1.f2 = 0;
+	c1.f1 = slot;
+	c1.f2 = 1;
 	c2.kind = 0;
 	c2.f1 = 0;
 	c2.f2 = 0;
 	act = fcn_004a4bb0(0, ent, mode, &c1, &c2, 1);
-	if (act == 0) {
+	if (act != 0) {
+		v = fcn_0050d200(ent, c1.f1);
+		if (v <= ratio) {
+			goto accept;
+		}
+		if ((float) (v - ratio) / (float) v < 0.25f) {
+			out1->f2 = v - ratio;
+			out1->kind = 0x12;
+			return ai_StartKreditNehmen(0, ent, mode, out1, out2);
+		}
+		return 0;
+	}
+	{
 		int limit;
 		int type2;
 		int e;
@@ -276,20 +280,10 @@ use_slot:
 			p = (unsigned char *) gm_FindNextFilteredEntity();
 		}
 		if (c1.kind == 4 && c2.kind == 8) {
-			goto accept;
-		}
-	} else {
-		v = fcn_0050d200(ent, modev);
-		if (v <= ratio) {
 accept:
 			*out1 = c1;
 			*out2 = c2;
 			return 0x13;
-		}
-		if ((float) (v - ratio) / (float) v < 0.25f) {
-			out1->f2 = v - ratio;
-			out1->kind = 0x12;
-			return ai_StartKreditNehmen(0, ent, mode, out1, out2);
 		}
 	}
 	return 0;

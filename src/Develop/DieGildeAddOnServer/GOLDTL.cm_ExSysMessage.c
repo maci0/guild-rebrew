@@ -48,10 +48,7 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 	{
 		Stamp t;
 
-		t.day = 0;
-		t.minute = 0;
-		t.second = 0;
-		t.hour = 0;
+		memset(&t, 0, sizeof t);
 		t.day = *(int*) (buf + 0x11);
 		srv_SeedRandom(*(int*) (buf + 0x15));
 		fcn_0052a3a0(&t, 1);

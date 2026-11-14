@@ -51,12 +51,13 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 	char buf[0x100];
 	int i;
 	int j;
+	int k;
 	int h;
 	int x;
 	unsigned char type;
 	unsigned char kind;
 	char* rec;
-	char* p;
+	int p;
 	void* entity;
 
 	ids[0] = 0x1c4;
@@ -80,7 +81,7 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 		count = 3;
 	} else {
 		count = 3;
-		if (kind == 8 || *(unsigned char*) (rec + 0x247) <= 1) {
+		if (kind == 8 || *(unsigned char*) (rec + 0x247) < 2) {
 			count = 2;
 		}
 	}
@@ -159,12 +160,9 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 				fcn_0046f9b0(handles[i], buf);
 			}
 		}
-		if (g_100f1dc != -1) {
+		if (g_100f1dc != -1 && count > 0) {
 			for (i = 0; i < count; i++) {
 				if (handles[i] == g_67d370) {
-					if (i == -1) {
-						break;
-					}
 					memset(pkt, 0, sizeof(pkt));
 					pkt[4] = 0x14;
 					pkt[0x36] = 1;
@@ -177,14 +175,21 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 					*(short*) (pkt + 0x34) = g_7f4c0c;
 					*(int*) (pkt + 0x5c) = *(int*) (a1 + 2);
 					j = 0;
-					for (p = (char*) 0x7f4ca4; j < 6 && p < (char*) 0x85a0a4; p += 0x21c) {
+					p = 0x7f4ca4;
+					do {
+						if (j >= 6) {
+							break;
+						}
 						if (*(char*) (p + 0x184) != 0) {
 							*(int*) (pkt + 0x38 + j * 4) = *(int*) p;
 							j++;
 						}
-					}
+						p += 0x21c;
+					} while (p < 0x85a0a4);
 					if (j < 6) {
-						memset(pkt + 0x38 + j * 4, 0xff, (6 - j) * 4);
+						for (k = j; k < 6; k++) {
+							*(int*) (pkt + 0x38 + k * 4) = -1;
+						}
 					}
 					pkt[0x58] = (char) j;
 					if (j != 0) {

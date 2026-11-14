@@ -53,11 +53,11 @@ void __cdecl PrepareFloorWater(char* e)
 	v4 = *(unsigned char*) (e + 0x8035);
 	*(unsigned char*) (e + 0x8035) = 0;
 	if (*(unsigned char*) (e + 0x8034) == 0xff) {
-		for (v13 = 0; v13 < 8; v13++) {
-			strcpy(buf, e + 0x7e24 + v13 * 0x40);
+		for (v14 = 0; v14 < 8; v14++) {
+			strcpy(buf, e + 0x7e24 + v14 * 0x40);
 			strupr(buf);
 			if (strstr(buf, (char*) 0x67a790) != 0) {
-				*(unsigned char*) (e + 0x8034) = (unsigned char) v13;
+				*(unsigned char*) (e + 0x8034) = (unsigned char) v14;
 				break;
 			}
 		}

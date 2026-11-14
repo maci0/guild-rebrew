@@ -36,14 +36,14 @@ void __cdecl fcn_00572e40(char* c)
 	fcn_00500bb0(p52, 0, 1, 0);
 	memset(buf, 0, 0xf8);
 	*(int*) (buf + 8) = *(int*) ((char*) 0x7f4ca0 + *(unsigned short*) (c + 8) * 0x21c + 4);
-	*(int*) (buf + 0x28) = *(int*) (c + 0x44);
-	*(short*) (buf + 0x34) = *(short*) (c + 0x50);
+	memcpy(buf + 0x28, p44, 0xe);
+
 	buf[4] = 0xf;
 	*(int*) (buf + 0xc) = -1;
 	buf[0x36] = 2;
 	*(int*) (buf + 0x60) = *(int*) (c + 0xb0);
-	*(int*) (buf + 0x30) = *(int*) (c + 0x4c);
-	*(int*) (buf + 0x2c) = *(int*) (c + 0x48);
+
+
 	*(int*) (buf + 0x5c) = *(int*) (c + 0x10);
 	*(int*) (buf + 0x58) = *(int*) (c + 0xac);
 	*(int*) (buf + 0xa0) = *(int*) (c + 4);

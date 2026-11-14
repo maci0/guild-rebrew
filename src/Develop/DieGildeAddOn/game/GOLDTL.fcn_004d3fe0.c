@@ -27,9 +27,9 @@ void __cdecl fcn_004d3fe0(char* a0)
 	int auswahl;
 	int chosen;
 
-	auswahl = 0;
-	n = 0;
 	chosen = 0;
+	n = 0;
+	auswahl = 0;
 	rec = 0;
 	w = fcn_004d3c60(a0);
 	for (i = 0; i < ((unsigned char*) g_772eb4)[0x30]; i++) {
@@ -57,11 +57,9 @@ void __cdecl fcn_004d3fe0(char* a0)
 			rnd = gm_RandomFloat01();
 			for (i = 0; i < 6; i++) {
 				if (rnd <= w[i]) {
+					auswahl = i;
 					break;
 				}
-			}
-			if (i < 6) {
-				auswahl = i;
 			}
 			best = -1.0f;
 			for (i = 0; i < 16; i++) {

@@ -44,9 +44,9 @@ typedef struct {
 	int f64;
 	unsigned char p68[0x1c];
 	int f84;
-	unsigned char p88[0x1a];
-	unsigned char fa2;
-	unsigned char p_a3[0x55];
+	unsigned char p88[0x16];
+	unsigned char f9e;
+	unsigned char p_9f[0x59];
 } TIME_JOB;
 #pragma pack(pop)
 
@@ -57,7 +57,7 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 	char* entity;
 	char* entry;
 	char* found;
-	int steps[7];
+	int steps[5];
 	int age;
 	int next;
 	int threshold;
@@ -71,9 +71,11 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 	threshold = (gm_RandomMod(0x20) & 0xffff) + 0x28;
 	age = (unsigned char) rec[0x12];
 	if (age < threshold) {
+		unsigned int eid;
 		memset(&job, 0, sizeof(job));
-		job.f08 = *(unsigned int*) (entity + 4);
-		job.f0c = *(unsigned int*) (entity + 4);
+		eid = *(unsigned int*) (entity + 4);
+		job.f08 = eid;
+		job.f0c = eid;
 		job.a28 = g_7f4c00;
 		job.b2c = g_7f4c04;
 		job.c30 = g_7f4c08;
@@ -82,12 +84,11 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 		job.e36 = 1;
 		fcn_00500bb0(&job.a28, 0, 0, 10);
 		job.f58 = *(unsigned int*) (rec + 2);
-		job.f5c = 100 - (unsigned char) rec[0x12];
 		job.f64 = 5;
 		job.f84 = 0;
-		price = eval_ObjektPreis2Credits(*(unsigned short*) rec, 100);
-		value = (int) (price * g_665ee8
-			* (float) (100 - (unsigned char) rec[0x12]));
+		job.f5c = 100 - (unsigned char) rec[0x12];
+		price = eval_ObjektPreis2Credits(*(unsigned short*) rec, 100) * g_665ee8;
+		value = (int) (price * (float) (100 - (unsigned char) rec[0x12]));
 		fcn_004c5150(-1, *(unsigned int*) (entity + 4), (char) g_773d75, value);
 		fcn_004c5530((int) &job);
 		return;
@@ -99,12 +100,12 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 	if (entry != 0) {
 		if (*(int*) (rec + 0x2d) == 0) {
 			previous = (unsigned char) rec[0x32];
-			steps[1] = 0x0c;
-			steps[2] = 8;
-			steps[3] = 4;
-			steps[4] = 2;
-			steps[5] = 0;
-			next = steps[(unsigned char) rec[0x31] + 1];
+			steps[0] = 0x0c;
+			steps[1] = 8;
+			steps[2] = 4;
+			steps[3] = 2;
+			steps[4] = 0;
+			next = steps[(unsigned char) rec[0x31]];
 			rec[0x32] = (char) (previous + 1);
 			if ((int) (unsigned char) (previous + 1) < next)
 				return;
@@ -113,12 +114,13 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 		if (fcn_00529710(rec, entry) != 0
 			&& (fcn_00505340(entry) == 0
 				|| *(int*) (rec + 6) == *(int*) ((char*) *(void**) 0x7749f0 + 1))) {
+			int next_idx;
 			next = fcn_004be340(*(unsigned int*) (rec + 0x29));
-			steps[0] = *(int*) (rec + 0x2d) + 1;
-			if (next <= steps[0])
-				steps[0] = 0;
+			next_idx = *(int*) (rec + 0x2d) + 1;
+			if (next_idx >= next)
+				next_idx = 0;
 			fcn_004c4510(rec, *(unsigned int*) (rec + 2));
-			fcn_004c4700(4, 1, (int) (rec + 0x2d) - g_aed32c, steps);
+			fcn_004c4700(4, 1, (int) (rec + 0x2d) - g_aed32c, &next_idx);
 			*(unsigned int*) (a0 + 0x84) = fcn_004c53a0();
 			return;
 		}
@@ -136,7 +138,7 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 			job.f58 = *(unsigned int*) (rec + 2);
 			job.f5c = *(unsigned int*) (found + 1);
 			job.f60 = *(unsigned int*) (entry + 1);
-			job.fa2 = 1;
+			job.f9e = 1;
 			fcn_004c5530((int) &job);
 		}
 	}

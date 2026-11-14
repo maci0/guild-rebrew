@@ -110,18 +110,18 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 								if (!fcn_004a4bb0(a0, a1, a2, &cmd, &out, 0))
 									return 0;
 								need = fcn_0050d200(a1, cmd.f1);
-								if (p >= need) {
-									*a3 = cmd;
-									*a4 = out;
-									return 0x11;
+								if (p < need) {
+									rem = need - p;
+									if ((float) rem / (float) need < g_6628bc) {
+										a3->kind = 0x12;
+										a3->f2 = rem;
+										return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
+									}
+									return 0;
 								}
-								rem = need - p;
-								if ((float) rem / (float) need < g_6628bc) {
-									a3->kind = 0x12;
-									a3->f2 = rem;
-									return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
-								}
-								return 0;
+								*a3 = cmd;
+								*a4 = out;
+								return 0x11;
 							}
 							if (t == 5)
 								return 0;
@@ -132,16 +132,17 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					cmd.f2 = 1;
 					if (fcn_004a4bb0(a0, a1, a2, &cmd, &out, 1)) {
 						need = fcn_0050d200(a1, cmd.f1);
-						if (p >= need) {
+						if (p < need) {
+							rem = need - p;
+							if ((float) rem / (float) need < g_6628bc) {
+								a3->kind = 0x12;
+								a3->f2 = rem;
+								return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
+							}
+						} else {
 							*a3 = cmd;
 							*a4 = out;
 							return 0x11;
-						}
-						rem = need - p;
-						if ((float) rem / (float) need < g_6628bc) {
-							a3->kind = 0x12;
-							a3->f2 = rem;
-							return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
 						}
 					}
 					cmd.kind = 5;
@@ -150,18 +151,18 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					if (!fcn_004a4bb0(a0, a1, a2, &cmd, &out, 1))
 						return 0;
 					need = fcn_0050d200(a1, cmd.f1);
-					if (p >= need) {
-						*a3 = cmd;
-						*a4 = out;
-						return 0x11;
+					if (p < need) {
+						rem = need - p;
+						if ((float) rem / (float) need < g_6628bc) {
+							a3->kind = 0x12;
+							a3->f2 = rem;
+							return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
+						}
+						return 0;
 					}
-					rem = need - p;
-					if ((float) rem / (float) need < g_6628bc) {
-						a3->kind = 0x12;
-						a3->f2 = rem;
-						return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
-					}
-					return 0;
+					*a3 = cmd;
+					*a4 = out;
+					return 0x11;
 				}
 				if (*(char*) a3 != 5)
 					return 0;
@@ -176,26 +177,26 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 						return 0;
 					if (id == 5 || id == 7)
 						return 0;
-					cmd.f1 = v;
 					cmd.f2 = 1;
+					cmd.f1 = v;
 					out.kind = 4;
 					out.f1 = *(int*) (q + 1);
 					out.f2 = 1;
-					need = (int) ((float) fcn_0050d170(cmd.f1) * g_66414c);
+					need = (int) ((float) fcn_0050d170(v) * g_66414c);
 					if (!fcn_004a4bb0(a0, a1, a2, &cmd, &out, 0))
 						return 0;
-					if (p >= need) {
-						*a3 = cmd;
-						*a4 = out;
-						return 0x11;
+					if (p < need) {
+						rem = need - p;
+						if ((float) rem / (float) need < g_6628bc) {
+							a3->kind = 0x12;
+							a3->f2 = rem;
+							return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
+						}
+						return 0;
 					}
-					rem = need - p;
-					if ((float) rem / (float) need < g_6628bc) {
-						a3->kind = 0x12;
-						a3->f2 = rem;
-						return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
-					}
-					return 0;
+					*a3 = cmd;
+					*a4 = out;
+					return 0x11;
 				}
 				if (((BldProt_497ec0*) lpGebaeudePROT)[a3->f1].type != 2)
 					return 0;
@@ -204,18 +205,18 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 				if (*(char*) ((char*) a1 + 2) != 5)
 					return 0;
 				need = fcn_0050d200(a1, cmd.f1);
-				if (p >= need) {
-					*a3 = cmd;
-					*a4 = out;
-					return 0x11;
+				if (p < need) {
+					rem = need - p;
+					if ((float) rem / (float) need < g_6628bc) {
+						a3->kind = 0x12;
+						a3->f2 = rem;
+						return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
+					}
+					return 0;
 				}
-				rem = need - p;
-				if ((float) rem / (float) need < g_6628bc) {
-					a3->kind = 0x12;
-					a3->f2 = rem;
-					return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
-				}
-				return 0;
+				*a3 = cmd;
+				*a4 = out;
+				return 0x11;
 			}
 		}
 		n += 1;

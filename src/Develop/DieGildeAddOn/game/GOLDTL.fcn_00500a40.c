@@ -7,7 +7,6 @@ extern float g_99f644;
 extern float g_99f648[8];
 extern float g_99f668[8];
 extern float g_662cf8;
-extern float g_6628a8;
 
 float __cdecl fcn_00505e30(int);
 int __cdecl fcn_004fffb0(int);
@@ -33,7 +32,7 @@ void __cdecl fcn_00500a40(void)
 		    && *(unsigned char*) (p + 8) > 0
 		    && *(unsigned char*) (p + 2) < 0xa) {
 			*(int*) &g_99f620[0] += 1;
-			idx = (int) MAX(MIN(fcn_00505e30(i) * 0.1f, 7.0f), g_6628a8);
+			idx = (int) MAX(MIN(fcn_00505e30(i) * 0.1f, 7.0f), 0.0f);
 			g_99f624[idx] += 1;
 			if (fcn_004fffb0(i) != 0)
 				g_99f644 += 1.0f;

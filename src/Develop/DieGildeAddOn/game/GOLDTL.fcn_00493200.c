@@ -1,6 +1,6 @@
 extern char g_7f4ca0[];
 extern float g_662c98;
-int __cdecl gm_RandomMod(unsigned short n);
+unsigned short __cdecl gm_RandomMod(unsigned short n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004e8b40(int kind, int* out);
 int __cdecl fcn_004e8b80(int kind, int max, void* out);
@@ -30,7 +30,7 @@ int __cdecl fcn_00493200(char* a1, char* a2)
 	unsigned char b;
 
 	pick = 0;
-	roll = gm_RandomMod(3) & 0xffff;
+	roll = gm_RandomMod(3);
 	if (a1 == 0 || a2 == 0) {
 		return 0;
 	}
@@ -39,25 +39,24 @@ int __cdecl fcn_00493200(char* a1, char* a2)
 		return 0;
 	}
 	if (kind == 7) {
-		kind = *(unsigned char*) (a1 + 0x166);
-		if (kind == 0) {
+		if (*(unsigned char*) (a1 + 0x166) == 0) {
 			goto other;
 		}
-		if (fcn_004e8b40((int) kind, rec) == 0) {
+		if (fcn_004e8b40(*(unsigned char*) (a1 + 0x166), rec) == 0) {
 			return 0;
 		}
 		count = fcn_004e8b80(rec[1], 6, slots);
 		if (count == 0) {
 			return 0;
 		}
-		index = gm_RandomMod(count) & 0xffff;
+		index = gm_RandomMod(count);
 		for (left = count; left != 0; left--) {
 			r = *(int*) (slots + index * 24 + 4);
 			if (*(int*) (a1 + 4) != r) {
 				pick = gm_LookupEntityRecordById(r);
 				if (pick != 0) {
 					f = fcn_0050f980(*(unsigned short*) a1, *(unsigned short*) pick, 1);
-					r = gm_RandomMod(0x1e) & 0xffff;
+					r = gm_RandomMod(0x1e);
 					if ((float) r + g_662c98 > f) {
 						break;
 					}
@@ -68,7 +67,7 @@ int __cdecl fcn_00493200(char* a1, char* a2)
 		}
 	} else if (kind == 0xa) {
 		code = 0xc00;
-		pos = gm_RandomMod(0x1e) & 0xffff;
+		pos = gm_RandomMod(0x1e);
 		if (fcn_004a55c0((unsigned short*) a1, 1, &code, 0.0f,
 				 (float) (int) pos + g_662c98, (unsigned short*) &pos) == 0) {
 			goto other;

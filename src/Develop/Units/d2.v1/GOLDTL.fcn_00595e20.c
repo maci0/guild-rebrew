@@ -19,79 +19,80 @@ int __cdecl CountDisplayCounters(void);
 /* ADDRESS: GOLDTL 0x00595e20 */
 int __cdecl fcn_00595e20(char* a0, char* a1)
 {
-	unsigned int tbl[54];
+	unsigned int tbl1[36];
+	unsigned int tbl2[18];
 	int cat;
-	int found;
+	register int found;
 	int i;
 	unsigned int* p;
 	unsigned short* ent;
 	char* q;
 
-	tbl[0x14] = 0;
-	tbl[0x24] = 0;
-	tbl[0x15] = 0;
-	tbl[0x1c] = 0;
-	tbl[0x25] = 0;
-	tbl[0x28] = 0;
-	tbl[0x1d] = 0;
-	tbl[0x29] = 0;
-	tbl[0x18] = 0;
-	tbl[0x2c] = 0;
-	tbl[0x1e] = 3;
-	tbl[0x26] = 3;
-	tbl[0x2f] = 3;
-	tbl[7] = 3;
-	tbl[0xb] = 3;
-	tbl[0xe] = 3;
-	tbl[0x12] = 2;
-	tbl[0x16] = 2;
-	tbl[0x19] = 0;
-	tbl[0x1a] = 2;
-	tbl[0x27] = 2;
-	tbl[0x2b] = 2;
-	tbl[0x2d] = 0;
-	tbl[1] = 2;
-	tbl[3] = 2;
-	tbl[5] = 2;
-	tbl[0xa] = 2;
-	tbl[0xc] = 2;
-	tbl[0x20] = 0;
-	tbl[0x30] = 0;
-	tbl[0x21] = 0;
-	tbl[0x31] = 0;
-	tbl[0x34] = 0;
-	tbl[0x13] = 0;
-	tbl[0x17] = 0;
-	tbl[0x1b] = 0;
-	tbl[0x1f] = 0;
-	tbl[0x22] = 4;
-	tbl[0x23] = 0;
-	tbl[0x2a] = 4;
-	tbl[0x2e] = 4;
-	tbl[0x32] = 4;
-	tbl[0x33] = 4;
-	tbl[0x35] = 0;
-	tbl[0] = 0;
-	tbl[2] = 0;
-	tbl[4] = 0;
-	tbl[6] = 0;
-	tbl[8] = 0;
-	tbl[9] = 4;
-	tbl[0xd] = 4;
-	tbl[0xf] = 4;
-	tbl[0x10] = 4;
-	tbl[0x11] = 4;
+	tbl1[2] = 0;
+	tbl1[0x12] = 0;
+	tbl1[3] = 0;
+	tbl1[0xa] = 0;
+	tbl1[0x13] = 0;
+	tbl1[0x16] = 0;
+	tbl1[0xb] = 0;
+	tbl1[0x17] = 0;
+	tbl1[6] = 0;
+	tbl1[0x1a] = 0;
+	tbl1[0xc] = 3;
+	tbl1[0x14] = 3;
+	tbl1[0x1d] = 3;
+	tbl2[7] = 3;
+	tbl2[0xb] = 3;
+	tbl2[0xe] = 3;
+	tbl1[0] = 2;
+	tbl1[4] = 2;
+	tbl1[7] = 0;
+	tbl1[8] = 2;
+	tbl1[0x15] = 2;
+	tbl1[0x19] = 2;
+	tbl1[0x1b] = 0;
+	tbl2[1] = 2;
+	tbl2[3] = 2;
+	tbl2[5] = 2;
+	tbl2[0xa] = 2;
+	tbl2[0xc] = 2;
+	tbl1[0xe] = 0;
+	tbl1[0x1e] = 0;
+	tbl1[0xf] = 0;
+	tbl1[0x1f] = 0;
+	tbl1[0x22] = 0;
+	tbl1[1] = 0;
+	tbl1[5] = 0;
+	tbl1[9] = 0;
+	tbl1[0xd] = 0;
+	tbl1[0x10] = 4;
+	tbl1[0x11] = 0;
+	tbl1[0x18] = 4;
+	tbl1[0x1c] = 4;
+	tbl1[0x20] = 4;
+	tbl1[0x21] = 4;
+	tbl1[0x23] = 0;
+	tbl2[0] = 0;
+	tbl2[2] = 0;
+	tbl2[4] = 0;
+	tbl2[6] = 0;
+	tbl2[8] = 0;
+	tbl2[9] = 4;
+	tbl2[0xd] = 4;
+	tbl2[0xf] = 4;
+	tbl2[0x10] = 4;
+	tbl2[0x11] = 4;
 
 	cat = gm_GetBuildingTypeCategory(*(unsigned char*) a0);
 
 	i = 0;
-	for (p = (unsigned int*) 0x778d4c; p < (unsigned int*) 0x778d9c; p += 5) {
-		*p = tbl[*(unsigned char*) (a1 + 0x1c) * 4 + i + 0x12];
+	for (p = (unsigned int*) 0x778d4c; (int) p < 0x778d9c; p += 5) {
+		*p = tbl1[*(unsigned char*) (a1 + 0x1c) * 4 + i];
 		i++;
 	}
 	i = 0;
-	for (p = (unsigned int*) 0x77912c; p < (unsigned int*) 0x779154; p += 5) {
-		*p = tbl[*(unsigned char*) (a1 + 0x1d) * 2 + i];
+	for (p = (unsigned int*) 0x77912c; (int) p < 0x779154; p += 5) {
+		*p = tbl2[*(unsigned char*) (a1 + 0x1d) * 2 + i];
 		i++;
 	}
 
@@ -106,7 +107,7 @@ int __cdecl fcn_00595e20(char* a0, char* a1)
 				goto add16;
 		}
 
-		for (i = 0, p = (unsigned int*) 0x7796e0; p < (unsigned int*) 0x7798a0; p += 0xe) {
+		for (i = 0, p = (unsigned int*) 0x7796e0; (int) p < 0x7798a0; p += 0xe) {
 			if (*p == *ent)
 				break;
 			i++;
@@ -118,7 +119,7 @@ int __cdecl fcn_00595e20(char* a0, char* a1)
 			*(int*) (i * 0x38 + 0x779714) = fcn_0050dfd0(a1, *ent);
 			goto next;
 		}
-		for (i = 0, p = (unsigned int*) 0x7796e0; p < (unsigned int*) 0x7798a0; p += 0xe) {
+		for (i = 0, p = (unsigned int*) 0x7796e0; (int) p < 0x7798a0; p += 0xe) {
 			if (*p == 0)
 				break;
 			i++;
@@ -133,7 +134,7 @@ int __cdecl fcn_00595e20(char* a0, char* a1)
 		goto next;
 
 	add16:
-		for (i = 0, p = (unsigned int*) 0x778da0; p < (unsigned int*) 0x779120; p += 0xe) {
+		for (i = 0, p = (unsigned int*) 0x778da0; (int) p < 0x779120; p += 0xe) {
 			if (*p == *ent)
 				break;
 			i++;
@@ -145,7 +146,7 @@ int __cdecl fcn_00595e20(char* a0, char* a1)
 			*(int*) (i * 0x38 + 0x778dd4) = fcn_0050dfd0(a1, *ent);
 			goto next;
 		}
-		for (i = 0, p = (unsigned int*) 0x778da0; p < (unsigned int*) 0x779120; p += 0xe) {
+		for (i = 0, p = (unsigned int*) 0x778da0; (int) p < 0x779120; p += 0xe) {
 			if (*p == 0)
 				break;
 			i++;
@@ -162,32 +163,28 @@ int __cdecl fcn_00595e20(char* a0, char* a1)
 		ent = (unsigned short*) gm_NextEntityQueryMatch();
 	}
 
-	for (p = (unsigned int*) 0x778da0; p < (unsigned int*) 0x779120; p += 0xe) {
+	for (p = (unsigned int*) 0x778da0; (int) p < 0x779120; p += 0xe) {
 		if (!fcn_00502cd0(*(int*) (a1 + 0x14), 1, 0, *p))
 			*p = 0;
 	}
-	for (p = (unsigned int*) 0x7796e0; p < (unsigned int*) 0x7798a0; p += 0xe) {
+	for (p = (unsigned int*) 0x7796e0; (int) p < 0x7798a0; p += 0xe) {
 		if (!fcn_00502cd0(*(int*) (a1 + 0x14), 1, 0, *p))
 			*p = 0;
 	}
 
 	found = 0;
-	for (p = (unsigned int*) 0x778db0; (int) p < 0x779130; p += 0xe) {
+	for (p = (unsigned int*) 0x778db0; !found && (int) p < 0x779130; p += 0xe) {
 		if (*p != (unsigned int) -1
 		    && *(int*) (g_1015ea0 + *p * 0x2f4 + 0x20) == 0x41
 		    && fcn_00471f80(*p))
 			found = 1;
-		if (found)
-			break;
 	}
 	if (!found) {
-		for (p = (unsigned int*) 0x7796f0; (int) p < 0x7798b0; p += 0xe) {
+		for (p = (unsigned int*) 0x7796f0; !found && (int) p < 0x7798b0; p += 0xe) {
 			if (*p != (unsigned int) -1
 			    && *(int*) (g_1015ea0 + *p * 0x2f4 + 0x20) == 0x41
 			    && fcn_00471f80(*p))
 				found = 1;
-			if (found)
-				break;
 		}
 	}
 
@@ -212,7 +209,7 @@ int __cdecl fcn_00595e20(char* a0, char* a1)
 				continue;
 			ent = (unsigned short*) fcn_00502cd0(*(int*) (a1 + 0x14), 1, 0, p[-8]);
 			if (ent == 0)
-				return found;
+				break;
 			if (*(unsigned int*) (ent + 0xe) >= 4)
 				cat = 0;
 			else

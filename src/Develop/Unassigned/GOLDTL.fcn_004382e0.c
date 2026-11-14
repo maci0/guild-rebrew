@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdlib.h>
 
 extern char* g_6b8014;
 extern float g_6628a0;
@@ -31,13 +32,7 @@ int __cdecl fcn_004382e0(char* a0)
 	}
 	else if ((*(unsigned char*) (a0 + 0x217) & 0xc) != 0 || g_6b8014 == 0) {
 		max_idx = (((*(unsigned char*) (a0 + 0x217)) >> 2) & 3) - 1;
-		idx = n - 1;
-		if (idx > max_idx) {
-			idx = max_idx;
-		}
-		if (idx < 0) {
-			idx = 0;
-		}
+		idx = __max(0, __min(n - 1, max_idx));
 		entry = ext + 0xf4 + idx * 0x4a4;
 	}
 	else {

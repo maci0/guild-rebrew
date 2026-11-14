@@ -1,6 +1,8 @@
+void __cdecl fcn_004177b0(char* p);
+
 /* ADDRESS: GOLD 0x004179d0 */
-int __cdecl fcn_004179d0(void)
+void __cdecl fcn_004179d0(char* p)
 {
-	/* Stub: provider restored; native behavior and full C contract unrecovered. */
-	return 0;
+	if (p != 0)
+		fcn_004177b0(p);
 }

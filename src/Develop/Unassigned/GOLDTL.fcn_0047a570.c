@@ -34,10 +34,10 @@ int __cdecl fcn_0047a570(int a0, int a1, int a2, int* a3, int* a4, int a5)
 	n = v1 * n;
 	size = 0;
 	i = n;
-	while (i > 0 && size < 0x18) {
-		i >>= 1;
+	do {
+		if (i <= 0) break; i >>= 1;
 		size++;
-	}
+	} while (size < 0x18);
 	size--;
 	if (size < 1) {
 		size = 1;
@@ -49,7 +49,7 @@ int __cdecl fcn_0047a570(int a0, int a1, int a2, int* a3, int* a4, int a5)
 	if (g_67dac0 < size) {
 		size = g_67dac0;
 	}
-	if ((double) n / (double) size < 0.9f && size > 0x40 && a5 != 0
+	if ((float) n / (float) size < 0.9f && size > 0x40 && a5 != 0
 	    && size / 2 > a1 && size / 2 > a2) {
 		size >>= 1;
 	}

@@ -27,16 +27,16 @@ void __cdecl fcn_0052d1f0(char* a0)
 	angles[1] = 0.0f;
 	angles[2] = 0.0f;
 	dir[1] = 0.0f;
-	pos[0] = base[0] + ((*(float*) (a0 + 0x19c) + *(float*) (a0 + 0x18c)) * *(float*) 0x6628a8 -
-	                    *(float*) (a0 + 0x1ac) * *(float*) 0x6628a0) *
-	                       *(float*) 0x665e1c;
-	pos[1] = base[1] + ((*(float*) (a0 + 0x1a0) + *(float*) (a0 + 0x190)) * *(float*) 0x6628a8 -
-	                    *(float*) (a0 + 0x1b0) * *(float*) 0x6628a0) *
-	                       *(float*) 0x665e1c;
-	pos[2] = base[2] + ((*(float*) (a0 + 0x1a4) + *(float*) (a0 + 0x194)) * *(float*) 0x6628a8 -
-	                    *(float*) (a0 + 0x1b4) * *(float*) 0x6628a0) *
-	                       *(float*) 0x665e1c;
-	pos[1] = pos[1] + *(float*) 0x665e18;
+	pos[0] = (*(float*) (a0 + 0x19c) + *(float*) (a0 + 0x18c)) * *(float*) 0x6628a8 - *(float*) (a0 + 0x1ac) * *(float*) 0x6628a0;
+	pos[1] = (*(float*) (a0 + 0x1a0) + *(float*) (a0 + 0x190)) * *(float*) 0x6628a8 - *(float*) (a0 + 0x1b0) * *(float*) 0x6628a0;
+	pos[2] = (*(float*) (a0 + 0x1a4) + *(float*) (a0 + 0x194)) * *(float*) 0x6628a8 - *(float*) (a0 + 0x1b4) * *(float*) 0x6628a0;
+	pos[0] *= 600.0f;
+	pos[1] *= 600.0f;
+	pos[2] *= 600.0f;
+	pos[0] += base[0];
+	pos[1] += base[1];
+	pos[2] += base[2];
+	pos[1] = pos[1] + 900.0f;
 	dir[0] = base[0] - pos[0];
 	dir[1] = 0.0f;
 	dir[2] = base[2] - pos[2];
@@ -57,6 +57,6 @@ void __cdecl fcn_0052d1f0(char* a0)
 	angles[0] = (float) acos(dot < -1.0 || !(dot < 1.0) ? (dot < -1.0 ? -1.0 : 1.0) : dot);
 	if (dir[1] < 0.0f)
 		angles[0] = -angles[0];
-	pos[1] = pos[1] + *(float*) 0x6652cc;
+	pos[1] = pos[1] + 700.0f;
 	fcn_00412cf0(*(int*) 0x6b8014, pos, angles, *(int*) 0x6a256c, 0x28);
 }

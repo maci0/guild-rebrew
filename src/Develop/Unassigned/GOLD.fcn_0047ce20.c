@@ -1,6 +1,8 @@
+#include <string.h>
+
 /* ADDRESS: GOLD 0x0047ce20 */
-int __cdecl fcn_0047ce20(void)
+void __cdecl fcn_0047ce20(int index)
 {
-	/* Stub: provider restored; native behavior and full C contract unrecovered. */
-	return 0;
+	/* 0x11-byte records at 0xf8a520 (DATA TODO: no Gold name yet). */
+	memset((char*) 0xf8a520 + index * 0x11, 0, 0x11);
 }

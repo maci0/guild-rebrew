@@ -42,19 +42,9 @@ void __cdecl fcn_005624a0(char* ctx)
 	unsigned char* ent;
 	unsigned char* hit;
 	char* house;
-	int state;
-	int handle;
-	int item;
-	int mask;
-	int mask2;
-	int tries;
-	int idx;
-	unsigned char type;
-	int left;
 
 	hit = 0;
-	state = *(int*) (ctx + 0x70);
-	if (state == -1 || state == -2) {
+	if (*(int*) (ctx + 0x70) == -1 || *(int*) (ctx + 0x70) == -2) {
 		if ((*(unsigned char*) (ctx + 0x78) & 2)
 		    && *(int*) (ctx + 0xd8) != -1) {
 			ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
@@ -69,27 +59,24 @@ void __cdecl fcn_005624a0(char* ctx)
 	if (*(unsigned char*) (ctx + 0x78) & 4) {
 		return;
 	}
-	handle = *(int*) (ctx + 0x84);
-	if (handle != -1 && !fcn_004c4450(handle)) {
+	if (*(int*) (ctx + 0x84) != -1 && !fcn_004c4450(*(int*) (ctx + 0x84))) {
 		return;
 	}
-	switch (state) {
+	switch (*(int*) (ctx + 0x70)) {
 	case 0:
-		handle = *(int*) (ctx + 0xd8);
-		if (handle != -1 && !fcn_004c4450(handle)) {
+		if (*(int*) (ctx + 0xd8) != -1 && !fcn_004c4450(*(int*) (ctx + 0xd8))) {
 			return;
 		}
 		ent = fcn_004c4480(*(int*) (ctx + 0xd8));
 		if (ent != 0) {
 			house = gm_GetEntityTableEntry(g_7f4ca0
 			    + *(unsigned short*) (ctx + 8) * 0x21c);
-			item = *(int*) (ctx + 0xe4);
 			if (house != 0) {
-				*(int*) (house + 0x28) = *(int*) (house + 0x28) + item;
+				*(int*) (house + 0x28) += *(int*) (ctx + 0xe4);
 			}
 			*(int*) (ctx + 0xd8) = *(int*) (ent + 4);
 			fcn_004c51a0(-1, *(int*) (g_7f4ca0
-			    + *(unsigned short*) (ctx + 8) * 0x21c + 4), g_773d75, item);
+			    + *(unsigned short*) (ctx + 8) * 0x21c + 4), g_773d75, *(int*) (ctx + 0xe4));
 			fcn_00529160(0, 0, *(unsigned short*) ent, ctx);
 			*(pos14_7f4c00*)(ctx + 0x52) = g_7f4c00;
 			*(int*) (ctx + 0x84) = fcn_004c5620(1, ctx);
@@ -100,37 +87,46 @@ void __cdecl fcn_005624a0(char* ctx)
 		*(int*) (ctx + 0x84) = fcn_004c5620(4, ctx);
 		return;
 	case 1:
+	{
+		int mask;
+		int mask2;
+		int tries;
+		int idx;
+		unsigned char* proto;
+
 		idx = *(int*) (ctx + 0xbc);
 		tries = 0x100;
 		do {
-			rec = (unsigned char*) (lpGebaeudeINST + idx * 0xa9);
+			hit = (unsigned char*) (lpGebaeudeINST + idx * 0xa9);
+			proto = lpGebaeudePROT + *hit * 0x24d;
 			mask = 0;
 			mask2 = 0;
-			type = ((SpyProto*)lpGebaeudePROT)[*rec].kind;
-			if (type >= 0x20) {
-				mask2 = 1 << ((type - 0x20) & 0x1f);
+			if (*proto > 0x1f) {
+				mask2 = 1 << (*proto - 0x20);
 			} else {
-				mask = 1 << (type & 0x1f);
+				mask = 1 << *proto;
 			}
 			if (((mask & 0xa7fcc3a6) || (mask2 & 1))
-			    && *(int*) (rec + 1) != *(int*) (ctx + 0xac)) {
-				hit = rec;
+			    && *(int*) (hit + 1) != *(int*) (ctx + 0xac)) {
 				break;
 			}
-			rec = 0;
+			hit = 0;
 			tries--;
 			idx = (idx + *(int*) (ctx + 0xc0)) % 256;
-			hit = 0;
 		} while (tries != 0);
 		idx = (*(int*) (ctx + 0xc0) + idx) % 256;
 		*(int*) (ctx + 0xbc) = idx;
 		if (hit == 0) {
-			break;
+			fcn_00500bb0(ctx + 0x52, 0, 1, 0);
+			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+			return;
 		}
 		io_FormatTextBuffer(text, 0x6a6578, hit);
 		ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 		if (ent == 0) {
-			break;
+			fcn_00500bb0(ctx + 0x52, 0, 1, 0);
+			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+			return;
 		}
 		fcn_004c5c80(*(int*) (ent + 4));
 		fcn_004c5da0(*(int*) (ent + 4), *(int*) (hit + 1), -1, 0, 1, s_67ed14);
@@ -138,6 +134,7 @@ void __cdecl fcn_005624a0(char* ctx)
 		*(int*) (ctx + 0xb4) = *(int*) (hit + 1);
 		*(int*) (ctx + 0x84) = fcn_004c5620(2, ctx);
 		return;
+	}
 	case 2:
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xb4));
 		fcn_00500bb0(ctx + 0x52, 0, 5, 0);
@@ -147,7 +144,9 @@ void __cdecl fcn_005624a0(char* ctx)
 		}
 		ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 		if (ent == 0) {
-			break;
+			fcn_00500bb0(ctx + 0x52, 0, 1, 0);
+			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+			return;
 		}
 		if (fcn_00529670(ent, hit) == 0) {
 			*(int*) (ctx + 0x70) = 2;
@@ -167,7 +166,8 @@ void __cdecl fcn_005624a0(char* ctx)
 			*(int*) (ctx + 0x84) = fcn_004c5620(1, ctx);
 			return;
 		}
-		break;
+		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+		return;
 	case 3:
 		fcn_00500bb0(ctx + 0x52, 0, 5, 0);
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
@@ -190,10 +190,10 @@ void __cdecl fcn_005624a0(char* ctx)
 		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 		return;
 	case 4:
-		break;
+		fcn_00500bb0(ctx + 0x52, 0, 1, 0);
+		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+		return;
 	default:
 		return;
 	}
-	fcn_00500bb0(ctx + 0x52, 0, 1, 0);
-	*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 }

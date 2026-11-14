@@ -24,14 +24,15 @@ void __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 	float f;
 	float r;
 
-	p = a1;
-	c = a1;
 	if (a1 == *(char**) (a0 + 0xc)) {
 		p = a0 + 0x18;
 		c = a0 + 0x10;
 	} else if (a1 == *(char**) (a0 + 0x30)) {
 		p = a0 + 0x3c;
 		c = a0 + 0x34;
+	} else {
+		p = a1;
+		c = a1;
 	}
 	f = gm_GetEntitySkill(a1, 2);
 	ix = (unsigned char) ((int) (f * 100.0f) / 20);

@@ -73,6 +73,8 @@ void __cdecl fcn_00585030(int a0)
 	int* ids;
 	int items[6];
 	int two[2];
+	int btn0;
+	int btn1;
 	char buf[0x100];
 	char buf2[0x100];
 	int owner;
@@ -89,12 +91,11 @@ void __cdecl fcn_00585030(int a0)
 	int y;
 	int item;
 	int dlg;
-	int flag;
 
 	e = (char*) a0;
 	data = fcn_004ec7d0((unsigned char*) a0);
 	records = *(int**) (e + 0x65);
-	sel = fcn_004ecf00(e, &owner, &frac, 0);
+	prev = fcn_004ecf00(e, &owner, &frac, 0);
 	stamp = g_6b7fac;
 	g_100f1dc = -1;
 	win = fcn_00470820(0, 0, "Locations\\Domizil\\Alchemistry2");
@@ -119,7 +120,8 @@ void __cdecl fcn_00585030(int a0)
 	}
 	d2_SetForm(win, 3);
 	fcn_00533a60(g_772514, 0, two, 2, g_14b546c, g_14b5470);
-	prev = sel;
+	btn0 = two[0];
+	btn1 = two[1];
 	d2_SetForm(win, 2);
 	io_AppendText(0x6811b0);
 	list = d2_CreateRadioGroup(0);
@@ -163,12 +165,8 @@ void __cdecl fcn_00585030(int a0)
 			fcn_00472900(item, 0x54);
 			d2_SetElementValue(dlg, 0, 0x64, (int) (frac * g_662cf8));
 		}
-		flag = 0;
-		if (g_102cbc8[list].n != -1 && count != 0 && sel == 0) {
-			flag = 1;
-		}
-		fcn_00472640(two[1], flag);
-		fcn_00472640(two[0], sel == 0);
+		fcn_00472640(btn1, g_102cbc8[list].n != -1 && count != 0 && sel == 0);
+		fcn_00472640(btn0, sel == 0);
 		if (sel != prev || g_6b7fac > (unsigned int) (stamp + 0x32)) {
 			stamp = g_6b7fac;
 			prev = sel;
@@ -204,7 +202,7 @@ void __cdecl fcn_00585030(int a0)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == two[1]) {
+			if (g_67d370 == btn1) {
 				for (i = 0; i < 6; i++) {
 					if (g_102cbc8[list].n != i) {
 						continue;
@@ -215,7 +213,7 @@ void __cdecl fcn_00585030(int a0)
 						fcn_00526120(g_14b59e0, 0);
 					}
 				}
-			} else if (g_67d370 == two[0]) {
+			} else if (g_67d370 == btn0) {
 				fcn_00585850(e, records);
 			}
 		}

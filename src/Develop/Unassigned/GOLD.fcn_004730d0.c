@@ -19,7 +19,7 @@ void __cdecl fcn_004730d0(int index, char* owner)
 			if (i == 0x2ff) {
 				table[0x2ff] = 0;
 			} else if (i < 0x2ff) {
-				memcpy(table + i, table + i + 1, 0xbf8 - i * 4);
+				memmove(table + i, table + i + 1, 0xbf8 - i * 4);
 			}
 			table = (char**) g_006ed964;
 			break;
@@ -34,7 +34,7 @@ void __cdecl fcn_004730d0(int index, char* owner)
 	}
 	if (i >= 0) {
 		if (i < 0x2ff) {
-			memcpy(table + i + 2, table + i + 1, 0xbf8 - i * 4);
+			memmove(table + i + 2, table + i + 1, 0xbf8 - i * 4);
 			table = (char**) g_006ed964;
 		}
 		table[i + 1] = (char*) g_00f8f080 + offset;

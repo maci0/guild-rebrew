@@ -65,7 +65,7 @@ void __cdecl fcn_00560290(char* a0)
 		fcn_00500bb0((int) (a0 + 0x52), 0, 5, 0);
 		return;
 	}
-	if (*(short*) (a0 + 8) != -1 && *(int*) (a0 + 0xc) != -1) {
+	if (*(unsigned short*) (a0 + 8) != 0xffff && *(int*) (a0 + 0xc) != -1) {
 		state = *(int*) (a0 + 0x70);
 		switch (state) {
 		case 1:
@@ -81,8 +81,8 @@ void __cdecl fcn_00560290(char* a0)
 			}
 			do {
 				fcn_00455350(*(int*) (e + 0x61), *(int*) (e + 0x61) + 0x4c, nextp);
-				dist = sqrt(((double) nextp[0] - here[0]) * ((double) nextp[0] - here[0])
-					+ (((double) nextp[1] - here[1]) * ((double) nextp[1] - here[1]) + ((double) nextp[2] - here[2]) * ((double) nextp[2] - here[2])));
+				dist = sqrt((nextp[2] - here[2]) * (nextp[2] - here[2]) + (nextp[1] - here[1]) * (nextp[1] - here[1])
+					+ (nextp[0] - here[0]) * (nextp[0] - here[0]));
 				if (dist < best) {
 					sel = (int) e;
 					best = dist;

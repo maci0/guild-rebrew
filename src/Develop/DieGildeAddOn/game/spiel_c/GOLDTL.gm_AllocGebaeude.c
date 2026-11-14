@@ -23,7 +23,7 @@ char* __cdecl gm_SetupEntityQuery(char*);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CheckEntityType(char*);
 void __cdecl gm_SetBuildingWorkerLimits(char*);
-void __cdecl gm_GetBuildingTypeCategory(unsigned char);
+int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl fcn_00504250(char*);
 char* __cdecl gv_AllocGraveyardField(char*);
 void __cdecl fcn_004f1ad0(char*, int);
@@ -49,10 +49,8 @@ typedef struct {
 /* ADDRESS: GOLDTL 0x005043d0 */
 char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 {
-	char buf[0x100];
 	char tmp[0x100];
 	char names[12][0x40];
-	char msg[0x200];
 	unsigned int type;
 	char* list_end;
 	BuildingProto5043d0* rec; BuildingProto5043d0* prototypes;
@@ -61,9 +59,9 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	char* comp_rec;
 	unsigned char comp_type;
 	char* q;
-	int count;
 	int i;
 	int n; int room_mode;
+	char** alias;
 
 	prototypes = (BuildingProto5043d0*) lpGebaeudePROT;
 	if (prototypes == 0) {
@@ -77,6 +75,9 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	type = (unsigned char) geb_type;
 	*geb = (char) geb_type;
 	rec = &prototypes[type];
+	{
+	char buf[0x100];
+	char msg[0x200];
 	fcn_0064d41a(buf, s_699858, g_699364, (int) type);
 	*(int*) (geb + 1) = g_699364;
 	g_699364 = g_699364 + 1;
@@ -121,21 +122,24 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		add ecx, ebx
 		rep stosb
 	}
-	if (*(char*) *(char**) (g_14a6558 + 8 + (int) type * 0x38) == 0) {
-		geb[5] = g_6b5c60;
-	} else {
-		strcpy(geb + 5, *(char**) (g_14a6558 + (int) type * 0x38));
-	}
-	list_end = names[0];
 	n = 0;
-	for (i = 0; i < 12; i++) {
-		char* p = *(char**) (g_14a6558 + 8 + (int) type * 0x38 + i * 4);
+	alias = (char**) (g_14a6558 + 8 + (int) type * 0x38);
+	if (**alias != 0) {
+		strcpy(geb + 5, *(char**) (g_14a6558 + (int) type * 0x38));
+		list_end = names[0];
+		i = 0;
+	} else {
+		geb[5] = g_6b5c60;
+		list_end = names[0];
+		i = 0;
+	}
+	for (; i < 12; i++, alias++) {
 		int j;
 
-		if (*p == 0) {
+		if (**alias == 0) {
 			continue;
 		}
-		strcpy(tmp, p);
+		strcpy(tmp, *(char**) (g_14a6558 + 8 + (int) type * 0x38 + i * 4));
 		for (j = 0; j < 0x100; j++) {
 			if (lpGebaeudeINST[j * 0xa9] != 0 && strcmp(lpGebaeudeINST + j * 0xa9 + 5, tmp) == 0) {
 				break;
@@ -151,6 +155,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		} else {
 			fcn_0064d41a(msg, s_69983c, tmp);
 		}
+	}
 	}
 	if (n != 0) {
 		strcpy(geb + 5, names[gm_RandomMod(n) & 0xffff]);
@@ -200,26 +205,15 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	case 6:
 	case 7:
 		*(int*) (geb + 0x69) = *(int*) 0x7f4c00;
-		*(int*) (geb + 0x6d) = *(int*) 0x7f4c04;
-		*(int*) (geb + 0x71) = *(int*) 0x7f4c08;
-		*(unsigned short*) (geb + 0x75) = *(unsigned short*) 0x7f4c0c;
+		q = geb + 0x69;
+		*(int*) (q + 4) = *(int*) 0x7f4c04;
+		*(int*) (q + 8) = *(int*) 0x7f4c08;
+		*(unsigned short*) (q + 0xc) = *(unsigned short*) 0x7f4c0c;
 		if (owner != 0xffff) {
 			*(int*) (geb + 0x65) = *(int*) (0x7f4ca4 + (int) owner * 0x21c);
 		} else {
 			*(int*) (geb + 0x65) = -1;
 		}
-		break;
-	case 0xb:
-	case 0xc:
-	case 0xd:
-		*(int*) (geb + 0x65) = -1;
-		break;
-	case 0xe:
-	case 0xf:
-	case 0x10:
-		*(int*) (geb + 0x65) = 0xa;
-		*(int*) (geb + 0x69) = 3;
-		*(int*) (geb + 0x6d) = 5;
 		break;
 	case 0x14:
 	case 0x15:
@@ -231,6 +225,9 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 			comp_rec[0x1d] = (char) -1;
 			*(int*) (comp_rec + 0x1e) = -1;
 		}
+		break;
+	case 0x47:
+		*(int*) (geb + 0x30) = 0x13880;
 		break;
 	case 0x1e:
 		*(int*) (geb + 0x71) = (int) m_alloc(0x600, s_69982c);
@@ -253,8 +250,17 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		*(unsigned short*) (geb + 0x6b) = 0;
 		*(int*) (geb + 0x6d) = 0;
 		break;
-	case 0x47:
-		*(int*) (geb + 0x30) = 0x13880;
+	case 0xb:
+	case 0xc:
+	case 0xd:
+		*(int*) (geb + 0x65) = -1;
+		break;
+	case 0xe:
+	case 0xf:
+	case 0x10:
+		*(int*) (geb + 0x65) = 0xa;
+		*(int*) (geb + 0x69) = 3;
+		*(int*) (geb + 0x6d) = 5;
 		break;
 	case 0x48:
 	case 0x49:

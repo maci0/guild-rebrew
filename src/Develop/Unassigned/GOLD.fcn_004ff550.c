@@ -23,14 +23,14 @@ void __cdecl fcn_004ff550(int city, int* date)
     count = 0;
     p = (int*) (tableOffset + 0x7e3fa4);
     do {
-        if (p[2] <= p[0]) break;
+        if (p[0] >= p[2]) break;
         ++count;
         p += 2;
     } while (count < 9);
     index = 0;
     p = (int*) (tableOffset + 0x7e3fa4);
     while (index < count) {
-        if (year <= *p) break;
+        if (*p >= year) break;
         ++index;
         p += 2;
     }
@@ -58,14 +58,14 @@ void __cdecl fcn_004ff550(int city, int* date)
     count = 0;
     p = (int*) (tableOffset + 0x7e3ff4);
     do {
-        if (p[2] <= p[0]) break;
+        if (p[0] >= p[2]) break;
         ++count;
         p += 2;
     } while (count < 9);
     index = 0;
     p = (int*) (tableOffset + 0x7e3ff4);
     while (index < count) {
-        if (year <= *p) break;
+        if (*p >= year) break;
         ++index;
         p += 2;
     }

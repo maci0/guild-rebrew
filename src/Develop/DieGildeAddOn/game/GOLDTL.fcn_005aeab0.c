@@ -59,6 +59,7 @@ void __cdecl fcn_005aeab0(char* rec)
 	float weight;
 	double prob;
 
+	weight = 0.0f;
 	if (fcn_00525fb0(rec) != 0) {
 		return;
 	}
@@ -96,8 +97,6 @@ void __cdecl fcn_005aeab0(char* rec)
 		weight = 0.04f;
 	} else if (cls == 1) {
 		weight = 0.02f;
-	} else {
-		weight = 0.0f;
 	}
 	v = gm_WalkEntityChain(*(unsigned short*) ent);
 	prob = (double) v;

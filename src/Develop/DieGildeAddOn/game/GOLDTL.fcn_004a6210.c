@@ -34,7 +34,7 @@ int __cdecl fcn_005ea4d0(void*, void*, void*, void*, void*, void*, void*, void*,
 int __cdecl _ftol(void);
 float __cdecl fcn_004f0eb0(int, int, int);
 int __cdecl fcn_004f0ff0(int, int, int, int, void*, void*);
-int __cdecl fcn_0050b810(int, int);
+int __cdecl fcn_0050b810(int, unsigned char);
 int __cdecl gm_RandomMod(int);
 
 extern float g_662cf8;
@@ -47,21 +47,24 @@ int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 	int row;
 	union { float level; int cash; } value;
 	float trajectory;
-	int cost;
-	int amount;
+	struct {
+		int cost;
+		int amount;
+	} res;
 	float bounds[4];
 	float range[2];
-	float origin[3];
-	float direction[3];
-	float normal[3];
+	float origin[4];
+	float direction[4];
+	float normal[4];
 	float angle;
-	float velocity[3];
+	float velocity[4];
 	float other;
 	float entry[5];
-	float target[3];
+	float target[4];
 	int profile[8];
 	float spread;
 	int state;
+	int off;
 
 	int* p;
 
@@ -78,8 +81,9 @@ int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 	value.level = fcn_004f1290(a1);
 	row = gm_RandomMod(row + 1) & 0xffff;
 	fcn_005e8de0(g_6660f4, *(float*) (col * 0xc + 0x665290), entry);
-	fcn_005e8e50(*(float*) (col * 0xc + 0x665288),
-		value.level * *(float*) (col * 0xc + 0x66528c), (char*) entry, range);
+	off = col * 0xc;
+	fcn_005e8e50(*(float*) (off + 0x665288),
+		value.level * *(float*) (off + 0x66528c), (char*) entry, range);
 	bounds[0] = range[0];
 	bounds[1] = range[1];
 	bounds[2] = -0.2617994f;
@@ -89,9 +93,9 @@ int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 	state = (int) ((trajectory - bounds[0]) * g_662cf8 / (bounds[1] - bounds[0]));
 	spread = fcn_004f0eb0(col, state, row + 1);
 	if (spread > *(float*) (p + 2 + row)) return 0;
-	if (fcn_004f0ff0((int) a0, col, state, row + 1, &amount, &cost) == 0) return 0;
+	if (fcn_004f0ff0((int) a0, col, state, row + 1, &res.amount, &res.cost) == 0) return 0;
 	value.cash = fcn_0050b810(*(int*) (a0 + 0x178), g_773d75);
-	if ((int) (value.cash * g_6628bc) < cost) return 0;
+	if ((int) (value.cash * g_6628bc) < res.cost) return 0;
 	g_772850 = origin[0];
 	g_772854 = origin[1];
 	g_772858 = origin[2];
@@ -105,9 +109,9 @@ int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 	g_772874 = normal[1];
 	g_772878 = normal[2];
 	g_772848 = *(int*) (a0 + 4);
-	g_7728b4 = cost;
+	g_7728b4 = res.cost;
 	g_77284c = *(int*) (a1 + 1);
-	g_7728b8 = amount;
+	g_7728b8 = res.amount;
 	g_772898 = state;
 	g_772894 = row + 1;
 	g_772890 = *(int*) &trajectory;

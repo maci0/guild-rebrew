@@ -62,7 +62,7 @@ char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
         sprintf(lower, "Buch_Seite%i_unten_ns_nm", i + 1);
         fcn_00474d80(((int*)(book + 0x228))[i], upper, lower);
         fcn_00474e70(((int*)(book + 0x228))[i]);
-        if (i >= 3) {
+        if (i > 2) {
             fcn_004754c0(((int*)(book + 0x228))[i], 0);
         }
     }

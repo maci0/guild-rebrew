@@ -143,14 +143,14 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, int cells,
 			fcn_0046f740((int) *(short*) (*(int*) &g_772500 + 0x1ebd8) - 0x10 + (left), (int) *(short*) (*(int*) &g_772500 + 0x1ebda) - 0x13 + y, items->cw28, *(int*) &g_772514);
 			obj = items->obj;
 			if (mode != 7) {
-				io_FormatTextBuffer(buf, 0x6ac964, (-(unsigned int) (*(char*) ((int) obj + 9) != 0) & 10) + 0x114 + (unsigned int) *(unsigned char*) ((int) obj + 0xd), *(unsigned short*) obj);
+				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) obj + 0xd), *(unsigned short*) obj);
 				fcn_005c9090(buf, x, items->y, 0xca, 0x56);
 				io_FormatTextBuffer(buf, 0x6ac95c, *(unsigned short*) items->obj);
 			} else {
-				io_FormatTextBuffer(buf, 0x6ac964, (-(unsigned int) (*(char*) ((int) obj + 9) != 0) & 10) + 0x114 + (unsigned int) *(unsigned char*) ((int) obj + 0xd), *(unsigned short*) obj);
+				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) obj + 0xd), *(unsigned short*) obj);
 				fcn_005c9090(buf, x, items->y, 0xca, 0x56);
 				obj = items->obj;
-				v = (-(unsigned int) (*(char*) ((int) obj + 9) != 0) & 0x28) + 0x253 + (unsigned int) *(unsigned char*) ((int) obj + 0x169);
+				v = (*(char*) ((int) obj + 9) ? 0x27b : 0x253) + (unsigned int) *(unsigned char*) ((int) obj + 0x169);
 				io_FormatTextBuffer(buf, 0x679060, v);
 			}
 			fcn_005c9090(buf, x, items->y + 0xf, 0xca, 0x56);

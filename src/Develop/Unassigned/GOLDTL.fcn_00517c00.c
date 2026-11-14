@@ -51,7 +51,7 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 	case 1:
 		strcpy(a4, (char*) p + 0x30);
 		if (a2 != 2) {
-			return 1;
+			break;
 		}
 		if (a4[strlen(a4) - 1] == 's' || a4[strlen(a4) - 1] == 'z' || (unsigned char) a4[strlen(a4) - 1] == 0xdf || a4[strlen(a4) - 1] == 'x') {
 			strcat(a4, "'");
@@ -60,12 +60,14 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 		}
 		return 1;
 	case 2:
-		if (!*(unsigned char*) (p + 0xd)) {
-			sprintf(a4, "%s", (char*) p + 0x30);
-		} else if (!p[0x40]) {
-			sprintf(a4, "%s %s", fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30);
+		if (*(unsigned char*) (p + 0xd)) {
+			if (!p[0x40]) {
+				sprintf(a4, "%s %s", fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30);
+			} else {
+				sprintf(a4, "%s %s %s", fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30, (char*) p + 0x40);
+			}
 		} else {
-			sprintf(a4, "%s %s %s", fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30, (char*) p + 0x40);
+			sprintf(a4, "%s", (char*) p + 0x30);
 		}
 		return 1;
 	case 3:
@@ -81,7 +83,7 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 			sprintf(a4, "%s", (char*) p + 0x30);
 		}
 		if (a2 != 2) {
-			return 1;
+			break;
 		}
 		if (ENDS_APOSTROPHE((char*) p + 0x40)) {
 			strcat(a4, "'");
@@ -98,7 +100,7 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 			sprintf(a4, "%s", (char*) p + 0x30);
 		}
 		if (a2 != 2) {
-			return 1;
+			break;
 		}
 		if (ENDS_APOSTROPHE((char*) p + 0x30)) {
 			strcat(a4, "'");
@@ -151,7 +153,11 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 		} else {
 			strcpy((char*) b1, (char*) p + 0x30);
 		}
-		sprintf(a4, "%s %s", (char*) (*(unsigned char*) (p + 0x166) ? b2 : b3), (char*) b1);
+		if (*(unsigned char*) (p + 0x166)) {
+			sprintf(a4, "%s %s", (char*) b2, (char*) b1);
+		} else {
+			sprintf(a4, "%s %s", (char*) b3, (char*) b1);
+		}
 		return 1;
 	case 9:
 		if (*(unsigned int*) (p + 0x1cc) & 0x3e00) {

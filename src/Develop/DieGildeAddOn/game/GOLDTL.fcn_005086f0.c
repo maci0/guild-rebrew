@@ -48,10 +48,7 @@ unsigned int __cdecl fcn_005086f0(unsigned short* a0)
 			goto found;
 		}
 		n--;
-		i = (i + 1) & 0x80000003;
-		if (i < 0) {
-			i = (i - 1 | 0xfffffffc) + 1;
-		}
+		i = (i + 1) % 4;
 	}
 	return 0;
 found:
@@ -70,12 +67,14 @@ found:
 	}
 	n = (int) ((float) value * *(float*) &slots[5]);
 	flags = *(int*) ((char*) a0 + 0x2c);
-	if (id == 5 || id == 8) {
+	if (id == 5) {
 		value = (value << 0x17 ^ flags) & 0x1800000;
 	} else if (id == 6) {
 		value = (value << 0x11 ^ flags) & 0xe0000;
 	} else if (id == 7) {
 		value = (value << 0x14 ^ flags) & 0x700000;
+	} else if (id == 8) {
+		value = (value << 0x17 ^ flags) & 0x1800000;
 	}
 	flags = flags ^ value;
 	slots[5] = flags;

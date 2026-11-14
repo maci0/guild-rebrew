@@ -73,8 +73,8 @@ next_mark:
 		fcn_00442d50(obj, 0);
 		goto done;
 	}
-	if (*(int*) (a0 + 0xc4) <= cur || obj == 0) {
-		if (*(int*) (a0 + 0xc4) < cur)
+	if (cur >= *(int*) (a0 + 0xc4) || obj == 0) {
+		if (cur > *(int*) (a0 + 0xc4))
 			goto release;
 		goto done;
 	}
@@ -129,15 +129,17 @@ next_mark:
 				*p = 0;
 				p = fcn_0064d1a0(buf, '_');
 			} while (p != 0);
-			flag = -1;
 			if (num == 1) {
-				flag = *(int*) (a0 + 0xc8) >= range[0];
+				if (*(int*) (a0 + 0xc8) >= range[0])
+					fcn_00442d50((int) list.items[idx], 1);
+				else
+					fcn_00442d50((int) list.items[idx], 0);
 			} else if (num == 2) {
-				flag = *(int*) (a0 + 0xc8) <= range[0]
-				    && *(int*) (a0 + 0xc8) >= range[1];
+				if (*(int*) (a0 + 0xc8) <= range[0] && *(int*) (a0 + 0xc8) >= range[1])
+					fcn_00442d50((int) list.items[idx], 1);
+				else
+					fcn_00442d50((int) list.items[idx], 0);
 			}
-			if (flag >= 0)
-				fcn_00442d50((int) list.items[idx], flag);
 		}
 		idx++;
 	}

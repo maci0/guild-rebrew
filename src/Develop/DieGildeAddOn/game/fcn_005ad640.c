@@ -95,13 +95,13 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 			fcn_00526120(buf_b, 0);
 		} else {
 			rec = 0;
+			n = 0;
 			if (g_7746c4) {
 				rec = g_7746c4;
 			} else if (g_7746c8) {
 				rec = g_7746c8;
 			}
 			typerec = &((TypeRec*) lpGebaeudePROT)[g_7746c4[0]];
-			n = 0;
 			if (rec) {
 				item = fcn_00502cd0(*((int*) (rec + 0x5d)), 1, 0, 0xca);
 				while (item) {
@@ -112,19 +112,15 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 					item = fcn_00502850();
 				}
 			}
-			item = fcn_005463a0(2, 2, g_774970, 0, 0x40);
-			while (item) {
+			for (item = fcn_005463a0(2, 2, g_774970, 0, 0x40); item; item = he_fn_Handlung()) {
 				for (k = 0; k < n; k++) {
 					if (*((int*) (item + 0xac)) == *((int*) (msg.objs[k] + 0x2a))) {
 						break;
 					}
 				}
-				if (k < n) {
-					item = he_fn_Handlung();
-					continue;
+				if (k >= n) {
+					cnt = cnt + 1;
 				}
-				cnt = cnt + 1;
-				item = he_fn_Handlung();
 			}
 			n = n + cnt;
 			if (n >= (int) (typerec->maxcount * 2)) {
@@ -145,11 +141,7 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 						g_774654 = 1;
 					}
 					if (g_100f1dc != -1) {
-						if (g_67d370 != cnt) {
-							if (g_67d370 == r1) {
-								g_774654 = 1;
-							}
-						} else {
+						if (g_67d370 == cnt) {
 							for (i = 0; i < 8; i = i + 1) {
 								msg.ids[i] = -1;
 							}
@@ -159,12 +151,17 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 							msg.value = g_7f4ca0[g_774970].field4;
 							msg.owner2 = *((int*) (g_7746c4 + 1));
 							t = (char*) &g_7f4ca0[0].field4;
-							for (i = 0; i < 8 && t < (char*) &g_7f4ca0[768].field4; t = t + 0x21c) {
+							i = 0;
+							do {
+								if (i >= 8) {
+									break;
+								}
 								if (*((unsigned char*) (t + 0x184))) {
 									msg.ids[i] = *((int*) t);
 									i = i + 1;
 								}
-							}
+								t = t + 0x21c;
+							} while ((int) t < (int) &g_7f4ca0[768].field4);
 							if (i) {
 								fcn_004c5530(&msg);
 								ret = 1;
@@ -174,6 +171,8 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 								fcn_00526120((char*) g_14abc98, 0);
 								g_774654 = 1;
 							}
+						} else if (g_67d370 == r1) {
+							g_774654 = 1;
 						}
 					}
 				} while (fcn_005373e0(fcn_005ad640, 0x677c7));

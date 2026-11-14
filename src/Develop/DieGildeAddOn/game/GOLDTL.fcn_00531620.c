@@ -15,11 +15,27 @@ typedef struct {
 	unsigned char* data;
 } Map_531620;
 
-// SIZE 0x1c
+/* SIZE 0x1c */
 typedef struct {
 	int id;
 	char pad4[0x18];
 } Cell_531620;
+
+/* SIZE 0x21c */
+typedef struct {
+	unsigned short id;
+	short pad2;
+	int handle;
+	char f8;
+	char pad9[0x163];
+	int f16c;
+	char pad170[0x14];
+	char* owner;
+	char flag;
+	char pad189[3];
+	int f18c;
+	char pad190[0x8c];
+} Slot_531620;
 
 extern int g_67a370;
 extern char* g_7746c4;
@@ -71,16 +87,15 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00531620(void)
 {
 	Map_531620* map;
+	Slot_531620* s;
 	char* ent;
 	char* p;
-	char* q;
 	char* e;
 	char* f;
 	union {
 		char buf[0x80];
 		int offs[9][2];
 	} u;
-	int v16;
 	int a;
 	int b;
 	int ix;
@@ -92,11 +107,10 @@ void __cdecl fcn_00531620(void)
 	int ei;
 	int w;
 
-	v16 = *(int*) ((char*) g_67a370 + 0xb0);
-	map = (Map_531620*) v16;
 	ent = 0;
 	a = -1;
 	b = -1;
+	map = *(Map_531620**) ((char*) g_67a370 + 0xb0);
 	if (g_7746c4 != 0) {
 		ent = g_7746c4;
 	} else if (g_7746c8 != 0) {
@@ -140,20 +154,22 @@ L6d3:
 		fcn_00531320();
 		goto La5d;
 	}
-	if (v16 == 0 || ent == 0 || g_14ce8cc == 0 || *(int*) 0x100f894 != -1) {
+	if (map == 0 || ent == 0 || g_14ce8cc == 0 || *(int*) 0x100f894 != -1) {
 		goto La5d;
 	}
-	k = 0; for (p = g_7f4ca0; p < (char*) 0x85a0a0; p += 0x21c) {
-		if (p[0x188] == 0) {
+	k = 0;
+	for (idx = 0; idx < 0x300; idx++) {
+		s = &((Slot_531620*) g_7f4ca0)[idx];
+		if (s->flag == 0) {
 			continue;
 		}
-		if (p[8] == 0) {
+		if (s->f8 == 0) {
 			continue;
 		}
-		if ((fcn_00506380(g_774970, 0, 0, (int) p) & 0x800) == 0) {
+		if ((fcn_00506380(g_774970, 0, 0, (int) s) & 0x800) == 0) {
 			continue;
 		}
-		if (*(int*) (p + 0x184) == 0) {
+		if (s->owner == 0) {
 			continue;
 		}
 		u.offs[0][0] = 0;
@@ -174,7 +190,7 @@ L6d3:
 		u.offs[7][1] = 1;
 		u.offs[8][0] = -1;
 		u.offs[8][1] = 1;
-		if (fcn_0045bad0(v16, g_14ce8c0, g_14ce8c2, &b, &a) == 0) {
+		if (fcn_0045bad0((int) map, g_14ce8c0, g_14ce8c2, &b, &a) == 0) {
 			continue;
 		}
 		cell = 0;
@@ -196,10 +212,10 @@ L6d3:
 			}
 			break;
 		}
-		if (*(int*) (p + 0x16c) != 0) {
-			fcn_00529160(*(int*) (p + 0x16c), 0, *(unsigned short*) p, 0);
+		if (s->f16c != 0) {
+			fcn_00529160(s->f16c, 0, s->id, 0);
 		}
-		f = (char*) (*(int*) (p + 0x184));
+		f = s->owner;
 		w = *(int*) (f + 0x28);
 		if (w != -1) {
 			f = (char*) fcn_00426cc0(w);
@@ -207,14 +223,14 @@ L6d3:
 				fcn_00428720(f);
 			}
 		}
-		fcn_004c5b50(*(int*) (p + 4), ix, iy, g_6b8010);
+		fcn_004c5b50(s->handle, ix, iy, g_6b8010);
 	}
 	if (g_7746b8 == 0) {
 		goto La50;
 	}
 
 L192f:
-	if (v16 == 0 || g_14ce8cc == 0 || *(int*) 0x100f894 != -1) {
+	if (map == 0 || g_14ce8cc == 0 || *(int*) 0x100f894 != -1) {
 		goto La50;
 	}
 	fcn_0064d41a(u.buf, (char*) 0x68143c, (char*) g_7746a0 + 8);
@@ -222,8 +238,8 @@ L192f:
 		strcpy(u.buf, (char*) g_7746a0);
 	}
 	ei = -1;
-	for (idx = 0, q = (char*) 0x7e4260; q < (char*) 0x7e42e0; q += 4, idx++) {
-		e = *(char**) q; p = 0;
+	for (idx = 0; idx < 32; idx++) {
+		e = g_7e4260[idx]; p = 0;
 		if (e == 0) {
 			continue;
 		}
@@ -269,10 +285,11 @@ La5d:
 	g_7746f0 = 0;
 	ResetDisplayCounters();
 	c = 0;
-	for (idx = 0, q = (char*) 0x7f4e24; q < (char*) 0x85a224; q += 0x21c, idx++) {
-		e = *(char**) q;
+	for (idx = 0; idx < 0x300; idx++) {
+		s = &((Slot_531620*) g_7f4ca0)[idx];
+		e = s->owner;
 		if (e != 0) {
-			c = q[4];
+			c = s->flag;
 			if (c != g_7e2760[idx] && (*(unsigned char*) (e + 0x8c) & 0x40) == 0) {
 				if (c == 0) {
 					fcn_00414c30(*(int*) (e + 0x34), 0);
@@ -280,20 +297,21 @@ La5d:
 					fcn_00414c30(*(int*) (e + 0x34), 1);
 				}
 			}
-			c = q[4]; if (c != 0) {
+			c = s->flag;
+			if (c != 0) {
 				if (g_7746f0 == 0) {
-					g_7ea360 = (int) (q - 0x184);
+					g_7ea360 = (int) s;
 				}
 				g_7746f0 = g_7746f0 + 1;
-				f = *(char**) (q - 0x18);
-				if (f != 0 && *(int*) (f + 1) == *(int*) (*(char**) q + 0x2c)
+				f = (char*) s->f16c;
+				if (f != 0 && *(int*) (f + 1) == *(int*) (s->owner + 0x2c)
 				    && !(g_7746c8 == 0
 				         && (g_7746cc == 0 || *(unsigned short*) g_7746cc == 0x120))) {
-					fcn_00473690(*(int*) (q + 8), 1);
+					fcn_00473690(s->f18c, 1);
 				}
 			}
 		}
-		g_7e2760[idx] = q[4];
+		g_7e2760[idx] = s->flag;
 	}
 	if (g_14ce8e0 != 0 && g_7746f0 != 0) {
 		sv_ClearObjectSelection();

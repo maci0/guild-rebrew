@@ -47,8 +47,11 @@ int __cdecl fcn_004cf6b0(void)
 	world = *(int*) (((char*) g_67a370) + 0xb0);
 	count = 0;
 	obj = fcn_004ce590(0x176);
-	for (p = (int*) 0x9b9ecc; (int) p < 0x9ba0cc; p += 4) {
-		if (p[-3] != 0) {
+	p = (int*) 0x9b9ecc;
+	do {
+		int p0;
+		p0 = p[-3];
+		if (p0 != 0) {
 			count++;
 			if ((*(unsigned char*) (p[-2] + 0x2d) & 0x20) != 0) {
 				v8[0] = -243.0f;
@@ -59,9 +62,9 @@ int __cdecl fcn_004cf6b0(void)
 				v7[1] = 0.0f;
 				v7[2] = 38.0f;
 				v7[3] = 0.0f;
-				v8[0] = *(float*) (p[-3] + 0x4c);
-				v8[1] = *(float*) (p[-3] + 0x50);
-				v8[2] = *(float*) (p[-3] + 0x54);
+				v8[0] = *(float*) (p0 + 0x4c);
+				v8[1] = *(float*) (p0 + 0x50);
+				v8[2] = *(float*) (p0 + 0x54);
 				color[2] = 0xc0;
 				color[1] = 0xc0;
 				color[0] = 0xc0;
@@ -73,40 +76,49 @@ int __cdecl fcn_004cf6b0(void)
 				fcn_00417d00(0, v8, 0x1e, 70.0f, 50.0f, 20.0f, 60.0f,
 				    0x3c);
 				map = g_6b8300;
-				n = p[0] * *(int*) map + p[-1];
+				n = p[-1] + p[0] * *(int*) map;
 				if (*(unsigned char*) (n + *(int*) (map + 0x14)) != 0) {
 					*(unsigned char*) (n + *(int*) (map + 0x10)) += 0xfb;
-					*(unsigned char*) (p[0] * *(int*) g_6b8300 + p[-1] + *(int*) (g_6b8300 + 0x14)) = 0;
+					*(unsigned char*) (p[0] * *(int*) g_6b8300 + *(int*) (g_6b8300 + 0x14) + p[-1]) = 0;
 					fcn_0043c2c0(g_6b8300);
 					fcn_0043ef20(g_6b8300);
 				}
 				fcn_004234e0((char*) g_772ec4, "Explosion_s", 1, 0x3f,
 				    0x7f, 0, 0);
-				for (q = (int*) 0x7e4260; (int) q < 0x7e42e0; q++) {
+				q = (int*) 0x7e4260;
+				do {
 					e = (char*) *q;
-					if (e != 0 && e[8] != 0) {
+					if (e != 0) {
 						other = *(int*) (e + 0x184);
-						fcn_0045b920(world, p[-1], p[0], v8);
-						v8[0] -= *(float*) (*(int*) (other + 0x34) + 0x4c);
-						v8[1] -= *(float*) (*(int*) (other + 0x34) + 0x50);
-						v8[2] -= *(float*) (*(int*) (other + 0x34) + 0x54);
-						d = (float) sqrt(v8[2] * v8[2] + v8[1] * v8[1] + v8[0] * v8[0]);
-						if (d < 100.0f) {
-							n = (int) cut_RandMod((unsigned int) ((unsigned char) ((char*) obj)[6] - (unsigned char) ((char*) obj)[5]));
-							dmg = (int) ((double) (unsigned int) (n + (unsigned char) ((char*) obj)[5]) * (*(float*) (e + 0x1c) * 0.01));
-							dmg2 = (int) ((double) dmg * (1.0 - d * 0.01f));
-							*(int*) (*(char**) q + 0x24) -= dmg2;
-							fcn_004cfc40(*q, dmg2, *(int*) (*(char**) q + 0x16c) == g_772e9c ? 1 : 2);
-							if (!fcn_004d4790(e)) {
-								fcn_00406340((char*) other, "kampf/arm_greifen", 1);
+						if (e[8] != 0) {
+							fcn_0045b920(world, p[-1], p[0], v8);
+							v8[0] -= *(float*) (*(int*) (other + 0x34) + 0x4c);
+							v8[1] -= *(float*) (*(int*) (other + 0x34) + 0x50);
+							v8[2] -= *(float*) (*(int*) (other + 0x34) + 0x54);
+							d = (float) sqrt(v8[2] * v8[2] + v8[1] * v8[1] + v8[0] * v8[0]);
+							if (d < 100.0f) {
+								n = (int) cut_RandMod((unsigned int) ((unsigned char) ((char*) obj)[6] - (unsigned char) ((char*) obj)[5]));
+								dmg = (int) ((double) (unsigned int) (n + (unsigned char) ((char*) obj)[5]) * (*(float*) (e + 0x1c) * 0.01));
+								dmg2 = (int) ((double) dmg * (1.0 - d * 0.01f));
+								*(int*) (*(char**) q + 0x24) -= dmg2;
+								if (*(int*) (*(char**) q + 0x16c) == g_772e9c) {
+									fcn_004cfc40(*q, dmg2, 1);
+								} else {
+									fcn_004cfc40(*q, dmg2, 2);
+								}
+								if (!fcn_004d4790(e)) {
+									fcn_00406340((char*) other, "kampf/arm_greifen", 1);
+								}
 							}
 						}
 					}
-				}
+					q++;
+				} while ((int) q < 0x7e42e0);
 				d3_DestroyObject(p[-3]);
 				p[-3] = 0;
 			}
 		}
-	}
+		p += 4;
+	} while ((int) p < 0x9ba0cc);
 	return count;
 }

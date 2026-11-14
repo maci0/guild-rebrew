@@ -10,7 +10,7 @@ char __cdecl fcn_004550d0(char*, void*);
 void __cdecl fcn_00455a80(char*);
 void __cdecl fcn_0045d4f0(void*);
 void __cdecl fcn_00452e00(void);
-void __cdecl fcn_0043b600(void);
+void __cdecl fcn_0043b600(void); extern float g_5ebaa4;
 #include "client_lighting.h"
 #include "Develop/Units/d3/d3_camera.h"
 /* ADDRESS: GOLD 0x0043e200 */
@@ -74,7 +74,7 @@ void __cdecl fcn_0043e200(unsigned int pass, int overlay)
     if ((*(unsigned char*) 0xfe7670 & 0x40) && *(int*) 0x63344c &&
         *(int*) 0xfb9904 && *(int*) 0xfb9908 && (*(unsigned char*) 0xfb9928 & 1))
         fcn_00438d40(*(char**) 0x5fb5b0, 0, pass, fcn_004550d0, (void*) 0xfb9900);
-    if (*(float*) 0xfc5344 == 10000000000.0f)
+    if (*(float*) 0xfc5344 == g_5ebaa4)
         *(float*) 0xfc5344 = 0.0f;
     *(int*) 0x633470 = *(int*) 0xfc2dcc;
     *(int*) 0x633488 = *(int*) 0xfe75b0;

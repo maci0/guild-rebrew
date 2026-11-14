@@ -47,7 +47,7 @@ void __cdecl fcn_0043dbc0(char* object)
     char* material;
     int* mapping;
     int group;
-    int fresh_faces;
+    unsigned char fresh_faces;
     int count;
     int i;
     int j;
@@ -56,6 +56,8 @@ void __cdecl fcn_0043dbc0(char* object)
     int next_material;
     unsigned int alpha;
     unsigned int color;
+    int fill;
+    int len;
 
     if (object == 0 || *(void**)(object + 0x1ec) == 0) {
         return;
@@ -69,14 +71,12 @@ void __cdecl fcn_0043dbc0(char* object)
             continue;
         }
         fresh_faces = 0;
-        count = *(int*)(source + 0x4c);
-        if (bank->faces == 0 && count > 0) {
+        if (bank->faces == 0 && (count = *(int*)(source + 0x4c)) > 0) {
             bank->face_count = count;
             bank->faces = (INFLATED_FACE*)m_alloc(count * 0x28, "d3:InflateObject(allpolys)");
             fresh_faces = 1;
         }
-        count = *(int*)(source + 0x44);
-        if (bank->vertices == 0 && count > 0) {
+        if (bank->vertices == 0 && (count = *(int*)(source + 0x44)) > 0) {
             bank->vertex_count = count;
             bank->vertices = (INFLATED_VERTEX*)m_alloc((count + 8) * 0x50, "d3:InflateObject(allpoints)");
         } else if (!fresh_faces) {
@@ -90,7 +90,30 @@ void __cdecl fcn_0043dbc0(char* object)
             }
         }
         mapping = (int*)m_alloc(g_fb9084 * 4, "d3:!InflateObject(mat)");
-        memset(mapping, 0xff, g_fb9084 * 4);
+        fill = -1;
+        len = g_fb9084 * 4;
+        __asm {
+            mov edi, mapping
+            mov eax, fill
+            mov ebx, len
+            mov ah, al
+            shl eax, 0x10
+            mov ecx, eax
+            shr ecx, 0x10
+            add eax, ecx
+            lea ecx, [edi+edi*2]
+            and ecx, 3
+            sub ebx, ecx
+            jle short FillMapTail
+            rep stosb
+            mov ecx, ebx
+            and ebx, 3
+            shr ecx, 2
+            rep stosd
+        FillMapTail:
+            add ecx, ebx
+            rep stosb
+        }
         next_material = 0;
         for (i = 0; i < bank->face_count; i++) {
             face = &bank->faces[i];

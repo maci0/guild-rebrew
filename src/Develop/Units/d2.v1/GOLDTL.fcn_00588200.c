@@ -86,7 +86,8 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	fcn_00472900(rec, 0x54);
 	io_FormatTextBuffer(text, (char*) 0x6a9480,
 	             fcn_0050d320((char*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0),
-	                          *(unsigned char*) &g_773d75));
+	                          *(unsigned char*) &g_773d75),
+	             *(int*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0 + 0x194));
 	rec = fcn_0046fac0(*(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c) / 2,
 	                   0x23, text, *(int*) &g_772514);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;

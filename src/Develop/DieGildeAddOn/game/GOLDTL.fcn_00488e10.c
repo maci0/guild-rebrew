@@ -1,6 +1,6 @@
 #include <string.h>
 #include "client_data.h"
-#pragma intrinsic(memcpy, memset)
+
 
 extern unsigned char* lpGebaeudePROT;
 

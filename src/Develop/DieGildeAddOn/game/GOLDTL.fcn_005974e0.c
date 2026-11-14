@@ -18,7 +18,7 @@ int __cdecl fcn_005974e0(int a0, char* a1)
 {
     unsigned int v11[68];
     unsigned int* v13;
-    unsigned int* v4;
+
     unsigned short* v5;
     unsigned short* v9;
     unsigned int* v6;
@@ -101,12 +101,11 @@ int __cdecl fcn_005974e0(int a0, char* a1)
     v10 = 0;
     v13 = (unsigned int*) 0x778d4c;
     do {
-        v4 = &v13[5];
         v8 = v10 + *(unsigned char*) (v3 + 0x1c) * 4;
         v10 += 1;
         *v13 = v11[v8];
-        v13 = v4;
-    } while ((int) v4 < 0x778d9c);
+        v13 += 5;
+    } while ((int) v13 < 0x778d9c);
 
     v5 = fcn_00502cd0(*(unsigned int*) (v3 + 0x14), 1, 5);
     while (v5) {
@@ -114,7 +113,7 @@ int __cdecl fcn_005974e0(int a0, char* a1)
         v6 = (unsigned int*) 0x778da0;
         do {
             if (*v6 == (unsigned int) *v5) {
-                if (v10 <= 0xf) {
+                if (v10 < 0x10) {
                     *(unsigned int*) (v10 * 0x38 + 0x778dd0) =
                         gm_GetMsgField(v3, (char*) v5);
                     goto next_match;
@@ -128,7 +127,7 @@ int __cdecl fcn_005974e0(int a0, char* a1)
         v7 = (int*) 0x778da0;
         do {
             if (!*v7) {
-                if (v10 <= 0xf) {
+                if (v10 < 0x10) {
                     if (*(unsigned short*) v3 != 0x1db && *(unsigned short*) v3 != 0x1dc) {
                         goto store_slot;
                     }

@@ -142,9 +142,11 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 		for (;;) {
 			int chk;
 			int d;
+			char ch;
 
 			t = *(char**) (slot + 0x3c);
-			if ((*(char*) (t + i) != '%') && (*(char*) (t + i) != '$')) {
+			ch = *(char*) (t + i);
+			if (ch != '%' && ch != '$') {
 				break;
 			}
 			i += 1;

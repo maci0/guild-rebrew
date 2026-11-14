@@ -32,13 +32,11 @@ int __cdecl ai_StartAnschwaerzen(int a1, char* ent, int a3, Blk24* o1, Blk24* o2
 			return 0;
 		}
 	}
-	if (*(char**) (ent + 0x170) == 0) {
-		if (*(unsigned char*) (ent + 2) == 3) {
-			if ((*(int*) (ent + 0x1e8) & 4) == 0) {
-				return 0;
-			}
-			goto fill;
-		}
+	if (*(char**) (ent + 0x170) == 0 && *(unsigned char*) (ent + 2) != 3) {
+
+
+
+
 		b1.kind = 5;
 		b1.a = 4;
 		b1.b = 1;
@@ -52,16 +50,16 @@ int __cdecl ai_StartAnschwaerzen(int a1, char* ent, int a3, Blk24* o1, Blk24* o2
 		*o1 = b1;
 		*o2 = b2;
 		return r;
-	} else {
-		if (*(unsigned char*) (ent + 2) == 3) {
-			if ((*(int*) (ent + 0x1e8) & 4) == 0) {
-				return 0;
-			}
-			goto fill;
+	}
+	if (*(unsigned char*) (ent + 2) == 3) {
+		if ((*(int*) (ent + 0x1e8) & 4) == 0) {
+			return 0;
 		}
-		if (fcn_00502cd0(*(int*) (*(char**) (ent + 0x170) + 0x5d), 2, 6, 0, 0x15) != 0) {
-			goto fill;
-		}
+		goto fill;
+	}
+	if (fcn_00502cd0(*(int*) (*(char**) (ent + 0x170) + 0x5d), 2, 6, 0, 0x15) == 0) {
+
+
 		b1.kind = 2;
 		b1.a = 0x15;
 		b1.b = 1;

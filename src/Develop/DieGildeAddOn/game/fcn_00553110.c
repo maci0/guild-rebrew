@@ -4,6 +4,16 @@
  * message ids, state 1 waits for the player choice and pushes the answer
  * into the pending message, the cleanup states close the dialog again. */
 
+#pragma pack(push, 2)
+typedef struct {
+	int a;
+	short b0;
+	int b1c0;
+	short c1;
+	short d;
+} Pos14;
+#pragma pack(pop)
+
 extern short g_7f4c0c;
 extern int g_100f884;
 extern int g_100f1dc;
@@ -27,10 +37,6 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 	int msg;
 	int actor;
 	int n;
-	int id;
-	int v0;
-	int v1;
-	int col;
 
 	msg = 0;
 	actor = fcn_005463a0(1, 1, *(int*) (dlg + 0xac));
@@ -51,9 +57,9 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 		return;
 	}
 	{
-		n = fcn_00500cb0((void*) 0x7f4c00, (int*) (dlg + 0x52));
-		
-		
+		Pos14 t;
+
+		n = fcn_00500cb0(&g_7f4c00, (int*) (dlg + 0x52));
 		if (n > 0) {
 			fcn_00545780(dlg);
 			fcn_00546190(dlg);
@@ -63,21 +69,15 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 			return;
 		if (g_100f1dc == -1)
 			return;
-		v1 = g_7f4c04;
-		col = g_7f4c08;
-		v0 = g_7f4c00;
-		id = g_7f4c0c;
+		t = *(Pos14*) &g_7f4c00;
 		if (g_14cbca0 == -1) {
-			col = g_7f4c08 & 0xffff0000;
-			v1 = 6;
+			t.b0 = 6;
+			t.b1c0 = 0;
 		}
 		if (g_100f1dc == 2) {
 			*(int*) (dlg + 0x70) = 3;
-			*(int*) (actor + 0x52) = v0;
+			*(Pos14*) (actor + 0x52) = t;
 			*(int*) (actor + 0xb8) = 1;
-			*(int*) (actor + 0x56) = v1;
-			*(int*) (actor + 0x5a) = col;
-			*(short*) (actor + 0x5e) = (short) id;
 			fcn_004c5620(3, actor);
 			fcn_004c5420(*(int*) (msg + 1), 0x5a, 2, 0x100, 0);
 			fcn_004c51a0(
@@ -92,11 +92,8 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 			}
 		} else if (g_100f1dc == 1) {
 			*(int*) (dlg + 0x70) = 3;
-			*(int*) (actor + 0x52) = v0;
+			*(Pos14*) (actor + 0x52) = t;
 			*(int*) (actor + 0xb8) = 0;
-			*(int*) (actor + 0x56) = v1;
-			*(int*) (actor + 0x5a) = col;
-			*(short*) (actor + 0x5e) = (short) id;
 			fcn_004c5620(3, actor);
 		}
 		fcn_00545780(dlg);
@@ -110,27 +107,20 @@ open:
 		return;
 	}
 	d2_SetForm(*(int*) (*(int*) (dlg + 0x74) + 8), 0);
-	n = fcn_0051e070();
-	if (n == 0) {
-		n = *(int*) (actor + 0xb4);
-		id = *(unsigned short*) (actor + 8);
-	} else if (n == 1) {
-		id = *(unsigned short*) (actor + 8);
-		n = msg;
-		msg = *(int*) (actor + 0xb4);
-	} else {
-		goto after;
+	switch (fcn_0051e070()) {
+	case 0:
+		io_AppendText((void*) 0x1a8c,
+		    (void*) (unsigned int) *(unsigned short*) (actor + 8),
+		    (void*) *(int*) (actor + 0xb4), (void*) msg);
+		break;
+	case 1:
+		io_AppendText((void*) 0x1a8c,
+		    (void*) (unsigned int) *(unsigned short*) (actor + 8),
+		    (void*) msg, (void*) *(int*) (actor + 0xb4));
+		break;
 	}
-	io_AppendText((void*) 0x1a8c, (void*) id, (void*) n, (void*) msg);
-after:
-	*(int*) (dlg + 0x44) = g_7f4c00;
-	*(int*) (dlg + 0x48) = g_7f4c04;
-	*(int*) (dlg + 0x4c) = g_7f4c08;
-	*(short*) (dlg + 0x50) = g_7f4c0c;
-	*(int*) (dlg + 0x52) = g_7f4c00;
-	*(int*) (dlg + 0x56) = g_7f4c04;
-	*(int*) (dlg + 0x5a) = g_7f4c08;
-	*(short*) (dlg + 0x5e) = g_7f4c0c;
+	*(Pos14*) (dlg + 0x44) = *(Pos14*) &g_7f4c00;
+	*(Pos14*) (dlg + 0x52) = *(Pos14*) &g_7f4c00;
 	fcn_00500bb0((int*) (dlg + 0x52), 3, 0, 0);
 	fcn_004c30a0(-7, 0, "_NACHRICHTEN_HS_34", 0, 0);
 	*(int*) (dlg + 0x70) = *(int*) (dlg + 0x70) + 1;

@@ -26,7 +26,7 @@ int __cdecl fcn_004f6040(int* ids, int* d, unsigned short k)
 	int list[0x200];
 	char* e;
 	char* p;
-	int key;
+
 	int n;
 	int m;
 	int i;
@@ -44,9 +44,9 @@ int __cdecl fcn_004f6040(int* ids, int* d, unsigned short k)
 	}
 	memset(list, 0xff, 0x200 * 4);
 	e = g_7f4ca0 + k * 0x21c;
-	key = *(int*) (e + 4);
+
 	for (i = 0; i < 0x800; i++) {
-		if (g_99f800[i].owner == key) {
+		if (g_99f800[i].owner == *(int*) (e + 4)) {
 			s = FindStraftatIndexById(g_99f800[i].key);
 			if (s != -1 && g_9a3800[s].x25 == 1) {
 				list[m] = g_9a3800[s].x16;
@@ -73,12 +73,12 @@ int __cdecl fcn_004f6040(int* ids, int* d, unsigned short k)
 			}
 			for (j = 0x1f; j > 0; j--) {
 				if (d[j] > d[j - 1]) {
-					t = ids[j - 1];
-					ids[j - 1] = ids[j];
-					ids[j] = t;
-					t = d[j - 1];
-					d[j - 1] = d[j];
-					d[j] = t;
+					t = ids[j];
+					ids[j] = ids[j - 1];
+					s = d[j];
+					d[j] = d[j - 1];
+					ids[j - 1] = t;
+					d[j - 1] = s;
 				}
 			}
 		}

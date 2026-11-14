@@ -103,7 +103,14 @@ label_49df97:
     if ((v10[0x5a] & 0x41) == 0)
     {
         fcn_004fc460(v15);
-        if (*v10 != 0x11)
+        if (*v10 == 0x11)
+        {
+            v19 = 0x12;
+            rv = gm_RandomMod(0x200);
+            if ((float)rv + v15[6] < g_66436c)
+                return 0;
+        }
+        else
         {
             if (*v10 != 0x12)
                 return 0;
@@ -112,14 +119,7 @@ label_49df97:
             if ((float)rv + v15[6] < g_664368)
                 return 0;
         }
-        else
-        {
-            v19 = 0x12;
-            rv = gm_RandomMod(0x200);
-            if ((float)rv + v15[6] < g_66436c)
-                return 0;
-        }
-        if ((float)fcn_0050d170(v19) * g_6628d8 <= (float)a2)
+        if ((float)fcn_0050d170(v19) * g_6628d8 <= (float)v7)
         {
             a3->type = 4;
             a3->a = v19;

@@ -133,25 +133,19 @@ void __cdecl fcn_00535ec0(void)
 		if (*(int*) (slot_off + 0x7f4cfc) != -1) {
 			return;
 		}
-		n = g_774970 + 1;
-		if (n >= 0xff) {
-			return;
-		}
-		q = (char*) (n * 0x21c + 0x7f4ca2);
-		do {
+		for (n = g_774970 + 1; n < 0xff; n++) {
+			q = (char*) (n * 0x21c + 0x7f4ca2);
 			if (*(unsigned char*) (q + 7) == 1 && *(unsigned char*) q != 0x0a
 			    && *(int*) (q + 0x5a) == -1) {
-				*q = 8;
-				*(int*) (q + 0x5a) = *(int*) (slot_off + 0x7f4ca4);
-				*(unsigned short*) (q + 0x4e) =
+				*(char*) (n * 0x21c + 0x7f4ca2) = 8;
+				*(int*) (n * 0x21c + 0x7f4cfc) = *(int*) (slot_off + 0x7f4ca4);
+				*(unsigned short*) (n * 0x21c + 0x7f4cf0) =
 				    *(unsigned short*) (slot_off + 0x7f4cf0);
-				*(int*) (slot_off + 0x7f4cfc) = *(int*) (q + 2);
+				*(int*) (slot_off + 0x7f4cfc) = *(int*) (n * 0x21c + 0x7f4ca4);
 				*(unsigned char*) (slot_off + 0x7f4ca8) = 0;
 				return;
 			}
-			q += 0x21c;
-			n++;
-		} while (q < (char*) 0x816686);
+		}
 		return;
 	}
 	case 0x17:

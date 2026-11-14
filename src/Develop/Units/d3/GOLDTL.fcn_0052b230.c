@@ -23,9 +23,7 @@ int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 int __cdecl fcn_0052b230(void)
 {
 	float m[16];
-	float v8;
-	float v10;
-	float v12;
+	float v[4];
 	float t;
 	float s;
 	float x;
@@ -34,14 +32,13 @@ int __cdecl fcn_0052b230(void)
 	float b8;
 	float b10;
 	float b12;
-	float v8f;
-	float v12f;
+
+
 	float sc;
-	float a;
+
 	char* p;
 	int i;
 	int r;
-	int u13;
 
 	r = 0;
 	if (g_14ce8e8 != 0 && *(int*) 0x774740 == 0) {
@@ -99,18 +96,18 @@ int __cdecl fcn_0052b230(void)
 	fcn_005ebbb9(m, (const float*) (p + 0x18c));
 	t = (float) ((int) *(short*) &g_14cf900 - *(int*) 0x774738);
 	s = t * *(float*) &g_6628a8;
-	v8 = m[0] * t + (m[4] * s + m[8] * s);
-	v10 = m[1] * t + (m[5] * s + m[9] * s);
-	v12 = m[2] * t + (m[6] * s + m[10] * s);
+	v[0] = m[0] * t + (m[4] * s + m[8] * s);
+	v[1] = m[1] * t + (m[5] * s + m[9] * s);
+	v[2] = m[2] * t + (m[6] * s + m[10] * s);
 	if (g_14cf70f != 0) {
 		y = (float) ((double) (*(int*) 0x77473c - (int) *(short*) &g_14cf902) * g_662cc0);
 		x = (float) ((double) y * g_662950);
-		v8 = v8 + x;
-		v10 = v10 + y;
-		v12 = v12 + x;
-		v8 = v8 + *(float*) (p + 0x4c);
-		v10 = v10 + *(float*) (p + 0x50);
-		v12 = v12 + *(float*) (p + 0x54);
+		v[0] = v[0] + x;
+		v[1] = v[1] + y;
+		v[2] = v[2] + x;
+		v[0] = v[0] + *(float*) (p + 0x4c);
+		v[1] = v[1] + *(float*) (p + 0x50);
+		v[2] = v[2] + *(float*) (p + 0x54);
 	} else {
 		y = (float) ((double) ((int) *(short*) &g_14cf902 - *(int*) 0x77473c) * g_662cc0);
 		n = (float) ((double) y * g_662950);
@@ -118,19 +115,19 @@ int __cdecl fcn_0052b230(void)
 		b8 = m[0] * n + (m[4] * n + m[8] * s);
 		b10 = m[1] * n + (m[5] * n + m[9] * s);
 		b12 = m[2] * n + (m[6] * n + m[10] * s);
-		v8f = b8 + v8;
-		v12f = b12 + v12;
 		sc = (float) sqrt((double) ((b12 * b12 + b10 * b10) + b8 * b8));
-		a = (float) sqrt((double) ((v8f * v8f) + v12f * v12f));
-		sc = sc / a;
-		v8 = v8f * sc + *(float*) (p + 0x4c);
-		v10 = g_6628a8 * sc;
-		v12 = v12f * sc + *(float*) (p + 0x54);
-		v10 = *(float*) (p + 0x50);
+		v[0] = b8 + v[0];
+		v[2] = b12 + v[2];
+		sc = sc / (float) sqrt((double) (v[2] * v[2] + v[0] * v[0]));
+		v[0] = v[0] * sc; v[1] = g_6628a8 * sc; v[2] = v[2] * sc;
+		v[0] = v[0] + *(float*) (p + 0x4c);
+		v[1] = v[1] + *(float*) (p + 0x50);
+		v[2] = v[2] + *(float*) (p + 0x54);
+		*(int*) &v[1] = *(int*) (p + 0x50);
 	}
-	r = CompareVector3WithinTolerance((float*) 0x773e04, &v8, 0.1f);
+	r = CompareVector3WithinTolerance((float*) 0x773e04, v, 0.1f);
 	if (r == 0) {
-		fcn_00438b40(g_6b8014, &v8);
+		fcn_00438b40(g_6b8014, v);
 		if (g_774650 == g_774658 && (*(int*) &g_7746c4 == 0 || *(int*) &g_7746c8 != 0)) {
 			p = g_6b8014;
 			*(int*) &g_7e3a50 = *(int*) (p + 0x84);
@@ -141,10 +138,10 @@ int __cdecl fcn_0052b230(void)
 			*(int*) &g_7e3a48 = *(int*) (p + 0x54);
 		}
 	}
-	*(int*) 0x773e08 = *(int*) &v10;
-	*(int*) 0x773e0c = *(int*) &v12;
-	*(int*) 0x773e04 = *(int*) &v8;
-	*(int*) 0x773e10 = u13;
+	*(int*) 0x773e08 = *(int*) &v[1];
+	*(int*) 0x773e0c = *(int*) &v[2];
+	*(int*) 0x773e04 = *(int*) v;
+	*(int*) 0x773e10 = *(int*) &v[3];
 	*(int*) 0x774738 = (int) *(short*) &g_14cf900;
 	*(int*) 0x77473c = (int) *(short*) &g_14cf902;
 	return 1;

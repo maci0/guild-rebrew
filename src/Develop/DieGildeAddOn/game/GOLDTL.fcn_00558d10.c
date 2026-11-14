@@ -14,7 +14,6 @@ void __cdecl fcn_00558d10(char* e)
 {
 	char buf[0x200];
 	pos14_7f4c00* clock;
-	char* q;
 	char* p;
 	int idx;
 	unsigned char c;
@@ -26,10 +25,9 @@ void __cdecl fcn_00558d10(char* e)
 	*clock = g_7f4c00;
 	idx = *(int*) (e + 0xb8);
 	n = 0x100;
-	p = 0;
 	do {
-		q = lpGebaeudeINST + idx * 0xa9;
-		c = *(unsigned char*) (lpGebaeudePROT + (unsigned int) *(unsigned char*) q * 0x24d);
+		p = lpGebaeudeINST + idx * 0xa9;
+		c = *(unsigned char*) (lpGebaeudePROT + (unsigned int) *(unsigned char*) p * 0x24d);
 		bit_lo = 0;
 		bit_hi = 0;
 		if (c > 31) {
@@ -37,11 +35,12 @@ void __cdecl fcn_00558d10(char* e)
 		} else {
 			bit_lo = 1U << c;
 		}
-		if (*(unsigned short*) (q + 0x27) != 0xffff
+		if (*(unsigned short*) (p + 0x27) != 0xffff
 		    && ((bit_lo & 0x807c4110U) != 0 || (bit_hi & 1) != 0)) {
-			p = q;
+
 			break;
 		}
+		p = 0;
 		n--;
 		idx = (idx + *(int*) (e + 0xbc)) % 0x100;
 	} while (n != 0);

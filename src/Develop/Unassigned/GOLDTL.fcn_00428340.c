@@ -1,4 +1,4 @@
-#pragma intrinsic(strcpy)
+
 extern void* g_6b7ea0;
 extern int* g_14cb8f0;
 extern int g_6b7eb0;

@@ -79,10 +79,7 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 			return 0x20;
 		}
 		p = gm_LookupEntityRecordById(*(int*) ((char*) a1 + 0x214));
-		if (p == 0) {
-			return 0x20;
-		}
-		if (*(char*) (p + 8) == 0) {
+		if (p == 0 || *(char*) (p + 8) == 0) {
 			return 0x20;
 		}
 		memset(buf, 0, 0xf8);
