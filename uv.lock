@@ -496,8 +496,8 @@ requires-dist = [
     { name = "isort", marker = "extra == 'dev'", specifier = ">=9.0.2" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=2.4.1" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.2.0" },
-    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.33.0/rebrew-6.33.0-py3-none-any.whl" },
-    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.33.0/rebrew-6.33.0-py3-none-any.whl" },
+    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.38.0/rebrew-6.38.0-py3-none-any.whl" },
+    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.38.0/rebrew-6.38.0-py3-none-any.whl" },
     { name = "recoverage", marker = "extra == 'dashboard'", url = "https://github.com/maci0/recoverage/releases/download/v8.8.2/recoverage-8.8.2-py3-none-any.whl" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.17.3" },
 ]
@@ -1270,8 +1270,8 @@ wheels = [
 
 [[package]]
 name = "rebrew"
-version = "6.33.0"
-source = { url = "https://github.com/maci0/rebrew/releases/download/v6.33.0/rebrew-6.33.0-py3-none-any.whl" }
+version = "6.38.0"
+source = { url = "https://github.com/maci0/rebrew/releases/download/v6.38.0/rebrew-6.38.0-py3-none-any.whl" }
 dependencies = [
     { name = "capstone" },
     { name = "click" },
@@ -1291,10 +1291,9 @@ dependencies = [
     { name = "tree-sitter" },
     { name = "tree-sitter-c" },
     { name = "typer" },
-    { name = "zstandard" },
 ]
 wheels = [
-    { url = "https://github.com/maci0/rebrew/releases/download/v6.33.0/rebrew-6.33.0-py3-none-any.whl", hash = "sha256:4af512b075baf290033404ba73dca920b83b36d01e284ef52c71760427a9f335" },
+    { url = "https://github.com/maci0/rebrew/releases/download/v6.38.0/rebrew-6.38.0-py3-none-any.whl", hash = "sha256:4b52e226e9cd4ba44b1301fd311ad712b580aeb0d9abdee7c18169d99ee13ea6" },
 ]
 
 [package.optional-dependencies]
@@ -1326,7 +1325,6 @@ requires-dist = [
     { name = "tree-sitter", specifier = ">=0.26.1,<1" },
     { name = "tree-sitter-c", specifier = ">=0.24.2,<1" },
     { name = "typer", specifier = ">=0.29.1,<1" },
-    { name = "zstandard", specifier = ">=0.25.0,<1" },
 ]
 provides-extras = ["prove", "binsync", "pgsql"]
 
