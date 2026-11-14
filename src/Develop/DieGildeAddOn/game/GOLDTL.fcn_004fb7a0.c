@@ -12,7 +12,7 @@ typedef struct Time14 {
 #pragma pack(pop)
 
 unsigned short __cdecl gm_RandomMod(int);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_005463a0(int, int, int);
 void __cdecl fcn_00500bb0(Time14* t, int hours, int minutes, int seconds);
 void __cdecl fcn_004c5530(void* msg);

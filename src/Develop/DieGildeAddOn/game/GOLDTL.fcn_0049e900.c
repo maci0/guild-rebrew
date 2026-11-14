@@ -73,8 +73,9 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 				if (((1 << row->kind) & 0x7d4390) != 0 && *(int*) (e + 0x39) < v[row->level])
 					break;
 			}
+			i--;
 			j = (j + v[0]) % 0x100;
-			if (--i == 0)
+			if (i == 0)
 				return 0;
 		}
 		j = gm_RandomMod(0x100);
@@ -83,8 +84,9 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 			if (e2[0] != 0 && *(short*) (e2 + 0x27) != *target
 			    && ((BuildingRow*) lpGebaeudePROT)[*(unsigned char*) e2].kind == 5)
 				break;
+			i--;
 			j = (j + v[0]) % 0x100;
-			if (--i == 0)
+			if (i == 0)
 				return 0;
 		}
 		n = fcn_0050d6d0(e2, target, 3, rec);
@@ -120,8 +122,9 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 		if (e2[0] != 0 && *(short*) (e2 + 0x27) != *target
 		    && ((BuildingRow*) lpGebaeudePROT)[*(unsigned char*) e2].kind == 5)
 			break;
+		i--;
 		j = (j + v[0]) % 0x100;
-		if (--i == 0)
+		if (i == 0)
 			return 0;
 	}
 	n = fcn_0050d6d0(e2, target, 3, rec);

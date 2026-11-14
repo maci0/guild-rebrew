@@ -32,7 +32,7 @@ int __cdecl fcn_00408320(int a0, char* a1, int* a2)
 	if (b != 0 && b[9] == '-' && *(int*) (b + 0xf4) != 0
 		&& *(int*) (b + 0x154) == -1) {
 		n = *(int*) (b + 0xf8);
-		end = (*(int**) (obj + 0x124) != 0) + 1 + n;
+		end = n + (*(int**) (obj + 0x124) != 0 ? 2 : 1);
 		while (n < end && n < *(int*) (b + 0xf0)) {
 			s = (unsigned char*) (*(int*) (b + 0xf4) + n * 2);
 			fcn_004082d0(a0, s[0], s[1], (int) g_6b5c5c, (int) p, (int) (p + 1));

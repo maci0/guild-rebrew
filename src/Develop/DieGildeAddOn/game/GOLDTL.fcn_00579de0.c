@@ -38,7 +38,7 @@ void __cdecl fcn_00500bb0(Pos14* pos, int a, int b, int c);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int a, int b, int id, int d);
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
-char* __cdecl gv_GetSlotEntry(int a, int b, int c);
+char* __cdecl gv_GetSlotEntry(int a, int b, unsigned char c);
 int __cdecl fcn_00500d20(Pos14* a, Pos14* b);
 
 int __cdecl fcn_004f2d30(char* p, int a, int b, int c);
@@ -103,10 +103,10 @@ void __cdecl fcn_00579de0(char* a0)
 		p->add += f;
 		p->pos52 = g_7f4c00;
 		fcn_00500bb0(&p->pos52, 0, 5, 0);
-		v = p->xb8 - v;
-		p->xb8 = v;
+		p->xb8 -= v;
+
 		p->posBC = g_7f4c00;
-		if (v <= 0) {
+		if (p->xb8 <= 0) {
 			p->status = -1;
 		}
 		if ((int) (*(unsigned char*) (q + 0xc)) + (int) p->add >= 0xff) {

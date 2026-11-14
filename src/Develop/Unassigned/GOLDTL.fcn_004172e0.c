@@ -99,10 +99,10 @@ unsigned char __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, unsigned int t)
                 p->f08 = p->f08 - p->f08 * g_662aac;
             } else { p->f04 = p->f04 - dt * e->f00; }
             p->f10 = p->f10 - dt * e->f04;
-            if (!(p->f10 > g_662950)) {
-                p->flags = p->flags & 0xfe;
-            } else {
+            if (p->f10 > g_662950) {
                 p->f4f = (char) (int) p->f10;
+            } else {
+                p->flags = p->flags & 0xfe;
             }
         }
     }

@@ -7,7 +7,7 @@ char __cdecl fcn_0045b920(int, int, int, float*);
 int __cdecl fcn_004cef70(int, int);
 int* __cdecl fcn_004ce610(int);
 int __cdecl fcn_0064f170(char*, char*, int);
-int __cdecl strncmp(char*, char*, unsigned int);
+#include <string.h>
 
 /* ADDRESS: GOLDTL 0x004d06d0 */
 void __cdecl fcn_004d06d0(void)
@@ -83,7 +83,7 @@ void __cdecl fcn_004d06d0(void)
 				return;
 			}
 			obj = (char*) *(int*) &g_7746a4;
-			if (strncmp(obj, (char*) 0x68b82c, 10) == 0 && count != 0) {
+			if (memcmp(obj, (char*) 0x68b82c, 10) == 0 && count != 0) {
 				g_7725c4 = 0x1c;
 				*(int*) 0x772e90 = (int) *(int*) &g_7746a4;
 				return;

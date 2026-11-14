@@ -196,11 +196,11 @@ void __cdecl fcn_00572ff0(char* a)
 			if (itm != 0) {
 				*(int*) (itm + 0x1b8) = *(int*) (itm + 0x1b8) + d * m;
 			}
-			if (t - m != 0) {
+			if ((t -= m) != 0) {
 				d = (int) (fcn_0050bb50(*(unsigned short*) r2,
 				    g_773d75) * g_664108);
 				*(int*) (a + 0xe8) = fcn_004c51f0(-1,
-				    *(int*) (q + 2), *(unsigned short*) r2, t - m,
+				    *(int*) (q + 2), *(unsigned short*) r2, t,
 				    g_773d75, d);
 			}
 i1next:

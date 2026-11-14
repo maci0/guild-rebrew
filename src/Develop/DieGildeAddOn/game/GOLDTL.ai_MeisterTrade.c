@@ -98,13 +98,13 @@ typedef struct {
 	char* xb4;
 } Stock;
 
-extern unsigned char g_773d75;
+extern unsigned char g_773d75; extern int g_100b0a8, g_100b0ac;
 extern unsigned char* lpGebaeudePROT;
 typedef struct BuildingRow489a70 { unsigned char kind; char fields[0x24c]; } BuildingRow489a70;
 extern char* g_773d78;
 extern float g_6628a0;
 extern float g_664144;
-extern char* g_100e748;
+extern char* g_100e748; extern char* lpObjektePROT;
 
 int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld);
 int __cdecl fcn_0050dfd0(char* pkt, int item_id);
@@ -167,7 +167,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 	}
 
 	/* 0x002d-0x00b0: producer records holding more than a third of demand */
-	for (i = 0; i < *(int*) 0x100b0a8; i++) {
+	for (i = 0; i < g_100b0a8; i++) {
 		pr = (Prod*) 0x100b0c0 + i;
 		if ((pr->flags & 6) != 0) {
 			continue;
@@ -188,7 +188,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 	if ((*(int*) 0x7f4c04 & 0xffff) % 2) {
 		if ((*(int*) (o + 0x1b4) & 0x200) == 0) {
 			/* 0x00c0-0x0198: sell town stock on a good price */
-			for (i = 0; i < *(int*) 0x100b0ac; i++) {
+			for (i = 0; i < g_100b0ac; i++) {
 				t = (Town*) 0x100d0c0 + i;
 				if ((t->flags54 & 6) != 0) {
 					continue;
@@ -209,7 +209,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 							sprintf(v.line,
 							    (char*) 0x67e708,
 							    t->qty44,
-							    *(char**) 0x99ec10 +
+							    lpObjektePROT +
 							    t->id * 0x41 + 1);
 						}
 					}
@@ -224,7 +224,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 							sprintf(v.line,
 							    (char*) 0x67e6cc,
 							    t->qty44,
-							    *(char**) 0x99ec10 +
+							    lpObjektePROT +
 							    t->id * 0x41 + 1);
 						}
 					}
@@ -255,7 +255,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 				goto dump_stock;
 			}
 			i = 0;
-			for (; tmp < 0x7d00 && i < *(int*) 0x100b0ac; i++) {
+			for (; tmp < 0x7d00 && i < g_100b0ac; i++) {
 				t = (Town*) 0x100d0c0 + i;
 				if ((t->flags54 & 6) != 0) {
 					continue;
@@ -271,14 +271,14 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 				if (o == g_100e748) {
 					sprintf(v.line, (char*) 0x67e6ac,
 					    t->qty44,
-					    *(char**) 0x99ec10 +
+					    lpObjektePROT +
 					    t->id * 0x41 + 1);
 				}
 			}
 
 dump_stock:
 			/* 0x02a5-0x0334: dump full town stock */
-			for (i = 0; i < *(int*) 0x100b0ac; i++) {
+			for (i = 0; i < g_100b0ac; i++) {
 				t = (Town*) 0x100d0c0 + i;
 				if ((t->flags54 & 6) != 0) {
 					continue;
@@ -297,7 +297,7 @@ dump_stock:
 				if (o == g_100e748) {
 					sprintf(v.line, (char*) 0x67e674,
 					    t->qty44,
-					    *(char**) 0x99ec10 +
+					    lpObjektePROT +
 					    t->id * 0x41 + 1);
 				}
 			}
@@ -312,7 +312,7 @@ dump_stock:
 	fcn_0050cce0(*(char**) (o + 0x16c), &v.s3, 0);
 
 	/* 0x03a7-0x0420: drop producer requests already being handled */
-	for (i = 0; i < *(int*) 0x100b0a8; i++) {
+	for (i = 0; i < g_100b0a8; i++) {
 		pr = (Prod*) 0x100b0c0 + i;
 		if ((pr->flags & 6) == 0) {
 			continue;
@@ -336,7 +336,7 @@ dump_stock:
 	type = ((BuildingRow489a70*) lpGebaeudePROT)[(unsigned char) *tp].kind;
 	if (type == 0xd || type == 0xb || type == 0xc) {
 		/* 0x0420-0x04b7: drop town requests already being handled */
-		for (i = 0; i < *(int*) 0x100b0ac; i++) {
+		for (i = 0; i < g_100b0ac; i++) {
 			t = (Town*) 0x100d0c0 + i;
 			if ((t->flags54 & 6) != 0) {
 				continue;
@@ -428,7 +428,7 @@ next_request:
 		}
 		id = v.s2.ids[i];
 		sprintf(v.line, (char*) 0x67e634, *(char**) (o + 0x16c) + 5,
-		    v.s2.vals[i], *(char**) 0x99ec10 + id * 0x41 + 1);
+		    v.s2.vals[i], lpObjektePROT + id * 0x41 + 1);
 		pr = 0;
 		for (pp = (Prod*) 0x100b0c0; pp < (Prod*) 0x100d0c0 &&
 		    pr == 0; pp++) {
@@ -449,7 +449,7 @@ next_request:
 			}
 			sprintf(v.line, (char*) 0x67e600,
 			    *(char**) (o + 0x16c) + 5,
-			    *(char**) 0x99ec10 + id * 0x41 + 1);
+			    lpObjektePROT + id * 0x41 + 1);
 			tmp = v.s1.caps[j] - v.s1.vals[j];
 			if (v.s2.vals[i] < tmp) {
 				tmp = v.s2.vals[i];
@@ -479,7 +479,7 @@ next_request:
 			}
 			sprintf(v.line, (char*) 0x67e5d0,
 			    *(char**) (o + 0x16c) + 5,
-			    *(char**) 0x99ec10 + id * 0x41 + 1);
+			    lpObjektePROT + id * 0x41 + 1);
 			tmp = fcn_0050dfd0(bld, id);
 			if (v.s2.vals[i] < tmp) {
 				tmp = v.s2.vals[i];
@@ -512,7 +512,7 @@ next_request:
 			sprintf(v.line, (char*) 0x67e588,
 			    *(char**) (o + 0x16c) + 5,
 			    v.s1.vals[j],
-			    *(char**) 0x99ec10 + id * 0x41 + 1);
+			    lpObjektePROT + id * 0x41 + 1);
 			price = (int) fcn_0050bb50(id, g_773d75);
 			sprintf(v.line, (char*) 0x67e358, -1,
 			    *(int*) (bld + 2), id, v.s1.vals[j],
@@ -547,7 +547,7 @@ no_market:
 		if (v.s2.vals[i] != 0) {
 			sprintf(v.line, (char*) 0x67e540,
 			    *(char**) (o + 0x16c) + 5, v.s2.vals[i],
-			    *(char**) 0x99ec10 + id * 0x41 + 1);
+			    lpObjektePROT + id * 0x41 + 1);
 			price = (int) fcn_0050bb50(id, g_773d75);
 			sprintf(v.line, (char*) 0x67e358, -1,
 			    *(int*) (bld + 2), id, v.s2.vals[i], g_773d75,
@@ -573,7 +573,7 @@ next_auto:
 		}
 		found = 0;
 		t = (Town*) 0x100d0c0;
-		for (j = 0; j < *(int*) 0x100b0ac; j++, t++) {
+		for (j = 0; j < g_100b0ac; j++, t++) {
 			if (t->id == id) {
 				found = 1;
 				break;
@@ -584,7 +584,7 @@ next_auto:
 		}
 		found = 0;
 		pr = (Prod*) 0x100b0c0;
-		for (j = 0; j < *(int*) 0x100b0a8; j++, pr++) {
+		for (j = 0; j < g_100b0a8; j++, pr++) {
 			if (pr->id == id) {
 				found = 1;
 				break;
@@ -631,7 +631,7 @@ next_auto:
 			}
 			found = 0;
 			t = (Town*) 0x100d0c0;
-			for (j = 0; j < *(int*) 0x100b0ac && found == 0; j++, t++) {
+			for (j = 0; j < g_100b0ac && found == 0; j++, t++) {
 				if (t->id == (unsigned short) id) {
 					found = 1;
 				}
@@ -641,7 +641,7 @@ next_auto:
 			}
 			found = 0;
 			pr = (Prod*) 0x100b0c0;
-			for (j = 0; j < *(int*) 0x100b0a8 && found == 0; j++, pr++) {
+			for (j = 0; j < g_100b0a8 && found == 0; j++, pr++) {
 				if (pr->id == (unsigned short) id) {
 					found = 1;
 				}
@@ -685,7 +685,7 @@ next_auto:
 
 	/* 0x0d30-0x0f60: sell collected stock, town first */
 	if (cnt < 3) {
-		for (i = 0; i < *(int*) 0x100b0ac && cnt < 3; i++) {
+		for (i = 0; i < g_100b0ac && cnt < 3; i++) {
 			t = (Town*) 0x100d0c0 + i;
 			if (t->qty44 == 0) {
 				continue;
@@ -719,7 +719,7 @@ next_auto:
 		}
 	}
 	if (cnt < 3) {
-		for (i = 0; i < *(int*) 0x100b0a8 && cnt < 3; i++) {
+		for (i = 0; i < g_100b0a8 && cnt < 3; i++) {
 			pr = (Prod*) 0x100b0c0 + i;
 			if (pr->qty18 == 0) {
 				continue;
@@ -727,7 +727,7 @@ next_auto:
 			if (!fcn_00503d10(pr->id)) {
 				sprintf(v.line, (char*) 0x67e4e8,
 				    *(char**) (o + 0x16c) + 5, pr->qty18,
-				    *(char**) 0x99ec10 +
+				    lpObjektePROT +
 				    pr->id * 0x41 + 1);
 				price = (int) fcn_0050bb50(pr->id,
 				    g_773d75);
@@ -776,7 +776,7 @@ next_auto:
 	cnt = 0;
 	sent = 0;
 	n = 0;
-	for (i = 0, pr = (Prod*) 0x100b0c0; i < *(int*) 0x100b0a8 && n < 3;
+	for (i = 0, pr = (Prod*) 0x100b0c0; i < g_100b0a8 && n < 3;
 	    i++, pr++) {
 		int* w = (int*) ((char*) pr + 0x14);
 
@@ -811,7 +811,7 @@ next_auto:
 			for (i = 0; i < 3; i++) {
 				if (v.m.ids[i] != 0) {
 					sprintf(v.line, (char*) 0x67e4d8,
-					    *(char**) 0x99ec10 +
+					    lpObjektePROT +
 					    v.m.ids[i] * 0x41 + 1);
 				}
 			}
@@ -819,7 +819,7 @@ next_auto:
 				if (v.m.ids[3 + i] != 0) {
 					sprintf(v.line, (char*) 0x67e4b8,
 					    v.m.f88[i],
-					    *(char**) 0x99ec10 +
+					    lpObjektePROT +
 					    v.m.ids[3 + i] * 0x41 + 1);
 				}
 			}

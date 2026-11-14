@@ -51,9 +51,9 @@ void __cdecl fcn_0043b990(char* a0)
 					*(int*) q = 0;
 				}
 				n = *(int*) (q + 0x18);
-				if (n != 0) {
+				if ((unsigned int) n > 0) {
 					m = *(int*) (q + 0xc);
-					if (m != 0) {
+					if ((unsigned int) m > 0) {
 						D3DXCreateMeshFVF(n, m, 0x6c0, 0x142,
 						    g_6b5de0, q);
 
@@ -92,9 +92,9 @@ void __cdecl fcn_0043b990(char* a0)
 					*(int*) srf2 = 0;
 				}
 				n = *(int*) (q + 0x1c);
-				if (n != 0) {
+				if ((unsigned int) n > 0) {
 					m = *(int*) (q + 0x10);
-					if (m != 0) {
+					if ((unsigned int) m > 0) {
 						D3DXCreateMeshFVF(n, m, 0x6c0, 0x142,
 						    g_6b5de0, srf2);
 

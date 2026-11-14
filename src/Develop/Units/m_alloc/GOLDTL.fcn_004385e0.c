@@ -1,7 +1,7 @@
 /* Builds one renderable particle per visible entity slot: allocates the
  * pool record, fills its transform and colour fields and links it into the
  * active list, or re-submits an already lit slot through the device. */
-
+extern int g_1052bac, g_1042a08; extern void* g_6b8068;
 void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
 void* __cdecl fcn_00436930(char* o, float* r);
 void __cdecl fcn_004372d0(unsigned char a, unsigned char b, int c, unsigned char d, unsigned char e);
@@ -60,8 +60,8 @@ unsigned char __cdecl fcn_004385e0(int a0)
 				p[10] = *(int*) (v17 + 0x28);
 				v17 = (int) p;
 			} else {
-				p[10] = *(int*) 0x6b8068;
-				*(int*) 0x6b8068 = (int) p;
+				p[10] = (int) g_6b8068;
+				g_6b8068 = p;
 			}
 		} else {
 			if (!flag) {
@@ -84,8 +84,8 @@ unsigned char __cdecl fcn_004385e0(int a0)
 		}
 	}
 tail:
-	*(int*) 0x1052bac += *(int*) (v1 + 0x310);
-	*(int*) 0x1042a08 += *(int*) (v1 + 0x314);
+	g_1052bac += *(int*) (v1 + 0x310);
+	g_1042a08 += *(int*) (v1 + 0x314);
 	(*(int*) 0x6b8054)++;
 	return 1;
 }

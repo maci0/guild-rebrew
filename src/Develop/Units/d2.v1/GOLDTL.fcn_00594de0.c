@@ -76,7 +76,7 @@ void __cdecl fcn_00594de0(int a0, int a1, int a2)
 			*(int*) (0x10161cc + w * 0x3cc) = 0x54;
 			fcn_0046f740(0, 0, 0x749, w);
 			if (i == 0) {
-				p->c[2] = fcn_0046f740(0xd, 5, 0x74a, p->c[1]);
+				((Panel*) g_779160)->c[2] = fcn_0046f740(0xd, 5, 0x74a, ((Panel*) g_779160)->c[1]);
 			} else {
 				p->c[2] = fcn_0046f740(0xd, 5, p->x0 + 0xdf, p->c[1]);
 			}

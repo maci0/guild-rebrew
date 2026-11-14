@@ -1,4 +1,7 @@
 #include "client_types.h"
+extern char* g_aed324;
+extern char* g_aed200;
+extern int g_1005760;
 
 #pragma pack(push, 1)
 typedef struct node99_save {
@@ -31,16 +34,16 @@ int __cdecl fcn_00521530(void* fp)
 			return 0;
 		}
 	}
-	if (*(unsigned int*) 0xaed324) {
-		index = (*(unsigned int*) 0xaed324 - 0x9bade0) / 0x99;
+	if ((unsigned int) g_aed324) {
+		index = ((unsigned int) g_aed324 - 0x9bade0) / 0x99;
 	} else {
 		index = 0xffffffff;
 	}
 	if (vfs_fwrite(&index, 4, 1, fp) <= 0) {
 		return 0;
 	}
-	if (*(unsigned int*) 0xaed200) {
-		index = (*(unsigned int*) 0xaed200 - 0x9bade0) / 0x99;
+	if ((unsigned int) g_aed200) {
+		index = ((unsigned int) g_aed200 - 0x9bade0) / 0x99;
 	} else {
 		index = 0xffffffff;
 	}
@@ -56,8 +59,8 @@ int __cdecl fcn_00521530(void* fp)
 			return 0;
 		}
 	}
-	if (*(unsigned int*) 0x1005760) {
-		index = (*(unsigned int*) 0x1005760 - 0xaed740) / 0x99;
+	if ((unsigned int) g_1005760) {
+		index = ((unsigned int) g_1005760 - 0xaed740) / 0x99;
 	} else {
 		index = 0xffffffff;
 	}

@@ -129,14 +129,14 @@ done:
             memcpy(text, str, strlen(str) + 1);
             *(int*) (e + 0xec) = fcn_004c30a0(-7, 0, text, 0, 0x7d0);
         }
-        *(int*) (e + 0x44) = g_7f4c00.a;
-        *(int*) (e + 0x48) = g_7f4c00.b;
-        *(int*) (e + 0x4c) = g_7f4c00.c;
-        *(short*) (e + 0x50) = g_7f4c00.d;
-        *(int*) (e + 0x52) = g_7f4c00.a;
-        *(int*) (e + 0x56) = g_7f4c00.b;
-        *(int*) (e + 0x5a) = g_7f4c00.c;
-        *(short*) (e + 0x5e) = g_7f4c00.d;
+        *(pos14_7f4c00*) (e + 0x44) = g_7f4c00;
+        *(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+
+
+
+
+
+
         if (*(unsigned char*) (e + 0xf0) & 4) {
             fcn_00500bb0(e + 0x52, 0x18, 0, 0);
         } else {

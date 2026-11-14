@@ -15,14 +15,14 @@ char* __cdecl fcn_00425ec0(char* obj, int mode, int size, char* name)
 	i = 0;
 	sz = 0;
 	slot = (int*) (*(char**) (obj + 0xc28) + 0x10);
-	while (*slot != 0) {
-		i++;
-		slot++;
-		if (i >= 8) {
-			fcn_00425bf0(obj, *(int*) (obj + 0x118) - 1, (char*) 0x67921c);
-			return rec;
-		}
-	}
+	do {
+		if (*slot == 0)
+			goto found;
+		i++; slot++;
+	} while (i < 8);
+	fcn_00425bf0(obj, *(int*) (obj + 0x118) - 1, (char*) 0x67921c);
+	return rec;
+found:
 	if (mode == 1) {
 		sz = 4;
 	}

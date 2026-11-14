@@ -61,8 +61,8 @@ void __cdecl fcn_00557460(char* dlg)
 		if (fcn_004c4450(*(int*) (dlg + 0xac)) == 1) {
 			p = fcn_004c4480(*(int*) (dlg + 0xac));
 			v = *(int*) ((char*) p + 4);
-			fcn_00500bb0((int*) (dlg + 0x52), 0, 1, 0);
 			*(int*) (dlg + 0xac) = v;
+			fcn_00500bb0((int*) (dlg + 0x52), 0, 1, 0);
 			*(int*) (dlg + 0x84) = fcn_004c5620(1, dlg);
 			return;
 		}
@@ -107,17 +107,17 @@ void __cdecl fcn_00557460(char* dlg)
 		}
 		io_FormatTextBuffer(text, 0x6a5f7c, (void*) hit);
 		e = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
-		if (e == 0) {
-			fcn_00500bb0((int*) (dlg + 0x52), 0, 1, 0);
-			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
+		if (e != 0) {
+			fcn_004c5c80(*(int*) (e + 4));
+			fcn_004c5da0(*(int*) (e + 4), *(int*) (hit + 1), -1, 0, 1,
+			    "Dunkle Ecke");
+			fcn_00500bb0((int*) (dlg + 0x52), 0, 5, 0);
+			*(int*) (dlg + 0xb8) = *(int*) (hit + 1);
+			*(int*) (dlg + 0x84) = fcn_004c5620(2, dlg);
 			return;
 		}
-		fcn_004c5c80(*(int*) (e + 4));
-		fcn_004c5da0(*(int*) (e + 4), *(int*) (hit + 1), -1, 0, 1,
-		    "Dunkle Ecke");
-		fcn_00500bb0((int*) (dlg + 0x52), 0, 5, 0);
-		*(int*) (dlg + 0xb8) = *(int*) (hit + 1);
-		*(int*) (dlg + 0x84) = fcn_004c5620(2, dlg);
+		fcn_00500bb0((int*) (dlg + 0x52), 0, 1, 0);
+		*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
 		return;
 	}
 	case 2: {
@@ -145,23 +145,21 @@ void __cdecl fcn_00557460(char* dlg)
 		*(int*) (dlg + 0xbc) = *(int*) (dlg + 0xbc) - 1;
 		f = gm_GetEntitySkill(g_7f4ca0
 		    + *(unsigned short*) (hit + 0x27) * 0x21c, 2);
-		if (*(int*) (dlg + 0xc0) >= 1) {
-			*(int*) (dlg + 0xc0) = *(int*) (dlg + 0xc0)
-			    + (fcn_0042e450() * 0.5f < f);
-		} else {
+		if (*(int*) (dlg + 0xc0) < 1) {
 			*(int*) (dlg + 0xc0) = *(int*) (dlg + 0xc0) + 1;
+		} else {
+			*(int*) (dlg + 0xc0) +=
+			    (fcn_0042e450() * 0.5f < f);
 		}
 		if (*(int*) (dlg + 0xc0) > 2) {
 			*(int*) (dlg + 0xbc) = 0;
 		}
 		fcn_005015e0((int*) &hit, 0, 0, *(int*) (dlg + 0xb0));
 		if (hit == 0) {
-			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
-			return;
+			goto fail;
 		}
 		if (*(short*) (hit + 0x27) == -1) {
-			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
-			return;
+			goto fail;
 		}
 		if (*(int*) (dlg + 0xbc) > 0) {
 			*(int*) (dlg + 0x84) = fcn_004c5620(1, dlg);
@@ -187,12 +185,10 @@ void __cdecl fcn_00557460(char* dlg)
 		fcn_00500bb0((int*) (dlg + 0x52), 0, 5, 0);
 		fcn_005015e0((int*) &hit, 0, 0, *(int*) (dlg + 0xb0));
 		if (hit == 0) {
-			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
-			return;
+			goto fail;
 		}
 		if (*(short*) (hit + 0x27) == -1) {
-			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
-			return;
+			goto fail;
 		}
 		e = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
 		if (e != 0 && fcn_00529670(e, (char*) hit) == 0) {
@@ -261,6 +257,7 @@ void __cdecl fcn_00557460(char* dlg)
 		    + *(unsigned short*) (hit + 0x27) * 0x21c + 4), -1, text, 0,
 		    0x5ec, *(int*) (hit + 1), *(int*) (dlg + 0xb4), 0,
 		    (char*) 0x6b5c60);
+fail:
 		*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
 		return;
 	}
@@ -277,12 +274,10 @@ void __cdecl fcn_00557460(char* dlg)
 
 		fcn_005015e0((int*) &hit, 0, 0, *(int*) (dlg + 0xb0));
 		if (hit == 0) {
-			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
-			return;
+			goto fail;
 		}
 		if (*(short*) (hit + 0x27) == -1) {
-			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
-			return;
+			goto fail;
 		}
 		*(int*) (dlg + 0xc0) = 0;
 		k = 3;
@@ -343,8 +338,7 @@ void __cdecl fcn_00557460(char* dlg)
 		    0x5ec, *(int*) (hit + 1), *(int*) (dlg + 0xb4), 0,
 		    (char*) 0x6b5c60);
 		*(pos14_7f4c00*) (dlg + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
-		*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
-		return;
+		goto fail;
 	}
 	}
 }

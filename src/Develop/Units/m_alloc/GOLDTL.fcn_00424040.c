@@ -34,11 +34,7 @@ int __cdecl fcn_00424040(char* name)
 		}
 		return r;
 	}
-	for (;;) {
-		e = *(char**) (g_6b7d68 + 0x3c);
-		if (e == 0) {
-			break;
-		}
+	for (e = *(char**) (g_6b7d68 + 0x3c); e != 0; e = *(char**) (g_6b7d68 + 0x3c)) {
 		if (fcn_00424040(e) != 0) {
 			return -1;
 		}

@@ -30,25 +30,25 @@ int __cdecl fcn_00495690(int a0)
 	for (i = 0; i < 0x20; i += 8) {
 		t = (char*) (0x1008570 + (unsigned int) b[0x131] * 0x94 + i);
 		if ((unsigned char) t[0] < 0xe)
-			fcn_004c4820((unsigned char) t[0], *(float*) (t + 4) * *(float*) 0x664158);
+			fcn_004c4820((unsigned char) t[0], *(float*) (t + 4) * -0.5f);
 	}
 	for (i = 0; i < 0x20; i += 8) {
 		t = (char*) (0x1008590 + (unsigned int) b[0x132] * 0x94 + i);
 		if ((unsigned char) t[-0x20] < 0xe)
-			fcn_004c4820((unsigned char) t[0], *(float*) (t + 4) * *(float*) 0x664158);
+			fcn_004c4820((unsigned char) t[0], *(float*) (t + 4) * -0.5f);
 	}
-	if (b[0x131] != b[0x132]) {
-		fcn_004c4820(0xd, 250.0f);
+	if (b[0x131] == b[0x132]) {
+		fcn_004c4820(0xd, 500.0f);
 		if (g_77261c && *(int*) (g_77261c + 4) == *(int*) (b + 0x210)) {
-			*(unsigned char*) &a0 = 1;
+			*(unsigned char*) &a0 = 2;
 			fcn_004c4510(b, *(int*) (b + 4));
 			fcn_004c4670(1, 1, 0x215, &a0);
 			fcn_004c5360();
 		}
 	} else {
-		fcn_004c4820(0xd, 500.0f);
+		fcn_004c4820(0xd, 250.0f);
 		if (g_77261c && *(int*) (g_77261c + 4) == *(int*) (b + 0x210)) {
-			*(unsigned char*) &a0 = 2;
+			*(unsigned char*) &a0 = 1;
 			fcn_004c4510(b, *(int*) (b + 4));
 			fcn_004c4670(1, 1, 0x215, &a0);
 			fcn_004c5360();

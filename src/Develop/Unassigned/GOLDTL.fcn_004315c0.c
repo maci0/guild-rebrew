@@ -27,7 +27,8 @@ char __cdecl fcn_004315c0(char* obj)
 			n = 0;
 			i = 0;
 			ent = elem + 0x40;
-			while (i < *(int*) (elem + 0x144)) {
+			do {
+				if (i >= *(int*) (elem + 0x144)) break;
 				for (node = *(char**) (obj + 0x200); node != 0; node = *(char**) (node + 0x1f4)) {
 					if (strcmp((char*) (*(int*) (node + 0x1ec) + 0xb4), ent) == 0) {
 						rec[n] = (char) i;
@@ -36,10 +37,7 @@ char __cdecl fcn_004315c0(char* obj)
 				}
 				ent += 0x40;
 				i++;
-				if (n >= 4) {
-					break;
-				}
-			}
+			} while (n < 4);
 		}
 		rec += 0x7c;
 	}

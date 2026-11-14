@@ -37,7 +37,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 	int score;
 	int a;
 	unsigned short b;
-	int found;
+	int found; int j;
 	char delta;
 
 	if (mode < 0 || mode > 5)
@@ -145,17 +145,17 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		} while ((int) p < (int) 0x85a0a2);
 		best = (unsigned char *) slots[0];
 		bv = gm_WalkEntityChain(*(unsigned short *) best);
-		for (i = 1; i < n; i++) {
-			v = gm_WalkEntityChain(*(unsigned short *) (unsigned char *) slots[i]);
+		for (j = 1; j < n; j++) {
+			v = gm_WalkEntityChain(*(unsigned short *) (unsigned char *) slots[j]);
 			if (v < bv) {
 				bv = v;
-				best = (unsigned char *) slots[i];
+				best = (unsigned char *) slots[j];
 			}
 		}
 		if (fcn_004a5e60(best, 4, 0xb07d43b4, 1, 0.0f, 100.0f, &found) == 0)
 			return;
 		r = (gm_RandomMod(5) & 0xffff) + 3;
-		score = (int) ((double) r * bv * 0.01f);
+		score = (int) ((float) r * bv * 0.01f);
 		gm_ResolveEntityById(&ent, 0, 0, found);
 		fcn_004c51a0(*(int *) (best + 4), -1, *(unsigned char *) &g_773d75, score);
 		io_FormatTextBuffer(t1, 0x1dff, *(unsigned short *) best, ent, *(unsigned short *) best, score);

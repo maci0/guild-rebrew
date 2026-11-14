@@ -34,7 +34,7 @@ void __cdecl fcn_004f6d60(unsigned int a0)
 	char* other;
 	unsigned short* found;
 	unsigned short* alloc;
-	unsigned char count;
+	int count;
 	int v;
 	int limit;
 	char* fill_dst;

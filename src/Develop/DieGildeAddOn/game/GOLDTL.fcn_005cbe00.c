@@ -11,8 +11,8 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 	int found;
 	int count;
 
+	count = 0;
 	if (limit == 0) {
-		count = 0;
 		if (src[0x72] & 0x400) {
 			rec = (int *) fcn_005463a0(1, 0, 0x47);
 			while (rec) {
@@ -66,7 +66,7 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 		                           0x18);
 		if (rec) {
 			dst = (int *) ((char *) out + count * 0x38);
-			for (;;) {
+			do {
 				if (count >= limit)
 					break;
 				found = gm_LookupEntityRecordById(rec[0x31]);
@@ -77,9 +77,7 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 					dst = (int *) ((char *) dst + 0x38);
 				}
 				rec = (int *) he_fn_Handlung();
-				if (!rec)
-					break;
-			}
+			} while (rec);
 		}
 		if (count > 0) {
 			n = count;

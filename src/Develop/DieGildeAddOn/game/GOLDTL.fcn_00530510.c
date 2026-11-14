@@ -2,17 +2,19 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl fcn_00502cd0(int, int, ...);
 extern char* g_item_def_table;
+extern char* g_7746c4; extern unsigned char* g_7746c8; extern int* g_7e2a9c;
+extern char* g_7e2aa0; extern char* g_7746c0; extern char g_7746f4;
 /* ADDRESS: GOLDTL 0x00530510 */
 void __cdecl fcn_00530510(void)
 {
 	unsigned short* entity;
 	unsigned short id; int mode; char *table;
 
-	mode = *(int*) 0x7746c4; entity = (unsigned short*) *(int*) 0x7746c8;
-	*(int*) 0x7e2a9c = 0;
-	*(int*) 0x7e2aa0 = 0;
+	mode = (int) g_7746c4; entity = (unsigned short*) g_7746c8;
+	g_7e2a9c = 0;
+	g_7e2aa0 = 0;
 	*(int*) 0x7ea3bc = 0;
-	*(int*) 0x7746c0 = 0;
+	g_7746c0 = 0;
 	if (mode != 0) {
 
 		if (entity == 0) {
@@ -28,7 +30,7 @@ void __cdecl fcn_00530510(void)
 	if (entity == 0) {
 		return;
 	}
-	*(unsigned char*) 0x7746f4 = 0;
+	g_7746f4 = 0;
 	entity = fcn_00502cd0(*(int*) ((char*) entity + 0x5d), 1, 5);
 	if (entity == 0) {
 		return;

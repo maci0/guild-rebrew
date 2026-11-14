@@ -76,6 +76,7 @@ void __cdecl fcn_004fbdd0(void)
 	}
 	min = sum0;
 	index = 0;
+	have = 0;
 	if (sum1 > min) {
 		index = 1;
 	}
@@ -88,7 +89,6 @@ void __cdecl fcn_004fbdd0(void)
 		index = 3;
 	}
 	min = min < sum2 ? min : sum2;
-	have = 0;
 	if (min > g_dbl_6628f0) {
 		table[0] = 0x1bf5;
 		table[1] = 0x1bfb;

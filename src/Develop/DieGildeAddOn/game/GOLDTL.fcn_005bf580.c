@@ -36,9 +36,9 @@ void __cdecl fcn_00472380(int, int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 int __cdecl fcn_00471f80(int);
-int __cdecl gm_WalkEntityChain(int);
+int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00526010(void*, int, int);
+int __cdecl fcn_00526010(void*, int, unsigned char);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5530(void*);
@@ -54,8 +54,6 @@ int __cdecl fcn_005bf580(char* rec)
 	int row;
 	unsigned char pkt[0xf8];
 	char buf[0x400];
-	unsigned char* tbl;
-	int slot;
 	int row2;
 	int v;
 	int w1;
@@ -96,8 +94,7 @@ int __cdecl fcn_005bf580(char* rec)
 	fcn_005340f0(g_772514);
 	d2_SetForm((int) h, 2);
 	row = fcn_0046fac0(0, 3, g_14b5e18, g_772514);
-	slot = (int) g_1015ea0 + row * 0x2f4;
-	*(int*) (slot + 0x6c) = 1;
+	*(int*) (g_1015ea0 + row * 0x2f4 + 0x6c) = 1;
 	*(int*) (g_1015ea0 + row * 0x2f4 + 0x18) = g_1015f40[g_772514].xc;
 	fcn_00472900(row, 0x54);
 	row2 = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 0x82, g_772514);
@@ -105,17 +102,13 @@ int __cdecl fcn_005bf580(char* rec)
 	fcn_00468bb0(row2, 3, g_14b5e0c, g_14b5e10, g_14b5e14);
 	d2_SetForm((int) h, 3);
 	fcn_00533a60(g_772514, 0, sel, 2, g_14b5e04, g_14b5e08);
-	tbl = (unsigned char*) (g_7f4ca0 + g_774970 * 0x21c);
 	while (fcn_005373e0((void*) fcn_005bf580, 0x677c7) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (*(unsigned short*) rec == 0xffff) {
+		if (g_14ce8e0 != 0 || *(unsigned short*) rec == 0xffff) {
 			g_774654 = 1;
 		} else {
 			v = fcn_00471f80(row2);
 			f = (float) v * 0.33f + 1.0f;
-			tbl = (unsigned char*) (g_7f4ca0 + g_774970 * 0x21c);
-			w1 = gm_WalkEntityChain(*(unsigned short*) tbl);
+			w1 = gm_WalkEntityChain(*(unsigned short*) (g_7f4ca0 + g_774970 * 0x21c));
 			f2 = (float) w1 * 0.005f;
 			w2 = gm_WalkEntityChain(*(unsigned short*) rec);
 			n = (int) ((float) w2 * 0.005f + f2);
@@ -126,17 +119,16 @@ int __cdecl fcn_005bf580(char* rec)
 			if (g_100f1dc != -1) {
 				if (g_67d370 == sel[0]
 					&& fcn_00526010(g_7f4ca0 + g_774970 * 0x21c, n, g_773d75) != 0) {
-					tbl = (unsigned char*) (g_7f4ca0 + g_774970 * 0x21c);
 					pkt[4] = 0x18;
-					*(int*) (pkt + 8) = *(int*) (tbl + 4);
+					*(int*) (pkt + 8) = *(int*) (g_7f4ca0 + g_774970 * 0x21c + 4);
 					*(int*) (pkt + 0xc) = -1;
 					pkt[0x36] = 2;
 					*(int*) (pkt + 0x70) = *(int*) (rec + 4);
-					ea = *(int*) (tbl + 0x16c);
+					ea = *(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x170);
 					*(int*) (pkt + 0x58) = ea != 0 ? *(int*) (ea + 1) : -1;
-					*(int*) (pkt + 0x94) = n;
+					*(int*) (pkt + 0x90) = n;
 					fcn_004c4eb0("spionage");
-					*(int*) (pkt + 0x9c) = fcn_00471f80(row2);
+					*(int*) (pkt + 0x94) = fcn_00471f80(row2);
 					fcn_004c5530(pkt);
 					fcn_004c4ef0("spionage");
 					io_FormatTextBuffer(buf, 0x42bf, *(unsigned short*) rec);

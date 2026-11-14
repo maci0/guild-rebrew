@@ -120,7 +120,7 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 	memset(g_11cd000, 0, 0x168000);
 	memset(g_14a5320, 0, 0x12000);
 	memset(g_149d120, 0, 0x3a00);
-	memset(g_11bb000, 0xff, 0x12000);
+	for (p = (char*) g_11bb000; p < (char*) (g_11bb000 + 0x4800); p += 4) *(int*) p = 0xff;
 
 	g_6b7f98 = 0;
 	g_6b7fa4 = 0;

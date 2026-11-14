@@ -30,7 +30,8 @@ void __cdecl fcn_005109f0(int a0)
 			strcpy(name, (char*) fcn_0064d1a0(a0, 0x5f) + 1);
 			i = 1;
 			p = (char*) 0x868354;
-			while (*p != 0) {
+			do {
+				if (*p == 0) break;
 				if (strcmpi(name, p) == 0) {
 					*(int*) (v + 0x65) = i;
 					strcpy((char*) (v + 5), (char*) (0x868060 + i * 0x2f4));
@@ -38,10 +39,7 @@ void __cdecl fcn_005109f0(int a0)
 				}
 				p += 0x2f4;
 				i++;
-				if (p >= (char*) 0x868c30) {
-					break;
-				}
-			}
+			} while ((int) p < 0x868c30);
 		} else {
 			v = gm_AllocGebaeude(id, 0xffff);
 		}

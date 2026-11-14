@@ -68,11 +68,12 @@ int __cdecl fcn_00492e50(Cmd92e50* a, char* b)
 		if (n >= 6) {
 			return 2;
 		}
-		if (n != 0) {
-			t = ((1.0f - (float) count * 0.2f) * 0.25f + 1.0f) * ((float) n * 0.16666667f);
-			if (gm_RandomFloat01() < t) {
-				return 2;
-			}
+		if (n == 0) {
+			return 3;
+		}
+		t = ((1.0f - (float) count * 0.2f) * 0.25f + 1.0f) * ((float) n * 0.16666667f);
+		if (t > gm_RandomFloat01()) {
+			return 2;
 		}
 		return 3;
 	case 3:
@@ -81,10 +82,10 @@ int __cdecl fcn_00492e50(Cmd92e50* a, char* b)
 			return 3;
 		}
 		n = 6 - count;
-		if (!(v - (float) v2 * 3.5f <= (float) n)) {
-			return 4;
+		if ((float) n >= v - (float) v2 * 3.5f) {
+			return 3;
 		}
-		return 3;
+		return 4;
 	}
 	return 0;
 }

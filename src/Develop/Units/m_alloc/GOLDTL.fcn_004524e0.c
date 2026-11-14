@@ -27,7 +27,7 @@ char* __cdecl fcn_004524e0(unsigned int a0, char* a1, int a2, float a3, int a4, 
 			*(float*) (s + 0xe4) = a3;
 			*(int*) (s + 0xe0) = (v2 - g_104049c) / 0x70;
 			*(int*) (s + 0x310) = a5;
-			*(char**) (s + 0x28) = m_alloc(a0 * 0x54, (char*) 0x67bc78);
+			*(char**) (s + 0x28) = m_alloc(*(unsigned int*) (s + 0xd8) * 0x54, (char*) 0x67bc78);
 			*(char**) (s + 0x2c) = m_alloc(*(unsigned int*) (s + 0xd8) * 4, (char*) 0x67bc64);
 			*(char**) (s + 0x30) = m_alloc(*(unsigned int*) (s + 0xd8) * 4, (char*) 0x67bc50);
 			*(int*) (s + 0) = 0;

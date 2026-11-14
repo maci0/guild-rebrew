@@ -11,6 +11,7 @@ void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(char*, int);
 char* __cdecl io_AppendText(char*, int);
 int __cdecl fcn_005373e0(char*, int);
+typedef struct { int i[0x2f4 / 4]; } Row_5845e0;
 
 /* ADDRESS: GOLDTL 0x005845e0 */
 int __cdecl fcn_005845e0(void)
@@ -39,11 +40,9 @@ int __cdecl fcn_005845e0(void)
 		ids[i] = (int) item;
 		index = (int) item;
 		base = g_1015ea0;
-		index = index * 0x40 - index;
-		index = index * 0xc;
-		*(int*) (g_1015ea0 + index + 0x58) = 1;
-		*(int*) (g_1015ea0 + index + 0x38) = g_6a81dc[i];
-		*(int*) (g_1015ea0 + index + 0x1d0) &= -3;
+		((Row_5845e0*) g_1015ea0)[index].i[0x58 / 4] = 1;
+		((Row_5845e0*) g_1015ea0)[index].i[0x38 / 4] = g_6a81dc[i];
+		((Row_5845e0*) g_1015ea0)[index].i[0x1d0 / 4] &= -3;
 	}
 	item = io_AppendText((char*) 0x681140, 0x3f20);
 	result = (int) fcn_00472250(menu, 2, item);

@@ -100,9 +100,9 @@ int __cdecl fcn_00455910(int a0, int a1, float* a2)
 		}
 		return a1;
 	}
-	for (i = 0; i < 8; i++) {
+	for (i = 1; i <= 8; i++) {
 		rec = *(int*) (a1 + 0x318);
-		p = (float*) (a1 + i * 0x50);
+		p = (float*) (a1 + (i - 1) * 0x50);
 		p[0] = *(float*) (rec + 0x1fc + i * 0xc) * a2[4] + *(float*) (rec + 0x200 + i * 0xc) * a2[8] + *(float*) (rec + 0x1f8 + i * 0xc) * a2[0] + a2[0xc];
 		rec = *(int*) (a1 + 0x318);
 		p[1] = *(float*) (rec + 0x1fc + i * 0xc) * a2[5] + *(float*) (rec + 0x200 + i * 0xc) * a2[9] + *(float*) (rec + 0x1f8 + i * 0xc) * a2[1] + a2[0xd];

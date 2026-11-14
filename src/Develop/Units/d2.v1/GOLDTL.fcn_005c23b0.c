@@ -17,7 +17,7 @@ typedef struct {
 } Msg5c23b0;
 
 extern unsigned char g_773d75;
-extern int g_100f1dc;
+extern int g_100f1dc; extern int g_774654; extern int g_14ce8e0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca4[];
 
@@ -64,10 +64,10 @@ void __cdecl fcn_005c23b0(char* e)
 	do {
 		ret = gm_SearchTable67(id);
 		if ((*(unsigned char*) (e + 0x5b) & 4) || ret == 0) {
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 		}
-		if (*(int*) 0x14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 != 0) {
+			g_774654 = 1;
 		}
 		if (g_100f1dc == 2) {
 			memset(&m, 0, sizeof(m));
@@ -79,10 +79,10 @@ void __cdecl fcn_005c23b0(char* e)
 			m.extra = fcn_0050b750(fcn_00471f80(h), g_773d75);
 			fcn_004c5530(&m);
 			fcn_00526120(*(int*) 0x14ab238, 0);
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 		}
 		else if (g_100f1dc == 1) {
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 		}
 	} while (fcn_005373e0((void*) fcn_005c23b0, 0x677c7) != 0);
 	fcn_00471e30(win);

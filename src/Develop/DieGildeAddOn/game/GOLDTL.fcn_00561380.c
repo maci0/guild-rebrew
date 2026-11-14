@@ -284,7 +284,7 @@ void __cdecl fcn_00561380(void *a0)
 
 			if (*(unsigned char *)(p + 0xc2) >= 1)
 				goto label_56211d;
-			v10 = g_6b8010;
+
 			{
 			char names[3][64] = {"dummy_TUER", "dummy_FAHNE", "dummy_RAUCH_0"};
 			unsigned char *r;
@@ -302,6 +302,7 @@ void __cdecl fcn_00561380(void *a0)
 			pos[6] = 38.0f;
 			*(int *)(pos + 7) = 0;
 			v24 = 1.0f;
+			v10 = g_6b8010;
 			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
 			if (r == 0)
 				goto label_561d51;

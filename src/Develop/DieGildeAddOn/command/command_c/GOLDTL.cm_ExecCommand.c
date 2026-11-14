@@ -4,6 +4,7 @@ extern char* g_aed324;
 extern char* g_aed200;
 extern int g_14cbcb0;
 extern int g_774954;
+extern int g_aecde0;
 extern cell10_fb5760 g_fb5760[0x8000];
 
 int __cdecl sprintf(char*, const char*, ...);
@@ -95,7 +96,7 @@ int __cdecl cm_ExecCommand(void)
 						seq = *(int*) (node + 8);
 						if (seq == lastreq + 1) {
 							*(int*) 0xaed31c = seq;
-						} else if (seq == *(int*) 0xaecde0) {
+						} else if (seq == g_aecde0) {
 							sprintf(buf1,
 								"cm_ExecCommand(): Received a Command with Count == cm_LastSyncCount, cmd->Count is %li, LastRequCnt is %li",
 								seq, lastreq);

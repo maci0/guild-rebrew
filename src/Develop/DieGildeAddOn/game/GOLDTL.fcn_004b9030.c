@@ -57,8 +57,8 @@ int __cdecl fcn_004b9030(int *msg)
 			gm_ResolveEntityById((void **) (&b), 0, 0, *(int *) (e + 0xb0));
 			if ((a != 0 && gm_CheckEntityType(a) != 0) || (b != 0 && gm_CheckEntityType(b) != 0)) {
 				if ((b != 0 && a != 0 && *b == 0x47) || *a == 0x47) {
-					recs[n] = r;
 					ents[n] = e;
+					recs[n] = r;
 					n++;
 				}
 			}

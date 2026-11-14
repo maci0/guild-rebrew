@@ -30,7 +30,7 @@ void __cdecl fcn_00500a40(void)
 	i = 0;
 	do {
 		if (*(short*) p != -1
-		    && *(unsigned char*) (p + 8) != 0
+		    && *(unsigned char*) (p + 8) > 0
 		    && *(unsigned char*) (p + 2) < 0xa) {
 			*(int*) &g_99f620[0] += 1;
 			idx = (int) MAX(MIN(fcn_00505e30(i) * 0.1f, 7.0f), g_6628a8);
@@ -40,8 +40,8 @@ void __cdecl fcn_00500a40(void)
 			g_99f648[idx] += fcn_004fef80(p);
 			g_99f668[idx] += fcn_004feff0(p);
 		}
-		i++;
 		p += 0x21c;
+		i++;
 	} while ((int) p < 0x85a0a0);
 	for (p = g_99f620 + 0x48; (int) p < (int) (g_99f620 + 0x68); p += 4) {
 		*(float*) (p - 0x20) = (*(float*) (p - 0x20) / *(float*) p) * g_662cf8;

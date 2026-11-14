@@ -22,28 +22,27 @@ void __cdecl fcn_00476a50(int x, int y, Surf* s, unsigned char* dst)
 	switch (s->bpp) {
 	case 15:
 	case 16:
-		dst[0] = (unsigned char) y;
-		dst[1] = (unsigned char) y;
-		dst[2] = (unsigned char) y;
+		c0 = (unsigned char) y;
+		c1 = (unsigned char) y;
+		c2 = (unsigned char) y;
 		break;
 	case 24:
 		off = (s->pitch * y + x) * n;
 		b = s->bits;
 		c0 = b[off]; c1 = b[off + 1]; c2 = b[off + 2];
-		dst[0] = c0; dst[1] = c1; dst[2] = c2;
 
 		break;
 	case 32:
 		off = s->pitch * y + x;
 		b = s->bits;
 		c0 = b[off * 4 + 2]; c1 = b[off * 4 + 1]; c2 = b[off * 4];
-		dst[0] = c0; dst[1] = c1; dst[2] = c2;
 
 		break;
 	default:
-		dst[0] = (unsigned char) y;
-		dst[1] = (unsigned char) y;
-		dst[2] = (unsigned char) y;
+		c0 = (unsigned char) y;
+		c1 = (unsigned char) y;
+		c2 = (unsigned char) y;
 		break;
 	}
+	dst[0] = c0; dst[1] = c1; dst[2] = c2;
 }

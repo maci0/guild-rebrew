@@ -28,9 +28,9 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_0050d320(char* e, unsigned char flag);
 int __cdecl fcn_00495400(int kind, int id, int n, Msg* b1, Msg* b2);
-int __cdecl fcn_00502cd0(int a, int b, int c, int d);
+int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl fcn_004f4830(int size, Stat* st);
-int __cdecl gm_RandomMod(int a);
+unsigned short __cdecl gm_RandomMod(int a);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 void __cdecl gm_ResolveEntityById(int* out, int a, int b, int id);
 int __cdecl fcn_00579640(char* obj, char* e);
@@ -60,12 +60,12 @@ int __cdecl fcn_00499090(int who, char* e, int arg, Msg* o1, Msg* o2)
 
 	v8 = fcn_0050d320(e, g_773d75);
 	if (arg != 0) {
-		return 0;
+		goto fail;
 	}
-	if (*(int*)(e + 0x170) == 0) {
-		if (e[2] == 3) {
-			goto flag_check;
-		}
+	if (*(int*)(e + 0x170) == 0 && e[2] != 3) {
+
+
+
 		b1.kind = 0;
 		b1.a = 0;
 		b1.b = 0;
@@ -78,7 +78,7 @@ int __cdecl fcn_00499090(int who, char* e, int arg, Msg* o1, Msg* o2)
 	if (e[2] == 3) {
 		goto flag_check;
 	}
-	if (fcn_00502cd0(*(int*)(*(int*)(e + 0x170) + 0x5d), 2, 6, 0x14) != 0) {
+	if (fcn_00502cd0(*(int*)(*(int*)(e + 0x170) + 0x5d), 2, 6, 0, 0x14) != 0) {
 		goto find_target;
 	}
 	b1.kind = 2;
@@ -99,7 +99,7 @@ check_call:
 
 flag_check:
 	if ((e[0x1e8] & 2) == 0) {
-		return 0;
+fail:	return 0;
 	}
 find_target:
 	fcn_004f4830(0x18, &st);
@@ -107,7 +107,7 @@ find_target:
 		return 0;
 	}
 	if (o1->kind != 0) {
-		return 0;
+		goto fail;
 	}
 	id = -1;
 	ff.mask = 0x344015;
@@ -118,20 +118,20 @@ find_target:
 			goto have_id;
 		}
 	}
-	v8 = gm_RandomMod(0x20) & 0xffff;
-	if (fcn_004a5e60(e, 6, ff, 0, (float)v8 + 19.0f, &id) == 0) {
-		return 0;
+	if (fcn_004a5e60(e, 6, ff, 0,
+		(float)gm_RandomMod(0x20) + 19.0f, &id) == 0) {
+		goto fail;
 	}
 have_id:
 	gm_ResolveEntityById(&v0, 0, 0, id);
 	if (v0 == 0) {
-		return 0;
+		goto fail;
 	}
 	if (*(unsigned short*)(v0 + 0x27) == 0xffff) {
-		return 0;
+		goto fail;
 	}
 	if (fcn_00579640((char*)((unsigned int)*(unsigned short*)(v0 + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
-		return 0;
+		goto fail;
 	}
 	memset(buf, 0, 0x220);
 	buf[0] = 1;
@@ -144,7 +144,7 @@ have_id:
 		v4 = v4 / 2;
 	}
 	if ((float)v8 * 0.44f < (float)v4) {
-		return 0;
+		goto fail;
 	}
 	if (fcn_00507e70(e, (char*)((unsigned int)*(unsigned short*)(v0 + 0x27) * 0x21c + 0x7f4ca0), 2) + gm_RandomFloat01() < 1.0f) {
 		b1.kind = 0xe;
@@ -163,16 +163,16 @@ have_id:
 		return r;
 	}
 	if (fcn_0055c0f0((char*)((unsigned int)*(unsigned short*)(v0 + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
-		return 0;
+		goto fail;
 	}
 	if (fcn_0055c0a0((char*)((unsigned int)*(unsigned short*)(v0 + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
-		return 0;
+		goto fail;
 	}
 	if (fcn_0055c050((int*)v0) == 0) {
-		return 0;
+		goto fail;
 	}
 	if (fcn_00579640((char*)((unsigned int)*(unsigned short*)(v0 + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
-		return 0;
+		goto fail;
 	}
 	o1->kind = 4;
 	o1->a = *(int*)(v0 + 1);

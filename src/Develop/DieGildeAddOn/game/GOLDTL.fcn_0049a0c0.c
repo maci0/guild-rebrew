@@ -56,9 +56,6 @@ int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
 	Msg a;
 	Msg b;
 	Rec18 q;
-	int mask;
-	int idx1;
-	int idx2; unsigned short picked;
 	int r;
 	int i;
 	int k;
@@ -127,11 +124,10 @@ int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
 		a.a = ((Ent*) e)->x4;
 		a.b = 1;
 		r = fcn_00495400(k, ((Ent*) e)->id, 2, &b, &a);
-		if (r == 0) {
-			return 0;
+		if (r != 0) {
+			*out1 = b;
+			*out2 = a;
 		}
-		*out1 = b;
-		*out2 = a;
 		return r;
 	}
 pick_used:
@@ -147,18 +143,20 @@ pick_used:
 	b.b = -1;
 	b.d = 0x1c;
 	if (i == 9) {
-		mask = (2 - (((Ent*) e)->x9 != 0)) | 0xf00500;
-		idx1 = gm_RandomMod(0x20) & 0xffff;
-		if (fcn_004a5340(e, 1, &mask, 10.0f, idx1 + *(float*) 0x662c98, &picked) == 0) {
+		unsigned short picked;
+		int mask;
+		mask = (((Ent*) e)->x9 ? 1 : 2) | 0xf00500;
+		if (fcn_004a5340(e, 1, &mask, 10.0f, (gm_RandomMod(0x20) & 0xffff) + 40.0f, &picked) == 0) {
 			return 0;
 		}
 		b.type = 7;
 		b.a = ((Ent*) g_7f4ca0)[picked].x4;
 		b.b = -1;
 	} else if (i == 10) {
-		mask = (2 - (((Ent*) e)->x9 != 1)) | 0xf00500;
-		idx2 = gm_RandomMod(0x20) & 0xffff;
-		if (fcn_004a5340(e, 1, &mask, 10.0f, idx2 + *(float*) 0x662c98, &picked) == 0) {
+		int mask;
+		unsigned short picked;
+		mask = (((Ent*) e)->x9 == 1 ? 2 : 1) | 0xf00500;
+		if (fcn_004a5340(e, 1, &mask, 10.0f, (gm_RandomMod(0x20) & 0xffff) + 40.0f, &picked) == 0) {
 			return 0;
 		}
 		b.type = 7;
@@ -166,11 +164,10 @@ pick_used:
 		b.b = -1;
 	} else if (i == 8) {
 		r = fcn_00495400(k, ((Ent*) e)->id, 3, &a, &b);
-		if (r == 0) {
-			return 0;
+		if (r != 0) {
+			*out1 = a;
+			*out2 = b;
 		}
-		*out1 = a;
-		*out2 = b;
 		return r;
 	}
 	*out1 = a;

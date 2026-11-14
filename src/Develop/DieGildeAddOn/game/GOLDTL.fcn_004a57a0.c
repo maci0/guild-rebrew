@@ -58,7 +58,7 @@ unsigned int __cdecl fcn_004a57a0(unsigned short *e, int a1, int n, char *src, f
 	count = 0x300;
 	found = 0;
 	i = gm_RandomMod(0x300) & 0xffff;
-	for (;;) {
+	do {
 		if (count == 0) {
 			if (found) {
 				return 1;
@@ -73,9 +73,7 @@ unsigned int __cdecl fcn_004a57a0(unsigned short *e, int a1, int n, char *src, f
 		}
 		count--;
 		i = (i + step) % 0x300;
-		if (found) {
-			return 1;
-		}
-	}
+	} while (!found);
+	return 1;
 	}
 }

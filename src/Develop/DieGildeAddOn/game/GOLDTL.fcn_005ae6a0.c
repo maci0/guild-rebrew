@@ -1,3 +1,6 @@
+#include "client_dialog_state.h"
+extern int g_14ce8e0;
+extern int g_67d370;
 /* Kidnapping message handler: validates the request against the current
  * location slot, builds and posts the stealing-guild packet, and pumps the
  * message queue until the dialog reports no further action. */
@@ -71,12 +74,12 @@ int __cdecl fcn_005ae6a0(void* a0)
 	v9 = fcn_00472250(v8, 1, v9 + 1);
 	*(int*) &g_100f1dc = -1;
 	do {
-		if (*(int*) 0x14ce8e0 != 0)
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 != 0)
+			g_774654 = 1;
 		if (*(int*) &g_100f1dc != -1) {
-			if (*(int*) 0x67d370 != v10) {
-				if (*(int*) 0x67d370 == v9)
-					*(int*) 0x774654 = 1;
+			if (g_67d370 != v10) {
+				if (g_67d370 == v9)
+					g_774654 = 1;
 			} else {
 				for (i = 0; i < 0x3e; i++)
 					((int*) msg)[i] = 0;
@@ -104,7 +107,7 @@ int __cdecl fcn_005ae6a0(void* a0)
 					fcn_004c35f0();
 					sv_ClearObjectSelection();
 					res = 1;
-					*(int*) 0x774654 = 3;
+					g_774654 = 3;
 				} else {
 					fcn_00526120((void*) *(int*) 0x14abaac, 0);
 					*(int*) &g_100f1dc = -1;

@@ -13,13 +13,13 @@ char* __cdecl fcn_004ffff0(int a0, int a1)
 	char* e;
 	char* best;
 	char* list[0x10];
-	float p1[3];
-	float p2[3];
+	float p1[4];
+	float p2[4];
 	float bestd;
 	float d;
 	int n;
 	QUERY_LIMIT selected, current;
-
+	int best_n;
 
 
 
@@ -29,7 +29,7 @@ char* __cdecl fcn_004ffff0(int a0, int a1)
 	fcn_004fac80(1, selected.word);
 	e = gm_StartFilteredEntitySearch(1, 5, 1);
 	if (e != 0) {
-
+		best_n = selected.word[0];
 		do {
 			fcn_004fac80(*(unsigned char*) e, current.word);
 			n = current.word[0];
@@ -43,19 +43,19 @@ char* __cdecl fcn_004ffff0(int a0, int a1)
 					p1[2] = p1[2] - p2[2];
 					d = sqrt(p1[0] * p1[0] + p1[1] * p1[1] + p1[2] * p1[2]);
 					if (d < bestd) {
-						selected = current;
-
+						selected.word[1] = current.word[1];
+						best_n = n;
 						best = e;
 						bestd = d;
 					}
 				} else if (best != 0) {
 					if ((float) *(unsigned char*) (e + 0x65) / (float) (n & 0xffff)
-					    < (float) *(unsigned char*) (best + 0x65) / (float) (selected.word[0] & 0xffff)) {
+					    < (float) *(unsigned char*) (best + 0x65) / (float) (best_n & 0xffff)) {
 						best = e;
 					}
 				} else {
-					selected = current;
-
+					selected.word[1] = current.word[1];
+					best_n = n;
 					best = e;
 				}
 			}

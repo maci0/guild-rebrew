@@ -1,5 +1,6 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/game_data.h"
+extern unsigned char* g_entity_ptr;
 int __cdecl fcn_00502cd0(int, ...);
 int __cdecl fcn_00503d10(int);
 int __cdecl fcn_0050dfd0(int, int);
@@ -24,12 +25,12 @@ int __cdecl fcn_00503a70(int a0)
 	float f;
 	int tmp[6];
 
-	if (!*(int*) 0x868050) {
+	if (!lpGebaeudePROT) {
 		return 1;
 	}
 	*(int*) 0x86805c = 0;
 	n = 0x58;
-	p = (char*) *(int*) 0x90e094;
+	p = (char*) g_entity_ptr;
 	do {
 		v5 = a0;
 		if (*p) {

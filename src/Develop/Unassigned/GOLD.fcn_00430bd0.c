@@ -12,6 +12,7 @@ unsigned int __cdecl fcn_00430bd0(void* buffer, unsigned int size,
     unsigned int bytes;
     unsigned int result;
     unsigned char flags;
+    unsigned char memory;
     void* copySrc;
     char text[0x100];
 
@@ -22,13 +23,14 @@ unsigned int __cdecl fcn_00430bd0(void* buffer, unsigned int size,
     if (!(flags & 1) || (!*(void**) (file + 0x100) && !(flags & 0x20)))
         return result;
     bytes = size * count;
-    if ((flags & 0x20) && !(flags & 8) && *(unsigned int*) (file + 0x104) < bytes)
+    memory = (flags >> 5) & 1;
+    if (memory && !(flags & 8) && *(unsigned int*) (file + 0x104) < bytes)
         bytes = *(unsigned int*) (file + 0x104);
     if (!bytes)
         return 0;
     if (!buffer)
         return result;
-    if (flags & 0x20) {
+    if (memory) {
         if (flags & 8) {
             *(void**) (file + 0x10c) = buffer;
             *(unsigned int*) (file + 0x110) = bytes;

@@ -138,10 +138,8 @@ void __cdecl fcn_0058a6b0(char *a0)
                         *(int *) (msg + 0x58) = tmp;
                     }
                     tmp = fcn_004c5530(msg);
-                    if (tmp != -1) {
-                        while (fcn_004c4450(tmp) == 0)
-                            fcn_005373e0(0, 0x20007);
-                    }
+                    while (tmp != -1 && fcn_004c4450(tmp) == 0)
+                        fcn_005373e0(0, 0x20007);
                     fcn_004c3030(-7, 0, "KOMMENTARE", -1);
                     g_774654 = 1;
                 }

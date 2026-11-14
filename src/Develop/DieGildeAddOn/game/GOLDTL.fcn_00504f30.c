@@ -30,7 +30,7 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 	int n;
 	int j;
 	int i;
-	unsigned char c;
+	int lvl;
 
 	type = gm_GetBuildingTypeCategory(a0);
 	rec = &((Loc*) lpGebaeudePROT)[a0];
@@ -44,11 +44,10 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 	}
 	if (type == 1) {
 		for (i = 0; i < 6; i++) {
-			c = rec->list[i];
-			if (c == 0) {
+			if (rec->list[i] == 0) {
 				break;
 			}
-			if (loc == c) {
+			if (loc == rec->list[i]) {
 				return 1;
 			}
 		}
@@ -56,11 +55,10 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 		for (j = 0; j < n; j++) {
 			rb = (unsigned char*) &((Loc*) lpGebaeudePROT)[arr[j]];
 			for (i = 0; i < 6; i++) {
-				c = rb[0x223 + i];
-				if (c == 0) {
+				if (rb[0x223 + i] == 0) {
 					break;
 				}
-				if (loc == c) {
+				if (loc == rb[0x223 + i]) {
 					return 2;
 				}
 			}
@@ -82,28 +80,25 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 		return 0;
 	}
 	if (type == 7) {
-		if (rec->kind != 0x13) {
-			return 0;
-		}
-		for (i = 0; i < 6; i++) {
-			c = rec->list[i];
-			if (c == 0) {
-				break;
-			}
-			if (loc == c) {
-				return 1;
-			}
-		}
-		n = fcn_00504ef0(0x13, arr);
-		for (j = 0; j < n; j++) {
-			rb = (unsigned char*) &((Loc*) lpGebaeudePROT)[arr[j]];
+		if (rec->kind == 0x13) {
 			for (i = 0; i < 6; i++) {
-				c = rb[0x223 + i];
-				if (c == 0) {
+				if (rec->list[i] == 0) {
 					break;
 				}
-				if (loc == c) {
-					return 2;
+				if (loc == rec->list[i]) {
+					return 1;
+				}
+			}
+			n = fcn_00504ef0(0x13, arr);
+			for (j = 0; j < n; j++) {
+				rb = (unsigned char*) &((Loc*) lpGebaeudePROT)[arr[j]];
+				for (i = 0; i < 6; i++) {
+					if (rb[0x223 + i] == 0) {
+						break;
+					}
+					if (loc == rb[0x223 + i]) {
+						return 2;
+					}
 				}
 			}
 		}
@@ -111,41 +106,42 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 	}
 	if (type == 4) {
 		for (i = 0; i < 6; i++) {
-			c = rec->list[i];
-			if (c == 0) {
+			if (rec->list[i] == 0) {
 				break;
 			}
-			if (loc == c) {
+			if (loc == rec->list[i]) {
 				return 1;
 			}
 		}
 		return 0;
 	}
 	if (type == 6) {
-		if ((unsigned int) (a0 - 4) <= 0x49) {
-			switch (a0) {
-			case 4:
-				return (rb[0x0d] < 1) + 1;
-			case 5:
-				return (rb[0x0d] < 3) + 1;
-			case 6:
-			case 75:
-			case 76:
-			case 77:
-				return (rb[0x0d] < 4) + 1;
-			case 7:
-				return (rb[0x0d] < 5) + 1;
-			}
+		lvl = 0;
+		switch (a0) {
+		case 4:
+			lvl = 1;
+			break;
+		case 5:
+			lvl = 3;
+			break;
+		case 6:
+		case 75:
+		case 76:
+		case 77:
+			lvl = 4;
+			break;
+		case 7:
+			lvl = 5;
+			break;
 		}
-		return 1;
+		return (rb[0x0d] < lvl) + 1;
 	}
 	if (type == 8) {
 		for (i = 0; i < 6; i++) {
-			c = rec->list[i];
-			if (c == 0) {
+			if (rec->list[i] == 0) {
 				break;
 			}
-			if (loc == c) {
+			if (loc == rec->list[i]) {
 				return 1;
 			}
 		}
@@ -153,11 +149,10 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 		for (j = 0; j < n; j++) {
 			rb = (unsigned char*) &((Loc*) lpGebaeudePROT)[arr[j]];
 			for (i = 0; i < 6; i++) {
-				c = rb[0x223 + i];
-				if (c == 0) {
+				if (rb[0x223 + i] == 0) {
 					break;
 				}
-				if (loc == c) {
+				if (loc == rb[0x223 + i]) {
 					return 2;
 				}
 			}

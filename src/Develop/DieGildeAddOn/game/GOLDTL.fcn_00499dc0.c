@@ -1,4 +1,4 @@
-// SIZE 0x18
+#include <string.h>
 typedef struct {
 	unsigned char valid;
 	char pad1[3];
@@ -57,19 +57,19 @@ int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)
 		kind = 0x1c;
 	}
 	if (busy != 0) {
-		return 0;
+		goto failed;
 	}
 	if (a1 != 0) {
-		return 0;
+		goto failed;
 	}
 	f.mask = 0x90010;
 	f.b = 0;
 	if (fcn_004a5e60(e, 4, f, 0, 100.0f, &found) == 0) {
-		return 0;
+		goto failed;
 	}
 	gm_ResolveEntityById(&p, 0, 0, found);
 	if (p == 0) {
-		return 0;
+		goto failed;
 	}
 	count = 0;
 	sum = 0;
@@ -83,18 +83,18 @@ int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)
 	} while (q < (char*) 0x85a265);
 	roll = (unsigned short) gm_RandomMod(4);
 	if ((float) roll + (float) sum / (float) count < 6.0f) {
-		return 0;
+		goto failed;
 	}
+	memset(&slot, 0, sizeof(slot));
 	slot.id = 0x161;
-	slot.a = 0;
-	slot.b = 0;
-	slot.item = 0;
+
+
 	fcn_004a51d0(e, 1, &slot, &cnt);
 	if (cnt.total == 6 && cnt.free == 0) {
-		return 0;
+		goto failed;
 	}
 	if (cnt.blocked == 1) {
-		return 0;
+		goto failed;
 	}
 	if (cnt.total < 6 && cnt.free == 0) {
 		a.valid = 2;
@@ -112,7 +112,7 @@ int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)
 		return r;
 	}
 	if (cnt.free == 0) {
-		return 0;
+		goto failed;
 	}
 	a.valid = 1;
 	a.v[0] = slot.b;
@@ -124,4 +124,6 @@ int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)
 	*out1 = a;
 	*out2 = b;
 	return 0x1b;
+failed:
+	return 0;
 }

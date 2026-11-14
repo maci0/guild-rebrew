@@ -71,10 +71,10 @@ void __cdecl fcn_0058a250(int a0)
 		fcn_00532ef0();
 		return;
 	}
-	n = fcn_004e99c0(*(unsigned char*) (v6 + 0x166)) / 3;
-	ids[0] = n + 5;
-	ids[1] = n + 7;
-	ids[2] = n + 10;
+	n = fcn_004e99c0(*(unsigned char*) (v6 + 0x166)) / 3 + 2;
+	ids[0] = n + 3;
+	ids[1] = n + 5;
+	ids[2] = n + 8;
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
@@ -97,7 +97,7 @@ void __cdecl fcn_0058a250(int a0)
 		v16 = fcn_00471f80(elem);
 		d2_SetForm(dlg, 1);
 		io_AppendText(0x6811b0);
-		io_AppendText(0x3ffd, 0x3ffb, *(unsigned short*) v6, n + 2);
+		io_AppendText(0x3ffd, 0x3ffb, *(unsigned short*) v6, n);
 		cost = ids[v16]; io_AppendText(0x3ffe, cost);
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

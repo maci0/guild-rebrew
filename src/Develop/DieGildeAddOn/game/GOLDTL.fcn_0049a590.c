@@ -72,25 +72,24 @@ int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				while (slot[i].a < 1) {
 					i = (i + 1) % 2;
 				}
+				b.a = slot[i].b;
 				b.type = 1;
 				b.b = 1;
-				b.a = slot[i].b;
 				a.type = 0;
 				a.a = -1;
 				a.b = -1;
 				a.d = 0x1d;
-				if (i != 0) {
-					*out1 = b;
-					*out2 = a;
-					return 0x1d;
-				} else {
+				if (i == 0) {
 					r = fcn_00495400(action, *(unsigned short*) e, 4, &b, &a);
+					if (r != 0) {
+						*out1 = b;
+						*out2 = a;
+					}
+					return r;
 				}
-				if (r != 0) {
-					*out1 = b;
-					*out2 = a;
-				}
-				return r;
+				*out1 = b;
+				*out2 = a;
+				return 0x1d;
 			}
 		}
 	}

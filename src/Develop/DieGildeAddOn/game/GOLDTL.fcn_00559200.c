@@ -17,6 +17,13 @@ char* __cdecl fcn_0064d530(char*, const char*, unsigned int);
 void __cdecl fcn_00402340(void*, int);
 int __cdecl fcn_0050b710(int, unsigned char);
 
+#pragma pack(push, 1)
+typedef struct {
+	int a;
+	char b;
+} s5_559200;
+#pragma pack(pop)
+
 /* ADDRESS: GOLDTL 0x00559200 */
 void __cdecl fcn_00559200(char* o)
 {
@@ -64,20 +71,19 @@ void __cdecl fcn_00559200(char* o)
 				g[0x13] = 1;
 			else
 				g[0x13] = 2;
-			*(int*) (g + 0x14) = *(int*) (e + 0x80);
-			g[0x18] = e[0x84];
+			*(s5_559200*) (g + 0x14) = *(s5_559200*) (e + 0x80);
 			fcn_0064d530(g + 0x19, e + 0x30, 0x18);
 			g[0x30] = 0;
-			io_FormatTextBuffer(text, "%s", (e[9] ? 0x5f : 0) + 0x130 + (unsigned char) e[0x164]);
+			io_FormatTextBuffer(text, "%s", (e[9] ? 0x18f : 0x130) + (unsigned char) e[0x164]);
 			fcn_0064d530(g + 0x31, text, 0x20);
 			g[0x50] = 0;
-			io_FormatTextBuffer(text, "%s", (e[9] ? 0xa : 0) + 0x114 + (unsigned char) e[0xd]);
+			io_FormatTextBuffer(text, "%s", (e[9] ? 0x11e : 0x114) + (unsigned char) e[0xd]);
 			fcn_0064d530(g + 0x51, text, 0x20);
 			g[0x50] = 0;
-			io_FormatTextBuffer(text, "%s", (e[9] ? 0x28 : 0) + 0x253 + (unsigned char) e[0x166]);
+			io_FormatTextBuffer(text, "%s", (e[9] ? 0x27b : 0x253) + (unsigned char) e[0x166]);
 			fcn_0064d530(g + 0x71, text, 0x24);
 			g[0x94] = 0;
-			io_FormatTextBuffer(text, "%s", (e[9] ? 0x28 : 0) + 0x253 + (unsigned char) e[0x169]);
+			io_FormatTextBuffer(text, "%s", (e[9] ? 0x27b : 0x253) + (unsigned char) e[0x169]);
 			fcn_0064d530(g + 0x95, text, 0x24);
 			g[0xb8] = 0;
 			fcn_00402340(g, *(unsigned short*) (g + 4));

@@ -1,62 +1,65 @@
 #include <string.h>
+#include "rgb.h"
+
+extern Rgb g_100f1a0;
 
 char* __cdecl m_alloc(unsigned int size, char* file);
 short __cdecl fcn_0041bac0(unsigned char r, unsigned char g, unsigned char b);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x004781e0 */
-unsigned int* __cdecl fcn_004781e0(int a0, int a1, int a2, unsigned int a3, int a4, char a5, int a6)
+unsigned int* __cdecl fcn_004781e0(int a0, int a1, int a2, int a3, int a4, char a5, int a6)
 {
-	unsigned int* v6;
-	unsigned int* v8;
+	char* v6;
 	unsigned int* v18;
 	unsigned short y0;
-	unsigned short* v20;
-	unsigned short* v21;
+	unsigned short* q;
+	unsigned short* p;
 	unsigned short x0;
 	unsigned short x1;
 	unsigned short y1;
 	int j;
-	unsigned int* row;
-	int v10;
-	unsigned int v11;
-	unsigned int v4;
+	char* dst;
+	char* row;
 	int i;
+	int rowstride;
+	int bytes;
+	unsigned int v4;
 
 	x0 = 0;
 	y0 = 0;
-	x1 = (unsigned short) a2;
 	y1 = (unsigned short) a3;
-	v6 = (unsigned int*) m_alloc((a2 * 8 + 4) * a3 + 0x32, (char*) 0x67d9c0);
-	v21 = (unsigned short*) (a4 + (a1 * a6 + a0) * 2);
-	v10 = 0;
-	if (1 <= (int) a3) {
+	x1 = (unsigned short) a2;
+	v6 = m_alloc(a3 * (a2 * 8 + 4) + 0x32, (char*) 0x67d9c0);
+	i = 0;
+	if (a3 > 0) {
+		p = (unsigned short*) (a4 + (a1 * a6 + a0) * 2);
 		do {
 			j = 0;
-			if (1 <= a2) {
-				v20 = v21;
+			if (a2 > 0) {
+				q = p;
 				do {
-					if (*v20) {
-						if (x0 < j) {
-							x0 = j;
+					if (*q != 0) {
+						if (j > x0) {
+							x0 = (unsigned short) j;
 						}
 						if (j < x1) {
-							x1 = j;
+							x1 = (unsigned short) j;
 						}
-						if (y0 < v10) {
-							y0 = v10;
+						if (i > y0) {
+							y0 = (unsigned short) i;
 						}
-						if (v10 < y1) {
-							y1 = v10;
+						if (i < y1) {
+							y1 = (unsigned short) i;
 						}
 					}
 					j++;
-					v20++;
+					q++;
 				} while (j < a2);
 			}
-			v10++;
-			v21 = v21 + a6;
-		} while ((int) v10 < (int) a3);
+			i++;
+			p += a6;
+		} while (i < a3);
 	}
 	if (x0 < x1 || y0 < y1) {
 		y1 = 0;
@@ -64,42 +67,41 @@ unsigned int* __cdecl fcn_004781e0(int a0, int a1, int a2, unsigned int a3, int 
 		x1 = 0;
 		y0 = 0;
 	}
-	*(unsigned short*) ((char*) v6 + 4) = x1;
-	*(unsigned short*) ((char*) v6 + 6) = x0 + 1;
-	*(unsigned short*) ((char*) v6 + 8) = y1;
-	*(unsigned short*) ((char*) v6 + 0xa) = y0 + 1;
-	*(unsigned short*) ((char*) v6 + 0xe) = x1;
-	*(unsigned short*) ((char*) v6 + 0x10) = y1;
-	*(unsigned short*) ((char*) v6 + 0x12) = x0 + 1;
-	*(unsigned short*) ((char*) v6 + 0x14) = y0 + 1;
-	*(unsigned short*) ((char*) v6 + 0x16) = x1;
-	*(unsigned short*) ((char*) v6 + 0x18) = y1;
-	*(unsigned short*) ((char*) v6 + 0x1a) = x0;
-	*(unsigned short*) ((char*) v6 + 0x1c) = y0;
-	*v6 = 0x32;
-	fcn_0041bac0(*(unsigned char*) 0x100f1a0, *(unsigned char*) 0x100f1a1, *(unsigned char*) 0x100f1a2);
-	v8 = (unsigned int*) ((char*) v6 + *v6);
-	if (*(unsigned short*) ((char*) v6 + 0xa) != 0) {
-		i = 0;
-		a3 = a6 * 2;
-		v11 = *(unsigned short*) ((char*) v6 + 6) * 2;
-		row = (unsigned int*) (a4 + (a1 * a6 + a0) * 2);
+	*(unsigned short*) (v6 + 4) = x1;
+	*(unsigned short*) (v6 + 6) = x0 + 1;
+	*(unsigned short*) (v6 + 8) = y1;
+	*(unsigned short*) (v6 + 0xa) = y0 + 1;
+	*(unsigned short*) (v6 + 0xe) = x1;
+	*(unsigned short*) (v6 + 0x10) = y1;
+	*(unsigned short*) (v6 + 0x12) = x0 + 1;
+	*(unsigned short*) (v6 + 0x14) = y0 + 1;
+	*(unsigned short*) (v6 + 0x16) = x1;
+	*(unsigned short*) (v6 + 0x18) = y1;
+	*(unsigned short*) (v6 + 0x1a) = x0;
+	*(unsigned short*) (v6 + 0x1c) = y0;
+	*(unsigned int*) v6 = 0x32;
+	fcn_0041bac0(g_100f1a0.r, g_100f1a0.g, g_100f1a0.b);
+	dst = v6 + *(unsigned int*) v6;
+	i = 0;
+	if (*(unsigned short*) (v6 + 0xa) > 0) {
+		rowstride = a6 * 2;
+		bytes = *(unsigned short*) (v6 + 6) * 2;
+		row = (char*) (a4 + (a1 * a6 + a0) * 2);
 		do {
-			v10 = v11 >> 2;
-			memcpy(v8, row, v11);
-			v11 = *(unsigned short*) ((char*) v6 + 6) * 2;
-			*(unsigned int*) ((char*) v6 + 0x2e) = *(unsigned int*) ((char*) v6 + 0x2e) + *(unsigned short*) ((char*) v6 + 6);
-			row = (unsigned int*) ((char*) row + a3);
-			v8 = (unsigned int*) ((char*) v8 + v11);
+			memcpy(dst, row, bytes);
+			*(unsigned int*) (v6 + 0x2e) += *(unsigned short*) (v6 + 6);
+			bytes = *(unsigned short*) (v6 + 6) * 2;
+			*(unsigned int*) v6 += bytes;
+			dst += bytes;
+			row += rowstride;
 			i++;
-			*v6 = *v6 + v11;
-		} while (i < (int) *(unsigned short*) ((char*) v6 + 10));
+		} while (i < *(unsigned short*) (v6 + 0xa));
 	}
-	*(unsigned int*) ((char*) v6 + 0x2a) = 0;
-	*(char*) ((char*) v6 + 0xd) = a5;
-	*(unsigned int*) ((char*) v6 + 0x26) = 0xffffffff;
-	v18 = (unsigned int*) m_alloc(*v6, (char*) 0x67d970);
-	v4 = *v6;
+	*(unsigned int*) (v6 + 0x2a) = 0;
+	*(char*) (v6 + 0xd) = a5;
+	*(unsigned int*) (v6 + 0x26) = 0xffffffff;
+	v18 = (unsigned int*) m_alloc(*(unsigned int*) v6, (char*) 0x67d970);
+	v4 = *(unsigned int*) v6;
 	memcpy(v18, v6, v4);
 	m_FreeTracked(v6);
 	return v18;

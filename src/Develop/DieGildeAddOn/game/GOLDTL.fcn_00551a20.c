@@ -59,9 +59,8 @@ void __cdecl fcn_00551a20(char* t)
 		fcn_005dcf40(e, *(unsigned char*) (t + 0xb8));
 		fcn_005dcf40(e, *(unsigned char*) (t + 0xb9));
 		io_FormatTextBuffer(buf, 0x1a9e, e->id);
-		t[0xba]++;
+		*(int*) (t + 0x70) = (unsigned char) (++t[0xba]) >= 5;
 		*(short*) (t + 0x56) += 0x18;
-		*(int*) (t + 0x70) = (unsigned char) t[0xba] >= 5;
 		he_RegisterApEvent(*(unsigned short*) p, buf, 0, -*(int*) (t + 0xb4));
 		return;
 	case 1:

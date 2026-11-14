@@ -1,4 +1,4 @@
-
+extern unsigned char g_773d75;
 int __cdecl fcn_004fd9d0(int, int);
 void * __cdecl fcn_004ee060(int);
 int __cdecl fcn_004ee0b0(void *);
@@ -63,7 +63,7 @@ void __cdecl fcn_005848b0(int a0)
 		}
 	}
 	if (count == 0) {
-		io_FormatTextBuffer(msg, 0x404a, 0x868060 + (*(volatile unsigned char *)0x773d75) * 0x2f4);
+		io_FormatTextBuffer(msg, 0x404a, 0x868060 + g_773d75 * 0x2f4);
 		fcn_005263d0((void *)0x14b5404, msg, 0);
 		fcn_00532ef0();
 		return;

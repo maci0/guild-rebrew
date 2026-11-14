@@ -31,32 +31,17 @@ void __cdecl fcn_004d4950(int a0)
     unsigned short* v4;
     int* v7;
     char* v9;
-    int v22;
     int v5;
+    int v22;
     int v11;
-    char v12[0x40];
+    char v12[2][0x20] = { "kampf/arm_greifen", "kampf/bauch_greifen" };
     char v13[0x100];
     int v8;
     int r;
-    char* reply;
-    char* speaker;
 
-    *(int*) (v12 + 8) = *(int*) 0x68b7e8;
-    *(int*) (v12 + 0x12) = 0;
-    *(int*) (v12 + 4) = *(int*) 0x68b7e4;
-    *(int*) v12 = *(int*) 0x68b7e0;
-    *(int*) (v12 + 0x16) = 0;
-    *(short*) (v12 + 0x10) = *(short*) 0x68b7f0;
-    *(int*) (v12 + 0x1a) = 0;
-    *(int*) (v12 + 0xc) = *(int*) 0x68b7ec;
     v3 = *(char**) (a0 + 0x180);
-    *(short*) (v12 + 0x1e) = 0;
-    memcpy(v12 + 0x20, (void*) 0x68b7c0, 0x14);
-    *(int*) (v12 + 0x34) = 0;
     v4 = *(unsigned short**) (a0 + 0x17c);
-    *(int*) (v12 + 0x38) = 0;
     v22 = *(int*) (a0 + 0x184);
-    *(int*) (v12 + 0x3c) = 0;
     v5 = 1;
     v9 = fcn_004ce610((char*) v4);
     v7 = (int*) fcn_004ce610(v3);
@@ -80,15 +65,18 @@ void __cdecl fcn_004d4950(int a0)
     }
     if (v22) {
         r = cut_RandMod(10);
-        fcn_004cfc40((char*) v4, v22,
-                     (*(int*) ((char*) v4 + 0x16c) != (int)g_772e9c) ? 2 : 1);
-        if (r >= 9) {
+        if (*(int*) ((char*) v4 + 0x16c) == (int) g_772e9c) {
+            fcn_004cfc40((char*) v4, v22, 1);
+        } else {
+            fcn_004cfc40((char*) v4, v22, 2);
+        }
+        if (r > 8) {
             if (*(int*) (a0 + 0x188) != *(int*) ((int)g_772e9c + 4)) {
                 fcn_004c30a0(*v4, *(int*) 0x772ef4, (char*) 0x68be54, -1, 500);
             } else {
                 fcn_004c30a0(*v4, *(int*) 0x772ef8, (char*) 0x68be54, -1, 500);
             }
-        } else if (r >= 6) {
+        } else if (r > 5) {
             fcn_004234e0((char*) 0, (char*) 0x68bde4, 1, 0x3f, 0x7f, 0, 0);
         }
     }
@@ -101,33 +89,28 @@ void __cdecl fcn_004d4950(int a0)
     if (!v5) {
         return;
     }
-    if (*v7 != 0x156 && *v7 != 0x158) {
-        if (*v7 != 0x154 && *v7 != 0x16e && *v7 != 0x172) {
-            if (*v7 != 0x15e) {
-                if (*v7 != 0x160) {
-                    if (*v7) goto draw;
-                } else if (!v22) goto draw;
-                reply = (char*)0x68be40;
-                speaker = 0;
-            } else {
-                reply = (char*)0x68be48;
-                speaker = *(char**)0x772ecc;
-            }
-        } else if (v22) {
-            reply = (char*)0x68be40;
-            speaker = 0;
+    if (*v7 == 0x156 || *v7 == 0x158) {
+        if (v22) {
+            fcn_004234e0(0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
         } else {
-            reply = (char*)0x68be34;
-            speaker = *(char**)0x772ec8;
+            fcn_004234e0(*(char**) 0x772ed0, (char*) 0x68be34, 1, 0x3f, 0x7f, 0, 0);
         }
-    } else if (v22) {
-        reply = (char*)0x68be40;
-        speaker = 0;
+    } else if (*v7 == 0x154 || *v7 == 0x16e || *v7 == 0x172) {
+        if (v22) {
+            fcn_004234e0(0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
+        } else {
+            fcn_004234e0(*(char**) 0x772ec8, (char*) 0x68be34, 1, 0x3f, 0x7f, 0, 0);
+        }
+    } else if (*v7 == 0x15e) {
+        fcn_004234e0(*(char**) 0x772ecc, (char*) 0x68be48, 1, 0x3f, 0x7f, 0, 0);
     } else {
-        reply = (char*)0x68be34;
-        speaker = *(char**)0x772ed0;
+        if (*v7 == 0x160) {
+            if (!v22) goto draw;
+        } else if (*v7) {
+            goto draw;
+        }
+        fcn_004234e0(0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
     }
-    fcn_004234e0(speaker, reply, 1, 0x3f, 0x7f, 0, 0);
 draw:
     if (fcn_004d4790((char*) v4)) {
         return;
@@ -139,7 +122,7 @@ draw:
         if (!v8 || *(char*) (v8 + 9) == ';') {
             ch_CancelActionQueue((char*) *(int*) ((char*) v4 + 0x184));
             fcn_004063b0(*(unsigned int*) ((char*) v4 + 0x184),
-                         v12 + cut_RandMod(2) * 0x20, 1, 1.4f);
+                         v12[cut_RandMod(2)], 1, 1.4f);
         }
         if (*v7 == 0x16e) {
             *(char*) ((char*) v4 + 8) = 4;

@@ -1,8 +1,8 @@
 #include <float.h>
 #include <string.h>
 
-extern float g_66413c;
-extern float g_664168;
+
+
 extern int g_7f4c00;
 extern int g_7f4c04;
 extern int g_7f4c08;
@@ -45,15 +45,15 @@ void __cdecl fcn_00551d50(char* a0)
 		byte = *(unsigned char*) (a0 + 0xae);
 		row = (char*) (0x7f4ca0 + index * 0x21c);
 		id = *(unsigned char*) (row + 0x80 + byte);
-		if ((float) (id + delay) > g_66413c) {
-			delay = (int) (g_66413c - (float) id);
+		if ((float) (id + delay) > 252.0f) {
+			delay = (int) (252.0f - (float) id);
 		}
 		fcn_004c6ba0(*(int*) (row + 4), byte, delay);
 		if (*(unsigned char*) (row + 2) == 6) {
 			byte = *(unsigned char*) (a0 + 0xae);
 			id = *(unsigned char*) (row + 0x80 + byte);
-			value = (int) ((float) (id + delay) * g_664168);
-			if (value > (int) ((float) id * g_664168)) {
+			value = (int) ((float) (id + delay) * 0.023809524f);
+			if (value > (int) ((float) id * 0.023809524f)) {
 				fn = 0xf8;
 				fp = packet;
 				__asm {
@@ -74,12 +74,12 @@ void __cdecl fcn_00551d50(char* a0)
 					rep stosb
 				}
 				*(int*) (packet + 8) = *(int*) (row + 4);
-				*(int*) (packet + 0xc) = -1;
 				*(int*) (packet + 0x28) = g_7f4c00;
 				*(int*) (packet + 0x2c) = g_7f4c04;
 				*(int*) (packet + 0x30) = g_7f4c08;
 				*(short*) (packet + 0x34) = g_7f4c0c;
 				*(char*) (packet + 4) = 0x6a;
+				*(int*) (packet + 0xc) = -1;
 				*(char*) (packet + 0x36) = 9;
 				*(char*) (packet + 0x58) = *(unsigned char*) (a0 + 0xae);
 				*(int*) (packet + 0x5c) = value;

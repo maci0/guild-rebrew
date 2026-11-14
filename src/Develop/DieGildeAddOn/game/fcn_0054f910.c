@@ -18,7 +18,7 @@ int __cdecl fcn_00500de0(char* p, int id, int a, int b, int c);
 int __cdecl fcn_004c5530(void* p);
 
 /* ADDRESS: GOLDTL 0x0054f910 */
-int __cdecl fcn_0054f910(char* ent)
+void __cdecl fcn_0054f910(char* ent)
 {
 	char* e1;
 	char* e2;
@@ -27,9 +27,8 @@ int __cdecl fcn_0054f910(char* ent)
 	int w;
 	int dmg;
 	float f;
-	char text[0x100];
-	int blk[0x3e];
-	int tmp[4];
+	int tmp[6];
+	int tmp2[6];
 
 	*(int*) (ent + 0x84) = -1;
 	*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
@@ -41,7 +40,7 @@ int __cdecl fcn_0054f910(char* ent)
 	*(short*) (ent + 0x56) = 6;
 	*(int*) (ent + 0x58) = 0x1e;
 	if ((flags & 2) == 0) {
-		return 0;
+		return;
 	}
 	e1 = gm_LookupEntityRecordById(*(int*) (ent + 0xac));
 	e2 = gm_LookupEntityRecordById(*(int*) (ent + 0xb0));
@@ -54,7 +53,7 @@ int __cdecl fcn_0054f910(char* ent)
 
 			fcn_00500bb0(ent + 0x52, 0, 2, 0);
 			*(int*) (ent + 0x84) = fcn_004c5620(-1, ent);
-			return 0;
+			return;
 		}
 	}
 	v = -1;
@@ -84,6 +83,7 @@ int __cdecl fcn_0054f910(char* ent)
 		*(int*) (ent + 0x58) = 0x1e;
 		if (*(unsigned char*) (e1 + 2) == 6
 		    || *(unsigned char*) (e1 + 2) == 7) {
+			char text[0x100];
 			io_FormatTextBuffer(text, 0x1d83,
 			    *(unsigned short*) (e2), ent + 0x52,
 			    *(unsigned short*) (e2));
@@ -91,11 +91,12 @@ int __cdecl fcn_0054f910(char* ent)
 			    text, 0, 0x5fa, (int) (char*) 0x6a5b08);
 		}
 		*(int*) (ent + 0x84) = fcn_004c5620(2, ent);
-		return 0;
+		return;
 	}
 	v = 0;
 	if (*(unsigned char*) (e1 + 2) == 6
 	    || *(unsigned char*) (e1 + 2) == 7) {
+		char text[0x100];
 		io_FormatTextBuffer(text, 0x1d81,
 		    *(unsigned short*) (e2), *(unsigned short*) (e2),
 		    (*(unsigned char*) (e2 + 9) != 0) + 0x1d68);
@@ -103,16 +104,15 @@ int __cdecl fcn_0054f910(char* ent)
 		    text, 0, 0x5fa, 0);
 	}
 	if (*(unsigned char*) (e2 + 0x166) != 0) {
-		w = fcn_004e7b70(e2, tmp, &tmp[2]);
+		w = fcn_004e7b70(e2, tmp, tmp2);
 		if (w != 0) {
 			v = tmp[1];
 		} else {
 			v = (fcn_0042e410(3) & 0xffff) + 1;
 		}
 	}
-	f = gm_GetEntitySkill(e1, 4) * 8.0f;
-	w = (int) f;
-	dmg = -9 - w - (fcn_0042e410(8) & 0xffff);
+	dmg = -9 - (int) (gm_GetEntitySkill(e1, 4) * 8.0f);
+	dmg -= fcn_0042e410(8) & 0xffff;
 	fcn_004ec2d0(e2, v, dmg);
 	fcn_004c54c0(*(int*) (e2 + 4), *(int*) (e1 + 4), -0x14, 1);
 	*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
@@ -121,8 +121,10 @@ int __cdecl fcn_0054f910(char* ent)
 
 	fcn_00500bb0(ent + 0x52, 0, 2, 0);
 	*(int*) (ent + 0x84) = fcn_004c5620(-1, ent);
-	return 0;
+	return;
 big:
+	{
+	int blk[0x3e];
 	for (w = 0; w < 0x3e; w++) {
 		blk[w] = 0;
 	}
@@ -143,5 +145,5 @@ big:
 	*(int*) (ent + 0x84) = fcn_004c5620(1, ent);
 	fcn_004c5420(*(int*) (e1 + 4), 0x1c8, 4, 0x400, 0);
 	fcn_004c5420(*(int*) (e2 + 4), 0x1c8, 4, 0x400, 0);
-	return 0;
+	}
 }

@@ -13,7 +13,6 @@ int __cdecl fcn_0047b630(int x, int y, int* surface, char* sprite, int factor)
 	int divisor;
 	int row;
 	int emit;
-	int screen_y;
 	line_count = (unsigned int*) (sprite + 0x32);
 	run = (unsigned int*) (sprite + 0x36);
 	row_output = (unsigned short*) surface[7] + surface[4] * y + x;
@@ -53,7 +52,6 @@ int __cdecl fcn_0047b630(int x, int y, int* surface, char* sprite, int factor)
 	} else {
 		for (row = 0; row < height; row++) {
 			emit = row % divisor == 0;
-			screen_y = row / divisor + y;
 			output = row_output;
 			for (i = 0; i < *line_count; i++) {
 				output += ((run[0] >> 1) + carry) / (unsigned int) divisor;
@@ -61,7 +59,7 @@ int __cdecl fcn_0047b630(int x, int y, int* surface, char* sprite, int factor)
 				if (emit) {
 					pixels = (unsigned short*) (run + 2);
 					for (n = 0; n < (run[1] + carry) / (unsigned int) divisor; n++) {
-						if (screen_y >= *(int*) 0x6f045c) {
+						if (row / divisor + y >= *(int*) 0x6f045c) {
 							*output = (*(unsigned short**)0x6f0460)[*pixels];
 						}
 						pixels += divisor;

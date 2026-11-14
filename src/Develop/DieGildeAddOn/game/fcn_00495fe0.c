@@ -31,7 +31,7 @@ int __cdecl fcn_00495fe0(int a0, char* obj, int flag, int* out1, int* out2)
 
 	int cands[5];
 	int frame[0x88];
-	int loop;
+	unsigned int loop;
 	int best1;
 	unsigned int costs[5];
 	int maxIdx;
@@ -45,7 +45,7 @@ int __cdecl fcn_00495fe0(int a0, char* obj, int flag, int* out1, int* out2)
 	unsigned short w1;
 	unsigned short w2;
 	unsigned char pct;
-	unsigned char tmp8;
+	unsigned char tmp8; float bonus;
 	int* pi;
 
 	(void) a0;
@@ -126,22 +126,22 @@ int __cdecl fcn_00495fe0(int a0, char* obj, int flag, int* out1, int* out2)
 		if ((extra.values[loop] & 0xff) == 0) {
 			extra.values[loop] = 0xfc;
 		}
-		r = fcn_004fa5b0(cands[loop], obj, frame);
+		r = fcn_004fa5b0(cands[loop], obj, frame); bonus = (r & 2) ? g_662a94 : g_6628a8;
 		tmp8 = (unsigned char) obj[loop + 0x80];
 		if (tmp8 < 0x2a) {
-			kind = 1;
+			costs[loop] = 1;
 		} else if (tmp8 < 0x54) {
-			kind = 2;
+			costs[loop] = 2;
 		} else if (tmp8 < 0x7e) {
-			kind = 4;
+			costs[loop] = 4;
 		} else if (tmp8 < 0xa8) {
-			kind = 6;
+			costs[loop] = 6;
 		} else if (tmp8 < 0xd2) {
-			kind = 9;
+			costs[loop] = 9;
 		} else {
-			kind = 0xc;
+			costs[loop] = 0xc;
 		}
-		costs[loop] = (unsigned int) (int) ((double) (unsigned int) kind + ((r & 2) ? g_662a94 : g_6628a8));
+		costs[loop] = (unsigned int) (costs[loop] + bonus);
 		if (*(unsigned int*) (obj + 0x194) < costs[loop]) {
 			marks[loop] = 0;
 		} else if ((float) tmp8 != g_66413c) {

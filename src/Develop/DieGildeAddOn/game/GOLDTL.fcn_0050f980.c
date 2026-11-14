@@ -13,26 +13,22 @@ int __cdecl fcn_005c6270(void*, int);
 /* ADDRESS: GOLDTL 0x0050f980 */
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
 {
-    unsigned char v1;
+    unsigned int v1;
     unsigned char* v10;
     int v11;
     unsigned int v12;
     float v13;
-    float v14;
     float v15;
     int v16;
     unsigned char v17;
-    unsigned int v2;
     int v3;
     unsigned int v4;
     unsigned int v5;
     char* v6;
-    unsigned char v7;
-    char q[0x14];
+    unsigned int qual;
+    char q[0x18];
     int v9;
 
-    v2 = a1;
-    v4 = a0;
     v15 = 0.0f;
     if (a0 == a1) {
         return *(float*) 0x662cf8;
@@ -55,13 +51,10 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
             }
         }
     }
-    v7 = *(unsigned char*) (v9 + 0x7f4e09);
-    if (0x1e <= v7 && v7 <= 0x21) {
+    if (*(unsigned char*) (v9 + 0x7f4e09) >= 0x1e &&
+        *(unsigned char*) (v9 + 0x7f4e09) <= 0x21) {
         v5 = 0;
-        switch (v7) {
-        case 0x1e:
-            v5 = 0x17;
-            break;
+        switch (*(unsigned char*) (v9 + 0x7f4e09)) {
         case 0x1f:
             v5 = 0x18;
             break;
@@ -71,28 +64,32 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
         case 0x21:
             v5 = 0x1a;
             break;
+        case 0x1e:
+            v5 = 0x17;
+            break;
         }
         v3 = (int) gm_StartFilteredEntitySearch(1, 5, v5);
         if (v3 && !(*(unsigned char*) (v3 + 0x5a) & 1)) {
             v15 = (float) fcn_0050c710((void*) v3, 4, 1) + v15;
         }
     }
+    v13 = (float) (*(char*) (a0 * 0x300 + 0x869480 + a1) + 0x7f) *
+          *(float*) 0x662c30;
+    v15 = v13 * *(float*) 0x662cf8 + v15;
     v12 = 0;
-    v7 = 0;
-    v13 = (float) (*(char*) (v4 * 0x300 + 0x869480 + v2) + 0x7f) *
-          *(float*) 0x662c30 * *(float*) 0x662cf8; v15 = v13 + v15;
+    qual = 0;
     v10 = (unsigned char*) (unsigned int) g_entity_ptr;
     do {
         if (*v10 && *(short*) (v10 + 0x27) == *(short*) (v9 + 0x7f4ca0)) {
             v6 = (char*) ((unsigned int) *v10 * 0x24d +
                           (unsigned int) lpGebaeudePROT);
             if (*v6 == '!') {
-                v1 = v6[0x247];
-                if (v7 < v1) {
-                    v7 = v1;
+                v1 = (unsigned char) v6[0x247];
+                if (v1 > qual) {
+                    qual = v1;
                 }
             }
-            if (3 <= v7) {
+            if (3 <= qual) {
                 break;
             }
         }
@@ -101,17 +98,16 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
     } while (v12 < 0x100);
     v3 = v9 + 0x7f4ca0;
     v11 = a1 * 0x21c;
-    v14 = fcn_004e7990((void*) v3, (void*) (v11 + 0x7f4ca0), v7, a2);
-    v15 = v14 + v15;
+    v15 = fcn_004e7990((void*) v3, (void*) (v11 + 0x7f4ca0), qual, a2) + v15;
     if (*(char*) (v11 + 0x7f4e06)) {
         fcn_004e8b40(*(unsigned char*) (v11 + 0x7f4e06), q);
         v17 = *(unsigned char*) (q + 8);
-        if (v17 && v17 <= 3) {
+        if (v17 > 0 && v17 < 4) {
             a1 = fcn_005c6270((void*) v3, 0x155);
             v15 = (float) (int) a1 * *(float*) 0x6640cc + v15;
             a1 = fcn_005c6270((void*) v3, 0x15d);
             v15 = (float) (int) a1 * *(float*) 0x6640cc + v15;
-        } else if (4 <= v17 && v17 <= 7) {
+        } else if (v17 > 3 && v17 < 8) {
             a1 = fcn_005c6270((void*) v3, 0x157);
             v15 = (float) (int) a1 * *(float*) 0x6640cc + v15;
             a1 = fcn_005c6270((void*) v3, 0x15f);
@@ -124,34 +120,30 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
             a1 = fcn_005c6270((void*) v3, 0x166);
             v15 = (float) (int) a1 * *(float*) 0x662938 + v15;
         }
-
     }
-    v14 = v15;
     if (fcn_005c6270((void*) v3, 0x2b6)) {
         if (*(char*) (v11 + 0x7f4e06)) {
-            v14 = v14 + *(float*) 0x662a98;
-            v15 = v14;
+            v15 = v15 + *(float*) 0x662a98;
         }
         if (*(unsigned int*) (v11 + 0x7f4e6c) & 0x3e00) {
-            v14 = v14 + *(float*) 0x662a98;
-            v15 = v14;
+            v15 = v15 + *(float*) 0x662a98;
         }
     }
     if (*(int*) (v11 + 0x7f4e0c) &&
         *(unsigned short*) (*(int*) (v11 + 0x7f4e0c) + 0x27) == a0) {
-        v14 = (float) fcn_005c6270((void*) v3, 0x16b) * *(float*) 0x664170 + v15;
+        v15 = (float) fcn_005c6270((void*) v3, 0x16b) * *(float*) 0x664170 + v15;
     }
     v4 = *(unsigned int*) (v9 + 0x7f4ccc) >> 0xe & 7;
     if (v4 && *(char*) (v9 + 0x7f4ca9) != *(char*) (v11 + 0x7f4ca9)) {
-        v14 = v14 - (float) (v4 * 3);
+        v15 = v15 - (float) (v4 * 3);
     }
     v4 = *(unsigned int*) (v9 + 0x7f4ccc) >> 0x17 & 3;
     if (v4) {
-        v14 = v14 - (float) (v4 * 3);
+        v15 = v15 - (float) (v4 * 3);
     }
-    if (v14 < *(float*) 0x662cf8) {
-        if (*(float*) 0x6628a8 < v14) {
-            return v14;
+    if (v15 < *(float*) 0x662cf8) {
+        if (*(float*) 0x6628a8 < v15) {
+            return v15;
         }
         return *(float*) 0x6628a8;
     }

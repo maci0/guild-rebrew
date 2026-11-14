@@ -44,7 +44,7 @@ void __cdecl fcn_00554b90(char* e)
 	char msg[0x114];
 	char buf[0x200];
 	House_554b90* h;
-	int i;
+
 	int k;
 	int m;
 	int v;
@@ -65,8 +65,8 @@ void __cdecl fcn_00554b90(char* e)
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x11be, r, *(int*) (e + 0xb0));
-		for (i = 0; i < 768; i++) {
-			h = &g_7f4ca0[i];
+		for (h = g_7f4ca0; h < g_7f4ca0 + 768; h++) {
+
 			if ((h->type == 6 || h->type == 7) && h->level > 0) {
 				fcn_00545d40(h->handle, h->handle, buf, 0, 0x601, 0);
 			}
@@ -81,8 +81,8 @@ void __cdecl fcn_00554b90(char* e)
 		memset(vals, 0, sizeof(vals));
 		memset(msg, 0, sizeof(msg));
 		n = 0;
-		for (i = 0; i < 768; i++) {
-			h = &g_7f4ca0[i];
+		for (h = g_7f4ca0; h < g_7f4ca0 + 768; h++) {
+
 			if (n >= 8) {
 				break;
 			}
@@ -91,9 +91,9 @@ void __cdecl fcn_00554b90(char* e)
 				n++;
 			}
 		}
-		for (i = 0; i < 768; i++) {
-			if (g_7f4ca0[i].level > 0 && g_7f4ca0[i].busy == 0 && (g_7f4ca0[i].type == 5 || g_7f4ca0[i].type == 3 || g_7f4ca0[i].type == 4)) {
-				v = gm_AccumulateTyped2(&g_7f4ca0[i]);
+		for (h = g_7f4ca0; h < g_7f4ca0 + 768; h++) {
+			if (h->level > 0 && h->busy == 0 && (h->type == 5 || h->type == 3 || h->type == 4)) {
+				v = gm_AccumulateTyped2(h);
 				if (v >= *(int*) (e + 0xb0)) {
 					for (k = 0; k < 8; k++) {
 						if (ids[k] == -1) {
@@ -113,7 +113,7 @@ shift:
 					}
 put:
 					vals[k] = v;
-					ids[k] = g_7f4ca0[i].handle;
+					ids[k] = h->handle;
 				}
 			}
 		}

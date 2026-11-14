@@ -86,8 +86,8 @@ found:
 					m.f8 = *(int*) (*(unsigned short*) (a1 + 0x27) * 0x21c + 0x7f4ca4);
 					m.fc = *(int*) (a1 + 1);
 					m.stamp = g_7f4c00;
-					m.f38 = *(int*) (h + 4);
 					m.f58 = *(int*) (h + 4);
+					m.f38 = *(int*) (h + 4);
 					fcn_004c5530(&m);
 					g_774654 = 1;
 				} else {

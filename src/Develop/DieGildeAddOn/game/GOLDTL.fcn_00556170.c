@@ -1,6 +1,5 @@
 #include <math.h>
 
-extern float g_6628a8;
 extern int lpGebaeudeINST;
 extern int lpGebaeudePROT;
 extern unsigned char g_773d75;
@@ -65,7 +64,7 @@ void __cdecl fcn_00556170(char* p)
 	case 0:
 		*(int*) (p + 0xb4) = 0;
 		*(int*) (p + 0xac) = 0;
-		*(float*) (p + 0xb0) = *(float*) (p + 0xb0) * g_6628a8;
+		*(float*) (p + 0xb0) = *(float*) (p + 0xb0) * 0.0f;
 		fcn_00500bb0(p + 0x52, 0, 0, 5);
 		*(int*) (p + 0x84) = fcn_004c5620(1, p);
 		return;
@@ -90,25 +89,25 @@ void __cdecl fcn_00556170(char* p)
 		*(short*) (p + 0x56) = 0xf;
 		goto anim7;
 	case 2:
-		if (*(unsigned short*) ((char*) g_7f4c00 + 4) < 0x14) {
-			f = fcn_0042e450();
-			if (f <= *(float*) (p + 0xb0)) {
-				*(float*) (p + 0xb0) -= *(float*) (p + 0xb4);
-				COPY_UI(p);
-				fcn_00500bb0(p + 0x52, 1, 0, 0);
-				*(int*) (p + 0x84) = fcn_004c5620(2, p);
-				return;
-			}
+		if (*(unsigned short*) ((char*) g_7f4c00 + 4) >= 0x14) {
+			COPY_UI(p);
+			break;
+		}
+		f = fcn_0042e450();
+		if (f > *(float*) (p + 0xb0)) {
 			*(int*) (p + 0xb8) = -1;
-			i = fcn_0042e410(0xc);
-			*(int*) (p + 0xb8) = fcn_004c4fc0(0xff, -1, -1, i + 0xf, -1, 0, 0, 2);
+			*(int*) (p + 0xb8) = fcn_004c4fc0(0xff, -1, -1,
+				fcn_0042e410(0xc) + 0xf, -1, 0, 0, 2);
 			COPY_UI(p);
 			fcn_00500bb0(p + 0x52, 0, 0, 1);
 			*(int*) (p + 0x84) = fcn_004c5620(3, p);
 			return;
 		}
+		*(float*) (p + 0xb0) -= *(float*) (p + 0xb4);
 		COPY_UI(p);
-		break;
+		fcn_00500bb0(p + 0x52, 1, 0, 0);
+		*(int*) (p + 0x84) = fcn_004c5620(2, p);
+		return;
 	case 3:
 		if (fcn_004c4450(*(int*) (p + 0xb8)) == 0) {
 			COPY_UI(p);
@@ -160,15 +159,12 @@ void __cdecl fcn_00556170(char* p)
 		*(int*) (p + 0x84) = fcn_004c5620(1, p);
 		return;
 	case 6:
-		if (*(unsigned short*) ((char*) g_7f4c00 + 4) < 0x14) {
-			f = fcn_0042e450();
-			if (f <= *(float*) (p + 0xb0)) {
-				*(float*) (p + 0xb0) -= *(float*) (p + 0xb4);
-				COPY_UI(p);
-				fcn_00500bb0(p + 0x52, 1, 0, 0);
-				*(int*) (p + 0x84) = fcn_004c5620(6, p);
-				return;
-			}
+		if (*(unsigned short*) ((char*) g_7f4c00 + 4) >= 0x14) {
+			COPY_UI(p);
+			break;
+		}
+		f = fcn_0042e450();
+		if (f > *(float*) (p + 0xb0)) {
 			v = (unsigned short) fcn_0042e410(0x300);
 			n = 0x300;
 			do {
@@ -190,8 +186,11 @@ void __cdecl fcn_00556170(char* p)
 			*(int*) (p + 0x84) = fcn_004c5620(1, p);
 			return;
 		}
+		*(float*) (p + 0xb0) -= *(float*) (p + 0xb4);
 		COPY_UI(p);
-		break;
+		fcn_00500bb0(p + 0x52, 1, 0, 0);
+		*(int*) (p + 0x84) = fcn_004c5620(6, p);
+		return;
 	case 7:
 		v = (unsigned short) fcn_0042e410(0x300);
 		n = 0x300;

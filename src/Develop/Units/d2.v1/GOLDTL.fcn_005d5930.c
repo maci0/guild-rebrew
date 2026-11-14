@@ -92,10 +92,10 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 			fcn_00500bb0(&pos, 0x60, 0, 0);
 			memset(&m, 0, sizeof(m));
 			m.pos.a = g_7f4c00.a;
-			m.pos.c = g_7f4c00.c;
+			m.pos.b = g_7f4c00.b;
 			m.f8 = *(int*) (p + 4);
 			m.fc = *(int*) (p + 4);
-			m.pos.b = g_7f4c00.b;
+			m.pos.c = g_7f4c00.c;
 			m.f58 = *(int*) (p + 4);
 			m.b4 = 0x45;
 			m.b36 = 2;

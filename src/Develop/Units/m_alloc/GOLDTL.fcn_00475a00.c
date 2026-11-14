@@ -61,14 +61,17 @@ int __cdecl fcn_00475a00(char* name, Surface* s)
 			bi.height = abs(h);
 			buf = (unsigned char*) m_alloc(abs(bi.height) * bi.width * 3,
 			    (char*) 0x67d940);
+			i = 0;
+			if (bi.height > 0) {
 			align = (bi.width * 3) & 3;
-			for (i = 0; i < bi.height; i++) {
+			do {
 				if (!rev)
 					fcn_0064ebe4(buf + i * bi.width * 3, 1, bi.width * 3, f);
 				else
 					fcn_0064ebe4(buf + (bi.height - i - 1) * bi.width * 3, 1, bi.width * 3, f);
 				if (align != 0)
 					fcn_0064e48f(f, 4 - align, 1);
+			} while (++i < bi.height);
 			}
 			fcn_0064e1fd(f);
 			p = buf + 2;

@@ -36,8 +36,8 @@ int __cdecl fcn_00496e60(int a1, char* e, int y, Msg* out1, Msg* out2)
 		b.a = 2;
 		b.b = 1;
 		b.f = 0.44f;
-		e = (char*) &a;
 		y = sizeof(a);
+		e = (char*) &a;
 		/* Native fill core at 0x496ea7-0x496ec7. */
 		__asm {
 			mov edi, e
@@ -74,14 +74,8 @@ int __cdecl fcn_00496e60(int a1, char* e, int y, Msg* out1, Msg* out2)
 		return 0;
 	}
 	r = fcn_004e8d10(e, 2, items);
-	if (r) {
-		v = *(int*) (items + gm_RandomMod(r) * 0xc);
-		if (v != 0 && v <= 0x1b) {
-			out1->a = v;
-			out1->type = 10;
-			return 10;
-		}
-	} else if (gm_RandomMod(4) == 0) {
+	if (r == 0) {
+		if (gm_RandomMod(4) != 0) return 0;
 		a.type = 0x10;
 		a.a = 0x12;
 		a.b = 0;
@@ -89,6 +83,13 @@ int __cdecl fcn_00496e60(int a1, char* e, int y, Msg* out1, Msg* out2)
 			*out1 = a;
 			*out2 = b;
 			return 0x27;
+		}
+	} else {
+		v = *(int*) (items + gm_RandomMod(r) * 0xc);
+		if (v != 0 && v <= 0x1b) {
+			out1->a = v;
+			out1->type = 10;
+			return 10;
 		}
 	}
 	return 0;

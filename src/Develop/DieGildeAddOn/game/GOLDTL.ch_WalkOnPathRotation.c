@@ -20,12 +20,13 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 	float t;
 	float angle;
 	float dx;
+	float dy;
 	float dz;
 	int ticks;
 
 	inst = *(char**) (obj + 0x14);
-	o = *(char**) (inst + 0x34);
 	if (*(float*) (obj + 0x108) < 0.0f) {
+		o = *(char**) (inst + 0x34);
 		v = fcn_00444700(o, (float*) (obj + 0x124));
 		*(float*) (obj + 0x108) = v;
 		if (v <= 0.04 && v >= -0.04) {
@@ -66,6 +67,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 		return;
 	}
 	if (*(float*) (obj + 0x108) > 0.0f) {
+		o = *(char**) (inst + 0x34);
 		v = fcn_00444700(o, (float*) (obj + 0x124));
 		*(float*) (obj + 0x108) = v;
 		if (v <= 0.04 && v >= -0.04) {
@@ -105,12 +107,11 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 		             *(int*) (o + 0x8c));
 		return;
 	}
+	o = *(char**) (inst + 0x34);
 	dx = *(float*) (o + 0x4c) - *(float*) (obj + 0x124);
+	dy = *(float*) (o + 0x50) - *(float*) (obj + 0x128);
 	dz = *(float*) (o + 0x54) - *(float*) (obj + 0x12c);
-	if ((float) sqrt(dx * dx +
-	                 (*(float*) (o + 0x50) - *(float*) (obj + 0x128)) *
-	                     (*(float*) (o + 0x50) - *(float*) (obj + 0x128)) +
-	                 dz * dz) >
+	if (sqrt(dz * dz + dy * dy + dx * dx) >
 	    *(float*) (obj + 0x10c) * 1.4) {
 		if (*(int*) (obj + 0xf8) >= *(int*) (obj + 0xf0) - 1) {
 			ch_SetPosition(inst, (float*) (obj + 0x124), 0);

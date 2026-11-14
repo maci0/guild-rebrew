@@ -57,11 +57,7 @@ void __cdecl he_RunLagerErweitern(char* a0)
 		fcn_004c5360();
 		rem = *(int*) (a0 + 0xb0) - 1;
 		*(int*) (a0 + 0xb0) = rem;
-		if (rem > 0) {
-			*(pos14_7f4c00*) q = g_7f4c00;
-			fcn_00500bb0(q, 0, 0xf, 0);
-			return;
-		}
+		if (rem <= 0) {
 		msg = 0x606;
 		ent = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x10));
 		if (ent) {
@@ -81,6 +77,11 @@ void __cdecl he_RunLagerErweitern(char* a0)
 				he_MessageBoxQuickjump(px, -1, buf, 0, msg, v9, -1, 0, 0);
 			}
 		}
+		} else {
+			*(pos14_7f4c00*) q = g_7f4c00;
+			fcn_00500bb0(q, 0, 0xf, 0);
+			return;
+				}
 	}
 	else {
 		ReportClientMessage("he_RunLagerErweitern():Wrong LagerID...");

@@ -119,12 +119,12 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 			count = 0;
 			j = i;
 			while (j < g_772604) {
-				if (id != *(int*) p) {
-					break;
-				}
 				p += 0xac;
 				count++;
 				j++;
+				if (id != *(int*) p) {
+					break;
+				}
 			}
 			g_6b5de0->vtbl->SelectBank(g_6b5de0, 0, id);
 			g_6b5de0->vtbl->SelectSample(g_6b5de0, 4, i * 6, count * 2);

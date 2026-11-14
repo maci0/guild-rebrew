@@ -1,4 +1,5 @@
 #include <math.h>
+#include <string.h>
 #pragma pack(push, 2)
 typedef struct {
 	int day;
@@ -58,9 +59,12 @@ float __cdecl fcn_00507540(int idx, Time* out)
 	num = (float) r * 16.0f + 72.0f;
 	n = (int) (num / (v + 1.0f));
 	{
-		Time a = {0};
-		Time b = {0};
-		Time z = {0};
+		Time a;
+		Time b;
+		Time z;
+		memset(&a, 0, sizeof(a));
+		memset(&b, 0, sizeof(b));
+		memset(&z, 0, sizeof(z));
 
 		a.day = (int) ((double) n * 0.041666666666666664);
 		a.hour = (unsigned short) (int) fmod((double) n, 24.0);

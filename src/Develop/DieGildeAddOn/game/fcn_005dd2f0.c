@@ -28,26 +28,24 @@ unsigned int __cdecl fcn_005dd2f0(int a0, int a1)
 		q[4] = 6;
 		*(__int64*) (q + 2) = g_666018;
 		v2 = fcn_005cd440(q, buf, 0, 0);
-		if (v2 == 0) {
-			return 0;
+		if (v2 != 0) {
+			q[5] = 3;
+			*(unsigned short*) &q[7] = *v2;
+			io_FormatTextBuffer(buf, 0x9e);
+			v3 = fcn_005cd440(q, buf, 0, 0);
+			if (v3 != 0) {
+				goto do_apply;
+			}
 		}
-		q[5] = 3;
-		*(unsigned short*) &q[7] = *v2;
-		io_FormatTextBuffer(buf, 0x9e);
-		v3 = fcn_005cd440(q, buf, 0, 0);
-		if (v3 == 0) {
-			return 0;
-		}
+		return 0;
 	} else {
 		v2 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a1 + 4));
 		v3 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a1 + 8));
-		if (v2 == 0) {
-			return 0;
-		}
-		if (v3 == 0) {
+		if (v2 == 0 || v3 == 0) {
 			return 0;
 		}
 	}
+do_apply:
 	v9 = ((fcn_005c6270(a0, 0x2c5) != 0) + 1) * -0x28;
 	fcn_004c54c0(*(unsigned int*) ((char*) v2 + 4), *(unsigned int*) ((char*) v3 + 4), v9, 1);
 	fcn_004c54c0(*(unsigned int*) ((char*) v3 + 4), *(unsigned int*) ((char*) v2 + 4), v9, 1);

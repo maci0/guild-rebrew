@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern void* g_6b7fdc;
+extern void* g_6b7fdc; extern float g_662c6c;
 
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl vfs_ReadData(char*, int, int, void*);
@@ -393,7 +393,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 					v36 = 1e+10f;
 					v39 = -1e+10f;
 					v40 = -1e+10f;
-					v28 = *(float*) 0x662c6c;
+					v28 = g_662c6c;
 					if (v22 > 0) {
 						v4 = *(int*) (v11 * 0xc0 + 0xbc + *(int*) (v26 + 0x15c));
 						if (v22 > 0) {

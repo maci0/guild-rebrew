@@ -59,7 +59,7 @@ void __cdecl fcn_0045a3a0(int* text, int* fmt)
 		y0 = 0;
 		outrow = 0;
 		recordrow = 0;
-		for (rows = count; rows != 0; rows--) {
+		for (rows = 0; rows < count; rows++) {
 			endy = y0 + q;
 			x0 = 0;
 			cellofs = recordrow;

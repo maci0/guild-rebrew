@@ -10,6 +10,13 @@ void __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 int __cdecl gv_CheckSlotActive(int, int);
 void* __cdecl gv_GetSlotEntry(int, int, char);
 
+#pragma pack(push, 1)
+typedef struct s5_4f2350 {
+	int a;
+	char b;
+} s5_4f2350;
+#pragma pack(pop)
+
 /* ADDRESS: GOLDTL 0x004f2350 */
 int __cdecl fcn_004f2350(int e)
 {
@@ -71,8 +78,7 @@ int __cdecl fcn_004f2350(int e)
 	*best = *(int*) (q + 4);
 	strcpy((char*) best + 4, q + 0x30);
 	strcpy((char*) best + 0x14, q + 0x40);
-	*(int*) ((char*) best + 0x24) = *(int*) (q + 0x80);
-	*(unsigned char*) ((char*) best + 0x28) = *(unsigned char*) (q + 0x84);
+	*(s5_4f2350*) ((char*) best + 0x24) = *(s5_4f2350*) (q + 0x80);
 	*(int*) ((char*) best + 0x2c) = *(unsigned char*) (q + 0x167);
 	*(int*) ((char*) best + 0x30) = *(unsigned char*) (q + 0xd);
 	*(int*) ((char*) best + 0x34) = *(unsigned char*) (q + 0x164);

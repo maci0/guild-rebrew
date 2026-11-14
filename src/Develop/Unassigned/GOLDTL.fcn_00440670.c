@@ -23,6 +23,7 @@ void __cdecl fcn_00440670(unsigned int time, unsigned int count, char* p)
 	int i;
 	unsigned int c;
 	double di;
+	float* o;
 	if (count <= 0) {
 		return;
 	}
@@ -46,14 +47,15 @@ void __cdecl fcn_00440670(unsigned int time, unsigned int count, char* p)
 			}
 			for (i = 0; i < 0x10; i++) {
 				di = (double) i;
+				o = (float*) (p + 0x38 + ((i & 3) + (i >> 2) * 4) * 0x10);
 				t[0] = (float) sin((cos(g_662cd8 * di) * g_662958 + *(float*) (p + 0x138)) + di);
 				t[1] = (float) cos((sin(g_662cc8 - g_662cd0 * di) * g_662958 + *(float*) (p + 0x13c)) + di);
 				t[2] = (float) sin(di - cos(g_662cc0 * di) * g_662958 + *(float*) (p + 0x140) + g_662cb8);
 				t[3] = (float) cos(di - sin(g_662cb0 * di + g_662cc8) * g_662958 + *(float*) (p + 0x144) + g_662ad0);
-				*(float*) (p + 0x38 + (i >> 2) * 0x40 + (i & 3) * 0x10) = t[0] * *(float*) (p + 0x28);
-				*(float*) (p + 0x3c + (i >> 2) * 0x40 + (i & 3) * 0x10) = t[1] * *(float*) (p + 0x2c);
-				*(float*) (p + 0x40 + (i >> 2) * 0x40 + (i & 3) * 0x10) = t[2] * *(float*) (p + 0x30);
-				*(float*) (p + 0x44 + (i >> 2) * 0x40 + (i & 3) * 0x10) = t[3] * *(float*) (p + 0x34);
+				o[0] = t[0] * *(float*) (p + 0x28);
+				o[1] = t[1] * *(float*) (p + 0x2c);
+				o[2] = t[2] * *(float*) (p + 0x30);
+				o[3] = t[3] * *(float*) (p + 0x34);
 			}
 			*(int*) (p + 0x150) = time;
 		}

@@ -6,7 +6,7 @@ unsigned int __cdecl fcn_005cfb00(short* a0, int* a1, unsigned char* a2)
 {
 	unsigned int hi;
 	unsigned int lo;
-	unsigned int i;
+	int i;
 	unsigned char type;
 	int match;
 	int accept;
@@ -16,7 +16,6 @@ unsigned int __cdecl fcn_005cfb00(short* a0, int* a1, unsigned char* a2)
 	short* q;
 
 	hi = 0;
-	lo = 0;
 	if (!a1)
 		return 1;
 	if (!a2)
@@ -26,7 +25,8 @@ unsigned int __cdecl fcn_005cfb00(short* a0, int* a1, unsigned char* a2)
 	if (!a1[2] && !a1[3] && !a1[4])
 		return 1;
 	type = (unsigned char) lpGebaeudePROT[a2[0] * 0x24d];
-	if (type >= 0x20)
+	lo = 0;
+	if (type > 0x1f)
 		hi = 1u << ((type - 0x20) & 0x1f);
 	else
 		lo = 1u << (type & 0x1f);
@@ -88,8 +88,8 @@ unsigned int __cdecl fcn_005cfb00(short* a0, int* a1, unsigned char* a2)
 	}
 	if ((a1[0x14 / 4] & 1) && (*(short*) (a2 + 0x27)) != -1) {
 		q = (short*) (a1 + 7);
-		for (i = 0; i < 4; i++) {
-			if ((*(short*) (a2 + 0x27)) == q[i] && q[i] != -1) {
+		for (i = 0; i < 4; i++, q++) {
+			if ((*(short*) (a2 + 0x27)) == *q && *q != -1) {
 				inlist = 0;
 				break;
 			}

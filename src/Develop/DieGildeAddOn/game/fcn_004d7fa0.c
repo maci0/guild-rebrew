@@ -1,4 +1,4 @@
-extern char* g_772eb4;
+extern char* g_772eb4; extern int g_772f2c; extern unsigned short* g_772e9c; extern int g_67a370;
 char* __cdecl fcn_004cef30(int id);
 int __cdecl fcn_0042e410(int code);
 char* __cdecl fcn_004ceac0(int a, char* s);
@@ -32,11 +32,11 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	double ratio;
 	double val;
 
-	level = *(int*) 0x772f2c;
+	level = g_772f2c;
 	if (level < 1) {
 		return level;
 	}
-	if (b == *(int*) 0x772e9c) {
+	if (b == (int) g_772e9c) {
 		base = g_772eb4 + 0xc0;
 	} else {
 		base = g_772eb4 + 0x80;
@@ -61,7 +61,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 			}
 		}
 	}
-	if (b == *(int*) 0x772e9c) {
+	if (b == (int) g_772e9c) {
 		ratio = (double) countC0 / (double) count80;
 	} else {
 		ratio = (double) count80 / (double) countC0;
@@ -107,7 +107,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 		} else {
 			e2 = (char*) fcn_004d34f0(s);
 			fcn_00455350(e2, e2 + 0x4c, point);
-			r = fcn_0045b990(*(int*) (*(int*) 0x67a370 + 0xb0),
+			r = fcn_0045b990(*(int*) (g_67a370 + 0xb0),
 			    point, &map_x, &countC0, &height);
 			if (r != 0) {
 				continue;

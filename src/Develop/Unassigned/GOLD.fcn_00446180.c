@@ -73,7 +73,7 @@ int __cdecl fcn_00446180(char* object)
                                         if (buffer != 0) {
                                             fcn_0043eef0(buffer, description + 0x10);
                                             fcn_0041e740(*(void**)(resource + 0x60));
-                                            if (*(int*)0x63373c != 0) {
+                                            if (*(unsigned char*)0x63373c != 0) {
                                                 fcn_004371d0(*(void**)(resource + 0x60), 0);
                                             }
                                             description[0x40] = 1;

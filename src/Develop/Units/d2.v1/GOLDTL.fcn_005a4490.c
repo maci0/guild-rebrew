@@ -65,7 +65,6 @@ void __cdecl fcn_005a4490(char* p)
 	prev = -1;
 	slot = -1;
 	count = 0;
-	first = -1;
 	second = -1;
 	refresh = 1;
 	for (i = 0; i < 9; i++) {

@@ -8,6 +8,7 @@ int __cdecl fcn_004bdbe0(int obj, int x, int y, int i, int j)
 	int* cell;
 	int n;
 	int row;
+	int offset;
 	int col;
 	int dx;
 	int dy;
@@ -23,10 +24,10 @@ int __cdecl fcn_004bdbe0(int obj, int x, int y, int i, int j)
 		if (n <= 0)
 			return 0;
 		dy = -y;
-		for (row = 0; row < n; row++) {
+		for (row = 0, offset = 0; row < n; row++, offset += n * 0x1c) {
 			col = 0;
 			dx = -x;
-			cell = (int*) (*(char**) (map + 0x24) + row * n * 0x1c);
+			cell = (int*) (*(char**) (map + 0x24) + offset);
 			do {
 				if (*cell == 6 || *cell == 0xb) {
 					d = dy * dy + dx * dx;

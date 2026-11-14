@@ -23,7 +23,7 @@ void __cdecl fcn_00441f90(unsigned char* base, int w, int x0, int y0, int size, 
 {
 	float inv;
 	float t;
-	volatile float f1;
+	float f1;
 	float f2;
 	float f3;
 	float f4;
@@ -41,7 +41,7 @@ void __cdecl fcn_00441f90(unsigned char* base, int w, int x0, int y0, int size, 
 	int rowbase;
 	int rows;
 	int idx;
-	unsigned char* volatile out;
+	unsigned char* out;
 
 	if (step == 1) {
 		return;

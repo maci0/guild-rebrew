@@ -37,7 +37,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-unsigned char* __cdecl gm_AddObjekt(void);
+unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_0050dc90(unsigned char*);
 int __cdecl fcn_0046f740(short x, short y, int id, int win);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
@@ -98,7 +98,7 @@ int __cdecl fcn_005bcb10(void)
 				g_777d00[n].e = e;
 				n++;
 			}
-			e = gm_AddObjekt();
+			e = gm_FindNextFilteredEntity();
 		} while (e != 0);
 	}
 	if (n == 0) {

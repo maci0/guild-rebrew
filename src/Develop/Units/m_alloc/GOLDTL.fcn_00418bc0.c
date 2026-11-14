@@ -8,24 +8,20 @@ int __cdecl fcn_00418bc0(int a0)
 {
 	int result;
 	unsigned int n;
-	char* p;
+
 
 	result = 0;
-	if (g_6b5d08 != 0)
-		return -1;
-	if (a0 != 0)
-		g_677680 = a0;
-	else
-		a0 = g_677680;
-	n = (unsigned int) a0 * 0x54;
-	p = (char*) m_alloc(n, (const char*) 0x677750);
-	g_6b5d08 = (SOUND_SOURCE*) p;
-	if (p == 0)
-		return -1;
-	a0 = g_677680 * 0x54;
-	p = (char*) g_6b5d08;
+	if (g_6b5d08 == 0) {
+		if (a0 != 0)
+			g_677680 = a0;
+		else
+			a0 = g_677680;
+		n = (unsigned int) a0 * 0x54;
+		g_6b5d08 = (SOUND_SOURCE*) m_alloc(n, (const char*) 0x677750);
+		if (g_6b5d08 != 0) {
+			a0 = g_677680 * 0x54;
 	__asm {
-		mov edi, p
+		mov edi, g_6b5d08
 		mov ebx, a0
 		xor eax, eax
 		lea ecx, [edi+edi*2]
@@ -41,6 +37,9 @@ int __cdecl fcn_00418bc0(int a0)
 		add ecx, ebx
 		rep stosb
 	}
-	return result;
+			return result;
+		}
+	}
+	return -1;
 }
 #pragma optimize("", on)

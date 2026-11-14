@@ -34,7 +34,7 @@ void __cdecl fcn_00533bb0(int a0, int a1, int* a2, int a3, ...)
 			src = va_arg(ap, char*);
 			strcpy(slot, src);
 			w = fcn_0046b520(src, 0x54) + 0x20;
-			if (maxw < w) {
+			if (w > maxw) {
 				maxw = w;
 			}
 			slot += 0x40;
@@ -54,10 +54,10 @@ void __cdecl fcn_00533bb0(int a0, int a1, int* a2, int a3, ...)
 		step = q;
 		start = q;
 	}
-	start -= maxw / 2;
+
 	slot = buf;
 	for (i = 0; i < a3; i++, slot += 0x40, start += step) {
-		w = fcn_00468df0(start, a1, 0xc5, slot, a0);
+		w = fcn_00468df0(start - maxw / 2, a1, 0xc5, slot, a0);
 		a2[i] = w;
 		*(int*) (g_1015ea0 + w * 0x2f4 + 0x84) = 0x54;
 		fcn_00469110(w, maxw);

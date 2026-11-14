@@ -10,7 +10,6 @@ int __cdecl fcn_004731c0(short x, short y, int image, int window)
 {
     GuiWin* owner;
     int index;
-    int offset;
     int height;
 
     owner = &g_00f8f120[window];
@@ -26,18 +25,17 @@ int __cdecl fcn_004731c0(short x, short y, int image, int window)
     index = owner->list[owner->count];
     if (index != -1) {
         fcn_004730d0(index, (char*) owner);
-        offset = index * 0x2ec;
-        ((GuiEnt*) (offset + (char*) g_00f8f080))->parent = owner;
-        ((GuiEnt*) (offset + (char*) g_00f8f080))->f22 = 0;
-        ((GuiEnt*) (offset + (char*) g_00f8f080))->f24 = g_00fb9070;
-        ((GuiEnt*) (offset + (char*) g_00f8f080))->f1e = 0;
-        ((GuiEnt*) (offset + (char*) g_00f8f080))->f20 = g_00fb9072;
-        ((GuiEnt*) (offset + (char*) g_00f8f080))->f40 = g_00f8f080[owner->id].f40;
-        *(int*) (offset + (char*) g_00f8f080 + 0x38) =
+        g_00f8f080[index].parent = owner;
+        g_00f8f080[index].f22 = 0;
+        g_00f8f080[index].f24 = g_00fb9070;
+        g_00f8f080[index].f1e = 0;
+        g_00f8f080[index].f20 = g_00fb9072;
+        g_00f8f080[index].f40 = g_00f8f080[owner->id].f40;
+        *(int*) ((char*) &g_00f8f080[index] + 0x38) =
             *(int*) ((char*) &g_00f8f080[owner->id] + 0x38);
         ++owner->count;
         fcn_00472c70(owner, &window, &image);
-        height = ((GuiEnt*) (offset + (char*) g_00f8f080))->f16;
+        height = g_00f8f080[index].f16;
         if (y + height > *(int*) ((char*) owner + 0x244)) {
             *(int*) ((char*) owner + 0x244) = y + window * 2 + height;
         }

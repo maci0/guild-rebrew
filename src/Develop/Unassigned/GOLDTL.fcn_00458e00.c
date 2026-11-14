@@ -17,7 +17,7 @@ char __cdecl fcn_00458e00(char* a0, char* a1)
 	int shade;
 	float* uv;
 	if (a0 != 0 && *(int*) (a0 + 0xc) > 0 && a1 != 0 && *(int*) (a1 + 0x1c) != 0) {
-		scale = *(float*) a1 * *(float*) 0x6628cc * *(float*) 0x662dc0;
+		scale = *(float*) a1 * 0.5f * *(float*) 0x662dc0;
 		if (((unsigned char*) a1)[0x2a] == 0) {
 			return 1;
 		}

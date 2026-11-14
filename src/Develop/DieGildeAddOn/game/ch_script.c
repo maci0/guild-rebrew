@@ -36,30 +36,19 @@ int __cdecl WalkToDummy(char** character, char** dummy)
 /* ADDRESS: GOLDTL 0x0040d980 */
 int __cdecl MoveCharacterCamera(char** character, char** view, int* mode)
 {
-    char* object;
-    char* name;
-
-    object = *character;
-    if (object == 0) {
+    if (*character == 0) {
         fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118),
             "MoveCharacterCamera(): Invalid character");
         return 1;
     }
-    name = *view;
-    if (strcmp("CLOSEUP", name) == 0) {
-        fcn_004056f0(object, 0, *mode);
-        return 0;
-    }
-    if (strcmp("LEFT_SHOULDER", name) == 0) {
-        fcn_004056f0(object, 1, *mode);
-        return 0;
-    }
-    if (strcmp("RIGHT_SHOULDER", name) == 0) {
-        fcn_004056f0(object, 2, *mode);
-        return 0;
-    }
-    if (strcmp("EGO", name) == 0) {
-        fcn_004056f0(object, 3, *mode);
+    if (strcmp("CLOSEUP", *view) == 0) {
+        fcn_004056f0(*character, 0, *mode);
+    } else if (strcmp("LEFT_SHOULDER", *view) == 0) {
+        fcn_004056f0(*character, 1, *mode);
+    } else if (strcmp("RIGHT_SHOULDER", *view) == 0) {
+        fcn_004056f0(*character, 2, *mode);
+    } else if (strcmp("EGO", *view) == 0) {
+        fcn_004056f0(*character, 3, *mode);
     }
     return 0;
 }

@@ -10,7 +10,7 @@ int __cdecl fcn_004cdda0(char* a1, unsigned char* a2, unsigned char* a3)
 {
 	char buf[0x240];
 	void* p;
-	char* prev;
+	char* prev = 0;
 	char* node;
 	int n;
 	int i;
@@ -30,7 +30,7 @@ int __cdecl fcn_004cdda0(char* a1, unsigned char* a2, unsigned char* a3)
 	n = *(int*) (a1 + 0x14);
 	memcpy(buf, g_aed340, n * 64);
 	node = buf + 0x40;
-	prev = 0;
+
 	i = 0;
 	if (n > 0) {
 		i = n;

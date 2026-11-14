@@ -83,18 +83,18 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 	handles[3] = fcn_00502cd0(*(unsigned int*) (a0 + 0x5d), 2, 6, 0, 0x2a);
 	n = 2;
 	ents = (char*) (lpGebaeudePROT + (unsigned int) *a0 * 0x24d);
-	if (*ents != 0x1f) {
-		ids[0] = 0x225;
-		ids[1] = 0x226;
-		if ((unsigned char) ents[0x247] >= 2) {
-			ids[2] = 0x227;
-			n = 3;
-		}
-	} else {
+	if (*ents == 0x1f) {
 		ids[0] = 0x293;
 		ids[1] = 0x294;
 		if ((unsigned char) ents[0x247] >= 2) {
 			ids[2] = 0x295;
+			n = 3;
+		}
+	} else {
+		ids[0] = 0x225;
+		ids[1] = 0x226;
+		if ((unsigned char) ents[0x247] >= 2) {
+			ids[2] = 0x227;
 			n = 3;
 		}
 	}
@@ -107,11 +107,11 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 	while (h) {
 		j = 0;
 		do {
-			if (*(unsigned short*) (h + 0xac) == ids[j / 4]) {
+			if (*(unsigned short*) (h + 0xac) == *(unsigned int*) ((char*) ids + j)) {
 				q = (int*) (h + 0x8c);
 				for (i = 0; i < 4; i++) {
 					if (*q != -1)
-						counts[j / 4]++;
+						(*(int*) ((char*) counts + j))++;
 					q++;
 				}
 			}
@@ -163,11 +163,11 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 		while (h) {
 			j = 0;
 			do {
-				if (*(unsigned short*) (h + 0xac) == ids[j / 4]) {
+				if (*(unsigned short*) (h + 0xac) == *(unsigned int*) ((char*) ids + j)) {
 					q = (int*) (h + 0x8c);
 					for (i = 0; i < 4; i++) {
 						if (*q != -1)
-							counts[j / 4]++;
+							(*(int*) ((char*) counts + j))++;
 						q++;
 					}
 				}

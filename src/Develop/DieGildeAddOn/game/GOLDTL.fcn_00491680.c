@@ -15,7 +15,7 @@ int __cdecl fcn_00491680(char* e, int unused, int* out)
 	int job;
 
 	job = gm_MapEntityStatRange(*(unsigned char*) (e + 0x164));
-	w = *(float*) (e + 0x100) - 2.0;
+	w = (float) (*(float*) (e + 0x100) - 2.0);
 	y = (*(float*) (e + 0xf4) - 2.0) * *(float*) (e + 0xfc);
 	z = (*(float*) (e + 0x10c) - 2.0) * *(float*) (e + 0x114);
 	if (job == 5 || job == 6) {

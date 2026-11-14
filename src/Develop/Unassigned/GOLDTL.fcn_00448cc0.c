@@ -28,7 +28,7 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 	float len;
 	unsigned char flag;
 	float ang;
-
+	float t[3];
 	float m[16];
 	float v[4];
 	float p[16];
@@ -71,19 +71,19 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 		}
 		if (same) {
 			if (self == *(unsigned char**) 0x6b8484 && g_6b85a0 == 0) {
-				x = m[0] * *(float*) 0x662d40 + m[4] * *(float*) 0x662d44
+				t[0] = m[0] * *(float*) 0x662d40 + m[4] * *(float*) 0x662d44
 				    + m[8] * *(float*) 0x662d48;
-				z = m[2] * *(float*) 0x662d40 + m[6] * *(float*) 0x662d44
+				t[2] = m[2] * *(float*) 0x662d40 + m[6] * *(float*) 0x662d44
 				    + m[10] * *(float*) 0x662d48;
-				len = (float) sqrt(x * x + z * z);
+				t[1] = 0.0f; len = (float) sqrt(t[0] * t[0] + t[2] * t[2]);
 				if (!(len < g_662a3c)) {
-					v[0] = x; v[1] = 0.0f; v[2] = z;
-					ang = -(float) fcn_004514d0((float*) 0x662d40, v);
-					x = (float) cos(ang) * dir[0] + (float) sin(ang) * dir[1];
-					z = (float) cos(ang) * dir[1] - (float) sin(ang) * dir[0];
+					ang = -(float) fcn_004514d0((float*) 0x662d40, t);
+					t[0] = dir[0]; t[2] = dir[1];
+					x = (float) cos(ang) * t[0] + (float) sin(ang) * t[2];
+					z = (float) cos(ang) * t[2] - (float) sin(ang) * t[0];
 				} else {
-					x = dir[1] * m[4] + dir[0] * m[0] + g_6628a8 * m[8];
-					z = dir[1] * m[6] + dir[0] * m[2] + g_6628a8 * m[10];
+					t[0] = dir[0]; t[1] = dir[1]; x = t[1] * m[4] + t[0] * m[0] + g_6628a8 * m[8];
+					z = t[1] * m[6] + t[0] * m[2] + g_6628a8 * m[10];
 				}
 				written = 1;
 				outA[0] = x + *(float*) (self + 0x4c);

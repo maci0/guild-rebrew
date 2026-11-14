@@ -100,7 +100,6 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 	int n;
 	int val;
 	BldRec* rec;
-	char* goods;
 
 	hit = 0;
 	prod = fcn_00502cd0(*(int*) (bld->x16c + 0x5d), 2, 6, 0, 0xff);
@@ -119,8 +118,7 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 			rec = (BldRec*) (g_100d0c0 + i * 0x58);
 			if (rec->id != (int) bld->id)
 				continue;
-			goods = lpObjektePROT + rec->id * 0x41;
-			if ((int) *(unsigned short*) (goods + 0x36) <= rec->f40 &&
+			if ((int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36) <= rec->f40 &&
 			    fcn_00486640(bld, rec, 1)) {
 				rec->f54 = rec->f54 | 8;
 				fcn_004868d0(bld, rec);
@@ -139,8 +137,7 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 				rec = (BldRec*) (g_100d0c0 + i * 0x58);
 				if (rec->id != (int) bld->id)
 					continue;
-				goods = lpObjektePROT + rec->id * 0x41;
-				if ((int) *(unsigned short*) (goods + 0x36) <= rec->f40 &&
+				if ((int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36) <= rec->f40 &&
 				    fcn_00486640(bld, rec, 1)) {
 					rec->f54 = rec->f54 | 8;
 					fcn_004868d0(bld, rec);
@@ -161,28 +158,27 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 			for (rec = (BldRec*) g_100d0c0; (char*) rec < g_100d0c0 + 0xb00; rec = (BldRec*) ((char*) rec + 0x58)) {
 				if (rec->id != n)
 					continue;
-				goods = lpObjektePROT + rec->id * 0x41;
 				if ((int) ((Craft*) craft)->x1c < rec->x1c)
 					break;
 				if ((int) ((Craft*) craft)->x1d < rec->x20)
 					break;
-				if (rec->f40 < (int) *(unsigned short*) (goods + 0x36))
+				if (rec->f40 < (int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36))
 					break;
 				val = fcn_00503d10(rec->id);
 				if (val == 0)
 					break;
-				if ((int) ((unsigned short) *(unsigned short*) (goods + 0x36) + rec->f3c) <= gm_eval_SlotVoll(val, rec->id, 1000000)) {
+				if ((int) ((unsigned short) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36) + rec->f3c) <= gm_eval_SlotVoll(val, rec->id, 1000000)) {
 					if (fcn_00486640(bld, rec, 1)) {
 						rec->f54 = rec->f54 | 8;
 						fcn_004868d0(bld, rec);
 						bld->id = (unsigned short) rec->id;
-						sprintf(name, "Produktion von %s starten, da Humanplayer es so will.", goods + 1);
+						sprintf(name, "Produktion von %s starten, da Humanplayer es so will.", (lpObjektePROT + rec->id * 0x41) + 1);
 						goto done;
 					}
 					if (fcn_00486640(bld, rec, 0)) {
 						fcn_004868d0(bld, rec);
 						bld->id = (unsigned short) rec->id;
-						sprintf(name, "Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will", goods + 1);
+						sprintf(name, "Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will", (lpObjektePROT + rec->id * 0x41) + 1);
 						goto done;
 					}
 				}
@@ -202,51 +198,49 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
 		if ((rec->f54 & 0x20) || (rec->f54 & 0x200))
 			continue;
-		goods = lpObjektePROT + rec->id * 0x41;
-		if ((*(unsigned char*) goods == 0x17 || *(unsigned char*) goods == 0x25) && rec->f3c >= 5)
+		if ((*(unsigned char*) (lpObjektePROT + rec->id * 0x41) == 0x17 || *(unsigned char*) (lpObjektePROT + rec->id * 0x41) == 0x25) && rec->f3c >= 5)
 			continue;
 		if ((int) ((Craft*) craft)->x1c < rec->x1c)
 			continue;
 		if ((int) ((Craft*) craft)->x1d < rec->x20)
 			continue;
-		if (rec->f40 < (int) *(unsigned short*) (goods + 0x36))
+		if (rec->f40 < (int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36))
 			continue;
 		n = fcn_00503d10(rec->id);
 		if (n == 0)
 			continue;
-		if ((int) ((unsigned short) *(unsigned short*) (goods + 0x36) + rec->f3c) > gm_eval_SlotVoll(n, rec->id, 1000000))
+		if ((int) ((unsigned short) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36) + rec->f3c) > gm_eval_SlotVoll(n, rec->id, 1000000))
 			continue;
 		if (!fcn_00486640(bld, rec, 1))
 			continue;
 		rec->f54 = rec->f54 | 8;
 		fcn_004868d0(bld, rec);
 		bld->id = (unsigned short) rec->id;
-		sprintf(name, "Produktion von %s starten", goods + 1);
+		sprintf(name, "Produktion von %s starten", (lpObjektePROT + rec->id * 0x41) + 1);
 		goto done;
 	}
 	for (i = 0; i < g_100b0ac; i++) {
 		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
 		if ((rec->f54 & 0x20) || (rec->f54 & 0x200))
 			continue;
-		goods = lpObjektePROT + rec->id * 0x41;
-		if ((*(unsigned char*) goods == 0x17 || *(unsigned char*) goods == 0x25) && rec->f3c >= 5)
+		if ((*(unsigned char*) (lpObjektePROT + rec->id * 0x41) == 0x17 || *(unsigned char*) (lpObjektePROT + rec->id * 0x41) == 0x25) && rec->f3c >= 5)
 			continue;
 		if ((int) ((Craft*) craft)->x1c < rec->x1c)
 			continue;
 		if ((int) ((Craft*) craft)->x1d < rec->x20)
 			continue;
-		if (rec->f40 < (int) *(unsigned short*) (goods + 0x36))
+		if (rec->f40 < (int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36))
 			continue;
 		n = fcn_00503d10(rec->id);
 		if (n == 0)
 			continue;
-		if ((int) ((unsigned short) *(unsigned short*) (goods + 0x36) + rec->f3c) > gm_eval_SlotVoll(n, rec->id, 1000000))
+		if ((int) ((unsigned short) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36) + rec->f3c) > gm_eval_SlotVoll(n, rec->id, 1000000))
 			continue;
 		if (!fcn_00486640(bld, rec, 0))
 			continue;
 		fcn_004868d0(bld, rec);
 		bld->id = (unsigned short) rec->id;
-		sprintf(name, "Produktion von %s starten obwohl Rohstoffe fehlen", goods + 1);
+		sprintf(name, "Produktion von %s starten obwohl Rohstoffe fehlen", (lpObjektePROT + rec->id * 0x41) + 1);
 		goto done;
 	}
 	bld->id = 0;
@@ -257,9 +251,8 @@ done:
 		for (i = 0; i < g_100b0ac; i++) {
 			rec = (BldRec*) (g_100d0c0 + i * 0x58);
 			if (rec->f54 & 8) {
-				goods = lpObjektePROT + rec->id * 0x41;
 				for (j = 0; j < 4; j++) {
-					if (*(int*) (g_100b0c0 + rec->cand[j] * 0x40 + 0x28) < (int) *(unsigned short*) (goods + 0x26 + j * 2))
+					if (*(int*) (g_100b0c0 + rec->cand[j] * 0x40 + 0x28) < (int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x26 + j * 2))
 						rec->f54 = rec->f54 & 0xfffffff7;
 				}
 			}

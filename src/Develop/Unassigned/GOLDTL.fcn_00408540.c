@@ -1,7 +1,7 @@
 /* Reconstructed from native disassembly; frame slots follow the decompiler map. */
 #include <math.h>
 extern void* g_6b5c5c; extern int g_67a370; extern char* g_6b8300;
-
+extern double g_662908; extern float g_662914; extern const float g_662910; extern float g_6628cc; extern const float g_6628a0;
 int __cdecl fcn_00402610();
 int __cdecl fcn_00405960();
 int __cdecl fcn_00405a50();
@@ -68,7 +68,7 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
     return -1;
   v35 = fcn_00402610(v27);
   fcn_00408250(((int)g_6b5c5c),v35);
-  v36 = (int)(*(double *)0x662908 + (*(float *)0x662914 / *(float *)(v35 + 0x10)));
+  v36 = (int)(g_662908 + (g_662914 / *(float *)(v35 + 0x10)));
   if (v36 > 10)
     v36 = 10;
   v10 = *(int *)(v28 + 0xf8);
@@ -87,8 +87,8 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
   if (a1 <= 0)
     goto label_ret0;
   v24 = a2;
-label_40869c:
-  if (!(v13 & 1)) {
+  do {
+  if (v13 & 1) break; {
     v10 = 0;
     v7 = (unsigned char *)(v27 + 0x94);
     v28 = *v24;
@@ -153,10 +153,10 @@ label_40874a:
             v31 = *(float *)(v10 + 0x4c) - *(float *)(v2 + 0x4c);
             v32 = *(float *)(v10 + 0x50) - *(float *)(v2 + 0x50);
             v33 = *(float *)(v10 + 0x54) - *(float *)(v2 + 0x54);
-            v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * (*(float *)0x662910) * (*(float *)0x6628cc);
+            v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * g_662910 * g_6628cc;
             *(float *)(v27 + 0x1a4) = v31;
-            if ((*(float *)0x6628a0) < v31)
-              v31 = (*(float *)0x6628a0);
+            if (g_6628a0 < v31)
+              v31 = g_6628a0;
             *(float *)(v27 + 0x1a4) = v31;
             v13 = 2;
           }
@@ -168,7 +168,6 @@ label_40875f:
     } while (v28 < 0x20);
     goto label_40890a;
   }
-  goto label_40892d;
   while( 1 ) {
     if ((*(int *)(*v24 + v28) == v27) && (*(unsigned char *)(*v24 + 4 + v28) & 2)) goto label_408905;
     v28 += 8;
@@ -181,17 +180,17 @@ label_408870:
   v31 = *(float *)(v28 + 0x4c) - *(float *)(v6 + 0x4c);
   v32 = *(float *)(v28 + 0x50) - *(float *)(v6 + 0x50);
   v33 = *(float *)(v28 + 0x54) - *(float *)(v6 + 0x54);
-  v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * (*(float *)0x662910) * (*(float *)0x6628cc);
+  v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * g_662910 * g_6628cc;
   *(float *)(v27 + 0x1a4) = v31;
-  if ((*(float *)0x6628a0) < v31)
-    v31 = (*(float *)0x6628a0);
+  if (g_6628a0 < v31)
+    v31 = g_6628a0;
   *(float *)(v27 + 0x1a4) = v31;
   v13 = 2;
 label_40890a:
   v26 += 1;
   v24 = &v24[1];
-  if (a1 <= (int)v26) goto label_40892d;
-  goto label_40869c;
+  } while ((int)v26 < a1);
+  goto label_40892d;
 label_408905:
   v13 = 1;
   goto label_40890a;
@@ -217,7 +216,7 @@ label_40892d:
   } while (v28 < a1);
   if (!(v13 & 1))
     goto label_ret0;
-  if (*(float *)(v27 + 0x1a4) < *(double *)0x662908)
+  if (*(float *)(v27 + 0x1a4) < g_662908)
     *(unsigned int *)(v27 + 0x1a4) = 0x3f000000;
   v26 = 0;
   do {

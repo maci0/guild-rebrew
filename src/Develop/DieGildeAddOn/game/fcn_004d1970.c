@@ -24,16 +24,16 @@ void* __cdecl fcn_004d1970(int a1, int a2)
 	EntityStruct* scan;
 
 	src = (char*) gm_LookupEntityRecordById(a1);
+	i = 0;
 	pool = (EntityStruct*) g_9b4a40;
 	scan = pool;
-	i = 0;
-	for (;;) {
+	do {
 		if (scan->entity_index == 0xffff)
-			break;
+			goto found;
 		i++; scan++;
-		if ((int) scan >= (int) (pool + 32))
-			return 0;
-	}
+	} while ((int) scan < (int) (pool + 32));
+	return 0;
+found:
 	rec = (char*) &pool[i];
 	pool[i] = *(EntityStruct*) src;
 	*(int*) ((char*) g_9b4a40 + i * 0x21c + 0x1ac) = 0;

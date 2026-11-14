@@ -60,13 +60,13 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 	p = m_alloc(0x16c, (char*) 0x67a1d4);
 	*(int*) (p + 0x140) = *(int*) (a0 + 0x44);
 	*(int*) (p + 0x148) = 2;
-	for (k = 0; ; k++) {
-		c = a6[k];
-		p[k] = c;
-		if (c == 0) {
-			break;
-		}
-	}
+	r = a6;
+	do {
+		c = *r;
+		p[r - a6] = c;
+		r++;
+	} while (c != 0);
+
 	*(char**) (p + 0x15c) = m_alloc(*(int*) (p + 0x148) * 0xc0, (char*) 0x67a1b4);
 	**(int**) (p + 0x15c) = 0;
 	*(int*) (*(int*) (p + 0x15c) + 4) = a7 * 3;
@@ -243,9 +243,9 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 			*(float*) (*(int*) (p + 0x15c) + 0xd4) = rx * *(float*) 0x662c30;
 			*(float*) (*(int*) (p + 0x15c) + 0xd8) = ry * *(float*) 0x662c30;
 			*(float*) (*(int*) (p + 0x15c) + 0xdc) = rz * *(float*) 0x662c30;
-			invx = *(float*) 0x6628a0 / rx;
-			invy = *(float*) 0x6628a0 / ry;
-			invz = *(float*) 0x6628a0 / rz;
+			invx = 1.0f / rx;
+			invy = 1.0f / ry;
+			invz = 1.0f / rz;
 			for (i = 0; i < *(int*) (p + 0x140); i++) {
 				*(unsigned char*) (*(int*) (*(int*) (p + 0x15c) + 0x174) + i * 3) =
 				    (unsigned char) ((*(float*) (r + i * 0x10) - minx) *

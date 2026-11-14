@@ -125,9 +125,9 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 	fcn_00589390();
 	dir1 = a0->dir1; dir2 = a0->dir2; dir3 = a0->dir3;
 	if (a0->mode == 0) {
-		pos0.x = dir1.x * 50.0f + a0->pos.x;
-		pos0.y = dir1.y * 50.0f + a0->pos.y;
-		pos0.z = dir1.z * 50.0f + a0->pos.z;
+		pos0.x = dir1.x * 50.0f; pos0.y = dir1.y * 50.0f; pos0.z = dir1.z * 50.0f;
+		pos0.x += a0->pos.x; pos0.y += a0->pos.y;
+		pos0.z += a0->pos.z;
 		fcn_005e8e80(&p0, &pos0, &a0->dir1, speed, b, 7874.0f);
 		fcn_005e8fe0((float*) &p0, spread, &a0->dir2, spread, &a0->dir3,
 			scale);

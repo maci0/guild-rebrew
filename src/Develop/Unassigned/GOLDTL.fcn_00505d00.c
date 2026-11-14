@@ -25,7 +25,7 @@ int __cdecl fcn_00505d00(unsigned char* building, int* out)
 	second = out + 0xd;
 	other = out + 0x19;
 	count = 0;
-	for (i = 0, e = g_slot_table + 0x165; e < g_slot_table + 0x165 + 0x300 * 0x21c; i++, e += 0x21c) {
+	for (i = 0, e = g_slot_table + 0x165; (int) e < (int) (g_slot_table + 0x165 + 0x300 * 0x21c); i++, e += 0x21c) {
 		if (*(unsigned char**) (e + 7) != building) {
 			continue;
 		}

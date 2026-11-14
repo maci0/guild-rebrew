@@ -93,7 +93,7 @@ matched1:
 	memset(a2, 0, a1 * 0x38);
 	o = a2;
 	e = (Ent*) g_slot_table;
-	while ((unsigned int) n < (unsigned int) a1 && (int) e < 0x85a0a0) {
+	while ((int) e < 0x85a0a0 && (unsigned int) n < (unsigned int) a1) {
 		if (e == a0) {
 			goto next;
 		}

@@ -1,7 +1,9 @@
+#include "client_types.h"
 extern char* g_1015ea0;
 extern int g_6a4768;
 extern int g_77e8a0;
 extern int g_772514;
+extern s_77e8c0 g_77e8c0[16];
 
 int __cdecl fcn_005455b0(void);
 int __cdecl fcn_0046f740(int, int, int, int);
@@ -40,7 +42,7 @@ allocate_slot:
 		g_6a4768 = i;
 	}
 	d2_SetForm(g_77e8a0, 0);
-	*(int*) (e + 0x74) = i * 0xc + 0x77e8c0;
+	*(int*) (e + 0x74) = (int) &g_77e8c0[i];
 	*(int*) ((char*) *(int*) (e + 0x74)) = (int) e;
 	*(int*) ((char*) *(int*) (e + 0x74) + 4) = fcn_0046f740(i << 5, 0, a5, g_772514);
 	v = *(int*) ((char*) *(int*) (e + 0x74) + 4);

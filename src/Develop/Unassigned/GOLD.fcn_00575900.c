@@ -32,9 +32,9 @@ int __cdecl fcn_00575900(unsigned int id)
 		break;
 	case 0x60b:
 		v = *(signed char*) 0x6f263c;
-		return (v & 0x40) >> 6;
+		return (v & 0x40) != 0;
 	case 0x60c:
-		if (*(signed char*) 0x6f263c < 0)
+		if (*(unsigned char*) 0x6f263c & 0x80)
 			return 1;
 		break;
 	case 0x60d:

@@ -46,7 +46,7 @@ extern int g_100f950;
 void __cdecl fcn_0046b2b0(int id);
 int __cdecl fcn_0046b520(char* s, int font);
 void __cdecl fcn_00469c40(int x, int y, int slot);
-int __cdecl fcn_004699c0(int x, int y, int a3);
+int __cdecl fcn_00469c30(int x, int y, int a3);
 char __cdecl fcn_00411610(int shift, int ctrl, int alt, char key);
 
 
@@ -73,97 +73,10 @@ void __cdecl fcn_00474300(void)
 			if (len > 0) {
 				p = (char*) w;
 				p[len + 0x2b] = 0;
-				w = (*(Combo**) &g_7725d0);
 			}
 			g_14cf950 = 0;
+			goto common_tail;
 		}
-		break;
-	case 15:
-		{
-			ComboList* list;
-			int i;
-			int idx;
-			int* cell;
-			int* p;
-			Combo* w2;
-
-			w = (*(Combo**) &g_7725d0);
-			list = (ComboList*) ((int*) g_1015ea0)[w->sel * 189 + 16];
-			if (g_14cf736 == 0 && g_14cf72a == 0) {
-				i = g_100f1cc;
-				if (i >= list->count - 1) {
-					i = -1;
-					g_100f1cc = -1;
-				}
-				i++;
-				if (i < list->count) {
-					p = list->items + i;
-					for (;;) {
-						idx = *p;
-						cell = &((int*) g_1015ea0)[idx * 189];
-						if (cell[8] == 0x41 && cell[0x12] == 0) {
-							goto found15;
-						}
-						i++;
-						p++;
-						if (i >= list->count) {
-							break;
-						}
-					}
-				}
-			} else {
-				i = g_100f1cc;
-				if (i == 0) {
-					i = list->count;
-					g_100f1cc = i;
-				}
-				i--;
-				if (i >= 0) {
-					p = list->items + i;
-					for (;;) {
-						idx = *p;
-						cell = &((int*) g_1015ea0)[idx * 189];
-						if (cell[8] == 0x41 && cell[0x12] == 0) {
-							goto found15;
-						}
-						i--;
-						p--;
-						if (i < 0) {
-							break;
-						}
-					}
-				}
-			}
-			goto tail15;
-found15:
-			g_100f1cc = i;
-			w = (*(Combo**) &g_7725d0);
-			((int*) g_1015ea0)[w->sel * 189 + 15] = 0;
-			idx = list->items[i];
-			w2 = (Combo*) ((int*) g_1015ea0)[idx * 189 + 3];
-			(*(Combo**) &g_7725d0) = w2;
-			((int*) g_1015ea0)[w2->sel * 189 + 15] = 1;
-			g_100f1d4 = g_6772c0 - saved;
-			g_100f940 = w2->text_len;
-			g_100f950 = 0;
-tail15:
-			if (g_67d8ec != -1) {
-				fcn_0046b2b0(g_67d8ec);
-				g_67d8ec = -1;
-			}
-			w = (*(Combo**) &g_7725d0);
-			if (w->flags & 1) {
-				g_100f898 = fcn_0046b520(w->text, w->text_px) + w->f4;
-				g_100f89c = w->f8;
-				if (g_67d8ec != -1) {
-					fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
-				} else {
-					g_67d8ec = fcn_004699c0((short) g_100f898, (short) (g_100f89c - 7), g_67d3b0 + 8);
-				}
-			}
-			g_14cf950 = 0;
-		}
-		break;
 	case 28:
 		w = (*(Combo**) &g_7725d0);
 		((int*) g_1015ea0)[w->sel * 189 + 15] = 0;
@@ -175,7 +88,119 @@ tail15:
 		}
 		/* fall through */
 	case 1:
-		break;
+	case 59:
+	case 60:
+	case 61:
+	case 62:
+	case 63:
+	case 64:
+	case 65:
+	case 66:
+	case 67:
+	case 68:
+	case 87:
+	case 88:
+common_tail:
+		w = (*(Combo**) &g_7725d0);
+		if (w == 0) {
+			return;
+		}
+		if (w->flags & 2) {
+			w->text_len = atoi(w->text);
+			w = (*(Combo**) &g_7725d0);
+		}
+		g_100f898 = fcn_0046b520(w->text, w->text_px) + w->f4;
+		if (g_67d8ec != -1) {
+			fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
+		}
+		return;
+	case 15:
+		{
+		ComboList* list;
+		int i;
+		int idx;
+		int* cell;
+		int* p;
+		Combo* w2;
+
+		w = (*(Combo**) &g_7725d0);
+		list = (ComboList*) ((int*) g_1015ea0)[w->sel * 189 + 16];
+		if (g_14cf736 == 0 && g_14cf72a == 0) {
+			i = g_100f1cc;
+			if (i >= list->count - 1) {
+				i = -1;
+				g_100f1cc = -1;
+			}
+			i++;
+			if (i < list->count) {
+				p = list->items + i;
+				for (;;) {
+					idx = *p;
+					cell = &((int*) g_1015ea0)[idx * 189];
+					if (cell[8] == 0x41 && cell[0x12] == 0) {
+						goto found15;
+					}
+					i++;
+					p++;
+					if (i >= list->count) {
+						break;
+					}
+				}
+			}
+		} else {
+			i = g_100f1cc;
+			if (i == 0) {
+				i = list->count;
+				g_100f1cc = i;
+			}
+			i--;
+			if (i >= 0) {
+				p = list->items + i;
+				for (;;) {
+					idx = *p;
+					cell = &((int*) g_1015ea0)[idx * 189];
+					if (cell[8] == 0x41 && cell[0x12] == 0) {
+						goto found15;
+					}
+					i--;
+					p--;
+					if (i < 0) {
+						break;
+					}
+				}
+			}
+		}
+		goto tail15;
+found15:
+		g_100f1cc = i;
+		w = (*(Combo**) &g_7725d0);
+		((int*) g_1015ea0)[w->sel * 189 + 15] = 0;
+		idx = list->items[i];
+		w2 = (Combo*) ((int*) g_1015ea0)[idx * 189 + 3];
+		(*(Combo**) &g_7725d0) = w2;
+		((int*) g_1015ea0)[w2->sel * 189 + 15] = 1;
+		g_100f1d4 = g_6772c0 - saved;
+		g_100f940 = (*(Combo**) &g_7725d0)->text_len;
+		g_100f950 = 0;
+tail15:
+		if (g_67d8ec != -1) {
+			fcn_0046b2b0(g_67d8ec);
+			w = (*(Combo**) &g_7725d0);
+			g_67d8ec = -1;
+		}
+		if (w->flags & 1) {
+			g_100f898 = fcn_0046b520(w->text, w->text_px) + w->f4;
+			g_100f89c = w->f8;
+			if (g_67d8ec != -1) {
+				fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
+			} else {
+				g_67d8ec = fcn_00469c30((short) g_100f898, (short) (g_100f89c - 7), g_67d3b0 + 8);
+			}
+			w = (*(Combo**) &g_7725d0);
+		}
+		g_14cf950 = 0;
+		}
+		goto common_tail;
 	default:
 		{
 		int len;
@@ -204,33 +229,8 @@ tail15:
 		}
 		g_14cf950 = 0;
 		}
-		break;
-	case 60:
-	case 61:
-	case 62:
-	case 63:
-	case 64:
-	case 65:
-	case 66:
-	case 67:
-	case 68:
-	case 69:
-		break;
+		goto common_tail;
 	}
-common_tail:
-	w = (*(Combo**) &g_7725d0);
-	if (w == 0) {
-		return;
-	}
-	if (w->flags & 2) {
-		w->text_len = atoi(w->text);
-		w = (*(Combo**) &g_7725d0);
-	}
-	g_100f898 = fcn_0046b520(w->text, w->text_px) + w->f4;
-	if (g_67d8ec != -1) {
-		fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
-	}
-	return;
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7725d0[68];

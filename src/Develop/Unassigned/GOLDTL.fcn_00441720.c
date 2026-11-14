@@ -25,15 +25,15 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 	}
 	fx = a1[0] - *(float*) ((char*) a0 + 0x50);
 	fz = a1[2] - *(float*) ((char*) a0 + 0x58);
-	if (*(float*) ((char*) a0 + 0x60) != *(float*) 0x6628a8) {
+	if (*(float*) ((char*) a0 + 0x60) != 0.0f) {
 		fx = fx / *(float*) ((char*) a0 + 0x60);
 	}
-	if (*(float*) ((char*) a0 + 0x78) != *(float*) 0x6628a8) {
+	if (*(float*) ((char*) a0 + 0x78) != 0.0f) {
 		fz = fz / *(float*) ((char*) a0 + 0x78);
 	}
-	v4 = (int) (fx + *(float*) 0x6628cc);
+	v4 = (int) (fx + 0.5f);
 	*a3 = v4;
-	v3 = (int) (fz + *(float*) 0x6628cc);
+	v3 = (int) (fz + 0.5f);
 	*a4 = v3;
 	if ((int) *a3 < 0 || a0[0] <= (int) *a3 || v3 < 0 || a0[0] <= v3) {
 		return 0;
@@ -58,7 +58,7 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 	fx = (fx - (float) v4) / (float) s;
 	fz = (fz - (float) v3) / (float) s;
 	if (data != 0 && (*(unsigned char*) (data + (unsigned int) v4 / s + ((unsigned int) v3 / s * (int) width) / s) & 0x80) != 0) {
-		if (!(fz + fx > *(float*) 0x6628a0)) {
+		if (!(fz + fx > 1.0f)) {
 			v13 = (float) ((unsigned char*) a0[4])[width * v3 + v4];
 			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + width * v3] - v13;
 			v12 = (float) ((unsigned char*) a0[4])[((v3 + s) & mask) * width + v4] - v13;
@@ -68,22 +68,22 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 			v13 = (float) ((unsigned char*) a0[4])[v9 + v6];
 			v11 = (float) ((unsigned char*) a0[4])[v6 + v4] - v13;
 			v12 = (float) ((unsigned char*) a0[4])[v3 * width + v9] - v13;
-			fx = *(float*) 0x6628a0 - fx;
-			fz = *(float*) 0x6628a0 - fz;
+			fx = 1.0f - fx;
+			fz = 1.0f - fz;
 		}
 	} else {
-		if (!(*(float*) 0x6628a0 - fz + fx > *(float*) 0x6628a0)) {
+		if (!(1.0f - fz + fx > 1.0f)) {
 			v7 = ((v3 + s) & mask) * width;
 			v13 = (float) ((unsigned char*) a0[4])[v7 + v4];
 			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + v7] - v13;
-			fz = *(float*) 0x6628a0 - fz;
+			fz = 1.0f - fz;
 			v12 = (float) ((unsigned char*) a0[4])[width * v3 + v4] - v13;
 		} else {
 			v9 = (v4 + s) & mask;
 			v13 = (float) ((unsigned char*) a0[4])[width * v3 + v9];
 			v11 = (float) ((unsigned char*) a0[4])[width * v3 + v4] - v13;
 			v12 = (float) ((unsigned char*) a0[4])[((v3 + s) & mask) * width + v9] - v13;
-			fx = *(float*) 0x6628a0 - fx;
+			fx = 1.0f - fx;
 		}
 	}
 	*a5 = (v11 * fx + v12 * fz + v13) * *(float*) ((char*) a0 + 0x84) + *(float*) ((char*) a0 + 0x54);

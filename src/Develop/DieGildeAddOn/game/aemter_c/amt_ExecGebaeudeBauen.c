@@ -98,16 +98,16 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 		v4 = 1;
 	}
 	sprintf(event + 0x9c, (char*) 0x679060, v9);
-	*(int*) (event + 0x28) = g_7f4c00.a;
+	*(pos14_7f4c00*) (event + 0x28) = g_7f4c00;
 	v6 = *(unsigned int*) (a0 + 4);
-	*(int*) (event + 0x2c) = g_7f4c00.b;
-	*(int*) (event + 0x30) = g_7f4c00.c;
-	v4 = *(unsigned int*) (a1 + 4);
-	event[4] = 13;
-	*(short*) (event + 0x34) = g_7f4c00.d;
-	event[0x36] = 2;
+
 	*(int*) (event + 0xc) = *(int*) (event + 8) = v6;
 	*(int*) (event + 0x58) = v6;
+
+	v4 = *(unsigned int*) (a1 + 4);
+	event[4] = 13;
+
+	event[0x36] = 2;
 	*(int*) (event + 0x5c) = v4; *(int*) (event + 0x60) = fcn_0050d200(a0, v4);
 	fcn_005986f0(event + 0x80, v3);
 	fcn_00598740((float*) (event + 0x90), v3);

@@ -228,7 +228,7 @@ void __cdecl fcn_00585910(char* e)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			for (i = 0, p = &ids[5]; i < 4; i++, p++) {
+			for (p = &ids[5], i = 0; i < 4; p++, i++) {
 				if (*p == g_67d370) {
 					fcn_00471af0(ids[0], 0);
 					fcn_005865f0(e, src, i);

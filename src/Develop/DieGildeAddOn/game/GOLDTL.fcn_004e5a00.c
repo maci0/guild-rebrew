@@ -86,9 +86,9 @@ void __cdecl fcn_004e5a00(int* event)
 
     e = (unsigned char*) event;
     sprintf(text, (char*) 0x68d604, e[8], *(int*) e);
+    g4808 = *(int*) 0x1040488;
     g4800 = *(int*) 0x1040480;
     g4804 = *(int*) 0x1040484;
-    g4808 = *(int*) 0x1040488;
     g480c = *(int*) 0x104048c;
     *(int*) 0x9a9648 = *(int*) 0x6b8010;
     *(int*) 0x9b0e00 = *(int*) 0x6791c8;

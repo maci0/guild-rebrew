@@ -1,9 +1,10 @@
+extern double g_662908;
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508220(int, int*);
 int __cdecl fcn_004c4510(int*, int);
 int __cdecl fcn_004c4570(int, int, int, void*);
 int __cdecl fcn_004c5360(void);
-float __cdecl fcn_004ff210(int, int);
+float __cdecl fcn_004ff210(unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x00508540 */
 int __cdecl fcn_00508540(int* rec, int unused, void* out)
@@ -55,7 +56,7 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 	if (fcn_00508220(mode, avail) == 0) {
 		return 0;
 	}
-	r = gm_RandomMod((int) ((double) (unsigned int) avail[2] * *(double*) 0x662908)) & 0xffff;
+	r = gm_RandomMod((int) ((double) (unsigned int) avail[2] * g_662908)) & 0xffff;
 	if (r == 0) {
 		return 0;
 	}
