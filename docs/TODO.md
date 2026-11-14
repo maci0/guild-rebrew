@@ -23,10 +23,9 @@ recovery. The status read was
 | Gold | 14 | 39 | 73 | 113 |
 | server.dll | 0 | 0 | 0 | 0 |
 
-The second table counts source-bound FUNCTION rows, measured on 2026-11-14 by
-`.venv/bin/python ../guild-rebrew-archive/2026-11-13/scratch/review/docs-todo/measure-counts-2.py`.
-Gold rows without a verdict are separate from STUB; `rebrew status` counts them as STUB. That scratch script is a
-local receipt, not a required project tool.
+The second table counts source-bound FUNCTION rows, measured on 2026-11-14 by counting `status` per FUNCTION row with a `file` in
+`rebrew-functions.toml`.
+Gold rows without a verdict are separate from STUB; `rebrew status` counts them as STUB.
 
 All-target lint passed on 2026-11-14: 5,538 files per target, zero errors and
 warnings (`.venv/bin/rebrew lint --all-targets`, exit 0).
@@ -109,7 +108,7 @@ requirements are met.
 
 These leads were open at the snapshot above. Check current bindings and verdicts
 before retrying. Scores below describe earlier experiments, not fresh tests.
-`.scratch/` candidates are local evidence; older receipts may be under `../guild-rebrew-archive/2026-11-05/scratch/`.
+`.scratch/` candidates are local evidence.
 
 - `fcn_00499950` (250 bytes, stored NEAR_MATCHING): the named-float candidate
   `.scratch/fcn_00499950.named-reloc.c` measured RELOC 250 of 250. Its eight

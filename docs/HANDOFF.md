@@ -14,9 +14,8 @@ treating a question as unresolved.
 | 0x00524b50 | Review global counter/failure state and transitive mutation. | `worker-10/review-00524b50-transitive-state/` |
 | 0x005e5a50 | Callee 0x00533a60 writes two IDs used by later gates. Scratch candidates still need whole-body review. | `worker-09/review-005e5a50-533a60-alias/FINAL-review.md` |
 
-Receipt paths are relative to
-`../guild-rebrew-archive/2026-11-05/scratch/microfleet/` from the checkout root.
-See [local receipts](goal-history.md#local-receipts) for archive access.
+The receipts these paths named were in the 2026-11-05 local archive, deleted on
+2026-11-14; review each lead from current source and native code.
 [Provenance](provenance.md) retains earlier decisions and superseded candidates.
 
 Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.
