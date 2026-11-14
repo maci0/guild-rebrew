@@ -67,7 +67,7 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	             (int) (*(float*) (a2 + 8 + *(int*) (a1 + 0xa0) * 4) * 100.0f), 1);
 	d2_SetForm(*(int*) (a1 + 0xc0), 2);
 	io_AppendText(0x6811b0);
-	rec = fcn_0046fac0(0, 0xf, (char*) 0x14b54c0, *(int*) &g_772514);
+	rec = fcn_0046fac0(0, 0xf, *(char**) 0x14b54c0, *(int*) &g_772514);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
 	    *(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c) / 2;
@@ -79,7 +79,7 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	    *(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c) / 2;
 	fcn_00472900(rec, 0x54);
 	rec = fcn_0046fac0(*(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c) / 2,
-	                   0xf, (char*) 0x14b54c4, *(int*) &g_772514);
+	                   0xf, *(char**) 0x14b54c4, *(int*) &g_772514);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
 	    *(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c) / 2;

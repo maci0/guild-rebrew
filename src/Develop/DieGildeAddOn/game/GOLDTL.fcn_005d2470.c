@@ -26,7 +26,7 @@ extern int g_14ce8e0, g_67d370, g_774654;
 /* ADDRESS: GOLDTL 0x005d2470 */
 int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 {
-	int v14;
+	int v14 = -1;
 	float v4;
 	float selected;
 	int flags;
@@ -34,16 +34,13 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 	int ebp;
 	int flag;
 	int dlg;
-	int v18;
-	int vc;
-	int v10;
+	int v18 = -1;
+	int vc = -1;
 	int r;
 	int hv;
 	int uv;
+	int v10;
 
-	v10 = -1;
-	vc = -1;
-	v18 = -1;
 	v14 = (int) ((float) gm_WalkEntityChain(SHP_ID) * 0.005f);
 	if (v14 < 0x640) {
 		v14 = 0x640;

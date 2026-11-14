@@ -55,16 +55,8 @@ int __cdecl fcn_005dc5e0(char* a0, int* a1)
 	unsigned int ent;
 	char kind;
 
-	if (*(char*) (a0 + 2) == 6) {
-		memset(set, 0, sizeof(set));
-		memset(&set[7], 0xff, 0x20);
-		io_FormatTextBuffer(name, 0x9b);
-		set[0] = 1;
-		set[1] = -1;
-		set[4] = 6;
-		set[2] = 0xa0744300;
-		set[3] = 1;
-		pkt = (char*) fcn_005bdc30(1, set, name, 0, 0);
+	if (*(char*) (a0 + 2) != 6) {
+		pkt = (char*) gm_StartFilteredEntitySearch(1, 1, a1[1]);
 		if (pkt == 0) {
 			return 0;
 		}
@@ -81,7 +73,15 @@ int __cdecl fcn_005dc5e0(char* a0, int* a1)
 		*(unsigned short*) (buf + 0x6e) = 0x178;
 		fcn_004c5530(buf); fill0_5dc5e0(buf, 0xf8);
 	} else {
-		pkt = (char*) gm_StartFilteredEntitySearch(1, 1, a1[1]);
+		memset(set, 0, sizeof(set));
+		memset(&set[7], 0xff, 0x20);
+		io_FormatTextBuffer(name, 0x9b);
+		set[0] = 1;
+		set[1] = -1;
+		set[4] = 6;
+		set[2] = 0xa0744300;
+		set[3] = 1;
+		pkt = (char*) fcn_005bdc30(1, set, name, 0, 0);
 		if (pkt == 0) {
 			return 0;
 		}

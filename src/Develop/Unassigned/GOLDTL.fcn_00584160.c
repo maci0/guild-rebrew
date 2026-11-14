@@ -21,7 +21,6 @@ void __cdecl fcn_00584160(int a0)
 	int handle;
 	int selection;
 	float point[2];
-	float f;
 
 	if (!g_774a14) {
 		return;
@@ -106,8 +105,8 @@ void __cdecl fcn_00584160(int a0)
 		frame = *(char**) (*(char**) (o + 0x18) + 0x64) + *(int*) (o + 0x54) * 0x2c;
 		
 		if ((double) g_6b7fac < (double) *(unsigned int*) (o + 0x5c) + *(float*) (frame + 0x24)) {
-			f = (float) ((double) (unsigned int) (g_6b7fac - *(unsigned int*) (o + 0x5c)) / *(float*) (frame + 0x24));
-			fcn_005840d0((float*) frame, (float*) (frame + 8), (float*) (frame + 0x10), (float*) (frame + 0x18), f, point);
+			point[0] = (float) ((double) (unsigned int) (g_6b7fac - *(unsigned int*) (o + 0x5c)) / *(float*) (frame + 0x24));
+			fcn_005840d0((float*) frame, (float*) (frame + 8), (float*) (frame + 0x10), (float*) (frame + 0x18), point[0], point);
 			fcn_00469c40((short) point[0], (short) point[1], *(int*) (o + 0x60));
 			return;
 		}

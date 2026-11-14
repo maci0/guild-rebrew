@@ -67,8 +67,8 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 
 	v7 = a2;
 	v6 = a1;
-	v3 = *(unsigned int*) &a1[2];
 	v4 = *(unsigned int*) (a2 + 4);
+	v3 = *(unsigned int*) &a1[2];
 	v8 = fcn_00470820(0, 0, "locations\\wohnsitz\\geliebte2");
 	d2_SetForm(v8, 0);
 	fcn_005340f0(g_772514);

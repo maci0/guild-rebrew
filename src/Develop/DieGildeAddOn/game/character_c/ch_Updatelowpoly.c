@@ -103,7 +103,8 @@ void __cdecl ch_Updatelowpoly(char* obj)
 			    && (dx = *(float*) (g_6b8014 + 0x4c) - *(float*) (*(char**) (obj + 0x34) + 0x4c),
 			         dy = *(float*) (g_6b8014 + 0x50) - *(float*) (*(char**) (obj + 0x34) + 0x50),
 			         dz = *(float*) (g_6b8014 + 0x54) - *(float*) (*(char**) (obj + 0x34) + 0x54),
-			         sqrt(dz * dz + dy * dy + dx * dx) < 1500.0f)) {
+			         dz = (float) sqrt(dz * dz + dy * dy + dx * dx),
+			         dz < 1500.0f)) {
 				goto detailed_model;
 			}
 			if (*(int*) (*(char**) (obj + 0x34) + 0x218) != 1) {

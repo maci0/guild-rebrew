@@ -81,7 +81,6 @@ int __cdecl fcn_0053d490(int a0, int a1)
 
 	redraw = 1;
 	result = 0;
-	sel[0] = 0;
 	i = 0;
 	list = 0;
 	v9 = 0;

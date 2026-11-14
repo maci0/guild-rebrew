@@ -8,13 +8,12 @@ int __cdecl fcn_004f9f70(int a, int b)
 {
 	int r;
 	int v;
+	int* t;
 
 	v = *(int*) b;
 	*(char*) (b + 0x14) = 0;
 	r = 0;
-	switch (v) {
-	case 1:
-	case 3:
+	if (v == 3 || v == 1) {
 		if ((*(int*) (a + 0x1cc) & 0x800) == 0) {
 			return 1;
 		}
@@ -31,18 +30,16 @@ int __cdecl fcn_004f9f70(int a, int b)
 			r = fcn_005dafd0(a, b);
 		}
 		return r | 2;
-	case 2:
-	case 4:
-		if ((*(int*) (a + 0x1c8) & 0x100) == 0) {
+	}
+	if (v == 4 || v == 2) {
+		if ((*(int*) (a + 0x1c8) & 0x100) == 0 || *(int**) (b + 0x21c) == 0) {
 			return 1;
 		}
-		if (*(int**) (b + 0x21c) == 0) {
+		t = *(int**) (b + 0x21c);
+		if ((*(int*) ((char*) t + 0x1cc) & 0x800) == 0) {
 			return 1;
 		}
-		if ((*(int*) ((char*) *(int**) (b + 0x21c) + 0x1cc) & 0x800) == 0) {
-			return 1;
-		}
-		if (*(int*) ((char*) *(int**) (b + 0x21c) + 0x1cc) & 0x40000) {
+		if (*(int*) ((char*) t + 0x1cc) & 0x40000) {
 			return 1;
 		}
 		if (v == 4) {

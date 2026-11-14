@@ -38,7 +38,6 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 	char v2;
 	double cap;
 	double basis;
-	float scratch;
 	float ratio;
 	float offer;
 
@@ -52,11 +51,11 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 				v2 = *(char*) ((unsigned int) v6 * 0x21c + 0x7f4ca2);
 				if (v2 != 6 && v2 != 7) {
 					cap = (double) gm_WalkEntityChain(*a1) * g_6628f0;
-					scratch = (float) v21;
+					ratio = (float) v21;
 					if ((double) v21 < cap) {
 						if (!(cap < 64000.0f))
 							cap = 64000.0f;
-						v21 = (int) ((double) scratch + cap);
+						v21 = (int) ((double) ratio + cap);
 						v8 = (int) cap;
 						fcn_004c5150(*(int*) (a0 + 1), 0xffffffff,
 						             g_773d75, v8);
@@ -128,8 +127,8 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 					               0x7f4ca2);
 					if (v2 != 6 && v2 != 7 &&
 					    ((char) a1[1] == 6 || (char) a1[1] == 7)) {
-						scratch = (float) v18;
-						v18 = (int) ((double) scratch -
+						ratio = (float) v18;
+						v18 = (int) ((double) ratio -
 						    ((double) fcn_0050f980(*a1,
 						        *(unsigned short*) (a0 + 0x27), 1) - g_662914)
 						    * g_6640e8 * g_662a98);

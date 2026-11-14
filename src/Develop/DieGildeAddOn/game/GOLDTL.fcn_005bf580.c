@@ -79,10 +79,11 @@ int __cdecl fcn_005bf580(char* rec)
 			}
 			tries++;
 			q = he_fn_Handlung();
-			if (q == 0)
-				break;
+			if (q != 0)
+				continue;
+			break;
 		}
-		if (tries > 4) {
+		if (tries >= 5) {
 			io_FormatTextBuffer(buf, 0x42c0, 5);
 			fcn_00526120(buf, 0x104);
 			return 0;
