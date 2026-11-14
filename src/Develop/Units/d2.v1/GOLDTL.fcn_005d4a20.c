@@ -62,9 +62,9 @@ int __cdecl fcn_005373e0(void*, int);
 /* ADDRESS: GOLDTL 0x005d4a20 */
 void __cdecl fcn_005d4a20(void)
 {
-	char* ptr = 0;
-	unsigned char changed;
-	int sel = -1;
+	char* ptr;
+	int changed;
+	int sel;
 	unsigned now;
 	char fmt[8] = "%ia[%s]";
 	Query q;
@@ -78,8 +78,11 @@ void __cdecl fcn_005d4a20(void)
 	int r;
 	int h;
 	int win;
-	int mode = 2;
+	int mode;
 
+	sel = -1;
+	mode = 2;
+	ptr = 0;
 	if (((House*) g_7f4ca0)[g_774970].f1b1 != 0) {
 		fcn_004fa5f0(*(char**)0x14ac69c, 0, 0x657c7);
 		return;

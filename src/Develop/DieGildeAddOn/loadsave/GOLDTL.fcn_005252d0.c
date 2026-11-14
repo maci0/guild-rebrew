@@ -73,7 +73,7 @@ read_failed: return 0;
 	if (n > 0) {
 		for (r = (char*) g_aed740 + 0x91; i < n; i++, r += 0x99) {
 			if (!ls_ReadVfsDataChecked(r - 0x91, 0x99, 1, fp)) {
-				goto read_failed;
+				return 0;
 			}
 			if (*(int*) r == -1) {
 				*(int*) r = 0;
@@ -103,7 +103,7 @@ read_failed: return 0;
 	if (n > 0) {
 		for (r = (char*) g_fb5760; i < n; i++, r += 0xa) {
 			if (!ls_ReadVfsDataChecked(r, 0xa, 1, fp)) {
-				goto read_failed;
+				return 0;
 			}
 		}
 	}

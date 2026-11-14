@@ -20,12 +20,12 @@ int __cdecl fcn_004a82b0(void)
 
 	tbl = g_1007cd4;
 	for (i = 0; i < 3; i++) {
-		if (*(int*) (tbl + i * 0x34 + 0x2c) >= 0) {
-			flag[i] = 1;
-		} else {
+		if (*(int*) (tbl + i * 0x34 + 0x2c) < 0) {
 			res[i] = fcn_004a8070(i, &a[i], &c[i], &b[i], &d[i]);
 			*(int*) (tbl + i * 0x34 + 0x34) = res[i];
 			tbl = g_1007cd4;
+		} else {
+			flag[i] = 1;
 		}
 	}
 	sel = 0;
@@ -33,7 +33,15 @@ int __cdecl fcn_004a82b0(void)
 		sel = 1;
 	} else if (flag[1] != 0) {
 		sel = 0;
-	} else if (res[0] != 0) {
+	} else if (res[0] == 0) {
+		if (res[1] == 0) {
+			x = fcn_004a77f0((int*) (tbl + 0x40), 0);
+			y = fcn_004a77f0((int*) (tbl + 0xc), 0);
+			sel = y <= x;
+		} else {
+			sel = 1;
+		}
+	} else {
 		if (res[1] == 0) {
 			sel = 0;
 		} else if (res[1] < res[0]) {
@@ -80,12 +88,6 @@ int __cdecl fcn_004a82b0(void)
 				break;
 			}
 		}
-	} else if (res[1] != 0) {
-		sel = 1;
-	} else {
-		x = fcn_004a77f0((int*) (tbl + 0x40), 0);
-		y = fcn_004a77f0((int*) (tbl + 0xc), 0);
-		sel = y <= x;
 	}
 	if (flag[2] != 0) {
 		*(int*) (tbl + 0xbc) = res[sel];

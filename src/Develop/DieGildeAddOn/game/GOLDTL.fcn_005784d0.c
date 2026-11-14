@@ -49,14 +49,18 @@ void __cdecl fcn_005784d0(char* obj)
 		}
 		fcn_00529160(0, 0, *lager, (int) obj);
 		res = gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0xac));
-		if (res != 0) {
-			a = *(unsigned int*) (res + 1);
-			b = *(unsigned int*) &lager[2];
-			*(int*) (obj + 0xbc) = fcn_004c5da0(b, a, -1, 0, 1, "HEIMSUCHUNG");
-			fcn_004c5620(2, obj);
+		if (res == 0) {
+reset:
+			*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+idle:
+			*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
 			return;
 		}
-		break;
+		a = *(unsigned int*) (res + 1);
+		b = *(unsigned int*) &lager[2];
+		*(int*) (obj + 0xbc) = fcn_004c5da0(b, a, -1, 0, 1, "HEIMSUCHUNG");
+		fcn_004c5620(2, obj);
+		return;
 	case 2:
 		*(int*) (obj + 0xbc) = -1;
 		if (*(int*) (*(int*) &lager[0xc2] + 0x128) != 0) {
@@ -77,16 +81,19 @@ void __cdecl fcn_005784d0(char* obj)
 			*(int*) (obj + 0x84) = fcn_004c5620(3, obj);
 			return;
 		}
-		break;
+		goto reset3;
 	case 3:
-		if (*(int*) &lager[0xb6] != 0) {
-			a = *(unsigned int*) (*(int*) &lager[0xb6] + 1);
-			b = *(unsigned int*) &lager[2];
-			*(int*) (obj + 0xbc) = fcn_004c5da0(b, a, -1, 0, 0, "HEIMSUCHUNG");
-			*(int*) (obj + 0x84) = fcn_004c5620(4, obj);
+		if (*(int*) &lager[0xb6] == 0) {
+reset3:
+			*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+			*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
 			return;
 		}
-		break;
+		a = *(unsigned int*) (*(int*) &lager[0xb6] + 1);
+		b = *(unsigned int*) &lager[2];
+		*(int*) (obj + 0xbc) = fcn_004c5da0(b, a, -1, 0, 0, "HEIMSUCHUNG");
+		*(int*) (obj + 0x84) = fcn_004c5620(4, obj);
+		return;
 	case 4:
 		if (*(int*) &lager[0xb6] != 0) {
 			if (*(int*) (*(int*) &lager[0xc2] + 0x128) != 0) {
@@ -98,22 +105,18 @@ void __cdecl fcn_005784d0(char* obj)
 			fcn_00529160(0, 0, *lager, 0);
 			*(int*) (obj + 0x84) = fcn_004c5620(5, obj);
 			h = *(int*) (obj + 0xb8) >> 1;
-			if (h <= 0) {
+			if (h < 1) {
 				h = 1;
 			}
 			*(int*) (obj + 0x52) = *(int*) (obj + 0x52) + h + 1;
 			return;
 		}
-		break;
+		goto reset;
 	case 5:
-		goto set_state;
+		goto idle;
 	default:
 		return;
 	}
-	*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
-set_state:
-	*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
-	return;
 release:
 	fcn_00529160(0, 0, *lager, (int) obj);
 	fcn_00546190(obj);

@@ -59,37 +59,37 @@ void __cdecl fcn_0058ee70(char* e)
 	unsigned char v;
 
 	rec = FindSlotEntryFiltered((int) (g_slot_table + g_774970 * 0x21c), e, 0, (void*) 0x4f1820, 0xff);
-	if (rec == 0) {
-		fcn_00526120(g_14b5674, 0);
-		return;
-	}
-	dlg.rec = (char*) rec;
-	dlg.rec_id = *(int*) rec;
-	v = (unsigned char) fcn_004f1790(*(int*) (e + 0x65), rec);
-	dlg.rec_state = v;
-	io_FormatTextBuffer(text, 0x4107, g_665f78[*(int*) rec]);
-	if (!fcn_0058c410((int*) &dlg, g_14b5650)) {
+	if (rec != 0) {
+		dlg.rec = (char*) rec;
+		dlg.rec_id = *(int*) rec;
+		v = (unsigned char) fcn_004f1790(*(int*) (e + 0x65), rec);
+		dlg.rec_state = v;
+		io_FormatTextBuffer(text, 0x4107, g_665f78[*(int*) rec]);
+		if (!fcn_0058c410((int*) &dlg, g_14b5650)) {
+			fcn_00532ef0();
+			return;
+		}
+		r = fcn_0058edc0((int) e, (char*) &dlg, (int) &result);
+		fcn_00471e30(dlg.dlg);
+		if (r != 0) {
+			fcn_004c5420(*(int*) (g_slot_table + g_774970 * 0x21c + 4), 0x1cc, 4, 0x800000, 0);
+			if (result.cost != 0) {
+				fcn_005100f0(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -result.cost);
+			}
+			switch (result.kind) {
+			case 1:
+				fcn_0058e510(e, (char*) &result);
+				break;
+			case 2:
+				fcn_0058ea60(e, (char*) &result);
+				break;
+			case 3:
+				fcn_0058e790(e, (char*) &result);
+				break;
+			}
+		}
 		fcn_00532ef0();
-		return;
+	} else {
+		fcn_00526120(g_14b5674, 0);
 	}
-	r = fcn_0058edc0((int) e, (char*) &dlg, (int) &result);
-	fcn_00471e30(dlg.dlg);
-	if (r != 0) {
-		fcn_004c5420(*(int*) (g_slot_table + g_774970 * 0x21c + 4), 0x1cc, 4, 0x800000, 0);
-		if (result.cost != 0) {
-			fcn_005100f0(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -result.cost);
-		}
-		switch (result.kind) {
-		case 1:
-			fcn_0058e510(e, (char*) &result);
-			break;
-		case 2:
-			fcn_0058ea60(e, (char*) &result);
-			break;
-		case 3:
-			fcn_0058e790(e, (char*) &result);
-			break;
-		}
-	}
-	fcn_00532ef0();
 }

@@ -38,16 +38,15 @@ void* __cdecl m_PoolAlloc(void*, int, int);
 void* __cdecl gzopen(char*, char*);
 void* __cdecl fopen(char*, char*);
 extern char g_file_extension_names[]; extern int g_6b7fec;
+extern char g_6b7fe4[];
 char* __cdecl strupr(char*);
-int __cdecl vfs_MakeDirs(char*, struct VFS_DIR*);
+char __cdecl vfs_MakeDirs(char*, struct VFS_DIR*);
 void __cdecl fcn_0042ed00(char*, struct VFS_DIR*, int, int, int, int, int);
 void __cdecl ReportClientMessage(char*);
 int __cdecl sprintf(char*, const char*, ...);
 
-void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* root)
+void* __cdecl vfs_Tfopen(char* path, char* mode, struct VFS_DIR* root)
 {
-	char* path;
-	char* mode;
 	char* stream;
 	unsigned char packed;
 	unsigned char binary;
@@ -64,8 +63,6 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 	char arch[0x100];
 	unsigned long info[0x14];
 
-	path = (char*) cpath;
-	mode = (char*) cmode;
 	stream = 0;
 	if (!path || !*path || !mode || !root)
 		return stream;
@@ -94,10 +91,10 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 			break;
 		}
 	}
-	if (!read)
-		goto write_path;
-	file = (VFS_FILE_42ff50*) vfs_LookupPath(path, root, &dir);
-	if (file) {
+	if (read) {
+		file = (VFS_FILE_42ff50*) vfs_LookupPath(path, root, &dir);
+		if (!file)
+			goto not_found;
 		if (file->source) {
 			if (!binary) {
 				ReportClientMessage("Unsupported Read-Mode in vfs:Open (textfile inside zip)");
@@ -107,117 +104,114 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 			strcat(arch, g_file_extension_names + file->archive * 6);
 			vfs_ToBackslashes(arch);
 			zip = (char*) unzOpen(arch);
-			if (zip) {
-				fcn_0042f240(file, dir, file->source, entry);
-				strupr(entry);
-				if ((unsigned long) file->stamp > 0) {
-					err = unzGoToFilePos(zip, file->stamp, file->packed);
-					if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
-						strupr(name);
-						vfs_ToSlashes(name);
-						if (info[8] > 0 && strcmp(entry, name) == 0)
-							goto open_member;
-					} else {
-						goto close_zip;
-					}
-					if (err != 0)
-						goto close_zip;
-					goto allocate_member;
-				}
-				do {
-					if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
-						strupr(name);
-						vfs_ToSlashes(name);
-						if (info[8] > 0 && strcmp(entry, name) == 0)
-							goto open_member;
-					}
-				} while (unzGoToNextFile(zip) == 0);
-close_zip:
-				unzClose(zip);
+			if (!zip)
 				goto not_found;
-open_member:
-				err = unzOpenCurrentFile(zip);
+			fcn_0042f240(file, dir, file->source, entry);
+			strupr(entry);
+			if ((unsigned long) file->stamp > 0) {
+				err = unzGoToFilePos(zip, file->stamp, file->packed);
+				if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
+					strupr(name);
+					vfs_ToSlashes(name);
+					if (info[8] > 0 && strcmp(entry, name) == 0) {
+						if (unzOpenCurrentFile(zip) != 0)
+							goto close_zip;
+allocate_member:
+						stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
+						((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b2 = 1;
+						((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b4 = 1;
+						*(char**) (stream + 0x100) = zip;
+						goto opened;
+					}
+				} else {
+					goto close_zip;
+				}
 				if (err != 0)
 					goto close_zip;
-allocate_member:
-				stream = (char*) m_PoolAlloc((void*) 0x6b7fe4, 0x140, 0x10);
-				((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b2 = 1;
-				((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b4 = 1;
-				*(char**) (stream + 0x100) = zip;
-				goto opened;
+				goto allocate_member;
 			}
-			goto not_found;
+			do {
+				if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
+					strupr(name);
+					vfs_ToSlashes(name);
+					if (info[8] > 0 && strcmp(entry, name) == 0) {
+						if (unzOpenCurrentFile(zip) == 0)
+							goto allocate_member;
+						break;
+					}
+				}
+			} while (unzGoToNextFile(zip) == 0);
+close_zip:
+			unzClose(zip);
+not_found:
+			sprintf(entry, "vfs_Tfopen: Could not find \"%s\"!!", path);
+			return stream;
 		}
 		modes[0] = "rt";
 		modes[1] = "rb";
 		fcn_0042f240(file, dir, 0, arch);
 		vfs_ToBackslashes(arch);
-	} else {
-		goto not_found;
-	}
-	if (packed) {
-		h = gzopen(arch, modes[binary]);
-	} else {
-		h = fopen(arch, modes[binary]);
-	}
-	if (h == 0)
-		goto not_found;
-	stream = (char*) m_PoolAlloc((void*) 0x6b7fe4, 0x140, 0x10);
-	*(void**) (stream + 0x100) = h;
-	((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b4 = 0;
+		if (packed) {
+			h = gzopen(arch, modes[binary]);
+		} else {
+			h = fopen(arch, modes[binary]);
+		}
+		if (h == 0)
+			goto not_found;
+		stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
+		*(void**) (stream + 0x100) = h;
+		((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b4 = 0;
 opened:
-	strcpy(stream, path);
-	((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b5 = 0;
-	((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->read = 1;
-set_mode:
-	((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b1 = binary;
-	((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->compressed = packed;
-	g_6b7fec = g_6b7fec + 1;
-	return stream;
-
-write_path:
-	for (p = path; *p == '\\' || *p == '/'; p++) {
-	}
-	strcpy(name, p);
-	vfs_ToSlashes(name);
-	strcpy(entry, name);
-	vfs_NormalizeCase(name);
-	file = (VFS_FILE_42ff50*) vfs_LookupPath(name, root, &dir);
-	if (!file || file->source) {
-		if (!vfs_MakeDirs(entry, root))
-			return 0;
-		if (!file) {
-			fcn_0042ed00(name, root, 0, 0, 0, 0, -1);
-			file = (VFS_FILE_42ff50*) vfs_LookupPath(name, root, &dir);
+		strcpy(stream, path);
+		((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b5 = 0;
+		((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->read = 1;
+		((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b1 = binary;
+		((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->compressed = packed;
+		g_6b7fec = g_6b7fec + 1;
+		return stream;
+	} else {
+		for (p = path; *p && (*p == '\\' || *p == '/'); p++) {
+		}
+		strcpy(name, p);
+		vfs_ToSlashes(name);
+		strcpy(entry, name);
+		vfs_NormalizeCase(name);
+		file = (VFS_FILE_42ff50*) vfs_LookupPath(name, root, &dir);
+		if (!file || file->source) {
+			if (!vfs_MakeDirs(entry, root))
+				return 0;
 			if (!file) {
-				sprintf(entry, "vfs_Tfopen: Could write to \"%s\"!!", path);
-				ReportClientMessage(entry);
-				return stream;
+				fcn_0042ed00(name, root, 0, 0, 0, 0, -1);
+				file = (VFS_FILE_42ff50*) vfs_LookupPath(name, root, &dir);
 			}
 		}
+		if (file) {
+			modes[0] = "wt";
+			modes[1] = "wb";
+			file->offset = -1;
+			file->source = 0;
+			file->stamp = 0;
+			fcn_0042f240(file, dir, 0, arch);
+			vfs_ToBackslashes(arch);
+			if (packed) {
+				h = gzopen(arch, modes[binary]);
+			} else {
+				h = fopen(arch, modes[binary]);
+			}
+			if (h == 0)
+				return stream;
+			stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
+			*(void**) (stream + 0x100) = h;
+			strcpy(stream, path);
+			((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->read = 0;
+			((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b5 = 0;
+			((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b1 = binary;
+			((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->compressed = packed;
+			g_6b7fec = g_6b7fec + 1;
+			return stream;
+		}
+		sprintf(entry, "vfs_Tfopen: Could write to \"%s\"!!", path);
+		ReportClientMessage(entry);
+		return stream;
 	}
-	modes[0] = "wt";
-	modes[1] = "wb";
-	file->offset = -1;
-	file->source = 0;
-	file->stamp = 0;
-	fcn_0042f240(file, dir, 0, arch);
-	vfs_ToBackslashes(arch);
-	if (packed) {
-		h = gzopen(arch, modes[binary]);
-	} else {
-		h = fopen(arch, modes[binary]);
-	}
-	if (h == 0)
-		return 0;
-	stream = (char*) m_PoolAlloc((void*) 0x6b7fe4, 0x140, 0x10);
-	*(void**) (stream + 0x100) = h;
-	strcpy(stream, path);
-	((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->read = 0;
-	((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b5 = 0;
-	goto set_mode;
-
-not_found:
-	sprintf(entry, "vfs_Tfopen: Could not find \"%s\"!!", path);
-	return stream;
 }

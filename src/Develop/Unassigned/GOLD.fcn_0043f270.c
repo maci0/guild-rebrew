@@ -1,36 +1,40 @@
 #include "client_scene_resources.h"
 void __cdecl m_FreeTracked(void*);
 
+typedef struct SLOT_44 {
+    char* record;
+    char pad4[0x3c];
+    char flag;
+} SLOT_44;
+
 /* ADDRESS: GOLD 0x0043f270 */
 void __cdecl fcn_0043f270(void)
 {
     unsigned int i;
     unsigned int count;
-    char* table;
+    SLOT_44* table;
     char* record;
 
     count = *(unsigned int*) 0x633744;
-    table = *(char**) 0x63374c;
+    table = *(SLOT_44**) 0x63374c;
     i = 0;
     if (i < count) {
-      int offset = 0;
       do {
-        record = *(char**) (table + offset);
+        record = table[i].record;
         if (record != 0) {
             if (record[0] == 0x2a) {
                 while (*(int*) (record + 0x40) > 0) {
                     fcn_0045fbb0((SCENE_RESOURCE*) record);
-                    table = *(char**) 0x63374c;
-                    record = *(char**) (table + offset);
+                    table = *(SLOT_44**) 0x63374c;
+                    record = table[i].record;
                 }
             }
-            *(int*) (offset + table) = 0;
-            table = *(char**) 0x63374c;
-            table[offset + 0x40] = 0;
-            table = *(char**) 0x63374c;
+            table[i].record = 0;
+            table = *(SLOT_44**) 0x63374c;
+            table[i].flag = 0;
+            table = *(SLOT_44**) 0x63374c;
         }
         i++;
-        offset += 0x44;
         count = *(unsigned int*) 0x633744;
       } while (i < count);
     }

@@ -8,6 +8,11 @@ int __cdecl fcn_005c7270(int, int);
 void __cdecl fcn_004c51f0(int, int, int, int, char, int);
 int __cdecl sprintf(char*, char*, ...);
 
+extern unsigned char g_773d75;
+extern int g_100b0a8;
+extern int g_100e724;
+extern int g_100e764;
+extern char* lpObjektePROT;
 /* ADDRESS: GOLDTL 0x00489010 */
 void __cdecl fcn_00489010(char* e)
 {
@@ -38,14 +43,14 @@ void __cdecl fcn_00489010(char* e)
 			return;
 		}
 		done = 0;
-		for (b = (char*) 0x100e764, a = (char*) 0x100b100; !done; b += 4, a += 0x40) {
+		for (b = (char*) &g_100e764, a = (char*) 0x100b100; !done; b += 4, a += 0x40) {
 			if (*(int*) (b - 4) == 0 || *(int*) b == 0) {
 				break;
 			}
 			k = *(unsigned short*) n;
 			*(int*) (b - 4) = k;
 			if (k != 0) {
-				for (i = 0; !done && i < *(int*) 0x100b0a8; i++) {
+				for (i = 0; !done && i < g_100b0a8; i++) {
 					if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
 						found = a;
 						done = 1;
@@ -54,14 +59,14 @@ void __cdecl fcn_00489010(char* e)
 			}
 		}
 		if (!done) {
-			for (b = (char*) 0x100e724, a = (char*) 0x100b100; !done; b += 4, a += 0x40) {
+			for (b = (char*) &g_100e724, a = (char*) 0x100b100; !done; b += 4, a += 0x40) {
 				if (*(int*) (b - 4) == 0 || *(int*) b == 0) {
 					break;
 				}
 				k = *(unsigned short*) n;
 				*(int*) (b - 4) = k;
 				if (k != 0) {
-					for (i = 0; !done && i < *(int*) 0x100b0a8; i++) {
+					for (i = 0; !done && i < g_100b0a8; i++) {
 						if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
 							found = a;
 							done = 1;
@@ -74,13 +79,13 @@ void __cdecl fcn_00489010(char* e)
 		    && fcn_004ce590(*(int*) found) != 0
 		    && fcn_005c7270((int) e, *(int*) found) != 0) {
 			idx = *(int*) found;
-			tbl = *(char**) 0x99ec10;
+			tbl = lpObjektePROT;
 			sprintf(buf, (char*) 0x67e388, e + 0x30, p - 0x154,
 			        tbl + idx * 0x41 + 1);
 			sprintf(buf + 0x14, (char*) 0x67e358, *(int*) (p - 0x180),
-			        *(int*) (e + 2), idx, 1, *(unsigned char*) 0x773d75, 0);
+			        *(int*) (e + 2), idx, 1, g_773d75, 0);
 			fcn_004c51f0(*(int*) (p - 0x180), *(int*) (e + 2), idx, 1,
-			             *(unsigned char*) 0x773d75, 0);
+			             g_773d75, 0);
 			*(int*) (found + 0x28) = *(int*) (found + 0x28) - 1;
 		}
 next:

@@ -79,7 +79,7 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 
 			g_14cc5b8 = RegisterClassExA(&wc);
 		}
-		if ((char) flags < 0) {
+		if (flags & 0x80) {
 			hwnd = CreateWindowExA(8, "MOVIEWNDCLASS", (char*) g_6b5c60, 0x86000000,
 			    0, 0, GetSystemMetrics(0), GetSystemMetrics(1), 0, 0, inst, 0);
 			ShowCursor(0);

@@ -19,7 +19,7 @@ extern char* g_14a5320[];
 extern char g_7e1d00[];
 extern int g_7e46ac;
 extern int g_68bfb8;
-extern char g_6a375c;
+extern unsigned char g_6a375c;
 extern int g_6b7fdc;
 extern int g_14b5e50;
 extern int g_14b5e54;
@@ -84,32 +84,35 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	char* obj;
 	char* city;
 	char* image;
-	char* cur;
 	char* sel;
 	int win1;
 	int win2;
-	int ids[2];
+	int tmp_ids[2];
+	int ok_id;
+	int info_id;
 	int count;
 	int i;
-	int n;
 	int h;
 	int idx;
 	int result;
 	int highlight;
 	int prev;
 
-	obj = 0;
 	result = 0;
-	highlight = -1;
+	obj = 0;
 	prev = 0;
-	sel = 0;
+	highlight = -1;
 	fcn_00533880();
 	fcn_005338a0();
 	fcn_004432d0(0, 0);
 	fcn_00438b40(g_6b8014, (int*) (g_6b8014 + 0x5c));
 	fcn_00438cb0(g_6b8014, (int*) (g_6b8014 + 0x90));
 	fcn_00445f50(0, 0, 1.0f, 0);
-	count = fcn_005dfa40((char*) 0x6a3778, network == 0 ? (char*) 0x6a41b8 : (char*) 0x6a41b0, data.names);
+	if (network == 0) {
+		count = fcn_005dfa40((char*) 0x6a3778, (char*) 0x6a41b8, data.names);
+	} else {
+		count = fcn_005dfa40((char*) 0x6a3778, (char*) 0x6a41b0, data.names);
+	}
 	for (i = 0; i < count; i++) {
 		h = vfs_Tfopen(data.names[i].path, (char*) 0x6750e8, g_6b7fdc);
 		if (h == 0) {
@@ -120,9 +123,10 @@ int __cdecl fcn_0053ed60(int unused, int network)
 			return 0;
 		}
 		CloseVfsStream(h);
-		data.values[i] = (signed char) data.hdr[0x30] - (g_6a375c & 0xff);
-		data.cities[i] = fcn_0053e7a0(data.hdr + 5);
-		if (data.cities[i] != 0) {
+		data.values[i] = (signed char) data.hdr[0x30] - (*(int*) &g_6a375c & 0xff);
+		city = fcn_0053e7a0(data.hdr + 5);
+		data.cities[i] = city;
+		if (city != 0) {
 			sprintf(data.keybuf, (char*) 0x6a22a8, data.hdr + 5);
 			_strupr(data.keybuf);
 			idx = fcn_0042dc90(data.keybuf);
@@ -132,7 +136,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 				strcpy(data.langName, data.hdr + 5);
 			}
 			sprintf(data.namebuf, (char*) 0x6a41a4, data.hdr + 5);
-			strcpy(data.cities[i], data.namebuf);
+			strcpy(city, data.namebuf);
 			fcn_005338d0(data.namebuf, data.langName, 0);
 		}
 	}
@@ -165,7 +169,9 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	fcn_00471d80(win2, 3);
 	fcn_00471db0(win2, 1);
 	d2_SetForm(win2, 2);
-	fcn_00533a60(g_772514, 0, ids, 2, g_14b5e50, g_14b5e54);
+	fcn_00533a60(g_772514, 0, tmp_ids, 2, g_14b5e50, g_14b5e54);
+	ok_id = tmp_ids[0];
+	info_id = tmp_ids[1];
 	while (fcn_005373e0((void*) fcn_0053ed60, 0x10d6) != 0) {
 		g_7746a0 = 0;
 		image = fcn_00443bf0((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
@@ -175,9 +181,8 @@ int __cdecl fcn_0053ed60(int unused, int network)
 		} else if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
 		}
-		cur = g_7746a0;
-		if (cur != 0 && fcn_0064f170(cur, (char*) 0x6a418c, 6) == 0) {
-			sel = cur;
+		if (g_7746a0 != 0 && fcn_0064f170(g_7746a0, (char*) 0x6a418c, 6) == 0) {
+			sel = g_7746a0;
 		}
 		if (sel != prev) {
 			pos[0] = 0.0f;
@@ -194,31 +199,29 @@ int __cdecl fcn_0053ed60(int unused, int network)
 			pos[2] = pos[2] + *(float*) (sel + 0x54);
 			fcn_00412cf0(obj, pos, dir, 0x28, 0x20);
 			for (i = 0; i < count; i++) {
-				if (sel != data.cities[i]) {
+				if (sel == data.cities[i]) {
 					if (data.cities[i] != 0) {
-						fcn_00442c00(data.cities[i], 1);
+						strcpy(g_7e1d00, sel + 6);
+						sprintf(data.keybuf, (char*) 0x6a4170, g_7e1d00);
+						_strupr(data.keybuf);
+						idx = fcn_0042dc90(data.keybuf);
+						if (idx != -1) {
+							d2_SetForm(win2, 1);
+							io_AppendText(idx);
+							io_AppendText(0x68b300);
+							io_AppendText(idx + 1);
+						}
 					}
-					continue;
+					fcn_00442c00(sel, 0);
+					highlight = data.values[i];
+				} else if (data.cities[i] != 0) {
+					fcn_00442c00(data.cities[i], 1);
 				}
-				if (data.cities[i] != 0) {
-					strcpy(g_7e1d00, data.cities[i] + 6);
-					sprintf(data.keybuf, (char*) 0x6a4170, g_7e1d00);
-					_strupr(data.keybuf);
-					idx = fcn_0042dc90(data.keybuf);
-					if (idx != -1) {
-						d2_SetForm(win2, 1);
-						io_AppendText(idx);
-						io_AppendText(0x68b300);
-						io_AppendText(idx + 1);
-					}
-				}
-				fcn_00442c00(data.cities[i], 0);
-				highlight = data.values[i];
 			}
 			prev = sel;
 		}
 		if (g_100f1dc == 2) {
-			if (g_67d370 == ids[1]) {
+			if (g_67d370 == info_id) {
 				fcn_00471af0(win2, 0);
 				fcn_00471af0(win1, 0);
 				fcn_0053eb60(highlight);
@@ -228,7 +231,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 					goto not_checked;
 				}
 			}
-			if (g_67d370 == ids[0]) {
+			if (g_67d370 == ok_id) {
 				goto accepted;
 			}
 		}
@@ -239,7 +242,10 @@ not_checked:
 accepted:
 		fcn_00471af0(win2, 0);
 		fcn_00471af0(win1, 0);
-		if (network == 0) {
+		if (network != 0) {
+			g_774654 = 1;
+			result = 1;
+		} else {
 			if (fcn_0053e9a0() != 0 && fcn_0053dc20() != 0) {
 				g_774654 = 1;
 				result = 1;
@@ -247,9 +253,6 @@ accepted:
 			}
 			fcn_00471af0(win2, 1);
 			fcn_00471af0(win1, 1);
-		} else {
-			g_774654 = 1;
-			result = 1;
 		}
 	}
 	if (win2 != -1) {

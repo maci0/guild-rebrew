@@ -1,5 +1,4 @@
 extern int g_6b8010;
-extern float g_665ea0;
 extern float g_662d40[3];
 extern int g_6b7fac;
 
@@ -66,11 +65,11 @@ int __cdecl fcn_00558370(int a0)
             fcn_00455350(*(int *)(v6 + 0x61), *(int *)(v6 + 0x61) + 0x4c,
                 &cur.x);
             cur.y = cur.y + *(float *)(*(int *)(*(int *)(*(int *)(v6 + 0x61)
-                + 0x1cc) + 0x318) + 0x1d4) + g_665ea0;
+                + 0x1cc) + 0x318) + 0x1d4) + 80.0f;
             fcn_00455350(*(int *)(v5 + 0x61), *(int *)(v5 + 0x61) + 0x4c,
                 &pos.x);
             pos.y = pos.y + *(float *)(*(int *)(*(int *)(*(int *)(v5 + 0x61)
-                + 0x1cc) + 0x318) + 0x1d4) + g_665ea0;
+                + 0x1cc) + 0x318) + 0x1d4) + 80.0f;
             rot.x = 0;
             rot.y = 0;
             rot.z = 0;
@@ -90,7 +89,7 @@ int __cdecl fcn_00558370(int a0)
             fcn_00455350(*(int *)(v5 + 0x61), *(int *)(v5 + 0x61) + 0x4c,
                 &pos.x);
             pos.y = pos.y + *(float *)(*(int *)(*(int *)(*(int *)(v5 + 0x61)
-                + 0x1cc) + 0x318) + 0x1d4) + g_665ea0;
+                + 0x1cc) + 0x318) + 0x1d4) + 80.0f;
             dir.x = pos.x - cur.x;
             dir.y = pos.y - cur.y;
             dir.z = pos.z - cur.z;

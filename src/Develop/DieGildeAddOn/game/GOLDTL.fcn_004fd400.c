@@ -1,3 +1,5 @@
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 int __cdecl gm_WalkEntityChain(int idx);
 
 /* ADDRESS: GOLDTL 0x004fd400 */
@@ -12,15 +14,15 @@ int __cdecl fcn_004fd400(short* out, int* value)
 	unsigned char* p;
 
 	rec = *(int**) 0x773d5c;
-	now = *(int*) 0x7f4c00;
+	now = g_7f4c00.a;
 	best = -100000;
 	limit = 0xffff;
-	if (rec == 0 || *(int*) 0x69643c < now || *(short*) rec == -1 || ((unsigned char*) rec)[8] == 0) {
+	if (rec == 0 || *(int*) 0x69643c < now || *(unsigned short*) rec == 0xffff || ((unsigned char*) rec)[8] == 0) {
 		*(int*) 0x69643c = now;
-		p = (unsigned char*) 0x7f4ca2;
 		i = 0;
+		p = (unsigned char*) 0x7f4ca2;
 		while ((int) p < 0x85a0a2) {
-			if (*(short*) (p - 2) != -1 && *p < 0xa && p[6] > 0) {
+			if (*(unsigned short*) (p - 2) != 0xffff && *p < 0xa && p[6] > 0) {
 				v = gm_WalkEntityChain(i);
 				if (v > best) {
 					best = v;
@@ -30,14 +32,14 @@ int __cdecl fcn_004fd400(short* out, int* value)
 			p += 0x21c;
 			i++;
 		}
-		if (limit == 0xffff) {
-			*(int**) 0x773d5c = 0;
-			*(int*) 0x696440 = 0xc80;
-			goto no_record;
-		} else {
+		if (limit != 0xffff) {
 			rec = (int*) (0x7f4ca0 + limit * 0x21c);
 			*(int*) 0x696440 = best;
 			*(int**) 0x773d5c = rec;
+		} else {
+			*(int**) 0x773d5c = 0;
+			*(int*) 0x696440 = 0xc80;
+			goto no_record;
 		}
 	}
 	if (rec != 0) {

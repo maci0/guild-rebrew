@@ -48,24 +48,24 @@ char __cdecl fcn_004d15c0(char* a0, char* a1)
 				if (fcn_004ce270(a1, obj) != 0 || g_14cf736 != 0) {
 					if (fcn_004d1020(a0, a1, (char*) obj, 0, 0) != -1) {
 						r = 1;
-						return r;
+						goto end;
 					}
 				}
 			} else {
 				if (strncmp((char*) g_7746a0, "sp_ESCAPE", 10) == 0) {
 					fcn_004d1250(a0, a1, (char*) g_7746a0);
 					r = 1;
-					return r;
+					goto end;
 				}
 				if (strncmp((char*) g_7746a0, "sp_CONQUER", 10) == 0) {
 					fcn_004d1320(a0, a1, (char*) g_7746a0);
 					r = 1;
-					return r;
+					goto end;
 				}
 				if (strncmp((char*) g_7746a0, "WARE", 4) == 0) {
 					fcn_004d13d0(a0, a1, (char*) g_7746a0);
 					r = 1;
-					return r;
+					goto end;
 				}
 			}
 		} else {
@@ -80,10 +80,11 @@ char __cdecl fcn_004d15c0(char* a0, char* a1)
 				l.f14 = v12;
 				fcn_004c67c0(*(int*) (a0 + 0x10), &l);
 				r = 1;
-				return r;
+				goto end;
 			}
 			fcn_00533a40(g_14a9a10);
 		}
 	}
+end:
 	return r;
 }

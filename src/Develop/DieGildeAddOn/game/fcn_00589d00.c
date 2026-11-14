@@ -1,4 +1,5 @@
 #include <string.h>
+extern int g_772514, g_100f1dc, g_14ce8e0, g_774654, g_67d370; extern char* g_1015ea0; extern unsigned short g_774970; extern unsigned char g_773d75;
 
 extern float g_662acc;
 extern float g_662910;
@@ -55,7 +56,7 @@ void __cdecl fcn_00589d00(int a0)
 	int id;
 	int i;
 
-	total = gm_WalkEntityChain(*(unsigned short*) 0x774970);
+	total = gm_WalkEntityChain(g_774970);
 	for (i = 0; i < 20; i++)
 		q[i] = 0;
 	for (i = 7; i < 15; i++)
@@ -78,14 +79,14 @@ void __cdecl fcn_00589d00(int a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(*(int*) 0x772514);
+	fcn_005340f0(g_772514);
 	d2_SetForm(dlg, 2);
-	elem = fcn_0046fac0(0, 3, *(int*) 0x14b5360, *(int*) 0x772514);
-	*(int*) (*(int*) 0x1015ea0 + elem * 0x2f4 + 0x6c) = 1;
-	*(int*) (*(int*) 0x1015ea0 + elem * 0x2f4 + 0x18) =
-	    *(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f4c);
+	elem = fcn_0046fac0(0, 3, *(int*) 0x14b5360, g_772514);
+	*(int*) (g_1015ea0 + elem * 0x2f4 + 0x6c) = 1;
+	*(int*) (g_1015ea0 + elem * 0x2f4 + 0x18) =
+	    *(int*) (g_772514 * 0x3cc + 0x1015f4c);
 	fcn_00472900(elem, 0x54);
-	elem = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, *(int*) 0x772514);
+	elem = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, g_772514);
 	fcn_00472380(elem, 0, 2, 0, 1);
 	fcn_00468bb0(elem, 3, *(int*) 0x14b5364, *(int*) 0x14b5368,
 	             *(int*) 0x14b536c);
@@ -93,49 +94,46 @@ void __cdecl fcn_00589d00(int a0)
 	btn = io_AppendText(0x4014);
 	no = fcn_00472250(dlg, 3, btn);
 	yes = fcn_00472250(dlg, 3, btn + 1);
-	*(int*) 0x100f1dc = -1;
+	g_100f1dc = -1;
 	do {
 		sel = fcn_00471f80(elem);
 		d2_SetForm(dlg, 1);
 		io_AppendText(0x6811b0);
 		io_AppendText(0x400e, 0x400c, *(unsigned short*) v6);
 		io_AppendText(0x400f, amt[sel], ids[sel]);
-		if (*(int*) 0x14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
-		} else if (*(int*) 0x100f1dc != -1) {
-			pick = *(int*) 0x67d370;
+		if (g_14ce8e0 != 0) {
+			g_774654 = 1;
+		} else if (g_100f1dc != -1) {
+			pick = g_67d370;
 			if (pick == no) {
 				char* p;
 
 				if (fcn_00526010(
 				        (char*) (0x7f4ca0 +
-				                 (unsigned int) *(unsigned short*) 0x774970 *
+				                 (unsigned int) g_774970 *
 				                     0x21c),
-				        ids[sel], *(char*) 0x773d75) != 0 &&
+				        ids[sel], g_773d75) != 0 &&
 				    fcn_00525f60(
 				        (char*) (0x7f4ca0 +
-				                 (unsigned int) *(unsigned short*) 0x774970 *
+				                 (unsigned int) g_774970 *
 				                     0x21c),
 				        amt[sel]) == 1 &&
 				    fcn_005898f0((void*) a0) != 0) {
 					p = gm_GetEntityTableEntry(
 					    (char*) (0x7f4ca0 +
-					             (unsigned int) *(unsigned short*)
-					                     0x774970 *
+					             (unsigned int) g_774970 *
 					                 0x21c));
 					if (p != 0)
 						*(int*) (p + 0x28) += ids[sel];
 					fcn_004c51a0(
 					    -1,
 					    *(int*) (0x7f4ca4 +
-					             (unsigned int) *(unsigned short*)
-					                     0x774970 *
+					             (unsigned int) g_774970 *
 					                 0x21c),
-					    *(char*) 0x773d75, ids[sel]);
+					    g_773d75, ids[sel]);
 					fcn_005100f0(
 					    *(int*) (0x7f4ca4 +
-					             (unsigned int) *(unsigned short*)
-					                     0x774970 *
+					             (unsigned int) g_774970 *
 					                 0x21c),
 					    -amt[sel]);
 					memset(req, 0, 0xf8);
@@ -165,8 +163,7 @@ void __cdecl fcn_00589d00(int a0)
 						n = -1;
 						fcn_004a5e60(
 						    (unsigned short*) (0x7f4ca0 +
-						                       (unsigned int) *(unsigned short*)
-						                               0x774970 *
+						                       (unsigned int) g_774970 *
 						                           0x21c),
 						    0, 0x7b4c4a0, 0, 0.0f, 100.0f, &n);
 						sel = n;
@@ -182,10 +179,10 @@ sent:
 						} while (1);
 					}
 					fcn_004c3030(-7, 0, (char*) 0x6a9508, 0);
-					*(int*) 0x774654 = 1;
+					g_774654 = 1;
 				}
 			} else if (pick == yes) {
-				*(int*) 0x774654 = 1;
+				g_774654 = 1;
 			}
 		}
 	} while (fcn_005373e0((void*) 0x589d00, 0x677c7) != 0);
