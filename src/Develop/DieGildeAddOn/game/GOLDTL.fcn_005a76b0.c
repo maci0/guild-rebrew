@@ -81,6 +81,9 @@ void __cdecl fcn_0058aad0(int, void*);
 void __cdecl fcn_005e51f0(int, void*);
 void __cdecl fcn_0058af00(int, void*);
 void __cdecl fcn_0058ae60(int, void*);
+extern int g_6a2520;
+extern char g_6752a8[];
+char* __cdecl strcpy(char*, const char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005a76b0 */
 int __cdecl fcn_005a76b0(char* o, int p2)
@@ -89,8 +92,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     int x;
     int i;
     int t;
-    float saved_pos[4];
-    float saved_rot[4];
+    struct { float pos[4]; float rot[3]; } saved;
     char* msg;
     u8 c;
 
@@ -101,27 +103,26 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     }
     fcn_00525ef0();
     fcn_005373e0((void*) 0x5a76b0, 0x20007);
-    *(int*) 0x6a2520 = 0;
+    g_6a2520 = 0;
     fcn_00530510();
     fcn_005305a0();
     x = *(int*) &g_6b8010;
     *(int*) 0x7746d0 = 0;
     *(u16*) (o + 0x29) = (u16) p2;
-    *(int*) &saved_pos[0] = *(int*) &g_7e3a40;
-    *(int*) &saved_pos[1] = *(int*) &g_7e3a44;
-    *(int*) &saved_pos[2] = *(int*) &g_7e3a48;
-    *(int*) &saved_rot[0] = *(int*) &g_7e3a50;
-    *(int*) &saved_rot[1] = *(int*) &g_7e3a54;
-    *(int*) &saved_rot[2] = *(int*) &g_7e3a58;
+    *(int*) &saved.pos[0] = *(int*) &g_7e3a40;
+    *(int*) &saved.pos[1] = *(int*) &g_7e3a44;
+    *(int*) &saved.pos[2] = *(int*) &g_7e3a48;
+    *(int*) &saved.rot[0] = *(int*) &g_7e3a50;
+    *(int*) &saved.rot[1] = *(int*) &g_7e3a54;
+    *(int*) &saved.rot[2] = *(int*) &g_7e3a58;
     if (p2 == 0)
         *(int*) &g_7746c4 = 0;
     if (*(u16*) (o + 0x27) == *(u16*) &g_774970)
         fcn_004234e0(g_7747c8, (void*) 0x6aadc8, 1, 0x3f, 0x7f, 0, 0);
     else
         fcn_004234e0(g_7747c8, (void*) 0x6aadac, 1, 0x3f, 0x7f, 0, 0);
-    *(int*) 0x6752a8 = *(int*) 0x6aada0;
-    *(int*) 0x6752ac = *(int*) 0x6aada4;
-    *(u8*) 0x6752b0 = *(u8*) 0x6aada8;
+    strcpy(g_6752a8, "normal_s");
+
     fcn_00502cd0(*(int*) (o + 0x5d), 1, 0, (int) *(u16*) (o + 0x29));
     fcn_004c3170(o);
 
@@ -368,11 +369,11 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     *(int*) &g_7746c4 = 0;
     *(int*) &g_7746cc = 0;
     fcn_00516f60();
-    *(int*) &g_7e3a40 = *(int*) &saved_pos[0];
-    *(int*) &g_7e3a44 = *(int*) &saved_pos[1];
-    *(int*) &g_7e3a48 = *(int*) &saved_pos[2];
-    *(int*) &g_7e3a50 = *(int*) &saved_rot[0];
-    *(int*) &g_7e3a54 = *(int*) &saved_rot[1];
-    *(int*) &g_7e3a58 = *(int*) &saved_rot[2];
+    *(int*) &g_7e3a40 = *(int*) &saved.pos[0];
+    *(int*) &g_7e3a44 = *(int*) &saved.pos[1];
+    *(int*) &g_7e3a48 = *(int*) &saved.pos[2];
+    *(int*) &g_7e3a50 = *(int*) &saved.rot[0];
+    *(int*) &g_7e3a54 = *(int*) &saved.rot[1];
+    *(int*) &g_7e3a58 = *(int*) &saved.rot[2];
     return fcn_004234e0(g_7747c8, (void*) 0x6aad8c, 1, 0x3f, 0x7f, 0, 0);
 }

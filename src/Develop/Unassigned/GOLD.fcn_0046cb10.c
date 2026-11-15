@@ -1,11 +1,11 @@
 #include "gold_gui.h"
 extern GuiEnt* g_00f8f080;
+extern char* g_772500; extern int g_772568;
 int __cdecl fcn_0046c9e0(void);
 void __cdecl fcn_00469170(int, void**, int*);
 void __cdecl d2_AddRefcount(int);
 int __cdecl fcn_0047cd10(int, int, void*, int);
 char* __cdecl fcn_0047cb60(void*, unsigned short);
-
 /* ADDRESS: GOLD 0x0046cb10 */
 int __cdecl fcn_0046cb10(int x, int y, int type)
 {
@@ -26,7 +26,7 @@ int __cdecl fcn_0046cb10(int x, int y, int type)
 	fcn_00469170(type, &data, &type);
 	s->data = data;
 	s->f08 = type;
-	s->kind = *(int*) (*(char**) 0x6ed918 + type * 0x54 + 0x3c);
+	s->kind = *(int*) (g_772500 + type * 0x54 + 0x3c);
 	s->x = (short) x;
 	s->y = (short) y;
 	s->f1e = *(short*) 0x6f0458;
@@ -53,9 +53,15 @@ int __cdecl fcn_0046cb10(int x, int y, int type)
 		g_00f8f080[id].w = *(short*) (resource + 0x2c);
 		g_00f8f080[id].f16 = *(short*) (resource + 0x2e);
 		return id;
+	case 17:
+		resource = g_00f8f080[id].data;
+		g_00f8f080[id].w = *(short*) (resource + 0xc);
+		g_00f8f080[id].f16 = *(short*) (resource + 0xe);
+		g_00f8f080[id].bild_offset = 2;
+		return id;
 	case 5:
 	case 8:
-		s->bild_offset = *(int*) 0x6ed98c;
+		s->bild_offset = g_772568;
 		resource = g_00f8f080[id].data;
 		shape = fcn_0047cb60(resource, (unsigned short) g_00f8f080[id].bild_offset);
 		s->w = *(short*) (shape + 6);
@@ -66,13 +72,7 @@ int __cdecl fcn_0046cb10(int x, int y, int type)
 		*(int*) ((char*) s + 0x1c8) = *(unsigned short*) (resource + 0x2e);
 		*((char*) &g_00f8f080[id] + 0x6c) = 8;
 		*((char*) &g_00f8f080[id] + 0x6d) = 8;
-		return id;
-	case 17:
-		resource = g_00f8f080[id].data;
-		g_00f8f080[id].w = *(short*) (resource + 0xc);
-		g_00f8f080[id].f16 = *(short*) (resource + 0xe);
-		g_00f8f080[id].bild_offset = 2;
-		return id;
+		break;
 	}
 	return id;
 }

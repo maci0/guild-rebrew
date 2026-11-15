@@ -94,7 +94,9 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 		return sign;
 	}
 
-	if (e[0x169] == 0x1f || e[0x169] == 0x21) {
+	if (e[0x169] != 0x1f && e[0x169] != 0x21) {
+		if (e[0x169] != 0x20)
+			return 0;
 		if (a1[0] != 4)
 			return 0;
 		if (a1[1] < 1 || a1[1] > 6)
@@ -103,11 +105,55 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 			n = fcn_004e8b80(a1[1], 6, arr);
 			g = gm_GetEntitySkill(e, 4);
 			value = (int) (((gm_RandomFloat01() + 1.0f) * g * 15.0f + 5.0) * 2.55f);
-			for (i = 1; i < n; i++) {
-				id1 = arr[i - 1].mplayerid;
+			for (k = 0; k < n; k++) {
+				id1 = arr[k].mplayerid;
+				if (id1 != *(int*) (e + 4) && id1 != -1)
+					fcn_004c54c0(*(int*) (e + 4), id1, value, 1);
+			}
+		}
+		fcn_005100f0(*(int*) (e + 4), -8);
+		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
+		if (f > g_66414c) {
+			io_FormatTextBuffer(buf, 0x167a, a1[1] + 0x1663);
+			p = g_7f4ca4;
+			do {
+				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
+					fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fd, g_6b5c60);
+				p += 0x21c;
+			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
+			if (e[2] == 6) {
+				io_FormatTextBuffer(buf, 0x1678, a1[1] + 0x1663);
+				fcn_00526120(buf, 0);
+				return sign;
+			}
+		} else {
+			io_FormatTextBuffer(buf, 0x167b, a1[1] + 0x1663);
+			p = g_7f4ca4;
+			do {
+				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
+					fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
+				p += 0x21c;
+			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
+			if (e[2] == 6) {
+				io_FormatTextBuffer(buf, 0x1679, a1[1] + 0x1663);
+				fcn_00526120(buf, 0);
+				return sign;
+			}
+		}
+	} else {
+		if (a1[0] != 4)
+			return 0;
+		if (a1[1] < 1 || a1[1] > 6)
+			return 0;
+		if (f > g_66414c) {
+			n = fcn_004e8b80(a1[1], 6, arr);
+			g = gm_GetEntitySkill(e, 4);
+			value = (int) (((gm_RandomFloat01() + 1.0f) * g * 15.0f + 5.0) * 2.55f);
+			for (i = 0; i < n - 1; i++) {
+				id1 = arr[i].mplayerid;
 				if (id1 == *(int*) (e + 4) || id1 == -1)
 					continue;
-				for (k = i; k < n; k++) {
+				for (k = i + 1; k < n; k++) {
 					id2 = arr[k].mplayerid;
 					if (id2 == *(int*) (e + 4) || id2 == -1)
 						continue;
@@ -164,50 +210,6 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 				fcn_00526120(buf, 0);
 			}
 		}
-		return sign;
 	}
-
-	if (e[0x169] != 0x20)
-		return 0;
-	if (a1[0] != 4)
-		return 0;
-	if (a1[1] < 1 || a1[1] > 6)
-		return 0;
-	if (f > g_66414c) {
-		n = fcn_004e8b80(a1[1], 6, arr);
-		g = gm_GetEntitySkill(e, 4);
-		value = (int) (((gm_RandomFloat01() + 1.0f) * g * 15.0f + 5.0) * 2.55f);
-		for (k = 0; k < n; k++) {
-			id1 = arr[k].mplayerid;
-			if (id1 != *(int*) (e + 4) && id1 != -1)
-				fcn_004c54c0(*(int*) (e + 4), id1, value, 1);
-		}
-	}
-	fcn_005100f0(*(int*) (e + 4), -8);
-	fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
-	if (f > g_66414c) {
-		io_FormatTextBuffer(buf, 0x167a, a1[1] + 0x1663);
-		p = g_7f4ca4;
-		do {
-			if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
-				fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fd, g_6b5c60);
-			p += 0x21c;
-		} while ((int) p < (int) (g_7f4ca4 + 0x65400));
-		if (e[2] != 6)
-			return sign;
-		io_FormatTextBuffer(buf, 0x1678, a1[1] + 0x1663);
-	} else {
-		io_FormatTextBuffer(buf, 0x167b, a1[1] + 0x1663);
-		p = g_7f4ca4;
-		do {
-			if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
-				fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
-			p += 0x21c;
-		} while ((int) p < (int) (g_7f4ca4 + 0x65400));
-		if (e[2] != 6)
-			return sign;
-		io_FormatTextBuffer(buf, 0x1679, a1[1] + 0x1663);
-	}
-	fcn_00526120(buf, 0);
 	return sign;
 }

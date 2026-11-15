@@ -205,8 +205,9 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 	}
 	if (p->flags & 2) {
 		if (changed == *(int*) &g_772e9c) {
-			fcn_004d5110(gm_StartFilteredEntitySearch(1, 1, p->actor), gm_StartFilteredEntitySearch(1, 1, p->owner),
-			             *(int*) &g_772e9c, *(int*) 0x772e98);
+			v = gm_StartFilteredEntitySearch(1, 1, p->owner);
+			w = gm_StartFilteredEntitySearch(1, 1, p->actor);
+			fcn_004d5110(w, v, *(int*) &g_772e9c, *(int*) 0x772e98);
 		}
 		return;
 	}
@@ -217,7 +218,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		return;
 	}
 	if (changed == *(int*) &g_772e9c) {
-		fcn_004d52a0(p, gm_StartFilteredEntitySearch(1, 1, p->owner), *(int*) &g_772e9c,
-		             *(int*) 0x772e98, 100.0f);
+		v = gm_StartFilteredEntitySearch(1, 1, p->owner);
+		fcn_004d52a0(p, v, *(int*) &g_772e9c, *(int*) 0x772e98, 100.0f);
 	}
 }
