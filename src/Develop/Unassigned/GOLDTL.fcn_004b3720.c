@@ -10,10 +10,11 @@ int __cdecl fcn_004b3720(int a0, char* a1, int a2)
 {
 	int pos;
 	int result;
+	int diff;
 	int slot[4];
 
 	pos = g_67fca8;
-	for (;;) {
+	do {
 		if (g_7728d4 == 0) {
 			return 3;
 		}
@@ -21,16 +22,17 @@ int __cdecl fcn_004b3720(int a0, char* a1, int a2)
 			g_7728d4 = 0;
 			return 4;
 		}
-		result = g_7f4c00.a - slot[0];
-		if (result == 1) {
+		diff = g_7f4c00.a - slot[0];
+		if (diff == 1) {
 			pos = fcn_004b2dd0(a1, g_67fca8, a2);
+			result = 1;
 			if (pos == 0) {
 				result = 5;
 			} else if (*a1 == 0) {
 				result = 6;
 			}
 		} else {
-			if (result <= 1) {
+			if (diff <= 1) {
 				return 2;
 			}
 			result = 0;
@@ -40,9 +42,6 @@ int __cdecl fcn_004b3720(int a0, char* a1, int a2)
 		if (g_67fca4 < pos) {
 			g_7728d4 = 0;
 		}
-		if (result != 0 && result != 6 && result != 5) {
-			break;
-		}
-	}
+	} while (result == 0 || result == 6 || result == 5);
 	return result;
 }

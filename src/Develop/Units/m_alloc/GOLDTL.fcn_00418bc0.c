@@ -37,9 +37,10 @@ int __cdecl fcn_00418bc0(int a0)
 		add ecx, ebx
 		rep stosb
 	}
-			return result;
+		} else {
+			result = -1;
 		}
 	}
-	return -1;
+	return result;
 }
 #pragma optimize("", on)

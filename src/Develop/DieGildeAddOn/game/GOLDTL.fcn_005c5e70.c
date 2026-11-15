@@ -33,7 +33,7 @@ unsigned int __cdecl fcn_005c5e70(void)
 	if (container == 0) {
 		return 0;
 	}
-	for (slot = (int*) 0x776c64; (int) slot <= 0x776c93; slot += 2) {
+	for (slot = (int*) 0x776c64; (int) slot < 0x776c94; slot += 2) {
 		if (*slot != 0) {
 			id = *(unsigned short*) *slot;
 			if (fcn_00502cd0(*(int*) (container + 0x178), 1, 0, id) != 0) {

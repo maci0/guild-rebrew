@@ -51,7 +51,7 @@ int __cdecl fcn_005ae6a0(void* a0)
 	if (a0 != 0 &&
 	    fcn_00525f60((char*) ((unsigned long)&g_7f4ca0 + *(unsigned short*) &g_774970 * 0x21c), 3) != 0 &&
 	    (*(int*) ((char*) a0 + 0x16c) == 0 ||
-	     *(short*) (*(int*) ((char*) a0 + 0x16c) + 0x27) != *(unsigned short*) a0)) {
+	     *(unsigned short*) (*(int*) ((char*) a0 + 0x16c) + 0x27) != *(unsigned short*) a0)) {
 	if (*(unsigned char*) ((char*) a0 + 0x1b1) != 0) {
 		io_FormatTextBuffer(text, 0x19ba, *(unsigned short*) a0);
 		fcn_00526120(text, 0);

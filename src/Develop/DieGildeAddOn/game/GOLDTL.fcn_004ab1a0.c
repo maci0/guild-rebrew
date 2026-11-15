@@ -89,7 +89,7 @@ unsigned int __cdecl fcn_004ab1a0(int* a0, Msg* a1, Msg* a2)
 							if ((unsigned short) gm_RandomMod(0xc) > (unsigned short) rec.x8) {
 								return 0;
 							}
-							if (gm_RandomFloat01() < *(float*) 0x6628cc) {
+							if ((float) gm_RandomFloat01() < *(float*) 0x6628cc) {
 								memset(a1, 0, 0x18);
 								memset(a2, 0, 0x18);
 							} else {

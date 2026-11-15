@@ -42,8 +42,8 @@ void __cdecl fcn_00487c00(char* a0, char* entity, int chance)
 	v[4] = 0x13;
 	*(int*) (v + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (entity + 0x16c) + 0x27) * 0x21c);
 	*(int*) (v + 0xc) = *(int*) (*(char**) (entity + 0x16c) + 1);
-	*(pos14_7f4c00*) (v + 0x28) = g_7f4c00;
 	v[0x36] = 1;
+	*(pos14_7f4c00*) (v + 0x28) = g_7f4c00;
 	*(int*) (v + 0x58) = *(int*) (a0 + 2);
 	*(int*) (v + 0x5c) = 1;
 	*(int*) (v + 0x64) = 1;

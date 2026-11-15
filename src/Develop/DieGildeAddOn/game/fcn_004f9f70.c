@@ -11,8 +11,8 @@ int __cdecl fcn_004f9f70(int a, int b)
 	int* t;
 
 	v = *(int*) b;
-	*(char*) (b + 0x14) = 0;
 	r = 0;
+	*(char*) (b + 0x14) = 0;
 	if (v == 3 || v == 1) {
 		if ((*(int*) (a + 0x1cc) & 0x800) == 0) {
 			return 1;

@@ -37,14 +37,14 @@ int __cdecl fcn_00492e50(Cmd92e50* a, char* b)
 	if (*(unsigned char*) (b + 2) != '\n') {
 		return 0;
 	}
-	if (a->link0 == (void*) b) {
+	if ((void*) b == a->link0) {
 		sw = a->f28;
 		count = a->f14;
 		v1 = a->f10;
 		p = a->arr0;
 		v2 = a->f34;
 		extra = 0;
-	} else if (a->link1 == (void*) b) {
+	} else if ((void*) b == a->link1) {
 		sw = a->f4c;
 		count = a->f38;
 		v1 = a->f34;

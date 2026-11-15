@@ -29,7 +29,6 @@
  * unassigned; the native reads that slot uninitialised.
  */
 
-#define F_ZERO      (*(float*) 0x6628a8)
 #define F_STEP_BIAS (*(float*) 0x662a7c)
 #define F_STEP_K    (*(float*) 0x662c78)
 
@@ -103,7 +102,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 	/* ---- layer walk: blend both records of every visible layer ---- */
 	do {
 		if (*(unsigned char**) (layer + 0x64) != 0 &&
-		    *(float*) (layer + 0x3c) != F_ZERO) {
+		    *(float*) (layer + 0x3c) != 0.0f) {
 			h = *(float*) (layer + 0x3c);
 			b = layer - 4;
 			ei = (b == first) ? 0 : count;

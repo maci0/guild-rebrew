@@ -23,17 +23,21 @@ int __cdecl fcn_005d6030(char* a0, char* a1)
 	unsigned char rec[0xf8];
 	unsigned int init[20];
 	char name[64];
-	int owner;
+	unsigned short owner;
 	int found;
-	int id;
+	unsigned short id;
+	int ret;
 
+	ret = 2;
 	if (*(unsigned char*) (a0 + 2) != 6 && *(unsigned char*) (a0 + 2) != 7) {
 		found = gm_LookupEntityRecordById(*(unsigned int*) (a1 + 0x214));
 		if (found == 0) {
 			return 0x60;
 		}
-		owner = (unsigned short) gm_RandomMod(9) + 0x1d76;
-		id = (unsigned short) gm_RandomMod(9) + 0x1d6d;
+		owner = gm_RandomMod(9);
+		owner += 0x1d76;
+		id = gm_RandomMod(9);
+		id += 0x1d6d;
 		memset(rec, 0, sizeof(rec));
 		*(int*) (rec + 8) = *(int*) (a0 + 4);
 		*(int*) (rec + 0xc) = *(int*) (a0 + 4);
@@ -59,7 +63,7 @@ int __cdecl fcn_005d6030(char* a0, char* a1)
 	io_FormatTextBuffer(name, 0x1d66);
 	found = fcn_005cd440(init, name, 0, (char*) 0x5d5d70);
 	if (found != 0 && (*(unsigned int*) (found + 0x1c8) & 0x400) != 0) {
-		return 0x81;
+		ret = 0x81;
 	}
-	return 2;
+	return ret;
 }

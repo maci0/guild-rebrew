@@ -51,7 +51,7 @@ int __cdecl fcn_005186c0(int a1, unsigned char a2, unsigned char a3, char* a4)
 	case 1:
 		strcpy(a4, (char*) p + 0x30);
 		if (a2 != 2) {
-			return 1;
+			break;
 		}
 		if (ENDS_APOSTROPHE((char*) p + 0x30)) {
 			strcat(a4, "'");
@@ -79,7 +79,7 @@ int __cdecl fcn_005186c0(int a1, unsigned char a2, unsigned char a3, char* a4)
 			sprintf(a4, "%s", (char*) p + 0x30);
 		}
 		if (a2 != 2) {
-			return 1;
+			break;
 		}
 		if (ENDS_APOSTROPHE((char*) p + 0x40)) {
 			strcat(a4, "'");
@@ -102,7 +102,7 @@ int __cdecl fcn_005186c0(int a1, unsigned char a2, unsigned char a3, char* a4)
 			sprintf(a4, "%s", (char*) p + 0x30);
 		}
 		if (a2 != 2) {
-			return 1;
+			break;
 		}
 		if (ENDS_APOSTROPHE((char*) p + 0x30)) {
 			strcat(a4, "'");
