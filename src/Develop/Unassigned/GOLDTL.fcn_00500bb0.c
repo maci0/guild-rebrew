@@ -19,8 +19,8 @@ void __cdecl fcn_00500bb0(Time* clock, int arg2, int arg3, int arg4)
 	clock->min += (arg4 + clock->sec) / 60;
 	clock->sec = (arg4 + clock->sec) % 60;
 	clock->hour += (unsigned short) ((arg3 + clock->min) / 60);
-	clock->min = (arg3 + clock->min) % 60;
 	minutes = *p4;
+	clock->min = (arg3 + clock->min) % 60;
 	minutes += arg2;
 
 	if (minutes >= 24) {

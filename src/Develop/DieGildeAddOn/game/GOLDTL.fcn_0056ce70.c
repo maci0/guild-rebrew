@@ -22,7 +22,7 @@ void __cdecl fcn_0056ce70(char* obj)
 {
 	float v1[4];
 	float v2[4];
-	float d;
+	double d;
 	pos14_7f4c00* p;
 	int i;
 	char* a;

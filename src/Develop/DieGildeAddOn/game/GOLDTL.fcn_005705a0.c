@@ -78,10 +78,10 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 		job.f0c = eid;
 		job.a28 = g_7f4c00;
 		job.b2c = g_7f4c04;
-		job.c30 = g_7f4c08;
-		job.d34 = g_7f4c0c;
 		job.f04 = 0x10;
 		job.e36 = 1;
+		job.c30 = g_7f4c08;
+		job.d34 = g_7f4c0c;
 		fcn_00500bb0(&job.a28, 0, 0, 10);
 		job.f58 = *(unsigned int*) (rec + 2);
 		job.f64 = 5;

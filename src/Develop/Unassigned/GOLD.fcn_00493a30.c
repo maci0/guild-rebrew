@@ -10,9 +10,9 @@ void __cdecl fcn_00493a30(unsigned char* game)
 
     state = *(int*) (game + 8);
     left = 0;
-    right = 0;
     triples_left = 0;
     triples_right = 0;
+    right = 0;
     if (state == 1) {
         *(int*) (game + 8) = 2;
         return;

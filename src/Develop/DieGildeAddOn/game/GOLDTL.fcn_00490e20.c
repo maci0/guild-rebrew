@@ -29,61 +29,60 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* a2)
 
 	mode = gm_MapEntityStatRange(*(unsigned char*) (a0 + 0x164));
 	cnt = 0;
-	if (g_7f4c00 < 10) {
-		return 0;
-	}
-	if (gm_StartFilteredEntitySearch(1, 5, 0x17)) { cnt = 1; }
-	if (gm_StartFilteredEntitySearch(1, 5, 0x18)) {
-		cnt++;
-	}
-	if (gm_StartFilteredEntitySearch(1, 5, 0x19)) {
-		cnt++;
-	}
-	if (gm_StartFilteredEntitySearch(1, 5, 0x1a)) {
-		cnt++;
-	}
-	if (cnt == 0) {
-		return 0;
-	}
-	fcn_004f4830(10, v5);
-	f = fcn_004fbd40();
-	d = v5[2] - v5[1];
-	if (f < g_664188) {
-		v = (int) ((float) d * g_664160 + v5[1]);
-	} else if (f < g_664180) {
-		v = (int) ((float) d * g_66417c + v5[1]);
-	} else {
-		v = (int) ((float) d * g_664178 + v5[1]);
-	}
-	r = v;
-	if (mode == 1 || mode == 2 || mode == 3 || mode == 5) {
-		r--;
-	}
-	owner = fcn_0050e4a0(1);
-	p = fcn_00502cd0(*(int*) ((char*) owner + 0x5d), 2, 6, 0, 0x115);
-	cur = fcn_0050b810(*(int*) ((char*) p + 0x14), g_773d75);
-	if (cur < fcn_004ec710() * 3) {
-		r = r + 1 + (gm_RandomMod(3) & 0xffff);
-	}
-	v = v5[6];
-	if (v - 3 <= r) {
-		if (v + 3 >= r) {
-			return 0;
+	if (g_7f4c00 >= 10) {
+		if (gm_StartFilteredEntitySearch(1, 5, 0x17)) { cnt = 1; }
+		if (gm_StartFilteredEntitySearch(1, 5, 0x18)) {
+			cnt++;
 		}
-		cur = (gm_RandomMod(2) & 0xffff) + v + 1;
-		if (v5[2] >= cur) {
-			*a2 = cur;
-			return 1;
+		if (gm_StartFilteredEntitySearch(1, 5, 0x19)) {
+			cnt++;
 		}
-		*a2 = v5[2];
-		return 1;
+		if (gm_StartFilteredEntitySearch(1, 5, 0x1a)) {
+			cnt++;
+		}
+		if (cnt != 0) {
+			fcn_004f4830(10, v5);
+			f = fcn_004fbd40();
+			d = v5[2] - v5[1];
+			if (f < g_664188) {
+				v = (int) ((float) d * g_664160 + v5[1]);
+			} else if (f < g_664180) {
+				v = (int) ((float) d * g_66417c + v5[1]);
+			} else {
+				v = (int) ((float) d * g_664178 + v5[1]);
+			}
+			r = v;
+			if (mode == 1 || mode == 2 || mode == 3 || mode == 5) {
+				r--;
+			}
+			owner = fcn_0050e4a0(1);
+			p = fcn_00502cd0(*(int*) ((char*) owner + 0x5d), 2, 6, 0, 0x115);
+			cur = fcn_0050b810(*(int*) ((char*) p + 0x14), g_773d75);
+			if (cur < fcn_004ec710() * 3) {
+				r = r + 1 + (gm_RandomMod(3) & 0xffff);
+			}
+			v = v5[6];
+			if (v - 3 <= r) {
+				if (v + 3 < r) {
+					cur = (gm_RandomMod(2) & 0xffff) + v + 1;
+					if (v5[2] >= cur) {
+						*a2 = cur;
+						return 1;
+					}
+					*a2 = v5[2];
+					return 1;
+				}
+			} else {
+				cur = (v - (gm_RandomMod(2) & 0xffff)) - 1;
+				*a2 = cur;
+				if (v5[1] > cur) {
+					*a2 = v5[1];
+					return 1;
+				}
+				*a2 = cur;
+				return 1;
+			}
+		}
 	}
-	cur = (v - (gm_RandomMod(2) & 0xffff)) - 1;
-	*a2 = cur;
-	if (v5[1] > cur) {
-		*a2 = v5[1];
-		return 1;
-	}
-	*a2 = cur;
-	return 1;
+	return 0;
 }

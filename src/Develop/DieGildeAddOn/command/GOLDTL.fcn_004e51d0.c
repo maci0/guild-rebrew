@@ -85,6 +85,7 @@ void __cdecl fcn_004e51d0(unsigned char* s, int id)
 	int pos;
 	int found;
 	rec35c* rec;
+	int* ids;
 
 	saved = cut_GetRandSeed();
 	fcn_004e4f10(s);
@@ -133,8 +134,9 @@ label_4e526f:
 		if (kind == 1) {
 			if (*(int*) (s + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
 				rec = (rec35c*) g_9b0e20;
-				for (i = 0; i < (int) s[0x30]; i++) {
-					ent = gm_LookupEntityRecordById(*(int*) (s + 0x34 + i * 4));
+				ids = (int*) (s + 0x34);
+				for (i = 0; i < (int) s[0x30]; i++, ids++) {
+					ent = gm_LookupEntityRecordById(*ids);
 					if (ent != 0
 							&& *(unsigned char*) (ent + 2) != 6
 							&& *(unsigned char*) (ent + 2) != 7

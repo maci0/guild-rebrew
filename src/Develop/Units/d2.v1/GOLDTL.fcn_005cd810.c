@@ -87,7 +87,7 @@ void __cdecl fcn_005cd810(int a0)
 				rec[i].h1 = -1;
 				rec[i].text = 0;
 			}
-			if (((1 <= a0) && (a0 <= 6)) || (a0 == 8)) {
+			if (((0 < a0) && (a0 < 7)) || (a0 == 8)) {
 				count = fcn_004e8b80(a0, 6, src1);
 				if (count > 0) {
 					for (i = 0; i < count; i++) {

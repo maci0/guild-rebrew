@@ -17,8 +17,8 @@ void __cdecl fcn_004fe140(TIME_4FE140* clock, int hours, int minutes, int second
 	clock->minute += (seconds + clock->second) / 60;
 	clock->second = (seconds + clock->second) % 60;
 	clock->hour += (unsigned short) ((minutes + clock->minute) / 60);
-	clock->minute = (minutes + clock->minute) % 60;
 	value = *hour;
+	clock->minute = (minutes + clock->minute) % 60;
 	value += hours;
 	if (value >= 24) {
 		days = clock->day; days += (unsigned int) value / 24;

@@ -62,11 +62,11 @@ void __cdecl fcn_005a4490(char* p)
 	int arg;
 	char* line;
 
-	prev = -1;
 	slot = -1;
-	count = 0;
 	second = -1;
+	count = 0;
 	refresh = 1;
+	prev = -1;
 	for (i = 0; i < 9; i++) {
 		rows[i].image = -1;
 		rows[i].text = -1;

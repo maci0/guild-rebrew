@@ -54,7 +54,7 @@ char __cdecl fcn_00411610(int shift, int ctrl, int alt, char key);
 void __cdecl fcn_00474300(void)
 {
 	int saved;
-	unsigned char c;
+	unsigned int c;
 	Combo* w;
 
 	saved = g_14ce8c2;

@@ -24,12 +24,13 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 	int n;
 	int idx;
 
-	count = 0;
+	n = 0;
 	for (i = 0x7f4e24; i < 0x85a224; i += 0x21c) {
 		if (*(int*) i != 0) {
-			count += 1;
+			n += 1;
 		}
 	}
+	count = n;
 	if (vfs_fwrite(&count, 4, 1, handle) <= 0) {
 		return 0;
 	}

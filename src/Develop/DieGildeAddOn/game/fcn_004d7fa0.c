@@ -19,6 +19,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	int countC0;
 	int i;
 	char* base;
+	char* list;
 	char* s;
 	char* e;
 	char* e2;
@@ -36,14 +37,15 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	if (level < 1) {
 		return level;
 	}
+	list = g_772eb4;
 	if (b == (int) g_772e9c) {
-		base = g_772eb4 + 0xc0;
+		base = list + 0xc0;
 	} else {
-		base = g_772eb4 + 0x80;
+		base = list + 0x80;
 	}
 	count80 = 0;
 	for (i = 0; i < 0x10; i++) {
-		v = *(int*) (g_772eb4 + 0x80 + i * 4);
+		v = *(int*) (list + 0x80 + i * 4);
 		if (v != -1) {
 			s = fcn_004cef30(v);
 			if (s[8] != 0 && s[8] != 4) {
@@ -53,7 +55,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	}
 	countC0 = 0;
 	for (i = 0; i < 0x10; i++) {
-		v = *(int*) (g_772eb4 + 0xc0 + i * 4);
+		v = *(int*) (list + 0xc0 + i * 4);
 		if (v != -1) {
 			s = fcn_004cef30(v);
 			if (s[8] != 0 && s[8] != 4) {

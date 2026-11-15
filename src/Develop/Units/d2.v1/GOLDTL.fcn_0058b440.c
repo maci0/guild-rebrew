@@ -44,7 +44,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
     v19 = 0;
     v1 = (int*) a1[a1[0x4d] * 4 + 0xe];
     v14 = *(int*) (*v1 * 4 + 0x6652f8);
-    if (1 <= v14) {
+    if (v14 > 0) {
         v7 = 0;
         v4 = &a1[0x51];
         do {
@@ -62,7 +62,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             v4 = v3;
         } while (v14);
     }
-    if (v16 <= 7) {
+    if (v16 < 8) {
         v14 = 8 - v16;
         v4 = &a1[v16 * 3 + 0x51];
         do {
@@ -88,7 +88,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
                  (int*) v10, (int*) v9);
     d2_SetForm(*v2, 3);
     v18 = 0;
-    if (1 <= v16) {
+    if (v16 > 0) {
         v17 = a3 == 0;
         v15 = (int*) &v2[0x50];
         do {
@@ -146,7 +146,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             io_FormatTextBuffer(v12, 0x6a9680, *v5);
         } else {
             v14 = 0;
-            if (1 <= v16) {
+            if (v16 > 0) {
                 v4 = &v2[0x50];
                 do {
                     if (*(int*) *v4 == v1[1]) {

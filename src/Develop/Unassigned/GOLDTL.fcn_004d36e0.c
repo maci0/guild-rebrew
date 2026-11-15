@@ -58,7 +58,7 @@ char* __cdecl fcn_004d36e0(char* e)
         }
     }
     if (*(char**) (res + 0x204) == e) {
-        return 0;
+        res = 0;
     }
     return res;
 }

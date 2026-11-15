@@ -56,7 +56,7 @@ unsigned int __cdecl fcn_0053d020(int a0)
 		*(unsigned int*) (v + 0x38 + (int) g_1015ea0) = 0;
 		*(unsigned int*) (v + 0x3c + (int) g_1015ea0) = 0;
 		*(unsigned int*) (v + 0x60 + (int) g_1015ea0) = 1;
-	} while (i <= 7);
+	} while (i < 8);
 	i = 0;
 	do {
 		if (*(int*) 0x7e23e4 == i + 0x59a) {

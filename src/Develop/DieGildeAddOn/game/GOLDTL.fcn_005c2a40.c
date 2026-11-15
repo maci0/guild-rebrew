@@ -80,9 +80,9 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	float lo;
 	float hi;
 
-	total = 0;
-	others = 0;
 	removed = 0;
+	others = 0;
+	total = 0;
 	owner = *(int*) (a0 + 1);
 	ep = slots;
 	for (i = 0x20; i != 0; i--) {

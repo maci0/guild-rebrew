@@ -45,8 +45,8 @@ void __cdecl fcn_00535ec0(void)
 
 	switch (g_14cf950) {
 	case 0x20: {
-		unsigned short si;
-		unsigned short slot_id;
+		int si;
+		int slot_id;
 		int slot_val;
 		int* l2;
 		char* p;

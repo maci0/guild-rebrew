@@ -111,11 +111,11 @@ void __cdecl fcn_004ad6a0(void)
 	if (best != 0) {
 		fcn_004e8240((unsigned char) info[0], best, 0, 1, 0xff);
 		if (best[2] == 6 || best[2] == 7 || best[2] == 5) {
-			msg.month = g_7f4c04;
 			msg.year = g_7f4c00;
+			msg.month = g_7f4c04;
 			v = *(int*) (best + 4);
-			msg.hour = g_7f4c0c;
 			msg.day = g_7f4c08;
+			msg.hour = g_7f4c0c;
 			msg.type = 0xa5;
 			msg.id = v;
 			msg.unk_c = -1;
