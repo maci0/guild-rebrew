@@ -34,15 +34,19 @@ void __cdecl fcn_00436aa0(unsigned char* flags)
     float m[16];
     void* copy_dst;
     int copy_size;
+    float f;
 
     ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x8e, 0);
     ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x1a, 1);
     ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x8d, 0);
     ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x9c, 1);
     ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x9d, 1);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x9e, 0);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x9f, 0);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0xa0, 0x3f800000);
+    f = 0.0f;
+    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x9e, *(int*) &f);
+    f = 0.0f;
+    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x9f, *(int*) &f);
+    f = 1.0f;
+    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0xa0, *(int*) &f);
     ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x30, 1);
     ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x8c, 3);
     ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x19, 5);

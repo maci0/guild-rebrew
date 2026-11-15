@@ -43,8 +43,8 @@ void __cdecl fcn_0044a390(MeshBox* m)
 	float dy;
 	float dz;
 
-	n = m->vert_count;
 	v = m->verts;
+	n = m->vert_count;
 	r = 0.0f;
 	for (i = n; i > 0; i--) {
 		d = v->px * v->px + v->py * v->py + v->pz * v->pz;
@@ -124,6 +124,7 @@ void __cdecl fcn_0044a390(MeshBox* m)
 	}
 	r = 0.0f;
 	v = m->verts;
+	n = m->vert_count;
 	for (i = n; i > 0; i--) {
 		dx = v->px - m->center_x;
 		dy = v->py - m->center_y;

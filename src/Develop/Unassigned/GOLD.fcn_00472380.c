@@ -21,7 +21,7 @@ int __cdecl fcn_00472380(short x, short y, short width, short height, unsigned i
     int descriptor[16];
 
     I32(0x6ed9b4)++;
-    if (I32(0x6ed9b4) >= 0x61) {
+    if (I32(0x6ed9b4) > 0x60) {
         I32(0x6ed9b4) = 1;
     }
     for (index = 0; index < 0x60; index++) {

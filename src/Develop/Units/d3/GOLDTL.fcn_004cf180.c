@@ -51,7 +51,7 @@ int __cdecl fcn_004cf180(void)
     do {
         if (*p != 0) {
             count++;
-            if ((unsigned int) (p[1] + 0x15e) < g_6b7fac) {
+            if (g_6b7fac > (unsigned int) (p[1] + 0x15e)) {
                 v[0] = -243.0f;
                 v[1] = -90.0f;
                 v[2] = 190.0f;

@@ -53,7 +53,8 @@ int __cdecl fcn_0052b230(void)
 			if (g_14cf70f != 0) {
 				t = (float) ((int) *(short*) &g_14cf902 - *(int*) 0x77473c) * g_662a70 + *(float*) (p + 0x84);
 				*(float*) 0x7e26f0 = t;
-				*(float*) 0x7e26f4 = *(float*) (p + 0x88);
+				b8 = *(float*) (p + 0x88);
+				*(float*) 0x7e26f4 = b8;
 				*(float*) 0x7e26f8 = *(float*) (p + 0x8c);
 				*(float*) 0x7e26f0 = (float) fmod(*(float*) 0x7e26f0, g_662958);
 			} else {

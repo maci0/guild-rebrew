@@ -33,9 +33,9 @@ int __cdecl fcn_0042bd20(char* path)
 	g_6b7f98 = 0;
 	p = fcn_0064d1a0(path, '\\');
 	if (p) {
-		len = (int) (p - path) + 1;
-		memcpy(g_1052f00, path, len);
-		g_1052f00[len] = 0;
+		len = (int) (p - path);
+		memcpy(g_1052f00, path, len + 1);
+		g_1052f00[len + 1] = 0;
 	} else {
 		g_1052f00[0] = g_6b5c60[0];
 	}

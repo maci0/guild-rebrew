@@ -9,14 +9,16 @@ void __cdecl fcn_004758e0(int index)
 {
     GuiObj* object;
     int i;
+    int off;
 
     if (index > 0x30 && index < 1)
         return;
-    object = &g_00fb1020[index];
-    if (object->used == 0)
+    off = index * sizeof(GuiObj);
+    object = (GuiObj*) ((char*) g_00fb1020 + off);
+    if (*(int*) ((char*) g_00fb1020 + off + 0x190) == 0)
         return;
-    for (i = object->count - 1; i >= 0; i--)
-        fcn_00472cd0(object->wins[i]);
+    for (i = *(int*) ((char*) g_00fb1020 + off + 0x184) - 1; i >= 0; i--)
+        fcn_00472cd0(*(int*) ((char*) g_00fb1020 + off + 4 + i * 4));
     if (*(int*) ((char*) object + 0x1a4) != 0)
         fcn_00478fb0(*(int*) ((char*) object + 0x1a4));
     if (*(int*) ((char*) object + 0x1a8) != 0)

@@ -37,8 +37,7 @@ int __cdecl fcn_00414d20(int a1, int count, ...)
 {
 	char rec[0x1600];
 	char name[0x60];
-	int h[12];
-	int q[4];
+	int h[16];
 	Flags4cf450 fl;
 	int n;
 	int i;
@@ -48,10 +47,10 @@ int __cdecl fcn_00414d20(int a1, int count, ...)
 	char* s;
 	va_list ap;
 
-	q[0] = 0;
-	q[1] = 0;
-	q[2] = 0;
-	q[3] = 0;
+	h[12] = 0;
+	h[13] = 0;
+	h[14] = 0;
+	h[15] = 0;
 	n = 0;
 	h[0] = 0;
 	h[1] = 0;

@@ -67,46 +67,25 @@ unsigned int __cdecl fcn_004ed240(void)
 	if (g_772fdc == 0) {
 		goto drop_second;
 	}
-	if (g_772fd8 > 0) {
 
 		for (i = 0; i < g_772fd8; i++) {
 			sprintf(app, s_68df84, i);
 			GetPrivateProfileStringA(app, s_68df78, s_68df80, out, 0x100, path);
 			v = atoi(out);
 			v = v <= 0 ? 0 : v;
-			v = v >= 0xfc ? 0xfc : v;
-
-
-
-
-			g_772fdc[i * 0xc + 0] = (unsigned char) v;
+			g_772fdc[i * 0xc + 0] = (unsigned char) (v >= 0xfc ? 0xfc : v);
 			GetPrivateProfileStringA(app, s_68df70, s_68df80, out, 0x100, path);
 			v = atoi(out);
 			v = v <= 0 ? 0 : v;
-			v = v >= 0xfc ? 0xfc : v;
-
-
-
-
-			g_772fdc[i * 0xc + 1] = (unsigned char) v;
+			g_772fdc[i * 0xc + 1] = (unsigned char) (v >= 0xfc ? 0xfc : v);
 			GetPrivateProfileStringA(app, s_68df68, s_68df80, out, 0x100, path);
 			v = atoi(out);
 			v = v <= 0 ? 0 : v;
-			v = v >= 0xfc ? 0xfc : v;
-
-
-
-
-			g_772fdc[i * 0xc + 2] = (unsigned char) v;
+			g_772fdc[i * 0xc + 2] = (unsigned char) (v >= 0xfc ? 0xfc : v);
 			GetPrivateProfileStringA(app, s_68df60, s_68df80, out, 0x100, path);
 			v = atoi(out);
 			v = v <= 0 ? 0 : v;
-			v = v >= 0xfc ? 0xfc : v;
-
-
-
-
-			g_772fdc[i * 0xc + 3] = (unsigned char) v;
+			g_772fdc[i * 0xc + 3] = (unsigned char) (v >= 0xfc ? 0xfc : v);
 			GetPrivateProfileStringA(app, s_68df54, s_68df5c, out, 0x100, path);
 			v = atoi(out);
 			v = v <= 0x12 ? 0x12 : v;
@@ -120,7 +99,7 @@ unsigned int __cdecl fcn_004ed240(void)
 			*(int*) (g_772fdc + i * 0xc + 8) = fcn_004edcd0(out);
 
 		}
-	}
+
 	GetPrivateProfileStringA(s_68df14, s_68df28, s_6b5c60, out, 0x100, path);
 	g_772fe0 = atoi(out);
 	if (g_772fe0 <= 0) {

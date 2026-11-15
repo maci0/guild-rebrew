@@ -33,36 +33,30 @@ int __cdecl fcn_004a4680(float* o0, float* o1, int idx, char* s, int* p4)
 	*o0 = 0.0f;
 	*o1 = 0.0f;
 	method = &g_1008540[idx];
-	found = ((unsigned char) method->flags & *(unsigned char*) (s + 0x218)) == 0;
-	if (found) {
-		v10 = g_662914;
-		v8 = g_662cf8;
-	} else {
+	if ((unsigned char) method->flags & *(unsigned char*) (s + 0x218)) {
 		v10 = g_662c98;
 		v8 = g_662914;
+		found = 1;
+	} else {
+		v10 = g_662914;
+		v8 = g_662cf8;
+		found = 0;
 	}
-	found = !found;
-	if (!found) {
-		t = (char*) &method->effects[0].value;
-		for (i = 0; i < 4; i++) {
-			if (*(char*) (t - 4) == *(char*) (s + 0x130)
-				&& *(float*) t > g_6628a8) {
-				found = 1;
-				break;
-			}
-			t += 8;
+	t = (char*) &method->effects[0].value;
+	for (i = 0; !found && i < 4; i++) {
+		if (*(char*) (t - 4) == *(char*) (s + 0x130)
+			&& *(float*) t > g_6628a8) {
+			found = 1;
 		}
+		t += 8;
 	}
-	if (!found) {
-		t = (char*) &method->other_effects[0].value;
-		for (i = 0; i < 4; i++) {
-			if (*(char*) (t - 4) == *(char*) (s + 0x130)
-				&& *(float*) t > g_6628a8) {
-				found = 1;
-				break;
-			}
-			t += 8;
+	t = (char*) &method->other_effects[0].value;
+	for (i = 0; !found && i < 4; i++) {
+		if (*(char*) (t - 4) == *(char*) (s + 0x130)
+			&& *(float*) t > g_6628a8) {
+			found = 1;
 		}
+		t += 8;
 	}
 	t = (char*) method->effects;
 	for (i = 4; i != 0; i--) {

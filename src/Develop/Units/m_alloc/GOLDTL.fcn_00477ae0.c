@@ -9,8 +9,8 @@ void __cdecl fcn_004757b0(char*, char, char, char);
    used bounds, repaint both row markers, copy the bounding rows into the block
    header and return a right-sized copy. */
 /* ADDRESS: GOLDTL 0x00477ae0 */
-unsigned int* __cdecl fcn_00477ae0(int a0, int a1, unsigned int a2,
-                                   unsigned int a3, char* a4, char a5, int a6)
+unsigned int* __cdecl fcn_00477ae0(int a0, int a1, int a2,
+                                   int a3, char* a4, char a5, int a6)
 {
 	unsigned int* v6;
 	unsigned int* v8;
@@ -36,7 +36,7 @@ unsigned int* __cdecl fcn_00477ae0(int a0, int a1, unsigned int a2,
 	ymax = 0;
 	ymin = (unsigned short) a3;
 	v6 = (unsigned int*) m_alloc((a2 * 0xc + 4) * a3 + 0x32, (char*) 0x67d9a0);
-	if (1 <= (int) a3) {
+	if (a3 > 0) {
 		step = a6 * 3;
 		v7 = a4 + (a1 * a6 + a0) * 3;
 		for (row = 0; (int) row < (int) a3; row++) {

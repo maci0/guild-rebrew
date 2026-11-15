@@ -18,6 +18,7 @@ void __cdecl fcn_00476d50(int x0, int y0, int x1, int y1, int r, int g, int b, S
 {
 	int n, x, y, dx, dy, step[2], d, inc1, inc2;
 
+	x = x0;
 	if (y0 == y1) {
 		if (x1 < x0) {
 			n = x0 - x1;
@@ -27,7 +28,7 @@ void __cdecl fcn_00476d50(int x0, int y0, int x1, int y1, int r, int g, int b, S
 		}
 		n = x1 - x0;
 		while (n-- > 0)
-			fcn_00476b10(x0++, y0, r, g, b, s);
+			fcn_00476b10(x++, y0, r, g, b, s);
 		return;
 	}
 	if (x0 == x1) {

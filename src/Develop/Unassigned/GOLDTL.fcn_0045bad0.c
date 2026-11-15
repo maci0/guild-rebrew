@@ -19,9 +19,7 @@ char __cdecl fcn_0045bad0(char* e, int gx, int gy, int* ox, int* oy)
 	float m[16];
 	float u;
 	float v;
-	float x0;
-	float y0;
-	float z0;
+	float o[3];
 	float px;
 	float py;
 	float pz;
@@ -34,9 +32,9 @@ char __cdecl fcn_0045bad0(char* e, int gx, int gy, int* ox, int* oy)
 	if (e == 0) {
 		return 0;
 	}
-	x0 = (*(float*) (g_6b8014 + 0x4c) - *(float*) (e + 0)) / *(float*) (e + 0x10);
-	y0 = (*(float*) (g_6b8014 + 0x50) - *(float*) (e + 4)) / *(float*) (e + 0x14);
-	z0 = (*(float*) (g_6b8014 + 0x54) - *(float*) (e + 8)) / *(float*) (e + 0x18);
+	o[0] = (*(float*) (g_6b8014 + 0x4c) - *(float*) (e + 0)) / *(float*) (e + 0x10);
+	o[1] = (*(float*) (g_6b8014 + 0x50) - *(float*) (e + 4)) / *(float*) (e + 0x14);
+	o[2] = (*(float*) (g_6b8014 + 0x54) - *(float*) (e + 8)) / *(float*) (e + 0x18);
 	u = ((float) gx - g_1052bc0) / g_10432a4;
 	v = ((float) gy - g_1052bc8) / g_1042584;
 	fcn_005ebbb9(m, (float*) (g_6b8014 + 0x18c));
@@ -47,10 +45,10 @@ char __cdecl fcn_0045bad0(char* e, int gx, int gy, int* ox, int* oy)
 	py = py / *(float*) (e + 0x14);
 	pz = pz / *(float*) (e + 0x18);
 	if (fabs(px) < g_662e68 && fabs(pz) < g_662e68) {
-		ix = (int) x0;
-		iz = (int) z0;
+		ix = (int) o[0];
+		iz = (int) o[2];
 		if (py > g_6628a8) {
-			if ((float) *(unsigned char*) (*(int*) (e + 0x28) + *(int*) (e + 0x20) * iz + ix) < y0) {
+			if ((float) *(unsigned char*) (*(int*) (e + 0x28) + *(int*) (e + 0x20) * iz + ix) < o[1]) {
 				return 0;
 			}
 		}
@@ -62,29 +60,29 @@ char __cdecl fcn_0045bad0(char* e, int gx, int gy, int* ox, int* oy)
 	px = px * t;
 	py = py * t;
 	pz = pz * t;
-	if (!(x0 >= g_6628a8)) {
+	if (!(o[0] >= g_6628a8)) {
 		return 0;
 	}
 	iw = *(int*) (e + 0x20);
 	lim = (float) iw;
 	do {
-		if (!(x0 < lim)) {
+		if (!(o[0] < lim)) {
 			return 0;
 		}
-		if (!(z0 >= g_6628a8)) {
+		if (!(o[2] >= g_6628a8)) {
 			return 0;
 		}
-		if (!(z0 < lim)) {
+		if (!(o[2] < lim)) {
 			return 0;
 		}
-		if ((float) *(unsigned char*) (*(int*) (e + 0x28) + (int) z0 * iw + (int) x0) >= y0) {
-			*ox = (int) x0;
-			*oy = (int) z0;
+		if ((float) *(unsigned char*) (*(int*) (e + 0x28) + (int) o[2] * iw + (int) o[0]) >= o[1]) {
+			*ox = (int) o[0];
+			*oy = (int) o[2];
 			return 1;
 		}
-		x0 = x0 + px;
-		y0 = y0 + py;
-		z0 = z0 + pz;
-	} while (x0 >= g_6628a8);
+		o[0] = o[0] + px;
+		o[1] = o[1] + py;
+		o[2] = o[2] + pz;
+	} while (o[0] >= g_6628a8);
 	return 0;
 }

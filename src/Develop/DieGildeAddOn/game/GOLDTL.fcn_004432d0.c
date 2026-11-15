@@ -24,11 +24,7 @@ char __cdecl fcn_004432d0(int a0, char a1)
 
 	if (a0 >= 0x40)
 		return 0;
-	if (a0 == *(int*) 0x6b8010) {
-		if (a1 == 0)
-			*(char*) 0x6b859b = 1;
-		return 1;
-	}
+	if (a0 != *(int*) 0x6b8010) {
 	off = *(int*) 0x6b8010 * 0x3dc;
 	*(int*) (g_10432c0 + off + 0x80) = *(int*) 0x1043254;
 	*(int*) (g_10432c0 + off + 0x84) = *(int*) 0x1042538;
@@ -199,6 +195,10 @@ char __cdecl fcn_004432d0(int a0, char a1)
 		*(int*) 0x1042a08 = 0;
 		*(char*) 0x6b859b = 1;
 	}
+		return 1;
+	}
+	if (a1 == 0)
+		*(char*) 0x6b859b = 1;
 	return 1;
 }
 #pragma optimize("", on)

@@ -33,7 +33,10 @@ int __cdecl fcn_004a5e60(unsigned short* a0, int a1, int a2, int a3, float a4, f
 	idx = (unsigned short) gm_RandomMod(0x100);
 	do {
 		if (i == 0) {
-			break;
+			if (found != 0) {
+				return 1;
+			}
+			return 0;
 		}
 		ent = (int) &g_entity_ptr[idx * 169];
 		if (*(char*) ent == 0) {
@@ -54,5 +57,5 @@ next:
 		i--;
 		idx = (idx + step) % 256;
 	} while (found == 0);
-	return found;
+	return 1;
 }

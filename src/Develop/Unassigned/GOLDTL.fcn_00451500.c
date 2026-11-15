@@ -13,7 +13,7 @@ void __cdecl fcn_00451500(float* a, float angle, float* m)
 {
 	float s;
 	float c;
-	float v[3];
+	float v[4];
 
 
 	float v4;

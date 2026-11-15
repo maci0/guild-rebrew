@@ -29,10 +29,10 @@ void __cdecl fcn_00402ba0(char* character)
     low = *(char**)(character + 0x22c);
     if (!low)
         return;
-    high = *(char**)(character + 0x34);
     if (I32(0x631064)) {
+        high = *(char**)(character + 0x34);
         I32(low + 0x200) = I32(high + 0x200);
-        I32(low + 0x48) = I32(high + 0x48);
+        I32(*(char**)(character + 0x22c) + 0x48) = I32(*(char**)(character + 0x34) + 0x48);
         if (*(unsigned short*)(character + 0x8c) & 0x200) {
             if (I32(high + 0x218) != 1)
                 fcn_00442c00(high, 0);
@@ -116,9 +116,12 @@ void __cdecl fcn_00402ba0(char* character)
             fcn_00442c00(high, 1);
             fcn_00453270(*(char**)(character + 0x34));
         }
-    } else if (I32(high + 0x218) == 1 && !(character[0x8c] & 0x20)) {
-        fcn_00442c00(high, 1);
-        fcn_00453270(*(char**)(character + 0x34));
+    } else {
+        high = *(char**)(character + 0x34);
+        if (I32(high + 0x218) == 1 && !(character[0x8c] & 0x20)) {
+            fcn_00442c00(high, 1);
+            fcn_00453270(*(char**)(character + 0x34));
+        }
     }
     low = *(char**)(character + 0x22c);
     if (I32(low + 0x218) != 1)

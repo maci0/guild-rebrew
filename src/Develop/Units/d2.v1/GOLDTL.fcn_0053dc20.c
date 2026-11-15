@@ -60,7 +60,7 @@ int __cdecl fcn_0053dc20(void)
 	fcn_00471b60(obj);
 	d2_SetForm(obj, 0);
 	if (fcn_0051e070()) {
-		v4 = io_AppendText(0x1ac0, 0x1ac2, 0x1ac4, 0x1ac2);
+		v4 = io_AppendText(0x1ac0, 0x1ac2, 0x1ac4, 0x1ac2, 0x1ac4, 1);
 		v10 = fcn_00472250(obj, 0, v4);
 		v11 = fcn_00472250(obj, 0, v4 + 1);
 		dlg = d2_CreateRadioGroup(3, v10, v11, fcn_00472250(obj, 0, v4 + 2));

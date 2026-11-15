@@ -85,8 +85,8 @@ void __cdecl fcn_00487000(char* e)
 		                           + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c);
 		*(int*) (m + 0xc) = *(int*) (*(char**) (e + 0x16c) + 1);
 		*(int*) (m + 0x28) = g_7f4c00.a;
-		*(int*) (m + 0x30) = g_7f4c08;
 		*(int*) (m + 0x2c) = g_7f4c04;
+		*(int*) (m + 0x30) = g_7f4c08;
 		m[0x36] = 2;
 		*(short*) (m + 0x34) = g_7f4c0c;
 		*(int*) (m + 0x58) = *(int*) (rec + 4);

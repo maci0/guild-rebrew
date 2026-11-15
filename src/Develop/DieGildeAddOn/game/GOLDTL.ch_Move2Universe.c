@@ -35,12 +35,13 @@ void __cdecl ch_Move2Universe(char* a0)
 		ch_RemoveQueueEntry(v4);
 		return;
 	}
-	if ((v2 == 0 && *(int*) (v4 + 0x34) != -1)
-		|| (v2 != 0 && *(int*) (v4 + 0x34) == -1)) {
-		if (v2 != 0 || *(int*) (v4 + 0x34) == -1)
-			ReportClientMessage((char*) 0x675950);
-		else
-			ReportClientMessage((char*) 0x6759c8);
+	if (v2 == 0 && *(int*) (v4 + 0x34) != -1) {
+		ReportClientMessage((char*) 0x6759c8);
+		ch_RemoveQueueEntry(v4);
+		return;
+	}
+	if (v2 != 0 && *(int*) (v4 + 0x34) == -1) {
+		ReportClientMessage((char*) 0x675950);
 		ch_RemoveQueueEntry(v4);
 		return;
 	}
