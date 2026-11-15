@@ -26,6 +26,7 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 	int v9;
 	int n;
 	int i;
+	int any;
 	int j;
 	int k;
 	int found;
@@ -71,11 +72,11 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 	d2_SetForm(v8, 3);
 	if (a0 < 8) {
 		io_AppendText(0x13a0);
-		i = 0;
+		any = 0;
 		for (j = 0; j < n; j++) {
 			if (rec[j * 0x18 + 0x10] == 3) {
-				i |= 1;
 				found = 0;
+				any |= 1;
 				io_AppendText(0x13a1, *(unsigned char*) (rec + j * 0x18 + 8) + 0x253);
 				k = 0;
 				h = (unsigned short*) g_7f4ca0;
@@ -94,9 +95,6 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 					io_AppendText(0x139d);
 				}
 			}
-		}
-		if (i != 0) {
-			goto have_pick;
 		}
 	} else {
 		k = fcn_004ad190();
@@ -126,23 +124,22 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 			}
 			h = (unsigned short*) ((char*) h + 0x21c);
 		} while (i < 4);
+		any = i;
 		io_AppendText(0x13a2);
 		if (k != 0) {
 			io_AppendText(0x13a3, k + 0x253);
 			for (j = 0; j < i; j++) {
-				if (j != 0) {
-					io_AppendText((int) "$A$Z%1N2", *pick[j]);
-				} else {
+				if (j == 0) {
 					io_AppendText((int) "$2A$Z%1N2", *pick[0]);
+				} else {
+					io_AppendText((int) "$A$Z%1N2", *pick[j]);
 				}
 			}
 		}
-		if (i != 0) {
-			goto have_pick;
-		}
 	}
-	io_AppendText(0x139d);
-have_pick:
+	if (any == 0) {
+		io_AppendText(0x139d);
+	}
 	do {
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;

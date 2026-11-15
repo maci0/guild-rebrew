@@ -16,8 +16,8 @@ int __cdecl fcn_004c4250(char* obj)
 		return 0;
 	}
 	for (e = g_aed324; e != 0; e = *(char**) (e + 0x95)) {
-		if (*(unsigned char*) (obj + 3) == *(unsigned char*) (e + 3) &&
-				*(int*) (obj + 0xc) == *(int*) (e + 8)) {
+		if (*(unsigned char*) (e + 3) == *(unsigned char*) (obj + 3) &&
+				*(int*) (e + 8) == *(int*) (obj + 0xc)) {
 			break;
 		}
 	}
@@ -35,8 +35,8 @@ int __cdecl fcn_004c4250(char* obj)
 		if (e == 0) {
 			return 0;
 		}
-		while (!(*(unsigned char*) (prev + 3) == *(unsigned char*) (e + 3) &&
-			*(int*) (prev + 0xc) == *(int*) (e + 8))) {
+		while (!(*(unsigned char*) (e + 3) == *(unsigned char*) (prev + 3) &&
+			*(int*) (e + 8) == *(int*) (prev + 0xc))) {
 			e = *(char**) (e + 0x95);
 			if (e == 0) {
 				return 0;

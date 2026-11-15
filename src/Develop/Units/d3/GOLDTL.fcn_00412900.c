@@ -32,8 +32,8 @@ int* __cdecl fcn_00412900(char* obj, float* pos, int id)
 	unsigned char* r;
 
 	*(unsigned int*) &flags = 0;
-	flags.bits_1 = 4;
 	flags.bit_8_1 = 1;
+	flags.bits_1 = 4;
 	flags.bit_8_0 = 1;
 	frames[0].unbekannt_000 = id;
 	frames[1].unbekannt_000 = id;

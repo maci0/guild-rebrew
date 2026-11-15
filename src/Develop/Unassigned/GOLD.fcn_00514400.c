@@ -38,17 +38,16 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 	}
 	if (p == (char*) g_773da8) {
 		strcpy(a4, (char*) 0x7e3f40 + g_773d75 * 0x2f4);
-		if ((unsigned char) a2 != 2) {
-			return 1;
+		if ((unsigned char) a2 == 2) {
+			strcat(a4, "'s");
 		}
-		strcat(a4, "'s");
 		return 1;
 	}
 	switch (a3 & 0xff) {
 	case 1:
 		strcpy(a4, (char*) p + 0x30);
 		if ((unsigned char) a2 != 2) {
-			return 1;
+			break;
 		}
 		if (a4[strlen(a4) - 1] == 's' || a4[strlen(a4) - 1] == 'z' || (unsigned char) a4[strlen(a4) - 1] == 0xdf || a4[strlen(a4) - 1] == 'x') {
 			strcat(a4, "'");
@@ -78,7 +77,7 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 			sprintf(a4, "%s", (char*) p + 0x30);
 		}
 		if ((unsigned char) a2 != 2) {
-			return 1;
+			break;
 		}
 		if (ENDS_APOSTROPHE((char*) p + 0x40)) {
 			strcat(a4, "'");
@@ -95,7 +94,7 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 			sprintf(a4, "%s", (char*) p + 0x30);
 		}
 		if ((unsigned char) a2 != 2) {
-			return 1;
+			break;
 		}
 		if (ENDS_APOSTROPHE((char*) p + 0x30)) {
 			strcat(a4, "'");
@@ -148,7 +147,11 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 		} else {
 			strcpy((char*) b1, (char*) p + 0x30);
 		}
-		sprintf(a4, "%s %s", (char*) (*(unsigned char*) (p + 0x166) ? b2 : b3), (char*) b1);
+		if (*(unsigned char*) (p + 0x166)) {
+			sprintf(a4, "%s %s", (char*) b2, (char*) b1);
+		} else {
+			sprintf(a4, "%s %s", (char*) b3, (char*) b1);
+		}
 		return 1;
 	case 9:
 		if (*(unsigned int*) (p + 0x1cc) & 0x3e00) {

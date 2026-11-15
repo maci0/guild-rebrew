@@ -7,14 +7,13 @@ char __cdecl fcn_0052a320(char* e)
 	int i;
 
 	if (g_7e4530 == 0) {
+		base = (char*) 0x6a2938;
 		if (e[0x215] & 4)
 			base = (char*) 0x6a29a8;
-		else
-			base = (char*) 0x6a2938;
-	} else if (e[0x215] & 4) {
-		base = (char*) 0x6a2af8;
 	} else {
 		base = (char*) 0x6a2a88;
+		if (e[0x215] & 4)
+			base = (char*) 0x6a2af8;
 	}
 	src = (int*) base;
 	for (i = 0; i < 0x150; i += 0x38) {

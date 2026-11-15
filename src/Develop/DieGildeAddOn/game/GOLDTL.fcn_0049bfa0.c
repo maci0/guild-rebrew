@@ -39,7 +39,7 @@ int __cdecl ai_StartSpionage(int code, short* target, int zero, char* out1, char
 	if ((float) thr * g_664160 >= (float) v5) {
 		return 0;
 	}
-	if (fcn_005463a0(2, 0, 0x18, 2, *target) != 0) {
+	if (fcn_005463a0(2, 0, 0x18, 2, *(unsigned short*) target) != 0) {
 		return 0;
 	}
 	*out1 = 7;

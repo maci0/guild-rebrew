@@ -113,8 +113,7 @@ void __cdecl cut_MainDuell(char* a0)
 
     keepA = 0;
     keepB = 0;
-    t = gm_RandomMod(3);
-    sel0 = ((unsigned short) t) - 5;
+    sel0 = ((unsigned short) gm_RandomMod(3)) - 5;
     other = 0;
     e1 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
     e2 = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
@@ -160,10 +159,7 @@ void __cdecl cut_MainDuell(char* a0)
     g_772f59 = 0;
     fcn_004fe2e0((char*) &sB, g_6b8010, 0, 0, 0, (int*) 0x68cdd0);
     fcn_004fe2e0((char*) &sA, g_6b8010, 0, 0, 0, (int*) 0x68cdb8);
-    if (sB.entity == 0)
-        goto err;
-    if (sA.entity == 0)
-        goto err;
+    if (sB.entity != 0 && sA.entity != 0) {
     fcn_00407800((char*) sB.entity, 2, (char*) 0x68cdac);
     *(unsigned char*) (sB.entity + 0x240) = 4;
     fcn_00407800((char*) sA.entity, 2, (char*) 0x68cdac);
@@ -270,11 +266,10 @@ void __cdecl cut_MainDuell(char* a0)
     }
     if (g_772f44 != 0) {
 compare:
-        if (fcn_004ff040((char*) &sA) < fcn_004ff040((char*) &sB))
+        if (fcn_004ff040((char*) &sB) > fcn_004ff040((char*) &sA))
             p = (char*) &sA;
         else {
-            other = (char*) &sB;
-            p = (char*) &sB;
+            other = p = (char*) &sB;
         }
         d2_SetForm(g_68bfc0, 0);
         io_AppendText(0x6811b0);
@@ -290,9 +285,8 @@ compare:
 
     d2_SetForm(g_68bfc0, 0);
     io_AppendText(0x6811b0);
-    n = g_772f58;
     if (keepA == 0) {
-        if (n != 0) {
+        if (g_772f58 != 0) {
             io_AppendText(0x111e, sB.id & 0xffff);
             fcn_004ff210(sB.id, (int) ((g_772f58 & 0xff) * 5.0));
             sB.acc = (int) ((g_772f58 & 0xff) * 5.0 + sB.acc);
@@ -300,7 +294,7 @@ compare:
             io_AppendText(0x111f, sB.id & 0xffff, sB.id & 0xffff);
         }
     } else {
-        if (n != 0)
+        if (g_772f58 != 0)
             io_AppendText(0x1120, sB.id & 0xffff);
         else
             io_AppendText(0x1121, sB.id & 0xffff);
@@ -309,9 +303,8 @@ compare:
 
     d2_SetForm(g_68bfc0, 0);
     io_AppendText(0x6811b0);
-    n = g_772f59;
     if (keepB == 0) {
-        if (n != 0) {
+        if (g_772f59 != 0) {
             io_AppendText(0x111e, sA.id & 0xffff);
             fcn_004ff210(sA.id, (int) ((g_772f59 & 0xff) * 5.0));
             sA.acc = (int) ((g_772f59 & 0xff) * 5.0 + sA.acc);
@@ -319,7 +312,7 @@ compare:
             io_AppendText(0x111f, sA.id & 0xffff, sA.id & 0xffff);
         }
     } else {
-        if (n != 0)
+        if (g_772f59 != 0)
             io_AppendText(0x1120, sA.id & 0xffff);
         else
             io_AppendText(0x1121, sA.id & 0xffff);
@@ -334,7 +327,7 @@ compare:
             fcn_004c3030(-8, 0, (int) 0x68cc9c, *(unsigned char*) (p + 9) + 1);
             if (srv_GetEntityOfficeSlot(p, outR, outS) != 0) {
                 if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + (g_774970 & 0xffff) * 0x21c)) {
-                    fcn_004e8240(outS[0] & 0xff, 0, 0, 4, 0xff);
+                    fcn_004e8240(outS[0], 0, 0, 4, 0xff);
                     q = (char*) 0x7f4ca2;
                     do {
                         if (*q == 6 || *q == 7) {
@@ -354,7 +347,7 @@ compare:
     }
 
     fcn_004e4c90(5);
-    if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + (g_774970 & 0xffff) * 0x21c)) {
+    if (*(int*) (0x7f4ca4 + (g_774970 & 0xffff) * 0x21c) == *(int*) (a0 + 0xc)) {
         fcn_004c54c0(sB.idx, sA.idx, 0xf, 1);
         fcn_004c54c0(sA.idx, sB.idx, 0xf, 1);
     }
@@ -370,8 +363,7 @@ compare:
     fcn_004230e0((char*) snd);
     fcn_004cfe20();
     fcn_004e3640(); return;
-
-err:
+    }
     ReportClientMessage((char*) 0x68cc70);
 fail:
     return;

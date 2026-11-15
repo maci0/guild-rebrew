@@ -47,8 +47,8 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 	int count;
 	int count2;
 	int idx;
-	int prev;
-	int selected;
+	int prev = -1;
+	int selected = 0;
 	int i;
 	char* p;
 	float d;
@@ -97,8 +97,8 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 
 	obj = 0;
 
-	prev = -1;
-	selected = 0;
+
+
 	while (fcn_005373e0(0x53b6b0, 0x12d6)) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

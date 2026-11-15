@@ -109,8 +109,7 @@ int __cdecl ch_RemoveQueueEntry(char* task)
         owner = *(char**) (task + 0x14);
         if (owner != 0 && task == *(char**) (owner + 0x128)) {
             *(char**) (owner + 0x128) = next;
-            memset(task, 0, 0x194);
-            return 1;
+            goto clear;
         }
     }
     previous = *(char**) (task + 0x24);
@@ -127,6 +126,7 @@ int __cdecl ch_RemoveQueueEntry(char* task)
             *(char**) (owner + 0x128) = next;
         }
     }
+clear:
     memset(task, 0, 0x194);
     return 1;
 }

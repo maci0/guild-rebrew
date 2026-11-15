@@ -4,7 +4,7 @@ extern float g_773d4c, g_773d50;
 /* ADDRESS: GOLD 0x004f9020 */
 int __cdecl fcn_004f9020(char* src)
 {
-    int totals[5] = {0, 0, 0, 0, 0};
+    int totals[5] = {0};
     int count;
     int sum;
     int i;

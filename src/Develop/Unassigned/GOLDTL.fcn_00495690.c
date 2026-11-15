@@ -65,8 +65,8 @@ fail:
 	return 0;
 copies:
 	fcn_004c53e0();
-	idx = b[0x132];
-	fcn_0064d740((char*) (0x1008590 + idx * 0x94), (char*) (0x1008570 + idx * 0x94), 0x20);
+	i = b[0x132];
+	fcn_0064d740((char*) (0x1008590 + i * 0x94), (char*) (0x1008570 + i * 0x94), 0x20);
 	return 1;
 }
 unsigned char _dpad_77261c[672];
