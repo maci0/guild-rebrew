@@ -100,7 +100,6 @@ int __cdecl fcn_004dcf50(int a0)
 	int votes;
 	int eIdx;
 	int didFolter;
-	volatile int xpad;	/* one pre-msg stack word: msg home stays at 0x40 */
 	int div3;
 	int acc;
 	char* end;
@@ -122,6 +121,30 @@ int __cdecl fcn_004dcf50(int a0)
 	char work[0x100];
 	char buf[0x200];
 
+
+	msg.hnd[2] = 0;
+	msg.hnd[5] = 0;
+	msg.hnd[0] = 0;
+	msg.hnd[1] = 0;
+	msg.hnd[3] = 0;
+	msg.hnd[4] = 0;
+	msg.hnd[7] = 0;
+	msg.hnd[6] = -1;
+	tbl.f[0] = 1.4f;
+	tbl.f[1] = 1.2f;
+	tbl.f[2] = 1.0f;
+	tbl.f[3] = 0.8f;
+	tbl.f[4] = 0.6f;
+	fcn_004f4830(0, rec.i);
+	i = rec.i[6];
+	if (i >= 4) {
+		i = 4;
+	} else if (i <= 0) {
+		i = 0;
+	}
+	f = tbl.f[i];
+	fcn_004e4450(g_68bfc0, 0);
+	fcn_004e4730("Gericht.ed3");
 	msg.state = 0;
 	msg.f04 = 0.0f;
 	msg.i08 = 0;
@@ -137,31 +160,6 @@ int __cdecl fcn_004dcf50(int a0)
 	msg.pad[6] = 0;
 	msg.pad[7] = 0;
 	msg.pad[8] = 0;
-
-	fcn_004f4830(0, rec.i);
-	xpad = 0;
-	msg.hnd[2] = 0;
-	msg.hnd[5] = 0;
-	msg.hnd[0] = 0;
-	msg.hnd[1] = 0;
-	msg.hnd[3] = 0;
-	msg.hnd[4] = 0;
-	msg.hnd[7] = 0;
-	msg.hnd[6] = -1;
-	tbl.f[0] = 1.4f;
-	tbl.f[1] = 1.2f;
-	tbl.f[2] = 1.0f;
-	tbl.f[3] = 0.8f;
-	tbl.f[4] = 0.6f;
-	i = rec.i[6];
-	if (i >= 4) {
-		i = 4;
-	} else if (i <= 0) {
-		i = 0;
-	}
-	f = tbl.f[i];
-	fcn_004e4450(g_68bfc0, 0);
-	fcn_004e4730("Gericht.ed3");
 	msg.id[0] = *(int*) (a0 + 0x34);
 	msg.id[1] = *(int*) (a0 + 0x38);
 	msg.id[2] = *(int*) (a0 + 0x3c);

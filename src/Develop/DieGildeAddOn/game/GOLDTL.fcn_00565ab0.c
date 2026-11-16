@@ -149,11 +149,10 @@ void __cdecl fcn_00565ab0(char* ev)
 								if (*(char*) p != -1 && *(int*) (p - 0xd) != *(int*) (ev + 0xb8)
 								    && *(char*) p >= *(char*) (v5 + 0xd)
 								    && *(short*) (v5 + 0xa) == *(short*) (p - 3)) {
-									c = *(unsigned char*) (v6 + 0x42);
-									if (*(unsigned char*) (v5 + 8) < (unsigned char) p[-5] + 2 + c
-									    && (int) *(unsigned char*) (v5 + 8) > (int) ((unsigned char) p[-5] - c - 2)
-									    && *(unsigned char*) (v5 + 9) < (unsigned char) p[-4] + 2 + c
-									    && (int) *(unsigned char*) (v5 + 9) > (int) ((unsigned char) p[-4] - c - 2)) {
+									if (*(unsigned char*) (v5 + 8) < (unsigned char) p[-5] + 2 + *(unsigned char*) (v6 + 0x42)
+									    && (int) *(unsigned char*) (v5 + 8) > (int) ((unsigned char) p[-5] - *(unsigned char*) (v6 + 0x42) - 2)
+									    && *(unsigned char*) (v5 + 9) < (unsigned char) p[-4] + 2 + *(unsigned char*) (v6 + 0x42)
+									    && (int) *(unsigned char*) (v5 + 9) > (int) ((unsigned char) p[-4] - *(unsigned char*) (v6 + 0x42) - 2)) {
 										rec2 = v24 + k * 0x18;
 										if (rec2 != 0) {
 											int id;

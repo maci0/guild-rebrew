@@ -34,7 +34,6 @@ void __cdecl fcn_00422150(void)
     int now;
     PART *p;
     int i;
-    int off;
     unsigned int value;
     int dt;
 
@@ -48,10 +47,9 @@ void __cdecl fcn_00422150(void)
         i = 0;
         if (g_6b7e8c <= 0)
             return;
-        off = 0;
         do
         {
-            p = (PART *)(g_6b7e88 + off);
+            p = (PART *)(g_6b7e88 + i * 0x30);
             if (p->ptr04 != 0)
             {
                 if (p->flags14 & 0x10)
@@ -108,7 +106,6 @@ void __cdecl fcn_00422150(void)
                 }
             }
             i++;
-            off = off + 0x30;
         } while (i < g_6b7e8c);
     }
     else
@@ -118,10 +115,9 @@ void __cdecl fcn_00422150(void)
         value = 1;
         if (g_6b7e8c > 0)
         {
-            off = 0;
             do
             {
-                p = (PART *)(g_6b7e88 + off);
+                p = (PART *)(g_6b7e88 + i * 0x30);
                 if (p->ptr04 != 0 && fcn_0042aaa0(p->obj) == 4)
                 {
                     value = 0;
@@ -134,7 +130,6 @@ void __cdecl fcn_00422150(void)
                         fcn_004237f0(p, 0);
                 }
                 i++;
-                off = off + 0x30;
             } while (i < g_6b7e8c);
         }
         g_6b7e90 = value == 0 ? 1 : 0;

@@ -54,7 +54,7 @@ int __cdecl fcn_005ae000(char* obj)
 		}
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				for (e = (char*) g_7e4260; n < 6 && (int) e < (int) (g_7e4260 + 32); e += 4) {
+				for (e = (char*) g_7e4260; (int) e < (int) (g_7e4260 + 32) && n < 6; e += 4) {
 					char* p;
 
 					p = *(char**) e;

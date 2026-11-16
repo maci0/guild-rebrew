@@ -1,28 +1,33 @@
 /* ADDRESS: GOLD 0x00468fa0 */
 void __cdecl fcn_00468fa0(int x, int y, int w, int h, char* obj)
 {
+	int lim;
 	int right;
 	int bottom;
+	int limy;
 	int i;
 	char* slot;
+	char* base;
 
 	if (*(int*) (obj + 0x190) == 0 || *(int*) (obj + 0x1a8) == 0) {
 		return;
 	}
-	if (x > *(int*) 0x5fed5c) {
-		x = *(int*) 0x5fed5c;
+	lim = *(int*) 0x5fed5c;
+	if (x > lim) {
+		x = lim;
 	}
 	if (x & 1) {
 		x--;
 		w = (w + 2) & ~1;
 	}
+	limy = *(int*) 0x5fed60;
 	bottom = y + h;
-	if (bottom > *(int*) 0x5fed60) {
-		h = *(int*) 0x5fed60 - y;
+	if (bottom > limy) {
+		h = limy - y;
 	}
 	right = x + w;
-	if (right > *(int*) 0x5fed5c) {
-		w = *(int*) 0x5fed5c - x;
+	if (right > lim) {
+		w = lim - x;
 	}
 	if (y < *(int*) 0x6f045c) {
 		y = *(int*) 0x6f045c;
@@ -36,7 +41,8 @@ void __cdecl fcn_00468fa0(int x, int y, int w, int h, char* obj)
 	if (h < 0) {
 		h = 1;
 	}
-	slot = *(char**) 0x6ed9a0;
+	base = *(char**) 0x6ed9a0;
+	slot = base;
 	i = 0;
 	while (*(int*) (slot + 8) != 0) {
 		if (i >= 0x300) {
@@ -48,7 +54,7 @@ void __cdecl fcn_00468fa0(int x, int y, int w, int h, char* obj)
 	if (i >= 0x300) {
 		return;
 	}
-	*(int*) (*(char**) 0x6ed9a0 + i * 0x14) = x;
+	*(int*) (base + i * 0x14) = x;
 	*(int*) (*(char**) 0x6ed9a0 + i * 0x14 + 4) = y;
 	*(int*) (*(char**) 0x6ed9a0 + i * 0x14 + 0xc) = w;
 	*(int*) (*(char**) 0x6ed9a0 + i * 0x14 + 0x10) = h;

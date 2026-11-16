@@ -7,8 +7,7 @@ void __cdecl fcn_0046cd90(short x, short y, int id)
 	char* box;
 	int i;
 	int child;
-	short w;
-	short h;
+	int h;
 
 	slot = ((id << 5) - id + ((id << 5) - id) * 2) * 2 + id;
 	rec = (char*) (*(int*) 0xf8f080 + slot * 4);
@@ -17,55 +16,35 @@ void __cdecl fcn_0046cd90(short x, short y, int id)
 	*(short*) (rec + 0x12) = y;
 	*(unsigned char*) (rec + 0x6c) = 8;
 	*(unsigned char*) (rec + 0x6d) = 8;
-	if (kind == 0x40) {
-		*(short*) (rec + 0x22) = y;
-		*(short*) (rec + 0x24) = (short) (*(short*) (rec + 0x16) + y);
-		*(short*) (rec + 0x1e) = x;
-		*(short*) (rec + 0x20) = (short) (*(short*) (rec + 0x14) + x);
-	} else {
+	if (kind != 0x40) {
 		*(short*) (rec + 0x22) = 0;
 		*(short*) (rec + 0x24) = *(short*) 0xfb9070;
 		*(short*) (rec + 0x1e) = 0;
 		*(short*) (rec + 0x20) = *(short*) 0xfb9072;
+	} else {
+		*(short*) (rec + 0x22) = y;
+		*(short*) (rec + 0x24) = (short) (*(short*) (rec + 0x16) + y);
+		*(short*) (rec + 0x1e) = x;
+		*(short*) (rec + 0x20) = (short) (*(short*) (rec + 0x14) + x);
 	}
 	box = *(char**) (rec + 0x30);
 	if (box != 0) {
-		w = *(short*) (box + 6);
-		if (w <= *(short*) (rec + 0x22)) {
-			w = *(short*) (rec + 0x22);
-		}
-		*(short*) (rec + 0x22) = w;
-		h = (short) (*(short*) (box + 0xa) + *(short*) (box + 6));
-		if (*(short*) (rec + 0x24) < h) {
-			h = *(short*) (rec + 0x24);
-		}
-		*(short*) (rec + 0x24) = h;
-		if (*(short*) 0xfb9070 < h) {
-			h = *(short*) 0xfb9070;
-		}
-		*(short*) (rec + 0x24) = h;
-		w = *(short*) (box + 4);
-		if (w <= *(short*) (rec + 0x1e)) {
-			w = *(short*) (rec + 0x1e);
-		}
-		*(short*) (rec + 0x1e) = w;
-		h = (short) (*(short*) (box + 8) + *(short*) (box + 4));
-		if (*(short*) (rec + 0x20) < h) {
-			h = *(short*) (rec + 0x20);
-		}
-		*(short*) (rec + 0x20) = h;
-		if (*(short*) 0xfb9072 < h) {
-			h = *(short*) 0xfb9072;
-		}
-		*(short*) (rec + 0x20) = h;
+		*(short*) (rec + 0x22) = *(short*) (box + 6) > *(short*) (rec + 0x22) ? *(short*) (box + 6) : *(short*) (rec + 0x22);
+		h = *(short*) (box + 0xa) + *(short*) (box + 6);
+		*(short*) (rec + 0x24) = *(short*) (rec + 0x24) < h ? *(short*) (rec + 0x24) : h;
+		*(short*) (rec + 0x24) = *(short*) 0xfb9070 < *(short*) (rec + 0x24) ? *(short*) 0xfb9070 : *(short*) (rec + 0x24);
+		*(short*) (rec + 0x1e) = *(short*) (box + 4) > *(short*) (rec + 0x1e) ? *(short*) (box + 4) : *(short*) (rec + 0x1e);
+		h = *(short*) (box + 8) + *(short*) (box + 4);
+		*(short*) (rec + 0x20) = *(short*) (rec + 0x20) < h ? *(short*) (rec + 0x20) : h;
+		*(short*) (rec + 0x20) = *(short*) 0xfb9072 < *(short*) (rec + 0x20) ? *(short*) 0xfb9072 : *(short*) (rec + 0x20);
 	}
-	if (kind == 4) {
+	switch (kind) {
+	case 4:
 		slot = *(int*) (rec + 0x78);
 		*(short*) (0xf8a52d + slot * 17) = x;
 		*(short*) (0xf8a52f + slot * 17) = *(short*) (rec + 0x12);
 		return;
-	}
-	if (kind == 0x40) {
+	case 0x40:
 		slot = *(int*) (rec + 0x78);
 		box = (char*) (0xf8f120 + slot * 0x34);
 		*(short*) (box + 6) = y;
@@ -92,8 +71,7 @@ void __cdecl fcn_0046cd90(short x, short y, int id)
 			i++;
 		}
 		return;
-	}
-	if (kind == 0x41) {
+	case 0x41:
 		slot = *(int*) (rec + 0x78);
 		*(int*) (0xfa6024 + slot * 0x160) = x;
 		*(int*) (0xfa6028 + slot * 0x160) = *(short*) (rec + 0x12);

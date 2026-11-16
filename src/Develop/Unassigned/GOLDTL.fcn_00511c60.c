@@ -28,7 +28,7 @@ int __cdecl gm_MapEntityStatRange(int);
 int __cdecl fcn_00507400(int, int);
 int __cdecl fcn_0050b750(int, int);
 void __cdecl fcn_004ad1c0(void);
-
+extern unsigned char g_773d75;
 /* ADDRESS: GOLDTL 0x00511c60 */
 int __cdecl fcn_00511c60(void)
 {
@@ -182,7 +182,7 @@ int __cdecl fcn_00511c60(void)
 						 -0.5f),
 				   *(unsigned char *) 0x773d75);
 		p = (char *) v26[i];
-		fcn_004c5150(*(int *) (p + 4), -1, *(unsigned char *) 0x773d75,
+		fcn_004c5150(*(int *) (p + 4), -1, g_773d75,
 			     v49);
 		fcn_004c4510(p, *(int *) (p + 4));
 		fcn_004c4570(1, 1, 0xd, &v36);
@@ -283,7 +283,7 @@ int __cdecl fcn_00511c60(void)
 			p = fcn_004c4480(k);
 			k = gm_RandomMod(0x400);
 			fcn_004c5150(*(int *) (p + 4), -1,
-				     *(unsigned char *) 0x773d75,
+				     g_773d75,
 				     ((k & 0xffff) + 0x200) << 5);
 			fcn_004c4510(p, *(int *) (p + 4));
 			fcn_004c4570(1, 1, 0xd, &v38);
@@ -315,7 +315,7 @@ int __cdecl fcn_00511c60(void)
 		}
 		p = fcn_004c4480(k);
 		k = gm_RandomMod(0x400);
-		fcn_004c5150(*(int *) (p + 4), -1, *(unsigned char *) 0x773d75,
+		fcn_004c5150(*(int *) (p + 4), -1, g_773d75,
 			     ((k & 0xffff) + 0x200) << 5);
 		fcn_004c4510(p, *(int *) (p + 4));
 		fcn_004c4570(1, 1, 0xd, &v36);
@@ -331,7 +331,7 @@ int __cdecl fcn_00511c60(void)
 		}
 		p = fcn_004c4480(k);
 		k = gm_RandomMod(0x400);
-		fcn_004c5150(*(int *) (p + 4), -1, *(unsigned char *) 0x773d75,
+		fcn_004c5150(*(int *) (p + 4), -1, g_773d75,
 			     ((k & 0xffff) + 0x200) << 5);
 		fcn_004c4510(p, *(int *) (p + 4));
 		fcn_004c4570(1, 1, 0xd, &v36);

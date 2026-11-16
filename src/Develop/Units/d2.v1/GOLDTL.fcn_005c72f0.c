@@ -60,7 +60,7 @@ int __cdecl fcn_005c6a10(int, int);
 int __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_00471e30(int);
 int __cdecl fcn_005373e0(int, int);
-int __cdecl fcn_00532ef0(int);
+void __cdecl fcn_00532ef0(void);
 int __cdecl CountDisplayCounters(void);
 void __cdecl ResetDisplayCounters(void);
 int __cdecl __itoa(int, char*, int);
@@ -316,5 +316,5 @@ label_5c76eb:
 		goto label_5c7466;
 	}
 	fcn_00471e30(win);
-	return fcn_00532ef0(a0);
+	fcn_00532ef0();
 }

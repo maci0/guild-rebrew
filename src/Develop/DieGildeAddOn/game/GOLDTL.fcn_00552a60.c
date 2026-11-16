@@ -117,11 +117,11 @@ void __cdecl fcn_00552a60(int a0)
 					v16 += 1;
 					v17 -= 1;
 				} while (v17);
-				v5 = fcn_0050b750(v15, *(unsigned char*) 0x773d75);
+				v5 = fcn_0050b750(v15, g_773d75);
 				v6 = fcn_0050c710(v4, 1, 1);
 				v5 = (int) (((float) v6 * 0.01f + 1.0f) * v5);
 				fcn_004c51a0(*(int*) (v18 + 4), -1,
-				    *(unsigned char*) 0x773d75, v5);
+				    g_773d75, v5);
 				*(int*) (v4 + 0x4d) = *(int*) (v4 + 0x4d) + v5;
 				if (*(char*) (v18 + 2) == 6) {
 					v6 = gm_GetEntityTableEntry(v18);
@@ -157,7 +157,7 @@ void __cdecl fcn_00552a60(int a0)
 			    + 1.0f);
 			v9 = (gm_RandomMod((unsigned short) ((v6 + 1) * v6))
 			    & 0xffff) + v6 * 2;
-			v5 = fcn_0050b750(v9 * 2, *(unsigned char*) 0x773d75);
+			v5 = fcn_0050b750(v9 * 2, g_773d75);
 			if (*(char*) (a0 + 0xd8) != 0) {
 				v4 = 0;
 				v6 = 0x20;
@@ -184,7 +184,7 @@ void __cdecl fcn_00552a60(int a0)
 					v2 = *(unsigned char*) (v14 + 0x41);
 					if (v1 - v2 <= (gm_RandomMod(0x7e) & 0xffff)) {
 						fcn_004c51a0(-1, *(int*) (v4 + 4),
-						    *(unsigned char*) 0x773d75, v5);
+						    g_773d75, v5);
 						if (*(char*) (v4 + 2) == 6
 						    || *(char*) (v4 + 2) == 7) {
 							io_FormatTextBuffer(v12, 0x19f2, v5);

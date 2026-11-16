@@ -67,9 +67,14 @@ char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
         }
     }
     va_end(ap);
-    if (*(unsigned char*)0x63342d != 0) {
-        book[0x272] = *(char*)0x63342d;
-        fcn_00437060(0);
+    {
+        char flag;
+
+        flag = *(char*)0x63342d;
+        if (flag != 0) {
+            book[0x272] = flag;
+            fcn_00437060(0);
+        }
     }
     fcn_004234e0(*(char**)0x6f240c, "Aufklappen_s", 1, 0x3f, 0x7f, 0, 0);
     return book;

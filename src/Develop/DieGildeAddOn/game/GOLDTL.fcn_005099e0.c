@@ -102,7 +102,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 	if (arg2 != (void *) g_773da8) {
 		val = gm_SumTreasury(arg1);
 		i = 4 + (*((unsigned char *) arg1 + 2) == 5);
-		fcn_004c5150(*(int *) ((char *) arg2 + 4), -1, *(unsigned char *) 0x773d75, val);
+		fcn_004c5150(*(int *) ((char *) arg2 + 4), -1, g_773d75, val);
 		type = gm_WalkEntityChain(*(unsigned short *) arg1);
 		fcn_004c4510(arg2, *(int *) ((char *) arg2 + 4));
 		fcn_004c4670(4, 1, (int) arg2 - g_aed32c + 0x1a8, &type);

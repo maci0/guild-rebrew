@@ -21,9 +21,9 @@ void __cdecl fcn_00558d10(char* e)
 	unsigned int bit_hi;
 	int n;
 
+	idx = *(int*) (e + 0xb8);
 	clock = (pos14_7f4c00*) (e + 0x52);
 	*clock = g_7f4c00;
-	idx = *(int*) (e + 0xb8);
 	n = 0x100;
 	do {
 		p = lpGebaeudeINST + idx * 0xa9;

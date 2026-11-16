@@ -40,7 +40,7 @@ void __cdecl fcn_0055a920(char* rec)
 	n = *(int*) (rec + 0xb0);
 	r = *(int*) (rec + 0xac);
 	d = (double) r;
-	if (ceil((double) (r + n)) > d) {
+	if (d < ceil((double) (r + n))) {
 		d = (double) *(int*) (rec + 0xac);
 	} else {
 		d = ceil((double) (*(int*) (rec + 0xb0) + *(int*) (rec + 0xac)));

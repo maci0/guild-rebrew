@@ -15,7 +15,7 @@ extern char g_7e23ea[];
 extern char g_7e240a[];
 extern int g_7e23e4;
 extern char g_7e23e8;
-extern char g_7e23e9;
+extern char g_7e23e9; extern unsigned char g_7e23e1; extern unsigned char g_7e23e2;
 extern char g_7e23e0[];
 extern char g_7e1d00[];
 
@@ -229,8 +229,8 @@ int __cdecl fcn_0053d490(int a0, int a1)
 			}
 		} else if (v9 == 5) {
 			g_7e23e0[0] = 0;
-			*(unsigned char*) 0x7e23e1 = 0;
-			*(unsigned char*) 0x7e23e2 = 0x12;
+			g_7e23e1 = 0;
+			g_7e23e2 = 0x12;
 			g_7e23e4 = *(int*) (g_1015ea0
 			    + *(int*) (((list * 8 - list) * 5
 					   + *(int*) (list * 0x8c + 0x102cbc8)) * 4

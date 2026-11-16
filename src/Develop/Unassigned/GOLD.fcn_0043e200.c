@@ -19,14 +19,16 @@ void __cdecl fcn_0043e200(unsigned int pass, int overlay)
     char* p;
     char* next;
     char* object;
+    unsigned char c633450;
     float distance;
     float density;
     if (g_6b86d4 < 0)
         g_6b86d4 = 0;
     if (!*(unsigned char*) 0x633451 || g_6b86d4 || !g_6b8014)
         return;
+    c633450 = *(unsigned char*) 0x633450;
     g_6b86d4 = 1;
-    if (*(unsigned char*) 0x633450)
+    if (c633450)
         fcn_00435fb0((void*) 0xfc2930);
     else
         fcn_0041e100((void*) 0xfc2930, *(unsigned char*) 0x6334a2,

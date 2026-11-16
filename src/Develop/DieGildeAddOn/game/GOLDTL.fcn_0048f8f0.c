@@ -32,7 +32,6 @@ int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2)
 	char* p;
 	int* h;
 	int t;
-	int found;
 	int v;
 	unsigned short idx;
 
@@ -67,11 +66,11 @@ int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2)
 
 		f.mask = 0x7b4c4a0;
 		f.b = 0;
-		found = -1;
-		fcn_004a5e60(g_7f4ca0 + g_774970 * 0x21c, 0, f, 0, 100.0f, &found);
+		t = -1;
+		fcn_004a5e60(g_7f4ca0 + g_774970 * 0x21c, 0, f, 0, 100.0f, &t);
 	}
-	if (found == -1)
+	if (t == -1)
 		return 0;
-	b2->b = found;
+	b2->b = t;
 	return 1;
 }

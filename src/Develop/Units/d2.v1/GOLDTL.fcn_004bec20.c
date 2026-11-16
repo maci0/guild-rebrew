@@ -45,6 +45,9 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 	char* p;
 	char* p2;
 
+	v17 = a2;
+	v2 = 1;
+	v18 = -1;
 	ids[0] = 0x95;
 	ids[1] = 0x92;
 	ids[2] = 0x93;
@@ -52,9 +55,6 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 	ids[4] = 0x97;
 	ids[5] = 0x96;
 	ids[6] = 0x2db;
-	v2 = 1;
-	v18 = -1;
-	v17 = a2;
 	g = fcn_00470820(0, 0, "misc\\routing_choose_good_enhanced");
 	fcn_00471b60(g);
 	d2_SetForm(g, 1);

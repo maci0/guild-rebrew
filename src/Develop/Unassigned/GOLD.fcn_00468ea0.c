@@ -7,6 +7,8 @@ void __cdecl fcn_00468ea0(int x, int y, int w, int h)
 	char* rec;
 	int right;
 	int bottom;
+	int ww;
+	int hh;
 
 	slot = *(int*) 0x63120c;
 	n = *(int*) (slot * 4 + 0x6ed9a4);
@@ -18,15 +20,19 @@ void __cdecl fcn_00468ea0(int x, int y, int w, int h)
 	}
 	if (x & 1) {
 		x--;
-		w = (w + 2) & ~1;
+		ww = (w + 2) & ~1;
+	} else {
+		ww = w;
 	}
 	bottom = y + h;
+	right = x + ww;
 	if (bottom > *(int*) 0x5fed60) {
-		h = *(int*) 0x5fed60 - y;
+		hh = *(int*) 0x5fed60 - y;
+	} else {
+		hh = h;
 	}
-	right = x + w;
 	if (right > *(int*) 0x5fed5c) {
-		w = *(int*) 0x5fed5c - x;
+		ww = *(int*) 0x5fed5c - x;
 	}
 	if (y < *(int*) 0x6f045c) {
 		y = *(int*) 0x6f045c;
@@ -34,13 +40,13 @@ void __cdecl fcn_00468ea0(int x, int y, int w, int h)
 	if (x < *(int*) 0x6f0458) {
 		x = *(int*) 0x6f0458;
 	}
-	if (w <= 0 || h <= 0) {
+	if (ww <= 0 || hh <= 0) {
 		return;
 	}
 	if (y > *(int*) 0xfb9064) {
-		if (y + h < *(int*) 0xfb906c) {
+		if (y + hh < *(int*) 0xfb906c) {
 			if (x > *(int*) 0xfb9060) {
-				if (x + w < *(int*) 0xfb9068) {
+				if (x + ww < *(int*) 0xfb9068) {
 					return;
 				}
 			}
@@ -53,8 +59,8 @@ void __cdecl fcn_00468ea0(int x, int y, int w, int h)
 	rec = (char*) (*table);
 	*(int*) (rec + n + 4) = y;
 	rec = (char*) (*table);
-	*(int*) (rec + n + 8) = w;
+	*(int*) (rec + n + 8) = ww;
 	rec = (char*) (*table);
-	*(int*) (rec + n + 0xc) = h;
+	*(int*) (rec + n + 0xc) = hh;
 	(*(int*) (slot * 4 + 0x6ed9a4))++;
 }

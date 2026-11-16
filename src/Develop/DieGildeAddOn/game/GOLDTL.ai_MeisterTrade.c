@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 #include <string.h>
-
+extern int g_7f4c00, g_7f4c04, g_7f4c08, g_772620; extern unsigned short g_7f4c0c;
 /* Request message, 0xf8 bytes. */
 typedef struct {
 	int f00;			/* +0x00 */
@@ -185,7 +185,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 	}
 
 	/* 0x00b0-0x00c0: building busy flag; the pricing pass runs once */
-	if ((*(int*) 0x7f4c04 & 0xffff) % 2) {
+	if ((g_7f4c04 & 0xffff) % 2) {
 		if ((*(int*) (o + 0x1b4) & 0x200) == 0) {
 			/* 0x00c0-0x0198: sell town stock on a good price */
 			for (i = 0; i < g_100b0ac; i++) {
@@ -377,10 +377,10 @@ next_request:
 		v.m.type = 0x10;
 		v.m.state = *(int*) (0x7f4ca4 + slot * 0x21c);
 		v.m.f0c = *(int*) (tp + 1);
-		v.m.p28 = *(int*) 0x7f4c00;
-		v.m.p2c = *(int*) 0x7f4c04;
-		v.m.p30 = *(int*) 0x7f4c08;
-		v.m.p34 = *(unsigned short*) 0x7f4c0c;
+		v.m.p28 = g_7f4c00;
+		v.m.p2c = g_7f4c04;
+		v.m.p30 = g_7f4c08;
+		v.m.p34 = g_7f4c0c;
 		v.m.flag2 = 1;
 		fcn_00500bb0(&v.m.p28, 0, 0, 0xa);
 		v.m.f58 = *(int*) (r + 2);
@@ -835,17 +835,17 @@ next_auto:
 			v.m.state = *(int*) (0x7f4ca0 +
 			    *(unsigned short*) (tpx + 0x27) * 0x21c + 4);
 			v.m.f0c = *(int*) (tpx + 1);
-			v.m.p28 = *(int*) 0x7f4c00;
-			v.m.p2c = *(int*) 0x7f4c04;
-			v.m.p30 = *(int*) 0x7f4c08;
-			v.m.p34 = *(unsigned short*) 0x7f4c0c;
+			v.m.p28 = g_7f4c00;
+			v.m.p2c = g_7f4c04;
+			v.m.p30 = g_7f4c08;
+			v.m.p34 = g_7f4c0c;
 			v.m.flag2 = 1;
 			v.m.f58 = *(int*) (r + 2);
 			v.m.f5c = s;
 			v.m.f60 = *(int*) (o + 4);
 			if (*(int*) 0x100b0a4 == 0) {
 				fcn_004c5530((int) &v.m);
-				*(int*) 0x772620 = *(int*) 0x772620 + 1;
+				g_772620 = g_772620 + 1;
 			}
 		}
 	}

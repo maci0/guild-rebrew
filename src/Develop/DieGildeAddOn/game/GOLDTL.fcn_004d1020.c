@@ -32,6 +32,7 @@ int __cdecl fcn_004d1020(char* a0, char* e, char* obj, int col, int row)
 	int kind;
 	char* x;
 	char* map;
+	char* node;
 	char* rec;
 	int v;
 	float height;
@@ -41,8 +42,9 @@ int __cdecl fcn_004d1020(char* a0, char* e, char* obj, int col, int row)
 	x = fcn_004ce610(e);
 	if (obj == 0) goto fail;
 	map = *(char**) (obj + 0x184);
-	if (*(int*) (map + 0x34) == 0) goto fail;
-	if (fcn_0045b990((char*) kind, (float*) (*(int*) (map + 0x34) + 0x4c), &col, &row, &height) == 0) goto fail;
+	node = *(char**) (map + 0x34);
+	if (node == 0) goto fail;
+	if (fcn_0045b990((char*) kind, (float*) (node + 0x4c), &col, &row, &height) == 0) goto fail;
 	rec = fcn_004ceac0(a0, e);
 	if (rec == 0) goto fail;
 	*(unsigned char*) (rec + 0x1c) = 0;
@@ -74,10 +76,10 @@ plain:
 			fcn_00533a40((char*) g_14a9a08);
 			goto fail;
 		}
-		m.f0 = *(int*) (e + 4);
 		m.f10 = 0;
 		m.f14 = col;
 		m.f18 = row;
+		m.f0 = *(int*) (e + 4);
 		m.f4 = 2;
 	} else if (v == 0x176) {
 		rec = fcn_004ce680(e);

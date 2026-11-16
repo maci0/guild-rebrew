@@ -99,8 +99,8 @@ void __cdecl init_LoadObjektScene(int a0)
 		}
 	} else {
 		type = (signed char) g_7f3b40[a0];
-		slot = type * 0xf7;
-		if (g_10432c0[slot * 4 + 0x3d5] != 0) {
+		if (g_10432c0[type * 0xf7 * 4 + 0x3d5] != 0) {
+			slot = type * 0xf7;
 			fcn_004432d0(type, 0);
 			sprintf(path, s_6a1c1c, name + 1);
 			strupr(path);

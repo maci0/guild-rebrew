@@ -10,6 +10,7 @@ void __cdecl fcn_004c51f0(int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
+extern char g_7f4ca0[];
 extern int g_775320;
 extern int g_775324;
 extern int g_775328;
@@ -43,8 +44,8 @@ void __cdecl fcn_005c6310(void)
 		if (off >= 0x65400) {
 			break;
 		}
-		if (*(short*) ((char*) 0x7f4ca0 + off) != -1) {
-			item = fcn_00502cd0(*(int*) ((char*) 0x7f4e18 + off), 1, 5);
+		if (*(unsigned short*) (g_7f4ca0 + off) != 0xffff) {
+			item = fcn_00502cd0(*(int*) (g_7f4ca0 + 376 + off), 1, 5);
 			while (item != 0) {
 				obj = fcn_005c61e0(*item);
 				if (obj != 0) {
@@ -57,9 +58,9 @@ void __cdecl fcn_005c6310(void)
 							*(pos14_7f4c00*) (rec + 0x2d) = g_7f4c00;
 							if (left < 0) {
 								*(int*) (rec + 0x21) = 0;
-								if (*(char*) ((char*) 0x7f4ca2 + off) == 6) {
+								if (*(char*) (g_7f4ca0 + 2 + off) == 6) {
 									io_FormatTextBuffer(text, 0x1bc9, *item * 2 + 0x9a8);
-									fcn_00545d40(*(int*) ((char*) 0x7f4ca4 + off),
+									fcn_00545d40(*(int*) (g_7f4ca0 + 4 + off),
 										-1, text, 0, 0x5ec, (char*) 0x6ac758);
 								}
 								if (*item == 0x178) {
@@ -68,8 +69,8 @@ void __cdecl fcn_005c6310(void)
 										fcn_004c5420(*(int*) (obj + 1), 0x5a, 2, 0, 0x20);
 									}
 								}
-								obj = fcn_0047dca0((char*) 0x7f4ca0 + off);
-								if (obj != 0 && *(char*) ((char*) 0x7f4ca2 + off) != 7) {
+								obj = fcn_0047dca0(g_7f4ca0 + off);
+								if (obj != 0 && *(char*) (g_7f4ca0 + 2 + off) != 7) {
 									fcn_004c51f0(-1, *(int*) (rec + 6), *item, 1,
 										g_773d75, 0);
 								}

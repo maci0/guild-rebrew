@@ -18,8 +18,8 @@ int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, f
 	int idx;
 	float f;
 
-	flag = 0;
 	step = g_6643d8[(unsigned short) gm_RandomMod(0x10)];
+	flag = 0;
 	buf[2] = a2;
 	buf[3] = a3 | 0x80000000;
 	buf[4] = a1;

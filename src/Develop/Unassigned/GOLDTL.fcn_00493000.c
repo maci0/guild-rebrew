@@ -5,11 +5,11 @@
 void __cdecl fcn_00493000(unsigned char* o)
 {
 	int state;
-	int a = 0;
-	int i = 0;
-	int b = 0;
-	int s1 = 0;
 	int s2 = 0;
+	int s1 = 0;
+	int b = 0;
+	int i = 0;
+	int a = 0;
 
 	state = *(int*) (o + 8);
 	if (state == 1) {

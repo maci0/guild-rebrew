@@ -207,21 +207,18 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 	} while ((int) list < 0x14d0c20);
 	fcn_004432d0(total, 1);
 	{
-		unsigned int* buf;
-
-		buf = (unsigned int*) g_6b5c20;
-		*buf = 0;
+		*(unsigned int*) g_6b5c20 = 0;
 		n = 0;
 		if (g_6a23ac < 0x10044) {
 			count = 0x300;
-		} else if (g_6a23ac >= 0x10058) {
-			count = 0x7d0;
-		} else {
+		} else if (g_6a23ac < 0x10058) {
 			count = 0x500;
+		} else {
+			count = 0x7d0;
 		}
 		i = 0;
 		do {
-			u = (unsigned int*) ((char*) buf + i);
+			u = (unsigned int*) (g_6b5c20 + i);
 			memset(u, 0, 0x194);
 			if (!ls_ReadVfsDataChecked(&t, 1, 1, (void*) stream)) {
 				return 0;
@@ -306,7 +303,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 		}
 	check_actions:
 		if (u[9] == 0xffffffff || u[10] == 0xffffffff) {
-			sprintf(path, s_6a23e0, *(char*) (rec + 9));
+			sprintf(path, s_6a23e0, *(unsigned char*) (rec + 9));
 			u[9] = 0;
 			u[10] = 0;
 			n = 0;

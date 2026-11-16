@@ -113,7 +113,7 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 	fcn_00487970(craft, bld, 0x4b);
 	fcn_00487c00(craft, bld, 0x19);
 	fcn_00487470(bld);
-	if (g_7f4c04 != 8 && g_7f4c04 != 0xd) {
+	if (g_7f4c04 != 0xd && g_7f4c04 != 8) {
 		for (i = 0; i < g_100b0ac; i++) {
 			rec = (BldRec*) (g_100d0c0 + i * 0x58);
 			if (rec->id != (int) bld->id)

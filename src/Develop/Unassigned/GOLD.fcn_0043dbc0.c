@@ -133,7 +133,7 @@ void __cdecl fcn_0043dbc0(char* object)
                 continue;
             }
             material_index = mapping[material_slot];
-            if (material_index <= -1) {
+            if (material_index < 0) {
                 material_index = (bank->materials[next_material] - ((char*)g_fb9074)) >> 7;
                 next_material++;
                 mapping[material_slot] = material_index;

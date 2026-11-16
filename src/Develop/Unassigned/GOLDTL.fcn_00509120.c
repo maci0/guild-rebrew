@@ -19,8 +19,8 @@ int __cdecl fcn_00509120(char* e, char* out)
 	if (e[8] != 0) {
 		return 0;
 	}
-	age = *(short*) (e + 0x28);
-	time[0] = age;
+	time[0] = *(short*) (e + 0x28);
+	age = time[0];
 	fcn_00500d60(time, packed);
 	seed = *(unsigned int*) (e + 0x30) ^ *(short*) (packed + 2);
 	packed[1] = (char) ((unsigned int) ((seed >> 3) % 7 + age % 0x13) % 0xc + 1);

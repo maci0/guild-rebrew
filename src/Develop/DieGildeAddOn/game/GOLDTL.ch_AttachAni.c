@@ -24,8 +24,8 @@ char* __cdecl ch_AttachAni(char* obj, char* name, unsigned char force)
     vfs_ToSlashes(ani);
     if (*name) {
         memset(&opt, 0, sizeof(opt));
-        *(int*) &opt = 0;
         opt.mode = 0;
+        opt.blend = 0;
         opt.queue = 1;
         opt.layer = 0x10 | (force & 1) << 3;
         opt.loop = 1;

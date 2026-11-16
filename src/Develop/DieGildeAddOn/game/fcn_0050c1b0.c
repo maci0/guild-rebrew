@@ -42,10 +42,10 @@ int __cdecl fcn_0050c1b0(unsigned char* e, int id, char* out)
 	int i;
 	int v;
 
-	memset(out, 0, 0x54);
-	row = (unsigned char*) lpGebaeudePROT + (unsigned int) *e * 0x24d;
 	total = 0;
 	var = 0;
+	memset(out, 0, 0x54);
+	row = (unsigned char*) lpGebaeudePROT + (unsigned int) *e * 0x24d;
 	if (id != *(unsigned short*) (e + 0x27)) {
 		goto tail;
 	}

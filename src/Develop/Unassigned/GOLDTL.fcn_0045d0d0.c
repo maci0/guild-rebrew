@@ -12,12 +12,11 @@ void __cdecl fcn_0045bda0(char* a, int b, int c);
 int* __cdecl fcn_0045d0d0(char* a0, int a1, int a2, int a3, int a4, unsigned char a5, unsigned char a6, char a7)
 {
 	int* p;
-	int out;
 	int n;
 	unsigned char b;
 
 
-	p = (int*) fcn_0045c290(a4, &out);
+	p = (int*) fcn_0045c290(a4, &n);
 	if (p == 0) {
 		return 0;
 	}

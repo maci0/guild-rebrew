@@ -6,7 +6,6 @@ int __cdecl fcn_00468850(void);
 int __cdecl fcn_0046c9e0(void)
 {
 	int index;
-	int offset;
 	int i;
 	GuiEnt* element;
 
@@ -14,8 +13,7 @@ int __cdecl fcn_0046c9e0(void)
 	if (index == -1) {
 		return index;
 	}
-	offset = index * 0x2ec;
-	element = (GuiEnt*) ((char*) g_00f8f080 + offset);
+	element = &g_00f8f080[index];
 	for (i = 0x2ff; i >= 0; i--) {
 		if (g_006ed964[i] != 0) {
 			i++;
@@ -29,6 +27,6 @@ int __cdecl fcn_0046c9e0(void)
 	if (index > *(int*) 0x6ed94c) {
 		*(int*) 0x6ed94c = index;
 	}
-	*(int*) ((char*) g_00f8f080 + offset + 4) = 1;
+	*(int*) ((char*) &g_00f8f080[index] + 4) = 1;
 	return index;
 }

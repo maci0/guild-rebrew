@@ -80,9 +80,9 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 	ids[6] = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, 0x2a);
 	if (fcn_00525fb0(a0))
 		return;
-	ids[3] = 0;
-	ids[4] = 0;
-	ids[5] = 0;
+	for (i = 3; i < 6; i++) {
+		ids[i] = 0;
+	}
 	h = fcn_005463a0(2, 0, 0x15, 3, *(int*) (a0 + 1));
 	while (h) {
 		i = 0;

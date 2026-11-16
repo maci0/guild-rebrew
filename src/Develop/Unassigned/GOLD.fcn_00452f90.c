@@ -3,6 +3,8 @@ void __cdecl fcn_00452f90(char* mesh, char* obj)
 {
 	unsigned char flags;
 	unsigned char high;
+	unsigned char b211;
+	unsigned char low;
 	int count;
 	char* vert;
 	int i;
@@ -13,7 +15,9 @@ void __cdecl fcn_00452f90(char* mesh, char* obj)
 	unsigned char out[4];
 
 	flags = *(unsigned char*) (mesh + 0x212);
-	high = (unsigned char) (~*(unsigned char*) (mesh + 0x211) >> 7);
+	b211 = *(unsigned char*) (mesh + 0x211);
+	high = (unsigned char) (unsigned char) ~b211 >> 7;
+	low = (unsigned char) ~flags & 1;
 	if (flags & 2) {
 		return;
 	}
@@ -24,7 +28,7 @@ void __cdecl fcn_00452f90(char* mesh, char* obj)
 		if (p == 0) {
 			goto next;
 		}
-		if ((flags & 1) == 0) {
+		if (low) {
 			*(unsigned char*) (vert + 0x26) =
 				(unsigned char) ((((*(unsigned char*) ((char*) p + 0x68) >> 2)
 					^ *(unsigned char*) (vert + 0x26)) & 4)

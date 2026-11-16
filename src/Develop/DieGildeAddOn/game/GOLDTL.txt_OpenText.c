@@ -72,8 +72,8 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 	int v38;
 	int v3c;
 	int v40;
-	int v44;
 	int v48;
+	int v44;
 	int starts[10];
 	char line[0xc8];
 	char msg[0x100];
@@ -106,7 +106,7 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 	do {
 		*(int*) p = 0;
 		p += 0x74;
-	} while (p < (char*) g_149d120 + 0x3a68);
+	} while ((int) p < (int) g_149d120 + 0x3a68);
 
 	p = m_alloc(0x4800000, "txt_txt_t:TextArray");
 	g_6b7fa0 = p;
