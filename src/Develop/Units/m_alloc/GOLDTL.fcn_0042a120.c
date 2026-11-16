@@ -24,11 +24,11 @@ int __cdecl fcn_0042a120(int* out, int channels, int bits, int rate)
 
 	*out = 0;
 	if (g_6b7f90 == 0) {
-		return -1;
+		goto fail;
 	}
 	index = fcn_0042b100();
 	if (index < 0) {
-		return -1;
+		goto fail;
 	}
 	rec = m_alloc(0x1c, (char*) 0x679874);
 	g_6b7ed0[index] = (int*) rec;
@@ -43,6 +43,7 @@ int __cdecl fcn_0042a120(int* out, int channels, int bits, int rate)
 	if (AIL_waveOutOpen(g_6b7ed0[index], 0, 0, (char*) g_6b7ed0[index] + 4) != 0) {
 		m_FreeTracked(g_6b7ed0[index]);
 		g_6b7ed0[index] = 0;
+fail:
 		return -1;
 	}
 	if (fcn_0042b2c0() == 1 && g_6b7f94 == 0) {

@@ -62,10 +62,7 @@ void __cdecl fcn_00531d20(void)
 		return;
 	sel = 0;
 	kind = 0;
-	i = g_7746c4;
-	if (i == 0)
-		i = g_7746c8;
-	sel = (unsigned char*) i;
+	sel = (unsigned char*) (g_7746c4 != 0 ? g_7746c4 : g_7746c8);
 	if (sel != 0)
 		kind = &((struct Building_531d20*) lpGebaeudePROT)[*sel];
 	if (g_7746b4 == 0

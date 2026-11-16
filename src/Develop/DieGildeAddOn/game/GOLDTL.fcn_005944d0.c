@@ -1,5 +1,8 @@
 /* Runs the town trade/settlement dialog: opens the window, collects the shop
    list, draws the goods rows and processes input until the player closes it. */
+extern unsigned char* lpGebaeudePROT;
+typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } BUILDING_ROW;
+
 
 int __cdecl fcn_00525fb0(void*);
 void __cdecl fcn_0057e880(int, int, int, int);
@@ -74,7 +77,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	window = fcn_00470820(0, 0, (char*) 0x6aa148);
 	saved = window;
 	fcn_00471b60(window);
-	id = (*(unsigned char*) (*(int*) 0x868050 + (unsigned int) *p * 0x24d) != 0x1e) ? 0 : 2;
+	id = (((BUILDING_ROW*) lpGebaeudePROT)[*p].kind != 0x1e) ? 0 : 2;
 	fcn_0052a0c0(p, id);
 	d2_SetForm(window, 3);
 	io_AppendText(0xb7);
@@ -82,7 +85,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	count = 0;
 	d2_SetForm(window, 0);
 	id = 0x70b;
-	switch (*(unsigned char*) (*(int*) 0x868050 + (unsigned int) *p * 0x24d)) {
+	switch (((BUILDING_ROW*) lpGebaeudePROT)[*p].kind) {
 	case 0x13:
 	case 0x04:
 	case 0x10:

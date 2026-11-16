@@ -25,8 +25,7 @@ char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS optio
 
 	if (context != 0) {
 		object = d3_FindAnimByName(name);
-		scan = context + 0x390;
-		for (slot = 0; slot < 3; slot++, scan += 0x7c) {
+		for (slot = 0, scan = context + 0x390; slot < 3; slot++, scan += 0x7c) {
 			if (*(int*) scan == 0) {
 				break;
 			}
@@ -35,9 +34,9 @@ char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS optio
 			if (*(int*) (object + 0x140) == *(int*) (context + 0x310)) {
 				if (slot < 3) {
 					g_6b86d4++;
+					entry = context + 0x328 + slot * 0x7c;
 					table = *(int*) (context + 0x320);
 					base = (char*) table;
-					entry = context + 0x328 + slot * 0x7c;
 					*(int*) (table + 0x40) = g_6b7fac;
 					*(char*) (context + 0x4a0) = 1;
 					*(char**) (entry + 0x68) = object;

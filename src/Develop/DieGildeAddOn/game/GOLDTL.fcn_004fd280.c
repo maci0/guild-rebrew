@@ -65,8 +65,8 @@ void __cdecl fcn_004fd280(int flag)
 			n = 0;
 			while (ent != 0 && n < 8) {
 				if (*(unsigned short*) (ent + 0x27) != 0xffff) {
-					ptrs[n] = ent;
 					vals[n] = lpGebaeudePROT[*(unsigned char*) ent * 0x24d + 0x247];
+					ptrs[n] = ent;
 					n++;
 				}
 				ent = (char*) gm_FindNextFilteredEntity();

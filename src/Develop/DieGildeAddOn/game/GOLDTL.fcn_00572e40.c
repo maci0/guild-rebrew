@@ -35,10 +35,10 @@ void __cdecl fcn_00572e40(char* c)
 	*(int*) (c + 0xec) = -1;
 	fcn_00500bb0(p52, 0, 1, 0);
 	memset(buf, 0, 0xf8);
+	buf[4] = 0xf;
 	*(int*) (buf + 8) = *(int*) ((char*) 0x7f4ca0 + *(unsigned short*) (c + 8) * 0x21c + 4);
 	memcpy(buf + 0x28, p44, 0xe);
 
-	buf[4] = 0xf;
 	*(int*) (buf + 0xc) = -1;
 	buf[0x36] = 2;
 	*(int*) (buf + 0x60) = *(int*) (c + 0xb0);

@@ -34,14 +34,13 @@ int __cdecl fcn_005cba60(unsigned short* who, unsigned int max, Item5cba60* out,
 			}
 		}
 	}
-	if (max == 0) {
-		return count;
-	}
-	memset(out, 0, max * 0x38);
-	for (i = 0, o = out; i < count && i < max; i++, o++) {
-		o->house = ps[i];
-		fcn_005ca560(o);
-		o->value = fcn_005cf720(*who, *o->house, kind, 0);
+	if (max != 0) {
+		memset(out, 0, max * 0x38);
+		for (i = 0, o = out; i < count && i < max; i++, o++) {
+			o->house = ps[i];
+			fcn_005ca560(o);
+			o->value = fcn_005cf720(*who, *o->house, kind, 0);
+		}
 	}
 	return count;
 }

@@ -63,7 +63,7 @@ int __cdecl fcn_00590b80(int a0)
 	if (*(int*) ((char*) &g_1015f40[n] + 0x4) + val > g_1040494 - 0x10) {
 		fcn_00469c40(g_1040494 - 0x10 - val,
 				*(int*) ((char*) &g_1015f40[n] + 0x8),
-				g_1015f40[n].x274);
+				*(int*) ((char*) &g_1015f40[n] + 0x27c));
 	}
 	d2_SetForm(0, 2);
 	fcn_0046f740(0, 0, a0 + 0xdf, g_772514);

@@ -327,11 +327,6 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			} else {
 				io_AppendText(0xc4, state, g_row_cat(row, key) * 2 + 0x9a8);
 			}
-			if (pick == 1) {
-				io_AppendText(0xc5);
-			} else {
-				io_AppendText(0xc6, pick);
-			}
 		}
 
 		d2_SetForm(a0, a1);

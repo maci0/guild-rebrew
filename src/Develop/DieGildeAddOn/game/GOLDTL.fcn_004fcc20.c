@@ -22,6 +22,7 @@ void __cdecl fcn_004fcc20(void)
 	int n;
 	int r;
 	char* rec;
+	char* q;
 	char* e;
 
 	handle = (int) fcn_00507ab0(1);
@@ -29,8 +30,9 @@ void __cdecl fcn_004fcc20(void)
 	n = fcn_0050b750(0xe - *(int*) (buf + 0x18), g_773d75);
 	i = 0;
 	g_773d48 = 0;
-	rec = (char*) 0x7f4ca0;
+	q = (char*) 0x7f4e10;
 	do {
+		rec = q - 0x170;
 		if (g_773d48 > 0x40) {
 			fcn_00535960();
 			g_773d48 = 0;
@@ -61,8 +63,8 @@ void __cdecl fcn_004fcc20(void)
 				g_773d48++;
 			}
 		}
-		rec += 0x21c;
+		q += 0x21c;
 		i++;
-	} while ((int) rec < 0x85a0a0);
+	} while ((int) q < 0x85a210);
 	g_773d48 = 0;
 }

@@ -45,13 +45,14 @@ unsigned int __cdecl fcn_005086f0(unsigned short* a0)
 	n = 4;
 	while (n != 0) {
 		if (slots[i + 4] == 1) {
-			goto found;
+			break;
 		}
 		n--;
 		i = (i + 1) % 4;
 	}
-	return 0;
-found:
+	if (n == 0) {
+		return 0;
+	}
 	if (i == -1) {
 		return 0;
 	}

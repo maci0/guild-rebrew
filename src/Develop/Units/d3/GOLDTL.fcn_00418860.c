@@ -36,7 +36,6 @@ void __cdecl fcn_0043a3f0(char*, char*, SUNRAY_COLOR);
 void __cdecl fcn_00418860(char* obj)
 {
 	float vec[3];
-	float pos[3];
 	float x;
 	float result;
 	float a;
@@ -55,6 +54,7 @@ void __cdecl fcn_00418860(char* obj)
 	}
 	{
 		char* light;
+		float pos[3];
 
 		light = fcn_00445600(0, 8, 0, "pLicht");
 		if (light != 0) {

@@ -35,11 +35,11 @@ void __cdecl fcn_00414830(float* lo, float* hi, char* entity)
 	if (p != 0) {
 		for (i = 8; i != 0; p++, i--) {
 			*lo = (*lo < p->x) ? *lo : p->x;
-			lo[1] = (p->y > lo[1]) ? lo[1] : p->y;
-			lo[2] = (p->z > lo[2]) ? lo[2] : p->z;
+			lo[1] = ((double) lo[1] < (double) p->y) ? lo[1] : p->y;
+			lo[2] = ((double) lo[2] < (double) p->z) ? lo[2] : p->z;
 			*hi = (*hi > p->x) ? *hi : p->x;
-			hi[1] = (p->y < hi[1]) ? hi[1] : p->y;
-			hi[2] = (p->z < hi[2]) ? hi[2] : p->z;
+			hi[1] = ((double) hi[1] > (double) p->y) ? hi[1] : p->y;
+			hi[2] = ((double) hi[2] > (double) p->z) ? hi[2] : p->z;
 		}
 	}
 	for (child = *(char**) (entity + 0x200); child != 0; child = *(char**) (child + 0x1f4)) {

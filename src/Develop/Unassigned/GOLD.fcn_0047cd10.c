@@ -5,24 +5,27 @@ int __cdecl fcn_0047cd10(unsigned short a, unsigned short b, int rec, unsigned c
 	char* slot;
 
 	i = 0;
-	slot = (char*) 0xf8a520;
-	for (; i < 0x10; i++) {
+	for (slot = (char*) 0xf8a520; (int) slot < 0xf8a630; slot += 0x11) {
 		if (*(int*) slot == 0) {
 			break;
 		}
-		slot += 0x11;
+		i++;
+	}
+	if ((int) slot >= 0xf8a630) {
+		return -1;
 	}
 	if (i >= 0x10) {
 		return -1;
 	}
 	*(unsigned short*) (0xf8a52d + i * 0x11) = a;
-	*(int*) slot = rec;
-	slot[4] = 0;
-	slot[5] = 0;
-	*(unsigned short*) (slot + 0xf) = b;
-	*(unsigned short*) (slot + 6) = *(unsigned char*) (*(int*) (rec + 0x3e) + rec);
+	*(int*) (0xf8a520 + i * 0x11) = rec;
+	*(char*) (0xf8a524 + i * 0x11) = 0;
+	*(char*) (0xf8a525 + i * 0x11) = 0;
+	*(unsigned short*) (0xf8a52f + i * 0x11) = b;
+	*(unsigned short*) (0xf8a526 + i * 0x11) = 0;
+	*(unsigned short*) (0xf8a526 + i * 0x11) = *(unsigned char*) (*(int*) (rec + 0x3e) + rec);
 	if (flags & 1) {
-		*(int*) (slot + 8) = 1;
+		*(int*) (0xf8a528 + i * 0x11) = 1;
 	}
 	return i;
 }

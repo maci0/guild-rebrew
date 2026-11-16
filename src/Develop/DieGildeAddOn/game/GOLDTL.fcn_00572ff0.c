@@ -50,6 +50,9 @@ void __cdecl fcn_00572ff0(char* a)
 	char* tmp;
 	unsigned short* ps;
 	int* pi;
+	int left = 0;
+	int amt = 0;
+	int flag = 0;
 	int n = 0;
 	int i;
 	int found;
@@ -57,9 +60,6 @@ void __cdecl fcn_00572ff0(char* a)
 	int t;
 	int m = 0;
 	int d;
-	int left = 0;
-	int amt = 0;
-	int flag = 0;
 	int lim;
 	int cand;
 

@@ -143,8 +143,8 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		pSuch = (unsigned char*) gm_StartFilteredEntitySearch(2, 4, g_774970, 5, 2);
 		while (pSuch != 0) {
 			if (*pSuch == gebaeudetyp) {
-				io_FormatTextBuffer(f.cTmp, 0x17f2, gebaeudetyp * 14 + 0x48e);
-				if (fcn_00526120(f.cTmp, 1) == 0) {
+				io_FormatTextBuffer((char*) f.pObjekte, 0x17f2, gebaeudetyp * 14 + 0x48e);
+				if (fcn_00526120((char*) f.pObjekte, 1) == 0) {
 					return 0;
 				}
 				break;

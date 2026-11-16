@@ -12,7 +12,7 @@ void __cdecl m_FreeTracked(void*);
 unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3)
 {
 	BITMAPINFOHEADER hdr;
-	unsigned char v10[4];
+	unsigned char v10[2];
 	void* f;
 	int v9;
 	int v12;

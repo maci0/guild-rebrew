@@ -1,8 +1,8 @@
 #include <math.h>
 
-/* Horizontal distance from a to the point held at b->member->pos. */
+/* Horizontal distance from the point a to the position held at b->member->pos. */
 /* ADDRESS: GOLD 0x004ce1b0 */
-float __cdecl fcn_004ce1b0(char* a, char* b)
+float __cdecl fcn_004ce1b0(char* b, char* a)
 {
 	char* p;
 	float dx;

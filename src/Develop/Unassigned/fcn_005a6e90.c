@@ -52,11 +52,10 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
     d2_SetForm(esi, 0);
 
     g = g_772514;
-    p = (int *)0x10162e8 + g * 243;
-    p[0] = 0xc;
-    p[1] = 0x14;
-    p[2] = 0xc;
-    p[3] = 0xc;
+    *(int *)(0x10162e8 + g * 0x3cc) = 0xc;
+    *(int *)(0x10162ec + g * 0x3cc) = 0x14;
+    *(int *)(0x10162f0 + g * 0x3cc) = 0xc;
+    *(int *)(0x10162f4 + g * 0x3cc) = 0xc;
 
     d2_SetForm(esi, 1);
     io_AppendText(0x18ed);

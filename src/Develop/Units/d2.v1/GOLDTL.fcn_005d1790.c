@@ -124,11 +124,11 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f57,
 		    *((unsigned char *)a0 + 0x169) + t);
 	}
-	if (ok != 0) {
+	if (ok == 0) {
+		io_AppendText("$5<$R%s$0<$3>$L%T$A$0>", 0x1f58, gm_WalkEntityChain(*a0));
+	} else {
 		gm_WalkEntityChain(*a0);
 		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f58, 0x679794);
-	} else {
-		io_AppendText("$5<$R%s$0<$3>$L%T$A$0>", 0x1f58, gm_WalkEntityChain(*a0));
 	}
 	p = gm_LookupEntityRecordById(*(int *)((char *)a0 + 0x5c));
 	if (ok != 0) {

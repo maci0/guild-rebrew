@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern unsigned char* lpGebaeudeINST;
-#include "GOLDTL.fcn_0049f000_gconf.h"
+extern unsigned char* lpGebaeudePROT;
 extern char g_773d75;
 
 int __cdecl gm_GetEntityTableEntry(int);
@@ -10,7 +10,7 @@ int __cdecl fcn_005463a0(int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl fcn_00507910(int);
-int __cdecl gm_RandomMod(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00507400(int, int);
 int __cdecl fcn_005072c0(int);
 int __cdecl fcn_004a4bb0(int, int, int, int*, int*, int);
@@ -64,7 +64,8 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 	i = 0;
 	do {
 		if (lpGebaeudeINST[i] != 0) {
-			v12[fcn_00507910(g_entity_type_table[lpGebaeudeINST[i] * 0x24d])]++;
+			p = lpGebaeudePROT + lpGebaeudeINST[i] * 0x24d;
+			v12[fcn_00507910(*p)]++;
 		}
 		i += 0xa9;
 	} while (i < 0xa900);
@@ -81,9 +82,9 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 			if (v15[1] == 0) {
 				return 0;
 			}
-			v15[0] = 5;
+			*(unsigned char*) v15 = 5;
 			v15[2] = 1;
-			v14[0] = 0;
+			*(unsigned char*) v14 = 0;
 			v14[1] = 0;
 			v14[2] = 0;
 			v9 = fcn_004a4bb0(a0, (int) a1, a2, v15, v14, 1);

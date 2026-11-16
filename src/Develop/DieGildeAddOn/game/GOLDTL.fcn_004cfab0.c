@@ -25,9 +25,9 @@ void __cdecl fcn_004cfab0(int a0, int a1)
 	if (!fcn_00443e10(*(int*) (*(int*) (a1 + 0x184) + 0x34), rect)) {
 		return;
 	}
-	w = rect[2] - rect[0] + 0x20;
 	x0 = rect[0] - 0x10;
 	y0 = rect[1] - 0x10;
+	w = rect[2] - rect[0] + 0x20;
 	if (w <= 0x6e) {
 		w = 0x6e;
 	}

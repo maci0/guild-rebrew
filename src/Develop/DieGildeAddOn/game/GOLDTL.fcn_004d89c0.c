@@ -68,25 +68,25 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 	if ((p[0x16] == 1 || p[0x16] == 2)
 	    && (w = fcn_004ce680(v4)) != 0
 	    && *(int*) (w + 0x20) <= 0)
-		return 0xffffffff;
+		goto fail;
 	v8 = p[0];
 	if (v8 == 0x154 || v8 == 0x156 || v8 == 0x158 || v8 == 0x16e
 	    || v8 == 0x172 || v8 == 0 || v8 == 0x176) {
 		v9 = *(int*) (a2 + 0x184);
 		if (*(float*) (p + 3) < fcn_004cefb0(v4, *(unsigned int*) (v9 + 0x34))) {
 			if (*(int*) (*(int*) (v4 + 0x184) + 0x128) != 0)
-				return 0xffffffff;
+				goto fail;
 			if (ev.busy)
-				return 0xffffffff;
+				goto fail;
 			if (fcn_0045b990(v7, *(int*) (v9 + 0x34) + 0x4c, (int*) &a1, &a2, &a0) == 0)
-				return 0xffffffff;
+				goto fail;
 			if (fcn_004cec00(a1, a2, (int*) &a1, &a2) == 0)
-				return 0xffffffff;
+				goto fail;
 			return fcn_004c6680(*(int*) (*(int*) (v4 + 0x184) + 0x34), a1, a2, 0);
 		}
 	}
 	if (*(int*) (*(int*) (v4 + 0x184) + 0x128) != 0)
-		return 0xffffffff;
+		goto fail;
 	v11 = (unsigned short) gm_RandomMod(0xff);
 	a1 = *(unsigned char*) (v4 + 0x83);
 	v9 = *(int*) (v4 + 0x16c);
@@ -123,4 +123,6 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 	}
 	fcn_004c5420(*(unsigned int*) (v4 + 4), 0x1c8, 4, 0x20000000, 0);
 	return fcn_004c6940(v4, 2, &ev);
+fail:
+	return 0xffffffff;
 }

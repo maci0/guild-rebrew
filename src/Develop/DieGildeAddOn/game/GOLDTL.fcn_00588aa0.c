@@ -118,9 +118,9 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 	fcn_004f11c0(a1, &spread, &scale);
 	k = fcn_004f1290(a1);
 	b = ((CANNON_ROW_588AA0*)0x665288)[slot0].f08;
-	speed = (float) slot1 * 0.01f
-		* (k * ((CANNON_ROW_588AA0*)0x665288)[slot0].f04
+	speed = (k * ((CANNON_ROW_588AA0*)0x665288)[slot0].f04
 			- ((CANNON_ROW_588AA0*)0x665288)[slot0].f00)
+		* ((float) slot1 * g_662910)
 		+ ((CANNON_ROW_588AA0*)0x665288)[slot0].f00;
 	fcn_00589390();
 	dir1 = a0->dir1; dir2 = a0->dir2; dir3 = a0->dir3;

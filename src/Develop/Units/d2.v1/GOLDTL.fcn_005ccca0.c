@@ -97,11 +97,12 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 	step = (*(int*) ((unsigned long)&g_1015f40 + g_772514 * 0x3cc + 0x10) - 0x107) / 7;
 	rem = (*(int*) ((unsigned long)&g_1015f40 + g_772514 * 0x3cc + 0x10) - 0x107) % 7;
 	y = 0;
-	for (i = 0; i < 8; i++) {
+	for (i = 0; i < 8;) {
 		g_6ac8a8[i].element = fcn_00468df0(
 				(*(int*) ((unsigned long)&g_1015f40 + g_772514 * 0x3cc + 0xc) - 0xb9) / 2, y, 0xbf,
 				*(int*) (0x14aad40 + g_6ac8a8[i].bild * 4), g_772514);
 		fcn_00469110(g_6ac8a8[i].element, 0xb9);
+		i++;
 		y += 0x21 + step + (--rem >= 0);
 	}
 	if (g_775344 < 8) {

@@ -23,7 +23,7 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3,
 /* ADDRESS: GOLDTL 0x0043ed30 */
 char __cdecl fcn_0043ed30(char* node, LightIter* it)
 {
-	float pt[3];
+	float pt[4];
 	float val;
 	float f90;
 	float t;
@@ -47,23 +47,23 @@ char __cdecl fcn_0043ed30(char* node, LightIter* it)
 		}
 		return 1;
 	}
-	if (*(float*) (node + 0x94) <= 0.0) {
+	if (!(*(float*) (node + 0x94) > 0.0)) {
 		return 1;
 	}
-	if (*(float*) (node + 0x90) <= 0.0) {
+	if (!(*(float*) (node + 0x90) > 0.0)) {
 		return 1;
 	}
+	sc = (Scene*) it->obj;
 	f90 = *(float*) (node + 0x90);
 	fcn_00455350(node, (float*) (node + 0x4c), pt);
-	sc = (Scene*) it->obj;
-	if (!fcn_00441720(&sc->width, pt, 0, (unsigned int*) &v4, (unsigned int*) &v3, &val)) {
+	if (!(unsigned char) fcn_00441720(&sc->width, pt, 0, (unsigned int*) &v4, (unsigned int*) &v3, &val)) {
 		return 1;
 	}
 	t = f90 * f90 - (pt[1] - val) * (pt[1] - val);
 	if (!(t > 0.0)) {
 		return 1;
 	}
-	scale = (*(float*) 0x6b8308 + sc->f60) / (float) sqrt(t);
+	scale = sqrt(t) / (*(float*) 0x6b8308 + sc->f60);
 	w = sc->width;
 	if (!(scale > *(double*) 0x6629c8)) {
 		sc->data[w * v3 + v4] |= 0x80;
@@ -88,12 +88,12 @@ char __cdecl fcn_0043ed30(char* node, LightIter* it)
 			x0 = 0;
 		}
 		x1 = v4 + r;
-		if (x1 > w - 1) {
-			x1 = w - 1;
+		if (x1 > sc->width - 1) {
+			x1 = sc->width - 1;
 		}
 		for (x = x0; x <= x1; x++) {
 			if ((x - v4) * (x - v4) + (y - v3) * (y - v3) < r2) {
-				sc->data[y * w + x] |= 0x80;
+				sc->data[y * sc->width + x] |= 0x80;
 			}
 		}
 	}

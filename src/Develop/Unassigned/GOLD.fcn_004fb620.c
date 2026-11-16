@@ -18,6 +18,7 @@ void __cdecl fcn_004fb620(char* p)
 	char* e;
 	int i;
 	int j;
+	int off;
 
 	slot = (int*) (p + 0x34);
 	if (*slot != 0xff)
@@ -31,8 +32,8 @@ void __cdecl fcn_004fb620(char* p)
 	for (i = 0; i < 4; i++, slot++) {
 		sprintf(file, "%s_HEAD%i_%s_ICON.bmp", base, i, suffix);
 		*slot = 0xff;
-		for (j = 0; j < *(int*) 0x6f1b90; j++) {
-			e = (char*) (*(int*) 0x6f1b94 + j * 0x30);
+		for (j = 0, off = 0; j < *(int*) 0x6f1b90; j++, off += 0x30) {
+			e = (char*) (*(int*) 0x6f1b94 + off);
 			if (*e == 0)
 				break;
 			if (strcmpi(file, e) == 0)
@@ -40,8 +41,8 @@ void __cdecl fcn_004fb620(char* p)
 		}
 		sprintf(file, "%s_HEAD%i_ICON.bmp", base, i);
 		*slot = 0xff;
-		for (j = 0; j < *(int*) 0x6f1b90; j++) {
-			e = (char*) (*(int*) 0x6f1b94 + j * 0x30);
+		for (j = 0, off = 0; j < *(int*) 0x6f1b90; j++, off += 0x30) {
+			e = (char*) (*(int*) 0x6f1b94 + off);
 			if (*e == 0)
 				break;
 			if (strcmpi(file, e) == 0)

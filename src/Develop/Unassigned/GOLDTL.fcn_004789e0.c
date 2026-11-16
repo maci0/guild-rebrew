@@ -16,15 +16,15 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 	unsigned int first;
 	unsigned int h;
 
-	h = *(unsigned short*) ((char*) spr + 6);
-	v2 = *(unsigned short*) ((char*) spr + 0xa);
 	line = (unsigned int*) ((char*) spr + 0x32);
-	q = (unsigned int*) ((char*) spr + 0x36);
 	dst = (unsigned short*) (*(int*) (s + 0x1c)
 	 + (*(int*) (s + 0x10) * (int) y + x) * 2);
+	v2 = *(unsigned short*) ((char*) spr + 0xa);
+	q = (unsigned int*) ((char*) spr + 0x36);
 	if ((int) (v2 + y) < *(int*) 0x7725fc) {
 		return 0;
 	}
+	h = *(unsigned short*) ((char*) spr + 6);
 	if ((int) x + (int) h / (int) zoom > *(int*) 0x67d964) {
 		return 0;
 	}

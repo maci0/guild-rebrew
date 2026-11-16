@@ -76,7 +76,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 		return 0;
 	}
 	i = 0;
-	if (count >= 1) {
+	if (count > 0) {
 		do {
 			e = fcn_00523710((void*) stream);
 			*(char**) (e + 0x12c) = gm_LookupEntityRecordById((int) *(char**) (e + 0x12c));
@@ -87,7 +87,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 		return 0;
 	}
 	i = 0;
-	if (count >= 1) {
+	if (count > 0) {
 		do {
 			e = fcn_00523710((void*) stream);
 			*(unsigned short**) (e + 0x12c) =

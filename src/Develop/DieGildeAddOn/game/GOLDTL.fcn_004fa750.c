@@ -26,7 +26,7 @@ void __cdecl fcn_004fa750(void)
     int t; int index;
     CellStat* row;
     row = g_99ef84[0]; memset(values, 0, sizeof(values));
-    for (; row < (CellStat*)g_99ef84 + 64; row += 8) {
+    for (; (int) row < (int) g_99ef84 + 0x600; row += 8) {
         for (j = 0; j < 8; j++) {
             row[j].count = 0;
         }

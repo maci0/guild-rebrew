@@ -30,11 +30,12 @@ unsigned int __cdecl fcn_004a57a0(unsigned short *e, int a1, int n, char *src, f
 	int found;
 	int i;
 	unsigned int len;
+	int flag;
 
+	flag = 0;
 	step = g_664398[gm_RandomMod(0x10) & 0xffff];
 	memset(&q, 0, sizeof(q));
 	{
-	int flag = 0;
 	len = n * 2;
 	if (len > 0x20) {
 		len = 0x20;
