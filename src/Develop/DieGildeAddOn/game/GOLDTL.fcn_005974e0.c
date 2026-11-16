@@ -1,3 +1,4 @@
+extern char* g_1015ea0;
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_0050dfd0(char*, int);
 int __cdecl gm_GetMsgField(char*, char*);
@@ -210,7 +211,7 @@ int __cdecl fcn_005974e0(int a0, char* a1)
         }
         v8 = *v7;
         if (v8 != -1 &&
-            *(int*) (*(int*) 0x1015ea0 + 0x20 + v8 * 0x2f4) == 0x41 &&
+            *(int*) (g_1015ea0 + 0x20 + v8 * 0x2f4) == 0x41 &&
             fcn_00471f80(v8)) {
             v10 = 1;
         }

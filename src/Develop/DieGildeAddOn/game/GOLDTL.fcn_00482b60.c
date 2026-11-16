@@ -81,7 +81,7 @@ void __cdecl fcn_00482b60(char* e)
 		}
 		o = *(char**) (e + 0x16c);
 		t = *(int*) (o + 0x65) + (gm_RandomMod(3) & 0xffff) + 1;
-		if (t > st.v[6] + 3) {
+		if (t >= st.v[6] + 3) {
 			t = st.v[6] + 3;
 		}
 		fcn_004c4510(o, *(int*) (o + 1));

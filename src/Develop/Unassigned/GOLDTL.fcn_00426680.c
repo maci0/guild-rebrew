@@ -167,12 +167,5 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 	if (tok->type != 0) {
 		return;
 	}
-	p = buf;
-	q = tok->u.text;
-	do {
-		c = *p;
-		*q = c;
-		p++;
-		q++;
-	} while (c != 0);
+	strcpy(tok->u.text, buf);
 }

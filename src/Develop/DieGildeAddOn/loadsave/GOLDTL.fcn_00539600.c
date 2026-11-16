@@ -99,8 +99,8 @@ int __cdecl fcn_00539600(void)
 					g_9badb0[i] = c;
 					i++;
 				} while (c != 0);
-				g_9badc8 = *(int*) (hdr + 0x63) & 0xff;
 				g_9badcc = *(int*) (hdr + 0x64);
+				g_9badc8 = *(int*) (hdr + 0x63) & 0xff;
 			}
 			CloseVfsStream(f);
 			return 1;

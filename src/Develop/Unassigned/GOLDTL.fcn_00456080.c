@@ -21,9 +21,9 @@ extern void __cdecl fcn_00455d30(int count, int size, unsigned char flags, int a
 void __cdecl fcn_00456080(float* v, unsigned char* colors, int base, int size,
 	unsigned char flags, int grid, int r)
 {
-	int top = -1;
-	int i = 0;
 	int ymin = size << 16;
+	int i = 0;
+	int top = -1;
 	int upper1;
 	int lower1;
 	int upper2;

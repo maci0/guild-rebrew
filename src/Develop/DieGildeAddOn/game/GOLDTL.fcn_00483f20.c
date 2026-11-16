@@ -200,7 +200,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 	    (id = fcn_005b1e40(e->root)) != 0) {
 		for (scan = g_100d0c0, i = 0; (char*) scan < (char*) 0x100dbc0; scan = (Prod483f20*) ((char*) scan + 0x58), i++) {
 			if (scan->id == id) {
-				if (can_start(e, rec, scan, 1)) {
+				if (can_start(e, stk, scan, 1)) {
 					start_production(e, scan, (char*) 0x67dcc0, msg);
 					goto after_start;
 				}
@@ -226,7 +226,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 		i = 0;
 		do {
 			prod = &g_100d0c0[order[i]];
-			if ((prod->flags & 0x400) == 0 && can_start(e, rec, prod, 1)) {
+			if ((prod->flags & 0x400) == 0 && can_start(e, stk, prod, 1)) {
 				start_production(e, prod, (char*) 0x67dc6c, msg);
 				goto after_start;
 			}
@@ -237,7 +237,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 		i = 0;
 		do {
 			prod = &g_100d0c0[order[i]];
-			if ((prod->flags & 0x400) == 0 && can_start(e, rec, prod, 0)) {
+			if ((prod->flags & 0x400) == 0 && can_start(e, stk, prod, 0)) {
 				start_production(e, prod, (char*) 0x67dc38, msg);
 				goto after_start;
 			}

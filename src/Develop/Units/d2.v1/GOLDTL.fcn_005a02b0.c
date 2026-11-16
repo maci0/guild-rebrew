@@ -1,6 +1,7 @@
 #include <string.h>
 
 #include "client_types.h"
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 extern pos14_7f4c00 g_7f4c00;
 
@@ -41,15 +42,15 @@ int __cdecl fcn_005a02b0(void)
 	int base;
 	int r;
 
-	slot = (char*) 0x7f4ca0 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c;
+	slot = g_7f4ca0 + (unsigned int) g_774970 * 0x21c;
 	n = gm_GetOppositeStatIndex(*(unsigned char*) (slot + 0x164)) + 1;
 	h = fcn_00470820(0, 0, (char*) 0x6aa80c);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);
 	fcn_00525ef0();
-	grade = fcn_00507540(*(unsigned short*) 0x774970, info);
-	r = (int) fcn_005463a0(2, 2, *(unsigned short*) 0x774970, 0, 0x26);
+	grade = fcn_00507540(g_774970, info);
+	r = (int) fcn_005463a0(2, 2, g_774970, 0, 0x26);
 	if (r == 0 && grade >= 1.0 && n <= 6) {
 		base = *(char*) (slot + 9) != 0 ? 0x18f : 0x130;
 		gm_MapEntityStatRange(*(unsigned char*) (slot + 0x164));
@@ -73,13 +74,12 @@ int __cdecl fcn_005a02b0(void)
 		    base + *(unsigned char*) (slot + 0x164) - 1);
 	}
 	else {
-		d2_SetForm(h, 1);
-		io_AppendText(0x15bb);
-		d2_SetForm(h, 2);
 		if (n >= 7) {
+			d2_SetForm(h, 1); io_AppendText(0x15bb); d2_SetForm(h, 2);
 			io_AppendText(0x15be, *(unsigned short*) slot);
 		}
 		else {
+			d2_SetForm(h, 1); io_AppendText(0x15bb); d2_SetForm(h, 2);
 			io_AppendText(0x15bc, *(unsigned short*) slot, info);
 			d = fcn_004677e0(0x1c,
 			    *(int*) (*(char**) 0x77255c + 0x10) - 0x3c,
@@ -89,7 +89,7 @@ int __cdecl fcn_005a02b0(void)
 		}
 	}
 	while (fcn_005373e0((void*) fcn_005a02b0, 0x677c7) != 0) {
-		if ((mode = *(int*) 0x100f1dc) != -1 && grade >= 1.0) {
+		if ((mode = g_100f1dc) != -1 && grade >= 1.0) {
 			if (mode == 2) {
 				if (*(int*) (slot + 0x194) < 4) {
 					io_FormatTextBuffer(text, 0x74, 4);

@@ -86,7 +86,6 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 	unsigned char color;
 	char* slot;
 	int miss;
-	unsigned char level;
 	float f;
 	int h;
 	int x;
@@ -106,19 +105,19 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 	miss = (fcn_004fa5b0(ids[a2], (char*) g_7f4ca0 + g_774970 * 0x21c, (int) big) & 2) != 0 ? -1 : 0;
 	color = *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2);
 	if (color < 0x2a) {
-		level = 1;
+		color = 1;
 	} else if (color < 0x54) {
-		level = 2;
+		color = 2;
 	} else if (color < 0x7e) {
-		level = 4;
+		color = 4;
 	} else if (color < 0xa8) {
-		level = 6;
+		color = 6;
 	} else if (color < 0xd2) {
-		level = 9;
+		color = 9;
 	} else {
-		level = 12;
+		color = 12;
 	}
-	color = level + miss;
+	color = color + miss;
 	h = fcn_00470820(0, 0, (char*) 0x6ac484);
 	d2_SetForm(h, 0);
 	fcn_005340f0(g_772514);

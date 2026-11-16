@@ -29,7 +29,7 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 	int v11;
 	int v25;
 	int v28;
-	unsigned int v14[3];
+	float v14[3];
 	unsigned int v15;
 	char v16[64];
 	char v17[64];
@@ -59,7 +59,7 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 		fcn_004011f0(v4, v26 + 0x44);
 		fcn_004011f0(v4, v26 + 0x4c);
 		v11 = *(int*)(v26 + 0x44);
-		if (v11 >= 1) {
+		if (v11 > 0) {
 			*(unsigned int*)(v26 + 0x40) = (unsigned int)m_alloc((v11 * 3 + 0x18) * 8, "d3_io_fl:LoadFastChunk(pol)");
 			v28 = 0;
 			if (v11 + 8 > 0) {
@@ -74,20 +74,20 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 		v11 = *(int*)(v26 + 0x4c);
 		*(unsigned int*)(v26 + 0x48) = (unsigned int)m_alloc(v11 * 0x38, "d3_io_fl:LoadFastChunk(poi)");
 		v11 = 0;
-		if (*(int*)(v26 + 0x4c) >= 1) {
+		if (*(int*)(v26 + 0x4c) > 0) {
 			do {
 				v10 = v11 * 0x38;
 				fcn_004011f0(v4, (void*)(v10 + 0x18 + *(int*)(v26 + 0x48)));
 				fcn_004011f0(v4, (void*)(v10 + 0x1c + *(int*)(v26 + 0x48)));
 				fcn_004011f0(v4, (void*)(v10 + 0x20 + *(int*)(v26 + 0x48)));
 				fcn_00401280(v4, v14);
-				*(unsigned int*)(v10 + *(int*)(v26 + 0x48)) = v14[0];
-				*(unsigned int*)(v10 + 8 + *(int*)(v26 + 0x48)) = v14[1];
-				*(unsigned int*)(v10 + 0x10 + *(int*)(v26 + 0x48)) = v14[2];
+				*(float*)(v10 + *(int*)(v26 + 0x48)) = v14[0];
+				*(float*)(v10 + 8 + *(int*)(v26 + 0x48)) = v14[1];
+				*(float*)(v10 + 0x10 + *(int*)(v26 + 0x48)) = v14[2];
 				fcn_00401280(v4, v14);
-				*(unsigned int*)(v10 + 4 + *(int*)(v26 + 0x48)) = v14[0];
-				*(unsigned int*)(v10 + 0xc + *(int*)(v26 + 0x48)) = v14[1];
-				*(unsigned int*)(v10 + 0x14 + *(int*)(v26 + 0x48)) = v14[2];
+				*(float*)(v10 + 4 + *(int*)(v26 + 0x48)) = v14[0];
+				*(float*)(v10 + 0xc + *(int*)(v26 + 0x48)) = v14[1];
+				*(float*)(v10 + 0x14 + *(int*)(v26 + 0x48)) = v14[2];
 				fcn_00401280(v4, (void*)(v10 + 0x2c + *(int*)(v26 + 0x48)));
 				*(unsigned int*)(v10 + 0x24 + *(int*)(v26 + 0x48)) = 0xffffffff;
 				if (*(int*)(v26 + 0x1e4) >= 0xff) {
@@ -103,7 +103,7 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 				v11 += 1;
 			} while (v11 < *(int*)(v26 + 0x4c));
 		}
-		if ((a2 != 0) && (a3 >= 1) && (a4 == *(int*)(v26 + 0x1e4))) {
+		if ((a2 != 0) && (a3 > 0) && (a4 == *(int*)(v26 + 0x1e4))) {
 			*(int*)(v26 + 0x1e8) = a3;
 			*(int*)(v26 + 0x200) = a2;
 			v3 = 1;
@@ -113,7 +113,7 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 			*(unsigned int*)(v26 + 0x200) = (unsigned int)m_alloc(v10 << 6, "d3_io_fl:LoadFastChunk(texset)");
 		}
 		v28 = 0;
-		if (*(int*)(v26 + 0x1e4) >= 1) {
+		if (*(int*)(v26 + 0x1e4) > 0) {
 			v6 = (char*)v15;
 			do {
 				v10 = v28 * 0x40;
@@ -176,7 +176,7 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 					v25 = -1;
 				}
 				v10 = 0;
-				if (*(int*)(v26 + 0x4c) >= 1) {
+				if (*(int*)(v26 + 0x4c) > 0) {
 					do {
 						v11 = *(int*)(v26 + 0x48) + v10 * 0x38;
 						if (*(int*)(v11 + 0x28) == v28) {
@@ -191,7 +191,7 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 		fcn_004011f0(v4, &v25);
 		*(char*)(v26 + 0x2a0) = (char)(v25 & 0xff);
 		v11 = 0;
-		if (v25 >= 1) {
+		if (v25 > 0) {
 			v10 = (int)(v26 + 0xb4);
 			do {
 				fcn_004011a0(v4, (char*)(v10 - 0x40));

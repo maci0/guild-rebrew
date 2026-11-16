@@ -27,6 +27,7 @@ extern pos14_7f4c00 g_7f4c00;
 void __cdecl fcn_0056bfd0(char* ent)
 {
 	int count;
+	int* ids;
 	float value;
 	float prob;
 	int slot;
@@ -45,18 +46,20 @@ void __cdecl fcn_0056bfd0(char* ent)
 		e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xac));
 		target = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 		if (e2 != 0 && target != 0) {
+			ids = (int*) (ent + 0x8c);
 			count = 8;
 			do {
-				j = *(int*) (ent + 0x8c + (8 - count) * 4);
+				j = *ids;
 				if (j != -1) {
 					slot = (int) gm_LookupEntityRecordById(j);
-					fcn_004c5c80(j);
-					fcn_004c5da0(j, *(int*) (e2 + 1),
+					fcn_004c5c80(*ids);
+					fcn_004c5da0(*ids, *(int*) (e2 + 1),
 					    -1, 0, 0, (char*) 0x6a6aac);
 					fcn_00529160((int) e2, 0,
 					    *(unsigned short*) slot,
 					    (int) ent);
 				}
+				ids++;
 				count--;
 			} while (count != 0);
 			*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
@@ -280,9 +283,10 @@ tail:
 		if (e2 != 0) {
 			slot = (int) fcn_00504b30(e2);
 		}
+		ids = (int*) (ent + 0x8c);
 		count = 8;
 		do {
-			j = *(int*) (ent + 0x8c + (8 - count) * 4);
+			j = *ids;
 			if (j != -1) {
 				target = gm_LookupEntityRecordById(j);
 				if (target != 0) {
@@ -298,6 +302,7 @@ tail:
 					    *(unsigned short*) target, 0);
 				}
 			}
+			ids++;
 			count--;
 		} while (count != 0);
 		fcn_00546190(ent);

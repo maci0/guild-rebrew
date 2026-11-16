@@ -1,4 +1,15 @@
 #include "game_data.h"
+typedef struct {
+	short id;
+	char pad2[0x16a];
+	int f16c;
+	int f170;
+	char pad174[8];
+	int f17c;
+	char pad180[4];
+	int f184;
+	char pad188[0x21c - 0x188];
+} Ent525670;
 extern char g_7f4ca0[];
 extern char* g_entity_type_table;
 
@@ -23,6 +34,7 @@ extern int g_6a23ac, g_773d8c;
 unsigned int __cdecl fcn_00525670(void)
 {
 	char* p;
+	Ent525670* e;
 	char* obj;
 	char* rec;
 	int* q;
@@ -43,22 +55,22 @@ unsigned int __cdecl fcn_00525670(void)
 		for (p = (char*) 0x773db4; (int) p < 0x773dd4; p += 4)
 			*(int*) p = gm_LookupEntityRecordById(*(int*) p);
 	}
-	for (p = g_7f4ca0 + 0x170; (int) p < 0x85a210; p += 0x21c) {
-		if (*(short*) (p - 0x170) != -1) {
-			if (*(int*) (p - 4) != -1)
-				gm_ResolveEntityById((int*) (p - 4), 0, 0, *(int*) (p - 4));
+	for (e = (Ent525670*) g_7f4ca0; (int) e < 0x85a0a0; e++) {
+		if (e->id != -1) {
+			if (e->f16c == -1)
+				e->f16c = 0;
 			else
-				*(int*) (p - 4) = 0;
-			if (*(int*) (p + 0) != -1)
-				gm_ResolveEntityById((int*) (p + 0), 0, 0, *(int*) (p + 0));
+				gm_ResolveEntityById(&e->f16c, 0, 0, e->f16c);
+			if (e->f170 == -1)
+				e->f170 = 0;
 			else
-				*(int*) (p + 0) = 0;
-			v9 = *(int*) (p + 0xc);
-			if (v9 != -1)
-				*(int*) (p + 0xc) = fcn_005463a0(1, 1, v9);
+				gm_ResolveEntityById(&e->f170, 0, 0, e->f170);
+			v9 = e->f17c;
+			if (v9 == -1)
+				e->f17c = 0;
 			else
-				*(int*) (p + 0xc) = 0;
-			*(int*) (p + 0x14) = 0;
+				e->f17c = fcn_005463a0(1, 1, v9);
+			e->f184 = 0;
 		}
 	}
 	v9 = 0;

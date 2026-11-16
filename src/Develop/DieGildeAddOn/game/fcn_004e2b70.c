@@ -1,3 +1,4 @@
+extern int g_68bfb8;
 /* TOD cutscene setup handler, 0x4e2b70..0x4e301e (1199 bytes).  Registered
  * with id 8 through fcn_004e7160 at 0x4e7299; frame is a 0x23EC-byte local
  * block (single `add esp,0x23EC; ret` exit at 0x4e3018/0x4e301e). */
@@ -61,7 +62,7 @@ void __cdecl fcn_004e2b70(void* arg)
 	w[4] = 0x12;
 	w[5] = 0x14;
 	state = 6;
-	*(int*) 0x68bfb8 = 0x702c6;
+	g_68bfb8 = 0x702c6;
 	*(int*) 0x7725c8 = 1;
 	mask &= 0xffff;
 	while (i < 6) {
@@ -90,7 +91,7 @@ void __cdecl fcn_004e2b70(void* arg)
 		if (state == 0) {
 			start = *(volatile int*) 0x6b7fac;
 			while (*(volatile unsigned int*) 0x6b7fac < (unsigned int) (start + 0x339) && state == 0) {
-				fcn_005373e0(0, *(int*) 0x68bfb8);
+				fcn_005373e0(0, g_68bfb8);
 				if (*(int*) 0x14ce8e0 != 0) {
 					state = 1;
 				}
@@ -117,7 +118,7 @@ void __cdecl fcn_004e2b70(void* arg)
 		io_FormatTextBuffer(buf1, 0x40fb, 0x40f5, idxval);
 		if (fcn_004e6eb0(buf1, 0x10) == 0) {
 		dialog_fallback:
-			fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, *(int*) 0x68bfb8);
+			fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, g_68bfb8);
 		} else {
 			int alo;
 			r = *(int*) ((char*) obj + 4);

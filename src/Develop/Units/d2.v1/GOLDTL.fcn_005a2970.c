@@ -66,13 +66,13 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 	int* q;
 	char* p;
 
+	vals[0] = 0;
+	vals[1] = 0;
+	vals[2] = 0;
 	seen[0] = -1;
 	seen[1] = -1;
 	seen[2] = -1;
 	memset(sel, 0, sizeof(sel));
-	vals[0] = 0;
-	vals[1] = 0;
-	vals[2] = 0;
 	handle = fcn_00470820(0, 0, "locations\\Wirtshaus\\DUNKLEECKE");
 	fcn_00471b60(handle);
 	d2_SetForm(handle, 0);

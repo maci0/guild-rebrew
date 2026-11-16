@@ -27,7 +27,7 @@ void __cdecl fcn_004f4970(unsigned int a0)
 	char* other;
 	unsigned short* found;
 	unsigned short* alloc;
-	unsigned char count;
+	int count;
 	int v;
 	int limit;
 	char* fill_dst;
@@ -48,7 +48,7 @@ void __cdecl fcn_004f4970(unsigned int a0)
 	}
 	v = gm_WalkEntityChain((int) a0);
 	count = *(unsigned char*) (slot + 0xd);
-	limit = (unsigned char) (count + 1);
+	limit = count + 1;
 	if (limit > 0xa) {
 		limit = 0xa;
 	}
@@ -72,6 +72,9 @@ void __cdecl fcn_004f4970(unsigned int a0)
 					       *(int*) ((char*) found + 1),
 					       *(int*) ((char*) alloc + 2), 0, "_NACHRICHTEN_HS_25");
 		}
+		return;
+	}
+	if (v <= limit) {
 		return;
 	}
 	if (count >= 9) {

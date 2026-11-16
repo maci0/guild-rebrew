@@ -49,12 +49,14 @@ int __cdecl fcn_004e8360(char* a0)
 	}
 	p = (unsigned char*) &g_9a9220;
 	i = 0;
-	while (*p != *(unsigned char*) a0) {
+	do {
+		if (*p == *(unsigned char*) a0)
+			break;
 		p += 0x18;
 		i++;
-		if ((int) p >= (int) 0x9a9610)
-			return 0;
-	}
+	} while ((int) p < (int) 0x9a9610);
+	if ((int) p >= (int) 0x9a9610)
+		return 0;
 	if (i >= 0x2a)
 		return 0;
 	x = gm_LookupEntityRecordById(((Rec18*) ((unsigned long)&g_9a9220 + i * 0x18))->f04);

@@ -26,7 +26,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	char* found;
 	int tmp[11];
 	float point[3];
-	int map_x = a;
+	int map_x;
 	float height;
 	int v;
 	int r;
@@ -109,6 +109,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 		} else {
 			e2 = (char*) fcn_004d34f0(s);
 			fcn_00455350(e2, e2 + 0x4c, point);
+			map_x = a;
 			r = fcn_0045b990(*(int*) (g_67a370 + 0xb0),
 			    point, &map_x, &countC0, &height);
 			if (r != 0) {

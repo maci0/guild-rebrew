@@ -45,7 +45,8 @@ int __cdecl fcn_004cb450(char* a0, char* a1)
 		k = fcn_00515540(d);
 		fcn_0064d41a(gate, g_68b214, strupr(name + 1));
 	}
-	fcn_0064d41a(gate2, g_68b214, strupr(lpObjektePROT + *(unsigned short*) v4 * 0x41 + 1));
+	name = lpObjektePROT + *(unsigned short*) v4 * 0x41; name++;
+	fcn_0064d41a(gate2, g_68b214, strupr(name));
 	if (k >= 0)
 		ch_UseGate(o, gate2, gate, k, *(int*) (s + 1), *(int*) (d + 2));
 	if (a1) {

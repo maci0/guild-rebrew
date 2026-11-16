@@ -153,20 +153,11 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 	fcn_0052d9d0(v4);
 	h = *(int*) (v4 + 0x61);
 	if (h != 0) {
-		switch (fcn_00500e20((char*) 0x7f4c00)) {
-		case 0:
-			g_773dd4 = 0;
-			break;
-		case 1:
-			g_773dd4 = 1;
-			break;
-		case 2:
-			g_773dd4 = 2;
-			break;
-		case 3:
-			g_773dd4 = 3;
-			break;
-		}
+		res = fcn_00500e20((char*) 0x7f4c00);
+		if (res == 1) g_773dd4 = (unsigned char)res;
+		else if (res == 0) g_773dd4 = (unsigned char)res;
+		else if (res == 2) g_773dd4 = (unsigned char)res;
+		else if (res == 3) g_773dd4 = (unsigned char)res;
 		fcn_005165b0(*(int*)(v4 + 0x61));
 		fcn_00437ac0((char*) g_67a370, (char*) *(int*)(v4 + 0x61), 0x2c0, (void (__cdecl*) (char*)) 0x514d80);
 		f = (float) g_774728 + g_6a2bec;

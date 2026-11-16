@@ -126,7 +126,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 		scale = (gm_RandomFloat01() + 1.0f) * t * *(float*) 0x6628d8 + *(float*) 0x664198;
 	} else {
 		scale = *(double*) 0x6629c8 -
-			((gm_RandomFloat01() + 1.0f) * t * *(float*) 0x66414c + *(double*) 0x6628f0);
+			((gm_RandomFloat01() + 1.0f) * t * 0.3f + *(double*) 0x6628f0);
 	}
 
 	e = gm_FindSlotById(g_773d75, v20);

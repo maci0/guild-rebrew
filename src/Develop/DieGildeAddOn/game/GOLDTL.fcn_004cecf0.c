@@ -52,14 +52,16 @@ unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 		if (maxy >= row + i) {
 			maxy = row + i;
 		}
-		miny = (row - i < 0) ? 0 : row - i;
+		miny = row - i;
+		if (miny < 0) miny = 0;
 		for (y = miny; y <= maxy; y++) {
 			span = i - abs(row - y);
 			maxx = *(int*) (m + 0x20) - 1;
 			if (maxx >= span + col) {
 				maxx = span + col;
 			}
-			minx = (col - span < 0) ? 0 : col - span;
+			minx = col - span;
+			if (minx < 0) minx = 0;
 			for (x = minx; x <= maxx; x++) {
 				if (!fcn_004ceba0(x, y)) {
 					continue;

@@ -84,7 +84,7 @@ int __cdecl fcn_0053dc20(void)
 	d2_SelectRadioGroup(dlg, mode);
 label_53dd68:
 	r = fcn_005373e0(0x53dc20, 0xc6);
-	while (1) {
+	for (;;) {
 		if (!r) {
 			fcn_00469510(dlg);
 			fcn_00471e30(obj);

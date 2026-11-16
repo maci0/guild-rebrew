@@ -18,7 +18,7 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
 	int v10;
 	int v5;
 	int v6;
-	int v7;
+	int v7; unsigned char kind;
 	char buf[0x100];
 
 	(void) a2;
@@ -68,8 +68,8 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
 			*(int*) ((int)g_1015ea0 + 0x1d0 + a4[1] * 0x2f4) = 3;
 			*(int*) ((int)g_1015ea0 + 0x2f0 + a4[1] * 0x2f4) = a4[0];
 		}
-		v5 = *(unsigned char*) (a4[0] + 2);
-		if (v5 != 5 && v5 != 6 && v5 != 7)
+		kind = *(unsigned char*) (a4[0] + 2);
+		if (kind != 5 && kind != 6 && kind != 7)
 			return 0;
 		fcn_0046f740(a0 - 0x20, v8, *(int*) (a4[0] + 0x54), g_772514);
 	} else {

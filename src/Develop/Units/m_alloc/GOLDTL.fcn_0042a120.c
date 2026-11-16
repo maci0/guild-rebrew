@@ -1,4 +1,8 @@
 #include <string.h>
+extern int g_6b7f90, g_6b7f94;
+extern int* g_6b7ed0[16];
+extern int* g_6b7f10[16];
+extern int* g_6b7f50[16];
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void* ptr);
@@ -19,7 +23,7 @@ int __cdecl fcn_0042a120(int* out, int channels, int bits, int rate)
 	int loaded;
 
 	*out = 0;
-	if (*(int*) 0x6b7f90 == 0) {
+	if (g_6b7f90 == 0) {
 		return -1;
 	}
 	index = fcn_0042b100();
@@ -27,34 +31,34 @@ int __cdecl fcn_0042a120(int* out, int channels, int bits, int rate)
 		return -1;
 	}
 	rec = m_alloc(0x1c, (char*) 0x679874);
-	*(int*) ((char*) 0x6b7ed0 + index * 4) = (int) rec;
-	*(short*) (rec + 4) = 1;
-	*(short*) (rec + 6) = (short) channels;
-	*(int*) (rec + 8) = rate;
-	block = bits >> 3;
+	g_6b7ed0[index] = (int*) rec;
+	*(short*) ((char*) g_6b7ed0[index] + 4) = 1;
+	*(short*) ((char*) g_6b7ed0[index] + 6) = (short) channels;
+	*(int*) ((char*) g_6b7ed0[index] + 8) = rate;
+	block = (unsigned int) bits >> 3;
 	loaded = block * channels;
-	*(int*) (rec + 0xc) = loaded * rate;
-	*(short*) (rec + 0x10) = (short) loaded;
-	*(short*) (rec + 0x12) = (short) bits;
-	if (AIL_waveOutOpen(rec, 0, 0, rec + 4) != 0) {
-		m_FreeTracked(rec);
-		*(int*) ((char*) 0x6b7ed0 + index * 4) = 0;
+	*(int*) ((char*) g_6b7ed0[index] + 0xc) = loaded * rate;
+	*(short*) ((char*) g_6b7ed0[index] + 0x10) = (short) loaded;
+	*(short*) ((char*) g_6b7ed0[index] + 0x12) = (short) bits;
+	if (AIL_waveOutOpen(g_6b7ed0[index], 0, 0, (char*) g_6b7ed0[index] + 4) != 0) {
+		m_FreeTracked(g_6b7ed0[index]);
+		g_6b7ed0[index] = 0;
 		return -1;
 	}
-	if (fcn_0042b2c0() == 1 && *(int*) 0x6b7f94 == 0) {
+	if (fcn_0042b2c0() == 1 && g_6b7f94 == 0) {
 		fcn_0042a4d0(AIL_get_preference(1));
 	}
-	*(int*) ((char*) 0x6b7f10 + index * 4) = (int) m_alloc(*(int*) 0x6b7f94 * 4, (char*) 0x679874);
-	*(int*) ((char*) 0x6b7f50 + index * 4) = (int) m_alloc(*(int*) 0x6b7f94 * 4, (char*) 0x679874);
+	g_6b7f10[index] = m_alloc(g_6b7f94 * 4, (char*) 0x679874);
+	g_6b7f50[index] = m_alloc(g_6b7f94 * 4, (char*) 0x679874);
 	/* Reviewed native fill cores at 0x0042a24a-0x0042a26a and 0x0042a284-0x0042a2a4. */
 	{
-		char* d;
-		int n;
-		d = (char*) *(int*) ((char*) 0x6b7f10 + index * 4);
-		n = *(int*) 0x6b7f94 * 4;
+
+
+		channels = (int) g_6b7f10[index];
+		bits = g_6b7f94 * 4;
 		__asm {
-			mov edi, d
-			mov ebx, n
+			mov edi, channels
+			mov ebx, bits
 			xor eax, eax
 			lea ecx, [edi+edi*2]
 			and ecx, 3
@@ -69,11 +73,11 @@ int __cdecl fcn_0042a120(int* out, int channels, int bits, int rate)
 			add ecx, ebx
 			rep stosb
 		}
-		d = (char*) *(int*) ((char*) 0x6b7f50 + index * 4);
-		n = *(int*) 0x6b7f94 * 4;
+		channels = (int) g_6b7f50[index];
+		bits = g_6b7f94 * 4;
 		__asm {
-			mov edi, d
-			mov ebx, n
+			mov edi, channels
+			mov ebx, bits
 			xor eax, eax
 			lea ecx, [edi+edi*2]
 			and ecx, 3
@@ -89,8 +93,8 @@ int __cdecl fcn_0042a120(int* out, int channels, int bits, int rate)
 			rep stosb
 		}
 	}
-	*(int*) (rec + 0x18) = *(int*) 0x6b7f94;
-	*(int*) (rec + 0x14) = 0;
-	*out = (int) rec;
+	*(int*) ((char*) g_6b7ed0[index] + 0x18) = g_6b7f94;
+	*(int*) ((char*) g_6b7ed0[index] + 0x14) = 0;
+	*out = (int) g_6b7ed0[index];
 	return 0;
 }

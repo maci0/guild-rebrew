@@ -3,6 +3,7 @@ extern float g_66293c;
 extern float g_6628fc;
 extern float g_6628b0;
 #include <math.h>
+extern double g_6629c8;
 
 extern int g_1041d0c;
 extern int g_14ce8d8;
@@ -55,11 +56,10 @@ int __cdecl fcn_00449130(void)
 	float v20;
 	float v21;
 	double d;
-	float v9;
-	float v22;
-	float v23;
+	float motion[3];
 	char v7[12];
-	float v10[4];
+	float scale[2];
+	float rotate[3];
 	char v8[16];
 	char v3;
 
@@ -69,12 +69,12 @@ int __cdecl fcn_00449130(void)
 		return 0;
 	v2 = g_14cf72a;
 	v1 = g_14cf71d;
-	v9 = 0.0f;
-	v22 = 0.0f;
-	v23 = 0.0f;
-	v10[0] = 0.0f;
-	v10[1] = 0.0f;
-	v10[2] = 0.0f;
+	motion[0] = 0.0f;
+	motion[1] = 0.0f;
+	motion[2] = 0.0f;
+	rotate[0] = 0.0f;
+	rotate[1] = 0.0f;
+	rotate[2] = 0.0f;
 	v19 = 0.0f;
 	v21 = 0.0f;
 	v20 = 0.0f;
@@ -138,18 +138,18 @@ int __cdecl fcn_00449130(void)
 		v21 = (float) v16 / (float) (unsigned int) g_14ce860;
 		v19 = (float) v17 / (float) (unsigned int) g_14ce864;
 		d = (double) (unsigned int) g_14ce860;
-		v10[0] = (float) d
-			/ (((float) fabs((float) v16) + *(double*) 0x6629c8)
+		scale[0] = (float) d
+			/ (((float) fabs((float) v16) + g_6629c8)
 			* g_66293c);
-		if (v10[0] > g_6628b0)
-			v10[0] = g_6628b0;
-		v10[1] = ((float) fabs((float) v17) + *(double*) 0x6629c8)
+		if (scale[0] > g_6628b0)
+			scale[0] = g_6628b0;
+		scale[1] = ((float) fabs((float) v17) + g_6629c8)
 			* g_66293c
 			/ (float) (unsigned int) g_14ce864;
-		if (v10[1] > g_6628b0)
-			v10[1] = g_6628b0;
-		v21 = v21 * v10[0] * *(float*) 0x662d00;
-		v19 = v19 * v10[1] * *(float*) 0x662cfc;
+		if (scale[1] > g_6628b0)
+			scale[1] = g_6628b0;
+		v21 = v21 * scale[0] * *(float*) 0x662d00;
+		v19 = v19 * scale[1] * *(float*) 0x662cfc;
 		g_6b85ac = (int) g_14cf902;
 		g_6b85a8 = (int) g_14cf900;
 	}
@@ -159,11 +159,11 @@ int __cdecl fcn_00449130(void)
 		fcn_004125c0((int) g_14ce8c0, (int) g_14ce8c2);
 	}
 	if (g_14ce904 != 0) {
-		v23 = v23 + g_662cf8;
+		rotate[2] = rotate[2] + g_662cf8;
 		v14 = 1;
 	}
 	else if (g_14ce900 != 0) {
-		v23 = v23 - g_662cf8;
+		rotate[2] = rotate[2] - g_662cf8;
 		v14 = 1;
 	}
 	if (g_14cf70f != 0) {
@@ -173,17 +173,17 @@ int __cdecl fcn_00449130(void)
 		goto label_4495a3;
 	}
 	if (v2 != 0 || v1 != 0) {
-		v22 = v18;
-		v10[3] = v19;
+		motion[1] = v18;
+		rotate[1] = v19;
 	}
 	else {
-		v9 = v20;
-		v22 = v18;
-		v10[2] = v21;
-		v10[3] = (float) ((unsigned char) g_14cf70f * 0x28) + v19;
+		motion[0] = v20;
+		motion[1] = v18;
+		rotate[0] = v21;
+		rotate[1] = (float) ((unsigned char) g_14cf70f * 0x28) + v19;
 	}
 	if (v14 != 0 || v15 != 0) {
-		v3 = fcn_00448cc0(g_1041d0c, &v10[0], &v9, g_6b8014, v8, v7);
+		v3 = fcn_00448cc0(g_1041d0c, rotate, motion, g_6b8014, v8, v7);
 		v15 = (char) ((unsigned char) v3 >> 1);
 		v14 = v3 & 1;
 		if (v14 != 0)
