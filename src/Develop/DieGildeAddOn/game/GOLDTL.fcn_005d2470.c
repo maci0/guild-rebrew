@@ -59,10 +59,10 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 	} else {
 		v4 = (float) gm_WalkEntityChain(SHP_ID) * 0.05f;
 		v8 = gm_AccumulateTyped2(SHP_REC);
-		if ((float) v8 > v4) {
-			selected = (float) gm_WalkEntityChain(SHP_ID) * 0.05f;
-		} else {
+		if (!((float) v8 > v4)) {
 			selected = (float) gm_AccumulateTyped2(SHP_REC);
+		} else {
+			selected = (float) gm_WalkEntityChain(SHP_ID) * 0.05f;
 		}
 		ebp = (int) selected;
 		if (ebp < 1) return 0;

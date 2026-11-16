@@ -51,7 +51,7 @@ int __cdecl fcn_004741e0(short x, short y, char* name)
 
     strcpy(path, name);
     if (!I32(0x6ed984)) {
-        strcpy(path, "forms\\");
+        strcpy(path, (char*)0x5fe608);
         strcat(path, name);
         strcat(path, ".form");
     }

@@ -35,7 +35,7 @@ char __cdecl fcn_004463b0(char* terrain, float* position, char coarse, int* outX
     if (*outX < 0 || *outX >= size || *outY < 0 || *outY >= size)
         return 0;
     if (!height)
-        return 1;
+        goto fail_1;
     triangles = *(unsigned char**)(terrain + 0x24);
     step = 1;
     if (coarse) {
@@ -46,8 +46,8 @@ char __cdecl fcn_004463b0(char* terrain, float* position, char coarse, int* outX
         }
     }
     ix = ~(step - 1) & *outX;
-    iz = ~(step - 1) & *outY;
     u = (x - (int)ix) / (float)step;
+    iz = ~(step - 1) & *outY;
     v = (z - (int)iz) / (float)step;
 
 
@@ -78,5 +78,7 @@ char __cdecl fcn_004463b0(char* terrain, float* position, char coarse, int* outX
         }
     }
     *height = (dx * u + dz * v + base) * F32(terrain + 0xc4) + F32(terrain + 0x94);
-    return 1;
+    goto fail_1;
+fail_1:
+	return 1;
 }

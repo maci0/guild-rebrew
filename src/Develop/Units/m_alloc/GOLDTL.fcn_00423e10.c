@@ -16,10 +16,7 @@ int __cdecl fcn_00423e10(char* s)
 	char* fp;
 	int fn;
 
-	if (g_6b7d68 == 0) {
-		return -1;
-	}
-	if (fcn_00423ac0(s) != 0) {
+	if (g_6b7d68 == 0 || fcn_00423ac0(s) != 0) {
 		return -1;
 	}
 	list = (char*) fcn_004239b0();

@@ -24,10 +24,7 @@ int __cdecl fcn_004d31d0(char* self, int a1, int a2, int a3,
 	if (a3 > 0) {
 		k = a2;
 		do {
-			row_hi = *(int*) (map + 0x20) - 1;
-			if (row_hi > i + a2) {
-				row_hi = i + a2;
-			}
+			row_hi = *(int*) (map + 0x20) - 1 > i + a2 ? i + a2 : *(int*) (map + 0x20) - 1;
 			lo = k < 0 ? 0 : k;
 			n = a2 - lo;
 			for (r = lo; r <= row_hi; r++, n--) {

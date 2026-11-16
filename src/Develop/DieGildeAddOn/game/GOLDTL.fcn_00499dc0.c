@@ -96,9 +96,9 @@ int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)
 						if (cnt.free != 0) {
 							a.valid = 1;
 							a.v[0] = slot.b;
+							b.v[0] = *(int*) (p + 1);
 							a.v[1] = 1;
 							b.valid = 4;
-							b.v[0] = *(int*) (p + 1);
 							b.v[1] = -1;
 							b.v[3] = 0x1b;
 							*out1 = a;

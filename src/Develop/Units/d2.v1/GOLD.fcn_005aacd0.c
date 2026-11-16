@@ -134,15 +134,15 @@ int __cdecl fcn_005aacd0(unsigned char* a1, int a2, int a3)
 	fcn_00514400(*(unsigned short*) (a1 + 0x27), 1, 2, f.txt7b0);
 	fcn_00514400(*(unsigned short*) (a1 + 0x25), 1, 2, f.txt760);
 	r = (char*) fcn_0050dc90(a1);
-	if (r != 0) {
-		fcn_00514400(*(unsigned short*) r, 1, 1, f.txt204);
-	} else {
+	if (r == 0) {
 		src = *(char**) 0x1440ac8;
 		dst = f.txt204;
 		do {
 			c = *src++;
 			*dst++ = c;
 		} while (c != 0);
+	} else {
+		fcn_00514400(*(unsigned short*) r, 1, 1, f.txt204);
 	}
 	fcn_00475f60(*(int*) (book + 0x228), 3);
 	f.v40 = fcn_00475b70(*(int*) (book + 0x228), 3, 2);

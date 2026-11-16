@@ -69,8 +69,8 @@ int __cdecl fcn_004a8070(int value, int* out1, int* out2, int* out3, int* out4)
 		}
 	}
 	if (groups1 == 1 && max2 == 5) {
-		mode = 6;
 		*out3 = best2;
+		mode = 6;
 	}
 	if (groups2 == 0) {
 		if (counts1[0] != 0 && counts1[5] != 0) {

@@ -7,7 +7,6 @@ void __cdecl fcn_0047a2b0(int index);
 void __cdecl fcn_0047a090(void)
 {
 	int delta;
-	int old;
 	int ebp;
 	int index;
 	char* p;
@@ -16,12 +15,11 @@ void __cdecl fcn_0047a090(void)
 	char cl;
 	unsigned short ax;
 
-	old = g_772600;
 	ebp = 1;
-	if (g_6b7fb0 - old == 0) {
+	if (g_6b7fb0 - g_772600 == 0) {
 		return;
 	}
-	delta = (unsigned int) (g_6b7fb0 - old) < 1U ? 1 : g_6b7fb0 - old;
+	delta = (unsigned int) (g_6b7fb0 - g_772600) < 1U ? 1 : g_6b7fb0 - g_772600;
 	g_772600 = g_6b7fb0;
 	index = 0;
 	for (p = (char*) 0x100e7a4; (int) p < 0x100eb64; p += 0x14, index++) {

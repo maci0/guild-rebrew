@@ -58,8 +58,8 @@ char* __cdecl fcn_00546590(char* a0, char* name, char* entity)
 	*(char**) (a0 + 0xc) = obj;
 	*(char**) (a0 + 8) = entity;
 	if (obj != 0) {
-		obj[0x216] |= 3;
 		obj[0x214] &= 0x7f;
+		obj[0x216] |= 3;
 		obj[0x217] &= 0xfe;
 		*(int*) (obj + 0x220) = 5;
 		color.r = 0x80;

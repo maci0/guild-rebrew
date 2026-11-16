@@ -96,7 +96,13 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 
 	while (*p != 0) {
 		c = *p;
-		if (c == ' ') {
+		if (c != ' ') {
+			if (!inToken) {
+				inToken = 1;
+			}
+			*wp = c;
+			wp++;
+		} else {
 			if (inToken) {
 				len = 8;
 				start = buf + 2;
@@ -117,12 +123,6 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 				wp = buf;
 				inToken = 0;
 			}
-		} else {
-			if (!inToken) {
-				inToken = 1;
-			}
-			*wp = c;
-			wp++;
 		}
 		p++;
 	}

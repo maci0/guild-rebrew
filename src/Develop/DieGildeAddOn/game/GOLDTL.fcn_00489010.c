@@ -90,5 +90,5 @@ void __cdecl fcn_00489010(char* e)
 		}
 next:
 		p += 0x21c;
-	} while (p < (char*) 0x85a224);
+	} while ((int) p < 0x85a224);
 }

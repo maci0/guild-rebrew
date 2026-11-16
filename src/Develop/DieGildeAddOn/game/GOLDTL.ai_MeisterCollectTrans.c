@@ -93,9 +93,9 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 					if (found != *(char**) (e + 0x16c)) {
 						memset(pkt, 0, 0xf8);
 						pkt[4] = 0xf;
-						pkt[0x36] = 2;
 						*(int*) (pkt + 0x08) = *(int*) (g_7f4ca4 +
 						                                *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c);
+						pkt[0x36] = 2;
 						*(int*) (pkt + 0x28) = g_7f4c00;
 						*(int*) (pkt + 0x2c) = g_7f4c04;
 						*(int*) (pkt + 0x30) = g_7f4c08;

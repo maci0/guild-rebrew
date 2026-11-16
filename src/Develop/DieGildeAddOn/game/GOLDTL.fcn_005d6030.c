@@ -8,7 +8,7 @@ extern int g_666018;
 extern int g_66601c;
 
 int __cdecl gm_LookupEntityRecordById(unsigned int);
-int __cdecl gm_RandomMod(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl io_FormatTextBuffer(char*, int);

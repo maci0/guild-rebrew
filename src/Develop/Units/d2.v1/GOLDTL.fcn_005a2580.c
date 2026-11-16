@@ -138,10 +138,10 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 				sel[j].used = (sel[j].who != 0);
 				fcn_005ca560(&sel[j]);
 				fcn_005ca740(sel[j].x10, sel[j].x14, g_772514, 0x54, &sel[j], 1);
-				if (seen[j] != -1) {
-					io_FormatTextBuffer(buf, 0x18a5, *(int*) (idx + j) * 5 + 0x13fd, vals[j]);
-				} else {
+				if (seen[j] == -1) {
 					io_FormatTextBuffer(buf, 0x18a6);
+				} else {
+					io_FormatTextBuffer(buf, 0x18a5, *(int*) (idx + j) * 5 + 0x13fd, vals[j]);
 				}
 				fcn_005c91c0(buf, x, line, 0xf0, 0x54);
 				line += 0x69;

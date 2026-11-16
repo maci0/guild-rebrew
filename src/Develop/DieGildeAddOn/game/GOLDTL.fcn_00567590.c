@@ -195,14 +195,13 @@ next0:
 							}
 						}
 						else {
-							if (out2 != -1) {
+							if (out2 == -1) {
+								fcn_004c5da0(*(int*) (p - 0x180), out1, out2, 0, 1, "Go home");
+							} else {
 								if (found >= 0x40) {
 									goto after1;
 								}
 								fcn_004c5da0(*(int*) (p - 0x180), out1, out2, 0, 0, "Go home");
-							}
-							else {
-								fcn_004c5da0(*(int*) (p - 0x180), out1, out2, 0, 1, "Go home");
 							}
 						}
 after1:

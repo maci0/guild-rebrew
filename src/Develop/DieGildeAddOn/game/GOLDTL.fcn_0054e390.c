@@ -77,13 +77,13 @@ void __cdecl fcn_0054e390(char* e)
 			do {
 				if (*(int*) p != -1) {
 					u = gm_LookupEntityRecordById(*(int*) p);
-					if (u == 0) {
-						*(int*) p = -1;
-					} else {
+					if (u != 0) {
 						fcn_00529160(own, 0, *(unsigned short*) u, e);
 						fcn_004c5c80(*(int*) p);
 						fcn_004c5da0(*(int*) p, *(int*) (own + 1), -1, 0, 0,
 						             (char*) 0x6a5ad8);
+					} else {
+						*(int*) p = -1;
 					}
 				}
 				p += 4;

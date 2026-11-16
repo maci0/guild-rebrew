@@ -77,9 +77,7 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 		do {
 			c = *s;
 			if (in_label == 0) {
-				if (c != '_') {
-					*out++ = (char) c;
-				} else {
+				if (c == '_') {
 					n = sizeof(label); p = label; __asm {
 						mov edi, p
 						mov ebx, n
@@ -101,6 +99,8 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 					p = label + 1;
 					in_label = 1;
 					dashes = 0;
+				} else {
+					*out++ = (char) c;
 				}
 				s++;
 				continue;

@@ -5,8 +5,8 @@ typedef struct Hit4ad6a0 {
 	float f;
 } Hit4ad6a0;
 
-/* Message record handed to the guild request buffer. The native frame holds
- * 0xe8 bytes for it; only the fields written below are evidenced. */
+/* Message record handed to the guild request buffer: the 0xf8-byte guild request
+ * record, only the fields written below are evidenced. */
 typedef struct Msg4ad6a0 {
 	char pad0[4];
 	unsigned char type;   /* +0x04 */
@@ -26,7 +26,7 @@ typedef struct Msg4ad6a0 {
 	char pad37[0x31];     /* +0x37 */
 	int unk_68;           /* +0x68 */
 	int unk_6c;           /* +0x6c */
-	char pad70[0x78];     /* +0x70 */
+	char pad70[0x88];     /* +0x70 */
 } Msg4ad6a0;
 
 extern int g_7728d0;

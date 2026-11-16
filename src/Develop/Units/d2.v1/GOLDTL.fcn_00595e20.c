@@ -98,12 +98,12 @@ int __cdecl fcn_00595e20(char* a0, char* a1)
 
 	ent = (unsigned short*) fcn_00502cd0(*(int*) (a1 + 0x14), 1, 5);
 	while (ent != 0) {
-		if (cat == 2) {
-			if (*(char*) (lpObjektePROT + *ent * 0x41) == 0x17)
-				goto add16;
-		} else {
+		if (cat != 2) {
 			q = lpObjektePROT + *ent * 0x41;
 			if (*q == 0x17 || *q == 0x25)
+				goto add16;
+		} else {
+			if (*(char*) (lpObjektePROT + *ent * 0x41) == 0x17)
 				goto add16;
 		}
 

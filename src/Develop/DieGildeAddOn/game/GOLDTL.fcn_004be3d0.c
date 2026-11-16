@@ -61,11 +61,10 @@ int __cdecl fcn_004be3d0(int* a0, char* a1, char* a2, char* a3)
 	n = g_772900;
 	g_10058a0[n].id = v;
 	*(int*) (g_1015ea0 + v * 0x2f4 + 0x58) = 1;
-	v = g_10058a0[g_772900].id;
 	if (g_6816d8 == -1) {
-		g_6816d8 = d2_CreateRadioGroup(1, v);
+		g_6816d8 = d2_CreateRadioGroup(1, g_10058a0[g_772900].id);
 	} else {
-		fcn_00469470(g_6816d8, v);
+		fcn_00469470(g_6816d8, g_10058a0[g_772900].id);
 	}
 	n = g_772900;
 	g_10058a0[n].b = (int) rec;

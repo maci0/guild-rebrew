@@ -142,7 +142,9 @@ void __cdecl fcn_005422c0(unsigned int arg)
 				obj = (unsigned char*) fcn_00502cd0(*(int*) (rec + 0x5d), 1, 0, 0xca);
 				while (obj != 0) {
 					count++;
-					if (*(unsigned char*) (obj + 0x37) > 5) {
+					if (*(unsigned char*) (obj + 0x37) <= 5) {
+						fcn_004c5a60(*(int*) (rec + 1), -1, *(int*) (obj + 2));
+					} else {
 						r = (unsigned char*) gm_SearchTable67(*(int*) (obj + 0x2a));
 						if (r != 0) {
 							cv = (char) (*(unsigned char*) (obj + 0x37) - fcn_0050c4e0(r) * 2);
@@ -156,9 +158,6 @@ void __cdecl fcn_005422c0(unsigned int arg)
 						else {
 							fcn_004c5120(*(int*) (obj + 2));
 						}
-					}
-					else {
-						fcn_004c5a60(*(int*) (rec + 1), -1, *(int*) (obj + 2));
 					}
 					obj = (unsigned char*) gm_NextEntityQueryMatch();
 				}

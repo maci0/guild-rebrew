@@ -89,11 +89,11 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 		for (i = 0; i < 4; i++) {
 			v = a0[i];
 			if (v != 0) {
-				if ((int) first >= 0) {
+				if ((int) first < 0) {
+					first = *(unsigned int*) (v + 0x30);
+				} else {
 					if (first != *(unsigned int*) (v + 0x30))
 						ok = 0;
-				} else {
-					first = *(unsigned int*) (v + 0x30);
 				}
 			}
 		}

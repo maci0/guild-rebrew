@@ -66,7 +66,7 @@ void __cdecl fcn_004d0070(void)
 					continue;
 				}
 
-				if (*(unsigned char*) (e + 8) > 4 || *(unsigned char*) (e + 8) == 0) {
+				if (*(unsigned char*) (e + 8) > 4 || *(unsigned char*) (e + 8) <= 0) {
 					continue;
 				}
 

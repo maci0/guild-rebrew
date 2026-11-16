@@ -50,7 +50,6 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 	int count;
 	int i;
 	int id1;
-	int id2;
 
 	saved = 0;
 	if (type == (unsigned int) st->type) {
@@ -60,7 +59,10 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 	io_AppendText((int) g_6811b0);
 	d2_SetForm(st->handle, 4);
 	io_AppendText((int) g_6811b0);
-	fcn_00533f40(0, 0, st->owner, st->slot, 0x35, &id2, &id1, (int*) &type);
+	{
+		int id2;
+		fcn_00533f40(0, 0, st->owner, st->slot, 0x35, &id2, &id1, (int*) &type);
+	}
 
 	item = (SlotItem*) FindSlotEntryFiltered(0, a0, 0, 0, st->type);
 	count = 0;

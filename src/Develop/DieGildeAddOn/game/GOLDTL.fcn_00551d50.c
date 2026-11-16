@@ -93,6 +93,8 @@ void __cdecl fcn_00551d50(char* a0)
 			}
 		}
 		fcn_004c6330(*(int*) (row + 4));
+		fcn_00546190(a0);
+		return;
 	}
 	fcn_00546190(a0);
 }

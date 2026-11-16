@@ -85,8 +85,8 @@ int __cdecl fcn_004e7d40(char* a0, int a1)
 	if (g_9a9220[i].xc >= 4) {
 		return -1;
 	}
-	info.owner = *(int*) (a0 + 4);
 	info.sel = g_9a9220[i].id;
+	info.owner = *(int*) (a0 + 4);
 	fcn_004c4eb0((char*) 0x67eef4);
 	res = fcn_004c6360(&info);
 	fcn_004c4ef0((char*) 0x67eef4);
