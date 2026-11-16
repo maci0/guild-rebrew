@@ -177,6 +177,9 @@ on unavailability; writes use a durable `.rebrew/metadata-journal.toml` and
 per-backend replication receipts. Back up those files. Recovered writers catch
 up on the next write or `rebrew metadata reconcile`; `--dry-run` previews.
 Independent changes conflict rather than being overwritten by wall-clock order.
+This project replicates: SQLite (`rebrew-metadata.sqlite3`, gitignored) is read
+first and the TOML stores stay a written, git-tracked replica. A clone without
+the database reads TOML; its first write populates SQLite.
 `source = "naked"`, STRUCT/CALLERS information and support file purposes are
 metadata-only. Old inline blocks and earlier metadata formats are rejected;
 ordinary readers have no compatibility parser or legacy fallback. Use

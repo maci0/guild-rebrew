@@ -116,3 +116,7 @@ compile_commands.json
 /rebrew-types.toml.lock
 /rebrew-libraries.toml.lock
 /rebrew-project.toml.lock
+
+# SQLite metadata replica (primary read source); TOML stores are the tracked copy.
+/rebrew-metadata.sqlite3
+/rebrew-metadata.sqlite3.lock
