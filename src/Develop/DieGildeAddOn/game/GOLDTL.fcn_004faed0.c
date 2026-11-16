@@ -60,8 +60,8 @@ void __cdecl fcn_004faed0(float* out)
 
 	oi = (int*) out;
 	total = 0;
-	slot0_count = 0;
 	slot1_count = 0;
+	slot0_count = 0;
 	sum_a = 0;
 	sum_b = 0;
 	sum_c = 0;

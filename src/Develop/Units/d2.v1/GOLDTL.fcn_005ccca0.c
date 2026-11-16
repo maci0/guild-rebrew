@@ -94,8 +94,9 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 	d2_SetForm(h, 1);
 	io_AppendText(name);
 	d2_SetForm(h, 4);
-	step = (*(int*) ((unsigned long)&g_1015f40 + g_772514 * 0x3cc + 0x10) - 0x107) / 7;
-	rem = (*(int*) ((unsigned long)&g_1015f40 + g_772514 * 0x3cc + 0x10) - 0x107) % 7;
+	rem = *(int*) ((unsigned long)&g_1015f40 + g_772514 * 0x3cc + 0x10) - 0x107;
+	step = rem / 7;
+	rem = rem % 7;
 	y = 0;
 	for (i = 0; i < 8;) {
 		g_6ac8a8[i].element = fcn_00468df0(

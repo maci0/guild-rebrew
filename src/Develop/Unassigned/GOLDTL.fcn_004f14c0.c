@@ -64,7 +64,7 @@ int __cdecl fcn_004f14c0(G175_REC* a, int na, G175_REC* b, int nb)
 	}
 	if (best_a == 0) {
 		if (best_b != 0) {
-			return 1;
+			goto fail_1;
 		}
 		return -2;
 	}
@@ -72,7 +72,9 @@ int __cdecl fcn_004f14c0(G175_REC* a, int na, G175_REC* b, int nb)
 		return -1;
 	}
 	if (sum_b > sum_a) {
-		return 1;
+		goto fail_1;
 	}
 	return (sum_b >= sum_a) - 1;
+fail_1:
+	return 1;
 }

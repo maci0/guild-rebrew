@@ -140,7 +140,7 @@ void __cdecl fcn_00512ee0(void)
 	memset(counts, 0, sizeof(counts));
 	memset(found, 0, sizeof(found));
 	memset(handles, 0, sizeof(handles));
-	for (e = g_7f4ca0 + 2; (int)e < 0x85a0a2; e += 0x21c) {
+	for (e = (char *)0x7f4ca2; (int)e < 0x85a0a2; e += 0x21c) {
 		if (total >= 8)
 			break;
 		if (*(unsigned short *)(e - 2) != 0xffff
@@ -444,7 +444,7 @@ handles_done:
 	}
 	if (g_6a3440 == 5) {
 		k = 0;
-		for (e = g_7f4ca0 + 2; (int)e < (int)(g_7f4ca0 + 0x65402); e += 0x21c) {
+		for (e = (char *)0x7f4ca2; (int)e < 0x85a0a2; e += 0x21c) {
 			if (*e == 6)
 				break;
 			k++;
@@ -464,11 +464,11 @@ handles_done:
 	fcn_00547130();
 	fcn_005471c0();
 	outer = 0;
-	for (e = g_7f4ca0 + 2; e < g_7f4ca0 + 0x651e6; e += 0x21c) {
+	for (e = (char *)0x7f4ca2; (int)e < 0x859e86; e += 0x21c) {
 		if (*e == 6 || *e == 7 || *e == 5 || *e == 3 || *e == 4 || *e == 2) {
 			total = 0;
 			if (outer + 1 < 0x300) {
-				for (f = e + 0x21c; f < g_7f4ca0 + 0x65402; f += 0x21c) {
+				for (f = e + 0x21c; (int)f < 0x85a0a2; f += 0x21c) {
 					if (!(*f == 6 || *f == 7 || *f == 5 || *f == 3 || *f == 4
 								|| *f == 2))
 						continue;

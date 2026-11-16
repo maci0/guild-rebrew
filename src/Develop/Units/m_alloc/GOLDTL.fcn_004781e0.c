@@ -62,9 +62,9 @@ unsigned int* __cdecl fcn_004781e0(int a0, int a1, int a2, int a3, int a4, char 
 		} while (i < a3);
 	}
 	if (x0 < x1 || y0 < y1) {
-		y1 = 0;
-		x0 = 0;
 		x1 = 0;
+		x0 = 0;
+		y1 = 0;
 		y0 = 0;
 	}
 	*(unsigned short*) (v6 + 4) = x1;

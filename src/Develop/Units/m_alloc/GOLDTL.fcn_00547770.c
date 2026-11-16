@@ -132,8 +132,8 @@ void __cdecl fcn_00547770(void)
         int msk = 0;
         int zer = 0;
         a = cnt[4] - cnt2[4];
-        b = cnt[19] - cnt2[19];
         c = cnt[16] - cnt2[16];
+        b = cnt[19] - cnt2[19];
         sel = 0;
         if (a < 3) {
             msk |= 1;

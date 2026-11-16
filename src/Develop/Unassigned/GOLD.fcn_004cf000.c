@@ -114,7 +114,7 @@ void __cdecl fcn_004cf000(void)
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				fcn_00442d50((int) e34, (unsigned char) found);
 				if (found) {
-					t = (int) ((*(float*) 0x5eb784) - best * (*(float*) 0x5eb7f0) * (*(float*) 0x5eb784));
+					t = (int) (255.0f - best * 0.01f * 255.0f);
 					memset(&color, 0, sizeof(color));
 					color.c = 0; color.a = (unsigned char) t;
 					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
@@ -143,9 +143,9 @@ void __cdecl fcn_004cf000(void)
 					o = *(char**) (e + 0x184);
 					s = (char*) *(int*) (o + 0x128);
 					if (s == 0 || (*(char*) (s + 9) != 0x2d && *(char*) (s + 9) != 0x3a)) {
-						if ((*(double*) 0x5edc48) < (double) fabs(v)) {
+						if (0.08 < (double) fabs(v)) {
 							e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
-							fcn_00438d70(e34, *(int*) (e34 + 0x84), *(float*) (e34 + 0x88) + v * (*(double*) 0x5eb9b0), *(int*) (e34 + 0x8c));
+							fcn_00438d70(e34, *(int*) (e34 + 0x84), *(float*) (e34 + 0x88) + v * 0.25, *(int*) (e34 + 0x8c));
 						}
 					}
 				}

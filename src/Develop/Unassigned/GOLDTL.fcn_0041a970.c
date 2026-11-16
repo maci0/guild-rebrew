@@ -15,6 +15,7 @@ extern int __cdecl fcn_0041ba40(void);
 /* ADDRESS: GOLDTL 0x0041a970 */
 char __cdecl fcn_0041a970(int a0, INDEXFN a1, unsigned char a2, unsigned char a3)
 {
+	int ready;
 	int slot;
 	int best;
 	int index;
@@ -28,8 +29,9 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, unsigned char a2, unsigned char a3
 	char *csrc;
 	int ccnt;
 
+	ready = *(int *) 0x6b5ddc;
 	*(int *) 0x14ce730 = a0;
-	if (*(int *) 0x6b5ddc == 0 || *(unsigned int *) 0x6b5de8 <= 0)
+	if (ready == 0 || *(unsigned int *) 0x6b5de8 <= 0)
 		goto done;
 	slot = -1;
 	*(unsigned char *) 0x6b5dec = (a1 != 0);

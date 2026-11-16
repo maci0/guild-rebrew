@@ -56,8 +56,8 @@ void __cdecl fcn_00536bb0(void)
 	}
 	f1 = g_7e4470[idx];
 	f2 = g_7e44d0[idx];
-	lim = g_7e43a8[idx];
 	i = g_7e43a8[(idx + 0x17) % 0x18];
+	lim = g_7e43a8[idx];
 	if (lim < i) {
 		lim = i;
 	}

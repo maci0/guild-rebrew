@@ -21,6 +21,7 @@ void __cdecl fcn_004fdd70(HeadSet* hs)
 	char icon[0x80];
 	char* p;
 	int j;
+	int off;
 	int i;
 	int* slot;
 
@@ -36,8 +37,8 @@ void __cdecl fcn_004fdd70(HeadSet* hs)
 	for (i = 0, slot = hs->head; i < 4; slot++, i++) {
 		fcn_0064d41a(icon, (char*) 0x69649c, base, i, kind);
 		*slot = 0xff;
-		for (j = 0; j < g_773d40; j++) {
-			p = g_773d44 + j * 0x30;
+		for (j = 0, off = 0; j < g_773d40; j++, off += 0x30) {
+			p = g_773d44 + off;
 			if (*p == 0) {
 				break;
 			}
@@ -47,8 +48,8 @@ void __cdecl fcn_004fdd70(HeadSet* hs)
 		}
 		fcn_0064d41a(icon, (char*) 0x696488, base, i);
 		*slot = 0xff;
-		for (j = 0; j < g_773d40; j++) {
-			p = g_773d44 + j * 0x30;
+		for (j = 0, off = 0; j < g_773d40; j++, off += 0x30) {
+			p = g_773d44 + off;
 			if (*p == 0) {
 				break;
 			}

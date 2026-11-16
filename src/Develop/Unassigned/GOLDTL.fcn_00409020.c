@@ -21,10 +21,7 @@ int __cdecl fcn_00409020(char* obj)
 		return result;
 	}
 	start = *(int*) (task + 0xf8);
-	limit = count - 2;
-	if (start + 2 < limit) {
-		limit = start + 2;
-	}
+	limit = start + 2 < count - 2 ? start + 2 : count - 2;
 	if (start < 1) {
 		start = 1;
 	}

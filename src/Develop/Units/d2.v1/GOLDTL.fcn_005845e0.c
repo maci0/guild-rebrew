@@ -50,8 +50,8 @@ int __cdecl fcn_005845e0(void)
 
 	if (fcn_005373e0((char*) 0x5845e0, 0x86) != 0) {
 		do {
-			n = 0;
-			for (k = 0; k < 5; k++) {
+			n = k = 0;
+			for (; k < 5; k++) {
 				index = ids[k];
 				index = index * 0x40 - index;
 				index = index * 0xc;

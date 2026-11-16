@@ -17,9 +17,10 @@ void __cdecl ch_ClearSitting(unsigned char* ch)
 	if ((ch[0x8c] & 0x10) != 0) {
 		p = *(unsigned char**) (ch + 0x74);
 		if (p != 0) {
-			if ((*(int**) (ch + 0x34))[0x73] == 0)
+			if ((*(int**) (ch + 0x34))[0x73] == 0) {
 				fcn_00402aa0(ch);
-			p = *(unsigned char**) (ch + 0x74);
+				p = *(unsigned char**) (ch + 0x74);
+			}
 			ent = *(int**) (ch + 0x34);
 			q = *(char**) (p + 0x68);
 			if (q != 0)

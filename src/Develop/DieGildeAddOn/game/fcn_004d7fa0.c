@@ -27,7 +27,6 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	int tmp[11];
 	float point[3];
 	int map_x;
-	float height;
 	int v;
 	int r;
 	double ratio;
@@ -107,6 +106,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 			*(int*) (tmp + 5) = *(int*) (e2 + 4);
 			fcn_004c67c0(*(int*) (a + 0x10), tmp);
 		} else {
+			float height;
 			e2 = (char*) fcn_004d34f0(s);
 			fcn_00455350(e2, e2 + 0x4c, point);
 			map_x = a;

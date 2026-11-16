@@ -27,23 +27,7 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 		*((float*) (a0 + 8)) = -1.0e10f;
 		*((float*) (a0 + 9)) = -1.0e10f;
 		*((float*) (a0 + 10)) = -1.0e10f;
-		if (a2 >= 2) {
-			for (p = (unsigned int*) a0[0xf]; p != 0; p = (unsigned int*) p[1]) {
-				v = *(unsigned int*) (*p + 0x1ec);
-				*((float*) (a0 + 4)) = (*((float*) (a0 + 4)) < *((float*) (v + 0x90)))
-					? *((float*) (a0 + 4)) : *((float*) (v + 0x90));
-				*((float*) (a0 + 5)) = (*((float*) (a0 + 5)) < *((float*) (v + 0x94)))
-					? *((float*) (a0 + 5)) : *((float*) (v + 0x94));
-				*((float*) (a0 + 6)) = (*((float*) (a0 + 6)) < *((float*) (v + 0x98)))
-					? *((float*) (a0 + 6)) : *((float*) (v + 0x98));
-				*((float*) (a0 + 8)) = (*((float*) (a0 + 8)) > *((float*) (v + 0xa0)))
-					? *((float*) (a0 + 8)) : *((float*) (v + 0xa0));
-				*((float*) (a0 + 9)) = (*((float*) (a0 + 9)) > *((float*) (v + 0xa4)))
-					? *((float*) (a0 + 9)) : *((float*) (v + 0xa4));
-				*((float*) (a0 + 10)) = (*((float*) (a0 + 10)) > *((float*) (v + 0xa8)))
-					? *((float*) (a0 + 10)) : *((float*) (v + 0xa8));
-			}
-		} else {
+		if (a2 <= 1) {
 			for (p = (unsigned int*) a0[0xf]; p != 0; p = (unsigned int*) p[1]) {
 				if (fcn_004546e0((char*) *p, lo, hi)) {
 					*((float*) (a0 + 4)) = (*((float*) (a0 + 4)) < lo[0])
@@ -59,6 +43,22 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 					*((float*) (a0 + 10)) = (*((float*) (a0 + 10)) > hi[2])
 						? *((float*) (a0 + 10)) : hi[2];
 				}
+			}
+		} else {
+			for (p = (unsigned int*) a0[0xf]; p != 0; p = (unsigned int*) p[1]) {
+				v = *(unsigned int*) (*p + 0x1ec);
+				*((float*) (a0 + 4)) = (*((float*) (a0 + 4)) < *((float*) (v + 0x90)))
+					? *((float*) (a0 + 4)) : *((float*) (v + 0x90));
+				*((float*) (a0 + 5)) = (*((float*) (a0 + 5)) < *((float*) (v + 0x94)))
+					? *((float*) (a0 + 5)) : *((float*) (v + 0x94));
+				*((float*) (a0 + 6)) = (*((float*) (a0 + 6)) < *((float*) (v + 0x98)))
+					? *((float*) (a0 + 6)) : *((float*) (v + 0x98));
+				*((float*) (a0 + 8)) = (*((float*) (a0 + 8)) > *((float*) (v + 0xa0)))
+					? *((float*) (a0 + 8)) : *((float*) (v + 0xa0));
+				*((float*) (a0 + 9)) = (*((float*) (a0 + 9)) > *((float*) (v + 0xa4)))
+					? *((float*) (a0 + 9)) : *((float*) (v + 0xa4));
+				*((float*) (a0 + 10)) = (*((float*) (a0 + 10)) > *((float*) (v + 0xa8)))
+					? *((float*) (a0 + 10)) : *((float*) (v + 0xa8));
 			}
 		}
 	}

@@ -72,18 +72,6 @@ int __cdecl fcn_004770a0(int* src, int flags)
 	if (g_67d91c != 0) {
 		n = 0;
 		do {
-			if (rw <= 0) {
-				break;
-			}
-			rw >>= 1;
-			n++;
-		} while (n < 0x18);
-		rw = 1 << (n - 1);
-		if (rw < width) {
-			rw *= 2;
-		}
-		n = 0;
-		do {
 			if (rh <= 0) {
 				break;
 			}
@@ -93,6 +81,18 @@ int __cdecl fcn_004770a0(int* src, int flags)
 		rh = 1 << (n - 1);
 		if (rh < height) {
 			rh *= 2;
+		}
+		n = 0;
+		do {
+			if (rw <= 0) {
+				break;
+			}
+			rw >>= 1;
+			n++;
+		} while (n < 0x18);
+		rw = 1 << (n - 1);
+		if (rw < width) {
+			rw *= 2;
 		}
 	}
 	if (g_67d91d != 0 || (flags & 0x10) != 0) {

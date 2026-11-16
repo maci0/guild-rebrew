@@ -26,9 +26,9 @@ char __cdecl fcn_004463b0(char* terrain, float* position, char coarse, int* outX
     z = position[2];
     z -= F32(terrain + 0x98);
     if (F32(terrain + 0xa0) != 0.0f)
-        x /= F32(terrain + 0xa0);
+        x = (float) ((double) x / F32(terrain + 0xa0));
     if (F32(terrain + 0xb8) != 0.0f)
-        z /= F32(terrain + 0xb8);
+        z = (float) ((double) z / F32(terrain + 0xb8));
     *outX = (int)(x + 0.5f);
     *outY = (int)(z + 0.5f);
     size = I32(terrain);

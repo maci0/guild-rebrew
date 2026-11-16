@@ -18,7 +18,7 @@ extern char g_6b5c60[];
 extern double g_664e78;
 extern double g_662930;
 
-int __cdecl fcn_0042e410(int a);
+unsigned short __cdecl fcn_0042e410(int a);
 int __cdecl fcn_005463a0(int n, ...);
 int __cdecl fcn_00506380(int a, int b, int c, int d);
 int __cdecl fcn_00403300(int a, ...);
@@ -62,7 +62,10 @@ void __cdecl fcn_00531d20(void)
 		return;
 	sel = 0;
 	kind = 0;
-	sel = (unsigned char*) (g_7746c4 != 0 ? g_7746c4 : g_7746c8);
+	if (g_7746c4 != 0)
+		sel = (unsigned char*) g_7746c4;
+	else if (g_7746c8 != 0)
+		sel = (unsigned char*) g_7746c8;
 	if (sel != 0)
 		kind = &((struct Building_531d20*) lpGebaeudePROT)[*sel];
 	if (g_7746b4 == 0

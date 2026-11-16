@@ -24,11 +24,9 @@ float __cdecl fcn_004f0eb0(int level, int percent, int count)
 	}
 	k = level + 1;
 	if (percent < 100) {
+		pc = percent;
 		if (percent <= 0) {
 			pc = 0;
-		}
-		else {
-			pc = percent;
 		}
 	}
 	else {

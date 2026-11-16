@@ -79,16 +79,16 @@ void __cdecl fcn_0043ef20(char* a0)
 	float chan;
 	LightIter it;
 	char* fillDst;
-	int fillCount;
+	char* self = a0; /* native stores the fill count over the a0 argument slot */
 
-	if ((*(unsigned char*) (a0 + 0x8036) & 2) == 0 && *(int*) (a0 + 0x1c) != 0) {
-		fcn_0043bf20(a0);
-		w = *(int*) a0;
-		fillCount = w * w;
-		fillDst = *(char**) (a0 + 0x1c);
+	if ((*(unsigned char*) (self + 0x8036) & 2) == 0 && *(int*) (self + 0x1c) != 0) {
+		fcn_0043bf20(self);
+		w = *(int*) self;
+		a0 = (char*) (w * w);
+		fillDst = *(char**) (self + 0x1c);
 		__asm {
 			mov edi, fillDst
-			mov ebx, fillCount
+			mov ebx, a0
 			xor eax, eax
 			lea ecx, [edi+edi*2]
 			and ecx, 3
@@ -103,7 +103,7 @@ void __cdecl fcn_0043ef20(char* a0)
 			add ecx, ebx
 			rep stosb
 		}
-		it.obj = a0;
+		it.obj = self;
 		it.item = 0;
 		fcn_004379a0((char*) g_67a370, 0, 0xe, fcn_0043ed30, &it);
 		if (it.item != 0) {
@@ -111,16 +111,16 @@ void __cdecl fcn_0043ef20(char* a0)
 
 			e = (char*) it.item;
 			f27 = *(float*) (e + 0x94) * 0.5f;
-			*(float*) (a0 + 0x90) = *(float*) (e + 0x5c) * 0.003921569f;
-			*(float*) (a0 + 0x94) = *(float*) (e + 0x60) * 0.003921569f;
-			*(float*) (a0 + 0x98) = *(float*) (e + 0x64) * 0.003921569f;
+			*(float*) (self + 0x90) = *(float*) (e + 0x5c) * 0.003921569f;
+			*(float*) (self + 0x94) = *(float*) (e + 0x60) * 0.003921569f;
+			*(float*) (self + 0x98) = *(float*) (e + 0x64) * 0.003921569f;
 			fcn_00455140(e, g_662d40, u);
-			grad = *(float*) (a0 + 0x78) * *(float*) (a0 + 0x84);
+			grad = *(float*) (self + 0x78) * *(float*) (self + 0x84);
 			grad += grad;
-			lum = *(char**) (a0 + 0x10);
-			bmp = *(char**) (a0 + 0x1c);
-			ka = *(float*) (a0 + 0x78) * *(float*) (a0 + 0x60) * g_662ca8;
-			kb = *(float*) (a0 + 0x84) * *(float*) (a0 + 0x60);
+			lum = *(char**) (self + 0x10);
+			bmp = *(char**) (self + 0x1c);
+			ka = *(float*) (self + 0x78) * *(float*) (self + 0x60) * g_662ca8;
+			kb = *(float*) (self + 0x84) * *(float*) (self + 0x60);
 			kb += kb;
 			if (w > 0) {
 				kaa = ka * ka;
@@ -155,11 +155,11 @@ void __cdecl fcn_0043ef20(char* a0)
 				} while (y - 1 < w);
 			}
 		} else {
-			*(int*) (a0 + 0x90) = 0x437f0000;
-			*(int*) (a0 + 0x94) = 0x437f0000;
-			*(int*) (a0 + 0x98) = 0x437f0000;
+			*(int*) (self + 0x90) = 0x437f0000;
+			*(int*) (self + 0x94) = 0x437f0000;
+			*(int*) (self + 0x98) = 0x437f0000;
 		}
-		cellp = a0 + 0xc0;
+		cellp = self + 0xc0;
 		planep = cellp;
 		i = 8;
 		do {
@@ -175,39 +175,39 @@ void __cdecl fcn_0043ef20(char* a0)
 						if (n > 0) {
 							do {
 								texel = *(unsigned int*) (*(int*) (cellp - 0x1c) + (int) t * 4) & 0xffffff;
-								*(float*) dst = (float) (unsigned int) (texel % *(unsigned int*) a0) *
-								                *(float*) (a0 + 0x60);
-								*(float*) (dst + 4) = (float) (unsigned char) (*(char**) (a0 + 0x10))[texel] * *(float*) (a0 + 0x84);
-								*(float*) (dst + 8) = (float) (unsigned int) (texel / *(unsigned int*) a0) *
-								                *(float*) (a0 + 0x78);
-								b0 = (unsigned char) (*(char**) (a0 + 0x1c))[texel];
+								*(float*) dst = (float) (unsigned int) (texel % *(unsigned int*) self) *
+								                *(float*) (self + 0x60);
+								*(float*) (dst + 4) = (float) (unsigned char) (*(char**) (self + 0x10))[texel] * *(float*) (self + 0x84);
+								*(float*) (dst + 8) = (float) (unsigned int) (texel / *(unsigned int*) self) *
+								                *(float*) (self + 0x78);
+								b0 = (unsigned char) (*(char**) (self + 0x1c))[texel];
 								shade = (float) (int) (b0 & 0x7f);
 								shade += shade;
 								if ((signed char) b0 < 0) {
-									red = (int) (shade * *(float*) (a0 + 0x90) + g_67bbdc + g_6b86c4);
+									red = (int) (shade * *(float*) (self + 0x90) + g_67bbdc + g_6b86c4);
 									if ((unsigned int) red > 0xff) {
 										red = 0xff;
 									}
-									grn = (int) (shade * *(float*) (a0 + 0x94) + g_67bbe0 + g_6b86c8);
+									grn = (int) (shade * *(float*) (self + 0x94) + g_67bbe0 + g_6b86c8);
 									if ((unsigned int) grn > 0xff) {
 										grn = 0xff;
 									}
-									blu = (int) (shade * *(float*) (a0 + 0x98) + g_67bbe4 + g_6b86cc);
+									blu = (int) (shade * *(float*) (self + 0x98) + g_67bbe4 + g_6b86cc);
 									if ((unsigned int) blu > 0xff) {
 										blu = 0xff;
 									}
 								} else {
-									red = (int) (shade * *(float*) (a0 + 0x90) + g_67bbdc);
+									red = (int) (shade * *(float*) (self + 0x90) + g_67bbdc);
 									if ((unsigned int) red > 0xff) {
 										red = 0xff;
 									}
 									red = red & 0xff;
-									grn = (int) (shade * *(float*) (a0 + 0x94) + g_67bbe0);
+									grn = (int) (shade * *(float*) (self + 0x94) + g_67bbe0);
 									if ((unsigned int) grn > 0xff) {
 										grn = 0xff;
 									}
 									grn = grn & 0xff;
-									blu = (int) (shade * *(float*) (a0 + 0x98) + g_67bbe4);
+									blu = (int) (shade * *(float*) (self + 0x98) + g_67bbe4);
 									if ((unsigned int) blu > 0xff) {
 										blu = 0xff;
 									}
@@ -215,8 +215,8 @@ void __cdecl fcn_0043ef20(char* a0)
 								}
 								*(unsigned int*) (dst + 0xc) = (*(unsigned int*) (*(int*) (cellp - 0x1c) + (int) t * 4) & 0xff000000) + (unsigned int) blu +
 								                               (unsigned int) (red * 0x100 + grn) * 0x100;
-								*(int*) (dst + 0x10) = *(int*) (*(int*) (a0 + 0x20) + (int) texel * 8);
-								*(int*) (dst + 0x14) = *(int*) (*(int*) (a0 + 0x20) + (int) texel * 8 + 4);
+								*(int*) (dst + 0x10) = *(int*) (*(int*) (self + 0x20) + (int) texel * 8);
+								*(int*) (dst + 0x14) = *(int*) (*(int*) (self + 0x20) + (int) texel * 8 + 4);
 								dst += 0x18;
 								t++;
 							} while (t < n);
@@ -231,39 +231,39 @@ void __cdecl fcn_0043ef20(char* a0)
 						if (n > 0) {
 							do {
 								texel = *(unsigned int*) (*(int*) (cellp - 0x18) + (int) t * 4) & 0xffffff;
-								*(float*) dst = (float) (unsigned int) (texel % *(unsigned int*) a0) *
-								                *(float*) (a0 + 0x60);
-								*(float*) (dst + 4) = (float) (unsigned char) (*(char**) (a0 + 0x10))[texel] * *(float*) (a0 + 0x84);
-								*(float*) (dst + 8) = (float) (unsigned int) (texel / *(unsigned int*) a0) *
-								                *(float*) (a0 + 0x78);
-								b0 = (unsigned char) (*(char**) (a0 + 0x1c))[texel];
+								*(float*) dst = (float) (unsigned int) (texel % *(unsigned int*) self) *
+								                *(float*) (self + 0x60);
+								*(float*) (dst + 4) = (float) (unsigned char) (*(char**) (self + 0x10))[texel] * *(float*) (self + 0x84);
+								*(float*) (dst + 8) = (float) (unsigned int) (texel / *(unsigned int*) self) *
+								                *(float*) (self + 0x78);
+								b0 = (unsigned char) (*(char**) (self + 0x1c))[texel];
 								shade = (float) (int) (b0 & 0x7f);
 								shade += shade;
 								if ((signed char) b0 < 0) {
-									red = (int) (shade * *(float*) (a0 + 0x90) + g_67bbdc + g_6b86c4);
+									red = (int) (shade * *(float*) (self + 0x90) + g_67bbdc + g_6b86c4);
 									if ((unsigned int) red > 0xff) {
 										red = 0xff;
 									}
-									grn = (int) (shade * *(float*) (a0 + 0x94) + g_67bbe0 + g_6b86c8);
+									grn = (int) (shade * *(float*) (self + 0x94) + g_67bbe0 + g_6b86c8);
 									if ((unsigned int) grn > 0xff) {
 										grn = 0xff;
 									}
-									blu = (int) (shade * *(float*) (a0 + 0x98) + g_67bbe4 + g_6b86cc);
+									blu = (int) (shade * *(float*) (self + 0x98) + g_67bbe4 + g_6b86cc);
 									if ((unsigned int) blu > 0xff) {
 										blu = 0xff;
 									}
 								} else {
-									red = (int) (shade * *(float*) (a0 + 0x90) + g_67bbdc);
+									red = (int) (shade * *(float*) (self + 0x90) + g_67bbdc);
 									if ((unsigned int) red > 0xff) {
 										red = 0xff;
 									}
 									red = red & 0xff;
-									grn = (int) (shade * *(float*) (a0 + 0x94) + g_67bbe0);
+									grn = (int) (shade * *(float*) (self + 0x94) + g_67bbe0);
 									if ((unsigned int) grn > 0xff) {
 										grn = 0xff;
 									}
 									grn = grn & 0xff;
-									blu = (int) (shade * *(float*) (a0 + 0x98) + g_67bbe4);
+									blu = (int) (shade * *(float*) (self + 0x98) + g_67bbe4);
 									if ((unsigned int) blu > 0xff) {
 										blu = 0xff;
 									}
@@ -271,8 +271,8 @@ void __cdecl fcn_0043ef20(char* a0)
 								}
 								*(unsigned int*) (dst + 0xc) = (*(unsigned int*) (*(int*) (cellp - 0x18) + (int) t * 4) & 0xff000000) + (unsigned int) blu +
 								                               (unsigned int) (red * 0x100 + grn) * 0x100;
-								*(int*) (dst + 0x10) = *(int*) (*(int*) (a0 + 0x20) + (int) texel * 8);
-								*(int*) (dst + 0x14) = *(int*) (*(int*) (a0 + 0x20) + (int) texel * 8 + 4);
+								*(int*) (dst + 0x10) = *(int*) (*(int*) (self + 0x20) + (int) texel * 8);
+								*(int*) (dst + 0x14) = *(int*) (*(int*) (self + 0x20) + (int) texel * 8 + 4);
 								dst += 0x18;
 								t++;
 							} while (t < n);
