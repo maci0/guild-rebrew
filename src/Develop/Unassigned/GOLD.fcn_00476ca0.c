@@ -40,10 +40,10 @@ void __cdecl fcn_00476ca0(char* obj, int x, int y)
     old_x = *(int*) 0x6f0458;
     old_height = *(int*) 0x5fed60;
     fcn_0047cb30(0, 0, *(int*) (obj + 4), *(int*) (obj + 8));
-    selected = *(int*) 0x5feba8;
-    if (selected == -1) {
+    if (*(int*) 0x5feba8 == -1) {
         fcn_0047c6e0(x, y, obj, *(int*) 0x6ed9cc, *(unsigned char*) 0x6ed9d0);
     } else {
+        selected = *(int*) 0x5feba8;
         *(short*) (0xf8a52d + selected * 17) = (short) x;
         *(short*) (0xf8a52f + selected * 17) = (short) y;
         fcn_0047cda0(selected, obj);

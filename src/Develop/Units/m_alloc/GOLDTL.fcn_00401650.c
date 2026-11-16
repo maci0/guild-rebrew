@@ -302,7 +302,9 @@ release:
 				n--;
 			}
 		}
-		return 1;
+		goto fail_1;
 	}
+	goto fail_1;
+fail_1:
 	return 1;
 }

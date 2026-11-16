@@ -58,68 +58,68 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 		g_773d38 = g_773d38 + 1;
 	}
 	idx = fcn_004f57e0();
-	if (idx == -1) {
-		return -1;
-	}
-	ent = (Straftat*) gm_LookupEntityRecordById(*(int*) (src + 0x26));
-	if (ent != 0 && *(char*) ((char*) ent + 2) == 6) {
-		fcn_004b4650((char*) ent, 0x17);
-	}
-	rec = (Straftat*) (g_9a3800 + idx * 0x2d);
-	memcpy(rec, src + 0x10, 0x2d);
-	rec->id = g_773d38;
-	sprintf(msg, "cm_ExAddStraftat(): Executed---- st_id = %i, taeter = %i, opfer = %i",
-		g_773d38, *(int*) (src + 0x26), *(int*) (src + 0x22));
-	taeter = *(int*) (src + 0x31);
-	if (taeter == -1) {
-		ent = (Straftat*) gm_LookupEntityRecordById(*(int*) (src + 0x22));
-		if (ent != 0) {
-			if (*(int*) ((char*) ent + 0x170) != 0) {
-				taeter = *(int*) (*(char**) ((char*) ent + 0x170) + 1);
-			} else if (*(int*) ((char*) ent + 0x16c) != 0) {
-				taeter = *(int*) (*(char**) ((char*) ent + 0x16c) + 1);
+	if (idx != -1) {
+		ent = (Straftat*) gm_LookupEntityRecordById(*(int*) (src + 0x26));
+		if (ent != 0 && *(char*) ((char*) ent + 2) == 6) {
+			fcn_004b4650((char*) ent, 0x17);
+		}
+		rec = (Straftat*) (g_9a3800 + idx * 0x2d);
+		memcpy(rec, src + 0x10, 0x2d);
+		rec->id = g_773d38;
+		sprintf(msg, "cm_ExAddStraftat(): Executed---- st_id = %i, taeter = %i, opfer = %i",
+			g_773d38, *(int*) (src + 0x26), *(int*) (src + 0x22));
+		taeter = *(int*) (src + 0x31);
+		if (taeter == -1) {
+			ent = (Straftat*) gm_LookupEntityRecordById(*(int*) (src + 0x22));
+			if (ent != 0) {
+				if (*(int*) ((char*) ent + 0x170) != 0) {
+					taeter = *(int*) (*(char**) ((char*) ent + 0x170) + 1);
+				} else if (*(int*) ((char*) ent + 0x16c) != 0) {
+					taeter = *(int*) (*(char**) ((char*) ent + 0x16c) + 1);
+				} else {
+					srv_SeedRandom(*(int*) (src + 0x39));
+				}
 			} else {
 				srv_SeedRandom(*(int*) (src + 0x39));
 			}
+		}
+		fcn_004fa850(taeter, *(char*) (src + 0x2c), &v13, &v14);
+		gm_ResolveEntityById(&p, 0, 0, taeter);
+		if (p != 0) {
+			if (*(int*) (p + 0x61) != 0) {
+				v16.a = *(unsigned int*) (*(char**) (p + 0x61) + 0x4c);
+				v16.b = *(unsigned int*) (*(char**) (p + 0x61) + 0x50);
+				v16.c = *(unsigned int*) (*(char**) (p + 0x61) + 0x54);
+			}
 		} else {
-			srv_SeedRandom(*(int*) (src + 0x39));
+			fcn_004faa90(v13, v14, &v16);
 		}
-	}
-	fcn_004fa850(taeter, *(char*) (src + 0x2c), &v13, &v14);
-	gm_ResolveEntityById(&p, 0, 0, taeter);
-	if (p != 0) {
-		if (*(int*) (p + 0x61) != 0) {
-			v16.a = *(unsigned int*) (*(char**) (p + 0x61) + 0x4c);
-			v16.b = *(unsigned int*) (*(char**) (p + 0x61) + 0x50);
-			v16.c = *(unsigned int*) (*(char**) (p + 0x61) + 0x54);
-		}
-	} else {
-		fcn_004faa90(v13, v14, &v16);
-	}
-	for (ent = (Straftat*) fcn_005463a0(1, 0, 0x18); ent != 0;
-		ent = (Straftat*) he_fn_Handlung()) {
-		if (*(int*) ((char*) ent + 0xc4) != *(int*) (g_9a3800 + idx * 0x2d + 0x16)) {
-			continue;
-		}
-		slot = *(unsigned short*) ((char*) ent + 8);
-		if (gs_AddBeweis(rec->id, *(int*) (g_7f4ca0 + slot * 0x21c + 4)) == 0) {
-			break;
-		}
-		if (out != 0) {
-			char* px;
+		for (ent = (Straftat*) fcn_005463a0(1, 0, 0x18); ent != 0;
+			ent = (Straftat*) he_fn_Handlung()) {
+			if (*(int*) ((char*) ent + 0xc4) != *(int*) (g_9a3800 + idx * 0x2d + 0x16)) {
+				continue;
+			}
+			slot = *(unsigned short*) ((char*) ent + 8);
+			if (gs_AddBeweis(rec->id, *(int*) (g_7f4ca0 + slot * 0x21c + 4)) == 0) {
+				break;
+			}
+			if (out != 0) {
+				char* px;
 
-			px = (char*) gm_LookupEntityRecordById(*(int*) ((char*) ent + 0xc4));
-			if (px != 0) {
-				fcn_005b2740(px, g_7f4ca0 + slot * 0x21c);
+				px = (char*) gm_LookupEntityRecordById(*(int*) ((char*) ent + 0xc4));
+				if (px != 0) {
+					fcn_005b2740(px, g_7f4ca0 + slot * 0x21c);
+				}
 			}
 		}
+		if (out != 0) {
+			out[0] = 1;
+			out[1] = 6;
+			*(Straftat**) (out + 6) = rec;
+		}
+		return 0;
 	}
-	if (out != 0) {
-		out[0] = 1;
-		out[1] = 6;
-		*(Straftat**) (out + 6) = rec;
-	}
-	return 0;
+	return -1;
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)

@@ -205,8 +205,8 @@ char __cdecl fcn_00457630(void* obj, void* map)
 			uv.u = u0;
 			uv.du = du;
 			uv.v = v0;
-			uv.dv = dv;
 			rect[0] = x0;
+			uv.dv = dv;
 			rect[1] = x1;
 			rect[2] = z0;
 			rect[3] = z1;

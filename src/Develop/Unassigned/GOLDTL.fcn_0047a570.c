@@ -50,7 +50,7 @@ int __cdecl fcn_0047a570(int a0, int a1, int a2, int* a3, int* a4, int a5)
 		size = g_67dac0;
 	}
 	if ((float) n / (float) size < 0.9f && size > 0x40 && a5 != 0
-	    && size / 2 > a1 && size / 2 > a2) {
+	    && size / 2 > a2 && size / 2 > a1) {
 		size >>= 1;
 	}
 	v1 = size / a1;

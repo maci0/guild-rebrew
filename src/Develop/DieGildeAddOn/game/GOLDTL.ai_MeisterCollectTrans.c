@@ -47,7 +47,7 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 
 	if (((unsigned short) g_7f4c04 % 2) != 0) {
 		flags = *(int*) (e + 0x1b4);
-		if ((signed char) flags < 0) {
+		if (flags & 0x80) {
 			return;
 		}
 		*(int*) (e + 0x1b4) = flags | 0x80;

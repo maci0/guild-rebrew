@@ -67,16 +67,16 @@ int __cdecl fcn_00449130(void)
 	v15 = 0;
 	if (g_1041d0c == 0)
 		return 0;
-	v2 = g_14cf72a;
 	v1 = g_14cf71d;
+	v2 = g_14cf72a;
 	motion[0] = 0.0f;
 	motion[1] = 0.0f;
 	motion[2] = 0.0f;
 	rotate[0] = 0.0f;
 	rotate[1] = 0.0f;
 	rotate[2] = 0.0f;
-	v19 = 0.0f;
 	v21 = 0.0f;
+	v19 = 0.0f;
 	v20 = 0.0f;
 	v18 = 0.0f;
 	if (g_14ce8d8 != 0) {

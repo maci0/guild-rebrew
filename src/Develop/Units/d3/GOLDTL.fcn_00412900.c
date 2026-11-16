@@ -30,7 +30,9 @@ int* __cdecl fcn_00412900(char* obj, float* pos, int id)
 	flags_00412900 flags;
 	frame_00412900 frames[5];
 	unsigned char* r;
+	float x0;
 
+	x0 = *(float*) 0x67750c;
 	*(unsigned int*) &flags = 0;
 	flags.bit_8_1 = 1;
 	flags.bits_1 = 4;
@@ -38,7 +40,7 @@ int* __cdecl fcn_00412900(char* obj, float* pos, int id)
 	frames[0].unbekannt_000 = id;
 	frames[1].unbekannt_000 = id;
 	flags.unbekannt_000 = 2;
-	frames[1].position[0] = *(float*) 0x67750c - *(float*) (g_6b8014 + 0x4c);
+	frames[1].position[0] = x0 - *(float*) (g_6b8014 + 0x4c);
 	frames[1].position[1] = *(float*) 0x677510 - *(float*) (g_6b8014 + 0x50);
 	frames[1].position[2] = *(float*) 0x677514 - *(float*) (g_6b8014 + 0x54);
 	frames[1].drehung[0] = pos[0] - *(float*) (g_6b8014 + 0x84);

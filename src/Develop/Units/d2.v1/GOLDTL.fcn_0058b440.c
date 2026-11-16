@@ -22,7 +22,6 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
 {
     int* v1;
     char v10[4];
-    char v11[4];
     char v12[256];
     char v13[256];
     int v14;
@@ -83,9 +82,12 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
     io_AppendText(0x6811b0);
     d2_SetForm(*v2, 7);
     io_AppendText(0x6811b0);
-    fcn_00533f40(0, 0, v2[6], v2[3],
-                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f50), (int*) v11,
-                 (int*) v10, (int*) v9);
+    {
+        char v11[4];
+        fcn_00533f40(0, 0, v2[6], v2[3],
+                     *(unsigned int*) (v2[3] * 0x3cc + 0x1015f50), (int*) v11,
+                     (int*) v10, (int*) v9);
+    }
     d2_SetForm(*v2, 3);
     v18 = 0;
     if (v16 > 0) {

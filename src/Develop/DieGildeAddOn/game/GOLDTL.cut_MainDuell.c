@@ -29,7 +29,7 @@ extern int g_68bfc0;
 extern int g_9afde0;
 extern int g_9afde4;
 
-int __cdecl gm_RandomMod(int a);
+unsigned short __cdecl gm_RandomMod(int a);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004e04f0(char* a0);
 void __cdecl fcn_004e4f10(void* event);
@@ -113,7 +113,7 @@ void __cdecl cut_MainDuell(char* a0)
 
     keepA = 0;
     keepB = 0;
-    sel0 = ((unsigned short) gm_RandomMod(3)) - 5;
+    sel0 = gm_RandomMod(3) - 5;
     other = 0;
     e1 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
     e2 = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));

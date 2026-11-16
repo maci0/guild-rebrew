@@ -1,3 +1,6 @@
+extern int g_14ce920[];
+extern short g_14ce922;
+extern short g_14ce924;
 void __cdecl fcn_00411f90(void);
 void __cdecl fcn_00411b80(void);
 
@@ -38,12 +41,12 @@ void __cdecl fcn_00411fe0(void)
 		switch (*(int*) ev) {
 		case 0:
 			v = (int) (*(int*) 0x6772b8 * *(float*) 0x662a30 * *(int*) (ev + 4));
-			*(short*) 0x14ce920 += (short) v;
+			*(short*) g_14ce920 += (short) v;
 			*(short*) 0x14ce926 = (short) v;
 			break;
 		case 4:
 			v = (int) (*(int*) 0x6772b8 * *(float*) 0x662a30 * *(int*) (ev + 4));
-			*(short*) 0x14ce922 += (short) v;
+			g_14ce922 += (short) v;
 			*(short*) 0x14ce928 = (short) v;
 			break;
 		case 8:
@@ -54,7 +57,7 @@ void __cdecl fcn_00411fe0(void)
 			} else if (v < 0) {
 				*(int*) 0x14ce960 = 1;
 			}
-			*(short*) 0x14ce924 += (short) v;
+			g_14ce924 += (short) v;
 			*(short*) 0x14ce92a = (short) v;
 			fcn_00411b80();
 			break;
@@ -110,25 +113,25 @@ void __cdecl fcn_00411fe0(void)
 			break;
 		}
 	}
-	if ((int) *(short*) 0x14ce920 < *(int*) 0x6b5c80) {
-		*(short*) 0x14ce920 = (short) *(int*) 0x6b5c80;
+	if ((int) *(short*) g_14ce920 < *(int*) 0x6b5c80) {
+		*(short*) g_14ce920 = (short) *(int*) 0x6b5c80;
 	}
-	if ((int) *(short*) 0x14ce920 > *(int*) 0x6772bc) {
-		*(short*) 0x14ce920 = (short) *(int*) 0x6772bc;
+	if ((int) *(short*) g_14ce920 > *(int*) 0x6772bc) {
+		*(short*) g_14ce920 = (short) *(int*) 0x6772bc;
 	}
-	if ((int) *(short*) 0x14ce922 < *(int*) 0x6b5c84) {
-		*(short*) 0x14ce922 = (short) *(int*) 0x6b5c84;
+	if ((int) g_14ce922 < *(int*) 0x6b5c84) {
+		g_14ce922 = (short) *(int*) 0x6b5c84;
 	}
-	if ((int) *(short*) 0x14ce922 > *(int*) 0x6772c0) {
-		*(short*) 0x14ce922 = (short) *(int*) 0x6772c0;
+	if ((int) g_14ce922 > *(int*) 0x6772c0) {
+		g_14ce922 = (short) *(int*) 0x6772c0;
 	}
 	if (*(int*) 0x6b5c88 & 4) {
 		int pt[2];
 		((void (__stdcall*) (int*)) *(void**) 0x662250)(pt);
 		((void (__stdcall*) (int, int*)) *(void**) 0x662308)(*(int*) 0x14ce89c, pt);
 		if (*(int*) 0x6772c4 == 0) {
-			*(short*) 0x14ce920 = (short) (*(short*) 0x14ce920 + pt[0] - *(int*) 0x14ce8c0);
-			*(short*) 0x14ce922 = (short) (*(short*) 0x14ce922 + (short) pt[1] - *(short*) 0x14ce8c2);
+			*(short*) g_14ce920 = (short) (*(short*) g_14ce920 + pt[0] - *(int*) 0x14ce8c0);
+			g_14ce922 = (short) (g_14ce922 + (short) pt[1] - *(short*) 0x14ce8c2);
 			pt[0] = (int) (short) *(int*) 0x14ce8c0;
 			pt[1] = (int) *(short*) 0x14ce8c2;
 			((void (__stdcall*) (int, int*)) *(void**) 0x662304)(*(int*) 0x14ce89c, pt);

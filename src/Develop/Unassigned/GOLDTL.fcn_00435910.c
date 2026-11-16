@@ -24,9 +24,9 @@
  *     count comes from the int array at a1, one int per cell;
  *   - the heights come from layout+0x27c, three floats per cell.
  *
- * Open native facts: the layer walk compares the layer against local slot
- * [esp+0x64], which no path in this function writes, so `first` below stays
- * unassigned; the native reads that slot uninitialised.
+ * Native facts: the layer walk compares the layer against local slot
+ * [esp+0x64], which fcn_004356c0's return value fills at 0x435927 (the store
+ * runs before the argument pop, so it is [esp+0x68] there); `first` holds it.
  */
 
 #define F_STEP_BIAS (*(float*) 0x662a7c)
@@ -91,7 +91,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 	int o;
 	Vertex* v;
 
-	fcn_004356c0(a0);
+	first = (unsigned char*) fcn_004356c0(a0);
 	layout = (unsigned char*) *(int*) ((unsigned char*) a0 + 0x318);
 	grid = (unsigned char*) *(int*) (layout + 0x294);
 	ids = (int*) grid;

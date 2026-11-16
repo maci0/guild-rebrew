@@ -7,7 +7,7 @@ void __cdecl fcn_00439870(char* object, char* parent, int force)
 	float matrix[16];
 	char* source;
 	char* destination;
-	if ((signed char) object[0x212] >= 0 || (char) force != 0) {
+	if (!(object[0x212] & 0x80) || (char) force != 0) {
 		fcn_00458d90(object, 0, 0, (float*) (*(char**) (object + 0x1ec) + 8));
 		object[0x212] |= 0x80;
 	}
@@ -15,7 +15,7 @@ void __cdecl fcn_00439870(char* object, char* parent, int force)
 		&& *(char**) (*(char**) (object + 0x1ec) + 4) == parent) {
 		return;
 	}
-	if (parent != 0 && (signed char) object[0x210] >= 0) {
+	if (parent != 0 && !(object[0x210] & 0x80)) {
 		force = 0x40;
 		source = *(char**) (object + 0x1ec) + 8;
 		destination = (char*) matrix;

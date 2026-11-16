@@ -66,8 +66,9 @@ int __cdecl fcn_0053b1b0(void)
 			if (v_first != 0) {
 				d2_SetForm(dlg, 1);
 				io_AppendText((int) s_6a3bcc);
+				i = 0;
 				y = 0x1c;
-				for (i = 0; y < 0xd5; i++, y += 0x25) {
+				for (; i < 5; i++, y += 0x25) {
 					io_AppendText((int) s_6a3bc4, i + 0x16b7);
 					fcn_00534160(0xd2, y, st[6 + i], 0x4d9);
 					id = fcn_0046f740(*(int*) (g_77255c + 0xc) - 0x2c, y, 0x519, g_772514);

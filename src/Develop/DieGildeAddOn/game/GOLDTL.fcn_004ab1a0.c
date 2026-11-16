@@ -27,7 +27,7 @@ int __cdecl gm_AccumulateTyped2(void*);
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 void* __cdecl fcn_00502cd0(int, ...);
-int __cdecl gm_RandomMod(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004e8b40(int, Rec18*);
 int __cdecl fcn_004f7120(unsigned int, void*, void*, void*, void*);

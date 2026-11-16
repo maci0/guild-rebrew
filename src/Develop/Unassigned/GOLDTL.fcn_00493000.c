@@ -47,12 +47,10 @@ void __cdecl fcn_00493000(unsigned char* o)
 	}
 	if (state == 3) {
 		if (s1 > 0x11) {
-			*(int*) (o + 8) = 6;
-			return;
+			goto lose;
 		}
 		if (*(int*) (o + 0x28) == 4) {
-			*(int*) (o + 8) = 6;
-			return;
+			goto lose;
 		}
 		if (*(int*) (o + 0x28) != 3 || *(int*) (o + 0x4c) != 3) {
 			*(int*) (o + 8) = 4;
@@ -77,6 +75,9 @@ void __cdecl fcn_00493000(unsigned char* o)
 		*(int*) (o + 8) = (s1 <= s2) ? 6 : 5;
 		return;
 	}
+	return;
+lose:
+	*(int*) (o + 8) = 6;
 	return;
 win:
 	*(int*) (o + 8) = 5;

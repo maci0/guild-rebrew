@@ -32,7 +32,6 @@ extern char g_1052bd0[];
 void __cdecl fcn_00436aa0(unsigned char* flags)
 {
     float m[16];
-    void* copy_dst;
     int copy_size;
     float f;
 
@@ -75,11 +74,6 @@ void __cdecl fcn_00436aa0(unsigned char* flags)
     ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0xf, 0);
     ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0xb, 0);
     ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0x18, 0);
-    ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 2, 2);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x1b, 0);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x14, 1);
-    ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0xb, 0);
-    ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0x18, 0);
     g_6b7ffa = 0;
     g_6b7ffb = 0;
     g_6b7ffc = 0;
@@ -104,10 +98,9 @@ void __cdecl fcn_00436aa0(unsigned char* flags)
     ((IDev*) g_6b5de0)->v->SetTransform(((IDev*) g_6b5de0), 0x10, m);
     if (flags == 0)
         return;
-    copy_dst = g_1052bd0;
     copy_size = 8;
     __asm {
-        mov edi, copy_dst
+        mov edi, offset g_1052bd0
         mov esi, flags
         mov ebx, copy_size
         lea ecx, [edi+edi*2]

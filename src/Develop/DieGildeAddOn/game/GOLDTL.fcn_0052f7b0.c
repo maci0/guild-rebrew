@@ -162,8 +162,8 @@ refresh:
     }
     goto snapshot;
 reload:
-    item = (unsigned short*)g_7e2a9c;
     focus = g_7ea360;
+    item = (unsigned short*)g_7e2a9c;
     count = g_7746f0;
 snapshot:
     record = g_7746cc;

@@ -56,74 +56,59 @@ int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)
 	if (kind == 0) {
 		kind = 0x1c;
 	}
-	if (busy != 0) {
-		goto failed;
-	}
-	if (a1 != 0) {
-		goto failed;
-	}
-	f.mask = 0x90010;
-	f.b = 0;
-	if (fcn_004a5e60(e, 4, f, 0, 100.0f, &found) == 0) {
-		goto failed;
-	}
-	gm_ResolveEntityById(&p, 0, 0, found);
-	if (p == 0) {
-		goto failed;
-	}
-	count = 0;
-	sum = 0;
-	q = (char*) g_7f4e0c + 0x59;
-	do {
-		if (*(char**) (q - 0x59) == p) {
-			count++;
-			sum += *(unsigned char*) q;
+	if (busy == 0 && a1 == 0) {
+		f.mask = 0x90010;
+		f.b = 0;
+		if (fcn_004a5e60(e, 4, f, 0, 100.0f, &found) != 0) {
+			gm_ResolveEntityById(&p, 0, 0, found);
+			if (p != 0) {
+				count = 0;
+				sum = 0;
+				q = (char*) g_7f4e0c + 0x59;
+				do {
+					if (*(char**) (q - 0x59) == p) {
+						count++;
+						sum += *(unsigned char*) q;
+					}
+					q += 0x21c;
+				} while ((int) q < 0x85a265);
+				roll = (unsigned short) gm_RandomMod(4);
+				if (!((float) roll + (float) sum / (float) count < 6.0f)) {
+					memset(&slot, 0, sizeof(slot));
+					slot.id = 0x161;
+					fcn_004a51d0(e, 1, &slot, &cnt);
+					if (!(cnt.total == 6 && cnt.free == 0) && cnt.blocked != 1) {
+						if (cnt.total < 6 && cnt.free == 0) {
+							a.valid = 2;
+							a.v[0] = slot.id;
+							a.v[1] = 1;
+							a.f14 = 0.05f;
+							b.valid = 7;
+							b.v[0] = *(int*) (e + 4);
+							b.v[1] = 1;
+							r = fcn_00495400(kind, *(unsigned short*) e, 2, &a, &b);
+							if (r != 0) {
+								*out1 = a;
+								*out2 = b;
+							}
+							return r;
+						}
+						if (cnt.free != 0) {
+							a.valid = 1;
+							a.v[0] = slot.b;
+							a.v[1] = 1;
+							b.valid = 4;
+							b.v[0] = *(int*) (p + 1);
+							b.v[1] = -1;
+							b.v[3] = 0x1b;
+							*out1 = a;
+							*out2 = b;
+							return 0x1b;
+						}
+					}
+				}
+			}
 		}
-		q += 0x21c;
-	} while ((int) q < 0x85a265);
-	roll = (unsigned short) gm_RandomMod(4);
-	if ((float) roll + (float) sum / (float) count < 6.0f) {
-		goto failed;
 	}
-	memset(&slot, 0, sizeof(slot));
-	slot.id = 0x161;
-
-
-	fcn_004a51d0(e, 1, &slot, &cnt);
-	if (cnt.total == 6 && cnt.free == 0) {
-		goto failed;
-	}
-	if (cnt.blocked == 1) {
-		goto failed;
-	}
-	if (cnt.total < 6 && cnt.free == 0) {
-		a.valid = 2;
-		a.v[0] = slot.id;
-		a.v[1] = 1;
-		a.f14 = 0.05f;
-		b.valid = 7;
-		b.v[0] = *(int*) (e + 4);
-		b.v[1] = 1;
-		r = fcn_00495400(kind, *(unsigned short*) e, 2, &a, &b);
-		if (r != 0) {
-			*out1 = a;
-			*out2 = b;
-		}
-		return r;
-	}
-	if (cnt.free == 0) {
-		goto failed;
-	}
-	a.valid = 1;
-	a.v[0] = slot.b;
-	a.v[1] = 1;
-	b.valid = 4;
-	b.v[0] = *(int*) (p + 1);
-	b.v[1] = -1;
-	b.v[3] = 0x1b;
-	*out1 = a;
-	*out2 = b;
-	return 0x1b;
-failed:
 	return 0;
 }
