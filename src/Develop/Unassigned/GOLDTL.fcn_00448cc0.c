@@ -92,9 +92,9 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 			} else {
 				x = m[8] * dir[2] + m[0] * dir[0] + m[4] * dir[1];
 				y = m[9] * dir[2] + m[1] * dir[0] + m[5] * dir[1];
-				z = m[10] * dir[2] + m[2] * dir[0] + m[6] * dir[1];
-				written = 1;
 				outA[0] = x + *(float*) (self + 0x4c);
+				written = 1;
+				z = m[10] * dir[2] + m[2] * dir[0] + m[6] * dir[1];
 				outA[1] = y + *(float*) (self + 0x50);
 				outA[2] = z + *(float*) (self + 0x54);
 			}

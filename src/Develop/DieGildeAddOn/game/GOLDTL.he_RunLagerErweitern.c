@@ -28,7 +28,6 @@ void __cdecl he_RunLagerErweitern(char* a0)
 	char* info;
 	int cat;
 	int msg;
-	int rem;
 	int px;
 	int v9;
 	int v10;
@@ -55,9 +54,7 @@ void __cdecl he_RunLagerErweitern(char* a0)
 		fcn_004c4510((char*) v5[0], *(int*) ((char*) v5[0] + 2));
 		fcn_004c4670(4, 1, (v5[0] - (int) g_aed32c) + 0xe, &v5[1]);
 		fcn_004c5360();
-		rem = *(int*) (a0 + 0xb0) - 1;
-		*(int*) (a0 + 0xb0) = rem;
-		if (rem <= 0) {
+		if (--*(int*) (a0 + 0xb0) <= 0) {
 		msg = 0x606;
 		ent = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x10));
 		if (ent) {

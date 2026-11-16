@@ -83,9 +83,9 @@ void __cdecl fcn_00487470(char* a0)
 			memset(pkt1, 0, 0xf8);
 			p = *(char**)(a0 + 0x16c);
 			pkt1[4] = 0x1c;
-			*(int*) (pkt1 + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) (p + 0x27) * 0x21c);
 			*(int*) (pkt1 + 0xc) = -1;
 			pkt1[0x36] = 1;
+			*(int*) (pkt1 + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) (p + 0x27) * 0x21c);
 			*(int*) (pkt1 + 0x58) = *(int*) (p + 1);
 			*(int*) (pkt1 + 0x5c) = 100 - *(char*) (p + 0x5c);
 			fcn_004c4eb0(g_67e330);

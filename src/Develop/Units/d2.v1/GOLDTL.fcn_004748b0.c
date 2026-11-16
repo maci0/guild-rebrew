@@ -75,10 +75,10 @@ int __cdecl fcn_004748b0(void)
 					*(int *) (*(int *) &g_1015ea0 + 0x3c + p[0x4d] * 0x2f4) = 0;
 				}
 				*(int *) (*(int *) &g_1015ea0 + 0x3c + v1[0x4d] * 0x2f4) = 1;
-				g_100f1d4 = g_6772c0 - v7;
+				v8 = *(int *) (*(int *) &g_1015ea0 + 0x40 + v1[0x4d] * 0x2f4);
 				g_100f940 = v1[0x4b];
 				g_100f950 = 0;
-				v8 = *(int *) (*(int *) &g_1015ea0 + 0x40 + v1[0x4d] * 0x2f4);
+				g_100f1d4 = g_6772c0 - v7;
 				i = 0;
 				if (v8 != 0) {
 					while (i < *(int *) (v8 + 0x2c)) {

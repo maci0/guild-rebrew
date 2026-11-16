@@ -49,7 +49,6 @@ void __cdecl fcn_00465c60(void)
 
 	int i;
 	int off;
-	int table;
 	VfsEntry* entry;
 	void* object;
 
@@ -69,9 +68,8 @@ void __cdecl fcn_00465c60(void)
 		i++;
 	} while (i < 0x3ff);
 	off = 0;
-	table = (int) g_772500;
 	do {
-		entry = (VfsEntry*) (table + off);
+		entry = (VfsEntry*) (g_772500 + off);
 		if (entry->data != 0 && entry->size != 0) {
 			if (entry->kind < 0x10) {
 				fcn_0047b5d0(entry->data);
@@ -81,7 +79,6 @@ void __cdecl fcn_00465c60(void)
 			}
 			g_772508 -= entry->size;
 			entry->data = 0;
-			table = (int) g_772500;
 		}
 		off += 0x54;
 	} while (off < 0x2a000);

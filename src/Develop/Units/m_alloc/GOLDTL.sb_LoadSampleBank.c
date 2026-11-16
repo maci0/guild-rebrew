@@ -51,7 +51,6 @@ Bank* __cdecl sb_LoadSampleBank(char* name, int init)
 	char path[0x100];
 	char msg[0x200];
 	int i;
-	int size;
 
 	if (g_6b7d7c == 0) {
 		return (Bank*) g_14cb980;
@@ -63,8 +62,7 @@ Bank* __cdecl sb_LoadSampleBank(char* name, int init)
 		fp = fopen(path, "rb");
 		if (fp != 0) {
 			if (fread(&hdr, 0x144, 1, fp) == 1) {
-				size = hdr.count * 0x40 + 0x144;
-				bank = m_alloc(size, "sb_LoadSampleBank");
+				bank = m_alloc(hdr.count * 0x40 + 0x144, "sb_LoadSampleBank");
 				if (bank != 0) {
 					strncpy(bank->title, hdr.title, 0x32);
 					strncpy(bank->file, path, 0x100);

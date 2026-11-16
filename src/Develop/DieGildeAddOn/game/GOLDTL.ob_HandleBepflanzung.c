@@ -116,7 +116,6 @@ void __cdecl ob_HandleBepflanzung(int a0)
 	v34 = 0;
 	v37 = 0;
 	v36 = 0;
-	v16 = 0;
 	v23 = 0;
 	v26 = 0;
 	v25 = 0;

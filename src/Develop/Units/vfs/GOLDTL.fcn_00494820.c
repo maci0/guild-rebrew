@@ -75,11 +75,7 @@ int __cdecl fcn_00494820(void)
 		if (f == 0) {
 			goto bad;
 		}
-		if (vfs_fwrite(&sig, 4, 1, f) <= 0) {
-			CloseVfsStream(f);
-			goto bad;
-		}
-		if (vfs_fwrite(&nmeth, 4, 1, f) <= 0) {
+		if (vfs_fwrite(&sig, 4, 1, f) <= 0 || vfs_fwrite(&nmeth, 4, 1, f) <= 0) {
 			CloseVfsStream(f);
 			goto bad;
 		}

@@ -36,14 +36,15 @@ void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, cha
 		unsigned int elapsed;
 		unsigned int frames;
 		unsigned int scale;
+		unsigned int fl;
 		int i;
 		Entry_1043340* entry;
 		char* node;
 
 		now = g_6b7fac;
 		fcn_0045ccf0(now);
-		flags |= 0x181;
-		fcn_004379a0((char*) g_67a370, 0, flags, fcn_00432480, (void*) now);
+		fl = flags | 0x181;
+		fcn_004379a0((char*) g_67a370, 0, fl, fcn_00432480, (void*) now);
 		if (deep) {
 			i = 0;
 			entry = (Entry_1043340*) 0x1043340;
@@ -52,7 +53,7 @@ void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, cha
 					node = entry->node;
 					if (node != 0 && node != g_1042340) {
 						do {
-							fcn_004379a0((char*) g_67a370, node, flags, fcn_00432480, (void*) (now | 0x80000000));
+							fcn_004379a0((char*) g_67a370, node, fl, fcn_00432480, (void*) (now | 0x80000000));
 							node = *(char**) (node + 0x1f4);
 						} while (node != g_1042340);
 					}

@@ -14,7 +14,6 @@ int __cdecl fcn_004e9ee0(void)
 	int flags[6] = {0, 0, 0, 0, 0, 0};
 	int order[6] = {6, 5, 4, 3, 2, 1};
 	OFFICE_SLOT recs[6];
-	OFFICE_SLOT* rp;
 	char* e1;
 	char* e2;
 	char* h;
@@ -29,17 +28,15 @@ int __cdecl fcn_004e9ee0(void)
 	for (i = 0; i < 6; i++) {
 		n = fcn_004e8b80(order[i], 6, recs);
 		if (n > 0) {
-			rp = recs;
-			j = n;
-			do {
-				if (rp->status == 2) {
-					e1 = gm_LookupEntityRecordById(rp->msetter);
-					e2 = gm_LookupEntityRecordById(rp->mplayerid);
+			for (j = 0; j < n; j++) {
+				if (recs[j].status == 2) {
+					e1 = gm_LookupEntityRecordById(recs[j].msetter);
+					e2 = gm_LookupEntityRecordById(recs[j].mplayerid);
 					if (e1 != 0 && *(unsigned char*) (e1 + 8) != 0) {
 						if (e2 != 0 && *(unsigned char*) (e2 + 8) != 0) {
 							flags[i] |= 1;
 						} else {
-							v = fcn_004e8240(rp->id, 0, 0, 4, 0xff);
+							v = fcn_004e8240(recs[j].id, 0, 0, 4, 0xff);
 							if (v != -1) {
 								while (!fcn_004c4450(v)) {
 									fcn_00535960();
@@ -47,15 +44,15 @@ int __cdecl fcn_004e9ee0(void)
 							}
 						}
 					} else {
-						v = fcn_004e8240(rp->id, (unsigned char*) e2, 0, 1, 0xff);
+						v = fcn_004e8240(recs[j].id, (unsigned char*) e2, 0, 1, 0xff);
 						if (v != -1) {
 							while (!fcn_004c4450(v)) {
 								fcn_00535960();
 							}
 						}
 					}
-				} else if (rp->status == 3 && rp->pcount >= 1) {
-					m = rp->mamt;
+				} else if (recs[j].status == 3 && recs[j].pcount >= 1) {
+					m = recs[j].mamt;
 					for (h = (char*) g_7f4ca2;
 						(int) h < (int) (g_7f4ca2 + 768);
 						h += 0x21c) {
@@ -68,9 +65,7 @@ int __cdecl fcn_004e9ee0(void)
 						}
 					}
 				}
-				rp++;
-				j--;
-			} while (j != 0);
+			}
 		}
 		if ((flags[i] & 1) && n > 0) {
 			for (j = 0; j < n; j++) {

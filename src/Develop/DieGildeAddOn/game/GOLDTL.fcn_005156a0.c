@@ -32,6 +32,9 @@ void __cdecl fcn_005156a0(char* record)
 	unsigned int v22;
 	int idx;
 	unsigned char kind;
+	int k0;
+	unsigned int id2;
+	unsigned char k1;
 	int i;
 	int n;
 	int count;
@@ -49,12 +52,12 @@ void __cdecl fcn_005156a0(char* record)
 	slot = 0;
 	list = 0;
 	id = *(unsigned int*) (record + 0x48) & 0xffffff;
-	kind = record[0x4b];
+	k0 = record[0x4b];
 	if (*(int*) 0x7f3b24 != 0)
 		list = (char*) *(int*) (*(int*) 0x7f3b24 + 0x14);
 	else
 		list = (char*) *(int*) (*(int*) 0x7f3ee0 + 0x5d);
-	if (kind != 1)
+	if (k0 != 1)
 		goto tail;
 	idx = (int) (id * 0x41);
 	entry = lpObjektePROT + idx;
@@ -71,23 +74,12 @@ void __cdecl fcn_005156a0(char* record)
 		*(unsigned int*) (slot + 0x34) = 0;
 		table = *(char**) (record + 0x1fc);
 		if (table != 0) {
-			if (table[0x4b] != 1) {
-				fcn_00442d50(record, 1);
-				*(char**) (record + 0x204) = slot;
-				*(unsigned int*) (record + 0x224) = 0;
-				*(char**) (slot + 0x30) = record;
-				if (fcn_005014d0(*(unsigned short*) slot) != 0) {
-					item = (char*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) entry);
-					while (item != 0) {
-						if (*(unsigned short*) slot < *(unsigned short*) item)
-							fcn_00442d50(record, 0);
-						item = (char*) gm_NextEntityQueryMatch();
-					}
-				}
-			} else {
+			id2 = *(unsigned int*) (table + 0x48) & 0xffffff;
+			k1 = table[0x4b];
+			if (k1 == 1) {
 				char* other;
 				other = (char*) fcn_00502cd0((int) list, 1, 0,
-					*(unsigned int*) (table + 0x48) & 0xffffff);
+					id2);
 				if (other != 0) {
 					fcn_00442d50(record, 1);
 					*(char**) (record + 0x204) = slot;
@@ -144,6 +136,19 @@ void __cdecl fcn_005156a0(char* record)
 				} else {
 					fcn_00442d50(record, 0);
 					*(unsigned int*) (record + 0x204) = 0;
+				}
+			} else {
+				fcn_00442d50(record, 1);
+				*(char**) (record + 0x204) = slot;
+				*(unsigned int*) (record + 0x224) = 0;
+				*(char**) (slot + 0x30) = record;
+				if (fcn_005014d0(*(unsigned short*) slot) != 0) {
+					item = (char*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) entry);
+					while (item != 0) {
+						if (*(unsigned short*) slot < *(unsigned short*) item)
+							fcn_00442d50(record, 0);
+						item = (char*) gm_NextEntityQueryMatch();
+					}
 				}
 			}
 		} else {

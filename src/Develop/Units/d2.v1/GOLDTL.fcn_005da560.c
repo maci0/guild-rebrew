@@ -43,12 +43,11 @@ int __cdecl fcn_005d9ca0(unsigned short*, unsigned short*, int, int);
 /* ADDRESS: GOLDTL 0x005da560 */
 int __cdecl fcn_005da560(unsigned short* a1, unsigned short* a2)
 {
-	struct {
-		int n;
-		int flag;
-		int result;
-		int dlg;
-	} v;
+	int sel;
+	int flag;
+	int result;
+	int dlg;
+	int n;
 	Stat5da5 st;
 	int list[32];
 	int q[0x88];
@@ -56,36 +55,35 @@ int __cdecl fcn_005da560(unsigned short* a1, unsigned short* a2)
 	int i;
 	int k;
 	int w;
-	int sel;
 
-	v.result = 0x20;
+	result = 0x20;
 	if (*a2 == 0xffff) {
 		return 0;
 	}
-	v.n = fcn_004f63d0(*(int*) (a2 + 2), list, *a1);
-	if (v.n < 1) {
+	n = fcn_004f63d0(*(int*) (a2 + 2), list, *a1);
+	if (n < 1) {
 		return 0;
 	}
-	v.flag = 0;
-	for (i = 0; i < v.n; i++) {
+	flag = 0;
+	for (i = 0; i < n; i++) {
 		rows[i] = g_9a3800[list[i]];
-		v.flag |= (rows[i].x25 == 1);
+		flag |= (rows[i].x25 == 1);
 	}
 	if (a1 == a2) {
-		v.flag = 0;
+		flag = 0;
 	}
-	fcn_004f6780(v.n, rows);
-	v.dlg = fcn_00470820(0, 0, g_6ac4c8);
-	fcn_00471b60(v.dlg);
-	d2_SetForm(v.dlg, 2);
+	fcn_004f6780(n, rows);
+	dlg = fcn_00470820(0, 0, g_6ac4c8);
+	fcn_00471b60(dlg);
+	d2_SetForm(dlg, 2);
 	w = g_772514;
-	d2_SetForm(v.dlg, 4);
+	d2_SetForm(dlg, 4);
 	fcn_0046e830(-1, -1, g_772514, w, 0x767);
 	d2_SetOverlayAnimation(0, 0);
-	d2_SetForm(v.dlg, 1);
+	d2_SetForm(dlg, 1);
 	io_AppendText(0x1742, *a2);
-	d2_SetForm(v.dlg, 2);
-	for (k = 0; k < v.n; k++) {
+	d2_SetForm(dlg, 2);
+	for (k = 0; k < n; k++) {
 		fcn_005c91c0(g_14aa314[rows[k].x1c].name, 10, k * 0x28 + 10, 0x13b, 0x55);
 		if (fcn_004f4830(rows[k].x1c, &st) != 0 && st.count != 0) {
 			for (i = 0; i < st.count; i++) {
@@ -95,11 +93,10 @@ int __cdecl fcn_005da560(unsigned short* a1, unsigned short* a2)
 	}
 	memset(q, 0, sizeof(q));
 
-	d2_SetForm(v.dlg, 3); q[0] = 1;
-	sel = fcn_00472250(v.dlg, 3, io_AppendText(0x1745));
-	if ((fcn_004fa5b0(0x16, a2, q) & 2) != 0) {
-		fcn_00472640(sel, 0);
-	} else if (v.flag == 0) {
+	q[0] = 1;
+	d2_SetForm(dlg, 3);
+	sel = fcn_00472250(dlg, 3, io_AppendText(0x1745));
+	if ((fcn_004fa5b0(0x16, a2, q) & 2) != 0 || flag == 0) {
 		fcn_00472640(sel, 0);
 	}
 	g_100f1dc = -1;
@@ -109,11 +106,11 @@ int __cdecl fcn_005da560(unsigned short* a1, unsigned short* a2)
 		}
 		if (g_100f1dc != -1) {
 			if (g_67d370 == sel) {
-				v.result = fcn_005d9ca0(a1, a2, v.n, 1);
+				result = fcn_005d9ca0(a1, a2, n, 1);
 				g_774654 = 3;
 			}
 		}
 	} while (fcn_005373e0(fcn_005da560, 0x657c7) != 0);
-	fcn_00471e30(v.dlg);
-	return v.result;
+	fcn_00471e30(dlg);
+	return result;
 }

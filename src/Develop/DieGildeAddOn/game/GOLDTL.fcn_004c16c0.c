@@ -186,8 +186,8 @@ join:
 			else if (g_772d44 != 0) {
 				fcn_0064d41a(&g_772b10, s_689ff0, g_772d44);
 				fcn_004237f0(g_772d44, 0);
-				*(int *) ((char *) g_772d44 + 0x18) = 0;
 				g_772d44 = 0;
+				*(int *) ((char *) g_772d44 + 0x18) = 0; /* stores through the just-cleared pointer, as in the original */
 			}
 		}
 		v6 = g_772d4c * 100;

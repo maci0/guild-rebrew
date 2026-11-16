@@ -14,49 +14,50 @@ int __cdecl fcn_004f14c0(G175_REC* a, int na, G175_REC* b, int nb)
 	int sum_b;
 	int sum;
 	int j;
+	int i;
 
 	best_a = 0;
 	sum_a = 0;
-	for (; na > 0; na--, a++) {
-		if (a->id == -1) {
+	for (i = 0; i < na; i++) {
+		if (a[i].id == -1) {
 			continue;
 		}
 		if (best_a == 0) {
-			best_a = a;
+			best_a = a + i;
 			for (j = 0; j < 5; j++) {
-				sum_a += a->v[j];
+				sum_a += a[i].v[j];
 			}
 		}
 		else {
 			sum = 0;
 			for (j = 0; j < 5; j++) {
-				sum += a->v[j];
+				sum += a[i].v[j];
 			}
 			if (sum > sum_a) {
-				best_a = a;
+				best_a = a + i;
 				sum_a = sum;
 			}
 		}
 	}
 	best_b = 0;
 	sum_b = 0;
-	for (; nb > 0; nb--, b++) {
-		if (b->id == -1) {
+	for (i = 0; i < nb; i++) {
+		if (b[i].id == -1) {
 			continue;
 		}
 		if (best_b == 0) {
-			best_b = b;
+			best_b = b + i;
 			for (j = 0; j < 5; j++) {
-				sum_b += b->v[j];
+				sum_b += b[i].v[j];
 			}
 		}
 		else {
 			sum = 0;
 			for (j = 0; j < 5; j++) {
-				sum += b->v[j];
+				sum += b[i].v[j];
 			}
 			if (sum > sum_b) {
-				best_b = b;
+				best_b = b + i;
 				sum_b = sum;
 			}
 		}

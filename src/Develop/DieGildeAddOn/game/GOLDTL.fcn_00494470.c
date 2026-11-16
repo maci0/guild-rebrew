@@ -68,7 +68,7 @@ int __cdecl fcn_00494470(Party494470* p, int flag)
 			return -6;
 		}
 		value = sum - fcn_00508eb0(p->members[i].ent->slot, 0);
-		if (value >= 2) {
+		if (2 <= value) {
 			value = 2;
 		}
 		else if (value <= -2) {

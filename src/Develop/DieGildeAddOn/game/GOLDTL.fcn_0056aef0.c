@@ -197,8 +197,8 @@ void __cdecl fcn_0056aef0(char* a1)
 		if (i >= 1600000) {
 			i = 1600000;
 		}
-		m.f12 = (int)((double)i * 0.1);
 		v = 0;
+		m.f12 = (int)((double)i * 0.1);
 		if (q != 0) {
 			e = (char*)fcn_00502cd0(*(int*)(q + 0x14), 1, 5);
 			while (e != 0) {

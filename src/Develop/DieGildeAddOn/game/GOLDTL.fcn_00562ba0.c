@@ -97,10 +97,10 @@ void __cdecl fcn_00562ba0(int a0)
 			v10[3] = 0;
 			if (fcn_0055be70(v10) != 0) {
 				*(int*) (v3 + 0xcc) = fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (v3 + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (v4 + 4), *(int*) (v6 + 1));
-				pkt = (char*) (v3 + 0x52);
-				*(int*) (v3 + 0x70) = 8;
-				*(int*) (v3 + 0xd4) = *(int*) (v10[3] + 4);
-				*(pos14_7f4c00*) pkt = *(pos14_7f4c00*) &g_7f4c00;
+				a0 += 0x52;
+				*(int*) (a0 + 0x1e) = 8;
+				*(int*) (a0 + 0x82) = *(int*) (v10[3] + 4);
+				*(pos14_7f4c00*) a0 = *(pos14_7f4c00*) &g_7f4c00;
 				return;
 			}
 		}

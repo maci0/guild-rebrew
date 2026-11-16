@@ -56,9 +56,9 @@ int __cdecl fcn_0052b720(void)
 	if (!(f < 4.0)) {
 		f = 4.0;
 	}
-	*(int*) 0x774750 = g_6b7fac;
 	step = (float) (f * 5.0);
 	pos = g_14ce8c0;
+	*(int*) 0x774750 = g_6b7fac;
 	typ = g_14ce8c2;
 	if ((typ == g_6b5c84
 	    && pos < g_6b5c80 + 0x40)

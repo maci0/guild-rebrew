@@ -34,9 +34,9 @@ int __cdecl fcn_005cfd00(unsigned short* self, int* action, unsigned char* entit
 	if (masks == 0 && action[4] == 0) {
 		return 1;
 	}
+	type = g_entity_type_table[entity[0] + entity[0] * 0x24c];
 	lo = 0;
 	hi = 0;
-	type = g_entity_type_table[entity[0] + entity[0] * 0x24c];
 	if (type > 0x1f) {
 		hi = 1 << (type - 0x20);
 	} else {

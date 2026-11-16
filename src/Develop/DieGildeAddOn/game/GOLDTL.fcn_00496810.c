@@ -41,7 +41,8 @@ int __cdecl fcn_00496810(int a1, short* ent, int mode, Cmd* out1, Cmd* out2, int
         c2.kind = 0;
         c2.f1 = 0;
         c2.f2 = 0;
-        goto send;
+        r = fcn_00495400(9, *(unsigned short*)ent, 1, &c1, &c2);
+        goto sent;
     }
     if ((*(unsigned int*)((char*)ent + 0x1e8) & 0x400) != 0 &&
         (unsigned short)gm_RandomMod(8) != 0) return 0;
@@ -55,7 +56,8 @@ int __cdecl fcn_00496810(int a1, short* ent, int mode, Cmd* out1, Cmd* out2, int
         c2.kind = 4;
         c2.f1 = *(int*)(*(char**)((char*)ent + 0x170) + 1);
         c2.f2 = 1;
-        goto send;
+        r = fcn_00495400(9, *(unsigned short*)ent, 1, &c1, &c2);
+        goto sent;
     }
     strength = (int)((float)fcn_0050d320(ent, g_773d75) * 0.33f);
     if (out1->kind == 0) {
@@ -129,8 +131,7 @@ int __cdecl fcn_00496810(int a1, short* ent, int mode, Cmd* out1, Cmd* out2, int
     out2->f4 = (int)(value / (float)sum);
     return 9;
 
-send:
-    r = fcn_00495400(9, *(unsigned short*)ent, 1, &c1, &c2);
+sent:
     if (r == 0) return 0;
     *out1 = c1;
     *out2 = c2;
