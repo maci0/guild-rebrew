@@ -460,8 +460,8 @@ void __cdecl fcn_004da690(unsigned int *a0)
                     if (a0[3] == *(int *)(0x7f4ca4 +
                                           (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
                         if (s0C > 0) {
-                            jc = 0x9b0e30;
                             n = s0C;
+                            jc = 0x9b0e30;
                             do {
                                 if (*(int *)jc != *(int *)(s10 + 4))
                                     fcn_004c54c0(*(int *)jc, *(int *)(s10 + 4),

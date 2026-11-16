@@ -56,7 +56,7 @@ float __cdecl fcn_004d3070(char* self, int x, int z, float range)
 	for (i = 0; i < 16; i++) {
 		if (listB[i] != -1) {
 			e = gm_LookupEntityRecordIn32SlotTable(listB[i]);
-			if (e != 0 && *(unsigned char*) (e + 8) != 0 && e != self) {
+			if (e != 0 && *(unsigned char*) (e + 8) > 0 && e != self) {
 				p = (float*) (*(int*) (*(int*) (e + 0x184) + 0x34));
 				dx = pos[0] - p[0x13];
 				dy = pos[1] - p[0x14];

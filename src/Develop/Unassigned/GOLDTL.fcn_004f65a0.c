@@ -27,10 +27,10 @@ void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
 	for (i = 0; i < 0x300; i++) {
 		groups[i] = 0;
 	}
+	best = 0;
+	best_count = 0;
 	n = 0;
 	group_count = 0;
-	best_count = 0;
-	best = 0;
 	group_limit = 1;
 	id = *(int*) (a1 + 4);
 	for (off = 0; off < 0x5a00; off += 0x2d) {

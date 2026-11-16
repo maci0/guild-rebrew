@@ -48,8 +48,8 @@ int __cdecl fcn_00492e50(Cmd92e50* a, char* b)
 		sw = a->f4c;
 		count = a->f38;
 		v1 = a->f34;
-		p = a->arr1;
 		v2 = a->f10;
+		p = a->arr1;
 		extra = 1;
 	} else {
 		return 0;

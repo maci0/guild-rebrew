@@ -88,9 +88,9 @@ void __cdecl fcn_004efde0(void)
 			slot->y = y;
 			z = step + slot->z;
 			slot->z = z;
-			slot->x = MIN(x, *(float*) 0x6628a0);
-			slot->y = MIN(y, *(float*) 0x6628a0);
-			slot->z = MIN(z, *(float*) 0x6628a0);
+			slot->x = MIN(x, 1.0f);
+			slot->y = MIN(y, 1.0f);
+			slot->z = MIN(z, 1.0f);
 			if (slot->flags & 2) {
 				i = 0;
 				count = 0;

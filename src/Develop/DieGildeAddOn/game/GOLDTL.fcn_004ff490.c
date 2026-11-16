@@ -136,10 +136,10 @@ void __cdecl fcn_004ff490(char* a0)
 		if (other != 0) {
 			mode = 0x12;
 			memset(pkt, 0, 0x114);
-			pkt[8] = 7;
-			*(int*) (pkt + 0xc) = *(int*) (other + 4);
-			*(int*) (pkt + 0x14) = -1;
 			*(Time*) (pkt + 0x18) = t;
+			*(int*) (pkt + 0xc) = *(int*) (other + 4);
+			pkt[8] = 7;
+			*(int*) (pkt + 0x14) = -1;
 			pkt[0x26] = 0xa0;
 			pkt[0x30] = 2;
 			*(int*) (pkt + 0x34) = *(int*) (other + 4);

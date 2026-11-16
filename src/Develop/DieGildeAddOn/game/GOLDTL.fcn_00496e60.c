@@ -13,7 +13,7 @@ typedef struct Msg {
 extern int __cdecl fcn_004fef00(char* p);
 extern int __cdecl fcn_004e8d10(void* p, int n, void* out);
 extern int __cdecl fcn_004a9b20(int a1, char* e, int a3, Msg* in, Msg* out);
-extern int __cdecl fcn_00495400(int kind, int id, int a3, Msg* b, Msg* a);
+extern int __cdecl fcn_00495400(int kind, unsigned short id, int a3, Msg* b, Msg* a);
 extern unsigned short __cdecl gm_RandomMod(unsigned short n);
 
 #pragma optimize("y", off)

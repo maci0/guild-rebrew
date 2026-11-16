@@ -32,7 +32,7 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 	char* p;
 	char* s;
 	char* q;
-	int c;
+	char c;
 	int n;
 
 	in_label = 0;

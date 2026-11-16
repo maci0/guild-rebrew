@@ -60,8 +60,8 @@ int __cdecl fcn_004fe570(char* prefix)
     gm_KillAllSpieler();
     for (i = 0; i < 0xca78; i += 0x24d) {
         p = g_entity_type_table + i;
-        items = g_item_def_table;
         n = 0;
+        items = g_item_def_table;
         for (j = 0; j < 0x40; j++) {
             id = *(unsigned short*) (p + 0x23 + j * 2);
             if (id == 0xffff)

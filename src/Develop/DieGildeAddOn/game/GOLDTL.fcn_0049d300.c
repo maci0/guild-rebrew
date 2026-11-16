@@ -32,6 +32,7 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 	unsigned short flags;
 	int val;
 	float buf[10];
+	char* prot;
 
 	best = 0;
 	ptrs[0] = 0;
@@ -48,11 +49,12 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 	r = fcn_00502cd0(*(int*) (r + 0x5d), 2, 6, 0, 0x115);
 	a0 = fcn_0050b810(*(int*) (r + 0x14), g_773d75);
 	fcn_004fc460((char*) buf);
+	prot = lpGebaeudePROT;
 	e = lpGebaeudeINST;
 	a2 = 0x100;
 	do {
 		kind = *e;
-		if (kind != 0 && lpGebaeudePROT[kind * 0x24d] == 1) {
+		if (kind != 0 && prot[kind * 0x24d] == 1) {
 			flags = *(unsigned short*) (e + 0x5a);
 			if ((flags & 0x45) == 0) {
 				if (*(char*) (e + 0x5c) < 0x50

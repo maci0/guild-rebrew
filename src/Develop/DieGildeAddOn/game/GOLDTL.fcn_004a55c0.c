@@ -58,23 +58,16 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 			}
 			id = *a0;
 			if (fcn_005cf720(id, (unsigned short) pos, v12, 0) != 0) {
-				if (flag == 0) {
+				if (flag == 0 ||
+				    (f = fcn_0050f980((unsigned short) pos, *a0, 1), !(f < a3) && !(f > a4))) {
 					hit = 1;
 					a5[idx] = (unsigned short) pos;
-				} else {
-					f = fcn_0050f980((unsigned short) pos, *a0, 1);
-					if (!(f < a3) && !(f > a4)) {
-						hit = 1;
-						a5[idx] = (unsigned short) pos;
-					}
 				}
 			}
 			tries--;
 			pos = (pos + step) % 0x300;
 		} while (hit == 0);
 		idx++;
-		if (a1 <= idx) {
-			return 1;
-		}
-	} while (1);
+	} while (idx < a1);
+	return 1;
 }

@@ -1,5 +1,4 @@
 extern char* g_6b8014;
-extern float g_6628a8;
 extern float g_6628a0;
 extern float g_6629b8;
 extern float g_662a70;
@@ -69,11 +68,11 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	in[1] = self->y - *(float*) (g_6b8014 + 0x88);
 	in[2] = self->z - *(float*) (g_6b8014 + 0x8c);
 	fcn_00451900(in, out);
-	b0 = (out[6] + out[2]) * g_6628a8 + out[8] * 1.9f;
+	b0 = (out[6] + out[2]) * 0.0f + out[8] * 1.9f;
 	self->x = *(float*) (g_6b8014 + 0x84);
 	self->y = *(float*) (g_6b8014 + 0x88);
 	self->z = *(float*) (g_6b8014 + 0x8c);
-	b1 = (out[5] + out[1]) * g_6628a8 + out[9] * 1.9f;
+	b1 = (out[5] + out[1]) * 0.0f + out[9] * 1.9f;
 	dv[0] = self->px - *(float*) (g_6b8014 + 0x4c);
 	dv[1] = self->py - *(float*) (g_6b8014 + 0x50);
 	dv[2] = self->pz - *(float*) (g_6b8014 + 0x54);
@@ -84,12 +83,12 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	self->px = *(float*) (g_6b8014 + 0x4c);
 	self->py = *(float*) (g_6b8014 + 0x50);
 	self->pz = *(float*) (g_6b8014 + 0x54);
-	t0 = self->u * (*(float*) (g_6b8014 + 0x18c + 0 * 4)) + self->v * (*(float*) (g_6b8014 + 0x18c + 8 * 4)) + (*(float*) (g_6b8014 + 0x18c + 4 * 4)) * g_6628a8;
-	t1 = self->u * (*(float*) (g_6b8014 + 0x18c + 1 * 4)) + self->v * (*(float*) (g_6b8014 + 0x18c + 9 * 4)) + (*(float*) (g_6b8014 + 0x18c + 5 * 4)) * g_6628a8;
-	t2 = self->u * (*(float*) (g_6b8014 + 0x18c + 2 * 4)) + self->v * (*(float*) (g_6b8014 + 0x18c + 10 * 4)) + (*(float*) (g_6b8014 + 0x18c + 6 * 4)) * g_6628a8;
-	u0 = ((*(float*) (g_6b8014 + 0x18c + 0 * 4)) + (*(float*) (g_6b8014 + 0x18c + 8 * 4))) * g_6628a8 - (*(float*) (g_6b8014 + 0x18c + 4 * 4)) * 1.0f;
-	u1 = ((*(float*) (g_6b8014 + 0x18c + 1 * 4)) + (*(float*) (g_6b8014 + 0x18c + 9 * 4))) * g_6628a8 - (*(float*) (g_6b8014 + 0x18c + 5 * 4)) * 1.0f;
-	u2 = ((*(float*) (g_6b8014 + 0x18c + 2 * 4)) + (*(float*) (g_6b8014 + 0x18c + 10 * 4))) * g_6628a8 - (*(float*) (g_6b8014 + 0x18c + 6 * 4)) * 1.0f;
+	t0 = self->u * (*(float*) (g_6b8014 + 0x18c + 0 * 4)) + self->v * (*(float*) (g_6b8014 + 0x18c + 8 * 4)) + (*(float*) (g_6b8014 + 0x18c + 4 * 4)) * 0.0f;
+	t1 = self->u * (*(float*) (g_6b8014 + 0x18c + 1 * 4)) + self->v * (*(float*) (g_6b8014 + 0x18c + 9 * 4)) + (*(float*) (g_6b8014 + 0x18c + 5 * 4)) * 0.0f;
+	t2 = self->u * (*(float*) (g_6b8014 + 0x18c + 2 * 4)) + self->v * (*(float*) (g_6b8014 + 0x18c + 10 * 4)) + (*(float*) (g_6b8014 + 0x18c + 6 * 4)) * 0.0f;
+	u0 = ((*(float*) (g_6b8014 + 0x18c + 0 * 4)) + (*(float*) (g_6b8014 + 0x18c + 8 * 4))) * 0.0f - (*(float*) (g_6b8014 + 0x18c + 4 * 4)) * 1.0f;
+	u1 = ((*(float*) (g_6b8014 + 0x18c + 1 * 4)) + (*(float*) (g_6b8014 + 0x18c + 9 * 4))) * 0.0f - (*(float*) (g_6b8014 + 0x18c + 5 * 4)) * 1.0f;
+	u2 = ((*(float*) (g_6b8014 + 0x18c + 2 * 4)) + (*(float*) (g_6b8014 + 0x18c + 10 * 4))) * 0.0f - (*(float*) (g_6b8014 + 0x18c + 6 * 4)) * 1.0f;
 	hw = (float) ((g_1042578 - g_1042570) >> 1);
 	hh = (float) ((g_104257c - g_1042574) >> 1);
 	half = (hw > hh) ? hw : hh;

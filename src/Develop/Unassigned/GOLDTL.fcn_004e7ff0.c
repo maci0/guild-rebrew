@@ -40,79 +40,84 @@ int __cdecl fcn_004e7ff0(unsigned char* arg)
 
 	owner = (unsigned char*) gm_LookupEntityRecordById(*(int*) arg);
 	if (owner == 0) {
-		return 0;
+		goto fail;
 	}
 	if (*(unsigned short*) owner == 0xffff) {
-		return 0;
+		goto fail;
 	}
 	if (*(unsigned char*) (owner + 0x168) != 0) {
-		return 0;
+		goto fail;
 	}
 	want = arg[4];
 	slot = (SlotRec*) g_9a9220;
 	for (i = 0; (unsigned char*) slot < (unsigned char*) g_9a9220 + 0x2d0; slot++, i++) {
-		if (slot->type == want) {
-			break;
+		if (((SlotRec*) g_9a9220)[i].type == want) {
+			goto found;
 		}
 	}
+fail:
+	return 0;
+found:
 	if (i >= 0x1e) {
-		return 0;
+		goto fail;
 	}
 	c = arg[6];
-	if (slot->tag != c) {
-		return 0;
+	if (((SlotRec*) g_9a9220)[i].tag != c) {
+		goto fail;
 	}
 	if (arg[5] == 0xff) {
-		if (slot->id != -1) {
-			return 0;
+		if (((SlotRec*) g_9a9220)[i].id != -1) {
+			goto fail;
 		}
-		if (slot->state != 3) {
-			return 0;
+		if (((SlotRec*) g_9a9220)[i].state != 3) {
+			goto fail;
 		}
-		if (slot->count >= 4) {
-			return 0;
+		if (((SlotRec*) g_9a9220)[i].count >= 4) {
+			goto fail;
 		}
 		*(unsigned char*) (owner + 0x168) = c;
-		slot->count++;
+		((SlotRec*) g_9a9220)[i].count++;
 		return 1;
 	}
 	want = arg[5];
 	other = (SlotRec*) g_9a9220;
 	for (j = 0; (unsigned char*) other < (unsigned char*) g_9a9220 + 0x2d0; other++, j++) {
-		if (other->type == want) {
-			break;
+		if (((SlotRec*) g_9a9220)[j].type == want) {
+			goto found2;
 		}
 	}
+	return 0;
+found2:
 	if (j >= 0x1e) {
-		return 0;
+		goto fail;
 	}
-	if (slot->tag != other->tag) {
-		return 0;
+	if (((SlotRec*) g_9a9220)[i].tag != ((SlotRec*) g_9a9220)[j].tag) {
+		goto fail;
 	}
-	rec = ((TypeRec*) g_68da68)[slot->tag];
+	rec = ((TypeRec*) g_68da68)[((SlotRec*) g_9a9220)[i].tag];
 	if (rec.f0 != c) {
-		return 0;
+		goto fail;
 	}
 	if (rec.f4 == 0) {
-		return 0;
+		goto fail;
 	}
-	if (slot->id != -1) {
-		return 0;
+	if (((SlotRec*) g_9a9220)[i].id != -1) {
+		goto fail;
 	}
-	if (slot->state != 3) {
-		return 0;
+	if (((SlotRec*) g_9a9220)[i].state != 3) {
+		goto fail;
 	}
-	if (slot->count >= 4) {
-		return 0;
+	if (((SlotRec*) g_9a9220)[i].count >= 4) {
+		goto fail;
 	}
-	if (other->id != -1) {
-		return 0;
+	if (((SlotRec*) g_9a9220)[j].id != -1) {
+		goto fail;
 	}
-	if (other->count >= 4) {
-		return 0;
+	if (((SlotRec*) g_9a9220)[j].count >= 4) {
+		goto fail;
 	}
 	*(unsigned char*) (owner + 0x168) = c;
-	slot->count++;
-	other->count++;
+	((SlotRec*) g_9a9220)[i].count++;
+	((SlotRec*) g_9a9220)[j].count++;
 	return 1;
 }

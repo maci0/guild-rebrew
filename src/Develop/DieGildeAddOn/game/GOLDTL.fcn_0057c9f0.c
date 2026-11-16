@@ -6,7 +6,7 @@ extern char g_7f4ca0[];
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00510500(int);
-int __cdecl gm_RandomMod(int);
+unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
 int __cdecl io_FormatTextBuffer(char*, int, int, int, int);
 int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
@@ -51,7 +51,7 @@ void __cdecl fcn_0057c9f0(char* a0)
 		}
 		bonus += 0x19;
 		radius = (float) base + g_662c98;
-		count = (unsigned short) gm_RandomMod(0x18) + 0xf;
+		count = gm_RandomMod(0x18) + 0xf;
 	}
 	else if (kind == 2) {
 		level = *(int*) (a0 + 0xac);
@@ -63,12 +63,12 @@ void __cdecl fcn_0057c9f0(char* a0)
 		}
 		bonus += 0xf;
 		radius = (float) base + g_662914;
-		count = (unsigned short) gm_RandomMod(0x10) + 0xc;
+		count = gm_RandomMod(0x10) + 0xc;
 	}
 	else {
 		radius = 70.0f;
 		bonus = 0xa;
-		count = (unsigned short) gm_RandomMod(8) + 0xa;
+		count = gm_RandomMod(8) + 0xa;
 	}
 	count <<= 5;
 	for (p = g_7f4ca0; (int) p < (int) (g_7f4ca0 + 0x65400); p += 0x21c) {

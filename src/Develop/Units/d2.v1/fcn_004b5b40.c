@@ -89,8 +89,8 @@ void __cdecl fcn_004b5b40(int mode)
 				}
 			}
 			else if (g_67d370 == r2) {
-				g_6a3440 = -1;
 				m2.id = *(int*) (slot + 4);
+				g_6a3440 = -1;
 				m2.vend = 0;
 				m2.vunk = 0;
 				q = fcn_004c5790(10, &m2);

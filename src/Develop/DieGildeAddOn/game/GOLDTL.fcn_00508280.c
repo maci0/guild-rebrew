@@ -63,23 +63,26 @@ int __cdecl fcn_00508280(char* p, unsigned int* a1, float* a2)
 	}
 	i = gm_RandomMod(8) & 0xffff;
 	n = 8;
-	while (avail[i] != 1) {
+	do {
+		if (avail[i] == 1) {
+			goto found;
+		}
 		n--;
 		i = (i + 1) % 8;
-		if (n == 0) {
-			return 0;
-		}
-	}
+	} while (n != 0);
+fail:
+	return 0;
+found:
 	if (i == -1) {
-		return 0;
+		goto fail;
 	}
 	if (i >= 8) {
-		return 0;
+		goto fail;
 	}
 	flags = *(int*) (p + 0x2c);
 	i += 2;
 	if (fcn_00508220(i, &s) == 0) {
-		return 0;
+		goto fail;
 	}
 	r = (unsigned short) gm_RandomMod(s.c);
 	cost = (int) (r * s.b);
@@ -87,7 +90,7 @@ int __cdecl fcn_00508280(char* p, unsigned int* a1, float* a2)
 		*a1 = r != 0 ? i : 0;
 	}
 	if (r == 0) {
-		return 0;
+		goto fail;
 	}
 	mask = 0;
 	if (i == 2) {

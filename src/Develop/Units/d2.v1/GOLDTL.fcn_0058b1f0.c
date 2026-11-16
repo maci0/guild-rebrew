@@ -91,8 +91,8 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 	*(int*) ((char*) g_1015ea0 + 0x3c + st->selected * 0x2f4) = 1;
 	*(int*) ((char*) g_1015ea0 + 0x38 + st->entries[st->selected].btn * 0x2f4) = 1;
 	if (count < 0x10) {
-		de = st->entries + count;
 		i = 0x10 - count;
+		de = st->entries + count;
 		do {
 			de->item = 0;
 			de->id = 0xff;

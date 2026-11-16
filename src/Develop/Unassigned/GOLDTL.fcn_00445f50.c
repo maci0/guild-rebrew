@@ -32,9 +32,7 @@ char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 	Pal_1041d20* dst;
 	unsigned char* rows;
 	float inv;
-	float c0;
-	float c1;
-	float c2;
+	float c[3];
 	unsigned int n;
 
 	if (a0 < 7) {
@@ -50,21 +48,21 @@ char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 	if (scale != 1.0f)
 		fcn_004379a0(g_67a370, 0, 8, (void*) fcn_00445d00, &scale);
 	n = (a0 + 1) % 7;
-	c0 = g_1041d80[n].a.x - g_1041d80[a0].a.x;
-	c1 = g_1041d80[n].a.y - g_1041d80[a0].a.y;
-	c2 = g_1041d80[n].a.z - g_1041d80[a0].a.z;
-	g_67bbdc.x = c0 * t + g_1041d80[a0].a.x;
-	g_67bbdc.y = c1 * t + g_1041d80[a0].a.y;
-	g_67bbdc.z = c2 * t + g_1041d80[a0].a.z;
+	c[0] = g_1041d80[n].a.x - g_1041d80[a0].a.x;
+	c[1] = g_1041d80[n].a.y - g_1041d80[a0].a.y;
+	c[2] = g_1041d80[n].a.z - g_1041d80[a0].a.z;
+	g_67bbdc.x = c[0] * t + g_1041d80[a0].a.x;
+	g_67bbdc.y = c[1] * t + g_1041d80[a0].a.y;
+	g_67bbdc.z = c[2] * t + g_1041d80[a0].a.z;
 	g_67bbdc.x *= scale;
 	g_67bbdc.y *= scale;
 	g_67bbdc.z *= scale;
-	c0 = g_1041d80[n].b.x - g_1041d80[a0].b.x;
-	c1 = g_1041d80[n].b.y - g_1041d80[a0].b.y;
-	c2 = g_1041d80[n].b.z - g_1041d80[a0].b.z;
-	g_6b86c4.x = c0 * t + g_1041d80[a0].b.x;
-	g_6b86c4.y = c1 * t + g_1041d80[a0].b.y;
-	g_6b86c4.z = c2 * t + g_1041d80[a0].b.z;
+	c[0] = g_1041d80[n].b.x - g_1041d80[a0].b.x;
+	c[1] = g_1041d80[n].b.y - g_1041d80[a0].b.y;
+	c[2] = g_1041d80[n].b.z - g_1041d80[a0].b.z;
+	g_6b86c4.x = c[0] * t + g_1041d80[a0].b.x;
+	g_6b86c4.y = c[1] * t + g_1041d80[a0].b.y;
+	g_6b86c4.z = c[2] * t + g_1041d80[a0].b.z;
 	inv = 1.0f - t;
 	pc = g_1041d80[a0].pal;
 	pn = g_1041d80[n].pal;

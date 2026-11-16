@@ -35,7 +35,7 @@ unsigned char __cdecl fcn_00417570(char* obj, int now)
 			*(float*) (rec + 0x3c) = (float) (*(float*) (rec + 4) * f1 + *(float*) (rec + 0x3c));
 			*(float*) (rec + 0x40) = (float) (*(float*) (rec + 8) * f1 + *(float*) (rec + 0x40));
 			*(float*) (rec + 0x10) = fv = (float) (*(float*) (rec + 0x10) - *(float*) (obj + 4) * f1);
-			if (fv > g_662950) {
+			if (g_662950 < fv) {
 				*(unsigned char*) (rec + 0x4f) = (unsigned char) (int) fv;
 			} else {
 				*(unsigned char*) (rec + 0x51) = flags & 0xfe;

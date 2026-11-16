@@ -70,11 +70,11 @@ int __cdecl fcn_0051e490(void* a0, int a1)
 	g_6a23ac = 0x1005a;
 	r = vfs_fwrite(&v11, 4, 1, a0);
 	if (r <= 0) {
-		return 0;
+		goto fail;
 	}
 	r = vfs_fwrite(&a1, 1, 1, a0);
 	if (r <= 0) {
-		return 0;
+		goto fail;
 	}
 	base = g_868060 + g_773d75 * 0x2f4;
 	p = name;
@@ -86,47 +86,47 @@ int __cdecl fcn_0051e490(void* a0, int a1)
 	v14 = *(char*) (base + 0x48);
 	v15 = g_6a375c;
 	if (vfs_fwrite(name, 0x20, 1, a0) <= 0) {
-		return 0;
+		goto fail;
 	}
 	if (vfs_fwrite(pair, 8, 1, a0) <= 0) {
-		return 0;
+		goto fail;
 	}
 	if (vfs_fwrite(&v14, 1, 1, a0) <= 0) {
-		return 0;
+		goto fail;
 	}
 	if (vfs_fwrite(&v15, 1, 1, a0) <= 0) {
-		return 0;
+		goto fail;
 	}
 	if (vfs_fwrite(g_7f4c00, 0xe, 1, a0) <= 0) {
-		return 0;
+		goto fail;
 	}
 	if (g_774970 != 0xffff) {
 		n = g_774970;
 		p = g_7f4ca0 + n * 0x21c;
 		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x30, 0x10, 1, a0) <= 0) {
-			return 0;
+			goto fail;
 		}
 		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x40, 0x10, 1, a0) <= 0) {
-			return 0;
+			goto fail;
 		}
 		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x0c, 1, 1, a0) <= 0) {
-			return 0;
+			goto fail;
 		}
 		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x54, 4, 1, a0) <= 0) {
-			return 0;
+			goto fail;
 		}
 		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x164, 1, 1, a0) <= 0) {
-			return 0;
+			goto fail;
 		}
 		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x166, 1, 1, a0) <= 0) {
-			return 0;
+			goto fail;
 		}
 		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x0d, 1, 1, a0) <= 0) {
-			return 0;
+			goto fail;
 		}
 		tmp = fcn_0050b710(gm_WalkEntityChain(g_774970), g_773d75);
 		if (vfs_fwrite(&tmp, 4, 1, a0) <= 0) {
-			return 0;
+			goto fail;
 		}
 		s = g_7f4ca0 + g_774970 * 0x21c + 9;
 	} else {
@@ -149,6 +149,7 @@ int __cdecl fcn_0051e490(void* a0, int a1)
 		s = &b2;
 	}
 	if (vfs_fwrite(s, 1, 1, a0) <= 0) {
+fail:
 		return 0;
 	}
 	if (vfs_fwrite(&g_773de8, 1, 1, a0) <= 0) {

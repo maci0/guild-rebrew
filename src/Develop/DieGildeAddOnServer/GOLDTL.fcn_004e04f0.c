@@ -10,6 +10,7 @@ void __cdecl fcn_004e04f0(char* a0)
 {
 	char* v2;
 	char* v3;
+	char* w;
 	char* p;
 	int v4[6];
 	int v5[6];
@@ -18,16 +19,15 @@ void __cdecl fcn_004e04f0(char* a0)
 	v2 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
 	v3 = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
 	if (v2 != 0 && v3 != 0) {
-		if (!(gm_GetEntitySkill(v2, 3) > gm_GetEntitySkill(v3, 3)))
-			v3 = v2;
-		if (*(unsigned char*) (v3 + 0x166) != 0) {
-			if (srv_GetEntityOfficeSlot((unsigned char*) v3, v5, v4) != 0) {
+		w = gm_GetEntitySkill(v2, 3) > gm_GetEntitySkill(v3, 3) ? v3 : v2;
+		if (*(unsigned char*) (w + 0x166) != 0) {
+			if (srv_GetEntityOfficeSlot((unsigned char*) w, v5, v4) != 0) {
 				if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + g_774970 * 0x21c)) {
 					fcn_004e8240(*(unsigned char*) v4, 0, 0, 4, 0xff);
 					p = (char*) 0x7f4ca2;
 					do {
 						if (*p == 6 || *p == 7) {
-							io_FormatTextBuffer(buf, 0x10c7, *(unsigned short*) v3, (*(unsigned char*) (v3 + 9) != 0) + 0x10c8);
+							io_FormatTextBuffer(buf, 0x10c7, *(unsigned short*) w, (*(unsigned char*) (w + 9) != 0) + 0x10c8);
 							fcn_00545d40(*(int*) (p + 2), -1, buf, 0, 0x5fe, (char*) 0x6b5c60);
 						}
 						p += 0x21c;

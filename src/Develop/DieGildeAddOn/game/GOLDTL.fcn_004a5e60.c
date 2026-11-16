@@ -10,7 +10,7 @@ int __cdecl fcn_004a5e60(unsigned short* a0, int a1, int a2, int a3, float a4, f
 {
 	int buf[20];
 	int step;
-	int flag = 0;
+	int flag;
 	int found;
 	int ent;
 	int i;
@@ -18,6 +18,7 @@ int __cdecl fcn_004a5e60(unsigned short* a0, int a1, int a2, int a3, float a4, f
 	float f;
 
 	step = g_6643d8[(gm_RandomMod(0x10) & 0xffff)];
+	flag = 0;
 	buf[2] = a2;
 
 	buf[4] = a1;

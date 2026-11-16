@@ -72,7 +72,7 @@ void __cdecl fcn_004f3ef0(char* a0)
 	if (entry != 0) {
 		do {
 			if (n >= 0x40 && handle != -1) {
-				for (;;) {
+				while (1) {
 					if (fcn_004c4450(handle) != 0)
 						break;
 					fcn_004c3ff0();

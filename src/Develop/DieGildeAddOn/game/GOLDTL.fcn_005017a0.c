@@ -32,7 +32,7 @@ void __cdecl fcn_004c4670(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 void __cdecl fcn_004c6190(char*, char);
-int __cdecl gm_RandomMod(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00535960(void);
 
 /* ADDRESS: GOLDTL 0x005017a0 */

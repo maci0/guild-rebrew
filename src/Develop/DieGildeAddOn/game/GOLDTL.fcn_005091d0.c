@@ -12,7 +12,7 @@ struct StatRow {
 	int points;
 };
 
-int __cdecl fcn_004e8b40(unsigned char, int*);
+int __cdecl fcn_004e8b40(int, int*);
 int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl sprintf(char*, const char*, ...);

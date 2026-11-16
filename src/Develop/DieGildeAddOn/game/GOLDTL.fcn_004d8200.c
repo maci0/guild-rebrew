@@ -47,6 +47,7 @@ void __cdecl fcn_004d8200(int* p)
 	int* ent;
 	unsigned int v13;
 	int save;
+	int eid;
 	int i;
 	int ext;
 	float height;
@@ -61,7 +62,8 @@ void __cdecl fcn_004d8200(int* p)
 	rec = (unsigned short*) gm_LookupEntityRecordIn32SlotTable(p[0]);
 	r = fcn_004ce610((char*) rec);
 	save = *(int*) ((char*) rec + 0x16c);
-	ent = (int*) gm_LookupEntityRecordIn32SlotTable(p[4]);
+	eid = p[4];
+	ent = (int*) gm_LookupEntityRecordIn32SlotTable(eid);
 	if (ent != 0) {
 		*(int*) ((char*) ent + 0x24) = p[10];
 	}

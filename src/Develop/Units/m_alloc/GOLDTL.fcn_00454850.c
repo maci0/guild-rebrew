@@ -20,7 +20,7 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 	int i;
 
 	ok = 1;
-	if (a0[0xc] != 0) {
+	if (a0[0xc] > 0) {
 		*((float*) (a0 + 4)) = 1.0e10f;
 		*((float*) (a0 + 5)) = 1.0e10f;
 		*((float*) (a0 + 6)) = 1.0e10f;

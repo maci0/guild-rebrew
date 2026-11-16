@@ -12,7 +12,7 @@ void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl srv_GetEntityOfficeSlot(unsigned char*, void*, void*);
 float __cdecl gm_GetEntitySkill(char*, int);
-int __cdecl gm_RandomMod(int);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004ec2d0(unsigned char*, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c5620(int, char*);

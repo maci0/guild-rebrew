@@ -71,9 +71,9 @@ unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3)
 		fcn_0064e1fd(f);
 		if ((a3 & 0xff) && hdr.biHeight > 0) {
 			q = m_alloc(hdr.biWidth, 0x67d924);
-			n = hdr.biHeight / 2;
-			last = hdr.biHeight - 1;
 			i = 0;
+			last = hdr.biHeight - 1;
+			n = hdr.biHeight / 2;
 			while (i < n) {
 				memcpy(q, (char*) a1 + hdr.biWidth * i, hdr.biWidth);
 				memcpy((char*) a1 + hdr.biWidth * i, (char*) a1 + hdr.biWidth * last, hdr.biWidth);

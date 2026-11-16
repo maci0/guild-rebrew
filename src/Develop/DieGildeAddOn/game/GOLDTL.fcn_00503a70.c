@@ -109,7 +109,7 @@ add:
 	}
 	count = *(int*) 0x86805c;
 	if (count <= 0) {
-		return 0;
+		goto fail_0;
 	}
 	v4 = 1;
 	v5 = 0;
@@ -130,5 +130,7 @@ add:
 		v4++;
 		v5 += 0x18;
 	} while (v4 - 1 < count);
+	goto fail_0;
+fail_0:
 	return 0;
 }

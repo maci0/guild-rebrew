@@ -56,7 +56,7 @@ void __cdecl fcn_0054a6a0(int a0)
 		fcn_004c5620(0xffffffff, v2);
 		return;
 	}
-	if (*(short*) (v7 + 0x27) == -1) {
+	if (*(unsigned short*) (v7 + 0x27) == 0xffff) {
 		fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
 		*(unsigned short*) (v2 + 0x56) = 7;
 		fcn_004c5620(0, v2);

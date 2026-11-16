@@ -1,6 +1,5 @@
 #include <string.h>
 
-extern float g_6628a0;
 extern float g_6628cc;
 extern float g_662910;
 extern float g_665ef8;
@@ -104,7 +103,7 @@ void __cdecl fcn_005797a0(char* a0)
 			if (handle == 3 && (search[0x5b] & 0x20) == 0)
 				fvalue = fvalue - g_6628cc;
 		}
-		increment = (fvalue + g_6628a0) * (float) value * g_665ef8;
+		increment = (fvalue + 1.0f) * (float) value * g_665ef8;
 		if (valid >= 1) {
 			v23 = *(float*) (a0 + 0xb0);
 			for (i = 0; i < valid; i++) {

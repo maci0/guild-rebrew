@@ -96,10 +96,7 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
 		cy = t;
 	}
 
-	if (ay >= map->stride) {
-		return 1;
-	}
-	if (cy < 0) {
+	if (ay >= map->stride || cy < 0) {
 		return 1;
 	}
 	if (ax < 0 && bx < 0 && cx < 0) {

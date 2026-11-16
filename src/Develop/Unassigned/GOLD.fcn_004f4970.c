@@ -53,7 +53,7 @@ void __cdecl fcn_004f4970(unsigned int a0)
 		limit = 0xa;
 	}
 	limit = *(int*) ((char*) 0x5ee0f8 + limit * 4);
-	if (v <= limit) {
+	if (limit >= v) {
 		return;
 	}
 	if (count == 1) {

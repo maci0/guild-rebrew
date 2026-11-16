@@ -95,10 +95,10 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 	seen[1] = -1;
 	seen[2] = -1;
 	h = 0;
-	memset(sel, 0, sizeof(sel));
 	vals[0] = 0;
 	vals[1] = 0;
 	vals[2] = 0;
+	memset(sel, 0, sizeof(sel));
 	h = fcn_00470820(0, 0, "locations\\Wirtshaus\\DUNKLEECKE");
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);

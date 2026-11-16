@@ -83,9 +83,9 @@ int __cdecl fcn_00539600(void)
 			memcpy(g_7e2520.rest + 0x20, hdr + 0x78, 0x20);
 			g_9baa70.info = g_7e2520;
 			memset(g_9bada0, 0, 0x30);
-			g_9badc0 = *(int*) (hdr + 0x60) & 0xff;
-			g_9baadc = 0x7f;
 			g_9badc4 = *(int*) (hdr + 0x6c) & 0xff;
+			g_9baadc = 0x7f;
+			g_9badc0 = *(int*) (hdr + 0x60) & 0xff;
 			i = 0;
 			do {
 				c = hdr[0x40 + i];

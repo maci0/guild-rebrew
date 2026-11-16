@@ -29,9 +29,9 @@ int* __cdecl fcn_00479330(int* src)
 		*(unsigned char*) ((char*) res + 0xc) = 1;
 		*(int*) ((char*) res + 0x26) = 0;
 		*(int*) ((char*) res + 0x2e) = 0;
-		in = (char*) src + 0x32;
-		out = (char*) res + 0x36;
 		p = (char*) src + 0x36;
+		out = (char*) res + 0x36;
+		in = (char*) src + 0x32;
 		s = (char*) res + 0x32;
 		for (j = 0; j < *(unsigned short*) ((char*) src + 0xa); j++) {
 			*(int*) s = *(int*) in;

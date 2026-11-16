@@ -86,7 +86,7 @@ void __cdecl fcn_00589930(char* a0)
 	f = (float) act.count;
 	act.amt[0] = (int) (f * g_662910);
 	act.amt[1] = (int) (f * g_664150);
-	act.amt[2] = (int) (f * *(float*) 0x6628ac);
+	act.amt[2] = (int) (f * 0.0199999996f);
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);

@@ -7,12 +7,28 @@ void __cdecl fcn_004519d0(float* m, float* e);
 /* ADDRESS: GOLDTL 0x00451a40 */
 void __cdecl fcn_00451a40(float* m, float* out, float* e)
 {
-    float basis[16] = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
+    float basis[16];
     float u[4];
     float v[4];
     float c[4];
     int i;
 
+    basis[14] = 0.0f;
+    basis[13] = 0.0f;
+    basis[12] = 0.0f;
+    basis[11] = 0.0f;
+    basis[9] = 0.0f;
+    basis[8] = 0.0f;
+    basis[7] = 0.0f;
+    basis[6] = 0.0f;
+    basis[4] = 0.0f;
+    basis[3] = 0.0f;
+    basis[2] = 0.0f;
+    basis[1] = 0.0f;
+    basis[15] = 1.0f;
+    basis[10] = 1.0f;
+    basis[5] = 1.0f;
+    basis[0] = 1.0f;
     u[0] = m[0x10] - m[0x14];
     u[1] = m[0x11] - m[0x15];
     u[2] = m[0x12] - m[0x16];

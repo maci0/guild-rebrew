@@ -19,7 +19,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 int __cdecl gm_CheckEntityType(unsigned char*);
 char* __cdecl gm_SearchTable67(int);
-int __cdecl gm_RandomMod(int);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00500bb0(int*, int, int, int);
 void __cdecl fcn_00455350(char*, char*, float*);
 void __cdecl fcn_00546190(char*);

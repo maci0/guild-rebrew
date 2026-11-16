@@ -64,7 +64,7 @@ void __cdecl fcn_00487000(char* e)
 	ent = lpGebaeudePROT + *(unsigned char*) (*(char**) (e + 0x16c)) * 0x24d;
 	for (p = 0x7f4e05; p < 0x85a205; p += 0x21c) {
 		rec = (char*) (p - 0x165);
-		if (*(short*) rec == -1) {
+		if (*(unsigned short*) rec == 0xffff) {
 			continue;
 		}
 		if (*(char**) (rec + 0x16c) != *(char**) (e + 0x16c)) {

@@ -22,10 +22,12 @@ int __cdecl fcn_0042dac0(int a)
     void* f;
     int n, v;
     int *first, *last;
+    char *row;
 
-    p = g_149d120[a] + 0x60;
+    row = g_149d120[a];
+    p = row + 0x60;
 
-    sub_64d41a(buf, 0x679de4, (unsigned long) g_1052f00, (unsigned long) g_679888, g_149d120[a]);
+    sub_64d41a(buf, 0x679de4, (unsigned long) g_1052f00, (unsigned long) g_679888, (void*) row);
     f = sub_64e2f9(buf, (unsigned long) g_6790b0);
     if (f == 0) {
         MessageBoxA(0, "Could not write ResourceFile!", "txt_SaveTextFile", 0x30);

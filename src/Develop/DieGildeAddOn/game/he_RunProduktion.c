@@ -280,11 +280,7 @@ warten:
                 rezept = lpObjektePROT + *(unsigned short*) (e + 0xac) * 0x41;
                 differenz = fcn_0050c830(letzte_zeit, naechste_zeit, 0);
                 produziert = 0;
-                {
-                    float df;
-                    df = (float) differenz;
-                    *(float*) (e + 0xb4) -= (*(int*) (e + 0x14) * 1.3f + *(int*) (e + 0x18)) * df * leistung;
-                }
+                *(float*) (e + 0xb4) -= (*(int*) (e + 0x14) * 1.3f + *(int*) (e + 0x18)) * (float) differenz * leistung;
                 if (*(float*) (e + 0xb4) <= 0.0f) {
                     do {
                         ++produziert;

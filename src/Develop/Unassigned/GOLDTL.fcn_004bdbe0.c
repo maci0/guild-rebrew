@@ -15,7 +15,7 @@ int __cdecl fcn_004bdbe0(int obj, int x, int y, int i, int j)
 	int d;
 	float best;
 
-	if (i < 0 || j < 0) {
+	if (j < 0 || i < 0) {
 		map = *(char**) (obj + 4);
 		n = *(int*) (map + 0x20);
 		best = (float) (n * n * 2);
