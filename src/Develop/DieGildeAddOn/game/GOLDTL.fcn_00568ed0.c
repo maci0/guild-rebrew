@@ -111,7 +111,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			*(int*) (a1 + 0x70) = -1;
 			return;
 		}
-		for (i = 8, p = a1 + 0x8c; i != 0; i--, p += 4) {
+		for (i = 0, p = a1 + 0x8c; i < 8; i++, p += 4) {
 			if (*(int*) p == -1) {
 				continue;
 			}

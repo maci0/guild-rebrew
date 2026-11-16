@@ -42,12 +42,11 @@ double __cdecl fcn_004fe5f0(char* a0)
 	float v10;
 	float v15;
 	double v11;
-	float v14;
 	int e;
 	int v4;
 	unsigned int v5;
 	int v6;
-	int w = 0;
+	unsigned short w = 0;
 
 	if (*(unsigned short*) a0 == 0xffff) {
 		return g_662a94;
@@ -72,9 +71,9 @@ double __cdecl fcn_004fe5f0(char* a0)
 			msg[4] = 0x72;
 			*(int*) (msg + 8) = *(int*) (a0 + 4);
 			*(int*) (msg + 0xc) = -1;
-			*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
 
 			msg[0x36] = 2;
+			*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
 
 
 			*(int*) (msg + 0x58) = *(int*) (a0 + 4);
@@ -188,10 +187,10 @@ double __cdecl fcn_004fe5f0(char* a0)
 			msg[4] = 0x72;
 			*(int*) (msg + 8) = *(int*) (a0 + 4);
 			*(int*) (msg + 0xc) = -1;
-			*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
 
 
 			msg[0x36] = 2;
+			*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
 
 			*(int*) (msg + 0x58) = *(int*) (a0 + 4);
 			fcn_004c5530(msg);
@@ -219,11 +218,11 @@ double __cdecl fcn_004fe5f0(char* a0)
 		          v15 +
 		      *(float*) (a0 + 0x10);
 	} else {
-		double adjusted;
+		float adjusted;
 		adjusted = *(float*) (a0 + 0x14);
 		if (*(int*) (a0 + 0x170) != 0) {
 			v4 = fcn_0050c710(*(int*) (a0 + 0x170), 8, 1);
-			adjusted = (double) v4 * 0.0125f * g_66444c + adjusted;
+			adjusted = v4 * 0.0125f * g_66444c + adjusted;
 		}
 		v10 = (*(float*) (a0 + 0x1c) - adjusted) + adjusted / *(float*) (a0 + 0x1c);
 		fcn_004c4510(a0, *(int*) (a0 + 4));
@@ -237,7 +236,7 @@ double __cdecl fcn_004fe5f0(char* a0)
 		c = 0;
 		if ((*(unsigned char*) (a0 + 0x1cc) & 1) != 0 &&
 		    *(char*) (a0 + 2) != 6 && *(char*) (a0 + 2) != 7) {
-			v14 = 0.0f;
+			float v14 = 0.0f;
 			v10 = 100.0f;
 			fcn_004c4510(a0, *(int*) (a0 + 4));
 			fcn_004c4570(4, 1, 0x1c, &v10);
@@ -256,9 +255,9 @@ double __cdecl fcn_004fe5f0(char* a0)
 		msg[4] = 0x72;
 		*(int*) (msg + 8) = *(int*) (a0 + 4);
 		*(int*) (msg + 0xc) = -1;
-		*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
 
 		msg[0x36] = 2;
+		*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
 
 
 		*(int*) (msg + 0x58) = *(int*) (a0 + 4);

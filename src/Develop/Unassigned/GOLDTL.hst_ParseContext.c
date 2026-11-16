@@ -26,7 +26,7 @@ int __cdecl hst_ParseContext(char* text, int* arg, int* out)
 	if (arg == 0)
 		return 0;
 	for (i = 0, t = (char*) 0x680738; (int) t < 0x680747; t += 5, i++) {
-		if (*(int*) t == *(int*) text)
+		if (*(int*) text == *(int*) t)
 			sel = i;
 	}
 	n = 0x100;

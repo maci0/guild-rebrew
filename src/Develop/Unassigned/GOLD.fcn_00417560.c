@@ -10,7 +10,9 @@ void __cdecl fcn_00417560(void* a0)
 {
 	int found;
 	int handle;
+	int sun;
 
+	sun = g_633444;
 	found = -1;
 	handle = *(int*) ((char*) a0 + 0x208);
 	if (handle != *(int*) 0x5fb5b0) {
@@ -21,6 +23,6 @@ void __cdecl fcn_00417560(void* a0)
 	d3_DestroyObject(a0);
 	SonnenstrahlenAktiv = 0;
 	if (found != -1) {
-		fcn_004478e0(g_633444, 1);
+		fcn_004478e0(sun, 1);
 	}
 }

@@ -31,9 +31,9 @@ int __cdecl fcn_004f61c0(int* a0, int* a1, int* a2, unsigned int a3)
 	for (i = 0; i < 0x200; i++) {
 		found[i] = 0;
 	}
-	n = 0;
 	slot_id = *(int*) (0x7f4ca0 + (a3 & 0xffff) * 0x21c + 4);
-	for (p = (unsigned char*) 0x99f804; p < (unsigned char*) 0x9a3804; p += 8) {
+	n = 0;
+	for (p = (unsigned char*) 0x99f804; (int) p < 0x9a3804; p += 8) {
 		if (*(int*) (p - 4) != slot_id) {
 			continue;
 		}

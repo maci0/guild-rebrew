@@ -34,7 +34,7 @@ void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
 	group_limit = 1;
 	id = *(int*) (a1 + 4);
 	for (off = 0; off < 0x5a00; off += 0x2d) {
-		if (*(int*) ((char*) g_9a3800 + 0x25 + off) == 0) {
+		if (*(unsigned int*) ((char*) g_9a3800 + 0x25 + off) <= 0) {
 			continue;
 		}
 		if (*(int*) ((char*) g_9a3800 + 0x16 + off) == id) {
@@ -44,7 +44,7 @@ void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
 		if (ent == 0) {
 			continue;
 		}
-		for (rec = (unsigned char*) g_99f800 + 4; rec < (unsigned char*) 0x9a3804; rec += 8) {
+		for (rec = (unsigned char*) g_99f800 + 4; (int) rec < 0x9a3804; rec += 8) {
 			if (*(int*) (rec - 4) == id && *(int*) rec == *(int*) ((char*) g_9a3800 + off)) {
 				goto next;
 			}

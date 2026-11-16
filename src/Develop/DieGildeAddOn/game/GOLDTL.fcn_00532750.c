@@ -17,12 +17,13 @@ void __cdecl fcn_00532750(char* a)
 	unsigned short* e;
 	char* p;
 
-	p = (char*) g_7746c8;
-	if (p == 0) {
-		p = g_7746c4;
-		if (p == 0) {
+	if ((int) g_7746c8 != 0) {
+		p = (char*) g_7746c8;
+	} else {
+		if (g_7746c4 == 0) {
 			return;
 		}
+		p = g_7746c4;
 	}
 	if (strstr(a, (char*) 0x6a1f84) == 0) {
 		return;

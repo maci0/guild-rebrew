@@ -13,14 +13,11 @@ int __cdecl fcn_004f14c0(G175_REC* a, int na, G175_REC* b, int nb)
 	int sum_a;
 	int sum_b;
 	int sum;
-	int i;
 	int j;
 
 	best_a = 0;
-	best_b = 0;
 	sum_a = 0;
-	sum_b = 0;
-	for (i = na; i > 0; i--, a++) {
+	for (; na > 0; na--, a++) {
 		if (a->id == -1) {
 			continue;
 		}
@@ -41,7 +38,9 @@ int __cdecl fcn_004f14c0(G175_REC* a, int na, G175_REC* b, int nb)
 			}
 		}
 	}
-	for (i = nb; i > 0; i--, b++) {
+	best_b = 0;
+	sum_b = 0;
+	for (; nb > 0; nb--, b++) {
 		if (b->id == -1) {
 			continue;
 		}

@@ -1,6 +1,36 @@
+char* __cdecl fcn_0043a000(char* object);
+void __cdecl fcn_0043d7c0(void* obj);
+void __cdecl fcn_00458b10(char* object, char* camera, float* position, float* out);
+
 /* ADDRESS: GOLD 0x00452ee0 */
-int __cdecl fcn_00452ee0(void)
+void __cdecl fcn_00452ee0(char* o)
 {
-	/* Stub: provider restored; native behavior and full C contract unrecovered. */
-	return 0;
+	float len;
+	char* rec;
+	char* vt;
+
+	len = 0.0f;
+	if (*(int*) (o + 0x1cc) == 0) {
+		*(char**) (o + 0x1cc) = fcn_0043a000(o);
+		if (*(int*) (o + 0x1cc) == 0) {
+			return;
+		}
+	}
+	fcn_00458b10(o, *(char**) 0xfc2dec, (float*) (o + 0x4c), (float*) (o + 0x1d8));
+	rec = *(char**) (o + 0x1cc);
+	vt = *(char**) (rec + 0x10);
+	if (vt != 0) {
+		len = ((float (__cdecl*)(char*, char*)) *(void**) (vt + 0x1f8))(o, rec);
+	}
+	*(float*) (o + 0x1e4) = len * len;
+	if (o[0x210] & 4) {
+		fcn_0043d7c0(o);
+	}
+	if (o[0x210] & 0x20) {
+		rec = *(char**) (o + 0x1cc);
+		vt = *(char**) (rec + 0x10);
+		if (vt != 0) {
+			((void (__cdecl*)(char*, char*)) *(void**) (vt + 0x1ec))(o, rec);
+		}
+	}
 }

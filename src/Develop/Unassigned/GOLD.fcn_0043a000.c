@@ -22,9 +22,9 @@ char* __cdecl fcn_0043a000(char* object)
     count = *(unsigned char*) (model + 0x96c);
     if (count == 0)
         return 0;
-    selected = (*(unsigned char*) (object + 0x213) & 0x30) >> 4;
+
     eye = g_6b8014;
-    if (selected == 0 && eye) {
+    if ((*(unsigned char*) (object + 0x213) & 0x30) == 0 && eye) {
         delta = *(VECTOR3*) (object + 0x4c);
         delta.x -= *(float*) (eye + 0x4c);
         delta.y -= *(float*) (eye + 0x50);
@@ -37,6 +37,7 @@ char* __cdecl fcn_0043a000(char* object)
             level = 0.0f;
         index = (int) level;
     } else {
+        selected = (*(unsigned char*) (object + 0x213) & 0x30) >> 4;
         index = __max(0, __min(count - 1, selected - 1));
     }
     page = model + 0xf4 + index * 0x198;

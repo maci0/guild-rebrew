@@ -52,7 +52,7 @@ void __cdecl fcn_00586c10(char* obj)
     int flags;
     int tbl;
     int count;
-    int v[4];
+    int v[3];
     unsigned int a0;
     float anchor[3];
     int g28;
@@ -60,7 +60,7 @@ void __cdecl fcn_00586c10(char* obj)
     int s1;
     int s2;
     int s3;
-    int p[4];
+    int p[3];
     int S[57];
     float f0[4];
     float f1[4];

@@ -1,44 +1,50 @@
-/* Walks a packed string list. a2 == 8 reads the count from *(int*)a1 and
- * returns the entry at index 4, or 6 when that entry is nonempty. */
+/* Walks a packed string list: a1 entries (plus 4 more when a2 == 8) are
+ * skipped, entry 4 or a nonempty entry 6 become the fallback returned for
+ * a2 == 8. */
 /* ADDRESS: GOLD 0x0042c3b0 */
 char* __cdecl fcn_0042c3b0(char* a0, int a1, int a2)
 {
-	char* base;
 	char* alt;
 	char* p;
 	int n;
 	int i;
+	int len;
+	char c;
 
-	base = a0;
-	if (a2 == 8) {
-		n = *(int*) a1;
-		alt = a0;
-		a1 = (int) ((int*) a1 + 1);
-	} else {
-		alt = (char*) a1;
-		n = a2;
-	}
-	n--;
-	p = a0;
 	i = 0;
-	while (i < n) {
-		while (*p != 0) {
+	p = a0;
+	if ((char) a2 == 8) {
+		a1 = a1 + 4;
+		alt = a0;
+	} else {
+		alt = (char*) a2;
+	}
+	n = a1 - 1;
+	if (n > 0) {
+		do {
+			len = 0;
+			do {
+				c = p[len];
+				len++;
+			} while (c != 0);
+			p = p + len - 1;
+			if (p == 0) {
+				return a0;
+			}
 			p++;
-		}
-		p++;
-		if (p == (char*) 1) {
-			return base;
-		}
-		i++;
-		if (i == 4 || (i == 6 && *p != 0)) {
-			alt = p;
-		}
+			i++;
+			if (i == 4 || (i == 6 && *p != 0)) {
+				alt = p;
+			}
+		} while (i < n);
 	}
-	if (*p == 0 && a2 == 4) {
-		return base;
-	}
-	if (*p == 0 && a2 == 8) {
-		return alt;
+	if (*p == 0) {
+		if ((char) a2 == 4) {
+			return a0;
+		}
+		if ((char) a2 == 8) {
+			p = alt;
+		}
 	}
 	return p;
 }

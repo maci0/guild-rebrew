@@ -21,8 +21,7 @@ void __cdecl fcn_005109f0(int a0)
 	if (fcn_005105a0(a0) == 0) {
 		return;
 	}
-	id = *(int*) (a0 + 0x48);
-	if (id != -1 && (id &= 0xffffff, *(char*) (a0 + 0x4b) == 2) &&
+	if (*(int*) (a0 + 0x48) != -1 && (id = *(int*) (a0 + 0x48) & 0xffffff, *(char*) (a0 + 0x4b) == 2) &&
 	    *(int*) (a0 + 0x218) != 0) {
 
 		if (id == 0x47) {
