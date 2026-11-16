@@ -39,7 +39,6 @@ void __cdecl fcn_005a86a0(void* a0)
 	int save50;
 	int save54;
 	int save58;
-	unsigned short id;
 	char v1;
 	char* saved688;
 	void* t;
@@ -62,12 +61,11 @@ void __cdecl fcn_005a86a0(void* a0)
 	g_6a2520 = 0;
 	fcn_00530510();
 	sv_ClearObjectSelection();
-	id = *(unsigned short*) a0;
-	v1 = *(char*) (id + (unsigned long)&g_7f3b40);
+	v1 = *(char*) (*(unsigned short*) a0 + (unsigned long)&g_7f3b40);
 	if (v1 != (char) 0xfe) {
 		if (v1 == (char) 0xff || *(char*) ((int) v1 * 0x3dc + 0x1043695) != 0) {
 			g_7725c8 = 1;
-			init_LoadObjektScene(id);
+			init_LoadObjektScene(*(unsigned short*) message);
 			g_7725c8 = 0;
 		}
 		*(unsigned short*) (*(int*) &g_7746c8 + 0x29) = *(unsigned short*)message;

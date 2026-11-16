@@ -78,45 +78,42 @@ void __cdecl fcn_00527540(void)
 	v3 = gm_GetBuildingTypeCategory(*v8);
 	if (v3 == 1) {
 		if (*q == 0x16)
-			p = "%sbmp\\groundplans\\riss_wirtshaus.bmp";
+			sprintf(buf, "%sbmp\\groundplans\\riss_wirtshaus.bmp", prefix);
 		else if (*q == 0x0e)
-			p = "%sbmp\\groundplans\\riss_parfuemerie.bmp";
+			sprintf(buf, "%sbmp\\groundplans\\riss_parfuemerie.bmp", prefix);
 		else if (*q == 8)
-			p = "%sbmp\\groundplans\\riss_tinkturei.bmp";
+			sprintf(buf, "%sbmp\\groundplans\\riss_tinkturei.bmp", prefix);
 		else {
 			sprintf(buf, "%sbmp\\groundplans\\riss_%s.bmp", prefix, p);
 			*(int*) 0x774680 = fcn_00475c10(buf);
 			if (*(int*) 0x774680)
 				goto have_image;
-			p = "%sbmp\\groundplans\\riss_handwerksbetrieb.bmp";
+			sprintf(buf, "%sbmp\\groundplans\\riss_handwerksbetrieb.bmp", prefix);
 		}
-		goto format_image;
+		goto have_image;
 	}
 	if (v3 == 3) {
 		if (*q == 0x0f)
-			p = "%sbmp\\groundplans\\riss_rathaus.bmp";
-		else if (*q == 0x01) {
-			p = "%sbmp\\groundplans\\Riss_Arbeiterunterkunft.bmp";
-		} else {
-			goto have_image;
-		}
-		goto format_image;
+			sprintf(buf, "%sbmp\\groundplans\\riss_rathaus.bmp", prefix);
+		else if (*q == 0x01)
+			sprintf(buf, "%sbmp\\groundplans\\Riss_Arbeiterunterkunft.bmp", prefix);
+		goto have_image;
 	}
 	if (v3 == 5)
-		p = "%sbmp\\groundplans\\riss_zunfthaus.bmp";
+		sprintf(buf, "%sbmp\\groundplans\\riss_zunfthaus.bmp", prefix);
 	else {
 		switch (*q) {
 		case 0x05:
-			p = "%sbmp\\groundplans\\riss_geldleihe.bmp";
+			sprintf(buf, "%sbmp\\groundplans\\riss_geldleihe.bmp", prefix);
 			break;
 		case 0x09:
-			p = "%sbmp\\groundplans\\riss_lagerhaus.bmp";
+			sprintf(buf, "%sbmp\\groundplans\\riss_lagerhaus.bmp", prefix);
 			break;
 		case 0x07:
-			p = "%sbmp\\groundplans\\riss_kirche.bmp";
+			sprintf(buf, "%sbmp\\groundplans\\riss_kirche.bmp", prefix);
 			break;
 		case 0x13:
-			p = "%sbmp\\groundplans\\riss_stadtwache.bmp";
+			sprintf(buf, "%sbmp\\groundplans\\riss_stadtwache.bmp", prefix);
 			break;
 		default:
 			sprintf(buf, "%sbmp\\groundplans\\riss_%s.bmp", prefix, p);
@@ -124,12 +121,10 @@ void __cdecl fcn_00527540(void)
 			*(int*) 0x774680 = v3;
 			if (v3)
 				goto have_image;
-			p = "%sbmp\\groundplans\\riss_handwerksbetrieb.bmp";
+			sprintf(buf, "%sbmp\\groundplans\\riss_handwerksbetrieb.bmp", prefix);
 			break;
 		}
 	}
-format_image:
-	sprintf(buf, p, prefix);
 have_image:
 	v3 = *(int*) 0x774680;
 	if (!v3) {

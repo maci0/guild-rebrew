@@ -84,8 +84,8 @@ void __cdecl fcn_0043ef20(char* a0)
 	if ((*(unsigned char*) (a0 + 0x8036) & 2) == 0 && *(int*) (a0 + 0x1c) != 0) {
 		fcn_0043bf20(a0);
 		w = *(int*) a0;
-		fillDst = *(char**) (a0 + 0x1c);
 		fillCount = w * w;
+		fillDst = *(char**) (a0 + 0x1c);
 		__asm {
 			mov edi, fillDst
 			mov ebx, fillCount

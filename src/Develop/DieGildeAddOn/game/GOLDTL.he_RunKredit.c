@@ -17,9 +17,9 @@ void __cdecl fcn_004c51a0(int, int, int, int);
 /* ADDRESS: GOLDTL 0x00564b90 */
 void __cdecl he_RunKredit(int a0)
 {
+	char info[0x80];
 	char buf[0x400];
-	char msg[0x400];
-	char info[0x3f0];
+	char msg[0x800];
 	char* slot;
 	float f;
 	int obj;
@@ -40,11 +40,7 @@ void __cdecl he_RunKredit(int a0)
 		}
 		if (*(unsigned char*) (a0 + 0x78) & 2) {
 			obj = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
-			if (!obj) {
-				fcn_64d41a(buf, (char*) 0x6a6620, *(int*) (a0 + 0xac));
-				fcn_00546190(a0);
-				return;
-			}
+			if (obj) {
 			n = gm_LookupEntityRecordById(*(int*) (a0 + 0xb0));
 			slot = (char*) 0x7f4ca0 +
 			       (unsigned short) *(unsigned short*) (obj + 0x27) * 0x21c;
@@ -69,7 +65,12 @@ void __cdecl he_RunKredit(int a0)
 			} else {
 				fcn_004c51a0(*(int*) ((char*) obj + 1), *(int*) (a0 + 0xb0),
 				           *(unsigned char*) 0x773d75, (int) f);
-				*(int*) ((char*) obj + 0x55) = (int) f;
+				*(int*) ((char*) obj + 0x55) = (int) (*(int*) ((char*) obj + 0x55) + f);
+			}
+			} else {
+				fcn_64d41a(info, (char*) 0x6a6620, *(int*) (a0 + 0xac));
+				fcn_00546190(a0);
+				return;
 			}
 		}
 		n = *(int*) (a0 + 0xbc) - 1;
@@ -84,12 +85,16 @@ void __cdecl he_RunKredit(int a0)
 			n = gm_LookupEntityRecordById(*(int*) (a0 + 0xb0));
 			if (*(unsigned char*) (a0 + 0x78) & 2) {
 				time = gm_AccumulateTyped2(n);
-				io_FormatTextBuffer(buf, *(int*) (a0 + 0xb4) <= time ? 0x18e9 : 0x18ea,
-				           *(int*) (a0 + 0xb4));
+				if (time < *(int*) (a0 + 0xb4))
+					io_FormatTextBuffer(buf, 0x18ea, *(int*) (a0 + 0xb4));
+				else
+					io_FormatTextBuffer(buf, 0x18e9, *(int*) (a0 + 0xb4));
 				fcn_005c4ec0(*(int*) ((char*) obj + 1), n,
 				           *(int*) (a0 + 0xb4), buf);
-				fcn_00545d40(*(int*) (a0 + 0xb0), -1, buf, 0, 0x5ff,
-				           *(int*) (a0 + 0xb4) <= time ? (char*) 0x6b5c60 : (char*) 0x699a88);
+				if (*(int*) (a0 + 0xb4) <= time)
+					fcn_00545d40(*(int*) (a0 + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x6b5c60);
+				else
+					fcn_00545d40(*(int*) (a0 + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x699a88);
 				if (*(unsigned char*) (slot + 2) == 6 ||
 				    *(unsigned char*) (slot + 2) == 7) {
 					io_FormatTextBuffer(msg, 0x18d8, *(unsigned short*) n, obj,

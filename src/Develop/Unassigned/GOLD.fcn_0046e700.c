@@ -60,7 +60,7 @@ void __cdecl fcn_0046e700(int index)
         }
         --i;
         if (i != parent->count) {
-            memcpy(parent->list + i, parent->list + i + 1, (parent->count - i) * 4);
+            memmove(parent->list + i, parent->list + i + 1, (parent->count - i) * 4);
         }
         --parent->count;
     }
@@ -73,7 +73,7 @@ void __cdecl fcn_0046e700(int index)
     for (i = 0; i < 0x2ff; i++) {
         if (g_006ed964[i] == element) {
             if (i == 0x2ff) g_006ed964[0x2ff] = 0;
-            else memcpy(g_006ed964 + i, g_006ed964 + i + 1, 0xbf8 - i * 4);
+            else memmove(g_006ed964 + i, g_006ed964 + i + 1, 0xbf8 - i * 4);
             break;
         }
     }

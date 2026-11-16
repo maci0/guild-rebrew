@@ -13,11 +13,11 @@ int __cdecl fcn_00504100(unsigned int kind, int* a, int* b)
 	case 2: *a = 1; *b = 0; return 1;
 	case 4: *a = 1; *b = 2; return 1;
 	case 13: *a = 2; *b = 0; return 1;
-	case 1:
-	case 3:
-	case 14:
-	case 15:
-	case 16:
+	case 1: *a = 1; *b = 0; return 1;
+	case 3: *a = 1; *b = 0; return 1;
+	case 14: *a = 1; *b = 0; return 1;
+	case 15: *a = 1; *b = 0; return 1;
+	case 16: *a = 1; *b = 0; return 1;
 	default: *a = 1; *b = 0; return 1;
 	}
 }

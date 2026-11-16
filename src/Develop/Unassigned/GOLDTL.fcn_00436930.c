@@ -2,11 +2,11 @@ void* __cdecl fcn_00435410(char* e);
 void __cdecl fcn_00435910(char* a0, int a1, int a2, int* a3);
 
 /* ADDRESS: GOLDTL 0x00436930 */
-void* __cdecl fcn_00436930(char* a0, int* a1)
+void* __cdecl fcn_00436930(char* a0, int* out)
 {
 	char* v1;
 	char* v2;
-	int* out = a1;
+	int buf;
 
 	if (out != 0) {
 		*out = 0;
@@ -25,8 +25,8 @@ void* __cdecl fcn_00436930(char* a0, int* a1)
 		if (*(char*) (a0 + 0x4a0) != 0) {
 			v1 = *(char**) (a0 + 0x318); v2 = *(char**) (v1 + 0x268);
 			if (v2 != 0) {
-				if (((int (__stdcall*) (void*, int, void**)) *(void**) (*(int*) v2 + 0x38)) (v2, 0x2000, (void**) &a1) >= 0) {
-					fcn_00435910(a0, *(int*) (v1 + 0x29c), (int) a1, out);
+				if (((int (__stdcall*) (void*, int, void**)) *(void**) (*(int*) v2 + 0x38)) (v2, 0x2000, (void**) &buf) >= 0) {
+					fcn_00435910(a0, *(int*) (v1 + 0x29c), buf, out);
 					((void (__stdcall*) (void*)) *(void**) (*(int*) v2 + 0x3c)) (v2);
 				}
 				return v2;

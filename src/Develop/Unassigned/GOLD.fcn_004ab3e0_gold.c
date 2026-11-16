@@ -58,8 +58,9 @@ int __cdecl fcn_004ab3e0_gold(int action, char* actor, int busy, char* first, ch
     if (total + 2 > *(int*) (actor + 0x194)) return 0;
     count = fcn_004a61d0(actor, 4, candidate, 25.0f, 75.0f, best_score, ids);
     if (!count) return 0;
+    i = 0;
     chosen = 0;
-    for (i = 0; i < count; i++) {
+    for (; i < count; i++) {
         level = fcn_004e99c0((unsigned char) ((char*) g_slot_table)[ids[i] * 0x21c + 0x166]) / 3 + 2 + total;
         if (level >= *(int*) (actor + 0x194)) {
             selected[chosen++] = (char*) g_slot_table + ids[i] * 0x21c;

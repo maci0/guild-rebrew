@@ -43,6 +43,7 @@ int __cdecl fcn_00499640(int unused0, char* e, int a2, Msg499640* out1, Msg49964
 	char* entry;
 	int r;
 	float v;
+	char kind;
 
 	va = fcn_0050d320(e, g_773d75);
 	if (a2 != 0) {
@@ -57,8 +58,9 @@ int __cdecl fcn_00499640(int unused0, char* e, int a2, Msg499640* out1, Msg49964
 	if ((float) va * g_664160 < (float) vb) {
 		goto fail;
 	}
+	kind = e[2];
 	if (*(int*) (e + 0x170) == 0) {
-		if (e[2] == 3) {
+		if (kind == 3) {
 			goto check_flag;
 		}
 		msg0.type = 5;
@@ -68,7 +70,7 @@ int __cdecl fcn_00499640(int unused0, char* e, int a2, Msg499640* out1, Msg49964
 		msg1.a = 0;
 		msg1.b = 0;
 	} else {
-		if (e[2] == 3) {
+		if (kind == 3) {
 			goto check_flag;
 		}
 		if (fcn_00502cd0(*(int*) (*(char**) (e + 0x170) + 0x5d), 2, 6, 0,

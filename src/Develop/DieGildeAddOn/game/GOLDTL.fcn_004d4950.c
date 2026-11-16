@@ -65,7 +65,7 @@ void __cdecl fcn_004d4950(int a0)
     }
     if (v22) {
         r = cut_RandMod(10);
-        if (*(int*) ((char*) v4 + 0x16c) == (int) g_772e9c) {
+        if ((int) g_772e9c == *(int*) ((char*) v4 + 0x16c)) {
             fcn_004cfc40((char*) v4, v22, 1);
         } else {
             fcn_004cfc40((char*) v4, v22, 2);

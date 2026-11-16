@@ -1,4 +1,4 @@
-extern int g_7f4ca0;
+extern char g_7f4ca0[];
 extern int g_14b5280;
 extern int g_aed32c;
 extern float flt_665ecc;
@@ -26,7 +26,6 @@ void __cdecl fcn_004c5530(int);
 void __cdecl fcn_00569760(char* a0)
 {
 	float f;
-	float v;
 	char* p;
 	int n;
 	int idx;
@@ -59,7 +58,7 @@ void __cdecl fcn_00569760(char* a0)
 		*(int*) (a0 + 0x70) = -1;
 		return;
 	}
-	p = (char*) &g_7f4ca0 + (*(unsigned short*) (rec + 0x27)) * 0x21c;
+	p = g_7f4ca0 + (*(unsigned short*) (rec + 0x27)) * 0x21c;
 	if (*(int*) (rec + 0x65) == -1) {
 		*(int*) (rec + 0x65) = *(int*) (e + 4);
 	}
@@ -105,17 +104,13 @@ void __cdecl fcn_00569760(char* a0)
 		f = 0.02f;
 	}
 	n = gm_WalkEntityChain(*(unsigned short*) e);
-	v = (float) n;
-	if (flt_665ecc < v) {
-		v = flt_665ecc;
-	}
 	*(unsigned char*) (b.msg + 4) = 0x3e;
 	*(int*) (b.msg + 8) = *(int*) (e + 4);
 	*(int*) (b.msg + 0xc) = *(int*) (rec + 1);
 	*(unsigned char*) (b.msg + 0x36) = 9;
 	*(int*) (b.msg + 0x58) = *(int*) (e + 4);
-	*(int*) (b.msg + 0x60) = (int) (v * f);
-	*(int*) (b.msg + 0x5c) = *(int*) ((char*) &g_7f4ca0
+	*(int*) (b.msg + 0x60) = (int) ((flt_665ecc < (float) n ? flt_665ecc : (float) n) * f);
+	*(int*) (b.msg + 0x5c) = *(int*) (g_7f4ca0
 	                                  + (*(unsigned short*) (a0 + 8)) * 0x21c + 4);
 	fcn_004c5530((int) b.msg);
 }

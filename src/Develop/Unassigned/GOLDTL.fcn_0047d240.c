@@ -13,16 +13,21 @@ int __cdecl fcn_0047d220(char* a);
 /* ADDRESS: GOLDTL 0x0047d240 */
 int __cdecl fcn_0047d240(char* p)
 {
+	int sel;
+	unsigned int v;
+
 	if (fcn_0047d220(p) == 0) {
 		return 0;
 	}
 	if (g_6a375c != 0) {
-		if (g_14cbca0 != -1) {
-			if (*(unsigned int*) (p + 4) % g_6a375c != g_14cbcb4) {
+		sel = g_14cbca0;
+		v = *(unsigned int*) (p + 4);
+		if (sel != -1) {
+			if (v % g_6a375c != g_14cbcb4) {
 				return 0;
 			}
 		} else {
-			if (*(unsigned int*) (p + 4) % g_6a375c != g_774948) {
+			if (v % g_6a375c != g_774948) {
 				return 0;
 			}
 		}

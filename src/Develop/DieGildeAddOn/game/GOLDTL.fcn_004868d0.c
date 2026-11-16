@@ -105,66 +105,55 @@ int __cdecl fcn_004868d0(char* a0, int* a1)
 					seg->flags |= 0x10;
 				}
 			}
-		} else {
-			if (seg->parent != -1) {
-				rp = (Rec4868d0*) (g_100d0c0 + seg->parent * 0x58);
-				rp->limit = rp->limit < a1[18] ? rp->limit : a1[18];
-				rp->flags |= 2;
-				if ((rp->f38 + rp->f3c) * 4 < rp->scale) {
-					if (rp->scale > *(unsigned short*) (g_item_def_table + rp->f00 * 0x41 + 0x36)) {
-						rp->flags |= 8;
-					}
-					fcn_004868d0(a0, (int*) rp);
+		} else if (seg->parent != -1) {
+			rp = (Rec4868d0*) (g_100d0c0 + seg->parent * 0x58);
+			rp->limit = rp->limit < a1[18] ? rp->limit : a1[18];
+			rp->flags |= 2;
+			if ((rp->f38 + rp->f3c) * 4 < rp->scale) {
+				if (rp->scale > *(unsigned short*) (g_item_def_table + rp->f00 * 0x41 + 0x36)) {
+					rp->flags |= 8;
 				}
-			} else {
-				w = *(unsigned short*) (g_item_def_table + a1[0] * 0x41 + off);
-				if (seg->stock + seg->used < w * 4) {
-					fcn_00503a70(seg->type);
-					idx = 0;
-					rec = g_868c40;
-					for (;;) {
-						if (idx >= g_86805c) {
-							break;
-						}
-						if (rec->name != *(char**) (a0 + 0x16c)
-						    && gm_GetBuildingTypeCategory((unsigned char) *rec->name) != 2
-						    && rec->field8 != 0) {
-							limit = rec->limit;
-							w = *(unsigned short*) (g_item_def_table + a1[0] * 0x41 + off);
-							if (limit >= w) {
-								seg->name = rec->name;
-								if (*(short*) (rec->name + 0x27) == *(short*) (*(int*) (a0 + 0x16c) + 0x27)) {
-									seg->f14 = seg->capacity;
-									idx++;
-									rec++;
-									continue;
-								}
-								scale = *(int*) ((char*) a1 + 0x40) >> 1;
-								if (scale < 1) {
-									scale = 1;
-								}
-								t = w * scale - seg->used - seg->stock;
-								n = (seg->capacity >> 1) - seg->used;
-								if (t < n) {
-									t = n;
-								}
-								n = seg->capacity - seg->used - 1;
-								if (t > n) {
-									t = n;
-								}
-								ratio = (float) *(int*) (a0 + 0x1b8) / seg->divisor;
-								fl = (float) t;
-								n = (int) (ratio < fl ? ratio : fl);
-								if (n > limit) {
-									n = limit;
-								}
-								if (n >= w) {
-									seg->f14 = n >= seg->f14 ? n : seg->f14;
-								}
+				fcn_004868d0(a0, (int*) rp);
+			}
+		} else {
+			w = *(unsigned short*) (g_item_def_table + a1[0] * 0x41 + off);
+			if (seg->stock + seg->used < w * 4) {
+				fcn_00503a70(seg->type);
+				for (idx = 0, rec = g_868c40; idx < g_86805c; idx++, rec++) {
+					if (rec->name != *(char**) (a0 + 0x16c)
+					    && gm_GetBuildingTypeCategory((unsigned char) *rec->name) != 2
+					    && rec->field8 != 0) {
+						limit = rec->limit;
+						w = *(unsigned short*) (g_item_def_table + a1[0] * 0x41 + off);
+						if (limit >= w) {
+							seg->name = rec->name;
+							if (*(short*) (rec->name + 0x27) == *(short*) (*(int*) (a0 + 0x16c) + 0x27)) {
+								seg->f14 = seg->capacity;
+								continue;
+							}
+							scale = *(int*) ((char*) a1 + 0x40) >> 1;
+							if (scale < 1) {
+								scale = 1;
+							}
+							t = w * scale - seg->used - seg->stock;
+							n = (seg->capacity >> 1) - seg->used;
+							if (t < n) {
+								t = n;
+							}
+							n = seg->capacity - seg->used - 1;
+							if (t > n) {
+								t = n;
+							}
+							ratio = (float) *(int*) (a0 + 0x1b8) / seg->divisor;
+							fl = (float) t;
+							n = (int) (ratio < fl ? ratio : fl);
+							if (n > limit) {
+								n = limit;
+							}
+							if (n >= w) {
+								seg->f14 = n >= seg->f14 ? n : seg->f14;
 							}
 						}
-						idx++;
-						rec++;
 					}
 				}
 			}

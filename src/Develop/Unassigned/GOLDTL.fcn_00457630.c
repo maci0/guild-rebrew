@@ -76,10 +76,7 @@ char __cdecl fcn_00457630(void* obj, void* map)
 	unsigned char* entity;
 	GOLDTL_TileUv uv;
 	unsigned long color;
-	unsigned char cr;
-	unsigned char cg;
-	unsigned char cb;
-	unsigned char ca;
+	unsigned char c[4];
 	float q;
 	float u0;
 	float v0;
@@ -106,22 +103,21 @@ char __cdecl fcn_00457630(void* obj, void* map)
 
 	entity = *(unsigned char**) (s + 0x08);
 	if (g_6b89bc == 0) {
-		scale = *(float*) (entity + 0x94) * g_6628cc * g_662c30;
-		cr = (unsigned char) (int) ((g_6628a4
+		scale = *(float*) (entity + 0x94) * 0.5f * g_662c30;
+		c[2] = (unsigned char) (int) ((g_6628a4
 			- *(float*) (entity + 0x5c)) * scale);
-		cg = (unsigned char) (int) ((g_6628a4
+		c[1] = (unsigned char) (int) ((g_6628a4
 			- *(float*) (entity + 0x60)) * scale);
-		cb = (unsigned char) (int) ((g_6628a4
+		c[0] = (unsigned char) (int) ((g_6628a4
 			- *(float*) (entity + 0x64)) * scale);
-		ca = 0xff;
+		c[3] = 0xff;
 	} else {
-		cr = (unsigned char) (int) *(float*) (entity + 0x5c);
-		cg = (unsigned char) (int) *(float*) (entity + 0x60);
-		cb = (unsigned char) (int) *(float*) (entity + 0x64);
-		ca = (unsigned char) (int) (*(float*) (entity + 0x94) * g_6628cc);
+		c[2] = (unsigned char) (int) *(float*) (entity + 0x5c);
+		c[1] = (unsigned char) (int) *(float*) (entity + 0x60);
+		c[0] = (unsigned char) (int) *(float*) (entity + 0x64);
+		c[3] = (unsigned char) (int) (*(float*) (entity + 0x94) * 0.5f);
 	}
-	color = ((unsigned long) ca << 24) | ((unsigned long) cr << 16)
-		| ((unsigned long) cg << 8) | (unsigned long) cb;
+	color = *(unsigned long*) c;
 	*(int*) (s + 0x94) = 0;
 	*(unsigned long*) (s + 0x04) = color;
 	*(int*) (s + 0x90) = 0;

@@ -44,16 +44,16 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		if (esi == 0 || *(short*) (esi + 0x27) == 0) {
 			return 0;
 		}
-		msg[4] = 0x76;
 		*(int*) (msg + 8) = *(int*) (cmd + 4);
-		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x28) = g_7f4c00;
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
-		*(short*) (msg + 0x34) = g_7f4c0c;
-		msg[0x36] = 0xa;
 		*(int*) (msg + 0x58) = *(int*) (esi + 1);
 		*(short*) (msg + 0x6e) = 0x177;
+		msg[4] = 0x76;
+		*(int*) (msg + 0xc) = -1;
+		*(short*) (msg + 0x34) = g_7f4c0c;
+		msg[0x36] = 0xa;
 		fcn_004c5530(msg);
 		fcn_004c4510(*(int*) arg2, *(int*) (*(int*) arg2 + 2));
 		h = *(short*) arg2;
@@ -61,8 +61,8 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		fcn_004c5360();
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 		fcn_00508280(slot, 0, 0);
-		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
-		if (slot[2] == 6 || slot[2] == 7) {
+		if (((char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c))[2] == 6
+		    || ((char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c))[2] == 7) {
 			io_FormatTextBuffer(line, 0xff1);
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 			fcn_00545d40(*(int*) (slot + 4), -1, line, 0, 0x5fb, 0);
@@ -73,16 +73,16 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 	if (esi == 0 || *(short*) (esi + 0x27) == 0) {
 		return 0;
 	}
-	msg[4] = 0x76;
 	*(int*) (msg + 8) = *(int*) (cmd + 4);
-	*(int*) (msg + 0xc) = -1;
 	*(int*) (msg + 0x28) = g_7f4c00;
 	*(int*) (msg + 0x2c) = g_7f4c04;
 	*(int*) (msg + 0x30) = g_7f4c08;
-	*(short*) (msg + 0x34) = g_7f4c0c;
-	msg[0x36] = 0xa;
 	*(int*) (msg + 0x58) = *(int*) (esi + 1);
 	*(short*) (msg + 0x6e) = 0x177;
+	msg[4] = 0x76;
+	*(int*) (msg + 0xc) = -1;
+	*(short*) (msg + 0x34) = g_7f4c0c;
+	msg[0x36] = 0xa;
 	fcn_004c5530(msg);
 	fcn_004c4510(*(int*) arg2, *(int*) (*(int*) arg2 + 2));
 	h = *(short*) arg2;
@@ -93,8 +93,8 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 		fcn_00508280(slot, 0, 0);
 	}
-	slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
-	if (slot[2] == 6 || slot[2] == 7) {
+	if (((char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c))[2] == 6
+	    || ((char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c))[2] == 7) {
 		io_FormatTextBuffer(line, 0xff1);
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 		fcn_00545d40(*(int*) (slot + 4), -1, line, 0, 0x5fb, 0);

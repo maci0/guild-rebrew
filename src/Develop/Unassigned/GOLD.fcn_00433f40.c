@@ -1,6 +1,16 @@
+#include <string.h>
+
 /* ADDRESS: GOLD 0x00433f40 */
-int __cdecl fcn_00433f40(void)
+char* __cdecl fcn_00433f40(const char* name)
 {
-	/* Stub: provider restored; native behavior and full C contract unrecovered. */
+	char* node;
+
+	node = *(char**) 0xfc26e0;
+	while (node != (char*) 0xfe7440) {
+		if (stricmp(name, node) == 0) {
+			return node;
+		}
+		node = *(char**) (node + 0x160);
+	}
 	return 0;
 }

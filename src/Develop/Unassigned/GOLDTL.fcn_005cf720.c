@@ -108,10 +108,10 @@ int __cdecl fcn_005cf720(unsigned int a0, unsigned int a1, unsigned char* p)
 	}
 	if (flags & 0xf00000) {
 		b4 = ((flags & 0x100000) && (s[2] == 6 || s[2] == 7));
-		b5 = ((flags & 0x200000) && s[2] == 5);
-		b6 = ((flags & 0x400000) && s[2] != 5 && fcn_0047dd60(s) != 0);
+		b5 = ((flags & 0x200000) && s[2] == 5); b4 |= b5;
+		b6 = ((flags & 0x400000) && s[2] != 5 && fcn_0047dd60(s) != 0); b4 |= b6;
 		b7 = ((*(unsigned int*) (p + 4) & 0x800000) && !s[2]);
-		if (!b7 && (!b4 && !b5) && !b6)
+		if (!(b4 | b7))
 			return 0;
 	}
 	if (!*(int*) (p + 0x40))

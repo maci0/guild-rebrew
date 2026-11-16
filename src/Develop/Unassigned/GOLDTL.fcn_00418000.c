@@ -65,8 +65,8 @@ int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, flo
             *(float*) (rec + 0x10) += v[0];
             *(float*) (rec + 0x14) += v[1];
             *(float*) (rec + 0x18) += v[2];
-            *(unsigned char*) (rec + 0x4f) = 0;
             v[3] = (*(float*) (rec + 0x14) - *(float*) (s + 1)) / *(float*) (rec + 0x14);
+            *(unsigned char*) (rec + 0x4f) = 0;
             *(float*) (rec + 0x1c) = v[3];
             *(float*) rec = g_6628a0 / v[3];
             *(float*) (rec + 4) = g_6628a0 / (g_6628a0 - *(float*) (rec + 0x1c));

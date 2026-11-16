@@ -46,7 +46,6 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	int entry;
 	int type;
 
-	count = 0;
 	id = *(int*) (a0 + 1);
 	for (i = 0; i < 0x24; i++) {
 		table[i] = i + 1;
@@ -64,6 +63,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	elem = fcn_00472250(window, 3, io_AppendText(0x17e1));
 	d2_SetForm(window, 2);
 	entry = table[0];
+	count = 0;
 	if (entry != 0) {
 		for (i = 0; table[i] != 0; i++) {
 			if (fcn_0050c7d0(a0[0], table[i]) != 0) {

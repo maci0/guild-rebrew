@@ -117,7 +117,8 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 		if (*(int*) (*(int*) (model + 0x288) + i * 4) != index)
 			continue;
 		*(char*) (a1 + 0x21) = 1;
-		for (j = 0; j < 3; j++) {
+		j = 0;
+		do {
 			int idx;
 			idx = *(unsigned short*) (*(int*) (model + 0x280) + (i * 3 + j) * 2);
 			f = verts + idx * 6;
@@ -163,7 +164,7 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 				a1[0x0e] = *(int*) (f + 4);
 				a1[0x0f] = *(int*) (f + 5);
 			}
-		}
+		} while (++j < 3);
 	}
 	m_FreeTracked(verts);
 	return 1;

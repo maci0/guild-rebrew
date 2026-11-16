@@ -25,7 +25,6 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 	char* list;
 	float* rec;
 	unsigned char b;
-	int* vt;
 	int i;
 	int ix;
 	int iy;
@@ -59,10 +58,9 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 		return 0;
 	}
 	b = *(unsigned char*) (obj + 0x214) & 0x20;
-	cam = (char*) ((int) g_6b8014 & ~-(b != 0));
+	cam = b != 0 ? (char*) 0 : g_6b8014;
 	fcn_00438100(obj, cam, 0);
-	vt = *(int**) (sub + 0x318);
-	list = (char*) ((int (__cdecl*) (char*, char*, char*)) vt[0x7c])(obj, sub, *(char**) (obj + 0x1ec) + 0x48);
+	list = (char*) ((int (__cdecl*) (char*, char*, char*)) (*(int**) (sub + 0x318))[0x7c])(obj, sub, *(char**) (obj + 0x1ec) + 0x48);
 	rc[1] = 0x10000;
 	rc[0] = 0x10000;
 	rc[3] = -0x10000;

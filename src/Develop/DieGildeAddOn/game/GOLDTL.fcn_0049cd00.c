@@ -22,15 +22,11 @@ int __cdecl ai_StartAnschwaerzen(int a1, char* ent, int a3, Blk24* o1, Blk24* o2
 	Blk24 b1;
 	Blk24 b2;
 	int r;
+	unsigned short id;
 
 	(void) a1;
-	if (a3 != 0) {
+	if (a3 != 0 || ((*(int*) (ent + 0x1e8) & 0x200) && gm_RandomMod(8) != 0)) {
 		return 0;
-	}
-	if (*(int*) (ent + 0x1e8) & 0x200) {
-		if (gm_RandomMod(8) != 0) {
-			return 0;
-		}
 	}
 	if (*(char**) (ent + 0x170) == 0 && *(unsigned char*) (ent + 2) != 3) {
 
@@ -43,7 +39,8 @@ int __cdecl ai_StartAnschwaerzen(int a1, char* ent, int a3, Blk24* o1, Blk24* o2
 		b2.kind = 0;
 		b2.a = 0;
 		b2.b = 0;
-		r = fcn_00495400(0x28, *(unsigned short*) ent, 1, &b1, &b2);
+		id = *(unsigned short*) ent;
+		r = fcn_00495400(0x28, id, 1, &b1, &b2);
 		if (r == 0) {
 			return 0;
 		}

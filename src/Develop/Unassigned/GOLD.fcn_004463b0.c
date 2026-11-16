@@ -15,15 +15,16 @@ char __cdecl fcn_004463b0(char* terrain, float* position, char coarse, int* outX
 
     int size;
     unsigned char* triangles;
-
     int kind;
     float base;
     float dx;
     float dz;
     if (!terrain)
         return 0;
-    x = position[0] - F32(terrain + 0x90);
-    z = position[2] - F32(terrain + 0x98);
+    x = position[0];
+    x -= F32(terrain + 0x90);
+    z = position[2];
+    z -= F32(terrain + 0x98);
     if (F32(terrain + 0xa0) != 0.0f)
         x /= F32(terrain + 0xa0);
     if (F32(terrain + 0xb8) != 0.0f)

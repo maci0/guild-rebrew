@@ -17,6 +17,7 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 {
 	char* p;
 	char* r;
+	char* res;
 	int i;
 	int j;
 	int k;
@@ -40,22 +41,9 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 	char* copy_src;
 	char* copy_dst;
 
-	if (a2 == 0) {
-		return 0;
-	}
-	if (a0 == 0) {
-		return 0;
-	}
-	if (a5 == 0) {
-		if (a3 == 0) {
-			return 0;
-		}
-		if (a4 == 0) {
-			return 0;
-		}
-	}
-	if (a7 <= 1) {
-		return 0;
+	res = 0;
+	if (a2 == 0 || a0 == 0 || (a5 == 0 && (a3 == 0 || a4 == 0)) || a7 <= 1) {
+		goto out;
 	}
 	p = m_alloc(0x16c, (char*) 0x67a1d4);
 	*(int*) (p + 0x140) = *(int*) (a0 + 0x44);
@@ -340,6 +328,8 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 	g_1052ba4 = p;
 	*(char**) (p + 0x160) = g_1052a40;
 	*(char**) (*(char**) (p + 0x164) + 0x160) = p;
-	return p;
+	res = p;
+out:
+	return res;
 }
 #pragma optimize("", on)

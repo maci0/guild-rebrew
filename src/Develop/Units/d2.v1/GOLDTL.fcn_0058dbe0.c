@@ -40,17 +40,6 @@ void __cdecl fcn_0058dbe0(int a0)
 	int v5;
 	int v6;
 	int v9;
-	int v11;
-	int v12;
-	int v13;
-	int v14;
-	int v15;
-	int v16;
-	int v17;
-	int v18;
-	int v19;
-	int v20;
-	int v21;
 	int* v27;
 	int rec;
 	int* v30;
@@ -144,28 +133,17 @@ void __cdecl fcn_0058dbe0(int a0)
 					for (v9 = 0; v9 < 0x3e; v9++) {
 						req[v9] = 0;
 					}
-					v11 = 0x90;
-					v18 = 2;
-					v12 = *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
-					v13 = *(int*) (a0 + 1);
-					v14 = *(int*) &g_7f4c00;
-					v15 = *(int*) &g_7f4c04;
-					v16 = *(int*) 0x7f4c08;
-					v17 = *(unsigned short*) 0x7f4c0c;
-					v20 = fcn_00471f80(v3);
-					v21 = fcn_00471f80(v4);
-					v19 = *(int*) (rec + 1);
-					((char*) req)[4] = (char) v11;
-					*(int*) ((char*) req + 8) = v12;
-					*(int*) ((char*) req + 0xc) = v13;
-					*(int*) ((char*) req + 0x28) = v14;
-					*(int*) ((char*) req + 0x2c) = v15;
-					*(int*) ((char*) req + 0x30) = v16;
-					*(unsigned short*) ((char*) req + 0x34) = (unsigned short) v17;
-					((char*) req)[0x36] = (char) v18;
-					*(int*) ((char*) req + 0x58) = v19;
-					*(int*) ((char*) req + 0x5c) = v20;
-					*(int*) ((char*) req + 0x60) = v21;
+					((char*) req)[4] = (char) 0x90;
+					((char*) req)[0x36] = (char) 2;
+					*(int*) ((char*) req + 8) = *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
+					*(int*) ((char*) req + 0xc) = *(int*) (a0 + 1);
+					*(int*) ((char*) req + 0x28) = *(int*) &g_7f4c00;
+					*(int*) ((char*) req + 0x2c) = *(int*) &g_7f4c04;
+					*(int*) ((char*) req + 0x30) = *(int*) 0x7f4c08;
+					*(unsigned short*) ((char*) req + 0x34) = *(unsigned short*) 0x7f4c0c;
+					*(int*) ((char*) req + 0x5c) = fcn_00471f80(v3);
+					*(int*) ((char*) req + 0x60) = fcn_00471f80(v4);
+					*(int*) ((char*) req + 0x58) = *(int*) (rec + 1);
 					fcn_004c5530(req);
 				label_58df76:
 					*(int*) 0x774654 = 1;

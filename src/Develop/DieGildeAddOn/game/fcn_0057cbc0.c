@@ -32,7 +32,6 @@ void __cdecl fcn_0057cbc0(char* p)
     int w;
     int r;
     int gfx;
-    int wnd2;
 
     if (*(int*) (p + 0x84) != -1 && fcn_004c4450(*(int*) (p + 0x84)) == 0)
         return;
@@ -58,9 +57,8 @@ void __cdecl fcn_0057cbc0(char* p)
             fcn_004432d0(r, 1);
             e = (char*) evt_LoadGfxScript(g_6a80c0);
             if (e != 0) {
-                wnd2 = *(int*) (wnd + 2);
                 *(int*) (e + 0xc8c) = 1;
-                *(int*) (e + 0x104) = wnd2;
+                *(int*) (e + 0x104) = *(int*) (wnd + 2);
                 fcn_00428340(e, 1, *(int*) (p + 0xac));
             }
             fcn_004432d0(gfx, 1);

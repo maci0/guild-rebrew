@@ -74,25 +74,28 @@ void __cdecl fcn_0057b390(char* e)
 				}
 				for (k = 0; k < count; k++) {
 					r = gm_RandomFloat01();
-					s = list[k];
 					if (r > lim) {
+						s = list[k];
 						if (!(*(unsigned char*) (s + 0x1b4) & 1) &&
 						    (*(unsigned char*) (s + 0x180) == 4 ||
 						     *(unsigned char*) (s + 0x180) == 0x8c ||
 						     *(unsigned char*) (s + 0x180) == 0x8d)) {
 							fcn_005904a0(s, 1);
 						}
-					} else if (r > 0.5 && *(int*) (s + 0x17c) == 0) {
-						d = fcn_0050f950(*(unsigned short*) (u + 0x27), *(unsigned short*) s);
-						if (-(int) (gm_RandomMod(0x4a) & 0xffff) < d) {
-							memset(&m, 0, sizeof(m));
-							m.target = *(int*) (u + 1);
-							m.owner = *(unsigned short*) (e + 8);
-							m.kind = 0x94;
-							m.at = *(Time5*) g_7f4c00;
-							m.code = 1;
-							*(int*) &m.who = *(int*) (s + 4);
-							fcn_004c5530(&m);
+					} else {
+						s = list[k];
+						if (r > 0.5 && *(int*) (s + 0x17c) == 0) {
+							d = fcn_0050f950(*(unsigned short*) (u + 0x27), *(unsigned short*) s);
+							if (-(int) (gm_RandomMod(0x4a) & 0xffff) < d) {
+								memset(&m, 0, sizeof(m));
+								m.target = *(int*) (u + 1);
+								m.owner = *(unsigned short*) (e + 8);
+								m.kind = 0x94;
+								m.at = *(Time5*) g_7f4c00;
+								m.code = 1;
+								*(int*) &m.who = *(int*) (s + 4);
+								fcn_004c5530(&m);
+							}
 						}
 					}
 				}

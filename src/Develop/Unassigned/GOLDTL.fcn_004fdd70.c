@@ -33,7 +33,7 @@ void __cdecl fcn_004fdd70(HeadSet* hs)
 		strcpy(kind, p + 1);
 		*p = 0;
 	}
-	for (slot = hs->head, i = 0; i < 4; i++, slot++) {
+	for (i = 0, slot = hs->head; i < 4; slot++, i++) {
 		fcn_0064d41a(icon, (char*) 0x69649c, base, i, kind);
 		*slot = 0xff;
 		for (j = 0; j < g_773d40; j++) {

@@ -8,6 +8,7 @@ extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char s_6a5b74[];
+extern char g_7f4ca0[];
 
 int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl fcn_00546190(void* u);
@@ -43,7 +44,7 @@ void __cdecl fcn_00551d50(char* a0)
 		delay = *(unsigned char*) (a0 + 0xac) - (gm_RandomMod(*(unsigned char*) (a0 + 0xad)) & 0xffff);
 		index = *(unsigned short*) (a0 + 8);
 		byte = *(unsigned char*) (a0 + 0xae);
-		row = (char*) (0x7f4ca0 + index * 0x21c);
+		row = g_7f4ca0 + index * 0x21c;
 		id = *(unsigned char*) (row + 0x80 + byte);
 		if ((float) (id + delay) > 252.0f) {
 			delay = (int) (252.0f - (float) id);

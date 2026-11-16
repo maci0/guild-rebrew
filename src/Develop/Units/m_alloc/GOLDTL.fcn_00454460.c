@@ -25,8 +25,8 @@ int __cdecl fcn_00454460(int a0, int a1, int a2, int a3, int* a4, int a5, int* a
 	}
 	if (s != 0) {
 		fcn_004526d0(s, a1);
-		a4 = (int*) ((char*) s + 0x34);
 		a5 = 0xa4;
+		a4 = (int*) ((char*) s + 0x34);
 		__asm {
 			mov edi, a4
 			mov esi, a6

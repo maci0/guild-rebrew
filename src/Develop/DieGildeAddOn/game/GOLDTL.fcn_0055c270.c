@@ -57,8 +57,6 @@ void __cdecl fcn_0055c270(char* o)
 	unsigned char* p;
 	unsigned char* h;
 	int kind;
-	char tmp[0x80];
-	Msg55c270 msg;
 	void* fill_dst;
 	int fill_count;
 	char buf[0x400];
@@ -99,6 +97,7 @@ void __cdecl fcn_0055c270(char* o)
 			fcn_004f2ba0((char*) 0x7f4ca0 + *(unsigned short*) (e + 0x27) * 0x21c,
 				(char*) e, 3);
 		} else if (*(unsigned short*) rec == 0x12d) {
+			Msg55c270 msg;
 			fill_dst = &msg;
             fill_count = sizeof(msg);
             __asm {
@@ -126,6 +125,7 @@ void __cdecl fcn_0055c270(char* o)
 			fcn_004c5530((char*) &msg);
 		}
 		if (g_7f4ca0[*(unsigned short*) (e + 0x27) * 0x21c + 2] == 6) {
+			char tmp[0x80];
 			char name[0x80];
 
 			h = fcn_00502cd0(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));

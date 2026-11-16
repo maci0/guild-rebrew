@@ -58,12 +58,12 @@ void __cdecl fcn_004f3ef0(char* a0)
 	int i;
 	float a;
 
-	handle = -1;
 	home = 0;
 	n = 0;
 	hits = 0;
 	count = 0;
 	total = 0;
+	handle = -1;
 	if (*(unsigned short*) (a0 + 0x27) != 0xffff
 	    && *(unsigned short*) (a0 + 0x27) != *(unsigned short*) g_773da8) {
 		home = g_7f4ca0 + *(unsigned short*) (a0 + 0x27) * 0x21c;

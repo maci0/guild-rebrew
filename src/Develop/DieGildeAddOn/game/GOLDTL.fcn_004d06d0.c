@@ -31,8 +31,8 @@ void __cdecl fcn_004d06d0(void)
 	i = 0;
 	*(int*) &g_7746a4 = 0;
 	g_7725c4 = 0;
-	if (1 <= *(short*) &g_14ce8c0 && *(short*) &g_14ce8c0 < g_1040494
-		&& 1 <= *(short*) &g_14ce8c2 && *(short*) &g_14ce8c2 < g_1040490
+	if (*(short*) &g_14ce8c0 > 0 && *(short*) &g_14ce8c0 < g_1040494
+		&& *(short*) &g_14ce8c2 > 0 && *(short*) &g_14ce8c2 < g_1040490
 		&& g_67d370 == -1) {
 		x = *(short*) &g_14ce8c0;
 		y = *(short*) &g_14ce8c2;

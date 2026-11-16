@@ -29,9 +29,8 @@ void __cdecl fcn_00402480(char* character, int visible)
     }
     if (visible != 0) {
         character[0x8c] &= 0xdf;
-        fcn_00402ba0(character);
-        return;
+    } else {
+        character[0x8c] |= 0x20;
     }
-    character[0x8c] |= 0x20;
     fcn_00402ba0(character);
 }

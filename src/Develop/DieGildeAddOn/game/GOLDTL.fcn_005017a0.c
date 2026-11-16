@@ -48,7 +48,6 @@ void __cdecl fcn_005017a0(int a0)
 	unsigned char* e;
 	unsigned short* item;
 	unsigned short* item2;
-	unsigned short id;
 	int* ip;
 	int v;
 	int n;
@@ -96,8 +95,7 @@ void __cdecl fcn_005017a0(int a0)
 		p = s;
 		for (n = 0x55; n != 0; n--) {
 			rec = *s;
-			id = p->target;
-			ent = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, id);
+			ent = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, p->target);
 			if (ent != 0) {
 				ent2 = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0xff);
 				if (ent2 == 0) {

@@ -11,27 +11,37 @@ float __cdecl fcn_004f0eb0(int level, int percent, int count)
 	float step;
 	float sum;
 	int k;
+	int pc;
 	double percent_term;
 
-	if (level >= 4) {
+	if (level < 4) {
+		if (level <= 0) {
+			level = 0;
+		}
+	}
+	else {
 		level = 4;
 	}
-	else if (level <= 0) {
-		level = 0;
-	}
 	k = level + 1;
-	if (percent >= 100) {
-		percent = 100;
+	if (percent < 100) {
+		if (percent <= 0) {
+			pc = 0;
+		}
+		else {
+			pc = percent;
+		}
 	}
-	else if (percent <= 0) {
-		percent = 0;
+	else {
+		pc = 100;
 	}
-	percent_term = percent * g_6628bc + g_662da8;
-	if (count >= 3) {
+	percent_term = pc * g_6628bc + g_662da8;
+	if (count < 3) {
+		if (count <= 1) {
+			count = 1;
+		}
+	}
+	else {
 		count = 3;
-	}
-	else if (count <= 1) {
-		count = 1;
 	}
 	step = k * percent_term * g_662b28 + g_662a3c;
 	sum = g_6628a8;

@@ -55,11 +55,11 @@ void __cdecl fcn_005797a0(char* a0)
 	float v23;
 
 	handle = fcn_00500e20(&g_7f4c00);
-	valid = 0;
 	search = 0;
 	row = 0;
 	param = 0;
 	mode = 0;
+	valid = 0;
 	value = (int) (g_7f4c04 & 0xffff);
 	if ((*(float*) (handle * 4 + 0x696550) <= (float) value
 			|| (float) value < *(float*) (handle * 4 + 0x696540))

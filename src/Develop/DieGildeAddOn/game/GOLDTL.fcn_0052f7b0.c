@@ -51,15 +51,17 @@ void __cdecl fcn_0052f7b0(void)
     int count;
     int kind;
     int flags;
-    int disabled;
 
+    char* pick;
+
+    pick = 0;
     if (g_6a25b4 != -1 || g_774964 == 0)
         return;
-    disabled = 1;
     if (g_7e2aa0 != 0 && fcn_00502cd0(*(int*)(g_7e2aa0 + 0x5d), 2, 6, 0, 0x2a) == 0
         && fcn_00502cd0(*(int*)(g_7e2aa0 + 0x5d), 2, 6, 0, 0x116) == 0)
-        disabled = 0;
-    fcn_00472640(g_6a25e4, disabled);
+        fcn_00472640(g_6a25e4, 0);
+    else
+        fcn_00472640(g_6a25e4, 1);
     selected = g_7e2aa0;
     flags = g_7e46ac & 0x2000;
     if (flags && g_100f1dc != -1) {
@@ -203,7 +205,10 @@ snapshot:
         return;
     }
     *(char**)0x774648 = g_7746c0;
-    selected = g_7e2aa0 != 0 ? g_7e2aa0 : (char*)g_7746c8;
-    fcn_0052df40((u8*)selected);
+    if (g_7e2aa0 != 0)
+        pick = g_7e2aa0;
+    else if (g_7746c8 != 0)
+        pick = (char*)g_7746c8;
+    fcn_0052df40((u8*)pick);
     fcn_0052ea30();
 }

@@ -8,11 +8,9 @@ void __cdecl fcn_004519d0(float* m, float* e);
 void __cdecl fcn_00451a40(float* m, float* out, float* e)
 {
     float basis[16] = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
-    float u[3];
-    float v[3];
-    float s0;
-    float s1;
-    float s2;
+    float u[4];
+    float v[4];
+    float c[4];
     int i;
 
     u[0] = m[0x10] - m[0x14];
@@ -86,15 +84,15 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
 
     fcn_004519d0(basis, e);
 
-    s0 = g_6628a8;
-    s1 = g_6628a8;
-    s2 = g_6628a8;
+    c[0] = g_6628a8;
+    c[1] = g_6628a8;
+    c[2] = g_6628a8;
     for (i = 0; i < 8; i++) {
-        s0 += m[i * 4];
-        s1 += m[i * 4 + 1];
-        s2 += m[i * 4 + 2];
+        c[0] += m[i * 4];
+        c[1] += m[i * 4 + 1];
+        c[2] += m[i * 4 + 2];
     }
-    out[0] = s0 * g_662a34;
-    out[1] = s1 * g_662a34;
-    out[2] = s2 * g_662a34;
+    out[0] = c[0] * g_662a34;
+    out[1] = c[1] * g_662a34;
+    out[2] = c[2] * g_662a34;
 }

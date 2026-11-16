@@ -69,7 +69,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 	fcn_004888a0(meister);
 	fcn_00488c00(meister);
 	if (((unsigned short) g_7f4c00.b <= 6)
-		|| ((*(int *) (meister + 4) + ((unsigned int) g_7f4c00.b & 0xffff)) % 3 != 0)) {
+		|| ((*(int *) (meister + 4) + (unsigned int) (unsigned short) g_7f4c00.b) % 3 != 0)) {
 		*(unsigned int *) (meister + 0x1b4) &= 0xffffffdf;
 		return;
 	}

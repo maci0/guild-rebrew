@@ -42,7 +42,7 @@ void __cdecl fcn_004faed0(float* out)
 	int slot0_e;
 	int slot1_e;
 	int x;
-	int y;
+	int y; int x2; int y2;
 	int n;
 	int idx;
 	int limit;
@@ -72,16 +72,16 @@ void __cdecl fcn_004faed0(float* out)
 	weight_b = 0;
 	accum = 0.0f;
 	fcn_004fad10();
-	for (rec = g_7f4ca0; rec < (char*) 0x85a0a0; rec += 0x21c) {
-		if (*(short*) rec == -1) {
+	rec = g_7f4ca0 + 0x16c; do {
+		if (*(short*) (rec - 0x16c) == -1) {
 			continue;
 		}
-		if (*(unsigned char*) (rec + 2) != 0
-		    && *(unsigned char*) (rec + 2) != 1) {
+		if (*(unsigned char*) (rec - 0x16a) != 0
+		    && *(unsigned char*) (rec - 0x16a) != 1) {
 			continue;
 		}
 		total++;
-		ent = *(char**) (rec + 0x16c);
+		ent = *(char**) rec;
 		if (ent != 0) {
 			proto = (StatsProto*)lpGebaeudePROT; type = *(unsigned char*)ent;
 			pos = *(char**) (ent + 0x61); proto += type; slot0_count++;
@@ -95,21 +95,21 @@ void __cdecl fcn_004faed0(float* out)
 				}
 			}
 		}
-		ent = *(char**) (rec + 0x170);
+		ent = *(char**) (rec + 4);
 		if (ent != 0) {
 			proto = (StatsProto*)lpGebaeudePROT; type = *(unsigned char*)ent;
 			pos = *(char**) (ent + 0x61); proto += type; slot1_count++;
 			if (pos != 0) {
 				type = proto->kind;
 				if (!(type >= 0x0b && type <= 0x0d) && type != 0x10) {
-					if (fcn_004fa6f0(pos + 0x4c, &x, &y) != 0) {
-						idx = y + x * 8;
+					if (fcn_004fa6f0(pos + 0x4c, &x2, &y2) != 0) {
+						idx = y2 + x2 * 8;
 						g_99ef94[idx * 6] = g_99ef94[idx * 6] + g_6628a0;
 					}
 				}
 			}
 		}
-	}
+	} while ((int) (rec += 0x21c) < 0x85a20c);
 	rec = (char*)lpGebaeudeINST;
 	for (n = 0x100; n != 0; n--) {
 		type = *(unsigned char*) rec;

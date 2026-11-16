@@ -51,8 +51,11 @@ int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
 			}
 		}
 	}
-	for (i = g_6b6f38; i > 0; i--) {
-		fcn_0041c190(i);
+	i = g_6b6f38;
+	if (g_6b6f38 > 0) {
+		do {
+			fcn_0041c190(i);
+		} while (--i != 0);
 	}
 	return 1;
 }

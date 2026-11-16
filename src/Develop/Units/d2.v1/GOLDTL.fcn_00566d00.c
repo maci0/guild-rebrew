@@ -56,11 +56,7 @@ void __cdecl fcn_00566d00(int a0)
 			io_FormatTextBuffer(buf, 0x19b3, *b);
 			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 			fcn_004c6b20(*(int*) (a + 2), -(unsigned int) *(unsigned char*) ((char*) a + 0x1b1), 0);
-			fcn_00545780(a0);
-			fcn_00546190(a0);
-			return;
-		}
-		if (v == 1) {
+		} else if (v == 1) {
 			io_FormatTextBuffer(buf, 0x19b4, *b, *(int*) (a0 + 0xb4));
 			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 		}
@@ -80,12 +76,11 @@ void __cdecl fcn_00566d00(int a0)
 			io_FormatTextBuffer(buf, 0x19b3, *b);
 			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 			fcn_004c6b20(*(int*) (a + 2), -(unsigned int) *(unsigned char*) ((char*) a + 0x1b1), 0);
-			fcn_00546190(a0);
-			return;
+		} else {
+			io_FormatTextBuffer(buf, 0x19b4, *b, *(int*) (a0 + 0xb4));
+			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
+			fcn_004c54c0(*(int*) (a + 2), *(int*) (b + 2), 10, 1);
 		}
-		io_FormatTextBuffer(buf, 0x19b4, *b, *(int*) (a0 + 0xb4));
-		fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
-		fcn_004c54c0(*(int*) (a + 2), *(int*) (b + 2), 10, 1);
 		fcn_00546190(a0);
 		return;
 	}

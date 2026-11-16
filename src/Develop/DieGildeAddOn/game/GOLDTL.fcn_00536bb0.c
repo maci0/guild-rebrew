@@ -66,12 +66,12 @@ void __cdecl fcn_00536bb0(void)
 		lim = i;
 	}
 	if (g_7e453c != 0) {
-		fcn_00416300(g_7e453c, 1, 2, (int) (4.0 * f1 * f2 * (double) lim),
-		             (int) (-2.0 * f2 * (double) lim), 1000);
+		fcn_00416300(g_7e453c, 1, 2, (int) ((double) -f1 * (double) lim * 2.0),
+		             (int) ((double) -f2 * (double) lim * 2.0), 1000);
 	}
 	if (g_7e4538 != 0) {
-		fcn_00415510(g_7e4538, 1, 2, (int) (0.25 * f1 * f2 * (double) lim),
-		             (int) (-0.5 * f2 * (double) lim), 1000);
+		fcn_00415510(g_7e4538, 1, 2, (int) ((double) -f1 * (double) lim * 0.5),
+		             (int) ((double) -f2 * (double) lim * 0.5), 1000);
 	}
 	if (g_6b89c0 == 0) {
 		return;

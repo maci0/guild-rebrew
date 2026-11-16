@@ -29,7 +29,7 @@ int __cdecl fcn_004ba9f0(int* a1)
 	int stride;
 	int cat;
 
-	found = 0; n = 0; k = 0;
+	n = 0; found = 0; k = 0;
 	e = gm_LookupEntityRecordById(a1[0]);
 	if (e == 0)
 		return 1;
@@ -42,45 +42,44 @@ int __cdecl fcn_004ba9f0(int* a1)
 		if (cat == 1 || cat == 2)
 			ents[n++] = (char*) it;
 	}
-	if (n == 0)
-		return 0x400;
-	chosen = ents[gm_RandomMod(n)];
-	step = 1;
-	if (gm_RandomMod(2) != 0) {
-		i = 0;
-		end = 0x180;
-	} else {
-		i = 0x180;
-		end = 0x300;
-	}
-	if (gm_RandomMod(2) != 0) {
-		end = 0;
-		i = 0x180;
-		step = -1;
-	}
+	if (n != 0) {
+		chosen = ents[gm_RandomMod(n)];
+		step = 1;
+		if (gm_RandomMod(2) != 0) {
+			i = 0;
+			end = 0x180;
+		} else {
+			i = 0x180;
+			end = 0x300;
+		}
+		if (gm_RandomMod(2) != 0) {
+			end = 0;
+			i = 0x180;
+			step = -1;
+		}
 
-	stride = step * 0x21c;
-	for (rp = (unsigned char*) g_7f4ca0 + 2 + i * 0x21c; i < end;
-	    i += step, rp += stride) {
-		if (rp[0] == 6 || rp[0] == 7 || rp[0] >= 0xa)
-			continue;
-		if (*(unsigned short*) (rp - 2) == 0xffff)
-			continue;
-		ents[k++] = (char*) (rp - 2);
-		if (k == 0x10)
-			break;
+		stride = step * 0x21c;
+		for (rp = (unsigned char*) g_7f4ca0 + 2 + i * 0x21c; i < end;
+		    i += step, rp += stride) {
+			if (rp[0] == 6 || rp[0] == 7 || rp[0] >= 0xa)
+				continue;
+			if (*(unsigned short*) (rp - 2) == 0xffff)
+				continue;
+			ents[k++] = (char*) (rp - 2);
+			if (k == 0x10)
+				break;
+		}
+		if (k != 0)
+			found = ents[gm_RandomMod(k)];
+		if (chosen == 0 || found == 0)
+			return 0x400;
+		fcn_004c51f0(*(int*) (chosen + 1), -1, gm_RandomMod(2) + 0x134, 1,
+		    *(unsigned char*) 0x773d75, 0);
+		io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7,
+		    *(unsigned short*) found);
+		he_MessageBoxQuickjump(*(int*) (e + 2), *(int*) (e + 2), buf,
+		    strlen(buf) > 0x100, 0x603, *(int*) (chosen + 1), -1, 0, 0);
+		return 0;
 	}
-	if (k != 0)
-		found = ents[gm_RandomMod(k)];
-	if (chosen == 0)
-		return 0x400;
-	if (found == 0)
-		return 0x400;
-	fcn_004c51f0(*(int*) (chosen + 1), -1, gm_RandomMod(2) + 0x134, 1,
-	    *(unsigned char*) 0x773d75, 0);
-	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7,
-	    *(unsigned short*) found);
-	he_MessageBoxQuickjump(*(int*) (e + 2), *(int*) (e + 2), buf,
-	    strlen(buf) > 0x100, 0x603, *(int*) (chosen + 1), -1, 0, 0);
-	return 0;
+	return 0x400;
 }

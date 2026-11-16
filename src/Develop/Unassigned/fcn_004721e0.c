@@ -24,6 +24,5 @@ int* __cdecl fcn_004721e0(int a, int b, int c)
 	arr = *(int**) ((char*) win + 0x28);
 	idx = arr[a];
 	flag = (c == 0);
-	*(int*) (g_1015ea0 + (idx * 189 + 18) * 4) = flag;
-	return (int*) g_1015ea0;
+	*(int*) (g_1015ea0 + (idx * 189 + 18) * 4) = flag; /* no return: native leaves the base in eax, no callers */
 }

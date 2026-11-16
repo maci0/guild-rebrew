@@ -30,14 +30,15 @@ void __cdecl fcn_00587a50(char* o)
 	float u;
 	float s;
 	float v[8];
+	float a[3];
 	float m[16];
 	void* c;
 	int i;
 
-	v[4] = 0.0f;
-	v[5] = *(float*) (o + 0x14);
-	v[6] = 0.0f;
-	fcn_00438cb0(*(void**) (o + 0x98), v + 4);
+	a[1] = *(float*) (o + 0x14);
+	a[2] = 0.0f;
+	a[0] = 0.0f;
+	fcn_00438cb0(*(void**) (o + 0x98), a);
 
 	v[4] = *(float*) (o + 0x10);
 	v[5] = 0.0f;

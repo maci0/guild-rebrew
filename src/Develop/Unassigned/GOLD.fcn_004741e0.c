@@ -37,6 +37,8 @@ int __cdecl fcn_004741e0(short x, short y, char* name)
     int i;
     int j;
     char* record;
+    char* v1;
+    char* v2;
     char* window;
     char* parent;
     char* current;
@@ -81,8 +83,8 @@ int __cdecl fcn_004741e0(short x, short y, char* name)
     }
     dialog = (char*)0xfb1020 + slot * 0x2ac;
     I32(dialog + 0x194) = I32(0x6ed94c) - 1;
-    for (i = 0; i < count; i++) {
-        record = version == 2 ? (char*)0x68ce98 + i * 0x101c : (char*)0x633f18 + i * 0xed4;
+    for (i = 0, v2 = (char*)0x68ce98, v1 = (char*)0x633f18; i < count; i++, v2 += 0x101c, v1 += 0xed4) {
+        record = version == 2 ? v2 : v1;
         parentID = I32(record + (version == 2 ? 0xed0 : 0xe94));
         if (parentID) {
             parentID = I32(dialog + parentID * 4);

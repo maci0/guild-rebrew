@@ -5,6 +5,7 @@ extern int g_6b89b0, g_6b89b8;
 void __cdecl fcn_00456530(int, int);
 void __cdecl fcn_00456c80(void);
 extern unsigned int g_14ce798, g_10405fc, g_104061c;
+extern char g_1040600;
 
 #define SET_MODE(f) \
 	(*(int (__stdcall **)(int, int, int, int, int, int, int)) \
@@ -29,7 +30,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		g_104061c = a1;
 	}
 	g_6b89b0 = a6;
-	*(char*) 0x1040600 = 1;
+	g_1040600 = 1;
 	*(char*) 0x1040601 = a4;
 	*(char*) 0x10405f8 = 1;
 	fcn_00456530(a2, a3);

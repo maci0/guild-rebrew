@@ -54,6 +54,8 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 	if (link != 0) {
 		fcn_004458e0(self, 0);
 		fcn_00438d70(self, 0, *(int*) (self + 0x88), 0);
+	} else {
+		link = 0;
 	}
 	if (*(int*) (self + 0x1cc) == 0) {
 		goto fail;

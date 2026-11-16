@@ -45,7 +45,7 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 	char* p;
 	char* q;
 	char* t;
-	Cell99ef80* cell;
+	unsigned short *row, *pc;
 	int n;
 	int i;
 	int kind;
@@ -65,10 +65,10 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 		fmax = 0.0f;
 		a = 8;
 		b = 8;
-		for (i = 0; i < 8; i++) {
-			for (n = 0; n < 8; n++) {
-				cell = (Cell99ef80*) ((char*) 0x99ef80 + (i + n * 8) * 0x18);
-				v = (float) cell->demand * *(float*) 0x662a34 + cell->supply;
+		for (row = (unsigned short*) 0x99ef82; (int) row < 0x99f042; row += 12) {
+			for (n = 8, pc = row; n != 0; n--, pc += 96) {
+				/* pc walks the supply words; demand is pc[-1] */
+				v = (float) pc[-1] * *(float*) 0x662a34 + pc[0];
 				/* native compares as !(fmax > v) (C3|C0 test), not the
 				   NaN-safe <= form */
 				if (!(fmax > v)) {

@@ -3,6 +3,7 @@
  * matrices, then raises the script events (0x210..0x218) and the ambient
  * dialogue for the chosen house. */
 
+#include <stdlib.h>
 #include "Develop/DieGildeAddOn/game/game_matrices.h"
 extern int g_7747b4;
 extern char g_7f4ca0[];
@@ -48,10 +49,7 @@ int __cdecl fcn_0047d2a0(char* e)
 					continue;
 				}
 			}
-			d = fcn_00508eb0(i, 0) - fcn_00508eb0(*(unsigned short*) e, 0);
-			if (d < 0) {
-				d = -d;
-			}
+			d = abs(fcn_00508eb0(i, 0) - fcn_00508eb0(*(unsigned short*) e, 0));
 			f = (10.0f - (float) d * 0.5f) * 0.1f;
 			if ((float) (signed char) g_90e0a0[i][*(unsigned short*) e] * f < bestscore) {
 				if (fcn_0050f980(i, (int) *(unsigned short*) e, 1) < 34.0f) {
@@ -71,10 +69,7 @@ int __cdecl fcn_0047d2a0(char* e)
 		b = 0;
 		fcn_004c4510((int) e, *(int*) (e + 4));
 		fcn_004c4570(1, 1, 0x215, &b);
-		d = (int) bestscore;
-		if (d < 0) {
-			d = -d;
-		}
+		d = abs((int) bestscore);
 		b = (unsigned char) (d / 3 + 1);
 		if ((((int) b < g_7747b4 + g_7747b4 + 0x23) ? (int) b : (g_7747b4 + g_7747b4 + 0x23))
 		    <= g_7747b4 + g_7747b4 + 0xf) {

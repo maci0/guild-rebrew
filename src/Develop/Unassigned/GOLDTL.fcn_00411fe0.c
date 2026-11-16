@@ -22,7 +22,7 @@ void __cdecl fcn_00411fe0(void)
 	if (*(int*) 0x14ce8a0 == 0) {
 		return;
 	}
-	for (;;) {
+	while (1) {
 		*(int*) 0x14ce938 = 0;
 		*(int*) 0x14ce92c = 0;
 		*(int*) 0x14ce93c = 0;

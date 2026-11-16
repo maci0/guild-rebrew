@@ -100,12 +100,12 @@ void __cdecl fcn_005d42e0(void)
 		n = 4;
 	}
 	io_AppendText(0x1f15, n + 0x1f16);
-	n = (int) (gfx.f[2] * g_662a98);
+	n = (int) (gfx.f[2] * 5.0f);
 	if (n > 4) {
 		n = 4;
 	}
 	io_AppendText(0x1f1b, n + 0x1f1c);
-	io_AppendText(0x1f21, (int) (gfx.f[1] * g_662cf8 > g_662950 ? gfx.f[1] * g_662cf8 : g_662950));
+	io_AppendText(0x1f21, (int) (gfx.f[1] * 100.0f > g_662950 ? gfx.f[1] * 100.0f : g_662950));
 	n = (int) ((gfx.f[3] > g_662950 ? gfx.f[3] : g_662950) * g_662c38);
 	io_AppendText(0x1f22, n);
 	d2_SetForm(dlg, 3);

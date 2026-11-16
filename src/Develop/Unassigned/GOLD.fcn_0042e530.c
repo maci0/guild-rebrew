@@ -27,9 +27,10 @@ unsigned int __cdecl fcn_0042e530(char* name)
 	int count;
 	int i; char* q; char ch; int* dst; int base;
 
-	i = 0; a = 0;
-	b = 0;
+	i = 0;
 	count = 0;
+	a = 0;
+	b = 0;
 	rec = (char*) 0x1431fc0;
 	do {
 		if (*rec == 0)

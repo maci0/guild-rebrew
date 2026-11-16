@@ -35,7 +35,7 @@ float __cdecl fcn_00508820(int id, int percentage)
 
     record = &((GOLD_PRICE_RECORD*) g_item_def_table)[id];
     if (record->cache != 0) {
-        double cached = (double) (record->cache << 5) * (percentage & 0xff) * 0.01f;
+        float cached = (float) (record->cache << 5) * (percentage & 0xff) * 0.01f;
         if (record->subtype == 3) {
             return cached * 1.5f;
         }
