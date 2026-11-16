@@ -82,8 +82,8 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 	if (rec == 0 || tbl == 0) {
 		return;
 	}
-	types = (char*)&((TradeProto*)lpGebaeudePROT)[*(unsigned char*)tbl];
 	fcn_00471a30(a1[0], 0);
+	types = (char*)&((TradeProto*)lpGebaeudePROT)[*(unsigned char*)tbl];
 	h = fcn_00470820(0, 0, s_681718);
 	fcn_00471b60(h);
 	first = fcn_00472830(h, 2);
@@ -116,7 +116,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 	i = d2_ShowTxt(0x6e, 0x70, g_14b5e8c, first);
 	*(int*) (g_1015ea0 + i * 0x2f4 + 0x6c) = 1;
 	*(int*) (g_1015ea0 + i * 0x2f4 + 0x18) = 0xcd;
-	if (n >= 1) {
+	if (n > 0) {
 		icons[3] = 0x51;
 		icons[4] = 0;
 		icons[5] = 0;
@@ -140,37 +140,41 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && g_67d370 == selA)) {
 			g_774654 = 1;
 		}
-		if (g_772908 != 0 && selB != -1) {
-			k = fcn_004be340((char*) g_772908) > 1;
+		if (g_772908 != 0 && selB != -1
+			&& fcn_004be340((char*) g_772908) <= 1) {
+			fcn_00472640(selB, 0);
 		}
 		else {
-			k = 1;
+			fcn_00472640(selB, 1);
 		}
-		fcn_00472640(selB, k);
 		for (i = 0; i < 3; i++) {
-			if (nodeA[i][1] == -1 && a0[2 + i * 2] != 0) {
+			n = nodeA[i][1];
+			if (n == -1 && a0[2 + i * 2] != 0) {
 				fcn_004bf000((unsigned short*) rec, (int) item, a0[2 + i * 2], i, 0, 0, first, &nodeA[i][0]);
 				k = a0[3 + i * 2];
 				if (k < 1) {
 					k = 1;
 				}
-				d2_SetElementValue(nodeA[i][1], 1, value, k);
+				n = nodeA[i][1];
+				d2_SetElementValue(n, 1, value, k);
 			}
 			if (nodeA[i][2] != -1) {
-				d2_SetElementValue(nodeA[i][2], 0, value, fcn_00471f80(nodeA[i][1]));
+				d2_SetElementValue(nodeA[i][2], 0, value, fcn_00471f80(n));
 			}
 		}
 		for (i = 0; i < 3; i++) {
-			if (nodeB[i][1] == -1 && a0[8 + i * 2] != 0) {
+			n = nodeB[i][1];
+			if (n == -1 && a0[8 + i * 2] != 0) {
 				fcn_004bf000((unsigned short*) rec, (int) item, a0[8 + i * 2], i, 0, 0x6e, first, &nodeB[i][0]);
 				k = a0[9 + i * 2];
 				if (k < 1) {
 					k = 1;
 				}
-				d2_SetElementValue(nodeB[i][1], 1, value, k);
+				n = nodeB[i][1];
+				d2_SetElementValue(n, 1, value, k);
 			}
 			if (nodeB[i][2] != -1) {
-				d2_SetElementValue(nodeB[i][2], 0, value, fcn_00471f80(nodeB[i][1]));
+				d2_SetElementValue(nodeB[i][2], 0, value, fcn_00471f80(n));
 			}
 		}
 		if (g_100f1dc != -1) {

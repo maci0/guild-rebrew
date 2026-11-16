@@ -43,9 +43,9 @@ void __cdecl fcn_00459050(int self)
 		return;
 	}
 	src = (float*) (g_6b8014 + 0x18c);
-	v[0] = g_662d40[2] * src[8] + g_662d40[1] * src[4] + g_662d40[0] * src[0];
-	v[1] = g_662d40[2] * src[9] + g_662d40[1] * src[5] + g_662d40[0] * src[1];
-	v[2] = g_662d40[2] * src[10] + g_662d40[1] * src[6] + g_662d40[0] * src[2];
+	v[0] = g_662d40[1] * src[4] + g_662d40[2] * src[8] + g_662d40[0] * src[0];
+	v[1] = g_662d40[1] * src[5] + g_662d40[2] * src[9] + g_662d40[0] * src[1];
+	v[2] = g_662d40[1] * src[6] + g_662d40[2] * src[10] + g_662d40[0] * src[2];
 	*(float*) (p + 0x14) = (float) fmod(fcn_00451380((float*) g_662d40, v), *(double*) 0x662958);
 	*(unsigned int*) (p + 0xc) = 0x30;
 	src = (float*) (g_6b8014 + 0x18c);

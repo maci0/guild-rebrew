@@ -9,40 +9,43 @@ int __cdecl fcn_0050b810(int, unsigned char);
 /* ADDRESS: GOLDTL 0x004f0ff0 */
 int __cdecl fcn_004f0ff0(char* obj, int a1, int a2, int a3, int* out1, int* out2)
 {
+	int c1;
+	int c2;
+	int c3;
 
-
-
-
-	if (a1 < 4) {
-		if (a1 > 0) {
-			a1 = a1;
+	c1 = a1;
+	c2 = a2;
+	c3 = a3;
+	if (c1 < 4) {
+		if (c1 > 0) {
+			c1 = c1;
 		} else {
-			a1 = 0;
+			c1 = 0;
 		}
 	} else {
-		a1 = 4;
+		c1 = 4;
 	}
-	if (a2 < 0x64) {
-		if (a2 > 0) {
-			a2 = a2;
+	if (c2 < 0x64) {
+		if (c2 > 0) {
+			c2 = c2;
 		} else {
-			a2 = 0;
+			c2 = 0;
 		}
 	} else {
-		a2 = 0x64;
+		c2 = 0x64;
 	}
-	if (a3 < 3) {
-		if (a3 > 1) {
-			a3 = a3;
+	if (c3 < 3) {
+		if (c3 > 1) {
+			c3 = c3;
 		} else {
-			a3 = 1;
+			c3 = 1;
 		}
 	} else {
-		a3 = 3;
+		c3 = 3;
 	}
-	*out1 = a1 + 2;
-	*out2 = (int) (((float) a2 * 2.0f + 500.0f) * ((float) a1 * 0.25f + 1.0f)
-		* a3 * 32.0f);
+	*out1 = c1 + 2;
+	*out2 = (int) (((float) c2 * 2.0f + 500.0f) * ((float) c1 * 0.25f + 1.0f)
+		* c3 * 32.0f);
 	if (*(int*) (obj + 0x194) < *out1) {
 		return 0;
 	}

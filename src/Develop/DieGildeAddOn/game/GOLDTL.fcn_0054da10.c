@@ -203,8 +203,8 @@ ent0:
 				*(int*) (a + 0x84) = fcn_004c5620(1, a);
 				return;
 			}
-			ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (a + 0xb4 + i * 4));
-			*(int*) (a + 0xd8) = i + 1;
+			ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (a + 0xb4 + *(int*) (a + 0xd8) * 4));
+			*(int*) (a + 0xd8) = *(int*) (a + 0xd8) + 1;
 			if (ent == 0) {
 				*(pos14_7f4c00*) (a + 0x52) = g_7f4c00;
 				fcn_00500bb0(a + 0x52, 0, 2, 0);

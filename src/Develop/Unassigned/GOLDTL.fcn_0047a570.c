@@ -19,11 +19,11 @@ int __cdecl fcn_0047a570(int a0, int a1, int a2, int* a3, int* a4, int a5)
 
 	unsigned int i;
 
-	if (a1 > a2) {
-		n = a1;
+	if (a2 > a1) {
+		n = a2;
 	}
 	else {
-		n = a2;
+		n = a1;
 	}
 	if (a0 > 1) {
 		v1 = (int) (sqrt((double) a0) + dbl_1_0);

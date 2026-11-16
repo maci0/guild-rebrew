@@ -23,7 +23,7 @@ void __cdecl fcn_0056e980(char* a0)
 	case 0:
 		w = *(int*) &g_7f4c04 & 0xffff;
 
-		if (!((float) w >= *(float*) (idx * 4 + 0x696540)) || !((float) w < *(float*) (idx * 4 + 0x696540) + *(float*) &g_6628a0)) {
+		if (!((float) w >= *(float*) (idx * 4 + 0x696540)) || !((float) w < *(float*) (idx * 4 + 0x696540) + 1.0f)) {
 			*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 			fcn_00500bb0((char*) &g_7f4c00, 0, 0, 1);
 			return;
@@ -36,8 +36,10 @@ void __cdecl fcn_0056e980(char* a0)
 			if (*(int*) (idx * 4 + 0x696540) == 0x40e00000) {
 				fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6d10, -1, 0xfa);
 			} else if (*(int*) (idx * 4 + 0x696540) == 0x41000000) {
-				fcn_004c30a0(*(int*) (a0 + 0xac), 0,
-					(char*) (idx == 2 ? 0x6a6cec : 0x6a6ccc), -1, 0xfa);
+				if (idx == 2)
+					fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6cec, -1, 0xfa);
+				else
+					fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6ccc, -1, 0xfa);
 			} else if (*(int*) (idx * 4 + 0x696540) == 0x41100000) {
 				fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6cac, -1, 0x3e8);
 			}
@@ -52,7 +54,7 @@ void __cdecl fcn_0056e980(char* a0)
 	case 1:
 		w = *(int*) &g_7f4c04 & 0xffff;
 
-		if (!((float) w >= *(float*) (idx * 4 + 0x696550)) || !((float) w < *(float*) (idx * 4 + 0x696550) + *(float*) &g_6628a0)) {
+		if (!((float) w >= *(float*) (idx * 4 + 0x696550)) || !((float) w < *(float*) (idx * 4 + 0x696550) + 1.0f)) {
 			*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 			fcn_00500bb0((char*) &g_7f4c00, 0, 0, 1);
 			return;
@@ -65,8 +67,10 @@ void __cdecl fcn_0056e980(char* a0)
 			if (*(int*) (idx * 4 + 0x696550) == 0x41980000) {
 				fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6c6c, -1, 0xfa);
 			} else if (*(int*) (idx * 4 + 0x696550) == 0x41a00000) {
-				fcn_004c30a0(*(int*) (a0 + 0xac), 0,
-					(char*) (idx == 2 ? 0x6a6c48 : 0x6a6c28), -1, 0xfa);
+				if (idx == 2)
+					fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6c48, -1, 0xfa);
+				else
+					fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6c28, -1, 0xfa);
 			} else if (*(int*) (idx * 4 + 0x696550) == 0x41a80000) {
 				fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6c08, -1, 0xfa);
 			}

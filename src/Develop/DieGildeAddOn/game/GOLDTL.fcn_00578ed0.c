@@ -129,7 +129,7 @@ found_one:
 						req.b = *(int*) (a0 + 0xac);
 						req.c = *(int*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca4);
 						req.d = ref;
-						if ((gm_RandomMod(2) & 0xffff) != 0)
+						if ((unsigned short) gm_RandomMod(2) != 0)
 							fcn_00579390((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
 						else
 							fcn_00579410((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));

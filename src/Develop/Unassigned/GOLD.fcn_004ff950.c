@@ -12,9 +12,9 @@ int __cdecl fcn_004ff950(int a0, int a1)
 	int i;
 	char* e;
 
+	sum = 0;
 	row = (char*) 0x7d6a70 + a1 * 0x80 + a0 * 0x6810;
 	g = row + 0x40;
-	sum = 0;
 	if (*g == 0) {
 		return 0;
 	}

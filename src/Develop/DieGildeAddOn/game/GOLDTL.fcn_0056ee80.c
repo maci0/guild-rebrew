@@ -288,7 +288,7 @@ label_1bc:
 				while (q != 0) {
 					if ((gm_RandomMod(100) & 0xffff) >= 0x33) {
 						cnt = gm_GetMsgField(h, (int*) q);
-						cnt = (int) ((double) cnt * ((double) count * g_6629f8));
+						cnt = (int) ((double) cnt * ((double) count * 0.1));
 						if (cnt <= 0) {
 							cnt = 1;
 						}

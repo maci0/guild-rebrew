@@ -114,7 +114,7 @@ void __cdecl fcn_00556ed0(char* s)
 			} else {
 				y = g_664f08 - gm_RandomFloat01() * g_66430c * g_662908;
 			}
-			m = fcn_005c6270((char*) p, 0x2b3) != 0 ? y * g_662a6c : y;
+			m = fcn_005c6270((char*) p, 0x2b3) != 0 ? y * 0.75f : y;
 			if (f < m - x) {
 				if (fcn_00508280((char*) p, &r, &g) != 0) {
 					home2 = g_7f4ca0[idx].home2;

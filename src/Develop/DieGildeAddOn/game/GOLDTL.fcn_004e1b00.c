@@ -38,6 +38,8 @@ void __cdecl fcn_004e1b00(int a0)
 	unsigned short* s;
 	char* scene;
 	int id;
+	char* s_dst;
+	char* r_dst;
 
 
 	mode = cut_RandMod(3);
@@ -79,19 +81,21 @@ void __cdecl fcn_004e1b00(int a0)
 
 	sprintf(buf + strlen(buf), (char*) 0x68cad8, fcn_004fda30(*p) + 4);
 
+	r_dst = buf + strlen(buf);
 	if (r != 0) {
 		id = fcn_004fda30(*r);
 	} else {
 		id = fcn_004fd9d0(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}
-	sprintf(buf + strlen(buf), (char*) 0x68cad8, id + 4);
+	sprintf(r_dst, (char*) 0x68cad8, id + 4);
 
+	s_dst = buf + strlen(buf);
 	if (s != 0) {
 		id = fcn_004fda30(*s);
 	} else {
 		id = fcn_004fd9d0(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}
-	sprintf(buf + strlen(buf), (char*) 0x679060, id + 4);
+	sprintf(s_dst, (char*) 0x679060, id + 4);
 	fcn_004e44b0((char*) 0x68cf80, buf);
 	fcn_004e44f0(fcn_004e44b0((char*) 0x68cf54, (char*) 0x6b5c60));
 	if (*(int*) (a0 + 0xc) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {

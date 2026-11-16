@@ -28,8 +28,9 @@ void __cdecl fcn_00421f10(Obj_00421f10* a0, unsigned int a1)
 	while (v != 0xffff) {
 		n = a0->table[v].next;
 		if (n != 0xffff) {
+			tail = (int) n;
 			a0->table[n].prev = v;
-			n = a0->table[v].next; tail = (int) n;
+			n = a0->table[v].next;
 		}
 		v = n;
 	}

@@ -47,9 +47,9 @@ int __cdecl fcn_004e7d40(char* a0, int a1)
 		first = 0;
 		flag = 0;
 		if (g_9a9220[i].x4 == -1 && g_9a9220[i].x10 == 3 && g_9a9220[i].xc < 4) {
+			info.owner = *(int*) (a0 + 4);
 			info.sel = g_9a9220[i].id;
 			first = 1;
-			info.owner = *(int*) (a0 + 4);
 			flag = 1;
 		}
 		for (i++; i < 0x1e; i++) {

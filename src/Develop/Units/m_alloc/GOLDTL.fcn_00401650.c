@@ -59,7 +59,7 @@ char __cdecl fcn_00401650(const char* name, char* buf, char* palbuf, int flags)
 	bpp24 = 0;
 	f = vfs_Tfopen(name, "rb", g_6b7fdc);
 	if (f == 0) {
-		return 0;
+		goto bad_ret;
 	}
 	vfs_fseek(f, 0xe, 0);
 	vfs_ReadData((char*) &bih, 1, 0x28, f);
@@ -82,6 +82,7 @@ char __cdecl fcn_00401650(const char* name, char* buf, char* palbuf, int flags)
 			if (bih.biBitCount != 8 ||
 			    (bih.biCompression != 1 && bih.biCompression != 0)) {
 				CloseVfsStream(f);
+bad_ret:
 				return 0;
 			}
 			if (bih.biClrUsed == 0) {

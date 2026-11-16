@@ -60,8 +60,8 @@ int __cdecl fcn_00539600(void)
 		if (f != 0) {
 			ls_LoadSavegameHeader(f, hdr);
 			c = hdr[0x31];
-			memcpy(g_7e2000, g_6a3a1c, 10);
 			g_7747b0 |= 0x50;
+			memcpy(g_7e2000, g_6a3a1c, 10);
 			g_6a375c = c;
 			g_7e2520.mode = c;
 			g_7e2520.size = 0x6a;

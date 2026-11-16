@@ -83,7 +83,6 @@ void __cdecl fcn_004fdfe0(Figure* f)
 		char base[0x80];
 		char kind[0x80];
 		char* p;
-		int* slot;
 
 		hs = fcn_004fda30(f->id);
 		n = 0;
@@ -94,20 +93,19 @@ void __cdecl fcn_004fdfe0(Figure* f)
 				strcpy(kind, p + 1);
 				*p = 0;
 			}
-			slot = hs->head;
-			*slot = 0;
-			for (i = 0; i < 4; i++, slot++) {
+			hs->head[0] = 0;
+			for (i = 0; i < 4; i++) {
 				fcn_0064d41a(icon, g_69649c, base, i, kind);
 				if (strstr(base, g_6964b4) != 0) {
 					fcn_0064d41a(icon, g_696488, base, i);
 				}
-				*slot = 0xff;
+				hs->head[i] = 0xff;
 				for (j = 0; j < g_773d40; j++) {
 					if (g_773d44[j * 0x30] == 0) {
 						break;
 					}
 					if (fcn_0065f220(icon, &g_773d44[j * 0x30]) == 0) {
-						*slot = j;
+						hs->head[i] = j;
 						break;
 					}
 				}

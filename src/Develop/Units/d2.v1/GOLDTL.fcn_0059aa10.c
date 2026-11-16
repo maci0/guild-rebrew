@@ -132,10 +132,10 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 							*(unsigned char*) (msg + 4) = 0x0c;
 							*(int*) (msg + 0x58) = *(int*) (a0 + 1);
 							*(int*) (msg + 0x60) = sel;
-							*(int*) (msg + 8) = *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (a0 + 0x25) * 0x21c + 4);
 							*(int*) (msg + 0x28) = g_7f4c00.a;
 							*(int*) (msg + 0x2c) = g_7f4c00.b;
 							*(int*) (msg + 0x30) = g_7f4c00.c;
+							*(int*) (msg + 8) = *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (a0 + 0x25) * 0x21c + 4);
 							*(short*) (msg + 0x34) = g_7f4c00.d;
 							*(int*) (msg + 0x5c) = *(int*) (msg + 8);
 						} else {

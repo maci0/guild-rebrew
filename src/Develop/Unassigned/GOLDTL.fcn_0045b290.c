@@ -32,6 +32,7 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 	int minb;
 	int maxb;
 	float n0;
+	float org[4];
 	double base_x;
 	float side_x;
 	float side_y;
@@ -100,19 +101,22 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 			}
 		}
 		base_x = (double) minb * f[0x20] + f[0x14];
-		pts[0][0] = (float) base_x;
-		pts[0][1] = (float) minb * f[0x21] + f[0x15];
-		pts[0][2] = (float) minb * f[0x22] + f[0x16];
+		org[0] = (float) base_x;
+		org[1] = (float) minb * f[0x21] + f[0x15];
+		org[2] = (float) minb * f[0x22] + f[0x16];
+		pts[0][0] = org[0];
+		pts[0][1] = org[1];
+		pts[0][2] = org[2];
 		n0 = (float) *(int*) t;
 		side_x = n0 * f[0x18];
 		pts[1][0] = side_x + base_x;
 		side_y = n0 * f[0x19];
-		pts[1][1] = side_y + pts[0][1];
+		pts[1][1] = side_y + org[1];
 		side_z = n0 * f[0x1a];
-		pts[1][2] = side_z + pts[0][2];
+		pts[1][2] = side_z + org[2];
 		pts[2][0] = n0 * f[0x1c] + base_x;
-		pts[2][1] = n0 * f[0x1d] + pts[0][1];
-		pts[2][2] = n0 * f[0x1e] + pts[0][2];
+		pts[2][1] = n0 * f[0x1d] + org[1];
+		pts[2][2] = n0 * f[0x1e] + org[2];
 		pts[3][0] = (float) side_x + pts[2][0];
 		pts[3][1] = (float) side_y + pts[2][1];
 		pts[3][2] = (float) side_z + pts[2][2];

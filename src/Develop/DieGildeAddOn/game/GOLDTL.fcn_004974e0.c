@@ -19,6 +19,7 @@ int __cdecl fcn_004974e0(int unused, char* e, int unused2, char* out, char* out2
 	int amount;
 	unsigned short* ent;
 	int i;
+	int who;
 	BUILDING_LIMIT_VIEW* limit;
 
 	if (e[2] == 3)
@@ -39,7 +40,8 @@ int __cdecl fcn_004974e0(int unused, char* e, int unused2, char* out, char* out2
 	amount = fcn_0050d320(g_slot_table + *(unsigned short*) (r + 0x27) * 0x21c, g_773d75);
 	if (*(float*) (out + 0x14) > 0.0f && *(float*) (out + 0x14) < 1.0f)
 		amount = (int) ((float) amount * *(float*) (out + 0x14));
-	if (amount < (int) fcn_0050bb50(*(int*) (out + 4), g_773d75))
+	who = g_773d75;
+	if (amount < (int) fcn_0050bb50(*(int*) (out + 4), who))
 		return 0;
 	i = 0;
 	limit = &((BUILDING_LIMIT_VIEW*) lpGebaeudePROT)[*(unsigned char*) r];

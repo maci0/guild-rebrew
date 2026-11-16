@@ -41,7 +41,7 @@ typedef struct {
 /* ADDRESS: GOLDTL 0x00416540 */
 void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 {
-	float in[3]; float dx; float dy; float dz;
+	float in[4]; float dv[4];
 	float out[16];
 	float* m;
 	float* r;
@@ -75,13 +75,13 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	self->y = *(float*) (g_6b8014 + 0x88);
 	self->z = *(float*) (g_6b8014 + 0x8c);
 	b1 = (out[5] + out[1]) * g_6628a8 + out[9] * 1.9f;
-	dx = self->px - *(float*) (g_6b8014 + 0x4c);
-	dy = self->py - *(float*) (g_6b8014 + 0x50);
-	dz = self->pz - *(float*) (g_6b8014 + 0x54);
+	dv[0] = self->px - *(float*) (g_6b8014 + 0x4c);
+	dv[1] = self->py - *(float*) (g_6b8014 + 0x50);
+	dv[2] = self->pz - *(float*) (g_6b8014 + 0x54);
 	m = (float*) (g_6b8014 + 0x18c);
-	a0 = dz * m[8] + dy * m[4] + dx * m[0];
-	a1 = dz * m[9] + dy * m[5] + dx * m[1];
-	a2 = dz * m[10] + dy * m[6] + dx * m[2];
+	a0 = dv[2] * m[8] + dv[1] * m[4] + dv[0] * m[0];
+	a1 = dv[2] * m[9] + dv[1] * m[5] + dv[0] * m[1];
+	a2 = dv[2] * m[10] + dv[1] * m[6] + dv[0] * m[2];
 	a0 *= 0.0025f; a1 *= 0.0025f; a2 *= 0.0025f;
 	self->px = *(float*) (g_6b8014 + 0x4c);
 	self->py = *(float*) (g_6b8014 + 0x50);

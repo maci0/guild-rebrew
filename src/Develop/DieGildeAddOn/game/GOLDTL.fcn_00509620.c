@@ -73,9 +73,9 @@ int __cdecl fcn_00509620(int a0, int a1)
 	fcn_004e8940(p);
 
 	rec_a = *q;
+	rec_a.entity_index = p->entity_index;
 	rec_a.entity_state = p->entity_state;
 	rec_a.entity_id = p->entity_id;
-	rec_a.entity_index = p->entity_index;
 	rec_a.is_active = p->is_active;
 	rec_a.current_building = p->current_building;
 
