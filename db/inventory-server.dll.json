@@ -188,23 +188,31 @@
   },
   {
     "va": 268449056,
-    "size": 30,
-    "name": "fcn.10003520"
-  },
-  {
-    "va": 268449086,
-    "size": 130,
-    "name": "fcn.1000353e"
+    "size": 155,
+    "name": "fcn.10003520",
+    "extent_history": [
+      {
+        "old_size": 30,
+        "new_size": 155,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268449216,
-    "size": 35,
-    "name": "fcn.100035c0"
-  },
-  {
-    "va": 268449251,
-    "size": 84,
-    "name": "fcn.100035e3"
+    "size": 119,
+    "name": "fcn.100035c0",
+    "extent_history": [
+      {
+        "old_size": 35,
+        "new_size": 119,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268449335,
@@ -773,88 +781,17 @@
   },
   {
     "va": 268479808,
-    "size": 40,
-    "name": "fcn.1000ad40"
-  },
-  {
-    "va": 268479848,
-    "size": 32,
-    "name": "case.0x1000ad61.10019"
-  },
-  {
-    "va": 268479880,
-    "size": 32,
-    "name": "case.0x1000ad61.10012"
-  },
-  {
-    "va": 268479912,
-    "size": 32,
-    "name": "case.0x1000ad61.10005"
-  },
-  {
-    "va": 268479944,
-    "size": 32,
-    "name": "case.0x1000ad61.10016"
-  },
-  {
-    "va": 268479976,
-    "size": 32,
-    "name": "case.0x1000ad61.10004"
-  },
-  {
-    "va": 268480008,
-    "size": 32,
-    "name": "case.0x1000ad61.10008"
-  },
-  {
-    "va": 268480040,
-    "size": 32,
-    "name": "case.0x1000ad61.10013"
-  },
-  {
-    "va": 268480072,
-    "size": 32,
-    "name": "case.0x1000ad61.10009"
-  },
-  {
-    "va": 268480104,
-    "size": 32,
-    "name": "case.0x1000ad61.10011"
-  },
-  {
-    "va": 268480136,
-    "size": 32,
-    "name": "case.0x1000ad61.10017"
-  },
-  {
-    "va": 268480168,
-    "size": 32,
-    "name": "case.0x1000ad61.10007"
-  },
-  {
-    "va": 268480200,
-    "size": 32,
-    "name": "case.0x1000ad61.10010"
-  },
-  {
-    "va": 268480232,
-    "size": 32,
-    "name": "case.0x1000ad61.10006"
-  },
-  {
-    "va": 268480264,
-    "size": 32,
-    "name": "case.0x1000ad61.10014"
-  },
-  {
-    "va": 268480296,
-    "size": 32,
-    "name": "case.0x1000ad61.10018"
-  },
-  {
-    "va": 268480328,
-    "size": 248,
-    "name": "case.0x1000ad61.10015"
+    "size": 758,
+    "name": "fcn.1000ad40",
+    "extent_history": [
+      {
+        "old_size": 40,
+        "new_size": 758,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268480576,
@@ -1088,23 +1025,17 @@
   },
   {
     "va": 268486416,
-    "size": 39,
-    "name": "fcn.1000c710"
-  },
-  {
-    "va": 268486509,
-    "size": 69,
-    "name": "fcn.1000c76d"
-  },
-  {
-    "va": 268486590,
-    "size": 22,
-    "name": "fcn.1000c7be"
-  },
-  {
-    "va": 268486750,
-    "size": 418,
-    "name": "fcn.1000c85e"
+    "size": 752,
+    "name": "fcn.1000c710",
+    "extent_history": [
+      {
+        "old_size": 39,
+        "new_size": 752,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268487168,
@@ -1229,9 +1160,18 @@
     "name": "fcn.1000d330"
   },
   {
-    "va": 268489534,
-    "size": 8,
-    "name": "fcn.1000d33e"
+    "va": 268489536,
+    "size": 6,
+    "name": "fcn.1000d340",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 6,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
+      }
+    ]
   },
   {
     "va": 268489542,
@@ -1259,9 +1199,18 @@
     "name": "fcn.1000d6e0"
   },
   {
-    "va": 268490542,
-    "size": 182,
-    "name": "fcn.1000d72e"
+    "va": 268490544,
+    "size": 180,
+    "name": "fcn.1000d730",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 180,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
+      }
+    ]
   },
   {
     "va": 268490724,
@@ -1284,9 +1233,18 @@
     "name": "fcn.1000d8a0"
   },
   {
-    "va": 268491054,
-    "size": 2066,
-    "name": "fcn.1000d92e"
+    "va": 268491056,
+    "size": 2057,
+    "name": "fcn.1000d930",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2057,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
+      }
+    ]
   },
   {
     "va": 268493120,
@@ -1313,9 +1271,18 @@
     "name": "fcn.1000e690"
   },
   {
-    "va": 268494671,
-    "size": 124,
-    "name": "fcn.1000e74f"
+    "va": 268494672,
+    "size": 123,
+    "name": "fcn.1000e750",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 123,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
+      }
+    ]
   },
   {
     "va": 268494800,
@@ -1333,9 +1300,18 @@
     "name": "fcn.1000e8d0"
   },
   {
-    "va": 268495295,
-    "size": 215,
-    "name": "fcn.1000e9bf"
+    "va": 268495296,
+    "size": 214,
+    "name": "fcn.1000e9c0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 214,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
+      }
+    ]
   },
   {
     "va": 268495510,
@@ -1436,19 +1412,51 @@
     ]
   },
   {
+    "va": 268497824,
+    "size": 3,
+    "name": "fcn.1000f3a0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 3,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
+      }
+    ]
+  },
+  {
     "va": 268497840,
     "size": 206,
     "name": "fcn.1000f3b0"
   },
   {
-    "va": 268498046,
-    "size": 273,
-    "name": "fcn.1000f47e"
+    "va": 268498048,
+    "size": 271,
+    "name": "fcn.1000f480",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 271,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
+      }
+    ]
   },
   {
-    "va": 268498319,
-    "size": 238,
-    "name": "fcn.1000f58f"
+    "va": 268498320,
+    "size": 237,
+    "name": "fcn.1000f590",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 237,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
+      }
+    ]
   },
   {
     "va": 268498560,
@@ -1495,9 +1503,18 @@
     "name": "fcn.1000f980"
   },
   {
-    "va": 268499663,
-    "size": 86,
-    "name": "fcn.1000facf"
+    "va": 268499664,
+    "size": 85,
+    "name": "fcn.1000fad0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 85,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
+      }
+    ]
   },
   {
     "va": 268499749,
@@ -1596,9 +1613,18 @@
     "name": "fcn.10010010"
   },
   {
-    "va": 268501118,
-    "size": 24,
-    "name": "fcn.1001007e"
+    "va": 268501120,
+    "size": 22,
+    "name": "fcn.10010080",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 22,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
+      }
+    ]
   },
   {
     "va": 268501142,
@@ -1611,9 +1637,18 @@
     "name": "fcn.100100a0"
   },
   {
-    "va": 268501311,
-    "size": 281,
-    "name": "fcn.1001013f"
+    "va": 268501312,
+    "size": 280,
+    "name": "fcn.10010140",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 280,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
+      }
+    ]
   },
   {
     "va": 268501592,
@@ -1680,8 +1715,17 @@
   },
   {
     "va": 268502320,
-    "size": 107,
-    "name": "fcn.10010530"
+    "size": 113,
+    "name": "fcn.10010530",
+    "extent_history": [
+      {
+        "old_size": 107,
+        "new_size": 113,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268502448,
@@ -1877,13 +1921,17 @@
   },
   {
     "va": 268511472,
-    "size": 1306,
-    "name": "fcn.100128f0"
-  },
-  {
-    "va": 268512778,
-    "size": 157,
-    "name": "fcn.10012e0a"
+    "size": 1463,
+    "name": "fcn.100128f0",
+    "extent_history": [
+      {
+        "old_size": 1306,
+        "new_size": 1463,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268512944,
@@ -2242,13 +2290,17 @@
   },
   {
     "va": 268526688,
-    "size": 257,
-    "name": "fcn.10016460"
-  },
-  {
-    "va": 268526945,
-    "size": 63,
-    "name": "fcn.10016561"
+    "size": 316,
+    "name": "fcn.10016460",
+    "extent_history": [
+      {
+        "old_size": 257,
+        "new_size": 316,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268527008,
@@ -2266,6 +2318,20 @@
         "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
         "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
         "changed_at": "2026-10-26T16:07:35.211532+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268527216,
+    "size": 1,
+    "name": "fcn.10016670",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.293156+00:00"
       }
     ]
   },
@@ -2414,13 +2480,17 @@
   },
   {
     "va": 268532144,
-    "size": 57,
-    "name": "fcn.100179b0"
-  },
-  {
-    "va": 268532243,
-    "size": 93,
-    "name": "fcn.10017a13"
+    "size": 181,
+    "name": "fcn.100179b0",
+    "extent_history": [
+      {
+        "old_size": 57,
+        "new_size": 181,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268532336,
@@ -2429,8 +2499,17 @@
   },
   {
     "va": 268532400,
-    "size": 68,
-    "name": "fcn.10017ab0"
+    "size": 74,
+    "name": "fcn.10017ab0",
+    "extent_history": [
+      {
+        "old_size": 68,
+        "new_size": 74,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268532480,
@@ -2493,18 +2572,31 @@
   },
   {
     "va": 268534064,
-    "size": 26,
-    "name": "fcn.10018130"
+    "size": 32,
+    "name": "fcn.10018130",
+    "extent_history": [
+      {
+        "old_size": 26,
+        "new_size": 32,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268534096,
-    "size": 28,
-    "name": "fcn.10018150"
-  },
-  {
-    "va": 268534124,
-    "size": 52,
-    "name": "fcn.1001816c"
+    "size": 70,
+    "name": "fcn.10018150",
+    "extent_history": [
+      {
+        "old_size": 28,
+        "new_size": 70,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268534176,
@@ -2518,13 +2610,17 @@
   },
   {
     "va": 268534272,
-    "size": 24,
-    "name": "fcn.10018200"
-  },
-  {
-    "va": 268534386,
-    "size": 190,
-    "name": "case.0x10018211.15"
+    "size": 291,
+    "name": "fcn.10018200",
+    "extent_history": [
+      {
+        "old_size": 24,
+        "new_size": 291,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268534576,
@@ -2604,13 +2700,17 @@
   },
   {
     "va": 268539680,
-    "size": 257,
-    "name": "fcn.10019720"
-  },
-  {
-    "va": 268539937,
-    "size": 139,
-    "name": "fcn.10019821"
+    "size": 396,
+    "name": "fcn.10019720",
+    "extent_history": [
+      {
+        "old_size": 257,
+        "new_size": 396,
+        "reason": "Relumea target verification job 1633 (316/316 passed) matched this function byte for byte at its registry extent; the discovery inventory split it at an internal return or switch dispatch, started it on the nop alignment before it, or lacked it (registry starts are 16-byte aligned and called)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-16T03:23:28.262590+00:00"
+      }
+    ]
   },
   {
     "va": 268540080,
