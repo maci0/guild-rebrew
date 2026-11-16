@@ -61,6 +61,7 @@ void __cdecl fcn_0058f6a0(const unsigned char* arg1)
     int r;
     int i;
     int index;
+    unsigned char* pe;
 
     memset(query, 0, sizeof(query));
     memset(query + 7, 0xff, 8 * sizeof(*query));
@@ -92,8 +93,8 @@ void __cdecl fcn_0058f6a0(const unsigned char* arg1)
             if (dword_67d370 == ok) {
                 r = sub_525f60(0x7f4ca0 + word_774970 * 0x21c, 4);
                 found = 0;
-                for (i = 0; (unsigned long) &byte_7f4e28[i * 0x21c] < 0x85a228; i++) {
-                    if (byte_7f4e28[i * 0x21c] != 0) {
+                for (i = 0, pe = byte_7f4e28; (int) pe < 0x85a228; i++, pe += 0x21c) {
+                    if (*pe != 0) {
                         found = (struct entry_s*) (0x7f4ca0 + i * 0x21c);
                         break;
                     }

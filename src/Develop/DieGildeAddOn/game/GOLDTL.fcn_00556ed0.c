@@ -26,6 +26,13 @@ extern pos14_7f4c00 g_7f4c00;
 extern Player g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 extern char g_6b5c60[];
+extern float g_662cf8;
+extern float g_665370;
+extern float g_66430c;
+extern float g_6628ac;
+extern double g_662908;
+extern double g_664f08;
+extern float g_662a6c;
 
 int __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
@@ -94,31 +101,31 @@ void __cdecl fcn_00556ed0(char* s)
 	do {
 		p = &g_7f4ca0[idx];
 		if (fcn_00556e80((unsigned short*) p) != 0) {
-			f = gm_RandomFloat01() * 100.0f;
-			home = p->home;
-			x = 0.0f;
+			f = gm_RandomFloat01() * g_662cf8;
+			home = g_7f4ca0[idx].home;
 			y = 0.0f;
+			x = 0.0f;
 			if (home != 0) {
 				if (*(unsigned char*) (lpGebaeudePROT + *(unsigned char*) home * 0x24d) == 2) {
-					x = (float) fcn_0050c710(home, 8, 1) * 0.0125f * 20.0f;
+					x = (float) fcn_0050c710(home, 8, 1) * g_665370 * g_66430c;
 				} else {
-					x = (float) fcn_0050c710(home, 8, 1) * 0.02f * 20.0f;
+					x = (float) fcn_0050c710(home, 8, 1) * g_6628ac * g_66430c;
 				}
 			} else {
-				y = 25.0 - gm_RandomFloat01() * 20.0f * 0.5;
+				y = g_664f08 - gm_RandomFloat01() * g_66430c * g_662908;
 			}
-			m = fcn_005c6270((char*) p, 0x2b3) != 0 ? y * 0.75f : y;
+			m = fcn_005c6270((char*) p, 0x2b3) != 0 ? y * g_662a6c : y;
 			if (f < m - x) {
 				if (fcn_00508280((char*) p, &r, &g) != 0) {
-					home2 = p->home2;
+					home2 = g_7f4ca0[idx].home2;
 					if (home2 != 0 && *(unsigned short*) (home2 + 0x27) != 0xffff
 					    && (q = (unsigned char*) &g_7f4ca0[*(unsigned short*) (home2 + 0x27)]) != 0) {
 						fcn_005498b0(s, (char*) p, (char*) q, home2, r, g);
 					} else {
 						if (g < fcn_004fef80((char*) p)
-						    && (p->type == 6 || p->type == 7)) {
+						    && (g_7f4ca0[idx].type == 6 || g_7f4ca0[idx].type == 7)) {
 							io_FormatTextBuffer(buf, (char*) 0x163c, (char*) (r + 0x1632));
-							fcn_00545d40(p->handle, -1, buf, 0, 0x5f7, g_6b5c60);
+							fcn_00545d40(g_7f4ca0[idx].handle, -1, buf, 0, 0x5f7, g_6b5c60);
 						}
 					}
 				}

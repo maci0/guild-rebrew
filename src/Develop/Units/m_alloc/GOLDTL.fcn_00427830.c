@@ -51,12 +51,12 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     if (tok.data[0] == 2)
     {
         v3 = fcn_004260f0(a0, name);
-        if (v3)
+        if (!v3)
         {
-            __asm { int 3 }
-        } else {
             record = fcn_00427740(v2, a1, 1);
             q = (char *)(record + 4); strcpy(q, name);
+        } else {
+            __asm { int 3 }
         }
         fcn_00426680(*(unsigned int *)(g_6b7e98 + 0x118), &tok.status);
         if (tok.status != 5)
@@ -68,35 +68,33 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     {
         v4 = *(unsigned int *)(g_6b7e98 + 0x118);
         v3 = fcn_00427600(a0, tok.data);
-        if (v3)
+        if (!v3)
+            return 0;
+        v5 = fcn_0064e790(v4, 0x7b);
+        *(unsigned int *)(*(int *)(v2 + 0x10c) - 300 + *(int *)(v2 + 0x110) * 0x14c) = v5;
+        v10 = name;
+        v6 = (char *)(*(int *)(v2 + 0x10c) - 0x14c + *(int *)(v2 + 0x110) * 0x14c);
+        do
         {
-            v5 = fcn_0064e790(v4, 0x7b);
-            *(unsigned int *)(*(int *)(v2 + 0x10c) - 300 + *(int *)(v2 + 0x110) * 0x14c) = v5;
-            v6 = (char *)(*(int *)(v2 + 0x10c) - 0x14c + *(int *)(v2 + 0x110) * 0x14c);
-            v10 = name;
-            do
-            {
-                v1 = *v10;
-                v10++;
-                *v6 = v1;
-                v6++;
-            } while (v1);
-            *(unsigned int *)(g_6b7e98 + 0x118) = v4;
-            return 1;
-        }
-        return 0;
+            v1 = *v10;
+            v10++;
+            *v6 = v1;
+            v6++;
+        } while (v1);
+        *(unsigned int *)(g_6b7e98 + 0x118) = v4;
+        return 1;
     }
     if (tok.data[0] != 0x1b)
         return 1;
     fcn_00426680(*(unsigned int *)(g_6b7e98 + 0x118), &tok.status);
     v2 = a0;
-    if (tok.status != 5)
+    if (tok.status == 5)
+        v3 = tok.data[0];
+    else
     {
         v3 = 1;
         fcn_00425bf0(a0, *(unsigned int *)(a0 + 0x118), (char *)0x6794a0);
     }
-    else
-        v3 = tok.data[0];
     if (!fcn_004260f0(v2, name))
     {
         v3 = fcn_00427740(v2, a1, v3);

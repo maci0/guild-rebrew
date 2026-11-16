@@ -9,7 +9,13 @@ extern int g_67a370;
 extern int g_6b89c0;
 extern VECTOR3 g_6b86c4;
 extern Pal_1041d20 g_1041d20[6];
-extern char g_1041d80[];
+typedef struct {
+	VECTOR3 a;
+	VECTOR3 b;
+	Pal_1041d20 pal[6];
+} Slot445f50;
+
+extern Slot445f50 g_1041d80[];
 extern int g_10405e0[];
 
 void __cdecl fcn_004379a0(int a, int b, int c, void* cb, void* q);
@@ -21,8 +27,6 @@ char __cdecl fcn_00445d00(char* p, float* q);
 char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 {
 	float pos;
-	float* cur;
-	float* next;
 	Pal_1041d20* pc;
 	Pal_1041d20* pn;
 	Pal_1041d20* dst;
@@ -46,27 +50,25 @@ char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 	if (scale != 1.0f)
 		fcn_004379a0(g_67a370, 0, 8, (void*) fcn_00445d00, &scale);
 	n = (a0 + 1) % 7;
-	cur = (float*) (g_1041d80 + a0 * 0x60);
-	next = (float*) (g_1041d80 + n * 0x60);
-	c0 = next[0] - cur[0];
-	c1 = next[1] - cur[1];
-	c2 = next[2] - cur[2];
-	g_67bbdc.x = c0 * t + cur[0];
-	g_67bbdc.y = c1 * t + cur[1];
-	g_67bbdc.z = c2 * t + cur[2];
+	c0 = g_1041d80[n].a.x - g_1041d80[a0].a.x;
+	c1 = g_1041d80[n].a.y - g_1041d80[a0].a.y;
+	c2 = g_1041d80[n].a.z - g_1041d80[a0].a.z;
+	g_67bbdc.x = c0 * t + g_1041d80[a0].a.x;
+	g_67bbdc.y = c1 * t + g_1041d80[a0].a.y;
+	g_67bbdc.z = c2 * t + g_1041d80[a0].a.z;
 	g_67bbdc.x *= scale;
 	g_67bbdc.y *= scale;
 	g_67bbdc.z *= scale;
-	c0 = next[3] - cur[3];
-	c1 = next[4] - cur[4];
-	c2 = next[5] - cur[5];
-	g_6b86c4.x = c0 * t + cur[3];
-	g_6b86c4.y = c1 * t + cur[4];
-	g_6b86c4.z = c2 * t + cur[5];
+	c0 = g_1041d80[n].b.x - g_1041d80[a0].b.x;
+	c1 = g_1041d80[n].b.y - g_1041d80[a0].b.y;
+	c2 = g_1041d80[n].b.z - g_1041d80[a0].b.z;
+	g_6b86c4.x = c0 * t + g_1041d80[a0].b.x;
+	g_6b86c4.y = c1 * t + g_1041d80[a0].b.y;
+	g_6b86c4.z = c2 * t + g_1041d80[a0].b.z;
 	inv = 1.0f - t;
-	pc = (Pal_1041d20*) (cur + 6);
-	pn = (Pal_1041d20*) (next + 6);
-	for (dst = g_1041d20; dst < g_1041d20 + 6; dst++) {
+	pc = g_1041d80[a0].pal;
+	pn = g_1041d80[n].pal;
+	for (dst = g_1041d20; (int) dst < (int) (g_1041d20 + 6); dst++) {
 		((unsigned char*) &dst->color)[2] = (unsigned char) (int) (((unsigned char*) &pc->color)[2] * inv + ((unsigned char*) &pn->color)[2] * t);
 		((unsigned char*) &dst->color)[1] = (unsigned char) (int) (((unsigned char*) &pn->color)[1] * t + ((unsigned char*) &pc->color)[1] * inv);
 		((unsigned char*) &dst->color)[0] = (unsigned char) (int) (((unsigned char*) &pc->color)[0] * inv + ((unsigned char*) &pn->color)[0] * t);

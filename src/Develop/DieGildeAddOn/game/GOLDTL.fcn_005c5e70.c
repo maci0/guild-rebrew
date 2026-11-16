@@ -22,7 +22,6 @@ unsigned int __cdecl fcn_005c5e70(void)
 	int* slot;
 	unsigned int result;
 	int container;
-	unsigned short id;
 	int handle;
 	int used;
 	unsigned short* match;
@@ -35,18 +34,17 @@ unsigned int __cdecl fcn_005c5e70(void)
 	}
 	for (slot = (int*) 0x776c64; (int) slot < 0x776c94; slot += 2) {
 		if (*slot != 0) {
-			id = *(unsigned short*) *slot;
-			if (fcn_00502cd0(*(int*) (container + 0x178), 1, 0, id) != 0) {
+			if (fcn_00502cd0(*(int*) (container + 0x178), 1, 0, *(unsigned short*) *slot) != 0) {
 				handle = fcn_00471f80(slot[-1]);
 				d2_SetElementValue(slot[-1], 0, *(unsigned int*) (*slot + 0xe), handle);
 				fcn_0064d41a(g_1015ea0 + 0xcc + slot[-1] * 0x2f4, "%s~ %li %s",
-				    (unsigned int) g_14a79c0[id * 2], *(unsigned int*) (*slot + 0xe), g_14b52c4);
-				used = fcn_005c61e0(id);
+				    (unsigned int) g_14a79c0[*(unsigned short*) *slot * 2], *(unsigned int*) (*slot + 0xe), g_14b52c4);
+				used = fcn_005c61e0(*(unsigned short*) *slot);
 				if (used != 0) {
 					if (*(int*) (*slot + 0x21) != 0) {
 						fcn_00472640(slot[-1], 0);
 						*(float*) (g_1015ea0 + 500 + slot[-1] * 0x2f4) = g_6629c8
-						    - (float) *(int*) (*slot + 0x1c) / (float) *(int*) (used + 4);
+						    - (float) *(int*) (*slot + 0x1c) / *(int*) (used + 4);
 					}
 					else {
 						fcn_00472640(slot[-1], 1);
@@ -55,7 +53,7 @@ unsigned int __cdecl fcn_005c5e70(void)
 					}
 				}
 				if (handle != 0) {
-					fcn_00473750(id + 0xdf, handle);
+					fcn_00473750(*(unsigned short*) *slot + 0xdf, handle);
 					result = 1;
 				}
 			}
@@ -95,7 +93,7 @@ unsigned int __cdecl fcn_005c5e70(void)
 							if (*(int*) ((char*) match + 0x21) != 0) {
 								fcn_00472640(handle, 0);
 								*(float*) (g_1015ea0 + 500 + handle * 0x2f4) = g_6629c8
-								    - (float) *(int*) ((char*) match + 0x1c) / (float) *(int*) (used + 4);
+								    - (float) *(int*) ((char*) match + 0x1c) / *(int*) (used + 4);
 							}
 							else {
 								fcn_00472640(handle, 1);

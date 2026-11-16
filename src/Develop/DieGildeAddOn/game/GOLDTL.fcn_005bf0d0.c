@@ -4,6 +4,11 @@ extern unsigned char g_773d75;
 extern int g_67d370;
 extern int g_100f1dc;
 extern int g_14ce8e0;
+extern int g_774654;
+extern char* g_7746c4;
+extern unsigned short g_774970;
+extern char g_7f4ca0[];
+extern char g_7f4ca4[];
 
 int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl fcn_0050cf50(void* obj, int n);
@@ -42,7 +47,6 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 	unsigned int idx;
 	int value;
 	int evid;
-	int flag;
 	int dlg;
 	void* entity;
 
@@ -108,14 +112,13 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 	ids[5] = 0x18;
 	fcn_005c9220(ids);
 	while (fcn_005373e0((void*) fcn_005bf0d0, 0x677c7) != 0) {
-		flag = g_100f1dc;
-		if (g_14ce8e0 != 0 || flag == 1) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 != 0 || g_100f1dc == 1) {
+			g_774654 = 1;
 		}
-		if (flag == 2 && evid != -1 && g_67d370 == evid) {
+		if (g_100f1dc == 2 && evid != -1 && g_67d370 == evid) {
 			ev[4] = 0x19;
-			*(int*) (ev + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) 0x774970 * 0x21c);
-			*(int*) (ev + 0xc) = *(int*) (*(int*) 0x7746c4 + 1);
+			*(int*) (ev + 8) = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+			*(int*) (ev + 0xc) = *(int*) (g_7746c4 + 1);
 			ev[0x36] = 1;
 			*(int*) (ev + 0x7c) = value;
 			*(int*) (ev + 0x58) = *(int*) (a1 + 1);
@@ -125,7 +128,7 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 			io_FormatTextBuffer(text2, 0x1701, *(unsigned short*) (a1 + 0x25),
 				*(unsigned char*) a1 * 0xe + 0x48e);
 			fcn_00526120(text2, 0);
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 			count = 1;
 		}
 	}

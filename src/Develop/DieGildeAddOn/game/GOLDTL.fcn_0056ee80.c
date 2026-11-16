@@ -22,7 +22,7 @@ extern double g_665ed0;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00529160(int, int, unsigned short, int);
+void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_00529670(int, int);

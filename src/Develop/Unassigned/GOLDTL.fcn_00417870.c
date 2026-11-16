@@ -1,3 +1,20 @@
+typedef struct {
+	float px, py, pz;
+	char p0c[4];
+	float vx, vy, vz;
+	char p1c[0x30 - 0x1c];
+	int t;
+	char p34[4];
+	float nx, ny, nz;
+	char p44[4];
+	float w;
+	char p4c[3];
+	unsigned char c4f;
+	char p50;
+	unsigned char fl;
+	char p52[2];
+} Rec;
+
 extern int __cdecl _ftol(void);
 extern int __cdecl fcn_0064d3f8(void);
 extern float g_6628cc;
@@ -15,7 +32,7 @@ extern float g_662a40;
 /* ADDRESS: GOLDTL 0x00417870 */
 char __cdecl fcn_00417870(char* a0, int a1)
 {
-	char* rec;
+	Rec* rec;
 	char* base;
 	int i;
 	int half;
@@ -29,25 +46,25 @@ char __cdecl fcn_00417870(char* a0, int a1)
 	base = *(char**) (a0 + 0x28);
 	{
 		for (i = 0; i < *(int*) (a0 + 0xd8); i++) {
-			rec = base + i * 0x54;
-			if (*(unsigned char*) (rec + 0x51) & 1) {
-				t = (unsigned int) (a1 - *(int*) (*(char**) (a0 + 0x28) + i * 0x54 + 0x30));
+			rec = (Rec*) base + i;
+			if (rec->fl & 1) {
+				t = (unsigned int) (a1 - ((Rec*) *(char**) (a0 + 0x28) + i)->t);
 				v = (float) t * g_662a2c;
-				*(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 0x38) = *(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 0x10) + *(float*) (*(char**) (a0 + 0x28) + i * 0x54);
-				*(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 0x3c) = *(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 0x14) + *(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 4);
-				*(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 0x40) = *(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 0x18) + *(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 8);
-				*(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 0x48) = g_662948 * v + *(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 0x48);
-				*(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 4) = *(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 4) - v;
-				if (*(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 0x3c) < -10.0)
-					*(unsigned char*) (rec + 0x51) &= 0xfe;
-				*(float*) (rec + 0x18) = *(float*) (rec + 0x40);
-				*(float*) (rec + 0x10) = *(float*) (rec + 0x38);
-				*(float*) (rec + 0x14) = *(float*) (rec + 0x3c);
-				f = *(float*) (rec + 0x3c) * 1.5f + 50.0f;
+				((Rec*) *(char**) (a0 + 0x28) + i)->nx = ((Rec*) *(char**) (a0 + 0x28) + i)->vx + ((Rec*) *(char**) (a0 + 0x28) + i)->px;
+				((Rec*) *(char**) (a0 + 0x28) + i)->ny = ((Rec*) *(char**) (a0 + 0x28) + i)->vy + ((Rec*) *(char**) (a0 + 0x28) + i)->py;
+				((Rec*) *(char**) (a0 + 0x28) + i)->nz = ((Rec*) *(char**) (a0 + 0x28) + i)->vz + *(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 8);
+				((Rec*) *(char**) (a0 + 0x28) + i)->w = g_662948 * v + ((Rec*) *(char**) (a0 + 0x28) + i)->w;
+				((Rec*) *(char**) (a0 + 0x28) + i)->py = ((Rec*) *(char**) (a0 + 0x28) + i)->py - v;
+				if (((Rec*) *(char**) (a0 + 0x28) + i)->ny < -10.0)
+					rec->fl &= 0xfe;
+				rec->vx = rec->nx;
+				rec->vy = rec->ny;
+				rec->vz = rec->nz;
+				f = rec->ny * 1.5f + 50.0f;
 				if (0.0f > f)
 					f = 0.0f;
-				*(unsigned char*) (rec + 0x4f) = (unsigned char) (int) f;
-				if (!(*(unsigned char*) (rec + 0x51) & 1))
+				rec->c4f = (unsigned char) (int) f;
+				if (!(rec->fl & 1))
 					count++;
 			}
 		}
@@ -59,33 +76,33 @@ char __cdecl fcn_00417870(char* a0, int a1)
 		for (i = 0; i < *(int*) (a0 + 0xd8); i++) {
 			if (i >= half)
 				break;
-			rec = base + i * 0x54;
-			if (!(*(unsigned char*) (rec + 0x51) & 1)) {
-				*(unsigned char*) (rec + 0x51) |= 1;
-				*(float*) (rec + 0x38) = (float) fcn_0064d3f8() * g_662a18 - g_6628cc;
-				*(float*) (rec + 0x3c) = (*(float*) (a0 + 4) + 1.0f) *
+			rec = (Rec*) base + i;
+			if (!(rec->fl & 1)) {
+				rec->fl |= 1;
+				rec->nx = (float) fcn_0064d3f8() * g_662a18 - g_6628cc;
+				rec->ny = (*(float*) (a0 + 4) + 1.0f) *
 				                            (float) fcn_0064d3f8() * g_662a18 +
 				                        *(float*) (a0 + 0xc);
-				*(float*) (rec + 0x40) = (float) fcn_0064d3f8() * g_662a18 - g_6628cc;
-				*(float*) rec = (float) fcn_0064d3f8() * *(float*) (a0 + 4) * 6.10370189e-05f -
+				rec->nz = (float) fcn_0064d3f8() * g_662a18 - g_6628cc;
+				rec->px = (float) fcn_0064d3f8() * *(float*) (a0 + 4) * 6.10370189e-05f -
 				                *(float*) (a0 + 4);
-				v = (*(float*) (rec + 0x3c) - 55.0f) * *(float*) (a0 + 8);
-				*(float*) (rec + 4) = v - ((float) fcn_0064d3f8() * 3.05185108e-06f +
+				v = (rec->ny - 55.0f) * *(float*) (a0 + 8);
+				rec->py = v - ((float) fcn_0064d3f8() * 3.05185108e-06f +
 				                           0.2f);
-				*(float*) (rec + 8) = ((*(float*) (rec + 0x3c) - 55.0f) +
-				                          *(float*) (rec + 4)) *
+				rec->pz = ((rec->ny - 55.0f) +
+				                          rec->py) *
 				                         *(float*) a0 +
 				                     (float) fcn_0064d3f8() * g_662a40 +
 				                     g_6628d8;
-				*(int*) (rec + 0x30) = a1;
-				*(float*) (rec + 0x10) = *(float*) (rec + 0x38);
-				*(int*) (rec + 0x48) = *(int*) (a0 + 0xe4);
-				*(float*) (rec + 0x14) = *(float*) (rec + 0x3c);
-				*(float*) (rec + 0x18) = *(float*) (rec + 0x40);
-				f = *(float*) (rec + 0x3c) * 1.5f + 50.0f;
+				rec->t = a1;
+				rec->vx = rec->nx;
+				rec->w = *(int*) (a0 + 0xe4);
+				rec->vy = rec->ny;
+				rec->vz = rec->nz;
+				f = rec->ny * 1.5f + 50.0f;
 				if (0.0f > f)
 					f = 0.0f;
-				*(unsigned char*) (rec + 0x4f) = (unsigned char) (int) f;
+				rec->c4f = (unsigned char) (int) f;
 			}
 		}
 		*(int*) (a0 + 0x20) &= ~1;

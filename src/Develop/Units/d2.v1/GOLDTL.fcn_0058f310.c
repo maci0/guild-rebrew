@@ -114,10 +114,10 @@ int __cdecl fcn_0058f310(char* a0)
 					*(int*) (req + 0x64) = n;
 					*(int*) (req + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (a0 + 0x27) * 0x21c);
 					*(int*) (req + 0xc) = *(int*) (a0 + 1);
-					*(int*) (req + 0x2c) = g_7f4c04;
-					*(short*) (req + 0x34) = g_7f4c0c;
 					*(int*) (req + 0x28) = g_7f4c00;
+					*(int*) (req + 0x2c) = g_7f4c04;
 					*(int*) (req + 0x30) = g_7f4c08;
+					*(short*) (req + 0x34) = g_7f4c0c;
 					*(int*) (req + 0x5c) = *(int*) (v + 4);
 					*(int*) (req + 0x60) = *(int*) (hh + 4);
 					*(int*) (req + 0x38) = *(int*) (hh + 4);

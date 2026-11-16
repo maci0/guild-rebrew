@@ -84,6 +84,7 @@ void __cdecl fcn_004d0070(void)
 	}
 	for (p = g_7e4260; (int) p < (int) &g_7e4260[32]; p++) {
 		e = *p;
+		found = 0;
 		if (e == 0) {
 			continue;
 		}
@@ -108,18 +109,18 @@ void __cdecl fcn_004d0070(void)
 				fcn_0043a3f0(e34, *(char**) (e34 + 0x1cc), c);
 			} else {
 				best = 999999.0f;
-				found = 0;
 				for (q = g_7e4260; (int) q < (int) &g_7e4260[32]; q++) {
-					if (*q == 0) {
+					g = *q;
+					if (g == 0) {
 						continue;
 					}
-					if (fcn_004ce270(e, *q) == 0) {
+					if (fcn_004ce270(e, g) == 0) {
 						continue;
 					}
-					if (*(char*) (*q + 8) == 0) {
+					if (*(char*) (g + 8) == 0) {
 						continue;
 					}
-					v = fcn_004cefb0(e, *(char**) (*(char**) (*q + 0x184) + 0x34));
+					v = fcn_004cefb0(e, *(char**) (*(char**) (g + 0x184) + 0x34));
 					if (v < 100.0f) {
 						found = 1;
 						if (v < best) {

@@ -98,8 +98,10 @@ void __cdecl fcn_00547770(void)
     u2 *wp;
 
     wi = g_7747b4;
-    wi = (wi > 4) ? 4 : wi;
-    wi = (wi <= 0) ? 0 : wi;
+    if (wi > 4)
+        wi = 4;
+    else if (wi <= 0)
+        wi = 0;
     a = g_7f4c00 / 4 + 1;
     thr = (float)a / ((float)a + *(float *)(wi * 4 + 0x665e68));
     fcn_00547670();

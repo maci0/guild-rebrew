@@ -116,7 +116,8 @@ int __cdecl fcn_004a82b0(void)
 	switch (res[sel]) {
 	case 1:
 		if (a[2] < a[sel]) {
-			break;
+			*(int*) (tbl + 0xbc) = res[sel];
+		return sel;
 		}
 		if (a[2] > a[sel]) {
 			*(int*) (tbl + 0xbc) = res[2];
@@ -126,17 +127,20 @@ int __cdecl fcn_004a82b0(void)
 			*(int*) (tbl + 0xbc) = res[2];
 			return 2;
 		}
-		break;
+		*(int*) (tbl + 0xbc) = res[sel];
+		return sel;
 	case 2:
 		if (a[2] < a[sel]) {
-			break;
+			*(int*) (tbl + 0xbc) = res[sel];
+		return sel;
 		}
 		if (a[2] > a[sel]) {
 			*(int*) (tbl + 0xbc) = res[2];
 			return 2;
 		}
 		if (c[2] < c[sel]) {
-			break;
+			*(int*) (tbl + 0xbc) = res[sel];
+		return sel;
 		}
 		if (c[2] > c[sel]) {
 			*(int*) (tbl + 0xbc) = res[2];
@@ -146,7 +150,8 @@ int __cdecl fcn_004a82b0(void)
 			*(int*) (tbl + 0xbc) = res[2];
 			return 2;
 		}
-		break;
+		*(int*) (tbl + 0xbc) = res[sel];
+		return sel;
 	case 3:
 	case 5:
 	case 7:
@@ -154,7 +159,8 @@ int __cdecl fcn_004a82b0(void)
 			*(int*) (tbl + 0xbc) = res[2];
 			return 2;
 		}
-		break;
+		*(int*) (tbl + 0xbc) = res[sel];
+		return sel;
 	case 4:
 		x = fcn_004a77f0((int*) (tbl + sel * 0x34 + 0xc), 0);
 		y = fcn_004a77f0((int*) (tbl + 0x74), 0);
@@ -169,7 +175,8 @@ int __cdecl fcn_004a82b0(void)
 			*(int*) (tbl + 0xbc) = res[2];
 			return 2;
 		}
-		break;
+		*(int*) (tbl + 0xbc) = res[sel];
+		return sel;
 	}
 	*(int*) (tbl + 0xbc) = res[sel];
 	return sel;

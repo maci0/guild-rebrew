@@ -1,6 +1,13 @@
 #include <math.h>
 
 
+typedef struct {
+	int o;
+	int d;
+	int x;
+	int z;
+} Ent4cf6b0;
+
 extern int g_67a370;
 extern int g_6b8300;
 extern int g_772e9c;
@@ -38,7 +45,7 @@ int __cdecl fcn_004cf6b0(void)
 	int map;
 	char* e;
 	int other;
-	int* p;
+	Ent4cf6b0* p;
 	int* q;
 	float v8[4];
 	float v7[4];
@@ -47,13 +54,13 @@ int __cdecl fcn_004cf6b0(void)
 	world = *(int*) (((char*) g_67a370) + 0xb0);
 	count = 0;
 	obj = fcn_004ce590(0x176);
-	p = (int*) 0x9b9ecc;
+	p = (Ent4cf6b0*) 0x9b9ec0;
 	do {
 		int p0;
-		p0 = p[-3];
+		p0 = p->o;
 		if (p0 != 0) {
 			count++;
-			if ((*(unsigned char*) (p[-2] + 0x2d) & 0x20) != 0) {
+			if ((*(unsigned char*) (p->d + 0x2d) & 0x20) != 0) {
 				v8[0] = -243.0f;
 				v8[1] = -90.0f;
 				v8[2] = 190.0f;
@@ -76,10 +83,10 @@ int __cdecl fcn_004cf6b0(void)
 				fcn_00417d00(0, v8, 0x1e, 70.0f, 50.0f, 20.0f, 60.0f,
 				    0x3c);
 				map = g_6b8300;
-				n = p[-1] + p[0] * *(int*) map;
+				n = p->x + p->z * *(int*) map;
 				if (*(unsigned char*) (n + *(int*) (map + 0x14)) != 0) {
 					*(unsigned char*) (n + *(int*) (map + 0x10)) += 0xfb;
-					*(unsigned char*) (p[0] * *(int*) g_6b8300 + *(int*) (g_6b8300 + 0x14) + p[-1]) = 0;
+					*(unsigned char*) (p->z * *(int*) g_6b8300 + *(int*) (g_6b8300 + 0x14) + p->x) = 0;
 					fcn_0043c2c0(g_6b8300);
 					fcn_0043ef20(g_6b8300);
 				}
@@ -91,7 +98,7 @@ int __cdecl fcn_004cf6b0(void)
 					if (e != 0) {
 						other = *(int*) (e + 0x184);
 						if (e[8] != 0) {
-							fcn_0045b920(world, p[-1], p[0], v8);
+							fcn_0045b920(world, p->x, p->z, v8);
 							v8[0] -= *(float*) (*(int*) (other + 0x34) + 0x4c);
 							v8[1] -= *(float*) (*(int*) (other + 0x34) + 0x50);
 							v8[2] -= *(float*) (*(int*) (other + 0x34) + 0x54);
@@ -114,11 +121,11 @@ int __cdecl fcn_004cf6b0(void)
 					}
 					q++;
 				} while ((int) q < 0x7e42e0);
-				d3_DestroyObject(p[-3]);
-				p[-3] = 0;
+				d3_DestroyObject(p->o);
+				p->o = 0;
 			}
 		}
-		p += 4;
-	} while ((int) p < 0x9ba0cc);
+		p++;
+	} while ((int) p < 0x9ba0c0);
 	return count;
 }

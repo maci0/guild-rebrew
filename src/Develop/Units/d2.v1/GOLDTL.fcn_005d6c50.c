@@ -11,7 +11,7 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl fcn_00471b60(int dlg);
 void __cdecl d2_SetForm(int dlg, int a);
 int __cdecl io_AppendText(int id, ...);
-void __cdecl fcn_004fcda0(int id, int a, void* out);
+void __cdecl fcn_004fcda0(u16 id, int a, void* out);
 int __cdecl gm_RandomMod(int a);
 int __cdecl _ftol(void);
 int __cdecl fcn_004c51a0(int a, int b, int c, int d);
@@ -28,49 +28,50 @@ int __cdecl fcn_00525f60(int a, int b);
 /* ADDRESS: GOLDTL 0x005d6c50 */
 int __cdecl fcn_005d6c50(int a0, int a1)
 {
-    char frame[0x118];
+    char frame[0x114];
     u16* p;
     int dlg;
     int v;
     int h;
     int h2;
-    char* text;
+    u16* q;
 
-    memset(frame + 9, 0, 15);
-
-
+    memset(frame + 5, 0, 15);
 
 
-    *(int*) (frame + 4) = 0;
-    frame[8] = 0;
 
-    if (*(int*) a1 == 3) {
+
+    *(int*) (frame + 0) = 0;
+    h = *(int*) a1;
+    frame[4] = 0;
+
+    if (h == 3) {
         p = (u16*) a0;
+    } else if (h == 4) {
+        q = *(u16**) (a1 + 0x21c);
+        if (q == 0)
+            return 0x60;
+        p = q;
     } else {
-        if (*(int*) a1 != 4)
-            return 0x60;
-        p = *(u16**) (a1 + 0x21c);
-        if (p == 0)
-            return 0x60;
+        return 0x60;
     }
-    fcn_004fcda0(*p, 0, frame + 8);
+    fcn_004fcda0(*p, 0, frame + 4);
     v = gm_RandomMod(0xb0) & 0xffff;
-    *(int*) frame = v + 0x19;
-    h2 = (int) (*(int*) frame * g_664138 * *(int*) (frame + 0xc));
+    h2 = (int) ((double) (v + 0x19) * g_664138 * *(int*) (frame + 0x8));
     if (((u8*) a0)[2] != 6) {
         if (*(int*) (a0 + 0x194) < 4)
             return 0x20;
         fcn_004c51a0(*(int*) (a0 + 4), -1, 0, h2);
         fcn_004c6ae0(*(int*) (a0 + 4), -4);
         fcn_004c5420(*(int*) (p + 2), 0x1c8, 4, 0x400000, 0);
-        return 0;
+        return *(int*) (frame + 0);
     }
     dlg = (int) fcn_00470820(0, 0, "privillegien\\unterschlagung");
+    *(int*) (frame + 0x8) = dlg;
     d2_SetOverlayAnimation(0, 0);
     fcn_00471b60(dlg);
     d2_SetForm(dlg, 1);
     io_AppendText(0x1dc2, *(u16*) a0);
-    *(int*) frame = dlg;
     g_100f1dc = -1;
     for (;;) {
         if (g_100f1dc != -1) {
@@ -78,13 +79,14 @@ int __cdecl fcn_005d6c50(int a0, int a1)
                 if (fcn_00525f60(a0, 4) != 0) {
                     fcn_004c51a0(*(int*) (a0 + 4), -1, 0, h2);
                     fcn_004c6ae0(*(int*) (a0 + 4), -4);
-                    h = fcn_004c5420(*(int*) (p + 2), 0x1c8, 4, 0x400000,
+                    dlg = fcn_004c5420(*(int*) (p + 2), 0x1c8, 4, 0x400000,
                                      0);
-                    while (fcn_004c4450(h) == 0)
+                    while (fcn_004c4450(dlg) == 0)
                         fcn_00535960();
-                    io_FormatTextBuffer(frame + 0x18, 0x1dc3, h2);
-                    fcn_00526120(frame + 0x18, 0);
-                    *(int*) (frame + 4) = 0x90;
+                    io_FormatTextBuffer(frame + 0x14, 0x1dc3, h2);
+                    fcn_00526120(frame + 0x14, 0);
+                    dlg = *(int*) (frame + 0x8);
+                    *(int*) (frame + 0) = 0x90;
                     g_774654 = 1;
                 }
             } else if (g_100f1dc == 1) {
@@ -95,7 +97,7 @@ int __cdecl fcn_005d6c50(int a0, int a1)
             g_774654 = 1;
         if (fcn_005373e0((void*) fcn_005d6c50, 0x657c7) == 0) {
             fcn_00471e30(dlg);
-            return *(int*) (frame + 4);
+            return *(int*) (frame + 0);
         }
     }
 }
