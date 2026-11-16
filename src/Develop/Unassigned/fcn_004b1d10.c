@@ -16,11 +16,12 @@ int __cdecl fcn_004b1d10(int a1, int a2, char* s)
 		return 0;
 	}
 	v = fcn_0064eeec(s + 1);
-	if (v > 10) {
+	if (v <= 10) {
+		if (v <= 1) {
+			v = 1;
+		}
+	} else {
 		v = 10;
-	}
-	else if (v <= 1) {
-		v = 1;
 	}
 	memset(buf, 0, 0xf8);
 	w = *(int*) (g_773da8 + 4);

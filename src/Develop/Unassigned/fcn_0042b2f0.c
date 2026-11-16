@@ -10,11 +10,10 @@ char* __cdecl fcn_0042b2f0(char* base, int count, int mode)
 	c = (char) mode;
 	p = base;
 	n = 0;
+	sel = (char*) mode;
 	if (c == 8) {
 		count += 4;
 		sel = base;
-	} else {
-		sel = (char*) mode;
 	}
 	while (n < count - 1) {
 		i = 0;

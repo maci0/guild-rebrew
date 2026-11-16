@@ -127,7 +127,7 @@ void __cdecl fcn_005d4a20(void)
 				mode = 2;
 				q.kind = 1;
 			} else {
-				q.kind = (mode != 2) + 1;
+				q.kind = mode == 2 ? 1 : 2;
 			}
 			for (i = 0; i < 0x3a; i++) {
 				r = fcn_004fa5b0(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
@@ -165,7 +165,7 @@ void __cdecl fcn_005d4a20(void)
 					}
 				}
 				d2_SetForm((int) dlg, 2);
-				q.kind = (mode != 2) + 1;
+				q.kind = mode == 2 ? 1 : 2;
 				for (i = 0; i < 0x3a; i++) {
 					keys[i] = -1;
 					r = fcn_004fa5b0(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
@@ -209,13 +209,13 @@ void __cdecl fcn_005d4a20(void)
 				for (i = 0; i < 0x3a; i++) {
 					if (keys[i] == g_67d370) {
 						fcn_00471af0((int) dlg, 0);
-						q.kind = (mode != 2) + 3;
+						q.kind = mode == 2 ? 3 : 4;
 						r = fcn_004fa5b0(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
 						if ((char) r < 0) {
 							changed = 1;
 							state[i] = r & 0xa;
 						}
-						q.kind = (mode != 2) + 1;
+						q.kind = mode == 2 ? 1 : 2;
 						fcn_00471af0((int) dlg, 1);
 						break;
 					}

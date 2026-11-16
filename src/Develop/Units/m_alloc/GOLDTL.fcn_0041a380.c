@@ -62,8 +62,10 @@ int __cdecl fcn_0041a380(unsigned int minWidth, unsigned int minHeight, unsigned
 		fcn_0041a2c0(0);
 	ADAPTERCOUNT = (unsigned int) ((ADAPTERCOUNTFN) VTBL(0x10))((void*) D3D);
 	g_6b5dd0 = (Adapter*)m_alloc(ADAPTERCOUNT * 0x508, "dd:AdapterInfo");
+	i = 0;
+	if (i < ADAPTERCOUNT) {
 	offset = 0;
-	for (i = 0; i < ADAPTERCOUNT; i++) {
+	do {
 		((ADAPTERIDENTFN) VTBL(0x14))((void*) D3D, i, 2,
 			(void*) (ADAPTERS + offset));
 		((GETCAPSFN) VTBL(0x34))((void*) D3D, i, 1,
@@ -129,6 +131,8 @@ int __cdecl fcn_0041a380(unsigned int minWidth, unsigned int minHeight, unsigned
 		}
 		qsort((void*) MODES, MODECOUNT, 0x10, fcn_0041a8d0);
 		offset += 0x508;
+		i++;
+	} while (i < ADAPTERCOUNT);
 	}
 	for (i = 0, offset = 0; i < ADAPTERCOUNT; i++, offset += 0x508) {
 		if (!((!windowed

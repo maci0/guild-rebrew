@@ -73,8 +73,8 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 	}
 	g_100590c = -1;
 	g_1005908 = -1;
-	n = 0;
 	k = 0;
+	n = 0;
 	do {
 		p = (char*) (g_1005900) + 0x7e24 + n;
 		q = name;

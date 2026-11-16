@@ -116,8 +116,8 @@ void __cdecl fcn_0056aef0(char* a1)
 			fcn_00500bb0((pos14_7f4c00*)(a1 + 0x52), 0, 5, 0);
 			return;
 		}
-		t = 0;
 		k = 0;
+		t = 0;
 		p = (int*)(a1 + 0x8c);
 		n = 8;
 		do {

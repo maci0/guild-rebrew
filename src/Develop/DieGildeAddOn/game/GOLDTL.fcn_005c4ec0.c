@@ -36,15 +36,14 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 	int total;
 	int found;
 	int div;
+	int got;
 
 	found = 0;
 	written = 0;
 	total = 0;
-	amount = gm_AccumulateTyped2(a1);
+	got = gm_AccumulateTyped2(a1);
 	remaining = a2;
-	if (amount >= remaining) {
-		amount = remaining;
-	}
+	amount = got < remaining ? got : remaining;
 	if (amount > 0) {
 		fcn_004c5150(a0, *(int*) (a1 + 4), g_773d75, amount);
 		remaining -= amount;

@@ -35,7 +35,6 @@ void __cdecl fcn_00471490(int k)
 	int flags;
 	int ybase;
 	int col;
-	int* rows;
 	char* win;
 	int row;
 	char** pp;
@@ -68,13 +67,12 @@ void __cdecl fcn_00471490(int k)
 			return;
 		}
 		fcn_004767f0(0, 0, *(int*) (pp[0] + 4), *(int*) (pp[0] + 8), *(int*) (pp[0] + 0x20), 0, 0, surf);
-		rows = (int*) (base + 4);
-		for (row = 0; row < *(int*) (base + 0x184); rows++, row++) {
-			win = (char*) &g_1015f40[*rows];
+		for (row = 0; row < *(int*) (base + 0x184); row++) {
+			win = (char*) &g_1015f40[((int*) (base + 4))[row]];
 			oh2 = *(int*) (win + 8);
 			oh1 = *(int*) (win + 4);
 			*(int*) (win + 8) = ybase + oh2;
-			fcn_0046dff0(*rows, surf);
+			fcn_0046dff0(((int*) (base + 4))[row], surf);
 			*(int*) (win + 4) = oh1;
 			*(int*) (win + 8) = oh2;
 			for (col = 0; col < *(int*) (win + 0x2c); col++) {

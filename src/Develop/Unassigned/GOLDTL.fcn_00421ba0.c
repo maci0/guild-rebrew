@@ -51,9 +51,9 @@ unsigned short __cdecl fcn_00421ba0(PathGrid* grid, unsigned short node)
 		idx = (node + t) & 0xffff;
 		q = &grid->nodes[idx];
 		if (q->mark == g_14cbc72 && (q->flags & g_14cbc68) != 0) {
+			g_14cbc7e = (unsigned short) idx;
 			q->flags = (unsigned char) (q->flags | g_14cbc60);
 			p->flags = (unsigned char) (p->flags | g_14cbc68);
-			g_14cbc7e = (unsigned short) idx;
 			return node;
 		}
 		costs = g_14cbc64;

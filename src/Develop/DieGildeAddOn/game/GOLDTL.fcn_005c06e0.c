@@ -8,7 +8,6 @@ typedef struct {
 
 extern Slot5c06 g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern float g_6628a0;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -95,7 +94,7 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 			if (g_67d370 == h1) {
 				fcn_004c6ae0(me->f4, -2);
 				f = fcn_00507e70(me, a0, 4);
-				if (gm_RandomFloat01() + f >= g_6628a0) {
+				if (gm_RandomFloat01() + f >= 1.0f) {
 					ev[4] = 0x2e;
 					*(int*) (ev + 8) = *(int*) (a0 + 2);
 					*(int*) (ev + 0xc) = -1;

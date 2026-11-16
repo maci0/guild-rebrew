@@ -84,8 +84,9 @@ void __cdecl fcn_005c0020(void)
 	if (count != 0) {
 
 
-		for (i = 0, y = 10; i < count; i++, y += 0x69) {
+		for (i = 0; i < count; i++) {
 			rec = &recs[i];
+			y = 10 + i * 0x69;
 			sprintf(buf, (char*) 0x6ac4e8, rec->x2c, rec->x34,
 			    (rec->x2c != 1) + 0x1748);
 			rec->x10 = 0x32;

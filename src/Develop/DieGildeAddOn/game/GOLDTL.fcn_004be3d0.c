@@ -70,6 +70,6 @@ int __cdecl fcn_004be3d0(int* a0, char* a1, char* a2, char* a3)
 	n = g_772900;
 	g_10058a0[n].b = (int) rec;
 	v = g_10058a0[n].id;
-	g_772900 = n + 1;
+	g_772900++;
 	return v;
 }

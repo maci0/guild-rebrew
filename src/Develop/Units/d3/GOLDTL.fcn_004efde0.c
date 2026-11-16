@@ -37,6 +37,7 @@ typedef struct Sefde0Slot {
 	int* data;
 } Sefde0Slot;
 
+extern int g_7731b8[];
 int __cdecl fcn_00500d20(char*, char*);
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_005e9870(Sefde0Entry*);
@@ -111,21 +112,21 @@ void __cdecl fcn_004efde0(void)
 							runs = fcn_005e9870((Sefde0Entry*) (statep - 0x17));
 						}
 						if (runs != 0) {
-							obj = slot->objects[i];
+							obj = ((char*) g_7731b8[idx + i + 0x57]);
 							if (obj == 0) {
 								obj = fcn_00442910(0, (float*) 0x662d70, (float*) 0x662d80, (char*) 0x68ff14);
-								slot->objects[i] = obj;
+								g_7731b8[idx + i + 0x57] = (int) obj;
 								*(unsigned char*) (obj + 0x215) |= 1;
-								*(unsigned char*) (slot->objects[i] + 0x216) |= 3;
-								*(unsigned char*) (slot->objects[i] + 0x215) &= ~2;
+								*(unsigned char*) (((char*) g_7731b8[idx + i + 0x57]) + 0x216) |= 3;
+								*(unsigned char*) (((char*) g_7731b8[idx + i + 0x57]) + 0x215) &= ~2;
 							}
-							fcn_00438b40(slot->objects[i], statep - 0xb);
+							fcn_00438b40(((char*) g_7731b8[idx + i + 0x57]), statep - 0xb);
 						}
 						if (*statep == 3) {
-							obj = slot->objects[i];
+							obj = ((char*) g_7731b8[idx + i + 0x57]);
 							if (obj != 0) {
 								d3_DestroyObject(obj);
-								slot->objects[i] = 0;
+								g_7731b8[idx + i + 0x57] = (int) 0;
 							}
 							if (slot->data != 0) {
 								*slot->data = i;
@@ -135,13 +136,13 @@ void __cdecl fcn_004efde0(void)
 								slot->callback((int) slot->data);
 							}
 							*statep = 0;
-							slot->active[i] = 0;
+							g_7731b8[idx + i + 0x54] = 0;
 						} else if (*statep == 2) {
 							count++;
-							obj = slot->objects[i];
+							obj = ((char*) g_7731b8[idx + i + 0x57]);
 							if (obj != 0) {
 								d3_DestroyObject(obj);
-								slot->objects[i] = 0;
+								g_7731b8[idx + i + 0x57] = (int) 0;
 							}
 							fcn_004f01c0(slot->flags & 1, slot->id, (int) (statep - 0x17), slot->data);
 							if (slot->data != 0) {
@@ -151,7 +152,7 @@ void __cdecl fcn_004efde0(void)
 								slot->callback((int) slot->data);
 							}
 							*statep = 0;
-							slot->active[i] = 0;
+							g_7731b8[idx + i + 0x54] = 0;
 							*slot->data = -1;
 						}
 					}

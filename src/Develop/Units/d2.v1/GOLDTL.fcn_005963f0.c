@@ -84,8 +84,8 @@ void __cdecl fcn_005963f0(int a0, int a1, int a2, unsigned int a3)
 		}
 	}
 
-	n = 0;
 	k = 0;
+	n = 0;
 	v = (int*) 0x778dac;
 	do {
 		n++;

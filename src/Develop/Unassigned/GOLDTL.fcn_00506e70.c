@@ -9,8 +9,8 @@ int __cdecl fcn_00506e70(unsigned int idx, int count, ...)
     int i;
     int found;
 
-    t = g_slot_table + (idx & 0xffff) * 0x21c;
     found = 0;
+    t = g_slot_table + (idx & 0xffff) * 0x21c;
     if (count >= 0) {
         va_start(p, count);
         for (i = 0; i < count; i++) {

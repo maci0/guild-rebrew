@@ -169,8 +169,8 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 				g_774654 = 1;
 			}
 		}
-		cnt2 = 0;
 		cnt3 = 0;
+		cnt2 = 0;
 		sum = 0;
 		p = fcn_005463a0(2, 0, 0x16, 3, *(int*) (obj + 1));
 		if (p != 0) {

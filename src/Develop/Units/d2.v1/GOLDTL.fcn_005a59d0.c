@@ -158,8 +158,8 @@ int __cdecl fcn_005a59d0(char* a0)
 			v30 = v29;
 			d2_SetElementImage(e4, 0x4f9);
 		} else {
-			v31 = 0;
 			v30 = -1;
+			v31 = 0;
 			fcn_00475220(g_14ab6fc);
 			d2_SetElementImage(e4, 0x4f7);
 		}

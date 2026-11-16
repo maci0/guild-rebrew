@@ -199,7 +199,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 	f.cnt = 0;
 	f.pg = 1;
 	i = 0;
-	for (;;) {
+	while (1) {
 		if ((int) (f.ent[0x232] + f.ent[0x231]) <= i) {
 			break;
 		}

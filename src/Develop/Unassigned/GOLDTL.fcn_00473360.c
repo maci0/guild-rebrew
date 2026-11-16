@@ -6,6 +6,7 @@ char __cdecl fcn_00473360(char* p)
 {
 	char shape[9];
 	int a;
+	char r;
 	RECORD3 record;
 
 	if (p == 0)
@@ -21,8 +22,10 @@ char __cdecl fcn_00473360(char* p)
 			return 4;
 		if (a == 2)
 			return 7;
-		return a == 3 ? 8 : 1;
+		r = a == 3 ? 8 : 1;
+		return r;
 	}
 	record = *(RECORD3*) p;
-	return record.bytes[2] == 2 ? 17 : 0;
+	r = record.bytes[2] == 2 ? 17 : 0;
+	return r;
 }

@@ -39,19 +39,20 @@ int __cdecl fcn_00476120(int left, int top, int width, int height, char* src,
 	void* target;
 	int surface_src;
 	int surface_dest;
+	int locked;
 
 	if ((*(unsigned char*) dest & 0x10) != 0 && *(void**) &g_7725ec != 0) {
 		if (fcn_0047b8b0(left, top, width, height, frame) == 0) {
 			return 0;
 		}
-		surface_src = *(int*) (src + 0x20);
-		target = (void*) surface_src;
+		locked = *(int*) (src + 0x20);
+		target = (void*) locked;
 		if ((*(int (__stdcall**) (int, int, int, int*, int))
 			 (*(char**) *(void**) &g_772614 + 0x2c))(*(int*) &g_772614, 0, 0x18,
-													&surface_src, 0x2000) < 0) {
+													&locked, 0x2000) < 0) {
 			return 0;
 		}
-		target = (void*) surface_src;
+		target = (void*) locked;
 		memcpy(target, frame, 0xa8);
 		(*(int (__stdcall**) (int)) (*(char**) *(void**) &g_772614 + 0x30))
 			(*(int*) &g_772614);

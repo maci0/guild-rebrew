@@ -122,8 +122,8 @@ unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* a1, 
 		if (*(unsigned short*) (ent + 0x27) == 0xffff)
 			continue;
 		idx = ent[0];
-		rec = &((GebProt_49f6d0*) lpGebaeudePROT)[idx];
 		bit_lo = 0;
+		rec = &((GebProt_49f6d0*) lpGebaeudePROT)[idx];
 		bit_hi = 0;
 		if (rec->type > 0x1f)
 			bit_hi = 1 << (rec->type - 0x20);

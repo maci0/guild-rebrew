@@ -83,8 +83,8 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 		return count;
 	}
 
-	fx = (float) rect[0] * scale[0] + offset[0];
 	fy = (g_6b7ff9 ? g_6629b0 : g_662acc) + offset[1];
+	fx = (float) rect[0] * scale[0] + offset[0];
 	y = rect[2];
 	fz = (float) y * scale[2] + offset[2];
 	u2 = uv->v;
@@ -126,8 +126,8 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 				tile = (unsigned char*) (base + (rect[2] + i) * stride
 					+ rect[0] + j);
 				h0 = tile[0];
-				h1 = tile[1];
 				h2 = tile[stride];
+				h1 = tile[1];
 				if (abs(h0 - h1) <= th && abs(h0 - h2) <= th
 					&& abs(h1 - h2) <= th) {
 					idx = (unsigned short*) idxs;

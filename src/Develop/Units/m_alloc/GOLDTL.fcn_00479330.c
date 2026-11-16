@@ -16,10 +16,11 @@ int* __cdecl fcn_00479330(int* src)
 	int* res;
 	char* p;
 	char* s;
+	int size;
 
 	if (*(int*) ((char*) src + 0x26) != -1) {
-		res = m_alloc(*(int*) src - *(int*) ((char*) src + 0x2e),
-		    (char*) 0x67d9fc);
+		size = *(int*) src - *(int*) ((char*) src + 0x2e);
+		res = m_alloc(size, (char*) 0x67d9fc);
 		memcpy(res, src, 0x32);
 
 
@@ -69,8 +70,8 @@ int* __cdecl fcn_00479330(int* src)
 		fcn_00477560(offs, res);
 		return res;
 	}
-	res = m_alloc(*(int*) src - *(int*) ((char*) src + 0x2e),
-	    (char*) 0x67d9fc);
+	size = *(int*) src - *(int*) ((char*) src + 0x2e);
+	res = m_alloc(size, (char*) 0x67d9fc);
 	memcpy(res, src, 0x32);
 
 

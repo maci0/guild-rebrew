@@ -166,8 +166,8 @@ int* __cdecl fcn_0043fa10(char* a0)
 		name += 0x40;
 		i--;
 	} while (i);
-	count = *v6 * *v6;
 	maxv = 0;
+	count = *v6 * *v6;
 	minv = 0xff;
 	i = 0;
 	if (count > 0) {

@@ -29,15 +29,15 @@ int __cdecl fcn_004cdda0(char* a1, unsigned char* a2, unsigned char* a3)
 	}
 	n = *(int*) (a1 + 0x14);
 	memcpy(buf, g_aed340, n * 64);
-	node = buf + 0x40;
+	node = buf;
 
 	i = 0;
 	if (n > 0) {
 		i = n;
 		do {
-			*(char**) (node - 8) = prev;
-			*(char**) (node - 4) = node;
-			prev = node - 0x40;
+			*(char**) (node + 0x38) = prev;
+			*(char**) (node + 0x3c) = node + 0x40;
+			prev = node;
 			node += 0x40;
 		} while (--n);
 	}

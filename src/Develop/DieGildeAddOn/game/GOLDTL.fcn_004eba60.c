@@ -21,7 +21,6 @@ int __cdecl fcn_004e8b80(int kind, int max, OFFICE_SLOT* out);
 unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 {
 	float f;
-	float g;
 	int sign;
 	int value;
 	int n;
@@ -102,6 +101,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 		if (a1[1] < 1 || a1[1] > 6)
 			return 0;
 		if (f > g_66414c) {
+			float g;
 			n = fcn_004e8b80(a1[1], 6, arr);
 			g = gm_GetEntitySkill(e, 4);
 			value = (int) (((gm_RandomFloat01() + 1.0f) * g * 15.0f + 5.0) * 2.55f);
@@ -146,6 +146,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 		if (a1[1] < 1 || a1[1] > 6)
 			return 0;
 		if (f > g_66414c) {
+			float g;
 			n = fcn_004e8b80(a1[1], 6, arr);
 			g = gm_GetEntitySkill(e, 4);
 			value = (int) (((gm_RandomFloat01() + 1.0f) * g * 15.0f + 5.0) * 2.55f);

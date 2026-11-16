@@ -61,8 +61,7 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 	Vec4_4a6550 delta;
 	Vec4_4a6550 pos2;
 	Vec3_4a6550 pos3;
-	float scale;
-	float spread;
+	float ss[2];
 	float speed;
 	float bits;
 	float factor;
@@ -77,7 +76,7 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 	if (g_772848 != *(int*) (a0 + 4) || g_77284c != *(int*) (a1 + 1)) {
 		return 0;
 	}
-	fcn_004f11c0(a1, &spread, &scale);
+	fcn_004f11c0(a1, &ss[0], &ss[1]);
 	factor = fcn_004f1290(a1);
 	p2 = g_7728b8;
 	p1 = g_7728b4;
@@ -95,8 +94,8 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 		pos.z += g_772858;
 		fcn_005e8e80(buf1, &pos.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
-		fcn_005e8fe0((float*) buf1, spread, (float*) 0x772870, spread,
-			(float*) 0x772880, scale);
+		fcn_005e8fe0((float*) buf1, ss[0], (float*) 0x772870, ss[0],
+			(float*) 0x772880, ss[1]);
 		fcn_004f0a30(a1, a0, (float*) buf1, 0, 0,
 			fcn_004f0eb0(g_77289c, g_772898, 1), p2, (unsigned int) p1);
 		return 1;
@@ -130,10 +129,10 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 			bits, g_6660f4);
 		fcn_005e8e80(buf1, &pos2.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
-		fcn_005e8fe0((float*) buf2, spread, (float*) 0x772870, spread,
-			(float*) 0x772880, scale);
-		fcn_005e8fe0((float*) buf1, spread, (float*) 0x772870, spread,
-			(float*) 0x772880, scale);
+		fcn_005e8fe0((float*) buf2, ss[0], (float*) 0x772870, ss[0],
+			(float*) 0x772880, ss[1]);
+		fcn_005e8fe0((float*) buf1, ss[0], (float*) 0x772870, ss[0],
+			(float*) 0x772880, ss[1]);
 		fcn_004f0a30(a1, a0, (float*) buf2, (float*) buf1, 0,
 			fcn_004f0eb0(g_77289c, g_772898, 2), p2, (unsigned int) p1);
 		return 1;
@@ -187,12 +186,12 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 			bits, g_6660f4);
 		fcn_005e8e80(buf2, &pos.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
-		fcn_005e8fe0((float*) buf3, spread, (float*) 0x772870, spread,
-			(float*) 0x772880, scale);
-		fcn_005e8fe0((float*) buf1, spread, (float*) 0x772870, spread,
-			(float*) 0x772880, scale);
-		fcn_005e8fe0((float*) buf2, spread, (float*) 0x772870, spread,
-			(float*) 0x772880, scale);
+		fcn_005e8fe0((float*) buf3, ss[0], (float*) 0x772870, ss[0],
+			(float*) 0x772880, ss[1]);
+		fcn_005e8fe0((float*) buf1, ss[0], (float*) 0x772870, ss[0],
+			(float*) 0x772880, ss[1]);
+		fcn_005e8fe0((float*) buf2, ss[0], (float*) 0x772870, ss[0],
+			(float*) 0x772880, ss[1]);
 		fcn_004f0a30(a1, a0, (float*) buf3, (float*) buf1, (float*) buf2,
 			fcn_004f0eb0(g_77289c, g_772898, 3), p2, (unsigned int) p1);
 		return 1;
