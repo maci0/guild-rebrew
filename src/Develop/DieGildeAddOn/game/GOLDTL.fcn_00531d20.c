@@ -75,17 +75,8 @@ void __cdecl fcn_00531d20(void)
 		rec = *(int*) (g_7746b4 + 0x184);
 	if (rec != 0 && (*(unsigned char*) (rec + 4) & 1) == 0)
 		return;
-	if (sel != 0) {
-		if (kind->class_id == 0x16) {
-			if (*g_7746cc != 0x120) {
-				if (kind->class_id != 0x0f)
-					return;
-			}
-		} else {
-			if (kind->class_id != 0x0f)
-				return;
-		}
-	}
+	if (sel != 0 && !(kind->class_id == 0x16 && *g_7746cc == 0x120) && kind->class_id != 0x0f)
+		return;
 	fcn_0042e410(4);
 	text[0] = g_6b5c60[0];
 	for (i = 1; i < 0x200; i++)

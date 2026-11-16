@@ -203,7 +203,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 		e = fcn_0064e790(p, 0x22);
 		q = (char*) 0x7e1d00;
 		if (e != 0) {
-			while (p < e)
+			while (e > p)
 				*q++ = *p++;
 		}
 		*q = 0;

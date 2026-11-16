@@ -222,7 +222,7 @@ label_54e6a1:
 					i++;
 				} while (i < 16);
 				i = 0;
-				for (p = (char*) 0x7f4e0c; p < (char*) 0x85a20c; p += 0x21c) {
+				for (p = (char*) 0x7f4e0c; (int) p < 0x85a20c; p += 0x21c) {
 					if (i >= 0x10 || i >= 6) {
 						break;
 					}

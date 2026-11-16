@@ -35,11 +35,12 @@ int __cdecl fcn_004eea30(void* a0, int a1, float a2)
 	if (a2 > g_6628a8) {
 		if (a2 < g_6628a0) {
 			m.f = a2;
-		} else {
-			m.f = 1.0f;
+			return fcn_004c6d30(&m);
 		}
 	} else {
 		m.f = 0.0f;
+		return fcn_004c6d30(&m);
 	}
+	m.f = 1.0f;
 	return fcn_004c6d30(&m);
 }

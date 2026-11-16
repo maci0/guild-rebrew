@@ -347,10 +347,9 @@ void __cdecl fcn_004d1ff0(void *arg)
 			}
 			if (first != 0) {
 				*(float *) 0x68b798 = (float) fcn_0050c710(first, 6, 1) + 1.4f;
-				return;
+			} else {
+				*(float *) 0x68b798 = 1.0f;
 			}
-			*(float *) 0x68b798 = 1.0f;
-			return;
 		}
 	}
 }

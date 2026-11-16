@@ -434,12 +434,11 @@ after:
 	if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) h].kind != 0xb) {
 		goto ltail;
 	}
-	if ((unsigned short) g_7f4c04 % 2 != 0) {
-		if ((*(int*) (a + 0x1b4) & 0x20) != 0) {
-			goto ltail;
-		}
-	} else {
+	if ((unsigned short) g_7f4c04 % 2 == 0) {
 		*(int*) (a + 0x1b4) &= ~0x20;
+		goto ltail;
+	}
+	if ((*(int*) (a + 0x1b4) & 0x20) != 0) {
 		goto ltail;
 	}
 	v = fcn_005155e0(h);

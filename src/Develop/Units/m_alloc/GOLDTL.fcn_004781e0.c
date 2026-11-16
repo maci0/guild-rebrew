@@ -89,9 +89,9 @@ unsigned int* __cdecl fcn_004781e0(int a0, int a1, int a2, int a3, int a4, char 
 		row = (char*) (a4 + (a1 * a6 + a0) * 2);
 		do {
 			memcpy(dst, row, bytes);
+			*(unsigned int*) v6 += *(unsigned short*) (v6 + 6) * 2;
 			*(unsigned int*) (v6 + 0x2e) += *(unsigned short*) (v6 + 6);
 			bytes = *(unsigned short*) (v6 + 6) * 2;
-			*(unsigned int*) v6 += bytes;
 			dst += bytes;
 			row += rowstride;
 			i++;

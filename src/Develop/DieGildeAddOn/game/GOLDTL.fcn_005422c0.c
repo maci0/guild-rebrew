@@ -196,8 +196,8 @@ void __cdecl fcn_005422c0(unsigned int arg)
 						if (*(unsigned char**) (slot + 0x16c) == rec) {
 							memset(msg, 0, 0xf8);
 							msg[4] = 0x31;
-							*(int*) (msg + 8) = *(int*) (g_773da8 + 2);
 							*(int*) (msg + 0xc) = *(int*) (rec + 1);
+							*(int*) (msg + 8) = *(int*) (g_773da8 + 2);
 							*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
 							msg[0x36] = 1;
 							*(int*) (msg + 0x58) = *(int*) (slot + 4);

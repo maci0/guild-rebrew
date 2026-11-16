@@ -25,12 +25,17 @@ void __cdecl fcn_004fa750(void)
     int j;
     int t; int index;
     CellStat* row;
+    CellStat* q;
     row = g_99ef84[0]; memset(values, 0, sizeof(values));
-    for (; (int) row < (int) g_99ef84 + 0x600; row += 8) {
-        for (j = 0; j < 8; j++) {
-            row[j].count = 0;
-        }
-    }
+    do {
+        q = row;
+        j = 8;
+        do {
+            q->count = 0;
+            q++;
+        } while (--j);
+        row = q;
+    } while ((int) row < (int) g_99ef84 + 0x600);
     e = gm_StartFilteredEntitySearch(1, 6);
     while (e != 0) {
         if (*(char**) (e + 0x61) != 0

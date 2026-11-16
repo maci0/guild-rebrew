@@ -26,6 +26,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl fcn_00508cf0(int a1, int* a2);
 float __cdecl gm_GetEntitySkill(char* entity, int index);
 double __cdecl gm_RandomFloat01(void);
+extern float g_6628a0;
 slot80* __cdecl gm_FindSlotById(int a1, int a2);
 float __cdecl fcn_00502780(int a1, int a2);
 int __cdecl fcn_004c61d0(slot80* e, unsigned char kind);
@@ -125,10 +126,10 @@ found:
 	}
 	t = gm_GetEntitySkill(self, 2);
 	if (packet[2] == 1) {
-		scale = (gm_RandomFloat01() + 1.0f) * t * *(float*) 0x6628d8 + *(float*) 0x664198;
+		scale = (gm_RandomFloat01() + g_6628a0) * t * *(float*) 0x6628d8 + *(float*) 0x664198;
 	} else {
 		scale = *(double*) 0x6629c8 -
-			((gm_RandomFloat01() + 1.0f) * t * 0.3f + *(double*) 0x6628f0);
+			((gm_RandomFloat01() + g_6628a0) * t * 0.3f + *(double*) 0x6628f0);
 	}
 
 	e = gm_FindSlotById(g_773d75, v20);

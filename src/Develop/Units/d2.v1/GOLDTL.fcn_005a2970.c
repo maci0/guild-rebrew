@@ -124,7 +124,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 				if (g_67d370 == *(int*) sel[j].pad4)
 					break;
 			}
-			if (j < 3) {
+			if (3 > j) {
 				for (i = 0; i < 3; i++) {
 					if (*(int*) (a1 + 0x1c + i * 4) == seen[j]) {
 						if (fcn_00526010((char*) (g_774970 * 0x21c + 0x7f4ca0),

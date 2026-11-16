@@ -60,7 +60,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 		if (self == 0 || other == 0) {
 			continue;
 		}
-		for (k = 0; k < count; k++) {
+		for (k = 0; count > k; k++) {
 			work.score[k] = 3;
 			ent = gm_LookupEntityRecordById(list[k].mplayerid);
 			if (ent != 0 && *(char*) (ent + 0x166) != 0

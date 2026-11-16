@@ -146,8 +146,8 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 				fcn_005c91c0(buf, x, line, 0xf0, 0x54);
 				line += 0x69;
 			}
-			found = 0;
 			changed = 0;
+			found = 0;
 			y = -1;
 			for (e = fcn_005463a0(1, 0, 0x74); e != 0; e = he_fn_Handlung()) {
 				if (*(int*) (e + 0xb0) == *(int*) (a0 + 1)) {

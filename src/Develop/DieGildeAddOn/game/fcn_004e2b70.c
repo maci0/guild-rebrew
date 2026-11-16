@@ -121,9 +121,9 @@ void __cdecl fcn_004e2b70(void* arg)
 			fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, g_68bfb8);
 		} else {
 			int alo;
-			r = *(int*) ((char*) obj + 4);
-			alo = 0;
 			f10 = 100.0f;
+			alo = 0;
+			r = *(int*) ((char*) obj + 4);
 			fcn_004c4510(obj, r);
 			fcn_004c4570(4, 1, 0x1c, &f10);
 			fcn_004c4570(4, 1, 0x24, &alo);

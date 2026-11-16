@@ -80,7 +80,7 @@ void __cdecl fcn_005513d0(char* a0)
 			count++;
 	}
 	if (count != 5) {
-		factor = (5.0f - (double) count) * 0.2f;
+		factor = (5.0f - (float) count) * 0.2f;
 		f = (float) (factor * factor);
 		threshold = (float) (f * *(float*) (a0 + 0xac)); r = gm_RandomFloat01();
 		t = (1.0f - f) + r;

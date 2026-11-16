@@ -32,8 +32,8 @@ void __cdecl gm_KillSpieler(int a0, int a1)
 		ent[8] = 0;
 		fcn_00506a70(ent);
 		ent[2] = 0x0f;
-		v15 = 0;
 		e = 0;
+		v15 = 0;
 		v9 = 0;
 		p = (char*) 0x7f4ca2;
 		do {

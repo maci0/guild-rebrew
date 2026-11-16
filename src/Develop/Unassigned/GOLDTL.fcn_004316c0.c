@@ -100,9 +100,9 @@ void __cdecl fcn_004316c0(int obj)
 				if (id == 0xff) {
 					continue;
 				}
-				cand = (unsigned char*) (nblock + (id + 1) * 0x40);
-				names = (unsigned char*) *(int*) ((char*) plan + 0x40c);
 				j = -1;
+				names = (unsigned char*) *(int*) ((char*) plan + 0x40c);
+				cand = (unsigned char*) (nblock + (id + 1) * 0x40);
 				for (k = 0; k < count; k++) {
 					if (strcmp(rec[k].name, (char*) cand) == 0) {
 						j = k;

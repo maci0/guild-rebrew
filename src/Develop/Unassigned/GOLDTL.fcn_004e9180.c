@@ -21,7 +21,7 @@ int __cdecl fcn_004e9180(void* rec, int role)
 	if (r1.x4 != r2.x4) {
 		return 0;
 	}
-	step = r1.type % 3;
+	step = r1.type - r1.type / 3 * 3;
 	if (step == 0 && r2.type % 3 != 0) {
 		return 1;
 	}
