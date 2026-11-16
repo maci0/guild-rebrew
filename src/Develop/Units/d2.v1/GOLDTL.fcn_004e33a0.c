@@ -59,7 +59,7 @@ void __cdecl fcn_004e33a0(int* arg)
 	int price;
 	int states[8];
 	int escBehavior;
-	int bid[4] = {0};
+	int bid[4];
 	int auctioneer;
 	int bank_comments;
 	int bank_intro;
@@ -77,7 +77,7 @@ void __cdecl fcn_004e33a0(int* arg)
 	int cand;
 	int bidCount;
 	int i;
-	char kind;
+	Building4e33a0* proto;
 	int* table;
 	int other;
 	int found;
@@ -90,16 +90,20 @@ void __cdecl fcn_004e33a0(int* arg)
 	npc = (int) gm_StartFilteredEntitySearch(1, 1, auctioneer);
 	building = npc;
 	besti = -1;
+	bid[0] = 0;
+	bid[1] = 0;
+	bid[2] = 0;
+	bid[3] = 0;
 	result = cut_RandMod(3);
 	fcn_004e4e90(0);
 	if (npc == 0)
 		return;
-	kind = ((Building4e33a0*) lpGebaeudePROT)[*(unsigned char*) npc].kind;
-	if (kind == 0x0b) {
+	proto = &((Building4e33a0*) lpGebaeudePROT)[*(unsigned char*) npc];
+	if (proto->kind == 0x0b) {
 		fcn_0064d41a(name, (char*) 0x679060, "WALDSTUECK");
-	} else if (kind == 0x0d) {
+	} else if (proto->kind == 0x0d) {
 		fcn_0064d41a(name, (char*) 0x679060, "MINE");
-	} else if (kind == 0x0c) {
+	} else if (proto->kind == 0x0c) {
 		fcn_0064d41a(name, (char*) 0x679060, "STEINBRUCH");
 	} else {
 		return;
@@ -124,11 +128,11 @@ void __cdecl fcn_004e33a0(int* arg)
 	fcn_004e4730("Versteigerung.ed3");
 	npc = (int) fcn_00445600(0, 0x40, 0, "ub_STAFELEI");
 	if (npc != 0) {
-		if (kind == 0x0b)
+		if (proto->kind == 0x0b)
 			i = 0;
-		else if (kind == 0x0c)
+		else if (proto->kind == 0x0c)
 			i = 1;
-		else if (kind == 0x0d)
+		else if (proto->kind == 0x0d)
 			i = 2;
 		else
 			return;

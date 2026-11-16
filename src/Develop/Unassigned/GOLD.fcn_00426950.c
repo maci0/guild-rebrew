@@ -1,3 +1,4 @@
+extern int g_0063319c;
 #include <stdio.h>
 #include <string.h>
 char* __cdecl fcn_00422730(char*);
@@ -16,7 +17,7 @@ char* __cdecl fcn_00426950(char* name, int load)
     FILE* file;
     int i, count;
     char c;
-    if (!*(int*) 0x63319c) return (char*) 0x14607c0;
+    if (!g_0063319c) return (char*) 0x14607c0;
     bank = fcn_00422730(name);
     if (bank == 0) {
         i = 0;

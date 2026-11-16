@@ -18,9 +18,7 @@ int __cdecl fcn_00496810(int a1, short* ent, int mode, Cmd* out1, Cmd* out2, int
     Cmd c2;
     unsigned char* list[6];
     unsigned char* e;
-    unsigned int mask;
     unsigned int magnitude;
-    unsigned short picked;
     int strength;
     int count;
     int best;
@@ -33,7 +31,6 @@ int __cdecl fcn_00496810(int a1, short* ent, int mode, Cmd* out1, Cmd* out2, int
     float best_value;
     float value;
 
-    (void)a1;
     (void)extra;
     if (mode != 0) return 0;
     if (*(int*)((char*)ent + 0x170) == 0 && *((char*)ent + 2) != 3) {
@@ -80,10 +77,10 @@ int __cdecl fcn_00496810(int a1, short* ent, int mode, Cmd* out1, Cmd* out2, int
             e = list[best];
         } else {
             if ((*(unsigned int*)((char*)ent + 0x1cc) & 0x1c000) != 0) return 0;
-            mask = 0x10000500;
+            mode = 0x10000500;
             i = (unsigned short)gm_RandomMod(0x19);
-            if (fcn_004a5340((unsigned short*)ent, 1, &mask, 0.0f, (float)i + 10.0, &picked) == 0) return 0;
-            e = (unsigned char*)0x7f4ca0 + picked * 0x21c;
+            if (fcn_004a5340((unsigned short*)ent, 1, (unsigned int*)&mode, 0.0f, (float)i + 10.0, (unsigned short*)&a1) == 0) return 0;
+            e = (unsigned char*)0x7f4ca0 + *(unsigned short*)&a1 * 0x21c;
         }
         if (e == 0) return 0;
         out1->kind = 7;

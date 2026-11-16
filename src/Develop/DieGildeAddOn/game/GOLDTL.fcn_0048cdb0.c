@@ -99,7 +99,25 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 	fcn_0050cce0(*(char**) (o + 0x16c), name, 0);
 	for (i = 0; i < *(int*) 0x100e74c; i++) {
 		v2 = (char*) *(int*) (0x100dbc0 + i * 4);
-		if (*(unsigned char*) (v2 + 0x12) >= 0x21) {
+		if (*(unsigned char*) (v2 + 0x12) < 0x21) {
+			memset(&m, 0, 0xf8);
+			m.type = 0x10;
+			m.flag2 = 1;
+			m.state = *(int*) (*(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c + 0x7f4ca4);
+			m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
+			m.p28 = g_7f4c00;
+			m.p2c = g_7f4c04;
+			m.p30 = g_7f4c08;
+			m.p34 = g_7f4c0c;
+			fcn_00500bb0(&m.p28, 0, 0, 10);
+			m.f58 = *(int*) (v2 + 2);
+			m.slots[0] = 5;
+			m.ids[4] = 0;
+			m.ids[5] = 0;
+			m.f5c = 100 - (int) *(unsigned char*) (v2 + 0x12);
+			fcn_004c5530(&m);
+		}
+		else {
 			memset(&m, 0, sizeof(m));
 			if (fcn_0047d1e0() > fcn_0047d1b0())
 				m.skip = 1;
@@ -234,24 +252,6 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 				fcn_004c5530(&m);
 				*(int*) 0x772620 = *(int*) 0x772620 + 1;
 			}
-		}
-		else {
-			memset(&m, 0, 0xf8);
-			m.type = 0x10;
-			m.flag2 = 1;
-			m.state = *(int*) (*(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c + 0x7f4ca4);
-			m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
-			m.p28 = g_7f4c00;
-			m.p2c = g_7f4c04;
-			m.p30 = g_7f4c08;
-			m.p34 = g_7f4c0c;
-			fcn_00500bb0(&m.p28, 0, 0, 10);
-			m.f58 = *(int*) (v2 + 2);
-			m.slots[0] = 5;
-			m.ids[4] = 0;
-			m.ids[5] = 0;
-			m.f5c = 100 - (int) *(unsigned char*) (v2 + 0x12);
-			fcn_004c5530(&m);
 		}
 	}
 	return 1;

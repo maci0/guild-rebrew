@@ -35,7 +35,7 @@ int __cdecl gm_CheckEntityType(void *);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7e1ae0[];
 extern int g_68b79c;
-extern int g_6b89c0;
+extern int g_6b89c0; extern char g_6a2574[];
 typedef struct BuildingRow4d1ff0 { unsigned char kind; char fields[0x24c]; } BuildingRow4d1ff0;
 /* ADDRESS: GOLDTL 0x004d1ff0 */
 void __cdecl fcn_004d1ff0(void *arg)
@@ -212,7 +212,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 	}
 	*(float *) 0x9ba2c0 = (float) (*(float *) (cur + 0x10) * 1.1);
 	*(int *) 0x6a2570 = 0x3e19999a;
-	*(char *) 0x6a2574 = 0;
+	g_6a2574[0] = 0;
 	*(void **) 0x772eb4 = (void *) o;
 	fcn_004d1cf0();
 	*(int *) &g_772e9c = gm_LookupEntityRecordById(*(int *) (o + 0x34));

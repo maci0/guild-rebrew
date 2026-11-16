@@ -82,6 +82,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 	int hflag;
 	int x;
 	int lastc;
+	int cnt;
 	int (*draw)(int, int, int, char*, int);
 	char c;
 
@@ -100,7 +101,8 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 		w->flags = savedFlags;
 		return;
 	}
-	for (n = 0; n < *(int*) 0x772530; n++) {
+	cnt = *(int*) 0x772530;
+	for (n = 0; n < cnt; n++) {
 		sum += *(int*) (0x1011ae8 + n * 0x10c);
 	}
 	base = ((w->flags & 8) >> 3) + ((w->flags & 0x20) ? 2 : 0);

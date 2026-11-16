@@ -121,9 +121,8 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 			    && *(float*) (vertices + 0x10 + index * 8) > g_6629d0) {
 				float f;
 
-				f = gm_RandomFloat01();
 				f = *(float*) (vertices + 0x10 + index * 8)
-				    - (f * g_662a3c + g_662b10);
+				    - (gm_RandomFloat01() * g_662a3c + g_662b10);
 				fcn_004eea30(city, *(int*) (vertices + 0xc + index * 8), f);
 				fcn_005b33a0((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
 				    city, object, *(int*) (vertices + 0xc + index * 8));

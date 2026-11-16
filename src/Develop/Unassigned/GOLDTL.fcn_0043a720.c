@@ -36,7 +36,6 @@ char __cdecl fcn_0043a720(Obj043a720* o, char* name)
 	Obj043a720* p;
 	List043a720* l;
 	int i;
-	int n;
 
 	if (o != 0 && name != 0 && o->parent != 0 && o->ov != 0) {
 		o->ov->name[0] = g_6b5c60;
@@ -44,13 +43,12 @@ char __cdecl fcn_0043a720(Obj043a720* o, char* name)
 		if (p->ov != 0) {
 			l = p->ov->list;
 			if (l != 0) {
-				n = l->count;
-				for (i = 0; i < n; i++) {
+				for (i = 0; i < l->count; i++) {
 					if (strcmp(l->items[i].name, name) == 0) {
 						break;
 					}
 				}
-				if (i < n) {
+				if (i < l->count) {
 					strcpy(o->ov->name, name);
 					fcn_004315c0(p);
 					fcn_004316c0(p);

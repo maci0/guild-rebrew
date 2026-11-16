@@ -100,7 +100,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 			return r;
 		}
 		val = fcn_004a48a0(w, need);
-		if (val > price) {
+		if (price < val) {
 			flag = 1;
 			goto sell;
 		}

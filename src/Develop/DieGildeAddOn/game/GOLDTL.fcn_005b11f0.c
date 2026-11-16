@@ -98,7 +98,6 @@ void __cdecl fcn_005b11f0(int* a0)
 		}
 		e = *(char**) (obj + 0x34);
 		fcn_00455350(e, e + 0x4c, pos);
-		view = *(char**) g_1043370;
 		x = (float) (((double) pos[0] - *(float*) t) / *(float*) (t + 0x10)
 		    - *(int*) (view + 0x20) * 0.5);
 		x = x * g_6ab3e0;

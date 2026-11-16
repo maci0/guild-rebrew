@@ -212,7 +212,7 @@ int __cdecl fcn_00497e60(int a1, char* a2)
 		t = (unsigned char*) he_fn_Handlung();
 	} while (t != 0);
 exhausted:
-	return 0;
+	return (int) t;
 found:
 	fcn_00505e20(*(int*) (a2 + 4), *(int*) (a1 + 4), *(int*) (t + 0xb0), (char*) t, 1);
 	return 0x10;

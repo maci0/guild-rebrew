@@ -23,6 +23,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 	int need;
 	int have;
 	int d;
+	Rec6* second;
 
 	e = ent;
 	if (fcn_0048e7f0(ent, (unsigned short**) &ent) != 0) {
@@ -49,8 +50,8 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 								}
 							} else {
 								*(Rec6*) out1 = rec2;
-								*(Rec6*) out2 = rec1;
-								return 0x43;
+								second = &rec1;
+								goto done;
 							}
 						}
 					}
@@ -70,8 +71,8 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 							}
 						} else {
 							*(Rec6*) out1 = rec1;
-							*(Rec6*) out2 = rec2;
-							return 0x43;
+							second = &rec2;
+							goto done;
 						}
 					}
 				}
@@ -79,4 +80,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 		}
 	}
 	return 0;
+done:
+	*(Rec6*) out2 = *second;
+	return 0x43;
 }

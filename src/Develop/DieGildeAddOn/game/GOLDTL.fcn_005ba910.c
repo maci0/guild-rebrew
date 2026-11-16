@@ -1,5 +1,5 @@
 #include <string.h>
-
+extern unsigned char g_773d75;
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl fcn_0052dee0(int, int, int);
@@ -376,7 +376,7 @@ l_after:
 			*(int*) 0x14a5664, *(int*) 0x14a5670);
 		f.v6c = f.v140;
 		f.v58 = f.v144;
-		f.v34 = *(unsigned char*) 0x773d75;
+		f.v34 = g_773d75;
 		f.v54 = f.v13C;
 	} else {
 		/* 0x5bad6d: one row id, then the entity's own selection field */
@@ -1138,7 +1138,7 @@ l_5bc253:
 		}
 		idx = gm_eval_SlotVoll(f.v18, slot_value, j);
 		f.v28 = idx * i;
-		f.vA4 = (int) fcn_0050b750(1, (int) (*(unsigned char*) 0x773d75));
+		f.vA4 = (int) fcn_0050b750(1, (int) (g_773d75));
 		*(float*) &f.v84 = (float) f.v28;
 		if ((int) (*(float*) &f.v84 * *(float*) &f.v64 - *(float*) &f.v84)
 		    < f.vA4) {
@@ -1479,7 +1479,7 @@ l_5bcd9a:
 			j = fcn_00471f80(*(int*) idx);
 			if (j > 0) {
 				fcn_004c51f0(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
-				             (int) (*(unsigned char*) 0x773d75), 0);
+				             (int) (g_773d75), 0);
 				fcn_00472380(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
 			} else if (j < 0) {
 				fcn_004c52d0(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
@@ -1492,7 +1492,7 @@ l_5bcd9a:
 			j = fcn_00471f80(*(int*) idx);
 			if (j > 0) {
 				fcn_004c51f0(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
-				             (int) (*(unsigned char*) 0x773d75), 0);
+				             (int) (g_773d75), 0);
 				fcn_00472380(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
 			} else if (j < 0) {
 				fcn_004c52d0(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
@@ -1522,7 +1522,7 @@ l_5bcd9a:
 					continue;
 				}
 				fcn_004c51f0(-1, *(int*) (f.vA4 + 2), slot_value, j,
-				             (int) (*(unsigned char*) 0x773d75), 0);
+				             (int) (g_773d75), 0);
 				fcn_00472380(*(int*) f.v30, 0,
 				             ((int*) (f.v15C + 0x64))[f.v24], 0);
 			}
@@ -1672,7 +1672,7 @@ l_5bd26b:
 		}
 		if (fcn_00526010((int) (0x7f4ca0
 		                       + *(unsigned short*) 0x774970 * 0x21c),
-		                f.v20, (int) *(unsigned char*) 0x773d75) == 0) {
+		                f.v20, (int) g_773d75) == 0) {
 			goto l_5bd632;
 		}
 		fcn_004c5150(-1,

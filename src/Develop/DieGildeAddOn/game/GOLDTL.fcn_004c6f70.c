@@ -7,7 +7,7 @@ int __cdecl gm_CheckInventoryCapacity(int, int, int);
 int __cdecl gm_QueryEntitySum(int, char);
 
 /* ADDRESS: GOLDTL 0x004c6f70 */
-int __cdecl fcn_004c6f70(char* a0)
+int __cdecl fcn_004c6f70(char* request)
 {
 	int v12;
 	int v13;
@@ -16,7 +16,7 @@ int __cdecl fcn_004c6f70(char* a0)
 	int obj;
 	char* p;
 	unsigned short type;
-	char* request = a0;
+	char* a0;
 
 	if (*(int*) (request + 0x14) != -1) {
 		id = fcn_004c4dc0(request, *(int*) (request + 0x14));

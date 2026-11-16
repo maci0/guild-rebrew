@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/Units/d3/d3_camera.h"
-
+extern char g_14cf950, g_1040600; extern char* g_1043254;
 int __cdecl fcn_00436aa0(void *flags);
 int __cdecl fcn_00436f70(int enable);
 void *__cdecl fcn_00437890(void *node);
@@ -16,7 +16,7 @@ char __cdecl fcn_00448b10(void)
 	void* dst;
 	int count;
 
-	if ((*(char *) 0x14cf950) != *(char *) 0x6b85a5) {
+	if (g_14cf950 != *(char *) 0x6b85a5) {
 		dst = flags;
 		count = 8;
 		__asm {
@@ -36,8 +36,8 @@ char __cdecl fcn_00448b10(void)
 			add ecx, ebx
 			rep movsb
 		}
-		*(char *) 0x6b85a5 = (*(char *) 0x14cf950);
-		switch ((unsigned char) (*(char *) 0x14cf950)) {
+		*(char *) 0x6b85a5 = g_14cf950;
+		switch ((unsigned char) g_14cf950) {
 		case 0x30:
 			value = flags[0];
 			flags[0] = value ^
@@ -49,7 +49,7 @@ char __cdecl fcn_00448b10(void)
 		case 0x2e:
 			node = g_6b8014;
 			if (*(char **) 0x1041d0c == node) {
-				node = *(char **) 0x1043254;
+				node = g_1043254;
 				while (*(int *) (node + 0x218) != 4) {
 					if (node == (char *) 0x1042340)
 						return 0;
@@ -62,12 +62,12 @@ char __cdecl fcn_00448b10(void)
 			return 0;
 		case 0x1f:
 			if (flags[0] & 0x1c) {
-				if (*(char *) 0x1040600)
+				if (g_1040600)
 					flags[0] &= 0xe3;
 				else
-					*(char *) 0x1040600 = 1;
+					g_1040600 = 1;
 			} else {
-				*(char *) 0x1040600 = 0;
+				g_1040600 = 0;
 				flags[0] = (flags[0] & 0xe7) | 4;
 			}
 			fcn_00437ac0(*(int *) 0x67a370, 0, 0x1ff,

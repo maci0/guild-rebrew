@@ -28,6 +28,6 @@ float __cdecl fcn_0050b840(int id)
 	for (i = 0; i < 2; i++) {
 		acc += base[t * 0x24d + 0x233 + i] * *(float*) 0x665be0 * *(double*) 0x665bd8;
 	}
-	r = (Rec*) lpObjektePROT;
-	return acc * r[id].cap / r[id].div;
+	r = (Rec*) lpObjektePROT + id;
+	return acc * r->cap / r->div;
 }

@@ -1,3 +1,4 @@
+#include <string.h>
 typedef struct {
 	unsigned char r;
 	unsigned char g;
@@ -68,11 +69,7 @@ char* __cdecl fcn_00546590(char* a0, char* name, char* entity)
 		color.x = 0;
 		fcn_0043a3f0(obj, *(char**) (obj + 0x1cc), color);
 		fcn_00414be0(obj, 0xc0, 0xa0, 0x80);
-		flags.b0 = 0;
-		flags.f0 = 0;
-		flags.f2 = 0;
-		flags.f3 = 0;
-		flags.f4 = 0;
+		memset(&flags, 0, sizeof(flags));
 		flags.e = 1;
 		frames[0].id = 0x8c0;
 		frames[0].pos[0] = 0.0f;

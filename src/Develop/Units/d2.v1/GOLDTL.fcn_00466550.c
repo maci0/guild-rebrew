@@ -159,9 +159,9 @@ void __cdecl fcn_00466550(int idx, int surf)
 				fcn_0047cbf0(f->x, f->y, g_77250c, font, g_772568);
 				fcn_0047a040(g_7725f8, g_7725fc, g_67d964, g_67d968);
 				if (g_67d370 != e->i[0]) {
-					width = (int) ((!(*(float*) (g_1015ea0 + f->ent * 0x2f4 + 0x1f4) > *(double*) 0x6629c8)
-					    ? *(float*) (g_1015ea0 + f->ent * 0x2f4 + 0x1f4)
-					    : *(double*) 0x6629c8) * *(double*) 0x662c38);
+					width = (int) (((*(float*) (g_1015ea0 + f->ent * 0x2f4 + 0x1f4) > *(double*) 0x6629c8)
+					    ? *(double*) 0x6629c8
+					    : *(float*) (g_1015ea0 + f->ent * 0x2f4 + 0x1f4)) * *(double*) 0x662c38);
 					sprintf(buf3, (char*) 0x67d43c, width);
 					fcn_00472880(g_67d398 + 1);
 					fcn_0046bd20(f->x,
