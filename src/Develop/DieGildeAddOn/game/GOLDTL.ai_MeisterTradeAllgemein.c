@@ -721,11 +721,7 @@ next_collect:
 				v.m.ids[3 + n] = *(unsigned short*)
 				    ((char*) w - 0x14);
 				v.m.slots[3 + n] = *(int*) ((char*) x + 1);
-				if (tmp < *(int*) w) {
-					v.m.f88[n] = tmp;
-				} else {
-					v.m.f88[n] = *(int*) w;
-				}
+				v.m.f88[n] = (tmp < *(int*) w) ? (tmp) : (*(int*) w);
 				n++;
 				*(int*) w = 0;
 				sent = 1;

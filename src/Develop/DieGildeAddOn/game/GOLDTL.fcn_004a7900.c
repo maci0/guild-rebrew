@@ -37,16 +37,13 @@ void __cdecl fcn_004a7900(void)
 		max_row = 0;
 		pairs = 0;
 		max_col = 0;
-		q = (char*) 0x1007ce8;
-		do {
+		for (i = 0; i < 6; i++) {
 			count = 0;
-			j = 4;
-			do {
-				if (*(int*) q == k) {
+			for (j = 0; j < 4; j++) {
+				if (g_1007ce0[i * 4 + j].count == k) {
 					count++;
 				}
-				q += 0x10;
-			} while (--j);
+			}
 			if (count > 1) {
 				pairs++;
 			}
@@ -56,28 +53,20 @@ void __cdecl fcn_004a7900(void)
 				best_row = i;
 			}
 			cnt[i] = count;
-			i++;
-		} while ((int) q < 0x1007e68);
-		p = (char*) 0x1007ce8;
-		j = 0;
-		do {
+		}
+		for (j = 0; j < 4; j++) {
 			count = 0;
-			q = p;
-			i = 6;
-			do {
-				if (*(int*) q == k) {
+			for (i = 0; i < 6; i++) {
+				if (g_1007ce0[i * 4 + j].count == k) {
 					count++;
 				}
-				q += 0x40;
-			} while (--i);
+			}
 			if (count > max_col) {
 				max_col = count;
 				best_col = j;
 			}
 			cnt[j] = count;
-			p += 0x10;
-			j++;
-		} while ((int) p < 0x1007d28);
+		}
 		seat = (char*) (off + (int) g_1007cd4 + 4);
 		switch (*(int*) (off + (int) g_1007cd4 + 0x30)) {
 		case 0:

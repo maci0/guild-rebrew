@@ -29,6 +29,7 @@ int __cdecl fcn_00405a50(int a, int b, int id, int value, int radius)
 	int col;
 	int colend;
 	int dy;
+	int w;
 
 	g = ((Grid**) g_1043370)[(id & 0xff) * 247];
 	if (g != ((Grid**) g_1043370)[0] && g != *(Grid**) (g_67a370 + 0xb0)) {
@@ -51,11 +52,12 @@ int __cdecl fcn_00405a50(int a, int b, int id, int value, int radius)
 		}
 		for (; row <= rowend; row++) {
 			dy = abs(b - row);
+			w = r - dy;
 			colend = g->n - 2;
-			if (a + r - dy < colend) {
-				colend = a + r - dy;
+			if (a + w < colend) {
+				colend = a + w;
 			}
-			col = a - (r - dy);
+			col = a - w;
 			if (col < 1) {
 				col = 1;
 			}

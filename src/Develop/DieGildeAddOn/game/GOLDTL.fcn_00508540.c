@@ -39,10 +39,8 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 		avail[3] = 1;
 	}
 	r = gm_RandomMod(4) & 0xffff;
-	for (left = 4; ; ) {
-		if (avail[r] == 1) {
-			break;
-		}
+	left = 4;
+	while (avail[r] != 1) {
 		left--;
 		r = (r + 1) % 4;
 		if (left == 0) {

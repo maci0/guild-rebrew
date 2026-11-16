@@ -35,12 +35,14 @@ unsigned int __cdecl txt_loadTextFile(char* name)
 	b = 0;
 	count = 0;
 	rec = (char*) 0x149d120;
-	while (*rec != 0) {
+	do {
+		if (*rec == 0)
+			goto found;
 		rec += 0x74;
 		count++;
-		if ((int) rec >= 0x14a0b20)
-			return 0;
-	}
+	} while ((int) rec < 0x14a0b20);
+	return 0;
+found:
 	if (count >= 0x80)
 		return 0;
 	fcn_0064d41a(path, "textbin_%s\\%s.res", "german", name);

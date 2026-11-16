@@ -16,10 +16,10 @@ int __cdecl m_alloc(int, char*);
 int __cdecl fcn_00407760(char*, void*, char*, void*);
 
 /* ADDRESS: GOLDTL 0x004090d0 */
-unsigned int __cdecl fcn_004090d0(int a0)
+unsigned int __cdecl fcn_004090d0(int self)
 {
+	int a0;
 	int v1;
-	int v2;
 	char* v4;
 	int v6;
 	int v8;
@@ -31,16 +31,15 @@ unsigned int __cdecl fcn_004090d0(int a0)
 	char v9[4];
 	short v3;
 
-	v2 = a0;
-	v1 = *(int*) (a0 + 0x14);
+	v1 = *(int*) (self + 0x14);
 	v4 = fcn_00402610(v1);
 	if (!fcn_0045b990((float*) v4,
-	                  (float*) (*(int*) (*(int*) (a0 + 0x14) + 0x34) + 0x4c),
+	                  (float*) (*(int*) (*(int*) (self + 0x14) + 0x34) + 0x4c),
 	                  &a0, &v10, (float*) v9)) {
 		return 0;
 	}
 	if (!fcn_0045b990((float*) v4,
-	                  (float*) (*(int*) (*(int*) (v2 + 0x110) + 0x34) + 0x4c),
+	                  (float*) (*(int*) (*(int*) (self + 0x110) + 0x34) + 0x4c),
 	                  (int*) &v12, &v11, (float*) v9)) {
 		return 0;
 	}
@@ -64,7 +63,7 @@ unsigned int __cdecl fcn_004090d0(int a0)
 	a0 = v14;
 	v10 = v13;
 	fcn_00407e30(v4, (float*) (*(int*) (v1 + 0x34) + 0x4c),
-	             (float*) (v2 + 0x144), v12, v11, &v14, &v13, 4, 0);
+	             (float*) (self + 0x144), v12, v11, &v14, &v13, 4, 0);
 	v12 = v14;
 	v11 = v13;
 	*(int*) 0x14d0c28 = 0x14cfc20;
@@ -74,23 +73,23 @@ unsigned int __cdecl fcn_004090d0(int a0)
 	if (v3 == -1) {
 		return 0;
 	}
-	if (*(int*) (v2 + 0xf4)) {
-		m_FreeTracked(*(int*) (v2 + 0xf4));
-		*(int*) (v2 + 0xf4) = 0;
+	if (*(int*) (self + 0xf4)) {
+		m_FreeTracked(*(int*) (self + 0xf4));
+		*(int*) (self + 0xf4) = 0;
 	}
 	v6 = m_alloc(*(int*) 0x14d0c20 * 2, (char*) 0x675ad8);
-	*(int*) (v2 + 0xf4) = v6;
+	*(int*) (self + 0xf4) = v6;
 	if (v6 == 0) {
 		__asm { int 3 }
 	}
-	*(int*) (v2 + 0xf0) =
-	    fcn_00407760((char*) v1, (void*) 0x14d0c20, (char*) *(int*) (v2 + 0xf4),
+	*(int*) (self + 0xf0) =
+	    fcn_00407760((char*) v1, (void*) 0x14d0c20, (char*) *(int*) (self + 0xf4),
 	                 v4);
-	v1 = *(int*) (v2 + 0x110);
-	*(int*) (v2 + 0xf8) = 0;
-	*(int*) (v2 + 0xfc) = 0xffffffff;
-	*(int*) (v2 + 0x134) = *(int*) (*(int*) (v1 + 0x34) + 0x4c);
-	*(int*) (v2 + 0x138) = *(int*) (*(int*) (v1 + 0x34) + 0x50);
-	*(int*) (v2 + 0x13c) = *(int*) (*(int*) (v1 + 0x34) + 0x54);
+	v1 = *(int*) (self + 0x110);
+	*(int*) (self + 0xf8) = 0;
+	*(int*) (self + 0xfc) = 0xffffffff;
+	*(int*) (self + 0x134) = *(int*) (*(int*) (v1 + 0x34) + 0x4c);
+	*(int*) (self + 0x138) = *(int*) (*(int*) (v1 + 0x34) + 0x50);
+	*(int*) (self + 0x13c) = *(int*) (*(int*) (v1 + 0x34) + 0x54);
 	return 1;
 }

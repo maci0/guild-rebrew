@@ -48,10 +48,10 @@ unsigned int __cdecl fcn_00412b10(char* a0, float a1, float a2, float a3, float 
 		rep stosb
 	}
 	z.layer = z.layer | 0x14;
-	z.layer = z.layer & 0xf7;
 	rotation[0] = a4;
-	rotation[2] = a6;
+	z.layer = z.layer & 0xf7;
 	z.queue = 1;
+	rotation[2] = a6;
 	frames[0].rotation[0] = 0.0f;
 	frames[0].rotation[1] = 0.0f;
 	frames[0].rotation[2] = 0.0f;

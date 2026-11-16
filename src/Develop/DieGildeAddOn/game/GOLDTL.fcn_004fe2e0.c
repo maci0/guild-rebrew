@@ -17,7 +17,7 @@ void __cdecl fcn_004fdfe0(char*);
 int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 {
 	int v2;
-	int def[4];
+	float def[4];
 	float opt[4];
 	int* q;
 	int* p;
@@ -25,17 +25,17 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 	char* v6;
 
 	v2 = g_6b8010;
-	def[0] = 0;
-	def[1] = 0;
-	def[2] = 0;
-	def[3] = 0;
+	def[0] = 0.0f;
+	def[1] = 0.0f;
+	def[2] = 0.0f;
+	def[3] = 0.0f;
 	p = a2;
 	if (p == 0) {
-		p = def;
+		p = (int*) def;
 	}
 	q = a3;
 	if (q == 0) {
-		q = def;
+		q = (int*) def;
 	}
 	if (a1 < 0) {
 		return 0;

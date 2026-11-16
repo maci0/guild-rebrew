@@ -97,6 +97,9 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 
 	in = (char*) a2;
 	out.h1 = a1;
+	best = 0;
+	count = 0;
+	bestdist = 100000.0f;
 	for (i = 0; i < 3; i++) {
 		out.slot[i].id = -1;
 		out.slot[i].dist = 1000000.0f;
@@ -106,9 +109,6 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 	cx = *(float*) (in + 0x30);
 	cy = *(float*) (in + 0x34);
 	cz = *(float*) (in + 0x38);
-	best = 0;
-	bestdist = 100000.0f;
-	count = 0;
 	for (off = 0; off < 0xa900; off += 0xa9) {
 		rec = (char*) g_entity_ptr + off;
 		k = -1;

@@ -19,7 +19,6 @@ int __cdecl fcn_005845e0(void)
 	char* menu;
 	char* item;
 	int ids[5];
-	char* base;
 	int i;
 	int k;
 	int n;
@@ -39,7 +38,6 @@ int __cdecl fcn_005845e0(void)
 		item = fcn_00472250(menu, 2, item);
 		ids[i] = (int) item;
 		index = (int) item;
-		base = g_1015ea0;
 		((Row_5845e0*) g_1015ea0)[index].i[0x58 / 4] = 1;
 		((Row_5845e0*) g_1015ea0)[index].i[0x38 / 4] = g_6a81dc[i];
 		((Row_5845e0*) g_1015ea0)[index].i[0x1d0 / 4] &= -3;
@@ -52,22 +50,19 @@ int __cdecl fcn_005845e0(void)
 
 	if (fcn_005373e0((char*) 0x5845e0, 0x86) != 0) {
 		do {
-			base = g_1015ea0;
 			n = 0;
 			for (k = 0; k < 5; k++) {
 				index = ids[k];
 				index = index * 0x40 - index;
 				index = index * 0xc;
-				if (*(int*) (base + index + 0x38) != 0) {
+				if (*(int*) (g_1015ea0 + index + 0x38) != 0) {
 					fcn_00472640((char*) result, 1);
-					base = g_1015ea0;
 					break;
 				}
 				n++;
 			}
 			if (n == 5) {
 				fcn_00472640((char*) result, 0);
-				base = g_1015ea0;
 			}
 			if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1) {
 				g_774654 = 1;
@@ -82,7 +77,7 @@ int __cdecl fcn_005845e0(void)
 						index = ids[k];
 						index = index * 0x40 - index;
 						index = index * 0xc;
-						if (*(int*) (base + index + 0x38) != 0) {
+						if (*(int*) (g_1015ea0 + index + 0x38) != 0) {
 							n++;
 							g_6a81dc[k] = 1;
 						} else {

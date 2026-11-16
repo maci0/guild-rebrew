@@ -33,8 +33,7 @@ int __cdecl nt_Recv(void)
 		n = receive(g_14cbca0, g_14cbca4 + (g_14cbcac & 0xffff),
 		             3 - (g_14cbcac & 0xffff), 0);
 		if (n == 0) {
-			fcn_00421050();
-			return 1;
+			goto fail;
 		}
 		if (n == -1) {
 			goto got_error;
@@ -58,6 +57,7 @@ got_error:
 			return 0;
 		}
 		nt_LogWinsockError(err);
+fail:
 		fcn_00421050();
 		return 1;
 	}

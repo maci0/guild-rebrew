@@ -36,11 +36,7 @@ unsigned int __cdecl fcn_00577e70(char* a0, char* a1, char* a2)
 				dy = (double) *(float*) (v3 + 0x50) - *(float*) (ent + 0x50);
 				dz = (double) *(float*) (v3 + 0x54) - *(float*) (ent + 0x54);
 				if (sqrt(dz * dz + dy * dy + (double) dx * dx) < 1850.0f) {
-				slot = *(unsigned short*) (a2 + 8);
-				slot = slot + (slot << 1);
-				slot = slot + (slot << 2);
-				slot = slot + (slot << 3);
-				v1 = (unsigned char*) (0x7f4ca0 + slot * 4);
+				v1 = (unsigned char*) (0x7f4ca0 + *(unsigned short*) (a2 + 8) * 0x21c);
 				v8 = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (a2 + 0xc4));
 				t0 = (float) (*(int*) (a2 + 0xe8) + 1) * 0.5f;
 				t1 = (float) (*(int*) (a1 + 0xc0) + 1) * 0.5f;

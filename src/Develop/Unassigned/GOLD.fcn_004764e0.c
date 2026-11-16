@@ -10,17 +10,17 @@ void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int a4, int a5, int a6)
 
     if (y == y1) {
         if (x1 < x) { t = x - x1;
-            if (t > 0) do { fcn_00476210(x1++, y, a4, a5, a6); } while (--t);
+            for (; t > 0; t--) { fcn_00476210(x1++, y, a4, a5, a6); }
         } else { t = x1 - x;
-            if (t > 0) do { fcn_00476210(x++, y, a4, a5, a6); } while (--t);
+            for (; t > 0; t--) { fcn_00476210(x++, y, a4, a5, a6); }
         }
         return;
     }
     if (x == x1) {
         if (y1 < y) { t = y - y1;
-            if (t > 0) do { fcn_00476210(x, y1++, a4, a5, a6); } while (--t);
+            for (; t > 0; t--) { fcn_00476210(x, y1++, a4, a5, a6); }
         } else { t = y1 - y;
-            if (t > 0) do { fcn_00476210(x, y++, a4, a5, a6); } while (--t);
+            for (; t > 0; t--) { fcn_00476210(x, y++, a4, a5, a6); }
         }
         return;
     }

@@ -24,8 +24,6 @@ void __cdecl fcn_0054f4a0(char* a0, char* a1, unsigned char* a2)
 	Row_54f4a0 slot;
 	char buf[0x400];
 	int ret;
-	int delay;
-	float d;
 
 	ret = 0;
 	if (a1[2] == 6 || a1[2] == 7) {
@@ -42,10 +40,7 @@ void __cdecl fcn_0054f4a0(char* a0, char* a1, unsigned char* a2)
 			ret = (unsigned short) gm_RandomMod(3) + 1;
 		}
 	}
-	d = gm_GetEntitySkill(a1, 4) * 8.0f;
-	delay = -9 - (int) d;
-	delay -= gm_RandomMod(8) & 0xffff;
-	fcn_004ec2d0(a2, ret, delay);
+	fcn_004ec2d0(a2, ret, -9 - (int) (gm_GetEntitySkill(a1, 4) * 8.0f) - (gm_RandomMod(8) & 0xffff));
 	fcn_004c54c0(*(int*) (a1 + 4), *(int*) (a2 + 4), -0x14, 1);
 	*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
 	fcn_004c5620(-1, a0);

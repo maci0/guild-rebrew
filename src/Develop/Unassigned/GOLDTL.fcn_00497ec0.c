@@ -150,10 +150,10 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					cmd.f2 = 1;
 					if (!fcn_004a4bb0(a0, a1, a2, &cmd, &out, 1))
 						return 0;
-					need = fcn_0050d200(a1, cmd.f1);
-					if (p < need) {
-						rem = need - p;
-						if ((float) rem / (float) need < g_6628bc) {
+					a0 = fcn_0050d200(a1, cmd.f1);
+					if (p < a0) {
+						rem = a0 - p;
+						if ((float) rem / (float) a0 < g_6628bc) {
 							a3->kind = 0x12;
 							a3->f2 = rem;
 							return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);

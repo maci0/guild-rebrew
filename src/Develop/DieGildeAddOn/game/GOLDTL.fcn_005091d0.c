@@ -35,6 +35,7 @@ void __cdecl fcn_005091d0(int* pn, StatRow* rows)
 	unsigned char* p;
 	StatRow* q;
 	StatRow* r;
+	int off;
 
 	q = rows;
 	p = (unsigned char*) 0x7f4ca2;
@@ -57,14 +58,15 @@ void __cdecl fcn_005091d0(int* pn, StatRow* rows)
 	}
 	for (i = 0; i < *pn; i++) {
 		r = rows + i;
+		off = r->id * 0x21c;
 		sum = 0;
-		p = (unsigned char*) (r->id * 0x21c + 0x7f4d20);
+		p = (unsigned char*) (off + 0x7f4d20);
 		for (j = 0; j < 5; j++) {
 			sum += *p++;
 		}
 		r->v18 = (float) sum * 0.0007936508f;
-		r->vc = (float) *(unsigned char*) (r->id * 0x21c + 0x7f4cad) * 0.11111111f;
-		fcn_004e8b40(*(unsigned char*) (r->id * 0x21c + 0x7f4e06), tmp);
+		r->vc = (float) *(unsigned char*) (off + 0x7f4cad) * 0.11111111f;
+		fcn_004e8b40(*(unsigned char*) (off + 0x7f4e06), tmp);
 		v1 = (float) (tmp[2] & 0xff);
 		fcn_004e8b40(*(unsigned char*) (r->id * 0x21c + 0x7f4e09), tmp);
 		r->v10 = ((float) (tmp[2] & 0xff) + v1) * 0.07692308f;

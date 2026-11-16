@@ -39,8 +39,9 @@ void __cdecl fcn_004ad2e0(void)
 	v3 = *(int*) (idx * 4 + 0x664e18);
 	v4 = *(int*) (idx * 4 + 0x664e0c);
 	v5 = *(int*) (idx * 4 + 0x664e24);
-	v6 = *(int*) ((idx - 1) * 4 + 0x664e34);
-	fcn_004ad4d0(idx - 1);
+	idx--;
+	v6 = *(int*) (idx * 4 + 0x664e34);
+	fcn_004ad4d0(idx);
 	obj = fcn_004e9110(v4);
 	if (obj == 0) {
 		return;

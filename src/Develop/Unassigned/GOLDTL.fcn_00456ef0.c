@@ -52,9 +52,7 @@ void __cdecl fcn_00456ef0(char* o)
 	V456ef0 v2;
 	V456ef0 r;
 	float h;
-	float dx;
-	float dy;
-	float dz;
+	V456ef0 d;
 	float t;
 	Cam456ef0* cam;
 	float* base;
@@ -92,21 +90,21 @@ void __cdecl fcn_00456ef0(char* o)
 				r.y = v2.y * t + q[1];
 				r.z = v2.z * t + q[2];
 			} else {
-				dx = v1.x - q[0];
-				dy = v1.y - q[1];
-				dz = v1.z - q[2];
-				t = -((v1.y - h) / dy);
-				r.x = dx * t + v1.x;
-				r.y = dy * t + v1.y;
-				r.z = dz * t + v1.z;
+				d.x = v1.x - q[0];
+				d.y = v1.y - q[1];
+				d.z = v1.z - q[2];
+				t = -((v1.y - h) / d.y);
+				r.x = d.x * t + v1.x;
+				r.y = d.y * t + v1.y;
+				r.z = d.z * t + v1.z;
 			}
 			cam = (Cam456ef0*) g_6b8014;
-			dx = r.x - cam->x;
-			dy = r.y - cam->y;
-			dz = r.z - cam->z;
-			q[0] = dz * cam->m20 + dy * cam->m10 + dx * cam->m00 + cam->tx;
-			cam = (Cam456ef0*) g_6b8014; q[1] = dz * cam->m21 + dy * cam->m11 + dx * cam->m01 + cam->ty;
-			cam = (Cam456ef0*) g_6b8014; q[2] = dz * cam->m22 + dy * cam->m12 + dx * cam->m02 + cam->tz;
+			d.x = r.x - cam->x;
+			d.y = r.y - cam->y;
+			d.z = r.z - cam->z;
+			q[0] = d.z * cam->m20 + d.y * cam->m10 + d.x * cam->m00 + cam->tx;
+			cam = (Cam456ef0*) g_6b8014; q[1] = d.z * cam->m21 + d.y * cam->m11 + d.x * cam->m01 + cam->ty;
+			cam = (Cam456ef0*) g_6b8014; q[2] = d.z * cam->m22 + d.y * cam->m12 + d.x * cam->m02 + cam->tz;
 			q += 0x14;
 			i--;
 		} while (i != 0);

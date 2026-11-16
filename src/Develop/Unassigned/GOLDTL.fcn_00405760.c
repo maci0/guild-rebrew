@@ -12,17 +12,19 @@ void __cdecl fcn_00438b40(char* p, float* v);
 void __cdecl fcn_00405760(unsigned char* e)
 {
 	float v[4];
+	float x;
+	float y;
 	char* p;
 
 	if (e[0x110] == 0) {
 		return;
 	}
 	p = *(char**) (e + 0x34);
-	v[0] = *(float*) (p + 0x4c);
-	v[1] = *(float*) (p + 0x50);
-	v[2] = *(float*) (p + 0x54);
-	v[0] += *(float*) (p + 0x78);
-	v[1] += *(float*) (p + 0x7c);
+	x = *(float*) (p + 0x4c);
+	y = *(float*) (p + 0x50);
+	*(int*) &v[2] = *(int*) (p + 0x54);
+	v[0] = x + *(float*) (p + 0x78);
+	v[1] = y + *(float*) (p + 0x7c);
 	v[2] += *(float*) (p + 0x80);
 	v[0] = *(float*) (e + 0x114) - v[0];
 	v[1] = *(float*) (e + 0x118) - v[1];
