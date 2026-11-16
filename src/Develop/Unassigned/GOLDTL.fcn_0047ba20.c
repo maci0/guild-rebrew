@@ -44,8 +44,8 @@ int __cdecl fcn_0047ba20(int x, int y, char* a2, float scale)
 	oy = 0.0f;
 	if (a2 == 0)
 		return 0;
-	w = *(unsigned short*) (a2 + 2);
 	h = *(unsigned short*) (a2 + 6);
+	w = *(unsigned short*) (a2 + 2);
 	if (g_772604 >= 0x400) {
 		fcn_0047c560(0, 0, 0);
 		if (g_772604 >= 0x400)

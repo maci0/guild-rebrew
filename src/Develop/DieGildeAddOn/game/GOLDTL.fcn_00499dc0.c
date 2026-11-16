@@ -80,7 +80,7 @@ int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)
 			sum += *(unsigned char*) q;
 		}
 		q += 0x21c;
-	} while (q < (char*) 0x85a265);
+	} while ((int) q < 0x85a265);
 	roll = (unsigned short) gm_RandomMod(4);
 	if ((float) roll + (float) sum / (float) count < 6.0f) {
 		goto failed;

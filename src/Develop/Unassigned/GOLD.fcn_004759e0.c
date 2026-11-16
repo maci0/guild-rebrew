@@ -8,6 +8,7 @@ int __cdecl fcn_004759e0(int id, int* out, int* out2)
 	int slot;
 	char* rec;
 	char* font;
+	char* sub;
 	int kind;
 	unsigned short w;
 
@@ -23,19 +24,17 @@ int __cdecl fcn_004759e0(int id, int* out, int* out2)
 			if (font != 0) {
 				kind = *(int*) (rec + 0x18);
 				if (kind == 8 || kind == 5) {
-					font = font + *(int*) (font + *(int*) (rec + 0x78) * 4 + 0x45);
-					if (font != 0) {
-						w = *(unsigned short*) (font + 6);
+					sub = font + *(int*) (font + *(int*) (rec + 0x78) * 4 + 0x45);
+					if (sub != 0) {
+						w = *(unsigned short*) (sub + 6);
 						*out = w;
-						w = *(unsigned short*) (font + 0xa);
+						w = *(unsigned short*) (sub + 0xa);
 						*out2 = w;
 					}
 					return 1;
 				}
-				w = *(unsigned short*) (font + 0x2c);
-				*out = w;
-				w = *(unsigned short*) (font + 0x2e);
-				*out = w;
+				*out = *(unsigned short*) (font + 0x2c);
+				*out = *(unsigned short*) (font + 0x2e);
 				return 1;
 			}
 		}

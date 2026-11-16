@@ -24,6 +24,7 @@ int __cdecl fcn_0050bff0(unsigned char* a0)
 	unsigned int id2;
 	unsigned char* def;
 	unsigned char* def2;
+	double ratio;
 
 	chain_count = 0;
 	match_count = 0;
@@ -71,5 +72,7 @@ int __cdecl fcn_0050bff0(unsigned char* a0)
 		i += 1;
 		slot += 1;
 	}
-	return (int) ((double) match_count / (double) chain_count * g_662cf8);
+	ratio = (double) chain_count;
+	ratio = (double) match_count / ratio;
+	return (int) (ratio * g_662cf8);
 }

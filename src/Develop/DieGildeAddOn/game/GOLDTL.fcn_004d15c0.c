@@ -52,7 +52,7 @@ char __cdecl fcn_004d15c0(char* a0, char* a1)
 					}
 				}
 			} else {
-				if (memcmp((char*) g_7746a0, "sp_ESCAPE", 10) == 0) {
+				if (strcmp((char*) g_7746a0, "sp_ESCAPE") == 0) {
 					fcn_004d1250(a0, a1, (char*) g_7746a0);
 					r = 1;
 					goto end;

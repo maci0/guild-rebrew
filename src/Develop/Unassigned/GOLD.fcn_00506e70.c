@@ -74,7 +74,7 @@ void __cdecl fcn_00506e70(unsigned short* a0, char* a1, int a2)
 {
 	char buf[0x800];
 	Packet pkt;
-	unsigned char ui_pos, ui_b0a, ui_b0b, ui_b34; int ui_f08, ui_f0c, ui_f14, ui_f18, ui_f1c, ui_f20, ui_f24, ui_f28, ui_f2c, ui_f30;
+	unsigned char ui_pos, ui_b0a, ui_b0b, ui_b34; int ui_f08, ui_f0c, ui_f14, ui_f30;
 	unsigned char* list[128];
 	unsigned char* stop;
 	unsigned char* p;
@@ -178,25 +178,25 @@ void __cdecl fcn_00506e70(unsigned short* a0, char* a1, int a2)
 		ui_f08 = 0x10;
 		ui_f14 = 3;
 		ui_f30 = 0;
-		ui_f20 = 0;
-		ui_f2c = 0;
-		ui_f28 = 0;
-		ui_f18 = 0;
+		ui_f30 = 0;
+		ui_f30 = 0;
+		ui_f30 = 0;
+		ui_f30 = 0;
 		ui_b0b = 0;
 		ui_b0a = 0;
 		ui_f0c = -1;
-		ui_f1c = 0;
-		ui_f24 = 0;
+		ui_f30 = 0;
+		ui_f30 = 0;
 		ui_pos = (unsigned char) i;
 		fcn_004c4510((char*) a0, *(int*) (a0 + 2));
 		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (8 - (*(int*) 0xa68d2c))), (char*) &ui_pos);
 		fcn_004c4570(2, 1, (unsigned short) ((int) a0 + (10 - (*(int*) 0xa68d2c))), (char*) &ui_f08);
 		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x194 - (*(int*) 0xa68d2c))), (char*) &ui_f14);
 		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x198 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x19c - (*(int*) 0xa68d2c))), (char*) &ui_f20);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a0 - (*(int*) 0xa68d2c))), (char*) &ui_f2c);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a4 - (*(int*) 0xa68d2c))), (char*) &ui_f28);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a8 - (*(int*) 0xa68d2c))), (char*) &ui_f18);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x19c - (*(int*) 0xa68d2c))), (char*) &ui_f30);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a0 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a4 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a8 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
 		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (0x1b0 - (*(int*) 0xa68d2c))), (char*) &ui_b0b);
 		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (0x1b1 - (*(int*) 0xa68d2c))), (char*) &ui_b0a);
 		fcn_004c5420(*(int*) (a0 + 2), 0x1c8, 4, 0x800000, 0);
@@ -205,10 +205,10 @@ void __cdecl fcn_00506e70(unsigned short* a0, char* a1, int a2)
 		for (i = 0; i < 8; i++) {
 			fcn_004c4570(4, 1, (unsigned short) ((i * 4 + 0x5c - (*(int*) 0xa68d2c)) + (int) a0), (char*) &ui_f0c);
 		}
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x24 - (*(int*) 0xa68d2c))), (char*) &ui_f1c);
+		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x24 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
 		ui_f0c = 0;
 		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x2c - (*(int*) 0xa68d2c))), (char*) &ui_f0c);
-		fcn_004c4570(2, 1, (unsigned short) ((int) a0 + (0x28 - (*(int*) 0xa68d2c))), (char*) &ui_f24);
+		fcn_004c4570(2, 1, (unsigned short) ((int) a0 + (0x28 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
 		fcn_004c5360();
 		fcn_004c5480(*(int*) (a0 + 2), 0x7c, -*(float*) (a0 + 0x3e));
 		h = gm_RandomQuadratic();

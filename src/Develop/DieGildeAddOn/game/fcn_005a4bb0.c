@@ -30,7 +30,6 @@ void __cdecl fcn_005a4bb0(char* o)
 {
     char* dlg;
     int have;
-    int idx;
     int r;
     int it1;
     int it2;
@@ -46,8 +45,7 @@ void __cdecl fcn_005a4bb0(char* o)
     io_AppendText((void*)0x18e5);
     have = gm_QueryEntitySum(*(int*)(o + 0x5d), g_773d75);
     d2_SetForm((int)dlg, 2);
-    idx = *(u16*)(g_773d75 * 0x2f4 + 0x8680b4);
-    r = io_AppendText((void*)0x18e6, (void*)(2 * idx + 0x9a8));
+    r = io_AppendText((void*)0x18e6, (void*)(2 * *(u16*)(g_773d75 * 0x2f4 + 0x8680b4) + 0x9a8));
     it1 = fcn_00472250((int)dlg, 2, r);
     it2 = fcn_00472250((int)dlg, 2, r + 1);
     fcn_00472380(it1, 5, 0x28, *(int*)(o + 0x65));

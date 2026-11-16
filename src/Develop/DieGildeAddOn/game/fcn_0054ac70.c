@@ -108,9 +108,9 @@ void __cdecl fcn_0054ac70(char* e)
 		*(int*) (m + 0x44) = *(int*) (e + 0xbc);
 		*(int*) (m + 0x48) = *(int*) (e + 0xc0);
 		*(int*) (m + 0x3c) = *(int*) (e + 0xb4);
-		*(int*) (m + 0x40) = *(int*) (e + 0xb8);
 		*(unsigned char*) (m + 0x30) =
 			(unsigned char) ((*(int*) (e + 0xc0) != -1) + 5);
+		*(int*) (m + 0x40) = *(int*) (e + 0xb8);
 		*(int*) (m + 0x18) = g_7f4c00;
 		*(unsigned char*) (m + 8) = 2;
 		*(unsigned char*) (m + 0x26) = 0xa2;

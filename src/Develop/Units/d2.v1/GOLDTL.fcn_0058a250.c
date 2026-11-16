@@ -60,12 +60,12 @@ void __cdecl fcn_0058a250(int a0)
 	for (i = 0; i < 20; i++) {
 		q[i] = 0;
 	}
-	for (i = 7; i < 15; i++) {
-		q[i] = -1;
-	}
 	q[0] = 1;
 	q[1] = 0x400;
 	q[4] = 6;
+	for (i = 7; i < 15; i++) {
+		q[i] = -1;
+	}
 	v6 = (char*) fcn_005cd440(q, (char*) *(int*) 0x14b5310, 0, 0);
 	if (v6 == 0) {
 		fcn_00532ef0();

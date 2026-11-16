@@ -36,7 +36,8 @@ void __cdecl fcn_0043eef0(char* buffer, char* desc)
 	*(unsigned int*) 0xfc2560 = off * s;
 	*(unsigned int*) 0xfbbd10 = off << 6;
 	*(unsigned int*) 0xfbb874 = *(unsigned int*) (desc + 0xc) * 2;
-	for (m = (unsigned char*) desc + 0x15; y < *(unsigned int*) (desc + 0x10); y++, m += 5) {
+	for (; y < *(unsigned int*) (desc + 0x10); y++) {
+		m = (unsigned char*) desc + 0x15 + y * 5;
 		for (x = 0; x < *(unsigned int*) (desc + 0x10); x++) {
 			off = (((((*(int*) (desc + 8) + y) * s) & 0x3f) << 6)
 			    + (((*(int*) (desc + 4) + x) * s) & 0x3f)) << 2;

@@ -110,10 +110,10 @@ void __cdecl fcn_0043ef20(char* a0)
 			char* e;
 
 			e = (char*) it.item;
-			f27 = *(float*) (e + 0x94) * g_6628cc;
-			*(float*) (a0 + 0x90) = *(float*) (e + 0x5c) * g_662c30;
-			*(float*) (a0 + 0x94) = *(float*) (e + 0x60) * g_662c30;
-			*(float*) (a0 + 0x98) = *(float*) (e + 0x64) * g_662c30;
+			f27 = *(float*) (e + 0x94) * 0.5f;
+			*(float*) (a0 + 0x90) = *(float*) (e + 0x5c) * 0.003921569f;
+			*(float*) (a0 + 0x94) = *(float*) (e + 0x60) * 0.003921569f;
+			*(float*) (a0 + 0x98) = *(float*) (e + 0x64) * 0.003921569f;
 			fcn_00455140(e, g_662d40, u);
 			grad = *(float*) (a0 + 0x78) * *(float*) (a0 + 0x84);
 			grad += grad;

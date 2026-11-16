@@ -124,7 +124,7 @@ unsigned int __cdecl fcn_00539930(int a0)
 	fcn_00472640(buttons[0], 0);
 	if (fcn_005373e0(0x539930, 0x24087) != 0) {
 		do {
-			if (v36 + 0x5dc < g_6b7fac || v4 != 0) {
+			if (g_6b7fac > v36 + 0x5dc || v4 != 0) {
 				int v6;
 				v4 = 1;
 				g_7725c8 = 1;

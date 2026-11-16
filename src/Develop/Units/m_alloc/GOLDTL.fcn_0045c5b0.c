@@ -75,8 +75,8 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 	char buf1[0x40];
 	char buf2[0x40];
 
-	c24 = (unsigned char) flags2 & 0xf;
 	c25 = (unsigned char) flags2 >> 4;
+	c24 = (unsigned char) flags2 & 0xf;
 	if (((unsigned char) flags & 0x40) != 0 && (c.a < 0xff || c.c0)) {
 		c26 = 1;
 	} else {

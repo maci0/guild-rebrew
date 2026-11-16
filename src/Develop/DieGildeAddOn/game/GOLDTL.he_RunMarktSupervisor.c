@@ -226,9 +226,9 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		q = (char*) fcn_00502cd0(*(int*) (ent + 0x14), 1, 0,
 		    rec.id);
 		if (q != 0) {
-			up.n = gm_GetMsgField(ent, q);
+			ub.n = gm_GetMsgField(ent, q);
 		} else {
-			up.n = 0;
+			ub.n = 0;
 		}
 		gm_RandomMod(10);
 		g = (float) (rec.f20 * g_665ec8 * ((double) v * g_665dd0));
@@ -241,11 +241,11 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 			t = (int) rec.f2c;
 			rec.f2c = rec.f2c - (float) t;
 		}
-		if (up.n != t) {
-			t = up.n;
+		if (ub.n != t) {
+			t = ub.n;
 		}
-		if (up.n < t) {
-			t = up.n;
+		if (ub.n < t) {
+			t = ub.n;
 		}
 		if (t != 0) {
 			rec.f14 = rec.f14 + t;
@@ -253,13 +253,13 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 			if (rec.f24 < g_6629c8) {
 				rec.f24 = 1.0f;
 			}
-			up.n = (int) (t * g_664468);
-			if (up.n < 1) {
-				up.n = 1;
+			ub.n = (int) (t * g_664468);
+			if (ub.n < 1) {
+				ub.n = 1;
 			}
 			if (g_7747b0 < 0x80) {
 				fcn_004c51f0(-1, *(int*) (ent + 2),
-				    rec.id, up.n, g_773d75, 0);
+				    rec.id, ub.n, g_773d75, 0);
 			}
 		} else {
 			rec.f24 = rec.f24 + g * g_662948;
@@ -328,14 +328,14 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 			g = (float) (rec.f20 * g_665ec8 * ((double) v * g_665dd0));
 			rec.f2c = rec.f2c + g;
 			if (rec.f2c < g_6628a0) {
-				up.n = 0;
+				ub.n = 0;
 			} else {
-				up.n = (int) rec.f2c;
-				rec.f2c = rec.f2c - (float) up.n;
+				ub.n = (int) rec.f2c;
+				rec.f2c = rec.f2c - (float) ub.n;
 			}
 			if (ub.n != 0) {
-				if (up.n < ub.n) {
-					ub.n = up.n;
+				if (ub.n < ub.n) {
+					ub.n = ub.n;
 				}
 				if (ub.n > 0) {
 					if (ub.n < 1) {
@@ -398,8 +398,8 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 			ub.n = gm_eval_SlotVoll(ent,
 			    ((MarktSlot*) scratch)->id, (int) uf.f);
 			uf.f = (float) ub.n;
-			up.n = gm_GetMsgField(ent, q);
-			if (up.n > ((MarktSlot*) scratch)->f20 * g_662908) {
+			ub.n = gm_GetMsgField(ent, q);
+			if (ub.n > ((MarktSlot*) scratch)->f20 * g_662908) {
 				fcn_004c51f0(*(int*) (ent + 2), -1,
 				    ((MarktSlot*) scratch)->id,
 				    (int) uf.f, g_773d75, 0);

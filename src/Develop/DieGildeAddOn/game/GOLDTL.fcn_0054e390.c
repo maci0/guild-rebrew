@@ -69,7 +69,7 @@ void __cdecl fcn_0054e390(char* e)
 			int i;
 
 			own = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
-			if (own == 0 || *(short*) (own + 0x27) == -1) {
+			if (own == 0 || *(unsigned short*) (own + 0x27) == 0xffff) {
 				goto label_54e513;
 			}
 			p = e + 0x8c;

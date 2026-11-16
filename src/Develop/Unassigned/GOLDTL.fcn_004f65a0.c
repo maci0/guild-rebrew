@@ -22,10 +22,10 @@ void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
 	int id;
 	*out_count = 0;
 	for (i = 0; i < 0x300; i++) {
-		groups[i] = 0;
+		counts[i] = 0;
 	}
 	for (i = 0; i < 0x300; i++) {
-		counts[i] = 0;
+		groups[i] = 0;
 	}
 	n = 0;
 	group_count = 0;

@@ -26,7 +26,6 @@ void __cdecl fcn_004d06d0(void)
 	unsigned short code;
 
 	v4 = *(unsigned int*) (*(int*) &g_67a370 + 0xb0);
-	count = 0;
 	code = 0x23;
 	i = 0;
 	*(int*) &g_7746a4 = 0;
@@ -51,6 +50,7 @@ void __cdecl fcn_004d06d0(void)
 			g_7725c4 = 0;
 		}
 		if (*(int*) &g_7746a4 != 0) {
+			count = 0;
 			for (rec = (int*) &g_7e4260; rec < (int*) 0x7e42dc; rec++) {
 				i = *rec;
 				if (i != 0 && *(char*) (i + 0x188) != 0) {

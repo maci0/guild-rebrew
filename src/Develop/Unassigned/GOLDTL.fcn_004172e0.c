@@ -62,7 +62,6 @@ unsigned char __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, unsigned int t)
 {
     fcn_004172e0_Particle* p;
     int i;
-    unsigned int cur;
     double dt;
 
     i = 0; if (e->f20 != 0) {
@@ -86,9 +85,8 @@ unsigned char __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, unsigned int t)
     p = e->particles;
     for (i = 0; i < e->count; i++, p++) {
         if (p->flags & 1) {
-            cur = p->f30;
+            dt = (double) (t - p->f30) * g_662a68;
             p->f30 = t;
-            dt = (double) (t - cur) * g_662a68;
             p->f38 = dt * p->f00 + p->f38;
             p->f3c = dt * p->f04 + p->f3c;
             p->f40 = dt * p->f08 + p->f40;

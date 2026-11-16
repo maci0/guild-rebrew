@@ -37,6 +37,8 @@ unsigned short __cdecl gm_RandomMod(int);
 /* ADDRESS: GOLD 0x00544a90 */
 void __cdecl fcn_00544a90(char* e)
 {
+	char* fill_dst;
+	int fill_len;
 	unsigned char* a;
 	unsigned char* b;
 	unsigned char* pa;
@@ -200,7 +202,25 @@ void __cdecl fcn_00544a90(char* e)
 			v = fcn_004ef6b0(*(int*) (rec + 0x65), hit);
 			fcn_004f2a10(0, (char*) rec, *(int*) hit, v);
 		}
-		memset(msg, 0, sizeof(msg));
+		fill_dst = msg;
+		fill_len = sizeof(msg);
+		__asm {
+			mov edi, fill_dst
+			mov ebx, fill_len
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short fill_done
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		fill_done:
+			add ecx, ebx
+			rep stosb
+		}
 		*(int*) (msg + 0x34) = *(int*) (a + 4);
 		*(int*) (msg + 0x38) = *(int*) (b + 4);
 		*(int*) (msg + 0x18) = g_7f4c00.a;

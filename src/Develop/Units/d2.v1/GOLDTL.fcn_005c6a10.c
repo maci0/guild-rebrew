@@ -59,11 +59,11 @@ unsigned int __cdecl fcn_005c6a10(unsigned int a0, unsigned int a1)
 		if (!slot->ent)
 			continue;
 		g_775334++;
-		for (list = (int*) 0x7e4260; list < (int*) 0x7e42e0; list++) {
+		for (list = (int*) 0x7e4260; (int) list < 0x7e42e0; list++) {
 			if (*list == slot->ent)
 				break;
 		}
-		if (list >= (int*) 0x7e42e0) {
+		if ((int) list >= 0x7e42e0) {
 			slot->ent = 0;
 			if (slot->a4 != -1) {
 				fcn_0046b2b0(slot->a4);
@@ -121,7 +121,7 @@ present:
 			item = gm_NextEntityQueryMatch();
 		}
 	}
-	for (list = (int*) 0x7e4260; list < (int*) 0x7e42e0; list++) {
+	for (list = (int*) 0x7e4260; (int) list < 0x7e42e0; list++) {
 		if (!*list)
 			continue;
 		k = fcn_00507c30(*(unsigned char*) (*list + 0x165));

@@ -11,9 +11,9 @@ void __cdecl fcn_004730d0(int index, char* owner)
 	char* p;
 	int offset;
 	int i;
+	table = (char**) g_006ed964;
 	offset = index * 0x2ec;
 	record = (char*) g_00f8f080 + offset;
-	table = (char**) g_006ed964;
 	for (i = 0; i < 0x2ff; i++) {
 		if (table[i] == record) {
 			if (i == 0x2ff) {

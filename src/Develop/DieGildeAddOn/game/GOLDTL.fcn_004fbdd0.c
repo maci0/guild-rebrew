@@ -53,9 +53,9 @@ void __cdecl fcn_004fbdd0(void)
 	if (g_7f4c00 % 4 != 0) {
 		return;
 	}
-	sum0 = (g_99ed18 + g_99ed2c + g_99ed40 + g_99ed54) * g_6628bc;
-	sum1 = (g_99ed10 + g_99ed24 + g_99ed38 + g_99ed4c) * g_6628bc;
 	sum2 = (g_99ed14 + g_99ed28 + g_99ed3c + g_99ed50) * g_6628bc;
+	sum1 = (g_99ed10 + g_99ed24 + g_99ed38 + g_99ed4c) * g_6628bc;
+	sum0 = (g_99ed18 + g_99ed2c + g_99ed40 + g_99ed54) * g_6628bc;
 	sum3 = (g_99ed1c + g_99ed30 + g_99ed44 + g_99ed58) * g_6628bc;
 	lit = fcn_004fc520();
 	id0 = 0x1c11;

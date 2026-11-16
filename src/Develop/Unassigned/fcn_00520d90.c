@@ -53,7 +53,6 @@ extern ApEvent520d90 g_7dcae0[256];
 /* ADDRESS: GOLDTL 0x00520d90 */
 int __cdecl fcn_00520d90(void* stream)
 {
-	Unit520d90* u;
 	int i;
 	int k;
 	int count;
@@ -71,39 +70,38 @@ int __cdecl fcn_00520d90(void* stream)
 	if (vfs_fwrite(&tmp, 4, 1, stream) <= 0)
 		return 0;
 	for (i = 0; i < 1024; i++) {
-		u = &g_77e980[i];
-		if (u->kind == 0)
+		if (g_77e980[i].kind == 0)
 			continue;
-		if (vfs_fwrite(&u->kind, 1, 1, stream) <= 0)
+		if (vfs_fwrite(&g_77e980[i].kind, 1, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&u->f04, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&g_77e980[i].f04, 4, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&u->f08, 2, 1, stream) <= 0)
+		if (vfs_fwrite(&g_77e980[i].f08, 2, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&u->f0c, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&g_77e980[i].f0c, 4, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&u->f10, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&g_77e980[i].f10, 4, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(u->f14, 0x30, 1, stream) <= 0)
+		if (vfs_fwrite(g_77e980[i].f14, 0x30, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(u->f44, 0xe, 1, stream) <= 0)
+		if (vfs_fwrite(g_77e980[i].f44, 0xe, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(u->f52, 0xe, 1, stream) <= 0)
+		if (vfs_fwrite(g_77e980[i].f52, 0xe, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(u->f60, 0xe, 1, stream) <= 0)
+		if (vfs_fwrite(g_77e980[i].f60, 0xe, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&u->f70, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&g_77e980[i].f70, 4, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&u->f78, 1, 1, stream) <= 0)
+		if (vfs_fwrite(&g_77e980[i].f78, 1, 1, stream) <= 0)
 			return 0;
 		for (k = 0; k < 8; k++) {
-			if (vfs_fwrite(&u->f8c[k], 4, 1, stream) <= 0)
+			if (vfs_fwrite(&g_77e980[i].f8c[k], 4, 1, stream) <= 0)
 				return 0;
 		}
-		if (u->blob != 0 && u->blob_len != 0) {
-			if (vfs_fwrite(&u->blob_len, 4, 1, stream) <= 0)
+		if (g_77e980[i].blob != 0 && g_77e980[i].blob_len != 0) {
+			if (vfs_fwrite(&g_77e980[i].blob_len, 4, 1, stream) <= 0)
 				return 0;
-			if (vfs_fwrite(u->blob, u->blob_len, 1, stream) <= 0)
+			if (vfs_fwrite(g_77e980[i].blob, g_77e980[i].blob_len, 1, stream) <= 0)
 				return 0;
 		}
 		else {
@@ -111,7 +109,7 @@ int __cdecl fcn_00520d90(void* stream)
 			if (vfs_fwrite(&tmp, 4, 1, stream) <= 0)
 				return 0;
 		}
-		if (vfs_fwrite(u->f0ac, 0xa0, 1, stream) <= 0)
+		if (vfs_fwrite(g_77e980[i].f0ac, 0xa0, 1, stream) <= 0)
 			return 0;
 	}
 	count = 0;
