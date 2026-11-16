@@ -67,8 +67,8 @@ int __cdecl fcn_004770a0(int* src, int flags)
 	}
 	width = tex[1];
 	height = tex[2];
-	rw = width;
 	rh = height;
+	rw = width;
 	if (g_67d91c != 0) {
 		n = 0;
 		do {

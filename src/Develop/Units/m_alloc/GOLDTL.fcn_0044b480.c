@@ -242,8 +242,8 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 	ca = (float) cos(*(double*) 0x662cc8);
 	for (i = 0; i < obj->anzahl_punkte; i++) {
 		off = i * 0x18;
-		ax = *(float*) ((char*) hdr.poi + off);
 		ay = *(float*) ((char*) hdr.poi + off + 4);
+		ax = *(float*) ((char*) hdr.poi + off);
 		az = *(float*) ((char*) hdr.poi + off + 8);
 		fu = cb * ay - sb * az;
 		fv = cb * az + sb * ay;

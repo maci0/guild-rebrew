@@ -57,9 +57,9 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 
 	v7 = *(unsigned int*) (g_67a370 + 0xb0);
 	memset(&ev, 0, sizeof(ev));
-	v4 = a1;
-	v2 = *(char*) (a1 + 0x1c4);
 	ev.ent = *(unsigned int*) (a1 + 4);
+	v2 = *(char*) (a1 + 0x1c4);
+	v4 = a1;
 	ev.kind = 2;
 	ev.target = *(unsigned int*) (a2 + 4);
 	if (v2 == 1 || v2 == 2 || v2 == 3)

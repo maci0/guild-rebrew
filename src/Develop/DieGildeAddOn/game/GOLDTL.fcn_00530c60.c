@@ -184,16 +184,14 @@ after:
 						}
 						k += 1;
 					}
-					if (*(char*) (ent + 0x180) != 0x16) {
-						if (itemdef != 0) {
+					if (*(char*) (ent + 0x180) == 0x16) {
+						strcpy(name, "Training_Allgemein");
+					} else {
+						if (itemdef == 0) {
+							fcn_00511040((int) *a0, name);
+						} else {
 							strcpy(name, itemdef + 1);
 						}
-						else {
-							fcn_00511040((int) *a0, name);
-						}
-					}
-					else {
-						strcpy(name, "Training_Allgemein");
 					}
 					sprintf(path, "%slocations\\%s\\%s%i_%s.esc", "x:\\engine\\gfx\\scripts\\",
 					        name, job, k, name);

@@ -163,8 +163,8 @@ label_4e526f:
 			ent = *(int*) (g_772f24 + 4);
 			for (i = 0; i < (int) s[0x30]; i++) {
 				if (*(int*) (s + 0x34 + i * 4) == ent) {
-					g_772f34 = g_68bfbc + g_772f30;
 					c1 = ((rec35c*) g_9b0e20)[i];
+					g_772f34 = g_68bfbc + g_772f30;
 					g_772f38 = 0;
 					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
 					c1.f8 = 1;

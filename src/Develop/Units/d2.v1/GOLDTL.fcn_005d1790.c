@@ -77,10 +77,10 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 	char *q;
 	char *r;
 
-	ok = 0;
+	r1 = -1;
 	r5 = -1;
 	r3 = -1;
-	r1 = -1;
+	ok = 0;
 	r4 = -1;
 	r2 = -1;
 	msg = g_7e46ac;

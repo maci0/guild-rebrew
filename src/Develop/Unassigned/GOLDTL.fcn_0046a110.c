@@ -137,8 +137,8 @@ void __cdecl fcn_0046a110(int a1)
 			dx = *(int*) (ent + 0x10);
 			dy = *(int*) (ent + 0x14);
 			left = *(int*) (ent + 0x28);
-			right = *(int*) (ent + 0x2c);
 			top = *(int*) (ent + 0x30);
+			right = *(int*) (ent + 0x2c);
 			bottom = *(int*) (ent + 0x34);
 			child = *(char**) (ent + 0x40);
 			if (child) {

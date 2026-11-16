@@ -41,7 +41,7 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 		if ((unsigned char) a2 == 2) {
 			strcat(a4, "'s");
 		}
-		return 1;
+		goto fail_1;
 	}
 	switch (a3 & 0xff) {
 	case 1:
@@ -54,7 +54,7 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 		} else {
 			strcat(a4, "s");
 		}
-		return 1;
+		goto fail_1;
 	case 2:
 		if (!*(unsigned char*) (p + 0xd)) {
 			sprintf(a4, "%s", (char*) p + 0x30);
@@ -63,7 +63,7 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 		} else {
 			sprintf(a4, "%s %s %s", fcn_0042c3b0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30, (char*) p + 0x40);
 		}
-		return 1;
+		goto fail_1;
 	case 3:
 		if (*(unsigned char*) (p + 0x166)) {
 			if (p[0x40]) {
@@ -84,7 +84,7 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 		} else {
 			strcat(a4, "s");
 		}
-		return 1;
+		goto fail_1;
 	case 4:
 		if (*(unsigned char*) (p + 0x164)) {
 			sprintf(a4, "%s %s", fcn_0042c3b0(g_14a5320[(p[9] != 0 ? 0x18f : 0x130) + *(unsigned char*) (p + 0x164)], 1, 4), (char*) p + 0x30);
@@ -101,17 +101,17 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 		} else {
 			strcat(a4, "s");
 		}
-		return 1;
+		goto fail_1;
 	case 5:
 		sprintf(a4, "%s", fcn_0042c3b0(g_14a5320[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
-		return 1;
+		goto fail_1;
 	case 6:
 		if (p[0x40]) {
 			strcpy(a4, (char*) p + 0x40);
 		} else {
 			strcpy(a4, (char*) p + 0x30);
 		}
-		return 1;
+		goto fail_1;
 	case 7:
 		if ((unsigned char) a2 == 2) {
 			if (ENDS_APOSTROPHE((char*) p + 0x40)) {
@@ -130,7 +130,7 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 		} else {
 			sprintf(a4, "%s", (char*) p + 0x30);
 		}
-		return 1;
+		goto fail_1;
 	case 8:
 		if (*(unsigned char*) (p + 0xd)) {
 			strcpy((char*) b3, fcn_0042c3b0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], a2 & 0xff, 4));
@@ -152,7 +152,7 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 		} else {
 			sprintf(a4, "%s %s", (char*) b3, (char*) b1);
 		}
-		return 1;
+		goto fail_1;
 	case 9:
 		if (*(unsigned int*) (p + 0x1cc) & 0x3e00) {
 			if (*(unsigned int*) (p + 0x1cc) & 0x1000) {
@@ -185,7 +185,9 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 			strcpy((char*) b1, (char*) p + 0x30);
 		}
 		sprintf(a4, "%s %s", (char*) (i != 0 ? b2 : b3), (char*) b1);
-		return 1;
+		goto fail_1;
 	}
+	goto fail_1;
+fail_1:
 	return 1;
 }

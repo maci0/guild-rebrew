@@ -141,9 +141,7 @@ read_pixels:
 		goto close_stream;
 	}
 	vfs_fseek(f, bpp24 ? 0x36 : bih.biClrUsed * 4 + 0x36, 0);
-	if (bih.biCompression != 1) {
-		vfs_ReadData(pixels, bpr, abs(bih.biHeight), f);
-	} else {
+	if (bih.biCompression == 1) {
 		row = 0;
 		col = 0;
 		while (row < abs(bih.biHeight)) {
@@ -168,6 +166,8 @@ read_pixels:
 				col += pair[1];
 			}
 		}
+	} else {
+		vfs_ReadData(pixels, bpr, abs(bih.biHeight), f);
 	}
 	if (bpp24) {
         for (i = 0; i < abs(bih.biHeight) * bih.biWidth; i++) {

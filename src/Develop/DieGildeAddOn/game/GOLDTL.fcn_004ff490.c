@@ -43,7 +43,7 @@ void __cdecl fcn_004ff490(char* a0)
 	int extra;
 	Time t;
 	int mode;
-	char pkt[0x114];
+	char pkt[0x110];
 	float f;
 
 	if ((unsigned char) a0[2] >= 10) {

@@ -53,8 +53,8 @@ int __cdecl fcn_0047d2a0(char* e)
 			f = (10.0f - (float) d * 0.5f) * 0.1f;
 			if ((float) (signed char) g_90e0a0[i][*(unsigned short*) e] * f < bestscore) {
 				if (fcn_0050f980(i, (int) *(unsigned short*) e, 1) < 34.0f) {
-					best = i;
 					bestscore = (float) (signed char) g_90e0a0[i][*(unsigned short*) e] * f;
+					best = i;
 				}
 			}
 		}

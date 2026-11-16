@@ -90,10 +90,10 @@ void __cdecl fcn_00541620(void)
 	double dbl;
 
 	b200 = 0;
-	e1ec = 0;
+	a7 = 0;
 	f1e8 = 0;
 	g1f4 = 0;
-	a7 = 0;
+	e1ec = 0;
 	*(int*) (char*) &g_7e2700 = 0;
 	if (g_6a3420 != 0) {
 		win = (unsigned char*) fcn_004730c0(0, 0, g_1040494, g_1040490, "BLACK", 0x1e, 1);

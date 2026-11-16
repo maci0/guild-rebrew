@@ -80,6 +80,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	float lo;
 	float hi;
 
+	nslots = 0;
 	removed = 0;
 	others = 0;
 	total = 0;
@@ -98,7 +99,6 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	}
 	base = g_entity_type_table + (int) (*a0) * 0x24d;
 	p = (unsigned short*) (base + 0x23);
-	nslots = 0;
 	for (i = 0; i < 0x40; i++) {
 		if (nslots >= 0x20) {
 			break;

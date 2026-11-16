@@ -31,8 +31,8 @@ float __cdecl fcn_00413d10(float* pos)
 							acc = acc + height;
 						}
 					}
-					off = off + width;
 					k = k + 1;
+					off = off + width;
 				} while (k < 4);
 				return acc * *(float*) 0x662a38;
 			}

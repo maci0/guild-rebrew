@@ -138,7 +138,17 @@ int __cdecl fcn_0059c000(char* a0)
 				rows = (int*) 0x7798c0;
 				for (k = 0; k < count; k++) {
 					if (g_67d370 == *(int*) (0x779194 + k * 0x58)) {
-						if (any) {
+						if (any == 0) {
+							p = (int*) 0x7e30d0;
+							do {
+								if (*p == 0xffff)
+									break;
+								row = *(char**) (*p * 0x21c + 0x7f4e1c);
+								if (row && (*row == 4) && (*(int*) (row + 0x10) == *(int*) (a0 + 1)) && (*(unsigned short*) (row + 0xac) == *(unsigned int*) (0x779160 + k * 0x58)))
+									*(char*) (*p * 0x21c + 0x7f4e28) = 1;
+								p += 10;
+							} while ((int) p < 0x7e35d0);
+						} else {
 							found = fcn_005463a0(2, 0, 4, 3, *(unsigned int*) (a0 + 1));
 							while (found) {
 								if (*(unsigned short*) (found + 0xac) == *rows)
@@ -184,16 +194,6 @@ located:
 							} while ((int) p < 0x7e35d0);
 							if (!*(int*) (found + 0x70))
 								*(int*) (found + 0x70) = 1;
-						} else {
-							p = (int*) 0x7e30d0;
-							do {
-								if (*p == 0xffff)
-									break;
-								row = *(char**) (*p * 0x21c + 0x7f4e1c);
-								if (row && (*row == 4) && (*(int*) (row + 0x10) == *(int*) (a0 + 1)) && (*(unsigned short*) (row + 0xac) == *(unsigned int*) (0x779160 + k * 0x58)))
-									*(char*) (*p * 0x21c + 0x7f4e28) = 1;
-								p += 10;
-							} while ((int) p < 0x7e35d0);
 						}
 					}
 					ep = (int*) (0x779164 + k * 0x58);
@@ -279,11 +279,11 @@ nextcand:
 					if (!*(int*) (0x779164 + k * 0x58 + j * 4))
 						continue;
 					m = fcn_00502cd0(*(unsigned int*) (q + 0x14), 1, 0, *(int*) (0x779164 + k * 0x58 + j * 4));
-					if (m) {
+					if (m == 0) {
+						*acc = 0;
+					} else {
 						if (*acc >= gm_GetMsgField(q, m) / *(int*) (0x779174 + k * 0x58 + j * 4))
 							*acc = gm_GetMsgField(q, m) / *(int*) (0x779174 + k * 0x58 + j * 4);
-					} else {
-						*acc = 0;
 					}
 				}
 				*acc = *(unsigned short*) (lpObjektePROT + *(int*) (0x779160 + k * 0x58) * 0x41 + 0x36) * *acc;

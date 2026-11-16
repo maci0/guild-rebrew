@@ -36,8 +36,8 @@ int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2)
 	unsigned short idx;
 
 	t = 0;
-	b1->c = *(int*) (q + 1);
 	b1->d = 2;
+	b1->c = *(int*) (q + 1);
 	if (fcn_00502cd0(*(int*) (q + 0x5d), 2, 0, 0x204, 6) == 0)
 		return 0;
 	h = fcn_0048f450(q);

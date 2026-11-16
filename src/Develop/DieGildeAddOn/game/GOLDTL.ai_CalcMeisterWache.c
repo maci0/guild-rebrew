@@ -83,7 +83,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 		if (*(unsigned char *) (p + 8) == 0) {
 			continue;
 		}
-		if (*(unsigned short *) p == 0xffff) {
+		if (*(short *) p == -1) {
 			continue;
 		}
 		if (*(unsigned char *) (p + 2) == 0x0a) {

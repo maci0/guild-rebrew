@@ -104,8 +104,8 @@ void __cdecl fcn_00586c10(char* obj)
     v[2] = *(int*) ((char*) g + 0x8c);
     s0 = g_1040480;
     s1 = g_1040484;
-    s2 = g_1040488;
     s3 = g_104048c;
+    s2 = g_1040488;
     g28 = g_6b8010;
 
     d2_SetOverlayAnimation(0, 0);

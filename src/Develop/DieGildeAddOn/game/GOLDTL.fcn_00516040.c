@@ -155,11 +155,10 @@ void __cdecl fcn_00516040(void)
 	if (mode == 1) {
 		found = 0;
 		for (off = 0; !found && off < 0x200; off += 0x40) {
-			p = &g_6b8300[off + 0x7e24];
-			if (*p != 0 &&
-			    (strstr(p, "_FRUEHLING") != 0 ||
-			     strstr(p, "_HERBST") != 0 ||
-			     strstr(p, "_SNOW") != 0)) {
+			if (g_6b8300[off + 0x7e24] != 0 &&
+			    (strstr(&g_6b8300[off + 0x7e24], "_FRUEHLING") != 0 ||
+			     strstr(&g_6b8300[off + 0x7e24], "_HERBST") != 0 ||
+			     strstr(&g_6b8300[off + 0x7e24], "_SNOW") != 0)) {
 				found = 1;
 			}
 		}

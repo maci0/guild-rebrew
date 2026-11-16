@@ -261,8 +261,8 @@ void __cdecl fcn_004d8d00(char* a0)
 						p->f24 = (int)(p->f24 * g_664144);
 					if (*(int*)(g_772f24 + 4) == g_68b79c
 					    && *(int*)(ent + 0x58) == 0 && tgt) {
-						v80 = 0;
 						n = *((unsigned char*)*(int*)0x772eb4 + 0x30);
+						v80 = 0;
 						for (v84 = 0; v84 < n; v84++) {
 							if (*(int*)((char*)*(int*)0x772eb4 + 0x34 + v84 * 4) != -1
 							    && a0 != (char*)(0x9b0e20 + v84 * 0x35c)) {

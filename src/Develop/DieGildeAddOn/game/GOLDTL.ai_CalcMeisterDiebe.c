@@ -210,8 +210,8 @@ common:
 		owner = (char*) (rec + 0x30);
 		sprintf(text, "ai_CalcMeisterDiebe(): Meister %s m\366chte entf\374hren", owner);
 		maxfactor = 0;
-		cx = 8;
 		cy = 8;
+		cx = 8;
 		{
 			unsigned char* p = (unsigned char*) g_99ef80 + 2;
 			unsigned char* q;

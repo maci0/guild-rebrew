@@ -108,9 +108,9 @@ void __cdecl fcn_004e33a0(int* arg)
 	} else {
 		return;
 	}
-	price = arg[0x80 / 4];
-	argRec = arg[0x7c / 4];
 	n = *(unsigned char*) (((char*) arg) + 0x30);
+	argRec = arg[0x7c / 4];
+	price = arg[0x80 / 4];
 	for (i = 0; i < n; i++) {
 		states[i] = 0;
 		ids[i] = arg[0x34 / 4 + i];

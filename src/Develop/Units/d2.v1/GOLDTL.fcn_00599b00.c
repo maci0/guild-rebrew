@@ -142,9 +142,7 @@ void __cdecl fcn_00599b00(void)
 			if (ent != 0) {
 				fcn_00471af0(dlg, 0);
 				ent = lc_GebaeudeAusrichten(i, name);
-				if (ent == 0) {
-					fcn_00471af0(dlg, 1);
-				} else {
+				if (ent != 0) {
 					msg.kind = 0x0d;
 					msg.mode = 2;
 					msg.actor = *(int*)(g_7f4ca0 + g_774970 * 0x21c + 4);
@@ -167,6 +165,8 @@ void __cdecl fcn_00599b00(void)
 					}
 					fcn_004c5530(&msg);
 					g_774654 = 1;
+				} else {
+					fcn_00471af0(dlg, 1);
 				}
 			}
 		}
