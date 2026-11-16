@@ -183,7 +183,7 @@ void __cdecl fcn_0043ef20(char* a0)
 								b0 = (unsigned char) (*(char**) (self + 0x1c))[texel];
 								shade = (float) (int) (b0 & 0x7f);
 								shade += shade;
-								if ((signed char) b0 < 0) {
+								if (b0 & 0x80) {
 									red = (int) (shade * *(float*) (self + 0x90) + g_67bbdc + g_6b86c4);
 									if ((unsigned int) red > 0xff) {
 										red = 0xff;
@@ -239,7 +239,7 @@ void __cdecl fcn_0043ef20(char* a0)
 								b0 = (unsigned char) (*(char**) (self + 0x1c))[texel];
 								shade = (float) (int) (b0 & 0x7f);
 								shade += shade;
-								if ((signed char) b0 < 0) {
+								if (b0 & 0x80) {
 									red = (int) (shade * *(float*) (self + 0x90) + g_67bbdc + g_6b86c4);
 									if ((unsigned int) red > 0xff) {
 										red = 0xff;

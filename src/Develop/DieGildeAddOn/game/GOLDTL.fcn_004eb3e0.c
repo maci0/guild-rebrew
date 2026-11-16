@@ -95,12 +95,14 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 		return 0;
 	k = 0;
 	q = (unsigned char*) 0x699058;
-	while (*q != v20) {
+	do {
+		if (*q == v20)
+			goto found;
 		q += 0x15;
 		k++;
-		if ((int) q >= 0x699361)
-			return 0;
-	}
+	} while ((int) q < 0x699361);
+	return 0;
+found:
 	if (k >= 0x25)
 		return 0;
 	n = 0;

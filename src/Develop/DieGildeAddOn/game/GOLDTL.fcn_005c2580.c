@@ -91,8 +91,8 @@ void __cdecl fcn_005c2580(char* e)
 					g_774654 = 1;
 				}
 			} else {
-				dur = 0;
 				val = 0;
+				dur = 0;
 				*(unsigned char*) (msg + 4) = 0x1c;
 				*(int*) (msg + 0xc) = -1;
 				*(unsigned char*) (msg + 0x36) = 1;

@@ -32,9 +32,13 @@ char __cdecl fcn_00445aa0(char* a0, unsigned int a1, float a2)
 	idx2 = (idx + 1) % 7;
 	flag = (*(float*) (v3 + 0x24 + ((idx - 1) % 7) * 0x38) != 0.0f) || (*(int*) (a0 + 0x218) == 8);
 	v1 = v3 + idx * 0x38;
-	v4 = (*(float*) (v1 + 0x24) != 0.0f) || (*(int*) (a0 + 0x218) == 8);
+	v4 = 0;
+	if (*(float*) (v1 + 0x24) != 0.0f || *(int*) (a0 + 0x218) == 8)
+		v4 = 1;
 	v2 = v3 + idx2 * 0x38;
-	v5 = (*(float*) (v2 + 0x24) != 0.0f) || (*(int*) (a0 + 0x218) == 8);
+	v5 = 0;
+	if (*(float*) (v2 + 0x24) != 0.0f || *(int*) (a0 + 0x218) == 8)
+		v5 = 1;
 	if (flag && v4 && v5) {
 		*(float*) (a0 + 0x94) = (*(float*) (v2 + 0x24) - *(float*) (v1 + 0x24)) * t + *(float*) (v1 + 0x24);
 		goto L;

@@ -25,6 +25,7 @@ void __cdecl fcn_005505b0(int a)
 	char msg[0x200];
 
 	char* p;
+	char* q;
 	int id;
 	int found;
 	int n;
@@ -36,8 +37,9 @@ void __cdecl fcn_005505b0(int a)
 		return;
 	}
 	io_FormatTextBuffer(buf, 0x10c2, g_868080 + (unsigned char) g_773d75 * 0x2f4, (gm_RandomMod(3) & 0xffff) + 0x10c4);
-	p = (char*) 0x7f4ca0;
+	q = (char*) 0x7f4ca2;
 	do {
+		p = q - 2;
 		id = 0;
 		if (*(short*) p != -1 && *(unsigned char*) (p + 8) >= 2
 		    && (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7 || *(char*) (p + 2) == 5)) {
@@ -57,7 +59,7 @@ void __cdecl fcn_005505b0(int a)
 				}
 			}
 		}
-		p += 0x21c;
-	} while ((int) p < 0x85a0a0);
+		q += 0x21c;
+	} while ((int) q < 0x85a0a2);
 	fcn_00546190((void*) a);
 }

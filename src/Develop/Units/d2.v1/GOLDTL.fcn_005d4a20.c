@@ -211,7 +211,7 @@ void __cdecl fcn_005d4a20(void)
 						fcn_00471af0((int) dlg, 0);
 						q.kind = mode == 2 ? 3 : 4;
 						r = fcn_004fa5b0(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
-						if ((char) r < 0) {
+						if (r & 0x80) {
 							changed = 1;
 							state[i] = r & 0xa;
 						}

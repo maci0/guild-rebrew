@@ -52,7 +52,6 @@ void __cdecl fcn_005017a0(int a0)
 	int v;
 	int n;
 	int i;
-	int count;
 	int codes[8] = { 0x92, 0x93, 0x94, 0x95, 0x96, 0x97, 0x2db, 0 };
 
 	g_773d78 = (char*) gm_StartFilteredEntitySearch(1, 5, 10);
@@ -129,6 +128,7 @@ void __cdecl fcn_005017a0(int a0)
 		}
 		ip = codes;
 		for (v = *ip; v != 0; v = *++ip) {
+			int count;
 			count = 0;
 			ent = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, v);
 			if (ent != 0) {

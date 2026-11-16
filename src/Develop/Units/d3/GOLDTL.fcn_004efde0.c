@@ -106,10 +106,10 @@ void __cdecl fcn_004efde0(void)
 							}
 						}
 					} else if (state == 1) {
-						if (slot->mode != 0) {
-							runs = fcn_005e9da0((Sefde0Entry*) (statep - 0x17));
-						} else {
+						if (slot->mode == 0) {
 							runs = fcn_005e9870((Sefde0Entry*) (statep - 0x17));
+						} else {
+							runs = fcn_005e9da0((Sefde0Entry*) (statep - 0x17));
 						}
 						if (runs != 0) {
 							obj = ((char*) g_7731b8[idx + i + 0x57]);

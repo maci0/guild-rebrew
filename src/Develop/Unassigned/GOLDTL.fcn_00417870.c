@@ -41,8 +41,8 @@ char __cdecl fcn_00417870(char* a0, int a1)
 	float v;
 	float f;
 
-	count = 0;
 	half = (int) (*(unsigned int*) (a0 + 0x20) >> 1);
+	count = 0;
 	base = *(char**) (a0 + 0x28);
 	{
 		for (i = 0; i < *(int*) (a0 + 0xd8); i++) {

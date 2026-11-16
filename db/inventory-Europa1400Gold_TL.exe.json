@@ -100909,7 +100909,7 @@
   },
   {
     "va": 6197216,
-    "size": 1056,
+    "size": 254,
     "name": "fcn.005e8fe0",
     "extent_history": [
       {
@@ -100918,6 +100918,13 @@
         "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-24T13:52:00.350084+00:00"
+      },
+      {
+        "old_size": 1056,
+        "new_size": 254,
+        "reason": "0x5e8fe0 ends with ret at 0x5e90dd followed by two nop pad bytes; a new prologue (sub esp,0x5c) starts at 0x5e90e0. The 1056-byte extent spans the following function; the 254 source bytes match native.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-16T19:01:08.508502+00:00"
       }
     ]
   },

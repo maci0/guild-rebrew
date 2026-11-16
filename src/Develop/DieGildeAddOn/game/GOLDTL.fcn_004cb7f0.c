@@ -104,10 +104,10 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 			} else {
 				fcn_0064d41a(path, "%sgebaeude/*%s_B.ogr", g_7e1ae0, name);
 			}
-		} else if (i == 0) {
-			fcn_0064d41a(path, g_67f0ac, g_7e1ae0, name);
-		} else {
+		} else if (i != 0) {
 			fcn_0064d41a(path, (char*)0x67f0c0, g_7e1ae0, name, (int)(char)(i + '@'));
+		} else {
+			fcn_0064d41a(path, g_67f0ac, g_7e1ae0, name);
 		}
 		if (fcn_0042f690(path, g_6b7fdc, g_6b7fdc, tmp) != 0) {
 			break;

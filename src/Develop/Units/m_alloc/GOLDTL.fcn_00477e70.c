@@ -62,8 +62,8 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char
 	}
 	if (maxx < minx) {
 		minx = 0;
-		maxx = 0;
 		miny = 0;
+		maxx = 0;
 		maxy = 0;
 	} else if (maxy < miny) {
 		minx = 0;

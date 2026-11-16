@@ -167,7 +167,7 @@ void __cdecl ch_Updatelowpoly(char* obj)
 				anim = fcn_00434970(*(char**) (*(char**) (obj + 0x22c) + 0x1ec) + 0xf4, ani, opt);
 				if (anim == 0) {
 					sprintf(msg, "ch_Updatelowpoly(): Could not attach ani: %s", path);
-					obj[0x8c] |= 0x80;
+					*(unsigned short*) (obj + 0x8c) |= 0x80;
 					return;
 				}
 				*(int*) (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) + 0x328) = **(int**) (obj + 0x70);

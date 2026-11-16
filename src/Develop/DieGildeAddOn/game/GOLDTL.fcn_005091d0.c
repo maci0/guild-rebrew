@@ -58,8 +58,8 @@ void __cdecl fcn_005091d0(int* pn, StatRow* rows)
 	}
 	for (i = 0; i < *pn; i++) {
 		r = rows + i;
-		off = r->id * 0x21c;
 		sum = 0;
+		off = r->id * 0x21c;
 		p = (unsigned char*) (off + 0x7f4d20);
 		for (j = 0; j < 5; j++) {
 			sum += *p++;

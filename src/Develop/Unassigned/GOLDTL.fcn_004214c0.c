@@ -56,10 +56,14 @@ unsigned short __cdecl fcn_004214c0(PathGrid* grid, int x, int y, int goal_x, in
 	level = 0;
 	g_678c0c = level;
 	g_678c08 = grid->width - 1;
-	for (t = grid->width >> 1; t != 0; t >>= 1) {
-		level++;
+	t = grid->width >> 1;
+	if (t != 0) {
+		do {
+			level++;
+			t >>= 1;
+		} while (t != 0);
+		g_678c0c = level;
 	}
-	g_678c0c = level;
 	g_678c20[0] = 0;
 	g_678c20[1] = -(short) grid->width;
 	g_678c20[2] = 0;

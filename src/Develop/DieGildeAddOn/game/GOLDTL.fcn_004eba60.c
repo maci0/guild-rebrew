@@ -124,7 +124,6 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x1678, a1[1] + 0x1663);
 				fcn_00526120(buf, 0);
-				return sign;
 			}
 		} else {
 			io_FormatTextBuffer(buf, 0x167b, a1[1] + 0x1663);
@@ -137,7 +136,6 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x1679, a1[1] + 0x1663);
 				fcn_00526120(buf, 0);
-				return sign;
 			}
 		}
 	} else {

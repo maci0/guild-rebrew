@@ -105,23 +105,23 @@ void __cdecl fcn_005a4490(char* p)
 				io_AppendText(0x18cc);
 				refresh = 1;
 			} else {
-				if (count != 0) {
-					io_AppendText(0x18ca, *(unsigned short*) (p + 0x27), p, count, n);
-				} else {
+				if (count == 0) {
 					io_AppendText(0x18cd, *(unsigned short*) (p + 0x27), p);
+				} else {
+					io_AppendText(0x18ca, *(unsigned short*) (p + 0x27), p, count, n);
 				}
 				refresh = 0;
 			}
 			d2_SetForm(dialog, 3);
 			io_AppendText(g_6811b0);
-			if (refresh) {
-				fcn_00533a60(g_772514, 0, sel, 1, g_14ab65c);
-				first = -1;
-				second = sel[0];
-			} else {
+			if (refresh == 0) {
 				fcn_00533a60(g_772514, 0, sel, 2, g_14ab658, g_14ab65c);
 				first = sel[0];
 				second = sel[1];
+			} else {
+				fcn_00533a60(g_772514, 0, sel, 1, g_14ab65c);
+				first = -1;
+				second = sel[0];
 			}
 			index = 0;
 			h = *(short*) (g_772500 + 0x269da);

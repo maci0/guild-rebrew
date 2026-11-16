@@ -38,13 +38,15 @@ int __cdecl fcn_005a51c0(unsigned char* entity)
 
 	slot = 0;
 	p = (int*) (entity + 0x1a4);
-	for (i = 0xf; i >= 0; i--) {
+	i = 0xf;
+	do {
 		if (p[3] != 0 && p[0] != -1) {
 			slot = i + 1;
 			break;
 		}
+		i--;
 		p = (int*) ((char*) p - 0x1c);
-	}
+	} while (i >= 0);
 	if (slot <= 0)
 		return 0;
 	slot_ptr = (char*) entity + 0xc;

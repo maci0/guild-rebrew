@@ -163,9 +163,7 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 			if (!(g_7746d8 & 0x200)) {
 				n -= r->f2c;
 			}
-			if (n < 0) {
-				n = 0;
-			}
+			n = n < 0 ? 0 : n;
 			d2_SetElementValue(r->icon, 0, n, v);
 			if (r->f30) {
 				*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x60) = 0;

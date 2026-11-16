@@ -6,8 +6,8 @@ void __cdecl fcn_00493000(unsigned char* o)
 {
 	int state;
 	int s2 = 0;
-	int s1 = 0;
 	int b = 0;
+	int s1 = 0;
 	int i = 0;
 	int a = 0;
 

@@ -74,8 +74,8 @@ fail:
 			add ecx, ebx
 			rep stosb
 		}
-		channels = (int) g_6b7f50[index];
 		bits = g_6b7f94 * 4;
+		channels = (int) g_6b7f50[index];
 		__asm {
 			mov edi, channels
 			mov ebx, bits

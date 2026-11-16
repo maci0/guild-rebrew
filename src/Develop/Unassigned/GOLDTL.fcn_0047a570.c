@@ -32,8 +32,8 @@ int __cdecl fcn_0047a570(int a0, int a1, int a2, int* a3, int* a4, int a5)
 		v1 = a0;
 	}
 	n = v1 * n;
-	size = 0;
 	i = n;
+	size = 0;
 	do {
 		if (i <= 0) break; i >>= 1;
 		size++;

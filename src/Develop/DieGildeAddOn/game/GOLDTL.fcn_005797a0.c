@@ -97,12 +97,12 @@ void __cdecl fcn_005797a0(char* a0)
 	}
 	if (*(int*) (a0 + 0x70) == 0) {
 		value = fcn_00500d20(a0 + 0xb8, 0x7f4c00);
-		if (*row != 0x1d) {
+		if (*row == 0x1d) {
+			fvalue = (float) fcn_0050c710(search, 0x12, 1) * g_662910;
+		} else {
 			fvalue = (float) fcn_0050c710(search, 0x1e, 1) * g_662910;
 			if (handle == 3 && (search[0x5b] & 0x20) == 0)
 				fvalue = fvalue - g_6628cc;
-		} else {
-			fvalue = (float) fcn_0050c710(search, 0x12, 1) * g_662910;
 		}
 		increment = (fvalue + g_6628a0) * (float) value * g_665ef8;
 		if (valid >= 1) {
@@ -158,12 +158,12 @@ void __cdecl fcn_005797a0(char* a0)
 			}
 			strcat(text, line);
 		} else {
-			if (*row != 0x1f) {
-				io_FormatTextBuffer(text, 0x412f, 0x4128, 0x228, (void*) search);
-				strcpy(name, "_NACHRICHTEN_FRIEDHOF_01");
-			} else {
+			if (*row == 0x1f) {
 				io_FormatTextBuffer(text, 0x4225, 0x421e, 0x22c, (void*) search);
 				strcpy(name, "_NACHRICHTEN_ZIGEUNER_03");
+			} else {
+				io_FormatTextBuffer(text, 0x412f, 0x4128, 0x228, (void*) search);
+				strcpy(name, "_NACHRICHTEN_FRIEDHOF_01");
 			}
 		}
 		i = *(unsigned short*) (a0 + 8) * 0x21c;

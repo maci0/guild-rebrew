@@ -1,8 +1,7 @@
 /* ADDRESS: GOLDTL 0x00441720 */
 int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, unsigned int* a4, float* a5)
 {
-	float fx;
-	float fz;
+	float pp[3];
 	float v13;
 	float hx;
 	float hz;
@@ -23,17 +22,17 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 	if (a0 == 0) {
 		return 0;
 	}
-	fx = a1[0] - *(float*) ((char*) a0 + 0x50);
-	fz = a1[2] - *(float*) ((char*) a0 + 0x58);
+	pp[0] = a1[0] - *(float*) ((char*) a0 + 0x50);
+	pp[2] = a1[2] - *(float*) ((char*) a0 + 0x58);
 	if (*(float*) ((char*) a0 + 0x60) != 0.0f) {
-		fx = fx / *(float*) ((char*) a0 + 0x60);
+		pp[0] = pp[0] / *(float*) ((char*) a0 + 0x60);
 	}
 	if (*(float*) ((char*) a0 + 0x78) != 0.0f) {
-		fz = fz / *(float*) ((char*) a0 + 0x78);
+		pp[2] = pp[2] / *(float*) ((char*) a0 + 0x78);
 	}
-	v4 = (int) (fx + 0.5f);
+	v4 = (int) (pp[0] + 0.5f);
 	*a3 = v4;
-	v3 = (int) (fz + 0.5f);
+	v3 = (int) (pp[2] + 0.5f);
 	*a4 = v3;
 	if ((int) *a3 < 0 || a0[0] <= (int) *a3 || v3 < 0 || a0[0] <= v3) {
 		return 0;
@@ -55,10 +54,10 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 	}
 	v4 = v4 & ~(s - 1);
 	v3 = v3 & ~(s - 1);
-	fx = (fx - (float) v4) / (float) s;
-	fz = (fz - (float) v3) / (float) s;
+	pp[0] = (pp[0] - (float) v4) / (float) s;
+	pp[2] = (pp[2] - (float) v3) / (float) s;
 	if (data != 0 && (*(unsigned char*) (data + (unsigned int) v4 / s + ((unsigned int) v3 / s * (int) width) / s) & 0x80) != 0) {
-		if (!(fz + fx > 1.0f)) {
+		if (!(pp[2] + pp[0] > 1.0f)) {
 			v13 = (float) ((unsigned char*) a0[4])[width * v3 + v4];
 			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + width * v3] - v13;
 			v12 = (float) ((unsigned char*) a0[4])[((v3 + s) & mask) * width + v4] - v13;
@@ -68,24 +67,24 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 			v13 = (float) ((unsigned char*) a0[4])[v9 + v6];
 			v11 = (float) ((unsigned char*) a0[4])[v6 + v4] - v13;
 			v12 = (float) ((unsigned char*) a0[4])[v3 * width + v9] - v13;
-			fx = 1.0f - fx;
-			fz = 1.0f - fz;
+			pp[0] = 1.0f - pp[0];
+			pp[2] = 1.0f - pp[2];
 		}
 	} else {
-		if (!(1.0f - fz + fx > 1.0f)) {
+		if (!(1.0f - pp[2] + pp[0] > 1.0f)) {
 			v7 = ((v3 + s) & mask) * width;
 			v13 = (float) ((unsigned char*) a0[4])[v7 + v4];
 			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + v7] - v13;
-			fz = 1.0f - fz;
+			pp[2] = 1.0f - pp[2];
 			v12 = (float) ((unsigned char*) a0[4])[width * v3 + v4] - v13;
 		} else {
 			v9 = (v4 + s) & mask;
 			v13 = (float) ((unsigned char*) a0[4])[width * v3 + v9];
 			v11 = (float) ((unsigned char*) a0[4])[width * v3 + v4] - v13;
 			v12 = (float) ((unsigned char*) a0[4])[((v3 + s) & mask) * width + v9] - v13;
-			fx = 1.0f - fx;
+			pp[0] = 1.0f - pp[0];
 		}
 	}
-	*a5 = (v11 * fx + v12 * fz + v13) * *(float*) ((char*) a0 + 0x84) + *(float*) ((char*) a0 + 0x54);
+	*a5 = (v11 * pp[0] + v12 * pp[2] + v13) * *(float*) ((char*) a0 + 0x84) + *(float*) ((char*) a0 + 0x54);
 	return 1;
 }
