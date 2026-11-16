@@ -33,8 +33,8 @@ int __cdecl fcn_004d31d0(char* self, int a1, int a2, int a3,
 			for (r = lo; r <= row_hi; r++, n--) {
 				d = i - abs(n);
 				lo = a1 - d;
-				lo = lo < 0 ? 0 : lo;
 				hi = a1 + d;
+				lo = lo < 0 ? 0 : lo;
 				if (hi > *(int*) (map + 0x20) - 1) {
 					hi = *(int*) (map + 0x20) - 1;
 				}

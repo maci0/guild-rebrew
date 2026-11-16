@@ -50,14 +50,14 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 		}
 	} else {
 		i = g_6b7fac + 0xfa;
-		if (g_6b7fac < i) {
+		if (i > g_6b7fac) {
 			b = a1 | 0x80;
 			do {
 				fcn_005373e0(0, b);
 				if (g_100f1dc != -1 && g_67d370 == tab) {
 					break;
 				}
-			} while (g_6b7fac < i);
+			} while (i > g_6b7fac);
 		}
 	}
 	d2_SetForm(obj, 1);
@@ -78,14 +78,14 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 		}
 	} else {
 		i = g_6b7fac + 0xfa;
-		if (g_6b7fac < i) {
+		if (i > g_6b7fac) {
 			b = a1 | 0x80;
 			do {
 				fcn_005373e0(0, b);
 				if (g_100f1dc != -1 && g_67d370 == tab) {
 					break;
 				}
-			} while (g_6b7fac < i);
+			} while (i > g_6b7fac);
 		}
 	}
 	d2_SetForm(obj, 1);
@@ -106,14 +106,14 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 		}
 	} else {
 		i = g_6b7fac + 0xfa;
-		if (g_6b7fac < i) {
+		if (i > g_6b7fac) {
 			b = a1 | 0x80;
 			do {
 				fcn_005373e0(0, b);
 				if (g_100f1dc != -1 && g_67d370 == tab) {
 					break;
 				}
-			} while (g_6b7fac < i);
+			} while (i > g_6b7fac);
 		}
 	}
 	d2_SetForm(obj, 1);
@@ -137,14 +137,14 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 		}
 	} else {
 		i = g_6b7fac + 0xfa;
-		if (g_6b7fac < i) {
+		if (i > g_6b7fac) {
 			b = a1 | 0x80;
 			do {
 				fcn_005373e0(0, b);
 				if (g_100f1dc != -1 && g_67d370 == tab) {
 					break;
 				}
-			} while (g_6b7fac < i);
+			} while (i > g_6b7fac);
 		}
 	}
 	fcn_00471e30(obj);

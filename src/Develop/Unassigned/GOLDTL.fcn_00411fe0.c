@@ -10,7 +10,6 @@ void __cdecl fcn_00411b80(void);
 void __cdecl fcn_00411fe0(void)
 {
 	int flag;
-	int pt[2];
 	unsigned char ev[0x14];
 	int v;
 	int t;
@@ -124,6 +123,7 @@ void __cdecl fcn_00411fe0(void)
 		*(short*) 0x14ce922 = (short) *(int*) 0x6772c0;
 	}
 	if (*(int*) 0x6b5c88 & 4) {
+		int pt[2];
 		((void (__stdcall*) (int*)) *(void**) 0x662250)(pt);
 		((void (__stdcall*) (int, int*)) *(void**) 0x662308)(*(int*) 0x14ce89c, pt);
 		if (*(int*) 0x6772c4 == 0) {

@@ -30,8 +30,8 @@ int __cdecl fcn_004a4680(float* o0, float* o1, int idx, char* s, int* p4)
 		v9 = (float) bonus + base;
 		v9 = (*(float*) (s + 0x10c) - g_662918) * v9;
 	}
-	*o0 = 0.0f;
 	*o1 = 0.0f;
+	*o0 = 0.0f;
 	method = &g_1008540[idx];
 	if ((unsigned char) method->flags & *(unsigned char*) (s + 0x218)) {
 		v10 = g_662c98;

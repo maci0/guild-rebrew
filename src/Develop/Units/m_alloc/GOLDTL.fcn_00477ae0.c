@@ -110,8 +110,8 @@ unsigned int* __cdecl fcn_00477ae0(int a0, int a1, int a2,
 	*(unsigned int*) v6 = 0x32;
 	v8 = (unsigned int*) ((char*) v6 + 0x32);
 	if (*(unsigned short*) ((char*) v6 + 0xa) != 0) {
-		step = a6 * 3;
 		v7 = a4 + (a1 * a6 + a0) * 3;
+		step = a6 * 3;
 		for (i = 0; (int) i < (int) *(unsigned short*) ((char*) v6 + 0xa);
 		     i++) {
 			w = *(unsigned short*) ((char*) v6 + 6);

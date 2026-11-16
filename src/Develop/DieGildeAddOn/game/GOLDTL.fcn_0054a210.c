@@ -82,6 +82,11 @@ void __cdecl fcn_0054a210(char* a0)
 
                 fcn_00500bb0((Stamp_54a210*) (o + 0x52), 1, 0, 0);
                 *(pos14_7f4c00*) (o + 0xb0) = g_7f4c00;
+                fcn_00500bb0((Stamp_54a210*) (o + 0xb0), 0x18, 0, 0);
+                *(int*) (o + 0xb6) = 0;
+                *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;
+                fcn_004c5620(0, o);
+                return;
 
 
 
@@ -95,15 +100,15 @@ void __cdecl fcn_0054a210(char* a0)
 
                 fcn_00500bb0((Stamp_54a210*) (o + 0x52), 1, 0, 0);
                 *(pos14_7f4c00*) (o + 0xb0) = g_7f4c00;
+                fcn_00500bb0((Stamp_54a210*) (o + 0xb0), 0x18, 0, 0);
+                *(int*) (o + 0xb6) = 0;
+                *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;
+                fcn_004c5620(0, o);
+                return;
 
 
 
             }
-            fcn_00500bb0((Stamp_54a210*) (o + 0xb0), 0x18, 0, 0);
-            *(int*) (o + 0xb6) = 0;
-            *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;
-            fcn_004c5620(0, o);
-            return;
         }
     }
     if (*(int*) (o + 0xc0) == 0) {

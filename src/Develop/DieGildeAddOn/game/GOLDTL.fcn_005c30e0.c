@@ -117,8 +117,7 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 	}
 	v = (int) (fcn_0050d170(*(unsigned char*) a1 + 1) * g_664e60);
 	io_FormatTextBuffer(buf, 0x17d5, v, a1, *(unsigned char*) a1 * 14 + 0x49c);
-	switch (kind) {
-	default:
+	if (kind != 3 && kind != 5) {
 		if (fcn_00526120(buf, 0x11) == 0) {
 			return;
 		}
@@ -151,13 +150,13 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 		io_FormatTextBuffer(text, 0x17da, *(unsigned char*) a1 * 14 + 0x49c);
 		fcn_00526120(text, 4);
 		return;
-	case 3:
+	}
+	if (kind == 3) {
 		m = fcn_00502cd0(*(int*) ((char*) fcn_0050e4a0(1) + 0x5d), 2, 6, 0, 0x115);
 		if (fcn_00526120(buf, 0x11) == 0) {
 			return;
 		}
-		break;
-	case 5:
+	} else {
 		m = fcn_00507a10(a1);
 		if (fcn_00526120(buf, 0x11) == 0) {
 			return;
@@ -165,7 +164,6 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 		if (m == 0) {
 			return;
 		}
-		break;
 	}
 	if (fcn_00526070(m, *(int*) (m + 0x14), v, (char) g_773d75) == 0) {
 		return;

@@ -35,8 +35,8 @@ void __cdecl fcn_0052ae80(void)
 	int cur[4];
 
 	minx = g_6b5c80 + 1;
-	maxx = g_6772bc - 1;
 	miny = g_6b5c84 + 1;
+	maxx = g_6772bc - 1;
 	maxy = g_6772c0 - 1;
 	ref[0] = 0.0f;
 	ref[1] = 0.0f;

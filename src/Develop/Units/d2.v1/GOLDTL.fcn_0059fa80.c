@@ -50,6 +50,8 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	unsigned int v4;
 	unsigned int v11;
 	int pair[2];
+	int id_a;
+	int id_b;
 	int v21;
 	int v22;
 	int v19;
@@ -78,6 +80,8 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	io_AppendText("$C$Z$[%1N3$]", *v6);
 	d2_SetForm(v8, 3);
 	fcn_00533a60(g_772514, 0, pair, 2, g_14abc90, g_14abc94);
+	id_a = pair[0];
+	id_b = pair[1];
 	d2_SetForm(v8, 2);
 	v22 = 0x19;
 	v21 = (*(int*) (g_77255c + 0xc) - (int) *(short*) (g_772500 + 0x1ebd8)) / 2;
@@ -88,10 +92,10 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	g_100f1dc = -1;
 	for (;;) {
 		v5 = gm_LookupEntityRecordById(v3) && fcn_005463a0(1, 1, v4);
-		fcn_00472640(pair[1], v5 && *(int*) (v7 + 0xbc) < g_7f4c00.a);
+		fcn_00472640(id_b, v5 && *(int*) (v7 + 0xbc) < g_7f4c00.a);
 		if (!g_14ce8e0 && v5) {
 			if (g_100f1dc != -1) {
-				if (g_67d370 == pair[0]) {
+				if (g_67d370 == id_a) {
 					if (*(char*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca9))
 						v19 = 0x1a58;
 					else
@@ -110,7 +114,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 						}
 						g_774654 = 1;
 					}
-			} else if (g_67d370 == pair[1]) {
+			} else if (g_67d370 == id_b) {
 					memset(flags, 0, sizeof(flags));
 					flags[1] = 0x20400;
 					flags[4] = 6;

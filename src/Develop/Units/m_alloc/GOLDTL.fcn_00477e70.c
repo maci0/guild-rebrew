@@ -31,16 +31,15 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char
 	int j;
 	int runs;
 
-	b = (char*) m_alloc((a3 * 8 + 4) * a4 + 0x32, (char*) 0x67d9c0);
 	minx = a3;
 	miny = a4;
 	maxx = 0;
 	maxy = 0;
 	runs = 0;
-	if (a4 > 0) {
-		g = (char*) a5;
-		p = (char*) (a5 + (a1 + a2 * a7) * 2);
-		for (i = 0; i < a4; i++) {
+	b = (char*) m_alloc((a3 * 8 + 4) * a4 + 0x32, (char*) 0x67d9c0);
+	g = (char*) a5;
+	p = (char*) (a5 + (a1 + a2 * a7) * 2);
+	for (i = 0; i < a4; i++) {
 			q = p;
 			for (j = 0; j < a3; j++) {
 				if (*(unsigned short*) q != 0) {
@@ -59,8 +58,7 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char
 				}
 				q += 2;
 			}
-			p += a7 * 2;
-		}
+		p += a7 * 2;
 	}
 	if (maxx < minx) {
 		minx = 0;

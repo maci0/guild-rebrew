@@ -66,6 +66,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 	int i;
 
 
+	best = 0;
 	v20 = 0;
 	v25 = 0;
 	packet[3] = 0;
@@ -82,7 +83,6 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 	e = (slot80*) gm_StartFilteredEntitySearch(1, 5, found);
 	if (e == 0)
 		return 0;
-	best = 0;
 	do {
 		b = &((Bld24d*) lpGebaeudePROT)[*(unsigned char*) e];
 		if ((int) b->x247 > best) {

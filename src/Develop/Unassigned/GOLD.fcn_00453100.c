@@ -34,23 +34,21 @@ char __cdecl fcn_00453100(char* o, Query_453100* q)
 				q->count++;
 				return *(char*) (*(char**) (o + 0x1e8) + 0x1a8) = 1;
 			}
-			return 1;
-		}
-		*(float*) (o + 0x1e4) = *(float*) (o + 0x90);
-		ref = q->ref;
-		dx = *(float*) (o + 0x1d8) - *(float*) (ref + 0x1d8);
-		dy = *(float*) (o + 0x1dc) - *(float*) (ref + 0x1dc);
-		dz = *(float*) (o + 0x1e0) - *(float*) (ref + 0x1e0);
-		if (*(float*) (o + 0x94) != *(double*) 0x5eb830) {
-			d = (float) sqrt(dx * dx + dy * dy + dz * dz);
-			if (d < *(float*) (o + 0x1e4) + *(float*) (ref + 0x1e4)) {
-				q->count++;
-				return *(char*) (*(char**) (o + 0x1e8) + 0x1a8) = 1;
+		} else {
+			*(float*) (o + 0x1e4) = *(float*) (o + 0x90);
+			ref = q->ref;
+			dx = *(float*) (o + 0x1d8) - *(float*) (ref + 0x1d8);
+			dy = *(float*) (o + 0x1dc) - *(float*) (ref + 0x1dc);
+			dz = *(float*) (o + 0x1e0) - *(float*) (ref + 0x1e0);
+			if (*(float*) (o + 0x94) != *(double*) 0x5eb830) {
+				d = (float) sqrt(dx * dx + dy * dy + dz * dz);
+				if (d < *(float*) (o + 0x1e4) + *(float*) (ref + 0x1e4)) {
+					q->count++;
+					return *(char*) (*(char**) (o + 0x1e8) + 0x1a8) = 1;
+				}
 			}
 		}
-		return 1;
-	}
-	if (*(char*) (*(char**) (o + 0x1e8) + 0x1a8) != 0) {
+	} else if (*(char*) (*(char**) (o + 0x1e8) + 0x1a8) != 0) {
 		q->list[q->count] = o;
 		q->count++;
 	}

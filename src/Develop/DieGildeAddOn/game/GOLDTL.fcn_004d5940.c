@@ -216,8 +216,8 @@ unsigned int __cdecl fcn_004d5940(int a0)
 				sel = gm_FindRecordById(*p);
 				if (sel) {
 					fcn_0050de80((char*) sel, (int*) &items);
+					sel = 0;
 					if (0 < items.count_b) {
-						sel = 0;
 						do {
 							total = (int) (fcn_0050bb50(items.ids[sel], g_773d75) * (float) items.weights[sel] + (float) total);
 							sel++;

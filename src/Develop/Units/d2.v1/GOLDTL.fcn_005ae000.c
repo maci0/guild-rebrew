@@ -42,10 +42,10 @@ int __cdecl fcn_005ae000(char* obj)
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x19f0);
+	g_100f1dc = -1;
 	ids = (int*) (packet + 0x38); for (i = 0; i < 6; i++) {
 		ids[i] = -1;
 	}
-	g_100f1dc = -1;
 	n = 0;
 	do {
 		fcn_00529890(obj);

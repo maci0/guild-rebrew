@@ -10,7 +10,7 @@ int __cdecl fcn_004a5e60(unsigned short* a0, int a1, int a2, int a3, float a4, f
 {
 	int buf[20];
 	int step;
-	int flag;
+	int flag = 0;
 	int found;
 	int ent;
 	int i;
@@ -21,7 +21,7 @@ int __cdecl fcn_004a5e60(unsigned short* a0, int a1, int a2, int a3, float a4, f
 	buf[2] = a2;
 
 	buf[4] = a1;
-	flag = 0;
+
 	buf[5] = 0;
 	buf[3] = a3 | 0x80000000;
 	*a6 = -1;

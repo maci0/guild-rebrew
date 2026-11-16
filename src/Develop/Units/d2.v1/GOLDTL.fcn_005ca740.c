@@ -22,8 +22,8 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
 	char buf[0x100];
 
 	(void) a2;
-	v8 = a1 + 0x1c;
 	v10 = ((D2_BILD_GROESSE*)g_772500)[0x5da].breite / 2 + a0;
+	v8 = a1 + 0x1c;
 	a4[1] = fcn_0046f740(a0, v8, 0x5da, g_772514);
 	a4[2] = -1;
 	if (a4[0] != 0) {

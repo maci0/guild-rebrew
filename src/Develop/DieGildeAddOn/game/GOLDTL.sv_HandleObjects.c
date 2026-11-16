@@ -94,7 +94,7 @@ void __cdecl sv_HandleObjects(void)
 	if (v7 != g_7e2704) {
 		goto L744;
 	}
-	if (g_7746cc == g_7e2708) {
+	if (g_7e2708 == g_7746cc) {
 		goto L66a;
 	}
 	if (g_7746c8 == 0 || g_7746cc != 0 || g_7e2708 == 0) {

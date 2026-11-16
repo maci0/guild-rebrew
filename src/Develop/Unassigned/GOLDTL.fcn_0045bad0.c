@@ -76,8 +76,8 @@ char __cdecl fcn_0045bad0(char* e, int gx, int gy, int* ox, int* oy)
 			return 0;
 		}
 		if ((float) *(unsigned char*) (*(int*) (e + 0x28) + (int) o[2] * iw + (int) o[0]) >= o[1]) {
-			*ox = (int) o[0];
 			*oy = (int) o[2];
+			*ox = (int) o[0];
 			return 1;
 		}
 		o[0] = o[0] + px;
