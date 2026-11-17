@@ -95,7 +95,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		w = *(unsigned short *) (ent + 0x27);
 		r = (char) gm_RandomMod(0x10);
 		delta = (char) (ent[0x5c] - r - 10);
-		if (delta < 1)
+		if (delta <= 0)
 			return;
 		fcn_004c4510(ent, *(int *) (ent + 1));
 		fcn_004c4570(1, 1, 0x5c, &delta);

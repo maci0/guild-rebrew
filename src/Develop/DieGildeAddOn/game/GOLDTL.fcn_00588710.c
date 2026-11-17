@@ -65,7 +65,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int a3, int a4)
 			vec[0] = *(float*) (a1 + 0x24);
 			vec[2] = *(float*) (a1 + 0x2c);
 			vec[1] = 0.0f;
-			f = *(float*) 0x6628a0 -
+			f = 1.0f -
 			    (float) (*(unsigned int*) 0x6b7fac - start) /
 			        *(float*) 0x665f3c;
 			fcn_004518a0(vec);

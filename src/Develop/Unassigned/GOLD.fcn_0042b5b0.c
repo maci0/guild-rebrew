@@ -33,9 +33,9 @@ int __cdecl fcn_0042b5b0(char* name, int a1, int a2, int n, ...)
 	}
 	off = i * 0x4c;
 	*(int*) (tab + off + 0x44) = a1;
-	*(int*) (*(char**) 0x6332bc + off + 0x48) = a2;
 	*(int*) (*(char**) 0x6332bc + off + 0x20) = n;
-	if (n > 0) {
+	*(int*) (*(char**) 0x6332bc + off + 0x48) = a2;
+	if (0 < n) {
 		va = &n;
 		dst = (int*) (off + 0x24);
 		for (i = n; i > 0; i--) {

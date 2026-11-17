@@ -234,7 +234,7 @@ void __cdecl fcn_00556170(char* p)
 			v = (unsigned short) ((v + 1) % 0x300);
 		}
 		fcn_00500bb0(p + 0x52, 0, 10, 0);
-		if (*(unsigned short*) (p + 0x56) > 0x15) {
+		if (*(unsigned short*) (p + 0x56) >= 0x16) {
 			COPY_UI(p);
 			*(int*) (p + 0x58) = 0;
 			*(int*) (p + 0x52) += 1;

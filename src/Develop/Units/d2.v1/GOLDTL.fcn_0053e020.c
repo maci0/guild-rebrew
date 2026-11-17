@@ -1,4 +1,5 @@
 extern int g_7e2468;
+extern int g_7e2430;
 extern int g_774654;
 extern int g_7725c8;
 extern int g_68bfb8;
@@ -129,7 +130,7 @@ int __cdecl fcn_0053e020(void)
 					if (fcn_0053cd40(0xc6) != 0) {
 						v11 = fcn_00506d50(*(unsigned char*) 0x7e23e3);
 						*(unsigned char*) 0x7e2434 = (unsigned char) v11.w[2];
-						*(int*) 0x7e2430 = *(int*) &v11;
+						g_7e2430 = *(int*) &v11;
 						g_7e2468 = fcn_004fdec0(0x6a3db4) + 0x639;
 					} else {
 						fcn_004432d0(0, 0);

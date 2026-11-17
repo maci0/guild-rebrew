@@ -262,7 +262,7 @@ dispatch:
 				sel = 5;
 				redraw = 1;
 			}
-			if (g_100f1dc >= 0x59a && g_100f1dc <= 0x5a1) {
+			if (g_100f1dc >= 0x59a && g_100f1dc < 0x5a2) {
 				for (i = 0; i < 8; i++) {
 					if (g_1015ea0 + ids[i] * 0x2f4 != g_100f1e4) {
 						*(int*) (g_1015ea0 + ids[i] * 0x2f4 + 0x38) = 0;

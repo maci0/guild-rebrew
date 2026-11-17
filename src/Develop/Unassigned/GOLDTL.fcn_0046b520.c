@@ -1,3 +1,4 @@
+extern int g_67d380;
 #include <string.h>
 
 void* __cdecl d2_GetResourceData(int idx);
@@ -25,7 +26,7 @@ int __cdecl fcn_0046b520(char* a0, int a1)
 			if (c != ' ')
 				total += *(unsigned short*) (entry + 0x15) + *(int*) 0x67d384;
 			else
-				total += *(unsigned short*) (entry + 0x15) + *(int*) 0x67d380 + *(int*) 0x67d384;
+				total += *(unsigned short*) (entry + 0x15) + g_67d380 + *(int*) 0x67d384;
 		}
 	}
 	return *(int*) 0x67d384 + total;

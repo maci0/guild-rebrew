@@ -41,7 +41,7 @@ void __cdecl fcn_005448e0(void)
 	}
 	b = buf;
 	saved = g_772d10;
-	*(unsigned char*) 0x772d10 = 0;
+	g_772d10 = 0;
 	sprintf(b, (char*) 0x6a4538, (char*) 0x6a3658);
 	*(int*) 0x6b5c90 = 1;
 	fcn_004124b0();
@@ -65,7 +65,7 @@ void __cdecl fcn_005448e0(void)
 	*(unsigned char*) 0x14cf950 = 0;
 	fcn_004c2d90((float) t * *(float*) 0x665e44, 0x3e8);
 	t = *(int*) 0x77492c;
-	*(unsigned char*) 0x772d10 = (unsigned char) saved;
+	g_772d10 = (unsigned char) saved;
 	if (t == 0) {
 		fcn_0041e650();
 	}

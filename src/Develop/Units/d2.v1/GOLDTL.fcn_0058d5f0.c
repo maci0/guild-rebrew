@@ -220,7 +220,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 				p = (unsigned char*) 0x7f4ca4;
 				do {
 					i = j;
-					if (j >= 4)
+					if (j > 3)
 						break;
 					if (p[0x184]) {
 						req.list[j] = *(unsigned int*) p;

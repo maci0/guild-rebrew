@@ -34,7 +34,7 @@ char* __cdecl fcn_0042f010(char* name, NODE042F010* node)
 	}
 	strcpy(path, buf);
 	p = fcn_0064e790(path, '/');
-	while (p != 0 && n != 0) {
+	while (n != 0 && p != 0) {
 		strcpy(buf, p + 1);
 		p[1] = 0;
 		n = n->child;

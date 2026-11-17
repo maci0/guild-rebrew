@@ -26,6 +26,7 @@ int __cdecl fcn_004770a0(int* src, int flags)
 	} TexDesc;
 
 	int* tex;
+	int* target;
 	void* device;
 	int width;
 	int height;
@@ -119,21 +120,21 @@ int __cdecl fcn_004770a0(int* src, int flags)
 			goto done;
 		}
 	}
-	src = 0;
+	target = 0;
 	if (flags & 0x10) {
-		fcn_00610011(g_6b5de0, rw, rh, 1, 1, format, 0, &src);
+		fcn_00610011(g_6b5de0, rw, rh, 1, 1, format, 0, &target);
 	} else if (flags & 0x20) {
 		device = g_6b5de0;
 		(*(void (__stdcall**) (void*, int, int, int, int*)) (*(int*) device + 0x6c))(device, rw, rh,
 			format, &tex[9]);
 		goto created;
 	} else {
-		fcn_00610011(g_6b5de0, rw, rh, 1, 0, format, 1, &src);
+		fcn_00610011(g_6b5de0, rw, rh, 1, 0, format, 1, &target);
 	}
 created:
-	if (src != 0) {
-		tex[8] = (int) src;
-		if ((*(int (__stdcall**) (void*, int, int*)) (*src + 0x3c))(src, 0, &tex[9]) != 0) {
+	if (target != 0) {
+		tex[8] = (int) target;
+		if ((*(int (__stdcall**) (void*, int, int*)) (*target + 0x3c))(target, 0, &tex[9]) != 0) {
 			m_FreeTracked(tex);
 			return 0;
 		}

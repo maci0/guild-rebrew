@@ -135,10 +135,11 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 				add ecx, ebx
 				rep stosb
 			}
-			if (fcn_00497ec0(0x13, ent, 0, &o1, &o2) != 0) {
+			t = fcn_00497ec0(0x13, ent, 0, &o1, &o2);
+			if (t != 0) {
 				*out1 = o1;
 				*out2 = o2;
-				return 0x13;
+				return t;
 			}
 		}
 	}
@@ -191,7 +192,7 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 	if (count > 3) {
 		return 0;
 	}
-	if (ones < 1) {
+	if (ones <= 0) {
 		if (slot == 0) {
 			goto use_slot;
 		}

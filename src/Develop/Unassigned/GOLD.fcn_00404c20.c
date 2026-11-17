@@ -13,13 +13,13 @@ void __cdecl fcn_00404c20(char* obj, int paused)
     stream = *(char**) (obj + 0x70);
     if (stream == 0)
         return;
-    frames = *(char**) (stream + 0x68);
+    frames = *(char**) (0x68 + stream);
 
     if (paused) {
         fcn_00435810(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, frames);
-        *(unsigned short*) (obj + 0x8c) |= 4;
+        *(unsigned char*) (obj + 0x8c) |= 4;
     } else {
         fcn_00435870(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, frames, 1);
-        *(unsigned short*) (obj + 0x8c) &= 0xfffb;
+        *(unsigned char*) (obj + 0x8c) &= 0xfb;
     }
 }

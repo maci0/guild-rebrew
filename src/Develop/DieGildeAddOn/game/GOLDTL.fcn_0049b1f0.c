@@ -111,7 +111,7 @@ int __cdecl fcn_0049b1f0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 	}
 occupied:
 	i = gm_RandomMod(0xc) & 0xffff;
-	while (slot[i].a <= 0) {
+	while (slot[i].a < 1) {
 		i = (i + 1) % 12;
 	}
 	a.type = 1;

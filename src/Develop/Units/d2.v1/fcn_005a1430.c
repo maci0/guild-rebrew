@@ -120,7 +120,7 @@ void __cdecl fcn_005a1430(void)
   if (((!(fcn_0042e450() < *(float *)(v7 + 0x5c))) || ((*(unsigned short *)&g_7f4c04) <= 0xb)) || (v11 < 10000)) {
     d2_SetForm(v6,2);
     io_AppendText(0x1875);
-    if (0xc <= (*(unsigned short *)&g_7f4c04)) {
+    if ((*(unsigned short *)&g_7f4c04) > 0xb) {
       v26 = *(float *)(v7 + 0x5c) * (*(float *)0x664178) - (*(float *)0x6628ac);
       goto label_5a15b5;
     }

@@ -27,7 +27,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 
 	e = ent;
 	if (fcn_0048e7f0(ent, (unsigned short**) &ent) != 0) {
-		if (opt == 0 && (action == 0x43 || action == 0)) {
+		if ((action == 0x43 || action == 0) && opt == 0) {
 			if (fcn_005463a0(2, 0, 0xd, 2, *(unsigned short*) e) == 0) {
 				if (ent != 0) {
 					c = (int) *(unsigned char*) ent;

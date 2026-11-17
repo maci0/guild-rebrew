@@ -12,7 +12,7 @@ int __cdecl fcn_00490c10(ENT_490c10* a0, int unused, int* out)
     int t;
 
     gm_MapEntityStatRange((unsigned char) a0->f164);
-    v = (int) ((a0->fac - *(float*) 0x662918) * *(float*) 0x662a98);
+    v = (int) ((a0->fac - *(float*) 0x662918) * 5.0f);
     t = v < 4 ? v : 4;
     t = t < 1 ? 1 : t;
     fcn_004f4830(7, &buf);
