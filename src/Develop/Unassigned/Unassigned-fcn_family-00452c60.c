@@ -161,9 +161,9 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
 			p->f4c = (char) ((rand() & e->d3) + e->d0);
 			p->f4f = 0;
 			p->f30 = t;
-			v[0] = (float) rand() * *(float*) 0x662a18 - *(float*) 0x6628cc;
-			v[1] = (float) rand() * *(float*) 0x662a18 - *(float*) 0x6628cc;
-			v[2] = (float) rand() * *(float*) 0x662a18 - *(float*) 0x6628cc;
+			v[0] = (float) rand() * *(float*) 0x662a18 - 0.5f;
+			v[1] = (float) rand() * *(float*) 0x662a18 - 0.5f;
+			v[2] = (float) rand() * *(float*) 0x662a18 - 0.5f;
 			fcn_004518a0(v);
 			if (!(e->d4 & 0x60)) {
 				p->f34 = t;
@@ -348,8 +348,8 @@ char __cdecl fcn_00453470(void* a1, unsigned int a2)
 				*(unsigned char*) (e + 0xd0);
 			*(unsigned char*) (p + 0x4f) = 0;
 			*(unsigned int*) (p + 0x30) = a2;
-			v[0] = (float) rand() * RAND_UNIT_453470 - *(float*) 0x6628cc;
-			v[1] = (float) rand() * RAND_UNIT_453470 - *(float*) 0x6628cc;
+			v[0] = (float) rand() * RAND_UNIT_453470 - 0.5f;
+			v[1] = (float) rand() * RAND_UNIT_453470 - 0.5f;
 			v[2] = 0.0f;
 			fcn_004518a0(v);
 			if (!(*(unsigned char*) (e + 0xd4) & 0x60)) {

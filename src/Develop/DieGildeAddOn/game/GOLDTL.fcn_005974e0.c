@@ -1,4 +1,5 @@
 extern char* g_1015ea0;
+extern int g_67d370;
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_0050dfd0(char*, int);
 int __cdecl gm_GetMsgField(char*, char*);
@@ -183,7 +184,7 @@ int __cdecl fcn_005974e0(int a0, char* a1)
         !CountDisplayCounters()) {
         v7 = (int*) 0x778dc0;
         do {
-            if (*v7 != -1 && *v7 == *(int*) 0x67d370) {
+            if (*v7 != -1 && *v7 == g_67d370) {
                 v10 = (int) fcn_00502cd0(*(unsigned int*) (v3 + 0x14), 1, 0,
                                          v7[-8]);
                 if (!v10) {

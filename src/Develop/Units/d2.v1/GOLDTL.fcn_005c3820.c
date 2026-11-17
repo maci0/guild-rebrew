@@ -111,10 +111,8 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		else if (g_100f1dc != -1) {
-			if (elem == g_67d370) {
-				g_774654 = 1;
-			}
+		else if (g_100f1dc != -1 && elem == g_67d370) {
+			g_774654 = 1;
 		}
 		if (g_100f1dc != -1 && entry != 0) {
 			for (i = 0; table[i] != 0; i++) {

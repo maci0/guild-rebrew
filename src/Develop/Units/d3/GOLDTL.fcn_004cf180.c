@@ -98,8 +98,10 @@ int __cdecl fcn_004cf180(void)
                                            (g_6629c8 - dist * g_664ed0));
                                 node = *q;
                                 *(int*) (node + 0x24) -= t;
-                                flag = (*(int*) (node + 0x16c) ==
-                                        *(int*) &g_772e9c) ? 1 : 2;
+                                if (*(int*) (node + 0x16c) == *(int*) &g_772e9c)
+                                    flag = 1;
+                                else
+                                    flag = 2;
                                 fcn_004cfc40((char*) node, t, flag);
                                 if (!fcn_004d4790((char*) e)) {
                                     fcn_00406340((char*) m, "Explosion_s", 1);

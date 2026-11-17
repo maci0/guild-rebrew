@@ -17,6 +17,7 @@ void __cdecl fcn_00473150(unsigned char*);
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
 extern void (__stdcall* g_662264)(int);
 extern int g_7747d4, g_7e46ac, g_1040494, g_1040490, g_7e1f80;
+extern unsigned char g_772d10;
 
 /* ADDRESS: GOLDTL 0x005448e0 */
 void __cdecl fcn_005448e0(void)
@@ -39,7 +40,7 @@ void __cdecl fcn_005448e0(void)
 		fcn_005373e0(0, g_7e46ac);
 	}
 	b = buf;
-	saved = *(unsigned char*) 0x772d10;
+	saved = g_772d10;
 	*(unsigned char*) 0x772d10 = 0;
 	sprintf(b, (char*) 0x6a4538, (char*) 0x6a3658);
 	*(int*) 0x6b5c90 = 1;

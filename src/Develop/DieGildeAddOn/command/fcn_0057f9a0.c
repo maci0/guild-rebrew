@@ -22,15 +22,15 @@ void __cdecl fcn_0057f9a0(int a0)
 		return;
 	}
 	key = g_774970;
-	idx = 0;
+	idx = -1;
 	p = g_7f4ca0 + 0x16c;
 	for (;;) {
 		char* rec = *(char**) p;
+		idx++;
 		if (rec != 0 && *(unsigned short*) (rec + 0x27) == key) {
 			break;
 		}
 		p += 0x21c;
-		idx++;
 		if ((int) p >= (int)(g_7f4ca0 + 0x6556c)) {
 			return;
 		}

@@ -173,7 +173,7 @@ have_image:
 						} while (1);
 					}
 					v7 = (short*) (r + 0x23);
-					for (j = 0; j <= 0x3f; j++) {
+					for (j = 0; j < 0x40; j++) {
 						if (*v7 != -1) {
 							v5 = *v7 & 0x7fff;
 							c = *(char*) (lpObjektePROT + v5 * 0x41);

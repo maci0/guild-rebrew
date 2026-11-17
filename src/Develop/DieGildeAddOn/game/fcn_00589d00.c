@@ -1,4 +1,5 @@
 #include <string.h>
+extern int g_7f4c00, g_7f4c08; extern unsigned short g_7f4c0c;
 extern int g_772514, g_100f1dc, g_14ce8e0, g_774654, g_67d370; extern char* g_1015ea0; extern unsigned short g_774970; extern unsigned char g_773d75;
 
 extern float g_662acc;
@@ -147,10 +148,10 @@ void __cdecl fcn_00589d00(int a0)
 					             (unsigned int) *(unsigned short*) (a0 + 0x27) *
 					                 0x21c);
 					*(int*) (req + 0xc) = *(int*) (a0 + 1);
-					*(int*) (req + 0x28) = *(int*) 0x7f4c00;
+					*(int*) (req + 0x28) = g_7f4c00;
 					*(int*) (req + 0x2c) = *(int*) 0x7f4c04;
-					*(int*) (req + 0x30) = *(int*) 0x7f4c08;
-					*(short*) (req + 0x34) = *(short*) 0x7f4c0c;
+					*(int*) (req + 0x30) = g_7f4c08;
+					*(short*) (req + 0x34) = g_7f4c0c;
 					*(int*) (req + 0x5c) = *(int*) (a0 + 1);
 					*(int*) (req + 0x60) = *(int*) (v6 + 4);
 					if (*(int*) (v6 + 0x170) != 0)

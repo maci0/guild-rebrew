@@ -127,6 +127,7 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 		found = (char*) gm_EntityAccumulate(rec);
 		if (found != 0) {
 			memset(&job, 0, sizeof(job));
+			job.f9e = 1;
 			job.f08 = *(unsigned int*) (entity + 4);
 			job.f04 = 0x0f;
 			job.f0c = -1;
@@ -138,7 +139,6 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 			job.f58 = *(unsigned int*) (rec + 2);
 			job.f5c = *(unsigned int*) (found + 1);
 			job.f60 = *(unsigned int*) (entry + 1);
-			job.f9e = 1;
 			fcn_004c5530((int) &job);
 		}
 	}

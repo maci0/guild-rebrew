@@ -324,14 +324,14 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 			g = (float) (rec.f20 * 0.0714285746f * ((double) v * g_665dd0));
 			rec.f2c = rec.f2c + g;
 			if (rec.f2c < g_6628a0) {
-				ub.n = 0;
+				up.n = 0;
 			} else {
-				ub.n = (int) rec.f2c;
-				rec.f2c = rec.f2c - (float) ub.n;
+				up.n = (int) rec.f2c;
+				rec.f2c = rec.f2c - (float) up.n;
 			}
 			if (ub.n != 0) {
-				if (ub.n < ub.n) {
-					ub.n = ub.n;
+				if (up.n < ub.n) {
+					ub.n = up.n;
 				}
 				if (ub.n > 0) {
 					if (ub.n < 1) {

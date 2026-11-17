@@ -133,9 +133,7 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 	while (fcn_005373e0((void*) fcn_0059e740, 0x677c7) != 0) {
 		fcn_00595e20(a0, ids[6]);
 		fcn_005963f0(dlg, 1, 0, a0);
-		ids[3] = 0;
-		ids[4] = 0;
-		ids[5] = 0;
+		memset(ids + 3, 0, 3 * sizeof(int));
 		entity = fcn_005463a0(2, 0, 0x14, 3, *(int*) (a0 + 1));
 		while (entity != 0) {
 			for (i = 0; i < 3; i++) {

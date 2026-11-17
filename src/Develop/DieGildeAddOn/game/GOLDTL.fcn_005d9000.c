@@ -134,7 +134,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		n = 0;
 		p = (unsigned char *) &g_7f4ca2;
 		do {
-			if (n > 7)
+			if (n >= 8)
 				break;
 			a = *p;
 			if (a == 6 || a == 7 || a == 5) {

@@ -120,7 +120,7 @@ int __cdecl fcn_00578a10(char* a1)
 			return;
 		}
 		if (*(int*) (a1 + 0xbc) != 0) {
-			t = *(float*) 0x6628a0 - gm_GetEntitySkill(m, 1);
+			t = 1.0f - gm_GetEntitySkill(m, 1);
 			fcn_005b3000(tbl, m, n, t + gm_RandomFloat01() > g_6629c8 ? 0 : 1);
 			*(int*) (a1 + 0x70) = -1;
 			return;

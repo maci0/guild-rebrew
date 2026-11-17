@@ -1,3 +1,4 @@
+extern int g_1041d0c;
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, unsigned int, unsigned int);
 int __cdecl fcn_00439c60(int);
 void __cdecl fcn_0043ad20(int, int);
@@ -38,14 +39,14 @@ void __cdecl fcn_004441c0(void)
 		} else {
 			fcn_00438da0((float) *(unsigned int*) 0x10529e0, (float) *(unsigned int*) 0x10529e4, 0, 0,
 				*(int*) 0x1052a2c, *(int*) 0x1052a30, *(int*) 0x1052a34, *(int*) 0x10529e0, *(int*) 0x10529e4);
-			v4 = *(int*) 0x1041d0c;
-			if (*(int*) 0x1041d0c && *(int*) (*(int*) 0x1041d0c + 0x218) == 3) {
-				v4 = fcn_00439c60(*(int*) 0x1041d0c);
+			v4 = g_1041d0c;
+			if (g_1041d0c && *(int*) (g_1041d0c + 0x218) == 3) {
+				v4 = fcn_00439c60(g_1041d0c);
 			}
 			fcn_0043ad20(0x17e, *(char*) 0x6b8488);
 			fcn_0043b170(0x17e, *(char*) 0x6b8488, 1, 1);
 		}
-		p = (int*) *(int*) 0x1041d0c;
+		p = (int*) g_1041d0c;
 		if (p) {
 			switch (p[0x86]) {
 			case 0:

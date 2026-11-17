@@ -126,7 +126,7 @@ void __cdecl fcn_005a4490(char* p)
 			index = 0;
 			h = *(short*) (g_772500 + 0x269da);
 			w = *(short*) (g_772500 + 0x269d8);
-			if (count >= 1) {
+			if (count > 0) {
 				y = 0;
 				for (i = 0; i < count; i++) {
 					d2_SetForm(dialog, 2);
@@ -159,7 +159,7 @@ void __cdecl fcn_005a4490(char* p)
 			g_774654 = 1;
 		}
 		if (second != -1) {
-			arg = count >= 1 && *(int*) (slot * 0x8c + 0x102cbc8) != -1;
+			arg = count > 0 && *(int*) (slot * 0x8c + 0x102cbc8) != -1;
 			fcn_00472640(second, arg);
 		}
 		if (g_100f1dc != -1 && g_100f1dc == 2) {

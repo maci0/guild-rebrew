@@ -50,6 +50,7 @@ extern int g_67d378;
 extern int g_67d380;
 extern int g_67d384;
 extern int g_67d398;
+extern int g_772554;
 extern TextWin46b5f0 g_1015f40[0x60];
 
 int __cdecl d2_GetResourceData(int);
@@ -97,7 +98,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 	if (newflags != 0) {
 		w->flags = newflags;
 	}
-	if (*(int*) 0x772554 == 1) {
+	if (g_772554 == 1) {
 		goto out;
 	}
 	cnt = *(int*) 0x772530;

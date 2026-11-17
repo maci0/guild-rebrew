@@ -1,3 +1,5 @@
+#include <string.h>
+
 extern unsigned char g_773d75;
 int __cdecl fcn_004fd9d0(int, int);
 void * __cdecl fcn_004ee060(int);
@@ -49,10 +51,8 @@ void __cdecl fcn_005848b0(int a0)
 	int *ent;
 	char *rp;
 
+	memset(rec, 0, sizeof(rec));
 	count = 0;
-	rec[0] = 0;
-	rec[1] = 0;
-	rec[2] = 0;
 	pt[0] = (unsigned int)fcn_004fd9d0(0, 0x52);
 	for (i = 0; i < 3; i++) {
 		r = fcn_004ee060(i);
@@ -64,7 +64,7 @@ void __cdecl fcn_005848b0(int a0)
 	}
 	if (count == 0) {
 		io_FormatTextBuffer(msg, 0x404a, 0x868060 + g_773d75 * 0x2f4);
-		fcn_005263d0((void *)0x14b5404, msg, 0);
+		fcn_005263d0(*(void **)0x14b5404, msg, 0);
 		fcn_00532ef0();
 		return;
 	}

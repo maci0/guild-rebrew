@@ -34,6 +34,7 @@ void __cdecl fcn_0059e390(int a0);
 void __cdecl fcn_0058f0a0(int a0);
 void __cdecl fcn_005e69f0(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
+extern int g_774650;
 /* ADDRESS: GOLDTL 0x005a80d0 */
 void __cdecl fcn_005a80d0(unsigned char* a0)
 {
@@ -60,7 +61,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 		*(int*) &g_7e2700 = n;
 		return;
 	}
-	*(int*) 0x774658 = *(int*) 0x774650 + 1;
+	*(int*) 0x774658 = g_774650 + 1;
 	a0 = (unsigned char*) *(int*) &g_6b8010;
 	*(int*) 0x6a2520 = 0;
 	fcn_00530510();
