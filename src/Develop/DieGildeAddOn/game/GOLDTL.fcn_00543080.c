@@ -87,8 +87,8 @@ void __cdecl fcn_00543080(void)
 	v8 = (unsigned int*) 0x7f4e68;
 	do {
 		fcn_004e7700(&v8[-0x72]);
-		*v8 = *v8 & 0xe0874703;
 		v8[1] = v8[1] & 0x3d31ffc7;
+		*v8 = *v8 & 0xe0874703;
 		if (*(char*) ((int) v8 - 0x1c6) == 6) {
 			v5 = v11;
 		}

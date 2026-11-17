@@ -142,8 +142,8 @@ void __cdecl fcn_0056aef0(char* a1)
 		}
 		v = fcn_0050c4e0((unsigned char*)h);
 		i = (int)d;
-		d = (double)v * 120.0 * (252.0 / (double)i) / (double)k;
-		if (d > 2880.0f) {
+		d = (double)v * 120.0 * (252.0f / (float)i) / k;
+		if (2880.0f < d) {
 			d = 2880.0f;
 		}
 		i = (int)d;

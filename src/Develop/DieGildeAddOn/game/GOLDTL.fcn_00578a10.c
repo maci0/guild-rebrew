@@ -94,12 +94,7 @@ int __cdecl fcn_00578a10(char* a1)
 		return *(int*) (a1 + 0x70) = *(int*) (a1 + 0x70) + 1;
 	case 3:
 		m = gm_LookupEntityRecordById(*(int*) (a1 + 0xb4));
-		if (m == 0) {
-			*(int*) (a1 + 0x70) = s;
-			return;
-		}
-		o = *(char**) (m + 0x16c);
-		if (o == 0) {
+		if (m == 0 || (o = *(char**) (m + 0x16c)) == 0) {
 			*(int*) (a1 + 0x70) = s;
 			return;
 		}
@@ -107,12 +102,7 @@ int __cdecl fcn_00578a10(char* a1)
 		return *(int*) (a1 + 0x70) = *(int*) (a1 + 0x70) + 1;
 	case 4:
 		m = gm_LookupEntityRecordById(*(int*) (a1 + 0xb4));
-		if (m == 0) {
-			*(int*) (a1 + 0x70) = -1;
-			return;
-		}
-		o = *(char**) (m + 0x16c);
-		if (o == 0) {
+		if (m == 0 || (o = *(char**) (m + 0x16c)) == 0) {
 			*(int*) (a1 + 0x70) = -1;
 			return;
 		}

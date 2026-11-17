@@ -43,8 +43,8 @@ int __cdecl fcn_0053b1b0(void)
 	v_ret = 0;
 	memset((void*) 0x7e1fd8, 0, 24);
 	v_first = 1;
-	memcpy(st, (void*) 0x7e1fc0, 44);
 	v_len = 0x7e;
+	memcpy(st, (void*) 0x7e1fc0, 44);
 	v_id = -1;
 	for (i = 4; i < 6; i++) {
 		if (i < 4)

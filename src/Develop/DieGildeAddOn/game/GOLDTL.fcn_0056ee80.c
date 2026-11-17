@@ -30,7 +30,7 @@ void __cdecl fcn_00500bb0(void*, int, int, int);
 int __cdecl fcn_0055be70(int*);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
 void __cdecl fcn_004c5ed0(int, char*, int);
-int __cdecl gm_RandomMod(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 char* __cdecl fcn_005463a0(int, int, int);
 int __cdecl fcn_004c4450(int);
 int* __cdecl fcn_004c4480(int);
@@ -158,7 +158,7 @@ label_1bc:
 					fcn_00529160(rec1, 0, *(unsigned short*) ent, (int) a0);
 					fcn_004c5c80(*(int*) (a0 + 0x8c + cnt * 4));
 					fcn_004c5da0(*(int*) (a0 + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 0, s_6a6dc4);
-					fcn_004c5ed0(*(int*) (a0 + 0x8c + cnt * 4), gestik[gm_RandomMod(3) & 0xffff], 1);
+					fcn_004c5ed0(*(int*) (a0 + 0x8c + cnt * 4), gestik[gm_RandomMod(3)], 1);
 				}
 			}
 		}
@@ -199,7 +199,7 @@ label_1bc:
 			val = (int) gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (a0 + 8) * 0x21c + 4));
 			row = (int) ((unsigned short) *(unsigned short*) (q + 8) * 0x21c + (int) g_7f4ca0);
 			if (row != 0 && val != 0) {
-				ent = fcn_0050b750((gm_RandomMod(200) & 0xffff) + 0x226, g_773d75);
+				ent = fcn_0050b750(gm_RandomMod(200) + 0x226, g_773d75);
 				io_FormatTextBuffer(buf, 0x19ea, rec1, ent, *(unsigned short*) row);
 				fcn_00545d40(*(int*) (val + 4), *(int*) (val + 4), buf, 1, 0x5f0, s_6a6a60);
 				io_FormatTextBuffer(buf, 0x19eb, rec1, ent);
@@ -217,7 +217,7 @@ label_1bc:
 			if (*(int*) (a0 + 0x8c + cnt * 4) != -1) {
 				val = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + cnt * 4));
 				if (val != 0) {
-					fcn_004ff210(*(unsigned short*) val, 0xffffff9c - (gm_RandomMod(100) & 0xffff));
+					fcn_004ff210(*(unsigned short*) val, 0xffffff9c - gm_RandomMod(100));
 				}
 			}
 		}
@@ -286,7 +286,7 @@ label_1bc:
 			if (i != 0) {
 				q = (int) fcn_00502cd0(*(int*) (h + 0x14), 1, 5);
 				while (q != 0) {
-					if ((gm_RandomMod(100) & 0xffff) >= 0x33) {
+					if (gm_RandomMod(100) > 0x32) {
 						cnt = gm_GetMsgField(h, (int*) q);
 						cnt = (int) ((double) cnt * ((double) count * 0.1));
 						if (cnt <= 0) {

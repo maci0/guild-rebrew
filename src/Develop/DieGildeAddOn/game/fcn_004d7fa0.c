@@ -1,6 +1,6 @@
 extern char* g_772eb4; extern int g_772f2c; extern unsigned short* g_772e9c; extern int g_67a370;
 char* __cdecl fcn_004cef30(int id);
-int __cdecl fcn_0042e410(int code);
+unsigned short __cdecl fcn_0042e410(int code);
 char* __cdecl fcn_004ceac0(int a, char* s);
 int __cdecl fcn_004d2f70(char* s);
 char* __cdecl fcn_004d34f0(char* s);
@@ -67,7 +67,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	} else {
 		ratio = (double) count80 / (double) countC0;
 	}
-	if (ratio <= 0.5 && (fcn_0042e410(0x64) & 0xffff) > 0x14) {
+	if (ratio <= 0.5 && fcn_0042e410(0x64) > 0x14) {
 		found = 0;
 		i = 0;
 		while (i < 0x10 && found == 0) {
@@ -95,7 +95,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 		memcpy(tmp, e, 0x2c);
 		val = fcn_004ff040(s) * 100.0;
 		r = (int) val;
-		if (r >= 0x14 || (fcn_0042e410(0x64) & 0xffff) <= 0x1e) {
+		if (r >= 0x14 || fcn_0042e410(0x64) <= 0x1e) {
 			r = fcn_004d2f70(s);
 			if (r == 0) {
 				continue;

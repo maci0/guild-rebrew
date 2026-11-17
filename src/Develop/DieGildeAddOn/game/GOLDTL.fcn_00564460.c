@@ -40,6 +40,7 @@ void __cdecl fcn_00564460(char* e)
 	unsigned char* rec;
 	unsigned short* q;
 	unsigned char type;
+	int ptype;
 	int k;
 	int a;
 	int b;
@@ -69,26 +70,7 @@ void __cdecl fcn_00564460(char* e)
 		p = (unsigned char*) gm_SearchTable67(*(int*) (e + 0xac));
 		rec = (unsigned char*) (lpGebaeudePROT + *p * 0x24d);
 		n = fcn_0050cf50(p, (int) (char) p[0x5c]);
-		if (*rec != 2) {
-			k = 0;
-			type = *(unsigned char*) (lpGebaeudePROT + *p * 0x24d);
-			c = *(unsigned short*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca0);
-			if (gm_StartFilteredEntitySearch(2, 4, c, 5, type) != 0) {
-				do {
-					k++;
-				} while (gm_FindNextFilteredEntity());
-			}
-			if (k > 1) {
-				f = 1.6f;
-			} else {
-				type = *(unsigned char*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca2);
-				if (type != 6 && type != 7 && type != 5) {
-					f = 1.6f;
-				} else {
-					f = 8.0f;
-				}
-			}
-		} else {
+		if (*rec == 2) {
 			unsigned char* v4;
 
 			v4 = *(unsigned char**) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4e10);
@@ -99,6 +81,25 @@ void __cdecl fcn_00564460(char* e)
 					if (v4 != 0 && *v4 < *p) {
 						f = 1.2f;
 					}
+				}
+			}
+		} else {
+			k = 0;
+			ptype = *(unsigned char*) (lpGebaeudePROT + *p * 0x24d);
+			c = *(unsigned short*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca0);
+			if (gm_StartFilteredEntitySearch(2, 4, c, 5, ptype) != 0) {
+				do {
+					k++;
+				} while (gm_FindNextFilteredEntity());
+			}
+			if (k > 1) {
+				f = 1.6f;
+			} else {
+				ptype = *(unsigned char*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca2);
+				if (ptype != 6 && ptype != 7 && ptype != 5) {
+					f = 1.6f;
+				} else {
+					f = 8.0f;
 				}
 			}
 		}

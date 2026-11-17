@@ -90,10 +90,10 @@ void __cdecl he_AllocTransport(char* a0)
 	idx = *(unsigned char*) second;
 	if (((TransportBuildingRow*) lpGebaeudePROT)[idx].kind == 10 && query != 0 &&
 	    (*(unsigned char*) (query + 0x20) & 1) != 0) {
+		best = second;
 		fbest = 1e8f;
 		fcn_00458a10((char*) *(int*) (first + 0x61),
 		             (float*) (*(int*) (first + 0x61) + 0x4c), pold);
-		best = second;
 		p = (char*) gm_StartFilteredEntitySearch(1, 5, 10);
 		if (p != 0) {
 			do {

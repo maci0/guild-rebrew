@@ -118,12 +118,12 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 			}
 			g_100d0c0[g_100b0ac].f1c = 0;
 			g_100d0c0[g_100b0ac].f20 = 0;
+			g_100d0c0[g_100b0ac].f48 = 0x21;
 			g_100d0c0[g_100b0ac].price = -1.0e10f;
 			g_100d0c0[g_100b0ac].f38 = 0;
 			g_100d0c0[g_100b0ac].f3c = 0;
 			g_100d0c0[g_100b0ac].f40 = 0;
 			g_100d0c0[g_100b0ac].f44 = 0;
-			g_100d0c0[g_100b0ac].f48 = 0x21;
 			g_100d0c0[g_100b0ac].flags = 0;
 			g_100b0ac++;
 		}

@@ -156,12 +156,12 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, int cells,
 			fcn_005c9090(buf, x, items->y + 0xf, 0xca, 0x56);
 			if (items->obj != (int*) owner && *(char*) ((int) items->obj + 2) != 6) {
 				items->win2 = fcn_004677e0(x - 0x23, (int) *(short*) (*(int*) &g_772500 + 0x1ebda) + 5 + y, 0x40, 0, 100, 0x75, 0x442, *(int*) &g_772514);
-				if (*(char*) ((int) items->obj + 2) != 7) {
+				if (!(*(char*) ((int) items->obj + 2) != 7)) {
+					fcn_00472380(items->win2, 0, 100, 0);
+				} else {
 					v = (int) fcn_0050f980(*(unsigned short*) owner,
 					    *(unsigned short*) items->obj, 1);
 					fcn_00472380(items->win2, 0, 100, v);
-				} else {
-					fcn_00472380(items->win2, 0, 100, 0);
 				}
 				fcn_00472640(items->win2, 1);
 				*(int*) (*(int*) &g_1015ea0 + 0x5c + items->win2 * 0x2f4) = 1;

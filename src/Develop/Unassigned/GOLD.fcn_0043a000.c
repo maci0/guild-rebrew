@@ -19,7 +19,7 @@ char* __cdecl fcn_0043a000(char* object)
     model = *(char**) (object + 0x1ec);
     if (!model)
         return 0;
-    if (*(unsigned char*) (model + 0x96c) == 0)
+    if (*(unsigned char*) (model + 0x96c) <= 0)
         return 0;
 
     eye = g_6b8014;

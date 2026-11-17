@@ -39,7 +39,7 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 	float offer;
 
 	v17 = 0;
-	if (a1 && a0 && *(short*) (a0 + 0x27) != -1 && a2) {
+	if (a1 && a0 && *(unsigned short*) (a0 + 0x27) != 0xffff && a2) {
 		v21 = gm_QueryEntitySum(*(int*) (a0 + 0x5d), g_773d75);
 		if ((char) a1[1] == 6) {
 			if (*(int*) 0x7f4c00 < 6) {

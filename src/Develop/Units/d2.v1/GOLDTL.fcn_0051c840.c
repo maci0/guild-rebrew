@@ -137,7 +137,7 @@ body:
 			break;
 		}
 		r = buf[++i] - '0';
-		if ((unsigned) r <= 9) {
+		if (r >= 0 && r <= 9) {
 			i++;
 		} else {
 			r = -1;

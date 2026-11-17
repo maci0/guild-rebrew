@@ -98,8 +98,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 		w->flags = newflags;
 	}
 	if (*(int*) 0x772554 == 1) {
-		w->flags = savedFlags;
-		return;
+		goto out;
 	}
 	cnt = *(int*) 0x772530;
 	for (n = 0; n < cnt; n++) {
@@ -244,6 +243,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 			fcn_00472880(back);
 		}
 	}
+out:
 	*(int*) 0x772530 = 0;
 	w->flags = savedFlags;
 }

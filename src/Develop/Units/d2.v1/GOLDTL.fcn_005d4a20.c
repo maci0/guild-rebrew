@@ -102,8 +102,8 @@ void __cdecl fcn_005d4a20(void)
 	for (i = 0; i < 0x3a; i++) {
 		state[i] = 1;
 	}
-	g_100f1dc = -1;
 	now = g_6b7fac;
+	g_100f1dc = -1;
 	do {
 		prev = ptr;
 		count = 0;

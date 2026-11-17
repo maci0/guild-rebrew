@@ -149,7 +149,7 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 	strcpy(buf, name);
 	_strupr(buf);
 	if (!strstr(buf, (char*) 0x67af00)) {
-		return 0;
+		goto done;
 	}
 	ok = fcn_0044f0e0(buf);
 	obj = fcn_0044f250(buf, a1, nametab, namestep, namecount);
@@ -184,7 +184,7 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 	}
 	stream = vfs_Tfopen(buf, (char*) 0x6750e8, *(void**) 0x6b7fdc);
 	if (stream == 0) {
-		return (BGF_OBJ*) res;
+		goto done;
 	}
 	fcn_0044e190(stream, &hdr);
 	CloseVfsStream(stream);
@@ -508,6 +508,7 @@ cleanup:
 	if (hdr.anzahl_poi > 0 && hdr.poi != 0) {
 		m_FreeTracked(hdr.poi);
 	}
+done:
 	return (BGF_OBJ*) res;
 }
 #pragma optimize("", on)

@@ -40,6 +40,7 @@ int __cdecl fcn_00509620(int a0, int a1)
 	int j;
 	unsigned short p_slot;
 	unsigned short q_slot;
+	unsigned short pid;
 	int kind;
 	int value;
 	int rank;
@@ -73,7 +74,8 @@ int __cdecl fcn_00509620(int a0, int a1)
 	fcn_004e8940(p);
 
 	rec_a = *q;
-	rec_a.entity_index = p->entity_index;
+	pid = p->entity_index;
+	rec_a.entity_index = pid;
 	rec_a.entity_state = p->entity_state;
 	rec_a.entity_id = p->entity_id;
 	rec_a.is_active = p->is_active;
@@ -89,7 +91,7 @@ int __cdecl fcn_00509620(int a0, int a1)
 	if (rank != 0) {
 		found = gm_GetEntityTableEntry(p);
 		if (found != 0) {
-			item = (char*) gm_CheckStatLevel(p->entity_index, rank);
+			item = (char*) gm_CheckStatLevel(pid, rank);
 			if (item != 0) {
 				if (gm_GetOppositeStatIndex(q->age) <= gm_GetOppositeStatIndex((int) item)) {
 					rec_a.age = p->age;

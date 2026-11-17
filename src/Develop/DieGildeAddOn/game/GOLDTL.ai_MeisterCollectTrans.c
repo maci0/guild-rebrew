@@ -117,7 +117,7 @@ next:
 		type = **(unsigned char**) (e + 0x16c);
 		row = &((BuildingRow489250*) lpGebaeudePROT)[type];
 		if (row->kind == 9) {
-			if (count == n136) {
+			if (count - n136 == 0) {
 				t = (int) eval_ObjektPreis2Credits(0x134, 100);
 				fcn_004c5150(-1, *(int*) (g_7f4ca4 +
 				                         *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),

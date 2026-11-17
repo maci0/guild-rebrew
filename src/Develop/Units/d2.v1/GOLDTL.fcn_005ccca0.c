@@ -145,7 +145,11 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 				n = g_6ac8a8[g_775344].create(
 						(char*) &g_7f4ca0 + g_774970 * 0x21c, 0x10, rows, ent);
 				g_6ac8a8[g_775344].count = n;
-				g_6ac8a8[g_775344].present(h, 2, n != old ? 3 : -1, n, rows);
+				if (n != old) {
+					g_6ac8a8[g_775344].present(h, 2, 3, n, rows);
+				} else {
+					g_6ac8a8[g_775344].present(h, 2, -1, n, rows);
+				}
 				fcn_005ccc00(cur, g_6ac8a8[g_775344].count, rows);
 			} else {
 				fcn_005cc240(h, 2, 3);

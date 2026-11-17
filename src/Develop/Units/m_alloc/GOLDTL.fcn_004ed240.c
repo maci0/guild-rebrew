@@ -88,8 +88,7 @@ unsigned int __cdecl fcn_004ed240(void)
 			g_772fdc[i * 0xc + 3] = (unsigned char) (v >= 0xfc ? 0xfc : v);
 			GetPrivateProfileStringA(app, s_68df54, s_68df5c, out, 0x100, path);
 			v = atoi(out);
-			v = v <= 0x12 ? 0x12 : v;
-			v = v >= 0x1e ? 0x1e : v;
+			v = v > 0x12 ? (v < 0x1e ? v : 0x1e) : 0x12;
 
 
 

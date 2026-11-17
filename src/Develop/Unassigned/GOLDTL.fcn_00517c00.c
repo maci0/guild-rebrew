@@ -90,7 +90,7 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 		} else {
 			strcat(a4, "s");
 		}
-		return 1;
+		goto ret_one;
 	case 4:
 		if (*(unsigned char*) (p + 0x164)) {
 			sprintf(a4, "%s %s", fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x18f : 0x130) + *(unsigned char*) (p + 0x164)], 1, 4), (char*) p + 0x30);
@@ -136,7 +136,7 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 		} else {
 			sprintf(a4, "%s", (char*) p + 0x30);
 		}
-		return 1;
+		goto ret_one;
 	case 8:
 		if (*(unsigned char*) (p + 0xd)) {
 			strcpy((char*) b3, fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], a2, 4));
@@ -193,6 +193,7 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 		sprintf(a4, "%s %s", (char*) (i != 0 ? b2 : b3), (char*) b1);
 		return 1;
 	}
+ret_one:
 	return 1;
 }
 unsigned char _dpad_149d188[33176];
