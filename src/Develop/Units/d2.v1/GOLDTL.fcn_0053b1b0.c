@@ -47,7 +47,7 @@ int __cdecl fcn_0053b1b0(void)
 	memcpy(st, (void*) 0x7e1fc0, 44);
 	v_id = -1;
 	for (i = 4; i < 6; i++) {
-		if (i < 4)
+		if (i <= 3)
 			st[6 + st[i]] = (int) (st[6 + st[i]] + 21.0f);
 		else
 			st[6 + st[i]] = (int) (st[6 + st[i]] + 63.0);

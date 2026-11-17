@@ -126,10 +126,10 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 			return;
 		}
 		m = gm_SearchTable67(id);
-		if (*(unsigned short*) (a1 + 0x5a) & 0x400) {
+		if (*(unsigned char*) (a1 + 0x5b) & 4) {
 			return;
 		}
-		if (m == 0) {
+		if (!m) {
 			return;
 		}
 		memset(&msg, 0, sizeof msg);

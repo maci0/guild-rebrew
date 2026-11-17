@@ -129,8 +129,8 @@ int __cdecl fcn_0041a380(unsigned int minWidth, unsigned int minHeight, unsigned
 			}
 		}
 		qsort((void*) MODES, MODECOUNT, 0x10, fcn_0041a8d0);
-		offset += 0x508;
 		i++;
+		offset += 0x508;
 	} while (i < ADAPTERCOUNT);
 	}
 	for (i = 0, offset = 0; i < ADAPTERCOUNT; i++, offset += 0x508) {

@@ -96,7 +96,7 @@ void __cdecl fcn_004ff8f0(void)
 				top++;
 		}
 	}
-	if (top <= 5 && !(unsigned short) gm_RandomMod(4)) {
+	if (top < 6 && !(unsigned short) gm_RandomMod(4)) {
 		handle = fcn_004c4fc0(0x10, -1, -1, gm_RandomMod(4) + 0x10, -1, 0, 0, 0);
 		if (handle != -1) {
 			while (!fcn_004c4450(handle)) {

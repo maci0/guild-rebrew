@@ -58,7 +58,7 @@ void __cdecl fcn_00589d00(int a0)
 	int i;
 
 	total = gm_WalkEntityChain(g_774970);
-	for (i = 0; i < 20; i++)
+	for (i = 0; i <= 19; i++)
 		q[i] = 0;
 	for (i = 7; i < 15; i++)
 		q[i] = -1;

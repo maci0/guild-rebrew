@@ -44,8 +44,8 @@ int __cdecl fcn_005d6030(char* a0, char* a1)
 		*(int*) (rec + 0x58) = *(int*) (a0 + 4);
 		*(char*) (rec + 4) = 0x47;
 		*(int*) (rec + 0x28) = g_7f4c00;
-		*(int*) (rec + 0x2c) = g_7f4c04;
 		*(int*) (rec + 0x30) = g_7f4c08;
+		*(int*) (rec + 0x2c) = g_7f4c04;
 		*(unsigned short*) (rec + 0x34) = g_7f4c0c;
 		*(char*) (rec + 0x36) = 2;
 		*(int*) (rec + 0x5c) = *(int*) (found + 4);

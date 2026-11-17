@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include "Develop/Units/d3/d3_camera.h"
+#include "client_lighting.h"
 
 extern int g_6791d0;
 extern int g_67a370;
@@ -116,8 +117,8 @@ int __cdecl fcn_0053c560(void)
 		}
 	}
 	oldSound = g_6791d0;
-	if (*(int *) 0x6b8300 != 0) {
-		base = *(int *) 0x6b8300;
+	if (g_6b8300 != 0) {
+		base = g_6b8300;
 		*(unsigned char *) (base + 0x8036) =
 		    (unsigned char) ((*(unsigned char *) (base + 0x8036) & 0xeb) | 8);
 	}

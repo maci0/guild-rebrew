@@ -48,7 +48,7 @@ void __cdecl fcn_005963f0(int a0, int a1, int a2, unsigned int a3)
 			d2_SetElementImage(v[1], *v + 0x741);
 		}
 		v[-1] = *v;
-		if (*v >= 2) {
+		if (*v > 1) {
 			tbl = g_772500;
 			v[-3] = (v1 - *(short*) (tbl + 0x261a4 + *v * 0x54)) >> 1;
 			v[-2] = (*(short*) (tbl + 0x2624e) + 0x16) * i;

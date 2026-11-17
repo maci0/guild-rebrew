@@ -74,8 +74,8 @@ void __cdecl fcn_005c23b0(char* e)
 			m.type = 0x1b;
 			m.owner = -1;
 			m.flags = 2;
-			m.other = *(int*) (e + 1);
 			m.key = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+			m.other = *(int*) (e + 1);
 			m.extra = fcn_0050b750(fcn_00471f80(h), g_773d75);
 			fcn_004c5530(&m);
 			fcn_00526120(*(int*) 0x14ab238, 0);

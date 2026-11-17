@@ -172,7 +172,7 @@ void __cdecl fcn_004d8d00(char* a0)
 			}
 			if (*(int*)(ent + 0x58) == 1 || *(int*)(ent + 0x58) == 2) {
 				n = (int)fcn_004ce680(obj);
-				if (n && *(int*)(n + 0x20) <= 0) {
+				if (n && *(int*)(n + 0x20) < 1) {
 					msg.f[0] = *(int*)(obj + 4);
 					msg.f[1] = 0;
 					fcn_004c6940(obj, 6, msg.f);

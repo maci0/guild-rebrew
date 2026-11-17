@@ -71,7 +71,7 @@ found:
 	vfs_ReadData((char*) &b, 4, 1, stream);
 	*(int*) (rec + 0x68) = (int) m_alloc(b, "txt_txt:txt_loadTextFile:Pointer");
 	vfs_ReadData((char*) *(int*) (rec + 0x68), b, 1, stream);
-	if (a > 0) { dst = (int*) ((*pc) * 4 + 0x14a5320); base = *(int*) (rec + 0x68); for (i = 0; i < a; i++, dst++)
+	if (a >= 1) { dst = (int*) ((*pc) * 4 + 0x14a5320); base = *(int*) (rec + 0x68); for (i = 0; i < a; i++, dst++)
 		*dst =
 		    ((int*) table)[i] + base; }
 	if (g_6b7f98 + 1 < *pcount)

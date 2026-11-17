@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char g_7f4ca0[];
+extern char g_7f4ca0[]; extern unsigned char g_773d75;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -74,7 +74,7 @@ int __cdecl fcn_004ba9f0(int* a1)
 		if (chosen == 0 || found == 0)
 			return 0x400;
 		fcn_004c51f0(*(int*) (chosen + 1), -1, gm_RandomMod(2) + 0x134, 1,
-		    *(unsigned char*) 0x773d75, 0);
+		    g_773d75, 0);
 		io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7,
 		    *(unsigned short*) found);
 		he_MessageBoxQuickjump(*(int*) (e + 2), *(int*) (e + 2), buf,

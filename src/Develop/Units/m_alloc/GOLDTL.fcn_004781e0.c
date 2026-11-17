@@ -93,8 +93,8 @@ unsigned int* __cdecl fcn_004781e0(int a0, int a1, int a2, int a3, int a4, char 
 			*(unsigned int*) (v6 + 0x2e) += *(unsigned short*) (v6 + 6);
 			bytes = *(unsigned short*) (v6 + 6) * 2;
 			dst += bytes;
-			row += rowstride;
 			i++;
+			row += rowstride;
 		} while (i < *(unsigned short*) (v6 + 0xa));
 	}
 	*(unsigned int*) (v6 + 0x2a) = 0;
