@@ -75,7 +75,7 @@ void __cdecl fcn_004d06d0(void)
 					}
 				}
 			}
-			if (2 <= count) {
+			if (count > 1) {
 				code = 0x23;
 			}
 			if (*(int*) &g_7746a4 == 0 || g_67d370 != -1) {

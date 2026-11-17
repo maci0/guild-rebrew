@@ -291,10 +291,10 @@ La5d:
 		if (e != 0) {
 			c = s->flag;
 			if (c != g_7e2760[idx] && (*(unsigned char*) (e + 0x8c) & 0x40) == 0) {
-				if (c == 0) {
-					fcn_00414c30(*(int*) (e + 0x34), 0);
-				} else {
+				if (c != 0) {
 					fcn_00414c30(*(int*) (e + 0x34), 1);
+				} else {
+					fcn_00414c30(*(int*) (e + 0x34), 0);
 				}
 			}
 			c = s->flag;

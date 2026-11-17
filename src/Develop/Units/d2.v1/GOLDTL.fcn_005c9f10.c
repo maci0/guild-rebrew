@@ -96,13 +96,7 @@ label_5ca044:
 				fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, v10 + 3, v15[3], g_772514);
 			}
 			fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, (int) *(short*) ((int) g_772500 + 0x1ebda) + -0x13 + v10, v15[4], g_772514);
-			if (a1 != 8) {
-				v3 = (unsigned short*) v15[-6];
-				io_FormatTextBuffer(v13, 0x6ac964, (-(unsigned int) (*(char*) ((int) v3 + 9) != 0) & 10) + 0x114 + (unsigned int) *(unsigned char*) ((int) v3 + 0xd), *v3);
-				fcn_005c9090(v13, v6, v15[-1], 0xca, 0x56);
-				io_FormatTextBuffer(v13, 0x6ac95c, *(unsigned short*) v15[-6]);
-				fcn_005c9090(v13, v6, v15[-1] + 0xf, 0xca, 0x56);
-			} else {
+			if (a1 == 8) {
 				v12 = *(int*) &((unsigned short*) v15[-6])[0xe6];
 				if (v12 & 0x1000) {
 					v12 = 0x26;
@@ -118,6 +112,12 @@ label_5ca044:
 				io_FormatTextBuffer(v13, 0x6ac96c, *(unsigned short*) v15[-6]);
 				fcn_005c9090(v13, v6, v15[-1], 0xca, 0x56);
 				io_FormatTextBuffer(v13, g_679060, (-(unsigned int) (*(char*) (v15[-6] + 9) != 0) & 0x28) + 0x253 + v12);
+				fcn_005c9090(v13, v6, v15[-1] + 0xf, 0xca, 0x56);
+			} else {
+				v3 = (unsigned short*) v15[-6];
+				io_FormatTextBuffer(v13, 0x6ac964, (-(unsigned int) (*(char*) ((int) v3 + 9) != 0) & 10) + 0x114 + (unsigned int) *(unsigned char*) ((int) v3 + 0xd), *v3);
+				fcn_005c9090(v13, v6, v15[-1], 0xca, 0x56);
+				io_FormatTextBuffer(v13, 0x6ac95c, *(unsigned short*) v15[-6]);
 				fcn_005c9090(v13, v6, v15[-1] + 0xf, 0xca, 0x56);
 			}
 			v3 = a5;

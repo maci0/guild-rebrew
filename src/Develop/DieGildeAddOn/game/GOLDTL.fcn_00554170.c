@@ -98,14 +98,14 @@ void __cdecl fcn_00554170(char* obj)
 		if (found != 0) {
 			for (;;) {
 				if (strcmp(obj + 0xac, found + 0xac) == 0 &&
-				    *(unsigned short*) (found + 8) != *(unsigned short*) (obj + 8))
+				    *(unsigned short*) (obj + 8) != *(unsigned short*) (found + 8))
 					break;
 				found = he_fn_Handlung();
 				if (found == 0)
 					goto not_found;
 			}
 			if (gm_RandomMod(2) != 0 &&
-			    *(unsigned short*) (found + 8) != *(unsigned short*) (obj + 8)) {
+			    *(unsigned short*) (obj + 8) != *(unsigned short*) (found + 8)) {
 				memset(msg, 0, sizeof(msg));
 				msg[8] = 3;
 				msg[0x26] = 0xa2;

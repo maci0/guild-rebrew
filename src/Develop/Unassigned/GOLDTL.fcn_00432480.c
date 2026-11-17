@@ -176,12 +176,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 				prev = SI(slot + 0x38);
 				fs->sb = 0;
 				if (cur != prev) {
-					if (prev > (int) now) {
-						SF(slot + 0x40) = SF(slot + 0x44) +
-							(SF(slot + 0x48) - SF(slot + 0x44)) *
-							((float) (unsigned int) ((int) now - cur) /
-							 (float) (prev - cur));
-					} else {
+					if (!(prev > (int) now)) {
 						f = SF(slot + 0x48);
 						SI(slot + 0x38) = 0;
 						SI(slot + 0x34) = 0;
@@ -189,6 +184,11 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 						if (f == 0.0f) {
 							fs->sb = 1;
 						}
+					} else {
+						SF(slot + 0x40) = SF(slot + 0x44) +
+							(SF(slot + 0x48) - SF(slot + 0x44)) *
+							((float) (unsigned int) ((int) now - cur) /
+							 (float) (prev - cur));
 					}
 				}
 
@@ -435,14 +435,14 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 	flags = SB(st + 0x2d);
 	SB(st + 0x2d) = (unsigned char) (flags & ~0x20);
 	bit = ((flags & ~0x20) >> 1) & 1;
-	if (bit) {
-		cur = SI(st + 8);
-		fs->f18 = (float) SI(st + 0xc) / (float) QI(WR(cur), 0);
-		fs->f14 = 1.0f - fs->f18;
-	} else {
+	if (!(bit)) {
 		cur = SI(st + 4);
 		fs->f14 = (float) SI(st + 0xc) / (float) QI(WR(cur), 0);
 		fs->f18 = 1.0f - fs->f14;
+	} else {
+		cur = SI(st + 8);
+		fs->f18 = (float) SI(st + 0xc) / (float) QI(WR(cur), 0);
+		fs->f14 = 1.0f - fs->f18;
 	}
 
 	if (SB(st + 0x2d) & 4) {

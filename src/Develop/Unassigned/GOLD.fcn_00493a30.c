@@ -8,8 +8,8 @@ void __cdecl fcn_00493a30(unsigned char* game)
     int triples_left;
     int triples_right;
 
-    state = *(int*) (game + 8);
     left = 0;
+    state = *(int*) (game + 8);
     triples_left = 0;
     triples_right = 0;
     right = 0;

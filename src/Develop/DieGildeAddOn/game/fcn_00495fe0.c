@@ -109,8 +109,8 @@ int __cdecl fcn_00495fe0(int a0, char* obj, int flag, int* out1, int* out2)
 		for (i = 0; i < 0x88; i++) {
 			frame[i] = 0;
 		}
-		pct = ((unsigned char*) &attributes.x)[loop];
 		frame[0] = 1;
+		pct = ((unsigned char*) &attributes.x)[loop];
 		if (best1 < (int) pct) {
 			if (best1 > 0) {
 				maxIdx = best1;

@@ -105,8 +105,8 @@ void __cdecl fcn_005d4a20(void)
 	now = g_6b7fac;
 	g_100f1dc = -1;
 	do {
-		prev = ptr;
 		count = 0;
+		prev = ptr;
 		if (now <= (unsigned) g_6b7fac || changed) {
 			now = (unsigned)g_6b7fac + 500;
 			if (((((House*) g_7f4ca0)[g_774970].f1c8) & 0x100) != 0 || ptr != 0) {

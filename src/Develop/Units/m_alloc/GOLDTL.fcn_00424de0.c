@@ -181,10 +181,10 @@ after_banks:
 				break;
 			}
 			node = m_alloc(0x108, "sbs_Load");
-			if (tail != 0) {
-				*(void**) ((char*) tail + 0x104) = node;
-			} else {
+			if (tail == 0) {
 				*(void**) ((char*) hdr + 0x38) = node;
+			} else {
+				*(void**) ((char*) tail + 0x104) = node;
 			}
 			tail = node;
 			if (node == 0) {

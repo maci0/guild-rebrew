@@ -135,8 +135,7 @@ found_one:
 							fcn_00579410((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
 					}
 				}
-				idx = *(int*) (a0 + 0xb0) + 1;
-				*(int*) (a0 + 0xb0) = idx;
+				idx = ++*(int*) (a0 + 0xb0);
 				if (idx < 5 && *(int*) (a0 + 0xb4 + idx * 4) != 0) {
 					*(int*) (a0 + 0x70) -= 1;
 					return;

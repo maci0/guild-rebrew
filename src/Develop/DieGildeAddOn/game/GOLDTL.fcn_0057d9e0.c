@@ -25,7 +25,7 @@ void __cdecl fcn_0057d9e0(char* a)
 	*(int*) (a + 0x70) = *(int*) (a + 0x70) + 1;
 	fcn_00500bb0(a + 0x52, (gm_RandomMod(3) & 0xffff) + 3, 0, 0);
 	v = *(int*) ((char*) e + 0x194);
-	if (v <= 0)
+	if (v < 1)
 		return;
 	if ((int) ((gm_RandomMod(2) & 0xffff) + 1) < v)
 		v = (int) ((gm_RandomMod(2) & 0xffff) + 1);

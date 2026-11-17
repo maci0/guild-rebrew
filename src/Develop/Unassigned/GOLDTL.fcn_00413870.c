@@ -108,14 +108,7 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
 	d = (void*) 0xff;
 	e = 0;
 	if (ay == by) {
-		if (ay == cy) {
-			/* one row: a single span from the leftmost to the rightmost x */
-			t = ax < bx ? ax : bx;
-			x = t < cx ? t : cx;
-			t = ax > bx ? ax : bx;
-			t = t > cx ? t : cx;
-			hit = fcn_004137e0(map, (int*) &d, (int*) &e, x, t, ay);
-		} else {
+		if (ay != cy) {
 			/* flat top: advance each edge toward the bottom vertex */
 			hit = fcn_004137e0(map, (int*) &d, (int*) &e, ax, bx, ay);
 			dx = (float) (cx - ax);
@@ -128,6 +121,13 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
 				left += slope_a;
 				right += slope_b;
 			}
+		} else {
+			/* one row: a single span from the leftmost to the rightmost x */
+			t = ax < bx ? ax : bx;
+			x = t < cx ? t : cx;
+			t = ax > bx ? ax : bx;
+			t = t > cx ? t : cx;
+			hit = fcn_004137e0(map, (int*) &d, (int*) &e, x, t, ay);
 		}
 	} else {
 		/* general triangle: the top row collapses to the apex */

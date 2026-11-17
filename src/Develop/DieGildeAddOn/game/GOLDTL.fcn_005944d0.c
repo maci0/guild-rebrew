@@ -77,8 +77,11 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	window = fcn_00470820(0, 0, (char*) 0x6aa148);
 	saved = window;
 	fcn_00471b60(window);
-	id = (((BUILDING_ROW*) lpGebaeudePROT)[*p].kind != 0x1e) ? 0 : 2;
-	fcn_0052a0c0(p, id);
+	if (((BUILDING_ROW*) lpGebaeudePROT)[*p].kind == 0x1e) {
+		fcn_0052a0c0(p, 2);
+	} else {
+		fcn_0052a0c0(p, 0);
+	}
 	d2_SetForm(window, 3);
 	io_AppendText(0xb7);
 	fcn_00594340();

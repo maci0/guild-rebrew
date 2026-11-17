@@ -56,11 +56,11 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 		return 0;
 	if (code == 0x33) {
 		t = (g_7f4c04 & 0xffff) - 8;
-		if (t <= 0 || t < 10)
+		if (t <= 0 || t < 10) {
 			if (t <= 0) {
 				t = 0;
 			}
-		else
+		} else
 			t = 10;
 		d = (10 - t) * g_662a3c;
 		d = d * d;

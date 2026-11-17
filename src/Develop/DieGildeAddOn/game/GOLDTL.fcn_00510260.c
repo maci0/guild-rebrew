@@ -61,7 +61,7 @@ float __cdecl fcn_00510260(unsigned char* a0, int a1, int a2)
 	}
 	f = (float) (fcn_0050fdb0(*(unsigned short*) (a0 + 0x27), a1, a2) - 0.5);
 	f = (float) (f * 0.25);
-	if (*(unsigned char*) (a0 + 0x5b) & 0x10) {
+	if (*(unsigned short*) (a0 + 0x5a) & 0x1000) {
 		a = a + 0.1f;
 	}
 	f = (float) (f + a + (*(int*) (a0 + 0x41) - 2) * 0.1);

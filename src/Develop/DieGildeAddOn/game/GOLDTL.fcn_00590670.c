@@ -84,7 +84,7 @@ void __cdecl fcn_00590670(void)
 		}
 		else if (0xdf <= v3) {
 			if (0x427 <= v3) {
-				if (v3 <= 0x47e) {
+				if (v3 < 0x47f) {
 					v6 = v3 - 0x427;
 				}
 			}
@@ -93,7 +93,7 @@ void __cdecl fcn_00590670(void)
 			}
 		}
 		else if (0x427 <= v3) {
-			if (v3 <= 0x47e) {
+			if (v3 < 0x47f) {
 				v6 = v3 - 0x427;
 			}
 		}

@@ -117,8 +117,10 @@ found:
 	fcn_004c5360();
 	f = fcn_004ff210(*(unsigned short*) p, -cost);
 	if (a2 == 0) {
-		return 1;
+		goto fail_1;
 	}
 	*a2 = f;
+	goto fail_1;
+fail_1:
 	return 1;
 }

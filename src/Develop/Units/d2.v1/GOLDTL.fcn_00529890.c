@@ -207,13 +207,12 @@ label_529cf0:
 		v13 = (int*) 0x7e30c8;
 		do {
 			if (v13[2] != 0xffff) {
-				if (*(char*) (v13[2] * 0x21c + 0x7f4e28)) {
+				if (!(*(char*) (v13[2] * 0x21c + 0x7f4e28))) {
+					d2_SetElementValue(v13[-2], 0);
+				} else {
 					fcn_00473690(*(unsigned int*) (g_1015ea0 + 8
 						+ v13[-2] * 0x2f4), 1);
 					d2_SetElementValue(v13[-2], 1);
-				}
-				else {
-					d2_SetElementValue(v13[-2], 0);
 				}
 				if (*v13 != -1) {
 					fcn_0046b2b0(*v13);
@@ -275,17 +274,7 @@ label_529cf0:
 label_529f4c:
 					if (v15 != -1) {
 						v6 = v13[1];
-						if (v6 == -1) {
-							if (v15 >= 0xdf && v15 <= 0x3bb) {
-								v6 = fcn_0046f7e0(0x38, v3, v15,
-									g_772514, -2);
-							}
-							else {
-								v6 = fcn_0046f740(0x38, v3, v15,
-									g_772514);
-							}
-						}
-						else {
+						if (v6 != -1) {
 							if (v15 == *(int*) (g_1015ea0 + 8
 								+ v6 * 0x2f4)) {
 								goto label_529fe5;
@@ -298,6 +287,15 @@ label_529f4c:
 							}
 							else {
 								v6 = fcn_0046f740(0x38, v3, 0,
+									g_772514);
+							}
+						} else {
+							if (v15 >= 0xdf && v15 <= 0x3bb) {
+								v6 = fcn_0046f7e0(0x38, v3, v15,
+									g_772514, -2);
+							}
+							else {
+								v6 = fcn_0046f740(0x38, v3, v15,
 									g_772514);
 							}
 						}
