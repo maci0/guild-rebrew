@@ -3,7 +3,6 @@ int __cdecl fcn_00439c60(int);
 void __cdecl fcn_0043ad20(int, int);
 int __cdecl fcn_0043b170(int, int, int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-extern float g_6628dc;
 
 /* ADDRESS: GOLDTL 0x004441c0 */
 void __cdecl fcn_004441c0(void)
@@ -60,7 +59,7 @@ void __cdecl fcn_004441c0(void)
 			case 3:
 			case 4:
 				fcn_0064d41a(v9, (char*) 0x67aab8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15),
-					(double) (*((float*) p + 0x21) * g_6628dc), (double) (*((float*) p + 0x22) * g_6628dc), (double) (*((float*) p + 0x23) * g_6628dc), p);
+					(double) (*((float*) p + 0x21) * 57.2957764f), (double) (*((float*) p + 0x22) * 57.2957764f), (double) (*((float*) p + 0x23) * 57.2957764f), p);
 				*(char*) 0x6b85a1 = 0;
 				return;
 			case 5:
@@ -75,7 +74,7 @@ void __cdecl fcn_004441c0(void)
 			case 7:
 				v5 = (int) *((float*) p + 0x25);
 				fcn_0064d41a(v9, (char*) 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15),
-					(double) (*((float*) p + 0x21) * g_6628dc), (double) (*((float*) p + 0x22) * g_6628dc), (double) (*((float*) p + 0x23) * g_6628dc), v5, p);
+					(double) (*((float*) p + 0x21) * 57.2957764f), (double) (*((float*) p + 0x22) * 57.2957764f), (double) (*((float*) p + 0x23) * 57.2957764f), v5, p);
 				break;
 			case 8:
 				if (!(*((unsigned char*) p + 0x215) & 4)) {
@@ -86,7 +85,7 @@ void __cdecl fcn_004441c0(void)
 				}
 				v5 = (int) *((float*) p + 0x25);
 				fcn_0064d41a(v9, (char*) 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15),
-					(double) (*((float*) p + 0x21) * g_6628dc), (double) (*((float*) p + 0x22) * g_6628dc), (double) (*((float*) p + 0x23) * g_6628dc), v5, p);
+					(double) (*((float*) p + 0x21) * 57.2957764f), (double) (*((float*) p + 0x22) * 57.2957764f), (double) (*((float*) p + 0x23) * 57.2957764f), v5, p);
 				*(char*) 0x6b85a1 = 0;
 				return;
 			}

@@ -51,6 +51,7 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 	int i;
 	int id1;
 
+	count = 0;
 	saved = 0;
 	if (type == (unsigned int) st->type) {
 		saved = *(int*) (g_1016198 + st->slot * 0x3cc);
@@ -65,7 +66,6 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 	}
 
 	item = (SlotItem*) FindSlotEntryFiltered(0, a0, 0, 0, st->type);
-	count = 0;
 	if (item != 0) {
 		int y = 2;
 		de = st->entries;

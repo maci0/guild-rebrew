@@ -66,9 +66,8 @@ void __cdecl fcn_005ad000(void)
 	id = io_AppendText(0x19b1, h, h, *(unsigned short*) obj);
 	ctl1 = fcn_00472250(dlg, 1, id);
 	ctl2 = fcn_00472250(dlg, 1, id + 1);
-	id = *(unsigned short*) &g_774970;
 	msg.ctl = ctl2;
-	h = gm_SumSlotTreasury(id);
+	h = gm_SumSlotTreasury(*(unsigned short*) &g_774970);
 	fcn_00472380(ctl1, 0x96,
 	             fcn_0050b710(h, *(unsigned char*) &g_773d75), 0xfa);
 	d2_SetOverlayAnimation(0, 0);

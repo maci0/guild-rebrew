@@ -142,7 +142,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	}
 	start = g_6b7fac;
 	*(int*) (g_77255c + 0x3a4) = 0;
-	btnA = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x35);
+	btnA = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x35) != 0;
 	btnB = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x34);
 	if (t->x0 == 4) {
 		btnC = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5d) != 0;
@@ -150,7 +150,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	else if (t->x0 == 0x10) {
 		btnC = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5e) != 0;
 	} else { btnC = 1; }
-	fcn_00472640(out[0], btnA != 0);
+	fcn_00472640(out[0], btnA);
 	fcn_00472640(out[3], btnB != 0);
 	fcn_00472640(out[6], btnC);
 	for (;;) {

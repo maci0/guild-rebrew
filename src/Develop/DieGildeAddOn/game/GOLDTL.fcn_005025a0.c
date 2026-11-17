@@ -52,7 +52,7 @@ float __cdecl fcn_005025a0(int season, int slot)
 				: *(float*) (g_85ab90 + off + 0x20) / stock)
 			: flt_1);
 	scale = ratio > 0.25 ? ratio : 0.25;
-	if (scale >= 5.0) {
+	if (scale >= g_664e78) {
 		scale = 5.0;
 	}
 	stock = scale;

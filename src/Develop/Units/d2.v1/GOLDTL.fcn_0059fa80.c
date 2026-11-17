@@ -52,8 +52,6 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	int pair[2];
 	int id_a;
 	int id_b;
-	int v21;
-	int v22;
 	int v19;
 	int v5;
 	int v8;
@@ -83,12 +81,12 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	id_a = pair[0];
 	id_b = pair[1];
 	d2_SetForm(v8, 2);
-	v22 = 0x19;
-	v21 = (*(int*) (g_77255c + 0xc) - (int) *(short*) (g_772500 + 0x1ebd8)) / 2;
+	*(int*) (cmd + 0x14) = 0x19;
+	*(int*) (cmd + 0x10) = (*(int*) (g_77255c + 0xc) - (int) *(short*) (g_772500 + 0x1ebd8)) / 2;
 	*(unsigned int*) cmd = (unsigned int) v6;
 	*(unsigned int*) (cmd + 0x30) = 0;
 	fcn_005ca560(cmd);
-	fcn_005ca740(v21, v22, g_772514, 0x54, cmd, 1);
+	fcn_005ca740(*(int*) (cmd + 0x10), *(int*) (cmd + 0x14), g_772514, 0x54, cmd, 1);
 	g_100f1dc = -1;
 	for (;;) {
 		v5 = gm_LookupEntityRecordById(v3) && fcn_005463a0(1, 1, v4);

@@ -187,7 +187,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 	cnt = 0;
 	pg = 1;
 	i = 0;
-	for (;;) {
+	while (1) {
 		if ((int) (ent[0x232] + ent[0x231]) <= i) {
 			break;
 		}

@@ -133,11 +133,11 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 			bestdist = dist;
 			best = rec;
 		}
-		s1 = *(float*) 0x6628a0 /
-		     (dist * *(float*) 0x664138 + *(float*) 0x6628a0);
-		s2 = *(float*) 0x6628a0 /
+		s1 = 1.0f /
+		     (dist * *(float*) 0x664138 + 1.0f);
+		s2 = 1.0f /
 		     ((dist * *(float*) 0x662b30 + *(float*) 0x664138) * dist +
-		      *(float*) 0x6628a0);
+		      1.0f);
 		fcn_00414ab0(&va.x, &vb.x, *(char**) (rec + 0x61));
 		vb.x = (vb.x - va.x) * *(float*) 0x6628cc;
 		vb.y = (vb.y - va.y) * *(float*) 0x6628cc;

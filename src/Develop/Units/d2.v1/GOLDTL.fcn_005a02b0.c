@@ -69,7 +69,11 @@ int __cdecl fcn_005a02b0(void)
 		d2_SetForm(h, 1);
 		io_AppendText(0x15bb);
 		d2_SetForm(h, 2);
-		base = *(char*) (slot + 9) != 0 ? 0x18f : 0x130;
+		if (*(char*) (slot + 9) != 0) {
+			base = 0x18f;
+		} else {
+			base = 0x130;
+		}
 		io_AppendText(0x15bd, *(unsigned short*) slot,
 		    base + *(unsigned char*) (slot + 0x164) - 1);
 	}

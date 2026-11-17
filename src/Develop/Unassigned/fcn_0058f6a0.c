@@ -109,7 +109,9 @@ void __cdecl fcn_0058f6a0(const unsigned char* arg1)
                     pe += 0x21c;
                 } while ((int) pe < 0x85a228);
                 if (denied == 0) {
-                    if (found != 0) {
+                    if (found == 0) {
+                        sub_526120((char*) dword_14b556c, 0);
+                    } else {
                         memset(msg, 0, sizeof(msg));
                         msg[4] = 0x89;
                         msg[0x36] = 1;
@@ -144,8 +146,6 @@ void __cdecl fcn_0058f6a0(const unsigned char* arg1)
                         sub_51af00(text, 0x40a7, *(unsigned short*) found->data);
                         sub_526120(text, 0);
                         dword_774654 = 1;
-                    } else {
-                        sub_526120((char*) dword_14b556c, 0);
                     }
                 }
             } else if (dword_67d370 == cancel) {

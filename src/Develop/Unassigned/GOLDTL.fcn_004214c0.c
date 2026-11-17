@@ -72,10 +72,10 @@ unsigned short __cdecl fcn_004214c0(PathGrid* grid, int x, int y, int goal_x, in
 	g_678c20[5] = -(short) grid->width;
 	g_678c20[6] = (short) grid->width;
 	g_678c20[7] = (short) grid->width;
-	g_14cbc70 = 0;
+	g_14cbc74 = (goal_y << level) + goal_x;
 	node = (y << level) + x;
 	g_14cbc76 = node;
-	g_14cbc74 = (goal_y << level) + goal_x;
+	g_14cbc70 = 0;
 	++g_14cbc72;
 	grid->nodes[node].mark = g_14cbc72;
 	grid->nodes[node].g = 0;

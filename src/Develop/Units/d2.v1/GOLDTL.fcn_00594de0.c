@@ -110,18 +110,18 @@ void __cdecl fcn_00594de0(int a0, int a1, int a2)
 					break;
 				}
 			}
-			if (found >= 0) {
-				if ((int) *(unsigned short*) (lpObjektePROT + p->x0 * 0x41 + off) <= *(int*) (st + 0x68 + found * 4)) {
-					*(int*) (g_1015ea0 + p->d[k] * 0x2f4 + 0x1e4) = 0x74d;
-				} else {
+			if (!(found >= 0)) {
+				status = 2;
+				*(int*) (g_1015ea0 + p->d[k] * 0x2f4 + 0x1e4) = 0x74f;
+			} else {
+				if (!((int) *(unsigned short*) (lpObjektePROT + p->x0 * 0x41 + off) <= *(int*) (st + 0x68 + found * 4))) {
 					*(int*) (g_1015ea0 + p->d[k] * 0x2f4 + 0x1e4) = 0x74e;
 					if (status <= 1) {
 						status = 1;
 					}
+				} else {
+					*(int*) (g_1015ea0 + p->d[k] * 0x2f4 + 0x1e4) = 0x74d;
 				}
-			} else {
-				status = 2;
-				*(int*) (g_1015ea0 + p->d[k] * 0x2f4 + 0x1e4) = 0x74f;
 			}
 		}
 		*(int*) (g_1015ea0 + p->c[2] * 0x2f4 + 0x1e4) = status + 0x750;

@@ -51,8 +51,6 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 	int i;
 
 	rec = 0;
-	len = 0;
-	inToken = 0;
 	wp = buf;
 
 	if (g_1052de0 == 0) {
@@ -93,6 +91,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 
 	fill0(buf, 0x100);
 	wp = buf;
+	inToken = 0;
 
 	while (*p != 0) {
 		c = *p;

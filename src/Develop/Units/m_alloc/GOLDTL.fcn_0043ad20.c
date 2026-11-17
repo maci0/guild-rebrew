@@ -108,10 +108,10 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 		}
 		for (outer = (int*) *(int*) 0x6b8068; outer; outer = (int*) outer[10]) {
 			DEV_43ad20->vtbl->SetTransform(DEV_43ad20, 0x100, (void*) outer[1]);
-			if (outer[6] < 0) {
-				fcn_00450e90(outer[4], outer[5], *(int*) (*outer + 0x1cc) + 0x280, 0x1040cc0, 0x1040c80);
-			} else {
+			if (outer[6] >= 0) {
 				fcn_00450e90(outer[4], outer[5], *(int*) (*outer + 0x1cc) + 0x280, 0, 0);
+			} else {
+				fcn_00450e90(outer[4], outer[5], *(int*) (*outer + 0x1cc) + 0x280, 0x1040cc0, 0x1040c80);
 			}
 			v12 = outer;
 			do {

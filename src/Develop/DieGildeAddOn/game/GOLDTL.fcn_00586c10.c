@@ -177,7 +177,7 @@ void __cdecl fcn_00586c10(char* obj)
     *(int*) ((char*) S + 0x10) = g_9a9200[2];
     *(int*) ((char*) S + 0x14) = g_9a9200[3];
     *(int*) ((char*) S + 0x18) = g_9a9200[4];
-    dt = dt * *(float*) 0x662948 + *(float*) ((char*) S + 0x04);
+    dt = dt * 0.800000012f + *(float*) ((char*) S + 0x04);
     *(float*) ((char*) S + 0x04) = dt;
     anchor[0] = 0.0f;
     anchor[1] = *(float*)&g_9a9200[3];

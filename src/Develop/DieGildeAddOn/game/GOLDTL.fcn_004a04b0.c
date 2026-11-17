@@ -130,8 +130,8 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 		if (r == 0) {
 			return 0;
 		}
-		*o1 = c;
 		*o2 = d;
+		*o1 = c;
 		return r;
 	}
 	row = &((BuildingRow*) lpGebaeudePROT)[*(unsigned char*) w];

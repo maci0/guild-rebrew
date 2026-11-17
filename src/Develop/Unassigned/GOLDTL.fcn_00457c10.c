@@ -74,8 +74,8 @@ void* __cdecl fcn_00457c10(void* vb, void* ib, GOLDTL_TileMap* map, int step,
 	float u2;
 
 	verts = 0;
-	idxs = 0;
 	w = (rect[1] - rect[0]) / step;
+	idxs = 0;
 	h = (rect[3] - rect[2]) / step;
 	ops = *(GOLDTL_BufferVtbl**) vb;
 	ops->Lock(vb, 0, (h + 1) * (w + 1) * 0x18, (void**) &verts, 0x2000);

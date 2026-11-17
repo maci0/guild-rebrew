@@ -35,6 +35,7 @@ int __cdecl fcn_00509620(int a0, int a1)
 	void* node;
 	void* found;
 	int off;
+	int sq;
 	int n;
 	int i;
 	int j;
@@ -93,7 +94,8 @@ int __cdecl fcn_00509620(int a0, int a1)
 		if (found != 0) {
 			item = (char*) gm_CheckStatLevel(pid, rank);
 			if (item != 0) {
-				if (gm_GetOppositeStatIndex(q->age) <= gm_GetOppositeStatIndex((int) item)) {
+				sq = gm_GetOppositeStatIndex(q->age);
+				if (gm_GetOppositeStatIndex((int) item) >= sq) {
 					rec_a.age = p->age;
 				} else {
 					*(char*) ((char*) found + 0x74 + rank) = q->age;

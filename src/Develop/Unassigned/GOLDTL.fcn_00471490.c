@@ -29,6 +29,7 @@ void __cdecl fcn_0047cd70(int idx, int surf);
 /* ADDRESS: GOLDTL 0x00471490 */
 void __cdecl fcn_00471490(int k)
 {
+	char** pp;
 	int saved;
 	char* base;
 	int v;
@@ -37,7 +38,6 @@ void __cdecl fcn_00471490(int k)
 	int col;
 	char* win;
 	int row;
-	char** pp;
 	int w;
 	int right;
 	int h;

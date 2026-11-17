@@ -32,6 +32,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	int obj;
 	int n;
 	int r;
+	int h;
 	void (__cdecl* fn)(int);
 
 	rec = a0;
@@ -53,9 +54,10 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	*(int*) (rec + 0x104) = 0;
 	*(int*) (rec + 0x154) = -1;
 	memset((void*) (obj + 0x90), 0, 0x80);
+	h = *(int*) (obj + 0x88);
 	v16 = *(unsigned int*) (rec + 0x30);
 	v17 = *(unsigned int*) (rec + 0x34);
-	n = fcn_00413190(*(int*) (obj + 0x88));
+	n = fcn_00413190(h);
 	if (n != *(int*) (rec + 0x38)) {
 		ch_RemoveQueueEntry((char*) rec);
 		return 0;

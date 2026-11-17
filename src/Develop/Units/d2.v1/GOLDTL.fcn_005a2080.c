@@ -119,7 +119,9 @@ void __cdecl fcn_005a2080(int a0, int a1)
 			d2_SetForm(win, 1);
 			fcn_0046f2c0(g_772514, 1);
 			io_AppendText((char*) 0x188c, a0);
-			if (n != 0) {
+			if (n == 0) {
+				io_AppendText((char*) 0x188e);
+			} else {
 				x0 = *(int*) (g_77255c + 0xc) + *(short*) (g_772500 + 0x1ebd8) * -2;
 				p = sel[0];
 				for (i = 0; i < n; i++) {
@@ -130,8 +132,6 @@ void __cdecl fcn_005a2080(int a0, int a1)
 					fcn_005ca740(p[4], p[5], g_772514, 0x54, p, 1);
 					p += 0xe;
 				}
-			} else {
-				io_AppendText((char*) 0x188e);
 			}
 			d2_SetForm(win, 2);
 			fcn_0046f2c0(g_772514, 1);

@@ -21,7 +21,7 @@ void __cdecl fcn_00411b80(void)
 	pressed = *(int*) 0x6b5c98;
 	other = *(int*) 0x6b5ca4;
 	if (pressed != 0) {
-		if (t - pressed > 0xf || (int) *(short*) &g_14ce920 < other - 3 ||
+		if (t - 0xf < pressed || (int) *(short*) &g_14ce920 < other - 3 ||
 		    (int) *(short*) &g_14ce920 > other + 3 ||
 		    (int) *(short*) &g_14ce922 > *(int*) 0x6b5ca8 + 3 ||
 		    (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {

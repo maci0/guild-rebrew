@@ -41,7 +41,7 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 			first = (row % (int) zoom) == 0;
 			end = q;
 			d = dst;
-			if (*line) {
+			if (*line > 0) {
 				k = 0;
 				do {
 					r = (*q >> 1) + off;
@@ -51,7 +51,7 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 						src = q + 2;
 						r = 0;
 						n = (q[1] + off) / zoom;
-						if (n) {
+						if (n > 0) {
 							do {
 								*d = *(unsigned short*) src;
 								src = (unsigned int*) ((char*) src + zoom * 2);
@@ -79,7 +79,7 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 		first = (row % (int) zoom) == 0;
 		end = q;
 		d = dst;
-		if (*line) {
+		if (*line > 0) {
 			k = 0;
 			do {
 				r = off + (*q >> 1);
@@ -89,7 +89,7 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 					src = q + 2;
 					r = 0;
 					n = (q[1] + off) / zoom;
-					if (n) {
+					if (n > 0) {
 						do {
 							if (*(int*) 0x7725fc <= (int) (row / (int) zoom + (int) y)) {
 								*d = *(unsigned short*) src;

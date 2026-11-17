@@ -138,11 +138,11 @@ void __cdecl fcn_005279f0(unsigned int a0)
 		goto done;
 	if (x < 0)
 		goto done;
-	if (*(int*) (g_774680 + 4) <= x)
+	if (x >= *(int*) (g_774680 + 4))
 		goto done;
 	if (y < 0)
 		goto done;
-	if (*(int*) (g_774680 + 8) <= y)
+	if (y >= *(int*) (g_774680 + 8))
 		goto done;
 	fcn_00475fd0(g_774680);
 	fcn_00476a50(x, y, g_774680, (unsigned char*) key);

@@ -105,8 +105,8 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 		}
 		if (*p != 0xffff) {
 			id = *p & 0x7fff;
-			k = *(char*) (g_item_def_table + id * 0x41);
-			if ((k == 2 || k == 6) && id != 0xfd) {
+			if ((g_item_def_table[id * 0x41] == 2 || g_item_def_table[id * 0x41] == 6)
+			    && id != 0xfd) {
 				slots[nslots * 3] = id;
 				nslots++;
 			}
@@ -115,8 +115,8 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	}
 	p = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 5, 0);
 	while (p != 0) {
-		k = *(char*) (g_item_def_table + (int) (*p) * 0x41);
-		if ((k == 2 || k == 6) && *p != 0xfd) {
+		if ((g_item_def_table[(int) (*p) * 0x41] == 2 || g_item_def_table[(int) (*p) * 0x41] == 6)
+		    && *p != 0xfd) {
 			others++;
 		}
 		p = gm_NextEntityQueryMatch();

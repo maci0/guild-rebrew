@@ -154,7 +154,28 @@ int __cdecl fcn_0059b260(char* a0)
 				do {
 					e = (char*) ((int) g_779160 + i * 0x58);
 					if (g_67d370 == *(int*) (e + 0x34)) {
-						if (hasAny != 0) {
+						if (hasAny == 0) {
+							q = (char*) 0x7e30d0;
+							do {
+								n = *(int*) q;
+								if (n == 0xffff) {
+									break;
+								}
+								p = *(char**) (((int) g_7f4ca0 + 0x17c) + n * 0x21c);
+								if (i == 0) {
+									if (p != 0 && *(char*) p == 9 && *(int*) (p + 0x10) == *(int*) (a0 + 1)) {
+										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 0;
+									}
+								}
+								else {
+									if (p != 0 && *(char*) p == 8 && *(int*) (p + 0x10) == *(int*) (a0 + 1)
+										&& *(unsigned short*) (p + 0xac) == *(int*) e) {
+										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 1;
+									}
+								}
+								q += 0x28;
+							} while (q < (char*) 0x7e35d0);
+						} else {
 							if (i == 0) {
 								fcn_004c35f0();
 								p = fcn_005463a0(2, 0, 9, 3, *(int*) (a0 + 1));
@@ -232,28 +253,6 @@ int __cdecl fcn_0059b260(char* a0)
 									*(int*) (p + 0x70) = 1;
 								}
 							}
-						}
-						else {
-							q = (char*) 0x7e30d0;
-							do {
-								n = *(int*) q;
-								if (n == 0xffff) {
-									break;
-								}
-								p = *(char**) (((int) g_7f4ca0 + 0x17c) + n * 0x21c);
-								if (i == 0) {
-									if (p != 0 && *(char*) p == 9 && *(int*) (p + 0x10) == *(int*) (a0 + 1)) {
-										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 0;
-									}
-								}
-								else {
-									if (p != 0 && *(char*) p == 8 && *(int*) (p + 0x10) == *(int*) (a0 + 1)
-										&& *(unsigned short*) (p + 0xac) == *(int*) e) {
-										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 1;
-									}
-								}
-								q += 0x28;
-							} while (q < (char*) 0x7e35d0);
 						}
 					}
 					i++;

@@ -158,7 +158,12 @@ void __cdecl fcn_00565350(int a0)
 		if ((int) g_7749e4 != (int) slot)
 			return;
 	}
-	if (g_100f1dc != -1) {
+	if (g_100f1dc == -1) {
+		if (!g_7749e8)
+			return;
+		if ((int) g_7749e4 != (int) slot)
+			return;
+	} else {
 		if (g_100f1dc == 2) {
 			fcn_00545780(a0);
 			fcn_00546190((char*) a0);
@@ -170,11 +175,6 @@ void __cdecl fcn_00565350(int a0)
 			g_7749e8 = 0;
 			return;
 		}
-	} else {
-		if (!g_7749e8)
-			return;
-		if ((int) g_7749e4 != (int) slot)
-			return;
 	}
 	if (!g_7749e8)
 		return;

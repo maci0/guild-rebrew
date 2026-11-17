@@ -38,7 +38,7 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 		return 0;
 	}
 	if (a5 == 0) {
-		return 1;
+		goto fail_1;
 	}
 	width = a0[0];
 	stride = a0[1];
@@ -86,5 +86,7 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 		}
 	}
 	*a5 = (v11 * pp[0] + v12 * pp[2] + v13) * *(float*) ((char*) a0 + 0x84) + *(float*) ((char*) a0 + 0x54);
+	goto fail_1;
+fail_1:
 	return 1;
 }
