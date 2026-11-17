@@ -26,8 +26,7 @@ void __cdecl fcn_005513d0(char* a0)
 	int i;
 	int state;
 	float f; double factor;
-	double r;
-	double t; float threshold; int rec_id;
+	float threshold; int rec_id;
 
 	v20 = -1;
 	entry = g_7f4ca0 + *(unsigned short*) (a0 + 8) * 0x21c;
@@ -82,9 +81,8 @@ void __cdecl fcn_005513d0(char* a0)
 	if (count != 5) {
 		factor = (5.0f - (float) count) * 0.2f;
 		f = (float) (factor * factor);
-		threshold = (float) (f * *(float*) (a0 + 0xac)); r = gm_RandomFloat01();
-		t = (1.0f - f) + r;
-		if (t < threshold) {
+		threshold = (float) (f * *(float*) (a0 + 0xac));
+		if ((1.0f - f) + gm_RandomFloat01() < threshold) {
 			*(int*) (a0 + 0x70) = 1;
 			*(int*) (a0 + 0x52) += 1;
 			*(float*) (a0 + 0xac) = 0;

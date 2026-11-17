@@ -17,7 +17,7 @@ int __cdecl fcn_0046cb10(int x, int y, int type)
 	int handle;
 
 	data = 0;
-	if (type > *(int*) 0x6ed91c)
+	if (*(int*) 0x6ed91c < type)
 		return -1;
 	id = fcn_0046c9e0();
 	s = &g_00f8f080[id];

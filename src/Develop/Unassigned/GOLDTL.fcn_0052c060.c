@@ -125,8 +125,8 @@ int __cdecl fcn_0052c060(void)
 	if (g_14ce8e8 != 0) {
 		if (g_774774 == 0) {
 			g_774754 = (int) g_14ce8c0;
-			g_773e38 = (int) g_14ce8c0;
 			g_774758 = (int) g_14ce8c2;
+			g_773e38 = (int) g_14ce8c0;
 			g_773df8 = (int) g_14ce8c2;
 			g_773e00 = g_6772bc;
 			g_773df0 = g_6772c0;

@@ -161,7 +161,7 @@ void __cdecl he_RunTransport(char *e)
 			}
 		}
 		n = (unsigned short)gm_RandomMod(0x69);
-		if (!((f * g_6640e8) * *(unsigned char *)(q + 0x12) < n)) {
+		if (!(n > (f * g_6640e8) * *(unsigned char *)(q + 0x12))) {
 			*(char *)(e + 0xf1) = 1;
 			return;
 		}

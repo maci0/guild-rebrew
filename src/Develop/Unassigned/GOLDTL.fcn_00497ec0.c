@@ -119,8 +119,8 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 									}
 									return 0;
 								}
-								*a3 = cmd;
 								*a4 = out;
+								*a3 = cmd;
 								return 0x11;
 							}
 							if (t == 5)

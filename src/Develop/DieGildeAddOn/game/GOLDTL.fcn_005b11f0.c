@@ -116,8 +116,8 @@ void __cdecl fcn_005b11f0(int* a0)
 		} else {
 			y = qy * 51.0f + y;
 		}
-		sx = (int) ((float) (g_778d24 / 2) + (float) ox + x);
 		sy = (int) ((float) (g_778d20 / 2) + (float) oy + y);
+		sx = (int) ((float) (g_778d24 / 2) + (float) ox + x);
 		if (*slot == -1) {
 			e = *(char**) (obj + 0x34);
 			id = *(int*) (e + 0x204);

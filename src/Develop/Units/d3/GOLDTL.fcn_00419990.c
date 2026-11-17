@@ -99,7 +99,7 @@ void __cdecl fcn_00419990(void)
 	}
 	if (g_6b5dcc == 0) {
 		g_6b5dcc = g_67a370;
-	} else if (g_6b5dcc != g_67a370) {
+	} else if (g_67a370 != g_6b5dcc) {
 		g_6b5dcc = g_67a370;
 		goto stop;
 	}

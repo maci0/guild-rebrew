@@ -162,11 +162,10 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 
 
 		if (g_14ce8e0 != 0) {
-			if (CountDisplayCounters() != 0) {
-				sv_ClearObjectSelection();
-			}
-			else {
+			if (CountDisplayCounters() == 0) {
 				g_774654 = 1;
+			} else {
+				sv_ClearObjectSelection();
 			}
 		}
 		cnt3 = 0;

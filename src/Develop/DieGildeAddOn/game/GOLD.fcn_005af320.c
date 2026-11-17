@@ -326,18 +326,7 @@ int __cdecl fcn_005af320(int a1, int a2)
 		}
 	} else {
 		f.v70 = a2 & 1;
-		if (f.v70 != 0) {
-			/* 0x5bac1b: entity slot rows without an open container */
-			f.v18 = (int) fcn_00502cd0(*(int*) (a1 + 0x5d), 2, 0, 0x2a, 6);
-			if (f.v18 != 0) {
-				goto l_packet;
-			}
-			f.v18 = (int) fcn_00502cd0(*(int*) (a1 + 0x5d), 2, 0, 0x116, 6);
-			if (f.v18 != 0) {
-				goto l_packet;
-			}
-			goto l_after;
-		} else {
+		if (f.v70 == 0) {
 			if (a2 == 2) {
 				f.v18 = (int) fcn_00502cd0(*(int*) (a1 + 0x5d), a2, 0, 0x1db, 6);
 			} else if (a2 == 4) {
@@ -345,6 +334,17 @@ int __cdecl fcn_005af320(int a1, int a2)
 			} else {
 				goto l_after;
 			}
+			if (f.v18 != 0) {
+				goto l_packet;
+			}
+			goto l_after;
+		} else {
+			/* 0x5bac1b: entity slot rows without an open container */
+			f.v18 = (int) fcn_00502cd0(*(int*) (a1 + 0x5d), 2, 0, 0x2a, 6);
+			if (f.v18 != 0) {
+				goto l_packet;
+			}
+			f.v18 = (int) fcn_00502cd0(*(int*) (a1 + 0x5d), 2, 0, 0x116, 6);
 			if (f.v18 != 0) {
 				goto l_packet;
 			}

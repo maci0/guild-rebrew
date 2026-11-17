@@ -257,7 +257,10 @@ build_other:
 			if (v.rec[0] == 1)
 				fcn_00519190(0x17a2,
 				    (unsigned char) ent[0x65]);
-			if (v.mode != 2) {
+			if (v.mode == 2) {
+				v.h48 = fcn_00472250(dlg, 1,
+				    fcn_00519190(0x17af));
+			} else {
 				if ((*(unsigned char*) (ent + 0x5a) & 2)
 				    != 0)
 					v.h44 = fcn_00472250(dlg, 1,
@@ -265,9 +268,6 @@ build_other:
 				else
 					v.h1c = fcn_00472250(dlg, 1,
 					    fcn_00519190(0x17a4));
-			} else {
-				v.h48 = fcn_00472250(dlg, 1,
-				    fcn_00519190(0x17af));
 			}
 			v.h3c = fcn_00472250(dlg, 1,
 			    fcn_00519190(0x17a5));

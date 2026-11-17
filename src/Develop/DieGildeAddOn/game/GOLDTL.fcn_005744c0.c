@@ -222,8 +222,8 @@ LfailB:
 				if (v29 < v21
 					&& fcn_00445600(*(int*) (v11 + (int) lpGebaeudeINST + 0x61),
 						0x100, 0, 0x68149c)) {
-					v21 = v29;
 					v13 = v11 + (int) lpGebaeudeINST;
+					v21 = v29;
 				}
 			}
 			v11 += 0xa9;

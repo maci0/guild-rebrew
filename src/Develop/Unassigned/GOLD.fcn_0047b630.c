@@ -15,8 +15,8 @@ int __cdecl fcn_0047b630(int x, int y, int* surface, char* sprite, int factor)
 	int emit;
 	line_count = (unsigned int*) (sprite + 0x32);
 	run = (unsigned int*) (sprite + 0x36);
-	row_output = (unsigned short*) surface[7] + surface[4] * y + x;
 	height = *(unsigned short*) (sprite + 0xa);
+	row_output = (unsigned short*) surface[7] + surface[4] * y + x;
 	if (height + y < *(int*) 0x6f045c) {
 		return 0;
 	}

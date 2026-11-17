@@ -151,11 +151,11 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 			}
 			q = he_fn_Handlung();
 		}
-		if (p == 0) {
-			io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f59, 0x1f5d);
-		} else {
+		if (p != 0) {
 			io_FormatTextBuffer(buf12, 0x1f60, *(unsigned short *)p);
 			io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f59, buf12);
+		} else {
+			io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f59, 0x1f5d);
 		}
 	printed:
 		;
@@ -270,23 +270,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 		     *(int *)(g_7f4ca0 + 540 * g_774970 + 4) == *(int *)((char *)a0 + 0x60)) ||
 		    (*((char *)g_7f4ca0 + 540 * g_774970 + 9) == 1 &&
 		     *(int *)(g_7f4ca0 + 540 * g_774970 + 4) == *(int *)((char *)a0 + 0x64))) {
-			if (*((char *)a0 + 0x164) != 0) {
-				if ((*(int *)((char *)a0 + 0x1c8) & 0x10000) == 0) {
-					if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
-						io_FormatTextBuffer(bufA, 0x1f4b, *a0);
-						io_FormatTextBuffer(bufB, 0x1a97);
-						d2_SetForm(h, 4);
-						fcn_00533a60(g_772514, 0, buttons, 2, bufA, bufB);
-						r1 = buttons[0];
-						r4 = buttons[1];
-					}
-				} else if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
-					io_FormatTextBuffer(bufA, 0x1f4b, *a0);
-					d2_SetForm(h, 4);
-					r1 = fcn_00472250(h, 4,
-					    io_AppendText("%ia[%s]", bufA));
-				}
-			} else {
+			if (!(*((char *)a0 + 0x164) != 0)) {
 				if (fcn_005463a0(2, 2, *a0, 0, 0x5e) == 0) {
 					v15 = a0[5] + 4;
 					if (v15 >= *(float *)((char *)a0 + 0x20)) {
@@ -302,6 +286,22 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 					}
 				}
 				if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
+					io_FormatTextBuffer(bufA, 0x1f4b, *a0);
+					d2_SetForm(h, 4);
+					r1 = fcn_00472250(h, 4,
+					    io_AppendText("%ia[%s]", bufA));
+				}
+			} else {
+				if ((*(int *)((char *)a0 + 0x1c8) & 0x10000) == 0) {
+					if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
+						io_FormatTextBuffer(bufA, 0x1f4b, *a0);
+						io_FormatTextBuffer(bufB, 0x1a97);
+						d2_SetForm(h, 4);
+						fcn_00533a60(g_772514, 0, buttons, 2, bufA, bufB);
+						r1 = buttons[0];
+						r4 = buttons[1];
+					}
+				} else if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
 					io_FormatTextBuffer(bufA, 0x1f4b, *a0);
 					d2_SetForm(h, 4);
 					r1 = fcn_00472250(h, 4,

@@ -58,7 +58,7 @@ void __cdecl fcn_004337c0(int *a0)
                 *(int *)((char *)a0[0x10] + 0x48) = 0;
             } else if (j < *a0 - 1) {
                 if (j == *a0 - 2) {
-                    if (*(unsigned char *)((int)a0 + 0x2d) & 0x11) {
+                    if ((*(unsigned char *)((int)a0 + 0x2d) & 0x10) || (*(unsigned char *)((int)a0 + 0x2d) & 1)) {
                         *(int *)((char *)a0[0x10] + j * 0x58 + 0x30) = 0;
                         *(int *)((char *)a0[0x10] + j * 0x58 + 0x34) = 0;
                         *(int *)((char *)a0[0x10] + j * 0x58 + 0x38) = 0;
@@ -72,7 +72,7 @@ void __cdecl fcn_004337c0(int *a0)
                     (int *)((char *)a0[0x10] + j * 0x58),
                     (int *)((char *)a0[0x10] + (j + 1) * 0x58));
             } else {
-                if ((*(unsigned char *)((int)a0 + 0x2d) & 0x11) == 0) {
+                if ((*(unsigned char *)((int)a0 + 0x2d) & 0x10) == 0 && (*(unsigned char *)((int)a0 + 0x2d) & 1) == 0) {
                     fcn_004321f0(
                         (int *)((char *)a0[0x10] + j * 0x58 - 0x58),
                         (int *)((char *)a0[0x10] + j * 0x58),

@@ -185,7 +185,14 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 			g_774654 = 1;
 			goto loopend;
 		}
-		if (g_14ce8e8) {
+		if (!(g_14ce8e8)) {
+			if (sel == 0)
+				goto select;
+			sel = 0;
+			p = 0;
+			again = 1;
+			goto loopend;
+		} else {
 			if (sel == 0) {
 				res = 0;
 				p = 0;
@@ -210,13 +217,6 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 				}
 				goto loopend;
 			}
-		} else {
-			if (sel == 0)
-				goto select;
-			sel = 0;
-			p = 0;
-			again = 1;
-			goto loopend;
 		}
 select:
 		if (g_14ce8d8 && (g_100f1dc != -1)) {

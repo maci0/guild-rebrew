@@ -247,7 +247,7 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 done:
 	fcn_0047e220(craft);
 	fcn_0047e0e0(bld, craft);
-	if (g_100b0ac > 0) {
+	if (0 < g_100b0ac) {
 		for (i = 0; i < g_100b0ac; i++) {
 			rec = (BldRec*) (g_100d0c0 + i * 0x58);
 			if (rec->f54 & 8) {

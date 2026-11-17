@@ -112,8 +112,8 @@ void __cdecl fcn_0046dff0(int a0, int a1)
 		rec = *(int*) (b + 0x288);
 		x = *(int*) (b + 4);
 		y = *(int*) (b + 8);
-		w = *(int*) (b + 0xc);
 		h = *(int*) (b + 0x10);
+		w = *(int*) (b + 0xc);
 		if (rec != g_67d3a0 && rec != g_67d3a4) {
 			horiz = *(short*) (g_772500 + 0x50 + rec * 0x54);
 			cornerHeight = *(short*) (g_772500 + 0x52 + rec * 0x54);
@@ -141,12 +141,12 @@ void __cdecl fcn_0046dff0(int a0, int a1)
 			if (count >= 1) {
 				while (1) {
 					if (i) {
-						if (i != count - 1) {
-							fcn_0047cba0(*(int*) (b + 4) + 10, *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, i % 4 + 10);
-							fcn_0047cba0((*(int*) (b + 4) - step) - 10 + *(int*) (b + 0xc), *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, (i - 1) % 4 + 10);
-						} else {
+						if (i == count - 1) {
 							fcn_0047cba0(*(int*) (b + 4) + 10, *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, 9);
 							fcn_0047cba0((*(int*) (b + 4) - step) - 10 + *(int*) (b + 0xc), *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, 9);
+						} else {
+							fcn_0047cba0(*(int*) (b + 4) + 10, *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, i % 4 + 10);
+							fcn_0047cba0((*(int*) (b + 4) - step) - 10 + *(int*) (b + 0xc), *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, (i - 1) % 4 + 10);
 						}
 					} else {
 						fcn_0047cba0(*(int*) (b + 4) + 10, *(int*) (b + 8) + cornerHeight, a1, surf, 8);

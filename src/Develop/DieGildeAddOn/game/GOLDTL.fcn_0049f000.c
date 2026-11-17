@@ -54,8 +54,8 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 	}
 	gm_GetOppositeStatIndex(*(unsigned char*) (a1 + 0x164));
 	memset(&v12[1], 0, 0x3c);
-	p = (unsigned char*) (v7 + 0x75);
 	i = 0;
+	p = (unsigned char*) (v7 + 0x75);
 	do {
 		*(int*) ((char*) v13 + i + 4) = gm_GetOppositeStatIndex(*p);
 		i += 4;

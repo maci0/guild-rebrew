@@ -110,8 +110,8 @@ unsigned int __cdecl fcn_0041c470(unsigned char* input, char* output, int width,
 				index = (unsigned short)cache[key];
 				*output = (unsigned char)index;
 				dr = error[256 + r - g_6b6008[0][index]];
-				dg = error[256 + g - g_6b6008[1][index]];
 				db = error[256 + bl - g_6b6008[2][index]];
+				dg = error[256 + g - g_6b6008[1][index]];
 				down[0] = (short)dr;
 				down[6] = (short)(down[6] + dr * 3);
 				down[3] = (short)(down[3] + dr * 5);

@@ -272,9 +272,7 @@ void __cdecl fcn_00547770(void)
                 }
             }
         }
-        if (zer != 0) {
-            sel = zer;
-        } else {
+        if (zer == 0) {
             if (fcn_0042e450() > thr) {
                 return;
             }
@@ -286,6 +284,8 @@ void __cdecl fcn_00547770(void)
                 }
                 r = (u2)((r + 1) % 4);
             }
+        } else {
+            sel = zer;
         }
         for (j = 0; j < 4; j++) {
             if ((sel & (1 << j)) == 0) {

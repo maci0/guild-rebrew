@@ -75,7 +75,7 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 	}
 	slot = (Slot_529160*) (g_7f4ca0 + index * 0x21c);
 	old = *(char**) (g_7f4ca0 + index * 0x21c + 0x17c);
-	if (old == (char*) a4) {
+	if ((char*) a4 == old) {
 		return;
 	}
 	if (a1 == 0) {

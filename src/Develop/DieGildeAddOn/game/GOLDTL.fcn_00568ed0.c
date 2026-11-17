@@ -136,7 +136,11 @@ void __cdecl fcn_00568ed0(char* a1)
 		hs = (char*) gm_LookupEntityRecordById(
 		    *(int*) (0x7f4ca4 + (unsigned short) *(unsigned short*) (a1 + 8) * 0x21c));
 		ent = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (a1 + 0xb4));
-		if (ent == 0 || obj == 0 || hs == 0 || *(unsigned char*) (obj + 0x1b1) != 0) {
+		if (ent == 0 || obj == 0 || hs == 0) {
+			*(int*) (a1 + 0x70) = -1;
+			return;
+		}
+		if (*(unsigned char*) (obj + 0x1b1) != 0) {
 			*(int*) (a1 + 0x70) = -1;
 			return;
 		}

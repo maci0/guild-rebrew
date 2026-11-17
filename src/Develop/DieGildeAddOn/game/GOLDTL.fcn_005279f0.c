@@ -212,8 +212,8 @@ void __cdecl fcn_005279f0(unsigned int a0)
 label_527db2:
 	if (!g_7746c8)
 		goto done;
-	v7 = 0;
 	v8 = 0;
+	v7 = 0;
 	v9 = 0;
 	e = ((BuildingProto5279f0*)lpGebaeudePROT)[(unsigned char)*g_7746c8].entries;
 	do {

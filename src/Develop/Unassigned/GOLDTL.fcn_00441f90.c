@@ -100,8 +100,8 @@ void __cdecl fcn_00441f90(unsigned char* base, int w, int x0, int y0, int size, 
 	do {
 		xx = x;
 		while (xx < x1) {
-			idx = xx & mask;
 			y2 = (xx + step) & mask;
+			idx = xx & mask;
 			f1 = (float) base[rowbase + idx];
 			f2 = (float) base[rowbase + y2];
 			f3 = (float) (base[rowbase + ((idx + step) & mask)] -

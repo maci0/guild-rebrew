@@ -176,7 +176,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 			if (maxv <= value) {
 				maxv = value;
 			}
-			if (value <= minv) {
+			if (minv >= value) {
 				minv = value;
 			}
 			i++;

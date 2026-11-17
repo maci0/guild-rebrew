@@ -452,7 +452,11 @@ void __cdecl fcn_005438c0(int a0)
 			break;
 		}
 		g_774948 = 0;
-		if (g_7747b0 & 0x42) {
+		if (!(g_7747b0 & 0x42)) {
+			g_774970 = 0;
+			g_774948 = 0;
+			main_RundenBeginn();
+		} else {
 			c = 0;
 			count = g_774970;
 			if (count != 0) {
@@ -466,10 +470,6 @@ void __cdecl fcn_005438c0(int a0)
 				} while (count != 0);
 				g_774948 = c;
 			}
-		} else {
-			g_774970 = 0;
-			g_774948 = 0;
-			main_RundenBeginn();
 		}
 		for (;;) {
 			if ((g_774970 >= 0x300) || (g_774954 != 0)) {
@@ -495,7 +495,9 @@ void __cdecl fcn_005438c0(int a0)
 				fcn_00535960();
 			}
 		}
-		if (g_7747b0 & 0x42) {
+		if (!(g_7747b0 & 0x42)) {
+			fcn_00540020();
+		} else {
 			fcn_00516f60();
 			fcn_00528fd0();
 			if (g_7747b0 & 4) {
@@ -504,8 +506,6 @@ void __cdecl fcn_005438c0(int a0)
 					fcn_00535770(0x67fff);
 				}
 			}
-		} else {
-			fcn_00540020();
 		}
 		if (!(g_7747b0 & 2)) {
 			fcn_004c44a0();
@@ -524,19 +524,7 @@ void __cdecl fcn_005438c0(int a0)
 		if ((!(g_7747b0 & 0x42)) && (g_6a342c != 0) &&
 		    (g_774954 == 0) && ((signed char) g_7747b0 >= 0)) {
 			g_773de8 = 0;
-			if (g_7747b0 & 4) {
-				if (g_7747b0 & 0x10) {
-					memset(buf, 0, 0x7c);
-					*(int*) (buf + 4) = *(int*) g_6a33dc;
-					buf[0] = 0;
-					*(int*) (buf + 8) = *(int*) (g_6a33dc + 4);
-					buf[0xc] = g_6a33dc[8];
-					x = fcn_004c5790(15, buf);
-					while (fcn_004c4450(x) == 0) {
-						fcn_00535960();
-					}
-				}
-			} else {
+			if (!(g_7747b0 & 4)) {
 				fcn_0064d41a(name, g_6a44c8, g_6a3448);
 				fp = (void*) fcn_0064e2f9(name, g_6750e8);
 				if (fp != 0) {
@@ -560,6 +548,18 @@ void __cdecl fcn_005438c0(int a0)
 				fcn_0064d41a(name, g_6a4498, g_6a3778);
 				fcn_005e3fa0(name);
 				fcn_0051e080(g_6a4470, g_6a448c, 1);
+			} else {
+				if (g_7747b0 & 0x10) {
+					memset(buf, 0, 0x7c);
+					*(int*) (buf + 4) = *(int*) g_6a33dc;
+					buf[0] = 0;
+					*(int*) (buf + 8) = *(int*) (g_6a33dc + 4);
+					buf[0xc] = g_6a33dc[8];
+					x = fcn_004c5790(15, buf);
+					while (fcn_004c4450(x) == 0) {
+						fcn_00535960();
+					}
+				}
 			}
 		}
 		fcn_005459a0(g_774970 & 0xffff);

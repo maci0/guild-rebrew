@@ -108,8 +108,8 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 				if (g_7f3f00[j].xc < g_7f3f00[i - 1].xc) {
 					tmp = g_7f3f00[i - 1];
 					g_7f3f00[i - 1] = g_7f3f00[j];
-					g_7f3f00[j] = tmp;
 					v = 1;
+					g_7f3f00[j] = tmp;
 				}
 			}
 		}

@@ -176,7 +176,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 			return;
 		}
 		v = a2;
-		for (item = 0; item < n; item++) {
+		for (item = 0; n > item; item++) {
 			o = item * CELL_STRIDE;
 			v->f[0] = (float) tapA[2][1][o] * wA[2][1][0] +
 				(float) tapA[1][0][o] * wA[1][0][0] +
