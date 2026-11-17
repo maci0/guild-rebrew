@@ -32,8 +32,8 @@ int __cdecl fcn_004e9ee0(void)
 				if (recs[j].status == 2) {
 					e1 = gm_LookupEntityRecordById(recs[j].msetter);
 					e2 = gm_LookupEntityRecordById(recs[j].mplayerid);
-					if (e1 != 0 && *(unsigned char*) (e1 + 8) != 0) {
-						if (e2 != 0 && *(unsigned char*) (e2 + 8) != 0) {
+					if (e1 != 0 && *(unsigned char*) (e1 + 8) > 0) {
+						if (e2 != 0 && *(unsigned char*) (e2 + 8) > 0) {
 							flags[i] |= 1;
 						} else {
 							v = fcn_004e8240(recs[j].id, 0, 0, 4, 0xff);
@@ -51,7 +51,7 @@ int __cdecl fcn_004e9ee0(void)
 							}
 						}
 					}
-				} else if (recs[j].status == 3 && recs[j].pcount >= 1) {
+				} else if (recs[j].status == 3 && recs[j].pcount > 0) {
 					m = recs[j].mamt;
 					for (h = (char*) g_7f4ca2;
 						(int) h < (int) (g_7f4ca2 + 768);

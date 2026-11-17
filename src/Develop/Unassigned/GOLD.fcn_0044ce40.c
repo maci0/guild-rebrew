@@ -28,12 +28,12 @@ void __cdecl fcn_0044ce40(char* object)
 	*(float*) (object + 0x70) = 0.0f;
 	if (n <= 0)
 		return;
+	mx[1] = -1.0e10f;
+	mx[2] = -1.0e10f;
 	mn[0] = 1.0e10f;
 	mn[1] = 1.0e10f;
 	mn[2] = 1.0e10f;
 	mx[0] = -1.0e10f;
-	mx[1] = -1.0e10f;
-	mx[2] = -1.0e10f;
 	corners = *(float**) (object + 0x40);
 	for (p = corners, i = n; i > 0; i--, p += 6) {
 		if (!(mn[0] < p[0])) mn[0] = p[0];

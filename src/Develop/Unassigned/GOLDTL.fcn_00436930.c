@@ -6,17 +6,19 @@ void* __cdecl fcn_00436930(char* a0, int* out)
 {
 	char* v1;
 	char* v2;
+	void* r;
 	int buf;
 
+	r = 0;
 	if (out != 0) {
 		*out = 0;
 	}
 	if (a0 == 0) {
-		goto zero;
+		goto done;
 	}
 	v1 = *(char**) (a0 + 0x318);
 	if (v1 == 0) {
-		goto zero;
+		goto done;
 	}
 	if (*(char*) (a0 + 0x4a0) != 0) {
 		if (*(int*) (v1 + 0x264) != 0 && (*(unsigned char*) (v1 + 0x2a1) & 2) != 0 && *(int*) (v1 + 0x268) == 0) {
@@ -29,11 +31,12 @@ void* __cdecl fcn_00436930(char* a0, int* out)
 					fcn_00435910(a0, *(int*) (v1 + 0x29c), buf, out);
 					((void (__stdcall*) (void*)) *(void**) (*(int*) v2 + 0x3c)) (v2);
 				}
-				return v2;
+				r = v2;
+				goto done;
 			}
 		}
 	}
 	return *(void**) (*(int*) (a0 + 0x318) + 0x264);
-zero:
-	return 0;
+done:
+	return r;
 }

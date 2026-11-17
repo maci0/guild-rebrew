@@ -18,10 +18,10 @@ void __cdecl fcn_00405540(unsigned char* object, int enabled)
             node = *(unsigned char**) (*(unsigned char**) (object + 0x34) + 0x1ec);
             if (enabled != 0) {
                 fcn_004355d0((char*) (node + 0xf4), (const char*) motion);
-                *(unsigned char*) (object + 0x8c) |= 4;
+                *(unsigned short*) (object + 0x8c) |= 4;
             } else {
                 fcn_00435630((char*) (node + 0xf4), (char*) motion, 1);
-                *(unsigned char*) (object + 0x8c) &= 0xfb;
+                *(unsigned short*) (object + 0x8c) &= 0xfffb;
             }
         }
     }

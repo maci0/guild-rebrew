@@ -26,8 +26,8 @@ char* __cdecl fcn_004d36e0(char* e)
     float d;
     int i;
 
-    res = 0; i = 0;
     best = 1000000.0f;
+    res = 0; i = 0;
     g_772f10 = 0;
     fcn_004379a0(((char*) g_67a370), 0, 0x40, fcn_004d36b0, e);
     c = *(char**) (*(char**) (e + 0x184) + 0x34);

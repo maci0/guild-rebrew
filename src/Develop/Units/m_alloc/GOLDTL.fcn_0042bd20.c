@@ -14,7 +14,7 @@ char* __cdecl fgets(char*, int, char*);
 void __cdecl fcn_0064d710(void);
 void __cdecl m_FreeTracked(void*);
 int __cdecl txt_loadTextFile(char*);
-int __stdcall MessageBoxA(void*, char*, char*, int);
+__declspec(dllimport) int __stdcall MessageBoxA(void*, char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x0042bd20 */
 int __cdecl fcn_0042bd20(char* path)

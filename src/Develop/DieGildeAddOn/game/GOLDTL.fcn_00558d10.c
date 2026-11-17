@@ -27,9 +27,9 @@ void __cdecl fcn_00558d10(char* e)
 	n = 0x100;
 	do {
 		p = lpGebaeudeINST + idx * 0xa9;
-		c = *(unsigned char*) (lpGebaeudePROT + (unsigned int) *(unsigned char*) p * 0x24d);
-		bit_lo = 0;
 		bit_hi = 0;
+		bit_lo = 0;
+		c = *(unsigned char*) (lpGebaeudePROT + (unsigned int) *(unsigned char*) p * 0x24d);
 		if (c > 31) {
 			bit_hi = 1U << ((c - 32) & 31);
 		} else {
@@ -45,10 +45,10 @@ void __cdecl fcn_00558d10(char* e)
 		idx = (idx + *(int*) (e + 0xbc)) % 0x100;
 	} while (n != 0);
 	*(int*) (e + 0xb8) = (*(int*) (e + 0xbc) + idx) % 0x100;
-	if (p != 0) {
-		io_FormatTextBuffer(buf, "EvtSensenmann: next target = %G", p);
-	} else {
+	if (p == 0) {
 		fcn_00546190(e);
+	} else {
+		io_FormatTextBuffer(buf, "EvtSensenmann: next target = %G", p);
 	}
 	*(int*) (e + 0xb4) = *(int*) (p + 1);
 	if (fcn_00558370(e) == 0) {

@@ -49,7 +49,7 @@ void __cdecl fcn_004fd0a0(void)
 		if (*(unsigned char*) (e + 2) >= 0xa) {
 			continue;
 		}
-		if (*(unsigned char*) (e + 8) == 0) {
+		if (*(unsigned char*) (e + 8) <= 0) {
 			continue;
 		}
 		r = gm_WalkEntityChain(*(unsigned short*) e);

@@ -47,6 +47,7 @@ void __cdecl fcn_0055cc80(char* self)
 	S55cc80Packet* packet;
 	unsigned short* answer;
 	char* q;
+	char* row;
 	int state, started, count;
 	int t;
 	int src; S55cc80Proto* proto; unsigned char job;
@@ -62,7 +63,8 @@ void __cdecl fcn_0055cc80(char* self)
 			fcn_00546190(self);
 			return;
 		}
-		t = (int)fcn_005101e0((char*) &g_7f4ca0 + packet->slot * 0x21c, packet->idx0, *(unsigned char*)(self + 0xac), -1);
+		row = (char*) &g_7f4ca0 + packet->slot * 0x21c;
+		t = (int)fcn_005101e0(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 		proto = &((S55cc80Proto*)lpGebaeudePROT)[packet->idx0];
 		src = gm_AccumulateTyped2((char*) &g_7f4ca0 + packet->slot * 0x21c);
 		if (t > src) {
@@ -118,7 +120,8 @@ void __cdecl fcn_0055cc80(char* self)
 			if (((int*) (self + 0xb0))[count] <= 0) {
 				continue;
 			}
-			t = (int)fcn_005101e0((char*) &g_7f4ca0 + packet->slot * 0x21c, packet->idx0, *(unsigned char*)(self + 0xac), -1);
+			row = (char*) &g_7f4ca0 + packet->slot * 0x21c;
+			t = (int)fcn_005101e0(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 			((int*) (self + 0xb0))[count] = ((int*) (self + 0xb0))[count] - 1;
 			if (*(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 6 || *(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
 				io_FormatTextBuffer(buf, 0x1bb1, t, (unsigned int)answer[0], (char*) packet);

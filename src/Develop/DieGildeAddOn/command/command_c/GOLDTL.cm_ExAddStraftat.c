@@ -85,14 +85,14 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 		}
 		fcn_004fa850(taeter, *(char*) (src + 0x2c), &v13, &v14);
 		gm_ResolveEntityById(&p, 0, 0, taeter);
-		if (p != 0) {
+		if (p == 0) {
+			fcn_004faa90(v13, v14, &v16);
+		} else {
 			if (*(int*) (p + 0x61) != 0) {
 				v16.a = *(unsigned int*) (*(char**) (p + 0x61) + 0x4c);
 				v16.b = *(unsigned int*) (*(char**) (p + 0x61) + 0x50);
 				v16.c = *(unsigned int*) (*(char**) (p + 0x61) + 0x54);
 			}
-		} else {
-			fcn_004faa90(v13, v14, &v16);
 		}
 		for (ent = (Straftat*) fcn_005463a0(1, 0, 0x18); ent != 0;
 			ent = (Straftat*) he_fn_Handlung()) {

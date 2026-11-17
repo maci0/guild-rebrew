@@ -70,8 +70,8 @@ void __cdecl fcn_004fad10(void)
 								do {
 									v11 = (unsigned int) (v14 - 1 < 0) - 1 & (unsigned int) (v14 - 1);
 									if ((int) v11 <= v19) {
-										v10 = (v19 - v11) + 1;
 										v6 = (float*) ((v11 + v9 * 8) * 0x18 + 0x99ef8c);
+										v10 = (v19 - v11) + 1;
 										do {
 											v7 = v6 + 6;
 											v10 -= 1;

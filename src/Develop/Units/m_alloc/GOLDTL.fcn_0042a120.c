@@ -55,8 +55,8 @@ fail:
 	{
 
 
-		channels = (int) g_6b7f10[index];
 		bits = g_6b7f94 * 4;
+		channels = (int) g_6b7f10[index];
 		__asm {
 			mov edi, channels
 			mov ebx, bits

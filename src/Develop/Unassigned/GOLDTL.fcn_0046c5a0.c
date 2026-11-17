@@ -133,7 +133,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 	i = 0;
 	t = *(char**) (slot + 0x3c);
 	textLen = (int) strlen(t);
-	while (i < textLen) {
+	while (textLen > i) {
 		if (!*(char*) (t + i)) {
 			break;
 		}

@@ -3,7 +3,7 @@ extern int g_664398[];
 extern int g_77261c;
 
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
+int __cdecl fcn_005cf720(unsigned int, unsigned int, void*, int);
 float __cdecl fcn_0050f980(unsigned short, unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x004a55c0 */

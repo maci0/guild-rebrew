@@ -10,7 +10,6 @@ void __cdecl fcn_00533a60(int a1, int a2, int* out, int count, ...)
 {
     char buf[32][0x40];
     char* entity; char* text;
-    char** p;
     int max;
     int i;
     int q;
@@ -20,11 +19,10 @@ void __cdecl fcn_00533a60(int a1, int a2, int* out, int count, ...)
     int id;
 
     entity = (char*) 0x1015f40 + a1 * 0x3cc;
-    p = (char**) &count;
     max = 0;
     if (count > 0) {
         for (i = 0; i < count; i++) {
-            text = *++p; strcpy(buf[i], text);
+            text = ((char**) &count)[i + 1]; strcpy(buf[i], text);
             id = fcn_0046b520(text, *(int*) (entity + 0x28c));
             if (id + 0x20 > max) {
                 max = id + 0x20;

@@ -25,7 +25,7 @@ __declspec(dllimport) short __stdcall RegisterClassExA(const void*);
 __declspec(dllimport) HWND __stdcall CreateWindowExA(unsigned long, const char*, const char*, unsigned long, int, int, int, int, void*, void*, void*, void*);
 __declspec(dllimport) int __stdcall GetSystemMetrics(int);
 __declspec(dllimport) int __stdcall ShowCursor(int);
-extern long __stdcall CoCreateInstance(void*, void*, unsigned long, void*, void**);
+extern __declspec(dllimport) long __stdcall CoCreateInstance(void*, void*, unsigned long, void*, void**);
 
 extern short g_14cc5b8;
 extern int g_14cc5bc;

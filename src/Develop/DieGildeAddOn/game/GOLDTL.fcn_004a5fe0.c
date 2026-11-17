@@ -3,7 +3,7 @@ extern unsigned char* g_entity_ptr;
 
 int __cdecl gm_RandomMod(int a0);
 int __cdecl fcn_005cfb00(unsigned short* a0, int* a1, int a2);
-float __cdecl fcn_0050f980(unsigned short a0, unsigned short a1, int a2);
+float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x004a5fe0 */
 int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, float a5, int a6, int* a7)

@@ -26,7 +26,7 @@ int __cdecl fcn_004758b0(char* name, unsigned char* pix)
 		if (*(int*) (hdr + 0x10) != 0 || *(unsigned short*) (hdr + 0xc) != 1
 		    || *(unsigned short*) (hdr + 0xe) != 0x18) {
 			fcn_0064e1fd(f);
-			return 1;
+			goto fail_1;
 		}
 		n = *(int*) (hdr + 8);
 		rev = n >= 0;
@@ -48,7 +48,9 @@ int __cdecl fcn_004758b0(char* name, unsigned char* pix)
 			p[0] = t;
 			p += 3;
 		}
-		return 1;
+		goto fail_1;
 	}
 	return 0;
+fail_1:
+	return 1;
 }
