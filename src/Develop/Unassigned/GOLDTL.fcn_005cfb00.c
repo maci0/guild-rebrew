@@ -51,13 +51,13 @@ unsigned int __cdecl fcn_005cfb00(short* a0, int* a1, unsigned char* a2)
 			accept = 1;
 			break;
 		case 1:
-			accept = (*(short*) (a2 + 0x27)) == -1;
+			accept = *(unsigned short*) (a2 + 0x27) == 0xffff;
 			break;
 		case 2:
-			accept = (*(short*) (a2 + 0x27)) != -1;
+			accept = *(unsigned short*) (a2 + 0x27) != 0xffff;
 			break;
 		case 3:
-			if ((*(short*) (a2 + 0x27)) == *a0 || (*(short*) (a2 + 0x27)) == -1) {
+			if ((*(short*) (a2 + 0x27)) == *a0 || *(unsigned short*) (a2 + 0x27) == 0xffff) {
 				accept = 1;
 				break;
 			}
@@ -86,7 +86,7 @@ unsigned int __cdecl fcn_005cfb00(short* a0, int* a1, unsigned char* a2)
 			break;
 		}
 	}
-	if ((a1[0x14 / 4] & 1) && (*(short*) (a2 + 0x27)) != -1) {
+	if ((a1[0x14 / 4] & 1) && *(unsigned short*) (a2 + 0x27) != 0xffff) {
 		q = (short*) (a1 + 7);
 		for (i = 0; i < 4; i++, q++) {
 			if ((*(short*) (a2 + 0x27)) == *q && *q != -1) {

@@ -129,9 +129,9 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 	} else if (steps < 1) {
 		steps = 1;
 	}
-	for (k = 0; k < 3; k++) {
-		scale[k] = 1.0f / c->ext[k];
-	}
+	scale[0] = 1.0f / c->ext[0];
+	scale[1] = 1.0f / c->ext[1];
+	scale[2] = 1.0f / c->ext[2];
 	/* pack the draw flags for the renderer */
 	flagbyte = (unsigned char) ((2 * ((((o->flags & 3) & c->flags) == 0) |
 	    (((o->flags & 8) == 8) * 2))) | ((o->flags & 4) == 4));

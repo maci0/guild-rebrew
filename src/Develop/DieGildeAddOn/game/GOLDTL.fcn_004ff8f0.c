@@ -117,7 +117,7 @@ void __cdecl fcn_004ff8f0(void)
 			v10 = (gm_RandomMod(2) & 0xffff) + 1;
 		else
 			v10 = 0;
-		while (v10 >= 1) {
+		while (v10 > 0) {
 			rnd2 = gm_RandomMod(2);
 			passes = gm_RandomMod(0xc);
 			handle = fcn_004c4fc0(3, -1, -1, 0x14, -1,

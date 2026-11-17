@@ -75,12 +75,10 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 	ops = *(GOLDTL_BufferVtbl**) ib;
 	ops->Lock(ib, 0, w * h * 0xc, &idxs, 0x2000);
 	if (verts == 0) {
-		return count;
+		goto done;
 	}
 	if (idxs == 0) {
-		ops = *(GOLDTL_BufferVtbl**) vb;
-		ops->Unlock(vb);
-		return count;
+		goto cleanup;
 	}
 
 	fy = (g_6b7ff9 ? g_6629b0 : g_662acc) + offset[1];
@@ -156,6 +154,7 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 	ops = *(GOLDTL_BufferVtbl**) ib;
 	ops->Unlock(ib);
 	idxs = 0;
+cleanup:
 	if (verts != 0) {
 		ops = *(GOLDTL_BufferVtbl**) vb;
 		ops->Unlock(vb);
@@ -164,6 +163,7 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 		ops = *(GOLDTL_BufferVtbl**) ib;
 		ops->Unlock(ib);
 	}
+done:
 	return count;
 }
 /* Layout scaffolding: shifts the next source object to its reference

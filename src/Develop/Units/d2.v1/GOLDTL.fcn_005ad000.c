@@ -75,7 +75,7 @@ void __cdecl fcn_005ad000(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		if (*(int*) &g_100f1dc != -1 && g_67d370 == msg.ctl) {
+		if (*(int*) &g_100f1dc != -1 && msg.ctl == g_67d370) {
 			*(int*) (msg.pkt + 0x20) = *(int*) (obj + 4);
 			*(char*) (msg.pkt + 0x1c) = 0x39;
 			*(int*) (msg.pkt + 0x24) = -1;

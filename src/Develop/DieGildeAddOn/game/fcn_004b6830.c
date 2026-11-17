@@ -5,7 +5,7 @@ extern double g_662a48;
 extern double g_6640e8;
 
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004e8ad0(unsigned char);
+int __cdecl fcn_004e8ad0(int);
 int __cdecl fcn_004e8b80(int, int, void*);
 int __cdecl fcn_0042e410(int);
 int __cdecl fcn_0050dac0(short);

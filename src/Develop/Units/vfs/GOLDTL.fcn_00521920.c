@@ -29,6 +29,7 @@ extern char g_7f3a5c[];
 extern char g_7f39c0[];
 
 #include "Develop/Units/vfs/vfs.h"
+extern struct VFS_DIR* g_6b7fdc;
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
 void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* root);
@@ -72,7 +73,7 @@ int __cdecl fcn_00521920(char* cpath)
 	void* stream;
 	int version;
 
-	stream = vfs_Tfopen(cpath, (char*) 0x6750e8, *(void**) 0x6b7fdc);
+	stream = vfs_Tfopen(cpath, (char*) 0x6750e8, g_6b7fdc);
 	if (stream == 0) {
 		goto ret0;
 	}

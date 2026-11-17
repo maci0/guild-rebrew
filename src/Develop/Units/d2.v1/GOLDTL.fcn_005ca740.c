@@ -40,7 +40,7 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
 		fcn_0046f740(((D2_BILD_GROESSE*)g_772500)[0x5da].breite - 0x10 + a0,
 		             ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 9 + a1, a4[10],
 		             g_772514);
-		if (*(unsigned char*) (a4[0] + 0xd) && a5)
+		if (a5 && *(unsigned char*) (a4[0] + 0xd))
 			io_FormatTextBuffer(buf, (const char*) 0x6ac964,
 			             ((*(unsigned char*) (a4[0] + 9) != 0) ? 10 : 0) + 0x114 +
 			                 *(unsigned char*) (a4[0] + 0xd),

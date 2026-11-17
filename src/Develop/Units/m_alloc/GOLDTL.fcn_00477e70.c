@@ -109,7 +109,7 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char
 						j++;
 					}
 					*(int*) q = *(int*) q * 2;
-					while (j + *(int*) (q + 4) < *(unsigned short*) (b + 6)
+					while ((unsigned int) (j + *(int*) (q + 4)) < *(unsigned short*) (b + 6)
 					       && *(unsigned short*) (g + (rb + j + *(int*) (q + 4)) * 2) != (unsigned short) color) {
 						(*(int*) (q + 4))++;
 					}

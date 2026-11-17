@@ -84,12 +84,11 @@ void __cdecl fcn_0041f2b0(unsigned int* destination, unsigned int* source)
 				output = (unsigned short*) (destination[9]
 					+ destination[4] * (first_y + y)) + first_x;
 				x = width;
-				if (x != 0) {
-					do {
-						*output++ = (unsigned short) (((left_b + xb / width) << bs)
-							| ((left_g + xg / width) << gs) | ((left_r + xr / width) << rs));
-						xr += dxr; xg += dxg; xb += dxb;
-					} while (--x != 0);
+				while (x != 0) {
+					*output++ = (unsigned short) (((left_b + xb / width) << bs)
+						| ((left_g + xg / width) << gs) | ((left_r + xr / width) << rs));
+					xr += dxr; xg += dxg; xb += dxb;
+					--x;
 				}
 				lr += dlr; lg += dlg; lb += dlb;
 				rr += drr; rg += drg; rb += drb;

@@ -249,15 +249,15 @@ void __cdecl fcn_0056cfc0(char *a0)
 						    (m = fcn_00445600((char *)*(int *)(e + 0x61), 0x100, 0,
 								      g_68149c)) != 0) {
 							fcn_00455350(m, m + 0x4c, pos);
-							if (CompareVector3WithinTolerance(
+							if (!(CompareVector3WithinTolerance(
 								    (float *)(*(int *)(*(int *)(r + 0x184) + 0x34) + 0x4c),
-								    pos, 80.0f) != 0) {
+								    pos, 80.0f) != 0)) {
+								fcn_004c5da0(*p, *(int *)(e + 1), -1, 0, 1,
+									     g_6a6af4);
+							} else {
 								if (i != 0)
 									fcn_004c5da0(*p, *(int *)(i + 1), -1, 0, 1,
 										     g_6a6af4);
-							} else {
-								fcn_004c5da0(*p, *(int *)(e + 1), -1, 0, 1,
-									     g_6a6af4);
 							}
 						}
 					}

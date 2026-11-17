@@ -166,7 +166,7 @@ int __cdecl fcn_00538850(int topmost)
 		return 0;
 	}
 	fcn_0041a2a0();
-	if (!fcn_00439020(&g.w2, *(HWND*) 0x774940, *(int*) 0x7e1f80))
+	if (!fcn_00439020(&g.w2, *(HWND*) 0x774940, g_7e1f80))
 		return 0;
 	fcn_00444040();
 	while (ShowCursor(0) > 0)

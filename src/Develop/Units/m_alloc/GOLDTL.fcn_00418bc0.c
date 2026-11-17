@@ -40,6 +40,8 @@ int __cdecl fcn_00418bc0(int a0)
 		} else {
 			result = -1;
 		}
+	} else {
+		result = -1;
 	}
 	return result;
 }

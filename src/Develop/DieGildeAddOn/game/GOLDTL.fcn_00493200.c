@@ -92,8 +92,8 @@ other:
 	if (kind != 3 && kind != 4 && roll == 0) {
 		return 0;
 	}
-	b = 1;
 	m = -1;
+	b = 1;
 	fcn_004c4510(a2, *(int*) (a2 + 2));
 	fcn_004c4570(4, 1, 0x1e, &m);
 	fcn_004c4570(1, 1, 0x22, &b);

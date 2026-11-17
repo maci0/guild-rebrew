@@ -8,14 +8,7 @@ void __cdecl fcn_0047cf60(char* p)
 	int i;
 
 	v = *(float*) (p + 0x124) + *(float*) (p + 0x12c) - *(float*) (p + 0x128) * *(float*) (p + 0x12c);
-	if (v < 0.0 || v < 1000.0) {
-		if (v < 0.0) {
-			v = 0.0;
-		}
-	} else {
-		v = 1000.0;
-	}
-	*(float*) (p + 0x12c) = v;
+	*(float*) (p + 0x12c) = v < 1000.0 ? (v < 0.0 ? 0.0 : v) : 1000.0;
 	best = 0;
 	besti = 0;
 	for (i = 0; i < 13; i++) {

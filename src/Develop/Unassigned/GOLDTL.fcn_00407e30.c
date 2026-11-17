@@ -96,9 +96,9 @@ char __cdecl fcn_00407e30(char* map, float* from, float* to, int x, int y, int* 
 								ey = pa[1] - p[1];
 								ez = pa[2] - p[2];
 								d = (float) sqrt(ez * ez + ey * ey + dx * dx);
-								ex = pb[0] - p[0];
-								ey = pb[1] - p[1];
 								ez = pb[2] - p[2];
+								ey = pb[1] - p[1];
+								ex = pb[0] - p[0];
 								d = d + (float) sqrt(ez * ez + ey * ey + ex * ex);
 								if (d < best) {
 									*outX = col;

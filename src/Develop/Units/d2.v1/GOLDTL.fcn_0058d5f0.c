@@ -10,6 +10,8 @@ extern int g_100f1dc;
 extern int g_14b556c;
 extern int g_774654;
 extern int g_7e46ac;
+extern int g_67d370;
+extern int g_14ce8e0;
 
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_00525fb0(int);
@@ -200,7 +202,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 		}
 		if (g_100f1dc != -1) {
 			for (sel = 0; sel < n; sel++) {
-				if (handles[sel] == *(int*) 0x67d370)
+				if (handles[sel] == g_67d370)
 					break;
 			}
 			if (sel < n) {
@@ -246,7 +248,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 				}
 				goto next;
 			}
-		} else if (*(int*) 0x14ce8e0) {
+		} else if (g_14ce8e0) {
 			g_774654 = 1;
 		}
 next:

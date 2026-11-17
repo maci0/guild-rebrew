@@ -2,6 +2,7 @@
  * and the averaged fill level, then updates the row's animation values. */
 
 extern int g_773d48;
+extern char g_slot_table[];
 extern int g_aed32c;
 extern double g_6629c8;
 extern double g_662908;
@@ -38,7 +39,7 @@ void __cdecl fcn_004fd0a0(void)
 
 	fcn_004fd400(&flag, &n);
 	g_773d48 = 0;
-	for (e = (char*) 0x7f4ca0; (int) e < 0x85a0a0; e += 0x21c) {
+	for (e = g_slot_table; (int) e < (int) g_slot_table + 0x65400; e += 0x21c) {
 		if (g_773d48 > 0x40) {
 			fcn_00535960();
 			g_773d48 = 0;

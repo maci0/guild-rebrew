@@ -48,7 +48,7 @@ void __cdecl fcn_0044a390(MeshBox* m)
 	r = 0.0f;
 	for (i = n; i > 0; i--) {
 		d = v->px * v->px + v->py * v->py + v->pz * v->pz;
-		if (r < d)
+		if (d > r)
 			r = d;
 		v++;
 	}
@@ -130,7 +130,7 @@ void __cdecl fcn_0044a390(MeshBox* m)
 		dy = v->py - m->center_y;
 		dz = v->pz - m->center_z;
 		d = dz * dz + dy * dy + dx * dx;
-		if (r < d)
+		if (d > r)
 			r = d;
 		v++;
 	}

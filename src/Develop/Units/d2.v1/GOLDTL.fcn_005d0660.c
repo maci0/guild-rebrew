@@ -216,7 +216,10 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				tabA[1].x = (short) (n3 + rows2 + 0x5a);
 				tabA[1].y = 0xa;
 				idx = rows2 + 0x5c;
-				if (tabA[1].id != -1) {
+				if (tabA[1].id == -1) {
+					fcn_0046f740(idx, 0xc, 0x4fb, g_772514);
+					tabA[1].text = -1;
+				} else {
 					id = tabA[1].id & 0xffff;
 					fcn_0046f740(idx, 0xc,
 					    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
@@ -225,9 +228,6 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 					*(int*) (g_1015ea0 + tabA[1].text * 756 + 0x1d0) = 3;
 					*(int*) (g_1015ea0 + tabA[1].text * 756 + 0x2f0) =
 					    (int) (g_7f4ca0 + id * 0x21c);
-				} else {
-					fcn_0046f740(idx, 0xc, 0x4fb, g_772514);
-					tabA[1].text = -1;
 				}
 
 				if (flag) {
@@ -236,7 +236,10 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 					tabB[2].x = (short) (t0 - 0x10);
 					tabB[2].y = 0x96;
 					idx = posY[0] - 0xe;
-					if (tabB[2].id != -1) {
+					if (tabB[2].id == -1) {
+						fcn_0046f740(idx, 0x98, 0x4fb, g_772514);
+						tabB[2].text = -1;
+					} else {
 						id = tabB[2].id & 0xffff;
 						fcn_0046f740(idx, 0x98,
 						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
@@ -244,9 +247,6 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						*(int*) (g_1015ea0 + tabB[2].text * 756 + 0x1d0) = 3;
 						*(int*) (g_1015ea0 + tabB[2].text * 756 + 0x2f0) =
 						    (int) (g_7f4ca0 + id * 0x21c);
-					} else {
-						fcn_0046f740(idx, 0x98, 0x4fb, g_772514);
-						tabB[2].text = -1;
 					}
 					tabB[3].text = fcn_0046f740(rows2 + 0x10,
 					    0x96, 0x5db, g_772514);

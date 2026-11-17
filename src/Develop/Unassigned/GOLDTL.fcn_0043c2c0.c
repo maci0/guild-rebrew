@@ -46,7 +46,7 @@ void __cdecl fcn_0043c2c0(int* a0)
 			x1 = (x + 1) & mask;
 			((unsigned char*) a0[9])[y * w + x] =
 			    ((abs(h[y * w + x] - h[y1 * w + x1]) <= abs(h[y * w + x1] - h[y1 * w + x])) * 2
-			     | fcn_0043c140(a0, x, y, 1)) << 6;
+			     | fcn_0043c140(a0, x, y, 1)) * 0x40;
 		}
 	}
 	for (lv = 1; lv < 3; lv++) {
@@ -60,7 +60,7 @@ void __cdecl fcn_0043c2c0(int* a0)
 				((unsigned char*) a0[10 + lv - 1])[y * n + x] =
 				    ((abs(h[(a0[0] * y + x) * s] - h[y1 * a0[0] + x1])
 				      <= abs(h[a0[0] * s * y + x1] - h[y1 * a0[0] + x * s])) * 2
-				     | fcn_0043c140(a0, x * s, y * s, s)) << 6;
+				     | fcn_0043c140(a0, x * s, y * s, s)) * 0x40;
 			}
 		}
 	}

@@ -71,16 +71,16 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 		}
 	} else {
 		idx4 = 0;
-		for (i = 0; i < 0x65400; i += 0x21c) {
+		for (i = 0; (unsigned int) i < 0x65400; i += 0x21c) {
 			if (SLOT_DWORD(i) == idx5) {
 				break;
 			}
 			idx4++;
 		}
-		if (i >= 0x65400) {
+		if ((unsigned int) i >= 0x65400) {
 			return 1;
 		}
-		if (idx4 >= 0x300) {
+		if ((unsigned int) idx4 >= 0x300) {
 			return 1;
 		}
 		if (SLOT_WORD(idx4 * 0x21c) == 0xffff) {
@@ -98,16 +98,16 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 		} else {
 			idx5idx = idx4;
 			idx4 = 0;
-			for (i = 0; i < 0x65400; i += 0x21c) {
+			for (i = 0; (unsigned int) i < 0x65400; i += 0x21c) {
 				if (SLOT_DWORD(i) == r1) {
 					break;
 				}
 				idx4++;
 			}
-			if (i >= 0x65400) {
+			if ((unsigned int) i >= 0x65400) {
 				return 1;
 			}
-			if (idx4 >= 0x300) {
+			if ((unsigned int) idx4 >= 0x300) {
 				return 1;
 			}
 			if (SLOT_WORD(idx4 * 0x21c) == 0xffff) {

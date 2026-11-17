@@ -82,18 +82,13 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 	v13 = -1;
 	v27 = fcn_005b1b10(*(unsigned int*) ((char*) a0 + 1));
 	memset(v12, -1, sizeof(v12));
+	if (!v27)
+		v27 = fcn_005b1b30(v3);
 	if (v27) {
 		fcn_005b1e20(v3);
-	}
-	else {
-		v27 = fcn_005b1b30(v3);
-		if (v27) {
-			fcn_005b1e20(v3);
-		}
-		else {
-			v20 = 0;
-			g_775348 = 0;
-		}
+	} else {
+		v20 = 0;
+		g_775348 = 0;
 	}
 	v5 = fcn_00470820(0, 0, (char*) 0x6aca84);
 	v28 = v5;

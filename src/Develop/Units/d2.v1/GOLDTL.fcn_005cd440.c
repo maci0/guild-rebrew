@@ -99,7 +99,7 @@ int __cdecl fcn_005cd440(char* a0, int a1, int a2, void* a3)
 					break;
 				}
 			}
-			if (i > -1 && i < 9) {
+			if (i < 9 && i > -1) {
 				fcn_00471af0(dlg, 0);
 				result = fcn_005cadc0(order[i], a0, (char*) a1, 0, a3);
 				fcn_00471af0(dlg, 1);

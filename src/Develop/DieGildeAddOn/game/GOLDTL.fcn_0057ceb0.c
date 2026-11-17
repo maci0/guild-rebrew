@@ -59,10 +59,7 @@ void __cdecl fcn_0057ceb0(char* entity)
 		}
 		p++;
 	}
-	if (n == 0) {
-		io_FormatTextBuffer(msg, 0x41f1, *(unsigned int*) (entity + 0xac));
-	}
-	else {
+	if (n != 0) {
 		fcn_004a51d0(v3, n, slots, &counts);
 		queued = 0;
 		p = (unsigned short*) (entity + 0xc8);
@@ -96,6 +93,9 @@ next:
 		else {
 			io_FormatTextBuffer(msg, 0x41f1, *(unsigned int*) (entity + 0xac));
 		}
+	}
+	else {
+		io_FormatTextBuffer(msg, 0x41f1, *(unsigned int*) (entity + 0xac));
 	}
 	fcn_004c51a0(*(int*) (v3 + 4), -1, g_773d75, *(unsigned int*) (entity + 0xac));
 	io_FormatTextBuffer(buf, 0x41f0, v15, msg);

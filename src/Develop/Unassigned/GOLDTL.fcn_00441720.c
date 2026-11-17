@@ -34,7 +34,7 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 	*a3 = v4;
 	v3 = (int) (pp[2] + 0.5f);
 	*a4 = v3;
-	if (v4 < 0 || a0[0] <= v4 || v3 < 0 || a0[0] <= v3) {
+	if (v4 < 0 || v4 >= a0[0] || v3 < 0 || v3 >= a0[0]) {
 		return 0;
 	}
 	if (a5 == 0) {
