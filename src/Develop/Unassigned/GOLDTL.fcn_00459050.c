@@ -46,7 +46,7 @@ void __cdecl fcn_00459050(int self)
 	v[0] = g_662d40[1] * src[4] + g_662d40[2] * src[8] + g_662d40[0] * src[0];
 	v[1] = g_662d40[1] * src[5] + g_662d40[2] * src[9] + g_662d40[0] * src[1];
 	v[2] = g_662d40[1] * src[6] + g_662d40[2] * src[10] + g_662d40[0] * src[2];
-	*(float*) (p + 0x14) = (float) fmod(fcn_00451380((float*) g_662d40, v), *(double*) 0x662958);
+	*(float*) (p + 0x14) = (float) fmod(fcn_00451380((float*) g_662d40, v), 6.2831854820251465);
 	*(unsigned int*) (p + 0xc) = 0x30;
 	src = (float*) (g_6b8014 + 0x18c);
 	fcn_005ebbb9(m, src);
@@ -69,7 +69,7 @@ void __cdecl fcn_00459050(int self)
 		fcn_00451340(dr, br, u, o1);
 		fcn_00451340(cr, ar, u, o2);
 		for (c = 0; c < 8; c++) {
-			fcn_00451340(o1, o2, (float) c * *(float*) 0x662dbc, vp - 1);
+			fcn_00451340(o1, o2, (float) c * 0.14285715f, vp - 1);
 			fcn_004518a0(vp - 1);
 			p[0x30 + i] = *(float*) (p + 0x18) < vp[0];
 			u = (vp[0] - *(float*) (p + 0x1c)) * *(float*) (p + 0x20);

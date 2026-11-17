@@ -128,7 +128,7 @@ void __cdecl fcn_0046a110(int a1)
 	}
 	if (!*(char**) g_772540)
 		goto label_46aadd;
-	for (;;) {
+	while (1) {
 		if (i >= 0x3fe)
 			goto label_46aadd;
 		ent = *(char**) ((char*) g_772540 + i * 4);

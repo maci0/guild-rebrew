@@ -91,10 +91,9 @@ int __cdecl fcn_0041a380(unsigned int minWidth, unsigned int minHeight, unsigned
 					j--;
 				}
 			}
-			fmt = MODEAT(i2)[3];
 			if (MODEAT(i2)[0] < minWidth || MODEAT(i2)[1] < minHeight
-			    || ((CHECKTYPEFN) VTBL(0x24))((void*) D3D, i, 1, fmt, fmt,
-				windowed) < 0
+			    || (fmt = MODEAT(i2)[3], ((CHECKTYPEFN) VTBL(0x24))((void*) D3D, i, 1, fmt, fmt,
+				windowed)) < 0
 			    || (windowed && MODEAT(i2)[3] != cur.format)) {
 				--MODECOUNT;
 				memmove((void*) MODEAT(i2), (void*) (MODEAT(i2) + 4),

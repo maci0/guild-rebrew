@@ -139,7 +139,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 		return 0;
 	}
 	*(float*) (raw + 0x50) = (float) (-*v6) * *(float*) (a0 + 0x90) * g_6628cc;
-	*(float*) (raw + 0x54) = *(float*) (a0 + 0x94) * *(float*) 0x662cac;
+	*(float*) (raw + 0x54) = *(float*) (a0 + 0x94) * -64.0f;
 	*(float*) (raw + 0x58) = (float) *v6 * *(float*) (a0 + 0x90) * g_6628cc;
 	*(float*) (raw + 0x60) = *(float*) (a0 + 0x90);
 	*(int*) (raw + 0x64) = 0;

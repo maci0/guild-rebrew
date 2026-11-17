@@ -59,9 +59,9 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 	char* map;
 	char* dst;
 	char* p;
-	char* q;
 	char c;
 	int n;
+	int d;
 
 	g_1005900 = g_104336c;
 	if (g_104336c == 0) {
@@ -77,10 +77,11 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 	n = 0;
 	do {
 		p = (char*) (g_1005900) + 0x7e24 + n;
-		q = name;
+		d = name - p;
 		do {
-			c = *p++;
-			*q++ = c;
+			c = *p;
+			p[d] = c;
+			p++;
 		} while (c);
 		_strupr(name);
 		if (strstr(name, s_681664) != 0) {

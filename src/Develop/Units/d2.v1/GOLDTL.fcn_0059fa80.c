@@ -81,8 +81,8 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	id_a = pair[0];
 	id_b = pair[1];
 	d2_SetForm(v8, 2);
-	*(int*) (cmd + 0x14) = 0x19;
 	*(int*) (cmd + 0x10) = (*(int*) (g_77255c + 0xc) - (int) *(short*) (g_772500 + 0x1ebd8)) / 2;
+	*(int*) (cmd + 0x14) = 0x19;
 	*(unsigned int*) cmd = (unsigned int) v6;
 	*(unsigned int*) (cmd + 0x30) = 0;
 	fcn_005ca560(cmd);

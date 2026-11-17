@@ -1,5 +1,6 @@
 #include <string.h>
 extern int g_6b7fb8;
+extern int g_6b5c8c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* Watch the cursor and the two button click latches, then publish the new
  * /selection state into the shared UI state block. */
@@ -35,9 +36,9 @@ void __cdecl fcn_00411b80(void)
 	}
 	armed = *(int*) 0x6b5cac;
 after_check:
-	if (g_14ce920[3] && *(int*) 0x6b5c8c) {
+	if (g_14ce920[3] && g_6b5c8c) {
 		*(int*) 0x6b5c98 = 0;
-		*(int*) 0x6b5c8c = 0;
+		g_6b5c8c = 0;
 		g_14ce920[4] = 0;
 		goto label_411cbe;
 	}

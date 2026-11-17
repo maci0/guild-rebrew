@@ -225,7 +225,7 @@ void __cdecl fcn_00419990(void)
 				}
 			}
 		}
-		radius = (float) (radius + *(double*) 0x662b58);
+		radius = (float) (radius + 39.37);
 	}
 	if (count == 2 && entries[0].id == entries[1].id && abs(entries[0].pan - entries[1].pan) < 31) {
 		count = 1;

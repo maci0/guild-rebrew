@@ -81,7 +81,7 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 			if (*(char*) 0x6b8060 && *(char*) 0x6b8061) {
 				v15 = fcn_004424c0(*(int*) 0x6b8300, *(int*) 0x6b8014 + 0x4c, *(int*) 0x6b8014 + 0x18c);
 				if (v15 < *(float*) 0x104329c) {
-					fcn_00438840((*(float*) 0x6628a0 - (*(float*) 0x104329c - v15) / *(float*) 0x104329c) * *(float*) 0x10425fc, v15);
+					fcn_00438840((1.0f - (*(float*) 0x104329c - v15) / *(float*) 0x104329c) * *(float*) 0x10425fc, v15);
 				} else {
 					fcn_00438840(*(float*) 0x10425fc, *(float*) 0x104329c);
 				}

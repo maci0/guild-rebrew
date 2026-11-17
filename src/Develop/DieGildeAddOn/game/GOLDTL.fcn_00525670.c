@@ -56,7 +56,7 @@ unsigned int __cdecl fcn_00525670(void)
 			*(int*) p = gm_LookupEntityRecordById(*(int*) p);
 	}
 	for (e = (Ent525670*) g_7f4ca0; (int) e < 0x85a0a0; e++) {
-		if (e->id != -1) {
+		if ((unsigned short) e->id != 0xffff) {
 			if (e->f16c == -1)
 				e->f16c = 0;
 			else

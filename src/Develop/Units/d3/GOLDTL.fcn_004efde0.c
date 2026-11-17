@@ -14,6 +14,8 @@
  */
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
+/* Current slot: idx counts ints, 0x5c per 0x170-byte slot of the table at g_7731b8. */
+#define SLOT ((Sefde0Slot*) ((char*) g_7731b8 + idx * 4))
 
 typedef struct Sefde0Entry {
 	int f00[12];
@@ -51,7 +53,6 @@ void __cdecl fcn_004f01c0(int, int, int, int*);
 /* ADDRESS: GOLDTL 0x004efde0 */
 void __cdecl fcn_004efde0(void)
 {
-	Sefde0Slot* slot;
 	int* statep;
 	char* obj;
 	int save;
@@ -79,34 +80,33 @@ void __cdecl fcn_004efde0(void)
 	step = step * *(float*) 0x662a3c;
 	save = g_6b8010; fcn_004432d0(0, 1);
 	count = 0; idx = 0;
-	slot = (Sefde0Slot*) 0x7731b8;
 	for (;;) {
-		if (slot->id != -1) {
-			x = step + slot->x;
-			slot->x = x;
-			y = step + slot->y;
-			slot->y = y;
-			z = step + slot->z;
-			slot->z = z;
-			slot->x = MIN(x, 1.0f);
-			slot->y = MIN(y, 1.0f);
-			slot->z = MIN(z, 1.0f);
-			if (slot->flags & 2) {
+		if (SLOT->id != -1) {
+			x = step + SLOT->x;
+			SLOT->x = x;
+			y = step + SLOT->y;
+			SLOT->y = y;
+			z = step + SLOT->z;
+			SLOT->z = z;
+			SLOT->x = MIN(x, 1.0f);
+			SLOT->y = MIN(y, 1.0f);
+			SLOT->z = MIN(z, 1.0f);
+			if (SLOT->flags & 2) {
 				i = 0;
 				count = 0;
-				statep = &slot->entry[0].state;
+				statep = &SLOT->entry[0].state;
 				while (i < 3) {
 					state = *statep;
 					if (state == 0) {
 						count++;
 						if (count >= 3) {
-							slot->flags &= ~3;
-							if (slot->flags & 4) {
-								fcn_004efd70(slot->id);
+							SLOT->flags &= ~3;
+							if (SLOT->flags & 4) {
+								fcn_004efd70(SLOT->id);
 							}
 						}
 					} else if (state == 1) {
-						if (slot->mode == 0) {
+						if (SLOT->mode == 0) {
 							runs = fcn_005e9870((Sefde0Entry*) (statep - 0x17));
 						} else {
 							runs = fcn_005e9da0((Sefde0Entry*) (statep - 0x17));
@@ -128,12 +128,12 @@ void __cdecl fcn_004efde0(void)
 								d3_DestroyObject(obj);
 								g_7731b8[idx + i + 0x57] = (int) 0;
 							}
-							if (slot->data != 0) {
-								*slot->data = i;
+							if (SLOT->data != 0) {
+								*SLOT->data = i;
 							}
-							*(int*) ((char*) slot->data + i * 0x10 + 8) = -1;
-							if (slot->callback != 0) {
-								slot->callback((int) slot->data);
+							*(int*) ((char*) SLOT->data + i * 0x10 + 8) = -1;
+							if (SLOT->callback != 0) {
+								SLOT->callback((int) SLOT->data);
 							}
 							*statep = 0;
 							g_7731b8[idx + i + 0x54] = 0;
@@ -144,33 +144,32 @@ void __cdecl fcn_004efde0(void)
 								d3_DestroyObject(obj);
 								g_7731b8[idx + i + 0x57] = (int) 0;
 							}
-							fcn_004f01c0(slot->flags & 1, slot->id, (int) (statep - 0x17), slot->data);
-							if (slot->data != 0) {
-								*slot->data = i;
+							fcn_004f01c0(SLOT->flags & 1, SLOT->id, (int) (statep - 0x17), SLOT->data);
+							if (SLOT->data != 0) {
+								*SLOT->data = i;
 							}
-							if (slot->callback != 0) {
-								slot->callback((int) slot->data);
+							if (SLOT->callback != 0) {
+								SLOT->callback((int) SLOT->data);
 							}
 							*statep = 0;
 							g_7731b8[idx + i + 0x54] = 0;
-							*slot->data = -1;
+							*SLOT->data = -1;
 						}
 					}
 					i++;
 					statep += 0x1a;
 				}
 				if (count >= 3) {
-					slot->flags &= ~3;
-					if (slot->flags & 4) {
-						fcn_004efd70(slot->id);
+					SLOT->flags &= ~3;
+					if (SLOT->flags & 4) {
+						fcn_004efd70(SLOT->id);
 					}
 				}
-			} else if (slot->flags & 4) {
-				fcn_004efd70(slot->id);
+			} else if (SLOT->flags & 4) {
+				fcn_004efd70(SLOT->id);
 			}
 		}
 		idx += 0x5c;
-		slot++;
 		if (idx >= 0x2e0) {
 			break;
 		}

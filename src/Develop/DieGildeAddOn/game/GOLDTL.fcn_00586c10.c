@@ -140,7 +140,7 @@ void __cdecl fcn_00586c10(char* obj)
     }
 
     fcn_00438da0((float) g_1040494,
-                 (float) g_1040490 - *(float*) 0x662d98,
+                 (float) g_1040490 - 150.0f,
                  0.0f, 75.0f,
                  *(float*) 0x10529c8, *(float*) 0x10421a0, *(float*) 0x10432a4,
                  g_1040494, g_1040490);
@@ -219,7 +219,7 @@ void __cdecl fcn_00586c10(char* obj)
         fcn_005270c0(0);
         *(unsigned int*) ((char*) S + 0x6c) = (unsigned int)g_6b7fac;
         a0 = (unsigned int)g_6b7fac - *(unsigned int*) ((char*) S + 0x68);
-        dt = (float) (unsigned int) a0 * *(float*) 0x665f44;
+        dt = (float) (unsigned int) a0 * 0.013513514f;
         if (*(int*) (res + 4) == 0
             && (g_14ce8e0 != 0
                 || (g_100f1dc != -1

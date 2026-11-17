@@ -94,7 +94,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 	float price;
 
 	n = k = 0;
-	if (*(float*) 0x100d0f4 <= *(float*) 0x6628a8 || *(int*) 0x100d10c == 0)
+	if (*(float*) 0x100d0f4 <= 0.0f || *(int*) 0x100d10c == 0)
 		return 0;
 	fcn_0050cce0(*(char**) (o + 0x16c), name, 0);
 	for (i = 0; i < *(int*) 0x100e74c; i++) {
@@ -164,7 +164,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			j = 1;
 			while (j < *(int*) 0x100b0ac && n < 3) {
 				e = (char*) (0x100d118 + j * 0x58);
-				if (*(float*) (e + 0x34) > *(float*) 0x6628a8)
+				if (*(float*) (e + 0x34) > 0.0f)
 					break;
 				if (*(int*) (*(int*) (e + 0x14) + 1) == m.slots[3] && *(int*) (e + 0x4c) != 0) {
 					lim = fcn_0050dfd0(q, *(int*) e);
@@ -194,7 +194,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			j = 0;
 			while (j < *(int*) 0x100b0a8 && k < 3) {
 				e = (char*) (0x100b0c0 + j * 0x40);
-				if (*(float*) (e + 0x20) > *(float*) 0x6628a8)
+				if (*(float*) (e + 0x20) > 0.0f)
 					break;
 				g = (char*) *(int*) (e + 8);
 				if (*(int*) (g + 1) != m.slots[0] || *(int*) (e + 0x34) == 0) {

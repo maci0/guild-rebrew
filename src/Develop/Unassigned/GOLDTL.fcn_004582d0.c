@@ -72,10 +72,10 @@ void __cdecl fcn_004582d0(char* a0, char* a1, char* a2, char* map, float* va,
     if (*(unsigned char*) &rec[0x26] != 0) {
         fcn_00455350(a0, (float*) (a0 + 0x4c), d);
         height = height + g_662a98;
-        minx = d[0] - *(float*) 0x662db8;
-        maxx = d[0] + *(float*) 0x662db8;
-        minz = d[2] - *(float*) 0x662db8;
-        maxz = d[2] + *(float*) 0x662db8;
+        minx = d[0] - 16.0f;
+        maxx = d[0] + 16.0f;
+        minz = d[2] - 16.0f;
+        maxz = d[2] + 16.0f;
     } else {
         v = ((float* (__cdecl*) (char*, char*, char*))
             *(void**) (*(char**) (a1 + 0x318) + 0x1f0))(
@@ -106,10 +106,10 @@ void __cdecl fcn_004582d0(char* a0, char* a1, char* a2, char* map, float* va,
             v += 0x14;
         }
     }
-    if (fabs(maxx) > *(double*) 0x662db0 || fabs(minx) > *(double*) 0x662db0
-        || fabs(maxz) > *(double*) 0x662db0 || fabs(minz) > *(double*) 0x662db0
-        || fabs(maxx - minx) > *(double*) 0x662db0
-        || fabs(maxz - minz) > *(double*) 0x662db0)
+    if (fabs(maxx) > 16384.0 || fabs(minx) > 16384.0
+        || fabs(maxz) > 16384.0 || fabs(minz) > 16384.0
+        || fabs(maxx - minx) > 16384.0
+        || fabs(maxz - minz) > 16384.0)
         return;
     rec[0x1c] = -1;
     rec[4] = 0;

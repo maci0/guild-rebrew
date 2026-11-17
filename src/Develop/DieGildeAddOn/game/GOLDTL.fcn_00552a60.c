@@ -1,6 +1,9 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+extern int g_7f4c08;
+extern unsigned short g_7f4c0c;
+
 typedef struct BuildingRow552 {
 	unsigned char kind;
 	char fields[0x24c];
@@ -74,9 +77,9 @@ void __cdecl fcn_00552a60(int a0)
 		} while (v14 == 0);
 		*(int*) (a0 + 0x70) = 0x1e0 < v4;
 		*(int*) (a0 + 0x52) = *(int*) 0x7f4c00;
-		*(int*) (a0 + 0x56) = *(int*) 0x7f4c04;
-		*(int*) (a0 + 0x5a) = *(int*) 0x7f4c08;
-		*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) 0x7f4c0c;
+		*(int*) (a0 + 0x56) = *(int*) &g_7f4c04;
+		*(int*) (a0 + 0x5a) = g_7f4c08;
+		*(unsigned short*) (a0 + 0x5e) = g_7f4c0c;
 		fcn_00500bb0((int*) (a0 + 0x52), 0, 6, 0);
 		*(unsigned char*) (a0 + 0xd2) =
 		    (unsigned char) (*(unsigned char*) (a0 + 0xd2) % 6);

@@ -11,7 +11,8 @@ void __cdecl fcn_0043f990(void)
 	char* fillDst;
 	int fillCount;
 
-	for (i = 0, offset = 0; i < *(unsigned int*) 0x633744; i++, offset += 0x44) {
+	for (i = 0; i < *(unsigned int*) 0x633744; i++) {
+		offset = i * 0x44;
 		resource = *(char**) (*(char**) 0x63374c + offset);
 		if (resource != 0) {
 			if (*resource == '*') {

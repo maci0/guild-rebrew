@@ -295,7 +295,7 @@ done:
 	fcn_00487e60(bld, 4);
 	put.count = 0;
 	for (n = 0x7f4ca2; n < 0x85a0a2; n += 0x21c) {
-		if (*(unsigned char*) (n + 6) == 0)
+		if (*(unsigned char*) (n + 6) <= 0)
 			continue;
 		if (*(short*) (n - 2) == -1)
 			continue;

@@ -175,7 +175,7 @@ void __cdecl fcn_00487f90(int* a0)
 		}
 		if (a0[8] < n) {
 			for (e = (char*) 0x7f4e05; (int) e < 0x85a205; e += 0x21c) {
-				if (*(short*) (e - 0x165) != -1 &&
+				if (*(unsigned short*) (e - 0x165) != 0xffff &&
 				    *(int*) (e + 7) == *(int*) (a0[1] + 0x16c) &&
 				    *e != 0 && *(int*) (e + 0x17) == 0 &&
 				    *(int*) (e + 0x1f) != 0 &&

@@ -61,8 +61,9 @@ void __cdecl fcn_0055c740(char* ctx)
 		if (rec == 0) {
 			break;
 		}
+		kind = *(unsigned char*) rec;
 		ver = (int) fcn_005101e0((unsigned char*) (g_7f4ca0 + *(unsigned short*) (rec + 0x27) * 0x21c),
-		    *(unsigned char*) rec, -1, 1);
+		    kind, -1, 1);
 		if (ver > gm_AccumulateTyped2(g_7f4ca0 + *(unsigned short*) (rec + 0x27) * 0x21c)) {
 			io_FormatTextBuffer(text, 0x1a40, rec);
 			he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (rec + 0x27) * 0x21c + 4),

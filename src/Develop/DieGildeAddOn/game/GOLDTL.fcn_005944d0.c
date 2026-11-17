@@ -112,7 +112,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	             fcn_00472830(window, 2), 0x78, &rect2, &rect1, &v13);
 	*(unsigned int*) (*(int*) 0x1015ea0 + 0x84 + v13 * 0x2f4) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
-	for (;;) {
+	while (1) {
 		int any;
 		int* r;
 

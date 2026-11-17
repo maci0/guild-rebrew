@@ -61,9 +61,9 @@ unsigned int __cdecl fcn_0041c470(unsigned char* input, char* output, int width,
 		free(map);
 		return 1;
 	}
+	entries = (unsigned int)width * 3 + 6;
 	clamp = (unsigned char*)malloc(768);
 	cache = (short*)malloc(65536);
-	entries = (unsigned int)width * 3 + 6;
 	size = entries * 2;
 	a = (short*)malloc(size);
 	b = (short*)malloc(size);
