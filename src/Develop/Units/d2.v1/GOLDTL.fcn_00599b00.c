@@ -130,7 +130,7 @@ void __cdecl fcn_00599b00(void)
 		*(int*) (ent * 0x2f4 + 0x6c + g_1015ea0) = 1;
 	}
 	for (;;) {
-		if (g_100f1dc >= 0x427 && g_100f1dc < 0x480) {
+		if (g_100f1dc >= 0x427 && g_100f1dc <= 0x47f) {
 			i = g_100f1dc - 0x427;
 			if (selected != -1) {
 				*(int*) (selected * 0x2f4 + 0x38 + g_1015ea0) = 0;

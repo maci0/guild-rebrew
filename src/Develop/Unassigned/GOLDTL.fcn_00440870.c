@@ -134,7 +134,7 @@ void __cdecl fcn_00440870(char* o, char* c)
 					col = (unsigned int) (int) f;
 					sb = *((char*) *(char**) (m + 0x1c) + idx);
 					f = (float) (sb & 0x7f) * 2.0f * *(float*) (m + 0x90) + *(float*) 0x67bbdc;
-					if (sb < 0) {
+					if (sb <= -1) {
 						f = f + *(float*) 0x6b86c4;
 					}
 					c0 = (unsigned int) (int) f;
@@ -142,7 +142,7 @@ void __cdecl fcn_00440870(char* o, char* c)
 						c0 = 0xff;
 					}
 					f = (float) (sb & 0x7f) * 2.0f * *(float*) (m + 0x94) + *(float*) 0x67bbe0;
-					if (sb < 0) {
+					if (sb <= -1) {
 						f = f + *(float*) 0x6b86c8;
 					}
 					c1 = (unsigned int) (int) f;
@@ -150,7 +150,7 @@ void __cdecl fcn_00440870(char* o, char* c)
 						c1 = 0xff;
 					}
 					f = (float) (sb & 0x7f) * 2.0f * *(float*) (m + 0x98) + *(float*) 0x67bbe4;
-					if (sb < 0) {
+					if (sb <= -1) {
 						f = f + *(float*) 0x6b86cc;
 					}
 					c2 = (unsigned int) (int) f;

@@ -170,7 +170,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 	count = *v6 * *v6;
 	minv = 0xff;
 	i = 0;
-	if (count > 0) {
+	if (count >= 1) {
 		do {
 			value = *(unsigned char*) (v6[5] + i);
 			if (maxv <= value) {
@@ -183,7 +183,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 		} while (i < count);
 	}
 	i = 0;
-	if (count > 0) {
+	if (count >= 1) {
 		do {
 			cell = (int*) (v6[5] + i);
 			*(char*) cell = *(char*) cell - (char) minv;

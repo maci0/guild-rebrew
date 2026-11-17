@@ -130,7 +130,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	io_AppendText(0x17ce);
 	d2_SetForm(han, 0);
 	cur = 0;
-	if (nslots >= 5) {
+	if (nslots > 4) {
 		cnt = fcn_00472830(han, 2, 0x3c, &coord_y, &coord_x, &child);
 		r = *(char**) 0x77255c;
 		fcn_00533f40(*(int*) (r + 0x10) - 0x4c, *(int*) (r + 0xc) - 0x20,

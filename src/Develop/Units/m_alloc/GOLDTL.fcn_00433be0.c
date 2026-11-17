@@ -65,6 +65,9 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 	*(int*) (*(int*) (p + 0x15c) + 0x30) = *(int*) (a2 + 0x30);
 	*(int*) (*(int*) (p + 0x15c) + 0x34) = *(int*) (a2 + 0x34);
 	if (*(int*) (a2 + 0xbc) != 0) {
+		int copy_len;
+		char* copy_src;
+		char* copy_dst;
 		*(char**) (*(int*) (p + 0x15c) + 0xbc) =
 		    m_alloc(*(int*) (p + 0x140) * 0xc, (char*) 0x67a194);
 		copy_len = *(int*) (p + 0x140) * 0xc;

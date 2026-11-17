@@ -10,6 +10,7 @@ extern void __cdecl fcn_004519d0(float*, float*);
 extern char g_6b85a0;
 extern float g_6628a8;
 extern float g_662a3c;
+extern const float g_662d40[3];
 
 /* Project one entity point through the active camera basis.  The view matrix
  * is built from the entity's own view object (or from the pass-through view
@@ -71,10 +72,10 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 		}
 		if (same) {
 			if (self == *(unsigned char**) 0x6b8484 && g_6b85a0 == 0) {
-				t[0] = m[0] * *(float*) 0x662d40 + m[4] * *(float*) 0x662d44
-				    + m[8] * *(float*) 0x662d48;
-				t[2] = m[2] * *(float*) 0x662d40 + m[6] * *(float*) 0x662d44
-				    + m[10] * *(float*) 0x662d48;
+				t[0] = m[0] * g_662d40[0] + m[4] * g_662d40[1]
+				    + m[8] * g_662d40[2];
+				t[2] = m[2] * g_662d40[0] + m[6] * g_662d40[1]
+				    + m[10] * g_662d40[2];
 				t[1] = 0.0f; len = (float) sqrt(t[0] * t[0] + t[2] * t[2]);
 				if (!(len < g_662a3c)) {
 					ang = -(float) fcn_004514d0((float*) 0x662d40, t);

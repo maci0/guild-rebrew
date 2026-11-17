@@ -101,8 +101,8 @@ void __cdecl fcn_005a2080(int a0, int a1)
 									state = 4;
 									break;
 								}
-								i++;
 								p++;
+								i++;
 							} while (i < 4);
 						}
 						next = (int) gm_FindNextFilteredEntity();

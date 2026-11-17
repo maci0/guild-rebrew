@@ -329,7 +329,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 			}
 		}
 		p++;
-		if (i > 2) {
+		if (i >= 3) {
 			fcn_0045b290(*(int *) (*(int *) &g_67a370 + 0xb0), *(int *) &g_6b8300);
 			i = 0;
 			if (mode > 0) {

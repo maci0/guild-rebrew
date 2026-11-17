@@ -156,7 +156,7 @@ have_image:
 			fcn_00476a50(v14 + 1, v3, *(int*) 0x774680, key);
 			for (i = 0, q = (char*) 0x6a24ec; q < (char*) 0x6a2519; q += 3, i++) {
 				if (!fcn_00475780(key, q)) {
-					if (i > 0xe)
+					if (i >= 0xf)
 						goto next_pixel;
 					v21 = 0;
 					if (*r == 2) {

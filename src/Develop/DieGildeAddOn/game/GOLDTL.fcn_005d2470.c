@@ -65,7 +65,7 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 			selected = (float) gm_WalkEntityChain(SHP_ID) * 0.05f;
 		}
 		ebp = (int) selected;
-		if (ebp < 1) return 0;
+		if (ebp <= 0) return 0;
 	}
 	flag = (*(unsigned int*) ((char*) arg2 + 0x1c8) >> 5) & 1;
 	dlg = fcn_00470820(0, 0, (char*) 0x6acbac);

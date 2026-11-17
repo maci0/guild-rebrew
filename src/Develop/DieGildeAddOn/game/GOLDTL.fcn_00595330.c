@@ -100,7 +100,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 		pick = 0;
 		if (g_row_handle(row) < 0) {
 			idx = fcn_0046f100(g_row_arg0(row), g_row_arg1(row), 0xcd, 0x57, 0x10,
-			                   *(int*) 0x772514);
+			                   g_772514);
 			g_row_handle(row) = idx;
 			*(int*) (idx * 0x3cc + 0x10161cc) = 0x54;
 			fcn_0046f740(0, 0, 0x74c, idx);

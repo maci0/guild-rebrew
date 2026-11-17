@@ -86,7 +86,6 @@ void __cdecl ob_HandleBepflanzung(int a0)
 	float matrix[16];
 	float world[3];
 	float place[3];
-	unsigned int color;
 
 
 
@@ -290,6 +289,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 				&v4[1]);
 			v6 = fcn_004488e0(v14, 0, 0);
 			if (v6) {
+				unsigned int color;
 				color = 0x100dc;
 				*(unsigned char*) ((char*) v6 + 0x215) =
 					*(unsigned char*) ((char*) v6 + 0x215) & 0x7f;

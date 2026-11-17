@@ -6,6 +6,7 @@
 extern pos14_7f4c00 g_7f4c00;
 
 extern int g_772514;
+extern char* g_77255c;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -86,7 +87,7 @@ int __cdecl fcn_005a02b0(void)
 		else {
 			d2_SetForm(h, 1); io_AppendText(0x15bb); d2_SetForm(h, 2);
 			io_AppendText(0x15bc, *(unsigned short*) slot, info);
-			sc = *(char**) 0x77255c;
+			sc = g_77255c;
 			d = fcn_004677e0(0x1c,
 			    *(int*) (sc + 0x10) - 0x3c,
 			    *(int*) (sc + 0xc) - 0x40, 0, 0x64, 0x83,

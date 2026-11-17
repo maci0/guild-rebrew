@@ -66,7 +66,7 @@ int __cdecl fcn_005c9f10(int a0, int a1, int a2, int a3, int a4, unsigned short*
 	v4 = 1;
 label_5ca044:
 	v17 = 0;
-	if (a3 <= 0) {
+	if (a3 < 1) {
 		return 0;
 	}
 	v15 = (int*) (a4 + 0x18);

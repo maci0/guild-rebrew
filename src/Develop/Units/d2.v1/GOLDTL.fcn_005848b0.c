@@ -1,3 +1,4 @@
+extern int g_772514;
 #include <string.h>
 
 extern unsigned char g_773d75;
@@ -72,12 +73,12 @@ void __cdecl fcn_005848b0(int a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(w);
 	d2_SetForm(w, 0);
-	fcn_005340f0(*(unsigned int *)0x772514);
+	fcn_005340f0(g_772514);
 	d2_SetForm(w, 1);
 	d2_SetForm(w, 2);
-	keep = *(unsigned int *)0x772514;
+	keep = g_772514;
 	d2_SetForm(w, 3);
-	last = *(unsigned int *)0x772514;
+	last = g_772514;
 	d2_SetForm(w, 1);
 	io_AppendText(0x4039);
 	d2_SetForm(w, 2);

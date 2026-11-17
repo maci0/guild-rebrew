@@ -4,6 +4,7 @@ extern int g_100b0ac;
 extern int g_100b0a8;
 extern int g_100dc34;
 extern int g_100dc20;
+extern int g_100dc24;
 extern int g_7747b4;
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
@@ -110,7 +111,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 	if (g_100dc20 == *(int *) (meister + 0x16c)) {
 		g_100dc34 = count;
 		if (*(int *) (meister + 0x1c0) != -1) {
-			*(int *) 0x100dc24 = (int) gm_SearchTable67(*(int *) (meister + 0x1c0));
+			g_100dc24 = (int) gm_SearchTable67(*(int *) (meister + 0x1c0));
 		}
 	}
 	i = seen >> 1;

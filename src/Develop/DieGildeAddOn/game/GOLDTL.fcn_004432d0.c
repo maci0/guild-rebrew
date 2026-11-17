@@ -1,3 +1,4 @@
+extern int g_6b8010;
 #include <string.h>
 
 extern void __cdecl fcn_00443030(char*);
@@ -24,8 +25,8 @@ char __cdecl fcn_004432d0(int a0, char a1)
 
 	if (a0 >= 0x40)
 		return 0;
-	if (a0 != *(int*) 0x6b8010) {
-	off = *(int*) 0x6b8010 * 0x3dc;
+	if (a0 != g_6b8010) {
+	off = g_6b8010 * 0x3dc;
 	*(int*) (g_10432c0 + off + 0x80) = *(int*) 0x1043254;
 	*(int*) (g_10432c0 + off + 0x84) = *(int*) 0x1042538;
 	if (*(int*) (g_10432c0 + off + 0x80) == 0x1042340
@@ -68,7 +69,7 @@ char __cdecl fcn_004432d0(int a0, char a1)
 		add ecx, ebx
 		rep movsb
 	}
-	off = *(int*) 0x6b8010 * 0x3dc;
+	off = g_6b8010 * 0x3dc;
 	*(int*) (g_10432c0 + off + 0xd4) = *(int*) 0x6b805c;
 	*(int*) (g_10432c0 + off + 0xd8) = *(int*) 0x10425fc;
 	*(int*) (g_10432c0 + off + 0xdc) = *(int*) 0x104329c;
@@ -91,7 +92,7 @@ char __cdecl fcn_004432d0(int a0, char a1)
 		add ecx, ebx
 		rep movsb
 	}
-	off = *(int*) 0x6b8010 * 0x3dc;
+	off = g_6b8010 * 0x3dc;
 	*(int*) (g_10432c0 + off + 0x3cc) = *(int*) 0x67a37c;
 	*(int*) (g_10432c0 + off + 0x3d0) = *(int*) 0x67a380;
 	*(int*) (g_10432c0 + off + 0x88) = *(int*) 0x6b8484;
@@ -166,7 +167,7 @@ char __cdecl fcn_004432d0(int a0, char a1)
 		add ecx, ebx
 		rep movsb
 	}
-	*(int*) 0x6b8010 = a0;
+	g_6b8010 = a0;
 	*(int*) 0x67a370 = (int) (g_10432c0 + off);
 	if (*(int*) 0x1041d0c == *(int*) 0x6b8484)
 		*(int*) 0x1041d0c = *(int*) (g_10432c0 + off + 0x88);

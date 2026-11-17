@@ -35,6 +35,7 @@ void __cdecl fcn_0058f0a0(int a0);
 void __cdecl fcn_005e69f0(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774650;
+extern int g_774658, g_774688, g_77468c, g_7725c8, g_67530c, g_675310;
 /* ADDRESS: GOLDTL 0x005a80d0 */
 void __cdecl fcn_005a80d0(unsigned char* a0)
 {
@@ -61,7 +62,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 		*(int*) &g_7e2700 = n;
 		return;
 	}
-	*(int*) 0x774658 = g_774650 + 1;
+	g_774658 = g_774650 + 1;
 	a0 = (unsigned char*) *(int*) &g_6b8010;
 	*(int*) 0x6a2520 = 0;
 	fcn_00530510();
@@ -81,20 +82,20 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	if (n != 0) {
 		fcn_004c3170(v7);
 		if (n == -1 || *(char*) (w + 0x1043695) != 0) {
-			*(int*) 0x7725c8 = 1;
+			g_7725c8 = 1;
 			fcn_005373e0(0, 0x603c7);
 			fcn_005373e0(0, 0x603c7);
 			init_LoadGebaeudeScene(*v7);
-			*(int*) 0x7725c8 = 0;
+			g_7725c8 = 0;
 		}
 		*(int*) &g_7746c8 = (int) v7;
 		*(int*) &g_6791c8 = *(int*) (v7 + 1);
-		*(int*) 0x67530c = *(int*) (v7 + 1);
+		g_67530c = *(int*) (v7 + 1);
 		p = (unsigned char*) fcn_00502cd0(*(int*) (v7 + 0x5d), 2, 6, 0, 0xfd);
 		if (p == 0) {
 			p = (unsigned char*) fcn_00502cd0(*(int*) (v7 + 0x5d), 2, 6, 4, 2);
 		}
-		*(int*) 0x675310 = *(int*) (p + 2);
+		g_675310 = *(int*) (p + 2);
 		fcn_004432d0(n, 0);
 		fcn_0043aa30(3);
 		if (*(int*) &g_6b8300 != 0) {
@@ -146,8 +147,8 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 		*(int*) &g_7e3a50 = *(int*) (*(int*) &g_6b8014 + 0x84);
 		*(int*) &g_7e3a54 = *(int*) (*(int*) &g_6b8014 + 0x88);
 		*(int*) &g_7e3a58 = *(int*) (*(int*) &g_6b8014 + 0x8c);
-		*(int*) 0x774688 = 0;
-		*(int*) 0x77468c = 0;
+		g_774688 = 0;
+		g_77468c = 0;
 	}
 	switch (*v7) {
 	case 0x1e:
@@ -186,8 +187,8 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	}
 	fcn_00530510();
 	sv_ClearObjectSelection();
-	*(int*) 0x774688 = 0;
-	*(int*) 0x77468c = 0;
+	g_774688 = 0;
+	g_77468c = 0;
 	if (id != -1) {
 		p = (unsigned char*) fcn_00426cc0(id);
 		if (p != 0) {
@@ -211,8 +212,8 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	*(int*) &g_7ea360 = 0;
 	*(int*) &g_7746c8 = 0;
 	*(int*) &g_6791c8 = 0;
-	*(int*) 0x67530c = -1;
-	*(int*) 0x675310 = -1;
+	g_67530c = -1;
+	g_675310 = -1;
 	fcn_00516f60();
 	*(int*) &g_7e3a40 = s0;
 	*(int*) &g_7e3a44 = s1;

@@ -1,3 +1,4 @@
+extern float g_10425a0[];
 extern float g_6629d0;
 extern const float g_662d40[3];
 #include <math.h>
@@ -59,9 +60,9 @@ void __cdecl fcn_00459050(int self)
 	br[0] = *(float*) 0x10425b8 * m[8] + *(float*) 0x10425b4 * m[4] + *(float*) 0x10425b0 * m[0];
 	br[1] = *(float*) 0x10425b8 * m[9] + *(float*) 0x10425b4 * m[5] + *(float*) 0x10425b0 * m[1];
 	br[2] = *(float*) 0x10425b8 * m[10] + *(float*) 0x10425b4 * m[6] + *(float*) 0x10425b0 * m[2];
-	ar[0] = *(float*) 0x10425a8 * m[8] + *(float*) 0x10425a4 * m[4] + *(float*) 0x10425a0 * m[0];
-	ar[1] = *(float*) 0x10425a8 * m[9] + *(float*) 0x10425a4 * m[5] + *(float*) 0x10425a0 * m[1];
-	ar[2] = *(float*) 0x10425a8 * m[10] + *(float*) 0x10425a4 * m[6] + *(float*) 0x10425a0 * m[2];
+	ar[0] = g_10425a0[2] * m[8] + g_10425a0[1] * m[4] + g_10425a0[0] * m[0];
+	ar[1] = g_10425a0[2] * m[9] + g_10425a0[1] * m[5] + g_10425a0[0] * m[1];
+	ar[2] = g_10425a0[2] * m[10] + g_10425a0[1] * m[6] + g_10425a0[0] * m[2];
 	vp = (float*) (p + 0x94);
 	i = 0;
 	for (r = 0; r < 6; r++) {

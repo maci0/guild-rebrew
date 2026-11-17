@@ -90,7 +90,7 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 				*(float*)(v10 + 0x14 + *(int*)(v26 + 0x48)) = v14[2];
 				fcn_00401280(v4, (void*)(v10 + 0x2c + *(int*)(v26 + 0x48)));
 				*(unsigned int*)(v10 + 0x24 + *(int*)(v26 + 0x48)) = 0xffffffff;
-				if (*(int*)(v26 + 0x1e4) >= 0xff) {
+				if (*(int*)(v26 + 0x1e4) > 0xfe) {
 					fcn_004011f0(v4, (void*)(v10 + 0x28 + *(int*)(v26 + 0x48)));
 				} else {
 					fcn_00401180(v4, &v15);
