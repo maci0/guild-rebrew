@@ -48,7 +48,7 @@ int __cdecl fcn_004f61c0(int* a0, int* a1, int* a2, unsigned int a3)
 		found[n] = (int) rec;
 		n++;
 	}
-	if (n <= 0) {
+	if (n < 1) {
 		return total;
 	}
 	idx = 1;

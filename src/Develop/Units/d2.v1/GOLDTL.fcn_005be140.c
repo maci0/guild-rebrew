@@ -2,6 +2,8 @@
 
 #include <math.h>
 
+extern int g_772514;
+
 int __cdecl fcn_0046f9b0();
 int __cdecl fcn_00470820();
 int __cdecl fcn_00471b60();
@@ -133,9 +135,9 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
   d2_SetForm(v5,3);
   io_AppendText(0xfa);
   d2_SetForm(v5,0);
-  fcn_00533dc0((*(int *)0x772514),0x70b,0x740);
+  fcn_00533dc0(g_772514,0x70b,0x740);
   d2_SetForm(v5,4);
-  fcn_00533a60((*(int *)0x772514),0,&v23,2,(*(int *)0x14a570c),(*(int *)0x14a5710));
+  fcn_00533a60(g_772514,0,&v23,2,(*(int *)0x14a570c),(*(int *)0x14a5710));
   v29 = v23;
   v28 = v30;
   if ((*(signed char *)0x7747b0) < 0)

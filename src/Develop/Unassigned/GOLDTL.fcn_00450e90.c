@@ -88,7 +88,7 @@ void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
 	probe = (Probe450e90*) c;
 	for (light = (SceneLight450e90*) g_6b86e8; light != 0 && g_6b8708 < g_6b8704; light = light->next) {
 		acc = g_6628a8;
-		for (i = 0; i < 9; i++) {
+		for (i = 0; i <= 8; i++) {
 			dx = probe[i].x - light->x;
 			dy = probe[i].y - light->y;
 			dz = probe[i].z - light->z;

@@ -42,7 +42,7 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 	left = 4;
 	while (avail[r] != 1) {
 		left--;
-		r = (r + 1) % 4;
+		r = (r + 1) & 3;
 		if (left == 0) {
 			return 0;
 		}

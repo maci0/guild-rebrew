@@ -1,4 +1,5 @@
 #include <string.h>
+#include "client_data.h"
 
 typedef struct Hit4ad2e0 {
 	char* p;
@@ -29,10 +30,10 @@ void __cdecl fcn_004ad2e0(void)
 	char* rec;
 	float f;
 
-	if (*(int*) 0x7f4c00 < 4) {
+	if (g_7f4c00.a < 4) {
 		return;
 	}
-	idx = *(int*) 0x7f4c00 % 4;
+	idx = g_7f4c00.a % 4;
 	if (idx == 0) {
 		return;
 	}

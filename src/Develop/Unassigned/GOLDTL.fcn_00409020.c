@@ -17,7 +17,7 @@ int __cdecl fcn_00409020(char* obj)
 	map = fcn_00402610(obj);
 	count = *(int*) (task + 0xf0);
 	result = 1;
-	if (count < 2) {
+	if (count <= 1) {
 		return result;
 	}
 	start = *(int*) (task + 0xf8);

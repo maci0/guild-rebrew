@@ -51,18 +51,14 @@ int __cdecl fcn_004b6830(int* a0)
 		if (*(rec + 4) != 3 || *(int*) rec == 0) {
 			continue;
 		}
-		for (j = 0; ; j++) {
-			s = (unsigned char*) 0x7f4ca2 + j * 0x21c;
-			if ((int) s >= 0x85a0a2) {
-				break;
-			}
+		for (s = (unsigned char*) 0x7f4ca2; (int) s < 0x85a0a2; s += 0x21c) {
 			if (*(s + 0x166) != *(rec - 4)) {
 				continue;
 			}
 			if (*s != 3 && *s != 4) {
 				continue;
 			}
-			hit = (unsigned short*) (0x7f4ca0 + j * 0x21c);
+			hit = (unsigned short*) (s - 2);
 			break;
 		}
 		if (hit != 0) {

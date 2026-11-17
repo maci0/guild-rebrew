@@ -16,7 +16,6 @@ int __cdecl ai_StartDomizil(int a0, char* a1, int a2, int* a3, int* a4)
 	int v13[6];
 	int first;
 	int second;
-	int rem;
 	int* tail_src;
 	char* entity = a1;
 
@@ -34,6 +33,7 @@ int __cdecl ai_StartDomizil(int a0, char* a1, int a2, int* a3, int* a4)
 				if (fcn_004a4bb0(a0, entity, 0, v13, v12, 0) != 0) {
 					second = (int) (fcn_0050b810(*(int*) (entity + 0x178), g_773d75) * 0.95f);
 					if (second < first) {
+					int rem;
 						rem = first - second;
 						if ((float) rem / first < 0.25f) {
 							a3[2] = rem;
@@ -55,6 +55,7 @@ int __cdecl ai_StartDomizil(int a0, char* a1, int a2, int* a3, int* a4)
 				first = fcn_0050d200(entity, v12[1]);
 				second = (int) (fcn_0050b810(*(int*) (entity + 0x178), g_773d75) * 0.95f);
 				if (second < first) {
+					int rem;
 					rem = first - second;
 					if ((float) rem / first < 0.25f) {
 						a3[2] = rem;

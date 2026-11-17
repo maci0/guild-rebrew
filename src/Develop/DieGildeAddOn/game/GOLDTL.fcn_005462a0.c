@@ -64,9 +64,10 @@ unit_77e980* __cdecl he_fn_Handlung(void)
 				matched = 1;
 			}
 			if (target != -1) {
-				if (*(int*) ((char*) e + 0x10) != target) {
-					goto nomatch;
+				if (*(int*) ((char*) e + 0x10) == target) {
+					break;
 				}
+				goto nomatch;
 			}
 		}
 		if (matched) {

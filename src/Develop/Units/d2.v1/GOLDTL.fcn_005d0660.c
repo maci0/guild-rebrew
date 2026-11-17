@@ -20,6 +20,7 @@
 
 extern int* g_772500;			/* 0x00772500 */
 extern int g_772514;			/* 0x00772514 */
+#include "client_data.h"
 extern int g_100f1dc;			/* 0x0100f1dc */
 extern char* g_1015ea0;		/* 0x01015ea0 */
 extern int g_14ce8e0;			/* 0x014ce8e0 */
@@ -100,7 +101,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 	d2_SetForm(win, 1);
 	count = 1;
 	g_100f1dc = -1;
-	rows = *(int*) (0x1015f4c + g_772514 * 0x3cc);
+	rows = *(int*) ((char*) g_1015f4c + g_772514 * 0x3cc);
 	for (;;) {
 		if (count) {
 			rows2 = rows / 2;

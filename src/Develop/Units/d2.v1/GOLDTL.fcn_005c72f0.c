@@ -96,8 +96,9 @@ int __cdecl fcn_005c72f0(int a0)
 	v7 = a0;
 	v15 = 0;
 	v8 = -1;
-	if (fcn_00525fb0(a0) != 0) {
-		return 0;
+	v15 = fcn_00525fb0(a0);
+	if (v15 != 0) {
+		return v15;
 	}
 	v18 = (g_7e46ac & 0x10000) != 0 ? 0x7d6c6 : 0x677c7;
 
@@ -109,8 +110,8 @@ int __cdecl fcn_005c72f0(int a0)
 		p = (unsigned short*) fcn_00502cd0(*(int*) (v7 + 0x5d), 2, 0, 0x116, 6);
 	}
 	if (p == 0) {
-		fcn_00526120(g_14aba98, 0);
-		return 0;
+		v15 = fcn_00526120(g_14aba98, 0);
+		return v15;
 	}
 	win = fcn_00470820(0, 0, s_6ac7b0);
 	fcn_00471b60(win);

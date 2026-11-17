@@ -39,7 +39,7 @@ int __cdecl fcn_004382e0(char* a0)
 		dx = *(float*) (a0 + 0x4c) - *(float*) (g_6b8014 + 0x4c);
 		dy = *(float*) (a0 + 0x50) - *(float*) (g_6b8014 + 0x50);
 		dz = *(float*) (a0 + 0x54) - *(float*) (g_6b8014 + 0x54);
-		dist = sqrt(dx * dx + dy * dy + dz * dz);
+		dist = sqrt(dz * dz + dy * dy + dx * dx);
 		dist = dist * n * g_1042a10;
 		idx = (int) dist;
 		if (idx >= n) {

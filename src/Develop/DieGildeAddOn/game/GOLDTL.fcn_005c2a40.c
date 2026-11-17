@@ -12,6 +12,9 @@ extern char* g_1015ea0;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 extern int g_772514;
+extern int g_7747b4;
+extern double g_662ad8;
+extern double g_662908;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern int g_67d370;
@@ -141,8 +144,8 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 		ep = slots;
 		do {
 			id = ep[0];
-			scale = (float) ((double) *(int*) 0x7747b4 * *(double*) 0x662ad8 +
-			                 *(double*) 0x662908);
+			scale = (float) ((double) g_7747b4 * g_662ad8 +
+			                 g_662908);
 			val = (int) (eval_ObjektPreis2Credits(id, 100) * scale);
 			handle = fcn_0046f740(0x10, cnt, (char*) (id + 0xdf), g_772514);
 			ep[1] = handle;
@@ -175,8 +178,8 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			sel = 0;
 			do {
 				if (g_67d370 == *ep) {
-					scale = (float) ((double) *(int*) 0x7747b4 * *(double*) 0x662ad8 +
-					                 *(double*) 0x662908);
+					scale = (float) ((double) g_7747b4 * g_662ad8 +
+					                 g_662908);
 					val = (int) (eval_ObjektPreis2Credits(slots[sel * 3], 100) * scale);
 					if ((int) (unsigned char) *(base + 0x21) <=
 					    total + others) {

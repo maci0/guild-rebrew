@@ -61,7 +61,6 @@ void __cdecl fcn_004efde0(void)
 	int i;
 	int flags;
 	int state;
-	int runs;
 	float step;
 	float x;
 	float y;
@@ -106,6 +105,7 @@ void __cdecl fcn_004efde0(void)
 							}
 						}
 					} else if (state == 1) {
+						int runs;
 						if (SLOT->mode == 0) {
 							runs = fcn_005e9870((Sefde0Entry*) (statep - 0x17));
 						} else {

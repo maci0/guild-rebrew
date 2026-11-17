@@ -21,6 +21,7 @@ extern int g_1005840;
 extern int g_1005844;
 extern int g_1005848;
 extern short g_100584c;
+extern unsigned short g_7f4c0c;
 extern int g_7f4c00, g_7f4c04, g_7f4c08;
 float __cdecl fcn_00413d10(float* pos);
 int __cdecl fcn_00500e20(int* p);
@@ -66,7 +67,7 @@ void __cdecl fcn_004c0cd0(void)
         scaled = 0;
         d = *(float*) (g_6b8014 + 0x50)
             - fcn_00413d10((float*) (g_6b8014 + 0x4c));
-        g_100584c = *(short*) 0x7f4c0c;
+        g_100584c = (short) g_7f4c0c;
         g_1005840 = g_7f4c00;
         g_1005844 = g_7f4c04;
         g_1005848 = g_7f4c08;

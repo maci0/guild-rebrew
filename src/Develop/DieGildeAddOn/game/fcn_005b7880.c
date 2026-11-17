@@ -95,9 +95,10 @@ typedef struct {
 } FRAME;
 /* SIZE 0x110c */
 
-#define GUI(i) (((Ctl*) *(void**) 0x1015ea0)[i])
+#define GUI(i) (((Ctl*) g_1015ea0)[i])
 
 extern int lpGebaeudePROT;
+extern char* g_1015ea0;
 
 void* __cdecl fcn_00534c40(unsigned int, int, int, ...);
 void __cdecl fcn_005350d0(char*);

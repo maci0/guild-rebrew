@@ -47,7 +47,7 @@ int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, flo
         s[8] = v3;
         i = 0;
         rec = (unsigned char*) s[10];
-        if (s[0x36] > 0) { sum = 0; spread = f8 * *(float*) 0x6628cc;
+        if (s[0x36] > 0) { sum = 0; spread = f8 * 0.5f;
         do {
             *(float*) (rec + 0x10) = p[0];
             *(float*) (rec + 0x14) = p[1];

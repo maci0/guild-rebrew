@@ -48,7 +48,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
 			if (d > *(float*) 0x664394)
 				continue;
 		} else {
-			d = *(float*) 0x6628a8;
+			d = 0.0f;
 		}
 		e = &a2[(a1 - 1) * 14];
 		if (!(d < (float) e[11]))

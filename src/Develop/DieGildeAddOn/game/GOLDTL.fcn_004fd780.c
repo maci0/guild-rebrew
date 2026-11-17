@@ -43,7 +43,7 @@ void __cdecl fcn_004fd780(void)
 						count = (p[0xa] == 0);
 						now = gm_RandomFloat01();
 						fcn_004c5480(*(int*) (p + 2), 0x1d0,
-							now * *(float*) 0x6628cc + *(float*) 0x6628bc);
+							now * 0.5f + 0.25f);
 						g_773d48++;
 						fcn_004c4510(p - 2, *(int*) (p + 2));
 						fcn_004c4570(1, 1, 0xc, &count);

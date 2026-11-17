@@ -61,7 +61,7 @@ void __cdecl fcn_004fad10(void)
 							fcn_004f4830(record[0x1c], (char*) stats);
 							v8 = v14 + v15 * 8;
 							v20 = (float) *(short*) (record + 0x1a) / (float) stats[4] * (float) stats[3];
-							v21 = v20 * *(float*) 0x6628cc;
+							v21 = v20 * 0.5f;
 							*(float*) (v8 * 0x18 + 0x99ef8c) = v21 + *(float*) (v8 * 0x18 + 0x99ef8c);
 							v8 = v15 + 1 <= 8 ? v15 + 1 : 8;
 							v19 = v14 + 1 >= 9 ? 8 : v14 + 1;

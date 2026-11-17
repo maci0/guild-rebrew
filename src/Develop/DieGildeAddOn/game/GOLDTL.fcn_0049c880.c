@@ -6,7 +6,7 @@ unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 int __cdecl fcn_00495400(int who, int idx, int arg, int* out1, int* out2);
 int __cdecl fcn_004aa7c0(char* e, int* a, int* b);
 float __cdecl fcn_00507e70(char* a, char* b, int c);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x0049c880 */
 int __cdecl ai_StartDrohen(int a0, unsigned short* a1, int a2, int* a3, int* a4)

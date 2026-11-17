@@ -1,4 +1,5 @@
 #include "client_data.h"
+#include "Develop/DieGildeAddOn/game/game_player.h"
 int __cdecl fcn_00500d20(void*, void*);
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
 int __cdecl fcn_005c61e0(int);
@@ -34,7 +35,7 @@ void __cdecl fcn_005c6310(void)
 	int left;
 	int obj;
 
-	if (*(unsigned short*) 0x774970 >= 0x300) {
+	if (g_774970 >= 0x300) {
 		return;
 	}
 	fcn_00500d20((void*) 0x775320, &g_7f4c00);

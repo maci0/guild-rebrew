@@ -74,7 +74,7 @@ int __cdecl fcn_004f0ed0(char* request)
 	*(unsigned short*) (oldSlot + 0xa) = 0xff;
 	if (*(int*) 0x1460ae0 != -1)
 		*(int*) 0x61a634 = *(int*) (request + 0x15);
-	if (*(int*) (request + 0x11) > 0) {
+	if (*(int*) (request + 0x11) >= 1) {
 		item = *(unsigned short*) (0x7e3f94 + *(unsigned char*) 0x6f1bc5 * 0x2f4);
 		gm_SubObjectNoKill(*(int*) (entity + 4), item, *(int*) (request + 0x11));
 		value = (int) (*(int*) (request + 0x11) * *(float*) (0x5ee034 + *(int*) (request + 0xd) * 4));

@@ -28,7 +28,6 @@ void __cdecl fcn_00569760(char* a0)
 	float f;
 	char* p;
 	int n;
-	int idx;
 	char* e;
 	char* rec;
 	char* pl;
@@ -56,6 +55,7 @@ void __cdecl fcn_00569760(char* a0)
 			*(int*) (rec + 0x65) = *(int*) (e + 4);
 		}
 		if (*(unsigned char*) (e + 0x1b1) <= 0) {
+			int idx;
 			idx = -1;
 			if ((*(unsigned char*) (a0 + 0x78) & 2) != 0) {
 				io_FormatTextBuffer(b.text, (char*) 0x19da);

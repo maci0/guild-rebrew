@@ -1,5 +1,6 @@
 /* Runs the town trade/settlement dialog: opens the window, collects the shop
    list, draws the goods rows and processes input until the player closes it. */
+extern int g_772514;
 extern unsigned char* lpGebaeudePROT;
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } BUILDING_ROW;
 
@@ -110,8 +111,8 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 		id = 0x717;
 		break;
 	}
-	fcn_00533dc0(*(int*) 0x772514, id, 0x742);
-	fcn_00533f40(0x270, 0x15e, *(int*) 0x772514,
+	fcn_00533dc0(g_772514, id, 0x742);
+	fcn_00533f40(0x270, 0x15e, g_772514,
 	             fcn_00472830(window, 2), 0x78, &rect2, &rect1, &v13);
 	*(unsigned int*) (*(int*) 0x1015ea0 + 0x84 + v13 * 0x2f4) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
@@ -414,17 +415,17 @@ after_input:
 			if (idx) {
 				d2_SetForm(saved, 2);
 				idx = 0;
-				*(int*) (*(int*) 0x772514 * 0x3cc + 0x1016198) =
-				    *(int*) (*(int*) 0x772514 * 0x3cc + 0x10161b4) *
+				*(int*) (g_772514 * 0x3cc + 0x1016198) =
+				    *(int*) (g_772514 * 0x3cc + 0x10161b4) *
 				    (signed char) a0[0x59];
 			}
 			fcn_00595e20(a0, entry);
 			fcn_005963f0(saved, 1, 0, a0);
 			if (!fcn_005373e0((void*) 0x5944d0, 0x677c7)) {
 				d2_SetForm(saved, 2);
-				a0[0x59] = (unsigned char) ((*(int*) (*(int*) 0x772514 * 0x3cc + 0x10161a0) +
-				                             *(int*) (*(int*) 0x772514 * 0x3cc + 0x1016198)) /
-				                            *(int*) (*(int*) 0x772514 * 0x3cc + 0x10161b4));
+				a0[0x59] = (unsigned char) ((*(int*) (g_772514 * 0x3cc + 0x10161a0) +
+				                             *(int*) (g_772514 * 0x3cc + 0x1016198)) /
+				                            *(int*) (g_772514 * 0x3cc + 0x10161b4));
 				fcn_00471e30(saved);
 				fcn_0052a2d0();
 				fcn_0057e880(0x1f, 0, 1, 0);

@@ -116,7 +116,7 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 			*(unsigned int*) (v8 + 8) = 0xffffffff;
 			if (*(int*) (v8 + 4) == 0) {
 				w = fcn_004ce680(a2);
-				if (w != 0 && *(int*) (w + 0x20) >= 1)
+				if (w != 0 && *(int*) (w + 0x20) > 0)
 					*(unsigned int*) (v8 + 8) = fcn_004d1020(v9, a2, v4, 0, 0);
 			}
 		}

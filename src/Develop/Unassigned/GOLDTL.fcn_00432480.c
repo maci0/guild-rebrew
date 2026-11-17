@@ -12,6 +12,8 @@
 
 #include <math.h>
 
+extern int g_6b8008;
+
 /* Native record strides: the walk frame is 0x58 bytes, the building frame
  * 0xc0. Indexing through these types is what turns the multiplies into the
  * lea chains MSVC emits for array subscripts. */
@@ -168,7 +170,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 				}
 				max = SI(owner + 0x148);
 				SB(slot + 0x6d) = (unsigned char) (flags & ~0x20);
-				SI(owner + 0x158) = SI(0x6b8008);
+				SI(owner + 0x158) = g_6b8008;
 				fcn_00438ac0(o, 1);
 
 				/* interval to clock fraction */

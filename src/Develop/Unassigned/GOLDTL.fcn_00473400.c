@@ -34,7 +34,6 @@ int __cdecl fcn_00473400(char* path, char* name)
 	int size;
 	FILE* f;
 	char* buf;
-	int kind;
 	int index;
 	int save;
 	int i;
@@ -47,15 +46,15 @@ int __cdecl fcn_00473400(char* path, char* name)
 	fread(buf, size, 1, f);
 	save = index = g_772504;
 	((VfsEntry*) g_772500)[index].kind = fcn_00473360(buf) & 0xff;
-	kind = ((VfsEntry*) g_772500)[index].kind;
-	if (kind == 1 || kind == 5 || kind == 4 || kind == 8) {
+	i = ((VfsEntry*) g_772500)[index].kind;
+	if (i == 1 || i == 5 || i == 4 || i == 8) {
 		char* p;
 		p = (char*) fcn_0047b620(buf, 0);
 		((VfsEntry*) g_772500)[index].w50 = *(short*) (p + 2);
 		((VfsEntry*) g_772500)[index].w52 = *(short*) (p + 6);
 		((VfsEntry*) g_772500)[index].parent = index;
 	}
-	if (kind == 0x11) {
+	if (i == 0x11) {
 		((VfsEntry*) g_772500)[index].w50 = *(short*) (buf + 0xc);
 		((VfsEntry*) g_772500)[index].w52 = *(short*) (buf + 0xe);
 	}
@@ -63,8 +62,8 @@ int __cdecl fcn_00473400(char* path, char* name)
 	strcpy(((VfsEntry*) g_772500)[index].name, name);
 	((VfsEntry*) g_772500)[index].flags |= 1;
 	((VfsEntry*) g_772500)[index].flags &= 0xfd;
-	kind = ((VfsEntry*) g_772500)[index].kind;
-	if (kind == 5 || kind == 8) {
+	i = ((VfsEntry*) g_772500)[index].kind;
+	if (i == 5 || i == 8) {
 		for (i = 0; i < (int) *(unsigned short*) (buf + 4) - 1; ) {
 			char* p;
 			index++;
