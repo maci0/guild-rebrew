@@ -88,12 +88,12 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 
 	w = &g_1015f40[win];
 	savedFlags = w->flags;
-	back = -1;
 	sum = 0;
-	step = g_67d380;
 	rem = 0;
 	hflag = 0;
+	back = -1;
 	special = -1;
+	step = g_67d380;
 	if (newflags != 0) {
 		w->flags = newflags;
 	}

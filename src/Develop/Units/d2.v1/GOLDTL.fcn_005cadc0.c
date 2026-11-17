@@ -60,10 +60,10 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 	int j;
 	float f;
 
-	sel = 0;
-	count = 0;
-	res = 0;
 	p = 0;
+	res = 0;
+	count = 0;
+	sel = 0;
 	dlg = fcn_00470820(0, 0, "special\\amt2");
 	fcn_00471b60(dlg);
 	again = 1;

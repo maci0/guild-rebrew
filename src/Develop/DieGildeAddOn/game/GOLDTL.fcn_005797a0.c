@@ -66,7 +66,7 @@ void __cdecl fcn_005797a0(char* a0)
 		fcn_00500bb0(a0 + 0x52, 0, 5, 0);
 		return;
 	}
-	if (*(short*) (a0 + 8) == -1 || *(int*) (a0 + 0xc) == -1) {
+	if (*(unsigned short*) (a0 + 8) == 0xffff || *(int*) (a0 + 0xc) == -1) {
 		fcn_00546190(a0);
 		return;
 	}

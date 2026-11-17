@@ -182,50 +182,7 @@ label_5be43c:
     }
     io_AppendText(0x103,*(int *)&v4[7] + 0x107,0x3200);
     if ((*(int *)0x100f1dc) != -1) {
-      if ((*(int *)0x67d370) != v29) { // branch-flip
-        if ((((*(int *)0x67d370) == v28) && (0 <= (*(signed char *)0x7747b0))) && (v11 = (*(unsigned char *)0x773d75),
-             v15 = (unsigned int)(*(unsigned short *)0x774970), fcn_00526010(v15 * 0x21c + 0x7f4ca0,0x3200,v11))) {
-          io_FormatTextBuffer(v26,0x113,0x3200);
-          v13 = fcn_00526120(v26,0x101);
-          if (v13) {
-            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca4),(*(unsigned char *)0x773d75),0x3200);
-            v12 = fcn_004c4450(v11);
-            while (!v12) {
-              fcn_00535960();
-              v12 = fcn_004c4450(v11);
-            }
-            if (fcn_004c4450(v11) == 1) {
-              v12 = fcn_00509570((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0);
-              if (v12)
-                *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 0x3200;
-              if (!v7) {
-                v12 = 0x3e;
-                v14 = (unsigned int *)(frame + 0x22c);
-                while (v12) {
-                  v1 = &v14[1];
-                  *v14 = 0;
-                  v12 -= 1;
-                  v14 = v1;
-                }
-                v53 = 0x13;
-                v60 = 1;
-                v62 = 1;
-                v55 = *(unsigned int *)&v2[1];
-                v54 = *(unsigned int *)((unsigned int)*(unsigned short *)&v2[0x27] * 0x21c + 0x7f4ca4);
-                v56 = (*(int *)0x7f4c00);
-                v57 = (*(int *)0x7f4c04);
-                v61 = *(unsigned int *)&v4[1];
-                v58 = (*(int *)0x7f4c08);
-                v59 = (*(int *)0x7f4c0c);
-                v14 = (unsigned int *)(frame + 0x22c);
-                goto label_5be96f;
-              }
-              *(int *)(v7 + 0xb0) = *(int *)(v7 + 0xb0) + 1;
-            }
-          }
-        }
-      }
-      else {
+      if (!((*(int *)0x67d370) != v29)) {
         v15 = (unsigned int)*(unsigned char *)&v4[0xe];
         if (v3)
           v15 += *(int *)(v3 + 0xb0);
@@ -317,6 +274,48 @@ label_5be970:
             }
           }
         }
+      } else { // branch-flip
+        if ((((*(int *)0x67d370) == v28) && (0 <= (*(signed char *)0x7747b0))) && (v11 = (*(unsigned char *)0x773d75),
+             v15 = (unsigned int)(*(unsigned short *)0x774970), fcn_00526010(v15 * 0x21c + 0x7f4ca0,0x3200,v11))) {
+          io_FormatTextBuffer(v26,0x113,0x3200);
+          v13 = fcn_00526120(v26,0x101);
+          if (v13) {
+            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca4),(*(unsigned char *)0x773d75),0x3200);
+            v12 = fcn_004c4450(v11);
+            while (!v12) {
+              fcn_00535960();
+              v12 = fcn_004c4450(v11);
+            }
+            if (fcn_004c4450(v11) == 1) {
+              v12 = fcn_00509570((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0);
+              if (v12)
+                *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 0x3200;
+              if (!v7) {
+                v12 = 0x3e;
+                v14 = (unsigned int *)(frame + 0x22c);
+                while (v12) {
+                  v1 = &v14[1];
+                  *v14 = 0;
+                  v12 -= 1;
+                  v14 = v1;
+                }
+                v53 = 0x13;
+                v60 = 1;
+                v62 = 1;
+                v55 = *(unsigned int *)&v2[1];
+                v54 = *(unsigned int *)((unsigned int)*(unsigned short *)&v2[0x27] * 0x21c + 0x7f4ca4);
+                v56 = (*(int *)0x7f4c00);
+                v57 = (*(int *)0x7f4c04);
+                v61 = *(unsigned int *)&v4[1];
+                v58 = (*(int *)0x7f4c08);
+                v59 = (*(int *)0x7f4c0c);
+                v14 = (unsigned int *)(frame + 0x22c);
+                goto label_5be96f;
+              }
+              *(int *)(v7 + 0xb0) = *(int *)(v7 + 0xb0) + 1;
+            }
+          }
+        }
       }
     }
     if (*v4 != 0x116) { // branch-flip
@@ -365,13 +364,12 @@ label_5bea6c:
       v28 = -1;
       v29 = -1;
     }
-    if (*v4 != 0x116) { // branch-flip
-      fcn_00595e20(v2,v4);
-      fcn_005963f0(v5,1,0,v2);
-    }
-    else {
+    if (*v4 == 0x116) {
       fcn_005974e0(v2,v4);
       fcn_00597940(v5,1,1,v2,v4);
+    } else { // branch-flip
+      fcn_00595e20(v2,v4);
+      fcn_005963f0(v5,1,0,v2);
     }
     if (((*(int *)0x14ce8e0)) && (fcn_0057ecc0() == 1))
       (*(int *)0x774654) = 1;

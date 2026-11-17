@@ -88,8 +88,8 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 	}
 	if (t) {
 		f = (float*) t;
-		minb = 0xff;
 		maxb = 0;
+		minb = 0xff;
 		p = t + 0x28c;
 		for (i = 0; i < 8; i++) {
 			for (j = 0; j < 8; j++) {

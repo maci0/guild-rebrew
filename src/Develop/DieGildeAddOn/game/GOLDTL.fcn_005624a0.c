@@ -155,7 +155,7 @@ void __cdecl fcn_005624a0(char* ctx)
 			return;
 		}
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
-		if (hit != 0 && *(short*) (hit + 0x27) != -1) {
+		if (hit != 0 && *(unsigned short*) (hit + 0x27) != 0xffff) {
 			if (fcn_00500cb0(ctx + 0xc8, &g_7f4c00) == -1) {
 				fcn_004c5c80(*(int*) (ent + 4));
 				fcn_004c5da0(*(int*) (ent + 4), *(int*) (hit + 1),
@@ -171,7 +171,7 @@ void __cdecl fcn_005624a0(char* ctx)
 	case 3:
 		fcn_00500bb0(ctx + 0x52, 0, 5, 0);
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
-		if (hit != 0 && *(short*) (hit + 0x27) != -1) {
+		if (hit != 0 && *(unsigned short*) (hit + 0x27) != 0xffff) {
 			ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 			if (ent != 0 && fcn_00529670(ent, hit) == 0) {
 				*(int*) (ctx + 0x70) = 3;

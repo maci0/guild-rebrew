@@ -55,7 +55,6 @@ void __cdecl fcn_0055e4a0(char* ev)
 	char* e;
 	char* p;
 	unsigned int v4;
-	char t;
 	GebProt_55e4a0* prot;
 	char* idx;
 
@@ -90,8 +89,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 			}
 		}
 		fcn_004c5420(*(int*) (e + 2), 0x13, 1, 0, 0x40);
-		t = *(char*) v8;
-		if (t == 0x47) {
+		if (*(char*) v8 == 0x47) {
 			io_FormatTextBuffer(buf, 0x1c3b, 1, 0x1c39,
 				*(int*) (v8 + 0x65) * 0x2f4 + (int) g_868060);
 			if ((*(int*) ((char*) g_7e35c0 + g_774650 * 8) != 0x5ba910
@@ -119,8 +117,8 @@ void __cdecl fcn_0055e4a0(char* ev)
 			}
 		}
 		else {
-			prot = &((GebProt_55e4a0*) lpGebaeudePROT)[(unsigned char) t];
-			if (t == 0x1e) {
+			prot = &((GebProt_55e4a0*) lpGebaeudePROT)[*(unsigned char*) v8];
+			if (*(char*) v8 == 0x1e) {
 				*(unsigned int*) (key + 0) = *(unsigned int*) (s_6a6340 + 0);
 				*(unsigned int*) (key + 4) = *(unsigned int*) (s_6a6340 + 4);
 				*(unsigned int*) (key + 8) = *(unsigned int*) (s_6a6340 + 8);
@@ -128,7 +126,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 				*(unsigned short*) (key + 16) = *(unsigned short*) (s_6a6340 + 16);
 				key[18] = s_6a6340[18];
 			}
-			else if (t == 0x1f) {
+			else if (*(char*) v8 == 0x1f) {
 				*(unsigned int*) (key + 0) = *(unsigned int*) (s_6a632c + 0);
 				*(unsigned int*) (key + 4) = *(unsigned int*) (s_6a632c + 4);
 				*(unsigned int*) (key + 8) = *(unsigned int*) (s_6a632c + 8);
@@ -136,7 +134,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 				*(unsigned short*) (key + 16) = *(unsigned short*) (s_6a632c + 16);
 				key[18] = s_6a632c[18];
 			}
-			else if (t == 0x20) {
+			else if (*(char*) v8 == 0x20) {
 				*(unsigned int*) (key + 0) = *(unsigned int*) (s_6a6318 + 0);
 				*(unsigned int*) (key + 4) = *(unsigned int*) (s_6a6318 + 4);
 				*(unsigned int*) (key + 8) = *(unsigned int*) (s_6a6318 + 8);

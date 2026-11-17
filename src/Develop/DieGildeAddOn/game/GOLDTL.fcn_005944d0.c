@@ -142,7 +142,29 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 				rowsLeft = count;
 				do {
 					if (*(int*) 0x67d370 == *(int*) (row + 0x779194)) {
-						if (any) {
+						if (!(any)) {
+							int* r2;
+
+							r2 = (int*) 0x7e30d0;
+							do {
+								int base;
+								unsigned char* obj;
+
+								if (*r2 == 0xffff) {
+									break;
+								}
+								base = *r2 * 0x21c;
+								obj = *(unsigned char**) (base + 0x7f4e1c);
+								if (obj && *obj == 0x04 &&
+								    *(int*) (obj + 0x10) == *(int*) (p + 1) &&
+								    !(*(unsigned int*) (base + 0x7f4e68) & 0x800) &&
+								    *(unsigned short*) (obj + 0xac) ==
+								        *(unsigned int*) (row + 0x779160)) {
+									*(unsigned char*) (base + 0x7f4e28) = 1;
+								}
+								r2 += 10;
+							} while ((int) r2 < 0x7e35d0);
+						} else {
 							int ok;
 							int rec;
 							int handle;
@@ -151,7 +173,16 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 							handle = *(int*) (row + 0x779160);
 							rec = *(int*) 0x99ec10 + handle * 0x40;
 							v3 = *(unsigned short*) (handle + 0x36 + rec);
-							if (gm_eval_SlotVoll(entry, handle, v3)) {
+							if (!(gm_eval_SlotVoll(entry, handle, v3))) {
+								unsigned char kind;
+
+								kind = *(unsigned char*) (handle + rec);
+								if (kind != '%' && kind != 0x17) {
+									fcn_00526120(*(int*) 0x14a561c, 0);
+								} else {
+									fcn_00526120(*(int*) 0x14a5618, 0);
+								}
+							} else {
 								int k;
 								unsigned short* q;
 
@@ -176,7 +207,9 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 									k++;
 									q++;
 								} while (k < 4);
-								if (ok) {
+								if (!(ok)) {
+									fcn_00526120(*(int*) 0x14a5620, 0);
+								} else {
 									int found;
 
 									found = fcn_005463a0(2, 0, 4, 3, *(int*) (p + 1));
@@ -239,41 +272,8 @@ found_row:
 									if (found && !*(int*) (found + 0x70)) {
 										*(unsigned int*) (found + 0x70) = 1;
 									}
-								} else {
-									fcn_00526120(*(int*) 0x14a5620, 0);
-								}
-							} else {
-								unsigned char kind;
-
-								kind = *(unsigned char*) (handle + rec);
-								if (kind != '%' && kind != 0x17) {
-									fcn_00526120(*(int*) 0x14a561c, 0);
-								} else {
-									fcn_00526120(*(int*) 0x14a5618, 0);
 								}
 							}
-						} else {
-							int* r2;
-
-							r2 = (int*) 0x7e30d0;
-							do {
-								int base;
-								unsigned char* obj;
-
-								if (*r2 == 0xffff) {
-									break;
-								}
-								base = *r2 * 0x21c;
-								obj = *(unsigned char**) (base + 0x7f4e1c);
-								if (obj && *obj == 0x04 &&
-								    *(int*) (obj + 0x10) == *(int*) (p + 1) &&
-								    !(*(unsigned int*) (base + 0x7f4e68) & 0x800) &&
-								    *(unsigned short*) (obj + 0xac) ==
-								        *(unsigned int*) (row + 0x779160)) {
-									*(unsigned char*) (base + 0x7f4e28) = 1;
-								}
-								r2 += 10;
-							} while ((int) r2 < 0x7e35d0);
 						}
 					}
 					row += 0x58;
@@ -372,7 +372,9 @@ after_input:
 						                               *(int*) 0x99ec10);
 						if (*cells) {
 							got = fcn_00502cd0(*(int*) (entry + 0x14), 1, 0, *cells);
-							if (got) {
+							if (!(got)) {
+								*r3 = 0;
+							} else {
 								int best;
 								int t;
 
@@ -383,8 +385,6 @@ after_input:
 								if (t <= best) {
 									*r3 = t;
 								}
-							} else {
-								*r3 = 0;
 							}
 						}
 						off += 2;

@@ -141,18 +141,18 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 				} while (*(int*) ((char*) obj + 0x128) != 0);
 				fcn_004030e0(obj);
 			}
-			if (g_7e23e8 != 0) {
-				idx = idx % count2;
-				if (idx <= -1) {
-					idx = count2 - 1;
-				}
-				p = &frauen[idx][0];
-			} else {
+			if (g_7e23e8 == 0) {
 				idx = idx % count;
 				if (idx <= -1) {
 					idx = count - 1;
 				}
 				p = &maenner[idx][0];
+			} else {
+				idx = idx % count2;
+				if (idx <= -1) {
+					idx = count2 - 1;
+				}
+				p = &frauen[idx][0];
 			}
 			i = 0;
 			do {

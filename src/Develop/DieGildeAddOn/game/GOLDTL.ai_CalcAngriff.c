@@ -38,6 +38,7 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 	float fmax;
 	char* nm;
 	int r;
+	Cell99ef80* cell;
 	float v;
 	int b;
 	int a;
@@ -106,7 +107,8 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 			}
 			if (*(int*) (p + 0x61) != 0 && fcn_004fa6f0(*(int*) (p + 0x61) + 0x4c, &a, &b) != 0) {
 				r = (b + a * 8) * 0x18;
-				w = 1.0f - ((float) *(unsigned short*) ((char*) 0x99ef80 + r) * *(float*) 0x662a34 + *(unsigned short*) ((char*) 0x99ef80 + r + 2)) / fmax;
+				cell = (Cell99ef80*) ((char*) 0x99ef80 + r);
+				w = 1.0f - ((float) cell->demand * *(float*) 0x662a34 + cell->supply) / fmax;
 			} else {
 				w = 0.0f;
 			}

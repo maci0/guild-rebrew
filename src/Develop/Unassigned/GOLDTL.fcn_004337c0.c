@@ -19,23 +19,23 @@ void __cdecl fcn_004337c0(int *a0)
             do {
                 if ((*(unsigned char *)((int)a0 + 0x34) & 1) != 0 &&
                     i < *a0 - 1) {
-                    fcn_00451720((int *)((char *)a0[0x10] + off + 0x6c),
-                                 (int *)((char *)a0[0x10] + off + 0x14),
-                                 (int *)((char *)a0[0x10] + off + 0x6c),
-                                 (int *)((char *)a0[0x10] + off + 0x14));
+                    fcn_00451720((int *)(off + (char *)a0[0x10] + 0x6c),
+                                 (int *)(off + (char *)a0[0x10] + 0x14),
+                                 (int *)(off + (char *)a0[0x10] + 0x6c),
+                                 (int *)(off + (char *)a0[0x10] + 0x14));
                 }
-                *(int *)((char *)a0[0x10] + off + 0x20) = 0;
-                *(int *)((char *)a0[0x10] + off + 0x24) = 0;
-                *(int *)((char *)a0[0x10] + off + 0x28) = 0;
-                *(int *)((char *)a0[0x10] + off + 0x30) = 0;
-                *(int *)((char *)a0[0x10] + off + 0x34) = 0;
-                *(int *)((char *)a0[0x10] + off + 0x38) = 0;
-                *(int *)((char *)a0[0x10] + off + 0x40) = 0;
-                *(int *)((char *)a0[0x10] + off + 0x44) = 0;
-                *(int *)((char *)a0[0x10] + off + 0x48) = 0;
-                *(int *)((char *)a0[0x10] + off + 0x4c) = 0;
-                *(int *)((char *)a0[0x10] + off + 0x50) = 0;
-                *(int *)((char *)a0[0x10] + off + 0x54) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x20) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x24) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x28) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x30) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x34) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x38) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x40) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x44) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x48) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x4c) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x50) = 0;
+                *(int *)(off + (char *)a0[0x10] + 0x54) = 0;
                 i++;
                 off += 0x58;
             } while (i < *a0);

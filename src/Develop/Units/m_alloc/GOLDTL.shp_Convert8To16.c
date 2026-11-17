@@ -31,11 +31,11 @@ int* __cdecl shp_Convert8To16(int* src, int unused, char* dest)
 	memcpy(res, src, 0x32);
 	*(int*) ((char*) res + 0x26) = 0;
 	*(int*) ((char*) res + 0x2e) = 0;
+	*(int*) res = 0x32;
+	*(unsigned char*) ((char*) res + 0xc) = 1;
 	s = (unsigned char*) src + 0x36;
 	q = (unsigned int*) ((char*) src + 0x32);
 	d2 = (unsigned char*) res + 0x36;
-	*(int*) res = 0x32;
-	*(unsigned char*) ((char*) res + 0xc) = 1;
 	hdr = (unsigned int*) ((char*) res + 0x32);
 	for (i = 0; i < 0x100; i++) {
 		pal[i] = fcn_0041bac0(g_100eb80[i * 4], g_100eb80[i * 4 + 1], g_100eb80[i * 4 + 2]);

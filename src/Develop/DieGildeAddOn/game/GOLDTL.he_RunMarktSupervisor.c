@@ -235,11 +235,11 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		if (g != g_6628a8) {
 			rec.f2c = rec.f2c + g;
 		}
-		if (rec.f2c < g_6628a0) {
-			t = 0;
-		} else {
+		if (!(rec.f2c < g_6628a0)) {
 			t = (int) rec.f2c;
 			rec.f2c = rec.f2c - (float) t;
+		} else {
+			t = 0;
 		}
 		if (ub.n != t) {
 			t = ub.n;
@@ -275,10 +275,10 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		}
 		if (rec.f20 * g_662acc < rec.f24) {
 			if (rec.f20 * g_662acc / rec.f24 < gm_RandomFloat01()) {
-				if ((float) t < rec.f20 * g_662908) {
-					rec.f24 = rec.f20 * g_6628d8;
-				} else {
+				if (!((float) t < rec.f20 * g_662908)) {
 					rec.f24 = rec.f20 * g_662948;
+				} else {
+					rec.f24 = rec.f20 * g_6628d8;
 				}
 			}
 		} else if (rec.f20 * g_6628d8 > rec.f24) {

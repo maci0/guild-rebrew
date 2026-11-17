@@ -316,7 +316,14 @@ void __cdecl fcn_00561380(void *a0)
 			model = (unsigned char *)*(int *)(r + 0x61);
 			if (model == 0)
 				goto label_562049;
-			if (*(unsigned char *)(p + 0xc2) == 0) {
+			if (!(*(unsigned char *)(p + 0xc2) == 0)) {
+				n = gm_RandomMod(3) & 0xffff;
+				model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, &names[n][0]);
+				if (model != 0)
+					fcn_00455350((char *)model, (char *)model + 0x4c, pos);
+				else
+					model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, "dummy_TUER");
+			} else {
 				*(unsigned char *)(msg + 4) = 0x4f;
 				*(int *)(msg + 8) = *(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4);
 				*(int *)(msg + 0xc) = -1;
@@ -330,13 +337,6 @@ void __cdecl fcn_00561380(void *a0)
 				query = (unsigned char *)(lpGebaeudePROT + (unsigned char)*(unsigned char *)r * 0x24d);
 				*(int *)(msg + 0x5c) = (gm_RandomMod(0x10) & 0xffff) - *(unsigned char *)(query + 0x247) * 3 + 0x14;
 				fcn_004c5530(msg);
-			} else {
-				n = gm_RandomMod(3) & 0xffff;
-				model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, &names[n][0]);
-				if (model != 0)
-					fcn_00455350((char *)model, (char *)model + 0x4c, pos);
-				else
-					model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, "dummy_TUER");
 			}
 			if (model == 0 || v10 != 0)
 				goto label_562049;

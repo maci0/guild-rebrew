@@ -159,12 +159,11 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 	_strupr(f.cName + 2);
 	pTemp = (char*) f.cGruppen;
 	for (f.fPruef = 0.0f; f.fPruef < 128.0f; f.fPruef += 1.0f) {
-		if (f.fPruef == 0.0f) {
-			sprintf(f.cPfad, (char*) 0x67f0ac, (char*) 0x7e1ae0, f.cName);
-		}
-		else {
+		if (f.fPruef != 0.0f) {
 			sprintf(f.cPfad, (char*) 0x67f0c0, (char*) 0x7e1ae0, f.cName,
 				(char) (f.fPruef + 65.0f - 1.0f));
+		} else {
+			sprintf(f.cPfad, (char*) 0x67f0ac, (char*) 0x7e1ae0, f.cName);
 		}
 		if (fcn_0042f690(f.cPfad, g_6b7fdc, g_6b7fdc, f.cTmp) != 0) {
 			strcpy(pTemp, f.cPfad);
@@ -343,16 +342,15 @@ platzieren:
 				f.key.id = 0xdd;
 				fcn_0043a3f0(pAktuell, *(char**) (pAktuell + 0x1cc), f.key);
 				*(unsigned char*) (pAktuell + 0x215) |= 0x80;
-				if (pNaechster == 0) {
-					if (f.iRot != 2) {
-						fcn_00414c90(pAktuell, 0x40, 0x40, 0xc0);
-						f.iRot = 2;
-					}
-				}
-				else {
+				if (pNaechster != 0) {
 					if (f.iRot != 1) {
 						fcn_00414c90(pAktuell, 0x40, 0xc0, 0x40);
 						f.iRot = 1;
+					}
+				} else {
+					if (f.iRot != 2) {
+						fcn_00414c90(pAktuell, 0x40, 0x40, 0xc0);
+						f.iRot = 2;
 					}
 				}
 				f.fPruef = 90.0f;
