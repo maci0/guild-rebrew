@@ -32,9 +32,12 @@ char __cdecl fcn_0045bad0(char* e, int gx, int gy, int* ox, int* oy)
 	if (e == 0) {
 		return 0;
 	}
-	o[0] = (*(float*) (g_6b8014 + 0x4c) - *(float*) (e + 0)) / *(float*) (e + 0x10);
-	o[1] = (*(float*) (g_6b8014 + 0x50) - *(float*) (e + 4)) / *(float*) (e + 0x14);
-	o[2] = (*(float*) (g_6b8014 + 0x54) - *(float*) (e + 8)) / *(float*) (e + 0x18);
+	o[0] = *(float*) (g_6b8014 + 0x4c) - *(float*) (e + 0);
+	o[1] = *(float*) (g_6b8014 + 0x50) - *(float*) (e + 4);
+	o[2] = *(float*) (g_6b8014 + 0x54) - *(float*) (e + 8);
+	o[0] = o[0] / *(float*) (e + 0x10);
+	o[1] = o[1] / *(float*) (e + 0x14);
+	o[2] = o[2] / *(float*) (e + 0x18);
 	u = ((float) gx - g_1052bc0) / g_10432a4;
 	v = ((float) gy - g_1052bc8) / g_1042584;
 	fcn_005ebbb9(m, (float*) (g_6b8014 + 0x18c));

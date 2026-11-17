@@ -17,7 +17,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl gm_SumSlotTreasury(int);
 int __cdecl fcn_0050b710(int, char);
 int __cdecl fcn_0050b750(int, char);
-int __cdecl fcn_00471f80(int, char);
+int __cdecl fcn_00471f80(int);
 void __cdecl fcn_004c4eb0(void*);
 void __cdecl fcn_004c4ef0(void*);
 void __cdecl fcn_004c5150(int, int, char, int);
@@ -85,7 +85,7 @@ void __cdecl fcn_005ad000(void)
 			                                    *(unsigned short*) &g_774970 * 0x21c);
 			h = *(unsigned char*) &g_773d75;
 			*(int*) (msg.pkt + 0x78) = fcn_0050b750(
-			    fcn_00471f80(ctl1, h), h);
+			    fcn_00471f80(ctl1), h);
 			fcn_004c4eb0((void*) 0x6ab168);
 			fcn_004c5150(*(int*) (obj + 4),
 			             *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c),

@@ -33,6 +33,7 @@ void __cdecl fcn_0045b290(int, int);
 int __cdecl fcn_0050c710(int, int, int);
 int __cdecl gm_CheckEntityType(void *);
 #include "Develop/DieGildeAddOn/game/game_data.h"
+extern double g_664ef8;
 extern char g_7e1ae0[];
 extern int g_68b79c;
 extern int g_6b89c0; extern char g_6a2574[];
@@ -210,7 +211,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 		*(int *) (*(int *) &g_67a370 + 0xb0) = cur;
 		cur = *(int *) (*(int *) &g_67a370 + 0xb0);
 	}
-	*(float *) 0x9ba2c0 = (float) (*(float *) (cur + 0x10) * 1.1);
+	*(float *) 0x9ba2c0 = (float) (*(float *) (cur + 0x10) * g_664ef8);
 	*(int *) 0x6a2570 = 0x3e19999a;
 	g_6a2574[0] = 0;
 	*(void **) 0x772eb4 = (void *) o;

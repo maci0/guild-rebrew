@@ -2,7 +2,6 @@
 
 #pragma optimize("y", off)
 
-extern float g_664178;
 extern float g_66414c;
 
 int __cdecl fcn_00507910(int);
@@ -62,7 +61,7 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 		return 0;
 	}
 	v = fcn_0050d320(ent, g_773d75);
-	ratio = (int) ((float) v * g_664178);
+	ratio = (int) ((float) v * 0.660000026f);
 	o1.kind = 0;
 	o1.f1 = 0;
 	o1.f2 = 0;

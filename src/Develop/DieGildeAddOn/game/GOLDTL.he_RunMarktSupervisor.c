@@ -51,15 +51,11 @@ extern char g_85ab90[];
 
 extern float g_6628a0;
 extern float g_6628a8;
-extern float g_6628d8;
 extern float g_662910;
 extern float g_662948;
-extern float g_6629b0;
-extern float g_662acc;
 extern float g_662d34;
 extern float g_664198;
 extern float g_665ea0;
-extern float g_665ec8;
 extern double g_662908;
 extern double g_662930;
 extern double g_6629c8;
@@ -166,7 +162,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		}
 		gm_RandomMod(10);
 		d = (double) v * g_665dd0;
-		uf.f = (float) (rec.f34 * g_665ec8 * d);
+		uf.f = (float) (rec.f34 * 0.0714285746f * d);
 		up.n = gm_RandomMod(100) & 0xffff;
 		uf.f = (up.n + g_665ea0) * uf.f * g_662910;
 		if (uf.f != g_6628a8) {
@@ -179,10 +175,10 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 			if (rec.f20 * g_662908 < rec.f24) {
 				fcn_004c51f0(*(int*) (ent + 2), -1,
 				    rec.id, (int) uf.f, g_773d75, 0);
-				rec.f24 = rec.f34 * g_665ec8 * d * g_662948 + rec.f24;
+				rec.f24 = rec.f34 * 0.0714285746f * d * g_662948 + rec.f24;
 			}
 		} else if (ub.n > rec.f34 * g_6640f8) {
-			uf.f = (float) (rec.f34 * g_665ec8 * d);
+			uf.f = (float) (rec.f34 * 0.0714285746f * d);
 			rec.f24 = rec.f24 - uf.f * g_662d34;
 			if (rec.f20 * g_662ad8 > rec.f24) {
 				rec.f24 = rec.f20 * g_662ad8;
@@ -191,13 +187,13 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 				rec.f24 = 1.0f;
 			}
 		}
-		if (rec.f20 * g_662acc < rec.f24) {
-			if (rec.f20 * g_662acc / rec.f24 < gm_RandomFloat01()) {
-				rec.f24 = rec.f20 * g_6628d8;
+		if (rec.f20 * 1.5f < rec.f24) {
+			if (rec.f20 * 1.5f / rec.f24 < gm_RandomFloat01()) {
+				rec.f24 = rec.f20 * 0.400000006f;
 			}
-		} else if (rec.f20 * g_6628d8 > rec.f24) {
-			if (rec.f24 / (rec.f20 * g_6628d8) < gm_RandomFloat01()) {
-				rec.f24 = rec.f20 * g_662acc;
+		} else if (rec.f20 * 0.400000006f > rec.f24) {
+			if (rec.f24 / (rec.f20 * 0.400000006f) < gm_RandomFloat01()) {
+				rec.f24 = rec.f20 * 1.5f;
 			}
 		}
 		if ((unsigned short) gm_RandomMod(100) > 0xa || g_7f4c00.b == 0xc) {
@@ -231,7 +227,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 			ub.n = 0;
 		}
 		gm_RandomMod(10);
-		g = (float) (rec.f20 * g_665ec8 * ((double) v * g_665dd0));
+		g = (float) (rec.f20 * 0.0714285746f * ((double) v * g_665dd0));
 		if (g != g_6628a8) {
 			rec.f2c = rec.f2c + g;
 		}
@@ -273,18 +269,18 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		if (rec.f20 * g_662930 < rec.f24) {
 			rec.f24 = rec.f20 * g_662930;
 		}
-		if (rec.f20 * g_662acc < rec.f24) {
-			if (rec.f20 * g_662acc / rec.f24 < gm_RandomFloat01()) {
+		if (rec.f20 * 1.5f < rec.f24) {
+			if (rec.f20 * 1.5f / rec.f24 < gm_RandomFloat01()) {
 				if (!((float) t < rec.f20 * g_662908)) {
 					rec.f24 = rec.f20 * g_662948;
 				} else {
-					rec.f24 = rec.f20 * g_6628d8;
+					rec.f24 = rec.f20 * 0.400000006f;
 				}
 			}
-		} else if (rec.f20 * g_6628d8 > rec.f24) {
-			if (rec.f24 / (rec.f20 * g_6628d8) < gm_RandomFloat01()) {
+		} else if (rec.f20 * 0.400000006f > rec.f24) {
+			if (rec.f24 / (rec.f20 * 0.400000006f) < gm_RandomFloat01()) {
 				if (t == 0) {
-					rec.f24 = rec.f20 * g_662acc;
+					rec.f24 = rec.f20 * 1.5f;
 				} else {
 					rec.f24 = rec.f20 * g_664198;
 				}
@@ -325,7 +321,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 			}
 			ub.n = gm_GetMsgField(ent, q);
 			uf.n = ub.n;
-			g = (float) (rec.f20 * g_665ec8 * ((double) v * g_665dd0));
+			g = (float) (rec.f20 * 0.0714285746f * ((double) v * g_665dd0));
 			rec.f2c = rec.f2c + g;
 			if (rec.f2c < g_6628a0) {
 				ub.n = 0;
@@ -359,13 +355,13 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 					rec.f24 = 1.0f;
 				}
 			}
-			if (rec.f20 * g_6629b0 < rec.f24) {
-				if (rec.f20 * g_6629b0 / rec.f24 < gm_RandomFloat01()) {
+			if (rec.f20 * 2.5f < rec.f24) {
+				if (rec.f20 * 2.5f / rec.f24 < gm_RandomFloat01()) {
 					rec.f24 = rec.f20 * g_662948;
 				}
 			} else if (rec.f20 * g_662948 > rec.f24) {
 				if (rec.f24 / (rec.f20 * g_662948) < gm_RandomFloat01()) {
-					rec.f24 = rec.f20 * g_6629b0;
+					rec.f24 = rec.f20 * 2.5f;
 				}
 			}
 			if ((unsigned short) gm_RandomMod(100) > 0x4b) {
@@ -388,7 +384,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 			if (q == 0) {
 				continue;
 			}
-			g = (float) (((MarktSlot*) scratch)->f20 * g_665ec8
+			g = (float) (((MarktSlot*) scratch)->f20 * 0.0714285746f
 			    * ((double) v * g_665dd0));
 			uf.n = gm_RandomMod(3) & 0xffff;
 			uf.f = (float) uf.n + g;

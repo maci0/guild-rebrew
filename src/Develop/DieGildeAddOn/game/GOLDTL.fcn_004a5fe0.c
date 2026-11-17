@@ -1,7 +1,7 @@
 extern int g_6643d8[];
 extern unsigned char* g_entity_ptr;
 
-int __cdecl gm_RandomMod(int a0);
+unsigned short __cdecl gm_RandomMod(int a0);
 int __cdecl fcn_005cfb00(unsigned short* a0, int* a1, int a2);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, int a2);
 
@@ -18,7 +18,7 @@ int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, f
 	int idx;
 	float f;
 
-	step = g_6643d8[(unsigned short) gm_RandomMod(0x10)];
+	step = g_6643d8[gm_RandomMod(0x10)];
 	flag = 0;
 	buf[5] = 0;
 	buf[2] = a2;
@@ -28,7 +28,7 @@ int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, f
 		flag = 1;
 	}
 	i = 0x100;
-	idx = (unsigned short) gm_RandomMod(0x100);
+	idx = gm_RandomMod(0x100);
 	limit = a6 & 0xff;
 	count = 0;
 	if (limit > 0) {

@@ -69,8 +69,7 @@ int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
 	n = a1->day;
 	if (i < n) {
 		acc = (int) (f2 * 60.0f - (float) (int) CLAMPF((float) (t.min + t.hour * 60), f1 * 60.0f, f2 * 60.0f));
-		i = i + 1;
-		t.day = i;
+		i = ++t.day;
 		sim_SetSyncParams((int) &t, (unsigned char) (int) f1, 0, 0);
 	} else {
 		acc = 0;

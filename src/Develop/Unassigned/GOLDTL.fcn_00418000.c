@@ -51,8 +51,8 @@ int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, flo
         do {
             *(float*) (rec + 0x10) = p[0];
             *(float*) (rec + 0x14) = p[1];
-            *(float*) (rec + 0x14) = f6;
             *(float*) (rec + 0x18) = p[2];
+            *(float*) (rec + 0x14) = f6;
             v[0] = (float) fcn_0064d3f8() * g_662a18;
             v[1] = (float) fcn_0064d3f8() * g_662a18;
             v[2] = (float) fcn_0064d3f8() * g_662a18;

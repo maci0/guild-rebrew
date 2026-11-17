@@ -58,8 +58,8 @@ int __cdecl fcn_004f2350(int e)
 	if (*(short*) (slot + 8) != *(short*) (q + 0x50)) {
 		return -7;
 	}
-	n = g_6652f8[*(int*) (e + 0xc)];
 	base = *(int**) (slot + 0x10);
+	n = g_6652f8[*(int*) (e + 0xc)];
 	best = base;
 	cur = base;
 	for (i = 0; i < n; i++, cur += 0x11) {

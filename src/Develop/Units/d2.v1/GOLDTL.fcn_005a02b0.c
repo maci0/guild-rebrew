@@ -35,6 +35,7 @@ int __cdecl fcn_005a02b0(void)
 	char msg[0xf8];
 	char text[0x100];
 	char* slot;
+	char* sc;
 	int h;
 	int n;
 	int mode;
@@ -85,9 +86,10 @@ int __cdecl fcn_005a02b0(void)
 		else {
 			d2_SetForm(h, 1); io_AppendText(0x15bb); d2_SetForm(h, 2);
 			io_AppendText(0x15bc, *(unsigned short*) slot, info);
+			sc = *(char**) 0x77255c;
 			d = fcn_004677e0(0x1c,
-			    *(int*) (*(char**) 0x77255c + 0x10) - 0x3c,
-			    *(int*) (*(char**) 0x77255c + 0xc) - 0x40, 0, 0x64, 0x83,
+			    *(int*) (sc + 0x10) - 0x3c,
+			    *(int*) (sc + 0xc) - 0x40, 0, 0x64, 0x83,
 			    0x42, g_772514);
 			d2_SetElementValue(d, 0, 0x64, (int) (grade * 100.0f));
 		}

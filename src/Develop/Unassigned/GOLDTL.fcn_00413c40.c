@@ -14,9 +14,9 @@ int __cdecl fcn_00413c40(void* obj, float* outA, float* outB, void* p4, void* p5
     int r1;
     int r2;
 
-    a6 = p6;
-    first = p4;
     object = obj;
+    first = p4;
+    a6 = p6;
     r1 = fcn_00413870(obj, &p6, &p5, p4, p5, a6);
     r2 = fcn_00413870(object, &p4, &obj, a6, p7, first);
     if (r1 != 0 && r2 != 0)

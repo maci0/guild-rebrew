@@ -31,9 +31,9 @@ unsigned int __cdecl txt_loadTextFile(char* name)
 	int count;
 	int i; char* q; char ch; int* dst; int base;
 
+	count = 0;
 	i = 0; a = 0;
 	b = 0;
-	count = 0;
 	rec = (char*) 0x149d120;
 	do {
 		if (*rec == 0)

@@ -6,6 +6,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern float g_662a94;
 extern float g_6628a8;
 extern float g_66444c;
+extern float g_665370;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -222,7 +223,7 @@ double __cdecl fcn_004fe5f0(char* a0)
 		adjusted = *(float*) (a0 + 0x14);
 		if (*(int*) (a0 + 0x170) != 0) {
 			v4 = fcn_0050c710(*(int*) (a0 + 0x170), 8, 1);
-			adjusted = v4 * 0.0125f * g_66444c + adjusted;
+			adjusted = v4 * g_665370 * g_66444c + adjusted;
 		}
 		v10 = (*(float*) (a0 + 0x1c) - adjusted) + adjusted / *(float*) (a0 + 0x1c);
 		fcn_004c4510(a0, *(int*) (a0 + 4));

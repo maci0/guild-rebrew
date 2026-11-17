@@ -44,6 +44,9 @@ void __cdecl fcn_004c5480(int a1, int a2, float a3);
 float __cdecl fcn_00507e70(fcn_004fd4f0_Ent* a, fcn_004fd4f0_Ent* b, int k);
 void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
 
+extern float g_665370, g_6628a0, g_6628bc;
+extern double g_664108;
+
 /* ADDRESS: GOLDTL 0x004fd4f0 */
 int __cdecl fcn_004fd4f0(char* a1, fcn_004fd4f0_Out* out)
 {
@@ -70,20 +73,20 @@ int __cdecl fcn_004fd4f0(char* a1, fcn_004fd4f0_Out* out)
 	me = &g_7f4ca0[*(unsigned short*) (a1 + 0x27)];
 	gm_GetEntitySkill(me, 4);
 	fcn_004f4830(2, &st);
-	mult = fcn_0050c710(a1, 9, 1) * 0.0125f + 1.0f;
+	mult = fcn_0050c710(a1, 9, 1) * g_665370 + g_6628a0;
 	for (i = 0; i < 768; i++) {
 		ent = &g_7f4ca0[i];
 		if (ent->id == 0xffff || ent->kind == 6 || ent->kind == 7 || ent->kind == 8 || ent->kind >= 10)
 			continue;
 		if (ent->h == me->h)
 			continue;
-		r = ent->rank * 0.25f;
+		r = ent->rank * g_6628bc;
 		if (ent->side == me->side) {
 			v = r * mult;
 			sign = 0.05f;
 		} else {
 			if (st.side == 2)
-				v = r * mult * 0.8;
+				v = r * mult * g_664108;
 			else if (me->side == st.side)
 				v = r * mult * 0.7;
 			else

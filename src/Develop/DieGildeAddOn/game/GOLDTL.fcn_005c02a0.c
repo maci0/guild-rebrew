@@ -41,6 +41,8 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* Inferred payment dialog callback; record accesses are slot +0, kind +2, id +4. */
+extern float g_664330;
+
 /* ADDRESS: GOLDTL 0x005c02a0 */
 int __cdecl fcn_005c02a0(char* entity)
 {
@@ -97,7 +99,7 @@ int __cdecl fcn_005c02a0(char* entity)
                         *(int*)((char*)stats + 0x28) += amount;
                     fcn_004c5150(*(int*)(entity + 4), *(int*)(g_7f4ca0 + g_774970 * 0x21c + 4), g_773d75, amount);
                     duration = amount * ((*(int*)(g_7f4ca0 + g_774970 * 0x21c + 0x1cc) & 0x800)
-                        ? (double) g_664164 : (double) g_662ac8) * 500.0f;
+                        ? (double) g_664164 : (double) g_662ac8) * g_664330;
                     command = gm_WalkEntityChain(g_774970);
                     command += gm_WalkEntityChain(*(unsigned short*)entity);
                     command = (int)(duration / command);
