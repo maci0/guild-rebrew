@@ -34,8 +34,8 @@ void __cdecl fcn_00402ba0(char* character)
         I32(low + 0x200) = I32(high + 0x200);
         I32(*(char**)(character + 0x22c) + 0x48) = I32(*(char**)(character + 0x34) + 0x48);
         if (*(unsigned short*)(character + 0x8c) & 0x200) {
-            if (I32(high + 0x218) != 1)
-                fcn_00442c00(high, 0);
+            if (I32(*(char**)(character + 0x34) + 0x218) != 1)
+                fcn_00442c00(*(char**)(character + 0x34), 0);
             low = *(char**)(character + 0x22c);
             if (I32(low + 0x218) == 1) {
                 fcn_00442c00(low, 1);

@@ -17,8 +17,8 @@ char __cdecl fcn_00448b10(void)
 	int count;
 
 	if (g_14cf950 != *(char *) 0x6b85a5) {
-		dst = flags;
 		count = 8;
+		dst = flags;
 		__asm {
 			mov edi, dst
 			mov esi, 0x1052bd0

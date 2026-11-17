@@ -1,4 +1,4 @@
-extern int SonnenstrahlenStartZeit;
+extern int g_6b7fac;
 
 /* ADDRESS: GOLD 0x00435870 */
 void __cdecl fcn_00435870(char* a0, char* name, unsigned char bit)
@@ -9,7 +9,7 @@ void __cdecl fcn_00435870(char* a0, char* name, unsigned char bit)
 	if (a0 == 0) {
 		return;
 	}
-	*(int*) (*(int*) (a0 + 0x18) + 0x40) = SonnenstrahlenStartZeit;
+	*(int*) (*(int*) (a0 + 0x18) + 0x40) = g_6b7fac;
 	rec = a0 + 0x90;
 	n = 3;
 	do {

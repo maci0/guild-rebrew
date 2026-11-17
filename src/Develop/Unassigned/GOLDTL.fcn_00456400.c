@@ -18,8 +18,8 @@ void __cdecl fcn_00456400(int i, int j)
 	int sz;
 	int span;
 
-	y0 = g_1043040[i];
 	x0 = g_1043030[i];
+	y0 = g_1043040[i];
 
 	dy = g_1043040[j] - y0;
 	if (dy < 0x10000) {

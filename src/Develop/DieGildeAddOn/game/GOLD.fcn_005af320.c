@@ -460,10 +460,10 @@ l_after:
 			msg = 0x737;
 		}
 		/* the native arms push 0x73f when the trade flag is set */
-		if (f.v3c != 0) {
-			fcn_00533dc0(g_772514, msg, 0x73f);
-		} else {
+		if (f.v3c == 0) {
 			fcn_00533dc0(g_772514, msg, 0x741);
+		} else {
+			fcn_00533dc0(g_772514, msg, 0x73f);
 		}
 	}
 
@@ -770,15 +770,15 @@ l_slot:
 	if (g_67d370 != e->f18) {
 		goto l_slot_handles;
 	}
-	if ((*(char*) (idx + 0x20) & 1) != 0) {
-		fcn_00533a40(*(int*) 0x14a56e0);
-	} else {
+	if (!((*(char*) (idx + 0x20) & 1) != 0)) {
 		*(signed char*) (idx + 0x28) =
 		    (signed char) (((int) (*(signed char*) (idx + 0x28)) + 1) % 3);
 		((char*) &f.v5c)[3] = *(signed char*) (idx + 0x28);
 		fcn_004c4510((char*) idx, *(int*) (idx + 2));
 		fcn_004c4700(1, 1, 0x28, (void*) (((char*) &f.v5c) + 3));
 		fcn_004c53a0();
+	} else {
+		fcn_00533a40(*(int*) 0x14a56e0);
 	}
 l_slot_handles:
 	/* 0x5bb937: item handle, selection frame and the list of owned rows */
@@ -1224,10 +1224,10 @@ l_5bc3fa:
 		if (e->f00 == 0 || e->f0c != g_67d370) {
 			continue;
 		}
-		if ((*(char*) (e->f00 + 0x20) & 1) != 0) {
-			fcn_00533a40(*(int*) 0x14a56e0);
-		} else {
+		if (!((*(char*) (e->f00 + 0x20) & 1) != 0)) {
 			e->f08 = (e->f08 == 0) ? 1 : 0;
+		} else {
+			fcn_00533a40(*(int*) 0x14a56e0);
 		}
 	}
 	goto l_5bc1d3;
@@ -1442,11 +1442,7 @@ l_5bcc9f:
 l_5bcd16:
 	/* 0x5bcd16: the selection flags of the panel row */
 	if (f.vB0 != -1) {
-		if (f.v48 != 0) {
-			if (f.v38 != 0) {
-				goto l_5bcd7b;
-			}
-		} else {
+		if (f.v48 == 0) {
 			if (f.v38 == 0) {
 				goto l_5bcd7b;
 			}
@@ -1454,6 +1450,10 @@ l_5bcd16:
 				goto l_5bcd7b;
 			}
 			if (*(short*) (f.v14 + 0x27) != (short) g_774970) {
+				goto l_5bcd7b;
+			}
+		} else {
+			if (f.v38 != 0) {
 				goto l_5bcd7b;
 			}
 		}

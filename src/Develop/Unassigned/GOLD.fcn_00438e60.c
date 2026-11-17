@@ -22,7 +22,7 @@ char __cdecl fcn_00438e60(char* scene, char* node, unsigned int flags, void (__c
                 break;
             p = *(char**) (p + 0x1f0);
             if (p != 0 && (p[0x210] & 1))
-                return 1;
+                goto fail_1;
         } while (p != 0);
     } else {
         if (scene == g_5fb5b0) {
@@ -37,5 +37,7 @@ char __cdecl fcn_00438e60(char* scene, char* node, unsigned int flags, void (__c
             p = *(char**) (p + 0x1f0);
         }
     }
-    return 1;
+    goto fail_1;
+fail_1:
+	return 1;
 }

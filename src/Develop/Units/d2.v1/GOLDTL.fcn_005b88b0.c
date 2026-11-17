@@ -85,6 +85,7 @@ void* __cdecl fcn_005463a0(int, ...);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0050f950(int, int);
 void __cdecl fcn_0046f940(int, const char*);
+extern unsigned char* lpGebaeudePROT;
 extern double dbl_128_0;
 extern double dbl_100_0;
 extern double dbl_0_00392156862745098;
@@ -137,7 +138,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 	Row* r;
 
 	cnt = 0;
-	ent = (unsigned char*) (*(void**) 0x868050) + *(unsigned char*) a0 * 0x24d;
+	ent = lpGebaeudePROT + *(unsigned char*) a0 * 0x24d;
 	nSlots = 0;
 	hA = -1;
 	sel = -1;

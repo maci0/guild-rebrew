@@ -17,9 +17,9 @@ void __cdecl fcn_00404c20(char* obj, int paused)
 
     if (paused) {
         fcn_00435810(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, frames);
-        obj[0x8c] |= 4;
+        *(unsigned short*) (obj + 0x8c) |= 4;
     } else {
         fcn_00435870(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, frames, 1);
-        obj[0x8c] &= 0xfb;
+        *(unsigned short*) (obj + 0x8c) &= 0xfffb;
     }
 }

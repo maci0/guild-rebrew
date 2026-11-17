@@ -50,7 +50,7 @@ int __cdecl fcn_00439c90(unsigned int* a0)
 			cur[*(int*) 0x633458] = v;
 			dc = v->x * pl[-1] + (v->y * pl[0] + v->z * pl[1]);
 			out = (Vtx439c90**) (((pi - 1) & 1) * 0x200 + 0xfc4c60);
-			inside = pl[2] <= dc;
+			inside = dc >= pl[2];
 			k = 0;
 			if (*(int*) 0x633458 != 0) {
 				do {

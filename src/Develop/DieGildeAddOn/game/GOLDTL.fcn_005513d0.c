@@ -44,9 +44,9 @@ void __cdecl fcn_005513d0(char* a0)
 				rec_id = *(int*) (rec + 4); memset(msg, 0, sizeof(msg));
 				*(int*) (msg + 0xc) = *(int*) (entry + 4);
 				*(int*) (msg + 0x34) = *(int*) (entry + 4);
+				*(int*) (msg + 0x18) = g_7f4c00;
 				*(int*) (msg + 0x1c) = g_7f4c04;
 				*(int*) (msg + 0x38) = rec_id;
-				*(int*) (msg + 0x18) = g_7f4c00;
 				msg[8] = 7;
 				msg[0x26] = 0x20;
 				*(int*) (msg + 0x14) = -1;

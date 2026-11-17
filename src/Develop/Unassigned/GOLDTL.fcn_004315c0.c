@@ -35,8 +35,8 @@ char __cdecl fcn_004315c0(char* obj)
 						n++;
 					}
 				}
-				ent += 0x40;
 				i++;
+				ent += 0x40;
 			} while (n < 4);
 		}
 		rec += 0x7c;

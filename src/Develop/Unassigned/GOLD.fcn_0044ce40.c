@@ -67,10 +67,10 @@ void __cdecl fcn_0044ce40(char* object)
 	(*(float**) (object + 0x40))[(*(int*) (object + 0x44) + 7) * 6] = mx[0];
 	(*(float**) (object + 0x40))[*(int*) (object + 0x44) * 6 + 43] = mx[1];
 	(*(float**) (object + 0x40))[*(int*) (object + 0x44) * 6 + 44] = mx[2];
-	dx = mx[0] - mn[0];
+	corners = *(float**) (object + 0x40) + *(int*) (object + 0x44) * 6;
 	dy = mx[1] - mn[1];
 	dz = mx[2] - mn[2];
-	corners = *(float**) (object + 0x40) + *(int*) (object + 0x44) * 6;
+	dx = mx[0] - mn[0];
 	*(float*) (object + 0x1d8) = (float) sqrt(dz * dz + dy * dy + dx * dx);
 	sx = sy = sz = 0.0f;
 	for (i = 8, p = corners; i > 0; i--, p += 6) {

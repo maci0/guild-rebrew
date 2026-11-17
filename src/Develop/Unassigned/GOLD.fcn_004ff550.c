@@ -19,8 +19,8 @@ void __cdecl fcn_004ff550(int city, int* date)
     year = *(short*) (calendar + 2);
     month = calendar[1];
     tableOffset = city * 0x2f4;
-    outputOffset = city * 0x2a90;
     count = 0;
+    outputOffset = city * 0x2a90;
     p = (int*) (tableOffset + 0x7e3fa4);
     do {
         if (p[0] >= p[2]) break;

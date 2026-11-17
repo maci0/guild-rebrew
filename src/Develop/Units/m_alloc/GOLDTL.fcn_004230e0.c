@@ -43,10 +43,10 @@ int __cdecl fcn_004230e0(char* a0)
 	if (left > 0) {
 		goto done;
 	}
-	if (prev != 0) {
-		*(char**) (prev + 0x13c) = *(char**) (bank + 0x13c);
-	} else {
+	if (prev == 0) {
 		g_6b7d78 = *(char**) (bank + 0x13c);
+	} else {
+		*(char**) (prev + 0x13c) = *(char**) (bank + 0x13c);
 	}
 	name = a0 + 0x32;
 	fcn_0064d41a(g_14cbae0, g_678f70, name, g_6b7d74);

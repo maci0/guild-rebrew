@@ -137,10 +137,12 @@ int __cdecl fcn_004dcf50(int a0)
 	tbl.f[4] = 0.6f;
 	fcn_004f4830(0, rec.i);
 	i = rec.i[6];
-	if (i >= 4) {
+	if (i < 4) {
+		if (i <= 0) {
+			i = 0;
+		}
+	} else {
 		i = 4;
-	} else if (i <= 0) {
-		i = 0;
 	}
 	f = tbl.f[i];
 	fcn_004e4450(g_68bfc0, 0);

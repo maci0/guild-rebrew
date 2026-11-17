@@ -50,8 +50,8 @@ int __cdecl fcn_004e7ff0(unsigned char* arg)
 	}
 	want = arg[4];
 	slot = (SlotRec*) g_9a9220;
-	for (i = 0; (unsigned char*) slot < (unsigned char*) g_9a9220 + 0x2d0; slot++, i++) {
-		if (((SlotRec*) g_9a9220)[i].type == want) {
+	for (i = 0; (int) slot < (int) g_9a9220 + 0x2d0; slot++, i++) {
+		if (slot->type == want) {
 			goto found;
 		}
 	}
@@ -81,7 +81,7 @@ found:
 	}
 	want = arg[5];
 	other = (SlotRec*) g_9a9220;
-	for (j = 0; (unsigned char*) other < (unsigned char*) g_9a9220 + 0x2d0; other++, j++) {
+	for (j = 0; (int) other < (int) g_9a9220 + 0x2d0; other++, j++) {
 		if (((SlotRec*) g_9a9220)[j].type == want) {
 			goto found2;
 		}

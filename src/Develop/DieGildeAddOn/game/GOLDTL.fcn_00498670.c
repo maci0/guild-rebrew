@@ -199,7 +199,7 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 	} else if (slot == 0) {
 		unsigned int flags;
 
-		if (cap < ones) {
+		if (ones > cap) {
 			return 0;
 		}
 		flags = (unsigned int) g_7f4c00 & 0x80000007u;
@@ -224,7 +224,7 @@ use_slot:
 	act = fcn_004a4bb0(0, ent, mode, &c1, &c2, 1);
 	if (act != 0) {
 		v = fcn_0050d200(ent, c1.f1);
-		if (v <= ratio) {
+		if (ratio >= v) {
 			goto accept;
 		}
 		if ((float) (v - ratio) / (float) v < 0.25f) {

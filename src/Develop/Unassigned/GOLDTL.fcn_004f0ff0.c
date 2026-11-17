@@ -47,10 +47,12 @@ int __cdecl fcn_004f0ff0(char* obj, int a1, int a2, int a3, int* out1, int* out2
 	*out2 = (int) (((float) c2 * 2.0f + 500.0f) * ((float) c1 * 0.25f + 1.0f)
 		* c3 * 32.0f);
 	if (*(int*) (obj + 0x194) < *out1) {
-		return 0;
+		goto fail_0;
 	}
 	if (fcn_0050b810(*(int*) (obj + 0x178), g_773d75) < *out2) {
-		return 0;
+		goto fail_0;
 	}
 	return 1;
+fail_0:
+	return 0;
 }

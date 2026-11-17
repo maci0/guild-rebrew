@@ -30,8 +30,8 @@ int __cdecl fcn_004ac8a0(struct hist_4ac9c0* h)
 	void* f;
 	int i;
 
-	magic = 0x68466153;
 	f = fcn_00430470("/gamedata/ai/historical.dfn", "wb", (*(VFS_DIR**) 0x6333fc));
+	magic = 0x68466153;
 	if (f == 0)
 		goto out;
 	if (vfs_fwrite(&magic, 4, 1, f) <= 0)

@@ -257,10 +257,7 @@ void __cdecl PrepareFloorWater(char* e)
 
 	if (*(unsigned char*) (e + 0x8035) != v4) {
 	v10 = (int) m_alloc(*(unsigned char*) (e + 0x8035) * 0x158, (char*) 0x67a730);
-	if (v4 > *(unsigned char*) (e + 0x8035)) {
-		memcpy((void*) v10, (void*) *(int*) (e + 0x7da0),
-		    *(unsigned char*) (e + 0x8035) * 0x158);
-	} else {
+	if (!(v4 > *(unsigned char*) (e + 0x8035))) {
 		v9 = 0;
 		if (v4 > 0) {
 			memcpy((void*) v10, (void*) *(int*) (e + 0x7da0), v4 * 0x158);
@@ -303,6 +300,9 @@ void __cdecl PrepareFloorWater(char* e)
 			*(int*) (v17 + 0x144) = 0;
 			*(int*) (v17 + 0x148) = g_6b7fac;
 		}
+	} else {
+		memcpy((void*) v10, (void*) *(int*) (e + 0x7da0),
+		    *(unsigned char*) (e + 0x8035) * 0x158);
 	}
 	if (*(int*) (e + 0x7da0) != 0) {
 		m_FreeTracked((void*) *(int*) (e + 0x7da0));

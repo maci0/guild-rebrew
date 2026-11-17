@@ -49,6 +49,7 @@ void __cdecl fcn_004e5a00(int* event)
 {
     unsigned char* e;
     int flag = 0;
+    unsigned char fl;
     int ready = 0;
     int saved_675308 = *(int*) 0x675308;
     int count = 0;
@@ -147,10 +148,11 @@ fill_tail:
         }
     }
     if (e[0x26] & 2) {
-        if (*(unsigned char*) 0x7747b0 & 8) {
+        fl = *(unsigned char*) 0x7747b0;
+        if (fl & 8) {
             if (flag != 0)
                 goto mark;
-        } else if (*(unsigned char*) 0x7747b0 & 4) {
+        } else if (fl & 4) {
             n = *(unsigned short*) 0x774970;
             if (cut_IsParticipant(((int*) 0x7f4ca0)[n * 135 + 1], e) == 0)
                 goto mark;

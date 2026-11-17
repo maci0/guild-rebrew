@@ -112,7 +112,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 			g_774654 = 1;
 		}
 		else if (g_100f1dc != -1) {
-			if (g_67d370 == elem) {
+			if (elem == g_67d370) {
 				g_774654 = 1;
 			}
 		}

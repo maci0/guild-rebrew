@@ -126,11 +126,7 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 	g_6b7fa4 = 0;
 	v18 = 0x4800;
 	p = (char*) fcn_0064d1a0(a1, '\\');
-	if (p == 0) {
-		strcpy(g_1052f00, "text\\");
-		strcpy(g_1052e00, "\\project\\DieGilde\\gfx\\textbin\\");
-	}
-	else {
+	if (p != 0) {
 		memset(g_1052e00, 0, 0x100);
 		memset(path, 0, 0x104);
 		memcpy(path, a1, p - a1 + 1);
@@ -147,6 +143,9 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 		}
 		fcn_0064d41a(path, "%s\\resources\\textbin_%s\\", "german");
 		strcpy(g_1052e00, path);
+	} else {
+		strcpy(g_1052f00, "text\\");
+		strcpy(g_1052e00, "\\project\\DieGilde\\gfx\\textbin\\");
 	}
 
 	fp = (FILE*) fcn_0064e2f9(a1, "rt");
@@ -416,18 +415,17 @@ pass1_done:
 						starts[k] = v14;
 						starts[k + 1] = v14 + 0xa;
 						memset(&g_1335120[v34], 0, 0x50);
-						if (k == 0) {
+						if (k != 0) {
+							strcpy(rec[k], rec[k - 1]);
+							strncat(rec[k], line + v10, v3c - v10);
+							strcpy(buf250, rec[k - 1]);
+							strcat(buf250, rec[k]);
+						} else {
 							fcn_0064d530(rec[0], line + v10, v3c - v10);
 							strcpy(buf250, rec[0]);
 							for (v3c = 1; v3c < 8; v3c++) {
 								starts[v3c] = starts[1] + (v3c - 1) * 0xa;
 							}
-						}
-						else {
-							strcpy(rec[k], rec[k - 1]);
-							strncat(rec[k], line + v10, v3c - v10);
-							strcpy(buf250, rec[k - 1]);
-							strcat(buf250, rec[k]);
 						}
 						strcpy((char*) &g_1335120[v34], rec[k]);
 						v18++;

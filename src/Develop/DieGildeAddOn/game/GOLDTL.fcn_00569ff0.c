@@ -5,6 +5,7 @@ extern double g_665ed0;
 extern float g_662910;
 extern float g_662a2c;
 extern int g_7f4c08;
+extern unsigned char g_773d75;
 
 /* Out-parameter block of the entity search helper at 0x55be70. */
 typedef struct {
@@ -217,14 +218,14 @@ void __cdecl fcn_00569ff0(char* e)
 			}
 			px = (char*) (0x7f4ca0 + *(unsigned short*) (pb + 8) * 0x21c);
 			if (px != 0 && pc != 0) {
-				num = fcn_0050b750((gm_RandomMod(0xc8) & 0xffff) + 0x226, *(char*) 0x773d75);
+				num = fcn_0050b750((gm_RandomMod(0xc8) & 0xffff) + 0x226, (char) g_773d75);
 				io_FormatTextBuffer(b200, 0x19ea, pa, num, *(unsigned short*) px);
 				fcn_00545d40(*(int*) (pc + 4), *(int*) (pc + 4), b200, 1, 0x5f0,
 				        "_NACHRICHTEN_HS_76");
 				io_FormatTextBuffer(b200, 0x19eb, pa, num);
 				fcn_00545d40(*(int*) (px + 4), *(int*) (px + 4), b200, 1, 0x5f0,
 				        "_NACHRICHTEN_HS_77");
-				fcn_004c51a0(*(int*) (pc + 4), *(int*) (px + 4), *(char*) 0x773d75, num);
+				fcn_004c51a0(*(int*) (pc + 4), *(int*) (px + 4), (char) g_773d75, num);
 			}
 			q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xbc));
 			if (q != 0) {
@@ -356,7 +357,7 @@ void __cdecl fcn_00569ff0(char* e)
 			num = num < 0 ? 0 : num;
 			io_FormatTextBuffer(b400, 0x68bea4, num);
 			strcat(b400, b100);
-			fcn_004c51a0(*(int*) (pc + 4), *(int*) (px + 4), *(char*) 0x773d75, num);
+			fcn_004c51a0(*(int*) (pc + 4), *(int*) (px + 4), (char) g_773d75, num);
 			fcn_004c4510(pb, *(int*) (pb + 1));
 			fcn_004c4670(4, 1, 0x69, &flag);
 			fcn_004c5360();
@@ -402,9 +403,9 @@ void __cdecl fcn_00569ff0(char* e)
 						strcat(b400, b100);
 						fcn_004c51f0(*(int*) (pb + 2), *(int*) (q + 2),
 						        *(unsigned short*) cnt2, *(int*) (cnt2 + 2),
-						        *(char*) 0x773d75);
+						        (char) g_773d75);
 						flag = (int) (fcn_0050bb50(*(unsigned short*) cnt2,
-						        *(char*) 0x773d75) * (float) num + (float) flag);
+						        (char) g_773d75) * (float) num + (float) flag);
 					}
 					cnt2 = (char*) gm_NextEntityQueryMatch();
 				}

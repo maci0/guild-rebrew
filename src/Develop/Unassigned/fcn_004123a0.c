@@ -48,8 +48,8 @@ void __cdecl fcn_004123a0(void)
 		g_14ce8d8 = 0;
 		g_14ce8d0 = 0;
 	}
-	dx = (short) (g_14ce920 + state[0]);
 	dy = *(short*) (state + 1) + *(short*) &g_14ce922;
+	dx = (short) (g_14ce920 + state[0]);
 	g_6772c4 = 1;
 	*(short*) &g_14ce8c0 = (short) dx;
 	*(short*) &g_14cf900 = (short) dx;
