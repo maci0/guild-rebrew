@@ -5,7 +5,7 @@ typedef Slot_1043340 Slot_4392c0;
 typedef void (__cdecl* node_fn_4392c0)(char* node);
 
 extern char g_6b8018;
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Slot_1043340 g_1043340[64];
 extern char* g_1043254;
 extern char g_1042340[];

@@ -14,7 +14,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 short* __cdecl gm_GetEntityTableEntry(char* entity);
 
 /* ADDRESS: GOLDTL 0x004d5110 */
-int __cdecl fcn_004d5110(char* a1, char* a2, char* a3, char* a4)
+int __cdecl fcn_004d5110(char* a1, char* a2, char* entity, char* otherEntity)
 {
 	char* p1;
 	char* p2;
@@ -24,13 +24,13 @@ int __cdecl fcn_004d5110(char* a1, char* a2, char* a3, char* a4)
 
 	p1 = fcn_00502cd0(*(int*) (a2 + 0x5d), 2, 6, 0, 0x116);
 	p2 = fcn_00502cd0(*(int*) (a1 + 0x5d), 2, 6, 0, 0x2a);
-	v = gm_AccumulateTyped2(a4);
+	v = gm_AccumulateTyped2(otherEntity);
 	v = v < 0 ? 0 : v;
 	if (v >= 0x9c400) {
 		v = 0x9c400;
 	}
 	v = (int) (((double) cut_RandMod(0x32) * g_662a20 + g_664f18) * v);
-	fcn_004c5150(*(int*) (a3 + 4), *(int*) (a4 + 4), g_773d75, v);
+	fcn_004c5150(*(int*) (entity + 4), *(int*) (otherEntity + 4), g_773d75, v);
 	if (p2 != 0 && p1 != 0) {
 		match = fcn_00502cd0(*(int*) (p2 + 0x14), 1, 5);
 		while (match != 0) {
@@ -43,7 +43,7 @@ int __cdecl fcn_004d5110(char* a1, char* a2, char* a3, char* a4)
 			match = gm_NextEntityQueryMatch();
 		}
 	}
-	p1 = (char*) gm_GetEntityTableEntry(a3);
+	p1 = (char*) gm_GetEntityTableEntry(entity);
 	if (p1 != 0) {
 		*(int*) (p1 + 0x1c) += v;
 	}

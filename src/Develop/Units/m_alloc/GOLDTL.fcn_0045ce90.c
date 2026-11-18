@@ -27,33 +27,33 @@ void __cdecl fcn_00436ff0(int a1, int a2, void* a3, int a4, int a5, int a6);
 void __cdecl fcn_0045ce20(Tex* a0);
 
 /* ADDRESS: GOLDTL 0x0045ce90 */
-void __cdecl fcn_0045ce90(Tex* a0)
+void __cdecl fcn_0045ce90(Tex* texture)
 {
 	Tex* p;
 	int obj;
 	unsigned int i;
 	unsigned char saved;
 
-	if (a0 != 0 && a0->refs > 0) {
-		if (a0->flags & 2) {
-			a0 = (Tex*) g_104049c + a0->parent;
+	if (texture != 0 && texture->refs > 0) {
+		if (texture->flags & 2) {
+			texture = (Tex*) g_104049c + texture->parent;
 		}
 		saved = g_6b7ff8;
-		if (a0->x50 == 0 && a0->parent != 0 && a0->name[0] != '*') {
-			obj = fcn_0045be40(a0->name);
+		if (texture->x50 == 0 && texture->parent != 0 && texture->name[0] != '*') {
+			obj = fcn_0045be40(texture->name);
 			if (obj != 0) {
 				int val = g_67bd2c;
-				g_6b7ff8 = (a0->flags & 0x20) ? 0 : saved;
-				fcn_00436ff0(obj, a0->x60, &a0->x50, val, a0->x68, a0->x68);
-				a0->x64 = (unsigned int) a0->x68 >> g_6b7ff8;
+				g_6b7ff8 = (texture->flags & 0x20) ? 0 : saved;
+				fcn_00436ff0(obj, texture->x60, &texture->x50, val, texture->x68, texture->x68);
+				texture->x64 = (unsigned int) texture->x68 >> g_6b7ff8;
 			}
 		}
-		fcn_0045ce20(a0);
+		fcn_0045ce20(texture);
 		g_6b7ff8 = saved;
-		if (a0->x5c > 1 && a0->x5d == 0) {
+		if (texture->x5c > 1 && texture->x5d == 0) {
 			p = (Tex*) g_104049c;
 			for (i = 0; i < g_10404a0; i++, p++) {
-				if (p->refs > 0 && p->id == a0->id && p->x5d > 0) {
+				if (p->refs > 0 && p->id == texture->id && p->x5d > 0) {
 					fcn_0045ce90(p);
 				}
 			}

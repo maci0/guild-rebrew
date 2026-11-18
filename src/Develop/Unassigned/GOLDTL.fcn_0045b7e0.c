@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /* ADDRESS: GOLDTL 0x0045b7e0 */
-char __cdecl fcn_0045b7e0(int a0, int a1, int a2, int* a3, int* a4)
+char __cdecl fcn_0045b7e0(int grid, int startCol, int startRow, int* outCol, int* outRow)
 {
 	int* base;
 	int n;
@@ -14,33 +14,33 @@ char __cdecl fcn_0045b7e0(int a0, int a1, int a2, int* a3, int* a4)
 	int span;
 	int type;
 
-	if (a0 == 0) {
+	if (grid == 0) {
 		return 0;
 	}
-	base = *(int**) (a0 + 0x24);
+	base = *(int**) (grid + 0x24);
 	if (base == 0) {
 		return 0;
 	}
-	if (a3 == 0) {
+	if (outCol == 0) {
 		return 0;
 	}
-	if (a4 == 0) {
+	if (outRow == 0) {
 		return 0;
 	}
-	n = *(int*) (a0 + 0x20);
+	n = *(int*) (grid + 0x20);
 	for (; i < n; i++) {
-		rowEnd = (n - 1 < i + a2) ? n - 1 : i + a2;
-		row = (a2 - i < 0) ? 0 : a2 - i;
+		rowEnd = (n - 1 < i + startRow) ? n - 1 : i + startRow;
+		row = (startRow - i < 0) ? 0 : startRow - i;
 		while (row <= rowEnd) {
-			span = i - abs(a2 - row);
-			colEnd = (n - 1 < a1 + span) ? n - 1 : a1 + span;
-			col = (a1 - span < 0) ? 0 : a1 - span;
+			span = i - abs(startRow - row);
+			colEnd = (n - 1 < startCol + span) ? n - 1 : startCol + span;
+			col = (startCol - span < 0) ? 0 : startCol - span;
 			while (col <= colEnd) {
 				if (row >= 0 && row < n && col >= 0 && col < n) {
-					type = base[(*(int*) (a0 + 0x20) * row + col) * 7];
+					type = base[(*(int*) (grid + 0x20) * row + col) * 7];
 					if (type != 0 && type != 0x0d) {
-						*a3 = col;
-						*a4 = row;
+						*outCol = col;
+						*outRow = row;
 						return 1;
 					}
 				}

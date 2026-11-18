@@ -12,68 +12,68 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl fcn_0051e070(void);
 
-int __cdecl fcn_004f53a0(void* a1, req_2d_c s, int b)
+int __cdecl fcn_004f53a0(void* output, req_2d_c request, int b)
 {
 	char* nm;
 	char name[0x80] = "Geb\xe4ude";
-	unsigned short w;
+	unsigned short entityId;
 	unsigned char* p;
-	int v = (b <= 1);
+	int formatOffset = (b <= 1);
 
-	gm_ResolveEntityById((void**) (&nm), 0, 0, *(int*) ((char*) &s + 0x21));
+	gm_ResolveEntityById((void**) (&nm), 0, 0, *(int*) ((char*) &request + 0x21));
 	if (nm != 0) {
 		io_FormatTextBuffer(name, (int) "%1G", nm);
 	}
-	p = gm_LookupEntityRecordById(*(int*) ((char*) &s + 0x12));
+	p = gm_LookupEntityRecordById(*(int*) ((char*) &request + 0x12));
 	if (p != 0) {
-		w = *(unsigned short*) p;
+		entityId = *(unsigned short*) p;
 	} else {
-		w = 0xfffe;
+		entityId = 0xfffe;
 	}
-	switch (*(int*) ((char*) &s + 0x1c) & 0xff) {
+	switch (*(int*) ((char*) &request + 0x1c) & 0xff) {
 	case 0x11:
-		io_FormatTextBuffer(a1, v + 0x1455, (char*) &s + 4);
+		io_FormatTextBuffer(output, formatOffset + 0x1455, (char*) &request + 4);
 		break;
 	case 0x12:
-		io_FormatTextBuffer(a1, v + 0x145a, (char*) &s + 4);
+		io_FormatTextBuffer(output, formatOffset + 0x145a, (char*) &request + 4);
 		break;
 	case 0x13:
-		io_FormatTextBuffer(a1, v + 0x145f, w, (char*) &s + 4);
+		io_FormatTextBuffer(output, formatOffset + 0x145f, entityId, (char*) &request + 4);
 		break;
 	case 0x14:
-		io_FormatTextBuffer(a1, v + 0x1464, (char*) &s + 4, w);
+		io_FormatTextBuffer(output, formatOffset + 0x1464, (char*) &request + 4, entityId);
 		break;
 	case 0x15:
-		io_FormatTextBuffer(a1, v + 0x1469, (char*) &s + 4, w);
+		io_FormatTextBuffer(output, formatOffset + 0x1469, (char*) &request + 4, entityId);
 		break;
 	case 0x16:
-		io_FormatTextBuffer(a1, v + 0x146e, w, (char*) &s + 4);
+		io_FormatTextBuffer(output, formatOffset + 0x146e, entityId, (char*) &request + 4);
 		break;
 	case 0x17:
-		io_FormatTextBuffer(a1, v + 0x1473, (char*) &s + 4, w);
+		io_FormatTextBuffer(output, formatOffset + 0x1473, (char*) &request + 4, entityId);
 		break;
 	case 0x18:
 		switch (fcn_0051e070()) {
 		case 0:
 		case 1:
-			io_FormatTextBuffer(a1, v + 0x1478, (char*) &s + 4, w, name);
+			io_FormatTextBuffer(output, formatOffset + 0x1478, (char*) &request + 4, entityId, name);
 			break;
 		case 2:
-			io_FormatTextBuffer(a1, v + 0x1478, (char*) &s + 4, name, w);
+			io_FormatTextBuffer(output, formatOffset + 0x1478, (char*) &request + 4, name, entityId);
 			break;
 		}
 		break;
 	case 0x19:
-		io_FormatTextBuffer(a1, v + 0x147d, w, (char*) &s + 4);
+		io_FormatTextBuffer(output, formatOffset + 0x147d, entityId, (char*) &request + 4);
 		break;
 	case 0x1a:
-		io_FormatTextBuffer(a1, v + 0x1482, (char*) &s + 4, w);
+		io_FormatTextBuffer(output, formatOffset + 0x1482, (char*) &request + 4, entityId);
 		break;
 	case 0x1b:
-		io_FormatTextBuffer(a1, v + 0x1487, (char*) &s + 4);
+		io_FormatTextBuffer(output, formatOffset + 0x1487, (char*) &request + 4);
 		break;
 	case 0x1c:
-		io_FormatTextBuffer(a1, v + 0x148c, (char*) &s + 4, w);
+		io_FormatTextBuffer(output, formatOffset + 0x148c, (char*) &request + 4, entityId);
 		break;
 	}
 	return 0;

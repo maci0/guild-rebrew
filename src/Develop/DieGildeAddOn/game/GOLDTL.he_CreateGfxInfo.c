@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "he_tables.h"
 
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Rec7dc6e0 g_7dc6e0[64];
 
 void __cdecl fcn_004432d0(int, int);

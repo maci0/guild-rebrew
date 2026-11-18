@@ -3,7 +3,7 @@
 
 typedef void (__cdecl* dispose_fn_4398d0)(char* obj);
 
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
 extern char g_10432c0[];
 extern char g_1040640[];

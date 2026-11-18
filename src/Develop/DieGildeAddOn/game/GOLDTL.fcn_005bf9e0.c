@@ -26,7 +26,7 @@ extern int g_14ce8e0;
 extern int g_67d370;
 extern int g_774654;
 /* ADDRESS: GOLDTL 0x005bf9e0 */
-int __cdecl fcn_005bf9e0(unsigned short* a0)
+int __cdecl fcn_005bf9e0(unsigned short* entity)
 {
 	unsigned int data[136];
 	unsigned char evt[0x100];
@@ -37,7 +37,7 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 	int i;
 	int timeout;
 	int hwnd;
-	int p;
+	int query;
 	int r;
 
 	for (i = 0; i < 136; i++) {
@@ -52,29 +52,29 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 	if (fcn_004fa5b0(0x1b, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0, data) & 2) {
 		timeout /= 2;
 	}
-	p = fcn_005463a0(2, 2, *(unsigned short*) &g_774970, 0, 0x1a);
-	while (p) {
-		if (*(int*) (p + 0xb4) == *(int*) (a0 + 2)) {
-			io_FormatTextBuffer(text, 0x170a, *a0);
+	query = fcn_005463a0(2, 2, *(unsigned short*) &g_774970, 0, 0x1a);
+	while (query) {
+		if (*(int*) (query + 0xb4) == *(int*) (entity + 2)) {
+			io_FormatTextBuffer(text, 0x170a, *entity);
 			fcn_00526120(text, 4);
 			return 0;
 		}
-		p = he_fn_Handlung();
+		query = he_fn_Handlung();
 	}
 	if (!fcn_00526010(*(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0, timeout, *(char*) &g_773d75)) {
 		return 0;
 	}
-	if (!fcn_0055c0f0(a0, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
-		io_FormatTextBuffer((char*) evt, 0x170b, *a0);
+	if (!fcn_0055c0f0(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
+		io_FormatTextBuffer((char*) evt, 0x170b, *entity);
 		fcn_00526120((char*) evt, 0);
 		return 0;
 	}
-	if (!fcn_0055c0a0(a0, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
-		io_FormatTextBuffer((char*) evt, 0x170c, *a0);
+	if (!fcn_0055c0a0(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
+		io_FormatTextBuffer((char*) evt, 0x170c, *entity);
 		fcn_00526120((char*) evt, 0);
 		return 0;
 	}
-	if (!fcn_00579640(a0, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
+	if (!fcn_00579640(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
 		io_FormatTextBuffer((char*) evt, 0x409f);
 		fcn_00526120((char*) evt, 0);
 		return 0;
@@ -83,9 +83,9 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 	fcn_00471b60(hwnd);
 	d2_SetForm(hwnd, 1);
 	d2_SetOverlayAnimation(0, 0);
-	if (a0) {
+	if (entity) {
 		d2_SetForm(hwnd, 1);
-		idx = fcn_00472250(hwnd, 1, io_AppendText(0x1708, 0x1711, timeout, *a0));
+		idx = fcn_00472250(hwnd, 1, io_AppendText(0x1708, 0x1711, timeout, *entity));
 	}
 	for (i = 0; i < 6; i++) {
 		t[i] = -1;
@@ -107,12 +107,12 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 			*(unsigned int*) (evt + 0x0c) = *(unsigned int*) (g_7746c4 + 1);
 			*(unsigned char*) (evt + 0x36) = 1;
 			*(unsigned int*) (evt + 0x84) = timeout;
-			*(unsigned int*) (evt + 0x60) = *(unsigned int*) (a0 + 2);
-			*(unsigned int*) (evt + 0x58) = fcn_004faaf0(a0);
+			*(unsigned int*) (evt + 0x60) = *(unsigned int*) (entity + 2);
+			*(unsigned int*) (evt + 0x58) = fcn_004faaf0(entity);
 			fcn_004c4eb0((char*) 0x6ac4c0);
 			fcn_004c5530(evt);
 			fcn_004c4ef0((char*) 0x6ac4c0);
-			io_FormatTextBuffer(text, 0x1709, *a0);
+			io_FormatTextBuffer(text, 0x1709, *entity);
 			fcn_00526120(text, 0);
 			g_774654 = 1;
 			res = 1;

@@ -29,7 +29,7 @@ void __cdecl fcn_004c0240(char* a0, int a1)
 	char* v4;
 	char* pkt;
 	char* src;
-	char* v6;
+	char* item;
 	int n;
 	int c;
 	int cnt;
@@ -63,21 +63,21 @@ void __cdecl fcn_004c0240(char* a0, int a1)
 			} else {
 				src = buf.obj;
 			}
-			v6 = fcn_00502cd0(*(int*) (stats.obj + 0x14), 1, 0, *(int*) rec);
-			if (v6 != 0) {
+			item = fcn_00502cd0(*(int*) (stats.obj + 0x14), 1, 0, *(int*) rec);
+			if (item != 0) {
 				n = *(int*) (rec + 4);
-				if (!(n < gm_GetMsgField(stats.obj, v6))) {
-					n = gm_GetMsgField(stats.obj, v6);
+				if (!(n < gm_GetMsgField(stats.obj, item))) {
+					n = gm_GetMsgField(stats.obj, item);
 				}
 				c = gm_eval_SlotVoll(src, *(int*) rec, n);
 				if (c > 0) {
 					val = 0;
 					if (*(unsigned short*) (pkt + 0x27) != *(unsigned short*) v4) {
 						if (*t == 0xa) {
-							val = (int) (fcn_0050bb50(*(unsigned short*) v6, g_773d75) *
+							val = (int) (fcn_0050bb50(*(unsigned short*) item, g_773d75) *
 								     g_664174);
 						} else {
-							val = (int) (fcn_0050bb50(*(unsigned short*) v6, g_773d75) *
+							val = (int) (fcn_0050bb50(*(unsigned short*) item, g_773d75) *
 								     *(float*) (pkt + 0x49));
 						}
 					}

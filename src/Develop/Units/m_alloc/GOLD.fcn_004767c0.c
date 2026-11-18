@@ -22,7 +22,7 @@ void* __cdecl fcn_00448200(int name, int a2);
 /* GOLD twin of GOLDTL fcn_004730c0: passes 1, not 0, as the second
  * argument of the texture load. */
 /* ADDRESS: GOLD 0x004767c0 */
-Sprite* __cdecl fcn_004767c0(int a1, int a2, int a3, int a4, int a5, int a6, int a7)
+Sprite* __cdecl fcn_004767c0(int a1, int a2, int a3, int a4, int textureName, int a6, int a7)
 {
 	int i;
 	Sprite* p;
@@ -42,7 +42,7 @@ Sprite* __cdecl fcn_004767c0(int a1, int a2, int a3, int a4, int a5, int a6, int
 	p->a4 = a4;
 	p->a7 = a7;
 	p->a6 = a6;
-	p->tex = fcn_00448200(a5, 1);
+	p->tex = fcn_00448200(textureName, 1);
 	p->t0 = g_6b7fb8;
 	p->t1 = g_6b7fb8;
 	((Sprite**)g_1015ec0)[i] = p;

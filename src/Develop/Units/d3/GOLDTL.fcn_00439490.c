@@ -7,7 +7,7 @@ typedef struct {
 typedef void (__cdecl* node_fn_439490)(char* node);
 
 extern char g_6b8018;
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
 extern Slot_1043340 g_1043340[64];
 extern char* g_1043254;

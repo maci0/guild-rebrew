@@ -20,7 +20,7 @@ int __cdecl fcn_005c6270(void*, int);
 int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char* kind)
 {
 	int v1;
-	int v3;
+	int funds;
 	char* list[8];
 	int v2;
 	int n;
@@ -49,7 +49,7 @@ int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char*
 				if (n != 0) {
 					t = list[gm_RandomMod(n)];
 					if (*(int*) (e + 0x194) < 4) {
-						v3 = fcn_0050d320(e, g_773d75);
+						funds = fcn_0050d320(e, g_773d75);
 						f1 = gm_WalkEntityChain(*(unsigned short*) e) * 0.005f;
 						amt = (int) (v1 * ((200.0f - fcn_0050f980(*(unsigned short*) e,
 							*(unsigned short*) (t + 0x27), 1)) * 0.01f) * f1);
@@ -57,7 +57,7 @@ int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char*
 						if (fcn_005c6270(e, 0x2c6) != 0) {
 							amt /= 2;
 						}
-						if (!(amt > v3 * 0.44f)) {
+						if (!(amt > funds * 0.44f)) {
 							if (v2 <= 1) {
 								v2 = 1;
 							}

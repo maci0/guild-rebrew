@@ -1,7 +1,7 @@
 #include "Develop/Units/d3/d3_object.h"
 extern void* g_14d0020[];
 extern int g_67a370;
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl fcn_00404560(char*);

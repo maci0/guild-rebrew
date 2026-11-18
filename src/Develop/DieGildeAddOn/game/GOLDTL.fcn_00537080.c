@@ -10,7 +10,7 @@ extern int g_7e43a4[];
 extern int g_7e4468;
 extern int g_7e446c;
 extern volatile int g_6b7fac;
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_6b5cf8;
 extern int g_6a2c24;
 extern int g_7747c0;

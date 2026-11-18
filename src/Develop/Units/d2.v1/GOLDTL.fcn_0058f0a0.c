@@ -34,60 +34,60 @@ void __cdecl fcn_0059a0e0(void);
 
 void __cdecl fcn_0058f0a0(int arg)
 {
-	int v4;
-	int v5;
-	int v6;
-	int v7;
-	int v8;
-	int v1;
-	int v2;
-	int v3;
-	int v9;
+	int graveCareAction;
+	int createHelperAction;
+	int insuranceAction;
+	int burialPlanAction;
+	int transportAction;
+	int ageAction;
+	int hauntAction;
+	int ingredientAction;
+	int rentGraveAction;
 
-	v1 = 0;
-	v2 = 0;
-	v7 = 0;
-	v3 = 0;
-	v5 = 0;
-	v4 = 0;
-	v6 = 0;
-	v8 = 0;
+	ageAction = 0;
+	hauntAction = 0;
+	burialPlanAction = 0;
+	ingredientAction = 0;
+	createHelperAction = 0;
+	graveCareAction = 0;
+	insuranceAction = 0;
+	transportAction = 0;
 	fcn_005338a0();
 	while (fcn_005373e0(fcn_0058f0a0, 0x67fff) != 0) {
 		fcn_00590500(arg);
 		if ((g_7746d8 & 0x200) != 0) {
-			v1 = fcn_005338d0("contact_ALTERN_LASSEN", g_14b55a0, 0x2f);
-			v2 = fcn_005338d0("contact_HEIMSUCHUNG", g_14b5570, 0x29);
-			v3 = fcn_005338d0("contact_ZUTATEN_SUCHEN", g_14b57bc, 0x13);
-			v4 = fcn_005338d0("contact_GRAEBER_PFLEGEN", g_14b5794, 0x2a);
-			v5 = fcn_005338d0("contact_GEHILFEN_ERSCHAFFEN", g_14b57e0, 0x28);
-			v6 = fcn_005338d0("contact_VERSICHERUNG", g_14b56f0, 0x2b);
-			v7 = fcn_005338d0("contact_LIEGEPLAN", g_14b5730, 0x13);
-			v8 = fcn_005338d0("contact_TRANSPORT", g_14ad100, 0x15);
+			ageAction = fcn_005338d0("contact_ALTERN_LASSEN", g_14b55a0, 0x2f);
+			hauntAction = fcn_005338d0("contact_HEIMSUCHUNG", g_14b5570, 0x29);
+			ingredientAction = fcn_005338d0("contact_ZUTATEN_SUCHEN", g_14b57bc, 0x13);
+			graveCareAction = fcn_005338d0("contact_GRAEBER_PFLEGEN", g_14b5794, 0x2a);
+			createHelperAction = fcn_005338d0("contact_GEHILFEN_ERSCHAFFEN", g_14b57e0, 0x28);
+			insuranceAction = fcn_005338d0("contact_VERSICHERUNG", g_14b56f0, 0x2b);
+			burialPlanAction = fcn_005338d0("contact_LIEGEPLAN", g_14b5730, 0x13);
+			transportAction = fcn_005338d0("contact_TRANSPORT", g_14ad100, 0x15);
 		}
-		v9 = fcn_005338d0("contact_GRAB_MIETEN", g_14b5734, 0x16);
+		rentGraveAction = fcn_005338d0("contact_GRAB_MIETEN", g_14b5734, 0x16);
 		if (g_7746a0 != 0) {
 			if ((g_7746d8 & 0x200) != 0) {
 				fcn_0058f020(arg);
-				if (g_7746a0 == v1) {
+				if (g_7746a0 == ageAction) {
 					fcn_0058f6a0(arg);
-				} else if (g_7746a0 == v2) {
+				} else if (g_7746a0 == hauntAction) {
 					fcn_0058f310(arg);
-				} else if (g_7746a0 == v3) {
+				} else if (g_7746a0 == ingredientAction) {
 					fcn_0058d5f0(arg);
-				} else if (g_7746a0 == v4) {
+				} else if (g_7746a0 == graveCareAction) {
 					fcn_0058fb60(arg);
-				} else if (g_7746a0 == v5) {
+				} else if (g_7746a0 == createHelperAction) {
 					fcn_0058fba0(arg);
-				} else if (g_7746a0 == v6) {
+				} else if (g_7746a0 == insuranceAction) {
 					fcn_0058fbd0(arg);
-				} else if (g_7746a0 == v7) {
+				} else if (g_7746a0 == burialPlanAction) {
 					fcn_0058fa20(arg);
-				} else if (g_7746a0 == v8) {
+				} else if (g_7746a0 == transportAction) {
 					fcn_005ba8e0(arg);
 				}
 			}
-			if ((g_7746d8 & 0x80) != 0 && g_7746a0 == v9) {
+			if ((g_7746d8 & 0x80) != 0 && g_7746a0 == rentGraveAction) {
 				fcn_0058fa40(arg);
 			}
 		} else if (g_774800 != 0) {

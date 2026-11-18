@@ -17,7 +17,7 @@ char* __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
 
 /* ADDRESS: GOLDTL 0x0053abe0 */
-void __cdecl fcn_0053abe0(unsigned int a0)
+void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 {
 	char* e;
 	char* q;
@@ -26,10 +26,10 @@ void __cdecl fcn_0053abe0(unsigned int a0)
 	e = gm_StartFilteredEntitySearch(1, 0, 6);
 	if (e != 0) {
 		*(Blk16_53abe0*) (e + 5) = *(Blk16_53abe0*) g_6a3bb4;
-		fcn_005059b0(e, a0, a0);
+		fcn_005059b0(e, ownerSlot, ownerSlot);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0x13);
 		if (q != 0) {
-			fcn_005058b0(e, q, a0);
+			fcn_005058b0(e, q, ownerSlot);
 		}
 		fcn_004c51f0(*(int*) (e + 1), -1, 0x15, 1, g_773d75, 0);
 		fcn_004c51f0(*(int*) (e + 1), -1, 0x17, 1, g_773d75, 0);
@@ -38,8 +38,8 @@ void __cdecl fcn_0053abe0(unsigned int a0)
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x20);
 	if (e != 0) {
-		*(short*) (e + 0x25) = (short) a0;
-		*(short*) (e + 0x27) = (short) a0;
+		*(short*) (e + 0x25) = (short) ownerSlot;
+		*(short*) (e + 0x27) = (short) ownerSlot;
 		n = 3;
 		do {
 			fcn_004c6090(e, 0, 10, 0);
@@ -57,7 +57,7 @@ void __cdecl fcn_0053abe0(unsigned int a0)
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x2a);
 	if (e != 0) {
-		fcn_005059b0(e, a0, a0);
+		fcn_005059b0(e, ownerSlot, ownerSlot);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
 			fcn_004c44a0();
@@ -73,24 +73,24 @@ void __cdecl fcn_0053abe0(unsigned int a0)
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x1e);
 	if (e != 0) {
-		fcn_005059b0(e, a0, a0);
+		fcn_005059b0(e, ownerSlot, ownerSlot);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x1f);
 	if (e != 0) {
-		fcn_005059b0(e, a0, a0);
+		fcn_005059b0(e, ownerSlot, ownerSlot);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x12);
 	if (e != 0) {
-		fcn_005059b0(e, a0, a0);
+		fcn_005059b0(e, ownerSlot, ownerSlot);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x14);
 	if (e != 0) {
-		fcn_005059b0(e, a0, a0);
+		fcn_005059b0(e, ownerSlot, ownerSlot);
 		fcn_004c51f0(*(int*) (e + 1), -1, 0xf7, 1, g_773d75, 0);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x32);
 	if (e != 0) {
-		fcn_005059b0(e, a0, a0);
+		fcn_005059b0(e, ownerSlot, ownerSlot);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
 			fcn_004c44a0();
@@ -105,17 +105,17 @@ void __cdecl fcn_0053abe0(unsigned int a0)
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x21);
 	if (e != 0) {
-		fcn_005059b0(e, a0, a0);
+		fcn_005059b0(e, ownerSlot, ownerSlot);
 		fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x19);
 	if (e != 0) {
-		fcn_005059b0(e, a0, a0);
+		fcn_005059b0(e, ownerSlot, ownerSlot);
 		fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x34);
 	if (e != 0) {
-		fcn_005059b0(e, a0, a0);
+		fcn_005059b0(e, ownerSlot, ownerSlot);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
 			fcn_004c44a0();
@@ -132,6 +132,6 @@ void __cdecl fcn_0053abe0(unsigned int a0)
 	if (e == 0) {
 		return;
 	}
-	fcn_005059b0(e, a0, a0);
+	fcn_005059b0(e, ownerSlot, ownerSlot);
 	fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 }

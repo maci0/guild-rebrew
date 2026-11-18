@@ -6,7 +6,7 @@
 typedef Slot170_7731b8 Slot170;
 // SIZE 0x170
 
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Slot170_7731b8 g_7731b8[8];
 
 void __cdecl fcn_004432d0(int, int);

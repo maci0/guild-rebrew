@@ -9,7 +9,7 @@ typedef struct Slot {
 } Slot;
 /* SIZE 0x124 */
 
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7f4c00[];
 extern unsigned char g_776664;
 extern volatile unsigned int g_6b7fac;

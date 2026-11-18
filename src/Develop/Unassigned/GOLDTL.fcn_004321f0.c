@@ -8,7 +8,7 @@ typedef struct {
 } F4321F0;
 
 /* ADDRESS: GOLDTL 0x004321f0 */
-void __cdecl fcn_004321f0(F4321F0* a0, F4321F0* a1, F4321F0* a2)
+void __cdecl fcn_004321f0(F4321F0* previous, F4321F0* current, F4321F0* next)
 {
 	float d[4];
 	float e[4];
@@ -16,17 +16,17 @@ void __cdecl fcn_004321f0(F4321F0* a0, F4321F0* a1, F4321F0* a2)
 	float n1;
 	float n0;
 
-	d[0] = a1->f[0] - a0->f[0];
-	d[1] = a1->f[1] - a0->f[1];
-	d[2] = a1->f[2] - a0->f[2];
-	s = K_6628A0 / (float) a0->i;
+	d[0] = current->f[0] - previous->f[0];
+	d[1] = current->f[1] - previous->f[1];
+	d[2] = current->f[2] - previous->f[2];
+	s = K_6628A0 / (float) previous->i;
 	d[0] *= s;
 	d[1] *= s;
 	d[2] *= s;
-	e[0] = a2->f[0] - a1->f[0];
-	e[1] = a2->f[1] - a1->f[1];
-	e[2] = a2->f[2] - a1->f[2];
-	n1 = (float) a1->i;
+	e[0] = next->f[0] - current->f[0];
+	e[1] = next->f[1] - current->f[1];
+	e[2] = next->f[2] - current->f[2];
+	n1 = (float) current->i;
 	s = K_6628A0 / n1;
 	e[0] *= s;
 	e[1] *= s;
@@ -37,24 +37,24 @@ void __cdecl fcn_004321f0(F4321F0* a0, F4321F0* a1, F4321F0* a2)
 	d[0] = d[0] * K_6628CC;
 	d[1] = d[1] * K_6628CC;
 	d[2] = d[2] * K_6628CC;
-	a1->f[7] = n1 * d[0];
-	a1->f[8] = n1 * d[1];
-	a1->f[9] = n1 * d[2];
-	n0 = (float) a0->i;
-	a0->f[11] = n0 * d[0];
-	a0->f[12] = n0 * d[1];
-	a0->f[13] = n0 * d[2];
-	d[0] = a1->f[4] - a0->f[4];
-	d[1] = a1->f[5] - a0->f[5];
-	d[2] = a1->f[6] - a0->f[6];
+	current->f[7] = n1 * d[0];
+	current->f[8] = n1 * d[1];
+	current->f[9] = n1 * d[2];
+	n0 = (float) previous->i;
+	previous->f[11] = n0 * d[0];
+	previous->f[12] = n0 * d[1];
+	previous->f[13] = n0 * d[2];
+	d[0] = current->f[4] - previous->f[4];
+	d[1] = current->f[5] - previous->f[5];
+	d[2] = current->f[6] - previous->f[6];
 	s = K_6628A0 / n0;
 	d[0] *= s;
 	d[1] *= s;
 	d[2] *= s;
-	e[0] = a2->f[4] - a1->f[4];
-	e[1] = a2->f[5] - a1->f[5];
-	e[2] = a2->f[6] - a1->f[6];
-	n1 = (float) a1->i;
+	e[0] = next->f[4] - current->f[4];
+	e[1] = next->f[5] - current->f[5];
+	e[2] = next->f[6] - current->f[6];
+	n1 = (float) current->i;
 	s = K_6628A0 / n1;
 	e[0] *= s;
 	e[1] *= s;
@@ -65,11 +65,11 @@ void __cdecl fcn_004321f0(F4321F0* a0, F4321F0* a1, F4321F0* a2)
 	d[0] = d[0] * K_6628CC;
 	d[1] = d[1] * K_6628CC;
 	d[2] = d[2] * K_6628CC;
-	a1->f[15] = n1 * d[0];
-	a1->f[16] = n1 * d[1];
-	a1->f[17] = n1 * d[2];
-	n0 = (float) a0->i;
-	a0->f[18] = n0 * d[0];
-	a0->f[19] = n0 * d[1];
-	a0->f[20] = n0 * d[2];
+	current->f[15] = n1 * d[0];
+	current->f[16] = n1 * d[1];
+	current->f[17] = n1 * d[2];
+	n0 = (float) previous->i;
+	previous->f[18] = n0 * d[0];
+	previous->f[19] = n0 * d[1];
+	previous->f[20] = n0 * d[2];
 }

@@ -94,7 +94,7 @@ char __cdecl fcn_00459530(Ent459* e)
 	} while (n);
 	found = e->node;
 	for (n = found->next; n; n = n->next) {
-		if (n->cur2a == 0xff && !(n->flags26 & 3)) {
+		if (n->cur2a == 0xff && !(n->flags26 & 1) && !(n->flags26 & 2)) {
 			found = n;
 		}
 	}

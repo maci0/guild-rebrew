@@ -24,62 +24,62 @@ void __cdecl fcn_0047a040(int a, int b, int c, int d);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
 
 /* ADDRESS: GOLDTL 0x00468e40 */
-void __cdecl fcn_00468e40(int a0, int a1)
+void __cdecl fcn_00468e40(int slotIndex, int surface)
 {
-	char* v1;
-	char* v2;
-	Glyph* v3;
-	Glyph* v4;
-	Glyph* v5;
-	int v6;
-	int v7;
-	int v8;
-	unsigned char v9;
+	char* slot;
+	char* font;
+	Glyph* leftGlyph;
+	Glyph* rightGlyph;
+	Glyph* middleGlyph;
+	int innerWidth;
+	int flags;
+	int glyphBase;
+	unsigned char color;
 	int i;
 
-	v8 = 0; v9 = 8; v1 = g_1015ea0 + a0 * 0x2f4;
-	v7 = *(int*) (v1 + 0x1d0);
-	if ((v7 & 2) && g_7725d0 == 0) {
-		if (!((g_1015ea0 + g_67d370 * 0x2f4 != v1) && *(int*) (v1 + 0x38) == 0)
-		    && *(int*) (v1 + 0x4c) == 0) {
-			if (v7 & 1) {
-				*(int*) (v1 + 0x3c) = 1;
+	glyphBase = 0; color = 8; slot = g_1015ea0 + slotIndex * 0x2f4;
+	flags = *(int*) (slot + 0x1d0);
+	if ((flags & 2) && g_7725d0 == 0) {
+		if (!((g_1015ea0 + g_67d370 * 0x2f4 != slot) && *(int*) (slot + 0x38) == 0)
+		    && *(int*) (slot + 0x4c) == 0) {
+			if (flags & 1) {
+				*(int*) (slot + 0x3c) = 1;
 			}
-		} else if (v7 & 1) {
-			*(int*) (v1 + 0x3c) = 0;
+		} else if (flags & 1) {
+			*(int*) (slot + 0x3c) = 0;
 		}
 	}
-	if (!(v7 & 2) && *(int*) (v1 + 0x58) != 0 && *(int*) (v1 + 0x4c) == 0) {
-		*(int*) (v1 + 0x3c) = *(int*) (v1 + 0x38);
+	if (!(flags & 2) && *(int*) (slot + 0x58) != 0 && *(int*) (slot + 0x4c) == 0) {
+		*(int*) (slot + 0x3c) = *(int*) (slot + 0x38);
 	}
-	if (*(int*) (v1 + 0x3c) != 0) {
-		v9 = 10;
-	} else if (*(int*) (v1 + 0x60) != 0) {
-		v9 = 9;
+	if (*(int*) (slot + 0x3c) != 0) {
+		color = 10;
+	} else if (*(int*) (slot + 0x60) != 0) {
+		color = 9;
 	}
-	fcn_00472880(*(int*) (v1 + 0x84));
-	v2 = *(char**) (v1 + 0xc);
-	v3 = fcn_0047b620(v2, 0);
-	v4 = fcn_0047b620(v2, 1);
-	v5 = fcn_0047b620(v2, 2);
-	v6 = (*(int*) (v1 + 0x18) - v4->w) - v3->w;
-	if (*(int*) (v1 + 0x3c) != 0) {
-		v8 = 3;
+	fcn_00472880(*(int*) (slot + 0x84));
+	font = *(char**) (slot + 0xc);
+	leftGlyph = fcn_0047b620(font, 0);
+	rightGlyph = fcn_0047b620(font, 1);
+	middleGlyph = fcn_0047b620(font, 2);
+	innerWidth = (*(int*) (slot + 0x18) - rightGlyph->w) - leftGlyph->w;
+	if (*(int*) (slot + 0x3c) != 0) {
+		glyphBase = 3;
 	}
-	fcn_0047cba0(*(int*) (v1 + 0x10), *(int*) (v1 + 0x14), a1, v2, v8);
-	fcn_0047cba0((*(int*) (v1 + 0x18) - v4->w) + *(int*) (v1 + 0x10),
-	    *(int*) (v1 + 0x14), a1, v2, v8 + 1);
+	fcn_0047cba0(*(int*) (slot + 0x10), *(int*) (slot + 0x14), surface, font, glyphBase);
+	fcn_0047cba0((*(int*) (slot + 0x18) - rightGlyph->w) + *(int*) (slot + 0x10),
+	    *(int*) (slot + 0x14), surface, font, glyphBase + 1);
 
-	fcn_0047a040(*(int*) (v1 + 0x10) + v3->w - 1, g_7725fc, *(int*) (v1 + 0x10) + v3->w + v6, g_67d968);
+	fcn_0047a040(*(int*) (slot + 0x10) + leftGlyph->w - 1, g_7725fc, *(int*) (slot + 0x10) + leftGlyph->w + innerWidth, g_67d968);
 	i = 0;
-	if (g_662950 < (double) (v6 / v5->w) + g_662908) {
+	if (g_662950 < (double) (innerWidth / middleGlyph->w) + g_662908) {
 		do {
-			fcn_0047cba0(v5->w * i + v3->w + *(int*) (v1 + 0x10),
-			    *(int*) (v1 + 0x14), a1, v2, v8 + 2);
+			fcn_0047cba0(middleGlyph->w * i + leftGlyph->w + *(int*) (slot + 0x10),
+			    *(int*) (slot + 0x14), surface, font, glyphBase + 2);
 			i++;
-		} while ((double) i < (double) (v6 / v5->w) + g_662908);
+		} while ((double) i < (double) (innerWidth / middleGlyph->w) + g_662908);
 	}
-	fcn_0046bd20(*(int*) (v1 + 0x10),
-	    ((v3->h >> 1) - g_1015ea4 / 2) + 1 + *(int*) (v1 + 0x14),
-	    *(int*) (v1 + 0x18), *(int*) (v1 + 0x1c), a1, v1 + 0x8c, v9);
+	fcn_0046bd20(*(int*) (slot + 0x10),
+	    ((leftGlyph->h >> 1) - g_1015ea4 / 2) + 1 + *(int*) (slot + 0x14),
+	    *(int*) (slot + 0x18), *(int*) (slot + 0x1c), surface, slot + 0x8c, color);
 }

@@ -15,7 +15,7 @@ int __cdecl fcn_004a5340(unsigned short* e, int n, int* lim, float a4, float r, 
 
 
 /* ADDRESS: GOLDTL 0x004abe20 */
-int __cdecl ai_StartEhrerbietung(int a1, unsigned short* a2, int a3, char* a4)
+int __cdecl ai_StartEhrerbietung(int a1, unsigned short* entity, int a3, char* result)
 {
 	int lim;
 	unsigned short id;
@@ -25,35 +25,35 @@ int __cdecl ai_StartEhrerbietung(int a1, unsigned short* a2, int a3, char* a4)
 	unsigned char* e;
 	char* p;
 
-	lvl = gm_CheckStatLevel(*a2, 0xe);
+	lvl = gm_CheckStatLevel(*entity, 0xe);
 	lim = 0;
-	if ((*((unsigned char*) a2 + 0x1cc) & 0x20) != 0)
+	if ((*((unsigned char*) entity + 0x1cc) & 0x20) != 0)
 		return 0;
-	if (*(int*) ((char*) a2 + 0x194) < 2)
+	if (*(int*) ((char*) entity + 0x194) < 2)
 		return 0;
 	if (a1 != 0x47 && a1 != 0)
 		return 0;
-	if (a3 != 0 || lvl == 0 || *((unsigned char*) a2 + 2) == 3)
+	if (a3 != 0 || lvl == 0 || *((unsigned char*) entity + 2) == 3)
 		return 0;
 	e = lpGebaeudeINST;
 	for (i = 0; i < 0x100; i++, e += 0xa9) {
-		if (e[0] != 0 && *(unsigned short*) (e + 0x27) == *a2
+		if (e[0] != 0 && *(unsigned short*) (e + 0x27) == *entity
 		    && ((Kind*)lpGebaeudePROT)[e[0]].type == 0x1f
 		    && fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x276) != 0) {
 			lim = 0xf00500;
-			if (fcn_004a5340(a2, 1, &lim, 0.0f, gm_RandomMod(0x20) + 25.0f, &id) == 0)
+			if (fcn_004a5340(entity, 1, &lim, 0.0f, gm_RandomMod(0x20) + 25.0f, &id) == 0)
 				return 0;
 			p = g_7f4ca0 + id * 540;
-			n = *(int*) ((char*) a2 + 0x194);
+			n = *(int*) ((char*) entity + 0x194);
 			if (n >= 8)
 				n = 8;
 			n = gm_RandomMod(n);
 			if (n <= 2)
 				n = 2;
-			*(int*) (a4 + 4) = *(int*) (p + 4);
-			*(int*) (a4 + 0x10) = n;
-			*(int*) (a4 + 0xc) = 0;
-			a4[0] = 7;
+			*(int*) (result + 4) = *(int*) (p + 4);
+			*(int*) (result + 0x10) = n;
+			*(int*) (result + 0xc) = 0;
+			result[0] = 7;
 			return 0x45;
 		}
 	}

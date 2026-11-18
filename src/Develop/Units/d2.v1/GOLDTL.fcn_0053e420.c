@@ -24,65 +24,65 @@ void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_0053e420(void)
 {
-	int a1;
-	int a2;
-	int a3;
-	int a4;
-	int a5;
-	int a6;
+	int option1;
+	int option2;
+	int option3;
+	int option4;
+	int option5;
+	int option6;
 	int result;
-	int h;
-	int s;
-	int a0;
-	int list;
+	int dialogHandle;
+	int textStart;
+	int option0;
+	int radioGroup;
 
 	result = 0;
-	h = fcn_00470820(0, 0, g_68116c);
-	fcn_00471b60(h);
-	d2_SetForm(h, 0);
-	s = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca, 0x1acb, 0x1acc);
-	a0 = fcn_00472250(h, 0, s);
-	a1 = fcn_00472250(h, 0, s + 1);
-	a2 = fcn_00472250(h, 0, s + 2);
-	a3 = fcn_00472250(h, 0, s + 3);
-	a4 = fcn_00472250(h, 0, s + 4);
-	a5 = fcn_00472250(h, 0, s + 5);
-	a6 = fcn_00472250(h, 0, io_AppendText((int) g_6a4078, 0x1acd));
+	dialogHandle = fcn_00470820(0, 0, g_68116c);
+	fcn_00471b60(dialogHandle);
+	d2_SetForm(dialogHandle, 0);
+	textStart = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca, 0x1acb, 0x1acc);
+	option0 = fcn_00472250(dialogHandle, 0, textStart);
+	option1 = fcn_00472250(dialogHandle, 0, textStart + 1);
+	option2 = fcn_00472250(dialogHandle, 0, textStart + 2);
+	option3 = fcn_00472250(dialogHandle, 0, textStart + 3);
+	option4 = fcn_00472250(dialogHandle, 0, textStart + 4);
+	option5 = fcn_00472250(dialogHandle, 0, textStart + 5);
+	option6 = fcn_00472250(dialogHandle, 0, io_AppendText((int) g_6a4078, 0x1acd));
 	if (g_776704 <= -1) {
 		g_776704 = -1;
 	}
-	list = d2_CreateRadioGroup(7, a0, a1, a2, a3, a4, a5, a6);
+	radioGroup = d2_CreateRadioGroup(7, option0, option1, option2, option3, option4, option5, option6);
 	if (g_776704 != -1) {
-		d2_SelectRadioGroup(list, g_776704 + 1);
+		d2_SelectRadioGroup(radioGroup, g_776704 + 1);
 	} else {
-		d2_SelectRadioGroup(list, 0);
+		d2_SelectRadioGroup(radioGroup, 0);
 	}
 	while (fcn_005373e0(fcn_0053e420, 0xc6) != 0) {
-		d2_UpdateRadioGroup(list);
+		d2_UpdateRadioGroup(radioGroup);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
 		}
 		if (g_100f1dc == 2) {
-			if (g_67d370 == a0) {
+			if (g_67d370 == option0) {
 				(*(char*)&g_6a3440) = -1;
-			} else if (g_67d370 == a1) {
+			} else if (g_67d370 == option1) {
 				(*(char*)&g_6a3440) = 0;
-			} else if (g_67d370 == a2) {
+			} else if (g_67d370 == option2) {
 				(*(char*)&g_6a3440) = 1;
-			} else if (g_67d370 == a3) {
+			} else if (g_67d370 == option3) {
 				(*(char*)&g_6a3440) = 2;
-			} else if (g_67d370 == a4) {
+			} else if (g_67d370 == option4) {
 				(*(char*)&g_6a3440) = 3;
-			} else if (g_67d370 == a5) {
+			} else if (g_67d370 == option5) {
 				(*(char*)&g_6a3440) = 4;
-			} else if (g_67d370 == a6) {
+			} else if (g_67d370 == option6) {
 				(*(char*)&g_6a3440) = 5;
 			}
 			g_776704 = (*(char*)&g_6a3440);
 			if (g_776704 != -1) {
-				d2_SelectRadioGroup(list, g_776704 + 1);
+				d2_SelectRadioGroup(radioGroup, g_776704 + 1);
 			} else {
-				d2_SelectRadioGroup(list, 0);
+				d2_SelectRadioGroup(radioGroup, 0);
 			}
 			result = 1;
 			g_774654 = 1;
@@ -90,7 +90,7 @@ int __cdecl fcn_0053e420(void)
 			g_774654 = 1;
 		}
 	}
-	fcn_00469510(list);
-	fcn_00471e30(h);
+	fcn_00469510(radioGroup);
+	fcn_00471e30(dialogHandle);
 	return result;
 }

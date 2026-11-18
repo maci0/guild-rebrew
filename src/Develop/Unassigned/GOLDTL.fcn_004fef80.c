@@ -60,36 +60,36 @@ typedef struct
 // SIZE 0x24
 
 
-float __cdecl fcn_004feff0(Bar24* a1)
+float __cdecl fcn_004feff0(Bar24* bar)
 {
 	float v;
 
-	if (a1->id == 0xffff) {
+	if (bar->id == 0xffff) {
 		return g_662a94;
 	}
-	if (a1->active == 0) {
+	if (bar->active == 0) {
 		return g_662a94;
 	}
-	v = a1->cur;
-	if (v <= a1->max) {
-		return (a1->hi - a1->lo) / a1->max * v + a1->lo;
+	v = bar->cur;
+	if (v <= bar->max) {
+		return (bar->hi - bar->lo) / bar->max * v + bar->lo;
 	}
-	return a1->hi;
+	return bar->hi;
 }
 
 extern float g_6628a8;
 
 
 /* ADDRESS: GOLDTL 0x004ff040 */
-float __cdecl fcn_004ff040(Bar24* a1)
+float __cdecl fcn_004ff040(Bar24* bar)
 {
-	if (a1->id == 0xffff) {
+	if (bar->id == 0xffff) {
 		return g_6628a8;
 	}
-	if (a1->active == 0) {
+	if (bar->active == 0) {
 		return g_6628a8;
 	}
-	return fcn_004fef80((Obj28*) a1) / fcn_004feff0(a1);
+	return fcn_004fef80((Obj28*) bar) / fcn_004feff0(bar);
 }
 
 extern char g_7f4ca0[];

@@ -23,23 +23,23 @@ extern void __cdecl fcn_0047cba0(int a0, int a1, int a2, int a3, int a4);
 /* ADDRESS: GOLDTL 0x00532bd0 */
 void __cdecl fcn_00532bd0(void)
 {
-    int v3 = 0;
-    int v4 = 0;
-    int v5 = 0;
-    int v7 = 0;
-    int v1;
-    int v2;
+    int rightState = 0;
+    int leftState = 0;
+    int bottomState = 0;
+    int topState = 0;
+    int resource;
+    int selection;
 
     if (!(g_7e46ac & 8))
         return;
     if (g_7746c4 != 0 || g_7746c8 != 0)
     {
-        v2 = g_7746c4 ? g_7746c4 : g_7746c8;
-        if (v2 != 0)
+        selection = g_7746c4 ? g_7746c4 : g_7746c8;
+        if (selection != 0)
         {
             if (g_7746cc != 0 || g_7746c8 != 0)
             {
-                g_7746dc = fcn_00506380(g_774970, v2, g_7746cc, 0);
+                g_7746dc = fcn_00506380(g_774970, selection, g_7746cc, 0);
                 if (!(g_7746dc & 0x1000))
                     return;
             }
@@ -47,60 +47,60 @@ void __cdecl fcn_00532bd0(void)
     }
     if (!(g_7746d8 & 0x1000))
         return;
-    v1 = d2_GetResourceData(0x52c);
+    resource = d2_GetResourceData(0x52c);
     if (g_774688 == -1)
     {
-        v3 = 1;
+        rightState = 1;
         if (!CompareVector3WithinTolerance(g_6b8014 + 0xfc, 0x662d70, 0.2f))
-            v3 = 2;
+            rightState = 2;
     }
     else if (g_774688 == 1)
     {
-        v4 = 1;
+        leftState = 1;
         if (!CompareVector3WithinTolerance(g_6b8014 + 0xe4, 0x662d70, 0.2f))
-            v4 = 2;
+            leftState = 2;
     }
     else if (g_774688 == 0)
     {
         if (!CompareVector3WithinTolerance(g_6b8014 + 0xe4, 0x662d70, 0.2f))
-            v4 = 1;
+            leftState = 1;
         if (!CompareVector3WithinTolerance(g_6b8014 + 0xfc, 0x662d70, 0.2f))
-            v3 = 1;
+            rightState = 1;
     }
     if (g_77468c == -1)
     {
-        v5 = 1;
+        bottomState = 1;
         if (!CompareVector3WithinTolerance(g_6b8014 + 0xb4, 0x662d70, 0.2f))
-            v5 = 2;
+            bottomState = 2;
     }
     else if (g_77468c == 1)
     {
-        v7 = 1;
+        topState = 1;
         if (!CompareVector3WithinTolerance(g_6b8014 + 0xcc, 0x662d70, 0.2f))
-            v7 = 2;
+            topState = 2;
     }
     else if (g_77468c == 0)
     {
         if (!CompareVector3WithinTolerance(g_6b8014 + 0xb4, 0x662d70, 0.2f))
-            v5 = 1;
+            bottomState = 1;
         if (!CompareVector3WithinTolerance(g_6b8014 + 0xcc, 0x662d70, 0.2f))
-            v7 = 1;
+            topState = 1;
     }
     fcn_0047a040(0, 0, *(int *)(g_77250c + 4), *(int *)(g_77250c + 8));
-    if (v5 == 2)
-        fcn_0047cba0(g_1015eac - 0x10, g_1040490 - 0x20, g_77250c, v1, 0);
-    else if (v5 == 1)
-        fcn_0047cba0(g_1015eac - 0x10, g_1040490 - 0x20, g_77250c, v1, v5);
-    if (v4 == 2)
-        fcn_0047cba0(4, g_1015ea8, g_77250c, v1, v4);
-    else if (v4 == 1)
-        fcn_0047cba0(4, g_1015ea8, g_77250c, v1, 3);
-    if (v3 == 2)
-        fcn_0047cba0(g_1040494 - 0x96, g_1015ea8, g_77250c, v1, 4);
-    else if (v3 == 1)
-        fcn_0047cba0(g_1040494 - 0x96, g_1015ea8, g_77250c, v1, 5);
-    if (v7 == 2)
-        fcn_0047cba0(g_1015eac - 0x10, 0x38, g_77250c, v1, 6);
-    else if (v7 == 1)
-        fcn_0047cba0(g_1015eac - 0x10, 0x38, g_77250c, v1, 7);
+    if (bottomState == 2)
+        fcn_0047cba0(g_1015eac - 0x10, g_1040490 - 0x20, g_77250c, resource, 0);
+    else if (bottomState == 1)
+        fcn_0047cba0(g_1015eac - 0x10, g_1040490 - 0x20, g_77250c, resource, bottomState);
+    if (leftState == 2)
+        fcn_0047cba0(4, g_1015ea8, g_77250c, resource, leftState);
+    else if (leftState == 1)
+        fcn_0047cba0(4, g_1015ea8, g_77250c, resource, 3);
+    if (rightState == 2)
+        fcn_0047cba0(g_1040494 - 0x96, g_1015ea8, g_77250c, resource, 4);
+    else if (rightState == 1)
+        fcn_0047cba0(g_1040494 - 0x96, g_1015ea8, g_77250c, resource, 5);
+    if (topState == 2)
+        fcn_0047cba0(g_1015eac - 0x10, 0x38, g_77250c, resource, 6);
+    else if (topState == 1)
+        fcn_0047cba0(g_1015eac - 0x10, 0x38, g_77250c, resource, 7);
 }

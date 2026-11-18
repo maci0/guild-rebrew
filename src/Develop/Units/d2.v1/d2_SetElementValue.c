@@ -28,10 +28,10 @@ void __cdecl d2_SetElementValue(int id, ...)
 	int step;
 	int v;
 	int n;
-	int a2;
-	int a3;
-	int a4;
-	int a5;
+	int firstValue;
+	int secondValue;
+	int thirdValue;
+	int fourthValue;
 	char* text;
 	va_list ap;
 
@@ -53,13 +53,13 @@ void __cdecl d2_SetElementValue(int id, ...)
 			return;
 		}
 		if (*(int*) (sub + 0x28) & 2) {
-			a2 = va_arg(ap, int);
-			a3 = va_arg(ap, int);
-			a4 = va_arg(ap, int);
-			*(int*) (sub + 0x1c) = a2;
-			*(int*) (sub + 0x18) = a3;
-			*(int*) (sub + 0x12c) = a4;
-			_itoa(a4, sub + 0x2c, 10);
+			firstValue = va_arg(ap, int);
+			secondValue = va_arg(ap, int);
+			thirdValue = va_arg(ap, int);
+			*(int*) (sub + 0x1c) = firstValue;
+			*(int*) (sub + 0x18) = secondValue;
+			*(int*) (sub + 0x12c) = thirdValue;
+			_itoa(thirdValue, sub + 0x2c, 10);
 			fl = *(int*) (sub + 0x28);
 			if (fl & 0x80) {
 				step = d2_GetValueStep(sub);
@@ -82,19 +82,19 @@ void __cdecl d2_SetElementValue(int id, ...)
 		}
 	}
 	if (e->kind == 0x45) {
-		a2 = va_arg(ap, int);
-		a3 = va_arg(ap, int);
-		a4 = va_arg(ap, int);
-		*(int*) ((char*) e + d2_GUI_NUMBER_OFFSET) = a2;
-		*(int*) ((char*) e + d2_GUI_NUMBER_OFFSET + 4) = a3;
-		*(int*) ((char*) e + d2_GUI_NUMBER_OFFSET - 4) = a4;
+		firstValue = va_arg(ap, int);
+		secondValue = va_arg(ap, int);
+		thirdValue = va_arg(ap, int);
+		*(int*) ((char*) e + d2_GUI_NUMBER_OFFSET) = firstValue;
+		*(int*) ((char*) e + d2_GUI_NUMBER_OFFSET + 4) = secondValue;
+		*(int*) ((char*) e + d2_GUI_NUMBER_OFFSET - 4) = thirdValue;
 		if (*((unsigned char*) e + d2_GUI_NUMBER_OFFSET + 8) & 0x10) {
-			a5 = va_arg(ap, int);
-			*(int*) ((char*) e + d2_GUI_NUMBER_OFFSET + 0x10) = a5;
+			fourthValue = va_arg(ap, int);
+			*(int*) ((char*) e + d2_GUI_NUMBER_OFFSET + 0x10) = fourthValue;
 		}
 	} else if (*(int*) ((char*) e + d2_GUI_DIRTY_OFFSET) != 0 || *(int*) ((char*) e + d2_GUI_DIRTY_OFFSET + 4) != 0) {
-		a2 = va_arg(ap, int);
-		*(int*) ((char*) e + d2_GUI_STATE_OFFSET + 4) = *(int*) ((char*) e + d2_GUI_STATE_OFFSET) = (unsigned char) a2;
+		firstValue = va_arg(ap, int);
+		*(int*) ((char*) e + d2_GUI_STATE_OFFSET + 4) = *(int*) ((char*) e + d2_GUI_STATE_OFFSET) = (unsigned char) firstValue;
 	}
 	va_end(ap);
 }

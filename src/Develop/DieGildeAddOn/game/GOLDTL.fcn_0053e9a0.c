@@ -22,14 +22,14 @@ void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_0053e9a0(void)
 {
-	int a1;
-	int a2;
-	int a3;
-	int a4;
+	int option1;
+	int option2;
+	int option3;
+	int option4;
 	int result;
 	int h;
 	int s;
-	int a0;
+	int option0;
 	int list;
 
 	result = 0;
@@ -37,12 +37,12 @@ int __cdecl fcn_0053e9a0(void)
 	fcn_00471b60(h);
 	g_7747b4 = g_77670a;
 	s = io_AppendText(0x1abf);
-	a0 = fcn_00472250(h, 0, s);
-	a1 = fcn_00472250(h, 0, s + 1);
-	a2 = fcn_00472250(h, 0, s + 2);
-	a3 = fcn_00472250(h, 0, s + 3);
-	a4 = fcn_00472250(h, 0, s + 4);
-	list = d2_CreateRadioGroup(6, a0, a1, a2, a3, a4, fcn_00472250(h, 0, s + 5));
+	option0 = fcn_00472250(h, 0, s);
+	option1 = fcn_00472250(h, 0, s + 1);
+	option2 = fcn_00472250(h, 0, s + 2);
+	option3 = fcn_00472250(h, 0, s + 3);
+	option4 = fcn_00472250(h, 0, s + 4);
+	list = d2_CreateRadioGroup(6, option0, option1, option2, option3, option4, fcn_00472250(h, 0, s + 5));
 	d2_SelectRadioGroup(list, g_7747b4);
 	while (fcn_005373e0(fcn_0053e9a0, 0xc6) != 0) {
 		d2_UpdateRadioGroup(list);
@@ -51,15 +51,15 @@ int __cdecl fcn_0053e9a0(void)
 			g_774654 = 1;
 		}
 		if (g_100f1dc == 2 || g_14cf950 == 0x1c) {
-			if (g_67d370 == a0) {
+			if (g_67d370 == option0) {
 				g_7747b4 = 0;
-			} else if (g_67d370 == a1) {
+			} else if (g_67d370 == option1) {
 				g_7747b4 = 1;
-			} else if (g_67d370 == a2) {
+			} else if (g_67d370 == option2) {
 				g_7747b4 = 2;
-			} else if (g_67d370 == a3) {
+			} else if (g_67d370 == option3) {
 				g_7747b4 = 3;
-			} else if (g_67d370 == a4) {
+			} else if (g_67d370 == option4) {
 				g_7747b4 = 4;
 			}
 			result = 1;

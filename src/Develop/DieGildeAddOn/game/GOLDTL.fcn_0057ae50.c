@@ -4,7 +4,7 @@
 /* 'sPgf': tag the effect object with its owner id */
 #define FX_MAGIC 0x66675073
 
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_005463a0(int, int, int, ...);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);

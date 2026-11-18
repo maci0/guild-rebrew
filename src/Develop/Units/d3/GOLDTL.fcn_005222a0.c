@@ -1,4 +1,4 @@
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 // SIZE 0x8038
 struct s_6b8300 {

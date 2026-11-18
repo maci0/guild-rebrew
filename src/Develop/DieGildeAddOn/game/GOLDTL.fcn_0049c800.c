@@ -8,16 +8,16 @@ extern void __cdecl fcn_004a4410(void* a0, void* a1, int a2, int a3, int a4, int
 
 
 /* ADDRESS: GOLDTL 0x0049c800 */
-void __cdecl ai_ScoreDrohen(int* a0, int* a1, int a2, int a3, int a4, int a5, int a6)
+void __cdecl ai_ScoreDrohen(int* out1, int* out2, int a2, int a3, int a4, int a5, int a6)
 {
 	Stat0049c800 st;
 
-	*a0 = 0;
-	*a1 = 0;
+	*out1 = 0;
+	*out2 = 0;
 	fcn_004f4830(0x13, &st);
 	if (st.v[6] != 0) {
-		fcn_004a4680(a0, a1, a2, a3, &st);
+		fcn_004a4680(out1, out2, a2, a3, &st);
 		return;
 	}
-	fcn_004a4410(a0, a1, a2, a3, a4, a5, a6);
+	fcn_004a4410(out1, out2, a2, a3, a4, a5, a6);
 }

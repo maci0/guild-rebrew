@@ -31,12 +31,12 @@ int __cdecl fcn_004c5620(int a1, char* e);
 /* ADDRESS: GOLDTL 0x0054ee10 */
 void __cdecl fcn_0054ee10(char* t)
 {
-	int r;
+	int impactValue;
 	int pick[16];
 	int ids[32];
 	char buf[0x100];
-	char* a;
-	char* b;
+	char* firstEntity;
+	char* secondEntity;
 	int id;
 	int n;
 	int i;
@@ -45,9 +45,9 @@ void __cdecl fcn_0054ee10(char* t)
 	*(int*) (t + 0x70) = 2;
 	if ((t[0x78] & 2) == 0)
 		return;
-	a = gm_LookupEntityRecordById(*(int*) (t + 0xac));
-	b = gm_LookupEntityRecordById(*(int*) (t + 0xb0));
-	if (a == 0 || (*(int*) (a + 0x1c8) & 0x100) || b == 0 || (*(int*) (b + 0x1c8) & 0x200)) {
+	firstEntity = gm_LookupEntityRecordById(*(int*) (t + 0xac));
+	secondEntity = gm_LookupEntityRecordById(*(int*) (t + 0xb0));
+	if (firstEntity == 0 || (*(int*) (firstEntity + 0x1c8) & 0x100) || secondEntity == 0 || (*(int*) (secondEntity + 0x1c8) & 0x200)) {
 		*(fcn_0054ee10_Stamp*) (t + 0x52) = (*(fcn_0054ee10_Stamp*)&g_7f4c00);
 		fcn_00500bb0((fcn_0054ee10_Stamp*) (t + 0x52), 0, 2, 0);
 		*(int*) (t + 0x84) = fcn_004c5620(-1, t);
@@ -56,37 +56,37 @@ void __cdecl fcn_0054ee10(char* t)
 	if (*(int*) (t + 0xb4) != 0) {
 		fcn_00500bb0((fcn_0054ee10_Stamp*) (t + 0x52), 0x18, 0, 0);
 		*(int*) (t + 0x58) = 0;
-		if (b[2] == 6 || b[2] == 7) {
-			io_FormatTextBuffer(buf, 0x1e18, *(unsigned short*) a);
-			fcn_00545d40(*(int*) (b + 4), -1, buf, 0, 0x5fb, g_6a5af4);
+		if (secondEntity[2] == 6 || secondEntity[2] == 7) {
+			io_FormatTextBuffer(buf, 0x1e18, *(unsigned short*) firstEntity);
+			fcn_00545d40(*(int*) (secondEntity + 4), -1, buf, 0, 0x5fb, g_6a5af4);
 		}
-		r = -4;
+		impactValue = -4;
 	} else {
 		fcn_00500bb0((fcn_0054ee10_Stamp*) (t + 0x52), 0x60, 0, 0);
 		*(int*) (t + 0x58) = 0;
-		r = -2;
-		if (b[2] == 6 || b[2] == 7) {
-			io_FormatTextBuffer(buf, 0x1d5b, *(unsigned short*) a, *(unsigned short*) a);
-			fcn_00545d40(*(int*) (b + 4), -1, buf, 0, 0x5fb, g_6a5ae0);
+		impactValue = -2;
+		if (secondEntity[2] == 6 || secondEntity[2] == 7) {
+			io_FormatTextBuffer(buf, 0x1d5b, *(unsigned short*) firstEntity, *(unsigned short*) firstEntity);
+			fcn_00545d40(*(int*) (secondEntity + 4), -1, buf, 0, 0x5fb, g_6a5ae0);
 		}
 		id = -1;
-		if (*(char**) (a + 0x170) != 0)
-			id = *(int*) (*(char**) (a + 0x170) + 1);
-		else if (*(char**) (b + 0x170) != 0)
-			id = *(int*) (*(char**) (b + 0x170) + 1);
-		fcn_004f4f60(0x16, 1, *(int*) (a + 4), *(int*) (b + 4), id);
-		fcn_004c54c0(*(int*) (a + 4), *(int*) (b + 4), 0x34, 1);
-		n = fcn_004f6470(*(int*) (b + 4), ids, *(unsigned short*) a);
+		if (*(char**) (firstEntity + 0x170) != 0)
+			id = *(int*) (*(char**) (firstEntity + 0x170) + 1);
+		else if (*(char**) (secondEntity + 0x170) != 0)
+			id = *(int*) (*(char**) (secondEntity + 0x170) + 1);
+		fcn_004f4f60(0x16, 1, *(int*) (firstEntity + 4), *(int*) (secondEntity + 4), id);
+		fcn_004c54c0(*(int*) (firstEntity + 4), *(int*) (secondEntity + 4), 0x34, 1);
+		n = fcn_004f6470(*(int*) (secondEntity + 4), ids, *(unsigned short*) firstEntity);
 		fcn_00508cf0(n < 0x10 ? n : 0x10, pick);
 		for (i = 0; i < 3; i++, n--) {
 			if (n == 0)
 				break;
-			fcn_004c58f0(ids[pick[i]], *(int*) (a + 4), 0);
+			fcn_004c58f0(ids[pick[i]], *(int*) (firstEntity + 4), 0);
 		}
-		if (a[2] == 6)
-			fcn_004b4650(a, 0xb);
+		if (firstEntity[2] == 6)
+			fcn_004b4650(firstEntity, 0xb);
 	}
-	fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0x100, 0);
-	fcn_004c5420(*(int*) (b + 4), 0x1c8, 4, 0x200, 0);
-	fcn_004c6ae0(*(int*) (a + 4), r);
+	fcn_004c5420(*(int*) (firstEntity + 4), 0x1c8, 4, 0x100, 0);
+	fcn_004c5420(*(int*) (secondEntity + 4), 0x1c8, 4, 0x200, 0);
+	fcn_004c6ae0(*(int*) (firstEntity + 4), impactValue);
 }

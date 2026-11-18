@@ -31,7 +31,7 @@ int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int 
 
 int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused);
 /* ADDRESS: GOLDTL 0x00476620 */
-void __cdecl fcn_00476620(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
+void __cdecl fcn_00476620(int x, int y, int width, int height, int src, int sx, int sy, int dst)
 {
-	fcn_004763e0(a1, a2, a3, a4, a5, a6, a7, a8, 0);
+	fcn_004763e0(x, y, width, height, src, sx, sy, dst, 0);
 }

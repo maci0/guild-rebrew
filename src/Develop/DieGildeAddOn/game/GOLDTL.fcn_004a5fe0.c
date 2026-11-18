@@ -6,7 +6,7 @@ int __cdecl fcn_005cfb00(unsigned short* a0, int* a1, int a2);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x004a5fe0 */
-int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, float a5, int a6, int* a7)
+int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, float a5, int maxCount, int* entityIds)
 {
 	int flag;
 	int step;
@@ -29,7 +29,7 @@ int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, f
 	}
 	i = 0x100;
 	idx = gm_RandomMod(0x100);
-	limit = a6 & 0xff;
+	limit = maxCount & 0xff;
 	count = 0;
 	if (limit > 0) {
 		do {
@@ -49,7 +49,7 @@ int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, f
 					goto next;
 				}
 			}
-			a7[count] = *(int*) (ent + 1);
+			entityIds[count] = *(int*) (ent + 1);
 			count++;
 next:
 			i--;

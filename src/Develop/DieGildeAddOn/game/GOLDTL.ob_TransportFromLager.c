@@ -36,7 +36,7 @@ void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
 int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
                                   float a5, int a6, int a7)
 {
-	int* p;
+	int* stockSlot;
 
 	int query;
 	char* type;
@@ -58,147 +58,147 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 	fcn_004c44a0();
 	{
 		int count;
-		float v11;
+		float unitPrice;
 		float countf;
 		float prod;
 		float scale;
-	p = (int*)0x7796e0;
+	stockSlot = (int*)0x7796e0;
 	do {
-		if (p[4] != -1 && fcn_00471f80(p[4])) {
-			count = fcn_00471f80(p[4]);
+		if (stockSlot[4] != -1 && fcn_00471f80(stockSlot[4])) {
+			count = fcn_00471f80(stockSlot[4]);
 			if (!a4) {
 				if (query) {
-					count = fcn_0050e170(query, *p, count);
+					count = fcn_0050e170(query, *stockSlot, count);
 				}
 			} else {
-				count = gm_CheckInventoryCapacity((char*)a4, *p, count);
+				count = gm_CheckInventoryCapacity((char*)a4, *stockSlot, count);
 			}
 			if (count > 0) {
 				if (a3) {
 					if (*type == '\n') {
-						v11 = fcn_0050bb50(*p, a6) * *(double*)0x664ef8;
+						unitPrice = fcn_0050bb50(*stockSlot, a6) * *(double*)0x664ef8;
 					} else {
-						v11 = fcn_0050bb50(*p, a6) * *(float*)(a2 + 0x49);
+						unitPrice = fcn_0050bb50(*stockSlot, a6) * *(float*)(a2 + 0x49);
 					}
 					if (a7 == 2 || a7 == 4) {
-						v11 = fcn_0050bb50(*p, *(char*)(a2 + 0x65));
+						unitPrice = fcn_0050bb50(*stockSlot, *(char*)(a2 + 0x65));
 					}
 				} else {
-					v11 = 0.0f;
+					unitPrice = 0.0f;
 				}
 				countf = (float)count;
-				prod = countf * v11;
+				prod = countf * unitPrice;
 				scale = flt_1 / a5;
 				if (fcn_00526010(g_slot_table + g_774970 * 0x21c,
-				                 (int)(scale * prod), a6) && p[0xc] >= 0) {
+				                 (int)(scale * prod), a6) && stockSlot[0xc] >= 0) {
 					n = fcn_0050b750(1, a6);
-					if (abs((int)(scale * countf * v11 - prod)) < n) {
+					if (abs((int)(scale * countf * unitPrice - prod)) < n) {
 						a5 = 1.0f;
 					}
 					if (a7 & 8) {
 						if (a4) {
-							if (!fcn_0057eba0(0x29, (int)a2, 0, *p)) {
+							if (!fcn_0057eba0(0x29, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
-							fcn_0057e880(0x29, (int)a2, 0, *p);
+							fcn_0057e880(0x29, (int)a2, 0, *stockSlot);
 						} else {
-							if (!fcn_0057eba0(0x27, (int)a2, 0, *p)) {
+							if (!fcn_0057eba0(0x27, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
-							fcn_0057e880(0x27, (int)a2, 0, *p);
+							fcn_0057e880(0x27, (int)a2, 0, *stockSlot);
 						}
 					} else if (a7 & 1) {
 						if (a4) {
-							if (!fcn_0057eba0(0x2a, (int)a2, 0, *p)) {
+							if (!fcn_0057eba0(0x2a, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
-							fcn_0057e880(0x2a, (int)a2, 0, *p);
+							fcn_0057e880(0x2a, (int)a2, 0, *stockSlot);
 						} else {
-							if (!fcn_0057eba0(0x25, (int)a2, 0, *p)) {
+							if (!fcn_0057eba0(0x25, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
-							fcn_0057e880(0x25, (int)a2, 0, *p);
+							fcn_0057e880(0x25, (int)a2, 0, *stockSlot);
 						}
 					}
-					fcn_004c51f0(a0, *(int*)(a1 + 2), *p, count, a6,
-					             (int)(v11 / a5));
-					if (v11 != g_6628a8 && a5 != dbl_1_0) {
+					fcn_004c51f0(a0, *(int*)(a1 + 2), *stockSlot, count, a6,
+					             (int)(unitPrice / a5));
+					if (unitPrice != g_6628a8 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
 						fcn_00533a40(buf);
 						fcn_004234e0(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}
-					d2_SetElementValue(p[4], 0, p[0xc],
-					                   fcn_00471f80(p[4]) - count, 0);
+					d2_SetElementValue(stockSlot[4], 0, stockSlot[0xc],
+					                   fcn_00471f80(stockSlot[4]) - count, 0);
 				}
 			}
 		}
 next:
-		p += 0xe;
-	} while ((int)p < 0x7798a0);
-	p = (int*)0x778da0;
+		stockSlot += 0xe;
+	} while ((int)stockSlot < 0x7798a0);
+	stockSlot = (int*)0x778da0;
 	do {
-		if (p[4] != -1 && fcn_00471f80(p[4])) {
-			count = fcn_00471f80(p[4]);
+		if (stockSlot[4] != -1 && fcn_00471f80(stockSlot[4])) {
+			count = fcn_00471f80(stockSlot[4]);
 			if (!a4) {
-				count = fcn_0050e170(query, *p, count);
+				count = fcn_0050e170(query, *stockSlot, count);
 			} else {
-				count = gm_CheckInventoryCapacity((char*)a4, *p, count);
+				count = gm_CheckInventoryCapacity((char*)a4, *stockSlot, count);
 			}
 			if (count > 0) {
 				if (a3) {
-					v11 = fcn_0050bb50(*p, a6) * *(float*)(a2 + 0x49);
+					unitPrice = fcn_0050bb50(*stockSlot, a6) * *(float*)(a2 + 0x49);
 				} else {
-					v11 = 0.0f;
+					unitPrice = 0.0f;
 				}
 				countf = (float)count;
-				prod = countf * v11;
+				prod = countf * unitPrice;
 				scale = flt_1 / a5;
 				if (fcn_00526010(g_slot_table + g_774970 * 0x21c,
-				                 (int)(scale * prod), a6) && p[0xc] >= 0) {
+				                 (int)(scale * prod), a6) && stockSlot[0xc] >= 0) {
 					n = fcn_0050b750(1, a6);
-					if (abs((int)(scale * countf * v11 - prod)) < n) {
+					if (abs((int)(scale * countf * unitPrice - prod)) < n) {
 						a5 = 1.0f;
 					}
 					if (a7 & 8) {
 						if (a4) {
-							if (!fcn_0057eba0(0x29, (int)a2, 0, *p)) {
+							if (!fcn_0057eba0(0x29, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
-							fcn_0057e880(0x29, (int)a2, 0, *p);
+							fcn_0057e880(0x29, (int)a2, 0, *stockSlot);
 						} else {
-							if (!fcn_0057eba0(0x27, (int)a2, 0, *p)) {
+							if (!fcn_0057eba0(0x27, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
-							fcn_0057e880(0x27, (int)a2, 0, *p);
+							fcn_0057e880(0x27, (int)a2, 0, *stockSlot);
 						}
 					} else if (a7 & 1) {
 						if (a4) {
-							if (!fcn_0057eba0(0x2a, (int)a2, 0, *p)) {
+							if (!fcn_0057eba0(0x2a, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
-							fcn_0057e880(0x2a, (int)a2, 0, *p);
+							fcn_0057e880(0x2a, (int)a2, 0, *stockSlot);
 						} else {
-							if (!fcn_0057eba0(0x25, (int)a2, 0, *p)) {
+							if (!fcn_0057eba0(0x25, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
-							fcn_0057e880(0x25, (int)a2, 0, *p);
+							fcn_0057e880(0x25, (int)a2, 0, *stockSlot);
 						}
 					}
-					fcn_004c51f0(a0, *(int*)(a1 + 2), *p, count, a6,
-					             (int)(v11 / a5));
-					if (v11 != g_6628a8 && a5 != dbl_1_0) {
+					fcn_004c51f0(a0, *(int*)(a1 + 2), *stockSlot, count, a6,
+					             (int)(unitPrice / a5));
+					if (unitPrice != g_6628a8 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
 						fcn_00533a40(buf);
 						fcn_004234e0(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}
-					d2_SetElementValue(p[4], 0, p[0xc],
-					                   fcn_00471f80(p[4]) - count, 0);
+					d2_SetElementValue(stockSlot[4], 0, stockSlot[0xc],
+					                   fcn_00471f80(stockSlot[4]) - count, 0);
 				}
 			}
 		}
 next2:
-		p += 0xe;
-	} while ((int)p < 0x779120);
+		stockSlot += 0xe;
+	} while ((int)stockSlot < 0x779120);
 	}
 	fcn_004c44b0();
 	while (!fcn_004c44c0()) {

@@ -4,21 +4,21 @@ extern int g_6b7d7c;
 
 int __cdecl fcn_0042a920(int, int);
 
-int __cdecl fcn_00423890(int* a1, int a2)
+int __cdecl fcn_00423890(int* state, int value)
 {
 	int r;
 
 	r = g_6b7d7c;
 	if (r != 0) {
-		if (a1 != 0) {
-			if (a2 >= 0 && a2 <= 0x7f) {
-				if (a1[9] != a2) {
-					a1[9] = a2;
-					return fcn_0042a920(a1[0], a2);
+		if (state != 0) {
+			if (value >= 0 && value <= 0x7f) {
+				if (state[9] != value) {
+					state[9] = value;
+					return fcn_0042a920(state[0], value);
 				}
-				return a2;
+				return value;
 			}
-			return a2;
+			return value;
 		}
 	}
 	return r;

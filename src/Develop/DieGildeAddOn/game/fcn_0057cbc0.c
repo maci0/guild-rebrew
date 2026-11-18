@@ -2,7 +2,7 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 
 extern char g_7f4ca0[];
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6b5c60[];
 extern char g_6a80c0[];
 

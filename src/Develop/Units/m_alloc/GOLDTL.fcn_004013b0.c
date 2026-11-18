@@ -8,11 +8,13 @@ int __cdecl fcn_004013b0(void* a1, int* a2, void* a3)
 {
 	void* p;
 	void* stream;
+	int size;
 
 	stream = a1;
-	fcn_004011f0(stream, (int*) &a1);
-	p = m_alloc((int) a1, a3);
+	size = (int) a1;
+	fcn_004011f0(stream, &size);
+	p = m_alloc(size, a3);
 	*a2 = (int) p;
-	vfs_ReadData(p, (int) a1, 1, stream);
-	return (int) a1;
+	vfs_ReadData(p, size, 1, stream);
+	return size;
 }

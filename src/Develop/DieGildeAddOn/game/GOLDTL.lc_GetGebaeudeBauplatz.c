@@ -1,6 +1,6 @@
 #include "client_placement.h"
 
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_633444;
 extern int g_67a370;
 extern char s_6aa1b4[];

@@ -4,26 +4,26 @@ int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, 
 int __cdecl fcn_004a4550(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x0049ef30 */
-int __cdecl ai_ScoreChangeProfession(float* o1, float* o2, int a3, char* e, int skip, int a6, int a7)
+int __cdecl ai_ScoreChangeProfession(float* firstScore, float* secondScore, int a3, char* e, int skip, int a6, int a7)
 {
 	int n;
 
-	*o1 = -100.0f;
-	*o2 = -100.0f;
+	*firstScore = -100.0f;
+	*secondScore = -100.0f;
 	if (skip) {
-		*o1 = -1.0e30f;
-		*o2 = -1.0e30f;
+		*firstScore = -1.0e30f;
+		*secondScore = -1.0e30f;
 	} else if (e[2] == 5 && !e[0x169]) {
 		n = gm_GetOppositeStatIndex(*(unsigned char*) (e + 0x164));
 		if (n >= 3) {
 			if (n < 6) {
 				if (gm_RandomMod(n - 1)) {
-					return fcn_004a4410(o1, o2, a3, e, 0, a6, a7);
+					return fcn_004a4410(firstScore, secondScore, a3, e, 0, a6, a7);
 				}
 			} else {
-				fcn_004a4550(o1, o2, a3, e, 0, a6, a7);
-				*o1 = *o1 + *o1;
-				*o2 = *o2 * 3.0f;
+				fcn_004a4550(firstScore, secondScore, a3, e, 0, a6, a7);
+				*firstScore = *firstScore + *firstScore;
+				*secondScore = *secondScore * 3.0f;
 				return 1;
 			}
 		}

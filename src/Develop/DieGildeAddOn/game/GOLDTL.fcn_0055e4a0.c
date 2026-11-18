@@ -44,11 +44,11 @@ void __cdecl fcn_0055e4a0(char* ev)
 {
 	char buf[1024];
 	char key[260];
-	float v13[4];
+	float position[4];
 	char v10[4];
 	int n7;
-	unsigned int v11;
-	unsigned int v12;
+	unsigned int cellY;
+	unsigned int cellX;
 	char* v6;
 	char* v7;
 	unsigned char* v8;
@@ -84,8 +84,8 @@ void __cdecl fcn_0055e4a0(char* ev)
 		fcn_004432d0(n7, 1);
 		if (fcn_0055d630(0)) {
 			idx = g_1043370[n7 * 247];
-			if (idx != 0 && fcn_0045b990(idx, v13, (int*) &v12, (int*) &v11, (float*) v10)) {
-				fcn_004c5b50(*(int*) (e + 2), v12, v11, n7);
+			if (idx != 0 && fcn_0045b990(idx, position, (int*) &cellX, (int*) &cellY, (float*) v10)) {
+				fcn_004c5b50(*(int*) (e + 2), cellX, cellY, n7);
 			}
 		}
 		fcn_004c5420(*(int*) (e + 2), 0x13, 1, 0, 0x40);

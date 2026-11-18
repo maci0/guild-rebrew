@@ -23,7 +23,7 @@ extern unsigned char g_772f5a;
 extern unsigned char g_772f5b;
 extern unsigned char g_772f5c;
 extern unsigned char g_772f5d;
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_68bfc0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_9afde0;

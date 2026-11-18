@@ -20,9 +20,9 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     int v3;
     unsigned int v4;
     unsigned int v5;
-    char *v6;
-    char *v10;
-    char v1;
+    char *nameDest;
+    char *nameCursor;
+    char copiedChar;
     char *q; int record;
 
     fcn_00426680(*(unsigned int *)(g_6b7e98 + 0x118), &tok.status);
@@ -31,10 +31,10 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     v2 = 0;
     do
     {
-        v1 = ((char *) tok.data)[v2];
-        name[v2] = v1;
+        copiedChar = ((char *) tok.data)[v2];
+        name[v2] = copiedChar;
         v2++;
-    } while (v1);
+    } while (copiedChar);
     fcn_00426680(*(unsigned int *)(g_6b7e98 + 0x118), &tok.status);
     v2 = a0;
     if (tok.status != 1)
@@ -72,15 +72,15 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
             return 0;
         v5 = fcn_0064e790(v4, 0x7b);
         *(unsigned int *)(*(int *)(v2 + 0x10c) - 300 + *(int *)(v2 + 0x110) * 0x14c) = v5;
-        v10 = name;
-        v6 = (char *)(*(int *)(v2 + 0x10c) - 0x14c + *(int *)(v2 + 0x110) * 0x14c);
+        nameCursor = name;
+        nameDest = (char *)(*(int *)(v2 + 0x10c) - 0x14c + *(int *)(v2 + 0x110) * 0x14c);
         do
         {
-            v1 = *v10;
-            v10++;
-            *v6 = v1;
-            v6++;
-        } while (v1);
+            copiedChar = *nameCursor;
+            nameCursor++;
+            *nameDest = copiedChar;
+            nameDest++;
+        } while (copiedChar);
         *(unsigned int *)(g_6b7e98 + 0x118) = v4;
         return 1;
     }

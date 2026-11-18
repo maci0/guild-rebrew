@@ -35,7 +35,7 @@ void __cdecl fcn_00584160(int);
 /* ADDRESS: GOLDTL 0x0057e0a0 */
 int __cdecl fcn_0057e0a0(void)
 {
-	void (__cdecl *cb)(int); int* cues; unsigned int deadline;
+	void (__cdecl *cb)(int); int* cues; unsigned int deadline; int cue_ready;
 
 	if (g_774a14 == 0) {
 		return -4;
@@ -175,8 +175,9 @@ label7:
 		return 0;
 	case 6:
 		cues = *(int**)((int)g_665f08[6] + 0x58); deadline = (unsigned int) cues[g_665f08[0x10] * 4] + (unsigned int) g_665f08[3];
-		g_6b7fc0 = deadline <= ((unsigned int) g_6b7fac);
-		fcn_00472640(g_665f08[0x13], g_6b7fc0);
+		cue_ready = deadline <= ((unsigned int) g_6b7fac);
+		g_6b7fc0 = cue_ready;
+		fcn_00472640(g_665f08[0x13], cue_ready);
 		if (fcn_00580960() != 1) {
 			break;
 		}

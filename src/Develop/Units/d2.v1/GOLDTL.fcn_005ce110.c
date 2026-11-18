@@ -19,10 +19,10 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 	char rec[0x90];
 	char* s;
 	char* v5;
-	char* v6;
+	char* otherEntity;
 	unsigned short* h;
 	unsigned short* pick[4];
-	int v8;
+	int dialog;
 	int v9;
 	int n;
 	int i;
@@ -36,40 +36,40 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 	if (n <= 0) {
 		return;
 	}
-	v8 = fcn_00470820(0, 0, "special\\tagesordnung");
-	fcn_00471b60(v8);
-	d2_SetForm(v8, 2);
+	dialog = fcn_00470820(0, 0, "special\\tagesordnung");
+	fcn_00471b60(dialog);
+	d2_SetForm(dialog, 2);
 	w = g_772514;
-	d2_SetForm(v8, 4);
+	d2_SetForm(dialog, 4);
 	fcn_0046e830(0xffffffff, 0xffffffff, g_772514, w, 0x767);
-	d2_SetForm(v8, 3);
+	d2_SetForm(dialog, 3);
 	w = g_772514;
-	d2_SetForm(v8, 5);
+	d2_SetForm(dialog, 5);
 	fcn_0046e830(0xffffffff, 0xffffffff, g_772514, w, 0x767);
-	d2_SetForm(v8, 1);
+	d2_SetForm(dialog, 1);
 	io_AppendText(a0 + 0x13a3);
-	d2_SetForm(v8, 2);
+	d2_SetForm(dialog, 2);
 	io_AppendText(0x139e);
 	found = 0;
 	for (i = 0; i < n; i++) {
 		if (rec[i * 0x18 + 0x10] == 2) {
 			s = (char*) gm_LookupEntityRecordById(*(int*) (rec + i * 0x18 + 4));
-			v6 = (char*) gm_LookupEntityRecordById(*(int*) (rec + i * 0x18 + 0x14));
-			if (s != 0 && v6 != 0) {
+			otherEntity = (char*) gm_LookupEntityRecordById(*(int*) (rec + i * 0x18 + 0x14));
+			if (s != 0 && otherEntity != 0) {
 				found |= 1;
 				if (*(char*) (s + 9) == 0) {
 					v9 = *(unsigned char*) (rec + i * 0x18 + 8) + 0x253;
 				} else {
 					v9 = *(unsigned char*) (rec + i * 0x18 + 8) + 0x27b;
 				}
-				io_AppendText(0x139f, *(unsigned short*) v6, *(unsigned short*) s, v9);
+				io_AppendText(0x139f, *(unsigned short*) otherEntity, *(unsigned short*) s, v9);
 			}
 		}
 	}
 	if (found == 0) {
 		io_AppendText(0x139d);
 	}
-	d2_SetForm(v8, 3);
+	d2_SetForm(dialog, 3);
 	if (a0 < 8) {
 		io_AppendText(0x13a0);
 		any = 0;
@@ -145,5 +145,5 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 			*(int*) 0x774654 = 1;
 		}
 	} while (fcn_005373e0((void*) fcn_005ce0f0, 0x657c7) != 0);
-	fcn_00471e30(v8);
+	fcn_00471e30(dialog);
 }

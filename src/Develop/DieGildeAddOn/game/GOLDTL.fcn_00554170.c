@@ -11,7 +11,7 @@ extern int __cdecl fcn_004c5620(int, char*);
 extern char* __cdecl fcn_005463a0(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern unsigned short __cdecl gm_RandomMod(unsigned short);
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int __cdecl fcn_004c4450(int);
 extern char* __cdecl fcn_004c4480(int);
 extern int __cdecl cut_FindCutsceneById(int);

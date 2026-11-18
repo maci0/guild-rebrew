@@ -58,7 +58,7 @@ extern int g_67a374;
 extern int g_6b805c;
 extern unsigned char g_6b7ff8;
 extern char g_6b8018;
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_1052bbc;
 extern float g_10432a4;
 extern float g_1052bc4;

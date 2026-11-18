@@ -8,7 +8,7 @@ struct room_4066d0 {
 };
 
 extern char g_1043370[];
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00413190(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"

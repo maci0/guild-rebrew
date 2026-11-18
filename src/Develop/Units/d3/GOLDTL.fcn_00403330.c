@@ -5,7 +5,7 @@
 
 
 extern void* g_14d0020[];
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b5c34;
 int __cdecl fcn_00413190(int p);
 void __cdecl fcn_004432d0(int a, int b);

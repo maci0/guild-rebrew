@@ -24,36 +24,36 @@ void __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
 void __cdecl fcn_0054b150(char* entity)
 {
 	char buf[0x200];
-	char* v2;
-	char* v3;
+	char* firstEntity;
+	char* secondEntity;
 	char* p;
 	int v4;
 
-	v2 = gm_LookupEntityRecordById(*(int*) (entity + 0xac));
-	v3 = gm_LookupEntityRecordById(*(int*) (entity + 0xb0));
+	firstEntity = gm_LookupEntityRecordById(*(int*) (entity + 0xac));
+	secondEntity = gm_LookupEntityRecordById(*(int*) (entity + 0xb0));
 	*(int*) (entity + 0x84) = -1;
 	if ((entity[0x78] & 2) == 0) {
 		return;
 	}
-	if (v2 == 0 || v3 == 0) {
+	if (firstEntity == 0 || secondEntity == 0) {
 		*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
 		fcn_004c5620(-1, (unsigned char*) entity);
 	}
 	*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
 	fcn_00500bb0((SIM_CLOCK*) (entity + 0x52), 0x30, 0, 0);
 	fcn_004c5620(0, (unsigned char*) entity);
-	fcn_004c54c0(*(int*) (v3 + 4), *(int*) (v2 + 4), -0x14, 1);
-	if (v2[2] == 6 || v2[2] == 7) {
-		io_FormatTextBuffer(buf, 0x175a, *(unsigned short*) v3, *(unsigned short*) v3);
-		fcn_00545d40(*(int*) (v2 + 4), -1, buf, 0, 0x5fb, (char*) 0x6b5c60);
+	fcn_004c54c0(*(int*) (secondEntity + 4), *(int*) (firstEntity + 4), -0x14, 1);
+	if (firstEntity[2] == 6 || firstEntity[2] == 7) {
+		io_FormatTextBuffer(buf, 0x175a, *(unsigned short*) secondEntity, *(unsigned short*) secondEntity);
+		fcn_00545d40(*(int*) (firstEntity + 4), -1, buf, 0, 0x5fb, (char*) 0x6b5c60);
 	}
 	v4 = -1;
-	p = *(char**) (v3 + 0x170);
+	p = *(char**) (secondEntity + 0x170);
 	if (p != 0) {
 		v4 = *(int*) (p + 1);
 	}
 	else {
-		p = *(char**) (v2 + 0x170);
+		p = *(char**) (firstEntity + 0x170);
 		if (p != 0) {
 			v4 = *(int*) (p + 1);
 		}

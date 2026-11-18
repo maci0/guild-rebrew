@@ -18,7 +18,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_0050d320(char*, unsigned char);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00588200 */
-void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
+void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 {
 	int level;
 	int percent;
@@ -30,42 +30,42 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	float f;
 	char text[64];
 
-	level = fcn_00471f80(*(int*) (a1 + 0xb0));
-	percent = fcn_00471f80(*(int*) (a1 + 0xb4));
+	level = fcn_00471f80(*(int*) (panel + 0xb0));
+	percent = fcn_00471f80(*(int*) (panel + 0xb4));
 	f = fcn_004f0eb0(level, percent, 1);
-	fcn_004f10d0(a0, (int*) (a1 + 0xdc), (int*) (a1 + 0xe0));
-	max = *(int*) (a1 + 0xe0);
+	fcn_004f10d0(obj, (int*) (panel + 0xdc), (int*) (panel + 0xe0));
+	max = *(int*) (panel + 0xe0);
 	if (max < level) {
 		level = max;
 	}
-	fcn_00472380(*(int*) (a1 + 0xb0), 0, max, level);
-	fcn_00472640(*(int*) (a1 + 0xcc), 1 <= *(int*) (a1 + 0xdc));
-	fcn_00472640(*(int*) (a1 + 0xd0), 2 <= *(int*) (a1 + 0xdc));
-	*(int*) (*(int*) &g_1015ea0 + 0x3c + *(int*) (a1 + 0xc8) * 0x2f4) =
-	    *(int*) (a1 + 0xa0) == 0;
-	*(int*) (*(int*) &g_1015ea0 + 0x3c + *(int*) (a1 + 0xcc) * 0x2f4) =
-	    *(int*) (a1 + 0xa0) == 1;
-	*(int*) (*(int*) &g_1015ea0 + 0x3c + *(int*) (a1 + 0xd0) * 0x2f4) =
-	    *(int*) (a1 + 0xa0) == 2;
-	*(int*) (*(int*) &g_1015ea0 + 0x38 + *(int*) (a1 + 0xc8) * 0x2f4) =
-	    *(int*) (a1 + 0xa0) == 0;
-	*(int*) (*(int*) &g_1015ea0 + 0x38 + *(int*) (a1 + 0xcc) * 0x2f4) =
-	    *(int*) (a1 + 0xa0) == 1;
-	*(int*) (*(int*) &g_1015ea0 + 0x38 + *(int*) (a1 + 0xd0) * 0x2f4) =
-	    *(int*) (a1 + 0xa0) == 2;
+	fcn_00472380(*(int*) (panel + 0xb0), 0, max, level);
+	fcn_00472640(*(int*) (panel + 0xcc), 1 <= *(int*) (panel + 0xdc));
+	fcn_00472640(*(int*) (panel + 0xd0), 2 <= *(int*) (panel + 0xdc));
+	*(int*) (*(int*) &g_1015ea0 + 0x3c + *(int*) (panel + 0xc8) * 0x2f4) =
+	    *(int*) (panel + 0xa0) == 0;
+	*(int*) (*(int*) &g_1015ea0 + 0x3c + *(int*) (panel + 0xcc) * 0x2f4) =
+	    *(int*) (panel + 0xa0) == 1;
+	*(int*) (*(int*) &g_1015ea0 + 0x3c + *(int*) (panel + 0xd0) * 0x2f4) =
+	    *(int*) (panel + 0xa0) == 2;
+	*(int*) (*(int*) &g_1015ea0 + 0x38 + *(int*) (panel + 0xc8) * 0x2f4) =
+	    *(int*) (panel + 0xa0) == 0;
+	*(int*) (*(int*) &g_1015ea0 + 0x38 + *(int*) (panel + 0xcc) * 0x2f4) =
+	    *(int*) (panel + 0xa0) == 1;
+	*(int*) (*(int*) &g_1015ea0 + 0x38 + *(int*) (panel + 0xd0) * 0x2f4) =
+	    *(int*) (panel + 0xa0) == 2;
 	rec = fcn_004f0ff0((char*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0), level,
-	                   percent, *(int*) (a1 + 0xa0) + 1, (int*) &v1, (int*) &v2);
-	show = *(float*) (a1 + 0x20) <= *(float*) &g_662910 && rec != 0 &&
-	       *(float*) (a2 + 8 + *(int*) (a1 + 0xa0) * 4) >= f &&
+	                   percent, *(int*) (panel + 0xa0) + 1, (int*) &v1, (int*) &v2);
+	show = *(float*) (panel + 0x20) <= *(float*) &g_662910 && rec != 0 &&
+	       *(float*) (a2 + 8 + *(int*) (panel + 0xa0) * 4) >= f &&
 	       (*(unsigned char*) (a2 + 4) & 2) == 0;
-	fcn_00472640(*(int*) (a1 + 0xb8), show);
-	fcn_00472640(*(int*) (a1 + 0xbc),
+	fcn_00472640(*(int*) (panel + 0xb8), show);
+	fcn_00472640(*(int*) (panel + 0xbc),
 	             (~*(unsigned int*) (a2 + 4) >> 1) & 1);
-	fcn_00472380(*(int*) (a1 + 0xa8), 0, 100, (int) (fcn_005e8860() * 100.0f), 1);
-	fcn_00472380(*(int*) (a1 + 0xac), 0, 100, (int) (fcn_00580070((float*) a1) * 100.0f), 1);
-	fcn_00472380(*(int*) (a1 + 0xc4), 0, 100,
-	             (int) (*(float*) (a2 + 8 + *(int*) (a1 + 0xa0) * 4) * 100.0f), 1);
-	d2_SetForm(*(int*) (a1 + 0xc0), 2);
+	fcn_00472380(*(int*) (panel + 0xa8), 0, 100, (int) (fcn_005e8860() * 100.0f), 1);
+	fcn_00472380(*(int*) (panel + 0xac), 0, 100, (int) (fcn_00580070((float*) panel) * 100.0f), 1);
+	fcn_00472380(*(int*) (panel + 0xc4), 0, 100,
+	             (int) (*(float*) (a2 + 8 + *(int*) (panel + 0xa0) * 4) * 100.0f), 1);
+	d2_SetForm(*(int*) (panel + 0xc0), 2);
 	io_AppendText(0x6811b0);
 	rec = fcn_0046fac0(0, 0xf, *(char**) 0x14b54c0, *(int*) &g_772514);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
@@ -96,8 +96,8 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	fcn_00472900(rec, 0x54);
 	*(int*) 0x9a9214 = level;
 	*(int*) 0x9a9218 = percent;
-	*(int*) 0x9a921c = *(int*) (a1 + 0xa0);
-	*(int*) 0x9a9208 = *(int*) (a1 + 0x10);
-	*(int*) 0x9a920c = *(int*) (a1 + 0x14);
-	*(int*) 0x9a9210 = *(int*) (a1 + 0x18);
+	*(int*) 0x9a921c = *(int*) (panel + 0xa0);
+	*(int*) 0x9a9208 = *(int*) (panel + 0x10);
+	*(int*) 0x9a920c = *(int*) (panel + 0x14);
+	*(int*) 0x9a9210 = *(int*) (panel + 0x18);
 }

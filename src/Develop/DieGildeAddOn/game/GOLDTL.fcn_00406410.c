@@ -17,7 +17,7 @@ struct anim_406410 {
 };
 
 
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 struct anim_406410* __cdecl ch_AttachAni(char* obj, char* name, int mode);
 void __cdecl fcn_00436a00(int h, struct anim_406410* a, int n);

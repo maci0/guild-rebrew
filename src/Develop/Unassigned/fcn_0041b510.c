@@ -6,7 +6,7 @@ extern int g_14ce860;
 extern int g_14ce864;
 
 /* ADDRESS: GOLDTL 0x0041b510 */
-void __cdecl fcn_0041b510(int a1, int a2, int a3, int a4, int a5, int a6)
+void __cdecl fcn_0041b510(int viewportX, int viewportY, int a3, int a4, int a5, int a6)
 {
 	int vp[4];
 	unsigned int packed;
@@ -16,8 +16,8 @@ void __cdecl fcn_0041b510(int a1, int a2, int a3, int a4, int a5, int a6)
 	if (g_6b5de4 == 0) {
 		return;
 	}
-	vp[0] = a1;
-	vp[1] = a2;
+	vp[0] = viewportX;
+	vp[1] = viewportY;
 	vp[2] = g_14ce860 - 1;
 	vp[3] = g_14ce864 - 1;
 	obj = g_6b5de0;

@@ -13,7 +13,7 @@ struct pos14 {
 };
 #pragma pack()
 
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_005463a0(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);

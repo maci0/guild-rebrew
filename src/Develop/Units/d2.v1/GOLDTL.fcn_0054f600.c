@@ -44,25 +44,25 @@ void __cdecl fcn_004c5620(int, void*);
 /* ADDRESS: GOLDTL 0x0054f600 */
 void __cdecl fcn_0054f600(char* o)
 {
-	char* v3;
+	char* entity;
 	char* v4;
 	char* v6;
 	SEL_54f600 s;
-	int v1;
+	int state;
 
 	v6 = 0;
 	v4 = 0;
-	v3 = fcn_005463a0(1, 1, *(int*) (o + 0xac));
-	if (v3 != 0) {
-		v6 = gm_LookupEntityRecordById(*(int*) (v3 + 0xb0));
-		v4 = gm_LookupEntityRecordById(*(int*) (v3 + 0xac));
+	entity = fcn_005463a0(1, 1, *(int*) (o + 0xac));
+	if (entity != 0) {
+		v6 = gm_LookupEntityRecordById(*(int*) (entity + 0xb0));
+		v4 = gm_LookupEntityRecordById(*(int*) (entity + 0xac));
 	}
-	v1 = *(int*) (o + 0x70);
-	if (v1 != -1 && v1 != -2 && v3 != 0 && v6 != 0 && v4 != 0) {
-		switch (v1) {
+	state = *(int*) (o + 0x70);
+	if (state != -1 && state != -2 && entity != 0 && v6 != 0 && v4 != 0) {
+		switch (state) {
 		case 1:
 			if (fcn_00500cb0(&g_7f4c00, o + 0x52) > 0) {
-				fcn_0054f4a0(v3, v4, (unsigned char*) v6);
+				fcn_0054f4a0(entity, v4, (unsigned char*) v6);
 				fcn_00545780(o);
 				fcn_00546190(o);
 				return;
@@ -74,9 +74,9 @@ void __cdecl fcn_0054f600(char* o)
 				return;
 			}
 			if (g_100f1dc == 2) {
-				fcn_0054f3b0(v3, v4, v6);
+				fcn_0054f3b0(entity, v4, v6);
 			} else if (g_100f1dc == 1) {
-				fcn_0054f4a0(v3, v4, (unsigned char*) v6);
+				fcn_0054f4a0(entity, v4, (unsigned char*) v6);
 			}
 			fcn_00545780(o);
 			fcn_00546190(o);
@@ -98,8 +98,8 @@ void __cdecl fcn_0054f600(char* o)
 					((TILE_54f600*) (void*) g_1015ea0)[s.tile].owner = s.e;
 				}
 				d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 3);
-				io_AppendText(0x1d6b, (int) *(unsigned short*) (v3 + 0xb4),
-				    (int) *(unsigned short*) v4, (int) *(unsigned short*) (v3 + 0xb6),
+				io_AppendText(0x1d6b, (int) *(unsigned short*) (entity + 0xb4),
+				    (int) *(unsigned short*) v4, (int) *(unsigned short*) (entity + 0xb6),
 				    (int) *(unsigned short*) v4);
 				*(pos14_7f4c00*) (o + 0x44) = g_7f4c00;
 				*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
@@ -115,9 +115,9 @@ void __cdecl fcn_0054f600(char* o)
 		if (*(int*) (o + 0x74) != 0) {
 			fcn_00545780(o);
 		}
-		if (v3 != 0) {
-			*(pos14_7f4c00*) (v3 + 0x52) = g_7f4c00;
-			fcn_004c5620(-1, v3);
+		if (entity != 0) {
+			*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
+			fcn_004c5620(-1, entity);
 		}
 	}
 	fcn_00546190(o);

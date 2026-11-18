@@ -15,16 +15,16 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
  * addresses the 0x200 scratch buffer off ebp; section 13 of
  * archived docs/msvc6-c-shapes.md. */
 #pragma optimize("y", off)
-int __cdecl fcn_004afa10(int a1, int a2, int a3, char* a4, int a5)
+int __cdecl fcn_004afa10(int selectionMode, int a2, int a3, char* a4, int a5)
 {
 	char buf[0x200];
-	char* e = 0;
+	char* entityRecord = 0;
 	int v2 = 0;
 	int n = 0x200;
 	char* p = buf;
-	char* q;
+	char* slotCursor;
 	int i;
-	int r;
+	int parsedOption;
 	int flag;
 
 	/* The original's zero-fill is the 24-byte hand-written block-fill prelude
@@ -55,45 +55,45 @@ int __cdecl fcn_004afa10(int a1, int a2, int a3, char* a4, int a5)
 		if (len != 1) {
 			return 0;
 		}
-		r = fcn_0064eeec(a4 + (int) p);
+		parsedOption = fcn_0064eeec(a4 + (int) p);
 	}
-	if (r < 0 || r > 2) {
+	if (parsedOption < 0 || parsedOption > 2) {
 		return 0;
 	}
 	flag = 1;
-	if (r == 0) {
+	if (parsedOption == 0) {
 		flag = 0;
 	} else {
-		v2 = (r != 1);
+		v2 = (parsedOption != 1);
 	}
-	if (a1 == 1) {
-		e = (char*) gm_LookupEntityRecordById(*(int*) ((char*) a2 + a3 * 8 + 4));
-		if (e == 0 || *(unsigned char*) (e + 8) <= 0) {
+	if (selectionMode == 1) {
+		entityRecord = (char*) gm_LookupEntityRecordById(*(int*) ((char*) a2 + a3 * 8 + 4));
+		if (entityRecord == 0 || *(unsigned char*) (entityRecord + 8) <= 0) {
 			return 0;
 		}
 	} else {
 		i = 0;
-		q = g_7f4ca4;
-		while ((int) q < (int) (g_7f4ca4 + 0x65400)) {
-			if (fcn_004ae0f0(*(int*) q) != 0) {
-				e = q - 4;
-				if (flag == 0 || *(unsigned char*) (q + 5) == v2) {
+		slotCursor = g_7f4ca4;
+		while ((int) slotCursor < (int) (g_7f4ca4 + 0x65400)) {
+			if (fcn_004ae0f0(*(int*) slotCursor) != 0) {
+				entityRecord = slotCursor - 4;
+				if (flag == 0 || *(unsigned char*) (slotCursor + 5) == v2) {
 					if (fcn_004ae260(i) != 0) {
 						break;
 					}
-					e = 0;
+					entityRecord = 0;
 				}
 			}
-			q += 0x21c;
+			slotCursor += 0x21c;
 			i++;
 		}
-		if (e == 0) {
+		if (entityRecord == 0) {
 			return 0;
 		}
 	}
-	if (a1 == 0) {
-		*(int*) ((char*) a2 + a3 * 8 + 4) = *(int*) ((char*) e + 4);
+	if (selectionMode == 0) {
+		*(int*) ((char*) a2 + a3 * 8 + 4) = *(int*) ((char*) entityRecord + 4);
 	}
-	io_FormatTextBuffer((void*) a5, (int) buf, *(unsigned short*) e);
+	io_FormatTextBuffer((void*) a5, (int) buf, *(unsigned short*) entityRecord);
 	return 1;
 }

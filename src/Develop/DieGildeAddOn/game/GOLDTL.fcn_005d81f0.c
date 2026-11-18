@@ -54,7 +54,7 @@ extern void __cdecl fcn_00471e30(int);
 /* Validates the current entity action against its target and executes the
  * action's announce/notify path; returns one of the 0x10/0x20/0x60/0x81 codes. */
 /* ADDRESS: GOLDTL 0x005d81f0 */
-unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
+unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 {
 	Req5d81f0 found;
 	char text[512];
@@ -71,31 +71,31 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 	int thr;
 	int r;
 
-	if (*(unsigned char*) (a0 + 2) != 6) {
-		if (*(int*) (a0 + 0x194) < 5)
+	if (*(unsigned char*) (entity + 2) != 6) {
+		if (*(int*) (entity + 0x194) < 5)
 			return 0x20;
-		if (*a1 == 3 && (*(int*) (a0 + 0x1c8) & 0x80) == 0) {
-			other = a0;
+		if (*action == 3 && (*(int*) (entity + 0x1c8) & 0x80) == 0) {
+			other = entity;
 		} else {
-			if (*a1 != 4)
+			if (*action != 4)
 				goto fail60;
-			other = (char*) a1[0x87];
+			other = (char*) action[0x87];
 			if (other == 0)
 				goto fail60;
 			if ((*(int*) (other + 0x1c8) & 0x80) != 0)
 				goto fail60;
 		}
-		ent = gm_LookupEntityRecordById(a1[0x85]);
+		ent = gm_LookupEntityRecordById(action[0x85]);
 		if (ent == 0)
 			goto fail60;
-		rec = gm_StartFilteredEntitySearch(1, 1, a1[0x86]);
+		rec = gm_StartFilteredEntitySearch(1, 1, action[0x86]);
 		if (rec == 0)
 			goto fail60;
-		fcn_004c6ae0(*(int*) (a0 + 4), -5);
+		fcn_004c6ae0(*(int*) (entity + 4), -5);
 		fcn_004c5420(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
 		if (((Slot5d81f0*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)].kind == 6 ||
 		    ((Slot5d81f0*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)].kind == 7) {
-			io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) a0, rec, *(unsigned short*) ent);
+			io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) entity, rec, *(unsigned short*) ent);
 			fcn_00545d40(*(unsigned short*) (rec + 0x27), *(unsigned short*) (rec + 0x27),
 				text, 0, 0x5fb, (char*) 0x6a59fc);
 		}
@@ -104,12 +104,12 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 		return 0x10;
 	}
 	memset(&found, 0, sizeof(found));
-	if (*a1 == 3) {
-		other = a0;
+	if (*action == 3) {
+		other = entity;
 	} else {
-		if (*a1 != 4 || a1[0x87] == 0)
+		if (*action != 4 || action[0x87] == 0)
 			goto fail60;
-		other = (char*) a1[0x87];
+		other = (char*) action[0x87];
 	}
 	if ((*(unsigned char*) (other + 0x1c8) & 0x80) != 0) {
 		io_FormatTextBuffer(name, 0x1ce0);
@@ -140,8 +140,8 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 	do {
 		if (g_100f1dc != -1) {
 			if (g_67d370 == kid) {
-				if (fcn_00525f60(a0, 5) != 0) {
-					fcn_004c6ae0(*(int*) (a0 + 4), -5);
+				if (fcn_00525f60(entity, 5) != 0) {
+					fcn_004c6ae0(*(int*) (entity + 4), -5);
 					thr = fcn_004c5420(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
 					while (fcn_004c4450(thr) == 0) {
 						fcn_00535960();
@@ -164,7 +164,7 @@ unsigned int __cdecl fcn_005d81f0(char* a0, int* a1)
 					if (ent != 0) {
 						if (*(unsigned char*) (state_ptr + 2) == 6 ||
 						    *(unsigned char*) (state_ptr + 2) == 7) {
-							io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) a0, rec,
+							io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) entity, rec,
 								*(unsigned short*) ent);
 							fcn_00545d40(*(int*) (state_ptr + 4), *(int*) (state_ptr + 4),
 								text, 0, 0x5fb, (char*) 0x6a59fc);

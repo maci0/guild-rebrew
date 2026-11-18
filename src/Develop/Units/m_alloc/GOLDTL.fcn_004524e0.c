@@ -9,22 +9,22 @@ void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl fcn_00439e70(char* o);
 
 /* ADDRESS: GOLDTL 0x004524e0 */
-char* __cdecl fcn_004524e0(unsigned int a0, char* a1, int a2, float a3, int a4, int a5)
+char* __cdecl fcn_004524e0(unsigned int entryCount, char* assetName, int a2, float a3, int a4, int a5)
 {
 	char* s;
 	int stamp;
-	int v2;
+	int assetHandle;
 	int i;
 
 	s = 0;
-	if (a3 > 0.0 && a0 > 0) {
-		v2 = fcn_0045c5b0(a1, a2, 0, 0);
-		if (v2 != 0) {
-			fcn_0045ce90(v2);
+	if (a3 > 0.0 && entryCount > 0) {
+		assetHandle = fcn_0045c5b0(assetName, a2, 0, 0);
+		if (assetHandle != 0) {
+			fcn_0045ce90(assetHandle);
 			s = m_alloc(0x31c, (char*) 0x67bc8c);
-			*(int*) (s + 0xdc) = v2;
-			i = (v2 - g_104049c) / 0x70;
-			*(int*) (s + 0xd8) = a0;
+			*(int*) (s + 0xdc) = assetHandle;
+			i = (assetHandle - g_104049c) / 0x70;
+			*(int*) (s + 0xd8) = entryCount;
 			*(float*) (s + 0xe4) = a3;
 			*(int*) (s + 0xe0) = i;
 			*(int*) (s + 0x310) = a5;

@@ -24,19 +24,19 @@ void __cdecl fcn_004c5150(int a, int b, char c, int n);
 void __cdecl fcn_004c5530(char* msg);
 int __cdecl amt_ExecGebaeudeBauen(char* a1, char* a2, char* a3);
 
-int __cdecl ai_RunBaumeister(char* a1, char* a2, char* a3)
+int __cdecl ai_RunBaumeister(char* entity, char* a2, char* a3)
 {
 	char msg[0xf8];
 	char* b;
 
 	b = fcn_00507ab0(1);
-	if (b == 0 || (unsigned char) a1[0x166] != 0xa) {
+	if (b == 0 || (unsigned char) entity[0x166] != 0xa) {
 		goto out0;
 	}
 	if (*a3 == 4) {
 		memset(msg, 0, sizeof(msg));
 		msg[4] = 0x1e;
-		*(int*) (msg + 8) = *(int*) (a1 + 4);
+		*(int*) (msg + 8) = *(int*) (entity + 4);
 		*(int*) (msg + 0xc) = *(int*) (a3 + 4);
 		msg[0x36] = 1;
 		*(int*) (msg + 0x28) = (*(int*)&g_7f4c00);

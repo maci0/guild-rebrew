@@ -28,9 +28,9 @@ int __cdecl srv_GetEntityOfficeSlot(unsigned char*, void*, void*);
 int __cdecl fcn_004e8240(unsigned char, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004f6850 */
-void __cdecl fcn_004f6850(unsigned short* a0, int a1)
+void __cdecl fcn_004f6850(unsigned short* entity, int action)
 {
-	char v12;
+	char level;
 	int n;
 	char msg[0xf8];
 	char b9[0x144];
@@ -39,9 +39,9 @@ void __cdecl fcn_004f6850(unsigned short* a0, int a1)
 	char* pkt;
 	int* list;
 
-	n = gm_WalkEntityChain((unsigned short) a0[0]);
+	n = gm_WalkEntityChain((unsigned short) entity[0]);
 
-	switch (a1) {
+	switch (action) {
 	case 0:
 		msg[4] = 0x5c;
 		msg[0x36] = 1;
@@ -50,7 +50,7 @@ void __cdecl fcn_004f6850(unsigned short* a0, int a1)
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
 		fcn_00500bb0((Time*) (msg + 0x28), 1, 0, 0);
-		*(int*) (msg + 8) = *(int*) (a0 + 2);
+		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = 3;
 		*(int*) (msg + 0x5c) = 1;
@@ -64,7 +64,7 @@ void __cdecl fcn_004f6850(unsigned short* a0, int a1)
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
 		fcn_00500bb0((Time*) (msg + 0x28), 1, 0, 0);
-		*(int*) (msg + 8) = *(int*) (a0 + 2);
+		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = (int) ((float) n * g_6652c8);
 		*(int*) (msg + 0x5c) = 1;
@@ -78,7 +78,7 @@ void __cdecl fcn_004f6850(unsigned short* a0, int a1)
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
 		fcn_00500bb0((Time*) (msg + 0x28), 1, 0, 0);
-		*(int*) (msg + 8) = *(int*) (a0 + 2);
+		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = 3;
 		*(int*) (msg + 0x5c) = 3;
@@ -92,35 +92,35 @@ void __cdecl fcn_004f6850(unsigned short* a0, int a1)
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
 		fcn_00500bb0((Time*) (msg + 0x28), 1, 0, 0);
-		*(int*) (msg + 8) = *(int*) (a0 + 2);
+		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = (int) ((float) n * g_6652c8);
 		*(int*) (msg + 0x5c) = 4;
 		fcn_004c5530(msg);
 		return;
 	case 4:
-		fcn_004c6b20(*(int*) (a0 + 2), 1, 0);
+		fcn_004c6b20(*(int*) (entity + 2), 1, 0);
 		return;
 	case 5:
-		fcn_004e8240(((char*) a0)[0x166], 0, 0, 4, 0xff);
+		fcn_004e8240(((char*) entity)[0x166], 0, 0, 4, 0xff);
 		return;
 	case 6:
-		fcn_004c6b20(*(int*) (a0 + 2), 2, 0);
+		fcn_004c6b20(*(int*) (entity + 2), 2, 0);
 		return;
 	case 7:
-		v12 = (char) (((unsigned char*) a0)[0xd] > 2 ? 2 : 1);
-		fcn_004c4510(a0, *(int*) (a0 + 2));
-		fcn_004c4570(1, 1, 0xd, &v12);
+		level = (char) (((unsigned char*) entity)[0xd] > 2 ? 2 : 1);
+		fcn_004c4510(entity, *(int*) (entity + 2));
+		fcn_004c4570(1, 1, 0xd, &level);
 		fcn_004c5360();
 		return;
 	case 8:
-		fcn_004c6b20(*(int*) (a0 + 2), 3, 0);
+		fcn_004c6b20(*(int*) (entity + 2), 3, 0);
 		return;
 	case 9:
-		fcn_004c6b20(*(int*) (a0 + 2), 0xff, 1);
+		fcn_004c6b20(*(int*) (entity + 2), 0xff, 1);
 		pkt = b9 + 0x18;
 		list = (int*) (pkt + 0x34);
-		id = *(int*) (a0 + 2);
+		id = *(int*) (entity + 2);
 		list[0] = id;
 		list[1] = *(int*) (gm_RichterKatholisch + 4);
 		list[2] = *(int*) (gm_RichterEvangelisch + 4);
@@ -147,11 +147,11 @@ void __cdecl fcn_004f6850(unsigned short* a0, int a1)
 		*(char*) (pkt + 0x7c) = (char) gm_RandomMod(5);
 		*(char*) (pkt + 0x7d) = 0;
 		*(char*) (pkt + 0x26) = 0x22;
-		if (((char*) a0)[2] == 6 || ((char*) a0)[2] == 7) {
+		if (((char*) entity)[2] == 6 || ((char*) entity)[2] == 7) {
 			*(char*) (pkt + 0x26) = 0xa2;
 		}
 		fcn_004c5980(pkt);
-		if (srv_GetEntityOfficeSlot((unsigned char*) a0, b9 + 0x12c, b9) == 0) {
+		if (srv_GetEntityOfficeSlot((unsigned char*) entity, b9 + 0x12c, b9) == 0) {
 			return;
 		}
 		fcn_004e8240(*(int*) b9, 0, 0, 3, 0xff);

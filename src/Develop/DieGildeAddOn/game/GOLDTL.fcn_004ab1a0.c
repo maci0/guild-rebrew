@@ -33,12 +33,12 @@ int __cdecl fcn_004e8b40(int, Rec18*);
 int __cdecl fcn_004f7120(unsigned int, void*, void*, void*, void*);
 
 /* ADDRESS: GOLDTL 0x004ab1a0 */
-unsigned int __cdecl fcn_004ab1a0(int* a0, Msg* a1, Msg* a2)
+unsigned int __cdecl fcn_004ab1a0(int* subject, Msg* firstMessage, Msg* secondMessage)
 {
 	Rec18 rec;
 	int found[16];
 	int* pair;
-	int v6;
+	int total;
 	int val;
 	int n;
 	int i;
@@ -50,11 +50,11 @@ unsigned int __cdecl fcn_004ab1a0(int* a0, Msg* a1, Msg* a2)
 	unsigned char* ent;
 	unsigned char* obj;
 
-	if ((*(unsigned int*) ((char*) a0 + 0x1cc) & 0x2000000) == 0) {
+	if ((*(unsigned int*) ((char*) subject + 0x1cc) & 0x2000000) == 0) {
 		g = *(unsigned int*) 0x7f4c04;
 		if ((unsigned short) g >= 0x15 &&
-		    (g & 0xffff) % 3 == *(unsigned int*) ((char*) a0 + 4) % 3) {
-			v6 = gm_AccumulateTyped2(a0);
+		    (g & 0xffff) % 3 == *(unsigned int*) ((char*) subject + 4) % 3) {
+			total = gm_AccumulateTyped2(subject);
 			for (k = 0; k < 16; k++) {
 				found[k] = 0;
 			}
@@ -63,7 +63,7 @@ unsigned int __cdecl fcn_004ab1a0(int* a0, Msg* a1, Msg* a2)
 			if (ent != 0) {
 				do {
 					if (*(unsigned short*) (ent + 0x27) != 0xffff &&
-					    *(unsigned short*) (ent + 0x27) != *(unsigned short*) a0 &&
+					    *(unsigned short*) (ent + 0x27) != *(unsigned short*) subject &&
 					    ((Bld24d*) lpGebaeudePROT)[*ent].x247 > 1 &&
 					    (obj = (unsigned char*) fcn_00502cd0(*(unsigned int*) (ent + 0x5d), 1, 0, 0x120)) != 0 &&
 					    (obj = (unsigned char*) fcn_00502cd0(*(unsigned int*) (obj + 0x14), 1, 0, 300)) != 0) {
@@ -84,20 +84,20 @@ unsigned int __cdecl fcn_004ab1a0(int* a0, Msg* a1, Msg* a2)
 						if (fcn_004f7120(*(unsigned int*) (obj + 0x1c + i * 4),
 								 (void*) ((unsigned int) *(unsigned short*) (ent + 0x27) * 0x21c + 0x7f4ca0),
 								 &val, &out2, &out1) != 0 &&
-						    !((float) v6 * *(float*) 0x662b10 < (float) val)) {
+						    !((float) total * *(float*) 0x662b10 < (float) val)) {
 							fcn_004e8b40(*(unsigned char*) ((out2 & 0xffff) * 0x21c + 0x7f4e06), &rec);
 							if ((unsigned short) gm_RandomMod(0xc) > (unsigned short) rec.x8) {
 								return 0;
 							}
 							if ((float) gm_RandomFloat01() < *(float*) 0x6628cc) {
-								memset(a1, 0, 0x18);
-								memset(a2, 0, 0x18);
+								memset(firstMessage, 0, 0x18);
+								memset(secondMessage, 0, 0x18);
 							} else {
-								a1->type = 0x13;
-								a1->object = *(unsigned int*) (obj + 0x1c + i * 4);
-								a1->param = (unsigned int) val;
-								a2->type = 4;
-								a2->object = *(unsigned int*) (ent + 1);
+								firstMessage->type = 0x13;
+								firstMessage->object = *(unsigned int*) (obj + 0x1c + i * 4);
+								firstMessage->param = (unsigned int) val;
+								secondMessage->type = 4;
+								secondMessage->object = *(unsigned int*) (ent + 1);
 							}
 							return 1;
 						}

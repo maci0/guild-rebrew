@@ -12,7 +12,7 @@ extern char g_005feea8[]; /* 0x005feea8 */
 int __cdecl fcn_0047b630(int a1, int a2, char* a3, char* e, int s);
 int __cdecl fcn_0047b340(int a1, int a2, char* a3, char* e, int s);
 
-int __cdecl fcn_0047c820(int a1, int a2, char* a3, char* h, unsigned char idx, char scale, int alt)
+int __cdecl fcn_0047c820(int a1, int a2, char* context, char* h, unsigned char idx, char scale, int alt)
 {
 	char buf[0x80];
 	char* e;
@@ -31,16 +31,16 @@ int __cdecl fcn_0047c820(int a1, int a2, char* a3, char* h, unsigned char idx, c
 	e = h + *(int*) (h + idx * 4 + 0x45);
 	if (g_00f8a630 == 0) {
 		save = g_005fed64;
-		g_005fed64 = *(int*) (a3 + 0x10);
+		g_005fed64 = *(int*) (context + 0x10);
 		switch (*(unsigned char*) (e + 0xc)) {
 		case 0:
 			return 0;
 		case 1:
 			if (scale < 0) {
 				if (alt != 0) {
-					r = fcn_0047b630(a1, a2, a3, e, abs(scale));
+					r = fcn_0047b630(a1, a2, context, e, abs(scale));
 				} else {
-					r = fcn_0047b340(a1, a2, a3, e, abs(scale));
+					r = fcn_0047b340(a1, a2, context, e, abs(scale));
 				}
 			}
 			return r;

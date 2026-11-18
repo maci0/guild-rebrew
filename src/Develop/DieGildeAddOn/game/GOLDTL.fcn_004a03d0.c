@@ -6,28 +6,28 @@ int __cdecl fcn_004a4550(float* o1, float* o2, int a3, char* e, int a5, int a6, 
 /* ADDRESS: GOLDTL 0x004a03d0 */
 int __cdecl ai_ScoreUpgradeZunft(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7)
 {
-	unsigned char c;
-	char* g;
+	unsigned char kind;
+	char* found;
 
 	*o1 = -100.0f;
 	*o2 = -100.0f;
-	c = e[0x169];
-	if (c < 0x1e && c > 0x21) {
+	kind = e[0x169];
+	if (kind < 0x1e && kind > 0x21) {
 		return 0;
 	}
-	if (c == 0x1e) {
-		g = gm_StartFilteredEntitySearch(1, 5, 0x17);
-	} else if (c == 0x1f) {
-		g = gm_StartFilteredEntitySearch(1, 5, 0x18);
-	} else if (c == 0x20) {
-		g = gm_StartFilteredEntitySearch(1, 5, 0x19);
+	if (kind == 0x1e) {
+		found = gm_StartFilteredEntitySearch(1, 5, 0x17);
+	} else if (kind == 0x1f) {
+		found = gm_StartFilteredEntitySearch(1, 5, 0x18);
+	} else if (kind == 0x20) {
+		found = gm_StartFilteredEntitySearch(1, 5, 0x19);
 	} else {
-		g = gm_StartFilteredEntitySearch(1, 5, 0x1a);
+		found = gm_StartFilteredEntitySearch(1, 5, 0x1a);
 	}
-	if (!g) {
+	if (!found) {
 		return 0;
 	}
-	if (g[0x5c] < gm_RandomMod(0x10) + 0x32) {
+	if (found[0x5c] < gm_RandomMod(0x10) + 0x32) {
 		fcn_004a4550(o1, o2, a3, e, a5, a6, a7);
 		*o1 = *o1 * 3.0f;
 		*o2 = *o2 * 3.0f;

@@ -12,76 +12,76 @@ int __cdecl fcn_0050e720(int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00566d00 */
-void __cdecl fcn_00566d00(int a0)
+void __cdecl fcn_00566d00(int action)
 {
 	char buf[256];
 	unsigned short* a;
 	unsigned short* b;
-	int v2;
+	int entityId;
 
 
 	int state;
-	int v;
+	int selection;
 
-	a = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
-	b = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0xb0));
+	a = (unsigned short*) gm_LookupEntityRecordById(*(int*) (action + 0xac));
+	b = (unsigned short*) gm_LookupEntityRecordById(*(int*) (action + 0xb0));
 	if (!a || !b) {
-		fcn_00546190(a0);
+		fcn_00546190(action);
 		return;
 	}
 	if (*(char*) ((char*) b + 2) != 6 && *(char*) ((char*) b + 2) != 7) {
-		if (fcn_00500cb0((char*) a0 + 0x52, 0x7f4c00) > 0) {
+		if (fcn_00500cb0((char*) action + 0x52, 0x7f4c00) > 0) {
 			return;
 		}
-		*(int*) (a0 + 0x70) = 2;
+		*(int*) (action + 0x70) = 2;
 	}
-	state = *(int*) (a0 + 0x70);
+	state = *(int*) (action + 0x70);
 	switch (state) {
 	case 0:
-		fcn_00545670(a0, 0, 0, 0x6a5a10, 0x5ec);
-		d2_SetForm(*(int*) (*(int*) (a0 + 0x74) + 8), 0);
-		v2 = *a;
-		io_AppendText(0x19b2, v2, *(int*) (a0 + 0xb4), v2, v2);
-		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
+		fcn_00545670(action, 0, 0, 0x6a5a10, 0x5ec);
+		d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 0);
+		entityId = *a;
+		io_AppendText(0x19b2, entityId, *(int*) (action + 0xb4), entityId, entityId);
+		*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 		return;
 	case 1:
-		if (*(int*) 0x100f884 != *(int*) (*(int*) (a0 + 0x74) + 8)) {
+		if (*(int*) 0x100f884 != *(int*) (*(int*) (action + 0x74) + 8)) {
 			return;
 		}
-		v = *(int*) 0x100f1dc;
-		if (v == -1) {
+		selection = *(int*) 0x100f1dc;
+		if (selection == -1) {
 			return;
 		}
-		if (v == 2) {
+		if (selection == 2) {
 			io_FormatTextBuffer(buf, 0x19b3, *b);
 			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 			fcn_004c6b20(*(int*) (a + 2), -(unsigned int) *(unsigned char*) ((char*) a + 0x1b1), 0);
-		} else if (v == 1) {
-			io_FormatTextBuffer(buf, 0x19b4, *b, *(int*) (a0 + 0xb4));
+		} else if (selection == 1) {
+			io_FormatTextBuffer(buf, 0x19b4, *b, *(int*) (action + 0xb4));
 			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 		}
-		fcn_00545780(a0);
-		fcn_00546190(a0);
+		fcn_00545780(action);
+		fcn_00546190(action);
 		return;
 	case -1:
 	case -2:
-		fcn_00545780(a0);
-		fcn_00546190(a0);
+		fcn_00545780(action);
+		fcn_00546190(action);
 		return;
 	case 2:
 
 
 
-		if (fcn_0050e720(*a, *b, *(int*) (a0 + 0xb4), *(unsigned char*) ((char*) a + 0x1b1) * 16000)) {
+		if (fcn_0050e720(*a, *b, *(int*) (action + 0xb4), *(unsigned char*) ((char*) a + 0x1b1) * 16000)) {
 			io_FormatTextBuffer(buf, 0x19b3, *b);
 			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 			fcn_004c6b20(*(int*) (a + 2), -(unsigned int) *(unsigned char*) ((char*) a + 0x1b1), 0);
 		} else {
-			io_FormatTextBuffer(buf, 0x19b4, *b, *(int*) (a0 + 0xb4));
+			io_FormatTextBuffer(buf, 0x19b4, *b, *(int*) (action + 0xb4));
 			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 			fcn_004c54c0(*(int*) (a + 2), *(int*) (b + 2), 10, 1);
 		}
-		fcn_00546190(a0);
+		fcn_00546190(action);
 		return;
 	}
 	return;

@@ -15,35 +15,35 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
  * addresses the 0x200 scratch buffer off ebp; section 13 of
  * archived docs/msvc6-c-shapes.md. */
 #pragma optimize("y", off)
-int __cdecl fcn_004af1d0(int a1, int a2, int a3, char* a4, int a5)
+int __cdecl fcn_004af1d0(int mode, int a2, int a3, char* a4, int a5)
 {
 	char buf[0x200];
-	int v = 0;
-	int r = -1;
+	int entity = 0;
+	int bestScore = -1;
 	void* e;
 
-	if (a1 == 2)
+	if (mode == 2)
 		return 0;
-	if (a1 == 1) {
-		gm_ResolveEntityById((void**) (&v), 0, 0, *(int*) ((char*) a2 + a3 * 8 + 4));
-		if (v == 0)
+	if (mode == 1) {
+		gm_ResolveEntityById((void**) (&entity), 0, 0, *(int*) ((char*) a2 + a3 * 8 + 4));
+		if (entity == 0)
 			return 0;
 	} else {
-		int s;
+		int score;
 
 		e = gm_StartFilteredEntitySearch(1, 5, 0x16);
 		while (e != 0) {
-			s = fcn_0050cf50(e, *(signed char*) ((char*) e + 0x5c));
-			if (s > r) {
-				v = (int) e;
-				r = s;
+			score = fcn_0050cf50(e, *(signed char*) ((char*) e + 0x5c));
+			if (score > bestScore) {
+				entity = (int) e;
+				bestScore = score;
 			}
 			e = gm_FindNextFilteredEntity();
 		}
-		if (v == 0)
+		if (entity == 0)
 			return 0;
-		if (a1 == 0)
-			*(int*) ((char*) a2 + a3 * 8 + 4) = *(int*) ((char*) v + 1);
+		if (mode == 0)
+			*(int*) ((char*) a2 + a3 * 8 + 4) = *(int*) ((char*) entity + 1);
 	}
 	/* The original keeps the scratch buffer pointer and its length in the
 	 * dead a2/a3 argument homes ([ebp+0xc], [ebp+0x10]) and passes their
@@ -52,7 +52,7 @@ int __cdecl fcn_004af1d0(int a1, int a2, int a3, char* a4, int a5)
 	 * (object 0x208 frame instead of 0x204). */
 	a2 = (int) buf;
 	a3 = 0x200;
-	/* The original's zero-fill is the 24-byte hand-written block-fill prelude
+	/* The original'score zero-fill is the 24-byte hand-written block-fill prelude
 	 * (archived docs/msvc6-c-shapes.md section 11, archived docs/codegen-walls.md section 6b);
 	 * recorded C probes did not emit it.  Reproduced as a block-fill with ordinary
 	 * named operands. */
@@ -74,6 +74,6 @@ int __cdecl fcn_004af1d0(int a1, int a2, int a3, char* a4, int a5)
 		rep stosb
 	}
 	fcn_004ae080(a4, buf, &a2, &a3);
-	io_FormatTextBuffer((void*) a5, (int) buf, v);
+	io_FormatTextBuffer((void*) a5, (int) buf, entity);
 	return 1;
 }

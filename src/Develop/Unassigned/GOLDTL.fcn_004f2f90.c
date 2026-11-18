@@ -21,13 +21,13 @@ void __cdecl fcn_004c6c70(void*);
 
 void __cdecl fcn_004f2f90(int a1, int a2, int a3, int a4, char a5, int a6)
 {
-	F2fMsg s;
+	F2fMsg message;
 
-	s.f0 = *(int*) ((char*) a1 + 4);
-	s.f4 = *(int*) ((char*) a3 + 1);
-	s.f8 = a4;
-	s.fc = a5;
-	s.fd = a2;
-	s.f11 = a6;
-	fcn_004c6c70(&s);
+	message.f0 = *(int*) ((char*) a1 + 4);
+	message.f4 = *(int*) ((char*) a3 + 1);
+	message.f8 = a4;
+	message.fc = a5;
+	message.fd = a2;
+	message.f11 = a6;
+	fcn_004c6c70(&message);
 }

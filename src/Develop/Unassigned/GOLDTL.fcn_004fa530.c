@@ -6,21 +6,21 @@ extern char g_679060[];
 int __cdecl fcn_005dae70(unsigned char* a1, int* a2);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-int __cdecl fcn_004fa530(unsigned char* a1, int* a2)
+int __cdecl fcn_004fa530(unsigned char* entity, int* context)
 {
-	int r;
+	int result;
 
-	r = 2;
-	if ((*a2 == 3 || *a2 == 1) && a1[0x166] != 0 && a1[0x166] <= 0x1b) {
-		if (*a2 == 3 && a1[2] == 6) {
-			return fcn_005dae70(a1, a2);
+	result = 2;
+	if ((*context == 3 || *context == 1) && entity[0x166] != 0 && entity[0x166] <= 0x1b) {
+		if (*context == 3 && entity[2] == 6) {
+			return fcn_005dae70(entity, context);
 		}
-		if (*a2 == 1 && a1[2] == 6) {
-			io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1e23);
+		if (*context == 1 && entity[2] == 6) {
+			io_FormatTextBuffer((char*) context + 0x14, (int) g_679060, 0x1e23);
 			return 2;
 		}
 	} else {
-		r = 1;
+		result = 1;
 	}
-	return r;
+	return result;
 }

@@ -37,7 +37,7 @@ void __cdecl main_RundenBeginn(void)
 	int n;
 	int i;
 	int v5;
-	int v18;
+	int eventValue;
 	int tmp;
 
 	bufA[0] = *(char*) 0x6b5c60;
@@ -116,10 +116,10 @@ void __cdecl main_RundenBeginn(void)
 		}
 		p = (char*) gm_StartFilteredEntitySearch(2, 4, *(unsigned short*) slot, 5, 5);
 		while (p != 0) {
-			v18 = fcn_0050c710((int) p, 3, 1);
-			if (v18 != 0) {
+			eventValue = fcn_0050c710((int) p, 3, 1);
+			if (eventValue != 0) {
 				io_FormatTextBuffer(bufG, 0x3fd7, p);
-				n = (int) he_RegisterApEvent(*(unsigned short*) slot, bufG, v18, 0);
+				n = (int) he_RegisterApEvent(*(unsigned short*) slot, bufG, eventValue, 0);
 				if (n != 0)
 					*(char*) n -= 1;
 			}

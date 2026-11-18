@@ -1,6 +1,6 @@
 extern int g_772f3c;
 extern int g_68bfc0;
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern float g_662b28;
 extern unsigned char g_9a3800[];

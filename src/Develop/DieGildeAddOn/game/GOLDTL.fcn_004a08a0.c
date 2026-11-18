@@ -22,25 +22,25 @@ void __cdecl fcn_004c5530(char* msg);
 
 int __cdecl ai_RunUpgradeZunft(char* a1, char* a2, char* a3)
 {
-	char* p;
-	char* q;
+	char* resolved;
+	char* other;
 	char msg[0xf8];
 
 	if (*a2 == 1 && *a3 == 0x12 && *(unsigned int*) (a3 + 8) > 0) {
-		gm_ResolveEntityById(0, (void**) (&p), 0, *(int*) (a2 + 4));
-		if (p == 0) {
+		gm_ResolveEntityById(0, (void**) (&resolved), 0, *(int*) (a2 + 4));
+		if (resolved == 0) {
 			return 0;
 		}
-		fcn_004c5150(*(int*) (p + 2), *(int*) (a1 + 4), (*(char*)&g_773d75), *(int*) (a3 + 8));
+		fcn_004c5150(*(int*) (resolved + 2), *(int*) (a1 + 4), (*(char*)&g_773d75), *(int*) (a3 + 8));
 		return 0x39;
 	}
 	if (*a2 == 4 && *a3 == 1) {
-		gm_ResolveEntityById((void**) (&q), 0, 0, *(int*) (a2 + 0xc));
-		if (q == 0) {
+		gm_ResolveEntityById((void**) (&other), 0, 0, *(int*) (a2 + 0xc));
+		if (other == 0) {
 			return 0;
 		}
-		gm_ResolveEntityById(0, (void**) (&p), 0, *(int*) (a3 + 4));
-		if (p == 0) {
+		gm_ResolveEntityById(0, (void**) (&resolved), 0, *(int*) (a3 + 4));
+		if (resolved == 0) {
 			return 0;
 		}
 		memset(msg, 0, sizeof(msg));
@@ -54,7 +54,7 @@ int __cdecl ai_RunUpgradeZunft(char* a1, char* a2, char* a3)
 		*(short*) (msg + 0x34) = g_7f4c0c;
 		*(int*) (msg + 0x58) = *(int*) (a2 + 0xc);
 		fcn_004c4eb0(g_67eb84);
-		fcn_004c5150(-1, *(int*) (p + 2), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (a2 + 4)) * g_66414c));
+		fcn_004c5150(-1, *(int*) (resolved + 2), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (a2 + 4)) * g_66414c));
 		fcn_004c5530(msg);
 		fcn_004c4ef0(g_67eb84);
 		return 0x39;

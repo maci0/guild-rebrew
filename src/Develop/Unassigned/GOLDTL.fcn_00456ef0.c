@@ -48,8 +48,8 @@ void __cdecl fcn_00457290(char*, char*, int, float);
 /* ADDRESS: GOLDTL 0x00456ef0 */
 void __cdecl fcn_00456ef0(char* o)
 {
-	V456ef0 v1;
-	V456ef0 v2;
+	V456ef0 position;
+	V456ef0 direction;
 	V456ef0 r;
 	float h;
 	V456ef0 d;
@@ -76,8 +76,8 @@ void __cdecl fcn_00456ef0(char* o)
 		if (ctx == 0) {
 			break;
 		}
-		fcn_00455350(s, s + 0x4c, &v1);
-		fcn_00455140(s, g_662d40, &v2);
+		fcn_00455350(s, s + 0x4c, &position);
+		fcn_00455140(s, g_662d40, &direction);
 		h = fcn_00457140(o, ctx, s);
 		base = ((Api456ef0*) *(char**) (ctx + 0x318))->query(
 		    o, ctx, *(char**) (o + 0x1ec) + 8);
@@ -85,18 +85,18 @@ void __cdecl fcn_00456ef0(char* o)
 		i = 8;
 		do {
 			if (*(unsigned char*) (s + 0x215) & 4) {
-				t = -((q[1] - h) / v2.y);
-				r.x = v2.x * t + q[0];
-				r.y = v2.y * t + q[1];
-				r.z = v2.z * t + q[2];
+				t = -((q[1] - h) / direction.y);
+				r.x = direction.x * t + q[0];
+				r.y = direction.y * t + q[1];
+				r.z = direction.z * t + q[2];
 			} else {
-				d.x = v1.x - q[0];
-				d.y = v1.y - q[1];
-				d.z = v1.z - q[2];
-				t = -((v1.y - h) / d.y);
-				r.x = d.x * t + v1.x;
-				r.y = d.y * t + v1.y;
-				r.z = d.z * t + v1.z;
+				d.x = position.x - q[0];
+				d.y = position.y - q[1];
+				d.z = position.z - q[2];
+				t = -((position.y - h) / d.y);
+				r.x = d.x * t + position.x;
+				r.y = d.y * t + position.y;
+				r.z = d.z * t + position.z;
 			}
 			cam = (Cam456ef0*) g_6b8014;
 			d.x = r.x - cam->x;

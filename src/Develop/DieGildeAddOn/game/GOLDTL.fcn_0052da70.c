@@ -1,4 +1,4 @@
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
 
 // SIZE 0x21c

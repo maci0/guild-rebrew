@@ -16,18 +16,18 @@ int __cdecl fcn_004c6f70(char* request)
 	int obj;
 	char* p;
 	unsigned short type;
-	char* a0;
+	char* record;
 
 	if (*(int*) (request + 0x14) != -1) {
 		id = fcn_004c4dc0(request, *(int*) (request + 0x14));
 		*(int*) (request + 0x14) = id;
-		if (gm_ResolveEntityById(&v13, &a0, &v12, id) == 0) {
+		if (gm_ResolveEntityById(&v13, &record, &v12, id) == 0) {
 			return 1;
 		}
 		if (v13 != 0) {
 			p = (char*) v13 + 0x5d;
-		} else if (a0 != 0) {
-			p = a0 + 0x14;
+		} else if (record != 0) {
+			p = record + 0x14;
 		} else {
 			p = (char*) v12 + 0x178;
 		}
@@ -42,7 +42,7 @@ int __cdecl fcn_004c6f70(char* request)
 	if (*(int*) (request + 0x10) != -1) {
 		id = fcn_004c4dc0(request, *(int*) (request + 0x10));
 		*(int*) (request + 0x10) = id;
-		if (gm_ResolveEntityById(&v14, &a0, &v12, id) == 0) {
+		if (gm_ResolveEntityById(&v14, &record, &v12, id) == 0) {
 			return 1;
 		}
 		if (v14 != 0) {
@@ -51,14 +51,14 @@ int __cdecl fcn_004c6f70(char* request)
 			} else {
 				obj = 0;
 			}
-		} else if (a0 != 0) {
-			type = *(unsigned short*) a0;
+		} else if (record != 0) {
+			type = *(unsigned short*) record;
 			if ((type == 0x2a || type == 0x116 || type == 0x1dd) &&
-			    gm_eval_SlotVoll(a0, *(unsigned short*) (request + 0x18), *(int*) (request + 0x1f)) <
+			    gm_eval_SlotVoll(record, *(unsigned short*) (request + 0x18), *(int*) (request + 0x1f)) <
 				    *(int*) (request + 0x1f)) {
 				return 1;
 			}
-			obj = (int) fcn_0050d490(a0);
+			obj = (int) fcn_0050d490(record);
 		} else {
 			if (gm_CheckInventoryCapacity(v12, *(unsigned short*) (request + 0x18), *(int*) (request + 0x1f)) <
 			    *(int*) (request + 0x1f)) {

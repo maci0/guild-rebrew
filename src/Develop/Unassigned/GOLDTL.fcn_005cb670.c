@@ -7,7 +7,7 @@ void __cdecl fcn_005ca560(void*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 
 /* ADDRESS: GOLDTL 0x005cb670 */
-int __cdecl fcn_005cb670(char* a0, int n, char* a2, int a3)
+int __cdecl fcn_005cb670(char* sourceRecord, int n, char* results, int a3)
 {
 	char* h;
 	int count;
@@ -19,10 +19,10 @@ int __cdecl fcn_005cb670(char* a0, int n, char* a2, int a3)
 	if (n == 0) {
 		h = (char*) 0x7f4ca0;
 		while ((int) h < 0x85a0a0) {
-			if (h != a0 && *(unsigned short*) h != 0xffff
+			if (h != sourceRecord && *(unsigned short*) h != 0xffff
 			    && *(unsigned char*) (h + 2) >= 2 && *(unsigned char*) (h + 2) <= 7) {
-				d = fcn_0050f980(*(unsigned short*) a0, *(unsigned short*) h, 1);
-				if (d >= g_66291c && *(int*) (h + 0x210) != *(int*) (a0 + 4)) {
+				d = fcn_0050f980(*(unsigned short*) sourceRecord, *(unsigned short*) h, 1);
+				if (d >= g_66291c && *(int*) (h + 0x210) != *(int*) (sourceRecord + 4)) {
 					count++;
 				}
 			}
@@ -30,25 +30,25 @@ int __cdecl fcn_005cb670(char* a0, int n, char* a2, int a3)
 		}
 		return count;
 	}
-	memset(a2, 0, n * 0x38);
+	memset(results, 0, n * 0x38);
 	h = (char*) 0x7f4ca0;
 	while ((int) h < 0x85a0a0) {
-		if (h != a0 && *(unsigned short*) h != 0xffff
+		if (h != sourceRecord && *(unsigned short*) h != 0xffff
 		    && *(unsigned char*) (h + 2) >= 2 && *(unsigned char*) (h + 2) <= 7) {
-			d = fcn_0050f980(*(unsigned short*) a0, *(unsigned short*) h, 1);
-			if (d >= g_66291c && *(int*) (h + 0x210) != *(int*) (a0 + 4)) {
-				if ((float) *(int*) (a2 + n * 0x38 - 0xc) < d) {
-					*(int*) (a2 + n * 0x38 - 0x38) = (int) h;
-					*(int*) (a2 + n * 0x38 - 0xc) = (int) d;
+			d = fcn_0050f980(*(unsigned short*) sourceRecord, *(unsigned short*) h, 1);
+			if (d >= g_66291c && *(int*) (h + 0x210) != *(int*) (sourceRecord + 4)) {
+				if ((float) *(int*) (results + n * 0x38 - 0xc) < d) {
+					*(int*) (results + n * 0x38 - 0x38) = (int) h;
+					*(int*) (results + n * 0x38 - 0xc) = (int) d;
 					count++;
 					for (i = n - 1; i != 0; i--) {
-						if (*(int*) (a2 + (i - 1) * 0x38 + 0x2c) < *(int*) (a2 + i * 0x38 + 0x2c)) {
-							d = (float) *(int*) (a2 + (i - 1) * 0x38 + 0x2c);
-							t = *(int*) (a2 + (i - 1) * 0x38);
-							*(int*) (a2 + (i - 1) * 0x38) = *(int*) (a2 + i * 0x38);
-							*(int*) (a2 + (i - 1) * 0x38 + 0x2c) = *(int*) (a2 + i * 0x38 + 0x2c);
-							*(int*) (a2 + i * 0x38) = t;
-							*(int*) (a2 + i * 0x38 + 0x2c) = (int) d;
+						if (*(int*) (results + (i - 1) * 0x38 + 0x2c) < *(int*) (results + i * 0x38 + 0x2c)) {
+							d = (float) *(int*) (results + (i - 1) * 0x38 + 0x2c);
+							t = *(int*) (results + (i - 1) * 0x38);
+							*(int*) (results + (i - 1) * 0x38) = *(int*) (results + i * 0x38);
+							*(int*) (results + (i - 1) * 0x38 + 0x2c) = *(int*) (results + i * 0x38 + 0x2c);
+							*(int*) (results + i * 0x38) = t;
+							*(int*) (results + i * 0x38 + 0x2c) = (int) d;
 						}
 					}
 				}
@@ -60,9 +60,9 @@ int __cdecl fcn_005cb670(char* a0, int n, char* a2, int a3)
 		count = n;
 	}
 	for (i = 0; i < count; i++) {
-		fcn_005ca560(a2 + i * 0x38);
-		*(int*) (a2 + i * 0x38 + 0x30) = fcn_005cf720(*(unsigned short*) a0,
-			*(unsigned short*) *(int*) (a2 + i * 0x38), a3, 0);
+		fcn_005ca560(results + i * 0x38);
+		*(int*) (results + i * 0x38 + 0x30) = fcn_005cf720(*(unsigned short*) sourceRecord,
+			*(unsigned short*) *(int*) (results + i * 0x38), a3, 0);
 	}
 	return count;
 }

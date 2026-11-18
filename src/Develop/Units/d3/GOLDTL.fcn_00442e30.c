@@ -50,7 +50,7 @@ extern char* g_6b8478;
 extern int g_6b8058;
 extern int g_67a37c;
 extern int g_67a380;
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_10432c0[];
 
 void __cdecl d3_DisposeObject(void*);

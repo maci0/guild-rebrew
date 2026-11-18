@@ -22,23 +22,23 @@ void __cdecl fcn_0054b450(char* a0)
 {
 	float dist;
 	char buf[0x100];
-	unsigned short* v3;
+	unsigned short* entityA;
 	unsigned short* v4;
-	unsigned short* v5;
+	unsigned short* entityC;
 	char* a;
 
 	a = a0;
-	v3 = gm_LookupEntityRecordById(*(int*) (a + 0xac));
+	entityA = gm_LookupEntityRecordById(*(int*) (a + 0xac));
 	v4 = gm_LookupEntityRecordById(*(int*) (a + 0xb0));
-	v5 = gm_LookupEntityRecordById(*(int*) (a + 0xb4));
-	if (*(int*) (a + 0x70) == -2 || v3 == 0 || v4 == 0 || v5 == 0) {
+	entityC = gm_LookupEntityRecordById(*(int*) (a + 0xb4));
+	if (*(int*) (a + 0x70) == -2 || entityA == 0 || v4 == 0 || entityC == 0) {
 		fcn_00546190(a);
 		if (*(int*) (a + 0x74) != 0)
 			fcn_00545780(a);
 		return;
 	}
 	if (*(int*) (a + 0x70) == -1 ||
-	    (*(char*) (v5 + 1) != 6 && *(char*) (v5 + 1) != 7))
+	    (*(char*) (entityC + 1) != 6 && *(char*) (entityC + 1) != 7))
 		*(int*) (a + 0x70) = 2;
 	switch (*(int*) (a + 0x70)) {
 	case 0:
@@ -48,7 +48,7 @@ void __cdecl fcn_0054b450(char* a0)
 			return;
 		}
 		d2_SetForm(*(int*) (*(int*) (a + 0x74) + 8), 0);
-		io_AppendText(0x1763, *(unsigned short*) v4, *(unsigned short*) v3);
+		io_AppendText(0x1763, *(unsigned short*) v4, *(unsigned short*) entityA);
 		*(pos14_7f4c00*) (a + 0x44) = g_7f4c00;
 		*(pos14_7f4c00*) (a + 0x52) = g_7f4c00;
 		fcn_00500bb0(a + 0x52, 0x18, 0, 0);
@@ -64,16 +64,16 @@ void __cdecl fcn_0054b450(char* a0)
 		if (*(int*) 0x100f884 == *(int*) (*(int*) (a + 0x74) + 8) &&
 		    *(int*) 0x100f1dc != -1) {
 			if (*(int*) 0x100f1dc == 2) {
-				io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) v5,
-				             *(unsigned short*) v3);
+				io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) entityC,
+				             *(unsigned short*) entityA);
 				fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
-				fcn_004c54c0(*(int*) (v3 + 2), *(int*) (v5 + 2), -0x14, 1);
+				fcn_004c54c0(*(int*) (entityA + 2), *(int*) (entityC + 2), -0x14, 1);
 			} else if (*(int*) 0x100f1dc == 1) {
-				io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) v5,
-				             *(unsigned short*) v3);
+				io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) entityC,
+				             *(unsigned short*) entityA);
 				fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
-				fcn_004c54c0(*(int*) (v4 + 2), *(int*) (v5 + 2), -0xf, 1);
-				fcn_004c54c0(*(int*) (v5 + 2), *(int*) (v4 + 2), -0xf, 1);
+				fcn_004c54c0(*(int*) (v4 + 2), *(int*) (entityC + 2), -0xf, 1);
+				fcn_004c54c0(*(int*) (entityC + 2), *(int*) (v4 + 2), -0xf, 1);
 			}
 			fcn_00545780(a);
 			fcn_00546190(a);
@@ -81,17 +81,17 @@ void __cdecl fcn_0054b450(char* a0)
 		}
 		return;
 	case 2:
-		dist = fcn_00507e70((char*) v4, (char*) v3, 4);
+		dist = fcn_00507e70((char*) v4, (char*) entityA, 4);
 		if (g_6628a0 <= gm_RandomFloat01() + dist) {
-			io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) v5, *(unsigned short*) v3);
+			io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) entityC, *(unsigned short*) entityA);
 			v4 = (unsigned short*) *(int*) (v4 + 2);
 			fcn_00545d40((int) v4, (int) v4, buf, 0, 0x5fa, 0);
-			fcn_004c54c0(*(int*) (v3 + 2), *(int*) (v5 + 2), -0x14, 1);
+			fcn_004c54c0(*(int*) (entityA + 2), *(int*) (entityC + 2), -0x14, 1);
 		} else {
-			io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) v5, *(unsigned short*) v3);
+			io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) entityC, *(unsigned short*) entityA);
 			fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
-			fcn_004c54c0(*(int*) (v4 + 2), *(int*) (v5 + 2), -0xf, 1);
-			fcn_004c54c0(*(int*) (v5 + 2), *(int*) (v4 + 2), -0xf, 1);
+			fcn_004c54c0(*(int*) (v4 + 2), *(int*) (entityC + 2), -0xf, 1);
+			fcn_004c54c0(*(int*) (entityC + 2), *(int*) (v4 + 2), -0xf, 1);
 		}
 		fcn_00546190(a);
 	}

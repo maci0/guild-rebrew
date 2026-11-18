@@ -1,5 +1,5 @@
 #include "Develop/Units/d3/d3_object.h"
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 

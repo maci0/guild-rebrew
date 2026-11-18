@@ -30,8 +30,8 @@ void __stdcall fcn_0042dcd0(unsigned int id, unsigned int msg, unsigned long use
 		return;
 	}
 	g_6b7fbc = 1;
-	(*(int*)&g_6b7fb8)++;
-	if ((*(int*)&g_6b7fc0) == 0) {
+	g_6b7fb8++;
+	if (g_6b7fc0 == 0) {
 		for (i = 0; i < 32; i++) {
 			if (g_1052c60[i].funktion != 0 && (unsigned int) g_6b7fac % g_1052c60[i].periode == 0
 			    && g_1052c60[i].pausiert == 0) {
@@ -52,7 +52,7 @@ void __stdcall fcn_0042dcd0(unsigned int id, unsigned int msg, unsigned long use
 			g_6b7fac = (unsigned int) g_6b7fac + 1;
 		}
 	}
-	if ((*(int*)&g_6b7fc4) != 0) {
+	if (g_6b7fc4 != 0) {
 		(*(unsigned int*)&g_6b7fa8) = timeSetEvent(g_1052c50, (*(unsigned int*)g_1052c48) + 5, fcn_0042dcd0, 0, 0);
 	}
 	g_6b7fbc = 0;

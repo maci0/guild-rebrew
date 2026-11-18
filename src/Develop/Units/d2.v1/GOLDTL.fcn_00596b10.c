@@ -14,15 +14,15 @@ void __cdecl fcn_00473750(int a1, int a2);
 void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
 {
     int* r;
-    int v1;
+    int width;
     int* p;
     int n;
     int i;
     int col;
-    int v9;
+    int value;
 
     r = (int*) (*(int*) ((a1 + a0 * 0xaf) * 4 + 0x1038144) * 0x3cc + 0x1015f40);
-    v1 = r[3];
+    width = r[3];
     d2_SetForm(a0, a1);
 
     p = (int*) 0x778d50;
@@ -43,10 +43,10 @@ void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
             d2_SetElementImage(p[0], p[-1] + 0x741);
             n = *(int*) 0x772500;
         }
-        v9 = p[-1];
-        p[-2] = v9;
-        if (v9 >= 2) {
-            p[-4] = (v1 - *(short*) (n + 0x261a4 + v9 * 0x54)) >> 1;
+        value = p[-1];
+        p[-2] = value;
+        if (value >= 2) {
+            p[-4] = (width - *(short*) (n + 0x261a4 + value * 0x54)) >> 1;
             p[-3] = (*(short*) (n + 0x2624e) + 0x1c) * i;
         }
         p += 5;
@@ -95,8 +95,8 @@ void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
     p = (int*) 0x778db0;
     do {
         if (*p != -1) {
-            v9 = fcn_00471f80(*p);
-            fcn_00473750(p[-4] + 0xdf, v9);
+            value = fcn_00471f80(*p);
+            fcn_00473750(p[-4] + 0xdf, value);
         }
         p += 0xe;
     } while ((int) p < 0x779130);
@@ -104,8 +104,8 @@ void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
     p = (int*) 0x7796f0;
     do {
         if (*p != -1) {
-            v9 = fcn_00471f80(*p);
-            fcn_00473750(p[-4] + 0xdf, v9);
+            value = fcn_00471f80(*p);
+            fcn_00473750(p[-4] + 0xdf, value);
         }
         p += 0xe;
     } while ((int) p < 0x7798b0);

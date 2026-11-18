@@ -24,7 +24,7 @@ typedef struct {
 	Vec3 rot;
 } View;
 
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_camera.h"
 extern float g_774690;
 extern float g_774694;

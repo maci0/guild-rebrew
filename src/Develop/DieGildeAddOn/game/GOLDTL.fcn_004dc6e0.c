@@ -7,11 +7,11 @@ int __cdecl fcn_004aacb0(unsigned short* a1, unsigned short* a2, unsigned short*
 int __cdecl fcn_004aae50(char a1, unsigned short* a2, int* a3, int* a4);
 
 /* ADDRESS: GOLDTL 0x004dc6e0 */
-void __cdecl fcn_004dc6e0(char* obj, int* a1)
+void __cdecl fcn_004dc6e0(char* obj, int* request)
 {
-	char* v3;
-	char* v4;
-	char* v5;
+	char* entity;
+	char* firstEntity;
+	char* secondEntity;
 	int tmp;
 	int r;
 
@@ -20,35 +20,35 @@ void __cdecl fcn_004dc6e0(char* obj, int* a1)
 	if (*(int*) (obj + 0x9c) != 0) {
 		return;
 	}
-	v3 = gm_LookupEntityRecordById(*(int*) (obj + 0x10));
-	if (v3 == 0) {
+	entity = gm_LookupEntityRecordById(*(int*) (obj + 0x10));
+	if (entity == 0) {
 		return;
 	}
-	if (*(char*) (v3 + 0x166) == 0) {
+	if (*(char*) (entity + 0x166) == 0) {
 		return;
 	}
-	if (*(unsigned char*) (v3 + 0x1b1) > 0) {
+	if (*(unsigned char*) (entity + 0x1b1) > 0) {
 		return;
 	}
-	if (a1[0] == 1) {
-		v4 = gm_LookupEntityRecordById(a1[3]);
-		v5 = gm_LookupEntityRecordById(a1[4]);
-		if (v4 == 0 || v5 == 0) {
+	if (request[0] == 1) {
+		firstEntity = gm_LookupEntityRecordById(request[3]);
+		secondEntity = gm_LookupEntityRecordById(request[4]);
+		if (firstEntity == 0 || secondEntity == 0) {
 			return;
 		}
-		r = fcn_004aacb0((unsigned short*) v3, (unsigned short*) v4, (unsigned short*) v5, &tmp);
+		r = fcn_004aacb0((unsigned short*) entity, (unsigned short*) firstEntity, (unsigned short*) secondEntity, &tmp);
 		*(int*) (obj + 0x98) = tmp;
 		*(int*) (obj + 0x94) = r;
 		obj += 0x14;
 		sprintf(obj, g_6b5c60);
 		return;
 	}
-	if (a1[0] == 2) {
-		r = fcn_004e9180(v3, a1[2]);
+	if (request[0] == 2) {
+		r = fcn_004e9180(entity, request[2]);
 		if (r == 0) {
 			return;
 		}
-		r = fcn_004aae50(*(char*) (a1 + 1), (unsigned short*) v3, a1 + 3, &tmp);
+		r = fcn_004aae50(*(char*) (request + 1), (unsigned short*) entity, request + 3, &tmp);
 		*(int*) (obj + 0x98) = tmp;
 		*(int*) (obj + 0x94) = r;
 		obj += 0x14;

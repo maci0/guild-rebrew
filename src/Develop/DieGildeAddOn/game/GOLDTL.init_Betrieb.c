@@ -23,7 +23,7 @@ int __cdecl fcn_004c51f0(int a1, int a2, int a3, int a4, char a5, int a6);
 void __cdecl ReportClientMessage(const char* msg);
 
 /* ADDRESS: GOLDTL 0x00512b40 */
-void __cdecl init_Betrieb(unsigned char* a0)
+void __cdecl init_Betrieb(unsigned char* building)
 {
     char* geb;
     init_Betrieb_Item* item;
@@ -35,12 +35,12 @@ void __cdecl init_Betrieb(unsigned char* a0)
     int i;
     int qty;
 
-    category = gm_GetBuildingTypeCategory(*a0);
-    geb = g_entity_type_table + *a0 * 0x24d;
+    category = gm_GetBuildingTypeCategory(*building);
+    geb = g_entity_type_table + *building * 0x24d;
     if (category != 1 && category != 4) {
         return;
     }
-    ent = fcn_00502cd0(*(int*)(a0 + 0x5d), 1, 0, 0xff);
+    ent = fcn_00502cd0(*(int*)(building + 0x5d), 1, 0, 0xff);
     if (ent == 0) {
         return;
     }
@@ -75,7 +75,7 @@ void __cdecl init_Betrieb(unsigned char* a0)
         if (limit <= 1) {
             limit = 1;
         }
-        obj = fcn_00502cd0(*(int*)(a0 + 0x5d), 1, 4, 5);
+        obj = fcn_00502cd0(*(int*)(building + 0x5d), 1, 4, 5);
         if (obj == 0) {
             return;
         }

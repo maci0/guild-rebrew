@@ -8,50 +8,50 @@ void __cdecl fcn_00411340(int);
 /* ADDRESS: GOLDTL 0x0044c6f0 */
 void __cdecl fcn_0044c6f0(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8,
 			  int a9, int a10, int a11, int a12, int a13, int a14, int a15, int a16,
-			  int a17, int a18, int a19, int a20, int a21, int a22, int a23)
+			  int a17, int a18, int a19, int a20, int a21, int a22, int sectionName)
 {
-	char* v2;
+	char* lodText;
 	char buf[0x100];
-	int v1;
+	int sectionId;
 
-	v1 = fcn_004112b0(a23, 2);
-	if (v1 == -1) {
+	sectionId = fcn_004112b0(sectionName, 2);
+	if (sectionId == -1) {
 		return;
 	}
-	fcn_00411500(v1, (char*) 0x67b218, a1);
-	fcn_00411500(v1, (char*) 0x67b208, a2);
-	fcn_00411500(v1, (char*) 0x67b1f4, a3);
-	fcn_00411500(v1, (char*) 0x67b1e4, a4);
-	fcn_00411500(v1, (char*) 0x67b1d4, a6);
-	fcn_00411500(v1, (char*) 0x67b1c4, a7);
-	fcn_00411500(v1, (char*) 0x67b1b4, a8);
-	fcn_00411500(v1, (char*) 0x67b19c, a12);
-	fcn_00411500(v1, (char*) 0x67b188, a9);
-	fcn_00411500(v1, (char*) 0x67b16c, a10);
-	fcn_00411500(v1, (char*) 0x67b15c, a5);
-	v2 = buf;
+	fcn_00411500(sectionId, (char*) 0x67b218, a1);
+	fcn_00411500(sectionId, (char*) 0x67b208, a2);
+	fcn_00411500(sectionId, (char*) 0x67b1f4, a3);
+	fcn_00411500(sectionId, (char*) 0x67b1e4, a4);
+	fcn_00411500(sectionId, (char*) 0x67b1d4, a6);
+	fcn_00411500(sectionId, (char*) 0x67b1c4, a7);
+	fcn_00411500(sectionId, (char*) 0x67b1b4, a8);
+	fcn_00411500(sectionId, (char*) 0x67b19c, a12);
+	fcn_00411500(sectionId, (char*) 0x67b188, a9);
+	fcn_00411500(sectionId, (char*) 0x67b16c, a10);
+	fcn_00411500(sectionId, (char*) 0x67b15c, a5);
+	lodText = buf;
 	switch (*(int*) 0x67ac90) {
 	case 1:
-		strcpy(v2, "d3io_LOD_SWITCH");
+		strcpy(lodText, "d3io_LOD_SWITCH");
 		break;
 	case 2:
-		strcpy(v2, "d3io_LOD_LOW");
+		strcpy(lodText, "d3io_LOD_LOW");
 		break;
 	case 4:
-		strcpy(v2, "d3io_LOD_HIGH");
+		strcpy(lodText, "d3io_LOD_HIGH");
 		break;
 	default:
-		v2[0] = *(char*) 0x6b5c60;
+		lodText[0] = *(char*) 0x6b5c60;
 		break;
 	}
-	fcn_00411520(v1, (char*) 0x67b11c, v2);
-	fcn_00411550(v1, (char*) 0x67b10c, a16);
-	fcn_00411550(v1, (char*) 0x67b0f8, a17);
-	fcn_00411550(v1, (char*) 0x67b0e4, a18);
-	fcn_00411550(v1, (char*) 0x67b0d0, a19);
-	fcn_00411550(v1, (char*) 0x67b0bc, a20);
-	fcn_00411550(v1, (char*) 0x67b0ac, a21);
-	fcn_00411550(v1, (char*) 0x67b094, a22);
-	fcn_00411500(v1, (char*) 0x67b080, 3);
-	fcn_00411340(v1);
+	fcn_00411520(sectionId, (char*) 0x67b11c, lodText);
+	fcn_00411550(sectionId, (char*) 0x67b10c, a16);
+	fcn_00411550(sectionId, (char*) 0x67b0f8, a17);
+	fcn_00411550(sectionId, (char*) 0x67b0e4, a18);
+	fcn_00411550(sectionId, (char*) 0x67b0d0, a19);
+	fcn_00411550(sectionId, (char*) 0x67b0bc, a20);
+	fcn_00411550(sectionId, (char*) 0x67b0ac, a21);
+	fcn_00411550(sectionId, (char*) 0x67b094, a22);
+	fcn_00411500(sectionId, (char*) 0x67b080, 3);
+	fcn_00411340(sectionId);
 }

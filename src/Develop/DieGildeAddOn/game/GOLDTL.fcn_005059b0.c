@@ -74,7 +74,7 @@ extern unsigned short* lpObjekteINST;
 extern char* lpObjektePROT;
 extern char g_7f4ca0[];
 extern char* g_773da8;
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_005b1c90(int);
 void __cdecl fcn_005b1b30(Estate*);

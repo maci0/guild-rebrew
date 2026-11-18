@@ -1,7 +1,7 @@
 #include "Develop/Units/d3/d3_object.h"
 #include <string.h>
 
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6b5c60[];
 
 char* __cdecl gm_LookupEntityRecordById(int);

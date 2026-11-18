@@ -67,7 +67,7 @@ typedef struct A {
 } A;
 
 /* ADDRESS: GOLDTL 0x00413fb0 */
-int __cdecl fcn_00413fb0(A* a1, B* b)
+int __cdecl fcn_00413fb0(A* bounds, B* b)
 {
     int r;
     int i;
@@ -104,8 +104,8 @@ int __cdecl fcn_00413fb0(A* a1, B* b)
             bmax.z = MAX(bmax.z, v->z);
             v++;
         }
-        if (bmin.x < a1->f68 && a1->f58 < bmax.x && a1->f6c > bmin.y &&
-            a1->f70 > bmin.z && a1->f60 < bmax.z) {
+        if (bmin.x < bounds->f68 && bounds->f58 < bmax.x && bounds->f6c > bmin.y &&
+            bounds->f70 > bmin.z && bounds->f60 < bmax.z) {
             itf = b->obj->itf;
             buf = (float*) m_alloc(itf->count, (char*) 0x67755c);
             for (i = 0; i < itf->count; i++) {
@@ -120,18 +120,18 @@ int __cdecl fcn_00413fb0(A* a1, B* b)
                                  b->mat->m[2] * itf->points[i].x + b->mat->m[14];
             }
             for (i = 0; i < itf->count; i++) {
-                V3* v0;
-                v0 = (V3*) &buf[itf->idx[i * 3 + 0] * 3];
-                if (fcn_00413e00((float*) v0,
+                V3* point;
+                point = (V3*) &buf[itf->idx[i * 3 + 0] * 3];
+                if (fcn_00413e00((float*) point,
                                  &buf[itf->idx[i * 3 + 1] * 3],
                                  &buf[itf->idx[i * 3 + 2] * 3],
-                                 &a1->f58, &a1->f68)) {
-                    a1->f10 = MIN(a1->f10, v0->y);
-                    a1->f10 = MIN(a1->f10, buf[itf->idx[i * 3 + 1] * 3 + 1]);
-                    a1->f10 = MIN(a1->f10, buf[itf->idx[i * 3 + 2] * 3 + 1]);
-                    a1->f14 = MAX(a1->f14, buf[itf->idx[i * 3 + 0] * 3 + 1]);
-                    a1->f14 = MAX(a1->f14, buf[itf->idx[i * 3 + 1] * 3 + 1]);
-                    a1->f14 = MAX(a1->f14, buf[itf->idx[i * 3 + 2] * 3 + 1]);
+                                 &bounds->f58, &bounds->f68)) {
+                    bounds->f10 = MIN(bounds->f10, point->y);
+                    bounds->f10 = MIN(bounds->f10, buf[itf->idx[i * 3 + 1] * 3 + 1]);
+                    bounds->f10 = MIN(bounds->f10, buf[itf->idx[i * 3 + 2] * 3 + 1]);
+                    bounds->f14 = MAX(bounds->f14, buf[itf->idx[i * 3 + 0] * 3 + 1]);
+                    bounds->f14 = MAX(bounds->f14, buf[itf->idx[i * 3 + 1] * 3 + 1]);
+                    bounds->f14 = MAX(bounds->f14, buf[itf->idx[i * 3 + 2] * 3 + 1]);
                 }
             }
             m_FreeTracked(buf);
@@ -139,7 +139,7 @@ int __cdecl fcn_00413fb0(A* a1, B* b)
         r = 0;
     }
     for (c = b->child; c != 0; c = c->next) {
-        r &= fcn_00413fb0(a1, c);
+        r &= fcn_00413fb0(bounds, c);
     }
     return r;
 }

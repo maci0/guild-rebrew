@@ -17,7 +17,7 @@ struct vec3 {
 };
 
 extern struct modelent g_6a6ee8[];
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_004488e0(char* name, int a, int b);

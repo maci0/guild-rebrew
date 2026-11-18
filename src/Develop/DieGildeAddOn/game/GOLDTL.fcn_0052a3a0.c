@@ -50,7 +50,7 @@ extern int g_7e4468;
 extern int g_7e446c;
 extern int g_7e4380;
 extern int g_6b89c0;
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7746fc;
 extern Slot_1043340 g_1043340[64];
 extern Tabs_7e43a8 g_7e43a8;

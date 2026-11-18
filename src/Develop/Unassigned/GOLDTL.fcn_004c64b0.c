@@ -5,7 +5,7 @@
 
 void __cdecl fcn_004c4330(void*);
 
-void __cdecl fcn_004c64b0(char a1, int a2, int a3, char a4, char a5, char a6, char* a7)
+void __cdecl fcn_004c64b0(char a1, int a2, int a3, char a4, char a5, char a6, char* text)
 {
 	char buf[0x9c];
 
@@ -16,6 +16,6 @@ void __cdecl fcn_004c64b0(char a1, int a2, int a3, char a4, char a5, char a6, ch
 	*(char*) (buf + 0x1f) = a4;
 	*(char*) (buf + 0x20) = a5;
 	*(char*) (buf + 0x21) = a6;
-	strcpy(buf + 0x26, a7);
+	strcpy(buf + 0x26, text);
 	fcn_004c4330(buf);
 }

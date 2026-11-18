@@ -12,52 +12,52 @@ void __cdecl fcn_004d87f0(int*);
 
 
 /* ADDRESS: GOLDTL 0x004cd330 */
-int __cdecl fcn_004cd330(unsigned char* a1, char* a2)
+int __cdecl fcn_004cd330(unsigned char* command, char* result)
 {
 	char* e;
 
-	if (g_772f40 == 0 || *g_772f40 != *(int*) (a1 + 0x10))
+	if (g_772f40 == 0 || *g_772f40 != *(int*) (command + 0x10))
 		return 1;
-	e = gm_LookupEntityRecordIn32SlotTable(*(int*) (a1 + 0x35));
-	switch (a1[0x14]) {
+	e = gm_LookupEntityRecordIn32SlotTable(*(int*) (command + 0x35));
+	switch (command[0x14]) {
 	case 2:
 		if (e[8] != 0) {
-			fcn_004cd2a0(e, (float*) (a1 + 0x15), (float*) (a1 + 0x25), *(int*) (a1 + 0x31));
-			fcn_004d8200((int*) (a1 + 0x35));
+			fcn_004cd2a0(e, (float*) (command + 0x15), (float*) (command + 0x25), *(int*) (command + 0x31));
+			fcn_004d8200((int*) (command + 0x35));
 		}
 		break;
 	case 6:
 		if (e[8] != 0) {
-			fcn_004cd2a0(e, (float*) (a1 + 0x15), (float*) (a1 + 0x25), *(int*) (a1 + 0x31));
-			fcn_004d85c0((int*) (a1 + 0x35));
+			fcn_004cd2a0(e, (float*) (command + 0x15), (float*) (command + 0x25), *(int*) (command + 0x31));
+			fcn_004d85c0((int*) (command + 0x35));
 		}
 		break;
 	case 1:
 		if (e[8] != 0)
-			fcn_004d85f0((int*) (a1 + 0x35));
+			fcn_004d85f0((int*) (command + 0x35));
 		break;
 	case 4:
 		if (e[8] != 0)
-			fcn_004d8660((int*) (a1 + 0x35));
+			fcn_004d8660((int*) (command + 0x35));
 		break;
 	case 5:
 		if (e[8] != 0)
-			fcn_004d8700((int*) (a1 + 0x35));
+			fcn_004d8700((int*) (command + 0x35));
 		break;
 	case 7:
-		fcn_004d87b0((int*) (a1 + 0x35));
+		fcn_004d87b0((int*) (command + 0x35));
 		break;
 	case 3:
 		if (e[8] != 0) {
-			fcn_004cd2a0(e, (float*) (a1 + 0x15), (float*) (a1 + 0x25), *(int*) (a1 + 0x31));
-			fcn_004d87f0((int*) (a1 + 0x35));
+			fcn_004cd2a0(e, (float*) (command + 0x15), (float*) (command + 0x25), *(int*) (command + 0x31));
+			fcn_004d87f0((int*) (command + 0x35));
 		}
 		break;
 	}
-	if (a2 != 0) {
-		a2[0] = 1;
-		a2[1] = 8;
-		*(int*) (a2 + 6) = 0;
+	if (result != 0) {
+		result[0] = 1;
+		result[1] = 8;
+		*(int*) (result + 6) = 0;
 	}
 	return 0;
 }

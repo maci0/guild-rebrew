@@ -36,7 +36,7 @@ void __cdecl fcn_004c4ef0(char* s);
 void __cdecl fcn_00471e30(int dlg);
 
 /* ADDRESS: GOLDTL 0x005bf0d0 */
-int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
+int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 {
 	unsigned int count;
 	unsigned int ids[6];
@@ -51,14 +51,14 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 	void* entity;
 
 	count = 0;
-	if (a1 == 0 || *(unsigned short*) (a1 + 0x27) == 0xffff) {
+	if (record == 0 || *(unsigned short*) (record + 0x27) == 0xffff) {
 		return 0;
 	}
 	memset(slots, 0, sizeof(slots));
 	idx = *(unsigned short*) 0x774970;
 	slots[0] = 1;
 	value = (int) ((float) gm_WalkEntityChain(*(unsigned short*) (0x7f4ca0 + idx * 0x21c)) * *(float*) 0x6628ac
-		+ (float) fcn_0050cf50(a1, 100) * *(float*) 0x662b10);
+		+ (float) fcn_0050cf50(record, 100) * *(float*) 0x662b10);
 	if (fcn_004fa5b0(0x1b, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), slots) & 2) {
 		value = value / 2;
 	}
@@ -67,30 +67,30 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 	}
 	entity = fcn_005463a0(2, 2, *(unsigned short*) 0x774970, 0, 0x19);
 	while (entity != 0) {
-		if (*(int*) ((char*) entity + 0xac) == *(int*) (a1 + 1)) {
-			io_FormatTextBuffer(text, 0x1702, *(unsigned short*) (a1 + 0x27), a1);
+		if (*(int*) ((char*) entity + 0xac) == *(int*) (record + 1)) {
+			io_FormatTextBuffer(text, 0x1702, *(unsigned short*) (record + 0x27), record);
 			fcn_00526120(text, 0);
 			return 0;
 		}
 		entity = he_fn_Handlung();
 	}
-	if (fcn_0055c0f0(a0, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
-		io_FormatTextBuffer(text, 0x1703, *(unsigned short*) (a1 + 0x27), a1);
+	if (fcn_0055c0f0(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
+		io_FormatTextBuffer(text, 0x1703, *(unsigned short*) (record + 0x27), record);
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	if (fcn_0055c0a0(a0, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
-		io_FormatTextBuffer(text, 0x1704, *(unsigned short*) a0);
+	if (fcn_0055c0a0(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
+		io_FormatTextBuffer(text, 0x1704, *(unsigned short*) obj);
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	if (fcn_0055c050(a1) == 0) {
-		io_FormatTextBuffer(ev, 0x1705, a1);
+	if (fcn_0055c050(record) == 0) {
+		io_FormatTextBuffer(ev, 0x1705, record);
 		fcn_00526120(ev, 0);
 		return 0;
 	}
-	if (fcn_00579640(a0, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
-		io_FormatTextBuffer(text, 0x409f, *(unsigned short*) a0);
+	if (fcn_00579640(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
+		io_FormatTextBuffer(text, 0x409f, *(unsigned short*) obj);
 		fcn_00526120(text, 0);
 		return 0;
 	}
@@ -100,8 +100,8 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
 	evid = fcn_00472250(dlg, 1,
-		io_AppendText(0x1700, 0x1711, value, *(unsigned short*) (a1 + 0x27),
-			*(unsigned char*) a1 * 0xe + 0x48e));
+		io_AppendText(0x1700, 0x1711, value, *(unsigned short*) (record + 0x27),
+			*(unsigned char*) record * 0xe + 0x48e));
 	/* The native 0x1705 text and later packet share ev. */
 	memset(ids, 0xff, 6 * sizeof(unsigned int));
 	ids[0] = dlg;
@@ -121,12 +121,12 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 			*(int*) (ev + 0xc) = *(int*) (g_7746c4 + 1);
 			ev[0x36] = 1;
 			*(int*) (ev + 0x7c) = value;
-			*(int*) (ev + 0x58) = *(int*) (a1 + 1);
+			*(int*) (ev + 0x58) = *(int*) (record + 1);
 			fcn_004c4eb0((char*) 0x67eac4);
 			fcn_004c5530(ev);
 			fcn_004c4ef0((char*) 0x67eac4);
-			io_FormatTextBuffer(text2, 0x1701, *(unsigned short*) (a1 + 0x25),
-				*(unsigned char*) a1 * 0xe + 0x48e);
+			io_FormatTextBuffer(text2, 0x1701, *(unsigned short*) (record + 0x25),
+				*(unsigned char*) record * 0xe + 0x48e);
 			fcn_00526120(text2, 0);
 			g_774654 = 1;
 			count = 1;

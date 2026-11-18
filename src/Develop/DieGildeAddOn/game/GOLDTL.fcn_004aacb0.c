@@ -5,7 +5,7 @@ int __cdecl abs(int);
 
 
 /* ADDRESS: GOLDTL 0x004aacb0 */
-int __cdecl fcn_004aacb0(unsigned short* a1, unsigned short* a2, unsigned short* a3, int* a4)
+int __cdecl fcn_004aacb0(unsigned short* subjectEntity, unsigned short* candidateA, unsigned short* candidateB, int* comparisonOut)
 {
 	float d2;
 	float q2;
@@ -14,25 +14,25 @@ int __cdecl fcn_004aacb0(unsigned short* a1, unsigned short* a2, unsigned short*
 	float s2;
 	float s3;
 
-	*a4 = 0;
-	if (a1 == a3)
+	*comparisonOut = 0;
+	if (subjectEntity == candidateB)
 		return 0;
-	if (a1 == a2)
+	if (subjectEntity == candidateA)
 		return 1;
-	d2 = (float)(fcn_0050f980(*a2, *a1, 1));
-	q2 = gm_GetEntitySkill((char*) a2, 4);
-	d3 = (float)(fcn_0050f980(*a3, *a1, 1));
-	q3 = gm_GetEntitySkill((char*) a3, 4);
+	d2 = (float)(fcn_0050f980(*candidateA, *subjectEntity, 1));
+	q2 = gm_GetEntitySkill((char*) candidateA, 4);
+	d3 = (float)(fcn_0050f980(*candidateB, *subjectEntity, 1));
+	q3 = gm_GetEntitySkill((char*) candidateB, 4);
 	s2 = (float)(q2 * 0.34 + d2 * 0.66);
 	s3 = (float)(q3 * 0.34 + d3 * 0.66);
-	if (fcn_005c6270(a2, 0x2be) != 0)
+	if (fcn_005c6270(candidateA, 0x2be) != 0)
 		d2 += 0.2f;
-	if (fcn_005c6270(a3, 0x2be) != 0)
+	if (fcn_005c6270(candidateB, 0x2be) != 0)
 		d3 += 0.2f;
 	if (abs((int) (d2 - d3)) * 0.66 > abs((int) (q2 - q3)) * 0.33)
-		*a4 = 1;
+		*comparisonOut = 1;
 	else
-		*a4 = 2;
+		*comparisonOut = 2;
 	if (s2 - 5.0f > s3)
 		return 1;
 	if (s3 - 5.0f > s2)

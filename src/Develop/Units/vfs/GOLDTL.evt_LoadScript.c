@@ -32,7 +32,7 @@ extern char* g_6b7e94;
 extern struct VFS_DIR* g_6b7fdc;
 extern int g_14cb430;
 extern int g_14c93a0[0x800];
-extern int g_6b8010;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6791c8;
 extern int g_6791cc;
 extern char g_6790c8[];

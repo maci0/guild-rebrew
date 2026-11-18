@@ -15,11 +15,13 @@ void __cdecl fcn_0044ce40(char* object)
 
 	radius = 0.0f;
 	n = *(int*) (object + 0x44);
-	p = *(float**) (object + 0x40);
-	for (i = n; i > 0; i--, p += 6) {
-		length = (float) sqrt(p[2] * p[2] + p[0] * p[0] + p[1] * p[1]);
-		if (length > radius)
-			radius = length;
+	if (n > 0) {
+		p = *(float**) (object + 0x40);
+		for (i = n; i > 0; i--, p += 6) {
+			length = (float) sqrt(p[2] * p[2] + p[0] * p[0] + p[1] * p[1]);
+			if (length > radius)
+				radius = length;
+		}
 	}
 	*(float*) (object + 0x1d8) = radius;
 	*(float*) (object + 0x1d4) = radius;

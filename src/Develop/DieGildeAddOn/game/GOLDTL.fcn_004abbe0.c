@@ -16,7 +16,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 
 
 /* ADDRESS: GOLDTL 0x004abbe0 */
-int __cdecl ai_StartTheater(int a1, unsigned short* a2, int a3, char* a4)
+int __cdecl ai_StartTheater(int a1, unsigned short* entity, int a3, char* action)
 {
 	int lvl;
 	int best;
@@ -27,15 +27,15 @@ int __cdecl ai_StartTheater(int a1, unsigned short* a2, int a3, char* a4)
 	unsigned char* found;
 	Kind* kind;
 
-	lvl = gm_CheckStatLevel(*a2, 0xe);
+	lvl = gm_CheckStatLevel(*entity, 0xe);
 	best = 0;
 	if ((a1 != 0x46 && a1 != 0) || a3 != 0 || lvl == 0
-	    || *((unsigned char*) a2 + 2) == 3 || *(int*) ((char*) a2 + 0x194) < 2)
+	    || *((unsigned char*) entity + 2) == 3 || *(int*) ((char*) entity + 0x194) < 2)
 		return 0;
 	e = lpGebaeudeINST;
 	found = 0;
 	for (a1 = 0x100; a1 != 0; a1--, e += 0xa9) {
-		if (e[0] == 0 || *(unsigned short*) (e + 0x27) != *a2)
+		if (e[0] == 0 || *(unsigned short*) (e + 0x27) != *entity)
 			continue;
 		kind = &((Kind*)lpGebaeudePROT)[e[0]];
 		if (kind->type != 0x1f)
@@ -57,10 +57,10 @@ int __cdecl ai_StartTheater(int a1, unsigned short* a2, int a3, char* a4)
 	}
 	if (found == 0 || best == 0)
 		return 0;
-	if (*(int*) ((char*) a2 + 0x194) >= 4) {
+	if (*(int*) ((char*) entity + 0x194) >= 4) {
 		if (best >= 10)
 			best = 10;
-	} else if (*(int*) ((char*) a2 + 0x194) >= 3) {
+	} else if (*(int*) ((char*) entity + 0x194) >= 3) {
 		if (best >= 7)
 			best = 7;
 	} else if (best >= 4) {
@@ -71,9 +71,9 @@ int __cdecl ai_StartTheater(int a1, unsigned short* a2, int a3, char* a4)
 		t = 2;
 	else
 		t = (r >= 7) + 3;
-	*(int*) (a4 + 4) = *(int*) (found + 1);
-	*(int*) (a4 + 0xc) = r;
-	*(int*) (a4 + 0x10) = t;
-	a4[0] = 7;
+	*(int*) (action + 4) = *(int*) (found + 1);
+	*(int*) (action + 0xc) = r;
+	*(int*) (action + 0x10) = t;
+	action[0] = 7;
 	return 0x46;
 }

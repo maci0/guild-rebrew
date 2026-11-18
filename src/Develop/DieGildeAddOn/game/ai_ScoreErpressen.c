@@ -6,24 +6,24 @@ extern int fcn_004a4680(int* a1, int* a2, int a3, int a4, void* s);
 extern int fcn_004a4410(int* a1, int* a2, int a3, int a4, int z, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x0049d030 */
-int __cdecl ai_ScoreErpressen(int* a1, int* a2, int a3, int a4, int a5, int a6, int a7)
+int __cdecl ai_ScoreErpressen(int* firstOut, int* secondOut, int a3, int a4, int a5, int a6, int a7)
 {
 	char s[0x24];
-	int* p1;
-	int* p2;
+	int* firstScore;
+	int* secondScore;
 
-	p1 = a1;
-	p2 = a2;
+	firstScore = firstOut;
+	secondScore = secondOut;
 	if (a5 != 0) {
-		*p1 = (int) 0xf149f2ca;
-		*p2 = (int) 0xf149f2ca;
+		*firstScore = (int) 0xf149f2ca;
+		*secondScore = (int) 0xf149f2ca;
 		return 0;
 	}
-	*p1 = 0;
-	*p2 = 0;
+	*firstScore = 0;
+	*secondScore = 0;
 	fcn_004f4830(0x16, s);
 	if (*(int*) (s + 0x18) != 0) {
-		return fcn_004a4680(p1, p2, a3, a4, s);
+		return fcn_004a4680(firstScore, secondScore, a3, a4, s);
 	}
-	return fcn_004a4410(p1, p2, a3, a4, 0, a6, a7);
+	return fcn_004a4410(firstScore, secondScore, a3, a4, 0, a6, a7);
 }

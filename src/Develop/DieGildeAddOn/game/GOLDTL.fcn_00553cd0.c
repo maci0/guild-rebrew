@@ -36,12 +36,12 @@ void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int 
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 
 /* ADDRESS: GOLDTL 0x00553cd0 */
-void __cdecl fcn_00553cd0(char* v3)
+void __cdecl fcn_00553cd0(char* event)
 {
 	char buf[1024];
 	char* e;
 	char* q;
-	unsigned short* v5;
+	unsigned short* record;
 	char* p;
 	unsigned char type;
 	float f;
@@ -51,28 +51,28 @@ void __cdecl fcn_00553cd0(char* v3)
 	int a;
 	int b;
 
-	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (v3 + 0xb0));
-	v5 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (v3 + 0xac));
-	state = *(int*) (v3 + 0x70);
-	if (state == -2 || v5 == 0 || e == 0 || *(unsigned short*) (e + 0x27) == 0xffff) {
-		fcn_00546190(v3);
+	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (event + 0xb0));
+	record = (unsigned short*) gm_LookupEntityRecordById(*(int*) (event + 0xac));
+	state = *(int*) (event + 0x70);
+	if (state == -2 || record == 0 || e == 0 || *(unsigned short*) (e + 0x27) == 0xffff) {
+		fcn_00546190(event);
 		return;
 	}
 	switch (state) {
 	case 0:
-		fcn_00529160(e, 0, *v5, v3);
-		fcn_004c5c80(*(int*) (v5 + 2));
-		fcn_004c5da0(*(int*) (v5 + 2), *(int*) (e + 1), -1, 0, 1, "BetriebsPr");
-		*(pos14_7f4c00*) (v3 + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
-		fcn_00500bb0((int*) (v3 + 0x52), 0, 10, 0);
-		*(int*) (v3 + 0x70) = 1;
+		fcn_00529160(e, 0, *record, event);
+		fcn_004c5c80(*(int*) (record + 2));
+		fcn_004c5da0(*(int*) (record + 2), *(int*) (e + 1), -1, 0, 1, "BetriebsPr");
+		*(pos14_7f4c00*) (event + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+		fcn_00500bb0((int*) (event + 0x52), 0, 10, 0);
+		*(int*) (event + 0x70) = 1;
 		return;
 	case 1:
-		*(pos14_7f4c00*) (v3 + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
-		fcn_00500bb0((int*) (v3 + 0x52), 0, 4, 0);
-		p = *(char**) ((char*) v5 + 0x184);
+		*(pos14_7f4c00*) (event + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+		fcn_00500bb0((int*) (event + 0x52), 0, 4, 0);
+		p = *(char**) ((char*) record + 0x184);
 		if (*(int*) (p + 0x128)) {
-			*(int*) (v3 + 0x70) = 1;
+			*(int*) (event + 0x70) = 1;
 			return;
 		}
 		f = (g_662cf8 - (float) fcn_00508da0(e)) * g_662910;
@@ -86,39 +86,39 @@ void __cdecl fcn_00553cd0(char* v3)
 		}
 		if (!(f > g_6628f0) && found == 0) {
 			io_FormatTextBuffer(buf, 0x1a76, *(unsigned short*) (e + 0x27), e);
-			a = ((Rec*) g_7f4ca0)[*(unsigned short*) (v3 + 8)].owner;
+			a = ((Rec*) g_7f4ca0)[*(unsigned short*) (event + 8)].owner;
 			fcn_00545d40(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_88");
-			io_FormatTextBuffer(buf, 0x1a78, *(unsigned short*) (v3 + 8), e);
+			io_FormatTextBuffer(buf, 0x1a78, *(unsigned short*) (event + 8), e);
 			b = ((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner;
 			he_MessageBoxQuickjump(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
 				"_NACHRICHTEN_HS_86");
-			*(int*) (v3 + 0x70) = 2;
+			*(int*) (event + 0x70) = 2;
 			return;
 		}
 		x = (int) (fcn_0050cf50(e, 100) * f * 0.07f);
-		fcn_004c51a0(((Rec*) g_7f4ca0)[*(unsigned short*) (v3 + 8)].owner,
+		fcn_004c51a0(((Rec*) g_7f4ca0)[*(unsigned short*) (event + 8)].owner,
 			((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner, 0, x);
-		type = ((Rec*) g_7f4ca0)[*(unsigned short*) (v3 + 8)].type;
+		type = ((Rec*) g_7f4ca0)[*(unsigned short*) (event + 8)].type;
 		if (type == 6 || type == 7) {
 			io_FormatTextBuffer(buf, 0x1a75, x, *(unsigned short*) (e + 0x27), e);
-			a = ((Rec*) g_7f4ca0)[*(unsigned short*) (v3 + 8)].owner;
+			a = ((Rec*) g_7f4ca0)[*(unsigned short*) (event + 8)].owner;
 			fcn_00545d40(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_87");
 		}
 		type = ((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].type;
 		if (type == 6 || type == 7) {
-			io_FormatTextBuffer(buf, 0x1a77, *(unsigned short*) (v3 + 8), e, x);
+			io_FormatTextBuffer(buf, 0x1a77, *(unsigned short*) (event + 8), e, x);
 			b = ((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner;
 			he_MessageBoxQuickjump(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
 				"_NACHRICHTEN_HS_86");
 		}
-		*(int*) (v3 + 0x70) = 2;
+		*(int*) (event + 0x70) = 2;
 		return;
 	case 2:
-		fcn_00529160(e, 0, *v5, 0);
-		fcn_004c5c80(*(int*) (v5 + 2));
-		fcn_004c5da0(*(int*) (v5 + 2), *(int*) (v3 + 0xb4), *(int*) (v3 + 0xb8), 0,
+		fcn_00529160(e, 0, *record, 0);
+		fcn_004c5c80(*(int*) (record + 2));
+		fcn_004c5da0(*(int*) (record + 2), *(int*) (event + 0xb4), *(int*) (event + 0xb8), 0,
 			0, "BetriebsPr");
-		fcn_00546190(v3);
+		fcn_00546190(event);
 		return;
 	}
 }

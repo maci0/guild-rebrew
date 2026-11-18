@@ -27,7 +27,7 @@ void __cdecl fcn_004c5530(void*);
 
 
 /* ADDRESS: GOLDTL 0x004b0e80 */
-int __cdecl fcn_004b0e80(int a1, int a2, char* a3)
+int __cdecl fcn_004b0e80(int a1, int a2, char* argumentText)
 {
 	char m[0xf8];
 	char names[2][16] = { "KATHOLISCH", "EVANGELISCH" };
@@ -41,12 +41,12 @@ int __cdecl fcn_004b0e80(int a1, int a2, char* a3)
 	int num;
 	int k;
 
-	if (*a3 != '-') {
+	if (*argumentText != '-') {
 		return 0;
 	}
-	a3++;
+	argumentText++;
 	for (i = 0; i < 2; i++) {
-		if (memcmp(a3, names[i], strlen(names[i])) == 0) {
+		if (memcmp(argumentText, names[i], strlen(names[i])) == 0) {
 			break;
 		}
 	}
@@ -57,34 +57,34 @@ int __cdecl fcn_004b0e80(int a1, int a2, char* a3)
 	} else {
 		return 0;
 	}
-	a3 += strlen(names[i]);
-	if (*a3 != '_') {
+	argumentText += strlen(names[i]);
+	if (*argumentText != '_') {
 		return 0;
 	}
 	n = 0;
-	a3++;
+	argumentText++;
 	*(int*) hi = 0;
 	*(int*) lo = 0;
-	while (*a3 != 0 && *a3 != '_' && n < 3) {
-		if (*a3 < '0' || *a3 > '9') {
+	while (*argumentText != 0 && *argumentText != '_' && n < 3) {
+		if (*argumentText < '0' || *argumentText > '9') {
 			return 0;
 		}
-		hi[n] = *a3;
+		hi[n] = *argumentText;
 		n++;
-		a3++;
+		argumentText++;
 	}
-	if (*a3 == 0 || n == 0) {
+	if (*argumentText == 0 || n == 0) {
 		return 0;
 	}
 	n = 0;
-	a3++;
-	while (*a3 != 0 && n < 3) {
-		if (*a3 < '0' || *a3 > '9') {
+	argumentText++;
+	while (*argumentText != 0 && n < 3) {
+		if (*argumentText < '0' || *argumentText > '9') {
 			return 0;
 		}
-		lo[n] = *a3;
+		lo[n] = *argumentText;
 		n++;
-		a3++;
+		argumentText++;
 	}
 	if (n == 0) {
 		return 0;
